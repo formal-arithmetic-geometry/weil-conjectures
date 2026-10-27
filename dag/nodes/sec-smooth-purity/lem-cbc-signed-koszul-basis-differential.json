@@ -1,0 +1,147 @@
+{
+ "id": "lem-cbc-signed-koszul-basis-differential",
+ "kind": "statement",
+ "title": "The ordered negative Koszul basis differential",
+ "statement": "For the ordered negative Koszul tensor Q of [def-cbc-signed-koszul-completion-model], let e_I be its specified subset basis inclusion in degree minus card I. Its differential is the sum over i in I of (-1) to the number of selected indices preceding i, times the (m+1)-st power of the rank-one scalar of a_i, followed by e_(I.erase i) and the equality transport to degree -card I+1. The sign acts by integer scalar multiplication on the rank-one endomorphism.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0E, lemma-derived-completion-koszul, finite free negative Koszul tensors."
+ },
+ "stmt_deps": [
+  "def-cbc-signed-koszul-completion-model"
+ ],
+ "proof": [
+  {
+   "text": "Prove the basis differential in every integer degree, including length zero, by induction on the ordered tensor length. The empty tensor is O[0] and its differential is zero.",
+   "uses": [
+    "def-cbc-signed-koszul-completion-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write the subset either as the successor image of a tail subset or as that image with zero inserted. Expand its recursive basis inclusion and apply the two total-differential formulas. The head contributes zero in degree zero and its (m+1)-st scalar power in degree minus one. Tensor additivity, the induction hypothesis, and naturality of the unitors put each tail scalar before the whole basis inclusion.",
+   "uses": [
+    "def-cbc-signed-koszul-completion-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reindex erasures by Fin.succ. The preceding-index count is unchanged when zero is absent and increases by one when zero is selected, agreeing with the minus sign in the second tensor differential. Finally specialize the degree to minus card I and use card(I.erase i)+1=card I to insert the specified equality transport.",
+   "uses": [
+    "def-cbc-signed-koszul-completion-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-signed-koszul-completion-model"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0E, lemma-derived-completion-koszul; ordered tensor calculation, formalized by induction in every degree."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ringedNegativeKoszulBasis differential",
+   "results": "No existing declaration computes this ordered pure-basis differential.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "ordered tensor pure basis differential erased subset",
+   "results": "No matching theorem.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "signed Koszul basis differential",
+   "results": "No matching theorem.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SignedKoszulSummandDifferential",
+  "date": "2026-10-26",
+  "group": "D4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-cbc-signed-koszul-summand-differential",
+   "place": "The inner ordered-basis calculation isolated from the second total differential."
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SignedKoszulSummandDifferential",
+  "file": "lean/Sheaf/CategoryTheory/SignedKoszulSummandDifferential.lean",
+  "declaration": "CategoryTheory.ringedNegativeKoszulBasis_d_succ",
+  "statement": "theorem ringedNegativeKoszulBasis_d_succ\n    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}\n    (O : Sheaf J CommRingCat.{u}) {A : Type z} [CommRing A]\n    (ρ : A →+* RingCat.sectionsSubring (O.obj ⋙ forget₂ CommRingCat RingCat))\n    (r : ℕ) (a : Fin (r + 1) → A) (m : ℕ) (I : Finset (Fin (r + 1))) :\n    letI : IsGrothendieckAbelian.{u} (SheafOfModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) :=\n      SheafOfModules.isGrothendieckAbelian _\n    letI := SheafOfModules.monoidalCategory O\n    letI := SheafOfModules.symmetricCategory O\n    letI := Classical.choice (SheafOfModules.tensorClosed O).1\n    letI := Classical.choice (SheafOfModules.tensorClosed O).2.1\n    ringedNegativeKoszulBasis O (r + 1)\n        (fun i ↦ ⟨(ρ (a i)).val, (ρ (a i)).property⟩) m I (-(I.card : ℤ)) ≫\n      (ringedNegativeKoszul O (r + 1)\n        (fun i ↦ ⟨(ρ (a i)).val, (ρ (a i)).property⟩) m).d\n        (-(I.card : ℤ)) (-(I.card : ℤ) + 1) =\n      ∑ i ∈ I, if h : -(I.card : ℤ) + 1 = -((I.erase i).card : ℤ) then\n        ((-1 : ℤ) ^ (I.filter (fun j ↦ j < i)).card •\n            (ringedKoszulScalar O ⟨(ρ (a i)).val, (ρ (a i)).property⟩) ^ (m + 1)) ≫\n          ringedNegativeKoszulBasis O (r + 1)\n            (fun j ↦ ⟨(ρ (a j)).val, (ρ (a j)).property⟩) m\n            (I.erase i) (-((I.erase i).card : ℤ)) ≫\n          eqToHom (congrArg\n            (ringedNegativeKoszul O (r + 1)\n              (fun j ↦ ⟨(ρ (a j)).val, (ρ (a j)).property⟩) m).X h.symm)\n      else 0",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261026T152229-L-1088581",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-c2185",
+  "group": "P1",
+  "result": "fix",
+  "landing": "20261027T012912-L-2345305",
+  "kind": "interface",
+  "note": "independent cc review: corrected statements of ringedNegativeKoszulSummand_D₂_term and ringedNegativeKoszulBasis_d_succ checked against ringedNegativeKoszulFactor (double of scalar^(m+1)) and the ε₂ tensor sign; original SignedKoszulSummandDifferential compiled against delivered item fails at line 180 (adaptation forced); item axioms clean; 3b importer SignedKoszulTensorCoordinates OK"
+ },
+ "statement_change": {
+  "date": "2026-10-27",
+  "by": "M1 stage 3",
+  "old_statement": "For a positive-length ordered negative Koszul tensor, the differential of the pure subset basis vector in degree minus its cardinality is the finite sum over selected indices of the corresponding scalar power times the erased-subset basis, with the equality transport between degrees.",
+  "what": "The Lean summand omitted both the ordered-tensor sign and the exponent m+1. Over the one-point site with O=Z, one factor, a_0=2 and m=1, the old equality says multiplication by 4 equals multiplication by 2. With two factors, m=0, both a_i=1 and I={0,1}, the second erasure must have the opposite sign. The correction follows the already-defined negative factors and ordered total tensor.",
+  "source": {
+   "document": "literature/stacks-project/algebraization.tex",
+   "place": "Tag 0A0E, lemma-derived-completion-koszul, finite free negative Koszul tensors."
+  },
+  "citers": [
+   {
+    "id": "lem-cbc-signed-koszul-summand-differential",
+    "holds": true,
+    "note": "The summand proof still uses the basis differential, now with the correct signed power. Its conclusion and hypotheses are unchanged; the matching term-transport statement is repaired in the same delivery."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Induct on the number of ordered factors. The empty tensor has zero differential. In the successor, use the two-term head differential and the induction hypothesis for the tail, reindexing tail subsets by Fin.succ.",
+    "uses": [
+     "def-cbc-signed-koszul-completion-model"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "A selected degree-minus-one factor contributes its scalar power, while degree-zero factors contribute zero. The total-tensor sign counts preceding selected factors, and card(I.erase i)+1=card I supplies the degree transport.",
+    "uses": [
+     "def-cbc-signed-koszul-completion-model"
+    ],
+    "elementary": false
+   }
+  ]
+ }
+}

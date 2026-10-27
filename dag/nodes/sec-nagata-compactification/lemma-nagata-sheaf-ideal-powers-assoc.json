@@ -177,7 +177,50 @@
    "where": "statement"
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.IdealSheafData.powMulMap_assoc",
+     "module": "WeilConjectures.AlgebraicGeometry.RelativeProj.Rees",
+     "lines": [
+      235,
+      246
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.IdealSheafData.powMulMap_powZeroUnit_left",
+     "module": "WeilConjectures.AlgebraicGeometry.RelativeProj.Rees",
+     "lines": [
+      248,
+      254
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.IdealSheafData.powMulMap_powZeroUnit_right",
+     "module": "WeilConjectures.AlgebraicGeometry.RelativeProj.Rees",
+     "lines": [
+      256,
+      266
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-nagata-compactification",
  "unit": "sk-lem-nagata-sketch-blowups",
  "blueprint_update": {
@@ -216,5 +259,24 @@
   "group": "Q143",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q143-f1b34322b (reviewer sub-agent of L); spot-checked: Read the item in full (5 steps, no new nodes) against the blueprint master lemma-nagata-sheaf-ideal-powers-assoc.md (order 104) and its main-20261015 blueprint_update, whose statement is the same and whose proof takes the same affine route. The statement is verbatim and its stmt_deps (def-sbc-ideal-sheaf-powers, def-pur-sheaf-tensor-product) are sufficient. Checked each cited statement. lem-weil-pbc-quasi-coherent-tensor-product-affine-sections uses the same sheafified tensor; t_U is bijective on affine opens and the tensor is quasi-coherent, so applying it twice to the triple tensor is valid. def-weil-pbc-module-tensor-product gives the universal property and generation by pure tensors. lem-weil-pbc-affine-opens-basis gives a basis inside an arbitrary W, so step 5 needs no affine intersections. def-weil-sheaf-of-modules-category gives semilinear restriction. The associator and both unitors are verified on pure tensors, including the balancing identities. Tested X empty, A=0, I=0, I=O_X, zero exponents and (2) in Z/4, where multiplication is not injective and the proof never needs it. No duplicate: lemma-nagata-rees-piece-mul and prop-nagata-rees-graded are affine Rees statements. No cycle: def-nagata-sheaf-rees-algebra cites the item, not the other way round. No SGA. No re-split note exists. Accepted tool_use: lem-weil-pbc-quasi-coherent-tensor-product-affine-sections (sk-thm-p1), a generic affine-tensor tool that the blow-up unit lacks. Minor: the report mentions a sandbox-only citations.json that is not part of the commit; step 4 is not strictly needed but is correct."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IdealPowerMultiplicationAssociative",
+  "declaration": "AlgebraicGeometry.Scheme.IdealSheafData.exists_powMultiplication_associative_unital",
+  "file": "lean/Sheaf/AlgebraicGeometry/IdealPowerMultiplicationAssociative.lean",
+  "statement": "theorem exists_powMultiplication_associative_unital {X : Scheme.{u}} (I : X.IdealSheafData) : ∃ μ : ∀ m n : ℕ, (I ^ m).toModules ⊗ (I ^ n).toModules ⟶ (I ^ (m + n)).toModules, (∀ m n : ℕ, μ m n ≫ (I ^ (m + n)).toModulesι = ((I ^ m).toModulesι ⊗ₘ (I ^ n).toModulesι) ≫ (λ_ (𝟙_ X.Modules)).hom) ∧ IsIso (I ^ 0).toModulesι ∧ (∀ m n k : ℕ, (μ m n ▷ (I ^ k).toModules) ≫ μ (m + n) k ≫ eqToHom (congrArg (fun r : ℕ ↦ (I ^ r).toModules) (Nat.add_assoc m n k)) = (α_ (I ^ m).toModules (I ^ n).toModules (I ^ k).toModules).hom ≫ ((I ^ m).toModules ◁ μ n k) ≫ μ m (n + k)) ∧ (∀ n : ℕ, μ 0 n ≫ eqToHom (congrArg (fun r : ℕ ↦ (I ^ r).toModules) (Nat.zero_add n)) = ((I ^ 0).toModulesι ▷ (I ^ n).toModules) ≫ (λ_ (I ^ n).toModules).hom) ∧ (∀ n : ℕ, μ n 0 ≫ eqToHom (congrArg (fun r : ℕ ↦ (I ^ r).toModules) (Nat.add_zero n)) = ((I ^ n).toModules ◁ (I ^ 0).toModulesι) ≫ (ρ_ (I ^ n).toModules).hom)",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Global sheaf-morphism version. The existential family is uniquely characterized by factorization through the monic ideal inclusions; no multiplication is assumed. Upstream RelativeProj.Rees.powMulMap_assoc and the unit identities apply only to affine ideal modules, not global sheaf morphisms."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-82b65af0a",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Global sheaf-morphism statement matches the node: X any scheme (universe u), I : IdealSheafData, I^r via Mathlib powers and the upstream toModules realization, the recorded sheaf tensor on X.Modules. Each μ is uniquely pinned by μ ≫ ι = (ι⊗ι) ≫ λ_(𝟙) with ι mono (multiplication in O_X), so there is no free map. IsIso ι_0 gives I^0 = O_X; associativity and both unit laws hold with eqToHom degree transports. All are true and well-typed, and edge cases (I=0, ⊤, zero exponents, empty scheme) are fine. Snapshot node differs from live only in the lean record; lean.statement is verbatim; statement- and proof-dependency imports match their recorded modules. Rees.lean powMulMap_* lemmas are affine-only, so not a duplicate. Proof is sorry only, no definitions, docstrings with source/blueprint and all 5 proof steps, report sections present. Not recompiled (no FIX); relied on the worker's clean compile."
  }
 }

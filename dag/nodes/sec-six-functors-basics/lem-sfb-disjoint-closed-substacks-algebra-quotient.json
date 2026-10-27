@@ -1,0 +1,292 @@
+{
+ "id": "lem-sfb-disjoint-closed-substacks-algebra-quotient",
+ "kind": "statement",
+ "title": "Disjoint closed substacks give a quasi-coherent quotient algebra",
+ "statement": "Let $k$ be a field [def-weil-field], let $\\mathcal X$ be an algebraic stack over $k$ [def-sfb-algebraic-moduli-stack], and let $i_a:\\mathcal Z_a\\hookrightarrow\\mathcal X$ for $a=1,2$ be closed substacks in the sense of [lem-sfb-invariant-closed-substack-descent]. Assume that $|\\mathcal Z_1|\\cap|\\mathcal Z_2|=\\varnothing$, with underlying spaces as in [lem-sfb-smooth-presentation-closed-subsets]. On the big fppf site of $\\mathcal X$, in the structure-sheaf and quasi-coherent-algebra conventions of [def-sfb-stack-quasi-coherent-algebra], define $\\mathcal B_a$ on an object $x:T\\to\\mathcal X$ by $\\mathcal B_a(x)=\\Gamma(T\\times_{\\mathcal X}\\mathcal Z_a,\\mathcal O)$, with restrictions induced by pullback. Then $\\mathcal B_1$, $\\mathcal B_2$, and $\\mathcal B_1\\times\\mathcal B_2$ are quasi-coherent $\\mathcal O_{\\mathcal X}$-algebras, and the canonical restriction map $\\mathcal O_{\\mathcal X}\\to\\mathcal B_1\\times\\mathcal B_2$ is a surjection of sheaves of algebras. Under the defining section convention, a global function on $\\mathcal X$ maps to its restrictions on $\\mathcal Z_1$ and $\\mathcal Z_2$. No Noetherian or finite-type hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Agent-formulated consequence of Tag 06WT (proposition-quasi-coherent); stacks-properties.tex Tag 0507 (lemma-substacks-presentation); morphisms.tex Tag 01QQ (lemma-closed-immersion-bijection-ideals); algebra.tex Tag 00DT (lemma-chinese-remainder). The consequence is stated on arbitrary algebraic stacks, not only schemes."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-algebraic-moduli-stack",
+  "lem-sfb-invariant-closed-substack-descent",
+  "lem-sfb-smooth-presentation-closed-subsets",
+  "def-sfb-stack-quasi-coherent-algebra"
+ ],
+ "proof": [
+  {
+   "text": "For every object $x:T\\to\\mathcal X$, put $Z_{a,T}=T\\times_{\\mathcal X}\\mathcal Z_a$ and $j_{a,T}:Z_{a,T}\\to T$. The closed-substack definition makes this a closed immersion of schemes. In particular it is affine, and on each affine open $U=\\operatorname{Spec}A$ its inverse image is $\\operatorname{Spec}(A/I_{a,U})$, with restriction map the quotient map. Since $\\mathcal Z_a$ is a strictly full substack and an object of the 2-fibre product over $T''$ is a triple $(t,z,\\phi:t^*x\\xrightarrow{\\sim}z)$, the functor $T\\times_{\\mathcal X}\\mathcal Z_a$ is the subfunctor $\\{t:T''\\to T\\mid t^*x\\in\\mathcal Z_a(T'')\\}$ of $h_T$, represented by $Z_{a,T}$. For an arrow $\\alpha:y\\to x$ over $u:T'\\to T$ one has $s^*y\\simeq(us)^*x$ for every $s:T''\\to T'$, so $Z_{a,T'}=u^{-1}(Z_{a,T})=Z_{a,T}\\times_TT'$ as closed subschemes of $T'$, independently of the choice of $\\alpha$ over $u$; for composable arrows these identifications are the transitivity isomorphisms of scheme fibre products, and for an open $U\\subseteq T$ the pullback is $Z_{a,T}\\cap U$. Set $M_{a,x}=(j_{a,T})_*\\mathcal O_{Z_{a,T}}$, with its ordinary algebra structure. The affine-pushforward theorem makes its underlying module quasi-coherent and, for every arrow $y\\to x$ over $u:T'\\to T$, supplies the canonical algebra isomorphism $u^*M_{a,x}\\simeq M_{a,y}$. Its composition clause gives the required cocycle, and the identity comparison is the identity. Thus these comparisons apply to arbitrary base maps, including nonflat ones.",
+   "uses": [
+    "lem-sfb-invariant-closed-substack-descent",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-affine-pushforward-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01QO (lemma-closed-immersion); affine pushforward and base change as stated in the cited node."
+   }
+  },
+  {
+   "text": "Apply the cartesian-module realization criterion to $x\\mapsto M_{a,x}$ and the comparisons in step 1. Its section formula is exactly $\\Gamma(T,M_{a,x})=\\Gamma(Z_{a,T},\\mathcal O)=\\mathcal B_a(x)$, with the prescribed pullback restrictions. Hence each $\\mathcal B_a$ is an fppf sheaf and is quasi-coherent. Pointwise multiplication and the pullback map from $\\Gamma(T,\\mathcal O_T)$ commute with restrictions, since the comparisons of step 1 are algebra isomorphisms. They therefore make it a quasi-coherent algebra in the stated convention.",
+   "uses": [
+    "lem-sfb-cartesian-module-fppf-realization",
+    "def-sfb-stack-quasi-coherent-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WK (lemma-quasi-coherent), applied to the explicit cartesian modules of step 1."
+   }
+  },
+  {
+   "text": "On each $T$ the module $M_{1,x}\\oplus M_{2,x}$ is quasi-coherent by the binary-direct-sum node. Its underlying sheaf is also the pointwise binary product. Tensor pullback commutes with this binary sum: the maps induced by the two inclusions and projections are inverse, since $p_ai_b=\\delta_{ab}$ and $i_1p_1+i_2p_2=1$, identities preserved by the additive tensor formula. The two comparisons of step 1 therefore give compatible pullback isomorphisms for this family. The realization criterion gives a quasi-coherent sheaf whose sections are $\\Gamma(T,M_{1,x})\\times\\Gamma(T,M_{2,x})$. This is exactly $\\mathcal B_1\\times\\mathcal B_2$, with componentwise algebra operations and diagonal structure map.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-direct-sum",
+    "def-pc-module-pullback",
+    "lem-sfb-cartesian-module-fppf-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WK; finite direct sums and the explicit tensor-pullback formula."
+   }
+  },
+  {
+   "text": "Fix $x:T\\to\\mathcal X$ and a pair of sections of the target over $x$. The base-change image clause of the topology node says the two closed supports $C_a=|Z_{a,T}|\\subseteq|T|$ are disjoint. Thus $T\\setminus C_1$ and $T\\setminus C_2$ cover $T$. Refine each by affine opens. On an affine $U=\\operatorname{Spec}A\\subseteq T\\setminus C_1$, the first pullback closed subscheme is empty, so its ring of sections is the zero ring; the second is $\\operatorname{Spec}(A/I_{2,U})$ by step 1. The given pair is therefore $(0,b)$, and any representative of $b$ in $A$ lifts it. On an affine in $T\\setminus C_2$ the same argument lifts $(b,0)$. These affine open covers are fppf covers, so every target section lifts locally. This is exactly surjectivity in the stated sheaf convention; no lifting on all global sections is asserted.",
+   "uses": [
+    "lem-sfb-smooth-presentation-closed-subsets",
+    "def-weil-closed-immersion",
+    "def-sfb-stack-quasi-coherent-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DT (lemma-chinese-remainder), elementary local form: on the two open complements one quotient factor is zero."
+   }
+  },
+  {
+   "text": "A global function is a compatible family $(f_x)_x$ in the structure sheaf. By construction its image at $x:T\\to\\mathcal X$ is the pair of pullbacks of $f_x$ to $Z_{1,T}$ and $Z_{2,T}$. These families are precisely its restrictions to the two closed substacks, since their values on every scheme object are those pullbacks. This proves the final compatibility. All preceding constructions allow arbitrary ideals and arbitrary base schemes, so no Noetherian or finite-type assumption has entered.",
+   "uses": [
+    "def-sfb-stack-quasi-coherent-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Structure-sheaf section convention, evaluated on the two closed-substack base changes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-weil-closed-immersion",
+  "lem-sfb-cartesian-module-fppf-realization",
+  "lem-sfb-invariant-closed-substack-descent",
+  "lem-sfb-smooth-presentation-closed-subsets",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "lem-weil-pbc-quasi-coherent-module-direct-sum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Agent assembly of Tag 06WK with affine pushforward base change and the local two-complement form of algebra.tex Tag 00DT."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Disjoint closed substacks of an algebraic stack are defined by comaximal quasi coherent ideal sheaves and their structure sheaf product is a quotient of the ambient structure sheaf",
+   "results": "{\"t\": \"2026-10-23T10:08:50Z\", \"tool\": \"leansearch\", \"query\": \"Disjoint closed substacks of an algebraic stack are defined by comaximal quasi coherent ideal sheaves and their structure sheaf product is a quotient of the ambient structure sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.subscheme\", \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeCover\", \"AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal\", \"AlgebraicGeometry.Scheme.IdealSheafData.inclusion\", \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj\", \"AlgebraicGeometry.Scheme.IdealSheafData.instIsEmptyCarrierCarrierCommRingCatSubschemeTop\", \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app\"], \"digest\": \"09e0e7c5c025b380\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme closed-immersion/ideal-sheaf results do not assert the algebraic-stack quotient and quasi-coherence statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed immersions into an algebraic stack correspond to quasi coherent ideal sheaves and intersections correspond to sums of ideals",
+   "results": "{\"t\": \"2026-10-23T10:08:51Z\", \"tool\": \"leanfinder\", \"query\": \"Closed immersions into an algebraic stack correspond to quasi coherent ideal sheaves and intersections correspond to sums of ideals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsClosedImmersionInclusion\", \"AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData\", \"AlgebraicGeometry.IsClosedImmersion.instSubschemeι\", \"AlgebraicGeometry.Scheme.IdealSheafData.inclusion\", \"AlgebraicGeometry.IsClosedImmersion.Spec_iff\", \"AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk\", \"AlgebraicGeometry.Scheme.IdealSheafData.instCompleteLattice\", \"AlgebraicGeometry.IsClosedImmersion.lift\"], \"digest\": \"13274da25126d296\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme closed-immersion/ideal-sheaf results do not assert the algebraic-stack quotient and quasi-coherence statement."
+  },
+  {
+   "tool": "grep",
+   "query": "closedSubstack|closed_substack|quasiCoherentIdeal|quasi_coherent_ideal",
+   "results": "{\"t\": \"2026-10-23T10:19:00Z\", \"tool\": \"grep\", \"query\": \"closedSubstack|closed_substack|quasiCoherentIdeal|quasi_coherent_ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme closed-immersion/ideal-sheaf results do not assert the algebraic-stack quotient and quasi-coherence statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Stack\"",
+   "results": "{\"t\": \"2026-10-23T10:19:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"Stack\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme closed-immersion/ideal-sheaf results do not assert the algebraic-stack quotient and quasi-coherence statement."
+  },
+  {
+   "tool": "grep",
+   "query": "overEquivIdealSheafData|quasi.*[Ss]tack|[Ss]tack.*quasi",
+   "results": "{\"t\": \"2026-10-23T10:26:46Z\", \"tool\": \"grep\", \"query\": \"overEquivIdealSheafData|quasi.*[Ss]tack|[Ss]tack.*quasi\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\"], \"digest\": \"bf8a06b72939e6f7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme closed-immersion/ideal-sheaf results do not assert the algebraic-stack quotient and quasi-coherence statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a closed immersion of algebraic stacks the structure sheaf of the closed substack is a quasi coherent quotient of the ambient structure sheaf",
+   "results": "{\"t\": \"2026-10-23T10:26:47Z\", \"tool\": \"leanfinder\", \"query\": \"For a closed immersion of algebraic stacks the structure sheaf of the closed substack is a quasi coherent quotient of the ambient structure sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk\", \"AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData\", \"AlgebraicGeometry.IsClosedImmersion.instSubschemeι\", \"AlgebraicGeometry.instIsClosedImmersionInclusion\", \"AlgebraicGeometry.IsClosedImmersion.Spec_iff\", \"AlgebraicGeometry.IsClosedImmersion.lift\", \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso\", \"AlgebraicGeometry.Scheme.IdealSheafData.instQuasiCompactSubschemeι\"], \"digest\": \"885c8f8693b53ee9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme closed-immersion/ideal-sheaf results do not assert the algebraic-stack quotient and quasi-coherence statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For two disjoint closed substacks of any algebraic stack the product of their pushed forward structure sheaves is a quasi coherent algebra and is a surjective quotient of the structure sheaf",
+   "results": "{\"t\": \"2026-10-23T10:29:49Z\", \"tool\": \"leanfinder\", \"query\": \"For two disjoint closed substacks of any algebraic stack the product of their pushed forward structure sheaves is a quasi coherent algebra and is a surjective quotient of the structure sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.disjoint_opensRange_sigmaι\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.image_preimage_is_empty\", \"AlgebraicGeometry.instQuasiCompactLiftSchemeIdOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instQuasiCompactιSchemeOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift\", \"AlgebraicGeometry.instQuasiSeparatedFstScheme\", \"AlgebraicGeometry.QuasiSeparated\"], \"digest\": \"f6dbacb832aa7ccc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme closed-immersion/ideal-sheaf results do not assert the algebraic-stack quotient and quasi-coherence statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For two disjoint closed substacks of an algebraic stack the product of their direct image structure sheaves is a quasi coherent quotient algebra of the structure sheaf",
+   "results": "{\"t\": \"2026-10-23T11:30:03Z\", \"tool\": \"leanfinder\", \"query\": \"For two disjoint closed substacks of an algebraic stack the product of their direct image structure sheaves is a quasi coherent quotient algebra of the structure sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.image_preimage_is_empty\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.disjoint_opensRange_sigmaι\", \"AlgebraicGeometry.Scheme.coprodPresheafObjIso\", \"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso\", \"AlgebraicGeometry.LocallyRingedSpace.HasCoequalizer.imageBasicOpen\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj\"], \"digest\": \"2766a061581528bb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme closed immersions and generic site presentation data do not state the algebraic-stack product quotient."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Stack\"",
+   "results": "{\"t\": \"2026-10-23T11:30:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"Stack\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme closed immersions and generic site presentation data do not state the algebraic-stack product quotient."
+  },
+  {
+   "tool": "grep",
+   "query": "closedSubstack|closed_substack|quasiCoherent.*[Ss]tack",
+   "results": "{\"t\": \"2026-10-23T11:32:20Z\", \"tool\": \"grep\", \"query\": \"closedSubstack|closed_substack|quasiCoherent.*[Ss]tack\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme closed immersions and generic site presentation data do not state the algebraic-stack product quotient."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Disjoint closed substacks give a surjective quasi coherent algebra product quotient",
+   "results": "{\"t\": \"2026-10-23T11:32:21Z\", \"tool\": \"leansearch\", \"query\": \"Disjoint closed substacks give a surjective quasi coherent algebra product quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.toSurjectiveOnStalks\", \"TopCat.Sheaf.isProductOfDisjoint\", \"AlgebraicGeometry.instCoproductsOfShapeDisjointSchemeOfSmall\", \"AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk\", \"AlgebraicGeometry.IsClosedImmersion.instIsMultiplicativeScheme\", \"AlgebraicGeometry.instSurjectiveDescI₀SchemeF\", \"AlgebraicGeometry.coprodSpec\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_forall_affineOpens\"], \"digest\": \"058145d9e10f3197\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme closed immersions and generic site presentation data do not state the algebraic-stack product quotient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraic stack closed immersion structure algebra pushforward quasi coherent quotient product disjoint supports",
+   "results": "{\"t\": \"2026-10-23T11:39:46Z\", \"tool\": \"leanfinder\", \"query\": \"Algebraic stack closed immersion structure algebra pushforward quasi coherent quotient product disjoint supports\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk\", \"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.instIsClosedImmersionLiftCoborder\", \"AlgebraicGeometry.instIsClosedImmersionInclusion\", \"AlgebraicGeometry.IsClosedImmersion.instSubschemeι\", \"AlgebraicGeometry.isClosedImmersion_equalizer_ι_left\", \"AlgebraicGeometry.IsClosedImmersion.Spec_iff\", \"AlgebraicGeometry.Scheme.instIsClosedImmersionιOfIsSeparated\"], \"digest\": \"ccaecea72718572a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme closed immersions and generic site presentation data do not state the algebraic-stack product quotient."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-adequate-moduli-topological-images",
+  "date": "2026-10-23",
+  "group": "Q157"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 2.1, printed pp.4--5, Hilbert embedding and determinant line; agent expansion of descent through the central group scheme mu_r, including nonreduced mu_r. Local PDF WANTED; read online at https://arxiv.org/pdf/0810.2340. Supporting general input: The geometric stability convention for the Hilbert linearization: affine invariant-quotient fibres and invariant closed images used to construct the stable open, without presupposing a projective stable-locus theorem. Supporting input: Adequate quotient surjectivity, closed images and intersection of images used for the affine invariant quotient. Supporting input: the disjoint closed-substack quotient algebra to which adequate power lifting is applied.",
+   "via": [
+    "lem-sfb-adequate-moduli-topological-images",
+    "lem-sfb-affine-pgl-quotient-orbit-topology",
+    "lem-sfb-hilbert-plucker-pgl-linearization",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-disjoint-closed-substacks-algebra-quotient",
+  "worker": "stage1",
+  "summary": "Q124 checked the arbitrary-stack and nonflat-base-change scope, constructed the two sheaves from affine pushforward, extracted only the missing cartesian-module realization criterion, and proved local surjectivity on complementary opens. The statement is unchanged; all cited statements were read and exact quotations recorded.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 2.1, printed pp.4--5, Hilbert embedding and determinant line; agent expansion of descent through the central group scheme mu_r, including nonreduced mu_r. Local PDF WANTED; read online at https://arxiv.org/pdf/0810.2340. Supporting general input: The geometric stability convention for the Hilbert linearization: affine invariant-quotient fibres and invariant closed images used to construct the stable open, without presupposing a projective stable-locus theorem. Supporting input: Adequate quotient surjectivity, closed images and intersection of images used for the affine invariant quotient. Supporting input: the disjoint closed-substack quotient algebra to which adequate power lifting is applied. Current latest direct-images proof (3) read. This is the inherited adequate-moduli supporting algebra input; the scheme-local realization and local lifting do not replace any unit step. The ancestor tool reports None, which is retained from the current item.",
+  "tool_uses": [
+   {
+    "node": "def-weil-closed-immersion",
+    "why": "Generic scheme closed-immersion affine quotient characterization used on every scheme object."
+   },
+   {
+    "node": "lem-weil-pbc-affine-pushforward-base-change",
+    "why": "Generic affine pushforward with arbitrary base change, algebra compatibility and composition; the unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-direct-sum",
+    "why": "Generic binary sum closure for ordinary quasi-coherent scheme modules."
+   },
+   {
+    "node": "def-pc-module-pullback",
+    "why": "Generic tensor-pullback formula used to write the binary sum comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "lem-weil-pbc-quasi-coherent-module-direct-sum",
+  "def-pc-module-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q124-1c0fa262a",
+  "group": "Q124",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-1c0fa262a (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-sfb-cartesian-module-fppf-realization, all cited statements, and Stacks 06WK with its full proof (via 06WI and 03DX), 00DT and 0507. The statement and stmt_deps are unchanged and nothing is weakened. Small cases checked: Z2 empty; X=A^1 with Z_1=V(t), Z_2=V(t-1); and Z1=Z2=Spec k, where the map fails, which shows disjointness is needed. One fault, now fixed: step 1 used Z_{a,T'} ≅ Z_{a,T}×_T T' along α without saying so. Affine base change into M_{a,y}, the cocycle and the restriction to opens in step 4 all depend on it. The fix writes it out from strict fullness: T×_X Z_a is the subfunctor {t : t^*x in Z_a} of h_T, and y ≅ u^*x. Only the step-1 text in fixes/ changed. Step 2: the section formula and restriction come from the base-change adjunction, and the algebra structure matches def-sfb-stack-quasi-coherent-algebra. Step 3: u^* preserves binary sums via the biproduct identities. Step 4: the base-change-image clause makes C_1 and C_2 disjoint, so the lifts (0,b) and (b,0) exist on affines in the two complements; Zariski covers are fppf, and the step is genuinely elementary. Step 5 is elementary. The new node is true: it is the converse of 06WK made explicit, with sheafness from 03DT and local presentations pulled back by the right-exact u^*. It is a real lemma, not a clause of the item, and B1-B5 hold. Not a duplicate of the qcoh-presentation-tensor-equivalence, space-qcoh-groupoid, stack-flat-scalar-sections or groupoid-module-descent nodes. Accepted tool uses: def-weil-closed-immersion, lem-weil-pbc-affine-pushforward-base-change, lem-weil-pbc-quasi-coherent-module-direct-sum, def-pc-module-pullback. Batch-5 flags: def-sfb-stable-pointed-moduli-groupoids is cited only for the general definitions of a fibred groupoid and a 2-fibre product, and def-sfb-stack-quasi-coherent-algebra is a general site quasi-coherence definition that the item already cited on the base. Neither is part of the trace formula or Poincaré duality or their proofs, so both are accepted. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DisjointClosedSubstacksAlgebraQuotient",
+  "declaration": "CategoryTheory.disjoint_closed_substacks_algebra_quotient",
+  "declarations": [
+   "CategoryTheory.closedModuliSectionDiagram",
+   "CategoryTheory.closedModuliSectionRing",
+   "CategoryTheory.closedModuliSectionRestriction",
+   "CategoryTheory.closedModuliSectionRestriction_id",
+   "CategoryTheory.closedModuliSectionRestriction_comp",
+   "CategoryTheory.closedModuliStructurePresheaf",
+   "CategoryTheory.closedModuliPullbacks_compatible",
+   "CategoryTheory.closedModuliStructureMapApp",
+   "CategoryTheory.closedModuliStructureMap_naturality",
+   "CategoryTheory.closedModuliStructurePresheaf_isSheaf",
+   "CategoryTheory.closedModuliAlgebra",
+   "CategoryTheory.closedModuliProductAlgebra",
+   "CategoryTheory.closedModuliAlgebra_sections",
+   "CategoryTheory.disjoint_closed_substacks_algebra_quotient"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DisjointClosedSubstacksAlgebraQuotient.lean",
+  "statement": "theorem disjoint_closed_substacks_algebra_quotient (k : Type u) [Field k] (F : BasedCategory.{v, w} (Over (Spec (.of k)))) (hF : IsAlgebraicModuliStack F) (W₁ W₂ : ClosedModuliSubstack F) (hd : Disjoint (Set.range (moduliPointMap W₁.inclusion)) (Set.range (moduliPointMap W₂.inclusion))) : IsQuasicoherentModuliAlgebra (closedModuliAlgebra W₁ hF.1.1) ∧ IsQuasicoherentModuliAlgebra (closedModuliAlgebra W₂ hF.1.1) ∧ IsQuasicoherentModuliAlgebra (closedModuliProductAlgebra W₁ W₂ hF.1.1) ∧ IsSurjectiveModuliAlgebra (Under.homMk (U := Under.mk (𝟙 (moduliStructureSheaf F hF.1.1))) (V := closedModuliProductAlgebra W₁ W₂ hF.1.1) (closedModuliProductAlgebra W₁ W₂ hF.1.1).hom (Category.id_comp _)) ∧ (∀ (s : moduliGlobalSectionsRing (moduliStructureSheaf F hF.1.1)) (x : F.obj) (i : CostructuredArrow W₁.inclusion.toFunctor x), (closedModuliStructureMapApp W₁ x (s.1 (op x))).1 (op i) = s.1 (op (W₁.inclusion.obj i.left))) ∧ (∀ (s : moduliGlobalSectionsRing (moduliStructureSheaf F hF.1.1)) (x : F.obj) (i : CostructuredArrow W₂.inclusion.toFunctor x), (closedModuliStructureMapApp W₂ x (s.1 (op x))).1 (op i) = s.1 (op (W₂.inclusion.obj i.left)))",
+  "branch": "sheaf-dag",
+  "by": "Q118",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The closed-base-change algebra has explicit compatible-family section rings and restriction maps, rather than chosen scheme representatives. The sections theorem identifies it with regular functions on every scheme 2-base change. Products use Mathlib ring-sheaf products; the theorem asserts all three quasi-coherence clauses, local surjectivity, and the global restriction formulas."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-87139a692",
+  "group": "Q118",
+  "result": "pass",
+  "note": "Every clause matches the node: field k; F with IsAlgebraicModuliStack; W1, W2 as ClosedModuliSubstack; disjoint ranges of moduliPointMap of the inclusions (the convention of smooth-presentation-closed-subsets); three IsQuasicoherentModuliAlgebra conjuncts; IsSurjectiveModuliAlgebra (fppf-local) of Under.homMk prod.hom; global-function restriction equations. B_a is the ring of compatible O-families on CostructuredArrow W.inclusion x with CostructuredArrow.map restriction; full pullback-stable W plus fibred groupoid make this exactly Γ(T×_X Z_a,O), the same comma model as the landed moduliDirectImage. Real data; only Prop obligations sorried; the product is the Mathlib sheaf product with prod.lift. No extra hypotheses or universe restriction. Edge cases checked: empty Z, Z1=Z2 excluded, A^1 two points, empty X. No duplicate found in side-live Sheaf/WeilConjectures or Mathlib. lean.statement verbatim (script); 14 declarations listed; docstrings present; all theorems sorry; only the lean record changed. Note: the helper closedModuliAlgebra_sections is a Nonempty iso, following the landed moduliDirectImage_sections; the item does not rely on it. No compile run, nothing changed."
+ }
+}

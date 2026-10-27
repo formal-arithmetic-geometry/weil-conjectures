@@ -1,0 +1,281 @@
+{
+ "id": "lem-cbc-tower-adjunction-realization",
+ "kind": "statement",
+ "title": "Constant coefficients and derived adjunctions on strict pro-etale towers",
+ "statement": "Let $B$ be a commutative ring. For every scheme $X$ use its small pro-etale site with the chosen small skeleton, its constant ring sheaf $\\underline B_X$, the abelian category of module sheaves, and $\\mathcal T_X=\\operatorname{Fun}(\\mathbf N_{\\geq1}^{op},\\operatorname{Mod}(\\underline B_X))$ of strict inverse systems. Work in the ordinary unbounded derived categories $D(\\mathcal T_X)$. Use the termwise inverse image $G_u$, total derived termwise direct image $R_u$, and exact open extension $J_j$ with their specified adjunctions and compositors [def-cbc-strict-constant-tower-operations] [def-cbc-strict-tower-open-extension]. For every scheme map $u:X\\to Y$, the canonical constant-section map $c_u:u^{-1}\\underline B_Y\\to\\underline B_X$ is an isomorphism of ring sheaves, natural in $B$, compatible with ring homomorphisms, identities and composition. Termwise module inverse image using $c_u$ is exact and left adjoint to termwise direct image. The categories $\\mathcal T_X$ are module-sheaf categories on the small diagram sites of [lem-weil-pbc-diagram-site-realization] and are Grothendieck abelian; every complex admits a K-injective resolution. Termwise direct image preserves K-injective complexes. Its total unbounded derived functor is everywhere defined, and the derived adjunction $G_u\\dashv R_u$ has the unit and counit induced by the termwise adjunction. For every open immersion $j$, termwise extension by zero and restriction are exact and induce $J_j\\dashv G_j$ with the termwise open unit and counit. These assertions hold for infinite $B$ and unbounded tower complexes, without transition-surjectivity or uniform-boundedness hypotheses.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI (lemma-extension-by-zero), 03DJ (lemma-extension-by-zero-exact); derived.tex Tag 0DVC (lemma-pre-derived-adjoint-functors); strict diagram-site and arbitrary constant-ring refinement, original parent proof steps 1-2"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-inverse-system",
+  "def-weil-abstract-derived-category",
+  "def-cbc-strict-constant-tower-operations",
+  "def-cbc-strict-tower-open-extension",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-diagram-site-realization",
+  "def-sp-grothendieck-abelian",
+  "def-pur-kinjective-complex"
+ ],
+ "proof": [
+  {
+   "text": "Use constantRing_isIso and constantRingIso_comp from [def-cbc-strict-constant-tower-operations] for invertibility and composition. The proved proEtaleConstantInverseImageMap_naturality declaration of [lem-weil-pbc-profinite-coefficient-inverse-image] is stated for arbitrary CommRingCat objects and gives coefficient naturality, without finiteness. For the identity, transpose under the actual sheaf adjunction. Sheafification uniqueness and naturality of toSheafify show that the direct-image constant-section map is the inverse component of the canonical direct-image identity isomorphism. The conjugation unit identity then gives exactly leftAdjointIdIso, not an arbitrary isomorphism.",
+   "uses": [
+    "def-cbc-strict-constant-tower-operations",
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Specialize the module and tower finite-limit/finite-colimit instances of [def-cbc-strict-constant-tower-operations]. Whiskering the specified module adjunction produces termwiseAdjunction. Its unit and counit at each index reduce definitionally to the specified module unit and counit.",
+   "uses": [
+    "def-cbc-strict-constant-tower-operations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Construct the vertical topology with verticalDiagramSiteTopology from [lem-weil-pbc-diagram-site-topology]. Its existing generalized sheaf criterion applies with index N^op and the larger small pro-etale model. Reproduce the component, horizontal-arrow and assembly constructions of [lem-weil-pbc-diagram-site-module-equivalence] privately with independent index universe Type and site universe u+1, retaining their formulas. Restricting along a vertical slice gives the component module; assembling a diagram uses the horizontal map followed by the vertical restriction. Commutation follows from module-map naturality. The component identity isomorphisms give the unit and counit, with triangle identity componentwise. Compose this explicit equivalence with postcomposition by the module pushforward equivalence for AsSmall.equiv from [def-weil-proetale-inverse-image]. Its underlying ring presheaf and vertical covers are the displayed ones by reduction. An equivalence preserves finite limits and colimits; preservation of binary products gives additivity.",
+   "uses": [
+    "lem-weil-pbc-diagram-site-topology",
+    "lem-weil-pbc-diagram-site-module-equivalence",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The module category is Grothendieck by modules_grothendieck in [def-cbc-strict-constant-tower-operations], which specializes [prop-pur-kinjective-resolutions-exist] at the original site universes. Take a separator H of modules. For each index j take its free diagram under the evaluation left adjoint. These form a separating family: a component map detected by H transposes under evaluation to a detecting map from the free diagram. Their coproduct is a separator. Filtered colimits and AB5 transfer pointwise by the Mathlib functor-category instances. This proves Grothendieck abelianness directly, without transferring through a chosen diagram-site equivalence. The existing towers_kInjective instance then supplies a K-injective resolution of every complex; retain its quasi-isomorphism and forget the additional monomorphism property.",
+   "uses": [
+    "def-cbc-strict-constant-tower-operations",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the proved upstream Adjunction.preservesKInjectiveComplexes lemma to termwiseAdjunction. Tower pullback is exact, hence preserves homology. The lemma transposes a map from an acyclic complex into the direct image of I, null-homotopes its adjunct into I, and transports the homotopy back. This uses K-injectivity in the tower category itself, not levelwise K-injectivity.",
+   "uses": [
+    "def-cbc-strict-constant-tower-operations",
+    "def-pur-kinjective-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Unfold R only and use the standard rightDerivedFunctor IsRightDerivedFunctor instance; its unit is an isomorphism at a K-injective complex by the upstream homotopy-category K-injective derivability instance. The adjunction equality is definitional from adj and termwiseAdjunction in [def-cbc-strict-constant-tower-operations]. For an open immersion all four exactness instances and the normalized jAdj equality are already supplied by [def-cbc-strict-tower-open-extension], the last again definitionally. Thus the existing constructions retain their specified termwise normalizations without a fresh choice of adjunction.",
+   "uses": [
+    "def-cbc-strict-constant-tower-operations",
+    "def-cbc-strict-tower-open-extension"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-strict-constant-tower-operations",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-constant-sheaf",
+  "lem-weil-pbc-diagram-site-topology",
+  "lem-weil-pbc-diagram-site-module-equivalence",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-pur-kinjective-complex",
+  "def-cbc-strict-tower-open-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 070H, 070K and 0DVC; sites-modules.tex extension-by-zero lemmas; explicit product-site constructions and existing strict-tower APIs, fully formalized by W3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For any commutative ring B, inverse image of its constant ring sheaf is canonically constant and termwise exact inverse image on strict towers of pro-etale module sheaves is left adjoint to total unbounded derived direct image; open extension is an exact left adjoint.",
+   "results": "8 hits: CondensedMod.LocallyConstant.adjunction, LightCondMod.LocallyConstant.adjunction, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, Condensed.freeForgetAdjunction, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, SheafOfModules.PullbackConstruction.adjunction, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules, LightCondensed.freeForgetAdjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical/module or algebraic-etale facts do not state this normalized pro-etale/etale tower assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, DerivedCategory",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical/module or algebraic-etale facts do not state this normalized pro-etale/etale tower assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale.*(tower|adjunction)|constantSheaf.*(pullback|inverseImage)|mapDerivedCategory.*adjunction",
+   "results": "1 hits: Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical/module or algebraic-etale facts do not state this normalized pro-etale/etale tower assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For any commutative ring B, inverse image of its constant ring sheaf is canonically constant and termwise exact inverse image on strict towers of pro-etale module sheaves is left adjoint to total unbounded derived direct image; open extension is an exact left adjoint.",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, CategoryTheory.constantSheafΓAdj, CategoryTheory.Sheaf.isConstant_iff_mem_essImage, CategoryTheory.constantCommuteCompose, AlgebraicGeometry.StructureSheaf.comap_id', SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullback",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical/module or algebraic-etale facts do not state this normalized pro-etale/etale tower assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image and derived pushforward adjunction for modules on the diagram site of inverse systems over a small ringed site",
+   "results": "8 hits: SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pushforwardNatIso, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.PullbackConstruction.adjunction, PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern ordinary module adjunctions, topological gluing or algebraic etaleness, not the full specified comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale.*(tower|adjunction)|constantSheaf.*(pullback|inverseImage)|mapDerivedCategory.*adjunction",
+   "results": "1 hits: Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected ordinary module adjunctions, constant-sheaf and Grothendieck sheaf results do not give the full strict-tower pro-etale assertion with its normalized unbounded adjunctions"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, DerivedCategory",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected ordinary module adjunctions, constant-sheaf and Grothendieck sheaf results do not give the full strict-tower pro-etale assertion with its normalized unbounded adjunctions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unbounded derived adjunction on inverse systems of module sheaves with constant ring coefficients on the pro-etale site",
+   "results": "8 hits: CategoryTheory.constantSheafΓAdj, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pushforwardPushforwardAdj, CategoryTheory.constantSheafAdj, CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, CategoryTheory.constantSheafAdj_counit_app, CategoryTheory.Functor.sheafAdjunctionCocontinuous, CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app'",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected ordinary module adjunctions, constant-sheaf and Grothendieck sheaf results do not give the full strict-tower pro-etale assertion with its normalized unbounded adjunctions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image of constant ring module sheaves on small pro-etale sites induces an adjunction on unbounded derived categories of strict inverse systems",
+   "results": "8 hits: CondensedMod.LocallyConstant.adjunction, LightCondMod.LocallyConstant.adjunction, SheafOfModules.PullbackConstruction.adjunction, LightCondensed.freeForgetAdjunction, Condensed.freeForgetAdjunction, SheafOfModules.pushforwardPushforwardAdj, Condensed.profiniteSolidification, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected ordinary module adjunctions, constant-sheaf and Grothendieck sheaf results do not give the full strict-tower pro-etale assertion with its normalized unbounded adjunctions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck abelian category of diagrams of module sheaves, K-injective resolutions, exact pullback left adjoint to derived pushforward",
+   "results": "8 hits: SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.PullbackConstruction.adjunction, LightCondensed.instIsGrothendieckAbelianLightCondMod, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, CategoryTheory.Sheaf.instIsGrothendieckAbelian",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected ordinary module adjunctions, constant-sheaf and Grothendieck sheaf results do not give the full strict-tower pro-etale assertion with its normalized unbounded adjunctions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-cbc-strict-tower-proper-open-calculus",
+  "date": "2026-10-22",
+  "group": "Q65"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "from": {
+   "node": "thm-cbc-complete-proetale",
+   "place": "Proof, last sentence: 'with the compatibility of the comparisons ... with the completed maps' — strict-tower open/proper comparison and coherence underlying the passage to derived limits; parent proof steps 1,2: Constant coefficients and derived adjunctions on strict pro-etale towers",
+   "via": [
+    "lem-cbc-strict-tower-proper-open-calculus"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-cbc-tower-adjunction-realization",
+  "worker": "stage1",
+  "summary": "Proved all clauses in eight steps using existing general ringed-site and derived-category nodes; no new nodes. Verified arbitrary commutative coefficients, the small diagram site, exact termwise adjunctions, K-injective preservation, and specified unit/counit normalization.",
+  "blueprint": "thm-cbc-complete-proetale: naturality and coherence for identity and pasted squares; realizes the strict-tower adjunction foundation extracted from parent lem-cbc-strict-tower-proper-open-calculus steps 1-2.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-proetale-constant-coefficient-comparison",
+    "why": "Generic ringed-site or unbounded derived-category tool, specialized in the indicated proof step; it supplies the strict-tower foundation and replaces no compact-support base-change route step."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic ringed-site or unbounded derived-category tool, specialized in the indicated proof step; it supplies the strict-tower foundation and replaces no compact-support base-change route step."
+   },
+   {
+    "node": "lem-weil-pbc-site-pullback-abelian-exact",
+    "why": "Generic ringed-site or unbounded derived-category tool, specialized in the indicated proof step; it supplies the strict-tower foundation and replaces no compact-support base-change route step."
+   },
+   {
+    "node": "lem-weil-pbc-diagram-site-realization",
+    "why": "Generic ringed-site or unbounded derived-category tool, specialized in the indicated proof step; it supplies the strict-tower foundation and replaces no compact-support base-change route step."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic ringed-site or unbounded derived-category tool, specialized in the indicated proof step; it supplies the strict-tower foundation and replaces no compact-support base-change route step."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Generic ringed-site or unbounded derived-category tool, specialized in the indicated proof step; it supplies the strict-tower foundation and replaces no compact-support base-change route step."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic ringed-site or unbounded derived-category tool, specialized in the indicated proof step; it supplies the strict-tower foundation and replaces no compact-support base-change route step."
+   },
+   {
+    "node": "lem-pc-pre-derived-adjoint-functors-general",
+    "why": "Generic ringed-site or unbounded derived-category tool, specialized in the indicated proof step; it supplies the strict-tower foundation and replaces no compact-support base-change route step."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic ringed-site or unbounded derived-category tool, specialized in the indicated proof step; it supplies the strict-tower foundation and replaces no compact-support base-change route step."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-comparison",
+    "why": "Generic ringed-site or unbounded derived-category tool, specialized in the indicated proof step; it supplies the strict-tower foundation and replaces no compact-support base-change route step."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic ringed-site or unbounded derived-category tool, specialized in the indicated proof step; it supplies the strict-tower foundation and replaces no compact-support base-change route step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q88-81ea382de",
+  "group": "Q88",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-81ea382de (reviewer sub-agent of L); spot-checked: I read the item, all 24 cited statements, the parent's use of the item, Stacks 0DVC/070Y/03DI/03DJ (and checked the other step tags in tags/tags) and the unit sk-prop-sf-cbc. The delivery has 0 new nodes. Statement and stmt_deps are identical to Q65's created node and match what the parent's step 1 needs. Small cases tested: B=0, empty scheme, u=id, infinite B, zero or non-surjective transitions, unbounded complexes. Steps 1-5 and 7 are correct: c_u is the adjunct of rho from def-weil-proetale-inverse-image, it is an iso for any A, and naturality and composition follow from the sheafification universal property. Module pullback S⊗u^{-1}M ≅ u^{-1}M is exact. The diagram site with J=N_{>=1}^op gives Grothendieck abelianness and K-injective resolutions. Step 4 (Hom_K(A,FI)=Hom_K(LA,I)=0) is elementary. R_u comes from kinjective-total-derived and G_u from exact descent. The open adjunction uses the localization and ringed-open comparison nodes. Fault C3/C4: steps 6 and 8 apply lem-pc-pre-derived-adjoint-functors-general, whose hypotheses are essential constancy of the ind/pro denominator diagrams. The steps instead claimed only Kan-extension existence from step 5. FIX: step 6 now proves both conditions as in Stacks 070Y. The ind side uses a fixed K-injective resolution and lem-weil-pbc-kinjective-hom-derived (homotopy-unique factorization; quasi-isomorphisms between K-injectives are homotopy equivalences). On the pro side, exactness of L makes every leg invertible. Step 8 now says the exact functors' diagrams are essentially constant with the identity as stage. Both steps cite def-pc-essentially-constant-ind/pro-diagram, and proof_deps were recomputed. Every step is under 2000 characters and there is no cycle. I accept the 11 declared tool uses as generic ringed-site and derived-category black boxes that replace no route step. No duplicate found: lem-sbc-unbounded-exact-adjunction-square and the pbc Roos-normalization nodes presuppose this adjunction. Advisory: the unsplit lem-weil-pbc-right-adjoint-preserves-kinjective states step 4's fact.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StrictTowerAdjunctionRealization",
+  "declaration": "AlgebraicGeometry.ProEtale.StrictTower.towerAdjunctionRealization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.StrictTower.termwiseAdjunction",
+   "AlgebraicGeometry.ProEtale.StrictTower.towerAdjunctionRealization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictTowerAdjunctionRealization.lean",
+  "statement": "theorem towerAdjunctionRealization : (∀ {X Y : Scheme.{u}} (f : X ⟶ Y), IsIso (Scheme.proEtaleConstantInverseImageMap f CommRingCat.{u + 1} (CommRingCat.of B))) ∧ (∀ (C : Type (u + 1)) [CommRing C] (φ : B →+* C) {X Y : Scheme.{u}} (f : X ⟶ Y), (Scheme.proEtaleSheafInverseImage f CommRingCat.{u + 1}).map ((constantSheaf (Scheme.ProEt.topology Y) CommRingCat.{u + 1}).map (CommRingCat.ofHom φ)) ≫ Scheme.proEtaleConstantInverseImageMap f CommRingCat.{u + 1} (CommRingCat.of C) = Scheme.proEtaleConstantInverseImageMap f CommRingCat.{u + 1} (CommRingCat.of B) ≫ (constantSheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}).map (CommRingCat.ofHom φ)) ∧ (∀ X : Scheme.{u}, Scheme.proEtaleConstantInverseImageMap (𝟙 X) CommRingCat.{u + 1} (CommRingCat.of B) = (Adjunction.leftAdjointIdIso (Scheme.proEtaleSheafAdjunction (𝟙 X) CommRingCat.{u + 1}) (Functor.sheafPushforwardContinuousId' (MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ X) CommRingCat.{u + 1} (Scheme.ProEt.topology X))).hom.app (coefficients B X)) ∧ (∀ {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z), constantRingIso B (f ≫ g) = Scheme.proEtaleRingCompositeCoefficients f g (coefficients B Z) (coefficients B Y) (coefficients B X) (constantRingIso B g) (constantRingIso B f)) ∧ (∀ {X Y : Scheme.{u}} (f : X ⟶ Y), PreservesFiniteLimits (modulePullback B f) ∧ PreservesFiniteColimits (modulePullback B f) ∧ PreservesFiniteLimits (towerPullback B f) ∧ PreservesFiniteColimits (towerPullback B f) ∧ (∀ (M : Towers B Y) (n : ℕ), ((termwiseAdjunction B f).unit.app M).app (op n) = (Scheme.proEtaleRingModuleAdjunction f (coefficients B Y) (coefficients B X) (constantRingIso B f)).unit.app (M.obj (op n))) ∧ (∀ (N : Towers B X) (n : ℕ), ((termwiseAdjunction B f).counit.app N).app (op n) = (Scheme.proEtaleRingModuleAdjunction f (coefficients B Y) (coefficients B X) (constantRingIso B f)).counit.app (N.obj (op n)))) ∧ (∀ X : Scheme.{u}, ∃ (T : GrothendieckTopology ((ℕᵒᵖ)ᵒᵖ × Scheme.proEtaleSiteModel X)) (R : Sheaf T RingCat.{u + 1}) (M : ringedSiteModules.{u + 1} R ≌ Towers B X), (∀ (n : ℕᵒᵖ) (V : Scheme.proEtaleSiteModel X) (S : Sieve (op n, V)), S ∈ T (op n, V) ↔ S.functorPullback (Prod.sectR (op n) (Scheme.proEtaleSiteModel X)) ∈ Scheme.proEtaleModelTopology X V) ∧ R.obj = (CategoryTheory.Prod.snd (ℕᵒᵖ)ᵒᵖ (Scheme.proEtaleSiteModel X)).op ⋙ (AsSmall.down : Scheme.proEtaleSiteModel X ⥤ X.ProEt).op ⋙ ((sheafCompose (Scheme.ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (coefficients B X)).obj ∧ M.functor.Additive ∧ PreservesFiniteLimits M.functor ∧ PreservesFiniteColimits M.functor) ∧ (∀ X : Scheme.{u}, IsGrothendieckAbelian.{u + 1} (Towers B X)) ∧ (∀ (X : Scheme.{u}) (K : CochainComplex (Towers B X) ℤ), ∃ (I : CochainComplex (Towers B X) ℤ) (s : K ⟶ I), I.IsKInjective ∧ QuasiIso s) ∧ (∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (I : CochainComplex (Towers B X) ℤ), I.IsKInjective → CochainComplex.IsKInjective (((towerDirectImage B f).mapHomologicalComplex (.up ℤ)).obj I)) ∧ (∀ {X Y : Scheme.{u}} (f : X ⟶ Y), (R B f).IsRightDerivedFunctor (towerDirectImage B f).rightDerivedFunctorUnit (HomotopyCategory.quasiIso (Towers B X) (.up ℤ)) ∧ (∀ (I : CochainComplex (Towers B X) ℤ), I.IsKInjective → IsIso ((towerDirectImage B f).rightDerivedFunctorUnit.app ((HomotopyCategory.quotient (Towers B X) (.up ℤ)).obj I)))) ∧ (∀ {X Y : Scheme.{u}} (f : X ⟶ Y), adj B f = (termwiseAdjunction B f).mapDerivedCategoryRightDerivedAdjunction) ∧ (∀ {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j], PreservesFiniteLimits (towerJ B j) ∧ PreservesFiniteColimits (towerJ B j) ∧ PreservesFiniteLimits (towerPullback B j) ∧ PreservesFiniteColimits (towerPullback B j) ∧ jAdj B j = Adjunction.ofNatIsoRight (((moduleJAdj B j).whiskerRight ℕᵒᵖ).mapDerivedCategoryRightDerivedAdjunction) (towerPullback B j).rightDerivedFunctorIsoMapDerivedCategory)",
+  "branch": "sheaf-dag",
+  "by": "Q103",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-10fa5f041",
+  "group": "Q103",
+  "result": "pass",
+  "note": "Read item, 12 stmt_deps, live StrictConstantTowerOperations/StrictTowerOpenExtension/ProEtaleInverseImage/DiagramSiteRealization/ProEtaleDerivedPullbackComposition, Mathlib leftAdjointIdIso/sheafPushforwardContinuousId', both citers' proof steps. Node unchanged except lean; statement verbatim. All 14 clauses rendered on actual pinned objects: c_u IsIso, naturality square in φ:B→+*C, identity = leftAdjointIdIso of canonical pushforward identity (true by conjugate/sheafification uniqueness), composite = canonical compositor, module/tower exactness + real whiskered termwiseAdjunction with evaluated unit/counit, diagram site with topology and ring pinned, Grothendieck, K-inj resolutions, K-inj preservation, IsRightDerivedFunctor, adj and jAdj equal to the termwise-induced derived adjunctions. Clauses that are dep theorems/rfl reflect the node restating the def-cbc normalizations, not hollowness. No extra hypotheses; B:Type(u+1) as in dep; edge cases B=0/infinite, empty scheme/open, id/composites, unbounded complexes OK. Docstrings with 8 steps and blueprint tags present; both report sections present. Advisories: owners of proEtaleRingCompositeCoefficients (def-sfb-proetale-composite-coefficients) and proEtaleRingModuleAdjunction (def-weil-pbc-proetale-operations) not in stmt_deps; diagram-site equivalence M not pinned by the lemma's HEq formulas (node wording does not demand it; citers do not use it). No FIX, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261023T152122-L-451592",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

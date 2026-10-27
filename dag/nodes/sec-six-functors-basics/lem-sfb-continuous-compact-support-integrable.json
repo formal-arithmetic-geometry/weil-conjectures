@@ -1,0 +1,105 @@
+{
+ "id": "lem-sfb-continuous-compact-support-integrable",
+ "kind": "statement",
+ "title": "Continuous compactly supported complex functions are integrable",
+ "statement": "Use $\\mathbf R,\\mathbf C$ [def-weil-field] with their usual Euclidean structures. Let $m\\geq1$ and $h:\\mathbf R^m\\to\\mathbf C$ be continuous. If $\\overline{\\{x:h(x)\\ne0\\}}$ is compact, then $h$ is Lebesgue integrable: $$\\int_{\\mathbf R^m}|h(x)|\\,dx<\\infty.$$ The support may be empty.",
+ "source": {
+  "document": "Mathlib/MeasureTheory/Function/LocallyIntegrable.lean",
+  "place": "Continuous.integrable_of_hasCompactSupport, lines 621–626 (read)."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A continuous compactly supported complex valued function on a locally compact Euclidean space is Lebesgue integrable",
+   "results": "Returned Continuous.integrable_of_hasCompactSupport (Mathlib/MeasureTheory/Function/LocallyIntegrable), CompactlySupportedContinuousMap.integrable, and ContinuousOn.integrableOn_compact.",
+   "date": "2026-10-24",
+   "verdict": "match: Continuous.integrable_of_hasCompactSupport is more general and specializes directly to complex functions on Euclidean space with Lebesgue measure."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous functions with compact support are integrable with respect to Lebesgue measure",
+   "results": "Returned Continuous.integrable_of_hasCompactSupport (Mathlib.MeasureTheory.Function.LocallyIntegrable), CompactlySupportedContinuousMap.integrable and ContinuousOn.integrableOn_compact.",
+   "date": "2026-10-24",
+   "verdict": "match: Continuous.integrable_of_hasCompactSupport is more general and specializes directly to complex functions on Euclidean space with Lebesgue measure."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HasCompactSupport.integrable\"",
+   "results": "[loogle] OK 0 hit(s).",
+   "date": "2026-10-24",
+   "verdict": "match: Continuous.integrable_of_hasCompactSupport is more general and specializes directly to complex functions on Euclidean space with Lebesgue measure."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Continuous.integrable_of_hasCompactSupport\"",
+   "results": "[loogle] OK 1 hit(s): Continuous.integrable_of_hasCompactSupport, Mathlib.MeasureTheory.Function.LocallyIntegrable, with Continuous f and HasCompactSupport f assumptions.",
+   "date": "2026-10-24",
+   "verdict": "match: Continuous.integrable_of_hasCompactSupport is more general and specializes directly to complex functions on Euclidean space with Lebesgue measure."
+  },
+  {
+   "tool": "grep",
+   "query": "integrable_of_hasCompactSupport",
+   "results": "[grep] OK 1 hit(s): Mathlib/MeasureTheory/Function/LocallyIntegrable.lean:622, theorem Continuous.integrable_of_hasCompactSupport.",
+   "date": "2026-10-24",
+   "verdict": "match: Continuous.integrable_of_hasCompactSupport is more general and specializes directly to complex functions on Euclidean space with Lebesgue measure."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Continuous.integrable_of_hasCompactSupport",
+  "file": "Mathlib/MeasureTheory/Function/LocallyIntegrable.lean",
+  "line": 622,
+  "how": "specializes in one line: X = Fin m → R, E = C and μ = volume; line 622 assumes Continuous and HasCompactSupport and concludes Integrable. Euclidean Lebesgue measure has IsFiniteMeasureOnCompacts, as required by the surrounding section."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-coordinate-weighted-adjoint",
+  "date": "2026-10-24",
+  "group": "Q02"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Lemmas 6.2 and 6.4, smooth formal adjoints and ellipticity of the Dolbeault Laplacian. Supporting input: Localize the adjunction calculation to a real coordinate chart with arbitrary Hermitian Gram matrices and volume density. Supporting scalar calculus input: Continuous compactly supported complex functions are integrable.",
+   "via": [
+    "lem-sfb-coordinate-weighted-adjoint",
+    "lem-sfb-dolbeault-laplacian-elliptic",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

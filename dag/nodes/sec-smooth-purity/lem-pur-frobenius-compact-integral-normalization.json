@@ -1,0 +1,148 @@
+{
+ "id": "lem-pur-frobenius-compact-integral-normalization",
+ "kind": "statement",
+ "title": "Integral proper/open Frobenius exchange normalization",
+ "statement": "Let D be a finite-field datum, l a prime distinct from D.p, E a finite extension of Q_l, and f₀ : X₀ → Y₀ a separated finite-type morphism between finite-type D.k₀-schemes. For a retained compactification c₀ of f₀ and an integral constructible complex M on the geometric fibre of X₀, the component of FrobeniusExchange.frobeniusCompactIntegral equals the hom of RationalWeilPurity.integralExchange, heterogeneously across the two definitionally identical compactification presentations. These are the whole-system exchange of [def-weil-frobenius-square-exchange] and [def-weil-system-operation-exchange-realization], and the completed proper/open mate composite of [def-zl-frobenius-compact-support-comparison] transported through the realization in [lem-pur-rational-weil-naturality-mate]. The equality holds integrally, before scalar localization.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+  "place": "Step 2, compact-support transport for the same Cartesian square, integrally before rational localization; the proper/open mate construction of def-weil-system-operation-exchange-realization."
+ },
+ "stmt_deps": [
+  "def-weil-frobenius-square-exchange",
+  "def-weil-system-operation-exchange-realization",
+  "def-zl-frobenius-compact-support-comparison",
+  "lem-pur-rational-weil-naturality-mate"
+ ],
+ "proof": [
+  {
+   "text": "On simultaneous K-flat inverse images and K-injective direct images of the actual quotient systems, compare the normalized pullback composition squares with ordinary completed-coefficient pullback through completedToOrdinary. At the chain level every quotient projection sends an inverse-image generator to 1 tensor that generator, the shifted Roos coordinate is zero, and these formulas commute with all quotient transitions. Product projections and the two Roos coordinates therefore identify the chain maps before derived localization. A right mate is its unit, square and counit: the coefficient comparison preserves each factor because their transposes are these same generator maps. This identifies the proper factor. The dual unit-square-counit calculation identifies the open factor, on the entire system. Inverting the open mate equation retains the prescribed inverse open factor.",
+   "uses": [
+    "def-weil-system-operation-exchange-realization",
+    "def-zl-frobenius-compact-support-comparison",
+    "def-weil-frobenius-coefficient-twists",
+    "lem-sf-integral-compactification-system-realization",
+    "lem-trf-compact-support-system-realization-normalization",
+    "def-zl-framework-open-exchange"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Paste the proper and inverse open identities through the projection-normalized compact-support realization. Its normalized Roos projection adjoints identify the realization with sfQcqsCompactSupportRealization, and the intervening realization and inverse cancel. The remaining five outside factors are exactly the defining composite for RationalWeilPurity.integralExchange. Restriction to the full constructible subcategory gives the claimed HEq. These are whole-system equations, valid for empty schemes and identity compactifications by uniqueness of zero arrows and adjunction triangle identities respectively.",
+   "uses": [
+    "def-weil-integral-rational-qbar-compact-support",
+    "lem-pur-rational-weil-naturality-mate",
+    "def-weil-system-operation-exchange-realization",
+    "lem-sf-integral-compactification-system-realization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-system-operation-exchange-realization",
+  "def-zl-frobenius-compact-support-comparison",
+  "def-weil-frobenius-coefficient-twists",
+  "lem-sf-integral-compactification-system-realization",
+  "lem-trf-compact-support-system-realization-normalization",
+  "def-zl-framework-open-exchange",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-pur-rational-weil-naturality-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "X7",
+  "date": "2026-10-27",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+  "place": "Step 2, the compact-support transport is the exchange for the same Cartesian square, followed by pushforward of the exceptional datum; rational localization of its proper/open construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The Frobenius compact support exchange on integral constructible sheaves is the proper mate followed by inverse open mate through the normalized realization",
+   "results": "Eight results: generic monoidal frobeniusMorphism_mate, sheaf-module pullback adjunctions and continuous pushforward composition. No integral pro-etale proper/open realization normalization.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of the compact support Frobenius exchange equals localization of the proper and open adjunction mates",
+   "results": "Generic categorical localization of adjunctions, monoidal Frobenius maps and condensed adjunction triangles; no comparison of the specified integral exchanges.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.eqToHom",
+   "results": "eqToHom_comp_heq and comp_eqToHom_heq remove equality transports but do not identify the integral maps. The rational proof uses a proved private functor-category specialization.",
+   "date": "2026-10-27",
+   "verdict": "generic transport only"
+  },
+  {
+   "tool": "grep",
+   "query": "frobeniusCompact.*normalization|compactIntegral.*zlCompactSupport; rg compactIntegralAmbient|zlCompactSupportFrobenius|zlFrobeniusProperMate|zlFrobeniusOpenMate lean/Sheaf lean/WeilConjectures",
+   "results": "No comparison theorem. Read SystemOperationExchangeRealization, FrobeniusGeometricExchange, RationalWeilPurityNaturalityMate, QcqsCompactSupportRealization, CompactSupportSystemRealizationNormalization, IntegralCompactificationSystemRealization and ConstructibleMateCoherence. The latter proves invertibility, not normalization with the completed mate composite.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FrobeniusCompactRationalNormalization",
+  "date": "2026-10-27",
+  "group": "X7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Integral proper/open comparison, Step 1 of lem-pur-frobenius-compact-rational-normalization; no rational localization or chosen rational exchange occurs.",
+   "via": [
+    "lem-pur-frobenius-compact-rational-normalization",
+    "lem-pur-constant-purity-frobenius-square",
+    "lem-pur-weil-smooth-dualizing-complex"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FrobeniusCompactIntegralNormalization",
+  "file": "lean/Sheaf/Paper/FrobeniusCompactIntegralNormalization.lean",
+  "declaration": "WeilConjectures.frobeniusCompactIntegral_normalization",
+  "statement": "theorem frobeniusCompactIntegral_normalization\n    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    {X₀ Y₀ : Over (Spec (.of D.k₀))}\n    [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]\n    [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]\n    (f₀ : X₀ ⟶ Y₀) [IsSeparated f₀.left]\n    [LocallyOfFiniteType f₀.left] [QuasiCompact f₀.left]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (c₀ : Compactification f₀.left)\n    (M : sfIntegralConstructibleCategory l E (D.geometricFiber X₀).left) :\n    HEq ((FrobeniusExchange.frobeniusCompactIntegral D l hl E f₀ c₀).app M)\n      (RationalWeilPurity.integralExchange D l hl f₀ E c₀ M).hom",
+  "branch": "sheaf-dag",
+  "by": "X7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X7",
+  "result": "pass",
+  "landing": "20261027T013007-L-2356950",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X7",
+  "result": "pass",
+  "landing": "20261027T013007-L-2356950",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

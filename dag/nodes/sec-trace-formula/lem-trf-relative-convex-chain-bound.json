@@ -1,0 +1,225 @@
+{
+ "id": "lem-trf-relative-convex-chain-bound",
+ "kind": "statement",
+ "title": "Relative convex-chain bound for an ordered subgroup",
+ "statement": "Let $\\Gamma$ be a totally ordered abelian group [def-trf-totally-ordered-abelian-group] and $H\\subseteq\\Gamma$ any subgroup, with the induced order. A subgroup $C$ of either ordered group is convex if $a,b\\in C$ and $a\\le x\\le b$ imply $x\\in C$. Let $h,e\\ge0$ be integers. Suppose every finite strict chain of convex subgroups of $H$ has at most $h$ strict inclusions, and $\\operatorname{rrk}(\\Gamma/H)\\le e$, where $\\Gamma/H$ is the quotient abelian group, without any quotient-order requirement, and rational rank means $\\dim_{\\mathbf Q}((\\Gamma/H)\\otimes_{\\mathbf Z}\\mathbf Q)$ [def-trf-rational-rank]. Then every finite strict chain of convex subgroups of $\\Gamma$ has at most $h+e$ strict inclusions.",
+ "source": {
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf",
+  "place": "Section 2.1, printed pp. 7–8, convex-subgroup correspondence and the relative rational-rank term of Lemma 2.1.2; abstract relative-chain refinement supplied by NX. Author’s v3 PDF read online; local archive WANTED."
+ },
+ "stmt_deps": [
+  "def-trf-totally-ordered-abelian-group",
+  "def-trf-rational-rank"
+ ],
+ "proof": [
+  {
+   "text": "Fix a finite strict chain $C_0\\subsetneq\\cdots\\subsetneq C_n$ of convex subgroups of $\\Gamma$. For $0\\le i\\le n$ put $D_i=C_i\\cap H$, viewed as a subgroup of $H$. If $a,b\\in D_i$ and $x\\in H$ satisfies $a\\le x\\le b$, convexity in $\\Gamma$ puts $x\\in C_i$, hence $x\\in D_i$. Thus each $D_i$ is convex in $H$. Let $J=\\{i\\in\\{1,\\ldots,n\\}:D_{i-1}\\subsetneq D_i\\}$ and let $I$ be its complement. Deleting repeated consecutive terms from the increasing sequence $D_0,\\ldots,D_n$ leaves exactly $|J|$ strict inclusions, so $|J|\\le h$. If $n=0$ the conclusion already holds.",
+   "uses": [
+    "def-trf-totally-ordered-abelian-group"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-trace-formula/sk-i-curve-zero/lem-trf-local-term-locality.proof.md",
+    "place": "Agent-supplied relative chain refinement in the Temkin height-bound branch of (1)--(2); intersection and finite counting argument."
+   }
+  },
+  {
+   "text": "For each $i\\in I$ choose $x_i\\in C_i\\setminus C_{i-1}$ and replace it by its negative if necessary so that $x_i>0$. This replacement preserves nonmembership because $C_{i-1}$ is a subgroup. Convexity gives the following observation used below: if $m>0$ is an integer and $m x_i\\in C_{i-1}$, then $0\\le x_i\\le m x_i$ and $0,m x_i\\in C_{i-1}$ imply $x_i\\in C_{i-1}$, a contradiction.",
+   "uses": [
+    "def-trf-totally-ordered-abelian-group"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-trace-formula/sk-i-curve-zero/lem-trf-local-term-locality.proof.md",
+    "place": "Agent-supplied ordered-group argument underlying the relative rational-rank contribution; compare Temkin Section 2.1, printed pp. 7--8."
+   }
+  },
+  {
+   "text": "Put $G=\\Gamma/H$ as an abelian group and $V=G\\otimes_{\\mathbf Z}\\mathbf Q$, with $j:G\\to V$, $j(g)=g\\otimes1$. Apply [lem-sfb-rational-tensor-fractions] to $M=G$ with $a=g$ and $b=0$: since $j(0)=0$, $j(g)=0$ holds if and only if $cg=c\\cdot0=0$ for some integer $c>0$. Thus $g\\otimes1=0$ implies $mg=0$ for some positive integer $m$. No torsion-free hypothesis on $G$ is used; $G$ may have torsion (e.g. $\\Gamma=\\mathbf Z$, $H=2\\mathbf Z$).",
+   "uses": [
+    "lem-sfb-rational-tensor-fractions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00DK (lemma-tensor-localization) and 07JZ (definition-localization-module), as packaged by the Mathlib leaf lem-sfb-rational-tensor-fractions (IsLocalizedModule.eq_iff_exists); specialization b=0."
+   }
+  },
+  {
+   "text": "For $i\\in I$ set $v_i=(x_i+H)\\otimes1\\in V$. We prove these vectors independent. Suppose $\\sum_{i\\in I}q_i v_i=0$. Write each $q_i=b_i/d_i$ with $b_i\\in\\mathbf Z$ and positive integer $d_i$, put $d=\\prod_{i\\in I}d_i$ (empty product $1$), and set $a_i=b_i\\prod_{k\\in I,\\,k\\ne i}d_k\\in\\mathbf Z$. Multiplication of the relation by $d$ and tensor bilinearity give $(\\sum a_i(x_i+H))\\otimes1=0$. Step 3 supplies $m>0$ with $\\sum m a_i x_i\\in H$. If some $a_i\\ne0$, choose the largest such index $j$. The sum belongs to $C_j$, because $x_i\\in C_i\\subseteq C_j$ for $i\\le j$. Since $j\\in I$, it therefore lies in $C_j\\cap H=D_j=D_{j-1}\\subseteq C_{j-1}$. All terms with $i<j$ already lie in $C_{j-1}$; subtracting them yields $m a_jx_j\\in C_{j-1}$. Negating if needed yields $m|a_j|x_j\\in C_{j-1}$, contrary to Step 2. Thus every $a_i=0$, and $a_i=dq_i$ with $d>0$ implies every $q_i=0$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-trace-formula/sk-i-curve-zero/lem-trf-local-term-locality.proof.md",
+    "place": "Agent-supplied largest-index argument for the relative chain bound; denominator and torsion multipliers written explicitly."
+   }
+  },
+  {
+   "text": "Enumerate the finite set $I$ by $\\mathrm{Fin}\\,|I|$. Step 4 and [lem-trf-independent-family-cardinal-dimension] give $|I|\\le\\dim_{\\mathbf Q}V=\\operatorname{rrk}(\\Gamma/H)\\le e$, with finite cardinalities interpreted as natural numbers. This uses cardinal dimension and requires no separate finite-dimensionality assumption on $H\\otimes\\mathbf Q$ or $\\Gamma\\otimes\\mathbf Q$. Finally $I$ and $J$ partition the $n$ inclusions, so $n=|J|+|I|\\le h+e$. The chain was arbitrary, which proves the assertion.",
+   "uses": [
+    "lem-trf-independent-family-cardinal-dimension",
+    "def-trf-rational-rank"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/LinearAlgebra/Dimension/Basic.lean",
+    "place": "LinearIndependent.cardinal_lift_le_rank, lines 84--89; rational-rank definition and elementary finite counting."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-totally-ordered-abelian-group",
+  "lem-sfb-rational-tensor-fractions",
+  "def-weil-pbc-module-tensor-product",
+  "lem-trf-independent-family-cardinal-dimension",
+  "def-trf-rational-rank"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-trace-formula/sk-i-curve-zero/lem-trf-local-term-locality.proof.md",
+  "place": "Abstract ordered-group refinement supplied for the Temkin relative height bound in the nearby-cycle branch of (1)--(2); the rationalization kernel criterion is the existing leaf lem-sfb-rational-tensor-fractions (Stacks 00DK, 07JZ). Temkin does not state this abstract lemma verbatim."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The convex rank of an ordered abelian group is bounded by the convex rank of an ordered subgroup plus the rational rank of the quotient",
+   "results": "rank_quotient_add_rank_le and rank_quotient_le (Mathlib/LinearAlgebra/Dimension/Constructions) concern module ranks, not lengths of convex-subgroup chains; remaining hits concern finitely generated group rank and number field units.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Convex, AddSubgroup",
+   "results": "Two Minkowski convex-body results in MeasureTheory.Group.GeometryOfNumbers; no ordered-group chain bound.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "convex.*rank|rank.*convex|convex.*subgroup",
+   "results": "Nine hits concerning Euclidean convex bodies, real spans and Hausdorff dimension, none a relative convex rank bound.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a linearly ordered abelian group, bound lengths of chains of convex subgroups by the convex rank of a subgroup and the dimension of its rationalized quotient",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Order.LTSeries.length_le_krullDim\", \"module\": \"Mathlib.Order.KrullDimension\", \"type\": \"(p : LTSeries α) : p.length ≤ krullDim α\", \"doc\": \"For any strict order chain $ p $ in the LTSeries of a preorder $ \\\\alpha $, the length of $ p $ satisfies $ \\\\text{length}(p) \\\\le \\\\text{krullDim}(\\\\alpha) $, where $ \\\\text{krullDim}(\\\\alpha) $ denotes the\"}\n  {\"name\": \"Module.coe_length\", \"module\": \"Mathlib.RingTheory.Length\", \"type\": \": (Module.length R M : WithBot ℕ∞) = Order.krullDim (Submodule R M)\", \"doc\": \"For any semiring $ R $ and $ R $-module $ M $, the length of $ M $ is equal to the Krull dimension of the complete lattice of submodules of $ M $. This means the supremum of the lengths of all strictl\"}\n  {\"name\": \"Subgroup.rank_le_index_mul_rank\", \"module\": \"Mathlib.GroupTheory.Schreier\", \"type\": \"[hG : Group.FG G] [FiniteIndex H] : Group.rank H ≤ H.index * Group.rank G\", \"doc\": \"If $ G $ is a finitely generated group with rank $ r $ and $ H $ is a subgroup of $ G $ with finite index $ n $, then the rank of $ H $ satisfies $ \\\\text{rank}(H) \\\\leq n \\\\cdot r $.\"}\n  {\"name\": \"Order.krullDim\", \"module\": \"Mathlib.Order.KrullDimension\", \"type\": \"(α : Type*) [Preorder α] : WithBot ℕ∞\", \"doc\": \"The Krull dimension of a preorder $\\\\alpha$ is defined as the supremum of the lengths of all strictly increasing chains formed by composing the strict order relation $<$ on $\\\\alpha$. Each such chain co\"}\n  {\"name\": \"MulArchimedeanClass.subgroup_antitone\", \"module\": \"Mathlib.Algebra.Order.Archimedean.Class\", \"type\": \": Antitone (subgroup (M := M))\", \"doc\": \"The subgroup construction from upper sets in a multiplicatively Archimedean ordered commutative group is antitone. That is, for any two upper sets $ S $ and $ T $ in the antisymmetrized order, if $ S \"}\n  {\"name\": \"Module.length_submodule\", \"module\": \"Mathlib.RingTheory.Length\", \"type\": \"{N : Submodule R M} : Module.length R N = Order.height N\", \"doc\": \"For any submodule $ N $ of an $ R $-module $ M $, the length of $ N $ (defined as the Krull dimension of its submodule lattice) is equal to the height of $ N $ in the preorder of submodules, where the\"}\n  {\"name\": \"AddGroup.rank_le\", \"module\": \"Mathlib.GroupTheory.Rank\", \"type\": \"∀ {G : Type u_1} [inst : AddGroup G] [h : AddGroup.FG G] {S : Finset G},\\n  AddSubgroup.closure ↑S = ⊤ → AddGroup.rank G ≤ S.card\", \"doc\": \"For any finitely generated additive group $ G $, if a finite subset $ S \\\\subseteq G $ generates $ G $ (i.e., the additive subgroup generated by $ S $ equals $ G $), then the rank of $ G $ satisfies $ \"}\n  {\"name\": \"Module.length_quotient\", \"module\": \"Mathlib.RingTheory.Length\", \"type\": \"{N : Submodule R M} : Module.length R (M ⧸ N) = Order.coheight N\", \"doc\": \"For a semiring $ R $, an $ R $-module $ M $, and a submodule $ N $ of $ M $, the Krull dimension of the submodule lattice of the quotient module $ M/N $ is equal to the coheight of $ N $ in the submod\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a chain of convex subgroups of an ordered abelian group and any subgroup H, repeated intersections with H give linearly independent classes in the rationalized quotient",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Profinite.NobelingProof.GoodProducts.linearIndependentAux\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Induction\", \"type\": \"∀ {I : Type u} [inst : LinearOrder I] [inst_1 : WellFoundedLT I] (μ : Ordinal.{u}), Profinite.NobelingProof.P I μ\", \"doc\": \"For an ordinal $\\\\mu$, if $\\\\mu$ is less than or equal to the order type of the well-order on $I$, then for every closed set $C$ of Boolean functions on $I$ satisfying the containment condition with res\"}\n  {\"name\": \"Profinite.NobelingProof.GoodProducts.linearIndependent_comp_of_eval\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Successor\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o : Ordinal.{u}},\\n  IsClosed C →\\n    ∀ (hsC : Profinite.NobelingProof.contained C (Order.succ o)) (ho : o < Ordinal.type fun x1 x2 => x1 < x2),\\n      ⊤ ≤\\n          Submodule.span ℤ\\n            (Set.range\\n         \", \"doc\": \"Given a well-ordered set $I$ and a set $C$ of Boolean-valued functions on $I$, if the evaluations of $C'$ (functions in $C$ with value false at ordinal $o$) are linearly independent over $\\\\mathbb{Z}$,\"}\n  {\"name\": \"Profinite.NobelingProof.GoodProducts.linearIndependentSingleton\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/ZeroLimit\", \"type\": \"∀ {I : Type u_1} [inst : LinearOrder I],\\n  LinearIndependent ℤ (Profinite.NobelingProof.GoodProducts.eval {fun x => false})\", \"doc\": \"The singleton set containing the evaluation of the constant function mapping all elements of a linearly ordered set $ I $ to false is linearly independent over the integers $ \\\\mathbb{Z} $. This evalua\"}\n  {\"name\": \"Profinite.NobelingProof.GoodProducts.linearIndependent\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Induction\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [WellFoundedLT I],\\n  IsClosed C → LinearIndependent ℤ (Profinite.NobelingProof.GoodProducts.eval C)\", \"doc\": \"Given a closed set $ C $, the evaluations of the good products form a linearly independent set over the integers $ \\\\mathbb{Z} $.\"}\n  {\"name\": \"HahnEmbedding.ArchimedeanStrata.iSupIndep_stratum'\", \"module\": \"Mathlib/Algebra/Order/Module/HahnEmbedding\", \"type\": \"∀ {K : Type u_1} [inst : DivisionRing K] [inst_1 : LinearOrder K] [inst_2 : IsOrderedRing K] [inst_3 : Archimedean K]\\n  {M : Type u_2} [inst_4 : AddCommGroup M] [inst_5 : LinearOrder M] [inst_6 : IsOrderedAddMonoid M]\\n  [inst_7 : Module K M] [inst_8 : IsOrderedModule K M] (u : HahnEmbedding.Archimed\", \"doc\": \"In the context of the Hahn embedding decomposition of an ordered module $ M $ over an Archimedean ordered division ring $ K $, the family of submodules $ u.\\text{stratum}' $ associated with finite Arch\"}\n  {\"name\": \"HahnEmbedding.ArchimedeanStrata.iSupIndep_stratum\", \"module\": \"Mathlib/Algebra/Order/Module/HahnEmbedding\", \"type\": \"∀ {K : Type u_1} [inst : DivisionRing K] [inst_1 : LinearOrder K] [inst_2 : IsOrderedRing K] [inst_3 : Archimedean K]\\n  {M : Type u_2} [inst_4 : AddCommGroup M] [inst_5 : LinearOrder M] [inst_6 : IsOrderedAddMonoid M]\\n  [inst_7 : Module K M] [inst_8 : IsOrderedModule K M] (u : HahnEmbedding.Archimed\", \"doc\": \"In the Hahn embedding decomposition of an ordered module over an Archimedean ordered division ring, the family of Archimedean strata submodules is independent. Specifically, for each stratum, it is di\"}\n  {\"name\": \"Profinite.NobelingProof.GoodProducts.linearIndependent_iff_smaller\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/ZeroLimit\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] (o : Ordinal.{u}),\\n  LinearIndependent ℤ\\n      (Profinite.NobelingProof.GoodProducts.eval\\n        (Profinite.NobelingProof.π C fun x => Profinite.NobelingProof.ord I x < o)) ↔\\n    LinearIndependent ℤ fun (p : ↑(Pro\", \"doc\": \"The set of evaluations of good products indexed by ordinals less than $ o $ is linearly independent over $ \\\\mathbb{Z} $ if and only if the corresponding set of smaller product evaluations is linearly \"}\n  {\"name\": \"Profinite.NobelingProof.GoodProducts.linearIndependentEmpty\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/ZeroLimit\", \"type\": \"∀ {I : Type u_1} [inst : LinearOrder I], LinearIndependent ℤ (Profinite.NobelingProof.GoodProducts.eval ∅)\", \"doc\": \"The evaluation of the empty product in the context of good products (which corresponds to the constant function 1) forms a linearly independent family over the integers $\\\\mathbb{Z}$.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ArchimedeanClass|ConvexSubgroup|convex.*subgroup",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Algebra/Order/Ring/StandardPart.lean\", \"line\": \"28\", \"text\": \"Given a finite element of the field, the `ArchimedeanClass.stdPart` function returns the real number\"}\n  {\"file\": \"Mathlib/Algebra/Order/Ring/StandardPart.lean\", \"line\": \"39\", \"text\": \"namespace ArchimedeanClass\"}\n  {\"file\": \"Mathlib/Algebra/Order/Ring/StandardPart.lean\", \"line\": \"163\", \"text\": \"theorem mk_eq_mk {x y : FiniteElement K} : mk x = mk y ↔ 0 < ArchimedeanClass.mk (x.1 - y.1) := by\"}\n  {\"file\": \"Mathlib/Algebra/Order/Ring/StandardPart.lean\", \"line\": \"168\", \"text\": \"theorem mk_eq_zero {x : FiniteElement K} : mk x = 0 ↔ 0 < ArchimedeanClass.mk x.1 := by\"}\n  {\"file\": \"Mathlib/Algebra/Order/Ring/StandardPart.lean\", \"line\": \"173\", \"text\": \"theorem mk_ne_zero {x : FiniteElement K} : mk x ≠ 0 ↔ ArchimedeanClass.mk x.1 = 0 := by\"}\n  {\"file\": \"Mathlib/Algebra/Order/Ring/Archimedean.lean\", \"line\": \"34\", \"text\": \"* In the ring version of Hahn embedding theorem, the subtype `FiniteArchimedeanClass R` of non-top\"}\n  {\"file\": \"Mathlib/Algebra/Order/Ring/Archimedean.lean\", \"line\": \"35\", \"text\": \"  elements in `ArchimedeanClass R` naturally becomes the additive abelian group for the ring\"}\n  {\"file\": \"Mathlib/Algebra/Order/Ring/Archimedean.lean\", \"line\": \"36\", \"text\": \"  `ℝ⟦FiniteArchimedeanClass R⟧`.\"}\n  {\"file\": \"Mathlib/Algebra/Order/Ring/Archimedean.lean\", \"line\": \"37\", \"text\": \"* The order we defined on `ArchimedeanClass R` matches the order on `AddValuation`, rather than the\"}\n  {\"file\": \"Mathlib/Algebra/Order/Ring/Archimedean.lean\", \"line\": \"45\", \"text\": \"namespace ArchimedeanClass\"}\n  {\"file\": \"Mathlib/Algebra/Order/Module/Archimedean.lean\", \"line\": \"17\", \"text\": \"* `ArchimedeanClass.ball` are `ArchimedeanClass.ballAddSubgroup` as a submodules.\"}\n  {\"file\": \"Mathlib/Algebra/Order/Module/Archimedean.lean\", \"line\": \"18\", \"text\": \"* `ArchimedeanClass.closedBall` are `ArchimedeanClass.closedBallAddSubgroup` as a submodules.\"}\n  {\"file\": \"Mathlib/Algebra/Order/Module/Archimedean.lean\", \"line\": \"27\", \"text\": \"namespace ArchimedeanClass\"}\n  {\"file\": \"Mathlib/Algebra/Order/Module/Archimedean.lean\", \"line\": \"45\", \"text\": \"end ArchimedeanClass\"}\n  {\"file\": \"Mathlib/Algebra/Order/Module/Archimedean.lean\", \"line\": \"47\", \"text\": \"namespace FiniteArchimedeanClass\"}\n  {\"file\": \"Mathlib/Algebra/Order/Module/HahnEmbedding.lean\", \"line\": \"24\", \"text\": \"`R⟦FiniteArchimedeanClass M⟧` with an archimedean `K`-module `R`,\"}\n  {\"file\": \"Mathlib/Algebra/Order/Module/HahnEmbedding.lean\", \"line\": \"28\", \"text\": \"`(c : ArchimedeanClass M)`, and each submodule is a complement of `ArchimedeanClass.ball K c`\"}\n  {\"file\": \"Mathlib/Algebra/Order/Module/HahnEmbedding.lean\", \"line\": \"29\", \"text\": \"under `ArchimedeanClass.closedBall K c`. The embeddings from these submodules are specified by\"}\n  {\"file\": \"Mathlib/Algebra/Order/Module/HahnEmbedding.lean\", \"line\": \"38\", \"text\": \"  there exists a strictly monotone `M →ₗ[K] Lex R⟦FiniteArchimedeanClass M⟧` that maps\"}\n  {\"file\": \"Mathlib/Algebra/Order/Module/HahnEmbedding.lean\", \"line\": \"39\", \"text\": \"  `ArchimedeanClass M` to `HahnSeries.orderTop` in the expected way, as long as\"}\n  {\"file\": \"Mathlib/Algebra/Order/Archimedean/Class.lean\", \"line\": \"32\", \"text\": \"* `ArchimedeanClass` is the archimedean class for additive linearly ordered group.\"}\n  {\"file\": \"Mathlib/Algebra/Order/Archimedean/Class.lean\", \"line\": \"33\", \"text\": \"* `MulArchimedeanClass` is the archimedean class for multiplicative linearly ordered group.\"}\n  {\"file\": \"Mathlib/Algebra/Order/Archimedean/Class.lean\", \"line\": \"34\", \"text\": \"* `ArchimedeanClass.orderHom` and `MulArchimedeanClass.orderHom` are `OrderHom` over\"}\n  {\"file\": \"Mathlib/Algebra/Order/Archimedean/Class.lean\", \"line\": \"36\", \"text\": \"* `ArchimedeanClass.ballAddSubgroup` and `MulArchimedeanClass.ballSubgroup` are subgroups\"}\n  {\"file\": \"Mathlib/Algebra/Order/Archimedean/Class.lean\", \"line\": \"38\", \"text\": \"* `ArchimedeanClass.closedBallAddSubgroup` and `MulArchimedeanClass.closedBallSubgroup` are\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: Archimedean strata and Hahn embedding infrastructure do not state the relative chain estimate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The length of a chain of convex subgroups of an ordered abelian group is bounded by subgroup convex rank plus quotient rational rank",
+   "results": "Subgroup.rank_le_index_mul_rank concerns finitely generated generator rank. rank_quotient_add_rank_le is a module-rank inequality; Module.length_eq_rank and length_quotient concern all submodules, not the arbitrary ordered-subgroup estimate.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearIndependent.baseChange",
+   "results": "Loogle returned zero hits and unknown identifier LinearIndependent.baseChange.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Convex, AddSubgroup",
+   "results": "Only two MeasureTheory Minkowski convex-body theorems, involving additive lattices in real normed spaces.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "convex.*rank|rank.*convex|convex.*subgroup",
+   "results": "Nine hits: Euclidean convex bodies, visible sets and Hausdorff dimension; no ordered-group relative chain bound.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A chain of convex subgroups of an ordered abelian group has length at most the convex rank of a subgroup plus the rational rank of the quotient",
+   "results": "AddSubgroup.dense_or_cyclic assumes Archimedean groups; AddSubgroup.rank_congr and AddGroup.rank concern generator rank; Order.LTSeries.length_le_krullDim gives the definition-level chain bound but no relative estimate; MulArchimedeanClass.subgroup_antitone gives an antitone construction.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a chain of convex subgroups of a linearly ordered additive group, the elements at repeated intersections with H have linearly independent images in the rationalization of the quotient group",
+   "results": "Profinite.NobelingProof.GoodProducts independence results concern evaluations on Boolean products. HahnEmbedding.ArchimedeanStrata.iSupIndep_stratum and iSupIndep_stratum' concern ordered modules and do not state independence modulo an arbitrary additive subgroup.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ConvexSubgroup|convex.*subgroup|subgroup.*convex",
+   "results": "No hits in Mathlib/Algebra/Order.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-valuation-height-coarsening",
+  "date": "2026-10-24",
+  "group": "NX"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Stable reduction over finite-height separably closed valuation fields. Input: Proposition 4.3.3, pp. 29--30; applied componentwise when the smooth generic fibre is disconnected Supporting input: Theorem 2.1.8 and Lemmas 2.1.1, 2.1.2, 2.1.6, pp. 7--10; smooth-centre formulation used in the first substantive paragraph of the proof of Proposition 4.3.3, pp. 29--30. Supporting lemma: Lemma 2.1.4 and its preceding composition discussion, printed p. 8; finite-height bound from the relative Abhyankar inequality, Lemma 2.1.2, and the prime/convex-subgroup correspondence in section 2.1; the bounded coarsening used in the proof of Theorem 2.1.8, printed p. 13. Supporting input for the height/coarsening argument: Section 2.1, printed pp. 7–8, convex-subgroup correspondence and the relative rational-rank term of Lemma 2.1.2; abstract relative-chain refinement supplied by NX.",
+   "via": [
+    "lem-trf-valuation-height-coarsening",
+    "lem-trf-valued-curve-etale-parameter",
+    "lem-trf-valuation-strict-semistable-local-uniformization",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-relative-convex-chain-bound",
+  "worker": "stage1",
+  "summary": "Q139 checked the arbitrary-subgroup formulation and supplied a five-step proof: count intersection jumps, select positive representatives at plateaus, specialize the existing tensor-localization theorem, prove quotient tensors independent by a largest-index relation, and apply the existing cardinal-dimension bound. No new nodes or changed statements; all cited statements read and quotation-checked. The quotient is never ordered or assumed torsion-free.",
+  "blueprint": "The supporting relative height estimate in the Temkin stable-modification branch of lem-trf-local-term-locality, proof (1)--(2), through the existing ancestor chain; the current latest blueprint has no separate ordered-group statement. The item realizes its existing from.place; no unit or chapter route changes."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q139-b4eed890c",
+  "group": "Q139",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q139-b4eed890c (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement. The statement is true for an arbitrary non-convex subgroup H, where Gamma/H is only an abelian group and its rank is a cardinal. I tested it on Gamma=Z with H=2Z (quotient has torsion), on lex Z^2 with H=Z(1,0), and on the edge cases H=0 and H=Gamma. Steps 1, 2, 4 and 5 are correct. Step 1: intersecting the chain with H gives convex subgroups of H, so at most h inclusions are jumps. Step 2: positive representatives, and convexity gives the m*x_i contradiction. Step 4: denominators are cleared explicitly, the largest-index argument uses the plateau equality D_j=D_{j-1}, and the sign is handled. Step 5: uses the cardinal-dimension bound on a Fin enumeration of I, then n=|I|+|J|. Step 3 is mathematically correct but rebuilds a fact the DAG already has: it specializes lem-weil-pbc-localization-tensor-over-base and adds unit and swap isomorphisms and S^{-1}Z=Q. The existing Mathlib leaf lem-sfb-rational-tensor-fractions (j(a)=j(b) iff ca=cb for some c>0, no torsion-free hypothesis) gives the step directly with b=0. The worker's whole-DAG search missed it (C5). FIX: step 3 now cites that leaf. proof_deps are recomputed, dropping lem-weil-pbc-localization-tensor-over-base and def-weil-pbc-module-localization, and proof_origin.place is updated. The corrected item is at fixes/dag/nodes/sec-trace-formula/lem-trf-relative-convex-chain-bound.json. The delivery creates no new nodes. Statement and stmt_deps are unchanged and stay on the sk-i-curve-zero route; no tool_uses are needed. The Temkin paper (section 2.1, pp. 7-8) is not in literature/, so I could not read it; proof_origin is correctly marked agent-written and the worker recorded it as WANTED. The parent lem-trf-valuation-height-coarsening (step 2) uses the item with exactly these hypotheses. No repair note exists, so the 2026-10-21 re-split rules do not apply.; 1 file(s) fixed by the reviewer"
+ }
+}

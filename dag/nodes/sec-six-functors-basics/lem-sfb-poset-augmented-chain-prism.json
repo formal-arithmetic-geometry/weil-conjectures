@@ -13,76 +13,34 @@
  ],
  "proof": [
   {
-   "text": "For a poset $S$, let $W_n(S)$ be the free $R$-module on weakly increasing tuples $(x_0,\\ldots,x_n)$ for $n\\geq0$, with $W_{-1}(S)=R[\\varnothing]$ and zero below $-1$. Define $d$ by alternating deletion and $d[x]=[\\varnothing]$. For positions $a<b$, deleting $a$ then the original $b$ has coefficient $(-1)^{a+b-1}$, whereas deleting $b$ then $a$ has coefficient $(-1)^{a+b}$; the resulting tuples agree. These pairs exhaust $d^2$ for $n\\geq2$. For $n=1$, $d^2[x_0,x_1]=[\\varnothing]-[\\varnothing]=0$, and for $n\\leq0$ the next differential is zero. Thus $W(S)$ is a chain complex in the sense of [def-weil-pbc-module-chain-complex-homology].",
+   "text": "Apply [lem-sfb-poset-weak-chain-normalization] to $P$ and $Q$. It gives augmented weak-chain complexes $W$, repeated-tuple subcomplexes $D$, and chain isomorphisms $\\overline q_S:W(S)/D(S)\\cong C(S;R)$. Thus the differential on the strict-chain modules in the statement is the quotient differential, including the vertex-to-empty augmentation.",
    "uses": [
-    "def-weil-pbc-module-chain-complex-homology"
+    "lem-sfb-poset-weak-chain-normalization"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/simplicial.tex",
     "place": "Tag 019S, lemma-homotopy-s-N, preceding equation-homotopy-to-homotopy (lines 4739–4846); explicit agent adaptation to weak tuples, quotient by repetitions, and augmentation."
    }
   },
   {
-   "text": "Let $D_n(S)\\subseteq W_n(S)$ be spanned by tuples with a repetition, and put $D_n(S)=0$ for $n\\leq0$. A repeated weak tuple has adjacent equal entries $x_j=x_{j+1}$: any equality at separated positions forces all intervening entries equal by antisymmetry. Deleting position $j$ or $j+1$ gives identical tuples with opposite coefficients; every other deletion retains these two adjacent equal entries. Hence $dD_n\\subseteq D_{n-1}$. The quotient $W_n/D_n$ is identified with the free module on strict tuples by killing repeated basis tuples and keeping strict ones: this map and inclusion of strict generators are inverse after taking the quotient. In degree $-1$ it is the identity of $R$. The induced differential is exactly that of $C(S;R)$, so this also verifies the complex specified in the statement.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/simplicial.tex",
-    "place": "Tag 019S, lemma-homotopy-s-N, preceding equation-homotopy-to-homotopy (lines 4739–4846); explicit agent adaptation to weak tuples, quotient by repetitions, and augmentation."
-   }
-  },
-  {
-   "text": "For a monotone $u:P\\to Q$, entrywise application defines $W(u)_n$ on each free basis and is the identity in degree $-1$. It commutes with each vertex deletion, so $dW(u)=W(u)d$ in degrees $n\\geq1$; in degree zero both composites send every vertex to $[\\varnothing]$, and below zero both are zero. Equal adjacent entries have equal images, so $W(u)D(P)\\subseteq D(Q)$. Therefore it induces a chain map on $W/D=C$, exactly $u_*$ from the statement; the termwise commutation is precisely the chain-map condition of [def-weil-pbc-module-chain-complex-homology].",
+   "text": "For a monotone $u:P\\to Q$, [lem-sfb-poset-weak-chain-normalization] gives a chain map $W(u)$ preserving $D$. Its quotient map, conjugated by $\\overline q_P$ and $\\overline q_Q$, sends a strict generator to the entrywise image with repeated tuples killed and fixes the empty generator. This is exactly $u_*$. The equations $W(\\mathrm{id})=\\mathrm{id}$ and $W(v\\circ u)=W(v)W(u)$ pass to the quotients and then through these isomorphisms, proving both functoriality assertions.",
    "uses": [
-    "def-weil-pbc-module-chain-complex-homology"
+    "lem-sfb-poset-weak-chain-normalization"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/simplicial.tex",
     "place": "Tag 019S, lemma-homotopy-s-N, preceding equation-homotopy-to-homotopy (lines 4739–4846); explicit agent adaptation to weak tuples, quotient by repetitions, and augmentation."
    }
   },
   {
-   "text": "Entrywise identity fixes every tuple and the empty generator. For monotone $u:P\\to Q$, $v:Q\\to S$, entrywise $(v\\circ u)$ equals successive entrywise application of $u$ and $v$, including in degree $-1$. These equalities pass to the quotients, giving $(\\mathrm{id}_P)_*=\\mathrm{id}_{C(P;R)}$ and $(v\\circ u)_*=v_*u_*$. In particular, if $u$ collapses a strict tuple to a repeated tuple, every further image is still repeated, in agreement with the zero convention.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/simplicial.tex",
-    "place": "Tag 019S, lemma-homotopy-s-N, preceding equation-homotopy-to-homotopy (lines 4739–4846); explicit agent adaptation to weak tuples, quotient by repetitions, and augmentation."
-   }
-  },
-  {
-   "text": "For a weak tuple $x=(x_0,\\ldots,x_n)$ put $T_i(x)=(f(x_0),\\ldots,f(x_i),g(x_i),\\ldots,g(x_n))$ and $H_n[x]=\\sum_{i=0}^n(-1)^i[T_i(x)]$, with $H_{-1}=0$ and zero lower down. Each $T_i$ is weakly increasing: monotonicity handles the two blocks and $f(x_i)\\leq g(x_i)$ handles their junction. If $x_j=x_{j+1}$, then $i\\leq j$ leaves the repeated pair in the $g$ block, and $i\\geq j+1$ leaves it in the $f$ block. Thus every summand is repeated and $H_nD_n(P)\\subseteq D_{n+1}(Q)$. The induced map on the quotients is the displayed $h_n$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/simplicial.tex",
-    "place": "Tag 019S, lemma-homotopy-s-N, preceding equation-homotopy-to-homotopy (lines 4739–4846); explicit agent adaptation to weak tuples, quotient by repetitions, and augmentation."
-   }
-  },
-  {
-   "text": "Fix $n\\geq1$, and write $\\delta_j$ for deleting position $j$. Expand $dH_n[x]$ into terms $(-1)^{i+j}[\\delta_jT_i(x)]$. For $j<i$, one has $\\delta_jT_i(x)=T_{i-1}(\\delta_jx)$, whose term in $H_{n-1}d[x]$ has coefficient $(-1)^{i-1+j}$ and cancels it. For $j>i+1$, one has $\\delta_jT_i(x)=T_i(\\delta_{j-1}x)$, whose term in $H_{n-1}d[x]$ has coefficient $(-1)^{i+j-1}$ and cancels it. These pairings exhaust the latter sum: a term there has prism index $r\\in\\{0,\\ldots,n-1\\}$ and deleted original index $k\\in\\{0,\\ldots,n\\}$; if $k\\leq r$ its partner is $(i,j)=(r+1,k)$ in the first case, while if $k>r$ its partner is $(i,j)=(r,k+1)$ in the second case.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/simplicial.tex",
-    "place": "Tag 019S, lemma-homotopy-s-N, preceding equation-homotopy-to-homotopy (lines 4739–4846); explicit agent adaptation to weak tuples, quotient by repetitions, and augmentation."
-   }
-  },
-  {
-   "text": "Only $j=i$ and $j=i+1$ remain from $dH_n$. Define $A_i=(f(x_0),\\ldots,f(x_{i-1}),g(x_i),\\ldots,g(x_n))$ for $0\\leq i\\leq n+1$, with empty end blocks permitted. The $j=i$ face is $A_i$ with coefficient $(-1)^{2i}=1$; the $j=i+1$ face is $A_{i+1}$ with coefficient $(-1)^{2i+1}=-1$. Hence $dH_n[x]+H_{n-1}d[x]=\\sum_{i=0}^n([A_i]-[A_{i+1}])=[g(x_0),\\ldots,g(x_n)]-[f(x_0),\\ldots,f(x_n)]$. This is $W(g)[x]-W(f)[x]$. Linearity gives the identity on all of $W_n(P)$, and the quotient maps of steps 2, 3 and 5 give $dh+hd=g_*-f_*$ on $C_n(P;R)$ for $n\\geq1$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/simplicial.tex",
-    "place": "Tag 019S, lemma-homotopy-s-N, preceding equation-homotopy-to-homotopy (lines 4739–4846); explicit agent adaptation to weak tuples, quotient by repetitions, and augmentation."
-   }
-  },
-  {
-   "text": "In degree zero, $H_0[x]=[f(x),g(x)]$, so $dH_0[x]=[g(x)]-[f(x)]$ and $H_{-1}d[x]=0$, even when the two vertices coincide. In degree $-1$, $d_0H_{-1}+H_{-2}d_{-1}=0$ and $W(g)_{-1}-W(f)_{-1}=\\mathrm{id}_R-\\mathrm{id}_R=0$. Below $-1$ all source modules vanish. Passing to the quotients proves the identity in all remaining degrees. If $P$ is empty, only the degree $-1$ check is needed; if $Q$ is empty, the assumed maps force $P$ empty. Thus no nonemptiness assumption has entered the proof.",
-   "uses": [],
-   "elementary": true,
+   "text": "For the given comparable $f,g$, [lem-sfb-poset-weak-prism-identity] supplies $H_n$ preserving $D$ and satisfying $d^Q_{n+1}H_n+H_{n-1}d^P_n=W(g)_n-W(f)_n$. It induces maps on $W/D$. By [lem-sfb-poset-weak-chain-normalization], the quotient identifications send each weak pivot tuple to its strict bracket, killing repetitions, so these induced maps are exactly the displayed $h_n$. Explicitly, $q_{Q,n+1}H_n=h_nq_{P,n}$ and $q_{Q,n}W(u)_n=u_{*,n}q_{P,n}$ on every basis tuple: repeated input tuples remain repeated, and strict tuples have precisely the stated image. Apply $q_{Q,n}$ to the weak identity. The chain-map equations for $q$ give\n$$(d^C_{Q,n+1}h_n+h_{n-1}d^C_{P,n})q_{P,n}=(g_{*,n}-f_{*,n})q_{P,n}.$$\nCancel the surjective $q_{P,n}$ to obtain the assertion. In degree $-1$, both homotopy terms vanish and both induced maps fix the empty generator, so their difference is zero; below $-1$ the source vanishes. These checks include empty posets.",
+   "uses": [
+    "lem-sfb-poset-weak-chain-normalization",
+    "lem-sfb-poset-weak-prism-identity"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/simplicial.tex",
     "place": "Tag 019S, lemma-homotopy-s-N, preceding equation-homotopy-to-homotopy (lines 4739–4846); explicit agent adaptation to weak tuples, quotient by repetitions, and augmentation."
@@ -90,7 +48,8 @@
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-module-chain-complex-homology"
+  "lem-sfb-poset-weak-chain-normalization",
+  "lem-sfb-poset-weak-prism-identity"
  ],
  "proof_origin": {
   "by": "agent",
@@ -220,19 +179,19 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-22",
+  "date": "2026-10-23",
   "item": "lem-sfb-poset-augmented-chain-prism",
   "worker": "stage1",
-  "summary": "Expanded the weak-tuple prism boundary calculation, including explicit sign pairings, degeneration descent, functoriality, and degrees zero and minus one. No new nodes: each step is a basis calculation or explicit cancellation. Retained the statement and inherited provenance; no exact project or Mathlib match found.",
-  "blueprint": "Carries the general augmented strict-poset prism used by lem-sfb-product-chain-proper-interval-homology, below paragraph (3) of the current direct-images proof. That combinatorial argument is agent-written, not asserted in the blueprint; ancestor tool returns None and inherited blueprint.from.node remains null. No unit or chapter route changed."
+  "summary": "Repair of the 2026-10-22 human re-split return: separated the full old steps 1–4 and 5–8 into two comparably sized independent statement-only obligations on weak tuples. The unchanged strict-chain statement now has a short quotient assembly. Both new nodes are unsplit, searched with all required services and a second phrasing; the original eight proof steps and their allocation are retained verbatim in report.md. Rebased after the landing refusal at f03bec3a764: re-read both live definition dependencies, retained the current DAG metadata and unchanged statement, and verified the child statements still supply every quotient and prism assertion. Repaired the citation record to quote the entrywise chain-map and quotient formula clauses actually used. Current-base promotion repair: rebuilt from the latest read DAG, retaining every current field outside the split; made the degree -1 assembly check explicit. The first fresh dry run identified the newly present same-tag equivariant continuous cochain prism; its topological cochain statement supplies neither child, and both distinctions are documented in the report. Repaired again on 2026-10-23 against the current live DAG after the side-completion promotion refusal: re-read all cited statements and the latest blueprint direct-image route, retained the released two-child re-split, and wrote the quotient descent equation with its source and target degrees. Only proof, proof_deps and split_report are overlaid on the current item; both child statements and actual search records are retained.",
+  "blueprint": "Carries the general augmented strict-poset prism used by lem-sfb-product-chain-proper-interval-homology, below paragraph (3) of the current direct-images proof. That combinatorial argument is agent-written, not asserted in the blueprint; ancestor tool returns None and inherited blueprint.from.node remains null. No unit or chapter route changed. Re-split of the weak-tuple normalization and weak prism arguments only; inherited null blueprint ancestor retained."
  },
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-Q13-f0a71bd0a",
-  "group": "Q13",
+  "reviewer": "NT-cc-Q137-e7e916824",
+  "group": "Q137",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-f0a71bd0a (reviewer sub-agent of L); spot-checked: Read the item in full: statement unchanged, 8 steps, 0 new nodes. The only citation is def-weil-pbc-module-chain-complex-homology, a Mathlib-leaf definition used only for what a complex and a chain map are. Source check: Stacks simplicial.tex l.4739-4846 (equation-homotopy-to-homotopy l.4754, lemma-homotopy-s-N l.4817, tag 019S checked in tags l.1663) has the same structure, first and last sums cancelling and the junction terms telescoping. The item's (-1)^i convention gives g_*-f_*, which I recomputed. I re-derived every step: (1) d^2=0 via the (-1)^{a+b-1}/(-1)^{a+b} pairs, including the augmentation at n=1; (2) a repetition is always adjacent by antisymmetry, so D is a subcomplex and W/D is free on strict tuples; (3)-(4) u_* is a chain map and is functorial, including degree 0, [∅] and collapses; (5) T_i is weakly increasing at the junction, and the repeated pair stays in the g block for i<=j and in the f block for i>=j+1, so H descends; (6) the j<i faces match T_{i-1}(δ_j x) and the j>i+1 faces match T_i(δ_{j-1}x) with opposite signs, and the inverse map (r,k) is a bijection; (7) the j=i and j=i+1 faces are A_i(+) and A_{i+1}(-), which telescope to g-f; (8) degrees 0 and -1 hold, including f(x)=g(x) and empty P or Q. My own small-case run: all labelled posets with up to 3 elements, every comparable pair of monotone maps, 12,558 checks of the homotopy identity and of the chain-map condition, all passed. Duplicates: searched the DAG for prism, strict chains, weakly increasing and order complex; simplicial-homotopy-free-chain-homotopy, split-simplicial-nondegenerate-homotopy and preorder-bar-terminal-augmentation do not state it, and blueprint_refs search finds nothing. Parent product-chain-proper-interval-homology uses exactly the stated clauses. No SGA, no repair note, no off-route statement, no tool_uses. Maintainer note: blueprint.from.node is null, inherited from the parent split (ancestor gives None). Not a fault of this delivery."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q137-e7e916824 (reviewer sub-agent of L); spot-checked: Read in full: the item, both new nodes, def-sfb-augmented-poset-chains and def-weil-pbc-module-chain-complex-homology. Source read: Stacks simplicial.tex lines 4739-4846 (Tag 019S, the expansion of the double sum and the telescoping to h_{n,n+1}-h_{n,0}). This is a re-push of the head reviewed at b19d. Both new nodes are byte-identical to that head. In the item only the proof and split_report changed: step 3 now writes out the descent through the quotient (q_{Q,n+1}H_n=h_n q_{P,n}; q W(u)=u_* q; apply q to the weak identity; cancel the surjective q_{P,n}; degree -1 is id-id=0 and lower degrees vanish). I checked each of these equalities. Re-split order: all 8 old proof steps appear verbatim in the report and every claim is a clause of a child statement. Steps 1-4 go to lem-sfb-poset-weak-chain-normalization: d^2=0; D is a subcomplex because antisymmetry makes any repeat adjacent; W/D is isomorphic to C with kernel D; W(u) is a functorial chain map preserving D; the quotient formula. Steps 5-8 go to lem-sfb-poset-weak-prism-identity: each T_i is weakly increasing; H(D) is contained in D; dH+Hd=W(g)-W(f) in every integer degree. The two children are of comparable size (about 2.5k and 2.2k characters), independent, statement-only and self-contained, and neither restates the item. The item proof is a 3-step assembly under 3000 characters. The sign g-f is opposite to Stacks' a-b because Stacks uses (-1)^{i+1}; the adaptation is declared as agent-written. My own brute-force script checked the prism identity and H(D) in D: 502 checks over posets with at most 2 elements, degrees -1 to 2, all passed, including empty posets and f=g. Duplicate search with rg -L over 019S/019R, prism, weakly increasing and poset found no duplicate. lem-weil-pbc-simplicial-homotopy-free-chain-homotopy gives only an existence statement for unnormalized, unaugmented chains, and lem-sfb-equivariant-continuous-cochain-prism is about group cochains. Mathlib searches are recorded with all three kinds; LeanSearch on the prism node is honestly recorded as unavailable. No SGA, no off-unit statement citations, no tool_uses, no cycle. Maintainer: the content has been unchanged since b19d apart from the expanded step 3; the returns were promotion and landing refusals, so this is the side-completion loop and should be landed."
  },
  "lean": {
   "module": "Sheaf.AlgebraicTopology.AugmentedPosetChainPrism",
@@ -260,5 +219,17 @@
   "group": "NM",
   "result": "pass",
   "note": "Read item, stmt_deps, new def node def-sfb-augmented-poset-chains, both modules, report. Item node changes only lean + added (A) stmt_dep; signatures verbatim (def statement from keyword). Clause check: Simplex = Pairwise(<) lists of length n+1 (deg -1 = [∅], below zero), boundary = alternating eraseIdx on down shape, bracket kills repeated tuples, mapComponent = bracket(map f), map_comm/map/map_id/map_comp, prismComponent = Σ(-1)^k [f(take(k+1)) ++ g(drop k)] guarded 0≤i so h_{-1}=0, prism_identity h≫d + d≫h = g_*-f_* for all n:ℤ (n=0 sign and n=-1 checked). No extra assumptions; empty P/Q, f=g, zero ring fine. Named sorry obligation boundary_laws, real data, docstrings with source/blueprint. Not a duplicate: Mathlib DoldKan/augment not exact; parent ProductChainProperInterval.complex is ℚ/proper-interval specialized. Advisory: P,Q share universe v (forced by chain map in one ModuleCat); unused Finite instances; parent could later use the general complex. No compile (no change)."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

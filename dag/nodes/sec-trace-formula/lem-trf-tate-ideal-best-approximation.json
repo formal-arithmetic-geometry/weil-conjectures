@@ -1,0 +1,387 @@
+{
+ "id": "lem-trf-tate-ideal-best-approximation",
+ "kind": "statement",
+ "title": "Every Tate ideal admits best approximation for the Gauss norm",
+ "statement": "Let $K$ be a field [def-weil-field], complete for a nontrivial real-valued nonarchimedean absolute value, and let $s\\ge0$. Let $T_s=K\\langle X_1,\\ldots,X_s\\rangle$ be the restricted-series ring [def-trf-restricted-series-presentation], consisting of coefficient families $\\sum_\\nu a_\\nu X^\\nu$ for which only finitely many $|a_\\nu|\\ge\\epsilon$ for each $\\epsilon>0$, with Gauss norm $\\|f\\|_G=\\sup_\\nu|a_\\nu|$. For every ideal $I\\subseteq T_s$ and every $f\\in T_s$ there is $g\\in I$ such that $\\|f-g\\|_G\\le\\|f-h\\|_G$ for every $h\\in I$. Equivalently, the infimum defining the Gauss quotient norm on each coset of $T_s/I$ is attained by a representative of that coset. The ideals $I=(0)$ and $I=T_s$ and the case $s=0$ are included; neither reducedness of $T_s/I$ nor algebraic closedness of $K$ is assumed.",
+ "source": {
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Corollary 5.2.7/8, strict closedness of Tate ideals (best approximation formulation). BGR is absent locally, so its proof and full printed wording remain WANTED. Corroboration read online in Jakob Werner, Coherent Sheaves on Non-Archimedean Analytic Spaces, Corollary 3.4.8 proof, printed p.57: strict closedness yields surjectivity onto the quotient-norm unit ball. This is a statement-only analytic input, not a claim to have read the BGR proof.",
+  "url": "https://homepages.uni-regensburg.de/~wej20488/Jakob%20Werner%20%E2%80%93%20Coherent%20Sheaves%20on%20Non-Archimedean%20Analytic%20Spaces.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-restricted-series-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Use the graded lexicographic order and $L(u)$ of [lem-trf-tate-convergent-division]. A nonzero restricted series has positive Gauss norm attained at finitely many coefficients: choose one nonzero coefficient of modulus $a>0$; the set of coefficients of modulus at least $a$ is finite and contains the maximum of all coefficients. Put $D=\\{L(u):0\\ne u\\in I\\}$. By [lem-trf-dickson-exponent-sequences], $D$ has a finite subset $B$ such that every $\\nu\\in D$ dominates some $\\beta\\in B$ componentwise. Indeed, if no finite subset works, recursively choose $\\beta_n\\in D$ which dominates none of $\\beta_0,\\ldots,\\beta_{n-1}$. The cited sequence-pair property supplies $m<n$ with $\\beta_m\\le\\beta_n$, a contradiction. This also gives $B=\\varnothing$ when $I=(0)$.",
+   "uses": [
+    "lem-trf-tate-convergent-division",
+    "lem-trf-dickson-exponent-sequences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Agent proof of BGR Corollary 5.2.7/8 by finite leading exponents and bounded convergent division. BGR absent locally; Bosch Lectures on Formal and Rigid Geometry §1.3 Corollary 9 (printed p.21) checked online for the exact conclusion, not used as an unproved invocation."
+   }
+  },
+  {
+   "text": "For each $\\beta\\in B$, choose $0\\ne u_\\beta\\in I$ with $L(u_\\beta)=\\beta$. Divide $u_\\beta$ by its coefficient at $\\beta$ to get $b_\\beta\\in I$ with norm one and the same leading exponent. Apply [lem-trf-tate-convergent-division] to this finite list and $f$. Write $f=\\sum_{\\beta\\in B}q_\\beta b_\\beta+r$, and put $g=\\sum_{\\beta\\in B}q_\\beta b_\\beta\\in I$. Every exponent occurring in $r$ fails to dominate every $\\beta\\in B$.",
+   "uses": [
+    "lem-trf-tate-convergent-division"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Agent proof of BGR Corollary 5.2.7/8 by finite leading exponents and bounded convergent division. BGR absent locally; Bosch Lectures on Formal and Rigid Geometry §1.3 Corollary 9 (printed p.21) checked online for the exact conclusion, not used as an unproved invocation."
+   }
+  },
+  {
+   "text": "If $r=0$, the chosen $g=f$ has distance zero and is optimal. Otherwise put $R=\\|r\\|_G>0$. For $h\\in I$ put $k=h-g\\in I$. Suppose $\\|f-h\\|_G=\\|r-k\\|_G<R$. At every exponent where the coefficient of $r$ has modulus $R$, the coefficient of $k$ has modulus $R$ by the ultrametric inequality; at every other exponent the coefficient of $k$ has modulus less than $R$. Thus $k\\ne0$, $\\|k\\|_G=R$, and its maximal-norm exponents are exactly those of $r$, so $L(k)=L(r)$. Since $L(k)\\in D$, some $\\beta\\in B$ satisfies $\\beta\\le L(r)$, contradicting the support condition from step 2. Therefore $\\|f-g\\|_G=R\\le\\|f-h\\|_G$ for every $h\\in I$. The coset representatives are exactly the $f-h$, so this is also attainment of their infimum. The same argument includes $s=0$; for $I=T_s$ one can alternatively take $g=f$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Agent proof of BGR Corollary 5.2.7/8 by finite leading exponents and bounded convergent division. BGR absent locally; Bosch Lectures on Formal and Rigid Geometry §1.3 Corollary 9 (printed p.21) checked online for the exact conclusion, not used as an unproved invocation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-tate-convergent-division",
+  "lem-trf-dickson-exponent-sequences"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Agent proof of BGR Corollary 5.2.7/8 by finite leading exponents and bounded convergent division. BGR absent locally; Bosch Lectures on Formal and Rigid Geometry §1.3 Corollary 9 (printed p.21) checked online for the exact conclusion, not used as an unproved invocation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "TateAlgebra|affinoid|quotient.*[Gg]auss|[Gg]auss.*quotient|distinguished.*epimorphism",
+   "results": {
+    "t": "2026-10-24T08:41:23Z",
+    "tool": "grep",
+    "query": "TateAlgebra|affinoid|quotient.*[Gg]auss|[Gg]auss.*quotient|distinguished.*epimorphism",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: quotient norm results give representatives within epsilon and a lower bound, not attainment. MvPowerSeries.gaussNorm and IsRestricted define the analytic objects but prove no ideal best approximation; WeierstrassPreparation concerns adic formal-series division, not arbitrary ideals of multivariable Tate algebras."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every coset of an ideal in a Tate algebra has a representative attaining its quotient Gauss norm",
+   "results": {
+    "t": "2026-10-24T08:41:24Z",
+    "tool": "leansearch",
+    "query": "Every coset of an ideal in a Tate algebra has a representative attaining its quotient Gauss norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "QuotientGroup.exists_norm_mul_lt",
+     "QuotientGroup.exists_norm_mk_lt",
+     "PowerSeries.gaussNorm",
+     "QuotientGroup.le_norm_iff",
+     "QuotientAddGroup.norm_lt_iff",
+     "quotient_norm_mk_eq",
+     "Ideal.Quotient.norm_mk_le",
+     "Ideal.Quotient.normedCommRing"
+    ],
+    "digest": "38d561f1bbadc007"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: quotient norm results give representatives within epsilon and a lower bound, not attainment. MvPowerSeries.gaussNorm and IsRestricted define the analytic objects but prove no ideal best approximation; WeierstrassPreparation concerns adic formal-series division, not arbitrary ideals of multivariable Tate algebras."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"norm\", \"Ideal\"",
+   "results": {
+    "t": "2026-10-24T08:41:25Z",
+    "tool": "loogle",
+    "query": "\"norm\", \"Ideal\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Ideal.exists_normalized_span_of_isPrincipal",
+     "Ideal.smithNormalForm",
+     "Ideal.exists_smith_normal_form",
+     "Ideal.instNormalSubtypeMemSubgroupStabilizerInertia",
+     "LieIdeal.idealizer_eq_normalizer",
+     "LieSubalgebra.ideal_in_normalizer",
+     "LieSubalgebra.exists_nested_lieIdeal_ofLe_normalizer",
+     "LieIdeal.normalizer_eq_top"
+    ],
+    "digest": "aa5fb63ccdffc831"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: quotient norm results give representatives within epsilon and a lower bound, not attainment. MvPowerSeries.gaussNorm and IsRestricted define the analytic objects but prove no ideal best approximation; WeierstrassPreparation concerns adic formal-series division, not arbitrary ideals of multivariable Tate algebras."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a Tate algebra every ideal admits best approximations: the distance from any restricted power series to the ideal is attained",
+   "results": {
+    "t": "2026-10-24T08:41:27Z",
+    "tool": "leanfinder",
+    "query": "In a Tate algebra every ideal admits best approximations: the distance from any restricted power series to the ideal is attained",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MvPowerSeries.hasEvalIdeal",
+     "PowerSeries.hasEvalIdeal",
+     "MvPowerSeries.coe_hasEvalIdeal",
+     "PowerSeries.coe_hasEvalIdeal",
+     "LaurentSeries.exists_Polynomial_intValuation_lt",
+     "PowerSeries.mem_hasEvalIdeal_iff",
+     "MvPowerSeries.mem_hasEvalIdeal_iff",
+     "PowerSeries.IsWeierstrassDivisorAt.coeff_div_sub_seq_mem"
+    ],
+    "digest": "b5f122612b44491e"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: quotient norm results give representatives within epsilon and a lower bound, not attainment. MvPowerSeries.gaussNorm and IsRestricted define the analytic objects but prove no ideal best approximation; WeierstrassPreparation concerns adic formal-series division, not arbitrary ideals of multivariable Tate algebras."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every ideal in the ring of convergent restricted power series is proximinal for the Gauss norm, so each coset has a minimum norm representative",
+   "results": {
+    "t": "2026-10-24T08:50:40Z",
+    "tool": "leanfinder",
+    "query": "Every ideal in the ring of convergent restricted power series is proximinal for the Gauss norm, so each coset has a minimum norm representative",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Ideal.Quotient.norm_mk_lt",
+     "Ideal.Quotient.norm_mk_le",
+     "PowerSeries.hasEvalIdeal",
+     "Ideal.Quotient.normedCommRing",
+     "Ideal.Quotient.semiNormedCommRing",
+     "Polynomial.gaussNorm_lt_one_iff_contentIdeal_le",
+     "Submodule.Quotient.norm_mk_lt",
+     "PowerSeries.IsWeierstrassDivisorAt.mod'_mk_eq_mod"
+    ],
+    "digest": "c5256c78d2a7203a"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: quotient norm results give representatives within epsilon and a lower bound, not attainment. MvPowerSeries.gaussNorm and IsRestricted define the analytic objects but prove no ideal best approximation; WeierstrassPreparation concerns adic formal-series division, not arbitrary ideals of multivariable Tate algebras."
+  },
+  {
+   "tool": "grep",
+   "query": "gaussNorm|IsRestricted",
+   "results": {
+    "t": "2026-10-24T08:54:39Z",
+    "tool": "grep",
+    "query": "gaussNorm|IsRestricted",
+    "sub": "RingTheory/MvPowerSeries",
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean"
+    ],
+    "digest": "f8a23b96ae6f13fe"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: quotient norm results give representatives within epsilon and a lower bound, not attainment. MvPowerSeries.gaussNorm and IsRestricted define the analytic objects but prove no ideal best approximation; WeierstrassPreparation concerns adic formal-series division, not arbitrary ideals of multivariable Tate algebras."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_norm_mk_lt|norm_mk_le|normedCommRing|norm_mk_lt",
+   "results": {
+    "t": "2026-10-24T08:59:05Z",
+    "tool": "grep",
+    "query": "exists_norm_mk_lt|norm_mk_le|normedCommRing|norm_mk_lt",
+    "sub": "Analysis/Normed/Group/Quotient.lean",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "33",
+     "173",
+     "195",
+     "203",
+     "284"
+    ],
+    "digest": "b450739bce1ff2ab"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: quotient norm results give representatives within epsilon and a lower bound, not attainment. MvPowerSeries.gaussNorm and IsRestricted define the analytic objects but prove no ideal best approximation; WeierstrassPreparation concerns adic formal-series division, not arbitrary ideals of multivariable Tate algebras."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every ideal in a Tate algebra has a closest element to each restricted power series for the Gauss norm",
+   "results": {
+    "t": "2026-10-24T09:28:16Z",
+    "tool": "leanfinder",
+    "query": "Every ideal in a Tate algebra has a closest element to each restricted power series for the Gauss norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MvPowerSeries.hasEvalIdeal",
+     "PowerSeries.hasEvalIdeal",
+     "PowerSeries.coe_hasEvalIdeal",
+     "LaurentSeries.exists_Polynomial_intValuation_lt",
+     "MvPowerSeries.coe_hasEvalIdeal",
+     "PowerSeries.mem_hasEvalIdeal_iff",
+     "MvPowerSeries.mem_hasEvalIdeal_iff",
+     "PowerSeries.IsWeierstrassDivisorAt.divCoeff"
+    ],
+    "digest": "eb9f6d00561ff05d"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define Gauss norm/restrictedness or only give epsilon-approximate quotient-norm lifts (Ideal.Quotient.norm_mk_lt). They do not assert best approximation by an arbitrary Tate ideal. GelfandMazur scalar minima require properness and minimize over scalars, not ideals of an infinite-dimensional Tate algebra."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"gaussNorm\"",
+   "results": {
+    "t": "2026-10-24T09:28:14Z",
+    "tool": "loogle",
+    "query": "\"gaussNorm\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "MvPowerSeries.HasGaussNorm",
+     "MvPowerSeries.gaussNorm",
+     "MvPowerSeries.AchievesGaussNorm",
+     "MvPowerSeries.gaussNorm_nonneg",
+     "MvPowerSeries.gaussNorm_zero",
+     "MvPowerSeries.gaussNorm_neg",
+     "MvPowerSeries.gaussNorm_eq_zero_iff",
+     "MvPowerSeries.gaussNorm_add_le_max"
+    ],
+    "digest": "0dbc0cc868afe6f0"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define Gauss norm/restrictedness or only give epsilon-approximate quotient-norm lifts (Ideal.Quotient.norm_mk_lt). They do not assert best approximation by an arbitrary Tate ideal. GelfandMazur scalar minima require properness and minimize over scalars, not ideals of an infinite-dimensional Tate algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "TateAlgebra|best.?approx|strictly.?closed|gaussNorm|IsRestricted",
+   "results": {
+    "t": "2026-10-24T09:28:14Z",
+    "tool": "grep",
+    "query": "TateAlgebra|best.?approx|strictly.?closed|gaussNorm|IsRestricted",
+    "sub": "",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean"
+    ],
+    "digest": "b773ef12b480d128"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define Gauss norm/restrictedness or only give epsilon-approximate quotient-norm lifts (Ideal.Quotient.norm_mk_lt). They do not assert best approximation by an arbitrary Tate ideal. GelfandMazur scalar minima require properness and minimize over scalars, not ideals of an infinite-dimensional Tate algebra."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every ideal in a Tate algebra admits a minimum norm representative in each coset",
+   "results": {
+    "t": "2026-10-24T09:28:14Z",
+    "tool": "leansearch",
+    "query": "Every ideal in a Tate algebra admits a minimum norm representative in each coset",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ClassGroup.exists_min",
+     "NormedAlgebra.exists_isMinOn_norm_sub_smul",
+     "Ideal.Quotient.norm_mk_lt",
+     "Ideal.norm_mem_spanNorm",
+     "Ideal.Quotient.semiNormedCommRing",
+     "Ideal.Quotient.norm_mk_le",
+     "ClassGroup.exists_mem_finset_approx'",
+     "Ideal.Quotient.normedCommRing"
+    ],
+    "digest": "02d1802495441bbc"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define Gauss norm/restrictedness or only give epsilon-approximate quotient-norm lifts (Ideal.Quotient.norm_mk_lt). They do not assert best approximation by an arbitrary Tate ideal. GelfandMazur scalar minima require properness and minimize over scalars, not ideals of an infinite-dimensional Tate algebra."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-tate-reduction-norm-lifting",
+  "date": "2026-10-24",
+  "group": "Q111"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: Norm-preserving lifts for a Tate epimorphism surjective on canonical reductions. Independent analytic input: Every Tate ideal admits best approximation for the Gauss norm.",
+   "via": [
+    "lem-trf-tate-reduction-norm-lifting",
+    "lem-trf-affinoid-distinguished-presentation",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-tate-ideal-best-approximation",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Split using the existing Mathlib Dickson leaf lem-trf-dickson-exponent-sequences (reviewer repointed from a duplicate new leaf, dropped) and a statement-only bounded convergent finite-list division lemma. Wrote the finite-cofinal-exponent construction and the coefficientwise cancellation contradiction explicitly; checked arbitrary value group, zero/unit ideals and s=0. Read all cited statements; no source/Lean attachment exists. BGR absent and WANTED, so proof_origin is agent; exact conclusion checked online in Bosch §1.3 Corollary 9.",
+  "blueprint": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: Norm-preserving lifts for a Tate epimorphism surjective on canonical reductions. Independent analytic input: Every Tate ideal admits best approximation for the Gauss norm. Steps 1–3 refine this existing historical analytic input only: finite leading exponents, convergent division, and norm minimality. Current contracting-correspondence unit route remains intact."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-5920115f6",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-5920115f6 (reviewer sub-agent of L); spot-checked: I read the whole delivery and checked the mathematics independently; BGR and Bosch's Lectures are not in the literature directory and are listed as WANTED, so proof_origin=agent is correct. The item statement is unchanged and true (every ideal of T_s is strictly closed). Step 1: the bad-sequence argument correctly gives a finite set B of minimal leading exponents, with B empty for I=(0). Step 2: dividing u_beta by its coefficient at beta gives norm 1 and the same leading exponent L, and the support condition is taken from the cited statement. Step 3 (elementary) is a correct ultrametric argument: if ||r-k||<||r||, the coefficients of k reach ||r|| exactly where those of r do, so L(k)=L(r), which contradicts the support condition; this works for a dense value group. New node lem-trf-tate-convergent-division (unsplit) is a self-contained statement and true: I checked the division-plus-contraction argument (unit-modulus polynomial part H_i, valuation-ring division, ||E||<=c<1, geometric sum) and the cases of an empty list, s=0 and X-a. It is not a duplicate of lem-sfb-monomial-order-polynomial-division (no norms), lem-trf-tate-weierstrass-norm-division or lem-trf-tate-submodule-norm-controlled-generators, and its searches are recorded. C5: the new leaf lem-trf-exponent-tuples-wqo repeats the existing Mathlib leaf lem-trf-dickson-exponent-sequences (Q71, 2026-10-22, same unit, same declarations wellQuasiOrdered_le and Pi.wellQuasiOrderedLE at the same lines). FIX: in fixes/dag/nodes/sec-trace-formula/lem-trf-tate-ideal-best-approximation.json, step 1 text, uses and proof_deps now cite lem-trf-dickson-exponent-sequences, and the split_report notes the change; the duplicate is dropped. Route, blueprint from/via, no SGA and no cycle all checked; details in review.md.; 1 file(s) fixed by the reviewer"
+ }
+}

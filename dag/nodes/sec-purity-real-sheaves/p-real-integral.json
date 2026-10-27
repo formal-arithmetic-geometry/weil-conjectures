@@ -60,7 +60,46 @@
    "where": "proof"
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-purity-real-sheaves",
- "unit": "sk-p-real-integral"
+ "unit": "sk-p-real-integral",
+ "blueprint_update": {
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $C_0$ be a smooth geometrically connected curve over $\\Fq$, and let\n$U_0\\subseteq C_0$ be a nonempty open subscheme with base change $U$ and\ngeometric fundamental group $\\pi_1(U)$. For a finite extension $E/\\Ql$\ninside $\\overline{\\mathbf Q}_\\ell$, an $\\mathcal O_E$-lattice in a\nfinite-dimensional $\\overline{\\mathbf Q}_\\ell$-vector space $V$ means a free\n$\\mathcal O_E$-submodule of rank $\\dim V$ whose\n$\\overline{\\mathbf Q}_\\ell$-span is $V$.\n\nLet $\\mathcal F$ be a lisse $\\overline{\\mathbf Q}_{\\ell,U}$-module on\n$U_{\\mathrm{proét}}$ (for instance the sheaf underlying a lisse Weil sheaf\non $U_0$), and let $\\rho:\\pi_1(U)\\to\\operatorname{GL}(V)$ be its\ngeometric fundamental representation of\n[thm-lisse-qlbar-representations]. After replacing $E$ by a\nfinite extension there is an $\\mathcal O_E$-lattice $L\\subset V$ with\n\n$$\n\\rho(\\pi_1(U))L=L,\\qquad L\\otimes_{\\mathcal O_E}\\overline{\\mathbf Q}_\\ell=V,\n$$\n\nand the image of $\\pi_1(U)$ in $\\operatorname{Aut}(L/\\mathfrak m_E^nL)$ is\nfinite for every $n$. Such an $L$ is the geometric stalk of a lisse\n$\\cO_{E,U}$-module $\\mathcal L$ on $U_{\\mathrm{proét}}$, locally isomorphic to\n$\\cO_{E,U}^{\\oplus\\operatorname{rk}L}$, whose reductions $\\mathcal L/\\mathfrak m_E^n\\mathcal L$\nare the finite locally constant sheaves with stalk $L/\\mathfrak m_E^nL$, and with\n$\\mathcal L\\otimes_{\\cO_{E,U}}\\overline{\\mathbf Q}_{\\ell,U}\\simeq\\mathcal F$.",
+  "proof": [
+   {
+    "text": "The representation $\\rho$ is continuous and defined over a finite\n$E/\\Ql$ by [thm-lisse-qlbar-representations]; a further finite extension\nabsorbs that choice: there is a $\\pi_1(U)$-stable $E$-subspace $V_E$ with\n$V_E\\otimes_E\\overline{\\mathbf Q}_\\ell=V$ on which $\\pi_1(U)$ acts\ncontinuously. Since $\\pi_1(U)$ is profinite, hence compact,\n$\\rho(\\pi_1(U))$ is a compact subgroup of $\\GL(V_E)$. The orbit of an\narbitrary $\\mathcal O_E$-lattice in $V_E$ under a compact subgroup is\nbounded, so the $\\mathcal O_E$-span $L$ of that orbit is again a lattice in\n$V_E$; it is stable by construction and of full rank, whence\n$L\\otimes_{\\mathcal O_E}\\overline{\\mathbf Q}_\\ell=V_E\\otimes_E\\overline{\\mathbf Q}_\\ell=V$. Each\n$L/\\mathfrak m_E^nL$ is a finite set, so the image of $\\pi_1(U)$ in its\nautomorphisms is finite.",
+    "uses": [
+     "thm-lisse-qlbar-representations"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*The sheaf $\\mathcal L$.* By the finite-coefficient case of\n[cor-galois-lisse-representations], the finite continuous $\\pi_1(U)$-module\n$L/\\mathfrak m_E^nL$ is the stalk of a finite locally constant sheaf $\\mathcal L_n$ of\n$\\cO_E/\\mathfrak m_E^n$-modules on $U$, with surjective transition maps\n$\\mathcal L_{n+1}\\to\\mathcal L_n$. Let $\\widetilde U=\\varprojlim_iU_i\\to U$ be the\npro-finite-étale cover given by the finite étale covers $U_i$ trivializing the\n$\\mathcal L_n$ (one for each of the finite groups of the statement); it is a\npro-étale cover, and over it\n$\\mathcal L_n|_{\\widetilde U}\\simeq(L/\\mathfrak m_E^nL)_{\\widetilde U}$\ncompatibly in $n$. Put $\\mathcal L=\\varprojlim_n\\mathcal L_n$ in\n$\\Sh(U_{\\mathrm{proét}})$. Restriction to $\\widetilde U$ commutes with limits, so a\nchoice of basis of $L$ gives\n$\\mathcal L|_{\\widetilde U}\\simeq\\varprojlim_n(\\cO_E/\\mathfrak m_E^n)^{\\oplus r}_{\\widetilde U}\n\\simeq\\cO_{E,\\widetilde U}^{\\oplus r}$ by the comparison theorem\n[sk-prop-sfb-qlbar-colimit-x]. Thus $\\mathcal L$ is a lisse $\\cO_{E,U}$-module with\nstalk $L$ and $\\mathcal L/\\mathfrak m_E^n\\mathcal L\\simeq\\mathcal L_n$. Its extension of\nscalars $\\mathcal L\\otimes_{\\cO_{E,U}}\\overline{\\mathbf Q}_{\\ell,U}$ is a lisse\n$\\overline{\\mathbf Q}_{\\ell,U}$-module with geometric representation\n$L\\otimes_{\\cO_E}\\Qlb=V$, so it is isomorphic to $\\mathcal F$ by\n[thm-lisse-qlbar-representations].",
+    "uses": [
+     "cor-galois-lisse-representations",
+     "sk-prop-sfb-qlbar-colimit-x",
+     "thm-lisse-qlbar-representations"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; a worker who touches the node follows it"
+ }
 }

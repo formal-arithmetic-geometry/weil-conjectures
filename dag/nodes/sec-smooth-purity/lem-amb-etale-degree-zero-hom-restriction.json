@@ -1,0 +1,108 @@
+{
+ "id": "lem-amb-etale-degree-zero-hom-restriction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-amb-vector-integration",
+   "place": "Restriction compatibility for the prescribed local trace",
+   "via": [
+    "lem-amb-vector-integration-local-trace-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Restriction compatibility of the inverse degree-zero Hom correspondence",
+ "statement": "For a commutative ring A, etale maps p:T→U, v:U→S, w:T→S with w=p≫v, sheaves M,Q on S_et and a specified isomorphism alpha:K≅single(M), let psi:v-restriction M→v-restriction Q. The inverse Hom correspondence of [lem-amb-etale-degree-zero-hom] sends compRestriction v p w psi to the conjugation by the derived compositor of p-pullback of the inverse Hom image of psi. The final compositor is evaluated at single(Q). There is no trace, frame, counit or noetherian hypothesis. The composition of comparison isomorphisms is [lem-amb-etale-single-restriction-comp].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md",
+  "place": "Overlap calculation: inverse image and the degree-zero Hom correspondence commute with restriction"
+ },
+ "stmt_deps": [
+  "lem-amb-etale-degree-zero-hom",
+  "lem-amb-etale-single-restriction-comp"
+ ],
+ "proof": [
+  {
+   "text": "The inverse fully faithful Hom equivalence is the map of alpha followed by the restriction comparison, the singleFunctor image of psi, and the inverse target comparison. Apply etaleSingleRestrictionIso_comp to move the composite restriction comparison past the derived compositor. The inverse comparison equation follows by taking inverses of the corresponding equality of object isomorphisms. Naturality of the derived compositor with alpha and of the single restriction comparison with psi then cancels the intermediate comparisons. Functoriality identifies the three remaining sheaf factors with compRestriction. All steps are actual categorical equalities, with no unproved inputs.",
+   "uses": [
+    "lem-amb-etale-degree-zero-hom",
+    "lem-amb-etale-single-restriction-comp"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-etale-degree-zero-hom",
+  "lem-amb-etale-single-restriction-comp"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md",
+  "place": "Categorical restriction subcalculation, implemented from the proved source APIs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback composition on a constant sheaf in degree zero agrees with the constant object pullback isomorphism",
+   "results": "No matching algebraic etale trace interface. Source LeftDerivedUpperStarSingle supplies the degree-zero compositor formula.",
+   "date": "2026-10-26",
+   "verdict": "reuse the source compositor and generic naturality"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"upperStarConstantSheafIso\"",
+   "results": "0 Mathlib hits; source UpperStarConstantSheafComp supplies constant-sheaf composition.",
+   "date": "2026-10-26",
+   "verdict": "use the source result"
+  },
+  {
+   "tool": "grep",
+   "query": "singleFunctorCompLeftDerived|upperStarConstantSheafIso|localizationRestrictionComp",
+   "results": "0 Mathlib hits. Repository search finds LeftDerivedUpperStarSingle, UpperStarConstantSheafComp, and EtaleMorphismDescent.",
+   "date": "2026-10-26",
+   "verdict": "reuse the proved source declarations; this module supplies only wrapper composition"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.VectorIntegrationLocalTraceCompatibility",
+  "date": "2026-10-26",
+  "group": "U2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleDegreeZeroHomRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleDegreeZeroHomRestriction.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleDegreeZeroHomEquiv_symm_compRestriction",
+  "statement": "theorem etaleDegreeZeroHomEquiv_symm_compRestriction (A : Type (u + 1)) [CommRing A]\n    {T U S : Scheme.{u}} (p : T ⟶ U) (v : U ⟶ S) (w : T ⟶ S)\n    [Etale p] [Etale v] [Etale w] (hw : w = p ≫ v)\n    {K : DerivedCategoryModule A S}\n    {M Q : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} A)}\n    (α : K ≅ (_root_.DerivedCategory.singleFunctor _ 0).obj M)\n    (ψ : (localizationRestriction (ModuleCat.{u + 1} A) v inferInstance).obj M ⟶\n      (localizationRestriction (ModuleCat.{u + 1} A) v inferInstance).obj Q) :\n    (etaleDegreeZeroHomEquiv A w α).symm (compRestriction v p w hw ψ) =\n      (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) p v w hw).hom.app K ≫\n        (ordinaryFinitePullback A p).map ((etaleDegreeZeroHomEquiv A v α).symm ψ) ≫\n        (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) p v w hw).inv.app\n          ((_root_.DerivedCategory.singleFunctor _ 0).obj Q)",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261026T100422-L-21726",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261026T100422-L-21726",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,121 @@
+{
+ "id": "def-pur-quotient-constant-system",
+ "kind": "definition",
+ "title": "Constant ring and module systems on the vertical sequence site",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $\\mathcal C$ be a category of object universe $c$ and morphism universe $v$, with a Grothendieck topology $J$ [def-weil-pbc-sites-and-cohomology], and let $r$ be a coefficient universe such that $\\mathcal C$ is essentially small in universe $\\max(c,v,r)$. Let $R$ be a sheaf of commutative rings with sections in this universe. On $\\mathbf N\\times\\mathcal C$ use the vertical sequence topology $J_{\\mathrm{seq}}$ [def-coef-ringed-sequence-site] and the projection $p(n,U)=U$. Define the constant sequence ring $\\Delta R=p^{-1}R$ by precomposition with $p^{\\mathrm{op}}$: $(\\Delta R)(n,U)=R(U)$, with the original vertical restrictions and identity horizontal maps. Define the constant module functor $\\Delta_R:\\operatorname{Mod}(J,R)\\to\\operatorname{Mod}(J_{\\mathrm{seq}},\\Delta R)$ [def-weil-sheaf-of-modules-category], using the ordinary ringed-site module and coefficient conventions of [def-coef-semilinear-system-models], by the same precomposition: $(\\Delta_R M)(n,U)=M(U)$ with its original $R(U)$-action, original vertical restrictions, and identity horizontal maps; on a module morphism $f$, the component at $(n,U)$ is exactly $f_U$. The commutative-to-ring coefficient identification is the identity on sections. These are the existing quotientConstantRing and quotientConstant constructions, with no derived localization, flatness or K-flatness assumption and no invocation of the quotient-system flat-model comparison theorem.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1: the projection from the topos of inverse sequences has inverse image constant of value G; constant coefficient ring and constant module precomposition, before the displayed tensor base change. Ringed sequence-site presentation as in the recorded quotientConstantRing/quotientConstant definitions."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-coef-ringed-sequence-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-coef-semilinear-system-models"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The constant sequence ring sheaf and constant module system on the vertical sequence site are precomposition with the projection",
+   "results": "8 hits: CategoryTheory.constantSheaf, CategoryTheory.Sheaf.isConstant_iff_mem_essImage, CategoryTheory.constantSheafΓAdj, AlgebraicGeometry.StructureSheaf.res_const', LightCondensed.IsDiscrete, CategoryTheory.constantCommuteCompose, CategoryTheory.Sheaf.mem_essImage_of_isConstant, AlgebraicGeometry.PresheafedSpace.const",
+   "date": "2026-10-24",
+   "verdict": "Reuse the exact existing project definitions, not a new Lean construction. Mathlib provides generic continuous precomposition; no existing definition DAG node owns this constant ring/module sequence specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.sheafPushforwardContinuous",
+   "results": "12 hits: CategoryTheory.Functor.sheafPushforwardContinuous, CategoryTheory.Adjunction.sheafPushforwardContinuous, CategoryTheory.Functor.sheafPushforwardContinuousId, CategoryTheory.Functor.sheafPushforwardContinuous_obj_obj_obj, CategoryTheory.Functor.sheafPushforwardContinuousIso, CategoryTheory.Functor.sheafPushforwardContinuousId', CategoryTheory.Functor.sheafPushforwardContinuousComp, CategoryTheory.Functor.sheafPushforwardContinuousComp'",
+   "date": "2026-10-24",
+   "verdict": "Reuse the exact existing project definitions, not a new Lean construction. Mathlib provides generic continuous precomposition; no existing definition DAG node owns this constant ring/module sequence specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "quotientConstantRing|quotientConstant|sheafPushforwardContinuous",
+   "results": "25 hits: Mathlib/CategoryTheory/Sites/Point/Map.lean, Mathlib/CategoryTheory/Sites/Point/Map.lean, Mathlib/CategoryTheory/Sites/Point/Map.lean, Mathlib/CategoryTheory/Sites/Point/Comap.lean, Mathlib/CategoryTheory/Sites/Point/Comap.lean, Mathlib/CategoryTheory/Sites/Point/Comap.lean, Mathlib/CategoryTheory/Sites/Point/Comap.lean, Mathlib/CategoryTheory/Sites/Point/Comap.lean; rg in lean/WeilConjectures found no matching quotientConstantRing/quotientConstant definitions; rg in lean/Sheaf found the exact definitions only in Sheaf.Paper.QuotientSystemFlatModels. grep -rl on dag/nodes found only the enclosing theorem node; blueprint_refs.py search constant sequence returned 0 blueprint nodes.",
+   "date": "2026-10-24",
+   "verdict": "Reuse the exact existing project definitions, not a new Lean construction. Mathlib provides generic continuous precomposition; no existing definition DAG node owns this constant ring/module sequence specialization."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-mixed-reduction-unit-composition",
+  "date": "2026-10-24",
+  "group": "Q90"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-compact-support-finite-field-independence",
+   "place": "Coherent whole-system reduction in the mixed tensor-unit composition detail: form the constant completed ring and constant module system before the quotient ring map.",
+   "via": [
+    "lem-weil-mixed-reduction-unit-composition",
+    "lem-weil-compact-support-normalized-scalar-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "module": "Sheaf.Paper.QuotientReductionCore",
+  "declaration": "WeilConjectures.SemilinearSections.quotientConstantRing",
+  "declarations": [
+   "WeilConjectures.SemilinearSections.quotientProjection_continuous",
+   "WeilConjectures.SemilinearSections.quotientProjectionContinuous",
+   "WeilConjectures.SemilinearSections.quotientConstantRing",
+   "WeilConjectures.SemilinearSections.quotientConstantRing_forget",
+   "WeilConjectures.SemilinearSections.quotientConstant",
+   "WeilConjectures.SemilinearSections.quotientConstant_exact",
+   "WeilConjectures.SemilinearSections.quotientConstantAdditive",
+   "WeilConjectures.SemilinearSections.quotientConstantLimits",
+   "WeilConjectures.SemilinearSections.quotientConstantColimits"
+  ],
+  "statement": "def quotientConstantRing (R : Sheaf J CommRingCat.{max c v r}) : Sheaf (coefficientSequenceTopology J) CommRingCat.{max c v r}",
+  "branch": "newtargets-dag",
+  "by": "Q90",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "H2 repair requested in return baefca2c503e: definition ownership for the existing constant sequence ring and module functor. No Lean file is added or changed. The enclosing quotientSystemFlatModels theorem and its K-flat computation conclusion are not used to state the consumer and are not statement dependencies. F2, 2026-10-26: relocated the unchanged declarations to QuotientReductionCore, publicly re-exported by QuotientSystemFlatModels; see coord/changes/quotient-reduction-core-module.md.",
+  "file": "lean/Sheaf/Paper/QuotientReductionCore.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9acbf2235",
+  "group": "Q90",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9acbf2235",
+  "group": "Q90",
+  "result": "pass",
+  "note": "Re-delivery of baefca2c H2 return. Lean module byte-identical (sha 0275366b) to the version already judged correct: both laws match the node, η=r(χ)∘v pinned by counit square and pure-tensor formula, no extra hypotheses, independent universes t,u, 7 sorry in theorem bodies only, lean.statement verbatim, all 24 decls present. All 9 existing dep records byte-identical to live (no rebinds); item changes only stmt_deps and lean; no DAG cycle. lem-weil-finite-free-completed-scalar-comparison replaced by def-trf-completed-scalar-identity-unit (owner of the FiniteFreeCompletedScalarComparison plain defs). lem-pur-quotient-system-flat-models replaced by new existing:true def-pur-quotient-constant-system (quotientConstantRing/quotientConstant; statement matches the Lean; cites definition nodes only; Zheng 4.1). Mechanical finding on lem-pur-derived-change-of-rings: PASS on point, since IntegralCoherentReduction.model = nonempty_derivedChangeOfRingsCochainModel(...).some uses the theorem's conclusion. Advisory: def-sfb-derived-change-of-rings-cochain-model not cited; lem-pur-completed-line-tensor-coherence theorem stmt_dep was already in the live item. No compile run (no file changed); worker reports clean scompile 22.1 s / 16.1 s and dry run."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-58b99",
+  "group": "F2",
+  "result": "fix",
+  "landing": "20261026T023109-L-519959",
+  "kind": "interface",
+  "note": "independent cc review: moved QuotientReductionCore block vs clone original (byte-identical); item statement vs base; new sorry quotientOrdinaryModels vs ScalarData/obj_eq + vertical slice sheafification; item node proof_deps vs Lean uses; importer MixedReductionUnitComposition compiled against delivered modules (16.3 s)"
+ }
+}

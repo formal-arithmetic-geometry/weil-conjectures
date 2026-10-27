@@ -113,7 +113,18 @@
   "item": "lemma-weil-pbc-torsion-assembly",
   "date": "2026-10-09"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "split_report": {
@@ -159,5 +170,33 @@
    "AlgebraicGeometry.Etale.inverseImage_preservesColimits"
   ],
   "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $u:U\\to V$ be a morphism of schemes and $u^{-1}:\\Ab(V_{\\Et})\\to\\Ab(U_{\\Et})$ the inverse image [def-weil-pbc-inverse-image] on the categories of abelian sheaves on the small etale sites [def-weil-pbc-abelian-etale-sheaves]. For every small category $I$ and every diagram $F:I\\to\\Ab(V_{\\Et})$, $i\\mapsto F_i$, with colimit $\\varinjlim_iF_i$ in $\\Ab(V_{\\Et})$ [def-weil-pbc-category-colimit], the canonical morphism\n\n$$\n\\varinjlim_i u^{-1}F_i\\longrightarrow u^{-1}\\bigl(\\varinjlim_iF_i\\bigr),\n$$\n\ninduced by the morphisms $u^{-1}$ of the coprojections $F_i\\to\\varinjlim F_i$, is an isomorphism; that is, $u^{-1}$ preserves all small colimits.",
+  "proof": [
+   {
+    "text": "**Step 1.** By [def-weil-pbc-inverse-image] the inverse image $u^{-1}:\\Ab(V_{\\Et})\\to\\Ab(U_{\\Et})$ is the left adjoint of the direct image $u_*:\\Ab(U_{\\Et})\\to\\Ab(V_{\\Et})$ of [def-weil-pbc-direct-image]: there are bijections $\\operatorname{Hom}_{\\Ab(U_{\\Et})}(u^{-1}G,F)\\cong\\operatorname{Hom}_{\\Ab(V_{\\Et})}(G,u_*F)$ natural in $G\\in\\Ab(V_{\\Et})$ and $F\\in\\Ab(U_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves], with unit $\\eta_u$ and counit $\\varepsilon_u$. This is an instance of the definition.",
+    "uses": [
+     "def-weil-pbc-inverse-image",
+     "def-weil-pbc-direct-image",
+     "def-weil-pbc-abelian-etale-sheaves"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "**Step 2.** Apply [lem-weil-pbc-left-adjoint-preserves-colimits] with $\\mathcal C=\\Ab(V_{\\Et})$, $\\mathcal D=\\Ab(U_{\\Et})$, $L=u^{-1}$, $R=u_*$ (step 1) and the diagram $M=F:I\\to\\Ab(V_{\\Et})$ with its colimit $(\\varinjlim_iF_i,(\\iota_i)_i)$: the cocone $(u^{-1}(\\varinjlim_iF_i),(u^{-1}\\iota_i)_i)$ is a colimit of $i\\mapsto u^{-1}F_i$. The canonical morphism $c:\\varinjlim_iu^{-1}F_i\\to u^{-1}(\\varinjlim_iF_i)$ is by definition [def-weil-pbc-category-colimit] the unique morphism with $c\\circ\\iota'_i=u^{-1}\\iota_i$ for all $i$, $\\iota'_i$ the coprojections of the chosen colimit of $u^{-1}\\circ F$. Since the target cocone is also a colimit, its universal property gives a unique $d$ with $d\\circ u^{-1}\\iota_i=\\iota'_i$; then $d\\circ c$ and $c\\circ d$ are compatible with the coprojections, hence equal to the identities by the uniqueness clauses of the two colimits. So $c$ is an isomorphism, for every small $I$ and every $F$: $u^{-1}$ preserves all small colimits.",
+    "uses": [
+     "lem-weil-pbc-left-adjoint-preserves-colimits",
+     "def-weil-pbc-category-colimit"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

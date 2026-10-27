@@ -120,5 +120,54 @@
   "kind": "interface",
   "note": "independent Codex review: Delivered Lean files, node metadata, report, and target signatures match the stage-3 brief; compilation succeeds with only the documented intermediate sorry."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.exists_module_sheaf_of_nsmul_id_eq_zero"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.exists_module_sheaf_of_nsmul_id_eq_zero",
+     "module": "WeilConjectures.AlgebraicGeometry.KilledSheafModuleLift",
+     "lines": [
+      25,
+      63
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $X$ be a scheme [def-weil-pbc-scheme-conventions], $n\\geq0$, and $G$ an abelian sheaf on its small etale site. If $n\\operatorname{id}_G=0$, then there exists a sheaf $M$ of $\\mathbf Z/n\\mathbf Z$-modules on the small etale site of $X$ [def-weil-pbc-etale-sheaves] whose underlying abelian sheaf is isomorphic to $G$.",
+  "proof": [
+   {
+    "text": "Evaluating $n\\operatorname{id}_G=0$ at every object $U$ shows that $n$ kills every section group $G(U)$. An abelian group killed by $n$ is uniquely a $\\mathbf Z/n\\mathbf Z$-module, with $(k\\bmod n)\\cdot a=ka$. Every additive map between such groups is $\\mathbf Z/n\\mathbf Z$-linear, so the restriction maps of $G$ are linear, and the functor laws follow from those of $G$. This defines a presheaf $M$ of $\\mathbf Z/n\\mathbf Z$-modules; the argument is valid also for $n=0$, $n=1$ and for the zero sheaf.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "The underlying abelian presheaf of $M$ is $G$ itself. The forgetful functor from $\\mathbf Z/n\\mathbf Z$-modules to abelian groups preserves and reflects limits, so $M$ satisfies the sheaf condition because $G$ does. The identity gives the claimed isomorphism of underlying abelian sheaves. ([def-weil-pbc-etale-sheaves]).",
+    "uses": [
+     "def-weil-pbc-etale-sheaves"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

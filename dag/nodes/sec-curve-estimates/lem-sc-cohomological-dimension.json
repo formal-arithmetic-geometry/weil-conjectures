@@ -230,7 +230,18 @@
   "def-weil-pbc-etale-sheaves"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-curve-estimates",
  "unit": "sk-prop-cd",
  "lean_candidates": [
@@ -281,5 +292,36 @@
   "landing": "20261012T053924-L-2631847",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "For a smooth separated connected curve $C$\nover an algebraically closed field and any torsion\netale sheaf $F$,\none has $H^q(C,F)=0$ for $q>2$, with cohomology as in\n[def-weil-pbc-etale-cohomology].",
+  "proof": [
+   {
+    "text": "Work on one of the finitely many disjoint integral components\nof the smooth curve. By [lem-sc-generic-cohomology-comparison]\nit suffices to treat $\\eta_*M$. At a closed point the strict\nlocal ring of $C$ is a discrete valuation ring, by\n[lem-sc-smooth-regular], [lem-sc-regular-dim1-dvr] and preservation\nof regularity and dimension under etale localization.\nIts fraction field is algebraic over $k(C)$: a strict\nhenselization is a filtered union of etale neighborhoods and\ntheir fraction fields are finite separable extensions.\nBy [prop-weil-pbc-strict-henselization-stalk-formula]\nand [lem-sc-function-field-cd-one],\n$R^q\\eta_*M=0$ for $q>1$.\nThe sheaf $R^1\\eta_*M$ has zero generic restriction, so its\nsections vanish generically as in the proof of\n[lem-sc-generic-cohomology-comparison]; hence it\nis acyclic by [lem-sc-zero-generic-acyclic].",
+    "uses": [
+     "lem-sc-generic-cohomology-comparison",
+     "lem-sc-smooth-regular",
+     "lem-sc-regular-dim1-dvr",
+     "prop-weil-pbc-strict-henselization-stalk-formula",
+     "lem-sc-function-field-cd-one",
+     "lem-sc-zero-generic-acyclic"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The ordinary Grothendieck spectral sequence of\n[thm-sp-grothendieck] for sections composed with $\\eta_*$\nhas terms $H^a(C,R^b\\eta_*M)$ and converges to\n$H^{a+b}(k(C),M)$. Direct image takes injectives to injectives\nbecause its left adjoint is exact, so the required acyclicity\nholds. The only row above $b=0$ is $b=1$, and its only\npossibly nonzero term is at $a=0$. For total degree $q>2$\nthere are thus no differentials into or out of $H^q(C,\\eta_*M)$.\nIt equals $H^q(k(C),M)=0$, by\n[lem-sc-function-field-cd-one].",
+    "uses": [
+     "thm-sp-grothendieck",
+     "lem-sc-function-field-cd-one"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

@@ -60,7 +60,7 @@
    }
   },
   {
-   "text": "A natural bijection of Hom functors. By [prop-weil-pbc-inverse-image-modules-exact](3), $h^{-1}\\dashv h_*$ on sheaves of modules with unit $\\eta$; its hom bijection is $\\alpha_{\\mathcal G}:\\mathrm{Hom}(h^{-1}\\mathcal A,\\mathcal G)\\xrightarrow{\\sim}\\mathrm{Hom}(\\mathcal A,h_*\\mathcal G)$, $\\chi\\mapsto h_*(\\chi)\\circ\\eta_{\\mathcal A}$ [lem-weil-pbc-adjunction-of-natural-bijection], natural in $\\mathcal G$. With $\\mathcal A=j_{W!}\\Lambda_W$ and $\\mathcal G\\in\\Mod(Y_{\\Et},\\Lambda)$ define $\\Phi_{\\mathcal G}=\\alpha_{\\mathcal G}^{-1}\\circ\\epsilon_{h_*\\mathcal G}^{-1}\\circ\\epsilon'_{\\mathcal G}:\\mathrm{Hom}(j_{W'!}\\Lambda_{W'},\\mathcal G)\\to\\mathcal G(W')=(h_*\\mathcal G)(W)\\to\\mathrm{Hom}(j_{W!}\\Lambda_W,h_*\\mathcal G)\\to\\mathrm{Hom}(h^{-1}j_{W!}\\Lambda_W,\\mathcal G)$. Each factor is a bijection natural in $\\mathcal G$: $\\epsilon'$ by step 1; $\\epsilon_{h_*\\mathcal G}$ by step 1 applied to $h_*\\chi$ together with $(h_*\\chi)_W=\\chi_{W'}$ (step 2); $\\alpha$ by the adjunction. So $\\Phi$ is a bijection natural in $\\mathcal G$.",
+   "text": "Let A and B be the free sheaves on W and its base change respectively. Compose the given adjunction hom equivalence Hom(L A,K) ≃ Hom(A,h_*K), epsilon on T, and the inverse of epsilon on Y to obtain Hom(L A,K) ≃ Hom(B,K). Define f:B -> L A by applying the inverse of epsilon on Y to epsilon_T(eta_A). Naturality of epsilon and the formula for the hom equivalence in terms of the unit show epsilon_Y(f followed by g) = epsilon_T(adj(g)) for every g:L A -> K. Thus composition with f is the displayed bijection.",
    "uses": [
     "prop-weil-pbc-inverse-image-modules-exact",
     "lem-weil-pbc-adjunction-of-natural-bijection",
@@ -73,7 +73,7 @@
    }
   },
   {
-   "text": "Existence of $\\theta$. By [lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection] applied in $\\Mod(Y_{\\Et},\\Lambda)$ with $A=j_{W'!}\\Lambda_{W'}$, $B=h^{-1}(j_{W!}\\Lambda_W)$ and $\\Phi$ of step 3, $\\theta=\\Phi_A(\\mathrm{id}_A):h^{-1}(j_{W!}\\Lambda_W)\\to j_{W'!}\\Lambda_{W'}$ is an isomorphism with $\\Phi_{\\mathcal G}(\\psi)=\\psi\\circ\\theta$ for all $\\mathcal G$ and $\\psi$. Unwinding $\\Phi$: for every $\\mathcal G$ and every $\\psi:j_{W'!}\\Lambda_{W'}\\to\\mathcal G$,\n$$(*)\\qquad\\epsilon'_{\\mathcal G}(\\psi)=\\epsilon_{h_*\\mathcal G}\\bigl(h_*(\\psi\\circ\\theta)\\circ\\eta_{j_{W!}\\Lambda_W}\\bigr)\\in(h_*\\mathcal G)(W)=\\mathcal G(W').$$",
+   "text": "By the co-Yoneda criterion that a morphism inducing bijections by precomposition into every object is an isomorphism (Mathlib isIso_of_coyoneda_map_bijective), f is an isomorphism. Set theta=(asIso f).symm, so theta inverse is f. This realizes the same natural Hom bijection as the co-Yoneda isomorphism of the original plan.",
    "uses": [
     "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection"
    ],
@@ -84,7 +84,7 @@
    }
   },
   {
-   "text": "The compatibility clause. Let $\\mathcal H\\in\\Mod(T_{\\Et},\\Lambda)$, $s\\in\\mathcal H(W)$ and $\\varphi_s$ with $\\epsilon_{\\mathcal H}(\\varphi_s)=s$. Apply $(*)$ to $\\mathcal G=h^{-1}\\mathcal H$ and $\\psi=h^{-1}(\\varphi_s)\\circ\\theta^{-1}$, so $\\psi\\circ\\theta=h^{-1}(\\varphi_s)$. Naturality of the unit $\\eta$ of $h^{-1}\\dashv h_*$ [prop-weil-pbc-inverse-image-modules-exact] gives $h_*h^{-1}(\\varphi_s)\\circ\\eta_{j_{W!}\\Lambda_W}=\\eta_{\\mathcal H}\\circ\\varphi_s$, and naturality of $\\epsilon$ (step 1) gives $\\epsilon_{h_*h^{-1}\\mathcal H}(\\eta_{\\mathcal H}\\circ\\varphi_s)=\\eta_{\\mathcal H,W}(\\epsilon_{\\mathcal H}(\\varphi_s))=\\eta_{\\mathcal H,W}(s)$. Hence $\\epsilon_{h^{-1}\\mathcal H}(h^{-1}(\\varphi_s)\\circ\\theta^{-1})=\\eta_{\\mathcal H,W}(s)$ (here $\\epsilon_{h^{-1}\\mathcal H}$ of the statement is $\\epsilon'_{h^{-1}\\mathcal H}$, for the object $W'$ of $Y_{\\Et}$).",
+   "text": "For phi:A -> H use the identity epsilon_Y(f followed by L(phi)) = epsilon_T(adj(L(phi))) from step 3. The unit formula for adj and naturality of its unit identify adj(L(phi)) with phi followed by eta_H. Naturality of epsilon_T then gives eta_H,W(epsilon_T(phi)), which is eta_H,W(s) under the given generating-section hypothesis.",
    "uses": [
     "prop-weil-pbc-inverse-image-modules-exact",
     "def-weil-presheaf-modules-sheafification",
@@ -97,7 +97,7 @@
    }
   },
   {
-   "text": "Uniqueness. Let $\\theta_1,\\theta_2$ both satisfy the clause. Take $\\mathcal H=j_{W!}\\Lambda_W$ and $s=\\epsilon_{\\mathcal H}(\\mathrm{id})$, so $\\varphi_s=\\mathrm{id}$ and $h^{-1}(\\varphi_s)=\\mathrm{id}$. The clause gives $\\epsilon'_{h^{-1}\\mathcal H}(\\theta_1^{-1})=\\eta_{\\mathcal H,W}(s)=\\epsilon'_{h^{-1}\\mathcal H}(\\theta_2^{-1})$; since $\\epsilon'_{h^{-1}\\mathcal H}$ is injective (step 1), $\\theta_1^{-1}=\\theta_2^{-1}$, so $\\theta_1=\\theta_2$.",
+   "text": "For any isomorphism theta satisfying compatibility, apply compatibility with H=A, phi=id_A and s=epsilon_T(id_A). Functoriality gives epsilon_Y(theta inverse)=eta_A,W(epsilon_T(id_A)). Naturality of epsilon_T at id_A identifies the right side with epsilon_T(eta_A)=epsilon_Y(f). Injectivity of epsilon_Y gives theta inverse=f, hence equality of isomorphisms.",
    "uses": [
     "def-weil-presheaf-modules-sheafification",
     "lem-weil-pbc-free-yoneda-presheaf-module"
@@ -121,7 +121,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma 03S6 (lemma-shriek-base-change), proof (comparison of the right adjoints f'_*(j')^{-1}=j^{-1}f_*), for the sheaf of modules Lambda_W; the Yoneda bookkeeping (steps 4-6) via Categories Lemma 001P and Modules on Sites, equation after Lemma 03DI"
+  "place": "Lemma 03S6, proof by comparison of right adjoints; implemented using the universal section of the adjunction unit and the co-Yoneda bijectivity criterion (Categories Lemma 001P)."
  },
  "mathlib_searches": [
   {
@@ -161,7 +161,18 @@
   "item": "lem-weil-pbc-constructible-module-limit-descent",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "reviewed": {
@@ -193,5 +204,62 @@
   "group": "C1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $h:Y\\to T$ be a morphism of schemes [def-pc-scheme], $\\Lambda$ a commutative ring, and for a scheme $S$ let $\\Mod(S_{\\Et},\\Lambda)$ be the category of sheaves of $\\Lambda$-modules on the small etale site $S_{\\Et}$ [def-weil-pbc-etale-site], [def-weil-pbc-etale-sheaves]. For an object $W$ of $S_{\\Et}$ let $j_{W!}\\Lambda_W$ be the sheafification of the presheaf of $\\Lambda$-modules $\\Lambda[h_W]:V\\mapsto\\bigoplus_{\\varphi\\in\\mathrm{Mor}_{S_{\\Et}}(V,W)}\\Lambda$ (the free presheaf of $\\Lambda$-modules on the functor represented by $W$), and let $\\epsilon_{\\mathcal H}:\\mathrm{Hom}(j_{W!}\\Lambda_W,\\mathcal H)\\xrightarrow{\\sim}\\mathcal H(W)$ ($\\mathcal H\\in\\Mod(S_{\\Et},\\Lambda)$) be the composite of the bijection given by the universal property of sheafification and the bijection $\\beta\\mapsto\\beta_W(e_{\\mathrm{id}_W})$ given by the universal property of the free presheaf; it is natural in $\\mathcal H$. Let $W$ be an object of $T_{\\Et}$ and $W'=W\\times_TY$, an object of $Y_{\\Et}$ (a base change of an etale morphism is etale). Let $h^{-1}:\\Mod(T_{\\Et},\\Lambda)\\to\\Mod(Y_{\\Et},\\Lambda)$ be the inverse image of sheaves of modules [prop-weil-pbc-inverse-image-modules-exact], left adjoint to the direct image $h_*$, $(h_*\\mathcal K)(W)=\\mathcal K(W\\times_TY)$ [def-weil-pbc-direct-image], with unit $\\eta$. Then there is a unique isomorphism $\\theta:h^{-1}(j_{W!}\\Lambda_W)\\xrightarrow{\\sim}j_{W'!}\\Lambda_{W'}$ in $\\Mod(Y_{\\Et},\\Lambda)$ such that for every $\\mathcal H\\in\\Mod(T_{\\Et},\\Lambda)$ and every $s\\in\\mathcal H(W)$, if $\\varphi_s:j_{W!}\\Lambda_W\\to\\mathcal H$ is the morphism with $\\epsilon_{\\mathcal H}(\\varphi_s)=s$, then\n$$\\epsilon_{h^{-1}\\mathcal H}\\bigl(h^{-1}(\\varphi_s)\\circ\\theta^{-1}\\bigr)=\\eta_{\\mathcal H,W}(s)\\in(h_*h^{-1}\\mathcal H)(W)=(h^{-1}\\mathcal H)(W').$$",
+  "proof": [
+   {
+    "text": "Naturality of $\\epsilon$. For a scheme $S$, an object $W$ of $S_{\\Et}$ and $\\mathcal H\\in\\Mod(S_{\\Et},\\Lambda)$, $\\epsilon_{\\mathcal H}$ is the composite of $\\mathrm{Hom}(j_{W!}\\Lambda_W,\\mathcal H)\\to\\mathrm{Hom}_{\\mathrm{PMod}(\\Lambda_S)}(\\Lambda_S[h_W],\\mathcal H)$, $\\varphi\\mapsto\\varphi\\circ\\sigma$ with $\\sigma:\\Lambda_S[h_W]\\to j_{W!}\\Lambda_W$ the sheafification map (bijective by the universal property of sheafification of presheaves of modules), and $\\beta\\mapsto\\beta_W(e_{\\mathrm{id}_W})$ (bijective by the Yoneda property of the free presheaf of modules $\\Lambda_S[h_W]$ on the generator $e_{\\mathrm{id}_W}$). Both are compatible with postcomposition by a morphism $\\gamma:\\mathcal H\\to\\mathcal H'$ (the first since $(\\gamma\\circ\\varphi)\\circ\\sigma=\\gamma\\circ(\\varphi\\circ\\sigma)$, the second since $(\\gamma\\circ\\beta)_W(e_{\\mathrm{id}_W})=\\gamma_W(\\beta_W(e_{\\mathrm{id}_W}))$). Hence $\\epsilon$ is a bijection natural in $\\mathcal H$: $\\epsilon_{\\mathcal H'}(\\gamma\\circ\\varphi)=\\gamma_W(\\epsilon_{\\mathcal H}(\\varphi))$. The same holds on $Y_{\\Et}$ for $W'$; write $\\epsilon'_{\\mathcal G}:\\mathrm{Hom}(j_{W'!}\\Lambda_{W'},\\mathcal G)\\xrightarrow{\\sim}\\mathcal G(W')$ for $\\mathcal G\\in\\Mod(Y_{\\Et},\\Lambda)$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "The right adjoint evaluated at $W$. The base-change functor $b:T_{\\Et}\\to Y_{\\Et}$, $W\\mapsto W\\times_TY$, of [lem-weil-pbc-etale-base-change-continuous] sends $W$ to the object $W'$ of $Y_{\\Et}$, and the direct image of sheaves of modules is $h_*\\mathcal G=\\mathcal G\\circ b$ [def-weil-pbc-direct-image], [prop-weil-pbc-inverse-image-modules-exact](3): $(h_*\\mathcal G)(W)=\\mathcal G(W')$, and for a morphism $\\chi:\\mathcal G\\to\\mathcal G'$ of $\\Mod(Y_{\\Et},\\Lambda)$, $(h_*\\chi)_W=\\chi_{W'}$. So $\\mathcal G\\mapsto(h_*\\mathcal G)(W)=\\mathcal G(W')$ is one functor $\\Mod(Y_{\\Et},\\Lambda)\\to\\mathrm{Sets}$, in both descriptions (this is Stacks' identity $f'_*(j')^{-1}=j^{-1}f_*$ on the generating sections).",
+    "uses": [
+     "lem-weil-pbc-etale-base-change-continuous",
+     "def-weil-pbc-direct-image"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "A natural bijection of Hom functors. By [prop-weil-pbc-inverse-image-modules-exact](3), $h^{-1}\\dashv h_*$ on sheaves of modules with unit $\\eta$; its hom bijection is $\\alpha_{\\mathcal G}:\\mathrm{Hom}(h^{-1}\\mathcal A,\\mathcal G)\\xrightarrow{\\sim}\\mathrm{Hom}(\\mathcal A,h_*\\mathcal G)$, $\\chi\\mapsto h_*(\\chi)\\circ\\eta_{\\mathcal A}$, natural in $\\mathcal G$. With $\\mathcal A=j_{W!}\\Lambda_W$ and $\\mathcal G\\in\\Mod(Y_{\\Et},\\Lambda)$ define $\\Phi_{\\mathcal G}=\\alpha_{\\mathcal G}^{-1}\\circ\\epsilon_{h_*\\mathcal G}^{-1}\\circ\\epsilon'_{\\mathcal G}:\\mathrm{Hom}(j_{W'!}\\Lambda_{W'},\\mathcal G)\\to\\mathcal G(W')=(h_*\\mathcal G)(W)\\to\\mathrm{Hom}(j_{W!}\\Lambda_W,h_*\\mathcal G)\\to\\mathrm{Hom}(h^{-1}j_{W!}\\Lambda_W,\\mathcal G)$. Each factor is a bijection natural in $\\mathcal G$: $\\epsilon'$ by step 1; $\\epsilon_{h_*\\mathcal G}$ by step 1 applied to $h_*\\chi$ together with $(h_*\\chi)_W=\\chi_{W'}$ (step 2); $\\alpha$ by the adjunction. So $\\Phi$ is a bijection natural in $\\mathcal G$. ([def-weil-pbc-direct-image]).",
+    "uses": [
+     "def-weil-pbc-direct-image"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Existence of $\\theta$. By the Yoneda lemma (the co-Yoneda embedding is fully faithful) applied in $\\Mod(Y_{\\Et},\\Lambda)$ with $A=j_{W'!}\\Lambda_{W'}$, $B=h^{-1}(j_{W!}\\Lambda_W)$ and $\\Phi$ of step 3, $\\theta=\\Phi_A(\\mathrm{id}_A):h^{-1}(j_{W!}\\Lambda_W)\\to j_{W'!}\\Lambda_{W'}$ is an isomorphism with $\\Phi_{\\mathcal G}(\\psi)=\\psi\\circ\\theta$ for all $\\mathcal G$ and $\\psi$. Unwinding $\\Phi$: for every $\\mathcal G$ and every $\\psi:j_{W'!}\\Lambda_{W'}\\to\\mathcal G$,\n$$(*)\\qquad\\epsilon'_{\\mathcal G}(\\psi)=\\epsilon_{h_*\\mathcal G}\\bigl(h_*(\\psi\\circ\\theta)\\circ\\eta_{j_{W!}\\Lambda_W}\\bigr)\\in(h_*\\mathcal G)(W)=\\mathcal G(W').$$",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "The compatibility clause. Let $\\mathcal H\\in\\Mod(T_{\\Et},\\Lambda)$, $s\\in\\mathcal H(W)$ and $\\varphi_s$ with $\\epsilon_{\\mathcal H}(\\varphi_s)=s$. Apply $(*)$ to $\\mathcal G=h^{-1}\\mathcal H$ and $\\psi=h^{-1}(\\varphi_s)\\circ\\theta^{-1}$, so $\\psi\\circ\\theta=h^{-1}(\\varphi_s)$. Naturality of the unit $\\eta$ of $h^{-1}\\dashv h_*$ [prop-weil-pbc-inverse-image-modules-exact] gives $h_*h^{-1}(\\varphi_s)\\circ\\eta_{j_{W!}\\Lambda_W}=\\eta_{\\mathcal H}\\circ\\varphi_s$, and naturality of $\\epsilon$ (step 1) gives $\\epsilon_{h_*h^{-1}\\mathcal H}(\\eta_{\\mathcal H}\\circ\\varphi_s)=\\eta_{\\mathcal H,W}(\\epsilon_{\\mathcal H}(\\varphi_s))=\\eta_{\\mathcal H,W}(s)$. Hence $\\epsilon_{h^{-1}\\mathcal H}(h^{-1}(\\varphi_s)\\circ\\theta^{-1})=\\eta_{\\mathcal H,W}(s)$ (here $\\epsilon_{h^{-1}\\mathcal H}$ of the statement is $\\epsilon'_{h^{-1}\\mathcal H}$, for the object $W'$ of $Y_{\\Et}$).",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Uniqueness. Let $\\theta_1,\\theta_2$ both satisfy the clause. Take $\\mathcal H=j_{W!}\\Lambda_W$ and $s=\\epsilon_{\\mathcal H}(\\mathrm{id})$, so $\\varphi_s=\\mathrm{id}$ and $h^{-1}(\\varphi_s)=\\mathrm{id}$. The clause gives $\\epsilon'_{h^{-1}\\mathcal H}(\\theta_1^{-1})=\\eta_{\\mathcal H,W}(s)=\\epsilon'_{h^{-1}\\mathcal H}(\\theta_2^{-1})$; since $\\epsilon'_{h^{-1}\\mathcal H}$ is injective (step 1), $\\theta_1^{-1}=\\theta_2^{-1}$, so $\\theta_1=\\theta_2$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261023T104732-L-3420698",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

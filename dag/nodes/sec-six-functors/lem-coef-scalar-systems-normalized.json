@@ -1,0 +1,135 @@
+{
+ "id": "lem-coef-scalar-systems-normalized",
+ "kind": "statement",
+ "title": "Scalar extension preserves normalized strict semilinear systems",
+ "statement": "For any small site J and compatible morphism alpha from a tower B to a tower F of commutative ring sheaves, let A and A-prime be actual derived system calculi [def-coef-semilinear-derived-calculus] and let S be normalized derived scalar extension with its adjunction-normalized evaluation comparisons. Every normalized object M of the B system category [def-coef-semilinear-system-models] has normalized scalar extension S(M) in the F system category. No finite freeness, constructibility, or boundedness is required.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+  "place": "Composition of scalar tensors and the strict-system transition formula of parent step 1."
+ },
+ "stmt_deps": [
+  "def-coef-semilinear-derived-calculus",
+  "def-coef-semilinear-system-models"
+ ],
+ "proof": [
+  {
+   "text": "For every n <= m, compatibility of the tower morphism gives alpha_m followed by the F coefficient transition equal to the B transition followed by alpha_n. Construct the comparison between the two composite scalar-restriction functors using identity maps on section groups. The uniquely specified ordinary restriction-evaluation comparisons and strict transitions satisfy the resulting square: after evaluating on a section both paths are the same horizontal presheaf restriction. Exact-functor localization carries this square to the actual derived transitions; cancellation of localization factors reduces the claim to the degreewise ordinary equation.",
+   "uses": [
+    "def-coef-semilinear-derived-calculus",
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the following proved categorical adjunction calculation. Suppose a commuting square of right adjoints has an invertible comparison, and the vertical maps x and y have invertible left adjuncts. If x followed by the restricted output transition and the right comparison equals the input transition followed by restricted y, the output transition has invertible left adjunct whenever the input transition does. Indeed, compare the two composite left adjoints by adjoint uniqueness, transpose the displayed equation twice, and obtain target-extension of the adjunct of x followed by the output reduction equal to the left-adjoint comparison followed by scalar extension of the input reduction and the adjunct of y. All other factors are isomorphisms; cancel the first factor.",
+   "uses": [
+    "def-coef-semilinear-derived-calculus",
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply naturality of the input derived transition to the global scalar-adjunction unit of M. Combine it with the derived restriction-transition square from step 1. The transpose_evaluation equation of S, applied to the identity of S(M), identifies the resulting vertical maps with the adjuncts of the inverse evaluation isomorphisms. Thus their adjuncts are invertible. The input reduction is invertible by hM. Step 2 proves invertibility of the output reduction for each n <= m, including equality, exactly the unchanged definition of Normalized. No choice of additional scalar data, K-flat-model comparison, finite freeness or coefficient nontriviality is needed.",
+   "uses": [
+    "def-coef-semilinear-derived-calculus",
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-semilinear-derived-calculus",
+  "def-coef-semilinear-system-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "T3",
+  "date": "2026-10-26",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+  "place": "Scalar composition in parent step 1, proved by the canonical scalar-restriction square, localization and uniqueness of composite left adjoints."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived extension of scalars on semilinear coefficient systems preserves cartesian normalization",
+   "results": "Only unrelated module tactic normal forms, LinearEquiv.transvection.baseChange and algebra presentation results.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "WeilConjectures.SemilinearSections.Normalized",
+   "results": "0 hits; unknown project identifier in Mathlib search.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "ScalarSystems.*[Nn]ormal|[Nn]ormal.*ScalarSystems",
+   "results": "0 hits via msearch.py. Local source rg found no preservation theorem in SemilinearDerivedCalculus, SemilinearOperationsExistence or ScalarOperationsExistence.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  }
+ ],
+ "mathlib_match": null,
+ "merged_into": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RamifiedScalarSystemTranspose",
+  "date": "2026-10-26",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-rational-operations",
+   "place": "Finite scalar-extension paragraph: normalization of derived coefficient systems; parent proof step 1.",
+   "via": [
+    "lem-coef-ramified-scalar-system-transpose",
+    "lem-coef-finite-scalar-mate-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarSystemsNormalized",
+  "file": "lean/Sheaf/Paper/ScalarSystemsNormalized.lean",
+  "declaration": "WeilConjectures.SemilinearSections.scalarSystems_normalized",
+  "statement": "theorem scalarSystems_normalized\n    {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]\n    (J : GrothendieckTopology C)\n    (B F : ℕ → Sheaf J CommRingCat.{u + 1})\n    (τ : ∀ n, B (n + 1) ⟶ B n) (σ : ∀ n, F (n + 1) ⟶ F n)\n    (α : ∀ n, B n ⟶ F n)\n    (hα : ∀ n, α (n + 1) ≫ σ n = τ n ≫ α n)\n    (A : Data.{u + 1, u, u + 1} J B τ)\n    (A' : Data.{u + 1, u, u + 1} J F σ)\n    (S : ScalarSystems.{u + 1, u, u + 1} J B τ F σ α hα)\n    (M : DS.{u + 1, u, u + 1} J B τ)\n    (hM : Normalized.{u + 1, u, u + 1} J B τ A.scalar M) :\n    Normalized.{u + 1, u, u + 1} J F σ A'.scalar (S.scalar.T.obj M)",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261026T022824-L-465056",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261026T071057-L-3815625",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

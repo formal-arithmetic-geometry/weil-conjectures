@@ -1,0 +1,116 @@
+{
+ "id": "def-sf-qbar-ordinary-exchange-presentation",
+ "kind": "definition",
+ "title": "Normalized common-stage presentation of the ordinary Qbar exchange",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix a prime $\\ell$ and an algebraic closure $\\Omega/\\mathbf Q_\\ell$, and use the raw finite-stage coefficient categories [def-weil-pbc-qbar-category] and their scalar systems [def-weil-pbc-finite-stage-pair-category]. Let $X,X',Y,Y'$ be Noetherian finite-dimensional schemes on which $\\ell$ is invertible, and let $s=(g',f',f,g)$ be a chosen Cartesian square [def-weil-pbc-cartesian-square]. A normalized ordinary exchange presentation consists of: proofs that the actual completed operations $Rf_*,Rf'_*,Lg^*,Lg'^*$ preserve the integral constructible categories at every finite coefficient field [def-weil-pbc-bounded-constructible-complete], [def-weil-pbc-completed-pullback]; four coherent exact scalar families [def-weil-pbc-descent-interfaces] whose stage functors are exactly the raw rationalizations of these four restricted operations; the canonical direct-image and pullback scalar-beta specifications, including at equal fields [def-per-rational-direct-image-family], [def-weil-pbc-descent-interfaces]; and a scalar-compatible family $\\tau:Rf_*;Lg^*\\to Lg'^*;Rf'_*$ whose component on every integral representative is exactly the localization of the actual completed exchange [def-exchange-projection]. Here semicolons denote application in order. No preservation, existence of such a presentation, or invertibility is asserted by this definition.\n\nFor arbitrary four coherent stage-system morphisms $F,G,H,J$ and a compatible stage transformation $\\tau:F;G\\to H;J$, define their descended exchange by $(F_{\\mathrm{desc}};G_{\\mathrm{desc}})\\xrightarrow{c_{F,G}^{-1}}(F;G)_{\\mathrm{desc}}\\xrightarrow{\\tau_{\\mathrm{desc}}}(H;J)_{\\mathrm{desc}}\\xrightarrow{c_{H,J}}(H_{\\mathrm{desc}};J_{\\mathrm{desc}})$, where $c$ is the canonical stage-system composition comparison. For a pair $K=(E,K_E)$ and any $M\\supset E$, define its representative to be the pair-category morphism class at $M$ of $\\beta_{F;G,M/E}\\,;\\tau_{M,T_{M/E}K_E}\\,;\\beta_{H;J,M/E}^{-1}$. For a normalized ordinary presentation $P$, define $P.\\mathrm{exchange}$ and $P.\\mathrm{atStage}$ by these formulas for its four families and $\\tau$. The case $M=E$ is included. These definitions retain all the actual operations, beta normalizations and exchange components and make no arbitrary choice of a natural transformation.",
+ "stmt_deps": [
+  "def-weil-pbc-qbar-category",
+  "def-weil-pbc-finite-stage-pair-category",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-descent-interfaces",
+  "def-per-rational-direct-image-family",
+  "def-exchange-projection"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "Clause (4), the proper common-stage exchange and its actual finite-overfield representatives; proper base change Qbar presentation definitions preceding the invertibility theorem."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Presentation of common finite coefficient field descended exchange with canonical scalar beta comparisons",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Field.noConfusion\", \"module\": \"Mathlib.Algebra.Field.Defs\", \"type\": \"{P : Sort u_1} →\\n  {K : Type u} → {t : Field K} → {K' : Type u} → {t' : Field K'} → K = K' → t ≍ t' → Field.noConfusionType P t t'\", \"doc\": \"A field is a set equipped with addition and multiplication operations, additive inverses, and multiplicative inverses for non-zero elements, satisfying the field axioms: commutativity, associativity, \"}\n  {\"name\": \"Finite.divisionRing_to_field\", \"module\": \"Mathlib.RingTheory.LittleWedderburn\", \"type\": \"(D : Type u_1) → [DivisionRing D] → [Finite D] → Field D\", \"doc\": \"Given a finite division ring $ D $, this constructs the field structure on $ D $ by promoting the division ring structure to a field structure, leveraging the fact that every finite division ring is a\"}\n  {\"name\": \"toColex_smul'\", \"module\": \"Mathlib.Algebra.Order.Group.Synonym\", \"type\": \"∀ {β : Type u_2} {α : Type u_1} [inst : SMul β α] (b : β) (a : α), toColex b • a = b • a\", \"doc\": \"For any scalar $ b \\\\in \\\\beta $ and element $ a \\\\in \\\\alpha $, the scalar multiplication of $ \\\\mathrm{Colex}\\\\, \\\\beta $ on $ \\\\alpha $ satisfies $ \\\\mathrm{toColex}(b) \\\\cdot a = b \\\\cdot a $, where $ \\\\mathr\"}\n  {\"name\": \"ofColex_smul'\", \"module\": \"Mathlib.Algebra.Order.Group.Synonym\", \"type\": \"∀ {β : Type u_2} {α : Type u_1} [inst : SMul β α] (b : Colex β) (a : α), ofColex b • a = b • a\", \"doc\": \"For any scalar multiplication of type $\\\\beta$ on $\\\\alpha$, the scalar multiplication defined for the $\\\\mathrm{Colex}\\\\, \\\\beta$ type synonym satisfies $\\\\mathrm{ofColex}(b) \\\\cdot a = b \\\\cdot a$ for all $\"}\n  {\"name\": \"FiniteField.instFiniteExtension\", \"module\": \"Mathlib.FieldTheory.Finite.Extension\", \"type\": \"∀ (k : Type u_1) [inst : Field k] (p : ℕ) [inst_1 : Fact (Nat.Prime p)] (n : ℕ) [inst_2 : CharP k p],\\n  Finite (FiniteField.Extension k p n)\", \"doc\": \"For a finite field $ k $ of characteristic $ p $, the field extension of degree $ n $ over $ k $ is finite.\"}\n  {\"name\": \"Finset.isScalarTower\", \"module\": \"Mathlib.Algebra.Group.Action.Pointwise.Finset\", \"type\": \"[SMul α β] [SMul α γ] [SMul β γ] [IsScalarTower α β γ] : IsScalarTower α β (Finset γ)\", \"doc\": \"Given scalar actions of $\\\\alpha$ on $\\\\beta$, $\\\\beta$ on $\\\\gamma$, and $\\\\alpha$ on $\\\\gamma$ satisfying the tower property $m \\\\cdot (n \\\\cdot a) = (m \\\\cdot n) \\\\cdot a$ for all $m \\\\in \\\\alpha$, $n \\\\in \\\\bet\"}\n  {\"name\": \"Finset.coe_smul\", \"module\": \"Mathlib.Algebra.Group.Pointwise.Finset.Scalar\", \"type\": \"(s : Finset α) (t : Finset β) : ↑(s • t) = (s : Set α) • (t : Set β)\", \"doc\": \"The canonical coercion of the scalar product of finite sets $ s $ and $ t $ to a set is equal to the scalar product of the sets $ s $ and $ t $ when they are interpreted as subsets of their respective\"}\n  {\"name\": \"Field.qsmul_def\", \"module\": \"Mathlib.Algebra.Field.Defs\", \"type\": \"∀ {K : Type u} [self : Field K] (a : ℚ) (x : K), Field.qsmul a x = ↑a * x\", \"doc\": \"For any field $ K $, the rational scalar multiplication of $ a \\\\in \\\\mathbb{Q} $ and $ x \\\\in K $ equals the product of the canonical embedding of $ a $ into $ K $ and $ x $, i.e., $ a \\\\cdot x = \\\\iota(a\"}\n",
+   "verdict": "Existing project definitions found by source grep; no Mathlib replacement and no separate definition-node owner.",
+   "date": "2026-10-24"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Presentation of common finite coefficient field descended exchange with canonical scalar beta comparisons",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Presentation.finite_coeffs\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Core\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] {P : Algebra.Presentation R S ι σ} [Finite σ], P.coeffs.Finite\", \"doc\": \"If $\\\\sigma$ is a finite type, then the set of coefficients in the algebra presentation $P$ is finite.\"}\n  {\"name\": \"Algebra.SubmersivePresentation.ofHasCoeffs\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Core\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {ι : Type u_3} →\\n      {σ : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [inst_3 : Finite σ] →\\n                (P : Algebra.SubmersivePresentation R S ι σ) →\\n                  (R\", \"doc\": \"Given commutative rings $ R $, $ S $, and $ R_0 $ with compatible $ R_0 $-algebra structures, a finite type $ \\\\sigma $, and a submersive presentation $ P $ of $ S $ over $ R $ with generators $ \\\\iota \"}\n  {\"name\": \"Algebra.PreSubmersivePresentation.ofHasCoeffs\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Core\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {ι : Type u_3} →\\n      {σ : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              (P : Algebra.PreSubmersivePresentation R S ι σ) →\\n                (R₀ : Type u_5) →\\n                  [in\", \"doc\": \"Given commutative rings $ R $, $ S $, and $ R₀ $ with compatible $ R₀ $-algebra structures, and a pre-submersive presentation $ P $ of $ S $ over $ R $ with generators $ ι $ and relations $ σ $, this \"}\n  {\"name\": \"Algebra.Presentation.instFinitePresentationModelOfHasCoeffsOfFinite\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Core\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] {P : Algebra.Presentation R S ι σ} (R₀ : Type u_5) [inst_3 : CommRing R₀]\\n  [inst_4 : Algebra R₀ R] [inst_5 : Algebra R₀ S] [inst_6 : IsScalarTower R₀ R S] [inst_7 : P.Has\", \"doc\": \"If the index types $\\\\iota$ and $\\\\sigma$ are finite, then the quotient ring $R₀[\\\\iota]$ modulo the ideal generated by the relations $P.\\\\text{relationOfHasCoeffs}(R₀)$ is finitely presented over $R₀$.\"}\n  {\"name\": \"Algebra.SubmersivePresentation.finite_coeffs\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Core\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ), P.coeffs.Finite\", \"doc\": \"In a submersive presentation of an $ R $-algebra $ S $, the set of coefficients—comprising elements from the underlying algebra presentation, the inverse of the Jacobian determinant (a unit in $ S $),\"}\n  {\"name\": \"Algebra.SubmersivePresentation.HasCoeffs\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Core\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {ι : Type u_3} →\\n      {σ : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [inst_3 : Finite σ] →\\n                Algebra.SubmersivePresentation R S ι σ →\\n                  (R₀ : Ty\", \"doc\": \"Given a submersive presentation of an $ R $-algebra $ S $ with finite generating set $ \\\\sigma $, there exists a commutative ring $ R_0 $ equipped with algebra structures to $ R $ and $ S $, forming a \"}\n  {\"name\": \"Algebra.SubmersivePresentation\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Submersive\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    Type w →\\n      (σ : Type t) →\\n        [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → [Finite σ] → Type (max (max (max t u) v) w)\", \"doc\": \"A submersive presentation of an $ R $-algebra $ S $ with finite generating set $ \\\\sigma $, defined as a structure where $ S $ is presented as a quotient of the polynomial ring $ R[\\\\sigma] $ by an idea\"}\n  {\"name\": \"Algebra.SubmersivePresentation.instHasCoeffs\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Core\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ) (R₀ : Type u_5)\\n  [inst_4 : CommRing R₀] [inst_5 : Algebra R₀ R] [inst_6 : Algebra R₀ S] [inst_7 : IsScala\", \"doc\": \"For any submersive presentation $ P $ of an $ R $-algebra $ S $ with finite generating set $ \\\\sigma $, there exists a commutative ring $ R_0 $ equipped with algebra structures to $ R $ and $ S $, form\"}\n",
+   "verdict": "Existing project definitions found by source grep; no Mathlib replacement and no separate definition-node owner.",
+   "date": "2026-10-24"
+  },
+  {
+   "tool": "grep",
+   "query": "PbcQbarExchangePresentation|pbcExchangeAtStage",
+   "results": "[grep] OK 0 hit(s)\n",
+   "verdict": "Existing project definitions found by source grep; no Mathlib replacement and no separate definition-node owner.",
+   "date": "2026-10-24"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicGeometry.Scheme.PbcQbarExchangePresentation; dag/nodes; lean/WeilConjectures; lean/Sheaf; blueprint_refs.py search",
+   "results": "The exact published definitions are in Sheaf.Paper.QbarProperBaseChange. No WeilConjectures or Mathlib duplicate; no separate definition-node owner in dag/nodes. The declaration is listed under its containing theorem node only. Blueprint searches for the exact helper/presentation names returned zero matches; the broad exchange coherence search found the completed-exchange theorem, not an owner of these predicates.",
+   "date": "2026-10-24",
+   "verdict": "Use existing:true ownership, with no new Lean definition or copied data."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-package-base-change-domain-realization",
+  "date": "2026-10-24",
+  "group": "Q03"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-functor-package",
+   "place": "Clause (4), the proper common-stage exchange and its actual finite-overfield representatives; proper base change Qbar presentation definitions preceding the invertibility theorem.",
+   "via": [
+    "lem-sf-package-base-change-domain-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "module": "Sheaf.Paper.QbarProperBaseChange",
+  "declaration": "AlgebraicGeometry.Scheme.PbcQbarExchangePresentation",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.PbcQbarExchangePresentation",
+   "AlgebraicGeometry.Scheme.PbcQbarExchangePresentation.exchange",
+   "AlgebraicGeometry.Scheme.PbcQbarExchangePresentation.atStage",
+   "AlgebraicGeometry.Scheme.pbcExchangeOfStageSystems",
+   "AlgebraicGeometry.Scheme.pbcExchangeAtStage"
+  ],
+  "statement": "structure PbcQbarExchangePresentation",
+  "branch": "sheaf-dag",
+  "by": "Q03",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition ownership requested in the H2 return of 5396dbfbf579. Reuses the exact published declarations in their existing module; no theorem conclusion or duplicate implementation is introduced."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-811acfef2",
+  "group": "Q03",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-811acfef2",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Re-delivery after 5396 RETURN H2. Lean byte-identical (sha c449b1f0); mathematics accepted in 5396. Item diff: only stmt_deps+lean. The four theorem stmt_deps are removed; it adds 4 existing:true def owners (def-sf-finite-exchange-comparison-coordinates on FiniteMateDomain, def-sf-completed-mate-comparison-profile on SfBcCompletedMateDomain, def-sf-exchange-domain-coherence-predicates on 24 ExchangeFunctoriality predicates, def-sf-qbar-ordinary-exchange-presentation on PbcQbarExchangePresentation/exchange/atStage/pbcExchangeOfStageSystems/AtStage) and the 3 requested landed owners (transpose, completed-pullback-transport, adic-finite-cohomology). Script check: statements verbatim on base 441e67aa and all decls exist; text matches the Lean; no invertibility asserted; no duplicate owner or parallel race; all item uses from the 4 modules are owned by cited nodes. Advisory: the new nodes' theorem stmt_deps (sbc-thm-e/qbar, thm-cbc-finite-extension/qbar, lem-sbc-completed-operations) are already in the item closure, and sbc ops are .choose/asIso theorem-built; sbc* owner is in the closure, not cited directly; inherited blueprint tags in reused docstrings; same-worker second readings. No fix and no compile."
+ }
+}

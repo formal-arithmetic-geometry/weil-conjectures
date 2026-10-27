@@ -1,0 +1,122 @@
+{
+ "id": "lem-sfb-constant-coefficient-pullback-coordinates",
+ "kind": "statement",
+ "title": "Transport of arbitrary constant coordinates on the condensed coefficient ring",
+ "statement": "Let f:Y→X be any scheme morphism, Λ a commutative condensed ring, k any commutative ring in the coefficient universe, and c:constant(k)≅smallRing(X,Λ_X) with the conventions of [def-sfb-integral-models-stacks-data]. There exists a unique ring-sheaf isomorphism d:constant(k)≅smallRing(Y,Λ_Y) for which the section-ring coefficient map of [lem-sfb-internal-module-operations-transport] sends c(a) to d(a), for every constant section a and every test object V of the coefficient-sized site of X (the latter d(a) evaluated on the base change of V). This only transports ring coordinates: it asserts no module equivalence or slice or module pullback comparison. No nonzero-ring, nonempty-scheme or scalar-normalization hypothesis is imposed.",
+ "stmt_deps": [
+  "def-sfb-integral-models-stacks-data",
+  "lem-sfb-internal-module-operations-transport",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Sites Tag 00YV; Modules on Sites Tag 03D2; ring-coordinate transport in step 1 of lem-sfb-constant-slice-module-encoding."
+ },
+ "proof": [
+  {
+   "text": "Let κ:constant_X k→f_*constant_Y k be the unique extension of the constant-presheaf unit. Evaluating at a terminal object and its base change shows that its adjunct q:f^*constant_X k→constant_Y k is an isomorphism: both constant sheaf functors are left adjoints to the same terminal-section functor. This is proved by leftAdjointUniq and the sheafification Hom bijection.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let φ=condensedSmallRingMap f Λ and ψ its adjunct. The ring-only coefficient pullback theorem makes ψ invertible. Define d=q⁻¹ followed by f^*(c) followed by ψ. Naturality of the adjunction gives κ followed by f_*(d)=c followed by φ. Precompose with the constant-presheaf unit and evaluate to obtain the displayed equation on constants.",
+   "uses": [
+    "lem-sfb-condensed-coefficient-ring-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conversely the displayed equation on constants implies the full sheaf-morphism equation by the sheafification Hom bijection. Apply the inverse-image adjunction to that equation and cancel the isomorphism q to determine d.hom; Iso.ext then determines d. These are complete generic categorical calculations in Lean, with no module or slice assumptions.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-proetale-inverse-image",
+  "lem-sfb-condensed-coefficient-ring-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "G3 explicit constant-sheaf adjunction construction and uniqueness; the only assumed step is invertibility of the coordinate-free reconstructed coefficient ring adjunct."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "constant ring sheaf inverse image isomorphism compatible with constant sections and Cartesian coefficient ring",
+   "date": "2026-10-26",
+   "results": "Search of the Mathlib interfaces for constant sheaves and inverse image. Project searches also read ProEtaleConstantRingMap, SheafPullbackForgetComparison and the actual condensed coefficient maps.",
+   "verdict": "The generic adjunction and constant comparisons are available; no theorem states transport of arbitrary coordinates for this reconstructed condensed ring."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence, CategoryTheory.Sheaf",
+   "date": "2026-10-26",
+   "results": "12 hits, including Equivalence.sheafCongr and dense-subsite sheaf equivalences.",
+   "verdict": "Use sheafCongr for the slice; it does not itself provide the specified inverse-image comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafCongr|sheafPushforwardContinuousComp|constantCommuteCompose",
+   "date": "2026-10-26",
+   "results": "25 hits, including Sites.Equivalence, Sites.Continuous and Sites.ConstantSheaf.",
+   "verdict": "These supply the proved site transport and constant-sheaf comparison used in the new fixed-scalar localization theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConstantSliceModuleEncoding",
+  "date": "2026-10-26",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-constant-slice-module-encoding",
+   "place": "Sites Tag 00YV; Modules on Sites Tag 03D2; ring-coordinate transport in step 1 of lem-sfb-constant-slice-module-encoding.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstantCoefficientPullbackCoordinates",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstantCoefficientPullbackCoordinates.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralModelsStacks.constant_coefficient_pullback_coordinates",
+  "statement": "theorem constant_coefficient_pullback_coordinates\n    {X Y : Scheme.{u}} (f : Y ⟶ X)\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ] (k : Type (u + 1)) [CommRing k]\n    (c : ConstantCompletion.constant (Scheme.coefficientProEtaleModelTopology.{u, u} X) k ≅\n      smallRing X (condensedRingObj Λ X)) :\n    ∃! d : ConstantCompletion.constant (Scheme.coefficientProEtaleModelTopology.{u, u} Y) k ≅\n        smallRing Y (condensedRingObj Λ Y),\n      ∀ (V : (Scheme.coefficientProEtaleSiteModel.{u, u} X)ᵒᵖ) (a : k),\n        ((InternalModuleOperations.coefficientMap Λ f).hom.app\n          (AsSmall.down.op.obj V)).hom\n            (c.hom.hom.app V\n              ((toSheafify (Scheme.coefficientProEtaleModelTopology.{u, u} X)\n                ((Functor.const _).obj (CommRingCat.of k))).app V a)) =\n          d.hom.hom.app ((Scheme.coefficientProEtaleModelBaseChange.{u, u} f).op.obj V)\n            ((toSheafify (Scheme.coefficientProEtaleModelTopology.{u, u} Y)\n              ((Functor.const _).obj (CommRingCat.of k))).app\n                ((Scheme.coefficientProEtaleModelBaseChange.{u, u} f).op.obj V) a)",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261026T152628-L-1143618",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261026T152628-L-1143618",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

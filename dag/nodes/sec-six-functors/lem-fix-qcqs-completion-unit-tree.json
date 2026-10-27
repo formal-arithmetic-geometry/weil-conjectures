@@ -1,0 +1,137 @@
+{
+ "id": "lem-fix-qcqs-completion-unit-tree",
+ "kind": "statement",
+ "title": "Finite open–closed tree detection for canonical completion",
+ "statement": "Fix ell,E and a qcqs scheme T on which ell is invertible. Use the completed integral coefficient sheaves, their unbounded derived categories and the specified completion unit [def-weil-l-adic-coefficient-extension, def-pc-scheme, def-weil-completed-integral-coefficients, def-weil-abstract-derived-category, def-pur-integral-derived-operations]. Suppose a finite numbered rooted binary tree of qcqs immersed schemes has root isomorphic to T, its parent indices precede child indices, and every internal vertex is partitioned into a qc open child and its closed complement. Choose on every nonempty leaf a pro-etale covering family with qcqs domains. For every H in D(B_T), its specified completion unit is invertible iff its images under the composite ordinary restrictions to all leaf covering domains are invertible [def-fix-qcqs-completion-ordinary-models]. Equivalently H is derived complete iff all those pulled objects are derived complete [def-weil-derived-complete]. Empty leaves impose no condition.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Bhatt–Scholze Remark 6.5.10; Tag 09AH, lemma-ses-associated-to-open; sites.tex Tag 04TQ, lemma-glue-maps. Strong induction for a finite tree, including empty leaves."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-abstract-derived-category",
+  "def-pur-integral-derived-operations",
+  "def-fix-qcqs-completion-ordinary-models",
+  "def-weil-derived-complete"
+ ],
+ "proof": [
+  {
+   "text": "Fix the root unit morphism and put P(v)=invertibility of its image under ordinary restriction to v. Strong induction on d-v.val proves P(v) for all vertices from the covering-domain tests: use cover detection at nonempty leaves, the direct zero-category argument at empty leaves: every section over an empty scheme has a unique value, so every module is zero and cohomology detects every derived morphism as invertible, and joint open–closed reflection at internal vertices. Both children have strictly larger indices. Reflection under the root isomorphism gives the first equivalence.",
+   "uses": [
+    "lem-fix-qcqs-ordinary-local-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099M, 09BL, 09BM, 09AH, 04TQ; Bhatt–Scholze Lemma 6.5.8 and Remark 6.5.10. Model/descent details: sites-cohomology.tex Tags 06YY and 0941."
+   }
+  },
+  {
+   "text": "Apply ordinaryCompositeCompletionUnit_isIso to each covering-domain weakly etale map followed by the immersion into T. It equates invertibility of the image of the root unit with invertibility of the unit of the pulled object. Apply the canonical-unit criterion at the root and every covering domain.",
+   "uses": [
+    "lem-fix-qcqs-completion-unit-restriction",
+    "lem-fix-qcqs-completion-unit-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099M, 09BL, 09BM, 09AH, 04TQ; Bhatt–Scholze Lemma 6.5.8 and Remark 6.5.10. Model/descent details: sites-cohomology.tex Tags 06YY and 0941."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-fix-qcqs-completion-unit-criterion",
+  "lem-fix-qcqs-completion-unit-restriction",
+  "lem-fix-qcqs-ordinary-local-detection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Bhatt–Scholze Remark 6.5.10; Tag 09AH, lemma-ses-associated-to-open; sites.tex Tag 04TQ, lemma-glue-maps. Strong induction for a finite tree, including empty leaves."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical derived completion unit is an isomorphism exactly for derived complete complexes, and restriction to a covering family reflects isomorphisms",
+   "results": "DerivedCategory.instIsIsoMapCochainComplexIntQ; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors; DerivedCategory.instEssSurjCochainComplexIntQ; IsAdicComplete.of_comp_lift, plus unrelated Kan extension units.",
+   "date": "2026-10-25",
+   "verdict": "No matching derived quotient-tower completion or pro-etale local conservativity theorem; exact functor localization is reusable."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A completion unit is invertible if and only if an object is derived complete, and restriction to a covering family reflects isomorphisms",
+   "results": "Eight general sheaf isomorphism results; none gives the specified derived completion unit. Local search found WeilConjectures.roosIntrinsicCompletenessEquivalence.",
+   "date": "2026-10-25",
+   "verdict": "Use the existing intrinsic completeness equivalence; no direct Mathlib completion-locality theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.piComparison",
+   "results": "piComparison; piComparison_comp_π; map_lift_piComparison; piComparison_comp_π_assoc; map_lift_piComparison_assoc; instIsIsoPiComparison; PreservesProduct.of_iso_comparison; inv_piComparison_comp_map_π.",
+   "date": "2026-10-25",
+   "verdict": "These supply product-coordinate identities, not geometric coefficient restriction."
+  },
+  {
+   "tool": "grep",
+   "query": "completionUnit|ordinaryDerivedPull|roosUnit",
+   "results": "msearch grep returned zero hits. Local rg found the canonical slice completion unit, the item-owned ordinaryDerivedPull and the intrinsic Roos completeness equivalence.",
+   "date": "2026-10-25",
+   "verdict": "Reuse the existing models and equivalence, with separate geometric restriction and local-conservativity interfaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QcqsCompletionUnitLocality",
+  "date": "2026-10-25",
+  "group": "E3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning “For an admissible exceptional adjoint”, especially “Evaluation is natural in the two Weil maps and their inverses, so its square commutes”: the canonical-unit restriction and finite open–closed locality used in the ordinary-to-completed evaluation comparison.",
+   "via": [
+    "lem-fix-qcqs-completion-unit-locality",
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QcqsCompletionUnitTree",
+  "file": "lean/Sheaf/Paper/QcqsCompletionUnitTree.lean",
+  "declaration": "WeilConjectures.IntegralOnSlice.qcqsCompletionUnitTree",
+  "statement": "theorem qcqsCompletionUnitTree\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (T : Scheme.{t}) [CompactSpace T] [QuasiSeparatedSpace T]\n    (_hl : IsUnit (l : Γ(T, ⊤))) :\n    (∀ (d : ℕ) (V : Fin d → Scheme.{t}) (toT : ∀ v : Fin d, V v ⟶ T)\n      (root : Fin d) (parent left right : Fin d → Fin d)\n      (leftEdge : ∀ v : Fin d, V (left v) ⟶ V v)\n      (rightEdge : ∀ v : Fin d, V (right v) ⟶ V v) (leaf : Fin d → Prop),\n      (∃ e : V root ≅ T, e.hom = toT root) → parent root = root →\n      (∀ v, v ≠ root → (parent v).val < v.val) →\n      (∀ v, CompactSpace (V v)) → (∀ v, QuasiSeparatedSpace (V v)) →\n      (∀ v, IsImmersion (toT v)) →\n      (∀ v, v ≠ root → left (parent v) = v ∨ right (parent v) = v) →\n      (∀ v, leaf v ↔ ∀ z, z ≠ root → parent z ≠ v) →\n      (∀ v, ¬ leaf v →\n        left v ≠ right v ∧ v.val < (left v).val ∧ v.val < (right v).val ∧\n        parent (left v) = v ∧ parent (right v) = v ∧\n        leftEdge v ≫ toT v = toT (left v) ∧ rightEdge v ≫ toT v = toT (right v) ∧\n        IsOpenImmersion (leftEdge v) ∧ QuasiCompact (leftEdge v) ∧\n        IsClosedImmersion (rightEdge v) ∧\n        Set.range (leftEdge v).base ∪ Set.range (rightEdge v).base = Set.univ ∧\n        Disjoint (Set.range (leftEdge v).base) (Set.range (rightEdge v).base)) →\n      ∀ (I : ∀ v : Fin d, Type w) (W : ∀ v : Fin d, I v → (V v).ProEt),\n      (∀ (v : Fin d) (a : I v), leaf v → Nonempty (V v) → CompactSpace (W v a).left) →\n      (∀ (v : Fin d) (a : I v), leaf v → Nonempty (V v) →\n        QuasiSeparatedSpace (W v a).left) →\n      (∀ v, leaf v → Nonempty (V v) →\n        Presieve.ofArrows (fun a : I v ↦ W v a)\n          (fun a ↦ (MorphismProperty.Over.homMk (W v a).hom (Category.comp_id _) :\n            W v a ⟶ ProEt.mk (𝟙 (V v)))) ∈\n          ProEt.precoverage (V v) (ProEt.mk (𝟙 (V v)))) →\n      ∀ H : D l E T none,\n        (IsIso ((completionUnit l E T none).app H) ↔\n          ∀ v, leaf v → Nonempty (V v) → ∀ a : I v,\n            IsIso ((ordinaryDerivedPull l E ((W v a).hom ≫ toT v)).map\n              ((completionUnit l E T none).app H))) ∧\n        (IsComplete l E T none H ↔\n          ∀ v, leaf v → Nonempty (V v) → ∀ a : I v,\n            IsComplete l E (W v a).left none\n              ((ordinaryDerivedPull l E ((W v a).hom ≫ toT v)).obj H)))",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-25"
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-640b7",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261025T162253-L-392015",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-640b7",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261025T162253-L-392015",
+  "kind": "interface",
+  "note": "independent cc review: item signature vs clone (identical); moved 22-decl block vs old item lines 40-728 (verbatim, doc refs only); node lean.statements vs delivered signatures; importer SfProEtaleProjectionFormula compiled in sandbox against all 8 delivered modules; #print axioms on proved decls"
+ }
+}

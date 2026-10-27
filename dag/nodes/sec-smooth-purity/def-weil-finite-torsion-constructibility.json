@@ -53,7 +53,18 @@
   "def-weil-pbc-proetale-site",
   "def-weil-scheme-morphism-properties"
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
   "date": "2026-10-09",
   "item": "def-weil-finite-torsion-constructibility",
@@ -68,12 +79,12 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-operations",
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-cffcc1a7e",
-  "group": "NY",
+  "reviewer": "NT-stage2-cc-6273acbd7",
+  "group": "Q32",
   "result": "pass",
-  "note": "Wrote review.md. Checked immutable files, all six statement dependencies, source correspondence, hypotheses, conclusions, universes, edge cases, dependency repair, uniqueness and docstrings. Both delivered Lean files compiled separately through scompile.py with no errors or warnings. No fixes needed; branch head unchanged."
+  "note": "Re-delivery after the H13 RETURN of 28f8868c. NY record: only a declarations superset and an appended note; existing:false, file and primary kept; the module gains one public import of ConstructibleIntrinsic; no name clash in the Sheaf tree. Q18 record: only mapDerivedCategory added to declarations and the note extended; existing:false and file kept; module not delivered. Q52 record identical to live; the canonical comparison alias moved into the item module with the same body. def-pc-flat: ObjectProperty.flat added; the record becomes existing:false owning FlatOnSite.lean (previously existing:true, no file; lean.by Q48 to Q32), its only change is a public import of FromJoel Flat.Basic, and every original declaration stays. def-pur-sheaf-hom superset accepted as before. Item node unchanged except lean; statement verbatim; single sorry; pro-etale D^b_ctf via boundedConstructibleIntrinsic matches the recorded finiteTorConstructible. All clauses (constructibility, flatness, pro-etale local triviality, both evaluations with the reverse arrow taking no sign, comparison square, singleton intervals [-m,-m] and [m,m], translated intervals for every K on both sites) and the edge cases checked. No compile run (no file changed); the worker reports clean per-file compiles and an OK dry run."
  },
  "lean": {
   "module": "Sheaf.Paper.IntrinsicFiniteTorsionConstructibility",
@@ -84,6 +95,22 @@
   "by": "NY",
   "date": "2026-10-15",
   "existing": false,
-  "note": "§1(B): finiteTorsionConstructible requires an unused global FiniteFieldDatum and l ≠ D.p, absent from the consumer statement. This module imports that original interface and supplies its exact intrinsic cohomological predicate with those unused parameters removed, on the identical quotient coefficient ring and small pro-etale derived category."
+  "note": "§1(B): finiteTorsionConstructible requires an unused global FiniteFieldDatum and l ≠ D.p, absent from the consumer statement. This module imports that original interface and supplies its exact intrinsic cohomological predicate with those unused parameters removed, on the identical quotient coefficient ring and small pro-etale derived category. Q32 return repair, §1(B): retain every landed primary-record field and the intrinsicFiniteTorsionConstructible declaration. Its intrinsic ringed-module endpoints cannot accept the fixed-ring Sheaf (ModuleCat A) presentation. A new public import in the same owning module exposes the existing upstream boundedConstructibleIntrinsic, IsConstructible and IsFiniteLocallyConstant interfaces on that presentation; no existing declaration is removed or redefined.",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.intrinsicFiniteTorsionConstructible",
+   "AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructibleIntrinsic",
+   "AlgebraicGeometry.ProEtale.IsConstructible",
+   "AlgebraicGeometry.ProEtale.IsFiniteLocallyConstant"
+  ]
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "For the global finite-field datum [def-weil-finite-field-fiber], fix a prime\n$\\ell\\neq p$, a finite extension $E/\\Ql$, a uniformizer $\\pi_E$ of its\nvaluation ring $\\mathcal O_E$, an integer $n\\in\\mathbf Z_{\\geq1}$, and a\nscheme $Y$. On the small pro-etale site\n[def-weil-pbc-proetale-site] $Y_{\\mathrm{proet}}$, put\n\n$$\n  A_{E,n}=\\mathcal O_E/\\pi_E^n.\n$$\n\nA sheaf of $A_{E,n}$-modules on $Y_{\\mathrm{proet}}$ is *constructible* if\nthere is a finite disjoint partition $Y=\\bigsqcup_{\\nu=1}^N Y_\\nu$ by locally\nclosed constructible subschemes [def-weil-scheme-morphism-properties], and\nthe restriction to each $Y_\\nu$ is locally constant with finite\n$A_{E,n}$-module stalks. For a derived complex, for every $i\\in\\mathbf Z$,\nwrite $\\mathcal H^i$ for its cohomology sheaves\n[def-weil-derived-cohomology-sheaves]. Define\n\n$$\n D^b_c(Y,A_{E,n})\\subset D(Y_{\\mathrm{proet}},A_{E,n})\n$$\n\nto be the full subcategory of complexes with finitely many\nnonzero cohomology sheaves, all constructible.",
+  "proof": [],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

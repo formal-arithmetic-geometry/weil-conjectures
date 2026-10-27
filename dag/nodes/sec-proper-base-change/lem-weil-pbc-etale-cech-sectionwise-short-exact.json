@@ -130,5 +130,70 @@
   "kind": "proof",
   "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.etale_cech_preservesZero",
+    "AlgebraicGeometry.Scheme.etale_cech_shortExact_of_sections"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.etale_cech_preservesZero",
+     "module": "WeilConjectures.AlgebraicGeometry.EtaleCechSectionwiseShortExact",
+     "lines": [
+      34,
+      48
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.etale_cech_shortExact_of_sections",
+     "module": "WeilConjectures.AlgebraicGeometry.EtaleCechSectionwiseShortExact",
+     "lines": [
+      50,
+      115
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $X$ be a scheme with small étale site $X_{\\Et}$ [def-weil-pbc-etale-site], and let $0\\to F_1\\to F_2\\xrightarrow{g}F_3\\to0$ be a short exact sequence of abelian sheaves on $X_{\\Et}$. Let $U$ be an object of $X_{\\Et}$ and $(f_t:V_t\\to U)_{t\\in T}$ any family of morphisms of $X_{\\Et}$, not necessarily a covering. Suppose that for every $p\\ge0$ and every tuple $(a_0,\\dots,a_p)\\in T^{p+1}$ the map $g$ is surjective on sections over the fibre product $V_{a_0}\\times_U\\cdots\\times_UV_{a_p}$. Then applying the Čech complex of the family $(f_t)_{t\\in T}$ gives a short exact sequence of cochain complexes of abelian groups\n$$0\\to\\check C^\\bullet(\\{V_t\\to U\\},F_1)\\to\\check C^\\bullet(\\{V_t\\to U\\},F_2)\\to\\check C^\\bullet(\\{V_t\\to U\\},F_3)\\to0.$$\nNo injectivity or Čech-acyclicity assumption is needed.",
+  "proof": [
+   {
+    "text": "Write $V_a=V_{a_0}\\times_U\\cdots\\times_UV_{a_p}$ for a tuple $a=(a_0,\\dots,a_p)\\in T^{p+1}$. Fix $p\\ge0$. Evaluating an abelian sheaf at all the objects $V_a$ is a functor $Q$ from abelian sheaves on $X_{\\Et}$ to families of abelian groups indexed by the set $T^{p+1}$. It is additive and preserves finite limits, because kernels of abelian sheaves are computed sectionwise [def-sp-left-exact-additive]. Applying $Q$ to the exact sequence $0\\to F_1\\to F_2\\xrightarrow{g}F_3$ therefore gives, for every $a$, an exact sequence $0\\to F_1(V_a)\\to F_2(V_a)\\to F_3(V_a)$, and the last map is surjective by hypothesis. So for every $a$ the sequence $0\\to F_1(V_a)\\to F_2(V_a)\\to F_3(V_a)\\to0$ is short exact.",
+    "uses": [
+     "def-sp-left-exact-additive"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Arbitrary products of abelian groups preserve short exact sequences (products are exact in the category of abelian groups). Taking the product over $a\\in T^{p+1}$ gives a short exact sequence\n$$0\\to\\prod_aF_1(V_a)\\to\\prod_aF_2(V_a)\\to\\prod_aF_3(V_a)\\to0,$$\nwhich is the degree-$p$ part of the sequence of Čech complexes: the degree-$p$ Čech cochains of $F_k$ are $\\prod_aF_k(V_a)$, and the maps induced by $F_1\\to F_2\\to F_3$ act componentwise. This works for every index set $T$, including the empty one.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "A sequence of cochain complexes which is short exact in every degree is a short exact sequence of complexes, which proves the claim.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

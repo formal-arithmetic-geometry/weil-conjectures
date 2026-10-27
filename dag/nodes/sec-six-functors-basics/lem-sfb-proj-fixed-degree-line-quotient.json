@@ -1,0 +1,493 @@
+{
+ "id": "lem-sfb-proj-fixed-degree-line-quotient",
+ "kind": "statement",
+ "title": "Fixed-degree line quotients classify maps to a standard-open union of Proj",
+ "statement": "Let $A=\\bigoplus_{j\\geq0}A_j$ be any nonnegatively graded commutative unital ring, $P=\\operatorname{Proj}(A)$ [def-pc-proj], and $d\\geq1$. Set $U_d=\\bigcup_{a\\in A_d}D_+(a)\\subseteq P$. Write $\\mathcal O_P(j)$ for the twisting modules and $a$ for their canonical homogeneous sections [def-weil-pbc-proj-twisting-sheaf]. The restriction $M_d=\\mathcal O_P(d)|_{U_d}$ is invertible [def-sc-invertible-module], and multiplication identifies $M_d^{\\otimes k}$ with $\\mathcal O_P(kd)|_{U_d}$ for all $k\\geq0$. The canonical homogeneous sections define a graded unital map $\\eta^d:A^{(d)}\\to\\Gamma_*(U_d,M_d)$, where $A^{(d)}_k=A_{kd}$ and $\\Gamma_*$ is [def-sc-invertible-section-ring]. For any scheme $T$ [def-pc-scheme], invertible module $L$ on $T$, and graded unital ring map $\\varphi:A^{(d)}\\to\\Gamma_*(T,L)$ such that the sections $\\varphi(A_d)$ generate $L$ as a sheaf, there is a unique pair $(g,\\alpha)$ consisting of a morphism $g:T\\to U_d$ and an isomorphism $\\alpha:g^*M_d\\simeq L$ [def-pc-module-pullback] satisfying $\\alpha^{\\otimes k}(g^*\\eta^d_k(b))=\\varphi_k(b)$ for every $k\\geq0$ and $b\\in A_{kd}$. Conversely pullback of $(M_d,\\eta^d)$ along any $g:T\\to U_d$ has these properties. For $a\\in A_d$ put $s=\\varphi_1(a)$ and let $T_s$ be its nonvanishing open [def-sc-section-generating-locus]. The map has $g^{-1}D_+(a)=T_s$, and on this open its ring map sends $b/a^k$ to $\\varphi_k(b)/s^{\\otimes k}$ for $b\\in A_{kd}$; division uses the free generator $s^{\\otimes k}$. No generation hypothesis on $A$ and no quasi-compactness hypothesis on $T$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01N8 (lemma-converse-construction), 01N9 (lemma-proj-functor-strict), and 01MS (lemma-when-invertible); equation-Ud and equation-psi-d."
+ },
+ "stmt_deps": [
+  "def-pc-proj",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-sc-invertible-module",
+  "def-sc-invertible-section-ring",
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "def-sc-section-generating-locus",
+  "def-pur-sheaf-tensor-product",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-sfb-veronese-graded-ring"
+ ],
+ "proof": [
+  {
+   "text": "Put $V_a=D_+(a)$ for $a\\in A_d$. Apply [lem-trf-proj-product-chart-twist-frame] with its $a=a$, $b=1$, $\\beta=0$, and $n=k\\geq1$: on every subopen of $V_a$, the section $a^k$ freely generates $\\mathcal O_P(kd)$, and the coefficient of a homogeneous $b\\in A_{kd}$ is $b/a^k$. For $k=0$ use $\\mathcal O_P(0)=\\mathcal O_P$. The twists are quasi-coherent by [lem-weil-pbc-proj-graded-module-sheaf-exists](c); their local rank-one frames show $M_d$ is invertible. Construct the multiplication maps by the bilinear fraction rule $(u/f^r,v/f^s)\\mapsto uv/f^{r+s}$ on standard opens, using [def-weil-pbc-proj-twisting-sheaf]. The rule respects restrictions since the restrictions are localization homomorphisms. Extend it from the standard-open basis by [lem-weil-pbc-sheaf-morphism-on-basis] and then use [lem-pc-sites-sheaf-tensor-bilinear-universal]. On $V_a$ it sends $(r a^i)\\otimes(t a^j)$ to $rt a^{i+j}$. Thus its inverse in these frames is $r a^{i+j}\\mapsto(r a^i)\\otimes a^j$. Restriction of tensor products is identified by [lem-weil-pbc-module-restriction-tensor-comparison]; these local inverses agree because they invert the same multiplication map, and glue by [lem-weil-pbc-glue-sheaves-of-modules](1). Consequently multiplication gives $M_d^{\\otimes k}\\simeq\\mathcal O_P(kd)|_{U_d}$ for all $k\\geq0$. Associativity, commutativity and the unit follow in each frame from the corresponding scalar identities.",
+   "uses": [
+    "lem-trf-proj-product-chart-twist-frame",
+    "lem-weil-pbc-proj-graded-module-sheaf-exists",
+    "def-weil-pbc-proj-twisting-sheaf",
+    "lem-weil-pbc-sheaf-morphism-on-basis",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "lem-weil-pbc-module-restriction-tensor-comparison",
+    "lem-weil-pbc-glue-sheaves-of-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MS (lemma-when-invertible), proof; equation-Ud and the paragraph before equation-psi-d."
+   }
+  },
+  {
+   "text": "Restrict the canonical homogeneous sections of [def-weil-pbc-proj-twisting-sheaf] to $U_d$ and use step 1 to obtain $\\eta^d_k:A_{kd}\\to\\Gamma(U_d,M_d^{\\otimes k})$. On $V_a$ this sends $b$ to $(b/a^k)a^{\\otimes k}$. The formulas $(b/a^i)(c/a^j)=bc/a^{i+j}$, additivity, and $1/1=1$ show that these maps form a graded unital ring map to the section ring [def-sc-invertible-section-ring]; the equalities hold globally because sections agree on this cover. The images of $A_d$ generate $M_d$, since $a$ is a free generator on $V_a$. For any $c\\in A_d$, its coefficient on $V_a$ is $c/a$. By [lem-weil-pbc-proj-basic-open-intersection], $V_a\\cap D_+(c)$ is the unit locus of $(c/a)^d$, which equals the unit locus of $c/a$ (a power is invertible exactly when its base is). Thus the nonvanishing locus of $\\eta^d_1(c)$ is precisely $D_+(c)$ inside $U_d$.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf",
+    "def-sc-invertible-section-ring",
+    "lem-weil-pbc-proj-basic-open-intersection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Equations equation-Ud and equation-psi-d, the global-generation paragraph, and Tag 01N8 (lemma-converse-construction), first and second paragraphs of proof."
+   }
+  },
+  {
+   "text": "Let $s_a=\\varphi_1(a)$ and $W_a=T_{s_a}$. These opens cover $T$: at a point choose a local frame of $L$; the coefficients of the $s_a$ generate the unit ideal in the local ring, so at least one coefficient is a unit, since otherwise every finite linear combination lies in the maximal ideal. By [def-sc-section-generating-locus], $s_a$ freely generates $L$ on $W_a$. On this open define\n$\\rho_a:A_{(a)}\\to\\Gamma(W_a,\\mathcal O_T)$ by $b/a^k\\mapsto\\varphi_k(b)/s_a^{\\otimes k}$.\nHere [def-nagata-homogeneous-localization-degree-zero] says that all elements have such representatives. If $b/a^k=c/a^l$, [def-weil-ring-localization-away] gives $a^N(a^l b-a^k c)=0$ for some $N$. Applying $\\varphi$ gives $s_a^{N+l}\\varphi_k(b)=s_a^{N+k}\\varphi_l(c)$ in $L^{\\otimes(N+k+l)}$. Divide by the free generator $s_a^{N+k+l}$ to obtain the equality of the proposed values. The same tensor-power identifications from [def-sc-invertible-section-ring] give addition by a common denominator, multiplication by multiplying numerators and denominators, and preservation of $1$ in degree zero. Thus $\\rho_a$ is a well-defined unital ring map, without cancelling a possibly vanishing section outside $W_a$. By [lem-weil-pbc-morphism-into-affine-scheme] and [def-pc-proj], it determines $g_a:W_a\\to V_a$.",
+   "uses": [
+    "def-sc-section-generating-locus",
+    "def-nagata-homogeneous-localization-degree-zero",
+    "def-weil-ring-localization-away",
+    "def-sc-invertible-section-ring",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "def-pc-proj"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01N8 (lemma-converse-construction), first paragraph of proof; Tag 01I1 (schemes-lemma-morphism-into-affine)."
+   }
+  },
+  {
+   "text": "Fix $a,c\\in A_d$, and put $s=s_a,t=s_c$. On $W_a$ the function $\\rho_a(c/a)=t/s$ is a unit exactly on $W_a\\cap W_c$. The affine inverse-image assertion of [lem-weil-pbc-morphism-into-affine-scheme] and the chart-intersection formula [lem-weil-pbc-proj-basic-open-intersection] therefore give $g_a^{-1}(V_a\\cap V_c)=W_a\\cap W_c$; use again that a function and its $d$th power have the same unit locus. On this intersection $s\\otimes t$ freely generates $L^{\\otimes2}$. The same fraction-relation calculation as in step 3, now with denominator $ac$ and the even-degree restriction of $\\varphi$, defines a ring map\n$A_{(ac)}\\to\\Gamma(W_a\\cap W_c,\\mathcal O_T)$, $z/(ac)^n\\mapsto\\varphi_{2n}(z)/(s\\otimes t)^{\\otimes n}$.\nThe restriction from $A_{(a)}$ sends $b/a^k$ to $bc^k/(ac)^k$, whose image is $\\varphi_k(b)t^{\\otimes k}/(s\\otimes t)^{\\otimes k}=\\varphi_k(b)/s^{\\otimes k}$. The symmetric calculation gives the $c$-chart map. These are the actual restriction maps by [def-pc-proj]. A ring map out of $A_{(ac)}$ is determined by its composite with $A_{(a)}\\to A_{(ac)}$: the image $c/a$ becomes a unit with inverse $a^2/(ac)$, and every element is $z/(ac)^n=(z/a^{2n})(a^2/(ac))^n$ with $z/a^{2n}\\in A_{(a)}$. Hence the ring map $A_{(ac)}\\to\\Gamma(W_a\\cap W_c,\\mathcal O_T)$ of $g_a|_{W_a\\cap W_c}:W_a\\cap W_c\\to V_a\\cap V_c=\\operatorname{Spec}A_{(ac)}$, whose composite with this restriction is $\\rho_a$ followed by restriction, equals the displayed map; symmetrically for $g_c$ via $A_{(c)}$. The affine Hom bijection thus proves that $g_a$ and $g_c$ agree as scheme morphisms on the overlap. Apply [lem-weil-pbc-scheme-morphism-gluing] to obtain $g:T\\to U_d$. Since the $W_a$ cover $T$, the inverse-image formula already proved on each $W_a$ gives $g^{-1}D_+(c)=W_c$ globally.",
+   "uses": [
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-weil-pbc-proj-basic-open-intersection",
+    "def-pc-proj",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01N8 (lemma-converse-construction), second paragraph of proof: the overlap square and its common ring map."
+   }
+  },
+  {
+   "text": "Use [lem-trf-proj-generated-pullback-frames] for $g:T\\to P$ (the composite of step 4 with $U_d\\hookrightarrow P$), $M=L$, and the generating sections $s_a$. Its hypotheses hold by the generation assumption and step 4. It supplies the two free generators $g^*a$ and $s_a$ on $W_a$, on every subopen. Define $\\alpha_a$ by $r g^*a\\mapsto r s_a$. On $W_a\\cap W_c$ the relation $c=(c/a)a$ pulls back to $g^*c=\\rho_a(c/a)g^*a=(t/s)g^*a$. Hence $\\alpha_a(g^*c)=(t/s)s=t=\\alpha_c(g^*c)$; since $g^*c$ freely generates there, the two module maps agree. By [lem-weil-pbc-glue-sheaves-of-modules](1), the $\\alpha_a$ glue to $\\alpha:g^*M_d\\to L$. Their inverses agree on overlaps as well, and the same gluing statement gives a two-sided inverse. This constructs the required isomorphism.",
+   "uses": [
+    "lem-trf-proj-generated-pullback-frames",
+    "lem-weil-pbc-glue-sheaves-of-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01N8 (lemma-converse-construction), definition of alpha_f and the final sentences of the second paragraph of proof."
+   }
+  },
+  {
+   "text": "For $b\\in A_{kd}$, step 2 gives $\\eta^d_k(b)=(b/a^k)a^{\\otimes k}$ on $V_a$. Use [lem-weil-pbc-module-pullback-tensor], including its formula on pure tensor sections, to identify its pullback with $g_a^\\sharp(b/a^k)(g^*a)^{\\otimes k}$. Applying $\\alpha^{\\otimes k}$ and step 3 gives\n$\\alpha^{\\otimes k}(g^*\\eta^d_k(b))=(\\varphi_k(b)/s_a^{\\otimes k})s_a^{\\otimes k}=\\varphi_k(b)$\non $W_a$. For $k=0$ the formula is the scalar ring map $\\rho_a(b)=\\varphi_0(b)$, with the zeroth tensor powers identified with the structure sheaves. The sheaf axiom on the cover $W_a$ proves the equality globally, in every degree.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01N8 (lemma-converse-construction), first paragraph of proof: verification of the diagram omitted in the source."
+   }
+  },
+  {
+   "text": "Suppose $(h,\\beta)$ satisfies the required equalities. In a local frame of an invertible sheaf, a section is nonvanishing exactly when its coefficient is a unit; a local homomorphism of local rings preserves and reflects units. Pulling back the nonvanishing identity of step 2 therefore gives $h^{-1}D_+(a)=W_a$, because $\\beta(h^*\\eta^d_1(a))=s_a$. On $W_a$ pull back the identity $\\eta^d_k(b)=(b/a^k)a^{\\otimes k}$ and use [lem-weil-pbc-module-pullback-tensor]. The degree-$k$ compatibility and the equality $\\beta(h^*a)=s_a$ imply $h^\\sharp(b/a^k)s_a^{\\otimes k}=\\varphi_k(b)$, so division by the frame forces $h^\\sharp=\\rho_a$. The affine Hom bijection [lem-weil-pbc-morphism-into-affine-scheme] gives $h|_{W_a}=g_a$. Scheme-morphism gluing uniqueness gives $h=g$. Under that equality $\\beta$ and $\\alpha$ both send the free generator $g^*a$ to $s_a$ on every $W_a$, so module-map gluing uniqueness gives $\\beta=\\alpha$. This uses only an open cover, not a claim that the degree-$d$ standard opens form a basis.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-tensor",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "lem-weil-pbc-glue-sheaves-of-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01N8 (lemma-converse-construction), uniqueness paragraph, replacing its incorrect fixed-degree-basis assertion by affine-chart uniqueness."
+   }
+  },
+  {
+   "text": "Conversely let $g:T\\to U_d$ be any morphism and put $L=g^*M_d$. Pulling a free frame $a$ back over $g^{-1}V_a$ gives a free frame $g^*a$: in the tensor formula [def-pc-module-pullback], $r\\otimes(ua)\\mapsto r g^\\sharp(u)$ identifies the pullback with the free rank-one module. Thus $L$ is invertible and the sections $g^*\\eta^d_1(a)$ generate it, since these opens cover $T$. The tensor comparison [lem-weil-pbc-module-pullback-tensor] and its pure-tensor formula make pullback of $\\eta^d$ a graded unital map to the section ring. With $\\alpha$ the identity these data satisfy all degreewise equations. Step 7 recovers the given pair uniquely, and its local division calculation also gives the required chart fraction formula. These arguments allow arbitrary covers and include empty $T$ or $U_d$.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "The paragraph following equation-psi-d and equation-psi-phi-d; Tag 01N9 (lemma-proj-functor-strict)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-pc-module-pullback",
+  "def-pc-proj",
+  "def-sc-invertible-section-ring",
+  "def-sc-section-generating-locus",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-weil-ring-localization-away",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-trf-proj-generated-pullback-frames",
+  "lem-trf-proj-product-chart-twist-frame",
+  "lem-weil-pbc-glue-sheaves-of-modules",
+  "lem-weil-pbc-module-pullback-tensor",
+  "lem-weil-pbc-module-restriction-tensor-comparison",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-proj-basic-open-intersection",
+  "lem-weil-pbc-proj-graded-module-sheaf-exists",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-sheaf-morphism-on-basis"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01N8 (lemma-converse-construction), with the calculations omitted there supplied and uniqueness checked by affine charts; Tag 01MS (lemma-when-invertible), equation-Ud, equation-psi-d, and Tag 01N9 (lemma-proj-functor-strict)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For any graded commutative ring A and positive d, the open union of D(f) for f in A_d represents graded maps from the d Veronese algebra to powers of a line bundle generated by A_d",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.Proj.openCoverOfISupEqTop",
+     "AlgebraicGeometry.Proj.opensRange_awayι",
+     "AlgebraicGeometry.Proj.basicOpen",
+     "AlgebraicGeometry.Proj.affineOpenCover",
+     "AlgebraicGeometry.Proj.awayι",
+     "AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan",
+     "AlgebraicGeometry.Proj.iSup_basicOpen_eq_top'",
+     "AlgebraicGeometry.Proj.basicOpen_eq_iSup_proj"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "7cd9945dc4c2c1b3"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: basic Proj schemes, standard-open covers, structure sheaves and maps from ring-valued global sections do not classify arbitrary line-valued Veronese quotients or glue relative twisting modules."
+  },
+  {
+   "tool": "grep",
+   "query": "Veronese|GammaStar|invertible|quotient",
+   "results": {
+    "hits": [
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "AlgebraicGeometry/ProjectiveSpectrum",
+    "digest": "569693be72306bfa"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: basic Proj schemes, standard-open covers, structure sheaves and maps from ring-valued global sections do not classify arbitrary line-valued Veronese quotients or glue relative twisting modules."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an arbitrary graded ring the open subset of Proj generated by degree d elements classifies invertible sheaves with a graded Veronese quotient",
+   "results": {
+    "hits": [
+     "ProjectiveSpectrum.basicOpen",
+     "AlgebraicGeometry.Proj.basicOpen",
+     "AlgebraicGeometry.Proj",
+     "AlgebraicGeometry.Proj.basicOpen_pow",
+     "AlgebraicGeometry.Proj.basicOpen_eq_iSup_proj",
+     "ProjectiveSpectrum.isOpen_iff",
+     "AlgebraicGeometry.Proj.basicOpenIsoSpec",
+     "AlgebraicGeometry.Proj.basicOpen_mono"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "0493fe79574ff6ab"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: basic Proj schemes, standard-open covers, structure sheaves and maps from ring-valued global sections do not classify arbitrary line-valued Veronese quotients or glue relative twisting modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj, AlgebraicGeometry.Scheme.Modules",
+   "results": {
+    "hits": [],
+    "n_hits": 0,
+    "note": "",
+    "subdirectory": "",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: basic Proj schemes, standard-open covers, structure sheaves and maps from ring-valued global sections do not classify arbitrary line-valued Veronese quotients or glue relative twisting modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An arbitrary graded ring has a canonical twisting line bundle O(d) on the union of degree d standard opens and morphisms into that union classify graded maps to powers of a generated line bundle",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.Proj",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections",
+     "AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections",
+     "AlgebraicGeometry.Proj.awayι",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections_resLE",
+     "AlgebraicGeometry.openToLocalization",
+     "AlgebraicGeometry.Proj.awayToSection",
+     "AlgebraicGeometry.Proj.awayMap_awayToSection"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "8f68dbebb6a42302"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: basic Proj schemes, standard-open covers, structure sheaves and maps from ring-valued global sections do not classify arbitrary line-valued Veronese quotients or glue relative twisting modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an arbitrary graded ring A the union of the standard opens of degree d in Proj A classifies graded homomorphisms from the d Veronese ring to the section ring of an invertible sheaf generated by degree one sections",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections",
+     "AlgebraicGeometry.Proj",
+     "AlgebraicGeometry.Proj.basicOpen",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections",
+     "AlgebraicGeometry.Proj.awayToSection",
+     "AlgebraicGeometry.Proj.basicOpen_eq_iSup_proj"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "186de3b914af1e80"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Proj.fromOfGlobalSections (Basic.lean:443) takes a ring-valued map A to global regular functions, not an arbitrary invertible-sheaf-valued graded quotient; neither it nor the standard-open definitions provide the line-bundle classification and unique compatible isomorphism."
+  },
+  {
+   "tool": "grep",
+   "query": "Veronese|invertible|quotient|fromOfGlobalSections",
+   "results": {
+    "hits": [
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean"
+    ],
+    "n_hits": 13,
+    "note": "",
+    "subdirectory": "AlgebraicGeometry/ProjectiveSpectrum",
+    "digest": "1fe2199da8d32ce7"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Proj.fromOfGlobalSections (Basic.lean:443) takes a ring-valued map A to global regular functions, not an arbitrary invertible-sheaf-valued graded quotient; neither it nor the standard-open definitions provide the line-bundle classification and unique compatible isomorphism."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Morphisms to Proj of a graded ring are uniquely classified by a generated invertible sheaf and a graded map from the Veronese subring",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.Proj.fromOfGlobalSections",
+     "AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections.congr_simp",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec",
+     "AlgebraicGeometry.Proj.awayι.congr_simp",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections.congr_simp",
+     "AlgebraicGeometry.Proj",
+     "ProjectiveSpectrum.mk.inj",
+     "AlgebraicGeometry.Proj.toSpecZero"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "11d592b10e246058"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Proj.fromOfGlobalSections (Basic.lean:443) takes a ring-valued map A to global regular functions, not an arbitrary invertible-sheaf-valued graded quotient; neither it nor the standard-open definitions provide the line-bundle classification and unique compatible isomorphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj, AlgebraicGeometry.Scheme.Modules",
+   "results": {
+    "hits": [],
+    "n_hits": 0,
+    "note": "",
+    "subdirectory": "",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Proj.fromOfGlobalSections (Basic.lean:443) takes a ring-valued map A to global regular functions, not an arbitrary invertible-sheaf-valued graded quotient; neither it nor the standard-open definitions provide the line-bundle classification and unique compatible isomorphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The universal property of Proj for morphisms from any scheme with a globally generated line bundle and compatible homogeneous sections in every degree, without finite generation or quasi compactness",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.Proj.fromOfGlobalSections",
+     "AlgebraicGeometry.Proj",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero_assoc",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero",
+     "AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec",
+     "AlgebraicGeometry.Proj.toSpecZero",
+     "AlgebraicGeometry.Proj.valuativeCriterion_existence"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "0d72b3ef5c9deca9"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Proj.fromOfGlobalSections (Basic.lean:443) takes a ring-valued map A to global regular functions, not an arbitrary invertible-sheaf-valued graded quotient; neither it nor the standard-open definitions provide the line-bundle classification and unique compatible isomorphism."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-scheme-proj-veronese-quotient-functor",
+  "date": "2026-10-24",
+  "group": "Q125"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting subargument for proper-support Grothendieck existence in Stacks Tag 08BE, serving the inherited compactification/direct-image prerequisite chain of sk-thm-sf-ctf-stability; the Chow modification in the third paragraph. Construction input: Tag 088S proof, apply 088R to the chosen open immersion into projective space; affine-base projectivity is handled separately. Supporting Tags 084B (lemma-relative-proj), 085Q (definition-blow-up), 085R (lemma-blowing-up-affine), 085S (lemma-flat-base-change-blowing-up), 085T (lemma-blowing-up-gives-effective-Cartier-divisor), 085Z (lemma-blowing-up-projective), and 083S (lemma-complement-effective-Cartier-divisor). Scheme coefficient comparison: descent.tex Tags 03DX (proposition-equivalence-quasi-coherent) and 05VG (lemma-equivalence-quasi-coherent-properties).. General graded-algebra construction underlying the blowup: representability and arbitrary-base-change comparison of relative Proj (084B and 085C). Scheme prerequisite for the compactification/direct-image paragraph of sk-thm-sf-ctf-stability.proof.md: constructions.tex 01NW, 01NY and 01NZ, the scheme functor used in the proof of spaces-divisors.tex 084B. Technical input: Tags 01N8 (lemma-converse-construction), 01N9 (lemma-proj-functor-strict), and 01MS (lemma-when-invertible); equation-Ud and equation-psi-d.",
+   "via": [
+    "lem-sfb-scheme-proj-veronese-quotient-functor",
+    "lem-sfb-space-relative-proj-scheme-tests",
+    "lem-sfb-space-blowup-chart-properties",
+    "lem-sfb-space-blowup-embedding-extension",
+    "lem-sfb-space-chow-dense-modification",
+    "lem-sfb-space-supported-adic-existence",
+    "lem-sfb-space-coherent-formal-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-proj-fixed-degree-line-quotient",
+  "worker": "stage1",
+  "summary": "Checked arbitrary graded-ring hypotheses against Stacks 01MS/01N8/01N9. Wrote the frame, tensor multiplication, fraction relation, overlap, all-degree compatibility and pair uniqueness arguments, reusing existing DAG statements; no new nodes. Corrected the source proof's false fixed-degree-basis assertion by the affine Hom bijection. Statement unchanged.",
+  "blueprint": "Inherited compactification/direct-image prerequisite chain of sk-thm-sf-ctf-stability, as retained in blueprint.from: the general scheme Proj functor for the affine-base construction in 084B. Latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability.proof.md, direct-image/compactification paragraph. This item has no imported blueprint ancestor (blueprint_refs.py ancestor returns None); its specific source is constructions.tex 01N8.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-proj-product-chart-twist-frame",
+    "why": "Explicit homogeneous localization frames specialized with b=1 supply the twisting generators on arbitrary-degree charts; this is a generic graded-ring tool, with no classification theorem assumed."
+   },
+   {
+    "node": "lem-weil-pbc-proj-graded-module-sheaf-exists",
+    "why": "Quasi-coherence of the graded-module twisting sheaves; generic scheme-module construction, not a change in the compactification route."
+   },
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Universal property of the ordinary sheaf tensor product constructs multiplication from the displayed bilinear fractions."
+   },
+   {
+    "node": "lem-weil-pbc-module-restriction-tensor-comparison",
+    "why": "Identifies restriction of the ordinary sheaf tensor product with the tensor of restrictions, allowing the explicitly written local inverses."
+   },
+   {
+    "node": "lem-weil-pbc-glue-sheaves-of-modules",
+    "why": "Gluing and uniqueness of ordinary module-sheaf maps on an arbitrary Zariski cover, including gluing their inverses."
+   },
+   {
+    "node": "lem-trf-proj-generated-pullback-frames",
+    "why": "Frames for a specified map with a known standard-open preimage formula; its statement supplies both generators on every subopen and does not construct or classify the map."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-tensor",
+    "why": "Ordinary pullback commutes with tensor with the stated formula on pure sections; needed for all-degree compatibility."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-proj-product-chart-twist-frame",
+  "lem-weil-pbc-proj-graded-module-sheaf-exists",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-weil-pbc-module-restriction-tensor-comparison",
+  "lem-weil-pbc-glue-sheaves-of-modules",
+  "lem-trf-proj-generated-pullback-frames",
+  "lem-weil-pbc-module-pullback-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N7-9f407eda5",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-9f407eda5 (reviewer sub-agent of L); spot-checked: FIX for step 4. Read Stacks constructions.tex: the Morphisms-into-Proj section (equations Ud, psi-d, psi-phi-d), Tag 01N8 with its full proof, and Tag 01MS. Statement checked: byte-identical to the base and agrees with 01N8 plus the chart and converse clauses; the two added stmt_deps (sheaf tensor product, homogeneous localization) are used by the statement. Item still unsplit live, no repair note, 0 new nodes, proof_deps equals the union of uses. Checked all 8 steps against every cited statement. Step 1: trf product-chart frame with b=1, beta=0 gives the frame a^k; quasi-coherence from graded-module-sheaf (c); multiplication via basis extension and the bilinear universal property; local inverses glued. Step 2: basic-open-intersection gives D((c/a)^d), same unit locus as c/a. Step 3: rho_a well-defined, division only on W_a. Step 5: pullback-frames hypotheses met; alpha and its inverses glue. Step 6: pure-tensor pullback formula. Step 7: units under a local homomorphism; chart and gluing uniqueness. Step 8: converse. Gap repaired: step 4 used the affine Hom bijection on the overlap without showing that a ring map out of A_(ac) is determined by its composite with A_(a) -> A_(ac) (Stacks covers this point with 'Proj is separated'). Added the elementary argument: c/a has inverse a^2/(ac) and z/(ac)^n = (z/a^{2n})(a^2/(ac))^n. Only proof[3].text changes. Source error confirmed: 01N8's claim that the D_+(f), f in S_d, form a basis fails for F_2[x,y], d=1, at the point (x^2+xy+y^2); the item avoids it; record in HUMAN.md. Batch 5: lem-trf-proj-product-chart-twist-frame (01MU/01MV frame) and lem-trf-proj-generated-pullback-frames (01NK/01N8 frames for a given map) are generic graded-ring/Proj facts; their closures reach no other trace-formula or Poincare node, so they are not part of either assumption: accepted. No cycle and no duplicate classification node in the DAG. All 7 declared generic tool_uses accepted. Edge cases: A_d=0, x of degree e not dividing d, zero or nilpotent a, k=0, non-quasi-compact covers.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjFixedDegreeLineQuotient",
+  "declaration": "AlgebraicGeometry.Proj.fixedDegreeLine_quotient_classification",
+  "declarations": [
+   "AlgebraicGeometry.Proj.fixedDegreeOpen",
+   "AlgebraicGeometry.Proj.fixedDegreeTwist",
+   "AlgebraicGeometry.Proj.fixedDegreeLine",
+   "AlgebraicGeometry.Proj.fixedDegreeCanonicalSection",
+   "AlgebraicGeometry.Proj.FixedDegreeMap",
+   "AlgebraicGeometry.Proj.fixedDegreeImage",
+   "AlgebraicGeometry.Proj.fixedDegreeLinearSection",
+   "AlgebraicGeometry.Proj.FixedDegreeGenerates",
+   "AlgebraicGeometry.Proj.FixedDegreeCompatible",
+   "AlgebraicGeometry.Proj.FixedDegreeCharts",
+   "AlgebraicGeometry.Proj.fixedDegreeLine_quotient_classification"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjFixedDegreeLineQuotient.lean",
+  "statement": "theorem fixedDegreeLine_quotient_classification : (fixedDegreeLine 𝒜 d).IsInvertible ∧ ∀ hM : (fixedDegreeLine 𝒜 d).IsInvertible, ∃ (θ : ∀ k : ℕ, (fixedDegreeLine 𝒜 d).tensorPow k ≅ fixedDegreeTwist 𝒜 d k) (η : FixedDegreeMap 𝒜 d (fixedDegreeLine 𝒜 d) hM), HEq (θ 1).hom (ρ_ (fixedDegreeLine 𝒜 d)).hom ∧ (∀ (k : ℕ) (b : GradedAlgebra.veroneseGrade 𝒜 d k), (θ k).hom.app ⊤ (fixedDegreeImage 𝒜 d (fixedDegreeLine 𝒜 d) hM η k b) = fixedDegreeCanonicalSection 𝒜 d k b) ∧ FixedDegreeGenerates 𝒜 d (fixedDegreeLine 𝒜 d) hM η ∧ (∀ (T : Scheme.{u}) (L : T.Modules) (hL : L.IsInvertible) (φ : FixedDegreeMap 𝒜 d L hL), FixedDegreeGenerates 𝒜 d L hL φ → (∃! q : Σ g : T ⟶ (fixedDegreeOpen 𝒜 d).toScheme, (tensorPullback g).obj (fixedDegreeLine 𝒜 d) ≅ L, FixedDegreeCompatible 𝒜 d hM η L hL φ q.1 q.2) ∧ (∀ (g : T ⟶ (fixedDegreeOpen 𝒜 d).toScheme) (α : (tensorPullback g).obj (fixedDegreeLine 𝒜 d) ≅ L), FixedDegreeCompatible 𝒜 d hM η L hL φ g α → FixedDegreeCharts 𝒜 d L hL φ g)) ∧ (∀ (T : Scheme.{u}) (g : T ⟶ (fixedDegreeOpen 𝒜 d).toScheme), ∃ hL : ((tensorPullback g).obj (fixedDegreeLine 𝒜 d)).IsInvertible, ∃ φ : FixedDegreeMap 𝒜 d ((tensorPullback g).obj (fixedDegreeLine 𝒜 d)) hL, FixedDegreeGenerates 𝒜 d ((tensorPullback g).obj (fixedDegreeLine 𝒜 d)) hL φ ∧ FixedDegreeCompatible 𝒜 d hM η ((tensorPullback g).obj (fixedDegreeLine 𝒜 d)) hL φ g (Iso.refl _))",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The existing Veronese ring is used with the canonical integer scalar action; this covers all graded commutative rings. One theorem includes invertibility, canonically normalized multiplication isomorphisms and graded map, existence and uniqueness of the entire compatible pair, all-degree compatibility, chart preimages and fractions, and the converse. Helpers are explicit restrictions, evaluations and predicates belonging to these clauses; no new independent notion or chosen unspecified object."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c19b32f90",
+  "group": "NY",
+  "result": "pass",
+  "note": "Lean matches node and Stacks 01MS/01N8/01N9 clause by clause: U_d as the unrestricted union, M_d as the restricted O(d), invertibility, θ pinned (θ1=ρ plus θk(ηk b)=b/1 plus the graded-ring-hom property force θ and η unique), ∃! of the full Σ (g,α) with all-degree compatibility via the canonical boundaryPullbackPowIso/boundaryTensorPowIso, converse with Iso.refl pinning φ=g^*η, chart preimage and fraction clause as multiplication by the frame on T_s. No extra hypotheses (no generation on A, no quasi-compactness on T). Edge cases (empty T/U_d, A_d=0, k=0,1, nilpotent a, infinite covers) covered. Only lean and stmt_deps changed (added landed def-sfb-veronese-graded-ring); statement verbatim; no hollow defs; docstrings and 8-step proof present. Advisory: the owners of the boundary* comparisons (def-sc-tensor-pullback-power-comparison, def-sfb-tensor-power-pullback-comparisons) are not in stmt_deps. Not recompiled (no file changed)."
+ }
+}

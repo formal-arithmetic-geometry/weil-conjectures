@@ -1,0 +1,135 @@
+{
+ "id": "lem-sf-open-quotient-scalar-unit-compatibility",
+ "kind": "statement",
+ "title": "Scalar-unit compatibility of strict open reduction towers",
+ "statement": "Fix a prime l, a finite extension E of Q_l and an open immersion j:U→X. For any fixed compatible ordinary open operations o and their normalized finite coefficient tensor comparison tc, there exist ScalarCompatibility sc and ScalarComparison r [def-sf-open-tensor-quotient-data]. For every unbounded completed-coefficient complex P on U, the scalar-adjunction unit on j_!P followed by r equals extension of the scalar-adjunction unit on P (using the canonical constant-functor comparison). All strict quotient transitions, finite comparison components and systems evaluation equations are retained. No tensor comparison square, balancing isomorphism or completion presentation is asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0E8I, lemma-j-shriek-and-tensor; scalar extension and restriction, Tags 03DI and 03EK; strict systems, Tag 0941. Strict cochain specialization."
+ },
+ "stmt_deps": [
+  "def-sf-open-tensor-quotient-data"
+ ],
+ "proof": [
+  {
+   "text": "On the ambient slice at the open object, scalar restriction leaves each extension-presheaf summand and insertion unchanged. The identity on summands, followed by sheafification, constructs the finite comparison. The same construction on whole semilinear coefficient systems commutes with every transition and gives the systems comparison and its finite evaluation formula. Transport using the coefficient equivalences of o. Their pushforward and projection equations identify both scalar actions.",
+   "uses": [
+    "def-sf-open-tensor-quotient-data",
+    "lem-sf-cbc-slice-tensor-generator-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose tc.ordinary at each coefficient level with the finite scalar restriction comparison, term by term. The generator formulas commute with quotient maps, so these maps assemble into a natural isomorphism of strict towers. This gives r and its required components field.",
+   "uses": [
+    "def-sf-open-tensor-quotient-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The actual scalar-adjunction unit sends x to 1 tensor x. Its consecutive transition equality follows because quotient maps preserve 1, hence gives scalarUnitTower. On an extension summand the normalized generator formula of tc sends this unit to the unit of the same summand. The scalar comparison is identity on that summand. Summand/sheafification extensionality proves the unit equation in every degree; complex and tower extensionality assemble it. The construction works for negative degrees, zero complexes, the empty open and identity open.",
+   "uses": [
+    "def-sf-open-tensor-quotient-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-open-tensor-quotient-data",
+  "lem-sf-cbc-slice-tensor-generator-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0E8I, proof on extension summands; strict quotient-tower specialization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "restriction of scalars extension by zero natural scalar unit compatibility for quotient towers",
+   "results": "Eight ordinary module restriction/scalar-tower results; no ringed-site strict tower compatibility.",
+   "date": "2026-10-27",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension by zero strict coefficient tensor augmentation chain map scalar restriction",
+   "results": "Generic complex tensor and ModuleCat scalar-unit results; no sheafified open quotient tower theorem.",
+   "date": "2026-10-27",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.whiskerRight_comp",
+   "results": "Found whiskerRight_comp in Mathlib.CategoryTheory.Whiskering; used for composing the scalar-unit square.",
+   "date": "2026-10-27",
+   "verdict": "generic composition API only"
+  },
+  {
+   "tool": "grep",
+   "query": "ScalarCompatibility|RoosNormalization; extensionByZero|restrictScalars",
+   "results": "No matching strict-system comparison; generic restriction of scalar APIs only. Repository search found normalizedIntegralTensorTower and fully faithful scalar restriction constructions.",
+   "date": "2026-10-27",
+   "verdict": "use project balancing and generic fully faithful lifting"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenTensorQuotientCochains",
+  "date": "2026-10-27",
+  "group": "Z5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-pf-coherence",
+   "place": "Base-change paragraph, open factor and finite-reduction compatibility: scalar restriction and normalized strict quotient tensor cochains.",
+   "via": [
+    "lem-sf-open-quotient-normalized-cochains",
+    "lem-sf-open-tensor-quotient-augmentation",
+    "lem-sf-pf-open-factor-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OpenTensorQuotientScalarCompatibility",
+  "file": "lean/Sheaf/SixFunctors/OpenTensorQuotientScalarCompatibility.lean",
+  "declaration": "WeilConjectures.OpenTensorQuotient.openQuotientScalarUnitCompatibility",
+  "declarations": [
+   "WeilConjectures.OpenTensorQuotient.openQuotientScalarUnitCompatibility",
+   "WeilConjectures.OpenTensorQuotient.scalarUnitTower",
+   "WeilConjectures.OpenTensorQuotient.scalarUnitTower_sections",
+   "WeilConjectures.OpenTensorQuotient.scalarUnitTower_natural"
+  ],
+  "statement": "theorem openQuotientScalarUnitCompatibility\n    (o : IntegralOpenReduction.Operations l E j)\n    (tc : IntegralOpenReduction.TensorComparison l E j o) :\n    ∃ (sc : ScalarCompatibility l E j o) (r : ScalarComparison l E j o sc tc),\n      ∀ P : CochainComplex (scalarReductionSource l E U) ℤ,\n        scalarUnitTower l E X ((OpenSemilinearTensor.extensionComplex l E j o).obj P) ≫\n            r.iso.hom.app P =\n          (Functor.constComp ℕᵒᵖ P (OpenSemilinearTensor.extensionComplex l E j o)).inv ≫\n            Functor.whiskerRight (scalarUnitTower l E U P)\n              (OpenSemilinearTensor.extensionComplex l E j o)",
+  "branch": "sheaf-dag",
+  "by": "Z5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261027T094550-L-243433",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261027T094550-L-243433",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

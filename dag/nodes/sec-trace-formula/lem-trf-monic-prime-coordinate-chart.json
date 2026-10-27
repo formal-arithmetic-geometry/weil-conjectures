@@ -1,0 +1,229 @@
+{
+ "id": "lem-trf-monic-prime-coordinate-chart",
+ "kind": "statement",
+ "title": "Monic finite coordinate chart at a nonzero polynomial prime",
+ "statement": "Let $k$ be a field, $n\\ge1$, $A=k[x_1,\\ldots,x_n]$, and $0\\ne\\mathfrak q\\subset A$ a prime ideal. Fix $0\\ne g\\in\\mathfrak q$. Polynomial rings are as in [def-weil-pbc-mv-polynomial-ring]. There exist positive integers $e_i$ for $i<n$, a nonzero scalar $a\\in k$, and $d>0$ such that the $k$-algebra automorphism $\\sigma:A\\xrightarrow{\\sim}A$ given by $\\sigma(x_i)=x_i+x_n^{e_i}$ for $i<n$ and $\\sigma(x_n)=x_n$ has inverse $x_i\\mapsto x_i-x_n^{e_i}$, and $f=a^{-1}\\sigma(g)$ is monic of degree $d$ in $x_n$. Put $\\mathfrak q^*=\\sigma(\\mathfrak q)$, $B=k[y_1,\\ldots,y_{n-1}]$, $C=B[y_n]$, and define $\\psi:C\\to A$ by $\\psi(y_i)=x_i$ for $i<n$ and $\\psi(y_n)=f$. Then $\\mathfrak q^*$ is prime, $f\\in\\mathfrak q^*$, and $\\psi$ is finite: $1,x_n,\\ldots,x_n^{d-1}$ generate $A$ as a $C$-module [def-weil-finitely-generated-module]. The ideal $\\mathfrak p=(\\psi|_B)^{-1}(\\mathfrak q^*)$ is prime and $$\\psi^{-1}(\\mathfrak q^*)=\\mathfrak pC+(y_n).$$ More explicitly, for every $H\\in C$, $\\psi(H)\\in\\mathfrak q^*$ if and only if $H(y_1,\\ldots,y_{n-1},0)\\in\\mathfrak p$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 051P (lemma-refined-Noether-normalization), nonzero-prime induction: triangular automorphism, monic last coordinate, finite map, and contraction pC+(y_n); helper is Tag 051N, already represented by lem-trf-polynomial-shear-leading-coefficient."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "Since $\\mathfrak q$ is proper, $g$ cannot be a nonzero constant: such a constant is a unit in $A$, and its membership would imply $1\\in\\mathfrak q$. Since $g\\ne0$, it is therefore nonconstant. Apply [lem-trf-polynomial-shear-leading-coefficient] with $R=k$ to obtain positive $e_i$, $d>0$, $a\\ne0$, and $b_j\\in k[x_1,\\ldots,x_{n-1}]$ with $g(x_1+x_n^{e_1},\\ldots,x_{n-1}+x_n^{e_{n-1}},x_n)=a x_n^d+\\sum_{j<d}b_jx_n^j$.",
+   "uses": [
+    "lem-trf-polynomial-shear-leading-coefficient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051P, lemma-refined-Noether-normalization, proof: nonzero-prime step before induction; Tag 051N, lemma-helper-polynomial."
+   }
+  },
+  {
+   "text": "By the evaluation universal property of [def-weil-pbc-mv-polynomial-ring], define $\\sigma$ by the displayed substitutions and $\\tau$ by $x_i\\mapsto x_i-x_n^{e_i}$ for $i<n$, fixing $x_n$. Both composites fix every generator: $(x_i-x_n^{e_i})+x_n^{e_i}=x_i$ and $(x_i+x_n^{e_i})-x_n^{e_i}=x_i$, since both maps fix $x_n$. They also fix $k$, so uniqueness gives $\\sigma\\tau=\\tau\\sigma=1$. Thus $\\sigma$ is the required automorphism. As $a\\in k^\\times$, setting $c_j=a^{-1}b_j$ gives $f=a^{-1}\\sigma(g)=x_n^d+\\sum_{j<d}c_jx_n^j$, monic of degree $d$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051P, lemma-refined-Noether-normalization, proof: nonzero-prime step before induction; Tag 051N, lemma-helper-polynomial."
+   }
+  },
+  {
+   "text": "The image $\\mathfrak q^*=\\sigma(\\mathfrak q)$ is an ideal: applying $\\tau$ reduces addition and multiplication by an arbitrary element to the ideal axioms for $\\mathfrak q$. It is proper since $\\tau(1)=1\\notin\\mathfrak q$. If $uv\\in\\mathfrak q^*$, then $\\tau(u)\\tau(v)\\in\\mathfrak q$, so one factor belongs to $\\mathfrak q$, and hence $u$ or $v$ belongs to $\\mathfrak q^*$. This proves primality. Moreover $\\sigma(g)\\in\\mathfrak q^*$, so $f=a^{-1}\\sigma(g)\\in\\mathfrak q^*$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051P, lemma-refined-Noether-normalization, proof: nonzero-prime step before induction; Tag 051N, lemma-helper-polynomial."
+   }
+  },
+  {
+   "text": "Let $\\iota:B\\to A$ send $y_i$ to $x_i$, and define $\\psi:B[y_n]\\to A$ by $\\psi|_B=\\iota$ and $\\psi(y_n)=f$, using [def-weil-pbc-mv-polynomial-ring]. For each $c_j$ choose the identical coefficient polynomial $\\widetilde c_j\\in B$ with $\\iota(\\widetilde c_j)=c_j$. We have the explicit relation $$x_n^d=\\psi(y_n)-\\sum_{j<d}\\psi(\\widetilde c_j)x_n^j.$$ Strong induction on $m\\ge0$ shows $x_n^m$ lies in the $C$-span of $1,\\ldots,x_n^{d-1}$. For $m<d$ this is a generator. For $m\\ge d$, multiply the relation by $x_n^{m-d}$; it expresses $x_n^m$ as $\\psi(y_n)x_n^{m-d}-\\sum_{j<d}\\psi(\\widetilde c_j)x_n^{m-d+j}$. Every exponent on the right is less than $m$ since $d>0$ and $j<d$, so the induction applies. Grouping monomials of any element of $A$ by their $x_n$ exponent writes it as $\\sum_m\\iota(h_m)x_n^m$ with $h_m\\in B$, a finite sum. Substituting the preceding expressions proves that the displayed $d$ elements generate $A$ as a $C$-module. This is precisely finiteness in [def-weil-finitely-generated-module].",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051P, lemma-refined-Noether-normalization, proof: nonzero-prime step before induction; Tag 051N, lemma-helper-polynomial."
+   }
+  },
+  {
+   "text": "Define $\\mathfrak p=\\iota^{-1}(\\mathfrak q^*)$. Preimages preserve the ideal axioms. It is proper since $\\iota(1)=1\\notin\\mathfrak q^*$; if $uv\\in\\mathfrak p$, then $\\iota(u)\\iota(v)\\in\\mathfrak q^*$, so the primality established in Step 3 implies $u\\in\\mathfrak p$ or $v\\in\\mathfrak p$. For $H=\\sum_{j=0}^N h_jy_n^j\\in C$, evaluation gives $\\psi(H)=\\iota(h_0)+f\\sum_{j=1}^N\\iota(h_j)f^{j-1}$. Since $f\\in\\mathfrak q^*$, this belongs to $\\mathfrak q^*$ exactly when $\\iota(h_0)\\in\\mathfrak q^*$, equivalently $h_0=H(y_1,\\ldots,y_{n-1},0)\\in\\mathfrak p$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051P, lemma-refined-Noether-normalization, proof: nonzero-prime step before induction; Tag 051N, lemma-helper-polynomial."
+   }
+  },
+  {
+   "text": "Finally $H=h_0+y_n\\sum_{j=1}^N h_jy_n^{j-1}$. If $h_0\\in\\mathfrak p$, this expression puts $H$ in $\\mathfrak pC+(y_n)$. Conversely, evaluating at $y_n=0$ sends a finite sum of multiples of elements of $\\mathfrak p$ into $\\mathfrak p$, and sends every multiple of $y_n$ to zero. Thus membership in $\\mathfrak pC+(y_n)$ is equivalent to $H(0)\\in\\mathfrak p$. Combining with Step 5 proves $\\psi^{-1}(\\mathfrak q^*)=\\mathfrak pC+(y_n)$ and the asserted explicit criterion. When $n=1$, $B=k$ and the shear lists are empty; all these formulas and the induction remain valid.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051P, lemma-refined-Noether-normalization, proof: nonzero-prime step before induction; Tag 051N, lemma-helper-polynomial."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-polynomial-shear-leading-coefficient",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 051P, lemma-refined-Noether-normalization, proof: nonzero-prime step before induction; Tag 051N, lemma-helper-polynomial."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "refinedNoether|monic.*comap|comap.*monic|T_leadingcoeff_isUnit [Mathlib/RingTheory]",
+   "results": "Actual msearch result: 12 hits; Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean, Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean, Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean, Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean, Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean, Mathlib/RingTheory/IsAdjoinRoot.lean, Mathlib/RingTheory/IsAdjoinRoot.lean, Mathlib/RingTheory/IsAdjoinRoot.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the results give ordinary normalization, coefficient membership or images of monic hypersurfaces, not a triangular prime chart with its finite evaluation map and exact contracted ideal"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Monic coordinate change at a nonzero prime of a multivariate polynomial algebra gives a finite map with contracted prime p plus the final variable",
+   "results": "Actual msearch result: 8 hits; NoetherNormalization.T1, MvPolynomial.coeff_rename_ne_zero, MvPolynomial.finite_universalFactorizationMap, Polynomial.exists_image_comap_of_monic, MvPolynomial.prime_rename_iff, Polynomial.Monic.roots_map_of_card_eq_natDegree, Polynomial.Monic.irreducible_of_irreducible_map_of_isPrime_nilradical, Polynomial.monic_mapAlg_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: the results give ordinary normalization, coefficient membership or images of monic hypersurfaces, not a triangular prime chart with its finite evaluation map and exact contracted ideal"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial, Ideal.comap",
+   "results": "Actual msearch result: 1 hits; MvPolynomial.mem_ideal_of_coeff_mem_ideal",
+   "date": "2026-10-22",
+   "verdict": "no match: the results give ordinary normalization, coefficient membership or images of monic hypersurfaces, not a triangular prime chart with its finite evaluation map and exact contracted ideal"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonzero prime in a polynomial ring over a field admits a triangular automorphism and a monic polynomial in the prime such that replacing the last coordinate by that polynomial is finite and contracts the prime to p plus the last variable",
+   "results": "Actual msearch result: 8 hits; Polynomial.generalizedEisenstein, MvPolynomial.finite_universalFactorizationMap, Polynomial.UniversalFactorizationRing.presentation, NumberField.Ideal.liesOver_primesOverSpanEquivMonicFactorsMod_symm, Polynomial.instFinitePresentationUniversalFactorizationRing, NumberField.Ideal.primesOverSpanEquivMonicFactorsMod_symm_apply_eq_span, Polynomial.UniversalCoprimeFactorizationRing.exists_liesOver_residueFieldMap_bijective, Polynomial.exists_image_comap_of_monic",
+   "date": "2026-10-22",
+   "verdict": "no match: the results give ordinary normalization, coefficient membership or images of monic hypersurfaces, not a triangular prime chart with its finite evaluation map and exact contracted ideal"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Refined Noether normalization first induction step: nonzero prime ideal becomes monic under triangular shear and a finite evaluation map has contraction p[T] plus T",
+   "results": "Actual msearch result: 8 hits; Polynomial.exists_monic_aeval_eq_zero_forall_mem_pow_of_mem_map, Polynomial.exists_monic_aeval_eq_zero_forall_mem_of_mem_map, exists_integral_inj_algHom_of_quotient, LinearMap.exists_monic_and_coeff_mem_pow_and_aeval_eq_zero_of_range_le_smul, Polynomial.exists_monic_aeval_eq_zero_forall_mem_pow_of_isIntegral, Polynomial.exists_image_comap_of_monic, Ideal.exists_coeff_mem_comap_sdiff_comap_of_root_mem_sdiff, Polynomial.idealSpan_range_update_divByMonic",
+   "date": "2026-10-22",
+   "verdict": "no match: the results give ordinary normalization, coefficient membership or images of monic hypersurfaces, not a triangular prime chart with its finite evaluation map and exact contracted ideal"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A triangular polynomial automorphism makes a polynomial in a nonzero prime monic in the last variable and substitution of that monic polynomial defines a finite ring map with contracted prime p[T]+(T)",
+   "results": "8 hits: MvPolynomial.finite_universalFactorizationMap, NoetherNormalization.T1, Polynomial.instFinitePresentationUniversalFactorizationRing, Polynomial.instEtaleUniversalCoprimeFactorizationRing, MvPolynomial.finitePresentation_universalFactorizationMap, Polynomial.exists_image_comap_of_monic, Polynomial.UniversalCoprimeFactorizationRing.exists_liesOver_residueFieldMap_bijective, Polynomial.UniversalCoprimeFactorizationRing.factor₂; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected results provide shear maps, ordinary normalization or monic hypersurface images, not the full specified finite prime-coordinate chart"
+  },
+  {
+   "tool": "grep",
+   "query": "T_leadingcoeff_isUnit|refinedNoether|monic.*comap|comap.*monic",
+   "results": "12 hits: Mathlib/RingTheory/IsAdjoinRoot.lean, Mathlib/RingTheory/IsAdjoinRoot.lean, Mathlib/RingTheory/IsAdjoinRoot.lean, Mathlib/RingTheory/NoetherNormalization.lean, Mathlib/RingTheory/NoetherNormalization.lean, Mathlib/RingTheory/Ideal/MonicSpan.lean, Mathlib/RingTheory/Ideal/GoingUp.lean, Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected results provide shear maps, ordinary normalization or monic hypersurface images, not the full specified finite prime-coordinate chart"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A monic polynomial in a nonzero polynomial prime defines a finite substitution map whose contracted ideal is p[T] plus T",
+   "results": "8 hits: Polynomial.modByMonicHom, Ideal.isPrime_map_C_of_isPrime, Polynomial.Monic.irreducible_of_irreducible_map_of_isPrime_nilradical, Polynomial.IsMonicOfDegree.aeval_sub, Polynomial.MonicDegreeEq.map, Polynomial.ker_modByMonicHom, Polynomial.Monic.isPrimitive, NoetherNormalization.T1; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected results provide shear maps, ordinary normalization or monic hypersurface images, not the full specified finite prime-coordinate chart"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial, Ideal.comap",
+   "results": "1 hits: MvPolynomial.mem_ideal_of_coeff_mem_ideal; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected results provide shear maps, ordinary normalization or monic hypersurface images, not the full specified finite prime-coordinate chart"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Refined Noether normalization at a prime ideal, with triangular coordinate change, explicit power basis spanning set for the monic evaluation map, and prime contraction equal to p plus the final variable",
+   "results": "8 hits: Algebra.QuasiFiniteAt, Algebra.ZariskisMainProperty, Algebra.ZariskisMainProperty.of_isIntegral, Algebra.zariskisMainProperty_iff', Ideal.exists_not_mem_forall_mem_of_ne_of_liesOver, Algebra.zariskisMainProperty_iff, exists_integral_inj_algHom_of_quotient, Algebra.ZariskisMainProperty.trans; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected results provide shear maps, ordinary normalization or monic hypersurface images, not the full specified finite prime-coordinate chart"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-refined-noether-normalization-prime",
+  "date": "2026-10-22",
+  "group": "Q133"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Tag 051P (lemma-refined-Noether-normalization), nonzero-prime induction: triangular automorphism, monic last coordinate, finite map, and contraction pC+(y_n); helper is Tag 051N, already represented by lem-trf-polynomial-shear-leading-coefficient. This is the affine polynomial-chart ingredient of the ancestor’s recorded 057K–057L/057S route.",
+   "via": [
+    "lem-trf-refined-noether-normalization-prime",
+    "lem-trf-refined-quasi-finite-polynomial-pure-transcendental",
+    "lem-trf-etale-finite-smooth-local-structure",
+    "lem-trf-elementary-module-devissage",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-monic-prime-coordinate-chart",
+  "worker": "stage1",
+  "summary": "Reused the existing 051N shear lemma; checked the proper-prime nonconstancy hypothesis, wrote inverse substitutions, an explicit strong induction proving finite generation, and both directions of the constant-coefficient contraction criterion. No new nodes or statement changes. Project attachment and logged Mathlib searches find no exact full result.",
+  "blueprint": "lem-trf-local-term-locality, specialization/normal-cone argument (1)-(2), via its recorded 057K--057L/057S flattening route: the refined Noether normalization 051P helper serving the nonzero-prime polynomial chart. The latest ancestor proof and unit were read; this is a below-unit algebraic refinement, not a change to the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-0d130f48c",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-0d130f48c (reviewer sub-agent of L); spot-checked: I read Stacks algebra.tex 051P (lemma-refined-Noether-normalization, the paragraph on a nonzero prime with r<n) and 051N (lemma-helper-polynomial). The item's statement is that paragraph made explicit, unchanged from live, where the item is still unsplit with no proof, and it does not weaken the source. Step 1: properness of q rules out g being a nonzero constant, so the shear lemma applies with R=k; that lemma is in the item's own unit sk-i-curve-zero and gives exactly the e_i, d, a and b_j used. Step 2: the inverse is checked on every generator, uniqueness comes from def-weil-pbc-mv-polynomial-ring, and a is a unit because k is a field, so f is monic of degree d>0. Step 3: q*=sigma(q) is prime and contains f. Step 4: the strong induction is set up properly (base m<d; exponents m-d and m-d+j are both <m), and grouping by x_n-degree gives the d generators, i.e. finiteness. Steps 5-6: psi(H)=iota(h_0)+f*(...), f is in q*, and evaluation at y_n=0 gives both inclusions of pC+(y_n). Edge cases: n=1 (p=0, contraction (y_1)), F_2 with q=(x_1) and f=x_1+x_2 (p=0, contraction (y_2)), and d=1. The rg -L search found no duplicate; the parent's steps 2-3 use exactly these outputs. No new nodes, proof_deps equals the union of the step uses, blueprint from/same_as are filled, no SGA, no changes and no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.MonicPrimeCoordinateChart",
+  "declaration": "Algebra.exists_monic_prime_coordinate_chart",
+  "file": "lean/Sheaf/TraceFormula/MonicPrimeCoordinateChart.lean",
+  "statement": "theorem exists_monic_prime_coordinate_chart (k : Type u) [Field k] (m : ℕ) (q : Ideal (MvPolynomial (Fin (m + 1)) k)) [q.IsPrime] (hq : q ≠ ⊥) (g : MvPolynomial (Fin (m + 1)) k) (hg : g ≠ 0) (hgq : g ∈ q) : ∃ (e : Fin m → ℕ) (a : k) (d : ℕ) (sigma : MvPolynomial (Fin (m + 1)) k ≃ₐ[k] MvPolynomial (Fin (m + 1)) k) (f : MvPolynomial (Fin (m + 1)) k) (F : Polynomial (MvPolynomial (Fin m) k)) (qStar : Ideal (MvPolynomial (Fin (m + 1)) k)) (psi : Polynomial (MvPolynomial (Fin m) k) →ₐ[k] MvPolynomial (Fin (m + 1)) k) (p : Ideal (MvPolynomial (Fin m) k)), (∀ i : Fin m, 0 < e i) ∧ a ≠ 0 ∧ 0 < d ∧ (∀ i : Fin m, sigma (MvPolynomial.X i.castSucc) = MvPolynomial.X i.castSucc + MvPolynomial.X (Fin.last m) ^ e i) ∧ sigma (MvPolynomial.X (Fin.last m)) = MvPolynomial.X (Fin.last m) ∧ (∀ i : Fin m, sigma.symm (MvPolynomial.X i.castSucc) = MvPolynomial.X i.castSucc - MvPolynomial.X (Fin.last m) ^ e i) ∧ sigma.symm (MvPolynomial.X (Fin.last m)) = MvPolynomial.X (Fin.last m) ∧ f = MvPolynomial.C a⁻¹ * sigma g ∧ F.Monic ∧ F.natDegree = d ∧ Polynomial.aevalTower (MvPolynomial.rename Fin.castSucc) (MvPolynomial.X (Fin.last m)) F = f ∧ qStar = Ideal.map sigma.toRingHom q ∧ qStar.IsPrime ∧ f ∈ qStar ∧ psi = Polynomial.aevalTower (MvPolynomial.rename Fin.castSucc) f ∧ psi.toRingHom.Finite ∧ (∀ h : MvPolynomial (Fin (m + 1)) k, ∃ c : Fin d → Polynomial (MvPolynomial (Fin m) k), h = ∑ j : Fin d, psi (c j) * MvPolynomial.X (Fin.last m) ^ (j : ℕ)) ∧ p = Ideal.comap (MvPolynomial.rename Fin.castSucc).toRingHom qStar ∧ p.IsPrime ∧ Ideal.comap psi.toRingHom qStar = Ideal.map Polynomial.C p ⊔ Ideal.span {Polynomial.X} ∧ (∀ H : Polynomial (MvPolynomial (Fin m) k), psi H ∈ qStar ↔ Polynomial.eval 0 H ∈ p)",
+  "branch": "sheaf-dag",
+  "by": "Q26",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6004c5b75",
+  "group": "Q26",
+  "result": "pass",
+  "note": "Node unchanged from live except the new lean record. Every clause matches: k-algebra automorphism sigma and its inverse fixed on all generators; e_i>0, a≠0, d>0; f = C a⁻¹ * sigma g, monic of degree d in the last variable via the unique F over B with aevalTower(rename castSucc, X last) F = f; qStar = map sigma q, prime, f ∈ qStar; psi = aevalTower(rename castSucc) f, RingHom.Finite, spanned by x_n^j for j<d; p = comap rename qStar, prime; comap psi qStar = map C p ⊔ span{X}; for all H, psi H ∈ qStar ↔ eval 0 H ∈ p. No extra hypotheses (q≠⊥ is in the node). Edge cases n=1 (m=0), d=1, char 2 OK; single universe u. Docstrings have source place, blueprint tag and six proof steps; no defs, only sorry; only Mathlib notions; no duplicate found. Non-public import of the shear-lemma module exists in live with the same convention and is unused in the statement. Report has both sections. Not recompiled (no file changed); worker dry run compiled with only the sorry warning."
+ }
+}

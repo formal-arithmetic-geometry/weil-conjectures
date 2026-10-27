@@ -1,0 +1,161 @@
+{
+ "id": "lem-pur-integral-line-chain-evaluations",
+ "kind": "statement",
+ "title": "Chain evaluations and triangle for opposite signed integral lines",
+ "statement": "Let ℓ be prime, E a finite-dimensional field extension of ℚ_ℓ, and X a scheme. Let R be the completed integral coefficient sheaf on the small pro-etale site of X, L a locally free rank-one R-module sheaf, and e a family of opposite signed-power sheaf evaluation isomorphisms satisfying EvaluationFormula of [def-pur-integral-line-reduction-data]. For m an integer, let C_m be the functor on all unbounded cochain complexes sending P to the recorded total tensor P ⊗ power(L,m)[0]. There are natural chain isomorphisms a:C_m ⋙ C_{-m} ≅ Id and b:C_{-m} ⋙ C_m ≅ Id. In every degree and on every object of the site, a sends the total-tensor generator ((x⊗y)⊗z) to e(m)(y⊗z)•x, and b sends it to reverseEvaluation(e,m)(y⊗z)•x. They satisfy C_m(a_P inverse) followed by b_{C_m(P)} = identity for every unbounded cochain complex P. This statement concerns chain complexes only; it makes no assertion about derived tensor, localization comparisons, completeness or finite reduction.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+  "place": "Proof (3), final two sentences: the termwise invertible-line cancellation before passing to the derived category",
+  "also": [
+   {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 0B8N and 0B8Q: evaluation and tensor equivalence for locally free rank-one module sheaves"
+   },
+   {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU: total tensor with a flat module in degree zero"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pur-integral-line-reduction-data"
+ ],
+ "proof": [
+  {
+   "text": "Compare the sheafification of the sectionwise tensor with the canonical monoidal tensor by tensorObjIsoSheafification and siteTensorRightIso. Naturality of the sheafification unit proves that this comparison takes the canonical pure tensor to siteSheafTensorTmul. Define the ordinary cancellation as reassociation, this comparison followed by the prescribed e, and the right unitor. The existing cancellation_pure calculation gives e(y tensor z) times x on every pure triple.",
+   "uses": [
+    "def-pur-integral-line-reduction-data",
+    "lem-pur-sheaf-line-evaluation-inverse-pair",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a positive exponent, the signed-line theorem gives rank one. Its finite locally free cover supplies the covering-sieve hypothesis of the line inverse-pair theorem, by pulling each chart to every object in its generated sieve. Pure-tensor extensionality and EvaluationFormula identify the positive evaluation with functional evaluation, and the negative evaluation with braiding followed by that evaluation. Apply the existing tensor_triangles calculation. For a negative exponent package the first triangle as a tensor equivalence and use the first triangle of its symmetric equivalence. At exponent zero, pure-tensor extensionality identifies evaluation with the right unitor of the coefficient unit; monoidal coherence proves the triangle. In these three integer cases reverseEvaluation reduces to the indicated opposite evaluation.",
+   "uses": [
+    "lem-weil-signed-line-tensor-equivalence",
+    "lem-pur-sheaf-line-evaluation-inverse-pair",
+    "def-pur-integral-line-reduction-data",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the existing map₂HomologicalComplexFlipObjSingleIso to collapse each total tensor by a degree-zero line to termwise tensor. The inclusion of bidegree (i,0) followed by this collapse is tensor of the identity with singleObjXSelf.hom: unfold the single-summand projection and cancel the flip. Consequently the collapse sends coefficientTensorGenerator(x,y) to the canonical pure tensor (x,y). Whisker the two collapses and compose with mapHomologicalComplexCompIso of the ordinary cancellation and mapHomologicalComplexIdIso. Its action on a nested generator follows by applying the outer collapse, naturality of pure tensor under the inner collapse, and the ordinary cancellation formula.",
+   "uses": [
+    "def-pur-integral-line-reduction-data",
+    "lem-pur-sheaf-line-evaluation-inverse-pair",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Package the ordinary cancellations and the proved first triangle as an equivalence. Apply Equivalence.mapHomologicalComplex, then changeFunctor and changeInverse using the two collapse isomorphisms. Its inverse unit is the lifted first cancellation. Naturality of the first collapse identifies its counit with the lifted reversed cancellation. The functor_unit_comp triangle of this transported equivalence is exactly the required chain triangle. This is an identity of unbounded complexes, and no derived localization, flatness comparison, or representative hypothesis is needed.",
+   "uses": [
+    "lem-pur-sheaf-line-evaluation-inverse-pair",
+    "def-pur-integral-line-reduction-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "M8",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+  "place": "Proof (3), final two sentences; ordinary canonical cancellations lifted through the existing BifunctorSingle collapse."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Opposite powers of an invertible sheaf cancel on cochain complexes and the evaluation maps satisfy triangle identities",
+   "results": "CochainComplex.homotopyOp, opEquivalence, homotopyOpEquiv, homotopyUnop, shiftEval; HomologicalComplex.opEquivalence_inverse and unopUnitIso; sheafSectionsNatIsoEvaluation_inv_app. No normalized sheaf tensor cancellation.",
+   "date": "2026-10-26",
+   "verdict": "No exact statement. The existing project sheaf inverse-pair theorem supplies the ordinary part, and BifunctorSingle supplies the total-complex collapse."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally free rank one module sheaf and its internal dual induce inverse tensor functors on unbounded cochain complexes with evaluation on pure generators",
+   "results": "HomologicalComplex.rightUnitor, leftUnitor, rightUnitor'_inv, leftUnitor'_inv; SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply, ιFree_mapFree_inv, freeHomEquiv_symm_comp; LightCondensed.instMonoidalLightCondSetLightCondModFree.",
+   "date": "2026-10-26",
+   "verdict": "The unit constraints and free-module maps are ingredients, not the normalized signed-line cancellation and its triangle."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.liftNatIso",
+   "results": "Localization.liftNatIso and its hom/inv equations. These concern localization only, not the chain-level sheaf pairing.",
+   "date": "2026-10-26",
+   "verdict": "Use in the parent only. The chain statement is a separate pre-localization obligation."
+  },
+  {
+   "tool": "grep",
+   "query": "DerivedEvaluationFormula|line.*cancellation|cancellation.*line; EvaluationFormula in IntegralLine modules; blueprint_refs.py search line cancellation",
+   "results": "No blueprint node matches line cancellation. IntegralLinePowerComparisons constructs the sheaf pairings but no chain evaluations. LineEvaluationInversePair has canonical ordinary dual pairings and triangle identities. BifunctorSingle has map₂HomologicalComplexFlipObjSingleIso. No existing signed-line chain formula in this tensor presentation.",
+   "date": "2026-10-26",
+   "verdict": "A strictly simpler chain-only substep is needed; it contains no derived representative normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralLineNormalizedEvaluations",
+  "date": "2026-10-26",
+  "group": "S9"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-def-sp-tate-twist-locally-free",
+   "place": "Proof (3), final two sentences: chain evaluation and its triangle before derived localization",
+   "via": [
+    "lem-pur-integral-line-normalized-evaluations",
+    "lem-pur-integral-line-restrictions",
+    "lem-pur-integral-line-reduction-restriction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralLineChainEvaluations",
+  "file": "lean/Sheaf/Paper/IntegralLineChainEvaluations.lean",
+  "declaration": "WeilConjectures.IntegralLineReduction.integral_line_chain_evaluations",
+  "declarations": [
+   "WeilConjectures.IntegralLineReduction.chainTensor",
+   "WeilConjectures.IntegralLineReduction.ChainEvaluationFormula",
+   "WeilConjectures.IntegralLineReduction.integral_line_chain_evaluations"
+  ],
+  "statement": "theorem integral_line_chain_evaluations\n    (L : scalarReductionSource.{u, u} l E X) [L.IsFiniteLocallyFreeOfRank 1]\n    (e : Evaluations l E X L) (he : EvaluationFormula l E X L e) (m : ℤ) :\n    ∃ (a : chainTensor l E X L m ⋙ chainTensor l E X L (-m) ≅ 𝟭 (Cx.{u, u} l E X none))\n      (b : chainTensor l E X L (-m) ⋙ chainTensor l E X L m ≅ 𝟭 (Cx.{u, u} l E X none)),\n      ChainEvaluationFormula l E X L m (-m) (e m) a ∧\n      ChainEvaluationFormula l E X L (-m) m (reverseEvaluation l E X L e m) b ∧\n      ∀ P : Cx.{u, u} l E X none,\n        (chainTensor l E X L m).map (a.inv.app P) ≫\n          b.hom.app ((chainTensor l E X L m).obj P) = 𝟙 _",
+  "branch": "sheaf-dag",
+  "by": "S9",
+  "date": "2026-10-26"
+ },
+ "proof_deps": [
+  "def-pur-integral-line-reduction-data",
+  "lem-pur-sheaf-line-evaluation-inverse-pair",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-weil-signed-line-tensor-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261026T002712-L-109472",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M8",
+  "result": "pass",
+  "landing": "20261026T070319-L-3537864",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

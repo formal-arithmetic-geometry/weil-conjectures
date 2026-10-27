@@ -43,9 +43,8 @@
    }
   },
   {
-   "text": "Assume (1). Choose an affine open cover S=⋃_j B_j using [lem-weil-pbc-affine-opens-basis]. For each j, apply the same basis statement to the open subscheme f^{-1}(B_j) to obtain an affine open cover f^{-1}(B_j)=⋃_i A_{ji}. The restriction [lem-weil-pbc-lqf-restriction-to-opens] of a locally quasi-finite morphism to these open subschemes is locally quasi-finite, so every A_{ji}->B_j is locally quasi-finite. This is (3).",
+   "text": "Assume (1). For (3), choose singleton index types for both coverings, with the entire target as B and the entire source as A. Both union identities hold, including for empty schemes. Apply [lem-weil-pbc-lqf-restriction-to-opens] to the canonical restriction to these whole opens.",
    "uses": [
-    "lem-weil-pbc-affine-opens-basis",
     "lem-weil-pbc-lqf-restriction-to-opens"
    ],
    "elementary": false,
@@ -55,11 +54,11 @@
    }
   },
   {
-   "text": "Assume (3) and let x be any point of X. Choose j with f(x) in B_j and then i with x in A_{ji}. Since A_{ji}->B_j is locally quasi-finite, [pqf-def-quasifinite] supplies affine neighbourhoods inside these opens whose induced ring map is finite type and quasi-finite at the prime of x. The same neighbourhoods are open subschemes of X and S, so they witness that f is quasi-finite at x. Hence f is locally quasi-finite, proving (1).",
+   "text": "Assume (3). For each x choose j with f(x) in B_j using the target union identity, then i with x in A_ji using the source union identity. The existing comparison Scheme.Hom.isLocallyQuasiFinite_iff (in WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphismComparison, comparing the predicates of [pqf-def-quasifinite]) gives Mathlib LocallyQuasiFinite and LocallyOfFiniteType on this resLE. Apply Mathlib IsZariskiLocalAtSource.iff_exists_resLE separately to both properties, then combine them by the same comparison to obtain (1). For finite type, the post-composition-with-open-immersions instance is supplied locally from the finite-type composition and open-immersion instances. This is the source-and-target locality argument of Stacks 01TK.",
    "uses": [
     "pqf-def-quasifinite"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
     "place": "Tag 01TK, proof of (3) => (1), by unpacking Definition 01TD on the covering pieces."
@@ -78,7 +77,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Morphisms, Lemma Tag 01TK (lemma-locally-quasi-finite-characterize), equivalences (1), (2), (3), with Tag 01TH and Tag 01T2 for the point and finite-type criteria."
+  "place": "Morphisms, Lemma Tag 01TK (lemma-locally-quasi-finite-characterize), equivalences (1), (2), (3), with Tag 01TH and Tag 01T2 for the point and finite-type criteria. Formal implementation: the forward covering implication uses the trivial whole-open coverings; the reverse uses the already proved Stacks/Mathlib comparison and Mathlib source-and-target locality separately for quasi-finiteness and finite type."
  },
  "mathlib_searches": [
   {
@@ -228,5 +227,26 @@
   "date": "2026-10-18",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261023T103141-L-3061327",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

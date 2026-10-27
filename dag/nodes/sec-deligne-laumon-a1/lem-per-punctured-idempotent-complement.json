@@ -232,22 +232,39 @@
  },
  "lean": {
   "module": "Sheaf.RingTheory.PuncturedIdempotentComplement",
-  "declaration": "RingTheory.exists_punctured_idempotent_complement",
+  "declaration": "RingHom.exists_surjective_complement_of_localization_idempotent",
   "file": "lean/Sheaf/RingTheory/PuncturedIdempotentComplement.lean",
-  "statement": "theorem exists_punctured_idempotent_complement {R : Type u} [CommRing R] {E : Type v} [CommRing E] (K : Ideal R) (hK : K.FG) (u : R →+* E) (hlocal : ∀ f ∈ K, ∃ e : Localization.Away f, IsIdempotentElem e ∧ @IsLocalization.Away (Localization.Away f) _ e (Localization.Away (u f)) _ (Localization.awayMap u f).toAlgebra) : ∃ (E' : Type u) (_ : CommRing E') (v : R →+* E'), Function.Surjective v ∧ ∀ f ∈ K, Function.Bijective (Localization.awayMap (u.prod v) f)",
-  "branch": "newtargets-dag",
-  "by": "Q131",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.RingTheory.PuncturedIdempotentComplement deleted (dead: no target reaches it); this node is not reached either."
+  "statement": "theorem exists_surjective_complement_of_localization_idempotent {R : Type u} [CommRing R] {E : Type v} [CommRing E] (K : Ideal R) (hK : K.FG) (u : R →+* E) (hlocal : ∀ f ∈ K, ∃ e : Localization.Away f, IsIdempotentElem e ∧ @IsLocalization.Away (Localization.Away f) _ e (Localization.Away (u f)) _ (Localization.awayMap u f).toAlgebra) : ∃ (E' : Type u) (_ : CommRing E') (v : R →+* E'), Function.Surjective v ∧ ∀ f ∈ K, Function.Bijective (Localization.awayMap (u.prod v) f)",
+  "branch": "sheaf-dag",
+  "by": "NB",
+  "date": "2026-10-24",
+  "existing": false
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-32e8cc3b1",
-  "group": "Q131",
+  "reviewer": "NT-stage2-cc-0db17b2b6",
+  "group": "NB",
   "result": "pass",
-  "note": "Lean matches node/Stacks 0C2A clause by clause: K.FG covers r=0; the hypothesis is for every f in K, with IsLocalization.Away e over the algebra from awayMap u f (the given map, not an unrelated one); the conclusion is a surjective v : R ->+* E' (E' : Type u, fine since E'=R/J) with awayMap (u.prod v) f bijective for every f in K. No extra hypotheses; universes u,v independent and bound. Edge cases r=0, f=0, e=0/1, K=top, zero ring covered. Only the lean field changed vs live node; statement verbatim in file. Imports: public statement imports + 3 proof-dep modules (rule 7). No existing declaration found. No definitions; sorry only; docstrings have source/blueprint and all 8 steps; lines <=100. nt_compile --json clean (1.8 s); broken control copy errors as expected. Report has Worker report + Second reading placeholder. No findings."
+  "note": "Re-delivery after lean_removed (dead module 8a6a58ff1c5); live node lean:null and file absent, so not a rebind. The node diff touches only lean. The Lean matches Stacks 0C2A and the node clause by clause: K.FG (r=0 allowed); forall f in K an idempotent e with IsLocalization.Away e over the (awayMap u f).toAlgebra structure; a surjective v : R ->+* E' with E' : Type u (harmless, E'=R/J); Bijective (awayMap (u.prod v) f) for all f in K. No extra hypotheses; universes bound; statement verbatim. Edge cases K=0, f nilpotent or 0, zero ring, K=top, e=0/1 and u not surjective are covered. sorry only, no defs. Source and blueprint docstrings with 8 steps. Public statement imports plus private proof-dep imports (CoverModuleExact exists in the side tree). Lines <=100. Report has a Worker report and the standard Second reading section. Searches find no existing declaration. No findings; no recompile because nothing changed."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean_removed": {
+  "commit": "8a6a58ff1c5",
+  "path": "lean/Sheaf/RingTheory/PuncturedIdempotentComplement.lean",
+  "module": "Sheaf.RingTheory.PuncturedIdempotentComplement",
+  "declaration": "RingTheory.exists_punctured_idempotent_complement",
+  "reason": "dead module deleted (no target reaches it by imports, node not reached); the declaration survives nowhere in Sheaf or Mathlib, so the node has no Lean statement"
+ }
 }

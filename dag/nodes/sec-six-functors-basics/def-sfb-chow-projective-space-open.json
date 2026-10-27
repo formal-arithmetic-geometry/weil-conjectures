@@ -1,0 +1,143 @@
+{
+ "id": "def-sfb-chow-projective-space-open",
+ "kind": "definition",
+ "title": "Projective space over an affine base and its open inclusion",
+ "status": "split",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $A$ be a commutative ring and $n\\geq0$. In the category of schemes [def-pc-scheme] over $\\operatorname{Spec}A$, define $P=\\mathbf P^n_A=\\operatorname{Proj}(A[x_0,\\ldots,x_n])$ with its canonical structure morphism, using [def-pc-projective-space-twist]. For every open subset $V\\subset P$, define the corresponding open subscheme over $\\operatorname{Spec}A$ by the composite $V\\hookrightarrow P\\to\\operatorname{Spec}A$. Regard both schemes as their Yoneda algebraic spaces by [def-trf-scheme-algebraic-space]. Define their inclusion to be the actual morphism of these representable sheaves induced by the open immersion $V\\hookrightarrow P$.",
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-pc-projective-space-twist",
+  "def-trf-scheme-algebraic-space"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0CTR, lemma-derived-chow, projective space and open V; Tag 0CTS, lemma-compute-Fourier-Mukai-for-derived-chow, the same open inclusion."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "chowProjectiveSpace|chowProjectiveOpen|chowProjectiveOpenInclusion",
+   "results": "0 hits. ",
+   "date": "2026-10-23",
+   "verdict": "No matching packaged definition in Mathlib; reuse the three existing project definitions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projective space over Spec A as a scheme over the base and its open subscheme inclusion as an algebraic space morphism",
+   "results": "8 hits. AlgebraicGeometry.Scheme.Opens.instIsOverι, AlgebraicGeometry.Scheme.Opens.ι, AlgebraicGeometry.IsAffineOpen.isOpenImmersion_fromSpec, AlgebraicGeometry.IsAffineOpen.fromSpec, AlgebraicGeometry.Proj, AlgebraicGeometry.Scheme.isOpenImmersion_SpecMap_localizationAway, AlgebraicGeometry.Proj.instIsOpenImmersionAwayι, AlgebraicGeometry.Scheme.Opens.instIsOpenImmersionι",
+   "date": "2026-10-23",
+   "verdict": "No matching packaged definition in Mathlib; reuse the three existing project definitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projective space over Spec A with n+1 homogeneous coordinates, open subscheme and Yoneda open inclusion",
+   "results": "8 hits. AlgebraicGeometry.Proj.awayι, AlgebraicGeometry.Proj, AlgebraicGeometry.Proj.basicOpenToSpec, AlgebraicGeometry.ProjIsoSpecTopComponent.fromSpec, AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec, AlgebraicGeometry.Proj.toSpecZero, AlgebraicGeometry.Proj.basicOpenIsoSpec, AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections",
+   "date": "2026-10-23",
+   "verdict": "No matching packaged definition in Mathlib; reuse the three existing project definitions."
+  },
+  {
+   "tool": "rg",
+   "query": "chowProjectiveSpace|chowProjectiveOpen|chowProjectiveOpenInclusion in lean/WeilConjectures and lean/Sheaf",
+   "results": "No upstream match; Sheaf/AlgebraicGeometry/SpaceDerivedChowTransformRestriction.lean defines exactly the three helpers at lines 52, 58 and 65.",
+   "date": "2026-10-23",
+   "verdict": "existing"
+  },
+  {
+   "tool": "rg",
+   "query": "chowProjectiveSpace|chowProjectiveOpen|chowProjectiveOpenInclusion in dag/nodes",
+   "results": "Only lem-sfb-space-derived-chow-transform-restriction.json names these declarations; no definition node owns them.",
+   "date": "2026-10-23",
+   "verdict": "new definition-node ownership required"
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "chowProjective",
+   "results": "0 blueprint nodes match 'chowProjective'",
+   "date": "2026-10-23",
+   "verdict": "no existing blueprint definition node"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-derived-chow-neighbourhood",
+  "date": "2026-10-23",
+  "group": "NK"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect pseudo-coherent tensor tests on flat algebraic spaces. Supporting input: Tag 0CTT, lemma-characterize-pseudo-coherent. Supporting proof input: 0CTT proof, choose n,Z,z,V,E using derived Chow. Definition input: projective space P, its open V and the actual inclusion in the derived Chow neighbourhood.",
+   "via": [
+    "lem-sfb-space-derived-chow-neighbourhood",
+    "lem-sfb-space-pseudocoherent-tests-relative",
+    "lem-sfb-space-perfect-tests-pseudocoherence",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceDerivedChowTransformRestriction",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.chowProjectiveSpace",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.chowProjectiveSpace",
+   "AlgebraicGeometry.AlgebraicSpace.chowProjectiveOpen",
+   "AlgebraicGeometry.AlgebraicSpace.chowProjectiveOpenInclusion"
+  ],
+  "statement": "def chowProjectiveSpace (A : CommRingCat.{u}) (n : ℕ) : Over (Spec A)",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Owns the three existing definitions independently of the derived_chow_transform_restriction theorem. The module and all declarations remain unchanged. The definition bodies use ProjectiveSpace, its canonical structure map, Scheme.Opens.ι, and the actual Yoneda map; they do not use or choose from the theorem."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c26e4b805",
+  "group": "NK",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c26e4b805",
+  "group": "NK",
+  "result": "pass",
+  "note": "Re-delivery after the 77ce RETURN (theorem stmt_dep used only for plain defs). Item Lean byte-identical (sha256 1dcb7045…), and the item node differs from 77ce only in stmt_deps: theorem lem-sfb-space-derived-chow-transform-restriction replaced by new def node def-sfb-chow-projective-space-open. The new node is existing:true on SpaceDerivedChowTransformRestriction and owns chowProjectiveSpace/chowProjectiveOpen/chowProjectiveOpenInclusion. These are real defs (Over.mk ProjectiveSpace (ULift (Fin (n+1))) ↘ Spec A, the open with composite structure map, yoneda.map of V.ι) that do not use the theorem. Its statement describes them, its stmt_deps are adequate and its signature is verbatim. No other def node owns the names. Theorem record co-listing has precedent (def-sfb-rational-localizing-twist). Re-verified every clause against 0CTR (1)-(5)/0CTS: relative diagonal closed, qc, qs, lfp on charts, BinaryFan product, closed fp h, both pullbacks over V, closed fp j, etale b|W, existence-only point, IsPseudoCoherent, all-degree support in pointImage h, iso after restriction over the whole X×V. No extra hypotheses; edge cases fine; proof sorry; docstrings and report sections present. No compile (no change). Advisory: helper docstrings tag the theorem's blueprint; ProjectiveSpace is owned by def-nagata-projective-space-base-change not def-pc-projective-space-twist; MapIsSeparated/MapIsLocallyOfFinitePresentation form optional."
+ }
+}

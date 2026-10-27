@@ -1,0 +1,132 @@
+{
+ "id": "lem-sf-integral-ordinary-pullback-comparison",
+ "kind": "statement",
+ "title": "Invertibility of the ordinary ringed pullback completion map",
+ "statement": "Fix a prime l and a finite extension E of Q_l, using the completed coefficients of [def-pur-integral-compact-support-coefficient-data]. For a morphism f:X→Y of Noetherian finite-dimensional schemes on which l is a unit in global sections, let pullIso identify the ordinary exact ringed pullback with ordinaryIntegralDerivedPull by equality of their direct coefficient maps and uniqueness of adjoints and total left derived functors. Let pullComparison be pullIso followed by ordinaryIntegralCompletionComparison from [lem-tw-ordinary-completed-integral-pullback]. For every integral constructible K on Y, pullComparison at K is invertible.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Integral reconstruction; tensor and pullback normalization before forming the proper counit projection"
+ },
+ "stmt_deps": [
+  "def-pur-integral-compact-support-coefficient-data",
+  "lem-tw-ordinary-completed-integral-pullback"
+ ],
+ "proof": [
+  {
+   "text": "The two direct coefficient maps have the same composite with every quotient projection, so uniqueness identifies them. Their module direct images are naturally isomorphic. Uniqueness of left adjoints identifies the module pullbacks. The exact ringed pullback makes the ordinary pullback exact, so its exact localization is its total left derived functor. Uniqueness of derived functors constructs pullIso.",
+   "uses": [
+    "def-pur-integral-compact-support-coefficient-data",
+    "lem-tw-ordinary-completed-integral-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The specified ordinary completion comparison is invertible on K by ordinaryCompletedIntegralPullback. Compose with pullIso to get the assertion.",
+   "uses": [
+    "lem-tw-ordinary-completed-integral-pullback"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-integral-compact-support-coefficient-data",
+  "lem-tw-ordinary-completed-integral-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Integral reconstruction; tensor and pullback normalization before forming the proper counit projection"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor completion comparison commutes with ordinary derived pullback on constructible sheaves",
+   "results": "8 hits, including SheafOfModules.pullbackComp, pullbackIso and pullbackObjFreeIso. No completed tensor augmentation square.",
+   "date": "2026-10-27",
+   "verdict": "Use the project completion and representative normalization declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "12 hits including NatIso.ofComponents and its hom/inv component equations. These construct restrictions of the comparison maps.",
+   "date": "2026-10-27",
+   "verdict": "Useful categorical assembly API, not the coefficient augmentation calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "ComparisonCompatible|ordinaryIntegralCompletionComparison",
+   "results": "Indexed Mathlib search: 0 hits. Local source search finds ordinaryCompletedIntegralPullback, tensorCompletionComparison, tensorComplete_onConstructible and proEtaleCanonicalTensorComparison.",
+   "date": "2026-10-27",
+   "verdict": "Use existing invertibility results; the forward augmentation compatibility needs its own argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralOrdinaryTensorPullbackNormalization",
+  "date": "2026-10-27",
+  "group": "W9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Integral reconstruction; tensor and pullback normalization before forming the proper counit projection",
+   "via": [
+    "lem-sf-integral-ordinary-tensor-pullback-normalization",
+    "lem-sf-integral-projection-operation-presentation",
+    "lem-sf-integral-stage-projection-reduction",
+    "lem-sf-projection-integral-stage-laws",
+    "lem-sf-integral-proper-operation-projection-isomorphism"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralOrdinaryPullbackComparison",
+  "file": "lean/Sheaf/Paper/IntegralOrdinaryPullbackComparison.lean",
+  "declaration": "WeilConjectures.IntegralOrdinary.pullComparison_isIso",
+  "declarations": [
+   "WeilConjectures.IntegralOrdinary.directRing_eq",
+   "WeilConjectures.IntegralOrdinary.pullIso",
+   "WeilConjectures.IntegralOrdinary.pullComparison",
+   "WeilConjectures.IntegralOrdinary.pullComparison_isIso"
+  ],
+  "statement": "theorem pullComparison_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [IsNoetherian X] [IsNoetherian Y]\n    (hXdim : ∃ n : ℕ, topologicalKrullDim X ≤ n)\n    (hYdim : ∃ n : ℕ, topologicalKrullDim Y ≤ n)\n    (hXinv : IsUnit (l : Γ(X, ⊤))) (hYinv : IsUnit (l : Γ(Y, ⊤)))\n    (K : sfIntegralConstructibleCategory l E Y) :\n    IsIso ((pullComparison l E f).app K.obj)",
+  "branch": "sheaf-dag",
+  "by": "W9",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W9",
+  "result": "pass",
+  "landing": "20261027T034806-L-3687251",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W9",
+  "result": "pass",
+  "landing": "20261027T034806-L-3687251",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

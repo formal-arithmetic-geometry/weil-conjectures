@@ -1,0 +1,145 @@
+{
+ "id": "lem-sfb-filtered-flat-tensor-cohomology",
+ "kind": "statement",
+ "title": "Cohomology colimit cocones for bounded flat coefficient tensors",
+ "statement": "Fix a prime $\\ell$, a field $k$ of positive characteristic $p\\ne\\ell$, and separated finite-type $k$-schemes $X,Y$ [sk-def-sfb-dc-setting]. Let $f:X\\to Y$ be a qcqs $k$-morphism. Let $R$ be a commutative condensed ring and use the ordinary internal-module derived categories [sk-def-sfb-condensed-ring, sk-def-sfb-module-derived-pushpull]. Write $L=Lf_R^*$ and $G=Rf_{R*}$ with the specified internal functors of [lem-pd-module-ringed-topos-derived-comparison]. Let $I$ be a small nonempty filtered category, $P:I\\to\\operatorname{Mod}_{R_Y}$ a diagram, and $(C,v)$ a colimit cocone [def-weil-pbc-category-colimit]. Suppose every $P_i$ and $f_R^*P_i$ is flat [def-pc-flat-sheaf-modules], and $K\\in D^+(R_X)$. For each integer $q$, both cocones obtained from $(C,v)$ by the functors $M\\mapsto H^q(GK\\otimes^L M[0])$ and $M\\mapsto H^q(G(K\\otimes^L L(M[0])))$ are colimit cocones in ordinary $R_Y$-modules. In particular their legs are the images of the given $v_i$ under these exact displayed composites; no colimit in the triangulated derived category is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+  "place": "paragraph (1), canonical scalar comparison and filtered coefficient colimits"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-module-derived-pushpull",
+  "lem-pd-module-ringed-topos-derived-comparison",
+  "def-weil-pbc-category-colimit",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof": [
+  {
+   "text": "Transport the given cocone through the exact module/section equivalence of [lem-pd-module-ringed-topos-derived-comparison]. Flatness means exactness of the fixed-factor tensor functor and is preserved by this equivalence. Filtered module colimits are exact and tensor commutes with them by [lem-pc-module-filtered-colimits-tensor]. Consequently their colimit $C$ is flat. The ordinary pullback preserves the colimit by its adjunction; the same argument with the flat pulled stages shows $f_R^*C$ is flat. Represent the bounded-below $K$ by a complex vanishing below some integer $a$.",
+   "uses": [
+    "lem-pd-module-ringed-topos-derived-comparison",
+    "lem-pc-module-filtered-colimits-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+    "place": "paragraph (1), canonical scalar comparison and filtered coefficient colimits"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-bounded-flat-tensor-continuity] to this section-module cocone and bounded representative. Its K-flat representative of $GK$ gives a strict colimit tensor cocone representing the first displayed functor, naturally on every diagram arrow and on every specified cocone leg. Its uniformly bounded strict pulled tensor diagram and functorial K-injective replacement give an invertible localized colimit comparison to $G(K\\otimes^L LC)$, with the legs of the second displayed functor.",
+   "uses": [
+    "lem-sfb-bounded-flat-tensor-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+    "place": "paragraph (1), canonical scalar comparison and filtered coefficient colimits"
+   }
+  },
+  {
+   "text": "By [src-weil-homology-preserves-exact-colimits], homology preserves these exact filtered complex colimits. Apply it to the first strict tensor cocone and to the replacement direct-image cocone; apply homology also to the latter's invertible localized comparison. The representative isomorphisms and their leg equations give the two required colimit cocones. The exact section equivalence reflects colimits and its tensor, pullback, and pushforward comparisons carry each leg back to the internal functors, by [lem-pd-module-ringed-topos-derived-comparison].",
+   "uses": [
+    "src-weil-homology-preserves-exact-colimits",
+    "lem-pd-module-ringed-topos-derived-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+    "place": "paragraph (1), canonical scalar comparison and filtered coefficient colimits"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-filtered-colimits-tensor",
+  "lem-pd-module-ringed-topos-derived-comparison",
+  "lem-sfb-bounded-flat-tensor-continuity",
+  "src-weil-homology-preserves-exact-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+  "place": "paragraph (1), canonical scalar comparison and filtered coefficient colimits"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Filtered colimits of flat coefficient modules commute with cohomology of bounded below derived direct image and derived tensor products",
+   "results": "8 hits: CategoryTheory.Tor'_map_app, Module.Flat.rTensor_shortComplex_exact, CategoryTheory.Tor, CategoryTheory.Tor', Module.Flat.lTensor_shortComplex_exact, Rep.Tor_map, Module.Flat.iff_rTensor_preserves_shortComplex_exact, CategoryTheory.Abelian.Ext.mapExactFunctor_hom",
+   "date": "2026-10-23",
+   "verdict": "No matching geometric statement; generic cocone isomorphism and preservation lemmas are used in the parent proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsColimit, CategoryTheory.Functor.mapCocone",
+   "results": "12 hits: CategoryTheory.Limits.IsColimit.mapCoconeEquiv, CategoryTheory.Limits.IsColimit.ofFaithful, CategoryTheory.Limits.isColimitOfPreserves, CategoryTheory.Limits.isColimitOfReflects, CategoryTheory.Limits.preservesColimit_of_preserves_colimit_cocone, CategoryTheory.Limits.PreservesColimit.mk, CategoryTheory.Limits.PreservesColimit.preserves, CategoryTheory.Limits.ReflectsColimit.mk",
+   "date": "2026-10-23",
+   "verdict": "No matching geometric statement; generic cocone isomorphism and preservation lemmas are used in the parent proof."
+  },
+  {
+   "tool": "grep",
+   "query": "isIso.*colimit|colimit.*isIso",
+   "results": "25 hits: Mathlib/Geometry/RingedSpace/OpenImmersion.lean, Mathlib/Geometry/RingedSpace/OpenImmersion.lean, Mathlib/Geometry/RingedSpace/OpenImmersion.lean, Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean, Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean, Mathlib/AlgebraicGeometry/Gluing.lean, Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean, Mathlib/AlgebraicGeometry/Limits.lean",
+   "date": "2026-10-23",
+   "verdict": "No matching geometric statement; generic cocone isomorphism and preservation lemmas are used in the parent proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Filtered colimits of flat coefficient modules commute with cohomology of bounded below derived direct image and derived tensor products",
+   "results": "8 hits: CategoryTheory.Limits.colimitLimitIso, ModuleCat.FilteredColimits.colimit, ModuleCat.FilteredColimits.colimitCoconeIsColimit, ModuleCat.FilteredColimits.M.mk, ModuleCat.FilteredColimits.colimitCocone, ModuleCat.FilteredColimits.colimitModule, ModuleCat.FilteredColimits.M, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat",
+   "date": "2026-10-23",
+   "verdict": "No match: these concern ordinary module scalar adjunctions or abstract filtered colimits, not the fixed derived internal-module comparisons and their specified cocone legs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientPushFilteredLegs",
+  "date": "2026-10-23",
+  "group": "C5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-coefficient-push-filtered-legs",
+   "place": "paragraph (1), canonical scalar comparison and filtered coefficient colimits",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FilteredFlatTensorCohomology",
+  "file": "lean/Sheaf/Paper/FilteredFlatTensorCohomology.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.filtered_flat_tensor_cohomology_cocones",
+  "statement": "theorem filtered_flat_tensor_cohomology_cocones\n    (ℓ p : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [CharP k p]\n    (hp : 0 < p) (hne : p ≠ ℓ)\n    {X Y : Over (Scheme.Spec.obj (Opposite.op (CommRingCat.of k)))}\n    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]\n    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]\n    (f : X ⟶ Y) [QuasiCompact f.left] [QuasiSeparated f.left]\n    {I : Type (u + 1)} [SmallCategory I] [IsFiltered I]\n    (P : I ⥤ internalModules R Y.left) (c : Cocone P) (hc : IsColimit c)\n    (hP : ∀ i : I, ObjectProperty.flat (P.obj i))\n    (hfP : ∀ i : I, ObjectProperty.flat ((upperStar R f.left).obj (P.obj i)))\n    (K : DerivedCategory (internalModules R X.left)) (hK : ∃ n : ℤ, K.IsGE n) :\n    ∀ q : ℤ,\n      Nonempty (IsColimit\n        ((DerivedCategory.singleFunctor (internalModules R Y.left) 0 ⋙\n          (derivedTensor R Y.left).obj ((internalDerivedPushforward R f.left).obj K) ⋙\n          DerivedCategory.homologyFunctor (internalModules R Y.left) q).mapCocone c)) ∧\n      Nonempty (IsColimit\n        ((DerivedCategory.singleFunctor (internalModules R Y.left) 0 ⋙\n          internalDerivedPullback R f.left ⋙ (derivedTensor R X.left).obj K ⋙\n          internalDerivedPushforward R f.left ⋙\n          DerivedCategory.homologyFunctor (internalModules R Y.left) q).mapCocone c))",
+  "branch": "sheaf-dag",
+  "by": "C5",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C5",
+  "result": "pass",
+  "landing": "20261023T230522-L-3438591",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C5",
+  "result": "pass",
+  "landing": "20261023T230522-L-3438591",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

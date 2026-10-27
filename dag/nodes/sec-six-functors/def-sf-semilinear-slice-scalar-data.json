@@ -1,0 +1,162 @@
+{
+ "id": "def-sf-semilinear-slice-scalar-data",
+ "kind": "definition",
+ "title": "Presentation data for the strict semilinear scalar comparison",
+ "statement": "Let $\\mathcal C$ be a category with Grothendieck topology $J$, let $U\\in\\mathcal C$, and fix a common coefficient universe supporting module sheafification on $J$ and $J/U$, with the locally bijective characterization of sheafification. Fix a sheaf $O$ of commutative rings, a functor $B:\\mathbb N^{\\mathrm{op}}\\to\\operatorname{Sh}(J,\\mathrm{CommRing})$ and a natural transformation $\\alpha:\\operatorname{const}O\\to B$. Use localized extension, scalar restriction, tensors, and strict ring systems as in [lem-pur-site-restriction-module-adjunction-exact], [def-pur-sheaf-tensor-product], [lem-sf-ringed-slice-tensor-generators] and [def-pur-system-level-left-extension-basic]. Define sliceScalarPure to be $b\\otimes x$ followed by the actual module-sheafification unit, and restrict $B,\\alpha$ termwise to $\\mathcal C/U$. A SliceScalarTowerPresentation fixes the actual scalar-extension objects and maps, all pure-tensor transitions, unit insertions and additivity. A SliceSystemExtensionPresentation fixes the actual termwise localized extension, its maps, original-summand transitions and additivity. SemilinearSliceScalarGenerators records these presentations, the natural strict comparison, normalized coefficient-linear components with uniqueness, the summand-preserving scalar identification with uniqueness, the augmentation square and the degreewise unbounded-complex lift. These are the pre-existing data declarations relocated without changing their types or bodies; no existence assertion is made.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI (lemma-extension-by-zero), 03CY (lemma-sheafification-presheaf-modules), 03EK (tensor product of module sheaves) and 0E8I (lemma-j-shriek-and-tensor); the coefficient-generator refinement in lem-sf-semilinear-slice-scalar-generators."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-pur-localized-ringed-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-pur-sheaf-tensor-product",
+  "lem-sf-ringed-slice-tensor-generators",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pc-cochain-complex-modules",
+  "def-pur-system-level-left-extension-basic"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheaf extension of scalars functor along a diagram of coefficient rings with compatible units",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "No generator-normalized slice comparison or sheaf scalar tower.",
+    "top": [
+     "ModuleCat.ExtendScalars.obj'",
+     "ModuleCat.extendScalars",
+     "CommRingCat.moduleCatExtendScalarsPseudofunctor",
+     "ModuleCat.coextendScalars",
+     "SheafOfModules.restrictScalars",
+     "ModuleCat.CoextendScalars.obj'",
+     "ModuleCat.extendRestrictScalarsAdj",
+     "PresheafOfModules.restrictScalars"
+    ],
+    "sub": ""
+   },
+   "date": "2026-10-27",
+   "verdict": "No exact match; use the existing project scalar models."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero of sheaves of modules commutes with restriction of scalars for a morphism of sheaves of rings",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "No generator-normalized slice comparison or sheaf scalar tower.",
+    "top": [
+     "SheafOfModules.map_ιFree_mapFree_hom",
+     "SheafOfModules.restrictScalars_obj_val",
+     "SheafOfModules.map_ιFree_mapFree_hom_assoc",
+     "SheafOfModules.restrictScalars",
+     "SheafOfModules.restrictScalars_map_val",
+     "SheafOfModules.instAdditiveRestrictScalars",
+     "ModuleCat.Tilde.res_apply",
+     "ModuleCat.Tilde.toOpen_res"
+    ],
+    "sub": ""
+   },
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafification.*restrictScalars|restrictScalars.*sheafification",
+   "results": {
+    "ok": true,
+    "n_hits": 2,
+    "note": "No generator-normalized slice comparison or sheaf scalar tower.",
+    "top": [
+     "Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean:124",
+     "Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean:126"
+    ],
+    "sub": ""
+   },
+   "date": "2026-10-27",
+   "verdict": "No duplicate; reuse the named declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SemilinearSliceScalarGenerators",
+  "date": "2026-10-27",
+  "group": "A5"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Proof sentence “The maps used here are tensor reassociation, evaluation, and adjunction units and counits”; open coefficient factor: original step 5 of lem-sf-open-semilinear-tensor-model, coefficient linearity, all quotient and scalar-unit squares before localization; scalar-extension tower and generator comparison before localization",
+   "via": [
+    "lem-sf-semilinear-slice-scalar-generators",
+    "lem-sf-open-semilinear-tensor-model",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SemilinearSliceScalarGeneratorsBasic",
+  "file": "lean/Sheaf/CategoryTheory/SemilinearSliceScalarGeneratorsBasic.lean",
+  "declaration": "SheafOfModules.SemilinearSliceScalarGenerators",
+  "statement": "structure SemilinearSliceScalarGenerators (O : Sheaf J CommRingCat.{max c v r}) (α : (Functor.const ℕᵒᵖ).obj O ⟶ B)",
+  "branch": "sheaf-dag",
+  "by": "A5",
+  "date": "2026-10-27",
+  "declarations": [
+   "SheafOfModules.sliceScalarPure",
+   "SheafOfModules.sliceScalarRings",
+   "SheafOfModules.SliceScalarTowerPresentation",
+   "SheafOfModules.SliceSystemExtensionPresentation",
+   "SheafOfModules.sliceScalarAlgebra",
+   "SheafOfModules.SemilinearSliceScalarGenerators"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-bd4d0",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261026T222543-L-667293",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-bd4d0",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261026T222543-L-667293",
+  "kind": "interface",
+  "note": "independent cc review: item exists_semilinearSliceScalarGenerators proved from two fully proved constructions (tower, system extension) + one true sorry hole exists_sliceScalarLevelComparison; moved data decls verbatim vs clone and the change record; node proof_deps vs owners of the declarations used; #print axioms on scratch compile"
+ }
+}

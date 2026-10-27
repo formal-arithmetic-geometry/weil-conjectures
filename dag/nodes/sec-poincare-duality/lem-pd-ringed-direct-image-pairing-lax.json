@@ -15,90 +15,66 @@
  ],
  "proof": [
   {
-   "text": "The specified precomposition sends underlying sheaves to sheaves by hypothesis. For $r\\in R(U)$ and $x\\in M(vU)$ put $rx=c_U(r)x$. The ring-map equations give the module axioms, and for $a:V\\to U$ naturality of $c$ gives $(c_U(r)x)|_{vV}=c_V(r|_V)(x|_{vV})$. Thus these are module sheaves and precomposition on linear maps is a functor, by [def-weil-sheaf-of-modules-category]. Define $e_U(r)=c_U(r)$. It commutes with restriction, is additive, and $e_U(ar)=c_U(a)c_U(r)=a e_U(r)$; hence $e:R\\to PS$ is a module-sheaf morphism.",
+   "text": "Use Mathlib pushforward c, which is precomposition with scalar restriction. Its regular-unit map is unitToPushforwardObjUnit c and its section formula is exactly c_U(r).",
    "uses": [
     "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D6, definition-pushforward: scalar restriction of direct image"
-   }
+   "elementary": true
   },
   {
-   "text": "For $U\\in C$ define $b_U:M(vU)\\times N(vU)\\to(M\\otimes_SN)(vU)$ by taking the image of the sectionwise pure tensor $x\\otimes y$ in the sheaf tensor. The construction [def-pur-sheaf-tensor-product] commutes with restrictions. It is additive in each input, and $b_U(c_U(r)x,y)=c_U(r)b_U(x,y)=b_U(x,c_U(r)y)$, so it is $R(U)$-bilinear for the three restricted scalar actions. The bijection of [lem-pc-sites-sheaf-tensor-bilinear-universal], applied on $C$ with coefficient ring $R$ and target $P(M\\otimes_SN)$, gives a unique module-sheaf map $\\mu_{M,N}:PM\\otimes_RPN\\to P(M\\otimes_SN)$ with this pure-tensor formula.",
+   "text": "Construct the canonical bilinear pairing by the sheafification unit followed by tensorObjIsoSheafification.inv. Reuse restriction, naturality and associator formulas from the tensor generator calculus. Reuse the proved right-unitor pure-section formula of the cochain coherence construction; braiding gives the left-unitor formula. Apply bilinear transfer to construct the normalized pushforward tensorator.",
    "uses": [
     "def-pur-sheaf-tensor-product",
-    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-pd-ringed-pushforward-bilinear-transfer",
+    "lem-pur-module-tensor-generator-calculus",
+    "def-pur-cochain-tensor-coherence-data"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK, section-tensor-product: sheafified tensor and displayed bilinear universal property"
-   }
+   "elementary": false
   },
   {
-   "text": "For $S$-linear morphisms $f:M\\to M'$ and $g:N\\to N'$, the two sides of the naturality equation $P(f\\otimes g)\\mu_{M,N}=\\mu_{M',N'}(Pf\\otimes Pg)$ send each local pure tensor $x\\otimes y$ over $U$ to $f_{vU}(x)\\otimes g_{vU}(y)$ in $(M'\\otimes_SN')(vU)$. The tensor of maps has this formula from the sectionwise construction [def-pur-sheaf-tensor-product]. Injectivity of the bijection in [lem-pc-sites-sheaf-tensor-bilinear-universal] gives equality of these sheaf maps. This proves naturality in both variables.",
+   "text": "Reuse the proved binary equality criterion of the scalar tensor construction imported by cochain coherence. Both naturality composites agree on pure tensors, so binary extensionality proves naturality in both variables. The left and right unit composites agree with the canonical unitors on pure tensors, using the coefficient map formula.",
    "uses": [
     "def-pur-sheaf-tensor-product",
-    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-weil-sheaf-of-modules-category",
+    "lem-pd-ringed-pushforward-bilinear-transfer",
+    "def-pur-cochain-tensor-coherence-data"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK, section-tensor-product: functoriality and bilinear universal property"
-   }
+   "elementary": false
   },
   {
-   "text": "The canonical unitors of [lem-pc-sheaf-modules-tensor-closed] send $r\\otimes x$ to $rx$ and $x\\otimes r$ to $rx$. For the left-unit equation, the composite $R\\otimes_RPM\\xrightarrow{e\\otimes1}PS\\otimes_RPM\\xrightarrow{\\mu_{S,M}}P(S\\otimes_SM)\\xrightarrow{P\\lambda_M}PM$ sends $r\\otimes x$ to $c_U(r)x$, exactly the left unitor of $PM$. For the right-unit equation the composite $PM\\otimes_RR\\xrightarrow{1\\otimes e}PM\\otimes_RPS\\xrightarrow{\\mu_{M,S}}P(M\\otimes_SS)\\xrightarrow{P\\rho_M}PM$ sends $x\\otimes r$ to $c_U(r)x$, exactly its right unitor. In each case [lem-pc-sites-sheaf-tensor-bilinear-universal] promotes the equality on local pure tensors to equality of maps.",
+   "text": "For the triple equality criterion, the canonical presheaf pairing m is a local equivalence: after sheafification both its unit and comparison factors are isomorphisms. The existing monoidal localization property implies m tensor id is a local equivalence too. Cancel its sheafification, compose with the tensor-sheafification comparison, and apply the sheafification adjunction. Two tensor inductions reduce equality to pure triples, using naturality of the sheafification unit. The two lax associativity composites then agree by the canonical associator section formula.",
    "uses": [
-    "lem-pc-sheaf-modules-tensor-closed",
-    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+    "def-pur-sheaf-tensor-product",
+    "lem-pc-sheaf-modules-tensor-closed"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03EK and 03EO, section-tensor-product and lemma-internal-hom-adjoint-tensor: canonical unitors"
-   }
+   "elementary": false
   },
   {
-   "text": "Write $A=PM$, $B=PN$, $C'=PT$ and $H=P(M\\otimes_S(N\\otimes_ST))$. To test maps $(A\\otimes_RB)\\otimes_RC'\\to H$, use the symmetry and tensor-Hom adjunction of [lem-pc-sheaf-modules-tensor-closed] to curry them to $A\\otimes_RB\\to\\mathcal Hom_R(C',H)$. The bilinear bijection of [lem-pc-sites-sheaf-tensor-bilinear-universal] tests these maps on $x,y$; by [def-pur-sheaf-hom], their values agree if their evaluations on every section $z$ over every further restriction agree. Thus it suffices to test the original maps on $(x\\otimes y)\\otimes z$ over all objects. The associativity composite $P\\alpha\\,\\mu_{M\\otimes N,T}(\\mu_{M,N}\\otimes1)$ sends this tensor first to $(x\\otimes y)\\otimes z$, then to $x\\otimes(y\\otimes z)$ over $vU$. The other composite $\\mu_{M,N\\otimes T}(1\\otimes\\mu_{N,T})\\alpha$ gives the same result. Here both associators are the canonical ones of [lem-pc-sheaf-modules-tensor-closed]. The preceding test gives equality, the required lax associativity identity.",
+   "text": "For a competing normalized lax structure, binary equality makes its tensorator equal to the constructed one. Evaluate its left-unit equation at the regular S-module on 1_R tensor 1_S. The pure-tensor and unitor formulas imply its unit sends 1_R to 1_S. R-linearity gives the coefficient-map formula on every r. Extensionality of lax structures proves uniqueness.",
    "uses": [
-    "lem-pc-sheaf-modules-tensor-closed",
-    "lem-pc-sites-sheaf-tensor-bilinear-universal",
-    "def-pur-sheaf-hom"
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-sheaf-tensor-product",
+    "lem-pc-sheaf-modules-tensor-closed"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03EK, 03EO and 04TT: associativity formula, tensor-Hom adjunction and sectionwise internal Hom"
-   }
-  },
-  {
-   "text": "For any other lax structure $(\\mu',e')$ with the prescribed pure-tensor formula, [lem-pc-sites-sheaf-tensor-bilinear-universal] gives $\\mu'_{M,N}=\\mu_{M,N}$ for every pair. Apply its left-unit identity at $M=S$ to $1_R\\otimes1_S$ over any $U$. Using the canonical unitors [lem-pc-sheaf-modules-tensor-closed], the left-hand composite has value $e'_U(1_R)1_S=e'_U(1_R)$, whereas the unitor has value $1_S$. Thus $e'_U(1_R)=1_S$. Since $e'$ is a morphism of $R$-module sheaves [def-weil-sheaf-of-modules-category], $e'_U(r)=r\\,e'_U(1_R)=c_U(r)$ for every $r\\in R(U)$. Hence $e'=e$, proving uniqueness of the whole structure and the asserted unit formula.",
-   "uses": [
-    "lem-pc-sites-sheaf-tensor-bilinear-universal",
-    "lem-pc-sheaf-modules-tensor-closed",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03D6 and 03EK: agent regular-unit uniqueness from left coherence"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pur-sheaf-hom",
   "def-pur-sheaf-tensor-product",
   "def-weil-sheaf-of-modules-category",
   "lem-pc-sheaf-modules-tensor-closed",
-  "lem-pc-sites-sheaf-tensor-bilinear-universal"
+  "lem-pd-ringed-pushforward-bilinear-transfer",
+  "lem-pur-module-tensor-generator-calculus",
+  "def-pur-cochain-tensor-coherence-data"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "G5",
+  "date": "2026-10-24",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tags 03D6 and 03EK; direct construction with explicit lax coherence and regular-unit uniqueness; Tag 03EO used for triple-tensor equality testing."
+  "place": "Tags 03D6 and 03EK: bilinear transfer, canonical tensor generator and unitor formulas, and direct triple extensionality by monoidal localization."
  },
  "mathlib_searches": [
   {
@@ -170,6 +146,48 @@
    "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf\", \"SheafOfModules.restrictScalars\", \"LightCondensed.instMonoidalLightCondSetLightCondModFree\", \"CategoryTheory.Sheaf.monoidalCategory\", \"PresheafOfModules.monoidalCategoryStruct\", \"SheafOfModules.restrictScalars_obj_val\"]}",
    "date": "2026-10-21",
    "verdict": "No complete match: the hits give sheaf pushforward/unit maps, ordinary module scalar restriction, presheaf tensors, or monoidal sheafification; none states the unique normalized lax structure for sheaves over varying ring sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ringed direct image of module sheaves has a unique natural tensor comparison sending local pure tensors to pure tensors",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.unitToPushforwardObjUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on $\\\\ma\"}\n  {\"name\": \"PresheafOfModules.Monoidal.tensorObjMap\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {R : CategoryTheory.Functor Cᵒᵖ CommRingCat} →\\n      (M₁ M₂ : PresheafOfModules (R.comp (CategoryTheory.forget₂ CommRingCat RingCat))) →\\n        {X Y : Cᵒᵖ} →\\n          (f : X ⟶ Y) →\\n            CategoryTheory.MonoidalCategoryStr\", \"doc\": \"For a presheaf of modules $ M_1, M_2 $ over a presheaf of commutative rings $ R $ on a category $ \\\\mathcal{C} $, and a morphism $ f: X \\\\to Y $ in $ \\\\mathcal{C}^\\\\text{op} $, this defines the $ R(X) $-l\"}\n  {\"name\": \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on $\\\\ma\"}\n  {\"name\": \"SheafOfModules.unitToPushforwardObjUnit_val_app_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"For any object $X$ in the opposite category $\\\\mathcal{C}^\\\\mathrm{op}$ and any element $a$ in the presheaf $S.\\\\text{val}.\\\\text{obj}\\\\, X$, the application of the unit morphism $\\\\text{unitToPushforwardOb\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"PresheafOfModules.Monoidal.tensorObj_map_tmul\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {R : CategoryTheory.Functor Cᵒᵖ CommRingCat}\\n  {M₁ M₂ : PresheafOfModules (R.comp (CategoryTheory.forget₂ CommRingCat RingCat))} {X Y : Cᵒᵖ} (f : X ⟶ Y)\\n  (m₁ : ↑(M₁.obj X)) (m₂ : ↑(M₂.obj X)),\\n  (ModuleCat.Hom.hom ((PresheafOfModules.Mo\", \"doc\": \"For a presheaf of rings $ R $ on a category $ \\\\mathcal{C} $ and presheaves of modules $ M_1, M_2 $ over $ R $, given a morphism $ f : X \\\\to Y $ in $ \\\\mathcal{C}^{\\\\text{op}} $, the tensor product of th\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}",
+   "date": "2026-10-22",
+   "verdict": "No match. PushforwardContinuous supplies the functor; PullbackFree supplies its regular-unit map. Presheaf tensors and ordinary bilinear restriction of scalars do not supply the sheafified transfer of arbitrary pairings and its naturality. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:43-51 and PullbackFree.lean:60-69; LinearAlgebra/BilinearMap.lean:261 concerns ordinary modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"SheafOfModules.pushforwardId\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \" {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {K : CategoryTheory.GrothendieckTopology D} (R : CategoryTheory.Sheaf K RingCat) : SheafOfModules.pushforward (CategoryTheory.CategoryStruct.id R) ≅ CategoryTheory.Functor.id (SheafOfModules R)\", \"doc\": \"The pushforward functor by the identity morphism identifies to\\nthe identify functor of the category of sheaves of modules.\"}\n  {\"name\": \"SheafOfModules.pushforward\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [F\", \"doc\": \"The pushforward of sheaves of modules that is induced by a continuous functor `F`\\nand a morphism of sheaves of rings `φ : S ⟶ (F.sheafPushforwardContinuous RingCat J K).obj R`.\"}\n  {\"name\": \"SheafOfModules.instIsLeftAdjointOverOverRingCatPushforwardIdSheafOver\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \" {C : Type u'} [CategoryTheory.Category.{v', u'} C] [CategoryTheory.Limits.HasBinaryProducts C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} (x : C) : (SheafOfModules.pushforward (CategoryTheory.CategoryStruct.id (R.over x))).IsLeftAdjoint\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.overPushforwardOverAdj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \" {C : Type u'} [CategoryTheory.Category.{v', u'} C] [CategoryTheory.Limits.HasBinaryProducts C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} (x : C) : SheafOfModules.pushforward (CategoryTheory.CategoryStruct.id (R.over x)) ⊣ SheafOfModules.pushforward (SheafOfMod\", \"doc\": \"The adjunction between restriction to `Over x` and pushforward along `Over.star x`.\"}\n  {\"name\": \"SheafOfModules.isLeftAdjoint_pushforward_of_isIso\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [F\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.pushforwardCongr\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [F\", \"doc\": \"Pushforwards along equal morphisms of sheaves of rings are isomorphic.\"}\n  {\"name\": \"SheafOfModules.pushforwardNatIso\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F G : CategoryTheory.Functor C D} {T : CategoryTheory.Sheaf J RingCat} {S : CategoryTheory.Sheaf K RingCat} \", \"doc\": \"A natural isomorphism gives a natural isomorphism between the pushforward functors.\"}\n  {\"name\": \"SheafOfModules.pushforwardNatTrans\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F G : CategoryTheory.Functor C D} {T : CategoryTheory.Sheaf J RingCat} {S : CategoryTheory.Sheaf K RingCat} \", \"doc\": \"A natural transformation gives a natural transformation between the pushforward functors.\"}\n  {\"name\": \"SheafOfModules.pushforward_obj_val\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [F\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.pushforwardCongr_symm\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [F\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.pushforwardComp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {D' : Type u₃} [CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.She\", \"doc\": \"The composition of two pushforward functors on categories of sheaves of modules\\nidentify to the pushforward for the composition.\"}\n  {\"name\": \"SheafOfModules.pushforwardCongr₂\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F G : CategoryTheory.Functor C D} {T : CategoryTheory.Sheaf J RingCat} {S : CategoryTheory.Sheaf K RingCat} \", \"doc\": \"More flexible variant of `SheafOfModules.pushforwardNatIso`.\"}",
+   "date": "2026-10-22",
+   "verdict": "No match. PushforwardContinuous supplies the functor; PullbackFree supplies its regular-unit map. Presheaf tensors and ordinary bilinear restriction of scalars do not supply the sheafified transfer of arbitrary pairings and its naturality. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:43-51 and PullbackFree.lean:60-69; LinearAlgebra/BilinearMap.lean:261 concerns ordinary modules."
+  },
+  {
+   "tool": "grep",
+   "query": "pushforward.*tensor|tensor.*pushforward|unitToPushforwardObjUnit",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"line\": \"21\", \"text\": \"We introduce `unitToPushforwardObjUnit φ` which is the morphism\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"line\": \"60\", \"text\": \"noncomputable def unitToPushforwardObjUnit : unit S ⟶ (pushforward.{u} φ).obj (unit R) where\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"line\": \"68\", \"text\": \"lemma unitToPushforwardObjUnit_val_app_apply {X : Cᵒᵖ} (a : S.obj.obj X) :\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"line\": \"69\", \"text\": \"    (unitToPushforwardObjUnit φ).val.app X a = φ.hom.app X a := rfl\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"line\": \"76\", \"text\": \"        (unitToPushforwardObjUnit φ ≫ (pushforward φ).map f) := by\"}",
+   "date": "2026-10-22",
+   "verdict": "No match. PushforwardContinuous supplies the functor; PullbackFree supplies its regular-unit map. Presheaf tensors and ordinary bilinear restriction of scalars do not supply the sheafified transfer of arbitrary pairings and its naturality. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:43-51 and PullbackFree.lean:60-69; LinearAlgebra/BilinearMap.lean:261 concerns ordinary modules."
+  },
+  {
+   "tool": "leansearch",
+   "query": "sheaves of modules direct image tensor product comparison natural bilinear pairing",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TensorProduct.AlgebraTensorModule.mapBilinear_apply\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \"(f : M →ₗ[A] P) (g : N →ₗ[R] Q) : mapBilinear R A B M N P Q f g = map f g\", \"doc\": \"For any $ A $-linear map $ f: M \\\\to P $ and $ R $-linear map $ g: N \\\\to Q $, the bilinear map from $ M \\\\times N $ to $ P \\\\otimes_R Q $ induced by $ f $ and $ g $ via the universal property of tensor p\"}\n  {\"name\": \"PresheafOfModules.Monoidal.tensorObjMap\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal\", \"type\": \"{X Y : Cᵒᵖ} (f : X ⟶ Y) : M₁.obj X ⊗ M₂.obj X ⟶ (ModuleCat.restrictScalars (R.map f).hom).obj (M₁.obj Y ⊗ M₂.obj Y)\", \"doc\": \"For a presheaf of modules $ M_1, M_2 $ over a presheaf of commutative rings $ R $ on a category $ \\\\mathcal{C} $, and a morphism $ f: X \\\\to Y $ in $ \\\\mathcal{C}^\\\\text{op} $, this defines the $ R(X) $-l\"}\n  {\"name\": \"TensorProduct.mapBilinear\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Basic\", \"type\": \": (M →ₛₗ[σ₁₂] M₂) →ₗ[R₂] (N →ₛₗ[σ₁₂] N₂) →ₗ[R₂] M ⊗[R] N →ₛₗ[σ₁₂] M₂ ⊗[R₂] N₂\", \"doc\": \"Given $ R $-modules $ M, N $ and $ R_2 $-modules $ M_2, N_2 $ with a ring homomorphism $ \\\\sigma_{12}: R \\\\to R_2 $, this constructs a bilinear map $ (M \\\\times N) \\\\to (M_2 \\\\otimes_{R_2} N_2) $ that fact\"}\n  {\"name\": \"PresheafOfModules.Monoidal.tensorObj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal\", \"type\": \": PresheafOfModules (R ⋙ forget₂ _ _)\", \"doc\": \"For a category $\\\\mathcal{C}$ and a presheaf $R : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\text{CommRing}$, the tensor product operation in the monoidal category of presheaves of modules over $R$ is defined object\"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (forget S ⋙ PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)) ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"PresheafOfModules.Monoidal.tensorObj_map_tmul\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal\", \"type\": \"{X Y : Cᵒᵖ} (f : X ⟶ Y) (m₁ : M₁.obj X) (m₂ : M₂.obj X) :\\n  DFunLike.coe (α := (M₁.obj X ⊗ M₂.obj X :)) (β := fun _ ↦\\n      (ModuleCat.restrictScalars (R.map f).hom).obj (M₁.obj Y ⊗ M₂.obj Y))\\n      (ModuleCat.Hom.hom (R := ↑(R.obj X)) ((tensorObj M₁ M₂).map f)) (m₁ ⊗ₜ[R.obj X] m₂) =\\n    M₁.map f m₁\", \"doc\": \"For a presheaf of rings $ R $ on a category $ \\\\mathcal{C} $ and presheaves of modules $ M_1, M_2 $ over $ R $, given a morphism $ f : X \\\\to Y $ in $ \\\\mathcal{C}^{\\\\text{op}} $, the tensor product of th\"}\n  {\"name\": \"TensorProduct.AlgebraTensorModule.mapBilinear\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \": (M →ₗ[A] P) →ₗ[B] (N →ₗ[R] Q) →ₗ[R] (M ⊗[R] N →ₗ[A] P ⊗[R] Q)\", \"doc\": \"Given an $ A $-linear map $ f: M \\\\to P $ and an $ R $-linear map $ g: N \\\\to Q $, this constructs a bilinear map from $ f $ and $ g $ to the $ A $-linear map $ M \\\\otimes_R N \\\\to P \\\\otimes_R Q $ induced\"}\n  {\"name\": \"PresheafOfModules.Monoidal.tensorHom\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal\", \"type\": \"(f : M₁ ⟶ M₂) (g : M₃ ⟶ M₄) : tensorObj M₁ M₃ ⟶ tensorObj M₂ M₄\", \"doc\": \"Given a category $\\\\mathcal{C}$ and a presheaf of commutative rings $R : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\text{CommRing}$, this defines a natural transformation between the tensor products of presheaves of\"}",
+   "date": "2026-10-22",
+   "verdict": "No match. PushforwardContinuous supplies the functor; PullbackFree supplies its regular-unit map. Presheaf tensors and ordinary bilinear restriction of scalars do not supply the sheafified transfer of arbitrary pairings and its naturality. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:43-51 and PullbackFree.lean:60-69; LinearAlgebra/BilinearMap.lean:261 concerns ordinary modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Precomposition and restriction of scalars for ring sheaf modules induces a natural comparison of sheafified balanced tensors",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PresheafOfModules.Sheafify.mul_smul\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.val)\\n  [inst_1 : CategoryTheory.Presheaf.IsLocallyInjective J α] [inst_2 : CategoryTheory.Presheaf.IsLo\", \"doc\": \"For all scalars $ r, r' $ in the sheafified ring $ R $ and all elements $ m $ in the sheafified module $ A $, the scalar multiplication operation satisfies $ \\\\alpha(\\\\phi(r \\\\cdot r') \\\\cdot m) = \\\\alpha(\"}\n  {\"name\": \"PresheafOfModules.Sheafify.map_smul_eq\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.val)\\n  [inst_1 : CategoryTheory.Presheaf.IsLocallyInjective J α] [inst_2 : CategoryTheory.Presheaf.IsLo\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a presheaf of rings $R_0$ with sheafification $R$, a presheaf of modules $M_0$ over $R_0$, and a sheaf of abelian groups $A$, the scala\"}\n  {\"name\": \"PresheafOfModules.Sheafify.map_smul\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.val)\\n  [inst_1 : CategoryTheory.Presheaf.IsLocallyInjective J α] [inst_2 : CategoryTheory.Presheaf.IsLo\", \"doc\": \"For a category $\\\\mathcal{C}$ with Grothendieck topology $J$, a presheaf of rings $R_0$ with sheafification $R$, a presheaf of modules $M_0$ over $R_0$, and a sheaf of abelian groups $A$, the sheafific\"}\n  {\"name\": \"PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.val)\\n  [inst_1 : CategoryTheory.Presheaf.IsLocallyInjective J α] [inst_2 : CategoryTheory.Presheaf.IsLo\", \"doc\": \"Given a presheaf of modules $M_0$ over a presheaf of rings $R_0$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, and a natural transformation $\\\\alpha: R_0 \\\\to R$ to a sheafified ring $R$, \"}\n  {\"name\": \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.val)\\n  [inst_1 : CategoryTheory.Presheaf.IsLocallyInjective J α] [inst_2 : CategoryTheory.Presheaf.IsLo\", \"doc\": \"The forgetful functor from presheaves of modules to presheaves of abelian groups commutes with the hom-set bijection induced by sheafification and the adjunction between presheaves and sheaves. Specif\"}\n  {\"name\": \"PresheafOfModules.toPresheaf_map_toSheafify\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.val)\\n  [inst_1 : CategoryTheory.Presheaf.IsLocallyInjective J α] [inst_2 : CategoryTheory.Presheaf.IsLo\", \"doc\": \"Applying the forgetful functor from presheaves of modules to presheaves of abelian groups to the sheafification morphism $\\\\alpha$ results in the original morphism $\\\\phi$, i.e., $(\\\\text{toPresheaf} \\\\, \"}\n  {\"name\": \"PresheafOfModules.sheafifyHomEquiv'\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} →\\n        {R : CategoryTheory.Sheaf J RingCat} →\\n          (α : R₀ ⟶ R.val) →\\n            [inst_1 : CategoryTheory.Presheaf.IsLocallyInjec\", \"doc\": \"Given a presheaf of modules $M_0$ over a presheaf of rings $R_0$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, and a natural transformation $\\\\alpha: R_0 \\\\to R$ to a sheafified ring $R$, \"}\n  {\"name\": \"PresheafOfModules.sheafificationCompToSheaf\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} →\\n        {R : CategoryTheory.Sheaf J RingCat} →\\n          (α : R₀ ⟶ R.val) →\\n            [inst_1 : CategoryTheory.Presheaf.IsLocallyInjec\", \"doc\": \"The natural isomorphism asserting that composing the sheafification functor for presheaves of modules with the forgetful functor to sheaves of abelian groups is naturally isomorphic to composing the f\"}",
+   "date": "2026-10-22",
+   "verdict": "No match. PushforwardContinuous supplies the functor; PullbackFree supplies its regular-unit map. Presheaf tensors and ordinary bilinear restriction of scalars do not supply the sheafified transfer of arbitrary pairings and its naturality. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:43-51 and PullbackFree.lean:60-69; LinearAlgebra/BilinearMap.lean:261 concerns ordinary modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushforward\", \"tensor\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "No match. PushforwardContinuous supplies the functor; PullbackFree supplies its regular-unit map. Presheaf tensors and ordinary bilinear restriction of scalars do not supply the sheafified transfer of arbitrary pairings and its naturality. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:43-51 and PullbackFree.lean:60-69; LinearAlgebra/BilinearMap.lean:261 concerns ordinary modules."
   }
  ],
  "mathlib_match": null,
@@ -196,11 +214,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-pd-ringed-direct-image-pairing-lax",
   "worker": "stage1",
-  "summary": "Constructed the normalized pairing by the existing sheaf bilinear universal property, checked naturality and all three coherence equations, and forced the unit by left coherence on the regular module. No statement change and no new nodes. Read the cited node statements and the Stacks source; preserved inherited searches and added the searches run by Q29.",
-  "blueprint": "No imported blueprint ancestor in the seeded created.item chain (blueprint_refs ancestor returns None). Realizes parent def-pd-proetale-section-module-functors proof Step 2, corresponding to its original Step 3 and the seeded nt-target-poincare-isiso Verdier-exchange Step 2; supplies only the ordinary direct-image normalization.",
+  "summary": "Human-directed re-split: unchanged statement and Lean record; two statement-only helpers isolate arbitrary bilinear transfer/naturality and the trilinear universal property. Retained explicit scalar action, both unit checks, associativity evaluation and regular-unit uniqueness. The helper statements introduce all objects and are searched in Mathlib.",
+  "blueprint": "Preserves original Steps 1–6 serving def-pd-proetale-section-module-functors Step 2 (original Step 3), hence the seeded Verdier-exchange Step 2. No imported blueprint ancestor: blueprint_refs ancestor returns None. New helpers carry the same rooted-null convention as their item.",
   "tool_uses": [
    {
     "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
@@ -213,18 +231,28 @@
   ]
  },
  "tool_uses": [
-  "lem-pc-sites-sheaf-tensor-bilinear-universal",
   "lem-pc-sheaf-modules-tensor-closed"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q29-15050ae9e",
-  "group": "Q29",
+  "reviewer": "NT-cc-Q101-96d57cebb",
+  "group": "Q101",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-15050ae9e (reviewer sub-agent of L); spot-checked: Read the whole delivery: the item statement is unchanged against live and there are no new nodes. The item is not in route-pivot-dropped, has no re-split note, and is still unsplit in live and side-live. Sources match: Stacks 03D6 (definition-pushforward) and 03EK (section-tensor-product, with the Hom=Bilin display); 03EO and 04TT agree with the steps. Steps checked against the cited statements. Step 1: the c_U action gives a module sheaf and e=c is R-linear. Step 2: b_U is a restriction-compatible, R(U)-bilinear sheaf map, so the bilinear universal property gives a unique mu. Step 3: naturality by injectivity. Step 4: both unit composites are r*x=c(r)x. Step 5: associativity is tested by currying through symmetry and the closed adjunction, then by sections of sheaf Hom over every V->U; this does not assume tensor sections are pure. Advisory only: the closed-structure node does not write out the adjunction formula, but the canonical 03EO adjunction is meant. Step 6: mu'=mu, then the left unit at M=S on 1_R⊗1_S gives e'(1)=1, so e'(r)=c(r); the unit is not assumed normalized. Edge cases tested: discrete one-object site (ordinary restriction of scalars), identity v and c, zero ring, empty site. Duplicate search: the def-sfb-*-lax-monoidal nodes concern pro-étale 𝒜-valued and internal module objects, so they are not duplicates. The single citer (def-pd-proetale-section-module-functors Step 2) matches the hypotheses. Accepted tool_uses: lem-pc-sites-sheaf-tensor-bilinear-universal and lem-pc-sheaf-modules-tensor-closed (unit sk-thm-picard-semicon), which are generic sheaf-tensor tools. proof_deps equals the union of uses; no SGA. No fixes written."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-96d57cebb (reviewer sub-agent of L); spot-checked: Re-split under the human note of 2026-10-21 (released 2026-10-22). No other group has re-split this item: live and side-live still hold the 6-step split. Item statement and Lean record unchanged. Mapping from the old proof: old Step 1 is new Step 1, verbatim. Old Steps 2-3 (restriction-compatible R-bilinear pairing via c, unique mu, naturality by injectivity) went into lem-pd-ringed-pushforward-bilinear-transfer, which handles an arbitrary S-bilinear b with uniqueness and a naturality clause; new Step 2 uses it with h=f⊗g. Old Step 4 (both unit composites give c_U(r)x, injectivity of lem-pc-sites-sheaf-tensor-bilinear-universal) is kept in full as Step 3. Old Step 5 (currying through 03EO, all-slice test through 04TT) went into lem-pd-sheaf-trilinear-universal, the natural Hom((A⊗B)⊗T,H)≅Trilin bijection with equality detection; Step 4 still evaluates both associativity composites on (x⊗y)⊗z. Old Step 6 is Step 5: mu'=mu by transfer uniqueness, then e'(1)=1 from the left unit at S, then e'=c by R-linearity. Assembly is 2197 characters; new statements are 1159 and 1010 characters. Neither node restates the item or one of its clauses. Both new statements checked true, on a one-object site, v=id with c=id, zero modules, the zero ring, the empty site and a non-flat c. Stacks sources checked: sites-modules.tex 03D6 definition-pushforward, 03EK section-tensor-product with the Hom=Bilin display, 03EO lemma-internal-hom-adjoint-tensor, 04TT section-internal-hom. No duplicates found among lem-pur-ringed-site-pullback-pairing-transfer, lem-sfb-site-inverse-image-bilinear-adjunction, lem-sfb-section-ring-lax-pushforward-coherence, lem-pc-sites-module-sheafification-bilinear-extension-uniqueness, lem-pur-module-tensor-generator-calculus, lem-pur-module-tensor-monoidal-equations or lem-sc-hom-tensor-pair-construction. Mathlib: PushforwardZeroMonoidal covers presheaves with no change of ring only; tensor_ext3 covers ordinary modules only. I accept the existing tool uses lem-pc-sites-sheaf-tensor-bilinear-universal and lem-pc-sheaf-modules-tensor-closed. Advisory, not repaired: the trilinear node's existence direction is more than the item needs; Steps 3-5 do not list def-pur-sheaf-tensor-product in uses for the tensor-of-maps formula (it is in proof_deps); the new nodes have no lean_audit field, which the status tool fills in."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.RingedDirectImagePairingLax",
   "declaration": "SheafOfModules.exists_unique_ringedPushforward_laxMonoidal",
@@ -247,5 +275,15 @@
   "group": "Q63",
   "result": "pass",
   "note": "Every node clause matches the Lean: EssentiallySmall.{w} sites with independent universes, v.IsContinuous, CommRingCat.{w} R and S, unital c, Mathlib pushforward c (scalar action via c checked by rfl), cochainModulesMonoidal tensor (instance identity checked by rfl), regular unit (𝟙_ = unit checked by rfl), Functor.LaxMonoidal, pure-tensor predicate over all M N U x y in the right direction, unit formula ε=c, uniqueness assuming only the predicate. lean.statement is verbatim; node differs from live only in lean. Docstrings and six-step proof are present; the predicate is not hollow; the only sorry is the theorem. Edge cases checked: empty site, zero ring, one-object site, identity v and c. No duplicate; the parent pro-étale PushNormalized is a specialization (advisory). nt_compile --json clean, exit 0, 21.7 s; rfl test copy compiled."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261024T185827-L-3703466",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

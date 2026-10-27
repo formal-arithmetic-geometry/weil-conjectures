@@ -19,6 +19,23 @@ universe u v
 
 open AlgebraicGeometry AddMonoidAlgebra
 
+private theorem monomial_factor_of_recognition
+    {M R : Type*} [CommMonoid M] [CommRing R] (f : M →* R)
+    (hrec : (algebraMap R (Localization (Submonoid.map f ⊤))) ⁻¹' {x | IsUnit x} =
+      {x | ∃ a : R, IsUnit a ∧ ∃ q : M, x = a * f q})
+    (q : M) (b c : R) (hbc : b * c = f q) :
+    ∃ (r : M) (u : Rˣ), b = (u : R) * f r := by
+  have hunit : IsUnit (algebraMap R (Localization (Submonoid.map f ⊤)) b) := by
+    apply isUnit_of_mul_isUnit_left (y := algebraMap R _ c)
+    rw [← map_mul, hbc]
+    exact IsLocalization.map_units (M := Submonoid.map f ⊤) _
+      ⟨f q, ⟨q, Submonoid.mem_top q, rfl⟩⟩
+  have hb : b ∈ {x | ∃ a : R, IsUnit a ∧ ∃ r : M, x = a * f r} := by
+    rw [← hrec]
+    exact hunit
+  obtain ⟨a, ⟨u, rfl⟩, r, hr⟩ := hb
+  exact ⟨r, u, hr⟩
+
 /-- Every factor of a chart monomial in either complete toric local model is a unit
  times a chart monomial.
 Source: Illusie--Laszlo--Orgogozo, Exposé VI, 1.4 and 1.6(i)--(ii),
@@ -51,4 +68,13 @@ theorem complete_toric_monomial_factor
             ∃ (r : P) (u : (cohenCompleteToricRing C P n θ)ˣ),
               b = (u : cohenCompleteToricRing C P n θ) *
                 cohenCompleteToricChart C P n θ ((r : Multiplicative P))) := by
-  sorry
+  obtain ⟨hfield, hcohen⟩ := complete_toric_kato_recognition P hP hsharp n
+  constructor
+  · intro k _ q b c hbc
+    obtain ⟨r, u, hr⟩ :=
+      monomial_factor_of_recognition (completeToricChart k P n) (hfield k) q b c hbc
+    exact ⟨r.toAdd, u, hr⟩
+  · intro C _ _ p hC θ hθ q b c hbc
+    obtain ⟨r, u, hr⟩ := monomial_factor_of_recognition
+      (cohenCompleteToricChart C P n θ) (hcohen C p hC θ hθ) q b c hbc
+    exact ⟨r.toAdd, u, hr⟩

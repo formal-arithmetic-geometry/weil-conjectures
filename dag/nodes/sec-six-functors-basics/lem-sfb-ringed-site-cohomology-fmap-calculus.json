@@ -1,0 +1,493 @@
+{
+ "id": "lem-sfb-ringed-site-cohomology-fmap-calculus",
+ "kind": "statement",
+ "title": "Resolution-normalized cohomology maps for coefficient maps on ringed sites",
+ "statement": "Let $\\mathcal X,\\mathcal Y,\\mathcal Z$ be sites small in a common coefficient universe, with terminal objects and sheaves of commutative rings $A,B,C$ [def-weil-pbc-sites-and-cohomology, def-weil-size-convention]. Let $f:(\\operatorname{Sh}(\\mathcal X),A)\\to(\\operatorname{Sh}(\\mathcal Y),B)$ and $g:(\\operatorname{Sh}(\\mathcal Y),B)\\to(\\operatorname{Sh}(\\mathcal Z),C)$ be morphisms of ringed topoi [def-weil-pbc-ringed-topos-morphism]. Assume the module categories [def-weil-sheaf-of-modules-category] have enough injectives [def-sp-enough-injectives]. Write $H^q(\\mathcal Y,M)=R^q\\Gamma(\\mathcal Y,-)(M)$, computed in all $B$-modules, and similarly on the other sites. For $B$- and $A$-modules $M,N$ and a $B$-linear coefficient map $\\phi:M\\to f_*N$, choose nonnegative injective resolutions $N\\to I$, $M\\to J$, a quasi-isomorphism $\\lambda:f_*I\\to J'$ to a bounded-below injective complex, and a chain map $\\beta:J\\to J'$ extending $M\\to f_*N\\to f_*I\\to J'$, with commutation in the homotopy category [def-sp-injective-resolutions, def-weil-abstract-derived-category]. Then $\\Gamma(\\mathcal Y,\\lambda)$ is a quasi-isomorphism and\n$$T_f^q(\\phi)=H^q(\\Gamma(\\mathcal Y,\\lambda))^{-1}H^q(\\Gamma(\\mathcal Y,\\beta)):H^q(\\mathcal Y,M)\\longrightarrow H^q(\\mathcal X,N)$$\nis independent of all choices. The section identity $\\Gamma(\\mathcal Y,f_*I)=\\Gamma(\\mathcal X,I)$, with restriction of scalars, is used in this formula. The map is additive and $\\Gamma(\\mathcal Y,B)$-linear for its induced action on the target, and $T_f^0(\\phi)=\\Gamma(\\phi)$. For a $C$-module $L$ and $\\psi:L\\to g_*M$, the canonical section-preserving comparison $(gf)_*\\simeq g_*f_*$ gives\n$$T_{gf}^q(g_*\\phi\\circ\\psi)=T_f^q(\\phi)\\circ T_g^q(\\psi).$$\nThese equalities respect geometric $2$-isomorphisms of the composite ringed-topos morphisms with their section-preserving direct-image comparisons. For the identity morphism, $T_{\\mathrm{id}}^q(\\phi)=H^q(\\phi)$; in particular the maps are natural in both coefficient modules.\n\nThe normalization also permits computing resolutions: if $M\\to K$ and $N\\to L'$ are nonnegative resolutions whose terms are acyclic for their respective global-section functors, and $u:K\\to f_*L'$ is an augmentation-preserving chain map, the map on section cohomology induced by $u$ equals $T_f^q(\\phi)$ under the canonical acyclic-resolution identifications [lemma-weil-pbc-leray-acyclicity]. In particular, if $f_*I$ resolves $f_*N$, then the map from $H^q(\\mathcal Y,f_*N)$ given by the identity coefficient map is the inverse of the acyclic-resolution comparison $H^q(\\Gamma(\\mathcal Y,f_*I))\\to H^q(\\mathcal Y,f_*N)$.\n\nFor a localization $j:\\mathcal X/U\\to\\mathcal X$ with the restricted ring [def-pur-localized-ringed-site], $T_j^q$ of the unit is the restriction map on cohomology, computed from restriction of sections to $U$. Under the canonical module/abelian evaluation comparisons [lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison], this is also the ordinary abelian cohomology restriction. No flatness of either structural ring map is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E, lemma-derived-pushforward-composition; derived sections construction in section-derived-functors and Tag 03FD, lemma-cohomology-modules-abelian-agree. Resolution recipe and its coefficient-map normalization extend cohomology.tex Tags 01F8 (lemma-functoriality) and 01FB (remark-explain-arrow) from ringed spaces to ringed sites; this general coefficient-map formulation is assembled by the agent."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-enough-injectives",
+  "def-sp-injective-resolutions",
+  "def-weil-abstract-derived-category",
+  "lemma-weil-pbc-leray-acyclicity",
+  "def-pur-localized-ringed-site",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Put $S_{\\mathcal T}=\\Gamma(\\mathcal T,-)$, and write $[v]_q=H^q(S_{\\mathcal T}v)$ for a chain map on $\\mathcal T$. The adjunction on underlying sheaves gives $\\Gamma(\\mathcal Y,f_*P)=\\operatorname{Hom}(1,f_*P)=\\operatorname{Hom}(f^{-1}1,P)=\\Gamma(\\mathcal X,P)$, naturally in $P$; finite-limit preservation identifies $f^{-1}1=1$. The induced $\\Gamma(\\mathcal Y,B)$-action is restriction along the structural ring map. Thus this identity applies to differentials, maps and homotopies, not just to objects. Nonnegative injective resolutions and a bounded-below injective replacement of $f_*I$ exist by lem-weil-pbc-complex-injective-resolution-mono. The augmentation $M[0]\\to J$ is a degreewise monic quasi-isomorphism, so lem-weil-pbc-lift-along-injective-quasi-iso gives $\\beta$ (even with strict augmentation compatibility).",
+   "uses": [
+    "def-weil-pbc-ringed-topos-morphism",
+    "lem-weil-pbc-complex-injective-resolution-mono",
+    "lem-weil-pbc-lift-along-injective-quasi-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 013K (lemma-injective-resolutions-exist), 013P(2) (lemma-morphisms-lift); section identities from sites-modules.tex Definition 03D6 (definition-pushforward)."
+   }
+  },
+  {
+   "text": "Each $f_*I^n$ is $S_{\\mathcal Y}$-acyclic by lem-sfb-ringed-topos-injective-pushforward-global-acyclic. Each term of $J'$ is also $S_{\\mathcal Y}$-acyclic by clause 1 of lemma-weil-pbc-leray-acyclicity. Both complexes are bounded below, so lem-weil-pbc-leray-acyclicity-quasi-iso applied to $\\lambda$ says $S_{\\mathcal Y}\\lambda$ is a quasi-isomorphism. Consequently $[\\lambda]_q^{-1}[\\beta]_q$ exists, with target $H^q(S_{\\mathcal X}I)$ by step 1. No assertion that $f_*$ preserves module injectives has been used.",
+   "uses": [
+    "lem-sfb-ringed-topos-injective-pushforward-global-acyclic",
+    "lemma-weil-pbc-leray-acyclicity",
+    "lem-weil-pbc-leray-acyclicity-quasi-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 072Z (lemma-direct-image-injective-sheaf), 0731(3) (lemma-limp-acyclic); derived.tex Tag 015E (lemma-leray-acyclicity)."
+   }
+  },
+  {
+   "text": "First keep $I,J$ fixed. Every bounded-below injective complex is K-injective by lem-weil-pbc-bounded-below-injectives-kinjective. Given two replacements $\\lambda:f_*I\\to J'$ and $\\widetilde\\lambda:f_*I\\to\\widetilde J'$, the Hom bijection of lem-sp-kinjective-comparison-principle supplies $s:J'\\to\\widetilde J'$ with $s\\lambda\\simeq\\widetilde\\lambda$. The maps $s\\beta$ and $\\widetilde\\beta$ agree after the quasi-isomorphism $M[0]\\to J$, hence are homotopic by lem-weil-pbc-lift-to-injective-unique-up-to-homotopy. Homotopies survive sections and give equal cohomology maps by lem-weil-pbc-homotopic-maps-equal-cohomology. Thus $[s]_q[\\lambda]_q=[\\widetilde\\lambda]_q$ and $[s]_q[\\beta]_q=[\\widetilde\\beta]_q$. Step 2 makes both denominators invertible, so $[s]_q$ is invertible and cancellation proves equality of the two roofs. This also proves independence of $\\beta$.",
+   "uses": [
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "lem-sp-kinjective-comparison-principle",
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "lem-weil-pbc-homotopic-maps-equal-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 013P(1), 013S (lemma-morphisms-equal-up-to-homotopy); bounded-below injective comparison in the homotopy category."
+   }
+  },
+  {
+   "text": "Now change $I,J$ to $\\widetilde I,\\widetilde J$. Lift the identity augmentations to $a:I\\to\\widetilde I$ and $b:J\\to\\widetilde J$ by lem-weil-pbc-injective-resolution-lift-exists. Reverse lifts exist too; their composites are homotopic to the identities by lem-weil-pbc-lift-to-injective-unique-up-to-homotopy. In particular $f_*a$ is a homotopy equivalence, since direct image is additive. Lift $\\widetilde\\lambda f_*a$ along $\\lambda$ to $s:J'\\to\\widetilde J'$ using the K-injective Hom bijection. The two maps $s\\beta$ and $\\widetilde\\beta b$ agree up to homotopy after $M[0]\\to J$, so they are homotopic. Applying sections gives $[s]_q[\\lambda]_q=[\\widetilde\\lambda]_q[a]_q$ and $[s]_q[\\beta]_q=[\\widetilde\\beta]_q[b]_q$. Cancel as in step 3. The maps $[a]_q,[b]_q$ are precisely the canonical resolution identifications by lem-weil-pbc-derived-functor-map-via-lift. This proves independence of all resolutions under those identifications.",
+   "uses": [
+    "lem-weil-pbc-injective-resolution-lift-exists",
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "lem-sp-kinjective-comparison-principle",
+    "lem-weil-pbc-homotopic-maps-equal-cohomology",
+    "lem-weil-pbc-derived-functor-map-via-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 013P, 013S; injective-resolution formula for higher derived maps, Tag 015B (lemma-higher-derived-functors)."
+   }
+  },
+  {
+   "text": "All maps in the roof are $\\Gamma(\\mathcal Y,B)$-linear after step 1's scalar restriction, including the inverse of the isomorphism $[\\lambda]_q$. They therefore induce additive linear maps on cohomology. For two coefficient maps use the same $I,J,\\lambda$; the sum of their lifts lifts their sum. Step 3 then gives $T_f^q(\\phi+\\phi')=T_f^q(\\phi)+T_f^q(\\phi')$, and the zero lift gives zero. In degree zero, left exactness identifies $H^0(S_{\\mathcal Y}J)$ and $H^0(S_{\\mathcal X}I)$ with sections of $M,N$. The augmentation equation gives $[\\beta]_0=[\\lambda]_0\\Gamma(\\phi)$ under these identifications. Cancelling $[\\lambda]_0$ proves $T_f^0(\\phi)=\\Gamma(\\phi)$.",
+   "uses": [
+    "def-weil-pbc-ringed-topos-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01FB (remark-explain-arrow), degree-zero augmentation calculation; sites-cohomology.tex section-derived-functors."
+   }
+  },
+  {
+   "text": "For the identity morphism take $J'=I$ and $\\lambda=\\mathrm{id}$. Then $\\beta:J\\to I$ lifts the ordinary module map $\\phi$, and lem-weil-pbc-derived-functor-map-via-lift gives $[\\beta]_q=H^q(\\phi)$ under the chosen resolution identifications. This proves $T_{\\mathrm{id}}^q(\\phi)=H^q(\\phi)$, including the identity coefficient map.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-map-via-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015B (lemma-higher-derived-functors); computation of derived maps by resolution lifts."
+   }
+  },
+  {
+   "text": "For composition, keep $I,J,\\lambda,\\beta$ for $f,\\phi$, and choose $L\\to K$ injective. Choose bounded-below injective replacements $\\mu:g_*J\\to P$ and $\\nu:g_*J'\\to P'$ by lem-weil-pbc-complex-injective-resolution-mono. Let $\\gamma:K\\to P$ lift $\\psi$ and let $\\delta:P\\to P'$ satisfy $\\delta\\mu\\simeq\\nu g_*\\beta$; the former exists by the monic augmentation lifting theorem, the latter by the K-injective Hom bijection. The normalized statement of lem-weil-pbc-ringed-topoi-derived-pushforward-composition applies to the K-injective $I$ and its K-injective replacement $\\lambda$ and gives that $g_*\\lambda$ is a quasi-isomorphism. Hence $\\xi=\\nu g_*\\lambda:g_*f_*I\\to P'$ is an allowed injective replacement for the composite. The map $\\delta\\gamma$ extends $g_*\\phi\\circ\\psi$: after the augmentation from $L$, its homotopy class is $\\nu g_*\\lambda\\,g_*f_*(N\\to I)\\,g_*\\phi\\,\\psi$.",
+   "uses": [
+    "lem-weil-pbc-complex-injective-resolution-mono",
+    "lem-weil-pbc-lift-along-injective-quasi-iso",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "lem-sp-kinjective-comparison-principle",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E (lemma-derived-pushforward-composition), normalized comparison on injective representatives; derived.tex Tags 013K, 013P."
+   }
+  },
+  {
+   "text": "Write $A=H^q(\\Gamma(\\mathcal Y,\\lambda))$, $B=H^q(\\Gamma(\\mathcal Y,\\beta))$, $C=H^q(\\Gamma(\\mathcal Z,\\mu))$, $D=H^q(\\Gamma(\\mathcal Z,\\gamma))$, $E=H^q(\\Gamma(\\mathcal Z,\\nu))$, and $V=H^q(\\Gamma(\\mathcal Z,\\delta))$. All section comparisons here are step 1's canonical ones, including the given section-preserving $(gf)_*\\simeq g_*f_*$. Step 2 makes $A,C,E$ invertible. The homotopy $\\delta\\mu\\simeq\\nu g_*\\beta$ gives $VC=EB$. Also $H^q(\\Gamma(\\mathcal Z,\\xi))=EA$. Step 7 and independence therefore give\n$$T_{gf}^q(g_*\\phi\\circ\\psi)=(EA)^{-1}VD=A^{-1}BC^{-1}D=T_f^q(\\phi)T_g^q(\\psi).$$\nThis is cancellation of the displayed six cohomology maps, with no extra coherence claim left implicit.",
+   "uses": [
+    "lem-weil-pbc-homotopic-maps-equal-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Agent calculation of roofs from Tag 0D6E (lemma-derived-pushforward-composition) and cohomology.tex Tag 01FB (remark-explain-arrow)."
+   }
+  },
+  {
+   "text": "If $\\theta:h_*\\xrightarrow{\\sim}h'_* $ is the direct-image comparison of a geometric 2-isomorphism, use the transported coefficient map $\\theta_N\\phi$ and replacement $\\lambda'=\\lambda\\theta_I^{-1}:h'_*I\\to J'$. Naturality of $\\theta$ says $\\lambda' h'_*(N\\to I)\\theta_N\\phi=\\lambda h_*(N\\to I)\\phi$, so the same $\\beta$ works. Since $\\theta_I$ preserves the canonical section comparison, the two section roofs coincide. Independence in steps 3–4 removes these transported choices. Apply this to the composite comparisons of steps 7–8. Finally apply composition with an identity morphism on either side: for $a:M'\\to M$ and $b:N\\to N'$, it gives $T_f^q(\\phi a)=T_f^q(\\phi)H^q(a)$ and $T_f^q(f_*b\\,\\phi)=H^q(b)T_f^q(\\phi)$. These are the claimed two coefficient naturality statements.",
+   "uses": [
+    "def-weil-pbc-ringed-topos-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Agent calculation using naturality of the given section-preserving direct-image comparisons."
+   }
+  },
+  {
+   "text": "For the acyclic resolutions choose comparison maps $a:L'\\to I$ over $N$ and $b:K\\to J$ over $M$. Their existence follows by lifting along the degreewise monic quasi-isomorphisms $N[0]\\to L'$ and $M[0]\\to K$ into the injective targets. Their section cohomology maps are the canonical acyclic-resolution isomorphisms of lemma-weil-pbc-leray-acyclicity(2). The maps $\\lambda f_*a\\,u$ and $\\beta b$ from $K$ to $J'$ agree after $M[0]\\to K$, by the augmentation condition on $u$ and the defining equation of $\\beta$; thus they are homotopic by the injective uniqueness theorem. Applying sections and cohomology gives\n$$[\\lambda]_q[a]_q H^q(\\Gamma(u))=[\\beta]_q[b]_q.$$\nConsequently $[a]_q H^q(\\Gamma(u))[b]_q^{-1}=[\\lambda]_q^{-1}[\\beta]_q$. This is exactly the claimed normalization under the acyclic-resolution identifications. We have not required the terms of $f_*L'$ to be acyclic or its augmentation to be a resolution.",
+   "uses": [
+    "lem-weil-pbc-lift-along-injective-quasi-iso",
+    "lemma-weil-pbc-leray-acyclicity",
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "lem-weil-pbc-homotopic-maps-equal-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 013P(2), 013S and 015E; cohomology.tex Tag 01FB, explicit compatibility with acyclic resolutions."
+   }
+  },
+  {
+   "text": "If $f_*I$ resolves $f_*N$, take $M=f_*N$, $K=f_*I$, $L'=I$ and $u=\\mathrm{id}$ in step 10. The terms of $K$ are acyclic by lem-sfb-ringed-topos-injective-pushforward-global-acyclic, and the terms of $I$ are acyclic by lemma-weil-pbc-leray-acyclicity(1). If $c:H^q(\\Gamma(\\mathcal Y,f_*I))\\to H^q(\\mathcal Y,f_*N)$ denotes its acyclic-resolution comparison, the equality in step 10 reads $T_f^q(\\mathrm{id})c=\\mathrm{id}$. Thus $T_f^q(\\mathrm{id})=c^{-1}$, with precisely the orientation in the statement.",
+   "uses": [
+    "lem-sfb-ringed-topos-injective-pushforward-global-acyclic",
+    "lemma-weil-pbc-leray-acyclicity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015E and cohomology.tex Tag 01FB; orientation of the acyclic-resolution comparison."
+   }
+  },
+  {
+   "text": "For $j:\\mathcal X/U\\to\\mathcal X$, restriction of modules is exact and has exact left adjoint $j_!$ by lem-pur-site-restriction-module-adjunction-exact. It therefore preserves injectives: for a monomorphism $V\\to W$ on the slice, $j_!V\\to j_!W$ is monic, so every map $V\\to j^*I$, adjoint to $j_!V\\to I$, extends across $W$ by injectivity of $I$. Hence an injective resolution $M\\to I$ restricts to an injective resolution $j^*M\\to j^*I$. Use the chain unit $I\\to j_*j^*I$ as $u$ in step 10. By the sectionwise formula of def-pur-localized-ringed-site and adjunction, on sections this sends a global section of $I^n$ to its restriction at $U$ in every degree. Step 10 identifies its cohomology map with $T_j^q$ of the unit. It is the ordinary restriction computed from this common resolution.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-pur-localized-ringed-site",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI (lemma-extension-by-zero), 03DJ (lemma-extension-by-zero-exact); sites-cohomology.tex Tag 08FI (lemma-restrict-K-injective-to-open), restriction argument."
+   }
+  },
+  {
+   "text": "To check the final abelian comparison, choose an abelian injective resolution $M_{ab}\\to E$ on $\\mathcal X$. Exactness of forgetting modules makes $M_{ab}\\to I_{ab}$ a resolution. Lift to $a:I_{ab}\\to E$ over $M_{ab}$ by the monic augmentation lifting theorem. For every object $V$, the terms of $I_{ab}$ are evaluation-acyclic by the general ringed-site statement of lem-sc-injective-module-abelian-acyclic-zariski, despite its historical name. The Leray acyclic-resolution comparison therefore identifies $H^q(a(V))$ with the canonical module/abelian evaluation comparison at $V$ in lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison. The single sheaf chain map $a$ commutes with restriction from the terminal object to $U$, so its two evaluations give a commuting square of complexes. The two horizontal cohomology maps of that square are exactly the section restrictions in step 12, and the vertical ones are those canonical comparisons. Abelian injectives restrict to injectives by the same exact-left-adjoint argument, now using lem-weil-pbc-site-restriction-injectives. Thus the lower map is ordinary abelian cohomology restriction on the slice. This proves the requested compatibility without assuming $I_{ab}$ injective or the ring flat over $\\mathbf Z$.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-lift-along-injective-quasi-iso",
+    "lem-sc-injective-module-abelian-acyclic-zariski",
+    "lemma-weil-pbc-leray-acyclicity",
+    "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+    "lem-weil-pbc-site-restriction-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 03FD (lemma-cohomology-modules-abelian-agree), 03F3 (lemma-cohomology-of-open); normalization via derived.tex Tag 015E (lemma-leray-acyclicity)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-ringed-topos-morphism",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sc-injective-module-abelian-acyclic-zariski",
+  "lem-sfb-ringed-topos-injective-pushforward-global-acyclic",
+  "lem-sp-kinjective-comparison-principle",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-weil-pbc-complex-injective-resolution-mono",
+  "lem-weil-pbc-derived-functor-map-via-lift",
+  "lem-weil-pbc-homotopic-maps-equal-cohomology",
+  "lem-weil-pbc-injective-resolution-lift-exists",
+  "lem-weil-pbc-leray-acyclicity-quasi-iso",
+  "lem-weil-pbc-lift-along-injective-quasi-iso",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-site-restriction-injectives",
+  "lemma-weil-pbc-leray-acyclicity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "section-derived-functors, Tags 072Z, 0731, 03FD, 0D6E; ringed-site assembly and explicit roof calculations extending cohomology.tex Tags 01F8 and 01FB."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For morphisms of ringed topoi, maps on module sheaf cohomology induced by a map M to f pushforward N are independent of injective resolutions and respect composition and scalars",
+   "results": "8 hits; names/files: SheafOfModules.pushforward_map_val, SheafOfModules.pushforwardNatTrans, SheafOfModules.pushforwardNatTrans_app_val_app_apply, SheafOfModules.pushforwardNatTrans_app_val_app, SheafOfModules.unitToPushforwardObjUnit, AlgebraicGeometry.Scheme.Modules.pushforward_map_app, PresheafOfModules.pushforward_obj_map_apply', SheafOfModules.pushforwardSections; ",
+   "date": "2026-10-23",
+   "verdict": "no match: underived module pushforward/sections and general derived natural transformations do not state ringed-site cohomology maps, the Leray roof, or composition across different ringed sites",
+   "digest": "5814e1854060223c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Functoriality of derived global sections for morphisms of ringed sites and maps of modules to direct images",
+   "results": "8 hits; names/files: SheafOfModules.sectionsFunctor, AlgebraicGeometry.Scheme.Γ, SheafOfModules.sectionsFunctor_obj, AlgebraicGeometry.SheafedSpace.Γ, AlgebraicGeometry.LocallyRingedSpace.Γ, SheafOfModules.pushforward, SheafOfModules.pushforward_map_val, AlgebraicGeometry.Scheme.Γ_def; ",
+   "date": "2026-10-23",
+   "verdict": "no match: underived module pushforward/sections and general derived natural transformations do not state ringed-site cohomology maps, the Leray roof, or composition across different ringed sites",
+   "digest": "eb61240caaa70794"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward, Functor.rightDerived",
+   "results": "0 hits; names/files: ; loogle: unknown identifier 'Functor.rightDerived'",
+   "date": "2026-10-23",
+   "verdict": "no match: underived module pushforward/sections and general derived natural transformations do not state ringed-site cohomology maps, the Leray roof, or composition across different ringed sites",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "grep",
+   "query": "fmap|fMap|cohomology.*(comp|pullback)|rightDerived.*comp",
+   "results": "0 hits; names/files: ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: underived module pushforward/sections and general derived natural transformations do not state ringed-site cohomology maps, the Leray roof, or composition across different ringed sites",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology maps from coefficient maps into direct images on arbitrary ringed sites compose functorially using injective resolutions and Leray",
+   "results": "8 hits; names/files: CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.InjectiveResolution.Hom.ι'_comp_hom'_assoc, CategoryTheory.plusPlusSheaf_map_val, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.InjectiveResolution.Hom.ι'_comp_hom', CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, CategoryTheory.InjectiveResolution.Hom.hom'_f_assoc; ",
+   "date": "2026-10-23",
+   "verdict": "no match: underived module pushforward/sections and general derived natural transformations do not state ringed-site cohomology maps, the Leray roof, or composition across different ringed sites",
+   "digest": "9270140929bcf419"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerivedComp",
+   "results": "0 hits; names/files: ; loogle: unknown identifier 'CategoryTheory.Functor.rightDerivedComp'",
+   "date": "2026-10-23",
+   "verdict": "no match: underived module pushforward/sections and general derived natural transformations do not state ringed-site cohomology maps, the Leray roof, or composition across different ringed sites",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedComp|rightDerived.*[Cc]omp|rightDerivedFunctorComp",
+   "results": "11 hits; names/files: Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean; ",
+   "date": "2026-10-23",
+   "verdict": "no match: underived module pushforward/sections and general derived natural transformations do not state ringed-site cohomology maps, the Leray roof, or composition across different ringed sites",
+   "digest": "a3fc1235f042c058"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerivedNatTrans_comp",
+   "results": "1 hits; names/files: CategoryTheory.Functor.rightDerivedNatTrans_comp; ",
+   "date": "2026-10-23",
+   "verdict": "general ingredient only: rightDerivedNatTrans_comp composes transformations with one fixed localization; it does not supply the ringed-site Leray comparison or coefficient h-map recipe",
+   "digest": "6e897dcc71bd6ef3"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology.*(fmap|ringed)|fmap.*cohomology|rightDerivedNatTrans_comp",
+   "date": "2026-10-23",
+   "results": "1 hits: Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean; source candidates read: RightDerived.lean:105–140 and PushforwardContinuous.lean:110–195.",
+   "verdict": "no match: underived pushforward composition and maps of derived functors along one fixed localization do not state the full arbitrary ringed-site coefficient-map calculus",
+   "digest": "654bc25ff11fe879"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Maps on sheaf module cohomology induced by coefficient maps into direct images compose without flatness",
+   "date": "2026-10-23",
+   "results": "8 hits: SheafOfModules.pushforwardComp, SheafOfModules.pushforward, SheafOfModules.sectionsMap_comp, AlgebraicGeometry.Scheme.Modules.pushforwardComp, groupCohomology.map, SheafOfModules.pushforwardComp_hom_app_val_app, PresheafOfModules.Hom.naturality_assoc, PresheafOfModules.map_comp_assoc; source candidates read: RightDerived.lean:105–140 and PushforwardContinuous.lean:110–195.",
+   "verdict": "no match: underived pushforward composition and maps of derived functors along one fixed localization do not state the full arbitrary ringed-site coefficient-map calculus",
+   "digest": "f6375eaa0793d84e"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward, CategoryTheory.Functor.rightDerivedNatTrans_comp",
+   "date": "2026-10-23",
+   "results": "0 hits: ; source candidates read: RightDerived.lean:105–140 and PushforwardContinuous.lean:110–195.",
+   "verdict": "no match: underived pushforward composition and maps of derived functors along one fixed localization do not state the full arbitrary ringed-site coefficient-map calculus",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial cohomology maps for coefficient homomorphisms M to f pushforward N for arbitrary morphisms of ringed sites via injective resolutions",
+   "date": "2026-10-23",
+   "results": "8 hits: SheafOfModules.pushforward_map_val, SheafOfModules.pushforwardNatTrans, SheafOfModules.pushforwardNatTrans_app_val_app_apply, SheafOfModules.pushforwardNatTrans_app_val_app, PresheafOfModules.pushforward_obj_map_apply', SheafOfModules.pushforwardSections, PresheafOfModules.pushforward_obj_map_apply, PresheafOfModules.pushforward_map_app_apply'; source candidates read: RightDerived.lean:105–140 and PushforwardContinuous.lean:110–195.",
+   "verdict": "no match: underived pushforward composition and maps of derived functors along one fixed localization do not state the full arbitrary ringed-site coefficient-map calculus",
+   "digest": "2e447ce8e2da6e27"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologyMap|cohomology.*[Ff]unctor|rightDerived.*[Cc]omp",
+   "date": "2026-10-23",
+   "results": "3 hits: Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean; source candidates read: RightDerived.lean:105–140 and PushforwardContinuous.lean:110–195.",
+   "verdict": "no match: underived pushforward composition and maps of derived functors along one fixed localization do not state the full arbitrary ringed-site coefficient-map calculus",
+   "digest": "e4fe0ee2d07e93ab"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerivedNatTrans_comp",
+   "date": "2026-10-23",
+   "results": "1 hits: CategoryTheory.Functor.rightDerivedNatTrans_comp; source candidates read: RightDerived.lean:105–140 and PushforwardContinuous.lean:110–195.",
+   "verdict": "no match: underived pushforward composition and maps of derived functors along one fixed localization do not state the full arbitrary ringed-site coefficient-map calculus",
+   "digest": "6e897dcc71bd6ef3"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections coefficient h maps computed on acyclic resolutions agree with injective resolution comparison and compose for ringed topoi",
+   "date": "2026-10-23",
+   "results": "8 hits: CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality, CategoryTheory.InjectiveResolution.Hom.ι'_comp_hom'_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, CategoryTheory.InjectiveResolution.desc_commutes_assoc, CategoryTheory.InjectiveResolution.Hom.hom'_f_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles_assoc, CategoryTheory.InjectiveResolution.Hom.ι'_comp_hom'; source candidates read: RightDerived.lean:105–140 and PushforwardContinuous.lean:110–195.",
+   "verdict": "no match: underived pushforward composition and maps of derived functors along one fixed localization do not state the full arbitrary ringed-site coefficient-map calculus",
+   "digest": "9e3da138141aa97d"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qcoh-cohomology-etale-pullback-naturality",
+  "date": "2026-10-23",
+  "group": "NQ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Quasi-coherent cohomological dimension of algebraic-space curve families. Supporting cohomology input: comparison of the schematic local higher images with the ordinary scheme vanishing theorem. Supporting comparison input: functoriality of the quasi-coherent cohomology comparison under etale restriction. General homological input: coefficient h-maps on ringed sites and their composition, used to compare the two paths around the Zariski-etale square.",
+   "via": [
+    "lem-sfb-qcoh-cohomology-etale-pullback-naturality",
+    "lem-sfb-scheme-etale-higher-image-comparison",
+    "lem-sfb-proper-space-curve-qcoh-bound",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-ringed-site-cohomology-fmap-calculus",
+  "worker": "stage1",
+  "summary": "Thirteen explicit steps prove the coefficient-map roof, all choice independence, composition and geometric 2-isomorphism invariance, linearity, acyclic-resolution normalization and localized/abelian restriction. Reused existing general homological nodes; no new nodes and no statement change.",
+  "blueprint": "Latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), via the inherited alteration/direct-image prerequisite chain: this general cohomological tool supplies the coefficient-map compatibility around the Zariski/etale square in lem-sfb-qcoh-cohomology-etale-pullback-naturality. The inherited nearest ancestor is null (blueprint_refs.py ancestor reports this); from.place already identifies this precise use and is retained.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-ringed-topos-morphism",
+    "why": "General injective-resolution, acyclic-comparison, or localized module/abelian restriction input used verbatim in steps 1, 5, 9; the current unit has no substitute for this general homological tool."
+   },
+   {
+    "node": "lem-sp-kinjective-comparison-principle",
+    "why": "General injective-resolution, acyclic-comparison, or localized module/abelian restriction input used verbatim in steps 3, 4, 7; the current unit has no substitute for this general homological tool."
+   },
+   {
+    "node": "lem-weil-pbc-complex-injective-resolution-mono",
+    "why": "General injective-resolution, acyclic-comparison, or localized module/abelian restriction input used verbatim in steps 1, 7; the current unit has no substitute for this general homological tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+    "why": "General injective-resolution, acyclic-comparison, or localized module/abelian restriction input used verbatim in steps 13; the current unit has no substitute for this general homological tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "General injective-resolution, acyclic-comparison, or localized module/abelian restriction input used verbatim in steps 7; the current unit has no substitute for this general homological tool."
+   },
+   {
+    "node": "lem-weil-pbc-site-restriction-injectives",
+    "why": "General injective-resolution, acyclic-comparison, or localized module/abelian restriction input used verbatim in steps 13; the current unit has no substitute for this general homological tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-ringed-topos-morphism",
+  "lem-sp-kinjective-comparison-principle",
+  "lem-weil-pbc-complex-injective-resolution-mono",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-site-restriction-injectives"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q81-3af9eb058",
+  "group": "Q81",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-3af9eb058 (reviewer sub-agent of L); spot-checked: FIX for one source fault; the mathematics passes. I read the item, all 13 steps, the statements of all 20 cited nodes and of every stmt_dep, Stacks 01F8 and 01FB (cohomology.tex) at the cited place, and the tag/label table for all tags the steps cite. This is the first split, not a re-split: there is no repair note, live and side-live still have the item unsplit, and the statement and stmt_deps match the base. No new nodes, no SGA citation, no cycle, and proof_deps equals the union of the step uses. All 20 cited nodes lie on the route of unit sk-thm-sf-ctf-stability, so the 6 declared tool_uses are unnecessary but harmless; I accept them. The proof follows the 01FB roof. Checks by step: 1-2: the section identity holds because f^{-1}1=1; lift-along-injective-quasi-iso gives beta; Gamma(lambda) is a quasi-isomorphism by global-acyclic plus Leray(1) plus leray-acyclicity-quasi-iso. 3-4: the K-injective Hom bijection and homotopy uniqueness give equal roofs under the canonical identifications [a],[b]. 5: in degree 0 a homotopy changes the map only by a coboundary. 7: uses the g_*j quasi-isomorphism clause of the derived-pushforward-composition node; the composite lift chain was checked. 8: (EA)^{-1}VD=A^{-1}BC^{-1}D, using VC=EB. 10-11: lambda f_*a u = beta b after augmentation, so T(id)=c^{-1} with the stated orientation. 12: j^* preserves injectives because j_! is exact, and the unit is restriction on sections. 13: forgotten injectives are evaluation-acyclic, and the Leray lift gives the square. Edge cases tested: identity morphism, zero map, one-point topoi with Z->F_2 (non-flat), f_*I not a resolution, U not subterminal. Not a duplicate: the def-weil-pbc-module-cohomology-fmap family covers scheme morphisms only, and the Cech refinement square covers site morphisms only. Advisories: (a) step 13 uses the lift formula of the module/abelian evaluation comparison; that formula is in the node's landed Lean statement and its proof but not in its natural-language statement, so I accept it and note it for the maintainer. (b) The localization clause presupposes that j is a ringed-topos morphism and that Mod(O|_U) has enough injectives; both were already implicit in the base statement. FIX: in steps 2, 5, 7, 8, 12 and 13, source.document said derived.tex but the cited tags live in sites-cohomology.tex, cohomology.tex or sites-modules.tex; corrected to the right files, with the remaining derived.tex tags named in place. Nothing else changed. File: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-ringed-site-cohomology-fmap-calculus.json. Details in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedSiteCohomologyFmapCalculus",
+  "declaration": "CategoryTheory.RingedSiteCohomology.map_roof",
+  "declarations": [
+   "CategoryTheory.RingedSiteCohomology.Site",
+   "CategoryTheory.RingedSiteCohomology.Site.base",
+   "CategoryTheory.RingedSiteCohomology.Site.Mod",
+   "CategoryTheory.RingedSiteCohomology.Site.sections",
+   "CategoryTheory.RingedSiteCohomology.Site.H",
+   "CategoryTheory.RingedSiteCohomology.Morphism",
+   "CategoryTheory.RingedSiteCohomology.Site.one",
+   "CategoryTheory.RingedSiteCohomology.Site.sets",
+   "CategoryTheory.RingedSiteCohomology.element",
+   "CategoryTheory.RingedSiteCohomology.SectionNormalized",
+   "CategoryTheory.RingedSiteCohomology.sections_existsUnique",
+   "CategoryTheory.RingedSiteCohomology.sectionsIso",
+   "CategoryTheory.RingedSiteCohomology.complexSectionsIso",
+   "CategoryTheory.RingedSiteCohomology.complexSectionsIsoInt",
+   "CategoryTheory.RingedSiteCohomology.resolutionIso",
+   "CategoryTheory.RingedSiteCohomology.RoofNormalized",
+   "CategoryTheory.RingedSiteCohomology.map_existsUnique",
+   "CategoryTheory.RingedSiteCohomology.map",
+   "CategoryTheory.RingedSiteCohomology.map_roof",
+   "CategoryTheory.RingedSiteCohomology.map_add_zero",
+   "CategoryTheory.RingedSiteCohomology.map_zero",
+   "CategoryTheory.RingedSiteCohomology.map_comp",
+   "CategoryTheory.RingedSiteCohomology.map_twoIso",
+   "CategoryTheory.RingedSiteCohomology.map_identity",
+   "CategoryTheory.RingedSiteCohomology.map_natural",
+   "CategoryTheory.RingedSiteCohomology.map_acyclic",
+   "CategoryTheory.RingedSiteCohomology.map_roof_int",
+   "CategoryTheory.RingedSiteCohomology.scalar",
+   "CategoryTheory.RingedSiteCohomology.ringElement",
+   "CategoryTheory.RingedSiteCohomology.map_scalar",
+   "CategoryTheory.RingedSiteCohomology.map_edge",
+   "CategoryTheory.RingedSiteCohomology.slice",
+   "CategoryTheory.RingedSiteCohomology.restriction",
+   "CategoryTheory.RingedSiteCohomology.restriction_additive",
+   "CategoryTheory.RingedSiteCohomology.restrictSections",
+   "CategoryTheory.RingedSiteCohomology.map_restriction",
+   "CategoryTheory.RingedSiteCohomology.abEval",
+   "CategoryTheory.RingedSiteCohomology.evaluationComparison",
+   "CategoryTheory.RingedSiteCohomology.abRestriction",
+   "CategoryTheory.RingedSiteCohomology.sliceSectionsIso",
+   "CategoryTheory.RingedSiteCohomology.restrictionComparison",
+   "CategoryTheory.RingedSiteCohomology.restriction_resolution",
+   "CategoryTheory.RingedSiteCohomology.map_restriction_abelian"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RingedSiteCohomologyFmapCalculus.lean",
+  "statement": "theorem map_roof {X Y : Site.{u}} (f : Morphism X Y) {M : Y.Mod} {N : X.Mod} (φ : M ⟶ f.modules.obj N) (q : ℕ) : RoofNormalized f M N φ q (map f φ q)",
+  "branch": "sheaf-dag",
+  "by": "NS",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "All clauses are carried by map_roof, map_roof_int, map_add_zero, map_scalar, map_zero, map_comp, map_twoIso, map_identity, map_natural, map_acyclic, map_edge, restriction_resolution, map_restriction and map_restriction_abelian. Site bundles precisely the common-universe small sites, terminal objects, commutative rings and enough injectives. sectionsIso and map are chosen only from unique resolution-normalized existence statements; all other data are real constructions. The sole dependency module repairs the overly restrictive precoverage interface of the recorded module/abelian comparison."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0c4cb97d6",
+  "group": "NS",
+  "result": "pass",
+  "note": "Re-delivery after the H13 RETURN of 581b. Dependency record for lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison is identical to live (module/declaration/statement/NJ/date) except the appended name in declarations and a note. ModuleAbelianEvaluationComparison.lean is a pure append of module_abelian_evaluation_comparison_general (sorry); the live prefix and NJ's proof are unchanged, and no other declaration has that name. The general theorem says what Stacks 03FD says, its ∃! is genuine, and it is provable from the existing proof body. Item module differs from 581b only by that import; item node is verbatim. I re-read every clause against the node, the lean.statement is verbatim in the file, the declarations list matches the file, there are no hollow definitions and all theorems are sorry. Not compiled (no file changed); the worker's compiles and dry run are reported clean. Advisory: landing adds one sorry'd declaration to the proved node's module, closable in stage 3 with the existing proof."
+ }
+}

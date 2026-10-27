@@ -1,0 +1,376 @@
+{
+ "id": "lem-fd-pullback-signed-shift-word-transport",
+ "kind": "statement",
+ "title": "Signed shifts and finite-word transport for normalized pullback comparisons",
+ "statement": "Fix a prime $\\ell$ and an algebraic closure $\\Omega/\\mathbf Q_\\ell$. All schemes $W$ below are noetherian and finite dimensional with $\\ell$ invertible, with the meaning and the common full integral constructible categories of [lem-weil-pbc-integral-stratified-perfect-characterization]. For finite $E\\subset\\Omega$ over $\\mathbf Q_\\ell$, put $A_{E,n}=\\mathcal O_E/\\varpi_E^n$, $R_{E,W}=\\lim_{n\\geq1}(A_{E,n})_W$ on the small pro-etale site, and use framework and PBC completed pullbacks $F^s_{h,E},F^p_{h,E}$ of [def-weil-derived-pullback-tensor-hom, def-weil-pbc-completed-pullback]. Write $I_{W,E}$ for restriction along the quotient-normalized coefficient identity, giving the integral identity equivalence. All equalities below use these fixed identity transports; we suppress $I$ when source and target already have the same module presentation. For a scheme isomorphism $h:U\\simeq T$, let $G_{h,E}$ be ordinary derived module pullback on the completed rings. For a flat-term K-flat representative $P$ over $R_{E,T}$ set\n$$Q_{h,E}(P)_n=\\operatorname{Res}_n h_n^*(P\\otimes_{R_{E,T}}(A_{E,n})_T),\\qquad H(Q)=\\operatorname{Cone}(1-s_Q)[-1],$$\nwith the actual quotient transitions and $s_Q((x_n)_n)=(t_nx_{n+1})_n$ [def-pur-integral-derived-operations].\nFor each such tower, use the normalized derived comparison of [lem-weil-strict-roos-comparison],\n$$\\rho_Q=[\\iota_I]^{-1}[H(q)]:H(Q)\\xrightarrow{\\sim}R\\lim Q,$$\nwhere $q:Q\\to I_\\bullet$ is a K-injective tower resolution with injective terms and $\\iota_I:\\lim I_\\bullet\\to H(I_\\bullet)$ has coordinates $z\\mapsto(0,z)$. Write $b^{\\rm amb}_{h,E}:IF^s_{h,E}\\to F^p_{h,E}I$ for this comparison with the defining realization identifications, and $b^{\\rm int}_{h,E}$ for its restriction to the full integral constructible categories.\nFor every $r\\in\\mathbf Z$ the natural signed cone isomorphism $H(Q[r])\\to H(Q)[r]$ is $(y,x)\\mapsto((-1)^r y,x)$ in reversed cone coordinates. It descends through the specified representative comparison to the framework pullback shifts with exactly the predicates $\\operatorname{ShiftCoordinates}$ and $\\operatorname{ShiftDescent}$ of [def-fd-integral-pullback-shift-coordinates]. With the canonical exact-functor shifts on the PBC realization and coefficient transport,\n$$\\operatorname{shift}^p_{r,K}\\circ b^{\\rm amb}_{h,E,K[r]}=b^{\\rm amb}_{h,E,K}[r]\\circ\\operatorname{shift}^s_{r,K}.$$\nIt fixes every normalized augmentation $(0,z)$; the same shift square holds for the scalar comparison induced by any degree-zero strict map $d_\\bullet$ on both cone coordinates.\nSuppose the primitive unit, composition and scalar maps are the actual maps identified in [lem-fd-pbc-completed-compositor-normalization, lem-fd-scalar-pullback-realization-identification], and the realization models retain the entire-system counits as in [lem-fd-pullback-augmentation-counit-matching]. For each finite composable word $w$ of scheme-isomorphism pullbacks and finite coefficient extensions, let $r_{w,C}:\\widehat w\\mathcal LC\\xrightarrow{\\sim}\\mathcal LwC$ be its counit-built comparison [lem-trf-counit-realization-substitution]; restrict to normalized systems with constructible-complete intermediate realizations. Every specified system comparison $t:w\\Rightarrow w'$ is realized by\n$$\\widehat t_{\\mathcal LC}=r_{w',C}^{-1}\\circ\\mathcal L(t_C)\\circ r_{w,C}.$$\nThis identification intertwines the two presentations by the above $b$, respects the signed shifts, and carries the entire-diagram equalities of [lem-trf-quotient-system-mixed-coherence] to the corresponding identities for the actual integral operations: associativity and units for arbitrary finite scheme compositions, equality of scheme maps, repeated fields, and successive scalar extensions. The scalar associator is the ordinary tensor associator conjugated by the specified $\\chi$ maps; equal fields use multiplication followed by completeness. The same identities hold after raw rationalization and for inverse comparisons. No finite Tor-amplitude hypothesis on quotient complexes is imposed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+  "place": "Final sentence; agent-written extraction of returned lem-fd-whole-tower-integral-pullback-comparison proof steps 11. Exact arguments retained in report.md. Supporting Stacks sources: Tag 0941, sites-cohomology.tex, lemma-derived-limit-is-ok; extracted normalized scalar/shift refinement, not a verbatim Stacks assertion"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pur-kinjective-complex",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-proetale-site",
+  "def-pc-kflat-complex",
+  "def-pur-integral-derived-operations",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-pbc-completed-pullback",
+  "lem-weil-strict-roos-comparison",
+  "def-fd-integral-pullback-shift-coordinates",
+  "lem-fd-pullback-augmentation-counit-matching",
+  "lem-fd-pbc-completed-compositor-normalization",
+  "lem-fd-scalar-pullback-realization-identification",
+  "lem-trf-counit-realization-substitution",
+  "lem-trf-quotient-system-mixed-coherence",
+  "def-weil-rationalization-karoubi"
+ ],
+ "proof": [
+  {
+   "text": "Work in the common completed-ring module presentation fixed in the statement. The pro-etale exact-product lemma applies to the sheaf of rings $R_{E,U}$, so the termwise countable products used by the Roos functor represent the required derived products. For each $r$, finite pullback, reduction and restriction of scalars commute with degree reindexing and multiply the differential by $(-1)^r$. Their canonical comparisons therefore identify $Q_{h,E}(P[r])_n$ with $Q_{h,E}(P)_n[r]$. They also identify each transition: in degree $i$ both transition maps are the original quotient map on $P^{i+r}$. Taking products gives precisely the productShift in the coordinate definition, and conjugates $1-s_{Q(P[r])}$ to $(1-s_{Q(P)})[r]$. No quotient tensor map is being declared flat.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "lem-weil-proetale-countable-products-exact",
+    "def-fd-integral-pullback-shift-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, product model; agent-written specialization to the specified finite pullback towers"
+   }
+  },
+  {
+   "text": "Apply the signed strict-Roos shift lemma to this tower. In its reversed coordinates put $M=\\prod_nQ_n$ and $a=1-s_Q$. The source differential on $H(Q[r])$ is $(y,x)\\mapsto(-(-1)^rdy-ax,(-1)^rdx)$, while that on $H(Q)[r]$ is $(y,x)\\mapsto((-1)^r(-dy-ax),(-1)^rdx)$. Thus $c_r(y,x)=((-1)^ry,x)$ is a chain map; it is its own inverse after reindexing. This is the exact pair of component equations of ShiftCoordinates, not an unsigned cone identification. The cited lemma gives naturality and $c_0=1$, $c_r[s]c_s=c_{r+s}$; the sign identity is $(-1)^{r+s}=(-1)^r(-1)^s$. Also $c_r(0,z)=(0,z)$, with the degree of $z$ reindexed.",
+   "uses": [
+    "lem-a1-strict-roos-shift-localization",
+    "def-fd-integral-pullback-shift-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014E, definition-cone; explicit signed cochain calculation and the existing strict-Roos shift/localization lemma"
+   }
+  },
+  {
+   "text": "The sign also commutes with the normalized comparison to $R\\lim$. Choose $q:Q\\to I_\\bullet$ as in the strict-Roos comparison. Its shift is again an eligible resolution: injectivity of terms is unchanged by reindexing, and K-injectivity follows by shifting an acyclic source back, applying its defining null-homotopy property, then shifting the homotopy. The inclusion $j_I(z)=(0,z)$ obeys $c_{I,r}j_{I[r]}=j_I[r]\\lambda_{I,r}$, where $\\lambda$ is the termwise limit shift. Naturality gives $H(q)[r]c_{Q,r}=c_{I,r}H(q[r])$. Substitution into $\\rho_Q=[j_I]^{-1}[H(q)]$ gives\n$$\\rho_Q[r]\\,[c_{Q,r}]=\\operatorname{shift}^{R\\lim}_{r,Q}\\,\\rho_{Q[r]}.$$\nHere the right-hand shift is the canonical shift computed by $\\lambda_{I,r}$ on the shifted K-injective resolution. The resolution independence in the cited comparison makes this identity independent of $q$. It also proves compatibility with every normalized augmentation, since its shifted product coordinate is zero.",
+   "uses": [
+    "lem-weil-strict-roos-comparison",
+    "lem-a1-strict-roos-shift-localization",
+    "def-pur-kinjective-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, K-injective model and ordinary-limit inclusion; signed refinement written by the worker"
+   }
+  },
+  {
+   "text": "Descend the coordinate isomorphism through the retained representative comparison. A flat-term K-flat $P$ remains good after any integer shift: its terms are reindexed flat terms, and $A\\otimes P[r]\\cong(A\\otimes P)[r]$ for any acyclic $A$, by the total-tensor sign convention, so this tensor is acyclic. The well-definedness theorem gives the descended pullback functor and its natural comparisons on good representatives, independent of resolutions. Conjugating the localized $c_r$ by those comparisons defines its shift $d_r$. Solving for $d_r$ gives, with localization comparisons $\\eta$ inserted,\n$$\\varepsilon_P[r]d_{r,QP}=\\eta_{F_g(P)}Q(c_{r,P})\\varepsilon_{P[r]}D_g(\\eta_P^{-1}),$$\nwhich is exactly ShiftDescent. Naturality of $c_r$ makes this formula commute with every resolving comparison and its inverse; the localization universal property transports the identity, composition and shift coherence equations. Hence it gives a coherent structure on the descended functor, not a choice made independently for each object. On the PBC side, the finite-pullback strict-tower comparison identifies $Lh^*_{\\operatorname{Tow}}(K_\\bullet)$ with the same strict tower $Q_{h,E}(P)$ by exactly the finite evaluation comparisons fixed in the PBC definition, and states $s^B_{K,r}\\circ b_{h,K[r]}=b_{h,K}[r]\\circ s^V_{K,r}$, where $s^V$ is the canonical reduction/tower-pullback shift and $s^B$ is the termwise levelShift of step 1. Applying $R\\lim$ with its canonical shift, and noting that the restriction $I$ along the identity coefficient isomorphism is termwise and commutes strictly with reindexing, the canonical exact-functor shift of $F^p_{h,E}$ is $R\\lim$-shift after $R\\lim(\\operatorname{levelShift})$. Combining this with step 3 and the formula above proves the displayed ambient shift square. Restriction to the full integral categories is valid because the characterization theorem explicitly closes them under shifts.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "def-pc-tensor-complex-sheaves",
+    "lem-pur-integral-operations-well-defined",
+    "lem-weil-pbc-localization-universal-property",
+    "def-fd-integral-pullback-shift-coordinates",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-a1-finite-pullback-strict-tower-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014E, definition-cone, and Tag 0941, lemma-derived-limit-is-ok; agent-written descent through the specified natural representative comparisons"
+   }
+  },
+  {
+   "text": "For a degree-zero strict tower map $d_\\bullet$, write $D=\\prod_nd_n$ after the specified tensor/product comparisons. The cone map is $(y,x)\\mapsto(Dy,Dx)$, so\n$$c_r(Dy,Dx)=((-1)^rDy,Dx)=(D((-1)^ry),Dx).$$\nThis proves the scalar shift square before localization, including its zero-coordinate augmentation. The scalar realization-identification lemma identifies this very diagonal cone map, after conjugating by $\\chi$, with the actual scalar/pullback comparison in the PBC presentation. The normalized scalar-completion comparison states that $\\chi$ and its inverse commute with the specified shifts. Thus conjugating the preceding equality proves the scalar square with the actual scalar maps, and step 3 applies on its derived-limit side. This argument only uses degree zero and strict compatibility of $d_\\bullet$; it never inverts an individual $d_n$.",
+   "uses": [
+    "lem-fd-scalar-pullback-realization-identification",
+    "lem-fd-normalized-integral-completion-comparison",
+    "lem-a1-strict-roos-shift-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, functorial cone map; agent-written degree-zero diagonal calculation"
+   }
+  },
+  {
+   "text": "Use the simultaneous realization system supplied by augmentation/counit matching. The compositor-normalization lemma identifies its scheme units and compositors with the actual PBC maps, and the scalar-identification lemma identifies its mixed scalar map with the actual one. In particular this is the system retaining the whole-system counit at every intermediate realization. Apply counit-realization substitution to it, on exactly the normalized systems with constructible-complete intermediate realizations stipulated here. It gives $r_{O,C}=\\mathcal L(O(e_C))b_{O,\\mathcal LC}$ for a primitive operation, and recursively $r_{vw,C}=r_{v,wC}\\widehat v(r_{w,C})$. Starting from the empty word with identity comparison gives all finite words. For a primitive comparison the cited theorem gives\n$$\\widehat t_{\\mathcal LC}=r_{w',C}^{-1}\\mathcal L(t_C)r_{w,C}.$$\nFor composable $t:w\\to w'$ and $u:w'\\to w''$, the two adjacent $r_{w',C}$ factors cancel, giving the same formula for $ut$; the cited substitution theorem also gives it after whiskering. Induction on the construction of a specified comparison proves the formula for every such comparison. Applying the same recursion to the primitive intertwinings by $b$ proves that these identifications intertwine the two presentations for every word.",
+   "uses": [
+    "lem-fd-pullback-augmentation-counit-matching",
+    "lem-fd-pbc-completed-compositor-normalization",
+    "lem-fd-scalar-pullback-realization-identification",
+    "lem-trf-counit-realization-substitution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, counit normalization; agent-written application of the cited whole-system substitution theorem"
+   }
+  },
+  {
+   "text": "Apply the entire-system coherence equations of the mixed-coherence lemma. For any two equal comparison paths $t,u:w\\Rightarrow w'$, functoriality gives $\\mathcal L(t_C)=\\mathcal L(u_C)$; conjugating by the same $r_{w',C}^{-1}$ and $r_{w,C}$ proves equality of their actual integral realizations. Step 6 identifies these realizations with the primitive actual maps and their whiskered composites. This proves the mixed composition equation, arbitrary finite associativity and scheme units, equality for equal scheme maps, and the scalar unit and tower equations, including repeated fields. No faithfulness of separate finite evaluations is used. More explicitly, the scalar associator is, by counit substitution,\n$$\\chi_{M/E,K}\\alpha^\\otimes_K(\\chi_{L/E,K}^{-1}\\otimes^L1)\\chi_{M/L,\\widehat S_{L/E}K}^{-1}.$$\nFor $E=L$, the same theorem identifies the system multiplication unit with multiplication followed by completeness. Thus these are the claimed specified scalar maps, rather than unnamed associators having only the same source and target.",
+   "uses": [
+    "lem-trf-quotient-system-mixed-coherence",
+    "lem-trf-counit-realization-substitution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, realization functor; agent-written conjugation of existing entire-system coherence equations"
+   }
+  },
+  {
+   "text": "The word identifications also respect the signed shifts. On the Roos side, every strict degree-zero operation map commutes with $c_r$ by the diagonal calculation of step 5; the quotient augmentations commute because $c_r(0,z)=(0,z)$. For the counit in the simultaneous models, augmentation/counit matching identifies it with $[q]^{-1}[\\Delta\\lim I_\\bullet\\to I_\\bullet]$. Shifting $q$ and the ordinary limit projections commutes with this entire-tower map, as in step 3. Its change-of-rings adjunct uses degree-zero tensor maps, so has the same compatibility. Thus every factor $b_{O,\\mathcal LC}$ and $\\mathcal L(O(e_C))$ in $r_{O,C}$ commutes with the specified shifts; for scalar factors use also the shift compatibility of $\\chi$. The recursive formula for $r_{vw,C}$ now proves its shift square by induction on word length. Inserting those squares on the two sides of the formula for $\\widehat t$ proves the asserted signed compatibility for each comparison and hence for every transported equality.",
+   "uses": [
+    "lem-fd-pullback-augmentation-counit-matching",
+    "lem-a1-strict-roos-shift-localization",
+    "lem-trf-counit-realization-substitution",
+    "lem-fd-normalized-integral-completion-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, whole-system counit computed on K-injectives; agent-written induction through the retained word comparisons"
+   }
+  },
+  {
+   "text": "Finally raw rationalization sends an integral map $f$ to $f\\otimes1$. By its definition, composition is bilinear and the induced shifts act on this same scalar-localized Hom, so applying it to either side of every equality above preserves that equality and all comparison isomorphisms. For the inverse of any comparison $t$, the transported formula is\n$$(r_{w',C}^{-1}\\mathcal L(t_C)r_{w,C})^{-1}=r_{w,C}^{-1}\\mathcal L(t_C^{-1})r_{w',C}.$$\nLikewise multiplying a shift square on the appropriate sides by the inverse comparison gives its inverse shift square. These operations preserve the already proved normalized unit and word identities. Throughout, towers and their counits were entire derived diagrams; only good ambient representatives were used. The mixed-coherence and substitution statements explicitly require neither finite Tor-amplitude of quotient complexes nor flat finite coefficient maps, so no such extra hypothesis has entered.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "lem-trf-counit-realization-substitution",
+    "lem-trf-quotient-system-mixed-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, realized diagram context; agent-written raw scalar-localization and inverse calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-integral-derived-operations",
+  "lem-weil-proetale-countable-products-exact",
+  "def-fd-integral-pullback-shift-coordinates",
+  "lem-a1-strict-roos-shift-localization",
+  "lem-weil-strict-roos-comparison",
+  "def-pur-kinjective-complex",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-fd-scalar-pullback-realization-identification",
+  "lem-fd-normalized-integral-completion-comparison",
+  "lem-fd-pullback-augmentation-counit-matching",
+  "lem-fd-pbc-completed-compositor-normalization",
+  "lem-trf-counit-realization-substitution",
+  "lem-trf-quotient-system-mixed-coherence",
+  "def-weil-rationalization-karoubi",
+  "lem-a1-finite-pullback-strict-tower-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+  "place": "Final coefficient-category sentence of def-fd-trace-function; signed Roos descent and counit-built finite-word transport, using Stacks 014E and 0941 and the cited existing DAG statements"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The signed cone shift preserves the normalized Roos comparison and transports all whole quotient diagram scalar and pullback coherence equations",
+   "results": "8 hits: HomotopyCategory.spectralObjectMappingCone_ω₁, CochainComplex.mappingCone.mapHomologicalComplexXIso, CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism, CochainComplex.mappingCone.mapHomologicalComplexXIso', CochainComplex.mappingCone.mapHomologicalComplexIso, CochainComplex.mappingCone.shiftIso, CochainComplex.mappingCone.map_δ, CochainComplex.shift_f_comp_mappingConeHomOfDegreewiseSplitIso_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: generic category/module/cone results do not state the specified completed pro-etale whole-tower comparison and its normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The cone shift map multiplies the shifted summand by minus one to the integer shift",
+   "results": "8 hits: CochainComplex.mappingCone.shiftIso, CochainComplex.HomComplex.Cochain.δ_shift, CategoryTheory.Functor.mapCochainComplexShiftIso, CochainComplex.mappingCone.inl_v_triangle_mor₃_f, CochainComplex.shiftFunctor_obj_d, CochainComplex.mappingCone.shiftTrianglehIso, CochainComplex.mappingCone.shiftTriangleIso, Homotopy.shift",
+   "date": "2026-10-22",
+   "verdict": "no match: generic category/module/cone results do not state the specified completed pro-etale whole-tower comparison and its normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "commShift|shiftFunctor.*mappingCone",
+   "results": "25 hits: Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic category/module/cone results do not state the specified completed pro-etale whole-tower comparison and its normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone.shiftIso",
+   "results": "1 hits: CochainComplex.mappingCone.shiftIso",
+   "date": "2026-10-22",
+   "verdict": "no match: generic category/module/cone results do not state the specified completed pro-etale whole-tower comparison and its normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CommShift",
+   "results": "12 hits: CategoryTheory.Functor.CommShift.id, CategoryTheory.Functor.CommShift, CategoryTheory.Functor.CommShift.ofIso, CategoryTheory.NatTrans.CommShift.id, CategoryTheory.NatTrans.CommShift.isoRefl_hom, CategoryTheory.NatTrans.CommShift, CategoryTheory.Functor.CommShift.comp, CategoryTheory.NatTrans.CommShiftCore",
+   "date": "2026-10-22",
+   "verdict": "no match: generic category/module/cone results do not state the specified completed pro-etale whole-tower comparison and its normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalized Roos cone comparison commutes with signed cochain shifts and transports coherence of completed pullbacks and scalar extension",
+   "results": "8 hits: CochainComplex.mappingCone.mapHomologicalComplexXIso, CochainComplex.mappingCone.mapHomologicalComplexXIso', CochainComplex.mappingCone.mapHomologicalComplexIso, CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom, CochainComplex.mappingCone.mapHomologicalComplexXIso_eq, CochainComplex.mappingCone.map_δ, CochainComplex.mappingCone.mapHomologicalComplexXIso'_inv, CochainComplex.mappingCone.shiftIso",
+   "date": "2026-10-22",
+   "verdict": "no match: generic cone/shift or limit results do not identify the normalized pro-etale completed pullback comparison, its retained representative descent, and actual integral scalar/word maps"
+  },
+  {
+   "tool": "grep",
+   "query": "roos|mappingCone.*shiftIso",
+   "results": "No hits in Algebra/Homology.",
+   "date": "2026-10-22",
+   "verdict": "no match: generic cone/shift or limit results do not identify the normalized pro-etale completed pullback comparison, its retained representative descent, and actual integral scalar/word maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone.shiftIso",
+   "results": "1 hits: CochainComplex.mappingCone.shiftIso",
+   "date": "2026-10-22",
+   "verdict": "no match: generic cone/shift or limit results do not identify the normalized pro-etale completed pullback comparison, its retained representative descent, and actual integral scalar/word maps"
+  },
+  {
+   "tool": "grep",
+   "query": "def shiftIso|shiftIso_hom|shiftIso_inv",
+   "results": "Two printed grep hits at lines 337 and 347 (single-file rg output); read Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean:347-375, declaration CochainComplex.mappingCone.shiftIso. This is a generic cone shift, not the normalized completed pullback word comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match: generic cone/shift or limit results do not identify the normalized pro-etale completed pullback comparison, its retained representative descent, and actual integral scalar/word maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural isomorphism between the shifted cone of one minus the tower transition and derived inverse limit preserves normalized augmentations and finite word coherence",
+   "results": "8 hits: CochainComplex.mappingCone.shiftIso, CategoryTheory.Limits.IsLimit.conePointsIsoOfNatIso_hom, CategoryTheory.Limits.IsLimit.lift_comp_conePointsIsoOfNatIso_inv, CochainComplex.mappingCone.shiftTriangleIso, CochainComplex.mappingCone.shiftTrianglehIso, CategoryTheory.Limits.Cones.postcomposeEquivalence, CategoryTheory.Limits.IsLimit.conePointsIsoOfNatIso, CategoryTheory.Limits.IsLimit.natIso",
+   "date": "2026-10-22",
+   "verdict": "no match: generic cone/shift or limit results do not identify the normalized pro-etale completed pullback comparison, its retained representative descent, and actual integral scalar/word maps"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-fd-whole-tower-integral-pullback-comparison",
+  "date": "2026-10-22",
+  "group": "Q60"
+ },
+ "chapter": "sec-fourier-transform",
+ "unit": "sk-def-trace",
+ "blueprint": {
+  "from": {
+   "node": "def-fd-trace-function",
+   "place": "Final sentence assigning the local Frobenius operator to the PBC Qbar coefficient category; old proof steps 7–8: identity on entire quotient towers and normalized integral coherence; returned whole-tower proof steps 11",
+   "via": [
+    "lem-fd-whole-tower-integral-pullback-comparison",
+    "lem-fd-rational-coefficient-category-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-fd-pullback-signed-shift-word-transport",
+  "worker": "stage1",
+  "summary": "No exact project attachment. Reused the existing generic signed-Roos localization lemma instead of duplicating it. Wrote nine steps: actual tower shift, signed differential calculation, K-injective-normalized rho square, representative descent, scalar square, counit-built word substitution, telescoping transport of entire-diagram coherence, shift induction, and raw rationalization/inverses. No new nodes and no statement change.",
+  "blueprint": "Final sentence of def-fd-trace-function computing in the PBC algebraically closed coefficient category; realizes the signed-shift and finite-word part extracted from whole-tower comparison step 11, with the stated primitive normalizations retained.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-strict-roos-shift-localization",
+    "why": "Generic strict-tower signed cone shift, coherent localization and normalized inclusion; no node of this unit gives this general localization result."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Exact sectionwise countable products on small pro-etale module sites validate the strict Roos model; this is a generic site tool."
+   },
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "Normalized entire-tower comparison to derived limit and its independence of resolutions; this is the given model comparison, not a replacement for the trace route."
+   },
+   {
+    "node": "lem-pur-integral-operations-well-defined",
+    "why": "Canonical descent and representative comparisons for the explicitly defined framework pullback; no trace-unit statement gives resolving-class well-definedness."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Unique descent of natural transformations and equality through localization, a generic categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Shift closure and identification of the two full integral categories; this is the coefficient-category interface assumed in the item."
+   },
+   {
+    "node": "lem-trf-counit-realization-substitution",
+    "why": "Counit-built word comparisons, their whiskering and scalar normalization are explicitly the transport interface assumed by this item."
+   },
+   {
+    "node": "lem-trf-quotient-system-mixed-coherence",
+    "why": "Whole quotient-diagram coherence equations are explicitly the finite-system input of the item; their realization follows the same route."
+   },
+   {
+    "node": "lem-a1-finite-pullback-strict-tower-comparison",
+    "why": "Shift compatibility of the defining PBC tower identification V_g((-)_bullet) = B_g with the termwise levelShift; no node of this unit states it for the PBC realization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-strict-roos-shift-localization",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-strict-roos-comparison",
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-trf-counit-realization-substitution",
+  "lem-trf-quotient-system-mixed-coherence",
+  "lem-a1-finite-pullback-strict-tower-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-fdaaf5d10",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-fdaaf5d10 (reviewer sub-agent of L); spot-checked: I read the item, its nine steps and every cited statement in full. There are no new nodes; the statement and stmt_deps are unchanged, and proof_deps equals the union of the step uses. I checked the signs against Stacks 014E (derived.tex:2471): Cone(h)[-1] has d(y,x)=(-dy-hx,dx), the two shifted differentials match, and c_r(y,x)=((-1)^r y,x) is a chain isomorphism that is its own inverse and fixes (0,z). I recomputed step 3 from lem-weil-strict-roos-comparison and lem-a1-strict-roos-shift-localization (Tag 0941, sites-cohomology.tex:5067): rho_Q[r][c_Q]=lambda rho_{Q[r]}, and q[r] is again K-injective with injective terms. Step 4's ShiftDescent types check. Steps 6-9 match the actual statements of lem-trf-counit-realization-substitution, lem-trf-quotient-system-mixed-coherence, the lem-fd compositor, scalar and counit nodes, and def-weil-rationalization-karoubi. Fault C1/C4: step 4 derived the ambient square for b^amb from 'the defining realization identifications' without a node. That identification is the Koszul zigzag Lh^*_Tow(K_bullet)=Q_{h,E}(P), and its shift compatibility s^B b=b[r] s^V is stated by the existing lem-a1-finite-pullback-strict-tower-comparison. FIX: step 4 now cites that node and says how Rlim of levelShift and the strict identity transport give the PBC shift; the node is added to proof_deps and declared in split_report.tool_uses. No cycle results. The other off-unit tool uses are accepted, since unit sk-def-trace has no steps. Maintainer note: lem-fd-normalized-integral-completion-comparison is stated for ell!=p (global finite-field datum), while the item says only 'fix a prime ell'. Its rationalization clause already presupposes ell!=p through def-weil-rationalization-karoubi, so I treated this as the project convention, not a fault.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FdPullbackSignedShiftWordTransport",
+  "declaration": "WeilConjectures.FdSignedWord.fdPullbackSignedShiftWordTransport",
+  "declarations": [
+   "WeilConjectures.fdSignedTransportShift",
+   "WeilConjectures.fdSignedConstantLimitShift",
+   "WeilConjectures.fdSignedRealizationShift",
+   "WeilConjectures.FdSignedWord.pbcPrimitive",
+   "WeilConjectures.FdSignedWord.pbcWord",
+   "WeilConjectures.FdSignedWord.pbcPrimitiveShift",
+   "WeilConjectures.FdSignedWord.pbcWordShift",
+   "WeilConjectures.FdSignedWord.primitiveIso",
+   "WeilConjectures.FdSignedWord.geometry",
+   "WeilConjectures.FdSignedWord.geometric",
+   "WeilConjectures.FdSignedWord.input",
+   "WeilConjectures.FdSignedWord.pullbackShift",
+   "WeilConjectures.FdSignedWord.pbcInputShift",
+   "WeilConjectures.FdSignedWord.realizationIso",
+   "WeilConjectures.FdSignedWord.Transport",
+   "WeilConjectures.FdSignedWord.towerRoos",
+   "WeilConjectures.FdSignedWord.roosShift",
+   "WeilConjectures.FdSignedWord.fdPullbackSignedShiftWordTransport"
+  ],
+  "file": "lean/Sheaf/Paper/FdPullbackSignedShiftWordTransport.lean",
+  "statement": "theorem fdPullbackSignedShiftWordTransport (D : IntegralComparisonSystem.{u} l) : Nonempty (Transport l D)",
+  "branch": "sheaf-dag",
+  "by": "Q105",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Owning-node helpers record actual PBC words, primitive normalizations, signed shifts and whole-counit substitution. Additional theorem declarations pullbackShift and roosShift state the ambient signed descent and the normalized augmentation/rho squares. No dependency node or mathematical statement is changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fc99a9eb4",
+  "group": "Q105",
+  "result": "pass",
+  "note": "Only the item lean field, the module and the report changed; stmt_deps and statement are byte-identical to live; lean.statement is verbatim; 18 declarations match the file; 3 sorry-only theorems; docstrings with source, blueprint id and proof steps. roosShift pins the signed cone shift by fst/snd projections (snd = y gets negOnePow, sign recomputed), fixes (0,z) and gives the rho shift square. pullbackShift gives ShiftCoordinates, ShiftDescent and NatTrans.CommShift for the pinned N.comparison. b is N.comparison on pullback letters and I(chi^-1) then derivedIso on scalar letters. actual is HEq-pinned on all 5 primitive constructors to the PBC compositor, id, scalarCompletedPull, ambientScalarComp and ambientUnit (directions checked), so substitution b;actual;b^-1 = I(r;L(t);r^-1) is a real claim. realizationShift, wordShift and actualShift use pinned or canonical shifts; coherence plus mixed gives the entire-diagram identities. forall D is safe: the system data are normalized and counitRealizationSubstitution holds for every M. Advisories: associator/unitor/identity actual maps pinned only on the normalized domain; laws and mixed are recall copies; completedScalarShiftRepresentativeProperty owner def-fd-completed-scalar-shift-representative-property is outside stmt_deps; global CommShift instances; report promises compile results it does not record. No compile run, per instructions."
+ }
+}

@@ -1,0 +1,305 @@
+{
+ "id": "lem-sfb-weighted-taylor-banach-model",
+ "kind": "statement",
+ "title": "Complete weighted Taylor coefficient model for holomorphic germs",
+ "statement": "For $d\\geq0$, let $G_d$ be the complex algebra of germs at $0\\in\\mathbf C^d$ of functions locally represented by convergent complex power series, two representatives agreeing when they agree on a neighbourhood of zero; its operations are pointwise [lem-sfb-complex-analytic-function-operations]. For a vector $\\rho=(\\rho_1,\\ldots,\\rho_d)$ of positive real numbers, put $\\rho^\\alpha=\\prod_i\\rho_i^{\\alpha_i}$ for $\\alpha\\in\\mathbf N^d$ and define\n$$A_\\rho=\\left\\{c:\\mathbf N^d\\to\\mathbf C:\\ \\|c\\|_\\rho=\\sum_{\\alpha\\in\\mathbf N^d}|c_\\alpha|\\rho^\\alpha<\\infty\\right\\}.$$\nWith coefficientwise addition and scalar multiplication, and convolution $(cb)_\\alpha=\\sum_{\\beta+\\gamma=\\alpha}c_\\beta b_\\gamma$, this is a complete normed unital complex algebra, with $\\|cb\\|_\\rho\\leq\\|c\\|_\\rho\\|b\\|_\\rho$ and unit the coefficient family supported at $\\alpha=0$. Complete means that every Cauchy sequence for this norm converges in $A_\\rho$. The series $\\sum_\\alpha c_\\alpha x^\\alpha$, where $x^\\alpha=\\prod_i x_i^{\\alpha_i}$, converges absolutely on $|x_i|<\\rho_i$ and is holomorphic there in the power-series sense. Sending $c$ to its germ gives an injective complex algebra homomorphism $\\gamma_\\rho:A_\\rho\\to G_d$. Every germ in $G_d$ belongs to the image of $\\gamma_\\rho$ for some positive $\\rho$. For $0<\\sigma_i\\leq\\rho_i$, keeping the same coefficients defines $A_\\rho\\to A_\\sigma$, satisfies $\\|c\\|_\\sigma\\leq\\|c\\|_\\rho$, and commutes with $\\gamma$. Restriction of $\\gamma_\\rho(c)$ to a coordinate subspace obtained by setting some coordinates to zero keeps precisely the coefficients whose corresponding exponents are zero. For $d=0$, $A_\\rho=G_0=\\mathbf C$.",
+ "source": {
+  "document": "literature/cartan-1951-52-exp10.pdf",
+  "place": "WANTED locally; read online https://www.numdam.org/item/SHC_1951-1952__4__A10_0.pdf. J. Frenkel, Seminaire H. Cartan 1951-52, exp.10, section 4 (printed pp.6-7, coefficient majorants) and section 5 (pp.7-9, convergence argument). The complete weighted coefficient-space formulation is agent supplied, not a verbatim theorem of the source."
+ },
+ "stmt_deps": [
+  "lem-sfb-complex-analytic-function-operations",
+  "def-sfb-weighted-taylor-coefficients",
+  "def-sfb-complex-analytic-germ"
+ ],
+ "proof": [
+  {
+   "text": "If $d=0$, the index set $\\mathbf N^0$ is a singleton and its unique weight is the empty product $1$. Thus $A_\\rho=\\mathbf C$ with its absolute-value norm and ordinary product. The space $\\mathbf C^0$ is a point, so $G_0=\\mathbf C$ and $\\gamma_\\rho$ is the identity. All restriction and radius assertions then hold. The arguments below also allow empty coordinate sets.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/cartan-1951-52-exp10.pdf",
+    "place": "WANTED locally; read online https://www.numdam.org/item/SHC_1951-1952__4__A10_0.pdf, Frenkel exp.10 section 4 printed pp.6-7. Agent-written complete l1 formulation and explicit majorant argument."
+   }
+  },
+  {
+   "text": "Put $I=\\mathbf N^d$ and $w_\\alpha=\\rho^\\alpha>0$. The map $T(c)_\\alpha=w_\\alpha c_\\alpha$ is a complex-linear bijection $A_\\rho\\to\\ell^1(I,\\mathbf C)$: its inverse divides each coordinate by $w_\\alpha$. Moreover $\\|T(c)\\|_1=\\sum_\\alpha|c_\\alpha|w_\\alpha=\\|c\\|_\\rho$. Apply [lem-sfb-complex-l1-completeness] to transport the normed vector-space structure and completeness. Explicitly, a Cauchy sequence $c_n$ gives the Cauchy sequence $T(c_n)$ with limit $u\\in\\ell^1$; then $T^{-1}u\\in A_\\rho$ and $\\|c_n-T^{-1}u\\|_\\rho=\\|T(c_n)-u\\|_1\\to0$.",
+   "uses": [
+    "lem-sfb-complex-l1-completeness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/cartan-1951-52-exp10.pdf",
+    "place": "WANTED locally; read online https://www.numdam.org/item/SHC_1951-1952__4__A10_0.pdf, Frenkel exp.10 section 4 printed pp.6-7. Agent-written complete l1 formulation and explicit majorant argument."
+   }
+  },
+  {
+   "text": "For each $\\alpha$, the decompositions $\\beta+\\eta=\\alpha$ form a finite set: each $\\beta_i$ lies between $0$ and $\\alpha_i$ and $\\eta=\\alpha-\\beta$. Also $w_{\\beta+\\eta}=w_\\beta w_\\eta$. Let $U_\\beta=|c_\\beta|w_\\beta$ and $V_\\eta=|b_\\eta|w_\\eta$. The product lemma [lem-sfb-absolute-series-product] over $\\mathbf R$ shows that the nonnegative family $U_\\beta V_\\eta$ has sum $\\|c\\|_\\rho\\|b\\|_\\rho$. Group it along $(\\beta,\\eta)\\mapsto\\beta+\\eta$ using [lem-wf-summable-family-regrouping]. Its grouped family $M_\\alpha$ is summable with that sum. The finite triangle inequality gives $|(cb)_\\alpha|w_\\alpha\\leq M_\\alpha$. Domination [lem-sfb-absolute-series-domination] now proves $cb\\in A_\\rho$ and $\\|cb\\|_\\rho\\leq\\|c\\|_\\rho\\|b\\|_\\rho$.",
+   "uses": [
+    "lem-sfb-absolute-series-domination",
+    "lem-sfb-absolute-series-product",
+    "lem-wf-summable-family-regrouping"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/cartan-1951-52-exp10.pdf",
+    "place": "WANTED locally; read online https://www.numdam.org/item/SHC_1951-1952__4__A10_0.pdf, Frenkel exp.10 section 4 printed pp.6-7. Agent-written complete l1 formulation and explicit majorant argument."
+   }
+  },
+  {
+   "text": "Each coefficient of a triple product is the same finite sum over $\\beta+\\eta+\\theta=\\alpha$, so multiplication is associative; swapping $\\beta,\\eta$ proves commutativity. Distributivity and compatibility with complex scalars follow by distributing each finite coefficient sum. The family $e_0$ which is $1$ at zero and $0$ elsewhere is the unit and has norm $1$; scalar constants are $\\lambda e_0$. Together with the preceding normed-space structure and product estimate this is a normed unital complex algebra. In particular multiplication is continuous: $\\|cb-c'b'\\|\\leq\\|c-c'\\|\\|b\\|+\\|c'\\|\\|b-b'\\|$, and convergent $c'$ are norm-bounded.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/cartan-1951-52-exp10.pdf",
+    "place": "WANTED locally; read online https://www.numdam.org/item/SHC_1951-1952__4__A10_0.pdf, Frenkel exp.10 section 4 printed pp.6-7. Agent-written complete l1 formulation and explicit majorant argument."
+   }
+  },
+  {
+   "text": "For $|z_i|\\leq\\rho_i$ one has $|c_\\alpha z^\\alpha|\\leq|c_\\alpha|\\rho^\\alpha$. Domination [lem-sfb-absolute-series-domination] therefore gives absolute convergence of $F_c(z)=\\sum_\\alpha c_\\alpha z^\\alpha$, in particular on the required open polydisc. We next verify local power-series representations at every interior point, rather than infer holomorphy merely from convergence at zero.",
+   "uses": [
+    "lem-sfb-absolute-series-domination"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/cartan-1951-52-exp10.pdf",
+    "place": "WANTED locally; read online https://www.numdam.org/item/SHC_1951-1952__4__A10_0.pdf, Frenkel exp.10 section 4 printed pp.6-7. Agent-written complete l1 formulation and explicit majorant argument."
+   }
+  },
+  {
+   "text": "Fix an interior point $a$ and choose $t_i>0$ with $|a_i|+t_i<\\rho_i$. For pairs $(\\beta,\\alpha)$ with $\\alpha\\leq\\beta$, set $H_{\\beta,\\alpha}=|c_\\beta|\\binom\\beta\\alpha |a|^{\\beta-\\alpha}t^\\alpha$, using products of coordinate binomial coefficients and $0^0=1$. Every finite subsum of this nonnegative family is at most $\\sum_\\beta |c_\\beta|(|a|+t)^\\beta\\leq\\|c\\|_\\rho$: enlarge the inner finite sum to all $\\alpha\\leq\\beta$ and use the finite binomial formula in each coordinate. Bounded finite subsums [lem-sfb-absolute-series-domination] give summability of $H$ and sum at most $\\|c\\|_\\rho$.",
+   "uses": [
+    "lem-sfb-absolute-series-domination"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/cartan-1951-52-exp10.pdf",
+    "place": "WANTED locally; read online https://www.numdam.org/item/SHC_1951-1952__4__A10_0.pdf, Frenkel exp.10 section 4 printed pp.6-7. Agent-written complete l1 formulation and explicit majorant argument."
+   }
+  },
+  {
+   "text": "Define $b_\\alpha=\\sum_{\\beta\\geq\\alpha}c_\\beta\\binom\\beta\\alpha a^{\\beta-\\alpha}$. These sums exist absolutely because the corresponding subfamily of $H$ is summable and $t^\\alpha>0$. Group $H$ by $\\alpha$ using [lem-wf-summable-family-regrouping] and apply [lem-sfb-absolute-series-domination] to obtain $\\sum_\\alpha |b_\\alpha|t^\\alpha\\leq\\|c\\|_\\rho$. For $|h_i|<t_i$, the complex family $c_\\beta\\binom\\beta\\alpha a^{\\beta-\\alpha}h^\\alpha$ is absolutely dominated by $H$. Grouping first by $\\beta$ gives $F_c(a+h)$ by the finite binomial identity, and grouping first by $\\alpha$ gives $\\sum_\\alpha b_\\alpha h^\\alpha$. Hence these values agree. This is an absolutely convergent power-series representation on a neighbourhood of $a$, so $F_c$ is holomorphic in the stipulated sense.",
+   "uses": [
+    "lem-sfb-absolute-series-domination",
+    "lem-wf-summable-family-regrouping"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/cartan-1951-52-exp10.pdf",
+    "place": "WANTED locally; read online https://www.numdam.org/item/SHC_1951-1952__4__A10_0.pdf, Frenkel exp.10 section 4 printed pp.6-7. Agent-written complete l1 formulation and explicit majorant argument."
+   }
+  },
+  {
+   "text": "The holomorphic function $F_c$ defines $\\gamma_\\rho(c)\\in G_d$. The pointwise germ operations exist by [lem-sfb-complex-analytic-function-operations]. Finite sums give $F_{c+b}=F_c+F_b$, $F_{\\lambda c}=\\lambda F_c$ and $F_{e_0}=1$. For $z$ in the open polydisc, [lem-sfb-absolute-series-product] applied over $\\mathbf C$ to $(c_\\beta z^\\beta)_\\beta$ and $(b_\\eta z^\\eta)_\\eta$ identifies their product with the sum over pairs. Group by $\\beta+\\eta$ using [lem-wf-summable-family-regrouping]; the finite inner sum is $(cb)_\\alpha z^\\alpha$. Thus $F_cF_b=F_{cb}$. Passing to germs proves that $\\gamma_\\rho$ is a unital complex algebra homomorphism.",
+   "uses": [
+    "lem-sfb-absolute-series-product",
+    "lem-wf-summable-family-regrouping",
+    "lem-sfb-complex-analytic-function-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/cartan-1951-52-exp10.pdf",
+    "place": "WANTED locally; read online https://www.numdam.org/item/SHC_1951-1952__4__A10_0.pdf, Frenkel exp.10 section 4 printed pp.6-7. Agent-written complete l1 formulation and explicit majorant argument."
+   }
+  },
+  {
+   "text": "Suppose $\\gamma_\\rho(c)=\\gamma_\\rho(b)$. The representatives $F_c,F_b$ agree on a neighbourhood of zero, so all their iterated coordinate derivatives at zero agree: difference quotients of equal local functions agree, and this remains true after each differentiation on that neighbourhood. Apply [lem-sfb-monomial-series-coordinate-derivatives] to the summable coefficient families $c$ and $b$. For every $\\alpha$ it yields $\\alpha!c_\\alpha=\\partial^\\alpha F_c(0)=\\partial^\\alpha F_b(0)=\\alpha!b_\\alpha$. The complex number $\\alpha!$ is nonzero; cancel it. Thus $c=b$, proving injectivity.",
+   "uses": [
+    "lem-sfb-monomial-series-coordinate-derivatives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/cartan-1951-52-exp10.pdf",
+    "place": "WANTED locally; read online https://www.numdam.org/item/SHC_1951-1952__4__A10_0.pdf, Frenkel exp.10 section 4 printed pp.6-7. Agent-written complete l1 formulation and explicit majorant argument."
+   }
+  },
+  {
+   "text": "By the definition of $G_d$, any of its germs has a representative near zero given by a convergent complex power series $\\sum c_\\alpha z^\\alpha$. Here convergence is the usual convergence of complex power series: on some positive polydisc its absolute majorant is finite at every smaller positive polyradius, as in section 4 of the source. Choose such a smaller $\\rho$ with its closed polydisc contained in the representative's neighbourhood. Then $\\sum|c_\\alpha|\\rho^\\alpha<\\infty$, so $c\\in A_\\rho$ and its image has exactly the original representative near zero. This proves the union-of-images assertion, without claiming that a single radius represents every germ.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/cartan-1951-52-exp10.pdf",
+    "place": "WANTED locally; read online https://www.numdam.org/item/SHC_1951-1952__4__A10_0.pdf, Frenkel exp.10 section 4 printed pp.6-7. Agent-written complete l1 formulation and explicit majorant argument."
+   }
+  },
+  {
+   "text": "If $0<\\sigma_i\\leq\\rho_i$, then $\\sigma^\\alpha\\leq\\rho^\\alpha$ for every $\\alpha$. Domination [lem-sfb-absolute-series-domination] applied to the two nonnegative majorants shows that keeping coefficients maps $A_\\rho$ into $A_\\sigma$ and that $\\|c\\|_\\sigma\\leq\\|c\\|_\\rho$. It preserves each coefficient operation, the convolution and the unit. The series evaluations agree on the smaller open polydisc, hence their germs agree. This also covers $\\sigma=\\rho$.",
+   "uses": [
+    "lem-sfb-absolute-series-domination"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/cartan-1951-52-exp10.pdf",
+    "place": "WANTED locally; read online https://www.numdam.org/item/SHC_1951-1952__4__A10_0.pdf, Frenkel exp.10 section 4 printed pp.6-7. Agent-written complete l1 formulation and explicit majorant argument."
+   }
+  },
+  {
+   "text": "Set any chosen coordinates to zero. In the absolutely convergent series every monomial with a positive exponent in one of those coordinates vanishes; every other monomial is unchanged. The remaining coefficient family is in the weighted space for the retained radii, since its weighted absolute sum is a subseries of the original nonnegative majorant, by [lem-wf-summable-family-regrouping]. Restricting that holomorphic representative therefore gives precisely the germ of the retained series. Setting no coordinates to zero is the identity; setting all of them to zero keeps only the constant coefficient.",
+   "uses": [
+    "lem-wf-summable-family-regrouping"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/cartan-1951-52-exp10.pdf",
+    "place": "WANTED locally; read online https://www.numdam.org/item/SHC_1951-1952__4__A10_0.pdf, Frenkel exp.10 section 4 printed pp.6-7. Agent-written complete l1 formulation and explicit majorant argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-complex-l1-completeness",
+  "lem-sfb-absolute-series-domination",
+  "lem-sfb-absolute-series-product",
+  "lem-wf-summable-family-regrouping",
+  "lem-sfb-complex-analytic-function-operations",
+  "lem-sfb-monomial-series-coordinate-derivatives"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/cartan-1951-52-exp10.pdf",
+  "place": "WANTED locally; read online https://www.numdam.org/item/SHC_1951-1952__4__A10_0.pdf, Frenkel exp.10 section 4 printed pp.6-7. Agent-written complete l1 formulation and explicit majorant argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A complete normed algebra of absolutely summable multivariate Taylor coefficients with weighted l1 norm embeds injectively into holomorphic germs and represents every such germ for some positive radii",
+   "results": "[OK] 8 hits: CPolynomialAt, HasFiniteFPowerSeriesOnBall, HasFTaylorSeriesUpToOn, Complex.hasSum_taylorSeries_of_entire, Complex.taylorSeries_eq_on_emetric_ball, Complex.hasSum_taylorSeries_on_ball, Complex.hasSum_taylorSeries_on_emetric_ball, CPolynomialOn.  Sources read: Mathlib/Analysis/Normed/Lp/lpSpace.lean:199,1359-1371; Analysis/Analytic/ConvergenceRadius.lean:130-134; Analysis/Analytic/ChangeOrigin.lean:15-39; Analysis/Analytic/CPolynomialDef.lean:15-53.",
+   "date": "2026-10-24",
+   "verdict": "no match: generic lp completeness, formal coefficient convergence and multilinear analyticity do not provide this weighted convolution algebra and its injective holomorphic germ model in one specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"summable\", \"norm\"",
+   "results": "[OK] 12 hits: Summable.of_nnnorm, Summable.of_norm, cauchySeq_finset_of_summable_norm, Summable.of_norm_bounded, Summable.of_nnnorm_bounded, Summable.of_norm_bounded_eventually, Summable.of_norm_bounded_eventually_nat, tsum_enorm_ne_top_iff_summable_nnnorm.  Sources read: Mathlib/Analysis/Normed/Lp/lpSpace.lean:199,1359-1371; Analysis/Analytic/ConvergenceRadius.lean:130-134; Analysis/Analytic/ChangeOrigin.lean:15-39; Analysis/Analytic/CPolynomialDef.lean:15-53.",
+   "date": "2026-10-24",
+   "verdict": "no match: generic lp completeness, formal coefficient convergence and multilinear analyticity do not provide this weighted convolution algebra and its injective holomorphic germ model in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "weighted|summable|Summable",
+   "results": "[OK] 25 hits: Mathlib/Analysis/Analytic/ConvergenceRadius.lean, Mathlib/Analysis/Analytic/ConvergenceRadius.lean, Mathlib/Analysis/Analytic/ConvergenceRadius.lean, Mathlib/Analysis/Analytic/ConvergenceRadius.lean, Mathlib/Analysis/Analytic/ConvergenceRadius.lean, Mathlib/Analysis/Analytic/Constructions.lean, Mathlib/Analysis/Analytic/Constructions.lean, Mathlib/Analysis/Analytic/Constructions.lean.  Subdirectory: Analysis/Analytic. Sources read: Mathlib/Analysis/Normed/Lp/lpSpace.lean:199,1359-1371; Analysis/Analytic/ConvergenceRadius.lean:130-134; Analysis/Analytic/ChangeOrigin.lean:15-39; Analysis/Analytic/CPolynomialDef.lean:15-53.",
+   "date": "2026-10-24",
+   "verdict": "no match: generic lp completeness, formal coefficient convergence and multilinear analyticity do not provide this weighted convolution algebra and its injective holomorphic germ model in one specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Absolutely convergent multivariate power series on a polydisc form a Banach algebra for the sum of weighted absolute coefficients and identify with analytic germs as radii vary",
+   "results": "[OK] 8 hits: MvPowerSeries.LinearTopology.instIsLinearTopologyOfMulOpposite, MvPowerSeries.hasSum_aeval, MvPowerSeries.WithPiTopology.as_tsum, FormalMultilinearSeries.analyticOnNhd, MvPowerSeries.WithPiTopology.summable_iff_summable_coeff, MvPowerSeries.instAddMonoid, MvPowerSeries.instMul, FormalMultilinearSeries.radius.  Sources read: Mathlib/Analysis/Normed/Lp/lpSpace.lean:199,1359-1371; Analysis/Analytic/ConvergenceRadius.lean:130-134; Analysis/Analytic/ChangeOrigin.lean:15-39; Analysis/Analytic/CPolynomialDef.lean:15-53.",
+   "date": "2026-10-24",
+   "verdict": "no match: generic lp completeness, formal coefficient convergence and multilinear analyticity do not provide this weighted convolution algebra and its injective holomorphic germ model in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "weighted|convolution|completeSpace|CompleteSpace",
+   "results": "[OK] 13 hits: Mathlib/Analysis/Normed/Lp/ProdLp.lean, Mathlib/Analysis/Normed/Lp/ProdLp.lean, Mathlib/Analysis/Normed/Lp/ProdLp.lean, Mathlib/Analysis/Normed/Lp/lpHolder.lean, Mathlib/Analysis/Normed/Lp/lpHolder.lean, Mathlib/Analysis/Normed/Lp/lpSpace.lean, Mathlib/Analysis/Normed/Lp/lpSpace.lean, Mathlib/Analysis/Normed/Lp/lpSpace.lean.  Subdirectory: Analysis/Normed/Lp. Sources read: Mathlib/Analysis/Normed/Lp/lpSpace.lean:199,1359-1371; Analysis/Analytic/ConvergenceRadius.lean:130-134; Analysis/Analytic/ChangeOrigin.lean:15-39; Analysis/Analytic/CPolynomialDef.lean:15-53.",
+   "date": "2026-10-24",
+   "verdict": "no match: generic lp completeness, formal coefficient convergence and multilinear analyticity do not provide this weighted convolution algebra and its injective holomorphic germ model in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weighted l1 convolution algebra of complex coefficients indexed by multiindices is complete and its power series sum is holomorphic with unique coefficients",
+   "results": "[OK] 8 hits: FormalMultilinearSeries.ofScalarsSum, cauchyPowerSeries, MvPowerSeries.WithPiTopology.hasSum_of_monomials_self, Nat.Partition.multipliable_genFun, MvPowerSeries.WithPiTopology.as_tsum, FormalMultilinearSeries.ofScalars, formalMultilinearSeries_geometric, ModularFormClass.qExpansionFormalMultilinearSeries.  Sources read: Mathlib/Analysis/Normed/Lp/lpSpace.lean:199,1359-1371; Analysis/Analytic/ConvergenceRadius.lean:130-134; Analysis/Analytic/ChangeOrigin.lean:15-39; Analysis/Analytic/CPolynomialDef.lean:15-53.",
+   "date": "2026-10-24",
+   "verdict": "no match: generic lp completeness, formal coefficient convergence and multilinear analyticity do not provide this weighted convolution algebra and its injective holomorphic germ model in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weighted l1 Banach algebra of multivariate complex power series with convolution embeds into holomorphic germs as the radii vary",
+   "results": "{\"t\": \"2026-10-24T03:14:55Z\", \"tool\": \"leanfinder\", \"query\": \"Weighted l1 Banach algebra of multivariate complex power series with convolution embeds into holomorphic germs as the radii vary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPowerSeries.hasSum_aeval\", \"FormalMultilinearSeries.ofScalarsSum\", \"cauchyPowerSeries\", \"MvPowerSeries.hasSum_eval₂\", \"ContinuousLinearMap.fpowerSeriesBilinear_radius\", \"HasFPowerSeriesAt.tendsto_partialSum_prod_of_comp\", \"Complex.tendsto_tsum_powerSeries_nhdsWithin_lt\", \"formalMultilinearSeries_geometric\"], \"digest\": \"3ce1580bc87553cd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern formal-series evaluations, multilinear series or generic summability; no declaration states the weighted convolution algebra and all germ/radius/coordinate clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Absolutely summable multivariate complex power series form a complete normed convolution algebra and determine holomorphic germs",
+   "results": "{\"t\": \"2026-10-24T03:14:57Z\", \"tool\": \"leansearch\", \"query\": \"Absolutely summable multivariate complex power series form a complete normed convolution algebra and determine holomorphic germs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"summable_mul_of_summable_norm\", \"MvPowerSeries.hasSum_aeval\", \"hasSum_sum_range_mul_of_summable_norm\", \"PowerSeries.WithPiTopology.instCompleteSpace\", \"MvPowerSeries.aeval_eq_sum\", \"summable_powerSeries_of_norm_lt\", \"tsum_mul_tsum_eq_tsum_sum_range_of_summable_norm\", \"NormedSpace.expSeries_summable\"], \"digest\": \"4a286812e6ae7374\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern formal-series evaluations, multilinear series or generic summability; no declaration states the weighted convolution algebra and all germ/radius/coordinate clauses"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-holomorphic-weierstrass-division",
+  "date": "2026-10-24",
+  "group": "NU"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), supporting GAGA input in the Kodaira/Kempf prerequisite chain: local-ring input for exact analytic pullback. The canonical local completion comparison. Analytic local-coordinate input: Analytic Weierstrass division after linear regularization. Supporting input: Complete weighted Taylor coefficient model for holomorphic germs.",
+   "via": [
+    "lem-sfb-holomorphic-weierstrass-division",
+    "lem-sfb-analytic-local-completion-comparison",
+    "lem-sfb-analytic-pullback-exact",
+    "lem-sfb-gaga-derived-coherent-sections",
+    "lem-sfb-algebraic-dolbeault-derivative-comparison",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-weighted-taylor-banach-model",
+  "worker": "stage1",
+  "summary": "Q97: statement retained. Explicit weight-rescaling, convolution majorant, binomial recentering and germ algebra proof; three Mathlib leaves and one smaller scalar-monomial derivative lemma. Checked derivative-factorial normalization, zero dimension, boundary summability, nonuniform germ radii and coordinate restrictions. Source is online but absent locally, so the complete model proof is marked agent-written.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images proof (3), GAGA/local analytic completion prerequisite chain in inherited blueprint.from.place. The exact scalar weighted coefficient model serves its Weierstrass division input. Nearest ancestor tool prints None; inherited null ancestor and complete via chain retained. Whole blueprint searches for power series, Banach, summable, Taylor, derivative and holomorphic found no equivalent node."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q97-f64fe8bd0",
+  "group": "Q97",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q97-f64fe8bd0 (reviewer sub-agent of L); spot-checked: Read the item, all 4 new nodes and the cited nodes in full (complex-analytic-function-operations, wf-summable-family-regrouping, def-weil-complex-absolute-value). The item statement is unchanged and true. Checked each of the 12 steps: (1) d=0; (2) the weight map onto ℓ¹ is an isometry, so A_ρ is complete; (3) submultiplicativity from the R-product leaf, regrouping by the sum map (finite fibres) and domination; (4) finite coefficient algebra laws, unit e_0 of norm 1; (5) absolute convergence by domination; (6)-(7) at an interior point a, the binomial majorant H_{β,α} has finite subsums at most Σ|c_β|(|a|+t)^β ≤ ‖c‖; grouping the summable family both ways gives F_c(a+h)=Σb_α h^α, with |a_i+h_i|<ρ_i; (8) F_cF_b=F_{cb} from the C-product leaf and regrouping; (9) injectivity from the statement of the derivative node, with α!≠0; (10) union of images from the definition of a convergent series, with no uniform radius claimed; (11) σ≤ρ by domination; (12) coordinate restriction by the subfamily clause. proof_deps equals the union of uses; no cycle. Read the Mathlib leaves at the quoted lines: lpSpace.lean 95/458/548/784/1361; Normed/Group/InfiniteSum 111/140; InfiniteSum/Real 84/95; Normed/Ring/InfiniteSum 39/45/70. All hold for arbitrary index types and complete R or C. The derivative node is statement-only and unsplit, is true, and was tested on ν=0, z1z2, z^2 and m=0; its uniform convergence claim is only on s_i<R_i, which is correct since (n+1)^-2 at R=1 diverges after differentiation. Recording it as a Mathlib leaf would hide a multilinear-to-scalar comparison, so unsplit is correct. Duplicate searches with rg -L (termwise, ℓ¹, α!, holomorphic, polydisc, power series) found no duplicate; taylor-jets, analytic-derivative-rules, rp-taylor-sum-on-disc and the ℕ-indexed comparison nodes are all different. The Frenkel source is absent locally; it is recorded as WANTED and the proof is marked agent-written, so I verified the mathematics directly. The regrouping citation from another unit is a Mathlib leaf, so no tool_use is needed. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Analysis.Complex.WeightedTaylorBanachModel",
+  "declaration": "Complex.Taylor.weightedTaylorBanachModel",
+  "declarations": [
+   "Complex.Taylor.BanachModel",
+   "Complex.Taylor.BanachModel.Spec",
+   "Complex.Taylor.weightedTaylorBanachModel"
+  ],
+  "file": "lean/Sheaf/Analysis/Complex/WeightedTaylorBanachModel.lean",
+  "statement": "theorem weightedTaylorBanachModel : ∃ M : BanachModel, @BanachModel.Spec M",
+  "branch": "sheaf-dag",
+  "by": "Q48",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4d092df3b",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Read item, 3 stmt_deps, the 2 new def nodes and all 3 modules. Each node clause is matched: weighted l1 subtype; ring ops, convolution and unit fixed by an AlgHom equal to .val; norm by norm_eq; norm_mul_le and CompleteSpace for the specified metric; summability and AnalyticOnNhd on the open polydisc; G_d as a subtype of Filter.Germ with pointwise ops fixed; one canonical γ (val = ofFun seriesValue), injective; every germ at some ρ, no uniform radius; σ≤ρ restriction with norm bound and commutation; coordinate restriction via Fin k ↪ Fin d with embDomain, for every representative; d=0 algebra equivalences. ∃ M : BanachModel is not a weakening because Spec fixes all of its data. Def nodes have real data and match their statements; no duplicates found in side-live lean/Sheaf or DAG. Only sorry is the theorem; docstrings and 12 proof steps present; lean.statement verbatim; report has Worker report, Second reading by Q48 and the Frenkel completeness remark (correct for weighted l1). No changes, no compile run (worker compile evidence and dry run OK)."
+ }
+}

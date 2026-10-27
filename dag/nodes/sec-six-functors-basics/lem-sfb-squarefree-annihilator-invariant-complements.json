@@ -1,0 +1,86 @@
+{
+ "id": "lem-sfb-squarefree-annihilator-invariant-complements",
+ "kind": "statement",
+ "title": "A squarefree annihilator gives invariant complements",
+ "statement": "Let $K$ be a field, let $V$ be a $K$-vector space, and let $T:V\\to V$ be $K$-linear. Let $p\\in K[X]$ [def-weil-polynomial-ring] be squarefree, meaning nonzero and divisible by no square of a nonconstant polynomial, and assume $p(T)=0$. Then every $T$-invariant subspace $W\\subseteq V$ has a $T$-invariant complement: there exists $W\\prime\\subseteq V$ with $T(W\\prime)\\subseteq W\\prime$ and $V=W\\oplus W\\prime$.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, Proposition 14.4(b), printed p.62: characteristic-zero semisimplicity input for the general finite-free-ring formulation; Mathlib LinearAlgebra/Semisimple.lean:218-232 and 74-76."
+ },
+ "stmt_deps": [
+  "def-weil-polynomial-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A squarefree polynomial annihilating a linear endomorphism implies that every invariant subspace has an invariant complement",
+   "results": "{\"t\": \"2026-10-22T07:26:32Z\", \"tool\": \"leanfinder\", \"query\": \"A squarefree polynomial annihilating a linear endomorphism implies that every invariant subspace has an invariant complement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.End.isSemisimple_of_squarefree_aeval_eq_zero\", \"Module.End.isSemisimple_iff\", \"Module.End.isSemisimple_iff'\", \"Module.End.IsSemisimple.minpoly_squarefree\", \"Module.End.isFinitelySemisimple_iff\", \"Module.End.IsSemisimple\", \"Module.End.IsFinitelySemisimple\", \"LinearMap.eventually_isCompl_ker_pow_range_pow\"], \"digest\": \"1aaf5f2125746383\"}",
+   "date": "2026-10-22",
+   "verdict": "match: isSemisimple_of_squarefree_aeval_eq_zero followed by isSemisimple_iff, read at the lines in mathlib_match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.End.isSemisimple_of_squarefree_aeval_eq_zero",
+   "results": "{\"t\": \"2026-10-22T07:26:25Z\", \"tool\": \"loogle\", \"query\": \"Module.End.isSemisimple_of_squarefree_aeval_eq_zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Module.End.isSemisimple_of_squarefree_aeval_eq_zero\"], \"digest\": \"f9724ace2bc3fe10\"}",
+   "date": "2026-10-22",
+   "verdict": "match: squarefree annihilator criterion, with isSemisimple_iff for the stated meaning."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A squarefree polynomial annihilating a linear endomorphism implies that every invariant subspace has an invariant complement",
+   "results": "{\"t\": \"2026-10-22T07:26:25Z\", \"tool\": \"leansearch\", \"query\": \"A squarefree polynomial annihilating a linear endomorphism implies that every invariant subspace has an invariant complement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.End.isSemisimple_of_squarefree_aeval_eq_zero\", \"Module.End.isSemisimple_iff\", \"Module.End.isSemisimple_iff'\", \"Module.End.isFinitelySemisimple_iff\", \"Module.End.IsSemisimple.minpoly_squarefree\", \"Module.End.isSemisimple_restrict_iff\", \"LinearMap.IsSymmetric.isFinitelySemisimple\", \"Module.End.IsFinitelySemisimple\"], \"digest\": \"17a44b12faabce78\"}",
+   "date": "2026-10-22",
+   "verdict": "match: both the annihilator criterion and isSemisimple_iff are returned."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem isSemisimple_of_squarefree_aeval_eq_zero",
+   "results": "{\"t\": \"2026-10-22T07:26:59Z\", \"tool\": \"grep\", \"query\": \"theorem isSemisimple_of_squarefree_aeval_eq_zero\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Semisimple.lean\"], \"digest\": \"48ae27ed6f6e0ae8\"}",
+   "date": "2026-10-22",
+   "verdict": "match: Mathlib/LinearAlgebra/Semisimple.lean:218; meaning at 74-76."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.End.isSemisimple_of_squarefree_aeval_eq_zero",
+  "file": "Mathlib/LinearAlgebra/Semisimple.lean",
+  "line": 218,
+  "how": "specializes in one line: apply Module.End.isSemisimple_iff.mp (lines 74-76) to Module.End.isSemisimple_of_squarefree_aeval_eq_zero (lines 218-232); IsCompl is the direct-sum complement condition. No finite-dimensional hypothesis is needed."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-free-ring-congruence-torsion",
+  "date": "2026-10-22",
+  "group": "Q84"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Lemma 14.5, printed p.63, and the eigenvalue argument of Proposition 14.4(b), printed p.62: general finite-free-ring formulation using its left regular representation; the finite-order conclusion uses characteristic-zero semisimplicity. Auxiliary linear/arithmetic input: Chapter I, Proposition 14.4(b), printed p.62: characteristic-zero semisimplicity input for the general finite-free-ring formulation; Mathlib LinearAlgebra/Semisimple.lean:218-232 and 74-76.",
+   "via": [
+    "lem-sfb-finite-free-ring-congruence-torsion",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

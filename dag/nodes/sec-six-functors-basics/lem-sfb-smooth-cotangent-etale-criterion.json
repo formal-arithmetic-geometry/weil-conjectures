@@ -1,0 +1,426 @@
+{
+ "id": "lem-sfb-smooth-cotangent-etale-criterion",
+ "kind": "statement",
+ "title": "Etaleness between smooth schemes is detected by the relative cotangent map",
+ "statement": "Let $S,X,Y$ be schemes [def-pc-scheme], let $X\\to S$ and $Y\\to S$ be smooth [def-sbc-smooth-morphisms], and let $h:X\\to Y$ be an $S$-morphism. Write $dh:h^*\\Omega^1_{Y/S}\\to\\Omega^1_{X/S}$ for the map induced by $b\\mapsto d(h^\\#b)$, using relative differentials [def-sc-relative-differential-sheaf] and tensor pullback [def-pc-module-pullback]. For every $x\\in X$, $h$ is etale on some open neighbourhood of $x$ [def-weil-etale-morphism] if and only if the stalk $(dh)_x$ is an isomorphism. Consequently $h$ is etale if and only if $dh$ is an isomorphism of sheaves. If both differential sheaves are locally free of the same finite rank $d$, this is also equivalent to the determinant map $\\bigwedge^d dh$ being an isomorphism everywhere [def-sc-sheaf-exterior-power]; for $d=0$ this determinant is the identity of the structure sheaf.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "2.2 Corollary 10, printed p.41 (PDF p.47), with Proposition 8; determinant reformulation by local finite-free matrices; primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local literature copy WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-sc-relative-differential-sheaf",
+  "def-pc-module-pullback",
+  "def-weil-etale-morphism",
+  "def-sc-sheaf-exterior-power",
+  "def-a1-relative-differentials-pullback-map",
+  "def-pc-module-stalk-functor",
+  "def-amb-finite-locally-free-module",
+  "def-sfb-site-exterior-sheaf",
+  "def-sfb-exterior-sheaf-comparison-iso"
+ ],
+ "proof": [
+  {
+   "text": "First suppose $h$ is etale on an open $V$ containing $x$. Apply [lem-sfb-etale-localization-relative-differentials] to the square with top map $h|_V:V\\to Y$ and bottom map $\\mathrm{id}_S$. The latter is etale by [lem-weil-pbc-open-immersion-etale] applied to the whole open $S$. The result identifies $(h|_V)^*\\Omega^1_{Y/S}\\to\\Omega^1_{V/S}$ as an isomorphism. The same comparison for the open immersion $V\\to X$ identifies this map with $dh|_V$: both send $1\\otimes db$ to $d(h^\\#b)$. Thus $(dh)_x$ is an isomorphism. This also proves that a globally etale $h$ has invertible $dh$.",
+   "uses": [
+    "lem-sfb-etale-localization-relative-differentials",
+    "lem-weil-pbc-open-immersion-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 04BX, lemma-sheaf-differentials-etale-localization; open immersions: morphisms.tex Tag 02GP, lemma-open-immersion-etale"
+   }
+  },
+  {
+   "text": "Conversely suppose $(dh)_x$ is invertible. By [lem-ag-smooth-relative-differentials-finite-locally-free], both relative differential sheaves are finite locally free. Tensor pullback [def-pc-module-pullback] preserves finite local freeness directly: pull back a local basis on $Y$ to its inverse-image open on $X$, giving the same finite basis. Hence [lem-sc-finite-locally-free-stalk-iso-neighborhood] gives an open $U\\ni x$ on which $dh$ is invertible. The open inclusion $U\\to X$ is etale by [lem-weil-pbc-open-immersion-etale]; smooth source locality in [lem-sfb-scheme-etale-source-target-properties] gives $U\\to S$ smooth. By the open comparison [lem-sfb-etale-localization-relative-differentials], the restricted $dh$ is exactly the cotangent map for $h|_U$. Replace $X$ by $U$. We now have $dh$ invertible everywhere and $X\\to S$ smooth. By [lem-a1-map-over-base-finite-presentation], $h$ is locally of finite presentation: $X\\to S$ is so by smoothness, while $Y\\to S$ is locally of finite type since finite presentation is in particular finite generation.",
+   "uses": [
+    "lem-ag-smooth-relative-differentials-finite-locally-free",
+    "def-pc-module-pullback",
+    "lem-sc-finite-locally-free-stalk-iso-neighborhood",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-sfb-scheme-etale-source-target-properties",
+    "lem-sfb-etale-localization-relative-differentials",
+    "lem-a1-map-over-base-finite-presentation",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02G1, lemma-smooth-omega-finite-locally-free; algebra.tex Tag 05GF, lemma-map-between-finitely-presented; Tag 02FV, lemma-finite-presentation-permanence"
+   }
+  },
+  {
+   "text": "Use [lem-sfb-space-square-zero-lift-linearization] for schemes regarded as representable algebraic spaces. Its differential modules and pullbacks are on the small etale ringed topoi. The canonical comparison [lem-sfb-scheme-etale-relative-differentials-comparison] identifies them with the associated usual Zariski differential sheaves, respecting universal derivations. The equivalence [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] identifies their tensor pullbacks with the associated Zariski tensor pullbacks. These comparisons carry the postcomposition action of $h$ to precomposition with $a_0^*dh$: on a generator $db$ the resulting derivation is $D(h^\\#b)$. Consequently, for a first order thickening $j:T_0\\hookrightarrow T$ with square-zero ideal $\\mathcal J$ and an $S$-lift $a:T\\to X$ of $a_0$, postcomposition on the sets of lifts is represented by the map $\\operatorname{Hom}(a_0^*\\Omega^1_{X/S},\\mathcal J)\\to\\operatorname{Hom}(a_0^*h^*\\Omega^1_{Y/S},\\mathcal J)$ sending $E$ to $E\\circ a_0^*dh$. It is bijective because $a_0^*dh$ has inverse $a_0^*((dh)^{-1})$ [def-pc-module-pullback]. This uses no cohomology-vanishing or global trivialization of the vector bundles.",
+   "uses": [
+    "lem-sfb-space-square-zero-lift-linearization",
+    "lem-sfb-scheme-etale-relative-differentials-comparison",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 04FG and 02H5, lemma-difference-derivation and lemma-action-by-derivations; more general space version: spaces-more-morphisms.tex Tags 0618, 0619 and 04D0; scheme comparison: Tag 04CS and descent.tex Tag 03LC"
+   }
+  },
+  {
+   "text": "Test $h$ against an arbitrary first order thickening $j:T_0\\hookrightarrow T$ of affine schemes [def-sbc-first-order-thickening] and maps $a_0:T_0\\to X$, $b:T\\to Y$ with $ha_0=bj$. Regard $T$ as an $S$-scheme through $b$. Smoothness of $X\\to S$ [def-sbc-smooth-morphisms] gives an $S$-lift $a:T\\to X$ of $a_0$. Under the bijection of [lem-sfb-space-square-zero-lift-linearization] centered at $ha$, the prescribed lift $b$ corresponds to $D=\\delta_{ha}(b)$. Step 3 gives the unique correction $E=D\\circ(a_0^*dh)^{-1}$ and hence a unique lift $a_E:T\\to X$ with $\\delta_a(a_E)=E$. Naturality yields $\\delta_{ha}(ha_E)=E\\circ a_0^*dh=D=\\delta_{ha}(b)$, so injectivity of this bijection gives $ha_E=b$. Every lift over $Y$ is an $S$-lift of $a_0$, and the same bijection and invertible precomposition force its correction to be $E$. We have proved both existence and uniqueness for every test diagram. Apply [lem-sfb-lfp-unique-infinitesimal-lifts-etale], with local finite presentation from step 2, to conclude that $h$ is etale. Before replacing $X$ by $U$, this says $h$ is etale on a neighbourhood of $x$.",
+   "uses": [
+    "def-sbc-first-order-thickening",
+    "def-sbc-smooth-morphisms",
+    "lem-sfb-space-square-zero-lift-linearization",
+    "lem-sfb-lfp-unique-infinitesimal-lifts-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02H6, lemma-smooth-formally-smooth, existence of the initial lift; Tags 04FG and 02H5, correction by a derivation; Tags 02HG and 02HM, definition-formally-etale and lemma-etale-formally-etale"
+   }
+  },
+  {
+   "text": "If $dh$ is an isomorphism, steps 2--4 give an open etale neighbourhood of every point. These opens cover $X$, so [lem-weil-pbc-etale-local-on-source] makes $h$ etale globally. Together with step 1 this proves the sheaf-level equivalence. Equally, if every stalk of $dh$ is an isomorphism, step 2 supplies open inverses; they agree on overlaps because the inverse of a fixed map is unique, and the sheaf gluing axiom gives a global inverse. The empty scheme causes no exception: the empty open cover is permitted and its sheaf maps are uniquely invertible.",
+   "uses": [
+    "lem-weil-pbc-etale-local-on-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GJ, lemma-etale-characterize, source-open locality, including the empty source"
+   }
+  },
+  {
+   "text": "For the determinant assertion, trivialize both finite locally free differential sheaves of rank $d$ and pull back the chosen basis from $Y$ using [def-pc-module-pullback]. The local matrix of $dh$ is square, say $A$. The alternating multilinear expansion in [def-sc-sheaf-exterior-power] gives $\\bigwedge^d dh(e_1\\wedge\\cdots\\wedge e_d)=\\det(A)(f_1\\wedge\\cdots\\wedge f_d)$. Thus the determinant line map is invertible precisely when $\\det(A)$ is a unit. In that case [lem-weil-pbc-matrix-adjugate-identity] supplies the two-sided inverse $\\det(A)^{-1}\\operatorname{adj}(A)$ for $A$. Conversely an inverse of $dh$ induces an inverse on exterior powers, by applying the wedge map to both composition identities. Local inverses glue by uniqueness, so $dh$ is invertible if and only if its top exterior power is. For $d=0$ both bundles are zero locally, and the degree-zero exterior power of every map is the identity of $\\mathcal O_X$ by the degree-zero construction. No positivity assumption on $d$ is used.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-sc-sheaf-exterior-power",
+    "lem-weil-pbc-matrix-adjugate-identity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07DQ, lemma-matrix-left-inverse, adjugate identity; determinant formula is the elementary alternating expansion of the exterior-power construction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-etale-localization-relative-differentials",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-ag-smooth-relative-differentials-finite-locally-free",
+  "def-pc-module-pullback",
+  "lem-sc-finite-locally-free-stalk-iso-neighborhood",
+  "lem-sfb-scheme-etale-source-target-properties",
+  "lem-a1-map-over-base-finite-presentation",
+  "def-sbc-smooth-morphisms",
+  "lem-sfb-space-square-zero-lift-linearization",
+  "lem-sfb-scheme-etale-relative-differentials-comparison",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "def-sbc-first-order-thickening",
+  "lem-sfb-lfp-unique-infinitesimal-lifts-etale",
+  "lem-weil-pbc-etale-local-on-source",
+  "def-sc-sheaf-exterior-power",
+  "lem-weil-pbc-matrix-adjugate-identity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Assemble Tags 04BX, 04FG, 02H5, 02H6 and 02HM with morphisms.tex Tags 02G1, 02FV and 02GJ; determinant reformulation by local matrices. BLR 2.2 Corollary 10 is the original reference but its local copy is unavailable."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism between two schemes smooth over the same base is etale exactly when its relative cotangent map is an isomorphism",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.IsEtale.instIsSmooth",
+     "AlgebraicGeometry.IsEtale",
+     "AlgebraicGeometry.IsEtale.instFormallyUnramified",
+     "Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero",
+     "AlgebraicGeometry.IsEtale.of_comp",
+     "Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat",
+     "RingHom.etale_iff_formallyUnramified_and_smooth",
+     "Algebra.FormallyEtale.of_unramified_and_smooth"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "f14e7de3726a913d"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the algebraic formally-etale base-change equivalence only proves the forward direction for algebra maps, and formal-etale criteria require cotangent homology; no converse geometric smooth-to-smooth criterion is stated"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etaleness of a morphism between smooth schemes over a base is equivalent to the isomorphism of the relative differential sheaves",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.Scheme.Etale",
+     "AlgebraicGeometry.IsEtale",
+     "RingHom.Etale",
+     "RingHom.FormallyEtale",
+     "Algebra.formallyEtale_iff",
+     "AlgebraicGeometry.IsEtale.instIsSmooth",
+     "Algebra.Etale.formallyEtale",
+     "Algebra.FormallyEtale.iff_of_equiv"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "bd6eb1bbd00d2ba4"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the algebraic formally-etale base-change equivalence only proves the forward direction for algebra maps, and formal-etale criteria require cotangent homology; no converse geometric smooth-to-smooth criterion is stated"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"Differential\"",
+   "results": {
+    "hits": [
+     "Algebra.FormallyEtale.subsingleton_kaehlerDifferential",
+     "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale",
+     "KaehlerDifferential.isBaseChange_of_formallyEtale",
+     "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply",
+     "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap"
+    ],
+    "n_hits": 5,
+    "note": "",
+    "subdirectory": "",
+    "digest": "29c4cb60d87f5b73"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the algebraic formally-etale base-change equivalence only proves the forward direction for algebra maps, and formal-etale criteria require cotangent homology; no converse geometric smooth-to-smooth criterion is stated"
+  },
+  {
+   "tool": "grep",
+   "query": "differential|cotangent",
+   "results": {
+    "hits": [
+     "Mathlib/AlgebraicGeometry/Morphisms/Etale.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean"
+    ],
+    "n_hits": 5,
+    "note": "",
+    "subdirectory": "AlgebraicGeometry/Morphisms",
+    "digest": "241c69f423b3a963"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the algebraic formally-etale base-change equivalence only proves the forward direction for algebra maps, and formal-etale criteria require cotangent homology; no converse geometric smooth-to-smooth criterion is stated"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent|differential",
+   "results": {
+    "hits": [
+     "Mathlib/AlgebraicGeometry/Morphisms/Etale.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean"
+    ],
+    "n_hits": 5,
+    "note": "",
+    "subdirectory": "AlgebraicGeometry/Morphisms",
+    "digest": "241c69f423b3a963"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the geometric smooth-to-smooth converse and neighbourhood criterion are not stated; ring-level formally-etale differentials cover the forward direction only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse function theorem for schemes smooth over a common base detected by invertible Kahler differential map",
+   "results": {
+    "hits": [
+     "Differentiable.fun_inv",
+     "mdifferentiableAt_of_isInvertible_mfderiv",
+     "KaehlerDifferential.tensorKaehlerEquivBase_symm_apply",
+     "KaehlerDifferential.tensorKaehlerEquiv_symm_D_tmul'",
+     "ContinuousLinearMap.IsInvertible.contDiffAt_map_inverse",
+     "ContMDiff.inv₀",
+     "IsLocalDiffeomorphAt.localInverse_contMDiffOn",
+     "IsLocalDiffeomorphAt.localInverse_contMDiffAt"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "8616676cc61f98ee"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the geometric smooth-to-smooth converse and neighbourhood criterion are not stated; ring-level formally-etale differentials cover the forward direction only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"Differential\"",
+   "results": {
+    "hits": [
+     "Algebra.FormallyEtale.subsingleton_kaehlerDifferential",
+     "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale",
+     "KaehlerDifferential.isBaseChange_of_formallyEtale",
+     "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply",
+     "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap"
+    ],
+    "n_hits": 5,
+    "note": "",
+    "subdirectory": "",
+    "digest": "29c4cb60d87f5b73"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the geometric smooth-to-smooth converse and neighbourhood criterion are not stated; ring-level formally-etale differentials cover the forward direction only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism between smooth schemes over the same arbitrary base is etale if and only if its relative cotangent map is an isomorphism",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.IsEtale",
+     "AlgebraicGeometry.IsEtale.instIsSmooth",
+     "AlgebraicGeometry.IsEtale.instFormallyUnramified",
+     "Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero",
+     "AlgebraicGeometry.Scheme.Etale",
+     "Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat",
+     "RingHom.etale_iff_formallyUnramified_and_smooth",
+     "AlgebraicGeometry.IsEtale.of_comp"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "66a8ec60d507011c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the geometric smooth-to-smooth converse and neighbourhood criterion are not stated; ring-level formally-etale differentials cover the forward direction only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For smooth algebras B and C over R an R algebra map B to C is etale when C tensor B Omega B R maps isomorphically to Omega C R",
+   "results": {
+    "hits": [
+     "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale",
+     "Algebra.Etale",
+     "Algebra.Etale.baseChange",
+     "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply",
+     "RingHom.etale_algebraMap",
+     "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap",
+     "RingHom.Etale",
+     "Algebra.FormallyEtale.instTensorProduct"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "b8c8b25ec355defa"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the geometric smooth-to-smooth converse and neighbourhood criterion are not stated; ring-level formally-etale differentials cover the forward direction only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-model-volume-order-comparison",
+  "date": "2026-10-24",
+  "group": "NB"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "BLR 4.3 Lemma 1 proof: 2.2 Corollary 10, printed p.41 (PDF p.47), with Proposition 8; determinant reformulation by local finite-free matrices",
+   "via": [
+    "lem-sfb-smooth-model-volume-order-comparison",
+    "lem-sfb-bounded-group-translation-model",
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-cotangent-etale-criterion",
+  "worker": "stage1",
+  "summary": "Proved the full pointwise, sheaf-level and rank-zero determinant criteria by existing DAG inputs. The converse explicitly corrects an S-lift along an arbitrary affine square-zero thickening using the inverse cotangent map and proves uniqueness before applying the existing etale lifting criterion. No new nodes or statement changes. Checked project source for attachments and both phrasings of the Mathlib search.",
+  "blueprint": "Existing provenance: BLR 4.3 Lemma 1 invokes BLR 2.2 Corollary 10; this split realizes its cotangent-isomorphism test and the top-differential determinant reformulation. Whole latest-blueprint searches found no same statement. The inherited nearest blueprint ancestor is null; its original via chain is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-ag-smooth-relative-differentials-finite-locally-free",
+    "why": "Generic variable-rank finite local freeness of smooth differentials; the unit has no duplicate statement."
+   },
+   {
+    "node": "lem-sc-finite-locally-free-stalk-iso-neighborhood",
+    "why": "Generic finite-free sheaf inverse spreading; used to pass from the single stalk to a neighbourhood without a Noetherian hypothesis."
+   },
+   {
+    "node": "lem-a1-map-over-base-finite-presentation",
+    "why": "Generic finite-presentation permanence for a map over a common base; needed before the infinitesimal etale criterion."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic comparison of quasi-coherent module pullbacks between Zariski and etale sites; reconciles the existing space linearization with the stated Zariski cotangent map."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-ag-smooth-relative-differentials-finite-locally-free",
+  "lem-sc-finite-locally-free-stalk-iso-neighborhood",
+  "lem-a1-map-over-base-finite-presentation",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q129-11bd656dc",
+  "group": "Q129",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q129-11bd656dc (reviewer sub-agent of L); spot-checked: Read the item and all 16 cited node statements in full. The statement is unchanged from base (it was unsplit). There are no new nodes, uses equal proof_deps, and there is no cycle. Sources checked: Stacks more-morphisms 04BX (l.2006), 02HM (l.1706) and spaces-more-morphisms 04D0 (l.3748). BLR has no local copy (WANTED). Step 1: 04BX applied to the square h|_V over id_S (étale as an open immersion) plus the open-restriction clause gives dh_x iso. Step 2: finite local freeness (02G1), pullback of a basis, stalk-to-neighbourhood spreading (05GF), U→S smooth by étale precomposition, h lfp by 02FV (lfp source, lft target). Step 3: 04D0 linearization with naturality u_*D=D∘u^♯; the 04CS comparison and the Zariski/étale quasi-coherent pullback comparison make u_* precomposition with a_0^*dh, which is bijective. Step 4: lift from formal smoothness, correction E=D∘(a_0^*dh)^{-1}, existence and uniqueness by injectivity, then 02HM. I checked the S-structure via b and the centring. Step 5: glue étale opens (02GJ) and unique inverses. Step 6: determinant/adjugate argument; borderline but accepted as elementary, since freeness of the top wedge is one line via the determinant form. Small cases: identity, empty X, t↦t² in characteristic 0 (étale off t=0), Frobenius in characteristic p (not étale), unequal ranks, d=0. Duplicate: lem-sfb-smooth-morphism-cotangent-isomorphism-etale is exactly the item's pointwise clause and is missed by the report. The concurrent Q127 delivery (8b55bf6e) splits it by citing this item, the correct direction, so no change here; land the two together. Batch 5: the closures of the four flagged citations reach only generic trf/pod foundations (lem-trf-smooth-composition, def-trf-algebraic-space, the Zariski/étale quasi-coherent equivalence 03DX). There is no trace-formula or Poincaré-duality statement or proof step, so keep them. Accepted tool_uses, written by the worker: smooth differentials finite locally free (sk-d-tangent), stalk-iso neighbourhood (sk-prop-av-cube), finite-presentation permanence (sk-thm-dl-a1-upper), Zariski/étale quasi-coherent equivalence (sk-i-curve-zero)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothCotangentEtaleCriterion",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.smooth_cotangent_etale_criterion",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Hom.smoothCotangentDeterminantMap",
+   "AlgebraicGeometry.Scheme.Hom.smooth_cotangent_etale_criterion"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothCotangentEtaleCriterion.lean",
+  "statement": "theorem smooth_cotangent_etale_criterion {X Y S : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S) [Smooth f] [Smooth g] (h : X ⟶ Y) (w : h ≫ g = f) : (∀ x : X, (∃ U : X.Opens, x ∈ U ∧ Etale (U.ι ≫ h)) ↔ IsIso ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).map (g.relativeDifferentialsPullbackMap h ≫ ((h ≫ g).relativeDifferentialsCongr w).hom))) ∧ (Etale h ↔ IsIso (g.relativeDifferentialsPullbackMap h ≫ ((h ≫ g).relativeDifferentialsCongr w).hom)) ∧ (∀ d : ℕ, f.relativeDifferentials.IsFiniteLocallyFreeOfRank d → g.relativeDifferentials.IsFiniteLocallyFreeOfRank d → (Etale h ↔ IsIso (smoothCotangentDeterminantMap f g h w d))) ∧ ((Classical.choose (Modules.exteriorSheaf_zero_iso ((Modules.tensorPullback h).obj g.relativeDifferentials))).inv ≫ smoothCotangentDeterminantMap f g h w 0 ≫ (Classical.choose (Modules.exteriorSheaf_zero_iso f.relativeDifferentials)).hom = 𝟙 (SheafOfModules.unit X.ringCatSheaf))",
+  "branch": "sheaf-dag",
+  "by": "Q33",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-45466a7ab",
+  "group": "Q33",
+  "result": "pass",
+  "note": "45466a7a is the repair of the landing refusal of 7096fcc7, which moved defs into ExteriorSheafComparisonIso (move false positive). The move is dropped. def-sfb-exterior-sheaf-comparison-iso is now existing:true on the unchanged live Sheaf.AlgebraicGeometry.ExteriorSheafComparison (exteriorSheafPresheafIso, exteriorSheafIsoExteriorPower). Record statement verbatim, without noncomputable; branch sheaf-dag. The item Lean is byte-identical to the PASSed 7096 file except imports (public import ExteriorSheafComparison). Item vs live base: only lean and stmt_deps differ; statement, proof and proof_deps unchanged (no H7); no theorem stmt_dep (H2 cleared). The NM parallel delivery was superseded, not landed. Maths re-checked clause by clause against node and BLR 2.2 Cor. 10: canonical dh = relativeDifferentialsPullbackMap ≫ eqToIso congr; stalk-iso iff étale on an open nbhd; global étale iff IsIso dh; equal-rank d determinant via comparison.hom ≫ siteExteriorHom dh ≫ comparison.inv (real data); d=0 identity via the ∃!-pinned exteriorSheaf_zero_iso (empty wedge ↦ 1). Edge cases: empty X, id, d=0, varying ranks, Frobenius char p, nonreduced base. No extra hypotheses; arbitrary universe. Docstrings carry source, blueprint and 6 proof steps; sorry only; lines ≤95; both report sections present. No compile (no changes). Advisories: the theorem node still lists the defs; upstream exteriorPower is not separately cited."
+ }
+}

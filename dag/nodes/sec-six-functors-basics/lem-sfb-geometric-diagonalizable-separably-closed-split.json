@@ -1,0 +1,313 @@
+{
+ "id": "lem-sfb-geometric-diagonalizable-separably-closed-split",
+ "kind": "statement",
+ "title": "Splitting a geometrically diagonalizable group over a separably closed field",
+ "statement": "Let $k$ be a separably closed field [def-weil-field, def-kun-separably-closed], and let $E/k$ be an extension field [def-pc-field-extension] with $E$ algebraically closed [def-weil-algebraic-closure]. Let $H$ be an affine group scheme of finite type over $k$ [pqf-def-affine-morphism, def-weil-finite-type-morphism]. A group scheme is a group object in schemes over its base; a group isomorphism preserves multiplication, identity and inverse. For a commutative ring $R$ and a finitely generated additive abelian group $N$, write $D_R(N)=\\operatorname{Spec}R[N]$ with the group-algebra Hopf operations of [def-sfb-ring-diagonalizable-group]. Suppose $H\\times_k E\\simeq D_E(N_0)$ as $E$-group schemes for some finitely generated abelian group $N_0$, where scalar extension uses fibre products [def-pc-fibre-product]. Then there exist a finitely generated additive abelian group $N$ and an isomorphism $D_k(N)\\xrightarrow{\\sim}H$ of $k$-group schemes. Neither algebraicity of $E/k$ nor smoothness, connectedness or reducedness of $H$ is assumed; torsion in $N_0$ is allowed.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Reductive group schemes, opening paragraph of B.4, printed p.297 (arbitrary field-extension independence), and Lemma B.1.5, printed pp.283-284 (finite separable splitting); combined separably closed instance. Online source read; WANTED locally as literature/conrad-reductive-group-schemes.pdf. No Stacks tag states this group-scheme result."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-kun-separably-closed",
+  "def-pc-field-extension",
+  "def-weil-algebraic-closure",
+  "pqf-def-affine-morphism",
+  "def-weil-finite-type-morphism",
+  "def-sfb-ring-diagonalizable-group",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Let $K\\subseteq E$ consist of the elements algebraic over $k$. By [lem-weil-pbc-relative-algebraic-closure-algclosed], $K$ is an algebraic closure of $k$, even when $E/k$ is transcendental. Put $C=k[H]$. The affine group coordinate theorem [lem-sfb-affine-group-coordinate-hopf] identifies $H$ with $\\operatorname{Spec}C$ with its actual Hopf operations. The affine fibre-product formula [lem-weil-pbc-fibre-product-affine-spectra] gives $H_K=\\operatorname{Spec}(K\\otimes_kC)$ and $(H_K)_E\\simeq H_E$: the ring identification sends $a\\otimes(b\\otimes c)$ to $ab\\otimes c$, with inverse $a\\otimes c\\mapsto a\\otimes(1\\otimes c)$. These maps respect multiplication, coproduct, counit and antipode on pure tensors. The same fibre-product formula shows $H_K$ is affine, and [lem-sfb-finite-type-composition-base-change](2) makes it finite type over $K$.",
+   "uses": [
+    "lem-weil-pbc-relative-algebraic-closure-algclosed",
+    "lem-sfb-affine-group-coordinate-hopf",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tags 09GJ (lemma-algebraic-permanence), 09GR (lemma-algebraically-closed), 09GS (definition-algebraic-closure); affine base-change formula: schemes.tex Tag 01I4; finite type: morphisms.tex Tag 01T4."
+   }
+  },
+  {
+   "text": "Choose generators $n_1,\\ldots,n_r$ of $N_0$ as an abelian group. The surjection $\\mathbf Z^r\\to N_0$ gives the surjective algebra map $E[\\mathbf Z^r]\\to E[N_0]$, $e_a\\mapsto e_{\\sum_i a_i n_i}$: each target basis monomial has a preimage. The group-algebra formulas in [def-sfb-ring-diagonalizable-group] show on basis elements that this map preserves coproduct, counit and antipode. By [lem-sfb-hopf-spectrum-functor] and the affine criterion in [def-weil-closed-immersion], its spectrum is a closed group embedding $D_E(N_0)\\hookrightarrow D_E(\\mathbf Z^r)$. Compose with the given isomorphism $H_E\\simeq D_E(N_0)$. The finite-type and torus assertions of [lem-sfb-diagonalizable-group-geometric-criteria] give $D_K(\\mathbf Z^r)\\simeq\\mathbf G_{m,K}^r$ of finite type over $K$. The maps $E\\otimes_K K[\\mathbf Z^r]\\rightleftarrows E[\\mathbf Z^r]$, $a\\otimes(be_m)\\mapsto ab e_m$ and $a e_m\\mapsto a\\otimes e_m$, are inverse Hopf algebra maps. Together with [lem-weil-pbc-fibre-product-affine-spectra], they identify $(D_K(\\mathbf Z^r))_E$ with $D_E(\\mathbf Z^r)$. Hence we have a closed group embedding $(H_K)_E\\hookrightarrow(D_K(\\mathbf Z^r))_E$. For $N_0=0$ take $r=0$.",
+   "uses": [
+    "def-sfb-ring-diagonalizable-group",
+    "lem-sfb-hopf-spectrum-functor",
+    "def-weil-closed-immersion",
+    "lem-sfb-diagonalizable-group-geometric-criteria",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.9(a), printed pp.233-234; explicit group-algebra monomial surjection and scalar extension."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-algclosed-group-embedding-existence-descent] over the algebraically closed field $K$ with extension $E/K$, source $H_K$ and target $D_K(\\mathbf Z^r)$. Both groups are affine and of finite type by steps 1 and 2, and step 2 supplies the required closed group embedding after scalar extension. We obtain a closed $K$-group embedding $H_K\\hookrightarrow D_K(\\mathbf Z^r)\\simeq\\mathbf G_{m,K}^r$. Thus $H$ satisfies exactly the definition in [lem-sfb-multiplicative-character-antiduality]: its extension to the algebraic closure $K$ of $k$ is a closed subgroup of a finite product of multiplicative groups. The descended embedding need not extend to the originally chosen embedding over $E$; only its existence is used.",
+   "uses": [
+    "lem-sfb-algclosed-group-embedding-existence-descent",
+    "lem-sfb-diagonalizable-group-geometric-criteria",
+    "lem-sfb-multiplicative-character-antiduality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM (lemma-descend-finite-presentation), parts (2),(3), with algebra.tex Tag 00FV (theorem-nullstellensatz), as assembled in the existing embedding-existence-descent node. Conrad Appendix B.4, printed p.297, uses the same specialization route."
+   }
+  },
+  {
+   "text": "Apply the finite separable splitting assertion of [lem-sfb-multiplicative-character-antiduality] to $H/k$. The original hypotheses give an affine group of finite type, and step 3 verifies multiplicative type over an algebraic closure of $k$. We obtain a finite separable field extension $L/k$, a finitely generated additive abelian group $N$, and an isomorphism $H_L\\simeq D_L(N)$ of $L$-group schemes. No smoothness or reducedness condition enters this theorem, so torsion in $N_0$ causes no restriction.",
+   "uses": [
+    "lem-sfb-multiplicative-character-antiduality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 12.19, printed p.238; finite separable splitting also stated in Conrad Lemma B.1.5, printed p.283."
+   }
+  },
+  {
+   "text": "Since $k$ is separably closed, [lem-pc-sepclosed-finite-sep-trivial] makes the finite separable extension $L/k$ trivial. Restricting the splitting of step 4 along the inverse $k$-algebra identification $L\\simeq k$ gives $H\\simeq D_k(N)$; the scalar maps on coordinate tensors send $a\\otimes c$ to $ac$ and $a e_m$ to $a e_m$. They preserve each group operation by its scalar-extension formula. Invert this group isomorphism to get the required $D_k(N)\\xrightarrow{\\sim}H$. In particular this also covers the trivial group and nonreduced diagonalizable groups such as $\\mu_p$ in characteristic $p$.",
+   "uses": [
+    "lem-pc-sepclosed-finite-sep-trivial"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 12.19, printed p.238, specialized to a separably closed field."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-relative-algebraic-closure-algclosed",
+  "lem-sfb-affine-group-coordinate-hopf",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-sfb-finite-type-composition-base-change",
+  "def-sfb-ring-diagonalizable-group",
+  "lem-sfb-hopf-spectrum-functor",
+  "def-weil-closed-immersion",
+  "lem-sfb-diagonalizable-group-geometric-criteria",
+  "lem-sfb-algclosed-group-embedding-existence-descent",
+  "lem-sfb-multiplicative-character-antiduality",
+  "lem-pc-sepclosed-finite-sep-trivial"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Appendix B.4 opening paragraph, printed p.297, and Lemma B.1.5, p.283; assembled using the existing Milne finite separable splitting theorem. Conrad unavailable locally; online source checked."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "diagonali[sz]able|group.like|groupLike|IsSepClosed",
+   "results": "{\"t\": \"2026-10-24T12:08:07Z\", \"tool\": \"grep\", \"query\": \"diagonali[sz]able|group.like|groupLike|IsSepClosed\", \"sub\": \"Algebra/Category\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern general field theory, affine morphisms, Henselian rings, smooth lifting or Hopf spectrum construction; no declaration states this group-scheme assertion or a one-line generalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Diagonalizable group schemes over separably closed fields and invariance under arbitrary extension fields",
+   "results": "{\"t\": \"2026-10-24T12:08:07Z\", \"tool\": \"leansearch\", \"query\": \"Diagonalizable group schemes over separably closed fields and invariance under arbitrary extension fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SeparableClosure.isSepClosed\", \"IsSepClosed.of_isAlgClosed\", \"IsSepClosed.casesOn\", \"IsSepClosed\", \"separableClosure\", \"separableClosure.isSepClosure\", \"IsSepClosure.recOn\", \"separableClosure.isSeparable\"], \"digest\": \"bef2e60ae06317e1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern general field theory, affine morphisms, Henselian rings, smooth lifting or Hopf spectrum construction; no declaration states this group-scheme assertion or a one-line generalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HopfAlgebra\", \"baseChange\"",
+   "results": "{\"t\": \"2026-10-24T12:08:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"HopfAlgebra\\\", \\\"baseChange\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern general field theory, affine morphisms, Henselian rings, smooth lifting or Hopf spectrum construction; no declaration states this group-scheme assertion or a one-line generalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine finite type group scheme over a separably closed field is diagonalizable if it becomes diagonalizable over an algebraically closed extension",
+   "results": "{\"t\": \"2026-10-24T12:08:09Z\", \"tool\": \"leanfinder\", \"query\": \"An affine finite type group scheme over a separably closed field is diagonalizable if it becomes diagonalizable over an algebraically closed extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\", \"AlgebraicGeometry.HasAffineProperty.diagonal_iff\", \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_respectsIso\", \"IsSepClosed\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_diagonal_of_isPullback\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover_diagonal\"], \"digest\": \"49ed297777bedbd3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern general field theory, affine morphisms, Henselian rings, smooth lifting or Hopf spectrum construction; no declaration states this group-scheme assertion or a one-line generalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric multiplicative type over any field extension implies a finite type affine group over a separably closed field is split diagonalizable",
+   "results": "{\"t\": \"2026-10-24T12:12:22Z\", \"tool\": \"leanfinder\", \"query\": \"Geometric multiplicative type over any field extension implies a finite type affine group over a separably closed field is split diagonalizable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsGalois.tfae\", \"AlgEquiv.fintype\", \"Algebra.FormallySmooth.of_perfectField\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"IsGaloisGroup.finite\", \"instTotallySeparatedSpaceAlgEquivOfIsIntegral\", \"CSA\", \"Algebra.Etale.iff_exists_algEquiv_prod\"], \"digest\": \"21cac1257a4735b0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern general field theory, affine morphisms, Henselian rings, smooth lifting or Hopf spectrum construction; no declaration states this group-scheme assertion or a one-line generalization."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonali[sz]able|multiplicativeType",
+   "results": "{\"t\": \"2026-10-24T13:29:19Z\", \"tool\": \"grep\", \"query\": \"diagonali[sz]able|multiplicativeType\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected results give field-theoretic splitting, affine diagonal morphisms, Hopf isomorphism constructors, or descent of a specified morphism being an isomorphism; none gives existence of an isomorphism after specialization or geometric diagonalizability over a separably closed field."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine group of multiplicative type splits over a separably closed field",
+   "results": "{\"t\": \"2026-10-24T13:29:19Z\", \"tool\": \"leansearch\", \"query\": \"An affine group of multiplicative type splits over a separably closed field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GroupExtension.Splitting\", \"IsSepClosed.casesOn\", \"IsSepClosed.splits_of_separable\", \"IsSepClosed.of_isAlgClosed\", \"AddGroupExtension.Splitting\", \"IsSepClosure.recOn\", \"IsSepClosed.factors_of_separable\", \"IsSepClosed.splits_codomain\"], \"digest\": \"40dddb5fb8c5685a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected results give field-theoretic splitting, affine diagonal morphisms, Hopf isomorphism constructors, or descent of a specified morphism being an isomorphism; none gives existence of an isomorphism after specialization or geometric diagonalizability over a separably closed field."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HopfAlgebra\", \"IsSepClosed\"",
+   "results": "{\"t\": \"2026-10-24T13:29:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"HopfAlgebra\\\", \\\"IsSepClosed\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected results give field-theoretic splitting, affine diagonal morphisms, Hopf isomorphism constructors, or descent of a specified morphism being an isomorphism; none gives existence of an isomorphism after specialization or geometric diagonalizability over a separably closed field."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine finite type group scheme over a separably closed field which becomes diagonalizable over an algebraically closed extension is split diagonalizable",
+   "results": "{\"t\": \"2026-10-24T13:29:20Z\", \"tool\": \"leanfinder\", \"query\": \"An affine finite type group scheme over a separably closed field which becomes diagonalizable over an algebraically closed extension is split diagonalizable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_respectsIso\", \"Algebra.FormallySmooth.of_perfectField\", \"AlgebraicGeometry.HasAffineProperty.diagonal_iff\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\"], \"digest\": \"aaaec740313e7b0a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected results give field-theoretic splitting, affine diagonal morphisms, Hopf isomorphism constructors, or descent of a specified morphism being an isomorphism; none gives existence of an isomorphism after specialization or geometric diagonalizability over a separably closed field."
+  },
+  {
+   "tool": "grep",
+   "query": "isomorph.*(descen|specializ)|exists.*(hopf|Hopf).*Equiv|IsAlgClosed",
+   "results": "{\"t\": \"2026-10-24T13:31:37Z\", \"tool\": \"grep\", \"query\": \"isomorph.*(descen|specializ)|exists.*(hopf|Hopf).*Equiv|IsAlgClosed\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\"], \"digest\": \"05d4da54cef47c09\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected results give field-theoretic splitting, affine diagonal morphisms, Hopf isomorphism constructors, or descent of a specified morphism being an isomorphism; none gives existence of an isomorphism after specialization or geometric diagonalizability over a separably closed field."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two finitely generated commutative Hopf algebras over an algebraically closed field which become isomorphic over an extension field are already isomorphic",
+   "results": "{\"t\": \"2026-10-24T13:31:37Z\", \"tool\": \"leansearch\", \"query\": \"Two finitely generated commutative Hopf algebras over an algebraically closed field which become isomorphic over an extension field are already isomorphic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HopfAlgCat.forget_reflects_isos\", \"HopfAlgCat.Hom.ext_iff\", \"HopfAlgCat.Hom.mk.inj\", \"BialgEquiv.toHopfAlgIso_hom\", \"CommBialgCat.Hom.ext\", \"HopfAlgCat.hom_ext_iff\", \"BialgEquiv.toHopfAlgIso\", \"CategoryTheory.Iso.toHopfAlgEquiv\"], \"digest\": \"d2446cf4597cd8c0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected results give field-theoretic splitting, affine diagonal morphisms, Hopf isomorphism constructors, or descent of a specified morphism being an isomorphism; none gives existence of an isomorphism after specialization or geometric diagonalizability over a separably closed field."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAlgClosed\", \"AlgEquiv\"",
+   "results": "{\"t\": \"2026-10-24T13:31:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsAlgClosed\\\", \\\"AlgEquiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"IsAlgClosed.nonempty_algEquiv_or_of_finrank_eq_two\", \"IsSimpleRing.exists_algEquiv_matrix_of_isAlgClosed\", \"IsSemisimpleRing.exists_algEquiv_pi_matrix_of_isAlgClosed\"], \"digest\": \"3e6afc8101c6d76d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected results give field-theoretic splitting, affine diagonal morphisms, Hopf isomorphism constructors, or descent of a specified morphism being an isomorphism; none gives existence of an isomorphism after specialization or geometric diagonalizability over a separably closed field."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For lem-sfb-affine-group-isomorphism-algclosed-specialization: affine finite type group schemes over an algebraically closed field are isomorphic if they become isomorphic after any field extension",
+   "results": "{\"t\": \"2026-10-24T13:31:38Z\", \"tool\": \"leanfinder\", \"query\": \"For lem-sfb-affine-group-isomorphism-algclosed-specialization: affine finite type group schemes over an algebraically closed field are isomorphic if they become isomorphic after any field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.instHasAffinePropertyIsomorphismsSchemeAndIsAffineIsIsoCommRingCatAppTop\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.IsAffine.affine\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_over\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine\"], \"digest\": \"8dc4a45e4d0b1208\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected results give field-theoretic splitting, affine diagonal morphisms, Hopf isomorphism constructors, or descent of a specified morphism being an isomorphism; none gives existence of an isomorphism after specialization or geometric diagonalizability over a separably closed field."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A group scheme geometrically of multiplicative type has trivial Galois form over a separably closed field, even with p torsion",
+   "results": "{\"t\": \"2026-10-24T13:31:39Z\", \"tool\": \"leanfinder\", \"query\": \"A group scheme geometrically of multiplicative type has trivial Galois form over a separably closed field, even with p torsion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsAbelianGalois\", \"IsGalois.self\", \"IsGaloisGroup.of_isFractionRing\", \"Field.absoluteGaloisGroup\", \"Field.absoluteGaloisGroupAbelianization\", \"IsGaloisGroup.of_mulEquiv_algEquiv\", \"IsGalois.tfae\", \"Field.instGroupAbsoluteGaloisGroup\"], \"digest\": \"7d5b8c6c59eadb9f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected results give field-theoretic splitting, affine diagonal morphisms, Hopf isomorphism constructors, or descent of a specified morphism being an isomorphism; none gives existence of an isomorphism after specialization or geometric diagonalizability over a separably closed field."
+  },
+  {
+   "tool": "grep",
+   "query": "isomorph.*(descen|specializ)|algEquiv.*[Ii]sAlgClosed|[Ii]sAlgClosed.*algEquiv",
+   "results": "{\"t\": \"2026-10-24T13:33:00Z\", \"tool\": \"grep\", \"query\": \"isomorph.*(descen|specializ)|algEquiv.*[Ii]sAlgClosed|[Ii]sAlgClosed.*algEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 23, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/RingTheory/Localization/BaseChange.lean\", \"Mathlib/Algebra/Ring/Subring/Basic.lean\", \"Mathlib/RingTheory/SimpleModule/IsAlgClosed.lean\", \"Mathlib/RingTheory/SimpleModule/IsAlgClosed.lean\"], \"digest\": \"97aa223b723b05f2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected results give field-theoretic splitting, affine diagonal morphisms, Hopf isomorphism constructors, or descent of a specified morphism being an isomorphism; none gives existence of an isomorphism after specialization or geometric diagonalizability over a separably closed field."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Specializing an isomorphism of finitely presented affine group schemes from an extension field back to an algebraically closed ground field using Nullstellensatz",
+   "results": "{\"t\": \"2026-10-24T13:33:01Z\", \"tool\": \"leanfinder\", \"query\": \"Specializing an isomorphism of finitely presented affine group schemes from an extension field back to an algebraically closed ground field using Nullstellensatz\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.SpecIso_inv_over\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.AffineSpace.SpecIso\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_over\", \"AlgebraicGeometry.AffineSpace.mapSpecMap\", \"AlgebraicGeometry.AffineSpace.map_Spec_map\", \"AlgebraicGeometry.AffineSpace.map_SpecMap\", \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_apply\"], \"digest\": \"1458a6a6c93eaf5c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected results give field-theoretic splitting, affine diagonal morphisms, Hopf isomorphism constructors, or descent of a specified morphism being an isomorphism; none gives existence of an isomorphism after specialization or geometric diagonalizability over a separably closed field."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-strict-local-diagonalizable-clopen-lift",
+  "date": "2026-10-24",
+  "group": "Q46"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting input to the strict-local clopen lifting prerequisite of Conrad Theorem B.4.1, printed pp.298-299; downstream of latest blueprint det-thm-sf-ctf-stability-direct-images, proof (3). No imported blueprint ancestor exists, as confirmed by blueprint_refs.py ancestor. Specific input: Splitting a geometrically diagonalizable group over a separably closed field.",
+   "via": [
+    "lem-sfb-strict-local-diagonalizable-clopen-lift",
+    "lem-sfb-multiplicative-type-fibral-criterion",
+    "lem-sfb-multiplicative-type-fpqc-descent",
+    "lem-sfb-relative-commutative-multiplicative-extension",
+    "lem-sfb-relative-central-multiplicative-preimage",
+    "lem-sfb-relative-central-multiplicative-quotient",
+    "lem-sfb-relative-rank-one-central-quotient",
+    "lem-sfb-relative-rank-one-local-matrix-model",
+    "lem-sfb-relative-opposite-root-reflection-map",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-geometric-diagonalizable-separably-closed-split",
+  "worker": "stage1",
+  "summary": "Preserved all mathematical hypotheses and conclusions, corrected only doubled TeX escapes. Five steps: algebraic closure inside E, explicit monomial closed embedding after E-extension, existing algebraically closed embedding-existence descent, existing finite separable splitting, and triviality over the separably closed field. No new nodes. Read all cited statements, checked no cycle to the item, and tested torsion, imperfect separably closed fields, zero character group and transcendental E/k.",
+  "blueprint": "No imported blueprint ancestor (blueprint_refs.py ancestor returns None). This supplies the geometric special-fibre split used by the strict-local clopen lift, downstream of latest det-thm-sf-ctf-stability-direct-images proof (3). Latest unit and chapter read; no unit route changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-4447651f0",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-4447651f0 (reviewer sub-agent of L); spot-checked: Five-step split with no new nodes and no changes from me. The item statement is byte-identical to the live one; the report's mention of a doubled-backslash fix is moot. proof_deps equals the union of the step uses, and there is no cycle: the item is not in the closure of the antiduality node or of the embedding-descent node. Steps: (1) K is the algebraic closure of k inside E, by relative-algebraic-closure-algclosed; with the affine fibre-product node, H_K is affine of finite type and (H_K)_E is identified with H_E. (2) An explicit surjective Hopf map E[Z^r]->E[N_0] gives a closed group embedding of (H_K)_E into D_E(Z^r) = (D_K(Z^r))_E; this step is genuinely elementary. (3) algclosed-group-embedding-existence-descent (K algebraically closed, any E/K, existence only) gives a closed embedding H_K -> G_m^r, which is the multiplicative-type definition stated in the antiduality node. (4) The antiduality node gives finite separable splitting over L. (5) L=k by sepclosed-finite-sep-trivial. Source: Milne iAG Corollary 12.19 (PDF p.250) says exactly this when k is separably closed; Conrad is not local, as the report says. Edge cases checked: N_0=0, mu_p over an imperfect separably closed field, transcendental E. Duplicate search over multiplicative-type and diagonalizable nodes found none. The only citer, strict-local-diagonalizable-clopen-lift, uses the statement as written. Batch-5 flag: the path from antiduality through coalgebra-separable-basis and finite-coalgebra-dual-base-change ends at lem-trf-projective-exterior-scalar-comparisons. The step there uses only the base-change isomorphism for the dual of a finite free module. That is generic commutative algebra, not the trace formula, Poincare duality or a step of their proofs, so I accept it."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricDiagonalizableSeparablyClosedSplit",
+  "declaration": "AlgebraicGeometry.geometric_diagonalizable_separably_closed_split",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricDiagonalizableSeparablyClosedSplit.lean",
+  "statement": "theorem geometric_diagonalizable_separably_closed_split (k E : Type u) [Field k] [IsSepClosed k] [Field E] [Algebra k E] [IsAlgClosed E] (H : Grp (Over (Spec (.of k)))) [IsAffineHom H.X.hom] [LocallyOfFiniteType H.X.hom] [QuasiCompact H.X.hom] (N₀ : AddCommGrpCat.{u}) [AddGroup.FG N₀] (h : Nonempty ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k E)))).mapGrp.obj H ≅ ringDiagonalizableGroup E N₀)) : ∃ N : AddCommGrpCat.{u}, AddGroup.FG N ∧ Nonempty (ringDiagonalizableGroup k N ≅ H)",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-33e452cc9",
+  "group": "NO",
+  "result": "pass",
+  "note": "Only the item's lean field changed; lean.statement is verbatim in the file. Single theorem with sorry and no definitions; docstrings give the source place and blueprint tag, and the theorem docstring has all 5 proof steps. Clause check: IsSepClosed k; Field E, Algebra k E, IsAlgClosed E (no algebraicity); H : Grp (Over Spec k) with IsAffineHom and LocallyOfFiniteType+QuasiCompact (the recorded owners), no extra assumptions; D_R = ringDiagonalizableGroup (hopfSpec of AddMonoidAlgebra, owner of def-sfb-ring-diagonalizable-group); base change = Over.pullback(Spec.map algebraMap).mapGrp, as in landed siblings; conclusion is ∃ N f.g. with Nonempty (D_k(N) ≅ H), right direction, existence only. Edge cases N0=0, mu_p, imperfect k, transcendental E covered; the single universe u is forced by Scheme and loses nothing. No duplicate statement found. Advisory: diagonalizableGroup and ringDiagonalizableGroup are definitionally identical abbrevs, not this delivery's fault. No compile run, no file changed."
+ }
+}

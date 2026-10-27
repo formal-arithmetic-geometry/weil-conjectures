@@ -1,0 +1,148 @@
+{
+ "id": "lem-trf-space-line-generation-open",
+ "kind": "statement",
+ "title": "The generation condition is represented by an open algebraic subspace",
+ "statement": "Let S be a scheme, T an S-scheme and X an algebraic space over S [def-trf-algebraic-space]. Let f:X→T, A a quasi-coherent graded algebra given by its affine-basis data, L a cartesian family of invertible modules on scheme tests of X, and ψ a graded line map [def-trf-space-line-module-proj-input]. The subfunctor whose sections have generation set equal to the entire test scheme is an fppf sheaf and an algebraic space, and its inclusion in X is representable by open immersions. It satisfies ψ.IsGenerationOpen. No cartesian coherence equations are needed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-divisors.tex",
+  "place": "Tag 0D2Z, opening generation locus and part (3); Constructions Tags 01NK and 01O9."
+ },
+ "stmt_deps": [
+  "def-trf-space-line-module-proj-input",
+  "def-trf-algebraic-space"
+ ],
+ "proof": [
+  {
+   "text": "Each free-generator witness supplies an open neighbourhood, so the generation set is open. Pulling a witness back along a scheme-test morphism preserves the free generator by tensor pullback and its specified power isomorphism. Conversely factor the test through the inverse image of the affine base open. Naturality expresses the witness as a pulled-back section. In a local frame, the local ring map reflects units at the image point, so that section generates on a neighbourhood of that point. Restrict there. Thus generation sets pull back exactly along arbitrary scheme tests.",
+   "uses": [
+    "def-trf-space-line-module-proj-input",
+    "def-pc-module-pullback",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 0D2Z, opening generation locus and part (3); Constructions Tags 01NK and 01O9."
+   }
+  },
+  {
+   "text": "Define the subfunctor by the everywhere-generation condition. The pullback equality proves functoriality and descent along jointly surjective fppf covers, so it is an fppf subsheaf. Over a scheme test its pullback is the open generation set: a test factors through this open exactly when its range is contained in that set.",
+   "uses": [
+    "def-trf-space-line-module-proj-input",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 0D2Z, opening generation locus and part (3); Constructions Tags 01NK and 01O9."
+   }
+  },
+  {
+   "text": "The diagonal of this subfunctor is the pullback of the diagonal of X along the product of its inclusions. Pull the representable etale surjective atlas of X back to the subfunctor; its source is the open just constructed. Stability of representability, etaleness and surjectivity under pullback proves the algebraic-space condition.",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 0D2Z, opening generation locus and part (3); Constructions Tags 01NK and 01O9."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "def-trf-algebraic-space",
+  "def-trf-space-line-module-proj-input"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-divisors.tex",
+  "place": "Tag 0D2Z, opening generation locus and part (3); Constructions Tags 01NK and 01O9."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"fromOfGlobalSections\"",
+   "results": "Search succeeded; candidates: AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero, AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero_assoc, AlgebraicGeometry.Proj.fromOfGlobalSections_preimage_basicOpen, AlgebraicGeometry.Proj.fromOfGlobalSections_resLE, AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict. No theorem with the stated cartesian-test-family interface.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An open subfunctor of an algebraic space is an fppf sheaf and an algebraic space; the generation locus of a line module is open",
+   "results": "Search succeeded; candidates: AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal.mk, Module.isOpen_freeLocus, Module.basicOpen_subset_freeLocus_iff, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.stalk_iso, AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.instOfRestrict, AlgebraicGeometry.Scheme.affineBasicOpen, AlgebraicGeometry.Scheme.AffineZariskiSite.toOpensFunctor. No theorem with the stated cartesian-test-family interface.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "generationSet|IsCanonicalMap|IsBaseChange",
+   "results": "Search succeeded; candidates: Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/LinearAlgebra/LinearIndependent/BaseChange.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean. No theorem with the stated cartesian-test-family interface.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.SpaceLineModuleProjMap",
+  "date": "2026-10-23",
+  "group": "N4"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Generation-open and relative-Proj construction in the polarized-descent helper under local-term locality; the same argument as the assigned parent, expressed on cartesian scheme tests.",
+   "via": [
+    "lem-trf-space-line-module-proj-map",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.SpaceLineGenerationOpen",
+  "file": "lean/Sheaf/TraceFormula/SpaceLineGenerationOpen.lean",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_space_line_generation_open",
+  "statement": "theorem exists_space_line_generation_open {S : Scheme.{u}} (T : Over S)\n    (X : AlgebraicSpace S) (f : X.obj.obj ⟶ yoneda.obj T)\n    (A : T.left.GradedAlgebraData) (L : TestLineFamily X.obj.obj)\n    (ψ : GradedLineMap f A L) :\n    ∃ (U : Subfunctor X.obj.obj)\n      (hU : Presheaf.IsSheaf (Scheme.fppfTopology.over S) U.toFunctor),\n      IsAlgebraicSpace ⟨U.toFunctor, hU⟩ ∧\n      IsRepresentableWith (fun _ _ j ↦ IsOpenImmersion j.left) U.ι ∧\n      ψ.IsGenerationOpen U",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261023T151908-L-421279",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261023T151908-L-421279",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

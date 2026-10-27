@@ -1,0 +1,137 @@
+{
+ "id": "lem-pur-algebra-diagram-scalar-presentation",
+ "kind": "statement",
+ "title": "Normalized scalar tensor presentation",
+ "statement": "On a small ringed site, for any algebra extension with exact restriction and existing unbounded derived categories, there is a ScalarDerivedPresentation: the ordinary extension functor with its specified object equality, a normalized derived adjunction unit, and the normalized underlying tensor isomorphism on two flat-term K-flat resolving factors.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 0G7E and 06YU; scalar-unit refinement with sites-modules.tex Tag 03EL; parent proof steps 1–6."
+ },
+ "stmt_deps": [
+  "def-pur-algebra-diagram-pullback-data"
+ ],
+ "proof": [
+  {
+   "text": "Sheafified pure tensors and braiding construct a natural ordinary tensor comparison with exactly the stipulated pure formula.",
+   "uses": [
+    "lem-cbc-extension-tensor-comparison-independent",
+    "lem-pur-module-tensor-generator-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the existing derived change-of-rings cochain model. On flat-term K-flat complexes its counit computes extension. The K-flat single-tensor theorem compares the published derived tensor with termwise tensor. Compose these comparisons and descend using full faithfulness of localization on resolving objects.",
+   "uses": [
+    "lem-sf-ringed-kflat-single-tensor-comparison",
+    "lem-weil-pbc-pullback-tensor-canonical-shift-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The single-tensor normalization on any two resolving factors gives the required tensor equation. The normalized coefficient adjunction, transported through the fixed object equality of the ordinary model, gives the unit equation.",
+   "uses": [
+    "lem-sfb-kflat-scalar-comparison-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-extension-tensor-comparison-independent",
+  "lem-sf-ringed-kflat-single-tensor-comparison",
+  "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-pur-module-tensor-generator-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Explicit formalization of the parent scalar/unit refinement of Tags 07A4 and 0G7E."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension commutes with exact geometric inverse image and its tensor comparison preserves scalar extension units",
+   "results": "Ordinary ModuleCat.extendScalars identity and adjunction unit lemmas; no normalized derived ringed-site comparison.",
+   "date": "2026-10-25",
+   "verdict": "No direct match; reuse ordinary adjunction and localization lemmas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of derived tensor with a module in degree zero and scalar extension units on ringed sites",
+   "results": "PresheafOfModules tensor definitions and SheafOfModules pullback free-module unit formulas; no derived normalized statement.",
+   "date": "2026-10-25",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategorySquareIso",
+   "results": "Unknown identifier in Mathlib search; this comparison is project-local.",
+   "date": "2026-10-25",
+   "verdict": "Use existing project comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategorySquareIso|kFlat.*single.*tensor|ScalarDerivedPresentation",
+   "results": "0 Mathlib hits; project source supplies exact localization and K-flat comparison tools.",
+   "date": "2026-10-25",
+   "verdict": "No direct Mathlib match."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.AlgebraDiagramPullbackExtensionCoherence",
+  "date": "2026-10-25",
+  "group": "M4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Imported Proof Step 2 (Qbar-stage), independence of finite coefficient extension; unit sk-thm-purity-transport Step 3, transitivity in coefficient extensions; auxiliary for integral coefficient comparison proof step 9 (completion unit and tower counits); (old proof steps 6-7 and 10). Original normalization proof steps 1-2: scalar-unit and tensor pullback comparison.",
+   "via": [
+    "lem-pur-algebra-diagram-pullback-extension-coherence",
+    "lem-pur-perfect-quotient-exchange-normalization",
+    "lem-pur-compact-support-completed-projection-coherence",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.AlgebraDiagramScalarPresentation",
+  "file": "lean/Sheaf/CategoryTheory/AlgebraDiagramScalarPresentation.lean",
+  "declaration": "CategoryTheory.AlgebraDiagramPullback.scalar_presentation",
+  "declarations": [
+   "CategoryTheory.AlgebraDiagramPullback.scalar_presentation"
+  ],
+  "statement": "theorem scalar_presentation : Nonempty (ScalarDerivedPresentation.{u, w} a)",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e45d3",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261025T095621-L-3454102",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e45d3",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261025T095621-L-3454102",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone (identical); AlgebraDiagramPullbackData vs clone's removed block (verbatim apart from dropped proof-only imports, one docstring line and a local instance attribute); ambient_balancing vs Coherence.tensor_coherence with pinned normalizations; 12 node lean.statement vs Lean files; delivered modules + importer TowerChernPullback compiled in /tmp sandbox (exit 0); #print axioms on all proved constituents"
+ }
+}

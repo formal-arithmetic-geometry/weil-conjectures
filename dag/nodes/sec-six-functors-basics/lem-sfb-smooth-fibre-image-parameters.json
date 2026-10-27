@@ -1,0 +1,417 @@
+{
+ "id": "lem-sfb-smooth-fibre-image-parameters",
+ "kind": "statement",
+ "title": "Parameters from a scheme at a rational point of a smooth algebraic space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $k$ a field [def-weil-field] over $S$. Let $U/S$ be a scheme, $u\\in U$ a closed point, $E/k$ an algebraic space [def-trf-algebraic-space] smooth over $k$, and $p:E\\to U$ an $S$-morphism. Smooth and etale morphisms of spaces are tested on etale scheme charts using [def-sbc-smooth-morphisms, def-weil-etale-morphism]. Suppose $z:\\operatorname{Spec}k\\to E$ is a $k$-rational point with image $u$ under $p$, the induced map $\\kappa(u)\\to k$ is an isomorphism, and $E\\times_U\\operatorname{Spec}\\kappa(u)$ has dimension zero at $z$. For a space $H$, dimension at a point is dimension on an etale scheme chart, with scheme dimension at a point the infimum of dimensions of its open neighbourhoods. There are an affine open neighbourhood $U'\\subset U$ of $u$, an integer $d\\geq0$, functions $f_1,\\ldots,f_d\\in\\Gamma(U',\\mathcal O_{U'})$ vanishing at $u$, an etale scheme chart $V\\to p^{-1}(U')$ and a point $v\\in V$ above $z$, such that their pullbacks form an $\\mathcal O_{V,v}$-regular sequence [def-weil-pbc-regular-sequence]. If $Z=V(f_1,\\ldots,f_d)\\subset U'$ [def-weil-closed-immersion], then $\\dim_z(E\\times_U Z)=0$. The point $z$ belongs to this fibre product. The empty sequence is allowed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 06MF (theorem-quasi-DM), local-ring paragraph beginning with the maps of etale local rings, isolated as a geometric local-algebra input independent of stacks. Inputs: algebra.tex Tags 06LC (lemma-find-sequence-image-regular), 00NQ (lemma-regular-ring-CM); spaces-over-fields.tex Tag 06M1 (lemma-smooth-regular); spaces-properties.tex Tag 06LQ (lemma-regular); spaces-morphisms.tex Tag 04NQ (lemma-dimension-fibre-at-a-point)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-field",
+  "def-trf-algebraic-space",
+  "def-sbc-smooth-morphisms",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-regular-sequence",
+  "def-weil-closed-immersion",
+  "def-a1-algebraic-space-point-classes",
+  "def-sfb-algebraic-space-etale-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine neighbourhood $U_0$ of $u$ and an etale scheme atlas $V\\to p^{-1}(U_0)$. Its pullback along $z$ is a nonempty etale scheme over $k$, by the definition of a representable etale atlas. Choose a point of that pullback and write $v$ for its image in $V$. Since $z$ is $k$-rational, its residue field is $k$, so the pullback point has residue field $\\kappa(v)$. On an affine open of the pullback, the etale residue-field lemma gives $\\kappa(v)/k$ finite separable. By the chart convention of the statement $V/k$ is smooth, hence locally of finite type. Choose a finite-type affine open $W\\subset V$ containing $v$. The closed-point criterion over a field shows that $v$ is closed in $W$. We retain $V$ as the atlas; only the local calculations are made on $W$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-etale-algebra-residue-field-separable",
+    "lem-kun-closed-point-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00U3 (lemma-etale-over-field); stacks-morphisms.tex Tag 06MF, ordinary etale-chart version of the local-ring setup"
+   }
+  },
+  {
+   "text": "Put $A=\\mathcal O_{U,u}$ and $B=\\mathcal O_{V,v}=\\mathcal O_{W,v}$, and let $\\varphi:A\\to B$ be the local map induced by $p$. The smooth-scheme regularity theorem applied to the smooth $k$-scheme $V$ makes $B$ a nonzero regular local ring, in particular Noetherian. Apply the regular-local depth theorem with the empty regular sequence: it gives $\\operatorname{depth}(B)=\\dim B$, so $B$ is Cohen--Macaulay. The finite-dimension theorem for Noetherian local rings gives a finite integer $d=\\dim B\\ge0$. This step imposes no Noetherian or finite-type assumption on $U$ or $A$.",
+   "uses": [
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-trf-regular-local-regular-sequence-depth",
+    "lem-weil-pbc-noetherian-local-finite-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06MF, regularity and Cohen--Macaulay paragraph; varieties.tex Tag 056S; algebra.tex Tags 00NQ and 00KQ"
+   }
+  },
+  {
+   "text": "Let $I=\\varphi(\\mathfrak m_A)B$. The local ring of $V\\times_U\\operatorname{Spec}\\kappa(u)$ at the point over $v$ is $B/I$: on affine charts the fibre-product formula is a tensor product, and $D\\otimes_R\\kappa(u)=(R\\setminus\\mathfrak p)^{-1}D/\\mathfrak p(R\\setminus\\mathfrak p)^{-1}D$; localization at the chosen prime gives $B/\\mathfrak m_AB$. Here $U_0=\\operatorname{Spec}R$, $u$ corresponds to $\\mathfrak p$, and $\\operatorname{Spec}D\\subset W$ is an affine neighbourhood of $v$. The hypothesis on $E\\times_U\\operatorname{Spec}\\kappa(u)$ and the etale-chart convention give dimension zero at this chart point. Every prime chain in its local ring is a chain of generalizations of the point and lies in every open neighbourhood of it. Its length is therefore at most that neighbourhood dimension, hence at most zero. Thus $B/I$ is a nonzero local ring of dimension zero, whose only prime is its maximal ideal. Taking inverse images of primes in $B\\to B/I$ gives $\\sqrt I=\\mathfrak m_B$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06MF, kernel calculation and radical equality in the local-ring paragraph"
+   }
+  },
+  {
+   "text": "Apply the image-selection lemma to $\\varphi:A\\to B$, using the Cohen--Macaulay equality of step 2 and the radical equality of step 3. It supplies $a_1,\\ldots,a_d\\in\\mathfrak m_A$ whose images $b_i=\\varphi(a_i)$ form a $B$-regular sequence. The Cohen--Macaulay regular-sequence dimension criterion, applied with $r=d$, gives $\\dim B/(b_1,\\ldots,b_d)=d-d=0$. Its hypotheses hold because $B$ is Noetherian local of finite dimension, $\\operatorname{depth}(B)=d$, and all $b_i$ lie in $\\mathfrak m_B$ by locality of $\\varphi$.",
+   "uses": [
+    "lem-sfb-local-map-image-regular-sequence",
+    "lem-trf-cm-regular-sequence-generator-count"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 06LC (lemma-find-sequence-image-regular) and Tag 02JN (lemma-reformulate-CM)"
+   }
+  },
+  {
+   "text": "Each $a_i\\in A$ is the germ of a function on some open neighbourhood of $u$. Intersect these finitely many neighbourhoods and choose an affine open $u\\in U'\\subset U_0$ inside the intersection. Restrict the representatives to get $f_i\\in\\Gamma(U',\\mathcal O_{U'})$. Their residues at $u$ vanish because $a_i\\in\\mathfrak m_A$. Replace $V$ by $V\\times_U U'$; this is an open part of $V$, still an etale atlas of $p^{-1}(U')$, and its local ring at $v$ is still $B$. The pulled-back germs are exactly the $b_i$, so they remain a regular sequence. Set $Z=V(f_1,\\ldots,f_d)\\subset U'$. Every $f_i$ pulls back to zero on $z:\\operatorname{Spec}k\\to E$, since evaluation factors through $\\kappa(u)\\cong k$. Consequently $z$ factors through $E\\times_U Z$. With $d=0$ use any affine $U'$ as above and $Z=U'$; all these assertions retain their meaning.",
+   "uses": [
+    "def-weil-pbc-module-stalk",
+    "def-weil-closed-immersion",
+    "def-weil-pbc-regular-sequence",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06MF, spreading the finitely many germs and forming the closed slice"
+   }
+  },
+  {
+   "text": "The pullback chart $V_Z=V\\times_U Z\\to E\\times_U Z$ is etale, by the base-change clause in the definition of the representable etale atlas. On the affine open $W\\cap p^{-1}(U')$ near $v$, shrink once more to a finite-type affine $k$-neighbourhood $\\operatorname{Spec}D'$. Its intersection with $V_Z$ is $\\operatorname{Spec}(D'/(p^*f_1,\\ldots,p^*f_d))$, again a finite-type $k$-scheme. The point $v$ is closed there, since it was closed in $W$. Localizing this quotient at $v$ gives $B/(b_1,\\ldots,b_d)$: explicitly $(D'/J)_{\\mathfrak q/J}=D'_{\\mathfrak q}/JD'_{\\mathfrak q}$ for $J=(p^*f_i)$ and the prime $\\mathfrak q$ of $v$. Its dimension is zero by step 4. The closed-point dimension theorem now gives $\\dim_v V_Z=0$. By the dimension convention in the item, computed on this etale chart, $\\dim_z(E\\times_U Z)=\\dim_v V_Z=0$. This proves the remaining conclusion.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-closed-point-dimension-local-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00OU (lemma-dimension-closed-point-finite-type-field); stacks-morphisms.tex Tag 06MF, final local-dimension paragraph, and spaces-morphisms.tex Tag 04NQ"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-trf-algebraic-space",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-regular-sequence",
+  "lem-kun-closed-point-field",
+  "lem-sfb-local-map-image-regular-sequence",
+  "lem-trf-cm-regular-sequence-generator-count",
+  "lem-trf-regular-local-regular-sequence-depth",
+  "lem-weil-pbc-closed-point-dimension-local-ring",
+  "lem-weil-pbc-etale-algebra-residue-field-separable",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+  "lem-weil-pbc-smooth-scheme-over-field-regular"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 06MF (theorem-quasi-DM), local-ring and dimension paragraphs; ordinary etale scheme charts replace the etale local rings, using algebra.tex Tags 06LC, 02JN and 00OU."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth algebraic space over a field, functions from a local base ring with zero dimensional fibre give a regular sequence cutting dimension to zero",
+   "results": "OK; 8 hits; Algebra.IsStandardSmoothOfRelativeDimension, Algebra.IsStandardSmoothOfRelativeDimension.out, Algebra.IsStandardSmooth.relativeDimension, Algebra.IsStandardSmoothOfRelativeDimension.localization_away, Algebra.IsStandardSmoothOfRelativeDimension.isStandardSmooth, RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway, Algebra.IsStandardSmoothOfRelativeDimension.id, Algebra.Smooth.exists_span_eq_top_isStandardSmooth",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only results do not state this algebraic-space or algebraic-stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local homomorphism into a regular local ring with primary maximal ideal image admits a system of parameters from the source",
+   "results": "OK; 8 hits; OfLocalizationMaximal, RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem, IsLocalRing.local_hom_TFAE, HenselianLocalRing, IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, Localization.isLocalHom_localRingHom, AlgHom.IsArithFrobAt.isArithFrobAt_localize",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only results do not state this algebraic-space or algebraic-stack assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Find a regular sequence in the image of a local ring homomorphism into a Cohen Macaulay local ring with zero dimensional closed fibre",
+   "results": "OK; 8 hits; RingTheory.Sequence.IsRegular.of_faithfullyFlat, LinearEquiv.isRegular_congr', RingTheory.Sequence.IsRegular, RingTheory.Sequence.IsRegular.of_faithfullyFlat_of_isBaseChange, RingTheory.Sequence.IsRegular.cons', RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem, RingTheory.Sequence.isRegular_cons_iff, RingTheory.Sequence.IsRegular.rec",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only results do not state this algebraic-space or algebraic-stack assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegular\", \"IsLocalRing\"",
+   "results": "OK; 7 hits; IsLocalRing.isRegular_of_perm, IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal, IsLocalRing.depth_eq_sSup_length_isRegular, IsLocalRing.ideal_depth_eq_sSup_length_isRegular, IsRegularLocalRing.toIsLocalRing, IsRegularLocalRing.of_isRegularRing_of_isLocalRing, IsRegularLocalRing.instOfIsLocalRingOfIsDomainOfIsPrincipalIdealRing",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only results do not state this algebraic-space or algebraic-stack assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "find.*[Ss]equence.*[Rr]egular|[Cc]ohen.*[Mm]acaulay|[Rr]egular.*[Pp]arameter",
+   "results": "OK; 3 hits; Mathlib/Combinatorics/SimpleGraph/StronglyRegular.lean, Mathlib/Combinatorics/SimpleGraph/StronglyRegular.lean, Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only results do not state this algebraic-space or algebraic-stack assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "find.*sequence.*regular|Cohen.?Macaulay|regular.*image.*sequence",
+   "results": {
+    "t": "2026-10-23T19:24:20Z",
+    "tool": "grep",
+    "query": "find.*sequence.*regular|Cohen.?Macaulay|regular.*image.*sequence",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: no returned declaration supplies the geometric construction from functions on an arbitrary base scheme; source-image selection and geometric descent remain necessary."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth algebraic space over a field cut out near a rational point by base functions forming a regular sequence with zero dimensional zero locus",
+   "results": {
+    "t": "2026-10-23T19:24:21Z",
+    "tool": "leansearch",
+    "query": "Smooth algebraic space over a field cut out near a rational point by base functions forming a regular sequence with zero dimensional zero locus",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "RingHom.IsStandardSmoothOfRelativeDimension.algebraMap_isLocalizationAway",
+     "Algebra.smoothLocus",
+     "AlgebraicGeometry.IsSmooth.recOn",
+     "Algebra.IsStandardSmoothOfRelativeDimension.localization_away",
+     "AlgebraicGeometry.RingedSpace.zeroLocus",
+     "Algebra.Smooth.exists_span_eq_top_isStandardSmooth",
+     "Algebra.IsSmoothAt",
+     "AlgebraicGeometry.Scheme.zeroLocus"
+    ],
+    "digest": "6a4fc4ec1235f271"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: no returned declaration supplies the geometric construction from functions on an arbitrary base scheme; source-image selection and geometric descent remain necessary."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegular\", \"IsLocalRing\"",
+   "results": {
+    "t": "2026-10-23T19:24:21Z",
+    "tool": "loogle",
+    "query": "\"IsRegular\", \"IsLocalRing\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 7,
+    "note": "",
+    "top": [
+     "IsLocalRing.isRegular_of_perm",
+     "IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal",
+     "IsLocalRing.depth_eq_sSup_length_isRegular",
+     "IsLocalRing.ideal_depth_eq_sSup_length_isRegular",
+     "IsRegularLocalRing.toIsLocalRing",
+     "IsRegularLocalRing.of_isRegularRing_of_isLocalRing",
+     "IsRegularLocalRing.instOfIsLocalRingOfIsDomainOfIsPrincipalIdealRing"
+    ],
+    "digest": "8204c6d481fb7a3a"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: no returned declaration supplies the geometric construction from functions on an arbitrary base scheme; source-image selection and geometric descent remain necessary."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local homomorphism into a Cohen Macaulay Noetherian local ring with maximal-primary image has a regular sequence of length the dimension in its image",
+   "results": {
+    "t": "2026-10-23T19:24:22Z",
+    "tool": "leanfinder",
+    "query": "A local homomorphism into a Cohen Macaulay Noetherian local ring with maximal-primary image has a regular sequence of length the dimension in its image",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem",
+     "ringKrullDim_add_length_eq_ringKrullDim_of_isRegular",
+     "RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem",
+     "Module.supportDim_add_length_eq_supportDim_of_isRegular",
+     "IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal",
+     "ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim",
+     "ringKrullDim_quotSMulTop_succ_eq_ringKrullDim",
+     "IsLocalRing.isWeaklyRegular_of_perm_of_subset_maximalIdeal"
+    ],
+    "digest": "e62f4457f46182b6"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: no returned declaration supplies the geometric construction from functions on an arbitrary base scheme; source-image selection and geometric descent remain necessary."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A local homomorphism A to B of local rings, B Noetherian Cohen Macaulay and radical of the extended maximal ideal equal to the maximal ideal of B, admits dim B source elements forming a B regular sequence",
+   "results": {
+    "t": "2026-10-23T19:26:44Z",
+    "tool": "leansearch",
+    "query": "A local homomorphism A to B of local rings, B Noetherian Cohen Macaulay and radical of the extended maximal ideal equal to the maximal ideal of B, admits dim B source elements forming a B regular sequence",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsLocalRing.local_hom_TFAE",
+     "RingTheory.Sequence.IsWeaklyRegular.of_isLocalizedModule",
+     "RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem",
+     "RingTheory.Sequence.IsRegular.of_faithfullyFlat_of_isBaseChange",
+     "RingTheory.Sequence.IsRegular.of_faithfullyFlat",
+     "RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem",
+     "IsLocalRing.isRegular_of_perm",
+     "ringKrullDim_add_length_eq_ringKrullDim_of_isRegular"
+    ],
+    "digest": "be76bbd001c3e33c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: no returned declaration supplies the geometric construction from functions on an arbitrary base scheme; source-image selection and geometric descent remain necessary."
+  },
+  {
+   "tool": "grep",
+   "query": "find.*sequence.*image|exists.*regular.*sequence|image.*regular.*sequence|Cohen.?Macaulay",
+   "results": {
+    "t": "2026-10-23T19:26:44Z",
+    "tool": "grep",
+    "query": "find.*sequence.*image|exists.*regular.*sequence|image.*regular.*sequence|Cohen.?Macaulay",
+    "sub": "RingTheory",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/Depth/Rees.lean",
+     "Mathlib/RingTheory/Depth/Rees.lean",
+     "Mathlib/RingTheory/Depth/Rees.lean"
+    ],
+    "digest": "12717f3bc459fc5e"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: no returned declaration supplies the geometric construction from functions on an arbitrary base scheme; source-image selection and geometric descent remain necessary."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-quasidm-flat-locally-quasifinite-atlas",
+  "date": "2026-10-23",
+  "group": "Q94"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: The stabilizer-preserving etale cover preceding the local invariant-ring quotients. Supporting proof input: first sentence of Tag 0DUE: choose the pointwise affine groupoid chart from Tag 0DU4. Supporting split input: Tag 0DU4 (lemma-etale-local-quasi-DM-at-x), first proof paragraph and the first part of lemma-etale-local-quasi-DM to which it refers: preparation of the flat locally quasi-finite scheme self-relation. Inputs: Tag 0CL0 (lemma-diagonal-diagonal), parts (1),(5); Tag 06MF (theorem-quasi-DM); spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme). Supporting input: Tag 06MF (theorem-quasi-DM), equivalence (1)--(2); relative over S, as in the chapter conventions; quasi-DM expanded as locally quasi-finite diagonal. Auxiliary input: Tag 06MF (theorem-quasi-DM), local-ring paragraph beginning with the maps of etale local rings, isolated as a geometric local-algebra input independent of stacks. Inputs: algebra.tex Tags 06LC (lemma-find-sequence-image-regular), 00NQ (lemma-regular-ring-CM); spaces-over-fields.tex Tag 06M1 (lemma-smooth-regular); spaces-properties.tex Tag 06LQ (lemma-regular); spaces-morphisms.tex Tag 04NQ (lemma-dimension-fibre-at-a-point).",
+   "via": [
+    "lem-sfb-quasidm-flat-locally-quasifinite-atlas",
+    "lem-sfb-finite-inertia-flat-quasifinite-presentation",
+    "lem-sfb-finite-inertia-pointwise-groupoid-chart",
+    "lem-sfb-finite-inertia-etale-affine-charts",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-fibre-image-parameters",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Followed Stacks 06MF on ordinary etale scheme charts, selected source germs using the new statement-only 06LC node, and wrote out the fibre quotient, radical equality, spreading, and closed-point dimension argument. Reused existing smooth regularity, Cohen--Macaulay, dimension and affine-fibre tools. All Mathlib searches were actually run and inspected.",
+  "blueprint": "Latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md (3), through the inherited admissible-direct-image/alteration/moduli prerequisite chain named in blueprint.from.place. Steps 1--6 realize the local-ring paragraph of Stacks 06MF isolated by the parent. The inherited ancestor is null, as returned by tools/blueprint_refs.py ancestor; the full inherited via chain is preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-algebra-residue-field-separable",
+    "why": "The atlas fibre is an etale scheme over k; the generic residue-field lemma supplies the finite extension needed for closedness. No same-unit statement gives this ring fact."
+   },
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "The generic finite-type field criterion turns finite residue extension into closedness on an affine chart. It does not replace any step of the six-functor unit."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "The generic smooth-scheme theorem supplies regularity of the chosen chart stalk. This is exactly the regularity input of the Stacks route."
+   },
+   {
+    "node": "lem-trf-regular-local-regular-sequence-depth",
+    "why": "Its empty-sequence case supplies the Cohen--Macaulay equality for a regular local ring; this is the local algebra used by the Stacks route."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+    "why": "This generic local-ring dimension bound supplies the finite integer d, with no finiteness assumption on the base U."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "The affine tensor-product description computes the closed-fibre stalk. This is a generic scheme tool, not a different proof route."
+   },
+   {
+    "node": "lem-trf-cm-regular-sequence-generator-count",
+    "why": "Its regular-sequence-to-dimension-drop direction computes the quotient dimension for the selected d elements. This is the explicit 02JN local algebra underlying the source."
+   },
+   {
+    "node": "lem-weil-pbc-closed-point-dimension-local-ring",
+    "why": "The generic closed-point dimension equality converts the zero-dimensional quotient stalk into dimension zero on the finite-type chart. This is the scheme version of the source dimension formula."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-algebra-residue-field-separable",
+  "lem-kun-closed-point-field",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-trf-regular-local-regular-sequence-depth",
+  "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-trf-cm-regular-sequence-generator-count",
+  "lem-weil-pbc-closed-point-dimension-local-ring"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N8-86652ad55",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-86652ad55 (reviewer sub-agent of L); spot-checked: I read the item, the new node and all 14 cited statements in full, plus Stacks 06LC (algebra.tex lemma-find-sequence-image-regular) and 06MF (stacks-morphisms.tex theorem-quasi-DM, paragraph 'Consider the maps of etale local rings'). The item statement is unchanged and faithful to 06MF: the fibre F->u is smooth with kappa(u)=k, p need not be compatible with the k-structure, and the slice and quasi-finiteness steps stay in the parent. Step 1: v' in Vx_E Spec k has residue field finite separable over k, so kappa(v)/k is finite, so v is closed on a finite-type affine W. The sentence 'residue field = kappa(v)' is true because z is a section (monomorphism) and is not needed for closedness. Step 2: B is regular, Noetherian and Cohen-Macaulay, using the empty sequence c=0 of the regular-local depth node. Step 3: u is closed, so the local ring of the fibre is B/m_A B. Prime chains lie in every neighbourhood, so its dimension is 0, which gives sqrt(m_A B)=m_B with no hypothesis on A. Step 4: the new node gives the sequence, and the 'only if' direction of the generator-count iff gives dim B/(b)=0 (b_i in m_B by locality). Steps 5-6: the stalk/germ spreading and the preimage atlas are correct, z factors through Z via kappa(u)->k, the local ring of V_Z at v is B/(b), and the closed-point dimension node gives dim_v=0; the d=0 case is handled. The new node lem-sfb-local-map-image-regular-sequence equals 06LC. The extra claim a_i in m_A is true: a unit would make the regular-sequence quotient zero. I tested it on k[t]->k[x], t->x^n; the t->x case into 2 variables is excluded; non-CM B is excluded. It is statement-only with B1-B7 satisfied and 4 kinds of search; Mathlib Depth/Rees.lean has no image selection. It is not a duplicate: rg -L for 06LC/its label hit only the item, its parent and this node, and the 07FD/07FH/0BIA parameter nodes differ. It is not a restatement of the item. Batch-5: lem-trf-cm-regular-sequence-generator-count (02JN) and lem-trf-regular-local-regular-sequence-depth (00NQ) are generic commutative algebra. Their closures (27/35 nodes, mostly pbc) contain no trace-formula, Poincare-duality or nt-assume node, and neither assumption gives them, so both are accepted. All 8 tool_uses are generic black boxes and are accepted. No SGA source is cited."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothFibreImageParameters",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_regular_parameters_of_zero_dimensional_fibre",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothFibreImageParameters.lean",
+  "statement": "theorem exists_regular_parameters_of_zero_dimensional_fibre {S : Scheme.{u}} (k : Type u) [Field k] (sk : Spec (CommRingCat.of k) ⟶ S) (U : Over S) (u₀ : U.left) (hu₀ : IsClosed ({u₀} : Set U.left)) (E : AlgebraicSpace S) (q : E.obj.obj ⟶ yoneda.obj (Over.mk sk)) (hq : ∀ (T : Over S) (a : yoneda.obj T ⟶ E.obj.obj), IsEtale a → Smooth (yoneda.preimage (a ≫ q)).left) (p : E.obj.obj ⟶ yoneda.obj U) (z : yoneda.obj (Over.mk sk) ⟶ E.obj.obj) (hz : z ≫ q = 𝟙 _) (e : Over.mk sk ≅ Over.mk (U.left.fromSpecResidueField u₀ ≫ U.hom)) (he : z ≫ p = yoneda.map e.hom ≫ yoneda.map (Over.homMk (U := Over.mk (U.left.fromSpecResidueField u₀ ≫ U.hom)) (V := U) (U.left.fromSpecResidueField u₀) rfl)) (hdim : etaleLocalDimension (Limits.pullback p (yoneda.map (Over.homMk (U := Over.mk (U.left.fromSpecResidueField u₀ ≫ U.hom)) (V := U) (U.left.fromSpecResidueField u₀) rfl))) (schemePointMap (Limits.pullback.lift (f := p) z (yoneda.map e.hom) he) (IsLocalRing.closedPoint k)) = 0) : ∃ (O : U.left.Opens) (_ : IsAffineOpen O) (hu : u₀ ∈ O) (fs : List Γ(O.toScheme, ⊤)) (V : Over S) (a : yoneda.obj V ⟶ Limits.pullback p (yoneda.map (Over.homMk (U := Over.mk (O.ι ≫ U.hom)) (V := U) O.ι rfl))), IsEtale a ∧ IsSurjective a ∧ (∃ v : V.left, schemePointMap (a ≫ Limits.pullback.fst _ _) v = schemePointMap z (IsLocalRing.closedPoint k) ∧ RingTheory.Sequence.IsRegular (V.left.presheaf.stalk v) (fs.map (fun f ↦ V.left.presheaf.germ ⊤ v trivial ((yoneda.preimage (a ≫ Limits.pullback.snd _ _)).left.appTop f)))) ∧ (∀ f ∈ fs, O.toScheme.Γevaluation ⟨u₀, hu⟩ f = 0) ∧ ∃ J : O.toScheme.IdealSheafData, J = Scheme.IdealSheafData.ofIdealTop (Ideal.ofList fs) ∧ ∃ zJ : yoneda.obj (Over.mk sk) ⟶ Limits.pullback p (yoneda.map (Over.homMk (U := Over.mk ((J.subschemeι ≫ O.ι) ≫ U.hom)) (V := U) (J.subschemeι ≫ O.ι) rfl)), zJ ≫ Limits.pullback.fst _ _ = z ∧ etaleLocalDimension (Limits.pullback p (yoneda.map (Over.homMk (U := Over.mk ((J.subschemeι ≫ O.ι) ≫ U.hom)) (V := U) (J.subschemeι ≫ O.ι) rfl))) (schemePointMap zJ (IsLocalRing.closedPoint k)) = 0",
+  "branch": "newtargets-dag",
+  "by": "Q61",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The already-landed point-classes and etale-dimension definition nodes are added to stmt_deps. Smoothness is tested on all representable etale scheme charts. A list encodes d and the empty sequence; the zero subscheme is the ideal sheaf of Ideal.ofList fs, not a reduced zero locus. The residue-field identification is the compatible Over-category isomorphism e, and he identifies the composite p z with its canonical residue-point morphism."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2a8e521b5",
+  "group": "Q61",
+  "result": "fix",
+  "note": "Lean statement exact against node and Stacks 06MF: residue iso e/he equivalent to 'image u, κ(u)→k iso'; hq smooth on all étale charts (not stronger); hdim/conclusion use landed etaleLocalDimension + schemePointMap (stmt_deps added, both landed defs); J = ofIdealTop (Ideal.ofList fs), the full ideal, not its radical; zJ determined since Z→U mono; IsRegular includes M≠(f)M; d=0/empty list OK; universes all u; lean.statement verbatim; no definitions, only sorry; docstrings OK. Sole fault H11: dispatcher-placeholder second reading → fixes/lem-sfb-smooth-fibre-image-parameters.report.md (Worker report verbatim + real clause-by-clause second reading). No Lean changed, no compile."
+ }
+}

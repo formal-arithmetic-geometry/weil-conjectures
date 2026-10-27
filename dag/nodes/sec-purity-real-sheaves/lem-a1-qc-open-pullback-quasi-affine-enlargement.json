@@ -1,0 +1,240 @@
+{
+ "id": "lem-a1-qc-open-pullback-quasi-affine-enlargement",
+ "kind": "statement",
+ "title": "Finite affine enlargement of a quasi-compact pullback open",
+ "statement": "Let $a:X\\to A$ and $b:B\\to A$ be morphisms of schemes [def-pc-scheme], with $A$ and $B$ affine. Suppose that every quasi-compact open subscheme of $X$ is quasi-affine, meaning isomorphic to a quasi-compact open subscheme of an affine scheme. Quasi-compact means that every open covering admits a finite subcover. Put $Z=X\\times_A B$ [def-pc-fibre-product], with projection $p:Z\\to X$. For every quasi-compact open subscheme $L\\subseteq Z$, there exist $n\\geq0$ and affine opens $W_1,\\ldots,W_n\\subseteq X$ such that $W=\\bigcup_{j=1}^nW_j$ is quasi-compact and $p(|L|)\\subseteq W$. The induced morphism $L\\to W\\times_A B$ is an open immersion [def-weil-open-immersion], and $W\\times_A B$ and $L$ are quasi-affine schemes. The morphism $W\\times_A B\\to B$ is quasi-affine [def-nagata-quasi-affine-morphism]. No quasi-compactness or separation hypothesis is imposed on $X$ or $a$.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0AP7, lemma-base-change-ind-quasi-affine, affine-base reduction; finite affine enlargement as in the proof of lemma-ind-quasi-affine-composition, expanded using ordinary quasi-affine base change (Morphisms Tag 01SO)"
+ },
+ "stmt_deps": [
+  "def-nagata-quasi-affine-morphism",
+  "def-pc-fibre-product",
+  "def-pc-scheme",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-affine-opens-basis], the affine opens $V$ of $X$ cover $X$. Their inverse images under $p$ restrict to an open cover of $L$, since scheme morphisms are continuous. Quasi-compactness of $L$ gives finitely many such opens $W_1,\\ldots,W_n$ with $p(|L|)\\subseteq W=\\bigcup_jW_j$. Each $W_j$ is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. For any open cover of $W$, restrict it to each $W_j$ and take a finite subcover there; the union of these finitely many finite subcovers covers $W$. Thus $W$ is a quasi-compact open of $X$, and the hypothesis makes $W$ quasi-affine. If $L$ is empty take $n=0$ and $W=\\varnothing$.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "lemma-ind-quasi-affine-composition, finite affine enlargement of the quasi-compact image; expanded open-cover argument"
+   }
+  },
+  {
+   "text": "Put $T=W\\times_A B$. The universal property [def-pc-fibre-product] identifies $T$ with $W\\times_X Z$: a map to either side is a pair of maps to $W$ and $B$ whose composites to $A$ agree. By [lem-weil-pbc-open-immersion-base-change], $T\\to Z$ is an open immersion with image $p^{-1}(W)$. Indeed, after restriction to the open $W$, maps to $X$ factor uniquely and their structure sheaves restrict. Since $|L|\\subseteq p^{-1}(W)$, $L$ is an open subset of $T$ and $\\mathcal O_T|_L=\\mathcal O_Z|_L=\\mathcal O_L$. This is exactly the induced open immersion $L\\to T$ by [def-weil-open-immersion].",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-immersion-base-change",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "lemma-base-change-immersion (Tag 01JY), and the definition of an open subscheme"
+   }
+  },
+  {
+   "text": "Apply [lem-a1-quasi-affine-target-locality] to $W\\to A$ with the singleton affine cover $\\{A\\}$. Its inverse image is the quasi-affine scheme $W$ from step 1, so $W\\to A$ is quasi-affine. Apply [lem-trf-quasi-affine-base-change] along $b:B\\to A$: the resulting morphism $T\\to B$ is quasi-affine. Its inverse image of the affine open $B$ is $T$ itself, so $T$ is quasi-affine by [def-nagata-quasi-affine-morphism].",
+   "uses": [
+    "lem-a1-quasi-affine-target-locality",
+    "lem-trf-quasi-affine-base-change",
+    "def-nagata-quasi-affine-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "lemma-characterize-quasi-affine (Tag 01SM), (2) implies (1); lemma-base-change-quasi-affine (Tag 01SO)"
+   }
+  },
+  {
+   "text": "Choose an open embedding of the quasi-affine scheme $T$ into an affine scheme $H$. Under step 2, $L$ is an open subscheme of $T$, hence an open subscheme of $H$: its underlying subset is open, and restricting $\\mathcal O_H$ first to $T$ and then to $L$ gives $\\mathcal O_L$. Its given quasi-compactness makes this a quasi-compact open subscheme of $H$. Thus $L$ is quasi-affine. Together with steps 1–3 this proves every assertion.",
+   "uses": [
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "lemma-characterize-quasi-affine: quasi-affine schemes as quasi-compact open subschemes of affine schemes"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-open-immersion-base-change",
+  "def-weil-open-immersion",
+  "lem-a1-quasi-affine-target-locality",
+  "lem-trf-quasi-affine-base-change",
+  "def-nagata-quasi-affine-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "lemma-ind-quasi-affine-composition (finite affine enlargement), lemma-base-change-ind-quasi-affine (Tag 0AP7, affine-base reduction), with morphisms.tex lemma-base-change-quasi-affine (Tag 01SO)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If every quasi compact open of X is quasi affine and A and B are affine schemes then a quasi compact open L in X times A B embeds into W times A B for some quasi compact open W of X and is quasi affine",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-22T06:17:42Z\", \"tool\": \"leanfinder\", \"query\": \"If every quasi compact open of X is quasi affine and A and B are affine schemes then a quasi compact open L in X times A B embeds into W times A B for some quasi compact open W of X and is quasi affine\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"AlgebraicGeometry.instQuasiCompactLiftSchemeIdOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift\", \"AlgebraicGeometry.IsAffineOpen.isCompact_pullback_inf\", \"AlgebraicGeometry.quasiCompact_iff_forall_affine\"], \"digest\": \"1da690b9874a45fd\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: IsAffineOpen.isCompact_pullback_inf controls compactness of an already specified pullback open; inverse-limit and hypercover results do not construct the finite affine enlargement together with the quasi-affine pullback and induced open embedding asserted here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a fibre product X over A with B where A and B are affine and all compact open subschemes of X are quasi affine, every compact open is contained in the base change of a finite union of affine opens of X",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-22T06:19:30Z\", \"tool\": \"leanfinder\", \"query\": \"In a fibre product X over A with B where A and B are affine and all compact open subschemes of X are quasi affine, every compact open is contained in the base change of a finite union of affine opens of X\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsAffineOpen.isCompact_pullback_inf\", \"AlgebraicGeometry.exists_preimage_eq\", \"AlgebraicGeometry.exists_map_preimage_le_map_preimage\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"AlgebraicGeometry.QuasiCompactCover.exists_isAffineOpen_of_isCompact\", \"AlgebraicGeometry.exists_map_preimage_eq_map_preimage\", \"AlgebraicGeometry.QuasiCompactCover.instPullback₁Scheme\", \"AlgebraicGeometry.IsAffineOpen.isCompactOpenCovered\"], \"digest\": \"e8da76f72b596ddf\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: IsAffineOpen.isCompact_pullback_inf controls compactness of an already specified pullback open; inverse-limit and hypercover results do not construct the finite affine enlargement together with the quasi-affine pullback and induced open embedding asserted here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite affine enlargement of the image of a quasi compact open of a scheme fibre product gives a quasi affine open immersion after base change",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-22T06:17:39Z\", \"tool\": \"leansearch\", \"query\": \"Finite affine enlargement of the image of a quasi compact open of a scheme fibre product gives a quasi affine open immersion after base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact\", \"AlgebraicGeometry.IsAffineOpen.preimage_of_isOpenImmersion\", \"AlgebraicGeometry.IsAffineOpen.image_of_isOpenImmersion\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.mk\", \"AlgebraicGeometry.Scheme.Hom.isAffineOpen_iff_of_isOpenImmersion\", \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\"], \"digest\": \"f05b17ced48a3668\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: IsAffineOpen.isCompact_pullback_inf controls compactness of an already specified pullback open; inverse-limit and hypercover results do not construct the finite affine enlargement together with the quasi-affine pullback and induced open embedding asserted here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasiAffine\", \"pullback\"",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-22T06:17:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsQuasiAffine\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: IsAffineOpen.isCompact_pullback_inf controls compactness of an already specified pullback open; inverse-limit and hypercover results do not construct the finite affine enlargement together with the quasi-affine pullback and induced open embedding asserted here."
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?affine|IsQuasiAffine",
+   "subdirectory": "AlgebraicGeometry",
+   "results": "{\"t\": \"2026-10-22T06:17:38Z\", \"tool\": \"grep\", \"query\": \"quasi.?affine|IsQuasiAffine\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\"], \"digest\": \"d5d4c83d006333a6\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: IsAffineOpen.isCompact_pullback_inf controls compactness of an already specified pullback open; inverse-limit and hypercover results do not construct the finite affine enlargement together with the quasi-affine pullback and induced open embedding asserted here."
+  },
+  {
+   "tool": "grep",
+   "query": "IsQuasiAffine|quasi.affine",
+   "subdirectory": "AlgebraicGeometry/QuasiAffine.lean",
+   "results": "{\"t\": \"2026-10-22T07:06:47Z\", \"tool\": \"grep\", \"query\": \"IsQuasiAffine|quasi.affine\", \"sub\": \"AlgebraicGeometry/QuasiAffine.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"12\", \"15\", \"16\", \"18\", \"19\"], \"digest\": \"5cdb025dedd1f183\"}",
+   "date": "2026-10-22",
+   "verdict": "No match for the whole item: compactness and finite affine cover results cover only the topological step; quasi-affine immersion results cover only the final open restriction; inverse-limit results have different hypotheses and conclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A compact open of a fibre product lies in the pullback of a finite union of affine open subschemes",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-22T07:06:47Z\", \"tool\": \"leansearch\", \"query\": \"A compact open of a fibre product lies in the pullback of a finite union of affine open subschemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_affineOpens\", \"AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens\", \"AlgebraicGeometry.Scheme.Pullback.openCoverOfLeftRight\", \"AlgebraicGeometry.IsAffineOpen.isCompact_pullback_inf\", \"AlgebraicGeometry.Scheme.Pullback.openCoverOfBase'\", \"AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom\", \"AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union\", \"AlgebraicGeometry.Scheme.Pullback.openCoverOfLeftRight_X\"], \"digest\": \"68cbf66f02a192a9\"}",
+   "date": "2026-10-22",
+   "verdict": "No match for the whole item: compactness and finite affine cover results cover only the topological step; quasi-affine immersion results cover only the final open restriction; inverse-limit results have different hypotheses and conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasiAffine\", \"pullback\"",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-22T07:06:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsQuasiAffine\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No match for the whole item: compactness and finite affine cover results cover only the topological step; quasi-affine immersion results cover only the final open restriction; inverse-limit results have different hypotheses and conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every compact open in a scheme fibre product over affine schemes is contained in the pullback of a finite union of affine opens, and is quasi affine when every compact open of the first scheme is quasi affine",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-22T07:06:59Z\", \"tool\": \"leanfinder\", \"query\": \"Every compact open in a scheme fibre product over affine schemes is contained in the pullback of a finite union of affine opens, and is quasi affine when every compact open of the first scheme is quasi affine\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsAffineOpen.isCompact_pullback_inf\", \"AlgebraicGeometry.quasiCompact_iff_forall_affine\", \"AlgebraicGeometry.quasiCompact_iff_forall_isAffineOpen\", \"AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatPullbackSchemeOfQuasiCompact\", \"AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatPullbackSchemeOfQuasiCompact_1\", \"AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatFiberOfQuasiCompact\", \"AlgebraicGeometry.quasiCompact_over_affine_iff\", \"AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit\"], \"digest\": \"e104871e3f95f0d2\"}",
+   "date": "2026-10-22",
+   "verdict": "No match for the whole item: compactness and finite affine cover results cover only the topological step; quasi-affine immersion results cover only the final open restriction; inverse-limit results have different hypotheses and conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "IsQuasiAffine|isCompact_iff_finite_and_eq_biUnion_affineOpens",
+   "subdirectory": "AlgebraicGeometry",
+   "results": "{\"t\": \"2026-10-22T07:10:46Z\", \"tool\": \"grep\", \"query\": \"IsQuasiAffine|isCompact_iff_finite_and_eq_biUnion_affineOpens\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\"], \"digest\": \"540d520358650a8f\"}",
+   "date": "2026-10-22",
+   "verdict": "No match for the whole item: compactness and finite affine cover results cover only the topological step; quasi-affine immersion results cover only the final open restriction; inverse-limit results have different hypotheses and conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If all quasi compact open subschemes of X are quasi affine then quasi compact opens of its fibre product with an affine scheme over an affine scheme embed into the base change of a finite affine open union of X",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-22T07:10:48Z\", \"tool\": \"leanfinder\", \"query\": \"If all quasi compact open subschemes of X are quasi affine then quasi compact opens of its fibre product with an affine scheme over an affine scheme embed into the base change of a finite affine open union of X\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsAffineOpen.isCompact_pullback_inf\", \"AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatPullbackSchemeOfQuasiCompact_1\", \"AlgebraicGeometry.quasiCompact_iff_forall_affine\", \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"AlgebraicGeometry.instQuasiCompactFstScheme\", \"AlgebraicGeometry.quasiCompact_iff_forall_isAffineOpen\", \"AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatPullbackSchemeOfQuasiCompact\", \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\"], \"digest\": \"c4ae16bc20fdd891\"}",
+   "date": "2026-10-22",
+   "verdict": "No match for the whole item: compactness and finite affine cover results cover only the topological step; quasi-affine immersion results cover only the final open restriction; inverse-limit results have different hypotheses and conclusion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-ind-quasi-affine-permanence",
+  "date": "2026-10-22",
+  "group": "Q49"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Gabber Tag 0APK input to lem-a1-affine-hc0: base-change input in the first paragraph. Extracts old permanence Steps 3-4 after affine-base reduction (projected compact image, finite affine enlargement, ordinary quasi-affine base change, induced open embedding and quasi-affineness of the compact open).",
+   "via": [
+    "lem-a1-ind-quasi-affine-permanence",
+    "lem-a1-ind-quasi-affine-fpqc-effective-descent",
+    "lem-a1-separated-lqf-fpqc-effective-descent",
+    "lem-a1-algebraic-space-fpqc-sheaf",
+    "lem-a1-space-fpqc-separated-valuative-descent",
+    "lem-a1-proetale-local-system-representability"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-a1-qc-open-pullback-quasi-affine-enlargement",
+  "worker": "stage1",
+  "summary": "Expanded the finite affine enlargement and the open restriction identification, then reused existing affine-target locality and ordinary quasi-affine base change. No new nodes. Checked cited statements and empty cases. Corrected doubled TeX escapes without changing the mathematical statement.",
+  "blueprint": "Realizes the affine-base pullback input to the Gabber Tag 0APK branch of lem-a1-affine-hc0, through the existing ind-quasi-affine-permanence ancestry; retains the finite enlargement plus ordinary quasi-affine base-change route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-quasi-affine-base-change",
+    "why": "Ordinary quasi-affine base change, Tag 01SO, is the generic geometric tool explicitly required by this item; no same-unit node states it without using the item."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-quasi-affine-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NG-0c7c60650",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-0c7c60650 (reviewer sub-agent of L); spot-checked: Read the item's four steps in full, plus every cited statement. The statement is unchanged: the only edit is the TeX escapes. There are no new nodes, no repair note for the item, the item is not in a dropped section, and no SGA source is cited. Step 1: affine-opens basis plus quasi-compactness of L gives finitely many affine W_j covering p(L), and W is qc by the explicit finite-union argument; this matches more-morphisms l.19594. Step 2: W×_A B ≅ W×_X Z by the universal property, the open-immersion base change gives T→Z open with image p^{-1}(W) (shown elementarily), and L is open in T with the restricted sheaf. Step 3: target locality with the singleton cover {A} (the 'if' direction; the report calls it forward, which is harmless) gives W→A quasi-affine; 01SO (morphisms l.2317) gives T→B quasi-affine, so T is quasi-affine since B is affine. Step 4: a qc open of the quasi-affine T is a qc open of an affine H. Checked L empty, X empty, B=Spec 0, b=id and non-qc X. The parent ind-quasi-affine-permanence step 2 uses only the L-conclusion, which still holds. Batch-5 flags: lem-trf-quasi-affine-base-change (Tag 01SO) and lem-trf-quasi-affine-canonical-affine-embedding (reached via target-locality) are generic scheme theory. Their closures contain only quasi-affine/affinization nodes, no trace-formula or Poincaré-duality content, so I accept them as general tools; the trf base-change node is declared in tool_uses. No duplicate of the item in the DAG."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QcOpenPullbackQuasiAffineEnlargement",
+  "declaration": "AlgebraicGeometry.qc_open_pullback_quasi_affine_enlargement",
+  "file": "lean/Sheaf/AlgebraicGeometry/QcOpenPullbackQuasiAffineEnlargement.lean",
+  "statement": "theorem qc_open_pullback_quasi_affine_enlargement {X A B : Scheme.{u}} (a : X ⟶ A) (b : B ⟶ A) [IsAffine A] [IsAffine B] (hX : ∀ U : X.Opens, IsCompact (U : Set X) → U.toScheme.IsQuasiAffine) (L : (pullback a b).Opens) (hL : IsCompact (L : Set (pullback a b : Scheme.{u}))) : ∃ (n : ℕ) (Wj : Fin n → X.Opens) (W : X.Opens), (∀ j : Fin n, IsAffineOpen (Wj j)) ∧ W = iSup Wj ∧ IsCompact (W : Set X) ∧ Set.MapsTo (pullback.fst a b) (L : Set (pullback a b : Scheme.{u})) (W : Set X) ∧ (pullback (W.ι ≫ a) b).IsQuasiAffine ∧ L.toScheme.IsQuasiAffine ∧ IsQuasiAffineHom (pullback.snd (W.ι ≫ a) b) ∧ ∃ i : L.toScheme ⟶ pullback (W.ι ≫ a) b, IsOpenImmersion i ∧ i ≫ pullback.fst (W.ι ≫ a) b ≫ W.ι = L.ι ≫ pullback.fst a b ∧ i ≫ pullback.snd (W.ι ≫ a) b = L.ι ≫ pullback.snd a b",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-97070568b",
+  "group": "Q04",
+  "result": "pass",
+  "note": "All clauses match the node: affine A and B, hX for quasi-compact opens of X, quasi-compact L, finite affine Wj with n=0 allowed, W = iSup Wj compact, p(L) ⊆ W via MapsTo, both pullback and L quasi-affine, snd quasi-affine via IsQuasiAffineHom. The open immersion i is the induced map: the two projection equations fix it because W.ι is mono. No extra hypotheses or universe restriction; lean.statement matches the file verbatim. Edge cases L, X, B empty, b = id and non-separated X are covered. No duplicate in Mathlib or the project; live node unbound. Docstrings carry the source and blueprint id and follow the 4 proof steps; proof is sorry only. Not recompiled since no file changed. Advisory: plain imports AffineScheme and QuasiSeparated serve proof deps with no Lean record yet; harmless."
+ }
+}

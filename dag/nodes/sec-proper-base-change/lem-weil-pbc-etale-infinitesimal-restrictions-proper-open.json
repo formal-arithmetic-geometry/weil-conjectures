@@ -124,5 +124,54 @@
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.proper_closed_fiber_open_eq_top"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.proper_closed_fiber_open_eq_top",
+     "module": "WeilConjectures.AlgebraicGeometry.ProperEtaleOpen",
+     "lines": [
+      18,
+      67
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $A$ be a commutative ring which is $I$-adically complete for an ideal $I\\subseteq A$. Let $f:Y\\to\\operatorname{Spec}A$ and $g:X\\to Y$ be morphisms of schemes with $f\\circ g$ proper. Let $W\\subseteq X$ be an open subset containing $g^{-1}$ of the image of the projection $Y\\times_{\\operatorname{Spec}A}\\operatorname{Spec}(A/I)\\to Y$ [def-pc-base-change]. Then $W=X$.",
+  "proof": [
+   {
+    "text": "Set $h=f\\circ g:X\\to\\operatorname{Spec}A$. The complement $C=X\\setminus W$ is closed, and $h$ is proper, in particular closed, so $h(C)$ is closed in $\\operatorname{Spec}A$; write $h(C)=V(K)$ for an ideal $K\\subseteq A$. Suppose $x\\in C$. Then $K$ is contained in the prime ideal $h(x)$, which is contained in a maximal ideal $\\mathfrak m$. Thus $\\mathfrak m\\in V(K)$, so $\\mathfrak m=h(t)$ for some $t\\in C$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Since $A$ is $I$-adically complete, $I$ is contained in the Jacobson radical of $A$, hence $I\\subseteq\\mathfrak m$. The image of $\\operatorname{Spec}(A/I)\\to\\operatorname{Spec}A$ is $V(I)$, and the image of the projection $Y_0=Y\\times_{\\operatorname{Spec}A}\\operatorname{Spec}(A/I)\\to Y$ is $f^{-1}(V(I))$ [def-pc-base-change]. As $f(g(t))=\\mathfrak m\\in V(I)$, the point $g(t)$ lies in that image. The containment hypothesis puts $t$ in $W$, contradicting $t\\in C$. Thus $C=\\emptyset$ and $W=X$.",
+    "uses": [
+     "def-pc-base-change"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

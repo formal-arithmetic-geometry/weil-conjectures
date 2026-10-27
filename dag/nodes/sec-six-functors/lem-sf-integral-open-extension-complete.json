@@ -1,0 +1,166 @@
+{
+ "id": "lem-sf-integral-open-extension-complete",
+ "kind": "statement",
+ "title": "Quasi-compact integral open extension preserves quotient completeness",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ [def-weil-l-adic-coefficient-extension], and a quasi-compact open immersion $j:U\\hookrightarrow X$ on which $\\ell$ is invertible. For any fixed coefficient-normalized open operations $o$ [def-sf-integral-open-operations], the actual unbounded derived extension by zero $j_!$ sends every quotient-tower complete object $K$ on $U$ [def-weil-derived-complete] to a quotient-tower complete object $j_!K$ on $X$. The coefficient and site universes are independent. The operations and completeness predicate are those of [def-sf-integral-open-reduction-comparison-data].",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-sf-integral-open-operations",
+  "def-sf-integral-open-reduction-comparison-data",
+  "def-weil-derived-complete"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09BP, with algebraization.tex Tag 0A0E and sites-modules.tex Tag 093M; independent-universe transport of the quotient/Koszul argument"
+ },
+ "proof": [
+  {
+   "text": "For each positive quotient, the limit-lift projection identity and naturality of constant sheafification compute the image of the actual uniformizer section. Apply the projection equations of the fixed operations and joint injectivity of the limit projections on sections. The finite constant-section equations then show that the completed coefficient map preserves this uniformizer.",
+   "uses": [
+    "def-weil-completed-integral-coefficients",
+    "lem-pur-roos-intrinsic-completeness-equivalence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The integral coefficient transport is the specified continuous pushforward. Substituting this functor shows that it carries uniformizer multiplication to slice uniformizer multiplication. Transpose through the actual localized extension/restriction adjunction. Naturality and linearity of its unit show that extension of the source scalar chain endomorphism is exactly the target scalar chain endomorphism, in every degree.",
+   "uses": [
+    "def-sf-integral-open-operations",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-pur-roos-intrinsic-completeness-equivalence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use lem-sf-ringed-open-extension-products-of-universes at the actual open object and completed ring sheaf. Its canonical product comparison is invertible. Product preservation composes with the integral coefficient equivalence, so the fixed ordinary extension preserves countable products.",
+   "uses": [
+    "lem-sf-ringed-open-extension-products-of-universes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the proved private complete_iff_local, complete_iff_principalUnit and principalMapIso helpers of CompletedDirectImagePreservesCompleteness. Represent K by a complex P. Quotient completeness of K makes the principal uniformizer-completion unit of P a quasi-isomorphism. Exact extension preserves this quasi-isomorphism. Its product, cone and shift comparison principalMapIso identifies extension of principal completion with principal completion for the mapped scalar, which Step 2 identifies with the target uniformizer. Thus the extended representative is isomorphic to its principal completion. The localCriterion theorem says that the latter is locally complete. Transport local completeness along this isomorphism and the exact-derived representative comparison, and apply complete_iff_local on X. Choose any auxiliary prime greater than ell to discharge the legacy finite-field-datum parameter in the already proved criterion. This imposes no restriction on ell or the schemes.",
+   "uses": [
+    "lem-pur-completed-direct-image-preserves-completeness",
+    "lem-pur-integral-principal-cone-local-criterion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-completed-integral-coefficients",
+  "lem-pur-roos-intrinsic-completeness-equivalence",
+  "def-sf-integral-open-operations",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-ringed-open-extension-products-of-universes",
+  "lem-pur-completed-direct-image-preserves-completeness",
+  "lem-pur-integral-principal-cone-local-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09BP; algebraization.tex Tag 0A0E. Lean proof by the existing principal-completion transport helpers, actual scalar preservation, and countable product preservation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "extension by zero derived complete sheaves reduction strict coefficient systems adjunction comparison",
+   "results": "IsAdicComplete.StrictMono.of_lift, IsAdicComplete.StrictMono.extend_eq, IsAdicComplete.StrictMono.of_comp_lift, IsAdicComplete.StrictMono.extend, CondensedMod.LocallyConstant.adjunction, LightCondMod.LocallyConstant.adjunction, Condensed.profiniteSolidification, IsAdicComplete.StrictMono.factorPow_comp_extend",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; use the stated project interfaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"tensor\"",
+   "results": "PresheafOfModulesOfCommRing.Monoidal.tensorObj, PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj, PresheafOfModulesOfCommRing.tensorObj_obj, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight, PresheafOfModulesOfCommRing.Monoidal.tensorHom, PresheafOfModulesOfCommRing.Monoidal.tensorObjMap, PresheafOfModulesOfCommRing.Monoidal.tensorHom_app",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; use the stated project interfaces."
+  },
+  {
+   "tool": "grep",
+   "query": "integralOpenReductionComparison|openSemilinearTensorModel|openRestrictionComplete",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; use the stated project interfaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi compact open immersion extension by zero preserves derived adic completeness",
+   "results": "IsAdicComplete, IsAdicComplete.bot, AlgebraicGeometry.QuasiCompactCover.of_hom, AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion, IsAdicComplete.mk, AdicCompletion, AlgebraicGeometry.QuasiCompactCover.inst, IsAdicComplete.StrictMono.of_lift",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; use the stated project interfaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open localization of a ringed sequence site has evaluation isomorphisms equal to the identity on underlying sections",
+   "results": "AlgebraicGeometry.Scheme.Hom.appIso, AlgebraicGeometry.StructureSheaf.openToLocalization, AlgebraicGeometry.StructureSheaf.openToLocalization_apply, CategoryTheory.sheafSectionsNatIsoEvaluation, AlgebraicGeometry.StructureSheaf.coe_openToLocalization, AlgebraicGeometry.StructureSheaf.toBasicOpen_to_map, ModuleCat.Tilde.openToLocalization, AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_hom_eq_germ_apply",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; use the stated project interfaces."
+  },
+  {
+   "tool": "grep",
+   "query": "semilinear.*localization|restrictionEvaluation|derived.*complete.*extension",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; use the stated project interfaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open ringed sequence site restriction evaluation identity section normalization",
+   "results": "TopCat.Presheaf.restrictOpenCommRingCat_apply, ModuleCat.Tilde.res_apply, AlgebraicGeometry.Scheme.restrictFunctorΓ_hom_app, AlgebraicGeometry.Scheme.restrictFunctorΓ_inv_app, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, AlgebraicGeometry.Scheme.Modules.restrictFunctorId_hom_app_app, AlgebraicGeometry.Scheme.Opens.ι_app_self, AlgebraicGeometry.Scheme.Modules.restrictFunctorId_inv_app_app",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; use the stated project interfaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralOpenReductionComparison",
+  "date": "2026-10-25",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Open-factor strict reduction and completed realization, through lem-sf-integral-open-reduction-comparison",
+   "via": [
+    "lem-sf-integral-open-reduction-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralOpenExtensionComplete",
+  "file": "lean/Sheaf/SixFunctors/IntegralOpenExtensionComplete.lean",
+  "declaration": "WeilConjectures.IntegralOpenReduction.integralOpenExtensionComplete",
+  "statement": "theorem integralOpenExtensionComplete [QuasiCompact j] (_hlX : IsUnit (l : Γ(X, ⊤))) (_hlU : IsUnit (l : Γ(U, ⊤))) (o : Operations l E j) : ∀ K, complete l E U K → complete l E X ((shriek l E j o).obj K)",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e4fb9",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261025T124443-L-2022665",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e4fb9",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261025T124443-L-2022665",
+  "kind": "interface",
+  "note": "independent cc review: Definitions module vs live item prefix (byte-identical); item/adapted/new modules vs nodes def-sf-integral-open-operations, def-sf-integral-open-reduction-comparison-data, lem-sf-integral-open-reduction-comparison, lem-sf-integral-open-extension-complete, lem-sf-normalized-open-section-existence; sandbox build of delivered and in-between modules plus all 24 remaining direct importers compiled (rc=0); axioms traced to existing sorried library statements"
+ }
+}

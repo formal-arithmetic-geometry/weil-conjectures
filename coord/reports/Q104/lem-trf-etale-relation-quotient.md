@@ -1,0 +1,102 @@
+# Q104 stage-1 repair: lem-trf-etale-relation-quotient
+
+## Files written
+
+- `dag/nodes/sec-trace-formula/lem-trf-etale-relation-quotient.json`: existing statement, split; assembly of the two new tasks and existing lemmas. Statement unchanged.
+- `dag/nodes/sec-trace-formula/lem-trf-etale-quotient-affine-open-cover.json`: statement, unsplit; no Mathlib match.
+- `dag/nodes/sec-trace-formula/lem-trf-representable-etale-quotient-presentation.json`: statement, unsplit; no Mathlib match.
+- `citations.json`: a verbatim statement quote for each citation in each assembly step.
+
+## Attachments
+
+None. The project search by blueprint tag, declaration name and quotient terminology found no completed declaration in `lean/WeilConjectures/`. `lean/Sheaf/AlgebraicGeometry/EtaleRelationQuotient.lean` states the item but its theorem ends in `sorry`. It is not an attachment. No Lean was written or compiled.
+
+## Wanted literature
+
+None. All source passages used are present in `literature/stacks-project/`.
+
+## What was wrong and what changed
+
+The return asks to spread the six-step, 3400-character proof across at least two independent statement-only tasks, with a parent assembly of at most 3000 characters. There were no retained node files, report or searches in this sandbox at the start (only brief marker files), so I copied the current repository item, which contains the returned six-step proof. Historical metadata and searches of that item are retained, and its mathematical statement is unchanged. The delivery tool rebases the split-owned fields on current main.
+
+The new affine-open-cover task owns the geometric preparation: passage through the scheme coproduct of affine opens, restriction of the relation along an arbitrary etale summand (without claiming that a summand quotient equals the total quotient), invariance under the surjective etale refinement, and representable open quotient charts with sheaf-surjective union. It does not assert that any quotient is algebraic.
+
+The new representable-presentation task owns the independent local pullback and descent argument: assuming only representability of the quotient map, identify its pullbacks after local representatives with base changes of the relation projection, descend etaleness and surjectivity, and produce etale-local lifts. It does not assert that the quotient or its diagonal is algebraic or representable. Its explicit base-change formula prevents hiding that comparison. It is useful twice, before and after the global gluing. Stacks 0265's second step explicitly says to reread the 02WV proof under exactly this weaker representability assumption.
+
+The parent still performs the algebraic-space construction: affine representability plus the second task gives each local atlas, and existing coproduct/open-gluing lemmas glue the quotient. The kernel-pair and universal-property clauses remain genuine assembly steps; the latter writes the elementary factorization on quotient classes before invoking sheafification.
+
+## Allocation of every old argument
+
+- Old step 1 -> affine-open-cover task: surjective etale refinement does not change the sheaf quotient, using the existing restriction-quotient lemma.
+- Old step 2 -> affine-open-cover task: construct the scheme coproduct of affine charts, its open-and-closed summands, the etale restricted relations and the distinction between an individual quotient and the total quotient.
+- Old step 3 -> parent step 2 uses the existing affine representability statement for both its conclusions. The kernel-pair pullback calculation, reflexivity giving surjectivity, and fpqc descent are the representable-presentation task. The algebraic-space definition is used in parent step 2.
+- Old step 4 -> affine-open-cover task: check flatness/local finite presentation from etaleness and surjectivity from reflexivity before applying finding-opens; prove covering by local representatives and refinement by inverse images of the affine opens.
+- Old step 5 -> parent step 3: scheme coproduct of the already supplied atlases, algebraic coproduct, then every hypothesis of open gluing.
+- Old step 6 -> parent step 4 gets representability from the diagonal via an explicit pullback, then invokes the representable-presentation task for the same calculation and descent as in the affine case, including etale-local lifting. The existing kernel-pair lemma supplies the isomorphism. Parent step 5 writes the quotient-class and sheafification universal properties.
+
+## Source reading and argument for the two new tasks
+
+For the affine-open-cover task I read `spaces.tex`, Tag 02WW / `theorem-presentation`, all three paragraphs of its proof, and Tag 02WU / `lemma-finding-opens`, including its hypotheses and construction of the open pullback. Tags 02WT and 045Z in the tag index identify the restriction inputs. The argument retained for the future splitter is: choose an affine open covering; the existing scheme-coproduct-family lemma makes its disjoint union a scheme. Its map to V is surjective etale. Restriction-quotient gives an etale relation on that union and an isomorphism of total quotients; applying its arbitrary-etale clause to the summands gives the individual relations. Reflexivity gives a diagonal section of each projection R -> V, hence surjectivity. Etaleness gives flatness and local finite presentation of both projections and chart inclusions. Finding-opens therefore applies to every summand quotient. For any quotient section, choose fppf-local representatives in V and refine the cover by the inverse images of the affine opens; the refined representatives give sections of the respective chart quotients. Thus the open subfunctors cover as sheaves, without assuming global algebraicity. This retains the first, second and fourth original arguments below.
+
+For the representable-presentation task I read `spaces.tex`, Tag 02WV / `lemma-when-it-works-it-works`, its complete displayed pullback calculation, and Tag 0265 / `lemma-presentation-quasi-compact`, the first and second proof steps. Given x and the representing scheme P_x, fppf-local quotient representatives a_alpha exist. The existing kernel-pair lemma identifies V x_F V with R, so associativity of pullbacks gives P_x x_T T_alpha = T_alpha x_(a_alpha,V,t) R, with map to V equal to s after the R projection. Reflexivity supplies a section of t and therefore surjectivity. Base change preserves etaleness and surjectivity, and fpqc descent of etaleness (existing `lem-galois-fpqc-descend-etale`) applies after fpqc refinement of the fppf cover; surjectivity follows from the jointly surjective base cover. No global quasi-compactness is required: work over affine opens of T, refine the flat locally finitely presented covers by affine opens over them, and choose finitely many whose open images cover each affine base. This is an fpqc refinement for the descent argument. Finally the single map P_x -> T is a surjective etale covering and its projection P_x -> V is a lift of x. The same calculation therefore proves the affine and general atlas clauses and the local-lift clause; no algebraicity hypothesis was used except, outside this task, to obtain representability.
+
+## Search record
+
+Every new-node query was run through the mandated `msearch.py Q104 lem-trf-etale-relation-quotient` command and recorded in `searches.jsonl`. Each new node records LeanFinder (two phrasings), Loogle, LeanSearch and Mathlib grep. I read all hits. The first task's semantic hits are affine/open scheme covers (`Scheme.affineCover`, `AffineOpenCover.openCover`, `OpenCover.restrict`, affine refinements) and limits of schemes; they have no quotient sheaf conclusion. Its grep hit, `IdealSheaf/Subscheme.lean:131`, is an open immersion between quotient-ring affine charts, not a groupoid quotient. I read lines 116-136. The second task's hits are the definition/base-change properties of scheme etaleness, ordinary set quotient surjectivity and topological quotient maps. `Morphisms/Flat.lean:124` assumes a flat, quasi-compact, surjective scheme map and concludes a topological quotient map; I read lines 110-134. It cannot prove this sheaf-quotient claim. Neither Loogle query found a hit. No service was unavailable. The item's historical searches were retained rather than rewritten or falsely logged as new executions.
+
+Whole-blueprint searches (`blueprint_refs.py search`) for `etale relation`, `02WW`, `02WV`, `quotient chart`, and `affine quotient` were read, along with the ancestor result. The two hits for `affine quotient` are unrelated strict-transform and additive/multiplicative-group definitions. DAG source-tag and statement searches found the existing restriction, finding-opens, affine representability and kernel-pair nodes, which are reused. I also opened the nearby a1 atlas/presentation, affine-atlas-open-cover and etale-space realization statements; they assume the space is already algebraic or start from a sheaf on a different site. They cannot construct quotient charts before algebraicity. The ancestor remains `lem-trf-local-term-locality`, with the same polarized-descent quotient input and the item's full intermediate-node chain. The chapter/unit route is unchanged.
+
+## Review by Q104
+
+I read the returned live node, its Lean statement/docstring, the chapter and unit records, GOAL.md, the three blueprint levels in SETUP.md, and both copies of delivery-errors B-E. I checked the full item against Stacks 02WW and 02WV and left its statement unchanged. Each new node introduces S, V, R, both relation maps, the monomorphism and pointwise equivalence hypotheses, the quotient sheaf and all extra assumptions. The first also introduces every chosen chart and each quotient, and defines sheaf covering explicitly. The second explicitly assumes representability of q rather than assuming the conclusion. They have no proof steps, proof dependencies or inline proof sketches. They are independent tasks and neither is the whole item, one of its unconditional clauses, nor a new spelling of an existing theorem.
+
+For assembly step 1 I verified that the new chart-cover statement gives every piece the step takes: the scheme coproduct, etale R_i, quotient invariance, representable open immersions and local section covering. For step 2 I opened the affine-quotient-representable statement and checked that it gives BOTH representability of each atlas base change and representability of the diagonal, under affineness and exactly the relation hypotheses furnished by step 1. The representable-presentation task therefore applies to each F_i, and the algebraic-space definition needs no further hypothesis. For step 3 I read the coproduct lemma's size/atlas assumptions and the open-gluing statement's five hypotheses: the chosen set I and scheme coproduct U supply the size assumption, the maps of step 1 identify subfunctors, and the covering is sheaf-surjective, not merely a claim about point images. For step 4 I checked the representable-diagonal definition and fibre-product definition; the displayed pullback really is T x_F V. The second task then applies to the original quotient, and the existing kernel-pair statement gives the complete requested isomorphism without etaleness or algebraicity assumptions. For step 5 I checked the sheafification definition and used exactly its universal property, without taking local-surjectivity from a definition which does not state it. The preceding quotient-class argument is elementary. Every cited statement is quoted verbatim in citations.json; no step cites a proof or only a source tag.
+
+I tested the new statements on V empty (empty chart family and empty covering where appropriate), the diagonal relation (quotient equal to V), a two-point scheme with the universal equivalence relation (each singleton quotient maps onto the same point), repeated/intersecting affine opens, and non-quasi-compact/non-separated V. No disjointness of quotient images is asserted: only the scheme-coproduct summands are disjoint. In particular an individual chart quotient need not equal F, and no intersection of arbitrary affine opens is assumed affine. The second statement only applies when P_x exists, so it cannot smuggle in effectivity of scheme descent. Choosing P_x -> T as the local lift covering also works when T is empty. No source error or statement dispute was found. The source remains the Stacks affine/open-gluing route; no SGA source is used.
+
+I checked C1/C4 citation coverage, duplicate candidates, the absence of cycles from new proof edges (the new tasks are statement-only), and all explicit hypotheses at applications. All old arguments are allocated above and reproduced below, not shortened away. The parent has no proof step longer than 2000 characters and the total is under 3000. The independent tasks are of comparable scope: restriction/open-cover geometry and representable-atlas descent. No unit/chapter/maintainer files were edited.
+
+## Not finished
+
+The two new tasks are deliberately unsplit so other workers can prove them independently. Nothing required of this stage-1 delivery is deferred.
+
+## Preserved returned argument (verbatim step texts)
+
+### Old step 1
+
+First let $g:U'\to U$ be a surjective etale morphism. By [lem-trf-etale-relation-restriction-quotient], the restricted relation is etale and the quotient map is an isomorphism when $g$ is surjective. Thus a surjective etale refinement of the atlas may be used without changing the quotient.
+
+### Old step 2
+
+Choose an affine open covering $U=\bigcup_iU_i$ and let $U'=\coprod_iU_i\to U$ be the resulting surjective etale map. The scheme coproduct lemma [lem-weil-pbc-scheme-coproduct-family] makes $U'$ a scheme with the $U_i$ as pairwise disjoint open-and-closed summands. The restriction lemma, applied first to $U'\to U$ and then to each (generally non-surjective) etale summand inclusion $U_i\to U'$, shows that every restricted relation $R_i$ is etale; it does not identify an individual quotient $F_i=U_i/R_i$ with $F$.
+
+### Old step 3
+
+For each affine $U_i$, apply [lem-trf-etale-affine-quotient-representable]. It gives representability of every base change of $h_{U_i}\to F_i$ and representability of the diagonal of $F_i$. The kernel-pair lemma [lem-trf-etale-relation-kernel-pair] identifies $h_{R_i}$ with $h_{U_i}\times_{F_i}h_{U_i}$. For an fppf presentation $T_j\to T$ of a section of $F_i$, this identification gives $T_j\times_{F_i}h_{U_i}\cong T_j\times_{a_j,U_i,t}R_i$, a base change of the etale map $t$; reflexivity makes $t$ surjective. Etaleness descends along the resulting fpqc cover by [lem-galois-fpqc-descend-etale], while surjectivity is checked after the same jointly surjective cover. Therefore $F_i$ is an algebraic space and $U_i\to F_i$ is an etale surjective atlas by [def-trf-algebraic-space].
+
+### Old step 4
+
+The maps $U_i\to U$ are flat and locally of finite presentation because they are etale; the projections $s,t:R\to U$ are surjective by reflexivity of the equivalence relation and are flat and locally of finite presentation for the same reason. Therefore [lem-trf-etale-relation-finding-opens] applies to each restriction and gives a representable open immersion $F_i\to F$. The images cover $F$: a section of the quotient is fppf-locally represented by a map to $U$, and after refining that cover the inverse image of the affine open covering places the representative in one $U_i$.
+
+### Old step 5
+
+The coproduct $\coprod_iF_i$ is an algebraic space by [lem-trf-algebraic-space-coproduct], because the coproduct of the scheme atlases $\coprod_iU_i$ is a scheme. The sheaf $F$ and its open subfunctors $F_i$ satisfy all hypotheses of [lem-trf-algebraic-space-open-gluing]: each $F_i$ is algebraic, each map is representable and open, the family is jointly surjective, and the coproduct is algebraic. Hence $F$ is an algebraic space.
+
+### Old step 6
+
+Because $F$ is now an algebraic space, its diagonal is representable, so for every scheme $T\to F$ the fibre product $T\times_Fh_V$ is a scheme. Choose an fppf cover $T_j\to T$ and representatives $a_j:T_j\to V$ of the given section. The kernel-pair lemma [lem-trf-etale-relation-kernel-pair] gives
+$T_j\times_Fh_V\cong T_j\times_{a_j,V,t}R$, a base change of the etale map $t$; reflexivity makes $t$ surjective. Thus the pullback of $q$ to each $T_j$ is etale and surjective, and [lem-galois-fpqc-descend-etale] descends etaleness along the fpqc cover while surjectivity is local on the base. The same kernel-pair isomorphism gives $h_R\cong h_V\times_Fh_V$. Finally, the quotient-sheaf coequalizer definition gives the stated bijection from maps $F\to G$ to maps $h_V\to G$ equalizing $s,t$.
+
+## Not duplicates
+
+- lem-trf-etale-quotient-affine-open-cover vs lem-coef-infinity-cartesian-initial-boundary-lift: the new task constructs the whole affine-chart family and proves its quotient invariance and sheaf covering; the existing statement Fiberwise relative initiality fills a boundary in a cartesian family does not state this package before global algebraicity.
+- lem-trf-etale-quotient-affine-open-cover vs lem-trf-etale-relation-finding-opens: the new task constructs the whole affine-chart family and proves its quotient invariance and sheaf covering; the existing statement Restriction of a quotient by an fppf relation is an open subspace does not state this package before global algebraicity.
+- lem-trf-etale-quotient-affine-open-cover vs lem-trf-etale-affine-quotient-representable: the new task constructs the whole affine-chart family and proves its quotient invariance and sheaf covering; the existing statement Representability facts for an affine etale-relation quotient does not state this package before global algebraicity.
+- lem-trf-etale-quotient-affine-open-cover vs lem-trf-polarized-scheme-etale-descent: the new task constructs the whole affine-chart family and proves its quotient invariance and sheaf covering; the existing statement Effective etale descent for polarized schemes does not state this package before global algebraicity.
+- lem-trf-etale-quotient-affine-open-cover vs lem-trf-etale-relation-quotient: the existing item concludes global algebraicity, the atlas, kernel pair and universal property; this new task supplies only affine restriction/open-cover data before algebraicity.
+- lem-trf-etale-quotient-affine-open-cover vs lem-trf-etale-relation-restriction-quotient: the new task constructs the whole affine-chart family and proves its quotient invariance and sheaf covering; the existing statement Restriction of an etale relation preserves its quotient does not state this package before global algebraicity.
+- lem-trf-etale-quotient-affine-open-cover vs def-trf-polarized-scheme-etale-descent-datum: the new task constructs the whole affine-chart family and proves its quotient invariance and sheaf covering; the existing statement Polarized scheme etale descent data, candidate pairs and compatible isomorphisms does not state this package before global algebraicity.
+- lem-trf-etale-quotient-affine-open-cover vs lem-trf-polarized-fine-log-etale-descent: the new task constructs the whole affine-chart family and proves its quotient invariance and sheaf covering; the existing statement Effective etale descent of fine log schemes with a compatible polarization does not state this package before global algebraicity.
+- lem-trf-representable-etale-quotient-presentation vs lem-trf-etale-affine-quotient-representable: the new task assumes only representability of the quotient map and gives its local pullback formula, etale/surjective projections and etale-local section lifts; the existing statement Representability facts for an affine etale-relation quotient has different hypotheses and conclusion.
+- lem-trf-representable-etale-quotient-presentation vs lem-trf-etale-relation-quotient: the existing item concludes global algebraicity, the atlas, kernel pair and universal property; this new task supplies only a conditional representable-atlas argument and explicit local pullback formula, with representability as an extra hypothesis.
+- lem-trf-representable-etale-quotient-presentation vs lem-trf-affine-etale-relation-separated-lqf: the new task assumes only representability of the quotient map and gives its local pullback formula, etale/surjective projections and etale-local section lifts; the existing statement Separated locally quasi-finite geometry of an affine etale relation has different hypotheses and conclusion.

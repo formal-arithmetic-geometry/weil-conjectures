@@ -11,8 +11,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.Abelian
 public import WeilConjectures.CategoryTheory.ModuleObjects.Symmetric
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
-
-import WeilConjectures.CategoryTheory.Monoidal.Mod.InternalHom
+import WeilConjectures.CategoryTheory.Monoidal.Mod.FreePresentation
 import WeilConjectures.CategoryTheory.Monoidal.Mod.TensorRegular
 
 /-!
@@ -30,16 +29,15 @@ inherits the remaining properties of `C` needed by the K-flat machinery:
 * `Mod C R` is Grothendieck abelian, as an instance deduced from `Mod.isGrothendieckAbelian`;
 * `Mod.hasFunctorialFlatResolution`: `Mod C R` admits functorial flat resolutions if `C` does.
 
-## Sorried input
+## Proofs
 
-The instances `Mod.monoidalClosed` and `Mod.hasFunctorialFlatResolution` are currently `sorry`ed.
-The intended arguments are:
-
-* The internal hom `Hom_R(M, N)` is the equalizer of the two maps `[M, N] ⇉ [R ⊗ M, N]`, adjoint
-  to `R ⊗ M ⊗ [M, N] ⟶ R ⊗ N ⟶ N` and to `R ⊗ M ⊗ [M, N] ⟶ M ⊗ [M, N] ⟶ N`, with the
-  `R`-action induced by that of `N`.
-* If `F` is flat in `C`, then `R ⊗ F` is flat in `Mod C R` because `(R ⊗ F) ⊗_R M ≅ F ⊗ M`; and
-  a functorial flat resolution `P(M) ⟶ M` in `C` gives the functorial epimorphism
+* `Mod.monoidalClosed`: after forgetting the action, `N ⊗_R M` is the coequalizer of two maps
+  `(N ⊗ R) ⊗ M ⇉ N ⊗ M`, natural in `N`, between functors that preserve colimits because `C` is
+  closed. As `forget` reflects colimits, `- ⊗_R M` preserves them, and it is a left adjoint
+  because `Mod C R` is Grothendieck abelian, hence has a separator.
+* `Mod.hasFunctorialFlatResolution`: for `F : C`, the split coequalizer of the action gives
+  `M ⊗_R (R ⊗ F) ≅ M ⊗ F` naturally in `M`, so `R ⊗ F` is flat in `Mod C R` when `F` is flat in
+  `C`. A functorial flat resolution `P(M) ⟶ M` in `C` then gives the functorial epimorphism
   `R ⊗ P(M) ⟶ R ⊗ M ⟶ M` of `R`-modules.
 
 -/
@@ -55,6 +53,97 @@ namespace CategoryTheory.Mod
 variable {C : Type u} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]
   [MonoidalCategory C] [MonoidalPreadditive C] [SymmetricCategory C] [MonoidalClosed C]
   {R : C} [MonObj R] [IsCommMonObj R]
+
+/-- The relative tensor product of module objects over a commutative algebra object in a closed
+symmetric monoidal Grothendieck abelian category is closed. -/
+noncomputable instance monoidalClosed : MonoidalClosed (Mod C R) where
+  closed M := by
+    -- Keep the original signature: closedness already makes the ambient tensor additive.
+    rename_i hpre _ _ _ _
+    clear hpre
+    have hleft (X : C) : (MonoidalCategory.tensorLeft X).Additive := by
+      have := preservesBinaryBiproducts_of_preservesBinaryCoproducts
+        (MonoidalCategory.tensorLeft X)
+      exact Functor.additive_of_preservesBinaryBiproducts _
+    have hright (X : C) : (MonoidalCategory.tensorRight X).Additive := by
+      have := preservesBinaryBiproducts_of_preservesBinaryCoproducts
+        (MonoidalCategory.tensorRight X)
+      exact Functor.additive_of_preservesBinaryBiproducts _
+    have : MonoidalPreadditive C :=
+      { whiskerLeft_zero := fun {X Y Z} ↦ (MonoidalCategory.tensorLeft X).map_zero Y Z
+        zero_whiskerRight := fun {X Y Z} ↦ (MonoidalCategory.tensorRight X).map_zero Y Z
+        whiskerLeft_add := fun {X Y Z} f g ↦ (MonoidalCategory.tensorLeft X).map_add
+        add_whiskerRight := fun {X Y Z} f g ↦ (MonoidalCategory.tensorRight X).map_add }
+    have : IsGrothendieckAbelian.{v} (Mod C R) := isGrothendieckAbelian R
+    let F₀ := forget R ⋙ MonoidalCategory.tensorRight R ⋙
+      MonoidalCategory.tensorRight M.X
+    let F₁ := forget R ⋙ MonoidalCategory.tensorRight M.X
+    let f : F₀ ⟶ F₁ :=
+      { app := fun N ↦ ((β_ N.X R).hom ≫ ModObj.smul (M := R) (X := N.X)) ▷ M.X
+        naturality := by
+          intro N N' φ
+          change (φ.hom ▷ R) ▷ M.X ≫
+              ((β_ N'.X R).hom ≫ ModObj.smul (M := R) (X := N'.X)) ▷ M.X =
+            ((β_ N.X R).hom ≫ ModObj.smul (M := R) (X := N.X)) ▷ M.X ≫ φ.hom ▷ M.X
+          rw [← comp_whiskerRight, ← comp_whiskerRight]
+          congr 1
+          rw [BraidedCategory.braiding_naturality_left_assoc, ← act_hom]
+          simp only [Category.assoc] }
+    let g : F₀ ⟶ F₁ :=
+      { app := fun N ↦ (α_ N.X R M.X).hom ≫ N.X ◁ ModObj.smul (M := R) (X := M.X)
+        naturality := by
+          intro N N' φ
+          change (φ.hom ▷ R) ▷ M.X ≫ (α_ N'.X R M.X).hom ≫
+              N'.X ◁ ModObj.smul (M := R) (X := M.X) =
+            ((α_ N.X R M.X).hom ≫ N.X ◁ ModObj.smul (M := R) (X := M.X)) ≫ φ.hom ▷ M.X
+          rw [associator_naturality_left_assoc, ← whisker_exchange]
+          simp only [Category.assoc] }
+    let D := parallelPair f g
+    have : PreservesColimitsOfSize.{v, v} D.flip :=
+      ⟨fun {J} _ ↦ preservesColimitsOfShape_of_evaluation _ _ fun j ↦ by
+        cases j
+        · exact inferInstanceAs (PreservesColimitsOfShape J F₀)
+        · exact inferInstanceAs (PreservesColimitsOfShape J F₁)⟩
+    let e : D.flip ⋙ colim ≅ MonoidalCategory.tensorRight M ⋙ forget R :=
+      NatIso.ofComponents
+        (fun N ↦ HasColimit.isoOfNatIso (diagramIsoParallelPair (D.flip.obj N)) ≪≫
+          IsColimit.coconePointUniqueUpToIso
+            (t := Cofork.ofπ (tensorObjπ N M) (tensorObjπ_condition N M))
+            (colimit.isColimit _) (isColimitTensorπ N M)) (by
+        intro N N' φ
+        apply colimit.hom_ext
+        intro j
+        simp only [Functor.comp_map, colim_map, Iso.trans_hom, Category.assoc,
+          ι_colimMap_assoc, HasColimit.isoOfNatIso_ι_hom_assoc]
+        cases j
+        · simp [D, F₀, F₁, f, g, tensorObjπ_whiskerRight]
+          have h := congrArg (fun k ↦ k ≫ tensorObjπ N' M) (f.naturality φ)
+          simp only [Category.assoc] at h
+          change (φ.hom ▷ R) ▷ M.X ≫
+              ((β_ N'.X R).hom ≫ ModObj.smul (M := R) (X := N'.X)) ▷ M.X ≫ tensorObjπ N' M =
+            ((β_ N.X R).hom ≫ ModObj.smul (M := R) (X := N.X)) ▷ M.X ≫
+              φ.hom ▷ M.X ≫ tensorObjπ N' M at h
+          simpa only [comp_whiskerRight, Category.assoc] using h
+        · simp [D, F₀, F₁, f, g, tensorObjπ_whiskerRight])
+    have : PreservesColimitsOfSize.{v, v}
+        (MonoidalCategory.tensorRight M ⋙ forget R) := preservesColimits_of_natIso e
+    have : PreservesColimitsOfSize.{v, v} (MonoidalCategory.tensorRight M) :=
+      preservesColimits_of_reflects_of_preserves _ (forget R)
+    have : PreservesColimitsOfSize.{v, v} (MonoidalCategory.tensorLeft M) :=
+      preservesColimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight M).symm
+    have : (MonoidalCategory.tensorLeft M).IsLeftAdjoint :=
+      isLeftAdjoint_of_preservesColimits_of_isSeparating
+        (isSeparator_separator (Mod C R)) _
+    exact
+      { rightAdj := (MonoidalCategory.tensorLeft M).rightAdjoint
+        adj := Adjunction.ofIsLeftAdjoint _ }
+
+
+/-- The category of module objects over a commutative algebra object in a closed symmetric
+monoidal Grothendieck abelian category is Grothendieck abelian, see `Mod.isGrothendieckAbelian`:
+tensoring with an object is a left adjoint, so it preserves colimits. -/
+instance : IsGrothendieckAbelian.{v} (Mod C R) :=
+  isGrothendieckAbelian R
 
 open MonObj in
 section
@@ -98,49 +187,6 @@ private noncomputable def isColimitRelativeTensorCofork (M N : Mod C R) :
     apply coequalizer.hom_ext (f := rightAct M ▷ N.X)
       (g := (α_ M.X R N.X).hom ≫ M.X ◁ γ[R,N.X])
     exact hm.trans (coequalizer.π_desc _ _).symm
-
-/-- The previously constructed coequalizer tensor functor agrees with the monoidal tensor. -/
-private noncomputable def relativeTensorRightIso (N : Mod C R) :
-    Mod.tensorLeft N ≅ MonoidalCategory.tensorRight N :=
-  NatIso.ofComponents
-    (fun M ↦ by
-      change colimit ((tensorLeftDiagram R N).flip.obj M) ≅ M ⊗ N
-      exact HasColimit.isoOfNatIso
-        (diagramIsoParallelPair ((tensorLeftDiagram R N).flip.obj M)) ≪≫
-        (colimit.isColimit _).coconePointUniqueUpToIso (isColimitRelativeTensorCofork M N)) (by
-    intro M M' f
-    apply colimit.hom_ext
-    intro j
-    simp only [id_eq, Iso.trans_hom, tensorLeft, Functor.comp_map, colim_map, Category.assoc,
-      ι_colimMap_assoc, HasColimit.isoOfNatIso_ι_hom_assoc]
-    cases j <;> apply Mod.hom_ext <;>
-      simp [relativeTensorCofork, relativeTensorπ, tensorObjπ_whiskerRight])
-
-end
-
-omit [MonoidalPreadditive C] in
-/-- The equalizer adjunction, transported along the relative tensor comparison. -/
-private lemma relativeTensor_isLeftAdjoint (M : Mod C R) :
-    (MonoidalCategory.tensorLeft M).IsLeftAdjoint :=
-  ((ihom'Adjunction R M).ofNatIsoLeft
-    (relativeTensorRightIso M ≪≫ (BraidedCategory.tensorLeftIsoTensorRight M).symm)).isLeftAdjoint
-
-/-- The relative tensor product of module objects over a commutative algebra object in a closed
-symmetric monoidal Grothendieck abelian category is closed. -/
-noncomputable instance monoidalClosed : MonoidalClosed (Mod C R) :=
-  ⟨fun M ↦
-    have : (MonoidalCategory.tensorLeft M).IsLeftAdjoint := by
-      exact relativeTensor_isLeftAdjoint M
-    ⟨_, Adjunction.ofIsLeftAdjoint (MonoidalCategory.tensorLeft M)⟩⟩
-
-/-- The category of module objects over a commutative algebra object in a closed symmetric
-monoidal Grothendieck abelian category is Grothendieck abelian, see `Mod.isGrothendieckAbelian`:
-tensoring with an object is a left adjoint, so it preserves colimits. -/
-instance : IsGrothendieckAbelian.{v} (Mod C R) :=
-  isGrothendieckAbelian R
-
-open MonObj in
-section
 
 /-- The free relative tensor product is the ordinary tensor product, by the split action
 coequalizer. -/
@@ -250,34 +296,43 @@ private lemma flat_free {F : C} (hF : ObjectProperty.flat F) :
 
 end
 
-omit [MonoidalPreadditive C] in
 /-- If `C` admits functorial flat resolutions, then so does `Mod C R`, by the free modules
 `R ⊗ F` on flat objects `F` of `C`. -/
 instance hasFunctorialFlatResolution [Abelian.HasFunctorialFlatResolution C] :
     Abelian.HasFunctorialFlatResolution (Mod C R) := by
-  classical
-  -- Preserve the original interface: no monoidal additivity is required here.
-  rename_i hAdd hSymm hClosed hMon hComm hResolution
-  clear hAdd
-  have : (free R).PreservesEpimorphisms :=
-    Functor.preservesEpimorphisms_of_adjunction (freeForgetAdjunction R)
-  let Λ : Abelian.LeftResolution (ObjectProperty.flat.ι : _ ⥤ C) := Classical.arbitrary _
-  let P := forget R ⋙ Λ.F ⋙ ObjectProperty.flat.ι ⋙ free R
-  let π : P ⟶ 𝟭 (Mod C R) :=
+  -- Derive additivity without capturing the unused section instance in the signature.
+  rename_i hpre _ _ _ _ _
+  clear hpre
+  have hleft (X : C) : (MonoidalCategory.tensorLeft X).Additive := by
+    have := preservesBinaryBiproducts_of_preservesBinaryCoproducts
+      (MonoidalCategory.tensorLeft X)
+    exact Functor.additive_of_preservesBinaryBiproducts _
+  have hright (X : C) : (MonoidalCategory.tensorRight X).Additive := by
+    have := preservesBinaryBiproducts_of_preservesBinaryCoproducts
+      (MonoidalCategory.tensorRight X)
+    exact Functor.additive_of_preservesBinaryBiproducts _
+  have : MonoidalPreadditive C :=
+    { whiskerLeft_zero := fun {X Y Z} ↦ (MonoidalCategory.tensorLeft X).map_zero Y Z
+      zero_whiskerRight := fun {X Y Z} ↦ (MonoidalCategory.tensorRight X).map_zero Y Z
+      whiskerLeft_add := fun {X Y Z} f g ↦ (MonoidalCategory.tensorLeft X).map_add
+      add_whiskerRight := fun {X Y Z} f g ↦ (MonoidalCategory.tensorRight X).map_add }
+  obtain ⟨Λ⟩ := ‹Abelian.HasFunctorialFlatResolution C›
+  have : (free R).IsLeftAdjoint := (freeForgetAdjunction R).isLeftAdjoint
+  let F := forget R ⋙ Λ.F ⋙ ObjectProperty.flat.ι ⋙ free R
+  let π : F ⟶ 𝟭 (Mod C R) :=
     Functor.whiskerRight (Functor.whiskerLeft (forget R) Λ.π) (free R) ≫
       (freeForgetAdjunction R).counit
-  refine ⟨{ F := ObjectProperty.lift _ P (fun M ↦ flat_free (Λ.F.obj M.X).property)
-            π := π
-            epi_π_app := ?_ }⟩
-  intro M
-  change Epi ((free R).map (Λ.π.app M.X) ≫ (freeForgetAdjunction R).counit.app M)
-  have : Epi (Λ.π.app M.X) := inferInstance
-  have : Epi ((free R).map (Λ.π.app M.X)) := (free R).map_epi _
-  have : Epi ((freeForgetAdjunction R).counit.app M) := by
-    have : IsSplitEpi ((forget R).map ((freeForgetAdjunction R).counit.app M)) :=
-      ⟨⟨(freeForgetAdjunction R).unit.app M.X,
-        (freeForgetAdjunction R).right_triangle_components M⟩⟩
-    exact (forget R).epi_of_epi_map inferInstance
-  infer_instance
+  refine ⟨{ F := ObjectProperty.lift _ F ?_, π := π, epi_π_app := ?_ }⟩
+  · intro M
+    exact flat_free (Λ.F.obj ((forget R).obj M)).property
+  · intro M
+    change Epi ((free R).map (Λ.π.app ((forget R).obj M)) ≫
+      (freeForgetAdjunction R).counit.app M)
+    have : Epi (Λ.π.app ((forget R).obj M)) := inferInstance
+    have : PreservesColimits (free R) :=
+      (freeForgetAdjunction R).leftAdjoint_preservesColimits
+    have : Epi ((free R).map (Λ.π.app ((forget R).obj M))) :=
+      (free R).map_epi _
+    exact epi_comp _ _
 
 end CategoryTheory.Mod

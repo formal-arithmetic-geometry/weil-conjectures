@@ -1,0 +1,244 @@
+{
+ "id": "lem-sfb-space-universal-isomorphism-open",
+ "kind": "statement",
+ "title": "The universal isomorphism locus for a diagram of algebraic spaces is open",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $A,C,B$ be algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Let $p:A\\to B$, $q:C\\to B$, and $f:A\\to C$ satisfy $q\\circ f=p$. Use the chartwise and topological morphism properties of [def-sfb-space-morphism-properties]: locally of finite presentation, flat and locally of finite type are tested on etale scheme charts; separated means the diagonal is representable by closed immersions; universally closed means closed on underlying point spaces after every algebraic-space base change. A closed map means that the induced map of point spaces sends closed subsets to closed subsets. Assume that $p$ is locally of finite presentation, flat and universally closed, and that $q$ is locally of finite type, closed and separated. Then there exists an open subspace $U\\subseteq B$ [def-a1-space-open-subspace] such that, for every algebraic space $B'$ over $S$ and morphism $h:B'\\to B$, $h$ factors through $U$ if and only if $f_{B'}:A\\times_BB'\\to C\\times_BB'$ is an isomorphism. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. In particular, if $B$ is a scheme, $U$ is represented by an open subscheme of $B$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 05XD, spaces-more-morphisms-lemma-where-isomorphism, all six hypotheses and arbitrary algebraic-space base-change conclusion."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-sfb-space-morphism-properties",
+  "def-a1-space-open-subspace",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof": [
+  {
+   "text": "The universal closedness of $p$ includes the identity base change, so $p$ is closed. Also $p$ is locally of finite type: on every compatible etale scheme chart its finite-presentation affine description is $R[x_1,\\ldots,x_n]/(g_1,\\ldots,g_m)$, generated over $R$ by the images of the $n$ variables. Thus the same charts satisfy local finite type. This uses only the definitions, and imposes no quasi-compactness or finite presentation on $q$.",
+   "uses": [
+    "def-sfb-space-morphism-properties",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05XD, preparation for the applications of Tags 05XC and 05XA; elementary implications of the hypotheses"
+   }
+  },
+  {
+   "text": "Apply the universal surjective-flat locus theorem to $(p,q,f)$. Its five hypotheses are: local finite presentation and flatness of $p$ from the assumptions, closedness of $p$ from step 1, and local finite type and closedness of $q$ from the assumptions. Obtain an open subspace $V_1\\subseteq B$ such that every algebraic-space map $h:T\\to B$ factors through $V_1$ exactly when $f_T$ is surjective and flat.",
+   "uses": [
+    "lem-sfb-space-universal-surjective-flat-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05XD, first sentence of the proof, applying Tag 05XC"
+   }
+  },
+  {
+   "text": "Apply the universal closed-immersion locus theorem to the same diagram. Its hypotheses hold because $p$ is locally of finite type by step 1 and universally closed by assumption, while $q$ is separated by assumption. Obtain an open subspace $V_2\\subseteq B$ such that every algebraic-space map $h:T\\to B$ factors through $V_2$ exactly when $f_T$ is a closed immersion.",
+   "uses": [
+    "lem-sfb-space-universal-closed-immersion-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05XD, second sentence of the proof, applying Tag 05XA"
+   }
+  },
+  {
+   "text": "Define the subfunctor $U=V_1\\cap V_2\\subseteq B$ by $U(R)=V_1(R)\\cap V_2(R)$ inside $B(R)$ for every $S$-scheme $R$. After any scheme test $R\\to B$, this is the intersection of the two open subschemes representing $R\\times_BV_1$ and $R\\times_BV_2$, hence is again an open subscheme of $R$. Thus $U$ is an open subspace by definition. A map $h:T\\to B$ of algebraic spaces factors through $U$ if and only if it factors through both $V_1$ and $V_2$: the two lifts, viewed as natural transformations, assign to each section of $T$ an element of each subfunctor with the same image in $B$, hence an element of their intersection, naturally in $R$.",
+   "uses": [
+    "def-a1-space-open-subspace",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05XD, intersection W = W_1 intersect W_2; explicit subfunctor construction"
+   }
+  },
+  {
+   "text": "Fix any algebraic-space map $h:T\\to B$. If it factors through $U$, steps 2--4 show that $f_T$ is surjective, flat and a closed immersion; the algebraic-space closed-immersion criterion [lem-sfb-space-surjective-flat-closed-immersion-isomorphism] makes $f_T$ an isomorphism. Conversely, suppose $f_T:A_T\\to C_T$ is an isomorphism. Its point map is a bijection, so it is surjective on point sets. Every scheme base change $A_T\\times_{C_T}R\\to R$ is an isomorphism, hence represented by a scheme and a closed immersion [def-weil-closed-immersion], so $f_T$ is a representable closed immersion. For flatness, which [def-sfb-space-morphism-properties] tests on every chart diagram, choose a surjective representable etale map $V\\to C_T$ from a scheme [def-trf-algebraic-space]; the base change $A_T\\times_{C_T}V\\to V$ is an isomorphism, so $U=V$ with the inverse isomorphism is a surjective etale chart of $A_T\\times_{C_T}V$, and the induced scheme map $U\\to V$ is $\\mathrm{id}_V$, which is flat. The chart criterion [lem-sfb-space-local-properties-chart-test] for the property flat then gives that $f_T$ is flat. Steps 2 and 3 then give both factorizations, so step 4 gives the factorization through $U$. This proves the required equivalence for arbitrary algebraic spaces $T$, including nonreduced and non-scheme ones.",
+   "uses": [
+    "lem-sfb-space-surjective-flat-closed-immersion-isomorphism",
+    "def-sfb-space-morphism-properties",
+    "def-trf-algebraic-space",
+    "def-weil-closed-immersion",
+    "lem-sfb-space-local-properties-chart-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05XD, final paragraph and the universal equivalence"
+   }
+  },
+  {
+   "text": "When $B$ is a scheme, apply the defining scheme-test property of the open subspace $U\\subseteq B$ to the identity $B\\to B$. It represents $B\\times_BU=U$ by an open subscheme of $B$, proving the final assertion.",
+   "uses": [
+    "def-a1-space-open-subspace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05XD, scheme-base consequence of open-subspace representability"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-space-morphism-properties",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "lem-sfb-space-universal-surjective-flat-open",
+  "lem-sfb-space-universal-closed-immersion-open",
+  "def-a1-space-open-subspace",
+  "def-trf-algebraic-space",
+  "lem-sfb-space-surjective-flat-closed-immersion-isomorphism",
+  "def-weil-closed-immersion",
+  "lem-sfb-space-local-properties-chart-test"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 05XD (spaces-more-morphisms-lemma-where-isomorphism), entire proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The universal isomorphism locus of a morphism of algebraic spaces between proper flat finitely presented families is open",
+   "results": "8 hits; AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.Scheme.Hom.isOpenMap, AlgebraicGeometry.UniversallyOpen.instOfIsOpenImmersion, AlgebraicGeometry.UniversallyOpen.universally_isOpenMap, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.of_isIso, AlgebraicGeometry.UniversallyOpen, AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.universallyOpen_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme open-map, descent, and isomorphism characterizations do not give the universal base isomorphism locus for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"isomorphism\", \"open\"",
+   "results": "1 hits; AlgebraicGeometry.isomorphisms_eq_isOpenImmersion_inf_surjective",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme open-map, descent, and isomorphism characterizations do not give the universal base isomorphism locus for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "whereIsomorphism|where_isomorphism|AlgebraicSpace|isomorphism.*locus|locus.*isomorphism",
+   "results": "0 hits; none",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme open-map, descent, and isomorphism characterizations do not give the universal base isomorphism locus for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given X to Y over Z with X flat locally finitely presented universally closed over Z and Y separated locally of finite type closed over Z the isomorphism functor is represented by an open subspace of Z",
+   "results": "8 hits; AlgebraicGeometry.UniversallyOpen, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.UniversallyOpen.eq, AlgebraicGeometry.Scheme.LocalRepresentability.representableBy, AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme open-map, descent, and isomorphism characterizations do not give the universal base isomorphism locus for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a map between flat proper finitely presented algebraic spaces over a base, the locus on the base where the map is an isomorphism is universally open",
+   "results": "8 hits; AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.UniversallyOpen.instIsZariskiLocalAtSource, AlgebraicGeometry.UniversallyOpen.instIsZariskiLocalAtTarget, AlgebraicGeometry.UniversallyOpen.eq, AlgebraicGeometry.UniversallyOpen.instRespectsIsoScheme, AlgebraicGeometry.UniversallyOpen, AlgebraicGeometry.UniversallyOpen.universally_isOpenMap, AlgebraicGeometry.UniversallyOpen.out",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme open-map, descent, and isomorphism characterizations do not give the universal base isomorphism locus for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|whereIsomorphism|where_isomorphism|isomorphism.*locus",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme open-map and restriction declarations do not state the arbitrary-space universal isomorphism locus"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The universal isomorphism locus of a morphism of algebraic spaces is represented by an open subspace of the parameter base",
+   "results": "8 hits; AlgebraicGeometry.UniversallyOpen.instRespectsIsoScheme, AlgebraicGeometry.UniversallyInjective.respectsIso, AlgebraicGeometry.UniversallyOpen.instOfIsOpenImmersion, AlgebraicGeometry.Scheme.instIsLocalAtTargetIsomorphismsZariskiPrecoverage, AlgebraicGeometry.universallyClosed_respectsIso, AlgebraicGeometry.Scheme.Hom.preimageIso.congr_simp, AlgebraicGeometry.Scheme.ofRestrict_appIso, AlgebraicGeometry.Scheme.Hom.preimageIso",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme open-map and restriction declarations do not state the arbitrary-space universal isomorphism locus"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"isomorphism\", \"open\"",
+   "results": "1 hits; AlgebraicGeometry.isomorphisms_eq_isOpenImmersion_inf_surjective",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme open-map and restriction declarations do not state the arbitrary-space universal isomorphism locus"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space family has an open base locus representing base changes on which a morphism is an isomorphism",
+   "results": "8 hits; AlgebraicGeometry.UniversallyOpen, AlgebraicGeometry.UniversallyOpen.instIsZariskiLocalAtSource, AlgebraicGeometry.UniversallyOpen.instIsZariskiLocalAtTarget, AlgebraicGeometry.IsLocalAtTarget, AlgebraicGeometry.IsLocalAtSource, AlgebraicGeometry.UniversallyOpen.out, AlgebraicGeometry.IsZariskiLocalAtTarget, AlgebraicGeometry.IsZariskiLocalAtSource",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme open-map and restriction declarations do not state the arbitrary-space universal isomorphism locus"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-graphs-open-in-hilbert",
+  "date": "2026-10-23",
+  "group": "Q86"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: The four Mor functors in the fibre-product argument of quot-lemma-spaces-diagonal, used by quot-lemma-curves-diagonal. Supporting input: Tags 0D1A--0D1B, the graph open immersion used by quot-proposition-Mor. In quot-lemma-Mor-into-Hilb-open, application of spaces-more-morphisms-lemma-where-isomorphism to the first projection.",
+   "via": [
+    "lem-sfb-space-graphs-open-in-hilbert",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-universal-isomorphism-open",
+  "worker": "stage1",
+  "summary": "Read Stacks 05XD with 05XC, 05XA and 04PW; retained all six hypotheses and arbitrary algebraic-space changes. Construct the intersection and prove both factorization directions. Added the three genuinely space-valued inputs absent from the scheme-only existing DAG nodes. Each new node is statement-only and has logged Mathlib searches with two semantic phrasings. No statement correction or Lean attachment.",
+  "blueprint": "Realizes the inherited from.place: det-thm-sf-ctf-stability-direct-images, proof (3), through its recorded stable-curve/Hilbert graph prerequisite. Read the current latest sketch and direct-images proof; no chapter or unit route changed. The ancestor command returns None for this existing created-node chain; preserve its inherited null from.node and full via/place. Steps 2 and 3 carry the first two applications in 05XD, steps 4--5 the intersection argument, step 6 its scheme-base consequence. Whole-blueprint searches found no equivalent imported statement."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q131-04a12f679",
+  "group": "Q131",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-04a12f679 (reviewer sub-agent of L); spot-checked: Read Stacks spaces-more-morphisms 05XA, 05XB, 05XC and 05XD (l.11642-11830), including the proofs, and 04PW. The item statement is unchanged and is 05XD verbatim: six hypotheses, an algebraic-space base, arbitrary algebraic-space tests. It still fits its only citer, lem-sfb-space-graphs-open-in-hilbert step 5. The six steps follow the 05XD proof. Step 1: identity base change gives p closed, and lfp implies lft chartwise (advisory: affine locality 01T2 is glossed, both definitions are Mathlib leaves). Step 2: hypotheses of the 05XC node checked. Step 3: hypotheses of the 05XA node checked. Step 4: the intersection of open subfunctors is elementary. Step 6: identity scheme test. The three new nodes are 05XC, 05XA and the representable/04PW reduction of the 05XD proof. They are self-contained, statement-only, true and strictly smaller than the item, and none restates a clause of it. Small cases tested: id, empty source, Spec k into Spec k[eps], and B a point. rg -L over dag/nodes for the tags, labels and keywords found only scheme-only siblings, so there are no duplicates. FIX (C1/C2): step 5's converse claimed an isomorphism is chart-flat by 'identifying it with the identity'. But def-sfb-space-morphism-properties tests every chart diagram, which needs etale cancellation. Step 5 now takes the chart U=V over the inverse isomorphism, so U to V is id_V, and cites lem-sfb-space-local-properties-chart-test (same unit, reviewed, no cycle). Surjectivity and the closed-immersion part are also written out, and proof_deps is the union of uses. Batch-5 flags (def-trf-algebraic-space, def-sfb-space-morphism-properties, def-a1-space-point-topology, def-a1-space-open-subspace, lem-trf-space-fibre-products-etale-covers): all are general definitions or the generic existence of fibre products. None is the trace formula, Poincare duality or a step of their proofs, so all are accepted. The added cite reaches only generic trf permanence facts. No SGA, no tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceUniversalIsomorphismOpen",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_openSubspace_universal_isomorphism",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceUniversalIsomorphismOpen.lean",
+  "statement": "theorem exists_openSubspace_universal_isomorphism {S : Scheme.{u}} (A C B : AlgebraicSpace S) (p : A ⟶ B) (q : C ⟶ B) (f : A ⟶ C) (w : f ≫ q = p) (hp_lfp : MapIsLocallyOfFinitePresentation p) (hp_flat : MapIsFlat p) (hp_closed : MapIsUniversallyClosed p) (hq_lft : MapIsLocally (@LocallyOfFiniteType) q) (hq_closed : IsClosedMap (mapPoint q.hom.hom)) (hq_sep : MapIsSeparated q) : ∃ U : OpenSubspace B, (∀ (B' : AlgebraicSpace S) (h : B' ⟶ B), (∃ l : B'.obj.obj ⟶ U.val.toFunctor, l ≫ U.val.ι = h.hom.hom) ↔ IsIso (pullback.map p.hom h.hom q.hom h.hom f.hom (𝟙 B'.obj) (𝟙 B.obj) (by simpa using (congrArg (fun k : A ⟶ B ↦ k.hom) w).symm) (by simp))) ∧ (∀ (T : Over S) (e : B.obj.obj ≅ yoneda.obj T), ∃ (V : Over S) (j : V ⟶ T), IsOpenImmersion j.left ∧ ∃ eU : U.val.toFunctor ≅ yoneda.obj V, U.val.ι ≫ e.hom = eU.hom ≫ yoneda.map j)",
+  "branch": "sheaf-dag",
+  "by": "Q83",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2ca7d42b4",
+  "group": "Q83",
+  "result": "pass",
+  "note": "Read node, Stacks 05XD (spaces-more-morphisms l.11790-11832), all 6 stmt_deps and the Lean of AlgebraicSpace, MorphismProperties (MapIsLocally/Flat/LFP/Separated/UniversallyClosed), OpenSubspace, mapPoint, point topology. All six hypotheses rendered, none stronger (lft via MapIsLocally @LocallyOfFiniteType, closed via IsClosedMap mapPoint); conclusion ∃ U : OpenSubspace B, ∀ algebraic-space B' h, factorization ↔ IsIso of the canonical pullback.map in fppf sheaves; scheme-base clause pinned by U.ι ≫ e.hom = eU.hom ≫ yoneda.map j. Single universe u, no extra hyps; edge cases (f iso, empty A/C, empty test, k[ε], non-scheme B) covered. Only the lean field differs from live; statement verbatim; sorry-only proof; source/blueprint docstrings with 6 steps; report sections present. Scheme-only sibling lem-sfb-universal-isomorphism-open is a distinct node, not a duplicate. Advisory: the 3 plain Mathlib imports are redundant (transitively public via ProperCurveModuli); mapPoint/point-topology owners are reached only through stmt_deps of def-sfb-space-morphism-properties. No file changed, no compile."
+ }
+}

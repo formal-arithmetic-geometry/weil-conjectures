@@ -1,0 +1,243 @@
+{
+ "id": "lem-sfb-semisimple-central-isogeny-multiplicative",
+ "kind": "statement",
+ "title": "Central isogenies of semisimple groups are multiplicative",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups below are affine $F$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism]. Smoothness and connectedness are as in [def-sbc-smooth-morphisms, def-weil-connected-scheme]. A semisimple group means a smooth connected affine group of finite type with no nontrivial smooth connected solvable normal closed subgroup scheme; solvable means that successive derived subgroup schemes eventually become trivial, where the derived subgroup is the smallest closed subgroup through which the commutator morphism factors. A multiplicative isogeny is a homomorphism $f:G\\to H$ for which $F[H]\\to F[G]$ is faithfully flat and whose scheme-theoretic kernel is finite and diagonalizable. Faithfully flat means that extension of scalars is exact and detects zero modules. Finite means finite-dimensional coordinate algebra. Diagonalizable means isomorphic to $D(M)=\\operatorname{Spec}F[M]$ for a finite abelian group $M$, where $F[M]$ has basis $e^m$, multiplication $e^me^n=e^{m+n}$, comultiplication $e^m\\mapsto e^m\\otimes e^m$, counit $e^m\\mapsto1$ and antipode $e^m\\mapsto e^{-m}$. Let $G_1,G_0$ be semisimple and let $f:G_1\\to G_0$ be a homomorphism that is surjective on underlying schemes and has finite central scheme-theoretic kernel. Central means that kernel elements commute with every group element after every commutative $F$-algebra extension. Then $f$ is a multiplicative isogeny. No separability or prime-to-characteristic hypothesis on its kernel is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 19.15 and its proof, printed pp.400--401; Definition 18.1 and following paragraph, printed p.387; faithful flatness of surjective homomorphisms onto smooth groups is Proposition 5.47, printed p.111."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-gm-ga",
+  "def-sfb-semisimple-group-scheme",
+  "def-sfb-finite-diagonalizable-group-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Write $A=F[G_0]$ and $B=F[G_1]$. For $y\\in G_0(F)$, the affine fibre is $\\operatorname{Spec}C$ with $C=B\\otimes_{A,y^*}F$ by [lem-weil-pbc-fibre-product-affine-spectra]. It is nonempty: scheme-surjectivity gives a point $x$ above the underlying point of $y$, and the maps $B\\to\\kappa(x)$ and $F\\to\\kappa(x)$ agree on $A$, hence give a map $C\\to\\kappa(x)$. Thus $C\\ne0$. If $b_1,\\ldots,b_s$ generate $B$ over $F$, the elements $b_i\\otimes1$ generate $C$ over $F$, since every tensor is a sum of $(b\\otimes1)(1\\otimes c)$. Choose a maximal ideal of $C$ using [lem-weil-common-extension-fields-maximal-ideal]. Clause (1) of [lem-wf-affine-nullstellensatz-vanishing] gives an $F$-algebra map $C\\to F$. Its composite with $B\\to C$ gives an $F$-point above $y$ by [def-weil-affine-spectrum]. Therefore $G_1(F)\\to G_0(F)$ is surjective.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-common-extension-fields-maximal-ideal",
+    "lem-wf-affine-nullstellensatz-vanishing",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.47 and proof, printed p.110; explicit affine-fibre verification of its rational-point hypothesis, using the same Nullstellensatz input."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-affine-group-homomorphism-image] to $f$. Both groups are affine of finite type over the algebraically closed field $F$, the target $G_0$ is smooth by semisimplicity, and step 1 gives surjectivity on $F$-points. Hence the coordinate-algebra map $F[G_0]\\to F[G_1]$ is faithfully flat in exactly the sense required by the statement.",
+   "uses": [
+    "lem-sfb-affine-group-homomorphism-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.47, printed p.110."
+   }
+  },
+  {
+   "text": "The source $G_1$ is reductive. Indeed let $U$ be any smooth connected normal unipotent closed subgroup of $G_1$. By [lem-sfb-smooth-unipotent-solvable] it has a finite series $U=U_0\\supseteq\\cdots\\supseteq U_d=1$ with commutative quotients. By [lem-sfb-affine-normal-quotient-geometry] the quotient homomorphism $U_i\\to U_i/U_{i+1}$ has scheme-theoretic kernel $U_{i+1}$; since that quotient is commutative, the commutator morphism of $U_i$ composed with it is trivial, so the commutator factors through the closed subgroup $U_{i+1}$ and the derived subgroup of $U_i$ lies in $U_{i+1}$. Moreover $H\\subseteq H'$ implies $D(H)\\subseteq D(H')\\cap H$. Inductively $D^i(U)\\subseteq U_i$, so $D^d(U)=1$. Thus $U$ is solvable also in the derived-series sense used in this item, and semisimplicity forces $U=1$. This is the reductivity condition in [lem-sfb-reductive-centre-multiplicative-type]. Since $F$ is already algebraically closed, its own algebraic closure may be chosen to be $F$, so connectedness and the geometric conditions there require no further extension.",
+   "uses": [
+    "lem-sfb-smooth-unipotent-solvable",
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-reductive-centre-multiplicative-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.21, printed pp.284--285; Proposition 6.30 and its proof, printed p.131; Chapter 19(b), printed p.400."
+   }
+  },
+  {
+   "text": "Put $K=\\ker f$. By [lem-sc-kernel-subgroup], $K\\hookrightarrow G_1$ is a closed subgroup scheme. By [lem-sfb-affine-group-centre-base-change], the universal centre functor is represented by a closed subgroup $Z(G_1)\\hookrightarrow G_1$. The centrality hypothesis gives $K(R)\\subseteq Z(G_1)(R)$ for every $F$-algebra $R$, including after every further algebra extension. Evaluate this inclusion on the universal point of the affine scheme $K$: it gives the factorization $K\\to Z(G_1)\\to G_1$ by [def-weil-affine-spectrum]. This factor map is a closed immersion: the surjection $F[G_1]\\to F[K]$ factors through the quotient $F[Z(G_1)]$, so $F[Z(G_1)]\\to F[K]$ is surjective [def-weil-closed-immersion]. Step 3 and [lem-sfb-reductive-centre-multiplicative-type] give a closed immersion $Z(G_1)\\hookrightarrow\\mathbf G_m^r$ over $F$ for some $r\\geq0$. Composing the two surjective coordinate maps exhibits $K$ as a closed subgroup scheme of this split torus.",
+   "uses": [
+    "lem-sc-kernel-subgroup",
+    "lem-sfb-affine-group-centre-base-change",
+    "def-weil-affine-spectrum",
+    "def-weil-closed-immersion",
+    "lem-sfb-reductive-centre-multiplicative-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 18.1 and following paragraph, printed p.387; Proposition 1.92, printed pp.33--34; Corollary 17.62(a), printed p.372."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-split-torus-subgroups-diagonalizable] to the closed subgroup $K\\subseteq\\mathbf G_m^r$ obtained in step 4. It gives $K\\simeq\\operatorname{Spec}F[M]$ with the displayed group-algebra Hopf structure. Since $F[K]$ is finite-dimensional by hypothesis, its final clause says that $M$ is finite. Together with faithful flatness from step 2, these are precisely the defining conditions for $f$ to be a multiplicative isogeny. The argument imposed neither reducedness on $K$ nor a restriction on its order.",
+   "uses": [
+    "lem-sfb-split-torus-subgroups-diagonalizable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorems 12.8 and 12.9(a),(c), printed pp.233--234; Definition 18.1, printed p.387; proof of Proposition 19.15, printed p.401."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-common-extension-fields-maximal-ideal",
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "def-weil-affine-spectrum",
+  "lem-sfb-affine-group-homomorphism-image",
+  "lem-sfb-smooth-unipotent-solvable",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "lem-sfb-reductive-centre-multiplicative-type",
+  "lem-sc-kernel-subgroup",
+  "lem-sfb-affine-group-centre-base-change",
+  "def-weil-closed-immersion",
+  "lem-sfb-split-torus-subgroups-diagonalizable"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Definition 18.1 and following paragraph, printed p.387, expanded using Proposition 5.47, Proposition 14.21, Corollary 17.62(a), and Theorems 12.8--12.9; this supplies the forward implication used in Proposition 19.15, pp.400--401."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A central isogeny between semisimple algebraic groups has finite kernel of multiplicative type and is faithfully flat",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas\", \"type\": \"∀ (k : Type u_1) (L : Type u_2) (M : Type u_3) [inst : Field k] [CharZero k] [inst_2 : LieRing L]\\n  [inst_3 : LieAlgebra k L] [Module.Finite k L] [inst_5 : AddCommGroup M] [inst_6 : Module k M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule k L M] [Module.Finite k M] [LieModule.IsIrreducible k L\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a field $k$ with an irreducible and faithful module $M$, the radical of $\\\\mathfrak{g}$ is central, and an element $x \\\\in \\\\mathfrak{g}$ lies in the center if and o\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V],\\n  Module.finrank R V ≤ 1 →\\n    ∀ (g : ↥(Subgroup.center (SpecialLinearGroup R V))), SpecialLinearGroup.centerEquivRootsOfUnity g = 1\", \"doc\": \"If the finite rank of the $ R $-module $ V $ is at most 1, then every element in the center of the special linear group $ \\\\text{SL}(V) $ is mapped to the multiplicative identity $ 1 $ under the isomor\"}\n  {\"name\": \"SpecialLinearGroup.center_eq_bot_of_finrank_le_one\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V] [Module.Free R V]\\n  [Module.Finite R V], Module.finrank R V ≤ 1 → Subgroup.center (SpecialLinearGroup R V) = ⊥\", \"doc\": \"If the finite rank of an $ R $-module $ V $ over a commutative ring $ R $ satisfies $ \\\\dim_R(V) \\\\leq 1 $, then the center of the special linear group $ \\\\text{SL}(V) $ is the trivial subgroup containin\"}\n  {\"name\": \"addCommGroupOfAddCyclicCenterQuotient\", \"module\": \"Mathlib/GroupTheory/SpecificGroups/Cyclic\", \"type\": \"{G : Type u_2} →\\n  {G' : Type u_3} →\\n    [inst : AddGroup G] →\\n      [inst_1 : AddGroup G'] → [IsAddCyclic G'] → (f : G →+ G') → f.ker ≤ AddSubgroup.center G → AddCommGroup G\", \"doc\": \"Let $G$ and $G'$ be additive groups, where $G'$ is cyclic. If there exists a group homomorphism $f : G → G'$ such that the kernel of $f$ is contained in the center of $G$, then $G$ is abelian (i.e., $\"}\n  {\"name\": \"commGroupOfCyclicCenterQuotient\", \"module\": \"Mathlib/GroupTheory/SpecificGroups/Cyclic\", \"type\": \"{G : Type u_2} →\\n  {G' : Type u_3} →\\n    [inst : Group G] → [inst_1 : Group G'] → [IsCyclic G'] → (f : G →* G') → f.ker ≤ Subgroup.center G → CommGroup G\", \"doc\": \"Let $G$ and $G'$ be groups with $G'$ cyclic. If there exists a group homomorphism $f : G \\\\to G'$ such that the kernel of $f$ is contained in the center of $G$, then $G$ is abelian. This follows becaus\"}\n  {\"name\": \"isNilpotent_of_ker_le_center\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"∀ {G : Type u_1} [inst : Group G] {H : Type u_2} [inst_1 : Group H] (f : G →* H),\\n  f.ker ≤ Subgroup.center G → Group.IsNilpotent H → Group.IsNilpotent G\", \"doc\": \"Let $ G $ and $ H $ be groups, and let $ f : G \\to H $ be a group homomorphism. If the kernel of $ f $ is contained in the center of $ G $ and $ H $ is nilpotent, then $ G $ is nilpotent.\"}\n  {\"name\": \"commutative_of_cyclic_center_quotient\", \"module\": \"Mathlib/GroupTheory/SpecificGroups/Cyclic\", \"type\": \"∀ {G : Type u_2} {G' : Type u_3} [inst : Group G] [inst_1 : Group G'] [IsCyclic G'] (f : G →* G'),\\n  f.ker ≤ Subgroup.center G → ∀ (a b : G), a * b = b * a\", \"doc\": \"Let $ G $ and $ G' $ be groups with $ G' $ cyclic. If there exists a group homomorphism $ f : G \\\\to G' $ such that the kernel of $ f $ is contained in the center of $ G $, then $ G $ is abelian (i.e.,\"}\n  {\"name\": \"LieAlgebra.center_eq_bot\", \"module\": \"Mathlib/Algebra/Lie/Abelian\", \"type\": \"∀ (R : Type u) (L : Type v) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieModule.IsFaithful R L L], LieAlgebra.center R L = ⊥\", \"doc\": \"For a Lie algebra $ L $ over a commutative ring $ R $, if the action of $ L $ on itself is faithful (i.e., the only element acting as zero on all of $ L $ is the zero element itself), then the center \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the results do not state this theorem for affine group schemes; abstract groups, Lie algebras and ring Picard groups do not specialize to it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For semisimple group schemes central isogenies are exactly multiplicative isogenies",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Subsemigroup.centerCongr\", \"module\": \"Mathlib/GroupTheory/Submonoid/Center\", \"type\": \"{M : Type u_2} →\\n  {N : Type u_1} → [inst : Mul M] → [inst_1 : Mul N] → M ≃* N → ↥(Subsemigroup.center M) ≃* ↥(Subsemigroup.center N)\", \"doc\": \"If $e: M \\\\simeq^* N$ is a multiplicative equivalence between two semigroups $M$ and $N$, then it induces a multiplicative equivalence between their centers, $\\\\mathrm{center}(M) \\\\simeq^* \\\\mathrm{center\"}\n  {\"name\": \"Subgroup.centerCongr\", \"module\": \"Mathlib/GroupTheory/Subgroup/Center\", \"type\": \"{G : Type u_1} →\\n  [inst : Group G] → {H : Type u_2} → [inst_1 : Group H] → G ≃* H → ↥(Subgroup.center G) ≃* ↥(Subgroup.center H)\", \"doc\": \"Given a group isomorphism $ e : G \\\\simeq^* H $ between groups $ G $ and $ H $, this constructs an induced group isomorphism $ \\\\text{center}(G) \\\\simeq^* \\\\text{center}(H) $ between their centers. The ce\"}\n  {\"name\": \"CategoryTheory.Center.isIso_of_f_isIso\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Center\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  {X Y : CategoryTheory.Center C} (f : X ⟶ Y) [CategoryTheory.IsIso f.f], CategoryTheory.IsIso f\", \"doc\": \"The center of a monoidal category $\\\\mathcal{C}$ forms a category, where objects are pairs $(X, \\\\beta_X)$ consisting of an object $X \\\\in \\\\mathcal{C}$ and a half-braiding $\\\\beta_X$, and morphisms are mo\"}\n  {\"name\": \"Subgroup.centerCongr_apply_coe\", \"module\": \"Mathlib/GroupTheory/Subgroup/Center\", \"type\": \"∀ {G : Type u_1} [inst : Group G] {H : Type u_2} [inst_1 : Group H] (e : G ≃* H) (r : ↥(Subsemigroup.center G)),\\n  ↑((Subgroup.centerCongr e) r) = e ↑r\", \"doc\": \"Given a group isomorphism $ e : G \\\\simeq H $ between groups $ G $ and $ H $, the induced isomorphism $ \\\\text{center}(G) \\\\simeq \\\\text{center}(H) $ satisfies $ e(z) = e(z) $ for all $ z \\\\in \\\\text{center\"}\n  {\"name\": \"MulEquivClass.apply_mem_center\", \"module\": \"Mathlib/GroupTheory/Submonoid/Center\", \"type\": \"∀ {M : Type u_3} {N : Type u_1} {F : Type u_2} [inst : EquivLike F M N] [inst_1 : Mul M] [inst_2 : Mul N]\\n  [MulEquivClass F M N] (e : F) {x : M}, x ∈ Set.center M → e x ∈ Set.center N\", \"doc\": \"For any multiplicative equivalence $ e : M \\\\to N $ between monoids $ M $ and $ N $, and for any element $ x $ in the center of $ M $, the image $ e(x) $ lies in the center of $ N $. This means that mu\"}\n  {\"name\": \"Subsemigroup.centerCongr_apply_coe\", \"module\": \"Mathlib/GroupTheory/Submonoid/Center\", \"type\": \"∀ {M : Type u_2} {N : Type u_1} [inst : Mul M] [inst_1 : Mul N] (e : M ≃* N) (r : ↥(Subsemigroup.center M)),\\n  ↑((Subsemigroup.centerCongr e) r) = e ↑r\", \"doc\": \"The set of elements in a semigroup $ M $ that commute with every element of $ M $ forms a commutative subsemigroup under the original semigroup operation. This means the center is closed under multipl\"}\n  {\"name\": \"MulEquivClass.apply_mem_center_iff\", \"module\": \"Mathlib/GroupTheory/Submonoid/Center\", \"type\": \"∀ {M : Type u_3} {N : Type u_1} {F : Type u_2} [inst : EquivLike F M N] [inst_1 : Mul M] [inst_2 : Mul N]\\n  [MulEquivClass F M N] (e : F) {x : M}, e x ∈ Set.center N ↔ x ∈ Set.center M\", \"doc\": \"For a multiplicative equivalence $ e : M \\to N $ between monoids $ M $ and $ N $, an element $ e(x) $ belongs to the center of $ N $ if and only if $ x $ belongs to the center of $ M $. The center of a\"}\n  {\"name\": \"CategoryTheory.Center.isoMk_hom\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Center\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  {X Y : CategoryTheory.Center C} (f : X ⟶ Y) [inst_2 : CategoryTheory.IsIso f.f],\\n  (CategoryTheory.Center.isoMk f).hom = f\", \"doc\": \"For any isomorphism $ f : X \\to Y $ in the center of a monoidal category $ \\\\mathcal{C} $, the underlying morphism of the isomorphism constructed by `isoMk` is $ f $ itself, i.e., $ \\\\text{hom}(\\\\text{iso\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the results do not state this theorem for affine group schemes; abstract groups, Lie algebras and ring Picard groups do not specialize to it"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Isogeny\", \"central\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the results do not state this theorem for affine group schemes; abstract groups, Lie algebras and ring Picard groups do not specialize to it"
+  },
+  {
+   "tool": "grep",
+   "query": "centralIsogeny|[Ss]emisimple.*[Mm]ultiplicative[Tt]ype|[Ii]sogen.*[Ff]aithfully[Ff]lat",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the results do not state this theorem for affine group schemes; abstract groups, Lie algebras and ring Picard groups do not specialize to it"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A central isogeny between semisimple algebraic groups has finite kernel of multiplicative type and is faithfully flat",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.IsCentral.instIsAzumaya\", \"module\": \"Mathlib.Algebra.Azumaya.Basic\", \"type\": \"{R A : Type*} [CommSemiring R] [Semiring A] [Algebra R A] [Module.Free R A] [IsAzumaya R A] : IsCentral R A\", \"doc\": \"For a commutative semiring $ R $ and a semiring $ A $ equipped with an $ R $-algebra structure, if $ A $ is an Azumaya algebra over $ R $ and a free $ R $-module, then the image of $ R $ under scalar \"}\n  {\"name\": \"Subgroup.centerCongr_apply_coe\", \"module\": \"Mathlib.GroupTheory.Subgroup.Center\", \"type\": \"∀ {G : Type u_1} [inst : Group G] {H : Type u_2} [inst_1 : Group H] (e : G ≃* H) (r : ↥(Subsemigroup.center G)),\\n  ↑((Subgroup.centerCongr e) r) = e ↑r\", \"doc\": \"Given a group isomorphism $ e : G \\\\simeq H $ between groups $ G $ and $ H $, the induced isomorphism $ \\\\text{center}(G) \\\\simeq \\\\text{center}(H) $ satisfies $ e(z) = e(z) $ for all $ z \\\\in \\\\text{center\"}\n  {\"name\": \"Algebra.FormallyEtale.iff_of_surjective\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"{R S : Type*} [CommRing R] [CommRing S] [Algebra R S] (h : Function.Surjective (algebraMap R S)) :\\n  Algebra.FormallyEtale R S ↔ IsIdempotentElem (RingHom.ker (algebraMap R S))\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with a surjective algebra map $ R \\\\to S $. Then $ S $ is formally étale over $ R $ if and only if the kernel of the algebra map is an idempotent ideal in $ R $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ker_eq_bot_of_isIso\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \"(f : X ⟶ Y) [IsIso f] : f.ker = ⊥\", \"doc\": \"For any isomorphism $ f: X \\to Y $ of schemes, the kernel of $ f $ is the trivial ideal sheaf (corresponding to the bottom element in the ordered structure of ideal sheaf data on $ X $).\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsIntegralHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"[IsFinite f] : IsIntegralHom f\", \"doc\": \"Every finite morphism of schemes is an integral morphism. In algebraic geometry, this means that if a morphism $ f: X \\to Y $ is finite (i.e., affine and inducing finite ring extensions on stalks), the\"}\n  {\"name\": \"Algebra.IsCentral.of_algEquiv\", \"module\": \"Mathlib.Algebra.Central.Basic\", \"type\": \"(e : D ≃ₐ[K] D') : IsCentral K D'\", \"doc\": \"If there is an algebra equivalence between two algebras $ D $ and $ D' $ over a commutative semiring $ K $, then $ D' $ is central over $ K $ whenever $ D $ is central over $ K $. This means the image\"}\n  {\"name\": \"Submonoid.centerCongr_apply_coe\", \"module\": \"Mathlib.GroupTheory.Submonoid.Center\", \"type\": \"∀ {M : Type u_2} {N : Type u_1} [inst : MulOneClass M] [inst_1 : MulOneClass N] (e : M ≃* N)\\n  (r : ↥(Subsemigroup.center M)), ↑((Submonoid.centerCongr e) r) = e ↑r\", \"doc\": \"Given a multiplicative equivalence between monoids $M$ and $N$, there exists an induced multiplicative equivalence between their centers. This equivalence maps central elements of $M$ to central eleme\"}\n  {\"name\": \"AddSubgroup.centerCongr\", \"module\": \"Mathlib.GroupTheory.Subgroup.Center\", \"type\": \"{G : Type u_1} →\\n  [inst : AddGroup G] →\\n    {H : Type u_2} → [inst_1 : AddGroup H] → G ≃+ H → ↥(AddSubgroup.center G) ≃+ ↥(AddSubgroup.center H)\", \"doc\": \"Given additive groups $G$ and $H$, and an additive equivalence $e : G ≃+ H$, this constructs an additive equivalence between the centers of $G$ and $H$. The center of an additive group consists of all\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the results do not state this theorem for affine group schemes; abstract groups, Lie algebras and ring Picard groups do not specialize to it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A central isogeny between semisimple algebraic groups is faithfully flat and its scheme theoretic kernel is diagonalizable",
+   "results": "8 hits: LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful, SpecialLinearGroup.centerEquivRootsOfUnity_apply, SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one, SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq, SpecialLinearGroup.centerEquivRootsOfUnity, Algebra.IsCentral.left_of_tensor, Algebra.IsCentral.right_of_tensor, SpecialLinearGroup.center_eq_bot_of_finrank_le_one",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Lie algebras, abstract centres, special linear groups alone, or general scheme morphisms, and do not state the asserted theorem for arbitrary affine semisimple group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A central isogeny between semisimple algebraic groups is faithfully flat and its scheme theoretic kernel is diagonalizable",
+   "results": "8 hits: AlgebraicGeometry.Flat, AlgebraicGeometry.Scheme.Hom.ker_eq_bot_of_isIso, AlgebraicGeometry.IsClosedImmersion.isIso_iff_ker_eq_bot, AlgebraicGeometry.Scheme.Hom.ker_comp_of_isIso, Subgroup.centerCongr_apply_coe, AddSubgroup.centerCongr, Algebra.IsCentral.instIsAzumaya, CSA.mk.inj",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Lie algebras, abstract centres, special linear groups alone, or general scheme morphisms, and do not state the asserted theorem for arbitrary affine semisimple group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a reductive algebraic group any finite central closed subgroup scheme is a diagonalizable group scheme",
+   "results": "8 hits: SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one, SpecialLinearGroup.centerEquivRootsOfUnity, Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity'_apply, SpecialLinearGroup.centerEquivRootsOfUnity_apply, Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity, Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity', SpecialLinearGroup.center_eq_bot_of_finrank_le_one, SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Lie algebras, abstract centres, special linear groups alone, or general scheme morphisms, and do not state the asserted theorem for arbitrary affine semisimple group schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semisimple-multiplicative-universal-cover",
+  "date": "2026-10-23",
+  "group": "N5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplicative simply connected covering of a semisimple algebraic group. Supporting Milne construction: Proposition 19.15 and its proof, printed pp.400--401; Definition 18.1 and following paragraph, printed p.387; faithful flatness of surjective homomorphisms onto smooth groups is Proposition 5.47, printed p.111.",
+   "via": [
+    "lem-sfb-semisimple-multiplicative-universal-cover",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-semisimple-central-isogeny-multiplicative",
+  "worker": "stage1",
+  "summary": "Q126 read Milne Definition 18.1 and Proposition 19.15, reused the existing rational-point flatness criterion, unipotent solvability, centre representability and multiplicative type, and split-torus subgroup diagonalizability. The five-step proof explicitly lifts rational points from affine fibres and checks the scheme-theoretic kernel containment. No new nodes; statement unchanged.",
+  "blueprint": "Existing supporting input below det-thm-sf-ctf-stability-direct-images proof (3), via the inherited stable-moduli/PGL/Haboush/central-cover ancestry. The current latest unit and direct-images proof were read. This expands only the inherited Milne prerequisite, not the unit route. blueprint_refs.py ancestor returns None, preserved as from.node; from.place is already explicit. Searches across all blueprint chapters found no equivalent statement.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-kernel-subgroup",
+    "why": "Generic group-scheme kernel representability and closed subgroup inclusion. The item uses it for its affine kernel, and no node of this unit replaces that elementary group-scheme interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-kernel-subgroup"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q126-6f27dcffd",
+  "group": "Q126",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q126-6f27dcffd (reviewer sub-agent of L); spot-checked: Read the item's 5 steps and every cited statement against Milne iAG2017: Def 18.1 + following paragraph p.387 (central isogeny of reductive source is multiplicative because the centre is of multiplicative type), Prop 19.15 proof p.401 and Prop 5.47 p.110 (the page correction is right). Statement and stmt_deps are byte-identical to live/side-live, where the item is still unsplit; there is no repair note and there are no new nodes. Step 1: fibre ring B⊗_{A,y*}F is nonzero via the point x over y and finitely generated; maximal ideal plus Nullstellensatz clause (1) gives an F-point over y. No reducedness is needed, so it is fine for μ_p. Step 2: the homomorphism-image criterion applies, since G_0 is smooth and step 1 gives surjectivity on F-points. Step 3: the normal-series-to-derived-series argument needs ker(U_i→U_i/U_{i+1})=U_{i+1} scheme-theoretically, which no cited node gave (C1). FIX: cite lem-sfb-affine-normal-quotient-geometry (same unit) in step 3 and proof_deps, and write out D(H)⊆D(H'). Semisimple then gives reductive with \\bar F=F. Step 4: kernel closed subgroup (tool_use lem-sc-kernel-subgroup, generic, accepted) inside the represented centre by Yoneda on the universal point; the closed immersion follows from the coordinate surjection factoring; the centre embeds in G_m^n. Step 5: split-torus subgroups are D(M), with M finite since F[K] is finite-dimensional. Edge cases checked: identity, SL_n→PGL_n, SL_p→PGL_p in char p (μ_p), noncentral Frobenius kernels excluded. Batch-5: lem-sfb-smooth-unipotent-solvable (and the added quotient node) reach def-trf-scheme-cover-descent-datum, a general fppf descent-datum definition used for quotient torsors, not part of the trace formula or Poincaré duality or their proofs. Accepted. No SGA citations.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SemisimpleCentralIsogenyMultiplicative",
+  "declaration": "AlgebraicGeometry.semisimpleCentralIsogeny_multiplicative",
+  "file": "lean/Sheaf/AlgebraicGeometry/SemisimpleCentralIsogenyMultiplicative.lean",
+  "statement": "theorem semisimpleCentralIsogeny_multiplicative {F : Type u} [Field F] [IsAlgClosed F] (G1 G0 : Over (Spec (.of F))) [GrpObj G1] [GrpObj G0] (hG1 : IsSemisimpleGroupScheme G1) (hG0 : IsSemisimpleGroupScheme G0) (f : G1 ⟶ G0) [IsMonHom f] [Surjective f.left] [IsFinite (GrpObj.ker f).hom] (hcentral : ∀ (T : Over (Spec (.of F))) (x : T ⟶ GrpObj.ker f) (g : T ⟶ G1), (x ≫ GrpObj.kerι f) * g = g * (x ≫ GrpObj.kerι f)) : f.left.appTop.hom.FaithfullyFlat ∧ IsFiniteDiagonalizableGroupScheme (GrpObj.ker f)",
+  "branch": "sheaf-dag",
+  "by": "Q61",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bd179d5e7",
+  "group": "Q61",
+  "result": "pass",
+  "note": "Re-delivery applies the 4f822e RETURN correction exactly: duplicate SemisimpleGroupScheme module/node removed, landed Q102 Sheaf.AlgebraicGeometry.GroupScheme.Semisimple imported (only diff line vs 4f822e), def-sfb-solvable-group-structure dropped from stmt_deps. All 9 dep records byte-identical to side-live; item record only adds lean + 2 used def stmt_deps. Clause check: IsAlgClosed F, IsSemisimpleGroupScheme (derived-series solvability) on G1/G0, IsMonHom, Surjective f.left, IsFinite ker, centrality on all test schemes; conclusion FaithfullyFlat appTop ∧ IsFiniteDiagonalizableGroupScheme ker, same convention as landed multiplicativeIsogeny_comp. lean.statement verbatim, single sorry, source/blueprint docstrings and 5-step plan present, no extra hypotheses or universe restriction, mu_p edge case covered, report sections present. No compile (no file changed). Advisory: unused StandardGroupSchemes public import; maintainer note on Q102 vs Q116 solvable predicates."
+ }
+}

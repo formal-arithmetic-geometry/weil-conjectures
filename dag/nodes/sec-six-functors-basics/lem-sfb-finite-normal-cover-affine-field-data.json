@@ -1,0 +1,271 @@
+{
+ "id": "lem-sfb-finite-normal-cover-affine-field-data",
+ "kind": "statement",
+ "title": "Affine generic-field data for finite covers of normal integral schemes",
+ "statement": "Let $p:Y\\to Z$ be a finite surjective morphism of integral schemes [def-pc-scheme, def-weil-finite-integral-morphism, def-weil-surjective-morphism, def-pc-integral-scheme], and suppose that every local ring of $Z$ is an integrally closed domain [def-weil-pbc-normal-ring]. Write $\\eta_Y,\\eta_Z$ for their generic points [def-sc-generic-point], $K=\\mathcal O_{Y,\\eta_Y}$ and $L=\\mathcal O_{Z,\\eta_Z}$ for their function fields [def-sc-function-field, def-weil-pbc-module-stalk]. Then $p(\\eta_Y)=\\eta_Z$, and the map on generic stalks is a field embedding $\\iota:L\\hookrightarrow K$ making $K$ finite-dimensional over $L$ [def-pc-field-extension]. Put $d=\\dim_LK\\geq1$ [def-weil-vector-space-dimension]. For every nonempty affine open $U=\\operatorname{Spec}B\\subseteq Z$ [def-weil-affine-spectrum], its inverse image is a nonempty affine open $p^{-1}U=\\operatorname{Spec}A$ of $Y$, and $p^\\sharp:B\\to A$ is an injective homomorphism of domains making $A$ a finite $B$-module [def-weil-finitely-generated-module]. The ring $B$ is integrally closed in its fraction field. The generic-germ embeddings $\\rho_U:B\\hookrightarrow L$ and $\\sigma_U:A\\hookrightarrow K$ identify $L$ and $K$ as fields of fractions of $B$ and $A$, respectively; that is, their elements are quotients of images of ring elements with nonzero denominator. They satisfy $\\sigma_U(p^\\sharp b)=\\iota(\\rho_U(b))$ for every $b\\in B$. For nested nonempty affine opens $W\\subseteq U$, taking a generic germ commutes with restriction for both $\\mathcal O_Z$ and $\\mathcal O_Y$. Thus all these affine fraction-field extensions have the single degree $d$.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BD3 (divisors-lemma-norm-in-normal-case), first paragraph: affine domains and the common fraction-field extension; the normal-base hypothesis needed for descent of minimal polynomials. Expanded affine normality and generic-field identifications from returned proof steps 1 and 2."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism",
+  "def-pc-integral-scheme",
+  "def-weil-pbc-normal-ring",
+  "def-sc-generic-point",
+  "def-sc-function-field",
+  "def-weil-pbc-module-stalk",
+  "def-pc-field-extension",
+  "def-weil-vector-space-dimension",
+  "def-weil-affine-spectrum",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "First $p(\\eta_Y)=\\eta_Z$. Indeed, let $V\\subseteq Z$ be nonempty open. Surjectivity makes $p^{-1}V$ nonempty, and continuity makes it open. A nonempty open of $Y$ contains $\\eta_Y$: otherwise the closed complement would contain $\\eta_Y$ and hence its closure $Y$. Thus $p(\\eta_Y)\\in V$. Consequently the closure of $\\{p(\\eta_Y)\\}$ is $Z$, since its complement, if nonempty, would be a nonempty open missing this point. The uniqueness of the generic point of an irreducible scheme, supplied by [lem-sc-scheme-sober], identifies it with $\\eta_Z$.",
+   "uses": [
+    "def-weil-surjective-morphism",
+    "def-weil-locally-ringed-space-morphism",
+    "def-sc-generic-point",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD3 (divisors-lemma-norm-in-normal-case), affine-field setup; generic-point argument expanded using Tag 01IS (schemes-lemma-scheme-sober)."
+   }
+  },
+  {
+   "text": "Fix a nonempty affine open $U=\\operatorname{Spec}B$ of $Z$. By the definition of finite morphism [def-weil-finite-integral-morphism], $p^{-1}U$ is affine, say $\\operatorname{Spec}A$, and $A$ is a finite $B$-module. This inverse image is nonempty by surjectivity. Apply [lem-sc-integral-function-field-affine-fraction] to $Z,U$ and to $Y,p^{-1}U$: $B,A$ are domains; $L,K$ are fields; the generic-germ maps $\\rho_U:B\\to L$ and $\\sigma_U:A\\to K$ are injective and exhibit the respective target fields as their fraction fields. This application is to opens of the original integral schemes, so it needs no normality of $Y$ or Noetherian hypothesis.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-weil-surjective-morphism",
+    "lem-sc-integral-function-field-affine-fraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD3 (divisors-lemma-norm-in-normal-case), first paragraph; fraction fields: Morphisms Tag 01RV (morphisms-lemma-integral-scheme-rational-functions)."
+   }
+  },
+  {
+   "text": "The morphism of locally ringed spaces underlying $p$ induces a unital ring map on stalks at $\\eta_Y$ [def-weil-locally-ringed-space-morphism]. Step 1 identifies its source with $L$, so call this map $\\iota:L\\to K$. It is injective: if $0\\ne c\\in L$ mapped to zero, then $1=\\iota(cc^{-1})=0$, contradicting that $K$ is a field. By the definition of the induced stalk map on a representative section and of germs [def-weil-pbc-module-stalk], for every $b\\in B$ one has $\\iota(\\rho_U(b))=(p^\\sharp b)_{\\eta_Y}=\\sigma_U(p^\\sharp b)$. If $p^\\sharp b=0$, this identity and the two injections $\\iota,\\rho_U$ give $b=0$. Thus $p^\\sharp:B\\to A$ is an injective map of domains.",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD3 (divisors-lemma-norm-in-normal-case), displayed square; definitions of morphism and stalk maps: Schemes Tag 01HA (schemes-section-locally-ringed-spaces) and Sheaves Tag 0078 (section-stalks)."
+   }
+  },
+  {
+   "text": "By [lem-trf-finite-domain-fraction-degree], the finite injective domain algebra $B\\hookrightarrow A$ of steps 2--3 induces a finite-dimensional extension of fraction fields. Use exactly the fraction-field identifications given by $\\rho_U,\\sigma_U$ in step 2. The induced map on a quotient is $\\rho_U(b)/\\rho_U(c)\\mapsto\\sigma_U(p^\\sharp b)/\\sigma_U(p^\\sharp c)$ for $c\\ne0$. Step 3 identifies this with $\\iota(\\rho_U(b)/\\rho_U(c))$. Every element of $L$ is such a quotient, so the induced extension is precisely $\\iota:L\\hookrightarrow K$, and $d=\\dim_LK$ is finite. A basis of the nonzero vector space $K$ cannot be empty (the span of the empty family is $0$, whereas $1\\ne0$), so $d\\geq1$. A nonempty affine $U$ exists because schemes are locally affine and $Z$ is nonempty.",
+   "uses": [
+    "lem-trf-finite-domain-fraction-degree",
+    "def-weil-vector-space-dimension",
+    "def-pc-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD3 (divisors-lemma-norm-in-normal-case), sentence \"Since K/L is a finite extension\"; finite-domain fraction-degree algebraic input."
+   }
+  },
+  {
+   "text": "To verify normality of $B$, let $t\\in L$ be a root of a monic polynomial over $B$. For every $z\\in U$, [lem-sc-integral-scheme-stalks-in-function-field] embeds $\\mathcal O_{Z,z}$ into $L$ and makes $L$ its fraction field; the embedding sends the germ of $b\\in B$ to $\\rho_U(b)$. Thus the same monic equation shows that $t$ is integral over $\\mathcal O_{Z,z}$. The hypothesis that this local ring is integrally closed, with the meaning in [def-weil-pbc-normal-ring], implies $t\\in\\mathcal O_{Z,z}$ inside $L$. Applying [lem-sc-function-field-sections-glue] to the integral scheme $Z$, the open $U$, and this one element $t$ gives $b\\in\\mathcal O_Z(U)=B$ with $\\rho_U(b)=t$. Therefore every element of the fraction field of $B$ integral over $B$ belongs to $B$, as required. No finiteness of the cover, local Noetherianity, or restriction on dimension was used.",
+   "uses": [
+    "lem-sc-integral-scheme-stalks-in-function-field",
+    "def-weil-pbc-normal-ring",
+    "lem-sc-function-field-sections-glue"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 033L (properties-lemma-integral-normal) and 0358 (properties-lemma-normal-integral-sections); the local-to-global step is expanded by the generic-germ gluing criterion, rather than invoking a Noetherian criterion."
+   }
+  },
+  {
+   "text": "For nonempty affine opens $W\\subseteq U$, the germ of $b|_W$ at $\\eta_Z$ equals the germ of $b$ at $\\eta_Z$: both represent the same element of the directed colimit over neighbourhoods [def-weil-pbc-module-stalk]. The identical argument on $Y$ applies to $p^{-1}W\\subseteq p^{-1}U$. The section maps $p^\\sharp$ commute with these restrictions by [def-weil-locally-ringed-space-morphism], so the commuting square in step 3 is compatible with both restrictions. Thus every affine fraction-field extension is the same actual map $\\iota:L\\hookrightarrow K$, with degree the single integer $d$ of step 4.",
+   "uses": [
+    "def-weil-pbc-module-stalk",
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD3 (divisors-lemma-norm-in-normal-case), first paragraph and the compatibility of affine constructions; Sheaves Tag 0078 (section-stalks), germ compatibility with restriction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-surjective-morphism",
+  "def-weil-locally-ringed-space-morphism",
+  "def-sc-generic-point",
+  "lem-sc-scheme-sober",
+  "def-weil-finite-integral-morphism",
+  "lem-sc-integral-function-field-affine-fraction",
+  "def-weil-pbc-module-stalk",
+  "lem-trf-finite-domain-fraction-degree",
+  "def-weil-vector-space-dimension",
+  "def-pc-scheme",
+  "lem-sc-integral-scheme-stalks-in-function-field",
+  "def-weil-pbc-normal-ring",
+  "lem-sc-function-field-sections-glue"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Expanded assembly of Tag 0BD3 (divisors-lemma-norm-in-normal-case), first paragraph, using the generic-field and gluing lemmas already in the DAG; normality checked against Properties Tags 033L and 0358."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "functionField.*[Ff]inite|[Ff]inite.*functionField|isIntegrallyClosed.*[Ss]ection|[Ss]ection.*isIntegrallyClosed",
+   "results": "{\"t\": \"2026-10-22T06:09:28Z\", \"tool\": \"grep\", \"query\": \"functionField.*[Ff]inite|[Ff]inite.*functionField|isIntegrallyClosed.*[Ss]ection|[Ss]ection.*isIntegrallyClosed\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\"], \"digest\": \"bf5feb981b1c2684\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned finite-morphism definitions and FunctionField fraction-ring instances provide individual ingredients, but not the finite common generic extension together with normality of every affine section ring from normal stalks."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite surjective morphism of integral schemes gives a finite extension of function fields with integrally closed affine sections when the base is normal",
+   "results": "{\"t\": \"2026-10-22T06:09:28Z\", \"tool\": \"leansearch\", \"query\": \"Finite surjective morphism of integral schemes gives a finite extension of function fields with integrally closed affine sections when the base is normal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.isFinite_iff\", \"AlgebraicGeometry.Surjective\", \"AlgebraicGeometry.Scheme.Hom.isIntegral_app\", \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"AlgebraicGeometry.IsFinite.instIsIntegralHom\"], \"digest\": \"0ec37b1a11a6d11e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned finite-morphism definitions and FunctionField fraction-ring instances provide individual ingredients, but not the finite common generic extension together with normality of every affine section ring from normal stalks."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.Scheme.functionField",
+   "results": "{\"t\": \"2026-10-22T06:09:29Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsFinite, AlgebraicGeometry.Scheme.functionField\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned finite-morphism definitions and FunctionField fraction-ring instances provide individual ingredients, but not the finite common generic extension together with normality of every affine section ring from normal stalks."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite surjective morphism of integral schemes identifies the affine fraction field extensions with one finite extension of generic stalks, and integrally closed local rings imply integrally closed affine sections",
+   "results": "{\"t\": \"2026-10-22T06:09:37Z\", \"tool\": \"leanfinder\", \"query\": \"A finite surjective morphism of integral schemes identifies the affine fraction field extensions with one finite extension of generic stalks, and integrally closed local rings imply integrally closed affine sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.IsFinite.instIsIntegralHom\", \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\"], \"digest\": \"8ef5e25b6bbeb01f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned finite-morphism definitions and FunctionField fraction-ring instances provide individual ingredients, but not the finite common generic extension together with normality of every affine section ring from normal stalks."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an integral scheme with integrally closed local domains every affine coordinate ring is integrally closed, and a finite dominant map gives the same finite function field extension on all affine opens",
+   "results": "{\"t\": \"2026-10-22T06:11:23Z\", \"tool\": \"leanfinder\", \"query\": \"For an integral scheme with integrally closed local domains every affine coordinate ring is integrally closed, and a finite dominant map gives the same finite function field extension on all affine opens\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.functionField_isFractionRing_of_isAffineOpen\", \"AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec\", \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\", \"AlgebraicGeometry.functionField_isFractionRing_of_affine\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\", \"AlgebraicGeometry.Scheme.functionField\"], \"digest\": \"9d5ebe94a563802d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned finite-morphism definitions and FunctionField fraction-ring instances provide individual ingredients, but not the finite common generic extension together with normality of every affine section ring from normal stalks."
+  },
+  {
+   "tool": "grep",
+   "query": "functionField.*[Ff]inite|[Ff]inite.*functionField|isIntegrallyClosed.*[Ss]ection|[Ss]ection.*isIntegrallyClosed",
+   "results": "{\"t\": \"2026-10-23T09:54:25Z\", \"tool\": \"grep\", \"query\": \"functionField.*[Ff]inite|[Ff]inite.*functionField|isIntegrallyClosed.*[Ss]ection|[Ss]ection.*isIntegrallyClosed\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\"], \"digest\": \"bf5feb981b1c2684\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations give finite section maps, fraction-field constructions or normalization, but no declaration gives this full generic-stalk extension with normal affine sections and restriction compatibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.Scheme.functionField",
+   "results": "{\"t\": \"2026-10-23T09:54:26Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsFinite, AlgebraicGeometry.Scheme.functionField\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations give finite section maps, fraction-field constructions or normalization, but no declaration gives this full generic-stalk extension with normal affine sections and restriction compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite surjective morphism of integral schemes induces a finite extension of function fields with normal affine base section rings",
+   "results": "{\"t\": \"2026-10-23T09:54:28Z\", \"tool\": \"leanfinder\", \"query\": \"Finite surjective morphism of integral schemes induces a finite extension of function fields with normal affine base section rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.IsFinite.instIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\"], \"digest\": \"8fe69d8318d4d178\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations give finite section maps, fraction-field constructions or normalization, but no declaration gives this full generic-stalk extension with normal affine sections and restriction compatibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite surjective morphism between integral schemes gives one finite extension of generic function fields on every affine open",
+   "results": "{\"t\": \"2026-10-23T09:57:28Z\", \"tool\": \"leansearch\", \"query\": \"Finite surjective morphism between integral schemes gives one finite extension of generic function fields on every affine open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.finite_app\", \"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.Scheme.Hom.finite_app\", \"AlgebraicGeometry.LocallyOfFiniteType.finiteType_appLE\", \"AlgebraicGeometry.isFinite_iff\", \"AlgebraicGeometry.Surjective\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.IsIntegralHom.instMorphismRestrict\"], \"digest\": \"1b8c1dd266017b17\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations give finite section maps, fraction-field constructions or normalization, but no declaration gives this full generic-stalk extension with normal affine sections and restriction compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral scheme has integrally closed affine section rings when all its local rings are integrally closed, and a finite dominant morphism induces finite function field extensions",
+   "results": "{\"t\": \"2026-10-23T09:57:29Z\", \"tool\": \"leanfinder\", \"query\": \"An integral scheme has integrally closed affine section rings when all its local rings are integrally closed, and a finite dominant morphism induces finite function field extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\", \"AlgebraicGeometry.Scheme.Hom.isIntegral_app\", \"AlgebraicGeometry.IsIntegralHom.integral_app\", \"AlgebraicGeometry.IsIntegral.component_integral\", \"AlgebraicGeometry.IsIntegralHom.isIntegral_app\"], \"digest\": \"76b07f694725dc4a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations give finite section maps, fraction-field constructions or normalization, but no declaration gives this full generic-stalk extension with normal affine sections and restriction compatibility."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-integral-finite-sheaf-norm",
+  "date": "2026-10-22",
+  "group": "Q92"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "Proof (3): proper direct image and open direct image assembled by compactification; the retained alteration/tame-boundary auxiliary route uses finite normal ample descent. This item supplies the affine domain and common finite function-field extension in Stacks Tag 0BD3, first paragraph, for the finite normal sheaf norm.",
+   "via": [
+    "lem-sfb-normal-integral-finite-sheaf-norm",
+    "lem-sfb-finite-normal-ample-descent",
+    "lem-sfb-semilinear-sylow-good-components",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-normal-cover-affine-field-data",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Six proof steps use existing generic-germ fraction-field, finite-domain fraction-degree and local-to-global gluing nodes; no new nodes. Explicit generic-point argument, injectivity, quotient formula, normality from stalks and germ restriction compatibility. Repaired the inherited null blueprint ancestor using the existing provenance of lem-sfb-admissible-direct-image.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images proof (3), inherited auxiliary finite-normal ample-descent/sheaf-norm route: this item expands the affine domain/common finite field extension paragraph of Stacks 0BD3. Latest blueprint was read; no change to unit/chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-scheme-sober",
+    "why": "Uniqueness of generic points for schemes is a generic foundational tool."
+   },
+   {
+    "node": "lem-sc-function-field-sections-glue",
+    "why": "Generic-field elements regular at all points of an open are sections; this is a generic gluing tool, used solely to verify affine normality in the retained norm route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-scheme-sober",
+  "lem-sc-function-field-sections-glue"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q146-162ac9cb3",
+  "group": "Q146",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q146-162ac9cb3 (reviewer sub-agent of L); spot-checked: Read Stacks 0BD3 (lemma-norm-in-normal-case), first paragraph: the item states exactly its data (affine domains, the fraction-field square, finite K/L of degree d, B normal). The statement is byte-identical to live, which is still unsplit, and there is no repair note. There are no new nodes. Step 1: the generic point maps to the generic point, using surjectivity, continuity and lem-sc-scheme-sober uniqueness; the argument is elementary. Step 2: the finite-morphism definition gives an affine preimage and a finite module, and lem-sc-integral-function-field-affine-fraction applies to both integral schemes with nonempty affine opens. Step 3: a field map is injective, the germ square is the definition of the stalk map, and so p# is injective. Step 4: Mathlib leaf lem-trf-finite-domain-fraction-degree, with the induced map identified with iota through quotients; d>=1, and an affine open exists. Step 5: normality of B from lem-sc-integral-scheme-stalks-in-function-field (2), def-weil-pbc-normal-ring and lem-sc-function-field-sections-glue, whose hypotheses match exactly. Step 6: compatibility with restriction gives the common d. Tested on the identity, a field extension, an inseparable Frobenius-type cover, a nonnormal source and a non-Noetherian base. Tool uses accepted: lem-sc-scheme-sober and lem-sc-function-field-sections-glue (generic, slopmaster2 declaration attached); the other off-unit cites are Mathlib leaves. Blueprint from.node repair to det-thm-sf-ctf-stability-direct-images matches lem-sfb-admissible-direct-image. Batch-5: lem-trf-finite-domain-fraction-degree is a Mathlib leaf with empty proof_deps and is pure commutative algebra, not part of the trace-formula or Poincaré-duality proofs, so it is accepted. No SGA citation."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteNormalCoverAffineFieldData",
+  "declaration": "AlgebraicGeometry.finite_normal_cover_affine_field_data",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteNormalCoverAffineFieldData.lean",
+  "statement": "theorem finite_normal_cover_affine_field_data {Y Z : Scheme.{u}} [IsIntegral Y] [IsIntegral Z] (p : Y ⟶ Z) [IsFinite p] [Surjective p] (hZ : ∀ z : Z, IsDomain (Z.presheaf.stalk z) ∧ IsIntegrallyClosed (Z.presheaf.stalk z)) : ∃ hη : p (genericPoint Y) = genericPoint Z, Function.Injective (p.functionFieldMap hη).hom ∧ (p.functionFieldMap hη).hom.Finite ∧ ∃ d : ℕ, d = @Module.finrank Z.functionField Y.functionField _ _ (p.functionFieldMap hη).hom.toAlgebra.toModule ∧ 1 ≤ d ∧ ∀ (U : Z.Opens) (_hU : IsAffineOpen U) [Nonempty U], ∃ _hpre : Nonempty (p ⁻¹ᵁ U), IsAffineOpen (p ⁻¹ᵁ U) ∧ IsDomain Γ(Z, U) ∧ IsDomain Γ(Y, p ⁻¹ᵁ U) ∧ Function.Injective (p.app U).hom ∧ (p.app U).hom.Finite ∧ IsIntegrallyClosed Γ(Z, U) ∧ Function.Injective (Z.germToFunctionField U).hom ∧ Function.Injective (Y.germToFunctionField (p ⁻¹ᵁ U)).hom ∧ IsFractionRing Γ(Z, U) Z.functionField ∧ IsFractionRing Γ(Y, p ⁻¹ᵁ U) Y.functionField ∧ (∀ b : Γ(Z, U), Y.germToFunctionField (p ⁻¹ᵁ U) (p.app U b) = p.functionFieldMap hη (Z.germToFunctionField U b)) ∧ (∀ (W : Z.Opens) (_hW : IsAffineOpen W) [Nonempty W] (hWU : W ≤ U) [Nonempty (p ⁻¹ᵁ W)], (∀ b : Γ(Z, U), Z.germToFunctionField W (Z.presheaf.map (homOfLE hWU).op b) = Z.germToFunctionField U b) ∧ (∀ a : Γ(Y, p ⁻¹ᵁ U), Y.germToFunctionField (p ⁻¹ᵁ W) (Y.presheaf.map (homOfLE (p.preimage_mono hWU)).op a) = Y.germToFunctionField (p ⁻¹ᵁ U) a))",
+  "branch": "newtargets-dag",
+  "by": "Q65",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5d39d6c2d",
+  "group": "Q65",
+  "result": "pass",
+  "note": "Only the lean record differs from side-live, the first stage-2 delivery for this item. Every clause matches the node: hη is proved as a conclusion; the generic stalk map functionFieldMap is injective and finite; d = finrank under toAlgebra and 1 ≤ d; for each nonempty affine U the preimage is nonempty and affine, both section rings are domains, p.app U is injective and finite, Γ(Z,U) is IsIntegrallyClosed, both germs are injective with IsFractionRing for the germ-induced algebras, the elementwise square holds, and germs commute with restriction on Z and Y. The normal-base hypothesis uses the recorded inline IsDomain ∧ IsIntegrallyClosed form, not stronger. The single degree d follows from the square plus fraction rings. One universe; edge cases (identity, inseparable, non-normal source, non-Noetherian) are covered. No definitions, one sorry, source and blueprint docstrings with the 6-step proof, statement verbatim, no stmt_dep change. Advisory: functionFieldMap is the canonical stalk map, not owned by a stmt_dep node; it is widely used in landed statements and def-sfb-dominant-function-field-map wraps the same map. No changes, so no compile; the worker reports clean scompile."
+ }
+}

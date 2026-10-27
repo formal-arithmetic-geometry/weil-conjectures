@@ -1,0 +1,348 @@
+{
+ "id": "lem-per-blowup-sequence-insertion",
+ "kind": "statement",
+ "title": "Canonical insertion into an ordinary blowup tower",
+ "statement": "Let $X_n\\to\\cdots\\to X_0=X$ be a finite ordinary blowup tower on Noetherian schemes [pqf-def-locnoeth, def-nagata-global-blowup], with coherent center ideals [pqf-def-coherent]. Write $C_i\\subset X_i$ for the center of $X_{i+1}\\to X_i$, for $0\\le i<n$. Noetherian means quasi-compact and locally Noetherian. Fix $0\\le m\\le n$ and an open $U\\subset X$ such that every center at an index $m\\le i<n$ is the schematic closure of its restriction over $U$: its ideal is the kernel of restriction of functions to that restricted center. Let $g:X'_m\\to\\cdots\\to X_m$ be a finite ordinary blowup tower whose centers map into $X\\setminus U$. There is a tower, unique up to the canonical stagewise isomorphisms preserving the ordered ideal centers, obtained by keeping the stages before $m$, inserting $g$, and then taking, successively, the schematic closures [def-nagata-scheme-theoretic-closure] of the old centers over $U$ in the new ambient schemes. Its restriction over $U$ is the old tower with empty stages inserted. When $m<n$, the first old center after $g$ is the strict transform [def-nagata-strict-transform] of the old center under $g$. When $m<n$ and $g$ is obtained by blowing up subschemes of that old center and then of its successive strict transforms, this first old center is its iterated blowup in those subschemes. If the old centers are reduced [def-pc-reduced-scheme], their replacements are reduced; if their images in $X$ have pure codimension $e$ and their inverse images of the generic points of those images are schematically dense, the replacements have the same images and the same schematic-density property. Here pure codimension $e$ means that every generic point $x$ of the image satisfies $\\dim\\mathcal O_{X,x}=e$. This insertion, including its ordered center ideals, commutes with flat base change [def-weil-flat-morphism] between Noetherian schemes, allowing empty centers. Here a subset is schematically dense if functions vanishing on its induced local schemes vanish identically.",
+ "source": {
+  "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+  "place": "§4.2.2, Definition 4.2.2 and Lemma 4.2.3, with flat compatibility Lemma 4.2.5, printed pp.28--29; Temkin arXiv:0904.1592v2, read online 2026-10-24; archival copy WANTED. No Stacks tag states this combined assertion."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-nagata-global-blowup",
+  "pqf-def-coherent",
+  "def-nagata-strict-transform",
+  "def-pc-reduced-scheme",
+  "def-weil-flat-morphism",
+  "def-nagata-scheme-theoretic-closure",
+  "def-per-blowup-sequence-insertion-data",
+  "def-trf-ordinary-resolution-rule"
+ ],
+ "proof": [
+  {
+   "text": "Keep the prefix ending at $X_m$ and append the given finite tower $g$. Each inserted blowup is the identity over $U$: its center is disjoint from the inverse image of $U$, so apply [thm-nagata-global-blowup-complement]. Compose these identifications to identify the terminal scheme $Y_m$ of $g$ over $U$ with $(X_m)_U$. This is the base case of the following induction: after replacing the centers with indices $m,\\ldots,i-1$, the current ambient scheme $Y_i$ is identified over $U$ with $(X_i)_U$.",
+   "uses": [
+    "thm-nagata-global-blowup-complement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02OS, lemma-blowing-up-gives-effective-Cartier-divisor (1); Temkin Definition 4.2.2"
+   }
+  },
+  {
+   "text": "Assume the induction hypothesis for $m\\le i<n$. Regard $(C_i)_U$ as a closed subscheme of $(Y_i)_U$ using that identification. Define $D_i\\subset Y_i$ to be its schematic closure. The morphism $(C_i)_U\\to Y_i$ is a quasi-compact locally closed immersion: all the ambient schemes are Noetherian. [lemma-nagata-scheme-image-ideal-qc] gives the quasi-coherent kernel ideal $K_i=\\ker(\\mathcal O_{Y_i}\\to j_*\\mathcal O_{(C_i)_U})$, the closed subscheme it defines, and schematic density of $(C_i)_U$ in $D_i$. A quasi-coherent ideal in a Noetherian scheme is coherent: on $\\operatorname{Spec}A$ its ideal and the kernels of maps from finite free modules are submodules of finite Noetherian modules, hence finitely generated. Put $Y_{i+1}=\\operatorname{Bl}_{K_i}Y_i$. The blowup is proper by [thm-nagata-global-blowup-proper], so of finite type by [def-weil-proper-morphism]; [lem-weil-pbc-finite-type-over-noetherian] makes $Y_{i+1}$ Noetherian. Thus the induction remains within the stated class.",
+   "uses": [
+    "lemma-nagata-scheme-image-ideal-qc",
+    "thm-nagata-global-blowup-proper",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01R8, lemma-quasi-compact-scheme-theoretic-image; Tag 01T6, lemma-finite-type-noetherian; coherent.tex Tag 01Y1, lemma-coherent-Noetherian-quasi-coherent-sub-quotient; divisors.tex Tag 02NS, lemma-blowing-up-projective"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-scheme-image-flat-base-change] to the open immersion $(Y_i)_U\\to Y_i$, which is flat because it induces isomorphisms of local rings. It shows that $D_i|_U=(C_i)_U$ as closed subschemes, including their ideals. Applying [thm-nagata-blowup-flat-base-change] to the same open immersion identifies $(Y_{i+1})_U$ with the blowup of $(X_i)_U$ in $(C_i)_U$, which is $(X_{i+1})_U$ by that theorem again. This is the induction step. There are $n-m$ such steps, so the construction is finite. For any other tower satisfying the closure prescription, $K_m$ is this same kernel. Its blowup is the same canonical blowup up to the canonical isomorphism. Repeating for $i=m+1,\\ldots,n-1$ proves uniqueness at every stage with the ordered ideals retained. For $m=n$ this induction is empty and the answer is the prefix followed by $g$.",
+   "uses": [
+    "lem-sfb-scheme-image-flat-base-change",
+    "thm-nagata-blowup-flat-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 081I, lemma-flat-base-change-scheme-theoretic-image; divisors.tex Tag 0805, lemma-flat-base-change-blowing-up"
+   }
+  },
+  {
+   "text": "Suppose $m<n$ and put $W=C_m$. Compute its successive strict transforms along the individual blowups of $g$. At one such step the current transform $W_j$ is a closed subscheme of the current ambient scheme, and [lemma-nagata-strict-transform-ambient-closed] identifies the next transform with the blowup of $W_j$ in the pulled-back center. Start with $W_0=W$, in which $W_U$ is schematically dense by hypothesis. Each pulled-back center is disjoint from $W_U$, so [lemma-nagata-admissible-blowup-preserves-density] says that $W_U$ remains schematically dense in $W_{j+1}$. Induction gives a closed subscheme $W_t\\subset Y_m$ with schematically dense open $W_U$. Its defining ideal is therefore the kernel of restriction to $W_U$, which is exactly $K_m$ from the construction. Hence $D_m=W_t$, proving the strict-transform assertion. If each inserted center is a subscheme of $W_j$, its pullback to $W_j$ is that very subscheme. The same cited identification at every step then identifies $D_m$ with the asserted iterated blowup of $W$. For a length-zero $g$ the assertion reads $D_m=W$, the hypothesis on $W$.",
+   "uses": [
+    "lemma-nagata-strict-transform-ambient-closed",
+    "lemma-nagata-admissible-blowup-preserves-density"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080E, lemma-strict-transform (1); Tags 02OS, lemma-blowing-up-gives-effective-Cartier-divisor, and 07ZU, lemma-complement-effective-Cartier-divisor; Temkin Lemmas 4.2.1 and 4.2.3"
+   }
+  },
+  {
+   "text": "If $C_i$ is reduced then $(C_i)_U$ is reduced, and [lem-trf-reduced-scheme-image] applied to $(C_i)_U\\to Y_i$ shows that $D_i$ is reduced. This does not require the ambient scheme to be reduced.",
+   "uses": [
+    "lem-trf-reduced-scheme-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 056B, lemma-scheme-theoretic-image-reduced"
+   }
+  },
+  {
+   "text": "Consider an old center $C_i$ whose image in $X$ has pure codimension $e$ and whose inverse image of the finite set $G_i$ of generic image points is schematically dense. All old and new ambient maps to $X$ are compositions of proper blowups, by [thm-nagata-global-blowup-proper]. Such maps are closed, since each factor is universally closed by [def-weil-proper-morphism]. The closed subset $|C_i|$ is the closure of $|(C_i)_U|$ by [lemma-nagata-scheme-image-ideal-qc]. Continuity and closedness therefore show that its image is exactly the closure in $X$ of the image of $(C_i)_U$. The same argument for $D_i$ gives the identical image. Each generic point of that image lies in $U$: otherwise its whole irreducible component would miss the image of $(C_i)_U$, contrary to density in the image. Hence the inverse images of $G_i$ in $C_i$ and in $D_i$ lie in the common open part and agree. Restriction of functions on $D_i$ to this open part is injective by [lemma-nagata-scheme-image-ideal-qc]; restriction onward to the local schemes above $G_i$ is injective by the assumed schematic density in $C_i$. Their composite is injective. This proves the required schematic density for $D_i$; equality of images gives the same codimension. Empty centers stay empty, and impose no generic-point condition.",
+   "uses": [
+    "thm-nagata-global-blowup-proper",
+    "def-weil-proper-morphism",
+    "lemma-nagata-scheme-image-ideal-qc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01R8, lemma-quasi-compact-scheme-theoretic-image; divisors.tex Tag 02NS, lemma-blowing-up-projective; Temkin §4.1.3"
+   }
+  },
+  {
+   "text": "Let $h:T\\to X$ be flat with $T$ Noetherian. Induct simultaneously on the inserted stages and on the $n-m$ old stages. [thm-nagata-blowup-flat-base-change] identifies the pullback of every already constructed blowup with the blowup in the extended ideal. Thus every stage on $T$ is the corresponding fiber product, and its map to the original stage is flat, being the base change of $h$, by [lem-weil-pbc-flat-morphism-base-change]. At a replacement center use [lem-sfb-scheme-image-flat-base-change] for the quasi-compact immersion $(C_i)_U\\to Y_i$ and this flat stage map. Its conclusion is the equality of the new kernel ideal with $K_i\\mathcal O_{Y_i\\times_XT}$, not just equality of supports. It also shows that the original closure hypotheses on $C_i$ persist after pullback. Blow up this ideal and apply the blowup comparison again to finish the induction step. This proves compatibility of the entire ordered list, retaining every empty center; the blowup of the unit ideal is the identity by [thm-nagata-global-blowup-complement] with empty vanishing locus. No assertion that flat pullback preserves reducedness is needed.",
+   "uses": [
+    "thm-nagata-blowup-flat-base-change",
+    "lem-sfb-scheme-image-flat-base-change",
+    "thm-nagata-global-blowup-complement",
+    "lem-weil-pbc-flat-morphism-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0805, lemma-flat-base-change-blowing-up; morphisms.tex Tag 081I, lemma-flat-base-change-scheme-theoretic-image; Temkin Lemma 4.2.5"
+   }
+  }
+ ],
+ "proof_deps": [
+  "thm-nagata-global-blowup-complement",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "thm-nagata-global-blowup-proper",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-scheme-image-flat-base-change",
+  "thm-nagata-blowup-flat-base-change",
+  "lemma-nagata-strict-transform-ambient-closed",
+  "lemma-nagata-admissible-blowup-preserves-density",
+  "lem-trf-reduced-scheme-image",
+  "lem-weil-pbc-flat-morphism-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+  "place": "Temkin arXiv:0904.1592v2, §§4.2.1--4.2.4, Lemmas 4.2.1, 4.2.3 and 4.2.5, printed pp.28--29; read online 2026-10-24; archival copy WANTED. Agent-written expansion using the cited Stacks interfaces."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"blowUp\"",
+   "results": "{\"t\": \"2026-10-24T02:51:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"blowUp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none gives this scheme blowup or regular-morphism assertion; elementary dimension, immersion and smoothness results do not specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-blowup-sequence-insertion: Strict transform of a closed subscheme under blowups in its centers equals its own blowup",
+   "results": "{\"t\": \"2026-10-24T02:51:48Z\", \"tool\": \"leansearch\", \"query\": \"lem-per-blowup-sequence-insertion: Strict transform of a closed subscheme under blowups in its centers equals its own blowup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.lift_fac_assoc\", \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_apply\", \"AlgebraicGeometry.universallyClosed_isStableUnderBaseChange\", \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.Proj.homOfLE_toBasicOpenOfGlobalSections_ι_assoc\", \"AlgebraicGeometry.IsLocalIso.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"AlgebraicGeometry.IsClosedImmersion.casesOn\"], \"digest\": \"ee0a59a87644d4e3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none gives this scheme blowup or regular-morphism assertion; elementary dimension, immersion and smoothness results do not specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowUp\"",
+   "results": "{\"t\": \"2026-10-24T02:51:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"blowUp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none gives this scheme blowup or regular-morphism assertion; elementary dimension, immersion and smoothness results do not specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "blow.?up.*(sequence|strict)|strictTransform",
+   "results": "{\"t\": \"2026-10-24T02:51:49Z\", \"tool\": \"grep\", \"query\": \"blow.?up.*(sequence|strict)|strictTransform\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none gives this scheme blowup or regular-morphism assertion; elementary dimension, immersion and smoothness results do not specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-blowup-sequence-insertion: Insert a blowup sequence in another by schematic closure of later centers and push blowup sequences through closed immersions",
+   "results": "{\"t\": \"2026-10-24T02:51:51Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-blowup-sequence-insertion: Insert a blowup sequence in another by schematic closure of later centers and push blowup sequences through closed immersions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.lift\", \"AlgebraicGeometry.Scheme.Hom.liftCoborder\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_ι_assoc\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom\", \"AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionGlueDataObjι\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.liftCoborder_ι\", \"AlgebraicGeometry.Scheme.IdealSheafData.inclusion\"], \"digest\": \"ff8bbf30fb8de7a8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none gives this scheme blowup or regular-morphism assertion; elementary dimension, immersion and smoothness results do not specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowUp\"",
+   "results": "{\"t\": \"2026-10-24T02:51:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"blowUp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none gives this scheme blowup or regular-morphism assertion; elementary dimension, immersion and smoothness results do not specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-blowup-sequence-insertion: Strict transform of a closed subscheme under blowups in its centers equals its own blowup",
+   "results": "{\"t\": \"2026-10-24T02:51:52Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-blowup-sequence-insertion: Strict transform of a closed subscheme under blowups in its centers equals its own blowup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.subSchemeCover_map_inclusion_assoc\", \"AlgebraicGeometry.Scheme.IdealSheafData.subSchemeCover_map_inclusion\", \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeMap_subschemeι\", \"AlgebraicGeometry.Scheme.IdealSheafData.inclusion_subschemeι\", \"AlgebraicGeometry.Scheme.IdealSheafData.inclusion\", \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeMap_subschemeι_assoc\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_comp\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_ι\"], \"digest\": \"67a1a419d5588c26\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none gives this scheme blowup or regular-morphism assertion; elementary dimension, immersion and smoothness results do not specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowUp\"",
+   "results": "{\"t\": \"2026-10-24T02:51:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"blowUp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none gives this scheme blowup or regular-morphism assertion; elementary dimension, immersion and smoothness results do not specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Insert a sequence of scheme blowups by schematic closure of centers and strict transforms",
+   "results": "{\"t\": \"2026-10-24T03:39:14Z\", \"tool\": \"leanfinder\", \"query\": \"Insert a sequence of scheme blowups by schematic closure of centers and strict transforms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.PartialMap\", \"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionGlueDataObjι\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.IdealSheafData.inclusion\", \"AlgebraicGeometry.specTargetImageFactorization\"], \"digest\": \"14cd29a6cfd16906\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: signatures concern rational maps, normalization, immersions or gluing; none constructs an insertion of blowup towers, with ordered coherent centers"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\"",
+   "results": "{\"t\": \"2026-10-24T03:39:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"blowup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: signatures concern rational maps, normalization, immersions or gluing; none constructs an insertion of blowup towers, with ordered coherent centers"
+  },
+  {
+   "tool": "grep",
+   "query": "blow.?up.*(tower|sequence|strict)|strictTransform",
+   "results": "{\"t\": \"2026-10-24T03:39:15Z\", \"tool\": \"grep\", \"query\": \"blow.?up.*(tower|sequence|strict)|strictTransform\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: signatures concern rational maps, normalization, immersions or gluing; none constructs an insertion of blowup towers, with ordered coherent centers"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sequence of blowups extends uniquely from an open by schematic closure of each center",
+   "results": "{\"t\": \"2026-10-24T03:41:12Z\", \"tool\": \"leansearch\", \"query\": \"A sequence of blowups extends uniquely from an open by schematic closure of each center\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsOpenImmersion.lift_uniq\", \"AlgebraicGeometry.Scheme.Cover.hom_ext\", \"AlgebraicGeometry.Scheme.OpenCover.ext_elem\", \"AlgebraicGeometry.sourceLocalClosure.instIsZariskiLocalAtSourceIsOpenImmersionOfRespectsIsoOfRespectsLeftScheme\", \"AlgebraicGeometry.Scheme.Opens.instIsOverι\", \"AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_assoc\", \"AlgebraicGeometry.IsOpenImmersion.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.instHasPullbacksIsOpenImmersion\"], \"digest\": \"9199277ffec83e2f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: signatures concern rational maps, normalization, immersions or gluing; none constructs an insertion of blowup towers, with ordered coherent centers"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Schematic closure of centers constructs an extension of a blowup tower after insertion of an admissible blowup",
+   "results": "{\"t\": \"2026-10-24T03:41:13Z\", \"tool\": \"leanfinder\", \"query\": \"Schematic closure of centers constructs an extension of a blowup tower after insertion of an admissible blowup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.liftQuotient_comp_assoc\", \"AlgebraicGeometry.instIsClosedImmersionLiftCoborder\", \"AlgebraicGeometry.Scheme.IdealSheafData.subSchemeCover_map_inclusion_assoc\", \"AlgebraicGeometry.specTargetImageFactorization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.IdealSheafData.subSchemeCover_map_inclusion\"], \"digest\": \"a99d54041d30f4b2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: signatures concern rational maps, normalization, immersions or gluing; none constructs an insertion of blowup towers, with ordered coherent centers"
+  },
+  {
+   "tool": "grep",
+   "query": "blow.?up|strict.transform",
+   "results": "{\"t\": \"2026-10-24T03:41:13Z\", \"tool\": \"grep\", \"query\": \"blow.?up|strict.transform\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: signatures concern rational maps, normalization, immersions or gluing; none constructs an insertion of blowup towers, with ordered coherent centers"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-codimension-resolution-improvement",
+  "date": "2026-10-24",
+  "group": "Q03"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, via ordinary characteristic-zero resolution: §4.2.2, Definition 4.2.2 and Lemma 4.2.3, with flat compatibility Lemma 4.2.5, printed pp.28--29",
+   "via": [
+    "lem-per-codimension-resolution-improvement",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-blowup-sequence-insertion",
+  "worker": "stage1",
+  "summary": "Q110 expands the finite recursive construction, the induction identifying strict transforms, and the ideal-level flat comparison. Reuses all existing geometric interfaces: no new nodes. Clarifies center indices, canonical uniqueness, the vacuous endpoint, and image codimension. Sources read and statement qualification explained in report.md.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve, proof Step 3, through the existing characteristic-zero ordinary-resolution codimension-induction branch: implements the insertion operation used in Extensions 0 and 1,...,n of Temkin §4.3. The current blueprint has no separate insertion node.",
+  "tool_uses": [
+   {
+    "node": "thm-nagata-global-blowup-complement",
+    "why": "Generic scheme/blowup interface used exactly as stated in the proof; the current unit has no construction of this generic geometric operation."
+   },
+   {
+    "node": "lemma-nagata-scheme-image-ideal-qc",
+    "why": "Generic scheme/blowup interface used exactly as stated in the proof; the current unit has no construction of this generic geometric operation."
+   },
+   {
+    "node": "thm-nagata-global-blowup-proper",
+    "why": "Generic scheme/blowup interface used exactly as stated in the proof; the current unit has no construction of this generic geometric operation."
+   },
+   {
+    "node": "def-weil-proper-morphism",
+    "why": "Generic scheme/blowup interface used exactly as stated in the proof; the current unit has no construction of this generic geometric operation."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic scheme/blowup interface used exactly as stated in the proof; the current unit has no construction of this generic geometric operation."
+   },
+   {
+    "node": "lem-sfb-scheme-image-flat-base-change",
+    "why": "Generic scheme/blowup interface used exactly as stated in the proof; the current unit has no construction of this generic geometric operation."
+   },
+   {
+    "node": "thm-nagata-blowup-flat-base-change",
+    "why": "Generic scheme/blowup interface used exactly as stated in the proof; the current unit has no construction of this generic geometric operation."
+   },
+   {
+    "node": "lemma-nagata-strict-transform-ambient-closed",
+    "why": "Generic scheme/blowup interface used exactly as stated in the proof; the current unit has no construction of this generic geometric operation."
+   },
+   {
+    "node": "lemma-nagata-admissible-blowup-preserves-density",
+    "why": "Generic scheme/blowup interface used exactly as stated in the proof; the current unit has no construction of this generic geometric operation."
+   },
+   {
+    "node": "lem-trf-reduced-scheme-image",
+    "why": "Generic scheme/blowup interface used exactly as stated in the proof; the current unit has no construction of this generic geometric operation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-nagata-global-blowup-complement",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "thm-nagata-global-blowup-proper",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-scheme-image-flat-base-change",
+  "thm-nagata-blowup-flat-base-change",
+  "lemma-nagata-strict-transform-ambient-closed",
+  "lemma-nagata-admissible-blowup-preserves-density",
+  "lem-trf-reduced-scheme-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q110-b0b7ceba6",
+  "group": "Q110",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q110-b0b7ceba6 (reviewer sub-agent of L); spot-checked: I read the item in full: statement plus steps 1-7, with no new nodes. Live/side-live still show it unsplit, so no other group has split it first, and there is no re-split note. Statement changes against the base: the indices of C_i are now explicit; uniqueness is up to the canonical stagewise isomorphisms; the strict-transform and iterated-blowup clauses are qualified by m<n (the base statement is ill-formed at m=n); pure codimension refers to the image in X. None of this weakens the statement, and its only citer, lem-per-codimension-resolution-improvement, uses exactly these forms. Step by step: (1) complement isomorphism over the preimage of U. (2) The 081I image lemma gives the kernel, schematic density and closure; quasi-compactness follows from the Noetherian source; coherence is proved inline; the blowup is proper, of finite type and Noetherian. (3) 081I applied to the open immersion gives D_i|_U=(C_i)_U, and bc_g applied twice gives (Y_{i+1})_U=(X_{i+1})_U; uniqueness holds because the kernel is intrinsic. (4) Ambient-closed strict transforms plus the admissible-blowup density lemma give W_t with W_U dense, and the injective composite shows its ideal is K_m. (5) Stacks 056B. (6) For a closed continuous map, the image of the closure equals the closure of the image; I checked the generic-point argument with finitely many components and the composite of two injective restrictions. (7) Flat base change of images and of blowups. Edge cases checked: m=n, n=0, g of length zero, U=X, U empty, an inserted center equal to the whole transform, a nonreduced ambient scheme, and empty fibres. FIX: step 7 used flatness of base changes without a citation (C1), so I added the mathlib leaf lem-weil-pbc-flat-morphism-base-change (01U9) to the text, uses and proof_deps. Step 3 now says why the open immersion is flat. The existing stmt_dep def-nagata-scheme-theoretic-closure is now cited inline in the statement. Batch-5 flag on lem-trf-reduced-scheme-image: it is Stacks 056B, a general scheme-image fact proved from generic pbc nodes. Neither the trace-formula leaf nor the Poincare-duality leaf gives it, and it is not part of their proofs, so it stays. I accept the generic Nagata/sfb/trf interfaces as tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BlowupSequenceInsertion",
+  "declaration": "AlgebraicGeometry.ordinaryBlowupSequence_insertion",
+  "file": "lean/Sheaf/AlgebraicGeometry/BlowupSequenceInsertion.lean",
+  "statement": "theorem ordinaryBlowupSequence_insertion (X : Scheme.{u}) (P : OrdinaryBlowupInsertion.Input X) : ∃ D : OrdinaryBlowupInsertion.Diagram P, (∀ E : OrdinaryBlowupInsertion.Diagram P, Nonempty (SuffixIso D E) ∧ Subsingleton (SuffixIso D E)) ∧ (∀ h : P.position.val < P.old.length, D.firstNew h = P.transform h (Fin.last P.inserted.length) ∧ ((∀ i : Fin P.inserted.length, P.transform h i.castSucc ≤ P.inserted.center i) → ∃ H : CenterTower P h, (∃ e : (D.firstNew h).subscheme ≅ H.tower.level (Fin.last H.tower.length), e.hom ≫ H.terminalMap = (D.firstNew h).subschemeι) ∧ ∀ j : Fin H.tower.length, ∃ e : (H.tower.center j).subscheme ≅ (P.inserted.center (Fin.cast H.length_eq j)).subscheme, e.hom ≫ (P.inserted.center (Fin.cast H.length_eq j)).subschemeι = (H.tower.center j).subschemeι ≫ H.map j.castSucc)) ∧ (∀ i : Fin D.suffix.length, IsReduced (P.old.center (shiftCenter P.old.length P.position.val D.suffix.length D.length_eq i)).subscheme → IsReduced (D.suffix.center i).subscheme) ∧ (∀ (i : Fin D.suffix.length) (e : ℕ), PureImageCodimension ((P.old.center (shiftCenter P.old.length P.position.val D.suffix.length D.length_eq i)).subschemeι ≫ P.old.toBase (shiftLevel P.old.length P.position.val D.suffix.length D.length_eq i.castSucc)) e → DenseAboveGenericImage ((P.old.center (shiftCenter P.old.length P.position.val D.suffix.length D.length_eq i)).subschemeι ≫ P.old.toBase (shiftLevel P.old.length P.position.val D.suffix.length D.length_eq i.castSucc)) → Set.range ((D.suffix.center i).subschemeι ≫ D.suffix.toBase i.castSucc ≫ P.inserted.toBase (Fin.last P.inserted.length) ≫ P.old.toBase P.position) = Set.range ((P.old.center (shiftCenter P.old.length P.position.val D.suffix.length D.length_eq i)).subschemeι ≫ P.old.toBase (shiftLevel P.old.length P.position.val D.suffix.length D.length_eq i.castSucc)) ∧ PureImageCodimension ((D.suffix.center i).subschemeι ≫ D.suffix.toBase i.castSucc ≫ P.inserted.toBase (Fin.last P.inserted.length) ≫ P.old.toBase P.position) e ∧ DenseAboveGenericImage ((D.suffix.center i).subschemeι ≫ D.suffix.toBase i.castSucc ≫ P.inserted.toBase (Fin.last P.inserted.length) ≫ P.old.toBase P.position)) ∧ (∀ (Y : Scheme.{u}) [IsNoetherian Y] (f : Y ⟶ X) [Flat f], ∃ Q : OrdinaryBlowupInsertion.Input Y, Nonempty (InputPullback f P Q)) ∧ (∀ (Y : Scheme.{u}) [IsNoetherian Y] (f : Y ⟶ X) [Flat f] (Q : OrdinaryBlowupInsertion.Input Y) (b : InputPullback f P Q), ∀ E : OrdinaryBlowupInsertion.Diagram Q, Nonempty (TowerPullback b.terminalMap D.suffix E.suffix))",
+  "branch": "newtargets-dag",
+  "by": "Q106",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5a301e450",
+  "group": "Q106",
+  "result": "pass",
+  "note": "Read item node (only lean + stmt_deps added vs side-live: new def-per-blowup-sequence-insertion-data and landed def-trf-ordinary-resolution-rule owning OrdinaryBlowupTower), new data node/module and item module, report (Worker report + Second reading present), dep declarations (OrdinaryBlowupTower, strictTransform/strictTransformMap U-relative per live dep statement, Mathlib IdealSheafData.comap = extended ideal, IsNoetherian). All clauses match: Input fields (Noetherian/coherent towers, Fin(n+1) position, closure = ker of restriction to (C_i)_U, supported centers); ∃ Diagram with kernel closure centers and over-U level/transition isos; uniqueness Nonempty∧Subsingleton SuffixIso (true: blowup composites are monos); m<n first center = U-relative strict transform; CenterTower iterated-blowup clause with correct ideal order; reduced, image/pure codimension/density preservation; uncontracted flat base change with persisted hypotheses. Edge cases n=0, m=n, length-0 g, U=∅/X, empty fibres ok; single universe; statement verbatim; no hollow defs, no proofs beyond sorry, docstrings/source ok; no name clash in side-live. Advisory: restricted-centers-over-U equality not a separate conjunct (follows from center_eq via 081I); Diagram noetherian/coherent also constrain E (automatic). No compile run (no file changed)."
+ }
+}

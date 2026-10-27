@@ -1,0 +1,248 @@
+{
+ "id": "lem-sp-tower-chern-pullback",
+ "kind": "statement",
+ "title": "Pullback naturality of the Kummer Chern morphism in coefficient towers",
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ [def-weil-l-adic-coefficient-extension]. Let $f:X\\to Y$ be any morphism of schemes on which $\\ell$ is invertible, and let $L$ be an invertible $\\mathcal O_Y$-module [def-sc-invertible-module]. Put $B_n=\\mathcal O_E/\\ell^n$ and $A_T=((B_n)_T)_{n\\geq1}$, with quotient transitions, on the small pro-etale site of $T=X,Y$. Use the varying-coefficient tower categories [sk-def-sp-coefficient-towers, det-sp-coefficient-towers-abelian] and their ordinary derived categories, and the exact tower inverse-image functor $f_\\bullet^*$ [lem-coef-semilinear-derived-sections]. Let $c_1(L):A_Y\\to A_Y(1)[2]$ and $c_1(f^*L):A_X\\to A_X(1)[2]$ be the coefficient-linear Kummer Chern morphisms constructed in [det-sp-tower-classes](2), using the same connecting-morphism sign convention. Let $\\theta_f^0:f_\\bullet^*A_Y\\xrightarrow{\\sim}A_X$ be the coefficient-unit identification. Let $\\theta_f^1:f_\\bullet^*A_Y(1)\\xrightarrow{\\sim}A_X(1)$ be induced by the roots-of-unity pullback maps and the coefficient-unit maps of [det-prop-sfb-cartesian-coefficients-twists], with transitions $z\\otimes a\\mapsto z^\\ell\\otimes\\bar a$. Then, with the canonical shift comparison understood,\n$$\\theta_f^1[2]\\circ f_\\bullet^*(c_1(L))=c_1(f^*L)\\circ\\theta_f^0$$\nin $D(\\operatorname{Tow}(X,\\mathcal O_E))$. This is equality of the actual tower-derived morphisms, without a Noetherian, finite-type or flatness hypothesis on $f$.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "Paragraph (2), Kummer connecting class and its coefficient-linear realization; agent-formulated geometric naturality of that construction, needed by the base-change-of-trace sentence in det-sp-tower-p1-adjunction"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-sc-invertible-module",
+  "sk-def-sp-coefficient-towers",
+  "det-sp-coefficient-towers-abelian",
+  "lem-coef-semilinear-derived-sections",
+  "det-sp-tower-classes",
+  "det-prop-sfb-cartesian-coefficients-twists"
+ ],
+ "proof": [
+  {
+   "text": "Factor firstChern as s_T inverse followed by H_T(lambda_L) and t_T, by unfolding firstChernR and firstChern and functoriality of scalar extension. Apply the natural comparison eta of [lem-sp-tower-chern-realization-pullback] to lambda_L. Its naturality gives P(H_Y(lambda_L)) eta_G = eta_Z H_X(F(lambda_L)).",
+   "uses": [
+    "lem-sp-tower-chern-realization-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "Paragraph (2), Kummer connecting class and its coefficient-linear realization; agent-formulated geometric naturality of that construction, needed by the base-change-of-trace sentence in det-sp-tower-p1-adjunction"
+   }
+  },
+  {
+   "text": "Substitute F(lambda_L) a = z lambda_(f*L) from [lem-sp-tower-integral-class-pullback]. The target equation of [lem-sp-tower-chern-realization-pullback] replaces P(t_Y) followed by shift and theta_1 with eta_G H_X(a) t_X. Functoriality combines H_X(F(lambda_L)) H_X(a) and then separates H_X(z) H_X(lambda_(f*L)).",
+   "uses": [
+    "lem-sp-tower-integral-class-pullback",
+    "lem-sp-tower-chern-realization-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "Paragraph (2), Kummer connecting class and its coefficient-linear realization; agent-formulated geometric naturality of that construction, needed by the base-change-of-trace sentence in det-sp-tower-p1-adjunction"
+   }
+  },
+  {
+   "text": "The source equation eta_Z H_X(z) s_X = P(s_Y) theta_0, composed on the left with P(s_Y inverse) and on the right with s_X inverse, cancels the two unit isomorphisms. Postcompose with H_X(lambda_(f*L)) t_X and use the factorization of firstChern. This is the required equality with the specified canonical shift comparison.",
+   "uses": [
+    "lem-sp-tower-chern-realization-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "Paragraph (2), Kummer connecting class and its coefficient-linear realization; agent-formulated geometric naturality of that construction, needed by the base-change-of-trace sentence in det-sp-tower-p1-adjunction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-tower-integral-class-pullback",
+  "lem-sp-tower-chern-realization-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "Paragraph (2); assembly by naturality of coefficient realization and integral line-bundle class pullback, preserving the former seven-step route in the two intermediate nodes"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "chern|Chern|kummer|Kummer",
+   "results": "No hits. (Mathlib/AlgebraicGeometry/ searched.)",
+   "date": "2026-10-24",
+   "verdict": "no match: no such declarations in Mathlib/AlgebraicGeometry."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Chern\"",
+   "results": "Lean.Meta.MatcherApp.matcherName, Lean.Meta.Match.MkMatcherInput.matcherName",
+   "date": "2026-10-24",
+   "verdict": "no match: the two matcherName substring hits are unrelated to Chern classes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality under inverse image of the Kummer connecting morphism and first Chern class of a line bundle for torsion coefficient systems",
+   "results": "AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality, CategoryTheory.MorphismProperty.naturalityProperty.stableUnderInverse, CategoryTheory.ShortComplex.mapHomologyIso_inv_naturality_assoc, SheafOfModules.pushforwardNatIso_inv, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.inv_naturality, ChainComplex.isoHomologyι₀_inv_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CochainComplex.isoHomologyπ₀_inv_naturality",
+   "date": "2026-10-24",
+   "verdict": "no match: generic homology naturality and sheaf pushforward comparisons do not state the tower Kummer class assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kummer first Chern classes of line bundles commute with scheme pullback as morphisms in derived categories of inverse systems of torsion module sheaves",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_l, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc, AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme structure-module pullback and its composition laws do not state naturality of Kummer Chern morphisms in varying-coefficient towers."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Chern\"",
+   "results": "Lean.Meta.MatcherApp.matcherName, Lean.Meta.Match.MkMatcherInput.matcherName",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary module pullback, presentations, sheaf cohomology or matcher names, not Kummer Chern morphisms in varying-coefficient towers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kummer first Chern class of a line bundle commutes with pullback in derived categories of coefficient towers",
+   "results": "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, AlgebraicGeometry.Scheme.Modules.pullbackComp, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_assoc",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary module pullback, presentations, sheaf cohomology or matcher names, not Kummer Chern morphisms in varying-coefficient towers."
+  },
+  {
+   "tool": "grep",
+   "query": "chern|Chern|kummer|Kummer",
+   "results": "No hits. Directory: Mathlib/AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary module pullback, presentations, sheaf cohomology or matcher names, not Kummer Chern morphisms in varying-coefficient towers."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of first Chern morphisms of line bundles under geometric inverse image of module sheaves",
+   "results": "PresheafOfModules.naturality_apply, PresheafOfModules.Hom.naturality, SheafOfModules.pushforwardNatIso_inv, SheafOfModules.pushforwardNatTrans_app_val_app_apply, exteriorPower.oneEquiv_naturality, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.inv_naturality_assoc, SheafOfModules.unitToPushforwardObjUnit, CategoryTheory.ShortComplex.SnakeInput.naturality_φ₁_assoc",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary module pullback, presentations, sheaf cohomology or matcher names, not Kummer Chern morphisms in varying-coefficient towers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of coefficients applied to the line bundle extension class commutes with inverse image on whole inverse systems of module sheaves",
+   "results": "SheafOfModules.Presentation.map_π_eq, localCohomology.diagram, ModuleCat.Tilde.res_apply, ModuleCat.Tilde.toOpen_res, SheafOfModules.Presentation.mapGenerators, PresheafOfModules.Derivation.d_map, CategoryTheory.Sheaf.H, ModuleCat.Tilde.res_const",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary module pullback, presentations, sheaf cohomology or matcher names, not Kummer Chern morphisms in varying-coefficient towers."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-tower-p1-kernel-scalar-normalization",
+  "date": "2026-10-24",
+  "group": "Q107"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-tower-p1-adjunction",
+   "place": "Reduction of the triangle identities: the trace of the projective line p_i is the base change of q; naturality of the hyperplane Chern component used to compare the splitting maps",
+   "via": [
+    "lem-sp-tower-p1-kernel-scalar-normalization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sp-tower-chern-pullback",
+  "worker": "stage1",
+  "summary": "Q74 preserves the statement and gives seven steps using existing nodes only. Constructed the pullback morphism of line-bundle extensions explicitly; transported it by unit-normalized scalar extension in whole strict diagrams; checked the target on the simultaneous two-term coefficient resolution, including the cone sign and actual transitions; then extended to O_E/ell^n. No new nodes, no finite-level faithfulness claim, no extra hypotheses.",
+  "blueprint": "Expands classes proof (1)-(2) in the same unit and supplies geometric naturality needed in the first paragraph of det-sp-tower-p1-adjunction: the projective-line traces along p_i are base changes of q.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Exact inverse image and module derived categories of whole varying-ring systems, used as categorical infrastructure. No statement of the tower-geometric unit supplies this generic fact."
+   },
+   {
+    "node": "det-prop-sfb-cartesian-coefficients-twists",
+    "why": "Root and coefficient inverse-image identifications compatible with Kummer transitions; no purity theorem is used. No statement of the tower-geometric unit supplies this generic fact."
+   },
+   {
+    "node": "lem-sc-line-bundle-torsor",
+    "why": "Identifies the explicit frame torsor on Zariski trivializations with its invertible module. No statement of the tower-geometric unit supplies this generic fact."
+   },
+   {
+    "node": "lem-sc-torsor-h1",
+    "why": "Its named Zariski torsor extension determines the integral class and its sign. No statement of the tower-geometric unit supplies this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-ext-one-extension-classification",
+    "why": "Interprets the explicit short exact extension as a derived morphism. No statement of the tower-geometric unit supplies this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-ses-triangle-image",
+    "why": "Exact inverse image preserves the specified signed extension boundary. No statement of the tower-geometric unit supplies this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-triangle",
+    "why": "Naturality of that boundary for the explicit morphism of pulled and target extensions. No statement of the tower-geometric unit supplies this generic fact."
+   },
+   {
+    "node": "lem-pur-algebra-diagram-pullback-extension-coherence",
+    "why": "The unit-normalized scalar/inverse-image comparison on whole strict diagrams, used for Z to R and Z to A. No statement of the tower-geometric unit supplies this generic fact."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "K-flat computation of derived scalar extension in the system topos. No statement of the tower-geometric unit supplies this generic fact."
+   },
+   {
+    "node": "lem-sf-derived-concentrated-single",
+    "why": "Identifies the one-cohomology target of the two-term coefficient reduction. No statement of the tower-geometric unit supplies this generic fact."
+   },
+   {
+    "node": "lem-pur-torsion-sheaf-constant-module",
+    "why": "Uniqueness of the levelwise torsion module action in the root cohomology computation. No statement of the tower-geometric unit supplies this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-derived-single-fully-faithful",
+    "why": "Detects equality between shifted degree-zero systems inside the derived category of modules. No statement of the tower-geometric unit supplies this generic fact."
+   },
+   {
+    "node": "lem-sfb-successive-derived-quotient-normalization",
+    "why": "Compares direct and successive derived extension and their units on the system site. No statement of the tower-geometric unit supplies this generic fact."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-504ba795c",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-504ba795c (reviewer sub-agent of L); spot-checked: Read the item in full, all 17 cited statements, the det-sp-tower-classes proof (steps 1-9) and the blueprint classes proof (1)-(4). There are no new nodes. The statement and stmt_deps are byte-identical to live and side-live (both unsplit); no repair note exists. Step 2: rechecked the gluing direction by hand (u_a=g_ab u_b, fibre over m=1 is Isom(O,L)), so the extension is the E_T of lem-sc-torsor-h1 / Stacks 03AJ and is the same as det-sp-tower-classes step 2. Step 3: pulled-back extension map (u,m)->(a(u),m) is natural via the exact-functor triangle node and the complex-ses-triangle node; no flatness of f is used. Step 4: hypotheses of lem-pur-algebra-diagram-pullback-extension-coherence checked (J=N^op small, base Z, varying quotient algebras, no flatness needed); unit normalization and compatibility with R->A hold. Step 5: Q_n=[Z->Z] with transition (ell,1) is K-flat; recomputed the homotopy h^0=1_M, which gives j^{-1}b=-pv^{-1} with the transitions respected, matching det-sp-tower-classes steps 4 and 6. Step 6: (a,a) is a chain map restricting to r on kernels. Step 7: wrote out the composite r[2]F_R(c1^R(L))=c1^R(f^*L)theta^0_R; extension to O_E/ell^n uses successive normalization and the flat root tower (tate-twist-locally-free(1)), giving theta^1. Edge cases (trivial L, f=id, empty X, n=1, ramified E) are fine. The declared tool_uses are all generic and accepted. Batch-5 finding: lem-trf-geometric-inverse-image-exact (reached through the scalar-coherence lemma) only states that the inverse image of a geometric morphism is exact on abelian and module sheaves. That is a general topos fact, not given by and not part of the proof of the trace formula or Poincare duality, so it is accepted. No SGA citation. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TowerChernPullback",
+  "declaration": "AlgebraicGeometry.ProEtale.tower_firstChern_pullback",
+  "file": "lean/Sheaf/Paper/TowerChernPullback.lean",
+  "statement": "theorem tower_firstChern_pullback (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] {X Y : Scheme.{u}} (f : X ⟶ Y) (_hX : IsUnit (l : Γ(X, ⊤))) (_hY : IsUnit (l : Γ(Y, ⊤))) (b : SpTowerShriek.Base l E) (g : SpTowerShriek.Geometry l E b f) (cY : Chern l E Y) (cX : Chern l E X) (_nY : cY.Normalized l E) (_nX : cX.Normalized l E) (θ₀ : CoefficientPullback l E b f g) (θ₁ : LinePullback l E f g cY cX) (L : Y.Modules) [Scheme.Modules.IsInvertible L] : (SpTowerShriek.pull l E b g).map (firstChern l E cY (Scheme.Pic.ofIsInvertible L)) ≫ ((SpTowerShriek.pull l E b g).commShiftIso (2 : ℤ)).hom.app (line l E cY) ≫ ((θ₁.derivedIso l E).hom)⟦(2 : ℤ)⟧' = (θ₀.derivedIso l E).hom ≫ firstChern l E cX (Scheme.Pic.ofIsInvertible ((Scheme.Modules.pullback f).obj L))",
+  "branch": "newtargets-dag",
+  "by": "Q60",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3a9f202bb",
+  "group": "Q60",
+  "result": "pass",
+  "note": "Read item, 7 stmt_dep records (identical to side-live; item differs only in lean), module, report, the TowerClasses/Chern/Reduction/Kummer/CoefficientPullback/LinePullback/SpTowerShriek Geometry sources, Invertible/Pic. Each clause checked: arbitrary f, both ℓ-invertibility hyps, no flat/finite/Noetherian; firstChern of Pic.ofIsInvertible L and of the pullback of L, with Normalized pinning unitIso/rootIso (singleδ sign)/scalarUnit; θ0 pinned by the levelwise adjoint = constant direct-image map; θ1 pinned on pure tensors via restrictRoot+lineEvaluation ∃!; commShiftIso 2 shift; orientation θ1[2]∘f*c1 = c1(f*L)∘θ0 type-checked by hand; literal equality in D(X) on whole systems. statement verbatim; sorry only; docstrings with source/blueprint and 7 steps; ≤100 cols; no live module. Not compiled (no fixes); worker's clean 43.7/16.9 s accepted. Advisories: owners of Chern/CoefficientPullback/LinePullback/SpTowerShriek are not in stmt_deps (reached via the det-sp-tower-classes re-export); cartesian-twists decls unused directly; the second reading is a self-check."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261025T142755-L-759893",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -120,4 +120,7 @@ def main(root):
     subprocess.run([sys.executable, str(root / "tools/claim.py"), "release", args.group, args.node,
                     "stage-2 attachment at " + head], check=True, cwd=root)
     print("ATTACHED " + args.node + " at " + head, flush=True)
+    # the human, 2026-10-25: the attached node leaves the queue at once (tools/queue_mark.py done)
+    subprocess.run([sys.executable, str(root / "tools/queue_mark.py"), "done", "-", args.node, "--note", "attached " + head],
+                   cwd=root, capture_output=True, timeout=60)
     return 0   # 2026-10-19: one repository; nothing to promote

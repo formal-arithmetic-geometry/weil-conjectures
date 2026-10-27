@@ -76,13 +76,14 @@
    "AlgebraicGeometry.Etale.scalarSheafPullbackIso",
    "AlgebraicGeometry.Etale.scalarSheafPullbackComplexIso",
    "AlgebraicGeometry.Etale.scalarGeometricRepresentative",
-   "AlgebraicGeometry.Etale.scalarCoefficientPullbackIso"
+   "AlgebraicGeometry.Etale.scalarCoefficientPullbackIso",
+   "AlgebraicGeometry.Etale.exactSingleCoefficientIso"
   ],
   "statement": "def scalarSheafPullbackIso\n    {A B : Type (u + 1)} [CommRing A] [CommRing B]\n    (φ : A →+* B) {Z W : Scheme.{u}} (f : Z ⟶ W) :\n    ProEtale.etaleSheafExtendScalars φ W ⋙ upperStar (ModuleCat.{u + 1} B) f ≅\n      upperStar (ModuleCat.{u + 1} A) f ⋙ ProEtale.etaleSheafExtendScalars φ Z",
   "branch": "sheaf-dag",
   "by": "R3",
   "date": "2026-10-21",
-  "note": "Existing definitions moved verbatim from PurEtaleScalarMateProjection and publicly reexported there. No signature or value changes."
+  "note": "Existing definitions moved verbatim from PurEtaleScalarMateProjection and publicly reexported there. Public signatures are unchanged. T7 preserves the geometric counit construction verbatim and adds proved private representative equations and a generic exact-derived restriction-square identity. T7 names the identical categorical single-coefficient composite exactSingleCoefficientIso and applies it in scalarCoefficientPullbackIso, preserving its value after unfolding. This avoids repeating typeclass elaboration of the monoidal coefficient square."
  },
  "reviewed": {
   "date": "2026-10-20",
@@ -95,14 +96,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-26",
   "by": "L",
-  "reviewer": "C-0453a",
-  "group": "R3",
+  "reviewer": "C-160a9",
+  "group": "A4",
   "result": "pass",
-  "landing": "20261020T233217-L-906112",
+  "landing": "20261026T000911-L-4147139",
   "kind": "interface",
-  "note": "independent cc review: Delivered item, data and normalization modules plus their node files, matched against the live clone: moved defs diffed byte-identical; all 6 direct importers compiled against the delivery (AcyclicFlatProperCoefficientModel only with the live EtaleDerivedScalarTensor, since it fails the same way against the published build); new sorry statement checked against the canonical definitions it uses"
+  "note": "independent cc review: delivered files vs b8b6a6cb2792 delivery (Lean and node JSONs byte-identical; only report/change-record retry note) and vs live 9176a4f74a2 (no touched file changed since; all imports exist); axioms clean; 8 delivered modules built in sandbox; 53 direct importers compiled: 45 pass incl. EtaleOpenScalarCoherence, 1 pre-existing missing-olean failure, 7 over 60 s with no error and equally slow against the published build"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

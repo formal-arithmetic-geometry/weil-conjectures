@@ -122,7 +122,32 @@
   "item": "lem-weil-pbc-popescu-lifting",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "KaehlerDifferential.exists_polynomial_extension_equiv"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "KaehlerDifferential.exists_polynomial_extension_equiv",
+     "module": "WeilConjectures.RingTheory.KaehlerDifferentialsPolynomialExtension",
+     "lines": [
+      36,
+      110
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
@@ -165,5 +190,47 @@
   "landing": "20261012T184353-L-4023367",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $R\\to A$ be a homomorphism of commutative rings, $e\\ge0$ and $B=A[z_1,\\dots,z_e]$ the polynomial ring, an $R$-algebra via $R\\to A\\to B$. Then the $B$-linear map $(B\\otimes_A\\Omega_{A/R})\\oplus B^{e}\\to\\Omega_{B/R}$, $(b\\otimes\\mathrm d\\alpha,(b_1,\\dots,b_e))\\mapsto b\\,\\mathrm d\\alpha+\\sum_jb_j\\,\\mathrm dz_j$, is an isomorphism. In particular, if $\\Omega_{A/R}$ is a free $A$-module of rank $d$, then $\\Omega_{B/R}$ is a free $B$-module of rank $d+e$.",
+  "proof": [
+   {
+    "text": "(Notation and the two maps.) Write $P=R[z_1,\\dots,z_e]$ and let $u:B\\otimes_A\\Omega_{A/R}\\to\\Omega_{B/R}$, $u(b\\otimes\\mathrm d\\alpha)=b\\,\\mathrm d\\alpha$, and $v:\\Omega_{B/R}\\to\\Omega_{B/A}$, $v(b\\,\\mathrm d_{B/R}\\beta)=b\\,\\mathrm d_{B/A}\\beta$, be the $B$-linear maps of the first fundamental exact sequence $B\\otimes_A\\Omega_{A/R}\\xrightarrow{u}\\Omega_{B/R}\\xrightarrow{v}\\Omega_{B/A}\\to0$ for the ring maps $R\\to A\\to B$ (constants $A\\subset B=A[z_1,\\dots,z_e]$); that sequence says $v$ is surjective and $\\ker v=\\operatorname{im}u$. Let $s:B^e\\to\\Omega_{B/R}$, $s(b_1,\\dots,b_e)=\\sum_jb_j\\,\\mathrm dz_j$. The map $\\varphi$ of the statement is $\\varphi(x,b)=u(x)+s(b)$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "($\\Omega_{B/A}$ is free on the $\\mathrm dz_j$.) The module of differentials of a polynomial ring is free on the differentials of the variables; with base ring $A$, $\\Omega_{B/A}$ is a free $B$-module with basis $\\mathrm d_{B/A}z_1,\\dots,\\mathrm d_{B/A}z_e$. Since $v(s(b))=\\sum_jb_j\\,\\mathrm d_{B/A}z_j$, the composite $v\\circ s:B^e\\to\\Omega_{B/A}$ is the isomorphism sending the $j$-th standard basis vector to $\\mathrm d_{B/A}z_j$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "($\\varphi$ is surjective, and $\\varphi$ is injective as soon as $u$ is.) Surjective: given $\\omega\\in\\Omega_{B/R}$ put $b=(v\\circ s)^{-1}(v(\\omega))\\in B^e$ (Step 2); then $v(\\omega-s(b))=0$, so $\\omega-s(b)=u(x)$ for some $x\\in B\\otimes_A\\Omega_{A/R}$ because $\\ker v=\\operatorname{im}u$ (Step 1), and $\\omega=\\varphi(x,b)$. Injective: if $u(x)+s(b)=0$, apply $v$: since $v\\circ u=0$ (as $\\operatorname{im}u=\\ker v$) we get $(v\\circ s)(b)=0$, so $b=0$ by Step 2, and then $u(x)=0$; so if $u$ is injective, $x=0$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "($B$ as a base change of $A$ along $R\\to P$.) Polynomial rings commute with base change: the map $A\\otimes_RP\\to B$, $a\\otimes p\\mapsto a\\cdot\\bar p$ ($\\bar p$ the image of $p$ under the coefficient map $R\\to A$) is an isomorphism of rings, sending $a\\otimes1\\mapsto a$ and $1\\otimes z_j\\mapsto z_j$. Transporting along it, the base-change property of Kähler differentials (for $R\\to P$ and $R\\to A$, $\\Omega_{(P\\otimes_RA)/P}\\cong P\\otimes_R\\Omega_{A/R}$, with $P\\otimes_RA\\cong B$) gives an isomorphism of $B$-modules $\\mu:B\\otimes_A\\Omega_{A/R}\\xrightarrow{\\ \\sim\\ }\\Omega_{B/P}$, where $B$ is a $P$-algebra via $p\\mapsto\\bar p$ (i.e. $z_j\\mapsto z_j$), with $\\mu(1\\otimes\\mathrm d\\alpha)=\\mathrm d_{B/P}\\alpha$ for $\\alpha\\in A$ (the base-change isomorphism sends $p\\otimes\\mathrm d\\alpha$ to $p\\,\\mathrm d(1\\otimes\\alpha)$; here $B\\otimes_A\\Omega_{A/R}$ is identified with $P\\otimes_R\\Omega_{A/R}$, $b\\otimes\\omega$ corresponding to the $B$-multiple $b\\cdot(1\\otimes\\omega)$).",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "($u$ is injective.) The ring maps $R\\to P\\to B$ are a factorization of the structure map $R\\to A\\to B$ (constants of $R$ go to constants), so the first fundamental exact sequence for $R\\to P\\to B$ gives the $B$-linear map $c:\\Omega_{B/R}\\to\\Omega_{B/P}$, $c(b\\,\\mathrm d_{B/R}\\beta)=b\\,\\mathrm d_{B/P}\\beta$. The $B$-linear maps $c\\circ u$ and $\\mu$ (Step 4) agree on the elements $1\\otimes\\mathrm d\\alpha$, $\\alpha\\in A$: both give $\\mathrm d_{B/P}\\alpha$. These elements generate $B\\otimes_A\\Omega_{A/R}$ as a $B$-module (the $\\mathrm d\\alpha$ generate $\\Omega_{A/R}$ as an $A$-module by construction), so $c\\circ u=\\mu$, which is an isomorphism. Hence $u$ is injective (with left inverse $\\mu^{-1}\\circ c$), and by Step 3 $\\varphi$ is an isomorphism.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "(Free of rank $d+e$.) If $\\omega_1,\\dots,\\omega_d$ is a basis of the $A$-module $\\Omega_{A/R}$, then $\\Omega_{A/R}\\cong A^d$ and $B\\otimes_A\\Omega_{A/R}\\cong B\\otimes_AA^d\\cong B^d$ (tensor product commutes with finite direct sums and $B\\otimes_AA\\cong B$), with basis $1\\otimes\\omega_1,\\dots,1\\otimes\\omega_d$. By Step 5, $\\Omega_{B/R}\\cong B^d\\oplus B^e=B^{d+e}$, with basis $\\omega_1,\\dots,\\omega_d$ (images $u(1\\otimes\\omega_i)$) and $\\mathrm dz_1,\\dots,\\mathrm dz_e$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

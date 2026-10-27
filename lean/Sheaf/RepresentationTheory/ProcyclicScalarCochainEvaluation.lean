@@ -13,13 +13,18 @@ public import Mathlib.Analysis.Normed.Algebra.Basic
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Data.Fin.Tuple.Basic
-import Sheaf.RepresentationTheory.TopologicalHomogeneousCochainCoordinates
-import Mathlib.Analysis.Normed.Unbundled.SpectralNorm
+import Sheaf.RepresentationTheory.ContinuousProcyclicLowDegreeEvaluation
+import Sheaf.RepresentationTheory.CompleteProcyclicScalarPrimitives
+import Sheaf.RepresentationTheory.ContinuousScalarLocalQuasiIso
+import Sheaf.RepresentationTheory.ParameterCochainCompletionBoundaryDescent
+import Mathlib.Analysis.Normed.Module.FiniteDimension
+import Mathlib.NumberTheory.Padics.ProperSpace
+import Mathlib.Analysis.Normed.Field.Instances
+import Mathlib.Topology.MetricSpace.Ultra.TotallySeparated
 import Mathlib.Analysis.Normed.Module.Completion
-import Mathlib.Topology.ContinuousMap.Compact
-import Mathlib.Topology.CompactOpen
-import Mathlib.NumberTheory.Padics.MahlerBasis
-import Mathlib.Algebra.Homology.HomologySequence
+public import Mathlib.NumberTheory.Padics.PadicIntegers
+public import Mathlib.RingTheory.DedekindDomain.Basic
+public import Mathlib.RingTheory.Flat.TorsionFree
 
 /-! # Evaluation on the procyclic generator with continuous scalar coefficients
 
@@ -165,6 +170,155 @@ structure ProcyclicScalarCoefficientCompatibility (ell : ℕ) [Fact ell.Prime]
   square : (procyclicScalarUnderlying E).map D.epsilon ≫ kMap =
     uMap ≫ (procyclicScalarUnderlying F).map D'.epsilon
 
+private def procyclicScalarFieldPair (E Ω : Type u) : Bool → Type u
+  | false => E
+  | true => Ω
+
+@[reducible] private instance (E Ω : Type u) [NormedField E] [NormedField Ω] (b : Bool) :
+    NormedField (procyclicScalarFieldPair E Ω b) :=
+  Bool.rec (motive := fun b ↦ NormedField (procyclicScalarFieldPair E Ω b))
+    (inferInstance : NormedField E) (inferInstance : NormedField Ω) b
+
+private instance scalarSections_preservesZeroMorphisms (F : Type u) [NormedField F]
+    (S : Profinite.{u}) :
+    (sectionsFunctor (continuousScalarRing F) ⋙
+      SheafOfModules.evaluation _ (op S)).PreservesZeroMorphisms where
+  map_zero _ _ := rfl
+
+private theorem procyclicScalar_complete_local_primitives (ell : ℕ) [Fact ell.Prime]
+    (F : Type u) [NormedField F] [NormedAlgebra ℚ_[ell] F] [CompleteSpace F]
+    (D : ProcyclicScalarCochainEvaluation ell F) :
+    ∀ (n : ℕ) (S : Profinite.{u})
+      (x : sections (continuousScalarRing F) (D.U.X ((n + 2 : ℕ) : ℤ)) S),
+      (((D.U.d ((n + 2 : ℕ) : ℤ) ((n + 3 : ℕ) : ℤ)).hom.hom.app (op S)) x) = 0 →
+      ∃ (m : ℕ) (T : Fin m → Profinite.{u}) (a : ∀ j : Fin m, T j ⟶ S)
+        (y : ∀ j : Fin m,
+          sections (continuousScalarRing F) (D.U.X ((n + 1 : ℕ) : ℤ)) (T j)),
+        (∀ s : S, ∃ (j : Fin m) (t : T j), a j t = s) ∧
+        ∀ j : Fin m,
+          (((D.U.d ((n + 1 : ℕ) : ℤ) ((n + 2 : ℕ) : ℤ)).hom.hom.app (op (T j)))
+            (y j)) = (D.U.X ((n + 2 : ℕ) : ℤ)).X.obj.map (a j).op x := by
+  intro n S x hx
+  let z := D.uEval (n + 2) S x
+  have hz (s : S) (t : Fin (n + 3) → ℤ_[ell]) :
+      z (s, fun i ↦ t i.succ) +
+        ∑ i : Fin (n + 3), (-1 : ℤ) ^ (i.val + 1) •
+          z (s, Fin.contractNth i (· + ·) t) = 0 := by
+    rw [← D.differential (n + 2) S x s t]
+    simp only [hx, map_zero, ContinuousMap.zero_apply]
+  obtain ⟨b, hb⟩ := complete_procyclic_scalar_primitives ell F S n z hz
+  refine ⟨1, (fun _ ↦ S), (fun _ ↦ 𝟙 S),
+    (fun _ ↦ (D.uEval (n + 1) S).symm b), ?_, ?_⟩
+  · intro s
+    exact ⟨0, s, rfl⟩
+  · intro j
+    apply (D.uEval (n + 2) S).injective
+    ext p
+    rw [D.differential, D.uRestriction]
+    simpa only [AddEquiv.apply_symm_apply, CompHausLike.coe_id, id_eq] using hb p.1 p.2
+
+private theorem procyclicScalar_algcl_local_primitives (ell : ℕ) [Fact ell.Prime]
+    (Ω : Type u) [NormedField Ω] [NormedAlgebra ℚ_[ell] Ω] [IsAlgClosure ℚ_[ell] Ω]
+    (D : ProcyclicScalarCochainEvaluation ell Ω) :
+    ∀ (n : ℕ) (S : Profinite.{u})
+      (x : sections (continuousScalarRing Ω) (D.U.X ((n + 2 : ℕ) : ℤ)) S),
+      (((D.U.d ((n + 2 : ℕ) : ℤ) ((n + 3 : ℕ) : ℤ)).hom.hom.app (op S)) x) = 0 →
+      ∃ (m : ℕ) (T : Fin m → Profinite.{u}) (a : ∀ j : Fin m, T j ⟶ S)
+        (y : ∀ j : Fin m,
+          sections (continuousScalarRing Ω) (D.U.X ((n + 1 : ℕ) : ℤ)) (T j)),
+        (∀ s : S, ∃ (j : Fin m) (t : T j), a j t = s) ∧
+        ∀ j : Fin m,
+          (((D.U.d ((n + 1 : ℕ) : ℤ) ((n + 2 : ℕ) : ℤ)).hom.hom.app (op (T j)))
+            (y j)) = (D.U.X ((n + 2 : ℕ) : ℤ)).X.obj.map (a j).op x := by
+  intro n S x hx
+  let z := D.uEval (n + 2) S x
+  have hz (s : S) (t : Fin (n + 3) → ℤ_[ell]) :
+      z (s, fun i ↦ t i.succ) +
+        ∑ i : Fin (n + 3), (-1 : ℤ) ^ (i.val + 1) •
+          z (s, Fin.contractNth i (· + ·) t) = 0 := by
+    rw [← D.differential (n + 2) S x s t]
+    simp only [hx, map_zero, ContinuousMap.zero_apply]
+  let zB : C(S × (Fin (n + 2) → ℤ_[ell]), UniformSpace.Completion Ω) :=
+    ⟨fun p ↦ UniformSpace.Completion.coeRingHom (z p),
+      UniformSpace.Completion.continuous_coeRingHom.comp z.continuous⟩
+  have hzB (s : S) (t : Fin (n + 3) → ℤ_[ell]) :
+      zB (s, fun i ↦ t i.succ) +
+        ∑ i : Fin (n + 3), (-1 : ℤ) ^ (i.val + 1) •
+          zB (s, Fin.contractNth i (· + ·) t) = 0 := by
+    simpa only [zB, ContinuousMap.coe_mk, map_add, map_sum, map_zsmul, map_zero] using
+      congrArg (UniformSpace.Completion.coeRingHom : Ω →+* UniformSpace.Completion Ω)
+        (hz s t)
+  obtain ⟨bB, hbB⟩ :=
+    complete_procyclic_scalar_primitives ell (UniformSpace.Completion Ω) S n zB hzB
+  let G := ProfiniteGrp.of (Multiplicative ℤ_[ell])
+  obtain ⟨m, T, a, b, hcover, hb⟩ :=
+    parameter_cochain_completion_boundary_descent ell Ω G S (n + 1) z hz ⟨bB, hbB⟩
+  refine ⟨m, T, (fun j ↦ CompHausLike.ofHom _ (a j)),
+    (fun j ↦ (D.uEval (n + 1) (T j)).symm (b j)), hcover, ?_⟩
+  intro j
+  apply (D.uEval (n + 2) (T j)).injective
+  ext p
+  rw [D.differential, D.uRestriction]
+  simp only [AddEquiv.apply_symm_apply, CompHausLike.hom_ofHom]
+  convert! hb j p.1 p.2 using 1
+
+private theorem exists_procyclicScalar_low_data (ell : ℕ) [Fact ell.Prime]
+    (Ω : Type u) [NormedField Ω] [NormedAlgebra ℚ_[ell] Ω]
+    (E : IntermediateField ℚ_[ell] Ω) :
+    ∃ (D : ProcyclicScalarCochainEvaluation ell E)
+      (D' : ProcyclicScalarCochainEvaluation ell Ω),
+    (∀ (S : Profinite.{u}) (i : ℤ), i = 0 ∨ i = 1 →
+      IsIso ((HomologicalComplex.homologyFunctor _ (ComplexShape.up ℤ) i).map
+        (((sectionsFunctor (continuousScalarRing E) ⋙
+          SheafOfModules.evaluation _ (op S)).mapHomologicalComplex
+            (ComplexShape.up ℤ)).map D.epsilon))) ∧
+    (∀ (S : Profinite.{u}) (i : ℤ), i = 0 ∨ i = 1 →
+      IsIso ((HomologicalComplex.homologyFunctor _ (ComplexShape.up ℤ) i).map
+        (((sectionsFunctor (continuousScalarRing Ω) ⋙
+          SheafOfModules.evaluation _ (op S)).mapHomologicalComplex
+            (ComplexShape.up ℤ)).map D'.epsilon))) ∧
+      Nonempty (ProcyclicScalarCoefficientCompatibility ell E Ω E.subtype D D') := by
+  let F := procyclicScalarFieldPair E Ω
+  let iota : ∀ b : Bool, ℚ_[ell] →+* F b := fun b ↦ by
+    cases b
+    · exact algebraMap ℚ_[ell] E
+    · exact algebraMap ℚ_[ell] Ω
+  have hiota : ∀ b : Bool, Isometry (iota b) := by
+    intro b
+    cases b
+    · exact algebraMap_isometry ℚ_[ell] E
+    · exact algebraMap_isometry ℚ_[ell] Ω
+  obtain ⟨U, K, e, k, epsilon, h, uMap, kMap, huMap, hkMap, hsquare⟩ :=
+    exists_continuousProcyclicLowDegreeEvaluation ell F iota hiota
+      E.subtype continuous_subtype_val (by ext; rfl)
+  let D (b : Bool) : ProcyclicScalarCochainEvaluation ell (F b) :=
+    { U := U b
+      K := K b
+      uEval := e b
+      kEval := k b
+      uNegative := (h b).1
+      kOutside := (h b).2.1
+      uZero := (h b).2.2.1
+      kZero := (h b).2.2.2.1
+      uScalar := (h b).2.2.2.2.1
+      kScalar := (h b).2.2.2.2.2.1
+      uRestriction := (h b).2.2.2.2.2.2.1
+      kRestriction := (h b).2.2.2.2.2.2.2.1
+      differential := (h b).2.2.2.2.2.2.2.2.1
+      epsilon := epsilon b
+      epsilonZero := (h b).2.2.2.2.2.2.2.2.2.1
+      epsilonOne := (h b).2.2.2.2.2.2.2.2.2.2.1
+      epsilonOutside := (h b).2.2.2.2.2.2.2.2.2.2.2.1 }
+  have hLow (b : Bool) := (h b).2.2.2.2.2.2.2.2.2.2.2.2.2
+  refine ⟨D false, D true, ?_, ?_, ?_⟩
+  · exact hLow false
+  · exact hLow true
+  exact ⟨{ uMap := uMap
+           kMap := kMap
+           uFormula := huMap
+           kFormula := hkMap
+           square := hsquare }⟩
+
 /-- Evaluation on the generator is a quasi-isomorphism of the specified function-sheaf
 complexes, for both a finite intermediate field and the norm-topological algebraic closure,
 compatibly with their inclusion. The conclusion uses ordinary kernel/image cohomology
@@ -276,6 +430,23 @@ theorem exists_procyclicScalarCochainEvaluation (ell : ℕ) [Fact ell.Prime]
           (procyclicScalarLocalization Ω).obj D'.K //
             e.hom = (procyclicScalarLocalization Ω).map D'.epsilon} ∧
         Nonempty (ProcyclicScalarCoefficientCompatibility ell E Ω E.subtype D D') := by
-  sorry
+  obtain ⟨D, D', hLow, hLow', hcompat⟩ := exists_procyclicScalar_low_data ell Ω E
+  have hE : QuasiIso D.epsilon := by
+    let : CompleteSpace E := FiniteDimensional.complete ℚ_[ell] E
+    exact continuousScalar_quasiIso_of_local_primitives E D.U D.K
+      D.epsilon D.uNegative D.kOutside hLow
+      (procyclicScalar_complete_local_primitives ell E D)
+  have hΩ : QuasiIso D'.epsilon :=
+    continuousScalar_quasiIso_of_local_primitives Ω D'.U D'.K
+      D'.epsilon D'.uNegative D'.kOutside hLow'
+      (procyclicScalar_algcl_local_primitives ell Ω D')
+  refine ⟨D, D', hE, hΩ, ?_, ?_, ?_⟩
+  · let := HasDerivedCategory.standard (Modules (continuousScalarRing E))
+    let : QuasiIso D.epsilon := hE
+    exact ⟨⟨asIso (DerivedCategory.Q.map D.epsilon), rfl⟩⟩
+  · let := HasDerivedCategory.standard (Modules (continuousScalarRing Ω))
+    let : QuasiIso D'.epsilon := hΩ
+    exact ⟨⟨asIso (DerivedCategory.Q.map D'.epsilon), rfl⟩⟩
+  · exact hcompat
 
 end ContinuousCohomology

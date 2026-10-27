@@ -1,0 +1,118 @@
+{
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Section 5, Lemmas 5.13 and 5.22, Constructions 5.15 and 5.20, Proposition 5.24; original refinement proof steps 1--8."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Section 5, Lemmas 5.13 and 5.22, Constructions 5.15 and 5.20, Proposition 5.24; original refinement proof steps 1--8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized left compactification refinement comparisons commute with coefficient localization common finite field inclusions and shifts",
+   "results": "OK 8 hits, including CategoryTheory.NatTrans.commShift_iso_hom_of_localization; remaining hits concern algebraic normalization.",
+   "date": "2026-10-27",
+   "verdict": "No normalized geometric left refinement or strict-system realization statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural isomorphism of left adjoints induces conjugate natural isomorphism of right adjoints commuting with unit counit and shifts",
+   "results": "OK 8 hits including CategoryTheory.Adjunction.RightAdjointCommShift.iso and LeftAdjointCommShift.iso; adjunction shift component formulas.",
+   "date": "2026-10-27",
+   "verdict": "Generic mate and shift tools apply to the proved assembly, but do not construct the geometric comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "compactification.*refinement|refinement.*compactification",
+   "results": "OK 0 hits.",
+   "date": "2026-10-27",
+   "verdict": "No Mathlib geometric refinement construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalRefinementMates",
+  "date": "2026-10-27",
+  "group": "Z6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Normalized exceptional refinement construction, retained steps 20--21; original refinement proof steps 1--8.",
+   "via": [
+    "lem-sf-exceptional-refinement-mates",
+    "lem-sf-constructible-exceptional-coefficient-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "id": "def-sf-exceptional-refinement-transport-data",
+ "kind": "definition",
+ "title": "Prescribed exceptional transports with their actual cross-field action",
+ "statement": "Fix a prime l, an algebraic closure Omega of Q_l in an independent universe, a finite-field datum D of characteristic p different from l, finite-type k-schemes X,Y and a separated finite-type k-map f. For a compactification c, Transport records the given exact adjunctions at finite, integral, rational and closed coefficient stages, their shift-compatible ambient left realizations, and their normalized integral, localization and common-field comparisons. It also records the integral compact-support scalar isomorphisms between common finite fields normalized by the actual whole-system map sfCompactSupportScalarSystemMap, their raw rational localizations, and the closed left functor action on every common-stage transition: after the rational realization and common q comparisons, that action is the common-stage image of the same normalized scalar map. Thus no arbitrary action on cross-field arrows is allowed.",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-zl-compact-support-scalar-system-map",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-compact-support-finite-action",
+  "def-weil-integral-scalar-extension",
+  "def-sf-finite-tor-integral-inclusion",
+  "def-weil-finite-tor-amplitude"
+ ],
+ "proof": [
+  {
+   "text": "Retain the given operations and their published realizations. Package the canonical integral scalar comparison, its raw rational localization, and the closed action on common-stage transition generators as equations. The inherited ring inclusion shift is the canonical shift on the corresponding full subcategory. No object is chosen from an unproved existence statement.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExceptionalRefinementTransportData",
+  "file": "lean/Sheaf/Paper/ExceptionalRefinementTransportData.lean",
+  "declaration": "WeilConjectures.ExceptionalRefinement.Transport",
+  "declarations": [
+   "WeilConjectures.ExceptionalRefinement.ringInclusionShift",
+   "WeilConjectures.ExceptionalRefinement.Transport"
+  ],
+  "statement": "structure Transport (c : Compactification f)",
+  "branch": "sheaf-dag",
+  "by": "Z6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-d2c5d",
+  "group": "Z6",
+  "result": "fix",
+  "landing": "20261027T013016-L-2358323",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-d2c5d",
+  "group": "Z6",
+  "result": "fix",
+  "landing": "20261027T013016-L-2358323",
+  "kind": "interface",
+  "note": "independent cc review: item exceptional_refinement_mates assembly vs node lem-sf-exceptional-refinement-mates; new sorry statements and Transport repair vs change record, the λ(field)-conjugation counterexample and the existing commonTransitionNatural practice; new node stmt_deps vs owners of the definitions used"
+ }
+}

@@ -1,0 +1,110 @@
+{
+ "id": "lem-pur-finite-general-ring-tensor-formula",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-finite-general-ring",
+   "place": "Proof (3): ordinary tensor duality and intrinsic pro-etale origin transport",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Tensor purity for arbitrary finite coefficients",
+ "statement": "Let A be a finite commutative ring killed by a positive integer N. Let f:X->Y be a separated smooth morphism of Noetherian schemes of pure relative dimension d with a compactification, and suppose N is invertible at every stalk of Y. For any isomorphism alpha from the ordinary dualizing complex to an arbitrary ordinary derived object L, the fixed proGamma of [def-pur-finite-smooth-canonical-maps] is invertible and natural on intrinsic Dctf pro-etale inputs, and its exceptional target belongs to intrinsic Dctf. Equivalently, FiniteGeneralRingTensorFormula of [def-sp-general-ring-canonical-data] holds. No orientation normalization and no prime-power presentation are required.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
+  "place": "Proof (3): ordinary tensor duality and intrinsic pro-etale origin transport"
+ },
+ "stmt_deps": [
+  "def-sp-general-ring-canonical-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply the already-proved generic arguments proObjectsCtf, proGammaIso and proNaturality in FiniteSmoothLevelOfOrientation. These arguments use smooth_tensor_duality, intrinsic constructible origins with invertible comparison counits, comparison of Tor intervals and ordinary smooth exceptional preservation. Extract the exceptional constructibility and gamma invertibility from their pair, and use proNaturality for the second conjunct. The proof is uniform in A, N, L and alpha; it uses none of the literal-prime-power or dimension-zero assertions of the public level theorem.",
+   "uses": [
+    "thm-asd-smooth-tensor",
+    "new-etale-proetale-exceptional-object-comparison",
+    "lem-exc-comparison-tor-interval",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "sk-prop-sf-rf-shriek-preservation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-comparison-tor-interval",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "new-etale-proetale-exceptional-object-comparison",
+  "sk-prop-sf-rf-shriek-preservation",
+  "thm-asd-smooth-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
+  "place": "Proof (3): ordinary tensor duality and intrinsic pro-etale origin transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The smooth dualizing orientation commutes with scalar extension of finite rings and with Kummer exponent change",
+   "results": "IsBaseChange.toDual; IsBaseChange.toDualBaseChange; RingHom.Smooth.isStableUnderBaseChange; Algebra.Smooth.baseChange; KaehlerDifferential.tensorKaehlerEquivBase; Algebra.IsStandardSmoothOfRelativeDimension.baseChange; RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale",
+   "date": "2026-10-25",
+   "verdict": "No matching geometric purity theorem. Generic categorical isomorphism lemmas used in assembly."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso, CategoryTheory.Functor.map",
+   "results": "CategoryTheory.Functor.map_isIso; CategoryTheory.Functor.map_inv; CategoryTheory.Functor.map_hom_inv; CategoryTheory.Functor.map_inv_hom; CategoryTheory.IsIso.hom_inv_id_map; CategoryTheory.IsIso.inv_hom_id_map; CategoryTheory.Functor.map_hom_inv_assoc; CategoryTheory.Functor.map_inv_hom_assoc",
+   "date": "2026-10-25",
+   "verdict": "No matching geometric purity theorem. Generic categorical isomorphism lemmas used in assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteGeneralRing|OrientationNormalized|proGamma",
+   "results": "No matches.",
+   "date": "2026-10-25",
+   "verdict": "No matching geometric purity theorem. Generic categorical isomorphism lemmas used in assembly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SecSmoothPurity.FiniteGeneralRing",
+  "date": "2026-10-25",
+  "group": "X2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SecSmoothPurity.FiniteGeneralRingTensorFormula",
+  "file": "lean/Sheaf/SecSmoothPurity/FiniteGeneralRingTensorFormula.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteGeneralRingTensorFormula",
+  "statement": "theorem finiteGeneralRingTensorFormula\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)\n    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]\n    (f : X ⟶ Y) [HasCompactification f] [IsSeparated f]\n    (d : ℕ) [SmoothOfRelativeDimension d f]\n    (hY : ∀ y : Y, IsUnit (N : Y.presheaf.stalk y))\n    (L : Etale.DerivedCategoryModule A X)\n    (alpha : Etale.dualizingComplex (ModuleCat.{u + 1} A) f ≅ L) :\n    FiniteGeneralRingTensorFormula A f L alpha",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-93ff3",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261025T124336-L-1979690",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-93ff3",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261025T124336-L-1979690",
+  "kind": "interface",
+  "note": "independent cc review: FiniteGeneralRingData vs the clone's FiniteGeneralRing block (verbatim, string-equal); item theorem signature vs the clone (identical); 2 direct importers compiled against the delivered modules (exit 0); #print axioms (sorryAx only from the split statements and upstream smooth_tensor_duality); unit realized lists vs the removed imports"
+ }
+}

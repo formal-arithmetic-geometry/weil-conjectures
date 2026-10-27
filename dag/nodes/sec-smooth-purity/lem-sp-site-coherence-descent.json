@@ -1,0 +1,301 @@
+{
+ "id": "lem-sp-site-coherence-descent",
+ "kind": "statement",
+ "title": "Descent and associativity of witnessed comparison pastes",
+ "statement": "Use ordinary categories [def-nagata-category]. A functor preserves identities and composition; a natural transformation is a family of component maps commuting with every functorial arrow, and is a natural isomorphism when every component is invertible. Let $\\mathscr B$ be a category. For each object $X$ give categories $\\mathcal E_X,\\mathcal P_X$ and a functor $N_X:\\mathcal E_X\\to\\mathcal P_X$. For each arrow $f:X\\to Y$ give a nonempty cofiltered category $I_f$ (any two objects admit a common source and parallel arrows can be equalized), and for $c\\in I_f$ functors $F_f^{e,c}:\\mathcal E_X\\to\\mathcal E_Y$, $F_f^{p,c}:\\mathcal P_X\\to\\mathcal P_Y$, with natural isomorphisms $C_f^c:N_YF_f^{e,c}\\cong F_f^{p,c}N_X$. Write composition functionally, with associators inserted. All pro-side refinement and tower transformations below are specified only on witnessed inputs: an input at $X$ is a pair $(E,\\xi)$ with $E\\in\\mathcal E_X$ and an isomorphism $\\xi:N_XE\\cong M$ in $\\mathcal P_X$. On such an input the value of a pro-side transformation is transported from its value at $N_XE$ by functorial application of $\\xi$ and its inverse. Naturality of these transformations means naturality in $E$ and under these specified changes of witness, rather than naturality on all of $\\mathcal P_X$. The isomorphism $C_f^c(E)$ gives $F_f^{p,c}N_XE$ the witness $F_f^{e,c}E$, so composites have such inputs as well.\nFor each refinement $u:c'\\to c$ suppose given a coherent etale natural isomorphism $\\rho_u^e:F_f^{e,c}\\cong F_f^{e,c'}$ and a specified natural map $\\rho_u^p:F_f^{p,c}\\to F_f^{p,c'}$, satisfying\n$$C_f^{c'}N_Y(\\rho_u^e)=(\\rho_u^pN_X)C_f^c.$$\nEtale comparisons through common refinements are assumed independent of their arrows and satisfy the cocycle law. For each composable $f,g$ suppose supplied a nonempty collection of compatible tower choices of candidates for $f,g,gf$, any two admitting a common refining tower. Each chosen triple of candidates can be compared to a tower triple by refinement comparisons and their inverses. Suppose the etale tower maps $\\alpha^e:F_g^eF_f^e\\cong F_{gf}^e$ descend through these comparisons to choice-independent associative unital natural isomorphisms. Suppose the computed pro-side tower maps $\\alpha^p:F_g^pF_f^p\\to F_{gf}^p$ are natural and obey on each tower\n$$C_{gf}N_Z(\\alpha^e)=(\\alpha^pN_X)(F_g^pC_f)(C_gF_f^e).$$\nAssume also that $C_{\\mathrm{id}}$ is the identity under the specified identity-functor identifications. For arbitrary candidates define the pro-side composition by moving to a tower, using its computed map, and moving back, with the specified pro-side refinement maps evaluated on $N_X(-)$; at other witnessed inputs use conjugation by the displayed $C$ witnesses.\nThen every $\\rho_u^pN_X$ is invertible and equals $C_f^{c'}N_Y(\\rho_u^e)(C_f^c)^{-1}$. All common-refinement comparisons on the image of $N_X$ are independent of choices and satisfy identities, composition and the cocycle law. The computed tower maps descend to arbitrary candidates, independently of the common refining tower, and satisfy the same displayed composition equation there. They equal transport through $C$, are invertible on witnessed inputs, and are unital and associative there. More explicitly, for composable $f,g,h$ both pro-side triple maps after precomposition by\n$$D=(F_h^pF_g^pC_f)\\circ(F_h^pC_gF_f^e)\\circ(C_hF_g^eF_f^e)$$\nequal $C_{hgf}N(\\alpha^e_{\\rm triple})$. These assertions are natural in the input. Only evaluations at objects with their specified $C$ witnesses are asserted; no fullness, faithfulness or essential surjectivity of the $N_X$ is required.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7I (lemma-shriek-well-defined), 0F7J (lemma-shriek-composition), 0F7K (lemma-pseudo-functor); agent categorical transport version of independence of choices and associativity."
+ },
+ "stmt_deps": [
+  "def-nagata-category"
+ ],
+ "proof": [
+  {
+   "text": "Work componentwise, in the functional composition convention of the statement. All reassociations are the canonical functor associators, whose components are identities. Suppress object arguments when they are determined. Write $E_f=F_f^{e,c}$, $P_f=F_f^{p,c}$ and $C_f:N_YE_f\\cong P_fN_X$. The category laws of [def-nagata-category] allow cancellation of an isomorphism: from $a s=b s$ compose on the right with $s^{-1}$. Functors preserve inverses since $F(s)F(s^{-1})=F(ss^{-1})=1$ and conversely. These component identities justify every cancellation and inversion below; they do not require any property of $N_X$ beyond functoriality.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7I (lemma-shriek-well-defined), cancellation footnote; componentwise categorical calculation"
+   }
+  },
+  {
+   "text": "For $u:c'\\to c$, the assumed refinement square gives, by right-composition with $C_c^{-1}$,\n$$\\rho_u^pN_X=C_{c'}N_Y(\\rho_u^e)C_c^{-1}.$$\nIts inverse is $C_cN_Y((\\rho_u^e)^{-1})C_{c'}^{-1}$, as multiplying in either order gives the identity. More generally any finite refinement zigzag from $c$ to $d$, with etale composite $t:E_c\\to E_d$, has pro-side composite $C_dN_Y(t)C_c^{-1}$: substitute the displayed formula (or its inverse) at each edge and cancel each adjacent $C^{-1}C$. This also proves the assertion for a single identity or two composable refinement arrows.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7I (lemma-shriek-well-defined), refinement comparisons; conjugation calculation"
+   }
+  },
+  {
+   "text": "For candidates $c,d$ and a common source $r$, write $a:E_c\\to E_r$ and $b:E_d\\to E_r$ for the etale refinement maps. The resulting comparison $c\\to d$ on the pro side is\n$$ (C_rN(b)C_d^{-1})^{-1}(C_rN(a)C_c^{-1})=C_dN(b^{-1}a)C_c^{-1}.$$\nThe hypothesis on etale common-refinement comparisons makes $t_{dc}=b^{-1}a$ independent of the common source and its arrows. Thus this pro comparison is independent too. For three candidates, its cocycle law is the explicit cancellation\n$$C_eN(t_{ed})C_d^{-1}C_dN(t_{dc})C_c^{-1}=C_eN(t_{ed}t_{dc})C_c^{-1}=C_eN(t_{ec})C_c^{-1}.$$\nThe identity comparison is $C_cN(1)C_c^{-1}=1$. Common sources exist by the stated cofilteredness; no colimit or smallness theorem is used.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7I (lemma-shriek-well-defined), common refinements and choice independence"
+   }
+  },
+  {
+   "text": "Fix a composable pair and a candidate triple, and put\n$$B_{g,f}=(P_g C_f)(C_g E_f):N_ZE_gE_f\\cong P_gP_fN_X.$$\nOn a compatible tower the assumed equation uniquely determines the computed map by\n$$A_{g,f}N_X=C_{gf}N_Z(\\alpha^e_{g,f})B_{g,f}^{-1}.$$\nAn explicit inverse is $B_{g,f}N_Z((\\alpha^e_{g,f})^{-1})C_{gf}^{-1}$. Each factor is invertible by hypothesis and Step 1. In particular this establishes invertibility only at image inputs; it asserts nothing at an unwitnessed object of $\\mathcal P_X$.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J (lemma-shriek-composition), tower composition; assumed tower equation solved for its map"
+   }
+  },
+  {
+   "text": "Check the input comparison when candidates for $f,g$ change. Let $t_f:E_f\\to E_f'$ and $t_g:E_g\\to E_g'$ be etale comparisons, and let $s_f,s_g$ be their pro comparisons from Step 3. Set\n$$t=(E_g't_f)(t_gE_f),\\qquad S=(P_g's_f)(s_gP_f).$$\nAt the second occurrence, $s_g$ is evaluated using the displayed $C_f$ witness. Its stipulated naturality under this change of witness says\n$$s_g(P_fN_X)(P_gC_f)=(P_g'C_f)s_g(N_YE_f).$$\nSubstitute this into $SB_{g,f}$, then use the two refinement equations from Step 2 and naturality of $C_g'$ at $t_f$. The factors become, in order,\n$$(P_g'C_f')(P_g'N_Y(t_f))(C_g'E_f)N_Z(t_gE_f)\n=(P_g'C_f')(C_g'E_f')N_Z((E_g't_f)(t_gE_f))=B'_{g,f}N_Z(t).$$\nFor a change of the $gf$ candidate with etale comparison $q:E_{gf}\\to E_{gf}'$, its pro comparison $Q$ satisfies $QC_{gf}=C_{gf}'N_Z(q)$ directly by Step 3. These equations also hold for inverse comparisons by multiplication by their inverses.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7I and 0F7J (lemma-shriek-well-defined, lemma-shriek-composition), compatibility of input and output comparisons"
+   }
+  },
+  {
+   "text": "For arbitrary fixed candidates choose a tower triple. Let $t$ compare their etale input composite to the tower input composite, and $q$ compare the tower output candidate back to their output candidate. The pro input and output comparisons $S,Q$ of Step 5 satisfy $SB=B_{\\rm tower}N(t)$ and $QC_{\\rm tower}=C_{gf}N(q)$. Hence their computed paste $A=QA_{\\rm tower}S$ satisfies\n$$AB=QC_{\\rm tower}N(\\alpha^e_{\\rm tower})N(t)=C_{gf}N(q\\alpha^e_{\\rm tower}t)=C_{gf}N(\\alpha^e_{g,f}).$$\nThe last equality is precisely the assumed etale descent through candidate comparisons. Thus $A=C_{gf}N(\\alpha^e_{g,f})B^{-1}$, independently of the chosen tower and of the comparison paths. This proves agreement on common refining towers as well. It gives both the required equation and invertibility for arbitrary candidates without assuming any unproved pro-side descent.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J (lemma-shriek-composition), independence of chosen compatible tower; cancellation calculation"
+   }
+  },
+  {
+   "text": "For a triple $f,g,h$, put $D=(P_hP_gC_f)(P_hC_gE_f)(C_hE_gE_f)$ as in the statement. For the parenthesization $L=A_{h,gf}(P_hA_{g,f})$, substitute Step 6 first for $A_{g,f}$ and then for $A_{h,gf}$. Cancelling the adjacent inverse comparisons gives\n$$LD=C_{hgf}N(\\alpha^e_{h,gf})(C_hE_{gf})^{-1}(P_hN(\\alpha^e_{g,f}))(C_hE_gE_f).$$\nNaturality of $C_h$ at $\\alpha^e_{g,f}$ identifies the last three factors with $N(E_h\\alpha^e_{g,f})$. Therefore\n$$LD=C_{hgf}N(\\alpha^e_{h,gf}(E_h\\alpha^e_{g,f})).$$\nEvery cancellation here takes place in the output category; $N$ is never cancelled or used to reflect an equality.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7K (lemma-pseudo-functor), first triple-composition path; explicit comparison calculation"
+   }
+  },
+  {
+   "text": "For the other parenthesization $R=A_{hg,f}(A_{h,g}P_f)$, naturality at the specified witness $C_f$ gives\n$$(A_{h,g}P_fN_X)(P_hP_gC_f)=(P_{hg}C_f)(A_{h,g}N_YE_f).$$\nConsequently Step 6 applied at $E_f$ gives\n$$RD=A_{hg,f}(P_{hg}C_f)(C_{hg}E_f)N(\\alpha^e_{h,g}E_f)\n=C_{hgf}N(\\alpha^e_{hg,f}(\\alpha^e_{h,g}E_f)).$$\nThe two etale composites in Steps 7 and 8 are the same $\\alpha^e_{\\rm triple}$ by the assumed etale associativity. Thus both pro composites precomposed by $D$ equal $C_{hgf}N(\\alpha^e_{\\rm triple})$. Since $D$ is invertible they agree. This uses only binary compatible towers, already handled in Step 6; no existence of an additional triple tower is needed.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7K (lemma-pseudo-functor), second triple-composition path and equality"
+   }
+  },
+  {
+   "text": "For a pair containing an identity arrow, the given identity-functor identifications and $C_{\\mathrm{id}}=1$ give $B=C_f$. The assumed etale unit law gives $\\alpha^e=1$ under those identifications. Step 6 therefore gives $A=C_fN(1)C_f^{-1}=1$, proving both unit laws. All formulas above are natural in $E$: move a morphism $E\\to E'$ past each factor using the given naturality squares; an inverse square follows by multiplying the original square by the two component inverses, and pasted squares follow by substitution and cancellation.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7I and 0F7K (lemma-shriek-well-defined, lemma-pseudo-functor), identities and naturality"
+   }
+  },
+  {
+   "text": "Finally let $(E,\\xi:N_XE\\cong M)$ be a witnessed input. For any transformation $T:U\\to V$ occurring above its value there is, by the stated witness convention,\n$$T_{(E,\\xi)}=V(\\xi)T_{N_XE}U(\\xi)^{-1}.$$\nIf $T$ is invertible on the image its inverse at this input is $U(\\xi)T_{N_XE}^{-1}V(\\xi)^{-1}$. For a composite $T_2T_1$ the middle functorial images of $\\xi^{-1}\\xi$ cancel, so every equation proved on image inputs remains the same equation at witnessed inputs. The intervening witness for $P_fM$ is $P_f(\\xi)C_f(E):N_YE_fE\\cong P_fM$; this is exactly the witness used in Steps 5 and 8. This proves naturality under the stipulated changes of witness and all asserted witnessed identities. It makes no assertion comparing unrelated witnesses through an arrow not supplied by the hypotheses, and proves no naturality on all of $\\mathcal P_X$.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7I, 0F7J and 0F7K; agent witnessed-input extension of the component cancellation calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7I (lemma-shriek-well-defined), 0F7J (lemma-shriek-composition), 0F7K (lemma-pseudo-functor); explicit component cancellation proof of the stated abstract witnessed transport version."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport composition and refinement coherence between functor families by natural isomorphisms through common refining towers",
+   "results": "8 hits: CategoryTheory.SmallObject.SuccStruct.Iteration.subsingleton.mapEq_trans, CategoryTheory.Functor.map_comp_heq, CategoryTheory.Functor.map_comp_heq', CategoryTheory.GradedObject.comapEq_trans, CategoryTheory.Grothendieck.mapCompIso, CategoryTheory.Pi.comapComp, localCohomology.diagramComp, AlgebraicTopology.DoldKan.Compatibility.τ₁; actual answer digest ef3440262cb29e0a; ",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state this full assertion; generic mate/associator identities alone do not supply the specified functor-family comparison and descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso, CategoryTheory.Functor",
+   "results": "0 hits: ; actual answer digest 4f53cda18c2baa0c; loogle: unknown identifier 'CategoryTheory.NatIso'",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state this full assertion; generic mate/associator identities alone do not supply the specified functor-family comparison and descent."
+  },
+  {
+   "tool": "grep",
+   "query": "cofiltered.*coheren|refinement.*associat|conjugat.*compos",
+   "results": "5 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Sites/Hypercover/One.lean; actual answer digest e5549cb6f3da0fd4; ",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state this full assertion; generic mate/associator identities alone do not supply the specified functor-family comparison and descent.",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural isomorphisms transport composition unit associativity and independence of common refinements between functor families",
+   "results": "0 hits: ; actual answer digest 4f53cda18c2baa0c; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Conjugating coherent compactification functors by invertible natural transformations preserves tower choice independence and triple associativity",
+   "results": "8 hits: AlgebraicTopology.DoldKan.Compatibility.τ₀, AlgebraicTopology.DoldKan.Compatibility.τ₁, AlgebraicTopology.DoldKan.Compatibility.υ, CategoryTheory.Equivalence.changeFunctor_trans, CategoryTheory.Idempotents.functorExtension₁Comp, compactumToCompHausCompForget, CategoryTheory.Equivalence.invFunIdAssoc, CategoryTheory.Equivalence.funInvIdAssoc; actual answer digest 8f8e63701728b7d3; ",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state this full assertion; generic mate/associator identities alone do not supply the specified functor-family comparison and descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.associator",
+   "results": "12 hits: CategoryTheory.Functor.associator, CategoryTheory.Functor.associator_hom_app, CategoryTheory.Functor.associator_inv_app, CategoryTheory.Functor.triangleIso, CategoryTheory.Functor.triangleIso_assoc, CategoryTheory.Functor.triangle, CategoryTheory.Functor.isoWhiskerLeft_twice, CategoryTheory.Functor.isoWhiskerRight_twice; actual answer digest 0fe9ecaf147c0a35; ",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state this full assertion; generic mate/associator identities alone do not supply the specified functor-family comparison and descent."
+  },
+  {
+   "tool": "grep",
+   "query": "cofiltered.*coheren|refinement.*associat|conjugat.*compos",
+   "results": "5 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Sites/Hypercover/One.lean; actual answer digest e5549cb6f3da0fd4; ",
+   "date": "2026-10-22",
+   "verdict": "no match: checked the returned types; associators, whiskering and pseudofunctor descent-data pullbacks do not state witnessed common-refinement transport of the supplied functor families.",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of coherent composition maps along common refinements by conjugation with natural isomorphisms",
+   "results": "8 hits: CategoryTheory.Pseudofunctor.ObjectProperty.mapComp, CategoryTheory.bicategoricalIsoComp, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformObjComp, CategoryTheory.Pseudofunctor.DescentData.toDescentDataCompPullFunctorIso, CategoryTheory.Pseudofunctor.DescentData.pullFunctorIso, CategoryTheory.Pseudofunctor.DescentData.pullFunctorCompIso, CategoryTheory.Pseudofunctor.DescentData.pullFunctorCompIso_hom_app_hom, CategoryTheory.Pseudofunctor.DescentData.pullFunctorCompIso_inv_app_hom; actual answer digest dc37ca670dce5eb8; ",
+   "date": "2026-10-22",
+   "verdict": "no match: checked the returned types; associators, whiskering and pseudofunctor descent-data pullbacks do not state witnessed common-refinement transport of the supplied functor families."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.associator",
+   "results": "12 hits: CategoryTheory.Functor.associator, CategoryTheory.Functor.associator_hom_app, CategoryTheory.Functor.associator_inv_app, CategoryTheory.Functor.triangleIso, CategoryTheory.Functor.triangleIso_assoc, CategoryTheory.Functor.triangle, CategoryTheory.Functor.isoWhiskerLeft_twice, CategoryTheory.Functor.isoWhiskerRight_twice; actual answer digest 0fe9ecaf147c0a35; ",
+   "date": "2026-10-22",
+   "verdict": "no match: checked the returned types; associators, whiskering and pseudofunctor descent-data pullbacks do not state witnessed common-refinement transport of the supplied functor families."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport associative unital composition and common refinement comparisons through natural isomorphisms on objects with specified witnesses",
+   "results": "8 hits: CategoryTheory.SmallObject.SuccStruct.Iteration.subsingleton.mapEq_trans, CategoryTheory.CategoryStruct.comp.hcongr_7, CategoryTheory.GradedObject.comapEq_trans, CategoryTheory.Functor.map_comp_heq, CategoryTheory.heq_comp, CategoryTheory.SmallObject.SuccStruct.Iteration.subsingleton.MapEq.w, AlgebraicTopology.DoldKan.Compatibility.τ₁, Mathlib.Tactic.Monoidal.eval_monoidalComp; actual answer digest 23df4aef1f405b78; ",
+   "date": "2026-10-22",
+   "verdict": "no match: checked the returned types; associators, whiskering and pseudofunctor descent-data pullbacks do not state witnessed common-refinement transport of the supplied functor families."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Conjugation of composition constraints by invertible natural transformations preserves associativity on the image of a functor without fullness or faithfulness",
+   "results": "8 hits: CategoryTheory.Functor.isoWhiskerRight_twice_assoc, CategoryTheory.Functor.isoWhiskerLeft_right_assoc, CategoryTheory.Functor.isoWhiskerRight_left_assoc, CategoryTheory.MorphismProperty.FunctorsInverting.comp_hom_assoc, CategoryTheory.Functor.CommShift.OfComp.map_iso_hom_app_assoc, CategoryTheory.Functor.isoWhiskerLeft_trans_isoWhiskerRight_assoc, CategoryTheory.Functor.isoWhiskerRight_trans_assoc, CategoryTheory.Functor.isoWhiskerLeft_twice; actual answer digest 9780edb519ccb8c2; ",
+   "date": "2026-10-22",
+   "verdict": "no match: checked the returned types; associators, whiskering and pseudofunctor descent-data pullbacks do not state witnessed common-refinement transport of the supplied functor families."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-finite-compact-site-coherence",
+  "date": "2026-10-22",
+  "group": "Q19"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-reduction-exceptional",
+   "place": "Locality paragraph: adjunctions compose and transposes of composites; finite compact-site proof Steps (7, 8) of lem-sp-finite-compact-site-coherence",
+   "via": [
+    "lem-sp-finite-compact-site-coherence",
+    "lem-sp-et-proet-coefficient-compatibility"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-site-coherence-descent",
+  "worker": "stage1",
+  "summary": "Expanded the assumed comparison squares into explicit refinement zigzag, binary tower, two triple-path and witness-conjugation calculations. No new nodes: all etale coherence and existence inputs are hypotheses, and all deductions are elementary category laws. Statement unchanged.",
+  "blueprint": "det-sp-reduction-exceptional Locality paragraph, through lem-sp-et-proet-coefficient-compatibility and lem-sp-finite-compact-site-coherence Steps 1--3: comparison pastes preserve identities, common-refinement descent and composition; this item supplies the generic categorical part of Step 3."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q128-a43d01bc3",
+  "group": "Q128",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-a43d01bc3 (reviewer sub-agent of L); spot-checked: I recomputed all ten steps; no fixes. The statement is unchanged from base: same text hash and stmt_deps [def-nagata-category] as the unsplit copy in an earlier run. There is no repair note for this item, so no re-split order applies. Step 2: ρ^pN = C'N(ρ^e)C⁻¹, and zigzags cancel at the fixed object N_X E. Step 3: common-source comparison C_dN(b⁻¹a)C_c⁻¹; it is choice-independent and satisfies the cocycle law by the etale hypotheses. Step 5: SB = B'N(t), from the witness-naturality of s_g at C_f (definitional via the transport convention), Step 3, and naturality of C_g' at t_f. Step 6: AB = C_{gf}N(qα_Tt) = C_{gf}N(α^e) by the etale descent hypothesis, so the result does not depend on the tower. Steps 7–8: LD and RD both equal C N(α_triple) by naturality of C_h and of A_{h,g} at the witness C_f, plus etale associativity; D is invertible and N is never cancelled. Step 9 covers units via C_id = 1; Step 10 transports to witnessed inputs (witness P_f(ξ)C_f(E)). All steps are elementary cancellations using only the category laws of the Mathlib leaf def-nagata-category. Stacks more-etale 0F7I/0F7J/0F7K (lines 3081, 3159, 3374) were read; they motivate the argument, and proof_origin agent is correct. No SGA citation, no new nodes, and no duplicates: the trf/cbc 'witnessed' nodes are geometric applications. Only the parent lem-sp-finite-compact-site-coherence (its Step 3) cites the item."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SiteCoherenceDescent",
+  "declaration": "CategoryTheory.WitnessedSiteCoherence.siteCoherenceDescent",
+  "declarations": [
+   "CategoryTheory.WitnessedSiteCoherence.SiteComparisonData",
+   "CategoryTheory.WitnessedSiteCoherence.atWitness",
+   "CategoryTheory.WitnessedSiteCoherence.change",
+   "CategoryTheory.WitnessedSiteCoherence.binaryComparison",
+   "CategoryTheory.WitnessedSiteCoherence.transportedComposition",
+   "CategoryTheory.WitnessedSiteCoherence.inputChange",
+   "CategoryTheory.WitnessedSiteCoherence.towerPaste",
+   "CategoryTheory.WitnessedSiteCoherence.towerAtWitness",
+   "CategoryTheory.WitnessedSiteCoherence.commonPaste",
+   "CategoryTheory.WitnessedSiteCoherence.tripleComparison",
+   "CategoryTheory.WitnessedSiteCoherence.SiteComparisonLaws",
+   "CategoryTheory.WitnessedSiteCoherence.tripleLeft",
+   "CategoryTheory.WitnessedSiteCoherence.tripleRight",
+   "CategoryTheory.WitnessedSiteCoherence.SiteComparisonConclusion",
+   "CategoryTheory.WitnessedSiteCoherence.siteCoherenceDescent"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SiteCoherenceDescent.lean",
+  "statement": "theorem siteCoherenceDescent (laws : SiteComparisonLaws S) : SiteComparisonConclusion S",
+  "branch": "sheaf-dag",
+  "by": "Q44",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The data, hypotheses and conclusion are bundled as SiteComparisonData, SiteComparisonLaws and SiteComparisonConclusion. All pro transformations are natural only after precomposition with N; atWitness is the stipulated conjugation. towerPaste uses the supplied computed ap, and the theorem identifies it with transportedComposition. The single theorem represents all clauses of the node, with real-data helper definitions and no extra hypothesis on N."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ded433177",
+  "group": "Q44",
+  "result": "pass",
+  "note": "Snapshot node = live node except the lean record; the live node is still split with no lean binding and no other group's module exists. lean.statement matches file line 339 verbatim, all 15 declarations are recorded, one sorry. Only stmt_dep is the Mathlib leaf def-nagata-category; the module imports only Mathlib. Hypotheses match the node with no stronger assumptions: C orientation, refinement square, te laws equivalent to arrow-independent cocycle comparisons under IsCofiltered, towers and common towers, ae descent/assoc/units, tower_square with B = C_g(Fe_f A) then Fp_g(C_f A), C_id = 1 via ue/up, nothing assumed on N. Recomputed every conclusion clause by hand from the laws: refinement, common_refinement, change/cocycle, descent via etale_descent, tower independence, composition square, both triple paths via naturality of C_h and etale_assoc, witnessed associativity with intermediate witness C_f(A) then Fp_f(xi), both unit laws via identity_square and naturality of up, witness naturality. towerPaste moves candidates by the C-transported te rather than rp zigzags; this is justified because the refinement and common_refinement clauses identify them. Edge cases and universes ok; docstrings carry source, blueprint id and ten proof steps; report has Worker report and Second reading by Q44. Advisory only: witnessed_change_invertible and witnessed_composition_invertible are trivially true IsIso of conjugated Iso.hom, redundant beside the substantive composition_invertible and witnessed_descent. No fixes, no recompile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "C5",
+  "result": "pass",
+  "landing": "20261022T143018-L-921802",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.WitnessedSiteCoherence.siteCoherenceDescent"
+  ],
+  "sorry_after": []
+ }
+}

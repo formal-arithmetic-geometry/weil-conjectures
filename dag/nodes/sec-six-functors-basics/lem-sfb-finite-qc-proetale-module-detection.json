@@ -1,0 +1,121 @@
+{
+ "id": "lem-sfb-finite-qc-proetale-module-detection",
+ "kind": "statement",
+ "title": "Finite quasi-compact jointly surjective pullbacks detect module sheaf morphisms",
+ "statement": "Let U be a scheme [def-pc-scheme] and R a ring in the coefficient universe. Let (g_i : Z_i → U) be a finite family of quasi-compact scheme morphisms [def-weil-pbc-scheme-conventions] whose images cover U. For fixed R-module sheaves F and G on the small pro-etale site [def-weil-pbc-proetale-site], and a morphism φ : F → G, if every inverse-image morphism g_i^* φ is zero [def-weil-proetale-inverse-image], then φ is zero. No weak-etaleness, Noetherianity, or compactness assumption on U is imposed. The empty family is allowed when U is empty.",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/FiniteCoefficient/UpperLowerStar/Detection.lean",
+  "place": "eq_zero_of_forall_upperStar_map_eq_zero, with its preceding proved section-detection theorem. The existing source proof is used verbatim."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Apply the already proved adopted source declaration eq_zero_of_forall_upperStar_map_eq_zero. For each section of the target sheaf, the pullback adjunction units and naturality reduce detection of the value of φ to detection of a section. The preceding source theorem eq_zero_of_forall_unit_app_eq_zero proves that detection: local injectivity of sheafification and the filtered left Kan extension give pro-etale neighborhoods of every base-changed point on which the section vanishes. Quasi-compactness and finiteness combine these neighborhoods into a cover of the original object. Sheaf separatedness gives zero. Sheaf and module-map extensionality then give φ = 0. This records an existing complete source proof; no additional Lean theorem or unproved declaration is introduced.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-pbc-scheme-conventions",
+    "def-weil-pbc-proetale-site",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/FiniteCoefficient/UpperLowerStar/Detection.lean",
+    "place": "eq_zero_of_forall_upperStar_map_eq_zero, with its preceding proved section-detection theorem. The existing source proof is used verbatim."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/FiniteCoefficient/UpperLowerStar/Detection.lean",
+  "place": "eq_zero_of_forall_upperStar_map_eq_zero, with its preceding proved section-detection theorem. The existing source proof is used verbatim."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pullbacks of pro etale sheaves of modules along finitely many quasi compact jointly surjective scheme morphisms detect zero morphisms",
+   "results": "8 hits: affine-transition-limit section detection, etale pullbacks, etale postcomposition, and a sheaf-of-modules pullback unit. None is the finite jointly surjective pro-etale detection statement.",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib match; the exact proved theorem is in the adopted source library."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"upperStar\", \"eq_zero\"",
+   "results": "0 hits.",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "eq_zero_of_forall_upperStar_map_eq_zero",
+   "results": "0 Mathlib hits. Local rg finds the exact complete source declaration in WeilConjectures/SixFunctors/ProEtale/FiniteCoefficient/UpperLowerStar/Detection.lean.",
+   "date": "2026-10-26",
+   "verdict": "Use that source declaration without a duplicate Lean wrapper."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteModelQuotientCohomologyDescent",
+  "date": "2026-10-26",
+  "group": "P3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Locality and Strata: ordinary module pullbacks along finite constructible strata detect vanishing; use the adopted proved generic module detection theorem.",
+   "via": [
+    "lem-sfb-finite-model-quotient-cohomology-descent",
+    "lem-sfb-finite-model-sheaf-quotient-constructible",
+    "lem-sfb-qcqs-integral-finite-model-completeness",
+    "lem-sfb-qcqs-proper-constructible-closed-base-change",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Detection",
+  "file": "lean/WeilConjectures/SixFunctors/ProEtale/FiniteCoefficient/UpperLowerStar/Detection.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.eq_zero_of_forall_upperStar_map_eq_zero",
+  "statement": "theorem eq_zero_of_forall_upperStar_map_eq_zero {κ : Type*} [Finite κ] {Z : κ → Scheme.{u}}\n    (g : ∀ k, Z k ⟶ U) [∀ k, QuasiCompact (g k)] (hg : ∀ x, ∃ k, x ∈ Set.range (g k))\n    {F G : Sheaf (Scheme.ProEt.topology U) (ModuleCat.{u + 1} R)} (φ : F ⟶ G)\n    (h : ∀ k, (g k)^*[ModuleCat.{u + 1} R].map φ = 0) : φ = 0",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-20d45",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261026T023654-L-590958",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-20d45",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261026T023654-L-590958",
+  "kind": "interface",
+  "note": "independent cc review: delivered Data/Constructible/item/IntegralScalarModelCoordinates vs clone base and nodes; ChartCalculation fields vs old 7 conjuncts; 12-module importer chain compiled (exit 0); axioms clean"
+ }
+}

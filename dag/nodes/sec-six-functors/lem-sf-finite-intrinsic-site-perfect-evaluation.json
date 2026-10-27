@@ -1,0 +1,122 @@
+{
+ "id": "lem-sf-finite-intrinsic-site-perfect-evaluation",
+ "kind": "statement",
+ "title": "Site-perfect evaluation for the intrinsic finite coefficient closed structure",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, a scheme $X$, and $n\\in\\mathbf N$. In the actual small pro-etale derived category over $A=\\mathcal O_E/(\\varpi_E^{n+1})$, let $K,L$ be arbitrary objects. Use the specified intrinsic closed structure [def-weil-derived-pullback-tensor-hom]. If $K$ is site-perfect [def-weil-site-perfect-complex], the morphism $L\\otimes R\\mathcal Hom(K,\\mathbf 1)\\to R\\mathcal Hom(K,L)$ obtained by transposing the associator, tensor with evaluation into the coefficient unit, and right unitor is invertible. No constructibility or bound on $L$ is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JJ, lemma-dual-perfect-complex, the evaluation isomorphism for an arbitrary target; compare the intrinsic coefficient tensor presentation."
+ },
+ "stmt_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-site-perfect-complex"
+ ],
+ "proof": [
+  {
+   "text": "Take the normalized ringed-site model supplied by the existing duality construction. Perfect duality for that fixed model makes its tensor-dual evaluation invertible for K and every L.",
+   "uses": [
+    "lem-fix-ringed-site-perfect-duality-for-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Both the normalized model and the intrinsic finite closed structure have the same recorded internal Hom as right adjoint. Uniqueness of left adjoints gives the tensor comparison. Their K-flat representative normalization identifies counits with ordinary evaluation. The tensor unit is identified by its unit universal property; the evaluation transpose is transported through these invertible comparisons. Equivalently, on each bounded finite-projective local model, compute the signed total tensor-Hom comparison termwise. The finite-projective dual-basis map is an isomorphism, including zero terms and the empty cover. Exact restriction detects quasi-isomorphisms, proving the global assertion. After choosing an identification of coefficient units, naturality of the adjunction identifies evaluation into the two unit objects. The canonical tensor-dual comparisons differ by tensoring that unit identification and by the tensor comparison of the left adjoints, so their isomorphism properties agree. This transport is needed even though the underlying internal Hom is the same.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-site-perfect-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-fix-ringed-site-perfect-duality-for-model",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-site-perfect-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JJ, lemma-dual-perfect-complex, the evaluation isomorphism for an arbitrary target; compare the intrinsic coefficient tensor presentation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a perfect complex of sheaves, tensoring with its coefficient dual is canonically isomorphic to derived internal Hom",
+   "results": "{\"n_hits\": 8, \"top\": [\"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction\", \"LightCondensed.instMonoidalClosedLightCondMod\", \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"LightCondensed.internallyProjective_iff_tensor_condition\", \"CategoryTheory.Abelian.Ext.homLinearEquiv\", \"CategoryTheory.Tor'_obj_obj\", \"LightCondensed.free_internallyProjective_iff_tensor_condition'\"], \"note\": \"\"}",
+   "date": "2026-10-25",
+   "verdict": "No intrinsic ringed-site perfect evaluation theorem. The hits concern ordinary module duality or categorical closed structures."
+  },
+  {
+   "tool": "grep",
+   "query": "IsPerfectOnRingedSite|ringedSiteDualEvaluation|perfect.*[Ii]hom|[Ii]hom.*perfect",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\"}",
+   "date": "2026-10-25",
+   "verdict": "No intrinsic ringed-site perfect evaluation theorem. The hits concern ordinary module duality or categorical closed structures."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom from a perfect complex of sheaves is tensor product with its dual",
+   "results": "{\"n_hits\": 8, \"top\": [\"dualTensorHomEquivOfBasis\", \"dualTensorHomEquiv\", \"lTensorHomEquivHomLTensor\", \"CategoryTheory.MonoidalClosed.internalHomAdjunction₂\", \"CategoryTheory.ihom.adjunction\", \"dualTensorHom\", \"CategoryTheory.tensorRightHomEquiv\", \"CategoryTheory.Types.tensorProductAdjunction\"], \"note\": \"\"}",
+   "date": "2026-10-25",
+   "verdict": "No intrinsic ringed-site perfect evaluation theorem. The hits concern ordinary module duality or categorical closed structures."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.ihomUnitTensorToIhom",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"loogle: unknown identifier 'CategoryTheory.MonoidalClosed.ihomUnitTensorToIhom'\"}",
+   "date": "2026-10-25",
+   "verdict": "No intrinsic ringed-site perfect evaluation theorem. The hits concern ordinary module duality or categorical closed structures."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfPackageCoefficientDomains",
+  "group": "B4",
+  "date": "2026-10-25"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-functor-package",
+   "place": "Opening coefficient domains: site-perfect coefficient-dual evaluation in finite coefficients",
+   "via": [
+    "lem-sf-package-coefficient-domain-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteSitePerfectEvaluation",
+  "file": "lean/Sheaf/Paper/FiniteSitePerfectEvaluation.lean",
+  "declaration": "WeilConjectures.finiteIntrinsic_sitePerfect_evaluation_isIso",
+  "statement": "theorem finiteIntrinsic_sitePerfect_evaluation_isIso\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]\n    [FiniteDimensional (Padic l) E] (X : Scheme.{u}) (n : ℕ)\n    (K L : proEtaleDerivedCategory X (Padic.coefficientExtensionRing l E (n + 1)))\n    (_hK : IsFiniteCoefficientSitePerfect l E X n K) :\n    IsIso ((finiteIntrinsicClosed l E X n).transpose _ K L\n          (((finiteIntrinsicClosed l E X n).monoidal.associator L\n              ((finiteIntrinsicDerivedInternalHom l E X n).obj\n                (op K, (finiteIntrinsicClosed l E X n).monoidal.tensorUnit)) K).hom ≫\n            (finiteIntrinsicClosed l E X n).tensor.map\n              (Prod.mkHom (𝟙 L) ((finiteIntrinsicClosed l E X n).evaluation K\n                (finiteIntrinsicClosed l E X n).monoidal.tensorUnit)) ≫\n            ((finiteIntrinsicClosed l E X n).monoidal.rightUnitor L).hom))",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261025T094849-L-3267289",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261025T094849-L-3267289",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

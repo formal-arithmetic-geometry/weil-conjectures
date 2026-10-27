@@ -1,0 +1,210 @@
+{
+ "id": "lem-trf-rational-parameter-binomial-irreducible",
+ "kind": "statement",
+ "title": "Binomials of a transcendental parameter are irreducible",
+ "statement": "Let $F\\subseteq E$ be fields [def-pc-field-extension], let $r\\geq1$, and let $t_1,\\ldots,t_r\\in E$ be algebraically independent over $F$, meaning that evaluation of a polynomial in these $r$ variables is zero only for the zero polynomial [def-weil-pbc-transcendence-basis]. Let $K=F(t_1,\\ldots,t_r)\\subseteq E$ be the smallest subfield containing $F$ and these elements. For every integer $m\\geq1$, the polynomial $X^m-t_1\\in K[X]$ [def-weil-polynomial-ring] is irreducible: it is a nonzero nonunit, and in any factorization in $K[X]$ one factor is a unit. No restriction on the characteristic of $F$ or on divisibility of $m$ by that characteristic is imposed.",
+ "source": {
+  "document": "Mathlib/RingTheory/Polynomial/Eisenstein/Criterion.lean",
+  "place": "Polynomial.irreducible_of_eisenstein_criterion, lines 175--180, applied over F(t_2,...,t_r)[t_1] at (t_1), followed by Polynomial.Monic.irreducible_iff_irreducible_map_fraction_map, Mathlib/RingTheory/Polynomial/GaussLemma.lean:149--150. This rational-parameter consequence is agent-written; the complete intended argument is in report.md."
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-transcendence-basis",
+  "def-weil-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Put $B=F[t_2,\\ldots,t_r]\\subset E$ and $G=F(t_2,\\ldots,t_r)$, taking both equal to $F$ if $r=1$. The fractions $b/c$ with $b,c\\in B$, $c\\ne0$, form a subfield of $E$ containing $F,t_2,\\ldots,t_r$, and every such fraction belongs to $G$; hence they are exactly $G$. If $\\sum_{i=0}^d g_it_1^i=0$ with $g_i\\in G$, write $g_i=b_i/c_i$ and multiply by $c=\\prod_i c_i\\ne0$. For each $i$, represent $b_i\\prod_{j\\ne i}c_j\\in B$ by a polynomial $q_i$ in the last $r-1$ variables over $F$. The polynomial $\\sum_i q_i(Y_2,\\ldots,Y_r)Y_1^i$ evaluates to zero at the given family; algebraic independence [def-weil-pbc-transcendence-basis] makes it the zero polynomial. Its coefficients $q_i$ are therefore zero, so $cg_i=0$ and $g_i=0$. Thus evaluation $G[T]\\to E$, $T\\mapsto t_1$, is injective.",
+   "uses": [
+    "def-weil-pbc-transcendence-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "agent-written",
+    "place": "elementary parameter-ring argument for X^m-t_1 over F(t_2,...,t_r)[t_1]"
+   }
+  },
+  {
+   "text": "Write $A=G[T]$ and identify it with $G[t_1]\\subset E$ by Step 1. Fractions of elements of $G[t_1]$ form a subfield containing $F,t_1,\\ldots,t_r$, so contain $K$; conversely $K$ contains all these fractions. Thus $K$ is a fraction field of $A$ via $j:A\\to K$, $T\\mapsto t_1$: $j$ is an injective unital ring map and every element of $K$ is $j(a)/j(b)$ with $a,b\\in A$, $b\\ne0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "agent-written",
+    "place": "elementary parameter-ring argument for X^m-t_1 over F(t_2,...,t_r)[t_1]"
+   }
+  },
+  {
+   "text": "For $m\\ge1$ set $f=X^m-T\\in A[X]$; its leading coefficient is $1$, so it is monic of degree $m$. Put $C=G[X]$. Regrouping a finite sum $\\sum_{i,j}a_{ij}T^iX^j$ by powers of $T$ identifies $A[X]=G[T][X]$ with $C[T]$ as rings, since in both rings the product is the same convolution of the coefficient arrays $(a_{ij})$. In $C[T]$ we have $f=(-1)T+X^m$, of $T$-degree $1$ with $T$-coefficient $-1$. The ring $C$ is a domain, since the product of the leading coefficients of two nonzero polynomials over the field $G$ is nonzero; hence $T$-degrees add under products in $C[T]$. So $f\\ne0$, and $f$ is not a unit, because $fg=1$ would force $1+\\deg_Tg=0$. Let $f=gh$ in $C[T]$. Then $\\deg_Tg+\\deg_Th=1$, so one factor, say $g$, has $T$-degree $0$, i.e. $g=c\\in C$. Write $h=h_1T+h_0$ with $h_0,h_1\\in C$; the $T$-coefficient gives $ch_1=-1$, so $c$ is a unit of $C$ and hence of $C[T]$. Thus $f$ is irreducible in $A[X]$. Nothing here depends on the characteristic of $G$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "agent-written",
+    "place": "degree count in T after regrouping G[T][X]=G[X][T] (replaces the earlier Eisenstein application)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-monic-polynomial-fraction-field-irreducibility] to the field $G$, the ring $A=G[T]$, its fraction field $K$ verified in Step 2, and the monic polynomial $f$ of Step 3, irreducible in $A[X]$. Its image has coefficient $1$ at degree $m$, coefficient $-t_1$ at degree $0$, and zero elsewhere, so is exactly $X^m-t_1$. The forward implication of the cited equivalence gives its irreducibility in $K[X]$, with all the clauses specified in the statement. Neither Step 3 nor the cited equivalence requires separability or an exponent invertible in $F$.",
+   "uses": [
+    "lem-trf-monic-polynomial-fraction-field-irreducibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/RingTheory/Polynomial/GaussLemma.lean",
+    "place": "Polynomial.Monic.irreducible_iff_irreducible_map_fraction_map, lines 149-150, with R=G[T] and K the fraction field of Step 2."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-transcendence-basis",
+  "lem-trf-monic-polynomial-fraction-field-irreducibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib/RingTheory/Polynomial/GaussLemma.lean",
+  "place": "agent-written parameter-ring argument (Steps 1-3), followed by Polynomial.Monic.irreducible_iff_irreducible_map_fraction_map, GaussLemma.lean:149-150."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Over the rational function field k(t), X^n-t is irreducible for every positive integer n",
+   "results": "8 hits: Polynomial.X_pow_sub_X_sub_one_irreducible_rat, Polynomial.X_pow_sub_X_sub_one_irreducible, ne_zero_of_irreducible_X_pow_sub_C, X_pow_mul_sub_C_irreducible, ne_zero_of_irreducible_X_pow_sub_C', X_pow_sub_C_irreducible_of_prime, X_pow_sub_C_irreducible_of_odd, X_pow_sub_C_irreducible_iff_of_prime.  Read candidate signatures: Eisenstein and Gauss supply general criteria, Kummer results require a prime exponent or additional power hypotheses, and RatFunc.irreducible_minpolyX concerns a different polynomial over a generated subfield. The desired arbitrary-positive-exponent parameter statement needs the Eisenstein application and rational-field identification, not a one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Irreducible, RatFunc",
+   "results": "3 hits: RatFunc.irreducible_minpolyX', RatFunc.irreducible_minpolyX, RatFunc.irreducible_min_polynomial_valuation_lt_one_and_ne_zero.  Read candidate signatures: Eisenstein and Gauss supply general criteria, Kummer results require a prime exponent or additional power hypotheses, and RatFunc.irreducible_minpolyX concerns a different polynomial over a generated subfield. The desired arbitrary-positive-exponent parameter statement needs the Eisenstein application and rational-field identification, not a one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "irreducible.*(X_pow|pow.*sub)|X_pow.*irreducible",
+   "results": "19 hits: Mathlib/FieldTheory/Perfect.lean, Mathlib/FieldTheory/SeparableDegree.lean, Mathlib/FieldTheory/SeparableDegree.lean, Mathlib/FieldTheory/KummerPolynomial.lean, Mathlib/FieldTheory/KummerPolynomial.lean, Mathlib/FieldTheory/KummerPolynomial.lean, Mathlib/FieldTheory/KummerPolynomial.lean, Mathlib/FieldTheory/KummerPolynomial.lean.  Read candidate signatures: Eisenstein and Gauss supply general criteria, Kummer results require a prime exponent or additional power hypotheses, and RatFunc.irreducible_minpolyX concerns a different polynomial over a generated subfield. The desired arbitrary-positive-exponent parameter statement needs the Eisenstein application and rational-field identification, not a one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The polynomial X^n-t over k(t) is irreducible by Eisenstein",
+   "results": "8 hits: Polynomial.IsEisensteinAt.irreducible, Polynomial.generalizedEisenstein, Polynomial.irreducible_of_eisenstein_criterion, Polynomial.IsEisensteinAt.mk, Polynomial.Monic.isEisensteinAt_of_mem_of_notMem, Polynomial.isEisensteinAt_iff, Polynomial.IsEisensteinAt.casesOn, Polynomial.IsEisensteinAt.mem.  Read candidate signatures: Eisenstein and Gauss supply general criteria, Kummer results require a prime exponent or additional power hypotheses, and RatFunc.irreducible_minpolyX concerns a different polynomial over a generated subfield. The desired arbitrary-positive-exponent parameter statement needs the Eisenstein application and rational-field identification, not a one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "X^m-t is irreducible over F(t,t2,...,tr) when the parameters are algebraically independent",
+   "results": "8 hits: MvPolynomial.irreducible_toPolynomialAdjoinImageCompl, X_pow_mul_sub_C_irreducible, Polynomial.X_pow_sub_X_sub_one_irreducible_rat, Polynomial.irreducible_X, irreducible_X_pow_sub_C_of_root_adjoin_eq_top, Polynomial.X_pow_sub_X_sub_one_irreducible, X_pow_sub_C_irreducible_of_prime, X_pow_sub_C_irreducible_of_prime_pow.  Read candidate signatures: Eisenstein and Gauss supply general criteria, Kummer results require a prime exponent or additional power hypotheses, and RatFunc.irreducible_minpolyX concerns a different polynomial over a generated subfield. The desired arbitrary-positive-exponent parameter statement needs the Eisenstein application and rational-field identification, not a one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "irreducible_iff_irreducible_map_fraction_map|irreducible_iff_irreducible_map",
+   "results": "11 hits: Mathlib/FieldTheory/Minpoly/IsIntegrallyClosed.lean, Mathlib/FieldTheory/RatFunc/IntermediateField.lean, Mathlib/FieldTheory/SeparablyGenerated.lean, Mathlib/RingTheory/Polynomial/GaussLemma.lean, Mathlib/RingTheory/Polynomial/GaussLemma.lean, Mathlib/RingTheory/Polynomial/GaussLemma.lean, Mathlib/RingTheory/Polynomial/GaussLemma.lean, Mathlib/RingTheory/Polynomial/GaussLemma.lean.  Read candidate signatures: Eisenstein and Gauss supply general criteria, Kummer results require a prime exponent or additional power hypotheses, and RatFunc.irreducible_minpolyX concerns a different polynomial over a generated subfield. The desired arbitrary-positive-exponent parameter statement needs the Eisenstein application and rational-field identification, not a one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a rational function field with algebraically independent parameters the polynomial X^m minus the first parameter is irreducible for every positive m",
+   "results": "{\"t\": \"2026-10-23T11:08:07Z\", \"tool\": \"leanfinder\", \"query\": \"Over a rational function field with algebraically independent parameters the polynomial X^m minus the first parameter is irreducible for every positive m\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.X_pow_sub_X_sub_one_irreducible_rat\", \"Polynomial.X_pow_sub_X_sub_one_irreducible\", \"X_pow_mul_sub_C_irreducible\", \"irreducible_X_pow_sub_C_of_root_adjoin_eq_top\", \"ne_zero_of_irreducible_X_pow_sub_C\", \"MvPolynomial.irreducible_toPolynomialAdjoinImageCompl\", \"X_pow_sub_C_irreducible_of_prime\", \"Polynomial.irreducible_X\"], \"digest\": \"ca7882a5cd75a86d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Kummer results need prime/power or non-power hypotheses, and RatFunc.minpolyX is a different polynomial over an adjoined subfield. The item requires the parameter-ring argument, Eisenstein and Gauss, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "irreducible.*(X_pow|pow.*sub)|X_pow.*irreducible",
+   "results": "{\"t\": \"2026-10-23T11:13:13Z\", \"tool\": \"grep\", \"query\": \"irreducible.*(X_pow|pow.*sub)|X_pow.*irreducible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/Perfect.lean\", \"Mathlib/FieldTheory/SeparableDegree.lean\", \"Mathlib/FieldTheory/SeparableDegree.lean\", \"Mathlib/FieldTheory/KummerPolynomial.lean\", \"Mathlib/FieldTheory/KummerPolynomial.lean\", \"Mathlib/FieldTheory/KummerPolynomial.lean\", \"Mathlib/FieldTheory/KummerPolynomial.lean\", \"Mathlib/FieldTheory/KummerPolynomial.lean\"], \"digest\": \"548c62e10192d6a8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Kummer results need prime/power or non-power hypotheses, and RatFunc.minpolyX is a different polynomial over an adjoined subfield. The item requires the parameter-ring argument, Eisenstein and Gauss, not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The polynomial X^n minus a transcendental parameter is irreducible over a rational function field",
+   "results": "{\"t\": \"2026-10-23T11:13:14Z\", \"tool\": \"leansearch\", \"query\": \"The polynomial X^n minus a transcendental parameter is irreducible over a rational function field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"X_pow_mul_sub_C_irreducible\", \"X_pow_sub_C_irreducible_iff_of_prime\", \"X_pow_sub_C_irreducible_iff_forall_prime_of_odd\", \"irreducible_X_pow_sub_C_of_root_adjoin_eq_top\", \"ne_zero_of_irreducible_X_pow_sub_C'\", \"ne_zero_of_irreducible_X_pow_sub_C\", \"X_pow_sub_C_irreducible_of_odd\", \"X_pow_sub_C_irreducible_of_prime\"], \"digest\": \"cae2e8dc9e0fc10d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Kummer results need prime/power or non-power hypotheses, and RatFunc.minpolyX is a different polynomial over an adjoined subfield. The item requires the parameter-ring argument, Eisenstein and Gauss, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "Irreducible, RatFunc",
+   "results": "{\"t\": \"2026-10-23T11:13:14Z\", \"tool\": \"loogle\", \"query\": \"Irreducible, RatFunc\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"RatFunc.irreducible_minpolyX'\", \"RatFunc.irreducible_minpolyX\", \"RatFunc.irreducible_min_polynomial_valuation_lt_one_and_ne_zero\"], \"digest\": \"1993e88ca053878f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Kummer results need prime/power or non-power hypotheses, and RatFunc.minpolyX is a different polynomial over an adjoined subfield. The item requires the parameter-ring argument, Eisenstein and Gauss, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Binomial X^m minus t is irreducible over F(t) by Eisenstein for any positive exponent",
+   "results": "{\"t\": \"2026-10-23T11:13:14Z\", \"tool\": \"leanfinder\", \"query\": \"Binomial X^m minus t is irreducible over F(t) by Eisenstein for any positive exponent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.X_pow_sub_X_sub_one_irreducible_rat\", \"X_pow_sub_C_irreducible_of_prime\", \"Polynomial.X_pow_sub_X_sub_one_irreducible\", \"X_pow_mul_sub_C_irreducible\", \"X_pow_sub_C_irreducible_of_prime_pow\", \"ne_zero_of_irreducible_X_pow_sub_C\", \"ne_zero_of_irreducible_X_pow_sub_C'\", \"X_pow_sub_C_irreducible_iff_of_prime\"], \"digest\": \"f1e98869564b3102\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Kummer results need prime/power or non-power hypotheses, and RatFunc.minpolyX is a different polynomial over an adjoined subfield. The item requires the parameter-ring argument, Eisenstein and Gauss, not a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-algclosed-fg-field-finite",
+  "date": "2026-10-23",
+  "group": "Q93"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Arbitrary base change of semistable marked curves and fibrewise stability. Supplies the hypothesis transfer used by its Steps 4, 6 and 11: nodal geometric fibres over the chosen algebraic closure give nodal fibres over every algebraically closed field. Re-split of lem-trf-node-algebraically-closed-extension: old Step 1, residue-field and closed-point argument. Field-theoretic subargument: finite field generation plus abstract algebraic closedness rules out positive transcendence degree. Supporting field-theoretic input: Binomials of a transcendental parameter are irreducible.",
+   "via": [
+    "lem-trf-algclosed-fg-field-finite",
+    "lem-trf-nodal-completion-rational-point",
+    "lem-trf-node-algebraically-closed-extension",
+    "lem-trf-semistable-marked-base-change",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-rational-parameter-binomial-irreducible",
+  "worker": "stage1",
+  "summary": "Verified the unchanged arbitrary-characteristic statement. Wrote the denominator argument establishing G[T] and its fraction field K. Review FIX (cc maintainer reader, 2026-10-23): the Eisenstein criterion leaf cited in Step 3 is on the 2026-10-19 route-pivot drop list, so Step 3 now proves irreducibility of X^m-T over G[T] directly as a polynomial of T-degree one over the domain G[X]; the monic Gauss Mathlib leaf then transfers it to K[X]. r=1, m=1 and exponents divisible by the characteristic were checked.",
+  "blueprint": "Preserves the inherited nearby-cycle / semistable-modification support chain from lem-trf-local-term-locality proof (1)-(2). This is the binomial obstruction used in Step 2 of lem-trf-algclosed-fg-field-finite, not a replacement of the unit route. Current latest blueprint read at main-20261023-1620 (7284bb09)."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-895096671",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-895096671 (reviewer sub-agent of L); spot-checked: Mechanical finding confirmed and repaired. Step 3 cited lem-per-eisenstein-prime-ideal-criterion, which is on the 2026-10-19 route-pivot drop list (coord/route-pivot-dropped.txt line 1505). It is a Mathlib Eisenstein leaf that Q62 created for the Gabber/Artin–Gabber chain, and no live general Eisenstein node exists to cite instead. The use was mathematically harmless: none of the forbidden Q̄_l, Gabber or alteration inputs enter this field lemma. A reachable node still may not cite a dropped id, and the report did not justify the citation. FIX: I rewrote Step 3 elementarily. Identify G[T][X] with G[X][T]; there X^m−T has T-degree 1 over the domain G[X], so in any factorization one factor is c∈G[X] with c·h_1=−1, hence a unit. Step 2 is trimmed to the fraction-field presentation, because the ideal (T) is no longer used. proof_deps is now {def-weil-pbc-transcendence-basis, lem-trf-monic-polynomial-fraction-field-irreducibility}. Sources and proof_origin now name the Gauss lemma (GaussLemma.lean:149-150) plus the agent-written argument. The dropped id appears nowhere in the corrected file, and the recomputed closure has no dropped nodes. The item statement is unchanged and equals the live text (the item is unsplit live, with no repair note and no earlier runs). The statement is true for r=1, m=1, char 2 (X^2−t over F_2(t)) and p|m; it claims no separability. Step 1 (denominator clearing plus algebraic independence gives G[T]↪E) and Step 4 (forward direction of the monic Gauss transfer, image X^m−t_1) are correct. New node lem-trf-monic-polynomial-fraction-field-irreducibility: true, because G[T] is a UFD and so integrally closed, and Mathlib's Monic.irreducible_iff_irreducible_map_fraction_map applies. It is not a duplicate: live nodes citing that declaration are all split statements with other content, and the weil-pbc x^p−t node covers only prime p. It does not restate the parent and is needed in Step 4. No SGA source; generic Mathlib leaf only; no tool_uses. Corrected file: fixes/dag/nodes/sec-trace-formula/lem-trf-rational-parameter-binomial-irreducible.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.RationalParameterBinomialIrreducible",
+  "declaration": "Polynomial.irreducible_X_pow_sub_C_of_algebraicIndependent",
+  "file": "lean/Sheaf/FieldTheory/RationalParameterBinomialIrreducible.lean",
+  "statement": "theorem irreducible_X_pow_sub_C_of_algebraicIndependent (F : Type u) (E : Type v) [Field F] [Field E] [Algebra F E] (r : ℕ) (hr : 0 < r) (t : Fin r → E) (ht : AlgebraicIndependent F t) (m : ℕ) (hm : 0 < m) : Irreducible ((X : Polynomial (IntermediateField.adjoin F (Set.range t))) ^ m - C ⟨t ⟨0, hr⟩, IntermediateField.subset_adjoin F (Set.range t) (Set.mem_range_self (⟨0, hr⟩ : Fin r))⟩)",
+  "branch": "sheaf-dag",
+  "by": "Q06",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-264ef3c42",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Clause-by-clause match: Field F, Field E, Algebra F E; 0<r; t : Fin r → E with AlgebraicIndependent F t; K = IntermediateField.adjoin F (range t), as named in the dep's mathlib_match; 0<m; Irreducible (X^m − C t₁) over K. No stronger hypotheses; universes u v independent and bound. Edge cases r=1, m=1, p|m covered and true; r=0, m=0 excluded as in the node. lean.statement verbatim; node differs from live only by the lean record; no name clash, no existing Mathlib statement; sorry-only proof; source and blueprint docstrings carry the 4 proof steps (degree argument, not the dropped Eisenstein node); only private import is the GaussLemma proof-dep module. Pre-existing: def-weil-pbc-transcendence-basis has no lean record, only a mathlib_match. No files changed, no compile run."
+ }
+}

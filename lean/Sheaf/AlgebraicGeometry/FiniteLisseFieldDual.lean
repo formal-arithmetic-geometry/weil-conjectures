@@ -13,10 +13,10 @@ public import WeilConjectures.ConstructibleSheaf.Defs
 public import Mathlib.Data.ZMod.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.InternalHom
 
-import WeilConjectures.ConstructibleSheaf.Monoidal
+import WeilConjectures.SixFunctors.Etale.Derived.LisseFieldDual
 
-import Sheaf.AlgebraicGeometry.FiniteLisseFieldDualHomology
-import Sheaf.AlgebraicGeometry.FiniteLisseFieldSitePerfect
+import Mathlib.Algebra.Field.ZMod
+import Mathlib.Algebra.Field.ULift
 
 /-!
 # Duals of bounded finite locally constant complexes over a prime field
@@ -80,19 +80,6 @@ private theorem derivedHomPullbackAlongIsoComparison_eq_transpose
   exact (leftDerivedUpperStarTensorIso A v C
     (((derivedHom A T).obj (op C)).obj M)).hom_inv_id
 
-private theorem dualPullback_isIso_of_exactPairing
-    {T T' : Scheme.{u}} (v : T' ⟶ T)
-    (C M : _root_.DerivedCategory (Sheaf T.smallEtaleTopology A))
-    (N : _root_.DerivedCategory (Sheaf T'.smallEtaleTopology A))
-    (e : (L(upperStar A v)).obj M ≅ N)
-    (hC : DerivedCategory.IsDualizableEtale C) :
-    IsIso (derivedHomPullbackAlongIsoComparison v C M N e) := by
-  obtain ⟨_⟩ := hC
-  obtain ⟨_⟩ := DerivedCategory.nonempty_exactPairing_swap C Cᘁ
-  have := isIso_derivedHomUpperStarComparison_of_exactPairing A v Cᘁ C M
-  unfold derivedHomPullbackAlongIsoComparison
-  infer_instance
-
 end General
 
 /-- The canonical map from the pullback of the coefficient dual to the dual of the
@@ -101,22 +88,10 @@ and its unit comparison. Source: blueprint lem-fin-lisse-field-dual, proof step 
 Stacks, Sites Cohomology, Section 08J7 (blueprint: lem-fin-lisse-field-dual). -/
 noncomputable def finiteLisseDualPullbackComparison
     {Λ : Type (u + 1)} [CommRing Λ] {T T' : Scheme.{u}} (v : T' ⟶ T)
-    (C : DerivedCategoryModule Λ T) :
-    (L(upperStar (ModuleCat.{u + 1} Λ) v)).obj
-        (((derivedHom (ModuleCat.{u + 1} Λ) T).obj (op C)).obj (constantComplex Λ T)) ⟶
-      ((derivedHom (ModuleCat.{u + 1} Λ) T').obj
-        (op ((L(upperStar (ModuleCat.{u + 1} Λ) v)).obj C))).obj (constantComplex Λ T') :=
+    (C : DerivedCategoryModule Λ T) :=
   derivedHomPullbackAlongIsoComparison v C (constantComplex Λ T) (constantComplex Λ T')
     (leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} Λ) v)
 
-
-private theorem finiteLisseDualPullbackComparison_isIso
-    {Λ : Type (u + 1)} [CommRing Λ] {T T' : Scheme.{u}} (v : T' ⟶ T)
-    (C : DerivedCategoryModule Λ T) (hC : DerivedCategory.IsDualizableEtale C) :
-    IsIso (finiteLisseDualPullbackComparison v C) := by
-  exact dualPullback_isIso_of_exactPairing (A := ModuleCat.{u + 1} Λ) v C
-    (constantComplex Λ T) (constantComplex Λ T')
-    (leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} Λ) v) hC
 
 /-- Duality for an ordinary bounded etale complex over the prime field: finite local
 constancy of cohomology is preserved, cohomology is the degree-reversed sheaf dual,
@@ -124,14 +99,14 @@ and the canonical comparison commutes with every scheme pullback.
 Source: blueprint sec-smooth-purity/sk-prop-sf-cbc/lem-fin-lisse-field-dual.md
 (blueprint: lem-fin-lisse-field-dual).
 
-Proof: the finite-ring local-constancy theorem gives bounded complexes of finite
-constant modules on an etale cover. Choosing bases over the coefficient field
-makes them site-perfect. The site-perfect homology-dual calculation gives the
-cohomology formula, and finite local constancy follows from the existing ordinary
-sheaf-dual theorem. Site-perfectness also implies dualizability. A strong monoidal
-functor preserves internal Hom out of a dualizable object; composing its comparison
-with the unit comparison gives exactly the displayed pullback map, by naturality
-of the tensor-Hom adjunction. -/
+Proof: the global vanishing bounds give `C.IsGE a` and `C.IsLE b`, and the coefficient
+ring `ULift (ZMod ℓ)` is a field. The truncation devissage of
+`isFiniteLocallyConstantSheaf_homology_coefficientDual` (exact pairings of finite locally
+constant cohomology sheaves over a field) gives finite local constancy of the dual
+cohomology and the degree-reversed sheaf-dual formula. The same devissage,
+`isIso_coefficientDualComparison_of_isFiniteLocallyConstantSheaf`, proves invertibility of
+`coefficientDualComparison`, which is by definition the displayed pullback map: the
+internal-Hom comparison of the strong monoidal pullback followed by the unit comparison. -/
 theorem finiteLisseFieldDual
     (ℓ : ℕ) [Fact ℓ.Prime] (T : Scheme.{u})
     (_hℓ : IsUnit (ℓ : Γ(T, ⊤)))
@@ -155,14 +130,16 @@ theorem finiteLisseFieldDual
             (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))))))) ∧
     (∀ (T' : Scheme.{u}) (v : T' ⟶ T),
       IsIso (finiteLisseDualPullbackComparison v C)) := by
-  have hp := finiteLisseField_sitePerfect ℓ T C _hbounded _hlisse
-  have h₂ := sitePerfect_fieldDual_homology ℓ T C hp
-  refine ⟨?_, h₂, ?_⟩
-  · intro q
-    obtain ⟨e⟩ := h₂ q
-    have hdual := (_hlisse (-q)).ihom_unit
-    exact Scheme.IsFiniteLocallyConstantSheaf.of_iso e.symm
-  · intro T' v
-    exact finiteLisseDualPullbackComparison_isIso v C hp.isDualizable
+  obtain ⟨a, b, _, hab⟩ := _hbounded
+  have : C.IsGE a := (_root_.DerivedCategory.isGE_iff C a).2
+    (fun n hn ↦ hab n (.inl hn))
+  have : C.IsLE b := (_root_.DerivedCategory.isLE_iff C b).2
+    (fun n hn ↦ hab n (.inr hn))
+  have hfield : IsField (ULift.{u + 1} (ZMod ℓ)) := Field.toIsField _
+  refine ⟨fun q ↦ ?_, fun q ↦ ?_, fun T' v ↦ ?_⟩
+  · exact (isFiniteLocallyConstantSheaf_homology_coefficientDual hfield C a b _hlisse q).1
+  · exact (isFiniteLocallyConstantSheaf_homology_coefficientDual hfield C a b _hlisse q).2
+  · exact isIso_coefficientDualComparison_of_isFiniteLocallyConstantSheaf
+      hfield C a b _hlisse v
 
 end AlgebraicGeometry.Etale

@@ -1,0 +1,424 @@
+{
+ "id": "lem-sfb-hypercover-normalized-single-site-descent",
+ "kind": "statement",
+ "title": "Augmentation-normalized single-site acyclic hypercover descent",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], with its small pro-etale site in compatible universes [def-weil-pbc-proetale-site, def-weil-size-convention], and $R$ a sheaf of commutative rings. Let $W$ be a site object and $U_\\bullet\\to W$ an augmented simplicial object [def-weil-pbc-simplicial-object]. Assume its finite proper-face matching objects exist, its degree-zero matching object is $W$, and each matching arrow is a covering [def-sfb-proper-face-matching-arrow]. Assume every $U_p$ is weakly contractible: evaluation there carries epimorphisms of set sheaves to surjections [sk-def-pe-weak-contractible]. For an integer-indexed strictly bounded-below complex $E$ of $R$-module sheaves [def-weil-sheaf-of-modules-category], write $T_U(E)^n=\\bigoplus_{p+q=n,\\,p\\geq0}E^q(U_p)$ with differential $\\delta+(-1)^p d_E$, $\\delta=\\sum_i(-1)^id_i^*$ [def-weil-pbc-proetale-hypercover-total]. Let $\\alpha_E:E(W)\\to T_U(E)$ be restriction into bidegree $(0,q)$ [def-weil-pbc-proetale-hypercover-augmentation]. All conclusions below are in abelian groups after forgetting scalars, with localization $Q$ into $D(\\mathbf{Ab})$ [def-weil-abstract-derived-category].\n\nEvaluation of module sheaves at every $U_p$ is exact, without an affineness assumption, and carries every quasi-isomorphism of coefficient complexes to a quasi-isomorphism. For every quasi-isomorphism $f:E\\to F$ between strictly bounded-below complexes, $T_U(f)$ is a quasi-isomorphism. For every strictly bounded-below termwise-injective complex $I$, $\\alpha_I$ is a quasi-isomorphism. Thus for every bounded-below termwise-injective resolution $i:E\\to I$, both $T_U(i)$ and $\\alpha_I$ are quasi-isomorphisms.\n\nLet $R\\Gamma(W,-)$ be the actual right derived evaluation [def-sfb-right-derived-functor], and let $\\rho_i:R\\Gamma(W,QE)\\xrightarrow{\\sim}Q(I(W))$ be its canonical computation on $i$. Then\n$$A_{U,E}=(Q T_U(i))^{-1}\\,Q\\alpha_I\\,\\rho_i:R\\Gamma(W,QE)\\xrightarrow{\\sim}Q T_U(E)$$\nis independent of $i$ and natural for all coefficient chain maps between strictly bounded-below complexes. Its normalization is $Q T_U(i) A_{U,E}=Q\\alpha_I\\rho_i$ for every such resolution. More explicitly, a coefficient homotopy $s:f\\simeq g$ induces the total homotopy with component $(-1)^p s|_{U_p}$ on bidegree $(p,q)$, and a comparison $k:I\\to I'$ with $ki\\simeq i'$ satisfies $Q T_U(k)Q T_U(i)=Q T_U(i')$ and $Q\\Gamma(W,k)\\rho_i=\\rho_{i'}$.\n\nFor any refinement $r:U'_\\bullet\\to U_\\bullet$ over $W$, with $U'$ satisfying the same assumptions, restriction gives chain maps $r_E:T_U(E)\\to T_{U'}(E)$ satisfying $r_I\\alpha_I=\\alpha'_I$, $r_I T_U(i)=T_{U'}(i)r_E$, and $Q r_E A_{U,E}=A_{U',E}$. These maps commute with coefficient maps and identity and composite refinements. For a sheaf $M$ in degree zero, $T_U(M[0])$ is the alternating section complex with degree $p$ term $M(U_p)$.\n\nInjective objects and resolutions are as in [def-sp-injective-resolutions]; coefficient homotopies and K-injectivity are as in [def-pur-kinjective-complex].",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09A2, label lemma-compute-cohomology; Tag 0946, sites-cohomology.tex label lemma-w-contractible. Agent refinement: signed homotopy, every-resolution normalization, coefficient naturality and refinement identities."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-pbc-simplicial-object",
+  "def-sfb-proper-face-matching-arrow",
+  "sk-def-pe-weak-contractible",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-proetale-hypercover-total",
+  "def-weil-pbc-proetale-hypercover-augmentation",
+  "def-sfb-right-derived-functor",
+  "def-sp-injective-resolutions",
+  "def-pur-kinjective-complex"
+ ],
+ "proof": [
+  {
+   "text": "For each $p$, apply [lem-weil-pbc-proetale-weakly-contractible-evaluation-exact] to $W=U_p$: its hypothesis is precisely the assumed surjectivity of evaluation on set-sheaf epimorphisms, in the coefficient universe. It gives preservation of homology by module evaluation. Applying this to a short exact sequence viewed as a three-term complex proves exactness, and $H^q(f(U_p))=H^q(f)(U_p)$ proves preservation of quasi-isomorphisms. Forgetting the $R(U_p)$-module structure does not change kernels, images, or these equalities. Nothing in this application requires $U_p$ to be affine.",
+   "uses": [
+    "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0946, lemma-w-contractible (1), module-valued version"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-proetale-hypercover-total-quasi-iso] to the two bounded-below coefficient complexes and the coefficient quasi-isomorphism. Weak contractibility supplies its section-surjectivity hypothesis by the set-sheaf epi criterion. Its total is the published signed total. Forgetting module scalars preserves homology, so the same map is a quasi-isomorphism of abelian-group complexes.",
+   "uses": [
+    "lem-weil-pbc-proetale-hypercover-total-quasi-iso",
+    "def-weil-pbc-proetale-hypercover-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A2, lemma-compute-cohomology, second paragraph; finite-diagonal comparison"
+   }
+  },
+  {
+   "text": "A covering map induces an epimorphism of represented sheaves: two maps out of its codomain agreeing after pullback agree by sheaf separation on the generated covering sieve. Apply this to every matching arrow in the slice. In degree zero the terminal matching object is canonically isomorphic to the identity over W; in degree one retain the product fan; in higher degrees transport the matching arrow across the recorded limiting-cone isomorphism. These are exactly the hypotheses of [lem-weil-pbc-proetale-hypercover-injective-row], giving the actual augmented section-row quasi-isomorphism for every injective module sheaf.",
+   "uses": [
+    "lem-weil-pbc-proetale-subcanonical",
+    "def-sfb-proper-face-matching-arrow",
+    "lem-weil-pbc-proetale-hypercover-injective-row"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Tags 01GE, lemma-acyclic-hypercover-sheaves, and 01GW, lemma-injective-trivial-cech, ringed-module analogue; Tag 00WN"
+   }
+  },
+  {
+   "text": "Now let $I$ be strictly bounded below with injective terms. Step 3 supplies the row hypothesis of [lem-weil-pbc-proetale-hypercover-injective-complex-comparison], which therefore makes the actual restriction augmentation $\\alpha_I:I(W)\\to T_U(I)$ a quasi-isomorphism. This is the map into the $(0,q)$ summands, since [def-weil-pbc-proetale-hypercover-augmentation] specifies precisely that augmentation. Together with step 2 this proves both quasi-isomorphism assertions for every $i:E\\to I$.",
+   "uses": [
+    "lem-weil-pbc-proetale-hypercover-injective-complex-comparison",
+    "def-weil-pbc-proetale-hypercover-augmentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A2, lemma-compute-cohomology, final paragraph"
+   }
+  },
+  {
+   "text": "For a coefficient homotopy $s:f\\simeq g$, put $H^{p,q}=(-1)^p s^q(U_p)$, landing in bidegree $(p,q-1)$. Naturality of the sheaf morphisms $s^q$ gives $\\delta s=s\\delta$. With $D=\\delta+(-1)^p d$, the horizontal terms in $DH+HD$ are $(-1)^p\\delta s+(-1)^{p+1}s\\delta=0$, and the vertical terms are $ds+sd=f-g$. Hence $DH+HD=T_U(f)-T_U(g)$. There is no convergence issue: $H$ acts one summand at a time in each finite diagonal. Evaluation at $W$ likewise sends $s$ to a homotopy. By the homotopy-category localization in [def-weil-abstract-derived-category], both functors therefore send homotopic maps to equal derived maps.",
+   "uses": [
+    "def-weil-pbc-proetale-hypercover-total",
+    "def-pur-kinjective-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A2, signed-total convention; agent calculation of coefficient homotopy"
+   }
+  },
+  {
+   "text": "The pro-etale site of the statement is small in the chosen universe, so [prop-pur-kinjective-resolutions-exist] shows that $\\operatorname{Mod}(R)$ is Grothendieck abelian and that every complex of $R$-module sheaves has a K-injective resolution; this is the hypothesis of [def-sfb-right-derived-functor] for the additive functor $\\Gamma(W,-):\\operatorname{Mod}(R)\\to\\mathbf{Ab}$, so $R\\Gamma(W,-)$ and its unit exist. By [lem-sp-grothendieck-enough-injectives] $\\operatorname{Mod}(R)$ has enough injectives, so [lem-sc-bounded-below-injective-resolution-existence] gives every strictly bounded-below $E$ a bounded-below termwise-injective resolution $i:E\\to I$; hence $A_{U,E}$ is defined for every such $E$. Mathlib CochainComplex.isKInjective_of_injective says directly that each bounded-below termwise-injective complex is K-injective. For two resolutions $i:E\\to I$ and $i':E\\to I'$, use [lem-sp-kinjective-comparison-principle] with $s=i$ and target $I'$ to obtain a chain map $k:I\\to I'$ with $ki\\simeq i'$. Step 5 gives $QT_U(k)QT_U(i)=QT_U(i')$. Writing $\\eta$ for the actual right-derived evaluation unit of [def-sfb-right-derived-functor], its computation on $i$ is $\\rho_i=\\eta_I^{-1}R\\Gamma(W,Qi)$. Unit naturality and $Qk\\,Qi=Qi'$ give\n$$Q\\Gamma(W,k)\\rho_i=\\eta_{I'}^{-1}R\\Gamma(W,Qk)R\\Gamma(W,Qi)=\\rho_{i'}.$$\nThis uses the unit of the specified derived functor, not an arbitrary isomorphism.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-sc-bounded-below-injective-resolution-existence",
+    "lem-sp-kinjective-comparison-principle",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I, lemma-K-injective; 070J, lemma-bounded-below-injectives-K-injective; 070Y, lemma-K-injective-defined; unit naturality"
+   }
+  },
+  {
+   "text": "Set $a_i=QT_U(i)$ and $b_i=Q\\alpha_I\\rho_i$. Steps 2 and 4 make $a_i,b_i$ invertible. Define $A_i=a_i^{-1}b_i$, so $a_iA_i=b_i$. For the comparison $k$ of step 6, augmentation naturality gives $QT_U(k)b_i=b_{i'}$ and step 5 gives $QT_U(k)a_i=a_{i'}$. Consequently $a_{i'}A_i=b_{i'}$, and cancellation of the invertible $a_{i'}$ yields $A_i=A_{i'}$. This proves independence and the normalization for every resolution, not merely for a selected one.",
+   "uses": [
+    "def-weil-pbc-proetale-hypercover-augmentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070Y, lemma-K-injective-defined; agent cancellation using the actual augmentation"
+   }
+  },
+  {
+   "text": "For a coefficient chain map $f:E\\to F$, take resolutions $i:E\\to I$, $j:F\\to J$, which exist by step 6. The comparison principle with quasi-isomorphism $i$ and K-injective target $J$ supplies $k:I\\to J$ with $ki\\simeq jf$. The signed homotopy of step 5 gives $QT_U(k)QT_U(i)=QT_U(j)QT_U(f)$. The unit computation in step 6, with $Qk\\,Qi=Qj\\,Qf$, gives $Q\\Gamma(W,k)\\rho_i=\\rho_j R\\Gamma(W,Qf)$. Finally, augmentation naturality gives $QT_U(k)Q\\alpha_I=Q\\alpha_JQ\\Gamma(W,k)$. Substitute these three equalities in step 7 and cancel $QT_U(j)$ to obtain\n$$QT_U(f)A_{U,E}=A_{U,F}R\\Gamma(W,Qf).$$\nThus naturality holds for every coefficient chain map, without requiring a strictly commuting resolution square.",
+   "uses": [
+    "lem-sp-kinjective-comparison-principle",
+    "def-sfb-right-derived-functor",
+    "def-weil-pbc-proetale-hypercover-augmentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I and 070Y; agent naturality calculation for a homotopy-commuting resolution square"
+   }
+  },
+  {
+   "text": "For a refinement $r$, define $r_E$ on the $(p,q)$ summand by $E^q(U_p)\\to E^q(U'_p)$. Commutation of $r$ with faces makes it commute with $\\delta$, and restrictions commute with $d_E$, so it is a chain map. Restriction functoriality gives $r_I\\alpha_I=\\alpha'_I$ and $r_IT_U(i)=T_{U'}(i)r_E$. After applying $Q$ and composing with $A_{U,E}$, these identities and step 7 give\n$$QT_{U'}(i)\\,Qr_E A_{U,E}=Qr_I Q\\alpha_I\\rho_i=Q\\alpha'_I\\rho_i=QT_{U'}(i)A_{U',E}.$$\nCancel $QT_{U'}(i)$, invertible by step 2 for $U'$, to obtain the desired refinement normalization. On each summand coefficient maps commute with restriction, the identity refinement restricts by the identity, and restriction for a composite is the composite restriction; hence all these identities hold already as chain maps. For $E=M[0]$, only $q=0$ survives, so degree $p$ is $M(U_p)$ and the total differential is precisely $\\sum_j(-1)^j d_j^*$. In Lean the row restrictions are the maps of the actual opposite-simplicial restriction functor; its map_id and map_comp laws give the row identities, which termwise extension and totalization preserve.",
+   "uses": [
+    "def-weil-pbc-proetale-hypercover-total",
+    "def-weil-pbc-proetale-hypercover-augmentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A2, section total and restriction augmentation; agent refinement calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact",
+  "lem-weil-pbc-proetale-hypercover-total-quasi-iso",
+  "def-weil-pbc-proetale-hypercover-total",
+  "lem-weil-pbc-proetale-subcanonical",
+  "def-sfb-proper-face-matching-arrow",
+  "lem-weil-pbc-proetale-hypercover-injective-row",
+  "lem-weil-pbc-proetale-hypercover-injective-complex-comparison",
+  "def-weil-pbc-proetale-hypercover-augmentation",
+  "def-pur-kinjective-complex",
+  "def-weil-abstract-derived-category",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-sc-bounded-below-injective-resolution-existence",
+  "lem-sp-kinjective-comparison-principle",
+  "def-sfb-right-derived-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09A2, lemma-compute-cohomology, row and column argument, with ringed-module hypercover rows Tags 01GE/01GW and explicit signed homotopy, derived-unit cancellation and refinement identities using Tags 070I/070J/070Y. H2 realization: reuse the published pro-etale total quasi-isomorphism and injective-row interfaces; construct the signed total homotopy on coproduct summands; use the canonical derived unit for resolution comparison and cancellation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(IsWeaklyContractible|[Hh]ypercover).*(quasiIso|QuasiIso|[Ii]njective)|[Ii]njective.*[Hh]ypercover",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: general injective-resolution/derived-functor or truncated-hypercover infrastructure does not state this every-resolution augmentation normalization and signed total/refinement compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "(homotopy|Homotopy).*(total|Total)|(total|Total).*(homotopy|Homotopy)",
+   "results": "2 hits: Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean, Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: general injective-resolution/derived-functor or truncated-hypercover infrastructure does not state this every-resolution augmentation normalization and signed total/refinement compatibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weakly contractible hypercover signed total of an injective resolution comparison and augmentation quasi-isomorphisms",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.self, QuasiIso, CategoryTheory.injectiveResolutions, CategoryTheory.InjectiveResolution.of_def, CategoryTheory.InjectiveResolution.ofCocomplex, CategoryTheory.InjectiveResolution.mk, CategoryTheory.InjectiveResolution.quasiIso, CategoryTheory.InjectiveResolution.mk.injEq",
+   "date": "2026-10-22",
+   "verdict": "no match: general injective-resolution/derived-functor or truncated-hypercover infrastructure does not state this every-resolution augmentation normalization and signed total/refinement compatibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrothendieckTopology.IsWeaklyContractible\", \"QuasiIso\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: general injective-resolution/derived-functor or truncated-hypercover infrastructure does not state this every-resolution augmentation normalization and signed total/refinement compatibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Homotopy\", \"total\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: general injective-resolution/derived-functor or truncated-hypercover infrastructure does not state this every-resolution augmentation normalization and signed total/refinement compatibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Augmentation normalized derived sections comparison independent of injective resolution natural under hypercover refinements",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: general injective-resolution/derived-functor or truncated-hypercover infrastructure does not state this every-resolution augmentation normalization and signed total/refinement compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a small subcanonical ringed site a weakly contractible hypercover has exact module evaluation and its bounded below injective resolution section total has quasi-isomorphic column and restriction augmentation maps",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ, CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex, CategoryTheory.InjectiveResolution.instQuasiIsoIntι', CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, CochainComplex.cm5b, CochainComplex.isKInjective_of_injective_aux, CategoryTheory.InjectiveResolution.cocomplex_exactAt_succ, CategoryTheory.InjectiveResolution.exact₀",
+   "date": "2026-10-22",
+   "verdict": "no match: general injective-resolution/derived-functor or truncated-hypercover infrastructure does not state this every-resolution augmentation normalization and signed total/refinement compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Signed alternating section totalization preserves chain homotopies with sign minus one to the simplicial degree and gives resolution-independent augmentation-normalized derived section comparisons",
+   "results": "8 hits: ChainComplex.alternatingConstHomotopyEquiv, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyInvHomId, AlgebraicTopology.DoldKan.homotopyPInftyToId_hom, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_hom, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyHomInvId, AlgebraicTopology.DoldKan.hσ'_eq, AlgebraicTopology.DoldKan.Hσ",
+   "date": "2026-10-22",
+   "verdict": "no match: general injective-resolution/derived-functor or truncated-hypercover infrastructure does not state this every-resolution augmentation normalization and signed total/refinement compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "(hypercover|Hypercover|[Ii]sWeaklyContractible|[Ww]eaklyContractible)",
+   "results": "25 hits: Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean, Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean, Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean, Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean, Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean, Mathlib/Topology/Category/TopCat/GrothendieckTopology.lean, Mathlib/Topology/Category/TopCat/GrothendieckTopology.lean, Mathlib/Topology/Category/TopCat/GrothendieckTopology.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: general injective-resolution/derived-functor or truncated-hypercover infrastructure does not state this every-resolution augmentation normalization and signed total/refinement compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hypercover descent over a ringed pro-etale site: the two actual injective-resolution and restriction-augmentation maps define a canonical natural isomorphism in the derived category independent of resolution and compatible with refinements",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.OneHypercover.isoMk, CategoryTheory.GrothendieckTopology.OneHypercover.exists_nonempty_homotopy, CategoryTheory.GrothendieckTopology.OneHypercover.toZeroHypercover_toPreZeroHypercover, CategoryTheory.GrothendieckTopology.OneHypercover.isoMk_hom, CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac'_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality_assoc, CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac'",
+   "date": "2026-10-22",
+   "verdict": "no match: general injective-resolution/derived-functor or truncated-hypercover infrastructure does not state this every-resolution augmentation normalization and signed total/refinement compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "(hypercover|weaklyContractible).*(quasiIso|augmentation|resolution)",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give injective-resolution comparison or truncated hypercover/homotopy infrastructure, not the ringed-site every-resolution normalized total descent statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Acyclic hypercover section totalization computes derived evaluation naturally with respect to injective resolutions",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.injectiveResolutions, CategoryTheory.InjectiveResolution.self, CategoryTheory.InjectiveResolution.Hom.ι'_comp_hom'_assoc, CategoryTheory.InjectiveResolution.of, CategoryTheory.InjectiveResolution.isoRightDerivedObj, CategoryTheory.InjectiveResolution.of_def, CategoryTheory.InjectiveResolution.instHasInjectiveResolution",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give injective-resolution comparison or truncated hypercover/homotopy infrastructure, not the ringed-site every-resolution normalized total descent statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hypercover\", \"QuasiIso\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give injective-resolution comparison or truncated hypercover/homotopy infrastructure, not the ringed-site every-resolution normalized total descent statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weakly contractible hypercover descent for bounded below complexes with augmentation normalized comparison independent of injective resolution and natural under refinements",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.iso_hom_naturality_assoc, CategoryTheory.InjectiveResolution.comp_descHomotopyZeroSucc, CategoryTheory.InjectiveResolution.descFSucc, CategoryTheory.InjectiveResolution.descHomotopyZeroSucc, CategoryTheory.InjectiveResolution.descHomotopyZeroZero, CategoryTheory.InjectiveResolution.desc_commutes_assoc, CategoryTheory.InjectiveResolution.comp_descHomotopyZeroSucc_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero'",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give injective-resolution comparison or truncated hypercover/homotopy infrastructure, not the ringed-site every-resolution normalized total descent statement"
+  },
+  {
+   "tool": "grep",
+   "query": "(augmentation|hypercover).*(rightDerived|derived|homotopy)",
+   "results": "11 hits: Mathlib/AlgebraicTopology/ExtraDegeneracy.lean, Mathlib/CategoryTheory/Sites/Hypercover/Saturate.lean, Mathlib/CategoryTheory/Sites/Hypercover/Saturate.lean, Mathlib/CategoryTheory/Sites/Hypercover/Saturate.lean, Mathlib/CategoryTheory/Sites/Hypercover/Saturate.lean, Mathlib/CategoryTheory/Sites/Hypercover/Saturate.lean, Mathlib/CategoryTheory/Sites/Hypercover/Homotopy.lean, Mathlib/CategoryTheory/Sites/Hypercover/Homotopy.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give injective-resolution comparison or truncated hypercover/homotopy infrastructure, not the ringed-site every-resolution normalized total descent statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Signed total homotopy on a weakly contractible simplicial hypercover and refinement compatibility of derived sections",
+   "results": "8 hits: AlgebraicTopology.DoldKan.hσ, HomologicalComplex.mapBifunctorMapHomotopy.ιMapBifunctor_hom₁, CategoryTheory.GrothendieckTopology.OneHypercover.arrowsCompatible, CategoryTheory.PreOneHypercover.Homotopy.mk, CategoryTheory.PreOneHypercover.Homotopy.noConfusionType, CategoryTheory.PreOneHypercover.Homotopy.ctorIdx, CategoryTheory.PreOneHypercover.Homotopy.H, CategoryTheory.GrothendieckTopology.OneHypercover.homotopicRel",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give injective-resolution comparison or truncated hypercover/homotopy infrastructure, not the ringed-site every-resolution normalized total descent statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-acyclic-hypercover-pullback-normalization",
+  "date": "2026-10-22",
+  "group": "Q75"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: the unpunctured one-term root-tower calculation underlying coordinate-face restriction in the tame-boundary expansion. Hypercover descent: identification of the section-complex map with the specified adjunction-unit pullback. Re-split: old steps 1-5 and refinement part of step 8.",
+   "via": [
+    "lem-sfb-acyclic-hypercover-pullback-normalization",
+    "lem-sfb-wstrict-lisse-component-cohomology",
+    "lem-sfb-root-tower-coordinate-face",
+    "lem-sfb-root-tower-inner-support",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-hypercover-normalized-single-site-descent",
+  "worker": "stage1",
+  "summary": "Reuse existing general exact-evaluation, bounded-below total comparison, injective module hypercover rows and K-injective comparison nodes. Prove the signed homotopy and all every-resolution, coefficient and refinement normalization identities explicitly. No new nodes and no statement change.",
+  "blueprint": "Retains inherited from.place/via: the unpunctured root-tower calculation and hypercover descent in the tame-boundary open-direct-image route; realizes old normalization steps 1-5 and refinement part of step 8. Whole-blueprint searches for hypercover and contractible found no node stating all normalization clauses. ancestor returns None, which is preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact",
+    "why": "General exact evaluation tool with precisely the set-sheaf epi hypothesis; not a replacement for the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-bounded-below-total-column-comparison",
+    "why": "General homological algebra comparison for finite diagonals, with bounds checked explicitly."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-subcanonical",
+    "why": "Generic topology fact used to identify represented matching objects."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+    "why": "Generic set-sheaf epi criterion, applied to covering matching arrows."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-hypercover-injective-augmentation",
+    "why": "General module-valued injective row tool; avoids an unjustified assertion about forgetful preservation of injectives."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-hypercover-injective-complex-comparison",
+    "why": "General row-to-total tool applied to the actual augmentation."
+   },
+   {
+    "node": "lem-sp-kinjective-computes",
+    "why": "General bounded-below injective K-injectivity, applied with the identity functor."
+   },
+   {
+    "node": "lem-sp-kinjective-comparison-principle",
+    "why": "General comparison lifting in the homotopy category for arbitrary quasi-isomorphisms."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact",
+  "lem-weil-pbc-proetale-subcanonical",
+  "lem-weil-pbc-proetale-hypercover-injective-complex-comparison",
+  "lem-sp-kinjective-comparison-principle"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-14327dbfe",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-14327dbfe (reviewer sub-agent of L); spot-checked: I read Stacks 09A2 (proetale.tex l.3066; two filtrations: columns exact on U_n, injective rows) and 0946 (1), and checked the labels for 01GE/01GW/070I/J/Y. The delivery has no new nodes and keeps the statement unchanged. Steps 1-9 match the statements they cite. Step 1: evaluation-exact needs exactly set-sheaf epi surjectivity; its homology preservation gives exactness and preserves quasi-isomorphisms. Step 2: column comparison with bounds 0,N; same coproduct-total convention as def-sp-double-complex-total (advisory: lem-weil-pbc-proetale-hypercover-total-quasi-iso already states this clause). Step 3: subcanonical, so h_M is the sheaf limit M_p. A covering matching arrow is locally surjective, hence epi, which is the hypothesis of the ringed injective-row lemma. Step 4: the row-to-total comparison applies to the actual α. Step 5: recomputed DH+HD=(-1)^p(δs-sδ)+(ds+sd)=f-g. Steps 6-8: ρ_i=η_I^{-1}RΓ(Qi), unit naturality, a_{i'}A_i=b_{i'} and cancellation, naturality via ki≃jf, all rechecked. Step 9: refinement cancellation rechecked. Edge cases: zero complex, N<0, constant hypercover (A=ρ), identity refinement. FIX (C1/C4): nothing cited the existence of K-injective resolutions for every complex, which is the hypothesis of def-sfb-right-derived-functor, or the bounded-below injective resolutions that A_{U,E} and step 8 need. The old parent step 5 cited prop-pur-kinjective-resolutions-exist and the split dropped it. Step 6 now cites prop-pur-kinjective-resolutions-exist (on-route, sk-def-sf-operations), lem-sp-grothendieck-enough-injectives and lem-sc-bounded-below-injective-resolution-existence (both mathlib). These replace the unsplit off-unit lem-weil-pbc-ring-sheaves-grothendieck, whose tool_use entry is removed. Step 8 now refers to step 6. No cycle. The other declared generic tool_uses are accepted. No SGA source is cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleNormalizedHypercoverDescent",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.NormalizedDescent.descent",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ProEt.NormalizedDescent.Modules",
+   "AlgebraicGeometry.Scheme.ProEt.NormalizedDescent.evaluation",
+   "AlgebraicGeometry.Scheme.ProEt.NormalizedDescent.evaluation_additive",
+   "AlgebraicGeometry.Scheme.ProEt.NormalizedDescent.total",
+   "AlgebraicGeometry.Scheme.ProEt.NormalizedDescent.augmentation",
+   "AlgebraicGeometry.Scheme.ProEt.NormalizedDescent.IsHypercover",
+   "AlgebraicGeometry.Scheme.ProEt.NormalizedDescent.evaluation_exact",
+   "AlgebraicGeometry.Scheme.ProEt.NormalizedDescent.evaluation_quasiIso",
+   "AlgebraicGeometry.Scheme.ProEt.NormalizedDescent.total_quasiIso",
+   "AlgebraicGeometry.Scheme.ProEt.NormalizedDescent.augmentation_quasiIso",
+   "AlgebraicGeometry.Scheme.ProEt.NormalizedDescent.coefficient_resolutions",
+   "AlgebraicGeometry.Scheme.ProEt.NormalizedDescent.derivedEvaluation",
+   "AlgebraicGeometry.Scheme.ProEt.NormalizedDescent.resolutionComputation",
+   "AlgebraicGeometry.Scheme.ProEt.NormalizedDescent.descent",
+   "AlgebraicGeometry.Scheme.ProEt.NormalizedDescent.comparison",
+   "AlgebraicGeometry.Scheme.ProEt.NormalizedDescent.resolutionTotalIso",
+   "AlgebraicGeometry.Scheme.ProEt.NormalizedDescent.injectiveAugmentationIso",
+   "AlgebraicGeometry.Scheme.ProEt.NormalizedDescent.comparison_formula",
+   "AlgebraicGeometry.Scheme.ProEt.NormalizedDescent.comparison_naturality",
+   "AlgebraicGeometry.Scheme.ProEt.NormalizedDescent.signed_homotopy",
+   "AlgebraicGeometry.Scheme.ProEt.NormalizedDescent.resolution_comparison",
+   "AlgebraicGeometry.Scheme.ProEt.NormalizedDescent.comparison_normalization",
+   "AlgebraicGeometry.Scheme.ProEt.NormalizedDescent.rowRefinement",
+   "AlgebraicGeometry.Scheme.ProEt.NormalizedDescent.rowRefinement_naturality",
+   "AlgebraicGeometry.Scheme.ProEt.NormalizedDescent.rowRefinementNat",
+   "AlgebraicGeometry.Scheme.ProEt.NormalizedDescent.refinement",
+   "AlgebraicGeometry.Scheme.ProEt.NormalizedDescent.refinement_squares",
+   "AlgebraicGeometry.Scheme.ProEt.NormalizedDescent.comparison_refinement",
+   "AlgebraicGeometry.Scheme.ProEt.NormalizedDescent.refinement_functoriality",
+   "AlgebraicGeometry.Scheme.ProEt.NormalizedDescent.single_sheaf",
+   "AlgebraicGeometry.Scheme.ProEt.NormalizedDescent.rowRestrictionFunctor",
+   "AlgebraicGeometry.Scheme.ProEt.NormalizedDescent.site_hasSheafify",
+   "AlgebraicGeometry.Scheme.ProEt.NormalizedDescent.site_wEqualsLocallyBijective"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleNormalizedHypercoverDescent.lean",
+  "statement": "theorem descent (hcover : IsHypercover X W U) (hweak : ∀ p : ℕ, (topology X).IsWeaklyContractible.{u + 1} (U _⦋p⦌).left) (E : CochainComplex (Modules X R) ℤ) (NE : ℤ) [E.IsStrictlyGE NE] : ∃! A : (derivedEvaluation X R W).obj (DerivedCategory.Q.obj E) ≅ DerivedCategory.Q.obj ((total X R W U).obj E), ∀ (I : CochainComplex (Modules X R) ℤ) (NI : ℤ) [I.IsStrictlyGE NI] [∀ n : ℤ, Injective (I.X n)] (i : E ⟶ I) [QuasiIso i], QuasiIso ((total X R W U).map i) ∧ QuasiIso ((augmentation X R W U).app I) ∧ A.hom ≫ DerivedCategory.Q.map ((total X R W U).map i) = (resolutionComputation X R W NI i).hom ≫ DerivedCategory.Q.map ((augmentation X R W U).app I)",
+  "branch": "sheaf-dag",
+  "by": "Q07",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The declarations jointly state every clause, for arbitrary W and integer-indexed bounded-below coefficients. descent and comparison_formula give the actual derived evaluation comparison normalized by every resolution; the signed summand homotopy and refinement identities are explicit. Helper constructions compose the recorded section total and augmentation with forgetting scalars; no affineness, monomorphic resolution, or chosen comparison map is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a277bfa8d",
+  "group": "Q07",
+  "result": "pass",
+  "note": "lean.statement verbatim; 30 declarations = module decls; node identical to live except lean. Hypotheses match recorded IsProperFaceMatchingArrow (deg0 terminal=W, deg1 fan, higher boundary limit; existential form equivalent), IsWeaklyContractible.{u+1} (locally surjective = epi), recorded hypercoverTotal/hypercoverAugmentation with forgetting scalars, actual rightDerivedFunctorOfQuasiIsoResolutions and its canonical ObjIso for rho_i. All clauses present: evaluation_exact/quasiIso, total_quasiIso (hweak only), augmentation_quasiIso (hcover only), descent ∃! with every-resolution normalization A≫QT(i)=rho_i≫Qalpha_I, formula, naturality for all chain maps, signed homotopy (-1)^p s (recomputed DH+HD=f-g with Mathlib total sign eps2=(-1)^p), resolution_comparison orientations, refinement squares/normalization/functoriality, single_sheaf. No extra assumptions or universe equalities; sorry-only; real data; plain imports = proof-dep modules. No compile (no change). Advisory: downstream Sheaf.Paper.AcyclicHypercoverPullbackNormalization duplicates the sections/total/augmentation composites; parent should reuse these on re-statement."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261024T185921-L-3767342",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

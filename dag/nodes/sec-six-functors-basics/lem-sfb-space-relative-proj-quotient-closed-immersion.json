@@ -1,0 +1,308 @@
+{
+ "id": "lem-sfb-space-relative-proj-quotient-closed-immersion",
+ "kind": "statement",
+ "title": "A graded surjection induces a closed immersion of relative Proj over a space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Let $\\mathcal A=\\bigoplus_{n\\geq0}\\mathcal A_n$ and $\\mathcal B=\\bigoplus_{n\\geq0}\\mathcal B_n$ be commutative unital graded $\\mathcal O_X$-algebras on the small etale site [def-trf-etale-graded-module-algebra] with every component quasi-coherent [def-trf-space-quasi-coherent-module], and let $\\varphi:\\mathcal A\\to\\mathcal B$ be a homogeneous algebra homomorphism such that $\\varphi_n:\\mathcal A_n\\to\\mathcal B_n$ is surjective for every $n\\geq0$. Write $P_X(\\mathcal A)$ and $P_X(\\mathcal B)$ for the relative Proj spaces with their scheme-test comparisons [lem-sfb-space-relative-proj-scheme-tests], and use tensor pullback [def-trf-space-etale-module-functors]. Then there is a unique morphism $r_\\varphi:P_X(\\mathcal B)\\to P_X(\\mathcal A)$ over $X$ with the following property: for every $S$-scheme $W$ and morphism $g:W\\to X$, the map $g^*\\varphi$ is surjective in every degree, and under the comparisons $W\\times_XP_X(\\mathcal B)\\simeq\\operatorname{Proj}_W((g^*\\mathcal B)_{\\mathrm{Zar}})$ and $W\\times_XP_X(\\mathcal A)\\simeq\\operatorname{Proj}_W((g^*\\mathcal A)_{\\mathrm{Zar}})$ the base change $W\\times_Xr_\\varphi$ is the morphism of scheme relative Proj induced by the surjection $g^*\\varphi$ [prop-nagata-relative-proj-functoriality]. The morphism $r_\\varphi$ is a closed immersion of algebraic spaces, meaning that it is representable by schemes [def-trf-algebraic-space] and every scheme base change is a closed immersion [def-weil-closed-immersion]. In particular, for an affine etale chart $u:U=\\operatorname{Spec}R\\to X$, $U\\times_Xr_\\varphi$ is the closed immersion $\\operatorname{Proj}(\\mathcal B(U))\\hookrightarrow\\operatorname{Proj}(\\mathcal A(U))$ induced by the surjective graded ring map $\\varphi_U$. The construction is compatible with composition of such surjections and is the identity for $\\varphi=\\mathrm{id}$. Empty Proj spaces are allowed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-divisors.tex",
+  "place": "Tag 085H (lemma-surjective-graded-rings-map-relative-proj), clauses (1)-(2), specialised to a map surjective in every degree, with the morphism r_psi of Tag 085F (lemma-morphism-relative-proj) and the etale-local reduction to constructions.tex Tag 07ZI (lemma-surjective-graded-rings-map-relative-proj); transitivity Tag 085G (lemma-morphism-relative-proj-transitive)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-trf-etale-graded-module-algebra",
+  "def-trf-space-quasi-coherent-module",
+  "lem-sfb-space-relative-proj-scheme-tests",
+  "def-trf-space-etale-module-functors",
+  "prop-nagata-relative-proj-functoriality",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "For every scheme test $g:W\\to X$, tensor pullback is left adjoint to the specified module direct image [def-trf-space-etale-module-functors]. By [lem-weil-pbc-left-adjoint-preserves-colimits] it preserves the finite coequalizer expressing each surjection $\\varphi_n$ as the cokernel of its kernel. Module sheaves are abelian, with sheafified cokernels [def-weil-sheaf-of-modules-category]; hence $g^*\\varphi_n$ is surjective. This uses preservation of cokernels, not preservation of kernels or flatness. Its source and target are quasi-coherent by [lem-sfb-space-module-pullback-quasicoherent]. Pass to Zariski modules on $W$ with [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence]; the equivalence and its inverse preserve this cokernel. Denote the resulting graded algebras by $A_g,B_g$ and the map by $\\varphi_g$. Products, units and pullback composition are those already supplied with the scheme-test comparisons [lem-sfb-space-relative-proj-scheme-tests]. In successive pullbacks use [def-sfb-space-module-tensor-composition], sending $c\\otimes(b\\otimes a)$ to $cb'\\otimes a$. Naturality of that formula in $a$ identifies the two successive pullbacks of $\\varphi$.",
+   "uses": [
+    "def-trf-space-etale-module-functors",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-weil-sheaf-of-modules-category",
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sfb-space-relative-proj-scheme-tests",
+    "def-sfb-space-module-tensor-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 085F (lemma-morphism-relative-proj), scheme localization; tensor pullback adjunction: sites-modules.tex Tag 03D7 (lemma-adjoint-pullback-pushforward-modules)."
+   }
+  },
+  {
+   "text": "First work over a scheme $W$ with a degreewise surjection $\\alpha:A\\to B$ of quasi-coherent graded algebras. Use [lem-sfb-scheme-proj-veronese-quotient-functor]. On a quasi-compact test $f:T\\to W$ send a quotient datum $[d,f,L,\\psi]$ for $B$ to $[d,f,L,\\psi\\circ f^*\\alpha^{(d)}]$ for $A$. The degree-one map remains surjective by step 1, applied to schemes, and composition of surjections. If $\\beta^{\\otimes n}\\psi_{an}=\\psi'_{a'n}$ witnesses equivalence at a common multiple $ad=a'd'$, precomposing both sides with $f^*\\alpha_{adn}$ gives the same witness for the new data. Thus the rule is well-defined. For a scheme map $v:T'\\to T$, pulling back this formula gives $v^*\\psi\\circ v^*f^*\\alpha^{(d)}$, which is the formula for $f\\circ v$ under the canonical Zariski pullback compositor $v^*f^*\\simeq(f\\circ v)^*$ of [def-pc-module-pullback], by naturality of that isomorphism in the module. Consequently the rule commutes with test pullback. For non-quasi-compact tests apply it to the compatible family on quasi-compact opens in the cited functor; on a map of arbitrary tests check the same equality on quasi-compact open refinements of inverse images. The representing bijection and [lem-pc-yoneda] give a unique $W$-morphism $c_\\alpha:\\operatorname{Proj}_W(B)\\to\\operatorname{Proj}_W(A)$ inducing this operation.",
+   "uses": [
+    "lem-sfb-scheme-proj-veronese-quotient-functor",
+    "def-pc-module-pullback",
+    "lem-pc-yoneda"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01NY (lemma-relative-proj), 01NZ (lemma-glueing-gives-functor-proj), and equation-proj: precomposition on the represented quotient functor."
+   }
+  },
+  {
+   "text": "Identify $c_\\alpha$ with the ordinary induced Proj map. On an affine base open, write $A(V),B(V)$ for the section graded rings. Quasi-coherent affine chart calculus [lem-sfb-space-qcoh-affine-chart-calculus] makes $\\alpha(V)$ surjective in every degree. For homogeneous $b\\in B(V)_d$, $d>0$, choose $a\\in A(V)_d$ with $\\alpha(a)=b$. The opens $D_+(b)$ cover $\\operatorname{Proj}(B(V))$ by [prop-nagata-proj-standard-open]. On $D_+(b)$ the normalized quotient in [lem-sfb-scheme-proj-veronese-quotient-functor] is the degree-$d$ twisting quotient. The fraction description of the twist [def-weil-pbc-proj-twisting-sheaf] makes $b$ a basis of $\\mathcal O(d)$ there: its inverse sends $x/b^m$ of degree $d$ to $x/b^{m+1}$ of degree zero. Precomposition sends $a$ to this basis. Hence $c_\\alpha$ takes this open to $D_+(a)$, with comorphism $x/a^m\\mapsto\\alpha(x)/b^m$ on degree-zero fractions [def-nagata-homogeneous-localization-degree-zero]. These are precisely the homogeneous localization maps specifying ordinary scheme Proj functoriality. Agreement on this covering proves equality of the morphisms. Clause (3) of [prop-nagata-relative-proj-functoriality] now makes $c_\\alpha$ a closed immersion.",
+   "uses": [
+    "lem-sfb-space-qcoh-affine-chart-calculus",
+    "prop-nagata-proj-standard-open",
+    "lem-sfb-scheme-proj-veronese-quotient-functor",
+    "def-weil-pbc-proj-twisting-sheaf",
+    "def-nagata-homogeneous-localization-degree-zero",
+    "prop-nagata-relative-proj-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NZ, second proof (canonical twisting quotient); lemma-morphism-proj, property (2); Tag 07ZI (lemma-surjective-graded-rings-map-relative-proj)."
+   }
+  },
+  {
+   "text": "For a scheme map $v:W'\\to W$, the scheme-test comparisons of [lem-sfb-space-relative-proj-scheme-tests] identify base change of the two relative Proj schemes with the Proj schemes of $v^*A,v^*B$. On quotient data [lem-sfb-scheme-proj-veronese-quotient-functor], pulling back $\\psi\\circ f^*\\alpha^{(d)}$ is $v'^*\\psi\\circ v'^*f^*\\alpha^{(d)}$ on every further test $v':T'\\to T$. The canonical Zariski pullback compositor of [def-pc-module-pullback], natural in the module, identifies the latter with precomposition by the pullback of $\\alpha$. Thus the two candidate base-change maps induce the same operation on every quotient class; the representing bijection shows they are equal. This proves compatibility for arbitrary $v$, without a flatness condition, including the identifications between successive scheme tests $W'\\to W\\to X$. It also proves invariance under the canonical algebra isomorphisms in those comparisons, since inserting an isomorphism and then precomposing is the same composite of graded maps.",
+   "uses": [
+    "lem-sfb-space-relative-proj-scheme-tests",
+    "lem-sfb-scheme-proj-veronese-quotient-functor",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01NY and 01NZ, functorial quotient description; spaces-divisors.tex Tag 085F, characterization on scheme charts and Tag 085C, base-change comparisons."
+   }
+  },
+  {
+   "text": "Construct the space morphism on sections. Put $Q=P_X(\\mathcal B)$ and $P=P_X(\\mathcal A)$. If $q\\in Q(T)$ for an $S$-scheme $T$, let $f=p_Qq\\in X(T)$. The pair $(\\mathrm{id}_T,q)$ is a section of $T\\times_XQ\\to T$. By [lem-sfb-space-relative-proj-scheme-tests] it is a section of $\\operatorname{Proj}_T(B_f)$. Apply $c_{\\varphi_f}$ of steps 2–3 and the inverse comparison for $A_f$; project the resulting section of $T\\times_XP$ to obtain $r_T(q)\\in P(T)$. Step 4 and compatibility of the comparisons with further scheme base change imply $r_{T'}(q|_{T'})=r_T(q)|_{T'}$ for every $T'\\to T$. Thus these functions form a natural transformation, hence a morphism of algebraic spaces by [def-trf-algebraic-space], and it is over $X$ by construction. Applying the same formula to pairs $(t,q)$ over any test $W\\to X$ shows its base change is exactly $c_{\\varphi_g}$: both send the pair to $(t,r_T(q))$. Conversely any morphism with the required scheme-test property has this same value on $(\\mathrm{id}_T,q)$ for each $T,q$. It therefore equals $r$ on every section. This proves existence, uniqueness and the full scheme-test assertion.",
+   "uses": [
+    "lem-sfb-space-relative-proj-scheme-tests",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 085F (lemma-morphism-relative-proj), omitted etale-local assembly written sectionwise using the existing scheme-test comparisons."
+   }
+  },
+  {
+   "text": "Choose an etale scheme atlas $U\\to X$ as in [def-trf-algebraic-space]. Its base change $P\\times_XU\\to P$ is a surjective etale cover by [lem-trf-space-fibre-products-etale-covers], and its source is a scheme by [lem-sfb-space-relative-proj-scheme-tests]. The pullback of $r$ over this cover is $Q\\times_XU\\to P\\times_XU$, which is $c_{\\varphi_U}$ and is a closed immersion by step 3. Apply [lem-sfb-space-closed-immersion-atlas-locality], whose hypotheses do not assume representability of $r$: it gives representability and the closed-immersion property on every scheme test of $P$. For an affine etale chart $U=\\operatorname{Spec}R\\to X$, [lem-sfb-space-qcoh-affine-chart-calculus] computes the cokernel of $\\varphi_n$ on sections as zero, so $\\varphi_U$ is degreewise surjective. The affine restriction in [prop-nagata-relative-proj-functoriality] identifies this base change with the stated ordinary $\\operatorname{Proj}(\\mathcal B(U))\\hookrightarrow\\operatorname{Proj}(\\mathcal A(U))$. Here the section graded ring means the direct sum of the component section modules, not sections of an unproved infinite-coproduct identification.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-relative-proj-scheme-tests",
+    "lem-sfb-space-closed-immersion-atlas-locality",
+    "lem-sfb-space-qcoh-affine-chart-calculus",
+    "prop-nagata-relative-proj-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 085H (lemma-surjective-graded-rings-map-relative-proj), reduction to Tag 07ZI; spaces-morphisms.tex Tag 03M4 (lemma-closed-immersion-local), (4) implies (1)."
+   }
+  },
+  {
+   "text": "For a second degreewise surjection $\\beta:\\mathcal B\\to\\mathcal C$, step 2 acts on quotient data by precomposition. Associativity gives $(\\psi\\circ f^*\\beta^{(d)})\\circ f^*\\varphi^{(d)}=\\psi\\circ f^*(\\beta\\circ\\varphi)^{(d)}$. Precomposition by the identity fixes every datum. Thus the scheme maps satisfy $c_{\\beta\\circ\\varphi}=c_\\varphi\\circ c_\\beta$ and $c_{\\mathrm{id}}=\\mathrm{id}$; evaluating the sectionwise construction of step 5 yields the identical equations for $r$. The quotient description is [lem-sfb-scheme-proj-veronese-quotient-functor]. None of these arguments selects a point of a Proj space. If the source Proj is empty, the construction is the unique empty-source map. If the target Proj is empty, step 2 constructs a morphism to the empty scheme on every scheme test, forcing the source test Proj to be empty as well; the sectionwise description then forces $Q$ empty. Consequently all clauses include the empty cases.",
+   "uses": [
+    "lem-sfb-scheme-proj-veronese-quotient-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 085G (lemma-morphism-relative-proj-transitive), surjective case; identities and empty cases from the represented quotient rule."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-space-etale-module-functors",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sfb-space-module-pullback-quasicoherent",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sfb-space-relative-proj-scheme-tests",
+  "def-sfb-space-module-tensor-composition",
+  "lem-sfb-scheme-proj-veronese-quotient-functor",
+  "lem-pc-yoneda",
+  "lem-sfb-space-qcoh-affine-chart-calculus",
+  "prop-nagata-proj-standard-open",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "prop-nagata-relative-proj-functoriality",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-closed-immersion-atlas-locality",
+  "def-pc-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-divisors.tex; literature/stacks-project/constructions.tex",
+  "place": "Tags 085F, 085H and 085G; scheme input 07ZI; omitted assembly and compatibility details expanded using the represented quotient functor (01NY, 01NZ) and atlas locality (03M4)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace in Mathlib/ (recursive, file names)",
+   "results": "none",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib has no algebraic spaces, hence no relative Proj over a space"
+  },
+  {
+   "tool": "grep",
+   "query": "IsClosedImmersion in Mathlib/AlgebraicGeometry/ProjectiveSpectrum/",
+   "results": "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean:87,98,99,105 (inside instance isSeparated for Proj.toSpecZero only)",
+   "date": "2026-10-24",
+   "verdict": "no match: only the separatedness proof of ordinary Proj; no closed immersion induced by a surjective graded map"
+  },
+  {
+   "tool": "grep",
+   "query": "^def|^noncomputable def|^theorem in Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean",
+   "results": "Proj.comap (line 40), Proj.map (line 148), ι_comp_map (164), map_comp (210), map_id (217)",
+   "date": "2026-10-24",
+   "verdict": "no match: Proj.map is the functoriality of ordinary Proj for graded ring maps over a ring; nothing about closed immersions for surjections or relative Proj over spaces; candidate ingredient only"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Ss]urjective|[Cc]losedImmersion",
+   "results": "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean Read Functor.lean:148 (Proj.map), 158 (preimage basic open), 171 (fraction comorphism), 210 and 217 (composition and identity); Proper.lean closed-immersion occurrences prove separatedness, not quotient functoriality.",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme Proj, Spec and standard-open facts only; no relative Proj of algebraic spaces or its quotient closed immersion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Surjective graded algebra maps induce closed immersions on relative Proj of algebraic spaces",
+   "results": "AlgebraicGeometry.IsClosedImmersion.mk; AlgebraicGeometry.IsClosedImmersion.spec_of_surjective; AlgebraicGeometry.IsClosedImmersion; AlgebraicGeometry.isClosedImmersion_iff; AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk; AlgebraicGeometry.IsClosedImmersion.of_surjective_of_isAffine; AlgebraicGeometry.Scheme.Hom.app_surjective; AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme Proj, Spec and standard-open facts only; no relative Proj of algebraic spaces or its quotient closed immersion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj.map, AlgebraicGeometry.IsClosedImmersion",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme Proj, Spec and standard-open facts only; no relative Proj of algebraic spaces or its quotient closed immersion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A degreewise surjective graded quasi-coherent algebra homomorphism induces a closed immersion of relative Proj algebraic spaces compatible with arbitrary base change",
+   "results": "AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat; AlgebraicGeometry.IsClosedImmersion.spec_of_surjective; AlgebraicGeometry.Proj.pullbackAwayιIso; AlgebraicGeometry.Proj.fromOfGlobalSections; AlgebraicGeometry.Proj.isSeparated; AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat; AlgebraicGeometry.IsClosedImmersion.of_surjective_of_isAffine; AlgebraicGeometry.Proj.instIsOpenImmersionAwayι",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme Proj, Spec and standard-open facts only; no relative Proj of algebraic spaces or its quotient closed immersion"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|RelativeProj|relativeProj",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme Proj, Spec and standard-open facts only; no relative Proj of algebraic spaces or its quotient closed immersion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projective spectrum functor of a quotient graded ring is a closed embedding and commutes with extension of scalars",
+   "results": "AlgebraicGeometry.Proj.toSpecZero; AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec; AlgebraicGeometry.projIsoSpec; AlgebraicGeometry.ProjIsoSpecTopComponent.fromSpec; AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_apply_eq; AlgebraicGeometry.Proj; AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat; AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_fromSpec",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme Proj, Spec and standard-open facts only; no relative Proj of algebraic spaces or its quotient closed immersion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "reviewer",
+  "item": "lem-sfb-space-blowup-finite-degree-ideal-descent",
+  "date": "2026-10-24",
+  "group": "Q67"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Supporting Tag 0860 (lemma-composition-finite-type-blowups), first and last paragraphs: the closed immersion Proj(A/FA) -> Proj(A) in the equation Z'=Proj(A/FA) (Tag 085M, proof, via Tag 085H) and its restriction to the affine blowup charts Spec A[I/a]. This serves the inherited Chow-modification prerequisite of sk-thm-sf-ctf-stability.",
+   "via": [
+    "lem-sfb-space-blowup-finite-degree-ideal-descent",
+    "lem-sfb-space-compose-admissible-blowups",
+    "lem-sfb-space-blowup-embedding-extension",
+    "lem-sfb-space-chow-dense-modification",
+    "lem-sfb-space-supported-adic-existence",
+    "lem-sfb-space-coherent-formal-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-relative-proj-quotient-closed-immersion",
+  "worker": "stage1",
+  "summary": "Split the surjective relative-Proj map over an algebraic space using existing nodes only. Tensor pullback preserves the degreewise cokernels; precomposition on the represented scheme quotient functor supplies the maps and all naturality; the normalized twist quotient gives the ordinary fraction comorphism, and the existing scheme closed-immersion theorem and atlas-locality lemma finish. Composition and empty cases are explicit. Clarified the existing closed-immersion clause by spelling out representability and all scheme tests; no mathematical hypothesis or conclusion changed. Six prescribed logged Mathlib searches give no match. No new nodes.",
+  "blueprint": "Inherited supporting Tag 0860 first/last paragraphs, the quotient Proj closed immersion used by Tag 085M in the finite-degree-ideal descent prerequisite, as recorded in blueprint.from.place. Realizes 085F/085H/085G without changing the inherited sk-thm-sf-ctf-stability route. The latest blueprint direct-images proof paragraph (3) uses compactification. The ancestry tool returns None for this inherited created-node chain; retain the existing from.node and via exactly.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic equivalence of the Zariski and etale quasi-coherent module categories on a scheme, including tensor pullback; needed to turn arbitrary space scheme tests into the ordinary scheme Proj input."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space fibre products and base change of surjective etale covers; transfers the atlas of X to the target Proj. No six-functors theorem is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-1e05b6927",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-1e05b6927 (reviewer sub-agent of L); spot-checked: 0 new nodes; the item is still unsplit live and there is no re-split note. Read Stacks spaces-divisors 085F/085H/085G (the 085H target typo R→P is correctly noted). Proof route: Yoneda on the scheme-test functor of points, then lem-sfb-scheme-proj-veronese-quotient-functor precomposition (steps 2,4,7), then fraction identification with prop-nagata-relative-proj-functoriality(3) on D_+(b) charts (step 3), then atlas-locality via the pulled-back atlas P×_XU→P (step 6). Sound. Hypotheses checked: no flatness, generation or quasi-compactness used. Small cases checked: identity, A→A/(t), B=0, degree-0 grading, not generated in degree 1, both empty cases. The statement change only spells out what closed immersion means for spaces. FIX (C4): steps 2 and 4 cited the étale space compositor def-sfb-space-module-tensor-composition for Zariski quotient data; repointed to def-pc-module-pullback. Removed the lemma lem-sfb-space-closed-immersion-atlas-locality from the statement/stmt_deps; the meaning is now cited to def-trf-algebraic-space and def-weil-closed-immersion, and the lemma is still used in step 6. Batch-5: all six flagged citations are generic algebraic-space/QCoh foundations, reached only via the definition def-trf-algebraic-space or directly as sk-i-curve-zero foundations, and are not part of the trace-formula or Poincaré proofs. Accepted, along with the two declared tool_uses. No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceRelativeProjQuotientClosedImmersion",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.space_relativeProj_quotient_closedImmersion",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.spaceProjQuotientSchemeMap",
+   "AlgebraicGeometry.AlgebraicSpace.IsSpaceProjQuotientMap",
+   "AlgebraicGeometry.AlgebraicSpace.SpaceProjQuotientSystem",
+   "AlgebraicGeometry.AlgebraicSpace.space_relativeProj_quotient_closedImmersion"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceRelativeProjQuotientClosedImmersion.lean",
+  "statement": "theorem space_relativeProj_quotient_closedImmersion (C : SpaceProjCoefficients S) (R : SpaceProjSystem C) : Nonempty (SpaceProjQuotientSystem C R)",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9cdfd1d6a",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Read the item, all 9 stmt_dep records, Stacks 085F/085G/085H (+07ZI) and the delivered module, with its uses of SpaceProjInput/Coefficients/Realization/System, GradedAlgebraData.Hom, relProjMap (+_relProjHom, ι_relProjMap, isClosedImmersion_relProjMap), IsRepresentableWith and EtaleGradedModuleAlgebra.Hom. Every clause is rendered. φ is an EtaleGradedModuleAlgebra.Hom with Epi in each degree (sheaf surjectivity, as in 085H). The unique r over X is characterised on every scheme test W,g by Epi of the tensor-pulled φ_n and by compare_B ≫ r = yoneda.map(relProjMap f) ≫ compare_A, with f pinned on homogeneous affine sections to evaluationZariskiRestriction.map(moduleTensorPullback.map φ_n), so it is not an arbitrary map. Closed immersion is IsRepresentableWith IsClosedImmersion. Identity and composition (correct contravariant order) are present. No extra hypotheses; one universe, as in the dependency. The statement is true for all C and R: f exists, affine sections surject, uniqueness holds pointwise. Edge cases: empty Proj, A=0 or B=0, A_0≠O_X, non-flat tests. No space-level duplicate in lean/Sheaf or WeilConjectures. Item still split live with no lean record; only the lean field changed. lean.statement verbatim, 4 declarations listed, stmt_deps unchanged, docstrings and 7-step proof present, sorry only. No compile (no changes). Advisories: the 'in particular' affine-chart clause is covered via W=U, g=u and relProjι_relProjMap, not a separate field; hφ in identity is redundant."
+ }
+}

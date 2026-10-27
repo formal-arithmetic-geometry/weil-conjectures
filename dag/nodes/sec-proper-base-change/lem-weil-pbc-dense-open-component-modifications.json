@@ -34,7 +34,9 @@
   {
    "text": "Over V_i every summand other than i has empty preimage; the i-th map is an isomorphism by restriction of the given isomorphism over its dense open and the preceding identification of the component inclusion. Thus the coproduct map restricts to an isomorphism over each V_i. The inverses glue on this open cover of U. For n=0 the covering hypothesis and the union of irreducible components imply X is empty; use U empty.",
    "uses": [
-    "def-weil-pbc-scheme-conventions"
+    "def-weil-pbc-scheme-conventions",
+    "lem-weil-pbc-dense-open-component-modifications-empty",
+    "lem-weil-pbc-dense-open-component-modifications-nonempty"
    ],
    "elementary": true
   }
@@ -44,7 +46,9 @@
   "def-pc-integral-scheme",
   "def-pc-reduced-scheme",
   "def-weil-closed-immersion",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-dense-open-component-modifications-empty",
+  "lem-weil-pbc-dense-open-component-modifications-nonempty"
  ],
  "proof_origin": {
   "by": "agent",
@@ -111,7 +115,32 @@
   "date": "2026-10-12",
   "existing": false
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.exists_dense_open_isIso_component_modifications"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.exists_dense_open_isIso_component_modifications",
+     "module": "WeilConjectures.AlgebraicGeometry.DenseOpenComponentModifications",
+     "lines": [
+      30,
+      62
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "reviewed": {
   "date": "2026-10-12",
   "by": "L",
@@ -135,5 +164,34 @@
    "AlgebraicGeometry.exists_dense_open_isIso_component_modifications"
   ],
   "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $X$ be a reduced scheme. Let $C_i$ ($i\\in\\operatorname{Fin}(n)$) be integral schemes with closed immersions $\\iota_i:C_i\\to X$ whose images enumerate the irreducible components of $X$ without repetitions. For schemes $Y_i$ and morphisms $\\nu_i:Y_i\\to C_i$ [def-weil-pbc-scheme-conventions], assume each $\\nu_i$ is an isomorphism over some dense open of $C_i$. Then the coproduct morphism $\\coprod_iY_i\\to X$, with component maps $\\iota_i\\circ\\nu_i$, is an isomorphism over a dense open of $X$. No finiteness, smoothness or dimension assumption on $\\nu_i$ or $Y_i$ is required.",
+  "proof": [
+   {
+    "text": "Let Z_i be the image of the component inclusion. The complement W_i of all other components is open, lies in Z_i, and contains its generic point. Finiteness makes the excluded union closed; maximality of irreducible components ensures the generic point is not on another component. The integral component has a generic point by sobriety of schemes.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Restrict the closed immersion to W_i. It is surjective into a reduced open subscheme, hence an isomorphism: locally Spec(A/I) maps onto Spec A, so I lies in the nilradical, zero because A is reduced. Intersect the dense open of the component with the preimage of W_i and transfer it through this isomorphism. This gives an open V_i of X containing the component generic point. Their union U is dense, since closure contains every component; injectivity of the image enumeration makes the V_i disjoint.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Over V_i every summand other than i has empty preimage; the i-th map is an isomorphism by restriction of the given isomorphism over its dense open and the preceding identification of the component inclusion. Thus the coproduct map restricts to an isomorphism over each V_i. The inverses glue on this open cover of U. For n=0 the covering hypothesis and the union of irreducible components imply X is empty; use U empty. ([def-weil-pbc-scheme-conventions]).",
+    "uses": [
+     "def-weil-pbc-scheme-conventions"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

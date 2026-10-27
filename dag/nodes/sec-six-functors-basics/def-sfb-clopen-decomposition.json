@@ -1,0 +1,109 @@
+{
+ "id": "def-sfb-clopen-decomposition",
+ "kind": "definition",
+ "title": "Indexed clopen decompositions of a scheme",
+ "status": "split",
+ "statement": "Let $W$ be a scheme [def-pc-scheme], let $E$ be any set, and let $(P_e)_{e\\in E}$ be a family of open subschemes of $W$. The family is an $E$-indexed clopen decomposition of $W$ if $P_e\\cap P_{e\\prime}=\\varnothing$ whenever $e\\ne e\\prime$ and $\\bigcup_{e\\in E}P_e=W$. Each piece is closed as well as open, since its complement is the union of the other pieces. Empty pieces, an empty scheme, and an empty indexing set are allowed.",
+ "stmt_deps": [
+  "def-pc-scheme"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-scheme.proof.md",
+  "place": "(2), open and closed pieces on which a source lattice label has a fixed target label; also Stacks Project, Groupoids, Example 03YW (locally constant labels)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A clopen decomposition of a scheme is a pairwise disjoint family of open subsets whose union is the whole scheme",
+   "results": "8 hits: IsClopen, isClopen_of_disjoint_cover_open, subsingleton_of_disjoint_isClopen, PrimeSpectrum.isClopen_iff_mul_add, TopologicalSpace.Clopens.coe_disjoint, AlgebraicGeometry.IsAffineOpen.biSup_of_disjoint, AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union, AlgebraicGeometry.Scheme.OpenCover.",
+   "date": "2026-10-23",
+   "verdict": "Related Mathlib ingredients only; reuse the exact project definition IsClopenDecomposition."
+  },
+  {
+   "tool": "grep",
+   "query": "IsClopenDecomposition|Pairwise.*Disjoint [Mathlib/AlgebraicGeometry]",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/Limits.lean.",
+   "date": "2026-10-23",
+   "verdict": "Related Mathlib ingredients only; reuse the exact project definition IsClopenDecomposition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A clopen decomposition of a scheme is a pairwise disjoint family of open subsets whose union is the whole scheme",
+   "results": "8 hits: AlgebraicGeometry.Scheme.OpenCover, AlgebraicGeometry.coprodOpenCover, AlgebraicGeometry.sigmaOpenCover, AlgebraicGeometry.Scheme.openCoverOfISupEqTop, AlgebraicGeometry.Scheme.instInhabitedOpenCover, AlgebraicGeometry.isCompl_opensRange_inl_inr, AlgebraicGeometry.Scheme.openCoverOfIsOpenCover, AlgebraicGeometry.IsAffineOpen.iSup_of_disjoint.",
+   "date": "2026-10-23",
+   "verdict": "Related Mathlib ingredients only; reuse the exact project definition IsClopenDecomposition."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n IsClopenDecomposition lean/WeilConjectures lean/Sheaf lean/.lake/packages/mathlib/Mathlib; definition-node search for IsClopenDecomposition and clopen decomposition",
+   "results": "The sole definition is AlgebraicGeometry.IsClopenDecomposition in lean/Sheaf/AlgebraicGeometry/CoproductCopiesMorphismsClopen.lean:31. Other project occurrences are uses, not definitions. No Mathlib or WeilConjectures match, and no definition node binds this declaration or has clopen decomposition in its title. The theorem node lem-galois-coproduct-copies-morphisms-clopen lists this helper but is a statement, not a definition node.",
+   "date": "2026-10-23",
+   "verdict": "Reuse the existing project declaration through a new definition node; no copied code."
+  },
+  {
+   "tool": "blueprint_refs",
+   "query": "search 'clopen decomposition'",
+   "results": "0 blueprint nodes match 'clopen decomposition'",
+   "date": "2026-10-23",
+   "verdict": "No existing definition node."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-local-system-affine-descent-presentation",
+  "date": "2026-10-23",
+  "group": "O4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-stratified-lattice-scheme",
+   "place": "(2), finite affine trivializing pro-étale charts and the clopen transition descent datum; old proof steps 3–5",
+   "via": [
+    "lem-sfb-local-system-affine-descent-presentation"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-stratified-lattice",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoproductCopiesMorphismsClopen",
+  "declaration": "AlgebraicGeometry.IsClopenDecomposition",
+  "statement": "def IsClopenDecomposition (W : Scheme.{u}) (E : Type v) (P : E → W.Opens) : Prop",
+  "branch": "newtargets-dag",
+  "by": "O4",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Dedicated definition node for the existing helper, not the coproduct-clopen theorem. The declaration has real data: pairwise Disjoint open pieces and their iSup equal to top. No Small, finite, nonempty, affine or quasi-compact hypothesis. Reused unchanged from the published module."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-085d1214b",
+  "group": "O4",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-085d1214b",
+  "group": "O4",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 52c0 fixes both findings and changes nothing else; only lean and stmt_deps differ from the returned head and side-live. Finding 1: lem-galois-coproduct-copies-morphisms-clopen removed from stmt_deps (kept in proof_deps); new def node def-sfb-clopen-decomposition binds AlgebraicGeometry.IsClopenDecomposition (existing:true, statement verbatim at CoproductCopiesMorphismsClopen.lean:31, node text = disjoint opens with union W, source path exists, no other owner in side-live). Finding 2: localSystemRestriction deleted; trivializations and psi use (Scheme.proEtaleSetRestriction X _).obj F, whose underlying presheaf is definitionally the deleted helper; landed def-a1-proetale-set-restriction added to stmt_deps (tool allows landed nodes); HEq now evaluates psi.inv.hom.app after e.inv.app, same meaning. Statement verbatim; every clause, universe and empty case re-checked; docstrings, sorry-only proof and gates OK; no file changed, nothing compiled (worker scompile clean 2.1/2.2 s)."
+ }
+}

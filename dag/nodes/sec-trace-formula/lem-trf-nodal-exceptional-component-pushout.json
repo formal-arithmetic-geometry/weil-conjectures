@@ -22,9 +22,120 @@
   "def-weil-pbc-category-colimit",
   "def-weil-proper-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "A chosen algebraic closure $\\iota:k\\to\\bar k$ is an isomorphism, since $k$ is algebraically closed and every element of $\\bar k$ has a linear minimal polynomial over $\\iota(k)$; so the geometric fibre of $R\\to\\operatorname{Spec}k$ is $R$ itself up to $\\iota$, and semistability says that every point of $R$ is smooth over $k$ or has completed local ring $k[[u,v]]/(uv)$. Hence $R$ is reduced by [lem-trf-nodal-points-reduced-algebraically-closed] (it is of finite type over $k$, being finitely presented). Give $A$ its reduced closed-subcurve structure and put $B=\\overline{R\\setminus A}_{\\mathrm{red}}$. Applying [lem-trf-nodal-subcurve-boundary] (with $N=R$) to $A$ gives $E=A\\cap B$ finite reduced, with every point a node of $R$ and smooth on both subcurves. Applying it to $B$ also proves that $B$ is nodal at its closed points. $B$ is a closed subscheme of the Noetherian finite-type $k$-scheme $R$, hence of finite presentation and flat over $k$, and it is pure of dimension one as the union of the components of $R$ other than $A$. Each generic point $\\eta$ of $B$ lies in the open $R\\setminus A$, on which the ideal of $A$ is the unit ideal, so $B$ and $R$ agree as open subschemes there and $B$ is smooth at $\\eta$ because $R$ is. Thus every point of $B$ is smooth or an ordinary double point, and $(B,\\varnothing)$ is a semistable multipointed $k$-curve. The ideals of $A$ and $B$ intersect to zero: a section in their intersection vanishes on all irreducible components and $R$ is reduced. Hence [lem-trf-closed-union-pushout] gives $R=A\\amalg_E B$. The set $E$ is the stipulated nonempty boundary. Its points lie in $R_{\\mathrm{sing}}$, so $d=|E|$ is $1$ or $2$. As $L$ avoids the singular locus, $|L\\cap A|+d\\le2$. Finally $B\\to C$ is proper by [lem-weil-pbc-closed-immersion-proper].",
+   "uses": [
+    "lem-trf-nodal-points-reduced-algebraically-closed",
+    "lem-trf-nodal-subcurve-boundary",
+    "lem-trf-closed-union-pushout",
+    "lem-weil-pbc-closed-immersion-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Appendix B, printed p. 58, exceptional-component contraction paragraph immediately preceding Lemma B.3; read at https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf (PDF page 58). Local archival copy WANTED. Construction detailed using Stacks Tags 0E38, 0C4J, 0E25 and 0E36 through the cited nodes."
+   }
+  },
+  {
+   "text": "The restriction $r|_A$ factors through a $k$-point $c:\\operatorname{Spec}k\\to C$. For an explicit check choose an affine neighbourhood $V=\\operatorname{Spec}H$ of its singleton image. On the two standard charts of $A\\simeq\\mathbf P^1_k$ in [def-sc-p1-standard], the pullback of any $a\\in H$ is a polynomial in $t$ and a polynomial in $t^{-1}$ with equal Laurent-polynomial restrictions. Only constants have both forms. These constants define a $k$-algebra map $H\\to k$, and its composite with the chart inclusions gives exactly $r|_A$. The affine-spectrum functoriality in [def-weil-affine-spectrum] proves the factorization, including equality of morphisms rather than just equality of point images. In particular the restrictions of $B\\to C$ and $c$ agree on $E$.",
+   "uses": [
+    "def-sc-p1-standard",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Appendix B, printed p. 58, exceptional-component contraction paragraph immediately preceding Lemma B.3; read at https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf (PDF page 58). Local archival copy WANTED. Construction detailed using Stacks Tags 0E38, 0C4J, 0E25 and 0E36 through the cited nodes."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-relative-nodal-point-pinching] to the proper map $B\\to C$, the smooth closed set $E\\subset B$, the one-point scheme $F=\\operatorname{Spec}k$, and its map $c$ to $C$. All fibres of $E\\to F$ have size $d\\in\\{1,2\\}$. It gives $R_1=B\\amalg_E F$, finite surjective $v:B\\to R_1$, a closed point $y=F\\subset R_1$ with $v^{-1}(y)=E$, the isomorphism $B\\setminus E\\simeq R_1\\setminus\\{y\\}$, a semistable curve $R_1$, and a proper map $r_1:R_1\\to C$. The maps $A\\to F\\to R_1$ and $v$ agree on $E$, so the closed-union pushout gives $h:R\\to R_1$ and $r=r_1h$. For any target $T$, a pair $R\\to T,F\\to T$ agreeing on $A$ is, by $R=A\\amalg_E B$, exactly a pair $B\\to T,F\\to T$ agreeing on $E$. The latter pair extends uniquely by the pinching pushout. This proves the required pushout universal property in schemes.",
+   "uses": [
+    "lem-trf-relative-nodal-point-pinching",
+    "lem-trf-closed-union-pushout",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Appendix B, printed p. 58, exceptional-component contraction paragraph immediately preceding Lemma B.3; read at https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf (PDF page 58). Local archival copy WANTED. Construction detailed using Stacks Tags 0E38, 0C4J, 0E25 and 0E36 through the cited nodes."
+   }
+  },
+  {
+   "text": "The map $h$ is surjective since $v=h|_B$ is. Its complement of $A$ is $B\\setminus E$, giving precisely the claimed isomorphism off $y$. It is proper by [lem-weil-pbc-proper-to-separated]: use base $C$, proper $R\\to C$, and separated $R_1\\to C$ (the latter is proper by the pinching theorem). To check geometric fibres, the closed subcurves $A,B$ cover $R$, and after any field base change they still cover: every point maps to a point in one of the two closed subcurves. Over $y$, the pullback from $B$ is $E$ scheme-theoretically by the pinching theorem and is already contained in the pullback of $A$. Thus the closed immersion $A_\\Omega\\hookrightarrow h^{-1}(y)_\\Omega$ is surjective on points and is a homeomorphism. Its underlying space is that of $\\mathbf P^1_\\Omega$, connected since the two integral affine-line charts have nonempty intersection. Away from $y$ the geometric fibres are single points by the complement isomorphism. This proves connectedness of every geometric fibre; it does not require any assertion about the fibre's nilpotent structure.",
+   "uses": [
+    "lem-trf-relative-nodal-point-pinching",
+    "lem-trf-closed-union-pushout",
+    "lem-weil-pbc-proper-to-separated",
+    "def-weil-proper-morphism",
+    "def-sc-p1-standard"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Appendix B, printed p. 58, exceptional-component contraction paragraph immediately preceding Lemma B.3; read at https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf (PDF page 58). Local archival copy WANTED. Construction detailed using Stacks Tags 0E38, 0C4J, 0E25 and 0E36 through the cited nodes."
+   }
+  },
+  {
+   "text": "The marking $L$ is a finite disjoint union of $k$-points. Indeed it is quasi-compact and etale over $k$; on every affine chart [lem-weil-pbc-etale-algebra-over-field-product] makes its ring a finite product of finite separable extensions, all equal to $k$. Thus these singleton affine opens give the asserted finite discrete reduced scheme. Put $m=|L\\cap A|$. The pinching theorem makes $y$ smooth if $d=1$, and a node if $d=2$. In the first case $m\\le1$; in the second $m=0$. All markings off $A$ avoid $E$ and are carried by the complement isomorphism to distinct smooth points off $y$. If $m=1$, the unique marking on $A$ maps to the smooth point $y$, distinct from those other images. Hence $h|_L$ identifies $L$ with the reduced closed union of these distinct smooth $k$-points. To see closedness, each such point off $y$ is the finite-map image under $v$ of a closed marked point of $B$; $y$ itself is closed by pinching. On a neighbourhood of each image point, evaluation of regular functions onto its residue field $k$ is surjective, and the kernel cuts out that reduced point. Off the finite image the kernel is the unit ideal. Therefore this closed immersion has exactly the kernel ideal $\\ker(\\mathcal O_{R_1}\\to h_*\\mathcal O_L)$ specified in the item, so its image is $L_1$. It follows that $L\\simeq L_1$ and $(R_1,L_1)$ is semistable.",
+   "uses": [
+    "lem-weil-pbc-etale-algebra-over-field-product",
+    "lem-trf-relative-nodal-point-pinching",
+    "def-trf-multipointed-curve-modification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Appendix B, printed p. 58, exceptional-component contraction paragraph immediately preceding Lemma B.3; read at https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf (PDF page 58). Local archival copy WANTED. Construction detailed using Stacks Tags 0E38, 0C4J, 0E25 and 0E36 through the cited nodes."
+   }
+  },
+  {
+   "text": "The maps on markings define a morphism of pairs $r_1:(R_1,L_1)\\to(C,D)$: use $L\\simeq L_1$ and the original marking map. Its marking map is an isomorphism by the hypothesis $L\\simeq D$. Properness of $r_1$ was part of the pinching theorem, and surjectivity follows from $r=r_1h$. For any geometric point $\\bar c\\to C$, [lem-weil-pbc-surjective-base-change] gives a surjection $R_{\\bar c}\\to(R_1)_{\\bar c}$. The source is connected by hypothesis; if the target split into two nonempty clopen sets their inverse images would split the source, a contradiction. Thus $r_1$ has connected geometric fibres as claimed.",
+   "uses": [
+    "lem-trf-relative-nodal-point-pinching",
+    "lem-weil-pbc-surjective-base-change",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Appendix B, printed p. 58, exceptional-component contraction paragraph immediately preceding Lemma B.3; read at https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf (PDF page 58). Local archival copy WANTED. Construction detailed using Stacks Tags 0E38, 0C4J, 0E25 and 0E36 through the cited nodes."
+   }
+  },
+  {
+   "text": "Write $c=r(A)$. If $c$ belonged to $U$, then the fibre over $c$ of the isomorphism $r^{-1}(U)\\to U$ would contain $A$, whereas that fibre is a point. Thus $c\\notin U$, $y\\notin r_1^{-1}(U)$, and restricting the complement isomorphism for $h$ identifies $r_1^{-1}(U)\\to U$ with the original isomorphism. For irreducible components, $B$ is the reduced union of the components of $R$ other than $A$. Each has a generic point off $E$: $E$ is finite and consists of closed smooth points of $B$. The complement isomorphism for the finite surjection $v:B\\to R_1$ bijects these generic points with those of $R_1$; no component of the pure one-dimensional curve $R_1$ is supported on $y$. Taking closures gives exactly the images of those components, since $v$ is closed. Distinct generic points remain distinct under the isomorphism, so their component images are distinct. Each such component has positive-dimensional image. Together with $h(A)=y$, this proves that $h$ contracts precisely $A$.",
+   "uses": [
+    "lem-trf-relative-nodal-point-pinching"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Appendix B, printed p. 58, exceptional-component contraction paragraph immediately preceding Lemma B.3; read at https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf (PDF page 58). Local archival copy WANTED. Construction detailed using Stacks Tags 0E38, 0C4J, 0E25 and 0E36 through the cited nodes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-p1-standard",
+  "def-trf-multipointed-curve-modification",
+  "def-weil-affine-spectrum",
+  "def-weil-connected-scheme",
+  "def-weil-pbc-category-colimit",
+  "def-weil-proper-morphism",
+  "lem-trf-closed-union-pushout",
+  "lem-trf-nodal-points-reduced-algebraically-closed",
+  "lem-trf-nodal-subcurve-boundary",
+  "lem-trf-relative-nodal-point-pinching",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "lem-weil-pbc-proper-to-separated",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Appendix B, printed p. 58, exceptional-component contraction paragraph immediately preceding Lemma B.3; read at https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf (PDF page 58). Local archival copy WANTED. Construction detailed using Stacks Tags 0E38, 0C4J, 0E25 and 0E36 through the cited nodes."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +164,52 @@
    "results": "{\"t\": \"2026-10-17T22:18:46Z\", \"tool\": \"grep\", \"query\": \"exceptional.*component|rational.*tail|rational.*bridge|nodal.*pushout|semistable\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned signatures: The scheme-wide pushout gluing instance requires all legs to be open immersions, and does not construct a quotient by a closed projective-line component. The Weierstrass and projective-spectrum declarations do not give the nodal marked-curve pushout.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional.*component|rational.*tail|rational.*bridge|nodal.*pushout|semistable",
+   "results": "{\"t\": \"2026-10-24T07:56:53Z\", \"tool\": \"grep\", \"query\": \"exceptional.*component|rational.*tail|rational.*bridge|nodal.*pushout|semistable\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned signatures: categorical pushout universal properties do not supply existence of this scheme contraction; RationalMap, normalization and Weierstrass declarations do not give nodal marked-curve pushouts. The Scheme gluing hit requires open-immersion legs.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pushout contraction of a projective line component in a nodal curve preserving marked smooth points",
+   "results": "{\"t\": \"2026-10-24T07:56:53Z\", \"tool\": \"leansearch\", \"query\": \"Pushout contraction of a projective line component in a nodal curve preserving marked smooth points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Types.Pushout.inl\", \"CategoryTheory.Limits.pushoutIsPushout\", \"CategoryTheory.Limits.PushoutCocone.mk\", \"CategoryTheory.Square.pushoutCocone\", \"CategoryTheory.Limits.Types.Pushout'\", \"CategoryTheory.Limits.pushout.congrHom\", \"CategoryTheory.IsPushout.isColimit\", \"CategoryTheory.IsPushout.mk\"], \"digest\": \"c6bff9d4ae1412ac\"}; Read returned signatures: categorical pushout universal properties do not supply existence of this scheme contraction; RationalMap, normalization and Weierstrass declarations do not give nodal marked-curve pushouts. The Scheme gluing hit requires open-immersion legs.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProjectiveSpectrum\", \"global\"",
+   "results": "{\"t\": \"2026-10-24T07:56:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"ProjectiveSpectrum\\\", \\\"global\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned signatures: categorical pushout universal properties do not supply existence of this scheme contraction; RationalMap, normalization and Weierstrass declarations do not give nodal marked-curve pushouts. The Scheme gluing hit requires open-immersion legs.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A projective line has only constant global regular functions and every morphism to a scheme with one point image factors through the residue field",
+   "results": "{\"t\": \"2026-10-24T07:56:54Z\", \"tool\": \"leanfinder\", \"query\": \"A projective line has only constant global regular functions and every morphism to a scheme with one point image factors through the residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecOf\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.Proj.isSeparated\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj.instIsSeparated\"], \"digest\": \"87f183a3ab0e403f\"}; Read returned signatures: categorical pushout universal properties do not supply existence of this scheme contraction; RationalMap, normalization and Weierstrass declarations do not give nodal marked-curve pushouts. The Scheme gluing hit requires open-immersion legs.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Contracting a rational tail or rational bridge in a semistable pointed curve by the scheme pushout preserves the nodal curve and proper morphism",
+   "results": "{\"t\": \"2026-10-24T08:02:50Z\", \"tool\": \"leanfinder\", \"query\": \"Contracting a rational tail or rational bridge in a semistable pointed curve by the scheme pushout preserves the nodal curve and proper morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.Point.map_some\", \"AlgebraicGeometry.Scheme.instIsOverToPartialMapOfIsSeparatedOfIsOver\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.isOver_iff\", \"AlgebraicGeometry.Scheme.PartialMap.isOver_toRationalMap_iff_of_isSeparated\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"WeierstrassCurve.Projective.comp_equiv_comp\"], \"digest\": \"a94d0782bd14142f\"}; Read returned signatures: categorical pushout universal properties do not supply existence of this scheme contraction; RationalMap, normalization and Weierstrass declarations do not give nodal marked-curve pushouts. The Scheme gluing hit requires open-immersion legs.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushout\", \"Scheme\"",
+   "results": "{\"t\": \"2026-10-24T08:02:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"pushout\\\", \\\"Scheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsLocallyDirected.instIsLocallyDirectedWidePushoutShapeCompForgetOfIsOpenImmersionMap\"], \"digest\": \"42e3dacfa27f30a5\"}; Read returned signatures: categorical pushout universal properties do not supply existence of this scheme contraction; RationalMap, normalization and Weierstrass declarations do not give nodal marked-curve pushouts. The Scheme gluing hit requires open-immersion legs.",
+   "date": "2026-10-24",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-semistable-modification-fibre-contractions",
@@ -87,5 +240,40 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-nodal-exceptional-component-pushout",
+  "worker": "stage1",
+  "summary": "Read Temkin Appendix B and the Stacks local pushout results, reused existing nodal boundary/closed union/relative pinching tools, and proved the contraction, marking image, connected fibres, reference-map permanence, open restriction and component correspondence. No new nodes. Corrected only doubled TeX escaping.",
+  "blueprint": "The semistable-modification branch below lem-trf-local-term-locality, through the recorded created.item ancestry: Temkin Appendix B single exceptional-component contraction. Current latest blueprint checked; this is a generic geometric input below the unit, not a replacement of its trace-formula route.",
+  "tool_uses": [
+   {
+    "node": "def-sc-p1-standard",
+    "why": "Generic scheme/field tool used with its stated hypotheses in this construction; the multipointed-curve unit supplies no replacement for this general interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sc-p1-standard"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-7d69f0c20",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-7d69f0c20 (reviewer sub-agent of L); spot-checked: I read the item in full. It is a first split with no new nodes, and its statement is identical to the live/base statement. Source check: Temkin, Stable modification, App. B p.58, the paragraph before Lemma B.3 (public PDF fetched and run through pdftotext). The item matches the exceptional-component definition, the pushout C'<-Z->Spec k, D''≅D', and the factorization of f; the complement C'∖Z is read as its closure B. Stacks 0E38 (curves.tex:4577) was checked, along with the tags carried by the cited nodes (0C4J/0E25/0E36). FIX in step 1, two faults. (E1) The step cited lem-trf-nodal-geometric-fibres-reduced, which needs the nodal/smooth condition over every algebraically closed Ω/k. Semistability (def-weil-geometric-fibre, chosen closure ≅ k) gives it only over k. Only reducedness of R is needed, so the step now cites lem-trf-nodal-points-reduced-algebraically-closed (same unit, split, no cycle) and states the ι:k≅k̄ identification. (C2) '(B,∅) semistable' had no argument for generic-point smoothness, finite presentation or flatness. I added: generic points of B lie in R∖A, where B=R as open subschemes, and B is a closed subscheme of a Noetherian finite-type k-scheme. proof_deps updated. Steps 2-7 checked and correct: Γ(P^1)=k gives the factorization through c, and s|_E=b∘a; the pinching hypotheses hold and the universal property transfers through R=A⊔_E B; R∖A=B∖E; properness via proper-to-separated over C; the fibre over y is homeomorphic to P^1; étale marking with cases d=1/2, m≤1/0, and the kernel ideal gives L≅L1; r1 is proper and surjective with connected geometric fibres via base-change surjectivity; c∉U; the component bijection uses generic points off E. No duplicate found; contraction-diamond differs. Route: the trf citations are in the same unit, and the lem-weil-pbc ones are Mathlib leaves. The def-sc-p1-standard tool_use is harmless. Note: Q18 8dd78e26 is a parallel delivery of the same item.; 1 file(s) fixed by the reviewer"
+ }
 }

@@ -1,0 +1,267 @@
+{
+ "id": "lem-sfb-ringed-site-higher-image-cohomology-sheafification",
+ "kind": "statement",
+ "title": "Natural cohomology-presheaf description of higher direct images on ringed sites",
+ "statement": "Work in compatible universes [def-weil-size-convention]. Let $\\mathcal C,\\mathcal D$ be small sites, and let $f:\\mathcal C\\to\\mathcal D$ be a morphism of sites presented by a continuous functor $u:\\mathcal D\\to\\mathcal C$ [def-weil-pbc-sites-and-cohomology]. Let $A,B$ be sheaves of commutative rings on $\\mathcal C,\\mathcal D$, respectively, and $\\rho:B\\to f_*A$ a morphism of ring sheaves. On module sheaves [def-weil-sheaf-of-modules-category], let $f_*:\\operatorname{Mod}(A)\\to\\operatorname{Mod}(B)$ send $M$ to $V\\mapsto M(u(V))$, with scalars restricted along $\\rho_V$. Assume module sheafification exists [def-weil-presheaf-modules-sheafification] and both module categories have enough injectives [def-sp-enough-injectives]. Fix $q\\geq0$. For $U\\in\\mathcal C$, let $H^q_{\\mathrm{Mod}(A)}(U,M)$ be the $q$-th right derived functor of additive evaluation $M\\mapsto M(U)$ on $A$-module sheaves [def-sp-left-exact-additive, def-sp-injective-resolutions], with values in abelian groups. For every $A$-module sheaf $M$, these groups form a presheaf of $B$-modules $P^q_M$ on $\\mathcal D$, with\n$$P^q_M(V)=H^q_{\\mathrm{Mod}(A)}(u(V),M).$$\nRestrictions are induced by restrictions on an injective resolution; the $B(V)$-action is induced by multiplication through $\\rho_V:B(V)\\to A(u(V))$ on its evaluated complex. The presheaves $P^q_M$ are functorial in $M$. There is a canonical isomorphism of $B$-module sheaves\n$$\\sigma_M:(P^q_M)^\\#\\xrightarrow{\\sim}R^qf_*M,$$\nwhere $R^qf_*$ is the right derived functor in the module categories. The isomorphism is induced by the map taking an evaluated resolution cocycle to its cohomology-sheaf section and is natural in $M$: for every $A$-linear morphism $a:M\\to M'$, writing $P^q(a)$ for the induced presheaf map,\n$$R^qf_*(a)\\circ\\sigma_M=\\sigma_{M'}\\circ(P^q(a))^\\#.$$\nNo flatness of $\\rho$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 072W, lemma-higher-direct-images, statement and proof, lines 746–785: explicitly for a morphism of ringed sites and module sheaves. Naturality is the cocycle-to-cohomology-sheaf construction in that proof."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-presheaf-modules-sheafification",
+  "def-sp-enough-injectives",
+  "def-sp-left-exact-additive",
+  "def-sp-injective-resolutions",
+  "def-sfb-ringed-site-section-functors"
+ ],
+ "proof": [
+  {
+   "text": "Choose a nonnegative injective resolution $M\\to I^\\bullet$ using lem-weil-pbc-left-exact-injective-resolution-degree-zero (1), and put $K^\\bullet=f_*I^\\bullet$. The module-category description of kernels shows that evaluation and $f_*$ preserve kernels: evaluate the kernel at $U$ or at $u(V)$, respectively; restriction of scalars changes neither that kernel nor the additive operations. Both functors are additive and left exact. The resolution-computation isomorphisms of lem-weil-pbc-derived-functor-map-via-lift give $H^q_{\\mathrm{Mod}(A)}(u(V),M)\\cong H^q(I^\\bullet(u(V)))$ and $R^qf_*M\\cong\\mathcal H^q(K^\\bullet)$, the latter in $B$-module sheaves. Write $L^\\bullet$ for the underlying complex of presheaves of $B$-modules of $K^\\bullet$, and $Q^q=\\ker(d_L^q)/\\operatorname{im}(d_L^{q-1})$ in that presheaf category. For $q=0$ use $L^{-1}=0$.",
+   "uses": [
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-derived-functor-map-via-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 072W, lemma-higher-direct-images, proof, lines 761–785"
+   }
+  },
+  {
+   "text": "Kernels and cokernels of presheaves of $B$-modules are formed objectwise: take the module kernel or quotient at each object and use the induced semilinear restrictions; the objectwise universal properties give the presheaf universal properties. Thus $Q^q(V)=\\ker(d_I^q(u(V)))/\\operatorname{im}(d_I^{q-1}(u(V)))$, with scalar action $b[z]=[\\rho_V(b)z]$. The differentials are $A$-linear, so this action is well defined. For $v:V'\\to V$, naturality of $\\rho$ and semilinearity of restriction give $(b[z])|_{V'}=b|_{V'}[z|_{u(V')}]$. Identity and composition of restrictions hold already on $I^\\bullet$. This identifies $Q^q$ with the presheaf $P^q_M$ in the statement, including its specified restrictions and $B$-action, using the computation in step 1.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 072W, lemma-higher-direct-images, proof, lines 761–785"
+   }
+  },
+  {
+   "text": "Apply the exact module-sheafification functor on $(\\mathcal D,B)$ from lem-weil-pbc-ringed-site-module-sheafification-exact. The natural homology comparison in lem-sp-exact-functor-preserves-homology (c) yields $(Q^q)^\\#\\cong\\mathcal H^q((L^\\bullet)^\\#)$. Every $L^r$ is the underlying presheaf of the sheaf $K^r$. Its sheafification is canonically $K^r$: by the sheafification universal property the identity of $K^r$ factors through $(L^r)^\\#$, and the two composites are identities by uniqueness. The same uniqueness makes these identifications commute with differentials and with complex maps. Therefore $(Q^q)^\\#\\cong\\mathcal H^q(K^\\bullet)\\cong R^qf_*M$. Define $\\sigma_M$ by composing this isomorphism with $(P^q_M)^\\#\\cong(Q^q)^\\#$ from step 2. The cited homology comparison respects cycle inclusions and quotient projections, so its composite with the sheafification unit sends $[z]$ to the cohomology-sheaf section represented by $z$. This is exactly the asserted cocycle map, and all its arrows are $B$-linear.",
+   "uses": [
+    "lem-weil-pbc-ringed-site-module-sheafification-exact",
+    "lem-sp-exact-functor-preserves-homology",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 072W, lemma-higher-direct-images, proof, lines 761–785"
+   }
+  },
+  {
+   "text": "For $a:M\\to M'$, choose resolutions $I,I'$ as above. The statement of lem-weil-pbc-injective-resolution-lift-exists supplies an augmentation-preserving $A$-linear complex map $t:I\\to I'$ over $a$. For every $V$, lem-weil-pbc-derived-functor-map-via-lift applied to evaluation identifies $P^q(a)_V$ with $[z]\\mapsto[t^q_{u(V)}(z)]$. This is $B(V)$-linear and commutes with restrictions, since $t$ is a morphism of module-sheaf complexes. Identity and composition hold for these maps because the evaluation right derived functors are functors. Applied to $f_*$, the same cited statement identifies $R^qf_*(a)$ with $\\mathcal H^q(f_*t)$ under the resolution-computation isomorphisms. Naturality of the homology comparison from step 3, together with the natural sheafification identifications there, now gives $R^qf_*(a)\\circ\\sigma_M=\\sigma_{M'}\\circ(P^q(a))^\\#$. Explicitly, both sides precomposed with the presheaf sheafification unit send $[z]$ to the cohomology-sheaf class of $t^q_{u(V)}(z)$; equality after sheafification follows from its universal property.",
+   "uses": [
+    "lem-weil-pbc-injective-resolution-lift-exists",
+    "lem-weil-pbc-derived-functor-map-via-lift",
+    "lem-sp-exact-functor-preserves-homology",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 072W, lemma-higher-direct-images, proof, lines 761–785"
+   }
+  },
+  {
+   "text": "Finally take $a=\\mathrm{id}_M$ in the preceding argument, allowing two different chosen resolutions of $M$. The lift-existence statement again supplies a comparison. The derived-map formula identifies its evaluated cohomology map with the identity of each fixed derived evaluation group, and its direct-image cohomology map with the identity of $R^qf_*M$. Hence the presheaf module structures and $\\sigma_M$ agree under the canonical resolution identifications; the construction is canonical. The calculation used only restriction of scalars, linear differentials and exact sheafification. It imposed no flatness condition on $\\rho$.",
+   "uses": [
+    "lem-weil-pbc-injective-resolution-lift-exists",
+    "lem-weil-pbc-derived-functor-map-via-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 072W, lemma-higher-direct-images, proof, lines 761–785"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-derived-functor-map-via-lift",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-ringed-site-module-sheafification-exact",
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-weil-pbc-injective-resolution-lift-exists"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 072W, lemma-higher-direct-images, proof; its cocycle map made explicitly natural using Tag 013P and right-derived resolution computation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images of modules on ringed sites are naturally the sheafification of the cohomology presheaf V maps to H^p(u(V),M)",
+   "results": "[\"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"PresheafOfModules.toPresheaf_map_toSheafify\", \"CategoryTheory.Sheaf.H\", \"PresheafOfModules.sheafificationCompToSheaf\", \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv\", \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def\", \"PresheafOfModules.sheafificationHomEquiv\"]",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give abelian-sheaf Ext cohomology, underived module pushforward, module sheafification, or colimit existence; none states the natural higher-image module sheafification comparison on arbitrary ringed sites"
+  },
+  {
+   "tool": "grep",
+   "query": "higher.*[Dd]irect.*[Ii]mage|rightDerived.*sheafification|sheafification.*rightDerived",
+   "results": "[]",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give abelian-sheaf Ext cohomology, underived module pushforward, module sheafification, or colimit existence; none states the natural higher-image module sheafification comparison on arbitrary ringed sites"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher direct images of modules on ringed sites are the sheafification of local module cohomology",
+   "results": "[\"PresheafOfModules.sheafify\", \"PresheafOfModules.sheafification\", \"PresheafOfModules.toSheafify\", \"PresheafOfModules.sheafifyMap\", \"localCohomology.diagram\", \"PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification\", \"localCohomology\", \"SheafOfModules.sheafificationCompPullback\"]",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give abelian-sheaf Ext cohomology, underived module pushforward, module sheafification, or colimit existence; none states the natural higher-image module sheafification comparison on arbitrary ringed sites"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"sheafification\"",
+   "results": "[]",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give abelian-sheaf Ext cohomology, underived module pushforward, module sheafification, or colimit existence; none states the natural higher-image module sheafification comparison on arbitrary ringed sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a ringed site the sheafification of the presheaf cohomology of a direct image complex naturally equals the higher derived module pushforward",
+   "results": "[\"SheafOfModules.sheafificationCompPullback\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.pushforwardNatIso\", \"SheafOfModules.pushforward\", \"SheafOfModules.pushforward_obj_val\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility\", \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv\"]",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give abelian-sheaf Ext cohomology, underived module pushforward, module sheafification, or colimit existence; none states the natural higher-image module sheafification comparison on arbitrary ringed sites"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologyPresheaf|rightDerived|sheafificationCompToSheaf",
+   "results": "[\"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\"]",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give abelian-sheaf Ext cohomology, underived module pushforward, module sheafification, or colimit existence; none states the natural higher-image module sheafification comparison on arbitrary ringed sites"
+  },
+  {
+   "tool": "grep",
+   "query": "higher.*[Dd]irect.*[Ii]mage|rightDerived.*sheafification|sheafification.*rightDerived",
+   "results": "[]",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected candidates concern Ext cohomology of abelian sheaves, underived module pushforward or sheafification alone; no arbitrary ringed-site higher-module-image comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural ringed site module higher direct image as associated sheaf of section cohomology",
+   "results": "[\"ModuleCat.tildeInModuleCat\", \"SheafOfModules\", \"AlgebraicGeometry.Scheme.Modules\", \"SheafOfModules.instIsRightAdjointPushforward\", \"SheafOfModules.pushforwardSections\", \"SheafOfModules.sections\", \"SheafOfModules.mk\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\"]",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected candidates concern Ext cohomology of abelian sheaves, underived module pushforward or sheafification alone; no arbitrary ringed-site higher-module-image comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"sheafification\"",
+   "results": "[]",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected candidates concern Ext cohomology of abelian sheaves, underived module pushforward or sheafification alone; no arbitrary ringed-site higher-module-image comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of cohomology of a complex of sheaves of modules computes higher derived pushforward",
+   "results": "[\"CategoryTheory.Sheaf.cohomologyPresheaf\", \"SheafOfModules.sheafificationCompPullback\", \"CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility\", \"CategoryTheory.Sheaf.H\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val\", \"SheafOfModules.pushforwardNatIso\", \"SheafOfModules.pushforwardNatIso_hom\"]",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected candidates concern Ext cohomology of abelian sheaves, underived module pushforward or sheafification alone; no arbitrary ringed-site higher-module-image comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images of modules on ringed sites are naturally the sheafification of the cohomology presheaf",
+   "results": "[\"CategoryTheory.Sheaf.cohomologyPresheaf\", \"PresheafOfModules.toPresheaf_map_toSheafify\", \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv\", \"PresheafOfModules.sheafificationCompToSheaf\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def\", \"PresheafOfModules.toSheafify_app_apply\", \"PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm\"]",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected candidates concern Ext cohomology of abelian sheaves, underived module pushforward or sheafification alone; no arbitrary ringed-site higher-module-image comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologyPresheaf|sheafificationCompToSheaf|instIsRightAdjointPushforward",
+   "results": "[\"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\"] ; subdirectory CategoryTheory/Sites/SheafCohomology",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected candidates concern Ext cohomology of abelian sheaves, underived module pushforward or sheafification alone; no arbitrary ringed-site higher-module-image comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ringed-site-higher-image-colimit-criterion",
+  "date": "2026-10-24",
+  "group": "Q01"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Right adjoint of quasi-coherent pushforward for qcqs algebraic spaces. Supporting input: 0E55 Brown hypotheses: qcqs derived direct image and direct-sum comparison 08FA/08FB. Auxiliary input: Higher module direct images on spaces preserve filtered colimits. Local assembly input: the covering-object cohomology criterion for higher module direct images (Stacks lemma-higher-direct-image-colimit). Sheafification input: the natural ringed-module cohomology-presheaf description in Stacks Tag 072W, used before the colimit comparison.",
+   "via": [
+    "lem-sfb-ringed-site-higher-image-colimit-criterion",
+    "lem-sfb-space-higher-module-image-filtered-colimits",
+    "lem-sfb-space-derived-pushforward-coproducts",
+    "lem-sfb-qcqs-space-pushforward-right-adjoint",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-ringed-site-higher-image-cohomology-sheafification",
+  "worker": "stage1",
+  "summary": "Proved the ringed-module version of Stacks 072W from an injective resolution, objectwise presheaf homology and exact module sheafification; checked scalar actions, naturality and independence with existing resolution-lifting and derived-map Mathlib leaves. No new nodes and no statement changes.",
+  "blueprint": "Realizes the ringed-module cohomology-sheafification input in the existing from.place chain below det-thm-sf-ctf-stability-direct-images, proof (3), via the higher-image filtered-colimit criterion. Current latest blueprint proof (3) and ancestor search were read; ancestor tool returns None, retained as null. No unit/chapter route change.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NR-326899e74",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-326899e74 (reviewer sub-agent of L); spot-checked: Read Stacks 072W lemma-higher-direct-images (sites-cohomology.tex 746-785), the item, all 5 steps and all 7 cited statements; the delivery has no new nodes. Statement, stmt_deps and blueprint are byte-identical to the unsplit base (dagsnap ece52a80). proof_deps equals the union of the step citations. The pushforward and coefficient category agree with 072W: M(u(V)) with scalars restricted along rho, all cohomology computed in Mod(A) and Mod(B). Step 1: resolution existence (degree-zero leaf (1)); evaluation and f_* are left exact because module kernels are sectionwise; iota from derived-map-via-lift, which needs only an additive functor. Step 2, marked elementary: objectwise presheaf kernel/quotient; the B-action through rho is well defined because the differentials are A-linear, and the restrictions are semilinear by naturality of rho. Step 3: exact module sheafification plus exact-functor-homology (c); (L^r)^# = K^r by the universal property; the cocycle compatibility comes from (c). Step 4: lift existence plus the derived-map formula for evaluation and for f_*, then naturality via the uniqueness in the unit's universal property. Step 5: independence of the resolution via h=id. No flatness, no SGA, no homotopy uniqueness assumed. Small cases checked: q=0, a one-object site with Z->Z/2, u=id with q>0, empty covers. No duplicate of the ringed-site module version among the abelian, scheme and ringed-space comparison nodes (lem-sbc-abelian-higher-image-sheafification-functor-iso, lem-pc-cohomology-presheaf-derived-sections-evaluation, lem-sbc-higher-direct-image-forget-comparison, lem-pc-higher-direct-image-coefficient-comparison). All cited non-definition nodes are Mathlib leaves, so no tool_uses entry is needed. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.RingedSiteHigherImageSheafification",
+  "declaration": "CategoryTheory.RingedSiteHigherImage.exists_cohomologyPresheaf_sheafificationIso",
+  "declarations": [
+   "CategoryTheory.RingedSiteHigherImage.directImage",
+   "CategoryTheory.RingedSiteHigherImage.cohomologyPresheaf",
+   "CategoryTheory.RingedSiteHigherImage.sheafifiedHomologyComparison",
+   "CategoryTheory.RingedSiteHigherImage.resolutionComparison",
+   "CategoryTheory.RingedSiteHigherImage.evaluationComparison",
+   "CategoryTheory.RingedSiteHigherImage.exists_cohomologyPresheaf_sheafificationIso"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Sites/RingedSiteHigherImageSheafification.lean",
+  "statement": "theorem exists_cohomologyPresheaf_sheafificationIso [PreservesFiniteLimits (u.sheafPullback (Type u) K J)] [EnoughInjectives (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A))] [EnoughInjectives (ringedSiteModules.{u} ((sheafCompose K (forget₂ CommRingCat RingCat)).obj B))] (q : ℕ) : (∀ V : D, ∃ e : cohomologyPresheaf u ρ q ⋙ PresheafOfModules.toPresheaf ((sheafCompose K (forget₂ CommRingCat RingCat)).obj B).obj ⋙ (CategoryTheory.evaluation Dᵒᵖ AddCommGrpCat.{u}).obj (op V) ≅ (RingedSiteSectionFunctors.sectionEvaluation ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A) (u.obj V)).rightDerived q, ∀ (M : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A)) (I : InjectiveResolution M), e.hom.app M = evaluationComparison u ρ q V M I) ∧ (∃ σ : cohomologyPresheaf u ρ q ⋙ PresheafOfModules.sheafification (𝟙 ((sheafCompose K (forget₂ CommRingCat RingCat)).obj B).obj) ≅ (directImage u ρ).rightDerived q, ∀ (M : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A)) (I : InjectiveResolution M), σ.hom.app M = resolutionComparison u ρ q M I)",
+  "branch": "newtargets-dag",
+  "by": "Q34",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c24372d30",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Clause-by-clause check against node and Stacks 072W (sites-cohomology.tex 746-785): small sites in Type u; u:D⥤C continuous with PreservesFiniteLimits of the Type sheafPullback = 'u_s exact' of def-weil-pbc-sites-and-cohomology (not stronger); CommRingCat sheaves A,B with actual ρ; directImage = SheafOfModules.pushforward (sectionModuleMap u ρ); both EnoughInjectives assumed as node; q:ℕ. cohomologyPresheaf = (directImage ⋙ forget).rightDerived q; first conjunct: per-V natural iso to (sectionEvaluation A (u V)).rightDerived q pinned to evaluationComparison for all M,I; second: natural iso σ: P ⋙ sheafification ≅ (directImage).rightDerived q pinned to resolutionComparison for all M,I; naturality = σ.hom.naturality. Helper maps are canonical (mapHomologyIso, sheafification counit forget⋙S⟶𝟭, isoRightDerivedObj) and resolution-independent, so the statement is true and non-vacuous. Edge cases q=0, zero rings/modules, empty sites, non-flat ρ, multiple resolutions covered. Node diff vs live: only lean + landed stmt_dep def-sfb-ringed-site-section-functors (permitted); dep records unchanged; lean.statement verbatim; single sorry; docstrings and both report sections present; no duplicate (ringed-space/scheme/abelian versions differ); per-degree rule n/a (node is per-degree by nature). No compile needed (no file changed). No findings."
+ }
+}

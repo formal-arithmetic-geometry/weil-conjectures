@@ -1,0 +1,218 @@
+{
+ "id": "lem-sf-etale-graph-unit-tensor",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-prop-sf-rf-shriek-preservation",
+   "place": "Unit step 3, smooth chart: etale counit and projection normalization, blueprint thm-asd-smooth-tensor.proof.md paragraph 3.",
+   "via": [
+    "lem-sf-etale-graph-projection-arbitrary-base",
+    "lem-sf-etale-unit-tensor-arbitrary-base",
+    "lem-sf-smooth-dualizing-complex-invertible"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The specified compactification graph unit respects tensor",
+ "statement": "Let A be a finite commutative ring, e:V\\to W a separated etale morphism of arbitrary schemes, and c=(V\\xrightarrow j Z\\xrightarrow r W) a compactification with j open and r proper [def-weil-etale-morphism, def-weil-proper-morphism, def-weil-open-immersion]. On ordinary unbounded etale module derived categories [def-weil-pbc-derived-categories], put F=Rr_*Dj_!, E=D(e^*), and form T=Z\\times_W V with projections q:T\\to V, q_Z:T\\to Z and graph sigma=(j,1):V\\to T. The graph is clopen. Let t:Lq^*M\\to Lq_Z^*Dj_!M be restriction to sigma, the canonical identification through q sigma=1 and q_Z sigma=j and the open adjunction unit, then extension by zero from the graph. Let u:1\\to EF be the composite of the q-pullback/direct-image unit, Rq_*t, inverse proper base change, and the canonical transport Le^*\\cong D(e^*) [prop-weil-pbc-inverse-image-modules-exact]. Let mu:E(B\\otimes K)\\cong EB\\otimes EK be supportExactPullbackTensorIso [def-pur-supported-localization-comparisons]. Let P:FM\\otimes K\\to F(M\\otimes EK) be projectionMapOfCompactification followed by the canonical exact-pullback transport [def-kun-projection-formula-map, lem-pur-etale-open-derived-tensor]. Then for all M in D(V_et,A) and K in D(W_et,A),\n$$u_{M\\otimes EK}=(u_M\\otimes 1_{EK});\\mu_{FM,K}^{-1};E(P_{M,K}),$$\nwhere semicolons denote composition in the order written. No quasi-compactness condition on j is imposed. This asserts an identity for the graph unit, without sum extension or invertibility.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+  "place": "Paragraph 3, etale counit/projection normalization; accepted graph-projection proof steps 2--6; Stacks more-etale.tex Tag 0GKF."
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion",
+  "def-weil-pbc-derived-categories",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-pur-supported-localization-comparisons",
+  "def-kun-projection-formula-map",
+  "lem-pur-etale-open-derived-tensor",
+  "def-kun-unbounded-exchange"
+ ],
+ "proof": [
+  {
+   "text": "Use the graph-transfer tensor equation before pushforward, with J=D(e*)K and the explicitly constructed sfEtaleGraphTensorMap d.",
+   "uses": [
+    "lem-sf-etale-graph-transfer-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For Q=Lq*, R=Rq* and η the adjunction unit, the counit-defined projection satisfies η_(M⊗J);R(μ_q)=(η_M⊗1);π_q. This is the existing unit_app_comp_map_rightAdjointProjectionMap. Apply R to the transfer equation and use naturality of π_q in t_M to obtain η_(M⊗J);R(t_(M⊗J))=((η_M;R(t_M))⊗1);π_q;R(d). The private transfer_unit_tensor proves this calculation for arbitrary bifunctors.",
+   "uses": [
+    "def-kun-projection-formula-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The definition of compactificationEtaleUnit gives u_M;Ex=η_M;R(t_M). Postcompose the desired identity with τ inverse and Ex at H(M⊗J); apply exchange/projection compatibility and the preceding calculation, then cancel τ inverse and proper exchange. Proper exchange is invertible for finite A, since its additive group is torsion.",
+   "uses": [
+    "lem-sf-etale-graph-exchange-tensor",
+    "lem-kun-proper-base-change-torsion-ring"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-etale-graph-transfer-tensor",
+  "def-kun-projection-formula-map",
+  "lem-sf-etale-graph-exchange-tensor",
+  "lem-kun-proper-base-change-torsion-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+  "place": "Paragraph 3; original steps 4--6, with the graph-transfer and exchange equations separated and the adjunction calculation written in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "projection formula tensor compatibility adjunction unit",
+   "results": "Adjunction.unit_app_tensor_comp_map_δ is a generic monoidal adjunction identity; it does not establish the geometric graph-unit identity or invertibility.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compactificationEtaleUnit tensor projection formula identity before adjunction transposition",
+   "results": "Only scalar-extension unit and generic monoidal-unit equations; no compactification graph-unit tensor identity.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "unit.*projectionMap|projectionMap.*unit in Mathlib; compactificationEtaleComparison and tensor in both library roots",
+   "results": "Mathlib has no compactification graph unit. Source EtaleLowerShriekCompactificationIso proves invertibility but no tensor compatibility.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SfEtaleGraphProjectionArbitraryBase",
+  "date": "2026-10-25",
+  "group": "G9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SfEtaleGraphUnitTensor",
+  "file": "lean/Sheaf/AlgebraicGeometry/SfEtaleGraphUnitTensor.lean",
+  "declaration": "AlgebraicGeometry.Etale.sfEtaleGraphUnitTensor",
+  "statement": "theorem sfEtaleGraphUnitTensor\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {V W : Scheme.{u}} (e : V ⟶ W) [Etale e] [IsSeparated e] (c : Compactification e)\n    (M : DerivedCategoryModule A V) (K : DerivedCategoryModule A W) :\n    (compactificationEtaleUnit A e c).app\n          (((derivedTensor (ModuleCat.{u + 1} A) V).obj M).obj\n            (D((e)^*[ModuleCat.{u + 1} A]).obj K)) ≫\n        (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) e).hom.app _ =\n      ((derivedTensor (ModuleCat.{u + 1} A) V).map\n        ((compactificationEtaleUnit A e c).app M ≫\n          (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) e).hom.app _)).app\n            (D((e)^*[ModuleCat.{u + 1} A]).obj K) ≫\n        (supportExactPullbackTensorIso (ModuleCat.{u + 1} A) e\n          ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).obj M) K).inv ≫\n        D((e)^*[ModuleCat.{u + 1} A]).map\n          (((projectionMapOfCompactification (ModuleCat.{u + 1} A) c).app M).app K ≫\n            (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).map\n              (((derivedTensor (ModuleCat.{u + 1} A) V).obj M).map\n                ((leftDerivedUpperStarIsoMapDerivedCategory\n                  (ModuleCat.{u + 1} A) e).hom.app K)))",
+  "branch": "sheaf-dag",
+  "by": "G9",
+  "date": "2026-10-25"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-sf-etale-graph-unit-tensor",
+  "worker": "stage3",
+  "summary": "Extract original steps 1--6 as the geometric unit identity, before the complete adjunction transpose calculation now proved in Lean. No invertibility or sum-extension assertion is included.",
+  "blueprint": "Unit step 3 via thm-asd-smooth-tensor.proof.md paragraph 3; graph transfer and proper/open projection normalization.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "The same generic geometric, clopen-localization or monoidal tool used in original graph-projection steps 1--6; the unit route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-section-separated-closed-immersion",
+    "why": "The same generic geometric, clopen-localization or monoidal tool used in original graph-projection steps 1--6; the unit route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-finite-limits",
+    "why": "The same generic geometric, clopen-localization or monoidal tool used in original graph-projection steps 1--6; the unit route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "The same generic geometric, clopen-localization or monoidal tool used in original graph-projection steps 1--6; the unit route is unchanged."
+   },
+   {
+    "node": "lem-pe-flat-lfp-monomorphism-open",
+    "why": "The same generic geometric, clopen-localization or monoidal tool used in original graph-projection steps 1--6; the unit route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-etale-sheaf-clopen-product",
+    "why": "The same generic geometric, clopen-localization or monoidal tool used in original graph-projection steps 1--6; the unit route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "The same generic geometric, clopen-localization or monoidal tool used in original graph-projection steps 1--6; the unit route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "The same generic geometric, clopen-localization or monoidal tool used in original graph-projection steps 1--6; the unit route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "The same generic geometric, clopen-localization or monoidal tool used in original graph-projection steps 1--6; the unit route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "The same generic geometric, clopen-localization or monoidal tool used in original graph-projection steps 1--6; the unit route is unchanged."
+   },
+   {
+    "node": "lem-kun-derived-pullback-composition-monoidal",
+    "why": "The same generic geometric, clopen-localization or monoidal tool used in original graph-projection steps 1--6; the unit route is unchanged."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "The same generic geometric, clopen-localization or monoidal tool used in original graph-projection steps 1--6; the unit route is unchanged."
+   },
+   {
+    "node": "lem-pur-etale-open-derived-tensor",
+    "why": "The same generic geometric, clopen-localization or monoidal tool used in original graph-projection steps 1--6; the unit route is unchanged."
+   },
+   {
+    "node": "lem-asd-open-projection-exchange",
+    "why": "The same generic geometric, clopen-localization or monoidal tool used in original graph-projection steps 1--6; the unit route is unchanged."
+   },
+   {
+    "node": "lem-asd-open-base-change-unit-mate",
+    "why": "The same generic geometric, clopen-localization or monoidal tool used in original graph-projection steps 1--6; the unit route is unchanged."
+   },
+   {
+    "node": "lem-kun-proper-base-change-torsion-ring",
+    "why": "The same generic geometric, clopen-localization or monoidal tool used in original graph-projection steps 1--6; the unit route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "why": "The same generic geometric, clopen-localization or monoidal tool used in original graph-projection steps 1--6; the unit route is unchanged."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261025T095409-L-3397528",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261025T161957-L-175460",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

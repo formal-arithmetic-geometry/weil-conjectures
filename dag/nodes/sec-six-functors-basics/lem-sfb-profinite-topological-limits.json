@@ -1,0 +1,96 @@
+{
+ "id": "lem-sfb-profinite-topological-limits",
+ "kind": "statement",
+ "title": "Profinite limits are limits of underlying topological spaces",
+ "statement": "Let $I$ be a small category and $F:I\\to\\mathsf{Profinite}$ a diagram of profinite spaces, meaning compact Hausdorff totally disconnected spaces and continuous maps. In compatible universes [def-weil-size-convention], let $(L,(p_i)_{i\\in I})$ be a limit cone in $\\mathsf{Profinite}$. The same cone is a limit in topological spaces. Explicitly, for every topological space $W$ and every compatible family of continuous maps $b_i:W\\to F(i)$ there is a unique continuous map $b:W\\to L$ such that $p_i b=b_i$ for every $i$. No compactness or separation hypothesis is imposed on $W$.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proof of Lemma 2.2.8, topological-limit input for the relative finite-stage presentation. Mathlib/Topology/Category/Profinite/Basic.lean, Profinite.toTopCat.createsLimits, lines 214–215; Mathlib/CategoryTheory/Limits/Creates.lean, preservesLimits_of_createsLimits_and_hasLimits, lines 376–378."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "preservesLimits|createsLimits|toTopCat",
+   "results": "Hits: Mathlib/Topology/Category/Profinite/CofilteredLimit.lean, Mathlib/Topology/Category/Profinite/CofilteredLimit.lean, Mathlib/Topology/Category/Profinite/CofilteredLimit.lean, Mathlib/Topology/Category/Profinite/CofilteredLimit.lean, Mathlib/Topology/Category/Profinite/CofilteredLimit.lean, Mathlib/Topology/Category/Profinite/Basic.lean, Mathlib/Topology/Category/Profinite/Basic.lean, Mathlib/Topology/Category/Profinite/Basic.lean Subdirectory: Topology/Category/Profinite",
+   "date": "2026-10-22",
+   "verdict": "match: Profinite.toTopCat.createsLimits, specialized by CategoryTheory.Limits.preservesLimits_of_createsLimits_and_hasLimits; the set-valued forgetful functor is not the topological inclusion"
+  },
+  {
+   "tool": "loogle",
+   "query": "Profinite.toTopCat",
+   "results": "Hits: Profinite.toTopCat, Profinite.toTopCat.createsLimits, Profinite.toTopCat.reflective",
+   "date": "2026-10-22",
+   "verdict": "match: Profinite.toTopCat.createsLimits, specialized by CategoryTheory.Limits.preservesLimits_of_createsLimits_and_hasLimits; the set-valued forgetful functor is not the topological inclusion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The forgetful functor from profinite spaces to topological spaces preserves all small limits",
+   "results": "Hits: Profinite.forget_preservesLimits, LightProfinite.instPreservesLimitsOfShapeOppositeNatForget, ProfiniteGrp.instPreservesLimitsProfiniteForget₂, Profinite.forgetCreatesLimits, Profinite.hasLimits, instPreservesLimitsOfShapeLightProfiniteLightCondSetLightProfiniteToLightCondSetOfCountableCategory, Profinite.toTopCat.createsLimits, instPreservesFiniteLimitsLightProfiniteLightCondSetLightProfiniteToLightCondSet",
+   "date": "2026-10-22",
+   "verdict": "match: Profinite.toTopCat.createsLimits, specialized by CategoryTheory.Limits.preservesLimits_of_createsLimits_and_hasLimits; the set-valued forgetful functor is not the topological inclusion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inclusion of profinite spaces in topological spaces preserves limits",
+   "results": "Hits: Profinite.toTopCat.createsLimits, Profinite.forget_preservesLimits, Profinite.toTopCat, Profinite.hasLimits, Profinite.toCompHaus.createsLimits, Profinite.limitCone, Profinite, Profinite.of",
+   "date": "2026-10-22",
+   "verdict": "match: Profinite.toTopCat.createsLimits, specialized by CategoryTheory.Limits.preservesLimits_of_createsLimits_and_hasLimits; the set-valued forgetful functor is not the topological inclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "preservesLimits_of_createsLimits_and_hasLimits",
+   "results": "Hits: Mathlib/CategoryTheory/Limits/Creates.lean Subdirectory: CategoryTheory/Limits",
+   "date": "2026-10-22",
+   "verdict": "match: Profinite.toTopCat.createsLimits, specialized by CategoryTheory.Limits.preservesLimits_of_createsLimits_and_hasLimits; the set-valued forgetful functor is not the topological inclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "instance.*[Hh]asLimits|instance.*[Hh]asLimit",
+   "results": "Mathlib/Topology/Category/TopCat/Limits/Basic.lean:170 topCat_hasLimitsOfShape; :176 topCat_hasLimitsOfSize; :178 topCat_hasLimits.",
+   "date": "2026-10-22",
+   "verdict": "match: target TopCat has small limits in the compatible universe; this discharges the target-limits hypothesis of preservesLimits_of_createsLimits_and_hasLimits."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Profinite.toTopCat.createsLimits",
+  "file": "Mathlib/Topology/Category/Profinite/Basic.lean",
+  "how": "specializes in one line: the creates-limits instance at lines 214–215, together with CategoryTheory.Limits.preservesLimits_of_createsLimits_and_hasLimits (Mathlib/CategoryTheory/Limits/Creates.lean:376–378), says that any profinite limit cone remains limiting in TopCat; TopCat has all small limits. Its cone universal property is exactly the displayed continuous-map assertion. The required target limit instance is TopCat.topCat_hasLimits at Mathlib/Topology/Category/TopCat/Limits/Basic.lean:178–179 (read together with lines 170–176 for the universe bounds).",
+  "line": 214
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-component-lift-pullback-space",
+  "date": "2026-10-22",
+  "group": "NY"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Bhatt–Scholze Lemma 2.2.8: the relative profinite limit in the finite-clopen presentation is also a topological limit; this is the limit comparison needed under paragraph (3), open direct image, of the inherited via chain.",
+   "via": [
+    "lem-sfb-relative-component-lift-pullback-space",
+    "lem-sfb-wstrict-common-component-hypercovers",
+    "lem-sfb-wstrict-lisse-component-cohomology",
+    "lem-sfb-root-tower-coordinate-face",
+    "lem-sfb-root-tower-inner-support",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -1,0 +1,322 @@
+{
+ "id": "lem-sfb-qcqs-lattice-tree-reconstruction",
+ "kind": "statement",
+ "title": "Integral branch models and finite reconstruction on a qcqs open–closed tree",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega=\\overline{\\mathbf Q}_\\ell$, and a finite subextension $E/\\mathbf Q_\\ell$ [def-weil-l-adic-coefficient-extension]. Let $\\Lambda=\\underline E$, the condensed ring of continuous functions to normed $E$, or $\\Lambda=\\Omega^{\\mathrm{fin}}$, whose sections on a profinite set are continuous functions to $\\Omega$ with image in one finite subextension [sk-def-sfb-qlbar-condensed]. Put $\\mathcal F=\\{E\\}$ in the first case and let $\\mathcal F$ be all finite subextensions of $\\Omega$ in the second. For $F\\in\\mathcal F$ write $A_F=\\mathcal O_F$ with its norm topology. For each scheme $T$, use the pulled-back condensed coefficient rings $\\Lambda_T,F_T,A_{F,T}$ on the small pro-étale site, module objects, and ordinary uncompleted unbounded derived categories [sk-def-sfb-pulled-back-coefficients, sk-def-sfb-module-objects, sk-def-sfb-module-derived-pushpull, def-weil-size-convention]. Constructibility means finite constant scalar models on a finite constructible locally closed stratification; $D_{\\mathrm{ctf}}$ means bounded constructible cohomology and finite Tor amplitude [sk-def-sfb-constructible]. A lisse module is pro-étale locally free of finite rank. A scheme is qcqs when it is quasi-compact and quasi-separated [def-weil-pbc-quasi-compact-scheme, def-weil-quasi-separated-morphism].\n\nLet $V$ be qcqs and let $\\mathscr T$ be a finite rooted binary tree of locally closed subschemes with root $V$, all vertices qcqs and all branch morphisms quasi-compact. Every internal vertex is partitioned by a quasi-compact open $j:U\\hookrightarrow T$ and its complementary closed immersion $i:Z\\hookrightarrow T$ [def-weil-open-immersion, def-weil-closed-immersion]. For a vertex $W$ let $e_W^R$ denote the composite from $W$ to $V$ of the exact edge module functors $j_!$ at open edges and $i_*$ at closed edges, with pulled-back coefficient $R$ [lem-weil-pbc-proetale-ringed-open-closed]. Assume that $\\Lambda_T$ is flat over $A_{F,T}$ for all vertices $T$ and all fields $F$ used below. Let $M$ be a $\\Lambda_V$-module and suppose that for each leaf $W$ one has $F_W\\in\\mathcal F$, a lisse $A_{F_W,W}$-module $B_W$, and an isomorphism $\\Lambda_W\\otimes_{A_{F_W,W}}B_W\\cong M|_W$ (zero models are allowed).\n\nFor each such leaf put $J_W=e_W^{A_{F_W}}B_W$. Then $J_W[0]\\in D_{\\mathrm{ctf}}(V,A_{F_W})$ with Tor amplitude $[0,0]$. There is an isomorphism in the ordinary derived category\n$$\\Lambda_V\\otimes^L_{A_{F_W,V}}J_W[0]\\ \\cong\\ e_W^\\Lambda(M|_W)[0].$$\nMore generally these edge composites preserve finite scalar-model constructibility and flat module sheaves, and their scalar comparison maps $e_W^\\Lambda(\\Lambda_W\\otimes_{A_{F,W}}B)\\cong\\Lambda_V\\otimes_{A_{F,V}}e_W^{A_F}B$ are isomorphisms for every $A_{F,W}$-module $B$. Finally $M[0]$ is obtained from the finitely many $e_W^\\Lambda(M|_W)[0]$ by finitely many distinguished-triangle extensions in $D(\\Lambda_V)$ [def-weil-triangulated-subcategory]. Connecting maps are arbitrary $\\Lambda_V$-linear maps; no common finite coefficient field for them is asserted.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AH, lemma-ses-associated-to-open; agent ringed coefficient, flatness and finite-tree reconstruction from returned item steps 10–13, using their Tor-local-detection and tensor-pullback comparisons."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-weil-size-convention",
+  "sk-def-sfb-constructible",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "def-weil-triangulated-subcategory",
+  "def-sfb-qcqs-open-closed-tree",
+  "def-sfb-lisse-coefficient-module"
+ ],
+ "proof": [
+  {
+   "text": "Combine the finite constant-model stratifications on complementary open and closed children using Scheme.Stratification.openClosed. Quasi-compactness of the open immersion transports constructible strata (Tags 09YD and 09YG). Normalized upperStar composition transports their local models. The exact open extension and closed direct image restrict to the input on their supporting child and to zero on the other; the zero module has a rank-zero finite constant model, including on empty schemes. Induction on Path proves branch preservation of constructibility. The implementation reuses the proved private constructibility helpers of CoefficientHeartLisseExtensionConstructible; no Noetherian hypothesis is used.",
+   "uses": [
+    "lem-weil-pbc-constructible-image-retrocompact-open",
+    "lem-weil-pbc-constructible-image-closed-retrocompact-complement",
+    "lem-weil-pbc-condensed-open-closed-recollement",
+    "sk-def-sfb-constructible",
+    "lem-sfb-coefficient-heart-lisse-extension-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH; topology.tex Tags 09YD, 09YG; sites-modules.tex Tags 03EL, 03ER; implemented using the existing normalized condensed-module APIs."
+   }
+  },
+  {
+   "text": "Use normalized monoidal upperStar and the internal relative tensor comparison to test preservation of monomorphisms by tensor on both children. The tensor kernel restricts to zero on both children, hence is zero by the module-object open/closed detection theorem. Right exactness of tensor upgrades this to finite-limit preservation. The existing proved private integralModel_open_closed_flat helper implements this argument for arbitrary condensed coefficients and a quasi-compact open. Iteration gives flatness preservation along Path. A lisse coefficient module becomes locally free for the raw pulled-back coefficient object via freeAt_iff_standard, and the locally-free tensor exactness theorem proves its flatness.",
+   "uses": [
+    "lem-weil-pbc-condensed-open-closed-recollement",
+    "lem-weil-pbc-condensed-finite-free-tensor-exact",
+    "lem-weil-pbc-profinite-point-pullback",
+    "det-lem-integral-models-generators",
+    "lem-weil-pbc-finite-etale-locally-free-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH; topology.tex Tags 09YD, 09YG; sites-modules.tex Tags 03EL, 03ER; implemented using the existing normalized condensed-module APIs."
+   }
+  },
+  {
+   "text": "For an open edge the specified comparison is the existing canonical openImmersionShriekIso. For a closed edge prove that the specified pushHom is invertible, rather than choosing an unrelated isomorphism. Its open restriction is a map between zero objects by pullIso and openRestrictionPushforwardZero. Its closed restriction becomes the composite of pullIso.inv and extension of the closed counit, after composing with the target counit. The generic iterated-mate identity push_eq_mate_pull_inv and mateEquiv_counit give this equality. Both counits are invertible by abelian closed support; therefore the closed restriction is invertible. Joint reflection of isomorphisms by open and closed upperStar makes pushHom invertible. Induct on Path to obtain invertibility of scalarComparison at every module, without a flatness assumption.",
+   "uses": [
+    "lem-weil-pbc-condensed-open-closed-recollement",
+    "lem-weil-pbc-proetale-abelian-closed-support",
+    "lem-weil-pbc-qbar-condensed-exchange-right-adjunct"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH; topology.tex Tags 09YD, 09YG; sites-modules.tex Tags 03EL, 03ER; implemented using the existing normalized condensed-module APIs."
+   }
+  },
+  {
+   "text": "A lisse leaf has a finite free constant scalar model. The preceding steps make its branch extension constructible and flat. Apply the existing generic source theorem DerivedCategory.torAmplitudeIn_singleFunctor_obj_of_flat to obtain amplitude [0,0], and hence finite Tor amplitude. Boundedness of a single and constructibility repleteness identify its cohomology, proving bounded constructibility. The existing proved integralModel_flat_derived_single helper identifies total left derived scalar extension of a flat single with ordinary scalar extension in degree zero, using the K-flat single complex and its invertible derived counit. Compose with the canonical branch scalar comparison from the previous step and with the supplied leaf scalarIso. All constructions work for an arbitrary coefficient family; specialize to the singleton finite-field family and to all finite subextensions.",
+   "uses": [
+    "sk-def-sfb-constructible",
+    "det-def-sfb-constructible-tor-amplitude",
+    "det-lem-integral-models-generators",
+    "lem-kun-flat-bounded-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH; topology.tex Tags 09YD, 09YG; sites-modules.tex Tags 03EL, 03ER; implemented using the existing normalized condensed-module APIs."
+   }
+  },
+  {
+   "text": "Apply condensed open/closed recollement to N in degree zero in D+, and include the first localization triangle into D. Exactness identifies the outer objects with single(j!j*N) and single(i*i*N), and the middle object with single(N), via the generic exactOuterSingleIso and singleFunctor inclusion comparison. Strengthen the induction to allow any exact additive functor F from the current vertex to a fixed root category and any replete object property P containing all leaf branch objects. At a split apply the child inductions to j! followed by F and i* followed by F, map the localization triangle by F.mapDerivedCategory, and combine the two finite extension products using Mathlib extensionProductIter_add. At a leaf use upperStarId and the identity branch. Specializing F to identity and P to the replete collection of leaf branch objects proves the required finite reconstruction. The root case and empty or zero leaves require no exceptions; all connecting maps stay in the fixed coefficient category.",
+   "uses": [
+    "lem-weil-pbc-condensed-open-closed-recollement",
+    "lem-weil-pbc-condensed-finite-coefficient-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH; topology.tex Tags 09YD, 09YG; sites-modules.tex Tags 03EL, 03ER; implemented using the existing normalized condensed-module APIs."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-constructible-image-retrocompact-open",
+  "lem-weil-pbc-constructible-image-closed-retrocompact-complement",
+  "lem-weil-pbc-condensed-open-closed-recollement",
+  "sk-def-sfb-constructible",
+  "lem-weil-pbc-condensed-finite-free-tensor-exact",
+  "lem-weil-pbc-profinite-point-pullback",
+  "det-lem-integral-models-generators",
+  "lem-weil-pbc-finite-etale-locally-free-models",
+  "lem-weil-pbc-proetale-abelian-closed-support",
+  "det-def-sfb-constructible-tor-amplitude",
+  "lem-sfb-coefficient-heart-lisse-extension-constructible",
+  "lem-weil-pbc-qbar-condensed-exchange-right-adjunct",
+  "lem-kun-flat-bounded-tor-amplitude",
+  "lem-weil-pbc-condensed-finite-coefficient-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AH, finite-tree induction; stage-3 R2 implementation via normalized module-object recollement, canonical adjunction mates, the generic source flat-single theorem, K-flat single scalar computation at the root, and extensionProductIter_add. Statement and unit route unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Reconstruct a module sheaf from a finite open closed tree with integral lattice leaves using exact extension by zero and closed pushforward commuting with flat scalar extension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CompHausLike.LocallyConstantModule.functor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"{P : TopCat → Prop} →\\n  (R : Type (max u w)) →\\n    [inst : Ring R] →\\n      [inst_1 : CompHausLike.HasExplicitFiniteCoproducts P] →\\n        [inst_2 : CompHausLike.HasExplicitPullbacks P] →\\n          (hs :\\n              ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y),\\n                CategoryTheory.EffectiveEpi \", \"doc\": \"A functor from the category of $ R $-modules to the category of sheaves on compact Hausdorff-like spaces equipped with the coherent Grothendieck topology. For each $ R $-module $ X $, it assigns the s\"}\n  {\"name\": \"ModuleCat.tilde\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"{R : Type u} → [inst : CommRing R] → ModuleCat R → (AlgebraicGeometry.Spec { carrier := R, commRing := inst }).Modules\", \"doc\": \"Given a commutative ring $ R $ and an $ R $-module $ M $, the tilde sheaf $ \\\\widetilde{M} $ on $ \\\\operatorname{Spec}(R) $ is constructed by localizing $ M $ over open sets in the Zariski topology. Sec\"}\n  {\"name\": \"LightCondMod.ofSheafLightProfinite\", \"module\": \"Mathlib/Condensed/Light/Explicit\", \"type\": \"(R : Type u) →\\n  [inst : Ring R] →\\n    (F : CategoryTheory.Functor LightProfiniteᵒᵖ (ModuleCat R)) →\\n      [CategoryTheory.Limits.PreservesFiniteProducts F] →\\n        CategoryTheory.regularTopology.EqualizerCondition F → LightCondMod R\", \"doc\": \"Given a functor $ F: \\\\mathbf{LightProfinite}^{\\\\text{op}} \\\\to \\\\text{ModuleCat}\\\\, R $ that preserves finite products and satisfies the Equalizer Condition for the regular topology, this constructor form\"}\n  {\"name\": \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"∀ (R : Type u) [inst : Ring R],\\n  CategoryTheory.HasSheafify (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R)\", \"doc\": \"For the coherent Grothendieck topology on the category of totally disconnected, second-countable compact Hausdorff spaces (light profinite spaces), there exists a sheafification functor from the categ\"}\n  {\"name\": \"LightCondensed.free\", \"module\": \"Mathlib/Condensed/Light/Module\", \"type\": \"(R : Type u) → [inst : Ring R] → CategoryTheory.Functor LightCondSet (LightCondMod R)\", \"doc\": \"The functor from the category of light condensed sets to the category of light condensed $ R $-modules, constructed by applying the free $ R $-module functor to each set in the sheaf and then sheafify\"}\n  {\"name\": \"ModuleCat.tildeInModuleCat\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"{R : Type u} → [inst : CommRing R] → ModuleCat R → TopCat.Presheaf (ModuleCat R) (AlgebraicGeometry.PrimeSpectrum.Top R)\", \"doc\": \"The sheaf $\\\\widetilde{M}$ associated to an $R$-module $M$ over $\\\\operatorname{Spec}(R)$, constructed by localizing $M$ in the Zariski topology and restricting scalars via the global sections of the st\"}\n  {\"name\": \"CondensedMod.ofSheafProfinite\", \"module\": \"Mathlib/Condensed/Explicit\", \"type\": \"(R : Type (u + 1)) →\\n  [inst : Ring R] →\\n    (F : CategoryTheory.Functor Profiniteᵒᵖ (ModuleCat R)) →\\n      [CategoryTheory.Limits.PreservesFiniteProducts F] →\\n        CategoryTheory.regularTopology.EqualizerCondition F → CondensedMod R\", \"doc\": \"Given a functor $ F: \\text{Profinite}^\\\\text{op} \\\\to \\\\text{ModuleCat}\\\\, R $ that preserves finite products and satisfies the Equalizer Condition for the regular topology, this constructs the correspondi\"}\n  {\"name\": \"CondensedMod.ofSheafStonean\", \"module\": \"Mathlib/Condensed/Explicit\", \"type\": \"(R : Type (u + 1)) →\\n  [inst : Ring R] →\\n    (F : CategoryTheory.Functor Stoneanᵒᵖ (ModuleCat R)) →\\n      [CategoryTheory.Limits.PreservesFiniteProducts F] → CondensedMod R\", \"doc\": \"Given a ring $ R $ and a functor $ F : \\\\text{Stonean}^{\\\\text{op}} \\\\to \\\\text{ModuleCat}\\\\, R $ that preserves finite products, this function constructs the corresponding condensed $ R $-module by applyi\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected all returned signatures; general algebraic modules, scheme morphisms, constructible subsets or sheaf generators do not state this qcqs pro-étale coefficient assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open closed localization of proetale sheaves preserves constructible flat integral models and gives finite distinguished triangle devissage",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.basicOpen_subset_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.etaleLocus R A ↔ Algebra.FormallyEtale R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in the Zariski topology on $ \\\\operatorname{Spec}(A) $ is contained in the étale locus of $ A $ over $ R $ if and on\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"Algebra.basicOpen_subset_etaleLocus_iff_etale\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.etaleLocus R A ↔ Algebra.Etale R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in $ \\\\operatorname{Spec}(A) $ is contained in the étale locus of $ A $ over $ R $ if and only if the localization $\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"Algebra.FormallyEtale.localization_map\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u_2} {S : Type u_3} {Rₘ : Type u_4} {Sₘ : Type u_5} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : CommRing Rₘ] [inst_3 : CommRing Sₘ] (M : Submonoid R) [inst_4 : Algebra R S] [inst_5 : Algebra R Sₘ]\\n  [inst_6 : Algebra S Sₘ] [inst_7 : Algebra R Rₘ] [inst_8 : Algebra Rₘ Sₘ] [IsSca\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra, then the localization of $ S $ at a submonoid $ M $ is a formally étale algebra over the localization of $ R $ at $ M $. Formally, given $ \\\\text{FormallyÉta\"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected all returned signatures; general algebraic modules, scheme morphisms, constructible subsets or sheaf generators do not state this qcqs pro-étale coefficient assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero and closed pushforward commute with flat coefficient extension and preserve flat constructible sheaves",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Function.ExtendByZero.linearMap\", \"module\": \"Mathlib.LinearAlgebra.Pi\", \"type\": \": (ι → R) →ₗ[R] η → R\", \"doc\": \"The linear map from the space of functions $\\\\iota \\\\to R$ to $\\\\eta \\\\to R$, defined by extending each function $f : \\\\iota \\\\to R$ via the mapping $s : \\\\iota \\\\to \\\\eta$ with zero as the default value for e\"}\n  {\"name\": \"ContMDiff.extend_zero\", \"module\": \"Mathlib.Geometry.Manifold.ContMDiff.Basic\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {H : Type u_3} [inst_3 : TopologicalSpace H] {I : ModelWithCorners 𝕜 E H} {M : Type u_4}\\n  [inst_4 : TopologicalSpace M] {E' : Type u_5} [inst_5 : NormedAddCommGroup E'] [i\", \"doc\": \"Let $ M $ and $ M' $ be manifolds modeled on normed vector spaces over a nontrivially normed field $ \\\\mathbb{K} $, with $ M' $ equipped with a zero element. If $ f : U \\\\to M' $ is a $ C^n $-differenti\"}\n  {\"name\": \"HasCompactSupport.extend_zero\", \"module\": \"Mathlib.Topology.Algebra.Support\", \"type\": \"∀ {α : Type u_2} {α' : Type u_3} {β : Type u_4} [inst : TopologicalSpace α] [inst_1 : TopologicalSpace α']\\n  [inst_2 : Zero β] {f : α → β} [T2Space α'],\\n  HasCompactSupport f → ∀ {g : α → α'}, Continuous g → HasCompactSupport (Function.extend g f 0)\", \"doc\": \"Let $\\\\alpha$ and $\\\\alpha'$ be topological spaces, $\\\\beta$ a type with a zero element, $f : \\\\alpha \\\\to \\\\beta$ a function with compact support, and $g : \\\\alpha \\\\to \\\\alpha'$ a continuous function. Then t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAdditivePushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pushforward f).Additive\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure s\"}\n  {\"name\": \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Descent\", \"type\": \"(hf : f.Flat) : PreservesFiniteLimits (extendScalars.{_, _, u} f)\", \"doc\": \"Given a flat ring homomorphism $ f : R \\\\to S $ between commutative rings, the scalar extension functor $ \\\\text{Mod}_R \\\\to \\\\text{Mod}_S $ induced by $ f $ preserves finite limits in the category of mod\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [Flat f] : Flat (f ∣_ V)\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, then its restriction to any open subset $ V $ of the target scheme $ Y $ remains flat. This means the property of flatness is maintained when restricti\"}\n  {\"name\": \"ContinuousLinearMap.extend_zero\", \"module\": \"Mathlib.Analysis.Normed.Operator.Extend\", \"type\": \"(h_dense : DenseRange e) (h_e : IsUniformInducing e) : extend (0 : E →SL[σ₁₂] F) e = 0\", \"doc\": \"The extension of the zero linear map from $ E $ to $ F $ along a dense embedding $ e : E \\to Eₗ $ that induces the uniform structure on $ E $ results in the zero linear map on $ Eₗ $.\"}\n  {\"name\": \"Module.Flat.localizedModule\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (S : Submonoid R) : Flat (Localization S) (LocalizedModule S M)\", \"doc\": \"If $ M $ is a flat module over a commutative semiring $ R $, then for any submonoid $ S $ of $ R $, the localized module $ M_S $ is flat over the localization $ R_S $ of $ R $ at $ S $. This asserts t\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected all returned signatures; general algebraic modules, scheme morphisms, constructible subsets or sheaf generators do not state this qcqs pro-étale coefficient assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"extensionByZero\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected all returned signatures; general algebraic modules, scheme morphisms, constructible subsets or sheaf generators do not state this qcqs pro-étale coefficient assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|open.closed.*flat|closed.*pushforward.*flat",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected all returned signatures; general algebraic modules, scheme morphisms, constructible subsets or sheaf generators do not state this qcqs pro-étale coefficient assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite open closed tree reconstruction of constructible flat proetale module sheaves and scalar extension of integral lattices",
+   "results": "LightCondMod.ofSheafLightProfinite; Condensed.profiniteSolid; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; CondensedMod.ofSheafProfinite; comonadicExtendScalars; Module.flat_of_isLocalized_maximal; Module.flat_of_isLocalized_span; Algebra.FormallyUnramified.flat_of_restrictScalars",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures concern algebraic localization, general module pushforward/adjunctions, condensed constructors or triangulated localization; none gives the pro-etale branch model and reconstruction assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"extensionByZero\"",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures concern algebraic localization, general module pushforward/adjunctions, condensed constructors or triangulated localization; none gives the pro-etale branch model and reconstruction assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|open.closed.*flat|closed.*pushforward.*flat",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures concern algebraic localization, general module pushforward/adjunctions, condensed constructors or triangulated localization; none gives the pro-etale branch model and reconstruction assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open closed localization of sheaves of modules finite constructible flat lattices distinguished triangles",
+   "results": "Module.Flat.of_isLocalizedModule; IsLocalization.flat; Module.flat_iff_of_isLocalization; Module.flat_of_isLocalized_span; CategoryTheory.Triangulated.Localization.pretriangulated; ModuleCat.Tilde.openToLocalization; Module.Flat.localizedModule; RingHom.Flat.ofLocalizationSpanTarget",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures concern algebraic localization, general module pushforward/adjunctions, condensed constructors or triangulated localization; none gives the pro-etale branch model and reconstruction assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact extension by zero and closed immersion pushforward preserve flat constructible sheaves and commute with change of coefficient rings",
+   "results": "AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous; SheafOfModules.pushforwardComp; AlgebraicGeometry.Scheme.Modules.pushforward; SheafOfModules.pushforwardComp_hom_app_val_app; AlgebraicGeometry.Scheme.Modules.pushforwardComp; SheafOfModules.pushforwardPushforwardAdj; SheafOfModules.pushforward_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures concern algebraic localization, general module pushforward/adjunctions, condensed constructors or triangulated localization; none gives the pro-etale branch model and reconstruction assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qcqs-rational-integral-localizing-generators",
+  "date": "2026-10-22",
+  "group": "Q155"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms (2), closed-complement generator calculation: Tag 09AH, lemma-ses-associated-to-open; agent ringed coefficient, flatness and finite-tree reconstruction from returned item steps 10–13, using their Tor-local-detection and tensor-pullback comparisons.",
+   "via": [
+    "lem-sfb-qcqs-rational-integral-localizing-generators",
+    "lem-sfb-qcqs-proper-constructible-closed-base-change",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-qcqs-lattice-tree-reconstruction",
+  "worker": "stage1",
+  "summary": "Five-step proof from existing nodes only: constructible strata extend through retrocompact edges; tensor kernels prove flatness without a constant-coefficient Tor-locality lemma; open-slice and closed projection give scalar comparisons; flat single tensor gives the derived assertions; exact path images of localization sequences give finite reconstruction. Statement retained verbatim.",
+  "blueprint": "Realizes the existing ancestry through qcqs rational/integral generators and closed-complement base change supporting the refinement-isomorphism paragraph of det-sf-comp-coherence-cocycle, using the finite-tree argument isolated from parent steps 10–13; no change to the unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-constructible-image-retrocompact-open",
+    "why": "Generic topology lemma 09YD transfers constructible strata across each open edge; the unit has no corresponding topology statement."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-image-closed-retrocompact-complement",
+    "why": "Generic topology lemma 09YG transfers constructible strata across the complementary closed edge; no unit statement supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Actual ringed pro-etale localization and exact extension functors used as generic tools; this is the existing proper-base-change route."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Generic exactness of inverse image for pulled-back coefficients is needed for the kernel test."
+   },
+   {
+    "node": "lem-pur-proetale-inverse-image-tensor-comparison",
+    "why": "Generic underived tensor/pullback comparison for arbitrary ring sheaves; no unit lemma states it."
+   },
+   {
+    "node": "lem-exc-open-closed-detection",
+    "why": "Generic open/closed zero-sheaf detection, used on the tensor kernel for flatness."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-extension-tensor",
+    "why": "Generic ringed-site underived open projection formula, not the compactification theorem being proved."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-closed-underived-projection",
+    "why": "Generic closed-immersion underived projection for arbitrary ring sheaves, no rational base-change result."
+   },
+   {
+    "node": "lem-fd-ringed-flat-single-tensor-cohomology",
+    "why": "Generic flat-single derived tensor computation on any small ringed site; no unit lemma supplies this formula."
+   },
+   {
+    "node": "lem-sfb-flat-single-scalar-conventions",
+    "why": "Generic agreement of derived ringed-site and module-object scalar extensions on flat singles."
+   },
+   {
+    "node": "lem-sf-derived-ses-triangle",
+    "why": "Generic short-exact-sequence triangle in an abelian derived category, independent of compactifications."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Only clause (1), the equivalence of the pro-etale site over an open with the slice site, is used to apply the generic ringed-slice tensor formula; no unit result supplies this site equivalence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-constructible-image-retrocompact-open",
+  "lem-weil-pbc-constructible-image-closed-retrocompact-complement"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-de585e3bf",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-de585e3bf (reviewer sub-agent of L); spot-checked: I read the item, all 15 cited node statements and Stacks 09AH, 09YD and 09YG at their labels. No new nodes; statement, stmt_deps and blueprint unchanged; the item (a Q155 sibling) had no proof before, and no re-split note applies. Step 1: a quasi-compact j means U is retrocompact, so 09YD/09YG carry the constructible strata and the other child gives a zero stratum; this iterates because every vertex is qcqs. Step 2: the flatness kernel test uses exact identified inverse images (cartesian-coefficients), the inverse-image tensor comparison and open/closed detection; this correctly avoids the constant-ring Tor-local node. Step 3: 0E8I slice tensor with the weakly-étale clause (1) identification for open edges, and the closed underived projection with B = Λ_T (explicitly B-linear) for closed edges; the induction along the path works for every B. Step 4: flat-single tensor cohomology gives Tor amplitude [0,0] and D_ctf, and flat-single scalar conventions give the derived isomorphism. Step 5: the 09AH sequence pushed by the exact path functors gives one Stacks 0152 triangle per internal vertex. Edge cases checked: empty child, one vertex, zero leaves, varying F_W, mixed paths. Citations and proof_deps are consistent; no SGA; the 12 generic tool_uses are accepted. Details in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.QcqsLatticeTreeReconstruction",
+  "declaration": "AlgebraicGeometry.ProEtale.LatticeTree.qcqs_lattice_tree_reconstruction",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.LatticeTree.Modules",
+   "AlgebraicGeometry.ProEtale.LatticeTree.single",
+   "AlgebraicGeometry.ProEtale.LatticeTree.scalarComparison",
+   "AlgebraicGeometry.ProEtale.LatticeTree.PreservesModelsAndFlat",
+   "AlgebraicGeometry.ProEtale.LatticeTree.Leaf",
+   "AlgebraicGeometry.ProEtale.LatticeTree.LeafModels",
+   "AlgebraicGeometry.ProEtale.LatticeTree.branchModel",
+   "AlgebraicGeometry.ProEtale.LatticeTree.Reconstruction",
+   "AlgebraicGeometry.ProEtale.LatticeTree.qcqs_lattice_tree_reconstruction"
+  ],
+  "file": "lean/Sheaf/Paper/QcqsLatticeTreeReconstruction.lean",
+  "statement": "theorem qcqs_lattice_tree_reconstruction (ℓ : ℕ) [Fact ℓ.Prime] : (∀ E : PadicAlgCl.FiniteIntermediateField ℓ, Reconstruction.{u} ℓ Unit (fun _ ↦ E) (Profinite.continuousMapRingObj E.1) (fun _ ↦ padicIntegersRingObjToContinuousMapRingObj ℓ E)) ∧ Reconstruction.{u} ℓ (PadicAlgCl.FiniteIntermediateField ℓ) (fun F ↦ F) (Profinite.padicAlgClRingObj ℓ) (fun F ↦ padicIntegersRingObjToContinuousMapRingObj ℓ F ≫ Profinite.padicSubfieldRingObjToPadicAlgCl ℓ F)",
+  "branch": "sheaf-dag",
+  "by": "Q33",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-731ffbf92",
+  "group": "Q33",
+  "result": "pass",
+  "note": "Re-delivery after the a88b2559 RETURN (H2/H4/H12). Diff vs that snapshot: item module only swaps the import ContinuousLocallyFreePullback→CoefficientHeartStratificationDefs and LeafModels.lisse to IsLisseCoefficientModule (padicIntegersRingObj ℓ (F (fieldIndex w)).1) (model w); item stmt_deps swap the theorem node for the landed def node def-sfb-lisse-coefficient-module (record identical to side-live, existing:true); tree def node and module unchanged. IsLisseCoefficientModule = pro-étale cover with Mod.IsFree (∃ n, ≅ finiteFree n) upperStar pullbacks: finite rank, rank 0 and varying ranks allowed, matching the item's lisse leaves. Re-confirmed: canonical coefficient inclusions in both cases, qcqs tree with quasi-compact complementary open/closed edges, vertexwise flatness, leaf D_ctf/Tor[0,0]/derived iso, preservation and scalarComparison IsIso for all B, extensionProductIter reconstruction (iter 0 = P), edge cases, universes, statement verbatim, single sorry, docstrings. Item not yet landed live (no supersession). Advisory only: the tree node cites theorem lem-weil-pbc-proetale-ringed-open-closed as a reference, as accepted before. No compile (no file changed); worker reports clean compiles and a passing dry run."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-42449",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261025T043304-L-1694089",
+  "kind": "interface",
+  "note": "independent cc review: Delivered Lean, node and change record against the clone; Reconstruction's let-body checked rfl-equal to the original body under the original imports; both direct importers compiled in a sandbox against the delivered module; axioms checked; unit realized list checked"
+ }
+}

@@ -1,0 +1,387 @@
+{
+ "id": "lem-sfb-classical-finite-scalar-restriction-hull",
+ "kind": "statement",
+ "title": "Classical finite-coefficient complexes in the supported hull, with integral scalar restriction",
+ "statement": "Fix a prime $\\ell$ and a qcqs scheme $T$ [def-pc-scheme, def-weil-pbc-scheme-conventions]. All sites and diagrams are small in the fixed universes [def-weil-size-convention]. Let $(R,B)$ be either $(B,B)$ for a finite discrete commutative ring $B$ killed by a power of $\\ell$, with identity coefficient map, or $(O,O/\\pi^n)$ for $O=\\mathcal O_F$, $F/\\mathbf Q_\\ell$ finite, $n\\geq1$, and a uniformizer $\\pi$ [def-weil-l-adic-coefficient-extension]. In the second case give $O$ its valuation topology and $B$ its finite discrete topology. Use the actual condensed rings $R^c(P)=C(P,R)$, $B^c(P)=C(P,B)$, the canonical quotient map, and their pulled-back ring objects $R_T,B_T$ [sk-def-localizing-closure, sk-def-sfb-pulled-back-coefficients]. Let $\\nu_T:T_{\\mathrm{pro\\acute et}}\\to T_{\\mathrm{\\acute et}}$ be site comparison [def-weil-pbc-site-comparison-morphism]. For every $C\\in D^+(T_{\\mathrm{\\acute et}},B)$, interpret $\\nu_T^*C$ as an internal $B_T$-module derived object by the finite discrete coefficient equivalence [lem-sf-module-object-ordinary-coefficient-equivalence]. Then its exact derived scalar restriction satisfies\n$$\\operatorname{Res}_{R_T\\to B_T}(\\nu_T^*C)\\in\\mathcal G_T(R^c).$$\nHere derived restriction is the termwise restriction of scalars of [sk-def-sfb-change-of-scalars], exact by its clause 4 and hence well defined on derived categories; it is the identity in the first case. The class $\\mathcal G_T(R^c)$ is exactly the ordinary uncompleted supported model hull [def-sfb-supported-model-hull]: supported finitely presented scalar local models, zero, shifts, triangle extensions, retracts, small derived products and strict filtered complex colimits with a common termwise lower bound. No constructibility, finite generation, Tor-amplitude or cohomological upper bound is required of $C$. No Noetherianity of $T$, characteristic or invertibility-of-$\\ell$ hypothesis is imposed. Empty $T$, $C=0$, nonreduced finite rings and torsion scalar modules are included.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03SA, lemma-torsion-colimit-constructible (3), combined with finite open-closed devissage and bounded good truncations; agent-formulated derived-hull and integral-restriction consequence, not the verbatim statement of Tag 03SA."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-size-convention",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-localizing-closure",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-sf-module-object-ordinary-coefficient-equivalence",
+  "sk-def-sfb-change-of-scalars",
+  "def-sfb-supported-model-hull"
+ ],
+ "proof": [
+  {
+   "text": "First verify the local scalar calculation, on any scheme $W$. A finite $B$-module $P$ has a finite presentation: take its finitely many elements as generators and all addition and scalar-action relations as a finite generating set of relations. For $R=B$, the finite-discrete scalar-model comparison identifies its constant sheaf with $B_W\\otimes_{\\underline B}\\underline P$. For $R=O$, lift a presentation $B^s\\xrightarrow{A}B^r\\to P\\to0$ to a matrix $\\widetilde A$ over $O$ and put $D=(\\widetilde A,\\pi^n I_r):O^{s+r}\\to O^r$. Reduction modulo $\\pi^n$ identifies $\\operatorname{coker}D$ with $P$, now as an $O$-module. Right exact scalar extension identifies $O_W\\otimes_{\\underline O}\\underline P$ with $\\operatorname{coker}D_W$. The actual quotient isomorphism $O_W/\\pi^nO_W\\cong B_W$ from integral quotient normalization identifies this cokernel with the constant $P$ sheaf restricted along the prescribed quotient $O_W\\to B_W$. Thus restriction of a finite constant $B$-model is a finite constant scalar $R$-model. The internal/section scalar comparison ensures this uses the actual scalar action, not an abstract identification of underlying abelian sheaves.",
+   "uses": [
+    "lem-pe-finite-discrete-scalar-constant-models",
+    "lem-sfb-integral-quotient-resolution-normalization",
+    "sk-def-sfb-change-of-scalars",
+    "lem-sfb-internal-section-scalar-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093M, lemma-completion-flat, canonical quotient clause; finite presentation calculation over that quotient"
+   }
+  },
+  {
+   "text": "Let $F$ be a constructible étale $B$-module sheaf on $T$, and put $M=\\operatorname{Res}(\\nu_T^*F)$. Finite-ring constructible comparison gives a finite constructible locally closed partition of $T$ on which $\\nu_T^*F$ is locally constant with finite $B$-module values. The ordinary/internal finite-coefficient equivalence and the finite-discrete scalar-model comparison identify these constant values with finite scalar models. On every trivializing cover, step 1 identifies their scalar restrictions with finite scalar $R$-models. Pullback commutes with scalar restriction here: both underlying sheaves are inverse images of the same abelian sheaf, and their actions are the composites of the pulled-back quotient with the pulled-back $B$-action; the cartesian coefficient identifications give the same composites. Hence $M$ is constructible in the finite constant scalar-model sense on that same partition. No local freeness of $P$ is used.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
+    "lem-sf-module-object-ordinary-coefficient-equivalence",
+    "lem-pe-finite-discrete-scalar-constant-models",
+    "sk-def-sfb-constructible",
+    "sk-def-sfb-change-of-scalars",
+    "sk-prop-sfb-cartesian-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AK, lemma-compare-constructible, and Tag 099Y, lemma-compare-locally-constant; apply the preceding scalar calculation"
+   }
+  },
+  {
+   "text": "Apply the finite constant-local-model tree theorem to the one-element family consisting of $M$. Its hypotheses are qcqs $T$ and precisely the constructibility just proved. It supplies a finite qcqs open-closed tree such that the actual leaf restrictions $p^*M$ are finite scalar local models. Each open edge is quasi-compact and each closed edge has the complementary quasi-compact open edge, so every path is a support chain allowed in the hull definition. In particular the refinement does not use Noetherian induction or replace scheme-theoretic pullbacks by set containment.",
+   "uses": [
+    "lem-sfb-finite-constant-local-model-tree",
+    "def-sfb-qcqs-open-closed-tree",
+    "def-sfb-supported-model-hull"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 09Y4, lemma-constructible-partition-refined-by-stratification, in its existing scheme-theoretic tree formulation"
+   }
+  },
+  {
+   "text": "Fix any class $\\mathscr P$ occurring in the defining intersection for $\\mathcal G_T(R^c)$. At a vertex $V$ let $J_V$ be its exact extension along the path to $T$. At a leaf $W$, $J_W(p_W^*M)[0]$ is a supported generator, hence belongs to $\\mathscr P$. For an internal vertex with children $j:U\\hookrightarrow V$ and $i:Z\\hookrightarrow V$, use the short exact sequence $0\\to j_!j^*(M|_V)\\to M|_V\\to i_*i^*(M|_V)\\to0$. Internal/section operation comparison identifies these operations with those of the hull. Both edge extensions are exact, so $J_V$ is exact; applying it and then the short-exact-sequence triangle theorem gives a triangle whose outside terms are the two child objects. Induction on the finite number of vertices and extension closure of $\\mathscr P$ put $M[0]$ in $\\mathscr P$ at the root. Since $\\mathscr P$ was arbitrary, every restricted constructible $F[0]$ lies in $\\mathcal G_T(R^c)$. Empty leaves have the zero model and cause no exception.",
+   "uses": [
+    "def-sfb-supported-model-hull",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-sfb-internal-module-operations-transport",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AH, lemma-ses-associated-to-open, and 09BM, lemma-closed-immersion-complement-retrocompact-exact; derived.tex Tag 0152, lemma-derived-canonical-delta-functor"
+   }
+  },
+  {
+   "text": "Now let $F$ be any étale $B$-module sheaf. Constructible approximation writes $F=\\varinjlim_{\\alpha\\in I}F_\\alpha$ for a small filtered diagram of constructible $B$-module sheaves; its hypotheses hold because $T$ is qcqs and $B$ is finite. Comparison inverse image is a left adjoint on module sheaves, the finite-coefficient encoding is an equivalence, and scalar restriction preserves colimits by the coextension adjunction. Consequently $\\operatorname{Res}\\nu_T^*F=\\varinjlim_\\alpha\\operatorname{Res}\\nu_T^*F_\\alpha$, with the actual induced linear maps. Put this diagram in degree zero. It is a strict small filtered diagram with common termwise lower bound $0$, whose members lie in the hull by step 4. Its termwise colimit is the displayed sheaf in degree zero. The specified filtered-colimit closure proves $\\operatorname{Res}\\nu_T^*F[0]\\in\\mathcal G_T(R^c)$ without any finiteness assertion about $F$.",
+   "uses": [
+    "lem-weil-pbc-module-sheaf-colimit-constructible",
+    "det-pe-classical-sheaves-modules",
+    "lem-sf-module-object-ordinary-coefficient-equivalence",
+    "sk-def-sfb-change-of-scalars",
+    "def-sfb-supported-model-hull"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03SA, lemma-torsion-colimit-constructible (3); use the existing small filtered presentation and the defining hull closure"
+   }
+  },
+  {
+   "text": "Write $E=\\operatorname{Res}\\circ\\nu_T^*$, including the internal finite-coefficient equivalence. Its factors are additive exact functors, so it induces a triangulated functor on ordinary derived categories and $H^q(EK)\\cong E(H^qK)$. By step 5 every $E(H^qK)[0]$ lies in the hull. Shift closure and the bounded degreewise dévissage theorem therefore show that $E(K)$ lies in the hull whenever $K$ has cohomology in a finite interval: take the property $Q$ there to be hull membership and each $P_q$ to mean being of the form $E(F)$ for an étale $B$-module $F$. The zero interval uses the zero object. This is an induction on the length of the interval, using the canonical truncation triangles, and assumes neither finite Tor amplitude nor constructibility of the cohomology.",
+   "uses": [
+    "det-pe-classical-sheaves-modules",
+    "lem-sf-module-object-ordinary-coefficient-equivalence",
+    "sk-def-sfb-change-of-scalars",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-sfb-degreewise-bounded-devissage",
+    "def-sfb-supported-model-hull"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5, remark-truncation-distinguished-triangle, finite induction; exact functor comparison is homology.tex Tag 010N, lemma-exact-functor"
+   }
+  },
+  {
+   "text": "Finally choose a representative $K$ of $C$ with $K^q=0$ for $q<a$, using the standard t-structure description of $D^+$. For $m=a,a+1,\\ldots$, take its good upper subcomplex $K_m=\\tau_{\\leq m}K$, with term $\\ker(d^m)$ in degree $m$, zero above $m$, and the terms of $K$ below $m$. The natural inclusions $K_m\\to K_{m+1}$ form a strict sequence. Every $K_m$ has finite cohomological interval $[a,m]$, so $Q(EK_m)$ is in the hull by step 6. All $EK_m$ vanish termwise below $a$. For any fixed degree $q$, once $m>q$ its terms and transition maps are exactly $E(K^q)$ and the identity; its colimit is $E(K^q)$. These identifications commute with differentials since every fixed adjacent pair also stabilizes. Equivalently, a compatible cocone determines its unique map from $EK$ by its stabilized components. Thus $\\varinjlim_m EK_m=EK$ termwise, without invoking an exchange of inverse limits or unbounded derived colimits. The strict filtered-colimit clause of the hull, with lower bound $a$, gives $Q(EK)\\in\\mathcal G_T(R^c)$. Repleteness transports this along the chosen representative isomorphism to $E(C)$, the asserted object.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-weil-pbc-truncation-step-ses",
+    "def-sfb-supported-model-hull"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5, remark-truncation-distinguished-triangle; homology.tex canonical good upper truncations, followed by their degreewise eventually constant colimit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pe-finite-discrete-scalar-constant-models",
+  "lem-sfb-integral-quotient-resolution-normalization",
+  "sk-def-sfb-change-of-scalars",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
+  "lem-sf-module-object-ordinary-coefficient-equivalence",
+  "sk-def-sfb-constructible",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-sfb-finite-constant-local-model-tree",
+  "def-sfb-qcqs-open-closed-tree",
+  "def-sfb-supported-model-hull",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-module-sheaf-colimit-constructible",
+  "det-pe-classical-sheaves-modules",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-sfb-degreewise-bounded-devissage",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-weil-pbc-truncation-step-ses"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03SA (3), assembled with the cited finite qcqs tree, open-closed exactness, integral quotient presentation, and bounded good truncations. The derived-hull consequence is an agent argument, not a verbatim Stacks theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "classical.*(generat|hull)|supportedModelHull|filtered.*constructible",
+   "results": "{\"t\": \"2026-10-25T13:57:48Z\", \"tool\": \"grep\", \"query\": \"classical.*(generat|hull)|supportedModelHull|filtered.*constructible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/MulChar/Lemmas.lean\", \"Mathlib/NumberTheory/MulChar/Lemmas.lean\", \"Mathlib/NumberTheory/MulChar/Lemmas.lean\", \"Mathlib/CategoryTheory/Triangulated/Generators.lean\", \"Mathlib/CategoryTheory/Triangulated/Generators.lean\", \"Mathlib/CategoryTheory/Triangulated/Generators.lean\", \"Mathlib/CategoryTheory/Triangulated/Generators.lean\", \"Mathlib/CategoryTheory/Triangulated/Generators.lean\"], \"digest\": \"9f7d97103946453b\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: hits provide abstract truncations, filtered-colimit infrastructure, local generators for structure-sheaf modules or unrelated scalar supports; none gives classical finite-coefficient generation in this geometric supported hull or integral scalar restriction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded below complexes of etale sheaves over a finite ring are built from constructible sheaves by filtered colimits and triangles",
+   "results": "{\"t\": \"2026-10-25T13:57:48Z\", \"tool\": \"leansearch\", \"query\": \"Bounded below complexes of etale sheaves over a finite ring are built from constructible sheaves by filtered colimits and triangles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.instHasFilteredColimitsOfSize\", \"CategoryTheory.Sheaf.hasFilteredColimitsOfSize\", \"CategoryTheory.IsGrothendieckAbelian.isColimitMapCoconeOfSubobjectMkEqISup\", \"SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat\", \"ModuleCat.FilteredColimits.M.mk\", \"CategoryTheory.Sheaf.ab5ofSize\", \"SheafOfModules.Presentation.isColimit\", \"CategoryTheory.ShortComplex.hasColimitsOfShape\"], \"digest\": \"6be73a231efe07cc\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: hits provide abstract truncations, filtered-colimit infrastructure, local generators for structure-sheaf modules or unrelated scalar supports; none gives classical finite-coefficient generation in this geometric supported hull or integral scalar restriction."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"IsGE\"",
+   "results": "{\"t\": \"2026-10-25T13:57:48Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory, \\\"IsGE\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"DerivedCategory.IsGE\", \"DerivedCategory.instIsGEObjSingleFunctor\", \"DerivedCategory.isZero_of_isGE\", \"DerivedCategory.isGE_iff\", \"DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\"], \"digest\": \"8a235ec4998b25b3\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: hits provide abstract truncations, filtered-colimit infrastructure, local generators for structure-sheaf modules or unrelated scalar supports; none gives classical finite-coefficient generation in this geometric supported hull or integral scalar restriction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded below classical finite coefficient complex on a qcqs scheme is generated by supported finite scalar local models using triangles and strict bounded below filtered colimits also after integral scalar restriction",
+   "results": "{\"t\": \"2026-10-25T13:57:49Z\", \"tool\": \"leanfinder\", \"query\": \"A bounded below classical finite coefficient complex on a qcqs scheme is generated by supported finite scalar local models using triangles and strict bounded below filtered colimits also after integral scalar restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"SheafOfModules.IsFiniteType.exists_localGeneratorsData\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\"], \"digest\": \"c993415926c0952f\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: hits provide abstract truncations, filtered-colimit infrastructure, local generators for structure-sheaf modules or unrelated scalar supports; none gives classical finite-coefficient generation in this geometric supported hull or integral scalar restriction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a bounded below classical finite torsion coefficient complex belongs to the supported scalar model hull for finite rings or a complete discrete valuation coefficient ring",
+   "results": "{\"t\": \"2026-10-25T14:01:19Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of a bounded below classical finite torsion coefficient complex belongs to the supported scalar model hull for finite rings or a complete discrete valuation coefficient ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HahnEmbedding.Seed.coeff'\", \"HahnEmbedding.Partial.evalCoeff\", \"HahnEmbedding.Partial.isWF_support_evalCoeff\", \"HVertexOperator.coeff_isPWOsupport\", \"HahnSeries.ofSuppBddBelow_coeff\", \"LaurentSeries.Cauchy.coeff_support_bddBelow\", \"HahnSeries.coeff_ofSuppBddBelow\", \"HahnEmbedding.Seed.truncLT_mem_range_baseEmbedding\"], \"digest\": \"9e915e2d1dd1fc62\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: hits provide abstract truncations, filtered-colimit infrastructure, local generators for structure-sheaf modules or unrelated scalar supports; none gives classical finite-coefficient generation in this geometric supported hull or integral scalar restriction."
+  },
+  {
+   "tool": "grep",
+   "query": "supportedModelHull|classical.*(scalar|hull)|constructible.*filtered",
+   "results": "{\"t\": \"2026-10-25T15:23:49Z\", \"tool\": \"grep\", \"query\": \"supportedModelHull|classical.*(scalar|hull)|constructible.*filtered\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/Basic.lean\", \"Mathlib/RingTheory/AlgebraTower.lean\", \"Mathlib/RingTheory/Smooth/Quotient.lean\"], \"digest\": \"d0c816be2db720c7\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: inspected hits concern abstract truncation, discrete condensed modules, local finite presentations or scalar restriction; none gives the supported hull generation assertion or its continuous integral quotient comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars of a bounded below etale finite coefficient complex is generated by supported finite scalar local models",
+   "results": "{\"t\": \"2026-10-25T15:23:50Z\", \"tool\": \"leansearch\", \"query\": \"Restriction of scalars of a bounded below etale finite coefficient complex is generated by supported finite scalar local models\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.of_restrictScalars\", \"RestrictScalars\", \"PresheafOfModules.restrictScalarsObj\", \"Submodule.restrictScalars_mem\", \"Module.Finite.of_restrictScalars_finite\", \"Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars\", \"Submodule.restrictScalars\", \"instSeminormedAddCommGroupRestrictScalars\"], \"digest\": \"266fe4c72bb6bfb3\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: inspected hits concern abstract truncation, discrete condensed modules, local finite presentations or scalar restriction; none gives the supported hull generation assertion or its continuous integral quotient comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"IsGE\"",
+   "results": "{\"t\": \"2026-10-25T15:23:50Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory, \\\"IsGE\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"DerivedCategory.IsGE\", \"DerivedCategory.instIsGEObjSingleFunctor\", \"DerivedCategory.isZero_of_isGE\", \"DerivedCategory.isGE_iff\", \"DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\"], \"digest\": \"8a235ec4998b25b3\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: inspected hits concern abstract truncation, discrete condensed modules, local finite presentations or scalar restriction; none gives the supported hull generation assertion or its continuous integral quotient comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Classical bounded below complexes of etale finite ring module sheaves belong to the hull generated by locally constant finite modules on open closed strata under triangles and bounded below filtered colimits",
+   "results": "{\"t\": \"2026-10-25T15:23:51Z\", \"tool\": \"leanfinder\", \"query\": \"Classical bounded below complexes of etale finite ring module sheaves belong to the hull generated by locally constant finite modules on open closed strata under triangles and bounded below filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.localGeneratorsDataOfIsFiniteType\", \"CondensedMod.IsSolid\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.IsFiniteType\", \"SheafOfModules.Presentation.IsFinite\"], \"digest\": \"d442aeab76d99932\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: inspected hits concern abstract truncation, discrete condensed modules, local finite presentations or scalar restriction; none gives the supported hull generation assertion or its continuous integral quotient comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite module over a discrete valuation quotient viewed as a sheaf over the condensed valuation ring is a finite constant scalar local model",
+   "results": "{\"t\": \"2026-10-25T15:23:52Z\", \"tool\": \"leanfinder\", \"query\": \"A finite module over a discrete valuation quotient viewed as a sheaf over the condensed valuation ring is a finite constant scalar local model\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.finFree\", \"CondensedMod.LocallyConstant.functor\", \"CompHausLike.LocallyConstantModule.functor\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"CondensedMod.LocallyConstant.instFaithfulModuleCatSheafCompHausCoherentTopologyConstantSheaf\", \"CondensedMod.IsSolid\", \"CondensedMod\", \"LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf\"], \"digest\": \"fd440dee48f9ec17\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: inspected hits concern abstract truncation, discrete condensed modules, local finite presentations or scalar restriction; none gives the supported hull generation assertion or its continuous integral quotient comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*(quotient|extendScalars)|extendScalars.*constant",
+   "results": "{\"t\": \"2026-10-25T15:24:51Z\", \"tool\": \"grep\", \"query\": \"constant.*(quotient|extendScalars)|extendScalars.*constant\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: inspected hits concern abstract truncation, discrete condensed modules, local finite presentations or scalar restriction; none gives the supported hull generation assertion or its continuous integral quotient comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensoring the constant sheaf of a finite torsion module with the sheaf of continuous functions to the ring of integers gives the same constant finite module sheaf",
+   "results": "{\"t\": \"2026-10-25T15:24:51Z\", \"tool\": \"leansearch\", \"query\": \"Tensoring the constant sheaf of a finite torsion module with the sheaf of continuous functions to the ring of integers gives the same constant finite module sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.isConstant_of_iso\", \"CategoryTheory.constantSheaf\", \"CategoryTheory.Sheaf.isConstant_iff_mem_essImage\", \"CompHausLike.LocallyConstantModule.functor\", \"ModuleCat.tildeInModuleCat\", \"CompHausLike.LocallyConstantModule.functor_obj_val\", \"CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app\", \"CondensedMod.LocallyConstant.functorIsoDiscrete\"], \"digest\": \"f4c00ca501649de3\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: inspected hits concern abstract truncation, discrete condensed modules, local finite presentations or scalar restriction; none gives the supported hull generation assertion or its continuous integral quotient comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"extendScalars\"",
+   "results": "{\"t\": \"2026-10-25T15:24:51Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules, \\\"extendScalars\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: inspected hits concern abstract truncation, discrete condensed modules, local finite presentations or scalar restriction; none gives the supported hull generation assertion or its continuous integral quotient comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite module P killed by a uniformizer power over a complete discrete valuation ring O, extension of its constant sheaf to the condensed coefficient ring O_X is canonically the finite constant sheaf P_X",
+   "results": "{\"t\": \"2026-10-25T15:24:52Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite module P killed by a uniformizer power over a complete discrete valuation ring O, extension of its constant sheaf to the condensed coefficient ring O_X is canonically the finite constant sheaf P_X\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.finFree\", \"CondensedMod.LocallyConstant.functor\", \"CondensedMod.LocallyConstant.functorToPresheaves\", \"CondensedMod.LocallyConstant.instFaithfulModuleCatSheafCompHausCoherentTopologyConstantSheaf\", \"LightCondMod.LocallyConstant.instFullModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf\", \"Condensed.profiniteFree\", \"LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf\", \"CondensedMod\"], \"digest\": \"59a703190d91ebc7\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: inspected hits concern abstract truncation, discrete condensed modules, local finite presentations or scalar restriction; none gives the supported hull generation assertion or its continuous integral quotient comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite torsion module over the integers of a finite extension of Q_l is finitely presented and unchanged by scalar extension from constant integers to condensed integers on a scheme",
+   "results": "{\"t\": \"2026-10-25T15:24:53Z\", \"tool\": \"leanfinder\", \"query\": \"A finite torsion module over the integers of a finite extension of Q_l is finitely presented and unchanged by scalar extension from constant integers to condensed integers on a scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.finFree\", \"CondensedMod\", \"Condensed.profiniteSolid\", \"CondensedMod.IsSolid\", \"CondensedMod.LocallyConstant.functor\", \"Condensed.profiniteFree\", \"CondensedMod.ofSheafProfinite\", \"CondensedMod.ofSheafCompHaus\"], \"digest\": \"8ac8f554ec28c4cb\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: inspected hits concern abstract truncation, discrete condensed modules, local finite presentations or scalar restriction; none gives the supported hull generation assertion or its continuous integral quotient comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-indetale-supported-hull-continuity",
+  "date": "2026-10-25",
+  "group": "NH"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms paragraph, via det-sf-comp-coherence-refinement (2), first paragraph: descendant closed-fibre heart comparison; descent of the structural supported generation class before applying closed-pair restriction. Generator-level coinduction input for the Cech descent of the structural supported hull. Conditional continuity from etale supported coinduction to locally affine ind-etale morphisms. Finite classical-complex generation and integral scalar restriction used before completion reconstruction.",
+   "via": [
+    "lem-sfb-indetale-supported-hull-continuity",
+    "lem-sfb-proetale-supported-model-coinduction",
+    "lem-sfb-supported-hull-proetale-descent",
+    "lem-sfb-supported-image-bounded-derived-generation",
+    "lem-sfb-supported-image-rigidity-from-model-comparisons",
+    "lem-sfb-supported-three-term-scalar-rigidity",
+    "lem-sfb-closed-torsion-rigidity-serre-transfer",
+    "lem-sfb-proper-wcontractible-closed-fibre-rigidity",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-sfb-classical-finite-scalar-restriction-hull",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reused existing qcqs finite-model tree and constructible approximation; verified the actual integral quotient and lifted finite presentation; assembled restricted constructible sheaves by exact support extensions, arbitrary sheaves by degree-zero filtered colimits, bounded complexes by degreewise devissage, and D+ by strict good upper truncations with one lower bound. No new nodes.",
+  "blueprint": "Refinement isomorphisms paragraph of det-sf-comp-coherence-cocycle, via refinement (2) closed-fibre heart comparison and the ind-etale supported-hull continuity obligation: supplies its classical finite-level generation and integral restriction input. Steps 1-5 realize finite coefficient and integral-scalar heart generation; steps 6-7 supply the specified bounded-below complex assembly.",
+  "tool_uses": [
+   {
+    "node": "lem-pe-finite-discrete-scalar-constant-models",
+    "why": "Uses only its stated generic scalar, module-sheaf, finite-refinement or derived-category assertion; the compactification-coherence unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-sfb-integral-quotient-resolution-normalization",
+    "why": "Uses only its stated generic scalar, module-sheaf, finite-refinement or derived-category assertion; the compactification-coherence unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-sfb-internal-section-scalar-adjunction",
+    "why": "Uses only its stated generic scalar, module-sheaf, finite-refinement or derived-category assertion; the compactification-coherence unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
+    "why": "Uses only its stated generic scalar, module-sheaf, finite-refinement or derived-category assertion; the compactification-coherence unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-sf-module-object-ordinary-coefficient-equivalence",
+    "why": "Uses only its stated generic scalar, module-sheaf, finite-refinement or derived-category assertion; the compactification-coherence unit has no replacement for this tool."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Uses only its stated generic scalar, module-sheaf, finite-refinement or derived-category assertion; the compactification-coherence unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Uses only its stated generic scalar, module-sheaf, finite-refinement or derived-category assertion; the compactification-coherence unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Uses only its stated generic scalar, module-sheaf, finite-refinement or derived-category assertion; the compactification-coherence unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-triangle",
+    "why": "Uses only its stated generic scalar, module-sheaf, finite-refinement or derived-category assertion; the compactification-coherence unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaf-colimit-constructible",
+    "why": "Uses only its stated generic scalar, module-sheaf, finite-refinement or derived-category assertion; the compactification-coherence unit has no replacement for this tool."
+   },
+   {
+    "node": "det-pe-classical-sheaves-modules",
+    "why": "Uses only its stated generic scalar, module-sheaf, finite-refinement or derived-category assertion; the compactification-coherence unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Uses only its stated generic scalar, module-sheaf, finite-refinement or derived-category assertion; the compactification-coherence unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Uses only its stated generic scalar, module-sheaf, finite-refinement or derived-category assertion; the compactification-coherence unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-sfb-degreewise-bounded-devissage",
+    "why": "Uses only its stated generic scalar, module-sheaf, finite-refinement or derived-category assertion; the compactification-coherence unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-step-ses",
+    "why": "Uses only its stated generic scalar, module-sheaf, finite-refinement or derived-category assertion; the compactification-coherence unit has no replacement for this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pe-finite-discrete-scalar-constant-models",
+  "lem-sfb-integral-quotient-resolution-normalization",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
+  "lem-sf-module-object-ordinary-coefficient-equivalence",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-module-sheaf-colimit-constructible",
+  "det-pe-classical-sheaves-modules",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-sfb-degreewise-bounded-devissage",
+  "lem-weil-pbc-truncation-step-ses"
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-cc-NR-cf5eb57c0",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-cf5eb57c0 (reviewer sub-agent of L); spot-checked: Read the item and all 21 cited statements, the hull definition (def-sfb-supported-model-hull, Λ=R^c) and Stacks 03SA (etale-cohomology.tex line 12216). The delivery adds no new nodes and leaves the statement and stmt_deps unchanged. Step 1: for R=O, coker(Ã,π^n I) over O_W equals B_W^r/im A, using the actual q_n isomorphism O_W/π^n≅B_W from lem-sfb-integral-quotient-resolution-normalization and right-exact Ext (change-of-scalars clause 2). So Res(B_W⊗P)≅O_W⊗_O P with P finitely presented over O=Λ(*); P=0 and nonreduced B are fine. Step 2: the finite-ring constructible origin gives the same stratification notion as sk-def-sfb-constructible, and Res commuting with pullback is argued via the cartesian coefficients and the identity-on-underlying Res. Step 3: the qcqs tree lemma's edges are exactly the hull's support chains, with no Noetherian hypothesis. Step 4: tree induction with the qc-open-complement open-closed SES, transported to internal operations, then the SES triangle and extension closure. Step 5: the 03SA approximation for finite B; ν^* is a left adjoint, the encoding an equivalence and Res has right adjoint Coext; a degree-0 strict filtered diagram with bound 0. Step 6: checked every hypothesis of the dévissage lemma (Q iso-invariant, contains 0, extension-closed; P_q iso-invariant). Step 7: good truncations τ≤m stabilize termwise, so the colimit is EK with common bound a. Edge cases checked: empty T, C=0, cohomology unbounded above. The cross-unit lemmas are generic tools used as black boxes; I accept the recorded tool_uses. No duplicates found. No changes made."
+ }
+}

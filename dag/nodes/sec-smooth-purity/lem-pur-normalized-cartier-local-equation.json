@@ -1,0 +1,136 @@
+{
+ "id": "lem-pur-normalized-cartier-local-equation",
+ "kind": "statement",
+ "title": "Local equation of one normalized Cartier Kummer representative",
+ "statement": "Fix the finite coefficient setting P of [def-pur-conventions], with m=ell^n, A=P.Coefficient and n>=1. Let T be a separated finite-type k-scheme [sk-def-purity-conv], and i:D->T a closed immersion whose kernel ideal is invertible [def-pc-divisor-line-bundle]. Let kappa be a degree-two module Ext class from i_*A_D to the finite etale root line A(1), satisfying the relative torsor normalization SupportedKummerBoundary [def-asd-ordinary-supported-kummer-boundary]. For every etale e:U->T, global function f on U, and Cartesian square identifying D times_T U with V(f), the canonical pro-etale comparison of kappa, pulled back through this square in the supported-Hom model [lem-pur-supported-cup-functoriality], is minus frameBoundary(f) [def-pur-frame-class]. It is also minus the one-factor ordered frameBoundaryProduct of the tuple Fin 1 -> Gamma(U,O), constantly f, after the exact singleton-support type identification. No finite-type or quasi-compact hypothesis is placed on e. The corresponding supported Hom representatives are supplied explicitly and identified with Ext.hom by HEq, so this is the same assertion without repeated derived-instance conversion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-divisor-class.proof.md",
+  "place": "Local relative-class and anticommuting-boundaries computation; Cartier addition paragraph"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "sk-def-purity-conv",
+  "def-pc-divisor-line-bundle",
+  "def-asd-ordinary-supported-kummer-boundary",
+  "lem-pur-supported-cup-functoriality",
+  "def-pur-frame-class"
+ ],
+ "proof": [
+  {
+   "text": "Use the canonical complementary frame of the dual ideal. The boundary witnesses and relative extension uniqueness identify its integral class; uniqueness of scalar realization identifies kappa with the framed realization. Pull back that framed pair along the chosen etale square.",
+   "uses": [
+    "lem-pur-divisor-normalized-realization",
+    "def-pc-divisor-line-bundle"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the principal chart e=f^-1 is a global frame and its complementary section is f e. The principal torsor Yoneda sign gives minus the Kummer localization boundary. The normalized relative-cone and root scalar/site comparisons identify this boundary with frameBoundary(f). This uses the specified relative extension, not an inference from local equality of ordinary degree-two classes.",
+   "uses": [
+    "lem-pur-principal-torsor-yoneda-sign",
+    "lem-pur-divisor-relative-cone",
+    "def-pur-frame-class"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the singleton tuple the dependent left fold starts at the supported unit and appends this sole boundary. The supported cup unit law and canonical intersection/support comparison give the same class; Set.range_const identifies the supports. A unit equation and an empty chart give zero classes and require no exclusion.",
+   "uses": [
+    "def-pur-frame-class",
+    "lem-pur-supported-cup-functoriality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-divisor-normalized-realization",
+  "def-pc-divisor-line-bundle",
+  "lem-pur-principal-torsor-yoneda-sign",
+  "lem-pur-divisor-relative-cone",
+  "def-pur-frame-class",
+  "lem-pur-supported-cup-functoriality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-divisor-class.proof.md",
+  "place": "Local relative-class and anticommuting-boundaries computation; Cartier addition paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Kummer class of an effective Cartier divisor is additive and equals minus localization boundary on a principal chart",
+   "results": "{\"t\": \"2026-10-25T10:21:56Z\", \"tool\": \"leanfinder\", \"query\": \"Kummer class of an effective Cartier divisor is additive and equals minus localization boundary on a principal chart\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.Point.toClass\", \"WeierstrassCurve.Affine.Point.toClass_apply\", \"AlgebraicGeometry.StructureSheaf.const_add\", \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.SectionSubring.add_mem'\"], \"digest\": \"73a5517718333c87\"}",
+   "date": "2026-10-25",
+   "verdict": "no matching Cartier supported Kummer theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "SupportedKummerBoundary|divisor_class|cartierPairTensor",
+   "results": "{\"t\": \"2026-10-25T10:22:48Z\", \"tool\": \"grep\", \"query\": \"SupportedKummerBoundary|divisor_class|cartierPairTensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no matching Cartier supported Kummer theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"Kummer\"",
+   "results": "{\"t\": \"2026-10-25T10:22:49Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme, \\\"Kummer\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no matching Cartier supported Kummer theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kummer class of a Cartier divisor is additive in the product of two Cartier ideals and has the negative local localization boundary",
+   "results": "{\"t\": \"2026-10-25T10:39:11Z\", \"tool\": \"leansearch\", \"query\": \"Kummer class of a Cartier divisor is additive in the product of two Cartier ideals and has the negative local localization boundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FractionalIdeal.count_prod\", \"FractionalIdeal.count_mul'\", \"MeromorphicOn.divisor_fun_smul\", \"FractionalIdeal.count_mul\", \"MeromorphicOn.divisor_mul\", \"MeromorphicOn.divisor_fun_mul\", \"ArchimedeanClass.mk_mul\", \"AddLocalization\"], \"digest\": \"dd6cd8e90a2ba230\"}",
+   "date": "2026-10-25",
+   "verdict": "no matching Cartier supported Kummer theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurityDivisorClass",
+  "date": "2026-10-25",
+  "group": "C6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-divisor-class",
+   "place": "Local relative-class and anticommuting-boundaries computation; Cartier addition paragraph"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedCartierLocalEquation",
+  "file": "lean/Sheaf/Paper/NormalizedCartierLocalEquation.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.normalizedCartier_localEquation",
+  "statement": "theorem normalizedCartier_localEquation (P : PurityFiniteSetting.{u})\n    {D T : Scheme.{u}} (a : T ⟶ Spec (.of P.field.k))\n    [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a]\n    (i : D ⟶ T) [IsClosedImmersion i] (hI : i.ker.IsInvertible)\n    (κ : Abelian.Ext\n      ((Etale.lowerStar (ModuleCat.{u + 1} P.Coefficient) i).obj (P.constantEtale D))\n      (P.frameTwistEtale T 1) 2)\n    (α : P.FunctorialCupH false i 2 1) (hα : HEq κ.hom α)\n    (hκ : Etale.SupportedKummerBoundary P.Coefficient P.diagonalExponent\n      P.diagonalExponent_annihilates i hI (P.diagonalExponent_isUnit a) κ)\n    (U : Scheme.{u}) (e : U ⟶ T) [Etale e] (f : Γ(U, ⊤))\n    (t : U.zeroLocusSubscheme {f} ⟶ D)\n    (sq : ChosenCartesianSquare t (U.zeroLocusSubschemeι {f}) i e) :\n    HEq (P.functorialCupPullback true i (U.zeroLocusSubschemeι {f}) e t sq\n      a 2 1 (P.functorialCupCompare i 2 1 α))\n      (-(P.frameBoundary U (e ≫ a) f)) ∧\n    HEq (P.functorialCupPullback true i (U.zeroLocusSubschemeι {f}) e t sq\n      a 2 1 (P.functorialCupCompare i 2 1 α))\n      (-(P.frameBoundaryProduct U (e ≫ a) 1 (fun _ : Fin 1 ↦ f)))",
+  "branch": "sheaf-dag",
+  "by": "C6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261025T180532-L-4000619",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261025T180532-L-4000619",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

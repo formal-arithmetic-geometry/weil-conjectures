@@ -1,0 +1,241 @@
+{
+ "id": "lem-sfb-multiradical-galois-degree",
+ "kind": "statement",
+ "title": "Galois group and degree bound for a finite multiradical extension",
+ "statement": "Let $F$ be a field [def-weil-field], let $n\\geq1$ be an integer invertible in $F$, and suppose $X^n-1$ splits over $F$. Let $r\\geq0$ and $a_1,\\ldots,a_r\\in F^\\times$. In an algebraic closure $\\Omega/F$ [def-weil-algebraic-closure], choose $\\alpha_j$ with $\\alpha_j^n=a_j$ and set $L=F(\\alpha_1,\\ldots,\\alpha_r)$. Then $L/F$ is a finite Galois extension (finite-dimensional, normal and separable). Put $\\mu_n(F)=\\{z\\in F^\\times:z^n=1\\}$. The map\n$$\\operatorname{Gal}(L/F)\\longrightarrow\\mu_n(F)^r,\\qquad\\sigma\\longmapsto(\\sigma(\\alpha_j)/\\alpha_j)_{j=1}^r$$\nis an injective homomorphism of groups, and $[L:F]\\mid n^r$. Field extensions and their finite degrees use [def-pc-field-extension, def-weil-vector-space-dimension]; normal means that every irreducible polynomial over $F$ with a root in $L$ splits there; separability uses [def-weil-pbc-separable-algebraic-extension]. No binomial $X^n-a_j$ is assumed irreducible. For $r=0$, $L=F$ and the target group is the trivial group.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Tag 09I6, section-Kummer, opening paragraph: injective Kummer character and cyclic degree dividing n for one root; the displayed finite-list formulation is its product-character version."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-pc-field-extension",
+  "def-weil-vector-space-dimension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "If $r=0$, $L=F$; its $F$-automorphism group and the empty product are trivial. Their unique map is injective, and $[F:F]=1\\mid n^0=1$. Assume $r>0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09I6, section-Kummer, opening paragraph, finite-list product-character version; assembly of the extracted inputs."
+   }
+  },
+  {
+   "text": "Apply the binomial root-torsor lemma to each $a_j$ and to $1$. It gives separability of $X^n-a_j$, nonzero $\\alpha_j$, $|\\mu_n(F)|=n$, and all roots of these binomials as $\\alpha_j\\zeta$. In the algebraic extension $\\Omega/F$, let $S$ be its separable subfield. Its root description puts every $\\alpha_j$ in $S$, so $L\\subseteq S$. Every $x\\in L$ is separable over $F$: the evaluation kernels of $F[X]\\to L$ and $F[X]\\to S$ at $x$ coincide under the injective inclusion, hence so do their monic generators, the minimal polynomials.",
+   "uses": [
+    "lem-sfb-split-binomial-root-torsor",
+    "lem-weil-pbc-separable-first-purely-inseparable",
+    "def-weil-pbc-relative-separable-closure",
+    "def-weil-pbc-separable-algebraic-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09I6, section-Kummer, opening paragraph, finite-list product-character version; assembly of the extracted inputs."
+   }
+  },
+  {
+   "text": "The root-torsor factorization gives $X^n-a_j=\\prod_{\\zeta\\in\\mu_n(F)}(X-\\alpha_j\\zeta)$ in $L[X]$, by injectivity of $L[X]\\to\\Omega[X]$. Thus $P=\\prod_j(X^n-a_j)$ splits over $L$ and has positive degree $rn$. All its roots are in $L$, and each $\\alpha_j$ is a root (take $\\zeta=1$), so its roots generate exactly $L$. The finite-normal splitting-field theorem gives finite dimensionality and normality. Together with the preceding separability this makes $L/F$ finite Galois. Repeated generators do not require $P$ to be separable.",
+   "uses": [
+    "lem-sfb-split-binomial-root-torsor",
+    "lem-sfb-splitting-field-finite-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09I6, section-Kummer, opening paragraph, finite-list product-character version; assembly of the extracted inputs."
+   }
+  },
+  {
+   "text": "For every $F$-automorphism $\\sigma$ of $L$, $(\\sigma(\\alpha_j)/\\alpha_j)^n=\\sigma(a_j)/a_j=1$. The root-torsor lemma with $a=1$ therefore places this ratio in the image of the finite scalar group $U=\\mu_n(F)$. Apply the generated-field scalar-character lemma with $E=L$ and $b_j=\\alpha_j$. Its hypotheses hold because these nonzero elements generate $L$. It gives the injective homomorphism with precisely the displayed ratio coordinates, and $|\\operatorname{Aut}_F(L)|\\mid|U|^r=n^r$.",
+   "uses": [
+    "lem-sfb-split-binomial-root-torsor",
+    "lem-sfb-generated-field-scalar-character-order"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09I6, section-Kummer, opening paragraph, finite-list product-character version; assembly of the extracted inputs."
+   }
+  },
+  {
+   "text": "The finite-Galois order theorem applies to $L/F$ and gives $|\\operatorname{Aut}_F(L)|=[L:F]$. Substituting in the preceding divisibility yields $[L:F]\\mid n^r$.",
+   "uses": [
+    "lem-weil-pbc-finite-galois-fixed-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09I6, section-Kummer, opening paragraph, finite-list product-character version; assembly of the extracted inputs."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-split-binomial-root-torsor",
+  "lem-weil-pbc-separable-first-purely-inseparable",
+  "def-weil-pbc-relative-separable-closure",
+  "def-weil-pbc-separable-algebraic-extension",
+  "lem-sfb-splitting-field-finite-normal",
+  "lem-sfb-generated-field-scalar-character-order",
+  "lem-weil-pbc-finite-galois-fixed-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Tag 09I6, section-Kummer, opening paragraph: finite-list assembly after the Q44 repair. Binomial root calculations and the scalar-character/coset argument are extracted into two independent statement-only tasks; existing separable-subfield, splitting-field and Galois-order results are retained."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a field containing nth roots of unity adjoining finitely many nth roots gives a finite Galois extension of degree dividing n to the number of generators",
+   "results": "8 hits; IsCyclotomicExtension.isGalois, IsCyclotomicExtension.finiteDimensional, IntermediateField.isCyclotomicExtension_adjoin_of_exists_isPrimitiveRoot, IsCyclotomicExtension.isAbelianGalois, IsPrimitiveRoot.intermediateField_adjoin_isCyclotomicExtension, exists_root_adjoin_eq_top_of_isCyclic, isCyclic_of_isSplittingField_X_pow_sub_C, IsCyclotomicExtension.finrank",
+   "date": "2026-10-22",
+   "verdict": "no match: KummerExtension.lean:442-456 assumes a single irreducible binomial and gives degree n; cyclotomic results concern roots of unity. Neither states the finite-list character or degree bound."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsGalois\", \"X_pow_sub_C\"",
+   "results": "1 hits; isGalois_of_isSplittingField_X_pow_sub_C",
+   "date": "2026-10-22",
+   "verdict": "no match: KummerExtension.lean:442-456 assumes a single irreducible binomial and gives degree n; cyclotomic results concern roots of unity. Neither states the finite-list character or degree bound."
+  },
+  {
+   "tool": "grep",
+   "query": "isGalois.*[Xx]_pow|finrank.*[Xx]_pow|finrank.*adjoin.*[Rr]oot|card.*[Rr]ootsOfUnity",
+   "results": "6 hits; Mathlib/FieldTheory/PurelyInseparable/Basic.lean, Mathlib/FieldTheory/KummerExtension.lean, Mathlib/FieldTheory/KummerExtension.lean, Mathlib/FieldTheory/KummerExtension.lean, Mathlib/FieldTheory/KummerExtension.lean, Mathlib/FieldTheory/KummerExtension.lean; Mathlib/FieldTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: KummerExtension.lean:442-456 assumes a single irreducible binomial and gives degree n; cyclotomic results concern roots of unity. Neither states the finite-list character or degree bound."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Galois Kummer extension finite compositum nth roots degree divides power",
+   "results": "8 hits; adjoinRootXPowSubCEquiv.congr_simp, adjoinRootXPowSubCEquiv_root, adjoinRootXPowSubCEquiv_symm_eq_root, isCyclic_tfae, CyclotomicField, adjoinRootXPowSubCEquiv, IsCyclotomicExtension.isGalois, IntermediateField.isCyclotomicExtension_lcm_sup",
+   "date": "2026-10-22",
+   "verdict": "no match: KummerExtension.lean:442-456 assumes a single irreducible binomial and gives degree n; cyclotomic results concern roots of unity. Neither states the finite-list character or degree bound."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The degree of a field generated by r radicals of exponent n divides n^r when the base contains all roots of unity and n is nonzero in the base",
+   "results": "8 hits; SeparableClosure.hasEnoughRootsOfUnity_pow, finrank_of_isSplittingField_X_pow_sub_C, Field.finSepDegree_dvd_finrank, IsSolvableByRad.rad, IsPrimitiveRoot.powerBasis_dim, IsPrimitiveRoot.subOnePowerBasis_dim, finInsepDegree_eq_pow, IsPurelyInseparable.hasExponent_of_finiteDimensional",
+   "date": "2026-10-22",
+   "verdict": "no match: KummerExtension.lean:442-456 assumes a single irreducible binomial and gives degree n; cyclotomic results concern roots of unity. Neither states the finite-list character or degree bound."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A field generated by finitely many nth roots over a field containing all nth roots of unity is Galois with an injective character into a product of roots of unity",
+   "results": "8 hits: IsCyclotomicExtension.isGalois, isGalois_of_isSplittingField_X_pow_sub_C, isCyclic_of_isSplittingField_X_pow_sub_C, IsCyclotomicExtension.isAbelianGalois, autEquivRootsOfUnity, exists_root_adjoin_eq_top_of_isCyclic, autAdjoinRootXPowSubCEquiv, autEquivZmod",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: Kummer equivalences and finite-degree results require an irreducible single binomial; cyclotomic characters act on roots of unity instead of on arbitrary radicals; the general splitting-field theorem does not give the finite-list character or degree divisibility. Read KummerExtension.lean:442-456 and Galois/Basic.lean:504ff."
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.IsSplittingField, IsGalois",
+   "results": "5 hits: IsGalois.of_separable_splitting_field, IsGalois.is_separable_splitting_field, IsGalois.tfae, isGalois_of_isSplittingField_X_pow_sub_C, isCyclic_tfae",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: Kummer equivalences and finite-degree results require an irreducible single binomial; cyclotomic characters act on roots of unity instead of on arbitrary radicals; the general splitting-field theorem does not give the finite-list character or degree divisibility. Read KummerExtension.lean:442-456 and Galois/Basic.lean:504ff."
+  },
+  {
+   "tool": "grep",
+   "query": "isGalois_of_isSplittingField|finrank_eq_card_aut|card_rootsOfUnity|card_dvd_of_injective|finiteDimensional.*IsSplittingField",
+   "results": "25 hits: Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean, Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean, Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean, Mathlib/FieldTheory/SplittingField/IsSplittingField.lean, Mathlib/FieldTheory/SplittingField/IsSplittingField.lean, Mathlib/NumberTheory/NumberField/Units/Basic.lean, Mathlib/NumberTheory/NumberField/Ideal/Basic.lean, Mathlib/FieldTheory/Normal/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: Kummer equivalences and finite-degree results require an irreducible single binomial; cyclotomic characters act on roots of unity instead of on arbitrary radicals; the general splitting-field theorem does not give the finite-list character or degree divisibility. Read KummerExtension.lean:442-456 and Galois/Basic.lean:504ff."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjoining finitely many nth roots over a field with all nth roots of unity gives an injective Galois character into the product of the groups of nth roots of unity",
+   "results": "8 hits: modularCyclotomicCharacter.toFun, modularCyclotomicCharacter.toFun_unique', modularCyclotomicCharacter', modularCyclotomicCharacter, autEquivZmod.congr_simp, modularCyclotomicCharacter.toFun_spec, autEquivRootsOfUnity, autEquivZmod",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: Kummer equivalences and finite-degree results require an irreducible single binomial; cyclotomic characters act on roots of unity instead of on arbitrary radicals; the general splitting-field theorem does not give the finite-list character or degree divisibility. Read KummerExtension.lean:442-456 and Galois/Basic.lean:504ff."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a field is generated by roots of a finite family of separable polynomials that split in it then the extension is finite Galois",
+   "results": "8 hits: IsGalois.of_separable_splitting_field, IsGalois.is_separable_splitting_field, IsSepClosure.isGalois, GaloisField.instIsGaloisOfFinite, IsGalois.tfae, IsGalois, FiniteGaloisIntermediateField, separableClosure.isGalois",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: Kummer equivalences and finite-degree results require an irreducible single binomial; cyclotomic characters act on roots of unity instead of on arbitrary radicals; the general splitting-field theorem does not give the finite-list character or degree divisibility. Read KummerExtension.lean:442-456 and Galois/Basic.lean:504ff."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-tame-radical-curve-normalization",
+  "date": "2026-10-22",
+  "group": "NM"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §3.5, p.607: tame normalization over separable branch points, etale generic marking, and extraction of the algebraic constant field. This isolates the local smoothness assertion, not the relative genus-raising construction. Local PDF WANTED; publisher PDF read. Supporting input: de Jong §3.5, p.607, adjoining finitely many roots; prime-to-characteristic degree is needed in the residue calculation.",
+   "via": [
+    "lem-sfb-tame-radical-curve-normalization",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-multiradical-galois-degree",
+  "worker": "stage1",
+  "summary": "Repair of the returned 4790-character proof: extracted the binomial root-torsor calculation and the general generated-field scalar-character/order argument as two comparable independent statement-only nodes. The unchanged statement is now assembled in five steps under 3000 characters. All transferred arguments and original step text are preserved in the report; existing Mathlib leaves are reused. No Lean changes.",
+  "blueprint": "Supporting Kummer algebra for the inherited route through det-thm-sf-ctf-stability-direct-images, proof (3), de Jong section 3.5 and the tame radical normalization prerequisite. The blueprint ancestor tool returns null for this migrated chain; retained the existing from.node and via, and recorded each auxiliary role explicitly.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-98d4a7b9d",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-98d4a7b9d (reviewer sub-agent of L); spot-checked: The re-split note answered here is coord/repair-notes/lem-sfb-multiradical-galois-degree.json (released, human 2026-10-21; at least 2 nodes, assembly at most 3000 characters). On live and side-live the item still has the old 9-step proof, so no other group has re-split it. Neither the item nor the new nodes are on route-pivot-dropped, and no SGA source is used. Against live, the item's statement, lean, reviewed and blueprint fields are unchanged; only proof, proof_deps, proof_origin and split_report differ. The assembly is 1854 characters in 5 steps. Step mapping: old steps 2, 4 and the scaling part of 5 moved to lem-sfb-split-binomial-root-torsor. Old step 6's homomorphism part, step 7, the count in step 8 and step 9 (Lagrange coset bijection) moved to lem-sfb-generated-field-scalar-character-order. What stays in the assembly applies existing leaf nodes at their original level of detail: the separable subfield (030K/09HC), splitting field finite-normal, and |Aut|=[L:F]. Nothing was summarised away, and the two nodes are comparable in size (about 1.2k and 1.9k characters of the old text). The root-torsor node is true. The Bezout identity -a^{-1}P+(na)^{-1}XP'=1 gives separability, X^n-1 split and separable gives |mu_n(F)|=n, the map zeta->alpha*zeta is a bijection because (beta/alpha)^n=1 forces beta/alpha into F, and the factorization holds in Omega[X]. Cases checked: n=1, F_7 with n=3 and a=2, a reducible binomial, and a=0 correctly excluded. The scalar-character node is true: the scalars are unique since b_j is nonzero, chi is a homomorphism because U is commutative, injectivity follows from the equalizer being a subfield containing the generators, and Lagrange gives |G| dividing |U|^r. Cases checked: Q(sqrt2), Q(2^{1/3}) with U={1}, transcendental b, r=0. Neither node restates a clause of the item. Neither duplicates the Kummer-binomial (irreducible), field-roots-cyclic-bound, sc-primitive-root, sbc root-torsor or per character nodes. Both have grep, loogle and leanfinder searches with leansearch recorded as unavailable, and are correctly unsplit since Mathlib only covers parts. Assembly steps 2-5 check: Omega/F is algebraic, the minimal-polynomial kernels agree, P has degree rn and generates L (separability of P is not needed), the ratio's nth power is 1 so the a=1 case puts it in U=mu_n(F), and the finite-galois-fixed-field node gives |Aut|=[L:F]. proof_deps equal the union of the step uses, there is no cycle, and tool_uses is empty. Stage-2 advisory only: the module docstring still carries the old nine steps. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.MultiradicalGaloisDegree",
+  "declaration": "IntermediateField.multiradical_galois_degree",
+  "file": "lean/Sheaf/FieldTheory/MultiradicalGaloisDegree.lean",
+  "statement": "theorem multiradical_galois_degree (F : Type u) [Field F] (Ω : Type v) [Field Ω] [Algebra F Ω] [IsAlgClosure F Ω] (n : ℕ) (hn : 1 ≤ n) (hnF : IsUnit (n : F)) (hsplit : (Polynomial.X ^ n - 1 : Polynomial F).Splits) (r : ℕ) (a : Fin r → Fˣ) (α : Fin r → Ω) (hα : ∀ j : Fin r, α j ^ n = algebraMap F Ω (a j : F)) : FiniteDimensional F (adjoin F (Set.range α)) ∧ IsGalois F (adjoin F (Set.range α)) ∧ (∃ χ : (adjoin F (Set.range α) ≃ₐ[F] adjoin F (Set.range α)) →* (Fin r → rootsOfUnity n F), Function.Injective χ ∧ ∀ (σ : adjoin F (Set.range α) ≃ₐ[F] adjoin F (Set.range α)) (j : Fin r), algebraMap F Ω ((χ σ j).val : F) = (σ ⟨α j, subset_adjoin F (Set.range α) (Set.mem_range_self j)⟩ : Ω) / α j) ∧ Module.finrank F (adjoin F (Set.range α)) ∣ n ^ r",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-366048d7d",
+  "group": "NI",
+  "result": "pass",
+  "note": "Only the lean record was added; the recorded statement is copied exactly from MultiradicalGaloisDegree.lean. Every hypothesis matches the node: field F, n≥1 with IsUnit (n:F), X^n−1 splits, a : Fin r → Fˣ, IsAlgClosure F Ω in an independent universe, α_j^n = a_j. L is adjoin F (range α). The conclusions are FiniteDimensional ∧ IsGalois ∧ an injective χ : (L≃ₐ[F]L) →* (Fin r → rootsOfUnity n F) whose coordinate formula σα_j/α_j fixes it uniquely ∧ finrank ∣ n^r. Edge cases r=0, n=1, repeated/reducible binomials and positive characteristic are covered. Mathlib's Kummer results need one irreducible binomial, so this is not a duplicate. The docstrings cite Stacks 09I6 and the blueprint node and carry the nine node proof steps; no definitions, sorry only, stmt_dep records consistent. No findings."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

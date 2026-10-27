@@ -21,20 +21,7 @@
  ],
  "proof": [
   {
-   "text": "First fix an affine pair $U=\\operatorname{Spec}B\\subseteq X$, $V=\\operatorname{Spec}A\\subseteq Y$ with $f(U)\\subseteq V$, and a map $\\operatorname{Spec}k\\to V$ from a field. Put $X_k=X\\times_Y\\operatorname{Spec}k$. By [lem-weil-pbc-open-preimage-fibre-product], the inverse image $U_k$ of $U$ under $X_k\\to X$ is an open subscheme and is the pullback of $U\\to X$ along that projection. The universal property [def-pc-fibre-product] identifies it with $U\\times_V\\operatorname{Spec}k$: a map into either object is exactly a map into $U$ and a map into $\\operatorname{Spec}k$ whose composites into $Y$ agree; both composites factor through the open $V$, where agreement is equivalent. Thus [lem-weil-pbc-fibre-product-affine-spectra] gives $U_k\\cong\\operatorname{Spec}(B\\otimes_A k)$ over $k$. Inverse images of a covering family cover: the inverse image of its union is the union of its inverse images. We use these chart identifications and this covering observation below.",
-   "uses": [
-    "lem-weil-pbc-open-preimage-fibre-product",
-    "def-pc-fibre-product",
-    "lem-weil-pbc-fibre-product-affine-spectra"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Tags 01JR (lemma-open-fibre-product), 01I4 (lemma-fibre-product-affine-schemes); restriction and pullback universal properties."
-   }
-  },
-  {
-   "text": "Assume (1), and fix any affine pair $U,V$ as in step 1. By [lem-weil-pbc-flat-morphism-affine-criterion], $A\\to B$ is flat. By [lem-weil-pbc-lfp-affine-opens-finite-presentation], it is of finite presentation. For each prime $\\mathfrak p\\subset A$, [lem-weil-pbc-finite-presentation-base-change-composition] (1), with base change $A\\to\\kappa(\\mathfrak p)$, shows that $S=B\\otimes_A\\kappa(\\mathfrak p)$ is a finitely presented $\\kappa(\\mathfrak p)$-algebra (interchanging the two tensor factors). In particular it is finitely generated: the images of the finitely many polynomial variables in a presentation [def-weil-pbc-finitely-presented-algebra] generate it.",
+   "text": "Assume (1). On every affine pair, [lem-weil-pbc-flat-morphism-affine-criterion] gives flatness and [lem-weil-pbc-lfp-affine-opens-finite-presentation] gives finite presentation. For $\\mathfrak p\\subset A$, [lem-weil-pbc-finite-presentation-base-change-composition](1) gives finite presentation of $\\kappa(\\mathfrak p)\\otimes_A B$. The symmetry $c\\otimes b\\mapsto b\\otimes c$, inverse $b\\otimes c\\mapsto c\\otimes b$, identifies this with $S=B\\otimes_A\\kappa(\\mathfrak p)$. The finitely many variable images in a presentation [def-weil-pbc-finitely-presented-algebra] generate $S$, proving finite type.",
    "uses": [
     "lem-weil-pbc-flat-morphism-affine-criterion",
     "lem-weil-pbc-lfp-affine-opens-finite-presentation",
@@ -48,21 +35,20 @@
    }
   },
   {
-   "text": "Continue with (1), $U,V,\\mathfrak p,S$ from step 2. Choose an algebraic closure $\\Omega$ of $\\kappa(\\mathfrak p)$ using [def-weil-algebraic-closure]. The point of $V$ corresponding to $\\mathfrak p$ and the field inclusion define a geometric point $\\operatorname{Spec}\\Omega\\to Y$ by [def-weil-geometric-point]. Its fibre $X_\\Omega$ has an affine cover by finitely generated local-complete-intersection $\\Omega$-algebras by (1). Step 1 identifies its affine open $U_\\Omega$ with $\\operatorname{Spec}(B\\otimes_A\\Omega)$. Applying [lem-trf-lci-affine-open-locality] to this open proves that $B\\otimes_A\\Omega$ is a local complete intersection over $\\Omega$. There is an $\\Omega$-algebra isomorphism $(B\\otimes_A\\kappa(\\mathfrak p))\\otimes_{\\kappa(\\mathfrak p)}\\Omega\\cong B\\otimes_A\\Omega$, sending $(b\\otimes t)\\otimes u$ to $b\\otimes tu$, with inverse $b\\otimes u\\mapsto(b\\otimes1)\\otimes u$; the balanced relations show these are well-defined inverses. The converse direction of [lem-weil-pbc-lci-field-change], applicable because $S$ is of finite type by step 2, proves that $S$ is a local complete intersection over $\\kappa(\\mathfrak p)$. Together with step 2 this proves (2).",
+   "text": "For each prime $\\mathfrak p$, choose an algebraic closure $\\Omega/\\kappa(\\mathfrak p)$ by [def-weil-algebraic-closure]. It gives a geometric point through $V$ by [def-weil-geometric-point]. Condition (1) supplies its complete-intersection fibre cover; step 1 supplies finite type of $S$. Apply [lem-trf-lci-geometric-chart-descent] with $K=\\Omega$. It gives that $S$ is lci. Together with step 1 this proves (2).",
    "uses": [
     "def-weil-algebraic-closure",
     "def-weil-geometric-point",
-    "lem-trf-lci-affine-open-locality",
-    "lem-weil-pbc-lci-field-change"
+    "lem-trf-lci-geometric-chart-descent"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00SJ (lemma-lci-field-change), descent along the algebraic closure; Morphisms Tag 01UG (lemma-local-complete-intersection) for the arbitrary affine open in the geometric fibre."
+    "place": "Tag 00SJ (lemma-lci-field-change), descent/ascent; schemes.tex Tags 01JR (lemma-open-fibre-product) and 01I4 (lemma-fibre-product-affine-schemes); morphisms.tex Tag 01UG (lemma-local-complete-intersection). Explicit affine-chart and balanced-tensor comparison extracted from the proof of lem-trf-syntomic-geometric-fibres-affine-criterion, original steps 1, 3 and 6."
    }
   },
   {
-   "text": "Condition (2) implies (3): choose an affine open cover of $Y$ and, for each member $V_a$, an affine open cover of the open subscheme $f^{-1}(V_a)$, using the local affine property of schemes [def-pc-scheme]. Each source member is an affine open of $X$ mapping into $V_a$, so (2) supplies exactly the three required properties. If an inverse image is empty, its cover may be empty.",
+   "text": "For (2)$\\Rightarrow$(3), choose affine opens $V_a$ covering $Y$ and affine opens $U_{ab}$ covering each open subscheme $f^{-1}(V_a)$, using the local affine property [def-pc-scheme]. Each $U_{ab}$ is also open in $X$ and maps into $V_a$, so (2) gives every required ring condition. Empty inverse images permit empty covers.",
    "uses": [
     "def-pc-scheme"
    ],
@@ -73,7 +59,7 @@
    }
   },
   {
-   "text": "Assume (3). For every chart $U_{ab}\\to V_a$, its flat coordinate map makes the chart morphism flat by [lem-weil-pbc-flat-ring-map-iff-flat-affine]. For any $x\\in X$, choose $a,b$ with $x\\in U_{ab}$. The stalk map of this restricted morphism is the stalk map $\\mathcal O_{Y,f(x)}\\to\\mathcal O_{X,x}$, since restricting a sheaf to an open neighbourhood leaves its stalk unchanged. This map is flat, so $f$ is flat by the pointwise definition [def-weil-flat-morphism]. The same affine pair around $x$ has a finitely presented coordinate map by (3), so $f$ is of finite presentation at $x$ by [def-sbc-locally-finite-presentation]. This holds for every $x$, proving that $f$ is locally of finite presentation.",
+   "text": "Assume (3). Given $x\\in X$, choose $a$ with $f(x)\\in V_a$, then $b$ with $x\\in U_{ab}$. The chart morphism $U_{ab}\\to V_a$ is flat by [lem-weil-pbc-flat-ring-map-iff-flat-affine]. Restricting to open neighbourhoods identifies its stalk map with $\\mathcal O_{Y,f(x)}\\to\\mathcal O_{X,x}$, so this map is flat. Thus [def-weil-flat-morphism] gives flatness of $f$. The same affine pair has a finitely presented coordinate map by (3), witnessing finite presentation at $x$ by [def-sbc-locally-finite-presentation]. This holds at every point.",
    "uses": [
     "lem-weil-pbc-flat-ring-map-iff-flat-affine",
     "def-weil-flat-morphism",
@@ -86,38 +72,33 @@
    }
   },
   {
-   "text": "Still assume (3). Fix any geometric point $\\bar y:\\operatorname{Spec}\\Omega\\to Y$ and let $y$ be its image. Choose $a$ with $y\\in V_a$. By [def-weil-geometric-point], $\\bar y$ gives a field extension $\\kappa(y)\\to\\Omega$; with $\\mathfrak p\\subset A_a$ corresponding to $y$, this is $\\kappa(\\mathfrak p)\\to\\Omega$. For every $b$, set $S_b=B_{ab}\\otimes_{A_a}\\kappa(\\mathfrak p)$. By (3), $S_b$ is a local complete intersection and hence a finitely generated $\\kappa(\\mathfrak p)$-algebra by [def-weil-pbc-complete-intersection-over-field]. The forward direction of [lem-weil-pbc-lci-field-change] implies that $S_b\\otimes_{\\kappa(\\mathfrak p)}\\Omega$ is a finitely generated local-complete-intersection $\\Omega$-algebra. The tensor formulas in step 3 identify it with $B_{ab}\\otimes_{A_a}\\Omega$. Since $\\operatorname{Spec}\\Omega\\to Y$ factors through $V_a$, the first projection $X\\times_Y\\operatorname{Spec}\\Omega\\to X$ has image in the open $f^{-1}(V_a)$ (its composite with $f$ equals the composite of the second projection with $\\bar y$, which lands in $V_a$); as the $U_{ab}$ cover $f^{-1}(V_a)$, their inverse images cover $X\\times_Y\\operatorname{Spec}\\Omega$, and step 1 identifies each of them with the spectrum of the corresponding algebra. They form an affine open cover of $X\\times_Y\\operatorname{Spec}\\Omega$. This cover makes the fibre locally of finite type [def-weil-finite-type-morphism] and a local complete intersection in the sense stipulated in the item. An empty fibre has the empty cover, so needs no nonemptiness assumption. With step 5 this proves (1), closing the cycle (1)$\\Rightarrow$(2)$\\Rightarrow$(3)$\\Rightarrow$(1).",
+   "text": "For (3)$\\Rightarrow$(1), fix $\\bar y:\\operatorname{Spec}\\Omega\\to Y$ and choose $V_a$ containing its image $y$. By [def-weil-geometric-point] this point factors through $\\kappa(y)=\\kappa(\\mathfrak p)$. Each $S_b=B_{ab}\\otimes_{A_a}\\kappa(\\mathfrak p)$ is lci by (3), hence finite type by [def-weil-pbc-complete-intersection-over-field]. Apply [lem-trf-lci-residue-chart-cover-extension] to $(U_{ab})_b$ and $\\kappa(\\mathfrak p)\\to\\Omega$. Its hypotheses now hold, and its conclusion gives an lci affine cover of the entire geometric fibre and local finite type. Together with step 4 this proves (1).",
    "uses": [
     "def-weil-geometric-point",
     "def-weil-pbc-complete-intersection-over-field",
-    "lem-weil-pbc-lci-field-change",
-    "def-weil-finite-type-morphism"
+    "lem-trf-lci-residue-chart-cover-extension"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00SJ (lemma-lci-field-change), ascent to the geometric-point field; Morphisms Tags 01UC (definition-syntomic), 01UD (lemma-syntomic-characterize), and 01UG (lemma-local-complete-intersection)."
+    "place": "Tag 00SJ (lemma-lci-field-change), descent/ascent; schemes.tex Tags 01JR (lemma-open-fibre-product) and 01I4 (lemma-fibre-product-affine-schemes); morphisms.tex Tag 01UG (lemma-local-complete-intersection). Explicit affine-chart and balanced-tensor comparison extracted from the proof of lem-trf-syntomic-geometric-fibres-affine-criterion, original steps 1, 3 and 6."
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-open-preimage-fibre-product",
-  "def-pc-fibre-product",
-  "lem-weil-pbc-fibre-product-affine-spectra",
   "lem-weil-pbc-flat-morphism-affine-criterion",
   "lem-weil-pbc-lfp-affine-opens-finite-presentation",
   "lem-weil-pbc-finite-presentation-base-change-composition",
   "def-weil-pbc-finitely-presented-algebra",
   "def-weil-algebraic-closure",
   "def-weil-geometric-point",
-  "lem-trf-lci-affine-open-locality",
-  "lem-weil-pbc-lci-field-change",
+  "lem-trf-lci-geometric-chart-descent",
   "def-pc-scheme",
   "lem-weil-pbc-flat-ring-map-iff-flat-affine",
   "def-weil-flat-morphism",
   "def-sbc-locally-finite-presentation",
   "def-weil-pbc-complete-intersection-over-field",
-  "def-weil-finite-type-morphism"
+  "lem-trf-lci-residue-chart-cover-extension"
  ],
  "proof_origin": {
   "by": "document",
@@ -220,28 +201,23 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-syntomic-geometric-fibres-affine-criterion",
   "worker": "stage1",
-  "summary": "Proved the three-way equivalence directly on affine charts, separating flatness and finite presentation from the geometric/ordinary fibre comparison. Reused the existing field-change theorem; one new statement-only node supplies local-complete-intersection inheritance by arbitrary affine opens. No statement change, Lean writing or compilation.",
-  "blueprint": "Historical local-equation input to lem-trf-local-term-locality, proof (1)--(2), below lem-trf-nodal-etale-chart: the flat local-complete-intersection-fibre condition in the first sentence of Stacks 0C5F; affine locality of the field-scheme fibre condition used in Stacks 01UD/01UF.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-lci-field-change",
-    "why": "Generic field-extension invariance/descent of the finite-type algebra complete-intersection property; used to compare ordinary and geometric fibres, with no replacement of a unit-level argument."
-   }
-  ]
+  "summary": "Q93 repair of return L at returned head 99187ce6e6e: reconciled the retained delivery with the current DAG and re-read every assembly citation and each component statement supporting the two extracted arguments. The first dry run on the current base passed at 46c3d90cd84. Retained both statement-only nodes, all original arguments and the logged Mathlib searches. Step 4 now explicitly chooses a target neighbourhood of f(x), then a source neighbourhood of x, and identifies the stalk map; step 5 now explicitly cites the finite-type prerequisite in the lci definition before applying the covering-extension node. Updated citations and the signed report. The statement, statement dependencies and all current maintainer metadata remain equal to the current DAG.",
+  "blueprint": "Historical local-equation input to lem-trf-local-term-locality, proof (1)--(2), below lem-trf-nodal-etale-chart: the flat local-complete-intersection-fibre condition in the first sentence of Stacks 0C5F; affine locality of the field-scheme fibre condition used in Stacks 01UD/01UF. Original steps 1/3 are assigned to lem-trf-lci-geometric-chart-descent; original steps 1/6 to lem-trf-lci-residue-chart-cover-extension; original steps 2/4/5 remain in the assembly.",
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-weil-pbc-lci-field-change"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-Q57-e46830dde",
-  "group": "Q57",
+  "reviewer": "NT-cc-Q93-e20a04f76",
+  "group": "Q93",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-e46830dde (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-trf-lci-affine-open-locality, every cited node's statement, and Stacks at the cited places: 01UC(3), 01UD(2)/(4), 01UF, 01UG(1)<=>(3), Algebra 00SL, 00S9, 00SH, 00SJ. The item's statement is byte-identical to the base and all old searches are kept. Steps 1-5 are correct as written. Step 1 uses 01JR open-preimage pullback, pasted through the open V, then 01I4 to get Spec(B⊗_A k). Step 2 uses 01U5 and 01TQ on every affine pair, then 05G5(4) base change. Step 3 builds an algebraic-closure geometric point at p in V (κ(p) is the residue field because V is open), applies the new lemma to U_Ω, uses the explicit tensor isomorphism, then reverse 00SJ with S of finite type. Step 4 is elementary. Step 5 uses flatness of the chart morphism, equality of open stalks, and the literal finite-presentation-at-x definition. Step 6 uses forward 00SJ, and the fibre is locally of finite type because the only affine opens of Spec Ω are the empty set and the whole space. The new node is true and is not elementary: the cover makes Z locally of finite type, so every affine ring is finitely generated (01T2) and lci (01UD(2), or 01UG with 00SH). I tested W empty (zero ring), Z empty, and nonreduced k[t]/(t^2). It is not a restatement of the item and no DAG duplicate exists: I ran rg for syntomic, 01UG, 00SH, 01UD and lci, and read the candidates. Its searches cover all three kinds. I accept the tool use of lem-weil-pbc-lci-field-change: it is the generic Stacks 00SJ field-change lemma. One repair: step 6 did not say why the inverse images of the U_ab cover X×_Y Spec Ω. I added that the first projection lands in f^{-1}(V_a), since f∘p = ȳ∘q lands in V_a. The corrected item file is in fixes/dag/nodes/sec-trace-formula/; uses are unchanged and no node is dropped.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-e20a04f76 (reviewer sub-agent of L); spot-checked: Fourth delivery of this re-split. Heads aee8, f33a and 99187 all passed review and were returned at landing because the side completion was not promoted. The released re-split note of 2026-10-22 still applies: live still has the old six-step proof and neither new id. Against 99187, both new nodes are byte-identical. The item's statement and stmt_deps are unchanged. The delta: step 4 now chooses a with f(x) in V_a, then b with x in U_ab, and spells out the stalk map. Step 5 now cites def-weil-pbc-complete-intersection-over-field for finite generation of S_b; that node was added to proof_deps. I reread everything in full. Coverage: old step 2 is now step 1; old 4 and 5 are now 3 and 4; old 1+3 went into lem-trf-lci-geometric-chart-descent and old 1+6 into lem-trf-lci-residue-chart-cover-extension. The two nodes are of comparable size, and the assembly is 2470 characters. Step 1: the flat-affine criterion; lfp-affine-opens (lfp comes from (1)); fp base change (1) with R'=κ(p), then the swap; finite type from the presentation variables. Step 2: the algebraic-closure point is Spec Ω→Spec κ(p)→V→Y, which is the node's t, and the item's lci convention matches the node's cover hypothesis. Step 3 is elementary. Step 4: flat-ring-map-iff-flat-affine, stalks unchanged on open neighbourhoods, and the literal definitions of flatness and of fp at a point. Step 5: ȳ factors through κ(p); lci includes finitely generated by definition (2); the cover node's hypotheses hold for (U_ab)_b. Both new statements are true: chart iso by 01JR/01I4, affine-open locality, 00SJ descent with S of finite type and ascent, and W_b cover because f∘π=t∘pr₂ lands in V. Tested on U=∅, J=∅, an empty fibre (A=k[t], B=k[t,x]/(tx−1), p=(t)), K=k, transcendental and inseparable K, k[x]/(x²) and the non-lci k[x,y]/(x,y)². A scan of every DAG node whose statement combines complete intersection, κ, a field extension and a fibre found no duplicate. No cycle; no SGA; every cited id exists and is unmerged; proof_deps equals the union of the uses; split_report.tool_uses is []. Batch-5 flags: both new nodes are generic 00SJ/01JR/01I4 scheme algebra, not steps of the trace-formula or Poincaré-duality proofs, and they cite no node from those chapters; accepted. Maintainer note: the node-level tool_uses [lem-weil-pbc-lci-field-change] is stale for the assembly, which no longer cites it; the new nodes will need it when they are split. No fixes."
  },
  "lean": {
   "module": "Sheaf.TraceFormula.SyntomicGeometricFibresAffineCriterion",
@@ -268,5 +244,16 @@
   "result": "fix",
   "note": "Substantive review passed; complete replacement files are in fixes/. scompile reproduced the criterion module, while sibling compilation hit an overlay/cache dependency-order error."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

@@ -6,6 +6,11 @@ Authors: SHEAF group A6
 module
 
 public import Sheaf.AlgebraicGeometry.OrdinaryFiniteP1DecompositionMaps
+import all Sheaf.AlgebraicGeometry.FiniteP1ChernAdjunctMate
+import Sheaf.AlgebraicGeometry.FiniteP1ChernMapBaseChange
+import Sheaf.AlgebraicGeometry.OrdinaryFiniteClassArbitraryBase
+import all Sheaf.AlgebraicGeometry.FiniteTwistShiftedFactorComparisons
+import Sheaf.AlgebraicGeometry.OrdinaryFiniteP1EvaluationRecipeBaseChange
 
 /-! # The two ordinary projective-line components commute with arbitrary base change
 
@@ -16,12 +21,75 @@ Source: main-20261015, thm-amb-p1-decomposition.proof.md, Cartier class and base
 @[expose] public noncomputable section
 
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency true
 
 universe u
 
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 
 namespace AlgebraicGeometry.Etale
+
+set_option linter.auxLemma false in
+attribute [local instance 100000] DerivedCategoryModule._proof_1 DerivedCategoryModule._proof_2
+
+set_option linter.auxLemma false in
+attribute [local instance 100000]
+  ordinaryFinitePullback._proof_1 ordinaryFinitePullback._proof_2
+  ordinaryFinitePullback._proof_3 ordinaryFinitePullback._proof_4
+  ordinaryFinitePullback._proof_5 ordinaryFinitePullback._proof_6
+  ordinaryFinitePullback._proof_7 ordinaryFinitePullback._proof_8
+  ordinaryFinitePullback._proof_9 ordinaryFinitePullback._proof_10
+  ordinaryFinitePullback._proof_11 ordinaryFinitePullback._proof_12
+  ordinaryFinitePullback._proof_13
+
+attribute [local implicit_reducible] ordinaryFiniteSingleFunctor ordinaryFiniteDegreeZero
+
+attribute [local irreducible] singleFunctorPullbackMap
+  upperStar Functor.leftDerivedFunctor
+  Functor.rightDerivedFunctor Functor.mapDerivedCategory
+
+attribute [local irreducible] AlgebraicGeometry.ProjectiveSpace
+  HasDerivedCategory.ofIsGrothendieckAbelian DerivedCategory.singleFunctors
+
+private theorem adjunct_square_core
+    {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]
+    {L : C ⥤ D} {R : D ⥤ C} {L' : E ⥤ F} {R' : F ⥤ E}
+    (adj : L ⊣ R) (adj' : L' ⊣ R') (G : C ⥤ E) (H : D ⥤ F)
+    (θ : TwoSquare G L L' H) {P : C} {P' : E} {K : D} {K' : F}
+    (z : L.obj P ⟶ K) (z' : L'.obj P' ⟶ K') (b : G.obj P ⟶ P')
+    (d : H.obj K ⟶ K')
+    (hz : θ.natTrans.app P ≫ H.map z ≫ d = L'.map b ≫ z') :
+    G.map (adj.homEquiv _ _ z) ≫ (mateEquiv adj adj' θ).natTrans.app K ≫ R'.map d =
+      b ≫ adj'.homEquiv _ _ z' := by
+  rw [reassoc_of% adjunct_mate adj adj' G H θ z]
+  rw [← adj'.homEquiv_naturality_right, ← adj'.homEquiv_naturality_left]
+  apply congrArg (adj'.homEquiv _ _)
+  simpa only [Category.assoc] using hz
+
+private theorem native_general_adjunct_square (A : Type (u + 1)) [CommRing A]
+    {X X' Y Y' : Scheme.{u}} {q : X ⟶ Y} {q' : X' ⟶ Y'}
+    {g : X' ⟶ X} {f : Y' ⟶ Y} (sq : CommSq g q' q f)
+    {P : DerivedCategoryModule A Y} {P' : DerivedCategoryModule A Y'}
+    {K : DerivedCategoryModule A X} {K' : DerivedCategoryModule A X'}
+    (z : (ordinaryFinitePullback A q).obj P ⟶ K)
+    (z' : (ordinaryFinitePullback A q').obj P' ⟶ K')
+    (b : (ordinaryFinitePullback A f).obj P ⟶ P')
+    (d : (ordinaryFinitePullback A g).obj K ⟶ K')
+    (hz : (derivedSquareUpperStarIso (ModuleCat.{u + 1} A) sq).hom.app P ≫
+      (ordinaryFinitePullback A g).map z ≫ d = (ordinaryFinitePullback A q').map b ≫ z') :
+    (ordinaryFinitePullback A f).map
+        ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) q).homEquiv _ _ z) ≫
+      (derivedBaseChangeMap (ModuleCat.{u + 1} A) sq).app K ≫
+        (ordinaryFinitePushforward A q').map d =
+      b ≫ (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) q').homEquiv _ _ z' := by
+  dsimp only [derivedBaseChangeMap, derivedBaseChangeSquare, ordinaryFinitePushforward,
+    ordinaryFinitePullback]
+  exact adjunct_square_core
+    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) q)
+    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) q')
+    (ordinaryFinitePullback A f) (ordinaryFinitePullback A g)
+    (TwoSquare.mk _ _ _ _ (derivedSquareUpperStarIso (ModuleCat.{u + 1} A) sq).hom)
+    z z' b d hz
 
 /-- The actual scalar Kummer class pulls back to the actual scalar Kummer class,
 and its evaluation adjunct, as well as the constant unit, commutes with exchange.
@@ -76,6 +144,36 @@ theorem ordinaryFiniteP1_components_baseChange
         (ordinaryFinitePushforward A (ProjectiveLine S' ↘ S')).map
           (ordinaryFiniteUnitPullback A (ProjectiveSpace.map (ULift.{u} (Fin 2)) g)).hom =
         (p1DecompositionTwistPullback A N hN hA g hS (-1) (-2)).hom ≫
-          p1DecompositionChernAdjoint A N hN hA S' hS' c') := by sorry
+          p1DecompositionChernAdjoint A N hN hA S' hS' c') := by
+  let hP' : IsUnit (N : Γ(ProjectiveLine S', ⊤)) :=
+    (map_natCast (ProjectiveLine S' ↘ S').appTop.hom N) ▸
+      hS'.map (ProjectiveLine S' ↘ S').appTop.hom
+  obtain ⟨c', hc'⟩ := (ordinaryFiniteClass_bijective_arbitraryBase A (ProjectiveLine S')
+    (Scheme.finiteEtaleTateLine (ProjectiveLine S') N A hA) 2).2
+      (ordinaryFiniteP1KummerClass A N hA S' hP')
+  have hc'spec : ordinaryFiniteP1ChernSpec A N hA S' hP' c' := hc'
+  refine ⟨c', hc'spec, ?_, ?_⟩
+  · unfold p1DecompositionUnit
+    rw [line_projective_exchange]
+    have h := native_adjunct_square A
+      (ProjectiveSpace.isPullback_map (ULift.{u} (Fin 2)) g).toCommSq
+      (𝟙 (ordinaryFiniteUnit A (ProjectiveLine S)))
+      (𝟙 (ordinaryFiniteUnit A (ProjectiveLine S')))
+      (ordinaryFiniteUnitPullback A (ProjectiveSpace.map (ULift.{u} (Fin 2)) g)).hom
+      (by simp)
+    simpa only [Category.comp_id] using h
+  · have hcmap := ordinaryFiniteP1_chern_map_baseChange A N hN hA
+      (positive_transport A N hN hA) g hS hS' c c' hc hc'spec
+    have hz := ordinaryFiniteP1_evaluationRecipe_baseChange A N hN hA
+      (positive_transport A N hN hA)
+      (ProjectiveSpace.isPullback_map (ULift.{u} (Fin 2)) g).toCommSq hS hS'
+      ((map_natCast (ProjectiveLine S ↘ S).appTop.hom N) ▸
+        hS.map (ProjectiveLine S ↘ S).appTop.hom) hP' c c' hcmap
+    unfold p1DecompositionChernAdjoint
+    rw [p1DecompositionTensorAdjoint, p1DecompositionTensorAdjoint, line_projective_exchange]
+    exact native_general_adjunct_square A
+      (ProjectiveSpace.isPullback_map (ULift.{u} (Fin 2)) g).toCommSq _ _
+      (p1DecompositionTwistPullback A N hN hA g hS (-1) (-2)).hom
+      (ordinaryFiniteUnitPullback A (ProjectiveSpace.map (ULift.{u} (Fin 2)) g)).hom hz
 
 end AlgebraicGeometry.Etale

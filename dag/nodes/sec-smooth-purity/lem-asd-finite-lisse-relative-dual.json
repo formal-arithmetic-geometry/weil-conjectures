@@ -1,0 +1,128 @@
+{
+ "id": "lem-asd-finite-lisse-relative-dual",
+ "kind": "statement",
+ "title": "Finite-lisse relative coefficient dual",
+ "statement": "Let Lambda be a finite commutative ring which is a field, X a scheme, L a finite locally constant Lambda-module sheaf, and W an invertible bounded constructible finite-Tor complex. Put K=L[0] and N=RHom(K,W). Then N is dualizable and bounded constructible of finite Tor dimension, and the canonical W-bidual map K -> RHom(N,W) is an isomorphism. The notation is that of [def-constructible-finite-locally-constant] [def-pur-derived-internal-hom] [def-weil-pbc-derived-categories].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-smooth-generic/lem-asd-smooth-generic-direct-image.proof.md",
+  "place": "First two paragraphs: finite local system, invertible relative dualizing coefficient, and relative biduality."
+ },
+ "stmt_deps": [
+  "def-constructible-finite-locally-constant",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-derived-categories"
+ ],
+ "proof": [
+  {
+   "text": "Use flat_of_isField and the explicit exact pairing of the finite local system with its sheaf dual. The bounded degree-zero complex is termwise dualizable, so isDualizable_Q_obj and singleFunctorIsoCompQ show that K=L[0] is dualizable. The categorical invertible-dualizing lemmas give dualizability of RHom(K,W) and invertibility of the canonical W-bidual map. The coefficient dual of K is the degree-zero sheaf dual by dual_singleFunctor, hence bounded constructible of Tor amplitude [0,0]. The explicit isomorphism RHom(K,W) ≅ coefficientDual(K) tensor W and constructibleFiniteTor_tensor give bounded constructibility and finite Tor amplitude. The relative dual is an explicit internal Hom and the bidual map is the usual braided evaluation transpose followed by the equality isomorphism of this alias.",
+   "uses": [
+    "lem-fin-lisse-field-dual",
+    "lem-asd-source-finite-etale-tensor-ctf",
+    "lem-asd-source-invertible-relative-bidual",
+    "sk-lem-sf-twist-interchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-smooth-generic/lem-asd-smooth-generic-direct-image.proof.md",
+    "place": "First two paragraphs: finite local system, invertible relative dualizing coefficient, and relative biduality."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-fin-lisse-field-dual",
+  "lem-asd-source-finite-etale-tensor-ctf",
+  "lem-asd-source-invertible-relative-bidual",
+  "sk-lem-sf-twist-interchange"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-smooth-generic/lem-asd-smooth-generic-direct-image.proof.md",
+  "place": "First two paragraphs: finite local system, invertible relative dualizing coefficient, and relative biduality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite locally constant sheaf over a field, relative internal dual against invertible complex, canonical bidual map is invertible",
+   "results": "Eight condensed/light-condensed locally-constant sheaf comparisons; no relative-dual finiteness and biduality theorem. The adopted source supplies dual_singleFunctor and invertible-dualizing categorical identities.",
+   "date": "2026-10-26",
+   "verdict": "no combined match"
+  },
+  {
+   "tool": "loogle",
+   "query": "isIso_toIhomIhom, IsDualizable",
+   "results": "No hits; isIso_toIhomIhom is not a Mathlib identifier. The relevant invertible-dualizing API is in the adopted source.",
+   "date": "2026-10-26",
+   "verdict": "source API"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_toIhomIhom|isDualizable_ihom",
+   "results": "No Mathlib hits. Local adopted-source search supplies the generic duality ingredients.",
+   "date": "2026-10-26",
+   "verdict": "source ingredients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite locally constant sheaf over a field relative internal dual against an invertible complex is dualizable and satisfies biduality",
+   "results": "Eight constant-sheaf/condensed and finite-module-dual results; no combined relative-duality theorem.",
+   "date": "2026-10-26",
+   "verdict": "no exact Mathlib match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothCompactDualModel",
+  "date": "2026-10-26",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-smooth-compact-dual-model",
+   "place": "Coefficient-dual construction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SmoothLisseRelativeDual",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothLisseRelativeDual.lean",
+  "declaration": "AlgebraicGeometry.Etale.finiteLisseRelativeDual",
+  "statement": "theorem finiteLisseRelativeDual\n    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (hfield : IsField Λ) (X : Scheme.{u})\n    (L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    (hL : IsFiniteLocallyConstantSheaf L)\n    (W : DerivedCategoryModule Λ X)\n    (hW : DerivedCategory.isInvertible Λ X W)\n    (hWc : DerivedCategory.boundedConstructibleFiniteTor\n      Λ X W) :\n    let K := (_root_.DerivedCategory.singleFunctor _ 0).obj L\n    let N := smoothRelativeDual (ModuleCat Λ) X K W\n    smoothRelativeDualizable (ModuleCat Λ) X N ∧\n      DerivedCategory.boundedConstructibleFiniteTor Λ X N ∧\n      IsIso (smoothRelativeBidualMap\n        (ModuleCat Λ) X W K)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-26",
+  "declarations": [
+   "AlgebraicGeometry.Etale.smoothRelativeDualizable",
+   "AlgebraicGeometry.Etale.smoothRelativeDual",
+   "AlgebraicGeometry.Etale.smoothRelativeDual_eq",
+   "AlgebraicGeometry.Etale.smoothRelativeBidualMap",
+   "AlgebraicGeometry.Etale.finiteLisseRelativeDual"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-e3e16",
+  "group": "B3",
+  "result": "fix",
+  "landing": "20261026T065155-L-2731829",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-e3e16",
+  "group": "B3",
+  "result": "fix",
+  "landing": "20261026T065155-L-2731829",
+  "kind": "interface",
+  "note": "independent cc review: item SmoothCompactDualModel + 4 modules and 8 nodes against the packet, the clone (signatures, SmoothBaseChange import cycle, canonical-map definitions) and a sandbox compile of all delivered modules with the unchanged importer SmoothGenericDirectImage (exit 0) and #print axioms"
+ }
+}

@@ -1,0 +1,417 @@
+{
+ "id": "lem-sfb-space-chow-configuration",
+ "kind": "statement",
+ "title": "The compactified distinct-tuple configuration of an affine etale atlas",
+ "statement": "Work over $\\operatorname{Spec}\\mathbf Z$ with schemes [def-pc-scheme, def-weil-affine-spectrum] and algebraic spaces [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Give spaces the atlas topology [def-a1-space-point-topology]. For morphisms of spaces, separated means that the representable diagonal is a closed immersion on every scheme test [def-weil-closed-immersion]; quasi-compact means that inverse images of quasi-compact opens are quasi-compact; quasi-separated means that the diagonal is quasi-compact. Locally of finite type and locally of finite presentation are tested on etale scheme charts [def-weil-finite-type-morphism, def-sbc-locally-finite-presentation]. Finite type means quasi-compact and locally of finite type; finite presentation means quasi-compact, quasi-separated, and locally of finite presentation. Proper means separated, of finite type, and universally closed, where universally closed means closed on underlying spaces after every algebraic-space base change (agreeing with the scheme convention [def-weil-proper-morphism]). Let $B=\\operatorname{Spec}A$ for a commutative ring $A$, let $X\\to B$ be separated of finite type, and let $f:W\\to X$ be a representable surjective etale map from an affine scheme of finite type over $B$ [def-weil-etale-morphism]. Let $d\\geq1$ bound all geometric fibre cardinalities of $f$. Assume that the locus $U\\subset X$ of fibres of cardinality $d$ is open and that $W\\times_XU\\to U$ is finite etale of degree $d$ (its etale-local finite locally free algebra has rank $d$). Choose an open immersion [def-weil-open-immersion] $W\\hookrightarrow Y$ over $B$ and a closed immersion $Y\\hookrightarrow\\mathbf P^m_B$ into projective space over $B$ [def-nagata-projective-space-base-change] for an integer $m\\geq0$. Put $F=W\\times_X\\cdots\\times_XW$ with $d$ factors, and let $V\\subset F$ be the complement of the pairwise equality diagonals. Let $Z$ be the scheme-theoretic image [def-nagata-scheme-theoretic-image] of $V\\to Y\\times_B\\cdots\\times_BY$, and let $g_i:Z\\to Y$ be its $i$th projection. Then $F$ is an affine scheme, $V$ is a quasi-compact open and closed subscheme of $F$, and $V\\to Z$ is a quasi-compact open immersion with scheme-theoretically and topologically dense image [def-nagata-scheme-theoretically-dense-open]. Each $g_i$ is a proper morphism of schemes, and $Z$ admits a closed immersion into a finite projective space over $B$. The open subscheme\n$$H=\\bigcup_{i=1}^d g_i^{-1}(W)\\subset Z$$\nis quasi-compact and separated and admits a quasi-compact immersion into a finite projective space over $B$. The maps $f\\circ g_i:g_i^{-1}(W)\\to X$ agree on overlaps and define a separated finite-type morphism $p:H\\to X$. The open $V$ is contained in $H$ and is scheme-theoretically and topologically dense there. The composite $V\\to H\\xrightarrow{p}X$ factors through $U$ and is surjective onto $U$. For every field $K$ [def-weil-field] and $v\\in V(K)$ with image $x\\in X(K)$, the $d$ coordinate sections identify $W\\times_{X,x}\\operatorname{Spec}K$ with $\\coprod_{i=1}^d\\operatorname{Spec}K$; this identification remains true after every field extension of $K$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 089J (lemma-weak-chow), proof from the definition of V through the construction of Xprime and its glued morphism, excluding the properness claim and the induction; the coordinate completeness used in the last paragraph."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-space-point-topology",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-proper-morphism",
+  "def-nagata-projective-space-base-change",
+  "def-weil-open-immersion",
+  "def-weil-etale-morphism",
+  "def-weil-field",
+  "def-nagata-scheme-theoretic-image",
+  "def-nagata-scheme-theoretically-dense-open",
+  "def-sfb-space-morphism-properties",
+  "def-a1-space-open-subspace",
+  "def-trf-scheme-algebraic-space"
+ ],
+ "proof": [
+  {
+   "text": "Write $F_r=W\\times_X\\cdots\\times_XW$ ($r$ factors). Start with $F_1=W$. Inductively the projection $F_r\\to X$ is representable etale: its projections are base changes of $f$, followed by composition. Apply [lem-trf-space-separated-affine-chart-overlap] to the affine etale charts $F_r,W\\to X$ over the affine base $B$. It gives an affine scheme $F_{r+1}$ and a closed immersion $F_{r+1}\\to F_r\\times_BW$. Induction and [lem-weil-pbc-closed-immersion-base-change, lem-weil-pbc-closed-immersion-products] give a closed immersion $F\\to W^d_B$. This includes $d=1$, when it is the identity. Thus $F$ is affine and quasi-compact.",
+   "uses": [
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-trf-space-separated-affine-chart-overlap",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-products",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 089J (lemma-weak-chow), the iterated fibre product before defining V"
+   }
+  },
+  {
+   "text": "Put $R=W\\times_XW$. The first projection $R\\to W$ is etale, and it is separated since $R$ is affine. Its diagonal section $W\\to R$ is therefore open and closed by [lem-weil-pbc-etale-section-clopen-immersion]. For each pair $i<j$, the equality locus in $F$ is the pullback of this section by the $(i,j)$ projection. Closed immersions remain closed under base change, and open subschemes pull back to inverse-image opens. The finite union of these clopen loci is clopen. Its complement $V$ is therefore open and closed in the quasi-compact affine scheme $F$, and is quasi-compact. For $d=1$ the union is empty and $V=F$.",
+   "uses": [
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-weil-pbc-etale-section-clopen-immersion",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-open-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 089J (lemma-weak-chow), the open and closed diagonals and quasi-compactness of V"
+   }
+  },
+  {
+   "text": "Put $T=Y^d_B$. The product $W^d_B\\to T$ is an open immersion by repeated [lem-weil-pbc-open-fibre-product]. Combining it with the closed immersion $F\\to W^d_B$ of step 1 and the clopen inclusion $V\\to F$ shows that $V\\to T$ is an immersion: $V$ is closed in $F$, hence closed in the open $W^d_B\\subset T$. The given closed immersion $Y\\to\\mathbf P^m_B$, products of closed immersions, and $d-1$ binary Segre embeddings give a closed immersion $T\\to\\mathbf P^N_B$ with $N=(m+1)^d-1$. All products and Segre embeddings are over $B$.",
+   "uses": [
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-closed-immersion-products",
+    "lem-chow-segre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 089J (lemma-weak-chow), the immersion into the product of projective compactifications"
+   }
+  },
+  {
+   "text": "The closed immersion $T\\to\\mathbf P^N_B$ makes $T\\to B$ proper, hence separated. Since $B$ is affine, $T$ is a separated scheme, and hence quasi-separated. As $V$ is quasi-compact, [lem-weil-pbc-qcqs-morphism-permanence] makes $V\\to T$ quasi-compact. Apply [lemma-nagata-immersion-open-in-scheme-image] to this immersion: its canonical factor $V\\to Z$ is a quasi-compact open immersion, scheme-theoretically and topologically dense. The composite closed immersion $Z\\to T\\to\\mathbf P^N_B$ supplies the required projective embedding of $Z$. In particular $Z\\to B$ is proper and $Z$ is separated and quasi-compact.",
+   "uses": [
+    "lemma-nagata-projective-space-base-change-proper",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-sc-separated-over-affine-scheme-separated",
+    "lem-pc-separated-quasi-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lemma-nagata-immersion-open-in-scheme-image",
+    "lem-weil-pbc-closed-immersion-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 089J (lemma-weak-chow), scheme-theoretic image Z and the dense open immersion V -> Z"
+   }
+  },
+  {
+   "text": "The given projective embedding makes $Y\\to B$ proper. Each projection $T=Y^d_B\\to Y$ is a composition of base changes of $Y\\to B$ (the identity when $d=1$), hence proper. Its restriction along the closed immersion $Z\\to T$ is the proper morphism $g_i$. Put $H_i=g_i^{-1}(W)$. Properness includes quasi-compactness, so the inverse image $H_i$ of the quasi-compact open $W$ is quasi-compact. Thus the finite union $H=\\bigcup_i H_i$ is quasi-compact. It contains $V$, since every coordinate of $V$ lies in $W$.",
+   "uses": [
+    "lemma-nagata-projective-space-base-change-proper",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-proper-composition",
+    "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 089J (lemma-weak-chow), proper projections and the definition of Xprime as the union of their inverse images"
+   }
+  },
+  {
+   "text": "The open $H\\subset Z$ is separated over $B$: its diagonal is the pullback of the closed diagonal of $Z/B$ along $H\\times_BH\\to Z\\times_BZ$. Closed immersions are stable under base change. The same argument over $\\operatorname{Spec}\\mathbf Z$ shows that $H$ is a separated scheme. Since $H$ is quasi-compact and $Z$ is quasi-separated, $H\\to Z$ is quasi-compact. It is an immersion: as $Z\\to\\mathbf P^N_B$ is a homeomorphism onto a closed subset, $H=Z\\cap O$ for an open $O\\subset\\mathbf P^N_B$, and $H=Z\\times_{\\mathbf P^N_B}O\\to O$ is a closed immersion by base change, followed by the open immersion $O\\subset\\mathbf P^N_B$ [lem-weil-pbc-open-fibre-product]. It is quasi-compact: for any quasi-compact open of projective space its inverse image in $Z$ is quasi-compact, and its further inverse image in $H$ is quasi-compact. This gives precisely the required immersion, without assuming that every open of a quasi-compact scheme is quasi-compact.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open",
+    "lem-weil-pbc-open-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 089J (lemma-weak-chow), H-quasi-projectivity of the constructed open Xprime"
+   }
+  },
+  {
+   "text": "Restrict the injection $\\mathcal O_Z\\to j_*\\mathcal O_V$ to any open $O\\subset Z$ containing $V$. On every open $Q\\subset O$ it is the same injective map $\\mathcal O_Z(Q)\\to\\mathcal O_V(Q\\cap V)$; hence $V$ is schematically dense in $O$. Its topological density restricts as well: every nonempty open of $O$ is a nonempty open of $Z$ and meets $V$. Take $O=H$ and $O=H_i\\cap H_j$. In these opens $V$ is still a quasi-compact open immersion, by quasi-compactness of $V$ and quasi-separatedness of the ambient open subscheme of $Z$.",
+   "uses": [
+    "def-nagata-scheme-theoretically-dense-open",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 089J (lemma-weak-chow), density in Xprime and the projection overlaps"
+   }
+  },
+  {
+   "text": "On $O=H_i\\cap H_j$ compare $a_i=f g_i$ and $a_j=f g_j$. Both are $B$-morphisms, equal on $V$ because the coordinates of $F$ have the same image in $X$. Their equalizer $E=O\\times_{X\\times_BX}X\\to O$ is a closed immersion by the separated-diagonal hypothesis on $X/B$. Its ideal sheaf $\\mathcal I$ restricts to zero on $V$. Each section of $\\mathcal I(Q)$ thus maps to zero in $\\mathcal O_V(Q\\cap V)$, so the injection of step 7 forces $\\mathcal I=0$. The affine quotient description of closed immersions gives $E=O$. Hence the maps agree on overlaps. For a scheme $L\\to H$, the inverse images of $H_i$ form a Zariski, hence fppf, covering; the compatible sections of the fppf sheaf $X$ glue uniquely. Uniqueness makes these glued sections functorial in $L$, giving $p:H\\to X$ with the required restrictions.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-pc-fppf-site",
+    "def-nagata-scheme-theoretically-dense-open",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 089J (lemma-weak-chow), agreement on overlaps, Tag 084N (lemma-equality-of-morphisms), with its closed-equalizer proof written out"
+   }
+  },
+  {
+   "text": "The morphism $H\\to B$ is finite type: $H\\to Z$ is a quasi-compact open immersion, $Z\\to B$ is proper, and finite-type scheme maps compose. Apply [lem-sfb-space-lft-cancellation] to $H\\xrightarrow p X\\to B$ to obtain local finite type of $p$. The space $X$ is quasi-separated: its absolute diagonal factors as its closed diagonal over $B$ followed by the pullback of the closed diagonal of the affine scheme $B/\\operatorname{Spec}\\mathbf Z$. On affine scheme tests these are closed immersions, and their composite is closed, hence quasi-compact. Now [lem-sfb-space-qcqs-permanence] applies to the quasi-compact source $H$ and gives quasi-compactness of $p$, hence finite type. Finally $H\\to H\\times_XH$ is the pullback of the closed diagonal $H\\to H\\times_BH$. Thus $p$ is separated, with no assumption that $X$ is a scheme.",
+   "uses": [
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-sfb-space-lft-cancellation",
+    "lem-sfb-space-qcqs-permanence",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-products",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 089J (lemma-weak-chow), separatedness and finite type at the beginning of the properness-claim proof"
+   }
+  },
+  {
+   "text": "For a field $K$ and $v\\in V(K)$, put $x=p(v)$ and $P=W\\times_{X,x}\\operatorname{Spec}K$. It is a scheme etale over $K$. By [lem-weil-pbc-etale-fibre-discrete-separable-points] it is a disjoint union of spectra of finite separable extensions. A $K$-section selects a component and a $K$-embedding of its residue field into $K$, forcing that component to be $\\operatorname{Spec}K$ with its unique section. The $d$ pairwise distinct coordinate sections therefore select $d$ different degree-one components. After an algebraic closure of $K$ these already give $d$ distinct geometric points; the assumed upper bound leaves no other components. The coordinate maps give $P\\simeq\\coprod_{i=1}^d\\operatorname{Spec}K$. Base change of this very isomorphism to any extension $K'/K$ gives the last assertion with the same labels.",
+   "uses": [
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 089J (lemma-weak-chow), the last paragraph: coordinate points are the complete set of inverse images"
+   }
+  },
+  {
+   "text": "Every geometric point of $V$ has $d$ distinct coordinate points in the fibre of $f$; the upper bound says the fibre has exactly $d$ points. Thus its image lies in the given open $U$, so $V\\to X$ factors uniquely through the open subspace $U$ by [lem-a1-space-open-factor-scheme-tests]. Conversely let $\\operatorname{Spec}\\Omega\\to U$ be a geometric point. The hypothesis that $W_U\\to U$ is finite etale of rank $d$ gives a fibre of dimension $d$ over $\\Omega$. By the etale-fibre description this is a disjoint union of $d$ copies of $\\operatorname{Spec}\\Omega$, because $\\Omega$ is algebraically closed. Enumerate those copies. Their ordered tuple is an $\\Omega$-point of $V$ above the chosen point. Hence $V\\to U$ is surjective on point classes, as asserted. No nonemptiness of $U$ was assumed or used.",
+   "uses": [
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "def-a1-space-point-topology",
+    "lem-a1-space-open-factor-scheme-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 089J (lemma-weak-chow), V surjects onto U in the induction paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-a1-space-point-topology",
+  "def-nagata-scheme-theoretically-dense-open",
+  "def-pc-fppf-site",
+  "def-trf-algebraic-space",
+  "def-weil-closed-immersion",
+  "lem-a1-space-open-factor-scheme-tests",
+  "lem-chow-segre",
+  "lem-pc-separated-quasi-separated",
+  "lem-sc-separated-over-affine-scheme-separated",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sfb-space-lft-cancellation",
+  "lem-sfb-space-qcqs-permanence",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-trf-space-separated-affine-chart-overlap",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-products",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-etale-section-clopen-immersion",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open",
+  "lemma-nagata-immersion-open-in-scheme-image",
+  "lemma-nagata-projective-space-base-change-proper"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 089J (lemma-weak-chow), configuration and closure construction, overlaps, finite-type/separatedness assertion, and coordinate-completeness paragraph; subsidiary arguments expanded from the cited scheme and space definitions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compactify the configuration of ordered distinct points of an etale atlas by scheme theoretic closure in a product of projective schemes",
+   "results": "8 hit(s); AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty, AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty', AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme gluing, affine-cover compactness and unrelated limit declarations do not construct the distinct-tuple compactification over an algebraic space."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Chow construction: projections from the closure of the configuration space glue on open subsets to a map to a separated algebraic space",
+   "results": "8 hit(s); AlgebraicGeometry.Scheme.Cover.fromGlued, AlgebraicGeometry.Scheme.GlueData.ι, AlgebraicGeometry.Scheme.Cover.ι_fromGlued, AlgebraicGeometry.Scheme.Cover.gluedCover_f, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_f, AlgebraicGeometry.Scheme.Cover.glueMorphisms, AlgebraicGeometry.Scheme.Pullback.p1, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_openCover_map",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme gluing, affine-cover compactness and unrelated limit declarations do not construct the distinct-tuple compactification over an algebraic space."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"schemeTheoreticImage\", \"IsOpenImmersion\"",
+   "results": "0 hit(s); none",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme gluing, affine-cover compactness and unrelated limit declarations do not construct the distinct-tuple compactification over an algebraic space."
+  },
+  {
+   "tool": "grep",
+   "query": "configuration|schemeTheoreticImage|chow",
+   "results": "0 hit(s); none",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme gluing, affine-cover compactness and unrelated limit declarations do not construct the distinct-tuple compactification over an algebraic space."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Configuration space compactification of an affine etale atlas for Chow lemma",
+   "results": "8 hit(s); AlgebraicGeometry.IsAffineOpen.isCompact, AlgebraicGeometry.Scheme.compactSpace_of_isAffine, AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace, AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen, AlgebraicGeometry.Scheme.OpenCover.compactSpace, AlgebraicGeometry.compactSpace_iff_exists, AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion, AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme gluing, affine-cover compactness and unrelated limit declarations do not construct the distinct-tuple compactification over an algebraic space."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"schemeTheoreticImage\", \"IsOpenImmersion\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: these are scheme separation, general immersion, projective properness or etale-fibre tools; none states the full algebraic-space configuration construction."
+  },
+  {
+   "tool": "grep",
+   "query": "configuration|schemeTheoreticImage|chow",
+   "results": "25 hits: Mathlib/Util/PrintSorries.lean, Mathlib/Util/AtomM/Recurse.lean, Mathlib/Util/AtomM/Recurse.lean, Mathlib/Util/AtomM/Recurse.lean, Mathlib/Tactic/Push.lean, Mathlib/Tactic/Push.lean, Mathlib/Tactic/Push.lean, Mathlib/Tactic/Algebraize.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: these are scheme separation, general immersion, projective properness or etale-fibre tools; none states the full algebraic-space configuration construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separated algebraic space has affine iterated fibre products of affine charts and clopen distinct tuple configurations",
+   "results": "8 hits: AlgebraicGeometry.IsSeparated.hasAffineProperty, AlgebraicGeometry.Proj.isSeparated, AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover, AlgebraicGeometry.Proj.instIsSeparated, AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine, AlgebraicGeometry.IsSeparated.instMap, AlgebraicGeometry.IsSeparated.instFstScheme, AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine",
+   "date": "2026-10-23",
+   "verdict": "no match: these are scheme separation, general immersion, projective properness or etale-fibre tools; none states the full algebraic-space configuration construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compactified distinct tuple configuration of an etale atlas of a separated algebraic space",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.quasiSeparatedSpace_iff_affine, Algebra.FormallyEtale.iff_exists_algEquiv_prod, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift, AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated, AlgebraicGeometry.Scheme.OpenCover.compactSpace, AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover",
+   "date": "2026-10-23",
+   "verdict": "no match: these are scheme separation, general immersion, projective properness or etale-fibre tools; none states the full algebraic-space configuration construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The closure of an immersion from a quasi compact scheme into a projective scheme has proper projections and dense open source",
+   "results": "8 hits: AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.instIsClosedImmersionLiftCoborder, AlgebraicGeometry.Proj.isSeparated, AlgebraicGeometry.IsImmersion.isImmersion_iff_exists_of_quasiCompact, AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion",
+   "date": "2026-10-23",
+   "verdict": "no match: these are scheme separation, general immersion, projective properness or etale-fibre tools; none states the full algebraic-space configuration construction."
+  },
+  {
+   "tool": "grep",
+   "query": "schemeTheoreticImage|distinct.*tuple|Chow|configuration",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: these are scheme separation, general immersion, projective properness or etale-fibre tools; none states the full algebraic-space configuration construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-weak-chow",
+  "date": "2026-10-23",
+  "group": "NS"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D55 (lemma-curves-limits). Input to Tag 0D55: Tag 08K1 (lemma-eventually-proper), in Situation 084W (situation-descent-property), specialized to a finitely presented space over an affine base; persistence at later stages: spaces-morphisms.tex, Tag 04WP (lemma-base-change-proper). Supporting input to Tag 08K1: Tag 089J (lemma-weak-chow); H-quasi-projectivity is the quasi-compact immersion in morphisms.tex Tag 01VW (definition-quasi-projective), (2). Universal surjectivity uses spaces-morphisms.tex Tag 03MH (lemma-base-change-surjective). Supporting input to Tag 089J, configuration V, closure Z, and union of projection inverse images, before the properness claim.",
+   "via": [
+    "lem-sfb-space-weak-chow",
+    "lem-sfb-space-eventually-proper",
+    "lem-sfb-curve-limit-preservation",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-chow-configuration",
+  "worker": "stage1",
+  "summary": "Checked Tag 089J against the unchanged statement. Expanded the affine iterated relation, clopen diagonals, immersion and Segre model, schematic closure, proper projections, quasi-compact open union, closed-equalizer gluing, relative finite type and separation, and complete labelled field fibres. Existing DAG statements suffice; no new nodes and no Lean attachment.",
+  "blueprint": "The inherited supporting-input chain for det-thm-sf-ctf-stability-direct-images (3), alteration input, reaches Tag 089J. Steps 1-4 realize its V and Z paragraphs; 5-8 the projection-union and glued map; 9 the first sentence of the properness claim; 10-11 coordinate completeness and V -> U. The current latest thm-sf-ctf-stability proof has a revised direct-image route, but this local item follows its explicit Stacks source without altering the unit or chapter.",
+  "tool_uses": [
+   {
+    "node": "lem-chow-segre",
+    "why": "Generic geometry input in the existing Tag 089J configuration route: The Segre embedding is a closed immersion. The item unit contains no replacement for this scheme/space lemma."
+   },
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Generic geometry input in the existing Tag 089J configuration route: Scheme tests and comparison maps for representable etale morphisms. The item unit contains no replacement for this scheme/space lemma."
+   },
+   {
+    "node": "lem-trf-space-separated-affine-chart-overlap",
+    "why": "Generic geometry input in the existing Tag 089J configuration route: Affine overlaps of affine charts of a separated space over an affine base. The item unit contains no replacement for this scheme/space lemma."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-products",
+    "why": "Generic geometry input in the existing Tag 089J configuration route: Closure of the closed-immersion and finite-type properties. The item unit contains no replacement for this scheme/space lemma."
+   },
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "Generic geometry input in the existing Tag 089J configuration route: The fibres of an etale morphism are disjoint unions of spectra of finite separable field extensions. The item unit contains no replacement for this scheme/space lemma."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Generic geometry input in the existing Tag 089J configuration route: Projective space is proper over its base. The item unit contains no replacement for this scheme/space lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-chow-segre",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-trf-space-separated-affine-chart-overlap",
+  "lem-weil-pbc-closed-immersion-products",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lemma-nagata-projective-space-base-change-proper"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-86235a735",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-86235a735 (reviewer sub-agent of L); spot-checked: I read Stacks 089J (spaces-cohomology.tex lemma-weak-chow) and its full proof. The item covers the construction part: V, Z, g_i, X'=H, the glued p, the sentence 'separated and of finite type', coordinate completeness and V onto U. The statement is unchanged, nothing is weakened, and the item is still unsplit on live, so it has not been superseded. There are no new nodes and no cycle, and the uses equal proof_deps. I checked each step against the statements of the cited nodes: 03EC/03M9 for the affine iterated product, 024T for the clopen diagonals, 01JR+Segre for the immersion into P^N, 01RG for the dense open in Z, proper projections with 01K4, the 084N closed-equalizer gluing written out, 0462+073B for p of finite type with X quasi-separated, and 02GL for the split K-fibre and the surjectivity onto U. Small cases checked: d=1, m=0, empty U, non-reduced A, non-split fibre. Two repairs, both C1/E5: (1) step 6 asserted that the open-then-closed composite H->Z->P^N is an immersion without writing H=Z∩O as a closed subscheme of the open O; I added the argument and cited lem-weil-pbc-open-fibre-product. (2) Step 11 used an uncited 'universal property of an open subspace'; I cited lem-a1-space-open-factor-scheme-tests (generic, no cycle). Batch-5: lem-trf-space-representable-etale-scheme-tests, lem-trf-space-separated-affine-chart-overlap and lem-sfb-space-lft-cancellation (via def-trf-algebraic-space) are generic foundations of algebraic spaces. Their closures contain only trf space definitions and lemmas, nothing from the trace-formula or Poincaré-duality proofs, so I accepted them. The listed tool_uses are accepted as generic geometry inputs of the 089J route.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceChowConfiguration",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_space_chow_configuration",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.chowConfigurationBase",
+   "AlgebraicGeometry.AlgebraicSpace.chowAbsolute",
+   "AlgebraicGeometry.AlgebraicSpace.chowAbsoluteMap",
+   "AlgebraicGeometry.AlgebraicSpace.exists_space_chow_configuration"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceChowConfiguration.lean",
+  "statement": "theorem exists_space_chow_configuration (A : CommRingCat.{u}) (X : AlgebraicSpace chowConfigurationBase) (s : X ⟶ schemeSpace (chowAbsolute (Spec A))) (hs : MapIsSeparated s) (hft : MapIsFiniteType s) (W : Over (Spec A)) (hWa : IsAffine W.left) (hWft : LocallyOfFiniteType W.hom ∧ QuasiCompact W.hom) (f : schemeSpace (chowAbsolute W.left) ⟶ X) (hf : IsEtale f.hom.hom) (hfs : IsSurjective f.hom.hom) (hfsB : f.hom.hom ≫ s.hom.hom = yoneda.map (chowAbsoluteMap W.hom)) (d : ℕ) (hd : 1 ≤ d) (hbound : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : X.obj.obj.obj (op (chowAbsolute (Spec (.of Ω))))), Finite {w : Spec (.of Ω) ⟶ W.left // f.hom.hom.app _ (chowAbsoluteMap w) = x} ∧ Nat.card {w : Spec (.of Ω) ⟶ W.left // f.hom.hom.app _ (chowAbsoluteMap w) = x} ≤ d) (U : OpenSubspace X) (hU : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : X.obj.obj.obj (op (chowAbsolute (Spec (.of Ω))))), x ∈ U.val.obj _ ↔ Nat.card {w : Spec (.of Ω) ⟶ W.left // f.hom.hom.app _ (chowAbsoluteMap w) = x} = d) (hUfinite : IsRepresentableWith (fun _ _ p ↦ IsFinite p.left ∧ Etale p.left) (pullback.snd f.hom.hom U.val.ι)) (Y : Over (Spec A)) (j : W ⟶ Y) (hj : IsOpenImmersion j.left) (m : ℕ) (eY : Y.left ⟶ ProjectiveSpace (ULift.{u} (Fin (m + 1))) (Spec A)) (heY : IsClosedImmersion eY) (heYB : eY ≫ (ProjectiveSpace.over _ _).hom = Y.hom) : ∃ (F : Over (Spec A)) (π : Fin d → (F ⟶ W)) (q : schemeSpace (chowAbsolute F.left) ⟶ X), (∀ i : Fin d, yoneda.map (chowAbsoluteMap (π i).left) ≫ f.hom.hom = q.hom.hom) ∧ (∀ (T : Scheme.{u}) (x : yoneda.obj (chowAbsolute T) ⟶ X.obj.obj) (a : Fin d → (T ⟶ W.left)), (∀ i : Fin d, yoneda.map (chowAbsoluteMap (a i)) ≫ f.hom.hom = x) → ∃! l : T ⟶ F.left, (∀ i : Fin d, l ≫ (π i).left = a i) ∧ yoneda.map (chowAbsoluteMap l) ≫ q.hom.hom = x) ∧ IsAffine F.left ∧ ∃ V : F.left.Opens, (V : Set F.left) = (⋃ (i : Fin d) (k : Fin d) (_ : i ≠ k), Set.range (equalizer.ι (π i).left (π k).left))ᶜ ∧ IsClosed (V : Set F.left) ∧ CompactSpace V.toScheme ∧ ∃ (T : Over (Spec A)) (ρ : Fin d → (T ⟶ Y)) (a : Over.mk (V.ι ≫ F.hom) ⟶ T), Nonempty (IsLimit (Fan.mk T ρ)) ∧ (∀ i : Fin d, a.left ≫ (ρ i).left = V.ι ≫ (π i).left ≫ j.left) ∧ IsOpenImmersion a.left.toImage ∧ QuasiCompact a.left.toImage ∧ IsSchemeTheoreticallyDominant a.left.toImage ∧ DenseRange a.left.toImage ∧ (∀ i : Fin d, IsProper (a.left.imageι ≫ (ρ i).left)) ∧ (∃ (N : ℕ) (eZ : a.left.image ⟶ ProjectiveSpace (ULift.{u} (Fin (N + 1))) (Spec A)), IsClosedImmersion eZ ∧ eZ ≫ (ProjectiveSpace.over _ _).hom = a.left.imageι ≫ T.hom) ∧ ∃ H : a.left.image.Opens, (H : Set a.left.image) = ⋃ i : Fin d, (a.left.imageι ≫ (ρ i).left) ⁻¹' Set.range j.left ∧ CompactSpace H.toScheme ∧ H.toScheme.IsSeparated ∧ (∃ (N : ℕ) (eH : H.toScheme ⟶ ProjectiveSpace (ULift.{u} (Fin (N + 1))) (Spec A)), IsImmersion eH ∧ QuasiCompact eH ∧ eH ≫ (ProjectiveSpace.over _ _).hom = H.ι ≫ a.left.imageι ≫ T.hom) ∧ ∃ (p : schemeSpace (chowAbsolute H.toScheme) ⟶ X) (k : ∀ i : Fin d, Limits.pullback (a.left.imageι ≫ (ρ i).left) j.left ⟶ H.toScheme) (r : V.toScheme ⟶ H.toScheme), p.hom.hom ≫ s.hom.hom = yoneda.map (chowAbsoluteMap (H.ι ≫ a.left.imageι ≫ T.hom)) ∧ (∀ i : Fin d, k i ≫ H.ι = pullback.fst (a.left.imageι ≫ (ρ i).left) j.left ∧ yoneda.map (chowAbsoluteMap (k i)) ≫ p.hom.hom = yoneda.map (chowAbsoluteMap (pullback.snd (a.left.imageι ≫ (ρ i).left) j.left)) ≫ f.hom.hom) ∧ MapIsSeparated p ∧ MapIsFiniteType p ∧ r ≫ H.ι = a.left.toImage ∧ IsOpenImmersion r ∧ QuasiCompact r ∧ IsSchemeTheoreticallyDominant r ∧ DenseRange r ∧ ∃ vU : yoneda.obj (chowAbsolute V.toScheme) ⟶ U.val.toFunctor, vU ≫ U.val.ι = yoneda.map (chowAbsoluteMap r) ≫ p.hom.hom ∧ pointImage vU = Set.univ ∧ ∀ (K : Type u) [Field K] (v : Spec (.of K) ⟶ V.toScheme) (L : Type u) [Field L] (b : K →+* L), ∃ (P : Over (Spec (.of L))) (w : P.left ⟶ W.left) (c : Fin d → (Over.mk (𝟙 (Spec (.of L))) ⟶ P)), IsPullback (yoneda.map (chowAbsoluteMap w)) (yoneda.map (chowAbsoluteMap P.hom)) f.hom.hom (yoneda.map (chowAbsoluteMap (Spec.map (CommRingCat.ofHom b) ≫ v ≫ r)) ≫ p.hom.hom) ∧ (∀ i : Fin d, (c i).left ≫ w = Spec.map (CommRingCat.ofHom b) ≫ v ≫ V.ι ≫ (π i).left) ∧ Nonempty (IsColimit (Cofan.mk P c))",
+  "branch": "sheaf-dag",
+  "by": "NB",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The theorem specifies F and Y^d_B by their universal properties, V by the complement of the equality diagonals, Z by the literal scheme-theoretic image, and H by the specified union. The labelled field-fibre coproduct is asserted after every field extension, including the identity. Finite etale degree d is rendered by finite etale scheme tests and geometric fibre cardinality d. Three existing definition interfaces are added to stmt_deps, including def-trf-scheme-algebraic-space for schemeSpace. Repair of returned head 6b5b587c46c4: replace the irrelevant enlarged-site theorem dependency and SpaceCotangentRingMap import by the definition owner and EnlargedEtaleRingedSite. The theorem signature is unchanged; the other declarations only supply the canonical Spec Z base and its scheme/morphism bookkeeping."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ca935958b",
+  "group": "NB",
+  "result": "pass",
+  "note": "Re-delivery of returned head 6b5b587c46c4. Compared with that snapshot: only the item stmt_dep swap lem-trf-space-enlarged-etale-ringed-site-model -> def-trf-scheme-algebraic-space (definition node, existing:true, schemeSpace in EnlargedEtaleRingedSite, landed 2026-10-18), the matching import change SpaceCotangentRingMap -> EnlargedEtaleRingedSite, and lean.note. Theorem signature byte-identical and lean.statement verbatim in the file. H2 and H11 repaired; real clause-by-clause Second reading by NB present; single copyright block. Independent clause check against Tag 089J and the live owners (MapIsSeparated/MapIsFiniteType, OpenSubspace, IsEtale/IsSurjective, pointImage, scheme-theoretic image): hypotheses no stronger; F universal property, V equalizer complement clopen and qc, literal image Z with qc dense open V, proper g_i, projective embeddings, H carrier, glued p over B separated and finite type, V into H, pointImage surjectivity onto U, labelled Cofan split fibre for every field extension. Edge cases d=1, m=0, empty U, A=0, non-reduced A, non-split fibres all covered. No hollow definition; proof is only sorry. No file changed, so nothing compiled."
+ }
+}

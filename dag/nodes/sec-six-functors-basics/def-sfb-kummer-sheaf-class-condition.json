@@ -1,0 +1,114 @@
+{
+ "id": "def-sfb-kummer-sheaf-class-condition",
+ "kind": "definition",
+ "title": "Full finite scalar-adjunct implication",
+ "statement": "For a prime invertible on W, integral source S, finite source objects Q_n, generator maps g_n and a boundary delta to comparison units, define sheafKummerClassCondition as follows. For every level and residue-linear degree-two class e, if the actual full scalar adjunct of e along g_n equals the negative product of delta with the positive compared Kummer unit, the finite-class predicate holds for the actual exact-functor image of e in p-adic coefficients. This is the literal scalar-adjunct implication of the diagonal tower calculation; it makes no existence assertion and chooses no data.",
+ "stmt_deps": [
+  "def-sfb-diagonal-system-interface",
+  "lem-sfb-canonical-sheaf-ext",
+  "lem-sfb-kummer-strict-target-transport",
+  "def-sfb-kummer-sheaf-predicates"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Steps (3)--(4), the actual normalized target and finite scalar-adjunct implication."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "rg",
+   "query": "^def normalizedBoundaryTarget|^def exactFunctorExtImage|^def DiagonalSourceNormalization in lean/Sheaf/Paper/DiagonalTowerSystemInterface.lean",
+   "results": "Exact existing definitions at lines 407, 435 and 518. The new definition is a concrete specialization of this interface with the actual Kummer expressions, and introduces no theorem or proof obligation.",
+   "date": "2026-10-27",
+   "verdict": "Use the actual project definitions verbatim in the body; name the proposition so its concrete formula is checked separately."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The type of predicates on finite Ext classes and ordinary quotient isomorphisms of coefficient sheaves",
+   "results": "8 hits: CategoryTheory.Abelian.Ext, CategoryTheory.Sheaf.H, CategoryTheory.HasExt, HasExt.standard, IsGrothendieckAbelian.hasExt, instHasExtModuleCatOfSmall, Ext.instModule and Ext.ext_iff. These provide the actual Ext type, not the project-specific predicate types.",
+   "date": "2026-10-27",
+   "verdict": "Use the actual Ext definition and name only the literal concrete function types."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext\", \"Sheaf\"",
+   "results": "12 hits, in OverPresheafAux extensionality and presheaf left Kan extensions. None supplies the actual normalized-source or finite-class predicate type.",
+   "date": "2026-10-27",
+   "verdict": "No replacement predicate; preserve the actual project formula."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafKummerFinitePredicate|sheafKummerSourcePredicate",
+   "results": "0 hits. These names do not occur in the adopted library.",
+   "date": "2026-10-27",
+   "verdict": "Introduce names for the unchanged actual function types, with real bodies."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Small Ext groups of sheaves of modules and abelian sheaves, with fixed abelian structures and finite coefficient objects",
+   "results": "8 hits: Ext, Ext.mk₀, Sheaf.cohomologyPresheafFunctor, hasExt_iff_small_ext, ShortComplex.ShortExact.extClass, ProjectiveResolution.extMk.congr_simp, Ext.instModule and Sheaf.H. The basic Ext type and smallness characterization are available; these do not replace the actual coefficient predicate types.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the project small-Ext witnesses with their canonical abelian structures and preserve the literal function types of the predicates."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalKummerReduction",
+  "group": "M2",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-system",
+   "place": "Steps (3)--(4), the actual normalized target and finite scalar-adjunct implication.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.KummerSheafClassCondition",
+  "file": "lean/Sheaf/Paper/KummerSheafClassCondition.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.sheafKummerClassCondition",
+  "statement": "def sheafKummerClassCondition (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})\n    (hW : IsUnit (ℓ : Γ(W, ⊤)))\n    (S : DiagonalAb W)\n    (Q : ∀ n, Sheaf (Scheme.ProEt.topology W)\n      (ModuleCat.{u + 1} (diagonalResidue.{u} ℓ n)))\n    (g : ∀ n, S ⟶ (cartierForget (diagonalResidue.{u} ℓ n) W).obj (Q n))\n    (δ : Ext.{u + 1} S ((comparisonUpperStar AddCommGrpCat.{u + 1} W).obj W.gmSheaf) 1)\n    (finiteClass : sheafKummerFinitePredicate ℓ W Q)\n    : Prop",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261027T012904-L-2344169",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261027T012904-L-2344169",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

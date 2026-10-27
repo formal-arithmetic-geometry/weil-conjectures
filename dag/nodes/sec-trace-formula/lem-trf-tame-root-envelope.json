@@ -1,0 +1,354 @@
+{
+ "id": "lem-trf-tame-root-envelope",
+ "kind": "statement",
+ "title": "Prime-to-residue-characteristic radical envelope for numerical tame extensions",
+ "statement": "Let $K$ be a complete field [def-weil-field] with a nontrivial nonarchimedean real absolute value: $|x|=0$ iff $x=0$, $|xy|=|x||y|$, $|1|=1$, $|x+y|\\le\\max(|x|,|y|)$, and $|a|\\notin\\{0,1\\}$ for some $a$. All finite extensions carry an extending absolute value. For each such field $F$ set $F^\\circ=\\{x:|x|\\le1\\}$ [def-trf-valuation-ring], $\\mathfrak m_F=\\{x:|x|<1\\}$, $\\widetilde F=F^\\circ/\\mathfrak m_F$ and $\\Gamma_F=|F^\\times|$. Write $e(F/E)=[\\Gamma_F:\\Gamma_E]$, $f(F/E)=[\\widetilde F:\\widetilde E]$, and let $p=\\operatorname{char}(\\widetilde K)$. A finite field extension is separable when every minimal polynomial has distinct roots. For any finite extension $L/K$, the following are equivalent: (a) $[L:K]=e(L/K)f(L/K)$, $\\widetilde L/\\widetilde K$ is separable, and $e(L/K)$ is prime to $p$ if $p>0$; (b) in a common algebraic overfield there is a finite extension $U/K$ such that $U^\\circ$ is finite etale over $K^\\circ$ (finite as a module and etale [def-weil-etale-morphism]), and there are finitely many positive integers $n_i$ prime to $p$ if $p>0$, elements $a_i\\in U^\\times$ and elements $\\alpha_i$ with $\\alpha_i^{n_i}=a_i$, such that $U$ contains all $n_i$-th roots of unity and $L$ embeds over $K$ into $R=U(\\alpha_1,\\ldots,\\alpha_s)$. The embedding respects the extending absolute values. The empty list is permitted. No discrete valuation or residue-perfection hypothesis is imposed.",
+ "source": {
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Temkin section 2.1, Lemma 2.1.5(iii) and preceding maximal-tame discussion. Root description: Gabber--Ramero, Almost Ring Theory (sixth release), Corollary 6.2.14, Definition 6.2.16 and 6.2.17--6.2.18, printed pp.161--162, followed by finite descent from the strict henselization. Online primary sources read; local archival copies WANTED.",
+  "url": "https://arxiv.org/html/0707.3953v3#S2.SS2"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-valuation-ring",
+  "def-weil-etale-morphism",
+  "def-trf-valuation-comap-residue"
+ ],
+ "proof": [
+  {
+   "text": "Fix a common algebraic closure with the spectral extending absolute value. Its restriction to every finite subextension agrees with the given absolute value by uniqueness. Each finite subextension is a finite-dimensional normed space over $K$, hence complete. The completion-factors lemma, applied with $F=K$ (and the identity finite separable extension), says that $K^\\circ$ is henselian, since $\\widehat K=K$. The same application to every finite extension gives henselianity of its valuation ring. These facts apply in particular to $L$, to the unramified fields constructed below and to their composita.",
+   "uses": [
+    "lem-pc-algebraic-closure-exists-unique",
+    "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+    "lem-trf-spectral-norm-algebraic-extension",
+    "lem-sfb-algebraic-absolute-value-unique",
+    "lem-per-finite-normed-space-complete",
+    "lem-trf-separable-valued-completion-factors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Section 2.1, henselianity of analytic fields; completeness and valuation extension preliminaries, expanded using the cited norm lemmas"
+   }
+  },
+  {
+   "text": "We will use elementary tower bookkeeping without the parent ramification-calculus lemma. For finite $A\\subset B\\subset C$, products of representatives for $\\Gamma_C/\\Gamma_B$ and $\\Gamma_B/\\Gamma_A$ represent $\\Gamma_C/\\Gamma_A$ exactly once; products of successive field bases give bases both for $C/A$ and for $\\widetilde C/\\widetilde A$. Thus $e$, $f$ and field degrees multiply. Put $d(B/A)=[B:A]/(e(B/A)f(B/A))$. The fundamental inequality gives $d\\ge1$, and the three multiplicativities give $d(C/A)=d(C/B)d(B/A)$. Consequently defectlessness descends to intermediate fields, since a product of two real numbers at least one is one only if both are one. Indices in the lower extension divide the composite index. Restricting the separability condition to elements proves that a subextension of a separable residue extension is separable; separability in successive residue extensions is transitive by the cited permanence lemma.",
+   "uses": [
+    "lem-trf-valued-extension-degree-bound",
+    "lem-zl-separable-permanence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Section 2.1, numerical ramification invariants; explicit tower bookkeeping"
+   }
+  },
+  {
+   "text": "Assume (a), and put $k=\\widetilde K$, $l=\\widetilde L$, $e=e(L/K)$, $f=[l:k]$. Choose $\\bar b$ with $l=k(\\bar b)$ by the primitive-element lemma. Lift $l/k$ to a finite etale $K^\\circ$-algebra $D$ using the field-lifting lemma. A prime over the maximal ideal is obtained from $D/\\mathfrak m_KD\\cong l$. The valuation-etale-factor lemma gives its localization $S$, finite etale over $K^\\circ$, a valuation domain with residue $l$ and fraction field $V_0$ of degree $f$. Choose $y\\in S$ reducing to $\\bar b$. That same lemma says $S=K^\\circ[y]$, $V_0=K(y)$, and the monic minimal polynomial $g$ of $y$ reduces to the minimal polynomial of $\\bar b$, with simple root $\\bar b$. Hensel lifting in $L^\\circ$ produces $b$ with $g(b)=0$ and residue $\\bar b$. Sending $y$ to $b$ embeds $V_0$ into $L$; write its image $V$. Uniqueness of the extending absolute value identifies $S$ with $V^\\circ$. Thus $V^\\circ/K^\\circ$ is finite etale, $\\widetilde V=l$, and $[V:K]=f$. The fundamental inequality gives $e(V/K)=1$, so $\\Gamma_V=\\Gamma_K$ and $[L:V]=e$.",
+   "uses": [
+    "lem-weil-pbc-finite-separable-extension-primitive-element",
+    "lem-weil-pbc-henselian-finite-etale-field-lift",
+    "lem-trf-henselian-valuation-etale-local-factors",
+    "lem-weil-pbc-henselian-local-root-lifting",
+    "lem-sfb-algebraic-absolute-value-unique",
+    "lem-trf-valued-extension-degree-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GK, lemma-henselian-cat-finite-etale; simple-root lifting and the cited valuation-etale-factor statement"
+   }
+  },
+  {
+   "text": "Choose nonidentity coset generators $\\gamma_i$ of the finite group $\\Gamma_L/\\Gamma_V$ (one may take all nonidentity cosets). Choose $t_i\\in L^\\times$ with value representing $\\gamma_i$, let $n_i$ be the order of that coset, and choose $a_i\\in V^\\times$ with $|a_i|=|t_i|^{n_i}$. Each $n_i$ divides $e$, so is prime to $p$ when $p>0$. Put $u_i=t_i^{n_i}/a_i\\in(L^\\circ)^\\times$. Their residues $\\bar u_i$ belong to $l=\\widetilde V$. If the quotient is trivial, take the empty list. For every integer prime to $p$ (every positive integer if $p=0$), its image in the residue field is nonzero, hence it is a unit in each valuation ring used here.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Section 2.1, total moderate ramification; explicit finite value-coset representatives"
+   }
+  },
+  {
+   "text": "In an algebraic closure of $l$, adjoin all roots of the finitely many polynomials $X^{n_i}-\\bar u_i$ and $X^{n_i}-1$, and call the resulting field $k'$. These monic polynomials have no common root with their derivatives: a root is nonzero and $n_i$ is invertible in $l$. Their roots are separable algebraic over $l$. The algebraic-generators lemma gives $[k':l]<\\infty$; adjoining the roots one at a time gives separability by the simple-separable-extension lemma and transitivity. At each adjunction the minimal polynomial divides the same separable polynomial over the intermediate field. Transitivity also gives $k'/k$ finite separable, since $l/k$ is so. When the list is empty set $k'=l$.",
+   "uses": [
+    "lem-pc-algebraic-closure-exists-unique",
+    "lem-weil-pbc-algebraic-generators-finite-extension",
+    "lem-trf-simple-separable-field-extension",
+    "lem-zl-separable-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09GH, lemma-algebraic-finitely-generated; Tag 09H9, lemma-separably-generated-separable; elementary derivative test for the displayed binomials"
+   }
+  },
+  {
+   "text": "Lift $k'/k$ to a finite etale $K^\\circ$-algebra, then take its valuation local factor as in step 3. Denote that factor by $B$ and its fraction field by $U$. The factor lemma gives $B=U^\\circ$, residue $k'$, and $[U:K]=[k':k]$; the fundamental inequality gives $\\Gamma_U=\\Gamma_K$. Both $V^\\circ$ and $B$ are finite etale over $K^\\circ$. The residue inclusion $l\\hookrightarrow k'$ lifts to a $K^\\circ$-algebra map $V^\\circ\\to B$ by the finite-etale map-bijection lemma. This map is injective: after tensoring with $K$ it is a unital map from the field $V$ to the field $U$. Thus regard $U$ as an extension of $V$ and form $H=LU$ in an algebraic closure containing both over $V$. The norm uniqueness lemma makes all these embeddings isometric, including their restrictions to $K$ and $L$. In particular $\\widetilde U$ contains $\\widetilde L=l$ inside $\\widetilde H$.",
+   "uses": [
+    "lem-weil-pbc-henselian-finite-etale-field-lift",
+    "lem-trf-henselian-valuation-etale-local-factors",
+    "lem-trf-valued-extension-degree-bound",
+    "lem-weil-pbc-henselian-finite-etale-map-bijective",
+    "lem-sfb-algebraic-absolute-value-unique",
+    "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GK, lemma-henselian-cat-finite-etale, essential surjectivity and full faithfulness; valuation-etale local factors"
+   }
+  },
+  {
+   "text": "For each $i$, the residue $\\bar u_i\\in l^\\times$ has an $n_i$-th root $\\bar z_i$ in $k'\\subseteq\\widetilde H$. Hensel lifting for $X^{n_i}-u_i$ in $H^\\circ$ produces a unit $z_i$ with $z_i^{n_i}=u_i$, because $n_i\\bar z_i^{n_i-1}\\ne0$. Set $\\alpha_i=t_i/z_i\\in H$. Then $\\alpha_i^{n_i}=a_i\\in V^\\times\\subseteq U^\\times$ and $|\\alpha_i|=|t_i|$. Also $U$ contains all $n_i$-th roots of unity: the residue polynomial $X^{n_i}-1$ splits into $n_i$ distinct roots in $k'$, and Hensel lifting in $U^\\circ$ gives $n_i$ distinct roots upstairs. A polynomial of degree $n_i$ has at most that many roots, so these are all the roots in the common algebraic closure.",
+   "uses": [
+    "lem-weil-pbc-henselian-local-root-lifting",
+    "lem-pc-separable-polynomial-distinct-roots-alg-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Simple-root characterization of henselianity; explicit unit-root and roots-of-unity lifting (compare Gabber--Ramero Corollary 6.2.14)"
+   }
+  },
+  {
+   "text": "Put $R=U(\\alpha_i)\\subseteq H$. Since $\\Gamma_U=\\Gamma_V$ and $|\\alpha_i|=|t_i|$, the group $\\Gamma_R/\\Gamma_U$ contains the $e$ distinct cosets generated by the original $\\gamma_i$. The fundamental inequality gives $[R:U]\\ge e$. On the other hand, the $U$-span in $H$ of a $V$-basis of $L$ is a subalgebra: multiplication has structure constants in $V$. It is a domain of dimension at most $[L:V]=e$, hence a field by the finite-dimensional-domain lemma. It contains $L$ and $U$, so equals $H$. Thus $[H:U]\\le e$. As $R\\subseteq H$, both inequalities force $R=H$. Hence $L\\subseteq R$, with all required equations, roots of unity and the isometric embedding. For $e=1$ the same comparison gives $LU=U$ and the empty list works.",
+   "uses": [
+    "lem-trf-valued-extension-degree-bound",
+    "lem-weil-pbc-finite-dimensional-domain-is-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Section 2.1, defectless total moderate ramification; explicit value-coset/degree comparison realizing the finite radical envelope"
+   }
+  },
+  {
+   "text": "Conversely assume (b). Apply the valuation-etale-factor lemma to $D=U^\\circ$ over $K^\\circ$ and its maximal ideal. Since $U^\\circ$ is already local, the factor is itself; its fraction field is $U$. The lemma gives separable residue extension and $[U:K]=f(U/K)$; the fundamental inequality gives $e(U/K)=1$. Thus $U/K$ satisfies (a). Write $R_0=U$ and $R_i=U(\\alpha_1,\\ldots,\\alpha_i)$. For each $i$, $R_{i-1}$ contains all $n_i$-th roots of unity, $n_i$ is invertible there, and $a_i\\in U^\\times\\subseteq R_{i-1}^\\times$. The multiradical Galois-degree lemma with one radical and exponent $n_i$ gives $R_i/R_{i-1}$ finite Galois and $[R_i:R_{i-1}]\\mid n_i$. This application makes no irreducibility assumption on the binomial and includes $n_i=1$.",
+   "uses": [
+    "lem-trf-henselian-valuation-etale-local-factors",
+    "lem-trf-valued-extension-degree-bound",
+    "lem-sfb-multiradical-galois-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09I6, section-Kummer, opening paragraph; finite-etale numerical input from the valuation local-factor lemma"
+   }
+  },
+  {
+   "text": "Apply the Galois graded-wild-kernel lemma to each $R_i/R_{i-1}$. If $p>0$, its wild subgroup has $p$-power order, whereas the Galois group has order prime to $p$: the fixed-field lemma identifies its order with the degree in step 9. Hence that subgroup is trivial, its fixed field is $R_i$, and the lemma gives $[R_i:R_{i-1}]=e(R_i/R_{i-1})f(R_i/R_{i-1})$, separable residue extension and prime-to-$p$ index. If $p=0$, the same lemma states directly that the wild subgroup is trivial, with the same conclusions and no index restriction. All bases are complete by step 1; their residue characteristic remains $p$.",
+   "uses": [
+    "lem-trf-galois-graded-wild-kernel",
+    "lem-weil-pbc-finite-galois-fixed-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 2.1.5(iii), numerical tame criterion; wild-kernel formulation for each finite Galois radical step"
+   }
+  },
+  {
+   "text": "Starting with $U/K$ and the successive radical extensions, multiply the tower invariants from step 2. Transitivity of residue separability gives separable $\\widetilde R/\\widetilde K$, the product of the indices is prime to $p$ if $p>0$, and $d(R/K)=1$. Identify $L$ with its image in $R$ under the embedding in (b); it is a valued embedding by hypothesis. In $K\\subseteq L\\subseteq R$, multiplicativity gives $d(R/K)=d(R/L)d(L/K)$ with both factors at least one. Thus $d(L/K)=1$. Also $e(L/K)$ divides $e(R/K)$, and $\\widetilde L/\\widetilde K$ is separable because every element lies in the separable extension $\\widetilde R/\\widetilde K$. These are exactly the three assertions in (a). When the list is empty the argument simply starts with $R=U$.",
+   "uses": [
+    "lem-trf-valued-extension-degree-bound",
+    "lem-zl-separable-permanence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 2.1.5(iii), tower and intermediate-field consequences, with the defect descent written explicitly"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-algebraic-closure-exists-unique",
+  "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+  "lem-trf-spectral-norm-algebraic-extension",
+  "lem-sfb-algebraic-absolute-value-unique",
+  "lem-per-finite-normed-space-complete",
+  "lem-trf-separable-valued-completion-factors",
+  "lem-trf-valued-extension-degree-bound",
+  "lem-zl-separable-permanence",
+  "lem-weil-pbc-finite-separable-extension-primitive-element",
+  "lem-weil-pbc-henselian-finite-etale-field-lift",
+  "lem-trf-henselian-valuation-etale-local-factors",
+  "lem-weil-pbc-henselian-local-root-lifting",
+  "lem-weil-pbc-algebraic-generators-finite-extension",
+  "lem-trf-simple-separable-field-extension",
+  "lem-weil-pbc-henselian-finite-etale-map-bijective",
+  "lem-pc-separable-polynomial-distinct-roots-alg-closed",
+  "lem-weil-pbc-finite-dimensional-domain-is-field",
+  "lem-sfb-multiradical-galois-degree",
+  "lem-trf-galois-graded-wild-kernel",
+  "lem-weil-pbc-finite-galois-fixed-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/fields.tex",
+  "place": "N0 direct finite value-coset/Hensel construction; compared with Temkin section 2.1 and Gabber--Ramero arXiv:math/0201175v3 Corollary 6.2.14, printed pp.161--162, read online; local copies WANTED. Uses Stacks Tags 04GK, 09I6 and the existing valuation/Galois nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tame valued field extensions are generated by unramified extensions and roots of elements of order prime to the residue characteristic",
+   "results": "{\"t\": \"2026-10-24T09:24:01Z\", \"tool\": \"leansearch\", \"query\": \"Tame valued field extensions are generated by unramified extensions and roots of elements of order prime to the residue characteristic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyUnramified.iff_isSeparable\", \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"IsUnramifiedAtInfinitePlaces_of_odd_finrank\", \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"IsUnramifiedAtInfinitePlaces.bot\", \"FiniteField.instFiniteExtension_1\", \"IsUnramifiedAtInfinitePlaces.id\", \"IsUnramifiedAtInfinitePlaces.top\"], \"digest\": \"ef7bbfcaf282125e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: valuation-subring inertia is only defined; the other results require Dedekind/discrete hypotheses or concern ring unramifiedness, not the asserted general valued-field theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Henselian tame ramification is equivalent to being contained in an unramified extension followed by adjoining prime to p roots",
+   "results": "{\"t\": \"2026-10-24T09:24:10Z\", \"tool\": \"leanfinder\", \"query\": \"Henselian tame ramification is equivalent to being contained in an unramified extension followed by adjoining prime to p roots\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isUnramifiedAt_iff_of_isDedekindDomain\", \"Ideal.ramificationIdx_eq_one_of_isUnramifiedAt\", \"Algebra.IsUnramifiedAt\", \"Algebra.IsUnramifiedAt.of_liesOver\", \"IsUnramifiedAt.of_liesOver_of_ne_bot\", \"NumberField.Ideal.ramificationIdx_primesOverSpanEquivMonicFactorsMod_symm_apply\", \"Ideal.ramificationIdx_eq_zero\", \"Algebra.IsUnramifiedAt.comp\"], \"digest\": \"7b80878ef9e890e6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: valuation-subring inertia is only defined; the other results require Dedekind/discrete hypotheses or concern ring unramifiedness, not the asserted general valued-field theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "Valuation, Polynomial.IsRoot",
+   "results": "{\"t\": \"2026-10-24T09:24:01Z\", \"tool\": \"loogle\", \"query\": \"Valuation, Polynomial.IsRoot\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: valuation-subring inertia is only defined; the other results require Dedekind/discrete hypotheses or concern ring unramifiedness, not the asserted general valued-field theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "[Tt]ame|[Uu]nramified|defectless",
+   "results": "{\"t\": \"2026-10-24T09:24:00Z\", \"tool\": \"grep\", \"query\": \"[Tt]ame|[Uu]nramified|defectless\", \"sub\": \"RingTheory/Valuation\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: valuation-subring inertia is only defined; the other results require Dedekind/discrete hypotheses or concern ring unramifiedness, not the asserted general valued-field theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite tame extensions of a complete nonarchimedean field are contained in unramified extensions generated by prime to residue characteristic radicals",
+   "results": "{\"t\": \"2026-10-24T11:38:00Z\", \"tool\": \"leanfinder\", \"query\": \"Finite tame extensions of a complete nonarchimedean field are contained in unramified extensions generated by prime to residue characteristic radicals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsUnramifiedAtInfinitePlaces\", \"IsUnramifiedAtInfinitePlaces.top\", \"IsUnramifiedAtInfinitePlaces.bot\", \"NumberField.InfinitePlace.IsUnramifiedIn\", \"IsUnramifiedAtInfinitePlaces.trans\", \"IsUnramifiedAtInfinitePlaces.id\", \"NumberField.InfinitePlace.IsUnramified.comap\", \"NumberField.InfinitePlace.IsUnramified.of_restrictScalars\"], \"digest\": \"5bb7ce99fdcd9992\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: search results do not state the numerical tame/root-envelope equivalence for general complete valued fields; Kummer hits concern only the algebraic radical input already cited by its existing DAG node."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsKummerExtension",
+   "results": "{\"t\": \"2026-10-24T11:38:25Z\", \"tool\": \"loogle\", \"query\": \"IsKummerExtension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'IsKummerExtension'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: search results do not state the numerical tame/root-envelope equivalence for general complete valued fields; Kummer hits concern only the algebraic radical input already cited by its existing DAG node."
+  },
+  {
+   "tool": "grep",
+   "query": "finrank.*dvd|dvd.*finrank|isGalois",
+   "results": "{\"t\": \"2026-10-24T11:38:25Z\", \"tool\": \"grep\", \"query\": \"finrank.*dvd|dvd.*finrank|isGalois\", \"sub\": \"FieldTheory/KummerExtension\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: search results do not state the numerical tame/root-envelope equivalence for general complete valued fields; Kummer hits concern only the algebraic radical input already cited by its existing DAG node."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tame henselian valued field extensions are generated by an unramified field extension and radicals of prime to residue characteristic order",
+   "results": "{\"t\": \"2026-10-24T11:38:58Z\", \"tool\": \"leansearch\", \"query\": \"Tame henselian valued field extensions are generated by an unramified field extension and radicals of prime to residue characteristic order\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSolvableByRad\", \"IsUnramifiedAtInfinitePlaces.bot\", \"Field.henselian\", \"Algebra.FormallyUnramified.iff_isSeparable\", \"IsPurelyInseparable\", \"IsPurelyInseparable.isPRadical\", \"IsUnramifiedAtInfinitePlaces.trans\", \"NumberField.InfinitePlace.isUnramified\"], \"digest\": \"a2af3c47d5bb7941\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: search results do not state the numerical tame/root-envelope equivalence for general complete valued fields; Kummer hits concern only the algebraic radical input already cited by its existing DAG node."
+  },
+  {
+   "tool": "grep",
+   "query": "[Tt]ame|defectless|[Uu]nramified",
+   "results": "{\"t\": \"2026-10-24T11:38:58Z\", \"tool\": \"grep\", \"query\": \"[Tt]ame|defectless|[Uu]nramified\", \"sub\": \"RingTheory/Valuation\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: search results do not state the numerical tame/root-envelope equivalence for general complete valued fields; Kummer hits concern only the algebraic radical input already cited by its existing DAG node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a field contains all nth roots of unity then adjoining an nth root is a cyclic Galois extension whose degree divides n",
+   "results": "{\"t\": \"2026-10-24T11:39:53Z\", \"tool\": \"leanfinder\", \"query\": \"If a field contains all nth roots of unity then adjoining an nth root is a cyclic Galois extension whose degree divides n\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isCyclic_of_isSplittingField_X_pow_sub_C\", \"IsPrimitiveRoot.intermediateField_adjoin_isCyclotomicExtension\", \"isCyclic_tfae\", \"IntermediateField.isCyclotomicExtension_adjoin_of_exists_isPrimitiveRoot\", \"CyclotomicField.isCyclotomicExtension\", \"isGalois_of_isSplittingField_X_pow_sub_C\", \"exists_root_adjoin_eq_top_of_isCyclic\", \"IsCyclotomicExtension.iff_singleton\"], \"digest\": \"fca52f5cbbc1304f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: search results do not state the numerical tame/root-envelope equivalence for general complete valued fields; Kummer hits concern only the algebraic radical input already cited by its existing DAG node."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-valued-finite-ramification-calculus",
+  "date": "2026-10-24",
+  "group": "Q157"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Stable reduction over finite-height separably closed valuation fields. Input: Proposition 4.3.3, pp. 29--30; applied componentwise when the smooth generic fibre is disconnected Supporting input: Theorem 2.1.8 and Lemmas 2.1.1, 2.1.2, 2.1.6, pp. 7--10; smooth-centre formulation used in the first substantive paragraph of the proof of Proposition 4.3.3, pp. 29--30. Supporting lemma: Theorem 2.1.10(i)--(iii), printed p. 10; etale form of unramifiedness by Lemma 2.1.6, same page. Supporting input: Theorem 6.3.1(iii), printed pp. 48–49; Cartesian means the degree formula of §6.1, p. 36 and §2.1, p. 9. Supporting input: §2.1, printed pp. 8–9, ramification discussion and Lemma 2.1.5; §6.2 opening, p. 41 (invariants unchanged by finite extension); immediate/tame base-change consequence of the same ramification calculus. Supporting structural input: Temkin section 2.1, Lemma 2.1.5(iii) and preceding maximal-tame discussion. Root description: Gabber--Ramero, Almost Ring Theory (sixth release), Corollary 6.2.14, Definition 6.2.16 and 6.2.17--6.2.18, printed pp.161--162, followed by finite descent from the strict henselization. Online primary sources read; local archival copies WANTED.",
+   "via": [
+    "lem-trf-valued-finite-ramification-calculus",
+    "lem-trf-analytic-type23-stability",
+    "lem-trf-analytic-uniformization",
+    "lem-trf-valued-curve-etale-parameter",
+    "lem-trf-valuation-strict-semistable-local-uniformization",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-tame-root-envelope",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Direct proof of both implications by finite etale residue realization, unit-root Hensel lifting and a value-coset degree comparison; reverse direction uses existing one-root Kummer degree and graded wild-kernel statements. No new nodes; avoids the circular parent ramification-calculus citation.",
+  "blueprint": "Realizes the finite tame radical-envelope input along the recorded ancestry of lem-trf-local-term-locality, proof (1)--(2), nearby-cycle/semistable-alteration branch, via Temkin section 2.1. This is below the fixed unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-henselian-finite-etale-field-lift",
+    "why": "Generic Lifting one finite separable residue extension used only for its stated algebraic/valued-field assertion in the explicit tame-envelope construction; no replacement of a unit-level geometric argument."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-local-root-lifting",
+    "why": "Generic A local ring is henselian (idempotent lifting) iff simple roots of monic polynomials lift used only for its stated algebraic/valued-field assertion in the explicit tame-envelope construction; no replacement of a unit-level geometric argument."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-finite-etale-map-bijective",
+    "why": "Generic Reduction is bijective on morphisms of finite etale algebras used only for its stated algebraic/valued-field assertion in the explicit tame-envelope construction; no replacement of a unit-level geometric argument."
+   },
+   {
+    "node": "lem-sfb-multiradical-galois-degree",
+    "why": "Generic Galois group and degree bound for a finite multiradical extension used only for its stated algebraic/valued-field assertion in the explicit tame-envelope construction; no replacement of a unit-level geometric argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-henselian-finite-etale-field-lift",
+  "lem-weil-pbc-henselian-local-root-lifting",
+  "lem-weil-pbc-henselian-finite-etale-map-bijective",
+  "lem-sfb-multiradical-galois-degree"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N0-657cc8009",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-657cc8009 (reviewer sub-agent of L); spot-checked: Statement unchanged: the item's statement, stmt_deps, source, created and blueprint fields match clones/live and side-live. The delivery adds 11 steps, 20 existing proof_deps and no new nodes. I read every step against the cited statements. Step 1 gets henselianity of every finite extension's valuation ring from completion-factors applied with F=E=K, using spectral-norm, absolute-value uniqueness and finite-normed-complete. Step 2 does the tower bookkeeping for e, f and the defect directly, without citing the parent ramification calculus. Steps 3 and 6 use field-lift, the etale local-factors node (S=R[y], g reduces to the separable minpoly) and map-bijective to build the unramified V and U, with all embeddings isometric by uniqueness. Steps 4 and 7 choose value-coset generators t_i, units u_i and Hensel roots z_i, so alpha_i^{n_i}=a_i lies in V^x, and U contains the n_i-th roots of unity. In step 8 the value cosets give [R:U]>=e, and the finite-dim-domain lemma applied to the U-span of a V-basis gives [LU:U]<=e, so R=LU contains L. For the converse, step 9 gets e=1 and separable residue for U from local-factors, and multiradical with r=1 makes each R_i/R_{i-1} Galois of degree dividing n_i. In step 10 the fixed-field lemma gives |G|=degree, so the wild kernel is trivial and the tame invariants hold. Step 11 transfers the defect, the index and residue separability to L. Small cases checked: Q_p(sqrt p) with p odd, the empty list, e=1, a purely inseparable L and nondiscrete Gamma. No cycle: the 344-node closure does not contain the item, and the wild-kernel node is unsplit with no deps. Duplicate candidates (sfb snc-tame-root, sfb tame-root-tower, exc DVR tame tower) differ. I accept the four other-unit tool_uses: henselian field-lift, root-lifting, map-bijective and multiradical, which are generic algebra. Stacks 04GK in algebra.tex was read. Temkin and Gabber-Ramero are not local and are marked WANTED; the agent-written proof cites only nodes. No SGA source is used. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.TameRootEnvelope",
+  "declaration": "IntermediateField.tame_root_envelope_iff",
+  "file": "lean/Sheaf/FieldTheory/TameRootEnvelope.lean",
+  "statement": "theorem tame_root_envelope_iff (K : Type u) [NontriviallyNormedField K] [IsUltrametricDist K] [CompleteSpace K] (L : Type v) [NormedField L] [NormedAlgebra K L] [IsUltrametricDist L] [FiniteDimensional K L] (A : ValuationSubring L) (_hA : A = (NormedField.valuation (K := L)).valuationSubring) (Ω : Type w) [NormedField Ω] [NormedAlgebra K Ω] [IsUltrametricDist Ω] [IsAlgClosure K Ω] (B : ValuationSubring Ω) (_hB : B = (NormedField.valuation (K := Ω)).valuationSubring) : (Module.finrank K L = ((QuotientGroup.mk' A.unitGroup).comp (Units.map (algebraMap K L).toMonoidHom)).range.index * @Module.finrank (IsLocalRing.ResidueField (A.comap (algebraMap K L))) (IsLocalRing.ResidueField A) inferInstance inferInstance (@Algebra.toModule (IsLocalRing.ResidueField (A.comap (algebraMap K L))) (IsLocalRing.ResidueField A) inferInstance inferInstance (A.comapResidueAlgebra (algebraMap K L))) ∧ @Algebra.IsSeparable (IsLocalRing.ResidueField (A.comap (algebraMap K L))) (IsLocalRing.ResidueField A) inferInstance inferInstance (A.comapResidueAlgebra (algebraMap K L)) ∧ (0 < ringChar (IsLocalRing.ResidueField (A.comap (algebraMap K L))) → Nat.Coprime ((QuotientGroup.mk' A.unitGroup).comp (Units.map (algebraMap K L).toMonoidHom)).range.index (ringChar (IsLocalRing.ResidueField (A.comap (algebraMap K L)))))) ↔ ∃ U : IntermediateField K Ω, FiniteDimensional K U ∧ ∃ C : ValuationSubring U, C = B.comap U.val ∧ @Module.Finite (C.comap (algebraMap K U)) C inferInstance inferInstance (@Algebra.toModule (C.comap (algebraMap K U)) C inferInstance inferInstance ((algebraMap K U).restrict (C.comap (algebraMap K U)) C (fun _ h ↦ h)).toAlgebra) ∧ @Algebra.Etale (C.comap (algebraMap K U)) C inferInstance inferInstance ((algebraMap K U).restrict (C.comap (algebraMap K U)) C (fun _ h ↦ h)).toAlgebra ∧ ∃ (s : ℕ) (n : Fin s → ℕ) (a : Fin s → Uˣ) (α : Fin s → Ω), (∀ i : Fin s, 0 < n i) ∧ (∀ i : Fin s, 0 < ringChar (IsLocalRing.ResidueField (A.comap (algebraMap K L))) → Nat.Coprime (n i) (ringChar (IsLocalRing.ResidueField (A.comap (algebraMap K L))))) ∧ (∀ i : Fin s, α i ^ n i = algebraMap U Ω (a i : U)) ∧ (∀ (i : Fin s) (ζ : Ω), ζ ^ n i = 1 → ζ ∈ U) ∧ ∃ j : L →ₐ[K] IntermediateField.adjoin U (Set.range α), ∀ x : L, ‖(j x : Ω)‖ = ‖x‖",
+  "branch": "sheaf-dag",
+  "by": "NR",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of returned head 544a18f98b2c: the canonical residue algebra is ValuationSubring.comapResidueAlgebra from the owning definition node def-trf-valuation-comap-residue; the finite-etale ring algebra is induced by the explicit restriction of algebraMap K U. Independent universes and all mathematical clauses are retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6dc8b3ae4",
+  "group": "NR",
+  "result": "pass",
+  "note": "Re-delivery after the 544a H2 RETURN. stmt_dep swapped to def-trf-valuation-comap-residue; the Lean uses comapResidueAlgebra and inlines the def-owned restriction; the Abhyankar theorem is no longer cited. Node unchanged from side-live apart from the stmt_dep and the lean record, so no citer audit; lean.statement is verbatim in the file. Clause check: K complete nontrivially normed ultrametric; L finite NormedAlgebra; Ω IsAlgClosure with extending norm (equivalent to a common overfield); A, B, C pinned to norm valuation rings; e = index of Kˣ image in Lˣ/(L°)ˣ (valid for non-discrete Γ); f = finrank under the canonical residue algebra; separability; p>0-guarded coprimality; U° Module.Finite + Algebra.Etale over K° via the canonical inclusion; n_i>0 prime to p; a_i ∈ Uˣ; α_i^{n_i}=a_i; all roots of unity in U; isometric K-embedding into U(α). Independent universes u,v,w; no extra hypotheses. Edge cases: s=0, L=K, n_i=1, char 0, purely inseparable L, non-discrete Γ, Q_p(√p). Gates: no definitions, sorry only, source/blueprint docstrings with the 11-step proof (step 4 empty Dependencies line, cosmetic). No recompile since no file changed; report records clean scompile."
+ }
+}

@@ -1,0 +1,296 @@
+{
+ "id": "lem-sfb-space-tor-independent-relative-amplitude",
+ "kind": "statement",
+ "title": "Relative Tor intervals under Tor-independent base change of algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $f:X\\to Y$ and $g:Y'\\to Y$ be morphisms of algebraic spaces over $S$ [def-trf-algebraic-space]. Put $X'=X\\times_Y Y'$ with projections $g':X'\\to X$ and $f':X'\\to Y'$ [lem-trf-space-fibre-products-etale-covers]. Use unbounded derived categories of module sheaves on small etale sites [def-weil-abstract-derived-category, def-weil-sheaf-of-modules-category], and tensor pullback computed by K-flat resolutions [def-trf-space-etale-module-functors]. Say that $f$ and $g$ are Tor independent when, for every compatible pair of geometric points $\\bar x$ of $X$ and $\\bar y'$ of $Y'$ over $\\bar y$ of $Y$, one has $\\operatorname{Tor}^{\\mathcal O_{Y,\\bar y}}_i(\\mathcal O_{X,\\bar x},\\mathcal O_{Y',\\bar y'})=0$ for all $i>0$, with Tor computed by projective resolutions [def-weil-pbc-tor-modules]. Assume this Tor independence; it holds in particular whenever $f$ is flat, meaning flat on etale scheme charts [def-weil-flat-morphism]. If $E\\in D(\\mathcal O_X)$ has Tor amplitude in $[a,b]$ over $f^{-1}\\mathcal O_Y$, then $L(g')^*E$ has Tor amplitude in $[a,b]$ over $(f')^{-1}\\mathcal O_{Y'}$. Here amplitude over a ring sheaf means that derived tensor with every module sheaf in degree zero has cohomology zero outside $[a,b]$. The assertion holds for each fixed pair of integers $a\\le b$ and hence etale locally with locally chosen intervals. Neither pseudo-coherence nor local finite presentation nor flatness of $g$ is required.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0DKD (lemma-tor-independence-and-tor-amplitude), clause (1), with the target inverse-image ring corrected from the printed f to f-prime; Tor independence definition Tag 08IP (definition-tor-independent). The flat case is immediate from flat geometric stalk rings, spaces-morphisms.tex Tag 04NG (lemma-flat-at-point-etale-local-rings), and vanishing of higher Tor for a flat module."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-space-etale-module-functors",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-tor-modules"
+ ],
+ "proof": [
+  {
+   "text": "First check the stated sufficient hypothesis. If $f$ is flat, [lem-sfb-space-strict-local-flatness] says that every structural geometric stalk ring $A=\\mathcal O_{X,\\bar x}$ is flat over $R=\\mathcal O_{Y,\\bar y}$. For any compatible $B=\\mathcal O_{Y',\\bar y'}$, take a projective resolution of $B$ as in [def-weil-pbc-tor-modules]. Tensoring its exact augmented sequence with $A$ preserves exactness at each positive degree by [lem-weil-pbc-flat-tensor-exact]. Thus $\\operatorname{Tor}_i^R(B,A)=0$ for $i>0$, and [lem-weil-pbc-tor-symmetry] gives $\\operatorname{Tor}_i^R(A,B)=0$. The remaining steps use only this Tor independence, not flatness of $f$.",
+   "uses": [
+    "lem-sfb-space-strict-local-flatness",
+    "def-weil-pbc-tor-modules",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-tor-symmetry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04NG, lemma-flat-at-point-etale-local-rings; algebra.tex Tags 00HD (lemma-flat), 00LY (section-tor), 00M3 (lemma-tor-left-right)."
+   }
+  },
+  {
+   "text": "Fix a geometric point $\\bar x'$ of $X'$ and its images $\\bar x,\\bar y',\\bar y$. Put $R=\\mathcal O_{Y,\\bar y}$, $A=\\mathcal O_{X,\\bar x}$, $B=\\mathcal O_{Y',\\bar y'}$, $C=\\mathcal O_{X',\\bar x'}$, and $D=A\\otimes_R B$. Write $M=E_{\\bar x}$ as an $A$-complex. By [lem-sfb-space-geometric-points-conservative], the stalk of an inverse image at a geometric point is the stalk at the image point, compatibly with the ring structures; hence $(f^{-1}\\mathcal O_Y)_{\\bar x}=R$, and similarly $((f')^{-1}\\mathcal O_{Y'})_{\\bar x'}=B$, acting on $C$ through the stalk map of $f'$. Apply [lem-sfb-space-ring-sheaf-tor-amplitude-stalk-test] to the ring sheaf $f^{-1}\\mathcal O_Y$: $M$, restricted to $R$, has amplitude $[a,b]$. By [lem-sfb-space-geometric-stalk-tensor-calculus], $D\\to C$ is flat and $(L(g')^*E)_{\\bar x'}\\simeq M\\otimes_A^{\\mathbf L}C$ in $D(C)$. In particular we retain $C$; we do not identify it with $D$.",
+   "uses": [
+    "lem-sfb-space-geometric-points-conservative",
+    "lem-sfb-space-ring-sheaf-tor-amplitude-stalk-test",
+    "lem-sfb-space-geometric-stalk-tensor-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0DKD, lemma-tor-independence-and-tor-amplitude, first stalk reduction; Tag 0DKG, lemma-single-complex-base-change-condition, strict-local comparison; sites-cohomology.tex Tag 0DJJ, lemma-tor-amplitude-stalk."
+   }
+  },
+  {
+   "text": "Apply [lem-pc-kflat-resolution] on the one-point ringed site to choose an $A$-K-flat resolution $Q\\to M$, and an $R$-K-flat resolution $P\\to Q|_R$. The latter also represents $M|_R$. Tor independence and [lem-pc-tor-independent-kflat-resolution-tensor] give a quasi-isomorphism $B\\otimes_R P\\to B\\otimes_R Q$ of $B$-complexes. Put $T=D\\otimes_A Q$. The generator formula of [lem-pc-base-tensor-ordinary-iso] identifies $T|_B$ with $B\\otimes_R Q$. By [lem-pc-derived-tensor-second-factor-functor], $B\\otimes_R P$ represents $M|_R\\otimes_R^{\\mathbf L}B$ in $D(B)$. Thus $T|_B$ represents precisely that scalar extension, with its $B$-action; no boundedness of $Q$ or flatness of $B/R$ has been used.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pc-tor-independent-kflat-resolution-tensor",
+    "lem-pc-base-tensor-ordinary-iso",
+    "lem-pc-derived-tensor-second-factor-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0661, lemma-base-change-comparison, free-resolution calculation, and Tag 06Y6, lemma-derived-base-change; sites-cohomology.tex Tag 06YS, lemma-K-flat-resolution."
+   }
+  },
+  {
+   "text": "The forward direction of [lem-pc-module-tor-amplitude-flat-model], over $R$, provides a flat complex $L$ supported in $[a,b]$ representing $M|_R$. It is K-flat by [lem-pc-bounded-above-flat-kflat] on the one-point ringed space. Therefore [lem-pc-derived-tensor-second-factor-functor] identifies $T|_B$ in $D(B)$ with $B\\otimes_R L$. Each $B\\otimes_R L^j$ is flat over $B$: for an exact sequence of $B$-modules, restrict to $R$, use [lem-weil-pbc-flat-tensor-exact] for $L^j$, and identify $N\\otimes_B(B\\otimes_R L^j)$ with $N\\otimes_R L^j$ by $n\\otimes(b\\otimes l)\\mapsto bn\\otimes l$, inverse $n\\otimes l\\mapsto n\\otimes(1\\otimes l)$. Its terms vanish outside $[a,b]$. The reverse direction of [lem-pc-module-tor-amplitude-flat-model], now over $B$, proves that $T|_B$ has amplitude $[a,b]$. This is the flat-model proof of ordinary scalar-extension preservation, written here as an application of existing nodes.",
+   "uses": [
+    "lem-pc-module-tor-amplitude-flat-model",
+    "lem-pc-bounded-above-flat-kflat",
+    "lem-pc-derived-tensor-second-factor-functor",
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066L, lemma-pull-tor-amplitude, proof using Tag 0654, lemma-tor-amplitude; cohomology.tex Tag 06YD, lemma-bounded-flat-K-flat."
+   }
+  },
+  {
+   "text": "Let $N$ be an arbitrary $B$-module in degree zero and choose a $B$-K-flat resolution $F\\to N[0]$ by [lem-pc-kflat-resolution]. Form $V=\\operatorname{Tot}(T\\otimes_B F)$ with the $D$-action through $T$. The mixed restriction comparison [lem-pc-mixed-tensor-restriction-comparison] and the fixed-second-factor derived construction [lem-pc-derived-tensor-second-factor-functor] show that $V|_B$ represents $T|_B\\otimes_B^{\\mathbf L}N$. (The usual signed flip interchanges the two homogeneous factors, with sign $(-1)^{pq}$.) Hence $H^i(V)=0$ for $i\\notin[a,b]$, since forgetting a module action leaves its kernels and images unchanged. Apply [new-lem-pc-mixed-total-tensor-scalar-extension] with its rings $(R,A,Aq)=(B,D,C)$ and complexes $(Q,F)=(T,F)$. After the mixed restriction identifications this is the $C$-linear chain isomorphism\n$$C\\otimes_D V\\ \\cong\\ \\operatorname{Tot}((C\\otimes_D T)\\otimes_B F),$$\nsending $c\\otimes(t\\otimes u)$ to $(c\\otimes t)\\otimes u$. The right side, restricted to $B$, represents $(C\\otimes_D T)|_B\\otimes_B^{\\mathbf L}N$ by the same fixed-second-factor construction. This uses a chain isomorphism already stated in the DAG, not an assumed mixed derived associativity theorem.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pc-mixed-tensor-restriction-comparison",
+    "lem-pc-derived-tensor-second-factor-functor",
+    "new-lem-pc-mixed-total-tensor-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06Y6, lemma-derived-base-change, fixed-second-factor construction; mixed rebracketing on total complexes as in Tag 08YU, lemma-double-base-change."
+   }
+  },
+  {
+   "text": "For $i\\notin[a,b]$, the three consecutive terms $V^{i-1}\\to V^i\\to V^{i+1}$ are exact at $V^i$. Since $C$ is flat over $D$, [lem-weil-pbc-flat-tensor-exact] makes their tensors with $C$ exact there as well. Thus $H^i(C\\otimes_D V)=0$; step 5 gives the required vanishing against every $N$. Finally $C\\otimes_D T=C\\otimes_D(D\\otimes_A Q)\\cong C\\otimes_A Q$, by $c\\otimes(d\\otimes q)\\mapsto cd\\otimes q$, inverse $c\\otimes q\\mapsto c\\otimes(1\\otimes q)$. Since $Q$ is $A$-K-flat, this last complex computes $M\\otimes_A^{\\mathbf L}C$ by [lem-pc-derived-tensor-second-factor-functor]. Consequently the stalk of $L(g')^*E$ has amplitude $[a,b]$ over $B$. Apply the converse of [lem-sfb-space-ring-sheaf-tor-amplitude-stalk-test] to the ring sheaf $(f')^{-1}\\mathcal O_{Y'}$ on $X'$ to obtain the asserted global interval. The same criterion applies on every etale chart, so applying the argument on the inverse images of charts carrying an input interval gives the locally chosen intervals. Empty charts and the empty space cause only vacuous stalk conditions. All test modules were arbitrary; no pseudo-coherence, finite presentation or flatness of $g$ entered.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-pc-derived-tensor-second-factor-functor",
+    "lem-sfb-space-ring-sheaf-tor-amplitude-stalk-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0DKD, lemma-tor-independence-and-tor-amplitude, clause (1), completed using the flat product-stalk comparison; sites-cohomology.tex Tag 0DJJ, lemma-tor-amplitude-stalk."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-tor-modules",
+  "lem-pc-base-tensor-ordinary-iso",
+  "lem-pc-bounded-above-flat-kflat",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-pc-kflat-resolution",
+  "lem-pc-mixed-tensor-restriction-comparison",
+  "lem-pc-module-tor-amplitude-flat-model",
+  "lem-pc-tor-independent-kflat-resolution-tensor",
+  "lem-sfb-space-geometric-points-conservative",
+  "lem-sfb-space-geometric-stalk-tensor-calculus",
+  "lem-sfb-space-ring-sheaf-tor-amplitude-stalk-test",
+  "lem-sfb-space-strict-local-flatness",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-tor-symmetry",
+  "new-lem-pc-mixed-total-tensor-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0DKD, lemma-tor-independence-and-tor-amplitude (1), expanded via the flat product-stalk extension of Tag 0DKG and existing K-flat tensor comparison nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a Tor independent cartesian square of algebraic spaces derived pullback preserves relative Tor amplitude",
+   "results": "{\"t\": \"2026-10-23T11:28:47Z\", \"tool\": \"leanfinder\", \"query\": \"In a Tor independent cartesian square of algebraic spaces derived pullback preserves relative Tor amplitude\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.IsStableUnderBaseChange.pullback_fst_appTop\", \"AlgebraicGeometry.Flat.instSndScheme\", \"AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"AlgebraicGeometry.Flat.instFstScheme\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback\", \"AlgebraicGeometry.Scheme.Pullback.affine_hasPullback\"], \"digest\": \"f768a36c8ebd2779\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary base change, scheme flatness, general derived-category truncation, or sheaf infrastructure; none states this Tor-amplitude theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite relative Tor dimension remains bounded in the same interval after arbitrary base change of a flat family",
+   "results": "{\"t\": \"2026-10-23T11:33:46Z\", \"tool\": \"leanfinder\", \"query\": \"Finite relative Tor dimension remains bounded in the same interval after arbitrary base change of a flat family\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange\", \"Algebra.IsStandardSmoothOfRelativeDimension.baseChange\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange\", \"RingHom.Flat.isStableUnderBaseChange\", \"RingHom.FaithfullyFlat.isStableUnderBaseChange\", \"RingHom.FormallySmooth.isStableUnderBaseChange\", \"Module.rankAtStalk_baseChange\"], \"digest\": \"5a41be9517820389\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary base change, scheme flatness, general derived-category truncation, or sheaf infrastructure; none states this Tor-amplitude theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor independent base change preserves relative Tor amplitude of complexes of sheaves",
+   "results": "{\"t\": \"2026-10-23T11:28:47Z\", \"tool\": \"leansearch\", \"query\": \"Tor independent base change preserves relative Tor amplitude of complexes of sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.IsStableUnderBaseChange\", \"IsBaseChange.rank_eq\", \"IsBaseChange.finrank_eq\", \"Submodule.baseChange_top\", \"IsBaseChange.of_comp\", \"IsBaseChange.finsuppPow\", \"IsBaseChange\", \"TensorProduct.AlgebraTensorModule.distribBaseChange\"], \"digest\": \"3f39f99a688081ee\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary base change, scheme flatness, general derived-category truncation, or sheaf infrastructure; none states this Tor-amplitude theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TorAmplitude\"",
+   "results": "{\"t\": \"2026-10-23T11:28:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"TorAmplitude\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary base change, scheme flatness, general derived-category truncation, or sheaf infrastructure; none states this Tor-amplitude theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "TorIndependent|tor.independent|TorAmplitude|tor.amplitude",
+   "results": "{\"t\": \"2026-10-23T11:28:48Z\", \"tool\": \"grep\", \"query\": \"TorIndependent|tor.independent|TorAmplitude|tor.amplitude\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Galois/GaloisObjects.lean\"], \"digest\": \"7706e955c912bb9b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary base change, scheme flatness, general derived-category truncation, or sheaf infrastructure; none states this Tor-amplitude theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "TorAmplitude|tor.amplitude|torIndependent|tor_independent",
+   "results": "{\"t\": \"2026-10-23T13:33:02Z\", \"tool\": \"grep\", \"query\": \"TorAmplitude|tor.amplitude|torIndependent|tor_independent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give underived scheme flatness or scalar base change; none concerns derived relative Tor amplitude on algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TorAmplitude\"",
+   "results": "{\"t\": \"2026-10-23T13:33:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"TorAmplitude\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give underived scheme flatness or scalar base change; none concerns derived relative Tor amplitude on algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative Tor amplitude of a complex is preserved under Tor independent base change",
+   "results": "{\"t\": \"2026-10-23T13:33:03Z\", \"tool\": \"leansearch\", \"query\": \"Relative Tor amplitude of a complex is preserved under Tor independent base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.IsStableUnderBaseChange\", \"Module.FaithfullyFlat.instTensorProduct\", \"IsBaseChange.rank_eq\", \"RingHom.IsStableUnderBaseChange.mk\", \"IsBaseChange.of_comp\", \"Submodule.baseChange_top\", \"Algebra.Smooth.baseChange\", \"IsBaseChange.finrank_eq\"], \"digest\": \"a3fe13ed4463157b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give underived scheme flatness or scalar base change; none concerns derived relative Tor amplitude on algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tor independent base change of algebraic spaces preserves relative Tor amplitude with unchanged bounds",
+   "results": "{\"t\": \"2026-10-23T13:33:05Z\", \"tool\": \"leanfinder\", \"query\": \"Tor independent base change of algebraic spaces preserves relative Tor amplitude with unchanged bounds\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.HasRingHomProperty.isStableUnderBaseChange\", \"RingHom.IsStableUnderBaseChange.pullback_fst_appTop\", \"AlgebraicGeometry.affineAnd_isStableUnderBaseChange\", \"RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange\"], \"digest\": \"48d547a2f48d89a5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give underived scheme flatness or scalar base change; none concerns derived relative Tor amplitude on algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-relative-perfect-base-change",
+  "date": "2026-10-23",
+  "group": "Q86"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Etale locality and base change of relative perfectness. Supporting input: Preserving the relative Tor interval in the base-change part; no pseudo-coherence assertion.",
+   "via": [
+    "lem-sfb-space-relative-perfect-base-change",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-tor-independent-relative-amplitude",
+  "worker": "stage1",
+  "summary": "Q29: split with no new nodes. Retained the statement; proved the flat sufficient condition, reduced to arbitrary ring-sheaf geometric stalks, used the existing unbounded K-flat Tor-independent comparison, and retained the flat tensor-product-to-product-stalk extension in the test-module calculation.",
+  "blueprint": "Inherited construction chain serves det-thm-sf-ctf-stability-direct-images proof (3), through relative perfectness and proper flat coherent duality. Read the latest blueprint paragraph (3). This subsidiary algebra input realizes the relative-amplitude portion of the recorded place. The ancestor tool returns None: preserve blueprint.from.node=null and the inherited place/via. Searches across the whole blueprint found no node stating this general coherent algebraic-space theorem.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Existence of resolutions, specialized to one-point ringed sites; no step of this unit supplies this generic homological construction."
+   },
+   {
+    "node": "lem-pc-tor-independent-kflat-resolution-tensor",
+    "why": "The unbounded Tor-independent ring comparison; its statement, unlike the finite-projective variants, applies to the arbitrary A-K-flat complex used here."
+   },
+   {
+    "node": "lem-pc-base-tensor-ordinary-iso",
+    "why": "Ordinary scalar tensor coordinate isomorphism, used only for module complexes."
+   },
+   {
+    "node": "lem-pc-derived-tensor-second-factor-functor",
+    "why": "Unbounded module scalar extension and tensor computation with a K-flat variable, retaining the target coefficient action."
+   },
+   {
+    "node": "lem-pc-module-tor-amplitude-flat-model",
+    "why": "Generic module finite Tor interval criterion over R and over B."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat",
+    "why": "K-flatness of the bounded flat module model, on the one-point ringed space."
+   },
+   {
+    "node": "lem-weil-pbc-flat-tensor-exact",
+    "why": "Exactness after tensoring with a flat module, used for the sufficient flat case, ordinary flat base change and the final product-stalk extension."
+   },
+   {
+    "node": "lem-weil-pbc-tor-symmetry",
+    "why": "Symmetry of ordinary module Tor, used only for the sufficient flat case."
+   },
+   {
+    "node": "new-lem-pc-mixed-total-tensor-scalar-extension",
+    "why": "Existing chain scalar-extension comparison for mixed total tensor; needed to keep the flat D-to-C extension and arbitrary B-test module."
+   },
+   {
+    "node": "lem-pc-mixed-tensor-restriction-comparison",
+    "why": "Existing ordinary mixed tensor identification, used to interpret the chain comparison in the fixed-second-factor derived construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pc-tor-independent-kflat-resolution-tensor",
+  "lem-pc-base-tensor-ordinary-iso",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-pc-module-tor-amplitude-flat-model",
+  "lem-pc-bounded-above-flat-kflat",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-tor-symmetry",
+  "new-lem-pc-mixed-total-tensor-scalar-extension",
+  "lem-pc-mixed-tensor-restriction-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-effc9bf92",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-effc9bf92 (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit, no new nodes, statement unchanged, item still unsplit live, so it is not superseded. Source: Stacks spaces-perfect 0DKD(1) and its proof. The item already corrects the printed f^{-1}O_{Y'} to (f')^{-1}O_{Y'}. The worker's source-error note is right: the source's proof treats D=A⊗_R B as if it were C=O_{X',x'}, and the A1×A1 example shows they differ. Steps 5-6 repair this through the flat map D→C given by lem-sfb-space-geometric-stalk-tensor-calculus. Steps 1-6 check against the cited statements. Step 1: strict-local-flatness, then a projective resolution and flat-tensor-exact, then Tor symmetry. Step 3: the hypotheses of tor-independent-kflat-resolution-tensor (Q A-K-flat, P R-K-flat, no boundedness) are met, and base-tensor-ordinary-iso plus the second-factor functor give T|_B = M|_R⊗^L B. Step 4: flat model, bounded-above-flat K-flat, B-flatness of B⊗L^j written out. Step 5: mixed-restriction and new-lem-pc-mixed-total-tensor-scalar-extension with (B,D,C) and (T,F), plus elementary cancellations. Step 6: flatness of C over D and C⊗_D T ≅ C⊗_A Q, then the converse of the stalk test. Edge cases: X' empty, E=0, g=id, f=id, flat f; the Tor-dependent case shows where step 3 needs the hypothesis. One fault fixed (C1): step 2's inverse-image stalk identifications (f^{-1}O_Y)_x=R and ((f')^{-1}O_{Y'})_{x'}=B had no citation. It now cites lem-sfb-space-geometric-points-conservative (same unit, no cycle), which is also added to proof_deps. Batch 5: geometric-stalk-tensor-calculus and strict-local-flatness reach sec-trace-formula only through the general definition def-trf-algebraic-space, so they are outside the assumed trace-formula and Poincaré statements; no leaf is needed. The worker-written tool_uses (generic module and K-flat homological algebra, 10 nodes) are accepted. No duplicate: 0DKD/066L appear only in the item and its citer.; 1 file(s) fixed by the reviewer"
+ }
+}

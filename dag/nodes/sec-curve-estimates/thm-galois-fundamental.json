@@ -138,7 +138,18 @@
   "thm-galois-lc-etale"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-curve-estimates",
  "unit": "sk-prop-h2",
  "split_report": {
@@ -189,5 +200,28 @@
   "landing": "20261018T062700-L-631028",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $Y$ be connected with a geometric point\n$\\bar y:\\operatorname{Spec}\\Omega\\to Y$, $\\Omega$ separably closed, and\nlet $\\pi_1(Y,\\bar y)$ be a fundamental group of $F_{\\bar y}$ as in\n[def-galois-fibre-functor] (for instance\n$\\operatorname{Aut}(F_{\\bar y})$). Then the fibre functor induces an\nequivalence\n\n$$\nF_{\\bar y}:\\mathrm{F\\acute Et}(Y)\\xrightarrow{\\ \\sim\\ }\n\\pi_1(Y,\\bar y)\\text{-}\\mathbf{Set},\n$$\n\nsending $P$ to the finite set $|P_{\\bar y}|$ with the given action of\n$\\pi_1(Y,\\bar y)$ and a morphism to the induced map of geometric\nfibres. Composing with the equivalence of [thm-galois-lc-etale], the\nsame holds for $\\mathrm{FLC}(Y)$ in place of $\\mathrm{F\\acute Et}(Y)$.\nBeing an equivalence, it is compatible with finite limits and colimits.",
+  "proof": [
+   {
+    "text": "By [lem-fet-galois-category] the pair\n$(\\mathrm{F\\acute Et}(Y),F_{\\bar y})$ is a Galois category, so\n[thm-galois-abstract-equivalence] applies with\n$G=\\operatorname{Aut}(F_{\\bar y})$, which is profinite by\n[lem-galois-aut-profinite]; this is the equivalence for\n$\\operatorname{Aut}(F_{\\bar y})$. For a general fundamental group\n$\\pi_1(Y,\\bar y)$ of [def-galois-fibre-functor], its action defines a\nhomomorphism $\\pi_1(Y,\\bar y)\\to\\operatorname{Aut}(F_{\\bar y})$ which is\na continuous bijection of compact Hausdorff groups, hence an isomorphism\nof topological groups, and restriction of the action along it identifies\ncontinuous $\\operatorname{Aut}(F_{\\bar y})$-sets with continuous\n$\\pi_1(Y,\\bar y)$-sets compatibly with the forgetful functors. The\nstatement for $\\mathrm{FLC}(Y)$ follows by composing with the\nequivalence of [thm-galois-lc-etale]. An equivalence of categories\npreserves all limits and colimits that exist.",
+    "uses": [
+     "lem-fet-galois-category",
+     "thm-galois-abstract-equivalence",
+     "lem-galois-aut-profinite",
+     "def-galois-fibre-functor",
+     "thm-galois-lc-etale"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

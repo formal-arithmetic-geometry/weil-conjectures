@@ -43,7 +43,32 @@
   "def-weil-frobenius-module-weights"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "FrobeniusModule.HasWeightsAtMost.of_powFrobenius"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "FrobeniusModule.HasWeightsAtMost.of_powFrobenius",
+     "module": "WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Exact",
+     "lines": [
+      163,
+      177
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-deligne-laumon-a1",
  "unit": "sk-thm-dl-a1-upper",
  "reviewed_lean": {
@@ -63,5 +88,23 @@
   "date": "2026-10-17",
   "existing": true,
   "note": "Existing live upstream theorem tagged with this blueprint id. Specialize K to Qlb, ι to the field isomorphism viewed as a ring homomorphism, and q to p^a. For q>0, the nonnegative-norm bounds with exponent b/2 are equivalent to the stated squared-norm bounds with exponent b. The finite extension degree is nonzero. HasWeightsAtMost here is the eigenvalue bound, not the mixed-filtration predicate of the dependency node."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $k_0=\\mathbf F_q$, let $k'_0=\\mathbf F_{q^m}$ be a finite\nextension of $k_0$, and let $(V,F)$ be as in\n[def-weil-frobenius-module-weights], with the embedding $\\iota$\nand the prime power $q$ of that definition. Suppose that every\neigenvalue $\\lambda$ of $F^m$ satisfies\n$|\\iota(\\lambda)|^2\\leq(q^m)^b$. Then every eigenvalue $\\alpha$ of\n$F$ satisfies $|\\iota(\\alpha)|^2\\leq q^b$: the weight bound for the\ntarget over the extended finite field implies the same bound over the\noriginal field.",
+  "proof": [
+   {
+    "text": "For an extension of degree $m$, Frobenius becomes $F^m$\nand the field cardinality becomes $q^m$. If $\\alpha$ is an eigenvalue\nof $F$ in the convention of [def-weil-frobenius-module-weights], then\n$\\alpha^m$ is an eigenvalue of $F^m$, so by hypothesis\n$|\\iota(\\alpha)|^{2m}=|\\iota(\\alpha^m)|^2\\leq(q^m)^b=q^{mb}$.\nTaking $m$-th roots gives $|\\iota(\\alpha)|^2\\leq q^b$.",
+    "uses": [
+     "def-weil-frobenius-module-weights"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; the node is proved in Lean: recorded 2026-10-25, not reopened"
  }
 }

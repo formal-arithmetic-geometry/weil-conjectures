@@ -1,0 +1,257 @@
+{
+ "id": "lem-weil-proper-integral-tower-comparison",
+ "kind": "statement",
+ "title": "Identity-compactification comparison of the entire integral direct-image towers",
+ "statement": "Fix the finite-field datum $(p,a,q,k_0,k)$ of [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, and an algebraic closure $\\Omega=\\overline{\\mathbf Q}_\\ell$. Let $E\\subset\\Omega$ be a finite extension of $\\mathbf Q_\\ell$, with valuation ring $R=\\mathcal O_E$, uniformizer $t=\\varpi_E$, and $A_n=R/t^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Let $X,Y$ be separated finite-type $k$-schemes and $f:X\\to Y$ a proper $k$-morphism [def-weil-scheme-morphism-properties, def-weil-proper-morphism]. Use the small pro-etale sites, finite constructible categories, derived direct images and compact-support candidates of [def-compact-support-direct-image-detailed, def-weil-derived-direct-image]. Write $c_0=(\\operatorname{id}_X,f)$ for the identity compactification [def-weil-compactifications-refinements].\n\nUse the derived-complete integral constructible category and derived reduction $K_n=K\\otimes_R^L A_n$ in [def-weil-integral-rational-qbar-compact-support]. Let $\\operatorname{Res}_n$ mean restriction to the completed integral coefficient sheaf, as in that definition. Fix the functorial strict-system interpretation of these towers: use the reduction functor and termwise completed-coefficient restriction $U$ of [lem-coef-derived-system-evaluation-calculus], the system direct image $S_f$ with its canonical level comparisons of [lem-pur-coefficient-system-derived-comparison], and total right-derived inverse limit on strict towers of [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. Thus $T_* = U S_f\\mathcal R_X$ and $T_!^0 = U S_f J_{\\operatorname{id}_X}\\mathcal R_X$, where $J_{\\operatorname{id}_X}$ is the termwise identity-open extension; their evaluated transitions are the ones specified below. All derived-limit projections mean the natural projections of this fixed total-derived model [lem-coef-derived-tower-counit-projections].\n\nFor $K\\in D^b_c(X,R)$ define diagrams\n$$T_!^0(K)_n=\\operatorname{Res}_nRf_{!,n}^{c_0}K_n,\\qquad T_*(K)_n=\\operatorname{Res}_nRf_{*,n}K_n.$$\nThe transition of $T_!^0$ is the specified reduction map followed by the compact-support restriction-of-scalars comparison, and the transition of $T_*$ is the specified reduction map followed by the ordinary restriction-of-scalars comparison; these are precisely the transitions in [def-weil-integral-rational-qbar-compact-support, def-weil-derived-direct-image]. For the sectionwise identity $a_n:(\\operatorname{id}_X)_!\\cong1$ from [def-weil-extension-by-zero], the term maps\n$$\\theta_{n,K}=\\operatorname{Res}_n\\bigl(Rf_{*,n}(a_n)_{K_n}\\bigr):T_!^0(K)_n\\xrightarrow{\\sim}T_*(K)_n$$\ndefine an isomorphism of the full inverse diagrams, natural in $K$: writing $d^!_n,d^*_n$ for their transitions, one has $d^*_n\\theta_{n+1,K}=\\theta_{n,K}d^!_n$ for every $n\\ge1$. The induced derived-limit isomorphism is a natural isomorphism of integral functors\n$$\\theta_E:Rf_!^{c_0}\\xrightarrow{\\sim}Rf_*:D^b_c(X,R)\\longrightarrow D(Y_{\\mathrm{proet}},R).$$\nIt identifies every chosen derived-limit projection to $\\operatorname{Res}_nRf_{*,n}K_n$ with the corresponding compact-support projection followed by $\\theta_{n,K}$. Consequently, writing $\\mathrm{red}^*_{n,K}:(Rf_*K)\\otimes^L_RA_n\\to Rf_{*,n}K_n$ and $\\mathrm{red}^!_{n,K}:(Rf_!^{c_0}K)\\otimes^L_RA_n\\to Rf_{!,n}^{c_0}K_n$ for the adjuncts, under the derived scalar-extension/restriction adjunction of [lem-weil-derived-scalar-extension-restriction-adjunction], of the $n$-th derived-limit projections, one has $\\mathrm{red}^*_{n,K}\\circ(\\theta_{E,K}\\otimes^L_RA_n)=Rf_{*,n}(a_n)_{K_n}\\circ\\mathrm{red}^!_{n,K}$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-input-weights/prop-weil-proper-compact-coincidence.proof.md",
+  "place": "first paragraph: passage from every finite coefficient level to the integral direct image"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-proper-morphism",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-derived-direct-image",
+  "def-weil-compactifications-refinements",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-extension-by-zero",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-coef-derived-tower-counit-projections"
+ ],
+ "proof": [
+  {
+   "text": "Use proper_system_evaluation_transitions for the two specified quotient-transition equations on the actual strict towers. These evaluations are the definitions shriekEvaluation and starEvaluation, for the same fixed reduction and system direct-image models.",
+   "uses": [
+    "lem-weil-proper-system-evaluation-transitions"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply identity_open_system_evaluation to the reduced system, naturality of systemDirectEvaluation at the identity-open isomorphism, and naturality of coefficientRestrictedEvaluationIso. The finite identity-open comparison is natural at the reductionEvaluation isomorphism. Functoriality of finite direct image and completed restriction yields the evaluated towerComparison square.",
+   "uses": [
+    "lem-weil-identity-open-system-evaluation",
+    "def-weil-system-operation-exchange-realization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Precompose the requested finite transition square with the invertible shriekEvaluation at level n+1. Substitute the compact transition equation, the evaluated towerComparison square, naturality of the strict tower transition at towerComparison, the ordinary transition equation, and the evaluated square at n+1. Cancel the evaluation isomorphism.",
+   "uses": [
+    "lem-weil-proper-system-evaluation-transitions",
+    "lem-weil-identity-open-system-evaluation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The native integral comparison is the total-limit functor applied to towerComparison. Naturality of the actual coefficientConstantTowerProjection, followed by the evaluated square, gives its projection equation. Apply the two-variable naturality of the fixed scalar-adjunction Hom equivalence to get the native reduction equation. Transport the projection equation through integralComparison; its inverse native factor cancels, proving the recorded projection square and, by the same Hom-equivalence naturality, the recorded reduction square.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "lem-weil-derived-scalar-extension-restriction-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the recorded reduction normalization, the counit_projection field of the chosen calculus identifies the adjunct of shriekProjection with reductionEvaluation inverse followed by the evaluated whole-system counit and compactFiniteEvaluation. The native comparison and its inverse cancel inside recordedProjection, leaving compactRealization followed by shriekProjection. Source naturality of the scalar adjunction therefore identifies recordedReduction with exactly the composite specified by CompactRealizationSpec. Its choose_spec is sfCompactSupportFiniteReductionIso, proving the eighth clause. Combine all nine equations.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-weil-system-operation-exchange-realization",
+    "lem-weil-derived-scalar-extension-restriction-adjunction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proper-system-evaluation-transitions",
+  "lem-weil-identity-open-system-evaluation",
+  "def-weil-system-operation-exchange-realization",
+  "def-coef-ringed-sequence-site",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-zeta-weil/sk-input-weights/prop-weil-proper-compact-coincidence.proof.md",
+  "place": "first paragraph; V2 Lean reduction to specified evaluation/transition coherence, with actual projection and scalar-adjunction naturality; Zheng 4.1/4.10 and Stacks 0941/07A6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "derived.*limit|restrictionOfScalars",
+   "results": "2 hits: Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean. Read the returned signatures: general pushforward/isomorphism facts or unrelated results; none states the specified pro-etale compact-support comparison and its coefficient compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso, CategoryTheory.Functor.mapIso",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.NatIso'. Read the returned signatures: general pushforward/isomorphism facts or unrelated results; none states the specified pro-etale compact-support comparison and its coefficient compatibility.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The integral compact support and ordinary derived pushforward quotient towers for a proper scheme agree including restriction of scalars transition morphisms",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction. Read the returned signatures: general pushforward/isomorphism facts or unrelated results; none states the specified pro-etale compact-support comparison and its coefficient compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper pushforward of adic complexes: the compact support and ordinary inverse systems of reductions are naturally isomorphic with their coefficient restriction transition maps",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, SheafOfModules.pushforwardComp, SheafOfModules.instIsRightAdjointPushforward, TopCat.Presheaf.toPushforwardOfIso, SheafOfModules.pushforwardCongr, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, TopCat.Presheaf.Pushforward.comp, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward. Read the returned signatures: general pushforward/isomorphism facts or unrelated results; none states the specified pro-etale compact-support comparison and its coefficient compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapIso\"",
+   "results": "12 hits: CategoryTheory.Functor.mapIso, CategoryTheory.Functor.mapIso_refl, CategoryTheory.Functor.mapIso_symm, CategoryTheory.Functor.mapIso_hom, CategoryTheory.Functor.mapIso_inv, CategoryTheory.Functor.mapIso_trans, CategoryTheory.Functor.mapIso_injective, CategoryTheory.Functor.preimageIso_mapIso. Read the returned signatures: general pushforward/isomorphism facts or unrelated results; none states the specified pro-etale compact-support comparison and its coefficient compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper morphism compact support and ordinary integral derived direct image towers agree naturally and preserve derived limit projections",
+   "results": "8 hits: CompactlySupportedContinuousMap.integralLinearMap_apply, MeasureTheory.integral_integral_swap_of_hasCompactSupport, CompactlySupportedContinuousMap.integralPositiveLinearMap_toFun, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, CompactlySupportedContinuousMap.integralLinearMap, ContinuousMapZero.integral_apply, RealRMK.integral_rieszMeasure. Read the returned signatures: none states the proper pro-etale integral tower comparison with specified transitions and projections.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*[Tt]ower|[Tt]ower.*proper|derived.*[Ll]imit",
+   "results": "11 hits: Mathlib/RingTheory/ZariskisMainTheorem.lean, Mathlib/RingTheory/ZariskisMainTheorem.lean, Mathlib/Analysis/Normed/Algebra/Spectrum.lean, Mathlib/Probability/Martingale/Convergence.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.lean, Mathlib/Topology/CantorBendixson.lean. Read the returned signatures: none states the proper pro-etale integral tower comparison with specified transitions and projections.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper map has identical compactly supported and ordinary derived pushforward on the inverse tower of finite coefficient reductions",
+   "results": "8 hits: IsProperMap, IsProperMap.isCompact_preimage, IsProperMap.mk, IsProperMap.isSpectralMap, AlgebraicGeometry.isProper_eq, IsProperMap.casesOn, isProperMap_iff_isCompact_preimage, Continuous.isProperMap. Read the returned signatures: none states the proper pro-etale integral tower comparison with specified transitions and projections.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "prop-weil-proper-compact-coincidence",
+  "date": "2026-10-22",
+  "group": "Q111"
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-input-weights",
+ "blueprint": {
+  "from": {
+   "node": "prop-weil-proper-compact-coincidence",
+   "place": "first paragraph: passage from every finite coefficient level to the integral direct image",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-proper-integral-tower-comparison",
+  "worker": "stage1",
+  "group": "Q75",
+  "summary": "Reused existing finite normalization and strict coefficient-system/total-limit lemmas; wrote transition equation, actual derived-system comparison, projection naturality and scalar-adjunction equation. Clarified the necessary functorial strict-tower interpretation: arbitrary Roos triangles do not define integral functors. No new nodes.",
+  "blueprint": "prop-weil-proper-compact-coincidence.proof.md first paragraph: identity compactification at every finite level and the passage to the integral direct image.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-complete",
+    "why": "Generic coefficient, strict-system, total-limit or adjunction tool for the identity-compactification argument; no statement of sk-input-weights supplies this infrastructure."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic coefficient, strict-system, total-limit or adjunction tool for the identity-compactification argument; no statement of sk-input-weights supplies this infrastructure."
+   },
+   {
+    "node": "lem-coef-derived-system-evaluation-calculus",
+    "why": "Generic coefficient, strict-system, total-limit or adjunction tool for the identity-compactification argument; no statement of sk-input-weights supplies this infrastructure."
+   },
+   {
+    "node": "lem-pur-coefficient-system-derived-comparison",
+    "why": "Generic coefficient, strict-system, total-limit or adjunction tool for the identity-compactification argument; no statement of sk-input-weights supplies this infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Generic coefficient, strict-system, total-limit or adjunction tool for the identity-compactification argument; no statement of sk-input-weights supplies this infrastructure."
+   },
+   {
+    "node": "lem-coef-derived-tower-counit-projections",
+    "why": "Generic coefficient, strict-system, total-limit or adjunction tool for the identity-compactification argument; no statement of sk-input-weights supplies this infrastructure."
+   },
+   {
+    "node": "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "why": "Generic coefficient, strict-system, total-limit or adjunction tool for the identity-compactification argument; no statement of sk-input-weights supplies this infrastructure."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-weil-derived-scalar-extension-restriction-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-8222f8c68",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-8222f8c68 (reviewer sub-agent of L); spot-checked: Read the full stage-1 split (5 steps, no new nodes) against its base. The base is the unsplit Q111 re-split node; its text was taken from the Q111 snapshot. Also read the main-20261015 prop-weil-proper-compact-coincidence proof, Stacks 08TC and 0H9J, and every cited node statement. STATEMENT-DISPUTED is justified. def-weil-derived-limit is a property of a Roos triangle, not a functor, and by 0H9J the comparison maps between derived limits are non-unique, so 'natural isomorphism of integral functors' needs a fixed model. The repair fixes the model L_Y S_f R_X (= R lim U S_f R_X) with J_id for the ! side. This matches the existing convention in lem-pod-identity-compact-support-normalization (R id_{s!} = L_s R_s) and the U∘P∘J∘R shape used in the proof of lem-weil-compact-support-reduction-tower-functor. The Roos triangle of lem-weil-pbc-ringed-strict-tower-homotopy-limit makes the model a genuine derived limit of the defining towers. No hypothesis was added and every base conclusion is kept; the vague adjunct sentence became an explicit equation. Step checks: step 1 Cauchy-lift completeness, which gives the hypotheses O = lim O/λ^n and λ a non-zero-divisor; step 2 uses only the unconditional e_n Ru_* ≅ Ru_* e_n with quotient compatibility, and B_n = (A_n)_T; step 3: for the identity open, P_M = M, and I recomputed ρ_* Rf_*(r_n) α_{n+1} = Res(α_n) ρ_! Rf_!(r_n) from naturality plus the c_0 square of lem-weil-proper-finite-normalization (stated on the ambient D(X,A_n)); step 4: exact R lim on the strict iso and its inverse; step 5: naturality of π (counit) and two-sided naturality of the 07A6-type adjunction give the red equation in the right order. proof_deps equals the union of uses; no cycle (traversal of 12.5k deps); no SGA. Accepted tool_uses: integers-dvr, coef-derived-system-evaluation-calculus, pur-coefficient-system-derived-comparison, pbc-ringed-strict-tower-homotopy-limit, coef-derived-tower-counit-projections, derived-scalar-extension-restriction-adjunction (l-adic-extension-complete is a Mathlib leaf; listing it is harmless). Edge cases: K=0, X empty, f=id, n=1, E=Q_l, unbounded reductions. Maintainer notes: (1) def-weil-compact-support-finite-action chooses F_E existentially, and nothing states that it agrees with this explicit strict model. The descent node lem-weil-proper-coefficient-descent composes θ_E with b_! built on F_E, so its splitter must bridge this; the gap predates the delivery. (2) The ringed strict-tower lemma does not state that its Roos map has components π_n; this holds in the K-injective model. (3) Step 1's source label (Zheng) is cosmetic."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProperIntegralTowerComparison",
+  "declaration": "WeilConjectures.ProperIntegralTower.proper_integral_tower_comparison",
+  "declarations": [
+   "WeilConjectures.ProperIntegralTower.identityOpen",
+   "WeilConjectures.ProperIntegralTower.systemComparison",
+   "WeilConjectures.ProperIntegralTower.shriekTower",
+   "WeilConjectures.ProperIntegralTower.starTower",
+   "WeilConjectures.ProperIntegralTower.towerComparison",
+   "WeilConjectures.ProperIntegralTower.finiteComparison",
+   "WeilConjectures.ProperIntegralTower.termComparison",
+   "WeilConjectures.ProperIntegralTower.shriekEvaluation",
+   "WeilConjectures.ProperIntegralTower.starEvaluation",
+   "WeilConjectures.ProperIntegralTower.nativeIntegralComparison",
+   "WeilConjectures.ProperIntegralTower.shriekProjection",
+   "WeilConjectures.ProperIntegralTower.starProjection",
+   "WeilConjectures.ProperIntegralTower.shriekReduction",
+   "WeilConjectures.ProperIntegralTower.starReduction",
+   "WeilConjectures.ProperIntegralTower.integralComparison",
+   "WeilConjectures.ProperIntegralTower.recordedProjection",
+   "WeilConjectures.ProperIntegralTower.recordedReduction",
+   "WeilConjectures.ProperIntegralTower.proper_integral_tower_comparison"
+  ],
+  "file": "lean/Sheaf/Paper/ProperIntegralTowerComparison.lean",
+  "statement": "theorem proper_integral_tower_comparison (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p) (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (_inclusion : E →ₐ[ℚ_[l]] Ω) {X Y : Scheme.{u}} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] [IsSeparated (Y ↘ Spec (.of D.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))] [IsProper f] : ∀ (K : sfIntegralConstructibleCategory l E X) (n : ℕ), ((normalizedDVRTowerTransition l E Y D hl (Nat.le_succ n)).app ((shriekTower l E f).obj K.obj) ≫ (shriekEvaluation l E f K.obj n).hom = (shriekEvaluation l E f K.obj (n + 1)).hom ≫ sfCompactSupportTransition l E (Compactification.ofIsProper f) K.obj n) ∧ ((normalizedDVRTowerTransition l E Y D hl (Nat.le_succ n)).app ((starTower l E f).obj K.obj) ≫ (starEvaluation l E f K.obj n).hom = (starEvaluation l E f K.obj (n + 1)).hom ≫ sfDirectImageTransition l E f K.obj n) ∧ ((coefficientConstantTowerEvaluation l E Y n).map ((towerComparison l E f).hom.app K.obj) ≫ (starEvaluation l E f K.obj n).hom = (shriekEvaluation l E f K.obj n).hom ≫ (termComparison l E f K.obj n).hom) ∧ (sfCompactSupportTransition l E (Compactification.ofIsProper f) K.obj n ≫ (termComparison l E f K.obj n).hom = (termComparison l E f K.obj (n + 1)).hom ≫ sfDirectImageTransition l E f K.obj n) ∧ ((nativeIntegralComparison l E f).hom.app K.obj ≫ starProjection l E f K.obj n = shriekProjection l E f K.obj n ≫ (termComparison l E f K.obj n).hom) ∧ ((scalarReductionDerivedExtension l E Y n).map ((nativeIntegralComparison l E f).hom.app K.obj) ≫ starReduction l E f K.obj n = shriekReduction l E f K.obj n ≫ (finiteComparison l E f n).hom.app ((scalarReductionDerivedExtension l E X n).obj K.obj)) ∧ ((integralComparison l E D hl f).hom.app K ≫ starProjection l E f K.obj n = recordedProjection l E D hl f K n ≫ (termComparison l E f K.obj n).hom) ∧ (recordedReduction l E D hl f K n = (sfCompactSupportFiniteReductionIso l D.k (finiteFieldDatumPrimeUnit D l hl) (Compactification.ofIsProper f) E K n).hom) ∧ ((scalarReductionDerivedExtension l E Y n).map ((integralComparison l E D hl f).hom.app K) ≫ starReduction l E f K.obj n = recordedReduction l E D hl f K n ≫ (finiteComparison l E f n).hom.app ((scalarReductionDerivedExtension l E X n).obj K.obj))",
+  "branch": "newtargets-dag",
+  "by": "Q75",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Canonical strict-system identity-open comparison, exact completed-coefficient restriction and fixed total inverse limit, with normalized finite evaluations, published quotient transitions, projection equations and their actual scalar-adjunction adjuncts. Helpers only assemble the existing constructions; no auxiliary comparison or resolution hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d50a6ef9a",
+  "group": "Q75",
+  "result": "pass",
+  "note": "Read the node, all 14 stmt_deps, the report and the module, plus the exact side-live declarations (FrobeniusExchange system model and compactRealization spec, CoefficientRingedSequenceSite limit/projection/evaluation, CoefficientDerivedSystemReduction counit_projection, the unit-pinned derived scalar adjunction, sfIntrinsicOpenId). Only the item's lean field changed; dependency nodes are identical to live; statement verbatim; no hollow defs; one sorry; docstrings with source and blueprint and all 5 proof steps. Hypotheses exact (finite-field datum, l != p, Omega in universe v with embedding of E, separated finite-type X and Y, IsProper f, constructible integral K); residue units built from the proved finiteFieldDatumPrimeUnit. Clauses 1-6 render the transitions, the strict tower iso, the transition square, the projection square and the red equation. Clauses 7-9 on the recorded Rf_! follow from them: clause 8 from CompactRealizationSpec plus counit_projection, since coefficientFiniteAdjunction = derivedScalarExtensionRestrictionAdjunction.choose. Edge cases: empty X/Y, K=0, f=id, n=0 (exponent 1), unbounded reductions. Advisories: owners not in stmt_deps (def-weil-system-operation-exchange-realization, def-coef-ringed-sequence-site, def-coef-normalized-dvr-tower, def-trf-integral-comparison-sequence-systems, def-sp-finite-intrinsic-open-square, def-weil-compact-support-finite-action, def-weil-derived-complete-integral-detailed, lem-sf-integral-compact-support-constructible, lem-weil-structure-direct-images-constructible) cannot be added at S2; identity-open iso copies exist only in downstream theorem modules; second-reading section is short. No file changed, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261025T203456-L-2820382",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

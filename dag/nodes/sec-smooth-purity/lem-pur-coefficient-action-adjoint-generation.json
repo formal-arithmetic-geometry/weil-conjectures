@@ -1,0 +1,238 @@
+{
+ "id": "lem-pur-coefficient-action-adjoint-generation",
+ "kind": "statement",
+ "title": "Generation proves invertibility of the specified coefficient-action adjoint mate",
+ "statement": "Let $C$ be a commutative ring and let $D(C\\text{-}\\mathrm{Mod})$ be its ordinary unbounded derived module category [def-weil-abstract-derived-category], with $C$ in degree zero. Let $\\mathcal A,\\mathcal B$ be locally small triangulated categories with set-indexed coproducts [def-weil-triangulated-category]. Let $T_{\\mathcal A}:D(C\\text{-}\\mathrm{Mod})\\times\\mathcal A\\to\\mathcal A$ and $T_{\\mathcal B}:D(C\\text{-}\\mathrm{Mod})\\times\\mathcal B\\to\\mathcal B$ be bifunctors, exact in the first variable with specified coherent integer-shift comparisons, and with natural unit identifications $u^{\\mathcal A}_K:T_{\\mathcal A}(C,K)\\xrightarrow{\\sim}K$ and $u^{\\mathcal B}_M:T_{\\mathcal B}(C,M)\\xrightarrow{\\sim}M$.\nLet $F:\\mathcal A\\to\\mathcal B$ and $G:\\mathcal B\\to\\mathcal A$ be exact functors with a fixed adjunction $F\\dashv G$ and counit $\\epsilon:FG\\to1$. Require their shift comparisons to be compatible with this adjunction, in particular\n$$\\epsilon_{M[n]}=\\epsilon_M[n]\\circ c_{F,n,GM}\\circ F(c_{G,n,M}).$$\nSuppose given a natural isomorphism\n$$P_{V,K}:T_{\\mathcal B}(V,FK)\\xrightarrow{\\sim}F(T_{\\mathcal A}(V,K))$$\nwhich commutes with the specified coefficient-variable shifts and satisfies\n$$F(u^{\\mathcal A}_K)\\circ P_{C,K}=u^{\\mathcal B}_{FK}.$$\nFor every $M$, assume that $A_M(V)=T_{\\mathcal A}(V,GM)$ and $B_M(V)=G(T_{\\mathcal B}(V,M))$ are exact functors preserving set-indexed coproducts, with their composite shift comparisons.\n\nDefine $\\alpha_{V,M}:A_M(V)\\to B_M(V)$ as the adjunction transpose of\n$$F(T_{\\mathcal A}(V,GM))\\xrightarrow{P_{V,GM}^{-1}}T_{\\mathcal B}(V,FGM)\\xrightarrow{T_{\\mathcal B}(1_V,\\epsilon_M)}T_{\\mathcal B}(V,M).$$\nThen $\\alpha$ is natural in $V,M$, satisfies $G(u^{\\mathcal B}_M)\\circ\\alpha_{C,M}=u^{\\mathcal A}_{GM}$, and commutes with all coefficient shifts:\n$$c_{B_M,n,V}\\circ\\alpha_{V[n],M}=\\alpha_{V,M}[n]\\circ c_{A_M,n,V}.$$\nFor every $M$, the full subcategory $\\mathcal L_M=\\{V:\\alpha_{V,M}\\text{ is invertible}\\}$ contains $C$ and is closed under isomorphisms, integer shifts, distinguished cones, retracts and arbitrary set-indexed coproducts. One has $\\mathcal L_M=D(C\\text{-}\\mathrm{Mod})$, so every $\\alpha_{V,M}$ is an isomorphism. This is an assertion about the specified transpose, with no claim that natural transformations are determined by their values on $C$. Here $c_{H,n,Z}:H(Z[n])\\xrightarrow{\\sim}H(Z)[n]$ denotes the specified shift comparison of a functor $H$.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 2.26, printed p. 15: counit transpose. Abstract coefficient-action formulation of retained item proof steps 9–10, with the localizing-generation argument independent of smooth purity."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "Write q_M = P.inv.app(GM) followed by TB.map(epsilon_M), a natural transformation TA.obj(GM) ⋙ F → TB.obj(M). Construct alpha_M as the composite of the right unitor inverse, the unit whiskered by TA.obj(GM), the associator inverse, and q_M whiskered by G. Its components equal the specified coefficientActionAdjointMate by Adjunction.homEquiv_unit. Naturality in V is now naturality of alpha_M. For naturality in M, apply Adjunction.homEquiv_naturality_left_square: the inverse adjunct square follows from naturality of P.inv, functoriality of TB, and naturality of the counit.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and following unit/counit formulas; agent calculation of the specified transpose from Zheng Construction 2.26."
+   }
+  },
+  {
+   "text": "At $V=C$, projection normalization gives $P_{C,GM}^{-1}= (u^{\\mathcal B}_{FGM})^{-1}F(u^{\\mathcal A}_{GM})$. Naturality of $u^{\\mathcal B}$ therefore gives $u^{\\mathcal B}_M q_{C,M}=\\epsilon_M F(u^{\\mathcal A}_{GM})$. Transpose this equality: the left side corresponds to $G(u^{\\mathcal B}_M)\\alpha_{C,M}$ and the right side to $u^{\\mathcal A}_{GM}$. Both unit identifications are isomorphisms, so $\\alpha_{C,M}$ is invertible.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and following unit/counit formulas; agent calculation of the specified transpose from Zheng Construction 2.26."
+   }
+  },
+  {
+   "text": "For each K, hshift gives NatTrans.CommShift (P.hom.app K) ℤ componentwise. The inverse-isomorphism and composition instances, together with the assumed shift compatibility of TB.map(epsilon_M), give NatTrans.CommShift q_M ℤ. The unit of the adjunction commutes with shifts by adj.CommShift. The whiskering, associator and unitor compatibility instances therefore give NatTrans.CommShift alpha_M ℤ. NatTrans.shift_app_comm, rewritten using the component equality from step 1, is precisely the required shift equation for every integer n.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014V, definition-exact-functor-triangulated-categories; agent calculation using the stated counit and projection shift compatibilities."
+   }
+  },
+  {
+   "text": "Equip the enlarged module category with its Grothendieck abelian structure by transport across the ULift ring equivalence. Use [lem-sfb-grothendieck-k-injective] and the existing DerivedCategory.hasColimitsOfShape_discrete construction to supply source coproducts. For each M, apply [det-sf-determination-localizing] to the two exact coproduct-preserving coefficient functors and alpha_M, whose shift compatibility was proved in step 3. This gives its triangulated locus, closure under arbitrary coproduct cocones, and retract closure. Step 2 puts the degree-zero ring in the locus. Naturality under isomorphisms gives repleteness; equivalently, after step 5 every object lies in the locus, which proves each requested closure clause directly.",
+   "uses": [
+    "lem-sfb-grothendieck-k-injective",
+    "det-sf-determination-localizing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-determination/det-sf-determination-localizing.md",
+    "place": "The full statement of det-sf-determination-localizing, applied in the coefficient variable."
+   }
+  },
+  {
+   "text": "Every $C[n]$ belongs to $\\mathcal L_M$ by steps 2 and 4. Apply [lem-pc-derived-module-free-generation] to the ring $C$. Its generating shifts and all three closure operations (set-indexed direct sums, third vertices of distinguished triangles, and retracts) lie in $\\mathcal L_M$ by step 4. Thus every unbounded coefficient complex $V$ belongs to $\\mathcal L_M$. This proves the conclusion for the specified transpose constructed in step 1; no uniqueness of natural transformations from their components on the generator has been used.",
+   "uses": [
+    "lem-pc-derived-module-free-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09PB, remark-P-resolution, final property criterion for all objects of D(R)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-grothendieck-k-injective",
+  "det-sf-determination-localizing",
+  "lem-pc-derived-module-free-generation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 2.26, printed p. 15, for the specified transpose. M7, 2026-10-23: direct adjunction naturality and unit normalization; Mathlib CommShift instances for the actual composite transpose; isoLocus_localizing and Stacks Tag 09PB derivedModuleFreeGeneration for invertibility. Statement and unit route unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact adjunction with a unital shift compatible projection formula and coproduct preserving coefficient action has an invertible right adjoint tensor mate by generation of the unbounded derived module category by its ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.IsGrothendieckAbelian.{v, v, u} C] {G : C},\\n  (CategoryTheory.IsGrothendieckAbelian.tensorObj G).IsLeftAdjoint\", \"doc\": \"For any object $ G $ in a Grothendieck abelian category $ \\\\mathcal{C} $, the functor $ \\\\text{Mod}(\\\\text{End}(G)^{\\\\text{op}}) \\\\to \\\\mathcal{C} $ constructed via the tensorObj operation is a left adjoint\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : CategoryTheory.IsGrothendieckAbelian.{v, v, u} C] →\\n        (G : C) → CategoryTheory.IsGrothendieckAbelian.tensorObj G ⊣ CategoryTheory.preadditiveCoyonedaObj G\", \"doc\": \"For any object $ G $ in a Grothendieck abelian category $ \\\\mathcal{C} $, this defines an adjunction where the tensor functor $ \\\\text{tensorObj} \\\\, G $ (constructing objects in $ \\\\mathcal{C} $ from $ \\\\\"}\n  {\"name\": \"CategoryTheory.Monoidal.Reflective.isIso_tfae\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Braided/Reflection\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.MonoidalCategory D]\\n  [CategoryTheory.SymmetricCategory D] [inst_4 : CategoryTheory.MonoidalClosed D] {R : CategoryTheory.Functor C D}\\n  [R.Faithfu\", \"doc\": \"In a reflective monoidal adjunction, the following four conditions are pairwise logically equivalent: (1) For all objects c in C and d in D, the component of the adjunction unit at the internal hom-ob\"}\n  {\"name\": \"CategoryTheory.Tor'\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Abelian C] →\\n        [CategoryTheory.MonoidalPreadditive C] →\\n          [CategoryTheory.HasProjectiveResolutions C] → ℕ → CategoryTheory.Functor C (Cat\", \"doc\": \"For a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, the $n$-th Tor functor $\\\\mathrm{Tor}_n : \\\\mathcal{C} \\\\times \\\\mathcal{C} \\\\to \\\\mathcal{C}$ is the $n$-th left-derived functo\"}\n  {\"name\": \"CategoryTheory.Tor\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Abelian C] →\\n        [CategoryTheory.MonoidalPreadditive C] →\\n          [CategoryTheory.HasProjectiveResolutions C] → ℕ → CategoryTheory.Functor C (Cat\", \"doc\": \"The $ n $-th left-derived functor of the tensor product operation in a monoidal abelian category, constructed by taking projective resolutions. For each object $ X $, $ \\\\mathrm{Tor}_n(X,-) $ is the $ \"}\n  {\"name\": \"CategoryTheory.Monoidal.Reflective.instIsIsoMapTensorHomAppUnit\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Braided/Reflection\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.MonoidalCategory D]\\n  [inst_3 : CategoryTheory.MonoidalCategory C] {L : CategoryTheory.Functor D C} [L.Monoidal]\\n  {R : CategoryTheory.Functor C D}\", \"doc\": \"In a reflective monoidal category, for any two objects $d$ and $d'$ in the category $D$, the functor $L$ maps the tensor product of the unit components $\\\\eta_d$ and $\\\\eta_{d'}$ of the adjunction to an\"}\n  {\"name\": \"CategoryTheory.tensorLeftAdjunction\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      (Y Y' : C) →\\n        [CategoryTheory.ExactPairing Y Y'] →\\n          CategoryTheory.MonoidalCategory.tensorLeft Y' ⊣ CategoryTheory.MonoidalCategory.tensorLeft Y\", \"doc\": \"In a rigid monoidal category $\\\\mathcal{C}$, given dual objects $Y$ and $Y'$ with an exact pairing, the left tensoring functor $\\\\mathcal{C} \\\\to \\\\mathcal{C}$ defined by tensoring with $Y'$ is left adjoi\"}\n  {\"name\": \"CategoryTheory.tensorRightAdjunction\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      (Y Y' : C) →\\n        [CategoryTheory.ExactPairing Y Y'] →\\n          CategoryTheory.MonoidalCategory.tensorRight Y ⊣ CategoryTheory.MonoidalCategory.tensorRight Y'\", \"doc\": \"Given dual objects $Y$ and $Y'$ in a monoidal category $\\\\mathcal{C}$, this establishes an adjunction between the functors $- \\\\otimes Y$ and $- \\\\otimes Y'$. Specifically, tensoring with the dual object\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ordinary tensor/scalar adjunctions or adjunction shift structures, not invertibility of this specified mate by unbounded derived-module generation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"CommShift\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.CommShift.instId\", \"module\": \"Mathlib.CategoryTheory.Shift.Adjunction\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] (A : Type u_3) [AddMonoid A] [CategoryTheory.HasShift C A] : CategoryTheory.Adjunction.id.CommShift A\", \"doc\": \"The identity adjunction is compatible with the trivial `CommShift` structure on the\\nidentity functor.\"}\n  {\"name\": \"CategoryTheory.Adjunction.CommShift\", \"module\": \"Mathlib.CategoryTheory.Shift.Adjunction\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) (A : Type u_3) [AddMonoid A] [CategoryTheory.HasShift C A] [CategoryTheory.HasShift D A] [F.CommShift A] [G.Com\", \"doc\": \"The property for `CommShift` structures on `F` and `G` to be compatible with an\\nadjunction `F ⊣ G`.\"}\n  {\"name\": \"CategoryTheory.Adjunction.leftAdjointCommShift\", \"module\": \"Mathlib.CategoryTheory.Shift.Adjunction\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) (A : Type u_3) [AddGroup A] [CategoryTheory.HasShift C A] [CategoryTheory.HasShift D A] [G.CommShift A] : F.Com\", \"doc\": \"Given an adjunction `F ⊣ G` and a `CommShift` structure on `G`, this constructs\\nthe unique compatible `CommShift` structure on `F`.\"}\n  {\"name\": \"CategoryTheory.Adjunction.rightAdjointCommShift\", \"module\": \"Mathlib.CategoryTheory.Shift.Adjunction\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) (A : Type u_3) [AddGroup A] [CategoryTheory.HasShift C A] [CategoryTheory.HasShift D A] [F.CommShift A] : G.Com\", \"doc\": \"Given an adjunction `F ⊣ G` and a `CommShift` structure on `F`, this constructs\\nthe unique compatible `CommShift` structure on `G`.\"}\n  {\"name\": \"CategoryTheory.Adjunction.CommShift.compatibilityUnit_isoZero\", \"module\": \"Mathlib.CategoryTheory.Shift.Adjunction\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) {A : Type u_3} [AddMonoid A] [CategoryTheory.HasShift C A] [CategoryTheory.HasShift D A] : CategoryTheory.Adjun\", \"doc\": \"The isomorphisms `Functor.CommShift.isoZero F` and `Functor.CommShift.isoZero G` are\\ncompatible with the unit of an adjunction `F ⊣ G`.\"}\n  {\"name\": \"CategoryTheory.Adjunction.commShift_of_leftAdjoint\", \"module\": \"Mathlib.CategoryTheory.Shift.Adjunction\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) (A : Type u_3) [AddGroup A] [CategoryTheory.HasShift C A] [CategoryTheory.HasShift D A] [F.CommShift A] : adj.C\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.commShift_of_rightAdjoint\", \"module\": \"Mathlib.CategoryTheory.Shift.Adjunction\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) (A : Type u_3) [AddGroup A] [CategoryTheory.HasShift C A] [CategoryTheory.HasShift D A] [G.CommShift A] : adj.C\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.LeftAdjointCommShift.compatibilityUnit_iso\", \"module\": \"Mathlib.CategoryTheory.Shift.Adjunction\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) {A : Type u_3} [AddGroup A] [CategoryTheory.HasShift C A] [CategoryTheory.HasShift D A] [G.CommShift A] (a : A)\", \"doc\": \"The commutation isomorphisms of `Adjunction.LeftAdjointCommShift.iso` are compatible with\\nthe unit of the adjunction.\"}\n  {\"name\": \"CategoryTheory.Adjunction.RightAdjointCommShift.compatibilityUnit_iso\", \"module\": \"Mathlib.CategoryTheory.Shift.Adjunction\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) {A : Type u_3} [AddGroup A] [CategoryTheory.HasShift C A] [CategoryTheory.HasShift D A] [F.CommShift A] (a : A)\", \"doc\": \"The commutation isomorphisms of `Adjunction.RightAdjointCommShift.iso` are compatible with\\nthe unit of the adjunction.\"}\n  {\"name\": \"CategoryTheory.Adjunction.LeftAdjointCommShift.iso\", \"module\": \"Mathlib.CategoryTheory.Shift.Adjunction\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) {A : Type u_3} [AddGroup A] [CategoryTheory.HasShift C A] [CategoryTheory.HasShift D A] (a : A) [G.CommShift A]\", \"doc\": \"Given an adjunction `F ⊣ G` and a `CommShift` structure on `G`, these are the candidate\\n`CommShift.iso a` isomorphisms for a compatible `CommShift` structure on `F`.\"}\n  {\"name\": \"CategoryTheory.Adjunction.RightAdjointCommShift.iso\", \"module\": \"Mathlib.CategoryTheory.Shift.Adjunction\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) {A : Type u_3} [AddGroup A] [CategoryTheory.HasShift C A] [CategoryTheory.HasShift D A] (a : A) [F.CommShift A]\", \"doc\": \"Given an adjunction `F ⊣ G` and a `CommShift` structure on `F`, these are the candidate\\n`CommShift.iso a` isomorphisms for a compatible `CommShift` structure on `G`.\"}\n  {\"name\": \"CategoryTheory.Adjunction.CommShift.CompatibilityCounit\", \"module\": \"Mathlib.CategoryTheory.Shift.Adjunction\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) {A : Type u_3} [AddMonoid A] [CategoryTheory.HasShift C A] [CategoryTheory.HasShift D A] {a : A} (e₁ : (Categor\", \"doc\": \"Given an adjunction `adj : F ⊣ G`, `a` in `A` and commutation isomorphisms\\n`e₁ : shiftFunctor C a ⋙ F ≅ F ⋙ shiftFunctor D a` and\\n`e₂ : shiftFunctor D a ⋙ G ≅ G ⋙ shiftFunctor C a`, this expresses the\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ordinary tensor/scalar adjunctions or adjunction shift structures, not invertibility of this specified mate by unbounded derived-module generation."
+  },
+  {
+   "tool": "grep",
+   "query": "(projection|tensor).*(mate|adjoint).*(generat|[Ii]so)|[Ii]so.*(mate|projection).*generat",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/Coalgebra.lean\", \"line\": \"76\", \"text\": \"    rw [← adjoint_lTensor, ← adjoint_rTensor, ← toLinearEquiv_assocIsometry,\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ordinary tensor/scalar adjunctions or adjunction shift structures, not invertibility of this specified mate by unbounded derived-module generation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjunction transpose of inverse projection followed by counit is compatible with shifts and becomes invertible on all scalar complexes from the unit generator",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.CommShift.compatibilityCounit_left\", \"module\": \"Mathlib.CategoryTheory.Shift.Adjunction\", \"type\": \"(h : CompatibilityCounit adj e₁ e₂) (X : C) :\\n  e₁.hom.app X = F.map ((adj.unit.app X)⟦a⟧') ≫ F.map (e₂.inv.app _) ≫ adj.counit.app _\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, an adjunction $F \\\\dashv G$ between functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$, and an additive monoid $A$ with s\"}\n  {\"name\": \"CategoryTheory.Adjunction.CommShift.compatibilityCounit_of_compatibilityUnit\", \"module\": \"Mathlib.CategoryTheory.Shift.Adjunction\", \"type\": \"(h : CompatibilityUnit adj e₁ e₂) : CompatibilityCounit adj e₁ e₂\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with shift functors parameterized by an additive monoid $A$, and an adjunction $F \\\\dashv G$ between functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G :\"}\n  {\"name\": \"CategoryTheory.Adjunction.commShiftIso_hom_app_counit_app_shift\", \"module\": \"Mathlib.CategoryTheory.Shift.Adjunction\", \"type\": \"[adj.CommShift A] (a : A) (Y : D) : ((G ⋙ F).commShiftIso a).hom.app Y ≫ (adj.counit.app Y)⟦a⟧' = adj.counit.app (Y⟦a⟧)\", \"doc\": \"For an adjunction between functors $ F $ and $ G $ between categories $ \\\\mathcal{C} $ and $ \\\\mathcal{D} $ equipped with shift operations parameterized by an additive monoid $ A $, and for any $ a \\\\in \"}\n  {\"name\": \"CategoryTheory.Adjunction.counitAsIsoOfIso\", \"module\": \"Mathlib.CategoryTheory.Monad.Adjunction\", \"type\": \"(adj : L ⊣ R) (j : R ⋙ L ≅ 𝟭 D) : R ⋙ L ≅ 𝟭 D\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, functors $L: \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $R: \\\\mathcal{D} \\\\to \\\\mathcal{C}$ forming an adjunction $L \\\\dashv R$, and a natural isomorphism $j: R \\\\ci\"}\n  {\"name\": \"CategoryTheory.Adjunction.CommShift.compatibilityUnit_right\", \"module\": \"Mathlib.CategoryTheory.Shift.Adjunction\", \"type\": \"(h : CompatibilityUnit adj e₁ e₂) (Y : D) :\\n  e₂.inv.app Y = adj.unit.app _ ≫ G.map (e₁.hom.app _) ≫ G.map ((adj.counit.app _)⟦a⟧')\", \"doc\": \"For categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with shift functors parameterized by an additive monoid $A$, and an adjunction $F \\\\dashv G$ between functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\\"}\n  {\"name\": \"CategoryTheory.Adjunction.commShiftIso_inv_app_counit_app\", \"module\": \"Mathlib.CategoryTheory.Shift.Adjunction\", \"type\": \"[adj.CommShift A] (a : A) (Y : D) : ((G ⋙ F).commShiftIso a).inv.app Y ≫ adj.counit.app (Y⟦a⟧) = (adj.counit.app Y)⟦a⟧'\", \"doc\": \"For an adjunction between functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{C} $ commuting with shift operations parameterized by an additive monoid $ A $, the inverse of\"}\n  {\"name\": \"CategoryTheory.Adjunction.CommShift.CompatibilityCounit\", \"module\": \"Mathlib.CategoryTheory.Shift.Adjunction\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        {F : CategoryTheory.Functor C D} →\\n          {G : CategoryTheory.Functor D C} →\\n            (F ⊣ G) →\\n              {A : Type u_3} →\\n               \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, an adjunction $F \\\\dashv G$ between functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$, and an additive monoid $A$ with s\"}\n  {\"name\": \"CategoryTheory.Adjunction.shift_unit_app\", \"module\": \"Mathlib.CategoryTheory.Shift.Adjunction\", \"type\": \"[adj.CommShift A] (a : A) (X : C) :\\n  (adj.unit.app X)⟦a⟧' =\\n    adj.unit.app (X⟦a⟧) ≫ G.map ((F.commShiftIso a).hom.app X) ≫ (G.commShiftIso a).hom.app (F.obj X)\", \"doc\": \"For any element $a$ in an additive monoid $A$ and object $X$ in category $\\\\mathcal{C}$, the unit component of the adjunction $\\\\eta_X$ at the $a$-shifted object $X[a]$ satisfies $\\\\eta_{X[a]} = \\\\eta_{X[\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ordinary tensor/scalar adjunctions or adjunction shift structures, not invertibility of this specified mate by unbounded derived-module generation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right adjoint linearity for derived module actions follows by localizing generation when the right adjoint preserves coproducts",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ModuleCat.instIsRightAdjointCoextendScalars\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : Ring R] [inst_1 : Ring S] (f : R →+* S),\\n  (ModuleCat.coextendScalars f).IsRightAdjoint\", \"doc\": \"For any ring homomorphism $ f : R \\to S $, the coextension of scalars functor from the category of left $ R $-modules to the category of left $ S $-modules is a right adjoint. This functor maps an $ R \"}\n  {\"name\": \"ModuleCat.instIsLeftAdjointExtendScalars\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S),\\n  (ModuleCat.extendScalars f).IsLeftAdjoint\", \"doc\": \"For any commutative rings $ R $ and $ S $, and a ring homomorphism $ f : R \\to S $, the extension of scalars functor from the category of $ R $-modules to the category of $ S $-modules along $ f $ is a\"}\n  {\"name\": \"ModuleCat.restrictCoextendScalarsAdj\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : Ring R] → [inst_1 : Ring S] → (f : R →+* S) → ModuleCat.restrictScalars f ⊣ ModuleCat.coextendScalars f\", \"doc\": \"Given a ring homomorphism $ f : R → S $, the restriction of scalars functor (mapping $ S $-modules to $ R $-modules) is left adjoint to the coextension of scalars functor (mapping $ R $-modules to $ S\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.IsGrothendieckAbelian.{v, v, u} C] {G : C},\\n  (CategoryTheory.IsGrothendieckAbelian.tensorObj G).IsLeftAdjoint\", \"doc\": \"For any object $ G $ in a Grothendieck abelian category $ \\\\mathcal{C} $, the functor $ \\\\text{Mod}(\\\\text{End}(G)^{\\\\text{op}}) \\\\to \\\\mathcal{C} $ constructed via the tensorObj operation is a left adjoint\"}\n  {\"name\": \"ModuleCat.instIsRightAdjointRestrictScalars\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S),\\n  (ModuleCat.restrictScalars f).IsRightAdjoint\", \"doc\": \"For any commutative rings $ R $ and $ S $ and a ring homomorphism $ f : R \\to S $, the restriction of scalars functor from the category of $ S $-modules to the category of $ R $-modules is a right adjo\"}\n  {\"name\": \"ModuleCat.instIsLeftAdjointRestrictScalars\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : Ring R] [inst_1 : Ring S] (f : R →+* S),\\n  (ModuleCat.restrictScalars f).IsLeftAdjoint\", \"doc\": \"For any ring homomorphism $ f : R \\to S $, the restriction of scalars functor from the category of left $ S $-modules to the category of left $ R $-modules is a left adjoint functor.\"}\n  {\"name\": \"ModuleCat.RestrictionCoextensionAdj.unit'\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : Ring R] →\\n      [inst_1 : Ring S] →\\n        (f : R →+* S) →\\n          CategoryTheory.Functor.id (ModuleCat S) ⟶ (ModuleCat.restrictScalars f).comp (ModuleCat.coextendScalars f)\", \"doc\": \"The natural transformation from the identity functor on the category of $ S $-modules to the composition of the restriction-of-scalars functor $ \\\\text{restrict}_f $ followed by the coextension-of-scal\"}\n  {\"name\": \"ModuleCat.instIsRightAdjointForget\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Adjunctions\", \"type\": \"∀ (R : Type u) [inst : Ring R], (CategoryTheory.forget (ModuleCat R)).IsRightAdjoint\", \"doc\": \"The forgetful functor from the category of left $ R $-modules to the category of sets is a right adjoint, with the left adjoint being the free module construction.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ordinary tensor/scalar adjunctions or adjunction shift structures, not invertibility of this specified mate by unbounded derived-module generation."
+  },
+  {
+   "tool": "grep",
+   "query": "(projection|tensor).*(mate|adjoint).*(generat|[Ii]so)|[Ii]so.*(mate|projection).*generat",
+   "results": "Actual logged search: 1 hits; top results: Mathlib/Analysis/InnerProductSpace/Coalgebra.lean. ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern adjunction shift structures or degree-zero derived functors, not the stated arbitrary coefficient-action mate and generation theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A unital shift compatible projection formula has an invertible right adjoint coefficient tensor mate by localizing generation of the module derived category",
+   "results": "Actual logged search: 8 hits; top results: CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.CommShift.compatibilityUnit_unique_right, CategoryTheory.Adjunction.RightAdjointCommShift.compatibilityUnit_iso, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.CommShift.CompatibilityUnit, CategoryTheory.Adjunction.CommShift.compatibilityUnit_isoZero, CategoryTheory.Adjunction.RightAdjointCommShift.iso_hom_app. ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern adjunction shift structures or degree-zero derived functors, not the stated arbitrary coefficient-action mate and generation theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"CommShift\"",
+   "results": "Actual logged search: 12 hits; top results: CategoryTheory.Adjunction.CommShift.instId, CategoryTheory.Adjunction.CommShift, CategoryTheory.Adjunction.leftAdjointCommShift, CategoryTheory.Adjunction.rightAdjointCommShift, CategoryTheory.Adjunction.CommShift.compatibilityUnit_isoZero, CategoryTheory.Adjunction.commShift_of_leftAdjoint, CategoryTheory.Adjunction.commShift_of_rightAdjoint, CategoryTheory.Adjunction.LeftAdjointCommShift.compatibilityUnit_iso. ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern adjunction shift structures or degree-zero derived functors, not the stated arbitrary coefficient-action mate and generation theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invertibility of the adjunction transpose of inverse projection formula followed by counit for exact coproduct preserving coefficient actions on the unbounded derived category of modules",
+   "results": "Actual logged search: 8 hits; top results: CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_assoc, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_app_assoc, CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_app, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc, DerivedCategory.singleFunctorIsoCompQ, CategoryTheory.instIsIsoAppFromLeftDerivedZero. ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern adjunction shift structures or degree-zero derived functors, not the stated arbitrary coefficient-action mate and generation theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformation between exact coproduct preserving functors out of derived modules is an isomorphism if its component at the free rank one module is an isomorphism",
+   "results": "Actual logged search: 8 hits; top results: CategoryTheory.instIsIsoAppFromLeftDerivedZero, CategoryTheory.instIsIsoFunctorFromLeftDerivedZero, CategoryTheory.instIsIsoAppToRightDerivedZero, CategoryTheory.instIsIsoFunctorToRightDerivedZero, CategoryTheory.instIsIsoFromLeftDerivedZero', CategoryTheory.instIsIsoAppFromLeftDerivedZeroOfProjective, CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective, CategoryTheory.Functor.leftDerivedZeroIsoSelf. ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern adjunction shift structures or degree-zero derived functors, not the stated arbitrary coefficient-action mate and generation theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-etale-exceptional-constant-tensor",
+  "date": "2026-10-22",
+  "group": "Q119"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph beginning \"For Λ in {O_E,E,Qlb}, use respectively derived inverse limits, rationalization, and the common-stage construction ... of the compatible finite-level functors\": the finite-level constant-coefficient tensor comparison needed to compare derived reductions. Work package: Construction 2.26, printed p. 15: counit transpose. Abstract coefficient-action formulation of retained item proof steps 9–10, with the localizing-generation argument independent of smooth purity.",
+   "via": [
+    "lem-pur-etale-exceptional-constant-tensor",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-coefficient-action-adjoint-generation",
+  "worker": "stage1",
+  "group": "Q125",
+  "summary": "No new nodes. Compute the actual counit transpose, its naturality, unit value and all integer shifts explicitly; then reuse the existing localizing-isomorphism-locus and derived-module free-generation statements. All hypotheses and the zero-ring/zero-object cases were checked. Statement unchanged.",
+  "blueprint": "Realizes the coefficient-action mate and generation subargument of the finite-level tensor comparison serving the adic-stage paragraph of def-weil-exceptional-inverse-image, through lem-pur-etale-exceptional-constant-tensor proof step 4.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-adjunction-mate",
+    "why": "Generic mate construction identifies the specified transpose and gives naturality, without replacing any geometric step."
+   },
+   {
+    "node": "det-sf-determination-localizing",
+    "why": "Generic invertibility propagation for exact coproduct-preserving functors is the localizing closure argument needed in the coefficient category."
+   },
+   {
+    "node": "lem-pc-derived-module-free-generation",
+    "why": "Ordinary derived modules are generated by shifts of their ring, the algebraic input not supplied by the six-operation definition unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-sf-determination-localizing",
+  "lem-pc-derived-module-free-generation"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q125-3c1a4b5bd",
+  "group": "Q125",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-3c1a4b5bd (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit, no new nodes. The item statement is unchanged from its creation by Q119 today, and there is no re-split note for this item. Source check: Zheng 1006.3810 Construction 2.26 (p. 15) defines the map as adjoint to the inverse projection followed by the counit, which is exactly the item's alpha. No SGA source is used. Step 1: def-weil-pbc-adjunction-mate with L=F, R=G and square P_V^{-1}; its transpose formula gives q_{V,M}=T_B(1,eps_M)P^{-1}, and naturality in M and V follows. Step 2: I checked the unit normalization G(u^B)alpha_C=u^A by naturality of u^B at eps_M. Step 3: I recomputed both inverse adjuncts using the counit-shift hypothesis and naturality of c_F; the connecting compatibility is written out, not asserted. Step 4: det-sf-determination-localizing applies because A_M and B_M are assumed exact and sum-preserving and alpha is shift-compatible by step 3. It gives a triangulated locus closed under sums and summands; retracts are summands since idempotents split. Step 5: lem-pc-derived-module-free-generation (Stacks 09PB) then gives L_M = D(C). There is no cycle (checked over 127 reachable nodes). Small cases checked: the zero ring, M=0, the identity adjunction, V=C and negative shifts. The parent lem-pur-etale-exceptional-constant-tensor (step 4) instantiates the item correctly. The three tool_uses (mate, localizing locus, module generation) are generic and accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CoefficientActionAdjointGeneration",
+  "declaration": "CategoryTheory.coefficientActionAdjointGeneration",
+  "declarations": [
+   "CategoryTheory.coefficientActionAdjointMate",
+   "CategoryTheory.coefficientActionAdjointIsoLocus",
+   "CategoryTheory.coefficientActionAdjointGeneration"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CoefficientActionAdjointGeneration.lean",
+  "statement": "theorem coefficientActionAdjointGeneration (R : Type u) [CommRing R] [HasDerivedCategory.{w} (ModuleCat.{max u v} R)] {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B] [HasZeroObject A] [HasShift A ℤ] [Preadditive A] [∀ n : ℤ, (shiftFunctor A n).Additive] [Pretriangulated A] [IsTriangulated A] [HasZeroObject B] [HasShift B ℤ] [Preadditive B] [∀ n : ℤ, (shiftFunctor B n).Additive] [Pretriangulated B] [IsTriangulated B] [HasCoproducts.{max u v} A] [HasCoproducts.{max u v} B] (TA : A ⥤ DerivedCategory (ModuleCat.{max u v} R) ⥤ A) (TB : B ⥤ DerivedCategory (ModuleCat.{max u v} R) ⥤ B) [∀ K : A, (TA.obj K).CommShift ℤ] [∀ M : B, (TB.obj M).CommShift ℤ] [∀ K : A, (TA.obj K).IsTriangulated] [∀ M : B, (TB.obj M).IsTriangulated] [∀ (K L : A) (f : K ⟶ L), NatTrans.CommShift (TA.map f) ℤ] [∀ (M N : B) (f : M ⟶ N), NatTrans.CommShift (TB.map f) ℤ] (uA : TA.flip.obj ((DerivedCategory.singleFunctor (ModuleCat.{max u v} R) 0).obj (ModuleCat.of R (ULift.{v} R))) ≅ 𝟭 A) (uB : TB.flip.obj ((DerivedCategory.singleFunctor (ModuleCat.{max u v} R) 0).obj (ModuleCat.of R (ULift.{v} R))) ≅ 𝟭 B) (F : A ⥤ B) (G : B ⥤ A) [F.CommShift ℤ] [G.CommShift ℤ] [F.IsTriangulated] [G.IsTriangulated] (adj : F ⊣ G) [adj.CommShift ℤ] (P : F ⋙ TB ≅ TA ⋙ (Functor.whiskeringRight (DerivedCategory (ModuleCat.{max u v} R)) A B).obj F) (hshift : ∀ (K : A) (n : ℤ) (V : DerivedCategory (ModuleCat.{max u v} R)), (P.hom.app K).app (V⟦n⟧) ≫ ((TA.obj K ⋙ F).commShiftIso n).hom.app V = ((TB.obj (F.obj K)).commShiftIso n).hom.app V ≫ ((P.hom.app K).app V)⟦n⟧') (hunit : ∀ K : A, (P.hom.app K).app ((DerivedCategory.singleFunctor (ModuleCat.{max u v} R) 0).obj (ModuleCat.of R (ULift.{v} R))) ≫ F.map (uA.hom.app K) = uB.hom.app (F.obj K)) [∀ M : B, (TB.obj M ⋙ G).IsTriangulated] [∀ (M : B) (I : Type (max u v)), PreservesColimitsOfShape (Discrete I) (TA.obj (G.obj M))] [∀ (M : B) (I : Type (max u v)), PreservesColimitsOfShape (Discrete I) (TB.obj M ⋙ G)] : (∀ (V W : DerivedCategory (ModuleCat.{max u v} R)) (h : V ⟶ W) (M : B), (TA.obj (G.obj M)).map h ≫ coefficientActionAdjointMate TA TB adj P W M = coefficientActionAdjointMate TA TB adj P V M ≫ G.map ((TB.obj M).map h)) ∧ (∀ (V : DerivedCategory (ModuleCat.{max u v} R)) (M N : B) (h : M ⟶ N), (TA.map (G.map h)).app V ≫ coefficientActionAdjointMate TA TB adj P V N = coefficientActionAdjointMate TA TB adj P V M ≫ G.map ((TB.map h).app V)) ∧ (∀ M : B, coefficientActionAdjointMate TA TB adj P ((DerivedCategory.singleFunctor (ModuleCat.{max u v} R) 0).obj (ModuleCat.of R (ULift.{v} R))) M ≫ G.map (uB.hom.app M) = uA.hom.app (G.obj M)) ∧ (∀ (M : B) (n : ℤ) (V : DerivedCategory (ModuleCat.{max u v} R)), coefficientActionAdjointMate TA TB adj P (V⟦n⟧) M ≫ ((TB.obj M ⋙ G).commShiftIso n).hom.app V = ((TA.obj (G.obj M)).commShiftIso n).hom.app V ≫ (coefficientActionAdjointMate TA TB adj P V M)⟦n⟧') ∧ (∀ M : B, coefficientActionAdjointIsoLocus TA TB adj P M ((DerivedCategory.singleFunctor (ModuleCat.{max u v} R) 0).obj (ModuleCat.of R (ULift.{v} R))) ∧ (∀ (V W : DerivedCategory (ModuleCat.{max u v} R)) (_ : V ≅ W), coefficientActionAdjointIsoLocus TA TB adj P M V → coefficientActionAdjointIsoLocus TA TB adj P M W) ∧ (∀ (n : ℤ) (V : DerivedCategory (ModuleCat.{max u v} R)), coefficientActionAdjointIsoLocus TA TB adj P M V → coefficientActionAdjointIsoLocus TA TB adj P M (V⟦n⟧)) ∧ (∀ T : Pretriangulated.Triangle (DerivedCategory (ModuleCat.{max u v} R)), T ∈ Pretriangulated.distinguishedTriangles → coefficientActionAdjointIsoLocus TA TB adj P M T.obj₁ → coefficientActionAdjointIsoLocus TA TB adj P M T.obj₂ → coefficientActionAdjointIsoLocus TA TB adj P M T.obj₃) ∧ (∀ (V W : DerivedCategory (ModuleCat.{max u v} R)) (_ : Retract V W), coefficientActionAdjointIsoLocus TA TB adj P M W → coefficientActionAdjointIsoLocus TA TB adj P M V) ∧ (∀ (I : Type (max u v)) (V : I → DerivedCategory (ModuleCat.{max u v} R)) (S : DerivedCategory (ModuleCat.{max u v} R)) (ι : ∀ i : I, V i ⟶ S), IsColimit (Cofan.mk S ι) → (∀ i : I, coefficientActionAdjointIsoLocus TA TB adj P M (V i)) → coefficientActionAdjointIsoLocus TA TB adj P M S) ∧ coefficientActionAdjointIsoLocus TA TB adj P M = ⊤ ∧ ∀ V : DerivedCategory (ModuleCat.{max u v} R), IsIso (coefficientActionAdjointMate TA TB adj P V M))",
+  "branch": "newtargets-dag",
+  "by": "Q54",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Actions are curried in the order category object, coefficient. The helper mate is the specified homEquiv transpose of inverse P followed by the action on the counit; the helper ObjectProperty is its invertibility locus. The theorem includes every naturality, unit, shift, closure, and generation clause. Coefficient modules and coproduct indices use max u v, as in derivedModuleFreeGeneration."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c25878fd6",
+  "group": "Q54",
+  "result": "pass",
+  "note": "Read node, module, report, stmt_dep records (DerivedCategory, Pretriangulated) and proof-dep modules (isoLocus_localizing, derivedModuleFreeGeneration). Every hypothesis and conclusion clause matches the node, none stronger or weaker: curried TA/TB with CommShift, IsTriangulated and NatTrans.CommShift; natural units uA/uB; adj.CommShift gives the node's counit shift equation; P oriented T_B(V,FK)->F(T_A(V,K)) with hshift and hunit as displayed; A_M = TA.obj(GM), B_M = TB.obj M ⋙ G, both exact and preserving Type(max u v) coproducts. Mate = adj.homEquiv of P.inv followed by TB.map counit (real data, Zheng 2.26 orientation). Conclusions: naturality in V and M, unit equation, shift equation for all n in ℤ, locus contains C[0] and is closed under iso, shift, cone, retract and arbitrary colimit cofans, locus = top, all IsIso. Recomputed steps 2 and 3 by hand: true and provable. Generator, universe and cofan form match derivedModuleFreeGeneration. Edge cases (zero ring, empty index, n=0 and negative, free hom universes) OK. lean.statement verbatim; docstrings with source, blueprint tag and 5 proof steps; no line over 100; only the theorem proof is sorry; plain imports are the proof-dep modules required by brief-stage2 §3. Citer lem-pur-etale-exceptional-constant-tensor uses the same interface. Advisory: the explicit (TB.obj M ⋙ G).IsTriangulated duplicates the comp instance (harmless). Not compiled per instruction; relied on the worker's reported clean compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261023T090723-L-708841",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,120 @@
+{
+ "id": "def-pur-coordinate-section-cartier-sign",
+ "kind": "definition",
+ "title": "TwistedCoordinateSectionSign",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix the finite purity datum $P$ [def-pur-conventions], a $k$-scheme $T$, and a divisibility witness for the affine-line datum [def-pur-affine-line-datum]. In that datum's literal coordinate and scalar presentation, define coordinateCartierOrdinary to be the derived map of the unique ordinary supported relative Kummer class [lem-asd-ordinary-supported-kummer]. Its exceptional adjunct uses the ordinary proper/closed comparison and adjunction. Define coordinateCartierAdjunct by the exact comparison image of that adjunct, the canonical single-complex and shift comparisons, and the actual comparison-unit right-adjoint map rho [def-pur-bounded-site-transpose-arrows] used in [def-pur-coordinate-section-site-arrows]. CoordinateCartierSign is the proposition that for every such divisibility witness the zero section is Cartier and there exist the normalized support chart and positive coordinate-boundary orientation of [thm-pur-affine-line-orientation], with coordinateCartierAdjunct equal to its negative. The sign is read in the signed relative-cone convention ($D(a,b)=(da,r(a)-db)$, boundary $b\\mapsto(0,-b)$) cited by the item.",
+ "stmt_deps": [
+  "def-pur-coordinate-section-site-arrows",
+  "def-pur-conventions",
+  "def-pur-affine-line-datum",
+  "thm-pur-affine-line-orientation",
+  "lem-asd-ordinary-supported-kummer",
+  "def-pur-bounded-site-transpose-arrows"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+  "place": "Rank-one supported coordinate Cartier normalization and the even twists/shifts paragraph; DAG Steps 1--10."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical zero section supported Kummer map, its integration-normalized exceptional adjunct, Tate tensor coprojection, projective zero divisor, and negative localization orientation",
+   "results": "8 hits: Bundle.zeroSection, AlgebraicGeometry.Proj.zero_apply, Submonoid.LocalizationMap.sec_zero_fst, Bundle.mdifferentiable_zeroSection, ContMDiffSection.coe_zero, Bundle.zeroSection_proj, AlgebraicGeometry.Scheme.Modules.Hom.zero_app, Algebra.Extension.Cotangent.val_zero",
+   "date": "2026-10-24",
+   "verdict": "No declaration for these canonical coordinate-section arrows or their normalization predicates; reuse the listed component APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "supported Kummer class of the zero section of the affine line integrates to one and exceptional adjunction purity with Tate twists",
+   "results": "8 hits: WeierstrassCurve.Affine.Point.toClass_zero, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.Proj.one_apply, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.StructureSheaf.const_zero",
+   "date": "2026-10-24",
+   "verdict": "No declaration for these canonical coordinate-section arrows or their normalization predicates; reuse the listed component APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "sectionComposition|coprojectionMate|coordinateCartierAdjunct|ProjectiveNormalization",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "No declaration for these canonical coordinate-section arrows or their normalization predicates; reuse the listed component APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n sectionComposition|coprojectionMate|coordinateCartierAdjunct|ProjectiveNormalization lean/WeilConjectures lean/Sheaf dag/nodes",
+   "results": "No matching coordinate-section construction. Unrelated same short names occur in Segal composition and diagonal affine trace namespaces. CoordinateLineAdjunctionMaps supplies integration/right comparison and is reused.",
+   "date": "2026-10-24",
+   "verdict": "The new nodes name the missing closed-section composites; they do not redefine the component functors."
+  },
+  {
+   "tool": "blueprint_refs",
+   "query": "python3 tools/blueprint_refs.py search \"coordinate section\"",
+   "results": "One unrelated symmetric-product node.",
+   "date": "2026-10-24",
+   "verdict": "No existing node owns these helper constructions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-twisted-coordinate-section-normalization",
+  "date": "2026-10-24",
+  "group": "Q21"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-affine-space-zero-section-purity",
+   "place": "Rank-one supported coordinate Cartier normalization and the even twists/shifts paragraph; DAG Steps 1--10.",
+   "via": [
+    "lem-pur-twisted-coordinate-section-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "module": "Sheaf.Paper.TwistedCoordinateSectionSign",
+  "declaration": "WeilConjectures.PurityFiniteSetting.CoordinateCartierSign",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.coordinateCartierOrdinary",
+   "WeilConjectures.PurityFiniteSetting.coordinateCartierOrdinaryAdjunct",
+   "WeilConjectures.PurityFiniteSetting.coordinateCartierAdjunct",
+   "WeilConjectures.PurityFiniteSetting.CoordinateCartierSign"
+  ],
+  "file": "lean/Sheaf/Paper/TwistedCoordinateSectionSign.lean",
+  "statement": "def CoordinateCartierSign (P : PurityFiniteSetting.{u}) (T : Scheme.{u}) (aT : T ⟶ Spec (.of P.field.k)) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a6ea79845",
+  "group": "Q21",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a6ea79845",
+  "group": "Q21",
+  "result": "fix",
+  "note": "Maths right: hypotheses only separated finite type over k, all a>=1 via ∀ b, no e|n and no flatness; forgetting support gives h, I_p∘Rp_!c=t_q h=1 with canonical sectionComposition; CartierRealization with α pinned by the epi supported unit and the published cartierKummerMap at every b; u_s iso and untwisted/twisted identities with the actual γ as equalities of derived morphisms; canonical coprojection mate (recorded immersion-twist is only Nonempty); transpose 1⊗I_p(c); u_s=−pur_s in the same ∃D∃m form as affineLine_orientation; edge cases empty/nonreduced/r=0/oversized a/ramified covered; no hollow defs; lean.statements verbatim; item proof_deps unchanged. FIX 1 (H11): self-audit second reading replaced by a real clause-by-clause reading in fixes/<item>.report.md, worker report verbatim. FIX 2 (H12/H2, cf. NI 30ebf7eb): six new-node JSONs, only statement+stmt_deps changed. Added owners: def-sf-etale-support-compositor and def-pur-compact-support-morphism-congruence (core-arrows); lem-amb-unbounded-compact-support-comparisons for Id, which has no def owner; def-pur-bounded-site-transpose-arrows for boundedSiteRho (site-arrows, cartier-sign); def-trf-section-local-comparison-data for tateObject (ordinary-arrows, site-arrows); def-amb-cartier-kummer-data, def-amb-proetale-supported-coefficient-reduction, def-pur-finite-site-coordinates (cartier-realization). Dropped unused theorem stmt_deps: six in ordinary-arrows, two in coprojection-arrows, one in cartier-sign; lem-pur-vector-integration-site-comparison replaced in site-arrows and cartier-realization. Bracket citations equal stmt_deps; all added nodes on base; no cycles. Advisories: compactAdjunction same term as CoordinateLine.exceptionalAdjunction; proClosed is the closed-adjunction form of sfFiniteExceptionalAt; Step 4 docstring citation is a summary. No Lean changed, so no compile."
+ }
+}

@@ -1,0 +1,321 @@
+{
+ "id": "lem-per-flat-monomorphism-local-structure",
+ "kind": "statement",
+ "title": "Local structure and Noetherianity of quasi-compact flat monomorphisms",
+ "statement": "Let $f:Y\\to X$ be a quasi-compact flat morphism of schemes [def-pc-scheme, def-weil-flat-morphism] whose diagonal $Y\\to Y\\times_XY$ is an isomorphism (a monomorphism). Then $f$ is injective on points, and for every $y\\in Y$ the induced local ring map $\\mathcal O_{X,f(y)}\\to\\mathcal O_{Y,y}$ is an isomorphism. For every $x\\in X$ the scheme-theoretic fibre $Y\\times_X\\operatorname{Spec}\\kappa(x)$ is either empty or canonically $\\operatorname{Spec}\\kappa(x)$, and is nonempty exactly when $x\\in f(Y)$. Here $\\kappa(x)=\\mathcal O_{X,x}/\\mathfrak m_x$ is the residue field. In particular $f$ is regular, meaning flat with geometrically regular fibres: after any field extension each nonempty fibre is the spectrum of that field. If $X$ is Noetherian [pqf-def-locnoeth], then $Y$ is Noetherian; Noetherian means having a finite affine open cover by spectra of Noetherian rings. If $X$ is reduced [def-pc-reduced-scheme], then $Y$ is reduced. These conclusions apply to $f_T:Y\\times_XT\\to T$ for every scheme $T\\to X$, with the Noetherian and reduced conclusions conditional on $T$ being Noetherian and reduced, respectively.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 2.1.12 (local-ring isomorphisms and injectivity, citing Raynaud 1968 Props. 1.1--1.2), 2.1.14 (extension of ideal centers), and 2.2.12 (regularity), printed pp.88--91. Auxiliary algebra: Stacks Tag 04VU, algebra.tex, lemma-faithfully-flat-epimorphism. The Noetherian consequence follows from extension-contraction for ideals of affine flat monomorphisms; no single Stacks tag states this combined geometric formulation."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "pqf-def-locnoeth",
+  "def-pc-reduced-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "def-pc-scheme-fibre",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [
+  {
+   "text": "We prove the assertions uniformly after arbitrary base change. Fix $T\\to X$, put $Z=Y\\times_XT$, and write $h:Z\\to T$. The diagonal hypothesis implies that $f$ is monic: if $fa=fb$, the pair $(a,b)$ factors uniquely through the diagonal, forcing $a=b$. The universal property [def-pc-fibre-product] then makes $h$ monic: two arrows to $Z$ with equal $T$-components have equal $Y$-components by monicity of $f$, and hence are equal. Conversely the same universal property shows that a monic arrow has invertible diagonal (the two projections of its kernel pair agree and are inverse to the diagonal). Thus $h$ satisfies the same diagonal hypothesis. By [lem-weil-pbc-flat-morphism-base-change] and [lem-pc-quasi-compact-base-change], $h$ is flat and quasi-compact. The identity base change recovers $f$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-pc-quasi-compact-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JP (definition-fibre-product); Tag 01K5 (lemma-quasi-compact-preserved-base-change); morphisms.tex Tag 01U9 (lemma-base-change-flat)."
+   }
+  },
+  {
+   "text": "For $t\\in T$, the fibre arrow $Z_t\\to\\operatorname{Spec}\\kappa(t)$ [def-pc-scheme-fibre] is monic by the preceding pullback argument. Apply [lem-sfb-monomorphism-into-field-coproduct] with a singleton index set. The subset supplied by that statement is either empty or the singleton, so the fibre is empty or its structural arrow is an isomorphism to $\\operatorname{Spec}\\kappa(t)$. This isomorphism is canonical: it is the structural arrow itself. By the homeomorphism onto $h^{-1}(t)$ in [def-pc-scheme-fibre], the fibre is nonempty exactly when $t\\in h(Z)$, and each such inverse-image set has exactly one point. Consequently $h$ is injective on points. After any field extension $L/\\kappa(t)$, the empty fibre remains empty and the nonempty fibre becomes $\\operatorname{Spec}L$, by the fibre-product universal property. A field has maximal ideal zero and Krull dimension zero, hence is a regular local ring. Thus these fibres are geometrically regular, and the already flat $h$ is regular in the stated sense.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "lem-sfb-monomorphism-into-field-coproduct",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 03DP (lemma-mono-towards-spec-field), singleton case; Tag 01K1 (lemma-fibre-topological); ILO VIII 2.1.12 and 2.2.12, printed pp.88,91."
+   }
+  },
+  {
+   "text": "Choose affine opens $V=\\operatorname{Spec}B\\subset Z$ and $U=\\operatorname{Spec}A\\subset T$ with $h(V)\\subset U$. Such pairs exist around every $z\\in Z$: first take affine $U$ around $h(z)$, then affine $V\\subset h^{-1}(U)$ around $z$, using [lem-weil-pbc-affine-opens-basis]. The induced map $g:V\\to U$ exists by [lem-weil-pbc-morphism-factors-through-open-subscheme]. It is monic: $ga=gb$ gives $h j_Va=h j_Vb$, then $j_Va=j_Vb$ by monicity of $h$, then $a=b$ by [lem-weil-pbc-open-immersion-monomorphism]. Write $g=\\operatorname{Spec}\\varphi$ using [def-weil-affine-spectrum]. The ring map $\\varphi:A\\to B$ is epic: for any commutative ring $C$ and $u,v:B\\to C$ equal on $A$, monicity of $g$ gives $\\operatorname{Spec}u=\\operatorname{Spec}v$, and uniqueness in [def-weil-affine-spectrum] gives $u=v$. Finally [lem-weil-pbc-flat-morphism-affine-criterion], applied to the flat arrow $h$ and these affine opens, says that $B$ is a flat $A$-module.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "lem-weil-pbc-open-immersion-monomorphism",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-flat-morphism-affine-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01U5 (lemma-flat-characterize); schemes.tex Tags 01IT (lemma-basis-affine-opens), 01HI (lemma-restrict-map-to-opens), 01L7 (lemma-immersions-monomorphisms), 01I1 (lemma-morphism-into-affine)."
+   }
+  },
+  {
+   "text": "Fix $z\\in V$, corresponding to $\\mathfrak q\\subset B$, and put $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$. By [lem-weil-pbc-affine-open-stalk-localization] and [lem-weil-pbc-spec-map-stalk-localization], the local ring map of $h$ is $\\varphi_z:A_{\\mathfrak p}\\to B_{\\mathfrak q}$, $a/s\\mapsto\\varphi(a)/\\varphi(s)$. It is epic: if two maps $B_{\\mathfrak q}\\to C$ agree on $A_{\\mathfrak p}$, their restrictions to $B$ agree on $A$, hence agree on $B$ by Step 3; they then agree on every fraction $b/u$ because its image is the image of $b$ times the inverse of the image of $u$. The fraction description is [def-weil-pbc-localization-at-prime]. By flatness of $h$ and [def-weil-flat-morphism], this stalk map is flat and local. Therefore [lem-pc-local-flat-faithful-flat-reflects-surjective] makes it faithfully flat, and [lem-sfb-faithfully-flat-ring-epimorphism-isomorphism] makes it an isomorphism. These are precisely the induced local ring maps, not merely unspecified isomorphisms between the two rings.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-spec-map-stalk-localization",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-flat-morphism",
+    "lem-pc-local-flat-faithful-flat-reflects-surjective",
+    "lem-sfb-faithfully-flat-ring-epimorphism-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HR (lemma-local-flat-ff) and Tag 04VU (lemma-faithfully-flat-epimorphism); ILO VIII 2.1.12, printed p.88; schemes.tex Tags 01HV, 01I1 for stalk maps."
+   }
+  },
+  {
+   "text": "Retain an arbitrary affine pair from Step 3 and let $J\\subset B$ be any ideal. The two ring maps $B\\to B\\otimes_AB$, $b\\mapsto b\\otimes1$ and $b\\mapsto1\\otimes b$, exist by [lem-weil-pbc-algebra-tensor-pushout-universal-property] and agree on $A$. Since $A\\to B$ is epic, they are equal. Multiplying by $1\\otimes c$ gives $b\\otimes c=1\\otimes bc$. Apply the tensor map induced by $B\\to B/J$ [def-weil-pbc-module-tensor-product] to obtain $b\\otimes\\bar c=1\\otimes\\overline{bc}$. It follows directly that $\\theta:B\\otimes_A(B/J)\\to B/J$, $b\\otimes\\bar c\\mapsto\\overline{bc}$, has inverse $\\bar c\\mapsto1\\otimes\\bar c$: the two composites are the identity on $B/J$ and on every generating pure tensor. The maps are well-defined by bilinearity and the displayed relation.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04VN (lemma-epimorphism), equality of the two tensor inclusions; Tag 00CX (lemma-tensor-product). The displayed quotient-module computation expands the argument directly."
+   }
+  },
+  {
+   "text": "Put $I=\\varphi^{-1}(J)$. The sequence $I\\hookrightarrow A\\to B/J$ is exact at $A$, by the definition of $I$. Tensor it with the flat $A$-module $B$ using [lem-weil-pbc-flat-tensor-exact]. Identify $B\\otimes_AA$ with $B$ by $b\\otimes a\\mapsto b\\varphi(a)$ and inverse $b\\mapsto b\\otimes1$; these formulas are inverse by the balancing relation of [def-weil-pbc-module-tensor-product]. Under this identification and $\\theta$ from Step 5, the tensored map to $B\\otimes_A(B/J)$ is exactly the quotient $B\\to B/J$. The image of $B\\otimes_AI\\to B$ is the set of finite sums $\\sum b_k\\varphi(i_k)$ with $i_k\\in I$, namely the extended ideal $IB$. Exactness therefore gives $IB=J$. No surjectivity of $A\\to B/J$ was assumed or used.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HD (lemma-flat), preservation of exactness, applied to the kernel of A -> B/J; Tag 00CX (lemma-tensor-product). This is the affine ideal-extension argument underlying ILO VIII 2.1.14."
+   }
+  },
+  {
+   "text": "Suppose now that $T$ is Noetherian. Choose a finite affine cover $U_i=\\operatorname{Spec}A_i$ with every $A_i$ Noetherian, as in the statement. Since $h$ is quasi-compact, each $h^{-1}(U_i)$ is quasi-compact by [def-weil-finite-type-morphism]. The affine basis [lem-weil-pbc-affine-opens-basis] supplies a finite cover of each such inverse image by affine opens $V_{ij}=\\operatorname{Spec}B_{ij}$ contained in it. For any ideal $J\\subset B_{ij}$, its contraction $I\\subset A_i$ has finitely many generators $a_1,\\ldots,a_r$ by [def-weil-pbc-noetherian-ring]. Step 6 gives $J=IB_{ij}$, so $\\varphi(a_1),\\ldots,\\varphi(a_r)$ generate $J$. Hence $B_{ij}$ is Noetherian by that same definition. The finite family $V_{ij}$ covers $Z$, proving that $Z$ is Noetherian in exactly the finite-affine-cover sense of the statement. This includes empty inverse images and the empty scheme.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.1.14, printed pp.88--89, affine ideal-extension consequence; Stacks algebra.tex Tag 00FM (section-Noetherian), every ideal finitely generated. Agent-written consequence of Steps 3,5,6."
+   }
+  },
+  {
+   "text": "If $T$ is reduced, every $\\mathcal O_{T,h(z)}$ is reduced by [def-pc-reduced-scheme]. The actual stalk-map isomorphism of Step 4 then makes $\\mathcal O_{Z,z}$ reduced: an element whose positive power is zero pulls back under the inverse isomorphism to a nilpotent element, which is zero. Again by [def-pc-reduced-scheme], $Z$ is reduced. Since $T\\to X$ was arbitrary in Step 1, all the conclusions hold for every $f_T$, with the Noetherian and reduced conclusions under exactly the corresponding assumptions on $T$. Taking $T=X$ and its identity gives the assertions for $f$ itself.",
+   "uses": [
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.1.12, printed p.88 (local-ring isomorphisms), and Stacks schemes.tex Tags 01J0 (definition-reduced), 01J1 (lemma-reduced)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-pc-quasi-compact-base-change",
+  "def-pc-scheme-fibre",
+  "lem-sfb-monomorphism-into-field-coproduct",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-open-immersion-monomorphism",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-spec-map-stalk-localization",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-flat-morphism",
+  "lem-pc-local-flat-faithful-flat-reflects-surjective",
+  "lem-sfb-faithfully-flat-ring-epimorphism-isomorphism",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-flat-tensor-exact",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-noetherian-ring",
+  "def-pc-reduced-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 2.1.12, 2.1.14 and 2.2.12, printed pp.88--91; explicit affine algebra argument using Stacks Tags 00HR, 04VU and 00HD instead of importing Raynaud/EGA wholesale."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A flat monomorphism of schemes induces isomorphisms on local rings and has empty or rational point fibres",
+   "results": "{\"t\": \"2026-10-24T02:12:10Z\", \"tool\": \"leansearch\", \"query\": \"A flat monomorphism of schemes induces isomorphisms on local rings and has empty or rational point fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Flat.mk\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.flat_iff\"], \"digest\": \"f833c70f50b82aa8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: FlatMono.lean:25 requires surjectivity for the isomorphism theorem; FlatMono.lean:38 requires local finite presentation for an open immersion. Neither gives local-ring isomorphisms, geometrically regular fibres and Noetherianity for an arbitrary quasi-compact flat monomorphism. Other hits give only flatness, completion flatness, or unrelated pushout sections."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, CategoryTheory.Mono",
+   "results": "{\"t\": \"2026-10-24T02:12:10Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Flat, CategoryTheory.Mono\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_left\", \"AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_right\", \"AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_left_of_ringHomFlat\", \"AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_right_of_ringHomFlat\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\"], \"digest\": \"6ffb5a0f1afddb97\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: FlatMono.lean:25 requires surjectivity for the isomorphism theorem; FlatMono.lean:38 requires local finite presentation for an open immersion. Neither gives local-ring isomorphisms, geometrically regular fibres and Noetherianity for an arbitrary quasi-compact flat monomorphism. Other hits give only flatness, completion flatness, or unrelated pushout sections."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat injective morphisms with isomorphic local rings are regular and quasi-compact flat monomorphisms preserve Noetherian schemes",
+   "results": "{\"t\": \"2026-10-24T02:12:11Z\", \"tool\": \"leanfinder\", \"query\": \"Flat injective morphisms with isomorphic local rings are regular and quasi-compact flat monomorphisms preserve Noetherian schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\"], \"digest\": \"5820a9e43164630e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: FlatMono.lean:25 requires surjectivity for the isomorphism theorem; FlatMono.lean:38 requires local finite presentation for an open immersion. Neither gives local-ring isomorphisms, geometrically regular fibres and Noetherianity for an arbitrary quasi-compact flat monomorphism. Other hits give only flatness, completion flatness, or unrelated pushout sections."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-flat-monomorphism-local-structure: A quasi-compact flat monomorphism into a Noetherian scheme is Noetherian and induces isomorphisms on local rings and has geometrically regular fibres",
+   "results": "{\"t\": \"2026-10-24T02:12:13Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-flat-monomorphism-local-structure: A quasi-compact flat monomorphism into a Noetherian scheme is Noetherian and induces isomorphisms on local rings and has geometrically regular fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.UniversallyOpen.of_flat\"], \"digest\": \"be9ce8b54ba2a444\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: FlatMono.lean:25 requires surjectivity for the isomorphism theorem; FlatMono.lean:38 requires local finite presentation for an open immersion. Neither gives local-ring isomorphisms, geometrically regular fibres and Noetherianity for an arbitrary quasi-compact flat monomorphism. Other hits give only flatness, completion flatness, or unrelated pushout sections."
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*mono|mono.*flat|isIso_of_surjective_of_mono",
+   "results": "{\"t\": \"2026-10-24T02:15:18Z\", \"tool\": \"grep\", \"query\": \"flat.*mono|mono.*flat|isIso_of_surjective_of_mono\", \"sub\": \"AlgebraicGeometry/Morphisms\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean\"], \"digest\": \"3b0715807edebe33\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: FlatMono.lean:25 requires surjectivity for the isomorphism theorem; FlatMono.lean:38 requires local finite presentation for an open immersion. Neither gives local-ring isomorphisms, geometrically regular fibres and Noetherianity for an arbitrary quasi-compact flat monomorphism. Other hits give only flatness, completion flatness, or unrelated pushout sections."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-flat-monomorphism-local-structure: flat ring epimorphism from a Noetherian ring is Noetherian, local maps are isomorphisms",
+   "results": "{\"t\": \"2026-10-24T02:15:20Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-flat-monomorphism-local-structure: flat ring epimorphism from a Noetherian ring is Noetherian, local maps are isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"RingHom.Flat.propertyIsLocal\", \"AdicCompletion.flat_of_isNoetherian\", \"Module.FaithfullyFlat.of_flat_of_isLocalHom\", \"Algebra.HasGoingDown.of_flat\", \"RingHom.Flat.holdsForLocalizationAway\", \"RingHom.Flat.ofLocalizationSpanTarget\"], \"digest\": \"1f1e9295b43ac8e3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: FlatMono.lean:25 requires surjectivity for the isomorphism theorem; FlatMono.lean:38 requires local finite presentation for an open immersion. Neither gives local-ring isomorphisms, geometrically regular fibres and Noetherianity for an arbitrary quasi-compact flat monomorphism. Other hits give only flatness, completion flatness, or unrelated pushout sections."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalkMap\", CategoryTheory.IsIso, AlgebraicGeometry.Flat",
+   "results": "{\"t\": \"2026-10-24T02:15:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"stalkMap\\\", CategoryTheory.IsIso, AlgebraicGeometry.Flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: FlatMono.lean:25 requires surjectivity for the isomorphism theorem; FlatMono.lean:38 requires local finite presentation for an open immersion. Neither gives local-ring isomorphisms, geometrically regular fibres and Noetherianity for an arbitrary quasi-compact flat monomorphism. Other hits give only flatness, completion flatness, or unrelated pushout sections."
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*mono|mono.*flat|faithfullyFlat.*epi|epi.*faithfullyFlat",
+   "results": "{\"t\": \"2026-10-24T03:08:35Z\", \"tool\": \"grep\", \"query\": \"flat.*mono|mono.*flat|faithfullyFlat.*epi|epi.*faithfullyFlat\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean\"], \"digest\": \"5b2b5fbc8629b7d2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: FlatMono.lean:25 assumes a surjective flat quasi-compact monomorphism, and :38 assumes local finite presentation; neither states this entire item. Flat.stalkMap and flat affine criteria give flatness only, not the required isomorphisms or Noetherianity."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, CategoryTheory.Mono",
+   "results": "{\"t\": \"2026-10-24T03:08:36Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Flat, CategoryTheory.Mono\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_left\", \"AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_right\", \"AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_left_of_ringHomFlat\", \"AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_right_of_ringHomFlat\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\"], \"digest\": \"6ffb5a0f1afddb97\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: FlatMono.lean:25 assumes a surjective flat quasi-compact monomorphism, and :38 assumes local finite presentation; neither states this entire item. Flat.stalkMap and flat affine criteria give flatness only, not the required isomorphisms or Noetherianity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-flat-monomorphism-local-structure: a quasi-compact flat monomorphism of schemes induces isomorphisms on local rings, trivial or empty fibres, and preserves Noetherianity and reducedness",
+   "results": "{\"t\": \"2026-10-24T03:08:37Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-flat-monomorphism-local-structure: a quasi-compact flat monomorphism of schemes induces isomorphisms on local rings, trivial or empty fibres, and preserves Noetherianity and reducedness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat.of_stalkMap\"], \"digest\": \"f71bdd1abf17dd3c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: FlatMono.lean:25 assumes a surjective flat quasi-compact monomorphism, and :38 assumes local finite presentation; neither states this entire item. Flat.stalkMap and flat affine criteria give flatness only, not the required isomorphisms or Noetherianity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi-compact flat monomorphism of schemes has isomorphic local rings and Noetherian source when its target is Noetherian",
+   "results": "{\"t\": \"2026-10-24T03:09:01Z\", \"tool\": \"leansearch\", \"query\": \"A quasi-compact flat monomorphism of schemes has isomorphic local rings and Noetherian source when its target is Noetherian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.quasiCompact_of_noetherianSpace_source\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.instQuasiSeparatedOfMonoScheme\", \"AlgebraicGeometry.Flat\", \"RingHom.Flat.localRingHom\", \"AlgebraicGeometry.Flat.of_stalkMap\"], \"digest\": \"72037b53c36a25cb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: FlatMono.lean:25 assumes a surjective flat quasi-compact monomorphism, and :38 assumes local finite presentation; neither states this entire item. Flat.stalkMap and flat affine criteria give flatness only, not the required isomorphisms or Noetherianity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-flat-monomorphism-local-structure: flat ring epimorphisms induce isomorphisms of local rings and every ideal of the target is extended from the source",
+   "results": "{\"t\": \"2026-10-24T03:11:55Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-flat-monomorphism-local-structure: flat ring epimorphisms induce isomorphisms of local rings and every ideal of the target is extended from the source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Flat.propertyIsLocal\", \"RingHom.Flat.localRingHom\", \"Algebra.HasGoingDown.of_flat\", \"RingHom.Flat.holdsForLocalizationAway\", \"RingHom.Flat.ofLocalizationSpanTarget\", \"Module.FaithfullyFlat.of_flat_of_isLocalHom\", \"RingHom.Flat.ofLocalizationPrime\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\"], \"digest\": \"3a2cf949c64a62e6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: FlatMono.lean:25 assumes a surjective flat quasi-compact monomorphism, and :38 assumes local finite presentation; neither states this entire item. Flat.stalkMap and flat affine criteria give flatness only, not the required isomorphisms or Noetherianity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-normalized-tower-support-recovery",
+  "date": "2026-10-24",
+  "group": "Q08"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3 (regular finite-torsion local model and purity), geometric equivariant-modification input through XVI 3.7: VIII Lemma 5.5.2 and proof, printed pp.127--128; characteristic-zero independence used there is Theorem 3.4.15, printed pp.113--114. VIII Theorem 2.3.10 and Remarks 2.3.11--2.3.12, pp.93--94 (existence and normalized regular functoriality); 3.2.19 and Theorem 3.4.15 with its proof and Remark 3.4.16(i), pp.106,113--114 (induced rule, independence, and synchronization). Supporting input: VIII 2.1.18--2.1.20, 2.2.11--2.2.12, printed pp.88--91; use of completed strict local tests in the proof of 3.4.15, printed p.114 Generic flat-monomorphism input for center recovery (ILO VIII 2.1.12--2.1.20 and 2.2.12).",
+   "via": [
+    "lem-per-normalized-tower-support-recovery",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-flat-monomorphism-local-structure",
+  "worker": "stage1",
+  "summary": "Proved all clauses uniformly after arbitrary base change using existing DAG tools. Expanded localization epimorphy and the exact tensor calculation IB=J; deduced finite affine Noetherian covers and reducedness. Statement unchanged; no new nodes or Lean files.",
+  "blueprint": "Nearest blueprint ancestor lem-per-artin-gabber-affine-curve, proof Step 3 (duality/cosupport direction), through the inherited purity -> equivariant modification -> characteristic-zero independence -> normalized-tower support-recovery ancestry. This generic flat-monomorphism input realizes the ILO VIII 2.1.12--2.1.14 and 2.2.12 local-ring/regularity/ideal-extension sentences cited by that supporting ancestry; no change to the unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-monomorphism-into-field-coproduct",
+    "why": "Generic scheme monomorphism classification over a field, used only with one field to identify fibres; no Fourier/perverse lemma states this elementary-geometric tool."
+   },
+   {
+    "node": "lem-sfb-faithfully-flat-ring-epimorphism-isomorphism",
+    "why": "Generic commutative-ring cancellation theorem for the faithfully flat stalk epimorphism; no node of the perverse unit replaces this algebraic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-monomorphism-into-field-coproduct",
+  "lem-sfb-faithfully-flat-ring-epimorphism-isomorphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q111-787d394c9",
+  "group": "Q111",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-787d394c9 (reviewer sub-agent of L); spot-checked: I read the whole split and found nothing to change. It is the first split of a node Q08 created on 2026-10-24: there is no repair note, live is still unsplit, and the statement is byte-identical to live. It adds 0 new nodes. The 4 added stmt_deps (finite-type-morphism for quasi-compact, fibre-product, scheme-fibre, noetherian-ring) are all used by the statement. proof_deps equals the union of the steps' uses, there is no cycle, and there is no SGA citation. Source check: the item matches ILO VIII 2.1.12 (p.88; the source's typo O_{X,y}→O_{X,x} is correctly stated in the item as O_{X,f(y)}→O_{Y,y}), 2.1.14 and 2.2.12 (pp.88-91). Every Stacks tag named in a step source resolves to the stated label. Steps: (1) diagonal iso ⇔ monic and stability under base change, by the universal property, with flat and quasi-compact base change from Mathlib-status nodes. (2) The singleton case of the field-coproduct node makes each fibre empty or Spec κ(t); with the fibre homeomorphism this gives injectivity, and geometric regularity follows. (3) Monic affine charts give a ring epimorphism by Spec uniqueness, and the affine flatness criterion gives B flat over A. (4) The stalk map is A_p→B_q, which is an epimorphism; it is flat and local, so faithfully flat by 00HR, and an isomorphism by 04VU. (5) B⊗_A(B/J)≅B/J by an elementary argument. (6) Tensoring the sequence I→A→B/J, exact only at A, with flat B gives J=IB without any surjectivity. (7) With quasi-compactness this gives finite Noetherian affine covers. (8) Reducedness holds stalk-wise. Small cases checked: Spec Q→Spec Z, Spec Z_(p)→Spec Z, a nonreduced identity, Spec(k×k)→Spec k (not monic) and the empty scheme. No duplicate exists in the DAG (lem-pe-flat-lfp-monomorphism-open needs lfp). I accept the two declared tool_uses as generic tools: lem-sfb-monomorphism-into-field-coproduct (03DP) and lem-sfb-faithfully-flat-ring-epimorphism-isomorphism (04VU). The split does not touch the unit, the chapter, any target or any coefficient category."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatMonomorphismLocalStructure",
+  "declaration": "AlgebraicGeometry.flat_monomorphism_local_structure",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatMonomorphismLocalStructure.lean",
+  "statement": "theorem flat_monomorphism_local_structure {X Y : Scheme.{u}} (f : Y ⟶ X) [QuasiCompact f] [Flat f] (_hdiag : IsIso (pullback.diagonal f)) : Function.Injective f ∧ (∀ y : Y, IsIso (f.stalkMap y)) ∧ (∀ x : X, (IsEmpty (f.fiber x) ∨ IsIso (f.fiberToSpecResidueField x)) ∧ (Nonempty (f.fiber x) ↔ x ∈ Set.range f)) ∧ (∀ (x : X) (K : Type u) [Field K] (ι : X.residueField x →+* K), IsEmpty (pullback (f.fiberToSpecResidueField x) (Spec.map (CommRingCat.ofHom ι)) : Scheme.{u}) ∨ IsIso (pullback.snd (f.fiberToSpecResidueField x) (Spec.map (CommRingCat.ofHom ι)))) ∧ (IsNoetherian X → IsNoetherian Y) ∧ (IsReduced X → IsReduced Y) ∧ (∀ (T : Scheme.{u}) (g : T ⟶ X), Flat (pullback.snd f g) ∧ Function.Injective (pullback.snd f g) ∧ (∀ z : (pullback f g : Scheme.{u}), IsIso ((pullback.snd f g).stalkMap z)) ∧ (∀ t : T, (IsEmpty ((pullback.snd f g).fiber t) ∨ IsIso ((pullback.snd f g).fiberToSpecResidueField t)) ∧ (Nonempty ((pullback.snd f g).fiber t) ↔ t ∈ Set.range (pullback.snd f g))) ∧ (∀ (t : T) (K : Type u) [Field K] (ι : T.residueField t →+* K), IsEmpty (pullback ((pullback.snd f g).fiberToSpecResidueField t) (Spec.map (CommRingCat.ofHom ι)) : Scheme.{u}) ∨ IsIso (pullback.snd ((pullback.snd f g).fiberToSpecResidueField t) (Spec.map (CommRingCat.ofHom ι)))) ∧ (IsNoetherian T → IsNoetherian (pullback f g)) ∧ (IsReduced T → IsReduced (pullback f g)))",
+  "branch": "newtargets-dag",
+  "by": "Q81",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-86a1d63f4",
+  "group": "Q81",
+  "result": "pass",
+  "note": "Snapshot node differs from live only in the lean field; statement, stmt_deps and proof are byte-identical to the Q111-reviewed split, and lean.statement appears verbatim in the file. Clause check: [QuasiCompact f][Flat f] IsIso(pullback.diagonal f), no lfp/surjective/Noetherian/reduced hypothesis; Injective f; IsIso stalkMap; fibre IsEmpty ∨ IsIso fiberToSpecResidueField and Nonempty ↔ range; field-extension dichotomy via pullback along Spec.map ι gives geometric regularity; IsNoetherian (Mathlib class in the pqf-def-locnoeth module, equal to the node's finite affine cover definition via isNoetherian_iff_of_finite_affine_openCover; no DAG def node owns it, so no H4 duplicate) and IsReduced implications; full ∀ T g base-change restatement with conditions on T. All clauses true (00HR+04VU, 03DP, ILO VIII 2.1.12/2.1.14/2.2.12). Edge cases: empty Y and T, identity, Spec Frac Z → Spec Z; K : Type u forced by Scheme.{u}. Docstrings carry the source place, the blueprint tag and all 8 steps; proof is only sorry; no definitions; no name clash in live; report sections present. No file changed, so no compile."
+ }
+}

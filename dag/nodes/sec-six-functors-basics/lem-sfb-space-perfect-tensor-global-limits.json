@@ -1,0 +1,349 @@
+{
+ "id": "lem-sfb-space-perfect-tensor-global-limits",
+ "kind": "statement",
+ "title": "Perfect tensor global sections preserve quasi-coherent derived limits",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $A$ be a commutative ring and let $f:X\\to\\operatorname{Spec}A$ be a quasi-compact quasi-separated morphism of algebraic spaces over $\\operatorname{Spec}\\mathbf Z$ [def-pc-scheme, def-weil-affine-spectrum, def-trf-algebraic-space]. Quasi-compact means inverse images of quasi-compact spaces are quasi-compact, and quasi-separated means the relative diagonal is quasi-compact. Use the small etale structure sheaf, module sheaves [def-weil-sheaf-of-modules-category], the unbounded derived categories [def-weil-abstract-derived-category], and quasi-coherent modules [def-trf-space-quasi-coherent-module]. Write $C_X=D_{\\mathrm{QCoh}}(\\mathcal O_X)$ for the full subcategory of objects with quasi-coherent cohomology. Let $E\\in C_X$ be perfect, meaning etale locally represented by a bounded complex of direct summands of finite free structure modules [def-weil-pbc-strict-perfect-coefficient-package]. Use K-flat derived tensor [def-pc-kflat-complex] and K-injective derived global sections (a complex is K-injective if every map from an acyclic complex to it is null-homotopic) [def-pur-ringed-site-zeroth-hypercohomology], retaining the $A$-module action induced by $f$.\nThe functor\n$$F_E:C_X\\longrightarrow D(A),\\qquad H\\longmapsto R\\Gamma(X,H\\otimes_{\\mathcal O_X}^{\\mathbf L}E)$$\nis exact and preserves products in the chosen indexing universe: the morphism $F_E(\\prod_jH_j)\\to\\prod_jF_E(H_j)$ with components $F_E(\\operatorname{pr}_j)$ is an isomorphism. The source product is taken in $C_X$. Consequently, applying $F_E$ to a product triangle\n$$L\\longrightarrow P\\xrightarrow{1-s}P\\longrightarrow L[1],\\qquad P=\\prod_{n\\ge1}H_n,\\quad\\operatorname{pr}_ns=t_n\\operatorname{pr}_{n+1},$$\nfor any countable tower $H_{n+1}\\xrightarrow{t_n}H_n$ in $C_X$, gives a derived limit of the tower $(F_E(H_n),F_E(t_n))$ in $D(A)$ [def-weil-derived-limit]: with $c:F_E(P)\\xrightarrow{\\sim}\\prod_nF_E(H_n)$ the product comparison, $F_E(L)\\xrightarrow{cF_E(p)}\\prod_nF_E(H_n)\\xrightarrow{1-s'}\\prod_nF_E(H_n)\\to F_E(L)[1]$ is distinguished, where $p:L\\to P$ is the first arrow and $\\mathrm{pr}_ns'=F_E(t_n)\\mathrm{pr}_{n+1}$. In particular, for every derived limit $(R,p',\\delta')$ of $(F_E(H_n),F_E(t_n))$ there is an isomorphism in $D(A)$,\n$$F_E(L)\\xrightarrow{\\sim}R=R\\varprojlim_nF_E(H_n),$$\nwhose composite with the $n$th projection $\\mathrm{pr}_np'$ is $F_E(q_n)$, where $q_n=\\mathrm{pr}_np:L\\to H_n$ is the projection of the given triangle. The product comparison $c$ is natural in morphisms of the $H_j$ and in morphisms of perfect $E$. No surjectivity, module concentration, finite presentation, proper support, or nilpotent-ring-tower hypothesis on the $H_n$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-flat.tex",
+  "place": "Tag 0CX6 (lemma-compute-against-perfect), proof: the exact product-preserving global RHom functor commutes with derived limits, translated to perfect tensor global sections by the dual-perfect-complex identification. This node states that general functor assertion, not the infinitesimal perfectness conclusion."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "def-weil-derived-limit",
+  "def-pc-kflat-complex",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-qcoh-derived-triangulation",
+  "def-sfb-space-affine-global-sections",
+  "def-sfb-space-quasi-compact-presheaf-map"
+ ],
+ "proof": [
+  {
+   "text": "First construct ambient products, without asserting quasi-coherence. Use the small ringed model [def-sfb-space-small-ringed-model]. For any small family of module sheaves, the sectionwise product is a module sheaf: restrictions and scalar multiplication are coordinatewise, and compatible sections glue uniquely in each coordinate. Thus termwise products of complexes exist. By [prop-pur-kinjective-resolutions-exist], represent each $H_j$ by a K-injective complex $I_j$. By [lem-pc-ringed-space-product-kinjective], $B=Q(\\prod_j I_j)$ with its specified projections is the product of the $H_j$ in $D(\\mathcal O_X)$. The cited statement is for an arbitrary abelian category and an arbitrary set, despite its title. Applying the same two statements to the one-object ringed site with ring $A$ proves existence of every small product in $D(A)$. Empty products give the zero object. No exactness of products of module sheaves is used.",
+   "uses": [
+    "def-sfb-space-small-ringed-model",
+    "def-weil-sheaf-of-modules-category",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pc-ringed-space-product-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CX6, lemma-compute-against-perfect, proof, exact global Hom and derived limits paragraph; details in the auxiliary places stated in this step. derived.tex Tag 0BK6, lemma-product-K-injective; injectives.tex Tag 07D9, lemma-derived-products."
+   }
+  },
+  {
+   "text": "The relative hypotheses imply the qcqs hypotheses needed for [lem-sfb-space-derived-coherator-adjunction]. Apply the affine tests and base-change stability in [lem-sfb-space-quasicompact-affine-tests]; [lem-sfb-space-qcqs-source-products] also gives absolute quasi-separatedness from the quasi-separated morphism to the quasi-separated affine base. Quasi-compactness follows by applying quasi-compactness of $f$ to the affine target. For affine etale charts $U,V\\to X$, the scheme $U\\times_A V$ is affine, and $U\\times_X V\\to U\\times_A V$ is the pullback of the relative diagonal; it is quasi-compact by quasi-separatedness of $f$. Thus the chart intersections are quasi-compact. Apply the cited adjunction $I_X\\dashv DQ_X$. For the ambient product $B$ of step 1, put $P=DQ_XB$; its $j$th projection is the counit $I_XP\\to B$ followed by the $j$th ambient projection. For every $T\\in C_X$, the counit adjunction and the ambient product give\n$$\\operatorname{Hom}_{C_X}(T,P)\\cong\\operatorname{Hom}_{D(\\mathcal O_X)}(I_XT,B)\\cong\\prod_j\\operatorname{Hom}_{C_X}(T,H_j).$$\nBoth bijections are induced by these projections, so this is exactly the product universal property in $C_X$. This argument also covers the empty family.",
+   "uses": [
+    "lem-sfb-space-derived-coherator-adjunction",
+    "lem-sfb-space-quasicompact-affine-tests",
+    "lem-sfb-space-qcqs-source-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CX6, lemma-compute-against-perfect, proof, exact global Hom and derived limits paragraph; details in the auxiliary places stated in this step. spaces-perfect.tex Tag 0CR4, lemma-better-coherator."
+   }
+  },
+  {
+   "text": "Set $D=E^\\vee$. By [lem-sfb-ringed-site-perfect-duality], $D$ is perfect and the canonical map $E\\to D^\\vee$ is invertible. Moreover $D$ belongs to $C_X$: on a strict-perfect chart, each term is a retract of a finite free module and hence quasi-coherent; kernels, images and cokernels remain quasi-coherent by [lem-sfb-space-qcoh-kernels-colimits], so its cohomology is quasi-coherent, which is an etale-local condition. Apply the evaluation isomorphism of the duality lemma with first argument $D$ and second argument $H$. It identifies $H\\otimes^{\\mathbf L}E$ with $R\\mathcal Hom(D,H)$, naturally in $H$. The final clause of [lem-sfb-ringed-site-global-rhom-derived-limits] therefore gives, for every integer $q$,\n$$H^qF_E(H)\\cong\\operatorname{Hom}_{D(\\mathcal O_X)}(D,H[q])\\cong\\operatorname{Hom}_{C_X}(D[-q],H).$$\nAll maps here retain the $A$-action. Only the cohomology-identification clause of the global-Hom node is used, not its assertion about ambient derived limits.",
+   "uses": [
+    "lem-sfb-ringed-site-perfect-duality",
+    "lem-sfb-space-qcoh-kernels-colimits",
+    "lem-sfb-ringed-site-global-rhom-derived-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CX6, lemma-compute-against-perfect, proof, exact global Hom and derived limits paragraph; details in the auxiliary places stated in this step. sites-cohomology.tex Tags 08JJ (lemma-dual-perfect-complex) and 0B6E (section-global-RHom)."
+   }
+  },
+  {
+   "text": "The functor is defined on $C_X$ because [lem-sfb-space-derived-qcoh-pullback-tensor] says that the derived tensor of two quasi-coherent derived objects is quasi-coherent. Choose a flat-term K-flat resolution of $E$ by [lem-pc-kflat-resolution]. Then [lem-weil-pbc-kflat-fixed-tensor-triangulated] makes tensoring with this fixed resolution an exact functor, including its signed shift comparison and connecting maps. Global sections with its induced $A$-action is an additive functor from module sheaves to $A$-modules. Both categories admit K-injective resolutions by [prop-pur-kinjective-resolutions-exist], using the one-object site for $A$-modules. Thus [lem-pc-right-derived-functor-triangulated] makes its K-injective right derived functor exact. Composing these two exact functors and restricting to the full triangulated subcategory $C_X$ proves exactness of $F_E$.",
+   "uses": [
+    "lem-sfb-space-derived-qcoh-pullback-tensor",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pc-right-derived-functor-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CX6, lemma-compute-against-perfect, proof, exact global Hom and derived limits paragraph; details in the auxiliary places stated in this step. sites-cohomology.tex Tag 06YU, definition-derived-tor; right-derived triangulated structure in WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/Triangulated.lean, instances at lines 94-99."
+   }
+  },
+  {
+   "text": "In $D(A)$, [lem-sc-module-cup-homology-representability] identifies $H^q(N)$ with $\\operatorname{Hom}_{D(A)}(A[-q],N)$, naturally in $N$. Consequently the product universal property, applied with test object $A[-q]$, gives\n$$H^q(\\prod_jN_j)\\cong\\prod_jH^q(N_j).$$\nThis is the map whose components are the cohomologies of the product projections. The family may be any small set, including the empty set. This uses representability, not a claim that ordinary sheaf products are exact.",
+   "uses": [
+    "lem-sc-module-cup-homology-representability"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CX6, lemma-compute-against-perfect, proof, exact global Hom and derived limits paragraph; details in the auxiliary places stated in this step. derived.tex Tag 064B, lemma-morphisms-from-projective-complex, applied to the rank-one single complex; the product universal property."
+   }
+  },
+  {
+   "text": "Let $P=\\prod_j^{C_X}H_j$ and let $c:F_E(P)\\to\\prod_jF_E(H_j)$ be the comparison specified in the statement. For every integer $q$, step 3 and the universal property of $P$ identify its source cohomology with\n$$\\operatorname{Hom}_{C_X}(D[-q],P)\\cong\\prod_j\\operatorname{Hom}_{C_X}(D[-q],H_j)\\cong\\prod_jH^qF_E(H_j).$$\nStep 5 identifies its target cohomology with the same product. Naturality of the step-3 identification shows that the $j$th component of $H^q(c)$ is precisely postcomposition with $\\operatorname{pr}_j$. Thus $H^q(c)$ is an isomorphism for every $q$, and [lem-weil-pbc-unbounded-derived-iso-cohomology] implies that $c$ is an isomorphism. This proves preservation for every small family, not only for countable towers.",
+   "uses": [
+    "lem-sfb-ringed-site-perfect-duality",
+    "lem-sfb-ringed-site-global-rhom-derived-limits",
+    "lem-sc-module-cup-homology-representability",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CX6, lemma-compute-against-perfect, proof, exact global Hom and derived limits paragraph; details in the auxiliary places stated in this step. sites-cohomology.tex Tags 08JJ and 0B6E; derived.tex Tag 05RT, lemma-acyclic."
+   }
+  },
+  {
+   "text": "The comparison is natural in the family: for maps $u_j:H_j\\to H'_j$, both sides of the naturality square have $j$th component $F_E(u_j\\operatorname{pr}_j)$. For a morphism $v:E\\to E'$ of perfect objects, the transformation $F_E\\to F_{E'}$ is induced by $1_H\\otimes^{\\mathbf L}v$. Tensor bifunctoriality makes its square with every $H$-projection commute. Hence both sides of the corresponding product-comparison square have the same $j$th component. The product universal property proves both squares commute, including for an empty family.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CX6, lemma-compute-against-perfect, proof, exact global Hom and derived limits paragraph; details in the auxiliary places stated in this step. Product universal property and bifunctoriality of the derived tensor functor in the statement."
+   }
+  },
+  {
+   "text": "For the given tower put $Q=\\prod_nF_E(H_n)$ and use the isomorphism $c:F_E(P)\\to Q$ from step 6. Additivity and functoriality give, for every $n$,\n$$\\operatorname{pr}_n cF_E(s)=F_E(t_n\\operatorname{pr}_{n+1})=F_E(t_n)\\operatorname{pr}_{n+1}c.$$\nTherefore $cF_E(1-s)c^{-1}=1-s'$, since the equality holds after every projection of $Q$. Exactness from step 4 sends the given product triangle to a distinguished triangle. Transport its two product vertices along $c$, and use the shift comparison of $F_E$ for the last arrow. This gives the distinguished triangle\n$$F_E(L)\\xrightarrow{cF_E(p)}Q\\xrightarrow{1-s'}Q\\longrightarrow F_E(L)[1].$$\nBy [def-weil-derived-limit] this is a derived limit of the image tower, with $n$th projection $F_E(\\operatorname{pr}_np)=F_E(q_n)$.",
+   "uses": [
+    "def-weil-derived-limit",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CX6, lemma-compute-against-perfect, proof, exact global Hom and derived limits paragraph; details in the auxiliary places stated in this step. derived.tex Tag 08TC, definition-derived-limit, and the TR1 closure under triangle isomorphisms."
+   }
+  },
+  {
+   "text": "Let $(R,p',\\delta')$ be any other specified derived limit of the image tower. Rotate its Roos triangle and that of step 8 so that both start with the same arrow $Q\\xrightarrow{1-s'}Q$. Apply TR3 of [def-weil-triangulated-category] with the identity maps on these two vertices, then rotate back. It supplies $a:F_E(L)\\to R$ completing the original triangles and satisfying $p'a=cF_E(p)$. Apply [lemma-weil-pbc-r-lim-levelwise-isomorphism] with the identity isomorphism on every object of the image tower: $a$ is an isomorphism. Composing the displayed equality with $\\operatorname{pr}_n$ gives $\\operatorname{pr}_np'a=F_E(q_n)$. Existence, rather than uniqueness or canonicity, is exactly what the statement requires. None of these steps used a surjectivity or finiteness condition on the tower.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lemma-weil-pbc-r-lim-levelwise-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CX6, lemma-compute-against-perfect, proof, exact global Hom and derived limits paragraph; details in the auxiliary places stated in this step. derived.tex Tag 08TC, paragraph following definition-derived-limit: TR3 uniqueness up to nonunique isomorphism."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-space-small-ringed-model",
+  "def-weil-sheaf-of-modules-category",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-ringed-space-product-kinjective",
+  "lem-sfb-space-derived-coherator-adjunction",
+  "lem-sfb-space-quasicompact-affine-tests",
+  "lem-sfb-space-qcqs-source-products",
+  "lem-sfb-ringed-site-perfect-duality",
+  "lem-sfb-space-qcoh-kernels-colimits",
+  "lem-sfb-ringed-site-global-rhom-derived-limits",
+  "lem-sfb-space-derived-qcoh-pullback-tensor",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sc-module-cup-homology-representability",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "def-weil-derived-limit",
+  "def-weil-triangulated-category",
+  "lemma-weil-pbc-r-lim-levelwise-isomorphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-flat.tex",
+  "place": "Tag 0CX6, lemma-compute-against-perfect, exact global Hom and dual-perfect translation paragraphs, with explicit coherator-product and TR3 details from Tags 0CR4, 0BK6 and 08TC."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi compact quasi separated algebraic space over a ring and a perfect complex E the functor R global sections of tensor E preserves products and homotopy inverse limits",
+   "results": "{\"t\": \"2026-10-23T22:09:06Z\", \"tool\": \"leanfinder\", \"query\": \"For a quasi compact quasi separated algebraic space over a ring and a perfect complex E the functor R global sections of tensor E preserves products and homotopy inverse limits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj\", \"AlgebraicGeometry.preservesLimit_rightOp_Γ\", \"LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology\", \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"LightCondensed.instPreservesFiniteProductsOppositeLightProfiniteVal\", \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"LightCondensed.internallyProjective_iff_tensor_condition\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\"], \"digest\": \"1346ad4476a0c886\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the scheme global-sections hits vary the underlying scheme; condensed-module results do not concern this derived quasi-coherent functor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The perfect tensor global cohomology functor on DQCoh of an algebraic space is exact and product preserving so sends a Roos product triangle to a derived limit triangle",
+   "results": "{\"t\": \"2026-10-23T22:09:41Z\", \"tool\": \"leanfinder\", \"query\": \"The perfect tensor global cohomology functor on DQCoh of an algebraic space is exact and product preserving so sends a Roos product triangle to a derived limit triangle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated\", \"CategoryTheory.Functor.map_distinguished_exact\", \"CategoryTheory.Functor.IsHomological.exact\", \"CategoryTheory.Functor.isHomological_of_localization\", \"CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Functor.mapDerivedCategory\", \"CategoryTheory.Tor_obj\", \"CategoryTheory.Tor\"], \"digest\": \"bdd04975e79ef49f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: exact functor and homological-functor generalities do not construct the perfect tensor global-sections functor or prove its product preservation."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"product\"",
+   "results": "{\"t\": \"2026-10-23T22:09:02Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory, \\\"product\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*(globalSections|global_sections|[Pp]roduct)|([Pp]erfect.*[Pp]roduct)",
+   "results": "{\"t\": \"2026-10-23T22:09:01Z\", \"tool\": \"grep\", \"query\": \"derived.*(globalSections|global_sections|[Pp]roduct)|([Pp]erfect.*[Pp]roduct)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: zero hits in AlgebraicGeometry."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived global sections after tensor with a dualizable object preserves homotopy limits of quasi coherent complexes",
+   "results": "{\"t\": \"2026-10-23T22:09:02Z\", \"tool\": \"leansearch\", \"query\": \"Derived global sections after tensor with a dualizable object preserves homotopy limits of quasi coherent complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.preservesLimit_rightOp_Γ\", \"CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier\", \"CategoryTheory.hasGlobalSectionsFunctor_of_hasLimitsOfShape\", \"AlgebraicGeometry.AffineScheme.Γ_preservesLimits\", \"Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier\", \"CategoryTheory.Functor.mapDerivedCategory\", \"SheafOfModules.evaluationPreservesLimit\", \"AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj\"], \"digest\": \"73aa3d54030a80a4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheaf evaluation and scheme global sections, flat finite-limit preservation and mapDerivedCategory do not state the unbounded quasi-coherent derived assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "([Pp]erfect.*[Pp]roduct|[Pp]erfect.*[Hh]omotopy|derivedGlobalSections.*[Pp]roduct)",
+   "results": "{\"t\": \"2026-10-23T22:44:14Z\", \"tool\": \"grep\", \"query\": \"([Pp]erfect.*[Pp]roduct|[Pp]erfect.*[Hh]omotopy|derivedGlobalSections.*[Pp]roduct)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect tensor derived global sections on a quasi compact quasi separated algebraic space preserves products and derived inverse limits",
+   "results": "{\"t\": \"2026-10-23T22:44:14Z\", \"tool\": \"leansearch\", \"query\": \"Perfect tensor derived global sections on a quasi compact quasi separated algebraic space preserves products and derived inverse limits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRingCat.Under.instPreservesLimitUnderDiscreteFunctorTensorProdOfFinite\", \"CommRingCat.Under.instPreservesFiniteProductsUnderTensorProd\", \"AlgebraicGeometry.preservesLimit_rightOp_Γ\", \"TensorProduct.directLimitLeft_symm_of_tmul\", \"CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier\", \"AlgebraicGeometry.AffineScheme.Γ_preservesLimits\", \"CategoryTheory.hasGlobalSectionsFunctor_of_hasLimitsOfShape\", \"CommRingCat.Under.instPreservesLimitsOfShapeUnderWalkingParallelPairTensorProdOfFlatCarrier\"], \"digest\": \"9cb5761f0d4770cf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern ordinary scheme global sections, finite products of ring algebras, or condensed modules, not perfect tensor global sections on D_QCoh of an algebraic space."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"preserves\"",
+   "results": "{\"t\": \"2026-10-23T22:44:14Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory, \\\"preserves\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a qcqs algebraic space over A and perfect E, derived global sections of derived tensor with E is exact and preserves products in the quasi coherent derived category and homotopy inverse limits",
+   "results": "{\"t\": \"2026-10-23T22:44:15Z\", \"tool\": \"leanfinder\", \"query\": \"For a qcqs algebraic space over A and perfect E, derived global sections of derived tensor with E is exact and preserves products in the quasi coherent derived category and homotopy inverse limits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"Condensed.instAB4StarCondensedMod\", \"LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology\", \"AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj\", \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.internallyProjective_iff_tensor_condition\"], \"digest\": \"af74c5ed4a496439\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern ordinary scheme global sections, finite products of ring algebras, or condensed modules, not perfect tensor global sections on D_QCoh of an algebraic space."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-inverse-module-perfect-test-reduction",
+  "date": "2026-10-24",
+  "group": "Q101"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite; spaces-flat.tex lemma-compute-against-perfect: the product-preserving global Hom paragraph and the final translation from dual perfect Hom to tensor tests.",
+   "via": [
+    "lem-sfb-space-inverse-module-perfect-test-reduction",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-perfect-tensor-global-limits",
+  "worker": "stage1",
+  "summary": "Q128: retained the statement; constructed products in D_QCoh with the existing coherator and K-injective product statements, proved product preservation via perfect-dual Hom tests, and tracked all Roos projections and noncanonical comparisons. No new nodes.",
+  "blueprint": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: spells out the exact product-preserving global Hom assertion in spaces-flat.tex Tag 0CX6 and its translation to perfect tensor tests. The current latest blueprint direct-images proof supplies the same ancestor context.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-ringed-space-product-kinjective",
+    "why": "Its statement is for any abelian category and any small set: constructs the ambient product of K-injective representatives; the space unit has no replacement for this general derived-category fact."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "General ringed-site flat-term K-flat resolution used to apply the fixed-tensor exactness theorem; no geometric argument is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "why": "General ringed-site exactness of fixed K-flat tensor including shifts and connecting maps; not a proper-base-change assertion."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "General small ringed-site K-injective existence, used both on X and on the one-object A-site."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic exactness of an unbounded right derived additive functor, applied to A-valued global sections."
+   },
+   {
+    "node": "lem-sc-module-cup-homology-representability",
+    "why": "Only the natural free-rank-one Hom-to-cohomology equivalence for any commutative ring is used to test products in D(A); no abelian-variety route is used."
+   },
+   {
+    "node": "lemma-weil-pbc-r-lim-levelwise-isomorphism",
+    "why": "Pure triangulated-category assertion makes a completion of the identity tower map invertible; no base-change hypotheses are used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-ringed-space-product-kinjective",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sc-module-cup-homology-representability",
+  "lemma-weil-pbc-r-lim-levelwise-isomorphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q128-5772f1563",
+  "group": "Q128",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-5772f1563 (reviewer sub-agent of L); spot-checked: I read the whole delivery and it is correct. It has no new nodes, the statement is unchanged and is not weakened, and proof_deps equals the union of the step uses. Source check: Stacks 0CX6 says RHom_X(E,-) on D_QCoh commutes with products and so with derived limits, then turns (1) into (2) via 08JJ; 0CR4 gives the coherator right adjoint. The nine steps follow that route. Step 1: ambient products from K-injective representatives through the small ringed model; 0BK6 holds for any abelian category. Step 2: qcqs of X follows from the affine tests, since U×_X V is a pullback of Δ_{X/A} over an affine. P = DQ_X(∏) has the product property in C_X. Step 3: D = E^∨ is perfect, lies in C_X by 03M1, and E⊗H ≅ RHom(D,H). Only the H^q-identification clause of the global-RHom node is used, not its strict-tower limit claim. Step 4: exactness from the fixed K-flat tensor and the right-derived functor of RΓ. Steps 5-6: H^q in D(A) is represented by A[-q], so H^q(c) is the identity on ∏H^qF_E(H_j); the cohomology criterion then makes c an isomorphism. Step 8: conjugating by c and applying TR1 gives the Roos triangle with projections F_E(q_n). Step 9: rotation plus TR3 gives (a,1,1), and the levelwise-isomorphism lemma with u_n = id makes a an isomorphism with pr_n p' a = F_E(q_n). Edge cases (empty family, singleton, E=0, unbounded objects, zero transitions) are fine. Batch 5: all six flagged citations reach sec-trace-formula only through def-trf-algebraic-space and other basic algebraic-space and quasi-coherence nodes, none of which is part of the trace formula or Poincaré duality, so this is not a RETURN. All seven split_report.tool_uses are generic tools and are accepted. Note for the maintainer: lem-sfb-space-perfect-tensor-test-holim is the countable strict-tower special case of this item; it is not a duplicate created by this delivery. No SGA is cited."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpacePerfectTensorGlobalLimits",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.perfectTensorGlobal_preserves_products_limits",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpacePerfectTensorGlobalLimits.lean",
+  "statement": "theorem perfectTensorGlobal_preserves_products_limits (A : Type u) [CommRing A] (Y : Over (Spec (.of (ULift.{u} ℤ)))) (e : Y.left ≅ Spec (.of A)) (X : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))) (f : X ⟶ schemeSpace Y) [HasDerivedCategory.{w} X.SmallModules] (_hqc : IsQuasiCompactPresheafMap f.hom.hom) (_hqs : IsQuasiCompactPresheafMap (pullback.diagonal f.hom.hom)) (T : X.DerivedQCoh ⥤ X.DerivedQCoh ⥤ DerivedCategory (ModuleCat.{u} A)) (_hT : T = (Functor.curry.obj ((X.derivedQCohProperty.ι.prod X.derivedQCohProperty.ι) ⋙ X.derivedDualityModel.closed.tensor ⋙ affineDerivedSections A Y e X f)).flip) (E : X.DerivedQCoh) (_hE : SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, u, w} X.smallStructureSheaf E.obj) : (T.obj E).Additive ∧ ∃ σ : (T.obj E).CommShift ℤ, (∀ Δ : Triangle X.DerivedQCoh, Δ ∈ distTriang X.DerivedQCoh → Triangle.mk ((T.obj E).map Δ.mor₁) ((T.obj E).map Δ.mor₂) ((T.obj E).map Δ.mor₃ ≫ (σ.commShiftIso (1 : ℤ)).hom.app Δ.obj₁) ∈ distTriang (DerivedCategory (ModuleCat.{u} A))) ∧ (∀ (I : Type u) (H : I → X.DerivedQCoh), HasProduct H ∧ HasProduct (fun j ↦ (T.obj E).obj (H j)) ∧ ∀ (P : Fan H) (_hP : IsLimit P) (Q : Fan (fun j ↦ (T.obj E).obj (H j))) (_hQ : IsLimit Q) (c : (T.obj E).obj P.pt ⟶ Q.pt) (_hc : ∀ j, c ≫ Q.proj j = (T.obj E).map (P.proj j)), IsIso c) ∧ (∀ (I : Type u) (H H' : I → X.DerivedQCoh) (v : ∀ j, H j ⟶ H' j) (P : Fan H) (_hP : IsLimit P) (P' : Fan H') (hP' : IsLimit P') (Q : Fan (fun j ↦ (T.obj E).obj (H j))) (_hQ : IsLimit Q) (Q' : Fan (fun j ↦ (T.obj E).obj (H' j))) (hQ' : IsLimit Q') (c : (T.obj E).obj P.pt ⟶ Q.pt) (_hc : ∀ j, c ≫ Q.proj j = (T.obj E).map (P.proj j)) (c' : (T.obj E).obj P'.pt ⟶ Q'.pt) (_hc' : ∀ j, c' ≫ Q'.proj j = (T.obj E).map (P'.proj j)), (T.obj E).map (hP'.lift (Fan.mk P.pt (fun j ↦ P.proj j ≫ v j))) ≫ c' = c ≫ hQ'.lift (Fan.mk Q.pt (fun j ↦ Q.proj j ≫ (T.obj E).map (v j)))) ∧ (∀ (E' : X.DerivedQCoh) (_hE' : SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, u, w} X.smallStructureSheaf E'.obj) (v : E ⟶ E') (I : Type u) (H : I → X.DerivedQCoh) (P : Fan H) (_hP : IsLimit P) (Q : Fan (fun j ↦ (T.obj E).obj (H j))) (_hQ : IsLimit Q) (Q' : Fan (fun j ↦ (T.obj E').obj (H j))) (hQ' : IsLimit Q') (c : (T.obj E).obj P.pt ⟶ Q.pt) (_hc : ∀ j, c ≫ Q.proj j = (T.obj E).map (P.proj j)) (c' : (T.obj E').obj P.pt ⟶ Q'.pt) (_hc' : ∀ j, c' ≫ Q'.proj j = (T.obj E').map (P.proj j)), (T.map v).app P.pt ≫ c' = c ≫ hQ'.lift (Fan.mk Q.pt (fun j ↦ Q.proj j ≫ (T.map v).app (H j)))) ∧ (∀ (H : ℕ → X.DerivedQCoh) (t : ∀ n, H (n + 1) ⟶ H n) (P : Fan H) (_hP : IsLimit P) (s : P.pt ⟶ P.pt) (_hs : ∀ n, s ≫ P.proj n = P.proj n - (P.proj (n + 1) ≫ t n)) (L : X.DerivedQCoh) (p : L ⟶ P.pt) (δ : P.pt ⟶ L⟦(1 : ℤ)⟧) (_hL : Triangle.mk p s δ ∈ distTriang X.DerivedQCoh) (Q : Fan (fun n ↦ (T.obj E).obj (H n))) (_hQ : IsLimit Q) (s' : Q.pt ⟶ Q.pt) (_hs' : ∀ n, s' ≫ Q.proj n = Q.proj n - (Q.proj (n + 1) ≫ (T.obj E).map (t n))), ∃ c : (T.obj E).obj P.pt ≅ Q.pt, (∀ n, c.hom ≫ Q.proj n = (T.obj E).map (P.proj n)) ∧ Triangle.mk ((T.obj E).map p ≫ c.hom) s' (c.inv ≫ (T.obj E).map δ ≫ (σ.commShiftIso (1 : ℤ)).hom.app L) ∈ distTriang (DerivedCategory (ModuleCat.{u} A)) ∧ ∀ (R : DerivedCategory (ModuleCat.{u} A)) (p' : R ⟶ Q.pt) (δ' : Q.pt ⟶ R⟦(1 : ℤ)⟧) (_hR : Triangle.mk p' s' δ' ∈ distTriang (DerivedCategory (ModuleCat.{u} A))), ∃ φ : (T.obj E).obj L ≅ R, φ.hom ≫ p' = (T.obj E).map p ≫ c.hom)",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing small etale model, induced D_QCoh triangulation, normalized derived tensor and scalar global sections. T is constrained by equality to the curried/flipped canonical composite, fixing both its coefficient maps and its H maps without a duplicate definition or an import of the downstream tensor-test theorem. Arbitrary product fans and their component characterization fix all product comparisons uniquely. No mathematical statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0a73706fb",
+  "group": "NY",
+  "result": "pass",
+  "note": "Clause-by-clause match against node and Stacks 0CX6. Item node changes only lean and stmt_deps; the 5 added stmt_deps (small-ringed-model, derived-module-calculus, qcoh-derived-triangulation, affine-global-sections, quasi-compact-presheaf-map) are landed nodes, which §5 allows. f qcqs via IsQuasiCompactPresheafMap on f and pullback.diagonal; E : DerivedQCoh with IsPerfectOnRingedSiteOfUniverses (08G5). T pinned by _hT to curry/flip of (ι×ι)⋙derivedDualityModel.closed.tensor⋙affineDerivedSections, with E second and A-linear: the same composite as landed perfectTensorTest, whose owner is a theorem node citing this item, so inlining is not H4. Exactness as Additive ∧ ∃ CommShift preserving distinguished triangles. All Type-u products exist as a conclusion and the projection-pinned comparison is iso for arbitrary limit fans. Naturality in the family and in perfect E is given via IsLimit.lift. Tower clause matches towerTransitionEndomorphism (s = 1−shift); the image Roos triangle is distinguished with c, and every derived limit (R,p′,δ′) gets φ iso with φ≫p′ = F_E(p)≫c, which gives pr_n p′φ = F_E(q_n). Edge cases fine: empty family, zero E/H, empty X, zero ring, unbounded objects, free w (degenerate only if w<u). No defs, proof sorry, docstrings with source/blueprint and 9 proof steps, no line over 100 chars, both report sections present; not recompiled per instruction (worker scompile and deliver2 --no-push OK). Notes: schemeSpace owner def-trf-scheme-algebraic-space not in stmt_deps (reached via def-sfb-space-affine-global-sections; landed sibling holim omits it too); some public imports only cite dependencies."
+ }
+}

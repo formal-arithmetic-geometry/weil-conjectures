@@ -1,0 +1,250 @@
+{
+ "id": "lem-sf-exact-pullback-tower-counit-comparison",
+ "kind": "statement",
+ "title": "Exact module pullback: universal ordinary and strict-tower comparisons with evaluation",
+ "statement": "Let $\\mathcal C,\\mathcal C'$ be small sites with sheaves of commutative rings $R,S$, and let $(f,c)$ be a morphism of ringed topoi: $f^{-1}\\dashv f_*$, $f^{-1}$ preserves finite limits, and $c:f^{-1}R\\to S$. Put $G(M)=f^{-1}M\\otimes_{f^{-1}R}S$ [def-pur-sheaf-tensor-product]. Let $F:\\operatorname{Mod}(R)\\to\\operatorname{Mod}(S)$ be additive and exact, and $m:G\\xrightarrow{\\sim}F$ a specified natural isomorphism. Use module sheaves [def-weil-sheaf-of-modules-category], unbounded derived categories with localizations $Q_R,Q_S$ [def-weil-abstract-derived-category], and strict inverse sequences indexed by $\\mathbf N_{\\geq1}^{\\mathrm{op}}$ [def-weil-inverse-system]. Write $G^{\\mathrm{Tow}},F^{\\mathrm{Tow}},m^{\\mathrm{Tow}}$ for the levelwise extensions. Let $(L,\\epsilon)$ and $(\\widetilde L,\\tau)$ be specified universal total left-derived pairs for $G$ and $G^{\\mathrm{Tow}}$, computed on objectwise K-flat complexes with flat terms [def-pc-kflat-complex, def-pc-flat-sheaf-modules, lem-pur-left-derived-from-kflat-class]. Write $F_D$ and $F_D^{\\mathrm{Tow}}$ for the exact termwise derived descents with localization comparisons $\\xi,\\Xi$ [lem-weil-pbc-exact-functor-derived-factorization]. All formulas include the exact-localization identifications, and $Q_R^{\\mathrm{Tow}},Q_S^{\\mathrm{Tow}}$ denote the tower localizations.\n\nThere are unique natural isomorphisms $e:L\\xrightarrow{\\sim}F_D$ and $E:\\widetilde L\\xrightarrow{\\sim}F_D^{\\mathrm{Tow}}$ such that, for every complex $P$ and every complex of strict towers $M$,\n$$\\xi_Pe_{Q_RP}=Q_S(m_P)\\epsilon_P,\\qquad \\Xi_ME_{Q_R^{\\mathrm{Tow}}M}=Q_S^{\\mathrm{Tow}}(m^{\\mathrm{Tow}}_M)\\tau_M.$$\nBoth $\\epsilon_P$ and $\\tau_M$ are invertible for every $P,M$. For every $n\\geq1$ there is a counit-normalized natural isomorphism $v_n:\\operatorname{ev}_n\\widetilde L\\xrightarrow{\\sim}L\\operatorname{ev}_n$, characterized on every objectwise K-flat flat-term tower complex $M$ by\n$$\\epsilon_{M_n}v_{n,Q_R^{\\mathrm{Tow}}M}=\\operatorname{ev}_n(\\tau_M).$$\nFor every derived strict tower $N$,\n$$\\operatorname{ev}_n(E_N)=e_{\\operatorname{ev}_nN}v_{n,N},$$\nwhere the left side is identified with a map to $F_D\\operatorname{ev}_nN$ by exact localization. For every $b\\geq a\\geq1$, $L(d_{b,a})v_{b,N}=v_{a,N}d'_{b,a}$, where $d,d'$ are the evaluation transition maps on $N,\\widetilde L N$. These are assertions in the derived category of strict towers and hold without boundedness assumptions.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.md",
+  "place": "Returned localization Step 6 via immersion-comparison Step 1; old normalization proof Steps 1-3: exact derived counits, levelwise comparison and normalized evaluations; agent-written refinement of the retained proof. Supporting Stacks derived.tex Tags 015F (lemma-right-derived-exact-functor, left-derived dual) and 06XN (lemma-find-existence-computes, dual)."
+ },
+ "stmt_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-inverse-system",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "lem-pur-left-derived-from-kflat-class",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-sf-derived-tower-evaluation-normalization",
+  "def-sbc-tower-derived-evaluation-interchange"
+ ],
+ "proof": [
+  {
+   "text": "Write $H=Q_S C(F)$ and $H_G=Q_S C(G)$, and put $\\mu=Q_S C(m):H_G\\xrightarrow{\\sim}H$. The exact-functor theorem makes $(F_D,\\xi)$ a right Kan extension of $H$ along $Q_R$. The specified pair $(L,\\mu\\epsilon)$ is also universal: composing any transformation $TQ_R\\to H$ with $\\mu^{-1}$, applying the universal property of $(L,\\epsilon)$, and composing back gives the required unique factorization. Right Kan uniqueness therefore gives a unique $e:L\\xrightarrow{\\sim}F_D$ with $\\xi_P e_{Q_RP}=\\mu_P\\epsilon_P$. Thus $\\epsilon_P=\\mu_P^{-1}\\xi_P e_{Q_RP}$ is invertible for every complex $P$.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-sfb-right-kan-extension-unique-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor, unbounded clause (3) and left-derived dual; universal-pair normalization is the agent-written refinement of the blueprint localization Step 6."
+   }
+  },
+  {
+   "text": "Kernels and cokernels of strict towers are levelwise. Hence $F^{\\mathrm{Tow}}$ is additive and exact: its kernel and cokernel comparisons at each level are those of exact $F$. Naturality of $m$ at the transition arrows makes its levelwise components a natural tower isomorphism $m^{\\mathrm{Tow}}$. Apply the exact-functor theorem to these two abelian tower categories. Composing the specified tower universal counit with $Q_S^{\\mathrm{Tow}}C(m^{\\mathrm{Tow}})$ preserves universality by the same inverse-composition argument as in Step 1. Right Kan uniqueness gives the unique $E$ with the displayed $\\Xi$ equation. Solving that equation for $\\tau_M$ proves its invertibility for every tower complex $M$.",
+   "uses": [
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-sfb-right-kan-extension-unique-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor, unbounded clause (3) and left-derived dual; universal-pair normalization is the agent-written refinement of the blueprint localization Step 6."
+   }
+  },
+  {
+   "text": "Exact evaluation descends by the exact-functor factorization theorem. The identity $\\operatorname{ev}_n C(F^{\\mathrm{Tow}})=C(F)\\operatorname{ev}_n$ on tower complexes gives, by localization uniqueness, a natural isomorphism $h_n:\\operatorname{ev}_nF_D^{\\mathrm{Tow}}\\xrightarrow{\\sim}F_D\\operatorname{ev}_n$. Specify it by $\\xi_{M_n}h_{n,QM}=\\operatorname{ev}_n(\\Xi_M)$, with all evaluation/localization comparisons inserted. Both sides are factorizations of the same functor $M\\mapsto Q_S F(M_n)$, which inverts quasi-isomorphisms; clause (2) of localization uniqueness lifts their identity, and its inverse, to this $h_n$. Define the natural isomorphism $w_{n,N}=e_{\\operatorname{ev}_nN}^{-1}h_{n,N}\\operatorname{ev}_n(E_N)$.",
+   "uses": [
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization; natural-transformation full faithfulness as stated in lem-weil-pbc-localization-universal-property, clause (2); agent-written exact-evaluation application."
+   }
+  },
+  {
+   "text": "For every tower complex $M$, the equations of Steps 1--3 give $Q_S(m_{M_n})\\epsilon_{M_n}w_{n,QM}=\\xi_{M_n}h_{n,QM}\\operatorname{ev}_n(E_{QM})=\\operatorname{ev}_n(\\Xi_M E_{QM})=Q_S(m_{M_n})\\operatorname{ev}_n(\\tau_M)$. Cancel the invertible $Q_S(m_{M_n})$. In particular $w_n$ satisfies the required normalization on the objectwise K-flat flat-term class. Strict diagram K-flat replacements supply this resolving class for the small index $\\mathbf N_{\\geq1}^{\\mathrm{op}}$. The normalized tower-evaluation theorem, applied to the present ringed topoi and the specified universal pairs for $G$, gives a unique normalized isomorphism $v_n$ and its transition equations. Consequently $w_n=v_n$; the definition of $w_n$ gives $h_{n,N}\\operatorname{ev}_n(E_N)=e_{\\operatorname{ev}_nN}v_{n,N}$. Its transition equation is precisely $L(d_{b,a})v_{b,N}=v_{a,N}d'_{b,a}$. All constructions are unbounded.",
+   "uses": [
+    "lem-weil-pbc-diagram-kflat-replacements",
+    "lem-cbc-derived-tower-evaluation-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XN, lemma-find-existence-computes, dual; normalized evaluation theorem lem-cbc-derived-tower-evaluation-normalization; agent-written comparison calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-sfb-right-kan-extension-unique-iso",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-diagram-kflat-replacements",
+  "lem-cbc-derived-tower-evaluation-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.md",
+  "place": "Returned localization Step 6 through exact-pullback normalization, ordinary and tower comparisons; expands old normalization Steps 1--3 preserved in coord/reports/Q80/lem-sf-exact-pullback-counit-normalization.md using Stacks Tags 015F and 06XN."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rightKanExtensionUnique|mapDerivedCategoryFactors|totalLeftDerivedCounit",
+   "results": "21 hits: Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic exact localization and Kan-extension or derived-counit results do not include the simultaneous normalized strict-tower evaluation and transition equations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact functor and isomorphic module pullback derived counit normalized tower comparison evaluation",
+   "results": "8 hits: PresheafOfModules.evaluation, CategoryTheory.Limits.pullbackComparison, CategoryTheory.expComparison_ev, CategoryTheory.Limits.instIsIsoPullbackComparison, CategoryTheory.Limits.pullbackObjIso, AlgebraicGeometry.Scheme.Modules.pullbackCongr, CategoryTheory.Abelian.FunctorCategory.imageObjIso, PresheafOfModules.pullback_comp_id",
+   "date": "2026-10-22",
+   "verdict": "no match: generic exact localization and Kan-extension or derived-counit results do not include the simultaneous normalized strict-tower evaluation and transition equations"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.totalLeftDerivedCounit",
+   "results": "2 hits: CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit, CategoryTheory.Functor.totalLeftDerivedCounit",
+   "date": "2026-10-22",
+   "verdict": "no match: generic exact localization and Kan-extension or derived-counit results do not include the simultaneous normalized strict-tower evaluation and transition equations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact functor isomorphic to ringed module pullback unique counit normalized derived isomorphism on strict towers compatible with evaluation",
+   "results": "8 hits: SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, CategoryTheory.Adjunction.derived'_counit, PresheafOfModules.pullbackComp, SheafOfModules.pullbackIso, AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc, CategoryTheory.Adjunction.derived_counit, SheafOfModules.pullbackComp",
+   "date": "2026-10-22",
+   "verdict": "no match: generic exact localization and Kan-extension or derived-counit results do not include the simultaneous normalized strict-tower evaluation and transition equations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural isomorphism between left derived exact functors intertwines evaluation and inverse sequence transition maps",
+   "results": "8 hits: CategoryTheory.Functor.leftDerivedNatIso_inv, CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_app, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_app, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_assoc, CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_app_assoc, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_app_assoc, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: generic exact localization and Kan-extension or derived-counit results do not include the simultaneous normalized strict-tower evaluation and transition equations"
+  },
+  {
+   "tool": "grep",
+   "query": "rightKanExtensionUnique|mapDerivedCategoryFactors|totalLeftDerivedCounit",
+   "results": "21 hits: Mathlib/Topology/Sheaves/Alexandrov.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean, Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean, Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean, Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: read hits give generic exact descent or universal derived counits, or degree-zero derived functors with projective resolutions; none states the simultaneous normalized strict-tower evaluation and transition comparison. Generic ingredients already have DAG nodes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact functor universal left derived counit isomorphism commutes with evaluation on towers",
+   "results": "8 hits: CategoryTheory.Functor.totalLeftDerivedCounit, CategoryTheory.Adjunction.derivedε, CategoryTheory.Functor.isLeftDerivedFunctor_iff_isIso_leftDerivedLift, CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_assoc, CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc, CategoryTheory.Functor.leftDerivedZeroIsoSelf, CategoryTheory.instIsIsoFunctorFromLeftDerivedZero",
+   "date": "2026-10-22",
+   "verdict": "no match: read hits give generic exact descent or universal derived counits, or degree-zero derived functors with projective resolutions; none states the simultaneous normalized strict-tower evaluation and transition comparison. Generic ingredients already have DAG nodes."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.totalLeftDerivedCounit",
+   "results": "2 hits: CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit, CategoryTheory.Functor.totalLeftDerivedCounit",
+   "date": "2026-10-22",
+   "verdict": "no match: read hits give generic exact descent or universal derived counits, or degree-zero derived functors with projective resolutions; none states the simultaneous normalized strict-tower evaluation and transition comparison. Generic ingredients already have DAG nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "universal left derived functor of an exact functor unique counit normalized isomorphism compatible with evaluation on inverse systems",
+   "results": "8 hits: CategoryTheory.Functor.totalLeftDerivedCounit, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc, CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_app, CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_assoc, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_app_assoc, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_app, CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_app_assoc, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id",
+   "date": "2026-10-22",
+   "verdict": "no match: read hits give generic exact descent or universal derived counits, or degree-zero derived functors with projective resolutions; none states the simultaneous normalized strict-tower evaluation and transition comparison. Generic ingredients already have DAG nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural isomorphism of exact total left derived functors normalized by universal counits intertwines strict inverse sequence evaluation and transition maps",
+   "results": "8 hits: CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_app_assoc, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc, CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_assoc, CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_app_assoc, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app_assoc, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_app_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: read hits give generic exact descent or universal derived counits, or degree-zero derived functors with projective resolutions; none states the simultaneous normalized strict-tower evaluation and transition comparison. Generic ingredients already have DAG nodes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-exact-pullback-counit-normalization",
+  "date": "2026-10-22",
+  "group": "Q80"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-localization",
+ "blueprint": {
+  "from": {
+   "node": "prop-sf-localization-all-stages",
+   "place": "Returned localization Step 6 via immersion-comparison Step 1; old normalization proof Steps 1-3: exact derived counits, levelwise comparison and normalized evaluations",
+   "via": [
+    "lem-sf-exact-pullback-counit-normalization",
+    "lem-sf-immersion-completed-pullback-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-exact-pullback-tower-counit-comparison",
+  "worker": "stage1",
+  "summary": "Proved the ordinary and strict-tower universal comparisons by exact descent and right Kan uniqueness. Constructed the exact evaluation interchange by localization and calculated its conjugate satisfies the actual counit normalization. Existing normalized evaluation uniqueness gives the comparison and every transition. No new nodes or statement changes.",
+  "blueprint": "Realizes prop-sf-localization-all-stages returned localization Step 6 via lem-sf-immersion-completed-pullback-comparison and lem-sf-exact-pullback-counit-normalization: old normalization Steps 1--3, retained in the Q80 report.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic universal unbounded derived pair of an exact additive functor, used for ordinary and strict-tower abelian categories."
+   },
+   {
+    "node": "lem-cbc-derived-tower-evaluation-normalization",
+    "why": "Generic normalized evaluation comparison for the same ringed-topos pullback and K-flat class, including uniqueness and every transition; supplies no comparison to arbitrary exact F."
+   },
+   {
+    "node": "lem-weil-pbc-diagram-kflat-replacements",
+    "why": "Generic small ringed-site strict-diagram resolving class; verifies the normalized evaluation theorem hypotheses without boundedness."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-cbc-derived-tower-evaluation-normalization",
+  "lem-weil-pbc-diagram-kflat-replacements"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q98-d737b3885",
+  "group": "Q98",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q98-d737b3885 (reviewer sub-agent of L); spot-checked: PASS, no fixes, no new nodes. This is a first split of the unsplit node Q80 created. The re-split note was for the parent, which Q80 answered with this item. Statement, stmt_deps, source and blueprint are unchanged against live. The 4 steps keep old parent Steps 1-3 (Q80 report lines 51-67) in full, and old Step 3 is made stricter: build h_n by localization (2), set w_n=e^-1 h_n ev_n(E), check the counit normalization, then get w_n=v_n from the uniqueness in lem-cbc-derived-tower-evaluation-normalization. Step 1: (L, Q(m)eps) is again a right Kan extension (bijection by mu^-1). With exact-functor-derived-functor(1) and Kan uniqueness this gives a unique e with xi e = Q(m) eps, so every eps is invertible. Step 2: Tow abelian with levelwise kernels and cokernels, so F^Tow is exact and m^Tow is natural; the same argument gives E and invertible tau. Step 3: M->Q_S F(M_n) inverts quasi-isomorphisms, and I checked the h_n specification map by map. Step 4: chain Q(m)eps w = xi e w = xi h ev(E) = ev(Xi E) = Q(m) ev(tau); cancel Q(m). The cbc node's hypotheses (same small ringed sites, F:=G, K-flat flat-term class from diagram-kflat-replacements) match exactly, and it also gives every b>=a transition. Universality over CoCh vs K(A) is a bijective-on-objects full functor, so no gap. Edge cases checked: F=G with m=id, twisting m, zero objects, b=a, unbounded complexes. No SGA. Accepted tool_uses: exact-functor-derived-functor, cbc-derived-tower-evaluation-normalization, diagram-kflat-replacements (all generic). review_split.py prints 'no such node' because of the snapshot's symlinked chapter directories; I opened every cited node, so this is not a delivery fault."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ExactPullbackTowerCounitComparison",
+  "declaration": "CategoryTheory.ExactPullbackTower.exists_unique_counit_comparison",
+  "file": "lean/Sheaf/Paper/ExactPullbackTowerCounitComparison.lean",
+  "statement": "theorem exists_unique_counit_comparison {C D : Type u} [SmallCategory C] [SmallCategory D] (J : GrothendieckTopology C) (K : GrothendieckTopology D) (R : Sheaf J CommRingCat.{u}) (S : Sheaf K CommRingCat.{u}) (f : RingedToposMorphism ((sheafCompose K (forget₂ CommRingCat RingCat)).obj S) ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) (G F : Modules R ⥤ Modules S) [G.Additive] (adj : G ⊣ f.modules) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F] (m : G ≅ F) [HasDerivedCategory.{wA} (Modules R)] [HasDerivedCategory.{wB} (Modules S)] [HasDerivedCategory.{wTA} (ℕᵒᵖ ⥤ Modules R)] [HasDerivedCategory.{wTB} (ℕᵒᵖ ⥤ Modules S)] (L : DerivedCategory (Modules R) ⥤ DerivedCategory (Modules S)) (Lt : DerivedCategory (ℕᵒᵖ ⥤ Modules R) ⥤ DerivedCategory (ℕᵒᵖ ⥤ Modules S)) (ε : DerivedCategory.Q ⋙ L ⟶ G.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q) (τ : DerivedCategory.Q ⋙ Lt ⟶ ((Functor.whiskeringRight ℕᵒᵖ (Modules R) (Modules S)).obj G).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q) [L.IsLeftDerivedFunctor ε (HomologicalComplex.quasiIso (Modules R) (.up ℤ))] [Lt.IsLeftDerivedFunctor τ (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ Modules R) (.up ℤ))] : ∃ (e : L ≅ F.mapDerivedCategory) (E : Lt ≅ Functor.mapDerivedCategory ((Functor.whiskeringRight ℕᵒᵖ (Modules R) (Modules S)).obj F)), (∀ P : CochainComplex (Modules R) ℤ, e.hom.app (DerivedCategory.Q.obj P) ≫ F.mapDerivedCategoryFactors.hom.app P = ε.app P ≫ DerivedCategory.Q.map ((NatIso.mapHomologicalComplex m (.up ℤ)).hom.app P)) ∧ (∀ e' : L ≅ F.mapDerivedCategory, (∀ P : CochainComplex (Modules R) ℤ, e'.hom.app (DerivedCategory.Q.obj P) ≫ F.mapDerivedCategoryFactors.hom.app P = ε.app P ≫ DerivedCategory.Q.map ((NatIso.mapHomologicalComplex m (.up ℤ)).hom.app P)) → e' = e) ∧ (∀ M : CochainComplex (ℕᵒᵖ ⥤ Modules R) ℤ, E.hom.app (DerivedCategory.Q.obj M) ≫ (Functor.mapDerivedCategoryFactors ((Functor.whiskeringRight ℕᵒᵖ (Modules R) (Modules S)).obj F)).hom.app M = τ.app M ≫ DerivedCategory.Q.map ((NatIso.mapHomologicalComplex ((Functor.whiskeringRight ℕᵒᵖ (Modules R) (Modules S)).mapIso m) (.up ℤ)).hom.app M)) ∧ (∀ E' : Lt ≅ Functor.mapDerivedCategory ((Functor.whiskeringRight ℕᵒᵖ (Modules R) (Modules S)).obj F), (∀ M : CochainComplex (ℕᵒᵖ ⥤ Modules R) ℤ, E'.hom.app (DerivedCategory.Q.obj M) ≫ (Functor.mapDerivedCategoryFactors ((Functor.whiskeringRight ℕᵒᵖ (Modules R) (Modules S)).obj F)).hom.app M = τ.app M ≫ DerivedCategory.Q.map ((NatIso.mapHomologicalComplex ((Functor.whiskeringRight ℕᵒᵖ (Modules R) (Modules S)).mapIso m) (.up ℤ)).hom.app M)) → E' = E) ∧ (∀ P : CochainComplex (Modules R) ℤ, IsIso (ε.app P)) ∧ (∀ M : CochainComplex (ℕᵒᵖ ⥤ Modules R) ℤ, IsIso (τ.app M)) ∧ ∃ v : ∀ n : ℕ, Comparison (A := Modules R) (B := Modules S) L Lt n, (∀ n : ℕ, IsNormalizedOn G L Lt ε τ (IsGoodTower R) n (v n)) ∧ (∀ (n : ℕ) (v' : Comparison (A := Modules R) (B := Modules S) L Lt n), IsNormalizedOn G L Lt ε τ (IsGoodTower R) n v' → v' = v n) ∧ (∀ (n : ℕ) (N : DerivedCategory (ℕᵒᵖ ⥤ Modules R)), ((evaluation ℕᵒᵖ (Modules S)).obj (op n)).mapDerivedCategory.map (E.hom.app N) ≫ (towerDerivedEvaluationInterchange F (op n)).hom.app N = (v n).hom.app N ≫ e.hom.app (((evaluation ℕᵒᵖ (Modules R)).obj (op n)).mapDerivedCategory.obj N)) ∧ ∀ (a b : ℕ) (h : a ≤ b) (N : DerivedCategory (ℕᵒᵖ ⥤ Modules R)), (v b).hom.app N ≫ L.map ((derivedTransition (A := Modules R) a b h).app N) = (derivedTransition (A := Modules S) a b h).app (Lt.obj N) ≫ (v a).hom.app N",
+  "branch": "sheaf-dag",
+  "by": "Q22",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the landed ringed-topos adjunction interface and the existing normalized evaluation predicate, transition maps, and canonical exact-descent evaluation interchange. The added statement dependencies own these declarations; no new notion or replacement interface is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-10e1db2de",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Re-delivery after the H2/H3 RETURN on 06b022261c90. The Lean signature is byte-identical, and four unused proof imports were removed. stmt_deps now cite def-sbc-tower-derived-evaluation-interchange (landed, reviewed pass) and the new existing:true def-sf-derived-tower-evaluation-normalization in place of the two theorem nodes. The new node's six declarations, read in the live DerivedTowerEvaluationNormalization.lean, are plain definitions matching its prose: Comparison direction, the IsNormalizedOn equation, derivedTransition by liftNatTrans, IsGoodTower = IsAcyclicTensorKFlat (def-pc-kflat-complex) and SheafOfModules.IsFlat (def-pc-flat-sheaf-modules). Its signature is verbatim in the file, its fields match the Q38 precedent, and its stmt_deps exist. The item's lean.statement is verbatim. The earlier clause-by-clause and edge-case review still applies. The live item is still open, so not superseded. No compile run (no changed file). Advisory: the module docstrings still tag the cbc theorem, as in the accepted Q38 precedent."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261023T134943-L-2818119",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.ExactPullbackTower.exists_unique_counit_comparison"
+  ],
+  "sorry_after": []
+ }
+}

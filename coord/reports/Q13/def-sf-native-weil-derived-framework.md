@@ -1,0 +1,78 @@
+# Worker report
+
+## Files written
+
+- `dag/nodes/sec-six-functors/def-sf-native-weil-derived-framework.json`: definition, split; no Mathlib match for the whole construction. Added nine existing definition dependencies and expanded the coefficient/module inverse image and equivariant lift. The original coefficient model, boundedness condition, morphisms, compactification choice and conditional restriction convention are retained.
+- `citations.json`: empty list. This item is a definition, with no proof steps or proof dependencies.
+- `report.md`: this report.
+
+No new nodes, no Mathlib leaves, no Lean files, and no unit realization edits. The item is not the statement of sk-thm-sf-package.
+
+## Attachments
+
+No whole-item attachment claimed. The native definitions do exist: AlgebraicGeometry.ProEtaleWeilSheaf and AlgebraicGeometry.WeilComplex (Category.lean:143,177), AlgebraicGeometry.WeilComplex.upperStar (Category.lean:472), AlgebraicGeometry.WeilComplex.derivedLowerStar (LowerStar.lean:172), and AlgebraicGeometry.WeilComplex.derivedLowerShriek (LowerShriek.lean:150). Their bodies have no literal sorry. However the last two restrictions use objectProperty_rightDerivedLowerStar, through which the constructibility proof uses AlgebraicGeometry.ProEtale.finiteLowerStar_singleFunctor_of_isAffine (SixFunctors/ProEtale/Adic/LowerStar.lean:410-415), whose proof is sorry. These are therefore not evidence of an entirely closed realization. In particular the source reference in this definition is not treated as a completed proof of finiteness. The ambient rightDerivedLowerShriek construction is LowerShriek.lean:88-93.
+
+## WANTED
+
+None. All sources needed to read this definition are present in the live read clone.
+
+## Findings and changes
+
+The seeded item already correctly distinguishes the native derived category of abelian Weil sheaves from the fixed-pair category formed after deriving. It also already states preservation separately; I retained both distinctions. It lacked links for some notions used in its construction. I added existing nodes for algebraic closure, Q_l and its topology, module objects, locally closed/constructible subsets, pro-etale inverse/direct images, sheaf tensor products, open immersions and total right derivation. Rather than introducing a new node for each clause of this definition, I unpacked the module coefficient map and the general fixed-pair lift formula in the item itself. These are definitions, not new preservation or comparison theorems.
+
+The small-site coefficient map is precomposition B_W -> hbar_* B_V; its adjoint supplies the module inverse image B_V tensor_{hbar^{-1} B_W} hbar^{-1}(-). There is no substitution of a discrete constant ring for B_W. The new formula G(phi) composed with c_M has domain F_T^* G M and codomain G M, the direction required by the fixed-pair convention. I explicitly specified that |V| denotes the whole topological space of V, because these functions are not functions only on its closed points.
+
+Blueprint searches used blueprint_refs.py search for locally finite, fixed pairs, fixed-pair, native derived, Weil complex and pro-etale Weil, and DAG searches for locallyFiniteFunctions, adicConstantSheaf, IsAdicConstructibleSheaf, ProEtaleWeilSheaf and the exact item id. I opened the related definitions def-wf-weil-category and def-weil-weil-sheaf-complex as candidates; the former uses raw-rationalized completed coefficients with Weil pairs after derivation, and the latter is also the other realization already distinguished by the item. Neither defines this native framework, so same_as remains empty. The recorded parent is lem-sf-weil-compact-image-localization-triangle, serving prop-functor-package clause 3. The ancestor command reports None because the parent is a seeded node with no created.item chain reaching an imported blueprint node. I retained the existing null from.node and explicit breadcrumb; no invented ancestor or unit route was installed.
+
+Mathlib searches were run with the prescribed msearch.py helper: LeanFinder with both 'bounded constructible derived category of Frobenius equivariant pro etale adic sheaves' and 'equivariant derived category of an abelian category with an automorphism'; Loogle with '"ProEtaleWeilSheaf"'; grep with 'WeilComplex|ProEtaleWeilSheaf|adicConstantSheaf'; LeanSearch with 'derived category of Frobenius equivariant sheaves'. LeanFinder's first query returned period rings and condensed modules. The second and LeanSearch returned generic DerivedCategory, HasDerivedCategory and related constructions. These generic constructions are already accounted for by the existing abstract-derived-category dependency and do not define B_W, native Weil sheaves, their constructibility predicate or the chosen compact-support functor. Loogle and grep returned no hits. All services answered; none was recorded unavailable. The inherited query records were retained, and the fresh first-phrasing result was appended. No new node requires search evidence.
+
+## Unfinished work
+
+None for this definition split. Preservation, compactification independence and any comparison between native derived Weil sheaves and other coefficient realizations are separate statements and are not asserted by the added formulas.
+
+## Not duplicates
+
+No new nodes. The definition candidates above differ in their coefficient and derived realizations and were not merged or copied.
+
+## Review by Q13
+
+I read Category.lean:130-179 for Frobenius pullback, the fixed pairs and the bounded homology predicate; :197-247 for the locally finite-type hypothesis and inherited triangulation; and :437-479 for inverse image. I read SixFunctors/ProEtale/Adic/ConstantSheaf.lean:73-95,229-232,317-330, Module.lean:50-56 and Constructible.lean:80-86,115-125,140-150. The coefficient sections in the node agree with locallyFiniteFunctions: the Q_l span is finite dimensional on a neighbourhood at every point, with continuity and precomposition restrictions. It is not local constancy and does not require one common finite extension on a non-quasi-compact object. The module-object citation really defines module objects in an arbitrary monoidal category, so it applies to sheaves of Omega-vector spaces without importing the condensed-coefficient specialization from its third clause. Constructibility agrees with the source's open-local finite stratification by immersion images, with pro-etale locally finite free restrictions. The rank may vary with the covering member and stratum, including rank zero.
+
+For the operations I read LowerStar.lean:70-87,107-156,168-179, LowerShriek.lean:81-108,116-160 and WeilSheaf/OpenImmersion.lean:45-55. The source uses IsoAlgebra.mapOfNatIso for each sheaf functor, so the added lift formula uses the inverse of the comparison when the library stores the opposite direction. In ordinary mathematical composition the required map is F_T^* G M -> G F_S^* M -> G M. Naturality ensures a commuting morphism u is sent to G(u); this only unfolds the fixed-pair definition. Source functors on complexes are mapDerivedCategory for exact pullback and extension by zero, and rightDerivedFunctor for direct image. Their composite in rightDerivedLowerShriek is first the open extension, then the proper derived direct image. I checked that the specified chosen HasCompactification.compactification is precisely the one used in the restricted WeilComplex.derivedLowerShriek; no independence or preservation claim was added. The quasi-compact and quasi-separated hypotheses are on the target W, and local finite type plus quasi-compactness is finite type by def-weil-finite-type-morphism. GeometricFrobenius.lean:445-461 confirms that F_W is id times Spec of inverse arithmetic Frobenius, rather than relative scheme Frobenius.
+
+There are no numbered proof steps for a definition, so the C1/C4 check here concerns every statement citation. I opened all seventeen dependency statements. The original eight provide local/finite type and quasi-compactness, the small pro-etale site, fixed pairs and their commuting maps, localization of complexes and homology, shifts and triangles, compactifications, separated/proper morphisms, and quasi-separatedness. The nine added definitions provide exactly the named notions listed above. In particular def-weil-proetale-inverse-image supplies the underlying site operations; I did not use its constant-ring specialization to identify B_W with a discrete constant sheaf. The B coefficient map and change of rings are written explicitly instead. def-pur-sheaf-tensor-product defines precisely that sheaf tensor/change of rings. def-sfb-right-derived-functor defines total unbounded right derivation with its K-injective convention. None is cited for constructible preservation, Frobenius comparison existence, or a derived comparison between coefficient models beyond its statement. There are no proof uses, hence no quotations missing from citations.json and no proof step longer than 2000 characters.
+
+For small cases I checked the empty scheme (the constructibility condition is vacuous), the zero sheaf (rank zero), a sheaf in one degree (the displayed bounded condition holds), and an infinite disjoint union of components (boundedness remains a single global finite set of degrees, not a different interval on each component). For the identity morphism the coefficient map is precomposition with the identity and the lift formula returns the original Frobenius structure through the unit comparisons. For an open immersion the ambient construction uses exact extension by zero termwise; for a proper compactification leg the order of the derived functors is correct. These checks do not assume non-quasi-compact targets have uniformly bounded pushforward, and the compact-support definition keeps its stated quasi-compact target condition. The definition is faithful to its live Lean source; I found no false imported statement requiring STATEMENT-DISPUTED or a source correction.
+
+I checked delivery-errors B through E: no new statement-only nodes or duplicate leaves, no missing node citations for a proof, no clause relabelled as a lemma, no cyclic proof, no extra field-coefficient identifications, and no unproved transport assertion inserted. The corrections were the missing definition links, the explicit coefficient and fixed-pair formulas, and the topological-space notation. No Lean or compiler command was used. Server review_split before writing this report returned PASS with zero new nodes; full delivery checks follow.
+
+
+## Repair of the return at 47d34cfcb02
+
+The return accepted the reader's mathematics but refused the landing because a side-DAG completion had not been promoted to the live DAG. I compared the retained returned split with the current shared item: the live item is unsplit, its original statement and eight original definition dependencies remain the seed, and its maintainer-owned fields agree with the retained copy. I rebuilt the sandbox item from that current file, reapplied only split-owned fields, and retained the prior report, citations and logged searches. The required first dry run completed successfully at ae186bff8d3; the final dry run below is rerun after this repair. Promotion and landing remain the maintainer's operations; no reviewed/completed flag was copied from the side DAG.
+
+I re-read all seventeen current dependency statements, rather than assuming that citations checked for the returned head were still valid. The eight original citations still define finite type/quasi-compactness, the actual small pro-etale site, fixed pairs and their morphisms, cohomology and derived localization, triangles, compactifications/refinements, separated/proper morphisms and quasi-separatedness. The nine added citations still define algebraic closure, Q_l, general module objects, locally closed and constructible subsets, the site inverse/direct images, sheaf tensor/change of rings, open immersions and total right derivation. None is merged away. In particular the current inverse-image statement's constant-ring clause is used only as context: the native B coefficient map remains explicitly specified in this item, and the general module-object clauses are used independently of the condensed specialization. These statements continue to support exactly the same construction, so no citation was replaced.
+
+I also re-read the current Category.lean fixed-pair and bounded homology definitions, ConstantSheaf.lean locallyFiniteFunctions and adicConstantSheaf, Module.lean AdicSheaf, Constructible.lean IsAdicLisseSheaf/IsAdicStratifiedLisseSheaf/IsAdicConstructibleSheaf, and the LowerStar/LowerShriek definitions. This found a useful precision to make in the retained wording: the finite free rank is chosen separately on each pro-etale covering member. The node now writes B_U^{oplus r_U}, with r_U allowed to depend on U, instead of leaving a single r ambiguously scoped over a stratum. This spells out the source's forall f, exists n; it does not impose a uniform rank. On an infinite disjoint union this permits unbounded component ranks, while the derived boundedness condition still uses one finite set of degrees. Empty schemes, rank-zero sheaves and identity inverse images still satisfy the definition. No new assertion of preservation, comparison, compactification independence or exactness is inserted.
+
+The remaining affine adic finiteness declaration still has a sorry, so the existing native declarations do not justify a whole-item closed attachment. For B--E, this remains a definition-only split with no new nodes and no proof steps: there is no proof relabelled as a new lemma, no unquoted proof citation, no hidden long step, and no off-unit theorem substituted for the route. citations.json remains the empty list. The retained Mathlib searches answer the unchanged whole-framework search question and were read, not fabricated or needlessly repeated.
+
+Current cited-statement SHA-256 fingerprints (UTF-8 statement text), recorded after rereading for subsequent repairs:
+
+- def-weil-finite-type-morphism: 68d44792d9f73d0d42ea289817f194b5603f3979ddcd59123948ee339fc82e0d
+- def-weil-pbc-proetale-site: 77edf275ee7a10a54d4c747b2893a5d6a3fb7485af3706bbdd15e1d3b4599b08
+- def-weil-endofunctor-fixed-pair-category: 00f1042fe7fdd828d1dade4c7265b52113f4b936562a942f64a63dc5b3fd214c
+- def-weil-abstract-derived-category: 9b8a86dbaa2660eea2db6af7f33887dd07d6908422dc7b9a7f18c311ff63f298
+- def-weil-triangulated-category: d4505788abeaf9c138590106a7fd80b4b5d94c28d696a58917a3ddaac4be6d94
+- def-weil-compactifications-refinements: 98bb4e125756c401892a2fe8cf261c39e7f8823c54df35e2c3065b527283a1b2
+- def-weil-proper-morphism: 65b7d5622eafd6afd2304a99e75fb12c17fb9870052a2e33a498a4ccae176f9f
+- def-weil-quasi-separated-morphism: 27109b312f6a9eb3c8307d12632152ddb8d3f54250adbfda1c5b82878d23b203
+- def-weil-algebraic-closure: de3c44b3bd526c8461d43b82e6bbeef6d0da6fa6e94bd74521cc990e3e38f776
+- def-weil-l-adic-numbers: 2940d8e2936f99fb180374baaea6ec9fd97bdfd32ea9899099ab5b3b09967bd0
+- sk-def-sfb-module-objects: 7e196c9a92c810a0a70a92651ba80794e5c73466db9f770000b1673725f991bb
+- def-weil-locally-closed-subset: 6657b8aa86c6ac8ddd46bce93ad39fb3546e65aea3029b1b911f21d6e9914b5c
+- def-weil-constructible-subset: 0cb7099e32b369f210327028c1e12b603b08c695a3854cb99b018baeb1f26f5d
+- def-weil-proetale-inverse-image: 8526d722e57d6a7075b796897a4404dd6210bd70dad840f6a09b1c652d69daa3
+- def-pur-sheaf-tensor-product: 244b4c988b045f98562b96ae3209738db2a0c22b162af037ecb13a98a5ace401
+- def-weil-open-immersion: a132b4b7ef6953ee988a937c5cf336781e656a77119c14b3b8541a5ca81efc49
+- def-sfb-right-derived-functor: 36c7ca86c3dc7d9e9db54aeae3a4a6e9ed88e76a87df5cb409057506442679d7

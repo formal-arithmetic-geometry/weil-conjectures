@@ -1,0 +1,235 @@
+{
+ "id": "lem-sfb-rational-positive-definite-feasibility",
+ "kind": "statement",
+ "title": "Rational strict feasibility for symmetric matrix equations",
+ "statement": "Use the rational and real fields $\\mathbf Q,\\mathbf R$ [def-weil-field]. Let $n,m\\geq0$ be integers. For $F=\\mathbf Q$ or $\\mathbf R$, let $\\operatorname{Sym}_n(F)$ be the vector space of matrices $A=(A_{ij})_{1\\leq i,j\\leq n}$ with entries in $F$ and $A_{ij}=A_{ji}$. A real symmetric matrix is called positive definite if $\\sum_{i,j}z_iA_{ij}z_j>0$ for every nonzero $z\\in\\mathbf R^n$. Let $L:\\operatorname{Sym}_n(\\mathbf Q)\\to\\mathbf Q^m$ be a $\\mathbf Q$-linear map and let $b\\in\\mathbf Q^m$. Write $L_{\\mathbf R}:\\operatorname{Sym}_n(\\mathbf R)\\to\\mathbf R^m$ for the real linear map with the same rational coefficients: use the basis matrices $E_{ii}$ and $E_{ij}+E_{ji}$ for $i<j$ on the source and the coordinate basis on the target, where $E_{ij}$ has a single entry $1$ at $(i,j)$ and all other entries zero. If there is a positive definite $G\\in\\operatorname{Sym}_n(\\mathbf R)$ such that $L_{\\mathbf R}(G)=b$, where $b$ is included coordinatewise in $\\mathbf R^m$, then there is $H\\in\\operatorname{Sym}_n(\\mathbf Q)$ with $L(H)=b$ whose entrywise image in $\\operatorname{Sym}_n(\\mathbf R)$ is positive definite. Empty matrices and empty coordinate spaces are allowed.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Agent auxiliary for the split-real sum-of-squares argument: rational strict feasibility of the Gram-matrix equations. Milne II §1, proof of Lemma 1.3, printed pp.77–78 motivates the ambient finite rational algebra only; this matrix lemma is not asserted there. Agent proof recorded in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "If $n=0$, there is just one rational or real empty matrix. The premise says $b_{\\mathbf R}=0$, hence $b=0$ coordinatewise by injectivity of $\\mathbf Q\\hookrightarrow\\mathbf R$; its rational empty matrix solves the equations and is vacuously positive definite. Assume $n>0$. Index the $d=n(n+1)/2$ upper-triangular entries by $I=\\{(a,b):1\\leq a\\leq b\\leq n\\}$. The coordinate map $c_F:\\operatorname{Sym}_n(F)\\to F^I$ and its inverse copy each off-diagonal coordinate symmetrically. They are inverse linear maps by inspection of entries, and commute with rational inclusion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Agent auxiliary to the Gram-matrix argument for lem-sfb-split-real-algebra-positive-squares. Milne II §1, Lemma 1.3, printed pp.77–78 motivates the rational algebra setting only; it does not assert this linear-algebra lemma. The agent argument is recorded in report.md."
+   }
+  },
+  {
+   "text": "Let $A$ be the $m\\times d$ rational matrix whose column at $(a,b)$ is $L(E_{aa})$ if $a=b$ and $L(E_{ab}+E_{ba})$ if $a<b$. Expanding a symmetric matrix in this basis gives $L(S)=Ac_{\\mathbf Q}(S)$ and $L_{\\mathbf R}(S)=A_{\\mathbf R}c_{\\mathbf R}(S)$. Thus $c_{\\mathbf R}(G)$ solves $A_{\\mathbf R}x=b_{\\mathbf R}$. Apply [lem-sfb-rational-linear-system-parametrization] and lift its $x_0,v_j$ to rational symmetric matrices $H_0,V_j$. We obtain $L(H_0)=b$, $L(V_j)=0$, and $G=(H_0)_{\\mathbf R}+\\sum_{j=1}^k t_j(V_j)_{\\mathbf R}$ for real parameters $t_j$.",
+   "uses": [
+    "lem-sfb-rational-linear-system-parametrization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Agent auxiliary to the Gram-matrix argument for lem-sfb-split-real-algebra-positive-squares. Milne II §1, Lemma 1.3, printed pp.77–78 motivates the rational algebra setting only; it does not assert this linear-algebra lemma. The agent argument is recorded in report.md."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-positive-definite-entrywise-neighbourhood] to the given real symmetric positive definite $G$, obtaining $\\varepsilon>0$. If $k=0$, the preceding equality already makes $H_0$ a rational positive definite solution, so return $H_0$. Otherwise put $B=1+\\sum_{j=1}^k\\sum_{a,b=1}^n |(V_j)_{ab}|$ with rational entries viewed in $\\mathbf R$, and $\\delta=\\varepsilon/B>0$.",
+   "uses": [
+    "lem-sfb-positive-definite-entrywise-neighbourhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Agent auxiliary to the Gram-matrix argument for lem-sfb-split-real-algebra-positive-squares. Milne II §1, Lemma 1.3, printed pp.77–78 motivates the rational algebra setting only; it does not assert this linear-algebra lemma. The agent argument is recorded in report.md."
+   }
+  },
+  {
+   "text": "For each of the finitely many parameters $t_j$, apply [lem-sfb-real-rational-interval-density] to $t_j-\\delta<t_j+\\delta$ and choose $q_j\\in\\mathbf Q$ in that interval. Hence $|q_j-t_j|<\\delta$. Set $H=H_0+\\sum_j q_jV_j$. It is rational and symmetric, and linearity gives the exact rational equality $L(H)=L(H_0)+\\sum_jq_jL(V_j)=b$.",
+   "uses": [
+    "lem-sfb-real-rational-interval-density"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Agent auxiliary to the Gram-matrix argument for lem-sfb-split-real-algebra-positive-squares. Milne II §1, Lemma 1.3, printed pp.77–78 motivates the rational algebra setting only; it does not assert this linear-algebra lemma. The agent argument is recorded in report.md."
+   }
+  },
+  {
+   "text": "Entrywise the parameter expression for $G$ gives $H_{\\mathbf R}-G=\\sum_j(q_j-t_j)(V_j)_{\\mathbf R}$. For every $a,b$, the triangle inequality gives $|(H_{\\mathbf R}-G)_{ab}|\\leq\\sum_j|q_j-t_j||(V_j)_{ab}|\\leq\\delta\\sum_j|(V_j)_{ab}|\\leq\\delta(B-1)<\\varepsilon$, the last inequality following from $B\\geq1$ and $\\delta B=\\varepsilon$. Since $H_{\\mathbf R}$ is symmetric, [lem-sfb-positive-definite-entrywise-neighbourhood] now makes it positive definite. Together with the exact equation above this is the required $H$.",
+   "uses": [
+    "lem-sfb-positive-definite-entrywise-neighbourhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Agent auxiliary to the Gram-matrix argument for lem-sfb-split-real-algebra-positive-squares. Milne II §1, Lemma 1.3, printed pp.77–78 motivates the rational algebra setting only; it does not assert this linear-algebra lemma. The agent argument is recorded in report.md."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-rational-linear-system-parametrization",
+  "lem-sfb-positive-definite-entrywise-neighbourhood",
+  "lem-sfb-real-rational-interval-density"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Agent auxiliary to the Gram-matrix argument for lem-sfb-split-real-algebra-positive-squares. Milne II §1, Lemma 1.3, printed pp.77–78 motivates the rational algebra setting only; it does not assert this linear-algebra lemma. The agent argument is recorded in report.md."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A rational affine subspace of symmetric matrices containing a real positive definite matrix contains a rational positive definite matrix",
+   "results": "8 hits: Matrix.PosDef.intCast, Matrix.posDef_intCast_iff, Matrix.PosDef.natCast, Matrix.PosDef.ofNat, Matrix.PosDef.of_toQuadraticForm', Matrix.PosDef.one, Matrix.posDef_natCast_iff, Matrix.PosDef.isStrictlyPositive. The hits define positivity or prove closure properties, not rational strict feasibility for a linear system.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict feasibility for rational linear matrix equations: a real positive definite symmetric solution implies a rational positive definite solution",
+   "results": "8 hits: Matrix.PosDef.isStrictlyPositive, Matrix.IsStrictlyPositive.posDef, Matrix.PosDef.intCast, Matrix.PosSemidef.intCast, Matrix.posDef_intCast_iff, Matrix.isStrictlyPositive_iff_posDef, Matrix.PosDef.natCast, Matrix.posDef_natCast_iff. The hits define positivity or prove closure properties, not rational strict feasibility for a linear system.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A rational linear system with a real positive definite symmetric matrix solution has a rational positive definite solution",
+   "results": "8 hits: Matrix.PosDef, Matrix.PosDef.posSemidef, Matrix.PosSemidef.posSemidef_sqrt, Matrix.PosDef.toQuadraticForm', Matrix.PosDef.of_toQuadraticForm', Matrix.IsUnit.posDef_star_left_conjugate_iff, Matrix.isStrictlyPositive_iff_posDef, Matrix.PosDef.isHermitian. The hits define positivity or prove closure properties, not rational strict feasibility for a linear system.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.PosDef",
+   "results": "12 hits: Matrix.PosDef, Matrix.PosDef.of_subsingleton, Matrix.PosDef.posSemidef, Matrix.PosDef.transpose, Matrix.PosDef.transpose_iff, Matrix.PosDef.mulVec_injective, Matrix.PosDef.submatrix, Matrix.PosDef.finite_setOfPred_dotProduct_mulVec_le. The hits define positivity or prove closure properties, not rational strict feasibility for a linear system.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "PosDef|posDef",
+   "results": "10 hits: Mathlib/LinearAlgebra/Matrix/ZMatrix.lean, Mathlib/LinearAlgebra/Matrix/ZMatrix.lean, Mathlib/LinearAlgebra/Matrix/ZMatrix.lean, Mathlib/LinearAlgebra/Matrix/ZMatrix.lean, Mathlib/LinearAlgebra/Matrix/ZMatrix.lean, Mathlib/LinearAlgebra/Matrix/PosDef.lean, Mathlib/LinearAlgebra/Matrix/PosDef.lean, Mathlib/LinearAlgebra/Matrix/PosDef.lean. The hits define positivity or prove closure properties, not rational strict feasibility for a linear system.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rational|Rat|dense|Dense",
+   "results": "9 hits: Mathlib/Analysis/Matrix/Order.lean, Mathlib/Analysis/Matrix/Order.lean, Mathlib/Analysis/Matrix/Order.lean, Mathlib/Analysis/Matrix/HermitianFunctionalCalculus.lean, Mathlib/Analysis/Matrix/Normed.lean, Mathlib/Analysis/Matrix/Normed.lean, Mathlib/Analysis/Matrix/Normed.lean, Mathlib/Analysis/Matrix/Normed.lean. The hits define positivity or prove closure properties, not rational strict feasibility for a linear system.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rational affine subspace containing a real positive definite matrix contains a rational positive definite matrix",
+   "results": "8 hits: Matrix.PosDef.intCast, Matrix.posDef_intCast_iff, Matrix.PosDef.natCast, Matrix.PosDef.ofNat, Matrix.PosDef.one, Matrix.posDef_natCast_iff, RootPairing.posRootForm_rootFormIn_posDef, QuadraticForm.posDef_toMatrix'. PosDef definitions, closure and quadratic-form comparisons do not state rational strict feasibility.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rational strict feasibility for linear matrix equality constraints and positive definiteness",
+   "results": "8 hits: Matrix.IsStrictlyPositive.posDef, Matrix.PosDef.isStrictlyPositive, Matrix.isStrictlyPositive_iff_posDef, Matrix.PosDef, Matrix.PosDef.intCast, Matrix.posDef_intCast_iff, Matrix.PosDef.one, Matrix.isPositive_toEuclideanLin_iff. PosDef definitions, closure and quadratic-form comparisons do not state rational strict feasibility.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.PosDef",
+   "results": "12 hits: Matrix.PosDef, Matrix.PosDef.of_subsingleton, Matrix.PosDef.posSemidef, Matrix.PosDef.transpose, Matrix.PosDef.transpose_iff, Matrix.PosDef.mulVec_injective, Matrix.PosDef.submatrix, Matrix.PosDef.finite_setOfPred_dotProduct_mulVec_le. PosDef definitions, closure and quadratic-form comparisons do not state rational strict feasibility.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isOpen.*(posDef|PosDef)|posDef.*isOpen|PosDef.*isOpen|isOpen.*isStrictlyPositive",
+   "results": "0 hits: . PosDef definitions, closure and quadratic-form comparisons do not state rational strict feasibility.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A rational linear system with a real positive definite symmetric matrix solution has a rational positive definite symmetric matrix solution",
+   "results": "8 hits: Matrix.PosDef, Matrix.IsUnit.posDef_star_left_conjugate_iff, Matrix.PosDef.of_toQuadraticForm', Matrix.PosDef.posSemidef, Matrix.PosDef.toQuadraticForm', Matrix.PosSemidef.posSemidef_sqrt, LinearMap.IsPosSemidef.isSymm, LinearMap.posSemidef_toMatrix_iff. These are positivity definitions and comparisons; none asserts rational strict feasibility.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-real-algebra-positive-squares",
+  "date": "2026-10-24",
+  "group": "Q17"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Agent auxiliary for the split-real sum-of-squares argument: rational strict feasibility of the Gram-matrix equations. Milne II §1, proof of Lemma 1.3, printed pp.77–78 motivates the ambient finite rational algebra only; this matrix lemma is not asserted there. Agent proof recorded in report.md.",
+   "via": [
+    "lem-sfb-split-real-algebra-positive-squares",
+    "lem-sfb-abelian-symmetric-ample-endomorphism-span",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-rational-positive-definite-feasibility",
+  "worker": "stage1",
+  "summary": "Preserved the full statement, including empty spaces. Parametrized the rational equations before approximation, used a uniform symmetric perturbation neighbourhood, and approximated only the free parameters using the exact Mathlib density leaf. Three new nodes: two statement-only auxiliaries and one Mathlib leaf.",
+  "blueprint": "The ancestor command returns None, consistently with the inherited null from.node and complete via chain. This realizes the rational feasibility call in step 3 of lem-sfb-split-real-algebra-positive-squares. Whole-blueprint searches for positive definite, rational affine, Gaussian, exists_rat_btwn, perturbation, rational numbers, rational density and linear system found no equivalent node. Current latest six-functor unit read for context; no unit-level route changed."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q14-f5f7ea6d0",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-f5f7ea6d0 (reviewer sub-agent of L); spot-checked: Read the item, all three new nodes, the citer (split-real-algebra-positive-squares step 3), the gram sibling node, def-weil-field, Mathlib exists_rat_btwn (Archimedean/Basic.lean:371) and Milne AV PDF pp. 82–85. The item statement is unchanged and true, and it matches the citer's use. Step 1 handles n=0 (b=0 by injectivity) and the triangular coordinates. Step 2: L(S)=A c(S) in the basis E_aa, E_ab+E_ba, with no lost factor of two, and c_R(G) is a real solution. The parametrization node gives the rational x0, v_j and the representation of every real solution. Steps 3–5: the k=0 branch is correct; for k>0, B≥1 and δ=ε/B give |H−G|_ab ≤ δ(B−1) < ε, and L(H)=b holds exactly by linearity. New nodes: the parametrization node is true (rank is invariant under Q⊂R) and was tested with d=0, m=0, A=0 and a unique solution. The neighbourhood node is true (sphere-minimum compactness, ε=c/2n²), with n=0 vacuous and H required to be symmetric. The density leaf is an accurate one-line specialization at line 371. No duplicates in the DAG: the gram node and the trf homogeneous approximation are different statements. None of the new nodes restates a clause of the item. They are same-unit, use no SGA, and are honestly marked agent-origin; Milne only motivates. No repair note applies. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.RationalPositiveDefiniteFeasibility",
+  "declaration": "Matrix.exists_rat_posDef_of_real_solution",
+  "declarations": [
+   "Matrix.rationalSymmetricRealExtension",
+   "Matrix.exists_rat_posDef_of_real_solution"
+  ],
+  "file": "lean/Sheaf/LinearAlgebra/RationalPositiveDefiniteFeasibility.lean",
+  "statement": "theorem exists_rat_posDef_of_real_solution {n m : ℕ} (L : selfAdjoint (Matrix (Fin n) (Fin n) ℚ) →ₗ[ℚ] (Fin m → ℚ)) (b : Fin m → ℚ) (h : ∃ G : selfAdjoint (Matrix (Fin n) (Fin n) ℝ), (G : Matrix (Fin n) (Fin n) ℝ).PosDef ∧ rationalSymmetricRealExtension L G = (fun k ↦ (b k : ℝ))) : ∃ H : selfAdjoint (Matrix (Fin n) (Fin n) ℚ), L H = b ∧ ((H : Matrix (Fin n) (Fin n) ℚ).map (fun q : ℚ ↦ (q : ℝ))).PosDef",
+  "branch": "newtargets-dag",
+  "by": "Q56",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5105e3ee9",
+  "group": "Q56",
+  "result": "pass",
+  "note": "Only the item's lean record and module changed; lean.statement is verbatim in the file. Clause check: ℚ/ℝ (def-weil-field→Field), {n m : ℕ} with Fin covers zero dims, Sym_n = selfAdjoint matrices (symmetric for trivial star), PosDef = Mathlib Matrix.PosDef (finite index ⇒ all nonzero z). L_R helper rationalSymmetricRealExtension is a real construction: selfAdjointPart ⅟2•(x+star x) with input 1/2 gives E_ii / E_ij+E_ji, coefficient cast(L(B_ij)_k)·G_ij for i≤j, matching the node's basis convention with no factor-2 error. Conclusion is an exact L H=b plus PosDef real image, as the node says. Edge cases n=0 (empty sum forces b=0), m=0, L=0, n=1,2 checked. No extra assumptions or universes; proof is sorry only; source/blueprint docstrings and all 5 proof steps present; no copy elsewhere in side-live; both report sections present. No fixes, no compile run."
+ }
+}

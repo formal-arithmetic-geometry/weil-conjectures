@@ -1,0 +1,226 @@
+{
+ "id": "lem-sfb-geometric-tangent-unramified",
+ "kind": "statement",
+ "title": "Unramified morphisms detected by geometric fibre tangent spaces",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes locally of finite type [def-pc-scheme, def-weil-finite-type-morphism]. Then $f$ is unramified [def-weil-unramified-morphism] if and only if the following holds: for every geometric point $\\bar s:\\operatorname{Spec}\\Omega\\to S$, with $\\Omega$ algebraically closed [def-weil-geometric-point], and every $\\Omega$-point $x$ of $X_{\\bar s}=X\\times_S\\operatorname{Spec}\\Omega$ [def-weil-geometric-fibre, def-pc-fibre-product], the tangent space $T_{X_{\\bar s}/\\Omega,x}$ [def-sc-scheme-tangent-space] is zero. Equivalently, the only morphism of $\\Omega$-schemes $\\operatorname{Spec}(\\Omega[\\epsilon]/(\\epsilon^2))\\to X_{\\bar s}$ reducing to $x$ is the constant one [def-sc-dual-numbers]. Empty fibres satisfy the condition. No flatness or Noetherian hypothesis on $S$ is required.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0B2G (lemma-injective-tangent-spaces-unramified), applied over an algebraically closed field; morphisms.tex Tags 02GF (lemma-unramified-at-point), 02G5 (lemma-unramified-omega-zero), and 02G8 (lemma-unramified-etale-fibres) give the fibrewise/global test. This is a geometric-point criterion, not merely a criterion at rational closed points on the original base."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-unramified-morphism",
+  "def-weil-geometric-point",
+  "def-weil-geometric-fibre",
+  "def-sc-scheme-tangent-space",
+  "def-sc-dual-numbers",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Fix $\\Omega,s,x$ as in the statement and write $p:X_s\\to\\operatorname{Spec}\\Omega$. By [lem-weil-pbc-lft-base-change], $p$ is locally of finite type. Apply [lem-sfb-rational-point-tangent-unramified] to its section $x$: its image is closed with residue field $\\Omega$, and $T_{X_s/\\Omega,x}=0$ if and only if $p$ is unramified at that image. Thus the tangent condition at each test point is precisely the local condition in [lem-sfb-unramified-geometric-point-test].",
+   "uses": [
+    "lem-weil-pbc-lft-base-change",
+    "lem-sfb-rational-point-tangent-unramified",
+    "lem-sfb-unramified-geometric-point-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2G (lemma-injective-tangent-spaces-unramified), applied to each geometric fibre structure morphism"
+   }
+  },
+  {
+   "text": "By [lem-sfb-unramified-geometric-point-test], the collection of local conditions in Step 1 is equivalent to $f$ being unramified. In the reverse implication that lemma tests each $z\\in X$ using an algebraic closure of $\\kappa(z)$; the resulting geometric point of $S$ is included in our quantifier even if its field is transcendental over $\\kappa(f(z))$. This gives both implications for every source point.",
+   "uses": [
+    "lem-sfb-unramified-geometric-point-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0475 (lemma-set-points-where-fibres-unramified); schemes.tex Tag 01J9 (lemma-characterize-points)"
+   }
+  },
+  {
+   "text": "At each test section the residue-field identification in [lem-sfb-rational-point-tangent-unramified] and [def-sc-scheme-tangent-space, def-sc-dual-numbers] identify tangent vectors with the relative $\\Omega$-dual-number lifts of $x$. Scalar multiplication by zero precomposes with $\\epsilon\\mapsto0$, which factors through $\\operatorname{Spec}\\Omega$ and then $x$, so the zero vector is the constant lift. A vector space is zero exactly when every vector equals its zero vector. This proves the dual-number formulation. Empty fibres have no test sections and impose no condition. For empty $X$ all conditions are vacuous, and the affine-cover formulation of [def-weil-unramified-morphism] likewise makes $f$ unramified.",
+   "uses": [
+    "lem-sfb-rational-point-tangent-unramified",
+    "def-sc-scheme-tangent-space",
+    "def-sc-dual-numbers",
+    "def-weil-unramified-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B29 (definition-dual-numbers) and Tag 0B2C (definition-tangent-space); zero scalar in the vector-space operations of Tag 0B2B"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lft-base-change",
+  "lem-sfb-rational-point-tangent-unramified",
+  "lem-sfb-unramified-geometric-point-test",
+  "def-sc-scheme-tangent-space",
+  "def-sc-dual-numbers",
+  "def-weil-unramified-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 0B2E, 0B2F, 0B2G specialized to rational points in a geometric fibre, combined with morphisms.tex Tag 0475 to test at every source point via an algebraic closure of its residue field."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite type scheme morphism is unramified if and only if the tangent spaces at every geometric fibre point vanish",
+   "results": "{\"t\": \"2026-10-22T03:45:20Z\", \"tool\": \"leanfinder\", \"query\": \"A locally finite type scheme morphism is unramified if and only if the tangent spaces at every geometric fibre point vanish\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.formallyUnramified_iff\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"Algebra.unramifiedLocus_eq_univ_iff\", \"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme\"], \"digest\": \"ccb4e1a871715574\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: FormallyUnramified and vanishing Kahler differentials are affine/general infinitesimal criteria; identifying geometric fibre tangent spaces and obtaining the global geometric-point test is additional mathematics. No scheme tangent criterion was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"tangent\"",
+   "results": "{\"t\": \"2026-10-22T03:45:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"tangent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: FormallyUnramified and vanishing Kahler differentials are affine/general infinitesimal criteria; identifying geometric fibre tangent spaces and obtaining the global geometric-point test is additional mathematics. No scheme tangent criterion was found."
+  },
+  {
+   "tool": "grep",
+   "query": "tangent.*unramified|unramified.*tangent|cotangent.*unramified",
+   "results": "{\"t\": \"2026-10-22T03:45:17Z\", \"tool\": \"grep\", \"query\": \"tangent.*unramified|unramified.*tangent|cotangent.*unramified\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: FormallyUnramified and vanishing Kahler differentials are affine/general infinitesimal criteria; identifying geometric fibre tangent spaces and obtaining the global geometric-point test is additional mathematics. No scheme tangent criterion was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric fibre tangent space zero criterion for an unramified morphism locally of finite type",
+   "results": "{\"t\": \"2026-10-22T03:45:18Z\", \"tool\": \"leansearch\", \"query\": \"Geometric fibre tangent space zero criterion for an unramified morphism locally of finite type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.FormallyUnramified\", \"instInhabitedTangentSpace\", \"Algebra.formallyUnramified_iff\", \"AlgebraicGeometry.FormallyUnramified.recOn\", \"IsUnramifiedAt.of_liesOver_of_ne_bot\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"AlgebraicGeometry.FormallyUnramified\", \"Algebra.FormallyUnramified.one_tmul_sub_tmul_one_mul_elem\"], \"digest\": \"4a9f2a12fb7a7023\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: FormallyUnramified and vanishing Kahler differentials are affine/general infinitesimal criteria; identifying geometric fibre tangent spaces and obtaining the global geometric-point test is additional mathematics. No scheme tangent criterion was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vanishing of geometric relative tangent spaces characterizes unramified scheme morphisms",
+   "results": "{\"t\": \"2026-10-22T03:45:22Z\", \"tool\": \"leanfinder\", \"query\": \"Vanishing of geometric relative tangent spaces characterizes unramified scheme morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.formallyUnramified_iff\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.IsEtale\", \"Algebra.unramifiedLocus_eq_univ_iff\", \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"Algebra.unramifiedLocus\"], \"digest\": \"4102d9d7466398f8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: FormallyUnramified and vanishing Kahler differentials are affine/general infinitesimal criteria; identifying geometric fibre tangent spaces and obtaining the global geometric-point test is additional mathematics. No scheme tangent criterion was found."
+  },
+  {
+   "tool": "grep",
+   "query": "tangent.*unramified|unramified.*tangent|cotangent.*unramified",
+   "results": "{\"t\": \"2026-10-22T04:02:31Z\", \"tool\": \"grep\", \"query\": \"tangent.*unramified|unramified.*tangent|cotangent.*unramified\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide formal unramifiedness and ring differential criteria, not the geometric fibre tangent criterion; passage through rational tangent/cotangent duality and geometric points is additional mathematics."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric fibre tangent space zero criterion for an unramified morphism locally of finite type",
+   "results": "{\"t\": \"2026-10-22T04:02:32Z\", \"tool\": \"leansearch\", \"query\": \"Geometric fibre tangent space zero criterion for an unramified morphism locally of finite type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.FormallyUnramified\", \"instInhabitedTangentSpace\", \"Algebra.formallyUnramified_iff\", \"AlgebraicGeometry.FormallyUnramified.recOn\", \"IsUnramifiedAt.of_liesOver_of_ne_bot\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"AlgebraicGeometry.FormallyUnramified\", \"Algebra.FormallyUnramified.one_tmul_sub_tmul_one_mul_elem\"], \"digest\": \"4a9f2a12fb7a7023\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide formal unramifiedness and ring differential criteria, not the geometric fibre tangent criterion; passage through rational tangent/cotangent duality and geometric points is additional mathematics."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"tangent\"",
+   "results": "{\"t\": \"2026-10-22T04:02:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"tangent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide formal unramifiedness and ring differential criteria, not the geometric fibre tangent criterion; passage through rational tangent/cotangent duality and geometric points is additional mathematics."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite type scheme morphism is unramified if and only if the tangent spaces at every geometric fibre point vanish",
+   "results": "{\"t\": \"2026-10-22T04:02:36Z\", \"tool\": \"leanfinder\", \"query\": \"A locally finite type scheme morphism is unramified if and only if the tangent spaces at every geometric fibre point vanish\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.formallyUnramified_iff\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"Algebra.unramifiedLocus_eq_univ_iff\", \"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme\"], \"digest\": \"ccb4e1a871715574\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide formal unramifiedness and ring differential criteria, not the geometric fibre tangent criterion; passage through rational tangent/cotangent duality and geometric points is additional mathematics."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vanishing of geometric relative tangent spaces characterizes unramified scheme morphisms",
+   "results": "{\"t\": \"2026-10-22T04:02:47Z\", \"tool\": \"leanfinder\", \"query\": \"Vanishing of geometric relative tangent spaces characterizes unramified scheme morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.formallyUnramified_iff\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.IsEtale\", \"Algebra.unramifiedLocus_eq_univ_iff\", \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"Algebra.unramifiedLocus\"], \"digest\": \"4102d9d7466398f8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide formal unramifiedness and ring differential criteria, not the geometric fibre tangent criterion; passage through rational tangent/cotangent duality and geometric points is additional mathematics."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stable-pointed-isom-finite",
+  "date": "2026-10-22",
+  "group": "NP"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Unramified morphisms detected by geometric fibre tangent spaces",
+   "via": [
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-geometric-tangent-unramified",
+  "worker": "stage1",
+  "summary": "Q51 repair of batch5 re-split: preserve the statement exactly and distribute old Steps 1--2 to the rational-point tangent criterion, old Steps 3--5 to the geometric-point unramifiedness test, both new statement-only unsplit nodes. Keep the full dual-number and empty-fibre argument in the parent. report.md preserves every old paragraph verbatim as the two proof handoffs. Parent assembly is below 3000 characters; searches were actually run and the rate-limited LeanSearch is recorded unavailable.",
+  "blueprint": "Realizes the rigidity input to lem-sfb-stable-pointed-isom-finite (geometric tangent vanishing implies unramified Isom), on the inherited direct-image alteration/plurinodal route rooted at det-thm-sf-ctf-stability-direct-images, proof (3). The existing ancestor command returns None; its inherited from.node and full via chain are retained. Searches of all imported blueprint nodes for unramified, tangent and cotangent found no equivalent blueprint node. The same rigidity input is now assembled from two independent smaller tasks, with inherited null ancestor retained exactly as blueprint_refs.py ancestor reports.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-sc-rational-tangent-cotangent-duality",
+  "lem-sc-rational-unramified-cotangent-criterion",
+  "lem-trf-unramified-locus-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q51-274dba08e",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-274dba08e (reviewer sub-agent of L); spot-checked: Re-split meets the released human note of 2026-10-22 (4204 chars, 6 steps). Old Steps 1-2 (a k-point is closed with residue field k; T=0 iff unramified via lem-sc-rational-tangent-cotangent-duality, lem-sc-dual-map-injective-iff-surjective and lem-sc-rational-unramified-cotangent-criterion) became the statement of the new node lem-sfb-rational-point-tangent-unramified, about 1.4k old characters. Old Steps 3-5 (base change of the unramified locus via lem-trf-unramified-locus-base-change, which is Stacks 0475 morphisms.tex l.7938; lifting z through an algebraic closure of kappa(z); reflection of the locus plus the open cover) became the statement of lem-sfb-unramified-geometric-point-test, about 2.1k old characters, with the lifting clause stated explicitly. Old Step 6 (zero vector = constant dual-number lift; empty cases) survives almost verbatim as parent Step 3. The parent proof is a 3-step assembly of about 1.6k characters, and its statement, stmt_deps and lean record are unchanged. Both new statements are true and self-contained. Edge cases checked: Spec k; A^1 at 0; Spec k[eps]; non-closed k; empty X; the inseparable extension F_p(t^{1/p})/F_p(t) through its geometric fibre Spec Omega[v]/v^p; Omega transcendental over kappa(f(z)). Stacks 0B2G (varieties l.3149) needs only local finite type and equal residue fields. Neither node restates the parent or cites it, so there is no cycle. No duplicate found: the sc criteria concern maps at rational points, the finite-flat criterion needs flatness, the group-scheme identity node is narrower, and the trf locus node is an input. Each new node has grep, leanfinder and loogle searches plus a rate-limited leansearch recorded as not ok, the inherited blueprint chain, and created.item set to this item. The item is not superseded in live or side-live, not dropped, and no SGA is cited. Inherited tool_uses (sc duality, sc cotangent criterion, trf 0475 locus) are generic and accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricTangentUnramified",
+  "declaration": "AlgebraicGeometry.unramified_iff_geometricFiber_tangentSpace_zero",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricTangentUnramified.lean",
+  "statement": "theorem unramified_iff_geometricFiber_tangentSpace_zero {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] : (IsUnramified f ↔ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (x : Spec (.of Ω) ⟶ pullback f s), x ≫ pullback.snd f s = 𝟙 (Spec (.of Ω)) → Subsingleton (schemeTangentSpace Ω (pullback f s) (pullback.snd f s) (x (IsLocalRing.closedPoint Ω)))) ∧ (IsUnramified f ↔ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (x : Spec (.of Ω) ⟶ pullback f s), x ≫ pullback.snd f s = 𝟙 (Spec (.of Ω)) → ∀ θ : Spec (.of (DualNumber Ω)) ⟶ pullback f s, θ ≫ pullback.snd f s = Spec.map (CommRingCat.ofHom (TrivSqZeroExt.inlHom Ω Ω)) → Spec.map (CommRingCat.ofHom (TrivSqZeroExt.fstHom Ω Ω Ω).toRingHom) ≫ θ = x → θ = Spec.map (CommRingCat.ofHom (TrivSqZeroExt.inlHom Ω Ω)) ≫ x)",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-764e464df",
+  "group": "NW",
+  "result": "pass",
+  "note": "Node unchanged except the lean record (same statement, stmt_deps and proof as side-live); one new module with one sorry theorem. Clause by clause: [LocallyOfFiniteType f], recorded IsUnramified (lft ∧ open-immersion diagonal), geometric point inline (Ω : Type u, IsAlgClosed, arbitrary s), fibre pullback f s via pullback.snd, Ω-points as sections x ≫ snd = 𝟙, T=0 as Subsingleton of the recorded schemeTangentSpace Ω (relative to Spec Ω, 0B2C), dual-number conjunct relative over Ω (inl), reducing to x (fst), conclusion θ = inl ≫ x (constant). No extra hypotheses. Universe u forced by Scheme.{u}; the converse needs only the algebraic closure of κ(z), which is in Type u. Edge cases: empty fibres and empty X vacuous or unramified, A^1 fails both conjuncts, any characteristic. lean.statement verbatim in the file; docstrings carry source tags, blueprint id and all 6 proof steps; public statement imports, plain proof-dep imports that exist in side-live; lines ≤100; no duplicate found; not dropped, not superseded. No recompile, per the 2026-10-21 rule (worker compiled cleanly). No findings."
+ }
+}

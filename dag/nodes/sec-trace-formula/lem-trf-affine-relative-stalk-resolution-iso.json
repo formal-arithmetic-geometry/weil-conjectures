@@ -1,0 +1,385 @@
+{
+ "id": "lem-trf-affine-relative-stalk-resolution-iso",
+ "kind": "statement",
+ "title": "Derived affine stalk and inverse-image base-skyscraper tensor comparisons",
+ "statement": "Let $R\\to A$ be any homomorphism of commutative rings, $f:U=\\operatorname{Spec}A\\to V=\\operatorname{Spec}R$ its scheme morphism [def-pc-scheme], and $M^\\bullet$ an arbitrary complex of $A$-modules. Let $\\widetilde{M^\\bullet}$ be its termwise associated-sheaf complex [lem-pc-affine-qcoh-derived-equivalence]. Put $\\mathcal B=f^{-1}\\mathcal O_V$ and $C^\\bullet=\\operatorname{Res}_{\\alpha}\\widetilde{M^\\bullet}$, where $\\alpha:\\mathcal B\\to\\mathcal O_U$ is the canonical structure map [def-pc-module-pullback]. For $x=\\mathfrak q\\in U$, put $\\mathfrak p=\\mathfrak q\\cap R$. Let $e_x:R_{\\mathfrak p}\\cong\\mathcal B_x$ be the composite of the affine germ isomorphism $R_{\\mathfrak p}\\cong\\mathcal O_{V,f(x)}$ [lem-weil-pbc-spec-tilde-stalk-localization] and the inverse-image structure stalk isomorphism $\\mathcal O_{V,f(x)}\\cong\\mathcal B_x$ [lem-pc-inverse-image-structure-stalk-iso], and let $S_x$ be the module stalk functor at $x$ [def-pc-module-stalk-functor] followed by restriction of scalars along $e_x$, applied termwise to complexes. In the unbounded derived category $D(R_{\\mathfrak p})$ [def-weil-abstract-derived-category], there is an isomorphism $\\theta_x:Q(S_x C^\\bullet)\\xrightarrow{\\sim}Q(M^\\bullet_{\\mathfrak q})$, where localization is termwise [def-weil-pbc-module-localization] and the right side has scalars restricted along the induced map $R_{\\mathfrak p}\\to A_{\\mathfrak q}$. For every K-flat resolution $u:P^\\bullet\\to C^\\bullet$ [def-pc-kflat-complex], $\\theta_x\\circ Q(S_x u):Q(S_x P^\\bullet)\\xrightarrow{\\sim}Q(M^\\bullet_{\\mathfrak q})$ is an isomorphism in $D(R_{\\mathfrak p})$. No flatness, finiteness, boundedness or Noetherian assumption is imposed. Write $S_x$ also for the functor on derived categories induced by the exact stalk and scalar transport. For every $\\mathcal O_V$-module sheaf $\\mathcal G$, there is an isomorphism in $D(R_{\\mathfrak p})$,\n$$S_x(QC^\\bullet\\otimes^{\\mathbf L}_{\\mathcal B}f^{-1}\\mathcal G)\\cong Q(M^\\bullet_{\\mathfrak q})\\otimes^{\\mathbf L}_{R_{\\mathfrak p}}\\mathcal G_{f(x)}.$$\nThe inverse-image module structure is the canonical one obtained by multiplying local representatives before sheafification [def-pc-topological-inverse-image-module]; the stalk $\\mathcal G_{f(x)}$ is viewed over $R_{\\mathfrak p}\\cong\\mathcal O_{V,f(x)}$. For every $R_{\\mathfrak p}$-module $L$, let $\\mathcal G=i_{f(x),*}L$ be the ringed-module skyscraper on $V$ [def-pc-ringed-module-skyscraper]. Then $\\mathcal G_{f(x)}\\cong L$ and $(f^{-1}\\mathcal G)_x\\cong L$, linearly under $e_x$, and the displayed comparison specializes to an isomorphism with right side $Q(M^\\bullet_{\\mathfrak q})\\otimes^{\\mathbf L}_{R_{\\mathfrak p}}L$. Sheaf derived tensors are defined by K-flat resolutions [def-trf-ringed-complex-derived-tensor-vanishing], and module derived tensors likewise use K-flat resolutions [def-pc-module-kflat-complex].",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DHY, lemma-tor-dimension-rel-affine, opening affine stalk identifications; derived stalk tensor comparison and inverse-image base-skyscraper realization expanding the cited stalk argument."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "def-pc-module-pullback",
+  "def-pc-module-stalk-functor",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-module-localization",
+  "def-pc-kflat-complex",
+  "def-pc-topological-inverse-image-module",
+  "def-pc-ringed-module-skyscraper",
+  "def-trf-ringed-complex-derived-tensor-vanishing",
+  "def-pc-module-kflat-complex",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "lem-pc-inverse-image-structure-stalk-iso",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof": [
+  {
+   "text": "Write $y=f(x)$, $T=R_{\\mathfrak p}$ and $B=\\mathcal B_x$. Let $k:\\mathcal O_{V,y}\\to B$ be the canonical inverse-image ring stalk comparison: the presheaf inverse-image stalk map, sending $s_y$ to the germ of the coprojection of $s$, followed by the stalk of the sheafification map. The first map is a ring isomorphism by the presheaf inverse-image stalk theorem for commutative rings, and the second is a bijective ring homomorphism by the sheafification stalk theorem; so $k$ is a ring isomorphism. On germs $\\alpha_x(k(s_y))=(f^\\sharp s)_x$, so $\\alpha_x k=f^\\sharp_x$: $k$ is the inverse-image structure stalk isomorphism of the statement, and it is the same $k$ as in the relative stalk restriction lemma and in the semilinear inverse-image comparison of Step 4. Let $j:T\\cong\\mathcal O_{V,y}$ be the affine germ isomorphism, so $e_x=kj$. The relative inverse-image stalk restriction lemma, applied to $K=\\widetilde{M^\\bullet}$, gives an isomorphism of complexes of $\\mathcal O_{V,y}$-modules between the restriction along $k$ of the stalk complex at $x$ of $C^\\bullet=\\operatorname{Res}_\\alpha\\widetilde{M^\\bullet}$ and the restriction along $f^\\sharp_x$ of the stalk complex $\\widetilde{M^\\bullet}_x$; restricting further along $j$ gives $S_xC^\\bullet\\cong\\operatorname{Res}_{f^\\sharp_x j}\\widetilde{M^\\bullet}_x$ over $T$. The affine scheme stalk-map formula identifies $f^\\sharp_x j$ with $r/s\\mapsto f(r)/f(s)$ into $A_{\\mathfrak q}\\cong\\mathcal O_{U,x}$, the scalar action on $M^\\bullet_{\\mathfrak q}$ in the statement. In each degree the tilde-stalk localization theorem gives an $\\mathcal O_{U,x}$-linear, hence $T$-linear, isomorphism $\\widetilde{M^n}_x\\cong M^n_{\\mathfrak q}$ sending the germ of $\\tau(m)$ to $m/1$, and so the germ of $a^{-1}\\tau(m)$ to $m/a$ for $a\\notin\\mathfrak q$. It commutes with differentials: the differential of the termwise associated-sheaf complex is $\\widetilde{d_M}$, with $\\widetilde{d_M}\\tau=\\tau d_M$, so both composites send the germ of $a^{-1}\\tau(m)$ to $d(m)/a$, and every stalk element is such a fraction. Composing gives an actual isomorphism of complexes $t:S_xC^\\bullet\\cong M^\\bullet_{\\mathfrak q}$ with the prescribed base-local-ring action.",
+   "uses": [
+    "lem-weil-pbc-presheaf-inverse-image-stalk",
+    "lem-weil-pbc-stalk-sheafification-space",
+    "lem-pc-inverse-image-structure-stalk-iso",
+    "lem-pc-relative-inverse-image-stalk-restriction",
+    "lem-weil-pbc-spec-map-stalk-localization",
+    "lem-weil-pbc-spec-tilde-stalk-localization",
+    "def-pc-module-stalk-functor",
+    "lem-pc-affine-qcoh-derived-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0DHY, lemma-tor-dimension-rel-affine, opening stalk calculation; schemes.tex Tags 01HV (lemma-spec-sheaves (6),(7)) and 01HY (lemma-morphism-into-affine-where-point-goes). sheaves.tex Tags 008H (lemma-stalk-pullback) and 007Z (sheafification stalks)."
+   }
+  },
+  {
+   "text": "The module-stalk exactness theorem applies to the ringed space $(U,\\mathcal B)$, irrespective of its relation to $\\mathcal O_U$. Restriction of scalars along $e_x$ is exact because kernels and cokernels have the same underlying additive groups and maps. Hence $S_x$ is exact. The exact-functor derived-factorization theorem therefore gives its functor on unbounded derived categories and the comparison $S_x(QK)\\cong Q(S_xK)$. Put $\\theta_x=Q(t)$. A K-flat resolution $u:P^\\bullet\\to C^\\bullet$ is a quasi-isomorphism by definition; exactness implies $S_xu$ is a quasi-isomorphism. The localization defining the derived category inverts it, so both $\\theta_x$ and $\\theta_x\\circ Q(S_xu)$ are isomorphisms. K-flatness is not needed for this last assertion beyond the resolution hypothesis.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-pc-kflat-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; modules.tex Tag 01AG, lemma-abelian; perfect.tex Tag 0DHY, opening stalk identification."
+   }
+  },
+  {
+   "text": "Choose a K-flat resolution $u:P^\\bullet\\to C^\\bullet$ on the ringed site $(U,\\mathcal B)$ using the ringed-site resolution theorem. The ringed-space K-flat stalk criterion implies that $P_x^\\bullet$ is K-flat over $B$. Transport along the ring isomorphism $e_x:T\\cong B$ makes $S_xP^\\bullet$ K-flat over $T$: for any acyclic $T$-complex $N$, give its same groups the $B$-action through $e_x^{-1}$; it remains acyclic, and the balanced tensors $S_xP\\otimes_T N$ and $P_x\\otimes_B N$ are identified by $p\\otimes n\\mapsto p\\otimes n$, with the same total differential. The latter is acyclic by K-flatness. This uses only a ring isomorphism, and does not assert that restriction along the possibly nonflat map $T\\to A_{\\mathfrak q}$ preserves K-flatness.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pc-kflat-stalk-criterion",
+    "def-pc-module-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 06YB, lemma-check-K-flat-stalks; sites-cohomology.tex Tag 06YS, lemma-K-flat-resolution."
+   }
+  },
+  {
+   "text": "For an arbitrary $\\mathcal O_V$-module $\\mathcal G$, put $H=f^{-1}\\mathcal G$, with the module structure obtained by multiplying representatives before sheafification. The semilinear inverse-image stalk comparison, whose ring map is the same canonical $k$ as in Step 1, gives $c_{\\mathcal G}:\\mathcal G_y\\cong H_x$ with $c_{\\mathcal G}(r m)=k(r)c_{\\mathcal G}(m)$. Let $j:T\\cong\\mathcal O_{V,y}$ be the affine germ isomorphism, so $e_x=kj$. Thus $\\gamma_{\\mathcal G}=c_{\\mathcal G}^{-1}:S_xH\\cong\\mathcal G_y$ is $T$-linear: $c_{\\mathcal G}(j(a)m)=e_x(a)c_{\\mathcal G}(m)$. This verifies the actual inverse-image scalar action rather than replacing it with extension of scalars to $\\mathcal O_{U,x}$.",
+   "uses": [
+    "lem-pc-ringed-inverse-image-stalk-scalar-transport-naturality",
+    "def-pc-topological-inverse-image-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 008H, lemma-stalk-pullback; Tags 008X/008Y, inverse-image module action; Tag 0098, lemma-stalk-pullback-modules, proof."
+   }
+  },
+  {
+   "text": "The ringed-site K-flat tensor comparison, applied to $P$ and $H$, and $Q(u):QP\\cong QC$, represents $QC\\otimes^{\\mathbf L}_{\\mathcal B}H$ by $Q\\operatorname{Tot}(P\\otimes_{\\mathcal B}H[0])$. Apply the exact derived functor $S_x$ from Step 2. The complex-level stalk tensor isomorphism identifies its representative with $Q\\operatorname{Tot}(S_xP\\otimes_T S_xH[0])$. Here scalar transport across $e_x$ commutes with tensor: the map on pure tensors is $p\\otimes h\\mapsto p\\otimes h$; the balancing relation by $a\\in T$ is the relation by $e_x(a)\\in B$, and bijectivity of $e_x$ gives the inverse. The differential is $d_P\\otimes1$ because $H$ is in degree zero. By Step 3 and the module K-flat tensor-model theorem, this object is isomorphic to $Q(S_xP)\\otimes_T^{\\mathbf L}S_xH$. Finally apply the derived tensor bifunctor to the isomorphisms $\\theta_x Q(S_xu):Q(S_xP)\\cong Q(M_{\\mathfrak q})$ and $\\gamma_{\\mathcal G}:S_xH\\cong\\mathcal G_y$ from Steps 2 and 4. This gives exactly the displayed derived-category comparison. All objects and maps here are in $D(T)$, before applying any cohomology functor.",
+   "uses": [
+    "lem-sf-ringed-kflat-single-tensor-comparison",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-pc-stalk-tensor-complex",
+    "lem-pc-source-kflat-module-tensor-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU, definition-derived-tor and preceding construction; cohomology.tex Tag 06YB, tensor-stalk identification; derived.tex Tag 015F."
+   }
+  },
+  {
+   "text": "Given any $T$-module $L$, regard it as an $\\mathcal O_{V,y}$-module via $j^{-1}$ and set $\\mathcal G=i_{y,*}L$. In the ringed-module skyscraper definition every neighborhood of $y$ has sections $L$, with identity restrictions between such neighborhoods. The map $\\mathcal G_y\\to L$ sending a germ represented by $l$ to $l$ is consequently a bijection, with inverse sending $l$ to its germ on $V$. It is linear because a section of $\\mathcal O_V$ acts by its germ at $y$. Combining it with the $T$-linear inverse-image comparison of Step 4 yields $(f^{-1}\\mathcal G)_x\\cong L$ under $e_x$. Substitution into Step 5 gives the required tensor with $L$. The point $y$ need not be closed: only neighborhoods containing that same point enter this stalk calculation.",
+   "uses": [
+    "def-pc-ringed-module-skyscraper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 009A, definition-skyscraper-sheaf (4); stalk at the defining point in Tag 009B, lemma-skyscraper-stalks."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-presheaf-inverse-image-stalk",
+  "lem-weil-pbc-stalk-sheafification-space",
+  "lem-pc-inverse-image-structure-stalk-iso",
+  "lem-pc-relative-inverse-image-stalk-restriction",
+  "lem-weil-pbc-spec-map-stalk-localization",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "def-pc-module-stalk-functor",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-pc-kflat-complex",
+  "def-weil-abstract-derived-category",
+  "lem-pc-kflat-resolution",
+  "lem-pc-kflat-stalk-criterion",
+  "def-pc-module-kflat-complex",
+  "lem-pc-ringed-inverse-image-stalk-scalar-transport-naturality",
+  "def-pc-topological-inverse-image-module",
+  "lem-sf-ringed-kflat-single-tensor-comparison",
+  "lem-pc-stalk-tensor-complex",
+  "lem-pc-source-kflat-module-tensor-model",
+  "def-pc-ringed-module-skyscraper"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DHY, lemma-tor-dimension-rel-affine, opening stalk identifications; expanded using sheaves.tex Tags 008H/0098, cohomology.tex Tag 06YB, sites-cohomology.tex Tags 06YS/06YU, and derived.tex Tag 015F."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "stalkIso|restrictScalars.*stalk|stalk.*restrictScalars",
+   "results": "{\"t\": \"2026-10-22T06:43:34Z\", \"tool\": \"grep\", \"query\": \"stalkIso|restrictScalars.*stalk|stalk.*restrictScalars\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\"], \"digest\": \"5dcd9251c06ffcc3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: tilde stalkIso and structure-sheaf stalk isomorphisms concern single modules or rings; none identifies the scalar-restricted resolved complex in D(R_p) with M_q along the actual scheme stalk map. A complex-level scalar comparison and passage through the stalk of a quasi-isomorphism remain."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Stalk of a scalar restricted associated sheaf complex on an affine scheme is the localized module complex over the base local ring",
+   "results": "{\"t\": \"2026-10-22T06:43:35Z\", \"tool\": \"leansearch\", \"query\": \"Stalk of a scalar restricted associated sheaf complex on an affine scheme is the localized module complex over the base local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.Tilde.instIsLocalizedModuleCarrierOfStalkTildeInModuleCatPrimeComplAsIdealHomToStalk\", \"ModuleCat.Tilde.stalkIso\", \"ModuleCat.Tilde.toStalk\", \"ModuleCat.Tilde.stalkToFiberLinearMap_toStalk\", \"AlgebraicGeometry.IsAffineOpen.isLocalization_stalk\", \"AlgebraicGeometry.StructureSheaf.IsLocalization.to_stalk\", \"ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap\", \"ModuleCat.Tilde.toOpen\"], \"digest\": \"8697ea6827673544\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: tilde stalkIso and structure-sheaf stalk isomorphisms concern single modules or rings; none identifies the scalar-restricted resolved complex in D(R_p) with M_q along the actual scheme stalk map. A complex-level scalar comparison and passage through the stalk of a quasi-isomorphism remain."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.Tilde.stalkIso",
+   "results": "{\"t\": \"2026-10-22T06:43:35Z\", \"tool\": \"loogle\", \"query\": \"ModuleCat.Tilde.stalkIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'ModuleCat.Tilde.stalkIso'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: tilde stalkIso and structure-sheaf stalk isomorphisms concern single modules or rings; none identifies the scalar-restricted resolved complex in D(R_p) with M_q along the actual scheme stalk map. A complex-level scalar comparison and passage through the stalk of a quasi-isomorphism remain."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a ring map R to A the stalk at a prime q of a K flat resolution of the scalar restricted associated sheaf complex M is isomorphic in the derived category of R_p modules to the localization M_q",
+   "results": "{\"t\": \"2026-10-22T06:43:45Z\", \"tool\": \"leanfinder\", \"query\": \"For a ring map R to A the stalk at a prime q of a K flat resolution of the scalar restricted associated sheaf complex M is isomorphic in the derived category of R_p modules to the localization M_q\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.Tilde.stalkIso\", \"ModuleCat.Tilde.stalkIso_inv\", \"ModuleCat.Tilde.stalkIso_hom\", \"ModuleCat.Tilde.stalkToFiberLinearMap_toStalk\", \"ModuleCat.Tilde.stalkToFiberLinearMap\", \"ModuleCat.Tilde.localizationToStalk\", \"RingHom.Flat.ofLocalizationPrime\", \"ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap\"], \"digest\": \"498d21cc808d5d24\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: tilde stalkIso and structure-sheaf stalk isomorphisms concern single modules or rings; none identifies the scalar-restricted resolved complex in D(R_p) with M_q along the actual scheme stalk map. A complex-level scalar comparison and passage through the stalk of a quasi-isomorphism remain."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived category isomorphism between stalk of inverse image structure sheaf scalar restriction of tilde complex and prime localization of a module complex",
+   "results": "{\"t\": \"2026-10-22T06:43:45Z\", \"tool\": \"leanfinder\", \"query\": \"Derived category isomorphism between stalk of inverse image structure sheaf scalar restriction of tilde complex and prime localization of a module complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.Tilde.stalkIso\", \"ModuleCat.Tilde.stalkIso_inv\", \"ModuleCat.Tilde.stalkIso_hom\", \"ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap\", \"ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap_assoc\", \"ModuleCat.Tilde.stalkToFiberLinearMap_toStalk\", \"ModuleCat.Tilde.stalkToFiberLinearMap\", \"ModuleCat.Tilde.localizationToStalk\"], \"digest\": \"879d461305d169d0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: tilde stalkIso and structure-sheaf stalk isomorphisms concern single modules or rings; none identifies the scalar-restricted resolved complex in D(R_p) with M_q along the actual scheme stalk map. A complex-level scalar comparison and passage through the stalk of a quasi-isomorphism remain."
+  },
+  {
+   "tool": "grep",
+   "query": "def stalkIso|theorem stalkIso|stalkIso_hom|stalkIso_inv|toStalk_comp_stalkToFiberLinearMap",
+   "results": "{\"t\": \"2026-10-22T06:43:56Z\", \"tool\": \"grep\", \"query\": \"def stalkIso|theorem stalkIso|stalkIso_hom|stalkIso_inv|toStalk_comp_stalkToFiberLinearMap\", \"sub\": \"AlgebraicGeometry/Modules/Tilde.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: tilde stalkIso and structure-sheaf stalk isomorphisms concern single modules or rings; none identifies the scalar-restricted resolved complex in D(R_p) with M_q along the actual scheme stalk map. A complex-level scalar comparison and passage through the stalk of a quasi-isomorphism remain."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"iso\"",
+   "results": "{\"t\": \"2026-10-22T06:43:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"stalk\\\", \\\"iso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"TopCat.Presheaf.stalkPullbackIso\", \"TopCat.Presheaf.stalkPushforward.stalkPushforward_iso_of_isInducing\", \"TopCat.Presheaf.isIso_of_stalkFunctor_map_iso\", \"TopCat.Presheaf.isIso_iff_stalkFunctor_map_iso\", \"TopCat.Presheaf.app_isIso_of_stalkFunctor_map_iso\", \"AlgebraicGeometry.StructureSheaf.stalkIso\", \"AlgebraicGeometry.PresheafedSpace.stalkMap.stalkIso\", \"AlgebraicGeometry.PresheafedSpace.stalkMap.isIso\"], \"digest\": \"6c533d679926a136\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: tilde stalkIso and structure-sheaf stalk isomorphisms concern single modules or rings; none identifies the scalar-restricted resolved complex in D(R_p) with M_q along the actual scheme stalk map. A complex-level scalar comparison and passage through the stalk of a quasi-isomorphism remain."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived stalk of scalar restricted tilde complex tensor inverse image base sheaf on Spec A equals localized complex tensor the base sheaf stalk over R_p and all coefficient modules are realized by skyscrapers",
+   "results": "{\"t\": \"2026-10-22T06:47:38Z\", \"tool\": \"leanfinder\", \"query\": \"Derived stalk of scalar restricted tilde complex tensor inverse image base sheaf on Spec A equals localized complex tensor the base sheaf stalk over R_p and all coefficient modules are realized by skyscrapers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap\", \"ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap_assoc\", \"ModuleCat.Tilde.stalkIso\", \"ModuleCat.Tilde.stalkToFiberLinearMap\", \"ModuleCat.Tilde.stalkToFiberLinearMap_toStalk\", \"AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom\", \"AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom_aux\", \"ModuleCat.Tilde.localizationToStalk\"], \"digest\": \"e3dedcbf3b906f22\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned ordinary tilde/localization formulas do not compare derived relative tensor stalks with arbitrary inverse-image base coefficients or supply the scalar-linear skyscraper specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "stalkIso|stalk.*[Kk]Flat|[Kk]Flat.*stalk",
+   "results": "{\"t\": \"2026-10-23T14:14:26Z\", \"tool\": \"grep\", \"query\": \"stalkIso|stalk.*[Kk]Flat|[Kk]Flat.*stalk\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/StructureSheaf.lean\"], \"digest\": \"37d212720910691a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary stalk/localization or flatness/tensor statements only; none proves the full scalar-restricted unbounded derived comparison and inverse-image skyscraper specialization. Semantic Tilde.stalkIso hits were checked against the pinned source, where that name is absent."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-23T14:14:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"stalk\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"RingHom.SurjectiveOnStalks.tensorProductMap\", \"PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks\", \"PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks_aux\", \"Module.rankAtStalk_tensorProduct\", \"Module.rankAtStalk_tensorProduct_of_isScalarTower\", \"Module.rankAtStalk_eq_finrank_tensorProduct\"], \"digest\": \"43b39f1ebb9173cf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary stalk/localization or flatness/tensor statements only; none proves the full scalar-restricted unbounded derived comparison and inverse-image skyscraper specialization. Semantic Tilde.stalkIso hits were checked against the pinned source, where that name is absent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor product of the stalk of an affine sheaf complex with the stalk of an inverse image module",
+   "results": "{\"t\": \"2026-10-23T14:14:26Z\", \"tool\": \"leansearch\", \"query\": \"Derived tensor product of the stalk of an affine sheaf complex with the stalk of an inverse image module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.Monoidal.tensorObjMap\", \"AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso\", \"RingHom.SurjectiveOnStalks.tensorProductMap\", \"CategoryTheory.Sheaf.tensorProd_isSheaf\", \"PresheafOfModules.Monoidal.tensorObj\", \"Derivation.tensorProductTo_tmul\", \"ModuleCat.Tilde.stalkIso\", \"PresheafOfModules.Monoidal.tensorObj_map_tmul\"], \"digest\": \"3ce9e8768755fc83\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary stalk/localization or flatness/tensor statements only; none proves the full scalar-restricted unbounded derived comparison and inverse-image skyscraper specialization. Semantic Tilde.stalkIso hits were checked against the pinned source, where that name is absent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stalk of a scalar restricted affine associated sheaf complex in the unbounded derived category equals localization and commutes with derived tensor against an inverse image module",
+   "results": "{\"t\": \"2026-10-23T14:14:27Z\", \"tool\": \"leanfinder\", \"query\": \"Stalk of a scalar restricted affine associated sheaf complex in the unbounded derived category equals localization and commutes with derived tensor against an inverse image module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.Tilde.stalkIso\", \"ModuleCat.Tilde.localizationToStalk\", \"ModuleCat.Tilde.stalkIso_inv\", \"ModuleCat.Tilde.localizationToStalk_mk\", \"ModuleCat.Tilde.stalkToFiberLinearMap\", \"ModuleCat.Tilde.stalkToFiberLinearMap_toStalk\", \"ModuleCat.Tilde.toStalk\", \"ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap\"], \"digest\": \"42e4f2e840bec935\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary stalk/localization or flatness/tensor statements only; none proves the full scalar-restricted unbounded derived comparison and inverse-image skyscraper specialization. Semantic Tilde.stalkIso hits were checked against the pinned source, where that name is absent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact stalk functor sends K flat resolutions to K flat resolutions and yields a derived tensor comparison over a base local ring",
+   "results": "{\"t\": \"2026-10-23T14:14:28Z\", \"tool\": \"leanfinder\", \"query\": \"An exact stalk functor sends K flat resolutions to K flat resolutions and yields a derived tensor comparison over a base local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.stalkMap\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_exact'\", \"Module.Flat.iff_lTensor_exact'\", \"Module.Flat.iff_rTensor_exact\"], \"digest\": \"f4895a49bd9e7ee5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary stalk/localization or flatness/tensor statements only; none proves the full scalar-restricted unbounded derived comparison and inverse-image skyscraper specialization. Semantic Tilde.stalkIso hits were checked against the pinned source, where that name is absent."
+  },
+  {
+   "tool": "grep",
+   "query": "def stalkIso|stalkIso_hom|stalkIso_inv|def localizationToStalk",
+   "results": "{\"t\": \"2026-10-23T14:16:16Z\", \"tool\": \"grep\", \"query\": \"def stalkIso|stalkIso_hom|stalkIso_inv|def localizationToStalk\", \"sub\": \"AlgebraicGeometry/Modules/Tilde.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary stalk/localization or flatness/tensor statements only; none proves the full scalar-restricted unbounded derived comparison and inverse-image skyscraper specialization. Semantic Tilde.stalkIso hits were checked against the pinned source, where that name is absent."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-affine-relative-tor-amplitude-criterion",
+  "date": "2026-10-22",
+  "group": "O3"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Affine comparison for a given coherent relative dualizing pair. Relative Tor amplitude in the affine reduction, using the generic affine relative-Tor criterion. Re-split argument: Resolved affine stalk identification, the opening stalk computation of Tag 0DHY (former Step 1). Includes the derived tensor comparison and inverse-image skyscraper realization of former Steps 2 and 4.",
+   "via": [
+    "lem-trf-affine-relative-tor-amplitude-criterion",
+    "lem-trf-affine-relative-dualizing-comparison",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-affine-relative-stalk-resolution-iso",
+  "worker": "stage1",
+  "summary": "Q59 checked the complete affine/local-ring and inverse-image coefficient statement against Stacks 0DHY and its stalk and K-flat inputs. Six explicit steps construct the chain isomorphism with its scalar action, descend exact stalks, retain K-flatness over the base stalk, compare inverse-image coefficients, assemble the derived tensor isomorphism, and calculate the skyscraper stalk. Existing DAG nodes supply every non-elementary input; no new nodes or changed hypotheses.",
+  "blueprint": "Inherited ancestor lem-trf-local-term-locality, proof (1)--(2), auxiliary semistable-modification/relative-duality chain recorded in blueprint.from.place: realizes the opening affine stalk identifications of Tag 0DHY used in the relative Tor criterion. The current latest blueprint has no separate statement of this auxiliary comparison; no chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-inverse-image-structure-stalk-iso",
+    "why": "Generic inverse-image structure map compatibility on stalks used as a black box for the affine relative stalk calculation of Tag 0DHY; no step of the trace-formula unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-spec-map-stalk-localization",
+    "why": "Generic the stalk maps of spec of a ring map are the induced maps of localizations used as a black box for the affine relative stalk calculation of Tag 0DHY; no step of the trace-formula unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-spec-tilde-stalk-localization",
+    "why": "Generic stalks of tilde modules are localizations used as a black box for the affine relative stalk calculation of Tag 0DHY; no step of the trace-formula unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-module-stalk-exact",
+    "why": "Generic stalks of o_x-modules commute with kernels, images and cokernels (stacks 01ag) used as a black box for the affine relative stalk calculation of Tag 0DHY; no step of the trace-formula unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic the functor induced on derived categories by an exact functor, with its factorization through the localization functors used as a black box for the affine relative stalk calculation of Tag 0DHY; no step of the trace-formula unit is replaced."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic existence of k-flat resolutions on a ringed site used as a black box for the affine relative stalk calculation of Tag 0DHY; no step of the trace-formula unit is replaced."
+   },
+   {
+    "node": "lem-pc-kflat-stalk-criterion",
+    "why": "Generic k-flatness of a complex of sheaves is detected on stalks used as a black box for the affine relative stalk calculation of Tag 0DHY; no step of the trace-formula unit is replaced."
+   },
+   {
+    "node": "lem-pc-ringed-inverse-image-stalk-scalar-transport-naturality",
+    "why": "Generic natural semilinear inverse-image module stalk comparison used as a black box for the affine relative stalk calculation of Tag 0DHY; no step of the trace-formula unit is replaced."
+   },
+   {
+    "node": "lem-sf-ringed-kflat-single-tensor-comparison",
+    "why": "Generic k-flat tensor with a degree-zero module on a ringed site used as a black box for the affine relative stalk calculation of Tag 0DHY; no step of the trace-formula unit is replaced."
+   },
+   {
+    "node": "lem-pc-stalk-tensor-complex",
+    "why": "Generic stalks commute with total tensor products of sheaf complexes used as a black box for the affine relative stalk calculation of Tag 0DHY; no step of the trace-formula unit is replaced."
+   },
+   {
+    "node": "lem-pc-source-kflat-module-tensor-model",
+    "why": "Generic derived module tensor computed on a k-flat first complex used as a black box for the affine relative stalk calculation of Tag 0DHY; no step of the trace-formula unit is replaced."
+   },
+   {
+    "node": "lem-pc-relative-inverse-image-stalk-restriction",
+    "why": "Generic scheme-level identification of the stalk complex of a scalar-restricted module complex along the canonical inverse-image ring stalk map with the restriction along f.stalkMap; used as a black box in Step 1 (reviewer FIX); no step of the trace-formula unit is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-inverse-image-structure-stalk-iso",
+  "lem-weil-pbc-spec-map-stalk-localization",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-pc-kflat-resolution",
+  "lem-pc-kflat-stalk-criterion",
+  "lem-pc-ringed-inverse-image-stalk-scalar-transport-naturality",
+  "lem-sf-ringed-kflat-single-tensor-comparison",
+  "lem-pc-stalk-tensor-complex",
+  "lem-pc-source-kflat-module-tensor-model",
+  "lem-pc-relative-inverse-image-stalk-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q59-8850e53ad",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-8850e53ad (reviewer sub-agent of L); spot-checked: I read the item in full: all 6 steps, every cited statement, and Stacks 0DHY (perfect.tex lemma-tor-dimension-rel-affine, opening identifications (f^{-1}O_S)_x=R_p, E_x=M_q), plus the tags each step cites. The delivery has no new nodes and the statement is unchanged. It does not duplicate the existing nodes I checked: the lem-pc-relative-tensor-* nodes and lem-pc-stalk-kflat-tensor-homology state only open-restriction or H^i comparisons. No SGA source is used.\n\nSteps 2-6 are correct:\n- Step 2: stalk exactness holds for (U,B) as a ringed space, and the derived factorization lemma (015F) inverts S_x u.\n- Step 3: the K-flat resolution is taken over B and transported across the ring isomorphism e_x. No flat base change along R_p→A_q is used.\n- Step 4: the semilinear c_G gives T-linearity once e_x=kj.\n- Step 5: the chain single-tensor comparison → φ → stalk tensor complex → source K-flat model → bifunctor stays in D(R_p).\n- Step 6: the skyscraper stalk at y is L.\n\nFIX (C3/E5): Step 1 takes α_x k=f^♯_x from lem-pc-inverse-image-structure-stalk-iso, which only says some e with that property exists. Step 4 uses the explicit k=stalkPullbackHom≫stalk(toSheafify) of the scalar-transport-naturality node. The proof identifies the two without a citation, and they need not agree: α_x is not injective, and the twist t↦t/(1+t) on Q[t]_(t) satisfies the same equation, so the skyscraper clause would fail for a twisted e. Step 1 now defines the explicit k. It is a ring isomorphism by lem-weil-pbc-presheaf-inverse-image-stalk (008G) and lem-weil-pbc-stalk-sheafification-space (007Z). The module comparison is cited from lem-pc-relative-inverse-image-stalk-restriction, which uses the same k and the actual tensorPullbackRingMap; the parent already cites it, so there is no cycle. The step also now cites lem-pc-affine-qcoh-derived-equivalence for tilde(d)τ=τd. Step 4 now says its k is the one from Step 1. proof_deps were recomputed and lem-pc-relative-inverse-image-stalk-restriction was added to tool_uses.\n\nEdge cases checked: M=0, L=0, R=A, A=0, the nonflat Z→Z/2, and a non-closed y. Stage-2 note: the statement should pin e_x as the explicit k composed with j.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineRelativeStalkResolutionIso",
+  "declaration": "AlgebraicGeometry.exists_affineRelativeStalkResolutionIso",
+  "declarations": [
+   "AlgebraicGeometry.AffineRelativeStalk.ringedSpace",
+   "AlgebraicGeometry.AffineRelativeStalk.inverseImageStalkMap",
+   "AlgebraicGeometry.AffineRelativeStalk.scalarMap",
+   "AlgebraicGeometry.AffineRelativeStalk.stalkFunctor",
+   "AlgebraicGeometry.AffineRelativeStalk.restrictedTilde",
+   "AlgebraicGeometry.AffineRelativeStalk.localizedComplex",
+   "AlgebraicGeometry.AffineRelativeStalk.baseStalkFunctor",
+   "AlgebraicGeometry.AffineRelativeStalk.inverseImage",
+   "AlgebraicGeometry.AffineRelativeStalk.skyscraper",
+   "AlgebraicGeometry.AffineRelativeStalk.complexStalkFunctor",
+   "AlgebraicGeometry.AffineRelativeStalk.tensorWithInverseImage",
+   "AlgebraicGeometry.AffineRelativeStalk.localizedTensor",
+   "AlgebraicGeometry.exists_affineRelativeStalkResolutionIso"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineRelativeStalkResolutionIso.lean",
+  "statement": "theorem exists_affineRelativeStalkResolutionIso {R A : Type u} [CommRing R] [CommRing A] (φ : R →+* A) (x : PrimeSpectrum A) (M : CochainComplex (ModuleCat.{u} A) ℤ) [HasDerivedCategory.{wB} (RingedSpace.Modules (AffineRelativeStalk.ringedSpace φ))] [HasDerivedCategory.{wT} (ModuleCat.{u} (Localization.AtPrime (PrimeSpectrum.comap φ x).asIdeal))] : ∃ θ : DerivedCategory.Q.obj ((AffineRelativeStalk.complexStalkFunctor φ x).obj (AffineRelativeStalk.restrictedTilde φ M)) ≅ DerivedCategory.Q.obj (AffineRelativeStalk.localizedComplex φ x M), (∀ (P : CochainComplex (RingedSpace.Modules (AffineRelativeStalk.ringedSpace φ)) ℤ) (u : P ⟶ AffineRelativeStalk.restrictedTilde φ M), CochainComplex.IsKFlatResolutionIndependentCoefficients u → IsIso (DerivedCategory.Q.map ((AffineRelativeStalk.complexStalkFunctor φ x).map u) ≫ θ.hom)) ∧ ∃ S : DerivedCategory (RingedSpace.Modules (AffineRelativeStalk.ringedSpace φ)) ⥤ DerivedCategory (ModuleCat.{u} (Localization.AtPrime (PrimeSpectrum.comap φ x).asIdeal)), Nonempty (DerivedCategory.Q ⋙ S ≅ AffineRelativeStalk.complexStalkFunctor φ x ⋙ DerivedCategory.Q) ∧ (∀ G : RingedSpace.Modules (Spec (.of R)).toRingedSpace, Nonempty (S.obj (AffineRelativeStalk.tensorWithInverseImage φ M G) ≅ AffineRelativeStalk.localizedTensor φ x M ((AffineRelativeStalk.baseStalkFunctor φ x).obj G))) ∧ ∀ L : ModuleCat.{u} (Localization.AtPrime (PrimeSpectrum.comap φ x).asIdeal), Nonempty ((AffineRelativeStalk.baseStalkFunctor φ x).obj (AffineRelativeStalk.skyscraper φ x L) ≅ L) ∧ Nonempty ((AffineRelativeStalk.stalkFunctor φ x).obj (AffineRelativeStalk.inverseImage φ (AffineRelativeStalk.skyscraper φ x L)) ≅ L) ∧ Nonempty (S.obj (AffineRelativeStalk.tensorWithInverseImage φ M (AffineRelativeStalk.skyscraper φ x L)) ≅ AffineRelativeStalk.localizedTensor φ x M L)",
+  "branch": "newtargets-dag",
+  "by": "Q80",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Helpers specialize the recorded affine, stalk, localization, inverse-image and skyscraper constructions; no new independent notion is introduced. The canonical ring map is stalkPullbackHom followed by stalk(toSheafify), composed with Spec.stalkIso.inv. The exact derived stalk is specified by its natural localization factorization. Added the landed site-derived-tensor-descent node to stmt_deps for the actual tensor object, since the vanishing predicate alone does not name that object."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b9d21442d",
+  "group": "Q80",
+  "result": "pass",
+  "note": "All node clauses match the Lean: B=f^{-1}O_V via inverseImageRing; C restricted along tensorPullbackRingMap; explicit k=stalkPullbackHom≫stalk(toSheafify), identical to the RelativeInverseImageStalkRestriction k; j=Spec.stalkIso.inv (direction checked); S_x=moduleStalkFunctor+restrictScalars; M_q via localizedModuleFunctor+localRingHom; θ existential with the K-flat-resolution IsIso clause (predicate=QuasiIso∧K-flat source); derived S pinned by Q⋙S≅stalk⋙Q; tensor clause uses siteDerivedTensorIndependentCoefficients and the K-flat module derived tensor; skyscraper via j^{-1} + ringedModuleSkyscraperFunctor with all three conjuncts. Mechanical theorem stmt_dep finding: siteDerivedTensorIndependentCoefficients is .choose of siteDerivedTensorExistsIndependentCoefficients, so it genuinely depends on the theorem's conclusion -> PASS on that point. No extra hypotheses or universe equalities; no hollow defs; only the main theorem is sorry; docstrings carry source and blueprint id; lean.statement verbatim; node diff vs live = lean + stmt_deps only. Edge cases A=0, zero objects, φ=id, nonflat Z->Z/2, nonclosed f(x) OK. No file changed, so no compile."
+ }
+}

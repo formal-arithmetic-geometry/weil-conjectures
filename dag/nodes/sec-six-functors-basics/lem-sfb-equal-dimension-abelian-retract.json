@@ -1,0 +1,183 @@
+{
+ "id": "lem-sfb-equal-dimension-abelian-retract",
+ "kind": "statement",
+ "title": "A retract of equal-dimensional abelian varieties is an isomorphism",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $A,B$ be abelian varieties over $k$ [def-sc-abelian-variety] with $\\dim A=\\dim B$. If homomorphisms $s:A\\to B$ and $r:B\\to A$ satisfy $r\\circ s=\\mathrm{id}_A$ as morphisms of group schemes [def-sc-group-scheme], then $s$ is an isomorphism and $r=s^{-1}$.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I Proposition 7.1(c)–(d), printed p.32 (equal dimensions and finite kernel imply finite flat surjectivity), followed by the degree-one conclusion for the trivial scheme-theoretic kernel; this is the geometric completion of the one-sided inverse obtained in III Lemma 6.9, pp.106–107."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-abelian-variety",
+  "def-sc-group-scheme",
+  "def-pc-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Let $K=\\ker s=A\\times_{B,s,e_B}\\operatorname{Spec}k$, with projections $i:K\\to A$ and $p:K\\to\\operatorname{Spec}k$, so $si=e_Bp$. Since $r$ is a group homomorphism, $re_B=e_A$; applying $r$ and using $rs=\\mathrm{id}_A$ gives $i=e_Ap$. Because $se_A=e_B$, the pair $(e_A,\\mathrm{id}_{\\operatorname{Spec}k})$ defines $u:\\operatorname{Spec}k\\to K$, with $iu=e_A$ and $pu=\\mathrm{id}$. The composites $up$ and $\\mathrm{id}_K$ have the same two projections: $iup=e_Ap=i$ and $pup=p$. The fibre-product universal property gives $up=\\mathrm{id}_K$. Thus $p$ is an isomorphism of $k$-schemes with inverse $u$. In particular the entire scheme-theoretic kernel is finite with coordinate algebra $k$ and order $\\dim_k k=1$.",
+   "uses": [
+    "def-sc-group-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I Proposition 7.1, printed p.32, and scheme-theoretic kernel discussion immediately before it"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-finite-kernel-equal-dimension-isogeny] to $s$: the hypothesis $\\dim A=\\dim B$ is given, and step 1 proves the required finiteness of the scheme-theoretic kernel. Consequently $s$ is surjective and finite locally free. In particular it is finite, flat and locally of finite presentation, and surjectivity together with the finite kernel makes it an isogeny by [def-sc-isogeny].",
+   "uses": [
+    "lem-sfb-finite-kernel-equal-dimension-isogeny",
+    "def-sc-isogeny",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I Proposition 7.1, printed p.32, and scheme-theoretic kernel discussion immediately before it"
+   }
+  },
+  {
+   "text": "Write $d=\\dim_k\\Gamma(K,\\mathcal O_K)$, which is $1$ by step 1. Since step 2 makes $s$ an isogeny, [lem-sc-isogeny-degree] gives a locally free $\\mathcal O_B$-module $s_*\\mathcal O_A$ of rank $d$. Thus $r_s(b)=1$ for every point $b\\in B$, not only at its identity. Apply clause (3) of [lem-weil-pbc-finite-flat-rank-iso]: step 2 supplies finiteness, flatness and local finite presentation, and the preceding equality supplies its rank hypothesis at every point. It follows that $s$ is an isomorphism.",
+   "uses": [
+    "lem-sc-isogeny-degree",
+    "lem-weil-pbc-finite-flat-rank-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I Proposition 7.1, printed p.32, and scheme-theoretic kernel discussion immediately before it"
+   }
+  },
+  {
+   "text": "Let $t:B\\to A$ be the inverse of $s$ as a $k$-scheme isomorphism. Associativity and the two inverse identities give $r=r\\mathrm{id}_B=r(st)=(rs)t=\\mathrm{id}_At=t$. Therefore $sr=st=\\mathrm{id}_B$, in addition to the given $rs=\\mathrm{id}_A$. Both $s$ and $r$ are the original $k$-group-scheme homomorphisms, so they are mutually inverse in that category and $r=s^{-1}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I Proposition 7.1, printed p.32, and scheme-theoretic kernel discussion immediately before it"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-group-scheme",
+  "lem-sfb-finite-kernel-equal-dimension-isogeny",
+  "def-sc-isogeny",
+  "def-pc-finite-locally-free",
+  "lem-sc-isogeny-degree",
+  "lem-weil-pbc-finite-flat-rank-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Assembly of Milne I Proposition 7.1, printed p.32: explicit kernel computation and the rank-one conclusion"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism of abelian varieties of equal dimension with a left inverse is an isomorphism",
+   "results": "8 hits; actual top results: AlgEquiv.ofLeftInverse, CategoryTheory.isIso_of_comp_hom_eq_id, CategoryTheory.isIso_of_hom_comp_eq_id, AlgebraicGeometry.Scheme.inv_hom_apply, AlgebraicGeometry.Scheme.iso_inv_base_hom_base, AlgebraicGeometry.Scheme.iso_inv_base_hom_base_apply, AlgebraicGeometry.Scheme.iso_hom_base_inv_base_apply, AlgebraicGeometry.Scheme.iso_hom_base_inv_base",
+   "date": "2026-10-22",
+   "verdict": "no match: categorical split-monomorphism results require epimorphism or monicity of the retraction; obtaining that from equality of dimensions for abelian varieties is a further geometric theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A split monomorphism between abelian varieties of the same dimension is an isomorphism",
+   "results": "8 hits; actual top results: CategoryTheory.IsSplitMono.of_iso, CategoryTheory.SplitEpi.splitMono, CategoryTheory.isIso_of_mono_of_isSplitEpi, CategoryTheory.IsIso.of_mono_retraction', CategoryTheory.IsIso.of_mono_retraction, CategoryTheory.isIso_of_epi_of_isSplitMono, CategoryTheory.SplitMono.mk, CategoryTheory.SplitMono",
+   "date": "2026-10-22",
+   "verdict": "no match: categorical split-monomorphism results require epimorphism or monicity of the retraction; obtaining that from equality of dimensions for abelian varieties is a further geometric theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsClosedImmersion\"",
+   "results": "12 hits; actual top results: AlgebraicGeometry.IsClosedImmersion.isZariskiLocalAtTarget, AlgebraicGeometry.IsClosedImmersion.instIsMultiplicativeScheme, AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, AlgebraicGeometry.IsClosedImmersion.respectsIso, AlgebraicGeometry.IsClosedImmersion.instSubschemeι, AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion, AlgebraicGeometry.IsClosedImmersion.instIsAffineHom",
+   "date": "2026-10-22",
+   "verdict": "no match: categorical split-monomorphism results require epimorphism or monicity of the retraction; obtaining that from equality of dimensions for abelian varieties is a further geometric theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "AbelianVariety|split.mono.*dimension|left.inverse.*dimension",
+   "results": "0 hits; actual top results: ",
+   "date": "2026-10-22",
+   "verdict": "no match: categorical split-monomorphism results require epimorphism or monicity of the retraction; obtaining that from equality of dimensions for abelian varieties is a further geometric theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-curve-polarized-jacobian-faithfulness",
+  "date": "2026-10-22",
+  "group": "Q59"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: A retract of equal-dimensional abelian varieties is an isomorphism.",
+   "via": [
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-equal-dimension-abelian-retract",
+  "worker": "stage1",
+  "summary": "Repair against the current DAG of the landing return recorded at returned head 6f618d99c18 (earlier retained repair notes refer to 91123449f2f). Retained the approved finite-kernel/isogeny-degree/rank-one route and logged searches. Reopened every current cited statement and verified all six verbatim quotations; current item remains unsplit and the helper remains absent. Explicitly extracted rank one at every target point from the isogeny-degree statement in step 3. Reviewed the newly arrived same-tag affine-equivalence-relation node and documented why it is not a duplicate. Delivery tool rebases on current origin/sheaf-dag; no repository edits, Lean writing or compilation.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: A retract of equal-dimensional abelian varieties is an isomorphism. The four steps supply this supporting geometric completion of Milne III Lemma 6.9 without changing the alteration or curve/Jacobian route.",
+  "tool_uses": [
+   {
+    "node": "def-sc-isogeny",
+    "why": "Generic terminology for the surjective finite-kernel map in step 2; no replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sc-isogeny"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-793ecb6ba",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-793ecb6ba (reviewer sub-agent of L); spot-checked: This is the third delivery of the split. Heads 91123449f2f2 and 6f618d99c182 both received PASS here; their returns came from landing and promotion, not from the mathematics. Compared with the 6f61 snapshot, the new node is byte-identical. In the item, only step 3's text and the split_report date and summary changed; the statement, deps, step uses and source are unchanged. Both live clones still show the item unsplit, there is no repair note and no SGA citation. I re-read all of the mathematics. Step 1: K = A ×_{B,s,e_B} Spec k; i = r e_B p = e_A p; u = (e_A, id) is defined, pu = id and up = id_K, so K ≅ Spec k as a scheme, of order 1. Step 2: the new node gives s surjective and finite locally free (finite, flat, lfp); it is an isogeny by def-sc-isogeny, accepted as the declared tool_use. Step 3 (new wording): lem-sc-isogeny-degree makes s_*O_A locally free of rank 1, so r_s = 1 everywhere, and clause (3) of lem-weil-pbc-finite-flat-rank-iso gives the isomorphism. Step 4: r = r(st) = (rs)t = t. New node: checked against Milne AV I Prop 7.1 (c) ⇒ (d), printed p.32, whose kernel is the fibre over 0 in the sense of algebraic spaces and whose proof gives α_*O_A locally free over a Noetherian B; Stacks 02KB gives finite locally free. 'Finite over k' is at least as strong as Milne's 'dimension zero'. It is not a restatement of the item, since [n] satisfies its hypotheses without being an isomorphism. Small cases tested: [n], the Frobenius kernel, A → A×E, dimension 0. I scanned every abelian-variety node in the current snapshot that mentions a kernel or isogeny: the hits are only [n]-specific nodes, the isogeny definitions, lem-sc-isogeny-degree (which assumes an isogeny) and polarization/Picard nodes, so there is no duplicate. The citer curve-polarized-jacobian-faithfulness is unaffected. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianVariety.EqualDimensionAbelianRetract",
+  "declaration": "AlgebraicGeometry.IsAbelianVariety.exists_iso_of_retraction_equal_dim",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianVariety/EqualDimensionAbelianRetract.lean",
+  "statement": "theorem IsAbelianVariety.exists_iso_of_retraction_equal_dim {k : Type u} [Field k] [IsAlgClosed k] {A B : Over (Spec (.of k))} [GrpObj A] [GrpObj B] [IsAbelianVariety A] [IsAbelianVariety B] (hdim : A.left.dim = B.left.dim) (s : A ⟶ B) [IsMonHom s] (r : B ⟶ A) [IsMonHom r] (hsr : s ≫ r = 𝟙 A) : ∃ e : A ≅ B, e.hom = s ∧ e.inv = r",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-510498863",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Only change: new module EqualDimensionAbelianRetract.lean plus the item's lean record; no rebind. Clauses match: Field+IsAlgClosed k; A,B : Over (Spec k) with GrpObj+IsAbelianVariety (Defs.lean:47); hdim via Scheme.dim (def-pc-dimension); s,r IsMonHom; s ≫ r = 𝟙 A is r∘s=id; conclusion ∃ e : A ≅ B, e.hom = s ∧ e.inv = r. No extra hypotheses; universes shared via k : Type u. Statement verbatim checked by script; docstrings give source place, blueprint id and the four proof steps; no definitions; proof sorry; report has both sections. Duplicate grep of WeilConjectures/Sheaf AbelianVariety trees: none (MultipleRetraction is a different statement). Private imports unneeded but harmless. No file changed, so no compile."
+ }
+}

@@ -107,7 +107,32 @@
   "item": "lem-weil-pbc-integral-closure-finite-fibre-part-localization",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.integralClosure_finite_fibre_choose_g"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.integralClosure_finite_fibre_choose_g",
+     "module": "WeilConjectures.AlgebraicGeometry.IntegralClosureFiniteFibreChooseG",
+     "lines": [
+      30,
+      155
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
@@ -151,5 +176,27 @@
   "landing": "20261012T060755-L-2916023",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $A$ be a commutative ring, let $I\\subseteq A$ be an ideal, and let $A\\to B$ be a finite-type ring map. Let $B'\\subseteq B$ be the integral closure of $A$ in $B$. Suppose given ring isomorphisms $B/IB\\cong C_1\\times C_2$ and $B'/IB'\\cong C'_1\\times C'_2$, compatible with the $A/I$-algebra structures, where $C_1,C_2,C'_1,C'_2$ are $A/I$-algebras with $C_1$ finite over $A/I$, and $A/I$-algebra maps $f_1:C'_1\\to C_1$, $f_2:C'_2\\to C_2$ such that the reduction $B'/IB'\\to B/IB$ of the inclusion is $f_1\\times f_2$ under these isomorphisms. Write $\\varepsilon'\\in B'/IB'$ for the element corresponding to $(1,0)$. Let $U\\subseteq\\operatorname{Spec}(B')$ be an open subset containing the image of $\\operatorname{Spec}(C'_1)$ under $\\operatorname{Spec}(C'_1)\\to\\operatorname{Spec}(B'/IB')\\to\\operatorname{Spec}(B')$ (induced by the projection onto the first factor and the quotient map), and suppose that the restriction of $\\operatorname{Spec}(B)\\to\\operatorname{Spec}(B')$ over $U$ is an isomorphism. Then there is $g\\in B'$ whose image modulo $IB'$ is $\\varepsilon'$, whose principal open $D(g)$ is contained in $U$, and such that the induced localization map $B'_g\\to B_g$ is bijective.",
+  "proof": [
+   {
+    "text": "Write $R=B'$ for the integral closure and let $q:R\\to C'_1\\times C'_2$ be the surjective quotient map $R\\to R/IR$ followed by the given isomorphism $R/IR\\cong C'_1\\times C'_2$. The composite $f=\\mathrm{pr}_1\\circ q:R\\to C'_1$ is surjective. Let $K=\\ker f$. Since $f$ is surjective, the image of $\\operatorname{Spec}(C'_1)\\to\\operatorname{Spec}(R)$ is $V(K)$, and by hypothesis it is contained in $U$. Let $J$ be the vanishing ideal of the closed complement of $U$, so $V(J)$ is that complement (a closed set is the zero locus of its vanishing ideal). Disjointness gives $V(J+K)=V(J)\\cap V(K)=\\emptyset$, hence $J+K=R$. Choose $j\\in J$ and $k\\in K$ with $j+k=1$, and $g_0\\in R$ with $q(g_0)=(1,0)$. Then the first component of $q(j)$ is $1$, so $q(g_0j)=(1,0)$, and $g=g_0j$ has image $\\varepsilon'$ modulo $IR$. Because $g\\in J$, $D(g)\\cap V(J)=\\emptyset$, i.e. $D(g)\\subseteq U$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Write $\\phi:\\operatorname{Spec}B\\to\\operatorname{Spec}R$ for the map induced by $R\\to B$. Restricting the isomorphism $\\phi|_U$ further over the open $D(g)\\subseteq U$ shows that $\\phi$ restricted over $D(g)$ is an isomorphism. The restriction of $\\phi$ over $D(g)$ is $\\operatorname{Spec}$ of the localized map $R_g\\to B_g$, as $\\phi^{-1}(D(g))=D(g)\\subseteq\\operatorname{Spec}B$ and the basic opens are the spectra of the localizations. A ring map whose $\\operatorname{Spec}$ is an isomorphism of schemes is itself an isomorphism, so $R_g\\to B_g$ is bijective.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

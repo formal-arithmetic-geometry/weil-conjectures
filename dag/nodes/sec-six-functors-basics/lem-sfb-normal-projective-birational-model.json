@@ -1,0 +1,323 @@
+{
+ "id": "lem-sfb-normal-projective-birational-model",
+ "kind": "statement",
+ "title": "Normal projective birational models by Chow modification and normalization",
+ "statement": "Let $e$ be a field [def-weil-field] and $S$ a nonempty integral proper finite-type $e$-scheme [def-pc-integral-scheme, def-weil-proper-morphism, def-weil-finite-type-morphism]. There exist an integral finite-type $e$-scheme $Y$, a proper surjective $e$-morphism $c:Y\\to S$ [def-weil-surjective-morphism], a nonempty open $V\\subseteq S$ [def-weil-open-immersion] with $c^{-1}V\\to V$ an isomorphism, and a closed immersion $Y\\hookrightarrow\\mathbf P^n_e$ over $e$ for some finite $n$ [def-weil-closed-immersion, def-nagata-projective-space-base-change]. For $n_Y:N=Y^\\nu\\to Y$, the normalization in its own function field [def-sc-normalization, def-sc-function-field], $n_Y$ is finite [def-weil-finite-integral-morphism], surjective and birational. The scheme $N$ is nonempty integral and normal: every local ring is an integrally closed domain [def-weil-pbc-normal-ring]. There exists a closed immersion $N\\hookrightarrow\\mathbf P^m_e$ over $e$ for a finite $m$, so $Y$ and $N$ are H-projective [def-kun-projective], proper and finite type over $e$. The composite $c\\circ n_Y:N\\to S$ is proper, surjective and birational. The morphisms $c$, $n_Y$ and $c\\circ n_Y$ induce isomorphisms on function fields. Birational means an isomorphism on suitable dense open subschemes; all function-field isomorphisms are those induced by the displayed morphisms.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose X 2.3 Step 1, printed p.150: finite normalization, with a birational Chow model inserted for projectivity. Stacks coherent.tex Tags 0200 (lemma-chow-Noetherian), 0201 (remark-chow-Noetherian); varieties.tex Tag 0BXR (lemma-normalization-locally-algebraic); finite-over-projective over the affine field base."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-integral-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-surjective-morphism",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-nagata-projective-space-base-change",
+  "def-sc-normalization",
+  "def-sc-function-field",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-normal-ring",
+  "def-kun-projective"
+ ],
+ "proof": [
+  {
+   "text": "Give the one-element group the identity actions on $e$ and $S$. These actions are compatible, and no faithfulness is needed. Apply [lem-sfb-semilinear-equivariant-chow-modification] with $k=e$, $X=S$ and this group. Discard the actions. It gives an integral finite-type $e$-scheme $Y$, a proper surjective $e$-morphism $c:Y\\to S$, an isomorphism $c^{-1}V\\simeq V$ over a dense open $V\\subseteq S$, and a closed immersion $Y\\hookrightarrow\\mathbf P^n_e$ for a finite $n$. Since $S$ is nonempty and $V$ is dense open, $V$ is nonempty. Thus $c^{-1}V$ is nonempty as well.",
+   "uses": [
+    "lem-sfb-semilinear-equivariant-chow-modification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0200, lemma-chow-Noetherian, and Tag 0201, remark-chow-Noetherian; trivial-group specialization of the existing equivariant Chow lemma."
+   }
+  },
+  {
+   "text": "The scheme $Y$ is proper over $e$: its structure morphism is $Y\\xrightarrow c S\\to\\operatorname{Spec}e$, a composite of proper morphisms [lem-weil-pbc-proper-composition]. A field is Noetherian because its only ideals are $(0)$ and $(1)$; its spectrum is therefore Noetherian. As $Y$ is finite type over $e$, [lem-weil-pbc-finite-type-over-noetherian] makes $Y$ Noetherian, and [lem-weil-pbc-locally-noetherian-quasi-separated] makes it quasi-separated. Put $K=k(Y)$ and let $a:\\operatorname{Spec}K\\to Y$ be its generic-point morphism. The source has one point, is affine, quasi-compact, quasi-separated and integral; its only local ring is the field $K$, hence integrally closed. By [lem-weil-pbc-qcqs-morphism-permanence](1), $a$ is quasi-compact and quasi-separated.",
+   "uses": [
+    "lem-weil-pbc-proper-composition",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01W3 (lemma-composition-proper), 01T6 (lemma-finite-type-noetherian); properties.tex Tag 01OY (lemma-locally-Noetherian-quasi-separated); generic-point setup for Tags 035I and 035L."
+   }
+  },
+  {
+   "text": "Form $n_Y:N=Y^\\nu\\to Y$ as in [def-sc-normalization]. This is the relative normalization of $Y$ in $a:\\operatorname{Spec}K\\to Y$: on each nonempty affine open $U\\subseteq Y$, its preimage in $\\operatorname{Spec}K$ is the whole point and has section ring $K$, so both constructions take the integral closure of $\\mathcal O_Y(U)$ in $K$. Their affine gluing maps are the same restrictions. Apply [lem-weil-pbc-relative-normalization](iv) to $a$ to conclude $N$ is integral, hence nonempty. Apply [lem-weil-pbc-normalization-normal-stalks] to the same $a$ (the qcqs and normal-integral source hypotheses were checked in step 2) to conclude every local ring of $N$ is an integrally closed domain. Finally [lem-sc-normalization-exists], applied to the integral finite-type $e$-scheme $Y$, makes $n_Y$ finite, surjective and birational and makes $N$ proper over $e$, since $Y$ is proper.",
+   "uses": [
+    "def-sc-normalization",
+    "lem-weil-pbc-relative-normalization",
+    "lem-weil-pbc-normalization-normal-stalks",
+    "lem-sc-normalization-exists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BXR, lemma-normalization-locally-algebraic; morphisms.tex Tags 035H (definition-normalization-X-in-Y), 035I (lemma-characterize-normalization), 035L (lemma-normal-normalization)."
+   }
+  },
+  {
+   "text": "To exhibit the normalization isomorphism open explicitly, choose a nonempty affine $U=\\operatorname{Spec}R\\subseteq Y$. By [def-sc-normalization] and [def-weil-finite-integral-morphism], $n_Y^{-1}U=\\operatorname{Spec}B$, where $B\\subseteq K$ is the integral closure of $R$ and is finite as an $R$-module. Choose module generators $b_1,\\ldots,b_t$; include $1$ if necessary. By [lem-sc-integral-function-field-affine-fraction], write $b_i=r_i/s_i$ in $K$, with $s_i\\ne0$. For $s=\\prod_i s_i\\ne0$, the inclusions $R\\subseteq B\\subseteq K$ give $B[1/s]=R[1/s]$: all generators lie in $R[1/s]$, and the reverse inclusion comes from $R\\subseteq B$. Thus $n_Y^{-1}D_U(s)\\to D_U(s)$ is an isomorphism. This target open contains the generic point, and its nonempty inverse image is open in the integral $N$, so both opens are dense.",
+   "uses": [
+    "def-sc-normalization",
+    "def-weil-finite-integral-morphism",
+    "lem-sc-integral-function-field-affine-fraction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BXC, lemma-normalization-birational; affine finite-module denominator argument (spelled out), and Tag 01RV, lemma-integral-scheme-rational-functions."
+   }
+  },
+  {
+   "text": "The embedding of $Y$ in step 1, together with its properness (so quasi-compactness), gives projectivity in [def-pc-projective-morphism]. Apply [lem-fin-finite-over-projective] with base $\\operatorname{Spec}e$, $T=Y$, and $h=n_Y$. This base is affine Noetherian, as checked in step 2. Its affine-base conclusion supplies a closed immersion $N\\hookrightarrow\\mathbf P^m_e$ with finite $m$. These two embeddings are exactly H-projectivity in [def-kun-projective]. Both schemes are proper over $e$ by steps 2 and 3. By [def-weil-proper-morphism], proper includes finite type, giving the remaining finite-type assertion for $N$.",
+   "uses": [
+    "def-pc-projective-morphism",
+    "lem-fin-finite-over-projective",
+    "def-kun-projective",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0GK4, lemma-normalize-projective; affine-base H-projective form supplied by lem-fin-finite-over-projective."
+   }
+  },
+  {
+   "text": "The composite $b=c\\circ n_Y$ is proper by [lem-weil-pbc-proper-composition]. It is surjective: for $s\\in S$, first lift $s$ to $y\\in Y$ along $c$, then lift $y$ to $x\\in N$ along $n_Y$. To check birationality explicitly, choose dense opens $A\\subseteq N$ and $B\\subseteq Y$ on which $n_Y$ is an isomorphism, as explicitly constructed in step 4. The open $D=B\\cap c^{-1}V$ is nonempty because $Y$ is irreducible and both factors are nonempty opens. Under $c^{-1}V\\simeq V$, its image is a nonempty open $W\\subseteq V\\subseteq S$, hence dense in the integral $S$. The open $A\\cap n_Y^{-1}D$ is nonempty and therefore dense in integral $N$, and $b$ restricts there to the composite isomorphism $A\\cap n_Y^{-1}D\\simeq D\\simeq W$. This proves birationality in the required dense-open sense.",
+   "uses": [
+    "lem-weil-pbc-proper-composition",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01W3 (lemma-composition-proper) and 01RO (definition-birational); elementary intersection of the two already constructed isomorphism opens."
+   }
+  },
+  {
+   "text": "For any of $c$, $n_Y$ and $b$, the preceding steps exhibit an isomorphism between nonempty opens of its integral source and target. Every such open contains the generic point, and the generic stalk is the function field [lem-sc-integral-function-field-affine-fraction, def-sc-function-field]. An open restriction leaves that stalk unchanged (the neighborhoods inside an open neighborhood are cofinal). Hence taking the stalk map of each displayed open isomorphism gives an isomorphism of function fields, and this is the stalk map of the original morphism, since restriction uses the same sheaf maps. Stalk maps compose, so $b^*=n_Y^*\\circ c^*$ under these identifications. Thus the asserted isomorphisms are all induced by the displayed morphisms.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "def-sc-function-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01RV (lemma-integral-scheme-rational-functions) and 01RW (definition-function-field); generic-stalk restriction and composition."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-semilinear-equivariant-chow-modification",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-sc-normalization",
+  "lem-weil-pbc-relative-normalization",
+  "lem-weil-pbc-normalization-normal-stalks",
+  "lem-sc-normalization-exists",
+  "def-weil-finite-integral-morphism",
+  "lem-sc-integral-function-field-affine-fraction",
+  "def-pc-projective-morphism",
+  "lem-fin-finite-over-projective",
+  "def-kun-projective",
+  "def-weil-proper-morphism",
+  "def-pc-integral-scheme",
+  "def-sc-function-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose X 2.3 Step 1, printed p.150; assembly through existing Chow, normalization and affine-base finite-over-projective nodes, with explicit dense-open and induced-field arguments."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every integral proper scheme over a field has a projective integral normal birational model obtained by Chow modification and finite normalization",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.fromNormalization f)\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y)\\n  [inst_2 : AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂),\\n  Alge\", \"doc\": \"The normalization morphism associated with a scheme morphism $ f: X \\to Y $, constructed via the colimit diagram involving the affine Zariski site of $ Y $ and the Spec functor, is an integral morphism\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegralHom f],\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsAffineHom f],\\n  AlgebraicGeometry.IsAffineHom (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the induced morphism from $ X $ to the normalization of $ f $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.IsProper (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If the zero-graded component $ \\\\mathcal{A}_0 $ of a graded ring $ \\\\mathcal{A} $ is a finitely generated $ A $-algebra, then the canonical morphism from the projective spectrum $ \\\\operatorname{Proj}(\\\\m\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → X ⟶ AlgebraicGeometry.Scheme.Hom.normalization f\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [AlgebraicGeometry.QuasiCompact f] → [AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply constituent notions or separate properties, not this complete intermediate construction or preservation statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalize an integral Chow modification of a proper variety to obtain a normal projective scheme with the same function field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y)\\n  [inst_2 : AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂),\\n  Alge\", \"doc\": \"The normalization morphism associated with a scheme morphism $ f: X \\to Y $, constructed via the colimit diagram involving the affine Zariski site of $ Y $ and the Spec functor, is an integral morphism\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.fromNormalization f)\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegralHom f],\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsAffineHom f],\\n  AlgebraicGeometry.IsAffineHom (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the induced morphism from $ X $ to the normalization of $ f $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → X ⟶ AlgebraicGeometry.Scheme.Hom.normalization f\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [AlgebraicGeometry.QuasiCompact f] → [AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] →\\n        {T : AlgebraicGeometry.Scheme} →\\n          (f₁ : X ⟶ T) →\\n            (f₂ : T ⟶ Y) →\\n              [AlgebraicGeometry.IsIntegralHom f₂] →\\n \", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply constituent notions or separate properties, not this complete intermediate construction or preservation statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsIntegral, AlgebraicGeometry.IsProper",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"AlgebraicGeometry.isCommMonObj_of_isProper_of_isIntegral_tensorObj_of_isAlgClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Group.Abelian\", \"type\": \" {K : Type u} [Field K] [IsAlgClosed K] (G : CategoryTheory.Over (AlgebraicGeometry.Spec ↧K)) [AlgebraicGeometry.IsProper G.hom] [AlgebraicGeometry.IsIntegral (CategoryTheory.MonoidalCategoryStruct.tensorObj G G).left] [CategoryTheory.GrpObj G] : CategoryTheory.IsCommMonObj G\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply constituent notions or separate properties, not this complete intermediate construction or preservation statement"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization|Chow|IsProjective",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"15\", \"text\": \"# Relative Normalization\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"17\", \"text\": \"Given a qcqs morphism `f : X ⟶ Y`, we define the relative normalization `f.normalization`,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"19\", \"text\": \"- `f.toNormalization : X ⟶ f.normalization`: a dominant morphism\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"20\", \"text\": \"- `f.fromNormalization : f.normalization ⟶ Y`: an integral morphism\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"24\", \"text\": \"the map `X ⟶ T` factors through `f.normalization` uniquely.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"12\", \"text\": \"public import Mathlib.AlgebraicGeometry.Normalization\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"21\", \"text\": \"`f` to the relative normalization `X'` of `Y` in `X` is an open immersion.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"26\", \"text\": \"- If `f` is itself quasi-finite, then the map `f.toNormalization : X ⟶ X'` is an open immersion.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"29\", \"text\": \"  If `f` is proper and quasi-finite, then the map `f.toNormalization : X ⟶ X'` is an isomorphism,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"119\", \"text\": \"lemma Scheme.Hom.exists_mem_and_isIso_morphismRestrict_toNormalization\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply constituent notions or separate properties, not this complete intermediate construction or preservation statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every integral proper scheme over a field has a projective integral normal birational model obtained by Chow modification and finite normalization",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsIntegral X] : IsIntegral f.normalization\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsIntegralHom f] : IsIso f.toNormalization\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": IsIntegralHom f.fromNormalization\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(H : f = f₁ ≫ f₂) : f.normalization ⟶ T\", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens) {Z : AlgebraicGeometry.Scheme}\\n  (h : AlgebraicGeometry.Scheme.Hom.normalization f ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp ((TopologicalSpa\", \"doc\": \"Given a quasi-compact and quasi-separated morphism $ f: X \\to Y $ of schemes, there exists a morphism from $ X $ to the normalization of $ f $, constructed by gluing local integral closure maps over an\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(H : f = f₁ ≫ f₂) : IsIntegralHom (f.normalizationDesc f₁ f₂ H)\", \"doc\": \"The normalization morphism associated with a scheme morphism $ f: X \\to Y $, constructed via the colimit diagram involving the affine Zariski site of $ Y $ and the Spec functor, is an integral morphism\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \": HasAffineProperty @IsIntegralHom fun X _ f _ ↦ IsAffine X ∧ RingHom.IsIntegral (f.app ⊤).hom\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is integral if the target scheme $ Y $ is affine, the source scheme $ X $ is affine, and the induced ring homomorphism between their coordinate rings is integral (i\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply constituent notions or separate properties, not this complete intermediate construction or preservation statement"
+  },
+  {
+   "tool": "grep",
+   "query": "Chow|birational|normalization",
+   "results": "Actual search returned 18 hits; recorded top hits: Mathlib/AlgebraicGeometry/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/Dominant.lean, Mathlib/AlgebraicGeometry/Birational/Birational.lean, Mathlib/AlgebraicGeometry/Birational/Birational.lean, Mathlib/AlgebraicGeometry/Birational/Birational.lean, Mathlib/AlgebraicGeometry/Birational/Birational.lean, Mathlib/AlgebraicGeometry/Birational/Birational.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean. Read normalization and properness hits: they give separate properties, not Chow existence plus all clauses of this item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper integral variety has a normal projective birational model by Chow lemma and finite normalization",
+   "results": "Actual search returned 8 hits; recorded top hits: AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.IsProper.isStableUnderBaseChange, AlgebraicGeometry.Scheme.Hom.normalizationDesc. Read normalization and properness hits: they give separate properties, not Chow existence plus all clauses of this item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.IsIntegral",
+   "results": "Actual search returned 1 hits; recorded top hits: AlgebraicGeometry.isCommMonObj_of_isProper_of_isIntegral_tensorObj_of_isAlgClosed. Read normalization and properness hits: they give separate properties, not Chow existence plus all clauses of this item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper integral scheme over a field admits an integral projective birational Chow modification whose normalization is finite and projective",
+   "results": "Actual search returned 8 hits; recorded top hits: AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDesc. Read normalization and properness hits: they give separate properties, not Chow existence plus all clauses of this item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Chows lemma a proper variety is birationally dominated by a normal projective variety with finite normalization morphism",
+   "results": "Actual search returned 8 hits; recorded top hits: AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.IsProper.of_valuativeCriterion. Read normalization and properness hits: they give separate properties, not Chow existence plus all clauses of this item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-pair-radicial-preparation",
+  "date": "2026-10-22",
+  "group": "Q09"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration/tame-boundary reduction, through the global alteration input; ILO X 2.3: Expose X 2.3 Step 1, printed p.150 (compactification, reduced components, radicial constants, blowup, finite normalization), applied to the finitely many components with one common finite radicial constant extension. The compactification is chosen with C the closure of Z; including the complement of X is optional, not required.; returned proper-pair proof steps 7--8: Normal projective birational models by Chow modification and normalization. No imported blueprint ancestor exists on this added-input branch.",
+   "via": [
+    "lem-sfb-proper-pair-radicial-preparation",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-normal-projective-birational-model",
+  "worker": "stage1",
+  "summary": "Retained the full statement and all imported metadata; split into seven steps using only existing nodes. Trivial-group equivariant Chow gives the integral projective modification. Generic-point relative normalization gives integrality and normality, the existing normalization theorem gives finite surjective birational properness, and the affine-base finite-over-projective theorem gives the finite projective-space embedding. The finite-module denominator argument supplies an explicit normalization isomorphism open. Dense-open composition and the actual induced field maps are written explicitly. No new nodes.",
+  "blueprint": "Added-input branch with no imported ancestor (blueprint_refs ancestor returned None): det-thm-sf-ctf-stability-direct-images proof (3), through proper-pair-radicial-preparation steps 7--8, ILO X 2.3 Step 1. Retains the Chow-modification/finite-normalization route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proper-composition",
+    "why": "Generic scheme-theoretic tool: Properness is stable under composition. Applied only to the Chow model or its generic-point normalization; no constructibility or alteration step of the unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic scheme-theoretic tool: A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6). Applied only to the Chow model or its generic-point normalization; no constructibility or alteration step of the unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic scheme-theoretic tool: A locally Noetherian scheme is quasi-separated (Stacks 01OY). Applied only to the Chow model or its generic-point normalization; no constructibility or alteration step of the unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic scheme-theoretic tool: Quasi-compactness and quasi-separatedness of morphisms between qcqs schemes; finite presentation is stable under base change. Applied only to the Chow model or its generic-point normalization; no constructibility or alteration step of the unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-relative-normalization",
+    "why": "Generic scheme-theoretic tool: The normalization of a scheme in a quasi-compact quasi-separated scheme over it. Applied only to the Chow model or its generic-point normalization; no constructibility or alteration step of the unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-normalization-normal-stalks",
+    "why": "Generic scheme-theoretic tool: The normalization of a scheme in a normal integral scheme has integrally closed local rings. Applied only to the Chow model or its generic-point normalization; no constructibility or alteration step of the unit is replaced."
+   },
+   {
+    "node": "lem-sc-normalization-exists",
+    "why": "Generic scheme-theoretic tool: Existence and finiteness of the normalization. Applied only to the Chow model or its generic-point normalization; no constructibility or alteration step of the unit is replaced."
+   },
+   {
+    "node": "lem-fin-finite-over-projective",
+    "why": "Generic scheme-theoretic tool: Finite covers of projective schemes are projective. Applied only to the Chow model or its generic-point normalization; no constructibility or alteration step of the unit is replaced."
+   },
+   {
+    "node": "lem-sc-integral-function-field-affine-fraction",
+    "why": "Generic scheme-theoretic tool: Function field of an integral scheme is the fraction field of an affine open. Applied only to the Chow model or its generic-point normalization; no constructibility or alteration step of the unit is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-relative-normalization",
+  "lem-weil-pbc-normalization-normal-stalks",
+  "lem-sc-normalization-exists",
+  "lem-fin-finite-over-projective",
+  "lem-sc-integral-function-field-affine-fraction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-9ec21ed4f",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-9ec21ed4f (reviewer sub-agent of L); spot-checked: I read the item and all 7 steps in full. The delivery adds no new nodes, the statement is unchanged, and there is no repair note, so this is a first split. Sources: ILO X 2.3 Step 1 (PDF p.156) is the finite-normalization reduction. The Stacks tags 0200, 0201, 0BXR, 035Q, 0GK4, 01W3 and 01RO all exist in tags/tags. No SGA is cited. Step checks: S1 is equivariant Chow with the trivial group (the node does not require a faithful action; it gives T integral, finite type and H-projective over k, with q proper, surjective and an isomorphism over a dense open). S2: Y is proper by composition, Noetherian and quasi-separated, and the generic-point map a is qcqs by permanence (1). S3: on a nonempty affine U, normalization in K is the same as relative normalization in a (both are the integral closure of O(U) in K). Clause (iv) gives N integral, the normal-stalks node applies to Spec K, and normalization-exists gives finite, surjective and birational, with N proper. S4: the elementary computation B_s=R_s with s the product of the denominators is correct. S5: finite-over-projective has an explicit affine-base clause, and Y is H-projective and quasi-compact, so N embeds in P^m_e. S6 (birational on dense opens) and S7 (generic stalk maps compose) are correct. Small cases tested: S=Spec e, a nodal cubic (N=P^1) and an imperfect field e. Duplicates: lem-sfb-equivariant-normal-projective-model assumes X normal and T projective, so it is not a generalization of the item. The generic tool_uses are accepted. Batch-5: the flagged citation reaches lem-trf-reduced-scheme-image, which is Stacks 056B (scheme-theoretic image of a reduced source). That is generic scheme theory outside both assumptions and not a step of the trace-formula or Poincaré-duality proofs, so it is not a fault."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalProjectiveBirationalModel",
+  "declaration": "AlgebraicGeometry.exists_normal_projective_birational_model",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalProjectiveBirationalModel.lean",
+  "statement": "theorem exists_normal_projective_birational_model (e : Type u) [Field e] (S : Scheme.{u}) [S.Over (Spec (.of e))] [IsIntegral S] [IsProper (S ↘ Spec (.of e))] : ∃ (Y : Scheme.{u}) (_ : IsIntegral Y) (c : Y ⟶ S), LocallyOfFiniteType (c ≫ S ↘ Spec (.of e)) ∧ QuasiCompact (c ≫ S ↘ Spec (.of e)) ∧ IsProper c ∧ Surjective c ∧ (∃ V : S.Opens, (V : Set S).Nonempty ∧ IsIso (c ∣_ V)) ∧ (∃ (n : ℕ) (i : Y ⟶ ℙ(ULift.{u} (Fin (n + 1)); Spec (.of e))), IsClosedImmersion i ∧ i ≫ ℙ(ULift.{u} (Fin (n + 1)); Spec (.of e)) ↘ Spec (.of e) = c ≫ S ↘ Spec (.of e)) ∧ IsFinite Y.fromNormalization ∧ Surjective Y.fromNormalization ∧ (∃ U : Y.Opens, Dense (U : Set Y) ∧ Dense ((Y.fromNormalization ⁻¹ᵁ U) : Set Y.normalization) ∧ IsIso (Y.fromNormalization ∣_ U)) ∧ IsIntegral Y.normalization ∧ (∀ x : Y.normalization, IsDomain (Y.normalization.presheaf.stalk x) ∧ IsIntegrallyClosed (Y.normalization.presheaf.stalk x)) ∧ (∃ (m : ℕ) (j : Y.normalization ⟶ ℙ(ULift.{u} (Fin (m + 1)); Spec (.of e))), IsClosedImmersion j ∧ j ≫ ℙ(ULift.{u} (Fin (m + 1)); Spec (.of e)) ↘ Spec (.of e) = Y.fromNormalization ≫ c ≫ S ↘ Spec (.of e)) ∧ IsHProjective (c ≫ S ↘ Spec (.of e)) ∧ IsHProjective (Y.fromNormalization ≫ c ≫ S ↘ Spec (.of e)) ∧ IsProper (c ≫ S ↘ Spec (.of e)) ∧ IsProper (Y.fromNormalization ≫ c ≫ S ↘ Spec (.of e)) ∧ LocallyOfFiniteType (Y.fromNormalization ≫ c ≫ S ↘ Spec (.of e)) ∧ QuasiCompact (Y.fromNormalization ≫ c ≫ S ↘ Spec (.of e)) ∧ IsProper (Y.fromNormalization ≫ c) ∧ Surjective (Y.fromNormalization ≫ c) ∧ (∃ (A : Y.normalization.Opens) (W : S.Opens) (a : A.toScheme ≅ W.toScheme), Dense (A : Set Y.normalization) ∧ Dense (W : Set S) ∧ a.hom ≫ W.ι = A.ι ≫ Y.fromNormalization ≫ c) ∧ c (genericPoint Y) = genericPoint S ∧ IsIso (c.stalkMap (genericPoint Y)) ∧ Y.fromNormalization (genericPoint Y.normalization) = genericPoint Y ∧ IsIso (Y.fromNormalization.stalkMap (genericPoint Y.normalization)) ∧ (Y.fromNormalization ≫ c) (genericPoint Y.normalization) = genericPoint S ∧ IsIso ((Y.fromNormalization ≫ c).stalkMap (genericPoint Y.normalization))",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Canonical normalization and all structural maps are the recorded upstream constructions. Birationality is expressed by dense open isomorphisms, and the three function-field isomorphisms by the actual generic-stalk maps, together with their generic-point image equalities. IsIntegral includes nonemptiness; properness includes finite type."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9a24ae022",
+  "group": "NN",
+  "result": "fix",
+  "note": "Lean exact against node: hyps Field e, S over Spec e, IsIntegral S, IsProper structure map (no stronger assumptions); conclusions Y integral finite-type, c proper surjective, nonempty V with IsIso (c ∣_ V), closed immersion into ℙ(ULift(Fin(n+1));Spec e) over e; canonical Y.normalization/fromNormalization (upstream def-sc-normalization) finite, surjective, dense-open iso; N integral, stalks IsDomain ∧ IsIntegrallyClosed, closed immersion over e; both IsHProjective/IsProper/finite type; composite proper, surjective, dense-open birational with commuting iso; generic point to generic point with iso stalkMaps for c, n_Y, composite. lean.statement verbatim; only the lean field changes vs live; docstrings carry source/blueprint/7 steps; sorry only; no duplicate in live lean. Sole fault H11: 'Second reading by NN' is an author self-check -> fixes/lem-sfb-normal-projective-birational-model.report.md (worker report verbatim + independent clause-by-clause second reading). No Lean changed, no compile."
+ }
+}

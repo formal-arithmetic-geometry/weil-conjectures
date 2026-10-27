@@ -1,0 +1,253 @@
+{
+ "id": "lem-sfb-space-eventually-smooth",
+ "kind": "statement",
+ "title": "Eventual smoothness of a finitely presented algebraic space",
+ "statement": "Work with schemes [def-pc-scheme] and algebraic spaces [def-trf-algebraic-space]. Smoothness and local finite presentation are tested on etale scheme charts [def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation]. Finite presentation means local finite presentation, quasi-compactness and quasi-separatedness; quasi-compactness means that affine scheme tests have quasi-compact inverse images, and quasi-separatedness means that the diagonal is quasi-compact. Separatedness means that the representable diagonal is a closed immersion on every scheme test. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Let $I$ be a small nonempty directed set [def-weil-size-convention], $(T_i)_{i\\in I}$ an inverse system of affine schemes with affine transition maps and limit $T=\\varprojlim_iT_i$. Fix $i_0\\in I$ and a finitely presented algebraic space $f_{i_0}:X_{i_0}\\to T_{i_0}$. Put $X_i=X_{i_0}\\times_{T_{i_0}}T_i$ for $i\\geq i_0$ and $X=X_{i_0}\\times_{T_{i_0}}T$. If $X\\to T$ is smooth, there is $j\\geq i_0$ such that $X_i\\to T_i$ is smooth for every $i\\geq j$. No surjectivity of transition maps or Noetherianity assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 0CN2 (lemma-descend-smooth), in Situation 084W (situation-descent-property), specialized to a finitely presented space over affine scheme bases. Persistence: spaces-morphisms.tex Tag 03ZE (lemma-base-change-smooth)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-size-convention",
+  "def-sfb-proper-curve-moduli",
+  "def-sfb-space-etale-presentation-property"
+ ],
+ "proof": [
+  {
+   "text": "The affine test $T_{i_0}\\to T_{i_0}$ in quasi-compactness of $f_{i_0}$ shows that $X_{i_0}$ is quasi-compact. Choose a representable surjective etale atlas $a_0:U_0\\to X_{i_0}$ with $U_0$ affine. Apply the presentation criterion to $f_{i_0}$, with target chart the identity of $T_{i_0}$ and property local finite presentation. This is an etale-local scheme property by the cited scheme-locality theorem. Thus $h_0=f_{i_0}a_0:U_0\\to T_{i_0}$ is locally of finite presentation.",
+   "uses": [
+    "lem-trf-space-qc-finite-affine-atlas-refinement",
+    "lem-sfb-space-etale-presentation-property-criterion",
+    "lem-sfb-scheme-etale-source-target-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0CN2 (lemma-descend-smooth), choice of affine presentations; spaces-properties.tex Tag 03H6 (lemma-quasi-compact-affine-cover)"
+   }
+  },
+  {
+   "text": "For $i\\geq i_0$ put $U_i=U_0\\times_{T_{i_0}}T_i$, and put $U=U_0\\times_{T_{i_0}}T$. The universal property of the sheaf fibre product identifies these with $U_0\\times_{X_{i_0}}X_i$ and $U_0\\times_{X_{i_0}}X$. Base change of an etale cover therefore gives representable surjective etale maps $a_i:U_i\\to X_i$ and $a:U\\to X$. These sources are schemes because they are base changes of the representable atlas. Apply the presentation criterion for smoothness to $X\\to T$, with target chart the identity of $T$; the scheme-locality theorem verifies its hypothesis on smoothness. It follows that the composite $h:U\\to T$ is smooth.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-etale-presentation-property-criterion",
+    "lem-sfb-scheme-etale-source-target-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0CN2 (lemma-descend-smooth), base-changed diagrams and smoothness on presentations; spaces-morphisms.tex Tag 03MJ (lemma-local-source-target)"
+   }
+  },
+  {
+   "text": "Restrict the base diagram to the nonempty directed tail $J=\\{i\\in I:i\\geq i_0\\}$. Its limit is still $T$: a cone on the tail extends to $T_k$ by choosing $l\\geq k,i_0$ and composing its $l$-component with $T_l\\to T_k$; two choices agree by passing to a common upper bound. This also proves uniqueness and the limiting universal property. Apply affine-diagram smoothness descent with $D_i=T_i$ for $i\\in J$, $Q=T_{i_0}$, $P=U_0$, structural maps $T_i\\to T_{i_0}$ and $T\\to T_{i_0}$, and $p=h_0$. Both $P,Q$ and every $D_i$ are affine; $h_0$ is locally of finite presentation by step 1, and its limit pullback is the smooth map $h$ of step 2. Hence there is $j\\geq i_0$ for which $h_j:U_j\\to T_j$ is smooth.",
+   "uses": [
+    "lem-sbc-affine-diagram-smooth-stage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0CN2 (lemma-descend-smooth), final reduction to limits.tex Tag 0C0C (lemma-descend-smooth), affine case"
+   }
+  },
+  {
+   "text": "Fix any $i\\geq j$. The universal property of fibre products gives $U_i\\simeq U_j\\times_{T_j}T_i$, compatibly with projections to $T_i$: both sides represent pairs consisting of a point of $U_0$ and a point of $T_i$ with the same image in $T_{i_0}$. Thus $h_i$ is the base change of $h_j$, and is smooth by scheme smooth base change. The diagram with source chart $a_i:U_i\\to X_i$ and target chart $\\operatorname{id}_{T_i}$ is a presentation with surjective source chart by step 2. The presentation criterion for smoothness, whose etale-locality hypothesis is verified by the scheme-locality theorem, now gives smoothness of $X_i\\to T_i$. This holds for every $i\\geq j$.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-sfb-space-etale-presentation-property-criterion",
+    "lem-sfb-scheme-etale-source-target-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0CN2 (lemma-descend-smooth), smoothness detected by the presentation; morphisms.tex Tag 01VB (lemma-base-change-smooth) for persistence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-qc-finite-affine-atlas-refinement",
+  "lem-sfb-space-etale-presentation-property-criterion",
+  "lem-sfb-scheme-etale-source-target-properties",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sbc-affine-diagram-smooth-stage",
+  "lem-pc-proper-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 0CN2 (lemma-descend-smooth), specialized to affine scheme bases and expanded using the affine case of Tag 0C0C; persistence by Tag 01VB"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finitely presented morphism of algebraic spaces smooth after an inverse limit of affine bases is smooth at some finite stage",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.IsSmooth fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth\", \"doc\": \"A morphism of schemes is smooth if and only if it is locally standard smooth, meaning that for every point in the domain, there exists an open neighborhood where the morphism is isomorphic to a standa\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsSmoothOfRelativeDimension n f],\\n  AlgebraicGeometry.IsSmooth f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is smooth of relative dimension $ n $, then $ f $ is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; smooth ring models, scheme-only geometric integrality and relative-dimension statements do not state this algebraic-space assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smoothness of algebraic spaces descends along filtered colimits of rings",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Smooth.of_isLocalization_Away\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(r : R) [IsLocalization.Away r A] : Smooth R A\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at the submonoid generated by all powers of an element $ r $, then $ A $ is a smooth $ R $-algebra.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"Algebra.Smooth.of_equiv\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[Smooth R A] (e : A ≃ₐ[R] B) : Smooth R B\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $ and there exists an $ R $-algebra isomorphism $ e : A \\\\simeq_R B $, then $ B $ is also smooth over $ R $.\"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib.RingTheory.RingHom.StandardSmooth\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, this proposition asserts that $ S $ is a standard smooth algebra over $ R $ of relative dimension $ n $, where the a\"}\n  {\"name\": \"CommRingCat.FilteredColimits.colimitCoconeIsColimit\", \"module\": \"Mathlib.Algebra.Category.Ring.FilteredColimits\", \"type\": \": IsColimit <| colimitCocone.{v, u} F\", \"doc\": \"The forgetful functor from the category of commutative rings to the category of rings reflects colimits for filtered diagrams. Specifically, if a diagram in the category of commutative rings has a col\"}\n  {\"name\": \"Algebra.Smooth.exists_finiteType\", \"module\": \"Mathlib.RingTheory.Smooth.NoetherianDescent\", \"type\": \"[Smooth A B] :\\n  ∃ (A₀ : Type u) (B₀ : Type u) (_ : CommRing A₀) (_ : CommRing B₀) (_ : Algebra R A₀) (_ : Algebra A₀ A) (_ :\\n    Algebra A₀ B₀),\\n    Function.Injective (algebraMap A₀ A) ∧ FiniteType R A₀ ∧ Smooth A₀ B₀ ∧ Nonempty (B ≃ₐ[A] A ⊗[A₀] B₀)\", \"doc\": \"For any smooth algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-algebra $ A_0 $, an injective $ R $-algebra homomorphism $ A_0 \\\\to A $, and a smooth $ A_0 $-algebra\"}\n  {\"name\": \"CommRingCat.FilteredColimits.colimit\", \"module\": \"Mathlib.Algebra.Category.Ring.FilteredColimits\", \"type\": \": CommRingCat.{max v u}\", \"doc\": \"The filtered colimit of a diagram of commutative rings in the category of commutative rings, constructed by first forming the colimit in the category of additive groups via the forgetful functor and t\"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib.RingTheory.Smooth.Flat\", \"type\": \"[Smooth R A] : Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; smooth ring models, scheme-only geometric integrality and relative-dimension statements do not state this algebraic-space assertion or specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSmooth\", \"colimit\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; smooth ring models, scheme-only geometric integrality and relative-dimension statements do not state this algebraic-space assertion or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Ss]mooth.*(colimit|limit)|descend.*[Ss]mooth",
+   "results": "[grep] OK 7 hit(s)\n  {\"file\": \"Mathlib/Analysis/Normed/Unbundled/SmoothingSeminorm.lean\", \"line\": \"31\", \"text\": \"* `tendsto_smoothingFun_of_map_one_le_one` : if `μ 1 ≤ 1`, then `smoothingFun μ x` is the limit\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Unbundled/SmoothingSeminorm.lean\", \"line\": \"103\", \"text\": \"/-- If `μ x = 0`, then `smoothingFun μ x` is the limit of `smoothingSeminormSeq μ x`. -/\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Unbundled/SmoothingSeminorm.lean\", \"line\": \"118\", \"text\": \"/-- If `μ 1 ≤ 1` and `μ x ≠ 0`, then `smoothingFun μ x` is the limit of\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Unbundled/SmoothingSeminorm.lean\", \"line\": \"241\", \"text\": \"/-- If `μ 1 ≤ 1`, then `smoothingFun μ x` is the limit of `smoothingSeminormSeq μ x`\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"line\": \"41\", \"text\": \"instance : DescendsAlong @Smooth (@Surjective ⊓ @Flat ⊓ @QuasiCompact) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"line\": \"42\", \"text\": \"  HasRingHomProperty.descendsAlong_flat RingHom.Smooth.codescendsAlong_faithfullyFlat\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Descent.lean\", \"line\": \"95\", \"text\": \"lemma Smooth.codescendsAlong_faithfullyFlat : CodescendsAlong Smooth FaithfullyFlat := by\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; smooth ring models, scheme-only geometric integrality and relative-dimension statements do not state this algebraic-space assertion or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Ss]mooth.*(colimit|inverseLimit)|descend.*[Ss]mooth",
+   "results": "2 hits; Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme smoothness, chart, base-change, or ring definitions do not give eventual smoothness for algebraic spaces; zero-hit queries returned no candidates"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smoothness of a finitely presented algebraic space over a filtered inverse limit descends to a finite stage",
+   "results": "8 hits; AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, Algebra.Smooth.mk, Algebra.Smooth.finitePresentation, AlgebraicGeometry.IsSmooth.casesOn, RingHom.smooth_def, Algebra.IsStandardSmooth.finitePresentation, Algebra.Smooth.formallySmooth, RingHom.Smooth",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme smoothness, chart, base-change, or ring definitions do not give eventual smoothness for algebraic spaces; zero-hit queries returned no candidates"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSmooth\", \"limit\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme smoothness, chart, base-change, or ring definitions do not give eventual smoothness for algebraic spaces; zero-hit queries returned no candidates"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely presented algebraic space over an inverse limit of affine schemes is smooth after base change to some finite stage if its limit pullback is smooth",
+   "results": "8 hits; AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmoothOfRelativeDimension, Algebra.smooth_iff, RingHom.Smooth.isStableUnderBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme smoothness, chart, base-change, or ring definitions do not give eventual smoothness for algebraic spaces; zero-hit queries returned no candidates"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Smooth\", \"colimit\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme smoothness, chart, base-change, or ring definitions do not give eventual smoothness for algebraic spaces; zero-hit queries returned no candidates"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smoothness descends to a finite stage for a quasi-compact locally finitely presented algebraic space over a directed affine base limit",
+   "results": "8 hits; AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme smoothness, chart, base-change, or ring definitions do not give eventual smoothness for algebraic spaces; zero-hit queries returned no candidates"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-group-open-arithmetic-model",
+  "date": "2026-10-23",
+  "group": "Q30"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Etale-local schematic nodal Picard identity space. Auxiliary input: Finite translates of a fibrewise nonempty open in a smooth group space. In Deligne 4.6: Arithmetic models of a smooth group with a fibrewise nonempty open.; arithmetic approximation: smoothness must hold at a finite stage, not only after pullback",
+   "via": [
+    "lem-sfb-group-open-arithmetic-model",
+    "lem-sfb-group-finite-translate-cover",
+    "lem-sfb-nodal-picard-etale-schematic",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-eventually-smooth",
+  "worker": "stage1",
+  "summary": "Q19 checked Stacks 0CN2, 03H6, 03MJ, and the affine 0C0C input, searched current Lean and Mathlib, and split through existing nodes only. A fixed affine atlas reduces to affine-model descent; chart descent and scheme base change prove all later stages. Statement and prior searches retained.",
+  "blueprint": "Supporting arithmetic approximation input below det-thm-sf-ctf-stability-direct-images proof (3), as recorded in blueprint.from.place; the latest direct-image proof gives the compactification route. Steps 1-4 supply only eventual smoothness of the existing model, without changing that route. Whole-blueprint searches for 0CN2, smooth stage, eventual smoothness, and affine etale found no same statement.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-qc-finite-affine-atlas-refinement",
+    "why": "Generic affine etale atlas existence for a quasi-compact algebraic space; the arithmetic approximation needs one fixed affine chart, and this unit has no replacement for the atlas theorem."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence of space fibre products and preservation of etale covers, used only to base change the fixed atlas."
+   },
+   {
+    "node": "lem-sbc-affine-diagram-smooth-stage",
+    "why": "Generic smoothness descent for a fixed affine scheme model; exactly the scheme input in the source proof of Tag 0CN2, not a substitute for the unit route."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Only clause (2), smooth scheme base change, is used to keep the chart smooth at every later index."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-qc-finite-affine-atlas-refinement",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sbc-affine-diagram-smooth-stage",
+  "lem-pc-proper-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-d0917f527",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-d0917f527 (reviewer sub-agent of L); spot-checked: I read the item in full; there are no new nodes. I checked it against Stacks spaces-limits.tex 0CN2 (lemma-descend-smooth) in Situation 084W, and the affine input limits.tex 0C0C. The statement is unchanged from live, which is still unsplit, and is the specialization of 0CN2 to Y_0=B_0=T_{i0} affine; the extra 'for every i>=j' comes from base change. Step 1: by the last sentence of the atlas node, the quasi-compact X_{i0} has an affine etale atlas U_0. By presentation-criterion clause (1), with lfp in the scheme-locality list, h_0 is lfp. Step 2: fibre-product pasting gives U_i = U_0 x_{X_{i0}} X_i. The base change of the cover is a jointly surjective etale cover by lem-trf-space-fibre-products-etale-covers. The criterion then gives h: U->T smooth. Step 3: the cofinal-tail argument is written out. lem-sbc-affine-diagram-smooth-stage is applied with every hypothesis met literally (P=U_0, Q=T_{i0}, D=T_J, p=h_0), giving j. Step 4: U_i = U_j x_{T_j} T_i, smooth by lem-pc-proper-base-change (2). Criterion (2) applied to the surjective chart a_i gives X_i->T_i smooth. Edge cases checked: empty X (Spec 0 atlas), a singleton index set, and non-surjective transitions. Duplicates: only scheme-level relatives exist (lem-weil-pbc-descend-smooth-qcqs, sbc noetherian-approximation nodes), with no space version. The four tool_uses are accepted as generic black boxes (03H6, 02X2/041F, 0C0C, smooth base change). Batch-5: the atlas node (03H6 foundations), def-trf-algebraic-space (a definition) and lem-trf-smooth-composition (01VA) are generic and outside the trace-formula/Poincare assumptions, so all three are accepted. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceEventuallySmooth",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.eventually_smooth_of_affine_isLimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceEventuallySmooth.lean",
+  "statement": "theorem eventually_smooth_of_affine_isLimit {S : Scheme.{u}} {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Over S) (hD : ∀ i : Iᵒᵖ, IsAffine (D.obj i).left) (c : Cone D) (hc : IsLimit ((Over.forget S).mapCone c)) (i₀ : I) (X₀ : AlgebraicSpace S) (f₀ : X₀.obj.obj ⟶ yoneda.obj (D.obj (op i₀))) (hlfp : MapToSchemeIsLocally (@LocallyOfFinitePresentation) X₀ (D.obj (op i₀)) f₀) (hqc : MapIsQuasiCompact f₀) (hqs : MapIsQuasiCompact (pullback.diagonal f₀)) (hf : HasEtalePresentationProperty (@Smooth) (Limits.pullback.snd f₀ (yoneda.map (c.π.app (op i₀))))) : ∃ (j : I) (hj : i₀ ≤ j), ∀ (i : I) (hi : j ≤ i), HasEtalePresentationProperty (@Smooth) (Limits.pullback.snd f₀ (yoneda.map (D.map (homOfLE (hj.trans hi)).op)))",
+  "branch": "newtargets-dag",
+  "by": "Q14",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The base diagram is in Over S, with its cone limiting on underlying schemes. MapToSchemeIsLocally and MapIsQuasiCompact give the existing local finite presentation, quasi-compactness and diagonal quasi-compactness notions. HasEtalePresentationProperty Smooth expresses smoothness of the canonical presheaf pullback projections, equivalently the sheaf fibre product projections. All bases are affine, so affine transition maps are automatic."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0f0579948",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Re-delivery of c222c2c66daf (RETURN H2). Repaired as instructed: in the item's stmt_deps the theorem node lem-sfb-space-etale-presentation-property-criterion is replaced by the new definition node def-sfb-space-etale-presentation-property; the criterion stays in proof_deps. The new node has kind definition, source Stacks 03MJ condition (2) and definition-P, stmt_deps def-pc-scheme, def-trf-algebraic-space and def-weil-etale-morphism, and a TeX statement matching the EtalePresentation structure and the HasEtalePresentationProperty def clause by clause. Its lean record is existing:true on Sheaf.AlgebraicGeometry.SpaceEtalePresentationPropertyCriterion with a verbatim statement field; nothing is moved or copied, and no other definition node in live owns these names. The Lean file is byte-identical to c222 (cmp). The item's mathematics was re-checked: full finite presentation (hlfp, hqc, hqs), affine stages, a cone limiting on underlying schemes, arrow direction Ti->Ti0, the same smoothness predicate in hypothesis and conclusion, and the conclusion exists j>=i0, forall i>=j. Edge cases checked: empty space, empty base and singleton index allowed; empty index set excluded as in the source. No hollow definition, sorry only, docstrings present, report sections present. No compile: no file was changed, and the Lean file is identical to the head the worker compiled."
+ }
+}

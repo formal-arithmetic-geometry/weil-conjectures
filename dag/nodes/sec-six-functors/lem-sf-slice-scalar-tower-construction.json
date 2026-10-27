@@ -1,0 +1,171 @@
+{
+ "id": "lem-sf-slice-scalar-tower-construction",
+ "kind": "statement",
+ "title": "Construction of the scalar-extension tower",
+ "statement": "Let $\\mathcal C$ have topology $J$, and assume module sheafification in a fixed coefficient universe with its locally bijective characterization. Let $O$ be a sheaf of commutative rings, let $B:\\mathbb N^{\\mathrm{op}}\\to\\operatorname{Sh}(J,\\mathrm{CommRing})$, and let $\\alpha:\\operatorname{const}O\\to B$. The SliceScalarTowerPresentation $O,B,\\alpha$ of [def-sf-semilinear-slice-scalar-data] exists. Thus the actual scalar extensions $B_n\\otimes_O H$ and the actual maps $\\mathrm{id}\\otimes f$ form an additive functor to strict systems, with transitions $b\\otimes x\\mapsto q(b)\\otimes x$ and units $x\\mapsto1\\otimes x$, including their compatibility. No flatness or surjectivity assumption is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI (lemma-extension-by-zero), 03CY (lemma-sheafification-presheaf-modules), 03EK (tensor product of module sheaves) and 0E8I (lemma-j-shriek-and-tensor); the coefficient-generator refinement in lem-sf-semilinear-slice-scalar-generators."
+ },
+ "stmt_deps": [
+  "def-sf-semilinear-slice-scalar-data"
+ ],
+ "proof": [
+  {
+   "text": "Choose the normalized scalar model for each alpha_n. Transpose its level-m unit through the level-n scalar adjunction and the identity-on-sections restriction compositor. The resulting transition sends b tensor x to q(b) tensor x. Identify the normalized model tensor with the actual sheafification unit pure tensor by linearity and cancellation of the prescribed object equality.",
+   "uses": [
+    "lem-pur-system-scalar-model",
+    "lem-pur-system-scalar-coherence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The generator extensionality theorem proves transition identity, composition and naturality from their unit-tensor formulas. Form the strict system and the functor with componentwise scalar-extension maps. Additivity is componentwise. The normalized units and preservation of one give the two unit formulas.",
+   "uses": [
+    "lem-pur-system-scalar-generators",
+    "lem-pur-system-scalar-coherence",
+    "def-pur-system-level-left-extension-basic"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-system-scalar-model",
+  "lem-pur-system-scalar-coherence",
+  "lem-pur-system-scalar-generators",
+  "def-pur-system-level-left-extension-basic"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "The specified construction step of lem-sf-semilinear-slice-scalar-generators; original generator calculations, with the cited Stacks universal properties."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheaf extension of scalars functor along a diagram of coefficient rings with compatible units",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "No generator-normalized slice comparison or sheaf scalar tower.",
+    "top": [
+     "ModuleCat.ExtendScalars.obj'",
+     "ModuleCat.extendScalars",
+     "CommRingCat.moduleCatExtendScalarsPseudofunctor",
+     "ModuleCat.coextendScalars",
+     "SheafOfModules.restrictScalars",
+     "ModuleCat.CoextendScalars.obj'",
+     "ModuleCat.extendRestrictScalarsAdj",
+     "PresheafOfModules.restrictScalars"
+    ],
+    "sub": ""
+   },
+   "date": "2026-10-27",
+   "verdict": "No exact match; use the existing project scalar models."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero of sheaves of modules commutes with restriction of scalars for a morphism of sheaves of rings",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "No generator-normalized slice comparison or sheaf scalar tower.",
+    "top": [
+     "SheafOfModules.map_ιFree_mapFree_hom",
+     "SheafOfModules.restrictScalars_obj_val",
+     "SheafOfModules.map_ιFree_mapFree_hom_assoc",
+     "SheafOfModules.restrictScalars",
+     "SheafOfModules.restrictScalars_map_val",
+     "SheafOfModules.instAdditiveRestrictScalars",
+     "ModuleCat.Tilde.res_apply",
+     "ModuleCat.Tilde.toOpen_res"
+    ],
+    "sub": ""
+   },
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafification.*restrictScalars|restrictScalars.*sheafification",
+   "results": {
+    "ok": true,
+    "n_hits": 2,
+    "note": "No generator-normalized slice comparison or sheaf scalar tower.",
+    "top": [
+     "Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean:124",
+     "Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean:126"
+    ],
+    "sub": ""
+   },
+   "date": "2026-10-27",
+   "verdict": "No duplicate; reuse the named declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SemilinearSliceScalarGenerators",
+  "date": "2026-10-27",
+  "group": "A5"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Proof sentence “The maps used here are tensor reassociation, evaluation, and adjunction units and counits”; open coefficient factor: original step 5 of lem-sf-open-semilinear-tensor-model, coefficient linearity, all quotient and scalar-unit squares before localization; scalar-extension tower and generator comparison before localization",
+   "via": [
+    "lem-sf-semilinear-slice-scalar-generators",
+    "lem-sf-open-semilinear-tensor-model",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SliceScalarTowerConstruction",
+  "file": "lean/Sheaf/CategoryTheory/SliceScalarTowerConstruction.lean",
+  "declaration": "SheafOfModules.exists_sliceScalarTowerPresentation",
+  "statement": "theorem exists_sliceScalarTowerPresentation\n    (O : Sheaf J CommRingCat.{max c v r})\n    (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{max c v r})\n    (α : (Functor.const ℕᵒᵖ).obj O ⟶ B) :\n    Nonempty (SliceScalarTowerPresentation.{c, v, r} O B α)",
+  "branch": "sheaf-dag",
+  "by": "A5",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-bd4d0",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261026T222543-L-667293",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-bd4d0",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261026T222543-L-667293",
+  "kind": "interface",
+  "note": "independent cc review: item exists_semilinearSliceScalarGenerators proved from two fully proved constructions (tower, system extension) + one true sorry hole exists_sliceScalarLevelComparison; moved data decls verbatim vs clone and the change record; node proof_deps vs owners of the declarations used; #print axioms on scratch compile"
+ }
+}

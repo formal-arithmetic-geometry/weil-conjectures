@@ -1,0 +1,138 @@
+{
+ "id": "lem-sp-tower-exchange-realization",
+ "kind": "statement",
+ "title": "Tower exchange invertibility from normalized comparison words",
+ "statement": "Fix ell, E, Base b, Operations o, OpenExchange x, ComparisonLevels levels and StrictFiniteCoordinates coordinates. Suppose StrictWordComparisons and StrictFiniteExchangeComparisons hold. For every cartesian square with separated finite-type quasi-compact f, any compactification c and bounded-below tower C with retained Origin witnesses at every n, the component of exchange on C is invertible. This is only the exchange field of Laws, with no projection or localization assertion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "paragraph (2b)"
+ },
+ "stmt_deps": [
+  "def-sp-tower-shriek-data",
+  "def-sp-strict-compactification-comparison-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "At every n apply finite compact-support base change to the etale antecedent of the retained origin. The witness transport identity and StrictFiniteExchangeComparisons identify its realization with the finite exchange after invertible comparisons; cancel them and use naturality along Origin.realization.",
+   "uses": [
+    "thm-cbc-finite-level-proetale",
+    "lem-pur-co-smooth-exchange-transport",
+    "def-sp-strict-compactification-comparison-interfaces"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "StrictWordComparisons identifies evaluation of tower exchange with the invertible finite exchange word, up to invertible comparisons. Cancel those comparisons and use joint conservativity from b.calculus to conclude tower invertibility.",
+   "uses": [
+    "def-coef-semilinear-derived-calculus",
+    "def-sp-strict-compactification-comparison-interfaces"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "thm-cbc-finite-level-proetale",
+  "lem-pur-co-smooth-exchange-transport",
+  "def-sp-strict-compactification-comparison-interfaces",
+  "def-coef-semilinear-derived-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "paragraph (2b); finite exchange transport and naturality"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "exact evaluation jointly reflects isomorphisms on unbounded derived categories of sequence site modules",
+   "results": "Eight generic results about exact functors, Ext, bounded-below representatives and condensed abelian categories. None supplies the normalized finite projection or the strict open-closed localization.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.ReflectsIsomorphisms",
+   "results": "Generic reflection and functor isomorphism lemmas; no coefficient tower geometric construction.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*[Rr]eflect|isIso_iff.*homology",
+   "results": "Only ModuleCat.Topology.Homology hit. Local source search found Data.detects, strict comparison realization, and semilinearOpenClosedComplexSequence, which are reused.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "open closed decomposition ringed site distinguished localization triangle of module sheaf complexes",
+   "results": "Eight scheme ring localization and GammaSpec results; no strict system localization triangle.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "projection formula compactification scheme morphism finite coefficient constructible complexes finite Tor amplitude",
+   "results": "Eight scheme affine limit and Spec factorization results; no finite derived compactification formula. The existing source-library formula and normalized strict comparison dependency are reused.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "triangleOfSES_distinguished|projection.*[Ff]ormula",
+   "results": "Mathlib triangleOfSES_distinguished found at Algebra/Homology/DerivedCategory/ShortExact.lean:92 and generic SES applications; projection formula hits concern Witt vectors. The SES triangle is reused, but it does not identify the normalized strict open/closed functors and maps.",
+   "date": "2026-10-25",
+   "verdict": "generic tool only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothPurityTowerShriekLevels",
+  "date": "2026-10-25",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-shriek-levels",
+   "place": "Operations proof (2b): finite compact-support exchange invertibility with retained origins, before tower conservativity.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-tower-bound",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SmoothPurityTowerExchange",
+  "file": "lean/Sheaf/Paper/SmoothPurityTowerExchange.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerShriek.tower_exchange_laws",
+  "statement": "theorem tower_exchange_laws (b : Base l E) (o : Operations l E b) (x : OpenExchange l E b o) (levels : ComparisonLevels l E b o) (coordinates : StrictFiniteCoordinates l E b) (_words : StrictWordComparisons l E b o x levels) (_finite : StrictFiniteExchangeComparisons l E b o levels coordinates) : ∀ {X' X Y' Y : Scheme.{u}} {h : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (sq : IsPullback h f' f g) (c : Compactification f) (C : DerivedCategory.Plus (S l E X)), (∀ n : ℕ, Origin l E b X n C.obj) → IsIso ((exchange l E b o x sq c).app C.obj)",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-d3de1",
+  "group": "S2",
+  "result": "fix",
+  "landing": "20261025T203044-L-2779831",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-d3de1",
+  "group": "S2",
+  "result": "fix",
+  "landing": "20261025T203044-L-2779831",
+  "kind": "interface",
+  "note": "independent cc review: delivered SmoothPurityTowerShriekData vs live item lines 39-620 (only blueprint tags differ); residual statements vs Laws fields and ComparisonData interfaces; new/item nodes vs Lean; 6 ComparisonData importers + CoefficientTowerShriekCalculus compiled rc 0"
+ }
+}

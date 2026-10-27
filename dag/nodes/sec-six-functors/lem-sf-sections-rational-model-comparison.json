@@ -1,0 +1,162 @@
+{
+ "id": "lem-sf-sections-rational-model-comparison",
+ "kind": "statement",
+ "title": "Rationalization of a prescribed integral section model",
+ "statement": "Fix a finite-field datum [def-weil-finite-field-fiber], a prime ell distinct from its characteristic, a finite coefficient field E with valuation ring R [def-weil-l-adic-coefficient-extension], a separated finite-type scheme X over the geometric field, and a compactification c. Let K_R be integral constructible [def-weil-derived-complete-integral-detailed] and K_E rational constructible [def-weil-rationalization-karoubi], with localization of K_R isomorphic to K_E. For every small R-complex P, let I be Q of its coefficient/carrier lift and V=Q(E tensor_R P). If integral ordinary sections are isomorphic to I then rational ordinary sections of K_E are isomorphic to V. The identical implication holds for compact sections using c. Sections are precisely [def-weil-ordinary-compact-cohomology]; this theorem makes no perfectness or boundedness assertion and constructs no model.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-point-perfectness.proof.md",
+  "place": "Step 3: integral models and exact rationalization"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "def-weil-ordinary-compact-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Construct the natural tensor/carrier interchange using Mathlib TensorProduct.AlgebraTensorModule.uliftEquiv. Its pure-tensor formula commutes with every module morphism, hence gives a chain isomorphism on P. The exact-functor derived-category factorization isomorphisms identify the two derived tensor presentations.",
+   "uses": [
+    "def-weil-finite-coefficient-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-point-perfectness.proof.md",
+    "place": "Step 3: integral models and exact rationalization"
+   }
+  },
+  {
+   "text": "Use the rational point normalization and pointFibreRationalDownIso to identify the lifted rational fibre with exact scalar extension of the integral fibre. Apply the given presentation and the tensor interchange. Reflect the resulting lifted derived isomorphism: carrier lift is fully faithful on modules; transport each cohomology isomorphism back, lift the family using field-complex cohomology splitting, and use cohomology detection of derived isomorphisms.",
+   "uses": [
+    "def-weil-finite-coefficient-point",
+    "lem-trf-field-complex-cohomology-splitting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-point-perfectness.proof.md",
+    "place": "Step 3: integral models and exact rationalization"
+   }
+  },
+  {
+   "text": "For ordinary sections use the existing strict integral direct-image model. Its reconstruction compares the image functor with the ambient completed direct image. Map the completeness Roos triangle under that right-derived functor; preservation of products and the restriction comparison give the direct-image Roos triangle. Uniqueness identifies this vertex with integralImage. Extend the integral linear image functor to raw scalar localization, map the representative isomorphism, and conjugate with these comparisons.",
+   "uses": [
+    "lem-sf-strict-direct-image-integral-models",
+    "lem-sf-complete-direct-image-reduction",
+    "lem-sf-derived-complete-legacy-comparison",
+    "lem-pur-semilinear-scalar-localization",
+    "def-weil-derived-direct-image",
+    "def-weil-ordinary-compact-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-point-perfectness.proof.md",
+    "place": "Step 3: integral models and exact rationalization"
+   }
+  },
+  {
+   "text": "For compact sections map the representative isomorphism by sfCompactSupportFiniteFunctor. Its integral object normalization identifies its values with sfRationalCompactSupportValue. Apply the point-model comparison to the integral compact image, then compose the representative comparison. Pair the ordinary and compact implications.",
+   "uses": [
+    "def-weil-compact-support-finite-action",
+    "def-weil-integral-rational-qbar-compact-support",
+    "def-weil-ordinary-compact-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-point-perfectness.proof.md",
+    "place": "Step 3: integral models and exact rationalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-coefficient-point",
+  "lem-trf-field-complex-cohomology-splitting",
+  "lem-sf-strict-direct-image-integral-models",
+  "lem-sf-complete-direct-image-reduction",
+  "lem-sf-derived-complete-legacy-comparison",
+  "lem-pur-semilinear-scalar-localization",
+  "def-weil-derived-direct-image",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-compact-support-finite-action",
+  "def-weil-integral-rational-qbar-compact-support"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-point-perfectness.proof.md",
+  "place": "Step 3: explicit tensor/carrier comparison; strict integral image reconstruction and localized functoriality; compact finite-action normalization (H6, 2026-10-26)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Rational sections of constructible adic complexes are scalar extension of integral sections and compact support sections",
+   "results": "8 hits on affine modules, completion scalar towers and localization equivalences; none states the adic section-model comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "rationalization of integral sections and compactly supported cohomology commutes with scalar extension",
+   "results": "8 hits on group cohomology and Shapiro comparison; none states this result.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rational.*sections.*iso|rationalImage|pointRationalNormalization",
+   "results": "Read OrdinaryCompactCohomology, FiniteCoefficientPoint (pointRationalNormalization), SfRationalizationKaroubi and SfDerivedDirectImage. They supply constructions and comparison ingredients, but do not state the small prescribed model comparison.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FieldCohomologyPerfectDescent",
+  "date": "2026-10-25",
+  "group": "X2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pod-point-perfectness",
+   "place": "Proof Step 3, integral models and exact rationalization",
+   "via": [
+    "lem-sf-field-cohomology-perfect-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SectionsRationalModelComparison",
+  "file": "lean/Sheaf/Paper/SectionsRationalModelComparison.lean",
+  "declaration": "WeilConjectures.sections_rational_model_comparison",
+  "statement": "theorem sections_rational_model_comparison\n    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (X : Scheme.{u}) [X.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))]\n    [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))]\n    (c : Compactification (X ↘ Spec (.of D.k)))\n    (K_E : sfRationalConstructibleCategory l E X)\n    (K_R : sfIntegralConstructibleCategory l E X)\n    (hrep : Nonempty ((sfRationalConstructibleLocalization l E X).obj K_R ≅ K_E))\n    (P : CochainComplex (ModuleCat.{u} (Padic.coefficientExtensionIntegers l E)) ℤ) :\n    let I := DerivedCategory.Q.{u + 1}.obj\n      (((ModuleCat.uliftFunctor.{u + 1, u} (Padic.coefficientExtensionIntegers l E) ⋙\n        ModuleCat.restrictScalars.{u + 1, u + 1, u}\n          (ULift.ringEquiv : ULift.{u + 1, u} (Padic.coefficientExtensionIntegers l E) ≃+*\n            Padic.coefficientExtensionIntegers l E).toRingHom\n        ).mapHomologicalComplex (.up ℤ)).obj P)\n    let V := DerivedCategory.Q.{u}.obj\n      (((ModuleCat.extendScalars.{u, u, u}\n        (algebraMap (Padic.coefficientExtensionIntegers l E) E)).mapHomologicalComplex\n        (.up ℤ)).obj P)\n    (Nonempty ((integralOrdinarySections D l hl E X K_R).obj ≅ I) →\n      Nonempty ((rationalOrdinarySections D l hl E X K_E).obj ≅ V)) ∧\n    (Nonempty ((integralCompactSections D l hl E X c K_R).obj ≅ I) →\n      Nonempty ((rationalCompactSections D l hl E X c K_E).obj ≅ V))",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261025T164730-L-1066487",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261025T204703-L-2993829",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

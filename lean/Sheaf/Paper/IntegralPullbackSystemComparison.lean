@@ -7,8 +7,11 @@ module
 public import Sheaf.Paper.IntegralSystemReductionFullyFaithful
 public import Sheaf.Paper.DerivedPullbackTensorHom
 public import Sheaf.Paper.IntegralFinitePullbackComposition
-import Sheaf.CategoryTheory.StrictRoosComparison
-import Sheaf.Paper.NormalizedDVREffectivity
+import Sheaf.Paper.IntegralComparisonSequenceSystems
+import Sheaf.Paper.IntegralComparisonRealizationModels
+import Sheaf.Paper.NormalizedCompletedOperationModels
+import Sheaf.Paper.EffectiveQuotientModelDescent
+import Sheaf.Paper.IntegralPullbackCounitProjection
 
 /-! # Integral pullback and coherent finite-system reduction
 
@@ -58,10 +61,13 @@ def integralSystemPullbackReductionIso {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 set_option allowUnsafeReducibility true in
 attribute [local irreducible] integralSystemPullbackReductionIso
-  constructibleIntegralPullback integralDerivedPullback
-  integralSystemReduction integralSystemReductionEvaluation
-  finiteSystemDerivedPullback finiteSystemDerivedEvaluation
+  integralDerivedPullback integralSystemReductionEvaluation
   finiteSystemDerivedPullbackEvaluation
+
+set_option allowUnsafeReducibility true in
+attribute [local reducible] integralCoefficientSheaf integralCoefficientCommRingSheaf
+  coefficientFiniteDerivedExtension constructibleIntegralPullback integralSystemReduction
+  Functor.comp ObjectProperty.ι CategoryTheory.inducedFunctor
 
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
@@ -109,6 +115,76 @@ theorem integralPullbackSystemComparison :
           (integralSystemReductionEvaluation l E X n).hom.app
               ((constructibleIntegralPullback l E f).obj K) ≫
             (integralSystemPullbackReductionIso l E f K P e n).hom := by
-  sorry
+  classical
+  let S (X : Scheme.{u}) : CoefficientDerivedSystemCalculus l E X :=
+    (coefficientDerivedSystemEvaluationCalculus l E X).choose
+  have hr (X : Scheme.{u}) [∀ x : X, Invertible (l : X.residueField x)] :
+      Nonempty (IntegralComparisonRoosModel l E X) := by
+    obtain ⟨M, _⟩ := CompletedOperations.normalizedCompletedOperationModels l E
+      (fun _ : Unit ↦ X) (fun _ x ↦ isUnit_of_invertible (l : X.residueField x))
+    exact ⟨M.roos ()⟩
+  let ρ (X : Scheme.{u}) [∀ x : X, Invertible (l : X.residueField x)] :=
+    Classical.choice (hr X)
+  have hd {X Y : Scheme.{u}}
+      [∀ x : X, Invertible (l : X.residueField x)]
+      [∀ y : Y, Invertible (l : Y.residueField y)] (f : X ⟶ Y) :=
+    effectiveQuotientModelDescent l E E (AlgHom.id _ _) f
+      (fun x ↦ isUnit_of_invertible (l : X.residueField x))
+      (fun y ↦ isUnit_of_invertible (l : Y.residueField y))
+      (S Y) (S X) (S Y) (ρ X) (ρ Y)
+  let M {X Y : Scheme.{u}}
+      [∀ x : X, Invertible (l : X.residueField x)]
+      [∀ y : Y, Invertible (l : Y.residueField y)] (f : X ⟶ Y) :=
+    Classical.choice (hd f).2.1
+  let τ {X Y : Scheme.{u}}
+      [∀ x : X, Invertible (l : X.residueField x)]
+      [∀ y : Y, Invertible (l : Y.residueField y)] (f : X ⟶ Y) :
+      integralDerivedPullback l E f ⋙ (S X).reduction ⟶
+        (S Y).reduction ⋙ integralComparisonDerivedSequencePullback l E f :=
+    Functor.whiskerRight (M f).realization.hom (S X).reduction ≫
+      Functor.whiskerLeft ((S Y).reduction ⋙ integralComparisonDerivedSequencePullback l E f)
+        (S X).adjunction.counit
+  have ht {X Y : Scheme.{u}}
+      [∀ x : X, Invertible (l : X.residueField x)]
+      [∀ y : Y, Invertible (l : Y.residueField y)] (f : X ⟶ Y)
+      (K : sfIntegralConstructibleCategory l E Y) : IsIso ((τ f).app K.obj) := by
+    have : IsIso ((S X).adjunction.counit.app
+        ((integralComparisonDerivedSequencePullback l E f).obj ((S Y).reduction.obj K.obj))) :=
+      ((hd f).1 K.obj).2.2.2.2.2.1
+    dsimp only [τ, NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
+    have hi : IsIso ((M f).realization.hom.app K.obj) :=
+      Iso.isIso_hom ((M f).realization.app K.obj)
+    exact IsIso.comp_isIso' (Functor.map_isIso _ _) this
+  unfold constructibleIntegralPullback integralSystemReduction finiteSystemDerivedPullback
+  refine ⟨fun {X Y} _ _ f ↦ ?_, ?_⟩
+  · refine NatIso.ofComponents (fun K ↦ ?_) ?_
+    · exact @asIso _ _ _ _ ((τ f).app K.obj) (ht f K)
+    · intro A B a
+      exact (τ f).naturality a.hom
+  · intro X Y _ _ f K P e n
+    have h := integralPullbackCounitProjection l E f (S Y) (S X) (ρ X) (M f)
+      K.obj P e n
+    have h' := congrArg
+      (fun q ↦ ((S X).reductionEvaluation n).hom.app
+        ((integralDerivedPullback l E f).obj K.obj) ≫ q) h
+    simp only [Iso.hom_inv_id_app_assoc] at h'
+    have h'' := congrArg
+      (fun q ↦ (show
+          (finiteSystemDerivedEvaluation (integralSystemRings l E)
+            (integralSystemTransition l E) X n).obj
+              ((S X).reduction.obj ((integralDerivedPullback l E f).obj K.obj)) ⟶
+            (proEtaleConstantRingDerivedPullback
+              (Padic.coefficientExtensionRing l E (n + 1)) f).obj
+                ((scalarReductionDerivedExtension l E Y n).obj K.obj) from q)) h'
+    unfold integralSystemReductionEvaluation integralSystemPullbackReductionIso
+    unfold constructibleIntegralPullback
+    dsimp only [Functor.comp, ObjectProperty.lift, ObjectProperty.ι, inducedFunctor,
+      NatIso.ofComponents, asIso, Functor.mapIso, Iso.trans, Iso.symm, Iso.app] at h'' ⊢
+    simp only [Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
+      ObjectProperty.ι_obj]
+    simp only [τ, S, NatTrans.comp_app, Functor.whiskerRight_app,
+      Functor.whiskerLeft_app, Functor.comp_obj] at h'' ⊢
+    exact h''
+
 
 end WeilConjectures

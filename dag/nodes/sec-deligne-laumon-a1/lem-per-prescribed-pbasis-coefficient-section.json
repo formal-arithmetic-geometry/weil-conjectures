@@ -225,20 +225,37 @@
   "module": "Sheaf.RingTheory.PrescribedPBasisCoefficientSection",
   "declaration": "IsLocalRing.existsUnique_coefficientSection_prescribed_pBasis",
   "file": "lean/Sheaf/RingTheory/PrescribedPBasisCoefficientSection.lean",
-  "statement": "theorem existsUnique_coefficientSection_prescribed_pBasis (p : ℕ) [Fact p.Prime] (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A] [CharP A p] [IsAdicComplete (maximalIdeal A) A] (E : Type v) (b : E → ResidueField A) (hpb : ∃ mon : Module.Basis {e : E →₀ ℕ // ∀ i : E, e i < p} (Subfield.closure (Set.range (fun x : ResidueField A ↦ x ^ p))) (ResidueField A), ∀ e, mon e = e.val.prod (fun i n ↦ b i ^ n)) (beta : E → A) (hlift : ∀ i : E, residue A (beta i) = b i) : ∃! s : ResidueField A →+* A, (residue A).comp s = RingHom.id (ResidueField A) ∧ ∀ i : E, s (b i) = beta i",
+  "statement": "theorem existsUnique_coefficientSection_prescribed_pBasis (p : ℕ) [Fact p.Prime] (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A] [CharP A p] [IsAdicComplete (maximalIdeal A) A] (E : Type v) (b : E → ResidueField A) (B : Module.Basis {n : E →₀ ℕ // ∀ i : E, n i < p} (Subfield.closure (Set.range (fun x : ResidueField A ↦ x ^ p))) (ResidueField A)) (hB : ∀ n, B n = n.val.prod (fun i e ↦ b i ^ e)) (β : E → A) (hβ : ∀ i : E, residue A (β i) = b i) : ∃! s : ResidueField A →+* A, (residue A).comp s = RingHom.id (ResidueField A) ∧ ∀ i : E, s (b i) = β i",
   "branch": "newtargets-dag",
-  "by": "Q06",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.RingTheory.PrescribedPBasisCoefficientSection deleted (dead: no target reaches it); this node is not reached either."
+  "by": "Q94",
+  "date": "2026-10-24",
+  "existing": false
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-f6fdc7ed8",
-  "group": "Q06",
+  "reviewer": "NT-stage2-cc-4b1289c86",
+  "group": "Q94",
   "result": "pass",
-  "note": "Lean statement IsLocalRing.existsUnique_coefficientSection_prescribed_pBasis matches node/ILO IV 2.1.4 clause by clause: Fact p.Prime, CharP A p, IsLocalRing (nonzero), IsNoetherianRing and IsAdicComplete (maximalIdeal A) A (recorded dep decls), inline p-basis as Module.Basis over Subfield.closure(range ^p) (= k^p by Frobenius) indexed by finsupp exponents <p with monomial identification, arbitrary lifts, ∃! ring hom section with residue∘s = id and s(b_i)=β_i. No extra hypotheses; universes u,v independent; edge cases (E empty/infinite, A field, nilpotents) covered. Node diff vs live: only lean added; statement verbatim. No duplicate (CoefficientResidueSection is char-0 existence only; p-basis is inline project-wide). Docstrings carry source place, blueprint id and all six proof steps; sorry only; Mathlib imports only. nt_compile --json: clean, exit 0, 1.3 s; broken-copy control errors. Advisory: scalar field is Subfield.closure rather than the IntermediateField.adjoin form of exists_p_basis (equal subfields; stage-3 transport)."
+  "note": "Only the item lean record and one theorem module (sorry, no defs). Checked against ILO IV 2.1.4 (PDF p.56): prime p, CharP A p, nonzero local, IsNoetherianRing and IsAdicComplete (maximalIdeal A) as recorded by the two stmt_deps, actual ResidueField, arbitrary E : Type v with finsupp exponents < p, basis over Subfield.closure(range ^p) = k^p with hB pinning monomials, arbitrary lifts hβ, conclusion ∃! s : k →+* A with residue∘s = id and s(b i) = β i. Statement verbatim equal to the file; universes independent; edge cases (empty or infinite E, A a field, nilpotent A) covered. No p-basis def node and no existing theorem. Note: Subfield.closure instead of the project's IntermediateField.adjoin (ZMod p) convention; same subfield, mapCoeffs transport as in KaehlerDifferentialZeroIffPow.lean:79-90. Citer lem-per-coefficient-field-generic-differential-basis compatible. Not recompiled (no file changed)."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean_removed": {
+  "commit": "f6bf55e2b05",
+  "path": "lean/Sheaf/RingTheory/PrescribedPBasisCoefficientSection.lean",
+  "module": "Sheaf.RingTheory.PrescribedPBasisCoefficientSection",
+  "declaration": "IsLocalRing.existsUnique_coefficientSection_prescribed_pBasis",
+  "reason": "module deleted as dead (no target reaches it by imports; this node is not reached either); the declaration does not live on elsewhere, so the node has no Lean statement"
+ }
 }

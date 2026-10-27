@@ -1,0 +1,245 @@
+{
+ "id": "lem-sfb-graded-bialgebra-coordinate-derivations",
+ "kind": "statement",
+ "title": "Coordinate graded derivations on finite connected signed bialgebras",
+ "statement": "Let $k$ be a field [def-weil-field] and $A=\\bigoplus_{n\\geq0}A^n$ a finite-dimensional graded associative unital $k$-algebra, with $A^0=k\\cdot1$, $1\\ne0$, and $ab=(-1)^{ij}ba$ for homogeneous $a\\in A^i,b\\in A^j$. Suppose a degree-preserving coassociative unital algebra map $\\Delta:A\\to A\\otimes_kA$ is given, where $(a\\otimes b)(c\\otimes d)=(-1)^{\\deg b\\deg c}ac\\otimes bd$, and the projection $\\varepsilon:A\\to A^0=k$ satisfies both counit identities. Put $I=\\bigoplus_{n>0}A^n$, and let $I^2$ be the span of products of two elements of $I$. Let $x_1,\\ldots,x_s$ be positive-degree homogeneous elements, of degrees $d_1,\\ldots,d_s$, whose classes form a $k$-basis of $I/I^2$. For every $i$ there is a $k$-linear map $\\partial_i:A\\to A$ of degree $-d_i$, with $\\partial_i(1)=0$, $\\partial_i(x_j)=\\delta_{ij}\\cdot1$, and $\\partial_i(ab)=\\partial_i(a)b+(-1)^{d_i\\deg a}a\\partial_i(b)$ for homogeneous $a,b$. Here a negative graded component is zero. No perfectness, cocommutativity, or characteristic restriction is required.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "I Lemma 12.2, printed p.55, first sentence of the proof (Borel structure input); agent-written graded invariant-derivation prerequisite, not a lemma stated in Milne."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "The grading makes $I^2$ a graded subspace: expand both factors of each product into their homogeneous components. Thus $Q=I/I^2$ is graded and the given classes $\\bar x_j$ are a homogeneous basis. Let $\\lambda_i:Q\\to k$ extract the coefficient of $\\bar x_i$, and put $\\phi_i(a)=\\lambda_i([a-\\varepsilon(a)1])$. This is $k$-linear, vanishes on $1$ and $I^2$, and satisfies $\\phi_i(x_j)=\\delta_{ij}$. It vanishes on $A^n$ for $n\\ne d_i$: in a homogeneous-basis expansion of a degree-$n$ class all coefficients of other degrees vanish. Expanding $a=\\varepsilon(a)1+u$, $b=\\varepsilon(b)1+v$, with $u,v\\in I$, gives $\\phi_i(ab)=\\phi_i(a)\\varepsilon(b)+\\varepsilon(a)\\phi_i(b)$ since $uv\\in I^2$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Lemma 12.2, printed p.55, Borel structure input, first sentence of proof; agent-written signed contraction and descending-normalization calculation, not asserted to be a proof printed in Milne."
+   }
+  },
+  {
+   "text": "Use the tensor universal property [def-weil-pbc-module-tensor-product], with base ring $k$ and $M=N=P=A$, for the bilinear map $(u,v)\\mapsto\\phi_i(u)v$. It gives a well-defined linear contraction $C_i:A\\otimes_kA\\to A$, $C_i(u\\otimes v)=\\phi_i(u)v$. Define $D_i=C_i\\Delta$. If $a\\in A^n$, write $\\Delta(a)$ as a finite sum of homogeneous simple tensors $a_1\\otimes a_2$ with $\\deg a_1+\\deg a_2=n$; such tensors span each graded component by the tensor-product presentation. Only terms with $\\deg a_1=d_i$ survive contraction. Consequently $D_i(A^n)\\subseteq A^{n-d_i}$, with zero output when $n<d_i$, and $D_i(1)=C_i(1\\otimes1)=0$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Lemma 12.2, printed p.55, Borel structure input, first sentence of proof; agent-written signed contraction and descending-normalization calculation, not asserted to be a proof printed in Milne."
+   }
+  },
+  {
+   "text": "For homogeneous $a,b$, expand $\\Delta(a)=\\sum a_1\\otimes a_2$, $\\Delta(b)=\\sum b_1\\otimes b_2$ homogeneously. The signed product and the identity for $\\phi_i$ give\n$$D_i(ab)=\\sum(-1)^{\\deg a_2\\deg b_1}\\bigl(\\phi_i(a_1)\\varepsilon(b_1)+\\varepsilon(a_1)\\phi_i(b_1)\\bigr)a_2b_2.$$\nIn the first summand $\\varepsilon(b_1)\\ne0$ forces $\\deg b_1=0$, so its sign is $1$. In the second, a nonzero scalar requires $\\deg a_1=0$ and $\\deg b_1=d_i$, so its sign is $(-1)^{d_i\\deg a}$. Using $\\sum\\varepsilon(b_1)b_2=b$ and $\\sum\\varepsilon(a_1)a_2=a$, the displayed expression is exactly $D_i(a)b+(-1)^{d_i\\deg a}aD_i(b)$. Expansion into simple tensors is legitimate because they span the tensor product [def-weil-pbc-module-tensor-product].",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Lemma 12.2, printed p.55, Borel structure input, first sentence of proof; agent-written signed contraction and descending-normalization calculation, not asserted to be a proof printed in Milne."
+   }
+  },
+  {
+   "text": "The other counit identity gives $\\varepsilon(D_i(a))=\\sum\\phi_i(a_1)\\varepsilon(a_2)=\\phi_i(a)$. Set $a_{ij}=D_i(x_j)\\in A^{d_j-d_i}$. When $d_j<d_i$ this is zero. When $d_j=d_i$ it is scalar, hence $a_{ij}=\\varepsilon(D_i(x_j))1=\\delta_{ij}1$. Thus the evaluation matrix has identity blocks in equal degrees and can have additional entries only when the column degree is strictly larger than the row degree. These additional entries need not vanish.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Lemma 12.2, printed p.55, Borel structure input, first sentence of proof; agent-written signed contraction and descending-normalization calculation, not asserted to be a proof printed in Milne."
+   }
+  },
+  {
+   "text": "For the normalization, check explicitly how a homogeneous coefficient changes the degree of a derivation. If $E$ has degree $-e$ and obeys the signed rule, and $h\\in A^{e-d}$ with $e\\geq d$, signed commutation gives, for homogeneous $a,b$,\n$$hE(ab)=hE(a)b+(-1)^{e\\deg a}haE(b)=hE(a)b+(-1)^{d\\deg a}ahE(b),$$\nbecause $ha=(-1)^{(e-d)\\deg a}ah$ and $e+(e-d)\\equiv d\\pmod2$. Hence $hE$ is a linear derivation of degree $-d$, vanishing on $1$. Finite sums or differences with this same degree preserve these identities term by term. This calculation also holds in characteristic $2$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Lemma 12.2, printed p.55, Borel structure input, first sentence of proof; agent-written signed contraction and descending-normalization calculation, not asserted to be a proof printed in Milne."
+   }
+  },
+  {
+   "text": "Recursively over the finitely many generator degrees in decreasing order, define\n$$\\partial_i=D_i-\\sum_{j:\\,d_j>d_i}a_{ij}\\partial_j.$$\nAt the greatest generator degree the sum is empty, so $\\partial_i=D_i$. At any subsequent degree all maps in the sum have already been defined. Each $a_{ij}$ has degree $d_j-d_i$; the preceding coefficient calculation therefore shows that every summand has degree $-d_i$ and obeys the required signed rule. Thus $\\partial_i$ is $k$-linear of degree $-d_i$, vanishes on $1$, and has the stated Leibniz identity. Generators of equal degree are defined simultaneously, with no dependence between them.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Lemma 12.2, printed p.55, Borel structure input, first sentence of proof; agent-written signed contraction and descending-normalization calculation, not asserted to be a proof printed in Milne."
+   }
+  },
+  {
+   "text": "The same decreasing-degree induction verifies all generator values. Assume $\\partial_j(x_l)=\\delta_{jl}1$ for every $l$ whenever $d_j>d_i$. If $d_l>d_i$, evaluating the defining formula gives $\\partial_i(x_l)=a_{il}-a_{il}=0$, because only the summand $j=l$ contributes. If $d_l\\leq d_i$, every term in the sum evaluates to zero, and step 4 gives $\\partial_i(x_l)=D_i(x_l)=\\delta_{il}1$. The base case is step 4 for the greatest degree. This proves every claimed value and completes the construction. For $s=0$ there is no index $i$, so the assertion is vacuous. No step uses perfectness, cocommutativity, an antipode, or division by an integer.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Lemma 12.2, printed p.55, Borel structure input, first sentence of proof; agent-written signed contraction and descending-normalization calculation, not asserted to be a proof printed in Milne."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "I Lemma 12.2, printed p.55, Borel structure input, first sentence of proof; agent-written signed contraction and descending-normalization calculation, not asserted to be a proof printed in Milne. The ordinary contraction construction was also read in lean/WeilConjectures/RingTheory/HopfAlgebra/Cartier.lean, lines 437-507, and the ordinary matrix normalization in RingTheory/Bialgebra/Frobenius.lean, lines 461-490; all signed arguments are written out here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Bialgebra.*[Dd]erivation|[Dd]erivation.*Bialgebra|[Hh]opf.*[Dd]ifferential|[Dd]ifferential.*[Hh]opf",
+   "results": "{\"t\": \"2026-10-23T21:31:35Z\", \"tool\": \"grep\", \"query\": \"Bialgebra.*[Dd]erivation|[Dd]erivation.*Bialgebra|[Hh]opf.*[Dd]ifferential|[Dd]ifferential.*[Hh]opf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern polynomial or presented-algebra differentials, ordinary derivations, or mere homogeneous generation; none constructs coordinate graded derivations on an arbitrary finite signed bialgebra."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite connected graded commutative bialgebra has graded derivations sending a minimal homogeneous set of algebra generators to the coordinate vectors",
+   "results": "{\"t\": \"2026-10-23T21:31:36Z\", \"tool\": \"leansearch\", \"query\": \"A finite connected graded commutative bialgebra has graded derivations sending a minimal homogeneous set of algebra generators to the coordinate vectors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Derivation.ext_of_adjoin_eq_top\", \"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous\", \"ModuleCat.Derivation.mk\", \"ModuleCat.Derivation\", \"Derivation.instAddMonoidHomClass\", \"Derivation.mk\", \"Bialgebra.mk'\", \"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous_ne_zero\"], \"digest\": \"ed6100b9b6c2ebd8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern polynomial or presented-algebra differentials, ordinary derivations, or mere homogeneous generation; none constructs coordinate graded derivations on an arbitrary finite signed bialgebra."
+  },
+  {
+   "tool": "loogle",
+   "query": "Bialgebra, Derivation",
+   "results": "{\"t\": \"2026-10-23T21:31:36Z\", \"tool\": \"loogle\", \"query\": \"Bialgebra, Derivation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern polynomial or presented-algebra differentials, ordinary derivations, or mere homogeneous generation; none constructs coordinate graded derivations on an arbitrary finite signed bialgebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The graded Kahler differential module of a graded commutative Hopf algebra is free on its augmentation indecomposables",
+   "results": "{\"t\": \"2026-10-23T21:31:38Z\", \"tool\": \"leanfinder\", \"query\": \"The graded Kahler differential module of a graded commutative Hopf algebra is free on its augmentation indecomposables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instFreeMvPolynomialKaehlerDifferential\", \"Algebra.IsStandardSmooth.free_kaehlerDifferential\", \"Algebra.SubmersivePresentation.free_kaehlerDifferential\", \"Algebra.Generators.instFreeCotangentSpaceToExtension\", \"KaehlerDifferential.mvPolynomialBasis\", \"Algebra.Generators.toKaehler_cotangentSpaceBasis\", \"Algebra.SubmersivePresentation.free_cotangent\", \"Algebra.Generators.cotangentSpaceBasis_apply\"], \"digest\": \"9981e97c6370f1e0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern polynomial or presented-algebra differentials, ordinary derivations, or mere homogeneous generation; none constructs coordinate graded derivations on an arbitrary finite signed bialgebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coordinate partial graded derivations dual to homogeneous indecomposable generators of a finite connected graded commutative bialgebra",
+   "results": "{\"t\": \"2026-10-23T21:31:39Z\", \"tool\": \"leanfinder\", \"query\": \"Coordinate partial graded derivations dual to homogeneous indecomposable generators of a finite connected graded commutative bialgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Generators.H1Cotangent.δAux_X\", \"Algebra.Generators.H1Cotangent.δAux_toAlgHom\", \"Algebra.Generators.H1Cotangent.δAux_monomial\", \"Algebra.PreSubmersivePresentation.differential\", \"Algebra.Generators.H1Cotangent.δAux\", \"Algebra.Presentation.differentialsRelations_G\", \"KaehlerDifferential.mvPolynomialBasis_repr_comp_D\", \"Algebra.Generators.cotangentSpaceBasis_repr_one_tmul\"], \"digest\": \"f397249d4f00947b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern polynomial or presented-algebra differentials, ordinary derivations, or mere homogeneous generation; none constructs coordinate graded derivations on an arbitrary finite signed bialgebra."
+  },
+  {
+   "tool": "grep",
+   "query": "Bialgebra.*[Dd]erivation|[Dd]erivation.*Bialgebra|[Gg]raded[Dd]erivation|[Ii]nvariant[Dd]erivation",
+   "results": "{\"t\": \"2026-10-23T22:19:47Z\", \"tool\": \"grep\", \"query\": \"Bialgebra.*[Dd]erivation|[Dd]erivation.*Bialgebra|[Gg]raded[Dd]erivation|[Ii]nvariant[Dd]erivation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean\", \"Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean\", \"Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean\", \"Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean\", \"Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean\", \"Mathlib/Geometry/Manifold/GroupLieAlgebra.lean\"], \"digest\": \"c7ce1f89651543fc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: polynomial partial derivatives, ordinary commutative derivations, smooth-manifold invariant derivations, and graded inclusions/projections do not state the signed graded bialgebra construction and normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homogeneous partial derivations sending minimal homogeneous generators of a graded commutative Hopf algebra to Kronecker delta",
+   "results": "{\"t\": \"2026-10-23T22:19:48Z\", \"tool\": \"leansearch\", \"query\": \"Homogeneous partial derivations sending minimal homogeneous generators of a graded commutative Hopf algebra to Kronecker delta\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.pderiv\", \"MvPolynomial.IsHomogeneous.pderiv\", \"MvPolynomial.pderiv_def\", \"MvPolynomial.pderiv_X\", \"MvPolynomial.derivation_ext\", \"Derivation.mk\", \"MvPolynomial.mkDerivation\", \"Derivation.instAddMonoidHomClass\"], \"digest\": \"26082aa4f22e9ff4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: polynomial partial derivatives, ordinary commutative derivations, smooth-manifold invariant derivations, and graded inclusions/projections do not state the signed graded bialgebra construction and normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "Bialgebra, Derivation",
+   "results": "{\"t\": \"2026-10-23T22:19:48Z\", \"tool\": \"loogle\", \"query\": \"Bialgebra, Derivation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: polynomial partial derivatives, ordinary commutative derivations, smooth-manifold invariant derivations, and graded inclusions/projections do not state the signed graded bialgebra construction and normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coordinate graded derivations dual to homogeneous indecomposables in a connected graded signed commutative bialgebra",
+   "results": "{\"t\": \"2026-10-23T22:19:49Z\", \"tool\": \"leanfinder\", \"query\": \"Coordinate graded derivations dual to homogeneous indecomposables in a connected graded signed commutative bialgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ExteriorAlgebra.GradedAlgebra.ι\", \"CliffordAlgebra.GradedAlgebra.ι_apply\", \"CliffordAlgebra.GradedAlgebra.ι\", \"ExteriorAlgebra.GradedAlgebra.ι_apply\", \"GradedAlgebra.proj\", \"GradedAlgebra.proj_apply\", \"DirectSum.toAlgebra_apply\", \"GradedAlgebra.ofAlgHom\"], \"digest\": \"a830b3566c844109\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: polynomial partial derivatives, ordinary commutative derivations, smooth-manifold invariant derivations, and graded inclusions/projections do not state the signed graded bialgebra construction and normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An infinitesimal character on a signed graded bialgebra extends to a homogeneous derivation by contracting its comultiplication",
+   "results": "{\"t\": \"2026-10-23T22:20:27Z\", \"tool\": \"leanfinder\", \"query\": \"An infinitesimal character on a signed graded bialgebra extends to a homogeneous derivation by contracting its comultiplication\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"liftOfDerivationToSquareZero\", \"liftOfDerivationToSquareZero_apply\", \"Derivation\", \"derivationToSquareZeroOfLift\", \"Derivation.compAlgebraMapL\", \"derivationToSquareZeroEquivLift_apply_coe_apply\", \"liftOfDerivationToSquareZero_mk_apply'\", \"derivationToSquareZeroOfLift_apply\"], \"digest\": \"24da8c0be6e835f5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: polynomial partial derivatives, ordinary commutative derivations, smooth-manifold invariant derivations, and graded inclusions/projections do not state the signed graded bialgebra construction and normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "derivation|cotangent",
+   "results": "{\"t\": \"2026-10-23T22:20:28Z\", \"tool\": \"grep\", \"query\": \"derivation|cotangent\", \"sub\": \"RingTheory/Bialgebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: polynomial partial derivatives, ordinary commutative derivations, smooth-manifold invariant derivations, and graded inclusions/projections do not state the signed graded bialgebra construction and normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-borel-graded-bialgebra-monomial-basis",
+  "date": "2026-10-24",
+  "group": "Q08"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Infinitesimal lifting of algebraically trivial rigidified line modules. Supporting input: Injectivity of the reduced coproduct in degree-two coherent cohomology. Supporting input: the relative exterior coherent-cohomology theorem, before the reduced-coproduct calculation; not a Picard infinitesimal-lifting assertion. Auxiliary: The field bialgebra equality case used on geometric fibres before the relative lifting argument. Borel homogeneous-generator and nilpotence structure input, quoted in Milne I Lemma 12.2, proof, first sentence. Graded invariant-derivation prerequisite for Borel: coordinate derivations on the augmentation indecomposables, before the Frobenius-image induction.",
+   "via": [
+    "lem-sfb-borel-graded-bialgebra-monomial-basis",
+    "lem-sfb-bounded-bialgebra-top-degree-exterior",
+    "lem-sfb-abelian-coherent-exterior-base-change",
+    "lem-sfb-abelian-h2-reduced-coproduct-injective",
+    "lem-sfb-abelian-picard-infinitesimal-lift",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-graded-bialgebra-coordinate-derivations",
+  "worker": "stage1",
+  "summary": "Q92: no exact project attachment or Mathlib match. Constructed dual indecomposable functionals, contracted the first coproduct factor, expanded the signed Leibniz calculation, and normalized the degree-triangular evaluation matrix by explicit finite descending recursion. No new nodes: every calculation is proved directly, with the existing tensor-product universal-property leaf cited. Statement unchanged; added only the tensor-product definition dependency.",
+  "blueprint": "Preserves the inherited from.place/via chain: direct-images proof (3), alteration/plurinodal and Picard prerequisites, then the Borel input in Milne I Lemma 12.2. This item realizes precisely the coordinate-derivation prerequisite used in steps 2 and 5 of lem-sfb-borel-graded-bialgebra-monomial-basis. Latest blueprint direct-images proof (3) and the unit/chapter were read; no route is replaced. The inherited nearest-blueprint-ancestor is null (tools/blueprint_refs.py ancestor reports None), so no ancestor id is invented."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q92-edca736d2",
+  "group": "Q92",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-edca736d2 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, both cited leaves (def-weil-pbc-module-tensor-product and def-weil-field, both mathlib), parent lem-sfb-borel-graded-bialgebra-monomial-basis steps 2 and 6, and Milne AV I Lemma 12.2 (printed p.55, PDF p.61). The statement text is unchanged against live. The only stmt_dep added is the tensor product, which the statement uses. Live is still unsplit and no repair note exists. I re-derived each step: step 1, I^2 graded and phi_i(ab)=phi_i(a)eps(b)+eps(a)phi_i(b); step 2, contraction through the universal property, of degree -d_i; step 3, signed Leibniz from the signs (-1)^{|a2||b1|} and both counit identities; step 4, eps D_i = phi_i, with identity blocks in equal degrees; step 5, the sign (2e-d)|a| ≡ d|a| for coefficient twists; steps 6-7, a well-founded decreasing-degree recursion whose generator values I verified. Small cases I tested: Lambda(u,v), where D_v(uv) = -u; F_3[t,y]/(t^3,y^3) with x2 = y+t^2, where the correction ∂1 = D1 - 2tD2 is needed and works; and A = k, which is vacuous. Each step is genuinely a few lines, so the elementary marks hold. I found no duplicate in the DAG and there is no route departure or tool use. The null blueprint.from.node is inherited from the parent chain (maintainer note only). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.GradedBialgebraCoordinateDerivations",
+  "declaration": "GradedAlgebra.exists_coordinate_derivations",
+  "file": "lean/Sheaf/RingTheory/GradedBialgebraCoordinateDerivations.lean",
+  "statement": "theorem exists_coordinate_derivations (k : Type u) [Field k] (A : Type v) [Ring A] [Algebra k A] [Nontrivial A] [FiniteDimensional k A] (𝒜 : ℕ → Submodule k A) [GradedAlgebra 𝒜] (hconnected : 𝒜 0 = Submodule.span k {(1 : A)}) (hcomm : ∀ (m n : ℕ) (a : 𝒜 m) (b : 𝒜 n), (a : A) * (b : A) = (-1 : k) ^ (m * n) • ((b : A) * (a : A))) (Δ : A →ₗ[k] A ⊗[k] A) (ε : A →ₗ[k] k) (hdegree : ∀ (n : ℕ) (a : 𝒜 n), Δ a ∈ Submodule.span k {z | ∃ (p q : ℕ) (b : 𝒜 p) (c : 𝒜 q), p + q = n ∧ z = (b : A) ⊗ₜ[k] (c : A)}) (hunit : Δ 1 = (1 : A) ⊗ₜ[k] (1 : A)) (hmul : ∀ a b : A, GradedTensorProduct.of k 𝒜 𝒜 (Δ (a * b)) = GradedTensorProduct.of k 𝒜 𝒜 (Δ a) * GradedTensorProduct.of k 𝒜 𝒜 (Δ b)) (hcoassoc : ∀ a : A, TensorProduct.assoc k A A A (TensorProduct.map Δ LinearMap.id (Δ a)) = TensorProduct.map LinearMap.id Δ (Δ a)) (hprojection : ∀ a : A, algebraMap k A (ε a) = GradedAlgebra.proj 𝒜 0 a) (hcounit : ∀ a : A, TensorProduct.lid k A (TensorProduct.map ε LinearMap.id (Δ a)) = a ∧ TensorProduct.rid k A (TensorProduct.map LinearMap.id ε (Δ a)) = a) (I : Submodule k A) (hI : I = ⨆ n : {n : ℕ // 0 < n}, 𝒜 n.val) (J : Submodule k I) (hJ : J = (Submodule.span k {z : A | ∃ a ∈ I, ∃ b ∈ I, z = a * b}).comap I.subtype) (s : ℕ) (d : Fin s → ℕ) (hd : ∀ i : Fin s, 0 < d i) (x : Fin s → I) (hx : ∀ j : Fin s, (x j : A) ∈ 𝒜 (d j)) (b : Module.Basis (Fin s) k (I ⧸ J)) (hb : ∀ j : Fin s, b j = J.mkQ (x j)) : ∀ i : Fin s, ∃ D : A →ₗ[k] A, (∀ (n : ℕ) (a : 𝒜 n), D a ∈ (if d i ≤ n then 𝒜 (n - d i) else ⊥)) ∧ D 1 = 0 ∧ (∀ j : Fin s, D (x j : A) = if i = j then 1 else 0) ∧ (∀ (m n : ℕ) (a : 𝒜 m) (c : 𝒜 n), D ((a : A) * (c : A)) = D a * (c : A) + (-1 : k) ^ (d i * m) • ((a : A) * D c))",
+  "branch": "sheaf-dag",
+  "by": "Q52",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5b6c7ec49",
+  "group": "Q52",
+  "result": "pass",
+  "note": "Every node clause is rendered in GradedAlgebra.exists_coordinate_derivations. Hypotheses: Field k with no char/perfectness restriction; Ring+Nontrivial+FiniteDimensional A; GradedAlgebra over ℕ with A^0=k·1; signed hcomm; hdegree; hunit and hmul via GradedTensorProduct.of, whose Mathlib sign (-1)^(j1 i2) is the node's; hcoassoc; ε pinned to proj 0; both counit identities; I and I² fixed by equations; basis b pinned to the classes of x_j. Conclusions: degree -d_i with ⊥ below d_i, D1=0, D x_j=δ_ij, signed Leibniz (-1)^(d_i deg a). Proof steps 3-7 re-derived; edge cases s=0, char 2, imperfect k OK. Hypotheses identical to the landed parent BorelBialgebraMonomialBasis. Live node has no lean record, so not superseded. Gates: no new defs (no hollow defs), sorry only, docstrings with source and blueprint and all 7 steps, imports used, statement verbatim, mathlib stmt_deps unchanged, no duplicate found. No recompile per instructions; worker reports a clean compile. The second reading was by the same worker (disclosed in the report)."
+ }
+}

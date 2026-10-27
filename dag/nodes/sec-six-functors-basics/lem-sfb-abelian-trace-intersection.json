@@ -1,0 +1,296 @@
+{
+ "id": "lem-sfb-abelian-trace-intersection",
+ "kind": "statement",
+ "title": "Intersection formula for the trace of an adjoint product",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], let $A/k$ be an abelian variety [def-sc-abelian-variety] of positive dimension $g$ [def-kun-topological-krull-dimension], and let $L$ be an ample invertible sheaf [def-sc-ample, def-sc-invertible-module]. Let $\\lambda=\\phi_L:A\\to A^\\vee$ be the homomorphism of [lem-sfb-abelian-polarization-calculus], and suppose $\\mu\\in\\operatorname{Hom}_k(A^\\vee,A)\\otimes_{\\mathbf Z}\\mathbf Q$ satisfies $\\mu\\lambda=1_A$ and $\\lambda\\mu=1_{A^\\vee}$, using [def-weil-pbc-module-tensor-product]. For every group-scheme endomorphism $f:A\\to A$ [def-sc-group-scheme] and every prime $\\ell\\ne\\operatorname{char}k$, one has the equality in $\\mathbf Q_\\ell$ [def-weil-l-adic-numbers]\n$$\\operatorname{tr}\\bigl(V_\\ell(\\mu f^\\vee\\lambda f)\\mid V_\\ell A\\bigr)=\\frac{2g\\,(L^{g-1}\\cdot f^*L\\cdot A)}{(L^g\\cdot A)}.$$\nHere $f^\\vee$ is pullback on the dual abelian variety, $V_\\ell$ is [sk-def-av-tate], trace is [def-weil-endomorphism-trace], and the intersection numbers are [def-sc-intersection-number]; $f^*L$ is pullback of modules [def-pc-module-pullback]. The denominator $(L^g\\cdot A)$ is nonzero. The rational number on the right is viewed in $\\mathbf Q_\\ell$ by the canonical field embedding.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, Theorem 14.3, printed p.62, displayed trace/intersection identity; Proposition 10.20, p.50, identifies its trace with Tate trace. The displayed identity is stated for alpha alpha-dagger; cyclicity of ordinary trace gives the order used here. The calculation is omitted by these notes (reference there: Milne 1986 §17)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-abelian-variety",
+  "def-sc-group-scheme",
+  "lem-sfb-abelian-polarization-calculus",
+  "sk-def-av-tate",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-l-adic-numbers",
+  "def-sc-ample",
+  "def-sc-invertible-module",
+  "def-kun-topological-krull-dimension",
+  "def-weil-endomorphism-trace",
+  "def-sc-intersection-number",
+  "def-pc-module-pullback",
+  "def-sfb-abelian-rational-hom",
+  "def-sfb-abelian-dual-poincare-datum",
+  "def-sfb-abelian-rational-tate-action"
+ ],
+ "proof": [
+  {
+   "text": "Put $S=(L^g\\cdot A)$ and $M=f^*L$. Choose $a\\geq1$ with $L^{\\otimes a}$ very ample, using [def-sc-ample]. Its projective embedding has Hilbert polynomial of degree $g$ with positive leading coefficient by [lem-sfb-projective-hilbert-polynomial-dimension]. The polynomial $p(t)=\\chi(A,L^{\\otimes t})$ therefore has degree $g$, since $p(at)$ is that embedding\\'s Hilbert polynomial. Its Hilbert degree is positive by [lem-sc-positive-ample-hilbert-degree] and equals $S$: if $p(t)=\\chi(A,L^{\\otimes t})$, then the polynomial for $g$ repeated entries in [def-sc-intersection-number] is $p(t_1+\\cdots+t_g)$, whose $t_1\\cdots t_g$ coefficient is $g!$ times the degree-$g$ coefficient of $p$, exactly the Hilbert degree of [def-sc-hilbert-degree]. Thus $S>0$. By [lem-sfb-top-intersection-multilinear], the polynomial\n$$H(X)=\\sum_{j=0}^g\\binom gj X^{g-j}(L^{g-j}\\cdot M^j\\cdot A)$$\nsatisfies $H(r)=((L^{\\otimes r}\\otimes M)^g\\cdot A)$ for every integer $r$ (negative tensor powers mean powers of the dual). Its leading coefficient is $S$ and its next coefficient is $g(L^{g-1}\\cdot M\\cdot A)$.",
+   "uses": [
+    "def-sc-ample",
+    "lem-sfb-projective-hilbert-polynomial-dimension",
+    "lem-sc-positive-ample-hilbert-degree",
+    "def-sc-intersection-number",
+    "def-sc-hilbert-degree",
+    "lem-sfb-top-intersection-multilinear"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Theorem 14.3, printed p.62; calculation supplied from I Theorem 11.1(a),(b), p.54, and Proposition 10.20, pp.50–52"
+   }
+  },
+  {
+   "text": "Let $u=\\mu f^\\vee\\lambda f$ and $N_r=L^{\\otimes r}\\otimes M$ for $r\\in\\mathbf Z$. The formula [lem-sfb-abelian-polarization-calculus] gives $\\phi_M=f^\\vee\\lambda f$. The definition of $\\phi_N$ in the same node gives additivity in the line bundle: at the family level, $t_x^*(N\\otimes N')\\otimes(N\\otimes N')^{-1}$ is the tensor product of $t_x^*N\\otimes N^{-1}$ and $t_x^*N'\\otimes (N')^{-1}$, so representability identifies the homomorphisms. The dual line bundle gives the negative homomorphism. Consequently $h_r:=\\phi_{N_r}=r\\lambda+f^\\vee\\lambda f$ and $\\mu h_r=r1_A+u$. The same formula for $N=L$ in [lem-sfb-abelian-line-bundle-degree-square] gives $d(\\lambda)=(S/g!)^2>0$; with its zero convention this implies that $\\lambda$ is an isogeny and $\\deg\\lambda=(S/g!)^2$.",
+   "uses": [
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sfb-abelian-line-bundle-degree-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Theorem 14.3, printed p.62; calculation supplied from I Theorem 11.1(a),(b), p.54, and Proposition 10.20, pp.50–52"
+   }
+  },
+  {
+   "text": "Fix a prime $\\ell\\ne\\operatorname{char}k$. By [prop-av-tate-rank], $V_\\ell A$ has dimension $2g$. The componentwise action in [sk-def-av-tate] preserves sums, identities and compositions: each equality holds on every torsion coordinate, hence on the inverse limit, then after tensoring; extending $\\mathbf Q$-linearly gives the same identities for $\\mu$ and $u$. Apply [lem-sfb-isogeny-relative-tate-determinant] to $h_r$ and then [lem-sfb-abelian-line-bundle-degree-square] to $N_r$. For every integer $r$ this gives\n$$\\det(rI+V_\\ell(u))=\\frac{d(h_r)}{\\deg\\lambda}=\\frac{H(r)^2}{S^2}.$$\nBoth sides are polynomial functions of $r$ over $\\mathbf Q_\\ell$ of degree at most $2g$. They agree at all integers, whose images are distinct in this characteristic-zero field; their difference has infinitely many roots and is therefore zero. Thus $\\det(XI+V_\\ell(u))=H(X)^2/S^2$ as polynomials.",
+   "uses": [
+    "prop-av-tate-rank",
+    "sk-def-av-tate",
+    "lem-sfb-isogeny-relative-tate-determinant",
+    "lem-sfb-abelian-line-bundle-degree-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Theorem 14.3, printed p.62; calculation supplied from I Theorem 11.1(a),(b), p.54, and Proposition 10.20, pp.50–52"
+   }
+  },
+  {
+   "text": "Compare the coefficients of $X^{2g-1}$ in this polynomial identity. In the determinant's permutation expansion a term of that degree must choose $X$ on $2g-1$ diagonal entries; the remaining entry is diagonal too. Its coefficient is therefore the sum of the diagonal entries of $V_\\ell(u)$, namely its trace [def-weil-endomorphism-trace]. On the right, the coefficient is $2S\\,g(L^{g-1}\\cdot M\\cdot A)/S^2$. Since $S\\ne0$ and $M=f^*L$, cancellation gives exactly the stated equality. The argument used no nonzero or isogeny assumption on $f$.",
+   "uses": [
+    "def-weil-endomorphism-trace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Theorem 14.3, printed p.62; calculation supplied from I Theorem 11.1(a),(b), p.54, and Proposition 10.20, pp.50–52"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-ample",
+  "lem-sfb-projective-hilbert-polynomial-dimension",
+  "lem-sc-positive-ample-hilbert-degree",
+  "def-sc-intersection-number",
+  "def-sc-hilbert-degree",
+  "lem-sfb-top-intersection-multilinear",
+  "lem-sfb-abelian-polarization-calculus",
+  "lem-sfb-abelian-line-bundle-degree-square",
+  "prop-av-tate-rank",
+  "sk-def-av-tate",
+  "lem-sfb-isogeny-relative-tate-determinant",
+  "def-weil-endomorphism-trace"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "I Theorem 14.3, printed p.62; calculation supplied from I Theorem 11.1(a),(b), p.54, and Proposition 10.20, pp.50–52"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Rosati|intersectionNumber|intersection.number",
+   "results": "0 hits; top: ",
+   "date": "2026-10-23",
+   "verdict": "no match: field-algebra trace forms and trace dual bases do not identify the geometric Rosati adjoint with an intersection number"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an ample divisor D on an abelian variety the trace of alpha alpha dagger equals 2g times D power g minus one intersect alpha pullback D divided by D power g",
+   "results": "8 hits; top: Module.Basis.trace_mul_traceDual, LinearMap.trace_transpose', Algebra.trace_algebraMap_of_basis, Module.Basis.traceDual_traceDual, Module.Basis.traceDual_involutive, Algebra.traceMatrix_apply, Module.Basis.trace_traceDual_mul, Algebra.normalizedTrace.congr_simp",
+   "date": "2026-10-23",
+   "verdict": "no match: field-algebra trace forms and trace dual bases do not identify the geometric Rosati adjoint with an intersection number"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Rosati\"",
+   "results": "0 hits; top: ",
+   "date": "2026-10-23",
+   "verdict": "no match: field-algebra trace forms and trace dual bases do not identify the geometric Rosati adjoint with an intersection number"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The trace of an abelian variety endomorphism times its Rosati adjoint equals an intersection number of ample divisors",
+   "results": "8 hits; top: Algebra.traceForm_apply, Module.Basis.trace_mul_traceDual, Algebra.traceForm, Module.Basis.trace_traceDual_mul, Algebra.traceMatrix_eq_embeddingsMatrix_mul_trans, Algebra.traceMatrix_eq_embeddingsMatrixReindex_mul_trans, Algebra.traceForm_isSymm, Module.Basis.traceDual_repr_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: field-algebra trace forms and trace dual bases do not identify the geometric Rosati adjoint with an intersection number"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ample line bundle on an abelian variety relates the trace of its Rosati adjoint product to its mixed intersection degree",
+   "results": "8 hits; top: Module.Basis.trace_mul_traceDual, Algebra.traceForm_apply, Module.Basis.trace_traceDual_mul, det_traceForm_ne_zero, traceForm_nondegenerate, Algebra.traceForm, Module.Basis.traceDual_repr_apply, Algebra.traceForm_isSymm",
+   "date": "2026-10-23",
+   "verdict": "no match: field-algebra trace forms and trace dual bases do not identify the geometric Rosati adjoint with an intersection number"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The trace of the Rosati adjoint product on a Tate module is a mixed intersection number of line bundles on an abelian variety",
+   "results": "8 hits; top: Module.Basis.trace_mul_traceDual, Module.Basis.trace_traceDual_mul, isIntegral_discr_mul_of_mem_traceDual, LinearMap.trace_eq_contract_apply, Algebra.traceForm_apply, Module.Basis.traceDual_repr_apply, Algebra.traceForm, ClassGroup.fintypeOfAdmissibleOfFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: linear or algebra trace statements do not identify the Rosati adjoint product with geometric intersections"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Rosati\"",
+   "results": "0 hits; top: ",
+   "date": "2026-10-23",
+   "verdict": "no match: linear or algebra trace statements do not identify the Rosati adjoint product with geometric intersections"
+  },
+  {
+   "tool": "grep",
+   "query": "Rosati|polarization.*degree|degree.*polarization",
+   "results": "0 hits; top: ",
+   "date": "2026-10-23",
+   "verdict": "no match: linear or algebra trace statements do not identify the Rosati adjoint product with geometric intersections"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Rosati trace of an endomorphism on an abelian variety is computed from intersection numbers of its pullback of a polarization",
+   "results": "8 hits; top: Algebra.traceForm_apply, Algebra.traceForm, Algebra.traceMatrix_apply, Algebra.traceMatrix_eq_embeddingsMatrix_mul_trans, LinearMap.trace_eq_contract', Module.Basis.trace_mul_traceDual, Algebra.trace, LinearMap.trace_eq_contract",
+   "date": "2026-10-23",
+   "verdict": "no match: linear or algebra trace statements do not identify the Rosati adjoint product with geometric intersections"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The trace of an abelian variety endomorphism times its Rosati adjoint is 2g times its mixed intersection divided by its top self intersection",
+   "results": "8 hits; top: Algebra.trace, LinearMap.traceAux_eq, LinearMap.trace_map, LinearMap.trace_eq_contract', Algebra.traceForm, LinearMap.trace_mul_comm, Algebra.intTrace_eq_trace, LinearMap.trace_transpose'",
+   "date": "2026-10-23",
+   "verdict": "no match: linear or algebra trace statements do not identify the Rosati adjoint product with geometric intersections"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The trace of the Rosati adjoint product on a Tate module is a mixed intersection number of line bundles on an abelian variety",
+   "results": "8 hits; top: Module.Basis.trace_mul_traceDual, Module.Basis.trace_traceDual_mul, isIntegral_discr_mul_of_mem_traceDual, LinearMap.trace_eq_contract_apply, Algebra.traceForm_apply, Module.Basis.traceDual_repr_apply, Algebra.traceForm, ClassGroup.fintypeOfAdmissibleOfFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: linear or algebra trace statements do not identify the Rosati adjoint product with geometric intersections"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Rosati\"",
+   "results": "0 hits; top: ",
+   "date": "2026-10-23",
+   "verdict": "no match: linear or algebra trace statements do not identify the Rosati adjoint product with geometric intersections"
+  },
+  {
+   "tool": "grep",
+   "query": "Rosati|polarization.*degree|degree.*polarization",
+   "results": "0 hits; top: ",
+   "date": "2026-10-23",
+   "verdict": "no match: linear or algebra trace statements do not identify the Rosati adjoint product with geometric intersections"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Rosati trace of an endomorphism on an abelian variety is computed from intersection numbers of its pullback of a polarization",
+   "results": "8 hits; top: Algebra.traceForm_apply, Algebra.traceForm, Algebra.traceMatrix_apply, Algebra.traceMatrix_eq_embeddingsMatrix_mul_trans, LinearMap.trace_eq_contract', Module.Basis.trace_mul_traceDual, Algebra.trace, LinearMap.trace_eq_contract",
+   "date": "2026-10-23",
+   "verdict": "no match: linear or algebra trace statements do not identify the Rosati adjoint product with geometric intersections"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The trace of an abelian variety endomorphism times its Rosati adjoint is 2g times its mixed intersection divided by its top self intersection",
+   "results": "8 hits; top: Algebra.trace, LinearMap.traceAux_eq, LinearMap.trace_map, LinearMap.trace_eq_contract', Algebra.traceForm, LinearMap.trace_mul_comm, Algebra.intTrace_eq_trace, LinearMap.trace_transpose'",
+   "date": "2026-10-23",
+   "verdict": "no match: linear or algebra trace statements do not identify the Rosati adjoint product with geometric intersections"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rosati-trace-positive",
+  "date": "2026-10-23",
+  "group": "Q11"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Proposition 14.4(a), printed p.62; polarization convention in I §11, printed p.53. Supporting fact for Proposition 14.4(a): Chapter I §14, printed p.61 (Rosati formula and involution), Theorem 14.3, printed p.62 (positive trace form); §11 p.53 (polarization isogeny); Proposition 10.20, printed pp.50–52 (trace on Tate modules). Supporting input: Chapter I, Theorem 14.3, printed p.62, displayed trace/intersection identity; Proposition 10.20, p.50, identifies its trace with Tate trace. The displayed identity is stated for alpha alpha-dagger; cyclicity of ordinary trace gives the order used here. The calculation is omitted by these notes (reference there: Milne 1986 §17).",
+   "via": [
+    "lem-sfb-rosati-trace-positive",
+    "lem-sfb-polarized-abelian-automorphisms-finite",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-abelian-trace-intersection",
+  "worker": "stage1",
+  "summary": "Supplied the calculation omitted in Milne I Theorem 14.3: apply the degree/intersection square formula to L^r tensor f^*L, divide by the polarization degree using the relative Tate determinant formula, and compare next-to-leading polynomial coefficients. Created precisely two general geometric prerequisites, both statement-only and absent from the searched Mathlib. Reused existing top-intersection multilinearity, ample Hilbert positivity and Tate rank. The statement is unchanged; non-isogenies f are included through zero-degree conventions.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Proposition 14.4(a), printed p.62; polarization convention in I §11, printed p.53. Supporting fact for Proposition 14.4(a): Chapter I §14, printed p.61 (Rosati formula and involution), Theorem 14.3, printed p.62 (positive trace form); §11 p.53 (polarization isogeny); Proposition 10.20, printed pp.50–52 (trace on Tate modules). Supporting input: Chapter I, Theorem 14.3, printed p.62, displayed trace/intersection identity; Proposition 10.20, p.50, identifies its trace with Tate trace. The displayed identity is stated for alpha alpha-dagger; cyclicity of ordinary trace gives the order used here. The calculation is omitted by these notes (reference there: Milne 1986 §17). The four proof steps supply only the trace/intersection calculation supporting Rosati positivity along this alteration prerequisite; no unit or chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-positive-ample-hilbert-degree",
+    "why": "General ample Hilbert positivity supplies S>0; no statement in this unit supplies general positivity, and it does not replace the alteration route."
+   },
+   {
+    "node": "prop-av-tate-rank",
+    "why": "General Tate rank supplies the dimension 2g needed to compare coefficients; it is a geometric tool, not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-positive-ample-hilbert-degree",
+  "prop-av-tate-rank"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q104-9985c820b",
+  "group": "Q104",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-9985c820b (reviewer sub-agent of L); spot-checked: I read all four steps in full against Milne AV I. The item matches Th. 14.3 (p.62), which omits the calculation, in cyclic order tr(f†f), with no hypothesis changed. Step 1: the Hilbert polynomial of the L^a embedding has degree exactly g, so S=(L^g·A)=Hilbert degree>0; multilinearity gives H(r) for every integer r. Step 2: φ_{f*L}=f^∨λf is a clause of polarization-calculus; additivity comes from the tensor identity of the representing families (same reading as rosati step 1); node 1 for L makes λ an isogeny of degree (S/g!)^2. Step 3: dim V=2g, V(μh_r)=rI+V(u); nodes 2 and 1 give det=H(r)^2/S^2, and agreement on all of ℤ gives the polynomial identity. Step 4: comparing X^{2g-1} coefficients gives the formula; this step is genuinely elementary. New node 1, d(φ_N)=((N^g)/g!)^2 for any N, is Th. 11.1(a)+(b) (p.54) with the zero convention on p.46; I tested it on elliptic curves including negative degree, trivial N and a non-isogeny on E×E. New node 2, det V(μh)=d(h)/deg λ, holds via ν=nμ integral, Prop. 10.20 and Remarks 10.11 and 8.6; I tested h=λ, nλ and 0. No duplicates: tate-charpoly, degree-polynomial, thm-av-final, top-intersection-pullback and the curve Riemann–Roch nodes each state something different. Batch-5 flags (polarization-calculus, intersection-number, projective-hilbert, ample-hilbert-degree, hilbert-degree, tate-rank) are all general geometry or definitions whose closure reaches only generic trf nodes (Proj Sym, schematically dense open, graded Hilbert function), not the trace formula or Poincaré duality. I accept the two declared tool_uses. No SGA source. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianVariety.TraceIntersection",
+  "declaration": "AlgebraicGeometry.IsAbelianVariety.trace_adjoint_product_eq_intersection",
+  "declarations": [
+   "AlgebraicGeometry.IsAbelianVariety.trace_adjoint_product_eq_intersection"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianVariety/TraceIntersection.lean",
+  "statement": "theorem IsAbelianVariety.trace_adjoint_product_eq_intersection {k : Type u} [Field k] [IsAlgClosed k] (A : Over (Spec (.of k))) [GrpObj A] [IsAbelianVariety A] (g : ℕ) (hd : topologicalKrullDim A.left = (((g + 1 : ℕ) : ℕ∞) : WithBot ℕ∞)) (D : AbelianDualPoincareDatum A) (L : A.left.Modules) [L.IsInvertible] (hL : IsAmple A.hom L) (lambda : A ⟶ D.dual) [IsMonHom lambda] (hlambda : ClassifiesAbelianDifference D L lambda) (mu : abelianRationalHom D.dual A) (hmulambda : IsAbelianVariety.rationalHomPrecomp lambda mu = abelianHomToRational (abelianHomId A)) (hlambdamu : IsAbelianVariety.rationalHomPostcomp lambda mu = abelianHomToRational (abelianHomId D.dual)) (f : A ⟶ A) [IsMonHom f] (fDual : D.dual ⟶ D.dual) [IsMonHom fDual] (hfDual : Nonempty ((Scheme.Modules.pullback (f ▷ D.dual).left).obj D.poincare ≅ (Scheme.Modules.pullback (A ◁ fDual).left).obj D.poincare)) (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : (ℓ : k) ≠ 0) : (@Scheme.Modules.selfIntersectionNumber k _ A.left ⟨A.hom⟩ (IsAbelianVariety.toIsProper (A := A)) A.left inferInstance (𝟙 A.left) inferInstance (g + 1) hd L inferInstance) ≠ 0 ∧ LinearMap.trace ℚ_[ℓ] (IsAbelianVariety.rationalTateModule ℓ A) (IsAbelianVariety.rationalHomTateMap ℓ (IsAbelianVariety.rationalHomPrecomp (f ≫ lambda ≫ fDual) mu)) = algebraMap ℚ ℚ_[ℓ] ((2 * (g + 1 : ℚ) * @Scheme.Modules.intersectionNumber k _ A.left ⟨A.hom⟩ (IsAbelianVariety.toIsProper (A := A)) A.left inferInstance (𝟙 A.left) inferInstance (g + 1) hd (Fin.cons ((Scheme.Modules.pullback f.left).obj L) (fun _ : Fin g ↦ L)) (fun j ↦ Fin.cases (by simpa only [Fin.cons_zero] using (inferInstance : ((Scheme.Modules.pullback f.left).obj L).IsInvertible)) (fun i ↦ by simpa only [Fin.cons_succ] using (inferInstance : L.IsInvertible)) j)) / @Scheme.Modules.selfIntersectionNumber k _ A.left ⟨A.hom⟩ (IsAbelianVariety.toIsProper (A := A)) A.left inferInstance (𝟙 A.left) inferInstance (g + 1) hd L inferInstance)",
+  "branch": "newtargets-dag",
+  "by": "Q155",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d96f94040",
+  "group": "Q155",
+  "result": "pass",
+  "note": "Every clause matches the Lean (Milne AV I Thm 14.3 / Prop 10.20). Dimension is g+1, which covers all positive dimensions including g=0. λ is fixed by ClassifiesAbelianDifference with the landed AbelianDualPoincareDatum, and fDual by the Poincaré-pullback iso, the same characterization as the aDual clause of exists_dual_polarization_calculus, so neither is arbitrary. mu : ℚ⊗Hom(A^∨,A), with precomp/postcomp inverse equations in the correct directions. The endomorphism is rationalHomPrecomp (f≫λ≫fDual) mu = μ f^∨ λ f. The selfIntersectionNumber≠0 conjunct and algebraMap ℚ ℚ_ℓ of the whole ratio are present. New node def-sfb-abelian-rational-tate-action has real bodies (Yoneda precomposition, IsMonHom.monoidHom postcomposition, baseChange ℚ, tateModuleMap with additivity proved, TensorProduct.lift q⊗h↦q·V_ℓ h) and reuses N9's landed RationalHom; grep of live and side-live found no duplicate. lean.statement is verbatim in both files. Dependency records are unchanged vs side-live; only the item's stmt_deps/lean and the new node are added. The only sorry is the item theorem, whose docstring has the 4-step plan and source. No SGA source, no pro-étale substitute. Not recompiled per instructions."
+ }
+}

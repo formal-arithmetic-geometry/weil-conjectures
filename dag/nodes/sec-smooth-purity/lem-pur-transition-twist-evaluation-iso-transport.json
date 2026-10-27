@@ -1,0 +1,257 @@
+{
+ "id": "lem-pur-transition-twist-evaluation-iso-transport",
+ "kind": "statement",
+ "title": "Transport of twist tower and inverse evaluation equations along transition isomorphisms",
+ "statement": "Let $I$ be a preordered set and $\\mathcal A_i$ categories [def-nagata-category]. For $i\\leq j$ let $B_{ji},C_{ji}:\\mathcal A_i\\to\\mathcal A_j$ be functors with natural isomorphisms $\\chi_{ji}:B_{ji}\\cong C_{ji}$. Suppose $B$ has natural associators $d_{kji}:B_{kj}B_{ji}\\cong B_{ki}$ and units $\\lambda_i:B_{ii}\\cong1$ satisfying the coherence and unit equations of [lem-pur-transition-associator-iso-transport], and let $a,u$ be its transported associators and units:\n$$a_{kji,K}=\\chi_{ki,K}d_{kji,K}(\\chi_{kj,C_{ji}K}B_{kj}(\\chi_{ji,K}))^{-1},\\qquad u_{i,K}=\\lambda_{i,K}\\chi_{ii,K}^{-1}.$$\nComposition is functional. For each integer $m$ let $T_{i,m}:\\mathcal A_i\\to\\mathcal A_i$ be an endofunctor with a natural isomorphism $\\epsilon_{i,m}:T_{i,-m}T_{i,m}\\cong1$. Suppose specified natural isomorphisms $\\bar\\beta_{ji,m}:B_{ji}T_{i,m}\\cong T_{j,m}B_{ji}$ satisfy, for every $K\\in\\mathcal A_i$,\n$$T_{k,m}(d_{kji,K})\\bar\\beta_{kj,m,B_{ji}K}B_{kj}(\\bar\\beta_{ji,m,K})=\\bar\\beta_{ki,m,K}d_{kji,T_{i,m}K},$$\n$$\\epsilon_{j,m,B_{ji}K}T_{j,-m}(\\bar\\beta_{ji,m,K})\\bar\\beta_{ji,-m,T_{i,m}K}=B_{ji}(\\epsilon_{i,m,K}).$$\nDefine $\\beta_{ji,m,K}=T_{j,m}(\\chi_{ji,K})\\bar\\beta_{ji,m,K}\\chi_{ji,T_{i,m}K}^{-1}$. These are natural isomorphisms $C_{ji}T_{i,m}\\cong T_{j,m}C_{ji}$ satisfying\n$$T_{k,m}(a_{kji,K})\\beta_{kj,m,C_{ji}K}C_{kj}(\\beta_{ji,m,K})=\\beta_{ki,m,K}a_{kji,T_{i,m}K},$$\n$$\\epsilon_{j,m,C_{ji}K}T_{j,-m}(\\beta_{ji,m,K})\\beta_{ji,-m,T_{i,m}K}=C_{ji}(\\epsilon_{i,m,K}).$$\nTheir unit-normalized components are exactly\n$$T_{i,m}(u_{i,K})\\beta_{ii,m,K}u_{i,T_{i,m}K}^{-1}=T_{i,m}(\\lambda_{i,K})\\bar\\beta_{ii,m,K}\\lambda_{i,T_{i,m}K}^{-1}.$$\nMore generally, for any $i\\leq j$ with $\\mathcal A_i=\\mathcal A_j$ and any specified natural isomorphism $\\lambda:B_{ji}\\cong1$, set $v_K=\\lambda_K\\chi_{ji,K}^{-1}$. Without identifying $T_{i,m}$ with $T_{j,m}$ one has\n$$T_{j,m}(v_K)\\beta_{ji,m,K}v_{T_{i,m}K}^{-1}=T_{j,m}(\\lambda_K)\\bar\\beta_{ji,m,K}\\lambda_{T_{i,m}K}^{-1}.$$\nThus normalization of the transition unit retains any prescribed nonidentity ordinary twist comparison. If its ordinary normalized component is identity under specified identifications of the two twists, so is its transported component. These assertions require only the displayed data and equations; no monoidal, additive, triangulated or completeness structure is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+  "place": "Proof (3), inverse tensor pair and final coefficient convention; general categorical cancellation argument extracted by the agent from original parent steps 5, 7, 8 and 11, not a numbered result of the source."
+ },
+ "stmt_deps": [
+  "def-nagata-category",
+  "lem-pur-transition-associator-iso-transport"
+ ],
+ "proof": [
+  {
+   "text": "Use the actual comparison, associator and unitIso definitions of [lem-pur-transition-associator-iso-transport]. Expanding associator and unitIso cancels the adjacent transition isomorphisms and yields a z = chi d and u chi = lambda on components. These identities follow from the definitions alone; the coherence theorem transport is not needed for the three equations proved here. Keep the supplied coherence hypothesis unchanged in the interface. All remaining calculations use only functor laws, naturality, inverse equations, and the ordinary tower and evaluation hypotheses.",
+   "uses": [
+    "lem-pur-transition-associator-iso-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), inverse tensor pair and final coefficient convention; general categorical cancellation argument extracted by the agent from original parent steps 5, 7, 8 and 11, not a numbered result of the source."
+   }
+  },
+  {
+   "text": "Fix $i\\leq j,m$ and abbreviate $F=B_{ji}$, $F'=C_{ji}$, $x=\\chi_{ji}$, $P=T_{i,m}$, $Q=T_{j,m}$, $b=\\bar\\beta_{ji,m}$ and $p_K=Q(x_K)b_Kx_{PK}^{-1}$. Each factor is invertible: for any functor $Q$, the two composites of $Q(x)$ and $Q(x^{-1})$ are identities by preservation of composition and identities. Explicitly $p_K^{-1}=x_{PK}b_K^{-1}Q(x_K^{-1})$. For $f:K\\to L$, naturality of $x,b,x^{-1}$ gives\n$$Q(F'f)p_K=Q(x_L)Q(Ff)b_Kx_{PK}^{-1}=Q(x_L)b_LF(Pf)x_{PK}^{-1}=p_LF'(Pf).$$\nHence these components define the asserted natural isomorphism. Here naturality means $G(f)\\eta_K=\\eta_LF(f)$ for $\\eta:F\\to G$; its inverse equation follows by multiplying this equation by the inverse components. These are definitions and cancellation in the categories of [def-nagata-category], not an additional transport theorem.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), inverse tensor pair and final coefficient convention; general categorical cancellation argument extracted by the agent from original parent steps 5, 7, 8 and 11, not a numbered result of the source."
+   }
+  },
+  {
+   "text": "For the tower fix $i\\leq j\\leq k,m$. In addition to Step 2 put $G=B_{kj}$, $G'=C_{kj}$, $y=\\chi_{kj}$, $R=T_{k,m}$, $c=\\bar\\beta_{kj,m}$ and $q=\\beta_{kj,m}$. Then $z_K=y_{F'K}G(x_K)$ (suppressing $kji$). Naturality of $y$ at $p_K$ and the defining equation $q_Xy_{QX}=R(y_X)c_X$ give the first equality below. Use $p_Kx_{PK}=Q(x_K)b_K$ for the second and naturality of $c:GQ\\to RG$ at $x_K:FK\\to F'K$ for the third:\n$$\\begin{aligned}\nq_{F'K}G'(p_K)z_{PK}&=R(y_{F'K})c_{F'K}G(p_Kx_{PK})\\\\\n&=R(y_{F'K})c_{F'K}G(Q(x_K))G(b_K)\\\\\n&=R(y_{F'K})R(G(x_K))c_{FK}G(b_K)\\\\\n&=R(z_K)c_{FK}G(b_K).\n\\end{aligned}$$\nEvery map has source $GF(PK)$ and target $R(G'F'K)$. This is a direct component calculation, using no compatibility for the transported comparisons.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), inverse tensor pair and final coefficient convention; general categorical cancellation argument extracted by the agent from original parent steps 5, 7, 8 and 11, not a numbered result of the source."
+   }
+  },
+  {
+   "text": "Keep Step 3's notation and put $h=\\chi_{ki}$, $e=\\bar\\beta_{ki,m}$, $r=\\beta_{ki,m}$, $d=d_{kji}$ and $a=a_{kji}$. Precompose the proposed tower equality with the isomorphism $z_{PK}$. Step 3, then $a_Kz_K=h_Kd_K$, the assumed ordinary tower equation, and $r_Kh_{PK}=R(h_K)e_K$ give\n$$\\begin{aligned}\nR(a_K)q_{F'K}G'(p_K)z_{PK}\n&=R(h_K)R(d_K)c_{FK}G(b_K)\\\\\n&=R(h_K)e_Kd_{PK}\\\\\n&=r_Kh_{PK}d_{PK}\\\\\n&=r_Ka_{PK}z_{PK}.\n\\end{aligned}$$\nPostcomposing both expressions on the right with $z_{PK}^{-1}$ proves exactly the tower equation for $\\beta$. This uses the ordinary tower hypothesis at the original object $K$, not a tower hypothesis for $C$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), inverse tensor pair and final coefficient convention; general categorical cancellation argument extracted by the agent from original parent steps 5, 7, 8 and 11, not a numbered result of the source."
+   }
+  },
+  {
+   "text": "For evaluation return to Step 2's notation and set $N=T_{i,-m}$, $M=T_{j,-m}$, $c=\\bar\\beta_{ji,-m}$ and $q=\\beta_{ji,-m}$. The component $q_{PK}$ equals $M(x_{PK})c_{PK}x_{NPK}^{-1}$. Expanding $p_K$ therefore cancels the adjacent factors $M(x_{PK}^{-1})M(x_{PK})$:\n$$\\epsilon_{j,m,F'K}M(p_K)q_{PK}=\\epsilon_{j,m,F'K}MQ(x_K)M(b_K)c_{PK}x_{NPK}^{-1}.$$\nNaturality of the specified $\\epsilon_{j,m}:MQ\\to1$ at $x_K:FK\\to F'K$ says $\\epsilon_{j,m,F'K}MQ(x_K)=x_K\\epsilon_{j,m,FK}$. Thus the last display equals\n$$x_K\\epsilon_{j,m,FK}M(b_K)c_{PK}x_{NPK}^{-1}.$$\nNo symmetry between $m$ and $-m$, and no triangle identities for an adjunction, have been assumed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), inverse tensor pair and final coefficient convention; general categorical cancellation argument extracted by the agent from original parent steps 5, 7, 8 and 11, not a numbered result of the source."
+   }
+  },
+  {
+   "text": "The ordinary evaluation equation in the hypotheses identifies $\\epsilon_{j,m,FK}M(b_K)c_{PK}$ from Step 5 with $F(\\epsilon_{i,m,K})$. Naturality of $x:F\\to F'$ at the morphism $\\epsilon_{i,m,K}:NPK\\to K$ now gives\n$$x_KF(\\epsilon_{i,m,K})x_{NPK}^{-1}=F'(\\epsilon_{i,m,K})x_{NPK}x_{NPK}^{-1}=F'(\\epsilon_{i,m,K}).$$\nTogether with Step 5 this is the asserted transported inverse evaluation equation, for every integer $m$, including $m=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), inverse tensor pair and final coefficient convention; general categorical cancellation argument extracted by the agent from original parent steps 5, 7, 8 and 11, not a numbered result of the source."
+   }
+  },
+  {
+   "text": "For the general normalization clause assume $\\mathcal A_i=\\mathcal A_j$ and let $\\lambda:F\\cong1$ be the specified isomorphism. Keep $P=T_{i,m}$ and $Q=T_{j,m}$ distinct and set $v_K=\\lambda_Kx_K^{-1}$. Its inverse at $PK$ is $v_{PK}^{-1}=x_{PK}\\lambda_{PK}^{-1}$. Direct substitution yields\n$$\\begin{aligned}\nQ(v_K)p_Kv_{PK}^{-1}\n&=Q(\\lambda_K)Q(x_K^{-1})Q(x_K)b_Kx_{PK}^{-1}x_{PK}\\lambda_{PK}^{-1}\\\\\n&=Q(\\lambda_K)b_K\\lambda_{PK}^{-1}.\n\\end{aligned}$$\nBoth sides are morphisms $PK\\to QK$. Thus this equality does not require $P=Q$. The identity cancels only the $x$ components and does not replace the ordinary normalized comparison by an identity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), inverse tensor pair and final coefficient convention; general categorical cancellation argument extracted by the agent from original parent steps 5, 7, 8 and 11, not a numbered result of the source."
+   }
+  },
+  {
+   "text": "For self-transition normalization expand unitIso and twistIso directly. Cancel chi followed by chi inverse at T_i,m(K); functoriality and the inverse equations cancel T_i,m(chi_K) followed by T_i,m(chi inverse_K). The remaining expression is exactly lambda inverse at T_i,m(K), then the ordinary twist comparison, then T_i,m(lambda_K). This is also the specialization of Step 7 to P = Q = T_i,m. For a specified identification e : P iso Q, postcompose the equality in Step 7 with e inverse. Reassociation shows that identity of the ordinary normalized comparison implies identity of the transported comparison. No additional structure or equality P = Q is needed in that general clause.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), inverse tensor pair and final coefficient convention; general categorical cancellation argument extracted by the agent from original parent steps 5, 7, 8 and 11, not a numbered result of the source."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-transition-associator-iso-transport",
+  "def-nagata-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+  "place": "Proof (3), inverse tensor pair and final coefficient convention; general categorical cancellation argument extracted by the agent from original parent steps 5, 7, 8 and 11, not a numbered result of the source. Explicit component calculations by NY; the blueprint motivates the comparison but does not state this categorical transport lemma. Lean proof by W4: direct expansion and cancellation of the canonical associator and unit definitions, followed by naturality and the supplied ordinary equations; no use of the unproved transport theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Conjugating a natural scalar tensor comparison by functor isomorphisms preserves the tower compatibility and the evaluation equation for inverse endofunctors",
+   "results": "CategoryTheory.Equivalence.counitIso_inv_app_tensor_comp_functor_map_δ_inverse_assoc; CategoryTheory.Equivalence.counitIso_inv_app_tensor_comp_functor_map_δ_inverse; CategoryTheory.Equivalence.counitInv_app_tensor_comp_functor_map_δ_inverse_assoc; CategoryTheory.Equivalence.counitInv_app_tensor_comp_functor_map_δ_inverse; CategoryTheory.Equivalence.functor_map_μ_inverse_comp_counitIso_hom_app_tensor; CategoryTheory.Equivalence.functor_map_μ_inverse_comp_counitIso_hom_app_tensor_assoc; CategoryTheory.MonoidalClosedFunctor.comparison_iso; CategoryTheory.Equivalence.unitIso_hom_app_tensor_comp_inverse_map_δ_functor",
+   "date": "2026-10-22",
+   "verdict": "no match: natural-transformation primitives, monoidal equivalence identities and evaluation of functors do not assert this simultaneous transition-tower, inverse-evaluation and unit-normalization transport"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pseudonatural family of endofunctors and its inverse evaluation remains compatible after conjugating all transition functors by natural isomorphisms",
+   "results": "CategoryTheory.Pseudofunctor.mapComp'_inv_naturality; CategoryTheory.Pseudofunctor.mapId'_inv_naturality; CategoryTheory.Pseudofunctor.ObjectProperty.mapComp_inv_app; CategoryTheory.Join.pseudofunctorLeft_mapComp_inv_toNatTrans_app; CategoryTheory.Pseudofunctor.mapComp'_inv_naturality_assoc; CategoryTheory.Join.pseudofunctorRight_mapComp_inv_toNatTrans_app; CategoryTheory.Pseudofunctor.mapId'_inv_naturality_assoc; CategoryTheory.Pseudofunctor.mapComp'_naturality_1",
+   "date": "2026-10-22",
+   "verdict": "no match: natural-transformation primitives, monoidal equivalence identities and evaluation of functors do not assert this simultaneous transition-tower, inverse-evaluation and unit-normalization transport"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural isomorphism conjugation of a functor comparison preserves composition and evaluation coherence",
+   "results": "CategoryTheory.Functor.functorialityCompPostcompose; CategoryTheory.largeCurriedCoyonedaLemma; CategoryTheory.flipCompEvaluation; CategoryTheory.compEvaluation; CategoryTheory.Pi.comapEvalIsoEval; CategoryTheory.Functor.pi'CompEval; CategoryTheory.Endofunctor.Algebra.functorOfNatTransComp; CategoryTheory.Functor.mapCommGrpCompIso",
+   "date": "2026-10-22",
+   "verdict": "no match: natural-transformation primitives, monoidal equivalence identities and evaluation of functors do not assert this simultaneous transition-tower, inverse-evaluation and unit-normalization transport"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans, CategoryTheory.Functor",
+   "results": "CategoryTheory.NatTrans; CategoryTheory.NatTrans.id; CategoryTheory.NatTrans.instInhabited; CategoryTheory.NatTrans.vcomp; CategoryTheory.NatTrans.app; CategoryTheory.NatTrans.ext; CategoryTheory.NatTrans.ext_iff; CategoryTheory.congr_app",
+   "date": "2026-10-22",
+   "verdict": "no match: natural-transformation primitives, monoidal equivalence identities and evaluation of functors do not assert this simultaneous transition-tower, inverse-evaluation and unit-normalization transport"
+  },
+  {
+   "tool": "grep",
+   "query": "NatIso.*(conj|transport)|conj.*NatIso|pseudonatural",
+   "results": "Mathlib/CategoryTheory/Core.lean; Mathlib/CategoryTheory/Grothendieck.lean; Mathlib/CategoryTheory/Bicategory/Monad/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: natural-transformation primitives, monoidal equivalence identities and evaluation of functors do not assert this simultaneous transition-tower, inverse-evaluation and unit-normalization transport"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso, CategoryTheory.Functor",
+   "results": "loogle: unknown identifier 'CategoryTheory.NatIso'",
+   "date": "2026-10-22",
+   "verdict": "invalid query: loogle: unknown identifier 'CategoryTheory.NatIso'; corrected by the subsequent NatTrans query"
+  },
+  {
+   "tool": "grep",
+   "query": "NatIso.*(conj|transport)|conj.*NatIso|twist.*evaluation",
+   "results": "Mathlib/CategoryTheory/Grothendieck.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected primitives or results about conjugation, pseudofunctor naturality, or specific Dold-Kan equivalences; none states all the transition-tower, inverse-evaluation and normalization identities in the item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural isomorphism conjugation preserves composition coherence and evaluation of inverse endofunctors",
+   "results": "CategoryTheory.Iso.conj; CategoryTheory.conjugateEquiv_symm_iso; CategoryTheory.largeCurriedCoyonedaLemma; CategoryTheory.Cat.Hom.hom_inv_id_toNatTrans_app_assoc; CategoryTheory.compEvaluation; CategoryTheory.Functor.map_conj; CategoryTheory.Cat.Hom.hom_inv_id_toNatTrans; CategoryTheory.Iso.isoInverseComp",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected primitives or results about conjugation, pseudofunctor naturality, or specific Dold-Kan equivalences; none states all the transition-tower, inverse-evaluation and normalization identities in the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Conjugating natural twist comparisons by transition functor isomorphisms preserves their composition and inverse evaluation identities",
+   "results": "AlgebraicTopology.DoldKan.Compatibility.τ₁; AlgebraicTopology.DoldKan.Compatibility.υ; CategoryTheory.SingleFunctors.hom_inv_id_hom_assoc; CategoryTheory.SingleFunctors.hom_inv_id_hom_app_assoc; CategoryTheory.SingleFunctors.inv_hom_id_hom_app_assoc; CategoryTheory.SingleFunctors.inv_hom_id_hom_assoc; CategoryTheory.NatTrans.naturality_2_assoc; CategoryTheory.NatTrans.naturality_2",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected primitives or results about conjugation, pseudofunctor naturality, or specific Dold-Kan equivalences; none states all the transition-tower, inverse-evaluation and normalization identities in the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans, CategoryTheory.Functor",
+   "results": "CategoryTheory.NatTrans; CategoryTheory.NatTrans.id; CategoryTheory.NatTrans.instInhabited; CategoryTheory.NatTrans.vcomp; CategoryTheory.NatTrans.app; CategoryTheory.NatTrans.ext; CategoryTheory.NatTrans.ext_iff; CategoryTheory.congr_app",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected primitives or results about conjugation, pseudofunctor naturality, or specific Dold-Kan equivalences; none states all the transition-tower, inverse-evaluation and normalization identities in the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pseudonatural family of endofunctors with evaluation is conjugated along natural isomorphisms of the underlying transition functors",
+   "results": "CategoryTheory.Pseudofunctor.mapComp'_naturality_1; CategoryTheory.Pseudofunctor.mapComp'_naturality_2; CategoryTheory.Pseudofunctor.CoGrothendieck.mapCompIso; CategoryTheory.WithTerminal.pseudofunctor_mapComp; CategoryTheory.Pseudofunctor.mapId'_hom_naturality; CategoryTheory.Pseudofunctor.mapComp'_hom_naturality; CategoryTheory.Pseudofunctor.ObjectProperty.map₂_app_hom; CategoryTheory.Functor.toPseudoFunctor'_mapComp",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected primitives or results about conjugation, pseudofunctor naturality, or specific Dold-Kan equivalences; none states all the transition-tower, inverse-evaluation and normalization identities in the item"
+  },
+  {
+   "tool": "grep",
+   "query": "def conj|theorem map_conj|def transport|def preNatIso",
+   "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Grothendieck.lean; Mathlib/CategoryTheory/Grothendieck.lean; Mathlib/CategoryTheory/Grothendieck.lean; Mathlib/CategoryTheory/Conj.lean; Mathlib/CategoryTheory/Conj.lean; Mathlib/CategoryTheory/Conj.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected primitives or results about conjugation, pseudofunctor naturality, or specific Dold-Kan equivalences; none states all the transition-tower, inverse-evaluation and normalization identities in the item"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-completed-line-tensor-coherence",
+  "date": "2026-10-22",
+  "group": "Q61"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "det-def-sp-tate-twist-locally-free",
+   "place": "Proof (3), final inverse-pair/scalar compatibility: conjugation of twist tower, evaluation and repeated-field components (parent old steps 5, 7, 8, 11).",
+   "via": [
+    "lem-pur-completed-line-tensor-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-transition-twist-evaluation-iso-transport",
+  "worker": "stage1",
+  "summary": "Verified every component equation directly. Eight steps establish natural isomorphy, the tower identity after precomposition with z, the evaluation identity by naturality of epsilon, and normalization with possibly distinct twists. Reused the existing associator-transport node and category definition; no new nodes or statement changes. Recorded fresh logged Mathlib searches without discarding the inherited search records.",
+  "blueprint": "det-def-sp-tate-twist-locally-free, proof (3), inverse tensor pair and final coefficient convention, via lem-pur-completed-line-tensor-coherence: supplies the categorical tower, inverse evaluation and repeated-transition normalization calculations extracted in that parent."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NY-c7856e815",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-c7856e815 (reviewer sub-agent of L); spot-checked: I recomputed all 8 steps and they are correct. Step 2: naturality of p uses naturality of x, b and x^{-1}, and the explicit inverse is right. Steps 3–4: naturality of y at p_K, the definition of q, and naturality of c at x_K give R(z_K)c_{FK}G(b_K); then a z = χ d, the ordinary tower hypothesis at K (matching the displayed hypothesis), the definition of r and cancelling z_{PK} give the transported tower. Steps 5–6: M(x^{-1})M(x) cancels, naturality of ε_{j,m} at x_K, the ordinary evaluation hypothesis, then naturality of x at ε_{i,m,K}; no triangle identity or ±m symmetry is used. Steps 7–8: two inverse cancellations give a map PK→QK without P=Q, and u_i is the j=i case. The cited associator-transport node (same unit, unsplit, no cycle) assumes exactly the item's hypotheses and states a z = χ d and u χ = λ. def-nagata-category is a Mathlib leaf. Source: main-20261015 sk-def-sp-tate-twist-locally-free proof (3); the origin is agent-written and correctly marked; no SGA. The statement is unchanged; this is a first split of a node created 2026-10-22 with no new nodes. Edge cases checked: empty I, a single index with nonidentity χ_ii, m=0, and a scalar model with β̄_{10,m}=2^m, where both tower sides equal 2^m/χ_11. A duplicate search over dag/nodes found nothing. Searches cover all three kinds. No fixes, no tool uses."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.TransitionTwistEvaluationIsoTransport",
+  "declaration": "CategoryTheory.TransitionIsoTransport.transportTwistEvaluation",
+  "declarations": [
+   "CategoryTheory.TransitionIsoTransport.twistIso",
+   "CategoryTheory.TransitionIsoTransport.transportTwistEvaluation",
+   "CategoryTheory.TransitionIsoTransport.twistIso_normalization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/TransitionTwistEvaluationIsoTransport.lean",
+  "statement": "theorem transportTwistEvaluation (B C : ∀ {i j : I}, i ≤ j → (A i ⥤ A j)) (χ : ∀ {i j : I} (h : i ≤ j), B h ≅ C h) (d : ∀ {i j k : I} (hij : i ≤ j) (hjk : j ≤ k), B hij ⋙ B hjk ≅ B (le_trans hij hjk)) (lam : ∀ i : I, B (le_refl i) ≅ 𝟭 (A i)) (hB : Coherent B d lam) (T : ∀ (i : I) (m : ℤ), A i ⥤ A i) (ε : ∀ (i : I) (m : ℤ), T i m ⋙ T i (-m) ≅ 𝟭 (A i)) (b : ∀ {i j : I} (h : i ≤ j) (m : ℤ), T i m ⋙ B h ≅ B h ⋙ T j m) (hTower : ∀ {i j k : I} (hij : i ≤ j) (hjk : j ≤ k) (m : ℤ) (K : A i), (B hjk).map ((b hij m).hom.app K) ≫ (b hjk m).hom.app ((B hij).obj K) ≫ (T k m).map ((d hij hjk).hom.app K) = (d hij hjk).hom.app ((T i m).obj K) ≫ (b (le_trans hij hjk) m).hom.app K) (hEvaluation : ∀ {i j : I} (h : i ≤ j) (m : ℤ) (K : A i), (b h (-m)).hom.app ((T i m).obj K) ≫ (T j (-m)).map ((b h m).hom.app K) ≫ (ε j m).hom.app ((B h).obj K) = (B h).map ((ε i m).hom.app K)) : (∀ {i j k : I} (hij : i ≤ j) (hjk : j ≤ k) (m : ℤ) (K : A i), (C hjk).map ((twistIso (B hij) (C hij) (χ hij) (T i m) (T j m) (b hij m)).hom.app K) ≫ (twistIso (B hjk) (C hjk) (χ hjk) (T j m) (T k m) (b hjk m)).hom.app ((C hij).obj K) ≫ (T k m).map ((associator B C χ d hij hjk).hom.app K) = (associator B C χ d hij hjk).hom.app ((T i m).obj K) ≫ (twistIso (B (le_trans hij hjk)) (C (le_trans hij hjk)) (χ (le_trans hij hjk)) (T i m) (T k m) (b (le_trans hij hjk) m)).hom.app K) ∧ (∀ {i j : I} (h : i ≤ j) (m : ℤ) (K : A i), (twistIso (B h) (C h) (χ h) (T i (-m)) (T j (-m)) (b h (-m))).hom.app ((T i m).obj K) ≫ (T j (-m)).map ((twistIso (B h) (C h) (χ h) (T i m) (T j m) (b h m)).hom.app K) ≫ (ε j m).hom.app ((C h).obj K) = (C h).map ((ε i m).hom.app K)) ∧ (∀ (i : I) (m : ℤ) (K : A i), (unitIso B C χ lam i).inv.app ((T i m).obj K) ≫ (twistIso (B (le_refl i)) (C (le_refl i)) (χ (le_refl i)) (T i m) (T i m) (b (le_refl i) m)).hom.app K ≫ (T i m).map ((unitIso B C χ lam i).hom.app K) = (lam i).inv.app ((T i m).obj K) ≫ (b (le_refl i) m).hom.app K ≫ (T i m).map ((lam i).hom.app K))",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The canonical twistIso supplies the displayed natural isomorphisms. The main theorem states tower, inverse evaluation and self-unit normalization; twistIso_normalization states the general common-category normalization with distinct source and target twists and its identity consequence. All constructions use the actual associator and unitIso of the recorded dependency."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ee5ddcb01",
+  "group": "NP",
+  "result": "pass",
+  "note": "All clauses match the node: twistIso hom = χ⁻¹_{PK}≫b_K≫Q(χ_K) = β; hTower/hEvaluation are the node's ordinary equations in diagrammatic order; conjuncts give the transported tower (actual dep associator), transported evaluation with the same ε, and self-unit normalization with actual unitIso/lam; twistIso_normalization generalizes the common-category clause with P≠Q allowed, and its identity consequence is correctly typed. Uses the recorded dep's Coherent/associator/unitIso. lean.statement verbatim; node otherwise identical to live; docstrings carry source+blueprint tag and all 8 steps; only sorry; no extra instances or universe restriction; edge cases (empty I, i=j with nonidentity χ_ii, m=0, scalar model) fine; no name collisions. Not recompiled per instructions; worker reports clean scompile and dry-run OK."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261022T144429-L-1678979",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

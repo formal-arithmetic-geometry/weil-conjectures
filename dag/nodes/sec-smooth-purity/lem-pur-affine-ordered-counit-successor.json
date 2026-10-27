@@ -1,0 +1,140 @@
+{
+ "id": "lem-pur-affine-ordered-counit-successor",
+ "kind": "statement",
+ "title": "Propagation of the ordinary coefficient counit by one coordinate",
+ "statement": "Fix the finite purity setting $P$ [def-pur-conventions], a Noetherian scheme $Y$ over its field and $d\\geq0$. Assume for every ordinary constructible finite-Tor complex $K$ on $Y$ that the ordered rank-$d$ counit, canonical source isomorphism [def-pur-affine-ordered-counit-data] and actual ordered trace [def-pur-affine-ordered-integration-data] satisfy the coefficient-counit equation. Then the same equation holds in rank $d+1$ for every such $K$. This is only the one-coordinate propagation step and does not assert the rank-zero equation.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Final paragraph, ordered affine-space integration and canonical reassociations; expanded ordered-transpose proof Steps 5 and 6."
+ },
+ "stmt_deps": [
+  "def-pur-affine-ordered-counit-data",
+  "def-pur-affine-ordered-integration-data"
+ ],
+ "proof": [
+  {
+   "text": "Use normalized_source_descent to identify the two canonical source-descent recursions. This proved comparison is in its own module solely to keep each file below the compilation limit.",
+   "uses": [
+    "lem-pur-affine-ordered-counit-descent-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The restriction theorem for the unbounded tower compact-support comparison identifies ordinaryCompactComparison with its unbounded component at every bounded-below input. The unbounded comparison and affineDualizingTowerComparison obey the same identity/successor recursion, hence are equal. This also identifies affineLinearCompactComparison at the unit source.",
+   "uses": [
+    "lem-amb-affine-trace-compact-comparison-restriction",
+    "def-pur-affine-dualizing-tower-comparison",
+    "def-pur-affine-ordered-counit-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply ordinaryAffineCounit_tensor_normalization at rank d+1 with the actual normalized transport and projectiveDatum. Change its Tate coefficient coordinates by c = coefficientComparison inverse followed by towerTateIso. Functoriality of the tensor bifunctor and naturality in its first factor identify its reassociation with ordinarySourceIso followed by tensor with c. The preceding comparison equalities identify its counit with ordinaryCounit after inverse source transport. Cancellation of coefficientComparison identifies its trace with compact support applied to c inverse followed by ordinaryTraceRaw.",
+   "uses": [
+    "lem-pur-ordinary-affine-counit-tensor-normalization",
+    "def-pur-affine-ordered-integration-data",
+    "def-pur-affine-ordered-counit-data",
+    "def-trf-coordinate-counit-arrows"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The compact-support projection is natural in its source coefficient: this follows by pasting naturality of its two tensor symmetries, proper/open projection and exact-pullback comparison. Precompose the known normalization equation with tensor by compact support of c. Naturality moves c through the projection; its inverse cancels in both source and trace. The private categorical normalization_transport calculation gives exactly OrdinaryCounitEquation after ordinaryFiniteTensorTrace_app. No preceding-rank hypothesis is needed because the existing normalization applies at every rank.",
+   "uses": [
+    "lem-amb-shriek-tensor-composition",
+    "def-asd-ordinary-finite-trace-counit"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-asd-ordinary-finite-trace-counit",
+  "def-pur-affine-dualizing-tower-comparison",
+  "def-pur-affine-ordered-counit-data",
+  "def-pur-affine-ordered-integration-data",
+  "def-trf-coordinate-counit-arrows",
+  "lem-amb-affine-trace-compact-comparison-restriction",
+  "lem-amb-shriek-tensor-composition",
+  "lem-pur-affine-ordered-counit-descent-comparison",
+  "lem-pur-ordinary-affine-counit-tensor-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/AlgebraicGeometry/OrdinaryAffineCounitTensorNormalization.lean",
+  "place": "ordinaryAffineCounit_tensor_normalization, specialized at rank d+1 and transported between the specified canonical coefficient, source and left-comparison coordinates; G8 proves all comparison and cancellation glue privately in the item module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp_counit_app",
+   "results": "One hit: CategoryTheory.Adjunction.comp_counit_app in Mathlib.CategoryTheory.Adjunction.Basic. It expands the composite counit but does not identify the normalized geometric projection or source-descent maps.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The coefficient counit of the identity adjunction is tensor with its unit trace and the counit of composed adjunctions propagates this formula by induction",
+   "results": "Eight hits, including Adjunction.comp_counit, comp_counit_app, id_counit and monoidal counit facts. These are abstract identities, without the canonical compact-support, finite Tate and coefficient-descent comparisons.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupportProjectionMap_comp|projection.*composition|ordinary.*counit",
+   "results": "Five Mathlib hits in symbolic dynamics, tactic simps, Dold-Kan and transfinite composition; no compact-support projection or finite coefficient counit formula. Project search found the existing composite-counit, ordinary projection-composition and ordered-affine construction modules, reused here.",
+   "date": "2026-10-26",
+   "verdict": "no Mathlib match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AffineOrderedIntegrationTransposes",
+  "date": "2026-10-26",
+  "group": "H7"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-projection-purity-agreement",
+   "place": "Final paragraph, ordered affine-space integration and canonical reassociations; expanded ordered-transpose proof Steps 5 and 6.",
+   "via": [
+    "lem-pur-affine-ordered-integration-transposes"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AffineOrderedCounitSuccessor",
+  "file": "lean/Sheaf/Paper/AffineOrderedCounitSuccessor.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.AffineOrderedIntegration.ordinary_counit_successor",
+  "statement": "theorem ordinary_counit_successor (P : WeilConjectures.PurityFiniteSetting.{u})\n    (Y : Scheme.{u}) [IsNoetherian Y] (aY : Y ⟶ Spec (.of P.field.k)) (d : ℕ)\n    (ih : ∀ (K : Etale.DerivedCategoryModule (AffineLinePurity.Ring P) Y)\n    (hK : etaleFiniteTor (AffineLinePurity.Ring P) Y K),\n    OrdinaryCounitEquation (AffineLinePurity.Ring P) (affineTraceProjection Y d)\n      (Etale.affineLinearBaseCoefficient (AffineLinePurity.Ring P) (exponent P) (annihilates P)\n        (affineTraceTower Y d) d) K _ (ordinarySourceIso P Y aY K d)\n      (ordinaryCounit P Y aY K hK d) (ordinaryTraceRaw P Y aY d)) :\n    ∀ (K : Etale.DerivedCategoryModule (AffineLinePurity.Ring P) Y)\n    (hK : etaleFiniteTor (AffineLinePurity.Ring P) Y K),\n    OrdinaryCounitEquation (AffineLinePurity.Ring P) (affineTraceProjection Y (d + 1))\n      (Etale.affineLinearBaseCoefficient (AffineLinePurity.Ring P) (exponent P) (annihilates P)\n        (affineTraceTower Y (d + 1)) (d + 1)) K _ (ordinarySourceIso P Y aY K (d + 1))\n      (ordinaryCounit P Y aY K hK (d + 1)) (ordinaryTraceRaw P Y aY (d + 1))",
+  "branch": "sheaf-dag",
+  "by": "H7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-61915",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261026T222713-L-684473",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G8",
+  "result": "pass",
+  "landing": "20261026T235902-L-1465778",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

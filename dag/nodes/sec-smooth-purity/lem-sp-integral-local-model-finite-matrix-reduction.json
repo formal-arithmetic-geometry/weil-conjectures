@@ -1,0 +1,266 @@
+{
+ "id": "lem-sp-integral-local-model-finite-matrix-reduction",
+ "kind": "statement",
+ "title": "Finite matrix models for reductions of integral constant local modules",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $A=\\mathcal O_E$ and uniformizer $\\pi$ [def-weil-l-adic-coefficient-extension]. Let $S$ be any scheme, with a fixed small skeleton of $S_{\\mathrm{proét}}$ [def-weil-pbc-proetale-site]. Put $A_n=A/\\ell^n$, $B_n=\\underline{A_n}$ and $B=\\varprojlim_{n\\geq1}B_n$, with their canonical coefficient maps [sk-def-sp-coefficient-towers, def-weil-pbc-constant-sheaf]. Use sheaves of modules and their ordinary unbounded derived categories [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], sheafified tensor products [def-pur-sheaf-tensor-product], and derived scalar extension computed by K-flat complexes [lem-pur-derived-change-of-rings].\n\nLet $L$ be a $B$-module sheaf with a finite constant local model [sk-def-sfb-constructible]: on a pro-étale cover $U_j\\to S$ there are finitely presented $A$-modules $N_j$ and isomorphisms $L|_{U_j}\\simeq B_{U_j}\\otimes_{\\underline A}\\underline{N_j}$. One may choose, for each $j$, finite integers $u_j,v_j$ and a single scalar exact sequence\n$$0\\longrightarrow A^{u_j}\\xrightarrow{d_j}A^{v_j}\\longrightarrow N_j\\longrightarrow0$$\nsuch that its constant sheafification followed by extension to $B_{U_j}$ is exact. For every $n\\geq1$, the derived reduction $(L[0]\\otimes_B^LB_n)|_{U_j}$ is isomorphic in $D((B_n)_{U_j})$ to\n$$[\\underline{A_n}^{u_j}\\xrightarrow{\\overline d_j}\\underline{A_n}^{v_j}],$$\nin degrees $-1,0$, where $\\overline d_j$ is reduction of the same scalar matrix $d_j$. These are isomorphisms of derived objects. They identify the actual quotient-induced transition with the termwise quotient of this matrix complex; hence the identifications hold simultaneously for all $n$ on the same cover. Every scalar ring $A_n$ is finite, including when $\\ell$ is ramified in $A$. The two cohomology sheaves are the constant sheaves of $\\ker\\overline d_j$ and $\\operatorname{coker}\\overline d_j$, respectively. Both scalar modules are finite as sets and finitely presented over $A_n$. All other cohomology sheaves vanish. Consequently $L[0]\\otimes_B^LB_n$ has locally constant finite-type cohomology in degrees $-1,0$. The assertion includes $N_j=0$, $L=0$, and empty $S$; it assumes neither Noetherianity of $S$ nor torsion-freeness of $N_j$.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093M (lemma-completion-flat) and Tag 093J (lemma-constant-exact); two-term DVR model of the blueprint constructibility paragraph, using more-algebra.tex Tag 0AUW (lemma-dedekind-torsion-free-flat) and sites-cohomology.tex Tag 06YQ (lemma-bounded-flat-K-flat)"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-pur-sheaf-tensor-product",
+  "lem-pur-derived-change-of-rings",
+  "sk-def-sfb-constructible",
+  "sk-def-sp-coefficient-towers",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-a1-completed-integral-small-site",
+  "def-sfb-site-derived-constant-module-functor",
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-weil-pbc-successive-derived-quotient-data",
+  "lem-pe-restricted-kflat-tensor-identification",
+  "lem-sfb-successive-derived-quotient-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Use the concrete unchanged coefficient and matrix data, publicly reexported from their data module. The ell-power/uniformizer-power cofinality gives a uniformizer-power ideal contained in each ell-power ideal; finite_coefficientExtensionRing and the surjective quotient factor make every actual ell-power residue finite. This covers ramification and exponent zero in the intermediate quotient.",
+   "uses": [
+    "def-sp-integral-matrix-model-data",
+    "sk-def-sp-coefficient-towers",
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The coefficient integer ring is a PID by extension_integers_dvr; transport the PID and domain structures through ULift.ringEquiv. For each supplied local model use Module.FinitePresentation.exists_fin' to obtain a surjection from finite free scalars. Submodule.basisOfPid gives a finite basis of its kernel. Compose the inverse basis map with kernel inclusion and express it by LinearMap.toMatrix'. Its injectivity and exactness follow from the basis equivalence and the range of kernel inclusion.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-sfb-scalar-finite-free-resolutions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the specified scalar-resolution comparison to obtain the completed short exact sequence and all simultaneous derived models. Apply the independent constant-matrix homology computation at every level to get the two slice cohomology identifications.",
+   "uses": [
+    "lem-sp-integral-matrix-local-resolution",
+    "lem-sp-integral-matrix-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A reduced kernel is a subtype of a finite power of the finite residue ring. The reduced cokernel is finite by surjectivity of its quotient map. A finite ring is Noetherian and finite modules over it are finitely presented by Module.finitePresentation_of_finite. These are actual Lean proofs, not split-off obligations.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For each V use exactly the covering sieve supplied by the local-model hypothesis. On each arrow choose its scalar model and construct its resolution and simultaneous comparison as above. The matrix homology lemma gives zero restrictions outside -1,0. Sheaf separatedness on that covering sieve proves the identity of the global homology sheaf equals zero: evaluate the identity=zero equation on each zero slice at its identity object and apply it to the restriction of an arbitrary section. Empty covering sieves use the same separatedness axiom. In degrees -1 and 0 use the scalar reduced kernel or cokernel as the local finite module, with the restricted-global homology isomorphism from the matrix calculation.",
+   "uses": [
+    "lem-sp-integral-matrix-local-resolution",
+    "lem-sp-integral-matrix-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-integral-matrix-model-data",
+  "sk-def-sp-coefficient-towers",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-sfb-scalar-finite-free-resolutions",
+  "lem-sp-integral-matrix-local-resolution",
+  "lem-sp-integral-matrix-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 093J and 093M, plus original eight-step plan; Mathlib scalar algebra and explicit sheaf-separatedness descent, with steps 1--4 and 6 split into strictly simpler statements"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constructible|locallyConstant|locally_constant|adic.*reduc",
+   "results": "0 hits in Mathlib/Algebra/Category/ModuleCat: ",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-presentation predicates, scalar matrix finiteness, cotangent theory and ordinary adic completion do not give the simultaneous derived sheaf matrix models or their constant finite cohomology."
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf, Module.Finite, TensorProduct",
+   "results": "0 hits: ; loogle: unknown identifier 'Sheaf'",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-presentation predicates, scalar matrix finiteness, cotangent theory and ordinary adic completion do not give the simultaneous derived sheaf matrix models or their constant finite cohomology."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite matrix models for derived reductions of constant local modules over a complete discrete valuation ring sheaf",
+   "results": "8 hits: Matrix.finiteDimensional, Module.Finite.matrix, CStarMatrix.instFinite, SheafOfModules.isFinitePresentation, SheafOfModules.IsFiniteType.mk, Matrix.instCompleteSpace, SheafOfModules.IsFinitePresentation, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-presentation predicates, scalar matrix finiteness, cotangent theory and ordinary adic completion do not give the simultaneous derived sheaf matrix models or their constant finite cohomology."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite constant local module over the completed ring of integers sheaf on a pro-etale site has derived reductions represented by a two-term finite free matrix over the finite quotient ring; its cohomology is finite locally constant in degrees minus one and zero",
+   "results": "8 hits: Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential, Algebra.etaleLocus_eq_compl_support, Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType, Algebra.FormallyEtale.instForallOfFinite, Condensed.finFree, Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.formallyEtale_iff, StandardEtalePair.instFormallyEtaleRing",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-presentation predicates, scalar matrix finiteness, cotangent theory and ordinary adic completion do not give the simultaneous derived sheaf matrix models or their constant finite cohomology."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reduction modulo a power of a prime of a finite presentation module over a complete DVR coefficient sheaf has locally constant finite kernel and cokernel computed by a two term free resolution",
+   "results": "8 hits: Module.FinitePresentation.exists_notMem_bijective, BDeRham, BDeRhamPlus, Module.FinitePresentation.exists_free_localizedModule_powers, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top, AdicCompletion.transitionMap_comp_reduceModIdeal, IsLocalizedModule.exists_isLocalizedModule_powers_of_finitePresentation",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-presentation predicates, scalar matrix finiteness, cotangent theory and ordinary adic completion do not give the simultaneous derived sheaf matrix models or their constant finite cohomology."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFinitePresentation",
+   "results": "5 hits: SheafOfModules.IsFinitePresentation, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.IsFinitePresentation.mk",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-presentation predicates, scalar matrix finiteness, cotangent theory and ordinary adic completion do not give the simultaneous derived sheaf matrix models or their constant finite cohomology."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"tensor\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give underived constant/condensed module functors, finite-presentation predicates or ordinary adic-completion naturality; none states the simultaneous coefficient-valued derived matrix model and finite constant cohomology."
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|derived.*reduction|constant.*(kernel|cokernel)",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give underived constant/condensed module functors, finite-presentation predicates or ordinary adic-completion naturality; none states the simultaneous coefficient-valued derived matrix model and finite constant cohomology."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived reduction of a locally constant finite module over a completed DVR ring sheaf is a two term finite free scalar matrix complex with constant finite kernel and cokernel",
+   "results": "8 hits: Condensed.finFree, CondensedMod.LocallyConstant.functor, LightCondMod.LocallyConstant.functor, CompHausLike.LocallyConstantModule.functor, LocallyConstant.freeOfProfinite, CompHausLike.LocallyConstantModule.functor_obj_val, Profinite.NobelingProof.Nobeling_aux, Condensed.profiniteFree",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give underived constant/condensed module functors, finite-presentation predicates or ordinary adic-completion naturality; none states the simultaneous coefficient-valued derived matrix model and finite constant cohomology."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived reductions of finite local constant modules over completed integral coefficient sheaves computed by a two term matrix complex",
+   "results": "8 hits: CondensedMod.LocallyConstant.functorIsoDiscrete, Mathlib.Tactic.Module.reduceCoefficientwise, CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_isModule, AdicCompletion.transitionMap_comp_reduceModIdeal, CondensedMod.LocallyConstant.adjunction, CompHausLike.LocallyConstantModule.functor_obj_val, CompHausLike.LocallyConstantModule.functor_map_val, LightCondMod.LocallyConstant.functorIsoDiscreteAux₁",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give underived constant/condensed module functors, finite-presentation predicates or ordinary adic-completion naturality; none states the simultaneous coefficient-valued derived matrix model and finite constant cohomology."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely presented module over a discrete valuation ring sheaf has finite constant kernel and cokernel after derived tensor with every finite quotient ring",
+   "results": "8 hits: SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.isFinitePresentation, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.QuasicoherentData.IsFinitePresentation, Module.free_of_lTensor_residueField_injective, SheafOfModules.Presentation.IsFinite",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give underived constant/condensed module functors, finite-presentation predicates or ordinary adic-completion naturality; none states the simultaneous coefficient-valued derived matrix model and finite constant cohomology."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-reduction-tower-normalized",
+  "date": "2026-10-22",
+  "group": "Q92"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sp-normalized-towers",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-reduction-tower-normalized",
+   "place": "Constructibility paragraph: two-term scalar free models and finite matrix reductions on a stratum (former proof step 6)",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-integral-local-model-finite-matrix-reduction",
+  "worker": "stage1",
+  "summary": "Eight-step split using existing scalar DVR resolutions, exact constant realization, completion flatness, K-flat coefficient extension and slice restriction. One matrix and augmentation are retained for all levels; quotient transitions are computed on pure tensors. Finite ramified quotients and explicit finite presentations of kernel and cokernel are included. Statement unchanged; no new nodes.",
+  "blueprint": "det-sp-reduction-tower-normalized: the constructibility paragraph (former proof step 6), concretizing the local scalar two-term model and its finite constant cohomology; main-20261015 supplies only the statement, so the expanded proof is agent-written.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Existence of a global flat-term K-flat resolution to compare global and local reduction."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Computation of coefficient-valued derived scalar extension on K-flat resolutions, already used in the statement."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Normalized unit and adjunct formulas identify the actual quotient-induced transition on the chosen resolution."
+   },
+   {
+    "node": "lem-sfb-localized-site-tensor-restriction",
+    "why": "Pure-tensor normalized comparison of sheaf tensor with slice restriction."
+   },
+   {
+    "node": "lem-sfb-ringed-finite-free-resolution-tensor",
+    "why": "K-flatness and explicit tensor formula for the specified finite free sheaf resolution; generic ringed-site tool."
+   },
+   {
+    "node": "lem-sfb-ringed-site-restriction-kflat",
+    "why": "Exact slice restriction and preservation of K-flat complexes, for locality of coefficient reduction."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Scalar coefficient structure and ramified factorization of ell; the tower unit does not establish local-field arithmetic."
+   },
+   {
+    "node": "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "why": "Flatness of the concrete inverse limit B over constant A for the ideal (ell); generic completion tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-constant-exact",
+    "why": "Exactness of constant module realization on arbitrary small sites, used for the resolution and its reduced cohomology."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q101-ea2ebe8d6",
+  "group": "Q101",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-ea2ebe8d6 (reviewer sub-agent of L); spot-checked: PASS for this split, which adds no new nodes and leaves the statement unchanged. The item is still unsplit in clones/live and clones/side-live, and coord/repair-notes has no re-split note for it, so a split with no new nodes is admissible. proof_deps equal the union of step uses, and the item cites no SGA source. Sources checked: blueprint main-20261015 sk-def-sp-normalized-towers-reduction.proof.md lines 21-28 (Constructibility: building blocks a_!C with C of Tor amplitude [-1,0]) and Stacks sites-modules.tex line 8261 (093M, lemma-completion-flat). lem-weil-pbc-completed-constant-sheaf-reduction with I=(ell) gives exactly the item's concrete B = lim A/ell^n; the condensed-pullback model lem-sfb-finite-constant-model-two-term-free-resolution is rightly not used. Step 1: K-flat resolution, then exact K-flat-preserving restriction, then pure-tensor restriction, then derived change of rings; correct. Step 2: DVR, then Noetherian PID, then scalar finite-free resolution (DVR clause, torsion and N=0 allowed), then constant-functor exactness and flatness of B; the basis maps are explicit. The restriction of a constant sheaf to the slice equals the slice constant sheaf; this is implicit but standard and the DAG already uses it. Step 3: the specified SES gives a quasi-isomorphism augmentation; the gamma basis formulas give the reduced matrix in D((B_n)_U). Step 4: unit x->x tensor 1 and adjunct x tensor a -> a g(x) give 1 tensor q_nm; this is the canonical arrow, and adjunction naturality makes it compatible with step 1. Step 5: |ell|<1 and ell = w pi^e with e>=1, so A/ell^n = A/pi^{en} is finite and the ramified case is covered. Steps 6-8: constant kernel and cokernel, H^{-1} and H^0, elementary finite presentations, and the same cover for every n. Tested on Z_l[sqrt l] with N=A/pi (kernel and cokernel both equal the residue field, matching Tor_1), N free, N=0 and identity transitions. No duplicate exists in the DAG; lem-sfb-stable-lattice-finite-matrix-reductions and lem-sfb-local-integral-perfect-model-cohomology are different statements. All 9 generic tool_uses are accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralLocalModelFiniteMatrixReduction",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralMatrix.integral_local_model_finite_matrix_reduction",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IntegralMatrix.integral_local_model_finite_matrix_reduction"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralLocalModelFiniteMatrixReduction.lean",
+  "statement": "theorem integral_local_model_finite_matrix_reduction (S : Scheme.{t}) (_site : C ≌ S.ProEt) (_topology : J = _site.functor.inducedTopology (Scheme.ProEt.topology S)) (L : Modules J (completion l E J)) (_hL : HasFiniteScalarConstantLocalModel J (Scalars l E) (completion l E J) (scalarMap l E J) L) : (∀ n : ℕ, Finite (Residues l E n)) ∧ (∀ (U : C) (N : ModuleCat.{r} (Scalars l E)), HasFiniteScalarConstantModelOn J (Scalars l E) (completion l E J) (scalarMap l E J) L U N → ∃ (a b : ℕ) (d : Matrix (Fin b) (Fin a) (Scalars l E)) (p : (Fin b → Scalars l E) →ₗ[Scalars l E] N), Function.Injective (Matrix.toLin' d) ∧ Function.Exact (Matrix.toLin' d) p ∧ Function.Surjective p ∧ ∃ eN : ((model l E J).obj N).over U ≅ L.over U, ∃ hz : ((model l E J).map (ModuleCat.ofHom (Matrix.toLin' d))).over U ≫ ((model l E J).map (ModuleCat.ofHom p)).over U ≫ eN.hom = 0, (ShortComplex.mk (((model l E J).map (ModuleCat.ofHom (Matrix.toLin' d))).over U) (((model l E J).map (ModuleCat.ofHom p)).over U ≫ eN.hom) hz).ShortExact ∧ Nonempty (SimultaneousModels l E J L U d) ∧ ∀ n : ℕ, Finite (scalarKernel l E d n) ∧ Finite (scalarCokernel l E d n) ∧ Module.FinitePresentation (Residues l E n) (scalarKernel l E d n) ∧ Module.FinitePresentation (Residues l E n) (scalarCokernel l E d n) ∧ Nonempty (((DerivedCategory.homologyFunctor (SheafOfModules.{r} ((SheafOfModules.derivedChangeRingIndependentCoefficients J (coefficient l E J n)).over U)) (-1)).obj (localReduction l E J L U n)) ≅ (((constantAtLevel l E J n).obj (ModuleCat.of (Residues l E n) (scalarKernel l E d n))).over U)) ∧ Nonempty (((DerivedCategory.homologyFunctor (SheafOfModules.{r} ((SheafOfModules.derivedChangeRingIndependentCoefficients J (coefficient l E J n)).over U)) 0).obj (localReduction l E J L U n)) ≅ (((constantAtLevel l E J n).obj (ModuleCat.of (Residues l E n) (scalarCokernel l E d n))).over U))) ∧ (∀ (n : ℕ) (i : ℤ), i ≠ -1 → i ≠ 0 → IsZero ((DerivedCategory.homologyFunctor (Modules J (coefficient l E J n)) i).obj (reduction l E J L n))) ∧ (∀ (n : ℕ) (i : ℤ), i = -1 ∨ i = 0 → ∀ V : C, ∃ W : Sieve V, W ∈ J V ∧ ∀ (U : C) (f : U ⟶ V), W f → ∃ M : ModuleCat.{r} (Residues l E n), Module.Finite (Residues l E n) M ∧ Nonempty ((((DerivedCategory.homologyFunctor (Modules J (coefficient l E J n)) i).obj (reduction l E J L n)).over U) ≅ (((constantAtLevel l E J n).obj M).over U)))",
+  "branch": "sheaf-dag",
+  "by": "Q108",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-60099490d",
+  "group": "Q108",
+  "result": "pass",
+  "note": "Clause-by-clause match. Coefficients: A_n=A/(ℓ)^{n+1} via CompletedSite, B=limit, actual projections and transitions. Site: small C ≌ S.ProEt with the induced topology. Local-model hypothesis: HasFiniteScalarConstantLocalModel via changeOfRings, which is Presentation.ordinary. Every given (U,N) gets ∃ d,p forming a scalar SES whose restricted model sequence is ShortExact. SimultaneousModels gives derived isos to the constant restricted mapping cone of d mod ℓ^{n+1}, with the differential pinned on generators, termwise quotient pinned on generators, and the canonical transition square for every m≤n. Finite residues; finite and f.p. ker/coker with H^{-1}/H^0 isos; global vanishing elsewhere; locally constant finite-type clause. Edge cases: N=0, L=0, empty S/sieves, torsion N, ramified ℓ. Mechanical theorem stmt_dep finding: genuine. presentations/normalization are .choose of successive_derived_quotient_normalization, pinned by universality and normalization (Q139 precedent); sliceScalars exactness instances are restrictedTensorScalars_preservesFiniteLimits/Colimits theorems needed by mapDerivedCategory (Q128 precedent). sk-def-sfb-constructible: §1(B) append keeps Q120's 8 decls plus public import. Node TeX and proof unchanged; signatures verbatim; all imports exist in live. Not recompiled (no change); worker compile clean 27.8 s/14.7 s. Advisory: dependency record note/primary declaration replaced; thin second-reading section."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-8c188",
+  "group": "M9",
+  "result": "pass",
+  "landing": "20261025T163916-L-898532",
+  "kind": "interface",
+  "note": "independent cc review: the delivered data module against the published item prefix (verbatim apart from blueprint tags and dropped plain imports); the item statement against the published one (identical); matrix_cohomology and local_resolution against their nodes and Stacks 093J/093M/06YQ (both true); a combined scratch compile with #print axioms (only the expected sorryAx)"
+ }
+}

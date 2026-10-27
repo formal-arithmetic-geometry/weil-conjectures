@@ -1,0 +1,425 @@
+{
+ "id": "lem-sfb-finite-open-equality-locus",
+ "kind": "statement",
+ "title": "The equality locus of two finite open subschemes is open",
+ "statement": "Let $q:M\\to T$ be any morphism of schemes [def-pc-scheme] in the universes [def-weil-size-convention]. Let $Z_1,Z_2\\subseteq M$ be open subschemes [def-weil-open-immersion] such that each restricted morphism $q_i:Z_i\\to T$ is finite [def-weil-finite-integral-morphism]. Set\n$$D=q_1(|Z_1|\\setminus|Z_2|)\\cup q_2(|Z_2|\\setminus|Z_1|),\\qquad V=T\\setminus D.$$\nThen $D$ is closed, and $V$ with its induced open subscheme structure has the following property: for every scheme morphism $h:T'\\to T$,\n$$h(|T'|)\\subseteq |V|\\quad\\Longleftrightarrow\\quad Z_1\\times_TT'=Z_2\\times_TT'\\text{ as open subschemes of }M\\times_TT'.$$\nHere fibre products are those of [def-pc-fibre-product]. In particular the subfunctor of $h_T$ defined by this equality is represented by $V\\hookrightarrow T$. No separatedness of $q$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-groupoids.tex",
+  "place": "Tag 04PK (lemma-finite-diagonal), proof: construction of the open equality locus V, for scheme test objects."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Put $C_1=|Z_1|\\setminus|Z_2|$ and $C_2=|Z_2|\\setminus|Z_1|$. Each $C_i$ is closed in $Z_i$, since $Z_1\\cap Z_2$ is open there. By [lem-weil-pbc-finite-closed-map-finite-fibres] applied to the finite map $q_i$, its image $q_i(C_i)$ is closed in $T$. Their union $D$ is closed, so $V=T\\setminus D$ is open. Give $V$ the restricted structure sheaf. Each $v\\in V$ has an affine open neighbourhood contained in $V$ by [lem-weil-pbc-affine-opens-basis]; hence this restricted locally ringed space is a scheme [def-pc-scheme]. Its inclusion is an open immersion by [def-weil-open-immersion].",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-weil-pbc-affine-opens-basis",
+    "def-pc-scheme",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 04PK (lemma-finite-diagonal), proof: construction of the open equality locus V, for scheme test objects. Closedness and the open-subscheme construction; Schemes Tags 01IK (lemma-open-subspace-scheme), 01IT (lemma-basis-affine-opens)."
+   }
+  },
+  {
+   "text": "Fix $h:T\\!\\prime\\to T$ and put $P=M\\times_TT\\!\\prime$, with projections $r:P\\to M$, $s:P\\to T\\!\\prime$. Write $Z_i\\!\\prime=Z_i\\times_TT\\!\\prime$. The natural map $Z_i\\!\\prime\\to P$ is the base change of $Z_i\\hookrightarrow M$ along $r$: a test pair $a:W\\to Z_i$, $b:W\\to P$ with $j_i a=rb$ gives the unique map to $Z_i\\!\\prime$ from $(a,sb)$, and its map to $P$ is $b$ because both projections agree. This verifies the pullback property [def-pc-fibre-product]. Thus [lem-weil-pbc-open-immersion-base-change] makes $Z_i\\!\\prime$ an open subscheme of $P$. The image clause of [lem-weil-pbc-base-change-image] on this square identifies its underlying open with $r^{-1}(|Z_i|)$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-base-change-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 04PK (lemma-finite-diagonal), proof: construction of the open equality locus V, for scheme test objects. Base-changed opens; Schemes Tag 01JY (lemma-base-change-immersion), Morphisms Tag 01S1 (lemma-base-change-surjective), proof."
+   }
+  },
+  {
+   "text": "By Step 2 the symmetric difference of the two underlying opens in $P$ is $E=r^{-1}(C_1)\\cup r^{-1}(C_2)$. Apply [lem-weil-pbc-base-change-image] to the defining square $P=M\\times_TT\\!\\prime$, separately for $C_1,C_2\\subseteq|M|$. It gives $s(r^{-1}(C_i))=h^{-1}(q(C_i))$, hence $s(E)=h^{-1}(D)$. A set is empty if and only if its image under a function is empty. Consequently the two opens agree exactly when $h^{-1}(D)=\\varnothing$, equivalently $h(|T\\!\\prime|)\\subseteq V$. An open subscheme has the restricted structure sheaf [def-weil-open-immersion], so equality of its underlying open is equality as an open subscheme. This proves both directions of the asserted equivalence.",
+   "uses": [
+    "lem-weil-pbc-base-change-image",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 04PK (lemma-finite-diagonal), proof: construction of the open equality locus V, for scheme test objects. Expansion of the final sentence that V works, using the arbitrary-subset image identity in Morphisms Tag 01S1 (lemma-base-change-surjective), proof."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-morphism-factors-through-open-subscheme], a morphism $h:T\\!\\prime\\to T$ has image in $V$ exactly when it has a unique factorization through $V\\hookrightarrow T$. Step 3 identifies these morphisms with those for which $Z_1\\!\\prime=Z_2\\!\\prime$. Thus composition with $V\\hookrightarrow T$ gives a bijection from morphisms $T\\!\\prime\\to V$ to this equality subfunctor. These bijections commute with precomposition: the precomposed factorization is a factorization of the precomposed map and uniqueness identifies it with the chosen one. They therefore give the claimed representation. Only the restrictions $q_i$ were required finite; no separatedness of $q$ was used.",
+   "uses": [
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 04PK (lemma-finite-diagonal), proof: construction of the open equality locus V, for scheme test objects. Representability from the universal image condition; Schemes Tag 01HI (lemma-restrict-map-to-opens)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-affine-opens-basis",
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-base-change-image",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-groupoids.tex",
+  "place": "Tag 04PK (lemma-finite-diagonal), proof: closed exceptional image and its complement; last sentence expanded using Morphisms Tag 01S1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Equality locus of two open subschemes finite over the base is open and commutes with arbitrary base change",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:08:12Z",
+    "tool": "leanfinder",
+    "query": "Equality locus of two open subschemes finite over the base is open and commutes with arbitrary base change",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal",
+     "AlgebraicGeometry.isPullback_opens_inf",
+     "AlgebraicGeometry.IsFinite.instMorphismRestrict",
+     "AlgebraicGeometry.instQuasiCompactιSchemeOfQuasiSeparatedSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.IsFinite.instFstScheme",
+     "AlgebraicGeometry.IsFinite.instSndScheme",
+     "AlgebraicGeometry.IsImmersion.instιScheme",
+     "AlgebraicGeometry.instLocallyOfFiniteTypeFstScheme"
+    ],
+    "digest": "ba241463a5cf7cd1"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme diagonals, intersections of opens, and equalizers of scheme morphisms do not identify this equality subfunctor. Read Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean:124-137; its theorem requires a given scheme morphism and formal unramifiedness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The diagonal of the finite open part functor is representable by open subschemes",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:08:11Z",
+    "tool": "leansearch",
+    "query": "The diagonal of the finite open part functor is representable by open subschemes",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.relativelyRepresentable.diag_iff",
+     "CategoryTheory.Functor.relativelyRepresentable.of_diag",
+     "AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable",
+     "CategoryTheory.Functor.relativelyRepresentable.diag_of_map_from_obj",
+     "AlgebraicGeometry.IsImmersion.instDiagonalScheme",
+     "AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal",
+     "AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover",
+     "AlgebraicGeometry.isSeparated_iff"
+    ],
+    "digest": "87ada4286bdc1800"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme diagonals, intersections of opens, and equalizers of scheme morphisms do not identify this equality subfunctor. Read Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean:124-137; its theorem requires a given scheme morphism and formal unramifiedness."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFinite\", \"IsOpenImmersion\"",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:08:11Z",
+    "tool": "loogle",
+    "query": "\"IsFinite\", \"IsOpenImmersion\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme diagonals, intersections of opens, and equalizers of scheme morphisms do not identify this equality subfunctor. Read Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean:124-137; its theorem requires a given scheme morphism and formal unramifiedness."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*diagonal|equal.*locus|equality.*locus",
+   "sub": "AlgebraicGeometry",
+   "results": {
+    "t": "2026-10-23T20:08:10Z",
+    "tool": "grep",
+    "query": "finite.*diagonal|equal.*locus|equality.*locus",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean"
+    ],
+    "digest": "3f93c9c41008acfa"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme diagonals, intersections of opens, and equalizers of scheme morphisms do not identify this equality subfunctor. Read Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean:124-137; its theorem requires a given scheme morphism and formal unramifiedness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The relative diagonal of the finite part functor is an open immersion represented by a scheme",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:10:28Z",
+    "tool": "leanfinder",
+    "query": "The relative diagonal of the finite part functor is an open immersion represented by a scheme",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal",
+     "AlgebraicGeometry.IsImmersion.instDiagonalScheme",
+     "AlgebraicGeometry.IsImmersion.instLiftSchemeId",
+     "AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme",
+     "AlgebraicGeometry.instIsZariskiLocalAtSourceDiagonalSchemeOfHasOfPostcompPropertyOfRespectsRightIsOpenImmersion",
+     "AlgebraicGeometry.isClosedImmersion_diagonal_restrict_diagonalCoverDiagonalRange",
+     "AlgebraicGeometry.IsOpenImmersion.instπWalkingCospanSchemeCospanOne",
+     "AlgebraicGeometry.IsOpenImmersion.instSndScheme"
+    ],
+    "digest": "4c644d4ccaa2f628"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme diagonals, intersections of opens, and equalizers of scheme morphisms do not identify this equality subfunctor. Read Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean:124-137; its theorem requires a given scheme morphism and formal unramifiedness."
+  },
+  {
+   "tool": "grep",
+   "query": "equality.?locus|finite.*opens|opens.*finite",
+   "sub": "AlgebraicGeometry",
+   "results": {
+    "t": "2026-10-23T20:36:07Z",
+    "tool": "grep",
+    "query": "equality.?locus|finite.*opens|opens.*finite",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Sites/QuasiCompact.lean",
+     "Mathlib/AlgebraicGeometry/Noetherian.lean",
+     "Mathlib/AlgebraicGeometry/Noetherian.lean",
+     "Mathlib/AlgebraicGeometry/Noetherian.lean",
+     "Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean",
+     "Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean",
+     "Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean",
+     "Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean"
+    ],
+    "digest": "0f97fbe32fe135b7"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned general scheme base-change properties, intersections/restrictions of opens or diagonals of a formally unramified morphism, not equality of two relatively finite open subschemes. Read FormallyUnramified.lean:124-139 and PullbackCarrier.lean:420-430."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two open subschemes finite over the base have an open equality locus stable under base change",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:36:08Z",
+    "tool": "leansearch",
+    "query": "Two open subschemes finite over the base have an open equality locus stable under base change",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme",
+     "AlgebraicGeometry.IsProper.isStableUnderBaseChange",
+     "AlgebraicGeometry.UniversallyOpen.instIsStableUnderBaseChangeScheme",
+     "AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange",
+     "AlgebraicGeometry.Flat.isStableUnderBaseChange",
+     "AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange",
+     "AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange",
+     "AlgebraicGeometry.IsSeparated.isStableUnderBaseChange"
+    ],
+    "digest": "972b4f2cdb401781"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned general scheme base-change properties, intersections/restrictions of opens or diagonals of a formally unramified morphism, not equality of two relatively finite open subschemes. Read FormallyUnramified.lean:124-139 and PullbackCarrier.lean:420-430."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFinite\", \"IsOpenImmersion\"",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:36:08Z",
+    "tool": "loogle",
+    "query": "\"IsFinite\", \"IsOpenImmersion\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned general scheme base-change properties, intersections/restrictions of opens or diagonals of a formally unramified morphism, not equality of two relatively finite open subschemes. Read FormallyUnramified.lean:124-139 and PullbackCarrier.lean:420-430."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equality locus of two open subschemes finite over the base is open and represents equality after arbitrary base change",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:36:09Z",
+    "tool": "leanfinder",
+    "query": "Equality locus of two open subschemes finite over the base is open and represents equality after arbitrary base change",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal",
+     "AlgebraicGeometry.IsImmersion.instιScheme",
+     "AlgebraicGeometry.isPullback_opens_inf",
+     "AlgebraicGeometry.instQuasiCompactιSchemeOfQuasiSeparatedSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.IsFinite.instFstScheme",
+     "AlgebraicGeometry.IsFinite.instSndScheme",
+     "AlgebraicGeometry.isClosedImmersion_equalizer_ι_left",
+     "AlgebraicGeometry.Scheme.instIsClosedImmersionιOfIsSeparated"
+    ],
+    "digest": "88140913ab55f20e"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned general scheme base-change properties, intersections/restrictions of opens or diagonals of a formally unramified morphism, not equality of two relatively finite open subschemes. Read FormallyUnramified.lean:124-139 and PullbackCarrier.lean:420-430."
+  },
+  {
+   "tool": "grep",
+   "query": "eqLocus|eq_locus|equality.?locus|symmetric.?diff",
+   "sub": "AlgebraicGeometry",
+   "results": {
+    "t": "2026-10-23T20:36:41Z",
+    "tool": "grep",
+    "query": "eqLocus|eq_locus|equality.?locus|symmetric.?diff",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean"
+    ],
+    "digest": "7f1c2ae526138964"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned general scheme base-change properties, intersections/restrictions of opens or diagonals of a formally unramified morphism, not equality of two relatively finite open subschemes. Read FormallyUnramified.lean:124-139 and PullbackCarrier.lean:420-430."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "There is an open subset of the base where two relatively finite open subschemes coincide, characterized by avoiding the image of their symmetric difference",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:36:43Z",
+    "tool": "leanfinder",
+    "query": "There is an open subset of the base where two relatively finite open subschemes coincide, characterized by avoiding the image of their symmetric difference",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.restrictRestrictComm",
+     "AlgebraicGeometry.LocallyRingedSpace.HasCoequalizer.imageBasicOpen_image_open",
+     "AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux",
+     "AlgebraicGeometry.Scheme.GlueData.isOpen_iff",
+     "AlgebraicGeometry.Scheme.Opens.mem_ι_image_iff",
+     "AlgebraicGeometry.Scheme.ι_image_homOfLE_le_ι_image",
+     "AlgebraicGeometry.Scheme.Opens.exists_toScheme",
+     "AlgebraicGeometry.Scheme.Opens.mem_basicOpen_toScheme"
+    ],
+    "digest": "62c348976ee089e9"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned general scheme base-change properties, intersections/restrictions of opens or diagonals of a formally unramified morphism, not equality of two relatively finite open subschemes. Read FormallyUnramified.lean:124-139 and PullbackCarrier.lean:420-430."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-unmarked-finite-open-parts-space",
+  "date": "2026-10-24",
+  "group": "O2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: Effectivity step in quot-lemma-curves-stack via quot-lemma-spaces-stack; finite-type part (2) of bootstrap-lemma-descend-algebraic-space. Supporting input: theorem-final-bootstrap (3), applied after constructing a representable fppf cover of the descended sheaf. Subdivision of the final bootstrap: affine locally quasi-finite relation; finite etale quasi-splitting charts and quotient by the open finite locally free subrelation (Tags 04S0, 04S4). Supporting input: Pointed affine etale quasi-splitting of a flat locally quasi-finite groupoid. Supporting input: finite-part parameter scheme and its residue-field point used before the affine quasi-splitting. Unmarked finite-part algebraic space used in the proof of Tag 04RI, first paragraph (Proposition 04QH). Supporting input for 04QH: Tag 04PK (lemma-finite-diagonal), proof: construction of the open equality locus V, for scheme test objects.",
+   "via": [
+    "lem-sfb-unmarked-finite-open-parts-space",
+    "lem-sfb-section-marked-finite-parts-scheme",
+    "lem-sfb-affine-groupoid-pointed-quasisplitting",
+    "lem-sfb-fppf-relation-etale-replacement",
+    "lem-sfb-fppf-space-atlas-bootstrap",
+    "lem-sfb-space-finite-type-fppf-effectivity",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-open-equality-locus",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 04PK equality-locus construction into four steps, reusing existing Mathlib leaves for finite closed maps, arbitrary-subset base-change images, open base change and unique open factorization. No new nodes and no statement change.",
+  "blueprint": "The inherited ancestry serves det-thm-sf-ctf-stability-direct-images (3), via the finite-part parameter prerequisite. Latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md (3) uses the constructible direct-image input. At this supporting level steps 1-4 implement Tag 04PK proof: intersection open, finite images closed, complement V works, universal representation. blueprint_refs.py ancestor reports None for the inherited imported ancestry; existing from.node and via retained."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-12785729d",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-12785729d (reviewer sub-agent of L); spot-checked: I read Stacks 04PK (spaces-more-groupoids.tex, lemma-finite-diagonal) proof in full. The item's statement is unchanged against clones/live and side-live, where the item is still unsplit, so no other group has superseded it. Replacing T×_Y X by an arbitrary scheme M→T is harmless: the proof never uses the form of M, and the citer lem-sfb-unmarked-finite-open-parts-space uses the item in exactly this form. The delivery has 0 new nodes, and all 8 dependencies are mathlib or definition leaves whose statements I read. Step 1: by clause (1) of finite-closed-map-finite-fibres, q_i(C_i) is closed, since C_i is closed in Z_i; V is a scheme by 01IT. Step 2: I re-checked the pullback argument (a,sb), including uniqueness; open-immersion-base-change and the base-change-image clause with C=Z_i give r^{-1}|Z_i|. Step 3: base-change-image holds for every subset C, so s(r^{-1}C_i)=h^{-1}q(C_i), hence E=∅ ⇔ h(T')⊆V. Step 4: unique factorisation from the 01HI node gives representability, and naturality follows from uniqueness. Tags appear only in source.place and each is carried by a cited node; no SGA is cited; there is no cycle. Duplicate searches (04PK, equality locus) found only lem-trf-coproduct-equality-locus and etale-sections-equal-open, both about different objects. Edge cases T'=∅, Z_1=Z_2, one Z_i empty and the doubled-origin line all check out. No fixes and no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteOpenEqualityLocus",
+  "declaration": "AlgebraicGeometry.finite_open_equality_locus",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteOpenEqualityLocus.lean",
+  "statement": "theorem finite_open_equality_locus {M T : Scheme.{u}} (q : M ⟶ T) (Z₁ Z₂ : M.Opens) [IsFinite (Z₁.ι ≫ q)] [IsFinite (Z₂.ι ≫ q)] : IsClosed (q '' ((Z₁ : Set M) \\ (Z₂ : Set M)) ∪ q '' ((Z₂ : Set M) \\ (Z₁ : Set M))) ∧ ∃ V : T.Opens, (V : Set T) = (q '' ((Z₁ : Set M) \\ (Z₂ : Set M)) ∪ q '' ((Z₂ : Set M) \\ (Z₁ : Set M)))ᶜ ∧ (∀ (T' : Scheme.{u}) (h : T' ⟶ T), Set.range h ⊆ (V : Set T) ↔ (pullback.fst q h) ⁻¹ᵁ Z₁ = (pullback.fst q h) ⁻¹ᵁ Z₂) ∧ (∀ (T' : Scheme.{u}) (h : T' ⟶ T), (pullback.fst q h) ⁻¹ᵁ Z₁ = (pullback.fst q h) ⁻¹ᵁ Z₂ ↔ ∃! k : T' ⟶ V.toScheme, k ≫ V.ι = h)",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0f920a321",
+  "group": "NW",
+  "result": "pass",
+  "note": "Read node, 5 stmt_dep records (identical to side-live, all existing Mathlib/convention), Stacks 04PK proof (spaces-more-groupoids.tex:1527-1570), module, report. Lean matches clause by clause: arbitrary q:M⟶T in Scheme.{u}, Z₁ Z₂ : M.Opens, IsFinite (Zᵢ.ι ≫ q), D explicit and IsClosed, V pinned as Dᶜ, ∀ T' h: range h ⊆ V ↔ fst⁻¹ᵁZ₁ = fst⁻¹ᵁZ₂, and that equality ↔ ∃! factorization through V.ι (representability). No separatedness or extra hypotheses, all universes bound, lean.statement verbatim, docstrings carry source place, blueprint id and steps 1-4, proof sorry only, no definitions, node diff = lean field only, name new (side-live grep), report sections present. Edge cases (Z₁=Z₂, empty opens/schemes, doubled-origin line) covered. Not recompiled (no change). Minor: stray report sentence about an unrelated compact-object module."
+ }
+}

@@ -13,7 +13,7 @@ public import Sheaf.Paper.CoefficientHomRepresentativeEvaluation
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
-public import Sheaf.CategoryTheory.RingedSiteDualityMaps
+public import Sheaf.CategoryTheory.RingedSiteOrdinaryHomComparison
 public import Mathlib.CategoryTheory.Triangulated.Functor
 public import WeilConjectures.Algebra.Homology.HomComplexComponents
 import WeilConjectures.Mathlib.CategoryTheory.Shift.Localization

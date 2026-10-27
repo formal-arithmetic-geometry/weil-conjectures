@@ -1,0 +1,233 @@
+{
+ "id": "lem-sf-package-finite-exceptional-domain",
+ "kind": "statement",
+ "title": "Restriction of the finite class-relative exceptional adjunction",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R=\\mathcal O_E$ and uniformizer $\\varpi$, and $A_n=R/(\\varpi^n)$ for $n\\ge1$. Let $X,Y$ be separated finite-type $k$-schemes and $f:X\\to Y$ a separated finite-type $k$-morphism. Choose a compactification $c=(X\\xrightarrow j\\overline X\\xrightarrow pY)$ with $j$ quasi-compact open and $p$ proper [def-weil-compactifications-refinements], and an integer $d\\ge0$ with $\\dim\\overline X\\le d$ [def-kun-topological-krull-dimension]. On the small pro-etale sites put $\\mathcal C_{T,n}=D^b_{ctf}(T,A_n)$, the full subcategory of bounded complexes with constructible cohomology and finite Tor amplitude [def-weil-finite-torsion-constructibility, def-weil-finite-tor-amplitude]. Let $\\nu_T:T_{\\mathrm{proet}}\\to T_{\\mathrm{et}}$ be site comparison [def-weil-pbc-site-comparison-morphism], let $f_{c,n}^{\\times}$ be the right adjoint of ordinary etale compact support $Rp_{\\mathrm{et},*}j_!^{\\mathrm{et}}$, and set\n$$F_{c,n}=Rp_*j_!,\\qquad G_{c,n}=\\nu_X^*f_{c,n}^{\\times}R\\nu_{Y,*}$$\n[def-compact-support-direct-image-detailed, def-weil-exceptional-inverse-image]. Both $F_{c,n}$ and $G_{c,n}$ preserve these finite-Tor constructible subcategories. For $K\\in\\mathcal C_{X,n}$ and $L\\in\\mathcal C_{Y,n}$ the class-relative natural bijections restrict to\n$$\\operatorname{Hom}_{\\mathcal C_{Y,n}}(F_{c,n}K,L)\\cong\\operatorname{Hom}_{\\mathcal C_{X,n}}(K,G_{c,n}L).$$\nThey define $F_{c,n}\\dashv G_{c,n}$, whose unit and counit, under the full inclusions, are the class-relative unit and counit. The compactification comparisons preserve these bijections and satisfy their original cocycle on the constructible domains. No adjunction on arbitrary unbounded pro-etale complexes is asserted.",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "Exceptional-adjunction sentence: restriction of the finite class-relative Hom bijections to the finite-Tor constructible domains (returned step 3)."
+ },
+ "stmt_deps": [
+  "def-weil-compactifications-refinements",
+  "def-kun-topological-krull-dimension",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-exceptional-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "For the actual quotient A=ULift(O_E/(varpi^n)), the characteristic p of the base is invertible: its l-adic spectral norm is one since l differs from p, so it is a unit in O_E and in the quotient. HasInvertibleExponent.spec_of_charP gives invertible exponent on Spec k, and pullback gives it on Y. This uses precisely the published coefficient ring, without any coefficient equivalence or change of universe of E.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "def-weil-finite-field-fiber"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the adopted source theorem constructibleFiniteTor_rightDerivedLowerShriekOfCompactification in WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.CompactifFiniteTor for every compactification. It proves exactly preservation of the native fixed-ModuleCat finite-Tor constructible predicate, already used in the statement, without requiring a supplied dimension bound. Use constructibleFiniteTor_rightDerivedUpperShriek in the adopted UpperShriekFiniteness module for the canonical comparison-transported right adjoint. For an arbitrary supplied etale adjoint (G,adj), adj.rightAdjointUniq identifies G with the canonical etale adjoint after the canonical compact-support isomorphism; apply comparison pullback to this isomorphism and transport finite-Tor membership through it. These are the already proved native preservation APIs underlying the recorded exceptional operation, so no new geometric preservation lemma is stated.",
+   "uses": [
+    "lem-sf-native-finite-tor-preservation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Quasi-compactness of Y follows from its finite-type structure map. The canonical ordinary etale exceptional adjoint preserves bounded-below complexes. Transport this lower bound to the supplied G by the same unique-adjoint isomorphism, and precompose with derived comparison direct image, which preserves a lower bound. Apply lem-sf-specified-comparison-class-construction to obtain the normalized class datum for this exact adjunction. Convert the fixed class record to ComparisonClassAdjunction field by field.",
+   "uses": [
+    "lem-etale-upper-shriek-quasicompact-bounded-below",
+    "lem-sf-specified-comparison-class-construction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In the private proved restrictClass helper, wrap each class Hom equivalence and its inverse with ObjectProperty.homMk. Source and target naturality follow by applying the inclusion and the original naturality equations. Apply Adjunction.mkOfHomEquiv. Its Hom-equivalence equation gives the required retained Hom map; its unit and counit component formulas give precisely the transposes of identity in the class datum.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift each class comparison component and inverse with ObjectProperty.isoMk. The original naturality equation gives a natural isomorphism between the restricted functors. Full-subcategory hom_ext reduces comparison-Hom compatibility, identity and cocycle to the original class equations. No bounds for additional compactifications are needed because Step 2 preserves the native finite-Tor domain for every compactification at once.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "def-weil-finite-field-fiber",
+  "lem-sf-native-finite-tor-preservation",
+  "lem-etale-upper-shriek-quasicompact-bounded-below",
+  "lem-sf-specified-comparison-class-construction",
+  "lem-weil-pbc-adjunction-of-natural-bijection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "Finite exceptional restriction; adopted native fixed-ModuleCat preservation APIs, normalized specified-adjoint class construction, and explicit full-subcategory Hom restriction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "restrict.*[Aa]djunction|[Aa]djunction.*restrict",
+   "results": "{\"top\": [\"Mathlib/CategoryTheory/Adjunction/Restrict.lean\", \"Mathlib/CategoryTheory/Adjunction/Restrict.lean\", \"Mathlib/CategoryTheory/Subobject/MonoOver.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean\", \"Mathlib/CategoryTheory/Sites/Pullback.lean\", \"Mathlib/CategoryTheory/Sites/Pullback.lean\", \"Mathlib/CategoryTheory/Sites/Adjunction.lean\"], \"note\": \"\", \"sub\": \"CategoryTheory\", \"n_hits\": 21}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restrict the etale origin exceptional adjunction to the full subcategories of bounded constructible finite Tor complexes",
+   "results": "{\"top\": [\"CategoryTheory.Adjunction.restrictFullyFaithful\", \"CategoryTheory.Adjunction.derived'\", \"CategoryTheory.Adjunction.derived\", \"SheafOfModules.PullbackConstruction.adjunction\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"CompHausLike.LocallyConstant.adjunction\", \"CategoryTheory.constantSheafΓAdj\", \"CondensedMod.LocallyConstant.adjunction\"], \"note\": \"\", \"sub\": \"\", \"n_hits\": 8}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A class relative compact support adjunction restricts to bounded constructible finite Tor sheaves because both functors preserve those full subcategories",
+   "results": "{\"top\": [\"CondensedMod.LocallyConstant.adjunction\", \"CondensedSet.compactlyGeneratedAdjunction\", \"LightCondMod.LocallyConstant.adjunction\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous\", \"LightCondSet.LocallyConstant.adjunction\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.freeForgetAdjunction\", \"Condensed.freeForgetAdjunction\"], \"note\": \"\", \"sub\": \"\", \"n_hits\": 8}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.restrictFullyFaithful",
+   "results": "{\"top\": [\"CategoryTheory.Adjunction.restrictFullyFaithful\", \"CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app\", \"CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app\", \"CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc\", \"CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc\", \"CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply\"], \"note\": \"\", \"sub\": \"\", \"n_hits\": 6}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite Tor constructible preservation of compact support and exceptional inverse image yields the restriction of the class relative adjunction",
+   "results": "{\"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app\", \"AlgebraicGeometry.Scheme.ofRestrict_app\"], \"note\": \"\", \"sub\": \"\", \"n_hits\": 8}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictFullyFaithful|mkOfHomEquiv",
+   "results": "{\"top\": [\"Mathlib/CategoryTheory/Adjunction/Restrict.lean\", \"Mathlib/CategoryTheory/Adjunction/Restrict.lean\", \"Mathlib/CategoryTheory/Adjunction/Restrict.lean\", \"Mathlib/CategoryTheory/Adjunction/Restrict.lean\", \"Mathlib/CategoryTheory/Adjunction/Restrict.lean\", \"Mathlib/CategoryTheory/Adjunction/Evaluation.lean\", \"Mathlib/CategoryTheory/Adjunction/Evaluation.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\"], \"note\": \"\", \"sub\": \"CategoryTheory/Adjunction\", \"n_hits\": 12}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract adjunction restriction only; does not prove either geometric preservation assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional|upperShriek|finiteTor",
+   "results": "{\"top\": [], \"note\": \"\", \"sub\": \"AlgebraicGeometry\", \"n_hits\": 0}",
+   "date": "2026-10-22",
+   "verdict": "no match: none states the finite-Tor pro-etale preservation and compactification-compatible exceptional adjunction of this item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restrict the compact support exceptional adjunction on bounded below etale origin complexes to bounded constructible finite Tor pro etale complexes",
+   "results": "{\"top\": [\"CategoryTheory.constantSheafΓAdj\", \"CompHausLike.LocallyConstant.adjunction\", \"CompHausLike.LocallyConstant.adjunction_unit\", \"CondensedSet.LocallyConstant.functorFullyFaithful\", \"HomologicalComplex.instIsSupportedOfIsStrictlySupported\", \"HomologicalComplex.IsSupported.casesOn\", \"HomologicalComplex.IsStrictlySupportedOutside.isSupportedOutside\", \"HomologicalComplex.IsSupported.mk\"], \"note\": \"\", \"sub\": \"\", \"n_hits\": 8}",
+   "date": "2026-10-22",
+   "verdict": "no match: none states the finite-Tor pro-etale preservation and compactification-compatible exceptional adjunction of this item"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.restrictFullyFaithful",
+   "results": "{\"top\": [\"CategoryTheory.Adjunction.restrictFullyFaithful\", \"CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app\", \"CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app\", \"CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc\", \"CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc\", \"CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply\"], \"note\": \"\", \"sub\": \"\", \"n_hits\": 6}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract adjunction restriction only; does not prove either geometric preservation assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The compact support functor and exceptional inverse image on finite torsion pro etale sheaves preserve bounded constructible complexes of finite Tor amplitude and their class relative adjunction restricts to these full subcategories",
+   "results": "{\"top\": [\"CategoryTheory.Functor.sheafAdjunctionCocontinuous\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"SheafOfModules.pushforwardPushforwardAdj\", \"LightCondMod.LocallyConstant.adjunction\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"DerivedCategory.isGE_Q_obj_iff\"], \"note\": \"\", \"sub\": \"\", \"n_hits\": 8}",
+   "date": "2026-10-22",
+   "verdict": "no match: none states the finite-Tor pro-etale preservation and compactification-compatible exceptional adjunction of this item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction between full subcategories induced by natural Hom bijections retains the unit counit and coherent compactification comparison isomorphisms",
+   "results": "{\"top\": [\"CondensedSet.compactlyGeneratedAdjunction\", \"Compactum.adj\", \"CategoryTheory.Adjunction.restrictFullyFaithful\", \"CompHausLike.LocallyConstant.adjunction_unit\", \"CompHausLike.LocallyConstant.adjunction\", \"Profinite.toProfiniteAdjToCompHaus\", \"CondensedSet.LocallyConstant.adjunction\", \"CompHausLike.LocallyConstant.adjunction_left_triangle\"], \"note\": \"\", \"sub\": \"\", \"n_hits\": 8}",
+   "date": "2026-10-22",
+   "verdict": "no match: none states the finite-Tor pro-etale preservation and compactification-compatible exceptional adjunction of this item"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-package-exceptional-coherence-realization",
+  "date": "2026-10-22",
+  "group": "Q142"
+ },
+ "blueprint": {
+  "from": {
+   "node": "prop-functor-package",
+   "place": "Exceptional-adjunction sentence: restriction of the finite class-relative Hom bijections to the finite-Tor constructible domains (returned step 3).",
+   "via": [
+    "lem-sf-package-exceptional-coherence-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-package-finite-exceptional-domain",
+  "worker": "stage1",
+  "summary": "Preserved the statement and split it into compact-support preservation, exceptional preservation, restriction of class-relative Hom bijections, identification of the unit and counit, and restriction of coherent compactification comparisons. All mathematical inputs already have DAG nodes; no new nodes were introduced. Searched the project and Mathlib; abstract restriction is in Mathlib but the geometric preservation assertions are not a one-line specialization.",
+  "blueprint": "prop-functor-package proof, exceptional-adjunction sentence: realizes the finite-level constructible adjunction and compactification coherence before integral and field passage.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-open-ctf",
+    "why": "Open extension preserves the same constructibility and Tor interval before applying direct-image preservation to the proper part; this is a reusable operation-preservation input, not a replacement of the package route."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Supplies the etale-origin hypothesis for the source of the class-relative Hom bijection; no statement in the package unit itself proves this site-comparison property."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NA-ef888c841",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-ef888c841 (reviewer sub-agent of L); spot-checked: Read the item, its parent's step 2, blueprint prop-functor-package.proof.md l.37 and every cited statement; no new nodes, item statement unchanged. Steps 1-4 hold. Step 1: def-weil-proper-morphism and lem-sfb-finite-type-composition-base-change(1) make the compactifying scheme of finite type over k; lem-trf-open-ctf keeps the Tor interval under j_!; cor-sf-direct-image-ctf-proetale gives [a,b+2d] for every intrinsic D^b_ctf input. Step 2: thm-sf-preservation-class(2) applies with Y separated of finite type and f separated of finite type, using the def-weil-exceptional-inverse-image composite. Step 3: lem-sf-proetale-constructible-origin(ii) provides an étale-origin witness, and thm-sf-ambient-adjoint-class(2) is the bijection for exactly F_c=Rp_*j_! and G_c=ν^*f_c^×Rν_*. Step 4: the Mathlib leaf for adjunctions from natural bijections gives the unit, counit and triangle identities, which are the same arrows as the class-relative ones. FIX (C1/E5): step 5 was marked elementary with 'the same preservation arguments apply' for another compactification c′, but applying clause (3) and Step 1 at c′ needs a dimension bound for its compactifying scheme, which nothing cited supplied. I rewrote step 5 to get finite type over k (as in Step 1), cite lem-kun-dimension-finite-type for a bound d′ (unit in the package route), and apply Steps 1-4 and clause (3) to (c′,d′); the step is now non-elementary and proof_deps is extended. The two declared tool uses (lem-trf-open-ctf, lem-sf-proetale-constructible-origin) are accepted. No SGA source and no cycle. Advisory: lem-sf-constructible-exceptional-adjunction-coefficients (Q39, sk-thm-sf-compatibility) already states the A_n adjunction on D^b_ctf with refinement compatibility, but without the class-relative identification; the item predates this delivery, so a maintainer note, not a fault.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.FiniteExceptionalDomain",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteExceptionalDomain",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FiniteExceptionalDomain.left",
+   "AlgebraicGeometry.ProEtale.FiniteExceptionalDomain.right",
+   "AlgebraicGeometry.ProEtale.FiniteExceptionalDomain.Restriction",
+   "AlgebraicGeometry.ProEtale.FiniteExceptionalDomain.Conclusion",
+   "AlgebraicGeometry.ProEtale.finiteExceptionalDomain"
+  ],
+  "file": "lean/Sheaf/SixFunctors/FiniteExceptionalDomain.lean",
+  "statement": "theorem finiteExceptionalDomain (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) {X Y : Scheme.{u}} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] [IsSeparated (Y ↘ Spec (.of D.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) [QuasiCompact c.i] (d : ℕ) (_hd : topologicalKrullDim c.Z ≤ (d : WithBot ℕ∞)) : FiniteExceptionalDomain.Conclusion l E n hn f c",
+  "branch": "newtargets-dag",
+  "by": "Q103",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Finite-level statement in the native fixed-ModuleCat presentation explicitly recorded by def-weil-finite-tor-amplitude. It uses the recorded ComparisonClassAdjunction with the ordinary etale right adjoint of the supplied compactification, retaining its normalization and original fixed-right comparison cocycle. left/right are ObjectProperty.lift of exactly the specified ambient composites; all preservation, adjunction, Hom normalization and comparison data are conclusions, not hypotheses. The canonical finite coefficient tensor equivalence identifies this presentation with the intrinsic constant-ring one; no second constructibility or Tor predicate is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-040e3514a",
+  "group": "Q103",
+  "result": "pass",
+  "note": "First S2 delivery; only the item lean record changed, all 7 stmt_dep nodes identical to live. Every clause matches the node: D,l≠p,E, A_n=ULift(coefficientExtensionRing) with n≥1; separated finite-type X,Y,f; c with QuasiCompact c.i and topologicalKrullDim c.Z≤d. Dctf = recorded native constructibleFiniteTor/DerivedCategoryFiniteTor. F = fixed-scalar rightDerivedLowerShriekOfCompactification (precedent Q19; the class datum uses it). G = Rν_*⋙G⋙ν^* = sfFiniteExceptionalAt with a specified étale adjoint (G,adj), quantified over all choices. Outputs: preservesLeft for every c (true: c.Z finite type, c.i automatically qc) and preservesRight; adjunction with homEquiv pinned to classData.homEquiv; ComparisonClassAdjunction fully pinned by homEquiv_normalized/naturality on iso-closed plusEtaleOrigin plus comparison_normalized and comparison_homEquiv; unit/counit = homEquiv(𝟙)/symm(𝟙); comparison pinned via comparison_hom, Hom-compatibility, id and cocycle present. Edge cases n=0/1, empty schemes, d=0 covered; no extra hypotheses; no hollow defs; proof only sorry; docstrings with source and blueprint; statement verbatim. No compile (no FIX). Advisory: ComparisonClassAdjunction owned by theorem thm-sf-ambient-adjoint-class outside stmt_deps (a def node should own it); FiniteFieldDatum owner outside stmt_deps; stage 3 needs a ULift transport, since exists_comparisonClassAdjunction is stated for E:Type(u+1)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261025T122756-L-1806152",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -9,9 +9,8 @@ public import Sheaf.RingTheory.CotangentResolutionCoherence
 public import WeilConjectures.RingTheory.KoszulRegularSequence
 public import Mathlib.RingTheory.Ideal.Cotangent
 public import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
-import WeilConjectures.RingTheory.KoszulConormalBasis
-import Sheaf.RingTheory.KoszulDerivedQuotient
-import Sheaf.RingTheory.CotangentFlatBaseChange
+import Sheaf.RingTheory.QuotientCotangentConormal
+import Sheaf.RingTheory.KoszulCotangentConcentration
 
 /-!
 # The cotangent complex of a Koszul-regular quotient
@@ -39,6 +38,26 @@ open CategoryTheory CategoryTheory.Limits
 open Algebra.CotangentResolution
 
 namespace Algebra.KoszulQuotientCotangent
+
+private theorem lift_homology_iso {A : Type*} [Category A] [Abelian A]
+    [HasDerivedCategory A] (X : DerivedCategory A) (n : ℤ)
+    [X.IsGE n] [X.IsLE n] (M : A)
+    (h : (DerivedCategory.homologyFunctor A n).obj X ≅ M) :
+    ∃ e : X ≅ (DerivedCategory.singleFunctor A n).obj M,
+      (DerivedCategory.homologyFunctor A n).map e.hom ≫
+        (DerivedCategory.singleFunctorCompHomologyFunctorIso A n).hom.app M = h.hom := by
+  obtain ⟨N, ⟨e⟩⟩ := X.exists_iso_singleFunctor_obj_of_isGE_of_isLE n
+  let H := DerivedCategory.homologyFunctor A n
+  let S := DerivedCategory.singleFunctor A n
+  let j := DerivedCategory.singleFunctorCompHomologyFunctorIso A n
+  let k : N ≅ M := (j.app N).symm ≪≫ (H.mapIso e).symm ≪≫ h
+  refine ⟨e ≪≫ S.mapIso k, ?_⟩
+  change H.map (e.hom ≫ S.map k.hom) ≫ j.hom.app M = h.hom
+  rw [H.map_comp, Category.assoc]
+  rw [show H.map (S.map k.hom) ≫ j.hom.app M = j.hom.app N ≫ k.hom from
+    j.hom.naturality k.hom]
+  dsimp [k]
+  simp
 
 variable [∀ B : CommRingCat.{u}, HasDerivedCategory.{u + 1} (ModuleCat.{u} B)]
 
@@ -91,25 +110,19 @@ Source: Stacks, Tag 08SJ, with lemma-surjection for the conormal normalization
 (blueprint: lem-trf-koszul-quotient-cotangent-vanishing).
 
 Proof:
-1. Set `P = ℤ[x₁,…,xᵣ]`, sending `xᵢ` to `fᵢ`. Its variable Koszul complex is
-   a free resolution of `ℤ`. By lem-trf-koszul-derived-quotient the canonical
-   augmentation identifies `R ⊗ᴸ[P] ℤ` with `(R/I)[0]`, including `r = 0`.
-2. Apply lem-trf-cotangent-flat-base-change to the square `(P,ℤ,R,R/I)`.
-   Its precise hypothesis is the canonical derived-tensor isomorphism in (1),
-   not flatness of `P → R`. Use lem-trf-cotangent-resolution-coherence for the
-   standard complexes, square maps and comparisons in the ordinary module categories.
-3. By lem-trf-cotangent-polynomial-special-case, `L_{ℤ/P} = (J/J²)[1]`.
-   This conormal module has free basis `[xᵢ]`, so its derived tensor with `R/I`
-   is the ordinary tensor placed in degree `-1`. The conormal base-change map
-   sends `[xᵢ] ⊗ 1` to `[fᵢ]`; these form a basis by lem-sc-koszul-conormal-basis.
-   Compose this isomorphism with the inverse of the base-change isomorphism.
-   The conormal comparison of lemma-surjection sends a standard relation with
-   first face `a` and second face zero to `[a]`. In the displayed standard model
-   that relation is `[C(a)] - [0]`; taking differentials gives relationVector.
-   Thus the composite has exactly the asserted normalization on every `a ∈ I`.
-4. A module placed in degree `-1` has zero cohomology in all other degrees.
-   Transport this through the isomorphism. For the empty sequence `I = 0` and
-   `L_{R/R} = 0`; the zero ring and the unit ideal cause no exception. -/
+1. The polynomial Koszul resolution, Tor-independent cotangent base change, and
+   the free conormal module of the polynomial augmentation show that the quotient
+   cotangent complex is concentrated in degree minus one.
+2. Independently apply the general quotient comparison to the identity presentation
+   `R → R/I`. Its relative differentials vanish, so the naive comparison identifies
+   degree minus one cohomology with `I/I²`. Its projection formula carries each
+   standard relation cycle to the corresponding conormal class.
+3. An object concentrated in one degree is isomorphic to a single module. Correct
+   such an isomorphism by the single of its induced homology automorphism to realize
+   precisely the prescribed conormal identification. The localization comparison
+   then gives the asserted normalization on the concrete standard complex.
+4. The two standard t-structure bounds give zero cohomology in every other degree.
+   Empty sequences, the unit ideal, and the zero ring need no separate argument. -/
 theorem exists_canonical_iso_and_vanishing (C : Coherence.{u})
     (R : Type u) [CommRing R] (r : ℕ) (f : Fin r → R)
     (hreg : RingTheory.Sequence.IsKoszulRegular f) :
@@ -129,6 +142,28 @@ theorem exists_canonical_iso_and_vanishing (C : Coherence.{u})
         ((DerivedCategory.homologyFunctor
           (ModuleCat.{u} (CommRingCat.of (R ⧸ Ideal.span (Set.range f)))) i).obj
             (cotangentComplex C (quotientArrow R (Ideal.span (Set.range f))))) := by
-  sorry
+  let I := Ideal.span (Set.range f)
+  let A := ModuleCat.{u} (CommRingCat.of (R ⧸ I))
+  let L := cotangentComplex C (quotientArrow R I)
+  obtain ⟨hge, hle⟩ := koszul_cotangent_concentrated C R r f hreg
+  have : L.IsGE (-1) := hge
+  have : L.IsLE (-1) := hle
+  obtain ⟨h, hz⟩ := quotient_conormal_homology C R I
+  let t := (DerivedCategory.homologyFunctorFactors A (-1)).app (quotientModel C R I)
+  obtain ⟨e, he⟩ := lift_homology_iso L (-1) (ModuleCat.of (R ⧸ I) I.Cotangent)
+    (t ≪≫ h)
+  have hmap : conormalHomologyMap C R I e = h.hom := by
+    change t.inv ≫ (DerivedCategory.homologyFunctor A (-1)).map e.hom ≫
+      (DerivedCategory.singleFunctorCompHomologyFunctorIso A (-1)).hom.app
+        (ModuleCat.of (R ⧸ I) I.Cotangent) = h.hom
+    exact (congrArg (fun g ↦ t.inv ≫ g) he).trans (by simp)
+  refine ⟨⟨e, ?_⟩, ?_⟩
+  · intro a
+    obtain ⟨z, hcycle, hclass⟩ := hz a
+    exact ⟨z, hcycle, by rw [hmap]; exact hclass⟩
+  · intro i hi
+    rcases lt_or_gt_of_ne hi with hlt | hgt
+    · exact DerivedCategory.isZero_of_isGE L (-1) i hlt
+    · exact DerivedCategory.isZero_of_isLE L (-1) i hgt
 
 end Algebra.KoszulQuotientCotangent

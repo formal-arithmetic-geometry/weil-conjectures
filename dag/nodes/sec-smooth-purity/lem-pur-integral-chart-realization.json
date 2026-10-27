@@ -1,0 +1,101 @@
+{
+ "id": "lem-pur-integral-chart-realization",
+ "kind": "statement",
+ "title": "Charts of the transported integral adjunction",
+ "statement": "The original chart_realization declarations of integral counit realization, with their unchanged hypotheses and conclusions: for every supplied smooth integral model m, its actual tower gamma is a natural isomorphism; the gamma-transported tower adjunction has the specified local chart comparisons and counits.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Purity transport Steps 1--4; relocation of the existing chart_realization declarations"
+ },
+ "stmt_deps": [
+  "def-pur-integral-counit-realization-data",
+  "def-sp-field-extension-integral-models",
+  "def-sp-tower-gluing-interfaces",
+  "def-sp-tower-gamma-data"
+ ],
+ "proof": [
+  {
+   "text": "For chart_realization, use the recorded naturality and invertibility of the whole-tower gamma. Whisker it by the inverse coordinate realization and compose with its inverse unit. Full-subcategory faithfulness yields the natural isomorphism from towerSource to the specified exceptional tower functor, with exactly the displayed components.",
+   "uses": [
+    "det-sp-tower-gamma"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use lem-pur-specified-tower-adjunction-charts for the original tower adjunction. Pull gamma back to each chart and compose with that chart comparison. In the chart counit word, naturality of openComposition and of the open adjunction counit moves gamma inverse next to gamma from the transported global counit. They cancel, leaving the recorded chart counit equation. This is the explicit Lean chart_counit_transport calculation; no identification of arbitrary derived morphisms by finite evaluations is used.",
+   "uses": [
+    "lem-pur-specified-tower-adjunction-charts"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-sp-tower-gamma",
+  "lem-pur-specified-tower-adjunction-charts"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Existing complete Lean combination proof, relocated by J3 to keep every file below the compilation bound; no hypothesis, conclusion or public declaration name changes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "integral_stage|coefficient_stage|condensed_stage|chart_realization|composition_realization",
+   "results": "Mathlib grep returned zero hits. The existing declarations and their proof arguments are retained from TransportIntegralCounitRealization. This node records relocation, not a new mathematical assertion.",
+   "date": "2026-10-27",
+   "verdict": "reuse existing proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TransportIntegralCounitRealization",
+  "date": "2026-10-27",
+  "group": "J3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-purity-transport",
+   "place": "Purity transport Steps 1--4; relocation of the existing chart_realization declarations",
+   "via": [
+    "lem-pur-transport-integral-counit-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TransportIntegralChartRealization",
+  "file": "lean/Sheaf/Paper/TransportIntegralChartRealization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.TransportIntegralCounit.chart_realization",
+  "statement": "theorem chart_realization (E : FieldShriekSystem.Index P)\n    (m : FieldExtensionTowers.IntegralModel P D E j p d)\n    [IsNoetherian X] [IsNoetherian Y]\n    [SmoothOfRelativeDimension d (j ≫ p)] :\n    ∃ g : towerSource P D j p d E m ≅ m.exceptional,\n      (∀ K : SpTowerCalculus.C P.coefficients.l E.val (D.base E) (D.coordinates E) Y,\n        (g.hom.app K).hom =\n          (SpTowerCalculus.realization P.coefficients.l E.val (D.base E) X\n            ((D.coordinates E).abelian X)).inverse.map\n              (SpTowerGamma.gamma P.coefficients.l E.val (D.base E) (D.operations E)\n                (D.coordinates E) (SpTowerGamma.factorization j p) m.twists d\n                m.realization.purity.tensorX m.realization.purity.tensorY\n                m.supportClosed m.exceptional m.adjunction m.realization.purity.unit_mem\n                m.realization.purity.orientation K (m.realization.purity.tensor_mem K)\n                (m.realization.purity.projection_iso K)) ≫\n            (SpTowerCalculus.realization P.coefficients.l E.val (D.base E) X\n              ((D.coordinates E).abelian X)).unitIso.inv.app (m.exceptional.obj K).obj) ∧\n      Nonempty (SpTowerGluing.Charts P.coefficients.l E.val (D.base E) (D.operations E)\n        (D.coordinates E) P.field.k (X.asOver (Spec (.of P.field.k)))\n        (Y.asOver (Spec (.of P.field.k)))\n        ⟨‹IsSeparated (Y ↘ Spec (.of P.field.k))›,\n          ‹LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))›,\n          ‹QuasiCompact (Y ↘ Spec (.of P.field.k))›⟩\n        ((j ≫ p).asOver (Spec (.of P.field.k))) d (SpTowerGamma.factorization j p)\n        m.supportClosed (towerSource P D j p d E m)\n        (m.adjunction.ofNatIsoRight g.symm))",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1ef65",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261027T034700-L-3673858",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1ef65",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261027T034700-L-3673858",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 9 new modules against clone main (integral_counit_realization statement identical; relocated decls same names/namespaces/variable binders; item public-imports them; 0 importers); new holes against CondensedStage fields, tower_gluing and FiniteNormalization"
+ }
+}

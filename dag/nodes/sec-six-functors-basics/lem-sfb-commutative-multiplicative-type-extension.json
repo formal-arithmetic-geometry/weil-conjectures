@@ -1,0 +1,219 @@
+{
+ "id": "lem-sfb-commutative-multiplicative-type-extension",
+ "kind": "statement",
+ "title": "Commutative extensions of groups of multiplicative type are of multiplicative type",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All group schemes are affine $F$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism]. A group scheme is of multiplicative type if it is isomorphic to $D(M)=\\operatorname{Spec}F[M]$ for a finitely generated abelian group $M$, with comultiplication $e_m\\mapsto e_m\\otimes e_m$ on the group-algebra basis. Let $q:E\\to Q$ be a homomorphism whose coordinate-ring map is faithfully flat, meaning that extension of scalars is exact and detects zero modules, and let $N=\\ker q$ be its scheme-theoretic kernel. Assume $N$ and $Q$ are of multiplicative type. If $E$ is commutative, then $E$ is of multiplicative type. No smoothness or connectedness assumption is made on $E,N,Q$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 12.22, printed p.239; the sufficient direction, with an explicitly specified faithfully flat quotient."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sfb-diagonalizable-group"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-multiplicative-additive-vanishing-criterion] to $N$ and $Q$. Each is affine of finite type by the hypotheses, and its given multiplicative-type presentation is exactly the diagonalizable presentation in that criterion. Consequently every homomorphism $N\\to\\mathbf G_{a,F}$ and every homomorphism $Q\\to\\mathbf G_{a,F}$ is zero. This assertion concerns scheme morphisms, hence all algebra-valued points, including nilpotent test algebras.",
+   "uses": [
+    "lem-sfb-multiplicative-additive-vanishing-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 12.22, printed p.239, proof; Theorem 12.18(a),(b),(d), printed pp.237–238."
+   }
+  },
+  {
+   "text": "Let $u:E\\to\\mathbf G_{a,F}$ be any group-scheme homomorphism. Its restriction $u|_N$ is zero by step 1. Apply [lem-sfb-faithfully-flat-group-quotient-universal] to $G=E$, the given $q:E\\to Q$, and $H=\\mathbf G_{a,F}$; the additive group is affine of finite type by [def-sc-gm-ga]. The stipulated faithful flatness of the coordinate map is exactly the hypothesis of that lemma. It gives a homomorphism $v:Q\\to\\mathbf G_{a,F}$ with $u=v\\circ q$. Step 1 gives $v=0$, so $u=0$. Thus every homomorphism $E\\to\\mathbf G_{a,F}$ vanishes.",
+   "uses": [
+    "lem-sfb-faithfully-flat-group-quotient-universal",
+    "def-sc-gm-ga"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 12.22, p.239, exactness of the displayed Hom sequence; Theorem 5.13, p.101."
+   }
+  },
+  {
+   "text": "The group $E$ is affine of finite type and commutative by assumption, and step 2 proves the remaining hypothesis of [lem-sfb-multiplicative-additive-vanishing-criterion]. Its converse therefore supplies a finitely generated abelian group $M$ and an isomorphism $E\\simeq D_F(M)$. This is the required multiplicative-type conclusion. The criterion and quotient lemma require neither smoothness nor connectedness, so the argument also covers infinitesimal kernels.",
+   "uses": [
+    "lem-sfb-multiplicative-additive-vanishing-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 12.22, printed p.239, proof; Theorem 12.18(a),(b),(d), printed pp.237–238."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-multiplicative-additive-vanishing-criterion",
+  "lem-sfb-faithfully-flat-group-quotient-universal",
+  "def-sc-gm-ga"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 12.22, printed p.239, proof; Theorem 12.18(a),(b),(d), printed pp.237–238."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An extension of diagonalizable affine algebraic group schemes is diagonalizable if the middle group is commutative",
+   "results": "Available; 8 hits: AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal, AlgebraicGeometry.AffineTargetMorphismProperty.diagonal, AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal, AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_respectsIso, AlgebraicGeometry.HasAffineProperty.diagonal_iff, AlgebraicGeometry.HasAffineProperty.diagonal_of_diagonal_of_isPullback, AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover, AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover_diagonal. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Galois categories, linear-operator diagonalization or diagonal morphism properties, not diagonalizable affine group schemes and their extensions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An extension of groups of multiplicative type is multiplicative if commutative",
+   "results": "Available; 8 hits: Multiplicative.commGroup, CommGroup.ofIsMulCommutative, CommGroup.ext, Multiplicative, Multiplicative.group, AddCommGrpCat.toCommGrp_obj_coe, IsAbelianGalois.toIsMulCommutative, Multiplicative.seminormedAddCommGroup. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Galois categories, linear-operator diagonalization or diagonal morphism properties, not diagonalizable affine group schemes and their extensions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative extension of two diagonalizable algebraic group schemes over an algebraically closed field is diagonalizable",
+   "results": "Available; 8 hits: AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal, AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal, AlgebraicGeometry.HasAffineProperty.diagonal_of_diagonal_of_isPullback, AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_respectsIso, AlgebraicGeometry.AffineTargetMorphismProperty.diagonal, AlgebraicGeometry.HasAffineProperty.diagonal_iff, AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme, AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Galois categories, linear-operator diagonalization or diagonal morphism properties, not diagonalizable affine group schemes and their extensions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"extension\"",
+   "results": "Available; 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Galois categories, linear-operator diagonalization or diagonal morphism properties, not diagonalizable affine group schemes and their extensions."
+  },
+  {
+   "tool": "grep",
+   "query": "[Dd]iagonaliz|[Dd]iagonalis|[Mm]ultiplicative.?[Tt]ype",
+   "results": "Available; 25 hits: Mathlib/NumberTheory/SelbergSieve.lean, Mathlib/NumberTheory/SelbergSieve.lean, Mathlib/NumberTheory/SelbergSieve.lean, Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean, Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean, Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean, Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Unital.lean, Mathlib/CategoryTheory/Limits/Shapes/Diagonal.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Galois categories, linear-operator diagonalization or diagonal morphism properties, not diagonalizable affine group schemes and their extensions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact sequence of affine group schemes with diagonalizable kernel and quotient has diagonalizable middle group if it is commutative",
+   "results": "Available; 8 hits: CategoryTheory.ShortComplex.ShortExact.ab_finite_iff, AddMonoidHom.injective_of_surjective_of_injective_of_injective, AddGroupExtension, CategoryTheory.ComposableArrows.Exact.isIso_cokerToKer', Function.Exact.of_ladder_addEquiv_of_exact', CategoryTheory.ShortComplex.ab_exact_iff_range_eq_ker, AddGroupExtension.mk, CategoryTheory.ComposableArrows.Exact.cokerIsoKer'. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Galois categories, linear-operator diagonalization or diagonal morphism properties, not diagonalizable affine group schemes and their extensions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Groups of multiplicative type are closed under extensions in commutative affine group schemes",
+   "results": "Available; 8 hits: CategoryTheory.PreGaloisCategory.instGroupAutGalois, AlgebraicGeometry.instIsMultiplicativeSchemeIsAffineHom, AlgebraicGeometry.IsAffineHom.comp_iff, AlgebraicGeometry.instIsAffineHomCompScheme, AlgebraicGeometry.AffineSpace.instIsAffine, AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass, CommGrpCat.instCategory, GroupExtension. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Galois categories, linear-operator diagonalization or diagonal morphism properties, not diagonalizable affine group schemes and their extensions."
+  },
+  {
+   "tool": "grep",
+   "query": "multiplicative.?type|[Dd]iagonaliz|[Dd]iagonalis",
+   "results": "Available; 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Galois categories, linear-operator diagonalization or diagonal morphism properties, not diagonalizable affine group schemes and their extensions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative extension of two diagonalizable algebraic group schemes over an algebraically closed field is diagonalizable",
+   "results": "Available; 8 hits: AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal, AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal, AlgebraicGeometry.HasAffineProperty.diagonal_of_diagonal_of_isPullback, AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_respectsIso, AlgebraicGeometry.AffineTargetMorphismProperty.diagonal, AlgebraicGeometry.HasAffineProperty.diagonal_iff, AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme, AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover. ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern abstract groups, type tags or diagonal morphism properties, not extensions of diagonalizable affine group schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Groups of multiplicative type are closed under extensions with commutative middle group",
+   "results": "Available; 8 hits: IsTorsion.extension_closed, CommGroup.ext_iff, CommSemigroup.ext, GroupExtension.Equiv.mk.injEq, CommGroup.ext, AddGroupExtension, Multiplicative.instCancelCommMonoid, GroupExtension.mk. ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern abstract groups, type tags or diagonal morphism properties, not extensions of diagonalizable affine group schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"extension\"",
+   "results": "Available; 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern abstract groups, type tags or diagonal morphism properties, not extensions of diagonalizable affine group schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonaliz|diagonalis|multiplicative.?type",
+   "results": "Available; 0 hits: .  Searched Mathlib/AlgebraicGeometry/",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern abstract groups, type tags or diagonal morphism properties, not extensions of diagonalizable affine group schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-multiplicative-isogeny-composition",
+  "date": "2026-10-23",
+  "group": "Q146"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Composition of multiplicative isogenies has finite central multiplicative kernel. Supporting input: Milne Corollary 12.22, multiplicative type of the now commutative kernel extension.",
+   "via": [
+    "lem-sfb-multiplicative-isogeny-composition",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-commutative-multiplicative-type-extension",
+  "worker": "stage1",
+  "summary": "Followed Milne Corollary 12.22: vanish additive Hom for kernel and quotient using Theorem 12.18, descend an arbitrary additive homomorphism through the specified faithfully flat quotient using Theorem 5.13, and apply the criterion to the commutative middle group. Two new statement-only inputs, no Mathlib match or Lean attachment. Statement unchanged. The source reference to criterion (12.18c) is a harmless label typo for (12.18b).",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Composition of multiplicative isogenies has finite central multiplicative kernel. Supporting input: Milne Corollary 12.22, multiplicative type of the now commutative kernel extension. The latest blueprint direct-image proof (3) is the ancestor route; this node is its already recorded algebraic-group prerequisite below the unit."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-4e2e617c9",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-4e2e617c9 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes and Milne iAG2017 at the cited places. Sources: Corollary 12.22 (p.239); Theorem 12.18 with its whole proof (pp.237-238); Def 5.5, Prop 5.7 and Theorem 5.13 (pp.99-101); Prop 5.43 (p.107). Step 1 applies the criterion (a=>b) to N and Q: the item's 'multiplicative type = D(M), M finitely generated' is exactly the criterion's 'diagonalizable' (k^s=F). Step 2 applies the quotient lemma to u:E->Ga, using u|N=0, q* faithfully flat and Ga=Spec k[y] of finite type, to get v with u=vq; then v=0. This is Milne's Hom-sequence exactness. Step 3 applies the criterion (b=>a) to the commutative E. Milne's '(12.18c)' is a label slip for (b), as the worker says. The criterion node (Milne 12.18 a<=>b over an algebraically closed field) checks out on D(0), mu_p in char p, alpha_p (excluded), constant Z/p in char p and SL_2 (shows commutativity is needed). The quotient node (Milne 5.13, affine, kernel condition as scheme morphisms) checks out on q=id and on G->1; e->alpha_p shows flatness is needed. Neither new node restates the item. No duplicate: compared with character-antiduality, diagonalizable-geometric-criteria, unipotent-to-multiplicative-trivial, split-torus-subgroups, central-kernel-cyclic-representation-descent (only the H->GL(W) case), fpqc-representable-descent and fppf-kernel-pair-quotient-descent. Same unit, no tool_uses, no SGA, statement unchanged and matches its use in lem-sfb-multiplicative-isogeny-composition. No repair note. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CommutativeMultiplicativeTypeExtension",
+  "declaration": "AlgebraicGeometry.commutative_multiplicativeType_extension",
+  "file": "lean/Sheaf/AlgebraicGeometry/CommutativeMultiplicativeTypeExtension.lean",
+  "statement": "theorem commutative_multiplicativeType_extension {F : Type u} [Field F] [IsAlgClosed F] (E Q : Over (Spec (.of F))) [GrpObj E] [GrpObj Q] [IsAffine E.left] [IsAffine Q.left] [LocallyOfFiniteType E.hom] [QuasiCompact E.hom] [LocallyOfFiniteType Q.hom] [QuasiCompact Q.hom] (q : E ⟶ Q) [IsMonHom q] (hq : q.left.appTop.hom.FaithfullyFlat) (hN : ∃ (M : Type u) (_ : AddCommGroup M) (_ : AddGroup.FG M), Nonempty (Grp.mk (GrpObj.ker q) ≅ diagonalizableGroup F M)) (hQ : ∃ (M : Type u) (_ : AddCommGroup M) (_ : AddGroup.FG M), Nonempty (Grp.mk Q ≅ diagonalizableGroup F M)) [IsCommMonObj E] : ∃ (M : Type u) (_ : AddCommGroup M) (_ : AddGroup.FG M), Nonempty (Grp.mk E ≅ diagonalizableGroup F M)",
+  "branch": "newtargets-dag",
+  "by": "Q45",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ee84d00d1",
+  "group": "Q45",
+  "result": "pass",
+  "note": "Node diff vs side-live: only the stmt_dep def-sfb-diagonalizable-group is added (landed 2026-10-23, on the base). lean.statement is verbatim in the file, one sorry, docstrings carry source/blueprint/3 proof steps, report has both sections. Clauses: IsAlgClosed F; E,Q : Over (Spec F) with GrpObj, IsAffine, LocallyOfFiniteType+QuasiCompact; IsMonHom q; q.left.appTop.hom.FaithfullyFlat = faithfully flat coordinate map; N = GrpObj.ker q (pullback, nilpotents kept); hN/hQ/conclusion = ∃ f.g. M, Grp-iso to diagonalizableGroup F M (real hopfSpec of AddMonoidAlgebra); IsCommMonObj E; no smooth/connected assumption. Edge cases Q=1, q=id, M=0, μ_p, α_p excluded, universes ok. H4: IsMultiplicativeType exists but the node explicitly defines multiplicative type as ≅D(M) over algebraically closed F (equivalent); no new definition. No compile run because no file changed."
+ }
+}

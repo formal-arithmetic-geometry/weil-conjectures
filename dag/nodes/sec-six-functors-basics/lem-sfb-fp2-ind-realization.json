@@ -1,0 +1,286 @@
+{
+ "id": "lem-sfb-fp2-ind-realization",
+ "kind": "statement",
+ "title": "Filtered-colimit hull closure for an essentially small FP2 weak Serre subcategory",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "statement": "Fix the universes of [def-weil-size-convention]. Let $\\mathcal B$ be a locally small Grothendieck abelian category [def-sp-grothendieck-abelian] with all small colimits in the indexing universe. Let $\\mathcal C\\subset\\mathcal B$ be an essentially small full replete subcategory containing zero and closed under ambient kernels, cokernels, and extensions. Suppose that for every $C\\in\\mathcal C$ and every small filtered diagram $(B_i)$ in $\\mathcal B$ [def-weil-pbc-category-colimit], the natural maps $\\varinjlim_i\\operatorname{Hom}(C,B_i)\\to\\operatorname{Hom}(C,\\varinjlim_i B_i)$ and $\\varinjlim_i\\operatorname{Ext}^1_{\\mathrm{Yon}}(C,B_i)\\to\\operatorname{Ext}^1_{\\mathrm{Yon}}(C,\\varinjlim_i B_i)$ are bijective. Yoneda $\\operatorname{Ext}^1(C,B)$ means equivalence classes of ambient short exact sequences $0\\to B\\to M\\to C\\to0$, with Baer sum. In this Grothendieck setting, render these Yoneda groups by the small degree-one Ext groups of [def-pc-ext] through the canonical natural Baer-group comparison, which identifies pushout of extensions with covariant functoriality in the second variable. Thus the displayed Yoneda continuity condition is equivalently preservation of small filtered colimits by $\\operatorname{Ext}^1_{\\mathcal B}(C,-)$ in that model; no comparison or finite-stage lift is an additional hypothesis. Let $\\mathcal J$ be the full replete class of small filtered colimits in $\\mathcal B$ of objects of $\\mathcal C$, with arbitrary morphisms in the diagrams. Then $\\mathcal J$ contains zero and $\\mathcal C$, is closed under all small filtered ambient colimits and all small ambient coproducts, and is closed under ambient kernels, cokernels and extensions. In the extension assertion every ambient short exact sequence is included, without any assumed lift to finite stages. All resulting presentations use small indexing categories in the same universe.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart.proof.md",
+  "place": "Full faithfulness, canonical presentations, filtered colimits and direct sums, kernels and cokernels, and extensions paragraphs, with the geometric hypotheses replaced by the precise abstract hypotheses used there. Agent extraction of the categorical argument."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sp-grothendieck-abelian",
+  "def-weil-pbc-category-colimit",
+  "def-pc-ext"
+ ],
+ "proof": [
+  {
+   "text": "A constant singleton presentation gives P ≤ ind(P), and therefore zero lies in ind(P). Hom continuity identifies P-objects as finitely presentable. Apply ObjectProperty.ind_ind to flatten a filtered colimit of filtered P-presentations. This proves the small filtered-colimit closure used throughout the remaining proof.",
+   "uses": [
+    "lem-sfb-ind-fp-idempotence",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Given a filtered P-presentation p of X, prove its functor to CostructuredArrow P.ι X is final: every map out of a P-object factors through a stage by finite presentability, and two maps to one stage that agree in X agree after a transition. For f:X→Y and chosen presentations pX,pY, take the comma category of pX.toCostructuredArrow followed by postcomposition with f, and pY.toCostructuredArrow. Since the latter functor is final and both indices are filtered, the comma category is filtered and both projections are final (Mathlib Comma.Final). Its diagram consists of the stage arrows, and its cocone to f is colimiting because both endpoint cocones are colimiting (Comma.fstSndJointlyReflectColimit). Its object type is small as a sigma of two small indices and small Hom sets; its homs are small as pairs of index morphisms. Reindex via SmallModel to obtain a presentation in the same universe. No finite colimits or skeleton of P are needed for this step.",
+   "uses": [
+    "def-weil-size-convention",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "lem-weil-pbc-initial-functor-cofiltered-criterion",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply arrow_exact_colimits to the filtered arrow presentation. Grothendieck exactness gives its hypothesis. Mapping the presentation through ker and coker presents the ambient kernel and cokernel by kernels and cokernels of stage arrows, which belong to P. Transport across the unique kernel/cokernel isomorphisms to get closure for every kernel fork and cokernel cofork, as required by the ObjectProperty classes.",
+   "uses": [
+    "def-sp-grothendieck-abelian",
+    "lem-sfb-arrow-exact-colimits",
+    "def-sp-abelian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Present X⊞Y using the product of chosen filtered presentations: the stage is the binary biproduct of the two stage objects, which belongs to P by extension closure. Each coordinate projection is final. A cocone on the stage biproducts is exactly a pair of cocones on the coordinate diagrams, by the two biproduct inclusions. Their colimit universal properties therefore give the colimit X⊞Y. Zero and binary coproducts imply finite coproduct closure by Mathlib ObjectProperty.FiniteProducts. In particular, a pushout of hull objects is again a hull object: in an abelian category it is the cokernel of (u,-a) into the binary biproduct, and step 3 applies.",
+   "uses": [
+    "def-sp-abelian",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a short exact sequence 0→N→M→C→0 with N in ind(P) and C in P, map a chosen filtered P-presentation of N through extFunctorObj C 1 and then forget to types. Ext continuity and elementwise surjectivity give a stage D_i and an Ext-one class ξ over D_i mapping to the class of the original sequence. The existing degree-one extension classification theorem represents ξ by 0→D_i→E→C→0. Extension closure gives P(E). Push this sequence out along D_i→N using pushout_short_exact_sequence. Naturality of extClass identifies the class of this pushout with the original class. The injectivity clause of the classification theorem supplies an endpoint-fixed isomorphism of middle objects. The pushout is in the hull by step 4, so M is too. This avoids constructing the filtered undercategory of a chosen kernel stage.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "lem-weil-pbc-ext-one-extension-classification",
+    "lem-weil-pbc-pushout-short-exact-sequence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an arbitrary short exact sequence with both endpoints in the hull, present its quotient as a filtered colimit of P-objects and pull the sequence back to each stage. ShortComplex.ShortExact.pullback, the dual pushout assertion, gives short exactness with unchanged kernel. Step 5 puts all these middle terms in the hull. Mathlib IsColimit.pullbackOfHasExactColimitsOfShape computes their colimit as the original middle term, using that the filtered index is connected and that Grothendieck filtered colimits are exact. The pullbackObjIso comparison and pullbackSymmetry identify its pointwise pullbacks with ShortComplex.pullback. Step 1 finishes extension closure.",
+   "uses": [
+    "lem-weil-pbc-pushout-short-exact-sequence",
+    "def-sp-grothendieck-abelian",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finally, the ambient coproduct of any small family is the filtered colimit of its finite subsums, using Mathlib CoproductsFromFiniteFiltered.liftToFinsetColimitCocone. The stages lie in the hull by step 4 (or extension closure), and step 1 puts their colimit in the hull. Finset(Discrete I) is small in the same universe and filtered, including for empty I.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-ind-fp-idempotence",
+  "def-weil-pbc-category-colimit",
+  "def-weil-size-convention",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-weil-pbc-initial-functor-cofiltered-criterion",
+  "def-sp-grothendieck-abelian",
+  "lem-sfb-arrow-exact-colimits",
+  "def-sp-abelian",
+  "lem-weil-pbc-ext-one-extension-classification",
+  "lem-weil-pbc-pushout-short-exact-sequence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart.proof.md",
+  "place": "F4 stage-3 proof, 2026-10-24. The same filtered-presentation, exactness and Ext-one descent argument, using Mathlib comma finality to present arrows, finite-colimit closure to handle the descended pushout, and IsColimit.pullbackOfHasExactColimitsOfShape for the final colimit. All helpers are proved privately in FP2IndRealization; no new intermediate holes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An essentially small weak Serre subcategory of an abelian category with exact filtered colimits has fully faithful Ind realization closed under kernels cokernels extensions and coproducts if Hom and Ext one commute with filtered colimits",
+   "results": "8 hits; [\"CategoryTheory.Limits.isGrothendieckAbelian_ind\", \"CategoryTheory.IsGrothendieckAbelian\", \"CategoryTheory.instAbelianInd\", \"CategoryTheory.IsGrothendieckAbelian.hasExt\", \"CategoryTheory.IsGrothendieckAbelian.hasFilteredColimitsOfSize\", \"CategoryTheory.IsGrothendieckAbelian.ab5OfSize\", \"CategoryTheory.IsGrothendieckAbelian.locallySmall\", \"CategoryTheory.ObjectProperty.IsSerreClass\"]",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Ind abelianness and its presheaf inclusion do not assert closure of the realization image under arbitrary ambient extensions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ind completion realization of a small abelian subcategory closed under extensions and finitely presented objects with Ext1 commuting with filtered colimits",
+   "results": "8 hits; [\"CategoryTheory.instHasFilteredColimitsInd\", \"CategoryTheory.Limits.isIndObject_of_isFiltered_of_finallySmall\", \"CategoryTheory.IsGrothendieckAbelian.hasFilteredColimitsOfSize\", \"CategoryTheory.IsGrothendieckAbelian.hasLimits\", \"CategoryTheory.Limits.IndObjectPresentation.instIsFilteredI\", \"CategoryTheory.instAbelianInd\", \"CategoryTheory.IsGrothendieckAbelian.ab4OfSize\", \"CategoryTheory.IsGrothendieckAbelian.hasColimits\"]",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Ind abelianness and its presheaf inclusion do not assert closure of the realization image under arbitrary ambient extensions"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.IsClosedUnderExtensions, CategoryTheory.IsFiltered",
+   "results": "0 hits; []",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Ind abelianness and its presheaf inclusion do not assert closure of the realization image under arbitrary ambient extensions"
+  },
+  {
+   "tool": "grep",
+   "query": "IsClosedUnderExtensions|PreservesFiniteLimits|full.*faith",
+   "results": "11 hits; [\"Mathlib/CategoryTheory/Limits/Indization/FilteredColimits.lean\", \"Mathlib/CategoryTheory/Limits/Indization/Category.lean\", \"Mathlib/CategoryTheory/Limits/Indization/Category.lean\", \"Mathlib/CategoryTheory/Limits/Indization/Category.lean\", \"Mathlib/CategoryTheory/Limits/Indization/Category.lean\", \"Mathlib/CategoryTheory/Limits/Indization/Category.lean\", \"Mathlib/CategoryTheory/Limits/Indization/IndObject.lean\", \"Mathlib/CategoryTheory/Limits/Indization/IndObject.lean\"]",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Ind abelianness and its presheaf inclusion do not assert closure of the realization image under arbitrary ambient extensions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Realization of Ind objects in a Grothendieck abelian category is exact and fully faithful and its image is extension closed when the small abelian subcategory consists of FP2 objects",
+   "results": "8 hits; [\"CategoryTheory.Limits.isGrothendieckAbelian_ind\", \"CategoryTheory.IsGrothendieckAbelian.hasExt\", \"CategoryTheory.instAbelianInd\", \"CategoryTheory.IsGrothendieckAbelian.IsPresentable.surjectivity\", \"CategoryTheory.IsGrothendieckAbelian.ab5OfSize\", \"CategoryTheory.IsGrothendieckAbelian\", \"CategoryTheory.Abelian.freyd_mitchell\", \"CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.functor\"]",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Ind abelianness and its presheaf inclusion do not assert closure of the realization image under arbitrary ambient extensions"
+  },
+  {
+   "tool": "grep",
+   "query": "isGrothendieckAbelian_ind|indLim|PreservesFinite",
+   "results": "0 hits; []",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Ind abelianness and its presheaf inclusion do not assert closure of the realization image under arbitrary ambient extensions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The realization functor from the Ind completion of a full finitely presented subcategory of a Grothendieck abelian category is exact and extension closed if Ext1 commutes with filtered colimits",
+   "results": "8 hits: CategoryTheory.Limits.isGrothendieckAbelian_ind, CategoryTheory.IsGrothendieckAbelian.hasExt, CategoryTheory.instAbelianInd, CategoryTheory.IsGrothendieckAbelian.ab5OfSize, CategoryTheory.IsGrothendieckAbelian, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Abelian.freyd_mitchell, CategoryTheory.HasExt",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: ind_ind handles flattening only; abstract Ind abelianness does not identify arbitrary ambient extensions with realizations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A full subcategory closed under kernels cokernels extensions and consisting of finitely presented objects with Ext1 commuting with filtered colimits has a filtered colimit closure closed under extensions",
+   "results": "8 hits: CategoryTheory.IsFiltered.instIsFilteredOrEmptyFullSubcategoryFilteredClosure, CategoryTheory.IsFiltered.filteredClosure, CategoryTheory.IsGrothendieckAbelian.hasColimits, CategoryTheory.IsFiltered.small_fullSubcategory_filteredClosure, CategoryTheory.IsGrothendieckAbelian.isColimitMapCoconeOfSubobjectMkEqISup, CategoryTheory.IsFiltered.instEssentiallySmallFullSubcategoryFilteredClosure, CategoryTheory.AB4.of_AB5, CategoryTheory.MorphismProperty.isClosedUnderColimitsOfShape_isLocal",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: ind_ind handles flattening only; abstract Ind abelianness does not identify arbitrary ambient extensions with realizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.ind",
+   "results": "12 hits: CategoryTheory.ObjectProperty.ind, CategoryTheory.ObjectProperty.instIsClosedUnderIsomorphismsInd, CategoryTheory.ObjectProperty.instNonemptyInd, CategoryTheory.ObjectProperty.le_ind, CategoryTheory.ObjectProperty.isClosedUnderLimitsOfShape_ind_discrete, CategoryTheory.ObjectProperty.ind_ind, CategoryTheory.ObjectProperty.of_essentiallySmall_index, CategoryTheory.ObjectProperty.ind_inverseImage_eq_of_isEquivalence",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: ind_ind handles flattening only; abstract Ind abelianness does not identify arbitrary ambient extensions with realizations."
+  },
+  {
+   "tool": "grep",
+   "query": "ind.*(extensions|kernels|cokernels)|IsClosedUnderExtensions.*ind",
+   "results": "7 hits: Mathlib/CategoryTheory/ObjectProperty/Kernels.lean, Mathlib/CategoryTheory/ObjectProperty/Kernels.lean, Mathlib/CategoryTheory/Abelian/DiagramLemmas/KernelCokernelComp.lean, Mathlib/CategoryTheory/Limits/Shapes/Kernels.lean, Mathlib/CategoryTheory/Limits/Shapes/Kernels.lean, Mathlib/CategoryTheory/Limits/Shapes/Kernels.lean, Mathlib/CategoryTheory/Limits/Shapes/Kernels.lean",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: ind_ind handles flattening only; abstract Ind abelianness does not identify arbitrary ambient extensions with realizations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-complex-heart-filtered-approximation",
+  "date": "2026-10-24",
+  "group": "NN"
+ },
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement proof (2), preservation of direct sums on the localizing hull: corrected Noetherian heart route; abstract passage from a weak Serre FP2 heart to its filtered-colimit hull.",
+   "via": [
+    "lem-sfb-finite-complex-heart-filtered-approximation",
+    "lem-sfb-torsion-cd-topological-serre-transfer",
+    "lem-sfb-affine-profinite-family-serre-cd",
+    "lem-sfb-profinite-geometric-family-heart-cd",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-fp2-ind-realization",
+  "worker": "stage1",
+  "summary": "NX verified the current blueprint route, generic versus geometric hypotheses, all indexing sizes, and all cited statements. One general Mathlib flattening leaf is added. The proof explicitly constructs square presentations and descends arbitrary Yoneda extensions via pushouts over undercategories; no Lean attachment, statement correction or extra hypothesis.",
+  "blueprint": "det-sf-comp-coherence-cocycle refinement proof (2), preservation of direct sums on the localizing hull, through the corrected FP2 heart route; latest sk-prop-ind-heart proof paragraphs Canonical presentations, Filtered colimits and direct sums, Kernels and cokernels, Extensions.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-initial-functor-cofiltered-criterion",
+    "why": "Generic finality and undercategory facts, applied dually to small filtered categories. The compactification-coherence unit has no category-theoretic substitute."
+   },
+   {
+    "node": "lem-weil-pbc-pushout-short-exact-sequence",
+    "why": "Ambient abelian pushout theorem, also applied in the opposite category to form pullback extensions. It is a generic tool, not a replacement of a geometric unit step."
+   },
+   {
+    "node": "lem-sfb-arrow-exact-colimits",
+    "why": "Generic preservation of kernel/cokernel cocones by exact colimits; needed for arrow presentations and the final pullback colimit, independently of the geometric ind-heart hypotheses."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-initial-functor-cofiltered-criterion",
+  "lem-weil-pbc-pushout-short-exact-sequence",
+  "lem-sfb-arrow-exact-colimits"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NX-494a5793f",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-494a5793f (reviewer sub-agent of L); spot-checked: First split; live and side-live are both unsplit, so the delivery is not superseded and no re-split note applies. The statement and maintainer fields are unchanged; proof_deps equals the union of uses; the graph is acyclic; there is no SGA. New leaf lem-sfb-ind-fp-idempotence = Mathlib ObjectProperty.ind_ind (Ind.lean:59-66, ind defined at 43-46). Its hypotheses match exactly: LocallySmall.{w} and P ≤ isFinitelyPresentable (Finite.lean:67-69 iff Hom preserves w-small filtered colimits). It is not a duplicate: rg -L for ind_ind and ObjectProperty.ind finds it only inside other nodes' proofs, and the lem-coef-accessible-* and det-ind-heart-* nodes are different or geometric. The item's 10 steps follow the latest sk-prop-ind-heart proof (canonical presentation, filtered colimits/sums, kernels/cokernels, extensions) and I checked every one. Steps 4-6 verify J_B and P_f filtered with cokernel equalizers, and I verified the dualization of the initial-functor criterion (i)/(ii) for both projections. Step 7 applies arrow-exact-colimits with Grothendieck exactness. Steps 8-10 form the pullback M_a, using the pushout lemma in B^op and Ext surjectivity with the elementwise clause (1); push out over i/I, which is filtered and final with the colimit computed by universal property; and M = colim ker(q,-c_a) with kernel of (q,-1) ≅ M. Small cases C={0}, coherent-ring fp modules and the empty sum were checked. I accept the three declared tool_uses as generic categorical facts. Minor: the report mentions a citations.json that was not committed; no DAG effect."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FP2IndRealization",
+  "declaration": "CategoryTheory.ObjectProperty.fp2_ind_realization",
+  "file": "lean/Sheaf/CategoryTheory/FP2IndRealization.lean",
+  "statement": "theorem fp2_ind_realization (B : Type u) [Category.{v} B] [Abelian B] [IsGrothendieckAbelian.{w} B] (P : ObjectProperty B) [EssentiallySmall.{w} P.FullSubcategory] [P.IsClosedUnderIsomorphisms] [P.ContainsZero] [P.IsClosedUnderKernels] [P.IsClosedUnderCokernels] [P.IsClosedUnderExtensions] (hHom : P ≤ isFinitelyPresentable.{w} B) (hExt : ∀ C : B, P C → PreservesFilteredColimitsOfSize.{w, w} (Abelian.extFunctorObj.{w} C 1)) : (ind.{w} P).ContainsZero ∧ P ≤ ind.{w} P ∧ (∀ (I : Type w) [SmallCategory I] [IsFiltered I], (ind.{w} P).IsClosedUnderColimitsOfShape I) ∧ (∀ I : Type w, (ind.{w} P).IsClosedUnderColimitsOfShape (Discrete I)) ∧ (ind.{w} P).IsClosedUnderKernels ∧ (ind.{w} P).IsClosedUnderCokernels ∧ (ind.{w} P).IsClosedUnderExtensions",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Yoneda Ext1 continuity is expressed using the small Ext groups of def-pc-ext. The proved nonempty_yonedaDerivedExtComparison justifies their natural Baer-group identification with actual short exact extension classes, compatibly with pushout; this theorem is explanatory only, not a signature dependency or additional hypothesis. See statement_change and the complete citer audit."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-21bf9835a",
+  "group": "NB",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN 685a: the theorem stmt_dep lem-coef-yoneda-derived-ext-comparison is dropped and def-pc-ext (Mathlib Abelian.Ext/extFunctorObj) is cited via a §1(C) statement_change; old_statement and old_stmt_deps equal the base, statement citations equal stmt_deps, and the node is not superseded (live/side-live have no lean record). The signature is byte-identical to 685a, which was fully checked (Grothendieck.{w}, essentially small replete weak-Serre P, hHom = isFinitelyPresentable, hExt, conclusions on ind.{w} P, universes at w) and re-read now. The corrected statement is equivalent to the source: the proved nonempty_yonedaDerivedExtComparison gives a natural additive iso with pushout naturality, Baer sum and a uniform sign. The citer verdicts holds:true for lem-sfb-finite-complex-heart-filtered-approximation and the qcqs closure are checked against their step 4. lean.statement is verbatim, the proof is sorry only, no definitions are added, docstrings and source are present, and public/plain imports are correct. No compile: no file changed; the worker reports clean compiles and dry run b1b2fe5704b. No findings.",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-23",
+  "by": "NB stage 2",
+  "old_statement": "Fix the universes of [def-weil-size-convention]. Let $\\mathcal B$ be a locally small Grothendieck abelian category [def-sp-grothendieck-abelian] with all small colimits in the indexing universe. Let $\\mathcal C\\subset\\mathcal B$ be an essentially small full replete subcategory containing zero and closed under ambient kernels, cokernels, and extensions. Suppose that for every $C\\in\\mathcal C$ and every small filtered diagram $(B_i)$ in $\\mathcal B$ [def-weil-pbc-category-colimit], the natural maps $\\varinjlim_i\\operatorname{Hom}(C,B_i)\\to\\operatorname{Hom}(C,\\varinjlim_i B_i)$ and $\\varinjlim_i\\operatorname{Ext}^1_{\\mathrm{Yon}}(C,B_i)\\to\\operatorname{Ext}^1_{\\mathrm{Yon}}(C,\\varinjlim_i B_i)$ are bijective. Yoneda $\\operatorname{Ext}^1(C,B)$ means equivalence classes of ambient short exact sequences $0\\to B\\to M\\to C\\to0$, with Baer sum. Let $\\mathcal J$ be the full replete class of small filtered colimits in $\\mathcal B$ of objects of $\\mathcal C$, with arbitrary morphisms in the diagrams. Then $\\mathcal J$ contains zero and $\\mathcal C$, is closed under all small filtered ambient colimits and all small ambient coproducts, and is closed under ambient kernels, cokernels and extensions. In the extension assertion every ambient short exact sequence is included, without any assumed lift to finite stages. All resulting presentations use small indexing categories in the same universe.",
+  "what": "The previous text specified geometric Yoneda Ext1 classes, whereas the Lean signature uses the standard small derived Ext model without naming its definition node. This interface ambiguity is resolved explicitly by citing def-pc-ext and the canonical natural Baer comparison; continuity is equivalent, with no added hypothesis or changed conclusion. The comparison theorem justifies the model and is not a statement dependency.",
+  "source": {
+   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart.proof.md",
+   "place": "Extensions paragraph: the Ext1 filtered-colimit comparison is used to descend an actual short exact extension by pushout. The rendered small Ext1 model has the same natural Baer-group interpretation."
+  },
+  "citers": [
+   {
+    "id": "lem-sfb-finite-complex-heart-filtered-approximation",
+    "holds": true,
+    "note": "Its scalar-heart Hom and Yoneda Ext1 continuity hypotheses give the same abstract hull-closure conclusion via the canonical natural Baer comparison; no hypothesis, conclusion, or indexing universe changes."
+   },
+   {
+    "id": "lem-sfb-qcqs-finite-complex-heart-filtered-closure",
+    "holds": true,
+    "note": "Its scalar-heart Hom and Yoneda Ext1 continuity hypotheses give the same abstract hull-closure conclusion via the canonical natural Baer comparison; no hypothesis, conclusion, or indexing universe changes."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-size-convention",
+   "def-sp-grothendieck-abelian",
+   "def-weil-pbc-category-colimit"
+  ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261024T014810-L-2270694",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

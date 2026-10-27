@@ -1,0 +1,124 @@
+{
+ "id": "lem-sp-coordinate-chart-models",
+ "kind": "statement",
+ "title": "Finite compatibility of the explicitly composed chart pairs",
+ "statement": "Fix the field, prime, coefficient and calculus data of the coordinate theorem and foundations a [lem-sp-coordinate-foundations], together with projection adjunctions p [lem-sp-coordinate-projection-models]. Define coordinateChartPair by composing the calculus etale sum-extension pair with p.projection, transporting the left side by the etale-shriek and compact-support composition isomorphisms, and the right side by a.pulled and composeRight [lem-sp-coordinate-restricted-composition]. For every separated finite-type etale k-chart e:U→A^d_Y and every chart compactification, this explicit pair admits LevelCompatibility on all finite constructible finite-Tor objects, with left comparison supportEvaluation and right comparison rightEvaluation [def-sp-coordinate-right-comparisons]. Its ambient counit is the displayed composite: inverse pulled right comparison, inverse compact-support composition, compact support of the etale-shriek comparison and fibre sum, followed by p.projection counit, for every intermediate compactification. This asserts compatibility of an already constructed adjunction, not existence of a new chart adjunction.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+  "place": "Local pairs and Levels; explicit categorical details of the original coordinate argument"
+ },
+ "stmt_deps": [
+  "def-sp-coordinate-adjunction-categories",
+  "def-sp-coordinate-tate-tensor-comparisons",
+  "def-sp-coordinate-right-comparisons",
+  "lem-sp-coordinate-foundations",
+  "lem-sp-coordinate-projection-models",
+  "lem-sp-coordinate-restricted-composition",
+  "lem-sp-coefficient-tower-shriek-calculus"
+ ],
+ "proof": [
+  {
+   "text": "First construct coordinateChartPair using restrictedComposite. Its left closure is Preservation and its right closure is foundation chart_closed. For the coefficient-independent intermediate compactifications chosen before deriving, apply restrictedComposite_counit and expand the inverse of the composite left comparison. This proves coordinateChartPair_counit with etale fibre summation preceding integration. For any other intermediate compactifications, use the calculus refinement naturality and composition coherence to identify the same counit; naturality of the projection counit gives the stated formula. At each finite level compose the finite etale pair with the projection finite pair, on all finite constructible finite-Tor objects. Evaluate the actual tower constructions via supportEvaluation and rightEvaluation. The constituent etale and projection transpose equations imply both composite transpose equations. Apply them to identities to obtain unit and counit compatibility. No faithfulness of derived evaluation is used.",
+   "uses": [
+    "lem-sp-coordinate-projection-models",
+    "lem-sp-coordinate-foundations",
+    "lem-sp-coordinate-restricted-composition",
+    "lem-sp-coefficient-tower-shriek-calculus",
+    "det-sp-tower-shriek-levels"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-coordinate-projection-models",
+  "lem-sp-coordinate-foundations",
+  "lem-sp-coordinate-restricted-composition",
+  "lem-sp-coefficient-tower-shriek-calculus",
+  "det-sp-tower-shriek-levels"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+  "place": "Local pairs and Levels, expanded into explicit Lean interfaces"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tate twist strict tower projection adjunction normalized finite roots tensor shift finite evaluation",
+   "results": "constantSheafAdj, evaluationAdjunctionLeft, CochainComplex.shiftEval, Adjunction.CommShift.CompatibilityCounit; none states the normalized geometric tower construction.",
+   "date": "2026-10-25",
+   "verdict": "No exact match; generic categorical operations reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp",
+   "results": "Adjunction.comp, comp_homEquiv, comp_counit_app, comp_unit_app in Mathlib.CategoryTheory.Adjunction.Basic.",
+   "date": "2026-10-25",
+   "verdict": "Generic composition supplies categorical assembly, not the root normalization or geometric projection adjunction."
+  },
+  {
+   "tool": "grep",
+   "query": "tower_coordinate|ProjectivePresentation|AffineRestriction in Mathlib; RestrictedPair|CompositeEquation in project Lean",
+   "results": "Only Mathlib projective presentations of profinite objects; project RestrictedPair and CompositeEquation definitions exist, with no composition theorem or normalized existence lemmas.",
+   "date": "2026-10-25",
+   "verdict": "No duplicate; reuse existing coordinate definitions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothPurityTowerCoordinateAdjunctionModels",
+  "date": "2026-10-25",
+  "group": "A7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-gluing",
+   "place": "Local pairs, ordered affine projection and etale composition; Levels",
+   "via": [
+    "lem-sp-tower-coordinate-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SmoothPurityCoordinateChartModels",
+  "file": "lean/Sheaf/Paper/SmoothPurityCoordinateChartModels.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpCoordinateAdjunction.coordinate_chart_models",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpCoordinateAdjunction.coordinateChartPair",
+   "AlgebraicGeometry.ProEtale.SpCoordinateAdjunction.coordinateChartPair_counit",
+   "AlgebraicGeometry.ProEtale.SpCoordinateAdjunction.ChartModels",
+   "AlgebraicGeometry.ProEtale.SpCoordinateAdjunction.coordinate_chart_models"
+  ],
+  "statement": "theorem coordinate_chart_models\n    (pchar : ℕ) [Fact pchar.Prime] (k : Type u) [Field k] [CharP k pchar]\n    (_hl : l ≠ pchar) (b : SpTowerShriek.Base l E) (o : SpTowerShriek.Operations l E b)\n    (q : SpTowerCalculus.Coordinates l E b) (z : SpTowerCalculus.FiniteCoordinates l E)\n    (h : SpTowerCalculus.Preservation l E k b o q)\n    (cal : SpTowerCalculus.Calculus l E k b o q z h) (w : TwistFamily l E)\n    (a : Foundations l E k b o q w)\n    (p : ProjectionModels l E k b o q z h cal w a) :\n    Nonempty (ChartModels l E k b o q z h cal w a p)",
+  "branch": "sheaf-dag",
+  "by": "A7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261025T161832-L-124555",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261025T161832-L-124555",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

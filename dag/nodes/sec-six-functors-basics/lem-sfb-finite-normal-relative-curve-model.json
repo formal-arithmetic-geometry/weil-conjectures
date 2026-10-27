@@ -1,0 +1,280 @@
+{
+ "id": "lem-sfb-finite-normal-relative-curve-model",
+ "kind": "statement",
+ "title": "Finite normalized models and their pure curve fibres",
+ "statement": "Let $k$ be a field, $S$ a normal integral projective finite-type $k$-scheme with $K=k(S)$, and $f:X\\to S$ an H-projective morphism with $X$ integral of finite type over $k$. Suppose the geometric fibres of $f$ are pure of dimension one and its generic fibre is smooth and geometrically integral. Write $F=k(X)$. Let $L/F$ be a finite separable field extension and $E/K$ a finite separable subextension of $L/K$. Suppose the normalization of $X_K$ in $L$, with its induced $E$-structure, is a smooth projective geometrically integral $E$-curve $C$. Put $T=\\operatorname{Nor}_E(S)$ and $Y=\\operatorname{Nor}_L(X)$. Then $T$ is normal integral projective of finite type over $k$, with function field $E$, and $T\\to S$ is finite surjective. The scheme $Y$ is normal integral of finite type over $k$, with function field $L$. The structural maps factor canonically as $Y\\to X\\times_ST\\to X$. The first map is finite surjective, and $Y\\to T$ is H-projective with all geometric fibres pure of dimension one and generic fibre $C$. The composite $Y\\to X$ is finite. The hypotheses on $L,E,C$ hold in particular for a finite separable extension $E/K$ and $L=F\\otimes_K E$: this tensor product is a field and $C=X_K\\times_K E$. These constructions are functorial for compatible isomorphisms of the scheme and field data, including isomorphisms that act on $k$. In particular every compatible group action on $X,S,L,E$ extends uniquely to $Y,T$. If $U\\subseteq S$ is open and $Z\\to X_U$ is a finite dominant morphism with $Z$ normal integral and a specified $F$-embedding $k(Z)\\hookrightarrow L$, then there is a unique $X_U$-morphism $Y_U\\to Z$ inducing that embedding; this morphism is finite.\n\nThe notions used are [def-weil-field], [def-pc-integral-scheme], [def-weil-finite-type-morphism], [def-weil-finite-integral-morphism], [def-sbc-smooth-morphisms], [def-pc-geometrically-irreducible], [def-kun-projective], [def-sc-function-field], [def-pc-field-extension], [def-fin-normalization-extension], [def-pc-fibre-product], [def-weil-pure-dimension]. Normal means that every local ring is an integrally closed domain. A finite separable extension is a finite-dimensional field extension whose elements have separable minimal polynomials. Group actions on schemes and fields may be nonfaithful and semilinear on the ground field.",
+ "source": {
+  "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+  "place": "de Jong §§3.2 and 3.5, pp.605,607--608, finite normalization and constant-field models. The relative purity and the full fibre-product surjectivity are the finite normal-model assertions used there; no flatness is claimed. Finiteness itself is already lem-fin-normalization-extension-finite. Local PDF WANTED; publisher PDF read."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-pc-geometrically-irreducible",
+  "def-kun-projective",
+  "def-sc-function-field",
+  "def-pc-field-extension",
+  "def-fin-normalization-extension",
+  "def-pc-fibre-product",
+  "def-weil-pure-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Apply the finite-normalization model theorem to $(X,F,L)$ and $(S,K,E)$. It gives normal integral finite-type schemes $Y,T$, their stated function fields, and finite surjective normalization maps; in particular $Y\\to X$ is finite. Its open restriction and intermediate-model clauses give exactly the unique finite map $Y_U\\to Z$ in the statement.",
+   "uses": [
+    "lem-sfb-finite-normalization-model-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 034L (lemma-integral-closure-in-normal), 00GY (lemma-localize-normal-domain), 0307 (lemma-integral-closure-localize), 00GQ (lemma-integral-overring-surjective), together with the existing finite-normalization theorem lem-fin-normalization-extension-finite. Agent synthesis of affine normalization, semilinear transport and intermediate-model domination; de Jong §§3.2, 3.5 motivating models (local PDF WANTED)."
+   }
+  },
+  {
+   "text": "Apply the normalized-base factorization theorem to $f,L,E$. Its hypotheses hold because the given generic fibre is geometrically integral. It supplies the canonical $g:Y\\to T$, the finite surjection $Y\\to X\\times_ST$, the field $F\\otimes_KE$, and the identification of the generic fibre of $g$ with the specified $C$. The last fibre is nonempty and pure one-dimensional by hypothesis. Apply the finite relative curve-factor theorem to $q,\\nu,g$: it gives projectivity of $T/k$ and H-projectivity of $g$, and pure dimension one for every geometric fibre.",
+   "uses": [
+    "lem-sfb-normalized-base-relative-factorization",
+    "lem-sfb-finite-curve-factor-projective-pure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0F32 (lemma-quasi-finite-Noetherian-universally-open), applied through lem-sfb-finite-dominant-normal-base-universally-open; algebra.tex Tag 0307 (lemma-integral-closure-localize). Agent affine factorization and dense generic-point argument, followed by localization identification of the generic fibre, supporting de Jong §§3.2 and 3.5 (local PDF WANTED)."
+   }
+  },
+  {
+   "text": "For the special case of a finite separable constant extension $E/K$, first show directly that $L=F\\otimes_KE$ is a field (step 2 cannot be invoked before such an $L$ is available). Choose a nonempty affine $\\operatorname{Spec}D\\subseteq X_K$. Since $X_K$ is geometrically integral, $X_K\\times_KE$ is integral, so $D\\otimes_KE$ is a domain; its localization at $D\\setminus\\{0\\}$ is $F\\otimes_KE$, a nonzero domain of finite dimension over $F$, hence a field (multiplication by a nonzero element is injective $F$-linear, hence bijective). It is finite separable over $F$: a finite separable extension has a primitive element with separable minimal polynomial $p$, and $L=F[t]/(p)$ is a field; the Bezout identity for $p,p\\prime$ remains valid over $F$. The base change $X_K\\times_KE$ is smooth of relative dimension one and projective, by smooth and projective base change, and geometrically integral by the definition. A smooth curve over a field is normal. The finite-algebra integrality theorem shows that its affine rings (finite modules because $E/K$ is finite) are integral over the affine rings of $X_K$ and have fraction field $L$. Conversely, an element of $L$ integral over an original affine ring is integral over its normal base-changed ring, and hence belongs to it. Thus this base change is exactly the normalization in $L$, yielding the stated $C$.",
+   "uses": [
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-pc-projective-base-change",
+    "def-pc-geometrically-irreducible",
+    "lem-sc-smooth-normal",
+    "def-fin-normalization-extension",
+    "lem-weil-pbc-finite-separable-extension-primitive-element",
+    "lem-weil-pbc-finite-algebra-is-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01VB, lemma-base-change-smooth, 01WF, lemma-H-projective-base-change; normality of smooth curves as in the cited smooth-normal node; elementary normal-affine-ring comparison"
+   }
+  },
+  {
+   "text": "For compatible isomorphisms of $X,S,L,E$, apply the semilinear functoriality assertion of the normalization model theorem to $Y$ and $T$. Their induced maps commute with $g$ by the uniqueness clause of the normalized-base factorization theorem: both composites have the same map over $S$ and the same embedding of $E$ into $L$. Identity and composition compatibility give the action laws for each compatible group action, with uniqueness supplied by the same normalization theorem.",
+   "uses": [
+    "lem-sfb-finite-normalization-model-functoriality",
+    "lem-sfb-normalized-base-relative-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 034L (lemma-integral-closure-in-normal), 00GY (lemma-localize-normal-domain), 0307 (lemma-integral-closure-localize), 00GQ (lemma-integral-overring-surjective), together with the existing finite-normalization theorem lem-fin-normalization-extension-finite. Agent synthesis of affine normalization, semilinear transport and intermediate-model domination; de Jong §§3.2, 3.5 motivating models (local PDF WANTED)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-normalization-model-functoriality",
+  "lem-sfb-normalized-base-relative-factorization",
+  "lem-sfb-finite-curve-factor-projective-pure",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-pc-projective-base-change",
+  "def-pc-geometrically-irreducible",
+  "lem-sc-smooth-normal",
+  "def-fin-normalization-extension",
+  "lem-weil-pbc-finite-separable-extension-primitive-element",
+  "lem-weil-pbc-finite-algebra-is-integral"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Explicit affine normalization argument supporting de Jong §§3.2 and 3.5; local de Jong PDF unavailable (WANTED), publisher text read; Tags 0F32, 0307, 02FZ and 02FY are the key inputs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Normalize an equidimensional projective relative curve in a finite separable function field extension and normalize its base in the constant field to obtain a finite model with pure one dimensional fibres",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.integralModel\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    {K : Type u_2} →\\n      [inst_1 : Field K] →\\n        [inst_2 : Algebra R K] → (W : WeierstrassCurve K) → [hW : WeierstrassCurve.IsIntegral R W] → WeierstrassCurve R\", \"doc\": \"Given a commutative ring $ R $, a field $ K $ equipped with an $ R $-algebra structure, and an integral Weierstrass curve $ W $ over $ K $, this constructs the integral model of $ W $ as a Weierstrass\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [AlgebraicGeometry.QuasiCompact f] → [AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] →\\n        {T : AlgebraicGeometry.Scheme} →\\n          (f₁ : X ⟶ T) →\\n            (f₂ : T ⟶ Y) →\\n              [AlgebraicGeometry.IsIntegralHom f₂] →\\n \", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → X ⟶ AlgebraicGeometry.Scheme.Hom.normalization f\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"WeierstrassCurve.IsIntegral.integral\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {K : Type u_2} {inst_1 : Field K} {inst_2 : Algebra R K} {W : WeierstrassCurve K}\\n  [self : WeierstrassCurve.IsIntegral R W], ∃ W_int, W = W_int.baseChange K\", \"doc\": \"For any commutative ring $ R $, field $ K $ equipped with an $ R $-algebra structure, and integral Weierstrass curve $ W $ over $ K $, there exists a Weierstrass curve $ W_{\\\\text{int}} $ over $ R $ su\"}\n  {\"name\": \"WeierstrassCurve.exists_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] {K : Type u_2} [inst_1 : Field K] [inst_2 : Algebra R K] [inst_3 : IsDomain R]\\n  [ValuationRing R] [IsFractionRing R K] (W : WeierstrassCurve K), ∃ C, WeierstrassCurve.IsIntegral R (C • W)\", \"doc\": \"For any Weierstrass curve $ W $ over a field $ K $ equipped with an $ R $-algebra structure, there exists a variable change $ C $ such that the transformed curve $ C \\\\cdot W $ has an integral coordina\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.fromNormalization f)\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the hits; none states this geometric assertion or specializes to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"normalization\", \"fiber\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.coequifibered_normalizationDiagramMap\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] : CategoryTheory.NatTrans.Coequifibered ((AlgebraicGeometry.Scheme.AffineZariskiSite.toOpensFunctor Y).op.whiskerLeft (AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap f))\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the hits; none states this geometric assertion or specializes to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*(pure|equidim)|equidim.*normalization|constantField.*normalization",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the hits; none states this geometric assertion or specializes to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite normalization of a projective family of curves over a normal variety preserves pure relative dimension after extracting constants",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(H : f = f₁ ≫ f₂) : f.normalization ⟶ T\", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsIntegralHom f] : IsIso f.toNormalization\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsAffineHom f] : IsAffineHom f.toNormalization\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the induced morphism from $ X $ to the normalization of $ f $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(H : f = f₁ ≫ f₂) : f.toNormalization ≫ f.normalizationDesc f₁ f₂ H = f₁\", \"doc\": \"Given a morphism $ f $ that factors as $ f = f_1 \\\\circ f_2 $, the composition of the normalization morphism $ f.toNormalization $ and the normalization description morphism $ f.normalizationDesc(f_1, \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": f.normalization ⟶ Y\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $, constructed as the universal morphism induced by the colimit definition of normalization in\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ker_toNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": f.toNormalization.ker = ⊥\", \"doc\": \"For a scheme morphism $ f: X \\to Y $, the kernel of the morphism from $ X $ to its normalization is equal to the bottom element $ \\bot $ in the relevant order structure of subschemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsIntegral X] : IsIntegral f.normalization\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the hits; none states this geometric assertion or specializes to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalization\", \"fiber\"",
+   "results": "Actual search returned 1 hits: AlgebraicGeometry.Scheme.Hom.coequifibered_normalizationDiagramMap. ",
+   "date": "2026-10-22",
+   "verdict": "no match: no declaration states the finite normalized relative curve model with all its clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite normalization of a projective curve family after a finite separable extension of its constants has pure one dimensional geometric fibres",
+   "results": "Actual search returned 8 hits: WeierstrassCurve.Projective.baseChange_nonsingular, WeierstrassCurve.IsIntegral.integral, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.finite_appTop_of_universallyClosed, WeierstrassCurve.isIntegral_iff, WeierstrassCurve.Projective.map_nonsingular, WeierstrassCurve.Affine.Point.map_some, AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat. ",
+   "date": "2026-10-22",
+   "verdict": "no match: no declaration states the finite normalized relative curve model with all its clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*(pure|equidim)|equidim.*normalization|constantField.*normalization",
+   "results": "Actual search returned 0 hits: . ",
+   "date": "2026-10-22",
+   "verdict": "no match: no declaration states the finite normalized relative curve model with all its clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalize a family of integral projective curves in a finite separable extension of its function field and of its constant field",
+   "results": "Actual search returned 8 hits: AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc, AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization. ",
+   "date": "2026-10-22",
+   "verdict": "no match: no declaration states the finite normalized relative curve model with all its clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite dominant morphism of integral schemes is open after arbitrary base change when the target is normal noetherian",
+   "results": "Actual search returned 8 hits: AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.isOpenMap_of_generalizingMap, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instIsOpenImmersionMapAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpec. ",
+   "date": "2026-10-22",
+   "verdict": "no match: no declaration states the finite normalized relative curve model with all its clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalization is a finite model of an equidimensional family of curves and compatible intermediate finite field extensions",
+   "results": "Actual search returned 8 hits: AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.fromNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc. ",
+   "date": "2026-10-22",
+   "verdict": "no match: no declaration states the finite normalized relative curve model with all its clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*curve|relative.*curve.*normalization|normalization.*relative.*dimension",
+   "results": "Actual search returned 0 hits: . ",
+   "date": "2026-10-22",
+   "verdict": "no match: no declaration states the finite normalized relative curve model with all its clauses"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-high-genus-equivariant-cover",
+  "date": "2026-10-22",
+  "group": "NF"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §§3.2 and 3.5, pp.605,607--608, finite normalization and constant-field models. The relative purity and the full fibre-product surjectivity are the finite normal-model assertions used there; no flatness is claimed. Finiteness itself is already lem-fin-normalization-extension-finite. Local PDF WANTED; publisher PDF read.",
+   "via": [
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-finite-normal-relative-curve-model",
+  "worker": "stage1",
+  "summary": "Repair of human re-split return: statement unchanged. Three statement-only unsplit children divide the affine normalization/functoriality/intermediate argument (old steps 1,10,11), relative factorization and generic fibre (2,3,4,6), and projectivity plus local dimension bounds (5,7,8). Old step 9 remains explicit. All eleven old arguments are preserved verbatim in report.md under their future proof tasks. The item now assembles these inputs in fewer than 3000 characters.",
+  "blueprint": "The inherited nearest blueprint ancestor is null (blueprint_refs.py ancestor confirms this). Retained the full inherited from.place and via chain; realizes det-thm-sf-ctf-stability-direct-images proof (3), de Jong §§3.2 and 3.5 finite normal-model prerequisite, within the marked plurinodal alteration route. The extracted children retain this same route and prepend the current item to via; no unit/chapter change.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Generic tool for the affine normalization construction: Base change and composition of smooth morphisms of fixed relative dimension. It supplies this stated algebraic/geometric fact and does not replace a step of the unit alteration route; this unit has no competing general statement."
+   },
+   {
+    "node": "lem-pc-projective-base-change",
+    "why": "Generic tool for the affine normalization construction: Projective morphisms are stable under base change. It supplies this stated algebraic/geometric fact and does not replace a step of the unit alteration route; this unit has no competing general statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-h-projective-composition",
+  "lem-fin-finite-over-projective",
+  "lem-kun-projective-implies-proper",
+  "lem-sbc-equidimensional-open-local-dimension",
+  "lem-weil-pbc-local-fibre-dimension-open",
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-sbc-constant-local-dimension-components",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-pc-projective-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q93-5d1280451",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-5d1280451 (reviewer sub-agent of L); spot-checked: Read in full: the human re-split note (live = side-live, released 2026-10-22), the item, the three new nodes, the cited statements and the old 11-step live proof. The item is still unsplit-by-resplit live; no other group superseded it, and no id is in route-pivot-dropped. Statement, stmt_deps, blueprint and lean are unchanged; only proof, proof_deps and split_report differ. The re-split is genuine and nothing was shortened. Child finite-normalization-model-functoriality carries old steps 1/10/11: affine integral closure (034L/00GY/0307/00GQ), finite surjective normal model, open restriction, the unique finite map to an intermediate model, and semilinear functoriality. It is true for any integral finite-type V and finite M/H. Child normalized-base-relative-factorization carries old 2/3/4/6: the unique g, h finite and surjective via the universally open T→S (normal base, 0F32 node) and the dense point Spec(F⊗_K E), and the generic fibre Y×_T E = Nor_L(X_K) by 0307. It is true, and the normality and geometric-integrality hypotheses are needed and stated. Child finite-curve-factor-projective-pure carries old 5/7/8: T projective by finite-over-projective over a field, X by 01WE, g by the closed graph (01KR), the fibre-dimension lower bound by 02FZ+02FY with η_Y in the pure 1-dimensional generic fibre, and the upper bound via finite Y_Ω→X×_SΩ. It is true, with no flatness or normality assumed. The three children are of comparable size, statement-only, self-contained, unsplit, with five searches each. None restates the item, and an rg -L DAG search found no duplicate. Old step 9 (constant separable extension) stays verbatim as item step 3; the proof is 2321 characters, 2741 after the fix, under 3000. Assembly checked: A for X and S, with U'=f^{-1}(U) nonempty since Z is integral; B (f dominant because X_K is integral); C (q and ν finite surjective, h finite, g dominant, C a nonempty pure 1-dimensional curve). Step 4 gets compatibility with g from B's uniqueness on the primed data. Repaired fault E1/C3: step 3 used 'the field L=F⊗_KE proved in step 2', but in the special case no L exists before this, so the reference was circular. I replaced it with the direct argument: D⊗_K E is a domain by geometric integrality, and its localization at D∖0 is a finite-dimensional domain over F, hence a field. The fix is in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-finite-normal-relative-curve-model.json, step 3 text only, uses unchanged. Tool uses smooth-relative-dimension-permanence and projective-base-change are generic and accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteNormalRelativeCurveModel",
+  "declaration": "AlgebraicGeometry.finite_normal_relative_curve_model",
+  "declarations": [
+   "AlgebraicGeometry.FiniteNormalRelativeCurveModel.genericLift",
+   "AlgebraicGeometry.finite_normal_relative_curve_model",
+   "AlgebraicGeometry.finite_normal_relative_curve_model_constant_extension",
+   "AlgebraicGeometry.finite_normal_relative_curve_model_isomorphisms",
+   "AlgebraicGeometry.finite_normal_relative_curve_model_actions",
+   "AlgebraicGeometry.finite_normal_relative_curve_model_intermediate"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteNormalRelativeCurveModel.lean",
+  "statement": "theorem finite_normal_relative_curve_model (k : Type u) [Field k] (S X : Scheme.{u}) [IsIntegral S] [IsIntegral X] (p : S ⟶ Spec (.of k)) [IsHProjective p] [LocallyOfFiniteType p] [QuasiCompact p] (hS : ∀ s : S, IsDomain (S.presheaf.stalk s) ∧ IsIntegrallyClosed (S.presheaf.stalk s)) (f : X ⟶ S) [IsHProjective f] [LocallyOfFiniteType (f ≫ p)] [QuasiCompact (f ≫ p)] (hpure : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S), (pullback f s).IsPureDimension 1) [Smooth (pullback.snd f S.fromSpecFunctionField)] [GeometricallyIntegral (pullback.snd f S.fromSpecFunctionField)] (L E : Type u) [Field L] [Field E] [Algebra X.functionField L] [FiniteDimensional X.functionField L] [Algebra.IsSeparable X.functionField L] [Algebra S.functionField E] [FiniteDimensional S.functionField E] [Algebra.IsSeparable S.functionField E] [Algebra S.functionField L] [Algebra E L] [IsScalarTower S.functionField E L] (h : X.fromSpecOfAlgebraFunctionField L ≫ f = Spec.map (CommRingCat.ofHom (algebraMap S.functionField L)) ≫ S.fromSpecFunctionField) (c : (genericLift f L h).normalization ⟶ Spec (.of E)) (hc : (genericLift f L h).toNormalization ≫ c = Spec.map (CommRingCat.ofHom (algebraMap E L))) [Smooth c] [IsHProjective c] [GeometricallyIntegral c] (hcurve : (genericLift f L h).normalization.IsPureDimension 1) : (∀ t : S.normalizationIn E, IsDomain ((S.normalizationIn E).presheaf.stalk t) ∧ IsIntegrallyClosed ((S.normalizationIn E).presheaf.stalk t)) ∧ IsIntegral (S.normalizationIn E) ∧ IsHProjective (S.fromNormalizationIn E ≫ p) ∧ LocallyOfFiniteType (S.fromNormalizationIn E ≫ p) ∧ QuasiCompact (S.fromNormalizationIn E ≫ p) ∧ IsFinite (S.fromNormalizationIn E) ∧ Surjective (S.fromNormalizationIn E) ∧ (∃ e : Spec (.of E) ≅ Spec (S.normalizationIn E).functionField, e.hom ≫ (S.normalizationIn E).fromSpecFunctionField = (S.fromSpecOfAlgebraFunctionField E).toNormalization) ∧ (∀ y : X.normalizationIn L, IsDomain ((X.normalizationIn L).presheaf.stalk y) ∧ IsIntegrallyClosed ((X.normalizationIn L).presheaf.stalk y)) ∧ IsIntegral (X.normalizationIn L) ∧ LocallyOfFiniteType (X.fromNormalizationIn L ≫ f ≫ p) ∧ QuasiCompact (X.fromNormalizationIn L ≫ f ≫ p) ∧ IsFinite (X.fromNormalizationIn L) ∧ (∃ e : Spec (.of L) ≅ Spec (X.normalizationIn L).functionField, e.hom ≫ (X.normalizationIn L).fromSpecFunctionField = (X.fromSpecOfAlgebraFunctionField L).toNormalization) ∧ (∃! g : X.normalizationIn L ⟶ S.normalizationIn E, g ≫ S.fromNormalizationIn E = X.fromNormalizationIn L ≫ f ∧ (X.fromSpecOfAlgebraFunctionField L).toNormalization ≫ g = Spec.map (CommRingCat.ofHom (algebraMap E L)) ≫ (S.fromSpecOfAlgebraFunctionField E).toNormalization) ∧ ∀ g : X.normalizationIn L ⟶ S.normalizationIn E, g ≫ S.fromNormalizationIn E = X.fromNormalizationIn L ≫ f → (X.fromSpecOfAlgebraFunctionField L).toNormalization ≫ g = Spec.map (CommRingCat.ofHom (algebraMap E L)) ≫ (S.fromSpecOfAlgebraFunctionField E).toNormalization → IsHProjective g ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ S.normalizationIn E), (pullback g t).IsPureDimension 1) ∧ (∃ m : X.normalizationIn L ⟶ pullback f (S.fromNormalizationIn E), m ≫ pullback.fst f (S.fromNormalizationIn E) = X.fromNormalizationIn L ∧ m ≫ pullback.snd f (S.fromNormalizationIn E) = g ∧ IsFinite m ∧ Surjective m) ∧ ∃ e : pullback g (S.fromSpecOfAlgebraFunctionField E).toNormalization ≅ (genericLift f L h).normalization, e.hom ≫ c = pullback.snd g (S.fromSpecOfAlgebraFunctionField E).toNormalization ∧ e.hom ≫ (genericLift f L h).fromNormalization ≫ pullback.fst f S.fromSpecFunctionField = pullback.fst g (S.fromSpecOfAlgebraFunctionField E).toNormalization ≫ X.fromNormalizationIn L ∧ (genericLift f L h).toNormalization ≫ e.inv ≫ pullback.fst g (S.fromSpecOfAlgebraFunctionField E).toNormalization = (X.fromSpecOfAlgebraFunctionField L).toNormalization",
+  "branch": "sheaf-dag",
+  "by": "NE",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The main declaration states the model properties; four companion theorems state the constant-extension, compatible-isomorphism, group-action, and intermediate-model clauses. The sole helper genericLift is the actual pullback lift of the specified generic maps. All original hypotheses are explicit; the generic normal curve is (genericLift f L h).normalization with its E-structure c characterized by hc. No statement, proof, or dependency field is changed.",
+  "fixed_by": "NT-stage2-cc-5fbb468cd"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5fbb468cd",
+  "group": "NE",
+  "result": "fix",
+  "note": "Hypotheses, conclusions, records and gates all match the node: Nor_L/Nor_E via normalizationIn, generic curve C = (genericLift f L h).normalization with E-structure c pinned by hc, h/hKF pin the K-algebras to f, full fibre-product map uses both projections, generic-fibre iso is checked on its projections, k is not fixed (semilinear), G in universe v, statement verbatim, only the lean field changed. H3 fault fixed: four ∃! clauses put consequence clauses inside the uniqueness predicate (intermediate: unique only among finite m; main: unique g only among those also H-projective/pure/etc.; isomorphisms/actions: uniqueness also required commuting with g). Each is rewritten as (∃! x, defining conditions) ∧ ∀ x, defining conditions → properties. fixes/FiniteNormalRelativeCurveModel.lean compiled clean via nt_compile --json (7.9 s); fixes/lem-sfb-finite-normal-relative-curve-model.lean-record.json re-pins the statement and passes refit_record with no errors. Advisory: unused private proof-dep imports."
+ }
+}

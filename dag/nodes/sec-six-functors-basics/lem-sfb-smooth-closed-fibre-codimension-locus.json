@@ -1,0 +1,403 @@
+{
+ "id": "lem-sfb-smooth-closed-fibre-codimension-locus",
+ "kind": "statement",
+ "title": "Constructible fibre-codimension bounds for a smooth closed pair",
+ "statement": "Let $S$ be a Noetherian scheme, meaning locally Noetherian and quasi-compact [def-pc-scheme, pqf-def-locnoeth, def-weil-pbc-quasi-compact-scheme], and let $f:X\\to S$ be smooth and of finite presentation [def-sbc-smooth-morphisms], where finite presentation means locally of finite presentation, quasi-compact and quasi-separated. Let $Z\\subseteq X$ be a closed subset and let $c\\ge0$ be an integer. For $s\\in S$ write $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ and $Z_s$ for the inverse image of $Z$ [def-pc-fibre-product, def-weil-residue-field, def-weil-affine-spectrum]. Put $G_c=\\{s\\in S:\\dim\\mathcal O_{X_s,z}\\ge c\\text{ for every }z\\in Z_s\\}$, using Krull dimension of local rings [def-weil-pbc-krull-dimension-ring]. Then $G_c$ is constructible [def-weil-constructible-subset]. For every field extension $K/\\kappa(s)$ [def-pc-field-extension], the inequality holds at every point of $Z_s$ if and only if it holds at every point of its inverse image in $X_s\\times_{\\kappa(s)}K$. Consequently, for every scheme morphism $v:S\\prime\\to S$, if $X\\prime=X\\times_SS\\prime$, $Z\\prime$ is the inverse image of $Z$, and $G_c\\prime$ is defined by the same fibrewise local-ring inequalities, then $G_c\\prime=v^{-1}(G_c)$. Finally, $s\\in G_1$ if and only if $Z_s$ contains no irreducible component of $X_s$ [def-weil-irreducible-components]. Empty fibres and empty $Z_s$ satisfy every bound.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 05F9 (lemma-dimension-fibres-constructible), applied on the finitely many constant-relative-dimension pieces of a smooth morphism to the closed subset. Field-extension invariance: EGA IV2 Corollary 6.1.4, literature/ega/EGA-IV-2_PMIHES-24-1965.pdf, printed p.136, applied to the surjective flat field-extension projection. This is the constructible-codimension calculation used in EGA IV4 21.14.3(ii)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-pc-fibre-product",
+  "def-weil-residue-field",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-constructible-subset",
+  "def-pc-field-extension",
+  "def-weil-irreducible-components"
+ ],
+ "proof": [
+  {
+   "text": "Finite presentation implies finite type: a finite polynomial presentation is a finite set of algebra generators. Thus $X$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Choose a closed immersion $C\\hookrightarrow X$ with image $Z$ by [lem-weil-pbc-closed-subset-closed-subscheme]. By [sbc-lem-smooth-relative-dimension-locally-constant], the level sets $X_d=\\{x:\\dim_x X_{f(x)}=d\\}$ are clopen. They cover $X$, and quasi-compactness gives only finitely many nonempty levels, indexed by a finite set $D\\subset\\mathbf Z_{\\geq0}$. Each restriction $X_d\\to S$ is smooth by [lem-weil-pbc-smooth-local-on-source] (applied to the open cover of $X$ by the $X_d$), and its smooth relative dimension is $d$ by [def-sbc-smooth-morphisms], since $\\dim_x$ of the fibre is computed on any open neighbourhood of $x$ [def-kun-dimension]. Put $C_d=C\\times_XX_d$; it is closed in $X_d$ by [lem-weil-pbc-closed-immersion-base-change].",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-closed-subset-closed-subscheme",
+    "sbc-lem-smooth-relative-dimension-locally-constant",
+    "lem-weil-pbc-smooth-local-on-source",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-kun-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T6 (lemma-finite-type-noetherian), 02G1 (lemma-smooth-omega-finite-locally-free), 02G2 (definition-smooth-relative-dimension); schemes.tex Tag 01J3; Tag 01QR"
+   }
+  },
+  {
+   "text": "The open $X_d\\subseteq X$ and closed $C_d\\hookrightarrow X_d$ are of finite presentation by [lem-sfb-noetherian-open-closed-finite-presentation], applied with Noetherian ambient scheme $X$. In particular $C_d\\to X$ is of finite type, so $C_d$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Quasi-compactness of $C_d$ is also seen directly: $X_d$ is a closed subset of quasi-compact $X$, and $C_d$ is closed in $X_d$; an open cover of a closed subset acquires the open complement to cover the ambient space. The composite $h_d:C_d\\to S$ is locally of finite presentation by [lem-sbc-locally-finite-presentation-composition]. The target $S$ is quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]; $C_d$ is also quasi-separated by that same node. Therefore [lem-weil-pbc-qcqs-morphism-permanence](1) makes $h_d$ quasi-compact and quasi-separated. It is of finite presentation, exactly as required below.",
+   "uses": [
+    "lem-sfb-noetherian-open-closed-finite-presentation",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sbc-locally-finite-presentation-composition",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex; literature/stacks-project/properties.tex; literature/stacks-project/schemes.tex",
+    "place": "Tags 01TR (lemma-composition-finite-presentation), 01OY (lemma-locally-Noetherian-quasi-separated), 03GI, 01KV; verification of the hypotheses of 05F9"
+   }
+  },
+  {
+   "text": "Fix $d\\in D$ and $s\\in S$, and write $M=(X_d)_s$, $A=(C_d)_s$. The morphisms $X_d\\to S$ (composite of the open immersion of [lem-sfb-noetherian-open-closed-finite-presentation] with $f$, locally of finite presentation by [lem-sbc-locally-finite-presentation-composition], quasi-compact and quasi-separated by [lem-weil-pbc-qcqs-morphism-permanence](1) as in step 2) and $h_d$ are of finite presentation, so their base changes $M,A\\to\\operatorname{Spec}k$, $k=\\kappa(s)$, are of finite presentation, in particular of finite type, by [lem-weil-pbc-qcqs-morphism-permanence](3); hence $M,A$ are Noetherian by [lem-weil-pbc-finite-type-over-noetherian]; $A$ is closed in $M$ by [lem-weil-pbc-closed-immersion-base-change]. The smooth base-change statement [lem-sbc-smooth-relative-dimension-permanence] makes $M$ smooth of relative dimension $d$. The closed subset $|A|$ has finitely many irreducible components $W_j$ by [lem-sc-noetherian-closed-subset-finite-components], with generic points $\\eta_j$ by [lem-sc-scheme-sober]. By [lem-kun-dimension-formula] and [lem-sc-closed-irreducible-dimension-trdeg], $\\dim\\mathcal O_{M,\\eta_j}=d-\\dim W_j$. Every $z\\in W_j$ is a specialization of $\\eta_j$. By [lem-sc-scheme-stalk-dimension-generalization-chains], a chain of generalizations of $\\eta_j$ can be preceded by $z$ if $z\\ne\\eta_j$, so $\\dim\\mathcal O_{M,z}\\geq\\dim\\mathcal O_{M,\\eta_j}$. Consequently the bound at every $z\\in A$ is equivalent to $\\dim W_j\\leq d-c$ for every $j$.",
+   "uses": [
+    "lem-sfb-noetherian-open-closed-finite-presentation",
+    "lem-sbc-locally-finite-presentation-composition",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "lem-sc-scheme-sober",
+    "lem-kun-dimension-formula",
+    "lem-sc-closed-irreducible-dimension-trdeg",
+    "lem-sc-scheme-stalk-dimension-generalization-chains"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex; literature/stacks-project/properties.tex; literature/stacks-project/morphisms.tex",
+    "place": "Tag 0A21, lemma-dimension-locally-algebraic, (6),(10), especially 0B1G; 02IZ, lemma-codimension-local-ring; 02NK; 0BA8; schemes.tex 01IS"
+   }
+  },
+  {
+   "text": "In the finite union $|A|=\\bigcup_jW_j$, each irreducible closed subset lies in some $W_j$: otherwise it is a finite union of proper closed subsets. Hence every chain lies in a component containing its largest member, and $\\dim|A|=\\max_j\\dim W_j$ by the chain definition [def-kun-topological-krull-dimension]. Together with step 3 this gives the exact criterion: if $d\\geq c$, the bound on $A$ is equivalent to $\\dim|A|\\leq d-c$; if $d<c$, it is equivalent to $A=\\varnothing$, since every nonempty component has nonnegative dimension. The criterion includes empty $A$, with dimension $-\\infty$. These arguments apply to every smooth finite-type $k$-scheme of relative dimension $d$ and every closed subset, independently of the chosen global base.",
+   "uses": [
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0055 (definition-Krull); elementary finite-closed-union argument and arithmetic from step 3"
+   }
+  },
+  {
+   "text": "For $h_d$ of step 2, each $E_{d,n}=\\{s:\\dim|(C_d)_s|=n\\}$, $n\\geq0$, is constructible by [lem-sfb-finite-presentation-fibre-dimension-levels]. Its nonempty-fibre locus is $h_d(C_d)$ by [def-pc-scheme-fibre], and is constructible by [lem-weil-pbc-chevalley-constructible-image]; its empty-fibre locus $N_d=S\\setminus h_d(C_d)$ is therefore constructible. Step 4 says that the good locus for piece $d$ is $N_d\\cup\\bigcup_{n=0}^{d-c}E_{d,n}$ when $d\\geq c$, and $N_d$ otherwise. These are finite unions. Since $Z_s$ is partitioned by the finitely many clopen pieces, $G_c$ is their finite intersection. Boolean closure in [def-weil-constructible-subset] proves its constructibility.",
+   "uses": [
+    "lem-sfb-finite-presentation-fibre-dimension-levels",
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-chevalley-constructible-image",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex; literature/stacks-project/morphisms.tex; literature/stacks-project/topology.tex",
+    "place": "05F9 (lemma-dimension-fibres-constructible); 054J (lemma-chevalley); 005H Boolean closure; no unbounded union of dimension levels is taken"
+   }
+  },
+  {
+   "text": "For any finite-type $k$-scheme $Y$ and field extension $K/k$, the projection $p:Y_K\\to Y$ is surjective by [lem-pc-field-extension-surjective] and [lem-weil-pbc-surjective-base-change]. Apply [lem-sc-fibre-dimension-after-base-change] to $Y\\to\\operatorname{Spec}k$ and $\\operatorname{Spec}K\\to\\operatorname{Spec}k$: $\\dim_{y'}Y_K=\\dim_{p(y')}Y$ at every point. Taking suprema and using surjectivity gives $\\dim|Y_K|=\\dim|Y|$ by [lem-weil-pbc-dimension-supremum-local-dimensions]. This includes emptiness, since surjectivity shows $Y_K$ is empty exactly when $Y$ is. In particular this applies to $A=(C_d)_s$, without any separatedness hypothesis.",
+   "uses": [
+    "lem-pc-field-extension-surjective",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-sc-fibre-dimension-after-base-change",
+    "lem-weil-pbc-dimension-supremum-local-dimensions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex; literature/stacks-project/topology.tex",
+    "place": "02FY (lemma-dimension-fibre-after-base-change)(1); 01S1 (lemma-base-change-surjective); 0B7I (lemma-dimension-supremum-local-dimensions)"
+   }
+  },
+  {
+   "text": "The field extension of $M=(X_d)_s$ is smooth of the same relative dimension $d$ by [lem-sbc-smooth-relative-dimension-permanence], and the inverse image of $A$ is closed by [lem-weil-pbc-closed-immersion-base-change]. Apply the criterion of steps 3--4 to $(M,A)$ and its extension. Step 6 identifies the dimensions of the two closed subsets and detects emptiness, so the criterion is equivalent over $k$ and $K$, on each piece and hence on their union. This proves preservation and reflection of the all-points bound; it does not assert equality of local-ring dimensions at individual lifted points.",
+   "uses": [
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex; literature/stacks-project/varieties.tex",
+    "place": "02NK (lemma-base-change-relative-dimension-d), 01QR; applying the explicitly proved criterion in steps 3--4"
+   }
+  },
+  {
+   "text": "For $s'\\in S'$ with $s=v(s')$, [lem-sc-fibre-dimension-after-base-change] identifies $X'_{s'}$ with $X_s\\times_{\\kappa(s)}\\kappa(s')$. The fibre-product universal property [def-pc-fibre-product] identifies the corresponding closed subset with the inverse image of $Z_s$: both composites to $X$ are the same projection. Apply step 7 with $K=\\kappa(s')$. This gives $s'\\in G'_c\\Longleftrightarrow v(s')\\in G_c$, proving $G'_c=v^{-1}(G_c)$ even when $S'$ is not Noetherian.",
+   "uses": [
+    "lem-sc-fibre-dimension-after-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex; literature/stacks-project/schemes.tex",
+    "place": "02FY (lemma-dimension-fibre-after-base-change)(1); 01JP (definition-fibre-product); formal fibre identification"
+   }
+  },
+  {
+   "text": "By [lem-sc-scheme-stalk-dimension-generalization-chains], $\\dim\\mathcal O_{X_s,z}=0$ exactly when $z$ has no strict generalization. By [lem-sc-scheme-sober] this says exactly that $z$ is the generic point of an irreducible component: the closure of a generalization contains $\\overline{\\{z\\}}$, and a larger irreducible closed subset has a generic point strictly generalizing $z$. A closed subset $Z_s$ contains such a generic point exactly when it contains its entire component. Thus the bound $c=1$ is precisely absence of an irreducible component in $Z_s$. Empty $Z_s$, including empty fibres, makes every universal inequality vacuous; for $c=0$ nonnegativity of local-ring dimension makes the locus all of $S$.",
+   "uses": [
+    "lem-sc-scheme-stalk-dimension-generalization-chains",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex; literature/stacks-project/schemes.tex",
+    "place": "02IZ (lemma-codimension-local-ring); 01IS (lemma-scheme-sober); elementary generic-point criterion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-closed-subset-closed-subscheme",
+  "sbc-lem-smooth-relative-dimension-locally-constant",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-sfb-noetherian-open-closed-finite-presentation",
+  "lem-sbc-locally-finite-presentation-composition",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-sc-scheme-sober",
+  "lem-kun-dimension-formula",
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "lem-sc-scheme-stalk-dimension-generalization-chains",
+  "def-kun-topological-krull-dimension",
+  "lem-sfb-finite-presentation-fibre-dimension-levels",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-chevalley-constructible-image",
+  "def-weil-constructible-subset",
+  "lem-pc-field-extension-surjective",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-weil-pbc-dimension-supremum-local-dimensions",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-smooth-local-on-source",
+  "def-kun-dimension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "05F9, assembled with 02G1/02G2 smooth dimension pieces, 0A21 dimension formula, 02FY field-extension invariance, and 02IZ chains. The assembly argument is written by Q125."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Constructibility of the locus in the base where a closed subset in a smooth family has fibre codimension less than a fixed integer",
+   "results": "Hits: PrimeSpectrum.ConstructibleSetData.degBound, chevalley_mvPolynomial_mvPolynomial, AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, PrimeSpectrum.ConstructibleSetData, ChevalleyThm.chevalley_mvPolynomialC, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, PrimeSpectrum.BasicConstructibleSetData.n Read the returned results. Constructible image/preimage theorems and smoothness base change do not state constructibility of fibre-codimension bounds or preservation and reflection of those bounds under arbitrary field extension.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The locus where every point of a closed subset of a smooth fibre has local ring dimension at least c is constructible on a Noetherian base and commutes with base change",
+   "results": "Hits: AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, chevalley_mvPolynomial_mvPolynomial, ChevalleyThm.chevalley_mvPolynomialC, PrimeSpectrum.isConstructible_comap_image, PrimeSpectrum.BasicConstructibleSetData.n, PrimeSpectrum.isConstructible_range_comap Read the returned results. Constructible image/preimage theorems and smoothness base change do not state constructibility of fibre-codimension bounds or preservation and reflection of those bounds under arbitrary field extension.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fibre codimension of a closed subset in a smooth morphism defines a constructible subset of the base and is invariant under field extension",
+   "results": "Hits: AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.isSmoothOfRelativeDimension_comp, AlgebraicGeometry.Scheme.Hom.fiber, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.instIsAffineFiberOfIsAffineHom, AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply Read the returned results. Constructible image/preimage theorems and smoothness base change do not state constructibility of fibre-codimension bounds or preservation and reflection of those bounds under arbitrary field extension.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSmooth\", \"IsConstructible\"",
+   "results": "No hits. Read the returned results. Constructible image/preimage theorems and smoothness base change do not state constructibility of fibre-codimension bounds or preservation and reflection of those bounds under arbitrary field extension.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "codimension|codim|dimension.*constructible|constructible.*dimension",
+   "results": "Hits: Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean, Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean, Mathlib/AlgebraicGeometry/OrderOfVanishing.lean Read the returned results. Constructible image/preimage theorems and smoothness base change do not state constructibility of fibre-codimension bounds or preservation and reflection of those bounds under arbitrary field extension.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "codimension|codim|constructible.*dimension",
+   "results": "No hits. Read the returned results. Constructible image/preimage theorems and smoothness base change do not state constructibility of fibre-codimension bounds or preservation and reflection of those bounds under arbitrary field extension.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructibility of the minimum codimension of a closed subset in fibres of a smooth finitely presented scheme morphism",
+   "results": "Hits: AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.Scheme.Hom.isConstructible_image, PrimeSpectrum.ConstructibleSetData.degBound, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, PrimeSpectrum.isConstructible_range_comap, AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType Returned types were read; no theorem gives this smooth closed-pair codimension locus.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "codimension|codim|dimension.*constructible|constructible.*dimension",
+   "results": "Hits: Mathlib/AlgebraicGeometry/OrderOfVanishing.lean, Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean, Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean Returned types were read; no theorem gives this smooth closed-pair codimension locus.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The set of base points where fibres of a finitely presented morphism have a given Krull dimension is locally constructible",
+   "results": "Hits: Topology.IsLocallyConstructible, Topology.IsConstructible.isLocallyConstructible, AlgebraicGeometry.Scheme.Hom.isConstructible_image, PrimeSpectrum.isConstructible_range_comap, PrimeSpectrum.isConstructible_comap_image, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, Topology.IsLocallyConstructible.isConstructible Returned types were read; no theorem gives this smooth closed-pair codimension locus.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ringKrullDim\", \"height\"",
+   "results": "Hits: Ideal.finiteHeight_of_finiteRingKrullDim, IsLocalRing.maximalIdeal_height_eq_ringKrullDim, Ideal.height_le_ringKrullDim_of_isPrime, Ideal.isMaximal_of_height_eq_ringKrullDim, ringKrullDim_le_iff_height_le, ringKrullDim_le_iff_isMaximal_height_le, IsLocalization.AtPrime.ringKrullDim_eq_height, Ideal.height_eq_ringKrullDim_iff Returned types were read; no theorem gives this smooth closed-pair codimension locus.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fiber.*(krullDim|[Dd]imension)|([Dd]imension|krullDim).*fiber|[Cc]onstructible.*[Dd]im|[Dd]im.*[Cc]onstructible",
+   "results": "Hits: Mathlib/RingTheory/KrullDimension/Polynomial.lean Returned types were read; no theorem gives this smooth closed-pair codimension locus.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsConstructible\", \"fiber\"",
+   "results": "No hits. Returned types were read; no theorem gives this smooth closed-pair codimension locus.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely presented morphism of schemes every level set of the function giving Krull dimension of the fibre is locally constructible",
+   "results": "Hits: AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.Scheme.Hom.isConstructible_image, PrimeSpectrum.isConstructible_range_comap, PrimeSpectrum.isConstructible_comap_image, AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.IsFinite.finite_preimage_singleton Returned types were read; no theorem gives this smooth closed-pair codimension locus.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The dimension of a closed subset in the fibre of a smooth family gives constructible codimension conditions invariant under arbitrary field extension",
+   "results": "Hits: Algebra.IsStandardSmooth.relativeDimension, Algebra.IsStandardSmoothOfRelativeDimension.out, ContMDiffFiberwiseLinear.locality_aux₂, ContMDiffFiberwiseLinear.locality_aux₁, Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension, Algebra.IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth, Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential, mem_contMDiffFiberwiseLinear_iff Returned types were read; no theorem gives this smooth closed-pair codimension locus.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-arithmetic-closed-pair-approximation",
+  "date": "2026-10-24",
+  "group": "Q93"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "EGA IV4 21.14.3(i), first assertion, used to verify the parafactoriality hypothesis in the proof of the second assertion; lower input to the inherited affine-boundary construction. Supporting input: EGA IV4 Proposition 21.14.3(ii), proof: approximation by normal finite type Z-subalgebras and descent of the closed pair; IV3 7.8.3(ii),(iii),(vi),(vii), 8.3.11, 8.5, IV4 17.7.8, and IV2 6.1.4, as cited there. Lower input: constructibility and field-extension invariance of the fibre-codimension conditions in the arithmetic approximation paragraph of EGA IV4 21.14.3(ii).",
+   "via": [
+    "lem-sfb-normal-arithmetic-closed-pair-approximation",
+    "lem-sfb-smooth-nongeneric-punctured-line-triviality",
+    "lem-sfb-ramanujam-samuel-prime-divisor",
+    "lem-sfb-smooth-normal-affine-boundary-cartier",
+    "lem-sfb-normal-smooth-group-local-ample-line",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-closed-fibre-codimension-locus",
+  "worker": "stage1",
+  "summary": "Reduced the smooth closed-pair bound to finite dimension levels on clopen smooth-dimension pieces. One general 05F9 statement-only input is new; dimension formula, component generic points, chains, Chevalley and base-change dimensions reuse existing statements. Empty fibres are handled by the complement of the constructible image, not the nonnegative dimension levels. No statement change.",
+  "blueprint": "EGA IV4 21.14.3(i), first assertion, used to verify the parafactoriality hypothesis in the proof of the second assertion; lower input to the inherited affine-boundary construction. Supporting input: EGA IV4 Proposition 21.14.3(ii), proof: approximation by normal finite type Z-subalgebras and descent of the closed pair; IV3 7.8.3(ii),(iii),(vi),(vii), 8.3.11, 8.5, IV4 17.7.8, and IV2 6.1.4, as cited there. Lower input: constructibility and field-extension invariance of the fibre-codimension conditions in the arithmetic approximation paragraph of EGA IV4 21.14.3(ii). Current latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md (3) fixes compactification/direct-image route. This is a lower arithmetic-approximation input; ancestor returns null and the inherited via chain is retained.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-smooth-relative-dimension-locally-constant",
+    "why": "Generic scheme/dimension/constructibility input in the proof; supplies exactly the cited statement, with no replacement of the unit direct-image route."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Generic scheme/dimension/constructibility input in the proof; supplies exactly the cited statement, with no replacement of the unit direct-image route."
+   },
+   {
+    "node": "lem-kun-dimension-formula",
+    "why": "Generic scheme/dimension/constructibility input in the proof; supplies exactly the cited statement, with no replacement of the unit direct-image route."
+   },
+   {
+    "node": "lem-sc-closed-irreducible-dimension-trdeg",
+    "why": "Generic scheme/dimension/constructibility input in the proof; supplies exactly the cited statement, with no replacement of the unit direct-image route."
+   },
+   {
+    "node": "lem-sc-fibre-dimension-after-base-change",
+    "why": "Generic scheme/dimension/constructibility input in the proof; supplies exactly the cited statement, with no replacement of the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-supremum-local-dimensions",
+    "why": "Generic scheme/dimension/constructibility input in the proof; supplies exactly the cited statement, with no replacement of the unit direct-image route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-smooth-relative-dimension-locally-constant",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-kun-dimension-formula",
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-weil-pbc-dimension-supremum-local-dimensions"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q125-9eb79bfe0",
+  "group": "Q125",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-9eb79bfe0 (reviewer sub-agent of L); spot-checked: Read the item, all 9 steps, the new node lem-sfb-finite-presentation-fibre-dimension-levels, and every cited node statement. Source: Stacks more-morphisms.tex lemma-dimension-fibres-constructible (05F9, lines 8453-8464) says the level sets are locally constructible for a finite-presentation morphism; on a Noetherian base T they are constructible, so the new node is a correct statement-only specialization. Small cases for the new node: a closed point into a trait (E_0 is the closed point), an open immersion (E_0 = U), Y empty. The new node is not a duplicate (regex search over all nodes plus a 05F9 grep) and does not restate the item. The math is correct: step 3 combines the dimension formula with dim of a closed irreducible set = trdeg and monotonicity along chains of generalizations, giving min dim O_z = d - max dim W_j. Step 5 writes G_c as a finite Boolean combination of the E_{d,n} with N_d = S minus h_d(C_d) (Chevalley). Step 6 uses surjectivity plus local dimension under base change. Step 7 is an all-points equivalence only. Step 8 identifies the fibre and needs no Noetherian S'. Step 9 matches dim O_z = 0 with generic points of components. The statement is unchanged; tool_uses are generic and accepted. FIX adds three missing citations in the item: step 1, lem-weil-pbc-smooth-local-on-source for X_d -> S smooth, plus def-kun-dimension; step 2, finite-type-over-noetherian for C_d Noetherian (was 'locally Noetherian' without citation); step 3, lfp composition and qcqs-permanence (1),(3) for M and A of finite type over kappa(s). proof_deps updated to match.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothClosedFibreCodimensionLocus",
+  "declaration": "AlgebraicGeometry.smooth_closed_fibre_codimension_locus",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Hom.fibreCodimensionLocus",
+   "AlgebraicGeometry.smooth_closed_fibre_codimension_locus"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothClosedFibreCodimensionLocus.lean",
+  "statement": "theorem smooth_closed_fibre_codimension_locus {X S : Scheme.{u}} [IsLocallyNoetherian S] [CompactSpace S] (f : X ⟶ S) [Smooth f] [QuasiCompact f] [QuasiSeparated f] (Z : Set X) (hZ : IsClosed Z) (c : ℕ) : Topology.IsConstructible (f.fibreCodimensionLocus Z c) ∧ (∀ (s : S) (K : Type u) [Field K] [Algebra (S.residueField s) K], s ∈ f.fibreCodimensionLocus Z c ↔ ∀ z : ↥(pullback (f.fiberToSpecResidueField s) (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) K)))), f.fiberι s (pullback.fst (f.fiberToSpecResidueField s) (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) K))) z) ∈ Z → (c : WithBot ℕ∞) ≤ ringKrullDim ((pullback (f.fiberToSpecResidueField s) (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) K)))).presheaf.stalk z)) ∧ (∀ (S' : Scheme.{u}) (v : S' ⟶ S), (pullback.snd f v).fibreCodimensionLocus ((pullback.fst f v) ⁻¹' Z) c = v ⁻¹' f.fibreCodimensionLocus Z c) ∧ (∀ s : S, s ∈ f.fibreCodimensionLocus Z 1 ↔ ∀ W ∈ irreducibleComponents (f.fiber s), ¬ W ⊆ (f.fiberι s) ⁻¹' Z) ∧ (∀ s : S, IsEmpty (f.fiber s) → s ∈ f.fibreCodimensionLocus Z c) ∧ (∀ s : S, (f.fiberι s) ⁻¹' Z = ∅ → s ∈ f.fibreCodimensionLocus Z c)",
+  "branch": "newtargets-dag",
+  "by": "Q86",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The auxiliary definition is precisely the set G_c introduced by this node, with real data and no assumptions; it remains usable on the arbitrary new base. Smooth supplies locally finite presentation; the explicit quasi-compact and quasi-separated instances supply the remaining finite-presentation conditions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-64f554aab",
+  "group": "Q86",
+  "result": "pass",
+  "note": "Read the node, all 11 stmt_dep records (all Mathlib), the snapshot module (verbatim lean.statement), and the report (Worker report and Second reading by Q86 present). The hypotheses are locally Noetherian + compact base and Smooth + qc + qs, with nothing stronger. The helper fibreCodimensionLocus is exactly G_c with real data. All conclusion clauses match the node: constructibility, field-extension all-points equivalence on one consistent pullback, arbitrary base change with no condition on S', the G_1 component criterion, and both empty cases. Edge cases c=0, empty fibre/Z_s, transcendental K and non-Noetherian S' are covered. K and S' in universe u is forced by Mathlib pullbacks and documented. No H4 duplicate found in Mathlib or the live lean tree. The snapshot node only adds the lean field. Not recompiled because no file was changed."
+ }
+}

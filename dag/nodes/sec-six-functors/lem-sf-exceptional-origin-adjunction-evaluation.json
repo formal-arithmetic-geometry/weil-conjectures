@@ -1,0 +1,121 @@
+{
+ "id": "lem-sf-exceptional-origin-adjunction-evaluation",
+ "kind": "statement",
+ "title": "Evaluation and quotient equations for origin adjunctions",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "statement": "Let O be a commutative ring and ell in O. Fix compactification c of f:X->Y, etale support package S and exceptional adjunction G, actual site comparisons CX,CY,CZ, pro-etale support P and canonical compactification comparison R [def-pur-exceptional-system-transport-interfaces, def-coef-system-site-transport-interfaces, def-sf-strict-etale-exceptional-adjoint-interfaces]. Let record be transport data: its system and finite origin adjunctions satisfy the prescribed transpose formula and its evaluations preserve origins. Suppose each finite source-site counit is invertible on finite origin, and suppose evaluation of R equals the canonical finite comparison word. Then (1) evaluation of the system-origin adjunction unit followed by the right-evaluation comparison and the right image of the left-evaluation comparison is the finite-origin unit; (2) the left-evaluation comparison followed by the finite-left image of the right-evaluation comparison and then the finite-origin counit equals evaluation of the system-origin counit; (3) for each n<=m and arbitrary pro-etale system N, the scalar-derived image of the m right-etale-evaluation comparison, followed by inverse site tensor comparison, the site inverse of G's quotient comparison, and the site inverse of G_n applied to the input quotient transpose, equals the output quotient transpose followed by the n right-etale-evaluation comparison. The exact words and their order are displayed in lean.statement; all quotient transposes are on the unbounded categories.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Zheng Lemmas 4.10 and 5.22 and Proposition 5.24; Stacks 0B65."
+ },
+ "stmt_deps": [
+  "def-pur-exceptional-system-transport-interfaces",
+  "def-coef-system-site-transport-interfaces",
+  "def-sf-strict-etale-exceptional-adjoint-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "the transpose equations determine the system and finite Hom maps after\nprecomposition with the respective source site counits. Evaluate these equations,\nsubstitute the comparison evaluation square, and use the three evaluated\nadjunctions. The evaluated source counit is the finite counit composed with the\ntwo inverse/direct evaluation comparisons; cancel it, using its invertibility on\norigins. Hence evaluation intertwines the forward Hom maps. Apply this identity\nto the identity of the left image for the unit, and to the counit for the counit,\nusing bijectivity of the finite Hom map. For quotient transitions use the actual\netale transition equation before evaluation, then apply the site inverse tensor\ncomparison. The scalar/site pullback cube identifies its derived tensor map and\nthe inverse-transition restriction comparison as scalar-adjunction mates. Moving\nthrough this mate square gives exactly the displayed transpose. The intermediate\ntensor object may be unbounded, so all transposes are taken in the unbounded\ncategories. No equality is inferred from agreement at every evaluation.",
+   "uses": [
+    "lem-pur-coefficient-system-derived-comparison",
+    "lem-pur-etale-coefficient-system-adjoint",
+    "lem-coef-semilinear-derived-sections",
+    "lem-sfb-etale-proetale-scalar-pullback-cube",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-pur-etale-coefficient-system-adjoint",
+  "lem-coef-semilinear-derived-sections",
+  "lem-sfb-etale-proetale-scalar-pullback-cube",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Separated portion of system-transport steps 2–8: Evaluation and quotient equations for origin adjunctions"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "bounded below etale proetale site comparison on derived strict coefficient systems with fixed evaluation packages",
+   "results": "8 hits: Scheme.Etale.forget, smallEtalePretopology, etalePretopology, smallEtaleTopology, etaleTopology, instCategoryEtale, IsEtale.instHasOfPostcompPropertyScheme, LightProfinite.instWEqualsLocallyBijectiveCoherentTopology. No strict-system comparison or transport theorem.",
+   "date": "2026-10-25",
+   "verdict": "Use the existing project comparison and mate interfaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.mateEquiv",
+   "results": "12 hits: mateEquiv, mateEquiv_counit, mateEquiv_counit_symm, unit_mateEquiv, unit_mateEquiv_symm, mateEquiv_vcomp, mateEquiv_hcomp and iterated/conjugate mate identities.",
+   "date": "2026-10-25",
+   "verdict": "Generic mate identities only; no geometric system construction."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficient.*comparison|adjunction.*evaluation|origin.*adjunction",
+   "results": "8 Mathlib hits: Adjunction.Evaluation, evaluationAdjunctionLeft/Right, and unrelated comparison references; no strict coefficient-system theorem.",
+   "date": "2026-10-25",
+   "verdict": "No equivalent result in Mathlib."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived etale proetale comparison on bounded below strict coefficient systems, transporting exceptional compact support adjunction and evaluation",
+   "results": "8 hits: CategoryTheory.Adjunction.derived, Adjunction.derivedε and its congr_simp; SheafOfModules.PullbackConstruction.adjunction; CompHausLike.LocallyConstant.adjunction, adjunction_unit, counit_app_val; LightCondSet.LocallyConstant.adjunction. None states site-origin equivalence or exceptional strict-system transport.",
+   "date": "2026-10-25",
+   "verdict": "Existing generic derived-adjunction tools do not construct the needed geometric packages or evaluation mate words."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalSystemTransport",
+  "date": "2026-10-25",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-exceptional-system-transport",
+   "place": "Evaluation and quotient equations for origin adjunctions",
+   "via": [
+    "lem-sf-exceptional-system-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExceptionalOriginAdjunctionEvaluation",
+  "file": "lean/Sheaf/Paper/ExceptionalOriginAdjunctionEvaluation.lean",
+  "declaration": "AlgebraicGeometry.exceptionalOriginAdjunctionEvaluation",
+  "statement": "theorem exceptionalOriginAdjunctionEvaluation (record : ExceptionalSystemTransportData G CX CY CZ P R) (hfinite : ∀ n M, CX.levelOrigin n M → IsIso ((CX.image.level n).adjunction.counit.app M)) (hcomparison : (∀ n M, (CY.proEvaluation.evaluation n).map ((exceptionalSystemComparison R).app M) ≫ (exceptionalProSupportEvaluation P n).hom.app (CX.image.system.inverse.obj M) ≫ (P.val.levelDerivedOpen n ⋙ (P.val.properDerived.level n).direct).map ((CX.image.inverseEvaluation n).hom.app M) = (CY.image.inverseEvaluation n).hom.app (S.functor.obj M) ≫ (CY.image.level n).inverse.map ((S.evaluation n).hom.app M) ≫ (exceptionalSystemLevelComparison R n).app ((S.PX.evaluation n).obj M))) : -- unitEvaluation (∀ n M, (CX.proEvaluation.evaluation n).map (record.systemAdjunction.adjunction.unit.app M).hom ≫ (exceptionalSystemRightEvaluation G CX CY n).hom.app ((exceptionalProSupport P).obj M.obj) ≫ ((CY.image.level n).direct ⋙ G.levelRight n ⋙ (CX.image.level n).inverse).map ((exceptionalProSupportEvaluation P n).hom.app M.obj) = ((record.finiteAdjunction n).adjunction.unit.app ⟨(CX.proEvaluation.evaluation n).obj M.obj, record.evaluationOriginX n M.obj M.property⟩).hom) ∧ -- counitEvaluation (∀ n N, (exceptionalProSupportEvaluation P n).hom.app ((exceptionalSystemRight G CX CY).obj N.obj) ≫ (P.val.levelDerivedOpen n ⋙ (P.val.properDerived.level n).direct).map ((exceptionalSystemRightEvaluation G CX CY n).hom.app N.obj) ≫ ((record.finiteAdjunction n).adjunction.counit.app ⟨(CY.proEvaluation.evaluation n).obj N.obj, record.evaluationOriginY n N.obj N.property⟩).hom = (CY.proEvaluation.evaluation n).map (record.systemAdjunction.adjunction.counit.app N).hom) ∧ -- quotientTransition (∀ {m n : ℕ} (h : n ≤ m) N, (CX.proEvaluation.scalar h).derived.map ((exceptionalSystemRightEtaleEvaluation G CX CY m).hom.app N) ≫ (CX.image.derivedTensor h).inv.app ((G.levelRight m).obj ((S.PY.evaluation m).obj (CY.image.system.direct.obj N))) ≫ (CX.image.level n).inverse.map ((G.quotientComparison h).hom.app ((S.PY.evaluation m).obj (CY.image.system.direct.obj N))) ≫ (CX.image.level n).inverse.map ((G.levelRight n).map (((S.PY.scalar h).derivedAdj.homEquiv _ _).symm ((S.PY.transition h).app (CY.image.system.direct.obj N)))) = ((CX.proEvaluation.scalar h).derivedAdj.homEquiv _ _).symm ((CX.proEvaluation.transition h).app ((exceptionalSystemRight G CX CY).obj N)) ≫ (exceptionalSystemRightEtaleEvaluation G CX CY n).hom.app N)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-dfec7",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261025T013903-L-4030217",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-dfec7",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261025T013903-L-4030217",
+  "kind": "interface",
+  "note": "independent cc review: item exceptionalSystemTransport (statement and kernel type hash unchanged vs published) with its 4 new sorry leaves + Interfaces relocation (49 moved decls: verbatim text; type-hash diffs only in Prop instance proofs); 6 delivered modules + 9 direct importers compiled clean in sandbox"
+ }
+}

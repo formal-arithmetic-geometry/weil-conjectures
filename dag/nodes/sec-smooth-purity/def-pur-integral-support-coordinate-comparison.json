@@ -1,0 +1,143 @@
+{
+ "id": "def-pur-integral-support-coordinate-comparison",
+ "kind": "definition",
+ "title": "Canonical proper/open comparison through integral quotient coordinates",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with its compatible norm, and the lifted integer ring and uniformizer of [def-pur-adic-exceptional-system-realization]. For a compactification $c=(X\\xrightarrow j\\bar X\\xrightarrow gY)$ [def-weil-compactifications-refinements], let $C_T$ be the exact ordinary quotient-coordinate equivalence from coefficient-sequence modules to strict pro-etale systems, and also its exact derived equivalence. Let $S,G,H,D$ be the Brown finite-evaluation and site-transport data of [lem-pur-brown-tower-finite-site-comparison], with $F_D=D.\\mathrm{compact}.\\mathrm{functor}$. Let $F_{\\rm seq}=J_jR_g$ be the existing ringed-sequence-site systemSupport of [def-pur-semilinear-compact-support-coefficient-transport]. All categories and localizations are ordinary unbounded derived categories [lem-pur-coefficient-system-derived-comparison].\n\nDefine the canonical natural isomorphism $\\beta:C_XF_D\\simeq F_{\\rm seq}C_Y$ as the proper/open paste of the following uniquely normalized data. First, the ordinary direct-image comparisons for $j,g$ are identity on every underlying section, after the strict-system rightEvaluation and rightUnderlying isomorphisms. The ordinary inverse-image comparison for $j$ is their adjunction transpose through $C_T$. The ordinary extension-by-zero comparison is its transpose under the two extension/restriction adjunctions, retaining the actual Hom formula. Its derived comparison is fixed by the exact termwise factorization on every complex. The proper derived comparison is fixed by the actual universal right-derived unit, after the ordinary direct-image comparison and the coordinate localization factorization. There exists exactly one package satisfying these equations; beta is its derived open comparison whiskered by the proper direct image followed by its derived proper comparison whiskered by $J_j$. Every other package satisfying the same equations gives this same beta. No arbitrary endpoint isomorphism, automorphism twist, or selection of levelwise derived lifts enters the definition.",
+ "stmt_deps": [
+  "def-pur-adic-exceptional-system-realization",
+  "def-weil-compactifications-refinements",
+  "lem-pur-brown-tower-finite-site-comparison",
+  "def-pur-semilinear-compact-support-coefficient-transport",
+  "lem-pur-coefficient-system-derived-comparison"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction.proof.md",
+  "place": "Outer Hom comparisons and final unit/counit paragraph; canonical comparison specified by Zheng Constructions 4.1 and 5.15, Lemma 4.10, and the universal-unit characterization in integralExceptionalComparison_characterization."
+ },
+ "proof": [
+  {
+   "text": "Obtain the unique Ordinary comparison B, then the unique Derived extension R over B. The pair (B,R) is a Normalized record. Any other record has ordinary field equal to B; substitute that equality, then use uniqueness of the derived field over B. This proves normalized_existsUnique by actual dependent record equality.",
+   "uses": [
+    "def-pur-integral-support-comparison-data",
+    "lem-pur-integral-support-ordinary-comparison",
+    "lem-pur-integral-support-derived-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Define normalized by the uniquely determined package and beta by its prescribed proper/open paste. For any B, apply uniqueness in normalized_existsUnique to get B=normalized, substitute, and use reflexivity for the two pastes.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-integral-support-comparison-data",
+  "lem-pur-integral-support-ordinary-comparison",
+  "lem-pur-integral-support-derived-comparison"
+ ],
+ "proof_origin": "Q4: ordinary/derived decomposition of the existing normalization argument, with dependent-record assembly and beta characterization proved in Lean. Both geometric comparison constructions remain named obligations.",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "integralExceptional.*[Cc]omparison|[Cc]ompact.*[Cc]oordinates",
+   "results": "{\"t\": \"2026-10-24T19:26:27Z\", \"tool\": \"grep\", \"query\": \"integralExceptional.*[Cc]omparison|[Cc]ompact.*[Cc]oordinates\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Topology/IsClosedRestrict.lean\", \"Mathlib/Topology/IsClosedRestrict.lean\"], \"digest\": \"a6048ac4a1da66cc\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact match: only general adjunction/right-derived uniqueness APIs, or unrelated compact-coordinate hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical comparison between strict coefficient system compact support and ringed sequence site compact support is uniquely determined by extension by zero adjunction and universal derived direct image unit",
+   "results": "{\"t\": \"2026-10-24T19:26:27Z\", \"tool\": \"leansearch\", \"query\": \"The canonical comparison between strict coefficient system compact support and ringed sequence site compact support is uniquely determined by extension by zero adjunction and universal derived direct image unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafAdjunctionCocontinuous\", \"stalkSkyscraperSheafAdjunction\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_unit_app_val\", \"CompHausLike.LocallyConstant.adjunction\", \"LightCondensed.discreteUnderlyingAdj\", \"CompactlySupportedContinuousMap.instFunLike\", \"CategoryTheory.abelianOfAdjunction\"], \"digest\": \"5c948eddf9428e24\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact match: only general adjunction/right-derived uniqueness APIs, or unrelated compact-coordinate hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniqueness of a comparison of derived functors with exact coordinate equivalences normalized by the right derived functor unit",
+   "results": "{\"t\": \"2026-10-24T19:26:28Z\", \"tool\": \"leanfinder\", \"query\": \"Uniqueness of a comparison of derived functors with exact coordinate equivalences normalized by the right derived functor unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.rightDerivedUnique\", \"CategoryTheory.Functor.leftDerivedUnique\", \"CategoryTheory.Functor.rightDerived_ext\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison\", \"CategoryTheory.Functor.leftDerived_ext\", \"CategoryTheory.LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac\", \"CategoryTheory.Functor.rightDerivedNatIso_hom\"], \"digest\": \"f0c707be35e60b73\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact match: only general adjunction/right-derived uniqueness APIs, or unrelated compact-coordinate hits."
+  },
+  {
+   "tool": "grep",
+   "query": "systemPresentation|supportPresentation|canonical.*compact.support.*coordinate in dag/nodes, lean/Sheaf, lean/WeilConjectures; blueprint_refs.py search compact support coordinates",
+   "results": "No Brown ProCompact / systemSupport comparison. Other supportPresentation declarations use different functors. blueprint_refs: 0 blueprint nodes match. integralExceptionalComparison_characterization fixes the site comparison only, not this proper/open comparison.",
+   "date": "2026-10-24",
+   "verdict": "The canonical proper/open coordinate comparison has no existing owner; reuse its ingredients."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-integral-reconstructed-representing-pair",
+  "date": "2026-10-24",
+  "group": "NA"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Integral Hom chain: identify the Brown proper/open system construction with the published systemSupport before reconstructing the counit. Repair H3.",
+   "via": [
+    "lem-pur-integral-reconstructed-representing-pair",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "module": "Sheaf.Paper.PurIntegralSupportComparison",
+  "declaration": "WeilConjectures.PurIntegralSupportComparison.beta",
+  "declarations": [
+   "WeilConjectures.PurIntegralSupportComparison.normalized_existsUnique",
+   "WeilConjectures.PurIntegralSupportComparison.normalized",
+   "WeilConjectures.PurIntegralSupportComparison.beta",
+   "WeilConjectures.PurIntegralSupportComparison.beta_characterization"
+  ],
+  "file": "lean/Sheaf/Paper/PurIntegralSupportComparison.lean",
+  "statement": "def beta : (coordinates l E X).functor ⋙ D.compact.functor ≅ systemSupport l E c ⋙ (coordinates l E Y).functor",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-86905e868",
+  "group": "NA",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-86905e868",
+  "group": "NA",
+  "result": "pass",
+  "note": "Re-delivery repairs H3 of d0fc: new def node def-pur-integral-support-coordinate-comparison defines beta (C_X F_D ≅ systemSupport C_Y) as the proper/open paste of a uniquely normalized package. Pinning: section identity (PushNormalized), openPull/openExtension adjunction transposes, derivedOpen_factors, derivedProper_unit via CoefficientDerivedImage.isRightDerived. Every field is determined, so .choose of ∃! is legitimate; beta_characterization rules out twists. No existing owner (side-live grep: no module with both ProCompact and systemSupport; node absent from DAG/index). PublishedFamily states the linear Hom bijection, trace_reduction, trace_evaluation and naturality on the dependency's own integralSupport/alpha. alpha_transport (types checked; follows from counit naturality + triangle identity) ties the coordinate alpha to the dependency's alpha. No free iso fields remain. Item statement, proof and source unchanged vs side-live; stmt_deps gains exactly the new node; lean.statement verbatim. Supplied/Pair clauses rechecked against the node, including case-(b) theta pinned by evaluation + H^r normalization. Edge cases ok; only sorry proofs; docstrings with sources. Not recompiled (no file changed); report records clean server compile and dry run. Advisories: Brown owners reached only via the cited Brown node; author-only second reading; hD ring caveat for citers."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e1a67",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261025T101306-L-3680017",
+  "kind": "interface",
+  "note": "independent cc review: published PurIntegralSupportComparison records vs delivered Data module (byte-identical but for blueprint tags); new ordinary/derived ∃! statements vs their nodes and the published normalized_existsUnique; item node vs sheaf-dag (only lean/proof fields); importer PurIntegralRepresentingPair compiled on delivered modules"
+ }
+}

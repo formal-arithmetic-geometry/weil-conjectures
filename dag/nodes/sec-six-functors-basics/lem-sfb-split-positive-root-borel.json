@@ -1,0 +1,289 @@
+{
+ "id": "lem-sfb-split-positive-root-borel",
+ "kind": "statement",
+ "title": "A constant positive root system determines a Borel over the base",
+ "statement": "Let $A$ be a nonzero commutative ring and $P=(G,T,M,\\Phi,\\Phi^\\vee,\\Delta,(X_\\alpha))$ a pinned split realization over $A$ in [def-sfb-pinned-split-root-realization]. Let $\\Phi^+$ be the positive roots determined by $\\Delta$. There exists a unique smooth closed $A$-subgroup scheme $B\\subseteq G$ containing $T$ whose geometric fibres are Borel subgroups and whose nonzero $T$-weights in its tangent Lie algebra are $\\Phi^+$. Here a Borel subgroup over an algebraically closed field is a maximal smooth connected solvable subgroup; solvable means that iterated commutator subgroups eventually become trivial. In particular $G$ has a Borel subgroup scheme containing its specified split maximal torus. This assignment of $B$ is compatible with arbitrary homomorphisms $A\\to C$ between nonzero commutative rings and with isomorphisms of pinned split realizations. If $\\Phi=\\varnothing$, then $B=T=G$. No Noetherian or connected-base hypothesis is assumed.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Theorem 5.1.13, printed pp.143-144 (the positive-root subgroup and its product with the torus); Corollary 5.2.7(2), pp.155-156 (uniqueness); Remark 6.1.2, p.186 (constant positive systems and their Borel subgroups) Read online; local PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-sfb-pinned-split-root-realization"
+ ],
+ "proof": [
+  {
+   "text": "Write $S=\\operatorname{Spec}A$. Extend the linearly independent simple roots $\\Delta$ to a $\\mathbf Q$-basis of $M\\otimes\\mathbf Q$. Define a rational linear functional to be $1$ on each simple root and $0$ on the added basis vectors. Multiplying by a positive common denominator of its values on a $\\mathbf Z$-basis of $M$ gives $\\lambda\\in\\operatorname{Hom}(M,\\mathbf Z)$ strictly positive on $\\Phi^+$ and strictly negative on $-\\Phi^+$. The sign assertion follows by summing the same-sign integral simple-root coefficients in the definition of the base. The Hopf map $A[M]\\to A[t,t^{-1}]$, $e_m\\mapsto t^{\\lambda(m)}$, defines a cocharacter $\\lambda:\\mathbf G_{m,A}\\to T$. When $\\Delta$ is empty choose $\\lambda=0$.",
+   "uses": [
+    "def-sfb-pinned-split-root-realization",
+    "def-sfb-ring-diagonalizable-group"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 5.1.13, proof, printed p.144, choice of a separating integral cocharacter; explicit rational-linear-algebra construction."
+   }
+  },
+  {
+   "text": "We will use tangents after arbitrary base change, including for a competing smooth affine subgroup. For a smooth affine finitely presented $A$-group $H=\\operatorname{Spec}R$ with identity augmentation $\\epsilon:R\\to A$, put $E=A\\otimes_{R,\\epsilon}\\Omega_{R/A}$. The smooth-differentials result makes the sheaf $\\Omega_{H/S}$ finite locally free; the affine-sections theorem makes its module of global sections $\\Omega_{R/A}$ finite projective over $R$, so $E$ is finite projective over $A$. A dual-number point reducing to $\\epsilon$ is exactly $r\\mapsto\\epsilon(r)+\\eta D(r)$ with $D$ an $A$-derivation, so $\\operatorname{Lie}(H)=\\operatorname{Hom}_A(E,A)$. The differential base-change isomorphism identifies the corresponding module over an arbitrary $A$-algebra $C$ with $C\\otimes_A E$. Locally choose a basis of $E$; its dual basis identifies $C\\otimes_A E^*$ with $(C\\otimes_A E)^*$, and these identifications agree on overlaps. This proves natural tangent base change, also for homomorphisms and conjugation actions. For a split torus action use the cited weight-decomposition theorem: weight summands are finite projective and their base changes are the same-character summands. In particular a weight absent over $A$ is absent in every geometric fibre. No reducedness or flatness of $A\\to C$ is used.",
+   "uses": [
+    "lem-ag-smooth-relative-differentials-finite-locally-free",
+    "lem-weil-pbc-kahler-differentials-base-change",
+    "lem-sfb-relative-torus-bundle-weights",
+    "lem-pc-finite-flat-affine-sections-projective"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Section 4 introduction, printed p.107 (graded Lie bundle and base change); elementary dual-basis calculation using Stacks Tags 02G1 and 00RV."
+   }
+  },
+  {
+   "text": "Let $a(t,g)=\\lambda(t)g\\lambda(t)^{-1}$. Apply the relative dynamic-subgroup theorem to the smooth affine finitely presented group $G$ and this action. It constructs $B=P_a$ as a smooth affine finitely presented closed subgroup of $G$, with connected geometric fibres. Every point of $T$ has constant orbit because $T$ is commutative, so $T\\subseteq B$. On the tangent module the $\\mathbf G_m$-degree of the $T$-weight $m$ is $\\lambda(m)$, by substituting $e_m\\mapsto t^{\\lambda(m)}$ in the coaction. Its nonnegative-degree part is therefore\n$$\\operatorname{Lie}(B)=\\operatorname{Lie}(T)\\oplus\\bigoplus_{\\alpha\\in\\Phi^+}\\mathfrak g_\\alpha.$$\nIndeed the pinned split realization gives exactly the zero and root summands, and step 1 determines all their signs. Each displayed root summand is free of rank one over the nonzero ring $A$, so the nonzero $T$-weights are exactly $\\Phi^+$.",
+   "uses": [
+    "def-sfb-pinned-split-root-realization",
+    "lem-sfb-relative-dynamic-subgroups"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 5.1.13, proof, printed p.144, construction by Theorem 4.1.7; tangent formula of Theorem 4.1.7."
+   }
+  },
+  {
+   "text": "For any geometric point $\\bar s:\\operatorname{Spec}F\\to S$, the base-change lemma for pinned split realizations identifies the roots and torus of $G_F$ with the prescribed $\\Phi$ and $T_F$. The dynamic theorem identifies $B_F$ with $P_{G_F}(\\lambda_F)$. The sign calculation of step 1 says that $\\lambda_F$ is regular, since regularity pairs characters with cocharacters over $\\mathbf Z$, rather than differentiating a character in $F$. Apply the regular-cocharacter Borel theorem to the reductive group $G_F$ and its maximal torus $T_F$: $B_F$ is a Borel subgroup. Thus the construction satisfies every existence condition, in all residue characteristics.",
+   "uses": [
+    "lem-sfb-pinned-split-root-base-change",
+    "lem-sfb-relative-dynamic-subgroups",
+    "lem-sfb-regular-cocharacter-borel-description"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 5.1.13, proof, printed p.144, passage to geometric fibres and the Borel conclusion."
+   }
+  },
+  {
+   "text": "Let $Q\\subseteq G$ be another smooth closed subgroup satisfying the stated conditions. It is affine, and its smooth structure map is finitely presented since it is quasi-compact and separated; thus the dynamic theorem applies to $Q$. Since $T\\subseteq Q$, conjugation by $\\lambda$ preserves $Q$. Its tangent inclusion into $\\mathfrak g$ is $T$-equivariant, and its only possible weights are $0$ and $\\Phi^+$ by the hypothesis on $Q$ and the weight decomposition of step 2. All its $\\lambda$-degrees are nonnegative. The dynamic theorem now gives $\\operatorname{Lie}(P_a(Q))=\\operatorname{Lie}(Q)$. On every geometric fibre this remains an equality by step 2 and dynamic base change. The inclusion $P_a(Q)_{\\bar s}\\subseteq Q_{\\bar s}$ is an equality: both groups are smooth and connected, and the smooth-subgroup tangent-generation theorem, applied to this single subgroup of $Q_{\\bar s}$, forces it to be the whole group. The fibre isomorphism criterion then gives $P_a(Q)=Q$ over $A$. Its hypotheses hold because these are smooth affine finitely presented $S$-schemes; their inclusion is locally finitely presented. This is an equality of subgroup schemes, including over nilpotents.",
+   "uses": [
+    "lem-sfb-relative-torus-bundle-weights",
+    "lem-sfb-relative-dynamic-subgroups",
+    "lem-sfb-smooth-subgroup-tangent-generation",
+    "lem-sfb-flat-geometric-fibre-open-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 5.2.3, proof, printed pp.152-153, the full-Lie-algebra dynamic subgroup argument; Corollary 5.2.7(2), proof, p.155."
+   }
+  },
+  {
+   "text": "For any $A$-algebra $C$ and $q\\in Q(C)=P_a(Q)(C)$, compose its extending orbit $\\mathbf A^1_C\\to Q_C$ with $Q_C\\hookrightarrow G_C$. This is an extension of the orbit of $q$ in $G_C$, so $q\\in P_a(G)(C)=B(C)$. Naturality for $C$ gives a closed subgroup inclusion $Q\\subseteq B$: on affine coordinate rings it factors the surjection defining $Q\\subseteq G$ through the quotient defining $B$. On a geometric fibre, $Q_{\\bar s}$ is Borel and $B_{\\bar s}$ is smooth connected solvable by step 4. Maximality in the definition of a Borel gives $Q_{\\bar s}=B_{\\bar s}$. Apply the same fibre isomorphism criterion to $Q\\to B$ to obtain $Q=B$. This proves uniqueness without inferring scheme equality just from equality of geometric point sets.",
+   "uses": [
+    "lem-sfb-flat-geometric-fibre-open-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 5.2.3, proof, printed pp.152-153, factorization by extending orbits and fibre criterion; Corollary 5.2.7(2), p.155."
+   }
+  },
+  {
+   "text": "For a homomorphism $A\\to C$ between nonzero rings, the pinned split base-change lemma makes $P_C$ a realization of the same based datum. The same integral cocharacter from step 1 works for it. Dynamic base change gives $(P_a(G))_C=P_{a_C}(G_C)$ as closed subgroup schemes. By steps 3-6 this is exactly its unique Borel for $\\Phi^+$, proving arbitrary, and hence successive, base-change compatibility. If $f:P\\to P'$ is an isomorphism of pinned split realizations with its specified based-lattice isomorphism, transport $\\lambda$ to $\\lambda'=f_T\\lambda$. For every algebra and every point $g$, the orbit identity\n$$f(\\lambda(t)g\\lambda(t)^{-1})=\\lambda'(t)f(g)\\lambda'(t)^{-1}$$\nshows, by composing an orbit extension with $f$ and conversely with $f^{-1}$, that $f(P_a(G))=P_{a'}(G')$. The transported functional has the same positive-root signs, so uniqueness identifies the right side with the required Borel of $P'$.",
+   "uses": [
+    "lem-sfb-pinned-split-root-base-change",
+    "lem-sfb-relative-dynamic-subgroups"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 4.1.7, base-change and orbit definitions; Remark 6.1.2, printed p.186, constant positive systems."
+   }
+  },
+  {
+   "text": "If $\\Phi=\\varnothing$, choose $\\lambda=0$ as in step 1. Conjugation is trivial, so every orbit extends constantly and $B=P_a(G)=G$ as functors on all algebras. In each geometric fibre the empty-root clause of the regular-cocharacter theorem gives $G_{\\bar s}=T_{\\bar s}$. Apply the fibre isomorphism criterion to the closed inclusion $T\\to G$ between smooth affine finitely presented $S$-schemes to get $T=G$. Thus $B=T=G$, including rank-zero tori. Every argument above works on arbitrary $\\operatorname{Spec}A$ and uses no connectedness or Noetherian hypothesis on $A$.",
+   "uses": [
+    "lem-sfb-regular-cocharacter-borel-description",
+    "lem-sfb-flat-geometric-fibre-open-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 5.1.13, empty-root dynamic construction; regular-cocharacter empty-root case."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-pinned-split-root-realization",
+  "def-sfb-ring-diagonalizable-group",
+  "lem-ag-smooth-relative-differentials-finite-locally-free",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "lem-sfb-relative-torus-bundle-weights",
+  "lem-pc-finite-flat-affine-sections-projective",
+  "lem-sfb-relative-dynamic-subgroups",
+  "lem-sfb-pinned-split-root-base-change",
+  "lem-sfb-regular-cocharacter-borel-description",
+  "lem-sfb-smooth-subgroup-tangent-generation",
+  "lem-sfb-flat-geometric-fibre-open-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Explicit assembly of Conrad Theorem 5.1.13 and Proposition 5.2.3 / Corollary 5.2.7(2), read online, using the existing DAG dynamic, geometric Borel, tangent and fibre-test statements; local PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a split reductive group scheme a positive system of roots determines a Borel subgroup containing the maximal torus",
+   "results": "Actual logged search: {\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.Base.IsPos\", \"RootPairing.Base.IsPos.induction_on_reflect\", \"RootPairing.GeckConstruction.cartanSubalgebra'\", \"RootPairing.GeckConstruction.h'\", \"RootPairing.baseOf_root_eq_baseOf_coroot\", \"RootPairing.Base.exists_eq_sum_and_forall_sum_mem_of_isPos\", \"RootPairing.Base.IsPos.induction_on_add\", \"RootPairing.nonempty_base\"]}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, Lie algebras, etale ring maps or measurable Borel structures do not supply this group-scheme notion or theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Borel subgroup of a split reductive group scheme associated to a positive root system over a ring",
+   "results": "Actual logged search: {\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.cartanSubalgebra'\", \"RootPairing.GeckConstruction.h'\", \"RootPairing.EmbeddedG2\", \"RootPairing.weylGroup\", \"RootPairing.GeckConstruction.cartanSubalgebra\", \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra'\", \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra\", \"RootPairing.GeckConstruction.cartanSubalgebra_le_lieAlgebra\"]}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, Lie algebras, etale ring maps or measurable Borel structures do not supply this group-scheme notion or theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Borel\", \"Scheme\"",
+   "results": "Actual logged search: {\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, Lie algebras, etale ring maps or measurable Borel structures do not supply this group-scheme notion or theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "Borel.*subgroup|subgroup.*Borel|reductive.*Borel",
+   "results": "Actual logged search: {\"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/MeasureTheory/Measure/Haar/Quotient.lean\", \"Mathlib/MeasureTheory/Measure/Haar/Quotient.lean\", \"Mathlib/MeasureTheory/Measure/Haar/Quotient.lean\", \"Mathlib/MeasureTheory/Constructions/Polish/Basic.lean\", \"Mathlib/MeasureTheory/Constructions/Polish/Basic.lean\"]}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, Lie algebras, etale ring maps or measurable Borel structures do not supply this group-scheme notion or theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A positive root system defines a Borel subgroup in a split reductive group scheme",
+   "results": "Actual logged search: {\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.Base.IsPos.or_neg\", \"RootPairing.posRootForm\", \"RootPairing.IsRootSystem.mk\", \"RootPairing.posRootForm_posForm_nondegenerate\", \"RootPairing.RootSystem\", \"RootPairing.posRootForm_posForm_pos_of_ne_zero\", \"RootPairing.RootPositiveForm.form\", \"RootPairing.zero_le_posForm\"]}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, Lie algebras, etale ring maps or measurable Borel structures do not supply this group-scheme notion or theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Borel\", \"Scheme\"",
+   "results": "{\"t\": \"2026-10-24T09:23:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"Borel\\\", \\\"Scheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract root data, Lie algebras or measurable Borel spaces, not Borel subgroup schemes over rings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A regular cocharacter of a split reductive group scheme defines a Borel subgroup over an arbitrary commutative ring",
+   "results": "{\"t\": \"2026-10-24T09:23:08Z\", \"tool\": \"leanfinder\", \"query\": \"A regular cocharacter of a split reductive group scheme defines a Borel subgroup over an arbitrary commutative ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.cartanSubalgebra'\", \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra'\", \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra\", \"RootPairing.GeckConstruction.cartanSubalgebra_le_lieAlgebra\", \"LieSubalgebra.root\", \"LieAlgebra.IsKilling.instIsReducedSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystem\", \"LieModule.exists_forall_mem_corootSpace_smul_add_eq_zero\", \"LieAlgebra.corootSpace\"], \"digest\": \"47c32a7acf6070cd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract root data, Lie algebras or measurable Borel spaces, not Borel subgroup schemes over rings"
+  },
+  {
+   "tool": "grep",
+   "query": "Borel.*subgroup|subgroup.*Borel|reductive.*Borel",
+   "results": "{\"t\": \"2026-10-24T09:23:51Z\", \"tool\": \"grep\", \"query\": \"Borel.*subgroup|subgroup.*Borel|reductive.*Borel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/MeasureTheory/Measure/Haar/Quotient.lean\", \"Mathlib/MeasureTheory/Measure/Haar/Quotient.lean\", \"Mathlib/MeasureTheory/Measure/Haar/Quotient.lean\", \"Mathlib/MeasureTheory/Constructions/Polish/Basic.lean\", \"Mathlib/MeasureTheory/Constructions/Polish/Basic.lean\"], \"digest\": \"c9a1ccb54e0d606f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract root data, Lie algebras or measurable Borel spaces, not Borel subgroup schemes over rings"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A positive root system defines a unique Borel subgroup of a split reductive group scheme",
+   "results": "{\"t\": \"2026-10-24T09:23:52Z\", \"tool\": \"leansearch\", \"query\": \"A positive root system defines a unique Borel subgroup of a split reductive group scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.Base.IsPos.or_neg\", \"RootPairing.IsRootSystem.mk\", \"LieSubalgebra.root.congr_simp\", \"RootPairing.posRootForm\", \"RootPairing.posRootForm_posForm_nondegenerate\", \"RootPairing.RootSystem\", \"RootPairing.RootPositiveForm.zero_lt_posForm_apply_root\", \"RootPairing.zero_le_posForm\"], \"digest\": \"3f8f2218bfbe7bc9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract root data, Lie algebras or measurable Borel spaces, not Borel subgroup schemes over rings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Borel subgroups containing a split maximal torus correspond to positive systems of roots",
+   "results": "{\"t\": \"2026-10-24T09:24:01Z\", \"tool\": \"leanfinder\", \"query\": \"Borel subgroups containing a split maximal torus correspond to positive systems of roots\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.Base.IsPos\", \"RootPairing.Base.isPos_of_mem_support\", \"RootPairing.baseOf_root_eq_baseOf_coroot\", \"RootPairing.Base.exists_eq_sum_and_forall_sum_mem_of_isPos\", \"RootPairing.Base.IsPos.induction_on_reflect\", \"RootPairing.nonempty_base\", \"RootPairing.Base.IsPos.exists_mem_support_pos_pairingIn\", \"RootPairing.Base.IsPos.or_neg\"], \"digest\": \"ebe5e3093bd2b430\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract root data, Lie algebras or measurable Borel spaces, not Borel subgroup schemes over rings"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-etale-integral-models",
+  "date": "2026-10-24",
+  "group": "Q56"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Theorem 5.1.13, printed pp.143-144 (the positive-root subgroup and its product with the torus); Corollary 5.2.7(2), pp.155-156 (uniqueness); Remark 6.1.2, p.186 (constant positive systems and their Borel subgroups)",
+   "via": [
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-split-positive-root-borel",
+  "worker": "stage1",
+  "summary": "Q78: constructed the Borel dynamically from an explicit positive integral cocharacter; proved fibrewise Borel property, uniqueness by dynamic contraction inside a competing subgroup and the smooth fibre criterion, arbitrary base change, pinned-isomorphism compatibility and the empty-root case. All supporting results already exist; no new nodes, statement changes, Lean edits or compilation.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images proof (3), through the inherited chain: reductive etale integral models, positive-root Borel needed for pinned splitting. Current latest blueprint direct-image proof read; the root-group prerequisite is below the fixed unit route. Steps implement Conrad positive-root construction and uniqueness. No matching blueprint Borel/cocharacter statement was found.",
+  "tool_uses": [
+   {
+    "node": "lem-ag-smooth-relative-differentials-finite-locally-free",
+    "why": "Generic finite local freeness of the relative differentials of a smooth morphism, for arbitrary-ring tangent base change in step 2; the unit has no arbitrary-ring smooth cotangent statement."
+   },
+   {
+    "node": "lem-pc-finite-flat-affine-sections-projective",
+    "why": "Generic finite-locally-free affine sections are finite projective, used in step 2 before the existing torus-weight theorem; this does not replace any unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-ag-smooth-relative-differentials-finite-locally-free",
+  "lem-pc-finite-flat-affine-sections-projective"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q78-578e37424",
+  "group": "Q78",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q78-578e37424 (reviewer sub-agent of L); spot-checked: Read the full item (8 steps), the report, every cited statement and Milne iAG Prop 21.29-21.32 (field-level Borel P(λ) and uniqueness). Conrad's notes are WANTED and the proof is marked agent. The statement is unchanged and true: a constant Φ⁺ gives a unique Borel over any nonzero ring. Steps 1, 3-8 check against their cited statements. In step 5, Q is closed in affine G, hence affine and fp; λ lands in T⊆Q; Lie(Q) has weights 0 and Φ⁺; tangent generation on fibres gives P_a(Q)=Q, and the fibre-isomorphism criterion applies because the source is smooth (flat, lfp). In step 6, Q⊆B is a closed immersion, Borel maximality gives equality on fibres, and the criterion again applies. Step 7 uses uniqueness because the choice of λ is not canonical. Step 8 uses the empty-root clause. No cycle, no new nodes, no duplicate (the root-product and local-Borel nodes need Noetherian local bases). One C4 fault, fixed: step 2 took 'Ω finite locally free' from sbc-lem-smooth-relative-dimension-locally-constant. That node and its Lean attachment (isLocallyConstant_topologicalKrullDimAt_asFiber) state only that fibre dimension is locally constant. Step 2 now cites the existing lem-ag-smooth-relative-differentials-finite-locally-free, with the same replacement in proof_deps and the tool_uses entry, and its sentence is made precise. That node's closure reaches no trace-formula or Poincaré-duality node and makes no cycle. Batch-5 check: the dynamic-subgroups and fibre-open-criterion citations reach lem-trf-geometric-fibre-unramified-criterion (Stacks 02G8, a generic unramified fibre test), and the regular-cocharacter citation reaches lem-trf-smooth-fpqc-base-descent (Stacks 02VL, a Mathlib leaf). Both are generic scheme lemmas, not part of the trace formula or Poincaré duality proofs, so the citations are accepted. Accepted tool_uses: lem-ag-smooth-relative-differentials-finite-locally-free and lem-pc-finite-flat-affine-sections-projective.; 1 file(s) fixed by the reviewer"
+ }
+}

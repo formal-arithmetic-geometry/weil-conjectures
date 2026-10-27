@@ -1,0 +1,283 @@
+{
+ "id": "lem-sfb-finite-constant-component-quotient",
+ "kind": "statement",
+ "title": "Finite constant component quotient of an affine algebraic group",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $G$ be an affine $k$-group scheme [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism]. There exist a finite abstract group $P$ and a surjective $k$-group-scheme homomorphism $c:G\\to P_k$, where $P_k=\\coprod_{a\\in P}\\operatorname{Spec}k=\\operatorname{Spec}(k^P)$ is the affine finite-type constant group scheme, with multiplication, inverse and identity induced by those of $P$ [def-weil-affine-spectrum]. The nonempty subsets $|c|^{-1}(\\{a\\})$, for $a\\in P$, are exactly the connected components of $|G|$. Here a connected component is a maximal connected subset, and connectedness is as in [def-weil-connected-scheme]. In particular the fibre over $1\\in P$ is the component containing the identity of $G$. No smoothness, reducedness, commutativity or characteristic-zero assumption on $G$ is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 2(g), Proposition 2.37(b),(d), printed pp.51-52, with the construction preceding it and Remark 2.39(a). Over an algebraically closed field the finite etale component group is constant."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum",
+  "def-weil-connected-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Write $C$ for the identity component and $P$ for the set of connected components of $G$. By lem-sfb-group-neutral-component-translates, $P$ is finite, every component $D$ is clopen, and there is $g_D\\in G(k)$ whose left translation identifies the open subscheme $C$ with the open subscheme $G_D=D$. In particular $g_D=t_{g_D}(e)$ lies in $D$, so every component has a rational point. By lem-sfb-locally-algebraic-group-identity-component, $C$ is geometrically irreducible: the finite-type hypothesis implies locally finite type, as required there. Each $G_D$ is geometrically irreducible too, since the translation isomorphism base changes to an isomorphism over every field extension. These statements apply to the original open subschemes, including their nilpotents.",
+   "uses": [
+    "lem-sfb-group-neutral-component-translates",
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.34 and Section 2(g), construction before Proposition 2.37, printed pp.16 and 51; geometric irreducibility also Stacks Tag 0B7R (proposition-connected-component)."
+   }
+  },
+  {
+   "text": "For $D,E\\in P$, lem-sc-irreducible-product-over-field makes $G_D\\times_kG_E$ irreducible, hence connected. Its image under multiplication is a nonempty connected subset of $G$, so lies in a unique component; define that component to be $DE$. It contains $g_Dg_E$. Thus, for arbitrary rational points $x\\in D(k)$ and $y\\in E(k)$, the component of $xy$ is $DE$, independently of the chosen representatives. Inversion similarly sends $G_D$ into a unique component, denoted $D^{-1}$, containing $g_D^{-1}$. The map $q:G(k)\\to P$ taking a rational point to its component is surjective by step 1 and satisfies $q(xy)=q(x)q(y)$ and $q(x^{-1})=q(x)^{-1}$. The group laws on $G(k)$ therefore give the laws on $P$: choose representatives $x,y,z$ to obtain $(DE)F=q((xy)z)=q(x(yz))=D(EF)$; $q(e)D=q(ex)=D=q(xe)=Dq(e)$; and $DD^{-1}=q(xx^{-1})=q(e)=q(x^{-1}x)=D^{-1}D$. Consequently $P$ is a finite abstract group whose identity is $C$.",
+   "uses": [
+    "lem-sc-irreducible-product-over-field",
+    "def-sc-group-scheme",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 2(g), construction of the group on components before Proposition 2.37, printed p.51; connected products: Stacks Tag 038F (lemma-bijection-irreducible-components)."
+   }
+  },
+  {
+   "text": "Form $Q=\\coprod_{D\\in P}\\operatorname{Spec}k$ with inclusions $j_D$, using lem-weil-pbc-scheme-coproduct-family. Its summands are disjoint clopen singletons. The open-fibre-product lemma identifies $Q_D\\times_kQ_E$ with the open subset cut out by these two summands in $Q\\times_kQ$; these subsets cover because both projections land in some summand. Each is canonically $\\operatorname{Spec}k$, by the fibre-product universal property over $\\operatorname{Spec}k$. On it define multiplication to be the structural map followed by $j_{DE}$. Define inversion on $Q_D$ by $j_{D^{-1}}$, and the identity by $j_C$. Glue along these disjoint open covers. Each group identity holds on each summand of its source: the two maps have the same label by the group law of $P$, and the unique $k$-map to that copy of $\\operatorname{Spec}k$. Gluing uniqueness gives the scheme identities, including associativity on the triple open cover. This makes $Q$ the constant group scheme $P_k$. The finite-affine-coproduct-spectrum lemma identifies $Q$ with $\\operatorname{Spec}(k^P)$, with $j_D$ induced by evaluation at $D$. This is affine and of finite type: the finitely many coordinate idempotents generate $k^P$ over $k$, since $(a_D)_D=\\sum_Da_D\\delta_D$.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-open-fibre-product",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-sc-group-scheme",
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 2(g), constant component-group construction, printed p.51; Stacks Tags 01JB/01JC (lemma-glue, lemma-glue-schemes), 01JR (lemma-open-fibre-product), and 00ED (algebra-lemma-spec-product)."
+   }
+  },
+  {
+   "text": "On the clopen cover $G=\\bigcup_{D\\in P}G_D$, define $c|_{G_D}$ to be $G_D\\to\\operatorname{Spec}k\\xrightarrow{j_D}Q$. The overlaps are empty, so the scheme-morphism gluing lemma gives a $k$-morphism $c:G\\to Q$. We check $c\\circ m_G=m_Q\\circ(c\\times c)$ as morphisms, rather than just on rational points. The opens $G_D\\times_kG_E$ cover $G\\times_kG$ by the open-fibre-product lemma. By step 2 multiplication sends each of these opens into $G_{DE}$, so its restriction factors uniquely through that open subscheme by lem-weil-pbc-morphism-factors-through-open-subscheme. On this source, both displayed composites are the structural $k$-map to $\\operatorname{Spec}k$ followed by $j_{DE}$. Hence they are equal there, and gluing uniqueness proves equality globally. Similarly on $G_D$ both inverse composites equal its structural map followed by $j_{D^{-1}}$, while $c\\circ e_G=j_C=e_Q$. These are precisely the homomorphism identities for group schemes.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "def-sc-group-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 2(g), homomorphism preceding Proposition 2.37, printed p.51; Stacks Tags 01JR (lemma-open-fibre-product), 01HI (lemma-restrict-map-to-opens), and 01JB/01JC (gluing mapping property)."
+   }
+  },
+  {
+   "text": "By its definition on the disjoint open pieces, $|c|^{-1}(\\{D\\})=D$ for every $D\\in P$: points of $G_D$ map to the $D$-th summand, and no other summand has that point. Each $D$ is nonempty, so $|c|$ is surjective. Thus these fibres are exactly the connected components, and the fibre over the group identity $C\\in P$ is the component containing $e_G$. All constructions used the original component open subschemes; no reduction or smoothness assumption has entered.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 2.37(b),(d), printed pp.51-52, now immediate from the componentwise construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-group-neutral-component-translates",
+  "lem-sfb-locally-algebraic-group-identity-component",
+  "def-pc-geometrically-irreducible",
+  "lem-sc-irreducible-product-over-field",
+  "def-sc-group-scheme",
+  "def-weil-connected-scheme",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-open-fibre-product",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Explicit componentwise construction following Section 2(g), printed pp.51-52, with the component geometry of Proposition 1.34 and Stacks Tag 0B7R; the finite clopen gluing and scheme-level homomorphism checks are written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(component[Gg]roup|connected[Cc]omponent|pi₀)",
+   "results": "{\"t\": \"2026-10-23T22:35:08Z\", \"tool\": \"grep\", \"query\": \"(component[Gg]roup|connected[Cc]omponent|pi₀)\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract groups, Galois-category components, topological connected components, or geometric connectedness of a given scheme morphism. None constructs a finite constant quotient group scheme of an arbitrary possibly nonreduced affine algebraic group."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"connectedComponent\"",
+   "results": "{\"t\": \"2026-10-23T22:35:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"connectedComponent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.connectedComponentsHomeomorph\", \"AlgebraicGeometry.Scheme.Hom.connectedComponentsHomeomorph_apply\"], \"digest\": \"7c6684093f1fd260\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract groups, Galois-category components, topological connected components, or geometric connectedness of a given scheme morphism. None constructs a finite constant quotient group scheme of an arbitrary possibly nonreduced affine algebraic group."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every affine finite type group scheme over an algebraically closed field has a surjective homomorphism to a finite constant group scheme whose fibres are precisely its connected components",
+   "results": "{\"t\": \"2026-10-23T22:35:14Z\", \"tool\": \"leanfinder\", \"query\": \"Every affine finite type group scheme over an algebraically closed field has a surjective homomorphism to a finite constant group scheme whose fibres are precisely its connected components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.AutGalois.π_surjective\", \"AlgebraicGeometry.pointsPi_surjective_of_isAffine\", \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"CategoryTheory.PreGaloisCategory.has_decomp_connected_components'\", \"CategoryTheory.PreGaloisCategory.has_decomp_connected_components\", \"CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois_finite_family\", \"CategoryTheory.PreGaloisCategory.surjective_of_nonempty_fiber_of_isConnected\", \"CategoryTheory.PreGaloisCategory.toAut_surjective_of_isPretransitive\"], \"digest\": \"0328e17e04bd3688\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract groups, Galois-category components, topological connected components, or geometric connectedness of a given scheme morphism. None constructs a finite constant quotient group scheme of an arbitrary possibly nonreduced affine algebraic group."
+  },
+  {
+   "tool": "grep",
+   "query": "(component[Gg]roup|connected.*[Ee]tale|[Ee]tale.*connected)",
+   "results": "{\"t\": \"2026-10-23T22:35:43Z\", \"tool\": \"grep\", \"query\": \"(component[Gg]roup|connected.*[Ee]tale|[Ee]tale.*connected)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract groups, Galois-category components, topological connected components, or geometric connectedness of a given scheme morphism. None constructs a finite constant quotient group scheme of an arbitrary possibly nonreduced affine algebraic group."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The group of connected components of an affine algebraic group scheme is represented by a finite etale quotient even for nonreduced group schemes",
+   "results": "{\"t\": \"2026-10-23T22:35:43Z\", \"tool\": \"leansearch\", \"query\": \"The group of connected components of an affine algebraic group scheme is represented by a finite etale quotient even for nonreduced group schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ConnectedComponents.isQuotientMap_coe\", \"ConnectedComponents\", \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"ConnectedComponents.mk\", \"AlgebraicGeometry.isReduced_of_isAffine_isReduced\", \"AlgebraicGeometry.AffineScheme\", \"ConnectedComponents.totallyDisconnectedSpace\", \"AlgebraicGeometry.Scheme.Etale\"], \"digest\": \"f1643294e88a798b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract groups, Galois-category components, topological connected components, or geometric connectedness of a given scheme morphism. None constructs a finite constant quotient group scheme of an arbitrary possibly nonreduced affine algebraic group."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"connected\"",
+   "results": "{\"t\": \"2026-10-23T22:35:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"connected\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract groups, Galois-category components, topological connected components, or geometric connectedness of a given scheme morphism. None constructs a finite constant quotient group scheme of an arbitrary possibly nonreduced affine algebraic group."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type group scheme over an algebraically closed field has a finite constant component group and the kernel of the component projection is the identity component",
+   "results": "{\"t\": \"2026-10-23T22:35:44Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type group scheme over an algebraically closed field has a finite constant component group and the kernel of the component projection is the identity component\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Group.fintypeOfKerOfCodom\", \"CategoryTheory.PreGaloisCategory.instTotallyDisconnectedSpaceAutFunctorFintypeCat\", \"CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial\", \"CategoryTheory.PreGaloisCategory.instFiniteAutOfIsConnected\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"CategoryTheory.PreGaloisCategory.instFiniteHomOfIsConnected\", \"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected\"], \"digest\": \"9611165a8d0fc3e9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract groups, Galois-category components, topological connected components, or geometric connectedness of a given scheme morphism. None constructs a finite constant quotient group scheme of an arbitrary possibly nonreduced affine algebraic group."
+  },
+  {
+   "tool": "grep",
+   "query": "(componentGroup|componentQuotient|constantGroup|connectedComponents)",
+   "results": "{\"t\": \"2026-10-23T22:59:49Z\", \"tool\": \"grep\", \"query\": \"(componentGroup|componentQuotient|constantGroup|connectedComponents)\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned topological/Galois-category component objects, base change of group objects, profinite groups, and finite-coproduct spectrum facts do not construct a quotient group scheme with these component fibres. The sigmaSpec hits are the existing auxiliary Mathlib leaf used in step 3, not the item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"ConnectedComponents\"",
+   "results": "{\"t\": \"2026-10-23T22:59:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"GrpObj\\\", \\\"ConnectedComponents\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned topological/Galois-category component objects, base change of group objects, profinite groups, and finite-coproduct spectrum facts do not construct a quotient group scheme with these component fibres. The sigmaSpec hits are the existing auxiliary Mathlib leaf used in step 3, not the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine algebraic group over an algebraically closed field has a finite constant quotient group scheme whose fibres are its connected components",
+   "results": "{\"t\": \"2026-10-23T22:59:50Z\", \"tool\": \"leanfinder\", \"query\": \"An affine algebraic group over an algebraically closed field has a finite constant quotient group scheme whose fibres are its connected components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"instFiniteObjOpenNormalSubgroupStabilizerHomSurjectiveAuxFunctor\", \"CategoryTheory.PreGaloisCategory.has_decomp_connected_components\", \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"Subgroup.instFiniteQuotientSubtypeMemOpenSubgroupOfIsTopologicalGroupOfCompactSpace\", \"Subgroup.instFiniteQuotientOfContinuousMulOfCompactSpace\", \"CategoryTheory.PreGaloisCategory.instFiniteAutOfIsConnected\"], \"digest\": \"c26e5d435bce7bbc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned topological/Galois-category component objects, base change of group objects, profinite groups, and finite-coproduct spectrum facts do not construct a quotient group scheme with these component fibres. The sigmaSpec hits are the existing auxiliary Mathlib leaf used in step 3, not the item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The connected components of a finite type group scheme over an algebraically closed field form a finite constant quotient group scheme",
+   "results": "{\"t\": \"2026-10-23T23:01:36Z\", \"tool\": \"leansearch\", \"query\": \"The connected components of a finite type group scheme over an algebraically closed field form a finite constant quotient group scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ConnectedComponents\", \"CategoryTheory.PreGaloisCategory.has_decomp_connected_components'\", \"CategoryTheory.PreGaloisCategory.has_decomp_connected_components\", \"ConnectedComponents.mk\", \"ConnectedComponents.isQuotientMap_coe\", \"SimpleGraph.ConnectedComponent.instFinite\", \"ConnectedComponents.instTopologicalSpace\", \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\"], \"digest\": \"993c2f381dfe3d1e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned topological/Galois-category component objects, base change of group objects, profinite groups, and finite-coproduct spectrum facts do not construct a quotient group scheme with these component fibres. The sigmaSpec hits are the existing auxiliary Mathlib leaf used in step 3, not the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A group object in schemes induces a group object on the finite discrete scheme of its connected components",
+   "results": "{\"t\": \"2026-10-23T23:01:37Z\", \"tool\": \"leanfinder\", \"query\": \"A group object in schemes induces a group object on the finite discrete scheme of its connected components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.GrpObjAsOverPullback\", \"ProfiniteGrp.instHasForget₂FiniteGrp\", \"CategoryTheory.PreGaloisCategory.has_decomp_connected_components'\", \"CategoryTheory.PreGaloisCategory.has_decomp_connected_components\", \"ProfiniteGrp.toFiniteQuotientFunctor\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup\", \"CategoryTheory.PreGaloisCategory.instTotallyDisconnectedSpaceAutFunctorFintypeCat\", \"ProfiniteGrp.instGroupCarrierToTopTotallyDisconnectedSpacePtProfiniteLimitConeCompForget₂\"], \"digest\": \"bb8c7422650ea335\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned topological/Galois-category component objects, base change of group objects, profinite groups, and finite-coproduct spectrum facts do not construct a quotient group scheme with these component fibres. The sigmaSpec hits are the existing auxiliary Mathlib leaf used in step 3, not the item."
+  },
+  {
+   "tool": "grep",
+   "query": "instIsAffineOfFiniteOfDiscreteTopology|sigmaSpec|ι_sigmaSpec",
+   "results": "{\"t\": \"2026-10-23T23:01:58Z\", \"tool\": \"grep\", \"query\": \"instIsAffineOfFiniteOfDiscreteTopology|sigmaSpec|ι_sigmaSpec\", \"sub\": \"AlgebraicGeometry/Limits.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"607\", \"611\", \"612\", \"629\", \"641\"], \"digest\": \"cd525e658edba5a6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned topological/Galois-category component objects, base change of group objects, profinite groups, and finite-coproduct spectrum facts do not construct a quotient group scheme with these component fibres. The sigmaSpec hits are the existing auxiliary Mathlib leaf used in step 3, not the item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-connected-group-extension",
+  "date": "2026-10-24",
+  "group": "Q91"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: The scheme-theoretic centre of a reductive group is of multiplicative type. Supporting input for Corollary 17.62(a): Proposition 17.61(a), printed p.372; centralizer functor as in Proposition 1.92, printed pp.33--34. Only the self-centralizer assertion (a) is used, not the centre containment assertion (b). Supporting input in the proof of Proposition 17.61(a): Corollary 13.10, printed p.257 (smoothness); Theorem 17.38, printed p.363 (connectedness), applied after extension to an algebraic closure; Proposition 1.92 and following paragraph, printed pp.33--34 (centralizer functor). Supporting input for the centralizer proof: Theorem 16.40, printed pp.338–339, connectedness assertion; the proof is induction using Lemma 16.39 and the quotient sequence. The extra unipotent-factor assertion of the theorem is not needed. Supporting input for Milne 16.40: Lemma 16.39, printed p.338. The rational-point decomposition is the rational-point consequence of its surjective morphism $N\times C_N(s)\to N$ over an algebraically closed field. Supporting input: Proposition 5.59(a), printed p.114, exact sequence of algebraic groups, with Proposition 5.45 and Section 5(j) for faithful-flat exactness. In Lemma 16.39, printed p.338, it is applied to a connected kernel which need not be reduced. Supporting construction for Milne Proposition 5.59(a): Proposition 2.37(b),(d), printed pp.51-52, the finite component-group quotient of an arbitrary algebraic group, specialized to an algebraically closed field.",
+   "via": [
+    "lem-sfb-connected-group-extension",
+    "lem-sfb-semisimple-commutative-unipotent-commutator",
+    "lem-sfb-solvable-semisimple-centralizer-connected",
+    "lem-sfb-torus-centralizer-smooth-connected",
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-reductive-centre-multiplicative-type",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-constant-component-quotient",
+  "worker": "stage1",
+  "summary": "Constructed the finite component group and its constant scheme explicitly from existing component-translation and geometric-irreducibility nodes. Proved the homomorphism identities on component-product open covers, retaining all nonreduced scheme structures. No new nodes are needed. Preserved the statement and inherited provenance/searches; added actual Q159 searches.",
+  "blueprint": "The inherited supporting component-quotient input below det-thm-sf-ctf-stability-direct-images, proof (3), in the current sk-thm-sf-ctf-stability direct-image branch. Steps 1-2 supply the component group, steps 3-4 construct the constant group scheme and quotient homomorphism, step 5 identifies fibres. The current latest blueprint proof was read; its direct-image clause stays unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-irreducible-product-over-field",
+    "why": "Generic product irreducibility applied to the geometrically irreducible component schemes. This geometric tool does not replace any unit step; the unit has no separate product irreducibility statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-irreducible-product-over-field"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q159-ed5512982",
+  "group": "Q159",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q159-ed5512982 (reviewer sub-agent of L); spot-checked: I read Milne iAG2017 §2(g) and Prop 2.37(b),(d), printed pp.51-52; over an algebraically closed k, π0(G) is constant. I also read Stacks 0B7R (G° geometrically irreducible, no reducedness assumed). This is a first split with no new nodes, and the inherited statement and blueprint are unchanged. Step 1: lem-sfb-group-neutral-component-translates gives clopen, finitely many components, each the translate of C by a rational point g_D; lem-sfb-locally-algebraic-group-identity-component gives C geometrically irreducible, which passes to every D through the translation isomorphism. Step 2: lem-sc-irreducible-product-over-field makes each G_D×G_E irreducible, hence nonempty and connected, so its image under multiplication lies in one component DE; P is a group because the surjection G(k)→P is multiplicative. Step 3: Q=∐Spec k gets multiplication, inverse and identity by gluing over the disjoint open product pieces (open-fibre-product), each ≅ Spec k, where any two k-maps agree; Q ≅ Spec(k^P) by the finite-affine-coproduct-spectrum leaf, of finite type. The existing constant-group-scheme-multiplication node covers abelian E only, so writing the gluing out duplicates nothing. Step 4: c is glued from the pieces G_D; on G_D×G_E, multiplication factors through the open G_{DE} (morphism-factors-through-open-subscheme), so both composites are j_{DE}∘str; these are scheme identities, valid with nilpotents. Step 5 (elementary): the fibres are the components. Edge cases checked: trivial G, α_p, μ_p, a constant group, α_p×(Z/n). No cycle; the only citer, lem-sfb-connected-group-extension, uses exactly what the item states. The declared tool use of lem-sc-irreducible-product-over-field is generic and accepted. No SGA source, and no duplicate in the DAG (the def-wf/lem-wf component nodes concern only classical subgroups of GL(V)). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteConstantComponentQuotient",
+  "declaration": "AlgebraicGeometry.GrpObj.exists_finiteConstantComponentQuotient",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteConstantComponentQuotient.lean",
+  "statement": "theorem GrpObj.exists_finiteConstantComponentQuotient (k : Type u) [Field k] [IsAlgClosed k] (G : Over (Spec (.of k))) [GrpObj G] [IsAffine G.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] : ∃ P : GrpCat.{u}, Finite P ∧ ∃ (Q : Grp (Over (Spec (.of k)))) (j : P → (𝟙_ (Over (Spec (.of k))) ⟶ Q.X)), Nonempty (IsColimit (Cofan.mk Q.X j)) ∧ j 1 = 1 ∧ (∀ a b : P, j (a * b) = j a * j b) ∧ (∀ a : P, j a⁻¹ = (j a)⁻¹) ∧ (∃ e : Q.X ≅ Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k (P → k)))), ∀ a : P, (j a).left ≫ e.hom.left = Spec.map (CommRingCat.ofHom (Pi.evalRingHom (fun _ : P ↦ k) a))) ∧ IsAffine Q.X.left ∧ LocallyOfFiniteType Q.X.hom ∧ QuasiCompact Q.X.hom ∧ ∃ c : G ⟶ Q.X, IsMonHom c ∧ Surjective c.left ∧ (∀ a : P, (c.left ⁻¹' Set.range (j a).left).Nonempty ∧ ∀ x : G.left, x ∈ c.left ⁻¹' Set.range (j a).left → c.left ⁻¹' Set.range (j a).left = connectedComponent x) ∧ c.left ⁻¹' Set.range (j 1).left = connectedComponent (GrpObj.onePoint G)",
+  "branch": "sheaf-dag",
+  "by": "Q29",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-85846f513",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Read node, 6 stmt_dep records, module, report (Worker report + Second reading by Q29 present), GrpObj.onePoint, live node (unchanged apart from the new lean record; first delivery, not a rebind). Every clause matches: k alg. closed; G affine GrpObj over Spec k with LocallyOfFiniteType+QuasiCompact; finite P : GrpCat.{u} (noncommutative allowed); Q coproduct cofan of P copies of 𝟙_=Spec k, with j 1=1, j(ab)=j a*j b, j a⁻¹=(j a)⁻¹ fixing η/μ/ι on every summand (coproducts in Scheme are universal, so Q×_kQ=∐ Spec k over P×P); e : Q ≅ Spec(k^P) over k with j a ↦ Spec(eval_a); affine finite type; c IsMonHom, Surjective; each fibre nonempty and = connectedComponent of each of its points, a↦fibre bijective by disjoint covering summands; fibre over 1 = component of onePoint. Edge cases: connected G, μ_p/α_p, nonabelian constant, char | |P|. No new defs, sorry only, docstrings with source/blueprint/5 proof steps, lean.statement verbatim, proof imports exist in live. Not recompiled per instructions; worker reports clean compile. No findings."
+ }
+}

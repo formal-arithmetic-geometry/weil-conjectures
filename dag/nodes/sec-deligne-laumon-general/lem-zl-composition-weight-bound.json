@@ -133,19 +133,99 @@
   "AlgebraicGeometry.HasDirectImageWeightBound.comp"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.HasDirectImageWeightBound.comp"
+   ]
+  },
+  "slopmaster2": {
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.HasDirectImageWeightBound.comp",
+     "module": "WeilConjectures.DeligneLaumon.Reduction.FormalSteps",
+     "lines": [
+      225,
+      237
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.isMixedOfWeightsAtMost_higherLowerShriek_comp",
+     "module": "WeilConjectures.DeligneLaumon.Reduction.FormalSteps",
+     "lines": [
+      205,
+      223
+     ],
+     "kind": "theorem",
+     "sorry": false,
+     "partial": "`lem-zl-composition-weight-bound`, for a single"
+    },
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.of_filtration",
+     "module": "WeilConjectures.DeligneLaumon.Reduction.Weights",
+     "lines": [
+      290,
+      306
+     ],
+     "kind": "theorem",
+     "sorry": false,
+     "partial": "`lem-zl-composition-weight-bound`, the"
+    }
+   ],
+   "missing": [],
+   "open": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.finiteLowerStar_singleFunctor_of_isAffine",
+     "module": "WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar",
+     "lines": [
+      405,
+      415
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sf-adic-affine-direct-image-finiteness"
+     ],
+     "below": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_comp_iso",
+     "module": "WeilConjectures.WeilSheaf.LowerShriekFunctoriality",
+     "lines": [
+      184,
+      200
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sf-native-weil-shriek-composition",
+      "prop-functor-package"
+     ],
+     "below": false
+    }
+   ]
+  }
+ },
  "chapter": "sec-deligne-laumon-general",
  "unit": "sk-l-dl-general-composition",
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $h:X_0\\to Z_0$ and $g:Z_0\\to Y_0$ be separated finite-type\nmorphisms of $k_0$-schemes, where $Z_0$ and $Y_0$ are quasi-separated\n$k_0$-schemes of finite type. Suppose the\ndirect-image weight assertion holds for $h$ and for $g$: for every\nreal $v$, every $\\iota$-mixed Weil sheaf of weights at most $v$ on the\nsource has its $i$th higher direct image with compact support\n$\\iota$-mixed of weights at most $v+i$, for every $i$. Then the same\nassertion holds for $gh$: if $\\mathcal F$ is an $\\iota$-mixed Weil\nsheaf on $X_0$ of weights at most $w$, then $R^n(gh)_!\\mathcal F$ is\n$\\iota$-mixed of weights at most $w+n$ for every $n$.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $h:X_0\\to Z_0$ and $g:Z_0\\to Y_0$ be separated finite-type\nmorphisms of $k_0$-schemes, where $Z_0$ and $Y_0$ are quasi-separated\n$k_0$-schemes of finite type. Suppose the\ndirect-image weight assertion holds for $h$ and for $g$: for every\nreal $v$, every $\\iota$-mixed constructible $\\Qlb$-Weil sheaf\n([sk-lem-coefficient-heart], [sk-def-sf-weil-complexes]) of weights at most $v$ on the\nsource has its $i$th higher direct image with compact support\n$\\iota$-mixed of weights at most $v+i$, for every $i$. Then the same\nassertion holds for $gh$: if $\\mathcal F$ is an $\\iota$-mixed Weil\nsheaf on $X_0$ of weights at most $w$, then $R^n(gh)_!\\mathcal F$ is\n$\\iota$-mixed of weights at most $w+n$ for every $n$.",
   "proof": [
    {
-    "text": "By [lem-zl-shriek-composition] there is a Frobenius-compatible\nisomorphism $R(gh)_!\\mathcal F\\simeq Rg_!(Rh_!\\mathcal F)$. Apply the\nhypercohomology spectral sequence of the truncation construction\n[def-weil-pbc-hypercohomology-filtrations] to the exact functor $Rg_!$\nand the bounded complex $K=Rh_!\\mathcal F$, whose cohomology sheaves\nare $\\mathcal H^b(K)=R^bh_!\\mathcal F$. This is the compact-support\nLeray spectral sequence\n\n$$\nE_2^{a,b}=R^ag_!\\bigl(R^bh_!\\mathcal F\\bigr)\n\\ \\Longrightarrow\\ R^{a+b}(gh)_!\\mathcal F,\n$$\n\na spectral sequence of Weil sheaves (all maps are Frobenius-compatible,\n[def-weil-pbc-qbar-category]), with only finitely many nonzero terms\nand a finite abutment filtration\n([lemma-weil-pbc-hypercohomology-convergence]).",
+    "text": "By [lem-zl-shriek-composition] there is a Frobenius-compatible\nisomorphism $R(gh)_!\\mathcal F\\simeq Rg_!(Rh_!\\mathcal F)$. Apply the\nhypercohomology spectral sequence of the truncation construction\n[thm-sp-truncation-e2] to the exact functor $Rg_!$\nand the bounded complex $K=Rh_!\\mathcal F$, whose cohomology sheaves\nare $\\mathcal H^b(K)=R^bh_!\\mathcal F$. This is the compact-support\nLeray spectral sequence\n\n$$\nE_2^{a,b}=R^ag_!\\bigl(R^bh_!\\mathcal F\\bigr)\n\\ \\Longrightarrow\\ R^{a+b}(gh)_!\\mathcal F,\n$$\n\na spectral sequence in $\\Cons(Y,\\Qlb)$ ([sk-lem-coefficient-heart]) whose\nterms carry Weil structures and whose differentials are Frobenius-compatible:\nthe Weil structure of $\\mathcal F$ induces Weil structures on\n$Rh_!\\mathcal F$ and $Rg_!Rh_!\\mathcal F$ through the base change\nisomorphisms for the Frobenius ([sk-def-sf-weil-complexes]), and the\ntruncation triangles of $K$ are functorial, hence Frobenius-compatible. It has only finitely many nonzero terms, since\n$Rh_!$ preserves bounded constructible complexes\n([sk-thm-sf-ctf-stability]), and a finite abutment filtration\n([lemma-weil-pbc-hypercohomology-convergence]).",
     "uses": [
      "lem-zl-shriek-composition",
-     "def-weil-pbc-hypercohomology-filtrations",
-     "def-weil-pbc-qbar-category",
+     "thm-sp-truncation-e2",
+     "sk-lem-coefficient-heart",
+     "sk-def-sf-weil-complexes",
      "lemma-weil-pbc-hypercohomology-convergence"
     ],
     "elementary": false
@@ -159,7 +239,7 @@
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  },
  "split_report": {
   "date": "2026-10-17",

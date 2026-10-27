@@ -1,0 +1,124 @@
+{
+ "id": "lem-sfb-quotient-scalar-derived-tensor-identification",
+ "kind": "statement",
+ "title": "The derived scalar oplax tensorator is canonical",
+ "statement": "The tensorator of scalarDerivedOplax equals the canonical normalized scalar tensorator on every pair.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YY, 0G7E, 07A4, 07A6; sites-modules.tex Tags 03EK and 03EL. Extracted from lem-sfb-quotient-section-tensor-normalization."
+ },
+ "stmt_deps": [
+  "def-sfb-quotient-section-tensor-data",
+  "def-sfb-quotient-scalar-derived-oplax",
+  "lem-sfb-quotient-scalar-tensor-canonical"
+ ],
+ "proof": [
+  {
+   "text": "Use the generic left-derived oplax structure of the ordinary strong monoidal scalar extension. Unfold its tensor and unit fields. The cochain and homotopy unit formulas identify the explicit localization-unit composite; the generic K-flat unit theorem proves its invertibility. Splitting these definitional identifications keeps kernel checking within the per-file limit.",
+   "uses": [
+    "def-sfb-quotient-scalar-derived-oplax",
+    "lem-sfb-quotient-scalar-tensor-canonical"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-quotient-scalar-derived-oplax",
+  "lem-sfb-quotient-scalar-tensor-canonical"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "The parent proof steps, specialized to the actual condensed coefficient map and fixed internal/section comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived extension of scalars is monoidal and its canonical tensor comparison commutes with pullback and computation counits",
+   "results": "Ordinary module extension, its counit and pseudofunctor composition; monoidal adjunction counit. No exact match for the specified unbounded internal/section comparisons.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing project generic derived-monoidal API and section comparison interfaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.leftDerivedTensorComparison",
+   "results": "Unknown identifier: a project declaration outside the Mathlib search environment.",
+   "date": "2026-10-27",
+   "verdict": "Read the existing project declaration directly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars is a strong monoidal functor, computed on K-flat complexes by the tensor balancing map",
+   "results": "Tor, exact mapDerivedCategory, and ordinary tensor constructions; no direct normalized section comparison.",
+   "date": "2026-10-27",
+   "verdict": "Generic derived comparison found locally in WeilConjectures."
+  },
+  {
+   "tool": "grep",
+   "query": "TensorNormalized|ScalarSectionNormalized|SectionPullNormalized",
+   "results": "Mathlib search has no matches. Local search finds the fixed project definitions, the restricted coefficient normalization and the downstream private canonicalScalarTensorIso computations.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the generic computations without importing the circular downstream module."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QuotientSectionTensorNormalization",
+  "date": "2026-10-27",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-quotient-section-tensor-normalization",
+   "place": "Separated construction and normalization steps",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QuotientScalarDerivedTensorIdentification",
+  "file": "lean/Sheaf/Paper/QuotientScalarDerivedTensorIdentification.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientSectionTensor.scalarDerivedOplax_δ",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.scalarDerivedOplax_δ"
+  ],
+  "statement": "theorem scalarDerivedOplax_δ (T : Scheme.{u})\n    (M N : DerivedCategory (Modules Λ T)) :\n    letI := scalarDerivedOplax a T\n    Functor.OplaxMonoidal.δ (D a T) M N = (canonicalTensor a T).hom.app (M, N)",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-75592",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261027T135442-L-3709173",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-75592",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261027T135442-L-3709173",
+  "kind": "interface",
+  "note": "independent cc review: Data split diffed byte-for-byte vs clone item (only blueprint tags differ); item proof vs ComparisonSpec; 3 holes vs plan steps 1/2-5/8; nodes vs Lean; 3 direct importers + all 11 delivered modules compiled in /tmp/t3rev (all OK); #print axioms clean except sorryAx via the 3 holes"
+ }
+}

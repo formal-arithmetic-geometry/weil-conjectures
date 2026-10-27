@@ -16,6 +16,12 @@ public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 import all Sheaf.AlgebraicGeometry.ProEtaleModuleInverseImageCanonicalUnit
 import all Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
+import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
+import Sheaf.Paper.WeilCompletedTensorReflector
+import Sheaf.Paper.WeilCompletedCechComparison
+import Sheaf.Paper.CompletedPullback
+import Sheaf.Paper.CompletedDirectImageLimits
+import Sheaf.Paper.CompletedKoszulQuotientComparison
 import WeilConjectures.CategoryTheory.RightKanExtensionCoherentShift
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
@@ -545,6 +551,227 @@ instance pbcActualPushShift : (pbcActualDerivedPush g d).CommShift ℤ :=
   (pbcActualPushShift_exists g d).exists.choose
 
 
+-- The two coefficient presentations have equivalent module and derived categories.
+-- These transport arguments are the existing ones used by WeilTensorProduct.
+section CompletionPresentation
+variable (X)
+variable (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal)
+
+set_option backward.isDefEq.respectTransparency false in
+private def wfRestrictId (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :
+    pbcRestrict (𝟙 R) ≅ 𝟭 (pbcModules X R) :=
+  NatIso.ofComponents (fun M ↦
+    (SheafOfModules.fullyFaithfulForget _).preimageIso
+      (PresheafOfModules.isoMk
+        (fun U ↦ (ModuleCat.restrictScalarsId (R.obj.obj U)).app (M.val.obj U))
+        (fun {U V} f ↦ by ext x; rfl))) (fun _ ↦ by ext U x; rfl)
+
+set_option backward.isDefEq.respectTransparency false in
+private def wfPresentationBackEquiv :
+    adicDatumModules X (intrinsicPresentationDatum d) ≌ pbcModules X (pbcAdicCompletion X d) :=
+  CategoryTheory.Equivalence.mk (intrinsicPresentationModulesBack X d)
+    (intrinsicPresentationModules X d)
+    ((pbcRestrictComp (pbcCompletedComparison X d).hom (pbcCompletedComparison X d).inv
+        (𝟙 _) (pbcCompletedComparison X d).hom_inv_id ≪≫
+      wfRestrictId X _).symm)
+    (intrinsicPresentationRoundTrip X d).symm
+
+attribute [local irreducible] pbcCompletedComparison intrinsicPresentationRoundTrip wfRestrictId
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem wfComplete_of_presentation
+    (M : PbcCompletedDerived X d) (s : ℕ) (b : Fin s → A)
+    (hb : Ideal.span (Set.range b) = d.ideal)
+    (C : CochainComplex (adicDatumModules X (intrinsicPresentationDatum d)) ℤ)
+    (eC : (completedConstantQ _).obj C ≅
+      (pbcDerivedExtend (pbcCompletedComparison X d).inv).obj M)
+    (hC : IsCompletedIntrinsicallyDerivedComplete X (intrinsicPresentationDatum d)
+      s b hb C eC) :
+    WfIsComplete X d r a ha M := by
+  let G := intrinsicPresentationModules X d
+  let B := intrinsicPresentationModulesBack X d
+  have : B.IsEquivalence := (wfPresentationBackEquiv X d).isEquivalence_functor
+  let BD := B.mapDerivedCategory
+  let GD := G.mapDerivedCategory
+  have : BD.IsEquivalence := inferInstance
+  have : (pbcDerivedRestrict (pbcCompletedComparison X d).inv).IsEquivalence :=
+    inferInstanceAs BD.IsEquivalence
+  let adj := pbcDerivedScalarAdjunction (pbcCompletedComparison X d).inv
+  have : IsIso adj.unit := by dsimp [adj]; infer_instance
+  let D := (B.mapHomologicalComplex (.up ℤ)).obj C
+  let eD : DerivedCategory.Q.obj D ≅ M :=
+    (B.mapDerivedCategoryFactors.app C).symm ≪≫ BD.mapIso eC ≪≫
+      (asIso (adj.unit.app M)).symm
+  let C' := (G.mapHomologicalComplex (.up ℤ)).obj D
+  let j := (wfPresentationBackEquiv X d).unitIso
+  let k : DerivedCategory.Q.obj C' ≅ DerivedCategory.Q.obj C :=
+    (DerivedCategory.Q.mapIso ((NatIso.mapHomologicalComplex j (.up ℤ)).app C)).symm
+  obtain ⟨F, η, hF⟩ := completedIntrinsicCompletion_descends X
+    (intrinsicPresentationDatum d) s b
+  obtain ⟨iC, hiC⟩ := hF C
+  obtain ⟨iC', hiC'⟩ := hF C'
+  have hu : IsIso ((completedConstantQ _).map
+      (completedKoszulUnitComplex X (intrinsicPresentationDatum d) s b C)) := by
+    have : IsIso (eC.inv ≫ (completedConstantQ _).map
+        (completedKoszulUnitComplex X (intrinsicPresentationDatum d) s b C)) := hC
+    exact IsIso.of_isIso_comp_left eC.inv _
+  have hη : IsIso (η.app (DerivedCategory.Q.obj C)) := by
+    have : IsIso (η.app (DerivedCategory.Q.obj C) ≫ iC.hom) := by
+      rw [hiC]
+      exact hu
+    exact IsIso.of_isIso_comp_right _ iC.hom
+  have hη' : IsIso (η.app (DerivedCategory.Q.obj C')) := by
+    have hn := η.naturality k.hom
+    dsimp only [Functor.id_map] at hn
+    have : IsIso (η.app (DerivedCategory.Q.obj C') ≫ F.map k.hom) := by
+      rw [← hn]
+      infer_instance
+    exact IsIso.of_isIso_comp_right _ (F.map k.hom)
+  have hu' : IsIso ((completedConstantQ _).map
+      (completedKoszulUnitComplex X (intrinsicPresentationDatum d) s b C')) := by
+    rw [← hiC']
+    infer_instance
+  have hq : QuasiIso (completedKoszulUnitComplex X (intrinsicPresentationDatum d) s b C') :=
+    (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).1 hu'
+  let t : D ≅ (B.mapHomologicalComplex (.up ℤ)).obj C' :=
+    (NatIso.mapHomologicalComplex (intrinsicPresentationRoundTrip X d) (.up ℤ)).app D
+  have hcomp : intrinsicCompletionComplexUnit X d s b D =
+      t.hom ≫ (B.mapHomologicalComplex (.up ℤ)).map
+        (completedKoszulUnitComplex X (intrinsicPresentationDatum d) s b C') := by
+    unfold intrinsicCompletionComplexUnit intrinsicCompletionUnitComponent
+    ext q
+    rfl
+  have hDC : QuasiIso (intrinsicCompletionComplexUnit X d s b D) := by
+    rw [hcomp]
+    infer_instance
+  have hQu : IsIso (DerivedCategory.Q.map (intrinsicCompletionComplexUnit X d s b D)) :=
+    (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).2 hDC
+  have hD : IsDerivedCompleteIntrinsic X d s b hb M D eD := by
+    unfold IsDerivedCompleteIntrinsic intrinsicCompletionUnit intrinsicCompletion
+    exact IsIso.comp_isIso' eD.isIso_inv hQu
+  have : IsIso (intrinsicCompletionUnit X d s b hb M D eD) := hD
+  obtain ⟨c, hc⟩ := completedKoszulQuotientComparison X d s b hb M D eD
+  have hTower : d.TowerComplete X M := by
+    change IsIso (d.completionUnit X M)
+    change intrinsicCompletionUnit X d s b hb M D eD ≫ c.hom = d.completionUnit X M at hc
+    rw [← hc]
+    exact inferInstanceAs (IsIso (intrinsicCompletionUnit X d s b hb M D eD ≫ c.hom))
+  exact (d.towerComplete_iff_intrinsic X M).1 hTower r a ha _ _
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem wfPresentation_of_complete (M : PbcCompletedDerived X d)
+    (hM : WfIsComplete X d r a ha M) : PbcIsIntrinsicallyComplete X d M := by
+  let B := intrinsicPresentationModulesBack X d
+  let G := intrinsicPresentationModules X d
+  let E := wfPresentationBackEquiv X d
+  have : B.IsEquivalence := E.isEquivalence_functor
+  have : G.IsEquivalence := E.isEquivalence_inverse
+  let C := wfCompletionRepresentative X d M
+  let C' := (G.mapHomologicalComplex (.up ℤ)).obj C
+  let real := DerivedCategory.Q.objObjPreimageIso M
+  let adj := pbcDerivedScalarAdjunction (pbcCompletedComparison X d).inv
+  have : E.symm.functor.Additive := inferInstanceAs G.Additive
+  have : E.symm.inverse.Additive := inferInstanceAs B.Additive
+  let ej := E.symm.mapDerivedCategory.toAdjunction
+  let j : G.mapDerivedCategory ≅ pbcDerivedExtend (pbcCompletedComparison X d).inv :=
+    Adjunction.leftAdjointUniq ej adj
+  let eC : DerivedCategory.Q.obj C' ≅
+      (pbcDerivedExtend (pbcCompletedComparison X d).inv).obj M :=
+    (G.mapDerivedCategoryFactors.app C).symm ≪≫ G.mapDerivedCategory.mapIso real ≪≫ j.app M
+  have hu : IsIso (DerivedCategory.Q.map (intrinsicCompletionComplexUnit X d r a C)) := by
+    have : IsIso (real.inv ≫ DerivedCategory.Q.map
+      (intrinsicCompletionComplexUnit X d r a C)) := by
+      unfold WfIsComplete IsDerivedCompleteIntrinsic intrinsicCompletionUnit
+        intrinsicCompletion at hM
+      exact hM
+    exact IsIso.of_isIso_comp_left real.inv _
+  have hq : QuasiIso (intrinsicCompletionComplexUnit X d r a C) :=
+    (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).1 hu
+  let t : C ≅ (B.mapHomologicalComplex (.up ℤ)).obj C' :=
+    (NatIso.mapHomologicalComplex (intrinsicPresentationRoundTrip X d) (.up ℤ)).app C
+  have hcomp : intrinsicCompletionComplexUnit X d r a C =
+      t.hom ≫ (B.mapHomologicalComplex (.up ℤ)).map
+        (completedKoszulUnitComplex X (intrinsicPresentationDatum d) r a C') := by
+    unfold intrinsicCompletionComplexUnit intrinsicCompletionUnitComponent
+    ext q
+    rfl
+  have hBu : QuasiIso ((B.mapHomologicalComplex (.up ℤ)).map
+      (completedKoszulUnitComplex X (intrinsicPresentationDatum d) r a C')) := by
+    have : QuasiIso (t.hom ≫ (B.mapHomologicalComplex (.up ℤ)).map
+        (completedKoszulUnitComplex X (intrinsicPresentationDatum d) r a C')) := by
+      rw [← hcomp]
+      exact hq
+    exact quasiIso_of_comp_left t.hom _
+  have hCu : QuasiIso (completedKoszulUnitComplex X (intrinsicPresentationDatum d) r a C') :=
+    (HomologicalComplex.quasiIso_map_iff_of_preservesHomology _ B).1 hBu
+  refine ⟨r, a, ha, C', eC, ?_⟩
+  change IsIso (eC.inv ≫ (completedConstantQ _).map
+    (completedKoszulUnitComplex X (intrinsicPresentationDatum d) r a C'))
+  infer_instance
+
+attribute [local irreducible] intrinsicCompletionComplex
+
+private theorem wfComplete_iff_presentation (M : PbcCompletedDerived X d) :
+    WfIsComplete X d r a ha M ↔ PbcIsIntrinsicallyComplete X d M := by
+  constructor
+  · exact wfPresentation_of_complete X d r a ha M
+  · rintro ⟨s, b, hb, C, eC, hC⟩
+    exact wfComplete_of_presentation X d r a ha M s b hb C eC hC
+
+
+
+private theorem actualComplete_iso {M N : PbcCompletedDerived X d} (k : M ≅ N) :
+    PbcIsIntrinsicallyComplete X d M ↔ PbcIsIntrinsicallyComplete X d N := by
+  have h {M N : PbcCompletedDerived X d} (k : M ≅ N)
+      (hM : PbcIsIntrinsicallyComplete X d M) : PbcIsIntrinsicallyComplete X d N := by
+    obtain ⟨s, b, hb, C, eC, hC⟩ := hM
+    refine ⟨s, b, hb, C,
+      eC ≪≫ (pbcDerivedExtend (pbcCompletedComparison X d).inv).mapIso k, ?_⟩
+    change IsIso (eC.inv ≫ _) at hC
+    have hu := (isIso_comp_left_iff eC.inv _).mp hC
+    change IsIso ((_ ≫ eC.inv) ≫ _)
+    infer_instance
+  exact ⟨h k, h k.symm⟩
+
+-- The Cech functor has the same essential image as the Koszul reflection.
+-- Its shift isomorphism therefore supplies shift closure without expanding the fiber.
+private theorem actualComplete_shift (M : PbcCompletedDerived X d)
+    (hM : PbcIsIntrinsicallyComplete X d M) (n : ℤ) :
+    PbcIsIntrinsicallyComplete X d (M⟦n⟧) := by
+  classical
+  obtain ⟨r, a, ha⟩ := Submodule.fg_iff_exists_fin_generating_family.mp d.finitelyGenerated
+  let O := completedCechRing X d
+  let E := completedCechDerivedEquiv X d
+  let F := ringedCechCompletionFunctor O
+    (ringedExtendedCech O r (fun i ↦ completedCechScalar X d (a i))).1
+  have hE : E.functor.CommShift ℤ := by
+    change ((completedCechModulesEquiv X d).functor.mapDerivedCategory).CommShift ℤ
+    infer_instance
+  obtain ⟨sF, _⟩ := (ringedInternalHom_exact (completedCechTopology X) O).1
+    (DerivedCategory.Q.obj
+      (ringedExtendedCech O r (fun i ↦ completedCechScalar X d (a i))).1)
+  let : F.CommShift ℤ := sF
+  have e (N : PbcCompletedDerived X d) :
+      Nonempty (E.functor.obj (wfCompletionObj X d r a ha N) ≅ F.obj (E.functor.obj N)) := by
+    let C := wfCompletionRepresentative X d N
+    let real := DerivedCategory.Q.objObjPreimageIso N
+    obtain ⟨e, _⟩ := completed_fiber_cech_comparison X d r a C
+    exact ⟨e ≪≫ F.mapIso (E.functor.mapIso real)⟩
+  have : IsIso (wfCompletionUnit X d r a ha M) :=
+    (wfComplete_iff_presentation X d r a ha M).mpr hM
+  let j : E.functor.obj M ≅ F.obj (E.functor.obj M) :=
+    E.functor.mapIso (asIso (wfCompletionUnit X d r a ha M)) ≪≫ (e M).some
+  let k : E.functor.obj (M⟦n⟧) ≅
+      E.functor.obj (wfCompletionObj X d r a ha (M⟦n⟧)) :=
+    (E.functor.commShiftIso n).app M ≪≫ (shiftFunctor _ n).mapIso j ≪≫
+      ((F.commShiftIso n).app (E.functor.obj M)).symm ≪≫
+      F.mapIso ((E.functor.commShiftIso n).app M).symm ≪≫ (e (M⟦n⟧)).some.symm
+  apply (actualComplete_iso X d (E.functor.preimageIso k)).mpr
+  exact (wfComplete_iff_presentation X d r a ha _).mp
+    ((wfCompletionReflector X d r a ha).1 _)
+
+end CompletionPresentation
+
 variable (T : Scheme.{u})
 
 /-- The intrinsic complete subcategory is reflective, with the Koszul completion unit.
@@ -557,7 +784,42 @@ so the predicate is exactly PbcIsIntrinsicallyComplete, even over the empty sche
 The reflection property determines the output and unit up to unique isomorphism. -/
 @[instance] theorem pbcActualCompleteInclusion_isRightAdjoint :
     (ObjectProperty.ι (PbcIsIntrinsicallyComplete T d)).IsRightAdjoint := by
-  sorry
+  classical
+  obtain ⟨r, a, ha⟩ := Submodule.fg_iff_exists_fin_generating_family.mp d.finitelyGenerated
+  let P : ObjectProperty (PbcCompletedDerived T d) := PbcIsIntrinsicallyComplete T d
+  let W := wfCompletion T d r a ha
+  let L : PbcCompletedDerived T d ⥤ P.FullSubcategory :=
+    P.lift (W ⋙ ObjectProperty.ι _) (fun M ↦
+      (wfComplete_iff_presentation T d r a ha _).mp (W.obj M).property)
+  let e (M : PbcCompletedDerived T d) (N : P.FullSubcategory) :
+      (L.obj M ⟶ N) ≃ (M ⟶ N.obj) :=
+    (ObjectProperty.fullyFaithfulι P).homEquiv.trans
+      (Equiv.ofBijective _ ((wfCompletionReflector T d r a ha).2 M N.obj
+        ((wfComplete_iff_presentation T d r a ha N.obj).mpr N.property)))
+  let adj : L ⊣ P.ι := Adjunction.mkOfHomEquiv
+    { homEquiv := e
+      homEquiv_naturality_left_symm := by
+        intro M M' N f h
+        apply (e M N).injective
+        symm
+        change wfCompletionUnit T d r a ha M ≫
+          (L.map f ≫ (e M' N).symm h).hom = _
+        dsimp only [ObjectProperty.FullSubcategory.comp_hom]
+        rw [← Category.assoc]
+        have hn : wfCompletionUnit T d r a ha M ≫ (L.map f).hom =
+            f ≫ wfCompletionUnit T d r a ha M' := by
+          exact (Equiv.ofBijective _ ((wfCompletionReflector T d r a ha).2 M
+            (wfCompletionObj T d r a ha M')
+            ((wfCompletionReflector T d r a ha).1 M'))).apply_symm_apply _
+        rw [hn, Category.assoc]
+        change f ≫ (e M' N) ((e M' N).symm h) = (e M N) ((e M N).symm (f ≫ h))
+        simp
+      homEquiv_naturality_right := by
+        intro M N N' h f
+        change wfCompletionUnit T d r a ha M ≫ (h ≫ f).hom =
+          (wfCompletionUnit T d r a ha M ≫ h.hom) ≫ f.hom
+        exact (Category.assoc _ _ _).symm }
+  exact ⟨L, ⟨adj⟩⟩
 
 /-- The canonical reflection onto the actual intrinsically complete subcategory.
 Its defining universal property determines its objects up to the equality used
@@ -593,6 +855,91 @@ theorem pbcActualCompletedPull_isComplete (K : PbcCompletedDerived Y d) :
   exact ((ObjectProperty.ι (PbcIsIntrinsicallyComplete X d)).leftAdjoint.obj
     ((pbcActualDerivedPull g d).obj K)).property
 
+private theorem actualReflection (S : Scheme.{u})
+    (M N : PbcCompletedDerived S d) (hN : PbcIsIntrinsicallyComplete S d N) :
+    Function.Bijective (fun f : (pbcActualCompletion d S).obj M ⟶ N ↦
+      (pbcActualCompletionUnit d S).app M ≫ f) := by
+  let P : ObjectProperty (PbcCompletedDerived S d) := PbcIsIntrinsicallyComplete S d
+  let adj := Adjunction.ofIsRightAdjoint P.ι
+  let e := (ObjectProperty.fullyFaithfulι P).homEquiv.symm.trans
+    (adj.homEquiv M ⟨N, hN⟩)
+  exact e.bijective
+
+private theorem actualCompletion_unit_iso (S : Scheme.{u})
+    (M : PbcCompletedDerived S d) (hM : PbcIsIntrinsicallyComplete S d M) :
+    IsIso ((pbcActualCompletionUnit d S).app M) := by
+  let P : ObjectProperty (PbcCompletedDerived S d) := PbcIsIntrinsicallyComplete S d
+  exact (Adjunction.ofIsRightAdjoint P.ι).isIso_unit_app_iff_mem_essImage.mpr
+    ⟨⟨M, hM⟩, ⟨Iso.refl _⟩⟩
+
+private theorem actualCompletion_complete (S : Scheme.{u}) (M : PbcCompletedDerived S d) :
+    PbcIsIntrinsicallyComplete S d ((pbcActualCompletion d S).obj M) :=
+  ((ObjectProperty.ι (PbcIsIntrinsicallyComplete S d)).leftAdjoint.obj M).property
+
+private theorem reflectionComparison
+    {C : Type*} [Category C] (P : C → Prop)
+    (F G : C ⥤ C) (η : 𝟭 C ⟶ F) (ε : 𝟭 C ⟶ G)
+    (hF : ∀ M, P (F.obj M)) (hG : ∀ M, P (G.obj M))
+    (rF : ∀ M N, P N → Function.Bijective (fun f : F.obj M ⟶ N ↦ η.app M ≫ f))
+    (rG : ∀ M N, P N → Function.Bijective (fun f : G.obj M ⟶ N ↦ ε.app M ≫ f)) :
+    ∃ e : F ≅ G, ∀ M, η.app M ≫ e.hom.app M = ε.app M := by
+  classical
+  choose f hf using fun M ↦ (rF M (G.obj M) (hG M)).surjective (ε.app M)
+  choose g hg using fun M ↦ (rG M (F.obj M) (hF M)).surjective (η.app M)
+  change ∀ M, η.app M ≫ f M = ε.app M at hf
+  change ∀ M, ε.app M ≫ g M = η.app M at hg
+  have hfg (M : C) : f M ≫ g M = 𝟙 _ := by
+    apply (rF M (F.obj M) (hF M)).injective
+    change η.app M ≫ (f M ≫ g M) = η.app M ≫ 𝟙 _
+    rw [← Category.assoc, hf, hg, Category.comp_id]
+  have hgf (M : C) : g M ≫ f M = 𝟙 _ := by
+    apply (rG M (G.obj M) (hG M)).injective
+    change ε.app M ≫ (g M ≫ f M) = ε.app M ≫ 𝟙 _
+    rw [← Category.assoc, hg, hf, Category.comp_id]
+  refine ⟨NatIso.ofComponents (fun M ↦ ⟨f M, g M, hfg M, hgf M⟩) ?_, hf⟩
+  intro M N a
+  apply (rF M (G.obj N) (hG N)).injective
+  change η.app M ≫ (F.map a ≫ f N) = η.app M ≫ (f M ≫ G.map a)
+  rw [← Category.assoc, ← η.naturality a, Category.assoc, hf, ← Category.assoc, hf]
+  exact ε.naturality a
+
+private theorem actualCompletion_quotient (S : Scheme.{u}) :
+    ∃ e : pbcActualCompletion d S ≅
+        completedReductionTower S d ⋙ completedRlim S (d.completedRing S),
+      ∀ M, (pbcActualCompletionUnit d S).app M ≫ e.hom.app M = d.completionUnit S M := by
+  classical
+  obtain ⟨r, a, ha⟩ := Submodule.fg_iff_exists_fin_generating_family.mp d.finitelyGenerated
+  let G := completedReductionTower S d ⋙ completedRlim S (d.completedRing S)
+  let ε : 𝟭 (d.derived S) ⟶ G :=
+    (d.constantRlimAdjunction S).unit ≫
+      whiskerRight (completedReductionTowerUnit d S) (completedRlim S (d.completedRing S))
+  have he (M : PbcCompletedDerived S d) :
+      ∃ e : wfCompletionObj S d r a ha M ≅ G.obj M,
+        wfCompletionUnit S d r a ha M ≫ e.hom = ε.app M := by
+    obtain ⟨e, he⟩ := completedKoszulQuotientComparison S d r a ha M
+      (wfCompletionRepresentative S d M) (DerivedCategory.Q.objObjPreimageIso M)
+    exact ⟨e, he⟩
+  choose e he using he
+  have hc (M) : PbcIsIntrinsicallyComplete S d (G.obj M) :=
+    (actualComplete_iso S d (e M)).mp ((wfComplete_iff_presentation S d r a ha _).mp
+      ((wfCompletionReflector S d r a ha).1 M))
+  have hb (M N) (hN : PbcIsIntrinsicallyComplete S d N) :
+      Function.Bijective (fun f : G.obj M ⟶ N ↦ ε.app M ≫ f) := by
+    have h := ((wfCompletionReflector S d r a ha).2 M N
+      ((wfComplete_iff_presentation S d r a ha N).mpr hN)).comp
+      (Iso.homCongr (e M).symm (Iso.refl N)).bijective
+    convert h using 1
+    ext f
+    change ε.app M ≫ f = wfCompletionUnit S d r a ha M ≫
+      ((e M).hom ≫ f ≫ 𝟙 N)
+    rw [Category.comp_id, ← Category.assoc, he]
+  obtain ⟨c, hc⟩ := reflectionComparison (PbcIsIntrinsicallyComplete S d) _ G
+    (pbcActualCompletionUnit d S) ε (actualCompletion_complete d S) hc
+    (actualReflection d S) hb
+  refine ⟨c, fun M ↦ (hc M).trans ?_⟩
+  rfl
+
+set_option linter.unusedVariables false in
 /-- Completion has the unique shift comparison commuting with its actual unit.
 Source: Stacks 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction).
 Proof: the Koszul tower shifts termwise and the Roos realization preserves shifts.
@@ -602,7 +949,43 @@ theorem pbcActualCompletionShift_exists :
     ∃! q : (pbcActualCompletion d T).CommShift ℤ,
       (fun [qInst : (pbcActualCompletion d T).CommShift ℤ] ↦
         NatTrans.CommShift (pbcActualCompletionUnit d T) ℤ) (qInst := q) := by
-  sorry
+  let P : ObjectProperty (PbcCompletedDerived T d) := PbcIsIntrinsicallyComplete T d
+  have : P.IsClosedUnderIsomorphisms := ⟨fun e h ↦ (actualComplete_iso T d e).mp h⟩
+  have : P.IsStableUnderShift ℤ := ⟨fun n ↦ ⟨fun M hM ↦ actualComplete_shift T d M hM n⟩⟩
+  let L := P.ι.leftAdjoint
+  let adj := Adjunction.ofIsRightAdjoint P.ι
+  let sL : L.CommShift ℤ := adj.leftAdjointCommShift ℤ
+  have : adj.CommShift ℤ := adj.commShift_of_rightAdjoint ℤ
+  dsimp only [pbcActualCompletion, pbcActualCompletionUnit]
+  let q : (L ⋙ P.ι).CommShift ℤ := inferInstance
+  have hq : (fun [_qInst : (L ⋙ P.ι).CommShift ℤ] ↦
+      NatTrans.CommShift adj.unit ℤ) (_qInst := q) := inferInstance
+  refine ⟨q, hq, ?_⟩
+  intro q' hq'
+  let F := pbcActualCompletion d T
+  let η := pbcActualCompletionUnit d T
+  have square (s : F.CommShift ℤ) (hs : letI := s; NatTrans.CommShift η ℤ)
+      (n : ℤ) (M : PbcCompletedDerived T d) :
+      η.app (M⟦n⟧) ≫ (Functor.commShiftIso F (self := s) n).hom.app M =
+        (shiftFunctor _ n).map (η.app M) := by
+    let := s
+    have := hs
+    have h := (NatTrans.shift_app_comm η n M).symm
+    change η.app (M⟦n⟧) ≫ _ = 𝟙 _ ≫ _ at h
+    simpa only [Category.id_comp] using h
+  apply commShift_ext
+  intro n
+  apply Iso.ext
+  ext M
+  let N : P.FullSubcategory :=
+    ⟨(F.obj M)⟦n⟧, actualComplete_shift T d _ (L.obj M).property n⟩
+  have he :
+      (ObjectProperty.homMk ((Functor.commShiftIso F (self := q') n).hom.app M) :
+        L.obj (M⟦n⟧) ⟶ N) =
+      ObjectProperty.homMk ((Functor.commShiftIso F (self := q) n).hom.app M) := by
+    apply (adj.homEquiv (M⟦n⟧) N).injective
+    exact (square q' hq' n M).trans (square q hq n M).symm
+  exact congrArg (fun f ↦ f.hom) he
 
 /-- The unit-normalized shift of the completion reflector.
 Source: Stacks 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction). -/
@@ -613,6 +996,57 @@ instance pbcActualCompletionShift : (pbcActualCompletion d T).CommShift ℤ :=
 Source: Stacks 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction). -/
 instance pbcActualCompletedPullShift : (pbcActualCompletedPull g d).CommShift ℤ :=
   inferInstanceAs ((pbcActualDerivedPull g d ⋙ pbcActualCompletion d X).CommShift ℤ)
+
+private theorem actualPush_eq_datum : pbcActualDerivedPush g d = d.push g := by
+  have hc : completedCoefficientMap g d = (d.integralRingIso g).hom := by
+    apply limit.hom_ext
+    intro n
+    change completedCoefficientMap g d ≫ d.projection X n.unop =
+      (d.integralRingIso g).hom ≫ d.projection X n.unop
+    calc
+      _ = completedCoefficientComponent g d n.unop := limit.lift_π _ n
+      _ = _ := by
+        rw [d.projection_comm]
+        rfl
+  have hm : completedModuleDirectImage g d =
+      proEtaleRingModuleDirectImage g (d.completedRing Y) (d.completedRing X)
+        (d.integralRingIso g) := by
+    unfold completedModuleDirectImage proEtaleRingModuleDirectImage
+    unfold completedCoefficientDirectImageMap proEtaleRingDirectImageMap
+    rw [hc]
+    rfl
+  change (completedModuleDirectImage g d).rightDerivedFunctor = _
+  cases hm
+  rfl
+
+-- Use the published perfect-projection tower mate and its completion-unit equation.
+private theorem quotientDirectComparison :
+    ∃ e : d.push g ⋙ (completedReductionTower Y d ⋙ completedRlim Y (d.completedRing Y)) ≅
+        (completedReductionTower X d ⋙ completedRlim X (d.completedRing X)) ⋙ d.push g,
+      ∀ M, d.completionUnit Y ((d.push g).obj M) ≫ e.hom.app M =
+        (d.push g).map (d.completionUnit X M) := by
+  let τ : d.push g ⋙ completedReductionTower Y d ⟶
+      completedReductionTower X d ⋙ d.towerPush g :=
+    { app := d.towerProjection g
+      naturality := fun {_ _} f ↦ (d.towerProjection_properties g _).2.1 _ f }
+  have : IsIso τ := NatIso.isIso_of_isIso_app τ
+  let e := (associator (d.push g) (completedReductionTower Y d)
+      (completedRlim Y (d.completedRing Y))).symm ≪≫
+    Functor.isoWhiskerRight (asIso τ) (completedRlim Y (d.completedRing Y)) ≪≫
+    associator (completedReductionTower X d) (d.towerPush g)
+      (completedRlim Y (d.completedRing Y)) ≪≫
+    Functor.isoWhiskerLeft (completedReductionTower X d) (d.directImageRlimIso g).symm ≪≫
+    (associator (completedReductionTower X d) (completedRlim X (d.completedRing X))
+      (d.push g)).symm
+  refine ⟨e, ?_⟩
+  intro M
+  change d.completionUnit Y ((d.push g).obj M) ≫
+    (𝟙 _ ≫ (completedRlim Y (d.completedRing Y)).map (d.towerProjection g M) ≫
+      𝟙 _ ≫ (d.directImageRlimIso g).inv.app ((completedReductionTower X d).obj M) ≫
+      𝟙 _) = _
+  simp only [Category.id_comp, Category.comp_id, ← Category.assoc]
+  rw [(d.towerProjection_properties g M).2.2]
+  simp
 
 /-- Direct image commutes with completion with the specified completion unit.
 Source: Stacks 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction).
@@ -628,7 +1062,40 @@ theorem pbcActualDirectCompletionIso_exists :
         (pbcActualCompletionUnit d Y).app ((pbcActualDerivedPush g d).obj K) ≫
             e.hom.app K =
           (pbcActualDerivedPush g d).map ((pbcActualCompletionUnit d X).app K) := by
-  sorry
+  classical
+  rw [actualPush_eq_datum g d]
+  let G := d.push g
+  let FX := pbcActualCompletion d X
+  let FY := pbcActualCompletion d Y
+  let ηX := pbcActualCompletionUnit d X
+  let ηY := pbcActualCompletionUnit d Y
+  obtain ⟨cX, hcX⟩ := actualCompletion_quotient d X
+  obtain ⟨cY, hcY⟩ := actualCompletion_quotient d Y
+  obtain ⟨δ, hδ⟩ := quotientDirectComparison g d
+  let e : G ⋙ FY ≅ FX ⋙ G :=
+    Functor.isoWhiskerLeft G cY ≪≫ δ ≪≫ Functor.isoWhiskerRight cX.symm G
+  have he (M : PbcCompletedDerived X d) :
+      ηY.app (G.obj M) ≫ e.hom.app M = G.map (ηX.app M) := by
+    change ηY.app (G.obj M) ≫
+      (cY.hom.app (G.obj M) ≫ δ.hom.app M ≫ G.map (cX.inv.app M)) = _
+    rw [← Category.assoc, hcY, ← Category.assoc, hδ, ← G.map_comp, ← hcX]
+    rw [Category.assoc, Iso.hom_inv_id_app, Category.comp_id]
+  have hG (M : PbcCompletedDerived X d) (hM : PbcIsIntrinsicallyComplete X d M) :
+      PbcIsIntrinsicallyComplete Y d (G.obj M) := by
+    have : IsIso (ηX.app M) := actualCompletion_unit_iso d X M hM
+    have : IsIso (ηY.app (G.obj M) ≫ e.hom.app M) := by
+      rw [he]
+      infer_instance
+    have : IsIso (ηY.app (G.obj M)) := IsIso.of_isIso_comp_right _ (e.hom.app M)
+    exact (actualComplete_iso Y d (asIso (ηY.app (G.obj M)))).mpr
+      (actualCompletion_complete d Y _)
+  refine ⟨e, he, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  ext M
+  apply (actualReflection d Y (G.obj M) (G.obj (FX.obj M))
+    (hG (FX.obj M) (actualCompletion_complete d X M))).injective
+  exact (he' M).trans (he M).symm
 
 /-- The completion comparison uniquely fixed by the quotient augmentation.
 Source: Stacks 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction). -/

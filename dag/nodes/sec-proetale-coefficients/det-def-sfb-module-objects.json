@@ -1,0 +1,173 @@
+{
+ "id": "det-def-sfb-module-objects",
+ "kind": "definition",
+ "title": "Module objects and the category $\\Mod_{\\Lambda_X}$",
+ "statement": "Let $(\\mathcal C,\\otimes,\\mathbf 1)$ be a monoidal category with associator $\\alpha$ and\nleft unitor $\\lambda$. Let $\\mathcal R$ be a monoid object of $\\mathcal C$, with\nmultiplication $\\mu\\colon\\mathcal R\\otimes\\mathcal R\\to\\mathcal R$ and unit\n$\\eta\\colon\\mathbf 1\\to\\mathcal R$. When $\\mathcal C$ is a category of abelian sheaves with\nits tensor product, these are the ring objects of [det-def-sfb-ring-object].\n\n1. A *(left) $\\mathcal R$-module object* is an object $M$ of $\\mathcal C$ with an\n   *action* $\\gamma_M\\colon\\mathcal R\\otimes M\\to M$ that is unital and associative:\n   $$\n   \\gamma_M\\circ(\\eta\\otimes M)=\\lambda_M,\\qquad\n   \\gamma_M\\circ(\\mu\\otimes M)=\\gamma_M\\circ(\\mathcal R\\otimes\\gamma_M)\\circ\\alpha_{\\mathcal R,\\mathcal R,M}.\n   $$\n2. A *morphism of $\\mathcal R$-module objects* $f\\colon M\\to N$ is a morphism of\n   $\\mathcal C$ with $f\\circ\\gamma_M=\\gamma_N\\circ(\\mathcal R\\otimes f)$. With the\n   composition of $\\mathcal C$, the $\\mathcal R$-module objects form a category\n   $\\Mod_{\\mathcal R}(\\mathcal C)$. It has a forgetful functor\n   $\\Mod_{\\mathcal R}(\\mathcal C)\\to\\mathcal C$, $(M,\\gamma_M)\\mapsto M$. The *regular\n   module* is $\\mathcal R$ itself with action $\\mu$.\n3. Let $X$ be a scheme with small pro-étale site $X_{\\mathrm{proét}}$\n   ([def-weil-pbc-proetale-site]). Give $\\Sh(X_{\\mathrm{proét}},\\Ab)$ the tensor product of\n   [lem-weil-pbc-sheaf-tensor-closed]. Let $\\Lambda$ be a condensed ring and let\n   $\\Lambda_X=p_X^*\\Lambda$ be its pullback, a ring object of $\\Sh(X_{\\mathrm{proét}},\\Ab)$\n   ([det-def-sfb-pulled-back-coefficients]). The category of *sheaves of\n   $\\Lambda_X$-modules* is\n   $$\n   \\Mod_{\\Lambda_X}:=\\Mod_{\\Lambda_X}\\bigl(\\Sh(X_{\\mathrm{proét}},\\Ab)\\bigr).\n   $$",
+ "source": {
+  "document": "literature/blueprint/main-20261023-1620/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/det-def-sfb-module-objects.md",
+  "place": "node det-def-sfb-module-objects, order 1172"
+ },
+ "stmt_deps": [
+  "det-def-sfb-ring-object",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "det-def-sfb-pulled-back-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Apply [det-def-sfb-module-objects-definition] to the given monoidal category $\\mathcal C$ and monoid object $(\\mathcal R,\\mu,\\eta)$. Its clauses 1 and 2 give exactly the action, the displayed unit and associativity equations, and the action-commuting morphisms of parts 1 and 2. Its clauses 3 and 4 specify the regular module, the underlying identities and composition, and the object and morphism maps of the forgetful functor. No braiding or commutativity of $\\mathcal R$ is required.",
+   "uses": [
+    "det-def-sfb-module-objects-definition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/det-def-sfb-module-objects.proof.md",
+    "place": "first sentence: module objects, morphisms, regular module and forgetful functor"
+   }
+  },
+  {
+   "text": "The hypotheses of [det-def-sfb-module-objects-category] are precisely the data just fixed in step 1. Its clause 1 says that identities and composites are module morphisms and that these operations give a category; clause 2 says that forgetting is a faithful functor, in particular a functor; clause 3 verifies the regular module axioms for $(\\mathcal R,\\mu)$. This supplies all well-definedness assertions in part 2.",
+   "uses": [
+    "det-def-sfb-module-objects-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/det-def-sfb-module-objects.proof.md",
+    "place": "second sentence: category, forgetful functor, regular module"
+   }
+  },
+  {
+   "text": "For part 3 take $\\mathcal C=\\Sh(X_{\\mathrm{proét}},\\Ab)$ with the tensor product of the item (sheafified objectwise $\\otimes_{\\mathbf Z}$, unit $\\underline{\\mathbf Z}$) and $\\mathcal R=\\Lambda_X=p_X^*\\Lambda$, which part 3 of the item takes as a ring object, i.e. a monoid object, of this monoidal category. Parts 1 and 2, established in steps 1 and 2 for an arbitrary monoid object of an arbitrary monoidal category, therefore define the category $\\Mod_{\\Lambda_X}(\\Sh(X_{\\mathrm{proét}},\\Ab))$ for every condensed ring $\\Lambda$, with no further hypothesis; in particular no comparison between ring objects and sheaves of rings is used. [det-def-sfb-module-objects-sheaves] is exactly this specialization: it names the same site, the tensor structure $a(\\mathcal F\\otimes_p\\mathcal G)$ with unit $\\underline{\\mathbf Z}$ (the same structure the item fixes), the pulled-back ring object $\\Lambda_X$, and displays $\\Mod_{\\Lambda_X}=\\Mod_{\\Lambda_X}(\\Sh(X_{\\mathrm{proét}},\\Ab))$, with abelian-sheaf action maps and action-commuting abelian-sheaf morphisms.",
+   "uses": [
+    "det-def-sfb-module-objects-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/det-def-sfb-module-objects.proof.md",
+    "place": "last sentence: Part 3 is det-def-sfb-module-objects-sheaves"
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-def-sfb-module-objects-definition",
+  "det-def-sfb-module-objects-category",
+  "det-def-sfb-module-objects-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/det-def-sfb-module-objects.proof.md",
+  "place": "complete three-sentence assembly proof, expanded clause by clause"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "class ModObj|class IsModHom|structure Mod|def regular|def forget|Category \\(Mod",
+   "sub": "CategoryTheory/Monoidal/Mod.lean",
+   "results": "{\"t\": \"2026-10-26T03:12:47Z\", \"tool\": \"grep\", \"query\": \"class ModObj|class IsModHom|structure Mod|def regular|def forget|Category \\\\(Mod\", \"sub\": \"CategoryTheory/Monoidal/Mod.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"59\", \"187\", \"227\", \"313\", \"336\"], \"digest\": \"22ad541b1ffd9c09\"}",
+   "date": "2026-10-26",
+   "verdict": "Pinned generic definitions read in Mathlib/CategoryTheory/Monoidal/Mod.lean at 59-65, 187-188, 227-230, 300-316, 336-349. No dedicated condensed pro-etale specialization in this file."
+  },
+  {
+   "tool": "leansearch",
+   "query": "category of module objects over the pullback of a condensed ring on the pro etale site of a scheme",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-26T03:12:47Z\", \"tool\": \"leansearch\", \"query\": \"category of module objects over the pullback of a condensed ring on the pro etale site of a scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullback\", \"CondensedMod\", \"AlgebraicGeometry.Scheme.Modules.pullback\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.instIsLeftAdjointPullback\", \"AlgebraicGeometry.Scheme.Modules.instAdditivePullback\", \"AlgebraicGeometry.Scheme.Modules\"], \"digest\": \"aaa664175dd2aab9\"}",
+   "date": "2026-10-26",
+   "verdict": "No match for the entire item: CondensedMod and LightCondMod have ordinary coefficient rings; Scheme.Modules uses the structure sheaf; SheafOfModules.pullback concerns the external sheaf-of-rings presentation. These do not supply this internal pulled-back condensed-ring definition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "left module objects over a monoid object in a monoidal category, their category, regular module and forgetful functor, specialized to a pulled-back condensed ring on the pro-etale site",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-26T03:12:48Z\", \"tool\": \"leanfinder\", \"query\": \"left module objects over a monoid object in a monoidal category, their category, regular module and forgetful functor, specialized to a pulled-back condensed ring on the pro-etale site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CondensedMod\", \"LightCondMod\", \"LightCondensed.instMonoidalCategoryLightCondMod\", \"LightCondensed.forget\", \"CondensedMod.LocallyConstant.functor\", \"Condensed.forget\", \"CondensedMod.ofSheafCompHaus\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\"], \"digest\": \"663439bb56abe7d9\"}",
+   "date": "2026-10-26",
+   "verdict": "No match for the entire item: CondensedMod and LightCondMod have ordinary coefficient rings; Scheme.Modules uses the structure sheaf; SheafOfModules.pullback concerns the external sheaf-of-rings presentation. These do not supply this internal pulled-back condensed-ring definition."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ModObj, CategoryTheory.Mod",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-26T03:12:48Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.ModObj, CategoryTheory.Mod\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CategoryTheory.Mod.mk\", \"CategoryTheory.Mod.mod\", \"CategoryTheory.Mod_.mod\", \"CategoryTheory.Mod.comap_obj_mod\"], \"digest\": \"8bac267c6621344e\"}",
+   "date": "2026-10-26",
+   "verdict": "Generic module-object constructors and actions found; same generic ingredients as the existing leaves, not the entire condensed pro-etale definition."
+  },
+  {
+   "tool": "grep",
+   "query": "pro.etale|condensed|Mod\\.forget|def forget",
+   "sub": "CategoryTheory/Monoidal/Mod.lean",
+   "results": "{\"t\": \"2026-10-26T03:12:59Z\", \"tool\": \"grep\", \"query\": \"pro.etale|condensed|Mod\\\\.forget|def forget\", \"sub\": \"CategoryTheory/Monoidal/Mod.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"347\", \"441\"], \"digest\": \"cb62990e81d0669a\"}",
+   "date": "2026-10-26",
+   "verdict": "Pinned generic definitions read in Mathlib/CategoryTheory/Monoidal/Mod.lean at 59-65, 187-188, 227-230, 300-316, 336-349. No dedicated condensed pro-etale specialization in this file."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "category of left modules over a monoid object in a monoidal category and its forgetful functor and regular module",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-26T03:13:00Z\", \"tool\": \"leanfinder\", \"query\": \"category of left modules over a monoid object in a monoidal category and its forgetful functor and regular module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Mod_.forget\", \"CategoryTheory.Mod_.forget_obj\", \"CategoryTheory.Mod_.X\", \"CategoryTheory.Mod_.mod\", \"CategoryTheory.Mod_.instCategory\", \"CategoryTheory.Mod_.regular\", \"CategoryTheory.Mod_.instInhabited\", \"CategoryTheory.Mod_\"], \"digest\": \"c281ff45018b637f\"}",
+   "date": "2026-10-26",
+   "verdict": "Match for the generic ingredients: Mod_.forget, Mod_.instCategory and Mod_.regular. Read pinned Mod.lean:59-65, 187-188, 227-230, 300-316, 336-349 and Action/Basic.lean:174-181; these are the existing definition/category Mathlib leaves, not a named full condensed pro-etale specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "lean_not_found"
+ ],
+ "blueprint_kind": "definition",
+ "blueprint_order": 1172,
+ "blueprint_uses": [
+  "def-weil-pbc-proetale-site",
+  "det-def-sfb-pulled-back-coefficients",
+  "det-def-sfb-ring-object",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "det-def-sfb-module-objects-definition",
+  "det-def-sfb-module-objects-category",
+  "det-def-sfb-module-objects-sheaves"
+ ],
+ "blueprint_lean": [
+  "CategoryTheory.ModObj",
+  "CategoryTheory.IsModHom",
+  "CategoryTheory.Mod",
+  "CategoryTheory.Mod.Hom",
+  "CategoryTheory.Mod.forget",
+  "CategoryTheory.Mod.regular",
+  "AlgebraicGeometry.ProEtale.condensedRingObj"
+ ],
+ "blueprint_lean_not_found": [
+  "CategoryTheory.ModObj",
+  "CategoryTheory.IsModHom",
+  "CategoryTheory.Mod",
+  "CategoryTheory.Mod.Hom",
+  "CategoryTheory.Mod.forget",
+  "CategoryTheory.Mod.regular",
+  "AlgebraicGeometry.ProEtale.condensedRingObj"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261023-1620",
+ "blueprint": {
+  "is": "det-def-sfb-module-objects",
+  "from": null,
+  "same_as": [
+   "sk-def-sfb-module-objects"
+  ]
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "det-def-sfb-module-objects",
+  "worker": "stage1",
+  "summary": "Preserved every clause and all imported metadata. Checked the current blueprint, existing module-object Mathlib leaves and the split sheaf specialization. Added the three defining assembly dependencies, expanded the existing assembly proof into three source-located steps, recorded actual searches and the sketch-layer duplicate, and created no nodes.",
+  "blueprint": "Steps 1, 2 and 3 realize respectively the first, second and final sentences of the current det-def-sfb-module-objects.proof.md. The sketch node sk-def-sfb-module-objects states the same combined definition with parallel references and is recorded in same_as.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-048782ce0",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-048782ce0 (reviewer sub-agent of L); spot-checked: I read all three steps. Each one matches the matching sentence of the blueprint proof det-def-sfb-module-objects.proof.md. The statement is byte-identical to the blueprint (main-20261023-1620 = latest), and there are no new nodes or tool_uses. Step 1 cites det-def-sfb-module-objects-definition, a Mathlib leaf (Mod.lean ModObj/IsModHom/Mod.regular/forget). Its action, unit, associativity (source (R⊗R)⊗M) and morphism equations match parts 1–2 exactly. Step 2 cites det-def-sfb-module-objects-category, a Mathlib leaf: it gives the category, the faithful forgetful functor and the regular module. Step 3 cites det-def-sfb-module-objects-sheaves, which uses the same tensor a(F⊗_pG) as lem-weil-pbc-sheaf-tensor-closed and the same Λ_X as pulled-back-coefficients-ring. Fix 1: the delivery added the three proof children to stmt_deps. The statement does not cite them (blueprint statement uses = 4 nodes), and the landed parents ring-object and pulled-back-coefficients keep their children out of stmt_deps, so I restored the 4 statement dependencies. Fix 2: step 3 claimed the -sheaves node covers an arbitrary condensed ring. That node takes a sheaf of rings, and no node compares ring objects with sheaves of rings. I reworded the step: part 3 is the direct instance of parts 1–2 for the monoid object Λ_X, and -sheaves is cited as the recorded specialization. No mathematics changed. Edge cases checked: non-commutative R, unit monoid, empty X, zero ring. Duplicate sk-def-sfb-module-objects is correctly recorded in same_as.; 1 file(s) fixed by the reviewer"
+ }
+}

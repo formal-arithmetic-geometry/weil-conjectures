@@ -1,0 +1,367 @@
+{
+ "id": "lem-sfb-finite-commutative-cartier-representability",
+ "kind": "statement",
+ "title": "The dual coordinate Hopf algebra represents finite-group characters",
+ "statement": "Let $k$ be a field [def-weil-field], and let $G$ be a finite commutative $k$-group scheme [def-sc-group-scheme]. Put $H=\\Gamma(G,\\mathcal O_G)$ and use its coordinate Hopf structure [def-sfb-affine-coordinate-hopf-algebra]. The vector space $H^*=\\operatorname{Hom}_k(H,k)$ has a commutative Hopf algebra structure obtained by transposing the structure maps of $H$: its multiplication is the transpose of the comultiplication of $H$, its unit is the transpose of the counit, its comultiplication is the transpose of multiplication, its counit is the transpose of the unit, and its antipode is the transpose of the antipode. Use the finite-dimensional identification $(H\\otimes_kH)^*=H^*\\otimes_kH^*$. The finite commutative group scheme $G^D=\\operatorname{Spec}(H^*)$ [def-weil-affine-spectrum] represents the character functor: for every $k$-scheme $T$ [def-pc-scheme] there is a canonical bijection of groups\n$$\\operatorname{Hom}_k(T,G^D)\\simeq\\operatorname{Hom}_{T\\text{-grp}}(G\\times_kT,\\mathbf G_{m,T}),$$\nnatural in $T$, where $\\mathbf G_m$ is the multiplicative group [def-sc-gm-ga] and multiplication on the right is pointwise multiplication. Its coordinate vector space is exactly $H^*$, not the space of functions on geometric points. No perfection or invertibility of $\\dim_kH$ is assumed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 11c, printed pp.212–214: Lemma 11.11, construction preceding Theorem 11.12, and Theorem 11.12. The scheme-valued form is the Zariski gluing of the functor on all test algebras."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sfb-affine-coordinate-hopf-algebra",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-sc-gm-ga",
+  "def-sfb-group-scheme-characters"
+ ],
+ "proof": [
+  {
+   "text": "Finite coordinates. By [def-sc-group-scheme], $G=\\operatorname{Spec}H$ with $H$ finite-dimensional. Choose a finite basis $(h_i)$: from a finite spanning list discard a vector whenever it is in the span of the others, leaving an independent spanning list. Let $(h_i^*)$ be its dual basis and put $D=H^*$. The evaluation map $H\\to D^*$ is an isomorphism: its inverse sends $F$ to $\\sum_iF(h_i^*)h_i$. Thus evaluation detects equality. By [lem-sfb-finite-free-tensor-dual] identify $(H\\otimes H)^*$ with $D\\otimes D$, with pairing $\\langle f\\otimes g,a\\otimes b\\rangle=f(a)g(b)$; iterating gives the same assertion for three or four factors. By [lem-sfb-linear-dual-dimension-rank], $D$ is finite-dimensional of dimension $\\dim_k H$. Write $\\mu,\\eta,\\Delta,\\epsilon,S$ for the coordinate operations of [def-sfb-affine-coordinate-hopf-algebra]. Define $\\mu_D=\\Delta^*$, $\\eta_D=\\epsilon^*$, $\\Delta_D=\\mu^*$, $\\epsilon_D=\\eta^*$ and $S_D=S^*$ using these identifications.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-sfb-affine-coordinate-hopf-algebra",
+    "lem-sfb-finite-free-tensor-dual",
+    "lem-sfb-linear-dual-dimension-rank"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§11c, printed pp.212–213, construction, Lemma 11.11 and proof of Theorem 11.12; §4g, printed p.92, character/group-like calculation."
+   }
+  },
+  {
+   "text": "Transpose the algebra and coalgebra identities. In evaluation notation $(fg)(h)=(f\\otimes g)(\\Delta h)$, $1_D(h)=\\epsilon(h)$, $\\langle\\Delta_Df,a\\otimes b\\rangle=f(ab)$ and $\\epsilon_D(f)=f(1)$. For $f,g,l\\in D$, the evaluations of $(fg)l$ and $f(gl)$ on $h$ are respectively $(f\\otimes g\\otimes l)((\\Delta\\otimes1)\\Delta h)$ and $(f\\otimes g\\otimes l)((1\\otimes\\Delta)\\Delta h)$; they agree. The two unit identities similarly are the two counit identities of $H$. Conversely, evaluating the two iterated coproducts of $f$ on $a\\otimes b\\otimes c$ gives $f((ab)c)=f(a(bc))$; their counit identities give $f(1a)=f(a)=f(a1)$. Since $G$ is commutative, its multiplication is fixed by swapping factors, hence $\\Delta=\\tau\\Delta$ by the coordinate definition, so $fg=gf$. Since $ab=ba$ in $H$, $\\Delta_D$ is also fixed by the swap. All tensor equalities are detected by the finite tensor pairings of [lem-sfb-finite-free-tensor-dual].",
+   "uses": [
+    "def-sfb-affine-coordinate-hopf-algebra",
+    "lem-sfb-finite-free-tensor-dual"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§11c, printed pp.212–213, construction, Lemma 11.11 and proof of Theorem 11.12; §4g, printed p.92, character/group-like calculation."
+   }
+  },
+  {
+   "text": "Check the bialgebra compatibility, rather than assuming that transposition preserves it. Write $\\Delta a=\\sum a_1\\otimes a_2$ and $\\Delta b=\\sum b_1\\otimes b_2$. The evaluations on $a\\otimes b$ of $\\Delta_D(fg)$ and $\\Delta_D(f)\\Delta_D(g)$ are both $\\sum f(a_1b_1)g(a_2b_2)$: for the first use $\\Delta(ab)=\\Delta(a)\\Delta(b)$, and for the second use $\\langle\\Delta_Df,u\\otimes v\\rangle=f(uv)$. Also $\\Delta_D(1_D)(a,b)=\\epsilon(ab)=\\epsilon(a)\\epsilon(b)$ and $\\epsilon_D(fg)=(f\\otimes g)\\Delta(1)=f(1)g(1)$, with $\\epsilon_D(1_D)=1$. Thus $\\Delta_D$ and $\\epsilon_D$ are unital algebra maps. Here tensor multiplication is precisely $(f\\otimes g)(l\\otimes q)=fl\\otimes gq$ from [lem-weil-pbc-algebra-tensor-pushout-universal-property]; evaluation detects the asserted equalities by [lem-sfb-finite-free-tensor-dual].",
+   "uses": [
+    "def-sfb-affine-coordinate-hopf-algebra",
+    "lem-sfb-finite-free-tensor-dual",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§11c, printed pp.212–213, construction, Lemma 11.11 and proof of Theorem 11.12; §4g, printed p.92, character/group-like calculation."
+   }
+  },
+  {
+   "text": "The transposed antipode. Evaluate $\\mu_D(S_D\\otimes1)\\Delta_Df$ at $h$ to obtain $f(\\sum S(h_1)h_2)=f(1)\\epsilon(h)$; the other antipode identity gives $f(\\sum h_1S(h_2))=f(1)\\epsilon(h)$. Both are $\\eta_D\\epsilon_D(f)$. Moreover inversion in a commutative group commutes with multiplication: the product of the two inverses multiplies the product of the two elements to the identity. Applied to the group-scheme diagrams, this yields $\\Delta S=(S\\otimes S)\\Delta$ and $\\epsilon S=\\epsilon$. Consequently $S_D(fg)(h)=(f\\otimes g)\\Delta(S h)=(S_Df\\otimes S_Dg)\\Delta h$, and $S_D(1_D)=1_D$. This proves that $D$ has the required commutative Hopf algebra structure with exactly the six transposed operations. Applying [lem-sfb-hopf-spectrum-functor] gives its affine group scheme $G^D=\\operatorname{Spec}D$. It is commutative because $\\Delta_D$ is fixed by the swap. It is finite by [def-weil-finite-integral-morphism], since $D$ is finite-dimensional. Its global coordinate algebra is $D$ by [def-weil-affine-spectrum].",
+   "uses": [
+    "def-sfb-affine-coordinate-hopf-algebra",
+    "def-sc-group-scheme",
+    "lem-sfb-finite-free-tensor-dual",
+    "lem-sfb-hopf-spectrum-functor",
+    "def-weil-finite-integral-morphism",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§11c, printed pp.212–213, construction, Lemma 11.11 and proof of Theorem 11.12; §4g, printed p.92, character/group-like calculation."
+   }
+  },
+  {
+   "text": "Affine test algebras. Let $R$ be any commutative $k$-algebra, including nonreduced algebras, and put $H_R=H\\otimes_kR$. The map $H_R\\to\\operatorname{Hom}_k(D,R)$ sends $h\\otimes r$ to $(f\\mapsto rf(h))$ and is bijective. The finite basis makes $D$ projective: lift each basis image through any surjective linear map and extend linearly. Indeed [lem-pc-finite-projective-module-tensor-hom] with $M=D$, $P=R$, $Q=k$, followed by the tensor unit and swap identifications and $D^*=H$, gives this map; alternatively its inverse is $\\alpha\\mapsto x_\\alpha=\\sum_i h_i\\otimes\\alpha(h_i^*)$. Direct substitution in both composites gives the identity by the two dual-basis expansion formulas. A linear map $\\alpha:D\\to R$ is a unital algebra map exactly when $\\Delta_R(x_\\alpha)=x_\\alpha\\otimes_Rx_\\alpha$ and $\\epsilon_R(x_\\alpha)=1$: pairing the first equation with $f\\otimes g$ gives $\\alpha(fg)=\\alpha(f)\\alpha(g)$, and pairing the second gives $\\alpha(1_D)=1$. These pairings detect equality over $R$ as well, because the tensors of the displayed basis are an $R$-basis. By [def-weil-affine-spectrum], the algebra maps $\\alpha$ are precisely the $R$-points of $G^D$.",
+   "uses": [
+    "lem-pc-finite-projective-module-tensor-hom",
+    "lem-sfb-finite-free-tensor-dual",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§11c, printed pp.212–213, construction, Lemma 11.11 and proof of Theorem 11.12; §4g, printed p.92, character/group-like calculation."
+   }
+  },
+  {
+   "text": "Characters on an affine test. By [lem-weil-pbc-fibre-product-affine-spectra], $G_R=\\operatorname{Spec}(H_R)$. For a group-like $x\\in H_R$, the two antipode equations evaluated at $x$ give $S_R(x)x=xS_R(x)=1$. Hence the formula $\\sum_n r_nt^n\\mapsto\\sum_n r_nx^n$ defines an $R$-algebra map $R[t,t^{-1}]\\to H_R$ (the sums are finite). It is the unique such map with $t\\mapsto x$, because $t^{-1}$ must map to $x^{-1}$. The coordinate operations of $\\mathbf G_m$ in [def-sc-gm-ga] show this is a group morphism $\\chi_x:G_R\\to\\mathbf G_{m,R}$: multiplication and identity are exactly $\\Delta_Rx=x\\otimes x$ and $\\epsilon_Rx=1$, while inversion is $S_Rx=x^{-1}$. Conversely a character has a coordinate map with $t$-image satisfying these equations. This uses [def-weil-affine-spectrum] on affine sources and [def-pc-fibre-product] to regard a map to $\\mathbf G_m$ together with the structure map as a map over $\\operatorname{Spec}R$. Thus $\\alpha\\mapsto\\chi_{x_\\alpha}$ is bijective, with inverse $\\alpha(f)=\\langle f,x\\rangle$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-sc-gm-ga",
+    "def-sfb-affine-coordinate-hopf-algebra",
+    "def-weil-affine-spectrum",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§11c, printed pp.212–213, construction, Lemma 11.11 and proof of Theorem 11.12; §4g, printed p.92, character/group-like calculation."
+   }
+  },
+  {
+   "text": "Group law and algebra naturality. For two algebra maps $\\alpha,\\beta:D\\to R$, multiplication of the associated $G^D(R)$-points is $\\alpha\\star\\beta=\\mu_R(\\alpha\\otimes\\beta)\\Delta_D$ by [lem-sfb-hopf-spectrum-functor]. Since $\\langle\\Delta_Df,a\\otimes b\\rangle=f(ab)$, its associated tensor is $x_{\\alpha\\star\\beta}=x_\\alpha x_\\beta$. The character with this tensor is $\\chi_{x_\\alpha}\\chi_{x_\\beta}$, because on every $R$-algebra $B$ and $g\\in G(B)$ its value is $g^*(x_\\alpha x_\\beta)=g^*(x_\\alpha)g^*(x_\\beta)$. The identity has tensor $1_H\\otimes1_R$ and gives the constant character $1$; thus the bijection is a group isomorphism. For any $k$-algebra map $u:R\\to R'$ the formula $x_{u\\alpha}=\\sum_i h_i\\otimes u(\\alpha(h_i^*))=(1\\otimes u)x_\\alpha$ proves compatibility with base change, as does the Laurent formula for $\\chi_x$. This includes restriction to every affine open of an affine test scheme.",
+   "uses": [
+    "lem-sfb-hopf-spectrum-functor",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-sc-group-scheme",
+    "def-sc-gm-ga"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§11c, printed pp.212–213, construction, Lemma 11.11 and proof of Theorem 11.12; §4g, printed p.92, character/group-like calculation."
+   }
+  },
+  {
+   "text": "Forward extension to all schemes. Let $T$ be any $k$-scheme and $f:T\\to G^D$ a $k$-map. Choose an affine open cover $U_i=\\operatorname{Spec}R_i$ of $T$. The affine construction gives $\\chi_i:G\\times U_i\\to\\mathbf G_m$. On each affine open $W\\subset U_i\\cap U_j$, the two restrictions have the same tensor by algebra naturality; these $W$ need not equal the intersection. Thus their $t$-images agree on the open cover $(G\\times W)$ of $G\\times(U_i\\cap U_j)$. The structure-sheaf separatedness axiom makes them equal there. The $t$-images, and their inverses, therefore glue to inverse global sections on $G\\times T$. Substitution of these sections gives a $k$-algebra map $k[t,t^{-1}]\\to\\Gamma(G\\times T,\\mathcal O)$. By [lem-weil-pbc-morphism-into-affine-scheme] this is a unique map to $\\mathbf G_m$. Pairing with the projection to $T$ using [def-pc-fibre-product] gives $\\chi:G\\times T\\to\\mathbf G_{m,T}$. Its group-morphism identities hold: locally on the cover by $U_i$ they are the established affine identities, and maps to the affine scheme $\\mathbf G_m$ agree if their coordinate sections agree on a cover. The same reasoning proves independence of the cover.",
+   "uses": [
+    "def-pc-scheme",
+    "def-sc-gm-ga",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf; literature/stacks-project/schemes.tex",
+    "place": "Theorem 11.12, printed p.213, extended from affine tests using Stacks Tag 01I1 (lemma-morphism-into-affine) and the structure-sheaf gluing axiom. The explicit extension argument is supplied here."
+   }
+  },
+  {
+   "text": "Inverse extension. For a $T$-group homomorphism $\\chi:G\\times T\\to\\mathbf G_{m,T}$, restriction to each affine $U_i$ gives the unique algebra map $\\alpha_i:D\\to R_i$ by the affine bijection. On every affine open $W\\subset U_i\\cap U_j$ the two restrictions of $\\alpha_i$ agree, since their characters both equal $\\chi|_W$. For each $f\\in D$, the sections $\\alpha_i(f)$ therefore glue to a unique section $\\alpha(f)\\in\\Gamma(T,\\mathcal O_T)$. Addition, multiplication, the unit, and the fixed $k$-scalars are preserved because they are preserved on every $U_i$, and the structure sheaf is separated. This gives a $k$-algebra map $D\\to\\Gamma(T,\\mathcal O_T)$, hence a unique $k$-map $T\\to\\operatorname{Spec}D$ by [lem-weil-pbc-morphism-into-affine-scheme]. The two constructions are inverse since their restrictions to each $U_i$ are inverse and coordinate sections in an affine target are determined by their restrictions to this cover. This proves bijectivity for arbitrary $T$, including $T=\\varnothing$, when all the morphism sets in question are singleton sets.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-morphism-into-affine-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf; literature/stacks-project/schemes.tex",
+    "place": "Theorem 11.12, printed p.213, extended from affine tests using Stacks Tag 01I1 (lemma-morphism-into-affine) and the structure-sheaf gluing axiom. The explicit extension argument is supplied here."
+   }
+  },
+  {
+   "text": "Scheme naturality and the group assertion. Given any $k$-map $v:T'\\to T$, cover $T$ by affine $U_i$ and each $v^{-1}U_i$ by affine opens $V_{ij}$. On $V_{ij}\\to U_i$ the claimed base-change equality is exactly the algebra naturality already computed for $R_i\\to\\Gamma(V_{ij},\\mathcal O)$. The affine-target uniqueness of [lem-weil-pbc-morphism-into-affine-scheme], applied to the coordinate sections, then proves the equality on $T'$. Pointwise multiplication of two characters and multiplication of two $G^D(T)$-points likewise agree after restriction to every $U_i$ by the computed affine group law; separatedness of coordinate sections gives equality globally. The resulting bijection is therefore canonical, natural in all test schemes, and an isomorphism of groups. The construction used the full dual vector space and the full rings $H\\otimes R$ throughout. No geometric-point replacement, perfection, reducedness, or division by $\\dim_kH$ occurred.",
+   "uses": [
+    "def-pc-scheme",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "def-sc-group-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf; literature/stacks-project/schemes.tex",
+    "place": "Theorem 11.12, printed p.213, extended from affine tests using Stacks Tag 01I1 (lemma-morphism-into-affine) and the structure-sheaf gluing axiom. The explicit extension argument is supplied here."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-scheme",
+  "def-sc-gm-ga",
+  "def-sc-group-scheme",
+  "def-sfb-affine-coordinate-hopf-algebra",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-integral-morphism",
+  "lem-pc-finite-projective-module-tensor-hom",
+  "lem-sfb-finite-free-tensor-dual",
+  "lem-sfb-hopf-spectrum-functor",
+  "lem-sfb-linear-dual-dimension-rank",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-morphism-into-affine-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "§11c pp.212–213, Lemma 11.11 and Theorem 11.12, with the group-like description of §4g p.92; explicit transpose and Zariski extension details supplied in the steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The linear dual Hopf algebra of a finite commutative group scheme represents its character functor",
+   "results": "8 hits: TannakaDuality.FiniteGroup.algHomOfRightFDRepComp, TannakaDuality.FiniteGroup.toRightFDRepComp_in_rightRegular, TannakaDuality.FiniteGroup.mulRepHom, TannakaDuality.FiniteGroup.ofRightFDRep_hom, TannakaDuality.FiniteGroup.ofRightFDRep, TannakaDuality.FiniteGroup.map_mul_toRightFDRepComp, FDRep.char_dual, FDRep.instRightRigidCategory. Finite abstract-group Tannaka duality, abstract characters and dual representations do not construct the Cartier dual scheme or its character functor.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartier duality for finite commutative group schemes represents homomorphisms into the multiplicative group",
+   "results": "8 hits: CharacterModule.dual_apply, AddChar.doubleDualEquiv, AddChar.coe_doubleDualEquiv, AddCommGrpCat.toCommGrp, AddChar.toMonoidHomMulEquiv, MulChar.mulEquivToUnitHom, CommGrpCat.coyoneda_obj_obj_coe, AddChar.instCommGroup. Finite abstract-group Tannaka duality, abstract characters and dual representations do not construct the Cartier dual scheme or its character functor.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HopfAlgebra, Module.Dual",
+   "results": "0 hits: none. Finite abstract-group Tannaka duality, abstract characters and dual representations do not construct the Cartier dual scheme or its character functor.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "CartierDual|cartier.dual|HopfAlgebra.*Dual|Dual.*HopfAlgebra",
+   "results": "0 hits: none. Finite abstract-group Tannaka duality, abstract characters and dual representations do not construct the Cartier dual scheme or its character functor.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "CartierDual|cartier.dual|HopfAlgebra.*Dual|Dual.*HopfAlgebra",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "Related tensor linear algebra is reused through existing Mathlib leaf nodes; no match for the full Cartier-dual representability statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartier duality finite commutative group scheme represented by dual Hopf algebra",
+   "results": "8 hits; AddChar.doubleDualEquiv, AddChar.coe_doubleDualEquiv, instAddCommGroupOrderDual, AddChar.doubleDualEmb_doubleDualEquiv_symm_apply, GroupLike.instCommGroup, FGModuleCat.FGModuleCatDual, HopfAlgCat.concreteCategory, instCommGroupOrderDual",
+   "date": "2026-10-24",
+   "verdict": "no match for the full Cartier-dual representability statement; group-like and antipode facts are component calculations only."
+  },
+  {
+   "tool": "loogle",
+   "query": "HopfAlgebra, Module.Dual",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "Related tensor linear algebra is reused through existing Mathlib leaf nodes; no match for the full Cartier-dual representability statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The linear dual of a finite dimensional commutative cocommutative Hopf algebra represents characters of its finite group scheme",
+   "results": "8 hits; TannakaDuality.FiniteGroup.algHomOfRightFDRepComp, FDRep.char_dual, AddChar.coe_doubleDualEquiv, FGModuleCat.FGModuleCatDual_coe, CharacterModule.dual_apply, AddChar.doubleDualEmb_bijective, FDRep.dualTensorIsoLinHom_hom_hom, CharacterModule.dual",
+   "date": "2026-10-24",
+   "verdict": "no match for the full Cartier-dual representability statement; group-like and antipode facts are component calculations only."
+  },
+  {
+   "tool": "grep",
+   "query": "dualTensorDual|tensor.*[Dd]ual|[Dd]ual.*tensor|groupLike.*[Ee]quiv|[Ee]quiv.*[Gg]roupLike",
+   "results": "25 hits; Mathlib/LinearAlgebra/Coevaluation.lean, Mathlib/LinearAlgebra/Coevaluation.lean, Mathlib/LinearAlgebra/Coevaluation.lean, Mathlib/LinearAlgebra/ExteriorPower/Pairing.lean, Mathlib/LinearAlgebra/ExteriorPower/Pairing.lean, Mathlib/LinearAlgebra/TensorPower/Pairing.lean, Mathlib/LinearAlgebra/TensorPower/Pairing.lean, Mathlib/LinearAlgebra/TensorPower/Pairing.lean",
+   "date": "2026-10-24",
+   "verdict": "Related tensor linear algebra is reused through existing Mathlib leaf nodes; no match for the full Cartier-dual representability statement."
+  },
+  {
+   "tool": "grep",
+   "query": "groupLike|GroupLike|Laurent",
+   "results": "8 hits; Mathlib/RingTheory/HopfAlgebra/MonoidAlgebra.lean, Mathlib/RingTheory/HopfAlgebra/MonoidAlgebra.lean, Mathlib/RingTheory/HopfAlgebra/MonoidAlgebra.lean, Mathlib/RingTheory/HopfAlgebra/GroupLike.lean, Mathlib/RingTheory/HopfAlgebra/GroupLike.lean, Mathlib/RingTheory/HopfAlgebra/GroupLike.lean, Mathlib/RingTheory/HopfAlgebra/GroupLike.lean, Mathlib/RingTheory/HopfAlgebra/GroupLike.lean",
+   "date": "2026-10-24",
+   "verdict": "no match for the full Cartier-dual representability statement; group-like and antipode facts are component calculations only."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Dual, TensorProduct",
+   "results": "12 hits; TensorProduct.dualDistrib, TensorProduct.AlgebraTensorModule.dualDistrib, TensorProduct.dualDistrib_apply, TensorProduct.AlgebraTensorModule.dualDistrib_apply, TensorProduct.dualDistrib_apply_comm, contractLeft, contractRight, dualTensorHom",
+   "date": "2026-10-24",
+   "verdict": "Related tensor linear algebra is reused through existing Mathlib leaf nodes; no match for the full Cartier-dual representability statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finite dimensional vector spaces the tensor product of their duals is canonically isomorphic to the dual of their tensor product",
+   "results": "8 hits; TensorProduct.dualDistribEquiv, PiTensorProduct.dualDistribEquiv, PiTensorProduct.dualDistribEquivOfBasis, PiTensorProduct.dualDistrib, TensorProduct.dualDistribEquivOfBasis, PiTensorProduct.dualDistribInvOfBasis, TensorProduct.dualDistribEquivOfBasis_apply_apply, PiTensorProduct.dualDistribEquivOfBasis_apply_apply",
+   "date": "2026-10-24",
+   "verdict": "Related tensor linear algebra is reused through existing Mathlib leaf nodes; no match for the full Cartier-dual representability statement."
+  },
+  {
+   "tool": "grep",
+   "query": "dualTensorHomEquiv|dualTensorHom_apply|dualDistribEquiv",
+   "results": "5 hits; 69, 86, 96, 104, 112",
+   "date": "2026-10-24",
+   "verdict": "Related tensor linear algebra is reused through existing Mathlib leaf nodes; no match for the full Cartier-dual representability statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finite projective module M and arbitrary module N the map from the tensor product of the dual of M with N to linear maps M to N is an equivalence",
+   "results": "8 hits; dualTensorHomEquivOfBasis, dualTensorHomEquiv, dualTensorHom, lTensorHomEquivHomLTensor, dualTensorHomEquivOfBasis_toLinearMap, ModuleCat.monoidalClosedHomEquiv, TensorProduct.dualDistribEquivOfBasis, rTensorHomEquivHomRTensor",
+   "date": "2026-10-24",
+   "verdict": "Related tensor linear algebra is reused through existing Mathlib leaf nodes; no match for the full Cartier-dual representability statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The dual vector space of a finite dimensional bialgebra is a bialgebra and the transpose of its antipode is an antipode",
+   "results": "8 hits; HopfAlgebra.ofAlgHom, instBialgebraCarrierUnopCommAlgCatOfMonObjOpposite, CommAlgCat.mul_op_of_unop_hom, HopfAlgebraStruct.antipode, BialgCat.of_comul, CommSemiring.toHopfAlgebra, HopfAlgebra.mul_antipode_lTensor_comul_apply, HopfAlgebra.mul_antipode_rTensor_comul_apply",
+   "date": "2026-10-24",
+   "verdict": "no match for the full Cartier-dual representability statement; group-like and antipode facts are component calculations only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dual-isogeny-degree",
+  "date": "2026-10-24",
+  "group": "NH"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Auxiliary for the symmetric ample endomorphism-span input below det-thm-sf-ctf-stability-direct-images, proof (3): Milne AV I §14, the double-dual identification behind the Rosati involution. Biduality proof: apply Milne I Theorem 9.1 to the ample polarization before cancelling its degree. Auxiliary below dual-isogeny-degree: The dual coordinate Hopf algebra represents finite-group characters.",
+   "via": [
+    "lem-sfb-dual-isogeny-degree",
+    "lem-sfb-abelian-poincare-biduality",
+    "lem-sfb-polarization-calculus-over-field",
+    "lem-sfb-abelian-symmetric-ample-endomorphism-span",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-commutative-cartier-representability",
+  "worker": "stage1",
+  "summary": "Followed Milne §11c and wrote the transposed Hopf identities and the group-like character calculation explicitly. Reused existing Mathlib leaves for finite dual dimension, tensor-dual and tensor-Hom equivalences, Hopf spectra and affine-scheme morphisms. Extended the algebra-valued construction to arbitrary schemes by gluing coordinate sections, without assuming affine overlaps. Statement unchanged; no new nodes.",
+  "blueprint": "Auxiliary for the symmetric ample endomorphism-span input below det-thm-sf-ctf-stability-direct-images, proof (3): Milne AV I §14, the double-dual identification behind the Rosati involution. Biduality proof: apply Milne I Theorem 9.1 to the ample polarization before cancelling its degree. Auxiliary below dual-isogeny-degree: The dual coordinate Hopf algebra represents finite-group characters. The current latest blueprint direct-images proof (3) supplies the ancestral direct-image route; this item is its pre-existing polarization/dual-isogeny auxiliary. blueprint_refs ancestor reports None, retained faithfully. Whole-blueprint searches Cartier, Hopf, tensor dual, finite projective tensor, dualTensorHomEquiv and scheme morphisms found no equivalent blueprint node."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-1d9b0d5c1",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-1d9b0d5c1 (reviewer sub-agent of L); spot-checked: PASS: the item and all 10 steps were read in full, no changes made. I checked the statement against Milne, Algebraic Groups §11c (printed pp.212–214: the construction, Lemma 11.11, Theorem 11.12 and Example 11.14) and it matches, including H* commutative because G is commutative. The statement itself is unchanged. The delivery creates no new nodes, and proof_deps equals the union of the step uses. Every statement node it cites is a Mathlib leaf and the rest are definitions, so there is no route departure and no tool_uses are needed. No SGA is cited. I recomputed the step calculations: transposed associativity, unit, coassociativity and counit (step 2); bialgebra compatibility as the sum f(a1b1)g(a2b2) (step 3); the antipode, where ΔS=(S⊗S)Δ comes correctly from commutativity of G as in Milne 11.11 (step 4); the dual-basis inverse x_α and the group-like criterion over any R (step 5); characters as group-like units (step 6); and x_{α⋆β}=x_α x_β (step 7). Steps 8–10 extend to arbitrary k-schemes by gluing over affine opens W inside the overlaps, without assuming affine overlaps, and use the morphism-into-affine Mathlib leaf, whose source scheme is arbitrary. Small cases agree: Z/2 gives μ2, μ_p gives Z/p, α_p is self-dual, and R=0 or T=∅ give singletons on both sides. I found no duplicate: finite-coalgebra-dual-base-change covers field extensions only, finite-dual-hopf-module is a different structure, and multiplicative-character-antiduality is a different setting. Mathlib has no Cartier dual. One advisory: the existing statement uses T-group homomorphisms and G_{m,T} without a node for group schemes over a base; the split did not introduce this."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteCommutativeCartierRepresentability",
+  "declaration": "AlgebraicGeometry.finite_commutative_cartier_representability",
+  "declarations": [
+   "AlgebraicGeometry.finiteCartierCoordinates",
+   "AlgebraicGeometry.finite_commutative_cartier_representability"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteCommutativeCartierRepresentability.lean",
+  "statement": "theorem finite_commutative_cartier_representability (k : Type u) [Field k] (G : Scheme.{u}) [G.Over (Spec (.of k))] [GrpObj (G.asOver (Spec (.of k)))] [IsCommMonObj (G.asOver (Spec (.of k)))] [IsFinite (G ↘ Spec (.of k))] : ∃ (n : ℕ) (b : Module.Basis (Fin n) k (finiteCartierCoordinates k G)) (D : CommHopfAlgCat.{u} k) (e : D ≃ₗ[k] Module.Dual k (finiteCartierCoordinates k G)), (∀ (d d' : D) (h : finiteCartierCoordinates k G), e (d * d') h = TensorProduct.dualDistrib k (finiteCartierCoordinates k G) (finiteCartierCoordinates k G) (e d ⊗ₜ[k] e d') (Coalgebra.comul h)) ∧ (∀ h : finiteCartierCoordinates k G, e (1 : D) h = Coalgebra.counit h) ∧ (∀ (a : k) (h : finiteCartierCoordinates k G), e (algebraMap k D a) h = a * Coalgebra.counit h) ∧ (∀ (d : D) (a b' : finiteCartierCoordinates k G), TensorProduct.dualDistrib k (finiteCartierCoordinates k G) (finiteCartierCoordinates k G) (TensorProduct.map e.toLinearMap e.toLinearMap (Coalgebra.comul d)) (a ⊗ₜ[k] b') = e d (a * b')) ∧ (∀ d : D, Coalgebra.counit d = e d 1) ∧ (∀ (d : D) (h : finiteCartierCoordinates k G), e (HopfAlgebra.antipode k d) h = e d (HopfAlgebra.antipode k h)) ∧ IsFinite ((hopfSpec (.of k)).obj (op D)).X.hom ∧ IsCommMonObj ((hopfSpec (.of k)).obj (op D)).X ∧ ∃ (c : ∀ T : Over (Spec (.of k)), CommGroup (GroupSchemeCharacters.Characters (G.asOver (Spec (.of k))) T)) (Φ : ∀ T : Over (Spec (.of k)), @MulEquiv (T ⟶ ((hopfSpec (.of k)).obj (op D)).X) (GroupSchemeCharacters.Characters (G.asOver (Spec (.of k))) T) inferInstance (c T).toMul), (∀ (T S : Over (Spec (.of k))) (χ ψ : GroupSchemeCharacters.Characters (G.asOver (Spec (.of k))) T) (z : S ⟶ G.asOver (Spec (.of k)) ⊗ T), GroupSchemeCharacters.value (@Mul.mul _ (c T).toMul χ ψ) z = GroupSchemeCharacters.value χ z * GroupSchemeCharacters.value ψ z) ∧ (∀ (T T' S : Over (Spec (.of k))) (v : T' ⟶ T) (f : T ⟶ ((hopfSpec (.of k)).obj (op D)).X) (z : S ⟶ G.asOver (Spec (.of k)) ⊗ T'), GroupSchemeCharacters.value (Φ T' (v ≫ f)) z = GroupSchemeCharacters.value (Φ T f) (z ≫ (G.asOver (Spec (.of k)) ◁ v))) ∧ (∀ (T : Over (Spec (.of k))) (f : T ⟶ ((hopfSpec (.of k)).obj (op D)).X), GroupSchemeCharacters.value (Φ T f) (𝟙 (G.asOver (Spec (.of k)) ⊗ T)) = ∑ i : Fin n, (fst (G.asOver (Spec (.of k))) T).left.appTop (b i) * (snd (G.asOver (Spec (.of k))) T).left.appTop (f.left.appTop ((Scheme.ΓSpecIso (.of D)).inv (e.symm (b.coord i)))))",
+  "branch": "sheaf-dag",
+  "by": "Q16",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of returned head 59d1b694267f: the character hom-set and Laurent value are now cited through new definition node def-sfb-group-scheme-characters and its owning module. Its abbreviations reuse the existing PointedTorsor helpers definitionally. No classification theorem is a statement dependency. All original six Hopf-operation formulas, finiteness, group compatibility, naturality and normalization are retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-976018648",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 59d1 (H2): the theorem stmt_dep is replaced by new def node def-sfb-group-scheme-characters (kind definition, status split, Milne §11c p.213/214, searches recorded); its module GroupSchemeCharacters holds two abbrevs definitionally equal to PointedTorsor.Characters/value, whose live bodies (Hom_{T-grp}(G_T,G_{m,T}); (pr_Gm∘χ∘z)^*t) match the node statement exactly. Item module differs from 59d1 only by the import and the two renamed declarations; item node differs from live only in stmt_deps (6 defs + new def) and lean; lean.statement verbatim. Pointed-torsor proof_deps do not cite the item, so the import is acyclic; no competing owner; Q07 f504 retired, not landed. The 59d1 substance check stands: the six transposed formulas, finite commutative hopfSpec D, pointwise CommGroup with MulEquiv, naturality, dual-basis Laurent normalization, edge cases (empty T, char p infinitesimal, nonreduced T), universe u bound, real-data helper, docstrings present, only sorry. No file changed, no compile. Advisory only: the pointed-torsor record still lists the aliased defs."
+ }
+}

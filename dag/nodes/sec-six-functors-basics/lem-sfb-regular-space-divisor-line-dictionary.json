@@ -1,0 +1,327 @@
+{
+ "id": "lem-sfb-regular-space-divisor-line-dictionary",
+ "kind": "statement",
+ "title": "Divisors and rationally trivialized lines on a regular algebraic space",
+ "statement": "Let $X$ be a regular Noetherian separated algebraic space [def-trf-algebraic-space, def-weil-regular-scheme, pqf-def-locnoeth]. Here regular means that every scheme etale over $X$ is regular; Noetherian means quasi-compact, quasi-separated and locally Noetherian, and separated means that the diagonal over $\\operatorname{Spec}\\mathbf Z$ is a closed immersion. A Weil divisor is a finite integral linear combination of integral closed subspaces of codimension one, with codimension computed on etale scheme charts. A Cartier divisor is a section of $\\mathcal K_X^\\times/\\mathcal O_X^\\times$, where $\\mathcal K_X$ is the sheaf of total quotient rings on the small etale site. A nonzero rational section of a line module means a generator at each generic point of each irreducible component, or equivalently a generator after tensoring with $\\mathcal K_X$.\n\nCartier divisors and Weil divisors on $X$ are canonically identified. Every line module $L$ on $X$ admits a nonzero rational section $s$. Its divisor $\\operatorname{div}(s)$ is the sum of its orders at codimension-one points, computed in etale charts using the normalized valuation of the local discrete valuation ring. For every Weil divisor $D$ there is a line module $\\mathcal O_X(D)$ with a canonical nonzero rational section $s_D$ of divisor $D$. Explicitly, on an etale scheme chart where the Cartier divisor of $D$ is the class of a local section $f$ of $\\mathcal K_X^\\times$, $\\mathcal O_X(D)=f^{-1}\\mathcal O_X\\subseteq\\mathcal K_X$ and $s_D=1$. Every pair $(L,s)$ has a unique isomorphism $(L,s)\\simeq(\\mathcal O_X(\\operatorname{div}(s)),s_{\\operatorname{div}(s)})$ preserving the rational sections. A rational section $s$ extends to an everywhere generating regular section if and only if $\\operatorname{div}(s)=0$. Two maps between line modules equal on a dense open are equal. These identifications respect restriction to open subspaces, and the associated line modules and sections respect etale pullback. More generally, let $q:X'\\to X$ be a flat morphism (flat on etale scheme charts) [def-weil-flat-morphism] to $X$ from another regular Noetherian separated algebraic space $X'$. Pulling back local equations defines the Cartier pullback $q^*D$ of every Weil divisor $D$ of $X$, the pullback $q^*s$ of a nonzero rational section is a nonzero rational section, and there is a unique isomorphism $q^*(\\mathcal O_X(D),s_D)\\simeq(\\mathcal O_{X'}(q^*D),s_{q^*D})$ preserving the rational sections; consequently $\\operatorname{div}(q^*s)=q^*\\operatorname{div}(s)$. On a scheme, line modules here are the usual invertible modules [def-sc-invertible-module].",
+ "source": {
+  "document": "literature/stacks-project/spaces-divisors.tex",
+  "place": "Tags 0DMM (lemma-Noetherian-regular-separated-pic-effective-Cartier), 0EPQ (lemma-regular-meromorphic-section-exists), together with divisors.tex Tag 0AGA (lemma-weil-divisor-is-cartier-UFD). Agent-formulated Cartier/Weil dictionary using these algebraic-space meromorphic sections and etale-local divisor constructions."
+ },
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-regular-scheme",
+  "pqf-def-locnoeth",
+  "def-sc-invertible-module",
+  "def-weil-flat-morphism",
+  "def-sfb-space-total-fractions",
+  "def-sfb-space-divisors",
+  "def-sfb-space-divisor-operations",
+  "def-trf-space-module-scheme-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Apply the meromorphic generic-chart model to $X$ and $L$. Each $L_\\eta$ is a one-dimensional vector space over $k(\\eta)$; choose a basis $s_\\eta$. The tuple $(s_\\eta)_\\eta$ is a global section of $\\mathcal K_X(L)$ and generates it over $\\mathcal K_X$, since componentwise multiplication by a nonzero basis coordinate is invertible. This gives the asserted nonzero rational section, also when $X$ is disconnected; for the empty space the tuple is empty. Throughout, use connected affine etale charts, whose rings are Noetherian normal domains, and interpret line modules on scheme charts by the ordinary-to-etale equivalence.",
+   "uses": [
+    "lem-sfb-space-meromorphic-generic-chart-model",
+    "lem-trf-scheme-etale-invertible-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tags 0ENA (lemma-compute-meromorphic), 0EPQ (lemma-regular-meromorphic-section-exists), basis-tuple argument"
+   }
+  },
+  {
+   "text": "A Cartier section is represented on an etale covering by invertible meromorphic functions $f_i$, with $f_i/f_j$ a regular unit on overlaps. On a connected normal affine chart, the principal-divisor kernel lemma gives a finite cycle of normalized codimension-one orders; it is additive on multiplication and vanishes on units. The cycle-descent lemma identifies these cycles under further etale restriction and descends them to a unique Weil divisor on $X$. Local finiteness is finite support here: choose a finite covering of the quasi-compact $X$ by affine charts with local equations; the finite union of their finite order supports has finite image. If two Cartier sections have the same Weil divisor, their ratio on any connected affine refinement has zero principal divisor. The kernel lemma says this ratio is a regular unit. The local classes in $\\mathcal K_X^\\times/\\mathcal O_X^\\times$ therefore agree; its sheaf axiom gives equality globally. This proves injectivity and also makes the order convention unambiguous.",
+   "uses": [
+    "lem-sfb-space-meromorphic-generic-chart-model",
+    "lem-trf-normal-domain-principal-divisor-kernel",
+    "lem-sfb-space-codimension-one-cycle-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0BE8 (lemma-normal-c1-injective) and 0BE3 (definition-principal-divisor), with spaces-chow.tex 0EQ2"
+   }
+  },
+  {
+   "text": "Conversely, pull a Weil divisor $E$ back to a quasi-compact etale scheme atlas $U$ by cycle descent. Work on a connected affine open $\\operatorname{Spec}R$ of $U$: by the model, $R$ is a Noetherian normal domain, and it is regular. Fix a point $x$ with prime $\\mathfrak q$; discard the finitely many prime divisors of $E$ on $\\operatorname{Spec}R$ not containing $x$ (remove their union), and let $J_a$ be the primes of the remaining ones, with coefficients $n_a\\in\\mathbf Z$. Primes of $R_{\\mathfrak q}$ inside $J_aR_{\\mathfrak q}$ correspond to primes of $R$ inside $J_a$, and $\\dim R_{J_a}=1$, so $J_aR_{\\mathfrak q}$ has height one. The regular local ring $R_{\\mathfrak q}$ is a unique factorization domain by the boundary-factorization lemma with $r=0$, so the height-one criterion gives $J_aR_{\\mathfrak q}=(t_a)$, with $t_a\\ne0$ a nonzerodivisor of the domain. The spreading lemma gives $g_a\\notin\\mathfrak q$ and $c_a\\in J_a$ with $J_aR_{g_a}=(c_a)$; let $g=\\prod_ag_a\\notin\\mathfrak q$. On $\\operatorname{Spec}R_g$, localizing at $J_a$ gives $J_aR_{J_a}=(c_a)$, so $c_a$ is a uniformizer of the discrete valuation ring $R_{J_a}$ of the kernel lemma and $v_{J_a}(c_a)=1$. A height-one prime $P\\ne J_aR_g$ of $R_g$ does not contain $c_a$, since otherwise $J_aR_g\\subseteq P$ with both of height one; so $v_P(c_a)=0$. Hence $f=\\prod_ac_a^{n_a}\\in\\operatorname{Frac}(R)^\\times$ has divisor precisely the specified sum on $\\operatorname{Spec}R_g$. The equations on overlaps have equal Weil divisors, by cycle descent, hence their ratios are regular units by the kernel lemma, applied on connected normal affine refinements. Their classes glue in $\\mathcal K_X^\\times/\\mathcal O_X^\\times$. Step 2 proves that this inverse to the order map is independent of every choice. Thus the Cartier and Weil groups are canonically identified.",
+   "uses": [
+    "lem-sfb-space-meromorphic-generic-chart-model",
+    "lem-sfb-space-codimension-one-cycle-descent",
+    "lem-trf-regular-local-ufd-boundary-factorization",
+    "lem-trf-ufd-height-one",
+    "lem-sfb-stalk-nonzerodivisor-cartier-spreading",
+    "lem-trf-normal-domain-principal-divisor-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0AGA (lemma-weil-divisor-is-cartier-UFD), 0BE9 (lemma-local-rings-UFD-c1-bijective), surjectivity argument; algebra.tex Tag 0AFT (lemma-characterize-UFD-height-1)"
+   }
+  },
+  {
+   "text": "For the Cartier equations $f_i$ of $E$, form $M_i=f_i^{-1}\\mathcal O_{U_i}\\subset\\mathcal K_{U_i}$. Each is a free line with basis $f_i^{-1}$. If $f_i/f_j$ is a unit, these are equal submodules of the meromorphic sheaf on the overlap; their identification is the identity on rational elements and satisfies the triple-overlap cocycle. Etale descent of line modules gives $\\mathcal O_X(E)$; its local injections into $\\mathcal K_X$ agree, so the sheaf axiom realizes it as the subsheaf given by these $M_i$. In its meromorphic localization, the element $1$ agrees on all overlaps and is a generator. Set $s_E=1$. Relative to $f_i^{-1}$ its coefficient is $f_i$, so Step 2 gives $\\operatorname{div}(s_E)=E$. These formulas give the explicit construction in the statement, including negative coefficients.",
+   "uses": [
+    "lem-sfb-space-meromorphic-generic-chart-model",
+    "lem-trf-algebraic-space-invertible-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BE9 proof: canonical section of the invertible module of a prime divisor; spaces-divisors.tex section Effective Cartier divisors, local inverse-ideal construction"
+   }
+  },
+  {
+   "text": "For any rationally trivialized line $(L,s)$, choose local frames $e_i$ on scheme charts and write $s=g_i e_i$ with $g_i\\in\\mathcal K^\\times$. A change of frame multiplies $g_i$ by a regular unit, so its orders define $E=\\operatorname{div}(s)$ by Steps 2 and 3. The map $g_i^{-1}\\mathcal O\\to L$, $a\\mapsto a g_i e_i$, is a regular isomorphism: it sends the basis $g_i^{-1}$ to $e_i$. It sends the rational section $1$ to $s$. On overlaps both maps send every rational scalar $a$ to $as$, so they agree by the injective meromorphic embedding of a line. Full faithfulness in etale descent glues them to $\\mathcal O_X(E)\\simeq L$. A second such isomorphism has the same meromorphic map, since $1$ generates after meromorphic localization; injectivity of $L\\to\\mathcal K_X(L)$ makes it equal to the first. Invert this unique isomorphism to obtain the orientation in the statement.",
+   "uses": [
+    "lem-sfb-space-meromorphic-generic-chart-model",
+    "lem-trf-scheme-etale-invertible-comparison",
+    "lem-trf-algebraic-space-invertible-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BE8 (lemma-normal-c1-injective), local trivialization argument, with spaces-descent.tex Tag 04W8"
+   }
+  },
+  {
+   "text": "In the same frame $s=g_i e_i$, it extends to a regular generating section exactly when $g_i$ is a regular unit. By the principal-divisor kernel lemma on connected normal affine refinements, this holds exactly when all codimension-one orders of $g_i$ vanish. The extension glues uniquely, since its images in the meromorphic sheaf agree. Therefore $s$ is everywhere generating if and only if $\\operatorname{div}(s)=0$. This tests the given rational section, rather than just the isomorphism class of its line.",
+   "uses": [
+    "lem-sfb-space-meromorphic-generic-chart-model",
+    "lem-trf-normal-domain-principal-divisor-kernel"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BE8 (lemma-normal-c1-injective), last paragraph"
+   }
+  },
+  {
+   "text": "Let $a,b:L\\to M$ agree on a dense open $W$. Apply the generic-chart model to the line $L^\\vee\\otimes M$: in local frames its regular sections are exactly the coefficients of maps $L\\to M$. The coefficient of $a-b$ restricts to zero on $W$, hence is zero by the dense-open injection of that model. Thus $a=b$. Open restriction and further etale restriction preserve the equations $f_i$, the submodules $f_i^{-1}\\mathcal O$, and the maps $a\\mapsto as$ above, by the meromorphic chart model. Consequently all the identifications commute with these restrictions. On schemes the ordinary-to-etale equivalence identifies these lines with the usual invertible modules.",
+   "uses": [
+    "lem-sfb-space-meromorphic-generic-chart-model",
+    "lem-trf-scheme-etale-invertible-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tags 0EN6, 0EN7, 0ENA, with descent.tex Tags 03DX, 03LC, 05VG"
+   }
+  },
+  {
+   "text": "For the flat $q:X'\\to X$, use the enlarged ringed-etale-site model to compute module pullback as tensor inverse image. After choosing charts of $X$ and refining their inverse images by affine charts of $X'$, the calculation is a flat ring map $A\\to A'$ of reduced rings. The total-fraction comparison lemma states that non-zero-divisors of $A$ map to non-zero-divisors of $A'$ and gives the map $Q(A)\\to Q(A')$, $a/t\\mapsto q(a)/q(t)$. Only this first assertion of that lemma is used (its finite intermediate algebra may be taken to be $A$). Hence every local equation $f_i\\in Q(A)^\\times$ pulls back to $q(f_i)\\in Q(A')^\\times$; regular-unit ratios remain units. These equations define a Cartier divisor, hence by Steps 2 and 3 a Weil divisor $q^*E$ on $X'$. No flat cycle pullback with a relative dimension assumption is used.",
+   "uses": [
+    "lem-sfb-space-meromorphic-generic-chart-model",
+    "lem-trf-flat-birational-normalization-comparison",
+    "lem-trf-space-enlarged-etale-ringed-site-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 0EN9 (lemma-pullback-meromorphic-sections-defined), flat case; spaces-properties.tex Tag 03G8"
+   }
+  },
+  {
+   "text": "Locally $q^*(f_i^{-1}\\mathcal O)$ is free with basis $1\\otimes f_i^{-1}$, and $1\\otimes f_i^{-1}\\mapsto q(f_i)^{-1}$ is an isomorphism to $q(f_i)^{-1}\\mathcal O_{X'}$. The rational element $1=f_i f_i^{-1}$ maps to $q(f_i)q(f_i)^{-1}=1$. The transition ratios are the images of the original ratios, so these local isomorphisms glue. Likewise $s=g_i e_i$ pulls back to $q(g_i)q^*e_i$, which is a generator over the meromorphic sheaf since $q(g_i)$ is a unit there. Its divisor is the Weil divisor represented by the Cartier equations $q(g_i)$, exactly $q^*\\operatorname{div}(s)$ by Step 8. This proves the asserted pullback identity and the isomorphism of pairs; its uniqueness follows as in Step 5 from the injective meromorphic embedding on $X'$.",
+   "uses": [
+    "lem-sfb-space-meromorphic-generic-chart-model",
+    "lem-trf-algebraic-space-invertible-descent",
+    "lem-trf-space-enlarged-etale-ringed-site-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 0ENC (lemma-meromorphic-sections-pullback): local tensor calculation supplied explicitly; Tag 0EN9 for the flat meromorphic map"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-meromorphic-generic-chart-model",
+  "lem-trf-scheme-etale-invertible-comparison",
+  "lem-trf-normal-domain-principal-divisor-kernel",
+  "lem-sfb-space-codimension-one-cycle-descent",
+  "lem-trf-regular-local-ufd-boundary-factorization",
+  "lem-trf-ufd-height-one",
+  "lem-sfb-stalk-nonzerodivisor-cartier-spreading",
+  "lem-trf-algebraic-space-invertible-descent",
+  "lem-trf-flat-birational-normalization-comparison",
+  "lem-trf-space-enlarged-etale-ringed-site-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-divisors.tex",
+  "place": "Tags 0ENA and 0EPQ for meromorphic sections; divisors.tex Tags 0AGA, 0BE8, 0BE9 for the chartwise divisor argument; the local-equation descent, pair identification and flat tensor formulas are written out here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Weil divisors on a regular Noetherian algebraic space correspond to line bundles with rational trivializations and a rational section is an invertible generator exactly when all orders are zero",
+   "results": "8 hits; returned declarations: Trivialization.zeroSection, Trivialization.symmₗ, PowerSeries.IsWeierstrassDivisorAt, ModuleCat.Tilde.const, AlgebraicGeometry.RingedSpace.zeroLocus, Trivialization.IsLinear, AlgebraicGeometry.StructureSheaf.isLocallyFraction, MeromorphicOn.divisor",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; scheme function-field and section-localization facts, topological bundle trivializations and analytic meromorphic divisors do not give the algebraic-space Cartier/Weil and line-module correspondence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeilDivisor\", \"Invertible\"",
+   "results": "0 hits; returned declarations: none",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; scheme function-field and section-localization facts, topological bundle trivializations and analytic meromorphic divisors do not give the algebraic-space Cartier/Weil and line-module correspondence"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilDivisor|CartierDivisor|meromorphic|rational[Ss]ection",
+   "results": "0 hits; returned declarations: none",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; scheme function-field and section-localization facts, topological bundle trivializations and analytic meromorphic divisors do not give the algebraic-space Cartier/Weil and line-module correspondence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regular Noetherian algebraic spaces have Cartier divisors equal to Weil divisors, and line bundles admit rational sections whose divisors determine the line bundle",
+   "results": "8 hits; returned declarations: AlgebraicGeometry.instFieldCarrierFunctionField, AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField, AlgebraicGeometry.Scheme.functionField, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.exists_of_res_eq_of_qcqs",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; scheme function-field and section-localization facts, topological bundle trivializations and analytic meromorphic divisors do not give the algebraic-space Cartier/Weil and line-module correspondence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cartier and Weil divisors on regular algebraic spaces classify invertible sheaves with a rational trivialization",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R))\\n  (s : ↑((AlgebraicGeometry.Spec.structureSheaf R).val.obj (Opposite.op U))) {ι : Type u_1} (t : Finset ι) (a h : ι → R)\\n  (iDh : (i : ι) → PrimeSpectrum.basicOpen (h i) ⟶ U),\\n  U ≤ ⨆ i ∈ t, Prim\", \"doc\": \"Given an open set $ U $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ of a commutative ring $ R $, a section $ s $ of the structure sheaf over $ U $, and a finite cover of $ U $ by basic open sets \"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n      ∃ n y, TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.restrictOpen f (X.basicOpen f) ⋯ ^\", \"doc\": \"For any affine open subset $ U $ of a scheme $ X $, a section $ f $ over $ U $, and a section $ x $ over the basic open set $ D(f) $ defined by $ f $, there exists a natural number $ n $ and a section\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f g s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = TopCat.Presheaf.restrictOpen g (X.basicOpen s) ⋯ →\\n    ∃ n, s ^ n * f = s ^ n * g\", \"doc\": \"For a compact and quasi-separated scheme $X$, given global sections $f, g, s$ of the structure sheaf $\\\\mathcal{O}_X$, if the restrictions of $f$ and $g$ to the basic open set $D(s)$ (where $s$ is a un\"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, if a section $ x $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ vanishes on the basic open set $ D(f) $ defined by a section $ f \\\\in \\\\Gamma(U,\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.isUnit_to_basicOpen_self\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (f : R),\\n  IsUnit\\n    ((CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.StructureSheaf.toOpen R (PrimeSpectrum.basicOpen f))) f)\", \"doc\": \"For any element $ f $ in a commutative ring $ R $, the image of $ f $ under the canonical ring homomorphism from $ R $ to the ring of sections $ \\\\mathcal{O}(D(f)) $ over the basic open set $ D(f) = \\\\{\"}\n  {\"name\": \"ModuleCat.Tilde.isUnit_toStalk\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) (x : ↑(AlgebraicGeometry.PrimeSpectrum.Top R))\\n  (r : ↥x.asIdeal.primeCompl), IsUnit ((algebraMap R (Module.End R ↑(M.tildeInModuleCat.stalk x))) ↑r)\", \"doc\": \"For any prime ideal $\\\\mathfrak{p}$ in the prime spectrum of a commutative semiring $R$ and any element $r$ in the complement of $\\\\mathfrak{p}$, the image of $r$ under the canonical algebra map from $R\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_eq_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f g s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = TopCat.Presheaf.restrictOpen g (X.basicOpen s) ⋯ →\\n          ∃ n,\", \"doc\": \"Let $X$ be a scheme, and let $U$ be a quasi-compact and quasi-separated open subset of $X$. Let $f, g, s \\\\in \\\\mathcal{O}_X(U)$ be sections of the structure sheaf over $U$. Let $U_s$ be the basic open \"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.IsFraction\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    {U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)} →\\n      ((x : ↥U) → AlgebraicGeometry.StructureSheaf.Localizations R ↑x) → Prop\", \"doc\": \"A function $ f $ defined on an open subset $ U $ of the prime spectrum $ \\\\operatorname{Spec}(R) $ is called a fraction if there exist elements $ r, s \\\\in R $ such that for every prime ideal $ \\\\mathfra\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme function-field, analytic meromorphic, topology, localization and ramification facts do not state the algebraic-space generic-chart model or descent of codimension-one cycles. No one-line specialization gives this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regular schemes locally factorial divisor rational section of a line bundle with zero divisor is a trivialization",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R))\\n  (s : ↑((AlgebraicGeometry.Spec.structureSheaf R).val.obj (Opposite.op U))) {ι : Type u_1} (t : Finset ι) (a h : ι → R)\\n  (iDh : (i : ι) → PrimeSpectrum.basicOpen (h i) ⟶ U),\\n  U ≤ ⨆ i ∈ t, Prim\", \"doc\": \"Given an open set $ U $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ of a commutative ring $ R $, a section $ s $ of the structure sheaf over $ U $, and a finite cover of $ U $ by basic open sets \"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n      ∃ n y, TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.restrictOpen f (X.basicOpen f) ⋯ ^\", \"doc\": \"For any affine open subset $ U $ of a scheme $ X $, a section $ f $ over $ U $, and a section $ x $ over the basic open set $ D(f) $ defined by $ f $, there exists a natural number $ n $ and a section\"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, if a section $ x $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ vanishes on the basic open set $ D(f) $ defined by a section $ f \\\\in \\\\Gamma(U,\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.isLocallyFraction_pred\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R] {U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)}\\n  (f : (x : ↥U) → AlgebraicGeometry.StructureSheaf.Localizations R ↑x),\\n  (AlgebraicGeometry.StructureSheaf.isLocallyFraction R).pred f =\\n    ∀ (x : ↥U),\\n      ∃ V,\\n        ∃ (_ : ↑x ∈ V),\\n      \", \"doc\": \"For any open subset $U$ of the prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative ring $R$, and for any function $f$ defined on $U$ with values in the localization rings of $R$, the predicate $\\\\\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.IsFraction\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    {U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)} →\\n      ((x : ↥U) → AlgebraicGeometry.StructureSheaf.Localizations R ↑x) → Prop\", \"doc\": \"A function $ f $ defined on an open subset $ U $ of the prime spectrum $ \\\\operatorname{Spec}(R) $ is called a fraction if there exist elements $ r, s \\\\in R $ such that for every prime ideal $ \\\\mathfra\"}\n  {\"name\": \"AlgebraicGeometry.germ_eq_zero_of_pow_mul_eq_zero\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X} (x : ↥U) {f s : ↑(X.presheaf.obj (Opposite.op U))},\\n  ↑x ∈ X.basicOpen s → ∀ {n : ℕ}, s ^ n * f = 0 → (CategoryTheory.ConcreteCategory.hom (X.presheaf.germ U ↑x ⋯)) f = 0\", \"doc\": \"Let $ X $ be a scheme, $ U $ an open subset of $ X $, $ x $ a point in $ U $, and $ f, s $ sections of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $. If $ x $ lies in the basic open set $ X_{\\\\text{\"}\n  {\"name\": \"ModuleCat.Tilde.isLocallyFraction_pred\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R)\\n  {U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)}\\n  (f : (x : ↥U) → ModuleCat.Tilde.Localizations M ↑x),\\n  (ModuleCat.Tilde.isLocallyFraction M).pred f =\\n    ∀ (y : ↥U),\\n      ∃ V,\\n        ∃ (_ : ↑y ∈ V),\\n          ∃ i m s,\\n \", \"doc\": \"For any open subset $ U $ of the prime spectrum $ \\\\operatorname{Spec}(R) $ of a commutative ring $ R $, a section $ f $ of the sheaf associated to an $ R $-module $ M $ over $ U $ satisfies the predic\"}\n  {\"name\": \"AlgebraicGeometry.isLocalization_away_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X] (r : ↑(X.presheaf.obj (Opposite.op ⊤))),\\n  IsLocalization.Away r ↑(X.presheaf.obj (Opposite.op (X.basicOpen r)))\", \"doc\": \"For a scheme $ X $, an open subset $ U $ of $ X $, and a section $ f $ of the structure sheaf over $ U $, the ring of sections over the basic open set $ D(f) $ (consisting of points where the germ of \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme function-field, analytic meromorphic, topology, localization and ramification facts do not state the algebraic-space generic-chart model or descent of codimension-one cycles. No one-line specialization gives this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CartierDivisor\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme function-field, analytic meromorphic, topology, localization and ramification facts do not state the algebraic-space generic-chart model or descent of codimension-one cycles. No one-line specialization gives this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "CartierDivisor|WeilDivisor|rationalSection",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme function-field, analytic meromorphic, topology, localization and ramification facts do not state the algebraic-space generic-chart model or descent of codimension-one cycles. No one-line specialization gives this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartier Weil divisors invertible sheaves regular algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.𝒪\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \": Sheaf CommRingCat X.toTopCat\", \"doc\": \"The sheaf $\\\\mathcal{O}_X$ of commutative rings on the underlying topological space of a locally ringed space $X$, where every stalk is a local ring. This is the canonical sheaf associated to the local\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \": (structureSheaf <| Γ.obj <| op X).val.obj (op <| basicOpen r) ⟶ X.presheaf.obj (op <| X.toΓSpecMapBasicOpen r)\", \"doc\": \"For a locally ringed space $X$ and element $r$ in its ring of global sections $\\\\Gamma(X)$, this is the canonical ring homomorphism from the localization $\\\\Gamma(X)_r$ to the ring of sections over the \"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.globalSectionsIso\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \": CommRingCat.of R ≅ (structureSheaf R).1.obj (op ⊤)\", \"doc\": \"For a commutative ring $ R $, the canonical ring homomorphism from $ R $ to the global sections $ \\\\mathcal{O}_{\\\\operatorname{Spec}(R)}(\\\\operatorname{Spec}(R)) $ of its structure sheaf is an isomorphis\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.basicOpenIso\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(f : R) : (structureSheaf R).1.obj (op (PrimeSpectrum.basicOpen f)) ≅ CommRingCat.of (Localization.Away f)\", \"doc\": \"The isomorphism between the ring of sections of the structure sheaf over the basic open set $D(f) = \\\\{\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R) \\\\mid f \\\\notin \\\\mathfrak{p}\\\\}$ and the localization $R_f$ o\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.isoMk_inv\", \"module\": \"Mathlib.Geometry.RingedSpace.SheafedSpace\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {X Y : AlgebraicGeometry.SheafedSpace C}\\n  (e : X.toPresheafedSpace ≅ Y.toPresheafedSpace),\\n  (AlgebraicGeometry.SheafedSpace.isoMk e).inv = CategoryTheory.InducedCategory.homMk e.inv\", \"doc\": \"For sheafed spaces $X$ and $Y$ over a category $\\\\mathcal{C}$, the inverse of the isomorphism $X \\\\cong Y$ constructed from an isomorphism $e$ between their underlying presheafed spaces is given by appl\"}\n  {\"name\": \"AlgebraicGeometry.Spec.sheafedSpaceObj\", \"module\": \"Mathlib.AlgebraicGeometry.Spec\", \"type\": \"(R : CommRingCat.{u}) : SheafedSpace CommRingCat\", \"doc\": \"For a commutative ring $ R $, the sheafed space constructed by equipping the prime spectrum $ \\\\operatorname{Spec}(R) $ with the structure sheaf of commutative rings $ \\\\mathcal{O}_{\\\\operatorname{Spec}(\"}\n  {\"name\": \"AlgebraicGeometry.isLocalization_away_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"[IsAffine X] (r : Γ(X, ⊤)) : IsLocalization.Away r Γ(X, X.basicOpen r)\", \"doc\": \"For a scheme $ X $, an open subset $ U $ of $ X $, and a section $ f $ of the structure sheaf over $ U $, the ring of sections over the basic open set $ D(f) $ (consisting of points where the germ of \"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.restrictTopIso_inv\", \"module\": \"Mathlib.Geometry.RingedSpace.SheafedSpace\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (X : AlgebraicGeometry.SheafedSpace C),\\n  X.restrictTopIso.inv = CategoryTheory.InducedCategory.homMk X.toRestrictTop\", \"doc\": \"For any sheafed space $X$ over a category $\\\\mathcal{C}$, the inverse of the canonical isomorphism between $X$ and its restriction to the entire underlying space is constructed via the homomorphism con\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme function-field, analytic meromorphic, topology, localization and ramification facts do not state the algebraic-space generic-chart model or descent of codimension-one cycles. No one-line specialization gives this statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-regular-group-rigidified-line-extension",
+  "date": "2026-10-23",
+  "group": "Q125"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Extension and uniqueness of rigidified lines over a regular base. Supporting input for the rigidified-line split: Divisors and rationally trivialized lines on a regular algebraic space.",
+   "via": [
+    "lem-sfb-regular-group-rigidified-line-extension",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-regular-space-divisor-line-dictionary",
+  "worker": "stage1",
+  "summary": "Q80: nine explicit steps preserve every clause of the statement. Two statement-only prerequisites give the generic-chart meromorphic model and etale cycle descent; prime local equations, zero-divisor kernel and module descent are reused. All cited statements were read; rational trivializations, signs, finite supports, disconnected spaces, and arbitrary flat pullback were checked.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Extension and uniqueness of rigidified lines over a regular base. Supporting input for the rigidified-line split: Divisors and rationally trivialized lines on a regular algebraic space. Current blueprint: sk-thm-sf-ctf-stability-direct-images.proof.md, clause (3), proper-direct-image input; this live supporting branch retains the regular-base Picard geometry described in its existing provenance.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-normal-domain-principal-divisor-kernel",
+    "why": "The generic Noetherian normal-domain order map, its finite support and its unit kernel are needed on charts; no node in this unit replaces this commutative-algebra tool."
+   },
+   {
+    "node": "lem-trf-regular-local-ufd-boundary-factorization",
+    "why": "Only the case r=0 is used: a regular local ring is a unique factorization domain, applied to local rings of etale charts in Step 3; generic commutative algebra that no node of this unit gives."
+   },
+   {
+    "node": "lem-trf-algebraic-space-invertible-descent",
+    "why": "Etale descent and full faithfulness for line modules are generic space tools for gluing the local inverse-equation modules."
+   },
+   {
+    "node": "lem-trf-scheme-etale-invertible-comparison",
+    "why": "The scheme Zariski/small-etale equivalence supplies ordinary local frames and interprets the final scheme clause."
+   },
+   {
+    "node": "lem-trf-flat-birational-normalization-comparison",
+    "why": "Only preservation of non-zero-divisors and the induced map of total fractions under a flat map is used, a generic ring-theoretic tool."
+   },
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "The canonical ringed-etale-site model supplies actual module pullback along arbitrary maps of spaces."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-normal-domain-principal-divisor-kernel",
+  "lem-trf-regular-local-ufd-boundary-factorization",
+  "lem-trf-algebraic-space-invertible-descent",
+  "lem-trf-scheme-etale-invertible-comparison",
+  "lem-trf-flat-birational-normalization-comparison",
+  "lem-trf-space-enlarged-etale-ringed-site-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q80-7bdb6d6d7",
+  "group": "Q80",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-7bdb6d6d7 (reviewer sub-agent of L); spot-checked: Read in full: the item (statement unchanged, 9 steps), both new nodes, all 8 cited nodes, and Stacks spaces-divisors 0DMM, 0EN6/0EN7, 0EN9, 0ENA, 0EPQ (l.1627-2230), with tags 0AFT/0AGA/0BE9. The item was created today by Q125 and is still unsplit in live and side-live; there is no repair note and no supersession. Statement edge cases checked: DVR with n[s] for n<0 (sign of s_D=1 is consistent), A^2 with V(x), a field, the empty space, disconnected X, flat Spec K(X)->X, and a ramified flat map of traits. Step checks: S1 is 0EPQ's basis-tuple argument; S2 uses the kernel lemma on Noetherian normal domains, and the descent of cycles is verified through order invariance on R; S4/S5 are correct descent uses (the embedding into K is glued by the Hom-sheaf property; uniqueness by K-linearity); S6/S7 are elementary; S8 uses only the NZD->NZD clause of the flat total-fraction lemma with B=A, on reduced A, A', which is 0EN9(2). Both new nodes are true and self-contained, and neither restates a clause of the item. The meromorphic model is 0ENA specialized via 0EN1/0BGT/033M. The cycle descent holds because etale maps are open and preserve local dimension, |R|->|U|x|U| is surjective, and unramified maps send uniformizers to uniformizers. Existing scheme-only meromorphic nodes (lem-sc-meromorphic-*) are not duplicates; this is advisory. Batch-5: the trf citations (scheme-etale invertible comparison, normal-domain divisor kernel, space invertible descent, flat total fractions, enlarged etale site, def-trf-algebraic-space) are all generic. The fixed closure has 565 nodes, contains no trf/pd thm node, no trace-transport node and no nt-assume leaf, so all are accepted. Artin-Gabber finding: the item is not in that node's closure and uses no Qbar/adic/Gabber/alteration input. However, lem-per-regular-prime-divisor-local-equations is on route-pivot-dropped.txt l.1877, and Step 3 cited it for a generic clause. FIX: Step 3 rewritten to use lem-trf-regular-local-ufd-boundary-factorization (r=0), lem-trf-ufd-height-one (0AFT), lem-sfb-stalk-nonzerodivisor-cartier-spreading and the kernel lemma (uniformizer at J_a, order 0 at other height-one primes); proof_deps recomputed; tool_uses entry replaced. Closure recomputed: no dropped id, no cycle. Whole corrected item in fixes/dag/nodes/sec-six-functors-basics/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RegularSpaceDivisorLineDictionary",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.regularSpaceDivisorLineDictionary",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.regularSpaceDivisorLineDictionary"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RegularSpaceDivisorLineDictionary.lean",
+  "statement": "theorem regularSpaceDivisorLineDictionary (X : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))) (hX : IsRegularNoetherianSeparated X) : ∃ (c : SpaceCartierDivisor X ≃ SpaceWeilDivisor X) (d : ∀ (L : X.Modules), SpaceRationalSection X L → SpaceCartierDivisor X) (line : SpaceCartierDivisor X → X.Modules) (sec : ∀ D : SpaceCartierDivisor X, SpaceRationalSection X (line D)), (∀ D, SpaceCartierDivisor.HasWeilDivisor X D (c D)) ∧ (∀ L : X.Modules, X.IsLineModule L → Nonempty (SpaceRationalSection X L)) ∧ (∀ (L : X.Modules) (s : SpaceRationalSection X L), X.IsLineModule L → SpaceRationalSection.HasCartierDivisor X s (d L s)) ∧ (∀ D, X.IsLineModule (line D) ∧ SpaceCartierDivisor.IsAssociated X D (line D) (sec D) ∧ d (line D) (sec D) = D) ∧ (∀ (L : X.Modules) (s : SpaceRationalSection X L), X.IsLineModule L → ∃! e : L ≅ line (d L s), SpaceRationalSection.Preserves X s (sec (d L s)) e) ∧ (∀ (L : X.Modules) (s : SpaceRationalSection X L), X.IsLineModule L → SpaceRationalSection.IsRegularGenerator X s ↔ c (d L s) = 0) ∧ (∀ (L M : X.Modules) (f g : L ⟶ M), X.IsLineModule L → X.IsLineModule M → ∀ W : Set (Point X.obj.obj), IsOpen W → Dense W → (∀ U : X.SmallEtaleModel, (∀ y : (divisorBasisChart X U).left, schemePointMap (X.smallEtaleInclusion.obj U).obj.hom y ∈ W) → f.val.app (op (X.smallEtaleInclusion.obj U)) = g.val.app (op (X.smallEtaleInclusion.obj U))) → f = g) ∧ (∀ L : X.Modules, X.IsLineModule L ↔ ∀ T : X.EtaleSite, Scheme.Modules.IsInvertible ((schemeRestriction X T).obj L)) ∧ (∀ (X' : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))) (_hX' : IsRegularNoetherianSeparated X') (q : X' ⟶ X) (hq : MapIsFlat q), ∃ (c' : SpaceCartierDivisor X' ≃ SpaceWeilDivisor X') (d' : ∀ (L : X'.Modules), SpaceRationalSection X' L → SpaceCartierDivisor X') (line' : SpaceCartierDivisor X' → X'.Modules) (sec' : ∀ D : SpaceCartierDivisor X', SpaceRationalSection X' (line' D)) (pullD : SpaceCartierDivisor X → SpaceCartierDivisor X') (pullS : ∀ (L : X.Modules), SpaceRationalSection X L → SpaceRationalSection X' ((moduleTensorPullback q).obj L)), (∀ D, SpaceCartierDivisor.HasWeilDivisor X' D (c' D)) ∧ (∀ (L : X'.Modules) (s : SpaceRationalSection X' L), X'.IsLineModule L → SpaceRationalSection.HasCartierDivisor X' s (d' L s)) ∧ (∀ D, X'.IsLineModule (line' D) ∧ SpaceCartierDivisor.IsAssociated X' D (line' D) (sec' D)) ∧ (∀ D, SpaceCartierDivisor.IsFlatPullback q hq D (pullD D)) ∧ (∀ (L : X.Modules) (s : SpaceRationalSection X L), X.IsLineModule L → SpaceRationalSection.IsFlatPullback q hq s (pullS L s)) ∧ (∀ (L : X.Modules) (s : SpaceRationalSection X L), X.IsLineModule L → d' ((moduleTensorPullback q).obj L) (pullS L s) = pullD (d L s)) ∧ (∀ D, ∃! e : (moduleTensorPullback q).obj (line D) ≅ line' (pullD D), SpaceRationalSection.Preserves X' (pullS (line D) (sec D)) (sec' (pullD D)) e))",
+  "branch": "sheaf-dag",
+  "by": "Q147",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ede0c0265",
+  "group": "Q147",
+  "result": "pass",
+  "note": "Every node clause is matched in the Lean: regular Noetherian separated X over Spec ULift ℤ (compact |X|, IsRegularScheme on all charts, separated diagonal); Cartier/Weil equivalence c pinned by HasWeilDivisor via Ring.ord lengths on every chart equation and codimension-1 point; rational sections as K⊗O ≅ K(L) isos; d pinned by HasCartierDivisor (s=g·e, sign checked); line/sec pinned by IsAssociated (mono into K, e ↦ g⁻¹) with d(line D)(sec D)=D; unique section-preserving iso; IsRegularGenerator ↔ c(d L s)=0; dense-open uniqueness; flat clause with pullD/pullS pinned on local equations and tensors, d'∘pullS = pullD∘d, unique pair iso. Edge cases checked: empty, disconnected, field, DVR with n<0, surface, generic-point and ramified flat maps, universes. Item changed only in lean and stmt_deps; the added def-trf-space-module-scheme-restriction is a landed node. Statements verbatim; declaration lists exact; 3 new def nodes pass H12 fields and searches; no project or Mathlib space-level duplicate; no hollow def, only named sorried theorems; docstrings with source, blueprint and 9 steps. No compile (no file changed). Advisories: Cartier divisors carry no group law; Weil-level restriction compatibility only implied; scheme sentence rendered as an IsLineModule ⇔ chart-invertibility characterization (⇐ not proved here); owner nodes of some declarations reach the item only through the new nodes' stmt_deps."
+ }
+}

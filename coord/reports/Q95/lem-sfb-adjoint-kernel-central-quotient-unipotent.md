@@ -1,0 +1,52 @@
+## Worker report
+
+Files written:
+- dag/nodes/sec-six-functors-basics/lem-sfb-adjoint-kernel-central-quotient-unipotent.json: item, split in five steps; original statement and statement dependencies preserved; no Mathlib match.
+- dag/nodes/sec-six-functors-basics/lem-sfb-conjugation-finite-jet-kernel.json: new statement-only lemma, unsplit; no Mathlib match.
+- citations.json: one verbatim statement quotation for each step/node pair.
+
+Attachments: none. I searched lean/WeilConjectures for the item's blueprint tag, adjoint/kernel, conjugation, unitriangular and infinitesimal/jet terminology, and inspected the group-scheme source search results. No declaration supplies the item or finite conjugation-jet kernel lemma. The Lie-bracket conjugation identities there do not construct a finite jet or identify its kernel with the group-scheme centre.
+
+WANTED: none. Milne's Algebraic Groups (2017), already in literature/, supplies the argument. No SGA source is used.
+
+The imported item had no proof. Its statement is correct and unchanged. Milne 14.23 allows connected algebraic groups, and the item has the stronger smooth connected affine finite-type hypotheses. The output is expressed through a closed unitriangular image, precisely the unipotence conclusion, with its full scheme-theoretic kernel. No statement dispute was found. Nothing necessary to this one-level split remains unfinished; the one new unsplit input is deliberately queued for its own split.
+
+## Sources and route
+
+I read Milne Proposition 14.23 (printed p.285) in full, Corollary 8.10 and the proof of Proposition 8.9 (p.150), paragraphs 10.19--10.21 (p.192), Theorem 14.5 and Corollary 14.6 (pp.281--282), and the Homomorphism Theorem 5.39 with its proof (p.108). The jet lemma states Corollary 8.10 in the coordinate-ring model, together with the preserved powers and residue quotient provided by the conjugation construction in 8.9. For the coordinate/local comparison, in B/I^(r+1) an element s outside I has s=c(1+u), c in F nonzero and u nilpotent; c^(-1) sum from j=0 to r of (-u)^j is its inverse. Hence localization gives exactly the local quotient used by Milne, with no completion theorem added.
+
+I read the chapter and unit records, SETUP's three-level restrictions, GOAL.md, the current latest blueprint unit and its direct-image proof (3). The long inherited prerequisite chain serves the alteration input there, reaching the Milne 21.7 use of 14.23. The split follows that same argument. The blueprint ancestor command returns None on this already inherited chain; the item retains its existing null ancestor and exact place, and the new node inherits that null ancestor with the item prepended to via. Searches of the whole blueprint for unipotent, conjugation, local ring, adjoint and infinitesimal found no equivalent jet lemma. The characteristic-zero Lie definitions and the unrelated categorical adjoints in those results cannot replace it.
+
+## Not duplicates
+
+lem-sfb-conjugation-finite-jet-kernel vs lem-sfb-adjoint-kernel-central-quotient-unipotent: the new lemma concerns conjugation on the whole group and detects its centre with one finite jet; it asserts neither an adjoint-kernel quotient nor unipotence. The item must still prove that restricting this representation to ker Ad gives a trivial associated-graded action, refine its filtration to a basis and take the closed image.
+
+lem-sfb-conjugation-finite-jet-kernel vs lem-sfb-affine-group-centre-base-change: the existing node constructs the closed centre and proves field base change; it says nothing about detecting it on a finite infinitesimal neighbourhood.
+
+lem-sfb-conjugation-finite-jet-kernel vs lem-sfb-normal-subgroup-representation-kernel: an arbitrary representation with prescribed kernel need not have the ideal filtration whose first quotient is dual to Ad; that node cannot supply the finite conjugation jet used here.
+
+lem-sfb-conjugation-finite-jet-kernel vs lem-sc-rational-tangent-cotangent-duality: first-order tangent duality supplies neither higher jets nor eventual detection of the centre.
+
+I searched all DAG statements and source places for Corollary 8.10, conjugation/local ring, finite jets and faithful infinitesimal actions, and read the nearby candidate statements. I also read lem-sfb-geometric-unipotence-unitriangular-embedding: it requires the represented group to be smooth, so it is deliberately not applied to N or its image, which may be nonsmooth. The existing algebraic-group-homomorphism-factorization is reused for the image; no duplicate quotient lemma is created. There are no shared Stacks-tag pairs for the new node (its source is Milne 8.10).
+
+## Mathlib searches
+
+Every search added in the JSON was run with the required msearch.py command, and its actual summary is preserved from searches.jsonl. I read the returned declarations/types. The jet searches used two semantic phrasings, a Loogle AlgebraicGeometry/conj pattern, and both a whole-Mathlib and an AlgebraicGeometry grep. The item also has direct adjoint-kernel/unipotence searches. All services answered; none was recorded as unavailable. Hits such as LieDerivation.ad_ker_eq_center and LieAlgebra.self_module_ker_eq_center concern Lie algebras; ConjAct.fixedPoints_eq_center concerns an abstract group action, without finite jets or representability. Categorical adjoint results, Galois faithful actions, SL centre formulas and topological closed embeddings do not specialize to this group-scheme theorem. No Mathlib leaf is created. Earlier searches already in the imported item are retained.
+
+## Review by Q95
+
+I checked delivery-errors B through E with the item, the new statement, all cited statements and the sources open. The new node introduces F, G, e, B, I, V_r, its filtration and the action on every test algebra. Its notions have definition dependencies or explicit meanings, its JSON uses single TeX escapes, and it contains no proof or proof dependency. It states a real finite-jet input, rather than the item's conclusion. Its source and search records are precise. No new elementary flag or ideal-product node was created.
+
+Step 1 uses the new lemma's actual clauses giving finite dimension, the action and the eventual scheme-theoretic kernel. Smoothness, connectedness, affineness and finite type are exactly available from the item. For central elements the conjugation morphism is identity by the definition of centre, so differentiating is identity; restriction therefore leaves the kernel exactly Z(G). This is an equality of subgroup functors, not an argument on F-points.
+
+Step 2 uses the statement of lem-sc-rational-tangent-cotangent-duality, which explicitly includes naturality of the tangent map under the dual pairing; its rational-point hypothesis holds at e over F. I also read its source, Stacks varieties.tex, Tags 0B2E (lemma-tangent-space-rational-point) and 0B2F (lemma-map-tangent-spaces), and the adjacent dual-number formula. The cited lemma is not silently applied over a nonfield A. Instead the step writes the formula f -> e*(f)+epsilon lambda([f-e*(f)]) over an arbitrary A and substitutes inverse conjugation. This is a direct check of the duality formula after scalar extension. Since the cotangent module is finite free, its dual basis detects equality even for nonreduced A. Thus Ad(g)=1 implies identity cotangent action on every A-point. The inverse in conjugation fixes the left-action convention and does not change the kernel. This explicit calculation is why the step is elementary relative to the cited duality, rather than a hidden comparison lemma. This general duality is the only off-unit tool declared in split_report.tool_uses.
+
+Step 3 uses the jet lemma's algebra-automorphism, ideal-preservation and residue-identity clauses, and step 2. I checked the product expansion modulo I^(i+1), including replacement of coefficients by their residues. It works on A tensor products because A is an F-vector space, and it proves triviality of every quotient without assuming that G or N has characteristic zero. No symmetric-power-isomorphism theorem or regular-local-ring theorem is used.
+
+Step 4 uses that same finite-dimensional filtered representation. Lifts of quotient bases, ordered deepest first, give an actual F-basis. Each image minus itself lies in earlier basis vectors over every A, so the matrices are upper, not lower, triangular and their diagonal entries are one. It does not invoke a triangularization theorem needing a smooth group. The residue quotient makes n at least one. No quotient U is prematurely assumed to exist.
+
+Step 5 cites the full statement of lem-sfb-algebraic-group-homomorphism-factorization. It provides a finite-type closed normal kernel (first applied to Ad), then a faithfully flat map to a closed subgroup of the given target with exactly the same kernel. Both G and GL(g) are finite-type separated over F, so its first application makes N finite-type; N is affine and separated. The unitriangular group is affine of finite type by its displayed polynomial coordinates. Thus its second application is valid without smoothness or connectedness of N or U. The kernel clause supplies precisely the conclusion on all test algebras. I did not take extra claims from the proof of that node.
+
+I tested the new statement and assembly on the trivial group (V_r=F and n=1), on G_m and G_a (conjugation and both kernels are the whole group), and on SL_p in characteristic p, where the centre mu_p is nonsmooth and must still be retained scheme-theoretically. The argument uses no density-of-points test on N or U. The connectedness hypothesis of the new jet statement is essential: for a nonabelian constant finite group, every identity jet is just F and its conjugation action is trivial, though the centre is proper. Such a group is excluded. Nonreduced A and the zero F-algebra cause no failure: the explicit scalar-extension and dual-basis calculations still apply. No claim about reductivity is used. Each step is shorter than 2000 characters, so there is no long argument hiding a separate lemma.
+
+During self-review I made the finite-type check for N explicit by citing the existing homomorphism theorem's kernel clause, and wrote the arbitrary-A dual-number calculation rather than extrapolating the field-only tangent lemma. citations.json quotes the statements themselves verbatim for every citation. No proof dependency is merely a definition used as if it were a theorem. The dependencies follow Milne's route, and no step uses a node depending on the item.

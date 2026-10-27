@@ -1,0 +1,110 @@
+{
+ "id": "def-sfb-shuffle-word-combinatorics",
+ "kind": "definition",
+ "title": "Shuffle words, prefix counts, inversions, signs and evaluation",
+ "status": "split",
+ "statement": "Let $a,b\\in\\mathbf N$ and $n=a+b$. Define $W_{a,b}$ to be the set of lists of length $n$ with letters $H,V$, exactly $a$ letters $H$ and $b$ letters $V$. For $w\\in W_{a,b}$ and $0\\leq k\\leq n$, define $A_k(w)=\\#\\{r<k:w_r=H\\}$ and $B_k(w)=\\#\\{r<k:w_r=V\\}$. Define $I(w)=\\#\\{(r,s):0\\leq r<s<n,\\ w_r=V,\\ w_s=H\\}$ and $s(w)=(-1)^{I(w)}\\in\\mathbf Z$. For arbitrary sets $X,Y$ and sequences $x=(x_0,\\ldots,x_a)$ and $y=(y_0,\\ldots,y_b)$, define $z_{x,y}(w)=((x_{A_k(w)},y_{B_k(w)}))_{k=0}^{n}$, a list of length $n+1$. The letters are encoded by $H=\\mathrm{false}$ and $V=\\mathrm{true}$. Repeated sequence entries are allowed; the definitions include $a=0$, $b=0$ and the empty word.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-written universal shuffle input: opening definitions of lem-sfb-shuffle-mixed-corner-cancellation and lem-sfb-shuffle-horizontal-face-reindexing. The blueprint gives the application only, not this combinatorial construction."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Binary shuffle words with specified horizontal and vertical letter counts, prefix counts, inversion number, sign, and evaluation on two sequences",
+   "results": "{\"t\": \"2026-10-23T12:21:33Z\", \"tool\": \"leansearch\", \"query\": \"Binary shuffle words with specified horizontal and vertical letter counts, prefix counts, inversion number, sign, and evaluation on two sequences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DyckWord.count_U_eq_count_D\", \"instAddDyckWord\", \"DyckWord\", \"Equiv.Perm.sign_eq_prod_prod_Ioi\", \"Equiv.Perm.sign_sumCongr\", \"Equiv.Perm.sign_eq_prod_prod_Iio\", \"Equiv.Perm.signAux_eq_signAux2\", \"DyckWord.casesOn\"], \"digest\": \"d1630c44f321d094\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Dyck words require balanced counts and prefix inequalities; permutation sign and Coxeter alternating words do not define arbitrary binary shuffle words with these prefix counts and sequence evaluation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Shuffle words as lists of booleans with fixed counts and sign given by the number of vertical-before-horizontal inversion pairs",
+   "results": "{\"t\": \"2026-10-23T12:21:35Z\", \"tool\": \"leanfinder\", \"query\": \"Shuffle words as lists of booleans with fixed counts and sign given by the number of vertical-before-horizontal inversion pairs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CoxeterSystem.alternatingWord\", \"DyckWord\", \"Equiv.Perm.signAux2\", \"DyckWord.nest\", \"CoxeterSystem.prod_alternatingWord_eq_prod_alternatingWord_sub\", \"CoxeterSystem.listTake_alternatingWord\", \"CoxeterSystem.getElem_alternatingWord\", \"CoxeterSystem.prod_alternatingWord_eq_mul_pow\"], \"digest\": \"703d29c63fd97d59\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Dyck words require balanced counts and prefix inequalities; permutation sign and Coxeter alternating words do not define arbitrary binary shuffle words with these prefix counts and sequence evaluation."
+  },
+  {
+   "tool": "grep",
+   "query": "ShuffleHorizontalFace|horizontalCount|verticalCount|shuffle.*word",
+   "results": "{\"t\": \"2026-10-23T12:21:33Z\", \"tool\": \"grep\", \"query\": \"ShuffleHorizontalFace|horizontalCount|verticalCount|shuffle.*word\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no Mathlib match; direct rg of lean/WeilConjectures and dag/lean_names_upstream.json found no match. Direct rg of lean/Sheaf located exactly the six reusable definitions in ShuffleHorizontalFaceReindexing. No separate definition node owns them; the maintainer explicitly requested this existing-declaration ownership node."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-shuffle-mixed-corner-cancellation",
+  "date": "2026-10-23",
+  "group": "Q73"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), opening word, prefix-count, inversion, sign and evaluated-path definitions of the universal shuffle input used by lem-sfb-shuffle-mixed-corner-cancellation. blueprint_refs.py ancestor reports None.",
+   "via": [
+    "lem-sfb-shuffle-mixed-corner-cancellation",
+    "lem-sfb-simplex-lattice-shuffle-boundary",
+    "lem-sfb-bicosimplicial-shuffle-totalization",
+    "lem-sfb-condensed-product-bar-comparison",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.ShuffleHorizontalFaceReindexing",
+  "declaration": "AlgebraicTopology.ShuffleHorizontalFace.Word",
+  "declarations": [
+   "AlgebraicTopology.ShuffleHorizontalFace.Word",
+   "AlgebraicTopology.ShuffleHorizontalFace.horizontalCount",
+   "AlgebraicTopology.ShuffleHorizontalFace.verticalCount",
+   "AlgebraicTopology.ShuffleHorizontalFace.inversions",
+   "AlgebraicTopology.ShuffleHorizontalFace.sign",
+   "AlgebraicTopology.ShuffleHorizontalFace.evaluate"
+  ],
+  "statement": "def Word (a b : ℕ)",
+  "branch": "sheaf-dag",
+  "by": "Q73",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Ownership of the six unchanged plain definitions at lines 33–83, as requested by the maintainer return at immutable head 43c3a8516ff6. These definitions use real data and no choice from horizontal_face_reindexing. The horizontal-face theorem is not needed. horizontalCount and verticalCount count prefixes; inversions counts VH pairs; sign is (-1)^inversions; evaluate uses List.ofFn and bounded prefix counts, with independent universes u,v. No new Lean file or duplicate declaration."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a9b822216",
+  "group": "Q73",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a9b822216",
+  "group": "Q73",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 43c3a85 (H2 theorem stmt_dep). Lean module byte-identical (sha256 75486a90…), so prior clause-by-clause acceptance stands and was re-read. Only node change: stmt_deps lem-sfb-shuffle-horizontal-face-reindexing → new def-sfb-shuffle-word-combinatorics (existing:true on unchanged ShuffleHorizontalFaceReindexing; Word/horizontalCount/verticalCount/inversions/sign/evaluate; statement matches the six defs exactly; real data, no choice from the sorried theorem; no duplicate in live/side-live); lean.note updated, statement verbatim. Item still split without lean in live and side-live (not superseded). Report sections present. No file changed, no compile. Advisory: landed citer simplex-lattice-shuffle-boundary uses a separate LatticePath encoding; its stage-3 proof needs a transport."
+ }
+}

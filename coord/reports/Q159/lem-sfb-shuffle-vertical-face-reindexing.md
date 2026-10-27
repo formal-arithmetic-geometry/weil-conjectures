@@ -1,0 +1,42 @@
+## Worker report
+
+Files written:
+- `dag/nodes/sec-six-functors-basics/lem-sfb-shuffle-vertical-face-reindexing.json`: statement item, now split into ten elementary steps; no Mathlib match.
+- `citations.json`: the verbatim statement citation for step 10.
+- `check_words.py`: sandbox-only finite-word verification; not a delivered library file.
+
+No new nodes; zero Mathlib leaves. The statement and statement dependencies are unchanged. The source path now points at `literature/blueprint/latest/`, and the source explicitly distinguishes the application in paragraph (3) from this agent-written combinatorial proof. Existing searches and blueprint provenance were retained; fresh searches were appended from the actual `searches.jsonl` output.
+
+Attachments: none. Searching `lean/WeilConjectures/` for the exact blueprint tag, shuffle, deleted vertex, lattice path and vertical reindexing finds no declaration stating the item. The only relevant-word shuffle hit is the complementary exterior-power pairing in `RingTheory/KoszulComplementaryEquivalences.lean:74`, which concerns wedge bases and does not state this lemma. It is not an attachment.
+
+WANTED: C. Weibel, *An Introduction to Homological Algebra*, §8.5, for comparison with the shuffle-boundary calculation. The book is already listed as unavailable in `literature/LIST.md`; I do not claim to have read it. No missing literature fact is used: the proof here is an agent-written direct calculation from the item's definitions.
+
+The imported item had no proof. The latest blueprint's `sk-thm-sf-ctf-stability-direct-images.proof.md`, paragraph (3), supplies the direct-image application, not this shuffle lemma. Its current unit statement and the recorded `dag/units/sk-thm-sf-ctf-stability.json` differ in their wider coefficient discussion; this elementary word lemma is independent of that discrepancy. Neither unit nor chapter nor any target is edited. There is no statement dispute in this item. The inherited blueprint ancestor is null: `tools/blueprint_refs.py ancestor lem-sfb-shuffle-vertical-face-reindexing` explicitly reports None, and this provenance is retained rather than inventing an ancestor.
+
+Nothing remains unproved in the natural-language argument. No Lean was written, and no compiler, Lake or build command was run.
+
+## Searches and reuse
+
+I read the inherited item and its four recorded searches before searching the sharper standalone statement. The new msearch runs use the exact statement's labeled-face formulation and then the broader binary-word inversion/deletion formulation. LeanFinder returns permutation pair maps, compositions/finite-set equivalences, degeneracy insertion, Coxeter inversion sequences and Dyck words; these have different objects or missing conclusions. I read `signBijAux_mem` at `Mathlib/GroupTheory/Perm/Sign.lean:212`, `simplicialInsert` at `Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/NormalForms.lean:155`, its `standardσ_simplicialInsert` lemma at line 265, and `rightInvSeq_drop` and `getD_leftInvSeq_mul_wordProd` at `Mathlib/GroupTheory/Coxeter/Inversion.lean:316,360`. None supplies the binary-word endpoint bijection or the evaluated-string formula, even by a one-line specialization. Loogle for both shuffle and sign has no hits. LeanSearch returns path-map vertices, complex shifts, graph deletion, permutation centralizers and free-group cancellation, all with different statements. The logged greps return no shuffle in AlgebraicTopology and only quiver orientation / incidence-algebra Möbius inversion in Combinatorics. All fresh queries and their original compact result records are appended verbatim in `mathlib_searches`; none was fabricated or recorded as unavailable when it succeeded.
+
+Whole-DAG keyword searches found the existing parent `lem-sfb-simplex-lattice-shuffle-boundary` and sibling `lem-sfb-shuffle-horizontal-face-reindexing`. I opened both. The parent needs this lemma and cannot be cited without circularity; the horizontal sibling concerns deletion of H rather than V and gives a different sign. They are not used as proof dependencies. Whole-blueprint searches with `tools/blueprint_refs.py search` for shuffle and deleted vertex found no matches; inversion found unrelated Fourier inversion and algebraic-group nodes, none about binary words. No new node was needed.
+
+## Not duplicates
+
+No new nodes are created. The item retains its identity; no duplicate is introduced.
+
+## Review by Q159
+
+I read the item's full statement, the latest blueprint unit and its direct-images proof paragraph (3), the recorded chapter and unit, and the free-module definition's statement and source entry (Stacks conventions, Tag 00C2, item-free-module). The blueprint is used solely to locate the application; it is honestly marked agent-written as a proof source. There are no new node statements to compare with a source. The elementary letter-count proof preserves all hypotheses: arbitrary sets, nonnegative a,b, no injectivity of the input sequences, and the separate b=0 clause.
+
+For step 1 I checked that both adjacent letters really are V: the first forces j>=1 and the second forces j<b. Counting H and V in the first k positions proves k=i+j and verifies the shorter word's type. Step 2 checks the two endpoint images and their disjoint index ranges; b>0 ensures the endpoints exist. Step 3 constructs the interior inverse using the j-th V of the shorter word, whose existence follows from j<=b-1. Its marked vertex is p+1, strictly inside the word, and the two inverse identities are explicit. Step 4 checks both endpoint inverse identities separately. These four steps use definitions and no external theorem; they do not assume that collapsing distinct marks produces distinct words.
+
+Step 5 checks the string formula on each output index t. Before the removed vertex the shorter prefix's vertical count is strictly below j; after it the shorter count is one below the old count at t+1 and at least j. The displayed definition of d_jv therefore gives exactly the old entry at t or t+1, respectively. Step 6 handles j=0 and j=b separately: a removed initial V shifts every vertical index, whereas a removed terminal V affects no remaining prefix. No cancellation or generator distinctness is used.
+
+Step 7 counts inversions by retained occurrences and the deleted V. The retained pairs preserve their order, and the deleted V contributes exactly one inversion per later H, namely a-i. Step 8 checks the initial loss a and terminal loss 0. Step 9 substitutes k=i+j in the interior, k=j=0 initially, and k=a+b,j=b terminally; this gives equality of exponents, stronger than merely a parity assertion. Each is a direct count or arithmetic identity and uses no uncited sign theorem.
+
+Step 10 checks b=1, a=0, b=0 and the empty word. It alone cites `def-weil-pbc-free-module`, whose statement explicitly defines a basis by unique finite linear combinations and permits an empty basis index set. The step uses only that identical evaluated strings denote identical basis symbols, not a theorem about tensor products or free-module exactness. The citation's quote in `citations.json` is a verbatim substring of that node's statement. There are no other proof citations or off-unit theorem uses.
+
+I checked delivery-errors B–E: no unsupported new notions, no new nodes with hidden proofs, no clause moved to a new node, no reverse edge to the parent, no external theorem smuggled into an elementary step, no SGA route, and no dropped endpoint or zero-degree hypothesis. All steps are below 600 characters, so no long non-elementary step hides a comparison lemma. I retained the imported statement unchanged and made all endpoint and inverse arguments explicit rather than appealing to the horizontal sibling. This is my own review for direct delivery, not a claim that an independent second worker read it.
+
+Finite verification: `python3 check_words.py` passed for every a,b in 0..5: 2,441 labeled pairs and 7,323 evaluated-string comparisons. It checks the forward and inverse maps in both directions, bijectivity onto every target, all precise inversion formulas, all signs and the b=0 empty case. Inputs include distinct entries, all equal entries and partially repeated entries. This includes a=b=0, a=0 with arbitrary tested b, and b=1 with arbitrary tested a. The general proof is the prefix and inversion argument in the item, not extrapolation from this enumeration.

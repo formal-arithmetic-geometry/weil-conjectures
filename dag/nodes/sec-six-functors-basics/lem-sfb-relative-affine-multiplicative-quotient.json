@@ -1,0 +1,357 @@
+{
+ "id": "lem-sfb-relative-affine-multiplicative-quotient",
+ "kind": "statement",
+ "title": "Affine quotients of smooth connected groups by multiplicative normal subgroups",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. An $S$-group scheme has multiplication, identity and inverse satisfying the group diagrams; a homomorphism respects them. A group of multiplicative type of finite presentation is an fppf-local form of $D(M)=\\operatorname{Spec}\\mathcal O_S[M]$ for a finitely generated abelian group $M$, with $e_m\\mapsto e_m\\otimes e_m$ as comultiplication [def-sfb-ring-diagonalizable-group]. Fppf means faithfully flat and locally of finite presentation [def-pc-fppf-site]. Let $H\\to S$ be a smooth affine group scheme of finite presentation with connected geometric fibres [def-sbc-smooth-morphisms] [def-weil-pbc-scheme-conventions] [def-weil-connected-scheme]. Let $N\\hookrightarrow H$ be a closed normal subgroup of multiplicative type of finite presentation [def-weil-closed-immersion]. Then the fppf sheafification $J$ of $U\\mapsto H(U)/N(U)$ is represented by a smooth affine $S$-group of finite presentation with connected geometric fibres. The map $q:H\\to J$ is faithfully flat and finitely presented with scheme-theoretic kernel $N$, and $(h,n)\\mapsto(h,hn)$ is an isomorphism $H\\times_SN\\simeq H\\times_JH$. These assertions, including the identification as the fppf quotient, commute with arbitrary base change on $S$. No reductivity of $H$ and no smoothness of $N$ are required.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Lemma 3.3.2, quotient discussion, printed pp.97--98; smoothness and connected fibres by the fppf quotient. This is the smooth connected affine quotient prerequisite, without centre or maximal-torus conclusions. WANTED locally as literature/conrad-reductive-group-schemes.pdf."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-ring-diagonalizable-group",
+  "def-pc-fppf-site",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-connected-scheme",
+  "def-weil-closed-immersion",
+  "def-sfb-relative-multiplicative-type",
+  "def-sfb-fppf-group-quotient-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Choose an fppf covering by affine schemes $S_i=\\operatorname{Spec}R_i$ on which $N_i\\simeq D_{R_i}(M_i)$ with $M_i$ finitely generated; such a cover is precisely the multiplicative-type hypothesis, refined by affine open covers. The base changes $H_i$ are affine by affine-morphism permanence. Work on one such chart, writing $R,M,H,N$ and $A=\\Gamma(H,\\mathcal O_H)$. Right translation by $N$ gives the coaction $\\rho:A\\to A\\otimes_RR[M]$. The action identities give its counit and coassociativity identities, so the coaction-grading lemma gives $A=\\bigoplus_{m\\in M}A_m$ with $\\rho(b_m)=b_m\\otimes e_m$. Put $B=A_0$.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-sfb-group-algebra-coaction-grading"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0EKK (lemma-complete-reducibility-Gm): coefficient grading; arbitrary M supplied by the cited existing node."
+   }
+  },
+  {
+   "text": "The morphism $c:H\\times_SN\\to H\\times_SH$, $(h,n)\\mapsto(h,hn)$, is a closed immersion. Indeed, under the automorphism $(h,h')\\mapsto(h,h^{-1}h')$, with inverse $(h,n)\\mapsto(h,hn)$, it is the base change of the given closed immersion $N\\hookrightarrow H$. Thus its map of affine coordinate rings is surjective. Under the affine tensor-product description that map is\n$$\\gamma:A\\otimes_RA\\longrightarrow A\\otimes_RR[M],\\qquad a\\otimes b_m\\longmapsto ab_m\\otimes e_m.$$\nFor each $m$, lift $1\\otimes e_m$ to a finite sum $\\sum_k a_k\\otimes b_k$. Expanding $b_k$ homogeneously and comparing the coefficient of $e_m$ gives $1=\\sum_k a_k(b_k)_m$. Taking degree zero in $A$ gives $1=\\sum_k(a_k)_{-m}(b_k)_m$. These are the homogeneous unit expressions required by the strong-grading lemma; no smoothness or centrality has entered.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sfb-group-algebra-coaction-grading"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0EKK coefficient extraction, combined with the closed subgroup and group identities; agent argument."
+   }
+  },
+  {
+   "text": "Apply the strong-grading algebra theorem to get $Q_i=\\operatorname{Spec}B\\ $ and $q_i:H_i\\to Q_i$, faithfully flat and finitely presented, together with $H_i\\times_{S_i}N_i\\simeq H_i\\times_{Q_i}H_i$ whose projections are $h$ and $hn$. The quotient-sheaf identification is explicit. For a test scheme $T\\to Q_i$, the base change $T\\times_{Q_i}H_i\\to T$ is an fppf cover and provides a lift to $H_i$. Two lifts have equal images exactly when their pair lies in the displayed fibre product, hence exactly when they differ by a unique section of $N_i$. Representable presheaves are fppf sheaves, by fpqc representable descent and the fppf-to-fpqc covering lemma. Therefore, for any fppf sheaf $F$, an orbit-presheaf map to $F$ extends uniquely to $h_{Q_i}$ by applying it to these local lifts and gluing; equality on overlaps and independence of lifts are the torsor identity. This proves the full sheafification universal property, also after any base change of $S_i$, because fppf covers base change and the torsor identity does too.",
+   "uses": [
+    "lem-sfb-strong-grading-torsor-algebra",
+    "lem-trf-fppf-covering-base-change",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03C5 (lemma-criterion-quotient-representable), proof with the kernel pair; the sheafification argument is written out."
+   }
+  },
+  {
+   "text": "Let $J$ initially denote the fppf sheafification in the statement. Its restriction to schemes over $S_i$ is the sheafification of the same orbit presheaf: coverings of such a test scheme and their refinements are identical in the big site and the slice site. Step 3 therefore identifies this restriction with $h_{Q_i}$. On overlaps these identifications induce unique scheme isomorphisms by Yoneda, satisfying the cocycle condition since their sheaf maps do. The locally representable-sheaf/descent-data theorem reduces representability of $J$ to effectiveness of this datum. Apply the fppf-family effectiveness criterion with the property 'affine morphism': affine permanence gives base-change stability and finite coproduct stability including the empty coproduct; its affine singleton hypothesis is precisely the existing effective fpqc descent theorem for affine morphisms, since an affine faithfully flat finitely presented cover is fpqc. Thus the datum is effective and $J$ is a scheme. Its map to $S$ is affine by fpqc descent of affineness, since each $Q_i\\to S_i$ is affine and an fppf cover is fpqc. The quotient maps glue to $q:H\\to J$ by their identical maps of sheaves and Yoneda.",
+   "uses": [
+    "lem-trf-fppf-sheaf-representability-descent-data",
+    "lem-galois-yoneda-fully-faithful",
+    "lem-trf-fppf-family-affine-effectivity-reduction",
+    "lem-galois-fpqc-affine-descent-effective",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-fpqc-descend-affine",
+    "lem-trf-fppf-covering-is-fpqc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 0245 (lemma-affine), 02W3 (lemma-descending-types-morphisms), 02L5 (lemma-descending-property-affine) and 02W5 (lemma-descent-data-sheaves)."
+   }
+  },
+  {
+   "text": "The family $J_i=J\\times_SS_i\\to J$ is fppf by base change. The pullbacks of $q$ are the maps $q_i$ of step 3, so fpqc descent makes $q$ flat and locally of finite presentation. It is surjective: any point of $J$ lifts to a point of some $J_i$, and then lifts through the surjective $q_i$. The same descent of affineness applies to $q$, since the $q_i$ are affine by the strong-grading theorem. Thus $q$ is quasi-compact and quasi-separated by affine permanence, and therefore finitely presented. The canonical map $c:H\\times_SN\\to H\\times_JH$ is an isomorphism: its pullback to every $S_i$ is the isomorphism in step 3; the local inverses agree on overlaps because they invert the same map and glue by representable fpqc descent. The projection formulas are exactly $(h,n)\\mapsto h,hn$.",
+   "uses": [
+    "lem-trf-fppf-covering-base-change",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-fpqc-descend-flat",
+    "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-weil-pbc-fpqc-descend-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 02L2 (lemma-descending-property-flat), 02KY (lemma-descending-property-locally-finite-presentation), 023Q (lemma-fpqc-universal-effective-epimorphisms)."
+   }
+  },
+  {
+   "text": "Normality supplies the group structure without any additional representability input. For sections of $J$ choose fppf-local lifts $h,k$ in $H$ and define their product as $q(hk)$. Replacing lifts by $hn_1,kn_2$ changes the product to $hk(k^{-1}n_1k)n_2$, the same coset since $N$ is normal. Inverses and identity are similarly well defined, and sheaf gluing makes them global natural transformations. Yoneda turns them into scheme morphisms; the group diagrams and the homomorphism diagrams for $q$ hold after lifting, hence hold as sheaf identities. The kernel is exactly $N$: a section of $H$ maps to the identity if and only if it is fppf-locally in $N$, by the orbit-sheaf description; those local factorizations uniquely glue to a section of the representable sheaf $N$. This proves equality of the kernel functor and $h_N$, and Yoneda gives the scheme-theoretic cartesian kernel square.",
+   "uses": [
+    "lem-galois-yoneda-fully-faithful",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-trf-fppf-covering-is-fpqc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023Q (lemma-fpqc-universal-effective-epimorphisms); agent group-law argument on local coset representatives."
+   }
+  },
+  {
+   "text": "Apply smooth source descent to $H\\xrightarrow qJ\\to S$: $q$ is flat, surjective and locally of finite presentation by step 5, and the composite $H\\to S$ is smooth by hypothesis. Hence $J\\to S$ is smooth, in particular locally of finite presentation. Because it is affine it is quasi-compact and quasi-separated, so it is of finite presentation. For any geometric point $\\bar s\\to S$, $q_{\\bar s}:H_{\\bar s}\\to J_{\\bar s}$ is surjective (the singleton fppf cover base changes). Its source is connected and nonempty; the identity section also proves the target nonempty. If its target had a partition into two nonempty open-and-closed subsets, their inverse images would give such a partition of its source, contradicting connectedness. Therefore all geometric fibres of $J$ are connected.",
+   "uses": [
+    "lem-sbc-smooth-flat-surjective-source-descent",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-trf-fppf-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 05B5 (lemma-smooth-permanence); connectedness is the explicit inverse-image argument."
+   }
+  },
+  {
+   "text": "Finally let $S'\\to S$ be arbitrary. The singleton fppf covering $q$ base changes to an fppf covering $q':H_{S'}\\to J_{S'}$; its kernel-pair isomorphism base changes with exactly the same two projection formulas. Repeating the local-lift and sheaf-gluing argument of step 3 proves directly that $J_{S'}$ sheafifies $H_{S'}(T)/N_{S'}(T)$, with no flatness assumption on $S'\\to S$. The canonical comparison is the unique isomorphism commuting with the quotient maps. The descended group law is carried to the base-changed one because both send local lifted pairs to $q'(hk)$; the kernel is the base-changed kernel square. Smoothness base changes: $J\\to S$ is smooth by step 7, i.e. affine-locally given by smooth ring maps $R\\to C$ (the affine-local form recorded in the definition of smooth morphisms); $J_{S'}$ is covered by the affines $\\operatorname{Spec}(R'\\otimes_RC)$ over affine opens $\\operatorname{Spec}R'\\subseteq S'$ mapping into $\\operatorname{Spec}R$, and $R'\\to R'\\otimes_RC$ is smooth by base change of smooth ring maps. A geometric fibre of $J_{S'}$ over $\\bar s'\\to S'$ is the geometric fibre of $J$ over the composite $\\bar s'\\to S$, hence connected by step 7. Affineness and finite presentation base change by their cited permanence results. Thus every clause commutes with arbitrary base change; the proof never assumes reductivity of $H$ or smoothness of $N$.",
+   "uses": [
+    "lem-trf-fppf-covering-base-change",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03C5 (lemma-criterion-quotient-representable), applied after arbitrary base change; the identification is the local-lift construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-sfb-group-algebra-coaction-grading",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-sfb-strong-grading-torsor-algebra",
+  "lem-trf-fppf-covering-base-change",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-trf-fppf-sheaf-representability-descent-data",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-trf-fppf-family-affine-effectivity-reduction",
+  "lem-galois-fpqc-affine-descent-effective",
+  "lem-weil-pbc-fpqc-descend-affine",
+  "lem-weil-pbc-fpqc-descend-flat",
+  "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+  "lem-sbc-smooth-flat-surjective-source-descent",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Independent strong-grading proof replacing the quotient input assumed in Conrad Lemma 3.3.1(2) and Lemma 3.3.2; Stacks 0EKK, 03C5 and descent 0245, 02W3, 05B5 provide the explicit algebra/descent framework."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "multiplicative.?type|reductive|normal.*quotient",
+   "results": "{\"t\": \"2026-10-24T08:18:23Z\", \"tool\": \"grep\", \"query\": \"multiplicative.?type|reductive|normal.*quotient\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern abstract groups, topological tori, or general scheme properties; none states this group-scheme assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GroupScheme",
+   "results": "{\"t\": \"2026-10-24T08:18:24Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.GroupScheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.GroupScheme'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern abstract groups, topological tori, or general scheme properties; none states this group-scheme assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quotient of a smooth affine group scheme by a normal subgroup of multiplicative type is affine and the quotient map is an fppf torsor",
+   "results": "{\"t\": \"2026-10-24T08:18:30Z\", \"tool\": \"leanfinder\", \"query\": \"Quotient of a smooth affine group scheme by a normal subgroup of multiplicative type is affine and the quotient map is an fppf torsor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.AffineSpace.instIsAffine\", \"Subgroup.QuotientDiff\", \"QuotientGroup.Quotient.group\", \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"Subgroup.instMulActionQuotientDiff\", \"instNonemptyObjOpenNormalSubgroupStabilizerHomSurjectiveAuxFunctor\"], \"digest\": \"268c46ce5e169b3a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern abstract groups, topological tori, or general scheme properties; none states this group-scheme assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quotient of a smooth affine group scheme by a normal subgroup of multiplicative type is affine and the quotient map is an fppf torsor",
+   "results": "{\"t\": \"2026-10-24T08:27:39Z\", \"tool\": \"leansearch\", \"query\": \"Quotient of a smooth affine group scheme by a normal subgroup of multiplicative type is affine and the quotient map is an fppf torsor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"QuotientAddGroup.fintype\", \"IsGalois.normalAutEquivQuotient\", \"Con.Quotient\", \"QuotientGroup.instIsTopologicalGroup\", \"QuotientGroup.Quotient.commGroup\", \"Rep.quotientToCoinvariants\", \"QuotientGroup.Quotient.group\", \"QuotientAddGroup.divisibleBy\"], \"digest\": \"4327fcd7d9788e34\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern abstract groups, topological tori, or general scheme properties; none states this group-scheme assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fppf quotient of a connected smooth affine group by a normal diagonalizable subgroup is represented by an affine smooth scheme",
+   "results": "{\"t\": \"2026-10-24T08:27:46Z\", \"tool\": \"leanfinder\", \"query\": \"The fppf quotient of a connected smooth affine group by a normal diagonalizable subgroup is represented by an affine smooth scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.AffineSpace.instIsAffine\"], \"digest\": \"93e954ca67554cf6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern abstract groups, topological tori, or general scheme properties; none states this group-scheme assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "multiplicative.?type|diagonali[sz]able.*quotient|group.*quotient",
+   "results": "{\"t\": \"2026-10-24T09:28:30Z\", \"tool\": \"grep\", \"query\": \"multiplicative.?type|diagonali[sz]able.*quotient|group.*quotient\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract group quotients, rational representations or unrelated Galois categories, not relative quotients of affine group schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GroupScheme, AlgebraicGeometry.IsAffineHom",
+   "results": "{\"t\": \"2026-10-24T09:28:30Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.GroupScheme, AlgebraicGeometry.IsAffineHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.GroupScheme'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract group quotients, rational representations or unrelated Galois categories, not relative quotients of affine group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fppf quotient of a smooth affine group scheme by a normal subgroup of multiplicative type is affine and smooth over an arbitrary base scheme",
+   "results": "{\"t\": \"2026-10-24T09:28:31Z\", \"tool\": \"leanfinder\", \"query\": \"The fppf quotient of a smooth affine group scheme by a normal subgroup of multiplicative type is affine and smooth over an arbitrary base scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"Subgroup.QuotientDiff\", \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"instNonemptyObjOpenNormalSubgroupStabilizerHomSurjectiveAuxFunctor\", \"ProfiniteGrp.toFiniteQuotientFunctor\", \"instFiniteObjOpenNormalSubgroupStabilizerHomSurjectiveAuxFunctor\", \"QuotientGroup.Quotient.group\", \"QuotientGroup.map_normal\"], \"digest\": \"653618501a75a4c8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract group quotients, rational representations or unrelated Galois categories, not relative quotients of affine group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine group quotient by a diagonalizable normal subgroup over a ring is the spectrum of its invariant algebra",
+   "results": "{\"t\": \"2026-10-24T09:29:16Z\", \"tool\": \"leanfinder\", \"query\": \"An affine group quotient by a diagonalizable normal subgroup over a ring is the spectrum of its invariant algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instMulSemiringActionQuotientSubgroupSubtypeMemSubalgebraSubalgebra\", \"Rep.quotientToInvariants\", \"instSMulCommClassQuotientSubgroupSubtypeMemSubalgebraSubalgebra\", \"instMulSemiringActionQuotientSubgroupSubtypeMemSubringSubring\", \"Rep.quotientToCoinvariants\", \"instNonemptyObjOpenNormalSubgroupStabilizerHomSurjectiveAuxFunctor\", \"Ideal.Quotient.exists_algEquiv_fixedPoint_quotient_under\", \"Representation.quotientToInvariants\"], \"digest\": \"47bd72bd093acc07\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract group quotients, rational representations or unrelated Galois categories, not relative quotients of affine group schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-central-multiplicative-quotient",
+  "date": "2026-10-24",
+  "group": "Q39"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell. Specific prerequisite: Conrad, Reductive group schemes, Lemma 4.1.3 (rank-one centralizer), Theorem 4.2.6, pp.120-121 (perfect opposite-root pairing and coroot), and Corollary 5.1.9(1), printed pp.140-141 (three-exponential normalizer element and reflection formula).  Supporting structural classification before the opposite-root matrix calculation: Conrad Theorem 5.1.8, printed pp.139-140. Supporting input to the matrix-model proof: the saturated root-kernel torus and its semisimple quotient, before either centre case. General structural input: Relative quotient by a central subgroup of multiplicative type. Supporting prerequisite: Affine quotients of smooth connected groups by multiplicative normal subgroups. Lemma 3.3.2, quotient discussion, printed pp.97--98; smoothness and connected fibres by the fppf quotient. This is the smooth connected affine quotient prerequisite, without centre or maximal-torus conclusions.",
+   "via": [
+    "lem-sfb-relative-central-multiplicative-quotient",
+    "lem-sfb-relative-rank-one-central-quotient",
+    "lem-sfb-relative-rank-one-local-matrix-model",
+    "lem-sfb-relative-opposite-root-reflection-map",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-affine-multiplicative-quotient",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Split the relative quotient by extracting a strong grading from the closed subgroup, applying one new general strong-grading algebra theorem, and proving the sheaf quotient, effective affine descent, normal group law, kernel, smoothness, connected fibres and arbitrary base change in eight steps. Reused existing coaction and descent nodes; no Lean or compiler. Corrected the source place and distinguished the quotient assumption there from a proof.",
+  "blueprint": "The inherited from.node is null, confirmed by blueprint_refs.py ancestor. Retained the exact via chain. Supports the inherited alteration/moduli branch of det-thm-sf-ctf-stability-direct-images (3) in the latest blueprint, through the rank-one structural quotient prerequisites; does not change the unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-fppf-sheaf-representability-descent-data",
+    "why": "Generic affine-scheme, sheaf, Yoneda or faithfully flat descent tool used exactly as stated; the present unit has no replacement for this foundational input."
+   },
+   {
+    "node": "lem-trf-fppf-family-affine-effectivity-reduction",
+    "why": "Generic affine-scheme, sheaf, Yoneda or faithfully flat descent tool used exactly as stated; the present unit has no replacement for this foundational input."
+   },
+   {
+    "node": "lem-galois-fpqc-affine-descent-effective",
+    "why": "Generic affine-scheme, sheaf, Yoneda or faithfully flat descent tool used exactly as stated; the present unit has no replacement for this foundational input."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-affine",
+    "why": "Generic affine-scheme, sheaf, Yoneda or faithfully flat descent tool used exactly as stated; the present unit has no replacement for this foundational input."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-flat",
+    "why": "Generic affine-scheme, sheaf, Yoneda or faithfully flat descent tool used exactly as stated; the present unit has no replacement for this foundational input."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+    "why": "Generic affine-scheme, sheaf, Yoneda or faithfully flat descent tool used exactly as stated; the present unit has no replacement for this foundational input."
+   },
+   {
+    "node": "lem-sbc-smooth-flat-surjective-source-descent",
+    "why": "Generic affine-scheme, sheaf, Yoneda or faithfully flat descent tool used exactly as stated; the present unit has no replacement for this foundational input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-fppf-sheaf-representability-descent-data",
+  "lem-trf-fppf-family-affine-effectivity-reduction",
+  "lem-galois-fpqc-affine-descent-effective",
+  "lem-weil-pbc-fpqc-descend-affine",
+  "lem-weil-pbc-fpqc-descend-flat",
+  "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+  "lem-sbc-smooth-flat-surjective-source-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q131-287fd15e0",
+  "group": "Q131",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-287fd15e0 (reviewer sub-agent of L); spot-checked: Read the item, new node lem-sfb-strong-grading-torsor-algebra and every cited statement in full. The item statement is byte-identical to live and stmt_deps are unchanged. This is a first split, not a re-split. Step 2: c=(h,hn) is phi^{-1}∘(id×incl), a closed immersion (01QR) with surjective c^# (01QO). gamma(a⊗b_m)=ab_m⊗e_m is right, and the e_m-coefficient then degree-0 extraction gives 1=Σ(a_k)_{-m}(b_k)_m, the strong-grading hypotheses. The new node is true: p_j=u_jv_j cover Spec B, A_m is locally free of rank 1, so A is faithfully flat. beta has inverse a⊗e_m ↦ Σ a v_j⊗u_j (both composites checked). The local Laurent presentation B[x^{±1}]/(x^{l_j}-c_j) gives finite presentation, and base change holds. Small cases M=0, A=0, mu_p⊂G_m in char p and Z-torsor all fit. The node is ring theory, not a clause of the item, and has no duplicate (graded-stabilizer-strong-products and the subtorus-schematicity node differ). Steps 3-7 hold. Step 3: lifts plus the kernel-pair iso give the sheafification universal property. Step 4: 02W5 + 02W3 with P=affine, (iii) via 0245/022C, affineness via 02L5. Step 5: flat/lfp/affine descent and the kernel-pair iso. Step 6: normality. Step 7: 05B5 and image of a connected fibre. Batch 5: lem-trf-fppf-covering-base-change (021O), -covering-is-fpqc (022C), -sheaf-representability-descent-data (02W5) and -family-affine-effectivity-reduction (02W3) are generic fppf descent foundations. Their closures reach only other generic lem-trf fppf descent nodes, nothing of the trace formula, PD or batch-4 targets, so I accept them. Fault C1: step 8 used smoothness of the base change over S' with no node. Fixed by citing lem-weil-pbc-smooth-ring-map-base-change-composition with the affine-local form in def-sbc-smooth-morphisms and lem-weil-pbc-fibre-product-affine-spectra; geometric fibres of J_{S'} are fibres of J. proof_deps updated. Fixed file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-relative-affine-multiplicative-quotient.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeAffineMultiplicativeQuotient",
+  "declaration": "AlgebraicGeometry.relative_affine_multiplicative_quotient",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeAffineMultiplicativeQuotient.lean",
+  "statement": "theorem relative_affine_multiplicative_quotient {S : Scheme.{u}} (N H : Grp (Over S)) (i : N ⟶ H) [Smooth H.X.hom] [IsAffineHom H.X.hom] [LocallyOfFinitePresentation H.X.hom] [QuasiCompact H.X.hom] [QuasiSeparated H.X.hom] [GeometricallyConnected H.X.hom] [IsClosedImmersion i.hom.hom.left] (hN : IsRelativeMultiplicativeType N) (hnormal : ∀ T : Over S, (IsMonHom.monoidHom i.hom.hom T).range.Normal) : ∃ (J : Grp (Over S)) (q : H ⟶ J), Smooth J.X.hom ∧ IsAffineHom J.X.hom ∧ LocallyOfFinitePresentation J.X.hom ∧ QuasiCompact J.X.hom ∧ QuasiSeparated J.X.hom ∧ GeometricallyConnected J.X.hom ∧ Flat q.hom.hom.left ∧ Surjective q.hom.hom.left ∧ LocallyOfFinitePresentation q.hom.hom.left ∧ QuasiCompact q.hom.hom.left ∧ QuasiSeparated q.hom.hom.left ∧ IsFppfGroupQuotient i q ∧ ∀ (S' : Scheme.{u}) (f : S' ⟶ S), Smooth ((Over.pullback f).mapGrp.obj J).X.hom ∧ IsAffineHom ((Over.pullback f).mapGrp.obj J).X.hom ∧ LocallyOfFinitePresentation ((Over.pullback f).mapGrp.obj J).X.hom ∧ QuasiCompact ((Over.pullback f).mapGrp.obj J).X.hom ∧ QuasiSeparated ((Over.pullback f).mapGrp.obj J).X.hom ∧ GeometricallyConnected ((Over.pullback f).mapGrp.obj J).X.hom ∧ Flat ((Over.pullback f).mapGrp.map q).hom.hom.left ∧ Surjective ((Over.pullback f).mapGrp.map q).hom.hom.left ∧ LocallyOfFinitePresentation ((Over.pullback f).mapGrp.map q).hom.hom.left ∧ QuasiCompact ((Over.pullback f).mapGrp.map q).hom.hom.left ∧ QuasiSeparated ((Over.pullback f).mapGrp.map q).hom.hom.left ∧ IsFppfGroupQuotient ((Over.pullback f).mapGrp.map i) ((Over.pullback f).mapGrp.map q)",
+  "branch": "newtargets-dag",
+  "by": "Q96",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-20446fec0",
+  "group": "Q96",
+  "result": "pass",
+  "note": "Item node equals live except the lean record and 2 added def stmt_deps (def-sfb-relative-multiplicative-type, def-sfb-fppf-group-quotient-presentation); proof/proof_deps unchanged. Lean matches the node clause by clause: S : Scheme.{u}; N H : Grp (Over S); H Smooth+IsAffineHom+LFP+QC+QS+GeometricallyConnected; i a closed immersion; functorial normality on every T : Over S (field-only IsNormalSubgroupScheme not applicable; same idiom as landed LocalBorelQuotientGeometry); IsRelativeMultiplicativeType (Q140, Conrad B.1.1). Conclusions: J smooth/affine/fp/geom-connected; q flat+surjective+LFP+QC+QS; IsFppfGroupQuotient (Q95) gives the kernel square, the (h,n)->(h,hn) torsor iso with specified projections and the sheafification UP; everything repeated for the actual pullbacks along arbitrary f : S' -> S. fp of N omitted but implied. Edge cases (empty S, M=0, N=H, mu_p, varying M_i, non-flat f) and single universe u OK. Docstrings carry source, blueprint tag and 8 steps; only sorry; no copies of the landed defs; lean.statement verbatim. No file changed, no compile run; the worker's scompile and dry run were OK. Advisory: the statement prose does not bracket-cite the 2 added stmt_deps."
+ }
+}

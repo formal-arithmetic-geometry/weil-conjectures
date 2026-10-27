@@ -1,0 +1,114 @@
+{
+ "id": "lem-sf-constructible-exceptional-left-refinements",
+ "kind": "statement",
+ "title": "Left geometric refinements on normalized coefficient stages",
+ "statement": "Under exactly the geometric and coefficient hypotheses of the normalized coefficient construction, let R,F,M be ring, rational and common-stage records satisfying CoefficientConstructionNormalization. There exists CoefficientLeftRefinements R F M: left comparison isomorphisms, their shifts, their canonical proper/open ring realization, their raw localization formula and their common-field conjugation formula. This asserts no right comparison or adjunction compatibility equations. It is the left geometric part of construction step 6.",
+ "stmt_deps": [
+  "def-sf-constructible-exceptional-coefficient-construction-data",
+  "def-sf-constructible-exceptional-assembly-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+  "place": "Left geometric refinements on normalized coefficient stages; normalized coefficient construction in the existing assembly node."
+ },
+ "proof": [
+  {
+   "text": "Construct the ring-stage proper/open refinement together with its integral scalar square. Localize the integral isomorphisms using the fixed rational functors and equal localization shift structures. At the closed stage conjugate the rational components by the supplied common-field q maps. The rational scalar square and commonTransitionNatural give compatibility along transitions. Every pair-category arrow factors through transitions and a stage arrow, so this defines a natural isomorphism. Its shift square follows after precomposition with each stage inclusion, since the common shift structures agree. Assemble the four Stage cases; the ring normalization, rational HEq and common conjugation formula are then the respective component equations.",
+   "uses": [
+    "lem-sf-constructible-ring-left-refinement",
+    "lem-sf-constructible-rational-left-refinement"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-constructible-ring-left-refinement",
+  "lem-sf-constructible-rational-left-refinement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+  "place": "Exceptional step 6; explicit common-stage descent via StageSystem.exists_stage_representation, 2026-10-27."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Assemble compatible compact support exceptional adjunctions for finite integral rational coefficients and common finite fields",
+   "results": "MeasureTheory.Integrable.exists_hasCompactSupport_lintegral_sub_le, MeasureTheory.MemLp.exists_hasCompactSupport_integral_rpow_sub_le, MeasureTheory.Integrable.exists_hasCompactSupport_integral_sub_le, HasCompactSupport.exist_eLpNorm_sub_le_of_continuous, exists_lt_rieszContentAux_add_pos, HasCompactSupport.exists_simpleFunc_approx_of_prod, MeasureTheory.MemLp.exists_hasCompactSupport_eLpNorm_sub_le, exists_continuous_sum_one_of_isOpen_isCompact",
+   "date": "2026-10-25",
+   "verdict": "No equivalent normalized coefficient construction or geometric refinement theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.IsTriangulated",
+   "results": "CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated, CategoryTheory.Adjunction.IsTriangulated.rightAdjoint_isTriangulated, CategoryTheory.Adjunction.isTriangulated_leftAdjoint, CategoryTheory.Adjunction.isTriangulated_rightAdjoint, CategoryTheory.Adjunction.IsTriangulated.mk', CategoryTheory.Adjunction.IsTriangulated.mk'', CategoryTheory.Adjunction.IsTriangulated.mk",
+   "date": "2026-10-25",
+   "verdict": "No equivalent normalized coefficient construction or geometric refinement theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_coefficient_construction|CoefficientConstructionRing|exceptionalIntegralReconstruction",
+   "results": "No matches.",
+   "date": "2026-10-25",
+   "verdict": "No equivalent normalized coefficient construction or geometric refinement theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived category constructible exceptional adjunction coefficient field descent normalized compactification refinement",
+   "results": "CategoryTheory.Adjunction.derivedη.congr_simp, HasDerivedCategory.standard, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Adjunction.derivedη_fac_app_assoc",
+   "date": "2026-10-25",
+   "verdict": "No equivalent normalized coefficient construction or geometric refinement theorem."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstructibleExceptionalCoefficientConstruction",
+  "date": "2026-10-25",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-tensor-hom",
+   "place": "Left geometric refinements on normalized coefficient stages",
+   "via": [
+    "lem-sf-constructible-exceptional-coefficient-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstructibleExceptionalLeftRefinements",
+  "file": "lean/Sheaf/Paper/ConstructibleExceptionalLeftRefinements.lean",
+  "declaration": "WeilConjectures.ConstructibleExceptionalCoefficients.exists_coefficient_left_refinements",
+  "statement": "theorem exists_coefficient_left_refinements (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p) {X Y : Scheme.{max u v}} (f : X ⟶ Y) [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (R : CoefficientConstructionRing.{u, v} l Ω D hl (f := f)) (F : CoefficientConstructionFields.{u, v} l Ω D hl R) (M : CoefficientConstructionCommon.{u, v} l Ω D hl R F) (H : CoefficientConstructionNormalization.{u, v} l Ω D hl R F M) : Nonempty (CoefficientLeftRefinements.{u, v} l Ω D hl R F M)",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-1106a",
+  "group": "A3",
+  "result": "fix",
+  "landing": "20261025T100757-L-3622475",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y6",
+  "result": "pass",
+  "landing": "20261027T013012-L-2357707",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -11,19 +11,13 @@ public import Sheaf.Paper.EtaleCompactSupportCoefficientChange
 public import Sheaf.Paper.IntegralCompactSupportCoefficientComparison
 public import Sheaf.AlgebraicGeometry.ProEtaleConstantRingPullbackComparison
 
-import Sheaf.AlgebraicGeometry.SfIntrinsicCompactSupport
-import Sheaf.Paper.ExchangeProjectionSuppliedDomains
-import Sheaf.SecSmoothPurity.ReductionDirectImage
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriekProj
-import Sheaf.Paper.ComparisonTorAmplitude
-import Sheaf.Paper.FiniteCoefficientFlatModel
-import Sheaf.SixFunctors.OpenTensorNormalization
-import Sheaf.Paper.ProEtaleConstructibleOrigin
-import Sheaf.Paper.OpenExtensionFiniteTor
-import Sheaf.AlgebraicGeometry.FiniteCompactProjectionFormula
-import Sheaf.Paper.RingedExchangeTensorCoherence
-import WeilConjectures.Compactification.NagataCompactification
-import Sheaf.AlgebraicGeometry.FiniteCoefficientEtaleProjectionFormula
+import Sheaf.Paper.FiniteTorStability
+import all Sheaf.Paper.FiniteRingConstructibleDerivedOrigin
+import Sheaf.Paper.ProjectionScalarSquare
+import Sheaf.Paper.FiniteProjectionPresentation
+import Sheaf.Paper.PfReductionProperOpenIdentities
+import Sheaf.Paper.ProjectionReductionWitnessedFlatDomains
+import all Sheaf.SecSmoothPurity.ReductionDirectImage
 
 /-!
 # Projection formula and finite coefficient reduction
@@ -36,10 +30,13 @@ identity reduction, occur. All arrows use the existing normalized ringed operati
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option Elab.async false
 set_option relaxedAutoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 4096
+set_option linter.unusedTactic false
+set_option linter.unreachableTactic false
 attribute [-instance] WeilConjectures.IntegralHom.derivedCategory
 universe u
 open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
@@ -103,6 +100,67 @@ def finiteProjectionReductionTarget (m n : ℕ) (h : m ≤ n)
             (finiteQuotientChange l E (n + 1) (m + 1) (Nat.succ_pos n) (Nat.succ_pos m)
               (Nat.succ_le_succ h)) f).hom.app L)))
 
+attribute [local irreducible] sfIntrinsicDerivedEquivalence pullbackTensorFiniteModel
+  coefficientFiniteQuotientDerived CategoryTheory.Functor.mapDerivedCategory
+  CategoryTheory.Functor.rightDerivedFunctor
+
+
+private theorem quotient_restriction (W : Scheme.{u}) {m n : ℕ} (h : m ≤ n) :
+    normalizedDVRRes l E W h =
+      pbcDerivedRestrict
+        ((finiteQuotientChange l E (n + 1) (m + 1) (Nat.succ_pos n)
+          (Nat.succ_pos m) (Nat.succ_le_succ h)).map W) := by
+  rw [sfStabilityQuotientRestrictionEquality l E W h]
+  rfl
+
+private theorem quotient_domain
+    (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
+    (W : Scheme.{u}) [W.Over (Spec (.of D.k))]
+    [IsSeparated (W ↘ Spec (.of D.k))]
+    [LocallyOfFiniteType (W ↘ Spec (.of D.k))] [QuasiCompact (W ↘ Spec (.of D.k))]
+    {m n : ℕ} (h : m ≤ n)
+    (K : proEtaleDerivedCategory W (Padic.coefficientExtensionRing l E (n + 1)))
+    (hK : finiteTorConstructible l E (n + 1) (Nat.succ_pos n) W K) :
+    finiteTorConstructible l E (m + 1) (Nat.succ_pos m) W
+      ((pbcDerivedExtend
+        ((finiteQuotientChange l E (n + 1) (m + 1) (Nat.succ_pos n)
+          (Nat.succ_pos m) (Nat.succ_le_succ h)).map W)).obj K) := by
+  have ha :=
+    (coefficientDerivedSystemEvaluationCalculus l E W).choose.quotientCalculus.adjunction h
+  rw [quotient_restriction l E W h] at ha
+  let e : coefficientFiniteQuotientDerived l E W h ≅
+      pbcDerivedExtend
+        ((finiteQuotientChange l E (n + 1) (m + 1) (Nat.succ_pos n)
+          (Nat.succ_pos m) (Nat.succ_le_succ h)).map W) :=
+    ha.leftAdjointUniq (pbcDerivedScalarAdjunction
+    ((finiteQuotientChange l E (n + 1) (m + 1) (Nat.succ_pos n)
+      (Nat.succ_pos m) (Nat.succ_le_succ h)).map W))
+  have hd := (finiteTor_stability_quotients D l hl E W h).1 K hK
+  have ei : (coefficientFiniteQuotientDerived l E W h).obj K ≅
+      (pbcDerivedExtend
+        ((finiteQuotientChange l E (n + 1) (m + 1) (Nat.succ_pos n)
+          (Nat.succ_pos m) (Nat.succ_le_succ h)).map W)).obj K := e.app K
+  have hc : intrinsicFiniteTorsionConstructible l E (m + 1) (Nat.succ_pos m) W
+      ((pbcDerivedExtend
+        ((finiteQuotientChange l E (n + 1) (m + 1) (Nat.succ_pos n)
+          (Nat.succ_pos m) (Nat.succ_le_succ h)).map W)).obj K) := by
+    constructor
+    · exact Set.Finite.subset hd.1.1 (fun i hi ↦ by
+        exact (not_congr ((DerivedCategory.homologyFunctor
+          (proEtaleRingModules W (proEtaleConstantRing W
+            (Padic.coefficientExtensionRing l E (m + 1)))) i).mapIso ei).isZero_iff.symm).mp hi)
+    · intro i
+      exact (intrinsicConstructible_of_iso W
+        (Padic.coefficientExtensionRing l E (m + 1))
+        ((DerivedCategory.homologyFunctor
+          (proEtaleRingModules W (proEtaleConstantRing W
+            (Padic.coefficientExtensionRing l E (m + 1)))) i).mapIso ei) (hd.1.2 i))
+  refine ⟨hc, ?_⟩
+  obtain ⟨a, b, hab, ht⟩ := hd.2
+  refine ⟨a, b, hab, ?_⟩
+  intro _A P eA f hf hP M i hi
+  exact ht _A P ⟨eA.some ≪≫ ei.symm⟩ f hf hP M i hi
+
 /-- The reduction square for the specified projection map commutes, and the original
 projection is invertible exactly when the projection at the reduced objects is.
 Source: current blueprint prop-sf-pf-reduction (blueprint: prop-sf-pf-reduction).
@@ -162,6 +220,70 @@ theorem projectionFiniteReduction
         ((pbcDerivedExtend
           ((finiteQuotientChange C.l E (n + 1) (m + 1) (Nat.succ_pos n) (Nat.succ_pos m)
             (Nat.succ_le_succ h)).map Y.obj.left)).obj L))) := by
-  sorry
+  let : X.obj.left.Over (Spec (.of D.k)) := ⟨X.obj.hom⟩
+  let : Y.obj.left.Over (Spec (.of D.k)) := ⟨Y.obj.hom⟩
+  have : IsSeparated (X.obj.left ↘ Spec (.of D.k)) := by
+    change IsSeparated X.obj.hom
+    infer_instance
+  have : IsSeparated (Y.obj.left ↘ Spec (.of D.k)) := by
+    change IsSeparated Y.obj.hom
+    infer_instance
+  have : LocallyOfFiniteType X.obj.hom := X.property.1
+  have : QuasiCompact X.obj.hom := X.property.2
+  have : LocallyOfFiniteType (f.hom.left ≫ Y.obj.hom) := by
+    rw [f.hom.w]
+    infer_instance
+  have : LocallyOfFiniteType f.hom.left :=
+    locallyOfFiniteType_of_comp f.hom.left Y.obj.hom
+  have : QuasiCompact (f.hom.left ≫ Y.obj.hom) := by
+    rw [f.hom.w]
+    infer_instance
+  have : QuasiCompact f.hom.left :=
+    QuasiCompact.of_comp f.hom.left Y.obj.hom
+  constructor
+  · have hc := projection_factor_coordinates D C E m n h X Y f c
+      (proEtaleConstantRingCompositeCoefficients_eq c.i c.g
+        (Padic.coefficientExtensionRing C.l E (n + 1))).symm
+      (proEtaleConstantRingCompositeCoefficients_eq c.i c.g
+        (Padic.coefficientExtensionRing C.l E (m + 1))).symm
+      (pullbackTensorFiniteModel C.l E X.obj.left n)
+      (pullbackTensorFiniteModel C.l E c.Z n)
+      (pullbackTensorFiniteModel C.l E Y.obj.left n)
+      (pullbackTensorFiniteModel C.l E X.obj.left m)
+      (pullbackTensorFiniteModel C.l E c.Z m)
+      (pullbackTensorFiniteModel C.l E Y.obj.left m) K L _hK _hL
+    have he := projection_scalar_square
+      (finiteQuotientChange C.l E (n + 1) (m + 1) (Nat.succ_pos n)
+        (Nat.succ_pos m) (Nat.succ_le_succ h)) c
+      (proEtaleConstantRingCompositeCoefficients_eq c.i c.g
+        (Padic.coefficientExtensionRing C.l E (n + 1))).symm
+      (proEtaleConstantRingCompositeCoefficients_eq c.i c.g
+        (Padic.coefficientExtensionRing C.l E (m + 1))).symm
+      (pullbackTensorFiniteModel C.l E X.obj.left n)
+      (pullbackTensorFiniteModel C.l E c.Z n)
+      (pullbackTensorFiniteModel C.l E Y.obj.left n)
+      (pullbackTensorFiniteModel C.l E X.obj.left m)
+      (pullbackTensorFiniteModel C.l E c.Z m)
+      (pullbackTensorFiniteModel C.l E Y.obj.left m) K L hc
+    simpa only [finiteReductionProjection, finiteProjectionReductionSource,
+      finiteProjectionReductionTarget, mixedChange, Category.assoc] using he
+  · have : LocallyOfFiniteType Y.obj.hom := Y.property.1
+    have : QuasiCompact Y.obj.hom := Y.property.2
+    have : LocallyOfFiniteType (X.obj.left ↘ Spec (.of D.k)) := X.property.1
+    have : QuasiCompact (X.obj.left ↘ Spec (.of D.k)) := X.property.2
+    have : LocallyOfFiniteType (Y.obj.left ↘ Spec (.of D.k)) := Y.property.1
+    have : QuasiCompact (Y.obj.left ↘ Spec (.of D.k)) := Y.property.2
+    have hKn : IsIso (finiteReductionProjection C.l E n c K L) := by
+      exact finiteProjectionPresentation_isIso D C E n X Y f c
+        (pullbackTensorFiniteModel C.l E X.obj.left n)
+        (pullbackTensorFiniteModel C.l E c.Z n)
+        (pullbackTensorFiniteModel C.l E Y.obj.left n) K L _hK _hL
+    have hKm := finiteProjectionPresentation_isIso D C E m X Y f c
+      (pullbackTensorFiniteModel C.l E X.obj.left m)
+      (pullbackTensorFiniteModel C.l E c.Z m)
+      (pullbackTensorFiniteModel C.l E Y.obj.left m) _ _
+      (quotient_domain C.l E D C.different X.obj.left h K _hK)
+      (quotient_domain C.l E D C.different Y.obj.left h L _hL)
+    exact ⟨fun _ ↦ hKm, fun _ ↦ hKn⟩
 
 end WeilConjectures

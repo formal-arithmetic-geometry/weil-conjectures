@@ -70,16 +70,6 @@ variable {R S : Type (u + 1)} [CommRing R] [CommRing S] (f : R →+* S)
 
 open ChangeOfRings
 
-instance : (extendScalars.{u + 1, u + 1, u + 1} f).Additive where
-  map_add := by
-    intros
-    ext m
-    simp [TensorProduct.tmul_add]
-
-instance : PreservesFiniteColimits (extendScalars.{u + 1, u + 1, u + 1} f) :=
-  have := (extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} f).leftAdjoint_preservesColimits
-  inferInstance
-
 /-- Extension of scalars sends the multiplication by `r` to the multiplication by `f r`. -/
 lemma extendScalars_map_smul_id (r : R) (M : ModuleCat.{u + 1} R) :
     (extendScalars.{u + 1, u + 1, u + 1} f).map (r • 𝟙 M) =

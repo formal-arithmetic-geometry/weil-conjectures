@@ -1,0 +1,204 @@
+{
+ "id": "lem-pd-section-push-normalized-exists-unique",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Human re-split 2026-10-24 of def-pd-proetale-section-module-functors: pushNormalized_existsUnique; original assembly Step 2. Seeded nt-target-poincare-isiso Verdier-exchange Step 2 prerequisites; no imported blueprint ancestor.",
+   "via": [
+    "def-pd-proetale-section-module-functors",
+    "lem-pd-module-ringed-topos-derived-comparison",
+    "nt-target-poincare-isiso"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Unique normalized lax structure on the actual pro-etale section direct image",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring], let $X,Y$ be schemes in universe $u$, and let $f:X\\to Y$ be any scheme morphism. Use the fixed small pro-etale sites [def-weil-pbc-proetale-site], with objects and module sections in universe $u+1$ and morphisms in universe $u$. Write $R_T$ for the section-ring sheaf of the pulled-back coefficients on $T$ [sk-def-sfb-pulled-back-coefficients, def-weil-pbc-internal-abelian-sheaf-module-equivalence]. Use exactly the coefficient map $c:R_Y\\to f_*R_X$, section-module functors $L=f^*_{\\rm sec}$ and $P=f_{*,\\rm sec}$ and specified adjunction $L\\dashv P$ of [def-pd-section-module-operations-data]. Module tensors are the sheafified balanced tensors [def-pur-sheaf-tensor-product], and their units are the regular modules $R_T$. A lax monoidal structure on $P$ consists of natural maps $\\mu_{H,K}:PH\\otimes_{R_Y}PK\\to P(H\\otimes_{R_X}K)$ and $e:R_Y\\to PR_X$ satisfying associativity and the two unit identities. Call it normalized when for every $R_X$-module sheaves $H,K$, object $V$ of the small site of $Y$, and $x\\in H(V\\times_YX)$, $y\\in K(V\\times_YX)$, $\\mu_{H,K}$ sends the local pure tensor $x\\otimes y$ over $V$ to the local pure tensor $x\\otimes y$ over $V\\times_YX$, using the pure-tensor sections of [def-pd-section-module-operations-data]. There exists exactly one normalized lax monoidal structure on $P$. Its unit satisfies $e_V(r)=c_V(r)$ for every $V$ and $r\\in R_Y(V)$; this unit formula is a conclusion, not an assumption on competing normalized structures.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK (section-tensor-product), bilinear representing property; specialized normalized existence and uniqueness recorded in Sheaf.Paper.ProEtaleSectionModuleFunctors, pushNormalized_existsUnique. Current read-only Lean declaration at lean/Sheaf/Paper/ProEtaleSectionModuleFunctors.lean:532; signature and docstring verified on 2026-10-24."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-pd-section-module-operations-data",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Set $C=Y_{\\mathrm{proet}}$, $D=X_{\\mathrm{proet}}$, $v(V)=V\\times_YX$, $R=R_Y$ and $S=R_X$. By [def-sfb-finite-lower-star], precomposition along $v$ is the actual sheaf direct image. Both sites are small in the common module-section universe $u+1$, as stipulated in the statement. By [def-pd-section-module-operations-data], the specified functor $P$ is precisely this precomposition followed by scalar restriction along the fixed ring-sheaf map $c$: $(PH)(V)=H(vV)$, $r\\cdot x=c_V(r)x$, and $P$ acts on maps by their components at $vV$. Thus the data satisfy the hypotheses of [lem-pd-ringed-direct-image-pairing-lax], with exactly the given coefficient map; no change of adjunction or coefficient category is involved.",
+   "uses": [
+    "def-sfb-finite-lower-star",
+    "def-pd-section-module-operations-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D6, definition-pushforward, and 03EK, section-tensor-product (Hom/Bilin display); specialization to the fixed pro-etale section operations."
+   }
+  },
+  {
+   "text": "Apply [lem-pd-ringed-direct-image-pairing-lax] to these data. Its tensors are the sheafified balanced tensors of [def-pur-sheaf-tensor-product], and its units are $R_Y,R_X$. Its unique lax structure supplies natural tensor maps and all three coherence identities. By [def-pd-section-module-operations-data], the pure tensor used here is the balanced section tensor followed by module sheafification and its canonical tensor identification. Consequently the normalization in the cited theorem is exactly the normalization in this item on every $V,x,y$. Every competing normalized lax structure therefore satisfies that theorem's uniqueness predicate, so equals the structure obtained above. The same theorem concludes $e_V(r)=c_V(r)$ for every $V,r$ without assuming a unit formula for competing structures, giving the final clause.",
+   "uses": [
+    "lem-pd-ringed-direct-image-pairing-lax",
+    "def-pur-sheaf-tensor-product",
+    "def-pd-section-module-operations-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D6, definition-pushforward, and 03EK, section-tensor-product (Hom/Bilin display); specialization to the fixed pro-etale section operations."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pd-section-module-operations-data",
+  "def-pur-sheaf-tensor-product",
+  "def-sfb-finite-lower-star",
+  "lem-pd-ringed-direct-image-pairing-lax"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D6, definition-pushforward, and 03EK, section-tensor-product (Hom/Bilin display); specialization to the fixed pro-etale section operations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Unique lax monoidal structure on sheaf module direct image normalized on every local pure tensor with unit equal to coefficient ring map",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.unitToPushforwardObjUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on $\\\\ma\"}\n  {\"name\": \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (CategoryTheory.presheafToSheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R)).Monoidal\", \"doc\": \"The sheafification functor from presheaves to sheaves on the coherent topology of light profinite spaces (compact, Hausdorff, totally disconnected, second-countable topological spaces) with values in \"}\n  {\"name\": \"SheafOfModules.unitToPushforwardObjUnit_val_app_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"For any object $X$ in the opposite category $\\\\mathcal{C}^\\\\mathrm{op}$ and any element $a$ in the presheaf $S.\\\\text{val}.\\\\text{obj}\\\\, X$, the application of the unit morphism $\\\\text{unitToPushforwardOb\"}\n  {\"name\": \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on $\\\\ma\"}\n  {\"name\": \"CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf\", \"module\": \"Mathlib/CategoryTheory/Sites/Monoidal\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      (A : Type u₃) →\\n        [inst_1 : CategoryTheory.Category.{v₃, u₃} A] →\\n          [inst_2 : CategoryTheory.MonoidalCategory A] →\\n            [inst_3 : J.W.IsMonoidal] →\\n           \", \"doc\": \"The sheafification functor from the opposite category of presheaves to sheaves on a site (a category equipped with a Grothendieck topology $J$) is a monoidal functor. This means it preserves the monoi\"}\n  {\"name\": \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalCategory\\n      (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal category. This structure is defined by equipping the category of sheaves on light profinite spaces (compa\"}\n  {\"name\": \"SheafOfModules.pushforwardCongr\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given continuous functors between sites with Grothendieck topologies and equal natural transformations $\\\\phi, \\\\psi : S \\\\to F_*R$ between sheaves of rings, this constructs a natural isomorphism between\"}\n  {\"name\": \"SheafOfModules.pushforward\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}",
+   "date": "2026-10-24",
+   "verdict": "No complete match. SheafOfModules.pushforward (PushforwardContinuous.lean:43) defines P and PullbackFree.lean:60 defines its coefficient unit; neither asserts existence, coherence and uniqueness of the normalized lax structure for the actual sheafified tensor."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushforward\", \"LaxMonoidal\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "No complete match. SheafOfModules.pushforward (PushforwardContinuous.lean:43) defines P and PullbackFree.lean:60 defines its coefficient unit; neither asserts existence, coherence and uniqueness of the normalized lax structure for the actual sheafified tensor."
+  },
+  {
+   "tool": "grep",
+   "query": "pushNormalized|pushforward.*[Ll]ax|[Ll]ax.*pushforward",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "No complete match. SheafOfModules.pushforward (PushforwardContinuous.lean:43) defines P and PullbackFree.lean:60 defines its coefficient unit; neither asserts existence, coherence and uniqueness of the normalized lax structure for the actual sheafified tensor."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf of modules ringed site pushforward tensor pairing lax monoidal uniqueness",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pushforward\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \": SheafOfModules.{v} R ⥤ SheafOfModules.{v} S\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pushforwardSections\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \"[Functor.IsContinuous.{v} F J K] {M : SheafOfModules.{v} R} (s : M.sections) : ((pushforward φ).obj M).sections\", \"doc\": \"Given a continuous functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, a natural transformation $ \\\\phi : S \\\\to F_*R $ between sheaves of rings, and \"}\n  {\"name\": \"PresheafOfModules.pushforward₀_obj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pushforward\", \"type\": \"(R : Dᵒᵖ ⥤ RingCat.{u}) (M : PresheafOfModules R) : PresheafOfModules (F.op ⋙ R)\", \"doc\": \"Given a presheaf of modules $ M $ over a presheaf of rings $ R $ on a category $ \\\\mathcal{C} $, and a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, the pushforward presheaf $ F_*M $ is defined as follo\"}\n  {\"name\": \"SheafOfModules.pushforward_obj_val\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"For categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betwee\"}\n  {\"name\": \"SheafOfModules.pushforwardComp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \":\\n  pushforward.{v} ψ ⋙ pushforward.{v} φ ≅\\n    pushforward.{v} (F := F ⋙ G) (φ ≫ (F.sheafPushforwardContinuous RingCat.{u} J K).map ψ)\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \"{M : SheafOfModules.{u} R} (f : unit R ⟶ M) :\\n  pushforwardSections φ (M.unitHomEquiv f) =\\n    ((pushforward φ).obj M).unitHomEquiv (unitToPushforwardObjUnit φ ≫ (pushforward φ).map f)\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on $\\\\ma\"}\n  {\"name\": \"PresheafOfModules.monoidalCategoryStruct\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal\", \"type\": \": MonoidalCategoryStruct (PresheafOfModules.{u} (R ⋙ forget₂ _ _))\", \"doc\": \"For any category $\\\\mathcal{C}$ and a presheaf $R : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\text{CommRing}$, the category of presheaves of modules over $R$ is equipped with a monoidal structure. The tensor produc\"}\n  {\"name\": \"PresheafOfModules.pushforward₀_obj_obj_isModule\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pushforward\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  (F : CategoryTheory.Functor C D) (R : CategoryTheory.Functor Dᵒᵖ RingCat) (M : PresheafOfModules R) (X : Cᵒᵖ),\\n  ((PresheafOfModules.pushforward₀_obj F R M).obj X).isModule = (M.\", \"doc\": \"Given a presheaf of modules $ M $ over a presheaf of rings $ R $ on a category $ \\\\mathcal{C} $, and a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, the pushforward presheaf $ F_*M $ assigns to each obj\"}",
+   "date": "2026-10-24",
+   "verdict": "No complete match. SheafOfModules.pushforward (PushforwardContinuous.lean:43) defines P and PullbackFree.lean:60 defines its coefficient unit; neither asserts existence, coherence and uniqueness of the normalized lax structure for the actual sheafified tensor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars for sheaves of modules has unique coherent tensor pairing and regular module unit",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.restrictScalars\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R R' : CategoryTheory.Sheaf J RingCat} → (R ⟶ R') → CategoryTheory.Functor (SheafOfModules R') (SheafOfModules R)\", \"doc\": \"Given a natural transformation $\\\\alpha: R \\\\to R'$ between sheaves of rings on a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, this defines a functor from the category of sheaves of modules \"}\n  {\"name\": \"SheafOfModules.restrictScalars_obj_val\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R R' : CategoryTheory.Sheaf J RingCat} (α : R ⟶ R') (M' : SheafOfModules R'),\\n  ((SheafOfModules.restrictScalars α).obj M').val = (PresheafOfModules.restrictScalars α.val).obj M'.val\", \"doc\": \"For a natural transformation $\\\\alpha: R \\\\to R'$ between sheaves of rings on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, the underlying presheaf of the restriction of scalars functor appli\"}\n  {\"name\": \"SheafOfModules.instAdditiveRestrictScalars\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R R' : CategoryTheory.Sheaf J RingCat} (α : R ⟶ R'), (SheafOfModules.restrictScalars α).Additive\", \"doc\": \"Given a natural transformation $\\\\alpha: R \\\\to R'$ between sheaves of rings on a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, the restriction of scalars functor from the category of sheaves\"}\n  {\"name\": \"SheafOfModules.restrictScalars_map_val\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R R' : CategoryTheory.Sheaf J RingCat} (α : R ⟶ R') {X Y : SheafOfModules R'} (φ : X ⟶ Y),\\n  ((SheafOfModules.restrictScalars α).map φ).val = (PresheafOfModules.restrictScalars α.val).map φ.val\", \"doc\": \"Given a natural transformation $\\\\alpha: R \\\\to R'$ between sheaves of rings on a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, and a morphism $\\\\varphi: X \\\\to Y$ between sheaves of modules ov\"}\n  {\"name\": \"PresheafOfModules.restrictScalarsObj\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/ChangeOfRings\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {R R' : CategoryTheory.Functor Cᵒᵖ RingCat} → PresheafOfModules R' → (R ⟶ R') → PresheafOfModules R\", \"doc\": \"Given a presheaf of modules $\\\\mathcal{M}'$ over a presheaf of rings $R'$ on a category $\\\\mathcal{C}$, and a natural transformation $\\\\alpha: R \\\\to R'$ between ring presheaves, this constructs a new pre\"}\n  {\"name\": \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalClosed (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of sheaves on light profinite spaces (compact Hausdorff, totally disconnected, second-countable topological spaces) equipped with the coherent Grothendieck\"}\n  {\"name\": \"SheafOfModules.over\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{D : Type u₂} →\\n  [inst : CategoryTheory.Category.{v₂, u₂} D] →\\n    {K : CategoryTheory.GrothendieckTopology D} →\\n      {R : CategoryTheory.Sheaf K RingCat} → SheafOfModules R → (X : D) → SheafOfModules (R.over X)\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $R$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, and an object $X \\\\in \\\\mathcal{C}$, this constructs the sheaf of modules $\\\\mathc\"}\n  {\"name\": \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (CategoryTheory.presheafToSheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R)).Monoidal\", \"doc\": \"The sheafification functor from presheaves to sheaves on the coherent topology of light profinite spaces (compact, Hausdorff, totally disconnected, second-countable topological spaces) with values in \"}",
+   "date": "2026-10-24",
+   "verdict": "No complete match. SheafOfModules.pushforward (PushforwardContinuous.lean:43) defines P and PullbackFree.lean:60 defines its coefficient unit; neither asserts existence, coherence and uniqueness of the normalized lax structure for the actual sheafified tensor."
+  },
+  {
+   "tool": "grep",
+   "query": "pushNormalized|pushforward.*[Ll]ax|[Ll]ax.*pushforward",
+   "results": "msearch.py: OK; 0 hits; top results: ",
+   "date": "2026-10-24",
+   "verdict": "No complete match. Read SheafOfModules.pushforward at Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:43 and unitToPushforwardObjUnit at PullbackFree.lean:60,68-69. These give the functor and coefficient unit, not the normalized tensor pairing, its coherence and uniqueness."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushforward\", \"LaxMonoidal\"",
+   "results": "msearch.py: OK; 0 hits; top results: ",
+   "date": "2026-10-24",
+   "verdict": "No complete match. Read SheafOfModules.pushforward at Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:43 and unitToPushforwardObjUnit at PullbackFree.lean:60,68-69. These give the functor and coefficient unit, not the normalized tensor pairing, its coherence and uniqueness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf of modules ringed site pushforward tensor pairing lax monoidal uniqueness",
+   "results": "msearch.py: OK; 8 hits; top results: SheafOfModules.pushforward, SheafOfModules.pushforwardSections, PresheafOfModules.pushforward₀_obj, SheafOfModules.pushforward_obj_val, SheafOfModules.pushforwardComp, SheafOfModules.pushforwardSections_unitHomEquiv, PresheafOfModules.monoidalCategoryStruct, PresheafOfModules.pushforward₀_obj_obj_isModule",
+   "date": "2026-10-24",
+   "verdict": "No complete match. Read SheafOfModules.pushforward at Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:43 and unitToPushforwardObjUnit at PullbackFree.lean:60,68-69. These give the functor and coefficient unit, not the normalized tensor pairing, its coherence and uniqueness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unique lax monoidal structure on sheaf module direct image normalized on every local pure tensor with unit equal to coefficient ring map",
+   "results": "msearch.py: OK; 8 hits; top results: SheafOfModules.unitToPushforwardObjUnit, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, SheafOfModules.unitToPushforwardObjUnit_val_app_apply, SheafOfModules.pushforwardSections_unitHomEquiv, CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, SheafOfModules.pushforwardCongr, SheafOfModules.pushforward",
+   "date": "2026-10-24",
+   "verdict": "No complete match. Read SheafOfModules.pushforward at Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:43 and unitToPushforwardObjUnit at PullbackFree.lean:60,68-69. These give the functor and coefficient unit, not the normalized tensor pairing, its coherence and uniqueness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars for sheaves of modules has unique coherent tensor pairing and regular module unit",
+   "results": "msearch.py: OK; 8 hits; top results: SheafOfModules.restrictScalars, SheafOfModules.restrictScalars_obj_val, SheafOfModules.instAdditiveRestrictScalars, SheafOfModules.restrictScalars_map_val, PresheafOfModules.restrictScalarsObj, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, SheafOfModules.over, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
+   "date": "2026-10-24",
+   "verdict": "No complete match. Read SheafOfModules.pushforward at Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:43 and unitToPushforwardObjUnit at PullbackFree.lean:60,68-69. These give the functor and coefficient unit, not the normalized tensor pairing, its coherence and uniqueness."
+  },
+  {
+   "tool": "grep",
+   "query": "unitToPushforwardObjUnit|pushforward.*[Ll]ax|[Ll]ax.*pushforward",
+   "results": "msearch.py: OK; 5 hits; top results: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean. Subdirectory: Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-24",
+   "verdict": "No complete match. Read SheafOfModules.pushforward at Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:43 and unitToPushforwardObjUnit at PullbackFree.lean:60,68-69. These give the functor and coefficient unit, not the normalized tensor pairing, its coherence and uniqueness."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-pd-proetale-section-module-functors",
+  "date": "2026-10-24",
+  "group": "NF"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProEtaleSectionModuleFunctors",
+  "declaration": "AlgebraicGeometry.ProEtale.ModuleRingedComparison.pushNormalized_existsUnique",
+  "file": "lean/Sheaf/Paper/ProEtaleSectionModuleFunctors.lean",
+  "note": "Named theorem ownership explicitly requested in the released human stage-1 repair of 2026-10-24. Verified against the current read-only lean/Sheaf/Paper/ProEtaleSectionModuleFunctors.lean:532; signature and docstring read, proof contains sorry. No completed-proof attachment is claimed."
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-pd-section-push-normalized-exists-unique",
+  "worker": "stage1",
+  "summary": "Specialized the existing reviewed general ringed direct-image pairing theorem to the exact small pro-etale section functor and coefficient map. Checked equality of local pure-tensor conventions and the unconditioned regular-unit conclusion. No new nodes and no change of statement.",
+  "blueprint": "Human re-split 2026-10-24: pushNormalized_existsUnique, original assembly Step 2 of def-pd-proetale-section-module-functors; seeded nt-target-poincare-isiso Verdier-exchange prerequisites. There is no imported blueprint ancestor (ancestor command returned None). Existing generic lemma is in the same sk-thm-sf-verdier-exchange unit."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NR-5ee19d1b8",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-5ee19d1b8 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item and the full statement of every cited node. Two steps, no new nodes, statement unchanged. Step 1 (elementary): def-sfb-finite-lower-star says base change V↦V×_YX is continuous and that direct image is precomposition along it. def-pd-section-module-operations-data says section direct image is that sheaf direct image with scalars restricted along the adjunct coefficient map, a unital map of commutative ring sheaves. The sizes fit the general lemma's 'small relative to the coefficient universe' (objects u+1, morphisms u, sections u+1). The coefficient map, coefficient category and adjunction are the same ones. Step 2: lem-pd-ringed-direct-image-pairing-lax (Q101 reviewed PASS, same unit sk-thm-sf-verdier-exchange) states a unique lax structure normalized only on tensor maps and concludes e=c. Its pure-tensor normalization is the item's: image in the presheaf tensor, then sheafification (def-pur-sheaf-tensor-product and the operations-data alias). The unit clause is a true conclusion: the left unit law at S on r⊗1 forces e(r)=c(r). Small cases checked: f=id, zero modules, the zero ring, empty X. The statement matches the read-only Lean PushNormalized/pushNormalized_existsUnique at ProEtaleSectionModuleFunctors.lean:509-534 (sorry). Stacks sources read: 03D6 definition-pushforward (sites-modules.tex line 1146) and 03EK section-tensor-product (line 3551ff, Bilin/Hom display). No cycle (DFS reaches 380 nodes, not the item); the only node citing the item is def-pd-proetale-section-module-functors. The lemma is cited inside its own unit, so no tool_uses are needed. 11 Mathlib searches are recorded with real results. Not duplicates: lem-sfb-derived-scalar-lax-normalization and lem-sfb-section-ring-lax-pushforward-coherence. Advisory, not repaired: step 1's text names the general lemma but does not list it in that step's uses; it is in step 2's uses and in proof_deps. No fixes written."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-e75a5",
+  "group": "K9",
+  "result": "fix",
+  "landing": "20261026T070233-L-3486174",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + FinalRingedUnitMate vs published clone ec62da3, nodes def-pd-proetale-section-module-functors / lem-pd-section-pull-delta-isiso / lem-pd-final-ringed-unit-mate-isiso, change records, and all 11 direct importers compiled against the corrected item",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.pull_delta_isIso",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.pull_eta_isIso",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.pushNormalized_existsUnique"
+  ],
+  "sorry_after": []
+ }
+}

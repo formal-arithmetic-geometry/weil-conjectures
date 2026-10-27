@@ -1,0 +1,266 @@
+{
+ "id": "lem-trf-finite-presentation-stalk-fibre-data",
+ "kind": "statement",
+ "title": "Finite-presentation stalk and compatible fibre quotient data",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] locally of finite presentation [def-sbc-locally-finite-presentation], let $\\mathcal F$ be a finitely presented $\\mathcal O_X$-module [def-weil-pbc-module-finite-type-presentation], and let $x\\in X$, $s=f(x)$. Put $R=\\mathcal O_{S,s}$, $B=\\mathcal O_{X,x}$, $M=\\mathcal F_x$ [def-weil-pbc-module-stalk] and $\\alpha=f_x^\\sharp:R\\to B$ [def-weil-locally-ringed-space-morphism]. Write $\\mathfrak m_R$ for the maximal ideal of $R$, $I=\\mathfrak m_RB$ for its extended ideal, and $\\mathfrak m_RM=IM$. Let $p:X_s\\to X$ be the projection of the scheme-theoretic fibre and $x'\\in X_s$ its unique point over $x$ [def-pc-scheme-fibre]; put $\\mathcal F_s=p^*\\mathcal F$ [def-pc-module-pullback]. Then $\\alpha$ is a local homomorphism, and there are a finitely presented $R$-algebra $P$ [def-weil-pbc-finitely-presented-algebra], a multiplicative subset $T\\subseteq P$ and an $R$-algebra isomorphism $T^{-1}P\\cong B$. The $B$-module $M$ is finitely presented: there is an exact sequence $B^{\\oplus a}\\to B^{\\oplus b}\\to M\\to0$ with $a,b\\geq0$. There are compatible isomorphisms\n$$\\theta:B/I\\xrightarrow{\\sim}\\mathcal O_{X_s,x'},\\qquad\n\\eta:M/\\mathfrak m_RM\\xrightarrow{\\sim}(\\mathcal F_s)_{x'},$$\nwhere $\\theta(\\bar b)=p^\\sharp_{x'}(b)$ and $\\eta$ is additive and $\\theta$-semilinear. For every local section $t\\in\\mathcal F(U)$ with $x\\in U$, $\\eta(\\overline{t_x})=(p^*t)_{x'}$, where $p^*t$ is the section induced by the pullback adjunction unit.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 080Q, lemma-flat-and-free-at-point-fibre, proof: the local algebra setup for applying the fibre flatness criterion to the identity of X; affine presentations and compatible fibre stalk identifications."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-weil-pbc-module-stalk",
+  "def-weil-locally-ringed-space-morphism",
+  "def-pc-scheme-fibre",
+  "def-pc-module-pullback",
+  "def-weil-pbc-finitely-presented-algebra"
+ ],
+ "proof": [
+  {
+   "text": "The map $\\alpha$ is local by the definition of a scheme morphism. Choose affine neighbourhoods $x\\in U\\subseteq X$, $s\\in V\\subseteq S$, with $f(U)\\subseteq V$ and finitely presented coordinate-ring map, using local finite presentation. The restricted morphism $g:U\\to V$ is locally finitely presented: the same affine pair witnesses finite presentation at every point of $U$. Its stalks at $x,s$ identify with $B,R$: restricting neighbourhoods to $U,V$ preserves germs, since a neighbourhood $W$ is replaced by $W\\cap U$ or $W\\cap V$, and equality of germs is unchanged. The restricted stalk map is $\\alpha$, as both send a represented section to the germ of its pullback. Apply the affine stalk localization model to $g,x$. It supplies $R\\to P\\to B$ and $T\\subseteq P$, with $P$ finitely presented over $R$ and $B$ a localization at $T$; the defining universal property of localization gives the required $R$-algebra isomorphism $T^{-1}P\\cong B$.",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-pbc-module-stalk",
+    "lem-sbc-finite-presentation-stalk-localization-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 080Q, local algebra setup; affine localization model as in Algebra Tags 00R7 and 00RH; open restriction on germs"
+   }
+  },
+  {
+   "text": "Apply the finite-presentation source-stalk lemma to the ringed space underlying $X$, the finitely presented module sheaf $\\mathcal F$, and $x$. Its maps $B^m\\xrightarrow{u}B^n\\xrightarrow{v}M$ satisfy that $v$ is surjective and $\\operatorname{Im}u=\\operatorname{Ker}v$. Thus $B^m\\to B^n\\to M\\to0$ is the required exact sequence, with $a=m$, $b=n$ (including either rank zero).",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-source-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01CP, lemma-stalk-internal-hom, third proof paragraph: finite presentation of the source stalk"
+   }
+  },
+  {
+   "text": "Apply the scheme-fibre stalk quotient lemma to $f,x$. It gives the unique point $x'$ over $x$ and a surjection $q=p^\\sharp_{x'}:B\\to C=\\mathcal O_{X_s,x'}$ with kernel $I=\\mathfrak m_RB$. Its quotient isomorphism is precisely $\\theta:B/I\\to C$, $\\bar b\\mapsto q(b)$.",
+   "uses": [
+    "lem-sbc-scheme-fibre-stalk-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 0HA1, lemma-local-ring-fibre; Algebra Tag 0H9M, remark-local-ring-fibre"
+   }
+  },
+  {
+   "text": "The module-stalk pullback lemma applied to $p,\\mathcal F,x'$ gives a $C$-linear isomorphism $\\beta:(\\mathcal F_s)_{x'}\\to M\\otimes_B C$, sending $(p^*t)_{x'}$ to $t_x\\otimes1$. Explicitly identify this tensor with $M/IM$: the balanced additive map $m\\otimes\\theta(\\bar b)\\mapsto\\overline{bm}$ is independent of the lift $b$, since changing $b$ by an element of $I$ changes $bm$ by an element of $IM$. The balanced relation holds because $\\overline{b(am)}=\\overline{(ab)m}$ for $a,b\\in B$. Its inverse is $\\bar m\\mapsto m\\otimes1$: it kills $IM$ because $im\\otimes1=m\\otimes q(i)=0$ for $i\\in I$, and the two composites are identities on classes and pure tensors, using $bm\\otimes1=m\\otimes q(b)$. Define $\\eta(\\bar m)=\\beta^{-1}(m\\otimes1)$. This is an additive isomorphism, and $\\eta(\\bar b\\bar m)=\\beta^{-1}(bm\\otimes1)=\\theta(\\bar b)\\eta(\\bar m)$ proves the stated semilinearity. Finally the germ formula for $\\beta$ gives $\\eta(\\overline{t_x})=(p^*t)_{x'}$ for every local section $t$. Here $IM=\\mathfrak m_RM$ as defined in the statement.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 0098, lemma-stalk-pullback-modules, with the explicit elementary tensor-quotient identification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-locally-ringed-space-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-module-stalk",
+  "lem-sbc-finite-presentation-stalk-localization-model",
+  "lem-weil-pbc-finite-presentation-source-stalk",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-weil-pbc-module-stalk-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 080Q, local algebra setup, expanded using Schemes Tag 0HA1, Sheaves Tag 0098 and Modules Tag 01CP; elementary tensor-quotient maps written explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "stalk.*(finitePresentation|finite_presentation)|fiber.*stalk|stalk.*fiber",
+   "results": "{\"t\": \"2026-10-22T06:42:48Z\", \"tool\": \"grep\", \"query\": \"stalk.*(finitePresentation|finite_presentation)|fiber.*stalk|stalk.*fiber\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/StructureSheaf.lean\"], \"digest\": \"fd4e4620191a3141\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-section finite presentation and essential finite type do not give the full local algebra and compatible fibre-module data; Tilde.stalkIso only treats modules associated to a ring module."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FinitePresentation, IsLocalization",
+   "results": "{\"t\": \"2026-10-22T06:42:49Z\", \"tool\": \"loogle\", \"query\": \"Algebra.FinitePresentation, IsLocalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.of_formallySmooth_residueField_tensor\"], \"digest\": \"8ef5b86fee894408\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-section finite presentation and essential finite type do not give the full local algebra and compatible fibre-module data; Tilde.stalkIso only treats modules associated to a ring module."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a locally finitely presented scheme morphism, the local ring is essentially finitely presented over the base stalk and the pulled back module stalk on the fibre is M modulo the maximal ideal",
+   "results": "{\"t\": \"2026-10-22T06:42:49Z\", \"tool\": \"leansearch\", \"query\": \"For a locally finitely presented scheme morphism, the local ring is essentially finitely presented over the base stalk and the pulled back module stalk on the fibre is M modulo the maximal ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.LocallyOfFinitePresentation.recOn\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"AlgebraicGeometry.LocallyOfFiniteType.stalkMap\", \"RingHom.finitePresentation_isLocal\"], \"digest\": \"5d35c3312960f725\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-section finite presentation and essential finite type do not give the full local algebra and compatible fibre-module data; Tilde.stalkIso only treats modules associated to a ring module."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finitely presented scheme morphism and finitely presented module sheaf give an essentially finitely presented local stalk algebra and the fibre module stalk is the quotient by the base maximal ideal",
+   "results": "{\"t\": \"2026-10-22T06:42:54Z\", \"tool\": \"leanfinder\", \"query\": \"A locally finitely presented scheme morphism and finitely presented module sheaf give an essentially finitely presented local stalk algebra and the fibre module stalk is the quotient by the base maximal ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFiniteType.stalkMap\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset\"], \"digest\": \"eaf1acb62f74579e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-section finite presentation and essential finite type do not give the full local algebra and compatible fibre-module data; Tilde.stalkIso only treats modules associated to a ring module."
+  },
+  {
+   "tool": "grep",
+   "query": "FinitePresentation.*stalk|stalk.*FinitePresentation|EssFiniteType.*stalk|stalkMap.*finite",
+   "results": "{\"t\": \"2026-10-22T06:43:00Z\", \"tool\": \"grep\", \"query\": \"FinitePresentation.*stalk|stalk.*FinitePresentation|EssFiniteType.*stalk|stalkMap.*finite\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean\"], \"digest\": \"69b4940e11cd48c6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-section finite presentation and essential finite type do not give the full local algebra and compatible fibre-module data; Tilde.stalkIso only treats modules associated to a ring module."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stalks of a finitely presented scheme module and its closed fibre: finitely presented module over an essentially finitely presented local algebra, compatible quotient isomorphisms",
+   "results": "{\"t\": \"2026-10-22T06:43:07Z\", \"tool\": \"leanfinder\", \"query\": \"Stalks of a finitely presented scheme module and its closed fibre: finitely presented module over an essentially finitely presented local algebra, compatible quotient isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.Tilde.stalkIso_hom\", \"AlgebraicGeometry.LocallyOfFiniteType.stalkMap\", \"ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap\", \"ModuleCat.Tilde.stalkToFiberLinearMap\", \"ModuleCat.Tilde.stalkToFiberLinearMap_toStalk\", \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\", \"ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap_assoc\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\"], \"digest\": \"e9b1b438379ed0ae\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-section finite presentation and essential finite type do not give the full local algebra and compatible fibre-module data; Tilde.stalkIso only treats modules associated to a ring module."
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*(FinitePresentation|quotient)|fiber.*stalk|stalk.*fiber",
+   "results": "{\"t\": \"2026-10-23T11:30:37Z\", \"tool\": \"grep\", \"query\": \"stalk.*(FinitePresentation|quotient)|fiber.*stalk|stalk.*fiber\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/ResidueField.lean\", \"Mathlib/AlgebraicGeometry/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/StructureSheaf.lean\"], \"digest\": \"a0f4600140c1723a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give affine section finite presentation or essentially finite type stalks, smoothness under extra hypotheses, or Tilde localization stalks; none gives all clauses and the compatible fibre quotient germ formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The local ring and module stalk of a finitely presented scheme morphism and module are essentially finitely presented and their fibre stalks are quotients by the base maximal ideal",
+   "results": "{\"t\": \"2026-10-23T11:30:38Z\", \"tool\": \"leansearch\", \"query\": \"The local ring and module stalk of a finitely presented scheme morphism and module are essentially finitely presented and their fibre stalks are quotients by the base maximal ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.LocallyOfFiniteType.stalkMap\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"SheafOfModules.IsFinitePresentation.mk\", \"AlgebraicGeometry.LocallyOfFinitePresentation.mk\", \"instFinitePresentationLocalizationLocalizedModule\", \"SheafOfModules.isFinitePresentation\"], \"digest\": \"37fb34a9416a88c5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give affine section finite presentation or essentially finite type stalks, smoothness under extra hypotheses, or Tilde localization stalks; none gives all clauses and the compatible fibre quotient germ formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FinitePresentation, IsLocalization",
+   "results": "{\"t\": \"2026-10-23T11:30:38Z\", \"tool\": \"loogle\", \"query\": \"Algebra.FinitePresentation, IsLocalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.of_formallySmooth_residueField_tensor\"], \"digest\": \"8ef5b86fee894408\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give affine section finite presentation or essentially finite type stalks, smoothness under extra hypotheses, or Tilde localization stalks; none gives all clauses and the compatible fibre quotient germ formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finitely presented scheme morphism and finitely presented sheaf yield an essentially finitely presented stalk algebra, finite presentation of the module stalk, and fibre ring and module quotient isomorphisms compatible with germs",
+   "results": "{\"t\": \"2026-10-23T11:30:39Z\", \"tool\": \"leanfinder\", \"query\": \"A locally finitely presented scheme morphism and finitely presented sheaf yield an essentially finitely presented stalk algebra, finite presentation of the module stalk, and fibre ring and module quotient isomorphisms compatible with germs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFiniteType.stalkMap\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\"], \"digest\": \"b32901ad92123225\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give affine section finite presentation or essentially finite type stalks, smoothness under extra hypotheses, or Tilde localization stalks; none gives all clauses and the compatible fibre quotient germ formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The stalk of the pullback of a finite presentation module to a scheme theoretic fibre is its quotient by the maximal ideal of the base stalk with compatible section germs",
+   "results": "{\"t\": \"2026-10-23T11:33:30Z\", \"tool\": \"leanfinder\", \"query\": \"The stalk of the pullback of a finite presentation module to a scheme theoretic fibre is its quotient by the maximal ideal of the base stalk with compatible section germs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.Tilde.stalkToFiberLinearMap\", \"ModuleCat.Tilde.stalkToFiberLinearMap_toStalk\", \"ModuleCat.Tilde.stalkIso_hom\", \"ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap\", \"ModuleCat.Tilde.toStalk\", \"ModuleCat.Tilde.stalkIso\", \"ModuleCat.Tilde.stalkToFiberLinearMap_germ\", \"ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap_assoc\"], \"digest\": \"66d57ac14395a7e3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give affine section finite presentation or essentially finite type stalks, smoothness under extra hypotheses, or Tilde localization stalks; none gives all clauses and the compatible fibre quotient germ formula."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-flat-fibre-free-neighbourhood",
+  "date": "2026-10-22",
+  "group": "NO"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument is applied to the finite-type module i_* O_X on an affine-space neighbourhood. Stacks 0815 proof paragraph 3: apply lemma-flatten-module-pre before subtracting a free module. Stacks 0811: Tag 080Q, lemma-flat-and-free-at-point-fibre. Re-split of the local-algebra part of the returned item, Step 2: affine finite presentation, finite presentation on stalks and compatible fibre ring/module quotients, before invoking the flatness criterion.",
+   "via": [
+    "lem-trf-flat-fibre-free-neighbourhood",
+    "lem-trf-generic-free-blowup",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-finite-presentation-stalk-fibre-data",
+  "worker": "stage1",
+  "summary": "Q42: retained the statement; reused the existing affine-stalk model, source-stalk presentation, fibre-ring quotient and module-pullback stalk lemmas. Wrote explicit affine restriction and balanced tensor-quotient maps, including section germs. No new nodes, Lean changes or compilations. Mathlib searches recorded as run.",
+  "blueprint": "Historical refinement of lem-trf-local-term-locality (1)--(2), along the recorded flattening chain: Tag 080Q local algebra data before the flatness criterion. Read the current latest locality proof and unit; they now cite the contracting-correspondence theorem directly. This split retains the assigned local algebra statement and its inherited provenance; it does not replace the current unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-finite-presentation-stalk-localization-model",
+    "why": "Generic affine algebraic geometry tool: converts an affine finitely presented morphism into a localization model at its stalk; no node in this unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-finite-presentation-source-stalk",
+    "why": "Generic ringed-space module tool: supplies the exact finite free presentation of the source stalk, with no extra hypothesis."
+   },
+   {
+    "node": "lem-sbc-scheme-fibre-stalk-quotient",
+    "why": "Generic scheme fibre tool: identifies the actual projection stalk map as the quotient by the base maximal ideal."
+   },
+   {
+    "node": "lem-weil-pbc-module-stalk-pullback",
+    "why": "Generic module pullback tool: identifies its stalk tensor and the image of pulled-back section germs; the final quotient is computed explicitly."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-finite-presentation-stalk-localization-model",
+  "lem-weil-pbc-finite-presentation-source-stalk",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-weil-pbc-module-stalk-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-605477140",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-605477140 (reviewer sub-agent of L); spot-checked: PASS, no fixes. The delivery is one commit with the item and its report and no new nodes. Compared with live, the statement and stmt_deps are unchanged, and live is still unsplit, so nothing supersedes it. There is no repair note. Step 1: the pointwise affine pair from def-sbc-locally-finite-presentation makes U->V a locally finitely presented map of affine schemes, which is what lem-sbc-finite-presentation-stalk-localization-model needs. Stalks are identified through the open immersions, and IsLocalization with the scalar tower gives T^-1P = B as R-algebras. Step 2: lem-weil-pbc-finite-presentation-source-stalk (any ringed space, the same finite-presentation definition) gives b surjective and Im a = Ker b; ranks 0 are allowed. Step 3: lem-sbc-scheme-fibre-stalk-quotient (0HA1) gives the unique point x', the actual stalk map p^#_{x'}, its kernel m_R B and the element formula for theta. Step 4: lem-weil-pbc-module-stalk-pullback (0098) is applied to p and gives the germ formula with s_y (x) 1; the M (x)_B B/I = M/IM algebra is written out, and I checked theta-semilinearity from the C-linearity of beta. I checked sources 080Q (more-morphisms.tex:4791), 0HA1 (schemes.tex:3545) and 0098 (sheaves.tex:3244). The citer lem-trf-flat-fibre-free-neighbourhood (steps 1 and 3) uses exactly the clauses the item states. Edge cases: field base, F=0, n=0, non-closed x. I accept the 4 declared generic tool_uses. There is no SGA citation. Step 4 is marked elementary although it cites a theorem node; I accepted this because what remains beyond that citation is a few lines of algebra."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FinitePresentationStalkFibreData",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.exists_finitePresentation_stalk_fibre_data",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePresentationStalkFibreData.lean",
+  "statement": "theorem exists_finitePresentation_stalk_fibre_data {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFinitePresentation f] (F : X.Modules) [SheafOfModules.IsFinitePresentation.{u} F] (x : X) : IsLocalHom (f.stalkMap x).hom ∧ (∃ (P : CommRingCat.{u}) (r : S.presheaf.stalk (f x) →+* P) (q : P →+* X.presheaf.stalk x), r.FinitePresentation ∧ q.comp r = (f.stalkMap x).hom ∧ ∃ T : Submonoid P, @IsLocalization P _ T (X.presheaf.stalk x) _ q.toAlgebra) ∧ (∃ (a b : ℕ) (v : (Fin a → X.presheaf.stalk x) →ₗ[X.presheaf.stalk x] (Fin b → X.presheaf.stalk x)) (w : (Fin b → X.presheaf.stalk x) →ₗ[X.presheaf.stalk x] (RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj F), Function.Exact v w ∧ Function.Surjective w) ∧ ∃ (theta : (X.presheaf.stalk x ⧸ (IsLocalRing.maximalIdeal (S.presheaf.stalk (f x))).map (f.stalkMap x).hom) ≃+* (f.fiber (f x)).presheaf.stalk (f.asFiber x)) (eta : ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj F ⧸ ((IsLocalRing.maximalIdeal (S.presheaf.stalk (f x))).map (f.stalkMap x).hom • (⊤ : Submodule (X.presheaf.stalk x) ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj F)))) ≃+ (RingedSpace.moduleStalkFunctor (f.fiber (f x)).toRingedSpace (f.asFiber x)).obj ((Scheme.Modules.tensorPullback (f.fiberι (f x))).obj F)), (∀ b : X.presheaf.stalk x, theta (Ideal.Quotient.mk _ b) = ((X.presheaf.stalkCongr (.of_eq (f.fiberι_asFiber x))).inv ≫ (f.fiberι (f x)).stalkMap (f.asFiber x)).hom b) ∧ (∀ (b : X.presheaf.stalk x) (m : (RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj F), eta (Submodule.Quotient.mk (b • m)) = theta (Ideal.Quotient.mk _ b) • eta (Submodule.Quotient.mk m)) ∧ (∀ (U : X.Opens) (hx : x ∈ U) (t : F.val.obj (op U)), eta (Submodule.Quotient.mk (TopCat.Presheaf.germ F.val.presheaf U x hx t)) = TopCat.Presheaf.germ ((Scheme.Modules.tensorPullback (f.fiberι (f x))).obj F).val.presheaf ((f.fiberι (f x)) ⁻¹ᵁ U) (f.asFiber x) (Eq.mpr (congrArg (fun z : X ↦ z ∈ U) (f.fiberι_asFiber x)) hx) (Scheme.Modules.tensorPullbackSection (f.fiberι (f x)) F U t))",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Stage-2 review FIX: the theta normalization inlines the definition of Scheme.Hom.fiberStalkMap (owned by theorem node lem-sbc-scheme-fibre-stalk-quotient, not a stmt_dep) as the stalk identification at p(x') = x followed by the fibre projection's stalk map, from def-pc-scheme-fibre's Mathlib.AlgebraicGeometry.Fiber; FibreStalkQuotient is now a proof-only import. O_X-module stalks use RingedSpace.moduleStalkFunctor per def-weil-pbc-module-stalk's recorded MODULE STALKS note.",
+  "fixed_by": "NT-stage2-cc-6947ac6a1"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6947ac6a1",
+  "group": "NR",
+  "result": "fix",
+  "note": "Statement correct clause by clause against node and Stacks 080Q (stalk map local; P f.p. with q∘r=α and IsLocalization = R-algebra T^-1P≅B; Exact+Surjective presentation incl. ranks 0; theta ring iso normalized by p♯; eta additive iso, θ-semilinear on representatives, germ formula via unit-normalized tensorPullbackSection). Edge cases ok; no extra assumptions or universe restriction; no hollow defs; proof only sorry; docstrings ok. H2: theta normalization used Scheme.Hom.fiberStalkMap, owned by theorem node lem-sbc-scheme-fibre-stalk-quotient (not a stmt_dep). FIX inlines its definition (stalkCongr(.of_eq fiberι_asFiber).inv ≫ fiberι.stalkMap asFiber), adds public import Mathlib.AlgebraicGeometry.Fiber, makes FibreStalkQuotient a plain import; fixes/FinitePresentationStalkFibreData.lean + <item>.lean-record.json with verbatim statement; nt_compile --json clean 7.6 s. RingedSpace.moduleStalkFunctor accepted per def-weil-pbc-module-stalk record's MODULE STALKS note."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261026T081018-L-1764128",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Scheme.Hom.exists_finitePresentation_stalk_fibre_data"
+  ],
+  "sorry_after": []
+ }
+}

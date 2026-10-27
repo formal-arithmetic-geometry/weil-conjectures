@@ -1,0 +1,108 @@
+{
+ "id": "lem-sfb-finite-etale-split-hom-descent-existence",
+ "kind": "statement",
+ "title": "Existence part of compatible finite-etale Hom descent",
+ "statement": "Compatible maps on all finite-etale splitting charts glue to an internal map. This is the conclusion of finiteEtaleSplitHom_descent with its epimorphism conclusion omitted.",
+ "stmt_deps": [
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-pushforward-pullback",
+  "def-sfb-module-upper-star-comp",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-trace.proof.md",
+  "place": "Tags 03EM, 04TQ and 04HN"
+ },
+ "proof": [
+  {
+   "text": "Construct a splitting chart through each point using finite_etale_etale_local_split, invert its component isomorphisms, and reindex the cofan by Fin(card J). The selected charts form an etale cover, so all charts generate a covering sieve of the terminal pro-etale object. Zero-sheet charts and the empty base require no separate hypothesis.",
+   "uses": [
+    "lem-weil-pbc-finite-etale-etale-local-split",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose profinitePointModuleForgetPullbackIso with the proved source upperStarIsoLocalizationRestriction. The module comparison composition law and the source localization composition law show that normalizing a refined module map agrees with refining its normalized underlying sheaf map. Evaluate this equality at the identity test object to obtain the matching condition on every common test object.",
+   "uses": [
+    "lem-weil-pbc-profinite-point-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For underlying abelian sheaves F and G, Mathlib Presheaf.IsSheaf.hom states that presheafHom F.obj G.obj is a sheaf. Use the chart-cover matching family to obtain a Hom section over the terminal object, then restrict it along the unique terminal arrows to obtain the glued sheaf morphism. Evaluation of the amalgamation equations gives its restriction on every chart.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The source isIso_of_isIso_localizationRestriction makes covering restriction jointly conservative; finite-limit preservation then makes the pullbacks jointly faithful. Since extension along condensedPullbackHom is equivalent to restriction along its inverse, each prescribed map has a preimage before extension of scalars. Naturality of the normalization identifies the underlying pullback of the glued map with this linear preimage. Its local action equations imply the global module action equation by joint faithfulness. Package the sheaf map as an internal module morphism and use normalization naturality again for the required chart equations.",
+   "uses": [
+    "lem-weil-pbc-profinite-point-pullback",
+    "lem-sfb-sheaf-cover-local-isomorphism"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-etale-etale-local-split",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-sfb-sheaf-cover-local-isomorphism"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "H3",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-trace.proof.md",
+  "place": "Local computation; splitting-chart cover, literal sheaf restriction and module action descent"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteEtaleSplitHomDescent",
+  "date": "2026-10-26",
+  "group": "U8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-finite-etale-split-hom-descent",
+   "place": "Existence and epi-cancellation parts of the descent proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-stratified-lattice",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteEtaleSplitHomDescent",
+  "file": "lean/Sheaf/Paper/FiniteEtaleSplitHomDescent.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.finiteEtaleSplitHom_exists",
+  "statement": "theorem finiteEtaleSplitHom_exists\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ] {X U : Scheme.{u}} (p : U ⟶ X)\n    [IsFinite p] [Etale p]\n    (Q P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))\n    (d : ∀ c : FiniteEtaleModuleChart p,\n      (upperStar Λ c.map).obj Q ⟶ (upperStar Λ c.map).obj P)\n    (hd : FiniteEtaleModuleChart.Compatible Λ Q P d) :\n    ∃ f : Q ⟶ P, ∀ c, (upperStar Λ c.map).map f = d c",
+  "branch": "sheaf-dag",
+  "by": "U8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U8",
+  "result": "pass",
+  "landing": "20261026T100427-L-24619",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261026T121046-L-2747170",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

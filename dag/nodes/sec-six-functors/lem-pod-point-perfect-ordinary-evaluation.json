@@ -1,0 +1,144 @@
+{
+ "id": "lem-pod-point-perfect-ordinary-evaluation",
+ "kind": "statement",
+ "title": "Ordinary evaluation through normalized projective point Hom models",
+ "statement": "In the integral point coefficient models [def-pod-point-derived-hom-models, lem-pod-point-projective-dual-tensor-models], let L be the specified extension with an explicit adjunction, and suppose the constant scalar map R to sections(B) is bijective. For a module complex P put C=L(P), J=L(Hom(P,R[0])). Suppose given the normalized unit isomorphism P to sections(C) and a sheaf-Hom isomorphism J to Hom(C,B[0]) normalized on local scalar generators. Then there are the normalized coefficient isomorphism R[0] to sections(B[0]), the normalized Hom comparison q:sections(J) to Hom(P,R[0]), and ordinary signed sheaf and module evaluation chain maps. For every beta:P tensor sections(J) to sections(Tot(C tensor J)) satisfying the unit-generator formula, beta followed by sections(evaluation) and the inverse coefficient isomorphism equals (id tensor q) followed by module evaluation. The assertion concerns ordinary chain maps and makes no completion, constructibility or derived tensor comparison assertion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-identification-of-the-comparison.proof.md",
+  "place": "Third paragraph, the adjunction/evaluation comparison; ordinary chain-level part of parent proof step 3; Stacks Tags 0A8X and 08J7."
+ },
+ "stmt_deps": [
+  "def-pod-point-derived-hom-models",
+  "lem-pod-point-projective-dual-tensor-models",
+  "def-sf-point-fibre-tensor-models"
+ ],
+ "proof": [
+  {
+   "text": "The scalar map is bijective, so applying the single-complex functor gives the normalized coefficient isomorphism R[0] to sections(B[0]). The ordinary Hom adjunction identifies sections Hom(LP,B[0]) with Hom(P,sections B[0]). Postcompose cochains with the inverse coefficient isomorphism and compose with sections of homIso. This defines q, with its normalization obtained by evaluating on 1 tensor x.",
+   "uses": [
+    "lem-pod-point-hom-complex-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-identification-of-the-comparison.proof.md",
+    "place": "Third paragraph, the adjunction/evaluation comparison; ordinary chain-level part of parent proof step 3; Stacks Tags 0A8X and 08J7."
+   }
+  },
+  {
+   "text": "Compose the ordinary signed sheaf evaluation with id tensor homIso, and take signed module evaluation into R[0]. Their local formulas use the common Koszul sign (-1)^(pj); the given normalization of homIso supplies the coefficient product bb′. Tensor naturality uses the proved pure-section formula in its implementation with independent site and coefficient universes.",
+   "uses": [
+    "lem-pod-point-sheaf-hom-maps",
+    "lem-pod-module-hom-signed-evaluation",
+    "def-weil-pbc-ringed-tensor-section-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-identification-of-the-comparison.proof.md",
+    "place": "Third paragraph, the adjunction/evaluation comparison; ordinary chain-level part of parent proof step 3; Stacks Tags 0A8X and 08J7."
+   }
+  },
+  {
+   "text": "For any beta with the specified unit-generator formula, precompose both chain maps with every total summand and every pure tensor. In total degree zero the q and coefficient normalizations identify both values as (-1)^(pj)h(1 tensor x). In all other degrees the target R[0] is zero. Tensor and coproduct extensionality yield the square.",
+   "uses": [
+    "def-pod-point-derived-hom-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-identification-of-the-comparison.proof.md",
+    "place": "Third paragraph, the adjunction/evaluation comparison; ordinary chain-level part of parent proof step 3; Stacks Tags 0A8X and 08J7."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-point-hom-complex-adjunction",
+  "lem-pod-point-sheaf-hom-maps",
+  "lem-pod-module-hom-signed-evaluation",
+  "def-pod-point-derived-hom-models",
+  "def-weil-pbc-ringed-tensor-section-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-identification-of-the-comparison.proof.md",
+  "place": "Third paragraph, the adjunction/evaluation comparison; ordinary chain-level part of parent proof step 3; Stacks Tags 0A8X and 08J7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "evaluation pairing bounded finite projective complex commutes with completion tensor product",
+   "results": "AdicCompletion.ofTensorProduct_naturality and algebraic completion results; no normalized sheaf Hom chain square.",
+   "verdict": "no_match",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"evaluation\"",
+   "results": "Rigid evaluation and tensor identities; no point coefficient Hom comparison with the required local normalization.",
+   "verdict": "no_match",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*[Bb]alanc|[Bb]alanc.*tensor",
+   "results": "TensorProduct balanced-map results; none states the signed ordinary chain square through the point sheaf-Hom model.",
+   "verdict": "no_match",
+   "date": "2026-10-26"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointCompletedEvaluation",
+  "date": "2026-10-26",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pod-identification-of-the-comparison",
+   "place": "Third proof paragraph: adjunction/evaluation comparison; the ordinary signed chain square, parent point-completed-evaluation proof step 3.",
+   "via": [
+    "lem-pod-point-completed-evaluation",
+    "lem-pod-global-duality-map-identification"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointPerfectOrdinaryEvaluation",
+  "file": "lean/Sheaf/Paper/PointPerfectOrdinaryEvaluation.lean",
+  "declaration": "WeilConjectures.PointPerfectOrdinaryEvaluation.point_perfect_ordinary_evaluation",
+  "statement": "theorem point_perfect_ordinary_evaluation\n    (L : ModuleCat.{u + 1} (R l E) ⥤ Modules D l E)\n    (hobj : ∀ M, L.obj M = PointDerivedHom.extensionObject.{u, u}\n      D.k (B D l E) (alpha D l E) M)\n    (adj : L ⊣ PointDerivedHom.sections.{u, u} D.k (B D l E) (alpha D l E))\n    (hex : PointDerivedHom.ExplicitAdjunction.{u, u} D.k (B D l E) (alpha D l E) L hobj adj)\n    (hscalar : Function.Bijective (pointIntegralSectionMap l E D.k))\n    (P : CochainComplex (ModuleCat.{u + 1} (R l E)) ℤ)\n    (unit : P ≅ (pointIntegralComplexSections D l E).obj (model D l E L adj P))\n    (hunit : ∀ (p : ℤ) (x : P.X p), (unit.hom.f p).hom x =\n      PointDerivedHom.generator.{u, u} D.k (B D l E) (alpha D l E) L hobj\n        (P.X p) (op (PointDerivedHom.finalObject D.k)) 1 x)\n    (homIso : model D l E L adj (dual l E P) ≅\n      PointDerivedHom.sheafHom.{u, u} D.k (B D l E)\n        (model D l E L adj P) (coefficient D l E))\n    (hhom : ∀ (p j : ℤ) (h : p + j = 0) (U : (Spec (.of D.k)).ProEtᵒᵖ)\n      (b b' : (B D l E).obj.obj U) (f : (dual l E P).X j) (x : P.X p),\n    (sheafValue D l E (p + j) h).val.app U\n      (PointDerivedHom.homValue.{u, u} D.k (B D l E) (model D l E L adj P) (coefficient D l E)\n        j p U ((homIso.hom.f j).val.app U\n          (PointDerivedHom.generator.{u, u} D.k (B D l E) (alpha D l E)\n            L hobj ((dual l E P).X j) U b f))\n        (PointDerivedHom.generator.{u, u} D.k (B D l E) (alpha D l E) L hobj (P.X p) U b' x)) =\n      b * b' * PointDerivedHom.scalar.{u, u} D.k (B D l E) (alpha D l E) U\n        ((moduleValue l E (p + j) h).hom ((f.v p (p + j) rfl).hom x))) :\n  letI := PointDerivedHom.sections_additive.{u, u} D.k (B D l E) (alpha D l E)\n  letI := adj.left_adjoint_additive\n  ∃ (coefficientUnit : ringComplex l E ≅\n    (pointIntegralComplexSections D l E).obj (coefficient D l E)),\n  ∃ (q : (pointIntegralComplexSections D l E).obj (model D l E L adj (dual l E P)) ≅ dual l E P),\n  ∃ (evaluation : PointDerivedHom.total.{u, u} D.k (B D l E) (model D l E L adj P)\n    (model D l E L adj (dual l E P)) ⟶ coefficient D l E),\n  ∃ (ringEvaluation : P ⊗ dual l E P ⟶ ringComplex l E),\n    Normalized D l E L hobj P unit homIso coefficientUnit q evaluation ringEvaluation ∧\n    ∀ (beta : P ⊗ (pointIntegralComplexSections D l E).obj\n        (model D l E L adj (dual l E P)) ⟶\n      (pointIntegralComplexSections D l E).obj\n        (PointDerivedHom.total.{u, u} D.k (B D l E) (model D l E L adj P)\n          (model D l E L adj (dual l E P)))),\n      (∀ (p j : ℤ) (x : P.X p)\n        (f : ((pointIntegralComplexSections D l E).obj\n          (model D l E L adj (dual l E P))).X j),\n        (beta.f (p + j)).hom\n          ((HomologicalComplex.ιTensorObj P ((pointIntegralComplexSections D l E).obj\n            (model D l E L adj (dual l E P))) p j (p + j) rfl).hom (x ⊗ₜ[R l E] f)) =\n        PointDerivedHom.totalElement.{u, u} D.k (B D l E) (model D l E L adj P)\n          (model D l E L adj (dual l E P)) p j (op (PointDerivedHom.finalObject D.k))\n            ((unit.hom.f p).hom x) f) →\n      beta ≫ (pointIntegralComplexSections D l E).map evaluation ≫ coefficientUnit.inv =\n        (MonoidalCategory.tensor _).map (Prod.mkHom (𝟙 P) q.hom) ≫ ringEvaluation",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-26",
+  "declarations": [
+   "WeilConjectures.PointPerfectOrdinaryEvaluation.ordinaryModel",
+   "WeilConjectures.PointPerfectOrdinaryEvaluation.Normalized",
+   "WeilConjectures.PointPerfectOrdinaryEvaluation.point_perfect_ordinary_evaluation"
+  ]
+ },
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-c68ff",
+  "group": "B2",
+  "result": "fix",
+  "landing": "20261026T065140-L-2717919",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-c68ff",
+  "group": "B2",
+  "result": "fix",
+  "landing": "20261026T065140-L-2717919",
+  "kind": "interface",
+  "note": "independent cc review: delivered PointCompletedEvaluation.Result vs published Result (scratch OldPCE copy, result_iff + towerBalancing/completedEvaluation/tau equalities, recompiled against current build incl. A7's new PointEvaluationCompletionNormalization); PointProjectiveDualTensorModels aliases vs old bodies (rfl); importer CompletedHomScalarTranspose compiled against fixed set and published parent; Lean/nodes byte-identical to c03b7 delivery"
+ }
+}

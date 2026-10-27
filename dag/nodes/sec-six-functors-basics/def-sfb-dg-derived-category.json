@@ -1,0 +1,143 @@
+{
+ "id": "def-sfb-dg-derived-category",
+ "kind": "definition",
+ "title": "Right dg modules and their canonical derived localization",
+ "status": "split",
+ "statement": "Work in the universes of [def-weil-size-convention]. An associative unital differential graded $\\mathbf Z$-algebra is a monoid object in integer cochain complexes of abelian groups: multiplication is additive in each variable and has $d(ab)=d(a)b+(-1)^{|a|}a d(b)$. A right dg module is a right module object in these complexes, equivalently a module object in the reversed tensor category; its action satisfies $d(ma)=d(m)a+(-1)^{|m|}m d(a)$. Morphisms are degree-zero action-preserving chain maps. Cohomology and quasi-isomorphisms use the underlying complex [def-weil-pbc-module-chain-complex-homology]; the regular module is $A$ with multiplication. Define $D(A,d)$ to be the Gabriel--Zisman localization at quasi-isomorphisms, equivalently the localization of the dg homotopy category. Its standard triangulated structure [def-weil-triangulated-category] has shifts induced by $M[n]^p=M^{p+n}$ with differential $(-1)^n d_M$ and unchanged right action, and distinguished triangles precisely the triangles isomorphic to images of dg mapping-cone triangles. Cones have underlying complex $N\\oplus M[1]$, componentwise right action, canonical inclusion, and the signed connecting map in Mathlib\\textquotesingle s equivalent cone convention. Include the small coproducts in the component-module universe. Shift comparisons are natural for dg module maps. All comparisons are actual isomorphisms of the specified complexes, not arbitrary replacements of the localization. The tensor product used is [def-weil-pbc-module-tensor-product].",
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-module-chain-complex-homology",
+  "def-weil-triangulated-category",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Definitions definition-dga, definition-dgm, definition-shift, definition-cone, definition-distinguished-triangle; section-derived, lemma-acyclic and lemma-derived-products."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The derived category of right differential graded modules over a differential graded algebra is the localization at quasi isomorphisms",
+   "results": "[leansearch] OK 8 hit(s); HasDerivedCategory.standard; HasDerivedCategory; DerivedCategory.instIsIsoMapCochainComplexIntQ; DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso; HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso; DerivedCategory.instCategory; DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic; HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso",
+   "date": "2026-10-24",
+   "verdict": "Ordinary derived categories of abelian categories, not dg modules over an arbitrary dg algebra. Reuse the general Gabriel-Zisman localization construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mon, CategoryTheory.Mod",
+   "results": "[loogle] OK 2 hit(s); CategoryTheory.Mod.trivialAction; CategoryTheory.Mod_.trivialAction",
+   "date": "2026-10-24",
+   "verdict": "Mon and Mod supply the actual dg algebra and module definitions after specialization to cochain complexes and reversed tensor. No dg localization and cone-triangulation interface."
+  },
+  {
+   "tool": "grep",
+   "query": "DGModule|DGAlgebra|DifferentialGraded|MonObj.*CochainComplex|CochainComplex.*MonObj",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "No specialized Mathlib interface. Use Mon, Mod, QuasiIso and MorphismProperty.Localization."
+  },
+  {
+   "tool": "grep",
+   "query": "rg dg algebra|dg module|differential graded lean/Sheaf lean/WeilConjectures; rg --files; DAG definition search; blueprint_refs.py search dg derived category",
+   "results": "No live dg algebra/module-derived interface. SmallDgCategory defines IntegralDGCategory and enriched Dg.Cat; it does not define dg algebras, right modules or their derived category. Historical SemiFreeDGModule and DGModuleSemiFreeReplacement records point to unavailable modules (scompile.py --source Sheaf.CategoryTheory.SemiFreeDGModule: Module source unavailable). Blueprint: 0 blueprint nodes match dg derived category.",
+   "date": "2026-10-24",
+   "verdict": "New notion needed; no duplicate of the ordinary DerivedCategory C or the nonnegative strictly commutative divided-power dg algebra."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dg-adjunction-compact-unit",
+  "date": "2026-10-24",
+  "group": "Q16"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 09MC, theorem-DQCoh-is-Ddga and its proof, with an arbitrary chosen perfect generator and its K-injective representative; the displayed derived tensor/Hom adjunction and equation-E-is-OK. Supporting subargument: Tag 09MC proof: full faithfulness by 09LZ, with compactness in D_QCoh and the unit at the regular dg module.",
+   "via": [
+    "lem-sfb-dg-adjunction-compact-unit",
+    "lem-sfb-space-generator-dg-equivalence",
+    "lem-sfb-space-countable-telescope",
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DgAlgebraDerivedCategory",
+  "declaration": "CategoryTheory.DgAlgebra.DerivedStructure",
+  "file": "lean/Sheaf/CategoryTheory/DgAlgebraDerivedCategory.lean",
+  "statement": "class DerivedStructure (A : Algebra.{u})",
+  "branch": "sheaf-dag",
+  "by": "Q16",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.DgAlgebra.Complex",
+   "CategoryTheory.DgAlgebra.Algebra",
+   "CategoryTheory.DgAlgebra.RightModule",
+   "CategoryTheory.DgAlgebra.underlying",
+   "CategoryTheory.DgAlgebra.regular",
+   "CategoryTheory.DgAlgebra.act",
+   "CategoryTheory.DgAlgebra.quasiIsomorphisms",
+   "CategoryTheory.DgAlgebra.Derived",
+   "CategoryTheory.DgAlgebra.Q",
+   "CategoryTheory.DgAlgebra.ShiftComparison",
+   "CategoryTheory.DgAlgebra.ConeComparison",
+   "CategoryTheory.DgAlgebra.DerivedStructure"
+  ]
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b510e349a",
+  "group": "Q16",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b510e349a",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Item adjunction_unit_isIso_of_compact_regular matches every clause of lem-sfb-dg-adjunction-compact-unit and Stacks 09LZ: exact T,R (CommShift+IsTriangulated), adj.CommShift, T preserves Discrete-I colimits for I:Type u (empty included), IsCompactObject.{u} at T(Q regular), unit iso at Q regular => unit iso everywhere and T.map bijective; no extra hypotheses; statement verbatim; docstring has source, blueprint tag and 5 steps; sorry only. New def-sfb-dg-derived-category: real Mon/Mod/localization defs; ShiftComparison has an unchanged right action (Stacks definition-shift-graded-module, Leibniz sign checked); ConeComparison fixes componentwise action, inr and mor3; DerivedStructure class pins additive structure, shift on all morphisms and distinguished triangles via distinguished_iff; inhabited by the standard structure and the item holds for every instance. No duplicate (SmallDgCategory/DgAbc are dg categories; no DgAlgebra namespace live, in Mathlib or in other runs). Advisories: shiftIso fixed only up to a global central/sign twist; possibly unused public imports in the def module. No file changed, no compile run."
+ }
+}

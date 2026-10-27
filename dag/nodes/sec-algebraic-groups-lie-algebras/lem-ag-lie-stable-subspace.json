@@ -62,7 +62,109 @@
   "lem-wf-same-lie-closed-subgroup"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.GeneralLinearGroup.lieSubalgebra",
+     "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.LieSubalgebra",
+     "lines": [
+      245,
+      263
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.GeneralLinearGroup.forall_zeroLocus_iff_forall_lieSubalgebra",
+     "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.LieSubalgebra",
+     "lines": [
+      364,
+      400
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.GeneralLinearGroup.forall_mem_zeroLocus_iff_forall_mem_lieSubalgebra",
+     "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.LieSubalgebra",
+     "lines": [
+      402,
+      424
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.GeneralLinearGroup.forall_mulVec_mem_iff_forall_lieSubalgebra",
+     "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.LieSubalgebra",
+     "lines": [
+      478,
+      509
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.GeneralLinearGroup.invariant_iff_differential_invariant",
+     "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.Lie",
+     "lines": [
+      753,
+      764
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-algebraic-groups-lie-algebras",
- "unit": "sk-p-comparison"
+ "unit": "sk-p-comparison",
+ "blueprint_update": {
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $G$ be a connected group scheme locally of finite type over an\nalgebraically closed field $L$ of characteristic zero, with Lie algebra\n$\\mathfrak g=\\operatorname{Lie}(G)$ as in\n[def-wf-lie-algebra-derivation], and let $r:G\\to\\operatorname{GL}(M)$ be\na rational representation on a finite-dimensional $L$-vector space $M$,\nwith differential $dr:\\mathfrak g\\to\\operatorname{End}(M)$. Then a\nsubspace $U\\subseteq M$ satisfies $r(g)U\\subseteq U$ for every\n$g\\in G(L)$ if and only if $dr(X)U\\subseteq U$ for every\n$X\\in\\mathfrak g$.\n\n*Complement.* Let $H\\subseteq\\operatorname{GL}(V)$ be a connected closed\nmatrix group over $L$ (connected in the sense of\n[def-wf-algebraic-components]), with Lie algebra\n$\\mathfrak h=\\operatorname{Lie}(H)$ computed by dual numbers, and let\n$r:H\\to\\operatorname{GL}(M)$ be an algebraic-group module in the sense\nof [def-wf-algebraic-representations], with differential defined by\n\n$$\nr(1+\\varepsilon X)=1+\\varepsilon\\,dr(X)\n\\qquad\\text{in }\\operatorname{GL}(M)(L[\\varepsilon]/\\varepsilon^2),\n\\quad X\\in\\mathfrak h .\n$$\n\nThen a subspace $U\\subseteq M$ is $H$-invariant if and only if\n$dr(X)U\\subseteq U$ for every $X\\in\\mathfrak h$.",
+  "proof": [
+   {
+    "text": "*$G$ is of finite type and irreducible.* By Cartier's theorem\n[lem-ag-cartier-reduced], $G$ is smooth over $L$, so its local rings are\nregular, and by [lem-wf-smooth-components-disjoint], applied on affine\nopens, distinct irreducible components of $G$ do not meet. In the locally\nNoetherian scheme $G$ the irreducible components are locally finite;\nbeing pairwise disjoint, each of them is therefore open and closed. As $G$\nis connected, it is irreducible. Choose an affine open $U_0\\ni1$. For\n$g\\in G(L)$ the opens $U_0$ and $gU_0^{-1}$ (translations and inversion\nare automorphisms of the scheme $G$, [lem-sc-translation-automorphism])\nare nonempty, hence dense, so they meet in a closed point, which is an\n$L$-point ([lem-wf-affine-nullstellensatz-vanishing]); thus $g\\in U_0U_0$.\nThe open set $W=\\bigcup_{u\\in U_0(L)}uU_0$ lies in the image of\n$U_0\\times_LU_0$ under multiplication and contains every $L$-point. Its\nclosed complement contains no closed point; since a nonempty closed\nsubset of a scheme locally of finite type over $L$ contains a closed\npoint, the complement is empty. Hence $G$ is the image of the\nquasi-compact scheme $U_0\\times_LU_0$, so $G$ is quasi-compact and of\nfinite type over $L$.",
+    "uses": [
+     "lem-ag-cartier-reduced",
+     "lem-wf-smooth-components-disjoint",
+     "lem-sc-translation-automorphism",
+     "lem-wf-affine-nullstellensatz-vanishing"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*The stabilizer.* Choose a basis of $M$ whose first $u=\\dim U$ vectors\nspan $U$, and write $r$ in block form\n$\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}$, with $c$ the lower-left\n$(\\dim M-u)\\times u$ block, whose entries are regular functions on $G$.\nLet $S\\subseteq G$ be the closed subscheme where $c$ vanishes. Its\n$R$-points, for a commutative $L$-algebra $R$, are the $g\\in G(R)$ such\nthat $r(g)$ is block upper triangular. Block upper triangular invertible\nmatrices form a subgroup and $r$ is a homomorphism of group schemes, so\n$S$ is a closed subgroup scheme of $G$. Its Lie algebra consists of the\n$X\\in\\mathfrak g$ such that the dual-number point $1+\\varepsilon X$ lies\nin $S$, that is, such that the lower-left block of\n$r(1+\\varepsilon X)=1+\\varepsilon\\,dr(X)$ vanishes:\n\n$$\n\\operatorname{Lie}(S)=\\{X\\in\\mathfrak g:dr(X)U\\subseteq U\\}.\n$$\n\nIf $dr(X)U\\subseteq U$ for all $X$, then\n$\\operatorname{Lie}(S)=\\mathfrak g$. By [lem-ag-cartier-reduced],\n$\\dim S=\\dim\\operatorname{Lie}(S)=\\dim\\mathfrak g=\\dim G$, and\n[lem-ag-equal-dimension-subgroup] gives $S=G$. Hence $r(g)U\\subseteq U$\nfor every $g\\in G(L)$. Conversely, if $r(g)U\\subseteq U$ for every\n$g\\in G(L)$, then the closed subscheme $S$ contains every $L$-point of\n$G$. The $L$-points are dense in $G$, and $G$ is reduced, so $S=G$; hence\n$\\operatorname{Lie}(S)=\\mathfrak g$ and every $dr(X)$ preserves $U$.",
+    "uses": [
+     "lem-ag-cartier-reduced",
+     "lem-ag-equal-dimension-subgroup"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Complement.* A connected closed matrix group $H$ over $L$ is a connected\ngroup scheme of finite type over $L$, its Lie algebra computed by dual\nnumbers is $\\operatorname{Lie}(H)$ of [def-wf-lie-algebra-derivation],\nand an algebraic-group module is a rational representation; so the\ncomplement is a special case. In the matrix language, the closed\nsubgroup $S=\\{g\\in H:r(g)U\\subseteq U\\}$ is reduced by\n[lem-ag-cartier-reduced], has Lie algebra\n$\\{X\\in\\mathfrak h:dr(X)U\\subseteq U\\}$, and\n[lem-wf-same-lie-closed-subgroup] replaces the dimension count above.",
+    "uses": [
+     "def-wf-lie-algebra-derivation",
+     "lem-ag-cartier-reduced",
+     "lem-wf-same-lie-closed-subgroup"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; the node is proved in Lean: recorded 2026-10-25, not reopened"
+ }
 }

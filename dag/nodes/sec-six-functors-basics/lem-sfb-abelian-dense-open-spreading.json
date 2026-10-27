@@ -1,0 +1,311 @@
+{
+ "id": "lem-sfb-abelian-dense-open-spreading",
+ "kind": "statement",
+ "title": "An abelian variety spreads to an abelian scheme on a dense open",
+ "statement": "Let $D$ be a Dedekind domain, $E=\\operatorname{Frac}(D)$, $S=\\operatorname{Spec}D$, and $A/E$ an abelian variety [def-weil-affine-spectrum, def-sc-abelian-variety]. There are a nonempty open subscheme $U\\subseteq S$ containing its generic point and a smooth proper commutative $U$-group scheme $B$ [def-pc-scheme, def-sbc-smooth-morphisms, def-weil-proper-morphism] with connected fibres, equipped with an isomorphism of $E$-group schemes $B_E\\simeq A$ [def-pc-base-change]. Such a smooth proper group scheme with connected fibres is called an abelian scheme. Here a Dedekind domain means a Noetherian integrally closed domain of Krull dimension one. A group scheme over a scheme $T$ consists of multiplication, inverse and identity $T$-morphisms satisfying the group diagrams; it is commutative if multiplication is invariant under interchange of the two factors. Separated means that the diagonal is a closed immersion [def-weil-closed-immersion].",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 1.4, paragraph before Theorem 3 and proof of Theorem 3 (printed pp.19-20, PDF pp.25-26); dense-open spreading of the abelian variety and its group structure; primary-source scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; project literature copy WANTED"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-base-change",
+  "def-sbc-smooth-morphisms",
+  "def-weil-closed-immersion",
+  "def-sc-abelian-variety",
+  "def-weil-proper-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Put $M=D\\setminus\\{0\\}$. Index by the directed set $I$ of finite subsets $F\\subseteq M$, ordered by inclusion, and put $d_F=\\prod_{a\\in F}a$ and $S_F=\\operatorname{Spec}D[1/d_F]$. The empty product is $1$; $F\\cup G$ is a common upper bound. These are affine principal opens of $S$, with affine transition maps. By [lem-weil-pbc-localization-colimit-principal-localizations], $E=M^{-1}D$ is the colimit of the principal localizations. The finite-subset indexing gives the same colimit: a compatible family of maps from $D[1/d_F]$ is precisely a map from $D$ inverting every $a\\in M$ (use $F=\\{a\\}$), so extends uniquely to $E$. Consequently [lem-weil-pbc-limit-affine-transition] identifies $\\operatorname{Spec}E$ with $\\varprojlim_FS_F$. All stages are quasi-compact and quasi-separated. Since no $d_F$ is zero, every $S_F$ contains the generic point $(0)$ of $S$.",
+   "uses": [
+    "lem-weil-pbc-localization-colimit-principal-localizations",
+    "lem-weil-pbc-limit-affine-transition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CR, lemma-localization-colimit; limits.tex Tags 01YW and 01YX"
+   }
+  },
+  {
+   "text": "By [def-sc-abelian-variety], $A\\to\\operatorname{Spec}E$ is smooth and proper. Smoothness includes local finite presentation by [def-sbc-smooth-morphisms]; properness includes quasi-compactness and separatedness by [def-weil-proper-morphism]. A separated morphism is quasi-separated because its diagonal is a closed immersion, hence quasi-compact. Thus the finite-presentation convention of [def-weil-pbc-scheme-conventions] applies to $A$. Clause (1) of [thm-pd-spreading-out], applied to the system in step 1, gives a finitely presented $X_0\\to S_{F_0}$ and an $E$-scheme isomorphism $\\alpha:(X_0)_E\\simeq A$. This is descent of the underlying scheme only; the operations are descended next.",
+   "uses": [
+    "def-sc-abelian-variety",
+    "def-sbc-smooth-morphisms",
+    "def-weil-proper-morphism",
+    "def-weil-pbc-scheme-conventions",
+    "thm-pd-spreading-out"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM, lemma-descend-finite-presentation, clause (1); BLR 1.4 p.19, limit-argument route"
+   }
+  },
+  {
+   "text": "The schemes $S_{F_0}$, $X_0$ and the finite powers $X_0^r$ over $S_{F_0}$, for $r\\leq3$, are of finite presentation over $S_{F_0}$ and are quasi-compact and quasi-separated. Indeed, product projections are base changes of $X_0\\to S_{F_0}$, so [lem-weil-pbc-qcqs-morphism-permanence] applies; local finite presentation of their structural composites follows on affine charts from [lem-weil-pbc-finite-presentation-base-change-composition]. Iterating the source-permanence clause gives quasi-compactness and quasi-separatedness of the powers. These statements persist at every later stage by the same base-change clause. Transport $m_A$, $i_A$, and $e_A$ through $\\alpha$ to morphisms on $(X_0)_E$. Apply clause (2) of [thm-pd-spreading-out] to the three pairs $(X_0^2,X_0)$, $(X_0,X_0)$ and $(S_{F_0},X_0)$. Taking a common later index gives $m:X_1^2\\to X_1$, $i:X_1\\to X_1$ and $e:S_{F_1}\\to X_1$ with exactly those generic restrictions. Fibre products and their base-change identifications use their universal property; in particular $(X_1^r)_E$ is identified with $A^r$.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "thm-pd-spreading-out"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM, lemma-descend-finite-presentation, clause (2); schemes.tex Tags 03GI, 01KU; morphisms.tex Tag 01TS"
+   }
+  },
+  {
+   "text": "Consider the following six pairs of parallel morphisms, all defined over $S_{F_1}$: $m\\circ(m\\times1)$ and $m\\circ(1\\times m)$ from $X_1^3$; $m\\circ(e\\circ p,1)$ and $1_{X_1}$ from $X_1$; $m\\circ(1,e\\circ p)$ and $1_{X_1}$ from $X_1$; $m\\circ(i,1)$ and $e\\circ p$ from $X_1$; $m\\circ(1,i)$ and $e\\circ p$ from $X_1$; and $m\\circ\\mathrm{swap}$ and $m$ from $X_1^2$, where $p:X_1\\to S_{F_1}$. The first five equalities hold generically by the group identities on $A$, and the sixth by [lem-sc-av-commutative]. Clause (3) of [thm-pd-spreading-out] makes each equality hold at some later stage. Taking the union of the finitely many resulting indices makes all six hold simultaneously. Hence we obtain a commutative group scheme $X_2/S_{F_2}$ and a group isomorphism $(X_2)_E\\simeq A$. Subsequent base change preserves these equalities, since it preserves composition and finite products.",
+   "uses": [
+    "lem-sc-av-commutative",
+    "thm-pd-spreading-out"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM, lemma-descend-finite-presentation, clause (3); groupoids.tex Tag 0BFD, lemma-abelian-variety-abelian"
+   }
+  },
+  {
+   "text": "By [lem-sc-abelian-variety-characterization], $A/E$ is geometrically integral and in particular geometrically connected. The base $S_{F_2}$ is irreducible, with generic point $(0)$ and residue field $E$, because $D[1/d_{F_2}]$ is a domain. The structural morphism of $X_2$ is of finite type since it is of finite presentation. Apply [lem-sbc-generic-geometrically-connected-spread] to obtain an open $W\\subseteq S_{F_2}$ containing $(0)$ over which all fibres are geometrically connected. A principal-open basis neighbourhood of $(0)$ inside $W$ has the form $D(a)$ in $S_{F_2}$ for a nonzero $a\\in D$ (clear a power of $d_{F_2}$ from its defining fraction). Replacing $F_2$ by $F_2\\cup\\{a\\}$ restricts $X_2$ to that neighbourhood. All later stages are open restrictions of it, so their fibres, with their residue fields, are the same fibres as before and remain geometrically connected.",
+   "uses": [
+    "lem-sc-abelian-variety-characterization",
+    "lem-sbc-generic-geometrically-connected-spread"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055G, lemma-geometrically-connected-generic-fibre; groupoids.tex Tag 0B7Q, lemma-connected-group-scheme-over-field-irreducible"
+   }
+  },
+  {
+   "text": "Use the cofinal tail of the system after step 5; its limit is still $\\operatorname{Spec}E$ by the same localization calculation as step 1. Apply [lem-weil-pbc-descend-smooth-qcqs] to the structural morphism of this stage model. Its source and base are quasi-compact and quasi-separated, it is locally of finite presentation by step 3, and its limit is $A/E$, which is smooth. Thus there is a stage after which every later structural morphism is smooth. Start at such a stage and apply [lem-weil-pbc-eventually-proper]. Its source and base are again quasi-compact and quasi-separated, its structural morphism is locally of finite type, and its limit $A/E$ is proper. This gives a further stage $F$ at which the structural morphism is proper; it is also smooth by the previous eventual assertion. The commutative group identities and geometrically connected fibres from steps 4 and 5 still hold there.",
+   "uses": [
+    "lem-weil-pbc-descend-smooth-qcqs",
+    "lem-weil-pbc-eventually-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 0C0C, lemma-descend-smooth, and 081F, lemma-eventually-proper, in Situation 081D"
+   }
+  },
+  {
+   "text": "Take $U=S_F\\subseteq S$ and $B=X_F$. Step 1 shows that $U$ contains $(0)$ and is nonempty. Step 6 gives smoothness and properness, and steps 4 and 5 give the commutative group structure and connected fibres. The original $\\alpha$ still identifies $B_E$ with $A$, and the descended operations make it an $E$-group isomorphism. These are exactly the required data.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Assembly of the preceding descent steps; BLR 1.4 pp.19-20"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-colimit-principal-localizations",
+  "lem-weil-pbc-limit-affine-transition",
+  "def-sc-abelian-variety",
+  "def-sbc-smooth-morphisms",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-scheme-conventions",
+  "thm-pd-spreading-out",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-sc-av-commutative",
+  "lem-sc-abelian-variety-characterization",
+  "lem-sbc-generic-geometrically-connected-spread",
+  "lem-weil-pbc-descend-smooth-qcqs",
+  "lem-weil-pbc-eventually-proper"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Explicit finite-diagram assembly of Tags 00CR, 01YW, 01ZM, 0C0C, 081F and 055G; expanding BLR 1.4 pp.19-20, whose local PDF is WANTED"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An abelian variety over the fraction field of a Dedekind domain extends to an abelian scheme over a dense open subset",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.exists_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] {K : Type u_2} [inst_1 : Field K] [inst_2 : Algebra R K] [inst_3 : IsDomain R]\\n  [ValuationRing R] [IsFractionRing R K] (W : WeierstrassCurve K), ∃ C, WeierstrassCurve.IsIntegral R (C • W)\", \"doc\": \"For any Weierstrass curve $ W $ over a field $ K $ equipped with an $ R $-algebra structure, there exists a variable change $ C $ such that the transformed curve $ C \\\\cdot W $ has an integral coordina\"}\n  {\"name\": \"WeierstrassCurve.IsGoodReduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [inst_2 : IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] →\\n            [inst_4 : Algebra R K] →\\n              [inst_5 : IsFractionRing R K] → (W : WeierstrassCurve K) → [WeierstrassCurve.Is\", \"doc\": \"A property of a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, asserting that $ W $ has good reduction. This means $ W $ satisfies minimality conditions with\"}\n  {\"name\": \"WeierstrassCurve.integralModel\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    {K : Type u_2} →\\n      [inst_1 : Field K] →\\n        [inst_2 : Algebra R K] → (W : WeierstrassCurve K) → [hW : WeierstrassCurve.IsIntegral R W] → WeierstrassCurve R\", \"doc\": \"Given a commutative ring $ R $, a field $ K $ equipped with an $ R $-algebra structure, and an integral Weierstrass curve $ W $ over $ K $, this constructs the integral model of $ W $ as a Weierstrass\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField_restrict\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X.PartialMap Y) [inst : IrreducibleSpace ↥X] {U : X.Opens} (hU : Dense ↑U)\\n  (hU' : U ≤ f.domain), (f.restrict U hU hU').fromFunctionField = f.fromFunctionField\", \"doc\": \"Let $X$ be an irreducible scheme, $Y$ be a scheme, and $f: X \\\\dashrightarrow Y$ be a rational map. Let $U$ be a dense open subset of $X$ that is contained in the domain of $f$. The morphism of schemes\"}\n  {\"name\": \"WeierstrassCurve.reduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [inst_2 : IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] →\\n            [inst_4 : Algebra R K] →\\n              [inst_5 : IsFractionRing R K] →\\n                (W : WeierstrassCurve K) →\\n    \", \"doc\": \"Given a minimal Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, its reduction is the Weierstrass curve obtained by first constructing the integral model of $ \"}\n  {\"name\": \"WeierstrassCurve.Affine.FunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} → [CommRing R] → WeierstrassCurve.Affine R → Type r\", \"doc\": \"The function field of an affine Weierstrass curve over a base ring $ R $ is the fraction ring of its coordinate ring. The coordinate ring is defined as the quotient ring $ R[X, Y] $ modulo the ideal g\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.functionField\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"(X : AlgebraicGeometry.Scheme) → [IrreducibleSpace ↥X] → CommRingCat\", \"doc\": \"For an irreducible scheme $X$, the function field is defined as the stalk of the structure sheaf $\\\\mathcal{O}_X$ at the generic point of $X$. This corresponds to the commutative ring obtained by takin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  [inst : IrreducibleSpace ↥X] → X.PartialMap Y → (AlgebraicGeometry.Spec X.functionField ⟶ Y)\", \"doc\": \"Given an irreducible scheme $X$ and a partial map $f : X \\to Y$ to a scheme $Y$, this constructs the morphism $\\\\operatorname{Spec}(K(X)) \\to Y$ where $K(X)$ is the function field of $X$. The constructio\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: integral Weierstrass equations, stalk-morphism spreading, smooth algebra descent and base-change stability do not spread an abelian group with properness and connected fibres. Read SpreadingOut.lean:14-44; it spreads morphisms between fixed schemes, and lists spreading morphism properties as TODO."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Spreading out an abelian variety to a smooth proper group scheme with connected fibres on a dense open",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.spread_out_of_isGermInjective\", \"module\": \"Mathlib.AlgebraicGeometry.SpreadingOut\", \"type\": \"[LocallyOfFiniteType sY] {x : X} [X.IsGermInjectiveAt x] {y : Y} (e : sX x = sY y)\\n  (φ : Y.presheaf.stalk y ⟶ X.presheaf.stalk x)\\n  (h : sY.stalkMap y ≫ φ = S.presheaf.stalkSpecializes (Inseparable.of_eq e).specializes ≫ sX.stalkMap x) :\\n  ∃ (U : X.Opens) (hxU : x ∈ U) (f : U.toScheme ⟶ Y),\\n    Spe\", \"doc\": \"Let $s_X: X \\\\to S$ and $s_Y: Y \\\\to S$ be morphisms of schemes. Let $x \\\\in X$ and $y \\\\in Y$ be points such that $s_X(x) = s_Y(y)$. Let $\\\\phi: \\\\mathcal{O}_{Y,y} \\\\to \\\\mathcal{O}_{X,x}$ be a homomorphism \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth) →\\n    AlgebraicGeometry.IsSmooth f\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if for every point $x \\\\in X$, there exist open sets $U \\\\subseteq Y$ and $V \\\\subseteq X$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring homom\"}\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \"[FinitePresentation R A] : IsOpen (smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"module\": \"Mathlib.AlgebraicGeometry.SpreadingOut\", \"type\": \"[LocallyOfFiniteType sY] {x : X} [X.IsGermInjectiveAt x] (φ : Spec (X.presheaf.stalk x) ⟶ Y)\\n  (h : φ ≫ sY = X.fromSpecStalk x ≫ sX) :\\n  ∃ (U : X.Opens) (hxU : x ∈ U) (f : U.toScheme ⟶ Y), φ = U.fromSpecStalkOfMem x hxU ≫ f ∧ f ≫ sY = U.ι ≫ sX\", \"doc\": \"Let $X$ and $Y$ be schemes with $s_X: X \\\\to S$ and $s_Y: Y \\\\to S$ morphisms locally of finite type. For a point $x \\\\in X$ where the germ map at $x$ is injective, and a morphism $\\\\phi: \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [Flat f] : Flat (f ∣_ V)\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, then its restriction to any open subset $ V $ of the target scheme $ Y $ remains flat. This means the property of flatness is maintained when restricti\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: integral Weierstrass equations, stalk-morphism spreading, smooth algebra descent and base-change stability do not spread an abelian group with properness and connected fibres. Read SpreadingOut.lean:14-44; it spreads morphisms between fixed schemes, and lists spreading morphism properties as TODO."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"Smooth\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: no declarations returned."
+  },
+  {
+   "tool": "grep",
+   "query": "[Aa]belian[Ss]cheme|[Aa]belian[Vv]ariety|spread.*proper|proper.*spread",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"line\": \"44\", \"text\": \"Show that certain morphism properties can also be spread out.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: integral Weierstrass equations, stalk-morphism spreading, smooth algebra descent and base-change stability do not spread an abelian group with properness and connected fibres. Read SpreadingOut.lean:14-44; it spreads morphisms between fixed schemes, and lists spreading morphism properties as TODO."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth proper group over a function field spreads to a smooth proper group with connected fibers after shrinking the integral base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"Algebra.Smooth.exists_finiteType\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Smooth A B],\\n  ∃ A₀ B₀ x x_1 x_2 x_3 x_4,\\n    Function.Injective ⇑(algebraMap A₀ A) ∧\\n      Algebra.FiniteType R A₀ ∧ Algebra.Smooth A₀ B₀ ∧ No\", \"doc\": \"For any smooth algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-algebra $ A_0 $, an injective $ R $-algebra homomorphism $ A_0 \\\\to A $, and a smooth $ A_0 $-algebra\"}\n  {\"name\": \"AlgebraicGeometry.isField_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f], IsField ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"If $X$ is an integral scheme and the morphism $f: X \\\\to \\\\operatorname{Spec}(K)$ is universally closed, then the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a field.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ), CategoryTheory.MorphismProperty.IsStableUnderBaseChange (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.compactSpace_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {K : Type u} [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.UniversallyClosed f], CompactSpace ↥X\", \"doc\": \"If $ f: X \\\\to \\\\operatorname{Spec}(K) $ is a universally closed morphism of schemes, where $ K $ is a field, then the underlying topological space of $ X $ is compact.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: integral Weierstrass equations, stalk-morphism spreading, smooth algebra descent and base-change stability do not spread an abelian group with properness and connected fibres. Read SpreadingOut.lean:14-44; it spreads morphisms between fixed schemes, and lists spreading morphism properties as TODO."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth proper group over a fraction field extends to a group scheme over a localization of the domain",
+   "results": "OK 8 hit(s): RingHom.Smooth.holdsForLocalizationAway, RingHom.FormallySmooth.holdsForLocalizationAway, Algebra.Smooth.of_isLocalization_Away, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, Algebra.FormallySmooth.of_isLocalization, Algebra.FormallySmooth.localization_base, Algebra.FormallySmooth.localization_map, AlgebraicGeometry.IsSmooth.recOn",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern integral Weierstrass models, localization smoothness or morphisms between fixed schemes; none descends a proper smooth group and its connected fibres. Mathlib/AlgebraicGeometry/SpreadingOut.lean:14-44 explicitly leaves spreading morphism properties as TODO."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An abelian variety over a fraction field extends to a smooth proper group scheme on a nonempty open of the base",
+   "results": "OK 8 hit(s): WeierstrassCurve.IsGoodReduction, WeierstrassCurve.integralModel, WeierstrassCurve.instIsMinimalMinimal, WeierstrassCurve.minimal, WeierstrassCurve.IsMinimal, WeierstrassCurve.reduction, WeierstrassCurve.Affine.FunctionField, WeierstrassCurve.Affine.Point.map_some",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern integral Weierstrass models, localization smoothness or morphisms between fixed schemes; none descends a proper smooth group and its connected fibres. Mathlib/AlgebraicGeometry/SpreadingOut.lean:14-44 explicitly leaves spreading morphism properties as TODO."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of an abelian variety and its multiplication inverse and identity from the generic point to a principal open subscheme",
+   "results": "OK 8 hit(s): AlgebraicGeometry.Proj.basicOpenToSpec_app_top, AlgebraicGeometry.basicOpenIsoSpecAway_inv_homOfLE, AlgebraicGeometry.basicOpenIsoSpecAway_inv_homOfLE_assoc, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_appTop_coord, AlgebraicGeometry.ProjIsoSpecTopComponent.fromSpec_toSpec, AlgebraicGeometry.SpecToEquivOfLocalRing_symm_apply, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_over, AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_symm_apply",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern integral Weierstrass models, localization smoothness or morphisms between fixed schemes; none descends a proper smooth group and its connected fibres. Mathlib/AlgebraicGeometry/SpreadingOut.lean:14-44 explicitly leaves spreading morphism properties as TODO."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-neron-model",
+  "date": "2026-10-24",
+  "group": "NK"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "BLR 1.4 p.19, paragraph before Theorem 3: the limit-argument construction of a dense-open abelian scheme; descent of the scheme, group operations and identities, and spreading of smoothness, properness and connected fibres",
+   "via": [
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-abelian-dense-open-spreading",
+  "worker": "stage1",
+  "summary": "Q22 expands the BLR dense-open limit argument using existing DAG tools only. Explicitly descends multiplication, inverse, identity and all six group equalities, verifies finite-presentation and qcqs hypotheses, spreads geometric connectedness, then descends smoothness and properness at successive stages. Statement unchanged; no new nodes. Existing searches retained and current logged searches added.",
+  "blueprint": "The created node has no imported blueprint ancestor (blueprint_refs.py ancestor returns None); its inherited BLR 1.4 dense-open construction is realized in steps 1-7. The latest blueprint was searched and contains no equivalent statement. No unit or chapter route was changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-localization-colimit-principal-localizations",
+    "why": "Generic localization as the colimit of principal localizations; a generic ring-limit tool absent from the unit."
+   },
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Existence and affine calculation of the scheme limit; a generic limit tool absent from the unit."
+   },
+   {
+    "node": "thm-pd-spreading-out",
+    "why": "Descent of finitely presented schemes, morphisms and equality; the general limit tool explicitly needed for BLR dense-open spreading."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Quasi-compactness, quasi-separatedness and finite presentation of the models and their products; generic scheme permanence."
+   },
+   {
+    "node": "lem-weil-pbc-finite-presentation-base-change-composition",
+    "why": "Affine-chart finite-presentation calculus for the finite powers used as sources of the group diagrams."
+   },
+   {
+    "node": "lem-sbc-generic-geometrically-connected-spread",
+    "why": "Geometrically connected generic fibre spreads over an irreducible base; generic fibre tool needed to finish the dense-open model."
+   },
+   {
+    "node": "lem-sc-abelian-variety-characterization",
+    "why": "Geometric integrality of the abelian variety supplies the generic geometric connectedness hypothesis."
+   },
+   {
+    "node": "lem-weil-pbc-descend-smooth-qcqs",
+    "why": "Smoothness descends at a qcqs limit; generic morphism-property descent tool."
+   },
+   {
+    "node": "lem-weil-pbc-eventually-proper",
+    "why": "Properness descends at a qcqs limit; generic morphism-property descent tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-localization-colimit-principal-localizations",
+  "lem-weil-pbc-limit-affine-transition",
+  "thm-pd-spreading-out",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-sbc-generic-geometrically-connected-spread",
+  "lem-sc-abelian-variety-characterization",
+  "lem-weil-pbc-descend-smooth-qcqs",
+  "lem-weil-pbc-eventually-proper"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-992f57c20",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-992f57c20 (reviewer sub-agent of L); spot-checked: This is a first split, not a re-split: on the base the item is unsplit with an empty proof. The statement is unchanged. Dropping the stmt_dep def-weil-finite-type-morphism is fine because the statement never says finite type; it gets that notion only through proper. There are no new nodes. I read all 7 steps against the statements of every cited node. Step 1: the finite subsets F of D minus 0, with D[1/d_F], form a directed system. The colimit equals E by the universal property of localization, so Spec E is the limit (limit-affine-transition). Step 2: smooth includes locally finite presentation, and proper gives quasi-compact and separated, hence quasi-separated. So A is of finite presentation in the 01TP sense, and clause (1) of 01ZM gives X_0 and α. Step 3: products are base changes and stay qcqs and of finite presentation; clause (2) of 01ZM descends m, i and e. Step 4: the 6 identities (associativity, 2 unit, 2 inverse, commutativity via lem-sc-av-commutative) have the correct sources and descend by clause (3). Step 5: geometrically integral gives geometrically connected. The generic fibre is A, and lem-sbc-generic-geometrically-connected-spread matches Stacks 055G. Taking D(g) with g=b/d^n gives D(b) with b nonzero. Step 6: 0C0C (lem-weil-pbc-descend-smooth-qcqs) gives smoothness for all j ≥ i, then 081F (lem-weil-pbc-eventually-proper) gives properness further on; its hypotheses hold, and locally finite presentation implies locally finite type. Step 7 is elementary assembly. Duplicate search found none. Tool uses: I accept the 9 generic tools in split_report.tool_uses, plus lem-sc-av-commutative, which the worker did not list; the maintainer should record it. Batch-5 flag: lem-weil-pbc-eventually-proper reaches def-trf-schematically-dense-open through the Nagata/Chow lemmas. That node is a plain general definition and no step of the trace formula or of Poincaré duality, so it is genuinely outside the assumptions."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianDenseOpenSpreading",
+  "declaration": "AlgebraicGeometry.exists_abelianScheme_denseOpen",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianDenseOpenSpreading.lean",
+  "statement": "theorem exists_abelianScheme_denseOpen (D : Type u) [CommRing D] [IsDedekindDomain D] (_hD : ringKrullDim D = 1) (E : Type u) [Field E] [Algebra D E] [IsFractionRing D E] (A : Over (Spec (CommRingCat.of E))) [GrpObj A] [IsAbelianVariety A] : ∃ U : (Spec (CommRingCat.of D)).Opens, (U : Set (Spec (CommRingCat.of D))).Nonempty ∧ genericPoint (Spec (CommRingCat.of D)) ∈ U ∧ ∃ (j : Spec (CommRingCat.of E) ⟶ U.toScheme), j ≫ U.ι = Spec.map (CommRingCat.ofHom (algebraMap D E)) ∧ ∃ B : Grp (Over U.toScheme), Smooth B.X.hom ∧ IsProper B.X.hom ∧ IsCommMonObj B.X ∧ (∀ s : U.toScheme, ConnectedSpace (B.X.hom.fiber s)) ∧ Nonempty (((Over.pullback j).mapGrp.obj B) ≅ Grp.mk A)",
+  "branch": "sheaf-dag",
+  "by": "Q97",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-624c02cf0",
+  "group": "Q97",
+  "result": "pass",
+  "note": "Checked every clause of the node against the Lean. Dedekind = IsDedekindDomain plus ringKrullDim D = 1, which excludes fields. E is the fraction field via IsFractionRing. A has [GrpObj A] [IsAbelianVariety A] (proper, smooth, connected). U is a nonempty open containing the generic point. j is the canonical generic-point map, pinned by j ≫ U.ι = Spec.map algebraMap. B : Grp (Over U) is smooth, proper and commutative (IsCommMonObj), with connected scheme-theoretic fibres. The iso is in Grp (Over Spec E) after Over.pullback j mapGrp. Nothing weaker or stronger; edge cases and universes fine. Only the lean field differs from the live node; lean.statement is the file signature word for word; all proof-dep imports exist. Docstrings have the source place, blueprint id and all 7 proof steps; proof is sorry only; no new definitions; no duplicate in Mathlib or the project trees. Nothing compiled because no file changed."
+ }
+}

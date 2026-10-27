@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-uniformizer-reduction-cohomology",
+ "kind": "statement",
+ "title": "Cohomology commutes with completed principal reduction under injectivity",
+ "statement": "For an adic principal datum d on a domain A, a nonzero generator π, and a completed-coefficient derived object K, injectivity of π on H^(q+1)(K) makes the canonical map Ext(H^q(K))→H^q(Ext K) an isomorphism for every finite quotient.",
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-complete"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-base-change/sk-thm-sbc-karoubian/prop-weil-pbc-levelwise-truncations.md",
+  "place": "Order 1429, sufficient uniformizer-injectivity criterion; normalized principal quotient triangle (Stacks Tag 06YU)."
+ },
+ "proof": [
+  {
+   "text": "Use the completed short exact principal presentation from the lower-bound lemma construction. The constant unit and ordinary extension formulas identify the regular endomorphism on sections with multiplication by the image of π^(n+1).",
+   "uses": [
+    "lem-weil-pbc-integral-local-reduction-lower-bound"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Iterate the assumed injectivity to the relevant positive power. The tensor unit identifies its action on cohomology with scalar multiplication, hence makes that action monic. In the normalized quotient triangle cohomology sequence its kernel is zero. The short exact sequence identifies the restricted canonical cohomology comparison as an isomorphism. Exact restriction and faithful forgetting reflect isomorphisms, proving the stated comparison. This includes the empty scheme, vanishing cohomology, and n=0.",
+   "uses": [
+    "lem-weil-pbc-adic-reduction-cohomology-sequence",
+    "lem-weil-pbc-adic-reduction-triangle"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-local-reduction-lower-bound",
+  "lem-weil-pbc-adic-reduction-cohomology-sequence",
+  "lem-weil-pbc-adic-reduction-triangle"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-base-change/sk-thm-sbc-karoubian/prop-weil-pbc-levelwise-truncations.md",
+  "place": "Order 1429, sufficient uniformizer-injectivity criterion; normalized principal quotient triangle (Stacks Tag 06YU). Complete G1 proof restored by E1 from returned repair packet 48160399e7852af6."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LevelwiseAdicTruncations",
+  "date": "2026-10-22",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-levelwise-truncations",
+   "place": "Sufficient condition in (1): comparison of cohomology with ordinary reduction.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-rem-rest",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.UniformizerReductionCohomology",
+  "file": "lean/Sheaf/Paper/UniformizerReductionCohomology.lean",
+  "declaration": "AlgebraicGeometry.Scheme.principalReductionCohomology_isIso",
+  "statement": "theorem principalReductionCohomology_isIso\n    (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A] [IsDomain A]\n    (d : AdicCoefficientDatum A) (π : A) (hI : d.ideal = Ideal.span {π})\n    (hπ : π ≠ 0) (n : ℕ) (K : PbcCompletedDerived T d) (q : ℤ)\n    (hinj : ∀ U : T.ProEtᵒᵖ,\n      Function.Injective (fun x :\n        ((DerivedCategory.homologyFunctor _ (q + 1)).obj K).val.obj U ↦\n        (CompletedConstantReduction.base T d.ideal ≫\n          CompletedConstantReduction.completedComparison T d.ideal d.quotientFinite).hom.app U\n            ((adicLisseConstantUnit T A).app U π) • x)) :\n    IsIso (((pbcScalarAdjunction (pbcAdicProjection T d n)).homEquiv _ _).symm\n      ((DerivedCategory.homologyFunctor _ q).map\n          ((pbcDerivedScalarAdjunction (pbcAdicProjection T d n)).unit.app K) ≫\n        ((pbcRestrict (pbcAdicProjection T d n)).mapDerivedCategoryHomologyFunctorIso q).inv.app\n          ((pbcDerivedExtend (pbcAdicProjection T d n)).obj K)))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-22"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "rg",
+   "query": "singleFunctorCompHomologyFunctorIso|HomologySequence|nonempty_iso_singleFunctor_obj_homologyFunctor_obj",
+   "results": "The existing single-object homology and concentrated-complex theorems apply. The project normalized reduction triangle supplies the needed coefficient comparison.",
+   "date": "2026-10-22",
+   "verdict": "Use these declarations; no new spectral sequence or periodic-resolution computation is needed for this criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomology of derived tensor with a regular principal quotient and periodic resolution of powers of a nonzero divisor",
+   "date": "2026-10-22",
+   "results": "Found cyclic-group resolutions and generic projective Tor vanishing, but no module-sheaf quotient result.",
+   "verdict": "Use the existing abelian, homology and K-flat APIs; no direct sheaf-coefficient periodic Tor computation was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "ShortComplex.Exact, CategoryTheory.End, pow",
+   "date": "2026-10-22",
+   "results": "The unqualified query returned no match; the project exactness declarations and Mathlib refinements provide the usable API.",
+   "verdict": "Use the existing abelian, homology and K-flat APIs; no direct sheaf-coefficient periodic Tor computation was found."
+  },
+  {
+   "tool": "grep",
+   "query": "alternating.*resolution|periodic.*Tor|principal.*quotient",
+   "date": "2026-10-22",
+   "results": "Found principal quotient ring results, but no periodic derived module-sheaf computation.",
+   "verdict": "Use the existing abelian, homology and K-flat APIs; no direct sheaf-coefficient periodic Tor computation was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology commutes with reduction modulo a regular element if multiplication is injective on the next cohomology group",
+   "results": "IsSMulRegular.smulShortComplex_shortExact (Mathlib.RingTheory.Regular.Category); groupCohomology.cochainsMap_f_map_mono (Mathlib.RepresentationTheory.Homological.GroupCohomology.Functoriality); groupCohomology (Mathlib.RepresentationTheory.Homological.GroupCohomology.Basic); groupCohomology.mono_map_0_of_mono (Mathlib.RepresentationTheory.Homological.GroupCohomology.Functoriality); groupCohomology.mono_δ_of_isZero (Mathlib.RepresentationTheory.Homological.GroupCohomology.LongExactSequence); groupCohomology.mapCocycles₁_comp_i (Mathlib.RepresentationTheory.Homological.GroupCohomology.Functoriality); groupCohomology.coindIso (Mathlib.RepresentationTheory.Homological.GroupCohomology.Shapiro); groupCohomology.π_comp_H0Iso_hom_apply (Mathlib.RepresentationTheory.Homological.GroupCohomology.LowDegree)",
+   "date": "2026-10-22",
+   "verdict": "No exact match: the regular-scalar short exact sequence is for ordinary modules; the remaining hits concern group cohomology. The normalized sheaf-coefficient cohomology comparison still requires the quotient triangle."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261022T040155-L-2822089",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261022T040155-L-2822089",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

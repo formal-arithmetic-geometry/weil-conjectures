@@ -1,0 +1,257 @@
+{
+ "id": "lem-sfb-finite-inertia-local-affine-covers",
+ "kind": "statement",
+ "title": "Stabilizer-preserving etale local finite flat affine covers",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention]. Deligne--Mumford stacks, representability by algebraic spaces, stacks in groupoids, and 2-fibre products use [def-sfb-stable-pointed-moduli-groupoids]; algebraic spaces use [def-trf-algebraic-space]. Let $\\mathcal X$ be a Deligne--Mumford stack over $S$. Define $I_{\\mathcal X}(T)$ to have objects $(x,\\alpha)$ with $x\\in\\mathcal X(T)$ and $\\alpha\\in\\operatorname{Aut}(x)$, and arrows $a:(x,\\alpha)\\to(y,\\beta)$ satisfying $a\\alpha=\\beta a$. Assume $I_{\\mathcal X}\\to\\mathcal X$ is finite, meaning every scheme base change is a finite scheme morphism [def-weil-finite-integral-morphism]. A finite flat affine cover of a stack $\\mathcal A$ means an affine scheme $U$ and a representable surjective morphism $U\\to\\mathcal A$ which is finite, flat and locally of finite presentation, tested after scheme base change using [def-weil-finite-integral-morphism, def-weil-flat-morphism, def-sbc-locally-finite-presentation]. A morphism of stacks is separated when its relative diagonal is proper, with properness tested on scheme charts using [def-weil-proper-morphism]. There is a set-indexed family $g_i:\\mathcal X_i\\to\\mathcal X$ of representable separated etale morphisms whose images jointly cover $|\\mathcal X|$, where each $\\mathcal X_i$ is Deligne--Mumford and admits a finite flat affine cover, and for every $T$ and $x\\in\\mathcal X_i(T)$ the map of automorphism sheaves $\\operatorname{Aut}_T(x)\\to\\operatorname{Aut}_T(g_i x)$ is an isomorphism. Equivalently, $I_{\\mathcal X_i}\\to\\mathcal X_i\\times_{\\mathcal X}I_{\\mathcal X}$ is an isomorphism. Etale means [def-weil-etale-morphism] on scheme charts. Here $|\\mathcal X|$ consists of field-valued objects modulo isomorphism after common field extension.",
+ "source": {
+  "document": "literature/stacks-project/stacks-more-morphisms.tex",
+  "place": "Tag 0DUE, lemma-etale-local-finite-inertia; restricted to Deligne--Mumford stacks. Etale-topology convention: criteria.tex Tag 076V, lemma-stacks-etale; DM permanence: stacks-morphisms.tex Tag 06N3, theorem-DM."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-weil-finite-integral-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-proper-morphism",
+  "def-weil-etale-morphism",
+  "def-sfb-moduli-inertia",
+  "def-sfb-finite-stack-scheme-tests",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-sfb-moduli-chart-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Fix $x\\in|\\mathcal X|$. Apply the pointed finite-groupoid neighbourhood theorem to obtain $g:\\mathcal Q=[U/R]\\to\\mathcal X$ and $q$ over $x$. Here $U,R$ are affine, the projections $s,t$ are finite locally free, and $g$ is representable etale and is an isomorphism on the geometric stabilizer at $q$. This step uses only preservation at this one point, not preservation on the entire neighbourhood.",
+   "uses": [
+    "lem-sfb-dm-pointed-finite-groupoid-neighbourhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUE (lemma-etale-local-finite-inertia), proof"
+   }
+  },
+  {
+   "text": "Apply the stabilizer-isomorphism open-locus theorem to $g$, using precisely the finite inertia of its target $\\mathcal X$. It gives an open $\\mathcal V\\subseteq\\mathcal Q$ containing $q$, with $I_{\\mathcal V}\\simeq\\mathcal V\\times_{\\mathcal X}I_{\\mathcal X}$. By finite-flat quotient geometry its inverse image $V=U\\times_{\\mathcal Q}\\mathcal V$ is an invariant open of $U$. The surjectivity of $|U|\\to|\\mathcal Q|$ supplies $v\\in V$ mapping to $q$. Its orbit $E=t(s^{-1}(\\{v\\}))$ is a finite set, contains $v$, and lies in $V$: finiteness is the finite-fibre clause of finite locally free, and invariance of $V$ puts both endpoints of each such arrow in $V$.",
+   "uses": [
+    "lem-sfb-dm-stabilizer-isomorphism-open-locus",
+    "lem-sfb-finite-flat-groupoid-quotient-open-geometry",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUE (lemma-etale-local-finite-inertia), proof"
+   }
+  },
+  {
+   "text": "Write $U=\\operatorname{Spec}A$. Let $J\\subseteq A$ cut out the closed complement $U\\setminus V$. For each $e\\in E$, the prime $\\mathfrak p_e$ does not contain $J$. Prime avoidance gives $a\\in J$ outside every $\\mathfrak p_e$, so $E\\subseteq D(a)\\subseteq V$ and $D(a)$ is affine. Since $V$ is invariant, the groupoid restricted to $V$ has finite locally free projections by the quotient-geometry lemma. Apply the existing invariant-affine-neighbourhood lemma to this restricted groupoid and $v$, with the affine open $D(a)$ containing its orbit. Obtain an invariant affine open $W\\subseteq V$ containing $v$. No affineness of $V$ or of intersections of arbitrary affine opens is assumed.",
+   "uses": [
+    "lem-weil-pbc-prime-avoidance",
+    "lem-sfb-locally-free-groupoid-invariant-affine",
+    "lem-sfb-finite-flat-groupoid-quotient-open-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUE (lemma-etale-local-finite-inertia), proof"
+   }
+  },
+  {
+   "text": "Invariance inside $V$ is also invariance in $U$, since $V$ was invariant. Finite-flat quotient geometry therefore gives the open substack $\\mathcal W=[W/R_W]\\subseteq\\mathcal V\\subseteq\\mathcal Q$. It contains $q$ and admits the required finite flat affine cover $W\\to\\mathcal W$. It is absolutely separated because $W$ is affine. By representable etale calculus, restriction of $g$ gives a representable etale map $g_x:\\mathcal W\\to\\mathcal X$. The source is Deligne--Mumford: base-change an etale scheme atlas of $\\mathcal Q$ to the open substack, obtaining an etale scheme atlas of $\\mathcal W$.",
+   "uses": [
+    "lem-sfb-finite-flat-groupoid-quotient-open-geometry",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUE (lemma-etale-local-finite-inertia), proof"
+   }
+  },
+  {
+   "text": "The separated-source cancellation theorem applies to $g_x$: its source $\\mathcal W$ is absolutely separated and its target $\\mathcal X$ has finite inertia. Thus $g_x$ is separated. On the strictly full open substack $\\mathcal W\\subseteq\\mathcal V$, the inertia comparison is the restriction of the isomorphism from step 2: for an object $w$ and any automorphism of $g_x(w)$, that isomorphism gives a unique automorphism of $w$ in $\\mathcal V$, which is also in $\\mathcal W$ by fullness. This proves the stated automorphism-sheaf isomorphism on every test scheme, hence the inertia isomorphism.",
+   "uses": [
+    "lem-sfb-stack-separated-source-separated-inertia-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUE (lemma-etale-local-finite-inertia), proof"
+   }
+  },
+  {
+   "text": "The construction works for every $x\\in|\\mathcal X|$ and produces $q\\in|\\mathcal W|$ with $g_x(q)=x$. Using the stated universe bound, choose one construction for each point of the set $|\\mathcal X|$. Their images cover by this equality, and every chosen map has all properties established in steps 1--5. If $|\\mathcal X|$ is empty take the empty family.",
+   "uses": [
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUE (lemma-etale-local-finite-inertia), proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-dm-pointed-finite-groupoid-neighbourhood",
+  "lem-sfb-dm-stabilizer-isomorphism-open-locus",
+  "lem-sfb-finite-flat-groupoid-quotient-open-geometry",
+  "def-pc-finite-locally-free",
+  "lem-weil-pbc-prime-avoidance",
+  "lem-sfb-locally-free-groupoid-invariant-affine",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-stack-separated-source-separated-inertia-target",
+  "def-weil-size-convention"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-more-morphisms.tex",
+  "place": "Tag 0DUE (lemma-etale-local-finite-inertia), proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic stack with finite inertia admits a covering by stabilizer preserving separated etale maps from stacks with finite flat affine scheme covers",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, this constructs an open cover of the object $D(i')\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.Pretopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f)\\n  (i : (CategoryTheory.Precove\", \"doc\": \"Given a diagram of schemes $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, the open covers $\\\\mathcal{U}_X(i)$ constructed f\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme → Type (max (u + 1) (v + 1))\", \"doc\": \"A predicate on morphisms between schemes that assigns to each morphism $ f : X \\to Y $ the proposition that it is an affine cover, i.e., an affine morphism forming a cover in the Zariski topology.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty\", \"type\": \"CategoryTheory.Precoverage AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme → Type (max (u + 1) (v + 1))\", \"doc\": \"Given a precoverage $K$ on the category of schemes, the cover associated to $K$ is the zero hypercover defined by $K$, which consists of a collection of covering sieves for each scheme in the category\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Pretopology X.Etale\", \"doc\": \"The Grothendieck pretopology on the category of schemes over a base scheme $ X $, defined by covering families consisting of jointly surjective étale morphisms. This pretopology uses the étale propert\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are scheme morphisms, affine spectra, finite-group invariant rings or unrelated quotients; none states this stack theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are scheme morphisms, affine spectra, finite-group invariant rings or unrelated quotients; none states this stack theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "well.nigh.affine|finite.inertia|stabilizer.preserving",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are scheme morphisms, affine spectra, finite-group invariant rings or unrelated quotients; none states this stack theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale local structure of a finite inertia algebraic stack as a quotient of an affine scheme by a finite flat groupoid",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"Algebra.FormallyEtale.of_unramified_and_smooth\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FormallyUnramified R A] [Algebra.FormallySmooth R A], Algebra.FormallyEtale R A\", \"doc\": \"For commutative rings $ R $ and $ A $ with an $ R $-algebra structure, if $ A $ is both formally unramified over $ R $ and formally smooth over $ R $, then $ A $ is formally étale over $ R $.\"}\n  {\"name\": \"Algebra.Etale.finitePresentation\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FinitePresentation R A\", \"doc\": \"Let $ R $ and $ A $ be commutative rings with an $ R $-algebra structure on $ A $. If $ A $ is étale over $ R $, then $ A $ is finitely presented as an $ R $-algebra.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \"(X : Scheme.{u}) : GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \": Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\n  {\"name\": \"Algebra.instEtaleOfIsStandardEtale\", \"module\": \"Mathlib.RingTheory.Etale.StandardEtale\", \"type\": \"[IsStandardEtale R S] : Algebra.Etale R S\", \"doc\": \"Every standard étale algebra over a commutative ring is an étale algebra. Specifically, if an algebra $ S $ over a commutative ring $ R $ is isomorphic to a localization of a polynomial ring over $ R \"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are scheme morphisms, affine spectra, finite-group invariant rings or unrelated quotients; none states this stack theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Deligne Mumford stack with finite inertia has stabilizer preserving separated etale neighbourhoods with finite flat affine covers",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsSeparated fun X x x_1 x_2 => X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsFinite @AlgebraicGeometry.IsSeparated\", \"doc\": \"The composition of a finite morphism with a separated morphism is finite.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.Pretopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern scheme morphisms, ring loci, topological stabilizers, or unrelated splitting constructions, and do not state this algebraic-stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale local finite inertia stack charts well nigh affine",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern scheme morphisms, ring loci, topological stabilizers, or unrelated splitting constructions, and do not state this algebraic-stack assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern scheme morphisms, ring loci, topological stabilizers, or unrelated splitting constructions, and do not state this algebraic-stack assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.inertia|stabilizer.preserving|well.nigh.affine",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern scheme morphisms, ring loci, topological stabilizers, or unrelated splitting constructions, and do not state this algebraic-stack assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite inertia Deligne Mumford stack has etale local finite flat affine covers",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineCover.ctorIdx\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.MorphismProperty\", \"type\": \"{P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n  {S : AlgebraicGeometry.Scheme} → AlgebraicGeometry.Scheme.AffineCover P S → ℕ\", \"doc\": \"A predicate on morphisms between schemes that assigns to each morphism $ f : X \\\\to Y $ the proposition that it is an affine cover, i.e., an affine morphism forming a cover in the Zariski topology.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsFinite f → Sort u} →\\n      (t : AlgebraicGeometry.IsFinite f) →\\n        ([toIsAffineHom : AlgebraicGeometry.IsAffineHom f] →\\n            (finite_app :\\n                ∀ (U : Y.Opens),\\n                  AlgebraicGeom\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is finite if it is affine and for every affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\Gamma(Y, U) \\\\to \\\\Gamma(X, f^{-1}(U)) $ is finite, m\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instInhabitedOpenCover\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \": Inhabited X.OpenCover\", \"doc\": \"For any scheme $X$, the type of open covers of $X$ is inhabited, with the canonical affine open cover constructed from affine open immersions $\\\\{\\\\operatorname{Spec}(R_x) \\\\to X\\\\}_{x \\\\in X}$ whose image\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": GrothendieckTopology Scheme.{u}\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": Pretopology Scheme.{u}\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineCover\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.MorphismProperty\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme → Type (max (u + 1) (v + 1))\", \"doc\": \"A predicate on morphisms between schemes that assigns to each morphism $ f : X \\to Y $ the proposition that it is an affine cover, i.e., an affine morphism forming a cover in the Zariski topology.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern scheme morphisms, ring loci, topological stabilizers, or unrelated splitting constructions, and do not state this algebraic-stack assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-keel-mori-finite-inertia-quotient",
+  "date": "2026-10-22",
+  "group": "NP"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Coarse-morphism input to the finite inertia-free cover argument, before composing with the finite cover. Finite-inertia categorical quotient used before deriving finite type and discrete fibres. Keel--Mori construction: Stabilizer-preserving etale local finite flat affine covers.",
+   "via": [
+    "lem-sfb-keel-mori-finite-inertia-quotient",
+    "lem-sfb-dm-coarse-proper-locally-quasifinite",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-inertia-local-affine-covers",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0DUE over an arbitrary scheme base, separating pointed local groupoid presentation, openness of the stabilizer-isomorphism locus, finite-flat quotient geometry, and separated-source cancellation. Reused invariant-affine shrinking and prime avoidance, checked all cited statements and small cases, and found no exact Lean or Mathlib attachment.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Coarse-morphism input to the finite inertia-free cover argument, before composing with the finite cover. Finite-inertia categorical quotient used before deriving finite type and discrete fibres. Keel--Mori construction: Stabilizer-preserving etale local finite flat affine covers. Realized the finite-inertia local-cover prerequisite via the six steps of Stacks 0DUE, supporting the direct-image alteration route (3).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-prime-avoidance",
+    "why": "Generic finite prime avoidance produces a principal affine neighbourhood of the finite orbit inside an open of an affine scheme; no stack theorem or replacement of the unit route is involved."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-prime-avoidance"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q77-c5f7760b1",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-c5f7760b1 (reviewer sub-agent of L); spot-checked: Read Stacks 0DUE in full (statement and proof) and the tags behind it: 0DUL/0DUM, 0DU4, 0DUA, 050M(3) and 0CL0(1). The item statement is unchanged; it is 0DUE restricted to DM stacks over an arbitrary scheme base S, with nothing weakened. Steps: (1) the pointed node gives a stabilizer isomorphism only at q, as 0DU4 does; (2) the 0DUA locus gives V, which is invariant and contains q, and the orbit E is finite and lies in V because s is finite and V is invariant; (3) prime avoidance applies because E is nonempty, giving E ⊆ D(a) ⊆ V, and 03JE applied to (V,R_V) gives an invariant affine W; (4) the quotient-geometry node gives [W/R_W] with a finite flat cover, absolute separatedness by implicitly applying its last clause to (W,R_W), and DM by restricting the atlas, while the étale calculus gives the restriction of g; (5) cancellation gives separatedness, and the inertia isomorphism restricts to the full substack; (6) choice over the set |X|, with the empty case covered. New nodes: all four are true and statement-only, none restates a clause of the item, and each was tested on schemes, BG with p dividing |G|, and a non-separated S. In quotient geometry I checked that p is finite and representable by schemes, the invariant-open bijection, and that R → U×_Z U is finite, hence proper, so the quotient is absolutely separated even over a non-separated S. No duplicates in snapshot, live or side-live: the field-base 0DUE sibling lem-sfb-finite-inertia-etale-affine-charts does not supply the item; invariant-open-substack-descent needs a smooth atlas, flat-groupoid-algebraic-quotient gives no finiteness, opens or separatedness, and separation-composition is 050K, not cancellation. Batch-5 flags: def-sfb-stable-pointed-moduli-groupoids and def-trf-algebraic-space are general definitions already in the item's base stmt_deps, and the chartwise étale calculus is generic permanence; none is a trace-formula or Poincaré-duality step, so all are accepted. The prime-avoidance tool_use (mathlib leaf) is accepted. No SGA; the item is still unsplit in live. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteInertiaLocalAffineCovers",
+  "declaration": "CategoryTheory.exists_finite_inertia_local_affine_covers",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteInertiaLocalAffineCovers.lean",
+  "statement": "theorem exists_finite_inertia_local_affine_covers {S : Scheme.{u}} (X : BasedCategory.{v, w} (Over S)) (hX : IsDeligneMumfordModuliStack X) (hfinite : IsRepresentableFiniteModuliMap (moduliInertiaProjection X)) : ∃ (I : Type (max (u + 1) w)) (A : I → BasedCategory.{max u v, max (u + 1) w} (Over S)) (g : ∀ i : I, BasedFunctor (A i) X), (∀ i : I, IsDeligneMumfordModuliStack (A i) ∧ IsRepresentableByAlgebraicSpaces (g i) ∧ IsEtaleModuliMap (g i) ∧ (∀ (T : Over S) (t : BasedFunctor (discreteModuli (yoneda.obj T)) X) (Z : AlgebraicSpace S) (a : Z.obj.obj ⟶ yoneda.obj T), HasSpaceBaseChange (g i) T t Z a → AlgebraicSpace.IsRepresentableWith (fun _ _ f ↦ IsProper f.left) (pullback.diagonal a)) ∧ (∃ (U : Over S) (_ : IsAffine U.left) (p : BasedFunctor (discreteModuli (yoneda.obj U)) (A i)), ModuliSchemeTest (fun _ _ f ↦ IsFinite f ∧ Flat f ∧ LocallyOfFinitePresentation f ∧ Surjective f) p) ∧ (∀ (T : Over S) (x : Functor.Fiber (A i).p T), Function.Bijective (fun α : x ≅ x ↦ (moduliFiberMap (g i) T).mapIso α))) ∧ ∀ x : ModuliPoints X, ∃ (i : I) (y : ModuliPoints (A i)), moduliPointMap (g i) y = x",
+  "branch": "sheaf-dag",
+  "by": "Q120",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing inertia, finite scheme tests, point classes, scheme-test predicate and chartwise etaleness interfaces; their four owning definition nodes are added to stmt_deps. Finite flat affine covers and separatedness are expanded exactly as in the node; the automorphism-sheaf isomorphism is tested on every scheme fibre. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9791a3417",
+  "group": "Q120",
+  "result": "pass",
+  "note": "Read node, 0DUE source place, module, report and all cited declarations: IsDeligneMumfordModuliStack, IsRepresentableByAlgebraicSpaces, HasSpaceBaseChange, IsEtaleModuliMap, AlgebraicSpace.IsRepresentableWith, moduliInertiaProjection, IsRepresentableFiniteModuliMap, ModuliSchemeTest, ModuliPoints/moduliPointMap, moduliFiberMap. Every clause matches the node: finite inertia via scheme tests; DM, representable, étale and separated g_i (proper diagonal of each base-change space, same as landed 0DUS hsep); finite-flat-lfp-surjective affine cover via ModuliSchemeTest; vertical-automorphism bijection on every fibre (sheaf isomorphism); joint point coverage. Output universes are larger existentials with no restriction on the input; empty family and other edge cases covered. Item record differs from live only in lean and four landed def stmt_deps whose declarations are recorded. lean.statement matches the file exactly. No new definitions, sorry only, docstrings carry source, blueprint and the six proof steps. No file changed, so not recompiled; worker reports a clean compile. No findings."
+ }
+}

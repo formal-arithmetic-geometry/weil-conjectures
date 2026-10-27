@@ -1,0 +1,123 @@
+{
+ "id": "def-sfb-diagonal-trace-sources",
+ "kind": "definition",
+ "title": "Product-projection models and normalized supported trace sources",
+ "statement": "For a scheme Y, the first projective-line model of P1(Y)×Y P1(Y) is the inverse of the canonical projective-space base-change pullback isomorphism, flipped so its structure morphism is the first projection. The second model composes factor symmetry with the first. IsIntegration(R,a,t,δ) is a≫R(δ)≫t=id. For prime l, supportedSourceNormalization fixes the inverse ordinary supported-source comparison after scalar forgetting as precisely lowerStarComp along Δ,f, followed by the equality Δ≫f=id and lowerStarId. SupportedSource is the NormalizedSource record with this predicate, actual completed coefficient unit, actual completed supported source and the specified right derived direct image. These are the existing definitions moved verbatim to an importable interface module.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), specified product projections and ordinary supported-source normalization"
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-trace-models",
+  "def-sfb-diagonal-normalized-source",
+  "def-sfb-diagonal-trace-presentation"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "adapted",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), specified product projections and ordinary supported-source normalization",
+  "by": "E7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "projective line completed trace and integral of the diagonal is identity",
+   "results": "8 hits: normalized algebra traces and linear-map traces, with no sheaf-theoretic projective-line trace.",
+   "date": "2026-10-23",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.singleFunctor",
+   "results": "12 hits including the full and faithful singleFunctor instances and the exact single-object comparison.",
+   "date": "2026-10-23",
+   "verdict": "Use the Mathlib full and faithful instances to prove degree-zero detection."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategorySingleFunctor|mapBiprod_inv_map_desc",
+   "results": "12 hits, including the exact single-object comparison in ExactFunctor.lean and the biproduct comparison lemma in Limits/Preserves/Shapes/Biproducts.lean.",
+   "date": "2026-10-23",
+   "verdict": "These prove categorical assembly but do not construct the geometric presentation."
+  },
+  {
+   "tool": "rg",
+   "query": "TowerClasses|DiagonalTrace.(Result|Presentation)|SupportedSource|IsIntegration in lean/Sheaf and lean/WeilConjectures",
+   "results": "TowerClasses and the trace presentation are records; no theorem supplies their inhabitants. Existing trace matches are definitions and consumers.",
+   "date": "2026-10-23",
+   "verdict": "The geometric existence step is separate from categorical assembly."
+  },
+  {
+   "tool": "blueprint_refs.py",
+   "query": "normalized trace presentation; completed trace; degree-zero system endomorphism",
+   "results": "0 blueprint nodes for all three searches.",
+   "date": "2026-10-23",
+   "verdict": "No exact smaller blueprint statement; retain the parent trace route."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact evaluation of inverse systems detects equality of morphisms between single objects in derived category",
+   "results": "8 hits including HasDerivedCategory.standard and DerivedCategory.singleFunctorsPostcompQIso_inv_hom; no exact tower detection theorem. See the recorded searches.jsonl entry at 2026-10-23T13:37:07Z.",
+   "date": "2026-10-23",
+   "verdict": "Use Mathlib full and faithful singleFunctor and prove the tower detection argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTowerTrace",
+  "date": "2026-10-23",
+  "group": "E7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (2), specified product projections and ordinary supported-source normalization",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceSources",
+  "file": "lean/Sheaf/Paper/DiagonalTraceSources.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.SupportedSource",
+  "statement": "abbrev SupportedSource (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})\n    [HasDerivedCategory.{u + 1} (DiagonalCompleted l (ProjectiveLine Y))]\n    [HasDerivedCategory.{u + 1} (DiagonalCompleted l (diagonalSurface Y))]\n    (f : diagonalSurface Y ⟶ ProjectiveLine Y)\n    [(diagonalTracePush l f).Additive]\n    (R : DiagonalRightDerived (diagonalTracePush l f))",
+  "branch": "sheaf-dag",
+  "by": "E7",
+  "date": "2026-10-23",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.diagonalTraceFirstModel",
+   "AlgebraicGeometry.ProEtale.diagonalTraceSecondModel",
+   "AlgebraicGeometry.ProEtale.DiagonalTrace.IsIntegration",
+   "AlgebraicGeometry.ProEtale.DiagonalTrace.supportedSourceNormalization",
+   "AlgebraicGeometry.ProEtale.DiagonalTrace.SupportedSource"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-beeda",
+  "group": "E7",
+  "result": "fix",
+  "landing": "20261023T231004-L-3527995",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-beeda",
+  "group": "E7",
+  "result": "fix",
+  "landing": "20261023T231004-L-3527995",
+  "kind": "interface",
+  "note": "independent cc review: item diagonalTower_trace (signature byte-identical to live) and 7 moved defs (byte-identical block now in DiagonalTraceSources, re-exported) against live clone; new sorry statements against det-prop-diagonal-tower-trace clauses 1-2 and the Result/Presentation/Twisting/Coefficients pinning; direct importers DiagonalCoefficientCategory and DiagonalTowerCoefficients compiled against the delivered modules; #print axioms clean apart from expected sorryAx"
+ }
+}

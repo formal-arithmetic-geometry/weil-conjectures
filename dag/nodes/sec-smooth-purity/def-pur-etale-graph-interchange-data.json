@@ -1,0 +1,231 @@
+{
+ "id": "def-pur-etale-graph-interchange-data",
+ "kind": "definition",
+ "title": "Explicit interchange diagrams and their normalized exchange words",
+ "statement": "Fix a finite commutative ring A. A supplied diagram of f:X→Y and g:Y→Z consists of schemes W,V,P,T and maps a:X→W proper, e:W→V open, r:V→Y proper, k:V→P open, p:P→T proper, i:Y→T open and q:T→Z proper, with a e r=f, i q=g and k p=r i [def-pur-etale-graph-presentation-maps, lem-pur-etale-proper-open-exchange-cube]. Its source, middle and composite presentations are (a,e,r), (id,i,q) and (a,e k,p q). For a proper/open/proper presentation H=(a,e,p), proper a' and open v with a' v=a, shrink(H,a',v)=(a',v e,p). The elementary shrinking isomorphism is the inverse identity-top proper/open exchange from R_a to R_a' J_v, followed by the open compositor under R_p. The diagram interchange is R_a J_e Γ_(k,r,p,i) R_q, after removal of the middle R_id and with canonical open and proper compositors. Γ is the same family chosen with its support and K-injective normalization from the cube theorem, not an arbitrary endpoint isomorphism. All these definitions are moved unchanged from the original interchange module.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7J (lemma-shriek-composition), independence-of-choices part of the proof and the final comparison of diagrams A-F. Agent-stated product-graph extension: unlike the source compatible-tower comparisons, this assertion identifies the concrete graph comparisons for arbitrary proper/open/proper presentations. Elementary presentation move compared with upstream LowerShriekComposition.lean, rightDerivedLowerStarCompOpenImmersionLowerShriekIso and the eh factor in nonempty_iso_rightDerivedLowerShriek_comp. This is a new obligation, not a theorem claimed to be proved by that Lean existence declaration."
+ },
+ "stmt_deps": [
+  "def-pur-etale-graph-presentation-maps",
+  "lem-pur-etale-proper-open-exchange-cube",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-cbc-extension-zero-composition"
+ ],
+ "proof": [
+  {
+   "text": "Keep all supplied geometric arrows and factorization equations as record data. Define every word by the same explicit associators, exchange maps, and proper/open compositors as before the separation of definitions and proof.",
+   "uses": [
+    "def-pur-etale-graph-presentation-maps",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-cbc-extension-zero-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J (lemma-shriek-composition), independence-of-choices part of the proof and the final comparison of diagrams A-F. Agent-stated product-graph extension: unlike the source compatible-tower comparisons, this assertion identifies the concrete graph comparisons for arbitrary proper/open/proper presentations. Elementary presentation move compared with upstream LowerShriekComposition.lean, rightDerivedLowerStarCompOpenImmersionLowerShriekIso and the eh factor in nonempty_iso_rightDerivedLowerShriek_comp. This is a new obligation, not a theorem claimed to be proved by that Lean existence declaration."
+   }
+  },
+  {
+   "text": "Choose the normalized comparison family from the cube theorem. Its support and representative normalization determines the maps. Every other definition is the supplied diagram or the stated explicit composition word.",
+   "uses": [
+    "lem-pur-etale-proper-open-exchange-cube"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J (lemma-shriek-composition), independence-of-choices part of the proof and the final comparison of diagrams A-F. Agent-stated product-graph extension: unlike the source compatible-tower comparisons, this assertion identifies the concrete graph comparisons for arbitrary proper/open/proper presentations. Elementary presentation move compared with upstream LowerShriekComposition.lean, rightDerivedLowerStarCompOpenImmersionLowerShriekIso and the eh factor in nonempty_iso_rightDerivedLowerShriek_comp. This is a new obligation, not a theorem claimed to be proved by that Lean existence declaration."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-etale-graph-presentation-maps",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-cbc-extension-zero-composition",
+  "lem-pur-etale-proper-open-exchange-cube"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7J. Definitions depend on the presentation interface, not on the graph-comparison coherence theorem; dependency-only correction by D5, 2026-10-26."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Proper maps to graph neighborhoods and inverse triangle interchange are compatible with shrinking the supporting open immersion",
+   "results": "IsProper.instMorphismRestrict; Scheme.Hom.app_appIso_inv; sheafed-space open-immersion inverse formulas; proper-map restrictions. None states the derived graph pasting equality.",
+   "date": "2026-10-24",
+   "verdict": "No match for the graph construction or its specified derived maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "product graph grid row boundary proper open exchange",
+   "results": "Combinatorial graph and Young-diagram results, not scheme graph comparisons.",
+   "date": "2026-10-24",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullback.map\"",
+   "results": "pullback.mapDesc, pullback.map, pullback.map_comp, pullback.map_id, IsPullback.map_fst_comp_fst_snd_comp_fst. Used the pullback-map API for geometry; no derived word equality.",
+   "date": "2026-10-24",
+   "verdict": "Geometry API applies to the projection steps; it does not state the complete assertions."
+  },
+  {
+   "tool": "grep",
+   "query": "graphNeighborhoodShrink|graphSide₂|productInterchange|productBV",
+   "results": "No Mathlib declarations with these graph-neighborhood or derived product-boundary constructions.",
+   "date": "2026-10-24",
+   "verdict": "No match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleGraphComparisonInterchange",
+  "date": "2026-10-24",
+  "group": "V1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "prop-asd-smooth-base-change.proof.md, coherences (i) and (iii): the specified compactification exchange, its restriction to a base chart, and the composition comparison used before transposition; detailed compositor argument in sk-thm-sf-comp-composition and sk-prop-sf-pf-coherence. Missing comparison/interchange square when changing the graph presentations; Stacks 0F7J independence-of-choices argument.",
+   "via": [
+    "lem-pur-etale-graph-comparison-interchange",
+    "lem-route-exists-right-derived-lower-shriek-comp-iso",
+    "lem-asd-exceptional-base-change-affine-locality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleGraphInterchangeData",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGraphInterchangeData.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleGraphDiagramInterchange",
+  "declarations": [
+   "AlgebraicGeometry.Etale.etaleGraphNormalizedProperOpenExchange",
+   "AlgebraicGeometry.Etale.EtaleGraphPresentation.shrink",
+   "AlgebraicGeometry.Etale.etaleGraphShrinkInterchange",
+   "AlgebraicGeometry.Etale.EtaleGraphInterchangeDiagram",
+   "AlgebraicGeometry.Etale.EtaleGraphInterchangeDiagram.sourcePresentation",
+   "AlgebraicGeometry.Etale.EtaleGraphInterchangeDiagram.compactification",
+   "AlgebraicGeometry.Etale.EtaleGraphInterchangeDiagram.compositePresentation",
+   "AlgebraicGeometry.Etale.etaleGraphDiagramInterchange"
+  ],
+  "statement": "def etaleGraphDiagramInterchange (A : Type (u + 1)) [CommRing A] [Finite A] {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z} (d : EtaleGraphInterchangeDiagram f g) : d.sourcePresentation.functor A ⋙ (EtaleGraphPresentation.ofCompactification d.compactification).functor A ≅ d.compositePresentation.functor A",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-b198d",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261024T020820-L-2671853",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-30889",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261026T081423-L-1954771",
+  "kind": "interface",
+  "note": "independent cc review: item theorem vs clone signature (byte-identical); InterchangeData/SfGraphCompactSupportCompositionBaseChange edits vs clone (import swap forced by cycle InterchangeData→BaseChange→Pairwise→OpenShrink; proof-only private edits); node JSONs vs Lean; SfGraphInterchangeProjection failure reproduced against published build (pre-existing)"
+ },
+ "statement_change": {
+  "date": "2026-10-26",
+  "by": "D5 stage 3",
+  "old_statement": "Fix a finite commutative ring A. A supplied diagram of f:X→Y and g:Y→Z consists of schemes W,V,P,T and maps a:X→W proper, e:W→V open, r:V→Y proper, k:V→P open, p:P→T proper, i:Y→T open and q:T→Z proper, with a e r=f, i q=g and k p=r i [lem-pur-etale-graph-comparison-base-change, lem-pur-etale-proper-open-exchange-cube]. Its source, middle and composite presentations are (a,e,r), (id,i,q) and (a,e k,p q). For a proper/open/proper presentation H=(a,e,p), proper a' and open v with a' v=a, shrink(H,a',v)=(a',v e,p). The elementary shrinking isomorphism is the inverse identity-top proper/open exchange from R_a to R_a' J_v, followed by the open compositor under R_p. The diagram interchange is R_a J_e Γ_(k,r,p,i) R_q, after removal of the middle R_id and with canonical open and proper compositors. Γ is the same family chosen with its support and K-injective normalization from the cube theorem, not an arbitrary endpoint isomorphism. All these definitions are moved unchanged from the original interchange module.",
+  "old_stmt_deps": [
+   "lem-pur-etale-graph-comparison-base-change",
+   "lem-pur-etale-proper-open-exchange-cube",
+   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+   "lem-cbc-extension-zero-composition"
+  ],
+  "old_proof": [
+   {
+    "text": "Keep all supplied geometric arrows and factorization equations as record data. Define every word by the same explicit associators, exchange maps, and proper/open compositors as before the separation of definitions and proof.",
+    "uses": [
+     "lem-pur-etale-graph-comparison-base-change",
+     "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+     "lem-cbc-extension-zero-composition"
+    ],
+    "elementary": true,
+    "source": {
+     "document": "literature/stacks-project/more-etale.tex",
+     "place": "Tag 0F7J (lemma-shriek-composition), independence-of-choices part of the proof and the final comparison of diagrams A-F. Agent-stated product-graph extension: unlike the source compatible-tower comparisons, this assertion identifies the concrete graph comparisons for arbitrary proper/open/proper presentations. Elementary presentation move compared with upstream LowerShriekComposition.lean, rightDerivedLowerStarCompOpenImmersionLowerShriekIso and the eh factor in nonempty_iso_rightDerivedLowerShriek_comp. This is a new obligation, not a theorem claimed to be proved by that Lean existence declaration."
+    }
+   },
+   {
+    "text": "Choose the normalized comparison family from the cube theorem. Its support and representative normalization determines the maps. Every other definition is the supplied diagram or the stated explicit composition word.",
+    "uses": [
+     "lem-pur-etale-proper-open-exchange-cube"
+    ],
+    "elementary": true,
+    "source": {
+     "document": "literature/stacks-project/more-etale.tex",
+     "place": "Tag 0F7J (lemma-shriek-composition), independence-of-choices part of the proof and the final comparison of diagrams A-F. Agent-stated product-graph extension: unlike the source compatible-tower comparisons, this assertion identifies the concrete graph comparisons for arbitrary proper/open/proper presentations. Elementary presentation move compared with upstream LowerShriekComposition.lean, rightDerivedLowerStarCompOpenImmersionLowerShriekIso and the eh factor in nonempty_iso_rightDerivedLowerShriek_comp. This is a new obligation, not a theorem claimed to be proved by that Lean existence declaration."
+    }
+   }
+  ],
+  "old_proof_deps": [
+   "lem-pur-etale-graph-comparison-base-change",
+   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+   "lem-cbc-extension-zero-composition",
+   "lem-pur-etale-proper-open-exchange-cube"
+  ],
+  "what": "Dependency-only interface repair: substitute the existing presentation definition node for the theorem that depends on open-shrink. No mathematical or Lean signature changes. All definition bodies remain verbatim.",
+  "source": {
+   "document": "literature/stacks-project/more-etale.tex",
+   "place": "Tag 0F7J (lemma-shriek-composition), independence-of-choices part of the proof and the final comparison of diagrams A-F. Agent-stated product-graph extension: unlike the source compatible-tower comparisons, this assertion identifies the concrete graph comparisons for arbitrary proper/open/proper presentations. Elementary presentation move compared with upstream LowerShriekComposition.lean, rightDerivedLowerStarCompOpenImmersionLowerShriekIso and the eh factor in nonempty_iso_rightDerivedLowerShriek_comp. This is a new obligation, not a theorem claimed to be proved by that Lean existence declaration."
+  },
+  "citers": [
+   {
+    "id": "lem-pur-etale-graph-product-geometry",
+    "holds": true,
+    "note": "Every definition and declaration remains verbatim. Only the public import of the coherence theorem is replaced by its existing definition interface."
+   },
+   {
+    "id": "lem-pur-etale-graph-comparison-interchange",
+    "holds": true,
+    "note": "Every definition and declaration remains verbatim. Only the public import of the coherence theorem is replaced by its existing definition interface."
+   },
+   {
+    "id": "lem-pur-etale-graph-shrink-side-pasting",
+    "holds": true,
+    "note": "Every definition and declaration remains verbatim. Only the public import of the coherence theorem is replaced by its existing definition interface."
+   },
+   {
+    "id": "lem-pur-etale-graph-product-row-pasting",
+    "holds": true,
+    "note": "Every definition and declaration remains verbatim. Only the public import of the coherence theorem is replaced by its existing definition interface."
+   },
+   {
+    "id": "lem-pur-etale-graph-shrink-middle-pasting",
+    "holds": true,
+    "note": "Every definition and declaration remains verbatim. Only the public import of the coherence theorem is replaced by its existing definition interface."
+   },
+   {
+    "id": "lem-pur-etale-graph-neighborhood-geometry",
+    "holds": true,
+    "note": "Every definition and declaration remains verbatim. Only the public import of the coherence theorem is replaced by its existing definition interface."
+   },
+   {
+    "id": "def-pur-etale-graph-product-interchange",
+    "holds": true,
+    "note": "Every definition and declaration remains verbatim. Only the public import of the coherence theorem is replaced by its existing definition interface."
+   }
+  ]
+ }
+}

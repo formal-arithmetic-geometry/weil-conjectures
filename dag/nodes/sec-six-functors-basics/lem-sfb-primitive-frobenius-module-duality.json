@@ -1,0 +1,293 @@
+{
+ "id": "lem-sfb-primitive-frobenius-module-duality",
+ "kind": "statement",
+ "title": "Primitive-function reconstruction for closed subgroups of vector groups",
+ "statement": "Let $k$ be a field [def-weil-field] of characteristic $p>0$, and put $\\sigma(c)=c^p$. Define $A=k_\\sigma[F]$ to be the ring of finite sums $\\sum_i c_iF^i$, with coefficientwise addition and multiplication $(cF^i)(bF^j)=c\\,b^{p^i}F^{i+j}$. For a commutative $k$-algebra $R$, give its additive group the left $A$-module structure $c\\cdot x=cx$ and $F\\cdot x=x^p$. For a finitely generated left $A$-module $M$ [def-weil-finitely-generated-module], let $U(M)$ be the functor on commutative $k$-algebras with values $U(M)(R)=\\operatorname{Hom}_A(M,R)$, with pointwise addition. This functor is represented by an affine commutative $k$-group scheme [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], admitting a closed embedding into some finite power of $\\mathbf G_a$ [def-sc-gm-ga, def-sc-group-scheme-subgroup]. For every affine $k$-group scheme $G$ of finite type admitting such a closed embedding, put $P(G)=\\operatorname{Hom}_{k\\text{-groups}}(G,\\mathbf G_a)$; addition is pointwise, $c\\cdot f$ is multiplication of $f$ by $c$, and $F\\cdot f$ is the composite of $f$ with $x\\mapsto x^p$. Then $P(G)$ is a finitely generated left $A$-module and evaluation gives an isomorphism of $k$-group schemes $G\\xrightarrow{\\sim}U(P(G))$, whose value on every $R$ sends $g\\in G(R)$ to $(f\\mapsto f_R(g))$. Here $\\mathbf G_a(R)=(R,+)$, and $\\operatorname{Hom}_A$ means additive maps respecting the displayed $A$-actions.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 14.46, printed p.295, with Proposition 14.41, Remark 14.42, Lemmas 14.43-14.44, printed pp.293-294, and equation (98). The represented functor is the universal U of Proposition 14.41."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-finitely-generated-module",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-gm-ga",
+  "def-sc-group-scheme-subgroup",
+  "def-sfb-frobenius-primitive-module-data"
+ ],
+ "proof": [
+  {
+   "text": "For an affine group $G=\\operatorname{Spec}C$, identify a morphism $f:G\\to\\mathbf G_a$ with $a=f^*(t)\\in C$. By the coordinate Hopf identities and $\\Delta(t)=t\\otimes1+1\\otimes t$, it is a group homomorphism exactly when $\\Delta_C(a)=a\\otimes1+1\\otimes a$. This equation forces $\\epsilon_C(a)=0$ and $S_C(a)=-a$ by applying the counit and antipode identities. Thus $P(G)$ is precisely this linear space of primitive elements. Frobenius additivity shows that $a\\mapsto a^p$ preserves it and satisfies $F(ca)=c^pF(a)$. The rule $(cF^i)a=ca^{p^i}$ gives the stated left $A$-action, since composition of these operators has the displayed skew multiplication.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-sc-gm-ga",
+    "lem-sfb-affine-group-coordinate-hopf",
+    "def-weil-ring-frobenius"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 14(e), equations (96)--(97), printed pp.292--293."
+   }
+  },
+  {
+   "text": "For any left $A$-module $V$, not yet assumed finitely generated, put $T(v)=Fv$ and construct $B(V,T)$ and $j$ as in the basis node. The symmetric-algebra universal property followed by the quotient property gives, naturally for every commutative $k$-algebra $R$, a bijection\n$$\\operatorname{Hom}_{k\\text{-alg}}(B(V,T),R)=\\{h:V\\to R\\text{ linear}:h(Tv)=h(v)^p\\}=\\operatorname{Hom}_A(V,R).$$\nIndeed both sides send $j(v)$ to $h(v)$; respecting $k$ and $F$ is exactly respecting every finite sum in $A$. This also proves uniqueness of all algebra maps out of $B(V,T)$ from their values on $j(V)$.",
+   "uses": [
+    "lem-sfb-semilinear-restricted-symmetric-basis",
+    "lem-weil-pbc-symmetric-algebra-universal-property",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.41, printed p.293, using the abelian form of the construction on p.207."
+   }
+  },
+  {
+   "text": "Define algebra maps on $B=B(V,T)$ by\n$$\\Delta(jv)=jv\\otimes1+1\\otimes jv,\\qquad\\epsilon(jv)=0,\\qquad S(jv)=-jv.$$\nThey exist by step 2: for $\\Delta$ the $p$th-power equation is $(jv\\otimes1+1\\otimes jv)^p=j(Tv)\\otimes1+1\\otimes j(Tv)$; the other two equations are immediate, including $p=2$. The tensor-product algebra structure is the cited one. Coassociativity, the two counit identities, the two antipode identities and symmetry of $\\Delta$ hold on each $jv$, hence on $B$ by uniqueness in step 2. The Hopf-spectrum functor therefore supplies an affine commutative group $\\operatorname{Spec}B$ representing the functor in step 2. The displayed comultiplication induces pointwise addition on $\\operatorname{Hom}_A(V,R)$.",
+   "uses": [
+    "def-weil-ring-frobenius",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-sfb-hopf-spectrum-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.41 and Remark 14.42, printed pp.293--294; Hopf identities spelled out from the construction."
+   }
+  },
+  {
+   "text": "If $M$ has $A$-generators $m_1,\\ldots,m_r$, every $j(m)$ is a linear combination of $j(F^im_s)=j(m_s)^{p^i}$. Since $B(M,F)$ is generated by $j(M)$, it is generated as a $k$-algebra by the finite list $j(m_s)$. Hence it is a quotient of $k[t_1,\\ldots,t_r]$, and its spectrum is a closed subscheme of $\\mathbf G_a^r$. This is a group embedding because each coordinate $j(m_s)$ is primitive. The finite affine polynomial presentation makes its structure morphism finite type directly from the finite-affine-cover definition. This proves all the representability, commutativity, finite-type and embedding assertions for $U(M)$, including $M=0$ and $r=0$.",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-closed-immersion",
+    "def-weil-finite-type-morphism",
+    "def-sc-gm-ga"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark 14.42, printed p.294; explicit finite-generation calculation."
+   }
+  },
+  {
+   "text": "Choose a $k$-basis $(e_i)$ of $V$. The basis node gives linearly independent monomials $b_a=\\prod j(e_i)^{a_i}$ with $0\\le a_i<p$. Multiplicativity of $\\Delta$ gives\n$$\\Delta(b_a)=\\sum_{r+s=a}\\left(\\prod_i\\binom{a_i}{r_i}\\right)b_r\\otimes b_s.$$\nFor every $a$ with $\\sum a_i\\ge2$, choose $i$ with $a_i>0$ and split $a=\\delta_i+(a-\\delta_i)$. Both terms are nonzero, and the coefficient of $b_{\\delta_i}\\otimes b_{a-\\delta_i}$ in a linear combination's reduced coproduct is exactly $a_i$ times its $b_a$ coefficient: no other monomial can contribute to this tensor. Since $1\\le a_i<p$, it is nonzero in $k$. Thus every primitive is in $j(V)$; its constant coefficient is zero by the counit. Conversely all $j(v)$ are primitive. Therefore $j$ identifies $V$ with the primitive space of $B(V,T)$. The subspaces spanned by $b_a$ with $\\sum a_i\\le n$ are exhaustive, start with $k1$, and satisfy the coalgebra filtration condition, by the same formula.",
+   "uses": [
+    "lem-sfb-semilinear-restricted-symmetric-basis",
+    "lem-weil-pbc-vector-space-free"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 14.43, printed p.294; ordinary monomials instead of divided monomials give the same coefficient test."
+   }
+  },
+  {
+   "text": "Let $C$ be a commutative Hopf $k$-algebra and let $V\\subseteq C$ be a linear subspace of primitive elements stable under $p$th powers. Step 2 extends the inclusion to an algebra map $q:B(V,F)\\to C$. The formulas on generators show that it commutes with comultiplication and counit. If it were not injective, the connected-filtered-coalgebra kernel lemma, applied to the filtration in step 5 with distinguished element $1$, would give a nonzero primitive element in its kernel. Step 5 says this element is $j(v)$, and then $q(j(v))=v$ forces $v=0$, a contradiction to injectivity of $j$. Thus $q$ is injective. Notice that neither $V$ nor $C$ needs a finite-generation assumption here.",
+   "uses": [
+    "lem-sfb-connected-filtered-coalgebra-kernel-primitive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent algebraic kernel argument from Lemma 14.43, printed p.294, replacing the quotient-map detour of Lemma 14.44."
+   }
+  },
+  {
+   "text": "Now fix a closed group embedding $G\\hookrightarrow\\mathbf G_a^r$ and write $C=k[G]$. The coordinate map $k[t_1,\\ldots,t_r]\\twoheadrightarrow C$ is surjective; let $x_s$ be the images of the coordinates. They are primitive by step 1. Let $N$ be their left $A$-span inside $P(G)\\subseteq C$. Then $N$ is generated by $x_1,\\ldots,x_r$ as an $A$-module. Step 6 makes $q:B(N,F)\\to C$ injective; it is also surjective since the $x_s$ generate $C$ as an algebra. This algebra isomorphism respects the Hopf maps, so it identifies their primitive spaces. Step 5 identifies the primitive space of $B(N,F)$ with $N$, and $q$ is the inclusion on $N$. Consequently $P(G)=N$, proving finite generation without presupposing it for the construction of $B(P(G),F)$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-sc-gm-ga"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 14.46, printed p.295; explicit finite-generation argument using the primitive calculation of Lemma 14.43."
+   }
+  },
+  {
+   "text": "Since $P(G)=N$, the isomorphism of step 7 is exactly the map $B(P(G),F)\\to C$ sending $j(f)$ to the coordinate function $f$. Taking spectra gives $G\\simeq U(P(G))$. For any commutative $k$-algebra $R$, a point $g:C\\to R$ is sent to the $A$-linear map $f\\mapsto g(f)=f_R(g)$. The formula is natural in $R$, and preserves addition since every $f$ is a group homomorphism. It is therefore the asserted evaluation isomorphism with its specified value on all $R$-points, including nonreduced algebras.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 14.46, printed p.295, with the adjunction (98) and its evaluation map."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-sc-gm-ga",
+  "lem-sfb-affine-group-coordinate-hopf",
+  "def-weil-ring-frobenius",
+  "lem-sfb-semilinear-restricted-symmetric-basis",
+  "lem-weil-pbc-symmetric-algebra-universal-property",
+  "def-weil-pbc-algebra-hom-quotient",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-sfb-hopf-spectrum-functor",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-vector-space-free",
+  "lem-sfb-connected-filtered-coalgebra-kernel-primitive"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 14.41, Remark 14.42, Lemma 14.43 and Theorem 14.46, printed pp.293--295. Agent supplies an algebraic connected-filtration kernel proof instead of Lemma 14.44 and makes finite generation explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Primitive functions give an anti equivalence between closed subgroup schemes of vector groups and finitely generated modules over the Frobenius skew polynomial ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"InfiniteGalois.IntermediateFieldEquivClosedSubgroup\", \"module\": \"Mathlib/FieldTheory/Galois/Infinite\", \"type\": \"{k : Type u_1} →\\n  {K : Type u_2} →\\n    [inst : Field k] →\\n      [inst_1 : Field K] →\\n        [inst_2 : Algebra k K] → [IsGalois k K] → IntermediateField k K ≃o (ClosedSubgroup Gal(K/k))ᵒᵈ\", \"doc\": \"The order-reversing bijection between intermediate fields of a Galois extension $K/k$ and closed subgroups of the Galois group $\\\\text{Gal}(K/k)$, where each intermediate field $L$ corresponds to its f\"}\n  {\"name\": \"FGModuleRepr.instIsEquivalenceFGModuleCatEmbed\", \"module\": \"Mathlib/Algebra/Category/FGModuleCat/EssentiallySmall\", \"type\": \"∀ (R : Type u) [inst : CommRing R], (FGModuleRepr.embed R).IsEquivalence\", \"doc\": \"The functor embedding finitely generated modules represented as quotient modules $ R^n/S $ into the category of finitely generated left $ R $-modules is an equivalence of categories. This means every \"}\n  {\"name\": \"FiniteField.frobeniusAlgEquiv_symm_apply\", \"module\": \"Mathlib/FieldTheory/Finite/Basic\", \"type\": \"∀ (K : Type u_1) (R : Type u_2) [inst : Field K] [inst_1 : Fintype K] [inst_2 : CommRing R] [inst_3 : Algebra K R]\\n  (p : ℕ) [inst_4 : ExpChar R p] [inst_5 : PerfectRing R p] (b : R),\\n  (FiniteField.frobeniusAlgEquiv K R p).symm b = Function.surjInv ⋯ b\", \"doc\": \"For a finite field $ K $ with cardinality $ \\\\#K $, a commutative ring $ R $ equipped with an $ K $-algebra structure, and a prime $ p $ such that $ R $ has exponential characteristic $ p $ and is a pe\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ (n : Type v) (S : AlgebraicGeometry.Scheme) [inst : AlgebraicGeometry.IsAffine S],\\n  (AlgebraicGeometry.AffineSpace.isoOfIsAffine n S).inv =\\n    AlgebraicGeometry.AffineSpace.homOfVector\\n      (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map (CommRingCat.ofHom MvPolynomial.C)) S.iso\", \"doc\": \"For an affine scheme $ S $ and a type $ n $, the inverse of the canonical isomorphism between the affine space $ \\\\mathbb{A}^n_S $ and the spectrum of the polynomial ring over the global sections of $ \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_apply\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ (n : Type v) {X : AlgebraicGeometry.Scheme}\\n  (f :\\n    X ⟶\\n      AlgebraicGeometry.Spec\\n        { carrier := MvPolynomial n (ULift.{u, 0} ℤ), commRing := MvPolynomial.instCommRingMvPolynomial })\\n  (i : n),\\n  (AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv n) f i =\\n    (CategoryTheory.ConcreteC\", \"doc\": \"For any scheme $X$ and index set $n$, there is a natural bijection between the set of morphisms from $X$ to the affine space $\\\\mathbb{A}^n_\\\\mathbb{Z}$ (realized as $\\\\operatorname{Spec}(\\\\mathbb{Z}[x_1,\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_symm_apply\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ (n : Type v) {X : AlgebraicGeometry.Scheme} (v : n → ↑(X.presheaf.obj (Opposite.op ⊤))),\\n  (AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv n).symm v =\\n    CategoryTheory.CategoryStruct.comp X.toSpecΓ\\n      (AlgebraicGeometry.Spec.map\\n        (CommRingCat.ofHom\\n          (MvPolynomial.eval₂Hom \", \"doc\": \"The inverse of the natural equivalence between morphisms from a scheme $ X $ to the affine space $ \\\\mathbb{A}^n_\\\\mathbb{Z} $ (realized as $ \\\\operatorname{Spec}(\\\\mathbb{Z}[x_1, \\\\dots, x_n]) $) and $ n \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.homOverEquiv_symm_apply_coe\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) {X : AlgebraicGeometry.Scheme} [inst : X.Over S]\\n  (v : n → ↑(X.presheaf.obj (Opposite.op ⊤))),\\n  ↑((AlgebraicGeometry.AffineSpace.homOverEquiv S).symm v) = AlgebraicGeometry.AffineSpace.homOfVector (X ↘ S) v\", \"doc\": \"For any scheme $ X $ over $ S $ and any $ n $-tuple $ v $ of global sections of the structure sheaf of $ X $, the morphism obtained by applying the inverse of the natural equivalence between morphisms\"}\n  {\"name\": \"FiniteField.frobeniusAlgEquivOfAlgebraic_symm_apply\", \"module\": \"Mathlib/FieldTheory/Finite/Basic\", \"type\": \"∀ (K : Type u_1) [inst : Field K] [inst_1 : Fintype K] (L : Type u_3) [inst_2 : Field L] [inst_3 : Algebra K L]\\n  [inst_4 : Algebra.IsAlgebraic K L] (b : L),\\n  (FiniteField.frobeniusAlgEquivOfAlgebraic K L).symm b = Function.surjInv ⋯ b\", \"doc\": \"For a finite field $ K $ and an algebraic field extension $ L/K $, the inverse of the Frobenius automorphism $ \\\\text{Frob} \\\\in \\\\text{Gal}(L/K) $ applied to an element $ b \\\\in L $ returns a preimage of\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Hopf algebra constructions, affine-space points, Galois correspondence and ordinary Frobenius maps do not reconstruct group schemes from their primitive-function modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HopfAlgebra\", \"primitive\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: Hopf algebra constructions, affine-space points, Galois correspondence and ordinary Frobenius maps do not reconstruct group schemes from their primitive-function modules."
+  },
+  {
+   "tool": "grep",
+   "query": "primitive|skew.polynomial",
+   "results": "[grep] OK 0 hit(s) Directory Mathlib/RingTheory/HopfAlgebra",
+   "date": "2026-10-24",
+   "verdict": "no match: Hopf algebra constructions, affine-space points, Galois correspondence and ordinary Frobenius maps do not reconstruct group schemes from their primitive-function modules."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An elementary unipotent group scheme is recovered from its primitive functions with Frobenius action",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"FiniteField.Extension.frob\", \"module\": \"Mathlib.FieldTheory.Finite.Extension\", \"type\": \": Gal(Extension k p n/k)\", \"doc\": \"The Frobenius automorphism of the finite field extension $ L/k $, defined by raising elements to the power of the characteristic $ p $ of the base field $ k $, viewed as an element of the Galois group\"}\n  {\"name\": \"coe_frobeniusEquiv\", \"module\": \"Mathlib.FieldTheory.Perfect\", \"type\": \": ⇑(frobeniusEquiv R p) = frobenius R p\", \"doc\": \"For a perfect ring $ R $ of characteristic $ p $, the underlying function of the Frobenius ring equivalence $ \\\\text{frobeniusEquiv}(R, p) $ coincides with the Frobenius endomorphism $ \\\\text{frobenius}\"}\n  {\"name\": \"frobenius_inj\", \"module\": \"Mathlib.Algebra.CharP.Reduced\", \"type\": \": Function.Injective (frobenius R p)\", \"doc\": \"The Frobenius endomorphism on a commutative semiring of characteristic $ p $, which maps each element $ x $ to $ x^p $, is injective.\"}\n  {\"name\": \"injective_frobenius\", \"module\": \"Mathlib.FieldTheory.Perfect\", \"type\": \": Injective (frobenius R p)\", \"doc\": \"The Frobenius endomorphism on a commutative semiring $ R $ with exponential characteristic $ p $ is injective, meaning that if $ x^p = y^p $ for elements $ x, y \\\\in R $, then $ x = y $.\"}\n  {\"name\": \"MulAction.is_one_preprimitive_iff\", \"module\": \"Mathlib.GroupTheory.GroupAction.MultiplePrimitivity\", \"type\": \": IsMultiplyPreprimitive M α 1 ↔ IsPreprimitive M α\", \"doc\": \"A group action is $1$-multiply preprimitive if and only if it is preprimitive, i.e., $\\\\text{IsMultiplyPreprimitive}\\\\, M\\\\, \\\\alpha\\\\, 1 \\\\leftrightarrow \\\\text{IsPreprimitive}\\\\, M\\\\, \\\\alpha$.\"}\n  {\"name\": \"WittVector.frobeniusFun_isPoly\", \"module\": \"Mathlib.RingTheory.WittVector.Frobenius\", \"type\": \": IsPoly p fun R _ Rcr => @frobeniusFun p R _ Rcr\", \"doc\": \"For a prime number $ p $, the Frobenius endomorphism on Witt vectors over a commutative ring $ R $ is a polynomial function. Specifically, each coefficient of the resulting Witt vector is obtained by \"}\n  {\"name\": \"IsPurelyInseparable.iterateFrobenius\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Exponent\", \"type\": \"{n : ℕ} (hn : exponent K L ≤ n) : L →+* K\", \"doc\": \"Given a purely inseparable field extension $ L/K $ with exponential characteristic $ p $ and exponent $ \\\\leq n $, this function defines the ring homomorphism $ L \\\\to K $ obtained by raising elements t\"}\n  {\"name\": \"AddChar.PrimitiveAddChar\", \"module\": \"Mathlib.NumberTheory.LegendreSymbol.AddCharacter\", \"type\": \"(R : Type u) → [CommRing R] → (R' : Type v) → [Field R'] → Type (max u v)\", \"doc\": \"A type representing additive characters from a commutative ring $ R $ to the multiplicative group of a field $ R' $, with primitivity conditions ensuring they do not factor through any proper subring \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Hopf algebra constructions, affine-space points, Galois correspondence and ordinary Frobenius maps do not reconstruct group schemes from their primitive-function modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restricted symmetric Hopf algebra of a semilinear Frobenius module represents the corresponding additive group scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AddMonoidAlgebra.instHopfAlgebra\", \"module\": \"Mathlib/RingTheory/HopfAlgebra/MonoidAlgebra\", \"type\": \"{R : Type u_1} →\\n  {A : Type u_2} →\\n    [inst : CommSemiring R] →\\n      [inst_1 : Semiring A] →\\n        [HopfAlgebra R A] → {G : Type u_3} → [inst_3 : AddGroup G] → HopfAlgebra R (AddMonoidAlgebra A G)\", \"doc\": \"Given a commutative semiring $ R $, a semiring $ A $ with a Hopf algebra structure over $ R $, and an additive group $ G $, this constructs a Hopf algebra structure on the additive monoid algebra $ A[\"}\n  {\"name\": \"AddMonoidAlgebra.instHopfAlgebraStruct\", \"module\": \"Mathlib/RingTheory/HopfAlgebra/MonoidAlgebra\", \"type\": \"(R : Type u_1) →\\n  (A : Type u_2) →\\n    [inst : CommSemiring R] →\\n      [inst_1 : Semiring A] →\\n        [HopfAlgebra R A] → (G : Type u_3) → [inst_3 : AddGroup G] → HopfAlgebraStruct R (AddMonoidAlgebra A G)\", \"doc\": \"Given a commutative semiring $ R $, a semiring $ A $ equipped with a Hopf algebra structure over $ R $, and an additive group $ G $, this constructs a Hopf algebra structure on the additive monoid alg\"}\n  {\"name\": \"CommSemiring.toHopfAlgebra\", \"module\": \"Mathlib/RingTheory/HopfAlgebra/Basic\", \"type\": \"(R : Type u) → [inst : CommSemiring R] → HopfAlgebra R R\", \"doc\": \"Every commutative semiring $ R $ admits a canonical Hopf algebra structure over itself, where the antipode map is the identity function. This structure is constructed by equipping $ R $ with its natur\"}\n  {\"name\": \"GroupLike.instGroup\", \"module\": \"Mathlib/RingTheory/HopfAlgebra/GroupLike\", \"type\": \"{R : Type u_1} →\\n  {A : Type u_2} → [inst : CommSemiring R] → [inst_1 : Semiring A] → [inst_2 : HopfAlgebra R A] → Group (GroupLike R A)\", \"doc\": \"For any commutative semiring $ R $ and semiring $ A $ equipped with a Hopf algebra structure over $ R $, the set of group-like elements in $ A $ forms a group under the multiplication operation inheri\"}\n  {\"name\": \"HopfAlgCat.carrier\", \"module\": \"Mathlib/Algebra/Category/HopfAlgCat/Basic\", \"type\": \"{R : Type u} → [inst : CommRing R] → HopfAlgCat R → Type v\", \"doc\": \"Given a commutative ring $R$ and a Hopf algebra in the category $\\\\text{HopfAlgCat}_R$, this function returns the underlying type of the Hopf algebra.\"}\n  {\"name\": \"GroupLike.instCommGroup\", \"module\": \"Mathlib/RingTheory/HopfAlgebra/GroupLike\", \"type\": \"{R : Type u_1} →\\n  {A : Type u_2} →\\n    [inst : CommSemiring R] → [inst_1 : CommSemiring A] → [inst_2 : HopfAlgebra R A] → CommGroup (GroupLike R A)\", \"doc\": \"For any commutative semiring $ R $ and semiring $ A $ equipped with a Hopf algebra structure over $ R $, the set of group-like elements in $ A $ forms a commutative group under the multiplication oper\"}\n  {\"name\": \"MonoidAlgebra.instHopfAlgebra\", \"module\": \"Mathlib/RingTheory/HopfAlgebra/MonoidAlgebra\", \"type\": \"{R : Type u_1} →\\n  {A : Type u_2} →\\n    [inst : CommSemiring R] →\\n      [inst_1 : Semiring A] →\\n        [HopfAlgebra R A] → {G : Type u_3} → [inst_3 : Group G] → HopfAlgebra R (MonoidAlgebra A G)\", \"doc\": \"Given a commutative semiring $ R $, a semiring $ A $ equipped with a Hopf algebra structure over $ R $, and a group $ G $, the monoid algebra $ A[G] $ admits a canonical Hopf algebra structure over $ \"}\n  {\"name\": \"HopfAlgCat\", \"module\": \"Mathlib/Algebra/Category/HopfAlgCat/Basic\", \"type\": \"(R : Type u) → [CommRing R] → Type (max u (v + 1))\", \"doc\": \"The category of Hopf algebras over a commutative ring $R$, with morphisms given by Hopf algebra homomorphisms.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Hopf algebra constructions, affine-space points, Galois correspondence and ordinary Frobenius maps do not reconstruct group schemes from their primitive-function modules."
+  },
+  {
+   "tool": "grep",
+   "query": "primitive|skew.polynomial",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space point coordinates, ordinary Hopf-algebra constructions and topological closed subgroups do not prove this primitive-function reconstruction theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HopfAlgebra\", \"primitive\"",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space point coordinates, ordinary Hopf-algebra constructions and topological closed subgroups do not prove this primitive-function reconstruction theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed subgroups of powers of the additive group correspond to finitely generated modules over the Frobenius skew polynomial ring",
+   "results": "8 hits; AddSubgroup.toIntSubmodule_closure, ClosedAddSubgroup, ClosedAddSubgroup.isClosed', ClosedSubgroup.ctorIdx, Submodule.fg_iff_add_subgroup_fg, ClosedSubgroup.mk, AddGroup.closure_finset_fg, ClosedAddSubgroup.instSetLike",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space point coordinates, ordinary Hopf-algebra constructions and topological closed subgroups do not prove this primitive-function reconstruction theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine group scheme embedded in a vector group is recovered from its primitive functions as a Frobenius module",
+   "results": "8 hits; AlgebraicGeometry.AffineSpace.homOfVector, AlgebraicGeometry.AffineSpace.homOverEquiv_symm_apply_coe, AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv, AlgebraicGeometry.AffineSpace.functor_obj_obj, AlgebraicGeometry.AffineSpace.coord, AlgebraicGeometry.AffineSpace.homOverEquiv, AlgebraicGeometry.AffineSpace.homOfVector_appTop_coord",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space point coordinates, ordinary Hopf-algebra constructions and topological closed subgroups do not prove this primitive-function reconstruction theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive group scheme of finite type is reconstructed by the restricted symmetric Hopf algebra of its primitive regular functions",
+   "results": "8 hits; AddMonoidAlgebra.instHopfAlgebraStruct, AddMonoidAlgebra.instHopfAlgebra, GroupLike.instGroup, GroupLike.instCommGroup, CommSemiring.toHopfAlgebra, GroupLike, CoalgCat.tensorUnit_isAddCommGroup, GroupLike.valEquiv",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space point coordinates, ordinary Hopf-algebra constructions and topological closed subgroups do not prove this primitive-function reconstruction theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-additive-subgroup-perfect-decomposition",
+  "date": "2026-10-24",
+  "group": "Q126"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplication by a central torus with semisimple quotient and the derived group. Supporting input: Semisimple algebraic groups are perfect. Root-subgroup structure and the torus conjugation formula used to realize the rank-one commutator calculation in Milne Corollary 21.50. Supporting lemma: A one-dimensional smooth connected unipotent group is additive. Supporting structural ingredient for the one-dimensional classification: Milne Corollary 14.55 (positive characteristic) and the central-series argument preceding the induction in Proposition 14.32 (characteristic zero). Supporting lemma: Smooth connected commutative exponent-p groups over a perfect field are vector groups. Supporting Milne Corollary 14.53, used after the elementary-unipotent reduction in 14.54: the full product classification is Proposition 14.52. Present split: step 1, passage from the subgroup H to its primitive-function module and evaluation reconstruction (Milne 14.46).",
+   "via": [
+    "lem-sfb-additive-subgroup-perfect-decomposition",
+    "lem-sfb-perfect-exponent-p-vector-group",
+    "lem-sfb-unipotent-central-additive-subgroup",
+    "lem-sfb-one-dimensional-unipotent-additive",
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-semisimple-group-perfect",
+    "lem-sfb-central-torus-semisimple-derived-product",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-primitive-frobenius-module-duality",
+  "worker": "stage1",
+  "summary": "Constructed the restricted symmetric coordinate Hopf algebra explicitly. Added arbitrary-dimensional abelian restricted PBW and a generic connected-filtered-coalgebra kernel lemma. Computed primitives by coefficients and proved reconstruction and finite generation without a circular prior assumption that P(G) is finite. The statement is unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplication by a central torus with semisimple quotient and the derived group. Supporting input: Semisimple algebraic groups are perfect. Root-subgroup structure and the torus conjugation formula used to realize the rank-one commutator calculation in Milne Corollary 21.50. Supporting lemma: A one-dimensional smooth connected unipotent group is additive. Supporting structural ingredient for the one-dimensional classification: Milne Corollary 14.55 (positive characteristic) and the central-series argument preceding the induction in Proposition 14.32 (characteristic zero). Supporting lemma: Smooth connected commutative exponent-p groups over a perfect field are vector groups. Supporting Milne Corollary 14.53, used after the elementary-unipotent reduction in 14.54: the full product classification is Proposition 14.52. Present split: step 1, passage from the subgroup H to its primitive-function module and evaluation reconstruction (Milne 14.46). The latest direct-images proof (3) supplies the proper/open/compactification route; this is a lower-level algebraic prerequisite in its imported alteration branch.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q80-4f27c7c49",
+  "group": "Q80",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-4f27c7c49 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement and Milne iAG2017 at 14.40-14.46, 10.39-10.40 and Def 14.4. The statement is Theorem 14.46 in functor-of-points form; it is unchanged from live and side-live and not weakened. Live still has the item unsplit and no repair note, so there is no supersession or re-split rule. Steps 1-8 each verified against their cited statements. Step 3: Hopf identities by uniqueness of algebra maps out of B, p=2 antipode fine. Step 4: generation via j(F^i m)=j(m)^{p^i}. Step 5: coefficient a_i in [1,p-1] of b_{δ_i}⊗b_{a-δ_i}, tensor basis, filtration B_n. Step 6: every hypothesis of the kernel lemma met with g=1. Step 7: P(G)=N with no circular finiteness. Step 8: evaluation on R-points. New basis node: true by Milne 10.40 for the zero-bracket p-Lie algebra with arbitrary index set, also checked by a Gröbner argument; tested on V=0, α_p, t^p-t, imperfect a, V=A. Not a duplicate of the finite-dimensional lem-sfb-restricted-pbw-basis. New kernel node: proved via the reduced coproduct (π⊗π)Δ and injectivity of f⊗f on C_{n-1}⊗C_{n-1}; the t^p example shows it cannot be strengthened to degree one. Not the comodule coinvariant lemma. Both new nodes are statement-only and self-contained, and neither restates a clause of the item. proof_deps equals the union of uses; no SGA, no cycle, no tool_uses. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PrimitiveFrobeniusModuleDuality",
+  "declaration": "AlgebraicGeometry.primitive_frobenius_module_duality",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrimitiveFrobeniusModuleDuality.lean",
+  "statement": "theorem primitive_frobenius_module_duality {k : Type u} [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] : (∀ (M : Type v) [AddCommGroup M] [Module (SkewRing k p) M] [Module.Finite (SkewRing k p) M], ∃ U : Representation k p M, IsAffine U.group.X.left ∧ LocallyOfFiniteType U.group.X.hom ∧ QuasiCompact U.group.X.hom ∧ ∃ (n : ℕ) (i : U.group ⟶ ∏ᶜ fun _ : Fin n ↦ Grp.mk (StandardGroupSchemes.additive k)), IsClosedSubgroupScheme i.hom.hom) ∧ (∀ (G : Grp (Over (Spec (.of k)))) [IsAffine G.X.left] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom], (∃ (n : ℕ) (i : G ⟶ ∏ᶜ fun _ : Fin n ↦ Grp.mk (StandardGroupSchemes.additive k)), IsClosedSubgroupScheme i.hom.hom) → Module.Finite (SkewRing k p) (PrimitiveFunctions k G) ∧ ∀ U : Representation k p (PrimitiveFunctions k G), ∃ e : G ≅ U.group, ∀ (R : Type u) [CommRing R] [Algebra k R] (g : Points k G.X R) (f : PrimitiveFunctions k G), U.points R (Additive.ofMul (g ≫ e.hom.hom.hom)) f = primitiveValue k G R f g)",
+  "branch": "newtargets-dag",
+  "by": "O2",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4333c31e6",
+  "group": "O2",
+  "result": "pass",
+  "note": "Read item + 7 stmt_dep records, new def node, both modules, report (Worker report + Second reading by O2 present), Milne §14(e) (96)-(98), Prop 14.41, Rem 14.42, Lem 14.43, Thm 14.46. SkewRing = Mathlib SkewPolynomial with Frobenius-power action; monomial_mul_C confirms c·b^{p^i} order; no perfectness. algebraModule/primitiveModule pinned by ∃! smul characterizations (true, incl. zero ring). Representation = comm group + natural additive bijections Points ≃+ Hom_A(M,R). Conjunct 1: affine, LOFT∧QC, closed embedding into ∏ᶜ Fin n Ga via IsClosedSubgroupScheme, same convention as landed additive_subgroup_perfect_decomposition. Conjunct 2: Module.Finite P(G) and for every representer a group iso e with U.points(g≫e) f = f_R(g), equivalent to the node's claim. Edge cases M=0, n=0, zero/nonreduced R, p=2, imperfect k covered; universes u (k, tests) and v (M) independent. No existing duplicate in Mathlib/side-live (grep SkewPolynomial/IsCommMonObj additive/dag); def node not live, no clash. Item differs from live only in lean + stmt_deps; lean.statement verbatim in both files; docstrings with source/blueprint and 8 proof steps; all proofs sorry. No compile (no file changed)."
+ }
+}

@@ -1,0 +1,258 @@
+{
+ "id": "lem-pur-general-coefficient-specialization",
+ "kind": "statement",
+ "title": "Identity-normalized shift and distinguished-triangle compatibility of specialization",
+ "statement": "Fix a finite-field datum $D=(p,a,q,k_0,k)$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, an algebraic closure $\\Omega/\\mathbf Q_\\ell$ [def-weil-l-adic-numbers, def-weil-algebraic-closure], and any scheme $Y$ with no structure map to $k$; its universe is independent of that of $\\Omega$. Let $I$ be the directed finite coefficient subfields [def-weil-finite-subextension-directed-set]. On the fixed intrinsic rational stages $C_E=\\mathrm{sfRationalConstructibleCategory}(\\ell,\\mathrm{Shrink}(E),Y)$, obtained by raw rationalization of the intrinsic integral category [def-weil-derived-complete-integral-detailed, def-weil-rationalization-karoubi], let $S$ and $S_D$ be the normalized scalar systems with proof parameters $0$ and $p$, respectively [lem-general-algebraically-closed-coefficient-stages]. Use the equality $\\eta:S=S_D$ of [lem-pur-general-specialization-pairs], and set $P=S.\\mathrm{PairCategory}$, $P_D=S_D.\\mathrm{PairCategory}$ [def-sf-directed-common-stage-data]. Let $e:P\\simeq P_D$ be equality transport, namely $\\mathrm{Pi.eqToEquivalence}(T\\mapsto T.\\mathrm{PairCategory},\\eta)$; this specifies the functor, not an arbitrary equivalence.\n\nUse the representative identifications of [lem-pur-general-specialization-pairs] and the prescribed additive Hom structures of [lem-pur-general-specialization-hom-additivity]. Equip $P$ with the uniquely normalized shifts and compatible stage identifications of [lem-pur-general-pair-shift-normalization, lem-pur-general-transition-shift-compatibility], and $P_D$ with those of [lem-pur-general-intrinsic-finite-field-transport]. There is exactly one coherent integer-shift comparison $c_n:e(A[n])\\xrightarrow{\\sim}e(A)[n]$ whose hom component at every $n\\in\\mathbf Z$ and $A\\in P$ is the identity of the displayed shifted pair, after the prescribed object equalities. For the common-stage Verdier pretriangulations [lem-route-common-stage-verdier-exists-unique, def-weil-triangulated-category], $e$ with this fixed comparison preserves and reflects distinguished triangles:\n$$V\\text{ is distinguished in }P\\quad\\Longleftrightarrow\\quad e^\\triangle(V)\\text{ is distinguished in }P_D.$$\nIn particular $e$ is exact for this comparison. A supplied common-stage cone keeps its finite coefficient label, its literal third pair $(L,C)$ and all three specified arrows, including the connecting arrow.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+  "place": "Former supporting proof final step; GeneralAlgebraicallyClosedCoefficients.lean:927-975 (specialization_commShift_existsUnique, specialization_distinguished, specialization_exact); old owning proof common-stage comparison clauses.",
+  "note": "Construction material retained from the former supporting proof final step. The two normalized scalar shift comparisons coincide by the existing stage theorem and the integral/rational uniqueness specifications, rather than by an arbitrary ofIso choice. The representative shift formulas therefore agree under eta. Identity hom components on shifted pairs are natural by specialization_pairs and that representative formula. The shift-zero and shift-add equations agree componentwise by the identity inclusion normalizations. Thus these components give a coherent CommShift structure. Natural-isomorphism extensionality and proof irrelevance make it unique. Every distinguished triangle is isomorphic to a distinguished finite-stage image. Equality transport fixes the finite triangle and its first two arrows; the identity shift comparison fixes its connecting arrow. Map its witnessing triangle isomorphism to obtain preservation. Apply the inverse equality transport to obtain reflection, keeping the inverse identity-normalized comparison. The forward implication is precisely specialization_exact. For the literal cone, conjugate the stage image by isoToStage at the first two objects and the identity at the third; the first square is mkHom_eq_isoToStage, the second a unit equation, the third cancels the shifted inverse identification. Old cone argument 4 and intrinsic cone argument 13 are retained in the cone and intrinsic nodes as well."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "lem-general-algebraically-closed-coefficient-stages",
+  "def-sf-directed-common-stage-data",
+  "lem-pur-general-specialization-pairs",
+  "lem-pur-general-specialization-hom-additivity",
+  "lem-pur-general-pair-shift-normalization",
+  "lem-pur-general-transition-shift-compatibility",
+  "lem-pur-general-intrinsic-finite-field-transport",
+  "lem-route-common-stage-verdier-exists-unique",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "Identify $S$ and $S_D$ using $\\eta$, with the pair and representative equalities specified by lem-pur-general-specialization-pairs. Parameter independence in lem-general-algebraically-closed-coefficient-stages identifies the prescribed coherent transition comparisons $\\sigma_{EL,n}$ as well as the scalar functors; this uses their integral-image normalization, not an arbitrary comparison. The Hom-coordinate and additivity equalities of lem-pur-general-specialization-hom-additivity identify the already prescribed Hom group operations under the same equality transport. Consequently both constructions now use the same fixed category, group laws, stage shifts and transition comparisons. Equality induction on $\\eta$ makes the specified $e$ the identity functor on this common category.",
+   "uses": [
+    "lem-pur-general-specialization-pairs",
+    "lem-general-algebraically-closed-coefficient-stages",
+    "lem-pur-general-specialization-hom-additivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Clauses (2),(4), scalar diagram; retained specialization_comparisons and specialization_pairs in lean/Sheaf/Paper/GeneralAlgebraicallyClosedCoefficients.lean:780-875 and specialization_transitionShift in GeneralAlgebraicallyClosedCoefficientStages.lean:445-484."
+   }
+  },
+  {
+   "text": "Pull the prescribed shift structure on $P_D$ back through the equality of step 1. By lem-pur-general-intrinsic-finite-field-transport it has object formula $(E,K)[n]=(E,K[n])$, representative formula $[L,u]\\mapsto[L,\\sigma_{FL,n,H}^{-1}\\circ u[n]\\circ\\sigma_{EL,n,K}]$, additive shift functors, and coherent inclusion comparisons with identity components. These are exactly the specification of lem-pur-general-pair-shift-normalization on the fixed category and Hom groups. Its uniqueness identifies this transported structure with the prescribed one on $P$, including the shift-zero and shift-add isomorphisms. The inclusion comparisons also agree: their hom components are the specified identities, their inverse components are determined by the inverse laws, and their coherence fields are proofs.",
+   "uses": [
+    "lem-pur-general-intrinsic-finite-field-transport",
+    "lem-pur-general-pair-shift-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Clause (4), pair-model shift; retained shift_existsUnique and specialization_commShift_existsUnique, lean/Sheaf/Paper/GeneralAlgebraicallyClosedCoefficients.lean:534-553,927-944."
+   }
+  },
+  {
+   "text": "In the equal-category, equal-shift situation of step 2, take $c_{n,A}=1_{A[n]}$ with inverse the same identity. Naturality is $f[n]\\circ1=1\\circ f[n]$. The shift-zero comparison is the composite of a shift-zero isomorphism with its inverse, and the shift-add comparison is the composite of the same shift-add isomorphism with its inverse, so both coherence equations hold. Transport back along $\\eta$ to obtain the required coherent comparison for the specified $e$. Any other normalized comparison has the same hom component at every $n,A$; inverse laws determine its inverse components. Thus its natural isomorphisms agree componentwise, and its coherence proofs agree by proof irrelevance. This proves existence and uniqueness without changing the comparison.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Retained specialization_commShift_existsUnique docstring, lean/Sheaf/Paper/GeneralAlgebraicallyClosedCoefficients.lean:927-944; identity comparison definitions read in Mathlib/CategoryTheory/Shift/CommShift.lean:147-154,196-198."
+   }
+  },
+  {
+   "text": "Use the supplied exact-stage pair data. Their canonical stage identifications have the required shift compatibility on $P$ by lem-pur-general-transition-shift-compatibility and on $P_D$ by lem-pur-general-intrinsic-finite-field-transport. The common-stage Verdier theorem identifies distinguishedness with $D_S$ and $D_{S_D}$ for these fixed data. By def-sf-directed-common-stage-data, a witness is a finite label $L$, a distinguished triangle $U=(x\\xrightarrow f y\\xrightarrow g z\\xrightarrow h x[1])$ in the same $C_L$, and an isomorphism $V\\cong j_L^\\triangle U$. In the coordinates of steps 1-3, the image of its third arrow is\n$$c_{1,j_Lx}\\circ e(\\beta_{L,1,x}\\circ j_Lh)=\\beta^D_{L,1,x}\\circ j_L^Dh;$$\nthe first two arrows are likewise unchanged. Triangle isomorphisms have three component maps and three commuting squares; with the equal shifts all three squares and the inverse component maps are unchanged. Thus precisely the same $L,U$ and isomorphism witness $D_S(V)$ and $D_{S_D}(e^\\triangle V)$ in either direction. The two common-stage criteria give the required equivalence of distinguishedness.",
+   "uses": [
+    "lem-pur-general-transition-shift-compatibility",
+    "lem-pur-general-intrinsic-finite-field-transport",
+    "lem-route-common-stage-verdier-exists-unique",
+    "def-sf-directed-common-stage-data",
+    "def-weil-pbc-triangles-with-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Clause (4), finite-stage triangle images; retained specialization_distinguished docstring, lean/Sheaf/Paper/GeneralAlgebraicallyClosedCoefficients.lean:952-964; common-stage predicate in lean/Sheaf/CategoryTheory/StageSystemCommonStageCones.lean:44-52."
+   }
+  },
+  {
+   "text": "For a supplied common-stage cone, apply the preceding identifications to its actual three arrows. Every arrow has a finite representative, and specialization_pairs keeps that label and finite map. The literal third object $(L,C)$ is fixed by the pair equality. The first and second arrows are their same representatives, and the third becomes $c_{1,A}\\circ e(h)=e(h)$ in the displayed equal-shift coordinates. Canonical stage identifications are also fixed, since their representatives are the associators specified in def-sf-directed-common-stage-data. Hence any expressions for these arrows using those identifications and inclusion comparisons are preserved term by term. This retains the supplied cone, its finite label and its connecting arrow; it makes no new cone choice.",
+   "uses": [
+    "lem-pur-general-specialization-pairs",
+    "def-sf-directed-common-stage-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Retained literal-cone assertion and specialization_pairs; lean/Sheaf/Paper/GeneralAlgebraicallyClosedCoefficients.lean:637-689,853-869 and lean/Sheaf/CategoryTheory/StageSystemCommonStageCones.lean:31-41 (formula only)."
+   }
+  },
+  {
+   "text": "The functor $e$ is additive for the prescribed Hom laws by lem-pur-general-specialization-hom-additivity. Step 3 equips it with the unique prescribed coherent shift comparison, and the forward implication of step 4 says that it carries every distinguished triangle to a distinguished triangle. These are exactly the defining conditions for exactness in def-weil-triangulated-category. Therefore $e$ is exact for this comparison.",
+   "uses": [
+    "lem-pur-general-specialization-hom-additivity",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Retained specialization_exact, lean/Sheaf/Paper/GeneralAlgebraicallyClosedCoefficients.lean:966-976; literature/stacks-project/derived.tex, Tag 014V, definition-exact-functor-triangulated-categories."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-general-specialization-pairs",
+  "lem-general-algebraically-closed-coefficient-stages",
+  "lem-pur-general-specialization-hom-additivity",
+  "lem-pur-general-intrinsic-finite-field-transport",
+  "lem-pur-general-pair-shift-normalization",
+  "lem-pur-general-transition-shift-compatibility",
+  "lem-route-common-stage-verdier-exists-unique",
+  "def-sf-directed-common-stage-data",
+  "def-weil-pbc-triangles-with-shift",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+  "place": "Clauses (2),(4), with the retained normalized-specialization construction in the item source.note and the live GeneralAlgebraicallyClosedCoefficients.lean:927-976; the argument assembles the existing normalized-stage and common-stage statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical coefficient stage specialization equivalence has a unique coherent integer shift comparison with identity components on shifted pairs and preserves and reflects common stage distinguished triangles",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.Triangulated.TStructure.triangle_iso_exists, CategoryTheory.Triangulated.TStructure.isLE_shift_iff, CategoryTheory.Triangulated.TStructure.isGE_shift_iff, CategoryTheory.Triangulated.TStructure.isLE_of_shift, CategoryTheory.Triangulated.TStructure.triangle_map_exists, CategoryTheory.Triangulated.TStructure.isGE_of_shift, CategoryTheory.Triangulated.TStructure.isLE_shift, CategoryTheory.Pretriangulated.Triangle.shift_distinguished_iff",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match: the hits do not identify this specified coefficient-system normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CommShift.ofIso",
+   "results": "[loogle] OK 4 hit(s); CategoryTheory.Functor.CommShift.ofIso, CategoryTheory.Functor.CommShift.ofIso_compatibility, CategoryTheory.Functor.CommShift.ofIso_commShiftIso_hom_app, CategoryTheory.Functor.CommShift.ofIso_commShiftIso_inv_app",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match: the hits do not identify this specified coefficient-system normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "specialization_commShift_existsUnique|specialization_distinguished|CommShift.*ofIso",
+   "results": "[grep] OK 2 hit(s); Mathlib/Algebra/Homology/DerivedCategory/Basic.lean:159, Mathlib/Algebra/Homology/DerivedCategory/Basic.lean:162",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match: the hits do not identify this specified coefficient-system normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equality transport of normalized coefficient pair categories preserves shift representatives and the connecting arrows of finite stage distinguished triangles",
+   "results": "[leansearch] OK 8 hit(s); CategoryTheory.Pretriangulated.Triangle.shiftFunctorAdd_eq, CategoryTheory.Pretriangulated.Triangle.shift_distinguished, HomotopyCategory.Pretriangulated.shift_distinguished_triangle, CategoryTheory.instIsEquivalenceShiftFunctor, CategoryTheory.Pretriangulated.Triangle.shiftFunctorAdd'_eq, CategoryTheory.Equivalence.IsTriangulated.symm, CategoryTheory.Equivalence.IsTriangulated.mk', CategoryTheory.Monoidal.Transported",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match: the hits do not identify this specified coefficient-system normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CommShift.ofIso",
+   "results": "{\"t\": \"2026-10-27T07:25:30Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.CommShift.ofIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.CommShift.ofIso\", \"CategoryTheory.Functor.CommShift.ofIso_compatibility\", \"CategoryTheory.Functor.CommShift.ofIso_commShiftIso_hom_app\", \"CategoryTheory.Functor.CommShift.ofIso_commShiftIso_inv_app\"], \"digest\": \"0556024bcf2e8b25\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: generic identity/transport and triangle functor facts do not identify the two prescribed full coefficient-pair shifts or their common-stage distinguished predicates; those identifications require the cited project nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "specialization_commShift_existsUnique|specialization_distinguished|CommShift.*ofIso",
+   "results": "{\"t\": \"2026-10-27T07:25:30Z\", \"tool\": \"grep\", \"query\": \"specialization_commShift_existsUnique|specialization_distinguished|CommShift.*ofIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\"], \"digest\": \"8e4239f6c01b5d93\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: generic identity/transport and triangle functor facts do not identify the two prescribed full coefficient-pair shifts or their common-stage distinguished predicates; those identifications require the cited project nodes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equality transport between categories with the same normalized shifts and common stage triangles is exact with identity shift comparison",
+   "results": "{\"t\": \"2026-10-27T07:25:31Z\", \"tool\": \"leansearch\", \"query\": \"Equality transport between categories with the same normalized shifts and common stage triangles is exact with identity shift comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Monoidal.Transported\", \"CategoryTheory.Pretriangulated.Triangle.mk'.injEq\", \"CategoryTheory.Pretriangulated.Triangle.shiftFunctorZero_eq\", \"CategoryTheory.Equivalence.IsTriangulated.mk'\", \"CategoryTheory.instIsEquivalenceShiftFunctor\", \"CategoryTheory.Pretriangulated.TriangleMorphism.mk.noConfusion\", \"CategoryTheory.Pretriangulated.TriangleMorphism.noConfusion\", \"CategoryTheory.pullbackShiftIso\"], \"digest\": \"4c046dc3b8c178bb\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: generic identity/transport and triangle functor facts do not identify the two prescribed full coefficient-pair shifts or their common-stage distinguished predicates; those identifications require the cited project nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equality transport equivalence between normalized coefficient pair categories has a unique identity component shift comparison and preserves and reflects finite stage distinguished triangles",
+   "results": "{\"t\": \"2026-10-27T07:25:31Z\", \"tool\": \"leanfinder\", \"query\": \"An equality transport equivalence between normalized coefficient pair categories has a unique identity component shift comparison and preserves and reflects finite stage distinguished triangles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.distTriang_iff\", \"CategoryTheory.Triangulated.TStructure.triangle_iso_exists\", \"CategoryTheory.Triangulated.TStructure.triangle_map_ext\", \"CategoryTheory.Equivalence.IsTriangulated.mk'\", \"CategoryTheory.Triangulated.SpectralObject.mk.inj\", \"CategoryTheory.Equivalence.IsTriangulated.mk''\", \"CategoryTheory.Pretriangulated.exists_iso_of_arrow_iso\", \"CategoryTheory.Triangulated.TStructure.triangle_map_exists\"], \"digest\": \"6a02cab533ec5c56\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: generic identity/transport and triangle functor facts do not identify the two prescribed full coefficient-pair shifts or their common-stage distinguished predicates; those identifications require the cited project nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "eqToEquivalence|class CommShift|mapTriangle|commShift.*ext",
+   "results": "{\"t\": \"2026-10-27T07:25:44Z\", \"tool\": \"grep\", \"query\": \"eqToEquivalence|class CommShift|mapTriangle|commShift.*ext\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Shift/CommShift.lean\", \"Mathlib/CategoryTheory/Shift/CommShift.lean\", \"Mathlib/CategoryTheory/Shift/CommShiftTwo.lean\", \"Mathlib/CategoryTheory/Shift/CommShiftTwo.lean\", \"Mathlib/CategoryTheory/Shift/CommShiftTwo.lean\", \"Mathlib/CategoryTheory/Shift/CommShiftTwo.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\"], \"digest\": \"8b04ce5ab4b06d89\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: generic identity/transport and triangle functor facts do not identify the two prescribed full coefficient-pair shifts or their common-stage distinguished predicates; those identifications require the cited project nodes"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CommShift.id",
+   "results": "{\"t\": \"2026-10-27T07:25:45Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.CommShift.id\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.CommShift.id\", \"CategoryTheory.NatTrans.CommShift.leftUnitor\", \"CategoryTheory.NatTrans.CommShift.rightUnitor\", \"CategoryTheory.Functor.commShiftIso_id_hom_app\", \"CategoryTheory.Functor.commShiftIso_id_inv_app\", \"CategoryTheory.Functor.CommShift.id_commShiftIso_hom_app\", \"CategoryTheory.Functor.CommShift.id_commShiftIso_inv_app\", \"CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpHomMapHomologicalComplexIdIso\"], \"digest\": \"1a4a2a5e78734e13\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: generic identity/transport and triangle functor facts do not identify the two prescribed full coefficient-pair shifts or their common-stage distinguished predicates; those identifications require the cited project nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport along equality of directed scalar systems preserves the uniquely normalized integer shifts on the pair category and the image of every finite stage triangle",
+   "results": "{\"t\": \"2026-10-27T07:25:46Z\", \"tool\": \"leanfinder\", \"query\": \"Transport along equality of directed scalar systems preserves the uniquely normalized integer shifts on the pair category and the image of every finite stage triangle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.distTriang_iff\", \"CategoryTheory.Triangulated.TStructure.shift_le\", \"CategoryTheory.isTriangulated_of_essSurj_mapComposableArrows_two\", \"CategoryTheory.Triangulated.TStructure.shift_ge\", \"CategoryTheory.Pretriangulated.Triangle.shiftFunctor_eq\", \"CategoryTheory.Equivalence.IsTriangulated\", \"CategoryTheory.ObjectProperty.instIsCompatibleWithShiftTrWIntOfIsStableUnderShift\", \"CategoryTheory.Functor.isTriangulated_of_iso\"], \"digest\": \"2fe1c18202b4afb2\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: generic identity/transport and triangle functor facts do not identify the two prescribed full coefficient-pair shifts or their common-stage distinguished predicates; those identifications require the cited project nodes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "def-weil-algebraically-closed-coefficients",
+  "date": "2026-10-27",
+  "group": "ND"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-algebraically-closed-coefficients",
+   "place": "Former supporting proof final step; GeneralAlgebraicallyClosedCoefficients.lean:927-975 (specialization_commShift_existsUnique, specialization_distinguished, specialization_exact); old owning proof common-stage comparison clauses.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-pur-general-coefficient-specialization",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Assembled the specified equality specialization from existing normalization, pair-shift uniqueness and common-stage Verdier statements. The proof identifies full shift structures before constructing identity components, verifies the connecting arrow and both directions of the same finite-stage witness criterion, and keeps the literal supplied cone. No new nodes or Mathlib leaves; project specialization declarations still have sorry, so no attachment. All fresh searches are logged separately from inherited ND searches.",
+  "blueprint": "Nearest blueprint ancestor def-weil-algebraically-closed-coefficients: its retained common-stage shift, distinguished-triangle and literal-cone clauses. Current latest sk-thm-sfb-qlbar-two-colimit clauses (2),(4) give the finite coefficient scalar diagram and finite-stage pair-model context; the specialization normalization is the retained construction, not an additional claim that current blueprint proves it.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NK-ec61ce855",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-ec61ce855 (reviewer sub-agent of L); spot-checked: Read in full: the item, every cited statement, the stages-lemma proof, the Lean docstrings at GeneralAlgebraicallyClosedCoefficients.lean:842,927-976 (both the commShift and distinguished lemmas still contain sorry, so there is no attachment) and sk-thm-sfb-qlbar-two-colimit (2),(4). The statement is unchanged and matches the Lean triple; e is Pi.eqToEquivalence as specified. Step 1: eta comes from specialization-pairs, sigma is identified by the stages lemma's parameter independence, and the Hom laws by hom-additivity. Step 2: the transported P_D shift from intrinsic-transport meets the specification of pair-shift-normalization, whose uniqueness is equality of the whole HasShift. I accept one minor reading: the transport node does not spell out beta zero/add coherence separately. Step 3: the identity CommShift exists and is unique by ext and proof irrelevance. Step 4: same D_S witness in both directions under the common-stage Verdier theorem; the connecting arrow c1∘e(beta∘j h)=beta^D∘j^D h is checked. Step 5: a supplied cone keeps its literal label and arrows. Step 6: the exactness definition. proof_deps equals the union of the step uses; no cycle; all deps are in unit sk-def-sf-operations except a Mathlib-leaf definition; no duplicate node in the DAG. Edge cases checked: empty Y, E=L, n=0, negative n, n+m, zero and identity cones. Advisory: def-weil-triangulated-category cites 05QL, where the exact-functor tag is 014V."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients",
+  "declaration": "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.specialization_commShift_existsUnique",
+  "declarations": [
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.specialization_commShift_existsUnique",
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.specialization_commShift",
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.specialization_distinguished",
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.specialization_exact"
+  ],
+  "statement": "theorem specialization_commShift_existsUnique :\n    ∃! c : (specialization D l hl Ω Y).functor.CommShift ℤ,\n      (fun [commInst : (specialization D l hl Ω Y).functor.CommShift ℤ] ↦\n        ∀ (n : ℤ) (A : Pair l Ω Y),\n          HEq (((specialization D l hl Ω Y).functor.commShiftIso n).hom.app A)\n            (𝟙 ((shiftFunctor (SfAlgebraicallyClosedCoefficients.Pair D l hl Ω Y) n).obj\n              ((specialization D l hl Ω Y).functor.obj A)))) (commInst := c)",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-27",
+  "existing": true,
+  "note": "Existing-declaration attachment of the specified equality specialization: specialization_commShift_existsUnique fixes the entire coherent integer-shift comparison to identity hom components (HEq); specialization_commShift chooses that uniquely normalized comparison; specialization_distinguished gives preservation and reflection for the common-stage Verdier pretriangulations; specialization_exact gives exactness for this very comparison. The literal-cone clause follows by specializing the already recorded specialization_pairs and specialization_transport to the supplied cone arrows: mapTriangle maps the first two arrows directly and postcomposes the third by the prescribed identity component, retaining the label and literal third pair. Independent scheme/coefficient universes and the arbitrary scheme are retained. No new module, proof completion or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-851a3a276",
+  "group": "NA",
+  "result": "pass",
+  "note": "Change is lean-only, existing:true; lean.statement matches the source verbatim (line 937). specialization = Pi.eqToEquivalence of the stageSystem equality. Main theorem: exactly one CommShift ℤ with HEq-identity hom components, in the node's direction e(A[n]) → e(A)[n]; uniqueness covers the zero/add coherence. specialization_distinguished gives both directions for every triangle; specialization_exact uses that same comparison. Both shifts and both Verdier pretriangulations come from the recorded dependency declarations. Universes d,u,v independent; no extra hypotheses; no hollow definitions or new proofs. Report has a real Worker report and the accepted dispatcher 'Second reading' wording. Advisories: literal-cone clause not restated but follows from specialization_pairs/transport plus the identity c_1 (the only citer needs only the stated parts); parent def node is a dual owner, as in the sibling PASSes; duplicate search entries. No fix, so no compile."
+ }
+}

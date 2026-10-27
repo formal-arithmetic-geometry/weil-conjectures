@@ -1,0 +1,124 @@
+{
+ "id": "lem-a1-finite-reduction-additive-compatibility",
+ "kind": "statement",
+ "title": "Finite-reduction pullback preserves homotopies, normalized shifts and cone triangles",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ [def-weil-l-adic-coefficient-extension], schemes $X,Y$ and a morphism $g:X\\to Y$ [def-weil-scheme-morphism-properties]. Write $R_W$ for the actual completed integral coefficient sheaf and $S_{W,n}$ for its quotient of exponent $n+1$, with their specified projections and quotient transitions [def-weil-completed-integral-coefficients]. Let $A_n(M)=\\operatorname{Res}_n g_n^*(M\\otimes_{R_Y} S_{Y,n})$ use the specified finite module pullback [def-pur-integral-finite-pullback]. Let $B^0$ be the strict finite-reduction pullback tower, transposed to a complex of strict towers [def-a1-integral-finite-pullback-tower, def-a1-integral-completed-tower-pullback-universes]. Then $B^0$ carries every chain homotopy to a chain homotopy. It has an integer-shift comparison whose component at every level and degree is precisely the standard shift comparison of the additive module functor $A_n$. For every chain map $f:P\\to P\\prime$, it has a cone isomorphism $B^0(\\operatorname{Cone}(f))\\simeq\\operatorname{Cone}(B^0(f))$ that commutes with the cone inclusion and, through this same shift comparison, the connecting map to $B^0(P)[1]$. No good-complex or invertibility hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Situation following Tag 06XN, situation-classical; Tags 014E and 0FNH"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-completed-integral-coefficients",
+  "def-pur-integral-finite-pullback",
+  "def-a1-integral-completed-tower-pullback-universes",
+  "def-a1-integral-finite-pullback-tower"
+ ],
+ "proof": [
+  {
+   "text": "Let A_n be the additive module functor Res_n g_n^*(- tensor S_n). Construct its module transition as the finite pullback adjunction mate of the actual quotient map. Its termwise chain transition and the selected chain transition have the same unit-generator formula: the finite pullback unit of x is sent to the lower-level unit of the quotient image of x. The unique generator characterization in the concrete operations interface identifies these transitions. Thus the transposed strict construction is the termwise complex functor of the additive module-to-towers functor A. Applying A to f-f′=dh+hd gives the strict tower homotopy.",
+   "uses": [
+    "def-a1-integral-finite-pullback-tower",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the canonical termwise shift comparison at every level. Its components are identities on reindexed modules, and additivity preserves the signed differentials. Naturality of the quotient transitions gives a strict tower comparison and its coherence.",
+   "uses": [
+    "def-a1-integral-finite-pullback-tower"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the additive binary-biproduct comparison to each degree of the cone. It carries the cone differential matrix to the cone differential of the image. Naturality of transitions makes it a strict tower isomorphism. The two summand maps are the cone inclusion and projection to the shifted source, so this comparison commutes with the inclusion and with the connecting map through the chosen shift.",
+   "uses": [
+    "def-a1-integral-finite-pullback-tower",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-a1-integral-finite-pullback-tower",
+  "lem-pur-integral-operations-well-defined",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Step 1 of lem-a1-finite-reduction-tower-resolving-model"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An additive functor on cochain complexes preserves homotopies shifts and mapping cones",
+   "results": "Functor.mapHomotopy; mappingCone.mapHomologicalComplexIso; mappingCone.map_δ; mappingCone.mapTriangleIso.",
+   "date": "2026-10-26",
+   "verdict": "Generic additive-functor compatibility is available. It does not identify the specified finite-reduction transitions with modulewise maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone.mapHomologicalComplexIso",
+   "results": "mappingCone.mapHomologicalComplexIso and its inclusion and connecting-map compatibility.",
+   "date": "2026-10-26",
+   "verdict": "Useful levelwise ingredients, no strict-tower statement."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologicalComplexShiftIso|mapHomologicalComplexIso|finiteReduction_quasiIso",
+   "results": "Mathlib shift/cone comparisons and the concrete finiteReduction_quasiIso in IntegralOperationsWellDefined.",
+   "date": "2026-10-26",
+   "verdict": "No exact strict-tower compatibility statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteReductionTowerResolvingModel",
+  "date": "2026-10-26",
+  "group": "Q4"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-a1-finite-map-purity",
+   "place": "First paragraph invoking lemma-weil-pbc-finite-stalk-formula; the supporting finite-reduction resolving model, step 1 (strict additive compatibility) of lem-a1-finite-reduction-tower-resolving-model."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteReductionAdditiveCompatibility",
+  "file": "lean/Sheaf/Paper/FiniteReductionAdditiveCompatibility.lean",
+  "declaration": "WeilConjectures.FiniteReductionTower.finite_reduction_additive_compatibility",
+  "statement": "theorem finite_reduction_additive_compatibility :\n    (∀ {P P' : CochainComplex (Modules l E Y) ℤ} (f f' : P ⟶ P'),\n      Homotopy f f' → Nonempty (Homotopy\n        ((integralOperationsPullbackTowerFunctor l E g ⋙ transpose l E X).map f)\n        ((integralOperationsPullbackTowerFunctor l E g ⋙ transpose l E X).map f'))) ∧\n    ∃ c : (integralOperationsPullbackTowerFunctor l E g ⋙ transpose l E X).CommShift ℤ,\n      (∀ (P : CochainComplex (Modules l E Y) ℤ) (r i : ℤ) (n : ℕ),\n    letI := integralOperationsLevelPullback_additive l E g n\n    letI := unrestrictedIntegralReductionFunctor_additive l E Y n\n    letI : (unrestrictedIntegralReductionFunctor l E Y n ⋙\n        integralOperationsLevelPullback l E g n ⋙\n        SheafOfModules.restrictScalars\n          (limit.π (integralCoefficientSheafSystem l E X) (op n))).Additive := by\n      with_unfolding_all infer_instance\n    (((Functor.commShiftIso (integralOperationsPullbackTowerFunctor l E g ⋙ transpose l E X)\n        (self := c) r).hom.app P).f i).app (op n) =\n      (((unrestrictedIntegralReductionFunctor l E Y n ⋙\n          integralOperationsLevelPullback l E g n ⋙\n          SheafOfModules.restrictScalars\n            (limit.π (integralCoefficientSheafSystem l E X) (op n))).mapCochainComplexShiftIso\n          r).hom.app P).f i) ∧\n      ∃ e : ∀ {P P' : CochainComplex (Modules l E Y) ℤ} (f : P ⟶ P'),\n        (integralOperationsPullbackTowerFunctor l E g ⋙ transpose l E X).obj\n          (CochainComplex.mappingCone f) ≅ CochainComplex.mappingCone\n            ((integralOperationsPullbackTowerFunctor l E g ⋙ transpose l E X).map f),\n        ∀ {P P' : CochainComplex (Modules l E Y) ℤ} (f : P ⟶ P'),\n          (integralOperationsPullbackTowerFunctor l E g ⋙ transpose l E X).map\n      (CochainComplex.mappingCone.inr f) ≫ (e f).hom =\n    CochainComplex.mappingCone.inr\n      ((integralOperationsPullbackTowerFunctor l E g ⋙ transpose l E X).map f) ∧\n  (e f).hom ≫ (CochainComplex.mappingCone.triangle\n      ((integralOperationsPullbackTowerFunctor l E g ⋙ transpose l E X).map f)).mor₃ =\n    (integralOperationsPullbackTowerFunctor l E g ⋙ transpose l E X).map\n        (CochainComplex.mappingCone.triangle f).mor₃ ≫\n      (Functor.commShiftIso (integralOperationsPullbackTowerFunctor l E g ⋙ transpose l E X)\n        (self := c) (1 : ℤ)).hom.app P",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261026T070617-L-3627537",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261026T070617-L-3627537",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

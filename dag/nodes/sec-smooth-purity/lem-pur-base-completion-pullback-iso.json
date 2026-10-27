@@ -1,0 +1,148 @@
+{
+ "id": "lem-pur-base-completion-pullback-iso",
+ "kind": "statement",
+ "title": "Invertibility of the normalized base coefficient limit comparison",
+ "statement": "Let $h:X\\to Y$ be a morphism of schemes [def-weil-proetale-inverse-image] and $\\ell$ a prime. Write $\\mathcal R_T=\\varprojlim_{n\\geq0}(\\mathbf Z/\\ell^{n+1})_T$, where the factors are discrete constant commutative-ring sheaves on the small pro-etale site of $T$, with reduction transitions [def-weil-pbc-constant-sheaf]. Let $d$ be normalized base data and $a$ a base pullback structure of [lem-pur-completed-coefficient-tensor-normalization]. Thus $a.\\alpha:h^{-1}\\mathcal R_Y\\to\\mathcal R_X$ satisfies $a.\\alpha\\,\\pi_{X,n}=h^{-1}(\\pi_{Y,n})\\,\\delta_{\\mathbf Z/\\ell^{n+1}}$, where $\\delta$ is the comparison adjoint to preservation of constant sections. Then $a.\\alpha$ is an isomorphism. There is no invertibility-on-the-scheme assumption on $\\ell$.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Roots of unity and Integral twist paragraphs."
+ },
+ "stmt_deps": [
+  "lem-pur-completed-coefficient-tensor-normalization",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Form the inverse sequence Q of lifted finite rings Z/l^(n+1), with the residue transitions. The successor equations give a natural isomorphism from Q followed by constant sheafification to baseTower. Each Q_n is finite since l is prime.",
+   "uses": [
+    "lem-pur-completed-coefficient-tensor-normalization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use preservation of a countable finite constant-ring tower and transport across this diagram isomorphism.",
+   "uses": [
+    "lem-weil-pbc-proetale-finite-tower-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The normalized constant comparisons form a natural transformation c from the pulled-back base tower to the base tower on X, by naturality with respect to the residue ring homomorphisms; every component is invertible by a.constant_iso.",
+   "uses": [
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "lem-pur-completed-coefficient-tensor-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The composite limit.post followed by limMap c is invertible. Its projections equal a.projection, so joint monicity of the limit projections identifies it with a.alpha.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-completed-coefficient-tensor-normalization",
+  "lem-weil-pbc-proetale-finite-tower-limit",
+  "lem-weil-pbc-profinite-coefficient-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Roots of unity and Integral twist paragraphs. W3 stage-3 reduction, following the existing unit route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of the completed integral Tate twist sheaf commutes with scalar extension",
+   "results": "8 hits: SheafOfModules.ιFree_mapFree_inv, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-26",
+   "verdict": "No exact completed integral-line inverse-image theorem; use the existing specialized APIs and categorical limit/tensor universal properties."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.limit.pre",
+   "results": "12 hits: CategoryTheory.Limits.limit.pre, CategoryTheory.Limits.limit.lift_pre, CategoryTheory.Limits.limit.pre_π, CategoryTheory.Limits.limit.id_pre, CategoryTheory.Limits.limit.pre_id, CategoryTheory.Limits.limit.pre_pre, CategoryTheory.Limits.limit.pre_π_assoc, CategoryTheory.Limits.limit.inv_pre_π",
+   "date": "2026-10-26",
+   "verdict": "No exact completed integral-line inverse-image theorem; use the existing specialized APIs and categorical limit/tensor universal properties."
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesLimit.*[Rr]ootsOfUnity|purIntegralTwist|integralCompletedScalarMap",
+   "results": "0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "No exact completed integral-line inverse-image theorem; use the existing specialized APIs and categorical limit/tensor universal properties."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse image on the pro-etale site preserves the inverse limit of the finite constant rings ZMod (p^n) and of the roots of unity sheaves",
+   "results": "8 hits: PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification, SheafOfModules.Finite.forgetPreservesFiniteLimits, SheafOfModules.Finite.evaluationPreservesFiniteLimits, SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf, ProfiniteGrp.isIso_toLimit, PresheafOfModules.evaluation_preservesFiniteLimits, AddCommGrpCat.leftExactFunctorForgetEquivalence.instPreservesFiniteLimitsObjLeftExactFunctorTypeFunctorInverseAux, Profinite.lim",
+   "date": "2026-10-26",
+   "verdict": "No exact completed integral-line inverse-image theorem; use the existing specialized APIs and categorical limit/tensor universal properties."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurIntegralTwistLineInverseImage",
+  "date": "2026-10-26",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "prop-weil-twist-preserves",
+   "place": "Proof final sentence on levelwise integral scalar extension, realized through the Roots of unity and Integral twist paragraphs of the Cartesian coefficient-twists proof: Invertibility of the normalized base coefficient limit comparison.",
+   "via": [
+    "lem-weil-integral-twist-base-change",
+    "lem-pur-integral-twist-line-inverse-image"
+   ]
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-existence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurBaseCompletionPullbackIso",
+  "file": "lean/Sheaf/Paper/PurBaseCompletionPullbackIso.lean",
+  "declaration": "WeilConjectures.CompletedCoefficientNormalization.pur_base_completion_pullback_isIso",
+  "statement": "theorem pur_base_completion_pullback_isIso\n    {X Y : Scheme.{u}} (h : X ⟶ Y) (l : ℕ) [Fact l.Prime]\n    (d : BaseData.{u, u} l) (a : BasePullback l d h) : IsIso a.alpha",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6da90",
+  "group": "W3",
+  "result": "fix",
+  "landing": "20261025T203613-L-2832800",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6da90",
+  "group": "W3",
+  "result": "fix",
+  "landing": "20261025T203613-L-2832800",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 3 new modules/nodes against node lem-pur-integral-twist-line-inverse-image, unit sk-prop-sf-existence (realized empty; qlbar-colimit unit not on its route), library ProfiniteCoefficientInverseImage, 6 importers compiled"
+ }
+}

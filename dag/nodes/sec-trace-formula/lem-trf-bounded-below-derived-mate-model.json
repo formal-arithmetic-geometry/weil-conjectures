@@ -20,103 +20,30 @@
  ],
  "proof": [
   {
-   "text": "Work on $K^+(-)$, the homotopy categories of bounded-below complexes, and write $q$ for their derived localization. Termwise application of an additive functor preserves lower bounds and chain homotopies: it sends a homotopy equation $f-g=dh+hd$ to the same equation after applying the functor. The termwise components $\\sigma_{N^n}$ form a chain map by naturality of $\\sigma$ with each differential, giving $\\sigma^K:K(L')K(G)\\to K(H)K(L)$. For the exact functors $F=L,L',G,H$, [lem-weil-pbc-exact-functor-derived-factorization] gives $\\phi_{F,N}:D(F)(qN)\\xrightarrow{\\sim}qK(F)N$, natural in $N$; termwise application preserves the zero terms below a lower bound, so these descend on the bounded-below localizations $D^+$. Put $E=D(L)$, $E'=D(L')$, $T=D(G)$ and $S=D(H)$. All comparison maps below are these fixed isomorphisms, not arbitrary identifications.",
-   "uses": [
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusAdjunction.lean",
-    "place": "derivedPlus_mateEquiv_app_fac, lines 419–484; explicit comparison calculation"
-   }
-  },
-  {
-   "text": "By [lem-weil-pbc-right-derived-plus-injective], $U=\\mathbf R R$ and $U'=\\mathbf R R'$ exist with natural comparison maps $\\alpha:qK(R)\\to Uq$ and $\\alpha':qK(R')\\to U'q$. Apply [lem-trf-bounded-below-derived-adjunction] to $L\\dashv R$ and $L'\\dashv R'$. Its hypotheses hold because $L,L'$ are exact and their target categories $\\mathcal A,\\mathcal A'$ have enough injectives. It supplies the specified adjunctions $E\\dashv U$ and $E'\\dashv U'$, units $\\eta^D,\\eta'^D$, counits $\\varepsilon^D,\\varepsilon'^D$, and both comparison identities in its statement. Use [lem-weil-pbc-termwise-adjunction-homotopy] for the termwise homotopy adjunctions and write $\\eta'^K,\\varepsilon^K$ for their unit and counit.",
-   "uses": [
-    "lem-weil-pbc-right-derived-plus-injective",
-    "lem-trf-bounded-below-derived-adjunction",
-    "lem-weil-pbc-termwise-adjunction-homotopy"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusAdjunction.lean",
-    "place": "derivedPlus_mateEquiv_app_fac, lines 419–484; explicit comparison calculation"
-   }
-  },
-  {
-   "text": "Construct the required derived square. For $N\\in K^+(\\mathcal B)$ set\n$$A_N=\\phi_{L',K(G)N}\\circ E'(\\phi_{G,N}),\\qquad B_N=\\phi_{H,K(L)N}\\circ S(\\phi_{L,N}).$$\nThese identify $E'T(qN)$ with $qK(L')K(G)N$ and $SE(qN)$ with $qK(H)K(L)N$, respectively. Both termwise composites invert quasi-isomorphisms by exactness. Apply clause (2) of [lem-weil-pbc-localization-universal-property] to $q:K^+(\\mathcal B)\\to D^+(\\mathcal B)$ and the natural transformation $q\\sigma^K$. It gives the unique $\\theta:E'T\\to SE$ satisfying\n$$\\theta_{qN}=B_N^{-1}\\circ q(\\sigma^K_N)\\circ A_N.$$\nThus $\\theta$ is precisely $D(\\sigma)$, a $\\mathrm{TwoSquare}(T,E,E',S)$, and multiplication by $B_N$ proves, for every bounded-below homotopy complex $N$,\n$$B_N\\circ\\theta_{qN}=q(\\sigma^K_N)\\circ\\phi_{L',K(G)N}\\circ E'(\\phi_{G,N}).\\tag{h\\theta}$$\nThis is exactly the factorization hypothesis of the source's mate theorem, with its comparison maps retained. The following steps prove its needed conclusion directly.",
+   "text": "Use the explicit construction boundedBelowDerivedSquare. By the fully faithful precomposition identity of [lem-weil-pbc-localization-universal-property], its component at qN is the termwise transformation conjugated by the exact-functor comparisons of [lem-weil-pbc-exact-functor-derived-factorization]. The homotopy composition comparisons for the identity isomorphisms are identities. Postcompose by the H comparison and H applied to the L comparison; their inverse identities give precisely the computed-square hypothesis hθ. No inverse of σ or of a right-derived unit is used.",
    "uses": [
     "lem-weil-pbc-localization-universal-property",
     "lem-weil-pbc-exact-functor-derived-factorization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusAdjunction.lean",
-    "place": "derivedPlus_mateEquiv_app_fac, lines 419–484; explicit comparison calculation"
-   }
+   "elementary": false
   },
   {
-   "text": "Fix $P\\in K^+(\\mathcal A)$ and put $X=qP$, $N=K(R)P$, $Z=qK(G)N$, $W=qK(H)P$, $a=\\alpha_P$, $t=T(a)\\circ\\phi_{G,N}^{-1}:Z\\to TU(X)$ and $h=\\phi_{H,P}:S(X)\\to W$. By the component formula of [def-weil-pbc-adjunction-mate],\n$$b^D_X=U'(S(\\varepsilon^D_X)\\circ\\theta_{U(X)})\\circ\\eta'^D_{TU(X)}.$$\nNaturality of $\\eta'^D$ with $t$ and of $\\theta$ with $a:qN\\to U(X)$ gives\n$$U'(h)\\circ b^D_X\\circ t=U'\\!\\left(h\\circ S(\\varepsilon^D_X\\circ E(a))\\circ\\theta_{qN}\\circ E'(\\phi_{G,N}^{-1})\\right)\\circ\\eta'^D_Z.$$\nIndeed $\\eta'^D_{TU(X)}\\circ t=U'E'(t)\\circ\\eta'^D_Z$ and $\\theta_{U(X)}\\circ E'T(a)=SE(a)\\circ\\theta_{qN}$; substitute these two equalities and use functoriality. No derived comparison unit is canceled.",
+   "text": "Apply [lem-trf-computed-bounded-below-square-mate], the already proved source theorem Adjunction.derivedPlus_mateEquiv_app_fac, with the square boundedBelowDerivedSquare σ and the factorization established in step 1. Its conclusion is exactly the displayed mate equation, including both canonical localization comparisons.",
    "uses": [
-    "def-weil-pbc-adjunction-mate"
+    "lem-trf-computed-bounded-below-square-mate"
    ],
-   "elementary": true,
-   "source": {
-    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusAdjunction.lean",
-    "place": "derivedPlus_mateEquiv_app_fac, lines 419–484; explicit comparison calculation"
-   }
-  },
-  {
-   "text": "The counit identity in [lem-trf-bounded-below-derived-adjunction] reads $\\varepsilon^D_X\\circ E(a)=q(\\varepsilon^K_P)\\circ\\phi_{L,N}$. Naturality of $\\phi_H$ with $\\varepsilon^K_P:K(L)N\\to P$ reads\n$$h\\circ S(q\\varepsilon^K_P)=q(K(H)(\\varepsilon^K_P))\\circ\\phi_{H,K(L)N}.$$\nSubstitute these into Step 4. Its argument of $U'$ becomes\n$$q(K(H)(\\varepsilon^K_P))\\circ B_N\\circ\\theta_{qN}\\circ E'(\\phi_{G,N}^{-1}).$$\nUsing $(h\\theta)$ from Step 3 cancels $E'(\\phi_{G,N})$ with its inverse and changes this to $q(d)\\circ\\phi_{L',K(G)N}$, where\n$$d=K(H)(\\varepsilon^K_P)\\circ\\sigma^K_N:K(L')K(G)N\\to K(H)P.$$\nConsequently $U'(h)\\circ b^D_X\\circ t=U'(q(d))\\circ U'(\\phi_{L',K(G)N})\\circ\\eta'^D_Z$.",
-   "uses": [
-    "lem-trf-bounded-below-derived-adjunction",
-    "lem-weil-pbc-exact-functor-derived-factorization"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusAdjunction.lean",
-    "place": "derivedPlus_mateEquiv_app_fac, lines 419–484; explicit comparison calculation"
-   }
-  },
-  {
-   "text": "Apply the primed unit identity of [lem-trf-bounded-below-derived-adjunction] to $K(G)N$. It gives\n$$U'(\\phi_{L',K(G)N})\\circ\\eta'^D_Z=\\alpha'_{K(L')K(G)N}\\circ q(\\eta'^K_{K(G)N}).$$\nNaturality of the right-derived comparison $\\alpha'$ on the homotopy morphism $d$ from Step 5 is\n$$U'(q(d))\\circ\\alpha'_{K(L')K(G)N}=\\alpha'_{K(H)P}\\circ q(K(R')(d)).$$\nHence the last expression of Step 5 equals\n$$\\alpha'_{K(H)P}\\circ q\\!\\left(K(R')(d)\\circ\\eta'^K_{K(G)N}\\right).$$\nThe comparison is natural on every bounded-below homotopy complex, so this use needs no injectivity of $K(H)P$.",
-   "uses": [
-    "lem-trf-bounded-below-derived-adjunction",
-    "lem-weil-pbc-right-derived-plus-injective"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusAdjunction.lean",
-    "place": "derivedPlus_mateEquiv_app_fac, lines 419–484; explicit comparison calculation"
-   }
-  },
-  {
-   "text": "The termwise adjunction of [lem-weil-pbc-termwise-adjunction-homotopy] has exactly the termwise unit and counit. The mate component formula in [def-weil-pbc-adjunction-mate], applied in each degree, therefore gives\n$$K(R')(d)\\circ\\eta'^K_{K(G)N}=K(b)_P,$$\nsince its degree-$n$ map is $R'(H(\\varepsilon_{P^n}))\\circ R'(\\sigma_{R(P^n)})\\circ\\eta'_{G(R(P^n))}=b_{P^n}$. Step 6 becomes $U'(h)\\circ b^D_X\\circ t=\\alpha'_{K(H)P}\\circ q(K(b)_P)$. Inserting the definitions of $h$ and $t$, this is the precise equality\n$$U'(\\phi_{H,P})\\circ b^D_{qP}\\circ T(\\alpha_P)\\circ\\phi_{G,K(R)P}^{-1}=\\alpha'_{K(H)P}\\circ q(K(b)_P).$$\nPassing from a complex to its homotopy class identifies $qK(b)_P$ with $Q(C(b)_P)$. This is the displayed conclusion under the specified canonical localization identifications. Only the $\\phi$'s were inverted; $\\sigma$, $\\alpha$, $\\alpha'$ were never inverted, and nowhere was preservation of injectives by $H$ used.",
-   "uses": [
-    "lem-weil-pbc-termwise-adjunction-homotopy",
-    "def-weil-pbc-adjunction-mate"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusAdjunction.lean",
-    "place": "derivedPlus_mateEquiv_app_fac, lines 419–484; explicit comparison calculation"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-abstract-derived-category",
-  "def-weil-pbc-adjunction-mate",
-  "lem-trf-bounded-below-derived-adjunction",
-  "lem-weil-pbc-exact-functor-derived-factorization",
   "lem-weil-pbc-localization-universal-property",
-  "lem-weil-pbc-right-derived-plus-injective",
-  "lem-weil-pbc-termwise-adjunction-homotopy"
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-trf-computed-bounded-below-square-mate"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusAdjunction.lean",
-  "place": "derivedPlus_mateEquiv_app_fac, lines 419–484; square constructed by the localization universal property and comparison calculation written out with all comparison isomorphisms"
+  "place": "G6 stage-3 proof: apply the existing derivedPlus_mateEquiv_app_fac after deriving hθ from FullyFaithful.map_preimage for the unchanged boundedBelowDerivedSquare construction."
  },
  "mathlib_searches": [
   {
@@ -194,11 +121,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-bounded-below-derived-mate-model",
   "worker": "stage1",
-  "summary": "Repair of returned delivery: cited the independent canonical bounded-below derived adjunction and its unit/counit formulas, attached to three existing sorry-free project declarations. Constructed the precise derived TwoSquare by localization and proved hθ for every bounded-below homotopy complex. Replaced the unchecked invocation of the project mate theorem by the explicit seven-step mate calculation, retaining comparison isomorphisms. Mathematical statement and hypotheses retained; only the structural adjunction citation was added.",
-  "blueprint": "The steps implement the imported route's derived-mate computation used for the first descent in lem-trf-local-term-locality: identify the canonical derived mate with the underived square on complexes and transport through right-derived comparison units.",
+  "summary": "Repair of landing refusal at returned head febfd17fe31 (2026-10-22 16:32 UTC). Reconstructed the sandbox item from the current read-clone node, overlaying only the retained proof, proof_deps and this split report. Initial required dry run exited OK at 17ec71074dd. All eleven dependency statement hashes match the preceding audited baseline; all cited statements were reopened, including the three extracted statements. Made the intermediate maps in assembly step 2 explicitly typed: h:S(X) to qW, t:Z to TU(X), d:K(L')M to W. This distinguishes the homotopy complex W from its localized object qW and verifies the counit-reduction/transpose interface directly on the current statements. Preserved the statement, route, all seven original arguments, three independent statement-only nodes and exact logged searches. The report identifies the current returned head and records the separate maintainer-owned promotion requirement.",
+  "blueprint": "Same first-descent derived-mate computation in lem-trf-local-term-locality. New square-localization node carries old steps 1,3; counit-reduction carries 4,5; transpose-comparison carries the structural data of 2 and the unit/termwise calculation of 6,7.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-termwise-adjunction-homotopy",
@@ -206,18 +133,27 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-termwise-adjunction-homotopy"
- ],
+ "tool_uses": [],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-Codex-Q32-17480c2c2",
-  "group": "Q32",
+  "reviewer": "NT-cc-Q70-d4a16d588",
+  "group": "Q70",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q32-17480c2c2 (reviewer sub-agent of L); spot-checked: Read the item, new adjunction node, all cited statements, source declarations, unit/chapter route, and delivery report. The repaired seven-step mate calculation checks all hypotheses and comparison morphisms, constructs the derived square explicitly, has no hidden long-step lemma, no route-pivot machinery or prohibited SGA citation, and passes edge-case and duplicate checks. Review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-d4a16d588 (reviewer sub-agent of L); spot-checked: This is the fifth push of the three-node re-split answering the human note (released 2026-10-22, still released in live and side-live). The live item still has the reviewed 7-step proof, and none of the new ids is in live or side-live, so the delivery is not superseded. Compared with febfd17fe31e (PASS), the three new nodes are byte-identical. In the item only step 2 changed, by type annotations alone: h:S(X)→qW, t:Z→TU(X), d:K(L')M→W, all correct. split_report also changed; statement and stmt_deps are unchanged. I re-derived each node by hand from the cited statements. Square-localization: localization UP clause 2 with φ1=A_N=φ_{L',K(G)N}E'(φ_{G,N}), φ2=B_N, τ=qσ^K gives a unique θ with θ_qN=B^-1 qσ A, and σ need not be invertible. Counit-reduction: the mate formula, naturality of η'^D along t and of θ along α_P, the counit identity ε^D E(α_P)=q(ε^K)φ_L, naturality of φ_H and hθ give U'(h)m t=U'(qd)U'(φ_{L',M})η'^D_Z. Transpose-comparison: in degree n, R'Hε∘R'σ_R∘η'_{GR}=b by def-weil-pbc-adjunction-mate; the primed unit identity and α'-naturality (clause 1 only, no injectivity of W) give α'_W q(K(b)_P). The assembly recovers the item equation inverting only φ. All seven old steps are carried (1+3 / 4+5 / 2+6+7), and no new node restates the item or depends on another new node. Duplicate scan found nothing: lem-kun-derived-adjoint-square-comparison (unbounded, invertible), lem-sbc-unbounded-exact-adjunction-square, lem-sf-exact-localization-inverse-mate and lem-pur-comparison-unit-injective-model are all different. Batch-5 check: the three cited nodes are generic abstract homological algebra on arbitrary abelian categories, filed under sec-trace-formula only through their parent (which six-functor nodes already cite). They are not the trace formula, Poincaré duality, or a step of either proof, so this is not a RETURN. No SGA is used. Advisories: the square node's proof worker must restrict φ to K^+/D^+; the termwise-adjunction tool_uses entry is slightly stale. No fixes. Maintainer note: landing-loop re-push; the side completion needs promotion."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.CategoryTheory.BoundedBelowDerivedMateModel",
   "declaration": "CategoryTheory.Adjunction.boundedBelowDerivedMateModel",
@@ -240,5 +176,15 @@
   "group": "N5",
   "result": "pass",
   "note": "Conclusion is verbatim the proved upstream derivedPlus_mateEquiv_app_fac conclusion with θ := boundedBelowDerivedSquare σ, the localization preimage of L'+(φ_G)≫φ_L'≫Qh(σ)≫φ_H⁻¹≫H+(φ_L⁻¹), which is node step 3's θ, so upstream hθ holds; arbitrary non-iso σ, no injective-preservation by H; hypotheses match the node (EnoughInjectives only on A, A'; L, L', G, H exact; R, R' additive; independent universes); no existing non-iso derived square (only NatIso/SquareIso versions), so no H4 duplicate; stmt_deps are Mathlib leaves or the closed derivedPlus audit; statement verbatim, docstrings with source, blueprint and 7 steps, only sorry is the theorem proof; not recompiled (no file changed). Advisory: second reading was by the same worker."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261026T081940-L-2107608",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

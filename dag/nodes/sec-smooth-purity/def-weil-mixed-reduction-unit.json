@@ -14,9 +14,52 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
   "place": "Tensor reassociation, compact-support reduction, and transported coefficient comparisons; used in finite-field-independence proof step 1"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the completed scalar-map projection identity. Compose the units of the ordinary E-to-L tensor adjunction and reduction over L to obtain a map from each completed E-module into restriction of the mixed target. Transpose through the E-reduction adjunction. The adjunction units are normalized by 1 tensor x; linearity gives the required s tensor x formula, and adjunction injectivity gives naturality and uniqueness.",
+   "uses": [
+    "def-weil-integral-scalar-extension",
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "def-weil-integral-reduction-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the exact-functor factorization comparisons for ordinary extension and restriction with the L-reduction counit. K-flat resolutions exist, and ordinary change of rings preserves K-flatness, so this composite comparison is invertible on a resolving class. Naturality shows it inverts quasi-isomorphisms between resolving objects. The resolving-class left-derived theorem and the universal lift identify this composite as the left-derived target.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-kflat-change-of-rings-all-independent",
+    "lem-pur-left-derived-from-kflat-class",
+    "def-weil-integral-scalar-extension",
+    "lem-weil-derived-scalar-extension-restriction-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift the E-reduction counit followed by the localized ordinary mixed unit through the target left-derived comparison. Its universal factorization equation is the prescribed equation on every homotopy object. The universal extensionality theorem gives uniqueness. Keep the existing composition with the normalized scalar-completion transformation.",
+   "uses": [
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "lem-pur-integral-operations-scalar-extension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-integral-scalar-extension",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "def-weil-integral-reduction-tower",
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-change-of-rings-all-independent",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-pur-integral-operations-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F7",
+  "date": "2026-10-24",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+  "place": "Tensor reassociation paragraph: tensor adjunction followed by K-flat localization; implemented using the existing published declarations."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -84,7 +127,18 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-operations",
  "lean": {
@@ -120,5 +174,15 @@
   "group": "Q103",
   "result": "pass",
   "note": "Wrote review.md. Checked immutable statements, dependencies, sources, helper normalization, universes, edge cases, and route-pivot compliance. All four modules compiled cleanly through scompile.py. No delivery faults found; two snapshot-omitted node records were verified in the immutable commit."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F7",
+  "result": "pass",
+  "landing": "20261024T185254-L-3495832",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

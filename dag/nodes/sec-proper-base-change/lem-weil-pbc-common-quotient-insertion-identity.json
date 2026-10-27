@@ -1,0 +1,115 @@
+{
+ "id": "lem-weil-pbc-common-quotient-insertion-identity",
+ "kind": "statement",
+ "title": "Identity normalization of scalar insertion",
+ "statement": "Let J be an essentially small site, R→B a morphism of commutative ring sheaves, nY normalized scalar extensions, and g0 an identity geometry with ring and underlying inverse-image unitors rho0 and theta0. For any normalized scalar insertion i0 and any IdentityData d [def-weil-pbc-common-quotient-pullback-data], for every M in D(J,B), d.source.derived.inv(M) followed by i0.derived(M) followed by d.target.derived.hom(M) is the identity of the twice restricted M. No coefficient-flatness or quotient hypotheses are required.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY (derived base change), 0G7E (K-flat pullback), 0D6D (composition); sites-modules.tex Tags 03D7, 03EK, 03EL."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-common-quotient-pullback-data"
+ ],
+ "proof": [
+  {
+   "text": "The insertion section formula and the specified ordinary target unitor give insertion followed by target unitor equal to source unitor on every section, hence as module morphisms.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the ordinary equality termwise on a flat-term K-flat complex. Paste the insertion representative square with the two unitor ModelIso squares. The common computation is the composite of two exact restriction computations, so is invertible; cancel it.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Restriction of homotopy localization to flat-term K-flat objects is a localization, as proved in RingedCoefficientPullbackComparison. Full faithfulness detects equality of the natural transformations on the derived category. Cancel the source unitor against its inverse.",
+   "uses": [
+    "lem-pur-coefficient-pullback-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-coefficient-pullback-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY (derived base change), 0G7E (K-flat pullback), 0D6D (composition); sites-modules.tex Tags 03D7, 03EK, 03EL.",
+  "note": "Explicit normalization and localization argument, with source formulas as written in the Lean docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Identity unitor for ringed topos derived pullback sends the canonical scalar insertion to the identity",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pullback_id_comp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": pullbackComp.{v} (F := 𝟭 C) (𝟙 S) φ = isoWhiskerRight (pullbackId S) (pullback φ) ≪≫ Functor.leftUnitor _\", \"doc\": \"The pullback functor induced by the identity functor on a category of sheaves of modules, along the identity natural transformation of the structure sheaf, is naturally isomorphic to the identity func\"}\n  {\"name\": \"SheafOfModules.pullback_comp_id\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": pullbackComp.{v} (G := 𝟭 _) φ (𝟙 R) = isoWhiskerLeft _ (pullbackId R) ≪≫ Functor.rightUnitor _\", \"doc\": \"The pullback functor associated with the identity functor on a category of sheaves of modules, along the identity natural transformation of the structure sheaf, is naturally isomorphic to the identity\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \":\\n  (pullbackComp (𝟙 X) f).inv ≫ Functor.whiskerLeft (pullback f) (pullbackId X).hom ≫ (Functor.rightUnitor _).hom =\\n    eqToHom (by simp)\", \"doc\": \"For a scheme $X$, the pullback functor induced by the identity morphism $\\\\mathrm{id}_X : X \\\\to X$ is naturally isomorphic to the identity functor on the category of sheaves of modules over $X$. This n\"}\n  {\"name\": \"ModuleCat.restrictScalarsId'App.congr_simp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"∀ {R : Type u₁} [inst : Ring R] (f : R →+* R) (hf : f = RingHom.id R) (M : ModuleCat R),\\n  ModuleCat.restrictScalarsId'App f hf M = ModuleCat.restrictScalarsId'App f hf M\", \"doc\": \"For any ring $ R $ and identity ring homomorphism $ f : R \\to R $, applying the restriction of scalars functor to a left $ R $-module $ M $ yields a module that is additively equivalent to $ M $ itself\"}\n  {\"name\": \"SheafOfModules.pullbackId\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": pullback.{v} (F := 𝟭 C) (𝟙 S) ≅ 𝟭 _\", \"doc\": \"The pullback functor induced by the identity functor on a category of sheaves of modules, along the identity natural transformation of the structure sheaf, is naturally isomorphic to the identity func\"}\n  {\"name\": \"Rep.linearization_η_hom_apply\", \"module\": \"Mathlib.RepresentationTheory.Rep\", \"type\": \"(r : k) : (η (linearization k G)).hom (Finsupp.single PUnit.unit r) = r\", \"doc\": \"For any element $ r $ in a commutative ring $ k $, the unit morphism $ \\\\eta $ of the monoidal structure on the linearization functor evaluates to $ r $ when applied to the finitely supported function \"}\n  {\"name\": \"PresheafOfModules.pullback_id_comp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \": pullbackComp.{v} (F := 𝟭 C) (𝟙 S) φ = isoWhiskerRight (pullbackId S) (pullback φ) ≪≫ Functor.leftUnitor _\", \"doc\": \"The composition of the pullback functor associated to the identity natural transformation with another pullback functor is naturally isomorphic to the original pullback functor, via the left unitor is\"}\n  {\"name\": \"ModuleCat.restrictScalarsId'App\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  [inst : Ring R] → (f : R →+* R) → f = RingHom.id R → (M : ModuleCat R) → (ModuleCat.restrictScalars f).obj M ≅ M\", \"doc\": \"For any ring $ R $ and identity ring homomorphism $ f : R \\to R $, applying the restriction of scalars functor to a left $ R $-module $ M $ yields a module that is additively equivalent to $ M $ itself\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No declaration for these arbitrary ringed-topos normalization data. Generic tensor, pullback and localization results are used in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Identity unitor for ringed topos derived pullback sends the canonical scalar insertion to the identity",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pullbackObjUnitToUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Scheme.Modules.pullbackComp f (CategoryTheory.CategoryStruct.id Y)).inv\\n      (CategoryTheory.CategoryStruct.comp\\n        (CategoryTheory.Functor.whiskerRight (AlgebraicGeometry.Scheme.Modul\", \"doc\": \"For any morphism $ f : X \\\\to Y $ of schemes, the pullback functor applied to the composition of $ f $ with the identity morphism on $ Y $ is naturally isomorphic to the pullback functor applied direct\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Scheme.Modules.pullbackComp (CategoryTheory.CategoryStruct.id X) f).inv\\n      (CategoryTheory.CategoryStruct.comp\\n        ((AlgebraicGeometry.Scheme.Modules.pullback f).whiskerLeft (Algebrai\", \"doc\": \"For a scheme $X$, the pullback functor induced by the identity morphism $\\\\mathrm{id}_X : X \\\\to X$ is naturally isomorphic to the identity functor on the category of sheaves of modules over $X$. This n\"}\n  {\"name\": \"SheafOfModules.pullback_id_comp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"The pullback functor induced by the identity functor on a category of sheaves of modules, along the identity natural transformation of the structure sheaf, is naturally isomorphic to the identity func\"}\n  {\"name\": \"SheafOfModules.pullbackId\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (S : CategoryTheory.Sheaf J RingCat) →\\n        SheafOfModules.pullback (CategoryTheory.CategoryStruct.id S) ≅ CategoryTheory.Functor.id (SheafOfModules S)\", \"doc\": \"The pullback functor induced by the identity functor on a category of sheaves of modules, along the identity natural transformation of the structure sheaf, is naturally isomorphic to the identity func\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"The hom-set equivalence of the pullback-pushforward adjunction between sheaves of modules maps the canonical morphism from the pullback of the unit sheaf to the unit sheaf to the canonical morphism fr\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackId\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"(X : AlgebraicGeometry.Scheme) →\\n  AlgebraicGeometry.Scheme.Modules.pullback (CategoryTheory.CategoryStruct.id X) ≅ CategoryTheory.Functor.id X.Modules\", \"doc\": \"The pullback functor induced by the identity morphism on a scheme $X$ is naturally isomorphic to the identity functor on the category of sheaves of modules over $X$. This follows from the adjunction b\"}\n  {\"name\": \"SheafOfModules.pullback_comp_id\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"The pullback functor associated with the identity functor on a category of sheaves of modules, along the identity natural transformation of the structure sheaf, is naturally isomorphic to the identity\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No declaration for these arbitrary ringed-topos normalization data. Generic tensor, pullback and localization results are used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryIdIso|leftDerived.*[Ii]d|[Ii]d.*leftDerived",
+   "results": "[grep] OK 7 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"line\": \"19\", \"text\": \"(The name `totalLeftDerived` is to avoid name-collision with\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"line\": \"115\", \"text\": \"lemma leftDerivedNatTrans_id :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/LeftDerived.lean\", \"line\": \"19\", \"text\": \"`P : ProjectiveResolution X`, then `F.leftDerivedToHomotopyCategory.obj X` identifies\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/LeftDerived.lean\", \"line\": \"102\", \"text\": \"    rw [← cancel_epi (P.isoLeftDerivedToHomotopyCategoryObj F).inv, Iso.inv_hom_id_assoc,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/LeftDerived.lean\", \"line\": \"204\", \"text\": \"lemma NatTrans.leftDerivedToHomotopyCategory_id (F : C ⥤ D) [F.Additive] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/LeftDerived.lean\", \"line\": \"221\", \"text\": \"theorem NatTrans.leftDerived_id (F : C ⥤ D) [F.Additive] (n : ℕ) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/LeftDerived.lean\", \"line\": \"224\", \"text\": \"  simp only [leftDerivedToHomotopyCategory_id, Functor.whiskerRight_id']\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No declaration for these arbitrary ringed-topos normalization data. Generic tensor, pullback and localization results are used in the proof."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedCommonQuotientPullbackComparison",
+  "date": "2026-10-22",
+  "group": "D3"
+ },
+ "blueprint": {
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Current blueprint order 1329, equality with the finite-level pullback tower and comparison from ordinary pullback; original item steps 4 and 5. Identity normalization of scalar insertion.",
+   "via": [
+    "lem-weil-pbc-ringed-common-quotient-pullback-comparison",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CommonQuotientInsertionIdentity",
+  "file": "lean/Sheaf/Paper/CommonQuotientInsertionIdentity.lean",
+  "declaration": "SheafOfModules.CommonQuotientPullback.insertion_identity",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-22",
+  "statement": "theorem insertion_identity (M : D J B) :\n    d.source.derived.inv.app M ≫ i0.derived.app M ≫\n      d.target.derived.hom.app M = 𝟙 _"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-2adb1",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261022T143033-L-933120",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-2adb1",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261022T143033-L-933120",
+  "kind": "interface",
+  "note": "independent cc review: delivered CommonQuotientPullbackData.lean vs live item module (verbatim apart from blueprint tags/imports); item signature vs live; sandbox build of all 6 modules + #print axioms + import-deletion variants; unit sk-thm-properbasechange realized vs dropped FlatCommonQuotientReductionTower; node proof fields vs Lean"
+ }
+}

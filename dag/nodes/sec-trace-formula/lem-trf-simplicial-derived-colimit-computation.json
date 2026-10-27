@@ -10,11 +10,12 @@
  "stmt_deps": [
   "def-weil-size-convention",
   "def-weil-abstract-derived-category",
-  "def-weil-pbc-simplicial-object"
+  "def-weil-pbc-simplicial-object",
+  "def-trf-derived-colimit-bar-system"
  ],
  "proof": [
   {
-   "text": "Apply [lem-trf-derived-colimit-bar] to $\\mathcal E=\\mathcal D^{op}$, viewing $F$ as a presheaf on $\\mathcal E$. Call the bar complex in the first-vertex sign convention stated above $B(\\mathcal D,F)$. The cited node numbers faces in the reverse order: in degree $n$ its differential is $(-1)^n$ times ours. Multiplication on degree $-n$ by $c_n=(-1)^{n(n+1)/2}$ is a chain isomorphism between these conventions, since $c_n=(-1)^nc_{n-1}$. The abelian category $\\operatorname{Fun}(\\mathcal D,\\operatorname{Mod}_R)$ has enough projectives: $R[\\operatorname{Hom}_{\\mathcal D}(T,-)]$ is projective since maps out of it are elements of the value at $T$ and epimorphisms are objectwise surjective, and $\\bigoplus_{T,\\,x\\in F(T)}R[\\operatorname{Hom}_{\\mathcal D}(T,-)]\\to F$ is surjective. The colimit is right exact, and the cited node gives that its total left derived functor exists. Hence [lem-trf-bounded-above-acyclic-derived-computation] identifies, for a projective resolution $a:P\\to F[0]$ zero in positive degrees, the object $\\operatorname{colim}_{\\mathcal D}P$ of the statement with the total left derived functor value by $\\varepsilon_P\\circ L\\operatorname{colim}(Qa)^{-1}$, independently of $P$ by its naturality clause. Consequently that node gives a canonical comparison $b_{\\mathcal D,F}:B(\\mathcal D,F)\\xrightarrow{\\sim}\\mathbf L\\operatorname{colim}_{\\mathcal D}F$. Its reindexing maps are exactly the displayed generator formula: the factors $c_n$ are the same on source and target. The node also gives the identity and composition laws, including semilinear maps and degreewise restriction of scalars. All sums are small because objects, arrows and finite strings in $\\mathcal D$ are in the working universe.",
+   "text": "Apply [lem-trf-derived-colimit-bar] with $\\mathcal E=\\mathcal D^{op}$. Reverse its face order using $c_n=(-1)^{n(n+1)/2}$: $c_n=(-1)^nc_{n-1}$ gives the first-vertex bar complex $B$. Enough projectives hold because maps $R[\\operatorname{Hom}(T,-)]\\to F$ are elements of $F(T)$ (extend $x$ by $(f,r)\\mapsto rF(f)x$); evaluation preserves epimorphisms, and the sum of these representables over $(T,x)$ surjects onto $F$. Colimit is right exact as a left adjoint. The cited bar node supplies the everywhere-defined total left derived functor. Thus [lem-trf-bounded-above-acyclic-derived-computation] supplies projective resolutions $a:P\\to F[0]$ with $P^{>0}=0$ and identifies the projective-resolution value via $\\varepsilon_P L\\operatorname{colim}(Qa)^{-1}$, independently of $P$. Obtain $b_{\\mathcal D,F}:B\\xrightarrow{\\sim}\\mathbf H(\\mathcal D,F)$. The bar node gives reindexing, identities and composition; identical factors $c_n$ on both sides leave its generator formula unchanged. All sums are small since $\\mathcal D$ is small.",
    "uses": [
     "lem-trf-derived-colimit-bar",
     "lem-trf-bounded-above-acyclic-derived-computation"
@@ -26,27 +27,10 @@
    }
   },
   {
-   "text": "For $p,q\\geq0$ form the module\n$$A_{p,q}=\\bigoplus_{T_0\\to\\cdots\\to T_p\\xrightarrow{f}Q_q}F(T_0).$$\nThe horizontal faces delete $T_i$; deleting $T_0$ applies $F(T_0\\to T_1)$, and deleting $T_p$ composes the last arrow with $f$. Use their alternating sum $\\partial_h$ for $p>0$. In the other direction a face or degeneracy of $Q$ postcomposes $f$ and leaves $x\\in F(T_0)$ unchanged; use the alternating faces $\\partial_v$ for $q>0$. Face identities give $\\partial_h^2=\\partial_v^2=0$; the two directions commute because postcomposition with a map of $Q$ commutes with composition of $f$ and never changes $x$. Put $A_{p,q}$ in cochain bidegree $(-p,-q)$ and totalize by $\\partial_h+(-1)^p\\partial_v$. There are chain maps\n$$e_Q:\\operatorname{Tot}A\\to s(F(Q)),\\qquad e_B:\\operatorname{Tot}A\\to B(\\mathcal D,F).$$\nThe first is zero on $p>0$ and sends $(T\\xrightarrow f Q_q,x)$ to $F(f)x$ on $p=0$; the second is zero on $q>0$ and forgets $f:T_p\\to Q_0$ on $q=0$. For $e_Q$, the two horizontal faces from $p=1$ have the same image by functoriality of $F$. For $e_B$, the two vertical faces from $q=1$ have the same image after forgetting $f$. The remaining chain-map equations are precisely the respective face formulas.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08Q9 (lemma-compute-by-cosimplicial-resolution), 08PG (example-left-derived-colimits), 08PH (example-morphism-categories); explicit two-sided bar comparison of their complexes"
-   }
-  },
-  {
-   "text": "For fixed $q$, the augmented horizontal chain complex $A_{\\bullet,q}\\to F(Q_q)$ is contractible. Its section in augmented degree $-1$ sends $y\\in F(Q_q)$ to $(Q_q\\xrightarrow{1}Q_q,y)$. For $p\\geq0$ set\n$$h_p(T_0\\to\\cdots\\to T_p\\xrightarrow f Q_q,x)=(-1)^{p+1}(T_0\\to\\cdots\\to T_p\\xrightarrow f Q_q\\xrightarrow1Q_q,x).$$\nEvery face except the last of this appended chain is the appended chain of the corresponding old face. Their coefficients in $\\partial h+h\\partial$ cancel; the last face has coefficient $(-1)^{p+1}(-1)^{p+1}=1$ and is the original chain. In degree zero the other term is the displayed section composed with $F(f)$, and in augmented degree $-1$ augmentation after section is the identity. Thus $\\partial h+h\\partial=1$ on the augmented complex, proving that the horizontal augmentation is a quasi-isomorphism. This calculation requires no representable contractibility assumption.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08Q9 (lemma-compute-by-cosimplicial-resolution), 08PG (example-left-derived-colimits), 08PH (example-morphism-categories); explicit two-sided bar comparison of their complexes"
-   }
-  },
-  {
-   "text": "Fix $p$ and a string $\\sigma=(T_0\\to\\cdots\\to T_p)$, and write $X=\\operatorname{Hom}_{\\mathcal D}(T_p,Q_\\bullet)$ and $M=F(T_0)$. Its contribution to the vertical augmented complex is $\\bigoplus_{X_\\bullet}M\\to M$. By hypothesis $X\\to *$ has a simplicial homotopy inverse. Apply [lem-weil-pbc-simplicial-homotopy-free-chain-homotopy] over $R$ to the homotopies of the two composites, adding or negating chain homotopies if a finite chain of homotopies is used. Hence $C_\\bullet(X;R)\\to C_\\bullet(*;R)$ is a chain homotopy equivalence. The latter complex has one $R$ in each degree, differential $1$ in positive even degrees and $0$ in odd degrees. Its augmentation to $R[0]$ is a chain homotopy equivalence: use the identity section in degree zero and homotopy $h_n=1$ for odd $n$, $h_n=0$ for even $n$. Tensor these maps and homotopies with $M$. The equation $dh+hd=f-g$ is preserved by tensoring because it uses only sums and compositions, so no flatness of $M$ is needed. Under $R[X_n]\\otimes_R M=\\bigoplus_{X_n}M$, the resulting augmentation is exactly summation to $M$. Taking the direct sum of these homotopy equivalences over $\\sigma$ gives a vertical augmentation quasi-isomorphism $A_{p,\\bullet}\\to B(\\mathcal D,F)^{-p}[0]$.",
+   "text": "Use [lem-trf-two-sided-bar-horizontal-augmentation] for the explicitly defined $A_{p,q}$ and both chain maps $e_Q,e_B$. It gives the horizontal contraction, the transpose sign $(-1)^{pq}$, and $e_Q:\\operatorname{Tot}A\\xrightarrow{\\sim}s(F(Q))$. The representable contractibility assumed here is exactly the hypothesis of [lem-trf-two-sided-bar-contractible-augmentation], which gives $e_B:\\operatorname{Tot}A\\xrightarrow{\\sim}B$, without flatness of $F(T_0)$. Both use finite diagonals and indices bounded above by zero.",
    "uses": [
-    "lem-weil-pbc-simplicial-homotopy-free-chain-homotopy"
+    "lem-trf-two-sided-bar-horizontal-augmentation",
+    "lem-trf-two-sided-bar-contractible-augmentation"
    ],
    "elementary": false,
    "source": {
@@ -55,18 +39,7 @@
    }
   },
   {
-   "text": "Apply [lem-pc-bounded-above-double-complex-total-comparison] to $e_B$ regarded as a morphism of double cochain complexes from $A$ to the double complex $B$ concentrated in second degree zero. The fixed-first-index column maps are the quasi-isomorphisms of step 4. Both first and second indices are at most zero, so use the uniform bounds $x_0=y_0=0$. Every total degree has a finite diagonal, hence the required totals exist as finite direct sums of modules. Thus $e_B$ is a quasi-isomorphism. Apply the same node with indices interchanged to $e_Q$, using step 3 for the column maps. To return to our chosen total convention, the canonical identification of the two orders of totalization multiplies $A_{p,q}$ by $(-1)^{pq}$: the horizontal coefficient changes from $(-1)^q$ to $1$, and the vertical coefficient changes from $1$ to $(-1)^p$, since adjacent $pq$ exponents differ by $q$ and $p$, respectively. On the augmentation edge $p=0$ this sign is $1$, so the resulting map is exactly $e_Q$. It too is a quasi-isomorphism.",
-   "uses": [
-    "lem-pc-bounded-above-double-complex-total-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08Q9 (lemma-compute-by-cosimplicial-resolution), double-complex argument; Homology Tags 0132 (lemma-first-quadrant-ss), 0133 (lemma-double-complex-gives-resolution), dual finite-diagonal comparison as stated in the cited node"
-   }
-  },
-  {
-   "text": "In the derived category [def-weil-abstract-derived-category] both augmentations of step 5 are invertible. Define\n$$a_Q=b_{\\mathcal D,F}\\,e_B\\,e_Q^{-1}:s(F(Q))\\xrightarrow{\\sim}\\mathbf H(\\mathcal D,F).$$\nEvery module and map in this roof is specified by a sum and a generator formula, so it involves no choice of contracting homotopies: those were used only to establish invertibility. This constructs the asserted canonical isomorphism.",
+   "text": "In [def-weil-abstract-derived-category] define $a_Q=b_{\\mathcal D,F}e_Be_Q^{-1}$. It is an isomorphism. Its maps are the specified generator maps; the contractions establish their invertibility and are not choices in the roof.",
    "uses": [
     "def-weil-abstract-derived-category"
    ],
@@ -77,22 +50,12 @@
    }
   },
   {
-   "text": "For $(u,\\rho,\\theta,k)$ as in the statement, define a map from $A(\\mathcal D,F,Q)$ to the degreewise restricted $A(\\mathcal D',F',Q')$ by\n$$(T_0\\to\\cdots\\to T_p\\xrightarrow fQ_q,x)\\longmapsto(uT_0\\to\\cdots\\to uT_p\\xrightarrow{k_q\\circ u(f)}Q'_q,\\theta_{T_0}x).$$\nIt commutes with the first horizontal face by naturality of $\\theta$, with the last by functoriality of $u$, with the intermediate faces by preservation of composition, and with vertical faces by $d_i k_q=k_{q-1}u(d_i)$. Hence it is a map of the signed total complexes. Its $e_Q$ square commutes because\n$$F'(k_q u(f))\\theta_{T_0}=F'(k_q)\\theta_{Q_q}F(f),$$\nand its $e_B$ square commutes because both routes forget $f$ and apply $u$ to the string and $\\theta$ to $x$. Inverting the two $e_Q$ maps and using the natural bar comparison of [lem-trf-derived-colimit-bar] proves exactly\n$$a_{Q'}\\,s(F'(k)\\theta_Q)=\\mathbf H(u,\\theta)\\,a_Q.$$\nTaking $u=1$ and $\\rho=1$ gives naturality in $F$ and $Q$. Only the original $Q$ and the target $Q'$ need step 4: the intermediate simplicial object $uQ$ is never used as a resolution.",
+   "text": "For $(u,\\rho,\\theta,k)$ apply [lem-trf-two-sided-bar-semilinear-naturality]. Its total map $V$ satisfies $e'_QV=t e_Q$ and $e'_BV=b e_B$, and these identities persist under degreewise scalar restriction in $D(R)$. Hence $e'_B(e'_Q)^{-1}t=b e_Be_Q^{-1}$. Composing with the bar comparisons and the generator reindexing of [lem-trf-derived-colimit-bar] gives exactly $a_{Q'}t=\\mathbf H(u,\\theta)a_Q$. Taking identity $u,\\rho$ gives naturality in $F,Q$. Only $Q,Q'$ need contractibility; the intervening $uQ$ never needs it. The same cited statements give all scalar-restriction identifications and identity/composition laws.",
    "uses": [
+    "lem-trf-two-sided-bar-semilinear-naturality",
     "lem-trf-derived-colimit-bar"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08Q9 (lemma-compute-by-cosimplicial-resolution), 08PG (example-left-derived-colimits), 08PH (example-morphism-categories); explicit two-sided bar comparison of their complexes"
-   }
-  },
-  {
-   "text": "All constructions in step 7 are valid with scalars restricted along $\\rho$. Restriction retains the underlying additive groups, so kernels and images of differentials, and therefore quasi-isomorphisms, are unchanged. It also retains direct sums: an element is the same finitely supported family with the same componentwise addition. Thus the displayed bar complexes and two-sided comparison roofs after restriction are precisely their degreewise restrictions, with the same generator maps and integer signs. The restricted $e_Q,e_B$ remain invertible and their inverses restrict as inverses. Consequently the equality of step 7 is an equality in $D(R)$ with all the prescribed restriction-of-scalars identifications.",
-   "uses": [
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
     "place": "Tags 08Q9 (lemma-compute-by-cosimplicial-resolution), 08PG (example-left-derived-colimits), 08PH (example-morphism-categories); explicit two-sided bar comparison of their complexes"
@@ -102,9 +65,10 @@
  "proof_deps": [
   "lem-trf-derived-colimit-bar",
   "lem-trf-bounded-above-acyclic-derived-computation",
-  "lem-weil-pbc-simplicial-homotopy-free-chain-homotopy",
-  "lem-pc-bounded-above-double-complex-total-comparison",
-  "def-weil-abstract-derived-category"
+  "lem-trf-two-sided-bar-horizontal-augmentation",
+  "lem-trf-two-sided-bar-contractible-augmentation",
+  "def-weil-abstract-derived-category",
+  "lem-trf-two-sided-bar-semilinear-naturality"
  ],
  "proof_origin": {
   "by": "agent",
@@ -258,28 +222,64 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-19",
+  "date": "2026-10-23",
   "item": "lem-trf-simplicial-derived-colimit-computation",
   "worker": "stage1",
-  "summary": "Kept the statement unchanged. Reused the existing category bar-complex, simplicial homotopy, and uniformly bounded-above total-comparison nodes. Wrote the two-sided bar roof, the explicit slice contraction, the representable homotopy argument with arbitrary coefficients, and strict reindexing squares. No new nodes.",
-  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Functorial standard resolutions and comparison with arbitrary polynomial resolutions. Generic input to lem-trf-cotangent-resolution-coherence: Contractible representable evaluations compute derived colimits, with reindexing naturality.",
-  "tool_uses": [
-   {
-    "node": "lem-pc-bounded-above-double-complex-total-comparison",
-    "why": "Generic finite-diagonal totalization comparison with both cochain indices at most zero; sk-i-curve-zero has no homological algebra comparison of this kind."
-   }
-  ]
+  "summary": "Repair of the human re-split order: statement and statement dependencies unchanged. Three independent statement-only nodes separate horizontal augmentation (old 2,3,5), vertical contractible comparison (old 4,5), and semilinear roof functoriality (old 7,8). The remaining proof assembles these and retains the projective/bar normalization (old 1) and canonical roof (old 6). Original arguments and source checks are retained in report.md.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Functorial standard resolutions and comparison with arbitrary polynomial resolutions. Generic input to lem-trf-cotangent-resolution-coherence: Contractible representable evaluations compute derived colimits, with reindexing naturality."
  },
  "tool_uses": [
   "lem-pc-bounded-above-double-complex-total-comparison"
  ],
  "reviewed": {
-  "date": "2026-10-19",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-Q63-43474449a",
-  "group": "Q63",
+  "reviewer": "NT-cc-Q23-35f5aed66",
+  "group": "Q23",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-43474449a (reviewer sub-agent of L); spot-checked: Read the item's 8 steps in full against Stacks 08Q9 (sites-cohomology.tex l.10229-10300), 08PG, 08PH, 08PD, Simplicial definition-homotopy-equivalent and remark-homotopy-better, and the statements of every cited node. The statement is unchanged from the live base and there are no new nodes. Checks: (1) The bar node with E=D^op has faces reversed, so the differential differs by (-1)^n; c_n=(-1)^{n(n+1)/2} is a chain isomorphism. (2) The double complex A_{p,q} has commuting differentials, the Tot sign matches def-sp-double-complex-total, and e_Q and e_B are chain maps (p=1 functoriality, q=1 face cancellation). (3) The slice contraction signs cancel in ∂h+h∂, including in degrees 0 and -1. (4) C(*;R) has differentials 1 and 0, and h_n=1 for odd n is correct; tensoring needs no flatness, and chains of homotopies are handled as Stacks allows. (5) The bounded-above total comparison holds for indices ≤0 (re-derived), and the transpose sign (-1)^{pq} intertwines the differentials and is 1 on p=0. (6) The roof orientation is correct. (7) Naturality squares checked: θ naturality, k simplicial, the e_Q square identity; uQ is never used as a resolution. (8) Restriction of scalars is exact. Edge cases: terminal-object D, singleton D, Z/2 coefficients, a Z→Z/2 ring map, empty D. No duplicates (searched 08Q9, cosimplicial resolution, derived colimit) and no cycle. Accepted tool use: lem-pc-bounded-above-double-complex-total-comparison as a generic homological tool. FIX (C1/C4): step 1 silently identified the item's H, defined via projective resolutions in Fun(D,Mod_R), with the bar node's total left derived functor. Step 1 now proves enough projectives (Yoneda on R[Hom(T,-)]) and cites lem-trf-bounded-above-acyclic-derived-computation (same unit, unsplit, no cycle) for ε_P∘Lcolim(Qa)^{-1}; uses and proof_deps updated, step is 1721 characters.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-35f5aed66 (reviewer sub-agent of L); spot-checked: I read the whole re-split delivery against the 2026-10-22 repair note (keep_plan) and the live 8-step proof (8333 characters). Live is still unsplit, so no re-split has landed; a parallel Q46 delivery of the same item exists but has not landed. All 8 old steps have a place. Old 2, 3 and the e_Q half of 5 (with the (-1)^{pq} sign) go to the horizontal-augmentation node. Old 4 and the e_B half of 5 (zigzags, singleton h_n, no flatness, sum over σ) go to the contractible-augmentation node. Old 7 and 8 (V, t, b, both strict squares, restriction of scalars) go to the semilinear-naturality node. Old 1 (c_n sign, enough projectives, ε_P Lcolim(Qa)^{-1}) and old 6 (the roof) remain as the 2401-character assembly. The three nodes are 2132, 2635 and 2717 characters. None restates the parent's derived conclusion and none is circular. Re-derived by hand: the double complex commutes; e_Q is a chain map (p=1: F(f)F(g)-F(fg)=0); e_B is a chain map (q=1 faces agree once f is forgotten); the appended-identity homotopy gives ∂h+h∂=1, including p=0 and augmented degree -1; the transpose sign (-1)^{pq} intertwines the two total differentials and is 1 on p=0; the singleton chains have d_n=1 for even n>0 with h_n=1 for odd n; third-quadrant finite-diagonal total comparison holds; the semilinear squares follow from θ naturality, functoriality of u and simpliciality of k, including F'(k_q u f)θ = F'(k_q)θ_{Q_q}F(f); and step 4's algebra e'_B(e'_Q)^{-1}t = b e_B e_Q^{-1} composes with the bar node's semilinear clause to give a_{Q'} t = H(u,θ) a_Q. Hypotheses of lem-trf-bounded-above-acyclic-derived-computation are checked in step 1. Stacks 08Q9 (sites-cohomology l.10229-10297), 08PG/08PH/08PD, 0132/0133 and the simplicial.tex labels exist and match. Form B1-B7 holds: statement-only nodes, three search kinds, blueprint.from = lem-trf-local-term-locality with the item first in via, same_as [], no SGA. Not duplicates: lem-trf-section-comma-bar-contraction (constant coefficients), lem-trf-simplicial-abelian-set-homotopy-quasi-iso (gives only a quasi-isomorphism; useful for a future proof), lem-trf-derived-shriek-comma-homology. Maintainer note: the item still lists tool_uses lem-pc-bounded-above-double-complex-total-comparison, which its proof no longer cites. This is harmless and merge-owned, so I left it; the future proofs of the horizontal and contractible nodes will need that tool use."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplicialDerivedColimitComputation",
+  "declaration": "CategoryTheory.SimplicialDerivedColimit.computation_exists",
+  "declarations": [
+   "CategoryTheory.SimplicialDerivedColimit.IsResolution",
+   "CategoryTheory.SimplicialDerivedColimit.evaluationComplex",
+   "CategoryTheory.SimplicialDerivedColimit.evaluationTerm",
+   "CategoryTheory.SimplicialDerivedColimit.resolutionDoubleComplex",
+   "CategoryTheory.SimplicialDerivedColimit.derivedColimit",
+   "CategoryTheory.SimplicialDerivedColimit.forwardGenerator",
+   "CategoryTheory.SimplicialDerivedColimit.derivedMap",
+   "CategoryTheory.SimplicialDerivedColimit.ResolutionRoof",
+   "CategoryTheory.SimplicialDerivedColimit.Computation",
+   "CategoryTheory.SimplicialDerivedColimit.computation_exists"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SimplicialDerivedColimitComputation.lean",
+  "statement": "theorem computation_exists (B : CategoryColimitBarSystem.{u}) : Nonempty (Computation B)",
+  "branch": "newtargets-dag",
+  "by": "Q44",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the recorded CategoryColimitBarSystem without selecting it from its existence theorem. The computation data include the derived comparison, its canonical normalization on every bounded-above projective resolution, signed first-vertex bar coordinates, semilinear maps, naturality, identity and composition. All helper definitions have real data."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6a4142e7b",
+  "group": "Q44",
+  "result": "pass",
+  "note": "Re-delivery of the ce2713fb H2 RETURN. The Lean is byte-identical to the returned head. Item node vs live: only lean and stmt_deps differ; lem-trf-derived-colimit-bar is replaced in stmt_deps by the new definition node def-trf-derived-colimit-bar-system and kept in proof_deps. The new node is existing:true on the unchanged Sheaf.CategoryTheory.DerivedColimitBar and lists its 10 non-theorem declarations (CategoryColimitBarSystem/Model/Point, generator, categoryBarDelete/FaceCoefficient, ConstantRing, ColimitReindex, 2 instances), excluding the theorem. check_existing, check_new_node and check_record are clean. Every bar declaration the item uses is owned through stmt_deps, the 7 new-node stmt_deps are live definitions, and there is no cycle. The node statement matches the structure fields clause by clause and does not assert inhabitation. Item substance re-confirmed: zigzag homotopy-equivalence hypothesis, derived-category iso pinned by the projective-resolution roof, (-1)^{n(n+1)/2} first-vertex signs, semilinear naturality with no uQ hypothesis, identity/composition, edge cases. No compile run (no file changed); worker reported clean compiles at 27.2 s and 28.6 s. Note: lem-trf-derived-colimit-change-rings and lem-trf-cotangent-lower-shriek should later cite the new def node."
+ }
 }

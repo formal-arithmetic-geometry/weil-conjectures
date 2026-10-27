@@ -1,0 +1,290 @@
+{
+ "id": "lem-sfb-flat-coefficient-square-normalization",
+ "kind": "statement",
+ "title": "Normalization of the flat coefficient square under scalar tensor presentation",
+ "statement": "Fix a prime $\\ell$ and a field $k$ of characteristic $p>0$, with $p\\ne\\ell$, and separated finite-type $k$-schemes $X,Y$ [sk-def-sfb-dc-setting]. Let $f:X\\to Y$ be a $k$-morphism. Let $a:R\\to S$ be a morphism of commutative condensed rings such that extension of scalars is exact on every scheme [sk-def-sfb-condensed-ring, sk-def-sfb-coefficient-change]. Write $R_Z=p_Z^*R$, $S_Z=p_Z^*S$ for $Z=X,Y$, with the canonical compatible coefficient inverse-image isomorphisms [sk-def-sfb-coefficient-morphisms]. Work in the ordinary unbounded internal-module derived categories, identified with sheaf-module derived categories by [lem-pd-module-ringed-topos-derived-comparison]. Put $T_Z=S_Z\\otimes^L_{R_Z}-$ and let $U_Z$ be exact scalar restriction; put $L_R=Lf_R^*$, $L_S=Lf_S^*$, $G_R=Rf_{R*}$, $G_S=Rf_{S*}$, with their specified scalar and geometric adjunctions [sk-def-sfb-module-derived-pushpull, sk-def-sfb-derived-extension-of-scalars]. Set $C=U_YS_Y$, $B=U_XS_X$, considered in degree zero, and let $\\rho:L_RC\\xrightarrow{\\sim}B$ be the canonical restricted-regular pullback identification. Let $e_Z(M):U_ZT_ZM\\xrightarrow{\\sim}M\\otimes^L_{R_Z}U_ZS_Z$ be the canonical balanced scalar-tensor identification, using symmetry to put the coefficient on the right [lem-sfb-internal-scalar-pullback-normalization].\nLet $d:U_YG_S\\xrightarrow{\\sim}G_RU_X$ be the actual comparison [def-sfb-derived-comap-lower-star-iso], $b:U_XL_S\\xrightarrow{\\sim}L_RU_Y$ the canonical restriction/pullback comparison [lem-weil-pbc-ring-sheaf-change-adjunction], and $\\theta:L_ST_Y\\xrightarrow{\\sim}T_XL_R$ the comparison conjugate to $d$ under the composite adjunctions (the inverse of [def-sfb-derived-pull-iso]). Then $C$ and $B$ are flat, $L_R,L_S$ are exact pullbacks, and $e_Z$ carries the scalar unit to $M\\otimes^L(R_Z\\to U_ZS_Z)$. The module-object scalar adjunction and this ring-sheaf scalar adjunction have the same units under the equivalence. Moreover $d$ equals the ring-sheaf derived direct-image comparison of [lem-weil-pbc-ring-sheaf-change-adjunction]; on K-injective $S_X$-complexes both are induced by the identical ordinary restriction/pushforward composite. Finally for every $M\\in D(R_Y)$,\n$$e_X(L_RM)\\circ U_X(\\theta_M)\\circ b_{T_YM}^{-1}\\circ L_R(e_Y(M)^{-1})\n=(1\\otimes\\rho)\\circ\\mu_{M,C}:L_R(M\\otimes^L C)\\longrightarrow L_RM\\otimes^L B,$$\nwhere $\\mu_{M,C}$ is the specified derived pullback tensor comparison [lem-weil-pbc-ringed-projection-mate-exact]. This is equality of the specified transformations in the derived category; the right side is induced on flat-term K-flat representatives by the inverse-image pure-tensor map $f^{-1}(m\\otimes s)\\mapsto f^{-1}m\\otimes f^{-1}s$, followed by the coefficient identification.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+  "place": "paragraph (1), canonical scalar comparison: normalized scalar units, derived restriction/pushforward, and the tensor identification of the conjugate pullback square (returned item steps 1 and 4)"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-coefficient-change",
+  "sk-def-sfb-coefficient-morphisms",
+  "lem-pd-module-ringed-topos-derived-comparison",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-derived-extension-of-scalars",
+  "def-sfb-derived-comap-lower-star-iso",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "def-sfb-derived-pull-iso",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "def-pur-kinjective-complex",
+  "lem-sfb-internal-scalar-pullback-normalization",
+  "def-sfb-scalar-restriction-tensor-comparison-data",
+  "def-sfb-section-scalar-tensor-normalization-data",
+  "def-sfb-scalar-section-push-comparison-data",
+  "def-sfb-internal-section-scalar-pullback-comparison-data",
+  "def-sfb-internal-derived-scalar-comparisons",
+  "def-pd-section-module-operations-data",
+  "def-pd-section-derived-tensor-data",
+  "def-pd-section-derived-realization"
+ ],
+ "proof": [
+  {
+   "text": "Multiplication preservation for the coefficient ring homomorphism proves flatScalarCoefficientMap_linear by expanding tensorHom_def'. Exact extension followed by exact restriction is isomorphic via the specified e.ordinary to tensorRight of the restricted coefficient; transport finite limits and finite colimits across this isomorphism. Geometric pullbacks are exact by module_pullback_additive_exact.",
+   "uses": [
+    "sk-def-sfb-change-of-scalars",
+    "det-prop-sfb-module-pullback-exact-main"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply lem-sfb-flat-scalar-unit-normalization at X and Y with the actual regular coefficient maps. It gives the two internal unit equations and the section scalar models with their tensor and adjunction-unit compatibility.",
+   "uses": [
+    "lem-sfb-flat-scalar-unit-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply lem-sfb-flat-scalar-geometric-coherence to these two normalized section scalar models. It gives equality of the actual direct-image map with scalarRestrictionPush, PullNormalized for the actual theta, the section pullback comparison and the section direct-image normalization and compatibility square.",
+   "uses": [
+    "lem-sfb-flat-scalar-geometric-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply internal_scalar_mate_projection with the given tensor normalizations and the now proved PullNormalized theta. Its ScalarMatePullEquation gives the tensor square before canceling eY. Precompose with L_R(eY.inv), combine the two functor images, and cancel eY.inv followed by eY.hom. This yields precisely the final requested equation.",
+   "uses": [
+    "lem-sfb-internal-scalar-mate-projection"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-change-of-scalars",
+  "det-prop-sfb-module-pullback-exact-main",
+  "lem-sfb-flat-scalar-unit-normalization",
+  "lem-sfb-flat-scalar-geometric-coherence",
+  "lem-sfb-internal-scalar-mate-projection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+  "place": "paragraph (1); R9 separates step 2 and steps 3--5, and combines them with exactness and the existing scalar mate-projection equation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For commutative condensed coefficient rings, the derived restriction pushforward square is conjugate to scalar extension pullback and its restriction is the normalized tensor pullback comparison",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackComp, SheafOfModules.pullbackIso, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; ",
+   "date": "2026-10-22",
+   "verdict": "no match: underived sheaf pullback composition/conjugacy and ordinary scalar units do not assert the normalized derived internal-module square or its tensor identification"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical conjugate pullback scalar change isomorphism agrees on unbounded sheaf derived categories with the tensor associator under the restriction tensor presentation",
+   "results": "8 hits: SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackIso, SheafOfModules.pullbackObjFreeIso; ",
+   "date": "2026-10-22",
+   "verdict": "no match: underived sheaf pullback composition/conjugacy and ordinary scalar units do not assert the normalized derived internal-module square or its tensor identification"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp, CategoryTheory.conjugateEquiv",
+   "results": "1 hits: SheafOfModules.conjugateEquiv_pullbackComp_inv; ",
+   "date": "2026-10-22",
+   "verdict": "no match: underived sheaf pullback composition/conjugacy and ordinary scalar units do not assert the normalized derived internal-module square or its tensor identification"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedComapLowerStarIso|derivedPullIso|residueDerivedTensorIso",
+   "results": "0 hits: ; ",
+   "date": "2026-10-22",
+   "verdict": "no match: underived sheaf pullback composition/conjugacy and ordinary scalar units do not assert the normalized derived internal-module square or its tensor identification"
+  },
+  {
+   "tool": "leansearch",
+   "query": "In the derived categories of condensed module sheaves the scalar extension pullback comparison under restriction is the canonical derived tensor pullback isomorphism",
+   "results": "8 hits: PresheafOfModules.pullback, PresheafOfModules.restrictScalarsObj, PresheafOfModules.restrictScalars, ModuleCat.ExtendRestrictScalarsAdj.unit, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, SheafOfModules.restrictScalars, PresheafOfModules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback; ",
+   "date": "2026-10-22",
+   "verdict": "no match: underived sheaf pullback composition/conjugacy and ordinary scalar units do not assert the normalized derived internal-module square or its tensor identification"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedComapLowerStarIso|derivedPullIso|scalar.*normalization",
+   "results": "2 hits: Mathlib/Tactic/Module.lean, Mathlib/RingTheory/Localization/Integral.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pullback composition, ordinary scalar units, or exact-functor Ext maps do not assert this normalized unbounded internal-module square"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension restriction adjunction unit is tensor with the ring homomorphism and conjugate pullback comparison is balanced inverse image",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.unit, ModuleCat.extendRestrictScalarsAdj, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction_hom_apply, ModuleCat.instIsLeftAdjointRestrictScalars, ModuleCat.RestrictionCoextensionAdj.unit'_app",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pullback composition, ordinary scalar units, or exact-functor Ext maps do not assert this normalized unbounded internal-module square"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "results": "1 hits: SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pullback composition, ordinary scalar units, or exact-functor Ext maps do not assert this normalized unbounded internal-module square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For flat scalar extension of sheaves of modules and geometric inverse image, the conjugate of restriction direct image equals the canonical derived tensor pullback comparison",
+   "results": "8 hits: SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackIso, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackComp, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pushforwardNatIso_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pullback composition, ordinary scalar units, or exact-functor Ext maps do not assert this normalized unbounded internal-module square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact extension of scalars and inverse image commute on unbounded derived categories compatibly with the specified scalar and geometric adjunction units",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.mapExactFunctor_smul, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.mapExtLinearMap_apply, CategoryTheory.Abelian.Ext.mapExactFunctor_zero, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Abelian.Ext.singleFunctor_map_comp_hom",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pullback composition, ordinary scalar units, or exact-functor Ext maps do not assert this normalized unbounded internal-module square"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv_pullbackComp_inv|extendRestrictScalarsAdj_unit_app_apply",
+   "results": "2 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pullback composition, ordinary scalar units, or exact-functor Ext maps do not assert this normalized unbounded internal-module square"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-coefficient-push-filtered-legs",
+  "date": "2026-10-22",
+  "group": "Q32"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-rational",
+   "place": "paragraph (1), canonical scalar comparison: normalized scalar units, derived restriction/pushforward, and the tensor identification of the conjugate pullback square (returned item steps 1 and 4)",
+   "via": [
+    "lem-sfb-coefficient-push-filtered-legs"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-flat-coefficient-square-normalization",
+  "worker": "stage1",
+  "summary": "Reused the existing generic internal scalar normalization, ring-sheaf comparison, and normalized projection equation. Proved the missing bridge theta=lambda by comparing scalar transposes using the composite derived adjunctions and their actual units. Replaced residue-only definition references for e by the existing generic normalized scalar presentation; no mathematical hypothesis or conclusion changed. No new nodes.",
+  "blueprint": "The six steps make precise the scalar comparison in det-thm-sfb-proper-base-change-rational paragraph (1), specifically the parent coefficient-push-filtered-legs old steps 1 and 4: flat coefficients and exact pullback, units, actual restriction/direct-image comparison, conjugacy, theta=lambda, and the tensor square.",
+  "tool_uses": [
+   {
+    "node": "lem-pd-module-ringed-topos-derived-comparison",
+    "why": "Fixed internal-module/section-ring equivalence including actual geometric adjunctions and tensor maps; no Poincare-duality argument is used."
+   },
+   {
+    "node": "det-prop-sfb-module-pullback-exact-main",
+    "why": "Generic Exactness of pullback on module objects used with the stated coefficient hypotheses; no proper-base-change or finiteness step of the unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic The functor induced on derived categories by an exact functor, with its factorization through the localization functors used with the stated coefficient hypotheses; no proper-base-change or finiteness step of the unit is replaced."
+   },
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Generic ordinary tensor equivalence preserving local pure tensors, units and symmetry."
+   },
+   {
+    "node": "lem-pc-pre-derived-adjoint-functors-general",
+    "why": "Generic representative formula for deriving an ordinary adjunction, applied to the exact scalar adjunction."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic Existence of K-injective resolutions of sheaves of modules used with the stated coefficient hypotheses; no proper-base-change or finiteness step of the unit is replaced."
+   },
+   {
+    "node": "lem-sfb-comap-preserves-k-injectives",
+    "why": "Generic Flat restriction of scalars preserves K-injectives used with the stated coefficient hypotheses; no proper-base-change or finiteness step of the unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-flat-ringed-diagram-restriction",
+    "why": "Generic flat ringed comparison theorem at the terminal diagram category, giving the precise K-injective representative normalization of d."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "Generic Derived adjunctions under compatible changes of ring sheaves used with the stated coefficient hypotheses; no proper-base-change or finiteness step of the unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Generic Universal property of a localization of categories: functors and natural transformations inverting W factor through it used with the stated coefficient hypotheses; no proper-base-change or finiteness step of the unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic Exactness data for the ringed-topos projection mate used with the stated coefficient hypotheses; no proper-base-change or finiteness step of the unit is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pd-module-ringed-topos-derived-comparison",
+  "det-prop-sfb-module-pullback-exact-main",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sfb-comap-preserves-k-injectives",
+  "lem-weil-pbc-flat-ringed-diagram-restriction",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-ringed-projection-mate-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q136-8f1fd5476",
+  "group": "Q136",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q136-8f1fd5476 (reviewer sub-agent of L); spot-checked: I read the item, all six steps, every cited statement, the Q32 snapshot of the item, the Q32 review notes and the read-only Lean (ChangeOfCoefficients.lean lines 140-243). (1) The statement changes in one place only: the residue-only e_Z citations become lem-sfb-internal-scalar-pullback-normalization, as Q32 review note 1 recommended. That node defines the generic balanced e_T (s⊗x↦x⊗s); hypotheses and conclusions are unchanged. (2) Types and directions match Lean: q = derivedPullIso : T_X L_R ≅ L_S T_Y, its conjugate is d.hom = derivedComapLowerStarIso, and θ = q⁻¹. μ has the direction L(M⊗N)→LM⊗LN of lem-weil-pbc-ringed-projection-mate-exact. (3) Step 1: flatness comes from exact Ext plus exact Res, and pullback is exact by det-prop-sfb-module-pullback-exact-main. Step 2: units derived from exact functors via 0FND. Step 3: the actual d is the derived ordinary comapLowerStarIso on K-injectives. It equals the ring-sheaf d because both satisfy the adjunct identity with the same b (take t = ε). Step 4: I checked the mate identity directly; U_X(q)j_X = b⁻¹L_R(j_Y). Step 5: λ⁻¹ agrees with this on generators via the coequalizer property, and localization (3) plus injectivity of the adjunction bijection give θ = λ. Step 6: the first equation of lem-sfb-internal-scalar-mate-projection with c = ρ and δ ↦ μ (lem-pd-module-ringed-topos-derived-comparison) gives the display. (4) Small cases a = id, f = id, S = 0 and unbounded M all check. (5) No new nodes and no cycle. No SGA. The 11 tool_uses are generic sheaf/derived-category tools; I accept them. Mathlib searches cover all three kinds. (6) Batch-5 finding: both flagged citations reach lem-pd-section-derived-pushpull-normalization only. That node is the foundational internal/section module derived push-pull comparison of unit sk-thm-sf-verdier-exchange, which neither assumption gives and which is not a step of PD or the trace formula. The base statement already cited lem-pd-module-ringed-topos-derived-comparison, which has the same reach, so I do not return on this finding. Maintainer note: the existing unsplit Q100 node lem-sfb-coefficient-ringed-square-normalization overlaps the item's pre-existing clause 'd = ring-sheaf comparison' (its C = e⁻¹), but not θ = λ or the square. Step 3 proves the clause independently."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FlatCoefficientSquareNormalization",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientChange.flat_coefficient_square_normalization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.QuotientChange.flatScalarCoefficientMap_linear",
+   "AlgebraicGeometry.ProEtale.QuotientChange.flatScalarCoefficientMap",
+   "AlgebraicGeometry.ProEtale.QuotientChange.flatScalarDerivedCoefficientMap",
+   "AlgebraicGeometry.ProEtale.QuotientChange.flatScalarTheta",
+   "AlgebraicGeometry.ProEtale.QuotientChange.flatScalarDirectImage",
+   "AlgebraicGeometry.ProEtale.QuotientChange.FlatSectionDirectImageNormalized",
+   "AlgebraicGeometry.ProEtale.QuotientChange.flat_coefficient_square_normalization"
+  ],
+  "file": "lean/Sheaf/Paper/FlatCoefficientSquareNormalization.lean",
+  "statement": "theorem flat_coefficient_square_normalization (ℓ p : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [CharP k p] (_hp : 0 < p) (_hne : p ≠ ℓ) {X Y : Over (Scheme.Spec.obj (Opposite.op (CommRingCat.of k)))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] (f : X ⟶ Y) (eX : TensorNormalization a X.left) (eY : TensorNormalization a Y.left) (_heX : TensorNormalized a X.left eX) (_heY : TensorNormalized a Y.left eY) : exactFunctor _ _ (tensorRight (B₀ a X.left)) ∧ exactFunctor _ _ (tensorRight (B₀ a Y.left)) ∧ exactFunctor _ _ (CondensedRing.upperStar R f.left) ∧ exactFunctor _ _ (CondensedRing.upperStar S f.left) ∧ (∀ M : DerivedCategory (Modules R X.left), (scalarAdj a X.left).unit.app M ≫ eX.derived.hom.app M = (ρ_ M).inv ≫ (M ◁ flatScalarDerivedCoefficientMap a X.left)) ∧ (∀ M : DerivedCategory (Modules R Y.left), (scalarAdj a Y.left).unit.app M ≫ eY.derived.hom.app M = (ρ_ M).inv ≫ (M ◁ flatScalarDerivedCoefficientMap a Y.left)) ∧ (flatScalarDirectImage a f.left).hom = scalarRestrictionPush a f.left ∧ PullNormalized a f.left (flatScalarTheta a f.left) ∧ (∃ (sX : SectionScalarComparison a X.left) (sY : SectionScalarComparison a Y.left), SectionScalarNormalized a X.left sX ∧ SectionScalarNormalized a Y.left sY ∧ SectionTensorNormalized a X.left sX eX ∧ SectionTensorNormalized a Y.left sY eY ∧ SectionPullNormalized a f.left sX sY (flatScalarTheta a f.left) ∧ (∀ M : DerivedCategory (Modules R X.left), (ModuleRingedComparison.derivedEquivalence R X.left).functor.map ((scalarAdj a X.left).unit.app M) ≫ (sectionScalarRestriction a X.left sX).hom.app ((D a X.left).obj M) ≫ (SheafOfModules.scalarDerivedRestriction.{u + 1, u, u + 1, u + 1} (CategoryTheory.InternalAbelianSheafModule.sectionScalarMap.{u + 1, u + 1, u} (Scheme.ProEt.topology X.left) (coefficientMap a X.left))).map (sX.derived.hom.app M) = sX.pair.adjunction.unit.app ((ModuleRingedComparison.derivedEquivalence R X.left).functor.obj M)) ∧ (∀ M : DerivedCategory (Modules R Y.left), (ModuleRingedComparison.derivedEquivalence R Y.left).functor.map ((scalarAdj a Y.left).unit.app M) ≫ (sectionScalarRestriction a Y.left sY).hom.app ((D a Y.left).obj M) ≫ (SheafOfModules.scalarDerivedRestriction.{u + 1, u, u + 1, u + 1} (CategoryTheory.InternalAbelianSheafModule.sectionScalarMap.{u + 1, u + 1, u} (Scheme.ProEt.topology Y.left) (coefficientMap a Y.left))).map (sY.derived.hom.app M) = sY.pair.adjunction.unit.app ((ModuleRingedComparison.derivedEquivalence R Y.left).functor.obj M)) ∧ ∃ d : ModuleRingedComparison.derivedPushforward S f.left ⋙ SheafOfModules.scalarDerivedRestriction.{u + 1, u, u + 1, u + 1} (CategoryTheory.InternalAbelianSheafModule.sectionScalarMap.{u + 1, u + 1, u} (Scheme.ProEt.topology Y.left) (coefficientMap a Y.left)) ≅ SheafOfModules.scalarDerivedRestriction.{u + 1, u, u + 1, u + 1} (CategoryTheory.InternalAbelianSheafModule.sectionScalarMap.{u + 1, u + 1, u} (Scheme.ProEt.topology X.left) (coefficientMap a X.left)) ⋙ ModuleRingedComparison.derivedPushforward R f.left, FlatSectionDirectImageNormalized a f.left d ∧ ∀ N : DerivedCategory (Modules S X.left), (ModuleRingedComparison.derivedEquivalence R Y.left).functor.map ((flatScalarDirectImage a f.left).hom.app N) ≫ (scalarSectionPushComparison R f.left).hom.app ((V a X.left).obj N) ≫ (ModuleRingedComparison.derivedPushforward R f.left).map ((sectionScalarRestriction a X.left sX).hom.app N) = (sectionScalarRestriction a Y.left sY).hom.app ((F S f.left).obj N) ≫ (SheafOfModules.scalarDerivedRestriction.{u + 1, u, u + 1, u + 1} (CategoryTheory.InternalAbelianSheafModule.sectionScalarMap.{u + 1, u + 1, u} (Scheme.ProEt.topology Y.left) (coefficientMap a Y.left))).map ((scalarSectionPushComparison S f.left).hom.app N) ≫ d.hom.app ((ModuleRingedComparison.derivedEquivalence S X.left).functor.obj N)) ∧ ∀ M : DerivedCategory (Modules R Y.left), (L R f.left).map (eY.derived.inv.app M) ≫ (scalarRestrictionPull a f.left).inv.app ((D a Y.left).obj M) ≫ (V a X.left).map ((flatScalarTheta a f.left).hom.app M) ≫ eX.derived.hom.app ((L R f.left).obj M) = scalarTensorPull f.left M (B a Y.left) ≫ ((L R f.left).obj M ◁ (scalarCoefficientPull a f.left).hom)",
+  "branch": "sheaf-dag",
+  "by": "Q79",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The immutable-head H2 repair adds existing:true definition ownership records for the plain scalar comparison maps, section restriction/tensor predicate and section pushforward alias on unchanged published modules, and cites the existing section comparison data owner. The theorem signature and all Lean bodies are unchanged. The K-injective normalization and conjugation specify canonical d. Only definition owners are added to stmt_deps; the scalar-mate theorem remains in proof_deps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-48f7da5cf",
+  "group": "Q79",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of d53b8964. Lean file byte-identical to returned head; item node changes only stmt_deps/lean.note: the theorem stmt_deps lem-sfb-internal-scalar-mate-projection and lem-sfb-scalar-geometric-exchange-rectangle are replaced by three new existing:true def nodes (def-sfb-scalar-restriction-tensor-comparison-data owning scalarRestrictionPull/Push, scalarCoefficientUnit/Pull, scalarTensorPull; def-sfb-section-scalar-tensor-normalization-data owning sectionScalarRestriction/Tensor/Coefficient, SectionTensorNormalized; def-sfb-scalar-section-push-comparison-data owning scalarSectionPushComparison) plus existing def-sfb-internal-section-scalar-pullback-comparison-data, def-sfb-internal-derived-scalar-comparisons, def-pd-section-module-operations-data, def-pd-section-derived-tensor-data and def-pd-section-derived-realization; mate theorem kept in proof_deps. Verified against side-live modules: all plain defs with real bodies, statements verbatim, TeX matches bodies (b, mate d, v, rho, mu directions), fields complete, no competing def owner live, item still split, no cycle. Substance re-read: hypotheses no stronger, flatness/exact pullback/unit/d/theta=lambda/section-pinned d/final display all match the node; edge cases fine; sorry only; docstrings ok. Advisory: base-era scalarDerivedRestriction etc. owned by uncited def nodes; owned decls' docstrings name theorem nodes. No file changed, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261024T020139-L-2560514",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

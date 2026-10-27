@@ -1,0 +1,73 @@
+# global build 2026-10-24T20:38:26Z of 2df928f8f4: Sheaf.Paper.RingedOpenScalarLimitCoherence failed
+error: Sheaf/Paper/RingedOpenScalarLimitCoherence.lean:699:43: Invalid field `comparisonF`: The environment does not contain `Exists.comparisonF`, so it is not possible to project the field `comparisonF` from an expression
+  c
+of type
+  ∃ d, NormalizedLimitSquare.SquareLaws F G H K LA etaA LB etaB LC etaC LD etaD d e
+error: Sheaf/Paper/RingedOpenScalarLimitCoherence.lean:698:52: unsolved goals
+A B C D : Type uA
+inst✝³⁵ : Category.{vA, uA} A
+inst✝³⁴ : Category.{vA, uA} B
+inst✝³³ : Category.{vA, uA} C
+inst✝³² : Category.{vA, uA} D
+inst✝³¹ : Abelian A
+inst✝³⁰ : Abelian B
+inst✝²⁹ : Abelian C
+inst✝²⁸ : Abelian D
+inst✝²⁷ : HasLimits A
+inst✝²⁶ : HasLimits B
+inst✝²⁵ : HasLimits C
+inst✝²⁴ : HasLimits D
+inst✝²³ : HasDerivedCategory A
+inst✝²² : HasDerivedCategory B
+inst✝²¹ : HasDerivedCategory C
+inst✝²⁰ : HasDerivedCategory D
+inst✝¹⁹ : HasDerivedCategory (ℕᵒᵖ ⥤ A)
+inst✝¹⁸ : HasDerivedCategory (ℕᵒᵖ ⥤ B)
+inst✝¹⁷ : HasDerivedCategory (ℕᵒᵖ ⥤ C)
+inst✝¹⁶ : HasDerivedCategory (ℕᵒᵖ ⥤ D)
+inst✝¹⁵ : IsGrothendieckAbelian.{vA, vA, max uA vA} (ℕᵒᵖ ⥤ A)
+inst✝¹⁴ : IsGrothendieckAbelian.{vA, vA, max uA vA} (ℕᵒᵖ ⥤ B)
+inst✝¹³ : IsGrothendieckAbelian.{vA, vA, max uA vA} (ℕᵒᵖ ⥤ C)
+inst✝¹² : IsGrothendieckAbelian.{vA, vA, max uA vA} (ℕᵒᵖ ⥤ D)
+F : A ⥤ B
+G : B ⥤ D
+H : A ⥤ C
+K : C ⥤ D
+inst✝¹¹ : F.Additive
+inst✝¹⁰ : G.Additive
+inst✝⁹ : H.Additive
+inst✝⁸ : K.Additive
+inst✝⁷ : PreservesFiniteLimits F
+inst✝⁶ : PreservesFiniteColimits F
+inst✝⁵ : PreservesFiniteLimits G
+inst✝⁴ : PreservesFiniteColimits G
+inst✝³ : PreservesFiniteLimits H
+inst✝² : PreservesFiniteColimits H
+inst✝¹ : PreservesFiniteLimits K
+inst✝ : PreservesFiniteColimits K
+LA : DerivedCategory (ℕᵒᵖ ⥤ A) ⥤ DerivedCategory A
+LB : DerivedCategory (ℕᵒᵖ ⥤ B) ⥤ DerivedCategory B
+LC : DerivedCategory (ℕᵒᵖ ⥤ C) ⥤ DerivedCategory C
+LD : DerivedCategory (ℕᵒᵖ ⥤ D) ⥤ DerivedCategory D
+etaA : roosLimitFunctor ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ LA
+etaB : roosLimitFunctor ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ LB
+etaC : roosLimitFunctor ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ LC
+etaD : roosLimitFunctor ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ LD
+e : F ⋙ G ≅ H ⋙ K
+c : NormalizedLimitSquare.Coherence F G H K LA etaA LB etaB LC etaC LD etaD e
+⊢ ∃ lF lG lH lK,
+    CbcLimitNormalized F LA LB etaA etaB lF ∧
+      CbcLimitNormalized G LB LD etaB etaD lG ∧
+        CbcLimitNormalized H LA LC etaA etaC lH ∧
+          CbcLimitNormalized K LC LD etaC etaD lK ∧
+            CbcAugmentationCompatible F LA LB etaA etaB lF ∧
+              CbcAugmentationCompatible G LB LD etaB etaD lG ∧
+                CbcAugmentationCompatible H LA LC etaA etaC lH ∧
+                  CbcAugmentationCompatible K LC LD etaC etaD lK ∧
+                    ∀ (M : DerivedCategory (ℕᵒᵖ ⥤ A)),
+                      G.mapDerivedCategory.map (lF.hom.app M) ≫
+                          lG.hom.app ((cbcTowerDerived F).obj M) ≫
+                            LD.map ((cbcDerivedTowerSquare F G H K e).hom.app M) =
+                        (cbcDerivedSquare F G H K e).hom.app (LA.obj M) ≫
+                          K.mapDerivedCategory.map (lH.hom.app M) ≫ lK.hom.app ((cbcTowerDerived H).obj M)
+error: Lean exited with code 1

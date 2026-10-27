@@ -1542,7 +1542,12 @@ private theorem scalarDerivedSquare
       dsimp only [inverseImagePullbackComparison, integralOperationsPullbackOnGood,
         integralOperationsGoodLocalization, Functor.comp_obj, GE]
       simp only [CategoryTheory.Functor.map_id, IsIso.inv_id, Category.id_comp]
-      erw [CategoryTheory.Functor.map_id, Category.comp_id]
+      simp only [← Category.assoc]
+      convert Category.comp_id _ using 2
+      all_goals first
+        | rfl
+        | exact ((integralDerivedPullback l E g).congr_map (DerivedCategory.Q.map_id _)).trans
+            ((integralDerivedPullback l E g).map_id _)
     have hkL : κL.app (DerivedCategory.Q.obj Q) =
         Gₗ.mapDerivedCategoryFactors.hom.app Q ≫
           DerivedCategory.Q.map (inverseImageRoosComparisonComplex l L g Q) ≫
@@ -1551,7 +1556,12 @@ private theorem scalarDerivedSquare
       dsimp only [inverseImagePullbackComparison, integralOperationsPullbackOnGood,
         integralOperationsGoodLocalization, Functor.comp_obj, Gₗ, Qgood]
       simp only [CategoryTheory.Functor.map_id, IsIso.inv_id, Category.id_comp]
-      erw [CategoryTheory.Functor.map_id, Category.comp_id]
+      simp only [← Category.assoc]
+      convert Category.comp_id _ using 2
+      all_goals first
+        | rfl
+        | exact ((integralDerivedPullback l L g).congr_map (DerivedCategory.Q.map_id _)).trans
+            ((integralDerivedPullback l L g).map_id _)
     have heκ : FX.mapDerivedCategory.map (κE.app (DerivedCategory.Q.obj P.obj)) ≫
         FX.mapDerivedCategory.map ((integralDerivedPullbackComparison l E g).hom.app P) =
       FX.mapDerivedCategory.map (GE.mapDerivedCategoryFactors.hom.app P.obj) ≫

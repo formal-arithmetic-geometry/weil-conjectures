@@ -87,6 +87,12 @@ private theorem changeOfRings_flat_terms
   exact (exactFunctor _ _).prop_of_iso
     (SheafOfModules.siteSheafTensorRightIso.{u + 1, u, u + 1} S _).symm (hc.2 i)
 
+section
+
+attribute [local instance] SheafOfModules.KFlatFixedTensor.tensorAdditive
+  SheafOfModules.KFlatFixedTensor.tensorObjAdditive
+  SheafOfModules.KFlatFixedTensor.tensorHasMapBifunctor
+
 private theorem proEtale_torAmplitude_of_flatModel
     (T : Scheme.{u}) (A : Type u) [CommRing A] (a b : ℤ) (hab : a ≤ b)
     (K : proEtaleDerivedCategory T A)
@@ -115,7 +121,7 @@ private theorem proEtale_torAmplitude_of_flatModel
   let S₀ := (HomologicalComplex.single C (.up ℤ) 0).obj M
   let eqP : DerivedCategory.Q.obj P ≅ DerivedCategory.Q.obj P' :=
     ei.symm ≪≫ e'.symm ≪≫ (asIso (DerivedCategory.Q.map f)).symm
-  let F := tensorRight M
+  let F := (SheafOfModules.KFlatFixedTensor.ordinaryTensor R).flip.obj M
   let PM := (F.mapHomologicalComplex (.up ℤ)).obj P
   have hzX : IsZero (PM.X i) := F.map_isZero (hsupp i hi)
   have hz : IsZero (PM.homology i) :=
@@ -123,15 +129,23 @@ private theorem proEtale_torAmplitude_of_flatModel
   let eq : DerivedCategory.Q.obj
       (((SheafOfModules.KFlatFixedTensor.totalTensor R).obj P').obj S₀) ≅
       DerivedCategory.Q.obj PM :=
-    DerivedCategory.Q.mapIso (CochainComplex.mapBifunctorSingle₂Iso (curriedTensor C) M P') ≪≫
+    DerivedCategory.Q.mapIso (CochainComplex.mapBifunctorSingle₂Iso
+      (SheafOfModules.KFlatFixedTensor.ordinaryTensor R) M P') ≪≫
       (c P' hk' M).symm ≪≫
       (((SheafOfModules.KFlatFixedTensor.derivedTensor R).mapIso eqP.symm).app _) ≪≫
       c P hk M
   have ht : IsZero ((DerivedCategory.homologyFunctor C i).obj
       (DerivedCategory.Q.obj PM)) :=
     hz.of_iso ((DerivedCategory.homologyFunctorFactors C i).app PM)
-  exact ht.of_iso ((DerivedCategory.homologyFunctor C i).mapIso eq)
+  have heq : derivedTensor T A L S₀ P' f hf hP' = DerivedCategory.Q.obj
+      (((SheafOfModules.KFlatFixedTensor.totalTensor R).obj P').obj S₀) := by
+    simp only [SheafOfModules.KFlatFixedTensor.totalTensor,
+      SheafOfModules.KFlatFixedTensor.ordinaryTensor_eq_published]
+    rfl
+  exact ht.of_iso ((DerivedCategory.homologyFunctor C i).mapIso (eqToIso heq ≪≫ eq))
 
+
+end
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
   [FiniteDimensional (Padic l) E] (m n : ℕ) (hmn : m ≤ n) (T : Scheme.{u})
@@ -177,6 +191,8 @@ noncomputable def flatModelReductionData :=
   SheafOfModules.derivedChangeOfRingsIndependentCoefficients.{u + 2, u + 1, u + 1, u}
     (flatModelReductionRingMap l E m n hmn T)
 
+attribute [local irreducible] flatModelReductionData
+
 /-- Ordinary tensor along the specified quotient map, fixed on objects and maps by
 sectionwise tensor followed by sheafification in the recorded change-of-rings theorem.
 Source: blueprint, lem-sf-reduction-flat-model.md, ordinary tensor complex
@@ -197,6 +213,8 @@ Source: Stacks Tags 06YT and 06YY; blueprint, lem-sf-reduction-flat-model.md
 (blueprint: lem-sf-reduction-flat-model). -/
 noncomputable def flatModelReductionDerivedData :=
   (flatModelReductionData l E m n hmn T).choose_spec.choose_spec.choose_spec.choose_spec.2.2
+
+attribute [local irreducible] flatModelReductionDerivedData
 
 /-- Derived reduction from finite coefficient stage n to stage m, as the universal
 left-derived functor of the specified ordinary scalar extension.
@@ -239,19 +257,19 @@ private theorem homotopyCounit_modelIso
 private theorem chosenCounit_modelIso
     {C D : Type (u + 2)} [Category.{u + 1} C] [Category.{u + 1} D]
     [Abelian C] [Abelian D] [HasDerivedCategory.{u + 2} C] [HasDerivedCategory.{u + 2} D]
-    (F : C ⥤ D) [F.Additive]
-    (r : ∀ (LF : DerivedCategory C ⥤ DerivedCategory D),
-      (DerivedCategory.Qh ⋙ LF ⟶ F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh) → Prop)
-    (H : ∃ LF ε, r LF ε) (P : CochainComplex C ℤ)
-    (h : ∀ LF ε, r LF ε →
-      IsIso (ε.app ((HomotopyCategory.quotient C (.up ℤ)).obj P))) :
+    (F : C ⥤ D) [F.Additive] (KF : CochainComplex C ℤ → Prop)
+    (H : ∃ (LF : DerivedCategory C ⥤ DerivedCategory D)
+      (ε : DerivedCategory.Qh ⋙ LF ⟶ F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh),
+      LF.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso C (.up ℤ)) ∧
+        (∃ (_ : LF.CommShift ℤ), LF.IsTriangulated) ∧
+        ∀ P, KF P → IsIso (ε.app ((HomotopyCategory.quotient C (.up ℤ)).obj P)))
+    (P : CochainComplex C ℤ) (hk : KF P) :
     Nonempty (H.choose.obj (DerivedCategory.Q.obj P) ≅
       DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj P)) := by
   exact homotopyCounit_modelIso F H.choose H.choose_spec.choose P
-    (h _ _ H.choose_spec.choose_spec)
+    (H.choose_spec.choose_spec.2.2 P hk)
 
-attribute [local irreducible] flatModelReductionData flatModelReductionDerivedData
-  Functor.mapHomotopyCategory DerivedCategory.Qh DerivedCategory.Q
+attribute [local irreducible] Functor.mapHomotopyCategory DerivedCategory.Qh DerivedCategory.Q
   SheafOfModules.changeOfRings SheafOfModules.changeOfRingsHom
 
 private theorem reductionChange_modelIso
@@ -265,12 +283,17 @@ private theorem reductionChange_modelIso
     (proEtaleRingModules T (proEtaleConstantRing T (Padic.coefficientExtensionRing l E n)))
   let := HasDerivedCategory.standard
     (proEtaleRingModules T (proEtaleConstantRing T (Padic.coefficientExtensionRing l E m)))
-  exact chosenCounit_modelIso (flatModelReductionChange l E m n hmn T) _
-    (flatModelReductionDerivedData l E m n hmn T) P
-    (fun _ _ h ↦ h.2.2 P hk)
+  let : (flatModelReductionData l E m n hmn T).choose.Additive :=
+    (flatModelReductionData l E m n hmn T).choose_spec.choose_spec.choose_spec.choose
+  exact chosenCounit_modelIso (flatModelReductionData l E m n hmn T).choose
+    (fun P ↦ P.IsKFlatIndependentCoefficients)
+    (flatModelReductionDerivedData l E m n hmn T) P hk
+
 
 
 attribute [local irreducible] flatModelReductionChange flatModelReduction
+
+
 
 /-- On the recorded pro-etale category, reduction of the supplied flat model is a flat
 model in the same interval, and the derived reduction has that Tor amplitude.
@@ -520,7 +543,8 @@ private theorem etale_reduction_model
   have : PreservesFiniteColimits U := inferInstance
   let coeff := (constantSheaf T.smallEtaleTopology (ModuleCat.{u + 1} R)).obj
     ((ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} φ).obj (ModuleCat.of S S))
-  have : (T.smallEtaleTopology.W (A := ModuleCat.{u + 1} R)).IsMonoidal := inferInstance
+  have : (T.smallEtaleTopology.W (A := ModuleCat.{u + 1} R)).IsMonoidal :=
+    GrothendieckTopology.W.monoidal (J := T.smallEtaleTopology) (A := ModuleCat.{u + 1} R)
   obtain ⟨ec⟩ := extension_tensor_comparison
     (C := T.Etale) (R := R) (S := S) T.smallEtaleTopology φ
   exact etale_model_from_extension T F U coeff ec

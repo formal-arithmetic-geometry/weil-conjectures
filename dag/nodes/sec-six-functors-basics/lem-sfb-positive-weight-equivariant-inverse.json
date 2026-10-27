@@ -1,0 +1,216 @@
+{
+ "id": "lem-sfb-positive-weight-equivariant-inverse",
+ "kind": "statement",
+ "title": "Positive tangent weights turn an equivariant local inverse into a global inverse",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $X$ and $Y$ be smooth connected affine $F$-schemes of finite type [def-pc-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-finite-type-morphism]. Give each a $\\mathbf G_m$-action [def-sc-gm-ga], meaning an $F$-morphism $\\mathbf G_m\\times_F X\\to X$ (respectively with $Y$) satisfying the action identity and associativity. Let $x\\in X(F)$ and $y\\in Y(F)$ be fixed points, and let $f:X\\to Y$ be an $F$-morphism with $f(x)=y$ and $f(tz)=t f(z)$ as an identity of scheme morphisms. Put $T_xX=\\operatorname{Hom}_F(\\mathfrak m_x/\\mathfrak m_x^2,F)$ and define $T_yY$ likewise; the differential $d f_x:T_xX\\to T_yY$ is the dual of pullback on these cotangent spaces. Assume $d f_x$ is an isomorphism and that, for the differentiated action, $T_xX$ is a direct sum of subspaces on which $t$ acts by $t^n$ with integers $n>0$. Weights here mean characters of $\\mathbf G_m$, not differentials of characters. Then $f$ is an isomorphism of $F$-schemes. The zero tangent space is allowed, with an empty set of weights, and no restriction on $\\operatorname{char}F$ is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 13.42 and its proof, printed p.270, using Theorem 13.41, pp.269--270; the smooth-variety differential criterion for etaleness is stated immediately before Lemma 13.35, p.267. The torus is specialized to G_m and both varieties are assumed smooth."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-gm-ga",
+  "def-sfb-affine-point-positive-tangent-weights"
+ ],
+ "proof": [
+  {
+   "text": "Put $C_Y=\\mathfrak m_y/\\mathfrak m_y^2$ and $C_X=\\mathfrak m_x/\\mathfrak m_x^2$. Pullback induces $c:C_Y\\to C_X$ and its dual is $df_x$. These spaces are finite-dimensional (apply [lem-sfb-fixed-point-homogeneous-cotangent-lifts] to each). Thus $c$ is invertible: dualize the inverse of $df_x$ and use the evaluation identifications with the double duals. Differentiating the given equivariance identity gives $df_x\\,d(t)_x=d(t)_y\\,df_x$. Hence $T_yY$ has precisely the positive character weights of $T_xX$, in every characteristic.",
+   "uses": [
+    "lem-sfb-fixed-point-homogeneous-cotangent-lifts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 13.42, first sentence of proof, p.270; Lemma 13.36 for finite cotangent bases."
+   }
+  },
+  {
+   "text": "Choose homogeneous $b_1,\\ldots,b_d\\in\\mathfrak m_y$ whose classes form a basis, by [lem-sfb-fixed-point-homogeneous-cotangent-lifts]. Set $a_i=f^*b_i\\in\\mathfrak m_x$. Their classes are $c(\\overline b_i)$ and form a basis since $c$ is invertible. Equivariance gives $a_i(tu)=b_i(f(tu))=b_i(tf(u))=t^{n_i}a_i(u)$ as scheme identities. Thus these are homogeneous lifts on $X$ as well. Apply [lem-sfb-positive-weight-luna-coordinates] first to $(Y,y,b_i)$ and then to $(X,x,a_i)$. Smoothness, connectedness, affineness and finite type are hypotheses for both schemes; positivity for $Y$ is step 1. The coordinate maps $\\lambda_Y:Y\\to\\mathbf A_F^d$ and $\\lambda_X:X\\to\\mathbf A_F^d$ are isomorphisms.",
+   "uses": [
+    "lem-sfb-fixed-point-homogeneous-cotangent-lifts",
+    "lem-sfb-positive-weight-luna-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 13.42, commutative diagram and concluding sentence, p.270; Theorem 13.41."
+   }
+  },
+  {
+   "text": "The two homomorphisms $F[T_1,\\ldots,T_d]\\to\\Gamma(X,\\mathcal O_X)$ defining $\\lambda_Y\\circ f$ and $\\lambda_X$ send every $T_i$ to $f^*b_i=a_i$. They are equal by the polynomial universal property [def-weil-pbc-mv-polynomial-ring], so contravariant functoriality and uniqueness for affine spectra [def-weil-affine-spectrum] give $\\lambda_Y\\circ f=\\lambda_X$. Consequently $f=\\lambda_Y^{-1}\\circ\\lambda_X$; its two-sided inverse is $\\lambda_X^{-1}\\circ\\lambda_Y$. For $d=0$ the same calculation uses the empty polynomial ring $F$. This proves the asserted scheme isomorphism.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 13.42, commutative diagram, p.270; compatibility expanded on polynomial generators."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-fixed-point-homogeneous-cotangent-lifts",
+  "lem-sfb-positive-weight-luna-coordinates",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 13.42, p.270; compatible Luna maps constructed by pulling back homogeneous target cotangent lifts."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Luna|strictly.definite|positive.{0,30}tangent|tangent.{0,30}positive|equivariant.{0,30}isomorphism",
+   "results": "0 hits in Mathlib/AlgebraicGeometry; read: none",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are etale/smooth definitions, affine morphism properties, elementary affine maps, or standard etale presentations; none asserts a global inverse from positive tangent weights"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism of smooth affine varieties equivariant for contracting multiplicative group actions is an isomorphism when its tangent map at the fixed point is invertible",
+   "results": "8 hits; read: AlgebraicGeometry.IsSmooth.recOn, AffineMap.homothetyHom, Action.HomSubtype, AffineEquiv.coe_homothetyUnitsMulHom_eq_homothetyHom_coe, AlgebraicGeometry.instIsAffineHomOfIsIsoScheme, AffineEquiv.homothetyUnitsMulHom, SubMulAction.ofFixingSubgroup_equivariantMap_injective, AffineEquiv.linear_symm",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are etale/smooth definitions, affine morphism properties, elementary affine maps, or standard etale presentations; none asserts a global inverse from positive tangent weights"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"tangent\"",
+   "results": "0 hits; read: none",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are etale/smooth definitions, affine morphism properties, elementary affine maps, or standard etale presentations; none asserts a global inverse from positive tangent weights"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivariant morphism between smooth connected affine schemes with multiplicative group actions and strictly positive tangent weights is an isomorphism if its differential at a fixed point is an isomorphism",
+   "results": "8 hits; read: AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.AffineTargetMorphismProperty.arrow_mk_iso_iff, AlgebraicGeometry.instHasAffinePropertyIsomorphismsSchemeAndIsAffineIsIsoCommRingCatAppTop, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.instIsAffineHomOfIsIsoScheme, AlgebraicGeometry.formallyUnramified_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are etale/smooth definitions, affine morphism properties, elementary affine maps, or standard etale presentations; none asserts a global inverse from positive tangent weights"
+  },
+  {
+   "tool": "grep",
+   "query": "Luna|contracting.{0,20}action|strictlyDefinite|positive.{0,20}grading",
+   "results": "0 hits; read: none",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are etale/smooth definitions, affine morphism properties, elementary affine maps, or standard etale presentations; none asserts a global inverse from positive tangent weights"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For contracting torus actions an equivariant etale morphism of connected affine varieties is globally an isomorphism, Luna positive weight inverse theorem",
+   "results": "8 hits; read: AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale, Algebra.Etale.of_equiv, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, StandardEtalePair.homEquiv_symm_apply, StandardEtalePresentation.lift_bijective, Algebra.Etale.iff_exists_algEquiv_prod",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are etale/smooth definitions, affine morphism properties, elementary affine maps, or standard etale presentations; none asserts a global inverse from positive tangent weights"
+  },
+  {
+   "tool": "grep",
+   "query": "Luna|positive.{0,30}weight|equivariant.{0,30}isomorphism",
+   "results": "0 hits; read returned signatures: ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations give affine morphism properties, abstract affine equivalences, or definitions of etaleness and smoothness; none gives the positive-weight global inverse theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An equivariant morphism between positive weight affine varieties which induces an isomorphism on tangent spaces is an isomorphism",
+   "results": "8 hits; read returned signatures: AlgebraicGeometry.instIsAffineHomOfIsIsoScheme, AffineEquiv.mk.injEq, AffineEquiv.mk.inj, AlgebraicGeometry.IsDominant.respectsIso, AffineEquiv.linear_toAffineMap, AffineEquiv.toAffineMap_inj, AffineEquiv.recOn, AffineEquiv.mk'",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations give affine morphism properties, abstract affine equivalences, or definitions of etaleness and smoothness; none gives the positive-weight global inverse theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsIso\", \"IsEtale\"",
+   "results": "0 hits; read returned signatures: ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations give affine morphism properties, abstract affine equivalences, or definitions of etaleness and smoothness; none gives the positive-weight global inverse theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivariant morphism of smooth connected affine schemes with positive multiplicative group tangent weights is an isomorphism when its tangent map is invertible",
+   "results": "8 hits; read returned signatures: AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.instHasAffinePropertyIsomorphismsSchemeAndIsAffineIsIsoCommRingCatAppTop, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.formallyUnramified_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations give affine morphism properties, abstract affine equivalences, or definitions of etaleness and smoothness; none gives the positive-weight global inverse theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-borel-root-product-coordinates",
+  "date": "2026-10-24",
+  "group": "Q29"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Duality step: the highest weight of a dual simple module is the opposition of the original highest weight, and highest weight determines the simple module. Supporting input to Milne 22.18 and 22.19: Proposition 22.17, multiplicity and weight bound for a cyclic module generated by a Borel eigenvector. Ordered-root-factor input for the sentence in Milne 22.17: the opposite unipotent group is generated by negative root groups; specifically Milne 21.68(a), ordered multiplication for the Borel unipotent radical. Supporting general inverse theorem in Milne 13.42, used in the tangent-space argument of 21.68(a).",
+   "via": [
+    "lem-sfb-borel-root-product-coordinates",
+    "lem-sfb-primitive-cyclic-weight-bound",
+    "lem-sfb-simple-module-dual-highest-weight",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-positive-weight-equivariant-inverse",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded Milne 13.42 using homogeneous target cotangent lifts and their pullbacks so compatibility is an equality on polynomial generators. Added the two source inputs, homogeneous lifts (13.36) and positive-weight Luna coordinates (13.41); checked characteristic-free character weights and the empty cotangent basis. No completed project declaration or Mathlib match found.",
+  "blueprint": "Read latest/main-20261024 det-thm-sf-ctf-stability-direct-images proof (3), beneath which the inherited alteration/moduli/representation chain places this item. blueprint_refs.py ancestor returns None; preserve inherited null ancestor and full via chain, with exact Milne 13.42 place. Whole-blueprint searches for Luna, positive weight, homogeneous parameters, tangent, cotangent, torus, 13.36 and 13.41 found no equivalent statement."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q68-ff0a12b5c",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-ff0a12b5c (reviewer sub-agent of L); spot-checked: I read all of the item's mathematics and passed it without changes. Source checked: Milne iAG pp.267-270 (the Luna-map paragraph, 13.35-13.42). The item is Milne 13.42 for T=G_m with X and Y smooth; its statement is unchanged and every hypothesis matches the source. Step 1 shows c=(df_x)^dual is invertible using finite-dimensionality from the lifts node, and the chain rule on f∘a_t=a_t∘f carries the positive character weights over to T_yY. Step 2 pulls back homogeneous target lifts b_i, giving a_i=f^*b_i: these lie in m_x, form a basis via c, and are homogeneous as a scheme identity. It then applies the Luna-coordinates node to (Y,y,b) and (X,x,a), and every hypothesis is available for both. Step 3 is elementary: polynomial uniqueness and the Spec bijection give λ_Y∘f=λ_X, so f=λ_Y^{-1}λ_X. New node lem-sfb-fixed-point-homogeneous-cotangent-lifts (13.36 for G_m) is true without smoothness or characteristic restrictions: the action is a Z-grading, m is graded because z is fixed, and m/m^2 is finite-dimensional. I tested it on d=0, on F[e]/(e^2) with any weight, and on the cusp with weights (2,3). New node lem-sfb-positive-weight-luna-coordinates (13.41 for G_m) is true. Smooth and connected makes Z integral, positive tangent weights force n_i>0, and Krull intersection then gives an N-grading with A_0=F; graded Nakayama makes λ a closed immersion, and comparing dimensions makes it an isomorphism. I tested it on d=0, on A^1 with weight 1, and on (u,v+u^2) with weights (1,2); with weight 0 the conclusion fails, and the positivity hypothesis excludes that case. Neither new node duplicates lem-sfb-positive-graded-regular-polynomial, which assumes the N-grading the Luna node derives, or the luna-borel/projective-attracting nodes. The Luna node is the Y=A^d special case, which is the source's own 13.41-then-13.42 order, not a restatement of the item. B1-B7 forms, created.item and proof_deps are correct. No SGA source, no tool_uses, and the item's citers are unaffected."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PositiveWeightEquivariantInverse",
+  "declaration": "AlgebraicGeometry.isIso_of_positive_tangent_weights",
+  "declarations": [
+   "AlgebraicGeometry.isIso_of_positive_tangent_weights"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PositiveWeightEquivariantInverse.lean",
+  "statement": "theorem isIso_of_positive_tangent_weights {F A B : Type u} [Field F] [IsAlgClosed F] [CommRing A] [Algebra F A] [CommRing B] [Algebra F B] [Smooth (StandardGroupSchemes.affine F A).hom] [Smooth (StandardGroupSchemes.affine F B).hom] [ConnectedSpace (StandardGroupSchemes.affine F A).left] [ConnectedSpace (StandardGroupSchemes.affine F B).left] [LocallyOfFiniteType (StandardGroupSchemes.affine F A).hom] [QuasiCompact (StandardGroupSchemes.affine F A).hom] [LocallyOfFiniteType (StandardGroupSchemes.affine F B).hom] [QuasiCompact (StandardGroupSchemes.affine F B).hom] [ModObj (StandardGroupSchemes.multiplicative F) (StandardGroupSchemes.affine F A)] [ModObj (StandardGroupSchemes.multiplicative F) (StandardGroupSchemes.affine F B)] (x : A →ₐ[F] F) (y : B →ₐ[F] F) (φ : B →ₐ[F] A) (hpoint : x.comp φ = y) (hxfixed : lift (𝟙 (StandardGroupSchemes.multiplicative F)) (toUnit (StandardGroupSchemes.multiplicative F) ≫ StandardGroupSchemes.identitySection F x) ≫ ModObj.smul (M := StandardGroupSchemes.multiplicative F) (X := StandardGroupSchemes.affine F A) = toUnit (StandardGroupSchemes.multiplicative F) ≫ StandardGroupSchemes.identitySection F x) (hyfixed : lift (𝟙 (StandardGroupSchemes.multiplicative F)) (toUnit (StandardGroupSchemes.multiplicative F) ≫ StandardGroupSchemes.identitySection F y) ≫ ModObj.smul (M := StandardGroupSchemes.multiplicative F) (X := StandardGroupSchemes.affine F B) = toUnit (StandardGroupSchemes.multiplicative F) ≫ StandardGroupSchemes.identitySection F y) [IsModHom (StandardGroupSchemes.multiplicative F) (StandardGroupSchemes.map F φ)] (hdf : ∃ e : ((RingHom.ker x).Cotangent →ₗ[F] F) ≃ₗ[F] ((RingHom.ker y).Cotangent →ₗ[F] F), ∀ (v : (RingHom.ker x).Cotangent →ₗ[F] F) (b : B), y.cotangentDerivation (e v) b = x.cotangentDerivation v (φ b)) (hweights : AffinePointTangent.HasPositiveWeights x) : IsIso (StandardGroupSchemes.map F φ)",
+  "branch": "sheaf-dag",
+  "by": "Q118",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-746b83d1c",
+  "group": "Q118",
+  "result": "pass",
+  "note": "Read item node (unchanged except lean + new stmt_dep), new def node def-sfb-affine-point-positive-tangent-weights, both Lean modules, report, and dependency declarations (StandardGroupSchemes affine/map/identitySection/multiplicative, AlgHom.cotangentDerivation/toDualNumber, DualNumber.scale/mapAlgebraMap, Mathlib Hom.smul/IsModHom). Clause match: alg-closed F; X=Spec A, Y=Spec B arbitrary affine with Smooth/ConnectedSpace/LocallyOfFiniteType+QuasiCompact per records; ModObj G_m actions; hxfixed/hyfixed orbit=constant; hpoint; IsModHom equivariance as scheme identity; hdf pins e to the dual of mapCotangent (cotangentDerivation formula + hpoint), so it is exactly 'df_x iso'; HasPositiveWeights = finite basis of Hom(m/m^2,F) with n_i>0 and character action t^n on R[eps]-points over all R (incl. R=0), equivalent to the positive weight decomposition since T_x is finite-dimensional; conclusion IsIso in Over(Spec F). Edge cases d=0, any char, universes all in u: OK. No duplicate: torus-character-tangent-weights is Lie(H) only; def-sc-scheme-tangent-space not cited by node, which defines T_x as the cotangent dual. lean.statement verbatim for both records; docstrings carry source and blueprint; proof steps in the docstring; only sorry; no hollow defs. No compile (no file changed)."
+ }
+}

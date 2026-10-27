@@ -1,0 +1,106 @@
+{
+ "id": "lem-pur-completed-scalar-transport-counit",
+ "kind": "statement",
+ "title": "Completed scalar comparison with its computation counit",
+ "statement": "For a prime l, finite normed extensions E and F of Q_l, a coefficient embedding i : E → F [def-weil-integral-scalar-extension], and a scheme W, suppose completed ordinary scalar extension pbcExtend (completedCoefficientMap l E F i W) preserves finite limits and finite colimits [def-weil-pbc-bounded-constructible-tower, lem-weil-finite-free-completed-scalar-comparison]. Its derived extension has a natural isomorphism to the exact termwise derived functor. Composing that isomorphism on Q(P) with the exact derived functor computation isomorphism equals pbcComplexCounit on every complex P.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Stacks 06YY; the universal-counit portion of the completed scalar model in sk-thm-purity-transport Steps 2--3. This API theorem simply records the existing exact-model comparison and its proved counit normalization."
+ },
+ "stmt_deps": [
+  "def-weil-integral-scalar-extension",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-weil-finite-free-completed-scalar-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Use completedTensorModel as the isomorphism. Its completedTensorModel_counit equation is exactly the desired equation on each complex. All finite limit and colimit preservation instances are proofs of propositions, so the construction with its original instances has the same type as the comparison using the supplied instances.",
+   "uses": [
+    "def-pur-completed-scalar-exact-model",
+    "lem-pur-completed-scalar-model-counit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-completed-scalar-exact-model",
+  "lem-pur-completed-scalar-model-counit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Immediate application of the existing completedTensorModel and completedTensorModel_counit APIs; isolated to hide their construction imports."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerived_ext",
+   "results": "1 hits: CategoryTheory.Functor.leftDerived_ext",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing completedTensorModel and completedTensorModel_counit; no new localization theory is required."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerived.*ext|leftDerived.*uniq|tensor.*ext",
+   "results": "25 hits: Mathlib/Algebra/Algebra/Bilinear.lean, Mathlib/Algebra/Algebra/Bilinear.lean, Mathlib/Algebra/Algebra/Bilinear.lean, Mathlib/NumberTheory/Padics/Measure/Basic.lean, Mathlib/Geometry/Convex/Cone/TensorProduct.lean, Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/RingTheory/PicardGroup.lean",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing completedTensorModel and completedTensorModel_counit; no new localization theory is required."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two natural transformations out of a left derived functor are equal if their composites with the universal counit are equal",
+   "results": "8 hits: CategoryTheory.Functor.leftDerived_ext, CategoryTheory.Functor.leftDerivedUnique, CategoryTheory.Functor.leftDerivedNatTrans_fac, CategoryTheory.Functor.rightDerived_ext, CategoryTheory.Functor.rightDerivedUnique, CategoryTheory.Functor.leftDerived_fac, CategoryTheory.Functor.leftDerivedNatIso_hom, CategoryTheory.Functor.leftDerivedNatTrans_app",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing completedTensorModel and completedTensorModel_counit; no new localization theory is required."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportCondensedRealizationSetup",
+  "date": "2026-10-27",
+  "group": "B8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-compact-support-condensed-realization-setup",
+   "place": "Derived comparison in proof step 3.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedScalarTransportCounit",
+  "file": "lean/Sheaf/Paper/CompletedScalarTransportCounit.lean",
+  "declaration": "WeilConjectures.CompactSupportCondensedRealization.derivedScalarTransport",
+  "statement": "theorem derivedScalarTransport (W : Scheme.{u})\n    [PreservesFiniteLimits (pbcExtend (completedCoefficientMap l E F i W))]\n    [PreservesFiniteColimits (pbcExtend (completedCoefficientMap l E F i W))] :\n    ∃ e : pbcDerivedExtend (completedCoefficientMap l E F i W) ≅\n        (pbcExtend (completedCoefficientMap l E F i W)).mapDerivedCategory,\n      ∀ P : CochainComplex (integralTowerModules l E W) ℤ,\n        e.hom.app (DerivedCategory.Q.obj P) ≫\n          (pbcExtend (completedCoefficientMap l E F i W)).mapDerivedCategoryFactors.hom.app P =\n            pbcComplexCounit (completedCoefficientMap l E F i W) P",
+  "branch": "sheaf-dag",
+  "by": "B8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261027T050541-L-236112",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261027T050541-L-236112",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

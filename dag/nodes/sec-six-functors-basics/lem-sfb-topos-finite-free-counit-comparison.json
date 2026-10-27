@@ -1,0 +1,301 @@
+{
+ "id": "lem-sfb-topos-finite-free-counit-comparison",
+ "kind": "statement",
+ "title": "Finite-free counit comparison on arbitrary sheaf topoi in specified coordinates",
+ "statement": "Let $h:\\mathscr X\\to\\mathscr Y$ be a morphism of sheaf topoi on sites small in the module universe [def-weil-pbc-ringed-topos-morphism, def-weil-size-convention]. Let $a:R_Y\\to S_Y$ be a map of commutative ring sheaves on $\\mathscr Y$, put $R_X=h^{-1}R_Y$, $S_X=h^{-1}S_Y$, $a_X=h^{-1}a$, and use the ordinary unbounded module derived categories [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Let $L_R=h_R^*\\dashv G_R=Rh_{*,R}$ and $L_S=h_S^*\\dashv G_S=Rh_{*,S}$ be the adjunctions obtained by deriving the canonical module adjunction [lem-weil-pbc-ringed-topoi-module-adjunction]. Write $E_T=S_T\\otimes_{R_T}^{\\mathbf L}-$ [lem-pur-derived-change-of-rings] and $r_T$ for exact scalar restriction [def-pc-sheaf-restrict-scalars]. Fix $\\theta_Y:R_Y^{\\oplus d}\\xrightarrow{\\sim}r_YS_Y$, $d\\geq0$ finite, and $\\theta_X=h^{-1}\\theta_Y$.\nFor $K\\in D(R_X)$ let $\\gamma_K:E_YG_RK\\to G_SE_XK$ be the adjunct of the canonical pullback/tensor comparison $L_SE_YG_RK\\cong E_XL_RG_RK$ followed by $E_X(\\varepsilon_{R,K})$ [lem-sfb-kflat-scalar-comparison-normalization]. The canonical ordinary identity $r_Yh_{*,S}=h_{*,R}r_X$ induces an isomorphism $d:r_YG_S\\xrightarrow{\\sim}G_Rr_X$ respecting adjoint transposes. With the coordinate isomorphisms $\\Phi_T$ of [lem-sfb-derived-finite-free-scalar-coordinates], one has\n$$G_R(\\Phi_{X,K})\\circ d_{E_XK}\\circ r_Y(\\gamma_K)\\circ\\Phi_{Y,G_RK}^{-1}=\\sigma_K:(G_RK)^{\\oplus d}\\longrightarrow G_R(K^{\\oplus d}),$$\nwhere $\\sigma_K\\iota_i=G_R(\\iota_i)$. Its inverse is $\\sum_i\\iota_iG_R(p_i)$, with $\\iota_i,p_i$ the finite biproduct inclusions and projections. In particular $\\gamma_K$ is an isomorphism for every unbounded $K$, with no geometric or boundedness hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D7 (lemma-adjoint-pullback-pushforward-modules); derived.tex Tags 08BJ (lemma-adjoint-preserve-K-injectives) and 09T5 (lemma-derived-adjoint-functors). Extracted finite-coordinate counit calculation of returned proof step 4, extended to arbitrary small-site sheaf topoi."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-derived-finite-free-scalar-coordinates",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-weil-pbc-ringed-topoi-module-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Write $H_R=h_{*,R}$ and $H_S=h_{*,S}$ for the ordinary functors. Scalar restriction $r_T$ is exact and is right adjoint to ordinary scalar extension. By the finite-free coordinate lemma that extension is exact for $T=X,Y$; the pulled-back frame is the specified $\\theta_X$. The geometric inverse images $L_R,L_S$ are exact, since the structural coefficient maps are identities. Their ordinary adjunctions are the module adjunctions in the statement. There are canonical ordinary identifications $u:L_Rr_Y\\cong r_XL_S$ and $c:r_YH_S\\cong H_Rr_X$: both leave the underlying geometric sheaf operation unchanged, and the actions agree by $a_X=h^{-1}a$. The ordinary counits agree under these identifications: forgetting the coefficient action gives the same geometric evaluation $h^{-1}h_*N\\to N$. Thus $r_X(\\varepsilon^0_{S,N})=\\varepsilon^0_{R,r_XN}$ after inserting $u$ and $c$.",
+   "uses": [
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "lem-sfb-derived-finite-free-scalar-coordinates",
+    "lem-trf-geometric-inverse-image-exact",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CZ (lemma-adjointness-tensor-restrict), 03D7 (lemma-adjoint-pullback-pushforward-modules), 04JC (lemma-flat-pullback-exact); action and evaluation calculation"
+   }
+  },
+  {
+   "text": "The small-site module categories have unbounded K-injective resolutions. Apply the exact-left-adjoint criterion to scalar extension $\\dashv r_X$: step 1 gives its exactness, so $r_X$ sends K-injectives to K-injectives. For an $S_X$-complex $J$ which is K-injective, both $r_YG_S(QJ)$ and $G_Rr_X(QJ)$ are therefore computed, respectively, by $Q(r_YH_SJ)$ and $Q(H_Rr_XJ)$; for the first, the exact functor $r_Y$ is computed termwise by its localization comparison. Define $d_{QJ}$ by $Q(c_J)$ through these computation isomorphisms. The Hom comparison for K-injectives represents every derived map by a unique homotopy class between K-injective representatives. Naturality of $c$ for those classes makes these components natural; changing representatives conjugates by the corresponding homotopy equivalences and gives the same components. Hence they define the canonical natural isomorphism $d:r_YG_S\\cong G_Rr_X$, normalized by the ordinary identity on K-injectives. This constructs the required comparison on all unbounded objects.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 08BJ (lemma-adjoint-preserve-K-injectives), 070I (lemma-K-injective), 070K (lemma-enough-K-injectives-implies); resolutions from injectives.tex Tag 079P (theorem-K-injective-embedding-grothendieck)"
+   }
+  },
+  {
+   "text": "Apply the exact-square derived-counit theorem with $F'=h_S^*$, $F=h_R^*$, $G'=H_S$, $G=H_R$, $r=r_X$, $s=r_Y$ and $\\beta=d$. Steps 1 and 2 verify its ordinary counit equality, exactness, existence of resolutions, preservation of K-injectives, and normalization of $d$. Its identities are read through $u,c$ rather than as literal equalities of differently presented module objects. Exact-functor localization supplies their termwise derived identifications. It follows that\n$$r_X(\\varepsilon_{S,N})=\\varepsilon_{R,r_XN}\\circ L_R(d_N).$$\nConsequently, for $t:L_SM\\to N$, its $S$-adjunct $t^\\sharp:M\\to G_SN$ satisfies\n$$\\bigl(r_X(t)\\circ u_M\\bigr)^{\\sharp_R}=d_N\\circ r_Y(t^\\sharp).$$\nIndeed, inverse-transpose the right side by composing with $\\varepsilon_R$: the counit identity above and naturality of $u$ give $r_X(\\varepsilon_SN\\circ L_S(t^\\sharp))\\circ u_M=r_X(t)\\circ u_M$. This proves the asserted compatibility with adjoint transposes for the actual derived adjunctions.",
+   "uses": [
+    "lem-weil-pbc-exact-square-derived-counit",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09T5 (lemma-derived-adjoint-functors), normalized exact-square counit formula; Tag 015F (lemma-right-derived-exact-functor)"
+   }
+  },
+  {
+   "text": "Set $A=G_RK$, let $\\chi:L_SE_Y\\cong E_XL_R$ be the specified comparison, and put $B=G_R(\\Phi_{X,K})\\,d_{E_XK}\\,r_Y(\\gamma_K)\\,\\Phi_{Y,A}^{-1}$. The scalar-comparison normalization identifies $\\chi$ with the ordinary balancing comparison on models, and the coordinate lemma gives its inverse-image compatibility and naturality. Explicitly, the $i$th input $m\\mapsto b_i\\otimes m$ is carried by $r_X(\\chi)u$ to the same input for the pulled-back basis $h^{-1}b_i$; applying $r_X(E_X\\varepsilon_{R,K})$ and then $\\Phi_X$ puts $\\varepsilon_{R,K}(m)$ in the $i$th summand. The coordinate lemma states these identities in the unbounded derived category as well. By step 3 and naturality of the Hom bijection, the $R$-transpose of $B\\iota_i$ is therefore\n$$\\iota_i\\varepsilon_{R,K}:L_RG_RK\\longrightarrow K^{\\oplus d}.$$\nThe transpose of $G_R(\\iota_i)$ is the same map, by naturality of $\\varepsilon_R$. Injectivity of the adjunction bijection yields $B\\iota_i=G_R(\\iota_i)$. The finite coproduct universal property now gives $B=\\sigma_K$, the claimed equality of specified maps.",
+   "uses": [
+    "lem-sfb-kflat-scalar-comparison-normalization",
+    "lem-sfb-derived-finite-free-scalar-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL (lemma-tensor-product-pullback); coordinate computation with the derived normalizations of the cited lemmas"
+   }
+  },
+  {
+   "text": "Since $G_R$ is a right adjoint, it preserves the finite product $K^{\\oplus d}$ and the zero object. Thus the maps $G_R(p_j)$ are jointly monic, and $G_R$ sends zero maps to zero maps (factor a zero map through the zero object). Put $\\tau=\\sum_i\\iota_iG_R(p_i)$. The biproduct relations give\n$$\\tau\\sigma\\iota_j=\\sum_i\\iota_iG_R(p_i\\iota_j)=\\iota_j,$$\nso $\\tau\\sigma=1$ by the coproduct property. Likewise\n$$G_R(p_j)\\sigma\\tau=\\sum_iG_R(p_j\\iota_i)G_R(p_i)=G_R(p_j),$$\nso $\\sigma\\tau=1$ by the preserved product property. This proves the specified inverse formula without requiring preservation of infinite sums. For $d=0$ the coproduct and product are zero objects and the empty sum is their unique identity morphism; the same argument applies.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-limits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Right-adjoint limit preservation, followed by the displayed finite biproduct matrix identities"
+   }
+  },
+  {
+   "text": "Step 4 identifies $r_Y(\\gamma_K)$, up to the isomorphisms $\\Phi_X,\\Phi_Y,d$, with the isomorphism $\\sigma_K$ of step 5. Exact restriction is computed termwise on representatives by its localization comparison and commutes with cohomology: its preservation of kernels and cokernels identifies $H^n(r_Yf)$ with $r_YH^n(f)$ directly from the kernel/image formula. Ordinary restriction reflects isomorphisms: an inverse of a bijective $S_Y$-linear sheaf map is $S_Y$-linear because $f(sm)=sf(m)$. Hence $r_Y(\\gamma_K)$ invertible implies every $H^n(\\gamma_K)$ invertible. The unbounded cohomology criterion implies that $\\gamma_K$ itself is invertible. Every construction above used small-site resolutions and the finite frame, with no bound on $K$ and no geometric assumption on $h$.",
+   "uses": [
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Derived isomorphism detection by cohomology; exact coefficient restriction and its kernel/cokernel formula"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "lem-sfb-derived-finite-free-scalar-coordinates",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-square-derived-counit",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-right-adjoint-preserves-limits",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Finite-coordinate assembly from Tags 08BJ, 070I, 070K and 09T5 and the ordinary module adjunction 03D7; the particular coordinate counit identity is written out here, not asserted verbatim in Stacks."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For arbitrary ringed topoi a cartesian finite free coefficient change has derived direct image counit mate equal to the finite biproduct comparison",
+   "results": "{\"top\": [\"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"Condensed.profiniteSolidCounit\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"LightCondensed.freeForgetAdjunction\", \"Condensed.freeForgetAdjunction\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ordinary module/sheaf operations or abstract categorical identities, not the stated derived ring-sheaf construction and its specified normalizations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars identifies a derived pushforward coefficient projection map with preservation of finite biproducts",
+   "results": "{\"top\": [\"PresheafOfModules.pushforward_map_app_apply'\", \"PresheafOfModules.pushforward_obj_obj\", \"PresheafOfModules.pushforward_map_app_apply\", \"PresheafOfModules.pushforward_obj_map_apply'\", \"PresheafOfModules.pushforward_obj_map_apply\", \"PresheafOfModules.restrictScalars_map_app\", \"PresheafOfModules.restrictScalarsCompToPresheaf\", \"PresheafOfModules.restrictScalarsObj_map\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ordinary module/sheaf operations or abstract categorical identities, not the stated derived ring-sheaf construction and its specified normalizations"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"pushforward\"",
+   "results": "{\"top\": [\"SheafOfModules.pushforwardId\", \"SheafOfModules.overMapPushforwardAdj\", \"SheafOfModules.pushforward\", \"SheafOfModules.instIsLeftAdjointOverOverRingCatPushforwardIdSheafOver\", \"SheafOfModules.overPushforwardOverAdj\", \"SheafOfModules.isLeftAdjoint_pushforward_of_isIso\", \"SheafOfModules.pushforwardCongr\", \"SheafOfModules.pushforwardNatIso\"], \"n_hits\": 12, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ordinary module/sheaf operations or abstract categorical identities, not the stated derived ring-sheaf construction and its specified normalizations"
+  },
+  {
+   "tool": "grep",
+   "query": "(pushforward|directImage).*(scalar|tensor)|[Pp]reserves.*[Bb]iproduct",
+   "results": "{\"top\": [\"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/CategoryTheory/Distributive/Monoidal.lean\", \"Mathlib/CategoryTheory/Distributive/Monoidal.lean\"], \"n_hits\": 25, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ordinary module/sheaf operations or abstract categorical identities, not the stated derived ring-sheaf construction and its specified normalizations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pushforward of sheaves of modules commutes with finite free coefficient change by the adjunction counit",
+   "results": "{\"top\": [\"SheafOfModules.pushforward\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"PresheafOfModules.pushforward₀\", \"SheafOfModules.pushforwardSections\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ordinary module/sheaf operations or abstract categorical identities, not the stated derived ring-sheaf construction and its specified normalizations"
+  },
+  {
+   "tool": "grep",
+   "query": "(counit|pushforward|directImage).*(finiteFree|finite_free|biproduct|restrictScalars)",
+   "results": "{\"top\": [\"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pushforward.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\"], \"n_hits\": 11, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf pushforwards, ring-module adjunctions and free-module maps do not state the unbounded finite-frame derived counit identity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image on ringed topoi commutes with finite free extension of scalars via the canonical adjunction mate",
+   "results": "{\"top\": [\"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pushforwardPushforwardAdj\", \"ModuleCat.extendRestrictScalarsAdj\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars\", \"SheafOfModules.instIsRightAdjointPushforward\", \"PresheafOfModules.freeAdjunctionUnit\", \"ModuleCat.ExtendRestrictScalarsAdj.Unit.map\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf pushforwards, ring-module adjunctions and free-module maps do not state the unbounded finite-frame derived counit identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"pushforward\"",
+   "results": "{\"top\": [\"SheafOfModules.pushforwardId\", \"SheafOfModules.overMapPushforwardAdj\", \"SheafOfModules.pushforward\", \"SheafOfModules.instIsLeftAdjointOverOverRingCatPushforwardIdSheafOver\", \"SheafOfModules.overPushforwardOverAdj\", \"SheafOfModules.isLeftAdjoint_pushforward_of_isIso\", \"SheafOfModules.pushforwardCongr\", \"SheafOfModules.pushforwardNatIso\"], \"n_hits\": 12, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf pushforwards, ring-module adjunctions and free-module maps do not state the unbounded finite-frame derived counit identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of sheaf topoi and a finite free ring sheaf extension the derived pushforward scalar counit mate is the finite biproduct comparison",
+   "results": "{\"top\": [\"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.unitToPushforwardObjUnit\", \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"SheafOfModules.unitToPushforwardObjUnit_val_app_apply\", \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"SheafOfModules.pushforwardNatIso\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf pushforwards, ring-module adjunctions and free-module maps do not state the unbounded finite-frame derived counit identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact restriction of ring sheaf scalars commutes with unbounded derived direct image and its adjunction counit under finite free coefficients",
+   "results": "{\"top\": [\"SheafOfModules.map_ιFree_mapFree_hom_assoc\", \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pushforwardSections_unitHomEquiv\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf pushforwards, ring-module adjunctions and free-module maps do not state the unbounded finite-frame derived counit identity"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qcqs-proper-integral-rational-scalar-comparison",
+  "date": "2026-10-22",
+  "group": "Q154"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms (2), proper closed-complement scalar calculation: identification of the finite-free counit mate with the finite-biproduct comparison, returned proof step 4.",
+   "via": [
+    "lem-sfb-qcqs-proper-integral-rational-scalar-comparison",
+    "lem-sfb-qcqs-proper-constructible-closed-base-change",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-topos-finite-free-counit-comparison",
+  "worker": "stage1",
+  "summary": "Constructed the canonical scalar-restriction/direct-image isomorphism on K-injectives, verified its counit/transpose normalization using the existing exact-square theorem, and calculated every finite-frame component of the specified scalar mate. Gave both biproduct inverse identities and exact-restriction conservativity. Reused existing general lemmas throughout; no new nodes or changes to the statement.",
+  "blueprint": "det-sf-comp-coherence-cocycle, Refinement isomorphisms: the proper closed-complement scalar calculation extracted through lem-sfb-qcqs-proper-integral-rational-scalar-comparison, specifically its finite-free counit calculation. The general small-topos version here remains a tool below the prescribed compactification route.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "why": "Exact scalar restriction and its ordinary tensor adjunction; generic module-sheaf tool, not a replacement for compactification coherence."
+   },
+   {
+    "node": "lem-trf-geometric-inverse-image-exact",
+    "why": "Exactness with transported ring actions on arbitrary small-site topoi; the unit has no independent exactness theorem."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "The canonical ordinary module Hom bijection and its geometric counit; generic ringed-topos tool."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Existence of unbounded K-injective resolutions for the four small-site module categories."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Exact tensor extension makes its scalar-restriction right adjoint preserve K-injectives."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Computes both derived direct images on the common K-injective representative."
+   },
+   {
+    "node": "lem-weil-pbc-exact-square-derived-counit",
+    "why": "Generic normalized derived adjoint-square theorem verifies the actual counit after coefficient restriction."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Termwise descent of the exact inverse-image and scalar-restriction comparisons."
+   },
+   {
+    "node": "lem-sfb-kflat-scalar-comparison-normalization",
+    "why": "Identifies the specified pullback/tensor comparison with the balancing comparison, needed before computing coordinates."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-exact-square-derived-counit",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sfb-kflat-scalar-comparison-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-a1ac42851",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-a1ac42851 (reviewer sub-agent of L); spot-checked: 0-node 6-step split; I read it in full. The statement is byte-identical to the side-live unsplit node; no repair note; not superseded (unsplit in both live and side-live); no SGA. Sources: Stacks 03D7 (sites-modules l.1197), 08BJ (derived l.9857), 09T5; the coordinate identity is correctly marked agent-written. Small cases: h=id with S=R and d=1 gives the identity; d=0 gives zero objects; unbounded K is fine because E is termwise exact. Step 1: c: r_Y H_S = H_R r_X is a literal equality (unit naturality), u is a natural isomorphism, and the counits agree. Step 2: the 08BJ form applied to the exact scalar extension, plus K-injective total-derived and hom-derived, gives d normalized on K-injectives. Step 3: every hypothesis of exact-square-derived-counit holds, with β=d. Its strict rF'=Fs holds only up to u; I accept this as an elementary transport (advisory only). I re-derived the transpose identity. Step 4: I re-derived B iota_i = G_R(iota_i) from the statement-level inverse-image compatibility and naturality of Phi, with χ identified through the K-flat normalization node. Step 5: both biproduct inverse identities check, including d=0. Step 6: exact restriction commutes with cohomology and reflects isomorphisms, then the cohomology criterion applies. FIX (C1): steps 2 and 6 used D(r_Y) computed termwise without citing lem-weil-pbc-exact-functor-derived-factorization (it was cited only in step 3); added to both steps, each with one clause; whole node in fixes/dag/nodes/sec-six-functors-basics/. Batch-5 flag lem-trf-geometric-inverse-image-exact: Stacks 04JC, generic exactness of inverse image; its closure is only two trf defs; it is already in the closure of the stmt_dep kflat-normalization, and no nt-assume or sk-thm-trace node is reachable. Accepted. tool_uses: all generic, accepted. Overlap advisory: lem-sf-finite-free-image-comparison, lem-sp-finite-free-direct-image-coherence and lem-pur-topos-finite-free-compact-constituents are scheme-specific relatives, not duplicates.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ToposFiniteFreeCounitComparison",
+  "declaration": "SheafOfModules.RingedTensor.topos_finiteFree_counit_comparison",
+  "declarations": [
+   "SheafOfModules.RingedTensor.finitePowerInclusion",
+   "SheafOfModules.RingedTensor.topos_finiteFree_counit_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ToposFiniteFreeCounitComparison.lean",
+  "statement": "theorem topos_finiteFree_counit_comparison {CY CX : Type u} [SmallCategory CY] [SmallCategory CX] {JY : GrothendieckTopology CY} {JX : GrothendieckTopology CX} (h : GeometricMorphism (Sheaf JX (Type u)) (Sheaf JY (Type u))) {RY SY : Sheaf JY CommRingCat.{u}} {RX SX : Sheaf JX CommRingCat.{u}} (aY : RY ⟶ SY) (aX : RX ⟶ SX) (IR : AlgebraicInverseImage h.inverse RY RX) (IS : AlgebraicInverseImage h.inverse SY SX) (ha : h.inverse.map ((sheafCompose JY (CategoryTheory.forget CommRingCat)).map aY) ≫ IS.ringUnderlying.hom = IR.ringUnderlying.hom ≫ (sheafCompose JX (CategoryTheory.forget CommRingCat)).map aX) (d : ℕ) (θY : ∏ᶜ (fun _ : Fin d ↦ unit (ringSheaf RY)) ≅ (restriction.{u, u} aY).obj (unit (ringSheaf SY))) [HasDerivedCategory.{w} (SheafOfModules.{u} (ringSheaf RY))] [HasDerivedCategory.{w} (SheafOfModules.{u} (ringSheaf SY))] [HasDerivedCategory.{w} (SheafOfModules.{u} (ringSheaf RX))] [HasDerivedCategory.{w} (SheafOfModules.{u} (ringSheaf SX))] (EY : DerivedCategory (SheafOfModules.{u} (ringSheaf RY)) ⥤ DerivedCategory (SheafOfModules.{u} (ringSheaf SY))) (EX : DerivedCategory (SheafOfModules.{u} (ringSheaf RX)) ⥤ DerivedCategory (SheafOfModules.{u} (ringSheaf SX))) (εY : DerivedCategory.Q ⋙ EY ⟶ (tensorFunctor aY).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q) (εX : DerivedCategory.Q ⋙ EX ⟶ (tensorFunctor aX).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q) [EY.IsLeftDerivedFunctor εY (HomologicalComplex.quasiIso (SheafOfModules.{u} (ringSheaf RY)) (.up ℤ))] [EX.IsLeftDerivedFunctor εX (HomologicalComplex.quasiIso (SheafOfModules.{u} (ringSheaf RX)) (.up ℤ))] : ∃ (_ : IR.modules.Additive) (_ : IS.modules.Additive) (_ : PreservesFiniteLimits IR.modules) (_ : PreservesFiniteColimits IR.modules) (_ : PreservesFiniteLimits IS.modules) (_ : PreservesFiniteColimits IS.modules) (_ : PreservesFiniteLimits (restriction.{u, u} aY)) (_ : PreservesFiniteColimits (restriction.{u, u} aY)) (_ : PreservesFiniteLimits (restriction.{u, u} aX)) (_ : PreservesFiniteColimits (restriction.{u, u} aX)) (HR : SheafOfModules.{u} (ringSheaf RX) ⥤ SheafOfModules.{u} (ringSheaf RY)) (HS : SheafOfModules.{u} (ringSheaf SX) ⥤ SheafOfModules.{u} (ringSheaf SY)) (_ : HR.Additive) (_ : HS.Additive) (adjR : IR.modules ⊣ HR) (adjS : IS.modules ⊣ HS) (pR : HR ⋙ underlying RY ≅ underlying RX ⋙ h.direct) (pS : HS ⋙ underlying SY ≅ underlying SX ⋙ h.direct), (∀ (M : SheafOfModules.{u} (ringSheaf RY)) (N : SheafOfModules.{u} (ringSheaf RX)) (f : IR.modules.obj M ⟶ N), (underlying RY).map (adjR.homEquiv M N f) ≫ pR.hom.app N = h.adj.homEquiv _ _ (IR.moduleUnderlying.inv.app M ≫ (underlying RX).map f)) ∧ (∀ (M : SheafOfModules.{u} (ringSheaf SY)) (N : SheafOfModules.{u} (ringSheaf SX)) (f : IS.modules.obj M ⟶ N), (underlying SY).map (adjS.homEquiv M N f) ≫ pS.hom.app N = h.adj.homEquiv _ _ (IS.moduleUnderlying.inv.app M ≫ (underlying SX).map f)) ∧ ∃ (ρ : restriction.{u, u} aY ⋙ IR.modules ≅ IS.modules ⋙ restriction.{u, u} aX) (c : HS ⋙ restriction.{u, u} aY ≅ restriction.{u, u} aX ⋙ HR), (∀ N : SheafOfModules.{u} (ringSheaf SY), (underlying RX).map (ρ.hom.app N) ≫ IS.moduleUnderlying.hom.app N = IR.moduleUnderlying.hom.app ((restriction.{u, u} aY).obj N)) ∧ (∀ N : SheafOfModules.{u} (ringSheaf SX), (underlying RY).map (c.hom.app N) ≫ pR.hom.app ((restriction.{u, u} aX).obj N) = pS.hom.app N) ∧ ∀ (GR : DerivedCategory (SheafOfModules.{u} (ringSheaf RX)) ⥤ DerivedCategory (SheafOfModules.{u} (ringSheaf RY))) (GS : DerivedCategory (SheafOfModules.{u} (ringSheaf SX)) ⥤ DerivedCategory (SheafOfModules.{u} (ringSheaf SY))) (ηR : HR.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ GR) (ηS : HS.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ GS) [GR.IsRightDerivedFunctor ηR (HomologicalComplex.quasiIso (SheafOfModules.{u} (ringSheaf RX)) (.up ℤ))] [GS.IsRightDerivedFunctor ηS (HomologicalComplex.quasiIso (SheafOfModules.{u} (ringSheaf SX)) (.up ℤ))], ∃ (DR : IR.modules.mapDerivedCategory ⊣ GR) (DS : IS.modules.mapDerivedCategory ⊣ GS), Adjunction.HasExactDerivedHomFormula IR.modules HR adjR GR ηR DR ∧ Adjunction.HasExactDerivedHomFormula IS.modules HS adjS GS ηS DS ∧ ∃ (δ : GS ⋙ (restriction.{u, u} aY).mapDerivedCategory ≅ (restriction.{u, u} aX).mapDerivedCategory ⋙ GR) (χ : tensorFunctor aY ⋙ IS.modules ≅ IR.modules ⋙ tensorFunctor aX) (β : EY ⋙ IS.modules.mapDerivedCategory ≅ IR.modules.mapDerivedCategory ⋙ EX) (κR : IR.modules.obj (unit (ringSheaf RY)) ≅ unit (ringSheaf RX)) (κS : IS.modules.obj (unit (ringSheaf SY)) ≅ unit (ringSheaf SX)) (τ : IR.modules.obj (∏ᶜ (fun _ : Fin d ↦ unit (ringSheaf RY))) ≅ ∏ᶜ (fun _ : Fin d ↦ unit (ringSheaf RX))) (θX : ∏ᶜ (fun _ : Fin d ↦ unit (ringSheaf RX)) ≅ (restriction.{u, u} aX).obj (unit (ringSheaf SX))) (φY : tensorFunctor aY ⋙ restriction.{u, u} aY ≅ Functor.const (Discrete (Fin d)) ⋙ lim) (φX : tensorFunctor aX ⋙ restriction.{u, u} aX ≅ Functor.const (Discrete (Fin d)) ⋙ lim) (ΦY : EY ⋙ (restriction.{u, u} aY).mapDerivedCategory ≅ Functor.const (Discrete (Fin d)) ⋙ lim) (ΦX : EX ⋙ (restriction.{u, u} aX).mapDerivedCategory ≅ Functor.const (Discrete (Fin d)) ⋙ lim), (∀ I : CochainComplex (SheafOfModules.{u} (ringSheaf SX)) ℤ, I.IsKInjective → (restriction.{u, u} aY).mapDerivedCategory.map (ηS.app I) ≫ δ.hom.app (DerivedCategory.Q.obj I) ≫ GR.map ((restriction.{u, u} aX).mapDerivedCategoryFactors.hom.app I) = (restriction.{u, u} aY).mapDerivedCategoryFactors.hom.app ((HS.mapHomologicalComplex (.up ℤ)).obj I) ≫ DerivedCategory.Q.map ((NatIso.mapHomologicalComplex c (.up ℤ)).hom.app I) ≫ ηR.app (((restriction.{u, u} aX).mapHomologicalComplex (.up ℤ)).obj I)) ∧ (∀ (M : DerivedCategory (SheafOfModules.{u} (ringSheaf SY))) (N : DerivedCategory (SheafOfModules.{u} (ringSheaf SX))) (f : IS.modules.mapDerivedCategory.obj M ⟶ N), DR.homEquiv _ _ ((Functor.mapDerivedCategorySquareIso ρ).hom.app M ≫ (restriction.{u, u} aX).mapDerivedCategory.map f) = (restriction.{u, u} aY).mapDerivedCategory.map (DS.homEquiv _ _ f) ≫ δ.hom.app N) ∧ IsScalarInverseImageComparison h.inverse IR IS aY aX χ ∧ (∀ P : CochainComplex (SheafOfModules.{u} (ringSheaf RY)) ℤ, β.hom.app (DerivedCategory.Q.obj P) ≫ EX.map (IR.modules.mapDerivedCategoryFactors.hom.app P) ≫ εX.app ((IR.modules.mapHomologicalComplex (.up ℤ)).obj P) = IS.modules.mapDerivedCategory.map (εY.app P) ≫ IS.modules.mapDerivedCategoryFactors.hom.app (((tensorFunctor aY).mapHomologicalComplex (.up ℤ)).obj P) ≫ DerivedCategory.Q.map ((Functor.mapHomologicalComplexCompIso (Iso.refl (tensorFunctor aY ⋙ IS.modules)) (.up ℤ)).hom.app P ≫ (χ.hom.mapHomologicalComplex (.up ℤ)).app P ≫ (Functor.mapHomologicalComplexCompIso (Iso.refl (IR.modules ⋙ tensorFunctor aX)) (.up ℤ)).inv.app P)) ∧ ((underlying RX).map κR.hom = IR.moduleUnderlying.hom.app (unit (ringSheaf RY)) ≫ IR.ringUnderlying.hom) ∧ ((underlying SX).map κS.hom = IS.moduleUnderlying.hom.app (unit (ringSheaf SY)) ≫ IS.ringUnderlying.hom) ∧ (∀ i : Fin d, τ.hom ≫ Pi.π (fun _ : Fin d ↦ unit (ringSheaf RX)) i = IR.modules.map (Pi.π (fun _ : Fin d ↦ unit (ringSheaf RY)) i) ≫ κR.hom) ∧ (τ.hom ≫ θX.hom = IR.modules.map θY.hom ≫ ρ.hom.app (unit (ringSheaf SY)) ≫ (restriction.{u, u} aX).map κS.hom) ∧ IsFiniteFreeScalarCoordinateIso aY d θY φY ∧ IsFiniteFreeScalarCoordinateIso aX d θX φX ∧ IsDerivedFiniteFreeScalarCoordinateIso aY d EY εY φY ΦY ∧ IsDerivedFiniteFreeScalarCoordinateIso aX d EX εX φX ΦX ∧ ∀ K : DerivedCategory (SheafOfModules.{u} (ringSheaf RX)), ∃ (γ : EY.obj (GR.obj K) ⟶ GS.obj (EX.obj K)) (σ : ∏ᶜ (fun _ : Fin d ↦ GR.obj K) ⟶ GR.obj (∏ᶜ (fun _ : Fin d ↦ K))), γ = DS.homEquiv _ _ (β.hom.app (GR.obj K) ≫ EX.map (DR.counit.app K)) ∧ (ΦY.inv.app (GR.obj K) ≫ (restriction.{u, u} aY).mapDerivedCategory.map γ ≫ δ.hom.app (EX.obj K) ≫ GR.map (ΦX.hom.app K) = σ) ∧ (∀ i : Fin d, finitePowerInclusion d (GR.obj K) i ≫ σ = GR.map (finitePowerInclusion d K i)) ∧ (σ ≫ (∑ i : Fin d, GR.map (Pi.π (fun _ : Fin d ↦ K) i) ≫ finitePowerInclusion d (GR.obj K) i) = 𝟙 _) ∧ ((∑ i : Fin d, GR.map (Pi.π (fun _ : Fin d ↦ K) i) ≫ finitePowerInclusion d (GR.obj K) i) ≫ σ = 𝟙 _) ∧ IsIso γ",
+  "branch": "sheaf-dag",
+  "by": "Q138",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-58578d8e6",
+  "group": "Q138",
+  "result": "pass",
+  "note": "Only the item's lean field changed (rest identical to the S1-reviewed node); one new module, statement verbatim with sorry; real Worker report and Second reading sections. All node clauses rendered and pinned: adjR/adjS and pR/pS by underlying Hom equations; DR/DS by HasExactDerivedHomFormula for every universal pair; δ by the K-injective normalization via c plus the transpose clause; χ by IsScalarInverseImageComparison; β by the all-complex counit square (same as the coordinate dependency, equivalent to the K-flat normalization since ε is invertible); θX by κ/τ; φ/Φ by the coordinate predicates; γ is the exact adjunct; σ fixed by inclusions; both inverse identities; IsIso γ for all unbounded K. No extra hypotheses; d=0, identity and empty-site cases covered; finitePowerInclusion is a real Pi.lift; docstrings carry the source and all 6 proof steps. Advisories: GeometricMorphism, AlgebraicInverseImage, IsScalarInverseImageComparison and HasExactDerivedHomFormula owners are not stmt_deps; the K-flat stmt_dep's declarations are not used directly; the second reading was by the same worker. No compile (no change)."
+ }
+}

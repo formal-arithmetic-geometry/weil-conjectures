@@ -13,7 +13,7 @@
  ],
  "proof": [
   {
-   "text": "Choose a sequence $(x_n)$ (finite and repeated when necessary) whose finite $R$-linear span is $M$; if the generating set is empty then $M=0$ and we use the empty sequence. By [lem-weil-pbc-filtered-colimit-modules-elementwise], each $x_n$ is the image of an element of some $M_i$. Choose one such index for each $n$, and also choose $i_*\\in I$; let $S_0$ be the resulting countable nonempty set of indices.",
+   "text": "Let $E\\subseteq M$ be the given at most countable generating set, allowing $E=\\varnothing$ when $M=0$, and write $u_i:M_i\\to M$ for the colimit maps. By [lem-weil-pbc-filtered-colimit-modules-elementwise], for each $x\\in E$ choose $i(x)\\in I$ and $y_x\\in M_{i(x)}$ with $u_{i(x)}(y_x)=x$. Choose $i_*\\in I$ and put $S_0=\\{i_*\\}\\cup\\{i(x):x\\in E\\}$. This is a countable nonempty set of indices containing representatives of every generator.",
    "uses": [
     "lem-weil-pbc-filtered-colimit-modules-elementwise"
    ],
@@ -24,20 +24,21 @@
    }
   },
   {
-   "text": "Fix $i\\in I$. Apply [lem-trf-mittag-leffler-hom-systems] with $N=\\prod_{s\\in I}M_s$. It gives $j\\ge i$ such that the image of $\\operatorname{Hom}_R(M_j,N)\to\\operatorname{Hom}_R(M_i,N)$ equals the image for every $k\\ge j$. Taking the $j$-component and the identity of $M_j$ yields, for every $k\\ge j$, a map $h_k:M_k\to M_j$ with $f_{ij}=h_k f_{ik}$. For an arbitrary $k\\ge i$, choose $\\ell\\ge j,k$ by directedness; then $f_{ij}=h_\\ell f_{i\\ell}=h_\\ell f_{k\\ell}f_{ik}$, so $f_{ij}$ factors through $f_{ik}$. Thus every $i$ has a stabilizing index $j$ with this factorization property for all $k\\ge i$.",
+   "text": "Apply [lem-trf-mittag-leffler-hom-systems] with $N=P=\\prod_{s\\in I}M_s$: its statement allows every $R$-module $N$, with no finiteness restriction. Its image-stabilization conclusion is exactly the hypothesis of [lem-trf-hom-product-stabilization-factorization]. The latter gives, for every $i$, an index $s(i)\\ge i$ such that $f_{i,s(i)}$ factors through every $f_{ik}$ with $k\\ge i$. Choose one such $s(i)$ for each $i$.",
    "uses": [
-    "lem-trf-mittag-leffler-hom-systems"
+    "lem-trf-mittag-leffler-hom-systems",
+    "lem-trf-hom-product-stabilization-factorization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 059M and 059E, proposition-ML-characterization, proof of (5) implies (3); the upper-bound argument for incomparable $j,k$ is written here explicitly"
+    "place": "Tags 059M and 059E, proposition-ML-characterization, proof of (5) implies (3); the common-upper-bound argument for incomparable indices is carried by the extracted product-Hom factorization lemma."
    }
   },
   {
-   "text": "Starting from $S_0$, alternate stabilization and directed enlargement. For every $i$ in the current countable set, adjoin a stabilizing index from Step 2, obtained using [lem-trf-mittag-leffler-hom-systems]. To enlarge any resulting nonempty countable set $T$ to a countable directed subset, enumerate it as $(t_n)_{n\\ge0}$, repeating entries if finite. Set $u_0=t_0$ and recursively choose $u_{n+1}\\ge u_n,t_{n+1}$ in $I$. Then $T\\cup\\{u_n:n\\ge0\\}$ is countable and directed: each of its two elements lies below some common $u_n$. Repeat the two operations countably many times, retaining all earlier indices, and let $J$ be the union. It is countable and nonempty. Any two elements lie together in some stage and have an upper bound at the next directed enlargement. Every $i\\in J$ receives its stabilizing index in a subsequent stabilization stage. Thus $J$ is directed and has the factorization property from Step 2 for every $i\\in J$.",
+   "text": "Apply [lem-trf-countable-directed-function-closure] to $I$, the function $s$ of Step 2 and $S_0$. It gives a countable nonempty directed subset $J\\supseteq S_0$ with $s(J)\\subseteq J$. Consequently every $i\\in J$ has $j=s(i)\\in J$, $j\\ge i$, for which $f_{ij}$ factors through $f_{ik}$ for every $k\\in I$ with $k\\ge i$.",
    "uses": [
-    "lem-trf-mittag-leffler-hom-systems"
+    "lem-trf-countable-directed-function-closure"
    ],
    "elementary": false,
    "source": {
@@ -46,33 +47,22 @@
    }
   },
   {
-   "text": "The canonical map $\\operatorname{colim}_{i\\in J}M_i\to M$ is surjective. Indeed, each generator $x_n$ comes from a stage in $J$ by construction. A finite sum of such generators and scalar multiples is represented at one stage of $J$ after taking a common upper bound of the finitely many stages, and these sums exhaust $M$; if $M=0$ the assertion is immediate. The map is the canonical map induced by the restricted cocone in [def-weil-pbc-category-colimit].",
+   "text": "For every $x\\in E$, Step 1 supplies its representative at $i(x)\\in S_0\\subseteq J$. For $i\\in J$, take $j=s(i)\\in J$ from Step 3. If $f_{ik}(y)=0$, the factorization $f_{ij}=h\\circ f_{ik}$ gives $f_{ij}(y)=h(0)=0$; hence $\\ker(f_{ik})\\subseteq\\ker(f_{ij})$ for every $k\\ge i$. All hypotheses of [lem-trf-restricted-colimit-generators-kernels] hold for this same $E$, so the canonical restricted-colimit map is an isomorphism. The argument permits $E=\\varnothing$.",
    "uses": [
-    "lem-weil-pbc-filtered-colimit-modules-elementwise",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 059W, proof, penultimate paragraph (surjectivity from the chosen generators)"
-   }
-  },
-  {
-   "text": "For injectivity, let a class represented by $\\tilde{x}\\in M_i$ with $i\\in J$ map to zero in $M$. The equality and zero clauses of [lem-weil-pbc-filtered-colimit-modules-elementwise] give $k\\ge i$ with $f_{ik}(\\tilde{x})=0$. By the factorization property of $J$ from Step 3, choose $j\\in J$ and $h:M_k\\to M_j$ with $f_{ij}=h f_{ik}$; hence $f_{ij}(\\tilde{x})=0$. Applying the same zero clause to the restricted filtered system indexed by $J$ shows that the original class is zero in $\\operatorname{colim}_{i\\in J}M_i$. The canonical map is therefore injective and surjective, hence an isomorphism of $R$-modules.",
-   "uses": [
-    "lem-weil-pbc-filtered-colimit-modules-elementwise",
-    "def-weil-pbc-category-colimit"
+    "lem-trf-restricted-colimit-generators-kernels"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 059W, proof, final paragraph (injectivity via eventual vanishing)"
+    "place": "Tag 059W, proof, properties (2),(3) and final two paragraphs; apply the extracted restricted-colimit criterion."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-category-colimit",
+  "lem-trf-countable-directed-function-closure",
+  "lem-trf-hom-product-stabilization-factorization",
   "lem-trf-mittag-leffler-hom-systems",
+  "lem-trf-restricted-colimit-generators-kernels",
   "lem-weil-pbc-filtered-colimit-modules-elementwise"
  ],
  "proof_origin": {
@@ -152,20 +142,20 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-ml-countable-colimit",
   "worker": "stage1",
-  "summary": "Split Tag 059W into five steps: choose stage representatives for a countable generating sequence, derive the factorization condition from the tensor-product Mittag-Leffler Hom-system criterion, construct a countable directed union closed under those stabilizing indices, and prove surjectivity and injectivity of the restricted colimit map. The source proof omitted the case of incomparable indices in its factorization sentence; the split inserts a common upper bound and the resulting composite factorization. No new nodes were needed because the DAG already has the module elementwise filtered-colimit leaf and the Hom-system stabilization statement.",
-  "blueprint": "Realizes the ancestor proof's supporting Tag 059X/059W sentence that a countably generated Mittag-Leffler module permits the presentation index to be made countable.",
+  "summary": "Repaired the human-requested re-split without changing the statement. Extracted three independent statement-only unsplit nodes: returned Step 2 product-Hom uniform factorization; Step 3 iterative countable directed closure; Steps 4 and 5 the generator-and-kernel criterion for a restricted colimit. The item assembles them with the existing Hom-system criterion after choosing representatives for generators. All original arguments, including incomparable indices and empty generating sets, are preserved in report.md for the next workers. Rebased the retained delivery onto the current live DAG after the promotion return; reread every current cited statement, verified the retained verbatim quotations, and confirmed that the live item still equals returned-item.json. Corrected Step 2 source wording to locate the extracted argument accurately. On the renewed promotion-return check, the current read-only item still agrees field-for-field with the archived returned item and the three supporting ids remain absent. Made the unrestricted-module hypothesis at the product-Hom application explicit; preserved all live statement, Lean and maintainer metadata. The fresh-base diagnostic dry run passed at b633d38f1e3 before this final refinement. Reconciled the returned delivery with the current live item on 2026-10-23, retaining every current metadata field. Named the given generating set E and its individual stage representatives explicitly, so the final comparison applies to exactly the same E, including the empty case.",
+  "blueprint": "Same ancestor and Tag 059X/059W supporting route: Steps 1-4 choose generator representatives, apply Hom-product factorization, form a countable directed function-closed index set, and apply the general restricted-colimit criterion. The three extracted statements carry all construction and colimit-comparison arguments of the returned five-step proof.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q96-a71c01fcc",
-  "group": "Q96",
+  "reviewer": "NT-cc-Q78-99f0815f4",
+  "group": "Q78",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q96-a71c01fcc (reviewer sub-agent of L); spot-checked: Read the complete item, cited statements, unit/chapter route, and Stacks 059W, 059E, 059M and 059X. Repaired malformed TeX and made Step 3’s countable directed enlargement explicit. Mathematics and edge cases check; no new nodes or target changes. Proof-only corrected JSON and detailed review.md written.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q78-99f0815f4 (reviewer sub-agent of L); spot-checked: Fourth head of the same re-split of lem-trf-ml-countable-colimit. The three new nodes are byte-identical to the earlier heads 6f81, 0979 and 6b5e. The item differs only in the wording of steps 1, 2 and 4 (it now names E, u_i and the representatives y_x, and says the Hom-system lemma allows any N), the step-2 source place and split_report. I reread Stacks 059W in full and 059E (5)=>(3). The item statement is unchanged and matches 059W hypothesis by hypothesis. Step 1 uses only clause (1) of the elementwise Mathlib leaf; S_0={i_*}∪{i(x)} is countable and nonempty, including when E is empty. Step 2: the statement of lem-trf-mittag-leffler-hom-systems (any N, same hypotheses as the item) gives, with N=∏M_s, exactly the hypothesis of the product lemma. Step 3: the closure lemma gives J⊇S_0 closed under s, and s(i)≥i gives Stacks property (3). Step 4: the kernel inclusion follows since h(0)=0, and every hypothesis of the restricted-colimit criterion holds for the same E. The assembly is 1643 characters, under 3000. I checked each new node by its proof: product-coordinate projection plus a common upper bound for incomparable k (true; fixes the source gap); alternating directed enlargement and s-closure over ω (true; S empty, s non-monotone and finite I checked); surjectivity from spanning plus injectivity from kernel capture at a J-index (true; empty E, non-cofinal J and non-injective transitions checked). Statements are self-contained, stmt_deps define the cited notions and searches cover three kinds. An rg search of the DAG for 059W/059E, countable-directed and restricted-colimit/subdiagram found no duplicates; I read eventual-domination, tensor-kernel-factorization, flat-ml-dual and the coef cardinal-regrouping/subdiagram nodes. The old steps 2, 3 and 4-5 became three comparable nodes; none restates the item and nothing was shortened. All citations are on the unit route; no SGA; no tool_uses. No fixes."
  },
  "lean": {
   "module": "Sheaf.SecTraceFormula.MLCountableColimit",
@@ -192,5 +182,16 @@
   "result": "fix",
   "note": "Statement matches node and Stacks 059W clause by clause (R comm ring; nonempty directed poset I; F : I ⥤ ModuleCat.{max u v w} R with FinitePresentation stages; IsColimit cocone; IsMittagLeffler.{u,max u v w,max u v w,0} c.pt matching the landed hom-systems lemma; countable spanning set; ∃ countable nonempty directed J with IsIso of the canonical colimit.desc map). Helpers are real (rfl/simp checks), universes bound and consistent, edge cases (M=0, empty/finite E, J=I) covered, docstrings/source/blueprint/proof steps present, sorry only, statement verbatim, compiles clean via nt_compile --json. Only finding: lean.declarations missing for the helpers restrictedDiagram/restrictedCocone/restrictedColimitMap; fixed in fixes/lem-trf-ml-countable-colimit.lean-record.json. Second-reading section is the standard post-2026-10-17 notice, accepted."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

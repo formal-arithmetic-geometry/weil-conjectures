@@ -1,0 +1,279 @@
+{
+ "id": "lem-sfb-plane-hypersurface-cohomology",
+ "kind": "statement",
+ "title": "Structure-sheaf cohomology of a plane hypersurface",
+ "statement": "Let $k$ be a field [def-weil-field], let $d\\geq1$ be an integer, and let $F\\in k[A,B,C]$ be a nonzero homogeneous polynomial of total degree $d$ [def-weil-pbc-mv-polynomial-ring]. Give $A,B,C$ degree one and put $Z=\\operatorname{Proj}(k[A,B,C]/(F))\\subset\\mathbf P^2_k$, with its closed subscheme structure [def-pc-proj, def-nagata-projective-space-base-change, def-weil-closed-immersion]. For structure-sheaf cohomology [def-sc-ringed-space-module-cohomology], the scalar map $k\\longrightarrow H^0(Z,\\mathcal O_Z)$ is an isomorphism of $k$-algebras, and $\\dim_k H^1(Z,\\mathcal O_Z)=(d-1)(d-2)/2$. No smoothness, reducedness, irreducibility, or characteristic hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0BYD, lemma-genus-plane-curve, especially its proof from the exact sequence for a nonzero homogeneous equation; Section 0BYA, section-plane-curves. The cohomology proof applies to every nonzero positive-degree homogeneous F, including nonreduced hypersurfaces."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-pc-proj",
+  "def-nagata-projective-space-base-change",
+  "def-weil-closed-immersion",
+  "def-sc-ringed-space-module-cohomology",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-pc-zero-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Put $P=\\mathbf P^2_k$ and let $i:Z\\hookrightarrow P$ be the specified closed immersion. Apply [lem-sfb-projective-hypersurface-structure-sequence] with $n=2$ to obtain $0\\to\\mathcal O_P(-d)\\xrightarrow{F}\\mathcal O_P\\xrightarrow{r}i_*\\mathcal O_Z\\to0$. Its last arrow is restriction of functions for the quotient ideal $(F)$, including when $F$ has repeated factors.",
+   "uses": [
+    "lem-sfb-projective-hypersurface-structure-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BYD, label lemma-genus-plane-curve, the hypersurface sheaf sequence"
+   }
+  },
+  {
+   "text": "Use [lem-pc-projective-space-twist-cohomology] with $n=2$, base ring $k$, and twists $-d$ and $0$. Because $d\\geq1$, it gives $H^0(P,\\mathcal O_P(-d))=0$ and $H^1(P,\\mathcal O_P(-d))=0$. It also gives $H^0(P,\\mathcal O_P)=k\\cdot1$ and $H^1(P,\\mathcal O_P)=H^2(P,\\mathcal O_P)=0$. Finally $H^2(P,\\mathcal O_P(-d))$ is free over $k$ with basis the Laurent classes $A^{e_0}B^{e_1}C^{e_2}$ for $e_i<0$ and $e_0+e_1+e_2=-d$.",
+   "uses": [
+    "lem-pc-projective-space-twist-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01XT, lemma-cohomology-projective-space-over-ring (within Section 01XS)"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-closed-immersion-cokernel-cohomology] with $X=P$, $Y=Z$, $\\mathcal L=\\mathcal O_P(-d)$, $\\mathcal E=\\mathcal O_P$, and $\\mathcal M=\\mathcal O_Z$ to the specified sequence of step 1. The four required vanishings are exactly those of step 2. Thus $H^0(P,\\mathcal O_P)\\to H^0(Z,\\mathcal O_Z)$ and $\\delta^1:H^1(Z,\\mathcal O_Z)\\to H^2(P,\\mathcal O_P(-d))$ are $k$-linear isomorphisms. The first map is restriction; composing it with the constants identification $k=H^0(P,\\mathcal O_P)$ gives the scalar map. Restriction preserves products and $1$ sectionwise, so this bijective scalar map is an isomorphism of $k$-algebras.",
+   "uses": [
+    "lem-sfb-closed-immersion-cokernel-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BYD, label lemma-genus-plane-curve, the two cohomology isomorphisms"
+   }
+  },
+  {
+   "text": "Count the basis from step 2. Put $a_i=-e_i-1\\geq0$; then $a_0+a_1+a_2=d-3$. For $d=1,2$ there are no such triples and both the dimension and $(d-1)(d-2)/2$ are zero. For $d\\geq3$ put $m=d-3$. For each $a_0=r\\in\\{0,\\ldots,m\\}$, there are $m-r+1$ choices for $a_1$ and then exactly one for $a_2$. The number is $\\sum_{r=0}^m(m-r+1)=(m+1)(m+2)/2=(d-1)(d-2)/2$. The boundary isomorphism of step 3 gives the required dimension. This is integer arithmetic, with no division in $k$, so the characteristic is unrestricted. The construction only used $F\\ne0$ and homogeneity, so it includes reducible and nonreduced hypersurfaces.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BYD, lemma-genus-plane-curve, final dimension count"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-projective-hypersurface-structure-sequence",
+  "lem-pc-projective-space-twist-cohomology",
+  "lem-sfb-closed-immersion-cokernel-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0BYD, lemma-genus-plane-curve, proof; the same exact-sequence proof with only F nonzero and positive-degree homogeneous, as explained in Section 0BYA"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "genus.*plane|plane.*genus|hypersurface.*cohomology|cohomology.*hypersurface",
+   "results": "0 hits; inspected: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern Proj constructions, elliptic curves, group/cotangent cohomology or etale cohomology; none computes the coherent cohomology of a plane hypersurface or states the relative Fermat assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The first coherent cohomology of a projective plane hypersurface of degree d has dimension (d-1)(d-2)/2 and its global functions are constants",
+   "results": "8 hits; inspected: groupCohomology.shortComplexH1_f, Algebra.Extension.H1Cotangent, groupCohomology.instFunLikeSubtypeForallCarrierVModuleCatMemSubmoduleCoboundaries₁, Algebra.FormallySmooth.subsingleton_h1Cotangent, groupCohomology.shortComplexH1, Algebra.FormallyEtale.subsingleton_h1Cotangent, groupCohomology.coboundaries₁_le_cocycles₁, Algebra.IsStandardSmooth.subsingleton_h1Cotangent",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern Proj constructions, elliptic curves, group/cotangent cohomology or etale cohomology; none computes the coherent cohomology of a plane hypersurface or states the relative Fermat assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Projective\", \"cohomology\"",
+   "results": "12 hits; inspected: CochainComplex.HomComplex.CohomologyClass.equivOfIsKProjective, CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective, CochainComplex.HomComplex.CohomologyClass.equivOfIsKProjective_apply, CochainComplex.HomComplex.CohomologyClass.equivOfIsKProjective_symm_apply, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass, CategoryTheory.ProjectiveResolution.extLinearEquivCohomologyClass, CategoryTheory.ProjectiveResolution.extAddEquivCohomologyClass, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern Proj constructions, elliptic curves, group/cotangent cohomology or etale cohomology; none computes the coherent cohomology of a plane hypersurface or states the relative Fermat assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a nonzero homogeneous polynomial F of positive degree d in three variables over a field, the projective plane hypersurface has global regular functions equal to the field and first structure sheaf cohomology of dimension (d-1)(d-2)/2",
+   "results": "8 hits; inspected: AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ, AlgebraicGeometry.Proj, WeierstrassCurve.Projective, AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf, AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection, AlgebraicGeometry.sectionInBasicOpen, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.sectionsSubring, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern Proj constructions, elliptic curves, group/cotangent cohomology or etale cohomology; none computes the coherent cohomology of a plane hypersurface or states the relative Fermat assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology|genus|EulerCharacteristic",
+   "results": "6 hits; inspected: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/BigZariski.lean; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern Proj constructions, elliptic curves, group/cotangent cohomology or etale cohomology; none computes the coherent cohomology of a plane hypersurface or states the relative Fermat assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "lem-sfb-plane-hypersurface-cohomology|planeHypersurfaceCohomology|plane_curve_genus",
+   "results": "0 hits; inspected: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern Proj constructions, elliptic curves, group/cotangent cohomology or etale cohomology; none computes the coherent cohomology of a plane hypersurface or states the relative Fermat assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The structure sheaf of a degree d hypersurface in the projective plane has H0 equal to the base field and H1 dimension choose d-1 two",
+   "results": "8 hits; inspected: AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf, WeierstrassCurve.Projective, AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ, Projectivization.card_of_finrank_two, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.commRingStructureSheafInTypeObj, AlgebraicGeometry.Proj, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.sectionsSubring",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern Proj constructions, elliptic curves, group/cotangent cohomology or etale cohomology; none computes the coherent cohomology of a plane hypersurface or states the relative Fermat assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "hypersurface.*cohomology|plane.*genus|genus.*plane",
+   "results": "0 hits; inspected: ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned Proj constructions, Weierstrass equations, or abstract homological algebra; none states coherent cohomology of a general plane hypersurface"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of the structure sheaf of a degree d plane hypersurface has dimension (d-1)(d-2)/2 in degree one",
+   "results": "8 hits; inspected: AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType, AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf, groupCohomology.H1, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction, AlgebraicGeometry.StructureSheaf.const_one, AlgebraicGeometry.Proj.one_apply, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.SectionSubring.zero_mem', AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.SectionSubring.neg_mem'",
+   "date": "2026-10-22",
+   "verdict": "no match: returned Proj constructions, Weierstrass equations, or abstract homological algebra; none states coherent cohomology of a general plane hypersurface"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Proj\", \"cohomology\"",
+   "results": "12 hits; inspected: CochainComplex.HomComplex.CohomologyClass.equivOfIsKProjective, CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective, CochainComplex.HomComplex.CohomologyClass.equivOfIsKProjective_apply, CochainComplex.HomComplex.CohomologyClass.equivOfIsKProjective_symm_apply, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass, CategoryTheory.ProjectiveResolution.extLinearEquivCohomologyClass, CategoryTheory.ProjectiveResolution.extAddEquivCohomologyClass, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk",
+   "date": "2026-10-22",
+   "verdict": "no match: returned Proj constructions, Weierstrass equations, or abstract homological algebra; none states coherent cohomology of a general plane hypersurface"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a nonzero homogeneous polynomial of degree d in three variables over a field the structure sheaf of its projective hypersurface has H0 equal to k and H1 dimension (d-1)(d-2)/2",
+   "results": "8 hits; inspected: AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.toFun, AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ, AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection, AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant, AlgebraicGeometry.Proj, AlgebraicGeometry.sectionInBasicOpen, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.commRingStructureSheafInTypeObj, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.sectionsSubring",
+   "date": "2026-10-22",
+   "verdict": "no match: returned Proj constructions, Weierstrass equations, or abstract homological algebra; none states coherent cohomology of a general plane hypersurface"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of a projective plane curve of degree d are constants and its arithmetic genus is binomial d minus one choose two",
+   "results": "8 hits; inspected: WeierstrassCurve.Projective, WeierstrassCurve.Affine.natDegree_polynomial, WeierstrassCurve.Affine.degree_polynomial, WeierstrassCurve.Affine, WeierstrassCurve, WeierstrassCurve.Projective.Equation, WeierstrassCurve.natDegree_preΨ', WeierstrassCurve.natDegree_preΨ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned Proj constructions, Weierstrass equations, or abstract homological algebra; none states coherent cohomology of a general plane hypersurface"
+  },
+  {
+   "tool": "grep",
+   "query": "plane.*genus|genus.*plane|hypersurface.*cohomology",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: only structure sheaves, Proj constructions, and general sheaf cohomology definitions, not the plane hypersurface calculation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Structure sheaf cohomology and arithmetic genus of a projective plane hypersurface",
+   "results": "8 hits; CategoryTheory.Sheaf.H, AlgebraicGeometry.LocallyRingedSpace.𝒪, CategoryTheory.Sheaf.instAddCommGroupH, AlgebraicGeometry.Spec.locallyRingedSpaceObj_presheaf', AlgebraicGeometry.Spec_sheaf, AlgebraicGeometry.Spec.locallyRingedSpaceObj_sheaf', AlgebraicGeometry.Spec.structureSheaf, AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: only structure sheaves, Proj constructions, and general sheaf cohomology definitions, not the plane hypersurface calculation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"hypersurface\", \"cohomology\"",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: only structure sheaves, Proj constructions, and general sheaf cohomology definitions, not the plane hypersurface calculation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The coherent cohomology of a degree d projective plane hypersurface has constants as global sections and first cohomology dimension (d-1)(d-2)/2",
+   "results": "8 hits; Configuration.ofField.instProjectivePlaneProjectivizationForallFinOfNatNatOfDecidableEq, WeierstrassCurve.Projective, Configuration.ofField.instNondegenerateProjectivizationForallFinOfNatNat, Configuration.ProjectivePlane.order, Projectivization.card'', Projectivization.card_of_finrank_two, WeierstrassCurve.Projective.PointClass, Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential",
+   "date": "2026-10-22",
+   "verdict": "no match: only structure sheaves, Proj constructions, and general sheaf cohomology definitions, not the plane hypersurface calculation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fermat-kummer-relative-curve",
+  "date": "2026-10-22",
+  "group": "NH"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §3.5, p.607, the cover C_i; explicit Fermat realization and genus computation from Stacks Tags 0BYA (curves-section-plane-curves) and 0BYD (curves-lemma-genus-plane-curve), literature/stacks-project/curves.tex. Local de Jong PDF WANTED; publisher PDF read.; Fermat geometric-fibre genus: the structure-sheaf cohomology calculation for a general plane hypersurface, Stacks 0BYD.",
+   "via": [
+    "lem-sfb-fermat-kummer-relative-curve",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-plane-hypersurface-cohomology",
+  "worker": "stage1",
+  "summary": "Repair of the 5345-character returned proof: preserve the statement and distribute returned steps 1--3 and 4+6 to two new statement-only unsplit lemmas of independent content. Keep the projective-space computation and the complete small-degree/monomial count in the item, whose four-step assembly is below 3000 characters. Full returned arguments are retained verbatim in report.md for the workers taking the new nodes; no argument is dropped. Mathlib searches actually run and logged for both nodes; no Mathlib match; no Lean attachment.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §3.5, p.607, the cover C_i; explicit Fermat realization and genus computation from Stacks Tags 0BYA (curves-section-plane-curves) and 0BYD (curves-lemma-genus-plane-curve), literature/stacks-project/curves.tex. Local de Jong PDF WANTED; publisher PDF read.; Fermat geometric-fibre genus: the structure-sheaf cohomology calculation for a general plane hypersurface, Stacks 0BYD.; new structure-sequence node carries returned steps 1--3, new cokernel-cohomology node carries returned steps 4 and 6, and item steps 2 and 4 retain returned steps 5 and 7.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-sc-p1-proj-tilde-functorial",
+  "lem-sc-cohomology-closed-immersion-pushforward"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q52-af6398353",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-af6398353 (reviewer sub-agent of L); spot-checked: I read the whole re-split. The note (2026-10-21/22) asks to cut the 5345-character, 7-step proof into separate new nodes. Live and side-live still have the reviewed 7-step base, so the delivery is not superseded. Every old argument is kept. Old steps 1-3 (graded sequence, exact tilde, twist charts x_j^{-d}->F/x_j^d, i_*O_Z = ((S/(F))_g)_0) are now the statement of the new node lem-sfb-projective-hypersurface-structure-sequence (P^n, F nonzero homogeneous, the ideal (F) itself, actual restriction map). Old steps 4+6 (k-linear closed-immersion comparison c^q, the long exact sequence with delta = boundary o (c^q)^-1, and the two isomorphisms under H0L=H1L=H1E=H2E=0) are now the new node lem-sfb-closed-immersion-cokernel-cohomology. Old steps 5 and 7 stay in the item verbatim. The item proof is a 4-step assembly of 2040 characters; the nodes carry about 2385 and 1920 characters of the old proof, so the work is evenly spread. Neither node restates a clause of the item. I checked Stacks curves.tex 0BYD (lemma-genus-plane-curve, lines 1687-1737): its proof uses only that F is nonzero and homogeneous. I read the statement of lem-pc-projective-space-twist-cohomology: at n=2 it gives all four vanishings, H^0(O)=k, and the basis e_i<0 with sum -d. I checked the exactness myself, and the count C(d-1,2) for d=1..5. Small cases tested: x_0, x_0^2, x_0x_1, g in (F), d=0 for the structure sequence; i=id, Y empty, and why the vanishing hypotheses are needed for the cohomology lemma. Both nodes are statement-only and self-contained, cite the definitions they use, name their source, and record grep, Loogle and LeanFinder searches; LeanSearch was rate-limited and is honestly recorded as unavailable. No duplicates in the DAG: the closest are pushforward-boundary-naturality, the abelian closed-pushforward comparisons, the m1 Leray linear comparison, and the coherent hyperplane restriction, which does the same comparison inline. No SGA, no cycle, no new off-unit use. Maintainer notes: (1) the item's merge-owned tool_uses field still lists p1-proj-tilde-functorial and cohomology-closed-immersion-pushforward, which the item no longer cites; (2) the cokernel-cohomology node could later be reused by coherent-regular-hyperplane-restriction."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PlaneHypersurfaceCohomology",
+  "declaration": "AlgebraicGeometry.PlaneHypersurface.cohomology_of_nonzero_homogeneous",
+  "declarations": [
+   "AlgebraicGeometry.PlaneHypersurface.ideal",
+   "AlgebraicGeometry.PlaneHypersurface.scheme",
+   "AlgebraicGeometry.PlaneHypersurface.ι",
+   "AlgebraicGeometry.PlaneHypersurface.π",
+   "AlgebraicGeometry.PlaneHypersurface.scalarMap",
+   "AlgebraicGeometry.PlaneHypersurface.cohomology",
+   "AlgebraicGeometry.PlaneHypersurface.cohomology_of_nonzero_homogeneous"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PlaneHypersurfaceCohomology.lean",
+  "statement": "theorem cohomology_of_nonzero_homogeneous {k : Type u} [Field k] (d : ℕ) (hd : 1 ≤ d) (F : MvPolynomial (ULift.{u} (Fin 3)) k) (hF : F.IsHomogeneous d) (hF0 : F ≠ 0) : Function.Bijective (scalarMap d F hF) ∧ Module.rank k (cohomology d F hF 1) = (((d - 1) * (d - 2) / 2 : ℕ) : Cardinal.{u})",
+  "branch": "sheaf-dag",
+  "by": "O2",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The actual homogeneous section Proj.unitToTwist defines the hypersurface via the existing zero-scheme construction. Its standard charts are the degree-zero localizations of k[A,B,C]/(F), including their nilpotents. H0 is expressed as global sections with the usual multiplication; the bijective map is the canonical scalar ring map, equivalently the canonical k-algebra isomorphism. H1 uses the recorded RingedSpace.moduleCohomology and canonical restriction of scalars. Module.rank is cardinal-valued, so the dimension clause includes finiteness."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e340674a7",
+  "group": "O2",
+  "result": "pass",
+  "note": "Node delta adds only lean plus two used, recorded stmt_deps (proj-twisting-sheaf, pc-zero-scheme). Z = zeroLocus(Proj.unitToTwist F) on Proj k[A,B,C]; O and O(d) are invertible, local ideal (F/X_i^d), equal to the Proj(S/(F)) closed subscheme with no radical; Mathlib has no graded quotient. H0: bijective canonical scalar ring map k -> Γ(Z,⊤). H1: recorded RingedSpace.moduleCohomology 1 of the structure sheaf, restricted to k, Module.rank = ((d-1)(d-2)/2 : ℕ), correct for d=1,2,3,4. Hypotheses match the node (field, d≥1, F≠0 homogeneous), with no extra assumptions and no universe restriction. Helpers have real data, only sorry is the theorem proof, docstrings carry the source, blueprint tag and 7 proof steps, statement field verbatim. No competing delivery. No compile needed (no FIX)."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

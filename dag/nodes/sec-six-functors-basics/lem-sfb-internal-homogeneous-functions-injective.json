@@ -21,111 +21,49 @@
  ],
  "proof": [
   {
-   "text": "Use the section-ring equivalence of [def-weil-pbc-internal-abelian-sheaf-module-equivalence] to regard internal $A$-modules as sheaves of modules over the section-ring sheaf $A$. It leaves sections, restriction maps and linear maps unchanged. The bilinear universal property identifies tensor products in these descriptions, and the right-adjoint universal property identifies their internal Homs. Equivalences preserve monomorphisms and the extension property defining injectivity: transport a lifting problem and its solution along the inverse equivalence. We may therefore work with these section-module sheaves. By [def-pur-sheaf-hom], a section of an internal Hom over $S$ is a map on the entire slice over $S$; evaluations below are required after every $T\\to S$, not just at ordinary points.",
+   "text": "By [lem-sfb-internal-homogeneous-lift-reconstruction], the prescribed homogeneous action has a normalized model $H$ with underlying module $H_n(J)$. Fix any equivariant monomorphism $i:N\\hookrightarrow M$ and equivariant linear map $h:N\\to H$. We solve its extension problem using the same free modules and slice evaluations as in the statement.",
    "uses": [
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-    "def-pur-sheaf-hom"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), open direct image: agent-written internal homogeneous-function extension argument"
-   }
-  },
-  {
-   "text": "Put $X=G^n$, with $G^0=*$, a profinite object of the chosen small site, and $P=A[\\underline X]$. The free-module universal property identifies $P$ with the sheafification of $V\\mapsto\\bigoplus_{t\\in C(V,X)}A(V)$: a map out is exactly a natural assignment of an element to each generator $[t]$, and sheafification does not change maps to a sheaf. This is exactly $j_{X!}A_X$ in [lem-pc-sites-modules-j-shriek-flat]. That node applies to the sheaf of commutative rings $A$ on this site and gives that $P\\otimes_A-$ preserves finite limits, hence monomorphisms. This uses flatness, not projectivity, of the free module.",
-   "uses": [
-    "lem-pc-sites-modules-j-shriek-flat"
+    "lem-sfb-internal-homogeneous-lift-reconstruction"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EV, label lemma-j-shriek-flat, clause (2) and its displayed direct-sum formula"
-   }
-  },
-  {
-   "text": "Let $i:N\\hookrightarrow M$ be any monomorphism of internal $G$-equivariant $A$-modules, and $h:N\\to H_n(J)$ an equivariant linear map. The forgetful functor $U$ sends $i$ to a monomorphism. Indeed $K(S)=\\ker(i_S)$ is a subsheaf of $UN$, because compatible kernel sections glue uniquely in $UN$. Equivariance gives $i_S(gx)=g i_S(x)=0$, so the action of [def-sfb-condensed-action-module] restricts to $K$, naturally after every base change. Its inclusion $k:K\\to N$ is equivariant and $ik=0$; monicity of $i$ implies $k=0$. Thus every $i_S$ has zero kernel, so is injective. A sectionwise injective sheaf map is monic, by testing equality of maps on sections.",
-   "uses": [
-    "def-sfb-condensed-action-module"
-   ],
-   "elementary": true,
-   "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), open direct image: agent-written internal homogeneous-function extension argument"
+    "place": "Paragraph (3), open direct image, homogeneous-function injectivity: existence of the specified homogeneous action"
    }
   },
   {
-   "text": "For each profinite test object and $\\mathbf t=(t_1,\\ldots,t_n)$, evaluation of $h(x)$ at $(1,\\mathbf t)$ defines $a_{\\mathbf t}(x)=h(x)(1,\\mathbf t)$. It is $A$-linear in $x$ and natural in the test object and $\\mathbf t$. Extend in the free generators of $P$ and apply the tensor universal property, equivalently the natural tensor--Hom adjunction of [lem-pc-sheaf-modules-tensor-closed], to get $\\alpha:P\\otimes_A UN\\to UJ$ with $\\alpha([\\mathbf t]\\otimes x)=a_{\\mathbf t}(x)$. The evaluation is the slice evaluation of [def-pur-sheaf-hom], so this is a morphism of sheaves, including all profinite base changes. For $n=0$, the tuple is empty and the evaluation is at the single group coordinate $1$.",
+   "text": "Put $P_n=A[\\underline G^n]$. Apply [lem-sfb-internal-homogeneous-transpose-extension] to $A,G,n,J,H,i,h$. Its sole injectivity hypothesis is the assumed injectivity of $UJ$. It supplies $\\alpha:P_n\\otimes_A UN\\to UJ$ and $\\beta:P_n\\otimes_A UM\\to UJ$ with $\\beta\\circ(P_n\\otimes_A Ui)=\\alpha$ and $\\alpha([\\mathbf t]\\otimes x)=h(x)(1,\\mathbf t)$ on every profinite slice. Thus $\\beta([\\mathbf t]\\otimes i(x))=h(x)(1,\\mathbf t)$ after every base change.",
    "uses": [
-    "lem-pc-sheaf-modules-tensor-closed",
-    "def-pur-sheaf-hom"
+    "lem-sfb-internal-homogeneous-transpose-extension"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EO, label lemma-internal-hom-adjoint-tensor, clause (2); agent specialization to evaluation on free generators"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image, homogeneous-function injectivity: transpose extension, old steps 1-5"
    }
   },
   {
-   "text": "By Steps 2 and 3, $P\\otimes_A Ui:P\\otimes_A UN\\hookrightarrow P\\otimes_A UM$ is monic. The assumed injectivity of $UJ$, in precisely the extension sense of [def-sp-injective-resolutions], supplies a sheaf-module morphism $\\beta:P\\otimes_A UM\\to UJ$ satisfying $\\beta\\circ(P\\otimes_A Ui)=\\alpha$. No sectionwise splitting or injectivity of the individual modules $J(S)$ is asserted: this is one extension in the category of internal modules.",
+   "text": "Use [lem-sfb-internal-homogeneous-lift-reconstruction] with this $\\beta$. It gives the equivariant internal map $b_\\beta:M\\to H$ specified on every slice by\n$$b_\\beta(m)(g_0,\\ldots,g_n)=g_0\\cdot_J\\beta([g_0^{-1}g_1,\\ldots,g_0^{-1}g_n]\\otimes(g_0^{-1}\\cdot_M m)).$$\nIts restriction clause applies to exactly the equality from the preceding step, yielding $b_\\beta\\circ i=h$. For each monomorphism $i$, this constructs a preimage of every $h$ under restriction $\\operatorname{Hom}(M,H)\\to\\operatorname{Hom}(N,H)$. This restriction is therefore surjective for every $i$, exactly the injectivity condition of [def-sp-injective-resolutions]. Thus $H$, with the specified homogeneous-function module and action, is injective.",
    "uses": [
+    "lem-sfb-internal-homogeneous-lift-reconstruction",
     "def-sp-injective-resolutions"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 015Z, label lemma-adjoint-preserve-injectives, proof of (a) implies (c): extend the transpose against a monomorphism"
-   }
-  },
-  {
-   "text": "Define $b:M\\to H_n(J)$ on generalized arguments by\n$$b(m)(g_0,\\ldots,g_n)=g_0\\cdot_J\\beta\\bigl([g_0^{-1}g_1,\\ldots,g_0^{-1}g_n]\\otimes(g_0^{-1}\\cdot_M m)\\bigr).$$\nHere $m\\in M(S)$ is first restricted to $T$ for every $T\\to S$, and $g_i\\in C(T,G)$. Inversion, multiplication and both internal actions commute with restriction; so does $\\beta$. The formula is therefore natural on each slice. For fixed tuple it is $A(T)$-linear in $m$, since the two actions are $A(T)$-linear. The free-module universal property in the tuple, followed by the tensor--Hom adjunction of [lem-pc-sheaf-modules-tensor-closed], gives an internal linear map $b$; the slice description of [def-pur-sheaf-hom] ensures these formulas specify its actual internal-Hom sections. Empty tests and the empty $n$-tuple are interpreted by the same formula.",
-   "uses": [
-    "def-sfb-condensed-action-module",
-    "lem-pc-sheaf-modules-tensor-closed",
-    "def-pur-sheaf-hom"
-   ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), open direct image: agent-written internal homogeneous-function extension argument"
-   }
-  },
-  {
-   "text": "Check equivariance on every profinite test object. Write $\\mathbf r=(g_0^{-1}g_1,\\ldots,g_0^{-1}g_n)$. For $k\\in\\underline G$, the definition gives\n$$b(km)(\\mathbf g)=g_0\\cdot_J\\beta([\\mathbf r]\\otimes(g_0^{-1}k\\cdot_M m)).$$\nOn the other hand the prescribed homogeneous action gives\n$$(k\\cdot b(m))(\\mathbf g)=k\\cdot_J\\bigl((k^{-1}g_0)\\cdot_J\\beta([\\mathbf r]\\otimes((k^{-1}g_0)^{-1}\\cdot_M m))\\bigr).$$\nSince $k(k^{-1}g_0)=g_0$ and $(k^{-1}g_0)^{-1}=g_0^{-1}k$, these expressions agree. These equalities use only the action laws of [def-sfb-condensed-action-module] and hold after all base changes, so $b$ is equivariant.",
-   "uses": [
-    "def-sfb-condensed-action-module"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), open direct image: agent-written internal homogeneous-function extension argument"
-   }
-  },
-  {
-   "text": "Finally let $x\\in N$ on any test object. Equivariance of $i$ and the extension identity give\n$$b(ix)(\\mathbf g)=g_0\\cdot_J\\alpha([\\mathbf r]\\otimes(g_0^{-1}\\cdot_N x))=g_0\\cdot_J h(g_0^{-1}\\cdot_N x)(1,\\mathbf r).$$\nEquivariance of $h$ and the stated homogeneous action identify the last evaluation with $g_0\\cdot_J(g_0^{-1}\\cdot_J h(x)(g_0,g_0r_1,\\ldots,g_0r_n))=h(x)(\\mathbf g)$. Equality on all generalized tuples, followed by linear extension in the free generators, gives $bi=h$ as internal maps. Every lifting problem has thus been solved, which is exactly injectivity by [def-sp-injective-resolutions].",
-   "uses": [
-    "def-sfb-condensed-action-module",
-    "def-sp-injective-resolutions"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), open direct image: agent-written internal homogeneous-function extension argument"
+    "place": "Paragraph (3), open direct image, homogeneous-function injectivity: reconstruction and extension identity, old steps 6-8"
    }
   }
  ],
  "proof_deps": [
-  "def-pur-sheaf-hom",
-  "def-sfb-condensed-action-module",
   "def-sp-injective-resolutions",
-  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-  "lem-pc-sheaf-modules-tensor-closed",
-  "lem-pc-sites-modules-j-shriek-flat"
+  "lem-sfb-internal-homogeneous-lift-reconstruction",
+  "lem-sfb-internal-homogeneous-transpose-extension"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-  "place": "Paragraph (3), internal homogeneous-function helper. Explicit internal extension proof adapting Stacks homology.tex Tag 015Z (lemma-adjoint-preserve-injectives) using sites-modules.tex Tags 03EV (lemma-j-shriek-flat) and 03EO (lemma-internal-hom-adjoint-tensor)."
+  "place": "Paragraph (3), open direct image, homogeneous-function helper: assembly of the transpose-extension and lift-reconstruction statements; preserves the original eight-step extension argument."
  },
  "mathlib_searches": [
   {
@@ -257,33 +195,23 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-22",
+  "date": "2026-10-23",
   "item": "lem-sfb-internal-homogeneous-functions-injective",
   "worker": "stage1",
-  "summary": "Replaced the unsplit helper by an eight-step explicit lifting proof. Evaluating at first coordinate 1 reduces a lifting problem to tensoring with the flat free module on G^n; underlying injectivity extends that map, and an explicit formula reconstructs and verifies the equivariant lift on all profinite tests. Reused existing nodes; no new nodes and no statement change.",
-  "blueprint": "Current main-20261015 direct-images proof paragraph (3), open direct image; supplies the injectivity input for equivariant resolution-to-bar normalization. Nearest imported blueprint ancestor is null, as returned by blueprint_refs.py ancestor.",
-  "tool_uses": [
-   {
-    "node": "lem-pc-sites-modules-j-shriek-flat",
-    "why": "Generic ringed-site flatness theorem applied to the represented profinite object G^n; the unit does not supply this algebraic tool."
-   },
-   {
-    "node": "lem-pc-sheaf-modules-tensor-closed",
-    "why": "Generic ringed-site tensor--Hom adjunction already used to define the item; required to construct and interpret evaluation maps, not to replace the geometric unit route."
-   }
-  ]
+  "summary": "Repair rebased onto the current DAG after the L side-completion promotion return. The current item matches original-item.json field for field; its released stage-1 repair note still requires two new nodes. Retained the transpose-extension (old steps 1-5) and lift-reconstruction (old steps 6-8) statement-only helpers and their actual search records, re-read the current cited statements, and made P_n explicit in assembly step 2. The three-step assembly preserves the original statement and all Lean/maintainer metadata; report.md retains every old argument verbatim and records the current-DAG comparison. On the resumed landing repair, compared the baseline against current main again (no changed fields), revalidated every assembly quote, and made the surjectivity conclusion in step 3 explicit. On 2026-10-23, the retained initial dry run passed on the current server DAG at 3c18f28fe67. Re-read every current cited statement and made the reconstruction formula explicit in assembly step 3, with its full theorem clause quoted in citations.json; the statement-only children and their logged searches are unchanged.",
+  "blueprint": "Main-20261015 direct-images proof paragraph (3), open direct image. This helper lies below equivariant resolution-to-bar normalization; nearest imported ancestor is null as reported by blueprint_refs.py ancestor. The two new nodes partition the original eight-step internal lifting argument."
  },
  "tool_uses": [
   "lem-pc-sites-modules-j-shriek-flat",
   "lem-pc-sheaf-modules-tensor-closed"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-NW-11411aeaa",
-  "group": "NW",
+  "reviewer": "NT-cc-Q131-2f5862a1b",
+  "group": "Q131",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-11411aeaa (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement. The item is a first split with no new nodes and an unchanged statement. The statement is true: classically the module is the coinduction of Hom(A[G^n],UJ), which is injective because UJ is injective and A[G^n] is flat. It matches the parent's step 3, which applies it to UI^q with the action on arguments and values. Step 2: A[G^n] is the sheafification of the direct sum over C(V,G^n), which is exactly j_{X!}A_X of lem-pc-sites-modules-j-shriek-flat. I checked this against Stacks 03EV clause (2) at sites-modules.tex:4389. Step 3: the proof that U preserves monomorphisms is correct; the sectionwise kernel is a subobject stable under the action. Steps 4-5: alpha is the tensor-Hom transpose of Uh followed by evaluation at (1,t), and beta is a single internal extension, matching Stacks 015Z (a)=>(c) at homology.tex:7287. I recomputed steps 7-8 by hand: the relative coordinates are unchanged by left translation, the order of factors is correct for non-abelian G, and b∘i=h. Edge cases checked: n=0, G=1, A=0 or J=0, and infinite G (only representability of G^n and flatness are used). No duplicate found among the sfb/proetale injective-resolution, bar and restriction-calculus nodes or the curve-estimate coinduced nodes, which have discrete coefficients. I accept the two declared tool uses: j-shriek flatness and the closed monoidal structure of sheaf modules. The split uses no SGA source and changes nothing."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-2f5862a1b (reviewer sub-agent of L); spot-checked: This is the 4th delivery of the Q131 re-split ordered by the released 2026-10-22 human note. The earlier heads 5cc8f321, 2f791c20 and b42163ab were all PASSed; landing refused each one as an unpromoted side completion. Compared with b42163ab: both new nodes (lem-sfb-internal-homogeneous-transpose-extension, lem-sfb-internal-homogeneous-lift-reconstruction) are field-identical, and the item statement, stmt_deps, proof_deps and status are identical. The only change is that step 3 now shows the b_β slice formula; I checked it character for character against the reconstruction child. In clones/live and clones/side-live the item is still the 8-step split, neither helper id exists, and the repair note is still released, so no other group has re-split it. I re-checked the mathematics myself. Step 1: the reconstruction child asserts that the normalized model exists, which def-sfb-condensed-homogeneous-functions does not assert, and the action laws hold for non-abelian G. Step 2: U preserves monos by the invariant-kernel argument; P_n = j_{X!}A_X is flat (lem-pc-sites-modules-j-shriek-flat, Stacks 03EV); α comes from the 03EO adjunction and is unique on the local generators [t]⊗x; β exists by injectivity of UJ (def-sp-injective-resolutions, 015Z). Step 3: equivariance follows from (k^{-1}g_0)^{-1}k^{-1}g_i = g_0^{-1}g_i, and b(ix)(g) = h(x)(g) needs neither monicity nor injectivity. Edge cases checked: n=0, G=1, A=0, J=0, N=0, M=0, the empty test object and infinite G. Old steps 1-5 (3214 characters) and 6-8 (2053 characters) are kept verbatim under the two children, which are independent and of comparable size; the parent is a 3-step assembly under 3000 characters. Re-read candidates, none a duplicate: lem-sfb-internal-action-coinduction (sheaves of sets), lem-sc-sheaf-coinduction-adjunction (schemes), lem-trf-coinduction-bounded-injective-model (ordinary rings), lem-sfb-homogeneous-bar-coordinate-normalization, lem-sfb-homogeneous-injective-total-target. No SGA, no new tool_uses. Maintainer note: the repeated deliveries come from landing not promoting the side completion, not from any fault in the split."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.CondensedHomogeneousFunctionsInjective",
@@ -309,5 +237,17 @@
   "group": "NB",
   "result": "pass",
   "note": "Re-delivery of 7f48924c H2/H4 RETURN. Lean delta: Hom source is now CondensedBar.freeParameter ⟨R.X⟩ (power G (n+1)) from def-sfb-condensed-equivariant-bar-data, body-identical to InternalBar.freePower; the generator typechecks definitionally. The theorem stmt_dep lem-sfb-condensed-internal-bar-resolution is removed. New def-sfb-condensed-free-module-generators is existing:true on unchanged CondensedInternalBarResolution (free/freeAdjunction/tuples/freePower/generator, plain defs at lines 53-90, no .choose); statement verbatim; check_existing clean; no competing owner in side-live. Item node differs from live only in stmt_deps (4 added def nodes) and lean. Clauses rechecked: arbitrary commutative R, profinite G, sole [Injective J.module], every n : ℕ, action pinned on all slices with correct inverse and order, ∃ over a normalized model unique up to iso. Edge cases n=0, G=1, zero ring, J=0, empty test, infinite G. Gates H5/H6/H8 OK. Advisory: base-era tensor-closed public import used only by the proof plan. No file changed, no compile."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

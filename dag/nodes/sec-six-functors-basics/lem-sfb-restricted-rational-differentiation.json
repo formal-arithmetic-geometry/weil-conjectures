@@ -1,0 +1,285 @@
+{
+ "id": "lem-sfb-restricted-rational-differentiation",
+ "kind": "statement",
+ "title": "Restricted Lie differentiation of affine group coactions",
+ "statement": "Let $F$ be a field of prime characteristic $p>0$ [def-weil-field], and let $H$ be an affine group scheme of finite type over $F$ [def-sc-group-scheme]. Write $C=F[H]$ for its coordinate algebra, $\\Delta:C\\to C\\otimes_F C$ for the map induced by multiplication, and $\\varepsilon:C\\to F$ for evaluation at the identity. A tangent vector at the identity is an $F$-linear map $x:C\\to F$ satisfying $x(ab)=\\varepsilon(a)x(b)+x(a)\\varepsilon(b)$; these maps form $\\mathfrak h=\\operatorname{Lie}(H)$. For such $x$ put $D_x=(\\operatorname{id}_C\\otimes x)\\Delta:C\\to C$. Then $x\\mapsto D_x$ identifies $\\mathfrak h$ with the left-invariant $F$-derivations of $C$, where a derivation $D$ is left-invariant if $\\Delta D=(\\operatorname{id}_C\\otimes D)\\Delta$. The commutator $[D_x,D_y]$ and the $p$th composition $D_x^p$ are left-invariant derivations. The operations defined by $D_{[x,y]}=[D_x,D_y]$ and $D_{x^{[p]}}=D_x^p$ make $\\mathfrak h$ a restricted Lie algebra whose bracket agrees with the tangent bracket induced by group commutators, with the three restricted identities and the polynomials $s_i$ specified in [lem-sfb-restricted-pbw-basis]. If $f:H\\to K$ is a homomorphism of affine finite-type $F$-group schemes and $f^*:F[K]\\to C$ its coordinate map, its differential $df(x)=x\\circ f^*$ preserves brackets and restricted operations. In particular every group automorphism of $H$ induces a restricted Lie automorphism of $\\mathfrak h$. For any $F$-vector space $W$ with a counital coassociative coaction $\\alpha:W\\to W\\otimes_F C$, the operators $\\rho(x)=(\\operatorname{id}_W\\otimes x)\\alpha$ satisfy $\\rho([x,y])=\\rho(x)\\rho(y)-\\rho(y)\\rho(x)$ and $\\rho(x^{[p]})=\\rho(x)^p$. Consequently they define a unital action of $u(\\mathfrak h)=T_F(\\mathfrak h)/(xy-yx-[x,y],x^p-x^{[p]})$ on $W$, with no finite-dimensionality hypothesis on $W$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Sections 10d and 10k, Theorem 10.23 and Proposition 10.38, printed pp.193--194 and 205--206; Theorem 11.25 and Proposition 11.26, printed pp.217--218, for invariant derivations; paragraph preceding Proposition 11.36, printed p.223, for the restricted operation; Section 10l, printed pp.207--208, for the distribution action on representations. The coaction formulas state explicitly its extension to arbitrary rational modules."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "lem-sfb-restricted-pbw-basis",
+  "def-sfb-bialgebra-tangent-derivation-data",
+  "def-sfb-coordinate-hopf-algebra",
+  "def-sfb-hopf-action-module-data",
+  "def-wf-lie-algebra-derivation"
+ ],
+ "proof": [
+  {
+   "text": "Pulling back the associativity and identity diagrams of [def-sc-group-scheme] gives coassociativity and both counit identities for $\\Delta,\\varepsilon$; both are algebra maps. Write $\\Delta(a)=\\sum a_1\\otimes a_2$, with all tensor sums finite. The tangent Leibniz rule gives $D_x(ab)=\\sum a_1b_1(\\varepsilon(a_2)x(b_2)+x(a_2)\\varepsilon(b_2))=aD_x(b)+D_x(a)b$. Coassociativity gives $\\Delta D_x=(\\operatorname{id}\\otimes D_x)\\Delta$, and the counit gives $\\varepsilon D_x=x$. Conversely, for an invariant derivation $D$, $x=\\varepsilon D$ is a tangent derivation and $D_x=(\\operatorname{id}\\otimes\\varepsilon D)\\Delta=(\\operatorname{id}\\otimes\\varepsilon)\\Delta D=D$. These formulas prove the asserted linear bijection.",
+   "uses": [
+    "def-sc-group-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§11e, Theorem 11.25 and Proposition 11.26, pp.217–218; invariant specialization written out"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-convolution-linear-map-algebra] with $R=B=F$: the space $E=\\operatorname{Hom}_F(C,F)$ has associative convolution $(\\phi*\\psi)(a)=\\sum\\phi(a_1)\\psi(a_2)$ with unit $\\varepsilon$. For every $\\phi\\in E$, set $R_\\phi=(\\operatorname{id}\\otimes\\phi)\\Delta$. Coassociativity gives $R_\\phi R_\\psi(a)=\\sum a_1\\phi(a_2)\\psi(a_3)=R_{\\phi*\\psi}(a)$, while $R_\\varepsilon=\\operatorname{id}$ and $\\varepsilon R_\\phi=\\phi$. Thus $R:E\\to\\operatorname{End}_F(C)$ is an injective unital algebra map. In particular $R_x=D_x$.",
+   "uses": [
+    "lem-sfb-convolution-linear-map-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§10l, p.208, convolution product; explicit regular-coaction calculation"
+   }
+  },
+  {
+   "text": "If $D,E$ are derivations, expansion of $DE(ab)-ED(ab)$ cancels the two mixed terms and yields $[D,E](ab)=[D,E](a)b+a[D,E](b)$. To handle $p$th composition, let $M_a$ denote multiplication by $a$ in $\\operatorname{End}_F(C)$. The Leibniz rule says $[D,M_a]=M_{D(a)}$, hence $\\operatorname{ad}(D)^p(M_a)=M_{D^p(a)}$. The first identity of [lem-sfb-associative-jacobson-identities], applied in the associative algebra $\\operatorname{End}_F(C)$, identifies this with $[D^p,M_a]$. Evaluating at $b$ gives $D^p(ab)=D^p(a)b+aD^p(b)$. Finally if $D,E$ are invariant then $\\Delta DE=(\\operatorname{id}\\otimes DE)\\Delta$; subtraction and repeated composition show that $[D,E]$ and $D^p$ are invariant.",
+   "uses": [
+    "lem-sfb-associative-jacobson-identities"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 10.38(a), pp.205–206; paragraph preceding Proposition 11.36, p.223; multiplication-operator argument for closure"
+   }
+  },
+  {
+   "text": "Use the inverse from step 1 to define $[x,y]$ and $x^{[p]}$ by $D_{[x,y]}=[D_x,D_y]$ and $D_{x^{[p]}}=D_x^p$. The commutator Lie algebra and its bracket-closed subspaces are those of [def-wf-lie-algebra], so this gives a Lie algebra. Apply [lem-sfb-associative-jacobson-identities] to $\\operatorname{End}_F(C)$ and restrict to its invariant derivations: it gives $\\operatorname{ad}(x^{[p]})=\\operatorname{ad}(x)^p$ and the stated sum formula, since the linear bracket-preserving injection $x\\mapsto D_x$ preserves each coefficient defining $s_i$. Also $(cD_x)^p=c^pD_x^p$ proves scalar semilinearity. Injectivity reflects all three identities. Step 2 additionally gives, inside $E$, $[x,y]=x*y-y*x$ and $x^{[p]}=x^{*p}$.",
+   "uses": [
+    "def-wf-lie-algebra",
+    "lem-sfb-associative-jacobson-identities"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 10.38 and Definition 10.39, pp.205–207; restricted operation preceding Proposition 11.36, p.223"
+   }
+  },
+  {
+   "text": "Check the tangent bracket directly. Let $B=F[t,s]/(t^2,s^2)$. The tangent product rule and $x(1)=y(1)=0$ imply that $U=\\varepsilon+tx$ and $V=\\varepsilon+sy$ are algebra maps $C\\to B$, hence $B$-points of $H$. Point multiplication is convolution, by the definition of $\\Delta$. In the convolution algebra of [lem-sfb-convolution-linear-map-algebra], their inverses are $\\varepsilon-tx$ and $\\varepsilon-sy$. Expanding four factors, using $t^2=s^2=0$, gives $UVU^{-1}V^{-1}=\\varepsilon+ts(x*y-y*x)$. Thus the mixed tangent coefficient of the group commutator is exactly the bracket from step 4, with the stated sign; this also covers $p=2$.",
+   "uses": [
+    "def-sc-group-scheme",
+    "lem-sfb-convolution-linear-map-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§10d, equations (60)–(63), Theorem 10.23, pp.192–194; explicit two-parameter commutator expansion"
+   }
+  },
+  {
+   "text": "For a group homomorphism $f:H\\to K$, put $C_K=F[K]$. Pullback of multiplication and identity gives $\\Delta_H f^*=(f^*\\otimes f^*)\\Delta_K$ and $\\varepsilon_H f^*=\\varepsilon_K$. The product rule then shows $x f^*$ is tangent. For arbitrary functionals, $(\\phi*\\psi)f^*=(\\phi f^*)*(\\psi f^*)$ by these displayed coalgebra identities. Therefore precomposition with $f^*$ preserves the convolution commutator and the $p$th convolution power, which are the tangent operations by step 4. This proves the two assertions about $df$. For a group automorphism, applying the same construction to its inverse gives the inverse differential, so it is a restricted Lie automorphism.",
+   "uses": [
+    "def-sc-group-scheme",
+    "lem-sfb-convolution-linear-map-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§10d, equations (59)–(62), pp.192–193; §10l, p.208, convolution product"
+   }
+  },
+  {
+   "text": "For the given $W,\\alpha$, define $S_\\phi=(\\operatorname{id}_W\\otimes\\phi)\\alpha$ for every $\\phi\\in E$. Coassociativity of $\\alpha$ gives $S_\\phi S_\\psi(w)=\\sum w_0\\phi(c_1)\\psi(c_2)=S_{\\phi*\\psi}(w)$, where $(\\operatorname{id}\\otimes\\Delta)\\alpha(w)=\\sum w_0\\otimes c_1\\otimes c_2$; counitality gives $S_\\varepsilon=\\operatorname{id}_W$. Thus $S$ is a unital algebra map and step 4 gives both required formulas for $\\rho(x)=S_x$. Explicitly send a tensor word $x_1\\otimes\\cdots\\otimes x_n$ to $\\rho(x_1)\\cdots\\rho(x_n)$, and the empty word to $\\operatorname{id}_W$, extending linearly on the direct sum. This is well defined by multilinearity and multiplicative by concatenation. Each displayed generator of the defining ideal of $u(\\mathfrak h)$ maps to zero by the two formulas, so the map factors through the quotient and defines its unital action. Every tensor expression used is a finite sum, regardless of $\\dim_F W$.",
+   "uses": [
+    "lem-sfb-convolution-linear-map-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§10k, Definition 10.39 and its universal property, pp.206–207; §10l, p.208; arbitrary-coaction calculation written out"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-group-scheme",
+  "lem-sfb-convolution-linear-map-algebra",
+  "lem-sfb-associative-jacobson-identities",
+  "def-wf-lie-algebra"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Explicit Hopf/coaction calculations following §§10d,10k,10l,11e and the paragraph preceding Proposition 11.36; extension from finite-dimensional representations to arbitrary coactions proved directly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Rational representations of affine group schemes differentiate to restricted Lie algebra representations and group automorphisms preserve the p power map",
+   "results": "8 hits: TannakaDuality.FiniteGroup.algHomOfRightFDRepComp, AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom_appTop, AlgebraicGeometry.AffineSpace.map_Spec_map, AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly, cyclotomicCharacter.spec, AlgebraicGeometry.AffineSpace.map_SpecMap, AlgebraicGeometry.AffineSpace.homOverEquiv_apply, AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_symm_apply",
+   "date": "2026-10-24",
+   "verdict": "no match: manifold Lie algebras require normed fields; scalar restriction is unrelated to restricted p-Lie operations; Derivation.leibniz_pow differentiates a power of an element rather than iterating a derivation; finite-group Tannaka duality gives no differentiated coaction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Lie algebra of an affine algebraic group in characteristic p is restricted and differentiating a rational coaction preserves the p operation",
+   "results": "8 hits: GroupLieAlgebra, LieAlgebra.RestrictScalars.lieAlgebra, LieAlgebra, LieAlgebra.mk, instLieRingGroupLieAlgebra, AddGroupLieAlgebra, instLieAlgebraGroupLieAlgebra, LieAlgebra.RestrictScalars.instLieRingRestrictScalars",
+   "date": "2026-10-24",
+   "verdict": "no match: manifold Lie algebras require normed fields; scalar restriction is unrelated to restricted p-Lie operations; Derivation.leibniz_pow differentiates a power of an element rather than iterating a derivation; finite-group Tannaka duality gives no differentiated coaction."
+  },
+  {
+   "tool": "loogle",
+   "query": "Derivation, \"pow\"",
+   "results": "12 hits: Derivation.leibniz_pow, Derivation.leibniz_zpow, MvPolynomial.pderiv_pow, MvPowerSeries.pderiv, MvPowerSeries.pderiv_X_self, MvPowerSeries.pderiv_X_of_ne, MvPowerSeries.pderiv_one, MvPowerSeries.pderiv_X",
+   "date": "2026-10-24",
+   "verdict": "no match: manifold Lie algebras require normed fields; scalar restriction is unrelated to restricted p-Lie operations; Derivation.leibniz_pow differentiates a power of an element rather than iterating a derivation; finite-group Tannaka duality gives no differentiated coaction."
+  },
+  {
+   "tool": "grep",
+   "query": "restricted[ -](Lie|envelop)|\\bp[ -](structure|operation|Lie)|invariant.derivation",
+   "results": "4 hits: Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean, Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean, Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean, Mathlib/Geometry/Manifold/GroupLieAlgebra.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: manifold Lie algebras require normed fields; scalar restriction is unrelated to restricted p-Lie operations; Derivation.leibniz_pow differentiates a power of an element rather than iterating a derivation; finite-group Tannaka duality gives no differentiated coaction."
+  },
+  {
+   "tool": "grep",
+   "query": "iterate.*leibniz|leibniz.*iterate|iterate.*mul|iterate.*char|pow.*char",
+   "results": "{\"t\": \"2026-10-23T23:30:42Z\", \"tool\": \"grep\", \"query\": \"iterate.*leibniz|leibniz.*iterate|iterate.*mul|iterate.*char|pow.*char\", \"sub\": \"RingTheory/Derivation\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth-manifold derivations, ordinary Lie algebras, Frobenius on elements, polynomial derivatives and finite-group Tannaka constructions do not state the Hopf-coaction restricted differentiation theorem. LieDerivation.iterate_apply_lie is an iterated bracket rule and not this theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The pth iterate of a derivation in characteristic p is a derivation",
+   "results": "{\"t\": \"2026-10-23T23:30:42Z\", \"tool\": \"leansearch\", \"query\": \"The pth iterate of a derivation in characteristic p is a derivation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"iterateFrobenius_one\", \"iterateFrobenius\", \"iterateFrobenius_def\", \"iterateFrobenius_eq_pow\", \"LinearMap.iterateFrobenius\", \"iterateFrobenius_mul_apply\", \"coe_iterateFrobenius\", \"iterateFrobeniusEquiv_eq_pow\"], \"digest\": \"6e866f7f6b14e7a7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth-manifold derivations, ordinary Lie algebras, Frobenius on elements, polynomial derivatives and finite-group Tannaka constructions do not state the Hopf-coaction restricted differentiation theorem. LieDerivation.iterate_apply_lie is an iterated bracket rule and not this theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "Derivation, \"iterate\"",
+   "results": "{\"t\": \"2026-10-23T23:30:43Z\", \"tool\": \"loogle\", \"query\": \"Derivation, \\\"iterate\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"PowerSeries.constantCoeff_iterate_derivative\", \"PowerSeries.coeff_iterate_derivative\"], \"digest\": \"76f24a5ac40946f7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth-manifold derivations, ordinary Lie algebras, Frobenius on elements, polynomial derivatives and finite-group Tannaka constructions do not state the Hopf-coaction restricted differentiation theorem. LieDerivation.iterate_apply_lie is an iterated bracket rule and not this theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Iterated Leibniz formula for derivations D to the n applied to a product is a sum with binomial coefficients",
+   "results": "{\"t\": \"2026-10-23T23:30:46Z\", \"tool\": \"leanfinder\", \"query\": \"Iterated Leibniz formula for derivations D to the n applied to a product is a sum with binomial coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"iteratedDeriv_mul\", \"iteratedDeriv_fun_mul\", \"LieDerivation.iterate_apply_lie'\", \"iteratedDerivWithin_mul\", \"Polynomial.iterate_derivative_mul\", \"LieDerivation.iterate_apply_lie\", \"Derivation.leibniz_pow\", \"Derivation.leibniz\"], \"digest\": \"fc93256e3cd82dd2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth-manifold derivations, ordinary Lie algebras, Frobenius on elements, polynomial derivatives and finite-group Tannaka constructions do not state the Hopf-coaction restricted differentiation theorem. LieDerivation.iterate_apply_lie is an iterated bracket rule and not this theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rational coactions of affine algebraic group schemes differentiate into restricted Lie representations in positive characteristic",
+   "results": "{\"t\": \"2026-10-23T23:31:55Z\", \"tool\": \"leanfinder\", \"query\": \"Rational coactions of affine algebraic group schemes differentiate into restricted Lie representations in positive characteristic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieModule.instLinearWeightsOfCharZero\", \"Representation.ofModule_asModule_act\", \"TannakaDuality.FiniteGroup.toRightFDRepComp_in_rightRegular\", \"TannakaDuality.FiniteGroup.algHomOfRightFDRepComp\", \"LieAlgebra.RestrictScalars.lieAlgebra\", \"TannakaDuality.FiniteGroup.map_mul_toRightFDRepComp\", \"TannakaDuality.FiniteGroup.ofRightFDRep_hom\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_appTop_coord\"], \"digest\": \"6b5893813e09dd19\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth-manifold derivations, ordinary Lie algebras, Frobenius on elements, polynomial derivatives and finite-group Tannaka constructions do not state the Hopf-coaction restricted differentiation theorem. LieDerivation.iterate_apply_lie is an iterated bracket rule and not this theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "restricted[ -]Lie|restrictedLie|invariant.derivation|coaction.*(deriv|Lie)",
+   "results": "{\"t\": \"2026-10-23T23:33:40Z\", \"tool\": \"grep\", \"query\": \"restricted[ -]Lie|restrictedLie|invariant.derivation|coaction.*(deriv|Lie)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean\", \"Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean\", \"Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean\", \"Mathlib/Geometry/Manifold/GroupLieAlgebra.lean\"], \"digest\": \"7c298a90891b238e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth-manifold derivations, ordinary Lie algebras, Frobenius on elements, polynomial derivatives and finite-group Tannaka constructions do not state the Hopf-coaction restricted differentiation theorem. LieDerivation.iterate_apply_lie is an iterated bracket rule and not this theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "Bialgebra, Derivation",
+   "results": "{\"t\": \"2026-10-23T23:34:13Z\", \"tool\": \"loogle\", \"query\": \"Bialgebra, Derivation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth-manifold derivations, ordinary Lie algebras, Frobenius on elements, polynomial derivatives and finite-group Tannaka constructions do not state the Hopf-coaction restricted differentiation theorem. LieDerivation.iterate_apply_lie is an iterated bracket rule and not this theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Left invariant derivations on the coordinate Hopf algebra of an affine group identify its tangent Lie algebra and rational representations preserve pth powers",
+   "results": "{\"t\": \"2026-10-23T23:34:13Z\", \"tool\": \"leansearch\", \"query\": \"Left invariant derivations on the coordinate Hopf algebra of an affine group identify its tangent Lie algebra and rational representations preserve pth powers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LeftInvariantDerivation.left_invariant''\", \"LeftInvariantDerivation.toDerivation\", \"LeftInvariantDerivation.rec\", \"LeftInvariantDerivation\", \"LeftInvariantDerivation.mk\", \"LeftInvariantDerivation.comp_L\", \"LeftInvariantDerivation.left_invariant\", \"LeftInvariantDerivation.coe_derivation\"], \"digest\": \"4a399a4aa366a55d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth-manifold derivations, ordinary Lie algebras, Frobenius on elements, polynomial derivatives and finite-group Tannaka constructions do not state the Hopf-coaction restricted differentiation theorem. LieDerivation.iterate_apply_lie is an iterated bracket rule and not this theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Hopf algebra the epsilon derivations act on every comodule by applying the functional to the coaction and p power is preserved",
+   "results": "{\"t\": \"2026-10-23T23:34:14Z\", \"tool\": \"leanfinder\", \"query\": \"For a Hopf algebra the epsilon derivations act on every comodule by applying the functional to the coaction and p power is preserved\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HopfAlgebra.mul_antipode_lTensor_comul_apply\", \"HopfAlgebra.mul_antipode_rTensor_comul_apply\", \"HopfAlgebra.sum_mul_antipode_eq_smul\", \"HopfAlgCat.of_comul\", \"HopfAlgebra.mul_antipode_rTensor_comul\", \"HopfAlgebra.counit_antipode\", \"HopfAlgebra.mul_antipode_lTensor_comul\", \"HopfAlgebra.sum_antipode_mul_eq_smul\"], \"digest\": \"7e10808587b78582\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth-manifold derivations, ordinary Lie algebras, Frobenius on elements, polynomial derivatives and finite-group Tannaka constructions do not state the Hopf-coaction restricted differentiation theorem. LieDerivation.iterate_apply_lie is an iterated bracket rule and not this theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-unipotent-restricted-enveloping-augmentation",
+  "date": "2026-10-24",
+  "group": "Q89"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Section 1, restricted enveloping algebra definition, Theorem 1.2 and Corollary 1.3, printed pp.148--150; positive-root grading of the Borel radical in Section 1, printed pp.151--152. The nilpotent augmentation assertion is the bounded positive-root grading consequence, not a claim that x^[p] is always zero. Supporting input for the augmentation argument: restricted invariant derivations, their functoriality and rational-module actions.",
+   "via": [
+    "lem-sfb-unipotent-restricted-enveloping-augmentation",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-restricted-rational-differentiation",
+  "worker": "stage1",
+  "summary": "Checked Milne §§10d,10k,10l,11e and p.223 against every clause. Proved the invariant-derivation bijection and all coaction/functoriality clauses by explicit counit and coassociativity calculations, checked the bracket sign using two square-zero parameters, and isolated only the general associative Jacobson identities. Reused the existing convolution Mathlib leaf and Lie-algebra definition; no PBW theorem or finite-dimensionality assertion is used in the proof.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Section 1, restricted enveloping algebra definition, Theorem 1.2 and Corollary 1.3, printed pp.148--150; positive-root grading of the Borel radical in Section 1, printed pp.151--152. The nilpotent augmentation assertion is the bounded positive-root grading consequence, not a claim that x^[p] is always zero. Supporting input for the augmentation argument: restricted invariant derivations, their functoriality and rational-module actions. The seven steps supply the restricted differentiation prerequisite of the unipotent augmentation argument; the current blueprint direct-image proof (3) and unit route are unchanged.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q52-5c3d0aa77",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-5c3d0aa77 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-sfb-associative-jacobson-identities and all cited nodes in full, and the delivery is correct as delivered. Shape and form: one commit; the item statement is byte-identical to the one in the Q89 parent delivery; this is not a re-split; no SGA citation. Sources and new node: I read Milne iAG2017 §10k pp.204-206 (Proposition 10.38, Definition 10.39, whose printed sum range is a typo). The new node's coefficient convention for s_i matches Milne's word-sum definition: for p=3 I got s_1=[[a,b],b] and 2s_2=[[a,b],a], their sum expands to (a+b)^3-a^3-b^3, and p=2 gives [b,a]. It also matches the convention in lem-sfb-restricted-pbw-basis. Part (a) follows from ad=L-R with L and R commuting. The node is a self-contained, statement-only fact about associative algebras, not a restated clause, and the duplicate search found none. Steps 1-7: bijection via counit and coassociativity; convolution map is a homomorphism (correct order) and injective via epsilon; Leibniz rule for D^p via [D,M_a]=M_{Da} plus Jacobson (a) in End(C); restricted identities restricted to invariant derivations, with i invertible; I recomputed the dual-number commutator 1+ts(XY-YX) and its sign agrees with D_[x,y]=[D_x,D_y]; f* preserves convolution; the coaction gives S_phi S_psi=S_{phi*psi} and descends to u(h) through T(h); all sums are finite, so W can have any dimension. No hidden hypotheses. Cross-unit use: def-wf-lie-algebra (mathlib status), used only for End(V) as a Lie algebra. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.RestrictedRationalDifferentiation",
+  "declaration": "AlgebraicGeometry.restricted_rational_differentiation",
+  "declarations": [
+   "AlgebraicGeometry.restricted_rational_differentiation"
+  ],
+  "file": "lean/Sheaf/RepresentationTheory/RestrictedRationalDifferentiation.lean",
+  "statement": "theorem restricted_rational_differentiation (F : Type u) [Field F] (p : ℕ) [Fact p.Prime] [CharP F p] (H : Scheme.{u}) [H.Over (Spec (.of F))] [GrpObj (H.asOver (Spec (.of F)))] [IsAffine H] [LocallyOfFiniteType (H ↘ Spec (.of F))] [QuasiCompact (H ↘ Spec (.of F))] : ∃ (δ : GrpObj.Lie (H.asOver (Spec (.of F))) ≃ₗ[F] BialgebraDistribution.tangentFunctionals F Γ(H, ⊤)) (D : GrpObj.Lie (H.asOver (Spec (.of F))) →ₗ⁅F⁆ Derivation F Γ(H, ⊤) Γ(H, ⊤)) (q : GrpObj.Lie (H.asOver (Spec (.of F))) → GrpObj.Lie (H.asOver (Spec (.of F)))), (∀ (x : GrpObj.Lie (H.asOver (Spec (.of F)))) (a : Γ(H, ⊤)), (((GrpObj.lieEquivTangent (H.asOver (Spec (.of F))) x).val.left.appTop ≫ (Scheme.ΓSpecIso (.of (DualNumber F))).hom).hom a) = TrivSqZeroExt.inl (Coalgebra.counit (R := F) a) + TrivSqZeroExt.inr ((δ x).1 a)) ∧ (∀ x : GrpObj.Lie (H.asOver (Spec (.of F))), (D x).toLinearMap = BialgebraDistribution.tangentContraction F Γ(H, ⊤) (δ x).1) ∧ (∀ x : GrpObj.Lie (H.asOver (Spec (.of F))), Coalgebra.counit.comp (D x).toLinearMap = (δ x).1) ∧ Function.Injective D ∧ (∀ d : Derivation F Γ(H, ⊤) Γ(H, ⊤), BialgebraDistribution.invariantDerivation F Γ(H, ⊤) d ↔ ∃ x, D x = d) ∧ (∀ x y : GrpObj.Lie (H.asOver (Spec (.of F))), BialgebraDistribution.invariantDerivation F Γ(H, ⊤) ⁅D x, D y⁆) ∧ LieAlgebra.IsRestrictedOperation F p q ∧ (∀ x : GrpObj.Lie (H.asOver (Spec (.of F))), (D (q x)).toLinearMap = (D x).toLinearMap ^ p ∧ BialgebraDistribution.invariantDerivation F Γ(H, ⊤) (D (q x))) ∧ (∀ (f : H.asOver (Spec (.of F)) ≅ H.asOver (Spec (.of F))) [IsMonHom f.hom], ∃ e : GrpObj.Lie (H.asOver (Spec (.of F))) ≃ₗ⁅F⁆ GrpObj.Lie (H.asOver (Spec (.of F))), e.toLieHom = GrpObj.differential f.hom ∧ ∀ x, e (q x) = q (e x)) ∧ (∀ (K : Scheme.{u}) [K.Over (Spec (.of F))] [GrpObj (K.asOver (Spec (.of F)))] [IsAffine K] [LocallyOfFiniteType (K ↘ Spec (.of F))] [QuasiCompact (K ↘ Spec (.of F))], ∃ (δK : GrpObj.Lie (K.asOver (Spec (.of F))) ≃ₗ[F] BialgebraDistribution.tangentFunctionals F Γ(K, ⊤)) (DK : GrpObj.Lie (K.asOver (Spec (.of F))) →ₗ⁅F⁆ Derivation F Γ(K, ⊤) Γ(K, ⊤)) (qK : GrpObj.Lie (K.asOver (Spec (.of F))) → GrpObj.Lie (K.asOver (Spec (.of F)))), (∀ (y : GrpObj.Lie (K.asOver (Spec (.of F)))) (a : Γ(K, ⊤)), (((GrpObj.lieEquivTangent (K.asOver (Spec (.of F))) y).val.left.appTop ≫ (Scheme.ΓSpecIso (.of (DualNumber F))).hom).hom a) = TrivSqZeroExt.inl (Coalgebra.counit (R := F) a) + TrivSqZeroExt.inr ((δK y).1 a)) ∧ (∀ y : GrpObj.Lie (K.asOver (Spec (.of F))), (DK y).toLinearMap = BialgebraDistribution.tangentContraction F Γ(K, ⊤) (δK y).1) ∧ LieAlgebra.IsRestrictedOperation F p qK ∧ (∀ y : GrpObj.Lie (K.asOver (Spec (.of F))), (DK (qK y)).toLinearMap = (DK y).toLinearMap ^ p) ∧ ∀ (f : H.asOver (Spec (.of F)) ⟶ K.asOver (Spec (.of F))) [IsMonHom f], (∀ (x : GrpObj.Lie (H.asOver (Spec (.of F)))) (a : Γ(K, ⊤)), (δK (GrpObj.differential f x)).1 a = (δ x).1 (f.left.appTop.hom a)) ∧ (∀ x y : GrpObj.Lie (H.asOver (Spec (.of F))), GrpObj.differential f ⁅x, y⁆ = ⁅GrpObj.differential f x, GrpObj.differential f y⁆) ∧ (∀ x : GrpObj.Lie (H.asOver (Spec (.of F))), GrpObj.differential f (q x) = qK (GrpObj.differential f x))) ∧ ∀ (W : Type v) [AddCommGroup W] [Module F W] (α : W →ₗ[F] W ⊗[F] Γ(H, ⊤)), HopfAction.Coassociative F Γ(H, ⊤) W α → HopfAction.Counital F Γ(H, ⊤) W α → ∃ ρ : GrpObj.Lie (H.asOver (Spec (.of F))) →ₗ[F] Module.End F W, (∀ x : GrpObj.Lie (H.asOver (Spec (.of F))), ρ x = (TensorProduct.rid F W).toLinearMap ∘ₗ (δ x).1.lTensor W ∘ₗ α) ∧ (∀ x y : GrpObj.Lie (H.asOver (Spec (.of F))), ρ ⁅x, y⁆ = ρ x * ρ y - ρ y * ρ x) ∧ (∀ x : GrpObj.Lie (H.asOver (Spec (.of F))), ρ (q x) = ρ x ^ p) ∧ ∃ A : RestrictedEnvelopingAlgebra F (GrpObj.Lie (H.asOver (Spec (.of F)))) p q →ₐ[F] Module.End F W, ∀ x : GrpObj.Lie (H.asOver (Spec (.of F))), A (RestrictedEnvelopingAlgebra.ι F p q x) = ρ x",
+  "branch": "newtargets-dag",
+  "by": "Q105",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The single theorem states all clauses. Its statement and module are unchanged from returned head d18a1a477182. The added definition-node dependencies own only the three existing BialgebraDistribution definitions, canonical coordinate Hopf instance, coaction predicates, and canonical upstream tangent Lie algebra/bracket. No conclusion or choice from either former theorem-node dependency is used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-64ef75836",
+  "group": "Q105",
+  "result": "pass",
+  "note": "Re-delivery of returned d18a1a477182. The Lean module is byte-identical (sha256 7390cad9…8418), and the mathematics was already verified clause by clause in that review; I re-read the signature against the node and agree. The H2/H12 fix is as instructed: the theorem stmt_deps lem-sfb-bialgebra-distribution-tangent-calculus and lem-sfb-hopf-coaction-linearization are replaced by the new existing:true def node def-sfb-bialgebra-tangent-derivation-data (tangentFunctionals/tangentContraction/invariantDerivation in Sheaf.RingTheory.BialgebraDistributionTangentCalculus) and by the landed def-sfb-coordinate-hopf-algebra, def-sfb-hopf-action-module-data and def-wf-lie-algebra-derivation. Compared with the live node, only stmt_deps and lean change; proof_deps, statement and proof are unchanged. The new node has every §5 field, its statement matches the three definitions, it asserts no theorem, its stmt_deps match its citations, and no other definition node owns these declarations. Report sections are present. No file changed, so nothing was compiled."
+ }
+}

@@ -1,0 +1,132 @@
+{
+ "id": "lem-sfb-pgl-invariant-section-finiteness",
+ "kind": "statement",
+ "title": "Finiteness of invariant sections with structural coefficients",
+ "statement": "For a projective finite-type k-scheme X, an ample invertible module L and PGL-linearization E [def-sfb-pgl-linearized-polarization], the invariant section algebra is finitely generated over k with its specified constants. More precisely, there is a map φ:k→E.CoefficientRing into degree zero whose coefficientVal is constantSection, such that its composite into E.invariantRing is finite type, and E.CoefficientRing is a finite k-module. No assumption that H⁰(X,O_X)=k is made.",
+ "source": {
+  "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+  "place": "MFK GIT Chapter 1 Theorem 1.10 and Appendix 1.C; Alper arXiv:1005.2398v3 Sections 8–9. The source-specific proof is written in the Lean docstring. Section-ring action uses Stacks 02KH; section finiteness uses Stacks 0B5T. Local MFK book is WANTED.",
+  "url": "https://arxiv.org/pdf/1005.2398"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-kun-projective",
+  "def-weil-finite-type-morphism",
+  "def-sc-ample",
+  "def-sfb-pgl-linearized-polarization"
+ ],
+ "proof": [
+  {
+   "text": "Use a positive very ample power from IsAmple as polarization. Projective section finiteness gives a finite-type section ring and finite-dimensional degree zero.",
+   "uses": [
+    "lem-sfb-projective-polarization-section-algebra",
+    "def-weil-pbc-tensor-pullback-ordinary-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the induced affine action and finite generation of reductive invariants. Transport the invariant algebra along the equality of subrings. The degree-zero projection restricts constants to the coefficient ring.",
+   "uses": [
+    "lem-sfb-pgl-section-affine-action",
+    "lem-sfb-pgl-geometric-reductivity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate a homogeneous degree-zero element in degree zero. This is an injective k-linear map into the finite-dimensional degree-zero section module, proving coefficient finiteness. Tensor multiplication in degree zero is scalar multiplication.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-projective-polarization-section-algebra",
+  "lem-sfb-pgl-section-affine-action",
+  "lem-sfb-pgl-geometric-reductivity",
+  "def-weil-pbc-tensor-pullback-ordinary-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+  "place": "MFK GIT Chapter 1 Theorem 1.10 and Appendix 1.C; Alper arXiv:1005.2398v3 Sections 8–9. The source-specific proof is written in the Lean docstring. Section-ring action uses Stacks 02KH; section finiteness uses Stacks 0B5T. Local MFK book is WANTED.",
+  "url": "https://arxiv.org/pdf/1005.2398"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "projective geometric invariant theory quotient stable semistable invariant section ring Proj",
+   "results": "Found Proj basicOpenToSpec, awayToΓ, fromOfGlobalSections and chart maps, but no PGL section-action or GIT theorem.",
+   "date": "2026-10-23",
+   "verdict": "No matching theorem. Found Proj basicOpenToSpec, awayToΓ, fromOfGlobalSections and chart maps, but no PGL section-action or GIT theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj; AlgebraicGeometry.Scheme.Hom.imageι; AlgebraicGeometry.PGLLinearization.Action",
+   "results": "Proj affineOpenCover, basicOpenIsoSpec and awayι; image factorization and image pullback APIs. No PGLLinearization identifier in Mathlib.",
+   "date": "2026-10-23",
+   "verdict": "No matching theorem. Proj affineOpenCover, basicOpenIsoSpec and awayι; image factorization and image pullback APIs. No PGLLinearization identifier in Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "lineariz.*section|section.*lineariz|invariants.*localiz|localiz.*invariants; scheme.*image.*action|action.*scheme.*image",
+   "results": "Only unrelated representation Linearization hit; no scheme image action or invariant section-ring localization theorem.",
+   "date": "2026-10-23",
+   "verdict": "No matching theorem. Only unrelated representation Linearization hit; no scheme image action or invariant section-ring localization theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projective geometric invariant theory quotient and induced action on section ring",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Projectivization.smul_mk\", \"module\": \"Mathlib.LinearAlgebra.Projectivization.Action\", \"type\": \"(g : G) {v : V} (hv : v ≠ 0) : g • mk K v hv = mk K (g • v) ((smul_ne_zero_iff_ne g).mpr hv)\", \"doc\": \"For a group $ G $ acting distributively on a module $ V $ over a division ring $ K $, the induced action of $ G $ on the projectivization $ \\\\mathbb{P}_K(V) $ satisfies that for any non-zero vector $ v\"}\n  {\"name\": \"Rep.quotient\", \"module\": \"Mathlib.RepresentationTheory.Rep\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] →\\n    [inst_1 : Monoid G] → (A : Rep k G) → (W : Submodule k ↑A.V) → (∀ (g : G), W ≤ Submodule.comap (A.ρ g) W) → Rep k G\", \"doc\": \"Given a representation $\\\\rho$ of a monoid $G$ on a module $V$ over a commutative ring $k$, and a submodule $W \\\\subseteq V$ invariant under the $G$-action (i.e., $\\\\rho(g)(W) \\\\subseteq W$ for all $g \\\\in\"}\n  {\"name\": \"MulAction.orbitRel.Quotient\", \"module\": \"Mathlib.GroupTheory.GroupAction.Defs\", \"type\": \": Type _\", \"doc\": \"The quotient of the set $ \\\\alpha $ by the orbit equivalence relation induced by the group action, resulting in the set of orbits under the action.\"}\n  {\"name\": \"Projectivization.smul_def\", \"module\": \"Mathlib.LinearAlgebra.Projectivization.Action\", \"type\": \"∀ {G : Type u_1} {K : Type u_2} {V : Type u_3} [inst : AddCommGroup V] [inst_1 : DivisionRing K] [inst_2 : Module K V]\\n  [inst_3 : Group G] [inst_4 : DistribMulAction G V] [inst_5 : SMulCommClass G K V] (g : G) (x : Projectivization K V),\\n  SMul.smul g x = Projectivization.map ((DistribMulAction.toM\", \"doc\": \"Given a group $G$ acting distributively on a module $V$ over a division ring $K$ with commuting scalar multiplications between $G$ and $K$, there exists a well-defined group action of $G$ on the proje\"}\n  {\"name\": \"Representation.quotient\", \"module\": \"Mathlib.RepresentationTheory.Basic\", \"type\": \"(W : Submodule k V) (le_comap : ∀ g, W ≤ W.comap (ρ g)) : Representation k G (V ⧸ W)\", \"doc\": \"Given a representation $\\\\rho$ of a monoid $G$ on a module $V$ over a commutative semiring $k$, and a submodule $W \\\\subseteq V$ satisfying $W \\\\subseteq W^{\\\\rho(g)}$ for all $g \\\\in G$ (i.e., $W$ is inva\"}\n  {\"name\": \"Rep.ofQuotient\", \"module\": \"Mathlib.RepresentationTheory.Rep\", \"type\": \"{k : Type u} →\\n  [inst : CommRing k] →\\n    {G : Type u} →\\n      [inst_1 : Group G] →\\n        (A : Rep k G) →\\n          (S : Subgroup G) →\\n            [inst_2 : S.Normal] → [Representation.IsTrivial (MonoidHom.comp A.ρ S.subtype)] → Rep k (G ⧸ S)\", \"doc\": \"Given a commutative ring $k$, a group $G$, a $k$-linear representation $A$ of $G$, and a normal subgroup $S \\trianglelefteq G$ acting trivially on $A$, this constructs the induced $k$-linear representa\"}\n  {\"name\": \"Representation.quotient_apply\", \"module\": \"Mathlib.RepresentationTheory.Basic\", \"type\": \"∀ {k : Type u_1} {G : Type u_2} {V : Type u_3} [inst : CommRing k] [inst_1 : Monoid G] [inst_2 : AddCommGroup V]\\n  [inst_3 : Module k V] (ρ : Representation k G V) (W : Submodule k V)\\n  (le_comap : ∀ (g : G), W ≤ Submodule.comap (ρ g) W) (g : G), (ρ.quotient W le_comap) g = W.mapQ W (ρ g) ⋯\", \"doc\": \"Given a representation $\\\\rho$ of a monoid $G$ on a module $V$ over a commutative semiring $k$, and a submodule $W \\\\subseteq V$ invariant under the action of $G$ (i.e., $\\\\rho(g)(W) \\\\subseteq W$ for all\"}\n  {\"name\": \"Projectivization.instMulAction.congr_simp\", \"module\": \"Mathlib.Topology.Compactification.OnePoint.ProjectiveLine\", \"type\": \"∀ {G : Type u_1} {K : Type u_2} {V : Type u_3} [inst : AddCommGroup V] [inst_1 : DivisionRing K] [inst_2 : Module K V]\\n  [inst_3 : Group G] [inst_4 : DistribMulAction G V] [inst_5 : SMulCommClass G K V],\\n  Projectivization.instMulAction = Projectivization.instMulAction\", \"doc\": \"For a group $G$ acting distributively on a module $V$ over a division ring $K$ with commuting scalar multiplications between $G$ and $K$, there exists a well-defined group action of $G$ on the project\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: projectivization of vector-space actions and abstract representation quotients do not give scheme action on a section ring or a projective GIT quotient."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectivePGLStableQuotient",
+  "date": "2026-10-23",
+  "group": "T6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-projective-pgl-stable-quotient",
+   "place": "The corresponding steps of its projective quotient argument",
+   "via": [
+    "lem-sfb-projective-pgl-stable-quotient"
+   ]
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PGLInvariantSectionFiniteness",
+  "file": "lean/Sheaf/AlgebraicGeometry/PGLInvariantSectionFiniteness.lean",
+  "declaration": "AlgebraicGeometry.PGLLinearization.invariant_section_finiteness",
+  "statement": "theorem invariant_section_finiteness\n    (r : ℕ) (hr : 1 ≤ r) (X : Over (Spec (.of k)))\n    (hprojective : IsHProjective X.hom)\n    (hfiniteType : LocallyOfFiniteType X.hom ∧ QuasiCompact X.hom)\n    (L : X.left.Modules) [L.IsInvertible] (hample : IsAmple X.hom L)\n    (E : Action k r X L) :\n    ∃ φ : k →+* E.CoefficientRing,\n      (∀ c : k, E.coefficientVal (φ c) = constantSection (Z := X) (L := L) c) ∧\n      ((algebraMap (E.invariantGrade 0) E.invariantRing).comp φ).FiniteType ∧\n      @Module.Finite k E.CoefficientRing _ _ φ.toAlgebra.toModule",
+  "branch": "sheaf-dag",
+  "by": "T6",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T6",
+  "result": "pass",
+  "landing": "20261023T135420-L-2886120",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T6",
+  "result": "pass",
+  "landing": "20261023T135420-L-2886120",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

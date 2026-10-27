@@ -1,0 +1,427 @@
+{
+ "id": "lem-sfb-complete-devissage-fp-dimension-preparation",
+ "kind": "statement",
+ "title": "Finite presentation and smooth fibre dimensions in an algebraic devissage",
+ "statement": "Let $R\\to A$ be a finitely presented homomorphism of commutative rings [def-weil-pbc-finitely-presented-algebra], let $N$ be a finitely presented $A$-module [def-sc-finitely-presented-module], and let $\\mathfrak p\\subset R$ be prime. Fix a complete algebra devissage $(A_i,B_i,M_i,\\alpha_i)_{1\\leq i\\leq l}$ of $N/A/R$ over $\\mathfrak p$ [def-trf-complete-algebra-devissage]. All $A_i$ and $B_i$ are finitely presented $R$-algebras, all displayed ring maps are finitely presented, and $M_i$ is finitely presented both over $A_i$ and over $B_i$. Put $Q_i=\\operatorname{coker}(\\alpha_i)$, the quotient of $M_i$ by the image of $\\alpha_i$. Then $Q_i$ is finitely presented over $B_i$. There exists $f\\in R\\setminus\\mathfrak p$ such that the localized data form a complete algebra devissage over $\\mathfrak pR_f$ and, for each $i$, $Y_i=\\operatorname{Spec}(B_i\\otimes_R R_f)\\to\\operatorname{Spec}R_f$ is smooth, flat, and of finite presentation, with geometrically integral nonempty fibres of a constant dimension $a_i\\geq0$. Here smoothness is [def-sbc-smooth-morphisms], flatness is [def-weil-flat-morphism], geometrically integral means integral after every residue-field extension [def-pc-integral-scheme], and dimension is [def-kun-topological-krull-dimension]. For every scheme $T\\to\\operatorname{Spec}R_f$, each fibre of $(Y_i)_T\\to T$ is geometrically integral of dimension $a_i$; its unique generic point $\\xi$ has $\\operatorname{trdeg}_{\\kappa(t)}\\kappa(\\xi)=a_i$, and every point of that fibre has transcendence degree at most $a_i$ [def-weil-residue-field], [def-kun-transcendence-degree]. No inequality between the different $a_i$ is asserted. Spectra and localization are [def-weil-affine-spectrum] and [def-weil-pbc-module-localization].",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05HY (remark-finite-presentation), for finite presentation; smooth dimension preparation from morphisms.tex Tags 02G1 (lemma-smooth-omega-finite-locally-free), 02G2 (definition-smooth-relative-dimension), 01VF (lemma-smooth-flat), and varieties.tex Tag 0A21 (lemma-dimension-locally-algebraic), dimension of irreducible algebraic schemes over a field and transcendence degree of points."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-sc-finitely-presented-module",
+  "def-trf-complete-algebra-devissage",
+  "def-sbc-smooth-morphisms",
+  "def-weil-flat-morphism",
+  "def-pc-integral-scheme",
+  "def-kun-topological-krull-dimension",
+  "def-weil-residue-field",
+  "def-kun-transcendence-degree",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof": [
+  {
+   "text": "If $l=0$, there are no indexed conclusions, the given complete devissage has $N=0$, and $f=1$ suffices. Hence assume $l>0$. Write $S=\\operatorname{Spec}R$ and $g_i:\\operatorname{Spec}B_i\\to S$. By [def-trf-complete-algebra-devissage] each $g_i$ is smooth. By [lem-pc-smooth-flat] it is flat and locally of finite presentation, and [lem-weil-pbc-lfp-affine-opens-finite-presentation], applied to the whole affine source and target, makes $R\\to B_i$ finitely presented. By [lem-weil-pbc-finite-presentation-base-change-composition](2), $R\\to A\\to A_1$ and $R\\to B_{i-1}\\to A_i$ show that every $A_i$ is finitely presented over $R$.",
+   "uses": [
+    "def-trf-complete-algebra-devissage",
+    "lem-pc-smooth-flat",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-finite-presentation-base-change-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tags 05HX (definition-complete-devissage-algebra), 05HY (remark-finite-presentation); morphisms Tags 01VF and 01TQ; Algebra Tag 00F4(2)"
+   }
+  },
+  {
+   "text": "The maps $A\\to A_1$ and $B_i\\to A_{i+1}$ are already finitely presented by the devissage definition. For $B_i\\to A_i$, the preceding step gives finite presentation of $A_i$ over $R$ and finite type of $B_i$ over $R$ (a finite presentation has finitely many generators). Thus [lem-weil-pbc-finite-presentation-over-finite-type-algebra] gives finite presentation of $B_i\\to A_i$. These, together with the structural maps just proved finitely presented, are all displayed ring maps.",
+   "uses": [
+    "def-trf-complete-algebra-devissage",
+    "lem-weil-pbc-finite-presentation-over-finite-type-algebra",
+    "def-weil-pbc-finitely-presented-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00F4 (lemma-compose-finite-type), part (4), as used in flat.tex Tag 05HY"
+   }
+  },
+  {
+   "text": "Here is the elementary quotient calculation used in the induction. For a commutative ring $C$, a finitely presented module $P$ has a presentation $C^u\\xrightarrow{D}C^v\\to P\\to0$ [def-sc-finitely-presented-module]. For a map $\\beta:C^r\\to P$ with $r$ finite, lift its $r$ basis images to vectors $w_1,\\ldots,w_r\\in C^v$. Then $\\operatorname{coker}\\beta=C^v/(\\operatorname{im}D+\\sum_j Cw_j)$: both sides identify exactly the vectors whose images in $P$ belong to $\\operatorname{im}\\beta$. The matrix with columns those of $D$ and the $w_j$ is a finite presentation of this cokernel.",
+   "uses": [
+    "def-sc-finitely-presented-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0519 (lemma-extension), part (4), finite-presentation quotient argument written out"
+   }
+  },
+  {
+   "text": "Induct on $i$ with inductive assertion that $M_i$ is finitely presented over $A_i$. Initially $N\\cong M_1$ over $A$ and $A\\to A_1$ is finite (it is surjective) and finitely presented; [lem-trf-finite-extension-module-finite-presentation] gives the assertion at $i=1$. At any stage $B_i\\to A_i$ is finite by definition and finitely presented by step 2, so the same node gives finite presentation of $M_i$ over $B_i$. Apply step 3 with $C=B_i$, $P=M_i$, $\\beta=\\alpha_i$ to obtain finite presentation of $Q_i$. For $i<l$, $Q_i\\cong M_{i+1}$ over $B_i$, and the surjective finitely presented map $B_i\\to A_{i+1}$ is finite. The same finite-extension equivalence gives the inductive assertion for $i+1$. At the terminal index $Q_l=0$, consistent with the quotient calculation. This proves every module assertion without any Noetherian hypothesis.",
+   "uses": [
+    "def-trf-complete-algebra-devissage",
+    "lem-trf-finite-extension-module-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05HY (remark-finite-presentation), using Algebra Tag 0564 (lemma-finite-finitely-presented-extension) and Tag 0519"
+   }
+  },
+  {
+   "text": "By [sbc-lem-smooth-relative-dimension-locally-constant] the function $d_i(x)=\\dim_x((\\operatorname{Spec}B_i)_{g_i(x)})$ is locally constant. Its values are nonnegative finite integers: the same cited statement identifies them with ranks of the finite locally free module of relative differentials. Every nonempty fibre is irreducible by [def-trf-complete-algebra-devissage, def-pc-geometrically-irreducible]. The restriction of $d_i$ to such a fibre is constant: two distinct values would partition the fibre into two disjoint nonempty open subsets (a level set and its complement), contradicting irreducibility [def-weil-irreducible-components]. The fibre over $\\mathfrak p$ is nonempty; in the stated geometric-irreducibility convention this already follows from irreducibility, which includes nonemptiness. Let its constant value be $a_i$.",
+   "uses": [
+    "sbc-lem-smooth-relative-dimension-locally-constant",
+    "def-sbc-smooth-morphisms",
+    "def-trf-complete-algebra-devissage",
+    "def-pc-geometrically-irreducible",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02G1 (lemma-smooth-omega-finite-locally-free), Tag 02G2 (definition-smooth-relative-dimension); elementary constancy on an irreducible fibre"
+   }
+  },
+  {
+   "text": "Set $E_i=\\{x:d_i(x)=a_i\\}$ and $U_i=g_i(E_i)$. The set $E_i$ is open by local constancy; $g_i$ is open by [lem-weil-pbc-flat-lfp-open], using flatness and local finite presentation from step 1. Thus $U_i$ is open and contains $\\mathfrak p$. If $s\\in U_i$, its fibre meets $E_i$, and constancy on that fibre shows the entire fibre belongs to $E_i$. Consequently $g_i^{-1}(U_i)=E_i$. The finite intersection $U=\\bigcap_i U_i$ is an open neighbourhood of $\\mathfrak p$. Write its closed complement as $V(I)$. Since $\\mathfrak p\\notin V(I)$, choose $f\\in I\\setminus\\mathfrak p$; then $D(f)\\subset U$. Thus all the restricted morphisms over $D(f)$ have nonempty fibres and local fibre dimension $a_i$ everywhere. The choice only compares points within each fibre and imposes no inequality between different indices.",
+   "uses": [
+    "lem-weil-pbc-flat-lfp-open",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 056G (lemma-smooth-open), with Tags 02G1 and 02G2; Zariski principal neighbourhood selection written out"
+   }
+  },
+  {
+   "text": "Identify $\\operatorname{Spec}R_f$ topologically with $D(f)$ by [lem-weil-pbc-localization-spectrum-embedding]. The canonical tensor-localization identification is $B_i\\otimes_RR_f\\cong(B_i)_f$, $b\\otimes(r/f^k)\\mapsto rb/f^k$, with inverse $b/f^k\\mapsto b\\otimes f^{-k}$; the balanced relations check these maps are inverse. Its fibres over the corresponding primes are the original fibres: [lem-weil-pbc-localization-prime-residue-field-iso] identifies the base residue fields, and the universal property of tensor products identifies both fibre rings with $B_i\\otimes_R\\kappa(s)$. By [lem-pc-proper-base-change](2) the new morphisms are smooth. Their local fibre dimensions are $a_i$ by step 6, so they are smooth of relative dimension $a_i$ [def-sbc-smooth-morphisms]. They are flat and locally of finite presentation by [lem-pc-smooth-flat]. The one-member affine cover of the target has affine inverse image, so [pqf-lem-affine-local-target] makes them affine morphisms; hence quasi-compact and quasi-separated by [lem-weil-pbc-affine-morphism-permanence](3), and therefore of finite presentation [def-sbc-locally-finite-presentation]. The identification of each affine fibre with the spectrum of its tensor-product ring is [lem-weil-pbc-fibre-product-affine-spectra].",
+   "uses": [
+    "lem-weil-pbc-localization-spectrum-embedding",
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "lem-pc-proper-base-change",
+    "def-sbc-smooth-morphisms",
+    "lem-pc-smooth-flat",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "def-sbc-locally-finite-presentation",
+    "pqf-lem-affine-local-target",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01VB (lemma-base-change-smooth), 02G2, 01S7 (lemma-affine-separated), 01TP; Algebra Tag 00E3 (lemma-spec-localization)"
+   }
+  },
+  {
+   "text": "Check the complete devissage after localization. A finite algebra remains finite because the images of a finite module generating list generate its localization. Surjective ring maps remain surjective by lifting numerators; finite presentations remain finite by [lem-weil-pbc-finite-presentation-base-change-composition](1). Module isomorphisms localize to isomorphisms. By [lem-weil-pbc-localization-module-exact], localizing $B_i^{r_i}\\to M_i\\to Q_i\\to0$ identifies the new cokernel with $(Q_i)_f$, hence with $(M_{i+1})_f$ for $i<l$, and with zero at the last index. Smoothness was checked in step 7; geometric irreducibility persists because its fibres are the old fibres over the same residue fields [def-pc-geometrically-irreducible].",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "lem-weil-pbc-localization-module-exact",
+    "def-pc-geometrically-irreducible",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05HX (definition-complete-devissage-algebra), conditions (1)-(6),(8); Algebra Tags 05G5 (lemma-base-change-finiteness) and 00CS (proposition-localization-exact)"
+   }
+  },
+  {
+   "text": "For condition (7), let $\\mathfrak p_i=\\mathfrak pB_i$. Since the fibre over $\\mathfrak p$ is nonempty, no $s\\in R\\setminus\\mathfrak p$ maps into $\\mathfrak p_i$: otherwise its image in the fibre ring $B_i\\otimes_R\\kappa(\\mathfrak p)$ would be both zero and a unit. In particular $f\\notin\\mathfrak p_i$. By [lem-weil-pbc-localization-prime-residue-field-iso], $(\\mathfrak p_i)_f$ is prime and its residue field is canonically $\\kappa(\\mathfrak p_i)$. Also $(\\mathfrak pR_f)(B_i)_f=(\\mathfrak p_i)_f$, directly by the generators of the extended ideals. Under this residue-field identification, the localized map $((B_i)_f)^{r_i}\\to(M_i)_f$ tensored with the residue field is the original $\\alpha_i\\otimes\\kappa(\\mathfrak p_i)$: on a pure tensor $m/f^k\\otimes c$ the identification sends it to $m\\otimes f^{-k}c$. Thus it remains an isomorphism. Together with step 8 this verifies every condition of [def-trf-complete-algebra-devissage].",
+   "uses": [
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "def-trf-complete-algebra-devissage"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05HX (definition-complete-devissage-algebra), condition (7), and Algebra Tag 00E3, residue-field identification"
+   }
+  },
+  {
+   "text": "The nonempty fibres of each $Y_i\\to\\operatorname{Spec}R_f$ are geometrically irreducible, hence geometrically connected: an irreducible space is connected, since a disconnection would give two proper closed subsets covering it [def-weil-irreducible-components, def-pc-geometrically-irreducible]. Apply [lem-trf-smooth-connected-fibre-normal-integrality] to this smooth morphism. It says that every field extension of every residue fibre is integral. In particular these fibres are geometrically integral, with precisely the quantifier over all residue-field extensions required in the item.",
+   "uses": [
+    "def-weil-irreducible-components",
+    "def-pc-geometrically-irreducible",
+    "lem-trf-smooth-connected-fibre-normal-integrality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 056T (lemma-smooth-geometrically-normal); geometric integrality of connected smooth fibres, as in more-morphisms.tex Tag 057J"
+   }
+  },
+  {
+   "text": "Let $T\\to\\operatorname{Spec}R_f$ and $t\\in T$, and let $s$ be its image. The fibre $F=((Y_i)_T)_t$ is $(Y_i)_s\\times_{\\kappa(s)}\\kappa(t)$, by [lem-sc-fibre-dimension-after-base-change]. Step 10 makes $F$ integral and nonempty. By [lem-sbc-smooth-relative-dimension-permanence](1), applied to $Y_i$ and the map $\\operatorname{Spec}\\kappa(t)\\to\\operatorname{Spec}R_f$, $F\\to\\operatorname{Spec}\\kappa(t)$ is smooth of relative dimension $a_i$. Therefore [lem-sbc-smooth-fixed-dimension-over-field] gives $\\dim F=a_i$. The same identification with a field extension, followed by any further extension of $\\kappa(t)$, proves geometric integrality of $F$. No Noetherian or finite type hypothesis on $T$ was used.",
+   "uses": [
+    "lem-sc-fibre-dimension-after-base-change",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-sbc-smooth-fixed-dimension-over-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FY (lemma-dimension-fibre-after-base-change), 02NK (lemma-base-change-relative-dimension-d); varieties.tex Tag 0A21"
+   }
+  },
+  {
+   "text": "The fibre $F$ is affine with coordinate ring $C=(B_i\\otimes_R R_f)\\otimes_{R_f}\\kappa(t)$, a finitely presented, hence finite type, $\\kappa(t)$-algebra by [lem-weil-pbc-finite-presentation-base-change-composition](1). As $F$ is integral, $C$ is a domain [def-pc-integral-scheme], so $(0)$ is its unique generic point $\\xi$. Indeed the closure of the prime $\\mathfrak q$ is $V(\\mathfrak q)$; in a domain this equals the whole spectrum only for $\\mathfrak q=0$. Apply [lem-sc-closed-irreducible-dimension-trdeg] first to $F$ itself to obtain $\\operatorname{trdeg}_{\\kappa(t)}\\kappa(\\xi)=\\dim F=a_i$. For any $x\\in F$, its closure $C_x=\\overline{\\{x\\}}$ is a nonempty irreducible closed subset with generic point $x$, so the same node gives $\\operatorname{trdeg}_{\\kappa(t)}\\kappa(x)=\\dim C_x$. Every chain of irreducible closed subsets of $C_x$ is also such a chain in $F$, because $C_x$ is closed; hence $\\dim C_x\\leq\\dim F=a_i$ directly from [def-kun-topological-krull-dimension]. This proves the last clause, including when $a_i=0$. The identification of each affine fibre with the spectrum of its tensor-product ring is [lem-weil-pbc-fibre-product-affine-spectra].",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "def-pc-integral-scheme",
+    "lem-sc-closed-irreducible-dimension-trdeg",
+    "def-kun-topological-krull-dimension",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0A21 (lemma-dimension-locally-algebraic), especially (6), with Tag 0B1C (item-dimension-irreducible-trdeg); topological chain monotonicity written out"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-complete-algebra-devissage",
+  "lem-pc-smooth-flat",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-weil-pbc-finite-presentation-over-finite-type-algebra",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-sc-finitely-presented-module",
+  "lem-trf-finite-extension-module-finite-presentation",
+  "sbc-lem-smooth-relative-dimension-locally-constant",
+  "def-sbc-smooth-morphisms",
+  "def-pc-geometrically-irreducible",
+  "def-weil-irreducible-components",
+  "lem-weil-pbc-flat-lfp-open",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-localization-spectrum-embedding",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "def-sbc-locally-finite-presentation",
+  "pqf-lem-affine-local-target",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-localization-module-exact",
+  "def-weil-pbc-module-localization",
+  "lem-trf-smooth-connected-fibre-normal-integrality",
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sbc-smooth-fixed-dimension-over-field",
+  "def-pc-integral-scheme",
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05HY finite-presentation induction; agent-written dimension and localization preparation for Tag 05UF, using morphisms Tags 02G1, 02G2, 056G, 02FY, 02NK and varieties Tags 056T, 0A21."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A complete algebra devissage of a finitely presented module over a finitely presented algebra has finitely presented terms and after shrinking the base its smooth algebras have constant fibre dimensions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.SubmersivePresentation.isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} {ι : Type w} {σ : Type t} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : Finite σ] [Finite ι] (P : Algebra.SubmersivePresentation R S ι σ), Algebra.IsStandardSmooth R S\", \"doc\": \"Given a finite index set $\\\\iota$ and a submersive presentation $P$ of an $R$-algebra $S$ with generating set $\\\\sigma$, the algebra $S$ is standard smooth over $R$. This means $S$ is isomorphic to a lo\"}\n  {\"name\": \"Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ {n : ℕ} {R : Type u} {S : Type v} {ι : Type w} {σ : Type t} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] [Finite ι] (P : Algebra.SubmersivePresentation R S ι σ),\\n  P.dimension = n → Algebra.IsStandardSmoothOfRelativeDimension n R S\", \"doc\": \"Let $ R $ be a commutative ring and $ S $ an $ R $-algebra. If $ S $ admits a submersive presentation with a finite generating set $ \\\\iota $, and the dimension of this presentation (defined as the dif\"}\n  {\"name\": \"Algebra.IsStandardSmooth.finitePresentation\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Algebra.FinitePresentation R S\", \"doc\": \"Every standard smooth algebra over a commutative semiring is finitely presented over its base semiring. Specifically, if $ S $ is a standard smooth algebra over $ R $, then $ S $ admits a finite prese\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ {n : ℕ} {R : Type u} {S : Type v} {inst : CommRing R} {inst_1 : CommRing S} {inst_2 : Algebra R S}\\n  [self : Algebra.IsStandardSmoothOfRelativeDimension n R S],\\n  ∃ ι σ, ∃ (x : Finite σ) (_ : Finite ι), ∃ P, P.dimension = n\", \"doc\": \"For any commutative ring $ R $, commutative ring $ S $ with an $ R $-algebra structure, and natural number $ n $, if $ S $ is a standard smooth algebra of relative dimension $ n $ over $ R $, then the\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"ℕ → (R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"Given a natural number $ n $, a commutative ring $ R $, and a commutative ring $ S $ equipped with an $ R $-algebra structure, the proposition that $ S $ is a standard smooth algebra of relative dimen\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] (n : ℕ) [Algebra.IsStandardSmoothOfRelativeDimension n A B],\\n  ∃ A₀ B₀ x x_1,\\n    A₀.FG ∧ Algebra.IsStandardSmoothOfRelativeDimension n (↥A₀) B\", \"doc\": \"For any commutative ring $ A $ and an $ A $-algebra $ B $ that is standard smooth of relative dimension $ n $, there exist a finitely generated subalgebra $ A_0 $ of $ A $ over $ R $, a commutative ri\"}\n  {\"name\": \"Algebra.IsStandardSmooth.out\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} {inst : CommRing R} {inst_1 : CommRing S} {inst_2 : Algebra R S}\\n  [self : Algebra.IsStandardSmooth R S],\\n  ∃ ι σ, ∃ (x : Finite σ), Finite ι ∧ Nonempty (Algebra.SubmersivePresentation R S ι σ)\", \"doc\": \"If $ S $ is a standard smooth algebra over a commutative ring $ R $, then there exist finite sets $ \\\\iota $ and $ \\\\sigma $ such that $ S $ admits a submersive presentation: $ S $ is isomorphic to a qu\"}\n  {\"name\": \"Algebra.Smooth.finitePresentation\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FinitePresentation R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ is finitely presented over $ R $.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib has finite-presentation transitivity and standard smooth charts, but not this complete-devissage preparation with uniform fibre dimensions after shrinking"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite presentation of all module terms in an algebraic devissage through finite maps and smooth algebras",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardSmooth.finitePresentation\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmooth\", \"type\": \"[IsStandardSmooth R S] : FinitePresentation R S\", \"doc\": \"Every standard smooth algebra over a commutative semiring is finitely presented over its base semiring. Specifically, if $ S $ is a standard smooth algebra over $ R $, then $ S $ admits a finite prese\"}\n  {\"name\": \"Module.Presentation.finitePresentation\", \"module\": \"Mathlib.Algebra.Module.Presentation.Finite\", \"type\": \"[Finite pres.G] [Finite pres.R] : Module.FinitePresentation A M\", \"doc\": \"If a module $ M $ over a ring $ A $ has a presentation with a finite set of generators and a finite set of relations, then $ M $ is finitely presented.\"}\n  {\"name\": \"Module.FinitePresentation\", \"module\": \"Mathlib.Algebra.Module.FinitePresentation\", \"type\": \"(R : Type u_1) → (M : Type u_2) → [inst : Semiring R] → [inst_1 : AddCommMonoid M] → [Module R M] → Prop\", \"doc\": \"A module $ M $ over a semiring $ R $ is finitely presented if there exists a finite set of generators and a finite set of relations such that $ M $ is isomorphic to the quotient of the free module gen\"}\n  {\"name\": \"Module.FinitePresentation.of_finite_of_finitePresentation\", \"module\": \"Mathlib.RingTheory.Finiteness.ModuleFinitePresentation\", \"type\": \"[Module.Finite R S] [Algebra.FinitePresentation R S] : Module.FinitePresentation R S\", \"doc\": \"If $ S $ is a finitely generated $ R $-module and finitely presented as an $ R $-algebra, then $ S $ is finitely presented as an $ R $-module.\"}\n  {\"name\": \"Module.FinitePresentation.mk\", \"module\": \"Mathlib.Algebra.Module.FinitePresentation\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : Semiring R] [inst_1 : AddCommMonoid M] [inst_2 : Module R M],\\n  (∃ s, Submodule.span R ↑s = ⊤ ∧ (Finsupp.linearCombination R Subtype.val).ker.FG) → Module.FinitePresentation R M\", \"doc\": \"If there exists a finite set $ s $ such that the span of $ s $ equals $ M $ and the kernel of the linear map from the free module on $ s $ to $ M $ is finitely generated, then $ M $ is finitely presen\"}\n  {\"name\": \"Algebra.Smooth.finitePresentation\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FinitePresentation R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ is finitely presented over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"Module.finitePresentation_iff_exists_presentation\", \"module\": \"Mathlib.Algebra.Module.Presentation.Finite\", \"type\": \": Module.FinitePresentation A M ↔ ∃ (pres : Presentation.{w₀, w₁} A M), Finite pres.G ∧ Finite pres.R\", \"doc\": \"A module $ M $ over a ring $ A $ is finitely presented if and only if there exists a presentation of $ M $ with a finite set of generators and a finite set of relations.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib has finite-presentation transitivity and standard smooth charts, but not this complete-devissage preparation with uniform fibre dimensions after shrinking"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FinitePresentation\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Algebra.FinitePresentation\", \"module\": \"Mathlib.RingTheory.FinitePresentation\", \"type\": \" (R : Type w₁) (A : Type w₂) [CommSemiring R] [Semiring A] [Algebra R A] : Prop\", \"doc\": \"An algebra over a commutative semiring is `Algebra.FinitePresentation` if it is the quotient of\\na polynomial ring in `n` variables by a finitely generated ideal.\"}\n  {\"name\": \"RingHom.FinitePresentation.id\", \"module\": \"Mathlib.RingTheory.FinitePresentation\", \"type\": \" (A : Type u_1) [CommRing A] : (RingHom.id A).FinitePresentation\", \"doc\": \"\"}\n  {\"name\": \"Algebra.FinitePresentation.self\", \"module\": \"Mathlib.RingTheory.FinitePresentation\", \"type\": \" (R : Type w₁) [CommRing R] : Algebra.FinitePresentation R R\", \"doc\": \"`R` is finitely presented as `R`-algebra.\"}\n  {\"name\": \"RingHom.FinitePresentation\", \"module\": \"Mathlib.RingTheory.FinitePresentation\", \"type\": \" {A : Type u_1} {B : Type u_2} [CommRing A] [CommRing B] (f : A →+* B) : Prop\", \"doc\": \"A ring morphism `A →+* B` is of `RingHom.FinitePresentation` if `B` is finitely presented as\\n`A`-algebra.\"}\n  {\"name\": \"RingHom.FiniteType.of_finitePresentation\", \"module\": \"Mathlib.RingTheory.FinitePresentation\", \"type\": \" {A : Type u_1} {B : Type u_2} [CommRing A] [CommRing B] {f : A →+* B} (hf : f.FinitePresentation) : f.FiniteType\", \"doc\": \"\"}\n  {\"name\": \"AlgHom.FinitePresentation.id\", \"module\": \"Mathlib.RingTheory.FinitePresentation\", \"type\": \" (R : Type u_1) (A : Type u_2) [CommRing R] [CommRing A] [Algebra R A] : (AlgHom.id R A).FinitePresentation\", \"doc\": \"\"}\n  {\"name\": \"Algebra.FiniteType.of_finitePresentation\", \"module\": \"Mathlib.RingTheory.FinitePresentation\", \"type\": \" {R : Type w₁} {A : Type w₂} [CommRing R] [CommRing A] [Algebra R A] [Algebra.FinitePresentation R A] : Algebra.FiniteType R A\", \"doc\": \"A finitely presented algebra is of finite type.\"}\n  {\"name\": \"RingHom.FinitePresentation.of_finiteType\", \"module\": \"Mathlib.RingTheory.FinitePresentation\", \"type\": \" {A : Type u_1} {B : Type u_2} [CommRing A] [CommRing B] [IsNoetherianRing A] {f : A →+* B} : f.FiniteType ↔ f.FinitePresentation\", \"doc\": \"\"}\n  {\"name\": \"RingHom.finitePresentation_algebraMap\", \"module\": \"Mathlib.RingTheory.FinitePresentation\", \"type\": \" {A : Type u_1} {B : Type u_2} [CommRing A] [CommRing B] [Algebra A B] : (algebraMap A B).FinitePresentation ↔ Algebra.FinitePresentation A B\", \"doc\": \"\"}\n  {\"name\": \"Algebra.FinitePresentation.of_finiteType\", \"module\": \"Mathlib.RingTheory.FinitePresentation\", \"type\": \" {R : Type w₁} {A : Type w₂} [CommRing R] [CommRing A] [Algebra R A] [IsNoetherianRing R] : Algebra.FiniteType R A ↔ Algebra.FinitePresentation R A\", \"doc\": \"An algebra over a Noetherian ring is finitely generated if and only if it is finitely\\npresented.\"}\n  {\"name\": \"AlgHom.FinitePresentation\", \"module\": \"Mathlib.RingTheory.FinitePresentation\", \"type\": \" {R : Type u_1} {A : Type u_2} {B : Type u_3} [CommRing R] [CommRing A] [CommRing B] [Algebra R A] [Algebra R B] (f : A →ₐ[R] B) : Prop\", \"doc\": \"An algebra morphism `A →ₐ[R] B` is of `AlgHom.FinitePresentation` if it is of finite\\npresentation as ring morphism. In other words, if `B` is finitely presented as `A`-algebra.\"}\n  {\"name\": \"Algebra.FinitePresentation.polynomial\", \"module\": \"Mathlib.RingTheory.FinitePresentation\", \"type\": \" (R : Type w₁) (A : Type w₂) [CommRing R] [CommRing A] [Algebra R A] [Algebra.FinitePresentation R A] : Algebra.FinitePresentation R (Polynomial A)\", \"doc\": \"`R[X]` is finitely presented as `R`-algebra.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib has finite-presentation transitivity and standard smooth charts, but not this complete-devissage preparation with uniform fibre dimensions after shrinking"
+  },
+  {
+   "tool": "grep",
+   "query": "devissage|dévissage|completeDevissage",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib has finite-presentation transitivity and standard smooth charts, but not this complete-devissage preparation with uniform fibre dimensions after shrinking"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite presentation transported through a finite finitely presented algebra and successive cokernels of maps from finite free modules",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Module.FinitePresentation.of_finite_of_finitePresentation\", \"module\": \"Mathlib/RingTheory/Finiteness/ModuleFinitePresentation\", \"type\": \"∀ (R : Type u) (S : Type u_1) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Finite R S]\\n  [Algebra.FinitePresentation R S], Module.FinitePresentation R S\", \"doc\": \"If $ S $ is a finitely generated $ R $-module and finitely presented as an $ R $-algebra, then $ S $ is finitely presented as an $ R $-module.\"}\n  {\"name\": \"Algebra.FinitePresentation.trans\", \"module\": \"Mathlib/RingTheory/FinitePresentation\", \"type\": \"∀ (R : Type w₁) (A : Type w₂) (B : Type w₃) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B]\\n  [Algebra.FinitePresentation R A] [Algebra.FinitePresentation A B], Algebra.FinitePresentation R B\", \"doc\": \"If $A$ is a finitely presented algebra over a commutative semiring $R$, and $B$ is a finitely presented algebra over $A$ with compatible scalar actions (i.e., $R$-algebra structure on $B$ via the scal\"}\n  {\"name\": \"AlgHom.FinitePresentation\", \"module\": \"Mathlib/RingTheory/FinitePresentation\", \"type\": \"{R : Type u_1} →\\n  {A : Type u_2} →\\n    {B : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing A] →\\n          [inst_2 : CommRing B] → [inst_3 : Algebra R A] → [inst_4 : Algebra R B] → (A →ₐ[R] B) → Prop\", \"doc\": \"The proposition asserts that the algebra structure on $ B $ over $ A $ induced by the algebra homomorphism $ f : A →ₐ[R] B $ is finitely presented. An algebra is finitely presented over $ A $ if it is\"}\n  {\"name\": \"Module.FinitePresentation.trans\", \"module\": \"Mathlib/Algebra/Module/FinitePresentation\", \"type\": \"∀ (R : Type u_2) (M : Type u_3) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] (S : Type u_1)\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [inst_5 : Module S M] [IsScalarTower R S M]\\n  [Module.FinitePresentation R S] [Module.FinitePresentation S M], Module.FinitePresentation R\", \"doc\": \"If $ S $ is a commutative ring equipped with an $ R $-algebra structure, $ M $ is an $ S $-module satisfying the scalar tower condition $ R \\to S \\to M $, and both $ S $ is finitely presented as an $ R \"}\n  {\"name\": \"Algebra.FinitePresentation.of_finitePresentation\", \"module\": \"Mathlib/RingTheory/Finiteness/ModuleFinitePresentation\", \"type\": \"∀ (R : Type u) (S : Type u_1) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Module.FinitePresentation R S], Algebra.FinitePresentation R S\", \"doc\": \"If a module $ S $ over a commutative semiring $ R $ is finitely presented, then the $ R $-algebra structure on $ S $ is also finitely presented. This instance asserts that the finite presentation of t\"}\n  {\"name\": \"Algebra.Presentation.instFinitePresentationModelOfHasCoeffsOfFinite\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Core\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] {P : Algebra.Presentation R S ι σ} (R₀ : Type u_5) [inst_3 : CommRing R₀]\\n  [inst_4 : Algebra R₀ R] [inst_5 : Algebra R₀ S] [inst_6 : IsScalarTower R₀ R S] [inst_7 : P.Has\", \"doc\": \"If the index types $\\\\iota$ and $\\\\sigma$ are finite, then the quotient ring $R₀[\\\\iota]$ modulo the ideal generated by the relations $P.\\\\text{relationOfHasCoeffs}(R₀)$ is finitely presented over $R₀$.\"}\n  {\"name\": \"Algebra.FinitePresentation\", \"module\": \"Mathlib/RingTheory/FinitePresentation\", \"type\": \"(R : Type w₁) → (A : Type w₂) → [inst : CommSemiring R] → [inst_1 : Semiring A] → [Algebra R A] → Prop\", \"doc\": \"Given a commutative semiring $ R $, a semiring $ A $ with an $ R $-algebra structure, this proposition asserts that $ A $ is finitely presented over $ R $.\"}\n  {\"name\": \"Algebra.Presentation.instFinitePresentationQuotientOfFinite\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} {ι : Type w} {σ : Type t} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : Algebra.Presentation R S ι σ) [Finite σ] [Finite ι], Algebra.FinitePresentation R P.Quotient\", \"doc\": \"If $ \\\\sigma $ and $ \\\\iota $ are finite types specifying generators and relations for an algebra presentation $ P $, then the quotient algebra $ P.\\\\text{Quotient} $ is finitely presented over the base \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib has finite-presentation transitivity and standard smooth charts, but not this complete-devissage preparation with uniform fibre dimensions after shrinking"
+  },
+  {
+   "tool": "grep",
+   "query": "devissage|dévissage|completeDevissage",
+   "results": "{\"t\": \"2026-10-23T22:20:20Z\", \"tool\": \"grep\", \"query\": \"devissage|dévissage|completeDevissage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: the hits give standard smoothness, finite presentation, or local constancy separately; none states complete algebra devissage preparation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth morphism with geometrically irreducible fibres has locally constant fibre dimension on its open image",
+   "results": "{\"t\": \"2026-10-23T22:20:20Z\", \"tool\": \"leansearch\", \"query\": \"A smooth morphism with geometrically irreducible fibres has locally constant fibre dimension on its open image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"IsLocallyConstant.iff_isOpen_fiber\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"IsLocallyConstant.iff_isOpen_fiber_apply\", \"AlgebraicGeometry.IsSmooth.recOn\", \"IsLocallyConstant.isOpen_fiber\", \"AlgebraicGeometry.IsSmooth.mk\"], \"digest\": \"e1e7e4baa1ea12ba\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: the hits give standard smoothness, finite presentation, or local constancy separately; none states complete algebra devissage preparation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Smooth\"",
+   "results": "{\"t\": \"2026-10-23T22:20:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"Smooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.inst\", \"Algebra.FormallySmooth\", \"Algebra.Smooth\", \"Algebra.Smooth.formallySmooth\", \"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"Algebra.FormallySmooth.polynomial\", \"Algebra.Smooth.finitePresentation\", \"Algebra.Smooth.of_isLocalization_Away\"], \"digest\": \"b687eda40c040e54\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: the hits give standard smoothness, finite presentation, or local constancy separately; none states complete algebra devissage preparation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Complete algebra devissage finite presentation and constant relative fibre dimension after localization",
+   "results": "{\"t\": \"2026-10-23T22:20:22Z\", \"tool\": \"leanfinder\", \"query\": \"Complete algebra devissage finite presentation and constant relative fibre dimension after localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension\", \"RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway\", \"Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"Algebra.FinitePresentation.of_isLocalizationAway\", \"Algebra.FinitePresentation.of_span_eq_top_target_of_isLocalizationAway\", \"RingHom.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\"], \"digest\": \"e2f9d64202d51f4e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: the hits give standard smoothness, finite presentation, or local constancy separately; none states complete algebra devissage preparation."
+  },
+  {
+   "tool": "grep",
+   "query": "instFlat|instLocallyOfFinitePresentation|IsSmoothOfRelativeDimension|isSmoothOfRelativeDimension",
+   "results": "{\"t\": \"2026-10-23T22:23:55Z\", \"tool\": \"grep\", \"query\": \"instFlat|instLocallyOfFinitePresentation|IsSmoothOfRelativeDimension|isSmoothOfRelativeDimension\", \"sub\": \"AlgebraicGeometry/Morphisms/Smooth.lean\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"140\", \"150\", \"173\"], \"digest\": \"4fe2ebe0cd136596\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: the hits give standard smoothness, finite presentation, or local constancy separately; none states complete algebra devissage preparation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite presentation of modules under finite finitely presented algebra maps and successive quotients by finitely generated submodules",
+   "results": "{\"t\": \"2026-10-23T22:23:56Z\", \"tool\": \"leanfinder\", \"query\": \"Finite presentation of modules under finite finitely presented algebra maps and successive quotients by finitely generated submodules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.FinitePresentation.trans\", \"Module.FinitePresentation.of_finite_of_finitePresentation\", \"Module.FinitePresentation\", \"Module.FinitePresentation.exists_fin\", \"Module.Presentation.finitePresentation\", \"Module.finitePresentation_iff_exists_presentation\", \"Module.finitePresentation_of_finite\", \"Module.FinitePresentation.iff_finitePresentation_of_finite\"], \"digest\": \"e4cf2ca61a0e2620\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: the hits give standard smoothness, finite presentation, or local constancy separately; none states complete algebra devissage preparation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-complete-devissage-dimension-flattening",
+  "date": "2026-10-24",
+  "group": "Q45"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tags 0CX4 (situation-existence), 0CXB (theorem-existence). Supporting input in 0CXB: Tags 0CVI (lemma-proper-pure), 0CX2 (lemma-when-universal-flattening), part (1), and 0CWX (situation-flat), defining the flat base-change functor; scheme representability: spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme), as invoked in 0CXB (theorem-existence). Subinput: Tag 0CX1 (theorem-flat-dimension-n-representable), specialized to a scheme base and universal purity (which implies the pure hypothesis); chart formulation of flatness in dimensions at least n: Tags 0CWS (lemma-pre-flat-dimension-n) and 0CWT (definition-flat-dimension-n). Subinput of the dimension induction: Tag 05UF (lemma-flat-dimension-n-representable), with complete devissage in Tags 05HH and 05HX; chart formulation from spaces-flat.tex Tag 0CWS. Supporting proof of 05UF: induction on the length of the algebraic devissage, first finite direct image, generic-basis universal injectivity, and generic-rank strata.",
+   "via": [
+    "lem-sfb-affine-complete-devissage-dimension-flattening",
+    "lem-sfb-space-pure-dimension-flatness-representability",
+    "lem-sfb-space-proper-support-universal-flattening",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-complete-devissage-fp-dimension-preparation",
+  "worker": "stage1",
+  "summary": "Read Stacks 05HX, 05HY and 05UF; retain the statement and give the finite-presentation induction, an explicit finite-relations cokernel calculation, the open-image shrinking argument, all localized devissage conditions, and the arbitrary-base-change dimension/transcendence calculation. Reuse existing DAG inputs only; no new nodes. Searched the live Lean source and current blueprint; no complete attachment or duplicate statement found.",
+  "blueprint": "Current literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability.proof.md, direct-image paragraph and inherited compactification prerequisite chain. The algebraic supporting place is Stacks 05UF, preliminary smooth relative dimensions, and 05HY, finite presentation. The computed nearest imported blueprint ancestor is null; the existing from.place and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-finite-extension-module-finite-presentation",
+    "why": "Generic input for the algebraic devissage preparation: Finite finitely presented ring extensions preserve finite presentation of modules. The unit has no substitute statement; used only for its stated conclusion within the inherited Stacks 05UF route."
+   },
+   {
+    "node": "lem-weil-pbc-localization-prime-residue-field-iso",
+    "why": "Generic input for the algebraic devissage preparation: Residue fields of a localization agree with those of the base. The unit has no substitute statement; used only for its stated conclusion within the inherited Stacks 05UF route."
+   },
+   {
+    "node": "lem-trf-smooth-connected-fibre-normal-integrality",
+    "why": "Generic input for the algebraic devissage preparation: Normal integral geometry of all field extensions of smooth connected fibres. The unit has no substitute statement; used only for its stated conclusion within the inherited Stacks 05UF route."
+   },
+   {
+    "node": "lem-sc-fibre-dimension-after-base-change",
+    "why": "Generic input for the algebraic devissage preparation: Fibre dimensions are preserved by base change. The unit has no substitute statement; used only for its stated conclusion within the inherited Stacks 05UF route."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Generic input for the algebraic devissage preparation: Base change and composition of smooth morphisms of fixed relative dimension. The unit has no substitute statement; used only for its stated conclusion within the inherited Stacks 05UF route."
+   },
+   {
+    "node": "lem-sbc-smooth-fixed-dimension-over-field",
+    "why": "Generic input for the algebraic devissage preparation: Dimension of a nonempty fixed-dimensional smooth scheme over a field. The unit has no substitute statement; used only for its stated conclusion within the inherited Stacks 05UF route."
+   },
+   {
+    "node": "lem-sc-closed-irreducible-dimension-trdeg",
+    "why": "Generic input for the algebraic devissage preparation: Dimension of an irreducible closed subset from its generic residue field. The unit has no substitute statement; used only for its stated conclusion within the inherited Stacks 05UF route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-finite-extension-module-finite-presentation",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-trf-smooth-connected-fibre-normal-integrality",
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sbc-smooth-fixed-dimension-over-field",
+  "lem-sc-closed-irreducible-dimension-trdeg"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q31-128b704da",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-128b704da (reviewer sub-agent of L); spot-checked: I read all 12 steps and every cited statement. Sources checked: Stacks flat.tex 05HX (l.1652), 05HY (l.1685) and the 05UF proof preliminaries. No new nodes. Steps 1-4 carry out the 05HY finite-presentation induction (00F4, 01TQ, the finite-type-intermediate lemma, 0564, and an explicit 0519 cokernel presentation); none of it needs Noetherian hypotheses. Steps 5-6: local constancy of fibre dimension (Lean-closed 02G1 node), constancy on irreducible fibres, and openness of g_i(E_i) by flat plus lfp; together they give f in I outside p, and every fibre over D(f) is nonempty. Steps 7-9 check that smoothness, finite presentation and all eight devissage conditions survive localization, including that p_i localized stays prime with the same residue field (f is not in pB_i because the fibre over p is nonempty). Steps 10-12: geometric integrality via the 056T/057J node; dim F = a_i via fibre base change, relative-dimension permanence and the fixed-dimension node; trdeg via 0A21, applied to F and to each point's closure. Statement test: the length-2 example over k with dimensions 1 and 3 is a valid devissage, so not asserting decreasing a_i is correct and is not a weakening. The l=0 case holds with f=1. Duplicates: lem-sfb-complete-algebra-devissage-base-change (NK, unsplit) covers only part of step 8, and no node restates the item. Route: sbc-lem-smooth-relative-dimension-locally-constant is off route but Lean-closed; the other off-route citations are declared generic tool uses, which I accept. Batch-5: lem-trf-finite-extension-module-finite-presentation is Algebra 0564, whose 11-node closure is pure algebra; lem-trf-smooth-connected-fibre-normal-integrality is 056T/057J generic geometry, whose 490-node closure has no trace-formula or Poincaré statement and no assumption leaf (its only pod node is a generic base-change lemma). Neither is part of either assumption or of their proofs, so both are accepted. No SGA citation. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CompleteDevissageDimensionPreparation",
+  "declaration": "AlgebraicGeometry.completeDevissage_fp_dimension_preparation",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompleteDevissageDimensionPreparation.lean",
+  "statement": "theorem completeDevissage_fp_dimension_preparation (R S : Type u) [CommRing R] [CommRing S] [Algebra R S] [Algebra.FinitePresentation R S] (N : Type v) [AddCommGroup N] [Module S N] [Module.FinitePresentation S N] (p : Ideal R) [p.IsPrime] (D : CompleteAlgebraDevissage R S p N) : (∀ i, Algebra.FinitePresentation R (D.A i) ∧ Algebra.FinitePresentation R (D.B i) ∧ (D.bToA i).toRingHom.FinitePresentation ∧ (∀ (hi : i.val = 0), (D.sToA i hi).toRingHom.FinitePresentation) ∧ (∀ (j : Fin D.n) (hij : j.val = i.val + 1), (D.bToAnext i j hij).toRingHom.FinitePresentation) ∧ Module.FinitePresentation (D.A i) (D.M i) ∧ Module.FinitePresentation (D.B i) ((ModuleCat.restrictScalars (D.bToA i).toRingHom).obj (D.M i)) ∧ Module.FinitePresentation (D.B i) ((ModuleCat.restrictScalars (D.bToA i).toRingHom).obj (D.M i) ⧸ LinearMap.range (D.alpha i))) ∧ ∃ (f : R), f ∉ p ∧ (∃ (p' : PrimeSpectrum (Localization.Away f)), p'.asIdeal = Ideal.map (algebraMap R (Localization.Away f)) p ∧ ∃ (hfin : Module.Finite (completeDevissageLocalizedAlgebra f (CommAlgCat.of R S)) (completeDevissageLocalizedModule f (CommAlgCat.of R S) (ModuleCat.of S N))), ∃ (E : @CompleteAlgebraDevissage (Localization.Away f) (completeDevissageLocalizedAlgebra f (CommAlgCat.of R S)) _ _ _ _ p'.asIdeal _ (completeDevissageLocalizedModule f (CommAlgCat.of R S) (ModuleCat.of S N)) _ _ hfin), ∃ (e : Fin D.n ≃ Fin E.n), (∀ i, (e i).val = i.val) ∧ ∃ (a : ∀ i, E.A (e i) ≃ₐ[Localization.Away f] completeDevissageLocalizedAlgebra f (D.A i)) (b : ∀ i, E.B (e i) ≃ₐ[Localization.Away f] completeDevissageLocalizedAlgebra f (D.B i)) (m : ∀ i, E.M (e i) ≃ₗ[E.A (e i)] (ModuleCat.restrictScalars (a i).toRingHom).obj (completeDevissageLocalizedModule f (D.A i) (D.M i))) (hr : ∀ i, E.rIndex (e i) = D.rIndex i), (∀ i (x : D.B i), a i (E.bToA (e i) ((b i).symm ((1 : Localization.Away f) ⊗ₜ[R] x))) = ((1 : Localization.Away f) ⊗ₜ[R] D.bToA i x)) ∧ (∀ i (hi : i.val = 0) (hi' : (e i).val = 0) (s : S), a i (E.sToA (e i) hi' ((1 : Localization.Away f) ⊗ₜ[R] s)) = ((1 : Localization.Away f) ⊗ₜ[R] D.sToA i hi s)) ∧ (∀ i j (hij : j.val = i.val + 1) (hij' : (e j).val = (e i).val + 1) (x : D.B i), a j (E.bToAnext (e i) (e j) hij' ((b i).symm ((1 : Localization.Away f) ⊗ₜ[R] x))) = ((1 : Localization.Away f) ⊗ₜ[R] D.bToAnext i j hij x)) ∧ (∀ i (j : Fin (D.rIndex i)), m i (E.alpha (e i) (Pi.single (Fin.cast (hr i).symm j) 1)) = completeDevissageLocalizedUnit f (D.A i) (D.M i) (D.alpha i (Pi.single j 1))) ∧ (∀ i (hi : i.val = 0) (hi' : (e i).val = 0) (x : N), m i (E.firstIso (e i) hi' (completeDevissageLocalizedUnit f (CommAlgCat.of R S) (ModuleCat.of S N) x)) = completeDevissageLocalizedUnit f (D.A i) (D.M i) (D.firstIso i hi x)) ∧ (∀ i j (hij : j.val = i.val + 1) (hij' : (e j).val = (e i).val + 1) (x : D.M i), m j (E.cokerIso (e i) (e j) hij' (Submodule.Quotient.mk ((m i).symm (completeDevissageLocalizedUnit f (D.A i) (D.M i) x)))) = completeDevissageLocalizedUnit f (D.A j) (D.M j) (D.cokerIso i j hij (Submodule.Quotient.mk x)))) ∧ ∃ (a : Fin D.n → ℕ), ∀ i, Smooth (completeDevissageLocalizedSpecMap f (D.B i)) ∧ Flat (completeDevissageLocalizedSpecMap f (D.B i)) ∧ LocallyOfFinitePresentation (completeDevissageLocalizedSpecMap f (D.B i)) ∧ QuasiCompact (completeDevissageLocalizedSpecMap f (D.B i)) ∧ QuasiSeparated (completeDevissageLocalizedSpecMap f (D.B i)) ∧ GeometricallyIntegral (completeDevissageLocalizedSpecMap f (D.B i)) ∧ SmoothOfRelativeDimension (a i) (completeDevissageLocalizedSpecMap f (D.B i)) ∧ ∀ (T : Scheme.{u}) (g : T ⟶ Spec (.of (Localization.Away f))) (t : T), GeometricallyIntegral (completeDevissageBaseChangeFibreMap f (D.B i) g t) ∧ IsIntegral (completeDevissageBaseChangeFibre f (D.B i) g t) ∧ topologicalKrullDim (completeDevissageBaseChangeFibre f (D.B i) g t) = (a i : WithBot ℕ∞) ∧ (∃! ξ : completeDevissageBaseChangeFibre f (D.B i) g t, IsGenericPoint ξ Set.univ) ∧ (∀ ξ : completeDevissageBaseChangeFibre f (D.B i) g t, IsGenericPoint ξ Set.univ → @Algebra.trdeg (T.residueField t) ((completeDevissageBaseChangeFibre f (D.B i) g t).residueField ξ) _ _ (Scheme.Hom.residueFieldAlgebraMap (completeDevissageBaseChangeFibreMap f (D.B i) g t) ξ).toAlgebra = (a i : Cardinal)) ∧ (∀ x : completeDevissageBaseChangeFibre f (D.B i) g t, @Algebra.trdeg (T.residueField t) ((completeDevissageBaseChangeFibre f (D.B i) g t).residueField x) _ _ (Scheme.Hom.residueFieldAlgebraMap (completeDevissageBaseChangeFibreMap f (D.B i) g t) x).toAlgebra ≤ (a i : Cardinal))",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-23",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.completeDevissageLocalizedAlgebra",
+   "AlgebraicGeometry.completeDevissageLocalizedModule",
+   "AlgebraicGeometry.completeDevissageLocalizedUnit",
+   "AlgebraicGeometry.completeDevissageLocalizedSpecMap",
+   "AlgebraicGeometry.completeDevissageBaseChangeFibre",
+   "AlgebraicGeometry.completeDevissageBaseChangeFibreMap",
+   "AlgebraicGeometry.completeDevissage_fp_dimension_preparation"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a0692e997",
+  "group": "NL",
+  "result": "pass",
+  "note": "Read node, 05HX/05HY/0A21 places, all 11 stmt_dep records, CompleteAlgebraDevissage structure, Mathlib GeometricallyIntegral/fiber, PointCount residueFieldAlgebraMap. All hypotheses exact (FP algebra, FP module, prime, D); fp conjunct covers A_i,B_i, all displayed maps, M_i over A_i and B_i, Q_i=quotient by range alpha. Localized devissage E over p'=pR_f pinned via a,b,m,hr,e and generator equations for bToA/sToA/bToAnext/alpha/firstIso/cokerIso (R_f-span of 1⊗x determines all maps). Geometry: Smooth, Flat, LFP+QC+QS, GeometricallyIntegral, SmoothOfRelativeDimension a_i : ℕ; arbitrary T fibres geometrically integral, IsIntegral, dim a_i, ∃! generic point, trdeg = a_i at generic point and ≤ a_i everywhere. Edge cases n=0, rank 0, a_i=0 fine. Helpers canonical, docstrings with source/blueprint and 12 proof steps, single sorry, statement verbatim, node diff vs side only the lean record, report sections present. Advisory: localized module/unit duplicate theorem-node-owned CompleteAlgebraDevissage.tensorModule/tensorUnit (not citable without theorem stmt_dep); GeometricallyIntegral/residueFieldAlgebraMap are canonical non-recorded decls. No compile (no file changed)."
+ }
+}

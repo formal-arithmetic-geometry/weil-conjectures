@@ -1,0 +1,273 @@
+{
+ "id": "lem-zl-finite-restriction-coefficient-descent",
+ "kind": "statement",
+ "title": "Finite coefficient extension and common-stage descent of restriction maps",
+ "statement": "Fix the finite-field datum $p,a,q,k_0=\\mathbf F_q,k=\\overline{\\mathbf F}_q$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$, uniformizer $\\varpi$, and $A_n=\\mathcal O_E/\\varpi^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Let $f:X\\to Y$ be a finite morphism of separated finite-type $k$-schemes [def-weil-finite-integral-morphism, def-weil-scheme-morphism-properties]. For a scheme $W$, write $R_W=\\varprojlim_n(A_n)_W$ on the small pro-etale site $W_{\\mathrm{proet}}$ [def-weil-completed-integral-coefficients, def-weil-pbc-proetale-site]. Use $D^b_c(W,\\mathcal O_E)$ of [def-weil-derived-complete-integral-detailed], the strict derived reductions $K_n=K\\otimes^L_{R_W}(A_n)_W$, and exact restriction of scalars $\\operatorname{Res}_n$ [def-pur-integral-derived-operations]. Let $Rf_*$ be the tower direct image of [def-weil-derived-direct-image].\n\nFor a geometric point $y:s=\\operatorname{Spec}k\\to Y$ [def-weil-geometric-point], set $S=X\\times_Ys$ with projections $v:S\\to X$, $h:S\\to s$ [def-pc-base-change], and $P_y=\\{x:s\\to X\\mid fx=y\\}$. For $x\\in P_y$ let $i_x:s\\to S$ be the unique lift, so $vi_x=x$ and $hi_x=\\operatorname{id}_s$. This is a finite set; an empty sum indexed by $P_y$ is the zero object. Write $L(-)^*$ for the completed integral pullback of [def-pur-integral-derived-operations], and $(-)_n^*$ for its exact finite-coefficient inverse image.\n\nChoose an algebraic closure $\\overline{\\mathbf Q}_\\ell$ containing $E$. For any finite coefficient extension $E\\subset L\\subset\\overline{\\mathbf Q}_\\ell$ [def-weil-l-adic-coefficient-extension], let $C_{L/E,W}$ denote integral derived change of completed coefficient rings and $T_{L/E,W}$ its raw rationalization [def-weil-rationalization-karoubi, def-weil-pbc-rational-category]. Integral ordinary ringed-topos direct image agrees with the reduction-tower direct image through the projection-normalized comparison. There are coherent natural isomorphisms\n$$C_{L/E,Y}Rf_{*,E}\\simeq Rf_{*,L}C_{L/E,X},\\quad\nC_{L/E,W'}Lg_E^*\\simeq Lg_L^*C_{L/E,W}$$\nfor $g\\in\\{y,v,h,x,i_x\\}$ with its indicated source $W'$ and target $W$, whenever the displayed pullback is used. These preserve the integral constructible categories. After rationalization they compare the prescribed rational functors; exact point sections have the compatible scalar comparison [def-weil-finite-coefficient-point].\n\nUnder these comparisons, scalar extension carries the integral finite-fibre exchange $Ly^*Rf_*K\\to Rh_*Lv^*K$ and the counit restriction $Rh_*Lv^*K\\to\\bigoplus_{x\\in P_y}Lx^*K$ to those at $L$. The same is true after rationalization and point sections. This specifies the actual arrows: on coefficient-level tensor representatives the $x$-component sends $a\\otimes m$ to $a\\otimes(m|_{i_x})$ and the exchange map is the scalar-extended counit mate. The comparisons respect identities and composition of coefficient extensions, including ramified ones; no common quotient exponent between two different uniformizers is assumed.\n\nConsequently the functors, both restriction maps, and all identities between them descend independently of a chosen finite field of definition to the common-stage category $D^b_c(-,\\overline{\\mathbf Q}_\\ell)$ [def-weil-algebraically-closed-coefficients]. Every finite collection of objects, morphisms, triangles and equations is represented after enlarging to one finite stage. A stagewise t-exact direct image and its exact heart restriction retain these properties for the common-stage standard pair [def-weil-constructible-standard-tstructure].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Bhatt–Scholze Proposition 6.8.14(1), Remark 6.8.15; coefficient-mate compatibility for exchange and counit restrictions, returned step 10."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-integral-morphism",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-proetale-site",
+  "def-weil-derived-complete-integral-detailed",
+  "def-pur-integral-derived-operations",
+  "def-weil-derived-direct-image",
+  "def-weil-geometric-point",
+  "def-pc-base-change",
+  "def-weil-rationalization-karoubi",
+  "def-weil-pbc-rational-category",
+  "def-weil-finite-coefficient-point",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-constructible-standard-tstructure",
+  "def-zl-finite-restriction-integral-diagram",
+  "def-zl-finite-restriction-geometric-comparisons",
+  "def-zl-finite-restriction-normalization",
+  "def-zl-finite-restriction-finite-data",
+  "def-zl-finite-restriction-geometric-arrows",
+  "lem-weil-point-sections-scalar-extension",
+  "def-zl-finite-restriction-coefficient-descent-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply finitePoints to the finite geometric fibre. Apply the integral assembly lemma to obtain G,I,N,J with all integral, scalar, arrow, tower normalizations and TensorRestrictionFormula.",
+   "uses": [
+    "lem-zl-finite-counit-restriction-towers",
+    "lem-zl-finite-restriction-integral-assembly"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply rational assembly to G,I and their normalized/coherent laws. It supplies R, normalized direct-image descent and conditional exact-heart descent.",
+   "uses": [
+    "lem-zl-finite-restriction-rational-assembly"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For point sections form psi = the sections-tensor map followed by sections of the completion comparison. Naturality of psi on each integral arrow, conjugated by its component inverses, is exactly integral SectionsCompatible. Rational SectionsCompatible is naturality of the already specified pointRationalFibreScalarIso.",
+   "uses": [
+    "lem-weil-point-sections-scalar-extension",
+    "def-weil-finite-coefficient-point"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Choose one eventual representative for each of finitely many arrows, a finite-stage distinguished triangle for each distinguished triangle, and one eventual-equality witness for each equation. Directedness gives a single upper bound for these stages and every object stage. Transport all representatives there; use isoToStage for the object and arrow squares, transIso and mapTriangleCompIso for triangles, and naturality of the associator to transport equality witnesses. Finite.exists_le includes empty index types, so the empty collection is also covered.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For TExactDescent, write a common-stage half-object as an isomorphic included finite-stage object. Apply the stagewise preservation hypothesis. Map its representing isomorphism and compose with Morphism.ιCompFunctorIso; this represents the image in the same half. Combine this with all preceding conjuncts.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-zl-finite-restriction-finite-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-finite-counit-restriction-towers",
+  "lem-zl-finite-restriction-integral-assembly",
+  "lem-zl-finite-restriction-rational-assembly",
+  "lem-weil-point-sections-scalar-extension",
+  "def-weil-finite-coefficient-point",
+  "def-weil-algebraically-closed-coefficients",
+  "def-zl-finite-restriction-finite-data"
+ ],
+ "proof_origin": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14 and Remark 6.8.15; complete Lean assembly from integral/rational lemmas, direct proofs of finite data, point naturality, and preservation of halves.",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite coefficient field extension preserves canonical finite direct image exchange and germ restriction maps and descends them to algebraic closure",
+   "results": "[leanfinder] OK 8 hit(s); Field.Emb.Cardinal.embFunctor; Field.Emb.Cardinal.succEquiv_coherence; Field.Emb.Cardinal.instInverseSystemWithTopToTypeOrdRankAlgHomSubtypeMemIntermediateFieldCoeOrderEmbeddingFiltrationAlgebraicClosureEmbFunctor; galRestrict'_galLift; IsAlgClosed.lift_def; Field.Emb.Cardinal.succEquiv; IntermediateField.Lifts.nonempty_algHom_of_exist_lifts_finset; InfiniteGalois.finGaloisGroupFunctor_map_proj_eq_proj. Algebraic finite field extensions, restriction of scalars, and field-embedding coherence do not compare the completed finite-image restriction maps across coefficient fields.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extensionOfScalars\", \"pushforward\"",
+   "results": "[loogle] OK 0 hit(s); No hits. Algebraic finite field extensions, restriction of scalars, and field-embedding coherence do not compare the completed finite-image restriction maps across coefficient fields.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionOfScalars.*pushforward|pushforward.*extensionOfScalars|changeOfRings",
+   "results": "[grep] OK 16 hit(s); Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean:8; Mathlib/Algebra/Category/AlgCat/TensorAlgebra.lean:10; Mathlib/Algebra/Category/ModuleCat/ChangeOfRingsExact.lean:8; Mathlib/Algebra/Category/ModuleCat/Descent.lean:8; Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean:8; Mathlib/Algebra/Category/ModuleCat/Presheaf.lean:8; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:359; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:364; Mathlib/Algebra/Category/ModuleCat/Differentials/Basic.lean:8; Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean:9; Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean:8; Mathlib/Algebra/Category/ModuleCat/EnoughInjectives.lean:9; Mathlib/Algebra/Category/ModuleCat/Presheaf/ChangeOfRings.lean:8; Mathlib/Algebra/Category/ModuleCat/Presheaf/Limits.lean:9; Mathlib/Algebra/Category/ModuleCat/Presheaf/Pushforward.lean:8; Mathlib/RingTheory/Morita/Basic.lean:8. Algebraic finite field extensions, restriction of scalars, and field-embedding coherence do not compare the completed finite-image restriction maps across coefficient fields.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite coefficient field extension preserves canonical finite direct image exchange and germ restriction maps and descends them to algebraic closure",
+   "results": "[leansearch] OK 8 hit(s); FiniteField.instFiniteExtension_1; FiniteField.Extension; Field.isAlgebraic_of_finite_intermediateField; finiteExts; FiniteField.instFieldExtension; FiniteField.instFiniteExtension; FiniteField.algEquivExtension; FiniteField.instFiniteDimensionalZModExtension. Algebraic finite field extensions, restriction of scalars, and field-embedding coherence do not compare the completed finite-image restriction maps across coefficient fields.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent scalar mates for adic finite fibre restrictions descend to common finite coefficient stages",
+   "results": "[leansearch] OK 8 hit(s); Module.Finite.of_restrictScalars_finite; RestrictScalars; AdicCompletion.val_smul; ContinuousLinearMap.restrictScalarsₗ; ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction; AdicCompletion.val_smul_apply; ModuleCat.restrictCoextendScalarsAdj; IsAdicComplete.StrictMono.of_comp_lift. Algebraic finite field extensions, restriction of scalars, and field-embedding coherence do not compare the completed finite-image restriction maps across coefficient fields.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent extension of completed adic coefficient rings commutes with finite direct image, inverse image and counit restriction maps and descends to common finite coefficient fields",
+   "results": "Hits: AdicCompletion.mk_smul_top_ofAlgEquiv_symm, IsAdicComplete.StrictMono.of_comp_lift, AdicCompletion.mk_ofAlgEquiv_symm, AdicCompletion.transitionMap_comp_eval_apply, IsAdicComplete.StrictMono.of_lift, IsAdicComplete.of_comp_lift, AdicCompletion.factor_eval_eq_evalₐ, AdicCompletion.factor_evalₐ_eq_eval. ; read the returned signatures. Algebraic adic completion, ordinary scalar adjunctions and underived sheaf evaluation do not state the completed constructible comparison and common-stage restriction descent.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extendScalars\", \"pushforward\"",
+   "results": "Hits: . ; read the returned signatures. Algebraic adic completion, ordinary scalar adjunctions and underived sheaf evaluation do not state the completed constructible comparison and common-stage restriction descent.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars.*pushforward|pushforward.*extendScalars|scalar.*counit|counit.*scalar",
+   "results": "Hits: Mathlib/RingTheory/Bialgebra/Quotient.lean, Mathlib/RingTheory/Bialgebra/TensorProduct.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/Algebra/Category/AlgCat/Basic.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean. ; read the returned signatures. Algebraic adic completion, ordinary scalar adjunctions and underived sheaf evaluation do not state the completed constructible comparison and common-stage restriction descent.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite free scalar extension of sheaves commutes with derived pushforward and its adjunction counit",
+   "results": "Hits: SheafOfModules.pushforwardPushforwardAdj, ModuleCat.ExtendRestrictScalarsAdj.Counit.map, ModuleCat.RestrictionCoextensionAdj.counit', SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.PullbackConstruction.adjunction, ModuleCat.ExtendRestrictScalarsAdj.counit, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pushforward. ; read the returned signatures. Algebraic adic completion, ordinary scalar adjunctions and underived sheaf evaluation do not state the completed constructible comparison and common-stage restriction descent.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite field extension of l-adic coefficients commutes coherently with pro-etale sheaf pushforward pullback and evaluation at points",
+   "results": "Hits: AlgebraicGeometry.Scheme.evaluation_naturality_apply, AlgebraicGeometry.Scheme.Γevaluation_naturality, AlgebraicGeometry.Scheme.Γevaluation_naturality_assoc, AlgebraicGeometry.Scheme.evaluation_naturality, AlgebraicGeometry.Scheme.Γevaluation_naturality_apply, SheafOfModules.pushforwardNatTrans_app_val_app_apply, SheafOfModules.pushforwardSections_coe, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom. ; read the returned signatures. Algebraic adic completion, ordinary scalar adjunctions and underived sheaf evaluation do not state the completed constructible comparison and common-stage restriction descent.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-finite-adic-direct-image",
+  "date": "2026-10-22",
+  "group": "Q03"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "blueprint": {
+  "from": {
+   "node": "lem-zl-finite-pushforward",
+   "place": "Opening exactness and finite-stalk-formula sentences of lem-zl-finite-pushforward.proof.md: coefficient extension and common-stage interpretation of the two finite-fibre restriction arrows.",
+   "via": [
+    "lem-zl-finite-adic-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-zl-finite-restriction-coefficient-descent",
+  "worker": "stage1",
+  "summary": "Kept the statement and reused existing completed comparison, adjunction-normalization, rationalization and coherent pair-descent nodes. Wrote eight steps, including the explicit inverse-adjunct counit equation, its individual germ components, normalized rational point sections, finite equality witnesses, and the conditional standard-pair/heart descent. No new nodes or Lean changes. The counit restriction is treated directly through the normalized ordinary/tower adjunction comparison; no equality is inferred just from individual reductions.",
+  "blueprint": "Realizes the coefficient descent needed by the opening exactness and finite-stalk-formula sentences of the current main-20261015 ancestor proof lem-zl-finite-pushforward, through its finite-adic-direct-image step. No unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "Generic integral pullback and completed tensor product preserve constructibility interface used to assemble coefficient-compatible finite-fibre arrows; the weight unit has no replacement for this coefficient/category-theoretic tool."
+   },
+   {
+    "node": "prop-weil-pbc-scalar-extension",
+    "why": "Generic compatibility with finite scalar extension interface used to assemble coefficient-compatible finite-fibre arrows; the weight unit has no replacement for this coefficient/category-theoretic tool."
+   },
+   {
+    "node": "lem-pur-integral-operations-scalar-extension",
+    "why": "Generic integral derived operations commute with finite scalar extension interface used to assemble coefficient-compatible finite-fibre arrows; the weight unit has no replacement for this coefficient/category-theoretic tool."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Generic finite free completed coefficient extension is ordinary derived scalar extension interface used to assemble coefficient-compatible finite-fibre arrows; the weight unit has no replacement for this coefficient/category-theoretic tool."
+   },
+   {
+    "node": "lem-pur-ordinary-adjunction-scalar-compatibility",
+    "why": "Generic scalar compatibility of the ordinary completed adjunction interface used to assemble coefficient-compatible finite-fibre arrows; the weight unit has no replacement for this coefficient/category-theoretic tool."
+   },
+   {
+    "node": "prop-weil-pbc-rational-transport",
+    "why": "Generic functorial transport to a finite field interface used to assemble coefficient-compatible finite-fibre arrows; the weight unit has no replacement for this coefficient/category-theoretic tool."
+   },
+   {
+    "node": "lem-weil-point-sections-scalar-extension",
+    "why": "Generic sections over the point commute with scalar extension interface used to assemble coefficient-compatible finite-fibre arrows; the weight unit has no replacement for this coefficient/category-theoretic tool."
+   },
+   {
+    "node": "lem-sbc-coherent-pair-functor-descent",
+    "why": "Generic coherent functors and transformations on common-stage pair categories interface used to assemble coefficient-compatible finite-fibre arrows; the weight unit has no replacement for this coefficient/category-theoretic tool."
+   },
+   {
+    "node": "lem-per-adic-common-stage-truncations",
+    "why": "Generic scalar-compatible truncations and bounded standard structure at common stages interface used to assemble coefficient-compatible finite-fibre arrows; the weight unit has no replacement for this coefficient/category-theoretic tool."
+   },
+   {
+    "node": "lem-weil-heart-short-exact-triangles",
+    "why": "Generic short exact sequences in the heart are triangles interface used to assemble coefficient-compatible finite-fibre arrows; the weight unit has no replacement for this coefficient/category-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-point-sections-scalar-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-O3-659d7024e",
+  "group": "O3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O3-659d7024e (reviewer sub-agent of L); spot-checked: I read all 8 steps of the 0-new-node split and checked each against the statements of its 15 cited nodes. I also read Bhatt–Scholze 6.8.14 and 6.8.15 (setting only; proof_origin=agent is correct). Step 1: completed-image-comparison covers h along a k-point; pullback constructibility only needs ℓ invertible; from rational-heart-comparison only the unconditional category identification is used. Step 2: the pbc scalar-extension comparison is conjugated by the normalized Θ, and χ identifies the derived change with the strict-tower extension, ramified extensions included. Step 3: I recomputed the inverse-adjunct equation of lem-pur-ordinary-adjunction-scalar-compatibility at v=id on F_E M and got ε_L P_L(b)=C_S(ε_E)a^{-1}, using its canonical a and b; the exchange is the mate clause of prop-weil-pbc-scalar-extension on (f,h,y,v). Step 4: pulling back along i_x with composition coherence (v∘i_x=x, h∘i_x=id) gives the x-component square; integral equality comes before the germ formula from the counit-towers node. Step 5: identity, tower, rational-transport uniqueness and point-sections φ=(Γχ∘θ)^{-1} all match. Step 6: the coherent pair descent hypotheses are supplied, and the transitions are identified via χ, the DAG convention. Step 7 is genuinely elementary. Step 8: common-stage truncations plus t-exact pair descent plus heart (4) give the conditional clause. No cycle (closure walked), no SGA, no repair note on this item (the 10-21 re-split note is the parent's). Small cases tested: L=E, towers, ramified L, X=∅, f=id, nonreduced fibre, empty collection. Batch-5: lem-pod-completed-integral-scalar-regular (ϖ non-zero-divisor on completed sections, from cohomological finiteness) and lem-pod-directed-pair-bounded-tstructure (abstract directed-pair t-structure, from prop-constructible-truncations) are generic coefficient formalism, not steps of the trace formula or Poincaré duality, so both were accepted. The split_report tool_uses are all generic and accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteRestrictionCoefficientDescent",
+  "declaration": "WeilConjectures.FiniteRestrictionCoefficient.finiteRestrictionCoefficientDescent",
+  "declarations": [
+   "WeilConjectures.FiniteRestrictionCoefficient.finiteRestrictionCoefficientDescent"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteRestrictionCoefficientDescent.lean",
+  "statement": "theorem finiteRestrictionCoefficientDescent (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p) [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [IsSeparated (Y ↘ Spec (.of D.k))] [f.IsOver (Spec (.of D.k))] [IsFinite f] (y : Spec (.of D.k) ⟶ Y) : Finite (FiniteCounitTowers.Points f y) ∧ ∃ (G : Geometry l Ω f y) (I : IntegralComparisons l f y Ω) (N : Endpoints l Ω f y G I) (R : RationalComparisons l f y Ω I) (J : GeometricArrows l Ω f y G), G.Normalized ∧ I.Laws ∧ I.Coherent ∧ N.ScalarNormalized ∧ J.Normalized l Ω f y ∧ N.ArrowsNormalized l Ω f y J ∧ TowerAgreement l Ω f ∧ TowerAgreement l Ω (pullback.snd f y) ∧ TensorRestrictionFormula l Ω f y ∧ DirectImageDescent l f y Ω G ∧ SectionsCompatible l Ω D hl ∧ (∀ W : Scheme.{u}, FiniteData l Ω W) ∧ (∀ q : Vertex, TExactDescent l Ω X (R.diagram q)) ∧ (∀ q : Vertex, HeartExactDescent l Ω X (R.diagram q))",
+  "branch": "newtargets-dag",
+  "by": "C4",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8793cb104",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Re-delivery after 4640 RETURN. H3 fixed: new def-zl-finite-restriction-geometric-arrows pins ordinary adjunctions/compositors/identity on cochains and K-flat good complexes, completed adjunctions by unit (ordinary unit, completion comparison, reconstruction), and square/pointH/pointV by precomposition with the completion maps; exchange = mateEquiv adjF adjH square (y^*f_* to h_*v^*, direction checked); component = i_x^* of the h-counit conjugated by pointH/pointV. Endpoints.ArrowsNormalized ties the N-conjugated strict arrows to these, so the -1 middle/projection twist fails; a global twist of all of N survives but is harmless because I.Laws + ScalarNormalized give the geometric scalar squares for any N. Mechanical theorem stmt_dep lem-weil-point-sections-scalar-extension is genuine: pointSectionsScalarExtensionIso = (pointDerivedSectionsTensor [.choose of existsUnique] then asIso via theorem pointConstructibleCompletionComparison_isIso).symm, and no def node owns the module; this was the H2 repair the RETURN requested. All clauses match the node: hypotheses, Finite Points, limit fan plus empty IsZero, G pinned to scalarPullbackCompleted and HasIntegralLaws, TowerAgreement for f and h, TensorRestrictionFormula a⊗m to a⊗m|x, Laws and Coherent with the balanced associator and no common exponent, rational HEq pins, SectionsCompatible naturality, descNatTrans descended arrows, FiniteData allowing empty lists, conditional TExact/HeartExact descent. lean.statement verbatim for the item and all 5 new nodes. No hollow defs; the main theorem is the only sorry; docstrings present. Advisory: new def nodes cite theorem nodes for constructed objects (.choose / sorry'd instances), which is genuine. No files changed, so nothing compiled."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-77b39",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261025T122609-L-1789509",
+  "kind": "interface",
+  "note": "independent cc review: item finiteRestrictionCoefficientDescent (unchanged signature) proved from finitePoints + 4 private proofs + 2 new sorry'd assembly statements (integral = integral conjuncts of item; rational = ∃R, DirectImageDescent ∧ HeartExactDescent, true via HasComparisonLaws pinning); 5 defs moved verbatim to FiniteRestrictionCoefficientDescentData with change record and public re-export; no importers; nodes checked against Lean"
+ }
+}

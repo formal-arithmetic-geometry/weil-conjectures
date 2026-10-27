@@ -1,0 +1,336 @@
+{
+ "id": "lem-sfb-scalar-model-restriction-criterion",
+ "kind": "statement",
+ "title": "Scalar models pass through restriction isomorphisms on an extended stratification",
+ "statement": "Let $T,X,Y$ be quasi-compact quasi-separated schemes [def-weil-pbc-scheme-conventions], and let $h:X\\hookrightarrow T$ and $k:Y\\hookrightarrow T$ be immersions [def-weil-closed-immersion] with disjoint images covering $|T|$. Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring], put $R_W=\\Lambda_W$ [sk-def-sfb-pulled-back-coefficients], and use internal modules [sk-def-sfb-module-objects] and their module pullbacks [sk-def-sfb-module-pushforward-pullback]. Let $M$ be an $R_X$-module and $H$ an $R_T$-module, supplied with $R_X$-module and $R_Y$-module isomorphisms $h^*H\\cong M$ and $k^*H\\cong0$.\nLet $(s_a:X_a\\hookrightarrow X)_{a<n}$ be a finite stratification [def-constructible-stratification]. Assume that the extended stratification has exactly $n+1$ strata, indexed with $Y$ first and the old strata following in their given order. Assume that the family $(h\\circ s_a)_{a<n}$ together with $k$ is a finite stratification of $T$ with constructible locally closed images [def-weil-constructible-subset]. Fix, for each $a$, a pro-étale cover $\\{v_{a,r}:V_{a,r}\\to X_a\\}_r$, finitely presented $\\Lambda(*)$-modules $P_{a,r}$ and model isomorphisms $v_{a,r}^*s_a^*M\\cong R_{V_{a,r}}\\otimes_{\\Lambda(*)}P_{a,r}$ [sk-def-sfb-constructible].\nThen $(h\\circ s_a)^*H\\cong s_a^*M$ for every $a$, and the same covers and scalar modules give isomorphisms $v_{a,r}^*(h\\circ s_a)^*H\\cong R_{V_{a,r}}\\otimes_{\\Lambda(*)}P_{a,r}$. On the additional stratum $Y$, $k^*H$ has a finite constant local model on the identity cover with scalar module $0$, whose finite presentation is $\\Lambda(*)^0\\to\\Lambda(*)^0\\to0\\to0$ and whose scalar extension is zero. This specified extended stratification is adapted to $H$, so $H$ is constructible in the sense of [sk-def-sfb-constructible].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+  "place": "paragraph (3), preservation of constructibility by retaining old scalar models and a zero complementary model; common restriction argument of original scalar-model immersion-extension proof steps 4–6"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-closed-immersion",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-pushforward-pullback",
+  "def-constructible-stratification",
+  "def-weil-constructible-subset",
+  "sk-def-sfb-constructible"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\beta:h^*H\\xrightarrow{\\sim}M$ for the supplied module isomorphism. For each $a$, evaluate the composition isomorphism of [def-sfb-module-upper-star-comp] at $H$, with $f=s_a$ and $g=h$, and compose with $s_a^*\\beta$. This gives\n$$e_a:(h\\circ s_a)^*H\\xrightarrow{\\sim}s_a^*h^*H\\xrightarrow{s_a^*\\beta}s_a^*M.$$\nThe second arrow is an isomorphism because applying the functor $s_a^*$ to $\\beta^{-1}$ gives its inverse: both composites are identities by preservation of composition and identities. Every arrow is in $\\operatorname{Mod}_{R_{X_a}}$, so this proves the first asserted restriction isomorphism without forgetting the module actions.",
+   "uses": [
+    "def-sfb-module-upper-star-comp"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+    "place": "paragraph (3), preservation of constructibility by retaining old scalar models and a zero complementary model; common restriction argument of original scalar-model immersion-extension proof steps 4–6"
+   }
+  },
+  {
+   "text": "Denote the given model isomorphism on $V_{a,r}$ by $\\theta_{a,r}:v_{a,r}^*s_a^*M\\xrightarrow{\\sim}R_{V_{a,r}}\\otimes_{\\Lambda(*)}P_{a,r}$. Define the required model by the actual composite\n$$v_{a,r}^*(h\\circ s_a)^*H\\xrightarrow{v_{a,r}^*e_a}v_{a,r}^*s_a^*M\\xrightarrow{\\theta_{a,r}}R_{V_{a,r}}\\otimes_{\\Lambda(*)}P_{a,r}.$$\nIts inverse is $v_{a,r}^*(e_a^{-1})\\circ\\theta_{a,r}^{-1}$. Thus the covers, scalar modules and their finite presentations are exactly the given ones. By clause 1 of [sk-def-sfb-constructible], these are finite constant local models on every old stratum.",
+   "uses": [
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+    "place": "paragraph (3), preservation of constructibility by retaining old scalar models and a zero complementary model; common restriction argument of original scalar-model immersion-extension proof steps 4–6"
+   }
+  },
+  {
+   "text": "The finite free module of rank zero is the empty biproduct, hence zero by the biproduct hom-extensionality principle. Compose its isomorphism with zero with the inverse of the canonical isomorphism from the cokernel of a zero morphism to its target. This supplies exactly the rank-zero presentation. The scalar-model pullback from the point preserves zero: pointUpperStar is a left adjoint and upperStarFromPoint preserves finite colimits, so its mapMod functor is additive. Apply the canonical mapZeroObject isomorphism. This is the zero case of the transport and scalar-extension functors of [sk-def-sfb-change-of-scalars].",
+   "uses": [
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+    "place": "paragraph (3), preservation of constructibility by retaining old scalar models and a zero complementary model; common restriction argument of original scalar-model immersion-extension proof steps 4–6"
+   }
+  },
+  {
+   "text": "Use the singleton identity cover $\\{\\mathrm{id}_Y:Y\\to Y\\}$: the identity is weakly étale, and each affine open covers itself, so this is a cover by [def-weil-pbc-proetale-site]. Write $\\gamma:k^*H\\xrightarrow{\\sim}0$ for the other supplied isomorphism. Even when restriction to the identity cover is written as the functor $F=(\\mathrm{id}_Y)^*$, its value at zero is zero: the pullback adjunction $F\\dashv(\\mathrm{id}_Y)_*$ of [sk-def-sfb-module-pushforward-pullback] identifies $\\operatorname{Hom}(F0,N)$ with $\\operatorname{Hom}(0,(\\mathrm{id}_Y)_*N)$, a singleton, and the same initial-object argument as in step 3 gives $F0\\cong0$. Compose $F\\gamma$ with this isomorphism and the inverse of the scalar-extension isomorphism from step 3. This supplies the required finite constant local model with scalar module $0$ on the identity cover of $Y$.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "sk-def-sfb-module-pushforward-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+    "place": "paragraph (3), preservation of constructibility by retaining old scalar models and a zero complementary model; common restriction argument of original scalar-model immersion-extension proof steps 4–6"
+   }
+  },
+  {
+   "text": "First use the private LocalModel structure to keep the concrete pullback predicate abstract. The generic cons_family lemma proves its assertion on the complementary-first family by Fin.cases, with explicit motives for both the scheme family and the dependent immersion family. The generic transfer_family lemma aligns the index counts by hE_n and eliminates hE_domain and hE_immersion as heterogeneous equalities. Projecting LocalModel.model gives the finite constant local models on every stratum of E. Package E as IsFiniteConstantStratified and apply the qcqs branch of [sk-def-sfb-constructible]. All three private helpers are proved; no new dependency is introduced.",
+   "uses": [
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+    "place": "paragraph (3), preservation of constructibility by retaining old scalar models and a zero complementary model; common restriction argument of original scalar-model immersion-extension proof steps 4–6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-module-upper-star-comp",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-change-of-scalars",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-module-pushforward-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+  "place": "paragraph (3), preservation of constructibility by retaining old scalar models and a zero complementary model; common restriction argument of original scalar-model immersion-extension proof steps 4–6; explicit functorial composition and rank-zero argument; B9 Lean proof uses empty-biproduct extensionality, cokernelZeroIsoTarget, mapZeroObject, and explicit transport of the index count"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A module sheaf with given restriction isomorphism on a locally closed part and zero restriction on its complement has the same finite constant scalar models on composite strata",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : TopCat} (F : TopCat.Presheaf CommRingCat X) {U₁ U₂ U₃ U₄ U₅ U₆ U₇ : TopologicalSpace.Opens ↑X} {n₁ n₂ : ℕ}\\n  {y₁ : ↑(F.obj (Opposite.op U₁))} {y₂ : ↑(F.obj (Opposite.op U₂))} {f : ↑(F.obj (Opposite.op (U₁ ⊔ U₂)))}\\n  {x : ↑(F.obj (Opposite.op U₃))} (h₄₁ : U₄ ≤ U₁) (h₄₂ : U₄ ≤ U₂) (h₅₁ : U₅ ≤ U\", \"doc\": \"Given a topological space $X$, a presheaf $F$ of commutative rings on $X$, and open subsets $U_1, U_2, U_3, U_4, U_5, U_6, U_7$ satisfying inclusion relations $U_4 \\\\subseteq U_1 \\\\cap U_2$, $U_5 \\\\subse\"}\n  {\"name\": \"ModuleCat.Tilde.res_const\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) (f : ↑M) (g : R)\\n  (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (hu : ∀ x ∈ U, g ∈ x.asIdeal.primeCompl)\\n  (V : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (hv : ∀ x ∈ V, g ∈ x.asIdeal.primeCompl)\\n  (i\", \"doc\": \"For an $R$-module $M$ and its associated sheaf $\\\\widetilde{M}$ over $\\\\operatorname{Spec}(R)$, if $U \\\\supseteq V$ are open subsets where $g \\\\in R$ is invertible (i.e., $g$ lies in the complement of all\"}\n  {\"name\": \"ModuleCat.Tilde.exists_const\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R)\\n  (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (s : ↑(M.tildeInModuleCat.obj (Opposite.op U))),\\n  ∀ x ∈ U,\\n    ∃ V,\\n      ∃ (_ : x ∈ V),\\n        ∃ i f g,\\n          ∃ (hg : ∀ x ∈ V, g ∈ x.asIdeal.primeCompl),\\n            Mo\", \"doc\": \"For any section $ s $ of the sheaf $ \\\\widetilde{M} $ over an open subset $ U \\\\subseteq \\\\operatorname{Spec}(R) $, and for any point $ x \\\\in U $, there exists an open neighborhood $ V \\\\subseteq U $ of $\"}\n  {\"name\": \"TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff\", \"module\": \"Mathlib/Topology/Sheaves/CommRingCat\", \"type\": \"∀ {X : TopCat} (F : TopCat.Sheaf CommRingCat X) {U V W UW VW : TopologicalSpace.Opens ↑X} (e : W ≤ U ⊔ V)\\n  (x :\\n    ↑{\\n        carrier :=\\n          ↥(((CommRingCat.Hom.hom (F.val.map (CategoryTheory.homOfLE ⋯).op)).comp\\n                  (RingHom.fst ↑(F.val.obj (Opposite.op U)) ↑(F.val.obj (Opposi\", \"doc\": \"For a sheaf $ F $ of commutative rings on a topological space $ X $, given open subsets $ U, V, W $ with $ W \\\\subseteq U \\\\cup V $, and elements $ x $ in the product of sections over $ U $ and $ V $, t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.ext_elem\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens} (f g : ↑(X.presheaf.obj (Opposite.op U))) (𝒰 : X.OpenCover),\\n  (∀ (i : 𝒰.I₀),\\n      (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.app (𝒰.f i) U)) f =\\n        (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.app (𝒰.\", \"doc\": \"Let $X$ be a scheme, $U$ an open subset of $X$, and $\\\\mathcal{U}$ an open cover of $X$. For any two sections $f, g$ of the structure sheaf over $U$, if the induced morphisms $\\\\mathcal{U}.f(i)$ agree o\"}\n  {\"name\": \"CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_isModule\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"∀ {P : TopCat → Prop} (R : Type (max u w)) [inst : Ring R] (X : ModuleCat R) (x : (CompHausLike P)ᵒᵖ),\\n  (((CompHausLike.LocallyConstantModule.functorToPresheaves R).obj X).obj x).isModule = LocallyConstant.instModule\", \"doc\": \"For any ring $R$ and compact Hausdorff-like space $S$, the module structure on the presheaf of locally constant functions $S \\to X$ induced by the functor coincides with the canonical $R$-module struct\"}\n  {\"name\": \"PresheafOfModules.Sheafify.instNonemptySMulCandidate\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.val)\\n  [CategoryTheory.Presheaf.IsLocallyInjective J α] [CategoryTheory.Presheaf.IsLocallySurjective J \", \"doc\": \"Given a category $\\\\mathcal{C}$ with Grothendieck topology $J$, a presheaf of rings $R_0$, its sheafification $R$, a presheaf of modules $M_0$ over $R_0$, and a sheaf of abelian groups $A$, there exist\"}\n  {\"name\": \"PresheafOfModules.Sheafify.instSubsingletonSMulCandidate\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.val)\\n  [CategoryTheory.Presheaf.IsLocallySurjective J α] {M₀ : PresheafOfModules R₀}\\n  {A : CategoryThe\", \"doc\": \"During the sheafification of a presheaf of modules over a presheaf of rings, the type of candidate scalar multiplication operations between sections of the sheafified ring and the sheafified module is\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local finite presentation permits arbitrary ring-sheaf coefficients and does not state retention of specified scalar models on composite strata"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sheaf of modules whose pullback to one part is a given constructible module and whose pullback to the complementary part is zero admits the same finite scalar local models on the extended stratification",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SheafOfModules, CategoryTheory.Functor",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.SheafOfModules'",
+   "date": "2026-10-22",
+   "verdict": "no match: local finite presentation permits arbitrary ring-sheaf coefficients and does not state retention of specified scalar models on composite strata"
+  },
+  {
+   "tool": "grep",
+   "query": "FiniteConstantLocalModel|ConstantModelConstructible|scalar.model.*stratif",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: local finite presentation permits arbitrary ring-sheaf coefficients and does not state retention of specified scalar models on composite strata"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite scalar presentations of sheaves on strata are unchanged under isomorphism of restrictions and the complementary zero sheaf has a rank zero scalar presentation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.Presentation.IsFinite\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n          \", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and conditions ensuring existence of sheafification, local bijectivity, and composition compatib\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of modules over $R$ is of finite presentation. Specifical\"}\n  {\"name\": \"SheafOfModules.Presentation.mk.inj\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} {inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat}\\n  {inst_2 : J.WEqualsLocallyBijective AddCommGrpCat}\\n  {inst_3 : J.HasSheafCompose (CategoryTheory.\", \"doc\": \"For a sheaf of modules over a ring sheaf on a category with a Grothendieck topology, if two presentations (defined by generating sections and relation sections) are equal, then their generating sectio\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, if $\\\\mathcal{M}$ satisfies the finite presentation condition (i.e., locally isomorphic to the coke\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"SheafOfModules.Presentation.map_relations_I\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.forg\", \"doc\": \"Given a sheaf of modules $ M $ over a ringed space with presentation $ P $, and a colimit-preserving functor $ F $ between sheaf categories equipped with a natural isomorphism $ \\\\eta $, the relations \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local finite presentation permits arbitrary ring-sheaf coefficients and does not state retention of specified scalar models on composite strata"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFinitePresentation",
+   "results": "[loogle] OK 5 hit(s)\n  {\"name\": \"SheafOfModules.IsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] (M : SheafOfModules R) : Prop\", \"doc\": \"A sheaf of modules is finitely presented if it is locally the cokernel of a\\nmorphism between coproducts of finitely many copies of the sheaf of rings.\"}\n  {\"name\": \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] (M : SheafOfModules R) [M.IsFinitePr\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] (M : SheafOfModules R) [M.IsFinitePr\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} {inst✝ : CategoryTheory.Category.{v₁, u₁} C} {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} {inst✝¹ : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat} {inst✝² : ∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat} (M : Sheaf\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] {M : SheafOfModules R} (exists_quasi\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local finite presentation permits arbitrary ring-sheaf coefficients and does not state retention of specified scalar models on composite strata"
+  },
+  {
+   "tool": "grep",
+   "query": "def IsFinitePresentation|def IsFinite|structure Presentation|constant|scalar",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"43\", \"line\": \"structure Presentation (M \", \"text\": \" SheafOfModules.{u} R) where\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local finite presentation permits arbitrary ring-sheaf coefficients and does not state retention of specified scalar models on composite strata"
+  },
+  {
+   "tool": "grep",
+   "query": "class IsFinitePresentation|structure Presentation|def IsFinite|abbrev IsFinite",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"line\": \"43\", \"text\": \"structure Presentation (M : SheafOfModules.{u} R) where\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"line\": \"236\", \"text\": \"class IsFinitePresentation {M : SheafOfModules.{u} R} (q : M.QuasicoherentData) : Prop where\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"line\": \"267\", \"text\": \"class IsFinitePresentation (M : SheafOfModules.{u} R) : Prop where\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"line\": \"273\", \"text\": \"abbrev isFinitePresentation : ObjectProperty (SheafOfModules.{u} R) :=\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local finite presentation permits arbitrary ring-sheaf coefficients and does not state retention of specified scalar models on composite strata"
+  },
+  {
+   "tool": "grep",
+   "query": "FiniteConstantLocalModel|ConstantModelConstructible|scalar.model.*stratif",
+   "results": "0 hits: none",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates concern ordinary constant sheaves, arbitrary ring-sheaf finite presentations, or scheme finite presentation; none states the specified scalar models on the extended stratification"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructibility of sheaves of modules is preserved by isomorphism on each stratum and the zero sheaf has a finite constant local model",
+   "results": "8 hits: CategoryTheory.Sheaf.isConstant_congr, AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp, SheafOfModules.mk.injEq, SheafOfModules.mk.inj, CategoryTheory.Sheaf.isConstant_of_iso, SheafOfModules.mk, PresheafOfModules.sheafifyMap.congr_simp, SheafOfModules.IsQuasicoherent.mk",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates concern ordinary constant sheaves, arbitrary ring-sheaf finite presentations, or scheme finite presentation; none states the specified scalar models on the extended stratification"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapIso, SheafOfModules.IsFinitePresentation",
+   "results": "0 hits: none",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates concern ordinary constant sheaves, arbitrary ring-sheaf finite presentations, or scheme finite presentation; none states the specified scalar models on the extended stratification"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constructible sheaf of modules with specified finite constant scalar models on a stratification retains exactly those models after isomorphic restriction, with zero model on a complementary stratum",
+   "results": "8 hits: ModuleCat.Tilde.res_const, ModuleCat.Tilde.exists_const, PresheafOfModules.Sheafify.instNonemptySMulCandidate, CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_isModule, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, PresheafOfModules.Sheafify.instSubsingletonSMulCandidate, CondensedMod.ofSheafCompHaus, SheafOfModules.IsFiniteType",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates concern ordinary constant sheaves, arbitrary ring-sheaf finite presentations, or scheme finite presentation; none states the specified scalar models on the extended stratification"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given an isomorphism h pullback H to M, compose the pullback composition isomorphism and functorial images to transfer local scalar presentations along a finite stratification",
+   "results": "8 hits: AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange, RingHom.finitePresentation_isLocal, Module.FinitePresentation.exists_lift_equiv_of_isLocalizedModule, AlgebraicGeometry.instLocallyOfFinitePresentationSndScheme, AlgebraicGeometry.instLocallyOfFinitePresentationResLE, AlgebraicGeometry.instLocallyOfFinitePresentationFstScheme, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation, Module.FinitePresentation.trans",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates concern ordinary constant sheaves, arbitrary ring-sheaf finite presentations, or scheme finite presentation; none states the specified scalar models on the extended stratification"
+  },
+  {
+   "tool": "grep",
+   "query": "isConstant_congr|class IsFinitePresentation|structure Presentation",
+   "results": "5 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Module/Presentation/Basic.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates concern ordinary constant sheaves, arbitrary ring-sheaf finite presentations, or scheme finite presentation; none states the specified scalar models on the extended stratification"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-scalar-model-immersion-extension",
+  "date": "2026-10-22",
+  "group": "NQ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "blueprint": {
+  "from": {
+   "node": "det-lem-integral-models-operations",
+   "place": "paragraph (3), preservation of constructibility by retaining old scalar models and a zero complementary model; common restriction argument of original scalar-model immersion-extension proof steps 4–6",
+   "via": [
+    "lem-sfb-scalar-model-immersion-extension"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-scalar-model-restriction-criterion",
+  "worker": "stage1",
+  "summary": "Kept the complete statement and specified scalar models. Wrote the restriction isomorphisms as explicit composites, checked their module linearity, constructed the rank-zero finite presentation and scalar-extension isomorphism by the existing adjunction, and applied the definition to the assumed extended stratification. No new node is necessary: each remaining inference is a short functorial or universal-property calculation from cited nodes.",
+  "blueprint": "det-lem-integral-models-operations, paragraph (3), constructibility of extension-by-zero reductions: retain the original scalar local models on the old strata and add the rank-zero model on the complementary stratum.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-d2b5490f2",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-d2b5490f2 (reviewer sub-agent of L); spot-checked: I read the whole delivery: a single commit with 0 new nodes, the statement byte-identical to the live side node (still unsplit there), not on the 2026-10-19 drop list, and no re-split note for this item. Source is blueprint main-20261015 sk-lem-integral-models-operations.proof.md paragraph (3): the old models are kept and the complement gets a zero model. Correctly marked agent-written. Parent check: step 3 of lem-sfb-scalar-model-immersion-extension applies the item twice, (j,i,F,j_!F) and (i,j,G,i_*G). The parent's steps 1–2 supply exactly the item's hypotheses (qcqs, extended constructible stratification, h^*H≅M, k^*H≅0). Steps: (1) def-sfb-module-upper-star-comp with f=s_a and g=h, then s_a^*β; its pullback has the same formula as sk-def-sfb-module-pushforward-pullback. (2) θ∘v^*e_a with the same covers and the same finitely presented P, an instance of clause 1 of sk-def-sfb-constructible. (3) The Ext⊣Res adjunction of sk-def-sfb-change-of-scalars clauses 2/4 makes R_Y⊗_A 0 initial, hence 0; the hypotheses of clause 2 are those already presupposed by the tensor in the definition. (4) {id_Y} is a covering in def-weil-pbc-proetale-site (id_Y flat with iso diagonal, affine opens cover themselves); (id)^*0≅0 by the adjunction. (5) Clause 2 of the definition applied to the assumed stratification; constructibility of the strata is a hypothesis, not a claim. Edge cases n=0, Y=∅, Λ=0 and nonreduced strata all go through. proof_deps equals the union of uses, all cited nodes are definition nodes, no SGA, no tool_uses. Searching the existing DAG found no node already stating this criterion. D1–D5 are fine: a short, genuine argument with justified elementary flags. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ScalarModelRestrictionCriterion",
+  "declaration": "AlgebraicGeometry.ProEtale.scalarModelRestrictionCriterion",
+  "file": "lean/Sheaf/Paper/ScalarModelRestrictionCriterion.lean",
+  "statement": "theorem scalarModelRestrictionCriterion (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] {T X Y : Scheme.{u}} [CompactSpace T] [QuasiSeparatedSpace T] [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y] (h : X ⟶ T) (k : Y ⟶ T) [IsImmersion h] [IsImmersion k] (_hdisjoint : Disjoint (Set.range h) (Set.range k)) (_hcover : Set.range h ∪ Set.range k = Set.univ) (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) (H : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)) (eh : (CondensedRing.upperStar Λ h).obj H ≅ M) (ek : (CondensedRing.upperStar Λ k).obj H ≅ 0) (S : Scheme.FiniteLocallyClosedStratification X) (E : Scheme.Stratification T) (hE_n : E.n = S.n + 1) (hE_domain : HEq E.domain (fun a : Fin (S.n + 1) ↦ Fin.cases (motive := fun _ ↦ Scheme.{u}) Y S.domain a)) (hE_immersion : HEq E.immersion (fun a : Fin (S.n + 1) ↦ Fin.cases (motive := fun b ↦ Fin.cases (motive := fun _ ↦ Scheme.{u}) Y S.domain b ⟶ T) k (fun b ↦ S.immersion b ≫ h) a)) (C : ∀ a : Fin S.n, Scheme.Cover.{u} Scheme.proetalePrecoverage (S.domain a)) (P : ∀ a : Fin S.n, (C a).I₀ → Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) Λ) (hP : ∀ (a : Fin S.n) (r : (C a).I₀), Mod.IsFinitelyPresented Λ (P a r)) (models : ∀ (a : Fin S.n) (r : (C a).I₀), (CondensedRing.upperStar Λ ((C a).f r)).obj ((CondensedRing.upperStar Λ (S.immersion a)).obj M) ≅ ((upperStarFromPoint ((C a).X r)).mapMod Λ).obj (P a r)) : (∀ a : Fin S.n, Nonempty ((CondensedRing.upperStar Λ (S.immersion a ≫ h)).obj H ≅ (CondensedRing.upperStar Λ (S.immersion a)).obj M)) ∧ (∀ (a : Fin S.n) (r : (C a).I₀), Nonempty ((CondensedRing.upperStar Λ ((C a).f r)).obj ((CondensedRing.upperStar Λ (S.immersion a ≫ h)).obj H) ≅ ((upperStarFromPoint ((C a).X r)).mapMod Λ).obj (P a r))) ∧ Nonempty ((0 : Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) Λ) ≅ cokernel (0 : Mod.finiteFree Λ 0 ⟶ Mod.finiteFree Λ 0)) ∧ Nonempty (((upperStarFromPoint Y).mapMod Λ).obj 0 ≅ 0) ∧ Nonempty ((CondensedRing.upperStar Λ (𝟙 Y)).obj ((CondensedRing.upperStar Λ k).obj H) ≅ ((upperStarFromPoint Y).mapMod Λ).obj 0) ∧ (∀ a : Fin E.n, HasFiniteConstantLocalModel Λ (E.domain a) ((CondensedRing.upperStar Λ (E.immersion a)).obj H)) ∧ IsConstantModelConstructible Λ T H",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-24cab3032",
+  "group": "N6",
+  "result": "pass",
+  "note": "Lean-only delivery: the node differs from live only in the lean field; lean.statement is verbatim the file signature. Every hypothesis and conclusion matches the node and the dependency records. qcqs and IsImmersion as in the conventions note. Commutative Λ is unbundled MonObj/IsCommMonObj. condensedRingObj, Mod and CondensedRing.upperStar are the recorded declarations. The old stratification is FiniteLocallyClosedStratification, so not stronger than the node. The extended stratification is Scheme.Stratification T, which has constructible strata, pinned by HEq to Fin.cases Y/k and S.domain/S.immersion≫h; a citer satisfies this with n := S.n+1 and HEq.rfl. Covers, P and models use the HasFiniteConstantLocalModel encoding verbatim. Conclusions: restriction isos; same-cover models; rank-zero presentation 0 ≅ coker(finiteFree 0 → finiteFree 0), the IsFinitelyPresented shape; scalar extension of 0 ≅ 0; zero model on 𝟙 Y; E adapted; IsConstantModelConstructible. Edge cases n=0, empty schemes, Λ=0 covered; no extra hypotheses; universes consistent. Parent scalarModelImmersionExtension can apply it. Docstrings carry source place, blueprint tag and the 5 proof steps. No definitions, proof is sorry. Advisory: redundant transitive import of ModuleObjects.ExtendScalars. No file changed, so no compile; the worker reports clean scompile."
+ },
+ "statement_change": {
+  "date": "2026-10-24",
+  "by": "B9 stage 2",
+  "old_statement": "Let $T,X,Y$ be quasi-compact quasi-separated schemes [def-weil-pbc-scheme-conventions], and let $h:X\\hookrightarrow T$ and $k:Y\\hookrightarrow T$ be immersions [def-weil-closed-immersion] with disjoint images covering $|T|$. Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring], put $R_W=\\Lambda_W$ [sk-def-sfb-pulled-back-coefficients], and use internal modules [sk-def-sfb-module-objects] and their module pullbacks [sk-def-sfb-module-pushforward-pullback]. Let $M$ be an $R_X$-module and $H$ an $R_T$-module, supplied with $R_X$-module and $R_Y$-module isomorphisms $h^*H\\cong M$ and $k^*H\\cong0$.\nLet $(s_a:X_a\\hookrightarrow X)_{a<n}$ be a finite stratification [def-constructible-stratification]. Assume that the family $(h\\circ s_a)_{a<n}$ together with $k$ is a finite stratification of $T$ with constructible locally closed images [def-weil-constructible-subset]. Fix, for each $a$, a pro-étale cover $\\{v_{a,r}:V_{a,r}\\to X_a\\}_r$, finitely presented $\\Lambda(*)$-modules $P_{a,r}$ and model isomorphisms $v_{a,r}^*s_a^*M\\cong R_{V_{a,r}}\\otimes_{\\Lambda(*)}P_{a,r}$ [sk-def-sfb-constructible].\nThen $(h\\circ s_a)^*H\\cong s_a^*M$ for every $a$, and the same covers and scalar modules give isomorphisms $v_{a,r}^*(h\\circ s_a)^*H\\cong R_{V_{a,r}}\\otimes_{\\Lambda(*)}P_{a,r}$. On the additional stratum $Y$, $k^*H$ has a finite constant local model on the identity cover with scalar module $0$, whose finite presentation is $\\Lambda(*)^0\\to\\Lambda(*)^0\\to0\\to0$ and whose scalar extension is zero. This specified extended stratification is adapted to $H$, so $H$ is constructible in the sense of [sk-def-sfb-constructible].",
+  "what": "Add the explicit count equality E.n = S.n+1 for the specified extended stratification, retaining the original two heterogeneous equalities of its domain and immersion functions. This supplies the count alignment needed for generic equality elimination. It states the intended complementary-first finite family and changes no target. The old Lean proposition is not counted as proved unchanged.",
+  "source": {
+   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+   "place": "paragraph (3), preservation of constructibility by retaining old scalar models and a zero complementary model; common restriction argument of original scalar-model immersion-extension proof steps 4–6"
+  },
+  "citers": [
+   {
+    "id": "lem-sfb-scalar-model-immersion-extension",
+    "holds": true,
+    "note": "Its extended stratification is constructed by adjoining one complementary stratum, with count n+1; the new Lean count equality is reflexivity. No current Lean application needs adaptation."
+   },
+   {
+    "id": "lem-sfb-open-extension-zero-constructible-finite-tor",
+    "holds": true,
+    "note": "Its extended stratification is constructed by adjoining one complementary stratum, with count n+1; the new Lean count equality is reflexivity. No current Lean application needs adaptation."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Write $\\beta:h^*H\\xrightarrow{\\sim}M$ for the supplied module isomorphism. For each $a$, evaluate the composition isomorphism of [def-sfb-module-upper-star-comp] at $H$, with $f=s_a$ and $g=h$, and compose with $s_a^*\\beta$. This gives\n$$e_a:(h\\circ s_a)^*H\\xrightarrow{\\sim}s_a^*h^*H\\xrightarrow{s_a^*\\beta}s_a^*M.$$\nThe second arrow is an isomorphism because applying the functor $s_a^*$ to $\\beta^{-1}$ gives its inverse: both composites are identities by preservation of composition and identities. Every arrow is in $\\operatorname{Mod}_{R_{X_a}}$, so this proves the first asserted restriction isomorphism without forgetting the module actions.",
+    "uses": [
+     "def-sfb-module-upper-star-comp"
+    ],
+    "elementary": true,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+     "place": "paragraph (3), preservation of constructibility by retaining old scalar models and a zero complementary model; common restriction argument of original scalar-model immersion-extension proof steps 4–6"
+    }
+   },
+   {
+    "text": "Denote the given model isomorphism on $V_{a,r}$ by $\\theta_{a,r}:v_{a,r}^*s_a^*M\\xrightarrow{\\sim}R_{V_{a,r}}\\otimes_{\\Lambda(*)}P_{a,r}$. Define the required model by the actual composite\n$$v_{a,r}^*(h\\circ s_a)^*H\\xrightarrow{v_{a,r}^*e_a}v_{a,r}^*s_a^*M\\xrightarrow{\\theta_{a,r}}R_{V_{a,r}}\\otimes_{\\Lambda(*)}P_{a,r}.$$\nIts inverse is $v_{a,r}^*(e_a^{-1})\\circ\\theta_{a,r}^{-1}$. Thus the covers, scalar modules and their finite presentations are exactly the given ones. By clause 1 of [sk-def-sfb-constructible], these are finite constant local models on every old stratum.",
+    "uses": [
+     "sk-def-sfb-constructible"
+    ],
+    "elementary": true,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+     "place": "paragraph (3), preservation of constructibility by retaining old scalar models and a zero complementary model; common restriction argument of original scalar-model immersion-extension proof steps 4–6"
+    }
+   },
+   {
+    "text": "Put $A=\\Lambda(*)$. The zero $A$-module has the stated finite presentation $A^0\\to A^0\\to0\\to0$: each term is zero and each image and kernel is zero. The constant sheaf $0_Y$ is the zero module sheaf, since all its sections and all its restriction maps are zero (the singleton section sets already satisfy the sheaf condition). Let $E=R_Y\\otimes_{A_Y}0_Y$. The extension--restriction adjunction in [sk-def-sfb-change-of-scalars], for the scalar ring map $A_Y\\to R_Y$, gives\n$$\\operatorname{Hom}_{R_Y}(E,N)\\cong\\operatorname{Hom}_{A_Y}(0_Y,\\operatorname{Res}N).$$\nFor every $N$ the right side contains exactly the zero morphism, so $E$ is initial. Consequently the unique maps $E\\to0$ and $0\\to E$ are inverse: their composites are the unique endomorphisms of the two initial objects and hence their identities. This proves the scalar-extension isomorphism $R_Y\\otimes_A0\\cong0$ used in the zero local model.",
+    "uses": [
+     "sk-def-sfb-change-of-scalars"
+    ],
+    "elementary": true,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+     "place": "paragraph (3), preservation of constructibility by retaining old scalar models and a zero complementary model; common restriction argument of original scalar-model immersion-extension proof steps 4–6"
+    }
+   },
+   {
+    "text": "Use the singleton identity cover $\\{\\mathrm{id}_Y:Y\\to Y\\}$: the identity is weakly étale, and each affine open covers itself, so this is a cover by [def-weil-pbc-proetale-site]. Write $\\gamma:k^*H\\xrightarrow{\\sim}0$ for the other supplied isomorphism. Even when restriction to the identity cover is written as the functor $F=(\\mathrm{id}_Y)^*$, its value at zero is zero: the pullback adjunction $F\\dashv(\\mathrm{id}_Y)_*$ of [sk-def-sfb-module-pushforward-pullback] identifies $\\operatorname{Hom}(F0,N)$ with $\\operatorname{Hom}(0,(\\mathrm{id}_Y)_*N)$, a singleton, and the same initial-object argument as in step 3 gives $F0\\cong0$. Compose $F\\gamma$ with this isomorphism and the inverse of the scalar-extension isomorphism from step 3. This supplies the required finite constant local model with scalar module $0$ on the identity cover of $Y$.",
+    "uses": [
+     "def-weil-pbc-proetale-site",
+     "sk-def-sfb-module-pushforward-pullback"
+    ],
+    "elementary": true,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+     "place": "paragraph (3), preservation of constructibility by retaining old scalar models and a zero complementary model; common restriction argument of original scalar-model immersion-extension proof steps 4–6"
+    }
+   },
+   {
+    "text": "The hypothesis already supplies the finite stratification of $T$ consisting of the composites $h\\circ s_a$ and $k$, including constructibility of all its locally closed images. Step 2 supplies a finite constant local model on each old stratum and step 4 supplies one on $Y$. Therefore this very stratification is adapted to $H$. Since $T$ is qcqs, clause 2 of [sk-def-sfb-constructible] applies directly and says that $H$ is constructible. No assertion that a locally closed subset of an arbitrary qcqs scheme is automatically constructible is needed.",
+    "uses": [
+     "sk-def-sfb-constructible"
+    ],
+    "elementary": true,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+     "place": "paragraph (3), preservation of constructibility by retaining old scalar models and a zero complementary model; common restriction argument of original scalar-model immersion-extension proof steps 4–6"
+    }
+   }
+  ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-92bb7",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261024T184643-L-3087952",
+  "kind": "interface",
+  "note": "independent cc review: delivered signature vs node lean.statement (equal); new hE_n vs node text, change record and both DAG citers (rfl at the intended construction); item+importer OpenExtensionConstructibleFiniteTor compiled together (exit 0); axioms = propext/Classical.choice/Quot.sound"
+ }
+}

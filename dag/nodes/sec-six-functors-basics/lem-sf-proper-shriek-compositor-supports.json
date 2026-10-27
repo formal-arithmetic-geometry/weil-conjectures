@@ -1,0 +1,125 @@
+{
+ "id": "lem-sf-proper-shriek-compositor-supports",
+ "kind": "statement",
+ "title": "Proper forget supports and the specified compact-support compositor",
+ "statement": "Let A be a finite commutative ring, p:W→X, f:X→S and h:W→S proper maps with w:p;f=h, and E any object of D(W_et,A). Write c_a:Ra!≅Ra* for the canonical proper comparison [def-sp-unbounded-proper-shriek-star-comparison], α! for the specifically constructed properRouteCompIso(A,p,f,h,w), and α* for the ordinary rightDerivedLowerStarCompIsoOfComp. Then α!⁻¹(E);c_h(E) = Rf!(c_p(E));c_f(Rp*E);α*(E). This compares only direct-image composition, without tensor, projection formula, or a cartesian square.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "First supported coordinate extraction before a trace; the coordinate triangle computation before applying its scalar trace"
+ },
+ "stmt_deps": [
+  "def-sp-unbounded-proper-shriek-star-comparison",
+  "def-sf-proper-supported-kunneth-route"
+ ],
+ "proof": [
+  {
+   "text": "Substitute h=p;f and expand the specific rightDerivedLowerShriekCompIso into its comparison of compactifications, the compactification-composition isomorphism, and the final comparison. Commute the latter comparison with forget supports using the proved rightDerivedLowerShriekOfCompactificationIso_hom_app_comp_toLowerStar.",
+   "uses": [
+    "def-sp-unbounded-proper-shriek-star-comparison",
+    "lem-sf-proper-refinement-forget-supports",
+    "lem-weil-derived-direct-image-composition",
+    "lem-asd-open-base-change-unit-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the compactification-composition isomorphism. Its factors are ordinary direct-image composition, open-extension composition and the open/proper exchange. Naturality of the open forget-supports adjunct and the composite counit formula show compatibility for open-extension composition. The proved rightDerivedLowerShriekOfCompactificationBaseChangeMap'_app_comp_toLowerStar gives the exchange compatibility. Cancel inverse compactification comparisons. Associativity of ordinary direct-image composition identifies the resulting path with the right side. Properness identifies all forget-supports transformations here with the recorded c_a.",
+   "uses": [
+    "def-sp-unbounded-proper-shriek-star-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-unbounded-proper-shriek-star-comparison",
+  "lem-sf-proper-refinement-forget-supports",
+  "lem-weil-derived-direct-image-composition",
+  "lem-asd-open-base-change-unit-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "First triangle, canonical mixed-counit transpose and proper forget-supports transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical composition isomorphism for derived direct image with proper support agrees with ordinary derived direct image through forget supports isomorphisms",
+   "results": "Eight underived sheaf direct-image compositor results, including Functor.sheafPushforwardContinuousComp and SheafOfModules.pushforwardComp. None compares the specified derived compact-support compositor with forget supports.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; retain the native compactification compositor compatibility substep."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "results": "Six component results, including Functor.map_comp, presheaf module map composition and PresheafedSpace.map_comp_c_app; none concerns compact supports.",
+   "date": "2026-10-27",
+   "verdict": "Functoriality is used in the algebra, but does not supply the missing comparison theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedLowerShriek.*[Cc]omp.*LowerStar|[Cc]omp.*forget[Ss]upport",
+   "results": "Zero Mathlib hits. Separate rg of the native derived source found refinement and exchange forget-supports equations, but no full compatibility of the specified compact-support compositor.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate of this residual statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SfSupportedFirstExtraction",
+  "date": "2026-10-27",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Inherited null ancestor; canonical-mate step of the first coordinate calculation.",
+   "via": [
+    "lem-sf-proper-relative-kunneth-supports",
+    "lem-sf-supported-first-extraction",
+    "lem-sf-supported-trace-contractions",
+    "lem-sf-diagonal-kernel-integral-triangles",
+    "lem-sf-affine-base-p1-trace-adjunction",
+    "lem-sf-affine-line-canonical-duality",
+    "lem-sf-smooth-dualizing-complex-invertible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperShriekCompSupports",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperShriekCompSupports.lean",
+  "declaration": "AlgebraicGeometry.Etale.properShriekComp_comp_forgetSupports",
+  "statement": "theorem properShriekComp_comp_forgetSupports {W X S : Scheme.{u}}\n    (p : W ⟶ X) (f : X ⟶ S) (h : W ⟶ S) (w : p ≫ f = h)\n    [IsProper p] [IsProper f] [IsProper h] (E : DerivedCategoryModule A W) :\n    (properRouteCompIso A p f h w).inv.app E ≫\n        (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} A) h).hom.app E =\n      (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).map\n          ((rightDerivedLowerShriekIsoRightDerivedLowerStar\n            (ModuleCat.{u + 1} A) p).hom.app E) ≫\n        (rightDerivedLowerShriekIsoRightDerivedLowerStar\n          (ModuleCat.{u + 1} A) f).hom.app\n            ((lowerStar (ModuleCat.{u + 1} A) p).rightDerivedFunctor.obj E) ≫\n        (rightDerivedLowerStarCompIsoOfComp\n          (ModuleCat.{u + 1} A) p f h w).hom.app E",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261027T135445-L-3710236",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261027T135445-L-3710236",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

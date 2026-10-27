@@ -1,0 +1,134 @@
+{
+ "id": "lem-sf-native-weil-tensor-constraint-lifts",
+ "kind": "statement",
+ "title": "Lifting individual native tensor constraints into a faithful ringed model",
+ "statement": "Fix k₀, ℓ, X, M, η, hη, S, β, hmonoidal, hS, T, a, ha, τ and hτ with precisely the hypotheses of [lem-sf-native-weil-tensor-adjoints, def-sf-native-weil-closed-models, def-coef-ringed-tensor-hom-model]. Write C=D(ProEtaleWeilSheaf k₀ ℓ X), D for the ordinary derived category, F for nativeForget, U=single₀(adicConstant), V=single₀(ordinaryUnit), and ζ:F(U)≅V for the fixed mapDerivedCategorySingleFunctor comparison. There are individual isomorphisms α:(A⊗B)⊗D≅A⊗(B⊗D), λ:U⊗A≅A, ρ:A⊗U≅A, and b:A⊗B≅B⊗A for tensor bifunctor T. Form raw MonoidalCategoryStruct operations from these, with exactly T.map on pairs of arrows and identity-arrow pairs. There are a model monoidal structure m₀ and symmetry β₀ on the category ULift C and a faithful plain functor E:C→ULift C, together with Monoidal.InducingFunctorData comparing these raw operations to m₀; the image of b is the conjugate of β₀ by its tensorators. There are ε:S.unit≅V and Monoidal.InducingFunctorData for F from the same raw operations to S.monoidal. Its tensor isomorphism is exactly τ inverse; its unit isomorphism inverse is ζ followed by ε inverse; F(b) followed by τ equals τ followed by β. No naturality, pentagon, triangle, hexagon, or involutivity law for the raw operations is asserted. Equivalently, TensorConstraintLifts F T U V ζ S.monoidal β τ is nonempty.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Internal-Hom/evaluation/transposition paragraph; associator, unit and symmetry descent in native tensor lift step 2. Stacks 06YS and 0FPT (lemma-symmetric-monoidal-derived)."
+ },
+ "stmt_deps": [
+  "lem-sf-native-weil-tensor-adjoints",
+  "def-sf-native-weil-closed-models",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the normalized action-site closed symmetric monoidal model W and its tensor comparison t, independent of the supplied T. Fixed-representative uniqueness identifies its Hom comparison chi with eta.",
+   "uses": [
+    "lem-sf-native-weil-ringed-tensor-model",
+    "lem-sf-native-hom-representative-uniqueness"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each K use Adjunction.leftAdjointUniq to compare a K with the slice adjunction of W. Counit parameter naturality on both sides makes these isomorphisms natural in K, hence a bifunctor isomorphism e:T≅W.tensor. The unit identity for leftAdjointUniq, naturality of eta and ordinary uncurrying show tau inverse followed by F(e) equals t inverse. Thus tau=F(e) followed by t.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Conjugate the individual associator, unitors and swap of W by e and its unit identification, keeping exactly T.map as tensorHom and whiskerings. Induce the monoidal structure on these operations along the identity into W and compose its strong monoidal structure with the ULift equivalence for the faithful model. The TensorCoherence equations for t give the strong monoidal forgetful structure; composition with the induced identity structure gives forgetData with tensorator tau inverse and the required unit. The symmetry equation follows by cancellation and the model symmetry square. No coherence axiom for the raw operations is presupposed.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-native-weil-ringed-tensor-model",
+  "lem-sf-native-hom-representative-uniqueness"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "E6: geometric steps 1 and 3 isolated before T; fixed-representative uniqueness and all adjoint comparison, conjugation and faithful model assembly proved in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport a symmetric monoidal category structure to a naturally isomorphic tensor bifunctor on the same category",
+   "results": "Found CategoryTheory.Monoidal.Transported.instSymmetricCategory, CategoryTheory.Mon.instSymmetricCategory, CategoryTheory.symmetricCategoryOfFullyFaithful, CategoryTheory.SymmetricCategory, CategoryTheory.SymmetricCategory.ofFullyFaithful, CategoryTheory.SymmetricCategory.toBraidedCategory, CategoryTheory.Monoidal.Transported.instBraidedCategory, CategoryTheory.Monoidal.instBraidedTransportedFunctorEquivalenceTransported. Monoidal.induced and BraidedCategory.ofFaithful prove the formal coherence laws; no result lifts native geometric constraints with the fixed unit-mate normalization.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction.leftAdjointUniq\"",
+   "results": "Found CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq_refl, CategoryTheory.Adjunction.leftAdjointUniq_inv_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_counit, CategoryTheory.Adjunction.leftAdjointUniq_trans, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit_assoc. Monoidal.induced and BraidedCategory.ofFaithful prove the formal coherence laws; no result lifts native geometric constraints with the fixed unit-mate normalization.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Monoidal.*[Ii]so|[Ii]so.*Monoidal",
+   "results": "Found Mathlib/Algebra/Category/ModuleCat/Adjunctions.lean, Mathlib/Algebra/Category/ModuleCat/Adjunctions.lean, Mathlib/Algebra/Category/ModuleCat/Adjunctions.lean, Mathlib/Algebra/Category/ModuleCat/Adjunctions.lean, Mathlib/Algebra/Category/ModuleCat/Adjunctions.lean, Mathlib/LinearAlgebra/QuadraticForm/QuadraticModuleCat/Monoidal.lean, Mathlib/LinearAlgebra/QuadraticForm/QuadraticModuleCat/Monoidal.lean, Mathlib/LinearAlgebra/QuadraticForm/QuadraticModuleCat/Monoidal.lean. Monoidal.induced and BraidedCategory.ofFaithful prove the formal coherence laws; no result lifts native geometric constraints with the fixed unit-mate normalization.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A faithful functor from raw tensor operations into a symmetric monoidal category induces the monoidal and symmetric coherence laws",
+   "results": "Found CategoryTheory.Monoidal.induced, CategoryTheory.Monoidal.fromInducedMonoidal, CategoryTheory.SymmetricCategory.ofFullyFaithful, CategoryTheory.symmetricCategoryOfFullyFaithful, CategoryTheory.Monoidal.fromInducedCoreMonoidal, CategoryTheory.MonoidalCategory.tensorMonoidal, CategoryTheory.BraidedCategory.ofFaithful, CategoryTheory.Monoidal.InducingFunctorData.mk. These supply formal faithful induction after the raw lifts; none supplies the native geometric lifts with fixed unit-mate and representative normalization.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeWeilTensorCoherence",
+  "date": "2026-10-27",
+  "group": "A9"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-coef-verdier-weil-equivariance",
+   "place": "Internal-Hom/evaluation/transposition paragraph; individual associator, unit and signed-swap lifts and their images, before faithful verification of coherence axioms.",
+   "via": [
+    "lem-sf-native-weil-tensor-coherence",
+    "lem-sf-native-weil-tensor-lift",
+    "lem-sf-weil-native-tensor-transport",
+    "lem-sf-weil-native-closed-forgetful"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeWeilTensorConstraintLifts",
+  "file": "lean/Sheaf/Paper/NativeWeilTensorConstraintLifts.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.native_weil_tensor_constraint_lifts",
+  "declarations": [
+   "CategoryTheory.TensorConstraintCandidate",
+   "CategoryTheory.TensorConstraintCandidate.operations",
+   "CategoryTheory.TensorConstraintLifts",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.native_weil_tensor_constraint_lifts"
+  ],
+  "statement": "theorem native_weil_tensor_constraint_lifts\n    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]\n    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]\n    [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]\n    (M : NativeClosedHomModels k₀ l X)\n    (η : M.weilHom ⋙ nativeForget k₀ l X ≅\n      (nativeForget k₀ l X).op.prod (nativeForget k₀ l X) ⋙ M.ordinaryHom)\n    (hη : NativeHomRepresentativeCompatibility (ihomBifunctor k₀ l X)\n      (ordinaryIhomBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)\n      M.weilHom M.ordinaryHom M.weilRepresentatives M.ordinaryRepresentatives\n      (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)) η)\n    (S : CoefficientClosedStructure M.ordinaryHom)\n    (β : @SymmetricCategory _ _ S.monoidal)\n    (hmonoidal : S.monoidal = (inferInstance : MonoidalCategory\n      (DerivedCategory (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber))))\n    (hS : NativeOrdinaryTensorModels l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber\n      M.ordinaryHom M.ordinaryRepresentatives S β)\n    (T : (DerivedCategory (ProEtaleWeilSheaf k₀ l X)) ×\n      DerivedCategory (ProEtaleWeilSheaf k₀ l X) ⥤\n        DerivedCategory (ProEtaleWeilSheaf k₀ l X))\n    (a : ∀ K : DerivedCategory (ProEtaleWeilSheaf k₀ l X),\n      Prod.sectL _ K ⋙ T ⊣ Prod.sectR (op K) _ ⋙ M.weilHom)\n    (ha : ∀ (K K' L : DerivedCategory (ProEtaleWeilSheaf k₀ l X)) (f : K' ⟶ K),\n        T.map (X := (M.weilHom.obj (op K, L), K'))\n            (Y := (M.weilHom.obj (op K', L), K'))\n            (M.weilHom.map (X := (op K, L)) (Y := (op K', L)) (f.op, 𝟙 L), 𝟙 K') ≫\n              (a K').counit.app L =\n          T.map (X := (M.weilHom.obj (op K, L), K'))\n            (Y := (M.weilHom.obj (op K, L), K))\n            (𝟙 (M.weilHom.obj (op K, L)), f) ≫ (a K).counit.app L)\n    (τ : T ⋙ nativeForget k₀ l X ≅\n        (nativeForget k₀ l X).prod (nativeForget k₀ l X) ⋙ S.tensor)\n    (hτ : ∀ A K : DerivedCategory (ProEtaleWeilSheaf k₀ l X),\n        τ.inv.app (A, K) =\n          (S.transpose ((nativeForget k₀ l X).obj A) ((nativeForget k₀ l X).obj K)\n            ((nativeForget k₀ l X).obj (T.obj (A, K)))).symm\n              ((nativeForget k₀ l X).map ((a K).unit.app A) ≫\n                η.hom.app (op K, T.obj (A, K)))) :\n    Nonempty (TensorConstraintLifts (nativeForget k₀ l X) T\n      ((DerivedCategory.singleFunctor _ 0).obj (adicConstant k₀ l X))\n      ((DerivedCategory.singleFunctor _ 0).obj\n        (ProEtale.AdicSheaf.unit l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber))\n      ((Functor.mapDerivedCategorySingleFunctor\n        (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)) 0).app\n          (adicConstant k₀ l X)) S.monoidal β τ)",
+  "branch": "sheaf-dag",
+  "by": "A9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261026T235830-L-1458723",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261027T012823-L-2335970",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

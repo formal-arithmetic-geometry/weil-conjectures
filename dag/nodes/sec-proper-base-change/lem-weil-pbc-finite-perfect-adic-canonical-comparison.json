@@ -18,42 +18,37 @@
  ],
  "proof": [
   {
-   "text": "Split each finite-projective term from a finite free A-module using Mathlib Module.Finite.exists_comp_eq_id_of_projective, whose maps satisfy f.comp g = id. This includes rank zero and does not require A Noetherian. Apply constant sheafification and scalar extension to its splitting matrices. Form ordinary completed and finite coefficient realizations with their actual quotient maps. Naturality in linear maps makes differentials and transitions commute, constructing T and c and their compatible finite-free retracts.",
+   "text": "Construct ordinary completed constant realization H and the tower obtained by tensoring H(P) termwise with the actual coefficient diagram. Its cone has point H(P), and the actual coefficient projections after the inverse right unitor. Tensor naturality proves commutation with every differential; mapping the coefficient cone and extending along the inverse right unitor proves all transition equations. These are explicit definitions in FinitePerfectAdicFreeTensorCone.",
    "uses": [
-    "lem-weil-pbc-constant-module-section-properties",
-    "def-weil-pbc-adic-coefficient-datum"
+    "lem-weil-pbc-finite-perfect-adic-free-tensor-cone"
    ],
    "elementary": false
   },
   {
-   "text": "Use flatness of the completed coefficient algebra and its normalized finite reductions. Bounded projectivity and exact constant sheafification compute derived realization on the ordinary bounded flat complex. The finite quotient comparison and constant-realization/scalar-extension mate identify the level complexes naturally, including all differentials and quotient maps. Transport the coefficient universe through its explicit lifts and ring equivalences.",
+   "text": "For each term P^j use Mathlib Module.Finite.exists_comp_eq_id_of_projective to obtain maps g:P^j→A^r and f:A^r→P^j with g followed by f equal to the identity. Map these under H and under its tensor diagram functor. The finite-free normalization provides e and e0 identifying the free diagram and cone with the finite powers of the coefficient diagram and unit. Define the diagram inclusion by O(H(g)) followed by e, and its projection by e inverse followed by O(H(f)); do the same at the cone point with e0. Functoriality and cancellation of the isomorphisms prove both splittings. Tensor-projection naturality and the free cone equation give the inclusion square; cancel e0 and e to obtain its inverse equation, then compose with f to get the projection square. Thus every degree has the required compatible retract.",
    "uses": [
-    "lem-weil-pbc-completed-constant-sheaf-reduction",
-    "lem-sfb-constant-realization-derived-scalar-extension"
+    "lem-weil-pbc-finite-perfect-adic-free-tensor-cone",
+    "lem-weil-pbc-finite-perfect-adic-coefficient-limit"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the proved choice-independence theorem finitePerfectAdicQuotientDiagram_changeAdjunction: uniqueness of left adjoints identifies the supplied L_n with actual derived scalar extension while preserving units and the whole canonical diagram. Combine it with the levelwise tensor comparisons from the preceding step. The ordinary-to-derived comparison on the bounded flat representative identifies the cone point with completed derived realization. No limit assertion enters this construction.",
+   "text": "Projective modules are flat. Apply the bounded-flat tensor comparison to P and the given bounds. Its two isomorphisms compare the explicitly constructed diagram and point with the canonical derived quotient diagram and completed derived realization. Pair them with the degreewise compatible retracts. The original statement and all chosen adjunctions are unchanged.",
    "uses": [
-    "lem-weil-pbc-derived-module-scalar-adjunction",
-    "lem-weil-pbc-finite-perfect-adic-quotient-diagram"
+    "lem-weil-pbc-finite-perfect-adic-flat-tensor-comparison"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-adic-coefficient-datum",
-  "lem-sfb-constant-realization-derived-scalar-extension",
-  "lem-weil-pbc-completed-constant-sheaf-reduction",
-  "lem-weil-pbc-constant-module-section-properties",
-  "lem-weil-pbc-derived-module-scalar-adjunction",
-  "lem-weil-pbc-finite-perfect-adic-quotient-diagram"
+  "lem-weil-pbc-finite-perfect-adic-coefficient-limit",
+  "lem-weil-pbc-finite-perfect-adic-flat-tensor-comparison",
+  "lem-weil-pbc-finite-perfect-adic-free-tensor-cone"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 09C6, the finite-projective quotient and cone comparison preceding the inverse-limit calculation; Modules on Sites, Tags 093J--093M; More on Algebra, Tag 09AW."
+  "place": "Tag 09C6, the finite-projective coefficient calculation: explicit ordinary tensor cone, finite-free normalization and termwise split retracts; bounded-flat derived comparison separated from the finite-projective splitting."
  },
  "mathlib_searches": [
   {
@@ -138,14 +133,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W3",
+  "group": "M8",
   "result": "pass",
-  "landing": "20261021T012429-L-2190159",
+  "landing": "20261027T034712-L-3676432",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

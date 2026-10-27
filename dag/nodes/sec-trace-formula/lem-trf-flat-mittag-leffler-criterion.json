@@ -25,7 +25,7 @@
    }
   },
   {
-   "text": "Conversely, assume the least-submodule property for every finite free $F$. The flat-tensor exactness statement [lem-weil-pbc-flat-tensor-exact], applied at each term of a short exact sequence including its zero endpoints, shows that $-\\otimes_R M$ preserves short exact sequences. Thus [lem-kun-lazard-flat-module] gives a small nonempty directed partially ordered set $I$, finite free modules $(M_i,f_{ij})$, and canonical maps $f_i:M_i\\to M$ exhibiting $M$ as their colimit [def-weil-pbc-category-colimit].",
+   "text": "Conversely, assume the least-submodule property for every finite free $F$. Given a short exact sequence $0\\to A\\to B\\to C\\to0$, apply [lem-weil-pbc-flat-tensor-exact] at $A$, $B$ and $C$, including the zero endpoints. Thus $-\\otimes_R M$ preserves short exact sequences, using the given flatness [def-weil-pbc-flat-ring-map]. By [lem-kun-lazard-flat-module], $M$ has a presentation by a small nonempty directed poset $I$, finite free modules $(M_i,f_{ij})$, and compatible colimit maps $f_i:M_i\\to M$ [def-weil-pbc-category-colimit].",
    "uses": [
     "def-weil-pbc-flat-ring-map",
     "lem-weil-pbc-flat-tensor-exact",
@@ -39,45 +39,36 @@
    }
   },
   {
-   "text": "Fix $i$. For $j\\ge i$ let $Q_j$ be the image of precomposition $\\operatorname{Hom}_R(M_j,R)\\to\\operatorname{Hom}_R(M_i,R)$. Put $H=\\operatorname{Hom}_R(M_i,R)$. For a basis $(e_a)$ of $M_i$, the inverse to $H\\otimes_R N\\to\\operatorname{Hom}_R(M_i,N)$, $h\\otimes n\\mapsto(v\\mapsto h(v)n)$, sends $g$ to $\\sum_a e_a^*\\otimes g(e_a)$, for any $N$. Choose also a basis $(b_s)$ of $M_j$ and write $f_{ij}=\\sum_s h_s\\otimes b_s$. The $h_s=b_s^*f_{ij}$ generate $Q_j$. The identification $H\\otimes_R M_j\\simeq\\bigoplus_s H$ identifies the image of $G\\otimes_R M_j$ with $\\bigoplus_s G$ for every submodule $G\\subseteq H$. Consequently that image contains $f_{ij}$ exactly when every $h_s$ lies in $G$, equivalently $Q_j\\subseteq G$. This proves the least-submodule characterization of $Q_j$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 059S proof, paragraph beginning \"Since $M_i$ is free and finite\"."
-   }
-  },
-  {
-   "text": "The same finite-free identification puts the canonical map $f_i:M_i\\to M$ in $\\operatorname{Hom}_R(M_i,R)\\otimes_R M$. By the assumed least-submodule property there is a smallest submodule $Q\\subseteq\\operatorname{Hom}_R(M_i,R)$ with $f_i\\in Q\\otimes_R M$. Compatibility $f_i=f_jf_{ij}$ shows that $f_i$ lies in $Q_j\\otimes_R M$ for every $j\\ge i$, so minimality gives $Q\\subseteq Q_j$. Thus the decreasing family $(Q_j)_{j\\ge i}$ all contains $Q$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 059S proof, paragraph beginning \"Under the identification\" through \"we have $Q\\subset Q_j$\"."
-   }
-  },
-  {
-   "text": "Write $H=\\operatorname{Hom}_R(M_i,R)$. The tensor-colimit comparison [lem-weil-pbc-tensor-commutes-with-colimits], using the elementary symmetry $h\\otimes m\\leftrightarrow m\\otimes h$, gives $H\\otimes_R M=\\operatorname{colim}_j(H\\otimes_R M_j)$ and $Q\\otimes_R M=\\operatorname{colim}_j(Q\\otimes_R M_j)$. Finite free modules are flat: under $N\\otimes_R R^r\\simeq N^r$, tensoring an injection is a componentwise injection. Thus [lem-weil-pbc-flat-tensor-exact] makes each $Q\\otimes_R M_j\\to H\\otimes_R M_j$ injective. By [lem-weil-pbc-filtered-colimit-modules-elementwise], choose $t\\in Q\\otimes_R M_l$ mapping to $f_i$. Its image and $f_{ii}\\in H\\otimes_R M_i$ have equal colimit images, so the same cited equality criterion gives a common stage $j\\ge l,i$ where their images agree. Hence $f_{ij}$ belongs to the image of $Q\\otimes_R M_j$. Step 3 gives $Q_j\\subseteq Q$, while Step 4 gives $Q\\subseteq Q_j$, so $Q_j=Q$. For every $k\\ge j$, composition of precomposition maps gives $Q_k\\subseteq Q_j$, and Step 4 gives $Q\\subseteq Q_k$. Therefore $Q_k=Q$ for every $k\\ge j$.",
+   "text": "Fix $i\\in I$ and put $H=\\operatorname{Hom}_R(M_i,R)$. By [lem-trf-finite-free-map-coefficient-support], $H$ is finite free and the natural isomorphisms $\\Phi_N$ give tensors $x_i=\\Phi_{M_i}^{-1}(1_{M_i})$, $x_j=\\Phi_{M_j}^{-1}(f_{ij})$, and $x=\\Phi_M^{-1}(f_i)$. Naturality gives $x_j=(1_H\\otimes f_{ij})x_i$ and $x=(1_H\\otimes f_i)x_i$. For each $j\\ge i$, the same lemma says that $Q_j=\\operatorname{im}(\\operatorname{Hom}_R(M_j,R)\\to H)$ is the least support of $x_j$; here precomposition sends $\\lambda$ to $\\lambda\\circ f_{ij}$. For $k\\ge j\\ge i$, compatibility $f_{ik}=f_{jk}f_{ij}$ and naturality also give $x_k=(1_H\\otimes f_{jk})x_j$.",
    "uses": [
-    "lem-weil-pbc-tensor-commutes-with-colimits",
-    "lem-weil-pbc-filtered-colimit-modules-elementwise",
-    "lem-weil-pbc-flat-tensor-exact"
+    "lem-trf-finite-free-map-coefficient-support"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 059S proof, paragraph beginning \"Since the $Q_j$ are decreasing\" through the conclusion that the $Q_j$ stabilize."
+    "place": "Tag 059S (lemma-flat-ML-criterion), finite-free dual tensor paragraph."
    }
   },
   {
-   "text": "Therefore, for every $i$, the inverse system of duals $(\\operatorname{Hom}_R(M_i,R),\\operatorname{Hom}_R(f_{ij},R))$ is Mittag-Leffler. The dual criterion [lem-trf-flat-ml-dual-criterion] then implies that $M$ is Mittag-Leffler in the tensor-product sense.",
+   "text": "Apply the assumed least-submodule property to the finite free module $H$ and $x$, obtaining its least support $Q$. Apply [lem-trf-directed-tensor-least-support-stabilization] to $(M_j,f_{jk})$, $H$, $i$, $x_i$, and the least supports $Q_j$ from Step 3. It gives $Q\\subseteq Q_j$ for all $j\\ge i$ and an index $j_0\\ge i$ with $Q_k=Q_{j_0}=Q$ for every $k\\ge j_0$. Thus the images of the precomposition maps into $\\operatorname{Hom}_R(M_i,R)$ stabilize for every $i$.",
+   "uses": [
+    "lem-trf-directed-tensor-least-support-stabilization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059S (lemma-flat-ML-criterion), commutative square and final stabilization paragraph."
+   }
+  },
+  {
+   "text": "The small nonempty directed finite-free presentation of Step 2, the original flatness of $M$, and stabilization from Step 4 satisfy every hypothesis of [lem-trf-flat-ml-dual-criterion]. It follows that $M$ is Mittag-Leffler. Together with Step 1 this proves the equivalence.",
    "uses": [
     "lem-trf-flat-ml-dual-criterion"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 059S proof, first sentence after the stabilization argument, invoking Tag 059G (remark-flat-ML)."
+    "place": "Tag 059S (lemma-flat-ML-criterion), reduction to Tag 059G (remark-flat-ML)."
    }
   }
  ],
@@ -85,11 +76,11 @@
   "def-weil-pbc-category-colimit",
   "def-weil-pbc-flat-ring-map",
   "lem-kun-lazard-flat-module",
+  "lem-trf-directed-tensor-least-support-stabilization",
+  "lem-trf-finite-free-map-coefficient-support",
   "lem-trf-flat-ml-dual-criterion",
   "lem-trf-flat-ml-minimal-support",
-  "lem-weil-pbc-filtered-colimit-modules-elementwise",
-  "lem-weil-pbc-flat-tensor-exact",
-  "lem-weil-pbc-tensor-commutes-with-colimits"
+  "lem-weil-pbc-flat-tensor-exact"
  ],
  "proof_origin": {
   "by": "document",
@@ -197,11 +188,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-flat-mittag-leffler-criterion",
   "worker": "stage1",
-  "summary": "Read Stacks Tag 059S together with its supporting Tags 0AS6 (least tensor-supporting submodule) and 059G (dual Hom-system criterion). The forward implication is one application of the least-support lemma. The reverse implication uses flatness and Lazard to obtain a directed finite-free presentation, the finite-free Hom/tensor coordinate calculation, stabilization of the least coefficient submodules by tensor-colimit and elementwise filtered-colimit detection, and the dual criterion. The statement and hypotheses are unchanged; two genuine supporting lemmas were added as statement-only nodes.",
-  "blueprint": "Realizes the inherited ancestor proof route through the Tag 059S flat Mittag-Leffler criterion, including its forward least-submodule argument and reverse finite-free Lazard/Hom-system stabilization.",
+  "summary": "Repair of landing return d3950d429ab (2026-10-23 12:33 UTC): rebuilt the parent from the current read-clone DAG and overlaid only proof, proof_deps and split_report. Retained both approved statement-only supporting nodes and all logged searches and handoff arguments. Reopened every current cited statement: all eight step/node quotation entries remain exact. Made the transition compatibility for the same tensor representatives explicit in step 3, so the directed stabilization application visibly uses the compatible system. Stacks 059S, 0AS6 and 059G, the released repair note and the current blueprint ancestry were reread; rank-zero, zero-divisor and vanishing-transition cases checked. Statement, statement dependencies and all maintainer-owned metadata preserved.",
+  "blueprint": "Same inherited ancestor semistable-alteration supporting-algebra route via Tag 059S: old step 3 and naturality/injectivity portions of 4--5 go to the finite-free coefficient-support node; old steps 4--5 go to the directed stabilization node; old 1, 2 and 6 remain in the assembly.",
   "tool_uses": [
    {
     "node": "lem-kun-lazard-flat-module",
@@ -213,12 +204,12 @@
   "lem-kun-lazard-flat-module"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-Codex-Q82-3fb8ba1f0",
-  "group": "Q82",
+  "reviewer": "NT-cc-Q106-0d675dd69",
+  "group": "Q106",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q82-3fb8ba1f0 (reviewer sub-agent of L); spot-checked: Read all three nodes and checked every step against Stacks 059S, 0AS6 and 059G. Repaired the countable-only ML citation, malformed TeX arrows, and missing Lazard tool declaration. Mathematical argument, edge cases, duplicate checks and dependency checks pass. Full findings in review.md; corrected JSON files under fixes/dag/nodes/sec-trace-formula/.; 3 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-0d675dd69 (reviewer sub-agent of L); spot-checked: This is the 9th head of the Q106 re-split, pushed after the side-promotion landing refusal. The two new nodes (lem-trf-finite-free-map-coefficient-support and lem-trf-directed-tensor-least-support-stabilization) are byte-identical to the approved head d3950. The item differs from d3950 only in split_report and one added step-3 sentence: x_k=(1_H⊗f_jk)x_j for k≥j≥i. That sentence is correct: it follows from f_ik=f_jk f_ij and the coefficient node's naturality clause with v=f_jk, and it matches the stabilization node's definition of x_k. I reread Stacks algebra.tex:21881 (Tag 059S, lemma-flat-ML-criterion) in full. Step-by-step check: step 1 uses minimal-support for every E (the forward direction). In step 2, flat-tensor exactness applied at 0→A→B, A→B→C and B→C→0 gives Lazard's short-exact-sequence hypothesis, and Lazard gives a small nonempty directed presentation by finite free modules. In step 3, the coefficient node with P=M_i, E=M_j, u=f_ij makes Q_j the least support of x_j. In step 4, the item's hypothesis applies to F=H because H is finite free, and the stabilization node gives Q_k=Q for all k≥j0. In step 5, the dual criterion's ∀i∃j∀k≥j hypothesis is met exactly. proof_deps equals the union of uses. All six external cited statements equal clones/live. Both new statements are true and self-contained; I tested rank 0, the zero ring, multiplication by a zero divisor (support aR), a singleton index set and a vanishing transition. Neither node restates the parent, the two carry old steps 3–5 at comparable size, and a duplicate search with rg -L found no duplicates. No SGA source is used. Live and side-live still carry the old 6-step proof and neither new id, so the item is not superseded. Maintainer note: the content was approved before; landing only needs to promote the side completion."
  },
  "lean": {
   "module": "Sheaf.SecTraceFormula.FlatMittagLefflerCriterion",
@@ -239,5 +230,16 @@
   "result": "fix",
   "note": "Read the node, the three statement dependencies, Stacks 059M/0AS6/059S, Module.IsMittagLeffler (universes u v w t) and the delivered module and report (both report sections present). The clauses match the node, but two free universes made the statement false at some instantiations (H3). (1) IsMittagLeffler's index universe was auto-bound and free: below R's universe the predicate is weaker, and the forward direction fails (the fraction field of a valuation domain whose value group has cofinality at least |Type 0| passes it with no least support for 1). Pinned to IsMittagLeffler.{u, v, max u s, t}. (2) F : Type w with w free: below R's universe only n = 0 occurs, so the reverse direction would make every flat module ML. Pinned to F : Type (max u w). No generality is lost (ULift transfers to smaller universes; the finite-free condition is invariant under transport). The docstring now gives the node's six proof steps. Fixes: fixes/FlatMittagLefflerCriterion.lean and fixes/lem-trf-flat-mittag-leffler-criterion.report.md; the record's statement is refit from the file. nt_compile: delivered file clean in 2.3 s (#check showed the free universes), fixed file clean in 1.9 s. No duplicates; citers use the item only as a proof dependency; gates pass (sorry only, no hollow definitions, docstrings, imports, no build)."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

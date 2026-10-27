@@ -1,0 +1,338 @@
+{
+ "id": "lem-sfb-space-schematic-near-height-one",
+ "kind": "statement",
+ "title": "Schematic neighborhoods at points of local dimension at most one",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $X$ be an algebraic space over $S$ [def-trf-algebraic-space] whose diagonal $X\\to X\\times_SX$ is representable by closed immersions [def-weil-closed-immersion]. Assume that $X$ is locally Noetherian, meaning that every etale scheme chart is locally Noetherian [pqf-def-locnoeth, def-weil-etale-morphism]. Let $a:V\\to X$ be an etale morphism from a scheme, and $v\\in V$, such that $\\dim\\mathcal O_{V,v}\\leq1$, with ring dimension as in [def-weil-pbc-krull-dimension-ring]. Then there is an open subspace $U\\subseteq X$ containing $a(v)$ which is represented by an $S$-scheme. An open subspace means a subfunctor whose pullback along every map from a scheme is an open immersion [def-weil-open-immersion]. No bound on the global dimension of $X$ or on the dimension of $S$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-over-fields.tex",
+  "place": "Tag 0ADD, lemma-codim-1-point-in-schematic-locus. Codimension is the local-ring dimension, equivalently computed on any etale scheme chart, as in spaces-properties.tex, definition-dimension-local-ring."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-closed-immersion",
+  "pqf-def-locnoeth",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-open-immersion",
+  "def-a1-algebraic-space-point-classes"
+ ],
+ "proof": [
+  {
+   "text": "Put $x=a(v)$. By [lem-sfb-space-local-dimension-chart-invariance], the chart hypothesis gives $\\delta_X(x)\\leq1$. Choose an open neighbourhood $Z$ of $x$ admitting a surjective etale map $T\\to Z$ with $T$ affine and with $Z\\to S$ factoring through an affine open $S_0\\subseteq S$, by [lem-a1-space-affine-atlas-open-cover]. The open $Z$ is quasi-compact by [lem-a1-space-etale-open-image] and locally Noetherian: any etale scheme chart of $Z$ is also an etale chart of $X$. Its diagonal over $S_0$ is the restriction of that of $X/S$ and is closed on scheme tests: pullbacks of closed immersions are closed immersions [lem-weil-pbc-closed-immersion-base-change]. For affine etale charts $A,B\\to Z$, $A\\times_ZB$ is therefore a closed subscheme of the affine scheme $A\\times_{S_0}B$; it is affine and quasi-compact [def-weil-closed-immersion, lem-weil-pbc-affine-scheme-qcqs]. Viewing $Z$ as an absolute algebraic space by [lem-sfb-space-change-base-to-integers], the affine-pair criterion [lem-sfb-etale-affine-pairs-test-quasiseparated] makes it absolutely quasi-separated. Thus $Z$ is Noetherian. Restricting the given pointed chart to $Z$ leaves its stalk at $v$ unchanged, so $\\delta_Z(x)\\leq1$.",
+   "uses": [
+    "lem-sfb-space-local-dimension-chart-invariance",
+    "lem-a1-space-affine-atlas-open-cover",
+    "lem-a1-space-etale-open-image",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-space-change-base-to-integers",
+    "lem-sfb-etale-affine-pairs-test-quasiseparated",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "Tag 0ADD, lemma-codim-1-point-in-schematic-locus, first paragraph, reduction to a quasi-compact separated Noetherian neighbourhood; affine-base refinement uses Properties of Spaces 03FY"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-qcqs-space-finite-scheme-cover] over $S_0$ to obtain a scheme $Y$ and a finite surjective $f:Y\\to Z$. Put $P=Y\\times_ZT$. This is a scheme finite over $T$, while $P\\to Y$ is surjective etale by [lem-trf-space-fibre-products-etale-covers]. The affine scheme $T$ is locally Noetherian by the hypothesis on $X$. A finite morphism is locally of finite type: on affines finite module generators are also algebra generators [def-weil-finite-integral-morphism]. Hence [pqf-lem-locnoeth-lft] gives that $P$ is locally Noetherian. Etale-local descent [lem-trf-etale-local-noetherian-descent] applied to $P\\to Y$ proves that $Y$ is locally Noetherian.",
+   "uses": [
+    "lem-sfb-qcqs-space-finite-scheme-cover",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-weil-finite-integral-morphism",
+    "pqf-lem-locnoeth-lft",
+    "lem-trf-etale-local-noetherian-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "Tag 0ADD, lemma-codim-1-point-in-schematic-locus, first paragraph, finite scheme cover (Limits of Spaces 09YC); source Noetherianity checked by Morphisms 01T6 and Descent 034C"
+   }
+  },
+  {
+   "text": "The finite morphism $f$ is integral on every scheme test by [pqf-lem-finite-integral-lft]. Thus [lem-sfb-space-integral-qcqs-permanence] makes $f$ separated. Composing with the separated map $Z\\to S_0$ gives a separated scheme morphism $Y\\to S_0$ by [lem-sfb-space-separated-fp-composition]. Since $S_0$ is affine, [lem-sc-separated-over-affine-scheme-separated] proves absolute separatedness of $Y$. This is the separatedness required for the absolute groupoid lemma below; no separatedness of the original base $S$ has been used.",
+   "uses": [
+    "pqf-lem-finite-integral-lft",
+    "lem-sfb-space-integral-qcqs-permanence",
+    "lem-sfb-space-separated-fp-composition",
+    "lem-sc-separated-over-affine-scheme-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "Tag 0ADD, lemma-codim-1-point-in-schematic-locus, first paragraph, separatedness of the scheme covering the affine-base neighbourhood"
+   }
+  },
+  {
+   "text": "By [lem-sfb-finite-space-morphism-topology], $f$ is locally quasi-finite. Applying [lem-sfb-space-local-ring-dimension-quasifinite] at each $y\\in f^{-1}(x)$ gives $\\dim\\mathcal O_{Y,y}\\leq\\delta_Z(x)\\leq1$. Only the local dimensions at points of this fibre are bounded; no dimension bound for all of $Y$ or $Z$ is needed.",
+   "uses": [
+    "lem-sfb-finite-space-morphism-topology",
+    "lem-sfb-space-local-ring-dimension-quasifinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "Tag 0ADD, lemma-codim-1-point-in-schematic-locus, first paragraph, dimension bound from Decent Spaces 0ABW"
+   }
+  },
+  {
+   "text": "Form the scheme $R=Y\\times_ZY$ using diagonal representability [def-trf-algebraic-space]. The projections $s,t$ are finite by [lem-sfb-finite-space-morphism-topology]. This is an absolute groupoid [def-a1-groupoid-scheme]: on test schemes its arrows are pairs $(b,c)$ with $f(b)=f(c)$, with identity $(b,b)$, inverse $(c,b)$, and composition $((b,c),(c,d))\\mapsto(b,d)$. These formulas verify the groupoid laws. Choose $y\\in f^{-1}(x)$ by surjectivity. Its orbit equals $f^{-1}(x)$: every arrow has equal image under $f$, and conversely any two points over $x$ lift to a point of $Y\\times_ZY$ by [lem-a1-space-fibre-product-point]. Steps 2--4 supply local Noetherianity, absolute separatedness and the local dimension bounds on this orbit. Apply [lem-sfb-finite-groupoid-height-one-affine-open] to get an affine open $W\\subseteq Y$ containing the orbit and satisfying $s^{-1}(W)=t^{-1}(W)$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-finite-space-morphism-topology",
+    "def-a1-groupoid-scheme",
+    "lem-a1-space-fibre-product-point",
+    "lem-sfb-finite-groupoid-height-one-affine-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "Tag 0ADD, lemma-codim-1-point-in-schematic-locus, first paragraph and second paragraph, applying More on Groupoids 0ABI to the finite equivalence relation"
+   }
+  },
+  {
+   "text": "For $w\\in W$ and $y\\in Y$ with $f(y)=f(w)$, [lem-a1-space-fibre-product-point] supplies an arrow between them. Invariance of $W$ forces $y\\in W$. Thus $f^{-1}(f(W))=W$. Since $f$ is closed and surjective [lem-sfb-finite-space-morphism-topology], $|Z|\\setminus f(W)=f(|Y|\\setminus W)$ is closed. The open-subspace correspondence [lem-a1-space-etale-open-image] gives an open subspace $Z^{\\prime}\\subseteq Z$ with point set $f(W)$. By [lem-a1-space-point-open-calculus], the pullback $Y\\times_ZZ^{\\prime}$ is the open subscheme with point set $W$, hence equals $W$. Therefore $W\\to Z^{\\prime}$ is a base change of $f$, finite and surjective, and $x\\in|Z^{\\prime}|$.",
+   "uses": [
+    "lem-a1-space-fibre-product-point",
+    "lem-sfb-finite-space-morphism-topology",
+    "lem-a1-space-etale-open-image",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "Tag 0ADD, lemma-codim-1-point-in-schematic-locus, second paragraph, descending the invariant open via closed surjectivity"
+   }
+  },
+  {
+   "text": "The continuous surjection $W\\to Z^{\\prime}$ has quasi-compact source because $W$ is affine [lem-weil-pbc-affine-scheme-qcqs]; pull back any open cover and take a finite subcover. Hence $Z^{\\prime}$ is quasi-compact. It is locally Noetherian by restriction, and is quasi-separated since it is a quasi-compact open subspace of the quasi-separated space $Z$ [lem-sfb-space-integral-qcqs-permanence]. Thus it is Noetherian. Apply [lem-sfb-noetherian-space-finite-affine-descent] to the finite surjection $W\\to Z^{\\prime}$ to obtain an affine scheme representing $Z^{\\prime}$. The composite open subspace $Z^{\\prime}\\subseteq Z\\subseteq X$ contains $x$. Its representing scheme has the induced map to $S_0\\subseteq S$, so it is the required $S$-scheme neighbourhood.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-space-integral-qcqs-permanence",
+    "lem-sfb-noetherian-space-finite-affine-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "Tag 0ADD, lemma-codim-1-point-in-schematic-locus, second paragraph, finite affine descent (Cohomology of Spaces 07VP) and conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-local-dimension-chart-invariance",
+  "lem-a1-space-affine-atlas-open-cover",
+  "lem-a1-space-etale-open-image",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sfb-space-change-base-to-integers",
+  "lem-sfb-etale-affine-pairs-test-quasiseparated",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-sfb-qcqs-space-finite-scheme-cover",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-finite-integral-morphism",
+  "pqf-lem-locnoeth-lft",
+  "lem-trf-etale-local-noetherian-descent",
+  "pqf-lem-finite-integral-lft",
+  "lem-sfb-space-integral-qcqs-permanence",
+  "lem-sfb-space-separated-fp-composition",
+  "lem-sc-separated-over-affine-scheme-separated",
+  "lem-sfb-finite-space-morphism-topology",
+  "lem-sfb-space-local-ring-dimension-quasifinite",
+  "def-trf-algebraic-space",
+  "def-a1-groupoid-scheme",
+  "lem-a1-space-fibre-product-point",
+  "lem-sfb-finite-groupoid-height-one-affine-open",
+  "lem-a1-space-point-open-calculus",
+  "lem-sfb-noetherian-space-finite-affine-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-over-fields.tex",
+  "place": "Tag 0ADD, lemma-codim-1-point-in-schematic-locus, main finite-groupoid proof; first restrict to an affine open of the arbitrary base using Properties of Spaces 03FY."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "schematic|AlgebraicSpace|codim.*scheme",
+   "results": "{\"t\": \"2026-10-24T11:45:31Z\", \"tool\": \"grep\", \"query\": \"schematic|AlgebraicSpace|codim.*scheme\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are already-schematic local Noetherian or separated schemes and a locally ringed space gluing criterion; none gives a schematic neighborhood in an algebraic space"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A separated algebraic space is a scheme near points of codimension zero or one",
+   "results": "{\"t\": \"2026-10-24T11:45:31Z\", \"tool\": \"leansearch\", \"query\": \"A separated algebraic space is a scheme near points of codimension zero or one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsSeparated\", \"AlgebraicGeometry.Scheme.IsSeparated.mk\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated\", \"AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift\", \"AlgebraicGeometry.Scheme.isSeparated_iff\", \"AlgebraicGeometry.isSeparated_iff\", \"AlgebraicGeometry.IsSeparated\", \"AlgebraicGeometry.IsSeparated.hasAffineProperty\"], \"digest\": \"8ff785f5b7b5d408\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are already-schematic local Noetherian or separated schemes and a locally ringed space gluing criterion; none gives a schematic neighborhood in an algebraic space"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsNoetherian\"",
+   "results": "{\"t\": \"2026-10-24T11:45:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicSpace\\\", \\\"IsNoetherian\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are already-schematic local Noetherian or separated schemes and a locally ringed space gluing criterion; none gives a schematic neighborhood in an algebraic space"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open neighborhood in a separated algebraic space of a codimension one point is representable by a scheme",
+   "results": "{\"t\": \"2026-10-24T11:45:36Z\", \"tool\": \"leanfinder\", \"query\": \"An open neighborhood in a separated algebraic space of a codimension one point is representable by a scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.scheme\", \"AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated\", \"AlgebraicGeometry.Scheme.IsSeparated\", \"AlgebraicGeometry.Scheme.local_affine\", \"AlgebraicGeometry.instIsPreimmersionFromSpecStalk\", \"AlgebraicGeometry.instT0SpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField\"], \"digest\": \"fa83009b72df9d6f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are already-schematic local Noetherian or separated schemes and a locally ringed space gluing criterion; none gives a schematic neighborhood in an algebraic space"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Separated locally Noetherian algebraic spaces have scheme open neighborhoods at all points whose local ring has dimension at most one",
+   "results": "{\"t\": \"2026-10-24T11:45:37Z\", \"tool\": \"leanfinder\", \"query\": \"Separated locally Noetherian algebraic spaces have scheme open neighborhoods at all points whose local ring has dimension at most one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace\", \"AlgebraicGeometry.IsLocallyNoetherian\", \"AlgebraicGeometry.instIsLocallyNoetherianToScheme\", \"AlgebraicGeometry.IsLocallyArtinian\", \"AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero\", \"AlgebraicGeometry.IsLocallyArtinian.isLocallyNoetherian\", \"AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian\", \"AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian\"], \"digest\": \"a486a5f1399f397b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are already-schematic local Noetherian or separated schemes and a locally ringed space gluing criterion; none gives a schematic neighborhood in an algebraic space"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|schematic.*(locus|neigh)|codimension.*scheme",
+   "results": "{\"t\": \"2026-10-24T12:16:12Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|schematic.*(locus|neigh)|codimension.*scheme\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: only already-schematic Noetherian, Artinian or separated scheme results; none proves schematicity near a point of an algebraic space"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Separated algebraic spaces are schemes in codimension one",
+   "results": "{\"t\": \"2026-10-24T12:16:12Z\", \"tool\": \"leansearch\", \"query\": \"Separated algebraic spaces are schemes in codimension one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsSeparated\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated\", \"AlgebraicGeometry.isSeparated_iff\", \"AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated\", \"AlgebraicGeometry.IsSeparated\", \"AlgebraicGeometry.isSeparated_of_injective\", \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift\"], \"digest\": \"11354e6ac0b658be\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: only already-schematic Noetherian, Artinian or separated scheme results; none proves schematicity near a point of an algebraic space"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsSeparated\"",
+   "results": "{\"t\": \"2026-10-24T12:16:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicSpace\\\", \\\"IsSeparated\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: only already-schematic Noetherian, Artinian or separated scheme results; none proves schematicity near a point of an algebraic space"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separated locally Noetherian algebraic space is represented by a scheme in an open neighborhood of every point of local ring dimension at most one",
+   "results": "{\"t\": \"2026-10-24T12:16:14Z\", \"tool\": \"leanfinder\", \"query\": \"A separated locally Noetherian algebraic space is represented by a scheme in an open neighborhood of every point of local ring dimension at most one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsLocallyNoetherian\", \"AlgebraicGeometry.IsLocallyArtinian\", \"AlgebraicGeometry.IsLocallyArtinian.isLocallyNoetherian\", \"AlgebraicGeometry.IsNoetherian\", \"AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian\", \"AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier\", \"AlgebraicGeometry.isLocallyNoetherian_Spec\", \"AlgebraicGeometry.Scheme.local_affine\"], \"digest\": \"ef86d4d54315c92d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: only already-schematic Noetherian, Artinian or separated scheme results; none proves schematicity near a point of an algebraic space"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Points of codimension zero or one in a separated Noetherian algebraic space belong to its schematic locus",
+   "results": "{\"t\": \"2026-10-24T12:16:45Z\", \"tool\": \"leanfinder\", \"query\": \"Points of codimension zero or one in a separated Noetherian algebraic space belong to its schematic locus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace\", \"AlgebraicGeometry.IsLocallyNoetherian\", \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.IsLocallyArtinian\", \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\"], \"digest\": \"7394894c39051116\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: only already-schematic Noetherian, Artinian or separated scheme results; none proves schematicity near a point of an algebraic space"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-group-space-fpqc-scheme-cover",
+  "date": "2026-10-24",
+  "group": "Q30"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), inherited trait-group schematicity input; Anantharaman 3.4.1 proof, use of 3.3.1 to obtain a schematic open meeting the special fibre",
+   "via": [
+    "lem-sfb-flat-group-space-fpqc-scheme-cover",
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-schematic-near-height-one",
+  "worker": "stage1",
+  "summary": "Followed the finite-groupoid proof of Stacks 0ADD. Kept the arbitrary-base and pointwise local-dimension statement. Reused existing finite cover, chart invariance, local quasi-finite dimension inequality, topology and Noetherian finite affine descent. Added the absolute 0ABI invariant-affine-open statement, because the existing 0ABI node assumes a field. Checked source Noetherianity by etale descent and absolute separatedness after the affine-base restriction.",
+  "blueprint": "Historical prerequisite of det-thm-sf-ctf-stability-direct-images proof (3), via the inherited trait-group schematicity chain; current latest blueprint proof (3) retains the proper/open compactification route. This node supplies the 0ADD local schematicity input, not a replacement of a unit step. blueprint_refs.py ancestor returns None, retained as inherited; same_as searches found no blueprint equivalent.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic quasi-compactness of affine schemes, used for affine chart tests and the final open image."
+   },
+   {
+    "node": "lem-trf-etale-local-noetherian-descent",
+    "why": "Generic etale descent of local Noetherianity from the scheme pullback of the finite cover; this unit has no substitute."
+   },
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Generic local Noetherianity of a finite scheme over the locally Noetherian atlas."
+   },
+   {
+    "node": "lem-sc-separated-over-affine-scheme-separated",
+    "why": "Generic passage from separatedness over an affine scheme to absolute separatedness; necessary for the absolute groupoid lemma."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic scheme base change of the closed diagonal, tested on schemes; no unit proof is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-trf-etale-local-noetherian-descent",
+  "pqf-lem-locnoeth-lft",
+  "lem-sc-separated-over-affine-scheme-separated",
+  "lem-weil-pbc-closed-immersion-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-0b72d8cbc",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-0b72d8cbc (reviewer sub-agent of L); spot-checked: Read Stacks 0ADD (spaces-over-fields.tex ll.1439-1484, main finite-groupoid proof) and 0ABI (more-groupoids.tex). The item statement is identical to live, so it was not weakened, and it matches 0ADD hypothesis by hypothesis. This is the item's first split, not a re-split. New node lem-sfb-finite-groupoid-height-one-affine-open is exactly the absolute statement of 0ABI and is true. Its orbit is t(s^-1 u); the invariance condition s^-1W=t^-1W is the same as Stacks' t(s^-1W) subset of W. It is a statement-only node with correct definition citations. The only same-tag node, lem-sfb-finite-groupoid-codimension-one-invariant-affine, assumes a groupoid over a field K, so it cannot apply to Y separated over an arbitrary affine S_0; the new node is a necessary generalization, not a restatement of the item. Advisory: the field node is now a special case of it. Steps 1-7: (1) chart invariance 0BAM, affine-base open 03FY, closed diagonal by base change, affine-pair qs test 0AHR after change of base, so Z is Noetherian. (2) 09YC finite cover; source locally Noetherian via finite => locally finite type, 01T6 and etale descent 034C. (3) finite => integral => separated; composite with Z->S_0, then affine base gives absolute separatedness. (4) locally quasi-finite plus 0ABW bounds dim at every point over x. (5) R=YxY is a finite groupoid whose orbit is the fibre (03H4); apply the new node. (6) saturation, closed surjective map gives f(W) open, pullback equals W via the point-open calculus. (7) Z' qc+qs+loc Noetherian, then 07VP gives Z' affine. Every cited statement says what the step takes from it. Batch-5 check: every flagged citation reaches the trace-formula chapter only through the general definition def-trf-algebraic-space, or is a general fact (02X2 fibre products, 034C descent). None is a step of the trace formula or Poincare duality, so all are accepted. Tool_uses (affine qcqs, 034C, 01T6, separated over affine, 01QR) are accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceSchematicNearHeightOne",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_scheme_open_of_stalk_dimension_le_one",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceSchematicNearHeightOne.lean",
+  "statement": "theorem exists_scheme_open_of_stalk_dimension_le_one {S : Scheme.{u}} (X : AlgebraicSpace S) (hsep : IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) (prod.lift (𝟙 X.obj.obj) (𝟙 X.obj.obj))) (hnoeth : ∀ (T : Over S) (t : yoneda.obj T ⟶ X.obj.obj), IsEtale t → IsLocallyNoetherian T.left) (V : Over S) (a : yoneda.obj V ⟶ X.obj.obj) (ha : IsEtale a) (v : V.left) (hdim : ringKrullDim (V.left.presheaf.stalk v) ≤ (1 : WithBot ℕ∞)) : ∃ (U : Over S) (j : yoneda.obj U ⟶ X.obj.obj), IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) j ∧ schemePointMap a v ∈ Set.range (schemePointMap j)",
+  "branch": "newtargets-dag",
+  "by": "Q67",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-24fa3395e",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0ADD clause by clause: hsep = relative diagonal over S (prod in presheaves on Over S) representable by closed immersions; hnoeth = every étale chart locally Noetherian, no surjectivity required; étale pointed chart with ringKrullDim of the stalk ≤ 1; conclusion ∃ S-scheme U with j representable by open immersions (a mono, so an open subspace represented by a scheme; same form as the landed exists_dense_scheme_open) and a(v) in the range of schemePointMap j; not required affine, no global dimension or base assumptions. Node diff vs live: only the added stmt_dep def-a1-algebraic-space-point-classes (landed; Point/schemePointMap used). lean.statement matches the file verbatim; imports exist; one sorry; docstrings carry source, blueprint and all 7 proof steps; report has both sections. Edge cases: empty V/X vacuous, dim 0 included, single universe u. No compile run since no file was changed."
+ }
+}

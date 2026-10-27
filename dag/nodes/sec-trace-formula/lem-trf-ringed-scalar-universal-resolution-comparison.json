@@ -1,0 +1,307 @@
+{
+ "id": "lem-trf-ringed-scalar-universal-resolution-comparison",
+ "kind": "statement",
+ "title": "Universal ring-sheaf scalar extension with normalized resolution comparisons",
+ "statement": "Let $\\mathcal C$ be a site small relative to a chosen module universe, $\\mathcal O,\\mathcal O'$ sheaves of commutative rings on it, and $\\varphi:\\mathcal O\\to\\mathcal O'$ a ring-sheaf homomorphism. Use the abelian categories of module sheaves [def-weil-sheaf-of-modules-category], their unbounded homotopy and derived categories [def-weil-abstract-derived-category], and localization functors $Q:K(\\mathcal O)\\to D(\\mathcal O)$ and $Q':K(\\mathcal O')\\to D(\\mathcal O')$ in sufficiently large universes. Let $T$ be termwise sheaf extension of scalars $-\\otimes_{\\mathcal O}\\mathcal O'$ [def-pur-sheaf-tensor-product] and put $F=Q'T$. Let $\\mathcal P$ be the class of all K-flat $\\mathcal O$-complexes [def-pc-kflat-complex], without a termwise-flatness restriction. Then $F$ is an exact functor of triangulated categories, every complex has a resolution from $\\mathcal P$, and $F$ inverts every quasi-isomorphism between members of $\\mathcal P$. There exists a pair $(L,\\varepsilon)$ with $L:D(\\mathcal O)\\to D(\\mathcal O')$ exact and $\\varepsilon:LQ\\to F$ natural, such that for every functor $H:D(\\mathcal O)\\to D(\\mathcal O')$ the map $\\alpha\\mapsto\\varepsilon\\circ(\\alpha Q)$ is a bijection $\\operatorname{Nat}(H,L)\\cong\\operatorname{Nat}(HQ,F)$, and $\\varepsilon_P$ is invertible for every $P\\in\\mathcal P$. Its functor agrees with the derived change of rings of [lem-pur-derived-change-of-rings] through the unique isomorphism respecting the universal counits.\n\nFor any such universal pair and any K-flat resolution $q:P\\to X$, the morphism\n$$\\theta_q=\\varepsilon_P\\circ L(Qq)^{-1}:L(QX)\\xrightarrow{\\sim}F(P)$$\nis an isomorphism in $D(\\mathcal O')$ and $\\varepsilon_X=F(q)\\circ\\theta_q$. If $q':P'\\to X'$, $a:X\\to X'$ and $b:P\\to P'$ obey $q'b=aq$, then $F(b)\\circ\\theta_q=\\theta_{q'}\\circ L(Qa)$. For two resolutions of the same $X$, the canonical comparison is $\\theta_{q'}\\circ\\theta_q^{-1}$; these comparisons are compatible with augmentation to $F(X)$ and satisfy the identity and three-resolution cocycle equations. These formulas hold for every universal pair, via its unique counit-compatible isomorphism, and impose neither flatness of $\\varphi$ nor boundedness of complexes.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 06XN (lemma-find-existence-computes), dual assertion and equation-everywhere; sites-cohomology.tex Tag 06YY (lemma-derived-base-change), proof in the fixed-site change-of-rings case. Explicit counit normalization for the ring-sheaf theorem lem-pur-derived-change-of-rings."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-kflat-complex",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof": [
+  {
+   "text": "Write $E(M)=M\\otimes_{\\mathcal O}\\mathcal O'$ for ordinary sheaf scalar extension. It is additive: on presheaf tensor generators, $((f+g)\\otimes1)(m\\otimes s)=f(m)\\otimes s+g(m)\\otimes s$, and the zero-map formula is the same calculation; the equalities extend by linearity and sheafification. The sheaf-module categories are abelian by [def-weil-sheaf-of-modules-category], since the site is small relative to the module universe. Thus [lem-trf-additive-homotopy-triangulated] applies to $E$, giving the termwise functor $T=K(E)$ with its canonical exact triangulated structure. The localization $Q'$ is exact by [lem-pur-homotopy-category-triangulated], so $F=Q'T$ is exact. Here additivity comes from the actual sheafified tensor construction [def-pur-sheaf-tensor-product]; exactness on the abelian module categories is unnecessary.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-sheaf-of-modules-category",
+    "lem-trf-additive-homotopy-triangulated",
+    "lem-pur-homotopy-category-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014X (lemma-additive-exact-homotopy-category); sites-cohomology.tex Tag 06YY, opening of proof"
+   }
+  },
+  {
+   "text": "Take $\\mathcal P$ to be all K-flat complexes, with the resolution convention of [def-pc-kflat-complex]. The resolution of any $X$ supplied by [lem-pc-kflat-resolution] has K-flat source, so belongs to $\\mathcal P$; the stronger flat-terms conclusion of that lemma need not be imposed on other members of $\\mathcal P$. For every quasi-isomorphism $s:P\\to P'$ with $P,P'\\in\\mathcal P$, [lem-pur-change-of-rings-kflat-quasi-iso] applies to this actual additive $E$ and makes $T(s)$ a quasi-isomorphism. Since $Q'$ is localization at quasi-isomorphisms [def-weil-abstract-derived-category], $F(s)$ is invertible. These statements apply to arbitrary unbounded complexes and arbitrary $\\varphi$.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "lem-pc-kflat-resolution",
+    "lem-pur-change-of-rings-kflat-quasi-iso",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution) and 06YT (lemma-derived-tor-quasi-isomorphism-other-side); fixed-site specialization of Tag 06YY"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-left-derived-from-kflat-class] with $\\mathcal A=\\operatorname{Mod}(\\mathcal O)$, target $D(\\mathcal O')$, the exact $F$ of step 1, and the class of step 2. Its two hypotheses are precisely the resolution and inversion assertions just proved. It gives an exact $L:D(\\mathcal O)\\to D(\\mathcal O')$ and $\\varepsilon:LQ\\to F$, with $\\varepsilon_P$ invertible for every $P\\in\\mathcal P$. Its right-Kan universal property says that each natural transformation $HQ\\to F$ factors through $\\varepsilon$ by a unique $H\\to L$. This is exactly the stated bijection, with the map $\\alpha\\mapsto\\varepsilon\\circ(\\alpha Q)$, for every functor $H$; no exactness of $H$ is required.",
+   "uses": [
+    "lem-pur-left-derived-from-kflat-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XN (lemma-find-existence-computes), dual part; equation-everywhere and Tag 05SE (proposition-derived-functor)"
+   }
+  },
+  {
+   "text": "Let $(M,\\eta)$ be another universal pair for the same $F,Q$, in particular the left derived change of rings of [lem-pur-derived-change-of-rings]. Universality gives unique $u:L\\to M$ and $v:M\\to L$ with $\\eta\\circ(uQ)=\\varepsilon$ and $\\varepsilon\\circ(vQ)=\\eta$. Consequently $vu$ and $1_L$ have the same composite with $\\varepsilon$ after precomposition by $Q$, so injectivity in the universal property gives $vu=1_L$; likewise $uv=1_M$. This proves the unique counit-compatible isomorphism. It also shows that any pair satisfying the universal property inherits invertibility of its counit on every K-flat complex from the pair of step 3. Thus the next calculations may start with any universal pair.",
+   "uses": [
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05S9 (definition-right-derived-functor-defined), left-derived convention, and equation-everywhere; sites-cohomology.tex Tag 06YY"
+   }
+  },
+  {
+   "text": "Fix a K-flat resolution $q:P\\to X$. By localization, $Qq$ is invertible, hence so is $L(Qq)$. Define $\\theta_q=\\varepsilon_P\\circ L(Qq)^{-1}$; both factors are invertible. Naturality of $\\varepsilon$ for $q$ gives $F(q)\\circ\\varepsilon_P=\\varepsilon_X\\circ L(Qq)$. Composing on the right with $L(Qq)^{-1}$ proves $F(q)\\circ\\theta_q=\\varepsilon_X$. This does not assert that $F(q)$ itself is invertible when $X$ is not K-flat.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Equation-everywhere, naturality of the universal left-derived counit and cancellation of the localized resolution"
+   }
+  },
+  {
+   "text": "For $q':P'\\to X'$ and $q'b=aq$, functoriality and invertibility of $L(Qq),L(Qq')$ give $L(Qb)\\circ L(Qq)^{-1}=L(Qq')^{-1}\\circ L(Qa)$. Naturality at $b$ gives $F(b)\\circ\\varepsilon_P=\\varepsilon_{P'}\\circ L(Qb)$. Substitute these two equations to obtain $F(b)\\circ\\theta_q=\\varepsilon_{P'}\\circ L(Qb)\\circ L(Qq)^{-1}=\\theta_{q'}\\circ L(Qa)$. Neither $a$ nor $b$ is assumed invertible.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Equation-everywhere, naturality of the counit; explicit algebra of the commuting augmentation square"
+   }
+  },
+  {
+   "text": "For resolutions $q_i:P_i\\to X$ put $c_{ij}=\\theta_{q_j}\\circ\\theta_{q_i}^{-1}$. Then $c_{ii}=1$ and $c_{jk}\\circ c_{ij}=\\theta_{q_k}\\circ\\theta_{q_i}^{-1}=c_{ik}$ by cancellation. Step 5 gives $F(q_j)\\circ c_{ij}=\\varepsilon_X\\circ\\theta_{q_i}^{-1}=F(q_i)$, proving augmentation compatibility. For any map $b:P_i\\to P_j$ over $X$, step 6 with $a=1_X$ gives $F(b)=c_{ij}$. The definition of $c_{ij}$ requires no chosen map between resolutions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Equation-everywhere; sites-cohomology.tex Tag 06YY, resolution computation, with explicit identity and cocycle equations"
+   }
+  },
+  {
+   "text": "Finally let $u:L\\xrightarrow{\\sim}M$ be the counit-compatible isomorphism of step 4. From $\\eta_Pu_{QP}=\\varepsilon_P$ and naturality $u_{QP}L(Qq)^{-1}=M(Qq)^{-1}u_{QX}$ one obtains $\\theta_q^{L}=\\theta_q^{M}u_{QX}$. Hence $\\theta_{q_j}^{L}(\\theta_{q_i}^{L})^{-1}=\\theta_{q_j}^{M}(\\theta_{q_i}^{M})^{-1}$. The augmentation and square equations of steps 5 and 6 therefore hold in each pair and are identified by $u$. This proves the asserted independence of the universal presentation. All inverses used above are counits on K-flat objects or images of quasi-isomorphisms under localization; none uses flatness of $\\varphi$ or boundedness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Equation-everywhere and uniqueness in Tag 05S9, explicit counit-compatible change of universal pair"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-sheaf-of-modules-category",
+  "lem-trf-additive-homotopy-triangulated",
+  "lem-pur-homotopy-category-triangulated",
+  "def-pc-kflat-complex",
+  "lem-pc-kflat-resolution",
+  "lem-pur-change-of-rings-kflat-quasi-iso",
+  "def-weil-abstract-derived-category",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 014X, 06XN, 05S9 and 05SE, equation-everywhere; sites-cohomology.tex Tags 06YS, 06YT and 06YY. Agent-written assembly and explicit counit normalization equations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For any morphism of commutative ring sheaves the universal total left derived change of rings has an invertible counit on every K-flat complex with natural resolution comparison and cocycle identities",
+   "results": "{\"t\": \"2026-10-22T06:47:55Z\", \"tool\": \"leanfinder\", \"query\": \"For any morphism of commutative ring sheaves the universal total left derived change of rings has an invertible counit on every K-flat complex with natural resolution comparison and cocycle identities\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived'_counit\", \"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.Functor.totalLeftDerivedCounit\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc\", \"CategoryTheory.instIsIsoFunctorFromLeftDerivedZero\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_app_assoc\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc\"], \"digest\": \"26672c7afd790f87\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract totalLeftDerivedCounit and ordinary adjunction counits do not construct a universal unbounded ring-sheaf scalar pair with the stated K-flat normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unbounded sheaf extension of scalars has a universal derived counit computed by arbitrary K-flat resolutions without flatness of the ring map",
+   "results": "{\"t\": \"2026-10-22T06:47:45Z\", \"tool\": \"leansearch\", \"query\": \"Unbounded sheaf extension of scalars has a universal derived counit computed by arbitrary K-flat resolutions without flatness of the ring map\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"totalLeftDerived\"",
+   "results": "{\"t\": \"2026-10-22T06:47:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"totalLeftDerived\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract totalLeftDerivedCounit and ordinary adjunction counits do not construct a universal unbounded ring-sheaf scalar pair with the stated K-flat normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|kFlat|leftDerivedCounit|totalLeftDerived",
+   "results": "{\"t\": \"2026-10-22T06:47:44Z\", \"tool\": \"grep\", \"query\": \"KFlat|kFlat|leftDerivedCounit|totalLeftDerived\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract totalLeftDerivedCounit and ordinary adjunction counits do not construct a universal unbounded ring-sheaf scalar pair with the stated K-flat normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural augmentation formula epsilon X equals tensor of resolution map composed with epsilon P and inverse of derived resolution map for sheaf scalar extension",
+   "results": "{\"t\": \"2026-10-22T06:47:55Z\", \"tool\": \"leanfinder\", \"query\": \"Natural augmentation formula epsilon X equals tensor of resolution map composed with epsilon P and inverse of derived resolution map for sheaf scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.unitToPushforwardObjUnit\", \"ModuleCat.extendRestrictScalarsAdj_unit_app_apply\", \"SheafOfModules.unitHomEquiv_comp_apply\", \"PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app\", \"SheafOfModules.unitToPushforwardObjUnit_val_app_apply\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"SheafOfModules.unitHomEquiv_symm_comp\", \"ModuleCat.ExtendRestrictScalarsAdj.unit_app\"], \"digest\": \"01ce7bbaa6aac457\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract totalLeftDerivedCounit and ordinary adjunction counits do not construct a universal unbounded ring-sheaf scalar pair with the stated K-flat normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|kFlat|totalLeftDerived",
+   "results": "{\"t\": \"2026-10-23T04:11:50Z\", \"tool\": \"grep\", \"query\": \"KFlat|kFlat|totalLeftDerived\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no ring-sheaf K-flat universal resolution-comparison theorem found"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf extension of scalars admits an unbounded total left derived functor computed by K-flat complexes",
+   "results": "{\"t\": \"2026-10-23T04:11:50Z\", \"tool\": \"leansearch\", \"query\": \"Sheaf extension of scalars admits an unbounded total left derived functor computed by K-flat complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.totalLeftDerived\", \"ModuleCat.extendScalars\", \"CategoryTheory.Functor.totalRightDerived\", \"ModuleCat.instIsLeftAdjointExtendScalars\", \"CategoryTheory.Functor.IsLeftDerivedFunctor.mk\", \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"ModuleCat.reflectsIsomorphisms_extendScalars_of_faithfullyFlat\", \"PresheafOfModules.Sheafify.instNonemptySMulCandidate\"], \"digest\": \"ecd93443594eb05f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract derived-functor definitions assume existence; ordinary scalar extension and sheaf adjunction counits do not state ringed-site unbounded K-flat derivation with these formulas"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"totalLeftDerived\"",
+   "results": "{\"t\": \"2026-10-23T04:11:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"totalLeftDerived\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no ring-sheaf K-flat universal resolution-comparison theorem found"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal left derived extension of scalars for sheaves of modules computed by all K-flat resolutions with normalized counit comparisons",
+   "results": "{\"t\": \"2026-10-23T04:11:59Z\", \"tool\": \"leanfinder\", \"query\": \"Universal left derived extension of scalars for sheaves of modules computed by all K-flat resolutions with normalized counit comparisons\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.Derivation.Universal.desc\", \"CategoryTheory.Functor.totalLeftDerivedCounit\", \"PresheafOfModules.sheafificationAdjunction\", \"comonadicExtendScalars\", \"PresheafOfModules.Derivation.Universal.fac\", \"PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification\", \"PresheafOfModules.sheafificationCompToSheaf\", \"PresheafOfModules.sheafificationCompForgetCompToPresheaf\"], \"digest\": \"8d013544ea56abf6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract derived-functor definitions assume existence; ordinary scalar extension and sheaf adjunction counits do not state ringed-site unbounded K-flat derivation with these formulas"
+  },
+  {
+   "tool": "grep",
+   "query": "totalLeftDerived|totalLeftDerivedCounit|IsLeftDerivedFunctor",
+   "results": "{\"t\": \"2026-10-23T04:12:57Z\", \"tool\": \"grep\", \"query\": \"totalLeftDerived|totalLeftDerivedCounit|IsLeftDerivedFunctor\", \"sub\": \"CategoryTheory/Functor/Derived/LeftDerived.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"16\", \"19\", \"24\", \"52\", \"56\"], \"digest\": \"1812d67c60c684cf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract derived-functor definitions assume existence; ordinary scalar extension and sheaf adjunction counits do not state ringed-site unbounded K-flat derivation with these formulas"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The counit of a right Kan extension is invertible on K-flat complexes and gives natural isomorphisms between arbitrary resolutions of sheaf complexes",
+   "results": "{\"t\": \"2026-10-23T04:13:01Z\", \"tool\": \"leanfinder\", \"query\": \"The counit of a right Kan extension is invertible on K-flat complexes and gives natural isomorphisms between arbitrary resolutions of sheaf complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsDenseSubsite.isIso_ranCounit_app_of_isDenseSubsite\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val\", \"CategoryTheory.Functor.IsDenseSubsite.instIsIsoSheafAppCounitSheafAdjunctionCocontinuous\", \"CategoryTheory.Functor.totalLeftDerivedCounit\", \"CategoryTheory.instIsIsoAppToRightDerivedZero\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app_assoc\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_app\"], \"digest\": \"7d1b86708132fa9b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract derived-functor definitions assume existence; ordinary scalar extension and sheaf adjunction counits do not state ringed-site unbounded K-flat derivation with these formulas"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-one-point-derived-ring-identification",
+  "date": "2026-10-22",
+  "group": "Q86"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Polynomial resolutions remain resolutions under Tor-independent tensoring. In the Stacks 08QP resolution computation, identify the one-object ringed-site K-flat scalar-extension construction with ordinary ring-module scalar extension, including the universal derived counit. Old steps 9 and 12: check the resolving-class hypotheses and identify the counit, augmentation and comparisons for arbitrary K-flat resolutions.",
+   "via": [
+    "lem-trf-one-point-derived-ring-identification",
+    "lem-trf-tor-independent-cotangent-base-change",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-ringed-scalar-universal-resolution-comparison",
+  "worker": "stage1",
+  "group": "Q22",
+  "summary": "Retained the statement and split its argument using existing additive homotopy exactness, general ringed-site K-flat resolutions, change-of-rings K-flat invariance, and universal resolving-class derivation. Wrote the counit normalization, natural square, augmentation and cocycle calculations explicitly. No new nodes.",
+  "blueprint": "The inherited lem-trf-local-term-locality ancillary ring/sheaf branch, via lem-trf-one-point-derived-ring-identification: old steps 9 and 12, resolving-class hypotheses and normalized counit/augmentation comparisons for arbitrary K-flat resolutions. No change to the geometric unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-homotopy-category-triangulated",
+    "why": "Generic exactness of the homotopy-to-derived localization, used after termwise scalar extension; the trace-formula unit does not construct localization."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic ringed-site K-flat resolution existence supplies the resolving class; the trace-formula unit does not prove flat-resolution existence."
+   },
+   {
+    "node": "lem-pur-change-of-rings-kflat-quasi-iso",
+    "why": "Generic ring-sheaf scalar extension preserves quasi-isomorphisms between all K-flat complexes, without flat terms; this is an auxiliary homological tool."
+   },
+   {
+    "node": "lem-pur-left-derived-from-kflat-class",
+    "why": "Generic universal resolving-class derivation is instantiated after both hypotheses are proved; no geometric route is replaced."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Identifies the constructed universal pair with the previously named ringed-site derived change of rings, using only its left-derived assertion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-homotopy-category-triangulated",
+  "lem-pc-kflat-resolution",
+  "lem-pur-change-of-rings-kflat-quasi-iso",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-58649486f",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-58649486f (reviewer sub-agent of L); spot-checked: Read the item, all 10 cited statements, the parent's citing steps 3 and 5, and the proof route of lem-pur-derived-change-of-rings. 0 new nodes; statement unchanged; first delivery with no re-split note. Stacks sources: derived.tex 06XN dual part (l.5092), the everywhere-defined definition and equation-everywhere (l.4962-4974) and 014X; sites-cohomology.tex 06YS, 06YT and 06YY (its proof uses K-flat with flat terms; the item uses all K-flat complexes, which is valid because lem-pur-change-of-rings-kflat-quasi-iso covers every K-flat complex). Step 1: E is additive; Mod(O) is abelian under the smallness hypothesis; additive-homotopy plus exact localization make F exact. Step 2: hypotheses (1) and (2) hold, with no flatness of phi and no boundedness. Step 3: the right-Kan universality of lem-pur-left-derived-from-kflat-class is the stated Nat bijection. Step 4: checked u, v and the uniqueness giving vu=1, uv=1; the counit inherits invertibility on K-flat objects. lem-pur-derived-change-of-rings is built from the same resolving-class lemma, so its left derived functor is the universal pair. Steps 5-8: checked by hand theta_q direction and invertibility, F(q)theta_q=eps_X, the square F(b)theta_q=theta_q' L(Qa), the identity, cocycle and augmentation of c_ij, F(b)=c_ij over X, and theta^L=theta^M u_{QX}. Edge cases: Z->Z/2 on the one-point site (F(q) is not a quasi-isomorphism and the statement does not claim it is), the zero ring, and identity resolutions. No duplicate: lem-trf-flat-resolution-canonical-tensor-comparison is the ordinary-ring bounded-above analogue. Mathlib searches cover all three kinds (one rate-limited LeanSearch was recorded as unavailable and a second ran); verdict not a leaf. Accepted the 5 declared tool_uses (lem-pur-homotopy-category-triangulated, lem-pc-kflat-resolution, lem-pur-change-of-rings-kflat-quasi-iso, lem-pur-left-derived-from-kflat-class, lem-pur-derived-change-of-rings), all generic homological black boxes. Blueprint place filled, same_as []. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingedScalarUniversalResolutionComparison",
+  "declaration": "SheafOfModules.ringedScalar_universal_resolution_comparison",
+  "declarations": [
+   "CategoryTheory.Functor.resolutionCounitIso",
+   "CategoryTheory.Functor.ResolutionCounitLaws",
+   "CategoryTheory.Functor.UniversalResolutionCounit",
+   "CategoryTheory.Functor.scalarHomotopyCounitOnCochains",
+   "SheafOfModules.ringedScalarKFlatObjects",
+   "SheafOfModules.ringedScalar_universal_resolution_comparison"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/RingedScalarUniversalResolutionComparison.lean",
+  "statement": "theorem ringedScalar_universal_resolution_comparison (φ : O ⟶ S) (M : DerivedChangeOfRingsCochainModel.{u, v, r, wO, wS} φ) : (M.E.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh).IsTriangulated ∧ (∀ X : HomotopyCategory (ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J O)) (.up ℤ), ∃ (P : HomotopyCategory (ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J O)) (.up ℤ)) (q : P ⟶ X), P ∈ ringedScalarKFlatObjects O ∧ HomotopyCategory.quasiIso _ (.up ℤ) q) ∧ (∀ (P P' : HomotopyCategory (ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J O)) (.up ℤ)) (s : P ⟶ P'), P ∈ ringedScalarKFlatObjects O → P' ∈ ringedScalarKFlatObjects O → HomotopyCategory.quasiIso _ (.up ℤ) s → IsIso ((M.E.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh).map s)) ∧ ∃ (L : DerivedCategory (ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J O)) ⥤ DerivedCategory (ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J S))) (ε : DerivedCategory.Qh ⋙ L ⟶ M.E.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh), (∃ (_ : L.CommShift ℤ), L.IsTriangulated) ∧ Functor.UniversalResolutionCounit DerivedCategory.Qh (HomotopyCategory.quasiIso _ (.up ℤ)) L ε (ringedScalarKFlatObjects O) ∧ ∃ i : L ≅ M.T, (Functor.whiskerLeft DerivedCategory.Q i.hom ≫ M.ε = Functor.scalarHomotopyCounitOnCochains M.E L ε) ∧ (∀ j : L ≅ M.T, Functor.whiskerLeft DerivedCategory.Q j.hom ≫ M.ε = Functor.scalarHomotopyCounitOnCochains M.E L ε → j = i)",
+  "branch": "newtargets-dag",
+  "by": "Q80",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The helper declarations package this node's formulas only. The comparison is constructed as the inverse image of the localized resolution followed by the universal counit. The actual scalar-extension functor and the comparison with lem-pur-derived-change-of-rings hold for every presentation M : DerivedChangeOfRingsCochainModel (explicit parameter, as in its other citers); F carries Mathlib's canonical shift structure (reviewer FIX); site, coefficient and localization universes remain independent.",
+  "fixed_by": "NT-stage2-cc-de7f55e5b"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-de7f55e5b",
+  "group": "Q80",
+  "result": "fix",
+  "note": "Read the item, all 5 stmt_deps, DerivedChangeOfRingsCochainModel (E pinned by obj_eq/map_eq), the module and the report (worker plus second-reading sections present). Every clause matches the node: K-flat class without flat terms, resolutions, inversion, Nat bijection for every H, theta_q = L(Qq)^-1 then eps_P, augmentation/square/identity/cocycle orientations, change_pair with unique counit-compatible iso, unique comparison with M.T through quotientCompQhIso. Edge cases covered; no extra hypotheses; no hollow defs; record statement verbatim. FIX (H3): the theorem began with exists M : DerivedChangeOfRingsCochainModel phi, which compares only a prover-chosen presentation; citers take D as a parameter, so M is now an explicit parameter. F's exactness was stated for some CommShift; now plain IsTriangulated with Mathlib's canonical shift. Fixed module plus lean-record.json; nt_compile --json clean (14.8 s)."
+ }
+}

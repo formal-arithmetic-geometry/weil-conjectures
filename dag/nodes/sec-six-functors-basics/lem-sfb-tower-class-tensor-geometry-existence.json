@@ -1,0 +1,126 @@
+{
+ "id": "lem-sfb-tower-class-tensor-geometry-existence",
+ "kind": "statement",
+ "title": "Geometric tower coordinates with normalized ordinary unit and tensor pullback",
+ "statement": "For every prime l, finite extension E/Q_l, schemes X,Y, and morphism f:X→Y, there exist Base b and Geometry g for the actual quotient coefficient systems [def-sp-tower-shriek-data], a CoefficientPullback(g) [def-sp-tower-class-diagonal] whose adjoint is the unital constant direct-image map, and TensorPullback(g) [def-sfb-tower-class-tensor-pullback]. No root line, Chern data, twisting, or projective model is part of the conclusion.",
+ "stmt_deps": [
+  "def-sp-tower-shriek-data",
+  "def-sp-tower-class-diagonal",
+  "def-sfb-tower-class-tensor-pullback"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "clause (2), geometric unit and tensor constructions on actual towers"
+ },
+ "proof": [
+  {
+   "text": "Choose the normalized geometry and compatible finite unit comparisons from exists_unitLevelCoordinates. Apply systemIsoOfEvaluation_exists to assemble their hom maps into a coefficient-system isomorphism. Ordinary unit evaluation and naturality of ordinaryPushEvaluation identify the evaluated system adjoint with the finite adjoint after ordinaryPullEvaluation.inv. The finite normalization therefore proves CoefficientPullback.normalization.",
+   "uses": [
+    "lem-sfb-tower-class-unit-level-coordinates",
+    "lem-coef-system-iso-assembly",
+    "lem-sp-tower-ordinary-unit-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exists_tensorLevelCoordinates to the same geometry and its levelPushUnderlying normalization. Assemble each compatible family of finite tensor maps with systemIsoOfEvaluation_exists. Joint faithfulness of evaluations (proved by extensionality on sequence-site sections) turns finite naturality into naturality of the assembled maps. Package them with NatIso.ofComponents. Apply the same adjoint-evaluation identity to the assembled hom map; its evaluated hom is the supplied finite comparison, whose pure-tensor normalization is exactly TensorPullback.normalization.",
+   "uses": [
+    "lem-sfb-tower-class-tensor-level-coordinates",
+    "lem-coef-system-iso-assembly",
+    "lem-sp-tower-ordinary-unit-evaluation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-tower-class-unit-level-coordinates",
+  "lem-coef-system-iso-assembly",
+  "lem-sp-tower-ordinary-unit-evaluation",
+  "lem-sfb-tower-class-tensor-level-coordinates"
+ ],
+ "proof_origin": {
+  "by": "H6",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "clause (2), finite unit and tensor maps and their transposes"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "LinePullback|PositivePullback",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "Generic tensor/adjunction tools only; no normalized tower-unit or root-line assembly. Existing local sheaf results are cited in the proof steps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateEquiv\"",
+   "results": "12 hits: CategoryTheory.conjugateEquiv, CategoryTheory.conjugateEquiv_id, CategoryTheory.conjugateEquiv_iso, CategoryTheory.conjugateEquiv_of_iso, CategoryTheory.conjugateEquiv_symm_id, CategoryTheory.conjugateEquiv_symm_iso, CategoryTheory.conjugateEquiv_symm_of_iso, CategoryTheory.conjugateEquiv_adjunction_id",
+   "date": "2026-10-27",
+   "verdict": "Generic tensor/adjunction tools only; no normalized tower-unit or root-line assembly. Existing local sheaf results are cited in the proof steps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of sheaves of modules preserves the tensor product and the tensor unit",
+   "results": "8 hits: CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf, CategoryTheory.sheafToPresheafMonoidal, PresheafOfModules.Monoidal.tensorObj_map_tmul, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, SheafOfModules.pullbackPushforwardAdjunction",
+   "date": "2026-10-27",
+   "verdict": "Generic tensor/adjunction tools only; no normalized tower-unit or root-line assembly. Existing local sheaf results are cited in the proof steps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The roots of unity Tate line pulls back under a morphism of schemes on which ell is invertible",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback, AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.carrierEquiv, AlgebraicGeometry.AffineSpace.isPullback_map, AlgebraicGeometry.pullbackSpecIso_hom_base, AlgebraicGeometry.Scheme.Pullback.Triplet.SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo",
+   "date": "2026-10-27",
+   "verdict": "Generic tensor/adjunction tools only; no normalized tower-unit or root-line assembly. Existing local sheaf results are cited in the proof steps."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceGeometricModelExistence",
+  "date": "2026-10-27",
+  "group": "J8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "clause (2), geometric unit and tensor constructions on actual towers",
+   "via": [
+    "lem-sfb-diagonal-trace-geometric-model-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerClassTensorGeometryExistence",
+  "file": "lean/Sheaf/Paper/TowerClassTensorGeometryExistence.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.exists_tensorGeometry",
+  "statement": "theorem exists_tensorGeometry {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    ∃ b : SpTowerShriek.Base l E, ∃ g : SpTowerShriek.Geometry l E b f,\n      Nonempty (CoefficientPullback l E b f g) ∧ Nonempty (TensorPullback l E f g)",
+  "branch": "sheaf-dag",
+  "by": "J8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261027T012856-L-2343048",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261027T034655-L-3673153",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

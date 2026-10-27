@@ -2,7 +2,7 @@
  "id": "lem-a1-filtered-spectrum-topological-limit",
  "kind": "statement",
  "title": "Topological spectrum of a directed colimit of rings",
- "statement": "Let $I$ be a small nonempty directed partially ordered set, let $(A_i,r_{ij}:A_i\\to A_j)_{i\\le j}$ be a directed system of commutative rings, and let $A=\\varinjlim_i A_i$ with coprojections $r_i:A_i\\to A$ be its colimit in commutative rings [def-weil-pbc-category-colimit]. Write $p_{ij}:\\operatorname{Spec}A_j\\to\\operatorname{Spec}A_i$ and $p_i:\\operatorname{Spec}A\\to\\operatorname{Spec}A_i$ for the induced maps [def-weil-affine-spectrum]. The map $\\mathfrak p\\mapsto(r_i^{-1}\\mathfrak p)_i$ is a homeomorphism from $|\\operatorname{Spec}A|$ to the set of families of primes $(\\mathfrak p_i)_i$ with $r_{ij}^{-1}(\\mathfrak p_j)=\\mathfrak p_i$ for every $i\\le j$, equipped with the coarsest topology making all coordinate projections continuous. Thus $|\\operatorname{Spec}A|$ is the inverse limit of the spaces $|\\operatorname{Spec}A_i|$. Moreover, for every $i$ and every quasi-compact open $Q\\subseteq|\\operatorname{Spec}A_i|$, the open subset $p_i^{-1}(Q)$ is quasi-compact.",
+ "statement": "Let $I$ be a nonempty directed partially ordered set small in the universe of the rings, let $(A_i,r_{ij}:A_i\\to A_j)_{i\\le j}$ be a directed system of commutative rings, and let $A=\\varinjlim_i A_i$ with coprojections $r_i:A_i\\to A$ be its colimit in commutative rings [def-weil-pbc-category-colimit]. Write $p_{ij}:\\operatorname{Spec}A_j\\to\\operatorname{Spec}A_i$ and $p_i:\\operatorname{Spec}A\\to\\operatorname{Spec}A_i$ for the induced maps [def-weil-affine-spectrum]. The map $\\mathfrak p\\mapsto(r_i^{-1}\\mathfrak p)_i$ is a homeomorphism from $|\\operatorname{Spec}A|$ to the set of families of primes $(\\mathfrak p_i)_i$ with $r_{ij}^{-1}(\\mathfrak p_j)=\\mathfrak p_i$ for every $i\\le j$, equipped with the coarsest topology making all coordinate projections continuous. Thus $|\\operatorname{Spec}A|$ is the inverse limit of the spaces $|\\operatorname{Spec}A_i|$. Moreover, for every $i$ and every quasi-compact open $Q\\subseteq|\\operatorname{Spec}A_i|$, the open subset $p_i^{-1}(Q)$ is quasi-compact.",
  "source": {
   "document": "literature/stacks-project/limits.tex; literature/stacks-project/algebra.tex",
   "place": "Tag 0CUE, lemma-inverse-limit-sets, affine-case proof; Tag 0CUF, lemma-inverse-limit-top, affine-case proof; final assertion by finite unions of principal opens, Algebra Tag 00E8, lemma-quasi-compact"
@@ -37,16 +37,16 @@
    }
   },
   {
-   "text": "Let $Q\\subseteq\\operatorname{Spec}A_i$ be quasi-compact and open. For each point of $Q$, choose a principal open contained in $Q$; quasi-compactness gives finitely many $D(f_1),\\ldots,D(f_n)$ covering $Q$. By Step 2, $p_i^{-1}(Q)=\\bigcup_{a=1}^nD(r_i(f_a))$. Each principal open $D(r_i(f_a))$ is homeomorphic to the spectrum of the localization $A_{r_i(f_a)}$ by [lem-weil-pbc-principal-localization-open-immersion], hence is quasi-compact by [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact](iii); a finite union of quasi-compact opens is quasi-compact. This proves the final assertion.",
+   "text": "The morphism $\\operatorname{Spec}A\\to\\operatorname{Spec}A_i$ is affine, hence quasi-compact by Mathlib AlgebraicGeometry.QuasiCompact.isCompact_preimage. Apply this directly to the open quasi-compact subset Q. This is the same finite-principal-open argument from Algebra Tag 00E8, already packaged in the Mathlib theorem.",
    "uses": [
     "def-weil-affine-spectrum",
-    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
-    "lem-weil-pbc-principal-localization-open-immersion"
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00E8, lemma-quasi-compact; Schemes Tag 01I3, lemma-standard-open-affine, for the principal-localization identification"
+    "document": "literature/stacks-project/morphisms.tex; literature/stacks-project/schemes.tex",
+    "place": "Tag 01S7, lemma-affine-separated, and Tag 01K4, lemma-quasi-compact-affine; these package the original finite-principal-open argument."
    }
   },
   {
@@ -62,13 +62,13 @@
  "proof_deps": [
   "lem-pc-filtered-colimit-commrings-elementwise",
   "def-weil-affine-spectrum",
-  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
-  "lem-weil-pbc-principal-localization-open-immersion"
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/limits.tex",
-  "place": "Tags 0CUE and 0CUF affine-case proofs; final quasi-compactness assertion from Algebra Tag 00E8"
+  "document": "literature/stacks-project/limits.tex; literature/stacks-project/algebra.tex",
+  "place": "Tags 0CUE and 0CUF affine-case proofs. For compact-open preimages use Mathlib quasi-compactness of affine morphisms, packaging the Tag 00E8 argument."
  },
  "mathlib_searches": [
   {
@@ -158,10 +158,11 @@
   "module": "Sheaf.Topology.FilteredSpectrumTopologicalLimit",
   "file": "lean/Sheaf/Topology/FilteredSpectrumTopologicalLimit.lean",
   "declaration": "AlgebraicGeometry.filteredSpectrumTopologicalLimit",
-  "statement": "theorem filteredSpectrumTopologicalLimit (I : Type u) [PartialOrder I] [Nonempty I] (hdir : Directed (· ≤ ·) (id : I → I)) (F : I ⥤ CommRingCat.{v}) (c : Cocone F) (hc : IsColimit c) : (∃ e : Homeomorph (Spec c.pt) {p : (i : I) → Spec (F.obj i) // ∀ (i j : I) (hij : i ≤ j), (Spec.map (F.map (homOfLE hij))) (p j) = p i}, ∀ x : Spec c.pt, (e.1 x : (i : I) → Spec (F.obj i)) = (fun i => (Spec.map (c.ι.app i)) x)) ∧ ∀ (i : I) (Q : Set (Spec (F.obj i))), IsOpen Q → IsCompact Q → IsCompact ((Spec.map (c.ι.app i)) ⁻¹' Q)",
+  "statement": "theorem filteredSpectrumTopologicalLimit (I : Type u) [Small.{v} I] [PartialOrder I] [Nonempty I] (hdir : Directed (· ≤ ·) (id : I → I)) (F : I ⥤ CommRingCat.{v}) (c : Cocone F) (hc : IsColimit c) : (∃ e : Homeomorph (Spec c.pt) {p : (i : I) → Spec (F.obj i) // ∀ (i j : I) (hij : i ≤ j), (Spec.map (F.map (homOfLE hij))) (p j) = p i}, ∀ x : Spec c.pt, (e.1 x : (i : I) → Spec (F.obj i)) = (fun i => (Spec.map (c.ι.app i)) x)) ∧ ∀ (i : I) (Q : Set (Spec (F.obj i))), IsOpen Q → IsCompact Q → IsCompact ((Spec.map (c.ι.app i)) ⁻¹' Q)",
   "branch": "newtargets-dag",
   "by": "N3",
-  "date": "2026-10-18"
+  "date": "2026-10-18",
+  "note": "N2 stage-3 repair: make smallness relative to the ring universe explicit, as required by filtered-colimit element representatives. Existing public conclusion is unchanged."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -171,5 +172,117 @@
   "result": "fix",
   "note": "[launcher 2026-10-18: Codex fallback verdict not landed after the Codex reviewers stopped; handed to the cc lander]"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "statement_change": {
+  "date": "2026-10-23",
+  "by": "N2 stage 2",
+  "old_statement": "Let $I$ be a small nonempty directed partially ordered set, let $(A_i,r_{ij}:A_i\\to A_j)_{i\\le j}$ be a directed system of commutative rings, and let $A=\\varinjlim_i A_i$ with coprojections $r_i:A_i\\to A$ be its colimit in commutative rings [def-weil-pbc-category-colimit]. Write $p_{ij}:\\operatorname{Spec}A_j\\to\\operatorname{Spec}A_i$ and $p_i:\\operatorname{Spec}A\\to\\operatorname{Spec}A_i$ for the induced maps [def-weil-affine-spectrum]. The map $\\mathfrak p\\mapsto(r_i^{-1}\\mathfrak p)_i$ is a homeomorphism from $|\\operatorname{Spec}A|$ to the set of families of primes $(\\mathfrak p_i)_i$ with $r_{ij}^{-1}(\\mathfrak p_j)=\\mathfrak p_i$ for every $i\\le j$, equipped with the coarsest topology making all coordinate projections continuous. Thus $|\\operatorname{Spec}A|$ is the inverse limit of the spaces $|\\operatorname{Spec}A_i|$. Moreover, for every $i$ and every quasi-compact open $Q\\subseteq|\\operatorname{Spec}A_i|$, the open subset $p_i^{-1}(Q)$ is quasi-compact.",
+  "what": "The original two independent universes allow an index poset larger than the universe of the rings. Smallness must be relative to the ring universe, as in the source set-indexed colimit. Without it the statement is false: take finite subsets of a set larger than the ring universe, with the corresponding finitely generated rational-function fields. A cocone in small rings must be the zero ring, since a nonzero cocone would embed the rational-function field on the whole large set into a small ring. Thus zero is a colimit in the restricted small-ring category, but the zero prime ideals give a compatible family at every field stage. The asserted homeomorphism would identify an empty spectrum with a nonempty space.",
+  "source": {
+   "document": "literature/stacks-project/limits.tex; literature/stacks-project/algebra.tex",
+   "place": "Tag 0CUE, lemma-inverse-limit-sets, affine-case proof; Tag 0CUF, lemma-inverse-limit-top, affine-case proof; final assertion by finite unions of principal opens, Algebra Tag 00E8, lemma-quasi-compact"
+  },
+  "citers": [
+   {
+    "id": "det-pe-wc-cover-second-stage",
+    "holds": true,
+    "note": "Finite partitions and clopen neighbourhoods are small in the common ring/space universe; the current Lean proof in fact uses an independent direct construction."
+   },
+   {
+    "id": "lem-a1-quasi-affine-chart-limit-topology",
+    "holds": true,
+    "note": "Its Lean index I and coordinate rings are in universe u, so Small I is automatic."
+   },
+   {
+    "id": "lem-sfb-wlocal-directed-limit-topology",
+    "holds": true,
+    "note": "Its Lean index D and all rings are in universe u, so Small D is automatic."
+   },
+   {
+    "id": "lem-sfb-wstrict-common-component-hypercovers",
+    "holds": true,
+    "note": "The finite-clopen-partition diagrams use the common small-site universe explicitly assumed in its statement."
+   },
+   {
+    "id": "lem-sfb-field-geometric-fibre-covering-test",
+    "holds": true,
+    "note": "Finite subalgebras of the given small algebra form a small index poset in the algebra universe."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "For a prime $\\mathfrak p\\subset A$, the contractions $\\mathfrak p_i=r_i^{-1}(\\mathfrak p)$ are prime and compatible, because the maps $r_i$ and $r_{ij}$ compose. Conversely, given compatible primes $\\mathfrak p_i$, define $\\mathfrak p\\subset A$ to consist of those elements represented by some $x_i\\in\\mathfrak p_i$. The elementwise description of filtered ring colimits gives representatives and says when two representatives agree. Using a common upper bound, compatibility shows that this set is closed under addition and multiplication by arbitrary elements and contains zero but not one. If $r_i(x_i)r_j(y_j)$ lies in it, move $x_i,y_j$ and the witnessing element to one common later stage; primality there puts one factor in the corresponding prime, so one of the original factors lies in $\\mathfrak p$. Thus $\\mathfrak p$ is prime, and the same common-stage argument gives $r_i^{-1}(\\mathfrak p)=\\mathfrak p_i$. These two constructions are inverse.",
+    "uses": [
+     "lem-pc-filtered-colimit-commrings-elementwise",
+     "def-weil-affine-spectrum"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/limits.tex",
+     "place": "Tag 0CUE, lemma-inverse-limit-sets, affine-case proof"
+    }
+   },
+   {
+    "text": "For every $i$ and $f\\in A_i$, the inverse image of the principal open $D(f)\\subset\\operatorname{Spec}A_i$ under $p_i$ is $D(r_i(f))\\subset\\operatorname{Spec}A$: membership is exactly the condition that the relevant element is absent from the prime. Every principal open of $\\operatorname{Spec}A$ has the form $D(r_i(f))$ for some $i,f$, since every element of $A$ is represented at a stage. Principal opens form a basis for the Zariski topology by the definition of affine spectrum. Hence the topology on $\\operatorname{Spec}A$ is exactly the coarsest topology making all $p_i$ continuous, and the bijection of Step 1 is a homeomorphism onto the compatible-family inverse-limit topology.",
+    "uses": [
+     "lem-pc-filtered-colimit-commrings-elementwise",
+     "def-weil-affine-spectrum"
+    ],
+    "elementary": true,
+    "source": {
+     "document": "literature/stacks-project/limits.tex",
+     "place": "Tag 0CUF, lemma-inverse-limit-top, affine-case proof"
+    }
+   },
+   {
+    "text": "Let $Q\\subseteq\\operatorname{Spec}A_i$ be quasi-compact and open. For each point of $Q$, choose a principal open contained in $Q$; quasi-compactness gives finitely many $D(f_1),\\ldots,D(f_n)$ covering $Q$. By Step 2, $p_i^{-1}(Q)=\\bigcup_{a=1}^nD(r_i(f_a))$. Each principal open $D(r_i(f_a))$ is homeomorphic to the spectrum of the localization $A_{r_i(f_a)}$ by [lem-weil-pbc-principal-localization-open-immersion], hence is quasi-compact by [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact](iii); a finite union of quasi-compact opens is quasi-compact. This proves the final assertion.",
+    "uses": [
+     "def-weil-affine-spectrum",
+     "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+     "lem-weil-pbc-principal-localization-open-immersion"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/algebra.tex",
+     "place": "Tag 00E8, lemma-quasi-compact; Schemes Tag 01I3, lemma-standard-open-affine, for the principal-localization identification"
+    }
+   },
+   {
+    "text": "The compatible-family description, the topology identification, and the quasi-compact-preimage statement together give all clauses of the asserted homeomorphism and inverse-limit description.",
+    "uses": [],
+    "elementary": true,
+    "source": {
+     "document": "literature/stacks-project/limits.tex",
+     "place": "Tags 0CUE and 0CUF, affine-case conclusions"
+    }
+   }
+  ],
+  "old_proof_deps": [
+   "lem-pc-filtered-colimit-commrings-elementwise",
+   "def-weil-affine-spectrum",
+   "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+   "lem-weil-pbc-principal-localization-open-immersion"
+  ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-a0bbd",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261023T105401-L-3550553",
+  "kind": "interface",
+  "note": "independent cc review: Lean signature (+[Small.{v} I]) with node statement 'small in the ring universe', change record, statement_change entry and the Lean proof with proof_deps (filtered-colimit elementwise, affine morphism quasi-compact preimage); axioms probe clean; 6 direct importers compiled clean against the delivered module"
+ }
 }

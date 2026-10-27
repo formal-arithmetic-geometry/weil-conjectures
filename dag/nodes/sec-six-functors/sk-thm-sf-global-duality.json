@@ -28,106 +28,39 @@
  ],
  "proof": [
   {
-   "text": "Put $s=\\operatorname{Spec}k$, $a=a_X:X\\to s$, $C=Ra_!K$ and $B=Ra_*\\mathbb D_XK$, using [sk-def-sf-operations] and the dualizing-object and duality notation of [def-sf-pf]. The hypotheses make $a$ a separated finite-type morphism between separated finite-type $k$-schemes. The coefficient unit has finite Tor amplitude $[0,0]$. Apply [thm-sf-ctf-stability](v) to the unit to obtain $\\omega_X=Ra^!\\Lambda_s\\in\\Dctf(X,\\Lambda)$, then (ii) to $(K,\\omega_X)$ to obtain $\\mathbb D_XK\\in\\Dctf(X,\\Lambda)$. Clauses (iv) and (iii), applied respectively to $K$ and $\\mathbb D_XK$, give $C,B\\in\\Dctf(s,\\Lambda)$. At finite coefficients these are precisely the displayed preservation assertions; clause (vii) supplies their integral, rational and common-stage versions. Apply (v) also to $\\operatorname{id}_s$ and $\\Lambda_s$ to obtain $\\omega_s\\in\\Dctf(s,\\Lambda)$; then (ii) at $s$ puts $\\mathbb D_s C=R\\mathcal H om_s(C,\\omega_s)$ in $\\Dctf(s,\\Lambda)$. Thus all objects used below lie in the bounded constructible point category, even though the exchange theorem is stated in an ambient category.",
-   "uses": [
-    "sk-def-sf-operations",
-    "def-sf-pf",
-    "thm-sf-ctf-stability"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-global-duality/sk-thm-sf-global-duality.proof.md",
-    "place": "Sole paragraph, before specializing exchange: verify the small-category domains using the existing preservation theorem"
-   }
-  },
-  {
-   "text": "Apply [sk-thm-sf-verdier-exchange] to $f=a$, $Y=s$ and $M=K$. It gives the canonical isomorphism $\\eta_K:\\mathbb D_s C\\xrightarrow{\\sim}B$, natural contravariantly in $K$ and compatible with finite reduction, scalar extension and shifts. Both ends belong to the full bounded constructible subcategory by step 1; the map and its inverse therefore restrict to an isomorphism there. The theorem uses the constructible exceptional adjoint of [sk-def-sf-operations](vi), so its hypotheses require no additional ambient admissibility datum. This application works under either geometric alternative in the item: both supply the same separated finite-type structure morphism.",
+   "text": "Specialize the existing Verdier exchange theorem to a_X:X→Spec k. Apply lem-sf-global-identity-normalization to obtain normalized closed structures and the evaluation-transposed epsilon as a natural transformation with signed shifts and coefficient equations, but no inverse.",
    "uses": [
     "sk-thm-sf-verdier-exchange",
-    "sk-def-sf-operations"
+    "lem-sf-global-identity-normalization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-global-duality/sk-thm-sf-global-duality.proof.md",
-    "place": "Sole paragraph, first sentence: specialize Verdier exchange to the structure morphism"
-   }
+   "elementary": false
   },
   {
-   "text": "Write $F_\\Lambda=\\operatorname{Fib}_s$. Use the exceptional adjunction of [sk-def-sf-operations](vi) and the counit normalization for the exceptional adjoint of the identity, whose compact-support functor is the identity; thus the point normalization is the adjunction identification, rather than a choice of an arbitrary isomorphism. The point identifications of [lem-sf-point] give $\\omega_s\\cong\\Lambda_s$ and identify the evaluated internal Hom $F_\\Lambda\\mathbb D_s C$ with $R\\operatorname{Hom}_\\Lambda(F_\\Lambda C,\\Lambda)=(F_\\Lambda C)^\\vee$. The current [lem-sf-point](3) and [lem-weil-point-fibre-equivalence] identify the exact fibre equivalence at each of the four coefficient stages, with targets $D^b_{\\mathrm{fin}}(A_{E,n})$, $D^b_{\\mathrm{fg}}(\\mathcal O_E)$, $D^b_{\\mathrm{fd}}(E)$ and the common-stage $D^b_{\\mathrm{fd}}(\\overline{\\mathbf Q}_\\ell)$ respectively. By [def-weil-ordinary-compact-cohomology], $F_\\Lambda C=R\\Gamma_c(X,K)$ and $F_\\Lambda B=R\\Gamma(X,\\mathbb D_XK)$. Define the asserted arrow $\\gamma_K$ by composing the inverse of the internal-Hom point identification with $F_\\Lambda(\\eta_K)$ and these two global-section identifications. Each factor is invertible, so $\\gamma_K$ is invertible. Through the fibre equivalence this is the asserted isomorphism in $D^b_c(s,\\Lambda)$, not just an isomorphism of cohomology groups.",
+   "text": "For each K and test object T, compose the inverse point tensor-Hom bijection, precomposition by the projection isomorphism, exceptional adjunction, the identity dualizing comparison, tensor-Hom on X and pull/star adjunction. Projection naturality and adjunction naturality prove naturality in T. Apply isoOfNaturalHomEquiv to the resulting Hom bijections. Expansion at the identity shows that its hom is exactly StageData.epsilon. Thus every epsilon component is invertible. Promote the recorded transformation to StageConclusion, retaining exactly its shifts.",
    "uses": [
-    "lem-sf-point",
-    "lem-weil-point-fibre-equivalence",
-    "def-weil-ordinary-compact-cohomology",
-    "sk-def-sf-operations"
+    "def-sf-global-normalized-construction",
+    "lem-sfb-projection-internal-hom-formal"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-global-duality/sk-thm-sf-global-duality.proof.md",
-    "place": "Sole paragraph, remaining sentences: evaluate and identify the two sides"
-   }
+   "elementary": true
   },
   {
-   "text": "Make the point internal-Hom comparison of step 3 explicit: [lem-sf-point](2) gives an isomorphism but specifies neither the map nor its naturality. Write $F=F_\\Lambda$, $t_{P,Q}:F(P\\otimes^L Q)\\xrightarrow{\\sim}FP\\otimes^L FQ$ and $u:F\\Lambda_s\\xrightarrow{\\sim}\\Lambda$ for the natural coherent tensor and unit comparisons of [lem-sf-point-fibre-derived-tensor] on finite-Tor point objects, and $e:C\\otimes^L\\mathbb D_sC\\to\\Lambda_s$ for internal-Hom evaluation of [sk-def-sf-operations](i) followed by $\\omega_s\\cong\\Lambda_s$ of [lem-sf-point](1). Define $\\alpha_C:F\\mathbb D_sC\\to R\\operatorname{Hom}_\\Lambda(FC,\\Lambda)$ as the module tensor/Hom transpose of $u\\circ Fe\\circ t_{C,\\mathbb D_sC}^{-1}:FC\\otimes^L F\\mathbb D_sC\\to\\Lambda$. Invertibility: $C$, $\\mathbb D_sC$ (step 1) and $\\Lambda_s[-r]$ lie in $\\Dctf(s,\\Lambda)$, so both ends are bounded. For each $r$, under [lem-sf-point](5) and the module adjunction, $H^r(\\alpha_C)$ is the composite of the bijections $\\operatorname{Hom}_s(\\Lambda_s[-r],\\mathbb D_sC)\\cong\\operatorname{Hom}_s(\\Lambda_s[-r]\\otimes^L C,\\Lambda_s)$ (adjunction (i)), then $F$ (fully faithful and shift-compatible by [lem-weil-point-fibre-equivalence]), then $t$ and $u$, then $\\operatorname{Hom}_\\Lambda(\\Lambda[-r]\\otimes^L FC,\\Lambda)\\cong H^r R\\operatorname{Hom}_\\Lambda(FC,\\Lambda)$; they agree by the definition of the transpose and the naturality and unit constraint of $t$. So each $H^r(\\alpha_C)$ is bijective and $\\alpha_C$ is invertible (at $\\Qlb$ at a common finite stage). Naturality in $C$ and the shift squares follow from naturality of $t,u,e$; the finite-reduction and scalar-extension squares hold because $t,u$ commute with them by [lem-sf-point-fibre-derived-tensor] and internal Hom with its evaluation does by [thm-sf-ctf-stability](vii): after the transpose bijection each square is a tensor/unit/evaluation square. This $\\alpha_C$ is the identification used in step 3.",
+   "text": "For the tensor-Hom adjunction at the tensor unit, compare its right adjoint with the identity using Adjunction.rightAdjointUniq and the right-unitor adjunction. The counit equation gives exactly inverse right unitor followed by evaluation; the reverse comparison is exactly the transpose of the right unitor. These comparisons are inverse. Compose this unit isomorphism with the same epsilon component, then assemble Package from the normalized ring, projection, unit, signed-shift and coefficient records.",
    "uses": [
-    "lem-sf-point",
-    "lem-weil-point-fibre-equivalence",
-    "lem-sf-point-fibre-derived-tensor",
-    "sk-def-sf-operations",
-    "thm-sf-ctf-stability"
+    "def-sf-global-normalized-construction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-global-duality/sk-thm-sf-global-duality.proof.md",
-    "place": "Sole paragraph, canonical point evaluation; make explicit the naturality and coefficient clauses of the statement"
-   }
-  },
-  {
-   "text": "For integral-to-finite passage, the actual comparison $F_{A_{E,n}}(N\\otimes^L A_{E,n})\\cong F_{\\mathcal O_E}(N)\\otimes^L A_{E,n}$ is [lem-pod-point-sections-derived-reduction], applicable because the point objects in step 1 are bounded constructible. The integral and rational scalar comparisons are [lem-weil-point-sections-scalar-extension], including its identity and tower equations; the common-stage definition of [def-weil-finite-coefficient-point] uses these same comparisons for $\\overline{\\mathbf Q}_\\ell$. Thus all point identifications in $\\gamma_K$ commute with the comparisons. The exchange factor has these properties by [sk-thm-sf-verdier-exchange]. Composing its naturality or coefficient square with the point-identification squares proves the corresponding square for $\\gamma_K$; composing the shift squares gives the contravariant shift convention on both sides. This proves naturality, finite-reduction compatibility, scalar-extension compatibility and shift compatibility of the specified canonical arrow.",
-   "uses": [
-    "lem-pod-point-sections-derived-reduction",
-    "lem-weil-point-sections-scalar-extension",
-    "def-weil-finite-coefficient-point",
-    "sk-thm-sf-verdier-exchange"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-global-duality/sk-thm-sf-global-duality.proof.md",
-    "place": "Sole paragraph, canonical point evaluation; make explicit the naturality and coefficient clauses of the statement"
-   }
-  },
-  {
-   "text": "Take $K=\\Lambda_X$, the coefficient object of [def-weil-ordinary-compact-cohomology] (the coefficient unit $\\Lambda_X$ of [def-sf-pf], the tensor unit as in [sk-def-sf-setting]), so that $R\\Gamma_c(X,\\Lambda)=R\\Gamma_c(X,\\Lambda_X)$ by the abbreviation of [def-weil-ordinary-compact-cohomology]. By [def-sf-pf], $\\mathbb D_X\\Lambda_X=R\\mathcal H om_X(\\Lambda_X,\\omega_X)$. This identifies canonically with $\\omega_X$: the adjoint of the tensor unitor $\\Lambda_X\\otimes^L\\omega_X\\to\\omega_X$ gives $\\omega_X\\to R\\mathcal H om_X(\\Lambda_X,\\omega_X)$; in the other direction use the inverse left unitor followed by internal-Hom evaluation. The two composites are identities by the tensor/internal-Hom adjunction identities of [sk-def-sf-operations](i). Substitute this identification into $\\gamma_{\\Lambda_X}$ from step 3 to obtain $R\\Gamma_c(X,\\Lambda)^\\vee\\cong R\\Gamma(X,\\omega_X)$.",
-   "uses": [
-    "sk-def-sf-setting",
-    "def-sf-pf",
-    "sk-def-sf-operations",
-    "def-weil-ordinary-compact-cohomology"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-global-duality/sk-thm-sf-global-duality.proof.md",
-    "place": "Statement, final clause: the constant-coefficient specialization"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sf-pf",
-  "def-weil-finite-coefficient-point",
-  "def-weil-ordinary-compact-cohomology",
-  "lem-pod-point-sections-derived-reduction",
-  "lem-sf-point",
-  "lem-sf-point-fibre-derived-tensor",
-  "lem-weil-point-fibre-equivalence",
-  "lem-weil-point-sections-scalar-extension",
-  "sk-def-sf-operations",
-  "sk-def-sf-setting",
-  "sk-thm-sf-verdier-exchange",
-  "thm-sf-ctf-stability"
+  "def-sf-global-normalized-construction",
+  "lem-sf-global-identity-normalization",
+  "lem-sfb-projection-internal-hom-formal",
+  "sk-thm-sf-verdier-exchange"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-global-duality/sk-thm-sf-global-duality.proof.md",
-  "place": "Sole proof paragraph, expanded using lem-sf-point and the existing small-category and coefficient-comparison statements"
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-global-duality/sk-thm-sf-global-duality.proof.md",
+  "place": "T2 Lean reduction: identity normalization, explicit Yoneda invertibility via the five adjunction bijections, and tensor-unit evaluation identities."
  },
  "mathlib_searches": [
   {
@@ -213,7 +146,22 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors",
  "unit": "sk-thm-sf-global-duality",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.nonempty_iso_coefficientDual_rightDerivedLowerShriek"
+   ]
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.nonempty_iso_coefficientDual_rightDerivedLowerShriek"
+   ]
+  }
+ },
  "split_report": {
   "date": "2026-10-17",
   "item": "sk-thm-sf-global-duality",
@@ -244,11 +192,7 @@
   ]
  },
  "tool_uses": [
-  "thm-sf-ctf-stability",
-  "lem-weil-point-fibre-equivalence",
-  "lem-sf-point-fibre-derived-tensor",
-  "lem-pod-point-sections-derived-reduction",
-  "lem-weil-point-sections-scalar-extension"
+  "thm-sf-ctf-stability"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -262,14 +206,6 @@
   "module": "Sheaf.Paper.GlobalVerdierDuality",
   "declaration": "WeilConjectures.GlobalVerdierDuality.global_verdier_duality",
   "declarations": [
-   "WeilConjectures.GlobalVerdierDuality.identityOperation",
-   "WeilConjectures.GlobalVerdierDuality.Data",
-   "WeilConjectures.GlobalVerdierDuality.unitEvaluation",
-   "WeilConjectures.GlobalVerdierDuality.unitCoevaluation",
-   "WeilConjectures.GlobalVerdierDuality.Conclusion",
-   "WeilConjectures.GlobalVerdierDuality.Package",
-   "WeilConjectures.GlobalVerdierDuality.GeometricAlternative",
-   "WeilConjectures.GlobalVerdierDuality.Assertion",
    "WeilConjectures.GlobalVerdierDuality.global_verdier_duality"
   ],
   "file": "lean/Sheaf/Paper/GlobalVerdierDuality.lean",
@@ -287,5 +223,34 @@
   "group": "O4",
   "result": "pass",
   "note": "Re-delivery of dbfc7b74 (RETURN H13): def-sf-pf.json now identical to NA's landed record; item .lean byte-identical (sha 230c3b5a) to the head whose substance was accepted; item node differs from live only in lean (note records omega_X=F.G.obj unit, D_X=StageData.dualX, point dual=StageData.dualY with identityOperation). Independently re-checked: smooth/separated/finite type/geometrically connected/pure dimension d; IsProper or Over-iso to geometricFiber X0 (Over.pullback), no properness in branch 2; no admissibility hypothesis; epsilon components = canonical StageData.epsilon; dualizing = refl; ring realizations/projection/shift pinned; ringScalar q = A.ring.comparison q plus unit equation; rational/common b.exceptional = System comparisons; unpinned structureX/Y only rescale by a scalar automorphism of the unit and the square is linear in it, so not hollow; K=Lambda_X clause = same component with pinned unit evaluation/coevaluation. Edge cases X=Spec k, K=0, empty X, A1/Gm. No H4 duplicate; single sorry; docstrings OK; statement verbatim; 9 declarations listed. nt_compile --json clean 11.0 s, error-injection control detected. Advisories: def-sf-verdier-exchange-data and def-weil-exceptional-inverse-image owner decls are not direct stmt_deps; lean.note misattributes StageData to NA; proof-only imports not individually tested."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Here $\\mathbb D_X$ and $\\omega_X=a_X^!\\Lambda_s$ are the Verdier dual and the dualizing\ncomplex of [sk-def-ops], and $s=\\operatorname{Spec}k$.\n\nOver algebraically closed $k$, every\n$K\\in\\Dctf(X,\\Lambda)$ has natural isomorphisms in\n$\\Perf(\\Lambda)$\n\n$$\n R\\Gamma(X,\\mathbb D_XK)\\simeq\n R\\operatorname{Hom}_\\Lambda(R\\Gamma_c(X,K),\\Lambda),\n \\tag{1}\n$$\n\n$$\n R\\Gamma_c(X,\\mathbb D_XK)\\simeq\n R\\operatorname{Hom}_\\Lambda(R\\Gamma(X,K),\\Lambda).\n \\tag{2}\n$$\n\nThe first is the adjoint of the pairing formed by mixed-support cup\nproduct, evaluation, and the counit $\\epsilon_{a_X}$ of\n$Ra_{X!}\\dashv a_X^!$:\n\n$$\n R\\Gamma_c(X,K)\\otimes^{\\mathbf L}R\\Gamma(X,\\mathbb D_XK)\n \\longrightarrow R\\Gamma_c(X,\\omega_X)\n \\xrightarrow{\\epsilon_{a_X}}\\Lambda.\n$$\n\nFor a finite base field the same isomorphisms hold in\n$D(s_{\\mathrm{pro\\acute et}},\\Lambda)$, before passage to the geometric fibre.",
+  "proof": [
+   {
+    "text": "Take $f=a_X$ in the two Verdier exchanges ([sk-thm-sf-verdier-exchange]). On a geometric\npoint the dualizing object is $\\Lambda$, and\n[sk-lem-finite] identifies $\\Dctf(s,\\Lambda)$ with\n$\\Perf(\\Lambda)$. The first exchange\nwas constructed from exactly the indicated evaluation and counit,\nso it identifies the adjoint of that pairing, including its signs.\nThe second exchange gives the second formula. Equivalently, it\nfollows by applying the first formula to $\\mathbb D_XK$ and\ndualizing perfect complexes. A detailed account of this theorem is in\nthe blueprint chapters on six functors and Poincaré duality (PDBP).",
+    "uses": [
+     "sk-lem-finite"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; a worker who touches the node follows it"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-1661a",
+  "group": "T2",
+  "result": "fix",
+  "landing": "20261025T101443-L-3695530",
+  "kind": "interface",
+  "note": "independent cc review: relocated Package/Assertion block vs live G5 text (identical); item proof (5-adjunction Yoneda + rightAdjointUniq unit iso) vs StageData.epsilon and unitEvaluation/unitCoevaluation; identity_normalization (NormalizedData) vs old Package and sk-thm-sf-global-duality; node stmt_deps vs owners of the Lean names"
  }
 }

@@ -1,0 +1,210 @@
+{
+ "id": "lem-sfb-sylow-generic-prime-to-ell-lift",
+ "kind": "statement",
+ "title": "A good generic lift in a prescribed Sylow quotient",
+ "statement": "Let $e$ be a field [def-weil-field], $\\ell$ a prime different from $\\operatorname{char}(e)$, and $B$ a nonempty normal finite-type $e$-scheme that is a finite disjoint union of integral schemes [def-weil-finite-type-morphism] [def-pc-integral-scheme]. Let a finite group $G$ [def-sfb-finite-infinite-set] act on a normal Noetherian $e$-scheme $Y$ [def-pc-scheme] by $e$-automorphisms. Let $L\\leq G$ have $\\ell$-power order and index prime to $\\ell$. Suppose $Z,Q$ are normal Noetherian $e$-schemes and $q_G:Y\\to Z$ and $q_L:Y\\to Q$ are invariant finite surjective morphisms for the respective $G$- and $L$-actions [def-weil-finite-integral-morphism] [def-weil-surjective-morphism]. Assume their geometric fibres are the respective group orbits and their structure sheaves are the invariant direct images of $\\mathcal O_Y$. Let $h:Y\\to B$ be a $G$-invariant $e$-morphism and let $d_G:Z\\to B$, $d_L:Q\\to B$ be $e$-morphisms with $d_Gq_G=h=d_Lq_L$. Assume every generic point $\\eta$ of $Y$ maps to a generic point of $B$ with $\\kappa(\\eta)/\\kappa(h(\\eta))$ finite [def-sc-generic-point] [def-weil-residue-field]. Suppose an open $U\\subseteq B$ containing every generic point has $Z\\times_B U\\to U$ finite and a universal homeomorphism [def-weil-universal-homeomorphism]. Then for every generic point $b$ of $B$ there exists a generic point $c$ of $Q$ with $d_L(c)=b$ and $[\\kappa(c):\\kappa(b)]$ finite and prime to $\\ell$ [def-pc-field-tower]. No condition is asserted for other generic points of $Q$. Normal means all local rings are integrally closed domains [def-weil-pbc-normal-ring]; Noetherian means a finite affine cover by spectra of Noetherian rings [def-weil-pbc-noetherian-ring]. No faithful action or generically free action is assumed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO Expose X 2.3 Step 2, printed p.151, prime-to-ell generic degree in diagram (2.c), with the component stabilizers discussed in Step 3 on the same page. Agent-extracted selection argument of returned item steps 7--9; localization of invariants: Stacks groupoids.tex Tag 03BK (lemma-invariants-base-change), part (3); inseparable degree: fields.tex Tag 09HI (lemma-finite-purely-inseparable)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-finite-type-morphism",
+  "def-pc-integral-scheme",
+  "def-sfb-finite-infinite-set",
+  "def-pc-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism",
+  "def-sc-generic-point",
+  "def-weil-residue-field",
+  "def-weil-universal-homeomorphism",
+  "def-pc-field-tower",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [
+  {
+   "text": "Fix a generic point $b$ of $B$ and put $k=\\kappa(b)$. Set $Z_U=Z\\times_B U$. By [def-weil-universal-homeomorphism], $Z_U\\to U$ is a homeomorphism, and all its base changes are injective. Its unique point $z$ over $b$ is generic in $Z$: the homeomorphism makes it generic in a component of $Z_U$, and any irreducible closed subset of $Z$ properly containing its closure would meet $Z_U$ in a larger irreducible closed subset (a nonempty open in an irreducible space is dense), contradicting this maximality. By the universally-injective/radicial equivalence explicitly stated in [def-weil-radicial-morphism], $E=\\kappa(z)$ is purely inseparable over $k$. Open restriction does not change these residue fields.",
+   "uses": [
+    "def-weil-universal-homeomorphism",
+    "def-weil-radicial-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01S4, lemma-universally-injective; elementary generic-point argument for an open subspace"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-finite-quotient-generic-fields] to $q_G$ with its given invariant sheaf and orbit-fibre hypotheses. Its component-orbit bijection supplies a generic point $\\eta$ of $Y$ above $z$. Put $D=\\{g\\in G:g\\eta=\\eta\\}$ and $M=\\kappa(\\eta)$. The same cited statement identifies the actual residue embedding $E\\hookrightarrow M$ with $E=M^D$. Since $h(\\eta)=d_G(z)=b$, the hypothesis on $h$ says that $M/k$ is finite. These embeddings are compatible with the base $k$ because $d_Gq_G=h$.",
+   "uses": [
+    "lem-sfb-finite-quotient-generic-fields"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BK, lemma-invariants-base-change (3), in the component-stabilizer form stated by the cited node"
+   }
+  },
+  {
+   "text": "Choose an $\\ell$-Sylow subgroup $P\\leq D$ by [lem-weil-pbc-sylow-subgroup-prime-index]. Regard $P$ as a subgroup of $G$. By [lem-sfb-sylow-conjugate-containment] choose $g\\in G$ with $P\\prime=gPg^{-1}\\subseteq L$. Put $\\eta\\prime=g\\eta$, $D\\prime=gDg^{-1}$, and $S=D\\prime\\cap L$. The stabilizer of $\\eta\\prime$ in $G$ is $D\\prime$: $a(g\\eta)=g\\eta$ is equivalent to $g^{-1}ag\\in D$. Thus $P\\prime\\subseteq S\\subseteq D\\prime$.",
+   "uses": [
+    "lem-weil-pbc-sylow-subgroup-prime-index",
+    "lem-sfb-sylow-conjugate-containment"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 2, printed p.151, Sylow choice before diagram (2.c); component stabilizers of Step 3"
+   }
+  },
+  {
+   "text": "The subgroup $S\\leq D\\prime$ is an $\\ell$-Sylow subgroup. Indeed conjugation gives a bijection $D/P\\simeq D\\prime/P\\prime$, so $[D\\prime:P\\prime]$ is prime to $\\ell$. The map of left-coset sets $D\\prime/P\\prime\\to D\\prime/S$ has every fibre bijective with $S/P\\prime$, whence $[D\\prime:P\\prime]=[D\\prime:S][S:P\\prime]$ and $[D\\prime:S]$ is prime to $\\ell$. Likewise the fibres of $L\\to L/S$ all have cardinality $|S|$, so $|S|$ divides $|L|$ and is an $\\ell$-power. All the sets here are finite; these are just partitions into equal-size cosets.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent elementary finite-coset calculation expanding the Sylow selection in X 2.3 Step 2"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-finite-quotient-generic-fields] to $q_G$ at $\\eta\\prime$ and to $q_L$ at $\\eta\\prime$. Since $q_G$ is invariant, $q_G(\\eta\\prime)=z$. Writing $M\\prime=\\kappa(\\eta\\prime)$ and $c=q_L(\\eta\\prime)$, the cited node says that $c$ is generic in $Q$, $E=(M\\prime)^{D\\prime}$, and $\\kappa(c)=(M\\prime)^S$, through the actual residue embeddings. Also $d_L(c)=h(\\eta\\prime)=h(\\eta)=b$ by $G$-invariance. The hypothesis on $h$ gives finite $M\\prime/k$; the action of $D\\prime$ fixes $k$ since $h$ is invariant over $B$. The field $k$ is an extension of $e$, so its characteristic is that of $e$ and is different from $\\ell$. Apply [lem-sfb-sylow-constants-field-degree] with base field $k$, field $M\\prime$, group $D\\prime$ and Sylow subgroup $S$ from step 4. Its purely inseparable fixed-field hypothesis is step 1. It gives $[(M\\prime)^S:k]$ finite and prime to $\\ell$, hence precisely $[\\kappa(c):\\kappa(b)]$ as required. This construction is made separately for each $b$ and makes no assertion about the other generic points of $Q$.",
+   "uses": [
+    "lem-sfb-finite-quotient-generic-fields",
+    "lem-sfb-sylow-constants-field-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 2, printed p.151, generic degree in (2.c), interpreted using the component stabilizers of Step 3; auxiliary fields.tex Tag 09HI, lemma-finite-purely-inseparable"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-universal-homeomorphism",
+  "def-weil-radicial-morphism",
+  "lem-sfb-finite-quotient-generic-fields",
+  "lem-weil-pbc-sylow-subgroup-prime-index",
+  "lem-sfb-sylow-conjugate-containment",
+  "lem-sfb-sylow-constants-field-degree"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "X 2.3 Step 2, printed p.151, expanded component selection for (2.c), using Step 3 stabilizers and existing quotient-field and constants-degree nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite group quotient generically radicial over a base each generic fibre has a Sylow quotient component of prime to ell residue degree",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"arithFrobAt\", \"module\": \"Mathlib/RingTheory/Frobenius\", \"type\": \"(R : Type u_1) →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          (G : Type u_3) →\\n            [inst_3 : Group G] →\\n              [inst_4 : MulSemiringAction G S] →\\n                [SMulCommClass G R S] →\\n                  (Q : Ide\", \"doc\": \"Given a prime ideal $ Q $ in a semiring $ S $ with finite quotient $ S/Q $, and a commutative semiring $ R $ with scalar multiplication commuting with a monoid action on $ S $, this definition asserts\"}\n  {\"name\": \"Ideal.ncard_primesOver_mul_card_inertia_mul_finrank\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {G : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G S] [IsGaloisGroup G R S] [Finite G] (p : Ideal R) [p.IsMaximal]\\n  (P : Ideal S) [inst_8 : P.LiesOver p] [P.IsMaximal] [Algebra.IsSeparabl\", \"doc\": \"For a maximal ideal $ p $ in a commutative ring $ R $ and a maximal ideal $ P $ in a commutative ring $ S $ lying over $ p $, if the algebra $ S/P $ is separable over $ R/p $, then the product of the \"}\n  {\"name\": \"IsArithFrobAt.exists_of_isInvariant\", \"module\": \"Mathlib/RingTheory/Frobenius\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (G : Type u_3)\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G S] [inst_5 : SMulCommClass G R S] (Q : Ideal S) [Finite G]\\n  [Algebra.IsInvariant R S G] [Q.IsPrime] [Finite (S ⧸ Q)], ∃ σ, IsArithFrobAt\", \"doc\": \"If $ Q $ is a prime ideal in $ S $ such that the quotient ring $ S/Q $ is finite, then there exists an element $ \\\\sigma \\\\in G $ such that $ \\\\sigma $ satisfies the arithmetic Frobenius condition at $ Q\"}\n  {\"name\": \"IsArithFrobAt.arithFrobAt\", \"module\": \"Mathlib/RingTheory/Frobenius\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (G : Type u_3)\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G S] [inst_5 : SMulCommClass G R S] (Q : Ideal S) [inst_6 : Finite G]\\n  [inst_7 : Algebra.IsInvariant R S G] [inst_8 : Q.IsPrime] [inst_9 :\", \"doc\": \"Given a prime ideal $ Q $ in a semiring $ S $ with finite quotient $ S/Q $, and a commutative semiring $ R $ with scalar multiplication commuting with a monoid action on $ S $, there exists a prime id\"}\n  {\"name\": \"IsArithFrobAt.exists_primesOver_isConj\", \"module\": \"Mathlib/RingTheory/Frobenius\", \"type\": \"∀ {R : Type u_1} (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (G : Type u_3)\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G S] [inst_5 : SMulCommClass G R S] [Finite G]\\n  [Algebra.IsInvariant R S G] (P : Ideal R),\\n  (∃ Q, Finite (S ⧸ ↑Q)) →\\n    ∃ σ, (∀ (Q : ↑(P\", \"doc\": \"Let $ R \\\\subseteq S $ be rings with $ S $ equipped with a monoid action commuting with scalar multiplication from $ R $. For any prime ideal $ P \\\\subseteq R $, if there exists a prime ideal $ Q \\\\subse\"}\n  {\"name\": \"Ideal.ncard_primesOver_mul_ramificationIdxIn_mul_inertiaDegIn\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] [IsDedekindDomain A] {p : Ideal A},\\n  p ≠ ⊥ →\\n    ∀ [p.IsMaximal] (B : Type u_2) [inst_3 : CommRing B] [IsDedekindDomain B] [inst_5 : Algebra A B] [Module.Finite A B]\\n      [Module.IsTorsionFree A B] (G : Type u_3) [inst_8 : Group G] [Finite G] [inst_10 : MulSemi\", \"doc\": \"For a prime ideal $\\\\mathfrak{p}$ in a Dedekind domain $A$ with finite Galois extension $A \\\\to B$ having Galois group $G$, the cardinality of $G$ equals the product of: (1) the number of distinct prime\"}\n  {\"name\": \"Ideal.card_inertia_eq_ramificationIdxIn\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {G : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G S] [IsGaloisGroup G R S] [Finite G] [IsDedekindDomain R]\\n  [IsDedekindDomain S] [Module.Finite R S] [Module.IsTorsionFree R S] (p : Ideal\", \"doc\": \"In a finite, torsion-free extension of Dedekind domains $ R \\\\to S $, for a non-zero prime ideal $ \\\\mathfrak{p} $ of $ R $ and a maximal ideal $ \\\\mathfrak{P} $ of $ S $ lying over $ \\\\mathfrak{p} $ with\"}\n  {\"name\": \"Ideal.inertiaDeg_eq_of_isGaloisGroup\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (p : Ideal A)\\n  (P Q : Ideal B) [hPp : P.IsPrime] [hp : P.LiesOver p] [hQp : Q.IsPrime] [Q.LiesOver p] (G : Type u_3)\\n  [inst_4 : Group G] [Finite G] [inst_6 : MulSemiringAction G B] [IsGaloisGroup G A B\", \"doc\": \"In a Galois extension, if $\\\\mathfrak{p}$ is a maximal ideal in $R$ and $\\\\mathfrak{P}, \\\\mathfrak{Q}$ are ideals in $S$ lying over $\\\\mathfrak{p}$, then the inertia degrees $[S/\\\\mathfrak{P} : R/\\\\mathfrak\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned facts do not state this lemma or give it by a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.residueFieldMap, Sylow",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: returned facts do not state this lemma or give it by a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "Sylow|fixedField|stabilizer",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: returned facts do not state this lemma or give it by a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Conjugate a Sylow subgroup of a decomposition group to find one generic point in a quotient whose residue field degree is coprime to the prime",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fixed Sylow quotient has a good generic point over each component by conjugating decomposition subgroups and comparing invariant field degrees",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Ideal.isPretransitive_of_isGalois\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (p : Ideal A)\\n  (G : Type u_3) [inst_3 : Group G] [Finite G] [inst_5 : MulSemiringAction G B] [inst_6 : IsGaloisGroup G A B],\\n  MulAction.IsPretransitive G ↑(p.primesOver B)\", \"doc\": \"Let $B$ be a Galois extension of a commutative ring $A$ with a finite Galois group $G$. For any ideal $p$ of $A$, the group $G$ acts transitively on the set of prime ideals of $B$ that lie over $p$.\"}\n  {\"name\": \"Ideal.isPretransitive_of_isGaloisGroup\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (p : Ideal A)\\n  (G : Type u_3) [inst_3 : Group G] [Finite G] [inst_5 : MulSemiringAction G B] [inst_6 : IsGaloisGroup G A B],\\n  MulAction.IsPretransitive G ↑(p.primesOver B)\", \"doc\": \"The group $ G $ acts on the set of prime ideals in $ B $ lying over the ideal $ p $, where the action is defined by applying each group element to the prime ideal.\"}\n  {\"name\": \"Ideal.exists_smul_eq_of_isGaloisGroup\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (p : Ideal A)\\n  (P Q : Ideal B) [hPp : P.IsPrime] [hp : P.LiesOver p] [hQp : Q.IsPrime] [Q.LiesOver p] (G : Type u_3)\\n  [inst_4 : Group G] [Finite G] [inst_6 : MulSemiringAction G B] [IsGaloisGroup G A B\", \"doc\": \"In a Galois extension $ B $ over $ A $ with Galois group $ G $, if two ideals $ P $ and $ Q $ in $ B $ both lie over the same ideal $ J $ in $ A $, then there exists an element $ \\\\sigma \\\\in G $ such t\"}\n  {\"name\": \"IsArithFrobAt.exists_primesOver_isConj\", \"module\": \"Mathlib/RingTheory/Frobenius\", \"type\": \"∀ {R : Type u_1} (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (G : Type u_3)\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G S] [inst_5 : SMulCommClass G R S] [Finite G]\\n  [Algebra.IsInvariant R S G] (P : Ideal R),\\n  (∃ Q, Finite (S ⧸ ↑Q)) →\\n    ∃ σ, (∀ (Q : ↑(P\", \"doc\": \"Let $ R \\\\subseteq S $ be rings with $ S $ equipped with a monoid action commuting with scalar multiplication from $ R $. For any prime ideal $ P \\\\subseteq R $, if there exists a prime ideal $ Q \\\\subse\"}\n  {\"name\": \"Ideal.exists_map_eq_of_isGalois\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (p : Ideal A)\\n  (P Q : Ideal B) [hPp : P.IsPrime] [hp : P.LiesOver p] [hQp : Q.IsPrime] [Q.LiesOver p] (G : Type u_3)\\n  [inst_4 : Group G] [Finite G] [inst_6 : MulSemiringAction G B] [IsGaloisGroup G A B\", \"doc\": \"In a Galois extension of commutative rings $ B $ over $ A $ with finite Galois group $ G $, if $ P $ and $ Q $ are prime ideals of $ B $ that both lie over the same prime ideal $ p $ of $ A $, then th\"}\n  {\"name\": \"galBasis\", \"module\": \"Mathlib/FieldTheory/KrullTopology\", \"type\": \"(K : Type u_1) → (L : Type u_2) → [inst : Field K] → [inst_1 : Field L] → [inst_2 : Algebra K L] → FilterBasis Gal(L/K)\", \"doc\": \"The filter basis for the Krull topology on the Galois group $\\\\text{Gal}(L/K)$, consisting of subgroups that fix finite intermediate fields between $K$ and $L$. Each basis element is the subgroup of au\"}\n  {\"name\": \"arithFrobAt\", \"module\": \"Mathlib/RingTheory/Frobenius\", \"type\": \"(R : Type u_1) →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          (G : Type u_3) →\\n            [inst_3 : Group G] →\\n              [inst_4 : MulSemiringAction G S] →\\n                [SMulCommClass G R S] →\\n                  (Q : Ide\", \"doc\": \"Given a prime ideal $ Q $ in a semiring $ S $ with finite quotient $ S/Q $, and a commutative semiring $ R $ with scalar multiplication commuting with a monoid action on $ S $, this definition asserts\"}\n  {\"name\": \"mem_galBasis_iff\", \"module\": \"Mathlib/FieldTheory/KrullTopology\", \"type\": \"∀ (K : Type u_1) (L : Type u_2) [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] (U : Set Gal(L/K)),\\n  U ∈ galBasis K L ↔ U ∈ (fun g => g.carrier) '' fixedByFinite K L\", \"doc\": \"A subset $ U $ of the Galois group $ \\\\text{Gal}(L/K) $ belongs to the Krull topology basis if and only if $ U $ is the underlying set of a subgroup that fixes a finite intermediate field between $ K $\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned facts do not state this lemma or give it by a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite group acting on a normal scheme, localizing a finite quotient at a generic point gives a product of finite fields with invariant rings the localized quotient",
+   "results": "{\"t\": \"2026-10-23T04:09:11Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite group acting on a normal scheme, localizing a finite quotient at a generic point gives a product of finite fields with invariant rings the localized quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"arithFrobAt\", \"IsArithFrobAt.arithFrobAt\", \"IsArithFrobAt.exists_of_isInvariant\", \"Ideal.Quotient.exists_algEquiv_fixedPoint_quotient_under\", \"Ideal.Quotient.normal\", \"Ideal.Quotient.finite_of_isInvariant\", \"IsGaloisGroup.to_isFractionRing\", \"IsFractionRing.stabilizerHom_surjective\"], \"digest\": \"4994e755eb977ba7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual invariant-ring, field, topological, or group-theoretic facts, not this generic-point assertion for finite scheme quotients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite group quotient of a normal scheme, a prescribed Sylow subgroup has a generic quotient point of residue degree prime to the Sylow prime",
+   "results": "{\"t\": \"2026-10-23T04:11:49Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite group quotient of a normal scheme, a prescribed Sylow subgroup has a generic quotient point of residue degree prime to the Sylow prime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsArithFrobAt.exists_of_isInvariant\", \"IsArithFrobAt.arithFrobAt\", \"Sylow.instFiniteQuotientSubgroupNormalizerOfFactPrime\", \"arithFrobAt\", \"IsArithFrobAt.exists_primesOver_isConj\", \"IsPGroup.to_quotient\", \"card_sylow_modEq_one\", \"Ideal.ncard_primesOver_mul_card_inertia_mul_finrank\"], \"digest\": \"0d5f4d32d13ae080\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual invariant-ring, field, topological, or group-theoretic facts, not this generic-point assertion for finite scheme quotients"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sylow, AlgebraicGeometry.Scheme",
+   "results": "{\"t\": \"2026-10-23T04:11:50Z\", \"tool\": \"loogle\", \"query\": \"Sylow, AlgebraicGeometry.Scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual invariant-ring, field, topological, or group-theoretic facts, not this generic-point assertion for finite scheme quotients"
+  },
+  {
+   "tool": "grep",
+   "query": "Sylow|fixedField|stabilizer",
+   "results": "{\"t\": \"2026-10-23T04:11:50Z\", \"tool\": \"grep\", \"query\": \"Sylow|fixedField|stabilizer\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual invariant-ring, field, topological, or group-theoretic facts, not this generic-point assertion for finite scheme quotients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Sylow quotient of a normal scheme has a generic point of degree coprime to the prime over a radicial full quotient",
+   "results": "{\"t\": \"2026-10-23T04:11:50Z\", \"tool\": \"leansearch\", \"query\": \"A Sylow quotient of a normal scheme has a generic point of degree coprime to the prime over a radicial full quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsGenericPoint\", \"genericPoint\", \"Sylow.card_quotient_normalizer_modEq_card_quotient\", \"Sylow.not_dvd_index'\", \"Sylow.ctorIdx\", \"Sylow.characteristic_of_normal\", \"Sylow.unique_of_normal\", \"IsIrreducible.isGenericPoint_genericPoint\"], \"digest\": \"90da566f52c221eb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual invariant-ring, field, topological, or group-theoretic facts, not this generic-point assertion for finite scheme quotients"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semilinear-sylow-good-components",
+  "date": "2026-10-22",
+  "group": "Q13"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration/tame-boundary reduction, through the global alteration input; ILO X 2.3: Expose X 2.3 Step 2, diagram (2.c), printed p.151, with explicit selection of components for the every-generic-point degree convention. The selection uses Sylow conjugacy in each decomposition group and invariant-field degrees, rather than interpreting a total degree as each residue degree. Re-split input: ILO Expose X 2.3 Step 2, printed p.151, prime-to-ell generic degree in diagram (2.c), with the component stabilizers discussed in Step 3 on the same page. Agent-extracted selection argument of returned item steps 7--9; localization of invariants: Stacks groupoids.tex Tag 03BK (lemma-invariants-base-change), part (3); inseparable degree: fields.tex Tag 09HI (lemma-finite-purely-inseparable).",
+   "via": [
+    "lem-sfb-semilinear-sylow-good-components",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-sylow-generic-prime-to-ell-lift",
+  "worker": "stage1",
+  "summary": "Q08: five-step proof with no new nodes. Use the existing normal quotient generic-field theorem, Sylow existence and conjugate containment, then the existing ineffective-action constants-degree theorem at the chosen component stabilizer. Explicit coset partitions verify the intersection is Sylow. Statement unchanged; every cited node statement read and quoted in citations.json.",
+  "blueprint": "Realizes the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration input through the recorded via chain, specifically ILO X 2.3 Step 2, diagram (2.c), p.151, using the component stabilizers of Step 3. blueprint_refs.py ancestor returns None; inherited null ancestor and via chain retained. A whole-blueprint Sylow search found only module-filtration and curve Sylow-trace nodes, neither this scheme quotient assertion."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-5743c57bf",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-5743c57bf (reviewer sub-agent of L); spot-checked: I read in full the unchanged statement, all five steps, the statements of all six cited nodes, and the source, ILO X 2.3 Step 2 (printed p.151, PDF p.157). The source says that X2/L → X2/G1 has generic degree prime to ℓ. The item correctly makes this a statement about one chosen component for each generic point b. There are no new nodes and no repair note, so the re-split rules do not apply. No SGA source is cited. Step 1: the item's universal-homeomorphism hypothesis on Z_U → U makes the point z over b generic in Z, and the radicial-morphism leaf (Stacks 01S4) makes κ(z)/k purely inseparable. I checked the dense-open argument. Step 2: lem-sfb-finite-quotient-generic-fields applies as stated; it gives a generic η over z and κ(z)=M^D through the canonical embedding. Step 3: two Sylow leaves; I checked that the stabilizer of gη is gDg^{-1}. Step 4: S=D′∩L is ℓ-Sylow in D′; this is a genuine two-line coset count and is correctly marked elementary. Step 5: applying the quotient node to q_G and to q_L at gη gives κ(c)=M′^S, with c generic in Q and d_L(c)=b. Then lem-sfb-sylow-constants-field-degree applies. I checked each of its hypotheses: K/k finite, action by k-automorphisms through h∘a=h, purely inseparable fixed field from step 1, S Sylow, ℓ≠char k. I also checked that the unsplit constants node is true: Artin's theorem on D′ modulo its kernel, plus an inseparable degree that is a power of p≠ℓ. Small cases tested: trivial G, ℓ not dividing |G|, characteristic 0, and non-faithful or disconnected cases. Route: both non-leaf cited statements are in unit sk-thm-sf-ctf-stability, so no tool_uses are needed. Duplicate search (rg -L sylow, 'generic degree prime to'): lem-per-sylow-simultaneous-field-sections, lem-sfb-generic-orbit-dense-quotient and the lem-per-alteration nodes all state different things. Batch-5 finding: lem-trf-normal-topologically-noetherian-components is Stacks 0357, general scheme topology that is part of neither the trace formula nor Poincaré duality nor their proofs, so it is genuinely outside the assumptions and accepted. No fixes."
+ }
+}

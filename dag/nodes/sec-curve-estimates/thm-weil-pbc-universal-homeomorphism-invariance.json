@@ -101,7 +101,18 @@
   "prop-weil-pbc-kinjective-resolutions-exist"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-curve-estimates",
  "unit": "sk-prop-cd",
  "split_report": {
@@ -142,5 +153,29 @@
   "landing": "20261012T070531-L-3468192",
   "kind": "interface",
   "note": "independent Codex review: Matched all five delivered Lean declarations with their nodes, the unchanged parent signature, proof dependencies, report and earlier return; compilation and axiom checks passed."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "If $u:X'\\to X$ is a universal homeomorphism\n[def-weil-pbc-scheme-conventions], then the morphisms of small etale sites\n[def-weil-pbc-etale-site] induced by $u$ give an equivalence of small etale\ntopoi, i.e. an equivalence of the categories of etale sheaves\n\n$$\n \\operatorname{Sh}(X_{\\Et})\\xrightarrow{\\ \\sim\\ }\\operatorname{Sh}(X'_{\\Et}),\n$$\n\ncompatible with the inverse and direct image functors and with cohomology.\nThe equivalence preserves and reflects covering families and is compatible\nwith identities, composition, and pullback of sheaves and cohomology.",
+  "proof": [
+   {
+    "text": "The input is the topological invariance of the small etale site\n[def-weil-pbc-etale-site]: for a universal homeomorphism\n[def-weil-pbc-scheme-conventions] $u:X'\\to X$, base change $V\\mapsto\nV\\times_XX'$ is an equivalence of the small etale categories, naturally in\nthe schemes and compatible with identities and composites, and it preserves\nand reflects jointly surjective families, because the underlying topological\nmap of $u$ and of every base change of $u$ is a homeomorphism (Stacks\nProject, Section 59.45, Tag\n[04DY](https://stacks.math.columbia.edu/tag/04DY), Theorem\n[04DZ](https://stacks.math.columbia.edu/tag/04DZ)). The inverse functors of\nthe equivalence are the inverse image $u^{-1}$ and the direct image $u_*$ of\n[def-weil-pbc-inverse-image]: the equivalence of sites makes $u^{-1}$ exact\nand $u_*$ its quasi-inverse, so the categories of\n[def-weil-pbc-etale-sheaves] are equivalent,\n\n$$\n \\operatorname{Sh}(X_{\\Et})\\xrightarrow{\\ \\sim\\ }\n \\operatorname{Sh}(X'_{\\Et}),\n$$\n\nand covering families are preserved and reflected by the site-equivalence\ninput. For the compatibility with cohomology, let $F\\to I$ be a resolution by\na bounded-below complex of injective sheaves (K-injective by\n[prop-weil-pbc-kinjective-resolutions-exist], so the model of\n[def-sp-kinjective-bridge] computes $H^q(X_{\\Et},F)$). Exactness\nof $u^{-1}$ sends the resolution to a resolution of $u^{-1}F$ with injective\nentries: for an injective $I^m$ the right adjoint criterion applied to the\nadjunction of [def-weil-pbc-inverse-image] gives that\n$\\operatorname{Hom}(u^{-1}I^m,-)\\cong\\operatorname{Hom}(I^m,u_*-)$ is exact.\nThe unit and counit of [def-weil-pbc-inverse-image] are the isomorphisms of\nthe equivalence, so\n$\\Gamma(X',u^{-1}I)=\\Gamma(X,u_*u^{-1}I)=\\Gamma(X,I)$ and hence\n\n$$\n H^q(X_{\\Et},F)\\xrightarrow{\\sim}H^q(X'_{\\Et},u^{-1}F)\n \\qquad(q\\geq0),\n$$\n\nthe compatibilities with identities, composition, and pullback of sheaves\nbeing the functoriality of the site equivalence: the equivalence of a\ncomposite is the composite of the equivalences, and for a base change $u'$ of\n$u$ — itself a universal homeomorphism by\n[lem-weil-pbc-universal-homeomorphism-base-change] — the equivalences of $u$\nand $u'$ form a commutative square with the inverse-image functors of\n[def-weil-pbc-inverse-image], which is the compatibility with pullback.",
+    "uses": [
+     "def-weil-pbc-etale-site",
+     "def-weil-pbc-scheme-conventions",
+     "def-weil-pbc-inverse-image",
+     "def-weil-pbc-etale-sheaves",
+     "prop-weil-pbc-kinjective-resolutions-exist",
+     "def-sp-kinjective-bridge",
+     "lem-weil-pbc-universal-homeomorphism-base-change"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

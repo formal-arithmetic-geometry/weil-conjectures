@@ -1,0 +1,285 @@
+{
+ "id": "lem-sfb-section-value-closure-dimension-specialization",
+ "kind": "statement",
+ "title": "Dimension of the closure of section values under specialization",
+ "statement": "Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], let $B$ be a finite type $A$-algebra [def-weil-pbc-finite-type-algebra], and put $T=\\operatorname{Spec}A$ and $Y=\\operatorname{Spec}B$ [def-weil-affine-spectrum]. Let $p:Y\\to T$ be the structure morphism and $(a_i:T\\to Y)_{i\\in I}$ any set-indexed family of sections, so $p\\circ a_i=\\mathrm{id}_T$. Suppose $t_0,t_1\\in T$ and $t_0\\in\\overline{\\{t_1\\}}$. For $j=0,1$, let $Y_{t_j}=Y\\times_T\\operatorname{Spec}\\kappa(t_j)$ [def-pc-base-change, def-weil-residue-field] and let $C_j$ be the closure in $|Y_{t_j}|$ of the images of the induced rational points $a_i(t_j):\\operatorname{Spec}\\kappa(t_j)\\to Y_{t_j}$ [def-pc-rational-point]. Then $\\dim C_1\\geq\\dim C_0$, with topological Krull dimension [def-kun-topological-krull-dimension]. The index set may be empty, in which case both dimensions are $-\\infty$. No flatness, smoothness, separatedness, henselianity or reducedness is assumed.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "5.3 Lemma 7, first assertion, printed p.126 (PDF p.132), affine case. Primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-affine-spectrum",
+  "def-pc-base-change",
+  "def-weil-residue-field",
+  "def-pc-rational-point",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [
+  {
+   "text": "If $I=\\varnothing$, both closures are empty and both dimensions are $-\\infty$. If $t_0=t_1$, the two closures agree. Hence assume $I\\ne\\varnothing$ and $t_0\\ne t_1$. The affine scheme $T=\\operatorname{Spec}A$ is locally Noetherian: its one-member affine cover has Noetherian coordinate ring [pqf-def-locnoeth]. Apply [lem-sbc-noetherian-specialization-trait] with $(y,x)=(t_1,t_0)$ to obtain a DVR $R$ and $u:\\operatorname{Spec}R\\to T$, with generic point $\\eta$ mapping to $t_1$ and closed point $s$ mapping to $t_0$. Put $K=\\operatorname{Frac}R$, $k=R/\\mathfrak m_R$ [def-sc-discrete-valuation-ring]. Base change each specified section along $u$; the defining projection identities of [def-pc-base-change] show that these are sections of $Y_R$. The induced maps of residue fields are field extensions $\\kappa(t_1)\\to K$ and $\\kappa(t_0)\\to k$.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-sbc-noetherian-specialization-trait",
+    "def-sc-discrete-valuation-ring",
+    "def-pc-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 054F, lemma-locally-Noetherian-specialization-dvr; BLR 5.3 Lemma 7, reduction to a DVR."
+   }
+  },
+  {
+   "text": "For $j=0,1$ set $B_j=B\\otimes_A\\kappa(t_j)$, the coordinate ring of $Y_{t_j}$ by [lem-weil-pbc-fibre-product-affine-spectra]. Let $e_{ij}:B_j\\to\\kappa(t_j)$ be evaluation at the specified section value and put $J_j=\\bigcap_{i\\in I}\\ker(e_{ij})$. In the Zariski topology a closed set $V(L)$ contains every value precisely when $L\\subseteq J_j$; thus $C_j=V(J_j)$. By [lem-weil-pbc-spec-quotient-homeomorphism-zero-locus], $Z_j=\\operatorname{Spec}(B_j/J_j)$ has underlying space $C_j$. Each value factors through $Z_j$, and their images are dense there. The quotient map defines a closed immersion [lem-weil-pbc-spec-quotient-closed-immersion]. After extending the field to $L_1=K$ or $L_0=k$, this remains a closed immersion by [lem-weil-pbc-closed-immersion-base-change]; [lem-sfb-rational-density-field-extension] makes the induced values dense in $(Z_j)_{L_j}$. Its closed image is therefore exactly the closure $C'_j$ of the base-changed values. The images of a fixed finite set of algebra generators of $B$ generate $B_j/J_j$ over $\\kappa(t_j)$. Apply [lem-pc-dim-base-change] to this finite type algebra and $L_j/\\kappa(t_j)$, and use [def-weil-pbc-krull-dimension-ring] to identify ring and spectrum dimensions. Hence $\\dim C'_j=\\dim C_j$. It suffices to prove the assertion over $R$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+    "lem-weil-pbc-spec-quotient-closed-immersion",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-sfb-rational-density-field-extension",
+    "lem-pc-dim-base-change",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/ega/EGA-IV-3_PMIHES-28-1966.pdf",
+    "place": "Corollaire 11.10.7, printed p.172; field-extension dimension: Stacks Tag 00P3 (algebra-lemma-dimension-preserved-field-extension)."
+   }
+  },
+  {
+   "text": "Write $D=B\\otimes_A R$ and $F=D\\otimes_R K$, and let $e_i:D\\to R$ be the maps of the base-changed sections [def-weil-affine-spectrum, lem-weil-pbc-fibre-product-affine-spectra]. Their generic evaluations are $e_{i,K}:F\\to K$. Put $J=\\bigcap_i\\ker(e_{i,K})$, $H=F/J$, and let $P$ be the inverse image of $J$ under $D\\to F$. Set $Q=D/P$ and $V=\\operatorname{Spec}Q$. The map $Q\\to H$ is injective by the definition of $P$. Moreover the map $Q\\otimes_R K\\to H$ sending $q\\otimes c$ to $cq$ is an isomorphism: every element of $F$ can be written $d/a$ with $d\\in D$ and $0\\ne a\\in R$, by taking a common denominator in a finite tensor sum; its class in $H$ is the image of $(d+P)\\otimes a^{-1}$. If this fraction maps to zero, $d/a\\in J$, so $d/1\\in J$ and $d\\in P$, proving injectivity as well. Thus the generic fibre $V_K$ is the closure $C'_1$, by the same vanishing-ideal description as in step 2. Finally $Q$ is torsion-free over $R$: if $0\\ne a\\in R$ and $aq=0$, its image in the $K$-algebra $H$ is zero after division by $a$, and injectivity $Q\\to H$ gives $q=0$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "5.3 Lemma 7, schematic closure of the generic closure; explicit affine quotient and fraction calculation."
+   }
+  },
+  {
+   "text": "A DVR is a principal ideal domain [def-sc-discrete-valuation-ring], so [lem-weil-pbc-pid-torsion-free-module-flat] applied to $Q$ proves flatness over $R$. By [lem-weil-pbc-flat-ring-map-iff-flat-affine], $V\\to\\operatorname{Spec}R$ is flat. A finite generating set of $B$ over $A$ generates $D$ over $R$, and its images generate $Q$ over $R$, so $V\\to\\operatorname{Spec}R$ is locally of finite type [def-weil-finite-type-morphism]. For every $d\\in P$ one has $e_i(d)=0$: its image in $K$ is $e_{i,K}(d/1)=0$, and $R\\to K$ is injective. Therefore the closed-fibre value of every section lies in $V_k\\subseteq Y_k$. This subset is closed, since the quotient closed immersion $V\\hookrightarrow Y_R$ remains closed after base change [lem-weil-pbc-spec-quotient-closed-immersion, lem-weil-pbc-closed-immersion-base-change]. It follows that $C'_0\\subseteq |V_k|$.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-pid-torsion-free-module-flat",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-spec-quotient-closed-immersion",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AUW, lemma-dedekind-torsion-free-flat (1); Tag 01U5, morphisms-lemma-flat-characterize; BLR 5.3 Lemma 7, flatness and containment."
+   }
+  },
+  {
+   "text": "If $\\dim C'_1=\\infty$ the required inequality is automatic. Otherwise $C'_1\\ne\\varnothing$ because the family is nonempty, so its dimension is an integer $r\\geq0$ [def-kun-topological-krull-dimension]. Apply [lem-trf-flat-family-generic-dimension-bound] with integral base $\\operatorname{Spec}R$, the flat locally finite type morphism $V\\to\\operatorname{Spec}R$ of step 4, and $r=\\dim V_K=\\dim C'_1$. It gives $\\dim V_k\\leq\\dim C'_1$. Since $C'_0$ is closed in $V_k$, each chain of irreducible closed subsets of $C'_0$ is the same strict chain of irreducible closed subsets of $V_k$, so $\\dim C'_0\\leq\\dim V_k$ directly from [def-kun-topological-krull-dimension]. Step 2 now gives $\\dim C_0=\\dim C'_0\\leq\\dim C'_1=\\dim C_1$.",
+   "uses": [
+    "def-kun-topological-krull-dimension",
+    "lem-trf-flat-family-generic-dimension-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0H3X, lemma-relative-dimension-support-flat with the structure sheaf; compare EGA IV_3 Lemma 14.3.10, printed pp.207–208, and BLR 5.3 Lemma 7."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-locnoeth",
+  "lem-sbc-noetherian-specialization-trait",
+  "def-sc-discrete-valuation-ring",
+  "def-pc-base-change",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+  "lem-weil-pbc-spec-quotient-closed-immersion",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-sfb-rational-density-field-extension",
+  "lem-pc-dim-base-change",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-pid-torsion-free-module-flat",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "def-weil-finite-type-morphism",
+  "def-kun-topological-krull-dimension",
+  "lem-trf-flat-family-generic-dimension-bound"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/ega/EGA-IV-3_PMIHES-28-1966.pdf",
+  "place": "BLR 5.3 Lemma 7 DVR/flat-closure route, with EGA IV_3 11.10.7 and 14.3.10 read locally; explicit affine quotient calculation and existing Stacks 054F, 00P3, 0AUW, 01U5, 0H3X. BLR primary scan read online; local copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type scheme over a Noetherian base and any family of sections the dimension of the closure of their fibre values cannot increase under specialization",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget (AlgebraicGeometry.topologically @SpecializingMap)\", \"doc\": \"The property of being a specializing map for scheme morphisms is Zariski local at the target. This means that if a morphism $ f : X \\to Y $ of schemes has the property that its underlying continuous ma\"}\n  {\"name\": \"AlgebraicGeometry.universallyClosed_eq_universallySpecializing\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"@AlgebraicGeometry.UniversallyClosed =\\n  (AlgebraicGeometry.topologically @SpecializingMap).universally ⊓ @AlgebraicGeometry.QuasiCompact\", \"doc\": \"A morphism of schemes is universally closed if and only if it is both quasi-compact and universally specializing. Universally specializing means that for every base change, the induced morphism preser\"}\n  {\"name\": \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.LocallyOfFiniteType f],\\n  JacobsonSpace ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes that is locally of finite type, and let $y$ be a point in $Y$. Then the fiber of $f$ over $y$, denoted $X_y$, is a Jacobson space.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.jacobsonSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFiniteType f] [JacobsonSpace ↥Y],\\n  JacobsonSpace ↥X\", \"doc\": \"If $ Y $ is a Jacobson space and $ f: X \\to Y $ is a morphism locally of finite type, then $ X $ is also a Jacobson space.\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsNoetherian X], (irreducibleComponents ↥X).Finite\", \"doc\": \"If $ X $ is a Noetherian scheme, then the set of its irreducible components is finite.\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.isClosedMap_iff_specializingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f],\\n  IsClosedMap ⇑(CategoryTheory.ConcreteCategory.hom f.base) ↔\\n    SpecializingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"For a quasi-compact morphism $ f: X \\to Y $ of schemes, $ f $ is a closed map if and only if it is a specializing map. A closed map sends closed subsets to closed subsets, while a specializing map ensu\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary specialization, Noetherianity, dominance, or smooth loci; none states this assertion or a one-line generalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"section\", \"dim\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary specialization, Noetherianity, dominance, or smooth loci; none states this assertion or a one-line generalization."
+  },
+  {
+   "tool": "grep",
+   "query": "section.*speciali[sz]|speciali[sz].*section|closure.*section.*dim|dim.*closure.*section",
+   "results": "[grep] OK 11 hit(s)\n  {\"file\": \"Mathlib/Combinatorics/Pigeonhole.lean\", \"line\": \"335\", \"text\": \"In this section we specialize theorems from the previous section to the special case of functions\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"line\": \"861\", \"text\": \"section stableUnderSpecialization\"}\n  {\"file\": \"Mathlib/Order/KonigLemma.lean\", \"line\": \"29\", \"text\": \"This is a specialization of the much more general `nonempty_sections_of_finite_cofiltered_system`,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean\", \"line\": \"275\", \"text\": \"section SpecializingMap\"}\n  {\"file\": \"Mathlib/Topology/Sheaves/Stalks.lean\", \"line\": \"351\", \"text\": \"section stalkSpecializes\"}\n  {\"file\": \"Mathlib/Analysis/Calculus/Deriv/AffineMap.lean\", \"line\": \"61\", \"text\": \"In this section we specialize some lemmas to `AffineMap.lineMap` because this map is very useful to\"}\n  {\"file\": \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"line\": \"32\", \"text\": \"* `nonempty_sections_of_finite_inverse_system` is a specialization of the above to `J` being a\"}\n  {\"file\": \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"line\": \"78\", \"text\": \"See `nonempty_sections_of_finite_inverse_system` for a specialization to inverse limits. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Galois/Prorepresentability.lean\", \"line\": \"48\", \"text\": \"In the following the section `Specialized` is reserved for the setup where `F` takes values in\"}\n  {\"file\": \"Mathlib/CategoryTheory/Galois/Prorepresentability.lean\", \"line\": \"143\", \"text\": \"section Specialized\"}\n  {\"file\": \"Mathlib/CategoryTheory/Galois/Prorepresentability.lean\", \"line\": \"209\", \"text\": \"section Specialized\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary specialization, Noetherianity, dominance, or smooth loci; none states this assertion or a one-line generalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dimension of the Zariski closure of the values of a family of sections of a finite type morphism at a general point is at least its dimension at a specialization",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"PrimeSpectrum.isClosed_of_stableUnderSpecialization_of_isConstructible\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.ConstructibleSet\", \"type\": \"{R : Type*} [CommRing R] {s : Set (PrimeSpectrum R)} (hs : StableUnderSpecialization s) (hs' : IsConstructible s) :\\n  IsClosed s\", \"doc\": \"In the Zariski topology on the prime spectrum of a commutative ring $ R $, any constructible set that is stable under specialization is closed.\"}\n  {\"name\": \"PrimeSpectrum.closure_image_comap_zeroLocus\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \"(I : Ideal S) : closure (comap f '' zeroLocus I) = zeroLocus (I.comap f)\", \"doc\": \"For a ring homomorphism $ f : R \\to S $ and an ideal $ I $ of $ S $, the Zariski closure of the image of the zero locus of $ I $ under the preimage map $ f^{-1} $ is equal to the zero locus of the prei\"}\n  {\"name\": \"IsLocalRing.specializes_closedPoint\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \"(x : PrimeSpectrum R) : x ⤳ closedPoint R\", \"doc\": \"In the Zariski topology on the prime spectrum of a local ring $ R $, every prime ideal specializes to the unique closed point corresponding to the maximal ideal of $ R $.\"}\n  {\"name\": \"PrimeSpectrum.stableUnderSpecialization_image_iff\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \"(Z : Set (PrimeSpectrum S)) (hZ : IsClosed Z) : StableUnderSpecialization (comap f '' Z) ↔ IsClosed (comap f '' Z)\", \"doc\": \"For a closed set $ Z $ in the prime spectrum of a commutative semiring $ S $, the image of $ Z $ under the preimage map induced by a ring homomorphism $ f : R \\to S $ is stable under specialization in \"}\n  {\"name\": \"AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \"[UniversallyClosed f] [IsDominant f] : Surjective f\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is universally closed if for every base change, the induced morphism is a closed map in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"(f : X ⟶ (Spec <| .of K)) [IsIntegral X] [UniversallyClosed f] [LocallyOfFiniteType f] : f.appTop.hom.Finite\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"PrimeSpectrum.stableUnderSpecialization_range_iff\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \": StableUnderSpecialization (Set.range (comap f)) ↔ IsClosed (Set.range (comap f))\", \"doc\": \"For a ring homomorphism $ f : R \\\\to S $ between commutative semirings, the image of the prime spectrum map $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R) $ induced by $ f $ is stable under specia\"}\n  {\"name\": \"Module.stableUnderSpecialization_support\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Module\", \"type\": \": StableUnderSpecialization (Module.support R M)\", \"doc\": \"For a module $ M $ over a commutative semiring $ R $, the support of $ M $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ is stable under specialization. This means that if a prime ideal $ \\\\mathfrak\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary specialization, Noetherianity, dominance, or smooth loci; none states this assertion or a one-line generalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Semicontinuity of dimension of the closure of an arbitrary set of sections in fibres over a noetherian scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyNoetherian X], QuasiSeparatedSpace ↥X\", \"doc\": \"Every locally Noetherian scheme is quasi-separated, meaning the intersection of any two quasi-compact open subsets of the scheme is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.noetherianSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsNoetherian X], TopologicalSpace.NoetherianSpace ↥X\", \"doc\": \"Every Noetherian scheme has an underlying topological space that satisfies the Noetherian condition, meaning every descending chain of closed subsets stabilizes.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is locally Noetherian if it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_of_noetherianSpace_source\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [TopologicalSpace.NoetherianSpace ↥X] (f : X ⟶ Y), AlgebraicGeometry.QuasiCompact f\", \"doc\": \"Any morphism of schemes with a Noetherian source is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsNoetherian X], (irreducibleComponents ↥X).Finite\", \"doc\": \"If $ X $ is a Noetherian scheme, then the set of its irreducible components is finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyNoetherian X],\\n  topologicalKrullDim ↥X ≤ 0 → AlgebraicGeometry.IsLocallyArtinian X\", \"doc\": \"If a scheme $ X $ is locally Noetherian and its topological Krull dimension satisfies $ \\\\dim(X) \\\\leq 0 $, then $ X $ is locally Artinian. This follows because a Noetherian topological space of dimensi\"}\n  {\"name\": \"AlgebraicGeometry.instIsLocallyNoetherianToScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens} [AlgebraicGeometry.IsLocallyNoetherian X],\\n  AlgebraicGeometry.IsLocallyNoetherian ↑U\", \"doc\": \"If $X$ is a locally Noetherian scheme and $U$ is an open subscheme of $X$, then $U$ is also a locally Noetherian scheme. This follows from the fact that any open subset of a scheme inherits the local \"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (S : ↑X.affineOpens) (U₁ U₂ : X.Opens) {n₁ n₂ : ℕ}\\n  {y₁ : ↑(X.presheaf.obj (Opposite.op U₁))} {y₂ : ↑(X.presheaf.obj (Opposite.op U₂))}\\n  {f : ↑(X.presheaf.obj (Opposite.op (U₁ ⊔ U₂)))} {x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))} (h₁ : ↑S ≤ U₁)\\n  (h₂ : ↑S \", \"doc\": \"For a scheme $X$ and open subsets $U_1, U_2 \\\\subseteq X$, given a section $f$ over $U_1 \\\\cup U_2$, the basic open set defined by the restriction of $f$ to $U_1$ is contained in $U_1$, i.e., $\\\\text{bas\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary specialization, Noetherianity, dominance, or smooth loci; none states this assertion or a one-line generalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a family of sections of an affine finite type scheme over a Noetherian ring the dimension of the Zariski closure of their values does not increase under specialization",
+   "results": "{\"t\": \"2026-10-24T10:26:49Z\", \"tool\": \"leanfinder\", \"query\": \"For a family of sections of an affine finite type scheme over a Noetherian ring the dimension of the Zariski closure of their values does not increase under specialization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget\", \"AlgebraicGeometry.noetherianSpace_of_isAffine\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.instPreorder\", \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty\", \"AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty'\", \"AlgebraicGeometry.Scheme.range_fromSpecStalk\", \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\"], \"digest\": \"cf7482cd0ffd521a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned hits; ordinary specialization, topology and flat morphism tools do not state fibrewise closure-of-section-values dimension monotonicity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dimensions of closures of section values in fibres decrease under specialization of the base",
+   "results": "{\"t\": \"2026-10-24T10:26:51Z\", \"tool\": \"leansearch\", \"query\": \"Dimensions of closures of section values in fibres decrease under specialization of the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Specializes.mem_closed\", \"Specializes.closure_subset\", \"SpecializingMap.closure_singleton_subset\", \"Specializes.mem_closure\", \"specializes_iff_closure_subset\", \"Specializes\", \"TopCat.Presheaf.stalkSpecializes\", \"SpecializingMap.stableUnderSpecialization_range\"], \"digest\": \"3b3c523f7b07a70d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned hits; ordinary specialization, topology and flat morphism tools do not state fibrewise closure-of-section-values dimension monotonicity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"closure\", \"section\"",
+   "results": "{\"t\": \"2026-10-24T10:26:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"closure\\\", \\\"section\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned hits; ordinary specialization, topology and flat morphism tools do not state fibrewise closure-of-section-values dimension monotonicity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Specializing the values of a set of algebra homomorphisms B to A decreases the dimension of their Zariski closure in the affine fibres",
+   "results": "{\"t\": \"2026-10-24T10:31:26Z\", \"tool\": \"leanfinder\", \"query\": \"Specializing the values of a set of algebra homomorphisms B to A decreases the dimension of their Zariski closure in the affine fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.HasGoingDown\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"Algebra.HasGoingDown.iff_generalizingMap_primeSpectrumComap\", \"chevalley_mvPolynomial_mvPolynomial\", \"ax_grothendieck_zeroLocus\", \"PrimeSpectrum.exists_image_comap_of_finite_of_free\", \"MvPolynomial.pointToPoint_zeroLocus_le\", \"PrimeSpectrum.stableUnderSpecialization_range_iff\"], \"digest\": \"e421b1cc666abab5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned hits; ordinary specialization, topology and flat morphism tools do not state fibrewise closure-of-section-values dimension monotonicity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-strict-local-sections-meet-dense-fibre-opens",
+  "date": "2026-10-24",
+  "group": "Q30"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "BLR 5.3 Lemma 7, first assertion: dimension inequality for closures of a family of sections, used to propagate closed-fibre density in the strict-local section input of Lemma 6.",
+   "via": [
+    "lem-sfb-strict-local-sections-meet-dense-fibre-opens",
+    "lem-sfb-strict-law-finite-translate-envelope",
+    "lem-sfb-strict-birational-law-realization",
+    "lem-sfb-trait-birational-group-envelope",
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-section-value-closure-dimension-specialization",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Followed BLR 5.3 Lemma 7 through a DVR and an explicit saturated affine closure. Reused existing density, dimension, trait and PID flatness nodes; no new nodes. Wrote the scalar-extension closure identification, localization calculation and all section-containment checks explicitly. No exact project Lean attachment or Mathlib match was found.",
+  "blueprint": "blueprint_refs ancestor returns null. The inherited from.place identifies BLR 5.3 Lemma 7 first assertion used in the strict-local-sections input of the finite-translate construction. Steps 1–2 justify its DVR reduction, steps 3–4 construct the flat closure and contain the section values, step 5 proves the dimension bound. Searched the whole imported blueprint and current latest ef6f9619 snapshot: no same assertion. The inherited chapter and unit are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-noetherian-specialization-trait",
+    "why": "DVR witness for a nontrivial specialization (054F). This is a general algebraic-geometry tool; the inherited unit has no replacement statement."
+   },
+   {
+    "node": "lem-pc-dim-base-change",
+    "why": "Invariance of the dimension of a finite type field algebra under scalar extension (00P3). This is a general algebraic-geometry tool; the inherited unit has no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+    "why": "Identify affine quotient spectra with the closed vanishing sets. This is a general algebraic-geometry tool; the inherited unit has no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-spec-quotient-closed-immersion",
+    "why": "The quotient maps used in the affine construction are closed immersions. This is a general algebraic-geometry tool; the inherited unit has no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Closed embeddings remain closed after the field/fibre base changes. This is a general algebraic-geometry tool; the inherited unit has no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "why": "Convert the proved ring flatness into flatness of the affine scheme morphism. This is a general algebraic-geometry tool; the inherited unit has no replacement statement."
+   },
+   {
+    "node": "lem-trf-flat-family-generic-dimension-bound",
+    "why": "Bound the special fibre of the flat closure by its generic fibre dimension (0H3X). This is a general algebraic-geometry tool; the inherited unit has no replacement statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-noetherian-specialization-trait",
+  "lem-pc-dim-base-change",
+  "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+  "lem-weil-pbc-spec-quotient-closed-immersion",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-trf-flat-family-generic-dimension-bound"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-a7de89472",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-a7de89472 (reviewer sub-agent of L); spot-checked: PASS: I read all five steps against every cited node's statement and found no faults; no fixes written. First split of a node that had no proof (live record unsplit, proof []), so not a re-split; statement and stmt_deps unchanged from live. No new nodes, and rg -L over the DAG finds no duplicate. Direction matches the citer lem-sfb-strict-local-sections-meet-dense-fibre-opens, which needs dim C_t >= dim C_{s_0}. Small cases tested: empty family, t0=t1, one section, x=ct over k[t] (strict drop 1 to 0), nilpotents. Step 1: trait lemma 054F applied with distinct points, and def-pc-base-change gives the induced sections. Step 2: C_j=V(cap ker e_ij); density over a field extension (lem-sfb-rational-density-field-extension), closed-immersion base change and 00P3 on the finite type quotient give dim C'_j=dim C_j. Step 3: the localization calculation Q tensor K = H with Q injecting into H is checked; marked elementary and it is. Step 4: the PID torsion-free-flat lemma, the affine flatness node and finite generation give a flat, locally finite type V; the sections factor through V because R injects into K, so C'_0 lies in the closed V_k. Step 5: the hypotheses of 0H3X (integral base, flat, locally finite type, integer r) hold; the infinite case is separate and the closed-subset chain step is direct. Batch-5 flag: lem-trf-flat-family-generic-dimension-bound is Stacks 0H3X for the structure sheaf. Its full closure (468 nodes) holds only commutative algebra and dimension nodes, with no cohomological, Poincare, trace-transport or nt-assume node, so neither assumption gives it and it is not a step of their proofs. Accepted. The worker's seven tool_uses entries (054F, 00P3, the spec-quotient facts, closed-immersion base change, affine flatness, 0H3X) are general algebraic-geometry tools that the unit has no replacement for; accepted. BLR local PDF absent (WANTED): the statement and the agent-written proof were checked on their own terms."
+ }
+}

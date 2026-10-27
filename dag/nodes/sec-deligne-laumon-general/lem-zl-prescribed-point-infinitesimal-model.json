@@ -1,0 +1,155 @@
+{
+ "id": "lem-zl-prescribed-point-infinitesimal-model",
+ "kind": "statement",
+ "title": "Finite-point kernel and square-ideal jet comparison",
+ "statement": "Let k be algebraically closed, let X and Y be schemes locally of finite type over k,\nlet j:X -> Y be an open immersion over k, and let S be a finite set of closed points\nof X. With the concrete sections and jets of [def-zl-prescribed-point-system-data],\nthere exist closed immersions i:Z -> Y and w:W -> Y with range(i)=j(S), finite\nrange(w), and ker(w)=ker(i)^2, using the ideal sheaves and powers of\n[def-sbc-closed-immersion-ideal-sheaf, def-sbc-ideal-sheaf-powers]. For every invertible\nmodule M on Y, restriction of v in Gamma(Y,M) to Z vanishes exactly when its tensor\npullback to X vanishes in all residue fibres at S. Moreover every tuple b in the\nproduct over x in S of (m_x/m_x^2) tensor (j^*M)_x is represented by a section t of\nw^*M on W such that EVERY global section v of M restricting to t vanishes at S and\nhas prescribedPointJet(j^*v,x)=b_x. No global lifting of t to Y is asserted here.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-lem-wgen-bertini-cover/lem-zl-bertini-finite-cover-curve.proof.md",
+  "place": "Proof paragraph 2: first infinitesimal neighbourhood interpolation"
+ },
+ "stmt_deps": [
+  "def-zl-prescribed-point-system-data",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-ideal-sheaf-powers"
+ ],
+ "proof": [
+  {
+   "text": "The finite-type k-scheme Y is Jacobson. The open immersion carries each closed point of S to a locally closed point, hence a closed point of Y. Let C=j(S), J be its vanishing ideal, Z=V(J), and W=V(J^2). The support and kernel identities for ideal subschemes give the required ranges and square-kernel equality. Both finite subspaces are T1 and thus discrete; this includes empty S.",
+   "uses": [
+    "lem-sc-lft-over-field-jacobson-space",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-sbc-ideal-sheaf-powers"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At a point y of C, remove the other finitely many closed points and choose an affine neighbourhood U. The preimage of C in Spec Gamma(U) is the singleton prime corresponding to y. Hence J(U) is that prime. The closed-immersion stalk-kernel formula and localization of ideal powers show that the stalk map for V(J^n) has kernel m_y^n. This is proved in finitePoint_ideal_stalk_kernel_pow using Scheme.Hom.ker_stalkMap and IsLocalization.AtPrime.map_eq_maximalIdeal.",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-sbc-ideal-sheaf-powers"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the existing pullback-stalk scalar-extension isomorphism, and compare the ordinary and tensor pullback units by uniqueness of left adjoints. An invertible stalk frame turns the tensor unit into the ring stalk map on coefficients. A local homomorphism of local rings detects membership in the maximal ideal. The reduced finite subscheme Z has field stalks, so its surjective stalk map has exactly the maximal ideal as kernel. These calculations identify zero germs after restriction to Z with the specified residue vanishing on X; the sheaf section-extensionality theorem gives the global equivalence.",
+   "uses": [
+    "def-zl-prescribed-point-system-data",
+    "lem-weil-pbc-module-stalk-pullback",
+    "lem-weil-pbc-invertible-stalk-linear-equiv"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Fix exactly the frame chosen in prescribedPointJet at x. Tensoring this rank-one frame identifies a cotangent tensor b with a cotangent class; choose a representative a in the maximal ideal. The open immersion has an isomorphism of ring stalks, so the module tensor unit is surjective and lifts the framed element a to an original M stalk element m. Its tensor class defines an ordinary pullback germ q on W. Right exactness of tensor products gives ker(1 tensor -)=ker(O_Y to O_W) times M. The preceding ideal calculation makes this kernel m_y^2 M. Thus any section restricting to q has framed coefficient differing from a by m_x^2. It vanishes in the residue fibre and has exactly the prescribed cotangent tensor under the defining formula.",
+   "uses": [
+    "def-zl-prescribed-point-system-data",
+    "lem-weil-pbc-module-stalk-pullback",
+    "lem-weil-pbc-invertible-stalk-linear-equiv",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-sbc-ideal-sheaf-powers"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On a discrete scheme, realize each assigned stalk germ by a section on its singleton open, and glue these sections using the sheaf axiom; compatibility follows because distinct singletons do not meet. Apply this to the germs q on W indexed by its bijection with S. Every global lift of the resulting section has the previously computed residue and jet at every x in S. For empty W the same empty-family gluing proves the assertion.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-lft-over-field-jacobson-space",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-ideal-sheaf-powers",
+  "def-zl-prescribed-point-system-data",
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-weil-pbc-invertible-stalk-linear-equiv"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-lem-wgen-bertini-cover/lem-zl-bertini-finite-cover-curve.proof.md",
+  "place": "Paragraph 2, implemented via affine ideal-stalk kernels, scalar-extension stalks, and singleton-open gluing (G3)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a scheme and finite set of rational closed points the square ideal thickening has sections representing all cotangent vectors",
+   "results": "Ideal.cotangentEquivIdeal and Ideal.Cotangent describe the local algebra; they do not construct the finite closed scheme or its section comparison.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of an invertible sheaf on a square ideal finite closed subscheme give all first order jets at its reduced support",
+   "results": "Scheme.IdealSheafData.subschemeObjIso, subschemeι_app and affine localization lemmas; none states the module or concrete-jet comparison.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangentEquivIdeal|toCotangent_surjective",
+   "results": "Mathlib/RingTheory/Ideal/Cotangent.lean:71,147 gives local quotient surjectivity and the square-ideal isomorphism; no global finite-support statement.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PrescribedPointEventualJetSystem",
+  "date": "2026-10-26",
+  "group": "J9"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-bertini-finite-cover-curve",
+   "place": "Proof paragraph 2: vanishing on the reduced finite subscheme and first-neighbourhood interpolation",
+   "via": [
+    "lem-zl-prescribed-point-eventual-jet-system",
+    "lem-zl-bertini-prescribed-point-smooth-system"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PrescribedPointInfinitesimalModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrescribedPointInfinitesimalModel.lean",
+  "declaration": "AlgebraicGeometry.exists_prescribedPoint_infinitesimalModel",
+  "statement": "theorem exists_prescribedPoint_infinitesimalModel\n    {k : Type u} [Field k] [IsAlgClosed k]\n    {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))]\n    (j : X ⟶ Y) [IsOpenImmersion j] (hj : j ≫ (Y ↘ Spec (.of k)) =\n      X ↘ Spec (.of k))\n    (S : Finset X) (hclosed : ∀ x ∈ S, IsClosed ({x} : Set X)) :\n    ∃ (Z W : Scheme.{u}) (i : Z ⟶ Y) (w : W ⟶ Y)\n      (_ : IsClosedImmersion i) (_ : IsClosedImmersion w),\n      Set.range i = j '' (S : Set X) ∧\n      (Set.range w).Finite ∧ w.ker = i.ker ^ 2 ∧\n      ∀ (M : Y.Modules) [M.IsInvertible],\n        (∀ v : Γ(M, ⊤), pullbackΓ i M v = 0 ↔\n          prescribedPointVanishes ((tensorPullback j).obj M) S (tensorSectionsUnit j M v)) ∧\n        ∀ (hMj : ((tensorPullback j).obj M).IsInvertible)\n          (b : (x : S) → PrescribedPointJet ((tensorPullback j).obj M) x.val),\n          ∃ t : Γ((Scheme.Modules.pullback w).obj M, ⊤),\n            ∀ v : Γ(M, ⊤), pullbackΓ w M v = t →\n              prescribedPointVanishes ((tensorPullback j).obj M) S\n                (tensorSectionsUnit j M v) ∧\n              ∀ x : S, @prescribedPointJet X ((tensorPullback j).obj M) hMj x.val\n                (tensorSectionsUnit j M v) = b x",
+  "branch": "sheaf-dag",
+  "by": "J9",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261026T023404-L-557776",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261026T065749-L-3227633",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

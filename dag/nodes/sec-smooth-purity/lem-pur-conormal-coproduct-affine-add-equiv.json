@@ -1,0 +1,181 @@
+{
+ "id": "lem-pur-conormal-coproduct-affine-add-equiv",
+ "kind": "statement",
+ "title": "Additive affine sections of the coproduct of conormal pieces",
+ "statement": "Let $i:Z\\to X$ be a closed immersion, with the fixed power modules, pullback pieces and adjunction representatives [lem-pur-conormal-graded-algebra-basic]. Let $M$ be any $\\mathcal O_Z$-module with maps $j_n:\\operatorname{piece}(i,n)\\to M$ forming a sheaf-module coproduct. For any affine open $U\\subseteq X$, put $R=\\Gamma(X,U)$ and $J=\\ker(i)(U)$. There is an additive equivalence $E:\\Gamma(M,i^{-1}U)\\simeq\\bigoplus_n J^n/J^{n+1}$ [def-weil-pbc-associated-graded-ring] such that $E(j_n(\\eta(a)))$ is the degree-n quotient class of the power inclusion of a, for every power-module section a on U. In particular its inclusion lies in J^n. No multiplication or unit on M is assumed or constructed.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0633 (lemma-affine-conormal-sheaf), part (2) and proof, expanding the omitted details only for the underlying additive modules."
+ },
+ "stmt_deps": [
+  "lem-pur-conormal-graded-algebra-basic",
+  "def-weil-pbc-associated-graded-ring",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "For every degree, specialize the ideal-times affine-sections theorem to the power module. It gives quasi-coherence, surjectivity of the quotient projection and kernel J times the power sections. The power inclusion has range J^n, including n=0 by the identity inclusion. Its injectivity follows from the proved formalPolynomial_power_injective helper. Mapping the kernel submodule through the inclusion gives J^(n+1), using map_smul, map_top and the ideal power identity. The first isomorphism theorem for linear maps identifies the quotient sections with J^n/J^(n+1), with the asserted value on representatives.",
+   "uses": [
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-formal-polynomial-power-lifts",
+    "def-weil-pbc-formal-kernel-graded-pieces"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0633 (lemma-affine-conormal-sheaf), part (2) and proof, expanding the omitted details only for the underlying additive modules."
+   }
+  },
+  {
+   "text": "Apply the normalized closed-immersion power-quotient comparison with the first power of ker(i), F equal to the n-th power module, and the very adjunction chosen in the definition of representative. Its isomorphism identifies the preceding quotient sheaf with i_* piece(i,n). Evaluate this isomorphism on U and compose its inverse with the preceding quotient equivalence. Evaluating its projection equation supplies the degreewise normalization. Quasi-coherence of each piece follows by the canonical tensor-to-ordinary pullback comparison.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-power-quotient",
+    "lem-pc-module-pullback-adjunction",
+    "lem-pur-conormal-graded-algebra-basic",
+    "def-weil-pbc-tensor-pullback-ordinary-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0633 (lemma-affine-conormal-sheaf), part (2) and proof, expanding the omitted details only for the underlying additive modules."
+   }
+  },
+  {
+   "text": "Restrict the supplied cofan along the canonical Spec chart of the affine inverse image of U. Restriction preserves the colimit and quasi-coherence. On a spectrum the colimit point is quasi-coherent by the existing coproduct-closure theorem and its canonical isomorphism to the supplied point; reindex the small family by ULift to apply the universe-sized closure statement. Lift this cofan to the full subcategory of quasi-coherent modules, reflecting the colimit along its fully faithful inclusion. The inverse tilde equivalence preserves that colimit. Compare the resulting module cofan to ModuleCat.coproductCoconeIsColimit, obtaining a linear equivalence to the direct sum. Transport the sections of the chart back to the affine open using restrictAppIso and the equality of its image with that open. Naturality and the cofan comparison equation give its value on each injection.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0633 (lemma-affine-conormal-sheaf), part (2) and proof, expanding the omitted details only for the underlying additive modules."
+   }
+  },
+  {
+   "text": "Compose the affine coproduct additive equivalence with DirectSum.congrAddEquiv of the degreewise quotient equivalences. DirectSum.map_of, the coproduct normalization and the degreewise normalization prove the required equation, carrying the actual power-inclusion membership proof. This is a direct-sum construction and uses no multiplication or unit of the coproduct.",
+   "uses": [
+    "def-weil-pbc-associated-graded-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0633 (lemma-affine-conormal-sheaf), part (2) and proof, expanding the omitted details only for the underlying additive modules."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-formal-polynomial-power-lifts",
+  "def-weil-pbc-formal-kernel-graded-pieces",
+  "lem-weil-pbc-closed-immersion-power-quotient",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pur-conormal-graded-algebra-basic",
+  "def-weil-pbc-tensor-pullback-ordinary-comparison",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "def-weil-pbc-associated-graded-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0633 (lemma-affine-conormal-sheaf), part (2) and proof, expanding the omitted details only for the underlying additive modules.",
+  "method": "N4: complete Lean proof via affine quotient kernels, the normalized closed-immersion quotient isomorphism, and the affine tilde equivalence applied to the given coproduct. All private helpers are proved; no new nodes or holes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Affine sections of a sheaf module coproduct of conormal power quotients are additively the direct sum of the ideal power quotients",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.Hom.add_app, SheafOfModules.free, SheafOfModules.ιFree, SheafOfModules.add_val, SheafOfModules.sections, AlgebraicGeometry.Scheme.coprodPresheafObjIso, SheafOfModules.GeneratingSections.ofEpi_s, ModuleCat.coprodIsoDirectSum",
+   "date": "2026-10-25",
+   "verdict": "No exact match: the hits do not supply this sheaf construction or its normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "graded.*sheaf|sheaf.*graded|conormal|coprodIsoDirectSum",
+   "results": "9 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/Algebra/Category/ModuleCat/Products.lean, Mathlib/Algebra/Category/ModuleCat/Products.lean, Mathlib/Algebra/Category/ModuleCat/Products.lean, Mathlib/Algebra/Category/ModuleCat/Products.lean, Mathlib/Algebra/Category/ModuleCat/Products.lean, Mathlib/Algebra/Category/FGModuleCat/Colimits.lean, Mathlib/RingTheory/Extension/Cotangent/Basic.lean",
+   "date": "2026-10-25",
+   "verdict": "No exact match: the hits do not supply this sheaf construction or its normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine sections of a sheaf module coproduct of conormal power quotients are additively the direct sum of the ideal power quotients",
+   "results": "8 hits: AdicCompletion.sumInv_apply, AdicCompletion.component_sumInv, Ideal.to_quotient_square_comp_toCotangent, Algebra.SubmersivePresentation.sectionCotangent, AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso, AdicCompletion.sumInv, AdicCompletion.sum_of, AdicCompletion.sum_lof",
+   "date": "2026-10-25",
+   "verdict": "No exact match: the hits do not supply this sheaf construction or its normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "graded|[Dd]irect[Ss]um|[Cc]oproduct",
+   "results": "9 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean",
+   "date": "2026-10-25",
+   "verdict": "No exact match: the hits do not supply this sheaf construction or its normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConormalGradedAlgebraConstruction",
+  "date": "2026-10-26",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-normal-bundle",
+   "place": "Definition of the normal cone as relative Spec of the direct sum of ideal-power quotients: Additive affine sections of the coproduct of conormal pieces.",
+   "via": [
+    "lem-pur-conormal-graded-algebra-construction",
+    "lem-pur-conormal-graded-algebra"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConormalCoproductAffineAddEquiv",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConormalCoproductAffineAddEquiv.lean",
+  "declaration": "AlgebraicGeometry.ConormalGradedAlgebra.exists_conormalCoproduct_affine_addEquiv",
+  "statement": "theorem exists_conormalCoproduct_affine_addEquiv {X Z : Scheme.{u}} (i : Z ⟶ X)\n    [IsClosedImmersion i] (M : Z.Modules) (j : ∀ n, piece i n ⟶ M)\n    (hc : IsColimit (Cofan.mk M j)) (U : X.affineOpens) :\n    ∃ e : M.val.obj (op (i ⁻¹ᵁ U.1)) ≃+ Ideal.associatedGraded (i.ker.ideal U),\n      ∀ (n : ℕ) (a : (power i n).val.obj (op U.1)),\n        ∃ h : (powerInclusion i n).val.app (op U.1) a ∈ i.ker.ideal U ^ n,\n          e ((j n).val.app (op (i ⁻¹ᵁ U.1)) (representative i n U.1 a)) =\n            DirectSum.of (Ideal.associatedGradedPiece (i.ker.ideal U)) n\n              (Submodule.Quotient.mk ⟨(powerInclusion i n).val.app (op U.1) a, h⟩)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261026T001706-L-22631",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261026T070407-L-3574846",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,247 @@
+{
+ "id": "lem-a1-flat-relation-invariant-open-complement",
+ "kind": "statement",
+ "title": "Invariant open complements of saturated closed-set closures",
+ "statement": "Let $R,V$ be schemes [def-pc-scheme], let $s,t:R\\to V$ be flat affine morphisms [def-weil-flat-morphism, pqf-def-affine-morphism], and let $e:V\\to R$ satisfy $s\\circ e=t\\circ e=\\mathrm{id}_V$. For a subset $A\\subseteq|V|$ set $\\sigma(A)=t(s^{-1}(A))$, and call a subset $F$ invariant when $s^{-1}(F)=t^{-1}(F)$. Assume $\\sigma(A)$ is invariant for every subset $A\\subseteq|V|$. Let $H\\subseteq|V|$ be a quasi-compact open [def-weil-pbc-quasi-compact-scheme] and $K\\subseteq H$ an invariant subset closed under generalization, meaning $y\\in K$ and $y\\in\\overline{\\{y'\\}}$ imply $y'\\in K$. Put $Z=|V|\\setminus H$, $T=\\sigma(Z)$ and $B=\\overline T$. Then $Z\\subseteq T$, $K\\cap T=\\varnothing$, and every point $y\\in B$ is the specialization of some point $y'\\in T$, that is, $y\\in\\overline{\\{y'\\}}$. Moreover $s^{-1}(B)=t^{-1}(B)$ and $K\\cap B=\\varnothing$. Consequently $W=|V|\\setminus B$ is an invariant open subset with $K\\subseteq W\\subseteq H$.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 0APB (lemma-second-observation), proof: Z, T, closure of T and its open complement; abstracted to the stated source-target saturation axioms, with affine s,t as in the descent application."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-quasi-compact-scheme"
+ ],
+ "proof": [
+  {
+   "text": "For $z\\in Z$, the point $e(z)$ has $s(e(z))=t(e(z))=z$, so $z\\in T$. If $x\\in K\\cap T$, choose $r$ with $t(r)=x$ and $s(r)\\in Z$. Invariance of $K$ gives $s(r)\\in K$, contradicting $K\\subseteq H$. Thus $Z\\subseteq T$ and $K\\cap T=\\varnothing$. The saturation hypothesis applied to $Z$ gives $s^{-1}(T)=t^{-1}(T)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0APB, lemma-second-observation, proof: saturation T of the closed complement, closure invariance, and its open complement"
+   }
+  },
+  {
+   "text": "Let C=s⁻¹(Z), a closed subset of R since s is continuous and H is open. Construct I=Scheme.IdealSheafData.vanishingIdeal C and i=I.subschemeι using [lem-weil-pbc-closed-subset-closed-subscheme]. Mathlib gives QuasiCompact i directly for this subscheme inclusion. The affine morphism t is quasi-compact by [lem-weil-pbc-affine-morphism-permanence]. Composition of quasi-compact morphisms, in the sense of [def-weil-finite-type-morphism], gives QuasiCompact (i ≫ t). The range formula for subschemeι and the range-of-composition identity identify its image with T.",
+   "uses": [
+    "lem-weil-pbc-closed-subset-closed-subscheme",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0APB, lemma-second-observation, proof: saturation T of the closed complement, closure invariance, and its open complement"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-picard-closure-specialization] to the quasi-compact morphism $j:D\\to V$ of step 2. Since its image is $T$, each $y\\in B=\\overline T$ admits $d\\in D$ such that $y'=j(d)\\in T$ and $y\\in\\overline{\\{y'\\}}$. This proves the required assertion about every closure point.",
+   "uses": [
+    "lem-sc-picard-closure-specialization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0APB, lemma-second-observation, proof: saturation T of the closed complement, closure invariance, and its open complement"
+   }
+  },
+  {
+   "text": "Let $r\\in R$ with $s(r)\\in B$. Step 3 gives $y'\\in T$ generalizing $s(r)$. By [lem-weil-pbc-flat-generalizations-lift] for the flat map $s$, there is $r'$ generalizing $r$ with $s(r')=y'$. Invariance of $T$ gives $t(r')\\in T$. Continuity of $t$ sends $r'\\leadsto r$ to $t(r')\\leadsto t(r)$: equivalently, preimages of closed sets are closed. Therefore $t(r)\\in B$. Conversely, if $t(r)\\in B$, choose $y'\\in T$ generalizing $t(r)$ by step 3 and apply the same cited lifting lemma to the flat map $t$. The lift $r'$ has $t(r')\\in T$, hence $s(r')\\in T$ by invariance; continuity of $s$ gives $s(r)\\in B$. These are the two inclusions $s^{-1}(B)=t^{-1}(B)$.",
+   "uses": [
+    "lem-weil-pbc-flat-generalizations-lift",
+    "def-pc-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0APB, lemma-second-observation, proof: saturation T of the closed complement, closure invariance, and its open complement"
+   }
+  },
+  {
+   "text": "If $y\\in K\\cap B$, step 3 gives $y'\\in T$ with $y\\in\\overline{\\{y'\\}}$. The assumed generalization stability of $K$ gives $y'\\in K$, contradicting $K\\cap T=\\varnothing$ from step 1. Hence $K\\cap B=\\varnothing$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0APB, lemma-second-observation, proof: saturation T of the closed complement, closure invariance, and its open complement"
+   }
+  },
+  {
+   "text": "The complement $W=|V|\\setminus B$ is open because $B$ is closed. Taking complements in the equality of step 4 gives $s^{-1}(W)=t^{-1}(W)$. Step 5 gives $K\\subseteq W$. Since $Z\\subseteq T\\subseteq B$, taking complements gives $W\\subseteq|V|\\setminus Z=H$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0APB, lemma-second-observation, proof: saturation T of the closed complement, closure invariance, and its open complement"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-subset-closed-subscheme",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "def-weil-finite-type-morphism",
+  "lem-sc-picard-closure-specialization",
+  "lem-weil-pbc-flat-generalizations-lift",
+  "def-pc-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "H5",
+  "date": "2026-10-22",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 0APB, lemma-second-observation; its closed-subscheme image and generalization-lifting argument, using the existing Mathlib quasi-compactness instances instead of repeating the affine-open verification."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a flat affine equivalence relation the closure of the saturation of a closed complement is invariant and disjoint from any invariant generalization stable subset in the open",
+   "subdirectory": "",
+   "results": "8 hits: stableUnderGeneralization_compl_iff, StableUnderGeneralization.compl, image_subset_closure_compl_image_compl_of_isOpen, stableUnderSpecialization_compl_iff, StableUnderSpecialization.compl, AlgebraicGeometry.Scheme.codisjoint_zeroLocus, Disjoint.closure_left, Disjoint.closure_right",
+   "date": "2026-10-22",
+   "verdict": "no match: invariant Haar measures, complements stable under specialization, and disjointness from closures of open sets do not give invariant closures for flat affine scheme relations or the specified bounded open."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct an invariant open containing a generalization stable invariant subset by removing the closure of the saturation of the complement",
+   "subdirectory": "",
+   "results": "8 hits: PrimeSpectrum.isOpen_of_stableUnderGeneralization_of_isConstructible, IsOpen.sub_closure, StableUnderSpecialization.compl, IsOpen.closure_inter, IsOpen.stableUnderGeneralization, TopologicalSpace.Opens.compl, StableUnderGeneralization, StableUnderGeneralization.compl",
+   "date": "2026-10-22",
+   "verdict": "no match: invariant Haar measures, complements stable under specialization, and disjointness from closures of open sets do not give invariant closures for flat affine scheme relations or the specified bounded open."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"invariant\", \"closure\"",
+   "subdirectory": "",
+   "results": "8 hits: MeasureTheory.Measure.measure_isAddInvariant_eq_smul_of_isCompact_closure, MeasureTheory.Measure.measure_isMulInvariant_eq_smul_of_isCompact_closure, MeasureTheory.Measure.measure_isAddInvariant_eq_smul_of_isCompact_closure_of_measurableSet, MeasureTheory.Measure.measure_isMulInvariant_eq_smul_of_isCompact_closure_of_measurableSet, MeasureTheory.Measure.measure_isAddInvariant_eq_smul_of_isCompact_closure_of_innerRegularCompactLTTop, MeasureTheory.Measure.measure_isMulInvariant_eq_smul_of_isCompact_closure_of_innerRegularCompactLTTop, MeasureTheory.Measure.smul_measure_isAddInvariant_le_of_isCompact_closure, MeasureTheory.Measure.smul_measure_isMulInvariant_le_of_isCompact_closure",
+   "date": "2026-10-22",
+   "verdict": "no match: invariant Haar measures, complements stable under specialization, and disjointness from closures of open sets do not give invariant closures for flat affine scheme relations or the specified bounded open."
+  },
+  {
+   "tool": "grep",
+   "query": "invariant.*closure|closure.*invariant|saturat.*[Cc]losed",
+   "subdirectory": "AlgebraicGeometry",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: invariant Haar measures, complements stable under specialization, and disjointness from closures of open sets do not give invariant closures for flat affine scheme relations or the specified bounded open."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The closure of a saturated closed complement under flat affine source and target maps is invariant and misses a generalization stable invariant subset",
+   "subdirectory": "",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.coborderRange, AlgebraicGeometry.instIsClosedImmersionLiftCoborder, AlgebraicGeometry.Scheme.codisjoint_zeroLocus, AlgebraicGeometry.instIsDominantιCoborderRange, mem_intrinsicClosure, IsClosed.intrinsicClosure, PrimeSpectrum.isClosed_image_of_stableUnderSpecialization, AlgebraicGeometry.Scheme.Hom.support_ker",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give affineness, generalization lifting, scheme-theoretic-image closure, or unrelated matroid/convex closure facts; none states closure invariance and the bounded invariant open under the hypotheses of this item."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, closure",
+   "subdirectory": "",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give affineness, generalization lifting, scheme-theoretic-image closure, or unrelated matroid/convex closure facts; none states closure invariance and the bounded invariant open under the hypotheses of this item."
+  },
+  {
+   "tool": "grep",
+   "query": "invariant.*closure|closure.*invariant|saturat.*[Cc]losed",
+   "subdirectory": "AlgebraicGeometry",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give affineness, generalization lifting, scheme-theoretic-image closure, or unrelated matroid/convex closure facts; none states closure invariance and the bounded invariant open under the hypotheses of this item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Invariant open subset containing an invariant generalization stable subset inside a quasi compact open of a scheme",
+   "subdirectory": "",
+   "results": "8 hits: AlgebraicGeometry.Scheme.affineOpens, AlgebraicGeometry.instQuasiCompactMorphismRestrict, AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_affineOpens, AlgebraicGeometry.IsAffineOpen, AlgebraicGeometry.Scheme.Opens.toScheme, AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens, AlgebraicGeometry.Scheme.Opens, AlgebraicGeometry.Scheme.Opens.instCanonicallyOverToScheme",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give affineness, generalization lifting, scheme-theoretic-image closure, or unrelated matroid/convex closure facts; none states closure invariance and the bounded invariant open under the hypotheses of this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme equivalence relation with flat source and target, taking closure preserves saturated subsets when every closure point specializes from the subset",
+   "subdirectory": "",
+   "results": "8 hits: AlgebraicGeometry.Flat.generalizingMap, Matroid.subset_closure_iff_forall_subset_isFlat, Matroid.mem_closure_iff_forall_mem_isFlat, RingHom.Flat.generalizingMap_comap, Matroid.IsFlat.closure, AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget, AlgebraicGeometry.Scheme.range_fromSpecStalk, Matroid.isFlat_iff_closure_eq",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give affineness, generalization lifting, scheme-theoretic-image closure, or unrelated matroid/convex closure facts; none states closure invariance and the bounded invariant open under the hypotheses of this item."
+  },
+  {
+   "tool": "grep",
+   "query": "generalizingMap|closure.*[Ii]mage|[Ii]mage.*closure",
+   "subdirectory": "AlgebraicGeometry/Morphisms",
+   "results": "15 hits: Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/AlgebraicGeometry/Morphisms/Flat.lean, Mathlib/AlgebraicGeometry/Morphisms/Flat.lean, Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give affineness, generalization lifting, scheme-theoretic-image closure, or unrelated matroid/convex closure facts; none states closure invariance and the bounded invariant open under the hypotheses of this item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-fpqc-invariant-intersection-neighbourhoods",
+  "date": "2026-10-22",
+  "group": "Q47"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Gabber fpqc descent input to the Loc_X-to-Cov_X construction in Bhatt–Scholze Lemma 7.3.9, p.67, used through lem-a1-proetale-local-system-representability and lem-a1-space-fpqc-separated-valuative-descent. In the Gabber input: Tag 0APK proof, groupoid paragraph and translation (a),(b): construct v in W in E, with W and E invariant. Extraction of returned proof steps 4-5: closure of saturated complement and bounded invariant open.",
+   "via": [
+    "lem-a1-fpqc-invariant-intersection-neighbourhoods",
+    "lem-a1-ind-quasi-affine-fpqc-effective-descent",
+    "lem-a1-separated-lqf-fpqc-effective-descent",
+    "lem-a1-algebraic-space-fpqc-sheaf",
+    "lem-a1-space-fpqc-separated-valuative-descent",
+    "lem-a1-proetale-local-system-representability"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-a1-flat-relation-invariant-open-complement",
+  "worker": "stage1",
+  "summary": "Kept the statement and its definition dependencies. Expanded the proof of Stacks 0APB into six steps, with a closed-subscheme realization and an explicit affine-open verification of quasi-compactness before invoking the existing closed project lemma for closure specialization. Proved both inclusions of closure invariance by flat generalization lifting, and wrote out disjointness from K and the complement inclusions. No new nodes: all non-elementary inputs already have DAG nodes. Searches found no whole-item Mathlib match or project attachment.",
+  "blueprint": "Gabber fpqc descent input to the Loc_X-to-Cov_X construction in Bhatt–Scholze Lemma 7.3.9, p.67, used through lem-a1-proetale-local-system-representability and lem-a1-space-fpqc-separated-valuative-descent. In the Gabber input: Tag 0APK proof, groupoid paragraph and translation (a),(b): construct v in W in E, with W and E invariant. Extraction of returned proof steps 4-5: closure of saturated complement and bounded invariant open. The six steps expand the saturated-complement input: Z⊂T, K∩T empty; quasi-compact closed-subscheme image; closure specialization; closure invariance; K∩B empty; complement W."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-1081431db",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-1081431db (reviewer sub-agent of L); spot-checked: I read Stacks groupoids.tex Tag 0APB (lemma-second-observation) in full. The item abstracts its proof faithfully: the common section e gives Z⊆T, and the saturation axiom is the set-theoretic invariance of 0APA. K invariant and stable under generalization stands for the source's E. The item proves both inclusions of the invariance of the closure directly, so no groupoid inverse is needed. This is a single commit with no new nodes. The statement and stmt_deps are kept, and the parent lem-a1-fpqc-invariant-intersection-neighbourhoods applies the item exactly as stated. Step 1 is elementary and checked: K∩T=∅ uses t⁻¹(K)=s⁻¹(K). Step 2 cites 01J3 for the closed immersion i with image s⁻¹(Z), pqf-def-affine-morphism for t⁻¹(U) affine, then that affine schemes are quasi-compact and that closed subsets of quasi-compact spaces are quasi-compact. So j=t∘i is quasi-compact in the sense of def-weil-finite-type-morphism, the notion def-weil-scheme-morphism-properties points to, and its image is T. Step 3 cites lem-sc-picard-closure-specialization (02JQ). That node is in unit sk-prop-av-cube but is Lean-closed: I read the sorry-free AlgebraicGeometry.exists_specializes_of_mem_closure_range at QuasiCompact.lean:66-86, so it is a tool and needs no tool_uses entry. Step 4 cites 03HV / Flat.generalizingMap twice, once for s and once for t; I checked both directions of specialization. Steps 5-6 are elementary. Edge cases V=∅, H=V, H=∅ and the identity relation all hold. Quasi-compactness of H is unused but harmless. No SGA source, no duplicate found, no re-split note applies. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatRelationInvariantOpenComplement",
+  "declaration": "AlgebraicGeometry.flat_relation_invariant_open_complement",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatRelationInvariantOpenComplement.lean",
+  "statement": "theorem flat_relation_invariant_open_complement {R V : Scheme.{u}} (s t : R ⟶ V) [Flat s] [Flat t] [IsAffineHom s] [IsAffineHom t] (e : V ⟶ R) (hes : e ≫ s = 𝟙 V) (het : e ≫ t = 𝟙 V) (hsat : ∀ A : Set V, s ⁻¹' (t '' (s ⁻¹' A)) = t ⁻¹' (t '' (s ⁻¹' A))) (H : V.Opens) [CompactSpace H] (K : Set V) (hKH : K ⊆ (H : Set V)) (hK : s ⁻¹' K = t ⁻¹' K) (hgen : StableUnderGeneralization K) : (H : Set V)ᶜ ⊆ t '' (s ⁻¹' (H : Set V)ᶜ) ∧ K ∩ (t '' (s ⁻¹' (H : Set V)ᶜ)) = ∅ ∧ (∀ y ∈ closure (t '' (s ⁻¹' (H : Set V)ᶜ)), ∃ y' ∈ t '' (s ⁻¹' (H : Set V)ᶜ), y ∈ closure ({y'} : Set V)) ∧ s ⁻¹' closure (t '' (s ⁻¹' (H : Set V)ᶜ)) = t ⁻¹' closure (t '' (s ⁻¹' (H : Set V)ᶜ)) ∧ K ∩ closure (t '' (s ⁻¹' (H : Set V)ᶜ)) = ∅ ∧ IsOpen (closure (t '' (s ⁻¹' (H : Set V)ᶜ)))ᶜ ∧ s ⁻¹' (closure (t '' (s ⁻¹' (H : Set V)ᶜ)))ᶜ = t ⁻¹' (closure (t '' (s ⁻¹' (H : Set V)ᶜ)))ᶜ ∧ K ⊆ (closure (t '' (s ⁻¹' (H : Set V)ᶜ)))ᶜ ∧ (closure (t '' (s ⁻¹' (H : Set V)ᶜ)))ᶜ ⊆ (H : Set V)",
+  "branch": "sheaf-dag",
+  "by": "Q77",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a98e82174",
+  "group": "Q77",
+  "result": "pass",
+  "note": "Every clause of the node matches the Lean: [Flat s][Flat t][IsAffineHom s][IsAffineHom t], e with e≫s=e≫t=𝟙, hsat ∀A invariance of t''(s⁻¹'A), H : V.Opens with CompactSpace H, K ⊆ H, s⁻¹'K = t⁻¹'K, StableUnderGeneralization K (same direction as the node), and all nine conjuncts with Z=Hᶜ, T=t''(s⁻¹'Z), B=closure T, W=Bᶜ. No hypothesis is added; quasi-compactness of H is kept. Edge cases V empty, H=V, H empty, K empty and the identity relation hold. lean.statement is verbatim in the file and the node is unchanged except for lean. Statement imports are public and proof-dependency imports plain, matching each node's record or mathlib_match (02JQ exists_specializes_of_mem_closure_range read). Lines ≤100, autoImplicit off, docstrings carry the source and blueprint id with the six proof steps; no name collision or duplicate. Not recompiled: no file changed. Advisory: the Second reading section is a worker self-check, not an independent reading."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261022T143828-L-1406836",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

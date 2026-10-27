@@ -14,7 +14,7 @@
  ],
  "proof": [
   {
-   "text": "Put $K=\\ker(\\psi_{i_0})$. By finite generation choose $z_1,\\ldots,z_r\\in K$ generating $K$ over $D_{i_0}$. Regard the underlying abelian groups $P_i$ and $P$ as $\\mathbf Z$-modules. Additive maps are exactly $\\mathbf Z$-linear maps, so the assumed abelian-group colimit is also their module colimit. Apply the vanishing clause of [lem-weil-pbc-filtered-colimit-modules-elementwise] separately to $\\psi_{i_0}(z_a)=0$: for each $a$ obtain $j_a\\ge i_0$ with $p_{j_ai_0}(z_a)=0$. The index category is small and filtered because $I$ is small, nonempty and directed, as required.",
+   "text": "Put K = ker(psi_i0) and choose a finite set of generators of K over D_i0. Use the explicit additive-group direct limit L of the system P_i. Its structure maps satisfy the eventual-zero assertion of [lem-weil-pbc-filtered-colimit-modules-elementwise] (AddCommGroup.DirectLimit.of.zero_exact). To transfer the given cocone kernel to L without equating the independent universes uR, uI and uP, fix a character c : L -> Q/Z. Compose c with the structure maps of L and lift its codomain to ULift.{uR}(Q/Z). This is a compatible additive cocone, so the assumed universal property factors it through Q. If psi_i(x) = 0, evaluation of this factorization gives c(of_i(x)) = 0. Mathlib CharacterModule.eq_zero_of_character_apply says that characters into Q/Z detect zero, so of_i(x) = 0. The eventual-zero assertion now supplies a later stage killing x. Apply this separately to the finite kernel generators. This realizes the first step of the source proof and retains all independent universes of the Lean statement.",
    "uses": [
     "def-weil-finitely-generated-module",
     "lem-weil-pbc-filtered-colimit-modules-elementwise"
@@ -22,7 +22,7 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 046Y (lemma-mod-injective-general), middle proof paragraph; Tag 00D7 (lemma-zero-directed-limit) for eventual vanishing; Tag 07JZ (definition-localization-module) for fractions"
+    "place": "Tag 046Y (lemma-mod-injective-general), middle proof paragraph; Tag 00D7 (lemma-zero-directed-limit) for eventual vanishing; Tag 07JZ (definition-localization-module) for fractions; universe bookkeeping uses the proved Mathlib declarations AddCommGroup.DirectLimit.of.zero_exact (Mathlib/Algebra/Colimit/Module.lean) and CharacterModule.eq_zero_of_character_apply (Mathlib/Algebra/Module/CharacterModule.lean:225)."
    }
   },
   {
@@ -65,7 +65,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 046Y (lemma-mod-injective-general), middle proof paragraph: finite-kernel generators killed at a common later stage, then denominator argument; Tag 00D7 (lemma-zero-directed-limit) makes the eventual-vanishing assertion explicit"
+  "place": "Tag 046Y (lemma-mod-injective-general), middle proof paragraph: finite-kernel generators killed at a common later stage, then denominator argument; Tag 00D7 (lemma-zero-directed-limit) makes the eventual-vanishing assertion explicit; P9 Lean realization: finite-set induction and span induction, explicit fraction/inverse-denominator calculation. The independent-universe cocone is compared to the explicit additive direct limit by Mathlib rational-circle characters; no statement or unit route changes."
  },
  "mathlib_searches": [
   {
@@ -189,21 +189,43 @@
  },
  "lean": {
   "module": "Sheaf.TraceFormula.LocalizationSystemKernelStabilization",
-  "file": "lean/Sheaf/TraceFormula/LocalizationSystemKernelStabilization.lean",
   "declaration": "localization_system_kernel_stabilization",
+  "file": "lean/Sheaf/TraceFormula/LocalizationSystemKernelStabilization.lean",
   "statement": "theorem localization_system_kernel_stabilization (I : Type uI) [Preorder I] [Nonempty I] (directed : ∀ i j : I, ∃ k : I, i ≤ k ∧ j ≤ k) (D : I → Type uD) [∀ i, CommRing (D i)] (d : ∀ i j : I, i ≤ j → D i →+* D j) (d_id : ∀ i : I, d i i (le_refl i) = RingHom.id (D i)) (d_comp : ∀ i j k (hij : i ≤ j) (hjk : j ≤ k), (d j k hjk).comp (d i j hij) = d i k (hij.trans hjk)) (P : I → Type uP) [∀ i, AddCommGroup (P i)] (moduleP : ∀ i : I, Module (D i) (P i)) (p : ∀ i j : I, i ≤ j → P i →+ P j) (p_id : ∀ i : I, p i i (le_refl i) = AddMonoidHom.id (P i)) (p_comp : ∀ i j k (hij : i ≤ j) (hjk : j ≤ k), (p j k hjk).comp (p i j hij) = p i k (hij.trans hjk)) (p_semilinear : ∀ i j (hij : i ≤ j) (a : D i) (x : P i), p i j hij (a • x) = d i j hij a • p i j hij x) (Q : Type uQ) [AddCommGroup Q] (moduleQ : ∀ i : I, Module (D i) Q) (q_smul_compat : ∀ i j (hij : i ≤ j) (a : D i) (x : Q), d i j hij a • x = a • x) (psi : ∀ i : I, P i →ₗ[D i] Q) (psi_compat : ∀ i j (hij : i ≤ j), (psi j).toAddMonoidHom.comp (p i j hij) = (psi i).toAddMonoidHom) (cocone : ∀ (R : Type uR) [AddCommGroup R] (f : ∀ i : I, P i →+ R) (hf : ∀ i j (hij : i ≤ j), (f j).comp (p i j hij) = f i), ∃! g : Q →+ R, ∀ i : I, g.comp (psi i).toAddMonoidHom = f i) (i₀ : I) (finite_kernel : Module.Finite (D i₀) (LinearMap.ker (psi i₀))) (W : ∀ i j : I, i ≤ j → Submonoid (D i)) (W_one : ∀ i j (hij : i ≤ j), (1 : D i) ∈ W i j hij) (W_mul : ∀ i j (hij : i ≤ j) (a b : D i), a ∈ W i j hij → b ∈ W i j hij → a * b ∈ W i j hij) (d_localization : ∀ i j (hij : i ≤ j), letI : Algebra (D i) (D j) := (d i j hij).toAlgebra IsLocalization (W i j hij) (D j)) (localization_equiv : ∀ i j (hij : i ≤ j), letI : Algebra (D i) (D j) := (d i j hij).toAlgebra letI : IsLocalization (W i j hij) (D j) := d_localization i j hij letI : Module (D i) (P i) := moduleP i letI : Module (D j) (P j) := moduleP j letI : Module (D j) (LocalizedModule (W i j hij) (P i)) := LocalizedModule.moduleOfIsLocalization (S := W i j hij) (T := D j) ∃ e : LocalizedModule (W i j hij) (P i) ≃ₗ[D j] P j, ∀ (m : P i) (s : W i j hij), ∃ u : D j, d i j hij (s : D i) * u = 1 ∧ e (LocalizedModule.mk m s) = u • p i j hij m) : ∃ j : I, i₀ ≤ j ∧ ∀ l : I, j ≤ l → Function.Injective (psi l)",
-  "branch": "newtargets-dag",
-  "by": "Q08",
-  "date": "2026-10-18",
-  "existing": false
+  "branch": "sheaf-dag",
+  "by": "Q51",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Interface repair under §1(B): the recorded module is a legacy non-module file, and the required module-mode consumer fails with cannot import non-module Sheaf.TraceFormula.LocalizationSystemKernelStabilization from module. This delivery adds module/public-import/public-section headers and the recorded proof imports. The declaration, full signature, proof and docstring are otherwise preserved verbatim; it states the same kernel stabilization node without changing any natural-language field."
  },
  "reviewed_lean": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-612bd45e7",
-  "group": "Q08",
+  "reviewer": "NT-stage2-cc-ef859683a",
+  "group": "Q51",
   "result": "pass",
-  "note": "Statement, dependencies, source alignment, edge cases, docstrings, route-pivot compliance, required report sections, and per-file scompile evidence all check out."
+  "note": "Read item node (7 steps), Stacks 046Y proof, three delivered modules, report, all six stmt_dep records (Mathlib colimit/IsColimit, Module.Finite, TensorProduct, EssFiniteType, IsNoetherianRing, LocalizedModule) and the new def node. Hypotheses match LocalAlgebraApproximationSystem: directed preorder per convention, IsLocalHom locality, IsColimit cocones plus derivable rep/eq criteria, scalar-tower restricted actions, localization witness and module base change fixed on pure tensors, EssFiniteType, residue algebra fixed by its algebraMap. Every node conclusion clause is a field of ResidueTensorComparison, each map/action fixed by its formula (d_ji and the actions are well defined; quotients are m_iS_i, m_iM_i, mM); localization is stated for every witness; group colimit into AddCommGrpCat.{u}; eventual injectivity with the node's quantifier order. Not hollow. New def node fields and searches ok, cited via added stmt_dep. Dependency-module repair of the kernel-stabilization proof dep is header-only (module, public imports), needed for module-mode import, no live importers, admissible via proof_deps closure. Advisory: unused/transitive imports (EssentialFiniteness, Torsion.Basic, HasLimits in the dep). Docstrings, verbatim statement, line width and report sections ok. No compile run, as no file was changed."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P9",
+  "result": "pass",
+  "landing": "20261023T124032-L-1314329",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

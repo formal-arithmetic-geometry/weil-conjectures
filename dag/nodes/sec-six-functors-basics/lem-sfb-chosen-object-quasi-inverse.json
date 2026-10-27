@@ -1,0 +1,228 @@
+{
+ "id": "lem-sfb-chosen-object-quasi-inverse",
+ "kind": "statement",
+ "title": "Quasi-inverse with prescribed object representatives and comparisons",
+ "statement": "Fix the universes of [def-weil-size-convention]. Let $\\mathcal A$ and $\\mathcal B$ be categories [def-nagata-category] small in a common sufficiently large universe and let $F:\\mathcal A\\to\\mathcal B$ be fully faithful: its maps on all morphism sets are bijections. Suppose that for every object $X$ of $\\mathcal B$ an object $j(X)$ of $\\mathcal A$ and an isomorphism $i_X:X\\xrightarrow{\\sim}F(j(X))$ are specified. There is a unique functor $J:\\mathcal B\\to\\mathcal A$ with $J(X)=j(X)$ such that the specified $i_X$ are the components of a natural isomorphism $i:1_{\\mathcal B}\\xrightarrow{\\sim}FJ$. Its arrow map is characterized by $F(J(f))=i_Y\\circ f\\circ i_X^{-1}$ for $f:X\\to Y$. Moreover there is a natural isomorphism $e:JF\\xrightarrow{\\sim}1_{\\mathcal A}$ characterized by $F(e_A)=i_{F(A)}^{-1}$ for every $A$. In particular $F$ and $J$ are quasi-inverse equivalences.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 05SG, lemma-construct-quasi-inverse; the final comparison e is the isomorphism constructed in its proof."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-nagata-category"
+ ],
+ "proof": [
+  {
+   "text": "For each pair $A,A'$ write $p_{A,A'}$ for the inverse of the stipulated bijection $F:\\operatorname{Hom}_{\\mathcal A}(A,A')\\to\\operatorname{Hom}_{\\mathcal B}(FA,FA')$. Set $J(X)=j(X)$ and, for $f:X\\to Y$, set $J(f)=p_{j(X),j(Y)}(i_Y\\circ f\\circ i_X^{-1})$. Thus $F(J(f))=i_Y\\circ f\\circ i_X^{-1}$, with the required source and target. These are inverse functions of specified bijections of sets, in the fixed universe; no new object representatives are chosen.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 05SG, lemma-construct-quasi-inverse, proof"
+   }
+  },
+  {
+   "text": "The category laws [def-nagata-category] give $F(J(1_X))=i_X\\circ1_X\\circ i_X^{-1}=1_{Fj(X)}=F(1_{j(X)})$. For $f:X\\to Y$ and $g:Y\\to Z$, functoriality of $F$ gives\n$$F(J(g)\\circ J(f))=(i_Z\\circ g\\circ i_Y^{-1})\\circ(i_Y\\circ f\\circ i_X^{-1})=i_Z\\circ(g\\circ f)\\circ i_X^{-1}=F(J(g\\circ f)).$$\nInjectivity of the relevant Hom maps proves both functor laws, so the data define $J$.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 05SG, lemma-construct-quasi-inverse, proof; omitted functor-law verification expanded"
+   }
+  },
+  {
+   "text": "The arrow formula gives $F(J(f))\\circ i_X=i_Y\\circ f$, so the prescribed components define a natural transformation $i:1_{\\mathcal B}\\to FJ$. Multiplying this equality by the inverse components gives $f\\circ i_X^{-1}=i_Y^{-1}\\circ F(J(f))$; hence those inverses are natural as well and $i$ is a natural isomorphism. If $J'$ has the prescribed object map and makes these same components natural, its naturality forces $F(J'(f))=i_Y\\circ f\\circ i_X^{-1}=F(J(f))$. Faithfulness gives equality on arrows; the object maps already agree, proving uniqueness of the functor.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 05SG, lemma-construct-quasi-inverse, proof"
+   }
+  },
+  {
+   "text": "Take the natural isomorphism $\\beta:FJF\\xrightarrow{\\sim}F$ obtained by evaluating $i^{-1}$ on $F(A)$; its component is $\\beta_A=i_{F(A)}^{-1}$. Naturality is the inverse-naturality equality of the preceding step at the arrow $F(a)$ for $a:A\\to A'$. Apply [lem-sfb-fully-faithful-cancel-iso-components] with source $\\mathcal A$, the two functors $JF,1_{\\mathcal A}$, and postcomposition functor $F$. It yields a natural isomorphism $e:JF\\xrightarrow{\\sim}1_{\\mathcal A}$ satisfying $F(e_A)=\\beta_A=i_{F(A)}^{-1}$. These equations determine each component uniquely by faithfulness. Together with $i^{-1}:FJ\\xrightarrow{\\sim}1_{\\mathcal B}$, this is precisely the asserted pair of quasi-inverse equivalences.",
+   "uses": [
+    "lem-sfb-fully-faithful-cancel-iso-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 05SG, lemma-construct-quasi-inverse, proof; final full-faithful cancellation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-category",
+  "lem-sfb-fully-faithful-cancel-iso-components"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 05SG, lemma-construct-quasi-inverse, proof; omitted functor laws and uniqueness written out; final cancellation uses an existing Mathlib leaf."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ofObjIso|construct.*[Qq]uasi|[Qq]uasi.*[Ii]nverse|def.*[Oo]bj.*[Ii]so",
+   "results": "25 hits; Mathlib/CategoryTheory/Subobject/Lattice.lean, Mathlib/CategoryTheory/GradedObject/Single.lean, Mathlib/CategoryTheory/GradedObject/Trifunctor.lean, Mathlib/CategoryTheory/GradedObject/Trifunctor.lean, Mathlib/CategoryTheory/GradedObject/Unitor.lean, Mathlib/CategoryTheory/GradedObject/Unitor.lean, Mathlib/CategoryTheory/Subobject/Basic.lean, Mathlib/CategoryTheory/Subobject/Limits.lean; Mathlib subdirectory: CategoryTheory",
+   "date": "2026-10-23",
+   "verdict": "no match: asEquivalence (Equivalence.lean:633-649) chooses its own object representatives; essImage.liftFunctor (EssentialImage.lean:179-192) also chooses representatives rather than extending prescribed ones. FullyFaithful.preimageIso and fullyFaithfulCancelRight (Functor/FullyFaithful.lean:113-118,390-409) supply parts, not the unique functor with the specified comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A fully faithful functor has a unique quasi inverse extending any prescribed preimage objects and isomorphisms",
+   "results": "8 hits; CategoryTheory.Functor.essImage.liftFunctor, CategoryTheory.Functor.FullyFaithful.mk.sizeOf_spec, CategoryTheory.Functor.FullyFaithful.preimage, CategoryTheory.Functor.FullyFaithful.mk, CategoryTheory.Equivalence.fullyFaithfulFunctor, CategoryTheory.Functor.FullyFaithful.casesOn, CategoryTheory.Functor.FullyFaithful.rec, CategoryTheory.Functor.preimageIso.congr_simp",
+   "date": "2026-10-23",
+   "verdict": "no match: asEquivalence (Equivalence.lean:633-649) chooses its own object representatives; essImage.liftFunctor (EssentialImage.lean:179-192) also chooses representatives rather than extending prescribed ones. FullyFaithful.preimageIso and fullyFaithfulCancelRight (Functor/FullyFaithful.lean:113-118,390-409) supply parts, not the unique functor with the specified comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, \"ofObjIso\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: asEquivalence (Equivalence.lean:633-649) chooses its own object representatives; essImage.liftFunctor (EssentialImage.lean:179-192) also chooses representatives rather than extending prescribed ones. FullyFaithful.preimageIso and fullyFaithfulCancelRight (Functor/FullyFaithful.lean:113-118,390-409) supply parts, not the unique functor with the specified comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a fully faithful functor F and prescribed objects j X with isomorphisms X to F j X there is a unique quasi inverse with these object values and counit components",
+   "results": "8 hits; CategoryTheory.Equivalence.fullyFaithfulInverse, CategoryTheory.Functor.fullyFaithfulCancelRight_inv_app, CategoryTheory.Functor.FullyFaithful.ofIso, CategoryTheory.Functor.essImage.liftFunctorCompIso_inv_app, CategoryTheory.Functor.FullyFaithful.isoEquiv_symm_apply, CategoryTheory.Functor.FullyFaithful.isoEquiv, CategoryTheory.Functor.FullyFaithful.preimageIso, CategoryTheory.Functor.FullyFaithful.mk.inj",
+   "date": "2026-10-23",
+   "verdict": "no match: asEquivalence (Equivalence.lean:633-649) chooses its own object representatives; essImage.liftFunctor (EssentialImage.lean:179-192) also chooses representatives rather than extending prescribed ones. FullyFaithful.preimageIso and fullyFaithfulCancelRight (Functor/FullyFaithful.lean:113-118,390-409) supply parts, not the unique functor with the specified comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "liftFunctor|liftNatIso|equivalenceOf|ofFullyFaithful|mk.*[Ee]quivalence",
+   "results": "4 hits; 177, 179, 189, 190; Mathlib subdirectory: CategoryTheory/EssentialImage.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: asEquivalence (Equivalence.lean:633-649) chooses its own object representatives; essImage.liftFunctor (EssentialImage.lean:179-192) also chooses representatives rather than extending prescribed ones. FullyFaithful.preimageIso and fullyFaithfulCancelRight (Functor/FullyFaithful.lean:113-118,390-409) supply parts, not the unique functor with the specified comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct an equivalence of categories using a fully faithful functor and a specified object function and specified isomorphism for every target object",
+   "results": "8 hits; CategoryTheory.Equivalence.fullyFaithfulFunctor, CategoryTheory.Equivalence.fullyFaithfulToEssImage, CategoryTheory.Functor.asEquivalence, CategoryTheory.Functor.IsEquivalence, CategoryTheory.Equivalence, CategoryTheory.CostructuredArrow.isEquivalence_post, CategoryTheory.Equivalence.full_functor, CategoryTheory.StructuredArrow.isEquivalence_post",
+   "date": "2026-10-23",
+   "verdict": "no match: asEquivalence (Equivalence.lean:633-649) chooses its own object representatives; essImage.liftFunctor (EssentialImage.lean:179-192) also chooses representatives rather than extending prescribed ones. FullyFaithful.preimageIso and fullyFaithfulCancelRight (Functor/FullyFaithful.lean:113-118,390-409) supply parts, not the unique functor with the specified comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "ofFullyFaithful|of_fullyFaithful|mk.*[Ff]ully|[Ff]ully.*[Ee]quivalence",
+   "results": "25 hits; Mathlib/CategoryTheory/ObjectProperty/Ind.lean, Mathlib/CategoryTheory/ObjectProperty/Ind.lean, Mathlib/CategoryTheory/ObjectProperty/Shift.lean, Mathlib/CategoryTheory/Adjunction/Reflective.lean, Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean, Mathlib/CategoryTheory/Shift/CommShift.lean; Mathlib subdirectory: CategoryTheory",
+   "date": "2026-10-23",
+   "verdict": "no match: asEquivalence (Equivalence.lean:633-649) chooses its own object representatives; essImage.liftFunctor (EssentialImage.lean:179-192) also chooses representatives rather than extending prescribed ones. FullyFaithful.preimageIso and fullyFaithfulCancelRight (Functor/FullyFaithful.lean:113-118,390-409) supply parts, not the unique functor with the specified comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "ofObjIso|construct.*quasi|quasi.*inverse|def.*inverse",
+   "results": "5 hits; 401, 412, 555, 593, 630; Mathlib subdirectory: CategoryTheory/Equivalence.lean",
+   "date": "2026-10-23",
+   "verdict": "no exact match: inv/asEquivalence and essImage.liftFunctor choose their own representatives (Equivalence.lean:633-649; EssentialImage.lean:179-192). copyObj/isoCopyObj (NatIso.lean:239-247) transport an already given functor, rather than constructing this unique inverse. Fully-faithful cancellation with specified components is already the Mathlib leaf lem-sfb-fully-faithful-cancel-iso-components and is reused in step 4."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Given a fully faithful functor and chosen lifts of objects with comparison isomorphisms construct the unique inverse functor",
+   "results": "8 hits; CategoryTheory.Functor.inv, CategoryTheory.Functor.FullyFaithful.homNatIsoMaxRight_inv_app, CategoryTheory.Functor.FullyFaithful.preimageIso_inv, CategoryTheory.Equivalence.fullyFaithfulInverse, CategoryTheory.Functor.essImage.liftFunctor, CategoryTheory.Functor.essImage.liftFunctorCompIso_inv_app, CategoryTheory.Functor.rightKanExtensionUnique_inv, CategoryTheory.Functor.FullyFaithful.homNatIso_inv_app_down",
+   "date": "2026-10-23",
+   "verdict": "no exact match: inv/asEquivalence and essImage.liftFunctor choose their own representatives (Equivalence.lean:633-649; EssentialImage.lean:179-192). copyObj/isoCopyObj (NatIso.lean:239-247) transport an already given functor, rather than constructing this unique inverse. Fully-faithful cancellation with specified components is already the Mathlib leaf lem-sfb-fully-faithful-cancel-iso-components and is reused in step 4."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.FullyFaithful, \"preimage\"",
+   "results": "12 hits; CategoryTheory.Functor.FullyFaithful.preimageIso, CategoryTheory.Functor.FullyFaithful.preimage, CategoryTheory.Functor.FullyFaithful.preimage_id, CategoryTheory.Functor.FullyFaithful.preimage_map, CategoryTheory.Functor.FullyFaithful.map_preimage, CategoryTheory.Functor.FullyFaithful.preimageIso_hom, CategoryTheory.Functor.FullyFaithful.preimageIso_inv, CategoryTheory.Functor.FullyFaithful.preimage_comp",
+   "date": "2026-10-23",
+   "verdict": "no exact match: inv/asEquivalence and essImage.liftFunctor choose their own representatives (Equivalence.lean:633-649; EssentialImage.lean:179-192). copyObj/isoCopyObj (NatIso.lean:239-247) transport an already given functor, rather than constructing this unique inverse. Fully-faithful cancellation with specified components is already the Mathlib leaf lem-sfb-fully-faithful-cancel-iso-components and is reused in step 4."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fully faithful functor extends specified preimage objects and specified comparison isomorphisms to a unique quasi inverse functor",
+   "results": "8 hits; CategoryTheory.Functor.FullyFaithful.mk.inj, CategoryTheory.Functor.FullyFaithful.preimageIso, CategoryTheory.Functor.essImage.liftFunctor, CategoryTheory.Functor.preimageIso, CategoryTheory.Functor.FullyFaithful, CategoryTheory.Functor.fullyFaithfulCancelRight_hom_app, CategoryTheory.Functor.fullyFaithfulCancelRight_inv_app, CategoryTheory.Functor.FullyFaithful.isoEquiv_symm_apply",
+   "date": "2026-10-23",
+   "verdict": "no exact match: inv/asEquivalence and essImage.liftFunctor choose their own representatives (Equivalence.lean:633-649; EssentialImage.lean:179-192). copyObj/isoCopyObj (NatIso.lean:239-247) transport an already given functor, rather than constructing this unique inverse. Fully-faithful cancellation with specified components is already the Mathlib leaf lem-sfb-fully-faithful-cancel-iso-components and is reused in step 4."
+  },
+  {
+   "tool": "grep",
+   "query": "liftFunctor|ofObjIso|changeInverse|def inv|asEquivalence",
+   "results": "25 hits; Mathlib/CategoryTheory/CofilteredSystem.lean, Mathlib/CategoryTheory/EssentiallySmall.lean, Mathlib/CategoryTheory/EssentiallySmall.lean, Mathlib/CategoryTheory/Join/Basic.lean, Mathlib/CategoryTheory/Types/Basic.lean, Mathlib/CategoryTheory/Types/Basic.lean, Mathlib/CategoryTheory/Types/Basic.lean, Mathlib/CategoryTheory/Types/Basic.lean; Mathlib subdirectory: CategoryTheory",
+   "date": "2026-10-23",
+   "verdict": "no exact match: inv/asEquivalence and essImage.liftFunctor choose their own representatives (Equivalence.lean:633-649; EssentialImage.lean:179-192). copyObj/isoCopyObj (NatIso.lean:239-247) transport an already given functor, rather than constructing this unique inverse. Fully-faithful cancellation with specified components is already the Mathlib leaf lem-sfb-fully-faithful-cancel-iso-components and is reused in step 4."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct a functor with prescribed object map by conjugating morphisms through isomorphisms and a fully faithful functor",
+   "results": "8 hits; CategoryTheory.Functor.copyObj, CategoryTheory.Functor.Faithful.div, CategoryTheory.Functor.essImage.liftFunctor, CategoryTheory.fullyFaithfulInducedFunctor, CategoryTheory.Functor.FullyFaithful.ofIso, CategoryTheory.Functor.fullyFaithfulCancelRight_hom_app, CategoryTheory.Functor.FullyFaithful.isoEquiv_apply, CategoryTheory.Functor.preimageIso",
+   "date": "2026-10-23",
+   "verdict": "no exact match: inv/asEquivalence and essImage.liftFunctor choose their own representatives (Equivalence.lean:633-649; EssentialImage.lean:179-192). copyObj/isoCopyObj (NatIso.lean:239-247) transport an already given functor, rather than constructing this unique inverse. Fully-faithful cancellation with specified components is already the Mathlib leaf lem-sfb-fully-faithful-cancel-iso-components and is reused in step 4."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fibred-groupoid-equivalence-criterion",
+  "date": "2026-10-23",
+  "group": "Q147"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 07Y4 (lemma-diagonal-representable), specialized to Spec Z; section-axioms [-1] through [3], definition-versal and definition-openness-versality. The specialization uses that Z and its localizations are G-rings. Local supporting input: sentence of the proof of Tag 07Y4 invoking criteria-lemma-stacks-etale once the smooth atlas has been shown surjective. Substep of Tag 076V: Local essential surjectivity of a fully faithful map of stacks. Passage from fibrewise equivalences to an inverse over the base after global essential surjectivity has been proved. Ordinary-category construction used in Tag 003Z: construct a quasi-inverse with the fibrewise chosen objects and vertical comparison isomorphisms (Tag 05SG).",
+   "via": [
+    "lem-sfb-fibred-groupoid-equivalence-criterion",
+    "lem-sfb-stack-fully-faithful-local-equivalence",
+    "lem-sfb-etale-smooth-atlas-fppf-descent",
+    "lem-sfb-artin-representable-diagonal-criterion",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-chosen-object-quasi-inverse",
+  "worker": "stage1",
+  "summary": "Expanded the prescribed-object construction of Stacks Tag 05SG, including both functor laws and uniqueness. Reused the existing Mathlib leaf for full-faithful cancellation with component formulas to produce the specified comparison e. No statement change, no new nodes and no exact project attachment.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 07Y4 (lemma-diagonal-representable), specialized to Spec Z; section-axioms [-1] through [3], definition-versal and definition-openness-versality. The specialization uses that Z and its localizations are G-rings. Local supporting input: sentence of the proof of Tag 07Y4 invoking criteria-lemma-stacks-etale once the smooth atlas has been shown surjective. Substep of Tag 076V: Local essential surjectivity of a fully faithful map of stacks. Passage from fibrewise equivalences to an inverse over the base after global essential surjectivity has been proved. Ordinary-category construction used in Tag 003Z: construct a quasi-inverse with the fibrewise chosen objects and vertical comparison isomorphisms (Tag 05SG). This is the ordinary-category prerequisite for the already reviewed fibred-groupoid criterion. Read the current latest blueprint direct-images proof (3), which now uses compactification; this generic prerequisite does not replace the current unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q67-e5b6c3744",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-e5b6c3744 (reviewer sub-agent of L); spot-checked: I read the full item, Stacks categories.tex 05SG (lemma-construct-quasi-inverse, the lemma and its proof, plus definition-equivalence-categories), the cited nodes def-nagata-category, def-weil-size-convention and lem-sfb-fully-faithful-cancel-iso-components, and the parent's use of the item. The delivery is one commit with the item and its report only. It has no repair note and no new nodes. The statement and stmt_deps are unchanged from the node the Q147 parent created, and proof_deps equals the union of the step uses. The statement matches 05SG clause by clause and makes the arrow formula and e explicit; the inherited size hypothesis is unused and harmless. Step 1 (elementary): J(f)=p(i_Y f i_X^{-1}), typed correctly, with no new choices. Step 2 (cites the category definition): both functor laws follow from F's functoriality and Hom injectivity. Step 3 (elementary): i and i^{-1} are natural, and uniqueness follows from naturality with the same i_X plus faithfulness. Step 4: applies the Mathlib leaf fullyFaithfulCancelRight (FullyFaithful.lean:372-387, checked) with F_l=JF, G_l=1_A, J_l=F and beta=F-whiskered i^{-1}, components i_{F(A)}^{-1}; this gives e with F(e_A)=i_{F(A)}^{-1}, the right orientation. Edge cases checked: one-object group (J(f)=gfg^{-1}, e=g^{-1}) and empty categories. No duplicate in the DAG (tag 05SG appears only in the item and parent; the 02C3 node is existential only) or in Mathlib (asEquivalence and essImage.liftFunctor choose their own representatives). No off-unit statement uses, no tool_uses and no SGA."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ChosenObjectQuasiInverse",
+  "declaration": "CategoryTheory.Functor.exists_quasiInverse_with_objIso",
+  "file": "lean/Sheaf/CategoryTheory/ChosenObjectQuasiInverse.lean",
+  "statement": "theorem exists_quasiInverse_with_objIso {A : Type u₁} [Category.{v₁} A] {B : Type u₂} [Category.{v₂} B] (F : A ⥤ B) [F.Full] [F.Faithful] (j : B → A) (iX : ∀ X : B, X ≅ F.obj (j X)) : ∃ (J : B ⥤ A) (h : ∀ X : B, J.obj X = j X) (i : 𝟭 B ≅ J ⋙ F), (∀ X : B, i.hom.app X ≫ eqToHom (congrArg F.obj (h X)) = (iX X).hom) ∧ (∀ (X Y : B) (f : X ⟶ Y), F.map (J.map f) = eqToHom (congrArg F.obj (h X)) ≫ (iX X).inv ≫ f ≫ (iX Y).hom ≫ eqToHom (congrArg F.obj (h Y).symm)) ∧ (∃ e : F ⋙ J ≅ 𝟭 A, ∀ a : A, F.map (e.hom.app a) = eqToHom (congrArg F.obj (h (F.obj a))) ≫ (iX (F.obj a)).inv) ∧ (∀ (J' : B ⥤ A) (h' : ∀ X : B, J'.obj X = j X) (i' : 𝟭 B ≅ J' ⋙ F), (∀ X : B, i'.hom.app X ≫ eqToHom (congrArg F.obj (h' X)) = (iX X).hom) → J' = J) ∧ F.IsEquivalence ∧ J.IsEquivalence",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-79dbff4cf",
+  "group": "N6",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 05SG clause by clause: Full+Faithful F, j : B → A, iX : X ≅ F(j X); ∃ J with J.obj = j (eqToHom transport only), i : 𝟭 B ≅ J ⋙ F with components iX, arrow formula F(J f) = iX.inv ≫ f ≫ iY.hom, e : F ⋙ J ≅ 𝟭 A with F(e_a) = (iX (F a)).inv (correct orientation), uniqueness J' = J under the same component condition only, F and J both IsEquivalence. All clauses true; universes u₁ u₂ v₁ v₂ independent and bound, no extra hypotheses. Delivered node differs from live only in lean; lean.statement is verbatim in the file; stmt_dep records fit (def-nagata-category mathlib_match CategoryTheory.Category, size convention existing:true). No existing Mathlib/project match (asEquivalence/liftFunctor/copyObj differ); name free. Docstrings carry Tag 05SG and blueprint id with all four proof steps; no defs; sorry only; report has Worker report and Second reading sections. Not recompiled (no file changed)."
+ }
+}

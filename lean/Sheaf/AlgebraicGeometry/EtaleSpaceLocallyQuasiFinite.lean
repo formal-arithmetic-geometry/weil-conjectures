@@ -47,6 +47,9 @@ theorem chartwise_isLocallyQuasiFinite_of_etale
       IsEtale v → Etale (yonedaEquiv (v ≫ f)).left) :
     ∀ (V : Over S) (v : yoneda.obj V ⟶ E.obj.obj),
       IsEtale v → Scheme.Hom.IsLocallyQuasiFinite (yonedaEquiv (v ≫ f)).left := by
-  sorry
+  intro V v hv
+  have : Etale (yonedaEquiv (v ≫ f)).left := hf V v hv
+  exact Scheme.Hom.isLocallyQuasiFinite_of_unramified _
+    ⟨inferInstance, inferInstance⟩
 
 end AlgebraicGeometry.AlgebraicSpace

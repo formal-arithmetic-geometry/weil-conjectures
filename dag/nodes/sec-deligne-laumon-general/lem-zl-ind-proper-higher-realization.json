@@ -1,0 +1,129 @@
+{
+ "id": "lem-zl-ind-proper-higher-realization",
+ "kind": "statement",
+ "title": "Realization of represented higher proper ind-image",
+ "statement": "Fix D,l≠D.p,Ω and finite-type k₀-schemes X₀,Y₀ [def-weil-finite-field-fiber]. Let p₀:X₀→Y₀ be proper and p its geometric base change [def-zl-weil-geometric-fiber-properties]. Let S be any normalized compact-support coefficient action [def-weil-compact-support-coefficient-action] for (id,p). For n∈ℕ, constructible Weil sheaves G on X₀ and H on Y₀ [def-weil-weil-sheaf-complex], and any isomorphism e:y_Y(H)≅Rⁿp_*(y_X(G)) in the specified ambient equivariant ind-category [def-zl-weil-ind-sheaf-category], H.carrier is isomorphic to the standard truncation cohomology Hⁿ(S(G.carrier)) [def-weil-constructible-heart]. No open extension, general compactification or input integral representative occurs. Schemes need not be absolutely separated.",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-zl-weil-geometric-fiber-properties",
+  "def-weil-compact-support-coefficient-action",
+  "def-weil-weil-sheaf-complex",
+  "def-zl-weil-ind-sheaf-category",
+  "def-weil-constructible-heart"
+ ],
+ "source": {
+  "document": "SGA 4, XVII, proper direct image; Bhatt–Scholze 6.8.14–6.8.15; Barrett, The derived category of the abelian category of constructible sheaves, https://arxiv.org/pdf/2005.10859, Theorem 1.1; Kashiwara–Schapira, Categories and Sheaves, §15.3",
+  "place": "Ordinary-heart realization, exact Yoneda on bounded derived categories, proper-image adjunction and coefficient transport."
+ },
+ "proof": [
+  {
+   "text": "On separated finite-type target charts and their proper inverse images, use Barrett Theorem 1.1 over the geometric algebraically closed field and a finite coefficient extension. The exact Yoneda embedding is fully faithful on bounded derived categories. Transport the normalized pullback/proper-image adjunction and test its Ext adjunction on represented objects. Proper finiteness identifies the higher ind right image with the constructible cohomology of proper derived image. Comparisons fixed by the adjunction unit agree on chart intersections; finite affine covers and their finite Cech resolutions provide the same comparison for nonseparated finite-type schemes.",
+   "uses": [
+    "def-zl-weil-ind-sheaf-category",
+    "def-weil-constructible-heart",
+    "def-weil-proper-morphism",
+    "def-weil-derived-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Forgetting the Weil structure preserves injectives since its free left adjoint is the exact sum of all Frobenius iterates. Thus ordinary comparison computes the underlying higher fixed-pair image. At each positive quotient the identity-open proper compactification computes ordinary proper image. Its whole-system Roos comparison identifies this with the integral compact-support value. Rationalization and common-stage inclusion commute with standard cohomology and the normalized adjunction mates. The coefficient-action normalization fixes these maps for every S. Full faithfulness gives independence of H and e. This includes n=0, proper identities, empty schemes and zero input.",
+   "uses": [
+    "def-zl-weil-ind-sheaf-category",
+    "def-weil-compact-support-coefficient-action",
+    "def-weil-integral-rational-qbar-compact-support",
+    "lem-fix-operation-reduction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-zl-weil-ind-sheaf-category",
+  "def-weil-constructible-heart",
+  "def-weil-proper-morphism",
+  "def-weil-derived-direct-image",
+  "def-weil-compact-support-coefficient-action",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-fix-operation-reduction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "SGA 4, XVII, proper direct image; Bhatt–Scholze 6.8.14–6.8.15; Barrett, The derived category of the abelian category of constructible sheaves, https://arxiv.org/pdf/2005.10859, Theorem 1.1; Kashiwara–Schapira, Categories and Sheaves, §15.3",
+  "place": "Ordinary-heart realization, exact Yoneda on bounded derived categories, proper-image adjunction and coefficient transport."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Higher right derived proper direct image on ind constructible sheaves is cohomology of derived direct image in the constructible derived category",
+   "results": "8 generic hits including CategoryTheory.Functor.rightDerived and generic right-derived universal properties.",
+   "date": "2026-10-25",
+   "verdict": "No comparison with the constructible heart or this ind model."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived",
+   "results": "12 hits including rightDerivedZeroIsoSelf, injective vanishing, and NatTrans.rightDerived.",
+   "date": "2026-10-25",
+   "verdict": "Generic derived-functor API only."
+  },
+  {
+   "tool": "grep",
+   "query": "Ind.*(rightDerived|Adjunction)|rightDerived.*Ind",
+   "results": "25 generic hits; CategoryTheory/Abelian/RightDerived.lean and adjunction files. Direct project rg found only the three representability/interchange statement modules.",
+   "date": "2026-10-25",
+   "verdict": "No existing normalized realization comparison."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.WeilCompactSupportCohomology",
+  "date": "2026-10-25",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-composition-weight-bound",
+   "place": "First paragraph, the proper/open construction of higher compact-support images. Realization of represented higher proper ind-image",
+   "via": [
+    "def-zl-weil-compact-support-cohomology",
+    "lem-zl-compact-support-leray-filtration"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-composition",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.WeilIndProperHigherRealization",
+  "file": "lean/Sheaf/Paper/WeilIndProperHigherRealization.lean",
+  "declaration": "WeilConjectures.zlIndWeilProperHigher_realization",
+  "statement": "theorem zlIndWeilProperHigher_realization\n    {X₀ Y₀ : Over (Spec (.of D.k₀))}\n    [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]\n    [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]\n    (p₀ : X₀ ⟶ Y₀) [IsProper p₀.left]\n    (S : SfCompactSupportCoefficientAction l D.k (zlRealizationPrimeUnit D l hl) Ω\n      (.ofIsProper (zlFiberMap D p₀)))\n    (n : ℕ) (G : sfCommonStageWeilSheaf D l hl X₀ Ω)\n    (H : sfCommonStageWeilSheaf D l hl Y₀ Ω)\n    (e : (zlWeilIndEmbedding D l hl Ω Y₀).obj H ≅\n      ((zlIndWeilPush D l hl Ω p₀).rightDerived n).obj\n        ((zlWeilIndEmbedding D l hl Ω X₀).obj G)) :\n    Nonempty (H.obj.carrier ≅\n      (constructibleTruncationCohomology\n        (sfCommonStageStandardTStructure l (D.geometricFiber Y₀).left Ω D hl) (n : ℤ)).obj\n          (S.system.functor.obj G.obj.carrier))",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261025T041146-L-1034267",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261025T041146-L-1034267",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

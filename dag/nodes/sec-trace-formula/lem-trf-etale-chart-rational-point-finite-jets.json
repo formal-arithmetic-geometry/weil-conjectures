@@ -1,0 +1,196 @@
+{
+ "id": "lem-trf-etale-chart-rational-point-finite-jets",
+ "kind": "statement",
+ "title": "Finite polynomial jets of an etale chart at a rational point",
+ "statement": "Let k be a field, U a k-scheme [def-pc-scheme], and t:U -> A^n_k an etale k-morphism [def-weil-etale-morphism, def-sbc-affine-space], with n >= 0. Let L/k be a field extension and b a point of V=U times_Spec(k) Spec(L) [def-pc-fibre-product] whose structural residue map rho:L -> kappa(b) [def-weil-residue-field] is bijective. Let B=O_(V,b), m its maximal ideal, iota:L -> B the structural scalar map, x_i the pulled-back coordinate germs, c_i=rho^(-1)(residue(x_i)), and z_i=x_i-iota(c_i). Set P=L[T_1,...,T_n] [def-weil-pbc-mv-polynomial-ring], I=(T_1,...,T_n), and f:P -> B the map evaluating T_i at z_i with scalars iota. Then B is Noetherian, I B=m, and for every r >= 0 there is a ring isomorphism e_r:P/I^r -> B/m^r sending the class of a polynomial a to the class of f(a).",
+ "source": {
+  "document": "literature/stacks-project/etale.tex; literature/stacks-project/more-algebra.tex; literature/stacks-project/schemes.tex",
+  "place": "Tag 039M (lemma-characterize-etale-completions) and its residue-degree remark; Tag 0AGX (lemma-flat-unramified); Tag 01HV (lemma-spec-sheaves); finite-level portions of steps 1--3, 5 and 7 of the parent Taylor-isomorphism proof"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-etale-morphism",
+  "def-sbc-affine-space",
+  "def-pc-fibre-product",
+  "def-weil-residue-field",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Base change the chart along $\\operatorname{Spec}L\\to\\operatorname{Spec}k$. By [lem-weil-pbc-etale-scheme-base-change] the resulting map $e:U_L\\to\\mathbf A^n_L$ is etale. The fibre-product definition of affine space identifies this base change with $\\mathbf A^n_L$. Put $x=e(b)$, $P=L[X_1,\\ldots,X_n]$, $y_i=X_i-c_i$ and $\\mathfrak q=(y_1,\\ldots,y_n)$. The composite $P\\to\\mathcal O_{U_L,b}\\to\\kappa(b)=L$ evaluates $X_i$ at $c_i$; its kernel is the prime corresponding to $x$. Translation $X_i\\mapsto y_i+c_i$, inverse $y_i\\mapsto X_i-c_i$, shows that this kernel is exactly $\\mathfrak q$, with quotient $L$. Thus $x$ has structural residue field $L$, and the actual map $\\kappa(x)\\to\\kappa(b)$ is the identity under these identifications. Set $A=\\mathcal O_{\\mathbf A^n_L,x}=P_{\\mathfrak q}$ and $B=\\mathcal O_{U_L,b}$; the affine-stalk localization theorem gives the displayed identification of $A$. The stalk map $\\varphi:A\\to B$ sends $y_i$ to $t_i-c_i$ and fixes $L$.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "def-sbc-affine-space",
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex; literature/stacks-project/schemes.tex",
+    "place": "Tag 02GO (lemma-base-change-etale); Tag 01HV (lemma-spec-sheaves); explicit translation and evaluation"
+   }
+  },
+  {
+   "text": "The field $L$ is Noetherian since its only ideals are $0$ and $L$. Apply [lem-weil-pbc-finite-type-algebra-noetherian] to $P$ and then [lem-weil-pbc-localization-noetherian] to $P_{\\mathfrak q}=A$. Thus $P$ and $A$ are Noetherian. The affine scheme $\\mathbf A^n_L=\\operatorname{Spec}P$ is locally Noetherian by [pqf-def-locnoeth]. By the definitions of etale and unramified, $e$ is locally of finite type. Apply [pqf-lem-locnoeth-lft] to $e$: $U_L$ is locally Noetherian. Choose an affine neighbourhood of $b$ in its Noetherian affine cover. Its stalk $B$ is a prime localization of the Noetherian coordinate ring by [lem-weil-pbc-affine-open-stalk-localization], hence is Noetherian by [lem-weil-pbc-localization-noetherian]. Both $A,B$ are local rings, as stalks of schemes; no global finite-type or quasi-compactness hypothesis on $U$ was used.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-localization-noetherian",
+    "pqf-def-locnoeth",
+    "def-weil-etale-morphism",
+    "def-weil-unramified-morphism",
+    "pqf-lem-locnoeth-lft",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex; literature/stacks-project/morphisms.tex",
+    "place": "Tag 00FN (lemma-Noetherian-permanence); Tag 01T6 (lemma-finite-type-noetherian)"
+   }
+  },
+  {
+   "text": "Etaleness gives flatness and unramifiedness by [def-weil-etale-morphism]. By [def-weil-flat-morphism], the actual local stalk map $\\varphi:A\\to B$ is flat. Apply the forward implication of [lem-trf-unramified-maximal-ideal-residue-criterion] to $e$ at $b$, using $U_L$ itself as the unramified neighbourhood and the local finite type already checked. It gives $\\mathfrak m_A B=\\mathfrak m_B$. The residue map is an isomorphism by step 1. The Noetherian hypotheses were checked in step 2, so [lem-weil-pbc-flat-local-completion-iso] gives an isomorphism $h:\\widehat A\\to\\widehat B$. Its stated formula on compatible classes is induced by $\\varphi$, so $h$ fixes $L$ and takes the completed image of each $y_i$ to that of $t_i-c_i$.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-weil-flat-morphism",
+    "lem-trf-unramified-maximal-ideal-residue-criterion",
+    "lem-weil-pbc-flat-local-completion-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex; literature/stacks-project/more-algebra.tex",
+    "place": "Tag 02GF (lemma-unramified-at-point), (1) implies (6); Tag 0AGX (lemma-flat-unramified), the residue-degree-one completion argument also described after Tag 039M"
+   }
+  },
+  {
+   "text": "Put J=(X_i-c_i) in P. Localization induces an isomorphism P/J^r -> P_J/J^r P_J: after translation every s outside J has nonzero constant term c, and modulo J^r its inverse is c^(-1) times the finite geometric series in 1-s/c. This includes r=0, when both rings are zero. The centered variables generate the maximal ideal of P_J, so its extension is m_B by the unramified maximal-ideal criterion. Thus the centered polynomial map f satisfies I B=m_B.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-trf-unramified-maximal-ideal-residue-criterion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The completion isomorphism from step 3 carries the extended maximal ideal of the source completion to that of the target: both are the unique maximal ideal by the local-completion theorem. Consequently it carries every power to the corresponding power. Quotient by these powers, using the completion projection's surjectivity and its kernel description, to obtain P_J/J^r P_J = B/m_B^r. Combine with the preceding localization isomorphism and translate variables to obtain e_r. All maps arise from the original stalk map, so e_r([a])=[f(a)]. Equivalently one can prove these finite-level isomorphisms directly by flatness and induction on r, using m_A B=m_B and the isomorphism on residue fields. No power series map, inverse limit uniqueness, or dimension-zero scalar conclusion is asserted here.",
+   "uses": [
+    "lem-weil-pbc-flat-local-completion-iso",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-adic-completion-mod-ideal"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-scheme-base-change",
+  "def-sbc-affine-space",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-localization-noetherian",
+  "pqf-def-locnoeth",
+  "def-weil-etale-morphism",
+  "def-weil-unramified-morphism",
+  "pqf-lem-locnoeth-lft",
+  "def-weil-flat-morphism",
+  "lem-trf-unramified-maximal-ideal-residue-criterion",
+  "lem-weil-pbc-flat-local-completion-iso",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-adic-completion-mod-ideal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale.tex; literature/stacks-project/more-algebra.tex; literature/stacks-project/schemes.tex",
+  "place": "Tag 039M (lemma-characterize-etale-completions) and its residue-degree remark; Tag 0AGX (lemma-flat-unramified); Tag 01HV (lemma-spec-sheaves); finite-level portions of steps 1--3, 5 and 7 of the parent Taylor-isomorphism proof; finite geometric-series localization argument and reduction modulo maximal-ideal powers written out by T2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An etale chart at a rational point induces isomorphisms of polynomial quotients by powers of the variables ideal and stalk quotients by powers of the maximal ideal",
+   "results": "8 hits: Algebra.Etale.of_isLocalizationAway, StructureSheaf.stalkIso, Algebra.exists_etale_of_isEtaleAt, and other stalk/localization declarations; no finite-jet comparison",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, Ideal.quotientMap",
+   "results": "0 hits",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rational_point_finite_jets|etale.*quotient.*pow|quotient.*pow.*etale",
+   "results": "0 hits",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleChartRationalPointTaylorIso",
+  "date": "2026-10-26",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "VIII 2.3.11 and 2.3.13, printed pp.93--94; lower local input for the historical modification branch of lem-trf-local-term-locality, proof (1)--(2): the identification of the completed local ring of M_L at a_L with the Taylor ring L[[T_1,...,T_n]] in the chart Taylor homomorphism of lem-trf-taylor-normal-cone-splitting (BM 1997, Definition 3.4). Finite-level stalk comparison in steps 1--3 and 5 of lem-trf-etale-chart-rational-point-taylor-iso.",
+   "via": [
+    "lem-trf-etale-chart-rational-point-taylor-iso",
+    "lem-trf-taylor-normal-cone-splitting",
+    "lem-trf-generic-monotone-diagram",
+    "lem-trf-regular-hilbert-coefficient-data",
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleChartFiniteJets",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleChartFiniteJets.lean",
+  "declaration": "AlgebraicGeometry.EtaleChartTaylor.rational_point_finite_jets",
+  "statement": "theorem rational_point_finite_jets\n    {k L : Type u} [Field k] [Field L] [Algebra k L]\n    {U : Scheme.{u}} (p : U ⟶ Spec (.of k)) (n : ℕ)\n    (t : U ⟶ AffineSpace (ULift.{u} (Fin n)) (Spec (.of k))) [Etale t]\n    (ht : t ≫ (AffineSpace (ULift.{u} (Fin n)) (Spec (.of k)) ↘ Spec (.of k)) = p)\n    (b : (pullback p (Spec.map (CommRingCat.ofHom (algebraMap k L))) : Scheme.{u})) :\n    let V : Scheme.{u} := pullback p (Spec.map (CommRingCat.ofHom (algebraMap k L)))\n    let ι : L →+* V.presheaf.stalk b :=\n      ((Scheme.ΓSpecIso (.of L)).inv ≫\n        (pullback.snd p (Spec.map (CommRingCat.ofHom (algebraMap k L)))).appTop ≫\n          V.presheaf.germ ⊤ b trivial).hom\n    let ρ := (V.residue b).hom.comp ι\n    ∀ hb : Function.Bijective ρ,\n    let z : Fin n → V.presheaf.stalk b := fun i ↦\n      let x := V.presheaf.germ ⊤ b trivial\n        ((pullback.fst p (Spec.map (CommRingCat.ofHom (algebraMap k L))) ≫ t).appTop\n          (AffineSpace.coord (Spec (.of k)) (ULift.up i)))\n      x - ι ((RingEquiv.ofBijective ρ hb).symm (V.residue b x))\n    IsNoetherianRing (V.presheaf.stalk b) ∧\n      Ideal.map (MvPolynomial.eval₂Hom ι z) (MvPolynomial.idealOfVars (Fin n) L) =\n        IsLocalRing.maximalIdeal (V.presheaf.stalk b) ∧\n      ∀ r : ℕ, ∃ e :\n          (MvPolynomial (Fin n) L ⧸ MvPolynomial.idealOfVars (Fin n) L ^ r) ≃+*\n            (V.presheaf.stalk b ⧸ IsLocalRing.maximalIdeal (V.presheaf.stalk b) ^ r),\n        ∀ f : MvPolynomial (Fin n) L,\n          e (Ideal.Quotient.mk _ f) =\n            Ideal.Quotient.mk _ (MvPolynomial.eval₂ ι z f)",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261026T092630-L-3449198",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261026T092630-L-3449198",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

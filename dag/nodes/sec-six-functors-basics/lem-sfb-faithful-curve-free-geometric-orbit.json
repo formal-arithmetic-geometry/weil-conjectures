@@ -1,0 +1,366 @@
+{
+ "id": "lem-sfb-faithful-curve-free-geometric-orbit",
+ "kind": "statement",
+ "title": "Faithful curve actions have free geometric orbits",
+ "statement": "Let $F$ be a field [def-weil-field] and $C$ a smooth projective geometrically integral finite-type $F$-scheme of dimension one [def-sbc-smooth-morphisms, def-kun-projective, def-pc-geometrically-irreducible, def-pc-integral-scheme, def-weil-finite-type-morphism, def-kun-topological-krull-dimension]. Let $G$ be a finite group acting on $C$ by $F$-automorphisms. Suppose $G\\to\\operatorname{Aut}_F(C)$ is injective. Let $L$ be an ample invertible $\\mathcal O_C$-module [def-sc-invertible-module, def-weil-pbc-ample-invertible-module]. For every extension field $E/F$, the pullbacks $C_E$ and $L_E$ [def-pc-base-change, def-pc-module-pullback] have the following properties: $C_E$ is a smooth proper geometrically integral Noetherian curve of dimension one, $L_E$ is ample, and every finite locally free module on $C_E$ and every coherent ideal tensored with such a module is coherent [pqf-def-coherent]. Noetherian means quasi-compact and covered by affine spectra of Noetherian rings, and finite locally free means locally a finite direct sum of the structure sheaf. For every algebraic closure $\\Omega/F$ [def-weil-algebraic-closure], the induced action on $D=C_\\Omega$ remains faithful and there is a nonempty open $D^\\circ\\subseteq D$ such that no nonidentity element fixes a geometric point of $D^\\circ$. In particular there is an $\\Omega$-rational closed point $x\\in D^\\circ$ and the points $gx$ for $g\\in G$ are all distinct. This includes $G=\\{1\\}$; no restriction on the characteristic is assumed.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0BY1, theorem-curves-rational-maps, full faithfulness, combined with the affine Nullstellensatz. Agent geometric setup/free-orbit argument of returned lem-sfb-separating-pair-open steps 1–3; ampleness under base change is morphisms.tex Tag 0893."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sbc-smooth-morphisms",
+  "def-kun-projective",
+  "def-pc-geometrically-irreducible",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "def-pc-base-change",
+  "def-pc-module-pullback",
+  "pqf-def-coherent",
+  "def-weil-algebraic-closure",
+  "def-weil-proper-morphism",
+  "def-weil-geometric-point",
+  "def-weil-closed-points",
+  "def-pc-field-extension",
+  "def-sc-finite-locally-free-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Fix an extension $E/F$. Projectivity makes $C$ proper, and properness survives this base change; hence $C_E$ is separated, quasi-compact and of finite type over $E$. The smooth-curve relative-dimension lemma applies because $C$ is integral, separated, finite type and of dimension one: it makes $C_E\\to\\operatorname{Spec}E$ smooth of relative dimension one. For every further field extension $K/E$, the fibre-product identity $(C_E)_K\\cong C_K$ and geometric integrality of $C$ make $(C_E)_K$ integral. Thus $C_E$ is geometrically integral, in particular nonempty and integral. Its sole fibre over $\\operatorname{Spec}E$ is therefore nonempty, so smooth relative dimension one gives dimension one. Finally $\\operatorname{Spec}E$ is Noetherian (a field has only the ideals $0,E$ and its spectrum has one point); the finite-type-over-Noetherian lemma gives that $C_E$ is Noetherian.",
+   "uses": [
+    "lem-kun-projective-implies-proper",
+    "lem-weil-pbc-proper-base-change",
+    "def-weil-proper-morphism",
+    "lem-sc-curve-base-change-relative-dimension-one",
+    "def-sbc-smooth-morphisms",
+    "def-pc-base-change",
+    "def-pc-geometrically-irreducible",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01WC (lemma-locally-projective-proper), 01W4 (lemma-base-change-proper), 01VB (lemma-base-change-smooth), 02NK (lemma-base-change-relative-dimension-d), 01T6 (lemma-finite-type-noetherian); relative dimension interpreted by definition-smooth-relative-dimension."
+   }
+  },
+  {
+   "text": "Apply relative ampleness under base change with $X=C$, $T=\\operatorname{Spec}F$, $T'=\\operatorname{Spec}E$ and the given $L$. The only nonempty affine open of $T$ is $T$ itself, so its hypothesis is exactly ampleness of $L$; the conclusion on the whole affine $T'$ says that $L_E$ is ample. Pulling back a local rank-one trivialization of $L$ gives a rank-one trivialization of $L_E$, by the pullback formula, so $L_E$ is invertible.",
+   "uses": [
+    "lem-trf-scheme-relative-ample-base-change",
+    "def-pc-module-pullback",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0893 (lemma-ample-base-change); invertibility is local rank-one triviality and the pullback formula."
+   }
+  },
+  {
+   "text": "Let $\\mathcal V$ be finite locally free on $C_E$ and let $\\mathcal I$ be a coherent ideal. On a trivializing affine open, $\\mathcal V$ is the sheaf associated to $A^r$, so it is quasi-coherent and of finite type. The coherence criterion on the locally Noetherian scheme $C_E$ makes $\\mathcal V$ coherent and makes $\\mathcal I$ quasi-coherent of finite type. Locally where $\\mathcal V\\cong\\mathcal O^r$, the map $(a_1,\\ldots,a_r)\\mapsto\\sum_i a_i\\otimes e_i$ identifies $\\mathcal I^{\\oplus r}$ with $\\mathcal I\\otimes\\mathcal V$, with inverse $a\\otimes\\sum_i b_ie_i\\mapsto(b_ia)_i$. A finite direct sum of local presentations $\\widetilde M$ is $\\widetilde{M^{\\oplus r}}$, and a finite list of generators for $M$ gives one for $M^{\\oplus r}$. Hence this tensor is quasi-coherent of finite type, and the same criterion makes it coherent. This also covers rank zero.",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth",
+    "pqf-def-coherent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01XZ (lemma-coherent-Noetherian), applied to finite local free modules and to the explicitly identified finite direct sums of a coherent ideal."
+   }
+  },
+  {
+   "text": "Now fix an algebraic closure $\\Omega/F$ and put $D=C_\\Omega$. The morphism $\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}F$ is an fpqc singleton covering. The bijection in fpqc descent of morphisms is in particular injective on $\\operatorname{Hom}_F(C,C)$. Consequently equality of two base-changed automorphisms of $D$ implies equality of the original automorphisms of $C$. The injective homomorphism $G\\to\\operatorname{Aut}_F(C)$ therefore stays injective after base change. In particular $g_\\Omega\\ne\\operatorname{id}_D$ whenever $g\\ne1$.",
+   "uses": [
+    "lem-pc-field-extension-fpqc-cover",
+    "lem-galois-fpqc-morphisms-descend"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02W0 (lemma-refine-coverings-fully-faithful), last sentence, for a field-extension singleton fpqc covering; topologies.tex Tags 022B and 03L7."
+   }
+  },
+  {
+   "text": "For each $g\\ne1$, write $a=g_\\Omega$ and form $Z_g=D\\times_{D\\times_\\Omega D}D$ using $(\\operatorname{id}_D,a)$ on the first factor and the diagonal on the second. Its projection $i_g:Z_g\\to D$ is a closed immersion: it is a base change of the closed diagonal of the separated $D/\\Omega$. The two fibre-product projection identities give $a\\circ i_g=i_g$. For any $t:T\\to D$, the fibre-product universal property says that $t$ factors through $i_g$ if and only if $a\\circ t=t$ (the other component of a lift is then $t$). Thus this construction detects fixed geometric morphisms, including their residue-field maps, rather than just equality of underlying points.",
+   "uses": [
+    "def-pc-base-change",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01KM (lemma-where-are-they-equal), its displayed fibre-product construction; closedness follows by the definition of separatedness and Tag 01QR (morphisms-lemma-base-change-closed-immersion)."
+   }
+  },
+  {
+   "text": "The closed image $|Z_g|\\subseteq|D|$ is proper. Indeed, if its image were all of $D$, then $i_g$ would have dense image. Apply the reduced-source separated-target equality lemma to $T=Y=D$, $S=\\operatorname{Spec}\\Omega$, $W=Z_g$, $h=i_g$ and the two maps $a,\\operatorname{id}_D$. The hypotheses hold because $D$ is integral, hence reduced, its structure morphism is separated, both maps are over $\\Omega$, and they agree after $i_g$. The lemma would imply $a=\\operatorname{id}_D$, contradicting faithfulness. The nonempty integral $D$ is irreducible. For completeness, a finite union of these proper closed subsets is proper by induction: the empty union is proper because $D$ is nonempty. If a proper closed union $A$ together with another proper closed subset $B$ covered $D$, irreducibility would force $A=D$ or $B=D$, contradicting their properness. Therefore $D^\\circ=D\\setminus\\bigcup_{g\\ne1}|Z_g|$ is nonempty and open. If a geometric point in $D^\\circ$ were fixed by $g\\ne1$, the factorization just established would put its image in $|Z_g|$, a contradiction.",
+   "uses": [
+    "lem-sfb-relative-separated-dominant-ext",
+    "def-pc-integral-scheme",
+    "def-weil-irreducible-components",
+    "def-weil-geometric-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01KM (lemma-where-are-they-equal), the reduced-source/dense-image consequence recorded in lem-sfb-relative-separated-dominant-ext; the finite-union induction is elementary irreducibility."
+   }
+  },
+  {
+   "text": "Since $D$ is smooth over $\\Omega$, density of closed points with finite separable residue field gives a closed $x\\in D^\\circ$ with $\\kappa(x)/\\Omega$ finite separable. Every element of this extension is algebraic; its irreducible minimal polynomial over the algebraically closed $\\Omega$ has a root and is therefore linear. Hence $\\kappa(x)=\\Omega$ and $x$ gives an $\\Omega$-rational geometric point. If two underlying orbit points $gx,hx$ were equal, their $\\Omega$-rational point morphisms would coincide: a point with residue field $\\Omega$ has just one residue-field map to $\\Omega$ over $\\Omega$. Composing with $h^{-1}$ would give a fixed geometric point for $h^{-1}g$, so $g=h$. Thus all $gx$ are distinct; they are closed and rational because $g$ is an $\\Omega$-automorphism. When $G=\\{1\\}$ the union above is empty and $D^\\circ=D$. No step divides by $|G|$ or assumes a characteristic restriction.",
+   "uses": [
+    "lem-pc-dense-separable-points",
+    "def-weil-algebraic-closure",
+    "def-weil-geometric-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 056U (lemma-smooth-separable-closed-points-dense); algebraic closedness reduces the finite residue extension to the ground field, and orbit injectivity follows by the displayed group calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-projective-implies-proper",
+  "lem-weil-pbc-proper-base-change",
+  "def-weil-proper-morphism",
+  "lem-sc-curve-base-change-relative-dimension-one",
+  "def-sbc-smooth-morphisms",
+  "def-pc-base-change",
+  "def-pc-geometrically-irreducible",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-trf-scheme-relative-ample-base-change",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "pqf-lem-coherent-ft-locnoeth",
+  "pqf-def-coherent",
+  "lem-pc-field-extension-fpqc-cover",
+  "lem-galois-fpqc-morphisms-descend",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-sfb-relative-separated-dominant-ext",
+  "def-pc-integral-scheme",
+  "def-weil-irreducible-components",
+  "def-weil-geometric-point",
+  "lem-pc-dense-separable-points",
+  "def-weil-algebraic-closure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01KM (lemma-where-are-they-equal), assembled with fpqc morphism faithfulness (descent.tex Tag 02W0), relative ampleness (morphisms.tex Tag 0893), coherent modules (coherent.tex Tag 01XZ) and smooth closed-point density (varieties.tex Tag 056U). The fixed-locus and finite-union argument is written by O2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A faithful finite group action on a smooth projective geometrically integral curve has a free rational orbit after algebraic closure",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.transitive_of_isGalois\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{u₂, u₁} C} {F : CategoryTheory.Functor C FintypeCat}\\n  {inst_1 : CategoryTheory.GaloisCategory C} {G : Type u_1} {inst_2 : Group G}\\n  {inst_3 : (X : C) → MulAction G (F.obj X).carrier} {inst_4 : TopologicalSpace G} {inst_5 : IsTopologicalGroup G}\\n  {i\", \"doc\": \"Given a Galois category $\\\\mathcal{C}$, a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, and a compact topological group $G$ acting continuously on each $F(X)$ for $X \\\\in \\\\mathcal{C}$, if $G$ is the fun\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isGalois\", \"module\": \"Mathlib/CategoryTheory/Galois/Prorepresentability\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C]\\n  (F : CategoryTheory.Functor C FintypeCat) [CategoryTheory.PreGaloisCategory.FiberFunctor F] (X : C)\\n  [CategoryTheory.PreGaloisCategory.IsGalois X], MulAction.IsPretransitive (CategoryTheory.Aut \", \"doc\": \"If an object $ X $ in a pre-Galois category $ \\\\mathcal{C} $ satisfies the Galois condition, then the automorphism group $ \\\\mathrm{Aut}(F) $ of a fiber functor $ F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat} $\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instIsPretransitiveAutCarrierVFintypeCatFunctorObjActionFunctorToActionOfIsGalois\", \"module\": \"Mathlib/CategoryTheory/Galois/Action\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F] (X : C)\\n  [CategoryTheory.PreGaloisCategory.IsGalois X],\\n  MulAction.IsPretransitive (CategoryTheory\", \"doc\": \"For any Galois object $ X $ in a pre-Galois category $ \\\\mathcal{C} $, the automorphism group $ \\\\mathrm{Aut}(X) $ acts pretransitively on the finite type $ F(X) $, where $ F $ is the fiber functor to f\"}\n  {\"name\": \"IsGaloisGroup.faithful\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ {G : Type u_1} (A : Type u_2) {B : Type u_3} {inst : Group G} {inst_1 : CommSemiring A} {inst_2 : Semiring B}\\n  {inst_3 : Algebra A B} {inst_4 : MulSemiringAction G B} [self : IsGaloisGroup G A B], FaithfulSMul G B\", \"doc\": \"If $ G $ is the Galois group of the algebra $ B $ over $ A $, then the scalar multiplication action of $ G $ on $ B $ is faithful. This means that for any two distinct elements $ g_1, g_2 \\\\in G $, the\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.isPretransitive_of_isGalois\", \"module\": \"Mathlib/CategoryTheory/Galois/GaloisObjects\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C]\\n  (F : CategoryTheory.Functor C FintypeCat) [CategoryTheory.PreGaloisCategory.FiberFunctor F] (X : C)\\n  [CategoryTheory.PreGaloisCategory.IsGalois X], MulAction.IsPretransitive (CategoryTheory.Aut \", \"doc\": \"For any Galois object $X$ in a category $\\\\mathcal{C}$ and a fiber functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, the automorphism group $\\\\mathrm{Aut}(X)$ acts pretransitively on the finite type $F(X\"}\n  {\"name\": \"FixedPoints.toAlgAut_bijective\", \"module\": \"Mathlib/FieldTheory/Fixed\", \"type\": \"∀ (G : Type u_1) (F : Type u_2) [inst : Group G] [inst_1 : Field F] [inst_2 : MulSemiringAction G F] [Finite G]\\n  [FaithfulSMul G F], Function.Bijective ⇑(MulSemiringAction.toAlgAut G (↥(FixedPoints.subfield G F)) F)\", \"doc\": \"If $ G $ is a finite group acting faithfully on a field $ F $, then the group homomorphism from $ G $ to the group of $ \\\\mathrm{FixedSubfield}(G, F) $-algebra automorphisms of $ F $ is bijective.\"}\n  {\"name\": \"FixedPoints.toAlgAut_surjective\", \"module\": \"Mathlib/FieldTheory/Fixed\", \"type\": \"∀ (G : Type u_1) (F : Type u_2) [inst : Group G] [inst_1 : Field F] [inst_2 : MulSemiringAction G F] [Finite G],\\n  Function.Surjective ⇑(MulSemiringAction.toAlgAut G (↥(FixedPoints.subfield G F)) F)\", \"doc\": \"For any finite group $ G $ acting on a field $ F $, the canonical group homomorphism from $ G $ to the group of $ R $-algebra automorphisms of $ F $ induced by the multiplicative semiring action is su\"}\n  {\"name\": \"FixedPoints.toAlgHom_bijective\", \"module\": \"Mathlib/FieldTheory/Fixed\", \"type\": \"∀ (G : Type u_1) (F : Type u_2) [inst : Group G] [inst_1 : Field F] [inst_2 : MulSemiringAction G F] [Finite G]\\n  [FaithfulSMul G F], Function.Bijective (MulSemiringAction.toAlgHom (↥(FixedPoints.subfield G F)) F)\", \"doc\": \"Under the assumptions that $ G $ is a finite monoid and its action on the field $ F $ is faithful, the algebra homomorphism $ \\\\varphi : G \\\\to \\\\mathrm{End}_{\\\\mathrm{Subfield}(G,F)}(F) $ defined by $ \\\\v\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this scheme-level construction or its full conclusions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite group acting faithfully on an integral curve has a geometric point with trivial stabilizer",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, MulAction.stabilizer",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this scheme-level construction or its full conclusions"
+  },
+  {
+   "tool": "grep",
+   "query": "freeOrbit|free_orbit|trivialStabilizer|faithful.*[Cc]urve",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this scheme-level construction or its full conclusions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Distinct automorphisms of a smooth proper curve are distinguished by rational functions and have a common open free action locus",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Projective.comp_equiv_comp\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"∀ {F : Type u} {K : Type v} [inst : Field F] [inst_1 : Field K] {W : WeierstrassCurve.Projective F} (f : F →+* K)\\n  {P Q : Fin 3 → F}, W.Nonsingular P → W.Nonsingular Q → (⇑f ∘ P ≈ ⇑f ∘ Q ↔ P ≈ Q)\", \"doc\": \"For a ring homomorphism $ f : F \\\\to K $ between fields and nonsingular points $ P, Q $ on a projective Weierstrass curve over $ F $, the images $ f \\\\circ P $ and $ f \\\\circ Q $ are projectively equival\"}\n  {\"name\": \"WeierstrassCurve.exists_variableChange_of_j_eq\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/IsomOfJ\", \"type\": \"∀ {F : Type u_1} [inst : Field F] [IsSepClosed F] (E E' : WeierstrassCurve F) [inst_2 : E.IsElliptic]\\n  [inst_3 : E'.IsElliptic], E.j = E'.j → ∃ C, C • E = E'\", \"doc\": \"If two elliptic curves over a separably closed field have the same $ j $-invariant, then there exists a variable change (isomorphism) transforming one curve into the other.\"}\n  {\"name\": \"WeierstrassCurve.Jacobian.comp_equiv_comp\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic\", \"type\": \"∀ {F : Type u} {K : Type v} [inst : Field F] [inst_1 : Field K] {W : WeierstrassCurve.Jacobian F} (f : F →+* K)\\n  {P Q : Fin 3 → F}, W.Nonsingular P → W.Nonsingular Q → (⇑f ∘ P ≈ ⇑f ∘ Q ↔ P ≈ Q)\", \"doc\": \"For any ring homomorphism $ f : F \\\\to K $ between fields $ F $ and $ K $, and for any two nonsingular points $ P, Q : \\\\text{Fin}(3) \\\\to F $ on the Jacobian of a Weierstrass curve over $ F $, the equiv\"}\n  {\"name\": \"WeierstrassCurve.instMulActionVariableChange\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/VariableChange\", \"type\": \"{R : Type u} → [inst : CommRing R] → MulAction (WeierstrassCurve.VariableChange R) (WeierstrassCurve R)\", \"doc\": \"For any commutative ring $ R $, the group of variable changes for Weierstrass curves over $ R $ acts on the set of Weierstrass curves over $ R $. This defines a monoid action where the group operation\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.map_injective\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} {S : Type s} {F : Type u} {K : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Field F]\\n  [inst_3 : Field K] {W' : WeierstrassCurve.Affine R} [inst_4 : DecidableEq F] [inst_5 : DecidableEq K]\\n  [inst_6 : Algebra R S] [inst_7 : Algebra R F] [inst_8 : Algebra S F] [inst_9 : \", \"doc\": \"Given an algebra homomorphism $ f : F → K $ between fields extending a commutative ring $ R $, and an affine Weierstrass curve $ W' $ over $ R $, the group homomorphism from $ W'(F) $ to $ W'(K) $ ind\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.map_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} {S : Type s} {F : Type u} {K : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Field F]\\n  [inst_3 : Field K] {W' : WeierstrassCurve.Affine R} [inst_4 : DecidableEq F] [inst_5 : DecidableEq K]\\n  [inst_6 : Algebra R S] [inst_7 : Algebra R F] [inst_8 : Algebra S F] [inst_9 : \", \"doc\": \"Given an algebra homomorphism $ f : F → K $ between fields extending a commutative ring $ R $, and an affine Weierstrass curve $ W' $ over $ R $, the map function sends a nonsingular point $ (x, y) $ \"}\n  {\"name\": \"WeierstrassCurve.Affine.FunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} → [CommRing R] → WeierstrassCurve.Affine R → Type r\", \"doc\": \"The function field of an affine Weierstrass curve over a base ring $ R $ is the fraction ring of its coordinate ring. The coordinate ring is defined as the quotient ring $ R[X, Y] $ modulo the ideal g\"}\n  {\"name\": \"WeierstrassCurve.VariableChange\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/VariableChange\", \"type\": \"(R : Type u) → [CommRing R] → Type u\", \"doc\": \"The type of variable changes for a Weierstrass curve over a commutative ring $ R $.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this scheme-level construction or its full conclusions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A faithful finite group action on a geometrically integral smooth projective curve has an open locus of geometric points with trivial stabilizer",
+   "results": "Actual search returned 8 hits: IntermediateField.fixingSubgroup_isOpen, CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial, IsFractionRing.stabilizerHom_surjective, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial', NumberField.InfinitePlace.IsUnramified.stabilizer_eq_bot, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.transitive_of_isGalois, Algebra.isOpen_unramifiedLocus",
+   "date": "2026-10-23",
+   "verdict": "no match: field-action and stabilizer results do not state this scheme-level item or all its clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "freeOrbit|free_orbit|faithful.*[Cc]urve|geometric.*stabilizer",
+   "results": "Actual search returned 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: field-action and stabilizer results do not state this scheme-level item or all its clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "equalizer|equaliser",
+   "results": "Actual search returned 5 hits: 12, 281, 282, 284, 305",
+   "date": "2026-10-23",
+   "verdict": "partial tool only: closed equalizers are in Mathlib, but do not state this item; the proof constructs them from existing diagonal and closed-immersion nodes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite group acting faithfully on an integral curve has a nonempty open locus with no fixed geometric points",
+   "results": "Actual search returned 8 hits: IsGaloisGroup.fixedPoints, FixedPoints.toAlgAut_bijective, IsPGroup.nonempty_fixed_point_of_prime_not_dvd_card, Finite.to_properlyDiscontinuousSMul, FixedPoints.finrank_eq_card, MulAction.nontrivial_of_fixedPoints_ne_univ, IsGalois.of_fixed_field, FixedPoints.isIntegral",
+   "date": "2026-10-23",
+   "verdict": "no match: field-action and stabilizer results do not state this scheme-level item or all its clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSeparated, CategoryTheory.Limits.equalizer.ι",
+   "results": "Actual search returned 1 hits: AlgebraicGeometry.isClosedImmersion_equalizer_ι_left",
+   "date": "2026-10-23",
+   "verdict": "partial tool only: closed equalizers are in Mathlib, but do not state this item; the proof constructs them from existing diagonal and closed-immersion nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonidentity automorphism of an integral separated scheme has a proper closed scheme theoretic fixed locus",
+   "results": "Actual search returned 8 hits: AlgebraicGeometry.IsIntegralHom.instHasOfPostcompPropertySchemeIsSeparated, AlgebraicGeometry.Scheme.IsSeparated, AlgebraicGeometry.IsSeparated, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.IsIntegralHom.of_comp, AlgebraicGeometry.IsProper.toIsSeparated, AlgebraicGeometry.IsSeparated.hasAffineProperty",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: general separatedness hits do not assert its base-change, coherence, or free-orbit conclusions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-separating-pair-open",
+  "date": "2026-10-22",
+  "group": "Q60"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Tag 0BY1, theorem-curves-rational-maps, full faithfulness, combined with the affine Nullstellensatz. Agent geometric setup/free-orbit argument of returned lem-sfb-separating-pair-open steps 1–3; ampleness under base change is morphisms.tex Tag 0893.",
+   "via": [
+    "lem-sfb-separating-pair-open",
+    "lem-sfb-invariant-local-curve-pencils",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-faithful-curve-free-geometric-orbit",
+  "worker": "stage1",
+  "summary": "Kept the statement, proved its geometric and module base-change clauses from existing nodes, preserved action faithfulness by fpqc descent, and constructed a free geometric locus as the complement of proper closed equalizers. Added no nodes: all non-elementary facts already have DAG statements. Checked geometric points rather than topological fixed points, arbitrary field extensions, rank zero, trivial group, and wild characteristic. Repair of return efab7680c88: compared the retained split with the current unsplit live item, reread all 22 proof-dependency statements, and verified all 25 citation quotes against them. Ordered geometric integrality before the nonempty-fibre dimension inference. Delivery is rebuilt on current origin/sheaf-dag; no side-project completion or reviewer fields are asserted. On the resumed repair, rechecked the current live statements and all literal citations; expanded the finite-union induction in step 6 to state its base and induction step explicitly.",
+  "blueprint": "The recorded blueprint ancestor is null (blueprint_refs.py ancestor); the inherited chain comes from the agent-created admissible-direct-image/alteration route. This split realizes the geometric setup and free-orbit argument of returned lem-sfb-separating-pair-open steps 1–3, as specified by the item source and blueprint.from.place. Whole-blueprint searches faithful curve and free geometric returned no equal statement.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Projective-implies-proper is a generic scheme tool; the coefficient stability unit does not state it. This supplies a black-box tool below the item, without replacing a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "Generic stability of proper morphisms under arbitrary base change. This supplies a black-box tool below the item, without replacing a unit step."
+   },
+   {
+    "node": "lem-sc-curve-base-change-relative-dimension-one",
+    "why": "Generic smooth curve base-change dimension tool over arbitrary fields; no algebraic-closedness assumption is added. This supplies a black-box tool below the item, without replacing a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic Noetherian permanence for the finite-type curve over a field. This supplies a black-box tool below the item, without replacing a unit step."
+   },
+   {
+    "node": "lem-trf-scheme-relative-ample-base-change",
+    "why": "Generic relative ampleness base change, specialized to affine field spectra. This supplies a black-box tool below the item, without replacing a unit step."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Generic coherence criterion used with explicit local free and tensor presentations. This supplies a black-box tool below the item, without replacing a unit step."
+   },
+   {
+    "node": "lem-pc-field-extension-fpqc-cover",
+    "why": "Generic recognition of a field extension as a singleton fpqc cover. This supplies a black-box tool below the item, without replacing a unit step."
+   },
+   {
+    "node": "lem-galois-fpqc-morphisms-descend",
+    "why": "Only injectivity of base change on morphisms of arbitrary schemes over a field is used. This supplies a black-box tool below the item, without replacing a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic stability of closed immersions used for diagonal pullback. This supplies a black-box tool below the item, without replacing a unit step."
+   },
+   {
+    "node": "lem-sfb-relative-separated-dominant-ext",
+    "why": "Generic reduced-source equality test used to show a nonidentity fixed locus is proper. This supplies a black-box tool below the item, without replacing a unit step."
+   },
+   {
+    "node": "lem-pc-dense-separable-points",
+    "why": "Generic smooth-scheme density theorem supplying a rational closed point over the algebraic closure. This supplies a black-box tool below the item, without replacing a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-projective-implies-proper",
+  "lem-weil-pbc-proper-base-change",
+  "lem-sc-curve-base-change-relative-dimension-one",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-trf-scheme-relative-ample-base-change",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-pc-field-extension-fpqc-cover",
+  "lem-galois-fpqc-morphisms-descend",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-sfb-relative-separated-dominant-ext",
+  "lem-pc-dense-separable-points"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O2-f44debf5f",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-f44debf5f (reviewer sub-agent of L); spot-checked: PASS, no changes; I read all seven steps on this head. This re-delivers efab7680c886, which had a full PASS; landing then refused it because the live queue still had the item as unsplit. I diffed the item between the two snapshots. Only proof and split_report changed. Step 1 now states 'sole fibre nonempty ⇒ dim 1' after geometric integrality, which is what proves nonemptiness. Step 6 now writes out the finite-union induction: the empty union is proper because D is nonempty, and A∪B=D with A, B proper closed contradicts irreducibility. Both are correct. All 29 deps have the same statements in both snapshots, none is merged, proof_deps equals the union of the step uses, and no SGA is cited. Step checks: (1) the smooth-curve lemma allows arbitrary T and gives dim_x=1 everywhere; geometric integrality via (C_E)_K=C_K; Noetherian over Spec E. (2) Stacks 0893 (morphisms.tex:8909) over Spec F: the affine opens are ∅ and T, so the hypothesis is exactly ampleness of L. (3) 01XZ with I⊗O^r≅I^r written both ways. (4) The singleton fpqc cover plus injectivity of the morphism-descent bijection keep the action faithful. (5) Z_g is the diagonal pullback of 01KM (schemes.tex:4100); it detects fixed morphisms, not fixed underlying points. (6) The reduced-source equality lemma allows any W, so each fixed locus is a proper closed subset and D° is a nonempty open. (7) 056U (varieties.tex:4658) gives an Ω-rational closed x in D°; equal orbit points would let h⁻¹g fix a geometric point of D°. Edge cases: G={1}, a wild action in characteristic p, transcendental E. Batch-5 flag on lem-trf-scheme-relative-ample-base-change: it is Stacks 0893, general scheme theory proved from generic pbc/pc nodes and the 01VJ affine-cover criterion. It lies in sec-trace-formula only through historical ancestry, is not part of the trace formula or Poincaré duality, and neither assumption leaf gives it, so it is accepted. All 11 tool_uses are accepted as generic tools."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FaithfulCurveFreeGeometricOrbit",
+  "declaration": "AlgebraicGeometry.faithful_curve_free_geometric_orbit",
+  "declarations": [
+   "AlgebraicGeometry.faithfulCurveFieldBaseChange",
+   "AlgebraicGeometry.faithfulCurveFieldBaseChangeAction",
+   "AlgebraicGeometry.faithfulCurveFieldBaseChangeModule",
+   "AlgebraicGeometry.faithful_curve_free_geometric_orbit"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FaithfulCurveFreeGeometricOrbit.lean",
+  "statement": "theorem faithful_curve_free_geometric_orbit {F : Type u} [Field F] {C : Scheme.{u}} (f : C ⟶ Spec (.of F)) [Smooth f] [IsHProjective f] [GeometricallyIntegral f] [LocallyOfFiniteType f] [QuasiCompact f] (hdim : topologicalKrullDim C = 1) {G : Type v} [Group G] [Finite G] (ρ : G →* Aut (Over.mk f)) (hρ : Function.Injective ρ) (L : C.Modules) [L.IsInvertible] (hL : Scheme.Modules.IsAmple C L) : (∀ (E : Type u) [Field E] [Algebra F E], Smooth (faithfulCurveFieldBaseChange f E).hom ∧ IsProper (faithfulCurveFieldBaseChange f E).hom ∧ GeometricallyIntegral (faithfulCurveFieldBaseChange f E).hom ∧ IsNoetherian (faithfulCurveFieldBaseChange f E).left ∧ topologicalKrullDim (faithfulCurveFieldBaseChange f E).left = 1 ∧ ∃ hInv : (faithfulCurveFieldBaseChangeModule f L E).IsInvertible, @Scheme.Modules.IsAmple (faithfulCurveFieldBaseChange f E).left (faithfulCurveFieldBaseChangeModule f L E) hInv ∧ (∀ V : (faithfulCurveFieldBaseChange f E).left.Modules, V.IsFiniteLocallyFree → RingedSpace.IsCoherent (faithfulCurveFieldBaseChange f E).left.toRingedSpace V) ∧ (∀ I : (faithfulCurveFieldBaseChange f E).left.IdealSheafData, RingedSpace.IsCoherent (faithfulCurveFieldBaseChange f E).left.toRingedSpace I.toModules → ∀ V : (faithfulCurveFieldBaseChange f E).left.Modules, V.IsFiniteLocallyFree → RingedSpace.IsCoherent (faithfulCurveFieldBaseChange f E).left.toRingedSpace (I.toModules ⊗ V : (faithfulCurveFieldBaseChange f E).left.Modules))) ∧ (∀ (Ω : Type u) [Field Ω] [Algebra F Ω] [IsAlgClosure F Ω], Function.Injective (faithfulCurveFieldBaseChangeAction f ρ Ω) ∧ ∃ U : (faithfulCurveFieldBaseChange f Ω).left.Opens, Set.Nonempty (U : Set (faithfulCurveFieldBaseChange f Ω).left) ∧ (∀ (K : Type u) [Field K] [IsAlgClosed K] (y : Spec (.of K) ⟶ (faithfulCurveFieldBaseChange f Ω).left), (Scheme.SpecToEquivOfField K (faithfulCurveFieldBaseChange f Ω).left y).1 ∈ U → ∀ g : G, g ≠ 1 → y ≫ (faithfulCurveFieldBaseChangeAction f ρ Ω g).hom.left ≠ y) ∧ ∃ x : Spec (.of Ω) ⟶ (faithfulCurveFieldBaseChange f Ω).left, x ≫ (faithfulCurveFieldBaseChange f Ω).hom = 𝟙 (Spec (.of Ω)) ∧ (Scheme.SpecToEquivOfField Ω (faithfulCurveFieldBaseChange f Ω).left x).1 ∈ U ∧ (Scheme.SpecToEquivOfField Ω (faithfulCurveFieldBaseChange f Ω).left x).1 ∈ closedPoints (faithfulCurveFieldBaseChange f Ω).left ∧ Function.Injective (fun g : G ↦ (faithfulCurveFieldBaseChangeAction f ρ Ω g).hom.left ((Scheme.SpecToEquivOfField Ω (faithfulCurveFieldBaseChange f Ω).left x).1)))",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The three helper abbreviations are the existing Over.pullback object, its mapAut homomorphism, and tensorPullback along pullback.fst, with no choices or replacement actions. The ampleness clause existentially binds the pullback invertibility proof required by IsAmple; it does not assume invertibility. Geometric fixed points are equalities of morphisms, while final orbit injectivity concerns underlying points. The landed variable-rank finite-locally-free definition node is added to stmt_deps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7030dd73e",
+  "group": "N6",
+  "result": "pass",
+  "note": "Statement verbatim, one sorry. Only non-lean change is the added stmt_dep def-sc-finite-locally-free-sheaf (existing, used via SheafOfModules.IsFiniteLocallyFree). Hypotheses match recorded decls (Smooth, IsHProjective, GeometricallyIntegral, LocallyOfFiniteType+QuasiCompact, topologicalKrullDim=1, ρ : G →* Aut (Over.mk f) injective, Scheme.Modules.IsInvertible/IsAmple). E-clauses: smooth/proper/geom-integral/IsNoetherian/dim1 over Spec E via Over.pullback; L_E = tensorPullback along pullback.fst, invertibility asserted in ∃ hInv with IsAmple; RingedSpace.IsCoherent for finite locally free V and IdealSheafData.toModules ⊗ V (sheafified tensor). Ω-clauses: injective base-changed action; nonempty open U with y ≫ g ≠ y for all geometric points (K alg closed, Type u) in U and g ≠ 1; Ω-section x closed in U with injective orbit on underlying points. Helper abbrevs canonical (Over.pullback, mapAut, tensorPullback), with docstrings. Edge cases G=1, any char, E=F, rank 0 covered; universes per records, no stray universe. No compile (no changes)."
+ }
+}

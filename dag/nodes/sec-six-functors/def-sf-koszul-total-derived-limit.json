@@ -1,0 +1,112 @@
+{
+ "id": "def-sf-koszul-total-derived-limit",
+ "kind": "definition",
+ "title": "Total derived strict inverse limit and principal Koszul completion",
+ "status": "split",
+ "statement": "Let $\\mathcal C$ be a site, small or essentially small relative to a chosen module universe, let $\\mathcal O$ be a sheaf of commutative rings, and put $\\mathcal A=\\operatorname{Mod}(\\mathcal O)$ [def-weil-sheaf-of-modules-category]. Use derived categories $D(\\mathcal A)$ and $D(\\operatorname{Tow}(\\mathcal A))$ with localization functors $Q$ [def-weil-abstract-derived-category], where $\\operatorname{Tow}(\\mathcal A)=\\operatorname{Fun}(\\mathbf N^{op},\\mathcal A)$ is the category of strict inverse systems [def-weil-inverse-system]. Define $\\operatorname{koszulRlim}_{\\mathcal O}:D(\\operatorname{Tow}(\\mathcal A))\\to D(\\mathcal A)$ to be the total right derived inverse-limit functor supplied, together with its universal right-derived comparison, by [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. This is the functor in the chosen right-derived pair; it is determined together with its comparison up to the unique compatible natural isomorphism. For every cochain complex $P$ of $\\mathcal O$-modules and global section $t\\in\\Gamma(\\mathcal C,\\mathcal O)$, let $V_n=[\\mathcal O\\xrightarrow{t^{n+1}}\\mathcal O]\\otimes_{\\mathcal O}P$ with its canonical strict transitions, and let $X(V)$ be its degreewise presentation as a cochain complex in $\\operatorname{Tow}(\\mathcal A)$, both as in [def-pur-principal-koszul-quotient-towers]. Define $\\operatorname{koszulCompletion}_{\\mathcal O}(P,t)=\\operatorname{koszulRlim}_{\\mathcal O}(Q(X(V)))$. Neither regularity of $t$, K-flatness of $P$, boundedness nor exactness of countable products is required for these definitions.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-inverse-system",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-pur-principal-koszul-quotient-towers"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/algebraization.tex",
+  "place": "Tag 0941, lemma-derived-limit-is-ok, total derived inverse limit of strict towers; Tag 0A0E, lemma-derived-completion-koszul, principal negative-degree Koszul tensor tower."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Total right derived inverse limit of a strict tower of sheaf module complexes and Koszul completion",
+   "results": "{\"t\": \"2026-10-22T11:48:29Z\", \"tool\": \"leansearch\", \"query\": \"Total right derived inverse limit of a strict tower of sheaf module complexes and Koszul completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.totalRightDerived\", \"CategoryTheory.Functor.totalLeftDerived\", \"SheafOfModules.hasLimit\", \"SheafOfModules.hasLimitsOfSize\", \"CategoryTheory.Functor.totalRightDerivedUnit\", \"SheafOfModules.hasLimitsOfShape\", \"AlgebraicGeometry.Scheme.Modules.instHasLimits\", \"AdicCompletion\"], \"digest\": \"3ebae6e789b7ceb7\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact specialized match; the generic totalRightDerived API and ordinary AdicCompletion differ from these strict ringed-site definitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Koszul completion as the total right derived inverse limit of the principal Koszul tensor tower",
+   "results": "{\"t\": \"2026-10-22T11:48:32Z\", \"tool\": \"leanfinder\", \"query\": \"Koszul completion as the total right derived inverse limit of the principal Koszul tensor tower\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Tor\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of\", \"CategoryTheory.Tor'\", \"AdicCompletion.ofTensorProduct\", \"CategoryTheory.Tor'_obj_obj\", \"CategoryTheory.Tor_obj\", \"AdicCompletion.tensor_map_id_left_eq_map\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\"], \"digest\": \"18f27a5ed3cc7be2\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact match; Tor and ordinary Noetherian adic tensor completion are different notions."
+  },
+  {
+   "tool": "grep",
+   "query": "koszulRlim|koszulCompletion|rightDerived.*[Ll]imit|[Ll]imit.*rightDerived",
+   "results": "{\"t\": \"2026-10-22T11:48:32Z\", \"tool\": \"grep\", \"query\": \"koszulRlim|koszulCompletion|rightDerived.*[Ll]imit|[Ll]imit.*rightDerived\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean\"], \"digest\": \"4ec8d5b5a7d69875\"}",
+   "date": "2026-10-22",
+   "verdict": "Mathlib hit is a generic pointwise right-derived colimit lemma, not Koszul completion."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n koszulRlim|koszulCompletion lean/WeilConjectures lean/Sheaf; rg in dag/nodes; blueprint_refs.py search Koszul total derived limit",
+   "results": "No WeilConjectures hits. Sheaf/Paper/DerivedCompleteKoszulReconstruction.lean defines koszulRlim at line 115 and koszulCompletion at line 122; reuse both. Other Sheaf hits are scheme-specific or constant-coefficient completions. DAG has the reconstruction theorem listing these helpers, but no separate definition node for them. blueprint_refs.py ancestor returns fix-prop-coherence; blueprint_refs.py search returns 0 blueprint nodes.",
+   "date": "2026-10-22",
+   "verdict": "Exact existing definitions found and reused with existing:true; the independent reviewer explicitly requested a definition node separating them from the reconstruction theorem."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-regular-roos-koszul-unit",
+  "date": "2026-10-22",
+  "group": "Q11"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Proof sentence “The maps used here are tensor reassociation, evaluation, and adjunction units and counits”; integral open factor, existential quotient Roos triangle versus the canonical Koszul unit (returned item Steps 6-7).",
+   "via": [
+    "lem-sf-regular-roos-koszul-unit",
+    "lem-sf-open-quotient-koszul-completeness",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "module": "Sheaf.Paper.DerivedCompleteKoszulReconstruction",
+  "declaration": "CategoryTheory.koszulRlim",
+  "declarations": [
+   "CategoryTheory.koszulRlim",
+   "CategoryTheory.koszulCompletion"
+  ],
+  "statement": "def koszulRlim : DerivedCategory.{w} (ℕᵒᵖ ⥤ 𝒜) ⥤ DerivedCategory.{w} 𝒜",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Existing plain definitions at lines 115 and 122 of the published module. koszulRlim chooses the total right-derived functor of the strict-tower theorem, independently of derivedComplete_koszul_reconstruction; koszulCompletion applies it to the localized strict Koszul tensor tower. This node records the definitions requested by the independent H2 return and adds no Lean declarations."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bd70d75e1",
+  "group": "Q11",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bd70d75e1",
+  "group": "Q11",
+  "result": "fix",
+  "note": "Re-delivery after the H2 RETURN at 0f6fb78e. Lean module byte-identical (sha256 0d0e8017…), so the earlier clause-by-clause acceptance stands. Item node vs live differs only in stmt_deps (theorem lem-pur-derived-complete-koszul-reconstruction replaced by new def-sf-koszul-total-derived-limit; theorem kept in proof_deps) and lean. New def node: existing:true on unchanged Sheaf.Paper.DerivedCompleteKoszulReconstruction (koszulRlim l.115 = choose of the strict-tower theorem, koszulCompletion l.122). Statement matches the Lean and sources Stacks 0941/0A0E; all body owners cited (strict-tower theorem, principal Koszul towers, ringedSiteModules, derived category, inverse system); no competing def owner; no cycle; check_new_node passes. F1 (mechanical): lean.statement carried `noncomputable`; fixes/def-sf-koszul-total-derived-limit.json is the full node with it trimmed, after which check_existing gives no failures or notes. No compile (records only, Lean unchanged)."
+ }
+}

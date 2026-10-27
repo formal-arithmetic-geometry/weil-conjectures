@@ -1,0 +1,278 @@
+{
+ "id": "lem-sfb-boolean-coatom-excision-derived",
+ "kind": "statement",
+ "title": "Derived Boolean coatom excision with an explicit quotient representative",
+ "statement": "Let $E$ be a finite set with $|E|\\geq2$, let $a\\in E$, and put $v=E\\setminus\\{a\\}$. For any finite set $F$, let $P_F=\\{S\\subseteq F:\\varnothing\\ne S\\ne F\\}$ ordered by inclusion and let $B_F=C(P_F;\\mathbf Q)$ be the augmented strict-chain complex of [def-sfb-augmented-poset-chains]. Let $D=P_E\\setminus\\{v\\}$ with its induced order. The assignment $S\\mapsto S\\cup\\{a\\}$ is a monotone endomorphism of $D$, pointwise above both its identity and its constant map at $\\{a\\}$, and $C(D;\\mathbf Q)$ is acyclic in all integer degrees. The chain-basis inclusion $C(D;\\mathbf Q)\\hookrightarrow B_E$ is the identity in degree $-1$; let $V$ be its degreewise quotient complex. Define the suspension by $(\\Sigma B_v)_n=(B_v)_{n-1}$ and $d^{\\Sigma}_n=-d^{B_v}_{n-1}$. For $n\\geq0$, the formula $\\theta_n([S_0<\\cdots<S_{n-1}<v]\\bmod C_n(D;\\mathbf Q))=(-1)^n[S_0<\\cdots<S_{n-1}]$, with $[v]$ sent to $[\\varnothing]$ when $n=0$, defines a chain isomorphism $\\theta:V\\cong\\Sigma B_v$; in negative degrees it is the unique map between zero spaces. Write $\\check K^q=K_{-q}$ for reversal from chain to cochain grading and $Q$ for localization into $D(\\mathbf Q\\text{-}\\mathrm{Mod})$ [def-weil-abstract-derived-category]. If $p:B_E\\to V$ is the quotient, then $Q(\\check\\theta\\circ\\check p):Q(\\check B_E)\\longrightarrow Q(\\check B_v)[1]$ is an isomorphism in this derived category.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image, contextual motivation only. Agent-formulated extraction of the retained proof of lem-sfb-product-chain-proper-interval-homology, steps 1 and 4–6; no exact combinatorial assertion in the blueprint. Exact reference WANTED."
+ },
+ "stmt_deps": [
+  "def-sfb-augmented-poset-chains",
+  "def-weil-pbc-module-chain-complex-homology",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Put $e=\\{a\\}$ and $u(S)=S\\cup\\{a\\}$. Since $|E|\\geq2$, $e$ is nonempty and proper, and $e\\ne v$, so $e\\in D$. For $S\\in D$, $u(S)$ is nonempty and contains $a$, hence is not $v$. If $u(S)=E$, then $v\\subseteq S$; as $E\\setminus v=\\{a\\}$, this forces $S=v$ or $S=E$, both excluded. Thus $u$ maps $D$ to $D$. Inclusion is preserved by union, and $S\\subseteq u(S)$ and $e\\subseteq u(S)$ prove $\\operatorname{id}_D\\leq u$ and $c_e\\leq u$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image, contextual motivation only; agent-written finite-chain argument extracted from lem-sfb-product-chain-proper-interval-homology. The blueprint contains no exact combinatorial statement."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-poset-augmented-chain-prism] with $R=\\mathbf Q$ and $P=Q=D$ to both comparisons from step 1. For $n\\geq0$ set $t_n=h_n(c_e,u)-h_n(\\operatorname{id}_D,u)$, and put $t_{-1}[\\varnothing]=[e]$, with $t_n=0$ below $-1$. The difference of the prism identities is $d t+t d=\\operatorname{id}-(c_e)_*$ before the degree $-1$ correction. In degrees $n\\geq1$ the constant map kills every strict chain (its image repeats a vertex), and the correction has no component there. In degree zero, $(c_e)_*$ sends every vertex to $[e]$; the added term $t_{-1}d$ sends every vertex to $[e]$ as well, so $d t_0+t_{-1}d=\\operatorname{id}$. In degree $-1$, $d t_{-1}[\\varnothing]=d[e]=[\\varnothing]$. Below $-1$ all spaces vanish. Hence $d t+t d=\\operatorname{id}$ in every degree. If $z$ is a cycle, $z=d(tz)$, so the kernel modulo image definition in [def-weil-pbc-module-chain-complex-homology] gives $H_n(C(D;\\mathbf Q))=0$ for all $n\\in\\mathbf Z$.",
+   "uses": [
+    "lem-sfb-poset-augmented-chain-prism",
+    "def-sfb-augmented-poset-chains",
+    "def-weil-pbc-module-chain-complex-homology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image, contextual motivation only; agent-written finite-chain argument extracted from lem-sfb-product-chain-proper-interval-homology. The blueprint contains no exact combinatorial statement."
+   }
+  },
+  {
+   "text": "By [def-sfb-augmented-poset-chains], the strict chains avoiding $v$ form a subset of the chain basis of $B_E$, closed under deletion. Their inclusion therefore commutes with the differential and is injective in every degree. It fixes the empty generator in degree $-1$. In each degree the quotient $V_n$ is free on the complementary basis: chains containing $v$; $V_n=0$ for $n<0$. Since $v$ is maximal in $P_E$, every surviving chain has the unique form $[S_0<\\cdots<S_{n-1}<v]$. Its preceding vertices are exactly a strict chain of nonempty proper subsets of $v$. For $n=0$ this preceding chain is empty. Dropping the last vertex is consequently a bijection from the quotient basis to the basis of $(B_v)_{n-1}$.",
+   "uses": [
+    "def-sfb-augmented-poset-chains"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image, contextual motivation only; agent-written finite-chain argument extracted from lem-sfb-product-chain-proper-interval-homology. The blueprint contains no exact combinatorial statement."
+   }
+  },
+  {
+   "text": "For a surviving basis element $b=[S_0<\\cdots<S_{n-1}<v]$ with $n\\geq1$, its quotient differential is $d_V b=\\sum_{i=0}^{n-1}(-1)^i[S_0<\\cdots<\\widehat S_i<\\cdots<S_{n-1}<v]$: the face deleting $v$ lies in $C(D;\\mathbf Q)$ and vanishes. Write $c=[S_0<\\cdots<S_{n-1}]$. Using the deletion differential in [def-sfb-augmented-poset-chains], $\\theta_{n-1}d_Vb=(-1)^{n-1}d_{B_v}c$, while $d_{\\Sigma B_v}\\theta_n b=-(-1)^n d_{B_v}c$. These coincide, including $n=1$ where $d_{B_v}[S_0]=[\\varnothing]$. In degree zero both differentials out of the source and target are zero, and negative degrees are zero. Thus $\\theta$ is a chain map. Its inverse on a degree $n$ basis element is $c\\mapsto(-1)^n[c<v]$, with the empty chain sent to $[v]$; the two composites multiply by $(-1)^{2n}=1$. Hence it is the asserted chain isomorphism.",
+   "uses": [
+    "def-sfb-augmented-poset-chains"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image, contextual motivation only; agent-written finite-chain argument extracted from lem-sfb-product-chain-proper-interval-homology. The blueprint contains no exact combinatorial statement."
+   }
+  },
+  {
+   "text": "The inclusion and quotient give a degreewise short exact sequence $0\\to C(D;\\mathbf Q)\\to B_E\\xrightarrow{p}V\\to0$ by the basis description in step 3. Reversing the integer indices produces a degreewise short exact sequence of cochain complexes of $\\mathbf Q$-modules. Apply [lem-weil-pbc-complex-ses-homology-long-exact]. Step 2 makes the terms on either side of $H^q(\\check p)$ zero for every $q$, so exactness gives $H^q(\\check p):H^q(\\check B_E)\\cong H^q(\\check V)$. Thus $\\check p$ is a quasi-isomorphism in the sense of [def-weil-abstract-derived-category].",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image, contextual motivation only; agent-written finite-chain argument extracted from lem-sfb-product-chain-proper-interval-homology. The blueprint contains no exact combinatorial statement."
+   }
+  },
+  {
+   "text": "Reversal sends the chain isomorphism of step 4 and its inverse to inverse cochain maps. Moreover $(\\check{\\Sigma B_v})^q=(B_v)_{-q-1}=(\\check B_v)^{q+1}$ and its differential is $-d_{B_v}$, exactly the shift convention of [def-weil-abstract-derived-category]; thus $\\check{\\Sigma B_v}=\\check B_v[1]$. The composite $\\check\\theta\\circ\\check p$ is a quasi-isomorphism: its cohomology map is the composite of the isomorphism in step 5 and the map induced by a cochain isomorphism. The localization $Q$ inverts quasi-isomorphisms by [def-weil-abstract-derived-category]. Using its compatibility with shift gives precisely the claimed isomorphism $Q(\\check B_E)\\to Q(\\check B_v)[1]$, represented by $Q(\\check\\theta\\circ\\check p)$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image, contextual motivation only; agent-written finite-chain argument extracted from lem-sfb-product-chain-proper-interval-homology. The blueprint contains no exact combinatorial statement."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-poset-augmented-chain-prism",
+  "def-sfb-augmented-poset-chains",
+  "def-weil-pbc-module-chain-complex-homology",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image, contextual motivation only; agent-written finite-chain argument extracted from lem-sfb-product-chain-proper-interval-homology. The blueprint contains no exact combinatorial statement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "orderComplex|order.complex|Boolean.*homolog|coatom.*(chain|complex)|poset.*contract",
+   "results": "{\"t\": \"2026-10-22T06:12:27Z\", \"tool\": \"grep\", \"query\": \"orderComplex|order.complex|Boolean.*homolog|coatom.*(chain|complex)|poset.*contract\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Finset.ssubsets, augment/truncate and Dold–Kan isomorphisms do not give coatom-deletion acyclicity or the quotient chain-basis identification. Euler characteristics do not determine a derived isomorphism."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The augmented chains on nonempty proper subsets of a finite set are derived isomorphic to the shifted augmented chains of a set with one element removed, by coatom excision",
+   "results": "{\"t\": \"2026-10-22T06:12:27Z\", \"tool\": \"leansearch\", \"query\": \"The augmented chains on nonempty proper subsets of a finite set are derived isomorphic to the shifted augmented chains of a set with one element removed, by coatom excision\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Finset.ssubsets\", \"ChainComplex.augment\", \"NonemptyChain.ext\", \"ChainComplex.truncateAugment\", \"NonemptyChain.carrier\", \"NonemptyChain.ext_iff\", \"Finset.covBy_iff_exists_erase\", \"Finset.erase_wcovBy\"], \"digest\": \"77de780b0b5da889\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Finset.ssubsets, augment/truncate and Dold–Kan isomorphisms do not give coatom-deletion acyclicity or the quotient chain-basis identification. Euler characteristics do not determine a derived isomorphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomologicalComplex\", \"Finset\"",
+   "results": "{\"t\": \"2026-10-22T06:12:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"HomologicalComplex\\\", \\\"Finset\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"HomologicalComplex.eulerChar_eq_sum_finSet_of_finrankSupport_subset\", \"HomologicalComplex.homologyEulerChar_eq_sum_finSet_of_finrankSupport_subset\"], \"digest\": \"4e889038f88ddd52\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Finset.ssubsets, augment/truncate and Dold–Kan isomorphisms do not give coatom-deletion acyclicity or the quotient chain-basis identification. Euler characteristics do not determine a derived isomorphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Deleting one coatom from the proper subset poset of a finite set gives an acyclic augmented chain subcomplex and a quotient isomorphic in the derived category to the suspension of the proper subset complex of that coatom",
+   "results": "{\"t\": \"2026-10-22T06:12:57Z\", \"tool\": \"leanfinder\", \"query\": \"Deleting one coatom from the proper subset poset of a finite set gives an acyclic augmented chain subcomplex and a quotient isomorphic in the derived category to the suspension of the proper subset complex of that coatom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.stdSimplex.faceSingletonComplIso\", \"ChainComplex.augmentTruncate\", \"AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace\", \"AlgebraicTopology.DoldKan.Γ₀NondegComplexIso\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.on_Γ₀_summand_id\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.summand\", \"Rep.standardComplex.compForgetAugmentedIso\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.Termwise.mapMono_eq_zero\"], \"digest\": \"e6541954cce722e0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Finset.ssubsets, augment/truncate and Dold–Kan isomorphisms do not give coatom-deletion acyclicity or the quotient chain-basis identification. Euler characteristics do not determine a derived isomorphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quotient of Boolean proper-subset chains by the chains avoiding a chosen maximal subset is quasi-isomorphic to the suspension of the smaller Boolean complex",
+   "results": "{\"t\": \"2026-10-22T06:12:58Z\", \"tool\": \"leanfinder\", \"query\": \"A quotient of Boolean proper-subset chains by the chains avoiding a chosen maximal subset is quasi-isomorphic to the suspension of the smaller Boolean complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.singularChainComplexFunctorIsoOfTotallyDisconnectedSpace\", \"AlgebraicTopology.DoldKan.Γ₀NondegComplexIso\", \"Rep.standardComplex.quasiIso_forget₂_εToSingle₀\", \"Rep.standardComplex.instQuasiIsoNatεToSingle₀\", \"AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace\", \"AlgebraicTopology.alternatingFaceMapComplexConst\", \"AlgebraicTopology.DoldKan.Q_is_eventually_constant\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.summand\"], \"digest\": \"3fbd50d819f91630\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Finset.ssubsets, augment/truncate and Dold–Kan isomorphisms do not give coatom-deletion acyclicity or the quotient chain-basis identification. Euler characteristics do not determine a derived isomorphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomologicalComplex\", \"Finset\"",
+   "results": "{\"t\": \"2026-10-23T11:31:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"HomologicalComplex\\\", \\\"Finset\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"HomologicalComplex.eulerChar_eq_sum_finSet_of_finrankSupport_subset\", \"HomologicalComplex.homologyEulerChar_eq_sum_finSet_of_finrankSupport_subset\"], \"digest\": \"4e889038f88ddd52\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned simplicial faces, boundaries, extra-degeneracy homotopy equivalence, augmentation operations, normalization and Euler characteristics do not state the strict-poset deletion contraction and explicit signed quotient isomorphism; applying them would need additional comparison constructions, not one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "orderComplex|Boolean.*homolog|coatom.*(chain|complex)|poset.*contract",
+   "results": "{\"t\": \"2026-10-23T11:31:41Z\", \"tool\": \"grep\", \"query\": \"orderComplex|Boolean.*homolog|coatom.*(chain|complex)|poset.*contract\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned simplicial faces, boundaries, extra-degeneracy homotopy equivalence, augmentation operations, normalization and Euler characteristics do not state the strict-poset deletion contraction and explicit signed quotient isomorphism; applying them would need additional comparison constructions, not one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The relative augmented strict chain complex of a Boolean proper subset poset modulo chains avoiding one maximal element is a suspension",
+   "results": "{\"t\": \"2026-10-23T11:31:42Z\", \"tool\": \"leansearch\", \"query\": \"The relative augmented strict chain complex of a Boolean proper subset poset modulo chains avoiding one maximal element is a suspension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ChainComplex.augment\", \"ChainComplex.augmentTruncate\", \"ChainComplex.toSingle₀AsComplex\", \"CochainComplex.augment\", \"ChainComplex.truncateAugment\", \"CochainComplex.fromSingle₀AsComplex\", \"ChainComplex.augment_X_zero\", \"ChainComplex.augment_d_succ_succ\"], \"digest\": \"82828f778d501092\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned simplicial faces, boundaries, extra-degeneracy homotopy equivalence, augmentation operations, normalization and Euler characteristics do not state the strict-poset deletion contraction and explicit signed quotient isomorphism; applying them would need additional comparison constructions, not one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Deleting a coatom from the poset of nonempty proper subsets gives an acyclic augmented chain subcomplex whose quotient is the suspension of the smaller Boolean complex",
+   "results": "{\"t\": \"2026-10-23T11:31:45Z\", \"tool\": \"leanfinder\", \"query\": \"Deleting a coatom from the poset of nonempty proper subsets gives an acyclic augmented chain subcomplex whose quotient is the suspension of the smaller Boolean complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.stdSimplex.face\", \"SSet.boundary\", \"SSet.stdSimplex.faceSingletonComplIso\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.summand\", \"SSet.skeleton\", \"SSet.Subcomplex.Pairing\", \"SSet.Subcomplex.PairingCore.WeakRankFunction\", \"SSet.Subcomplex.Pairing.WeakRankFunction\"], \"digest\": \"bfffc75546a3f035\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned simplicial faces, boundaries, extra-degeneracy homotopy equivalence, augmentation operations, normalization and Euler characteristics do not state the strict-poset deletion contraction and explicit signed quotient isomorphism; applying them would need additional comparison constructions, not one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalized augmented order complex of a Boolean lattice with one coatom removed is contractible by adjoining an atom",
+   "results": "{\"t\": \"2026-10-23T11:31:46Z\", \"tool\": \"leanfinder\", \"query\": \"The normalized augmented order complex of a Boolean lattice with one coatom removed is contractible by adjoining an atom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv\", \"SSet.Augmented.StandardSimplex.extraDegeneracy\", \"SSet.Augmented.StandardSimplex.nonempty_extraDegeneracy_stdSimplex\", \"AlgebraicTopology.AlternatingFaceMapComplex.ε\", \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmented\", \"classifyingSpaceUniversalCover.extraDegeneracyAugmentedCechNerve\", \"AlgebraicTopology.NormalizedMooreComplex.objX_zero\", \"AlgebraicTopology.NormalizedMooreComplex.objX\"], \"digest\": \"9f2991d01dc905f1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned simplicial faces, boundaries, extra-degeneracy homotopy equivalence, augmentation operations, normalization and Euler characteristics do not state the strict-poset deletion contraction and explicit signed quotient isomorphism; applying them would need additional comparison constructions, not one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-product-chain-proper-interval-homology",
+  "date": "2026-10-22",
+  "group": "Q98"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: the trivial-lattice polynomial-bar multidegree calculation below lem-sfb-rational-polynomial-bar-contraction; contraction and Boolean-interval induction for its finite combinatorial input. This combinatorial argument is agent-written, not present in the blueprint. Extraction of retained proof steps 1 and 4–6.",
+   "via": [
+    "lem-sfb-product-chain-proper-interval-homology",
+    "lem-sfb-rational-polynomial-bar-contraction",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-boolean-coatom-excision-derived",
+  "worker": "stage1",
+  "summary": "Q105 supplies the coatom-deletion contraction from the existing augmented prism, the complete complementary-basis quotient and suspension sign calculation, and derived localization via the existing Mathlib long-exact-sequence leaf. No new node or weakened statement. Verified augmentation and the two-element edge case; current blueprint provides contextual motivation only. Exact combinatorial reference remains WANTED.",
+  "blueprint": "Current latest direct-images proof, paragraph (3), contextual open-direct-image input only. The finite combinatorial argument is agent-written. The ancestor search returns None, so the inherited null ancestor and via chain are retained; no unit or chapter route changes."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q105-3bd3462e3",
+  "group": "Q105",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-3bd3462e3 (reviewer sub-agent of L); spot-checked: I read the item and all 6 steps in full; the delivery adds no new nodes, and the statement and stmt_deps are unchanged. Step 2: I recomputed t=h(c_e,u)-h(id,u), so dt+td=id-c_e*; together with the t_{-1}[∅]=[e] correction this gives a contraction in every degree, including degrees 0 and -1. This uses the prism node's statement exactly. Step 3: v is a coatom, so the quotient basis is the chains [c<v] with c a chain in P_v. Step 4: both sides give (-1)^{n-1}dc, which I rechecked for n=1. Step 6: the reversed suspension matches the shift convention of def-weil-abstract-derived-category ((K[1])^q=K^{q+1}, differential -d). Step 5: the cited long exact sequence leaf applies. The |E|=2 case checks out, and |E|≥2 is needed. proof_deps is the union of the step uses. No SGA is cited. Source paragraph (3) of the main-20261015 direct-images proof is honestly marked as context only, with agent proof_origin and an exact source WANTED. This is not a duplicate of lem-sfb-product-interval-nullhomotopy, which uses the same pattern on product intervals, nor of the unsplit sibling coatom-excision-homology, which cites this item. No re-split note applies."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.BooleanCoatomExcisionDerived",
+  "declaration": "AlgebraicTopology.AugmentedPosetChains.BooleanCoatom.excision",
+  "declarations": [
+   "AlgebraicTopology.AugmentedPosetChains.BooleanCoatom.Proper",
+   "AlgebraicTopology.AugmentedPosetChains.BooleanCoatom.booleanComplex",
+   "AlgebraicTopology.AugmentedPosetChains.BooleanCoatom.coatom",
+   "AlgebraicTopology.AugmentedPosetChains.BooleanCoatom.Deleted",
+   "AlgebraicTopology.AugmentedPosetChains.BooleanCoatom.inclusionOrder",
+   "AlgebraicTopology.AugmentedPosetChains.BooleanCoatom.inclusion",
+   "AlgebraicTopology.AugmentedPosetChains.BooleanCoatom.quotientComplex",
+   "AlgebraicTopology.AugmentedPosetChains.BooleanCoatom.projection",
+   "AlgebraicTopology.AugmentedPosetChains.BooleanCoatom.suspension",
+   "AlgebraicTopology.AugmentedPosetChains.BooleanCoatom.smallerVertices",
+   "AlgebraicTopology.AugmentedPosetChains.BooleanCoatom.signedDeletion",
+   "AlgebraicTopology.AugmentedPosetChains.BooleanCoatom.signedDeletion_comm",
+   "AlgebraicTopology.AugmentedPosetChains.BooleanCoatom.deletionMap",
+   "AlgebraicTopology.AugmentedPosetChains.BooleanCoatom.inclusion_deletionMap",
+   "AlgebraicTopology.AugmentedPosetChains.BooleanCoatom.thetaMap",
+   "AlgebraicTopology.AugmentedPosetChains.BooleanCoatom.thetaMap_isIso",
+   "AlgebraicTopology.AugmentedPosetChains.BooleanCoatom.theta",
+   "AlgebraicTopology.AugmentedPosetChains.BooleanCoatom.reversal",
+   "AlgebraicTopology.AugmentedPosetChains.BooleanCoatom.reversalSuspensionComponent",
+   "AlgebraicTopology.AugmentedPosetChains.BooleanCoatom.reversalSuspension_comm",
+   "AlgebraicTopology.AugmentedPosetChains.BooleanCoatom.reversalSuspensionIso",
+   "AlgebraicTopology.AugmentedPosetChains.BooleanCoatom.derivedComparison",
+   "AlgebraicTopology.AugmentedPosetChains.BooleanCoatom.excision"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/BooleanCoatomExcisionDerived.lean",
+  "statement": "theorem excision [HasDerivedCategory.{w} (ModuleCat.{u} ℚ)] (a : E) (hcard : 2 ≤ Fintype.card E) : (∃ (e : Deleted a) (f : Deleted a →o Deleted a), e.val.val = {a} ∧ (∀ S : Deleted a, (f S).val.val = insert a S.val.val) ∧ (∀ S : Deleted a, S ≤ f S ∧ e ≤ f S)) ∧ (∀ n : ℤ, IsZero ((complex ℚ (Deleted a)).homology n)) ∧ (∀ n : ℤ, Function.Injective ((inclusion a).f n)) ∧ ((inclusion a).f (-1) (bracket ℚ (-1) ([] : List (Deleted a))) = bracket ℚ (-1) ([] : List (Proper (Finset.univ : Finset E)))) ∧ (∀ n : ℤ, n < 0 → IsZero ((quotientComplex a).X n) ∧ IsZero ((suspension (booleanComplex (coatom a))).X n)) ∧ (∀ (n : ℤ) (c : Simplex (Proper (Finset.univ : Finset E)) n), (theta a hcard).hom.f n ((projection a).f n (Finsupp.single c 1)) = signedDeletion a n (Finsupp.single c 1)) ∧ IsIso (derivedComparison a hcard)",
+  "branch": "newtargets-dag",
+  "by": "Q54",
+  "date": "2026-10-23",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-b2692db41"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b2692db41",
+  "group": "Q54",
+  "result": "fix",
+  "note": "Read item, 3 stmt_deps, AugmentedPosetChains + Prism map, module, report. Node delta = lean only; statement verbatim; 24 decls = file. All 7 conjuncts match: pinned S∪{a} order hom, acyclic C(D) all n, injective inclusion fixing [∅], cokernel quotient, V and ΣB_v zero for n<0, θ∘p = signed drop-last on every generator, IsIso of Q(reversed θ∘p)≫commShiftIso (derived form). Signs (-1)^(n-1)d = -(-1)^n d and reversed suspension = ⟦1⟧ rechecked; |E|=2 case checked; u,w free. H4 FIX: reversalEmbedding duplicated Mathlib ComplexShape.embeddingUpIntDownInt (functor of ChainComplex.cochainComplexEquivalence) → reversal := embeddingUpIntDownInt.restrictionFunctor, import CochainComplexOpposite, unused Finset.Powerset import dropped; lean-record.json: 23 declarations + verbatim statement (refit_record: no notes, no refusals). Fixed file compiles clean in 1.9 s (control with a broken name errors). Advisory: map/mapComponent owned by the prism theorem module (proof_dep, not stmt_dep); θ chain-map/iso clauses are named sorry obligations, all true; the second reading was by the same worker."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261026T091744-L-3372910",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicTopology.AugmentedPosetChains.BooleanCoatom.excision",
+   "AlgebraicTopology.AugmentedPosetChains.BooleanCoatom.inclusion_deletionMap",
+   "AlgebraicTopology.AugmentedPosetChains.BooleanCoatom.reversalSuspension_comm",
+   "AlgebraicTopology.AugmentedPosetChains.BooleanCoatom.signedDeletion_comm",
+   "AlgebraicTopology.AugmentedPosetChains.BooleanCoatom.thetaMap_isIso"
+  ],
+  "sorry_after": [
+   "AlgebraicTopology.AugmentedPosetChains.BooleanCoatom.excision",
+   "AlgebraicTopology.AugmentedPosetChains.BooleanCoatom.signedDeletion_comm",
+   "AlgebraicTopology.AugmentedPosetChains.BooleanCoatom.thetaMap_isIso"
+  ]
+ }
+}

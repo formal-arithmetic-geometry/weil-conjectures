@@ -1,0 +1,501 @@
+{
+ "id": "lem-sfb-space-universally-closed-quasicompact",
+ "kind": "statement",
+ "title": "Universally closed morphisms of algebraic spaces are quasi-compact",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $f:X\\to Y$ be a morphism of algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Use sheaf fibre products [lem-trf-space-fibre-products-etale-covers] and the atlas topology on point spaces [def-a1-space-point-topology]. Suppose $f$ is universally closed: for every algebraic space $Y'$ over $S$ and morphism $Y'\\to Y$, the induced map $|X\\times_Y Y'|\\to|Y'|$ is closed [def-sfb-space-morphism-properties]. Then $f$ is quasi-compact: for every affine scheme $T\\to Y$, the point space $|X\\times_YT|$ is quasi-compact, meaning that every open covering has a finite subcover. Here an affine scheme is a scheme isomorphic to the spectrum of a commutative ring [def-weil-affine-spectrum]. No representability, separatedness, finite-type or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 04XW (lemma-universally-closed-quasi-compact)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-space-point-topology",
+  "def-sfb-space-morphism-properties",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Fix an affine scheme $Y_0\\to Y$ and put $X_0=X\\times_YY_0$. For every $T\\to Y_0$, the fibre-product universal property identifies $X_0\\times_{Y_0}T$ with $X\\times_YT$. Universal closedness of $f$ therefore gives universal closedness of $X_0\\to Y_0$ directly from its definition. It suffices to prove that $|X_0|$ is quasi-compact for each such test. Rename $X_0,Y_0$ as $X,Y$, write $Y=\\operatorname{Spec}B$, and suppose for contradiction that $|X|$ is not quasi-compact.",
+   "uses": [
+    "def-sfb-space-morphism-properties",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04XW (lemma-universally-closed-quasi-compact), proof."
+   }
+  },
+  {
+   "text": "Choose a set-indexed Zariski covering $X=\\bigcup_{i\\in I}X_i$ whose members admit surjective etale maps from affine schemes. Affine schemes are quasi-compact, and the atlas criterion for quasi-compactness makes each $|X_i|$ quasi-compact. Since the affine scheme $Y$ is quasi-separated, quasi-compact/quasi-separated permanence makes each morphism $X_i\\to Y$ quasi-compact. Thus for every principal affine open $V\\subset Y$, the point space of $X_{i,V}=X_i\\times_YV$ is quasi-compact. These pullbacks are the inverse-image open subspaces by point-open calculus.",
+   "uses": [
+    "lem-a1-space-affine-atlas-open-cover",
+    "lem-a1-space-etale-open-image",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-space-qcqs-permanence",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04XW (lemma-universally-closed-quasi-compact), proof."
+   }
+  },
+  {
+   "text": "There is a point $y\\in Y$ for which $|X_V|$ is not quasi-compact for every principal open neighbourhood $V=D(b)$ of $y$. Otherwise choose such a neighbourhood with quasi-compact inverse image at every point. Quasi-compactness of $\\operatorname{Spec}B$ selects finitely many covering $Y$. Their inverse images cover $X$, and a finite union of quasi-compact subsets is quasi-compact: restrict any open cover to each subset and unite the finitely many finite subcovers. This contradicts the choice of $X$. Fix this $y$.",
+   "uses": [
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04XW (lemma-universally-closed-quasi-compact), proof."
+   }
+  },
+  {
+   "text": "Form the polynomial ring $A=B[a_i:i\\in I]$, the affine scheme $T=\\operatorname{Spec}A$, and $T_i=D(a_i)\\subset T$. Write $P=T\\times_YX$, with projections $p:P\\to T$ and $q:P\\to X$. Define the subset\n$$C=|P|\\setminus\\bigcup_{i\\in I}\\bigl(|p|^{-1}(T_i)\\cap|q|^{-1}(|X_i|)\\bigr).$$\nThe two point maps are continuous and the displayed subsets are open, so $C$ is closed. Universal closedness says $F=|p|(C)$ is closed in $T$. This uses a closed subset only; no reduced closed subspace structure is needed.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-a1-space-point-open-calculus",
+    "def-sfb-space-morphism-properties"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04XW (lemma-universally-closed-quasi-compact), proof."
+   }
+  },
+  {
+   "text": "Let $t\\in T$ be the point given by the ring map $A\\to\\kappa(y)$ taking coefficients through $B\\to\\kappa(y)$ and every $a_i$ to $1$; its kernel contracts to the prime $y$, and $t\\in T_i$ for every $i$. If $z\\in C$ mapped to $t$, choose $i$ with $q(z)\\in|X_i|$. Then $p(z)\\in T_i$ and $q(z)\\in|X_i|$, contrary to the definition of $C$. Hence $t\\notin F$. Since principal opens form a basis, choose $g\\in A$ such that $t\\in D(g)\\subset T\\setminus F$; equivalently $F\\subset V(g)$ and $g(t)\\ne0$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-prime-residue-field-algebra",
+    "lem-weil-pbc-spec-localization-away-basic-open"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04XW (lemma-universally-closed-quasi-compact), proof."
+   }
+  },
+  {
+   "text": "The polynomial $g$ involves only finitely many variables; let $J\\subset I$ contain all their indices. At least one coefficient $c\\in B$ of $g$ has nonzero image in $\\kappa(y)$, since otherwise evaluation of $g$ at $t$ would vanish. Put $V=D(c)$, a principal affine neighbourhood of $y$. The open subspaces $X_{j,V}$ for $j\\in J$ cannot cover $X_V$: each is quasi-compact by step 2, whereas $|X_V|$ is not quasi-compact by step 3, and a finite union would be quasi-compact. Choose $x\\in|X_V|\\setminus\\bigcup_{j\\in J}|X_{j,V}|$ and put $v=f(x)\\in V$. Thus $x\\notin|X_j|$ for all $j\\in J$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-prime-residue-field-algebra",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04XW (lemma-universally-closed-quasi-compact), proof."
+   }
+  },
+  {
+   "text": "Put $R=\\kappa(v)[u_j:j\\in J]$. This is an integral domain. Its zero ideal is prime; its residue field $L=\\kappa_R((0))$ receives an injective map $R\\hookrightarrow L$. Define $A\\to L$ by $B\\to\\kappa(v)\\to L$, $a_j\\mapsto u_j$ for $j\\in J$, and $a_i\\mapsto0$ for $i\\notin J$. The coefficient $c$ chosen in step 6 stays nonzero at $v$, so the image of $g$ is a nonzero polynomial in $R$, hence nonzero in $L$. The kernel defines a point $t'\\in T$ above $v$ with $g\\notin t'$ and $a_i\\in t'$ for every $i\\notin J$. This construction includes $J=\\varnothing$ and works over finite residue fields; no assertion about rational values of a polynomial is used.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-domain",
+    "lem-weil-pbc-prime-residue-field-algebra",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04XW (lemma-universally-closed-quasi-compact), proof."
+   }
+  },
+  {
+   "text": "The points $x\\in|X|$ and $t'\\in|T|$ have the same image $v\\in|Y|$. Surjectivity of the map from points of a fibre product to the fibre product of point sets gives $z\\in|P|$ with $q(z)=x$ and $p(z)=t'$. For $j\\in J$ we have $q(z)\\notin|X_j|$; for $i\\notin J$ we have $p(z)\\notin D(a_i)$. Thus $z$ belongs to none of the open subsets removed in the definition of $C$, so $z\\in C$. Consequently $t'\\in F\\subset V(g)$, contradicting $g\\notin t'$. This contradiction proves $|X|$ quasi-compact. Step 1 applied to every affine test proves precisely the stated quasi-compactness of the original $f$.",
+   "uses": [
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04XW (lemma-universally-closed-quasi-compact), proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-space-morphism-properties",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-a1-space-affine-atlas-open-cover",
+  "lem-a1-space-etale-open-image",
+  "lem-a1-space-point-open-calculus",
+  "lem-sfb-space-qcqs-permanence",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-polynomial-ring-domain",
+  "lem-weil-pbc-prime-residue-field-algebra",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-weil-pbc-spec-localization-away-basic-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 04XW (lemma-universally-closed-quasi-compact), proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "instQuasiCompactOfUniversallyClosed|[Aa]lgebraic[Ss]pace",
+   "results": {
+    "t": "2026-10-23T13:14:33Z",
+    "tool": "grep",
+    "query": "instQuasiCompactOfUniversallyClosed|[Aa]lgebraic[Ss]pace",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned algebraic-geometry declarations are for Scheme, not arbitrary algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean:34-42, 158-168 and Morphisms/Proper.lean:106-112; the quasi-separatedness hits likewise quantify over schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"UniversallyClosed\", \"QuasiCompact\"",
+   "results": {
+    "t": "2026-10-23T13:14:33Z",
+    "tool": "loogle",
+    "query": "\"UniversallyClosed\", \"QuasiCompact\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instQuasiCompactOfUniversallyClosed",
+     "AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact"
+    ],
+    "digest": "5210ba39b01bb30a"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned algebraic-geometry declarations are for Scheme, not arbitrary algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean:34-42, 158-168 and Morphisms/Proper.lean:106-112; the quasi-separatedness hits likewise quantify over schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every universally closed morphism of algebraic spaces is quasi compact",
+   "results": {
+    "t": "2026-10-23T13:14:44Z",
+    "tool": "leanfinder",
+    "query": "Every universally closed morphism of algebraic spaces is quasi compact",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instQuasiCompactOfUniversallyClosed",
+     "AlgebraicGeometry.Scheme.Hom.isProperMap",
+     "AlgebraicGeometry.IsProper.toUniversallyClosed",
+     "AlgebraicGeometry.UniversallyClosed.out",
+     "AlgebraicGeometry.universallyClosed_iff",
+     "AlgebraicGeometry.UniversallyClosed.universally_isClosedMap",
+     "AlgebraicGeometry.Scheme.Hom.isClosedMap",
+     "AlgebraicGeometry.universallyClosed_eq"
+    ],
+    "digest": "6e228914de0d4482"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned algebraic-geometry declarations are for Scheme, not arbitrary algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean:34-42, 158-168 and Morphisms/Proper.lean:106-112; the quasi-separatedness hits likewise quantify over schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A universally closed map of algebraic spaces is quasi compact on affine scheme tests",
+   "results": {
+    "t": "2026-10-23T13:21:42Z",
+    "tool": "leansearch",
+    "query": "A universally closed map of algebraic spaces is quasi compact on affine scheme tests",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instQuasiCompactOfUniversallyClosed",
+     "AlgebraicGeometry.UniversallyClosed.mk",
+     "AlgebraicGeometry.UniversallyClosed",
+     "AlgebraicGeometry.universallyClosed_eq_universallySpecializing",
+     "AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant",
+     "AlgebraicGeometry.universallyClosed_eq",
+     "AlgebraicGeometry.universallyClosed_isStableUnderBaseChange",
+     "AlgebraicGeometry.quasiCompact_iff_forall_isAffineOpen"
+    ],
+    "digest": "43768b2674ea7038"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned algebraic-geometry declarations are for Scheme, not arbitrary algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean:34-42, 158-168 and Morphisms/Proper.lean:106-112; the quasi-separatedness hits likewise quantify over schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an affine scheme T mapping to an algebraic space Y, a universally closed morphism X to Y has quasi compact fibre product X times Y T",
+   "results": {
+    "t": "2026-10-23T13:21:43Z",
+    "tool": "leanfinder",
+    "query": "For an affine scheme T mapping to an algebraic space Y, a universally closed morphism X to Y has quasi compact fibre product X times Y T",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instQuasiCompactOfUniversallyClosed",
+     "AlgebraicGeometry.UniversallyClosed",
+     "AlgebraicGeometry.universallyClosed_snd",
+     "AlgebraicGeometry.universallyClosed_fst",
+     "AlgebraicGeometry.UniversallyClosed.out",
+     "AlgebraicGeometry.quasiCompact_isStableUnderBaseChange",
+     "AlgebraicGeometry.universallyClosed_isStableUnderBaseChange",
+     "AlgebraicGeometry.Scheme.Hom.isProperMap"
+    ],
+    "digest": "1f1670793cf1ce61"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned algebraic-geometry declarations are for Scheme, not arbitrary algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean:34-42, 158-168 and Morphisms/Proper.lean:106-112; the quasi-separatedness hits likewise quantify over schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "UniversallyClosed.*QuasiCompact|AlgebraicSpace|Algebraic.Space",
+   "results": {
+    "t": "2026-10-23T13:26:32Z",
+    "tool": "grep",
+    "query": "UniversallyClosed.*QuasiCompact|AlgebraicSpace|Algebraic.Space",
+    "sub": "AlgebraicGeometry/Morphisms",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean"
+    ],
+    "digest": "3fe569ad51d73973"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned algebraic-geometry declarations are for Scheme, not arbitrary algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean:34-42, 158-168 and Morphisms/Proper.lean:106-112; the quasi-separatedness hits likewise quantify over schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every universally closed morphism of algebraic spaces is quasi compact",
+   "results": {
+    "t": "2026-10-23T14:24:30Z",
+    "tool": "leanfinder",
+    "query": "Every universally closed morphism of algebraic spaces is quasi compact",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instQuasiCompactOfUniversallyClosed",
+     "AlgebraicGeometry.Scheme.Hom.isProperMap",
+     "AlgebraicGeometry.UniversallyClosed.out",
+     "AlgebraicGeometry.universallyClosed_eq_universallySpecializing",
+     "AlgebraicGeometry.UniversallyClosed.universally_isClosedMap",
+     "AlgebraicGeometry.compactSpace_of_universallyClosed",
+     "AlgebraicGeometry.Scheme.Hom.isClosedMap",
+     "AlgebraicGeometry.universallyClosed_eq"
+    ],
+    "digest": "53babedf7a490639"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: read Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean:34-44,158-168; all relevant hits quantify over Scheme, not arbitrary algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"UniversallyClosed\", \"QuasiCompact\"",
+   "results": {
+    "t": "2026-10-23T14:24:30Z",
+    "tool": "loogle",
+    "query": "\"UniversallyClosed\", \"QuasiCompact\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instQuasiCompactOfUniversallyClosed",
+     "AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact"
+    ],
+    "digest": "5210ba39b01bb30a"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: read Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean:34-44,158-168; all relevant hits quantify over Scheme, not arbitrary algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "UniversallyClosed.*QuasiCompact|AlgebraicSpace",
+   "results": {
+    "t": "2026-10-23T14:24:31Z",
+    "tool": "grep",
+    "query": "UniversallyClosed.*QuasiCompact|AlgebraicSpace",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 7,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/ValuativeCriterion.lean",
+     "Mathlib/AlgebraicGeometry/ValuativeCriterion.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean"
+    ],
+    "digest": "8ce6851fb0b02397"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: read Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean:34-44,158-168; all relevant hits quantify over Scheme, not arbitrary algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A universally closed map of algebraic spaces has quasi compact inverse images on affine scheme tests",
+   "results": {
+    "t": "2026-10-23T14:24:31Z",
+    "tool": "leansearch",
+    "query": "A universally closed map of algebraic spaces has quasi compact inverse images on affine scheme tests",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instQuasiCompactOfUniversallyClosed",
+     "AlgebraicGeometry.UniversallyClosed.mk",
+     "AlgebraicGeometry.UniversallyClosed",
+     "AlgebraicGeometry.quasiCompact_iff_forall_isAffineOpen",
+     "AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant",
+     "AlgebraicGeometry.universallyClosed_eq",
+     "AlgebraicGeometry.quasiCompact_iff_forall_affine",
+     "AlgebraicGeometry.UniversallyClosed.out"
+    ],
+    "digest": "18dbf1617b02c211"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: read Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean:34-44,158-168; all relevant hits quantify over Scheme, not arbitrary algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal closedness for algebraic spaces implies compactness of point spaces over affine schemes",
+   "results": {
+    "t": "2026-10-23T14:32:46Z",
+    "tool": "leanfinder",
+    "query": "Universal closedness for algebraic spaces implies compactness of point spaces over affine schemes",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.compactSpace_of_universallyClosed",
+     "AlgebraicGeometry.instQuasiCompactOfUniversallyClosed",
+     "AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.quasiCompact_over_affine_iff",
+     "AlgebraicGeometry.universallyClosed_eq_universallySpecializing",
+     "AlgebraicGeometry.universallyClosed_eq",
+     "AlgebraicGeometry.compactSpace_iff_quasiCompact",
+     "AlgebraicGeometry.Scheme.Hom.isProperMap"
+    ],
+    "digest": "95d083709b886ed4"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: read Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean:34-44,158-168; all relevant hits quantify over Scheme, not arbitrary algebraic spaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-uc-surjection-separation",
+  "date": "2026-10-23",
+  "group": "Q35"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D58 (lemma-curves-existence). Proof detail: Tag 0E7R proof, first paragraph after the first medskip: each X_n is a scheme by Tag 05ZR. Supporting input: Tag 05ZR via the affine-open argument of Tag 07VU; Tag 07VS applies to the surjective closed immersion from each affine open of Z to the corresponding open subspace of Y. Supporting input for Tag 07VS: Tag 05Z2 (lemma-image-universally-closed-separated), parts (1) and (2). Proof of Tag 05Z2, paragraph before the first medskip: the right vertical arrow is quasi-compact by Tag 04XW.",
+   "via": [
+    "lem-sfb-space-uc-surjection-separation",
+    "lem-sfb-finite-surjective-affine-space-target",
+    "lem-sfb-thickening-of-scheme-space",
+    "lem-sfb-curve-formal-effectivity",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-universally-closed-quasicompact",
+  "worker": "stage1",
+  "summary": "Expanded Tag 04XW into the affine-test reduction and polynomial-variable closed-image contradiction, reusing existing atlas, point-calculus, permanence and commutative-algebra nodes. No new nodes. Corrected source proof typos and used a closed subset directly.",
+  "blueprint": "Supports the inherited direct-image alteration/moduli chain: Tag 05Z2 uses Tag 04XW for the right vertical arrow. The current blueprint direct-image proof (3) assembles compactification; no chapter or unit route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-affine-atlas-open-cover",
+    "why": "Generic set-indexed affine-etale open cover; the unit has no replacement for Tag 03FY."
+   },
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "Generic atlas/topological quasi-compactness criterion, Tag 03E4."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic continuity, open pullback and point-lifting facts, especially Tag 03H4; used as tools for Tag 04XW."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-affine-atlas-open-cover",
+  "lem-a1-space-etale-open-image",
+  "lem-a1-space-point-open-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q120-9210adde8",
+  "group": "Q120",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-9210adde8 (reviewer sub-agent of L); spot-checked: I read the whole delivery and accept it without changes. The item, Stacks Tag 04XW (spaces-morphisms.tex, lemma-universally-closed-quasi-compact, full proof) and every cited node's statement were read; there are no new nodes. The statement matches the source with no added hypothesis: universal closedness and the affine-test definition of quasi-compact are spelled out, and the only edit is Y\\prime to Y'. Steps 1-8 follow the source, and each one is backed by cited statements. Step 1 reduces to an affine base through the fibre-product universal property. Step 2 gets a cover by quasi-compact opens from Tag 03FY, the 03E4 criterion and the qcqs-permanence node; the scheme-versus-space meaning of 'affine is quasi-separated' agrees in one line. Step 3 finds the bad point y using principal opens, which form a basis. Step 4 takes the closed set C directly in |T x_Y X|, so the source's reduced-closed-subspace lemma is not needed. Step 5 shows t is not in F and finds g. Step 6 chooses the coefficient c, the finite index set J and the point x. Step 7 builds t' as the generic point of kappa(v)[u_j], which handles J empty and finite residue fields. Step 8 lifts to z with Tag 03H4 and reaches the contradiction. The source's typos (Z for X, Y_V for X_V, q(t) for q(z)) are recorded in the report and do not affect the statement. Edge cases checked: X empty, B=0, I empty, J empty, finite fields, and an infinite disjoint union. Duplicate search: the only related node is the scheme lemma (Tag 04XU), so nothing duplicates the item, and there is no cycle. Tool uses accepted: the three declared lem-a1 point-topology nodes, plus the undeclared lem-trf-space-fibre-products-etale-covers, which is already a stmt_dep and is basic fibre-product foundations. Batch-5 check: the four flagged citations reach sec-trace-formula only through def-trf-algebraic-space and other algebraic-space foundation nodes (fppf descent, etale relations, fibre products). No Poincare-duality, sk-thm-trace or batch-4 node is in their closures, so these are general definitions, not steps of either assumed theorem, and the citations stand."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceUniversallyClosedQuasiCompact",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.mapIsQuasiCompact_of_mapIsUniversallyClosed",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceUniversallyClosedQuasiCompact.lean",
+  "statement": "theorem mapIsQuasiCompact_of_mapIsUniversallyClosed {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) (hf : MapIsUniversallyClosed f) : MapIsQuasiCompact f.hom.hom",
+  "branch": "sheaf-dag",
+  "by": "Q153",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-68f83c3bb",
+  "group": "Q153",
+  "result": "pass",
+  "note": "Read Tag 04XW (spaces-morphisms.tex l.1468), the item node, all 7 stmt_deps and the live decls MapIsUniversallyClosed (∀ Y' g, IsClosedMap mapPoint of sheaf pullback.snd), MapIsQuasiCompact (∀ affine T→Y, CompactSpace Point(pullback)) and pointTopologicalSpace (étale-atlas final topology). Hypothesis and conclusion match the node and source: no extra hypotheses, instances or universe restriction, and no Hausdorff condition. Edge cases covered: empty X/Y/S, Spec 0 test, identities, nonrepresentable f. Node record differs from live only by the lean field; lean.statement is verbatim in the file; sorry-only proof; no new defs; docstrings carry source, blueprint id and the 8 steps; public imports are the stmt_dep modules only. The report has both required sections. H4: no duplicate in lean/Sheaf, lean/WeilConjectures or Mathlib (scheme-only instance). Advisory: the MapIsQuasiCompact/mapPoint owner def-sfb-proper-curve-moduli is reached only transitively via def-sfb-space-morphism-properties (same as the N8 precedent); lem-sfb-space-qcqs-permanence is used only in the proof docstring. No recompile per the 2026-10-21 rule; worker reports clean compiles."
+ }
+}

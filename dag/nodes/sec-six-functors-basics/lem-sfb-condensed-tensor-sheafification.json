@@ -1,0 +1,155 @@
+{
+ "id": "lem-sfb-condensed-tensor-sheafification",
+ "kind": "statement",
+ "title": "Equivariant tensor sheafification and the identity tensor",
+ "statement": "Fix R,P,H as in [def-sfb-condensed-tensor-induction-data]. For every TensorInductionPresheaf B, there exists TensorInductionSheafData B: a functor L, its natural comparison with ordinary module sheafification, the induced-action and map formulas, and the H-equivariant identity tensor morphism. No adjunction or extension property is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Agent-formulated induction argument below paragraph (3); Equivariant tensor sheafification and the identity tensor. External reference WANTED, as for the parent."
+ },
+ "stmt_deps": [
+  "def-sfb-condensed-tensor-induction-data"
+ ],
+ "proof": [
+  {
+   "text": "Continuous maps into P form a sheaf of groups: descend compatible maps along finite coproduct covering surjections, which are quotient by compactness and the Hausdorff property. Empty covers are included.",
+   "uses": [
+    "def-sfb-condensed-tensor-induction-data",
+    "lem-sfb-compact-hausdorff-surjection-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Induction step 1"
+   }
+  },
+  {
+   "text": "Apply equivariant module sheafification to B and realize the sheaf and its action in the internal module category through the section-module equivalence. Unique extension of the maps gives functoriality, the comparison and the action/map formulas.",
+   "uses": [
+    "def-sfb-condensed-tensor-induction-data",
+    "lem-sfb-equivariant-module-sheafification-reflector",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Induction step 4"
+   }
+  },
+  {
+   "text": "The identity tensor is linear and natural. The balanced relation identifies [h] tensor m with [1] tensor hm, so equivariance of the sheafification unit makes it H-equivariant. Full faithfulness of the section-module equivalence supplies the corresponding internal-module morphism.",
+   "uses": [
+    "def-sfb-condensed-tensor-induction-data",
+    "def-sfb-condensed-action-module",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Induction step 5"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-condensed-tensor-induction-data",
+  "lem-sfb-compact-hausdorff-surjection-quotient",
+  "lem-sfb-equivariant-module-sheafification-reflector",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-sfb-condensed-action-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Induction proof steps specified in the Lean docstring and inherited from the parent argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "universal balanced group algebra tensor presheaf and equivariant module sheafification",
+   "results": "PresheafOfModules.sheafify, sheafifyMap, sheafification, toSheafify, Sheafify.module, and toSheaf_map_sheafificationHomEquiv_symm.",
+   "date": "2026-10-26",
+   "verdict": "Ordinary module sheafification is used; none states balanced induction over varying section rings with internal continuous group action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of balanced group algebra tensor induction is left adjoint to restriction of internal group actions on sheaves of modules",
+   "results": "PresheafOfModules.sheafificationAdjunction; Rep.indResAdjunction; fixed-ring restriction adjoints. Loogle Rep.indResAdjunction confirms the abstract fixed-ring statement.",
+   "date": "2026-10-26",
+   "verdict": "No direct match; use the ordinary sheafification API and prove the balanced-generator argument."
+  },
+  {
+   "tool": "grep",
+   "query": "indResAdjunction|TensorInductionPresheaf|Equivariant.*sheafif",
+   "results": "Mathlib.RepresentationTheory.Induced, the item, CondensedSplitCosetInduction, and EquivariantModuleSheafificationReflector.",
+   "date": "2026-10-26",
+   "verdict": "Split-coset induction has a stronger hypothesis and is unproved; the proved reflector supplies the sheafification step, not the tensor presheaf or normalized Frobenius transposes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CondensedTensorInductionAdjunction",
+  "group": "E2",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), induction argument: Equivariant tensor sheafification and the identity tensor",
+   "via": [
+    "lem-sfb-condensed-tensor-induction-adjunction",
+    "lem-sfb-condensed-split-coset-induction",
+    "lem-sfb-derived-invariants-normal-subgroup-comparison",
+    "lem-sfb-prime-to-ell-derived-invariants-reduction",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CondensedTensorInductionSheafification",
+  "file": "lean/Sheaf/CategoryTheory/CondensedTensorInductionSheafification.lean",
+  "declaration": "Profinite.CondensedAction.tensorInductionSheafData_exists",
+  "statement": "theorem tensorInductionSheafData_exists (B : TensorInductionPresheaf R P H) :\n    Nonempty (TensorInductionSheafData B)",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-7249c",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261026T081602-L-2013109",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-7249c",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261026T081602-L-2013109",
+  "kind": "interface",
+  "note": "independent cc review: moved data block vs clone item (byte-identical), item theorem statement vs clone, item/new node lean records and proof_deps vs Lean, ActionModule definition vs the two sorried statements"
+ }
+}

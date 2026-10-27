@@ -1,0 +1,257 @@
+{
+ "id": "lem-sfb-algebraic-stack-dm-point-stabilizer",
+ "kind": "statement",
+ "title": "Stabilizer criterion for membership in the DM locus",
+ "statement": "Let $S$ be a scheme, $\\mathcal X$ an algebraic stack over $S$, and $\\mathcal U\\subseteq\\mathcal X$ its largest open substack with unramified relative diagonal. Let $K$ be any field and $x:\\operatorname{Spec}K\\to\\mathcal X$ an $S$-morphism. Let $G_x$ be the automorphism group algebraic space of the object $x$, namely the sheaf $T\\mapsto\\operatorname{Aut}_{\\mathcal X(T)}(x_T)$ on $K$-schemes. Then $x$ factors through $\\mathcal U$ if and only if $G_x\\to\\operatorname{Spec}K$ is unramified. No perfectness assumption on $K$ is imposed. An algebraic stack here is a stack in groupoids on schemes with representable diagonal and a smooth surjective scheme atlas; stacks, representability and scheme atlases use [def-sfb-stable-pointed-moduli-groupoids], and smooth means [def-sbc-smooth-morphisms]. Open substacks are full substacks whose pullback by every scheme is an open subscheme. A representable morphism is unramified if every scheme base change, on etale scheme charts of its algebraic-space source, is unramified in [def-weil-unramified-morphism].",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 0DSN (lemma-points-DM-locus), part (1); relative-base convention via Tag 050N (lemma-separated-implies-morphism-separated), part (1)."
+ },
+ "stmt_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sbc-smooth-morphisms",
+  "def-weil-unramified-morphism",
+  "def-weil-field",
+  "def-trf-algebraic-space",
+  "def-sfb-open-moduli-substack"
+ ],
+ "proof": [
+  {
+   "text": "Choose a smooth surjective scheme atlas $p:P\\to\\mathcal X$ and write $G=\\operatorname{Aut}_{\\mathcal X,P}(p)$. By [lem-sfb-stack-isom-space-locally-finite-type], $G$ is an algebraic space locally of finite type over $P$. Composition, identity and inversion of automorphisms make it a group algebraic space. On $R=P\\times_{\\mathcal X}P$, the defining isomorphism $\\alpha:p s\\xrightarrow{\\sim}p t$ identifies $s^*G$ with $t^*G$ by $g\\mapsto\\alpha g\\alpha^{-1}$; its inverse is conjugation by $\\alpha^{-1}$. These formulas commute with pullback because composition and inversion do.",
+   "uses": [
+    "lem-sfb-stack-isom-space-locally-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DSN, proof: choose a smooth atlas and its automorphism group; Tag 04XR supplies local finite type."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-group-space-unramified-base-locus] to $G\\to P$ and denote its maximal open by $V\\subseteq P$. By its arbitrary base-change clause, $s^{-1}V$ and $t^{-1}V$ are the maximal unramified base loci of $s^*G$ and $t^*G$, respectively. The conjugation isomorphism of step 1 preserves unramifiedness and open containment, so these two maximal opens are equal. Thus $V$ is invariant under the presentation groupoid.",
+   "uses": [
+    "lem-sfb-group-space-unramified-base-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DSN, proof: construction of the maximal atlas open and equality of its two pullbacks; Tag 0DSJ (1)."
+   }
+  },
+  {
+   "text": "By [lem-sfb-invariant-open-substack-descent], $V$ descends to an open substack $\\mathcal W\\subseteq\\mathcal X$ with $P\\times_{\\mathcal X}\\mathcal W=V$. The restriction $V\\to\\mathcal W$ is a smooth surjective scheme atlas: its scheme pullbacks are precisely the atlas pullbacks of $P\\to\\mathcal X$. Its automorphism algebraic space is $G\\times_P V$, since $\\mathcal W$ is full. Step 2 makes this group unramified over $V$, so [lem-sfb-smooth-atlas-automorphism-diagonal-test] applied to $V\\to\\mathcal W$ says that $\\Delta_{\\mathcal W/S}$ is unramified. Hence maximality of the open $\\mathcal U$ in the statement gives $\\mathcal W\\subseteq\\mathcal U$.",
+   "uses": [
+    "lem-sfb-invariant-open-substack-descent",
+    "lem-sfb-smooth-atlas-automorphism-diagonal-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DSN, proof: descend the invariant open using Tag 0507, then apply the inertia/diagonal criterion Tag 0CL0 (4)."
+   }
+  },
+  {
+   "text": "Conversely let $P_{\\mathcal U}=P\\times_{\\mathcal X}\\mathcal U$, an open subscheme of $P$ and a smooth surjective atlas of $\\mathcal U$. Its automorphism space is $G\\times_P P_{\\mathcal U}$, again by fullness. Since $\\Delta_{\\mathcal U/S}$ is unramified, [lem-sfb-smooth-atlas-automorphism-diagonal-test] makes this group unramified over $P_{\\mathcal U}$. Maximality in [lem-sfb-group-space-unramified-base-locus] implies $P_{\\mathcal U}\\subseteq V$. The inclusion-preserving bijection of [lem-sfb-invariant-open-substack-descent] therefore gives $\\mathcal U\\subseteq\\mathcal W$. Together with step 3 this identifies $\\mathcal W=\\mathcal U$ and $P_{\\mathcal U}=V$.",
+   "uses": [
+    "lem-sfb-smooth-atlas-automorphism-diagonal-test",
+    "lem-sfb-group-space-unramified-base-locus",
+    "lem-sfb-invariant-open-substack-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DSN, proof: identify the constructed open with the largest DM open."
+   }
+  },
+  {
+   "text": "For the given $x:\\operatorname{Spec}K\\to\\mathcal X$, put $Q=\\operatorname{Spec}K\\times_{\\mathcal X}P$, with maps $a:Q\\to P$ and $b:Q\\to\\operatorname{Spec}K$. This is an algebraic space smooth and surjective over $\\operatorname{Spec}K$ by [lem-sfb-invariant-open-substack-descent], hence is nonempty. By [lem-sfb-stack-isom-space-locally-finite-type], $G_x$ is locally of finite type over $K$, so [lem-sfb-group-space-unramified-base-locus] gives its maximal unramified base open $V_x\\subseteq\\operatorname{Spec}K$. The tautological isomorphism $p a\\simeq x b$ identifies $a^*G$ with $b^*G_x$ by conjugation, as in step 1. The base-change clause of the same group-locus lemma therefore identifies $a^{-1}V=b^{-1}V_x$ in $Q$.",
+   "uses": [
+    "lem-sfb-invariant-open-substack-descent",
+    "lem-sfb-stack-isom-space-locally-finite-type",
+    "lem-sfb-group-space-unramified-base-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DSN, proof: comparison of the automorphism groups after atlas pullback; Tag 0DSJ (1), applied to both maps from Q."
+   }
+  },
+  {
+   "text": "By [lem-sfb-invariant-open-substack-descent] and step 4, $x$ factors through $\\mathcal U$ exactly when $a:Q\\to P$ factors through $V$, equivalently when $a^{-1}V=Q$. Step 5 replaces the latter equality by $b^{-1}V_x=Q$. The spectrum of a field has a single point, so its only opens are empty and the whole spectrum; since $Q$ is nonempty, this equality is equivalent to $V_x=\\operatorname{Spec}K$. By the defining maximality and unramifiedness clauses of [lem-sfb-group-space-unramified-base-locus], $V_x=\\operatorname{Spec}K$ is equivalent to $G_x\\to\\operatorname{Spec}K$ being unramified. This proves both directions for the original field $K$.",
+   "uses": [
+    "lem-sfb-invariant-open-substack-descent",
+    "lem-sfb-group-space-unramified-base-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DSN (1): conclude the point test from arbitrary base change of the group locus; the two-open observation is elementary."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-stack-isom-space-locally-finite-type",
+  "lem-sfb-group-space-unramified-base-locus",
+  "lem-sfb-invariant-open-substack-descent",
+  "lem-sfb-smooth-atlas-automorphism-diagonal-test"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 0DSN (lemma-points-DM-locus), proof of (1), obtained from its written proof of (2) by using unramifiedness. The final field test uses the entire pulled-back atlas instead of choosing a field extension."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A point of an algebraic stack lies in the Deligne Mumford locus iff its stabilizer group algebraic space is unramified",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"Algebra.isOpen_unramifiedLocus\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A], IsOpen (Algebra.unramifiedLocus R A)\", \"doc\": \"If $ A $ is a commutative ring of essential finite type over a commutative ring $ R $, then the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A) $ where $ A $ is unramified over $ R $ for\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"Algebra.unramifiedLocus_eq_univ_iff\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.unramifiedLocus R A = Set.univ ↔ Algebra.FormallyUnramified R A\", \"doc\": \"The unramified locus of an algebra $ A $ over a commutative ring $ R $ is equal to the universal set of prime ideals in $ A $ if and only if $ A $ is formally unramified over $ R $.\"}\n  {\"name\": \"Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = Algebra.unramifiedLocus R A ∩ Algebra.smoothLocus R A\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the étale locus of $ A $ over $ R $ coincides with the intersection of the unramified locus and the smooth locus of $ A $ over $ R $. Formally,\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.FormallyUnramified\", \"doc\": \"The property of being formally unramified is multiplicative; that is, the composition of two formally unramified morphisms of schemes is again formally unramified.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme/ring unramifiedness and general topology do not supply this algebraic-stack theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The open unramified diagonal locus of an algebraic stack is detected by automorphism group schemes at field valued points",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.unramifiedLocus\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \": Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals in the prime spectrum of a commutative ring $ A $ where the algebra $ A $ is unramified over the base commutative ring $ R $. Formally, this consists of all prime ideals $ \\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"[FormallyUnramified f] [LocallyOfFiniteType f] : IsOpenImmersion (pullback.diagonal f)\", \"doc\": \"If a morphism of schemes is formally unramified and locally of finite type, then its diagonal morphism in the pullback is an open immersion.\"}\n  {\"name\": \"Algebra.isOpen_unramifiedLocus\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \"[EssFiniteType R A] : IsOpen (unramifiedLocus R A)\", \"doc\": \"If $ A $ is a commutative ring of essential finite type over a commutative ring $ R $, then the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A) $ where $ A $ is unramified over $ R $ for\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"Algebra.unramifiedLocus_eq_univ_iff\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \": unramifiedLocus R A = Set.univ ↔ Algebra.FormallyUnramified R A\", \"doc\": \"The unramified locus of an algebra $ A $ over a commutative ring $ R $ is equal to the universal set of prime ideals in $ A $ if and only if $ A $ is formally unramified over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"[IsOpenImmersion (pullback.diagonal f)] : FormallyUnramified f\", \"doc\": \"If the diagonal morphism of a morphism $ f $ of schemes is an open immersion, then $ f $ is formally unramified. This instance asserts that the condition of the diagonal being an open immersion suffic\"}\n  {\"name\": \"AlgebraicGeometry.formallyUnramified_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.FormallyUnramified f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V $ maps into $ U $\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme/ring unramifiedness and general topology do not supply this algebraic-stack theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme/ring unramifiedness and general topology do not supply this algebraic-stack theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|stabilizer.*unramified",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Ramification.lean\", \"line\": \"356\", \"text\": \"lemma IsUnramified.stabilizer_eq_bot (h : IsUnramified k w) : Stab w = ⊥ := by\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Ramification.lean\", \"line\": \"387\", \"text\": \"lemma isUnramified_iff_stabilizer_eq_bot [IsGalois k K] : IsUnramified k w ↔ Stab w = ⊥ := by\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme/ring unramifiedness and general topology do not supply this algebraic-stack theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The open unramified diagonal locus of an algebraic stack is detected by automorphism group schemes at field valued points",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.FormallyUnramified f]\\n  [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"If a morphism of schemes is formally unramified and locally of finite type, then its diagonal morphism in the pullback is an open immersion.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y)\\n  [AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)],\\n  AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If the diagonal morphism of a morphism $ f $ of schemes is an open immersion, then $ f $ is formally unramified. This instance asserts that the condition of the diagonal being an open immersion suffic\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  AlgebraicGeometry.IsZariskiLocalAtTarget P.diagonal\", \"doc\": \"If a morphism property $P$ on schemes is Zariski local at the target, then the diagonal morphism property $P.diagonal$ (defined via pullbacks) is also Zariski local at the target. This asserts that th\"}\n  {\"name\": \"AlgebraicGeometry.universallyInjective_eq_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective\", \"type\": \"@AlgebraicGeometry.UniversallyInjective = CategoryTheory.MorphismProperty.diagonal @AlgebraicGeometry.Surjective\", \"doc\": \"A morphism of schemes is universally injective if and only if its diagonal morphism (obtained from the pullback of the morphism with itself) is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.FormallyUnramified\", \"doc\": \"The property of being formally unramified is multiplicative; that is, the composition of two formally unramified morphisms of schemes is again formally unramified.\"}\n  {\"name\": \"AlgebraicGeometry.instIsZariskiLocalAtSourceDiagonalSchemeOfHasOfPostcompPropertyOfRespectsRightIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.HasOfPostcompProperty AlgebraicGeometry.IsOpenImmersion] [P.RespectsRight AlgebraicGeometry.IsOpenImmersion]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P], AlgebraicGeometry.IsZariskiLocalAtSource P.diagonal\", \"doc\": \"If a morphism property $P$ on schemes is Zariski-local at the source, closed under post-composition with open immersions, and respects right composition with open immersions, then the diagonal morphis\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ {Q : AlgebraicGeometry.AffineTargetMorphismProperty} [Q.IsLocal], Q.diagonal.IsLocal\", \"doc\": \"If a property $ Q $ of morphisms with affine targets is local on the target scheme, then the diagonal property $ Q $ (preserved under pullbacks along open immersions from affine schemes) is also local\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme/ring unramifiedness and general topology do not supply this algebraic-stack theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A point of an algebraic stack is in the Deligne Mumford locus if and only if its automorphism group algebraic space is unramified",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"Algebra.unramifiedLocus_eq_univ_iff\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.unramifiedLocus R A = Set.univ ↔ Algebra.FormallyUnramified R A\", \"doc\": \"The unramified locus of an algebra $ A $ over a commutative ring $ R $ is equal to the universal set of prime ideals in $ A $ if and only if $ A $ is formally unramified over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.FormallyUnramified\", \"doc\": \"The property of being formally unramified is multiplicative; that is, the composition of two formally unramified morphisms of schemes is again formally unramified.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.FormallyUnramified fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.FormallyUnramified\", \"doc\": \"The property of a morphism of schemes being formally unramified corresponds to the associated ring homomorphism being formally unramified, meaning there are no nontrivial derivations from the target r\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = Algebra.unramifiedLocus R A ∩ Algebra.smoothLocus R A\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the étale locus of $ A $ over $ R $ coincides with the intersection of the unramified locus and the smooth locus of $ A $ over $ R $. Formally,\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme/ring, sheaf or manifold declarations do not state this theorem about algebraic spaces and algebraic stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A field valued point factors through the open unramified diagonal locus exactly when its stabilizer is unramified",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"[FormallyUnramified f] [LocallyOfFiniteType f] : IsOpenImmersion (pullback.diagonal f)\", \"doc\": \"If a morphism of schemes is formally unramified and locally of finite type, then its diagonal morphism in the pullback is an open immersion.\"}\n  {\"name\": \"NumberField.InfinitePlace.isUnramified_iff_stabilizer_eq_bot\", \"module\": \"Mathlib.NumberTheory.NumberField.InfinitePlace.Ramification\", \"type\": \"[IsGalois k K] : IsUnramified k w ↔ Stab w = ⊥\", \"doc\": \"For a Galois extension $ K/k $, an infinite place $ w $ of $ K $ is unramified over $ k $ if and only if the stabilizer subgroup $ \\\\text{Stab}(w) $ in the Galois group $ \\\\text{Gal}(K/k) $ is trivial, \"}\n  {\"name\": \"Algebra.unramifiedLocus\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \": Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals in the prime spectrum of a commutative ring $ A $ where the algebra $ A $ is unramified over the base commutative ring $ R $. Formally, this consists of all prime ideals $ \\\\mat\"}\n  {\"name\": \"NumberField.InfinitePlace.IsUnramified.stabilizer_eq_bot\", \"module\": \"Mathlib.NumberTheory.NumberField.InfinitePlace.Ramification\", \"type\": \"(h : IsUnramified k w) : Stab w = ⊥\", \"doc\": \"For an infinite place $ w $ of a number field $ K $ that is unramified over a subfield $ k $, the stabilizer subgroup $ \\\\text{Stab}(w) $ under the Galois group $ \\\\text{Gal}(K/k) $ action is equal to t\"}\n  {\"name\": \"Algebra.unramifiedLocus_eq_univ_iff\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \": unramifiedLocus R A = Set.univ ↔ Algebra.FormallyUnramified R A\", \"doc\": \"The unramified locus of an algebra $ A $ over a commutative ring $ R $ is equal to the universal set of prime ideals in $ A $ if and only if $ A $ is formally unramified over $ R $.\"}\n  {\"name\": \"NumberField.InfinitePlace.not_isUnramified_iff_card_stabilizer_eq_two\", \"module\": \"Mathlib.NumberTheory.NumberField.InfinitePlace.Ramification\", \"type\": \"[IsGalois k K] : ¬IsUnramified k w ↔ Nat.card (Stab w) = 2\", \"doc\": \"For a Galois extension $ K/k $ and an infinite place $ w $ of $ K $, the place $ w $ is not unramified over $ k $ if and only if the cardinality of the stabilizer subgroup $ \\\\text{Stab}(w) $ of $ w $ \"}\n  {\"name\": \"Algebra.basicOpen_subset_unramifiedLocus_iff\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \"{f : A} : ↑(PrimeSpectrum.basicOpen f) ⊆ unramifiedLocus R A ↔ Algebra.FormallyUnramified R (Localization.Away f)\", \"doc\": \"The basic open set $ D(f) $ in the prime spectrum of $ A $ is contained within the unramified locus of the $ R $-algebra $ A $ if and only if the localization $ A_f $ (localization of $ A $ at the sub\"}\n  {\"name\": \"NumberField.InfinitePlace.isUnramified_iff_card_stabilizer_eq_one\", \"module\": \"Mathlib.NumberTheory.NumberField.InfinitePlace.Ramification\", \"type\": \"[IsGalois k K] : IsUnramified k w ↔ Nat.card (Stab w) = 1\", \"doc\": \"An infinite place $ w $ of a number field $ K $ is unramified over a subfield $ k $ if and only if the stabilizer subgroup of $ w $ under the Galois group $ \\\\text{Gal}(K/k) $ action has cardinality 1.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme/ring, sheaf or manifold declarations do not state this theorem about algebraic spaces and algebraic stacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme/ring, sheaf or manifold declarations do not state this theorem about algebraic spaces and algebraic stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|Deligne.?Mumford|stabilizer.*unramified",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Ramification.lean\", \"line\": \"356\", \"text\": \"lemma IsUnramified.stabilizer_eq_bot (h : IsUnramified k w) : Stab w = ⊥ := by\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Ramification.lean\", \"line\": \"387\", \"text\": \"lemma isUnramified_iff_stabilizer_eq_bot [IsGalois k K] : IsUnramified k w ↔ Stab w = ⊥ := by\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme/ring, sheaf or manifold declarations do not state this theorem about algebraic spaces and algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The largest open Deligne Mumford substack contains precisely field points with unramified inertia group",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.isOpen_unramifiedLocus\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A], IsOpen (Algebra.unramifiedLocus R A)\", \"doc\": \"If $ A $ is a commutative ring of essential finite type over a commutative ring $ R $, then the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A) $ where $ A $ is unramified over $ R $ for\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"Algebra.unramifiedLocus\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals in the prime spectrum of a commutative ring $ A $ where the algebra $ A $ is unramified over the base commutative ring $ R $. Formally, this consists of all prime ideals $ \\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"Algebra.basicOpen_subset_unramifiedLocus_iff\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.unramifiedLocus R A ↔ Algebra.FormallyUnramified R (Localization.Away f)\", \"doc\": \"The basic open set $ D(f) $ in the prime spectrum of $ A $ is contained within the unramified locus of the $ R $-algebra $ A $ if and only if the localization $ A_f $ (localization of $ A $ at the sub\"}\n  {\"name\": \"Algebra.unramifiedLocus_eq_univ_iff\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.unramifiedLocus R A = Set.univ ↔ Algebra.FormallyUnramified R A\", \"doc\": \"The unramified locus of an algebra $ A $ over a commutative ring $ R $ is equal to the universal set of prime ideals in $ A $ if and only if $ A $ is formally unramified over $ R $.\"}\n  {\"name\": \"Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = Algebra.unramifiedLocus R A ∩ Algebra.smoothLocus R A\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the étale locus of $ A $ over $ R $ coincides with the intersection of the unramified locus and the smooth locus of $ A $ over $ R $. Formally,\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme/ring, sheaf or manifold declarations do not state this theorem about algebraic spaces and algebraic stacks"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-curve-stack-infinitesimal-dm-locus",
+  "date": "2026-10-22",
+  "group": "N5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Stabilizer criterion for membership in the DM locus. Atlas construction and field-point test of Tag 0DSN, supporting the infinitesimal DM-locus input.",
+   "via": [
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-algebraic-stack-dm-point-stabilizer",
+  "worker": "stage1",
+  "summary": "Checked Tag 0DSN (1) and its full atlas proof. Constructed the invariant group unramified locus, descended it and identified the maximal diagonal locus, then tested the given field point via the whole atlas fibre. Four genuine structural inputs are new statement-only nodes; no statement change and no perfectness assumption. Retained the ancestry tool's null anchor because the inherited created.item chain is broken; recorded the intended det-thm-sf-ctf-stability-direct-images proof location in blueprint.from.place and the report.",
+  "blueprint": "main-20261015 det-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3), Rj_* preserves Dctf: inherited alteration/moduli subroute through stable pointed curves, supporting the infinitesimal DM-locus criterion. Steps 1--4 realize the atlas construction of the DM open and steps 5--6 its field-point test, with Stacks 0DSN as the immediate proof source."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-5dabbd477",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-5dabbd477 (reviewer sub-agent of L); spot-checked: Read the full proof of Stacks 0DSN (stacks-morphisms 4604-4675). The item statement is byte-identical to side-live and is not superseded, not dropped and has no re-split note. Steps 1-4 build G=Aut(p), its maximal unramified open V by 0DSJ(1) with base change, show V is R-invariant by conjugation, descend V by 0507 and prove W=U with the atlas test 0CL0(4)+050Q. Steps 5-6 do the field test through the whole nonempty fibre Q=SpecK x_X P instead of a field extension; the opens of Spec K make this elementary. Each step uses only what its cited statements say (C3/C4). The four new nodes are true and match their sources hypothesis by hypothesis: 04XR (lines 64-90), 0CL0(4)/050Q/042A, 0DSJ(1) (spaces-groupoids 365-389), 0507 (stacks-properties 1808-1846). Tested on BG for finite G, BG_a, Bmu_p in char p, schemes and the empty stack; no flatness, perfectness or separatedness is used. Duplicate search: rg -L over the snapshot for the tags and labels, and a read of all sfb algebraic-stack nodes (open-dm-locus 0DSM, unramified-diagonal-etale-atlas 06N3 and others); none states these facts. Batch-5 finding: def-trf-algebraic-space (general algebraic-space definition) and def-sfb-stable-pointed-moduli-groupoids (convention definition whose closure reaches only the projective-morphism definition) are general definitions outside both assumptions and are already base stmt_deps of the item. Accepted. Null from.node is the inherited ancestry-tool result. Minor unwritten point, elementary: W has representable diagonal because W->X is a monomorphism."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DmPointStabilizer",
+  "declaration": "CategoryTheory.fieldPoint_factors_dmOpen_iff_unramified_automorphismSpace",
+  "declarations": [
+   "CategoryTheory.IsModuliAutomorphismSpace",
+   "CategoryTheory.fieldPoint_factors_dmOpen_iff_unramified_automorphismSpace"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DmPointStabilizer.lean",
+  "statement": "theorem fieldPoint_factors_dmOpen_iff_unramified_automorphismSpace {S : Scheme.{u}} (F : BasedCategory.{v, w} (Over S)) (hstack : IsModuliStack F) (hdiag : HasAlgebraicSpaceDiagonal F) (hatlas : ∃ (P : Over S) (a : BasedFunctor (discreteModuli (yoneda.obj P)) F), ∀ (T : Over S) (t : BasedFunctor (discreteModuli (yoneda.obj T)) F), ∃ (Z : AlgebraicSpace S) (p : Z.obj.obj ⟶ yoneda.obj T), HasSpaceBaseChange a T t Z p ∧ SpaceMapIsSurjective Z T p ∧ ∀ (V : Over S) (b : yoneda.obj V ⟶ Z.obj.obj), AlgebraicSpace.IsEtale b → Smooth ((yoneda.preimage (b ≫ p)).left)) (U : OpenModuliSubstack F) (hU : HasUnramifiedModuliDiagonal U.category) (hmax : ∀ V : OpenModuliSubstack F, HasUnramifiedModuliDiagonal V.category → V.IsContainedIn U) (K : Type u) [Field K] (a : Spec (.of K) ⟶ S) (x : BasedFunctor (discreteModuli (yoneda.obj (Over.mk a))) F) (G : AlgebraicSpace S) (p : G.obj.obj ⟶ yoneda.obj (Over.mk a)) (hG : IsModuliAutomorphismSpace (Over.mk a) x G p) : (∃ y : BasedFunctor (discreteModuli (yoneda.obj (Over.mk a))) U.category, Nonempty (ModuliTwoIso (y.comp (fullModuliInclusion F U.property)) x)) ↔ SpaceMapIsUnramified G (Over.mk a) p",
+  "branch": "newtargets-dag",
+  "by": "Q120",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5652c782a",
+  "group": "Q120",
+  "result": "pass",
+  "note": "Read node, Stacks 0DSM/0DSN(1), StablePointedModuliGroupoids and OpenModuliSubstack declarations, unramifiedModuliDiagonal_iff_etaleAtlas (identical atlas interface). Clause by clause: stack + algebraic-space diagonal + smooth surjective atlas with its actual maps; given largest open U with relative unramified diagonal (hU, hmax); arbitrary field K, S-point x; G with p pinned by IsModuliAutomorphismSpace = natural bijection of sections over b with vertical automorphisms of x∘b, which is Aut(x_V) by fibred Yoneda (not hollow; empty G impossible); conclusion: lift to U.category up to ModuliTwoIso ↔ SpaceMapIsUnramified, both directions. Edge cases (schemes, BG finite/G_a, mu_p in char p, imperfect K, empty stack, universes) OK. stmt_deps gains only the landed def-sfb-open-moduli-substack (allowed). Statement verbatim, 1 sorry, docstrings with source/blueprint/6 proof steps, lines <=87, no duplicate. No compile (no change)."
+ }
+}

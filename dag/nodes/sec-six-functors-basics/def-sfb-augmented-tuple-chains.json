@@ -1,0 +1,120 @@
+{
+ "id": "def-sfb-augmented-tuple-chains",
+ "kind": "definition",
+ "title": "Augmented free integer chains on ordered tuples",
+ "statement": "For a set $Y$ and $m\\geq0$, let $T_m(Y)=\\mathbf Z[Y^m]$ be the free integer module [def-weil-pbc-free-module] on all ordered length-$m$ tuples, with repetitions allowed and the specified unit basis. Thus $T_0(Y)$ is canonically $\\mathbf Z$ on the unique empty tuple; $T_{q+1}(Y)$ is the chain group in homological degree $q\\geq-1$, with zero groups below degree $-1$. Define the additive deletion map $d_m:T_{m+1}(Y)\\to T_m(Y)$ by $d_m[y_0,\\ldots,y_m]=\\sum_{i=0}^m(-1)^i[y_0,\\ldots,\\widehat{y_i},\\ldots,y_m]$, in particular $d_0[y]=[\\varnothing]$. For a map $f:Y\\to Z$ define $T_m(f)$ by applying $f$ to every coordinate. For $b\\in Y$ define $C_{b,m}:T_m(Y)\\to T_{m+1}(Y)$ by prefixing $b$, including $C_{b,0}[\\varnothing]=[b]$. For a group $Y$ define left translation $L_{g,m}=T_m(y\\mapsto gy)$, trivial at length zero. All maps are extended additively from the specified bases; the boundary out of the empty degree and maps from the lower zero groups are zero.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent arithmetic expansion below local continuous-cocycle descent: lem-sfb-homogeneous-tuple-prefix-homotopy, calculations 1–2; not asserted in the blueprint text; exact literature reference WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "homogeneous bar resolution alternating deletion boundary finite tuple prefix contracting homotopy",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Rep.barComplex\", \"module\": \"Mathlib.RepresentationTheory.Homological.Resolution\", \"type\": \"(k G : Type u) → [inst : CommRing k] → [inst_1 : Group G] → ChainComplex (Rep k G) ℕ\", \"doc\": \"For a commutative ring $ k $ and group $ G $, this constructs a chain complex in the category of $ k $-representations of $ G $. The complex is indexed by natural numbers, where each degree $ n $ corr\"}\n  {\"name\": \"Rep.barResolution\", \"module\": \"Mathlib.RepresentationTheory.Homological.Resolution\", \"type\": \"(k G : Type u) → [inst : CommRing k] → [inst_1 : Group G] → CategoryTheory.ProjectiveResolution (Rep.trivial k G k)\", \"doc\": \"For a commutative ring $ k $ and group $ G $, this constructs a projective resolution of the trivial $ G $-representation over $ k $ using the bar complex. The resolution is built from free $ k[G] $-m\"}\n  {\"name\": \"Rep.barComplex.d\", \"module\": \"Mathlib.RepresentationTheory.Homological.Resolution\", \"type\": \"(k G : Type u) →\\n  [inst : CommRing k] → (n : ℕ) → [inst_1 : Group G] → Rep.free k G (Fin (n + 1) → G) ⟶ Rep.free k G (Fin n → G)\", \"doc\": \"For a commutative ring $ k $, a group $ G $, and natural number $ n $, this defines the differential $ d_n $ in the bar complex as a morphism from the free $ k $-representation on $ (n+1) $-tuples of \"}\n  {\"name\": \"Rep.barComplex.d_single\", \"module\": \"Mathlib.RepresentationTheory.Homological.Resolution\", \"type\": \"(x : Gⁿ⁺¹) :\\n  (d k G n).hom (single x (single 1 1)) =\\n    single (fun i => x i.succ) (Finsupp.single (x 0) 1) +\\n      Finset.univ.sum fun j : Fin (n + 1) =>\\n        single (Fin.contractNth j (· * ·) x) (single (1 : G) ((-1 : k) ^ ((j : ℕ) + 1)))\", \"doc\": \"For a commutative ring $ k $, a group $ G $, and natural number $ n $, applying the differential $ d_n $ in the bar complex to the basis element corresponding to an $(n+1)$-tuple $ x $ yields an alter\"}\n  {\"name\": \"Rep.barComplex.d_def\", \"module\": \"Mathlib.RepresentationTheory.Homological.Resolution\", \"type\": \": (barComplex k G).d (n + 1) n = d k G n\", \"doc\": \"For a commutative ring $k$, a group $G$, and a natural number $n$, the differential $d_{n+1,n}$ in the bar complex of the group representation is defined as the morphism $d_k(G, n)$, which maps the fr\"}\n  {\"name\": \"groupHomology.inhomogeneousChains.d_single\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupHomology.Basic\", \"type\": \"(n : ℕ) (g : Fin (n + 1) → G) (a : A) :\\n  d A n (single g a) =\\n    single (fun i => g i.succ) (A.ρ (g 0)⁻¹ a) +\\n      Finset.univ.sum fun j : Fin (n + 1) => (-1 : k) ^ ((j : ℕ) + 1) • single (Fin.contractNth j (· * ·) g) a\", \"doc\": \"For a natural number $n$, a tuple $g : \\\\mathrm{Fin}(n+1) \\\\to G$, and a module element $a \\\\in A$, the boundary operator $d$ applied to the single chain $\\\\mathrm{single}(g, a)$ equals the sum of two ter\"}\n  {\"name\": \"AlgebraicTopology.AlternatingFaceMapComplex.objD\", \"module\": \"Mathlib.AlgebraicTopology.AlternatingFaceMapComplex\", \"type\": \"(n : ℕ) : X _⦋n + 1⦌ ⟶ X _⦋n⦌\", \"doc\": \"For a simplicial object $X$ in a category $\\\\mathcal{C}$, the boundary map $d_n: X_{n+1} \\\\to X_n$ is defined as the alternating sum $\\\\sum_{i=0}^{n+1} (-1)^i \\\\cdot \\\\delta^i$, where $\\\\delta^i: X_{n+1} \\\\t\"}\n  {\"name\": \"Homotopy.mkCoinductive\", \"module\": \"Mathlib.Algebra.Homology.Homotopy\", \"type\": \": Homotopy e 0\", \"doc\": \"This constructor defines a homotopy between chain maps $ e $ and $ 0 $ in cochain complexes using coinduction. For indices $ i, j $, the homotopy component is defined as the composition of an inverse \"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact augmented, arbitrary-universe tuple-chain package with all the specified maps. Rep.standardComplex.d supplies the same deletion formula in the shared coefficient/index universe; FreeAbelianGroup supplies generic free groups, not this package."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Augmented free abelian group on all ordered tuples of a set with alternating deletion and insertion of a prefix vertex including the empty tuple",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"FreeAbelianGroup\", \"module\": \"Mathlib/GroupTheory/FreeAbelianGroup\", \"type\": \"Type u → Type u\", \"doc\": \"The free abelian group on a set $\\\\alpha$ is constructed as the abelianization of the free group on $\\\\alpha$, denoted $\\\\text{Ab}(F(\\\\alpha))$, where $F(\\\\alpha)$ is the free group generated by $\\\\alpha$ a\"}\n  {\"name\": \"FreeAbelianGroup.instMonad\", \"module\": \"Mathlib/GroupTheory/FreeAbelianGroup\", \"type\": \"Monad FreeAbelianGroup\", \"doc\": \"The free abelian group construction forms a monad, where the pure operation corresponds to the canonical embedding of a set $\\\\alpha$ into its free abelian group $\\\\mathbb{Z}[\\\\alpha]$, and the bind oper\"}\n  {\"name\": \"FreeAbelianGroup.of\", \"module\": \"Mathlib/GroupTheory/FreeAbelianGroup\", \"type\": \"{α : Type u} → α → FreeAbelianGroup α\", \"doc\": \"The function maps each element $x$ of the set $\\\\alpha$ to its image in the free abelian group $\\\\mathbb{Z}[\\\\alpha]$, constructed as the abelianization of the free group on $\\\\alpha$. This is achieved by\"}\n  {\"name\": \"FreeAddGroup\", \"module\": \"Mathlib/GroupTheory/FreeGroup/Basic\", \"type\": \"Type u → Type u\", \"doc\": \"Given a type $X$, constructs the free abelian group on the set $X$, which is the group of formal integer linear combinations of elements of $X$ with no relations other than commutativity and the group\"}\n  {\"name\": \"FreeAddGroup.mk\", \"module\": \"Mathlib/GroupTheory/FreeGroup/Basic\", \"type\": \"{α : Type u} → List (α × Bool) → FreeAddGroup α\", \"doc\": \"The function maps a list of generator-sign pairs to the corresponding element in the free abelian group, where each pair contributes a generator with a coefficient of $+1$ or $-1$.\"}\n  {\"name\": \"ExteriorAlgebra.ιMulti_family\", \"module\": \"Mathlib/LinearAlgebra/ExteriorAlgebra/Basic\", \"type\": \"(R : Type u1) →\\n  [inst : CommRing R] →\\n    {M : Type u2} →\\n      [inst_1 : AddCommGroup M] →\\n        [inst_2 : Module R M] →\\n          (n : ℕ) → {I : Type u_1} → [LinearOrder I] → (I → M) → { s // s.card = n } → ExteriorAlgebra R M\", \"doc\": \"Let $v: I \\\\to M$ be a family of vectors in an $R$-module $M$, indexed by a linearly ordered type $I$. For any finite subset $s \\\\subseteq I$ of size $n$, this function defines the wedge product of the \"}\n  {\"name\": \"Rep.standardComplex.d_of\", \"module\": \"Mathlib/RepresentationTheory/Homological/Resolution\", \"type\": \"∀ {k : Type u} [inst : CommRing k] {G : Type u} {n : ℕ} (c : Fin (n + 1) → G),\\n  (Rep.standardComplex.d k G n) (Finsupp.single c 1) = ∑ p, Finsupp.single (c ∘ p.succAbove) ((-1) ^ ↑p)\", \"doc\": \"For any function $ c : \\\\text{Fin}(n+1) \\\\to G $, the differential $ d_n $ applied to the basis element corresponding to $ c $ is the sum over all $ p \\\\in \\\\text{Fin}(n+1) $ of $ (-1)^p $ multiplied by t\"}\n  {\"name\": \"FreeAddGroup.Lift.aux\", \"module\": \"Mathlib/GroupTheory/FreeGroup/Basic\", \"type\": \"{α : Type u} → {β : Type v} → [AddGroup β] → (α → β) → List (α × Bool) → β\", \"doc\": \"The function maps a list of pairs $(a, b)$, where $a$ is an element of $\\\\alpha$ and $b$ is a boolean indicating sign, to the sum in the additive group $\\\\beta$ of $f(a)$ if $b$ is true and $-f(a)$ if $\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact augmented, arbitrary-universe tuple-chain package with all the specified maps. Rep.standardComplex.d supplies the same deletion formula in the shared coefficient/index universe; FreeAbelianGroup supplies generic free groups, not this package."
+  },
+  {
+   "tool": "grep",
+   "query": "augmented.*tuple|tuple.*chain|def d |def prefix|prepend",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"180\", \"line\": \"def d (G \", \"text\": \" Type u) (n : ℕ) : k[Fin (n + 1) → G] →ₗ[k] k[Fin n → G] :=\"}\n  {\"file\": \"346\", \"line\": \"def d \", \"text\": \" free k G Gⁿ⁺¹ ⟶ free k G Gⁿ :=\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact augmented, arbitrary-universe tuple-chain package with all the specified maps. Rep.standardComplex.d supplies the same deletion formula in the shared coefficient/index universe; FreeAbelianGroup supplies generic free groups, not this package."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l augmented.*tuple.*chain|tuple.*chain.*augmented dag/nodes --glob def-*.json; rg homogeneousTuple|tuplePrefix|tupleChains|prefixHomotopy lean/WeilConjectures lean/Sheaf; tools/blueprint_refs.py search tuple",
+   "results": "The only definition-node match is def-sfb-augmented-poset-chains, which requires strictly ordered vertices and kills repetitions. Project searches found no augmented tuple-chain declaration. Blueprint search tuple returned 25 nodes, none for augmented ordered tuple chains. Related statement nodes equivariant-prefix-finite-chain-homotopy, ordered-coset-finite-chain-projection and ordered-join-prefix-telescope have no Lean record and are not definitions of this notion.",
+   "date": "2026-10-24",
+   "verdict": "no exact node or project declaration"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-homogeneous-tuple-prefix-homotopy",
+  "date": "2026-10-24",
+  "group": "Q120"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The augmented free tuple chains underlying prefix-homotopy calculations 1–2 in the agent arithmetic expansion below direct-images paragraph (3).",
+   "via": [
+    "lem-sfb-homogeneous-tuple-prefix-homotopy",
+    "lem-sfb-homogeneous-cocycle-rectangle-detection",
+    "lem-sfb-local-norm-algcl-cocycle-descent",
+    "lem-sfb-profinite-algcl-derived-invariants-comparison",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.AugmentedTupleChains",
+  "declaration": "ContinuousCohomology.AugmentedTupleChains.Chains",
+  "declarations": [
+   "ContinuousCohomology.AugmentedTupleChains.Chains",
+   "ContinuousCohomology.AugmentedTupleChains.basis",
+   "ContinuousCohomology.AugmentedTupleChains.boundary",
+   "ContinuousCohomology.AugmentedTupleChains.map",
+   "ContinuousCohomology.AugmentedTupleChains.prepend",
+   "ContinuousCohomology.AugmentedTupleChains.translate"
+  ],
+  "file": "lean/Sheaf/RepresentationTheory/AugmentedTupleChains.lean",
+  "statement": "abbrev Chains (Y : Type u) (m : ℕ)",
+  "branch": "newtargets-dag",
+  "by": "Q120",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d06f2ba0c",
+  "group": "Q120",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d06f2ba0c",
+  "group": "Q120",
+  "result": "pass",
+  "note": "Every hypothesis and all seven conclusion parts match the node over degrees -1..n, using tuple length = degree+1 consistently. A has exactly the range 0..n+1 and the zero extension of Q above degree n is never used. Boundary sign (-1)^i, Fin.cons prefixing and the degree -1 contraction checked. HasCoordinateFormula fixes the term count, coefficients and labels before the input and sums over Fin r, so repeated terms need no input-dependent choices. Item JSON differs from live only by the lean record and the new stmt_dep def-sfb-augmented-tuple-chains, which has no live clash; lean.statement matches the file verbatim. Rep.standardComplex.d puts the coefficients and G in one universe, so with Z it restricts G to Type 0; the new Finsupp wrapper is justified. Poset chains have no repeated vertices. Only the theorem proof is sorry; no hollow definitions; docstrings carry source place, blueprint id and proof steps 1-9; no extra assumptions; report has both required sections. No change made, so no compile run."
+ }
+}

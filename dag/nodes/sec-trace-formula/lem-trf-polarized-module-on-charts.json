@@ -1,0 +1,149 @@
+{
+ "id": "lem-trf-polarized-module-on-charts",
+ "kind": "statement",
+ "title": "Line-module effectivity on fixed polarized scheme charts",
+ "statement": "Let $D$ be a polarized descent datum [def-trf-polarized-scheme-etale-descent-datum] for schemes $S$, $U_i$, $X_i$, maps $u_i:U_i\\to S$, $f_i:X_i\\to U_i$, and invertible modules $L_i$, indexed by a set $I$ in an arbitrary universe. Fix a scheme $Y$, a map $g:Y\\to S$, and isomorphisms $e_i:Y\\times_SU_i\\simeq X_i$ over $U_i$. Suppose their chart maps $q_i=\\operatorname{pr}_Y e_i^{-1}$ induce precisely the given transitions: $q_i p_i=q_j p_j\\theta_{ij}$ on every overlap. There exist an ordinary invertible module $M$ on this fixed $Y$ and isomorphisms $c_i:\\operatorname{pr}_Y^*M\\simeq e_i^*L_i$ such that the candidate pair $(Y,M)$ with these labelled charts realizes $D$. In particular its line transitions equal exactly $\\lambda_{ij}$ under the stipulated canonical tensor composition and equality comparisons. No scheme effectivity assertion is made.",
+ "stmt_deps": [
+  "def-trf-polarized-scheme-etale-descent-datum"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Descent Tag 023T (proposition-fpqc-descent-quasi-coherent), effectivity and rank-one descent Tag 05VG; Spaces Descent Tag 04W8; fixed-scheme module part of polarized descent."
+ },
+ "proof": [
+  {
+   "text": "The maps e_i^{-1} followed by the first projections form an etale covering of Y: transport the base change of the given covering U_i of S along the isomorphisms e_i. The theta equation and pullback uniqueness identify its double overlaps with the specified polarizedOverlap, with second projection theta_ij followed by p_j. Dependencies: [lem-trf-fppf-covering-base-change], [def-trf-polarized-scheme-etale-descent-datum].",
+   "uses": [
+    "lem-trf-fppf-covering-base-change",
+    "def-trf-polarized-scheme-etale-descent-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Descent Tag 023T (proposition-fpqc-descent-quasi-coherent), effectivity and rank-one descent Tag 05VG; Spaces Descent Tag 04W8; fixed-scheme module part of polarized descent."
+   }
+  },
+  {
+   "text": "Transport lambda to this covering's module descent data. Its diagonal and cocycle conditions follow from D.lambda_identity and D.lambda_cocycle using the canonical tensor-pullback composition and identity comparisons. Invertibility makes each component quasi-coherent. Fpqc effectivity (Descent Tag 023T) supplies M and the compatible local module isomorphisms. Finite local freeness of rank one descends, so M is invertible (Tag 05VG). Dependencies: [lem-weil-pbc-fpqc-finer-than-etale], [lem-pc-fpqc-descent].",
+   "uses": [
+    "lem-weil-pbc-fpqc-finer-than-etale",
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Descent Tag 023T (proposition-fpqc-descent-quasi-coherent), effectivity and rank-one descent Tag 05VG; Spaces Descent Tag 04W8; fixed-scheme module part of polarized descent."
+   }
+  },
+  {
+   "text": "Pull these local identifications along e_i to obtain c on Y times_S U_i. The unit and associativity of the canonical comparisons identify their direct chart expressions polarizedChartLine with the identifications just descended. Their overlap equation is precisely the lambda field of IsPolarizedDescentRealization. The theta field is the assumed htheta. The empty scheme and empty cover satisfy the same sheaf equalizers and require no nonemptiness assumption. Dependencies: [lem-pc-tensor-pullback-composition-associativity], [def-trf-polarized-scheme-etale-descent-datum].",
+   "uses": [
+    "lem-pc-tensor-pullback-composition-associativity",
+    "def-trf-polarized-scheme-etale-descent-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Descent Tag 023T (proposition-fpqc-descent-quasi-coherent), effectivity and rank-one descent Tag 05VG; Spaces Descent Tag 04W8; fixed-scheme module part of polarized descent."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-fppf-covering-base-change",
+  "def-trf-polarized-scheme-etale-descent-datum",
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-pc-fpqc-descent",
+  "lem-pc-tensor-pullback-composition-associativity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Descent Tag 023T (proposition-fpqc-descent-quasi-coherent), effectivity and rank-one descent Tag 05VG; Spaces Descent Tag 04W8; fixed-scheme module part of polarized descent."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Existence of a scheme with specified etale base changes from a relatively ample invertible module descent cocycle",
+   "results": "{\"t\": \"2026-10-26T06:56:07Z\", \"tool\": \"leansearch\", \"query\": \"Existence of a scheme with specified etale base changes from a relatively ample invertible module descent cocycle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.baseChange\", \"Algebra.Etale.exists_subalgebra_fg\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.etalePretopology\"], \"digest\": \"07b0cf80f963d857\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match for the fixed polarized chart interface; reuse general module descent and sheaf gluing where applicable."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invertible module with a compatible cocycle descends on a fixed scheme along an etale covering",
+   "results": "{\"t\": \"2026-10-26T06:56:09Z\", \"tool\": \"leanfinder\", \"query\": \"An invertible module with a compatible cocycle descends on a fixed scheme along an etale covering\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\"], \"digest\": \"caf470f32f47966a\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match for the fixed polarized chart interface; reuse general module descent and sheaf gluing where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "descent|descend",
+   "results": "{\"t\": \"2026-10-26T07:04:02Z\", \"tool\": \"grep\", \"query\": \"descent|descend\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Descent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Descent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Descent.lean\"], \"digest\": \"8c32db7b36fb7838\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match for the fixed polarized chart interface; reuse general module descent and sheaf gluing where applicable."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PolarizedSchemeEtaleDescent",
+  "date": "2026-10-26",
+  "group": "B7"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Additional input to the descent sentence: Stacks Spaces Descent Tag 0D3C, together with Tags 02WW and 04W8, for effective descent of a scheme with a relatively ample invertible module. Descent Tag 023T (proposition-fpqc-descent-quasi-coherent), effectivity and rank-one descent Tag 05VG; Spaces Descent Tag 04W8; fixed-scheme module part of polarized descent.",
+   "via": [
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PolarizedModuleOnCharts",
+  "file": "lean/Sheaf/AlgebraicGeometry/PolarizedModuleOnCharts.lean",
+  "declaration": "AlgebraicGeometry.exists_polarizedModule_on_schemeCharts",
+  "declarations": [
+   "AlgebraicGeometry.exists_polarizedModule_on_schemeCharts"
+  ],
+  "statement": "theorem exists_polarizedModule_on_schemeCharts\n    {S : Scheme.{u}} {I : Type v} {U : I → Scheme.{u}}\n    {uMap : ∀ i, U i ⟶ S} {X : I → Scheme.{u}} {f : ∀ i, X i ⟶ U i}\n    {L : ∀ i, (X i).Modules} {hL : ∀ i, Scheme.Modules.IsInvertible (L i)}\n    (D : PolarizedSchemeEtaleDescentDatum S I U uMap X f L hL)\n    (Y : Scheme.{u}) (g : Y ⟶ S) (e : ∀ i, pullback g (uMap i) ≅ X i)\n    (he : ∀ i, (e i).hom ≫ f i = pullback.snd g (uMap i))\n    (htheta : ∀ i j,\n      polarizedOverlapX U uMap X f i j ≫ (e i).inv ≫ pullback.fst g (uMap i) =\n        (D.theta i j).hom ≫ polarizedOverlapX U uMap X f j i ≫\n          (e j).inv ≫ pullback.fst g (uMap j))\n    : ∃ (M : Y.Modules) (hM : Scheme.Modules.IsInvertible M)\n        (c : ∀ i, (Scheme.Modules.tensorPullback (pullback.fst g (uMap i))).obj M ≅\n          (Scheme.Modules.tensorPullback (e i).hom).obj (L i)),\n      IsPolarizedDescentRealization D\n        { Y := Y, g := g, M := M, isInvertible := hM,\n          chart := fun i ↦ { schemeIso := e i, over := he i, moduleIso := c i } }",
+  "branch": "sheaf-dag",
+  "by": "B7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-23251",
+  "group": "B7",
+  "result": "fix",
+  "landing": "20261026T081113-L-1815856",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-23251",
+  "group": "B7",
+  "result": "fix",
+  "landing": "20261026T081113-L-1815856",
+  "kind": "interface",
+  "note": "independent cc review: 16 relocated defs in PolarizedSchemeEtaleDescentData vs published item (verbatim); item theorem header vs clone (identical); 3 new sorried statements vs their nodes and the item conclusion (true, weaker); direct importer PolarizedFineLogEtaleDescent compiled against the delivery (OK); item node fields vs clone"
+ }
+}

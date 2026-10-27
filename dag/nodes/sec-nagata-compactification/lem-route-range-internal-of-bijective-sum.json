@@ -1,0 +1,68 @@
+{
+ "id": "lem-route-range-internal-of-bijective-sum",
+ "kind": "statement",
+ "title": "Injective summands with a bijective sum map form an internal direct sum",
+ "statement": "Let $I$ be a set with decidable equality, let $(N_i)_{i\\in I}$ and $M$ be abelian groups, and let $f_i:N_i\\to M$ be injective additive homomorphisms. Let $\\bigoplus_{i\\in I}N_i$ be the group of finitely supported families $(x_i)_i$ with $x_i\\in N_i$ (the coproduct of the $N_i$ in abelian groups [def-weil-pbc-category-colimit]), and assume the additive map $\\bigoplus_iN_i\\to M$, $(x_i)_i\\mapsto\\sum_if_i(x_i)$, is bijective. Then $M$ is the internal direct sum of the subgroups $f_i(N_i)$: the map $\\bigoplus_if_i(N_i)\\to M$, $(y_i)_i\\mapsto\\sum_iy_i$, is bijective; equivalently every $m\\in M$ is uniquely a finite sum $\\sum_iy_i$ with $y_i\\in f_i(N_i)$. In Lean: $\\mathrm{DirectSum.IsInternal}(i\\mapsto\\mathrm{AddMonoidHom.range}(f_i))$.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 01BF and the direct-sum uniqueness argument; the range formulation is the elementary additive-group reformulation"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A bijective direct sum map implies the ranges of the component maps form an internal direct sum",
+   "results": "DirectSum.Decomposition.isInternal; DirectSum.IsInternal; DirectSum.Decomposition.ofAddHom; no exact range-of-component theorem",
+   "date": "2026-10-27",
+   "verdict": "generalization: DirectSum.Decomposition.isInternal and ofAddHom provide the canonical internal-sum criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "DirectSum.IsInternal for ranges of injective component maps when the direct sum map is bijective",
+   "results": "DirectSum.IsInternal; DirectSum.Decomposition.isInternal; DirectSum.Decomposition.ofAddHom; no exact range theorem",
+   "date": "2026-10-27",
+   "verdict": "generalization: use the decomposition criterion after replacing each summand by its range"
+  },
+  {
+   "tool": "loogle",
+   "query": "DirectSum.IsInternal, ofBijective, coeAddMonoidHom",
+   "results": "0 hits; loogle reported unknown identifier 'ofBijective'",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsInternal|coeAddMonoidHom|AddMonoidHom.range",
+   "results": "Mathlib/Algebra/DirectSum/Basic.lean:410-422; Mathlib/Algebra/DirectSum/Decomposition.lean:51-72; Mathlib/Algebra/DirectSum/Module.lean:429-441",
+   "date": "2026-10-27",
+   "verdict": "generalization: canonical map and decomposition APIs found"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-route-section-grade-internal",
+  "date": "2026-10-27",
+  "group": "ND"
+ },
+ "chapter": "sec-nagata-compactification",
+ "unit": "sk-def-nagata-sketch-data",
+ "blueprint": {
+  "from": {
+   "node": "lemma-nagata-relative-proj-exists",
+   "via": [
+    "lem-route-section-grade-internal",
+    "lem-nagata-proj-affine-restriction"
+   ],
+   "place": "the provisional proof sentence “the inclusions are injective, so replacing each piece by its image gives this internal sum”"
+  },
+  "same_as": [],
+  "is": null
+ }
+}

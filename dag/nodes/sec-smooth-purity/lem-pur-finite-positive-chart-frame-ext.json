@@ -1,0 +1,127 @@
+{
+ "id": "lem-pur-finite-positive-chart-frame-ext",
+ "kind": "statement",
+ "title": "Extensionality of positive-line maps on compatible ordered frame generators",
+ "status": "split",
+ "statement": "Fix a finite purity setting P [def-pur-conventions], a k-scheme T, its signed finite coefficient sheaves [def-pur-finite-tensor-reduction-data] and coherent frames [def-pur-finite-signed-twist-products]. Let e1 be any isomorphism from the first signed ordinary sheaf to the coefficient unit, d a natural number, M any coefficient-module sheaf, and f,g maps from the d-th signed ordinary sheaf to M. Suppose that for every site object V and coherent signed frame b, ordinary sections x1,x realizing b(1),b(d), with e1(x1) equal to coefficient one, satisfy f(x)=g(x). Then f=g. No isomorphism hypothesis on f or g, and no normalization or existence assertion about a family of charts, is included.",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-finite-tensor-reduction-data",
+  "def-pur-finite-signed-twist-products"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+  "place": "Step 2, compatibility with the invertible twist by associativity of derived tensor; expanded Step 8 of def-pur-finite-positive-root-charts."
+ },
+ "proof": [
+  {
+   "text": "Use the inverse e1 on coefficient one as the degree-one generator. On a pro-etale trivializing cover extend it to all positive ordered tensor powers, the coefficient-one zero vector, and the dual evaluation bases. This gives a coherent signed frame. The realization unit/counit identify ordinary and intrinsic section modules, so these frame vectors have ordinary representatives. The construction works at degree zero and on the empty object.",
+   "uses": [
+    "def-pur-finite-tensor-reduction-data",
+    "def-pur-finite-signed-twist-products",
+    "def-coefficient-twists-detailed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The assumed equality gives equality on the degree-d frame generator. Transport the maps to intrinsic coefficient modules, where linearity over the coefficient ring sheaf extends this equality to every local section. Equivalently, apply basis extensionality in a trivialization. The target sheaf is separated, so equality after restriction to a covering implies equality on each original section. Sheaf morphism extensionality yields f=g.",
+   "uses": [
+    "def-pur-finite-signed-twist-products"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-finite-tensor-reduction-data",
+  "def-pur-finite-signed-twist-products",
+  "def-coefficient-twists-detailed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "R4",
+  "date": "2026-10-25",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+  "place": "Explicit ordinary-sheaf realization of the positive-power construction in Step 2."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms of rank one sheaves are equal if they agree on every compatible local basis generator",
+   "results": "8 hits: TopCat.Sheaf.hom_ext, module-sheaf hom_ext and generator structure injection lemmas. No extensionality for the prescribed compatible signed frame.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Morphisms of rank one sheaves are equal if they agree on every compatible local basis generator",
+   "results": "8 hits: module-sheaf and topological-sheaf hom_ext lemmas and scheme module extensionality; none supplies compatible frame generators.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"hom_ext\"",
+   "results": "12 hits, including CategoryTheory.Sheaf.hom_ext, Presheaf.IsSheaf.hom_ext and sheafify_hom_ext. These check equality on all sections, rather than on compatible frame vectors.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "FiniteTensorFrame|finiteTensorOrdinaryChartRecursion|finiteTensorFrameBasis",
+   "results": "0 Mathlib hits. Local rg finds only the existing signed frame and its consumers; no compatible frame extensionality.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePositiveRootCharts",
+  "date": "2026-10-25",
+  "group": "R4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-finite-reduction-of-purity",
+   "place": "Step 2, compatibility with the invertible twist: ordered positive-power charts and their local basis normalization.",
+   "via": [
+    "def-pur-finite-positive-root-charts",
+    "lem-pur-finite-tensor-presentation-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePositiveChartFrameExt",
+  "file": "lean/Sheaf/Paper/FinitePositiveChartFrameExt.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.finiteTensorPositiveChart_frame_ext",
+  "statement": "theorem finiteTensorPositiveChart_frame_ext (P : PurityFiniteSetting.{u})\n    (T : Scheme.{u}) [T.Over (Spec (.of P.field.k))]\n    (e₁ : P.finiteTensorFixedSheaf T 1 ≅\n      𝟙_ (Sheaf (ProEt.topology T) (ModuleCat.{u + 1} P.Coefficient)))\n    (d : ℕ) (M : Sheaf (ProEt.topology T) (ModuleCat.{u + 1} P.Coefficient))\n    (f g : P.finiteTensorFixedSheaf T d ⟶ M)\n    (h : ∀ (V : T.ProEt) (b : P.FiniteTensorFrame T V)\n      (x₁ : (P.finiteTensorFixedSheaf T 1).obj.obj (Opposite.op V))\n      (x : (P.finiteTensorFixedSheaf T d).obj.obj (Opposite.op V)),\n      HEq (P.finiteTensorSection T 1 V x₁) (P.finiteTensorFrameBasis T V b 1) →\n      e₁.hom.hom.app (Opposite.op V) x₁ =\n        (Functor.LaxMonoidal.ε (sheafToPresheaf (ProEt.topology T)\n          (ModuleCat.{u + 1} P.Coefficient))).app (Opposite.op V) (1 : P.Coefficient) →\n      HEq (P.finiteTensorSection T d V x) (P.finiteTensorFrameBasis T V b d) →\n      f.hom.app (Opposite.op V) x = g.hom.app (Opposite.op V) x) : f = g",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261025T143856-L-1097536",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261025T143856-L-1097536",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

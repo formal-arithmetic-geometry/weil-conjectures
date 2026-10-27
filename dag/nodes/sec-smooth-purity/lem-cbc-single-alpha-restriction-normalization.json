@@ -1,0 +1,153 @@
+{
+ "id": "lem-cbc-single-alpha-restriction-normalization",
+ "kind": "statement",
+ "title": "Restriction normalization of intrinsic proper/open alpha",
+ "statement": "Let $B$ be a commutative ring. On the small pro-etale site of a scheme [def-pc-scheme] [def-weil-pbc-proetale-site], use the module sheaves over the constant ring $B$ [def-weil-pbc-constant-sheaf] [def-weil-sheaf-of-modules-category], the specified inverse-image functors $P_f$ [def-cbc-strict-constant-tower-operations], and the specified open extensions $L_j\\dashv P_j$ with units $u_j$ [def-cbc-strict-tower-open-extension]. Let $k:V\\to W$ and $i:S\\to T$ be quasi-compact open immersions [def-weil-open-immersion] [def-weil-finite-type-morphism], let $r:V\\to S$ and $p:W\\to T$ be proper [def-weil-proper-morphism], and fix $h:pk=ir$. Write $\\sigma_{k,r,p,i}:P_rP_i\\cong P_kP_p$ for the specified square comparison and $\\alpha:P_pL_i\\to L_kP_r$ for the intrinsic clopen alpha [def-cbc-strict-tower-ordinary-proper-open-arrows]. For every module sheaf $M$ on $S$,\n$$P_k(\\alpha_M)\\circ\\sigma_{k,r,p,i,L_iM}=u_{k,P_rM}\\circ P_r(u_{i,M}^{-1}).$$\nThe units and all comparisons are the specified ones, rather than arbitrary identifications.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7C (lemma-shriek-proper-and-open-compose); arbitrary-ring underived refinement, parent lem-cbc-proper-open-alpha-vertical-modules steps 2-3, not a verbatim assertion of Stacks"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-cbc-strict-constant-tower-operations",
+  "def-cbc-strict-tower-open-extension",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-cbc-strict-tower-ordinary-proper-open-arrows"
+ ],
+ "proof": [
+  {
+   "text": "For a cartesian square with opens, expand the hom-equivalence formula for the inverse transpose defining beta. Cancel the invertible beta and the invertible open unit. This gives the restriction of beta as the inverse-image square comparison followed by inverse image of the inverse open unit and the target open unit.",
+   "uses": [
+    "lem-cbc-tower-open-beta-normalization",
+    "def-cbc-strict-tower-open-extension",
+    "def-cbc-strict-constant-tower-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BN (lemma-open-immersion), inverse-transpose calculation"
+   }
+  },
+  {
+   "text": "Factor the proper/open square through Z = W times_T S, with b:Z -> W open, q:Z -> S, and the clopen lift s:V -> Z. The alpha definition is beta followed by L_b of the clopen projector, the unit-preserving open compositor, and the inverse-image compositor for sq=r. The projector theorem gives P_s(pi_s)=u_s. The unit formula for the adjoint compositor identifies the restriction of the open compositor with the units of s,b,k. Naturality moves the beta across the compositor; u_s cancels its inverse and the previous step cancels u_b. The identical functorial word is packaged before specializing, and its generic component formula is used for the calculation.",
+   "uses": [
+    "def-cbc-strict-tower-ordinary-proper-open-arrows",
+    "lem-cbc-proper-open-clopen-projector",
+    "lem-cbc-tower-open-beta-normalization",
+    "def-cbc-strict-tower-open-extension",
+    "def-cbc-strict-constant-tower-operations",
+    "lem-cbc-proper-open-word-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09BN and 09AE, intrinsic clopen construction; parent alpha vertical proof steps 2-3"
+   }
+  },
+  {
+   "text": "The two inverse-image compositor coherence equations for sbp=kp and sqi=ri identify the product of the outer square comparison, the compositor for sb=k, and P_s of the pullback square comparison with the compositor for sq=r. Move the inverse open unit along this last natural isomorphism and cancel the isomorphism with its inverse. Finally cancel the inverse k-unit, obtaining the displayed equation. Empty opens and the zero ring require no extra assumptions. Carry out this categorical word calculation for abstract functors before specializing it to the module functors.",
+   "uses": [
+    "def-cbc-strict-constant-tower-operations",
+    "def-cbc-strict-tower-open-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BN, elementary inverse-image and adjunction coherence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-tower-open-beta-normalization",
+  "def-cbc-strict-tower-open-extension",
+  "def-cbc-strict-constant-tower-operations",
+  "def-cbc-strict-tower-ordinary-proper-open-arrows",
+  "lem-cbc-proper-open-clopen-projector",
+  "lem-cbc-proper-open-word-components"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Underived restriction calculation of parent lem-cbc-proper-open-alpha-vertical-modules steps 2-3, with explicit adjunction units and inverse-image coherence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "restriction of extension by zero proper open comparison alpha to open immersion equals inverse image square compositor and open adjunction units",
+   "results": "8 hits: AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_hom_hom_c_app, AlgebraicGeometry.IsOpenImmersion.map_ΓIso_inv_apply, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.isoRestrict_hom_c_app, AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv_apply, AlgebraicGeometry.Scheme.Hom.appIso_hom, AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv, AlgebraicGeometry.Scheme.Hom.app_invApp', AlgebraicGeometry.IsOpenImmersion.app_ΓIso_hom",
+   "date": "2026-10-27",
+   "verdict": "No exact restriction-of-alpha theorem. Reuse the adjunction compositor/unit APIs and the declared beta/projector lemmas."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.unit_conjugateEquiv_symm",
+   "results": "1 hits: CategoryTheory.unit_conjugateEquiv_symm",
+   "date": "2026-10-27",
+   "verdict": "No exact restriction-of-alpha theorem. Reuse the adjunction compositor/unit APIs and the declared beta/projector lemmas."
+  },
+  {
+   "tool": "grep",
+   "query": "clopen.*projector|singleAlpha|leftAdjointCompIso",
+   "results": "5 hits: Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+   "date": "2026-10-27",
+   "verdict": "No exact restriction-of-alpha theorem. Reuse the adjunction compositor/unit APIs and the declared beta/projector lemmas."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperOpenAlphaVerticalModules",
+  "date": "2026-10-27",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-complete-proetale",
+   "place": "Displayed composite, second arrow '(Ex^j)^{-1}', and the sentence 'Both arrows are natural transformations, so the composite is natural in K.' This gives the prescribed ordinary proper/open comparison normalization used before tower and derived transport, refining the parent vertical-coherence calculation.",
+   "via": [
+    "lem-cbc-proper-open-alpha-vertical-modules",
+    "lem-cbc-proper-open-alpha-pasting",
+    "lem-cbc-strict-tower-proper-open-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SingleAlphaRestrictionNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/SingleAlphaRestrictionNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.StrictTower.singleAlpha_restriction_normalized",
+  "statement": "theorem singleAlpha_restriction_normalized {V W S T : Scheme.{u}}\n    (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)\n    [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]\n    [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i) (M : Modules B S) :\n    (moduleSquareG B k r p i h).hom.app ((moduleJ B i).obj M) ≫\n        (modulePullback B k).map ((singleAlpha B k r p i h).app M) =\n      (modulePullback B r).map\n        ((@asIso _ _ _ _ (moduleJAdj B i).unit\n          (clopenModule_openUnit_isIso B i)).inv.app M) ≫\n        (moduleJAdj B k).unit.app ((modulePullback B r).obj M)",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261027T123418-L-2293365",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261027T123418-L-2293365",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

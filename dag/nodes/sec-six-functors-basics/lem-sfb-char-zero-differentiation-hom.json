@@ -1,0 +1,281 @@
+{
+ "id": "lem-sfb-char-zero-differentiation-hom",
+ "kind": "statement",
+ "title": "Differentiation detects morphisms of rational representations in characteristic zero",
+ "statement": "Let $F$ be an algebraically closed field of characteristic zero [def-weil-field, def-weil-algebraic-closure], and let $G$ be a smooth connected affine $F$-group scheme of finite type [def-sc-group-scheme, def-weil-finite-type-morphism, def-sbc-smooth-morphisms, def-weil-connected-scheme]. Put $\\mathfrak g=T_eG$ [def-sc-scheme-tangent-space, def-sc-dual-numbers]. Its canonical Lie bracket is induced by the commutator of left-invariant derivations of $F[G]$: a derivation $\\delta:F[G]\\to F$ at the counit $\\varepsilon$ corresponds to $(1\\otimes\\delta)\\Delta:F[G]\\to F[G]$, where $\\Delta$ is the comultiplication. With this bracket $\\mathfrak g$ is a finite-dimensional Lie algebra [def-wf-lie-algebra]. A finite-dimensional rational representation is a vector space $M$ with a coassociative counital coaction $\\alpha_M:M\\to M\\otimes_F F[G]$, or equivalently an action morphism $r_M:G\\to\\operatorname{GL}(M)$. Its differential $dr_M:\\mathfrak g\\to\\operatorname{End}_F(M)$, characterized by $r_M(1+\\epsilon x)=1+\\epsilon dr_M(x)$ on dual-number points, is linear and preserves Lie brackets. For any two such representations $M,N$ and any $F$-linear map $u:M\\to N$, one has\n$$\\alpha_N u=(u\\otimes1)\\alpha_M\\quad\\Longleftrightarrow\\quad u\\,dr_M(x)=dr_N(x)\\,u\\text{ for every }x\\in\\mathfrak g.$$\nIn particular, the left side means equivariance after every commutative $F$-algebra extension.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 10.23, printed pp.193-194; Proposition 10.31, printed p.196, combined with Proposition 10.15, printed pp.190-191 and Cartier Theorem 3.23, printed p.71, applied to the stabilizer of the graph of u. Also §10l, printed p.208 (full faithfulness)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-scheme-tangent-space",
+  "def-sc-dual-numbers",
+  "def-wf-lie-algebra",
+  "def-sfb-hopf-action-module-data",
+  "def-sfb-affine-coordinate-hopf-algebra",
+  "def-wf-lie-algebra-derivation"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=F[G]$, with comultiplication $\\Delta$ and counit $\\varepsilon$ induced by multiplication and identity. By [lem-pc-affine-finite-type-algebra], choose finitely many algebra generators $a_1,\\ldots,a_s$ of $A$. An identity tangent point is an algebra map $A\\to F[t]/(t^2)$ reducing to $\\varepsilon$, uniquely $a\\mapsto\\varepsilon(a)+t\\delta(a)$. Multiplicativity is precisely $\\delta(ab)=\\varepsilon(a)\\delta(b)+\\delta(a)\\varepsilon(b)$, and $F$-linearity is part of being an $F$-algebra map. The vector operations of [def-sc-scheme-tangent-space] become addition and scalar multiplication of $\\delta$. Such a derivation is determined on the generators by repeated Leibniz expansion, so $\\mathfrak g$ embeds linearly into $F^s$ and is finite dimensional.",
+   "uses": [
+    "lem-pc-affine-finite-type-algebra",
+    "def-sc-scheme-tangent-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§10a-b, especially 10.6; Proposition 10.28, printed p.195"
+   }
+  },
+  {
+   "text": "For a counit derivation $\\delta$, set $D_\\delta=(1\\otimes\\delta)\\Delta$. The Leibniz rule follows by expanding $\\Delta(ab)=\\Delta(a)\\Delta(b)$ and using $(1\\otimes\\varepsilon)\\Delta=1$. Coassociativity gives $\\Delta D_\\delta=(1\\otimes D_\\delta)\\Delta$, so it is left invariant, and $\\varepsilon D_\\delta=\\delta$. Conversely, applying $1\\otimes\\varepsilon$ to $\\Delta D=(1\\otimes D)\\Delta$ yields $D=(1\\otimes\\varepsilon D)\\Delta$. Thus these are inverse linear identifications. Expanding the two Leibniz rules shows $DD'-D'D$ is a derivation; substituting the invariance identities shows $\\Delta[ D,D']=(1\\otimes[ D,D'])\\Delta$. The invariant derivations therefore form a subspace of $\\operatorname{End}_F(A)$ closed under commutator, hence a Lie algebra by [def-wf-lie-algebra]. Transport this bracket to $\\mathfrak g$.",
+   "uses": [
+    "def-wf-lie-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 10.28-10.29, printed pp.195-196"
+   }
+  },
+  {
+   "text": "Choose a basis $m_j$ and write $\\alpha_M(m_j)=\\sum_i m_i\\otimes b_{ij}$. The coaction axioms say $\\varepsilon(b_{ij})=\\delta_{ij}$ and $\\Delta(b_{ij})=\\sum_k b_{ik}\\otimes b_{kj}$. Consequently evaluation by $g:A\\to R$ gives matrices $B(g)$ with $B(gh)=B(g)B(h)$ and $B(1)=1$; evaluation by the inverse point supplies the inverse matrix. This gives the action morphism to $\\operatorname{GL}(M)$; conversely the universal matrix of such a morphism gives exactly these coaction identities. This is the coaction/representation dictionary of [lem-sfb-rational-representation-comodule-dictionary] for finite-dimensional $M$. At the tangent point $\\varepsilon+t\\delta$ the matrix is $1+t(\\delta(b_{ij}))$. Thus $dr_M(\\delta)=(\\delta(b_{ij}))$ is linear and has the required characterization. Moreover $D_\\delta b_{ij}=\\sum_k b_{ik}\\delta(b_{kj})$, so\n$$\\varepsilon[D_\\delta,D_\\eta](b_{ij})=\\sum_k\\bigl(\\delta(b_{ik})\\eta(b_{kj})-\\eta(b_{ik})\\delta(b_{kj})\\bigr).$$\nBy the bracket of step 2 this is precisely $dr_M([\\delta,\\eta])=[dr_M(\\delta),dr_M(\\eta)]$. The same applies to $N$.",
+   "uses": [
+    "lem-sfb-rational-representation-comodule-dictionary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§10e after Proposition 10.29; Theorem 10.23 and §10f"
+   }
+  },
+  {
+   "text": "Let $U$ be the matrix of $u$ in the chosen bases, and write $B_M,B_N$ for the two matrices with entries in $A$. The coaction equality in the statement is exactly $B_NU-UB_M=0$. Applying any counit derivation entrywise gives $dr_N(x)U-Udr_M(x)=0$. Conversely, assume all these differential equalities. Let $I\\subset A$ be the ideal generated by the entries of $B_NU-UB_M$, and put $H=\\operatorname{Spec}(A/I)$. By [def-weil-affine-spectrum], for every commutative $F$-algebra $R$, $H(R)$ is precisely the set of $g\\in G(R)$ with $r_N(g)u_R=u_Rr_M(g)$. It is the stabilizer of the graph of $u$ in $M\\oplus N$.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§4a, stabilizers (4.3); §10f, Proposition 10.31"
+   }
+  },
+  {
+   "text": "These $R$-points form a subgroup: the equation for $gh$ follows from $r_N(g)r_N(h)u_R=r_N(g)u_Rr_M(h)=u_Rr_M(g)r_M(h)$, and that for $g^{-1}$ follows by multiplying $r_N(g)u_R=u_Rr_M(g)$ by both inverses. The identity satisfies the equation. This holds for every $R$, so $H\\hookrightarrow G$ is a closed subgroup scheme by [def-sc-group-scheme-subgroup]. For $x\\in T_eG$, evaluate its tangent point: the defining matrix becomes $t(dr_N(x)U-Udr_M(x))$, which is zero by assumption. Thus its algebra map factors through $A/I$, giving a tangent vector in $T_eH$ mapping to $x$. In particular the tangent map is surjective.",
+   "uses": [
+    "def-sc-group-scheme-subgroup",
+    "def-sc-scheme-tangent-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§10f, proof of Proposition 10.31, printed p.196"
+   }
+  },
+  {
+   "text": "By step 1, $A/I$ is a finitely generated $F$-algebra, so $H=\\operatorname{Spec}(A/I)$ is an affine $F$-group scheme of finite type; its functor of points takes values in groups by step 5, as in [def-sc-group-scheme]. Since $\\operatorname{char}F=0$, the first clause of [lem-sfb-affine-group-frobenius-smooth-image] shows that $H$ is smooth. By [lem-sfb-locally-algebraic-group-identity-component] the identity component $H^0$ is open and closed in $H$ and, with its open-subscheme structure, a subgroup scheme; it is connected, and smooth because it is open in the smooth $H$. Being closed in $H$, which is closed in $G$, it is a smooth connected closed subgroup scheme of $G$, and the inclusion $H^0\\hookrightarrow G$ factors through $H$. A tangent vector $\\operatorname{Spec}F[\\epsilon]\\to H$ at $e$ has one-point image $\\{e\\}\\subseteq H^0$, so it factors uniquely through $H^0$ by [lem-weil-pbc-morphism-factors-through-open-subscheme]; hence $T_eH^0=T_eH$, and by step 5 the tangent map $T_eH^0\\to T_eG$ is surjective. By [lem-sc-rational-tangent-cotangent-duality] this is surjectivity of $\\operatorname{Lie}(H^0)=(\\mathfrak m_e/\\mathfrak m_e^2)^\\vee\\to\\operatorname{Lie}(G)$. Apply [lem-sfb-smooth-subgroup-tangent-generation] to the smooth connected affine finite-type $G$ over the algebraically closed $F$, the one-element family $H_1=H^0$ and $K=H$: it gives $H=G$ as closed subschemes, so the defining ideal $I$ is zero. Each entry of $B_NU-UB_M$ is then zero in $A$, proving the coaction equality and the reverse implication.",
+   "uses": [
+    "def-sc-group-scheme",
+    "lem-sfb-affine-group-frobenius-smooth-image",
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "lem-sc-rational-tangent-cotangent-duality",
+    "lem-sfb-smooth-subgroup-tangent-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 10.15 and Corollary 10.17, printed pp.190-191; Cartier Theorem 3.23, printed p.71"
+   }
+  },
+  {
+   "text": "Finally, an equality $B_NU=UB_M$ in $A$ remains true after evaluation by every algebra map $A\\to R$, so it gives equivariance on $G(R)$ for every commutative $F$-algebra $R$. Conversely, take $R=A$ and the universal point corresponding to $1_A:A\\to A$ to recover the matrix equality itself. This proves the last sentence scheme-theoretically. Empty bases give the same equations with zero rows or columns, so the zero-dimensional representation cases are included.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§4a rational representations and §10l, printed p.208"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-finite-type-algebra",
+  "def-sc-scheme-tangent-space",
+  "def-wf-lie-algebra",
+  "lem-sfb-rational-representation-comodule-dictionary",
+  "def-weil-affine-spectrum",
+  "def-sc-group-scheme-subgroup",
+  "def-sc-group-scheme",
+  "lem-sfb-affine-group-frobenius-smooth-image",
+  "lem-sfb-locally-algebraic-group-identity-component",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-sc-rational-tangent-cotangent-duality",
+  "lem-sfb-smooth-subgroup-tangent-generation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "§10e (Propositions 10.28-10.29), §10f (Proposition 10.31), Proposition 10.15 and Cartier Theorem 3.23; graph-stabilizer application realizing the full-faithfulness statement of §10l."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a connected smooth affine algebraic group in characteristic zero differentiation of rational representations is fully faithful",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"FDRep.instFullRepForget₂\", \"module\": \"Mathlib/RepresentationTheory/FDRep\", \"type\": \"∀ {R G : Type u} [inst : CommRing R] [inst_1 : Monoid G], (CategoryTheory.forget₂ (FDRep R G) (Rep R G)).Full\", \"doc\": \"The forgetful functor from the category of finitely generated representations of a monoid $G$ over a commutative ring $R$ to the category of all representations of $G$ over $R$ is full, meaning that e\"}\n  {\"name\": \"FGAlgCat.fullyFaithfulUliftFunctor\", \"module\": \"Mathlib/Algebra/Category/CommAlgCat/FiniteType\", \"type\": \"(R : Type u) → [inst : CommRing R] → (FGAlgCat.uliftFunctor R).FullyFaithful\", \"doc\": \"The ULift functor on the category of finitely generated commutative $ R $-algebras is fully faithful, meaning it induces a bijection between hom-sets of original and universe-lifted algebras while pre\"}\n  {\"name\": \"TannakaDuality.FiniteGroup.toRightFDRepComp_injective\", \"module\": \"Mathlib/RepresentationTheory/Tannaka\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] [inst_2 : Finite G]\\n  {η₁ η₂ : CategoryTheory.Aut (TannakaDuality.FiniteGroup.forget k G)},\\n  η₁.hom.hom.app TannakaDuality.FiniteGroup.rightFDRep = η₂.hom.hom.app TannakaDuality.FiniteGroup.rightFDRep → η₁ = η₂\", \"doc\": \"Given two automorphisms $\\\\eta_1$ and $\\\\eta_2$ of the forgetful functor from the category of finitely generated $k$-representations of a finite group $G$ to the category of finitely generated $k$-modul\"}\n  {\"name\": \"Algebra.SubmersivePresentation.aevalDifferentialEquiv_apply\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Submersive\", \"type\": \"∀ {R : Type u} {S : Type v} {ι : Type w} {σ : Type t} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ) [inst_4 : Finite σ] (x : σ → S),\\n  P.aevalDifferentialEquiv x = P.aevalDifferential x\", \"doc\": \"Given a submersive presentation $ P $ of an $ R $-algebra $ S $ with finite generating set $ \\\\sigma $, the differential map $ P.\\\\text{aevalDifferential} $ induces a linear equivalence between the func\"}\n  {\"name\": \"AlgebraicGeometry.AffineScheme.forgetToScheme_full\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"AlgebraicGeometry.AffineScheme.forgetToScheme.Full\", \"doc\": \"The inclusion functor from the category of affine schemes to the category of schemes is full, meaning that every morphism between affine schemes in the category of schemes is already a morphism in the\"}\n  {\"name\": \"TannakaDuality.FiniteGroup.toRightFDRepComp_in_rightRegular\", \"module\": \"Mathlib/RepresentationTheory/Tannaka\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] [inst_2 : Finite G] [IsDomain k]\\n  (η : CategoryTheory.Aut (TannakaDuality.FiniteGroup.forget k G)),\\n  ∃ s,\\n    ModuleCat.Hom.hom (η.hom.hom.app TannakaDuality.FiniteGroup.rightFDRep).hom =\\n      TannakaDuality.FiniteGroup.rightRegular s\", \"doc\": \"Let $ G $ be a finite group and $ k $ a commutative ring that is an integral domain. Every automorphism $ \\\\eta $ of the forgetful functor from the category of finitely generated $ k $-representations \"}\n  {\"name\": \"TannakaDuality.FiniteGroup.algHomOfRightFDRepComp\", \"module\": \"Mathlib/RepresentationTheory/Tannaka\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] →\\n    [inst_1 : Group G] → [Finite G] → CategoryTheory.Aut (TannakaDuality.FiniteGroup.forget k G) → (G → k) →ₐ[k] G → k\", \"doc\": \"For any automorphism $\\\\eta$ of the forgetful functor from the category of finitely generated representations of a finite group $G$ over a commutative ring $k$ to the category of finitely generated $k$\"}\n  {\"name\": \"Differential.algHom_deriv'\", \"module\": \"Mathlib/RingTheory/Derivation/MapCoeffs\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] [inst_1 : Differential A] {R : Type u_2} [inst_2 : CommRing R]\\n  [inst_3 : Differential R] [inst_4 : Algebra A R] [DifferentialAlgebra A R] {R' : Type u_3} [inst_6 : CommRing R']\\n  [inst_7 : Differential R'] [inst_8 : Algebra A R'] [DifferentialAlgebra A R'] [IsD\", \"doc\": \"If $ f : R \\\\to R' $ is an injective $ A $-algebra homomorphism between commutative rings equipped with derivations, then for all $ x \\\\in R $, the derivation of $ f(x) $ in $ R' $ equals $ f $ applied \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group intertwining maps and Lie module structures do not compare rational algebraic-group representations with their differentials"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"differential\", \"Representation\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group intertwining maps and Lie module structures do not compare rational algebraic-group representations with their differentials"
+  },
+  {
+   "tool": "grep",
+   "query": "differentiation|LieHom|LieModule|differential",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group intertwining maps and Lie module structures do not compare rational algebraic-group representations with their differentials"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A linear map between rational representations of a connected algebraic group commutes with the group if and only if it commutes with the Lie algebra in characteristic zero",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Representation.linHom.mem_invariants_iff_comm\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"{X Y : Rep k G} (f : X.V →ₗ[k] Y.V) (g : G) : (linHom X.ρ Y.ρ) g f = f ↔ f.comp (X.ρ g) = (Y.ρ g).comp f\", \"doc\": \"For representations $X$ and $Y$ of a group $G$ over a commutative ring $k$, a linear map $f : X \\to Y$ is invariant under the action of $G$ (i.e., $\\\\rho_Y(g) \\\\circ f = f \\\\circ \\\\rho_X(g)$ for all $g \\\\in\"}\n  {\"name\": \"Representation.linHom\", \"module\": \"Mathlib.RepresentationTheory.Basic\", \"type\": \": Representation k G (V →ₗ[k] W)\", \"doc\": \"For representations $\\\\rho_V: G \\\\to \\\\mathrm{End}_k(V)$ and $\\\\rho_W: G \\\\to \\\\mathrm{End}_k(W)$ of a group $G$ on $k$-modules $V$ and $W$, this defines the linear map sending each $k$-linear map $f: V \\\\to\"}\n  {\"name\": \"LinearMap.instLieModule\", \"module\": \"Mathlib.Algebra.Lie.Basic\", \"type\": \": LieModule R L (M →ₗ[R] N)\", \"doc\": \"Given a commutative ring $ R $, a Lie algebra $ L $ over $ R $, and $ R $-modules $ M $ and $ N $, the space of linear maps $ M \\to N $ forms a Lie module over $ L $. This means the Lie algebra action \"}\n  {\"name\": \"LieModuleHom.instLinearMapClass\", \"module\": \"Mathlib.Algebra.Lie.Basic\", \"type\": \": LinearMapClass (M →ₗ⁅R,L⁆ N) R M N\", \"doc\": \"For any commutative ring $R$, Lie ring $L$, and Lie modules $M$ and $N$ over $R$ and $L$, the type of Lie module homomorphisms $M →ₗ⁅R,L⁆ N$ forms a linear map class over $R$. This means that such hom\"}\n  {\"name\": \"LinearMap.instLieRingModule\", \"module\": \"Mathlib.Algebra.Lie.Basic\", \"type\": \": LieRingModule L (M →ₗ[R] N)\", \"doc\": \"Let $R$ be a commutative ring, $L$ a Lie algebra over $R$, and let $M$ and $N$ be Lie modules over $L$. The space of $R$-linear maps from $M$ to $N$, denoted $\\\\operatorname{Hom}_R(M, N)$, has a canoni\"}\n  {\"name\": \"LieHom.toLinearMap_comp\", \"module\": \"Mathlib.Algebra.Lie.Basic\", \"type\": \"(f : L₂ →ₗ⁅R⁆ L₃) (g : L₁ →ₗ⁅R⁆ L₂) : (f.comp g : L₁ →ₗ[R] L₃) = (f : L₂ →ₗ[R] L₃).comp (g : L₁ →ₗ[R] L₂)\", \"doc\": \"For Lie algebra homomorphisms $ f: L_2 \\\\to L_3 $ and $ g: L_1 \\\\to L_2 $ over a commutative ring $ R $, the underlying $ R $-linear map of their composition $ f \\\\circ g $ as Lie algebra homomorphisms c\"}\n  {\"name\": \"LieHom.coe_toLinearMap\", \"module\": \"Mathlib.Algebra.Lie.Basic\", \"type\": \"(f : L₁ →ₗ⁅R⁆ L₂) : ⇑(f : L₁ →ₗ[R] L₂) = f\", \"doc\": \"For any Lie algebra homomorphism $ f : L_1 \\\\to L_2 $ over a commutative ring $ R $, the canonical coercion of $ f $ to an $ R $-linear map coincides with $ f $ as a function, i.e., $ \\\\Uparrow(f : L_1 \"}\n  {\"name\": \"LieHom.mk\", \"module\": \"Mathlib.Algebra.Lie.Basic\", \"type\": \"{R : Type u_1} →\\n  {L : Type u_2} →\\n    {L' : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : LieRing L] →\\n          [inst_2 : LieAlgebra R L] →\\n            [inst_3 : LieRing L'] →\\n              [inst_4 : LieAlgebra R L'] →\\n                (toLinearMap : L →ₗ[R] L') →\\n                  (∀ \", \"doc\": \"Given a linear map between Lie algebras over a commutative ring $ R $, this constructor forms a Lie algebra homomorphism by verifying that the map preserves the Lie bracket, i.e., $ [f(x), f(y)] = f([\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group intertwining maps and Lie module structures do not compare rational algebraic-group representations with their differentials"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lie algebra invariant linear maps between rational algebraic group representations are group equivariant for connected groups in characteristic zero",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Representation.linHom.invariantsEquivRepHom_apply_hom\", \"module\": \"Mathlib/RepresentationTheory/Invariants\", \"type\": \"∀ {k : Type u} [inst : CommRing k] {G : Type u} [inst_1 : Group G] (X Y : Rep k G) (f : ↥(X.ρ.linHom Y.ρ).invariants),\\n  ((Representation.linHom.invariantsEquivRepHom X Y) f).hom = ModuleCat.ofHom ↑f\", \"doc\": \"For representations $X$ and $Y$ of a group $G$ over a commutative ring $k$, the equivalence between $G$-invariant linear maps $X \\\\to Y$ and morphisms $X \\\\to Y$ in the category $\\\\text{Rep}(k, G)$ satis\"}\n  {\"name\": \"Representation.linHom.invariantsEquivFDRepHom\", \"module\": \"Mathlib/RepresentationTheory/Invariants\", \"type\": \"{k : Type u} →\\n  [inst : Field k] →\\n    {G : Type u} → [inst_1 : Group G] → (X Y : FDRep k G) → ↥(Representation.linHom X.ρ Y.ρ).invariants ≃ₗ[k] X ⟶ Y\", \"doc\": \"For a field $k$ and group $G$, the invariant elements of the linear maps between two finitely generated representations $X$ and $Y$ (fixed by the $G$-action) are linearly equivalent to the space of mo\"}\n  {\"name\": \"Representation.linHom.mem_invariants_iff_comm\", \"module\": \"Mathlib/RepresentationTheory/Invariants\", \"type\": \"∀ {k : Type u} [inst : CommRing k] {G : Type u} [inst_1 : Group G] {X Y : Rep k G} (f : ↑X.V →ₗ[k] ↑Y.V) (g : G),\\n  ((X.ρ.linHom Y.ρ) g) f = f ↔ f ∘ₗ X.ρ g = Y.ρ g ∘ₗ f\", \"doc\": \"For representations $X$ and $Y$ of a group $G$ over a commutative ring $k$, a linear map $f : X \\to Y$ is invariant under the action of $G$ (i.e., $\\\\rho_Y(g) \\\\circ f = f \\\\circ \\\\rho_X(g)$ for all $g \\\\in\"}\n  {\"name\": \"Representation.linHom.invariantsEquivRepHom\", \"module\": \"Mathlib/RepresentationTheory/Invariants\", \"type\": \"{k : Type u} →\\n  [inst : CommRing k] → {G : Type u} → [inst_1 : Group G] → (X Y : Rep k G) → ↥(X.ρ.linHom Y.ρ).invariants ≃ₗ[k] X ⟶ Y\", \"doc\": \"For representations $X$ and $Y$ of a group $G$ over a commutative ring $k$, this establishes a $k$-linear equivalence between the $G$-invariant linear maps $X \\to Y$ and the morphisms $X \\to Y$ in the c\"}\n  {\"name\": \"Representation.linHom_apply\", \"module\": \"Mathlib/RepresentationTheory/Basic\", \"type\": \"∀ {k : Type u_1} {G : Type u_2} {V : Type u_3} {W : Type u_4} [inst : CommSemiring k] [inst_1 : Group G]\\n  [inst_2 : AddCommMonoid V] [inst_3 : Module k V] [inst_4 : AddCommMonoid W] [inst_5 : Module k W]\\n  (ρV : Representation k G V) (ρW : Representation k G W) (g : G) (f : V →ₗ[k] W),\\n  ((ρV.linHo\", \"doc\": \"For group representations $\\\\rho_V: G \\\\to \\\\mathrm{End}_k(V)$ and $\\\\rho_W: G \\\\to \\\\mathrm{End}_k(W)$ on $k$-modules $V$ and $W$, and for any $k$-linear map $f: V \\\\to W$ and group element $g \\\\in G$, the i\"}\n  {\"name\": \"Rep.ihom_obj_ρ_apply\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] {A B : Rep k G} (g : G) (x : ↑A.V →ₗ[k] ↑B.V),\\n  ((A.ihom.obj B).ρ g) x = B.ρ g ∘ₗ x ∘ₗ A.ρ g⁻¹\", \"doc\": \"For representations $ A $ and $ B $ of a monoid $ G $ over a commutative ring $ k $, the $ G $-action on the internal Hom object $ [A, B] $ satisfies $ \\\\rho(g)(x) = B(g) \\\\circ x \\\\circ A(g^{-1}) $ for \"}\n  {\"name\": \"Representation.linHom.invariantsEquivRepHom_symm_apply_coe\", \"module\": \"Mathlib/RepresentationTheory/Invariants\", \"type\": \"∀ {k : Type u} [inst : CommRing k] {G : Type u} [inst_1 : Group G] (X Y : Rep k G) (f : X ⟶ Y),\\n  ↑((Representation.linHom.invariantsEquivRepHom X Y).symm f) = ModuleCat.Hom.hom f.hom\", \"doc\": \"For representations $X$ and $Y$ of a group $G$ over a commutative ring $k$, applying the inverse of the $k$-linear equivalence between $G$-invariant linear maps $X \\to Y$ and morphisms $X \\to Y$ in the \"}\n  {\"name\": \"Representation.IntertwiningMap.isIntertwining\", \"module\": \"Mathlib/RepresentationTheory/Intertwining\", \"type\": \"∀ {A : Type u_1} {G : Type u_2} {V : Type u_3} {W : Type u_4} [inst : CommRing A] [inst_1 : Monoid G]\\n  [inst_2 : AddCommMonoid V] [inst_3 : AddCommMonoid W] [inst_4 : Module A V] [inst_5 : Module A W]\\n  (ρ : Representation A G V) (σ : Representation A G W) (f : ρ.IntertwiningMap σ) (g : G) (v : V),\", \"doc\": \"For any intertwining map $ f $ between representations $ \\\\rho $ and $ \\\\sigma $ of a monoid $ G $ on a module $ V $, and for all $ g \\\\in G $ and $ v \\\\in V $, the equation $ f(\\\\rho(g)(v)) = \\\\sigma(g)(f(\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group intertwining maps and Lie module structures do not compare rational algebraic-group representations with their differentials"
+  },
+  {
+   "tool": "grep",
+   "query": "differentiation|rational.*representation|algebraic.*group.*Lie",
+   "results": "{\"t\": \"2026-10-23T20:22:37Z\", \"tool\": \"grep\", \"query\": \"differentiation|rational.*representation|algebraic.*group.*Lie\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract monoid intertwiners and analytic manifold Lie algebras do not compare rational representations of affine group schemes and their algebraic differentials"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An intertwining linear map between Lie algebra representations of a connected algebraic group is equivariant for the original rational group representations in characteristic zero",
+   "results": "{\"t\": \"2026-10-23T20:22:37Z\", \"tool\": \"leansearch\", \"query\": \"An intertwining linear map between Lie algebra representations of a connected algebraic group is equivariant for the original rational group representations in characteristic zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Representation.linHom\", \"Representation.IntertwiningMap.isIntertwining'\", \"Representation.IntertwiningMap.mk\", \"Representation.IsIntertwiningMap.mk\", \"Representation.IntertwiningMap.toLinearMap\", \"Representation.isIntertwiningMap_iff\", \"Representation.IntertwiningMap.ctorIdx\", \"Representation.IntertwiningMap.isIntertwining\"], \"digest\": \"d0913f68430335d4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract monoid intertwiners and analytic manifold Lie algebras do not compare rational representations of affine group schemes and their algebraic differentials"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Representation\", \"differential\"",
+   "results": "{\"t\": \"2026-10-23T20:22:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"Representation\\\", \\\"differential\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract monoid intertwiners and analytic manifold Lie algebras do not compare rational representations of affine group schemes and their algebraic differentials"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Differentiation from rational representations of a connected affine algebraic group in characteristic zero to Lie algebra modules is fully faithful",
+   "results": "{\"t\": \"2026-10-23T20:22:38Z\", \"tool\": \"leanfinder\", \"query\": \"Differentiation from rational representations of a connected affine algebraic group in characteristic zero to Lie algebra modules is fully faithful\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LeftInvariantDerivation.instLieAlgebra\", \"instLieAlgebraGroupLieAlgebra\", \"LeftInvariantDerivation.toDerivation_injective\", \"GroupLieAlgebra\", \"instLieRingGroupLieAlgebra\", \"LeftInvariantDerivation.toFun_eq_coe\", \"LeftInvariantDerivation.coe_derivation\", \"LieDerivation.toLinearMapLieHom_injective\"], \"digest\": \"5d63edfe001c80c5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract monoid intertwiners and analytic manifold Lie algebras do not compare rational representations of affine group schemes and their algebraic differentials"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semisimple-group-casimir-trace",
+  "date": "2026-10-23",
+  "group": "Q17"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Characteristic-zero simplicity step: finite-dimensional rational modules are direct sums of simple submodules. Supporting Casimir endomorphism and trace for a semisimple algebraic group. Prerequisite: Differentiation detects morphisms of rational representations in characteristic zero.",
+   "via": [
+    "lem-sfb-semisimple-group-casimir-trace",
+    "lem-sfb-characteristic-zero-complete-reducibility",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-char-zero-differentiation-hom",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged; proved the derivation bracket, finite dimensionality and rational coaction/differential claims by explicit Hopf-coordinate calculations, then used the graph stabilizer and its explicit tangent equations. Created only the field-general closed-subgroup tangent-rigidity prerequisite; existing comparison nodes restrict the coefficient field to Qbar_l and cannot be invoked for arbitrary F. Reviewer FIX (2026-10-24): the new node lem-sfb-char-zero-subgroup-tangent-rigidity was a few-line consequence of existing same-unit nodes (Cartier clause of lem-sfb-affine-group-frobenius-smooth-image, lem-sfb-locally-algebraic-group-identity-component, lem-sfb-smooth-subgroup-tangent-generation); it is dropped and step 6 cites them directly. Step 3 cites the existing coaction dictionary lem-sfb-rational-representation-comodule-dictionary.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Characteristic-zero simplicity step: finite-dimensional rational modules are direct sums of simple submodules. Supporting Casimir endomorphism and trace for a semisimple algebraic group. Prerequisite: Differentiation detects morphisms of rational representations in characteristic zero. The split realizes its differentiation prerequisite through Milne 10.28-10.31 and 10.15. Current blueprint/latest direct-images proof (3) remains the enclosing route; this is a generic algebraic-group supporting argument.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-finite-type-algebra",
+    "why": "Finite generation of the coordinate algebra of an affine finite-type scheme bounds its counit derivations; this generic affine algebra tool is not replaced by any step of the six-functors unit."
+   },
+   {
+    "node": "lem-sc-rational-tangent-cotangent-duality",
+    "why": "Identifies the dual-number tangent map at rational identity points with the dual of the cotangent map, matching the (m/m^2)^dual Lie convention of lem-sfb-smooth-subgroup-tangent-generation; a generic tangent-space tool not replaced by any step of the six-functors unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-finite-type-algebra",
+  "lem-sc-rational-tangent-cotangent-duality"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NI-82c040f9b",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-82c040f9b (reviewer sub-agent of L); spot-checked: I read the whole item and the new node, every cited statement, and Milne iAG 2017 Prop 10.15 (pp.190-191, including the α_p/G° remark), Cartier Thm 3.23 (p.71), Prop 10.31 (p.196) and §10l (p.208). Live still has the item unsplit with no repair note. The statement and stmt_deps are byte-identical to live and no target is weakened. I recomputed every step. Step 2: D_δ=(1⊗δ)Δ is a derivation, invariant by coassociativity, εD_δ=δ, the inverse is D=(1⊗εD)Δ, and the commutator is closed. Step 3: Δb_kj=Σb_ki⊗b_ij and ε[D_δ,D_η](b_ij)=[dr δ,dr η]_ij. Step 4: the coaction identity is exactly B_NU=UB_M. Step 5: the graph stabilizer is a closed subgroup with surjective tangent map. Step 7: Yoneda at 1_A. Edge cases checked: G trivial, G_m with distinct weights, G_a unipotent, μ_p in characteristic p, and disconnected μ_2. Fault C5: the new node is a few-line consequence of existing same-unit nodes that the worker's duplicate search missed: lem-sfb-affine-group-frobenius-smooth-image (Cartier clause, split and reviewed), lem-sfb-locally-algebraic-group-identity-component (split and reviewed) and lem-sfb-smooth-subgroup-tangent-generation (H_1=H^0, K=H). FIX: I dropped the node and rewrote step 6 to cite those three, plus the open-factorization leaf and lem-sc-rational-tangent-cotangent-duality. That last node is added as a declared tool_use; I also accept the worker's tool_use of lem-pc-affine-finite-type-algebra. Second fault: step 3 did not cite the existing coaction/GL(M) dictionary lem-sfb-rational-representation-comodule-dictionary; it now does. proof_deps is the union of all uses. Cycle check is clean. No SGA is used. from.node=null is inherited, not this delivery's fault. Corrected item: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-char-zero-differentiation-hom.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.CharZeroDifferentiationHom",
+  "declaration": "AlgebraicGeometry.charZero_differentiation_hom",
+  "file": "lean/Sheaf/RepresentationTheory/CharZeroDifferentiationHom.lean",
+  "statement": "theorem charZero_differentiation_hom (F : Type u) [Field F] [IsAlgClosed F] [CharZero F] (G : Scheme.{u}) [G.Over (Spec (.of F))] [GrpObj (G.asOver (Spec (.of F)))] [IsAffine G] [Smooth (G ↘ Spec (.of F))] [ConnectedSpace G] [LocallyOfFiniteType (G ↘ Spec (.of F))] [QuasiCompact (G ↘ Spec (.of F))] : FiniteDimensional F (GrpObj.Lie (G.asOver (Spec (.of F)))) ∧ ∃ (δ : GrpObj.Lie (G.asOver (Spec (.of F))) →ₗ[F] (Γ(G, ⊤) →ₗ[F] F)) (D : GrpObj.Lie (G.asOver (Spec (.of F))) →ₗ⁅F⁆ Derivation F Γ(G, ⊤) Γ(G, ⊤)), (∀ (x : GrpObj.Lie (G.asOver (Spec (.of F)))) (a : Γ(G, ⊤)), (((GrpObj.lieEquivTangent (G.asOver (Spec (.of F))) x).val.left.appTop ≫ (Scheme.ΓSpecIso (.of (DualNumber F))).hom).hom a) = TrivSqZeroExt.inl (Coalgebra.counit a) + TrivSqZeroExt.inr (δ x a)) ∧ Function.Injective δ ∧ (∀ d : Γ(G, ⊤) →ₗ[F] F, (∀ a b : Γ(G, ⊤), d (a * b) = Coalgebra.counit a * d b + d a * Coalgebra.counit b) ↔ ∃ x : GrpObj.Lie (G.asOver (Spec (.of F))), δ x = d) ∧ (∀ x : GrpObj.Lie (G.asOver (Spec (.of F))), (D x).toLinearMap = (TensorProduct.rid F Γ(G, ⊤)).toLinearMap ∘ₗ (δ x).lTensor Γ(G, ⊤) ∘ₗ Coalgebra.comul) ∧ (∀ x : GrpObj.Lie (G.asOver (Spec (.of F))), Coalgebra.comul ∘ₗ (D x).toLinearMap = (D x).toLinearMap.lTensor Γ(G, ⊤) ∘ₗ Coalgebra.comul) ∧ (∀ x : GrpObj.Lie (G.asOver (Spec (.of F))), Coalgebra.counit ∘ₗ (D x).toLinearMap = δ x) ∧ (∀ d : Derivation F Γ(G, ⊤) Γ(G, ⊤), (Coalgebra.comul ∘ₗ d.toLinearMap = d.toLinearMap.lTensor Γ(G, ⊤) ∘ₗ Coalgebra.comul) ↔ ∃ x : GrpObj.Lie (G.asOver (Spec (.of F))), D x = d) ∧ ∀ (M : Type v) [AddCommGroup M] [Module F M] [FiniteDimensional F M] (N : Type w) [AddCommGroup N] [Module F N] [FiniteDimensional F N] (αM : M →ₗ[F] M ⊗[F] Γ(G, ⊤)) (αN : N →ₗ[F] N ⊗[F] Γ(G, ⊤)), HopfAction.Coassociative F Γ(G, ⊤) M αM → HopfAction.Counital F Γ(G, ⊤) M αM → HopfAction.Coassociative F Γ(G, ⊤) N αN → HopfAction.Counital F Γ(G, ⊤) N αN → ∃ (drM : GrpObj.Lie (G.asOver (Spec (.of F))) →ₗ[F] Module.End F M) (drN : GrpObj.Lie (G.asOver (Spec (.of F))) →ₗ[F] Module.End F N), (∀ x : GrpObj.Lie (G.asOver (Spec (.of F))), drM x = (TensorProduct.rid F M).toLinearMap ∘ₗ (δ x).lTensor M ∘ₗ αM) ∧ (∀ x : GrpObj.Lie (G.asOver (Spec (.of F))), drN x = (TensorProduct.rid F N).toLinearMap ∘ₗ (δ x).lTensor N ∘ₗ αN) ∧ (∀ x y : GrpObj.Lie (G.asOver (Spec (.of F))), drM ⁅x, y⁆ = (drM x).comp (drM y) - (drM y).comp (drM x)) ∧ (∀ x y : GrpObj.Lie (G.asOver (Spec (.of F))), drN ⁅x, y⁆ = (drN x).comp (drN y) - (drN y).comp (drN x)) ∧ (∀ x : GrpObj.Lie (G.asOver (Spec (.of F))), ∃ g : Γ(G, ⊤) →ₐ[F] DualNumber F, g.toRingHom = ((GrpObj.lieEquivTangent (G.asOver (Spec (.of F))) x).val.left.appTop ≫ (Scheme.ΓSpecIso (.of (DualNumber F))).hom).hom ∧ (∀ m : M, g.toLinearMap.lTensor M (αM m) = m ⊗ₜ[F] (1 : DualNumber F) + drM x m ⊗ₜ[F] DualNumber.eps) ∧ (∀ n : N, g.toLinearMap.lTensor N (αN n) = n ⊗ₜ[F] (1 : DualNumber F) + drN x n ⊗ₜ[F] DualNumber.eps)) ∧ ∀ f : M →ₗ[F] N, (αN ∘ₗ f = f.rTensor Γ(G, ⊤) ∘ₗ αM ↔ ∀ x : GrpObj.Lie (G.asOver (Spec (.of F))), f ∘ₗ drM x = drN x ∘ₗ f) ∧ (αN ∘ₗ f = f.rTensor Γ(G, ⊤) ∘ₗ αM ↔ ∀ (R : Type (max u r)) [CommRing R] [Algebra F R] (g : Γ(G, ⊤) →ₐ[F] R) (m : M), f.rTensor R (g.toLinearMap.lTensor M (αM m)) = g.toLinearMap.lTensor N (αN (f m)))",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "All clauses are one theorem. The existential coordinate functional, invariant derivation map and representation differentials are pinned by their formulas and by the actual upstream dual-number tangent point. No new data definition or additional mathematical hypothesis is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bb6dd4cbe",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Re-delivery after the 449c H2 RETURN makes both prescribed repairs. (a) New definition node def-sfb-affine-coordinate-hopf-algebra, existing:true on the landed Sheaf.AlgebraicGeometry.HopfCoactionLinearization (affineCoordinateHopfAlgebra = Mathlib inferInstance, coordinateHopfAlgebra its unbundled-field specialisation; verbatim statement; nothing moved or copied). (b) §1(B) lean-only superset repair of def-wf-lie-algebra-derivation: primary GrpObj.lieEquivTangent (side-live Bracket.lean:788, verbatim), plus Lie, AddCommGroup, Module R (Ring.lean:39), Bracket/LieRing/LieAlgebra instances and the old tangentGroup, all in the closure of Lie.Bracket (Bracket→LocalPoints→Ring→…→Basic); the rest of the record equals live. Item node equals live apart from lean and stmt_deps; added stmt_deps are all definition nodes; lean.statement verbatim; the only Lean change vs 449c is dropping the unused LieIdentityTangentEquiv import plus a docstring line. No cycle (BFS); item still unsplit for stage 2 on side-live. Mathematics re-checked: hypotheses match the node, δ pinned to the actual tangent point with range exactly the counit derivations, D=(1⊗δ)Δ left-invariant with bracket sign XY−YX, dr formulas, dual-number clause, both iff clauses (R : Type (max u r)); edge cases M=0, N=0, trivial and non-commutative G. One sorry, no definitions, source and blueprint docstrings present, both report sections present. No compile because no file was changed. Advisory only: step-1 docstring still mentions lieIdentityTangentEquiv; SchemeTangentSpace public import unused; Q86 wrappers keep their lem-sfb-hopf-coaction-linearization blueprint tag; sibling statement node lem-sfb-affine-group-coordinate-hopf is a different kind, not a duplicate."
+ }
+}

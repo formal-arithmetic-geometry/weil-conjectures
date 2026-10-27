@@ -1,0 +1,461 @@
+{
+ "id": "lem-sfb-dg-bimodule-derived-adjunction",
+ "kind": "statement",
+ "title": "Derived tensor-Hom adjunction for an arbitrary DG bimodule",
+ "statement": "Work in the universes of [def-weil-size-convention]. A differential graded algebra over $\\mathbf Z$ means an associative unital graded ring $A=\\bigoplus_{i\\in\\mathbf Z}A^i$ with additive differential $d:A^i\\to A^{i+1}$ satisfying $d^2=0$ and $d(ab)=d(a)b+(-1)^ia\\,d(b)$ for $a\\in A^i$. A right differential graded $A$-module is a graded right module $M$ with $d^2=0$ and $d(ma)=d(m)a+(-1)^jm\\,d(a)$ for $m\\in M^j$. Write $D(A,d)$ for the homotopy category of these modules localized at the maps inducing isomorphisms on all cohomology groups; triangles are the distinguished mapping-cone triangles. Let $(A,d)$ and $(B,d)$ be such differential graded algebras. A differential graded $(A,B)$-bimodule $N$ has commuting unital graded left $A$- and right $B$-actions, with $d(an)=d(a)n+(-1)^{|a|}a\\,d(n)$ and $d(nb)=d(n)b+(-1)^{|n|}n\\,d(b)$ for homogeneous elements. For right modules $M$ over $A$ and $Y$ over $B$, set $M\\otimes_A N=(M\\otimes_{\\mathbf Z}N)/(ma\\otimes n-m\\otimes an)$, with differential $d(m\\otimes n)=d(m)\\otimes n+(-1)^{|m|}m\\otimes d(n)$. Let $\\underline{\\operatorname{Hom}}_B(N,Y)$ have degree-$r$ homogeneous right $B$-linear maps, differential $d(f)=d_Yf-(-1)^rf d_N$, and right $A$-action $(fa)(n)=f(an)$. The total derived functors\n$$T_N=-\\otimes_A^{\\mathbf L}N:D(A,d)\\longrightarrow D(B,d),\\qquad U_N=R\\operatorname{Hom}_B(N,-):D(B,d)\\longrightarrow D(A,d)$$\nexist on the unbounded categories and are exact. The second is represented by $\\underline{\\operatorname{Hom}}_B(N,I)$ for a quasi-isomorphism $Y\\to I$ with $I$ homotopically injective, meaning $\\underline{\\operatorname{Hom}}_B(C,I)$ is acyclic for every acyclic right DG $B$-module $C$; such resolutions exist. The first is the total left derived functor of the displayed balanced tensor. Chain currying $g\\mapsto(m\\mapsto(n\\mapsto g(m\\otimes n)))$ induces natural bijections\n$$\\operatorname{Hom}_{D(B,d)}(T_NM,Y)\\cong\\operatorname{Hom}_{D(A,d)}(M,U_NY).$$\nThey specify an adjunction $T_N\\dashv U_N$. With the canonical shift comparisons induced by tensor and Hom, its unit and counit commute with shifts; these exact functors carry distinguished triangles to distinguished triangles. No flatness, boundedness, compactness or quasi-isomorphism between $A$ and $B$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09LT, lemma-tensor-hom-adjoint; its derived tensor and Hom constructions and the canonical tensor/Hom shift comparisons in the preceding sections."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sfb-dg-derived-category",
+  "def-sfb-dg-bimodule-models"
+ ],
+ "proof": [
+  {
+   "text": "The property-(P) resolution statement gives a quasi-isomorphism $p:P\\to M$ with an exhaustive graded-split filtration whose quotients are sums of shifts of $A$. View $A$ as the one-object dg category with endomorphism complex $A$ and composition its multiplication. That filtration is exactly semi-freeness for this category, so the semi-free projectivity statement makes $P$ homotopically projective. The injective statement applied over $B$ gives $i:Y\\to I$ with $I$ homotopically injective. Both constructions apply to arbitrary integer-graded modules. Localization is fully faithful on homotopically projective sources and on homotopically injective targets. Consequently a quasi-isomorphism between two projective models, or between two injective models, is an isomorphism in the homotopy category: lift its derived inverse by the stated bijection and use injectivity of that bijection to check both inverse identities.",
+   "uses": [
+    "lem-sfb-dg-property-p-resolution",
+    "lem-coef-dg-semi-free-homotopically-projective",
+    "lem-sfb-dg-homotopically-projective-hom-derived",
+    "lem-sfb-dg-injective-resolution-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tags 09KP, 09KM, 09KU, 09KS, 09KY"
+   }
+  },
+  {
+   "text": "The homotopy calculus supplies exact functors $F_N,G_N$ and their chain currying isomorphism, with the specified shift comparisons. As functors on homotopy categories they carry the isomorphisms of step 1 to isomorphisms. Therefore $Q_BF_N$ inverts quasi-isomorphisms between homotopically projective objects and $Q_AG_N$ inverts quasi-isomorphisms between homotopically injective objects. This uses no preservation of arbitrary quasi-isomorphisms by tensor or Hom.",
+   "uses": [
+    "lem-sfb-dg-tensor-hom-homotopy-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tags 09LN, 09LR, 09LH"
+   }
+  },
+  {
+   "text": "Apply the resolving-class essential-constancy statement to $K(A,d)$, $W_A$, $Q_BF_N$ and its class of homotopically projective modules, using the compatible fraction calculus. Each denominator pro-diagram is essentially constant, which is precisely everywhere-definedness of the left derived functor in Definition 05S9. The everywhere-defined exactness statement gives its universal total left derived functor $T_N$, with $T_N(M)\\cong Q_B(P\\otimes_A N)$. Apply the same two statements to $K(B,d)^{\\mathrm{op}}$, $W_B^{\\mathrm{op}}$ and $(Q_AG_N)^{\\mathrm{op}}:K(B,d)^{\\mathrm{op}}\\to D(A,d)^{\\mathrm{op}}$, taking homotopically injective objects as the resolving class, and then take opposites. The DG localization statement makes these opposite categories triangulated, $W_B^{\\mathrm{op}}$ saturated and compatible, and $Q_B^{\\mathrm{op}}$ its localization; the opposite-functor statement makes $(Q_AG_N)^{\\mathrm{op}}$ exact. This gives the universal total right derived functor $U_N$, with $U_N(Y)\\cong Q_A\\underline{\\operatorname{Hom}}_B(N,I)$. The two fraction calculi and two-out-of-three hold by the DG localization statement; step 1 supplies replacements and step 2 inversion on the classes. Opposites interchange the cone/pro and cocone/ind criteria. Both functors are exact with the derived shift comparisons induced by those of $F_N,G_N$.",
+   "uses": [
+    "lem-sfb-dg-quasi-isomorphism-localization",
+    "lem-pur-resolving-class-essential-constancy",
+    "lem-pur-left-derived-exact-when-defined",
+    "lem-sfb-dg-tensor-hom-homotopy-calculus",
+    "lem-sfb-dg-property-p-resolution",
+    "lem-coef-dg-semi-free-homotopically-projective",
+    "lem-sfb-dg-injective-resolution-localization",
+    "lem-sfb-dg-homotopically-projective-hom-derived",
+    "lem-sf-triangulated-functor-opposite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 06XN and 05S9 (derived.tex), 09LS and 09LI (dga.tex); derived.tex Tag 05SC via the cited exactness statement"
+   }
+  },
+  {
+   "text": "For the models $P\\to M$ and $Y\\to I$ above, form the following composite of bijections: $$\\operatorname{Hom}_{D(B,d)}(T_NM,Y)\\cong\\operatorname{Hom}_{K(B,d)}(P\\otimes_A N,I)\\cong\\operatorname{Hom}_{K(A,d)}(P,\\underline{\\operatorname{Hom}}_B(N,I))\\cong\\operatorname{Hom}_{D(A,d)}(M,U_NY).$$ The first uses the comparison into the homotopically injective $I$ and the isomorphism $Y\\cong Q_BI$; it does not require $P\\otimes_A N$ to be projective. The middle is $H^0$ of the chain currying isomorphism. The last uses the comparison out of the homotopically projective $P$ and $Q_AP\\cong M$; it does not require $\\underline{\\operatorname{Hom}}_B(N,I)$ to be injective over $A$. This proves the asserted bijection without a flatness hypothesis on $N$.",
+   "uses": [
+    "lem-sfb-dg-injective-resolution-localization",
+    "lem-sfb-dg-tensor-hom-homotopy-calculus",
+    "lem-sfb-dg-homotopically-projective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LT, with 09LN and both parts of 09KY"
+   }
+  },
+  {
+   "text": "To check naturality for any derived $M\\to M'$ and $Y\\to Y'$, choose projective models $P,P'$ and injective models $I,I'$. The localization comparisons give unique homotopy classes $P\\to P'$ and $I\\to I'$ representing the conjugated derived arrows. The two naturality squares for the composite in step 4 reduce to naturality of chain currying and of localization. The same argument for identities on the derived objects compares different choices of replacements, so the bijections are canonical. The natural-bijection statement now gives $T_N\\dashv U_N$, with unit the transpose of $1_{T_NM}$ and counit the inverse transpose of $1_{U_NY}$. For simultaneous shifts use $P[k]$ and $I[k]$ as the replacements: projectivity and injectivity persist since their defining Hom acyclicity tests are shifted tests. The shift identity in the homotopy-calculus statement makes the step-4 composite commute with shifts. Applying it to those two identity morphisms proves the required shift squares for unit and counit. Exactness from step 3 already proves preservation of distinguished triangles.",
+   "uses": [
+    "lem-sfb-dg-injective-resolution-localization",
+    "lem-sfb-dg-homotopically-projective-hom-derived",
+    "lem-sfb-dg-tensor-hom-homotopy-calculus",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tags 09LT, 0FQN, 0FQR; categories.tex Definition 0037"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-dg-semi-free-homotopically-projective",
+  "lem-pur-left-derived-exact-when-defined",
+  "lem-pur-resolving-class-essential-constancy",
+  "lem-sf-triangulated-functor-opposite",
+  "lem-sfb-dg-homotopically-projective-hom-derived",
+  "lem-sfb-dg-injective-resolution-localization",
+  "lem-sfb-dg-property-p-resolution",
+  "lem-sfb-dg-quasi-isomorphism-localization",
+  "lem-sfb-dg-tensor-hom-homotopy-calculus",
+  "lem-weil-pbc-adjunction-of-natural-bijection"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09LT, lemma-tensor-hom-adjoint; constructions 09LS and 09LI. The proof makes its canonical bijection explicit using 09KY and 09LN."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "DGAlgebra|DGModule|tensor.*[Rr]estrict|[Rr]estrict.*tensor",
+   "results": {
+    "t": "2026-10-23T23:56:17Z",
+    "tool": "grep",
+    "query": "DGAlgebra|DGModule|tensor.*[Rr]estrict|[Rr]estrict.*tensor",
+    "sub": "Algebra/Homology",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: ModuleCat.extendRestrictScalarsAdj is for ordinary commutative rings; Adjunction.derived assumes the derived functors and composite comparison hypotheses. Neither constructs the unbounded DG bimodule functors, their models and exact adjunction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor with a differential graded algebra is left adjoint to restriction of scalars",
+   "results": {
+    "t": "2026-10-23T23:56:18Z",
+    "tool": "leansearch",
+    "query": "Derived tensor with a differential graded algebra is left adjoint to restriction of scalars",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ModuleCat.instIsLeftAdjointRestrictScalars",
+     "ModuleCat.restrictCoextendScalarsAdj",
+     "ModuleCat.extendRestrictScalarsAdj",
+     "ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction",
+     "Derivation.restrictScalars",
+     "Derivation.restrictScalars.congr_simp",
+     "Rep.instIsLeftAdjointActionModuleCatRes",
+     "PresheafOfModules.instIsRightAdjointPushforward"
+    ],
+    "digest": "e020ed1da2a7bbad"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: ModuleCat.extendRestrictScalarsAdj is for ordinary commutative rings; Adjunction.derived assumes the derived functors and composite comparison hypotheses. Neither constructs the unbounded DG bimodule functors, their models and exact adjunction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derivedTensor\", \"Adjunction\"",
+   "results": {
+    "t": "2026-10-23T23:56:18Z",
+    "tool": "loogle",
+    "query": "\"derivedTensor\", \"Adjunction\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: ModuleCat.extendRestrictScalarsAdj is for ordinary commutative rings; Adjunction.derived assumes the derived functors and composite comparison hypotheses. Neither constructs the unbounded DG bimodule functors, their models and exact adjunction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any map of differential graded algebras extension by derived tensor is an exact left adjoint to restriction of scalars",
+   "results": {
+    "t": "2026-10-23T23:56:19Z",
+    "tool": "leanfinder",
+    "query": "For any map of differential graded algebras extension by derived tensor is an exact left adjoint to restriction of scalars",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "comonadicExtendScalars",
+     "ModuleCat.extendRestrictScalarsAdj",
+     "ModuleCat.instIsLeftAdjointExtendScalars",
+     "CategoryTheory.Adjunction.derivedε",
+     "CategoryTheory.Adjunction.derived",
+     "ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply",
+     "ModuleCat.restrictCoextendScalarsAdj",
+     "ModuleCat.extendRestrictScalarsAdj_unit_app_apply"
+    ],
+    "digest": "7939cde337c5f11c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: ModuleCat.extendRestrictScalarsAdj is for ordinary commutative rings; Adjunction.derived assumes the derived functors and composite comparison hypotheses. Neither constructs the unbounded DG bimodule functors, their models and exact adjunction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension and restriction of scalars for DG rings form a triangulated adjunction without flatness assumptions",
+   "results": {
+    "t": "2026-10-23T23:56:20Z",
+    "tool": "leanfinder",
+    "query": "Extension and restriction of scalars for DG rings form a triangulated adjunction without flatness assumptions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.isTriangulated_rightAdjoint",
+     "CategoryTheory.Adjunction.isTriangulated_leftAdjoint",
+     "CategoryTheory.Adjunction.IsTriangulated.mk'",
+     "CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated",
+     "CategoryTheory.Adjunction.IsTriangulated.rightAdjoint_isTriangulated",
+     "CategoryTheory.Adjunction.IsTriangulated.mk''",
+     "ModuleCat.extendRestrictScalarsAdj",
+     "CategoryTheory.Adjunction.IsTriangulated.comp"
+    ],
+    "digest": "8ab1d7e69fbe83b1"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: ModuleCat.extendRestrictScalarsAdj is for ordinary commutative rings; Adjunction.derived assumes the derived functors and composite comparison hypotheses. Neither constructs the unbounded DG bimodule functors, their models and exact adjunction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor Hom adjunction for arbitrary differential graded bimodules over noncommutative differential graded algebras",
+   "results": {
+    "t": "2026-10-24T00:03:13Z",
+    "tool": "leansearch",
+    "query": "Derived tensor Hom adjunction for arbitrary differential graded bimodules over noncommutative differential graded algebras",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ModuleCat.monoidalClosedHomEquiv",
+     "CategoryTheory.ihom.adjunction",
+     "CategoryTheory.exp.adjunction",
+     "lTensorHomEquivHomLTensor",
+     "dualTensorHomEquiv",
+     "dualTensorHomEquivOfBasis",
+     "TensorProduct.lTensorHomToHomLTensor",
+     "CategoryTheory.Adjunction.derivedη.congr_simp"
+    ],
+    "digest": "c5d36da7961d0935"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary closed-module tensor Hom and Tor, or Adjunction.derived assuming existing derived functors, do not construct these arbitrary DG bimodule functors and exact adjunction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any differential graded A B bimodule the unbounded derived balanced tensor is an exact left adjoint of derived Hom",
+   "results": {
+    "t": "2026-10-24T00:03:15Z",
+    "tool": "leanfinder",
+    "query": "For any differential graded A B bimodule the unbounded derived balanced tensor is an exact left adjoint of derived Hom",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Tor'",
+     "CategoryTheory.Tor",
+     "CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj",
+     "CategoryTheory.Adjunction.derived",
+     "CategoryTheory.Tor'_obj_obj",
+     "CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory",
+     "CategoryTheory.Tor_obj",
+     "CategoryTheory.Adjunction.derivedε"
+    ],
+    "digest": "07d74e107cff75df"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary closed-module tensor Hom and Tor, or Adjunction.derived assuming existing derived functors, do not construct these arbitrary DG bimodule functors and exact adjunction."
+  },
+  {
+   "tool": "grep",
+   "query": "DGAlgebra|DGModule|differential.?graded|homotopically",
+   "results": {
+    "t": "2026-10-24T00:36:18Z",
+    "tool": "grep",
+    "query": "DGAlgebra|DGModule|differential.?graded|homotopically",
+    "sub": "",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Homology/DifferentialObject.lean",
+     "Mathlib/Algebra/Homology/DifferentialObject.lean",
+     "Mathlib/Algebra/Homology/DifferentialObject.lean",
+     "Mathlib/Algebra/Homology/DifferentialObject.lean",
+     "Mathlib/Algebra/Homology/DifferentialObject.lean"
+    ],
+    "digest": "b00540e86065b3f2"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary complexes, ordinary module tensor and general derivation machinery do not give the arbitrary DG bimodule construction and exact adjunction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor and derived Hom for arbitrary differential graded bimodules",
+   "results": {
+    "t": "2026-10-24T00:36:18Z",
+    "tool": "leansearch",
+    "query": "Derived tensor and derived Hom for arbitrary differential graded bimodules",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HasDerivedCategory.standard",
+     "HasDerivedCategory",
+     "Bimod.TensorBimod.X",
+     "dualTensorHomEquiv",
+     "Bimod.Hom",
+     "CategoryTheory.Functor.rightDerivedToHomotopyCategory",
+     "Bimod.tensorBimod",
+     "CategoryTheory.Functor.leftDerivedToHomotopyCategory"
+    ],
+    "digest": "298eda505447ffda"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary complexes, ordinary module tensor and general derivation machinery do not give the arbitrary DG bimodule construction and exact adjunction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DGModule\", \"Adjunction\"",
+   "results": {
+    "t": "2026-10-24T00:36:18Z",
+    "tool": "loogle",
+    "query": "\"DGModule\", \"Adjunction\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary complexes, ordinary module tensor and general derivation machinery do not give the arbitrary DG bimodule construction and exact adjunction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived tensor Hom adjunction for arbitrary differential graded A B bimodules",
+   "results": {
+    "t": "2026-10-24T00:36:19Z",
+    "tool": "leanfinder",
+    "query": "Unbounded derived tensor Hom adjunction for arbitrary differential graded A B bimodules",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HomologicalComplex.tensorHom",
+     "HomologicalComplex.ιTensorObj",
+     "HomologicalComplex.tensorObj",
+     "HomologicalComplex.HasTensor",
+     "HomologicalComplex.HasGoodTensor₁₂",
+     "HomologicalComplex.instHasTensorTensorUnit",
+     "HomologicalComplex.HasGoodTensor₂₃",
+     "HomologicalComplex.instHasTensorTensorUnit_1"
+    ],
+    "digest": "30e98ea748fb059a"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary complexes, ordinary module tensor and general derivation machinery do not give the arbitrary DG bimodule construction and exact adjunction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dg-qis-restriction-equivalence",
+  "date": "2026-10-24",
+  "group": "Q89"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 0CRM, lemma-countable, implication (2) to (1); derived.tex Tags 090Z, definition-derived-colimit and 0CRH, remark-map-from-derived-colimit, for the legs. Supporting input for 0CRM (2) to (1): the reduction to the countable subalgebra A' by Tag 09S6, lemma-qis-equivalence. Supporting input for Tag 09S6: Tag 09LT, lemma-tensor-hom-adjoint; its derived tensor and Hom constructions and the canonical tensor/Hom shift comparisons in the preceding sections.",
+   "via": [
+    "lem-sfb-dg-qis-restriction-equivalence",
+    "lem-sfb-dg-countable-compact-telescope",
+    "lem-sfb-space-countable-telescope",
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dg-bimodule-derived-adjunction",
+  "worker": "stage1",
+  "summary": "Read Stacks 09LT and its resolution constructions. Reused the existing one-object specializations of dg-category semi-free replacements and projectivity, and the existing DG projective localization comparison. Added three statement-only DG foundations; assembled universal exact derived functors and their explicit natural Hom bijections, including shift-compatible unit and counit. No statement correction was necessary.",
+  "blueprint": "Inherited direct-image prerequisite via Tag 0CRM and Tag 09S6: realizes precisely the cited Tag 09LT derived bimodule adjunction needed for restriction along a DG quasi-isomorphism. The latest unit/direct-image proof was read; its route was not replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-dg-semi-free-homotopically-projective",
+    "why": "Generic semi-free homotopical projectivity specialized to one object; the same-unit countable resolution would add a hypothesis."
+   },
+   {
+    "node": "lem-pur-resolving-class-essential-constancy",
+    "why": "Generic localization theorem for resolving classes, also applied in opposite categories; no replacement of the unit route."
+   },
+   {
+    "node": "lem-pur-left-derived-exact-when-defined",
+    "why": "Generic exactness of everywhere-defined triangulated derived functors; applies to DG homotopy categories and their opposites without assuming they are ordinary complex categories."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-dg-semi-free-homotopically-projective",
+  "lem-pur-resolving-class-essential-constancy",
+  "lem-pur-left-derived-exact-when-defined"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q59-7a63493a4",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-7a63493a4 (reviewer sub-agent of L); spot-checked: Read in full: the item (5 steps), all 3 new nodes, every cited statement, and Stacks dga.tex 09LT/09LS/09LI/09LN/09LM/0FQQ/09LR/09LH/0FQN/0FQR/09KU/09KS/09KY/09KW/09KX/09KJ plus derived 06XN. On live the item is still unsplit with an empty proof and the same statement, and there is no re-split note. The item's statement is correct (R=Z; sign conventions for the Hom action, the currying differential and the sign-free shifts checked on elements). Steps 1, 2, 4 and 5 are correct. Step 4 uses only the injective-target and projective-source comparisons, never flatness of N or injectivity of Hom(N,I). The new nodes are true, statement-only and self-contained: the injective node follows 09KU, 09KS and 09KY(2) (whose proof only uses homotopical injectivity); the localization node follows 09KJ, 09KW and 09KX; the tensor-Hom calculus node follows 09LN and 09LR/09LH with the 0FQN/0FQR identities. None restates the item, and none duplicates the trf nodes (commutative rings), the ringed-site node or the admissible-triangles node. One gap, repaired by FIX: step 3 builds U_N from the left-derived-exact node applied to opposite categories. That node needs triangulated D and D', a saturated compatible W^op and an exact F^op, and no cited statement gave these. I added an opposite clause to lem-sfb-dg-quasi-isomorphism-localization (opposite categories triangulated, Mathlib Opposite/Triangulated.lean:37; W^op saturated and compatible via MS5, MS6 and rotation; Q^op a localization). Step 3 now also cites the Mathlib leaf lem-sf-triangulated-functor-opposite for exactness of (Q_A G_N)^op, added to uses and proof_deps. Route-pivot points: the citation of lem-coef-dg-semi-free-homotopically-projective is accepted. It is justified at step 1 as the one-object specialization, it is a plain algebraic acyclicity lemma with its own proof and no proof_deps, its Lean module was kept at the pivot, and no DG-algebra 09KM node exists. The 'dg categor' wording appears only in that step-1 specialization. Tool uses accepted: the coef node and two generic pur localization nodes (sk-def-sf-operations). No SGA.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DgBimoduleDerivedAdjunction",
+  "declaration": "CategoryTheory.DgAlgebra.bimodule_derived_tensor_hom_adjunction",
+  "file": "lean/Sheaf/CategoryTheory/DgBimoduleDerivedAdjunction.lean",
+  "statement": "theorem bimodule_derived_tensor_hom_adjunction (A B : Algebra.{u}) [DerivedStructure A] [DerivedStructure B] (N : Bimod A B) : ∃ (F : RightModule A ⥤ RightModule B) (G : RightModule B ⥤ RightModule A) (t : BalancedTensorModel N F) (h : BimoduleHomModel N G) (a : F ⊣ G), IsBimoduleCurrying N t h a ∧ ∃ (T : Derived A ⥤ Derived B) (U : Derived B ⥤ Derived A) (α : Q A ⋙ T ⟶ F ⋙ Q B) (β : G ⋙ Q A ⟶ Q B ⋙ U) (_sT : T.CommShift ℤ) (_sU : U.CommShift ℤ) (adj : T ⊣ U), T.IsRightKanExtension α ∧ U.IsLeftKanExtension β ∧ T.IsTriangulated ∧ U.IsTriangulated ∧ adj.CommShift ℤ ∧ (∀ (Y : RightModule B), ∃ (I : RightModule B) (i : Y ⟶ I), quasiIsomorphisms B i ∧ IsHomotopicallyInjective B I) ∧ (∀ (I : RightModule B), IsHomotopicallyInjective B I → IsIso (β.app I)) ∧ (∀ (M : RightModule A) (Y : RightModule B) (g : F.obj M ⟶ Y), adj.homEquiv ((Q A).obj M) ((Q B).obj Y) (α.app M ≫ (Q B).map g) = (Q A).map (a.homEquiv M Y g) ≫ β.app Y) ∧ (∀ (M S : RightModule A) (e : ShiftComparison A 1 M S), ∃ eF : ShiftComparison B 1 (F.obj M) (F.obj S), IsTensorShift N t 1 M S e eF ∧ T.map (DerivedStructure.shiftIso 1 M S e).hom ≫ (Functor.commShiftIso T (1 : ℤ)).hom.app ((Q A).obj M) ≫ (α.app M)⟦(1 : ℤ)⟧' = α.app S ≫ (DerivedStructure.shiftIso 1 (F.obj M) (F.obj S) eF).hom) ∧ (∀ (Y S : RightModule B) (e : ShiftComparison B 1 Y S), ∃ eG : ShiftComparison A 1 (G.obj Y) (G.obj S), IsHomShift N h 1 Y S e eG ∧ β.app S ≫ U.map (DerivedStructure.shiftIso 1 Y S e).hom ≫ (Functor.commShiftIso U (1 : ℤ)).hom.app ((Q B).obj Y) = (DerivedStructure.shiftIso 1 (G.obj Y) (G.obj S) eG).hom ≫ (β.app Y)⟦(1 : ℤ)⟧')",
+  "branch": "sheaf-dag",
+  "by": "Q73",
+  "date": "2026-10-24",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-39e22f43d"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-39e22f43d",
+  "group": "Q73",
+  "result": "fix",
+  "note": "Read item, 3 stmt_deps, landed DgAlgebraDerivedCategory, both delivered modules and Stacks dga.tex 09LN/09LT/0FQN/0FQR. All clauses match: Bimod N; BalancedTensorModel coequalizer + induced B-action; BimoduleHomModel injective onto right-linear cochains, delta = d f-(-1)^r f d, (fa)(n)=f(an); currying pinned; T right Kan / U left Kan (correct directions); h-injective resolutions + beta iso; homEquiv normalization; IsTriangulated; adj.CommShift; no extra hypotheses or universes. No duplicate or name clash (live, O1, Q46, Q16); record diff only lean+stmt_deps; statements verbatim; 12 declarations match; docstrings and 5 steps present. Finding (H3): shift squares over all k tie commShiftIso k to DerivedStructure.shiftIso k, which has no additivity coherence; shiftIso' n=(-1)^{n(n-1)/2} shiftIso n is a valid instance, and with it on B the squares contradict CommShift.add at 1+1, so the theorem is false. FIX: squares at k=1 only (a Z-CommShift is determined by degree one); fixes/DgBimoduleDerivedAdjunction.lean + fixes/lem-sfb-dg-bimodule-derived-adjunction.lean-record.json; refit_record OK; nt_compile --json clean (17.6 s / 2.8 s). Advisories: DerivedStructure shift coherence; redundant KanExtension import in the models module."
+ }
+}

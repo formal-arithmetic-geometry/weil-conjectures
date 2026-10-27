@@ -1,0 +1,164 @@
+{
+ "id": "lem-sfb-condensed-tensor-presheaf",
+ "kind": "statement",
+ "title": "The concrete balanced tensor presheaf",
+ "statement": "For a commutative condensed ring R, a profinite group P and a closed subgroup H, the concrete finite-sum quotients of [def-sfb-condensed-tensor-induction-data] form a TensorInductionPresheaf R P H, including the section identifications and every specified restriction, functor-map, left-action and naturality formula. The finite-sum quotient also has the semilinear balanced universal property: every additive, semilinear-in-m balanced family v(p,m) admits a unique semilinear quotient map, and maps from the quotient agree if they agree on pure tensors.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Agent-formulated induction argument below paragraph (3); The concrete balanced tensor presheaf. External reference WANTED, as for the parent."
+ },
+ "stmt_deps": [
+  "def-sfb-condensed-tensor-induction-data"
+ ],
+ "proof": [
+  {
+   "text": "The quotient symbols are additive and scalar-linear in the module variable and satisfy balancing: each difference is one of the spanning relations.",
+   "uses": [
+    "def-sfb-condensed-tensor-induction-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Induction step 2, defining relations"
+   }
+  },
+  {
+   "text": "For a semilinear family v(p,m) satisfying these three relations, sum sigma(a)v(p,m) on finite formal sums and descend through the quotient. The spanning relations are in the kernel. Maps from the quotient agree if they agree on pure symbols, by linearity of finite sums.",
+   "uses": [
+    "def-sfb-condensed-tensor-induction-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Induction steps 2--3, universal quotient map"
+   }
+  },
+  {
+   "text": "Apply the quotient map to restriction of coefficients, precomposition of p and restriction of m. Naturality of the action preserves balancing. Check identity and composition on generators. Equivariant module morphisms act on the second variable; equivariance preserves balancing, and naturality and functor laws hold on generators.",
+   "uses": [
+    "def-sfb-condensed-tensor-induction-data",
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Induction steps 2--3, restrictions and maps"
+   }
+  },
+  {
+   "text": "Left multiplication of the first variable preserves balancing by associativity and gives linear endomorphisms. The monoid laws and compatibility with restrictions hold on generators, hence on all quotient sections. Package these constructions with identity section isomorphisms.",
+   "uses": [
+    "def-sfb-condensed-tensor-induction-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Induction step 3, left action"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-condensed-tensor-induction-data",
+  "def-sfb-condensed-action-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Induction proof steps specified in the Lean docstring and inherited from the parent argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "universal balanced group algebra tensor presheaf and equivariant module sheafification",
+   "results": "PresheafOfModules.sheafify, sheafifyMap, sheafification, toSheafify, Sheafify.module, and toSheaf_map_sheafificationHomEquiv_symm.",
+   "date": "2026-10-26",
+   "verdict": "Ordinary module sheafification is used; none states balanced induction over varying section rings with internal continuous group action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of balanced group algebra tensor induction is left adjoint to restriction of internal group actions on sheaves of modules",
+   "results": "PresheafOfModules.sheafificationAdjunction; Rep.indResAdjunction; fixed-ring restriction adjoints. Loogle Rep.indResAdjunction confirms the abstract fixed-ring statement.",
+   "date": "2026-10-26",
+   "verdict": "No direct match; use the ordinary sheafification API and prove the balanced-generator argument."
+  },
+  {
+   "tool": "grep",
+   "query": "indResAdjunction|TensorInductionPresheaf|Equivariant.*sheafif",
+   "results": "Mathlib.RepresentationTheory.Induced, the item, CondensedSplitCosetInduction, and EquivariantModuleSheafificationReflector.",
+   "date": "2026-10-26",
+   "verdict": "Split-coset induction has a stronger hypothesis and is unproved; the proved reflector supplies the sheafification step, not the tensor presheaf or normalized Frobenius transposes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CondensedTensorInductionAdjunction",
+  "group": "E2",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), induction argument: The concrete balanced tensor presheaf",
+   "via": [
+    "lem-sfb-condensed-tensor-induction-adjunction",
+    "lem-sfb-condensed-split-coset-induction",
+    "lem-sfb-derived-invariants-normal-subgroup-comparison",
+    "lem-sfb-prime-to-ell-derived-invariants-reduction",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CondensedTensorInductionPresheaf",
+  "file": "lean/Sheaf/CategoryTheory/CondensedTensorInductionPresheaf.lean",
+  "declaration": "Profinite.CondensedAction.tensorInductionPresheaf_exists",
+  "statement": "theorem tensorInductionPresheaf_exists : Nonempty (TensorInductionPresheaf R P H)",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-26",
+  "declarations": [
+   "Profinite.CondensedAction.tensorInductionPresheaf_exists",
+   "Profinite.CondensedAction.inductionTensorLift_unique",
+   "Profinite.CondensedAction.inductionTensor_hom_ext"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-7249c",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261026T081602-L-2013109",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-7249c",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261026T081602-L-2013109",
+  "kind": "interface",
+  "note": "independent cc review: moved data block vs clone item (byte-identical), item theorem statement vs clone, item/new node lean records and proof_deps vs Lean, ActionModule definition vs the two sorried statements"
+ }
+}

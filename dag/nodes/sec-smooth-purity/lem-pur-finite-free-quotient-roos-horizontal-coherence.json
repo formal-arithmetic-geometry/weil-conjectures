@@ -1,0 +1,144 @@
+{
+ "id": "lem-pur-finite-free-quotient-roos-horizontal-coherence",
+ "kind": "statement",
+ "title": "Horizontal coherence of normalized finite free quotient Roos comparisons",
+ "statement": "On an essentially small site with independent module and derived universes, take scalar extension models E_a,E_b,E_ba and an ordinary natural associator E_a E_b ≅ E_ba satisfying the balanced pure-tensor formula. Suppose V is finite free over S. Let ra, rb and rba be actual representative Roos comparisons for a fixed complex, with exponents e,f,ef≥1, satisfying their quotient augmentation formulas [lem-pur-finite-free-completion-exchange]. Then there is a comparison restricted to the e-subsequence whose finite-stage maps are exactly the selected maps of rb. Its horizontal cochain equation with ra and rba holds on the actual signed Roos cones. Arithmetic restriction gives the commuting square, composition rb.a followed by the e-restriction equals restricted.a, and its naturality square with the output associator. All equalities are before derived localization. The arithmetic map is precisely [def-pur-arithmetic-roos-map]. No derived completion functor occurs.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, lemma-derived-limit-is-ok, product-cone calculation; Stacks sites-modules.tex Tag 03EK for scalar tensor products."
+ },
+ "stmt_deps": [
+  "lem-pur-finite-free-completion-exchange",
+  "def-pur-arithmetic-roos-map",
+  "def-pur-roos-representative-composition"
+ ],
+ "proof": [
+  {
+   "text": "Finite freeness of V over S identifies extension followed by restriction with a finite power. Restriction preserves products and reflects isomorphisms, so extension preserves products; this includes rank zero. Reindex the finite-stage comparison rb along e and identify its target index with ef. Apply the canonical product-cone comparison to construct restricted.",
+   "uses": [
+    "lem-pur-finite-free-scalar-extension",
+    "lem-pur-roos-additive-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Quotient augmentations are epimorphisms, being inverse unit maps followed by tensor images of quotient projections. Cancel their scalar images. The three quotient formulas and naturality of the ordinary associator identify the finite-stage horizontal maps. Project to each product factor and both signed cone coordinates to obtain the horizontal equation.",
+   "uses": [
+    "def-pur-principal-quotient-completion-model",
+    "lem-pur-roos-comparison-horizontal-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Selection and finite transition sums commute with additive comparison. The two cone coordinates give the arithmetic square. Compose the finite blocks and regroup the transition sums to get the block of length ef; selected indices obey the same formula. Naturality with respect to the output tower map gives the last square.",
+   "uses": [
+    "lem-pur-roos-additive-comparison",
+    "lem-fix-cofinal-roos-restriction",
+    "def-pur-arithmetic-roos-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-finite-free-scalar-extension",
+  "lem-pur-roos-additive-comparison",
+  "def-pur-principal-quotient-completion-model",
+  "lem-pur-roos-comparison-horizontal-coherence",
+  "lem-fix-cofinal-roos-restriction",
+  "def-pur-arithmetic-roos-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, lemma-derived-limit-is-ok, product-cone calculation; Stacks sites-modules.tex Tag 03EK for scalar tensor products."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The product and cone comparison for an additive functor commutes with arithmetic subsequences and composition of scalar extension",
+   "results": "MappingCone.mapHomologicalComplexXIso and preservation of finite products by additive functors; no arithmetic Roos coherence theorem.",
+   "date": "2026-10-24",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Arithmetic subsequence restriction of a Roos mapping fiber commutes with tensor product and composition of finite free ring extensions",
+   "results": "Ordinary tensor scalar restriction and cotangent comparison results; no Roos coherence statement.",
+   "date": "2026-10-24",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Roos\"",
+   "results": "Slice-category RooSlice names; no relevant result.",
+   "date": "2026-10-24",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "strictRoosMapOfSquare|arithmeticRoosMap",
+   "results": "No Mathlib declaration; the project implements these maps.",
+   "date": "2026-10-24",
+   "verdict": "Reuse the project strict Roos API."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FiniteFreeCompletionExchangeCoherence",
+  "date": "2026-10-24",
+  "group": "B4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "Cochain portion of proof steps 3--4, before localization.",
+   "via": [
+    "lem-pur-finite-free-completion-exchange-coherence",
+    "lem-pur-integral-operations-scalar-extension"
+   ]
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FiniteFreeQuotientRoosHorizontalCoherence",
+  "file": "lean/Sheaf/Algebra/Homology/FiniteFreeQuotientRoosHorizontalCoherence.lean",
+  "declaration": "CategoryTheory.PrincipalQuotientCompletion.finiteFreeQuotientRoosHorizontalCoherence",
+  "statement": "theorem finiteFreeQuotientRoosHorizontalCoherence\n    (Fa : SheafOfModules.DerivedChangeOfRingsCochainModel.{u, v, r, wR, wS} a)\n    (Fb : SheafOfModules.DerivedChangeOfRingsCochainModel.{u, v, r, wS, wV} b)\n    (Fba : SheafOfModules.DerivedChangeOfRingsCochainModel.{u, v, r, wR, wV} (a ≫ b))\n    (ordinary : Fa.E ⋙ Fb.E ≅ Fba.E)\n    (balanced : ∀ M (U : Cᵒᵖ) (s : S.obj.obj U) (q : V.obj.obj U) (x : M.val.obj U),\n      (ordinary.hom.app M).val.app U\n        (scalarTensorSection Fb (Fa.E.obj M) U q (scalarTensorSection Fa M U s x)) =\n          scalarTensorSection Fba M U (b.hom.app U s * q) x)\n    (hfreeV : ∃ d : ℕ, Nonempty\n      ((SheafOfModules.restrictScalars\n        ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map b)).obj\n          (SheafOfModules.unit (SheafOfModules.derivedChangeRingIndependentCoefficients J V)) ≅\n        ∐ (fun _ : Fin d ↦ SheafOfModules.unit\n          (SheafOfModules.derivedChangeRingIndependentCoefficients J S))))\n    (t : (SheafOfModules.unit\n      (SheafOfModules.derivedChangeRingIndependentCoefficients J R)).sections)\n    (vS : (SheafOfModules.unit\n      (SheafOfModules.derivedChangeRingIndependentCoefficients J S)).sections)\n    (w : (SheafOfModules.unit\n      (SheafOfModules.derivedChangeRingIndependentCoefficients J V)).sections)\n    (e f : ℕ) (he : 1 ≤ e) (hf : 1 ≤ f)\n    (P : CochainComplex (ringedSiteModules.{r}\n      (SheafOfModules.derivedChangeRingIndependentCoefficients J R)) ℤ)\n    (ra : RepresentativeRoosComparison Fa.E (sourceTower t P) (targetTower Fa vS P) e)\n    (rb : RepresentativeRoosComparison Fb.E (targetTower Fa vS P)\n      (targetTower Fb w ((extendedComplex Fa).obj P)) f)\n    (rba : RepresentativeRoosComparison Fba.E (sourceTower t P) (targetTower Fba w P) (e * f))\n    (hqa : ∀ n : ℕ, (extendedComplex Fa).map (quotientMap R t P n) ≫\n      ra.β.hom.app (op n) = quotientMap S vS ((extendedComplex Fa).obj P)\n        (e * (n + 1) - 1))\n    (hqb : ∀ n : ℕ, (extendedComplex Fb).map\n      (quotientMap S vS ((extendedComplex Fa).obj P) n) ≫ rb.β.hom.app (op n) =\n      quotientMap V w ((extendedComplex Fb).obj ((extendedComplex Fa).obj P))\n        (f * (n + 1) - 1))\n    (hqba : ∀ n : ℕ, (extendedComplex Fba).map (quotientMap R t P n) ≫\n      rba.β.hom.app (op n) = quotientMap V w ((extendedComplex Fba).obj P)\n        ((e * f) * (n + 1) - 1)) :\n    ∃ d : RepresentativeComposition ordinary\n        (sourceTower t P) (targetTower Fa vS P)\n        (targetTower Fb w ((extendedComplex Fa).obj P)) (targetTower Fba w P)\n        ((quotientTower V w).map\n          ((Functor.mapHomologicalComplexCompIso ordinary (.up ℤ)).hom.app P))\n        e f he ra rb rba,\n      roosF.map ((quotientTower V w).map\n          ((Functor.mapHomologicalComplexCompIso ordinary (.up ℤ)).hom.app P)) ≫ rba.a =\n        d.restricted.a ≫ roosF.map ((complexRestriction _ (e * f)).map\n          ((quotientTower V w).map\n            ((Functor.mapHomologicalComplexCompIso ordinary (.up ℤ)).hom.app P)))",
+  "branch": "sheaf-dag",
+  "existing": false,
+  "by": "B4",
+  "date": "2026-10-24"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-9c075",
+  "group": "B4",
+  "result": "fix",
+  "landing": "20261025T201357-L-2465468",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-9c075",
+  "group": "B4",
+  "result": "fix",
+  "landing": "20261025T201357-L-2465468",
+  "kind": "interface",
+  "note": "independent cc review: item signatures byte-identical to live; split lemma checked clause by clause against RepresentativeRoosComparison/index/block/selection; 26 importers compiled against the delivered set and against published PQCM/FFCE"
+ }
+}

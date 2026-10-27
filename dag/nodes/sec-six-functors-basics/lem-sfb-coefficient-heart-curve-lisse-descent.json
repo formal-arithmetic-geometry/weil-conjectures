@@ -1,0 +1,312 @@
+{
+ "id": "lem-sfb-coefficient-heart-curve-lisse-descent",
+ "kind": "statement",
+ "title": "Descent of lisse condensed-coefficient modules across a surjective closed immersion",
+ "statement": "Let $t:T\\hookrightarrow W$ be a surjective closed immersion of schemes [def-weil-closed-immersion, def-weil-surjective-morphism], and let $\\Lambda$ be a commutative condensed ring. Use the small pro-étale sites and internal modules over the pulled-back coefficient rings $\\Lambda_Y=p_Y^*\\Lambda$ [sk-def-sfb-condensed-ring, sk-def-sfb-pulled-back-coefficients, sk-def-sfb-module-objects]. Let $M$ be a $\\Lambda_W$-module and $t^*$ the actual coefficient-module inverse image [sk-def-sfb-module-pushforward-pullback]. Then $M$ is lisse if and only if $t^*M$ is lisse, where lisse means locally finite free for a pro-étale covering, with rank zero allowed [def-sfb-lisse-coefficient-module]. More explicitly, given a pro-étale covering $\\{C_a\\to T\\}$ and trivializations $(t^*M)|_{C_a}\\cong\\Lambda_{C_a}^{r_a}$, there are a pro-étale covering $\\{B_b\\to W\\}$ and, for each $b$, an index $a(b)$ and a map $T_b=B_b\\times_WT\\to C_{a(b)}$ over $T$ such that $M|_{B_b}\\cong\\Lambda_{B_b}^{r_{a(b)}}$. The latter isomorphisms pull back along $t_b:T_b\\to B_b$ to the prescribed pulled-back trivializations under the Cartesian coefficient identifications. No Noetherianity, reducedness, uniform rank, or bound on nilpotence is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart.proof.md",
+  "place": "Final curve paragraph: descent of finite free local models from the scheme fibre product; retained proof step 9. Supporting Stacks: proetale.tex Tag 09AB, lemma-thickening; the cover-refinement and actual condensed-module consequences are stated by the existing cited tools, not assumed from a discrete-coefficient comparison."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-pushforward-pullback",
+  "def-weil-closed-immersion",
+  "def-weil-surjective-morphism",
+  "def-sfb-lisse-coefficient-module",
+  "def-pc-fibre-product",
+  "def-weil-pbc-proetale-site"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing canonical coefficientHeartFiniteFreePullbackIso. Its unchanged definition applies the finite-biproduct comparison of actual coefficient pullback, then the extension/restriction comparison along the invertible coefficient map and the regular-module isomorphism. This is already the required finite-free normalization, including rank zero. No separate finite-free-transport or slice-localization theorem is needed, because the statement uses the actual coefficient-module pullbacks throughout.",
+   "uses": [
+    "def-sfb-module-upper-star",
+    "lem-sfb-alpha-iso",
+    "def-sfb-modobj-extension-along-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/_section.md",
+    "place": "Pullback formula; proetale slice restriction: sites.tex Tag 00Y0 (definition-localize); finite-free transport and coefficient comparison"
+   }
+  },
+  {
+   "text": "Suppose $M$ is lisse. Choose its covering $\\{U_i\\to W\\}$ and finite-free isomorphisms as in the definition. The family $\\{T\\times_W U_i\\to T\\}$ is a cover: its arrows are weakly etale by base change, and it is fpqc by covering base change. Pull back each chosen isomorphism. The module composition isomorphisms identify its source with the restriction of $t^*M$ to $T\\times_WU_i$; the maps $\\kappa$ of step 1 identify its target with the same finite rank free coefficient module there. Thus $t^*M$ is lisse.",
+   "uses": [
+    "def-sfb-lisse-coefficient-module",
+    "lem-weil-pbc-weakly-etale-composition-base-change",
+    "lem-galois-fpqc-covering-base-change",
+    "def-weil-pbc-proetale-site",
+    "def-sfb-module-upper-star-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 022D (lemma-fpqc), part (3); weakly etale base change Tag 094U; slice pullback and lisse definition"
+   }
+  },
+  {
+   "text": "Apply Mathlib Precoverage.Small for the proetale precoverage (definitionally propQCPrecoverage WeaklyEtale), and restrictIndexOfSmall to obtain a u-small subcover with its selection map into the original arbitrary-universe cover. Apply exists_cover_refinement_surjective_closed to this subcover. Identify each supplied cartesian object with the chosen pullback using IsPullback.isoPullback, and compose its inverse with the refinement map. The equation over T follows from isoPullback_inv_snd. The selected original indices and their ranks are retained. The standard closed-immersion and surjectivity base-change instances apply directly to each pullback.fst; no universal-homeomorphism comparison theorem is needed.",
+   "uses": [
+    "new-lem-weil-pbc-proetale-surjective-closed-cover-refinement",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AB (lemma-thickening), affine ind-etale cover refinement; Tag 09BK (lemma-closed-immersion-affines); base-changed closed fibres"
+   }
+  },
+  {
+   "text": "On each refined closed fibre form gamma using the unchanged coefficientHeartRefinementPullbackIso, then beta = gamma followed by the refinement pullback of the specified phi and coefficientHeartFiniteFreePullbackIso. All objects are the actual coefficient-module inverse images in the statement, so this construction requires only the existing composition isomorphisms, without a slice-section localization theorem.",
+   "uses": [
+    "def-sfb-module-upper-star-comp"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/_section.md",
+    "place": "Composition isomorphisms; sites.tex Tag 00Y0 and Tag 03EH (lemma-relocalize), keeping the chosen trivialization"
+   }
+  },
+  {
+   "text": "The existing condensedSurjectiveClosedPullback_isEquivalence makes the actual coefficient pullback F on each closed fibre full and faithful. Apply Mathlib Functor.preimageIso to beta followed by the inverse of the canonical finite-free comparison kappa. The private abstract-functor lemma lift_compatible_iso proves F.map psi.hom followed by kappa.hom = beta.hom using Functor.map_preimage and the inverse identity of kappa. This is exactly the required equality with the prescribed trivialization.",
+   "uses": [
+    "new-lem-weil-pbc-condensed-surjective-closed-equivalence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AB (lemma-thickening), lifted by the existing condensed-module equivalence; full faithfulness lifts the chosen isomorphism and its inverse"
+   }
+  },
+  {
+   "text": "The covering $\\{B_b\\to W\\}$ and the isomorphisms $u_b:M|_{B_b}\\xrightarrow{\\sim}\\Lambda_{B_b}^{\\oplus r_{a(b)}}$ satisfy the definition of lisse. Together with step 2 this proves both directions and the more explicit assertion. The proof selects a rank separately for each member, and never uses its uniqueness. Rank zero uses the empty biproduct in step 1. If $W$ is empty, its empty covering suffices; if the input family is empty then it covers only empty $T$, and surjectivity forces empty $W$. No Noetherian or nilpotence-bound assumption occurs in either of the two geometric tools.",
+   "uses": [
+    "def-sfb-lisse-coefficient-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/_section.md",
+    "place": "Final curve statement: descent of the lisse module in retained parent step 7 (formerly step 9); empty and zero-rank cases"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-lisse-coefficient-module",
+  "def-sfb-modobj-extension-along-iso",
+  "def-sfb-module-upper-star",
+  "def-sfb-module-upper-star-comp",
+  "def-weil-pbc-proetale-site",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-sfb-alpha-iso",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "new-lem-weil-pbc-condensed-surjective-closed-equivalence",
+  "new-lem-weil-pbc-proetale-surjective-closed-cover-refinement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AB and 09BK; C3 Lean assembly of the existing cover-refinement and condensed-module-equivalence theorems, Mathlib small-subcover selection and full-faithful isomorphism lifting, 2026-10-23."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "surjective|closed immersion|condensed|coefficient",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no usable result: the subdirectory argument accidentally repeated Mathlib/; corrected source grep below is the search used for the verdict"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIso, Sheaf, Pullback, Equivalence",
+   "results": "0 hits: ; loogle: unknown identifier 'IsIso'",
+   "date": "2026-10-22",
+   "verdict": "no usable pattern result; semantic searches and corrected qualified-name pattern below were used"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite free coefficient module descends across a surjective closed immersion and proves lisse on an open neighborhood",
+   "results": "8 hits: Module.FinitePresentation.exists_free_localizedModule_powers, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, Module.finitePresentation_of_free_of_surjective, Module.isOpen_freeLocus, Module.free_of_isLocalizedModule, AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact', Module.freeLocus",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state the scheme-and-internal-coefficient assertion, nor specialize to all its conclusions in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite free coefficient module descends across a surjective closed immersion and proves lisse on an open neighborhood",
+   "results": "8 hits: AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.IsEtale, AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion, AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state the scheme-and-internal-coefficient assertion, nor specialize to all its conclusions in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "surjective.closed|IsLisse|LocallyFree|proetale",
+   "results": "16 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state the scheme-and-internal-coefficient assertion, nor specialize to all its conclusions in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "pullback of a condensed coefficient module by a surjective closed immersion is locally finite free if and only if the original is locally finite free",
+   "results": "0 hits: ; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsEquivalence",
+   "results": "12 hits: CategoryTheory.Functor.isEquivalence_refl, CategoryTheory.Functor.IsEquivalence, CategoryTheory.Equivalence.isEquivalence_functor, CategoryTheory.Equivalence.isEquivalence_inverse, CategoryTheory.Functor.asEquivalence, CategoryTheory.Functor.inv, CategoryTheory.Functor.IsEquivalence.essSurj, CategoryTheory.Functor.IsEquivalence.faithful",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state the scheme-and-internal-coefficient assertion, nor specialize to all its conclusions in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback of a condensed coefficient module by a surjective closed immersion is locally finite free if and only if the original is locally finite free",
+   "results": "8 hits: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.freeFunctorCompPullbackIso, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state the scheme-and-internal-coefficient assertion, nor specialize to all its conclusions in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An internal module over a condensed coefficient ring is locally finite free on the pro etale site if and only if its pullback by a surjective closed immersion is locally finite free",
+   "results": "8 hits: LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', Condensed.finFree, LightCondensed.isLocallySurjective_iff_locallySurjective_on_lightProfinite, SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation",
+   "date": "2026-10-22",
+   "verdict": "no match: the retrieved declarations concern discrete condensed modules, general equivalences, or unrelated scheme properties; none states cover refinement and compatible finite-free descent for actual internal condensed coefficient modules"
+  },
+  {
+   "tool": "grep",
+   "query": "surjective.closed|[Ii]sLisse|[Ll]isse|thickening",
+   "results": "Subdirectory AlgebraicGeometry. 2 hits: Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean, Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the retrieved declarations concern discrete condensed modules, general equivalences, or unrelated scheme properties; none states cover refinement and compatible finite-free descent for actual internal condensed coefficient modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsEquivalence, CategoryTheory.Iso",
+   "results": "12 hits: CategoryTheory.Functor.isEquivalence_of_iso, CategoryTheory.Functor.isEquivalence_iff_of_iso, CategoryTheory.Functor.IsEquivalence.mk', CategoryTheory.Functor.mapCoconeInvMapCocone, CategoryTheory.Functor.mapConeInvMapCone, CategoryTheory.Functor.mapCoconeMapCoconeInv, CategoryTheory.Functor.mapConeMapConeInv, CategoryTheory.Limits.compNatIso",
+   "date": "2026-10-22",
+   "verdict": "no match: the retrieved declarations concern discrete condensed modules, general equivalences, or unrelated scheme properties; none states cover refinement and compatible finite-free descent for actual internal condensed coefficient modules"
+  },
+  {
+   "tool": "grep",
+   "query": "LocallyFree|locallyFree|IsLocallyConstant|IsEquivalence",
+   "results": "Subdirectory Condensed. 3 hits: Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/LocallyConstant.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the retrieved declarations concern discrete condensed modules, general equivalences, or unrelated scheme properties; none states cover refinement and compatible finite-free descent for actual internal condensed coefficient modules"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A condensed coefficient module is lisse if its inverse image under a surjective closed immersion of schemes is lisse",
+   "results": "8 hits: CondensedMod.isDiscrete_tfae, LightCondensed.IsDiscrete, LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, CondensedMod, CondensedMod.LocallyConstant.functor, CondensedMod.LocallyConstant.instFullModuleCatSheafCompHausCoherentTopologyConstantSheaf, CondensedMod.epi_iff_locallySurjective_on_compHaus, CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor",
+   "date": "2026-10-22",
+   "verdict": "no match: the retrieved declarations concern discrete condensed modules, general equivalences, or unrelated scheme properties; none states cover refinement and compatible finite-free descent for actual internal condensed coefficient modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Topological invariance of pro etale sheaves under thickenings lifts any chosen finite free local trivialization of a module with condensed ring coefficients",
+   "results": "8 hits: CondensedMod.ofSheafProfinite, LightCondMod.ofSheafLightProfinite, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtaleTopology, Algebra.basicOpen_subset_etaleLocus_iff, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.Scheme.Etale.forget",
+   "date": "2026-10-22",
+   "verdict": "no match: the retrieved declarations concern discrete condensed modules, general equivalences, or unrelated scheme properties; none states cover refinement and compatible finite-free descent for actual internal condensed coefficient modules"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "sk-lem-coefficient-heart",
+  "date": "2026-10-22",
+  "group": "Q11"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-coefficient-heart",
+ "blueprint": {
+  "from": {
+   "node": "sk-lem-coefficient-heart",
+   "place": "Final curve paragraph of sk-lem-coefficient-heart/_section.md; the lisse descent used in parent proof step 7 (retained former step 9), after passing to the actual surjective closed fibre product.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-coefficient-heart-curve-lisse-descent",
+  "worker": "stage1",
+  "summary": "Preserved every clause and hypothesis. Reused existing geometric cover refinement and arbitrary condensed-module equivalence, with explicit finite-free pullback and a full-faithfulness lift of the chosen trivialization and its inverse. Added no nodes; supplied verbatim citations and self-review. Existing finite discrete coefficient invariance was not used for arbitrary condensed coefficients.",
+  "blueprint": "Final curve paragraph of the unit statement and retained parent step 7: the generic open fibre-product module is lisse by this descent. The six steps give both directions, the lifted cover, and the exact normalization of every specified trivialization.",
+  "tool_uses": [
+   {
+    "node": "new-lem-weil-pbc-condensed-surjective-closed-equivalence",
+    "why": "Actual internal condensed coefficient pullback is an equivalence for a surjective closed immersion; used only to lift an isomorphism by full faithfulness. No node of this unit supplies it for arbitrary condensed rings."
+   },
+   {
+    "node": "new-lem-weil-pbc-proetale-surjective-closed-cover-refinement",
+    "why": "Lifts and refines the input pro-etale cover with explicit cartesian closed fibres; a geometric tool needed by the curve descent, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+    "why": "Its statement explicitly says every base change is again a surjective closed immersion, needed to apply the equivalence on each refined member."
+   },
+   {
+    "node": "lem-sfb-coefficient-sections-localization",
+    "why": "Identifies abelian inverse image along a pro-etale site object with slice restriction, with the actual condensed coefficient map; required to interpret the given slice trivializations."
+   },
+   {
+    "node": "lem-sfb-monoidal-finite-free-transport",
+    "why": "General additive strong monoidal transport of finite-free modules, including empty biproducts and the specified basis maps."
+   },
+   {
+    "node": "lem-sfb-alpha-iso",
+    "why": "Gives the Cartesian coefficient isomorphism for every condensed ring, not just the admissible adic coefficient list."
+   }
+  ]
+ },
+ "tool_uses": [
+  "new-lem-weil-pbc-condensed-surjective-closed-equivalence",
+  "new-lem-weil-pbc-proetale-surjective-closed-cover-refinement",
+  "lem-sfb-alpha-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-70c04ddec",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-70c04ddec (reviewer sub-agent of L); spot-checked: PASS, no fixes. This is a first split: the item was created 2026-10-22 with an empty proof and has no repair note. The delivery adds no new nodes, the statement is preserved in full (arbitrary scheme and commutative condensed Λ, rank 0 and varying ranks, explicit refinement plus compatibility with the given trivializations), and no SGA is used. Source check: I read Stacks proetale.tex 09AB lemma-thickening (pro-étale topoi equivalent under an integral, universally injective, surjective map) and 09BK lemma-closed-immersion-affines. The parent's step 7 uses the item exactly as stated. Step 1: module-upper-star = Ext_α∘mapMod; alpha-iso holds for every condensed ring; finite-free transport includes n=0; Ext along an iso = Res along its inverse; the localization node gives the slice-restriction identification. Together these give κ_{f,n}, which is correct. Step 2: base change of the cover is weakly étale (094U) and fpqc (022D(3)), with composition isos and κ; correct. Step 3: the u-small subfamily selection is valid, since the fpqc condition needs only finitely many witnesses per affine open of T. The Lean signature of cover-refinement (IsPullback q p (B.f b) i, r ≫ C.f a = p) gives exactly the data used, and the universal-homeomorphism node gives that every base change is a surjective closed immersion. Steps 4–5 are elementary: β_b carries the prescribed φ_a, and full faithfulness lifts e_b and its inverse. I checked CondensedSurjectiveClosedEquivalence.lean (0 sorry): CondensedRing.upperStar = extendScalars(condensedPullbackHom)∘mapMod(upperStar Ab), the same functor as def-sfb-module-upper-star, for any commutative condensed Λ. Edge cases: T empty forces W empty; rank 0; zero ring; non-nilpotent nil ideals. Duplicates: lem-sfb-surjective-closed-module-invariance covers finite discrete A only, and common-stratification-lisse covers E or Q̄_ℓ restriction only; I found no node that states this descent. I accept the 6 declared tool_uses as generic black boxes. Advisory: source.place on the proof.md file says 'step 9' while the paragraph is in _section.md; blueprint.from.place is correct."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CoefficientHeartCurveLisseDescent",
+  "declaration": "AlgebraicGeometry.ProEtale.coefficientHeart_curve_lisse_descent",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.coefficientHeartFiniteFreePullbackIso",
+   "AlgebraicGeometry.ProEtale.coefficientHeartRefinementPullbackIso",
+   "AlgebraicGeometry.ProEtale.coefficientHeart_curve_lisse_descent"
+  ],
+  "file": "lean/Sheaf/Paper/CoefficientHeartCurveLisseDescent.lean",
+  "statement": "theorem coefficientHeart_curve_lisse_descent (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] {W T : Scheme.{u}} (t : T ⟶ W) [IsClosedImmersion t] [Surjective t] (M : Mod (Sheaf (Scheme.ProEt.topology W) Ab.{u + 1}) (condensedRingObj Λ W)) : (IsLisseCoefficientModule Λ M ↔ IsLisseCoefficientModule Λ ((CondensedRing.upperStar Λ t).obj M)) ∧ ∀ (C : Scheme.Cover.{v} Scheme.proetalePrecoverage T) (r : C.I₀ → ℕ) (φ : ∀ a : C.I₀, (CondensedRing.upperStar Λ (C.f a)).obj ((CondensedRing.upperStar Λ t).obj M) ≅ Mod.finiteFree (condensedRingObj Λ (C.X a)) (r a)), ∃ B : Scheme.Cover.{u} Scheme.proetalePrecoverage W, ∀ b : B.I₀, ∃ (a : C.I₀) (f : pullback (B.f b) t ⟶ C.X a) (hf : f ≫ C.f a = pullback.snd (B.f b) t) (ψ : (CondensedRing.upperStar Λ (B.f b)).obj M ≅ Mod.finiteFree (condensedRingObj Λ (B.X b)) (r a)), (CondensedRing.upperStar Λ (pullback.fst (B.f b) t)).map ψ.hom ≫ (coefficientHeartFiniteFreePullbackIso Λ (pullback.fst (B.f b) t) (r a)).hom = (coefficientHeartRefinementPullbackIso Λ t (B.f b) (C.f a) (pullback.fst (B.f b) t) f ((pullback.condition (f := B.f b) (g := t)).trans (congrArg (fun p : pullback (B.f b) t ⟶ T ↦ p ≫ t) hf).symm) M).hom ≫ (CondensedRing.upperStar Λ f).map (φ a).hom ≫ (coefficientHeartFiniteFreePullbackIso Λ f (r a)).hom",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Includes the lisse iff and refinement with equality to the prescribed pulled-back trivializations. The two real-data helper isomorphisms fix the canonical finite-free and composition comparisons. Input cover indices range over an independent universe v; the output cover is u-small."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c89ff86d3",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Every clause matches the node: IsClosedImmersion and Surjective t; arbitrary commutative condensed Λ (Sheaf with MonObj/IsCommMonObj, the same convention as the recorded IsLisseCoefficientModule); actual t^* = CondensedRing.upperStar (mapMod then extendScalars along α); lisse iff matches the recorded def (u-small proetale cover, Mod.IsFree, rank 0 allowed). The explicit clause quantifies over an input cover in an independent universe v (stronger, still true via the u-small subfamily of proof step 3) and concludes with a u-small cover B, a(b), f : pullback (B.f b) t ⟶ C.X a over T, and ψ whose t_b-pullback equals γ ≫ f^*φ ≫ κ (domains checked). Helpers are canonical real data: κ = mapBiproduct, extendScalarsIsoComapInv, regularIsoOfIsIso α; γ = upperStarComp/eqToIso. Statement field verbatim; all 9 def stmt_deps used; only sorry is the theorem; docstrings carry source place, blueprint tag and the 6 proof steps; report has both sections; node copy differs from live only by the lean record. No duplicate found. Not recompiled per instructions (worker: clean compile, dry run OK). Advisory: inherited source.place 'step 9' locator."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261023T151805-L-409499",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

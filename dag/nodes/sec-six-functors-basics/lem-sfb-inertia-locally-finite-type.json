@@ -1,0 +1,177 @@
+{
+ "id": "lem-sfb-inertia-locally-finite-type",
+ "kind": "statement",
+ "title": "Inertia projections are locally of finite type",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $\\mathcal X/S$ be an algebraic stack [def-sfb-algebraic-moduli-stack]. Its inertia $I_{\\mathcal X/S}$ and projection $r:I_{\\mathcal X/S}\\to\\mathcal X$ are those of [def-sfb-moduli-inertia]: objects are pairs $(x,\\alpha)$ with $\\alpha$ an automorphism of $x$, and $r$ forgets $\\alpha$. Then $I_{\\mathcal X/S}$ is an algebraic stack and $r$ is representable by algebraic spaces [def-trf-algebraic-space] and locally of finite type. Here locally of finite type means that after every scheme base change $T\\to\\mathcal X$ and every etale scheme chart $V\\to I_{\\mathcal X/S}\\times_{\\mathcal X}T$, the composite $V\\to T$ is locally of finite type [def-weil-finite-type-morphism]; the 2-fibre product is [def-sfb-stable-pointed-moduli-groupoids]. No quasi-compactness or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 050Q (lemma-inertia), absolute inertia and its representable locally finite type projection."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-moduli-inertia",
+  "def-trf-algebraic-space",
+  "def-weil-finite-type-morphism",
+  "def-sfb-stable-pointed-moduli-groupoids"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-relative-inertia-second-diagonal-geometry] in its absolute case $\\mathcal Y=S$. Its last sentence identifies the relative inertia with absolute inertia, with the same objects, arrows and forgetful projection as [def-sfb-moduli-inertia]. Its algebraicity and representability clauses therefore give that $I_{\\mathcal X/S}$ is algebraic and $r$ is representable by algebraic spaces. No local finite type conclusion is taken from this node.",
+   "uses": [
+    "lem-sfb-relative-inertia-second-diagonal-geometry",
+    "def-sfb-moduli-inertia"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 050Q (lemma-inertia), absolute case, proof."
+   }
+  },
+  {
+   "text": "Fix $x:T\\to\\mathcal X$. Over $H\\to T$, an object of $I_{\\mathcal X/S}\\times_{\\mathcal X}T$ is $(y,\\alpha,\\beta:y\\xrightarrow{\\sim}x_H)$. Send it to $\\beta\\alpha\\beta^{-1}\\in\\operatorname{Aut}(x_H)$. The inverse sends $\\gamma$ to $(x_H,\\gamma,1)$. An arrow to $(y\\prime,\\alpha\\prime,\\beta\\prime)$ is an isomorphism $v$ satisfying $v\\alpha=\\alpha\\prime v$ and $\\beta\\prime v=\\beta$. It exists uniquely exactly when the two conjugated automorphisms agree: necessarily $v=(\\beta\\prime)^{-1}\\beta$. Thus these functors are quasi-inverse; their comparison on an object is $\\beta$. The formulas commute with pullback, including its canonical comparison isomorphisms. They give an equivalence over $T$ with the discrete sheaf $\\operatorname{Isom}_{\\mathcal X,T}(x,x)$, preserving the actual projection to $T$. This is a calculation with the inertia and 2-fibre-product definitions.",
+   "uses": [
+    "def-sfb-moduli-inertia",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 050Q (lemma-inertia), absolute case, proof."
+   }
+  },
+  {
+   "text": "By [lem-sfb-stack-isom-space-locally-finite-type] with $a=b=x$, the sheaf $\\operatorname{Isom}_{\\mathcal X,T}(x,x)$ is an algebraic space locally of finite type over $T$. All its hypotheses hold: $T$ is an arbitrary $S$-scheme and $x$ an object of the given algebraic stack. Step 2 presents the scheme base change of $r$ by exactly this space over $T$. Hence, for every etale scheme chart $V$ of that base change, $V\\to T$ is locally of finite type, by the chartwise conclusion of the cited node. Since $T\\to\\mathcal X$ was arbitrary, this is precisely the asserted local finite type of $r$. Neither the identification nor the Isom theorem requires quasi-compactness or a Noetherian hypothesis.",
+   "uses": [
+    "lem-sfb-stack-isom-space-locally-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 050Q (lemma-inertia), absolute case, proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-relative-inertia-second-diagonal-geometry",
+  "def-sfb-moduli-inertia",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-stack-isom-space-locally-finite-type"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 050Q (lemma-inertia), absolute case, proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The inertia of an algebraic stack is algebraic and its projection is representable by algebraic spaces and locally of finite type",
+   "results": "8 hits; AlgebraicGeometry.instIsPreimmersionFiberι, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.instIsPreimmersionFromSpecStalk, AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.FormallyUnramified",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms or ordinary categorical stacks, not this assertion for algebraic stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Automorphism group space of any object of an algebraic stack is locally of finite type",
+   "results": "8 hits; CategoryTheory.Aut, CategoryTheory.PreGaloisCategory.instFiniteAutOfIsConnected, AlgebraicGeometry.LocallyOfFiniteType.mk, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, CategoryTheory.PreGaloisCategory.instSMulAutFintypeCatObjCarrier, FintypeCat.instFiniteAut",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms or ordinary categorical stacks, not this assertion for algebraic stacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\", \"inertia\"",
+   "results": "0 hits; none",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms or ordinary categorical stacks, not this assertion for algebraic stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|inertiaStack|inertia_stack",
+   "results": "0 hits; none",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms or ordinary categorical stacks, not this assertion for algebraic stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|inertiaStack|inertia_stack",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme morphisms or ordinary categorical automorphisms do not assert the inertia theorem for algebraic stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an algebraic stack X the automorphism algebraic space of an object over T is locally of finite type over T",
+   "results": "8 hits: AlgebraicGeometry.LocallyOfFiniteType.casesOn, AlgebraicGeometry.LocallyOfFiniteType.mk, CategoryTheory.Aut, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType, AlgebraicGeometry.locallyOfFiniteType_of_isOpenImmersion, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme morphisms or ordinary categorical automorphisms do not assert the inertia theorem for algebraic stacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\", \"inertia\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme morphisms or ordinary categorical automorphisms do not assert the inertia theorem for algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inertia stack of an algebraic stack is algebraic and its projection is representable and locally of finite type",
+   "results": "8 hits: AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.instIsPreimmersionFiberι, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme, AlgebraicGeometry.LocallyOfFinitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme morphisms or ordinary categorical automorphisms do not assert the inertia theorem for algebraic stacks"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-noetherian-singleton-gerbe",
+  "date": "2026-10-23",
+  "group": "Q38"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: closed-point hypothesis (c) of Lemma 8.3.1; Residual-gerbe reduction of the closed singleton: a reduced singleton stack locally of finite type over a field is universally homeomorphic to a finite field spectrum; supporting input: Reduced locally Noetherian singleton gerbe before imposing local finite type over the ground field. Supporting input: Tag 06QK, first paragraph: finite type of the inertia projection before its pullback to the field atlas.",
+   "via": [
+    "lem-sfb-noetherian-singleton-gerbe",
+    "lem-sfb-singleton-stack-finite-field-homeomorphism",
+    "lem-sfb-stack-diagonal-closed-points",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-inertia-locally-finite-type",
+  "worker": "stage1",
+  "summary": "Checked Stacks 050Q and 04XR. Reused the existing relative-inertia geometry and Isom-space theorems; expanded the scheme-test equivalence explicitly. Statement unchanged; no new nodes. Project-source and recorded Mathlib searches found no exact declaration.",
+  "blueprint": "Realizes the inherited from.place: the Tag 06QK inertia finite-type input on the singleton-gerbe branch of det-thm-sf-ctf-stability-direct-images (3). The latest direct-images proof was read. blueprint_refs ancestor returns None; retain the inherited null from.node and via. Whole-blueprint searches found no equivalent algebraic-stack inertia statement."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q104-f587ae8c0",
+  "group": "Q104",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-f587ae8c0 (reviewer sub-agent of L); spot-checked: PASS. The statement is unchanged and follows Stacks 050Q (stacks-morphisms.tex l.1007) for absolute inertia. There are no new nodes and no re-split note. Step 1: the relative-inertia node with Y=S gives algebraicity and representability; its objects, arrows and projection match def-sfb-moduli-inertia. Step 2: I checked the 2-fibre-product calculation. An object (y,α,β) maps to βαβ^{-1}. The arrow is forced to be v=β'^{-1}β, and it is an inertia arrow exactly when the conjugates agree. So the base change is equivalent to the discrete sheaf Isom(x,x), which is the 2-cartesian square in the 050Q proof. Step 3: the 04XR Isom node applies with a=b=x and gives local finite type on every étale chart; I read its step 7. proof_deps is exactly the union of the step uses. The closure of the cited nodes does not reach the item. A grep of the DAG found no duplicate; the inertia nodes that mention quasi-finite, separated or unramified state different things. Batch-5: both flagged citations reach only def-trf-algebraic-space and generic trf algebraic-space and descent foundations. Those are general definitions, not trace-formula or Poincaré-duality steps, so the citations are acceptable. Small cases checked: X a scheme, BG_m, Bμ_p in characteristic p, the empty stack."
+ }
+}

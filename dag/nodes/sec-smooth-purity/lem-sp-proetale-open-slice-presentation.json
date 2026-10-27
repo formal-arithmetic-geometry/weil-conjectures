@@ -1,0 +1,117 @@
+{
+ "id": "lem-sp-proetale-open-slice-presentation",
+ "kind": "statement",
+ "title": "Actual pro-etale open extension has a slice presentation",
+ "statement": "For any open immersion j:U→V of schemes [def-weil-open-immersion], arbitrary ring sheaves RV on V and RU on U, and an isomorphism j⁻¹RV≅RU [def-weil-pbc-proetale-operations], there is an equivalence e from RU-module sheaves on U to RV-module sheaves on the slice at the open object j, and the actual left adjoint proEtaleRingOpenExtension j RV RU c is naturally isomorphic to e followed by the literal direct-sum-and-sheafification slice extension [lem-pur-site-restriction-module-adjunction-exact]. No quasi-compactness is required.",
+ "stmt_deps": [
+  "def-weil-open-immersion",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-projection-compactification",
+  "lem-pur-site-restriction-module-adjunction-exact"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI and 03DJ, extension to the open slice; Sites Tags 09BN and 00XZ, localization of the site."
+ },
+ "proof": [
+  {
+   "text": "Use proEtale_ringed_open_comparison to identify actual inverse-image modules with modules on the ambient slice. Scalar restriction along the specified coefficient isomorphism is an equivalence from RU modules to inverse-image-ring modules. Compose these equivalences. Transport the slice extension adjunction through the ringed-open comparison, then through the coefficient equivalence. Its right adjoint is exactly the actual proEtaleRingModulePullback. Uniqueness of left adjoints identifies the resulting composite with actual open extension.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-comparison",
+    "def-weil-pbc-proetale-operations",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI and 03DJ, extension to the open slice; Sites Tags 09BN and 00XZ, localization of the site."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-ringed-open-comparison",
+  "def-weil-pbc-proetale-operations",
+  "lem-pur-site-restriction-module-adjunction-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B4",
+  "date": "2026-10-25",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI and 03DJ, extension to the open slice; Sites Tags 09BN and 00XZ, localization of the site."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero commutes with tensor and coefficient restriction for arbitrary ring sheaves on an open slice",
+   "results": "Generic modules and ordinary scheme modules; no actual pro-etale coefficient presentation comparison.",
+   "verdict": "Use existing ringed-open comparison and uniqueness of adjoints.",
+   "date": "2026-10-25"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\"",
+   "results": "Generic adjunction mate calculus, no geometric presentation theorem.",
+   "verdict": "No exact match; generic uniqueness of adjoints is used.",
+   "date": "2026-10-25"
+  },
+  {
+   "tool": "grep",
+   "query": "open.*[Pp]rojection|[Pp]rojection.*[Oo]pen",
+   "results": "No matching Mathlib theorem. Local searches found ProjectionCompactification.openRestriction_exactLeftAdjoint and proEtale_ringed_open_comparison.",
+   "verdict": "Refine the already proved adjoint construction to retain its equivalence and isomorphism.",
+   "date": "2026-10-25"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralCompactSupportCoefficientData",
+  "date": "2026-10-25",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-integral-compact-support-coefficient-data",
+   "place": "Shared geometric slice presentation used in the scalar mate and intrinsic projection proofs.",
+   "via": [
+    "lem-sp-intrinsic-open-projection-invertible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleOpenSlicePresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleOpenSlicePresentation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleOpen_slicePresentation",
+  "statement": "theorem proEtaleOpen_slicePresentation {U V : Scheme.{u}} (j : U ⟶ V)\n    [IsOpenImmersion j]\n    (RV : Sheaf (ProEt.topology V) CommRingCat.{u + 1})\n    (RU : Sheaf (ProEt.topology U) CommRingCat.{u + 1})\n    (c : (proEtaleSheafInverseImage j CommRingCat.{u + 1}).obj RV ≅ RU) :\n    ∃ e : proEtaleRingModules U RU ≌\n        SheafOfModules.{u + 1} (((sheafCompose (ProEt.topology V)\n          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RV).over (ProEt.mk j)),\n      Nonempty (proEtaleRingOpenExtension j RV RU c ≅ e.functor ⋙\n        SheafOfModules.localizedModuleExtension.{u} RV (ProEt.mk j))",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261025T033836-L-113015",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261025T033836-L-113015",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

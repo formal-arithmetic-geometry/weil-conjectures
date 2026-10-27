@@ -1,0 +1,265 @@
+{
+ "id": "lem-sfb-space-pointwise-module-flat-base-change",
+ "kind": "statement",
+ "title": "Pointwise relative module flatness under algebraic-space base change",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $X,Y,Y'$ be algebraic spaces over $S$ [def-trf-algebraic-space], and let $f:X\\to Y$ and $g:Y'\\to Y$ be morphisms. Put $X'=X\\times_Y Y'$ with projections $q:X'\\to X$ and $f':X'\\to Y'$ [lem-trf-space-fibre-products-etale-covers]. Let $M$ be a quasi-coherent $\\mathcal O_X$-module on the small etale ringed site [def-trf-space-quasi-coherent-module] and put $M'=q^*M$, with the tensor pullback [def-trf-space-etale-module-functors]. Fix $x'\\in|X'|$, $x=|q|(x')$, and $y'=|f'|(x')$, with point classes as in [def-a1-space-point-topology]. Relative module flatness at a point means that on every compatible etale scheme-chart diagram for the structure map the corresponding ordinary module stalk is flat over the local ring of the base chart; module flatness means exactness of tensoring [def-weil-pbc-flat-ring-map]. Then: (1) if $M$ is flat over $Y$ at $x$, then $M'$ is flat over $Y'$ at $x'$; (2) if $g$ is flat at $y'$, meaning that on every compatible etale scheme-chart diagram for $g$, as in the chart test of [def-sfb-space-morphism-properties], the chart scheme map is flat [def-weil-flat-morphism] at each point lying over $y'$, and $M'$ is flat over $Y'$ at $x'$, then $M$ is flat over $Y$ at $x$. In particular, flatness of $M$ over $Y$ implies flatness of $M'$ over $Y'$. There are no finite-presentation, finite-type, proper-support or Noetherian hypotheses.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 05VW (lemma-base-change-module-flat), clauses (1), (2) and the final sentence."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-a1-space-point-topology",
+  "def-weil-pbc-flat-ring-map",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-space-morphism-properties",
+  "def-weil-flat-morphism",
+  "def-sfb-space-module-flat-at-point",
+  "def-sfb-space-flat-proper-coefficient"
+ ],
+ "proof": [
+  {
+   "text": "Choose a surjective etale scheme atlas $b:V\\to Y$, an atlas $U\\to X\\times_YV$, and an atlas $V'\\to Y'\\times_YV$, using [def-trf-algebraic-space] and [lem-trf-space-fibre-products-etale-covers]. Write $a:U\\to X$, $c:V'\\to Y'$, $h:U\\to V$ and $k:V'\\to V$ for the induced maps. Form the scheme $U'=U\\times_VV'$ with projections $p:U'\\to U$ and $h':U'\\to V'$ [def-pc-fibre-product]. It maps to $X'$, and $U'\\to X'$ is surjective etale: it factors through $X\\times_YV'$, with first map the base change of $U\\to X\\times_YV$ and second map the base change of $V'\\to Y'$. The atlas compositions $a,c$ are also surjective etale by [lem-trf-space-chartwise-etale-permanence]. Pick $u'\\in U'$ over $x'$, and put $u=p(u')$, $v'=h'(u')$, $v=h(u)=k(v')$. Then $a(u)=x$, $c(v')=y'$; in particular the charts used below are charts at the specified points.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-pc-fibre-product",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 05VW (lemma-base-change-module-flat), proof, using Tag 05VU (lemma-flat-at-point)."
+   }
+  },
+  {
+   "text": "Let $F$ correspond to $a^*M$ on $U$. The pullbacks of $M$ and $M'=q^*M$ are quasi-coherent by [lem-sfb-space-module-pullback-quasicoherent]. If $a':U'\\to X'$ is the chart just constructed, the identity $qa'=ap$ and the normalized composition maps of [def-sfb-space-module-tensor-composition] identify $a'^*M'$ with $p^*a^*M$. The functorial pullback comparison in [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] therefore identifies the Zariski module corresponding to $a'^*M'$ with the ordinary scheme tensor pullback $p^*F$. Concretely the two iterated local tensors have the same image $(r\\,s)\\otimes m$ under the composition normalization, so this is the specified tensor pullback, with the scalar actions for $h,h'$ unchanged.",
+   "uses": [
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "def-sfb-space-module-tensor-composition",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 05VW (lemma-base-change-module-flat), proof, using Tag 05VU (lemma-flat-at-point)."
+   }
+  },
+  {
+   "text": "Assume $M$ is flat over $Y$ at $x$. Its every-chart definition gives flatness of $F_u$ over $\\mathcal O_{V,v}$. Apply clause (1) of [lem-sfb-pointwise-module-flatness-base-change] to the cartesian scheme square $U'=U\\times_VV'$ and to the quasi-coherent module $F$. It gives flatness of $(p^*F)_{u'}$ over $\\mathcal O_{V',v'}$. Step 2 identifies this module with the restriction of $M'$ in the compatible charts $U'\\to X'$ and $V'\\to Y'$. By [lem-sfb-space-module-flat-arbitrary-charts], flatness in this one diagram implies flatness in every diagram at $x'$. Thus $M'$ is flat over $Y'$ at $x'$, proving clause (1).",
+   "uses": [
+    "lem-sfb-pointwise-module-flatness-base-change",
+    "lem-sfb-space-module-flat-arbitrary-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 05VW (lemma-base-change-module-flat), proof, using Tag 05VU (lemma-flat-at-point)."
+   }
+  },
+  {
+   "text": "Assume $g$ is flat at $y'$ and $M'$ is flat over $Y'$ at $x'$. The flat-at-$y'$ hypothesis in the statement applies to the compatible chart diagram $V'\\xrightarrow{k}V$ over $g$, since $c(v')=y'$; thus $k$ is flat at $v'$. The module hypothesis gives flatness of $(p^*F)_{u'}$ over $\\mathcal O_{V',v'}$ by Step 2. Clause (2) of [lem-sfb-pointwise-module-flatness-base-change] for the same scheme square yields flatness of $F_u$ over $\\mathcal O_{V,v}$. By [lem-sfb-space-module-flat-arbitrary-charts] for $f$, this one diagram implies every-chart flatness of $M$ at $x$, proving clause (2). There is no assumption that $k$ is flat away from $v'$.",
+   "uses": [
+    "lem-sfb-pointwise-module-flatness-base-change",
+    "lem-sfb-space-module-flat-arbitrary-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 05VW (lemma-base-change-module-flat), proof, using Tag 05VU (lemma-flat-at-point)."
+   }
+  },
+  {
+   "text": "If $M$ is flat over $Y$, then it is flat at the image of every $x'\\in|X'|$. Clause (1), already proved, gives flatness of $M'$ at every $x'$, hence flatness over $Y'$. This also covers an empty $X'$ by universal quantification.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 05VW (lemma-base-change-module-flat), proof, using Tag 05VU (lemma-flat-at-point)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-pc-fibre-product",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-sfb-space-module-pullback-quasicoherent",
+  "def-sfb-space-module-tensor-composition",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sfb-pointwise-module-flatness-base-change",
+  "lem-sfb-space-module-flat-arbitrary-charts"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 05VW (lemma-base-change-module-flat), proof, using Tag 05VU (lemma-flat-at-point).",
+  "by": "document"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Relative flatness of a quasi-coherent sheaf on algebraic spaces ascends under arbitrary base change and is reflected when the base change is flat at the point",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to Z $ is als\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.Flat\", \"doc\": \"The composition of two flat morphisms of schemes is also a flat morphism. Specifically, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Flat.of_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  (∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat) → AlgebraicGeometry.Flat f\", \"doc\": \"If for every point $ x \\\\in X $, the induced map on stalks $ \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x} $ is flat, then the morphism $ f : X \\\\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔ ∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is flat if and only if for every point $ x \\\\in X $, the induced ring homomorphism on the stalks at $ x $ is flat.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: tensor-module stability and scheme flat morphisms do not state pointwise relative module flatness for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat.baseChange",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"Module.Flat.baseChange\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \" (R : Type u) (S : Type v) (M : Type w) [CommSemiring R] [CommSemiring S] [Algebra R S] [AddCommMonoid M] [Module R M] [Module.Flat R M] : Module.Flat S (TensorProduct R S M)\", \"doc\": \"If `M` is a flat `R`-module and `S` is any `R`-algebra, `S ⊗[R] M` is `S`-flat.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: tensor-module stability and scheme flat morphisms do not state pointwise relative module flatness for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "base.change.*flat|flat.*base.change",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"line\": \"26\", \"text\": \"  In particular, the base change of a geometrically reduced and flat scheme to an\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean\", \"line\": \"24\", \"text\": \"  quasicompact + scheme-theoretically dominant is stable under flat base change.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: tensor-module stability and scheme flat morphisms do not state pointwise relative module flatness for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pointwise ascent and descent of relative module flatness under base change of algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.Flat.isBaseChange\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (N : Type t) [AddCommMonoid N] [Module R N] [Module S N] [IsScalarTower R S N] {f : M →ₗ[R] N}\\n  (h : IsBaseChange S f) : Flat S N\", \"doc\": \"If $ M $ is a flat $ R $-module, $ N $ is an $ R $-module and $ S $-module equipped with a scalar tower structure $ R \\to S \\to N $, and there exists an $ R $-linear map $ f : M \\to N $ satisfying the ba\"}\n  {\"name\": \"RingHom.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": IsStableUnderBaseChange Flat\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if the ring homomorphism $ R \\to S $ is flat, then the ring homomorphism $ R' \\to S' $ obtained by \"}\n  {\"name\": \"RingHom.Flat\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \"{R : Type u} {S : Type v} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, the property that $ S $ is a flat $ R $-module under the induced algebra structure defined by $ f $. This means that\"}\n  {\"name\": \"Module.FaithfullyFlat.instTensorProduct\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"(S : Type*) [CommRing S] [Algebra R S] [Module.FaithfullyFlat R M] : Module.FaithfullyFlat S (S ⊗[R] M)\", \"doc\": \"Let $R$ and $S$ be commutative rings, and suppose $S$ is an $R$-algebra. If $M$ is a faithfully flat $R$-module, then the tensor product $S \\\\otimes_R M$ is a faithfully flat $S$-module.\"}\n  {\"name\": \"Module.Flat.of_flat_tensorProduct\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"(S : Type*) [CommRing S] [Algebra R S] [Module.FaithfullyFlat R S] [Module.Flat S (S ⊗[R] M)] : Module.Flat R M\", \"doc\": \"If $ S $ is a faithfully flat $ R $-algebra and the tensor product $ S \\\\otimes_R M $ is a flat $ S $-module, then $ M $ is a flat $ R $-module.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"Module.Flat.of_isLocalizedModule\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (S : Submonoid R) [IsLocalization S Rp] (f : M →ₗ[R] Mp) [h : IsLocalizedModule S f] : Flat Rp Mp\", \"doc\": \"If $ M $ is a flat $ R $-module and $ M' $ is the localization of $ M $ at a submonoid $ S $ of $ R $, then $ M' $ is a flat module over the localized ring $ R' $, where $ R' $ is the localization of \"}\n  {\"name\": \"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"module\": \"Mathlib.RingTheory.Unramified.Finite\", \"type\": \"[Module.Flat R M] : Module.Flat S M\", \"doc\": \"If $ M $ is a flat $ R $-module, then $ M $ remains flat as an $ S $-module when viewed through the scalar restriction induced by an $ S $-algebra structure on $ R $. This holds for any commutative ri\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: tensor-module stability and scheme flat morphisms do not state pointwise relative module flatness for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a cartesian square of algebraic spaces a pulled back quasi-coherent module is relatively flat at the point if the original is, with converse for flat base morphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instSndScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.Flat f],\\n  AlgebraicGeometry.Flat (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\\\to Z $ and $ g : Y \\\\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all co\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instFstScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.Flat g],\\n  AlgebraicGeometry.Flat (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"If $ g : Y \\to Z $ is a flat morphism of schemes, then the first projection morphism from the fiber product $ X \\times_Z Y $ to $ X $ is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to Z $ is als\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.Flat.stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] (x : ↥X),\\n  (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. Then for any point $x \\\\in X$, the induced ring homomorphism on stalks, $f_x^\\\\sharp: \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$, is a flat ring homomo\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.Flat\", \"doc\": \"The composition of two flat morphisms of schemes is also a flat morphism. Specifically, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: tensor-module stability and scheme flat morphisms do not state pointwise relative module flatness for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "base.change.*flat|flat.*base.change",
+   "results": "Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean; Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean; grep directory Mathlib/AlgebraicGeometry/",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern schemes or abstract modules, not relative quasi-coherent module flatness at points of algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi coherent sheaf on algebraic spaces is flat over the base at a point after flat base change if and only if it was flat at the image point",
+   "results": "Module.Flat.isBaseChange; RingHom.Flat.isStableUnderBaseChange; IsSMulRegular.of_flat_of_isBaseChange; AlgebraicGeometry.Flat.isStableUnderBaseChange; AlgebraicGeometry.Flat.iff_flat_stalkMap; AlgebraicGeometry.Flat.stalkMap; AlgebraicGeometry.Flat.casesOn; AlgebraicGeometry.flat_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern schemes or abstract modules, not relative quasi-coherent module flatness at points of algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat.baseChange",
+   "results": "Module.Flat.baseChange",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern schemes or abstract modules, not relative quasi-coherent module flatness at points of algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pointwise relative module flatness for algebraic spaces is preserved by arbitrary base change and reflected by base change flat at the image point",
+   "results": "AlgebraicGeometry.Flat.isStableUnderBaseChange; AlgebraicGeometry.Flat.instHasRingHomPropertyFlat; AlgebraicGeometry.Flat; AlgebraicGeometry.Flat.instIsMultiplicativeScheme; AlgebraicGeometry.Flat.iff_flat_stalkMap; AlgebraicGeometry.flat_iff; AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme; AlgebraicGeometry.Flat.of_stalkMap",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern schemes or abstract modules, not relative quasi-coherent module flatness at points of algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative flatness of a quasi coherent sheaf for a cartesian diagram of algebraic spaces descends at a point along a flat base morphism",
+   "results": "AlgebraicGeometry.Flat.isStableUnderBaseChange; AlgebraicGeometry.Flat.stalkMap; AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact; AlgebraicGeometry.Flat.instSndScheme; AlgebraicGeometry.Flat.instFstScheme; AlgebraicGeometry.Flat.of_stalkMap; AlgebraicGeometry.Flat.iff_flat_stalkMap; AlgebraicGeometry.Flat",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern schemes or abstract modules, not relative quasi-coherent module flatness at points of algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-relative-finite-free-locus-base-change",
+  "date": "2026-10-24",
+  "group": "Q71"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Quasi-coherent cohomological dimension of algebraic-space curve families. Supporting cohomology input: local scheme representability of the curve family, before using scheme cohomology. Supporting input in Tag 0E6F proof, first paragraph: the smooth covering with a relatively ample invertible module obtained from Tag 0DQ0. Picard-stack input in the smoothness paragraph of Tag 0DQ0 (lemma-polarized-curves-over-curves): moduli.tex Tag 0DPJ, for an algebraic-space total space. Supporting Invertible modules form an open substack for proper flat algebraic spaces. Specific input: quot.tex lemma-picard-stack-open-in-coh, the sentence invoking spaces-more-morphisms lemma-finite-free-open to obtain W and its arbitrary-base-change property. Supporting input in the proof of Tag 0CZT: relative flatness of the pulled-back module, needed before applying the fibre criterion to X prime.",
+   "via": [
+    "lem-sfb-space-relative-finite-free-locus-base-change",
+    "lem-sfb-space-invertible-open-coherent",
+    "lem-sfb-space-picard-stack-smooth",
+    "lem-sfb-curve-smooth-polarization-cover",
+    "lem-sfb-curve-etale-scheme-cover",
+    "lem-sfb-proper-space-curve-qcoh-bound",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-pointwise-module-flat-base-change",
+  "worker": "stage1",
+  "summary": "Followed Stacks 05VW via compatible etale atlases, normalized tensor pullback comparisons, and the existing pointwise scheme theorem 047C. Created only the general-target chart-independence input of 05VU: existing chart-test nodes assume a scheme target. Checked both pointwise clauses and global consequence without extra hypotheses. Statement and inherited metadata retained.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images proof (3) chain, specifically 0CZT relative finite-free-locus base change. Read the latest blueprint direct-images proof clause (3); inherited nearest blueprint ancestor is null, as blueprint_refs.py ancestor confirms, so preserved the from/via chain. No equivalent blueprint node found.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space fibre products and base change of etale covers, needed to form compatible atlases; no unit-specific replacement."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic composition and base-change permanence of etale atlases; no unit-specific replacement for these elementary chart constructions."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic quasi-coherent Zariski/etale equivalence with functorial tensor pullback; needed to apply the scheme 047C theorem to these charts."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-fba462498",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-fba462498 (reviewer sub-agent of L); spot-checked: I read Stacks 05VU, 05VW and 047C in full. The item statement matches 05VW and is unchanged from live, where the item is still unsplit; no parallel group has split it. The every-chart flatness convention is legitimate through 05VU. Step 1 builds the charts as the 05VW proof does: atlases V, U→X×_YV and V'→Y'×_YV, then U'=U×_VV'→X'. The factorisation of U'→X' is correct, and the étale-covering composition and base-change clauses come from the statements of lem-trf-space-chartwise-etale-permanence and lem-trf-space-fibre-products-etale-covers. Step 2 identifies the module on U' with p^*F, using the uniquely normalized γ of def-sfb-space-module-tensor-composition and the unconditional pullback-comparison clause of the Zariski/étale equivalence; the direct-image clause with qc/separated hypotheses is not used. Steps 3 and 4 apply 047C(1) and 047C(2) through lem-sfb-pointwise-module-flatness-base-change. In Step 4, k is flat at v' because the hypothesis on g applies to the diagram V'→V with c(v')=y'. The new node lem-sfb-space-module-flat-arbitrary-charts is exactly 05VU: some diagram if and only if every diagram, with both source and target charts free. It is true, statement-only, self-contained, not a restatement of the item, and genuinely needed because the existing chart-test nodes assume a scheme target. I tested it on a scheme target, identity charts, an étale V→Y and zero modules. My grep of the snapshot DAG for 05VU and 05VW found 23 nodes; none duplicates the new node. There are no cycles and no SGA source. Batch-5 flags: the full closures of every flagged citation contain no theorem node of sec-trace-formula or sec-poincare-duality, no nt- node and no node named for the trace formula or Poincaré duality. All are generic algebraic-space and quasi-coherent foundations, so all are accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpacePointwiseModuleFlatBaseChange",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.pointwise_module_flat_base_change",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpacePointwiseModuleFlatBaseChange.lean",
+  "statement": "theorem pointwise_module_flat_base_change {S : Scheme.{u}} {X Y Y' X' : AlgebraicSpace S} (f : X ⟶ Y) (g : Y' ⟶ Y) (q : X' ⟶ X) (f' : X' ⟶ Y') (sq : IsPullback q f' f g) (M : X.Modules) [M.IsQuasicoherent] : (∀ x' : Point X'.obj.obj, (ModuleIsFlatAt f M (mapPoint q.hom.hom x') → ModuleIsFlatAt f' ((moduleTensorPullback q).obj M) x') ∧ ((∀ (U : Y'.EtaleSite) (V : Y.EtaleSite) (h : U.obj.left ⟶ V.obj.left), U.obj.hom ≫ g.hom.hom = yoneda.map h ≫ V.obj.hom → ∀ u : U.obj.left.left, schemePointMap U.obj.hom u = mapPoint f'.hom.hom x' → (h.left.stalkMap u).hom.Flat) → ModuleIsFlatAt f' ((moduleTensorPullback q).obj M) x' → ModuleIsFlatAt f M (mapPoint q.hom.hom x'))) ∧ (ModuleIsFlatOver f M → ModuleIsFlatOver f' ((moduleTensorPullback q).obj M))",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-07d5d23cc",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Item differs from live only in lean + stmt_deps (+new def-sfb-space-module-flat-at-point, +landed def-sfb-space-flat-proper-coefficient). Lean matches 05VW clause by clause: IsPullback q f' f g, M qcoh, M'=(moduleTensorPullback q).obj M, x=mapPoint q x', y'=mapPoint f' x'; (1) and (2) pointwise, (2)'s g-flat-at-y' premise is the node's every-compatible-chart form restricted to points over y' (same chart data as MapIsLocally); global clause via landed ModuleIsFlatOver outside the x' binder (empty X' ok). New ModuleIsFlatAt: real every-chart Zariski stalk of schemeRestriction flat over O_{V,h u} via stalkMap, same convention as ModuleIsFlatOver; no duplicate (MapIsFlatAt is morphism flatness). lean.statement verbatim, sorry only, docstrings with source/blueprint/proof steps, universes bound, no extra hypotheses. Advisories: Q63 MapIsFlatAt (existential form) could later replace the inlined every-chart premise; second reading is a self-check. No files changed, no compile."
+ }
+}

@@ -1,0 +1,321 @@
+{
+ "id": "lem-sf-native-proper-projection-realization",
+ "kind": "statement",
+ "title": "Native proper projection morphism and its coefficient realization",
+ "statement": "Fix a finite field $k_0$, an algebraic closure $k$ of $k_0$, a prime $\\ell\\ne\\operatorname{char}(k_0)$ and $\\Omega=\\overline{\\mathbf Q}_\\ell$. For separated finite-type $k_0$-schemes use the coefficient sheaves $B_V$, abelian Weil-sheaf categories $\\mathcal W_V$, ambient ordinary derived categories $D(\\mathcal W_V)$, bounded constructible full subcategories $\\mathrm{WC}^{\\mathrm{der}}(V_0)$ and actual module operations of [def-sf-native-weil-derived-framework], with derived tensor as in [def-sf-derived-weil-category-and-operations].\n\nLet $p_0:Z_0\\to Y_0$ be proper, meaning separated, finite type and universally closed, and let $p:Z\\to Y$ be its geometric base change. Write $U_V:D(\\mathcal W_V)\\to D(\\operatorname{Mod}(B_V))$ for termwise forgetting Frobenius and $\\rho_V$ for the symmetric monoidal common-stage realization of [lem-sf-adic-qbar-constructible-realization]. The locally finite-span coefficient sheaf $B_V$ is canonically the locally finite-extension-valued sheaf used by that realization and by [lem-sf-weil-native-closed-forgetful].\n\nFor $A\\in\\mathrm{WC}^{\\mathrm{der}}(Z_0)$ and $T\\in\\mathrm{WC}^{\\mathrm{der}}(Y_0)$, let $\\mu$ be the balanced module pullback/tensor comparison and $\\varepsilon^W$ the actual derived counit of [lem-sf-derived-weil-pullback-pushforward-adjunction]. The transpose of $(\\varepsilon^W_A\\otimes1)\\mu$ is a natural isomorphism in $D(\\mathcal W_Y)$,\n$$\\alpha^W_{A,T}:Rp_{0*}A\\otimes^L_{B_Y}T\\xrightarrow{\\sim}Rp_{0*}(A\\otimes^L_{B_Z}p_0^*T).$$\nUnder the canonical tensor and direct-image comparisons, $U_Y(\\alpha^W_{A,T})$ is the ordinary module projection morphism adjoint to $(\\varepsilon_{U_ZA}\\otimes1)\\mu$, with the ordinary module derived counit. The direct-image comparison computed by forgetting an equivariant K-injective resolution identifies these actual counits. Under the pullback and direct-image comparisons $(a_p,b_p)$ of [lem-sf-adic-proper-adjunction-realization], this ordinary projection morphism is precisely the realization by $\\rho_Y$ of the common-stage projection morphism, with its normalization $Rp_!\\cong Rp_*$. The assertion concerns actual arrows in $D(\\mathcal W_Y)$, rather than fixed pairs in an ordinary module derived category, and $T$ is an arbitrary bounded constructible derived object.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "fix-lem-tensor-adjunction.proof.md Step 1, second Hom bijection: proper factor; old compact-projection proof Steps 1 and 3; Bhatt-Scholze Proposition 6.8.14 and Remark 6.8.15, pp. 61-62"
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-sf-derived-weil-category-and-operations",
+  "lem-sf-adic-qbar-constructible-realization",
+  "lem-sf-weil-native-closed-forgetful",
+  "lem-sf-derived-weil-pullback-pushforward-adjunction",
+  "lem-sf-adic-proper-adjunction-realization"
+ ],
+ "proof": [
+  {
+   "text": "Identify the two coefficient sheaves by the canonical ring isomorphism $\\theta_V:p_V^*C\\xrightarrow{\\sim}B_V$ of [lem-sf-locally-finite-coefficient-ring-realization]: on functions it is the identity, since a finite-dimensional $\\mathbf Q_\\ell$-subspace of $\\Omega$ has a finite basis lying in one finite subextension, and conversely a finite subextension has finite dimension. That lemma also says $\\theta$ intertwines the coefficient maps $\\eta_p$ with precomposition $B_Y\\to p_*B_Z$. Thus the native and realization coefficient maps agree. Put $A_B=U_ZA$ and $T_B=U_YT$. By the closed forgetful theorem these are bounded constructible ordinary module objects, and by the realization equivalence choose $K\\in\\mathcal C_Z,L\\in\\mathcal C_Y$ with $\\rho_ZK\\cong A_B$, $\\rho_YL\\cong T_B$. All subsequent equations are conjugated by these isomorphisms. Geometric base change preserves separated finite type; the base change of $p_0$ is universally closed because every further base change is also a base change of $p_0$. Hence the proper realization theorem applies to $p$.",
+   "uses": [
+    "def-sf-native-weil-derived-framework",
+    "lem-sf-weil-native-closed-forgetful",
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-sf-locally-finite-coefficient-ring-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+    "place": "Step 1, second Hom bijection: identify the native coefficient presentation and the proper-factor domain; BS Proposition 6.8.14"
+   }
+  },
+  {
+   "text": "The native pullback and pushforward at the sheaf level have underlying functors $p_B^*$ and $p_{*,B}$. The native pullback/Frobenius lemma gives exact ordinary pullback and the mate relation. Native pullback is exact: after applying exact forgetting, the homology of its image of a short exact sequence is the homology after exact ordinary pullback, hence zero; conservative forgetting detects that zero homology. Apply the fixed-pair adjunction lift: its unit and counit have precisely the ordinary module carrier components. In particular its counit on a complex $I$ is termwise $\\varepsilon_I:p_B^*p_{*,B}I\\to I$, with its native Weil structure. The Frobenius resolution theorem supplies equivariant K-injective resolutions, and termwise forgetting preserves them. It also supplies equivariant K-flat resolutions with flat terms, whose underlying complexes are K-flat. These assertions apply to the actual abelian fixed-pair categories, before taking derived categories.",
+   "uses": [
+    "lem-sf-native-adic-pullback-frobenius-mates",
+    "lem-sf-fixed-pair-adjunction-lift",
+    "lem-sf-weil-frobenius-action-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/WeilSheaf/UpperStarLowerStarAdjunction.lean",
+    "place": "ProEtaleWeilSheaf.upperStarLowerStarAdjunction and its unit/counit carrier formulas, lines 99-135; Stacks 08BJ (derived-lemma-adjoint-preserve-K-injectives)"
+   }
+  },
+  {
+   "text": "Write $L^W=p_0^*$ and $R^W=Rp_{0*}$. The native adjunction is the derived adjunction of step 2. For a representative $A\\xrightarrow{u}I$ with $I$ equivariant K-injective, the direct-image forgetful comparison identifies both $U_YR^WA$ and $Rp_{*,B}A_B$ with $Qp_{*,B}U_ZI$. On this model the native derived counit is\n$$L^WR^WA=Q(p_0^*p_{0*}I)\\xrightarrow{Q\\varepsilon_I^W}QI\\xrightarrow{(Qu)^{-1}}A.$$\nIndeed step 2 gives exact native pullback. For an acyclic complex $N$, the termwise homotopy adjunction gives $\\operatorname{Hom}_{K}(N,p_{0*}I)=\\operatorname{Hom}_{K}(p_0^*N,I)=0$. Thus $p_{0*}I$ is K-injective too. Maps into $I$ and $p_{0*}I$ both compute derived Hom, so the termwise adjunction is precisely the derived Hom bijection on these models, with the displayed counit. Forgetting this formula gives exactly $(QU_Zu)^{-1}Q\\varepsilon_{U_ZI}$, the ordinary derived counit. For a complex $S$ and an equivariant resolution $v:p_0^*S\\to J$, the derived unit is represented by $S\\xrightarrow{\\eta_S^W}p_{0*}p_0^*S\\xrightarrow{p_{0*}v}p_{0*}J$; forgetting gives the ordinary unit on the same model. Thus both actual units and counits agree under the canonical comparisons, naturally and independently of the chosen resolutions.",
+   "uses": [
+    "lem-sf-derived-weil-pullback-pushforward-adjunction",
+    "lem-sf-fixed-pair-derived-forget-comparison",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I (lemma-K-injective), 08BJ (lemma-adjoint-preserve-K-injectives); common-resolution computation of the derived adjunction"
+   }
+  },
+  {
+   "text": "The pullback/tensor comparison $\\mu^W$ is a native derived arrow. On sheaves the balanced comparison and its inverse are\n$$b\\otimes(x\\otimes y)\\longmapsto(b\\otimes x)\\otimes(1\\otimes y),\\qquad (b\\otimes x)\\otimes(c\\otimes y)\\longmapsto bc\\otimes(x\\otimes y).$$\nThe balancing relations make them inverse, and the diagonal Frobenius action commutes with these formulas since the coefficient maps commute with Frobenius. Apply them on equivariant K-flat flat-term resolutions and use direct-sum total tensor with differential $d\\otimes1+(-1)^i1\\otimes d$. The ordinary ringed pullback theorem says the underlying pulled-back resolutions are K-flat; their equivariant pullbacks are K-flat too: tensoring with an acyclic equivariant complex becomes tensoring with its acyclic underlying complex, and forgetting detects acyclicity. Consequently the formulas descend to the derived tensors defining $\\mu^W$. The forgetful tensor comparison is induced by precisely these summands, so $U_Z(\\mu^W)$ is the ordinary balanced derived pullback/tensor comparison, including its naturality on derived arrows.",
+   "uses": [
+    "def-sf-derived-weil-category-and-operations",
+    "lem-sf-weil-frobenius-action-resolutions",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sf-ringed-forget-tensor-transposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat); balanced formulas with diagonal Frobenius action"
+   }
+  },
+  {
+   "text": "Set $S=R^WA\\otimes^LT$ and $H=A\\otimes^LL^WT$. Form the actual native arrow\n$$h^W=(\\varepsilon_A^W\\otimes1)\\mu^W_{R^WA,T}:L^WS\\to H,\\qquad \\alpha^W=R^W(h^W)\\eta^W_S.$$\nThis is the transpose of $h^W$, and is natural in $A,T$ by the adjunction bijection. Steps 3 and 4 identify its underlying composite with\n$$Rp_{*,B}\\big((\\varepsilon_{A_B}\\otimes1)\\mu_{Rp_{*,B}A_B,T_B}\\big)\\eta_{Rp_{*,B}A_B\\otimes^LT_B}.$$\nBy the ordinary ringed projection-mate theorem this is its canonical projection morphism $\\pi_B$. This is an equality of actual derived morphisms obtained by applying a functor to the displayed composite; no faithfulness of derived forgetting is needed.",
+   "uses": [
+    "lem-sf-derived-weil-pullback-pushforward-adjunction",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+    "place": "Step 1, second Hom bijection: construct the proper projection arrow as the transpose of the counit/tensor composite"
+   }
+  },
+  {
+   "text": "The objects $K,L$ of step 1 are common-stage objects: by the definition of algebraically closed coefficients, after taking a compositum they have representatives over one finite $E/\\mathbf Q_\\ell$. These representatives lie in the raw rationalizations of the integral constructible categories. At the field stages $D^b_{ctf}=D^b_c$ by definition; no extra Tor hypothesis on $T$ is being imposed. Apply the field projection theorem to these representatives and pass to their common-stage classes. It gives an invertible specified projection arrow. Since $p$ is proper, use the compactification $(\\mathrm{id}_Z,p)$ in the defining projection formula. Extension by zero over the whole scheme is the identity; its tensor comparison is the identity under the unit pullback identification. The compactification formula is therefore exactly\n$$\\pi_{K,L}=Rp_*\\big((\\varepsilon_K\\otimes1)\\mu_{Rp_*K,L}\\big)\\eta_{Rp_*K\\otimes^LL}.$$\nThis fixes the $Rp_!\\cong Rp_*$ normalization of the common-stage arrow whose invertibility we use.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-finite-tor-amplitude",
+    "thm-sf-pf-field",
+    "def-exchange-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+    "place": "Step 1, second Hom bijection and fix-prop-projection-formula: field-stage projection formula, proper identity-open compactification"
+   }
+  },
+  {
+   "text": "Use the proper realization comparisons $a_p,b_p$ on $K,L$. The realization is symmetric strong monoidal; $a_p$ preserves the pullback tensor comparison; and $(a_p,b_p)$ identifies units and counits. In particular\n$$\\rho_Z\\varepsilon_K=\\varepsilon_{\\rho_ZK}\\circ Lp_B^*(b_{p,K})\\circ a_{p,Rp_*K}.$$\nSubstitute this equation in the transpose $(\\varepsilon_K\\otimes1)\\mu$ of step 6, and use the tensor compatibility of $a_p$. Under the induced source and target comparisons its image is $(\\varepsilon_{A_B}\\otimes1)\\mu_{Rp_{*,B}A_B,T_B}$. Equivalently, substituting also the unit comparison into the displayed formula for $\\pi_{K,L}$ gives exactly $\\pi_B$ of step 5. Thus $\\rho_Y(\\pi_{K,L})$ and $\\pi_B$ are the same arrow under the specified comparisons. This uses adjunction normalization and the balanced tensor comparisons, not just an identification of objects. Since $\\pi_{K,L}$ and all comparison maps are invertible, $\\pi_B$ is invertible.",
+   "uses": [
+    "lem-sf-adic-proper-adjunction-realization",
+    "lem-sf-adic-qbar-constructible-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14 and Remark 6.8.15, pp. 61-62; explicit substitution in the normalized adjunction/tensor comparisons stated by lem-sf-adic-proper-adjunction-realization"
+   }
+  },
+  {
+   "text": "We have proved $U_Y(\\alpha^W)=\\pi_B$, and $\\pi_B$ is invertible. The native closed forgetful theorem states that $U_Y$ is conservative, hence $\\alpha^W$ is invertible in $D(\\mathcal W_Y)$. Its inverse is natural: from $\\alpha' F(u)=G(u)\\alpha$ multiply on the left by $(\\alpha')^{-1}$ and on the right by $\\alpha^{-1}$. Pullback and ordinary pushforward preserve the bounded constructible subcategories, and native tensor closure puts both $S$ and $H$ in them; pushforward preservation then puts $R^WH$ there as well. Fullness restricts the same isomorphism and inverse to that subcategory. No replacement of the native derived category by fixed pairs in an ordinary derived category occurred. The arbitrary object $T$ entered only through its bounded constructible underlying realization, so the proof includes every derived $T$ in the statement.",
+   "uses": [
+    "lem-sf-weil-native-closed-forgetful",
+    "lem-sf-native-weil-pullback-star-preservation",
+    "lem-sf-derived-weil-tensor-hom-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+    "place": "Step 1, second Hom bijection: conservativity and restriction of the native proper projection isomorphism"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "def-sf-derived-weil-category-and-operations",
+  "def-sf-native-weil-derived-framework",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-finite-tor-amplitude",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-sf-adic-proper-adjunction-realization",
+  "lem-sf-adic-qbar-constructible-realization",
+  "lem-sf-derived-weil-pullback-pushforward-adjunction",
+  "lem-sf-derived-weil-tensor-hom-adjunction",
+  "lem-sf-fixed-pair-adjunction-lift",
+  "lem-sf-fixed-pair-derived-forget-comparison",
+  "lem-sf-locally-finite-coefficient-ring-realization",
+  "lem-sf-native-adic-pullback-frobenius-mates",
+  "lem-sf-native-weil-pullback-star-preservation",
+  "lem-sf-ringed-forget-tensor-transposition",
+  "lem-sf-weil-frobenius-action-resolutions",
+  "lem-sf-weil-native-closed-forgetful",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "thm-sf-pf-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+  "place": "Step 1, second Hom bijection, proper-factor realization; explicit common-resolution and balanced-tensor computation, using BS Proposition 6.8.14/Remark 6.8.15 and Stacks 070I, 08BJ, 07A4, 0G7E."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "projectionFormula|WeilComplex|derivedLowerStar",
+   "results": "OK 0 hits; ; subdirectory=",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not assert a comparison in the actual derived category of Frobenius-equivariant module sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image projection formula from adjunction counit for Frobenius equivariant sheaves",
+   "results": "OK 8 hits; CategoryTheory.Adjunction.CoreHomEquivUnitCounit.counit, CategoryTheory.Adjunction.derivedε, CategoryTheory.LiftLeftAdjoint.otherMap, CategoryTheory.Adjunction.derivedε.congr_simp, CategoryTheory.Limits.coneOfAdj_π, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val; subdirectory=",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not assert a comparison in the actual derived category of Frobenius-equivariant module sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionFormula\"",
+   "results": "OK 0 hits; ; subdirectory=",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not assert a comparison in the actual derived category of Frobenius-equivariant module sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For proper morphisms the counit-defined projection map for bounded constructible complexes of native proetale Weil module sheaves is invertible after forgetting Frobenius",
+   "results": "OK 8 hits; LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, Condensed.profiniteSolidCounit, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction, CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, LightCondSet.instIsIsoFunctorSequentialCounitSequentialAdjunction, CondensedMod.IsSolid.isIso_solidification_map, Condensed.profiniteSolid; subdirectory=",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not assert a comparison in the actual derived category of Frobenius-equivariant module sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|[Ee]xtension.*[Zz]ero",
+   "results": "OK 0 hits; ; subdirectory=CategoryTheory/Sites",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not assert a comparison in the actual derived category of Frobenius-equivariant module sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionFormula\"",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived sheaf functors or other categorical adjunctions, not the native derived Weil proper projection arrow with both comparison normalizations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived projection formula for proper pushforward in the ordinary derived category of Frobenius equivariant module sheaves, compatible with forgetting and adic realization",
+   "results": "OK 8 hits; localCohomology.diagram, SheafOfModules.pushforward_map_val, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.unitToPushforwardObjUnit_val_app_apply, SheafOfModules.unitToPushforwardObjUnit, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived sheaf functors or other categorical adjunctions, not the native derived Weil proper projection arrow with both comparison normalizations"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|WeilComplex|derivedLowerStar",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived sheaf functors or other categorical adjunctions, not the native derived Weil proper projection arrow with both comparison normalizations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image projection formula for Frobenius equivariant module sheaves after forgetting the action",
+   "results": "OK 8 hits; SheafOfModules.forget, AlgebraicGeometry.Scheme.Modules.toPresheafOfModules, PresheafOfModules.pushforward₀CompToPresheaf, AlgebraicGeometry.Scheme.Modules.instFaithfulPresheafOfModulesToPresheafOfModules, AlgebraicGeometry.Scheme.Modules.instReflectsIsomorphismsPresheafAbCarrierCommRingCatToPresheaf, SheafOfModules.forget_obj, SheafOfModules.toSheaf, SheafOfModules.fullyFaithfulForget",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived sheaf functors or other categorical adjunctions, not the native derived Weil proper projection arrow with both comparison normalizations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper derived pushforward satisfies the tensor projection formula and its counit-defined arrow is preserved by a monoidal realization functor",
+   "results": "OK 8 hits; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc, PresheafOfModules.pushforwardComp, CategoryTheory.ExponentiableMorphism.pushforwardId_hom_counit_assoc, CategoryTheory.ExponentiableMorphism.pushforwardId_hom_counit, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom, CategoryTheory.ExponentiableMorphism.unit_pushforwardId_hom_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived sheaf functors or other categorical adjunctions, not the native derived Weil proper projection arrow with both comparison normalizations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-derived-weil-compact-projection-formula",
+  "date": "2026-10-22",
+  "group": "Q22"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "fix-lem-tensor-adjunction.proof.md Step 1, second Hom bijection: proper factor; old compact-projection proof Steps 1 and 3; Bhatt-Scholze Proposition 6.8.14 and Remark 6.8.15, pp. 61-62",
+   "via": [
+    "lem-sf-derived-weil-compact-projection-formula",
+    "lem-sf-weil-verdier-exchange"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-native-proper-projection-realization",
+  "worker": "stage1",
+  "group": "Q86",
+  "summary": "Repair of returned head db325177f48 on the current DAG: retained the approved eight-step route, re-read all 22 current proof dependencies, and rechecked all 26 verbatim statement quotations. Steps 2--3 now spell out both detection of native pullback exactness by forgetting and the homotopy-adjunction proof that pushforward preserves the K-injective model. Thus the actual derived counit is computed on a justified common model. Statement, statement dependencies and provenance agree with the current unsplit item; the delivery tool rebases owned fields while preserving current maintainer metadata. No new nodes and no lisse restriction.",
+  "blueprint": "Inherited blueprint.from.node is null, as confirmed by blueprint_refs ancestor; retained inherited via list. This realizes fix-lem-tensor-adjunction.proof.md Step 1, second Hom bijection, proper factor in the compactification projection formula (parent lem-sf-derived-weil-compact-projection-formula step 2). Blueprint searches for projection, proper projection, projection morphism, projection formula and Frobenius found no equivalent full native assertion.",
+  "tool_uses": [
+   {
+    "node": "def-exchange-projection",
+    "why": "Generic exchange and projection transformations used with its stated hypotheses in this native proper-factor comparison; this supplies a tool, not a replacement of the unit route."
+   },
+   {
+    "node": "def-sf-native-weil-derived-framework",
+    "why": "Generic the native derived category of pro-etale weil sheaves and its operations used with its stated hypotheses in this native proper-factor comparison; this supplies a tool, not a replacement of the unit route."
+   },
+   {
+    "node": "def-weil-algebraically-closed-coefficients",
+    "why": "Generic algebraically closed coefficient category used with its stated hypotheses in this native proper-factor comparison; this supplies a tool, not a replacement of the unit route."
+   },
+   {
+    "node": "def-weil-finite-tor-amplitude",
+    "why": "Generic finite tor amplitude used with its stated hypotheses in this native proper-factor comparison; this supplies a tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-sf-fixed-pair-adjunction-lift",
+    "why": "Generic an adjunction lifts to fixed pairs when the right exchange is its invertible mate used with its stated hypotheses in this native proper-factor comparison; this supplies a tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-sf-fixed-pair-derived-forget-comparison",
+    "why": "Generic derived forgetting of fixed pairs and right derived functors used with its stated hypotheses in this native proper-factor comparison; this supplies a tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic exactness data for the ringed-topos projection mate used with its stated hypotheses in this native proper-factor comparison; this supplies a tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic derived tensor comparison for arbitrary ringed topoi used with its stated hypotheses in this native proper-factor comparison; this supplies a tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic an adjunction of additive functors induces an adjunction on the homotopy categories of complexes, termwise used with its stated hypotheses in this native proper-factor comparison; this supplies a tool, not a replacement of the unit route."
+   },
+   {
+    "node": "thm-sf-pf-field",
+    "why": "Generic rational and algebraically closed stages used with its stated hypotheses in this native proper-factor comparison; this supplies a tool, not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-exchange-projection",
+  "def-sf-native-weil-derived-framework",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-finite-tor-amplitude",
+  "lem-sf-fixed-pair-adjunction-lift",
+  "lem-sf-fixed-pair-derived-forget-comparison",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "thm-sf-pf-field"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q86-60995585a",
+  "group": "Q86",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-60995585a (reviewer sub-agent of L); spot-checked: Re-delivery of db325177f48e, whose review was FIX (step 1 to cite lem-sf-locally-finite-coefficient-ring-realization). The landing then refused that head because the item was a side completion not yet in the live DAG, and the FIX was lost: step 1 of this head is byte-identical to the unfixed step. The item is still unsplit with no proof in live and side-live, so no other group has superseded it. Delta against the earlier head: only steps 2-3 and the split_report summary changed. Step 2 is correct: native pullback is exact because the frobenius-mates node gives exact ordinary pullback and the resolutions node gives exact, conservative U. Step 3 is correct: for acyclic N, termwise-adjunction-homotopy gives Hom_K(N,p_*I)=Hom_K(p^*N,I)=0, so p_*I is K-injective, kinjective-hom-derived applies to both sides, and the counit Q(eps_I) followed by (Qu)^{-1} follows (Stacks 08BJ argument). Steps 4-8 are unchanged and re-checked: the balanced tensor inverses carry no sign; alpha=R(h)eta is the ringed projection mate; thm-sf-pf-field applies with compactification (id,p), where Rp_!=Rp_* and D^b_ctf=D^b_c at field stages; the quoted counit equation of proper-adjunction-realization holds verbatim; conservative U_Y gives invertibility. All 22 proof_deps and 6 stmt_deps statements are unchanged against live. Edge cases p=id, T=1, A=0 and multi-degree complexes are fine. No SGA source. Declared tool_uses accepted. FIX (C1/C5), re-applied: step 1 now cites theta_V and its eta_h/precomposition square from the same-unit node lem-sf-locally-finite-coefficient-ring-realization (statement unchanged live, status split; its closure of 891 nodes does not contain the item and has no trace-formula or Poincare-duality node), and the node is added to the step's uses and to proof_deps. Corrected file: fixes/dag/nodes/sec-six-functors/lem-sf-native-proper-projection-realization.json. Maintainer note: this FIX has now been lost once after a landing refusal; re-apply it if the head is refused again.; 1 file(s) fixed by the reviewer"
+ }
+}

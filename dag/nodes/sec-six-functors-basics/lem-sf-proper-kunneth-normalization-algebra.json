@@ -1,0 +1,105 @@
+{
+ "id": "lem-sf-proper-kunneth-normalization-algebra",
+ "kind": "statement",
+ "title": "Abstract proper Kunneth normalization diagram",
+ "statement": "For categories D,E, functors F,G:D→E and eta:F⇒G, take objects U,X,X′,X″,Z,H,H′ in E and V,V′,W,Q in D. Take maps s:U→X, r:X→F(V), i:V→W, k:F(W)→H, ch:H→H′, c:W→Q, cmp:G(Q)→H′, v:V→V′, t:V′→Q, b:X→X′, r′:X′→G(V), d:X′→X″, r″:X″→G(V′), input:U→Z, s′:Z→X″ and kappa:Z→H′. If k;ch=F(c);eta_Q;cmp, i;c=v;t, r;eta_V=b;r′, r′;G(v)=d;r″, s;b;d=input;s′ and s′;r″;G(t);cmp=kappa, then (s;r;F(i);k);ch=input;kappa. No invertibility or geometric hypotheses are assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "First triangle, proper-support route normalization"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Reassociate the composite, substitute hc and combine the two F-images. Use hi and naturality of eta, then hp. Expand the G-image of the composite; apply hn and hs under the common tail. Finish with hk. All steps are composition associativity, functoriality and naturality in Mathlib.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Elementary diagram calculation of the proper forget-supports normalization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Functor.map_comp_assoc; NatTrans.naturality_assoc in Mathlib.CategoryTheory.Functor.Category and NatTrans",
+   "results": "The standard functoriality, naturality and associativity equations suffice. This lemma bundles their six given squares without a new mathematical assumption.",
+   "date": "2026-10-27",
+   "verdict": "Elementary combination of Mathlib equations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Category theory diagram chase: a composite under functors F and G related by a natural transformation, substituting six commutative squares using naturality and functoriality",
+   "results": "Eight results, including CatCommSq, TwoSquare, NatTrans.mapSquare and CatCommSq component/naturality equations. These package functor squares rather than this six-equation morphism calculation.",
+   "date": "2026-10-27",
+   "verdict": "Use the elementary Mathlib composition and naturality equations directly."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality_assoc",
+   "results": "One exact hit in Mathlib.CategoryTheory.NatTrans. Its reassociated naturality equation is used in the proof.",
+   "date": "2026-10-27",
+   "verdict": "Used together with functoriality and the six given square equations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SfSupportedFirstExtraction",
+  "date": "2026-10-27",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Elementary calculation inside proper-support normalization.",
+   "via": [
+    "lem-sf-proper-relative-kunneth-supports",
+    "lem-sf-supported-first-extraction",
+    "lem-sf-supported-trace-contractions",
+    "lem-sf-diagonal-kernel-integral-triangles",
+    "lem-sf-affine-base-p1-trace-adjunction",
+    "lem-sf-affine-line-canonical-duality",
+    "lem-sf-smooth-dualizing-complex-invertible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperKunnethNormalizationAlgebra",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperKunnethNormalizationAlgebra.lean",
+  "declaration": "AlgebraicGeometry.Etale.properKunnethNormalizationAlgebra",
+  "statement": "theorem properKunnethNormalizationAlgebra\n    {D E : Type v} [Category.{u} D] [Category.{u} E]\n    (F G : D ⥤ E) (eta : F ⟶ G)\n    {U X X' X'' Z H H' : E} {V V' W Q : D}\n    (s : U ⟶ X) (r : X ⟶ F.obj V) (i : V ⟶ W)\n    (k : F.obj W ⟶ H) (ch : H ⟶ H')\n    (c : W ⟶ Q) (cmp : G.obj Q ⟶ H')\n    (v : V ⟶ V') (t : V' ⟶ Q)\n    (b : X ⟶ X') (r' : X' ⟶ G.obj V)\n    (d : X' ⟶ X'') (r'' : X'' ⟶ G.obj V')\n    (input : U ⟶ Z) (s' : Z ⟶ X'') (kappa : Z ⟶ H')\n    (hc : k ≫ ch = F.map c ≫ eta.app Q ≫ cmp)\n    (hi : i ≫ c = v ≫ t)\n    (hp : r ≫ eta.app V = b ≫ r')\n    (hn : r' ≫ G.map v = d ≫ r'')\n    (hs : s ≫ b ≫ d = input ≫ s')\n    (hk : s' ≫ r'' ≫ G.map t ≫ cmp = kappa) :\n    (s ≫ r ≫ F.map i ≫ k) ≫ ch = input ≫ kappa",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261027T135445-L-3710236",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261027T135445-L-3710236",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

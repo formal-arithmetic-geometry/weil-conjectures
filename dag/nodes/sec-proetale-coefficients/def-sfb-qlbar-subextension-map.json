@@ -166,7 +166,65 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q29-8093ca7f3 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited nodes, blueprint proof sources, unit/chapter route, delivery rules, and archived master target declarations. Verified inherited-topology continuity, postcomposition on every profinite section, underlying ring-object morphism, strict identity/composition, edge cases, acyclicity, duplicate/generalization candidates, Mathlib searches, coefficient categories, and base-change morphisms. No new nodes or repairs are needed; review.md records the checks."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "Profinite.padicSubfieldRingObjMap",
+    "Profinite.padicSubfieldCondensedRingMap",
+    "Profinite.padicSubfieldRingObjMap_id",
+    "Profinite.padicSubfieldRingObjMap_comp"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "Profinite.padicSubfieldRingObjMap",
+     "module": "WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension",
+     "lines": [
+      86,
+      91
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "Profinite.padicSubfieldCondensedRingMap",
+     "module": "WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension",
+     "lines": [
+      79,
+      84
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "Profinite.padicSubfieldRingObjMap_id",
+     "module": "WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension",
+     "lines": [
+      98,
+      99
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "Profinite.padicSubfieldRingObjMap_comp",
+     "module": "WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension",
+     "lines": [
+      101,
+      104
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "lean": {
   "module": "WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension",
   "declaration": "Profinite.padicSubfieldRingObjMap",
@@ -190,5 +248,23 @@
   "group": "NP",
   "result": "pass",
   "note": "Existing attachment Profinite.padicSubfieldRingObjMap (FiniteSubextension l.86-104). The delivery adds only the lean field; the statement is verbatim. My consumer compile (42 s) checks: endpoints rfl = padicSubfieldCondensedRing; HEq.rfl with continuousMapRingSheafMapOfUniverse.{u,0} and continuousMapRingObjMapOfUniverse.{u,0} of IntermediateField.inclusion; section formula rfl; IsMonHom; _id and _comp strict rfl equalities. FiniteIntermediateField = finite-dimensional intermediate fields with no extra hypotheses; universe u arbitrary; E=F, ⊥ and empty S covered. The scheme-level map owned by def-sfb-subfield-coefficient-map is a different notion, so this is not a duplicate. Report sections present; item not dropped. No findings."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $E\\subseteq F$ be finite subextensions of $\\Qlb/\\mathbf Q_\\ell$\n([det-def-sfb-qlbar-condensed]), with the topologies restricted from $\\Qlb$, and let\n$\\underline E$, $\\underline F$ be their condensed rings\n([def-sfb-padic-subfield-condensed-ring]). The morphism\n$\\iota_{E,F}\\colon\\underline E\\to\\underline F$ is postcomposition with the inclusion\n$E\\subseteq F$ ([def-sfb-continuous-map-condensed-ring-map]), viewed as a morphism of the\nunderlying ring objects of $\\Sh(*_{\\mathrm{proét}},\\Ab)$. It is strictly functorial:\n$\\iota_{E,E}=\\mathrm{id}$, and $\\iota_{F,H}\\circ\\iota_{E,F}=\\iota_{E,H}$ for\n$E\\subseteq F\\subseteq H$.",
+  "proof": [
+   {
+    "text": "Both $E$ and $F$ carry the topology restricted from $\\Qlb$, so the inclusion\n$E\\subseteq F$ is a continuous ring homomorphism. Then\n[def-sfb-continuous-map-condensed-ring-map] gives a morphism of condensed rings, hence of\nring objects. It also gives the functoriality, since the inclusion\n$E\\subseteq E$ is $\\mathrm{id}_E$ and $(F\\subseteq H)\\circ(E\\subseteq F)=(E\\subseteq H)$.",
+    "uses": [
+     "def-sfb-continuous-map-condensed-ring-map"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

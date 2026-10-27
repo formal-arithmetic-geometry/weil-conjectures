@@ -50,7 +50,32 @@
   "def-sc-curves"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.isFinite_of_isProper_of_isAffine"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.isFinite_of_isProper_of_isAffine",
+     "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper",
+     "lines": [
+      104,
+      120
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-curve-estimates",
  "unit": "sk-thm-br",
  "lean": {
@@ -63,5 +88,24 @@
   ],
   "sorry_free": true,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $C$ be a scheme over a field $k$ (for instance a curve) which is\nboth proper over $k$ and affine. Then $C$ is finite over $k$\n(in particular of dimension zero).",
+  "proof": [
+   {
+    "text": "Write $C=\\operatorname{Spec}B$ with $B$ a $k$-algebra of finite\ntype. If $B$ were not finite over $k$, then $B$ would contain\nan element $t$ transcendental over $k$ (a finitely generated\n$k$-algebra all of whose elements are algebraic over $k$ is a\nfinite-dimensional $k$-vector space). The $k$-algebra map\n$k[x]\\to B$, $x\\mapsto t$, defines a morphism\n$\\varphi:\\operatorname{Spec}B\\to\\mathbf A^1_k$. Since\n$\\operatorname{Spec}B$ is proper over $k$, the image\n$Z:=\\varphi(\\operatorname{Spec}B)$ is a closed subscheme of\n$\\mathbf A^1_k$ which is proper over $k$, by [lem-weil-pbc-proper-closed-image] of the ambient-foundations chapter and [pqf-lem-image-proper] of the quasi-finite chapter). Now $Z\\neq\\mathbf A^1_k$: the affine\nline is not proper over $k$, because the image of the closed\nsubset $V(xy-1)\\subset\\mathbf A^1_k\\times_k\\mathbf A^1_k$ under\nthe first projection is $\\mathbf A^1_k\\setminus\\{0\\}$, which is\nnot closed. Hence $Z=V(f)$ for a nonzero $f\\in k[x]$, a finite\nset of closed points. But $Z$ is also the closed subscheme of\n$\\mathbf A^1_k$ cut out by the kernel of the map $k[x]\\to B$, and\nthis kernel contains no nonzero polynomial because $t$ is\ntranscendental, so $Z=\\mathbf A^1_k$, a contradiction. Therefore\n$B$ is integral over $k$, and being of finite type it is finite\nover $k$. A finite $k$-scheme has dimension zero: every quotient\nof a finite $k$-algebra is finite over $k$, and a domain finite\nover the field $k$ is a field.",
+    "uses": [
+     "lem-weil-pbc-proper-closed-image",
+     "pqf-lem-image-proper"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

@@ -1,0 +1,322 @@
+{
+ "id": "lem-pod-completed-inverse-image-scalar-counit",
+ "kind": "statement",
+ "title": "Completed scalar comparison preserves the inverse-image counit",
+ "statement": "Fix a prime $\\ell$ and finite extensions $E\\subset L$ of $\\mathbf Q_\\ell$ inside a fixed algebraic closure, with valuation rings $\\mathcal O_E\\subset\\mathcal O_L$ [def-weil-l-adic-coefficient-extension]. Let $g:X\\to Y$ be an isomorphism of schemes on which $\\ell$ is invertible, with inverse $\\bar g:Y\\to X$ [def-weil-scheme-morphism-properties]. Use small pro-etale sites [def-weil-pbc-proetale-site] and completed coefficient sheaves $R_{F,W}=\\widehat{\\mathcal O}_{F,W}$ for $F=E,L$ and $W=X,Y$ [def-weil-completed-integral-coefficients]. Put $\\mathcal C_F(W)=D^b_c(W,\\mathcal O_F)$, the derived-complete integral constructible category [def-weil-derived-complete-integral-detailed]. Write $G_F=g^{-1}:\\mathcal C_F(Y)\\to\\mathcal C_F(X)$ and $H_F=\\bar g^{-1}:\\mathcal C_F(X)\\to\\mathcal C_F(Y)$, transporting the module actions through the canonical coefficient isomorphisms [def-weil-proetale-inverse-image, lem-weil-proetale-isomorphism-inverse-image, lem-weil-isomorphism-derived-pullback]. Let $u_{F,K}:H_FG_FK\\xrightarrow{\\sim}K$ be the canonical inverse-image identification: on site objects it is the reindexing identification induced by $g\\bar g=\\mathrm{id}_Y$.\n\nLet $T_W:\\mathcal C_E(W)\\to\\mathcal C_L(W)$ be integral scalar extension [def-weil-integral-scalar-extension], set $C_WK=K\\otimes^L_{R_{E,W}}R_{L,W}$ and let $\\chi_W:C_W\\xrightarrow{\\sim}T_W$ be the specified natural completion comparison [lem-weil-finite-free-completed-scalar-comparison]. Use the specified ordinary tensor reindexing isomorphisms $b^g:C_XG_E\\xrightarrow{\\sim}G_LC_Y$ and $b^{\\bar g}:C_YH_E\\xrightarrow{\\sim}H_LC_X$ of [lem-weil-isomorphism-comparison-scalar-extension], and define\n$$\\beta^g_K=G_L(\\chi_{Y,K})b^g_K\\chi_{X,G_EK}^{-1},\\qquad \\beta^{\\bar g}_M=H_L(\\chi_{X,M})b^{\\bar g}_M\\chi_{Y,H_EM}^{-1}.$$\nFor every $K\\in\\mathcal C_E(Y)$ the following are equalities of derived morphisms:\n$$u_{L,C_YK}H_L(b^g_K)b^{\\bar g}_{G_EK}=C_Y(u_{E,K}),$$\n$$u_{L,T_YK}H_L(\\beta^g_K)\\beta^{\\bar g}_{G_EK}=T_Y(u_{E,K}).$$\nThey have sources $C_YH_EG_EK$ and $T_YH_EG_EK$, respectively, and targets $C_YK$ and $T_YK$. They are natural in $K$ and use the specified $b$ and $\\chi$, rather than arbitrary isomorphisms between the same functors.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+  "place": "First paragraph, inverse automorphism squares whose paste is identity. Agent extraction of original item Step 4: sectionwise tensor reindexing and conjugation by completion comparisons. Context: Stacks sites-modules.tex, Tag 03D6, definition-pushforward (module pullback); the displayed counit identities are agent-formulated, not a quoted assertion of that tag."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-isomorphism-derived-pullback",
+  "def-weil-integral-scalar-extension",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-isomorphism-comparison-scalar-extension"
+ ],
+ "proof": [
+  {
+   "text": "Normalize the double finite constant coefficient transport against the identity-on-underlying-schemes site isomorphism. Conjugate by the inverse of the canonical reindexing isomorphism; the resulting endomorphism of the constant sheaf fixes each constant section by isoSectionwiseConstantMap_existsUnique and naturality of toSheafify. Full faithfulness of forgetting commutativity and sheafification uniqueness make it the identity. The completed coefficient maps are limit lifts. Postcompose their double transport with each finite projection, use the lift equations and the finite equality, then use naturality of the reindexing transformation and joint monicity of limit projections.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-weil-completed-integral-coefficients",
+    "def-weil-inverse-image-pullback-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "First paragraph, inverse automorphism squares and identity pasting; sectionwise tensor and completion calculation from the existing proof plan."
+   }
+  },
+  {
+   "text": "Invert the completed coefficient equality. Mathlib SheafOfModules.pushforwardComp, pushforwardCongr₂ and pushforwardId give a natural isomorphism from the double module inverse image to the identity. Its component is exactly restriction along the inverse of the specified site counit. Extensionality on each module, site object and section proves uniqueness. This constructs integralInverseImageCounit_existsUnique without a new existence assumption.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-weil-inverse-image-pullback-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "First paragraph, inverse automorphism squares and identity pasting; sectionwise tensor and completion calculation from the existing proof plan."
+   }
+  },
+  {
+   "text": "Use the ordinary scalar model already supplied by integralOrdinaryScalarWitness; its exactness is already an instance, so no second finite-free-coordinate argument is needed. The normalized ordinary scalar adjunction identifies its unit with 1 tensor x. The injective adjunction Hom equivalence shows that maps out of this scalar extension are equal when they agree on every such unit section. Its unit naturality supplies the formulas for restriction and module maps. The specified isomorphismScalarTensor_existsUnique applied twice sends these generators to the same reindexed tensor. The section normalization of the constructed counit followed by the two unit naturality formulas proves scalarModuleCounit on all module sheaves. No equality between tensor-sheaf sections and sectionwise tensors is used.",
+   "uses": [
+    "def-weil-integral-scalar-extension",
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "lem-weil-isomorphism-comparison-scalar-extension",
+    "lem-weil-scalar-extension-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "First paragraph, inverse automorphism squares and identity pasting; sectionwise tensor and completion calculation from the existing proof plan."
+   }
+  },
+  {
+   "text": "Prove the exact-functor descent calculation with private generic helpers. The composition and natural-isomorphism factorization equations, and the identity factorization, identify the derived counit and derived tensor squares on Qh of each complex. The sheaf identity of the preceding step holds degreewise, hence on homotopy classes. Naturality moves all factorization isomorphisms to common source and target positions; cancel them, apply the degreewise equality, and use Localization.natTrans_ext to descend it to every derived object. Specialize to the named inverse image, scalar functors and normalized isomorphisms to obtain the ordinary clause.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-isomorphism-comparison-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "First paragraph, inverse automorphism squares and identity pasting; sectionwise tensor and completion calculation from the existing proof plan."
+   }
+  },
+  {
+   "text": "Expand the specified beta maps and precompose with chi_Y on H_E G_E K. The adjacent chi_X and its inverse cancel after H_L. Naturality of the normalized derived counit at chi_Y moves chi_Y to the output. Substitute the ordinary clause and then naturality of chi_Y at u_E. Constructibility of both successive inverse-image inputs supplies the required completeness and invertibility of chi. The existing comparison-model normalization is retained, so these are the specified completion maps.",
+   "uses": [
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-weil-isomorphism-comparison-scalar-extension",
+    "lem-weil-isomorphism-derived-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "First paragraph, inverse automorphism squares and identity pasting; sectionwise tensor and completion calculation from the existing proof plan."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-inverse-image-pullback-comparison",
+  "def-weil-integral-scalar-extension",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "lem-weil-isomorphism-comparison-scalar-extension",
+  "lem-weil-scalar-extension-composition",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-weil-isomorphism-derived-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+  "place": "First paragraph, inverse automorphism squares and identity pasting; sectionwise tensor and completion calculation from the existing proof plan. Lean proof by U3: constant/limit normalization, generator-one adjunction calculation, exact derived descent, and completion naturality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "counit.*[Ss]calar|[Ss]calar.*counit|[Cc]ompletion.*tensor",
+   "results": "{\"t\": \"2026-10-22T07:05:47Z\", \"tool\": \"grep\", \"query\": \"counit.*[Ss]calar|[Ss]calar.*counit|[Cc]ompletion.*tensor\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give individual naturality/cancellation identities, ordinary sheaf or module comparisons, not this composite comparison formula with its specified data; no one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed extension of scalars commutes with inverse image equivalence counit using the canonical tensor comparison",
+   "results": "{\"t\": \"2026-10-22T07:05:48Z\", \"tool\": \"leansearch\", \"query\": \"Completed extension of scalars commutes with inverse image equivalence counit using the canonical tensor comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply\", \"ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply\", \"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"LinearEquiv.extendScalarsOfIsLocalizationEquiv_symm_apply\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map\", \"CoalgEquiv.symm\", \"LinearEquiv.extendScalarsOfSurjective_symm\"], \"digest\": \"79ab41c1ea724cb5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give individual naturality/cancellation identities, ordinary sheaf or module comparisons, not this composite comparison formula with its specified data; no one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence.counitIso, CategoryTheory.NatIso",
+   "results": "{\"t\": \"2026-10-22T07:05:48Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Equivalence.counitIso, CategoryTheory.NatIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.NatIso'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: query rejected for an unknown identifier; corrected searches also recorded"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse-image tensor scalar comparison conjugated by completion commutes with the counit of inverse scheme isomorphisms",
+   "results": "{\"t\": \"2026-10-22T07:05:58Z\", \"tool\": \"leanfinder\", \"query\": \"Inverse-image tensor scalar comparison conjugated by completion commutes with the counit of inverse scheme isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.ΓSpecIso_inv_naturality\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm\", \"AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo\", \"AlgebraicGeometry.pullbackSpecIso_hom_base\", \"AlgebraicGeometry.Scheme.ΓSpecIso_inv_naturality_assoc\", \"AlgebraicGeometry.pullbackSpecIso_hom_base_assoc\", \"AlgebraicGeometry.Scheme.ΓSpecIso_naturality_assoc\"], \"digest\": \"6ee86cce627e22bf\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give individual naturality/cancellation identities, ordinary sheaf or module comparisons, not this composite comparison formula with its specified data; no one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherence of conjugated tensor extension comparison with inverse-image counit for derived complete sheaves",
+   "results": "{\"t\": \"2026-10-22T07:06:42Z\", \"tool\": \"leanfinder\", \"query\": \"Coherence of conjugated tensor extension comparison with inverse-image counit for derived complete sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val\", \"CategoryTheory.sheafComposeNatIso\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val\", \"CategoryTheory.sheafComposeIso_inv_fac\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_unit_app_val\", \"CategoryTheory.constantCommuteCompose\", \"CategoryTheory.sheafComposeNatTrans_fac\", \"CategoryTheory.sheafComposeIso_hom_fac\"], \"digest\": \"6647b68d3463621d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give individual naturality/cancellation identities, ordinary sheaf or module comparisons, not this composite comparison formula with its specified data; no one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence.counit_naturality",
+   "results": "{\"t\": \"2026-10-22T07:13:41Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Equivalence.counit_naturality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Equivalence.counit_naturality\"], \"digest\": \"b87fc1b68c183048\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give individual naturality/cancellation identities, ordinary sheaf or module comparisons, not this composite comparison formula with its specified data; no one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "counit|tensor",
+   "results": "{\"t\": \"2026-10-22T07:13:41Z\", \"tool\": \"grep\", \"query\": \"counit|tensor\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Colimits.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\"], \"digest\": \"7bd156d77d6dadc4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give individual naturality/cancellation identities, ordinary sheaf or module comparisons, not this composite comparison formula with its specified data; no one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "counit.*[Ss]calar|[Ss]calar.*counit",
+   "results": "{\"t\": \"2026-10-22T11:13:38Z\", \"tool\": \"grep\", \"query\": \"counit.*[Ss]calar|[Ss]calar.*counit\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module pullback composition and counit naturality are ingredients; none states both identities for the prescribed completed coefficient comparison, nor specializes to them in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor reindexing along inverse site equivalences commutes with their counit after conjugation by a natural isomorphism",
+   "results": "{\"t\": \"2026-10-22T11:13:39Z\", \"tool\": \"leansearch\", \"query\": \"Tensor reindexing along inverse site equivalences commutes with their counit after conjugation by a natural isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PiTensorProduct.reindex\", \"PiTensorProduct.reindex_tprod\", \"PiTensorProduct.map_reindex_symm\", \"PiTensorProduct.reindex_comp_tprod\", \"PiTensorProduct.map_comp_reindex_eq\", \"CategoryTheory.Equivalence.counitIso_inv_app_tensor_comp_functor_map_δ_inverse\", \"PiTensorProduct.lift_reindex_symm\", \"PiTensorProduct.map_reindex\"], \"digest\": \"9f6a055b56c3e201\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module pullback composition and counit naturality are ingredients; none states both identities for the prescribed completed coefficient comparison, nor specializes to them in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence.counit_naturality",
+   "results": "{\"t\": \"2026-10-22T11:13:39Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Equivalence.counit_naturality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Equivalence.counit_naturality\"], \"digest\": \"b87fc1b68c183048\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module pullback composition and counit naturality are ingredients; none states both identities for the prescribed completed coefficient comparison, nor specializes to them in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical inverse-image tensor comparison for inverse scheme isomorphisms respects the counit and conjugation by a natural completion isomorphism",
+   "results": "{\"t\": \"2026-10-22T11:13:40Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical inverse-image tensor comparison for inverse scheme isomorphisms respects the counit and conjugation by a natural completion isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm\", \"AlgebraicGeometry.Scheme.inv_appTop\", \"AlgebraicGeometry.Scheme.Hom.inv_appTop\", \"AlgebraicGeometry.Scheme.Modules.inv_app\", \"AlgebraicGeometry.Scheme.inv_app\", \"AlgebraicGeometry.Scheme.Hom.inv_app\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\"], \"digest\": \"116ec0872b8ce2fb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module pullback composition and counit naturality are ingredients; none states both identities for the prescribed completed coefficient comparison, nor specializes to them in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "counit_naturality|counitIso_inv_app_tensor_comp_functor_map",
+   "results": "{\"t\": \"2026-10-22T11:15:03Z\", \"tool\": \"grep\", \"query\": \"counit_naturality|counitIso_inv_app_tensor_comp_functor_map\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"Mathlib/CategoryTheory/Adjunction/Triple.lean\", \"Mathlib/CategoryTheory/Adjunction/Triple.lean\"], \"digest\": \"226f2048d7b79544\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module pullback composition and counit naturality are ingredients; none states both identities for the prescribed completed coefficient comparison, nor specializes to them in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of modules extension of scalars commutes with pullback by inverse site equivalences and the composite comparison is the counit tensored with identity",
+   "results": "{\"t\": \"2026-10-22T11:15:03Z\", \"tool\": \"leanfinder\", \"query\": \"For sheaves of modules extension of scalars commutes with pullback by inverse site equivalences and the composite comparison is the counit tensored with identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.pullback_id_comp\", \"SheafOfModules.pullback_comp_id\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\"], \"digest\": \"33a2c2f9e9ef4a44\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module pullback composition and counit naturality are ingredients; none states both identities for the prescribed completed coefficient comparison, nor specializes to them in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv_pullbackComp_inv|def pullbackComp|pullback_id_comp|pullback_comp_id",
+   "results": "{\"t\": \"2026-10-22T11:16:35Z\", \"tool\": \"grep\", \"query\": \"conjugateEquiv_pullbackComp_inv|def pullbackComp|pullback_id_comp|pullback_comp_id\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\"], \"digest\": \"028e4396feaeec08\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module pullback composition and counit naturality are ingredients; none states both identities for the prescribed completed coefficient comparison, nor specializes to them in one line"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pod-pullback-identities-scalar-extension",
+  "date": "2026-10-22",
+  "group": "Q123"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "blueprint": {
+  "from": {
+   "node": "prop-weil-operations",
+   "place": "Proof sentence 1 ('The equivariant lifts of the operations ... are [lem-fix-weil-operations]'): the inverse automorphism squares for pullback, read at the algebraically closed coefficient level, must paste to the identity after scalar extension; this node is the geometric part of that pasting (the tensor/completion scalar comparisons along g and its inverse compose to the scalar extension of the inverse-image identification), used in Step 4 of lem-pod-pullback-identities-scalar-extension.",
+   "via": [
+    "lem-pod-pullback-identities-scalar-extension",
+    "lem-pod-semilinear-field-operation-lifts"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pod-completed-inverse-image-scalar-counit",
+  "worker": "stage1",
+  "summary": "Q25: retained the statement and all imported metadata; proved ordinary tensor counit compatibility on local generators, descended the actual exact chain transformations, and expanded the completed comparisons using naturality and inverse cancellation. Reused existing finite-free-coordinate and localization nodes; no new nodes. Checked zero, identity-isomorphism and identity-coefficient cases; no noetherian or Tor-amplitude hypothesis added.",
+  "blueprint": "prop-weil-operations, first proof sentence referring to lem-fix-weil-operations, whose first paragraph says inverse automorphism squares paste to the identity. Realizes the tensor/completion portion extracted through lem-pod-semilinear-field-operation-lifts and lem-pod-pullback-identities-scalar-extension.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-finite-free-scalar-coordinates",
+    "why": "Generic finite-free sheaf scalar-coordinate formula used to prove exactness; the unit has no replacement for this linear-algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic termwise descent of an exact functor to the unbounded derived category, used for the ordinary scalar and reindexing functors."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic identification of an exact functor with its universal left derived functor, used to identify the termwise scalar model with C."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Generic faithfulness of precomposition with localization, used to pass the equality of the actual chain maps to an equality of derived natural transformations."
+   },
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Generic sectionwise exact inverse image along an isomorphism; used only as the prescribed reindexing model."
+   },
+   {
+    "node": "lem-weil-isomorphism-derived-pullback",
+    "why": "Generic normalization of completed coefficient transport and preservation of the constructible complete domain under isomorphism pullback."
+   },
+   {
+    "node": "lem-weil-isomorphism-comparison-scalar-extension",
+    "why": "Uses only the specified local tensor formula for b and its exact derived realization, not its kappa/scalar compatibility conclusion."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Generic finite freeness of the completed coefficient extension and natural invertibility of the specified chi on complete inputs."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-isomorphism-derived-pullback",
+  "lem-weil-isomorphism-comparison-scalar-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-c26c35e91",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-c26c35e91 (reviewer sub-agent of L); spot-checked: Shape A is clean: one commit that changes only the item JSON and the report with its Q25 review. No new nodes, statement unchanged, stmt_deps complete. In clones/live and side-live the item is still unsplit, and there is no repair note. Statement types check: u_{L,C_YK}∘H_L(b^g_K)∘b^{ḡ}_{G_EK} and C_Y(u_{E,K}) have the same source and target, and likewise for β and T_Y. b^{ḡ} is the cited isomorphism node applied to ḡ, whose hypotheses hold. G_EK is in D^b_c by lem-weil-isomorphism-derived-pullback. Small cases g=id, E=L, K=0 and the empty scheme need no extra hypothesis. Step 1: S is finite free over R (lem-weil-finite-free-completed-scalar-comparison); the finite-free coordinates node gives M^n; kernels and cokernels are the underlying ones (def-weil-sheaf-of-modules-category); so A_W is exact. g^{-1} is exact (the iso-inverse-image node, part 2, via underlying sheaves). The exact-functor nodes then say every complex computes the derived functor, with no flatness of K. Step 2: part 1 is used twice; ρ^f fixes constants and c_{O_E}=lim c^g_{A_{E,m}}, so the double transport is the identity. Step 3: I traced the generator x⊗a → ḡ^{-1}(x_0⊗a_0) → ḡ^{-1}g^{-1}(x_00⊗a_00) → u_E(x)⊗a. Equality on the presheaf tensor extends through the sheafification universal property (def-pur-sheaf-tensor-product). Step 4: degreewise chain-map equality, the cited node's derived b is the termwise one, and localization part (3) gives equality on the derived category. Step 5: I redid the algebra (cancel χ_X^{-1}χ_X, naturality of u_L at χ_{Y,K}, Step 4, naturality of χ_Y at u_{E,K}); it is correct. Only lem-sfb-finite-free-scalar-coordinates is off the unit route; it is a generic tool and I accept the declared tool_uses. No cycle. rg -L over dag/nodes found no duplicate: inverse-comparison-counit-transport is abstract, and isomorphism-scalar-comparison-agreement, reindexing-completion-unit-tensor and sheaf-scalar-extension-constraint-coherence are different identities. No SGA. Mathlib searches recorded, no leaf. The parent's Step 4 uses exactly this statement."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedInverseImageScalarCounit",
+  "declaration": "WeilConjectures.completedInverseImage_scalarCounit",
+  "declarations": [
+   "WeilConjectures.integralInverseImageCounitSite",
+   "WeilConjectures.integralInverseImageCounit_existsUnique",
+   "WeilConjectures.integralInverseImageCounit",
+   "WeilConjectures.integralInverseImageDerivedCounit",
+   "WeilConjectures.completedInverseImage_scalarCounit"
+  ],
+  "file": "lean/Sheaf/Paper/CompletedInverseImageScalarCounit.lean",
+  "statement": "theorem completedInverseImage_scalarCounit {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] (hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) (K : sfIntegralConstructibleCategory l E Y) : ((isomorphismScalarTensorDerived l E L ι (inv g)).hom.app ((inverseImageIntegralDerived l E g).obj K.obj) ≫ (inverseImageIntegralDerived l L (inv g)).map ((isomorphismScalarTensorDerived l E L ι g).hom.app K.obj) ≫ (integralInverseImageDerivedCounit l L g).hom.app ((integralOrdinaryDerivedScalar l E L ι Y).obj K.obj) = (integralOrdinaryDerivedScalar l E L ι Y).map ((integralInverseImageDerivedCounit l E g).hom.app K.obj)) ∧ (isomorphismComparisonScalarBeta l E L ι (inv g) hY hX ((inverseImageIntegralDerived l E g).obj K.obj) (isomorphismComparisonInputs_constructible l E g hX hY K.obj K.property).1 ≫ (inverseImageIntegralDerived l L (inv g)).map (isomorphismComparisonScalarBeta l E L ι g hX hY K.obj K.property) ≫ (integralInverseImageDerivedCounit l L g).hom.app ((integralScalarExtension l E L ι Y).obj K.obj) = (integralScalarExtension l E L ι Y).map ((integralInverseImageDerivedCounit l E g).hom.app K.obj))",
+  "branch": "newtargets-dag",
+  "by": "Q152",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the specified isomorphismScalarTensorDerived and isomorphismComparisonScalarBeta. The ordinary exact model and its completion map are identified with the recorded completedDerivedScalarExtension/completedScalarComparison by the normalized isomorphismScalarModel_existsUnique. The counit is uniquely fixed on sections by a concrete identity-on-underlying-schemes site isomorphism, then localized termwise. Both clauses are equalities of ambient derived arrows for every object of the full integral constructible category."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a9ffb686c",
+  "group": "Q152",
+  "result": "pass",
+  "note": "First S2 delivery. Clause by clause, the Lean matches the node: b^{inv g}.app(G_E K) ≫ H_L.map(b^g.app K) ≫ u_L.app(C_Y K) = C_Y.map(u_E K), and the same with isomorphismComparisonScalarBeta and integralScalarExtension. Directions checked against isomorphismScalarTensorDerived (G_E⋙C_X ≅ C_Y⋙G_L) and against beta = scalarCompletionIso⁻¹≫b≫G_L(scalarCompletion). The beta for inv g uses hY hX and the .1 membership from isomorphismComparisonInputs_constructible. chi is identified with completedScalarComparison by isomorphismScalarModel_existsUnique. The helper u is the .choose of a true ∃! that pins every section to restriction along the Over.mapComp/mapId site iso (identity on schemes); it is localized with mapDerivedCategoryCompIso/NatIso/IdIso. Not hollow. Only sorry proofs; lean.statement verbatim; docstrings with source and blueprint, Steps 1-5 in the theorem docstring; no line over 100 characters; proof-route imports allowed. No extra hypotheses; the single universe u is inherited from the stmt_dep records; g=id, E=L, K=0 and the empty scheme are covered. No compile (no file changed); the worker reports a clean scompile. Advisories: (1) the parent lem-pod-pullback-identities-scalar-extension module already declares the identical pullbackIdentityModuleCounit*; the item cannot import its parent (stage-3 cycle); the two are equal by uniqueness, so at stage 3 the parent should reuse the item's counit; the worker's report missed this copy. (2) inverseImageIntegralModules/Derived are owned by def-weil-inverse-image-pullback-comparison, which is not in stmt_deps; it is the G of the stmt_dep b, so advisory. (3) The second reading is a short self-check but names concrete checks."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261025T101513-L-3702517",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

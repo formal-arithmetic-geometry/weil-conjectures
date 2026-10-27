@@ -1,0 +1,275 @@
+{
+ "id": "lem-sp-supported-scalar-tor-interval",
+ "kind": "statement",
+ "title": "Supported scalar tensor interval and reflection to an arbitrary etale origin",
+ "statement": "Fix a prime $\\ell$, a unital map $A\\to B$ of finite commutative rings killed by powers of $\\ell$, schemes $U,Z$, an open immersion $j:U\\hookrightarrow Z$, and integers $a\\leq b$. Work with constant-ring module sheaves on the small etale and pro-etale sites and ordinary uncompleted unbounded derived categories with comparison $\\nu_Z^*$ [def-weil-pbc-proetale-modules, def-weil-pbc-derived-categories]. Let $M\\in D(U_{\\mathrm{proet}},A)$ have Tor amplitude in $[a,b]$ [def-weil-proetale-tor-amplitude]. With pro-etale extension by zero [def-weil-extension-by-zero] put\n$$N=j_!^{\\mathrm{pro},A}M,\\quad Q=M\\otimes^L_{A_U}B_U,\\quad M_B=T_U^{A,B}M,$$\nwhere $Q$ retains only its $A$-action, derived tensor on the pro-etale sites is [def-weil-derived-tensor], and $T_U^{A,B}$ is scalar extension with its $B$-action [det-sp-scalar-extension-functor]. Let $\\operatorname{Res}_{A\\to B}$ denote restriction of scalars [def-pc-sheaf-restrict-scalars]. There are canonical isomorphisms in $D(Z_{\\mathrm{proet}},A)$\n$$N\\otimes^L_{A_Z}B_Z\\xrightarrow{\\sim}j_!^{\\mathrm{pro},A}Q\\xrightarrow{\\sim}\\operatorname{Res}_{A\\to B}j_!^{\\mathrm{pro},B}M_B.$$\nThe first is the open projection comparison using $j^{-1}B_Z=B_U$. The second is induced by the identity on the K-flat tensor complex computing $Q\\cong\\operatorname{Res}_{A\\to B}M_B$, followed by the restriction-of-scalars comparison for extension by zero. Each displayed object and $Q$ has cohomology zero outside $[a,b]$. Moreover, for every etale $A$-complex $E\\in D(Z_{\\mathrm{et}},A)$ and every isomorphism\n$$r:\\nu_Z^*E\\xrightarrow{\\sim}N\\otimes^L_{A_Z}B_Z,$$\none has $\\mathcal H^q(E)=0$ for $q\\notin[a,b]$. No boundedness, constructibility, or prior etale-origin hypothesis on $M$ or $E$, and no flatness or finite projective dimension of $B$ over $A$, is required beyond the stated Tor interval of $M$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08FZ (definition-tor-amplitude), 0GL1 (lemma-j-shriek-and-tensor), 06YY (lemma-derived-base-change); comparison reflection from proetale.tex Tag 099T (lemma-fully-faithful). Agent-written combination preserving returned steps 4-6 of lem-sp-supported-etale-tensor-origin."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-derived-categories",
+  "def-weil-extension-by-zero",
+  "def-weil-proetale-tor-amplitude",
+  "def-weil-derived-tensor",
+  "det-sp-scalar-extension-functor",
+  "def-pc-sheaf-restrict-scalars",
+  "def-sp-open-coefficient-adjunction-data",
+  "def-sp-proetale-scalar-mate-identifications"
+ ],
+ "proof": [
+  {
+   "text": "Choose a cochain representative L of M and a flat-term K-flat resolution P → L using [lem-pc-kflat-resolution]. The scalarMateDerivedTensorIso of [def-sp-proetale-scalar-mate-identifications] identifies tensor φ U aU M with restriction of scalar extension. The K-flat computation of [det-sp-scalar-extension-functor], the exact restriction localization factor, and scalarMateOrdinaryComplexIso identify this with Q(Tot(P tensor B_U[0])). This is exactly the tensor tested by [def-weil-proetale-tor-amplitude], so its cohomology vanishes outside [a,b]. No flatness of B is used.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-sp-proetale-scalar-mate-identifications",
+    "det-sp-scalar-extension-functor",
+    "def-weil-proetale-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FZ, definition-tor-amplitude, first clause"
+   }
+  },
+  {
+   "text": "Specialize [def-sp-open-coefficient-adjunction-data] to the constant A family. The inverse projection is invertible by [lem-sp-intrinsic-open-projection-invertible], so openProjectionIso is an isomorphism. The normalized scalarMateDerivedCoefficientPullback of [def-sp-proetale-scalar-mate-identifications] identifies pullback of B_Z[0] with B_U[0]. Tensoring its hom with the identity of M and applying open extension preserves invertibility. Their composite is definitionally projection.",
+   "uses": [
+    "def-sp-open-coefficient-adjunction-data",
+    "lem-sp-intrinsic-open-projection-invertible",
+    "def-sp-proetale-scalar-mate-identifications"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; constant coefficient identification for the open restriction"
+   }
+  },
+  {
+   "text": "The inverse of scalarMateDerivedTensorIso from [def-sp-proetale-scalar-mate-identifications] identifies the tensor on U with the restricted scalar extension. Apply exact open extension and compose with openRestriction from [def-pur-integral-compact-support-coefficient-data], specialized to change φ. Both factors are isomorphisms; this composite is definitionally restrictionComparison. No constructibility clause of scalar extension is used.",
+   "uses": [
+    "def-sp-proetale-scalar-mate-identifications",
+    "def-pur-integral-compact-support-coefficient-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, lemma-derived-base-change, computation on K-flat complexes; sites-modules.tex Tag 03DJ, lemma-extension-by-zero-exact, and the coefficient-restriction comparison"
+   }
+  },
+  {
+   "text": "The open extension of [def-sp-open-coefficient-adjunction-data] is an exact module functor, and its derived functor is definitionally openExtension j. Apply the cohomology commutation of [lem-weil-pbc-exact-functor-bounded-below], as implemented by Functor.isZero_homologyFunctor_mapDerivedCategory_obj, to Step 1. This proves vanishing for the open extension of the tensor on U. Map the isomorphisms of Steps 2 and 3 through the homology functor and transport this zero-object property to the ambient tensor and the restricted B-extension.",
+   "uses": [
+    "def-sp-open-coefficient-adjunction-data",
+    "lem-weil-pbc-exact-functor-bounded-below"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DJ, lemma-extension-by-zero-exact; passage to cohomology for an exact degreewise functor"
+   }
+  },
+  {
+   "text": "For E and r as in the statement, Step 4 and r give zero homology for its intrinsic derived comparison pullback. The intrinsic realization of [def-weil-pbc-proetale-modules] is an exact equivalence. The comparison on fixed-coefficient module sheaves is faithful by [det-pe-classical-sheaves-modules], hence their composite finiteCoefficientIntrinsicComparison is faithful and exact. Its derived functor is definitionally finiteCoefficientIntrinsicDerivedComparison. Apply the generic cohomology commutation of [lem-weil-pbc-exact-functor-bounded-below]: the image of H^q(E) is zero, so faithfulness equates its identity and zero morphisms. Functor.isZero_homologyFunctor_of_isZero_homologyFunctor_mapDerivedCategory_obj performs this argument. It applies degree by degree without boundedness of E or derived full faithfulness.",
+   "uses": [
+    "def-weil-pbc-proetale-modules",
+    "det-pe-classical-sheaves-modules",
+    "lem-weil-pbc-exact-functor-bounded-below"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099T, lemma-fully-faithful, in the module form; sites-modules.tex Tag 04JC, lemma-flat-pullback-exact"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "def-sp-proetale-scalar-mate-identifications",
+  "det-sp-scalar-extension-functor",
+  "def-weil-proetale-tor-amplitude",
+  "def-sp-open-coefficient-adjunction-data",
+  "lem-sp-intrinsic-open-projection-invertible",
+  "def-pur-integral-compact-support-coefficient-data",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "def-weil-pbc-proetale-modules",
+  "det-pe-classical-sheaves-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "M7 Lean proof, 2026-10-22. Tags 08FZ, 0GL1, 06YY; exact functor cohomology via derived.tex Tag 015F; module comparison faithfulness via proetale.tex Tag 099T. Existing normalized scalar comparisons avoid a new tensor-model lemma."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An etale complex whose proetale pullback is the coefficient tensor of an open supported finite Tor amplitude complex is bounded in the same interval",
+   "results": "OK: 8 hits; Algebra.FormallyEtale.instTensorProduct, Algebra.etaleLocus_eq_compl_support, Algebra.FormallyEtale.comp, Algebra.FormallyEtale.of_restrictScalars, AlgebraicGeometry.IsEtale.of_comp, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, Algebra.Etale.exists_subalgebra_fg, Algebra.FormallyEtale.instForallOfFinite",
+   "date": "2026-10-22",
+   "verdict": "no match: complex-shape extension and algebraic etale tensor results do not state geometric open extension, scalar restriction, or reflection of its Tor-test interval through site comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived scalar extension of a finite Tor amplitude complex extended by zero is bounded in the original Tor interval after forgetting scalars",
+   "results": "OK: 8 hits; HomologicalComplex.extend_exactAt, HomologicalComplex.instIsStrictlySupportedExtend, HomologicalComplex.extend_exactAt_iff, HomologicalComplex.extend.instHasHomology, HomologicalComplex.isZero_extend_X, HomologicalComplex.extend.hasHomology, HomologicalComplex.isZero_extend_X', HomologicalComplex.extend.instHasHomologyF",
+   "date": "2026-10-22",
+   "verdict": "no match: complex-shape extension and algebraic etale tensor results do not state geometric open extension, scalar restriction, or reflection of its Tor-test interval through site comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero of a finite Tor amplitude proetale complex after derived scalar extension has the same cohomology bounds without finite projective dimension of coefficients",
+   "results": "OK: 8 hits; HomologicalComplex.extend.d, HomologicalComplex.extendMap_zero, HomologicalComplex.extend.d_none_eq_zero', CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_zero, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, HomologicalComplex.extend.leftHomologyData.lift_d_comp_eq_zero_iff', HomologicalComplex.extend_single_d, CategoryTheory.instHasProjectiveDimensionLTOfNatNat",
+   "date": "2026-10-22",
+   "verdict": "no match: complex-shape extension and algebraic etale tensor results do not state geometric open extension, scalar restriction, or reflection of its Tor-test interval through site comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Tor\"",
+   "results": "OK: 12 hits; CategoryTheory.OverPresheafAux.yonedaCollectionFunctor, CategoryTheory.OverPresheafAux.yonedaCollectionFunctor_obj, CategoryTheory.OverPresheafAux.yonedaCollectionFunctor_map, CategoryTheory.CostructuredArrow.overEquivPresheafCostructuredArrow_functor_map_toOverCompYoneda, CategoryTheory.CostructuredArrow.overEquivPresheafCostructuredArrow_functor_map_toOverCompCoyoneda, CategoryTheory.Presheaf.functorToRepresentables, CategoryTheory.Presheaf.instIsLeftKanExtensionOppositeObjFunctorTypeUliftYonedaUliftYonedaMap, CategoryTheory.Presheaf.instIsLeftKanExtensionOppositeObjFunctorTypeYonedaYonedaMap",
+   "date": "2026-10-22",
+   "verdict": "no match: complex-shape extension and algebraic etale tensor results do not state geometric open extension, scalar restriction, or reflection of its Tor-test interval through site comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "tor.?amplitude|extensionByZero|extension_by_zero|lowerShriek",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: complex-shape extension and algebraic etale tensor results do not state geometric open extension, scalar restriction, or reflection of its Tor-test interval through site comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "tor.?amplitude|extensionByZero|extension_by_zero|lowerShriek",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned derived support, Ext, and presheaf facts do not state this open-supported scalar tensor comparison and interval reflection."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact faithful inverse image of sheaves reflects cohomology vanishing of an arbitrary unbounded complex after extension by zero and derived change of rings",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Tor\"",
+   "results": "OK: 12 hits; CategoryTheory.OverPresheafAux.yonedaCollectionFunctor, CategoryTheory.OverPresheafAux.yonedaCollectionFunctor_obj, CategoryTheory.OverPresheafAux.yonedaCollectionFunctor_map, CategoryTheory.CostructuredArrow.overEquivPresheafCostructuredArrow_functor_map_toOverCompYoneda, CategoryTheory.CostructuredArrow.overEquivPresheafCostructuredArrow_functor_map_toOverCompCoyoneda, CategoryTheory.Presheaf.functorToRepresentables, CategoryTheory.Presheaf.instIsLeftKanExtensionOppositeObjFunctorTypeUliftYonedaUliftYonedaMap, CategoryTheory.Presheaf.instIsLeftKanExtensionOppositeObjFunctorTypeYonedaYonedaMap",
+   "date": "2026-10-22",
+   "verdict": "no match: returned derived support, Ext, and presheaf facts do not state this open-supported scalar tensor comparison and interval reflection."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open extension by zero of a finite Tor amplitude sheaf complex after coefficient tensor has the same cohomology interval, reflected through etale proetale comparison",
+   "results": "OK: 8 hits; DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective",
+   "date": "2026-10-22",
+   "verdict": "no match: returned derived support, Ext, and presheaf facts do not state this open-supported scalar tensor comparison and interval reflection."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unbounded derived projection formula for extension by zero on a ringed site, together with forgetting derived scalar extension and faithful reflection of cohomology",
+   "results": "OK: 8 hits; Ext, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CategoryTheory.ProjectiveResolution.isoExt, CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ, DerivedCategory.left_fac_of_isStrictlyGE, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor",
+   "date": "2026-10-22",
+   "verdict": "no match: returned derived support, Ext, and presheaf facts do not state this open-supported scalar tensor comparison and interval reflection."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-supported-etale-tensor-origin",
+  "date": "2026-10-22",
+  "group": "Q10"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-reduction-direct-image",
+   "place": "Step 1, open extension commutes with coefficient tensor; finite-window inputs for Steps 2-3: supported scalar tensor bound and faithful-comparison reflection; returned item steps 4-6.",
+   "via": [
+    "lem-sp-supported-etale-tensor-origin"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-supported-scalar-tor-interval",
+  "worker": "stage1",
+  "summary": "Unchanged statement split into the B_U Tor test, existing unbounded open projection formula, identity of the K-flat tensor complexes and restriction comparison, exact extension of the cohomology bound, and reflection through exact faithful comparison on sheaves. All cited statements read; no new nodes or Mathlib leaves. No boundedness of E or constructibility of M is used.",
+  "blueprint": "det-sp-reduction-direct-image Step 1: extension by zero commutes with coefficient tensor; the reflected cohomology interval supplies the supported etale finite-window inputs for Steps 2-3. Item belongs to sk-lem-sp-reduction, but is not its key node.",
+  "tool_uses": [
+   {
+    "node": "lem-sp-intrinsic-open-projection-invertible",
+    "why": "Generic unbounded open projection formula for the constant A coefficient family; supplies the open tensor comparison in the unit route, without any constructibility assumption."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Generic constant-ring inverse-image identification for A and B; identifies the coefficient family and the test sheaf restricted to U."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero",
+    "why": "Generic exact degreewise open extension and its restriction-of-scalars comparison; these implement the open extension used in unit Step 1."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Generic exact comparison and its cohomology isomorphism for arbitrary complexes, needed to reflect the finite window."
+   },
+   {
+    "node": "det-pe-classical-sheaves-modules",
+    "why": "Generic full faithfulness on module sheaves, used only to reflect a zero cohomology sheaf, not to change the unit proof route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-intrinsic-open-projection-invertible",
+  "det-pe-classical-sheaves-modules"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q126-1ec668647",
+  "group": "Q126",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q126-1ec668647 (reviewer sub-agent of L); spot-checked: Q126 lem-sp-supported-scalar-tor-interval @1ec66864: first split of a statement-only node that Q10 created (no new nodes); statement and stmt_deps unchanged, proof_deps equals the union of the step uses, no cycle. I read all five steps and every cited statement in full. S1: B_U viewed as an A_U-module is a test sheaf in the Tor-amplitude definition (def-weil-proetale-tor-amplitude, Stacks 08FZ), so H^q(Q)=0 off [a,b] with no flatness of B. S2: the coefficient family A_W, with identifications from prop-weil-pbc-proetale-constant-ring-map (any finite ring, any scheme map, U empty included), and lem-sp-intrinsic-open-projection-invertible (unbounded, no hypotheses), inverted; j^{-1}B_Z = B_U keeps the A-action. S3: only clause 1 of det-sp-scalar-extension-functor is used, with the same K-flat P tensor B_U as def-weil-derived-tensor; the Res/j_! comparison is stated for complexes in lem-cbc-proetale-extension-zero (finite A, B). S4: exact degreewise j_!. S5: clause 3 of lem-sf-comparison-pullback-exact holds for all complexes; full faithfulness from det-pe-classical-sheaves-modules (any X) gives faithfulness, which reflects zero for unbounded E. Edge cases checked: U empty, j=id, B=0, a=b, Z/l^2->F_l with M=A_U[0]. Duplicates: lem-fix-reduction-open-etale-origin (narrower, D^b_c) and lem-sp-unbounded-finite-tor-comparison-reflection (qcqs plus constructibility) are not duplicates. All five tool_uses are generic tools for unit Step 1 and are accepted. No SGA source. Advisory: Step 2 could cite the Lean-closed lem-cbc-extension-zero-projection-formula directly; the intrinsic node is valid but carries a Lean sorry. 'Each displayed object' reads as the chain plus Q, and it holds under the wider reading too."
+ },
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.SupportedScalarTorInterval",
+  "declaration": "AlgebraicGeometry.ProEtale.SupportedScalarTorInterval.supported_scalar_tor_interval",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SupportedScalarTorInterval.coefficients",
+   "AlgebraicGeometry.ProEtale.SupportedScalarTorInterval.change",
+   "AlgebraicGeometry.ProEtale.SupportedScalarTorInterval.tensor",
+   "AlgebraicGeometry.ProEtale.SupportedScalarTorInterval.projection",
+   "AlgebraicGeometry.ProEtale.SupportedScalarTorInterval.restrictionComparison",
+   "AlgebraicGeometry.ProEtale.SupportedScalarTorInterval.supported_scalar_tor_interval"
+  ],
+  "file": "lean/Sheaf/SecSmoothPurity/SupportedScalarTorInterval.lean",
+  "statement": "theorem supported_scalar_tor_interval {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (ℓ : ℕ) [Fact ℓ.Prime] (_hA : ∃ n : ℕ, ∀ x : A, (ℓ ^ n) • x = 0) (_hB : ∃ n : ℕ, ∀ x : B, (ℓ ^ n) • x = 0) (φ : A →+* B) {U Z : Scheme.{u}} (j : U ⟶ Z) [IsOpenImmersion j] (a b : ℤ) (_hab : a ≤ b) (aU : ProEtaleTensorModel U (proEtaleConstantRing U A)) (aZ : ProEtaleTensorModel Z (proEtaleConstantRing Z A)) (M : proEtaleDerivedCategory U A) (_hTor : HasProEtaleTorAmplitude U A M a b) : IsIso (projection φ j aU aZ M) ∧ IsIso (restrictionComparison φ j aU M) ∧ (∀ q : ℤ, q < a ∨ b < q → IsZero ((DerivedCategory.homologyFunctor _ q).obj (tensor φ U aU M)) ∧ IsZero ((DerivedCategory.homologyFunctor _ q).obj (tensor φ Z aZ ((openExtension (A := A) j).obj M))) ∧ IsZero ((DerivedCategory.homologyFunctor _ q).obj ((openExtension (A := A) j).obj (tensor φ U aU M))) ∧ IsZero ((DerivedCategory.homologyFunctor _ q).obj ((scalarRestriction φ Z).obj ((openExtension (A := B) j).obj ((scalarExtensionFunctor φ U).obj M))))) ∧ (∀ E : Etale.DerivedCategoryModule (ULift.{u + 1, u} A) Z, ∀ _r : (finiteCoefficientIntrinsicDerivedComparison Z A).obj E ≅ tensor φ Z aZ ((openExtension (A := A) j).obj M), ∀ q : ℤ, q < a ∨ b < q → IsZero ((DerivedCategory.homologyFunctor _ q).obj E))",
+  "branch": "sheaf-dag",
+  "by": "Q59",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses existing intrinsic constant-ring operations and actual K-flat tensor presentations. The canonical forward projection and scalar-restriction maps are defined composites of the recorded open adjunct, coefficient pullback, normalized scalar/tensor identification, and exact restriction square. The two added statement dependencies are already landed definition nodes owning these canonical comparison interfaces; no new mathematical notion or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ec7b62cbb",
+  "group": "Q59",
+  "result": "pass",
+  "note": "Read the item node, all 9 stmt_dep records, the delivered module and report, and the exact declarations: openProjectionIso/openRestriction/Change/openProjectionInverse(+isIso) in IntegralCompactSupportCoefficientData; ProEtale.openExtension/scalarRestriction in OpenScalarExchange; scalarMateDerivedTensorIso (∃!-pinned on K-flat representatives) and scalarMateDerivedCoefficientPullback; ProEtaleTensorModel (representative-pinned); HasProEtaleTorAmplitude; finiteCoefficientIntrinsicDerivedComparison. Every hypothesis matches with nothing stronger (finite ℓ-torsion rings, arbitrary open immersion, a≤b, Tor predicate). Both maps are the canonical composites (inverse open projection then normalized j^{-1}B_Z=B_U; K-flat scalar/tensor identity then the j_!/Res mate), stated as IsIso; four IsZero clauses for Q, N⊗B_Z, j_!Q, Res j_!M_B off [a,b]; ∀E étale ∀r reflection clause. lean.statement verbatim; universes bound. Edge cases U=∅, j=id, zero rings, a=b, Z/4→Z/2 and unbounded E are covered. Added stmt_deps are landed def nodes; no theorem stmt_dep; no cycle; no hollow defs; docstrings carry source, blueprint tag and the 5 steps; sorry only; report sections present. No recompile (no file changed; the worker reports clean 5.7 s / 5.9 s). Advisories: openExtension/scalarRestriction are owned by theorem lem-fix-open-scalar-exchange (not cited); openProjectionIso/openRestriction/Change are recorded under def-pur-integral-compact-support-coefficient-data, not the cited def-sp-open-coefficient-adjunction-data; ProEtaleIntrinsicExtensionByZero import unused; finiteCoefficientIntrinsicDerivedComparison has no DAG record."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261022T144011-L-1476120",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

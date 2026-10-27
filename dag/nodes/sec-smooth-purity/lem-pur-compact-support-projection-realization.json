@@ -1,0 +1,154 @@
+{
+ "id": "lem-pur-compact-support-projection-realization",
+ "kind": "statement",
+ "title": "Unique constructible compact-support realization",
+ "statement": "Fix the finite-field datum [def-pur-conventions], a prime l distinct from its characteristic, a finite extension E of Q_l, separated finite-type schemes X,Y over its algebraically closed field, and a separated finite-type map f:X→Y with a compactification c [def-weil-compactifications-refinements]. Let S be any coefficient reduction/total-limit calculus on X [lem-coef-derived-system-evaluation-calculus], and let M be a complete bounded constructible finite-Tor integral input [def-weil-derived-complete-integral-detailed, def-weil-finite-tor-amplitude]. There is a unique isomorphism rho from the actual completed proper/open image of M to scalarSupport(S,M) [def-pur-compact-support-scalar-limit-maps] such that for each exponent n+1 its reduction followed by the specified scalarSupportCounit equals the actual proper/open coefficient comparison. The definition realization selects this uniquely normalized isomorphism.",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Proved comparison component extracted after profiling the item beyond the per-file compile limit",
+   "via": [
+    "lem-pur-compact-support-scalar-projection-identification",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Stacks Tags 0941, 0A07, 07A6 and 0B56; existing qcqs realization, coefficient mate laws, and constructible Milnor injection."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-compactifications-refinements",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-tor-amplitude",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-pur-compact-support-scalar-limit-maps",
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-sp-coefficient-mate-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "B3: realization_existsUnique is proved from the actual normalized system morphism of [lem-pur-compact-support-projection-realization-lift]. The qcqs finite comparison makes every finite comparison an isomorphism. Scalar-limit reduction at the identity coefficient extension supplies complete target and invertible finite counits, so every reduction of the lift is an isomorphism. The recorded qcqs realization makes its source constructible; complete reduction detection makes its target constructible, and constructible reduction detection makes the lift invertible. For uniqueness, the target reduction cone is a homotopy limit. Finite shifted Hom groups over the finite-field datum kill the Milnor lim-one obstruction, hence equality of all reductions detects equality of these constructible morphisms. Cancellation of the invertible finite counits gives precisely these reduction equalities. This does not assert faithfulness on arbitrary derived objects. Identity ramification is proved locally by the identity integral coefficient inclusion and Ideal.map_id, without importing the full strict scalar-composition component.",
+   "uses": [
+    "lem-pur-compact-support-projection-realization-lift",
+    "def-weil-integral-rational-qbar-compact-support",
+    "lem-qcqs-compact-support-finite-comparison",
+    "lem-pur-compact-support-scalar-limit-reduction",
+    "lem-sf-integral-reductions-jointly-faithful",
+    "lem-sf-integral-reduction-shifted-hom-finite-qcqs",
+    "def-pur-finite-compact-support-scalar-data",
+    "def-sf-finite-tor-integral-inclusion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0941 and 0A07; existing normalized qcqs realization and constructible Milnor detection."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-compact-support-projection-realization-lift",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-qcqs-compact-support-finite-comparison",
+  "lem-pur-compact-support-scalar-limit-reduction",
+  "lem-sf-integral-reductions-jointly-faithful",
+  "lem-sf-integral-reduction-shifted-hom-finite-qcqs",
+  "def-pur-finite-compact-support-scalar-data",
+  "def-sf-finite-tor-integral-inclusion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B3",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Stacks Tags 0941, 0A07, 07A6 and 0B56; existing qcqs realization, coefficient mate laws, and constructible Milnor injection.",
+  "note": "A proved component of the assigned item, isolated after profiling and replacing expensive cancellation instance searches by explicit isomorphism cancellation. Existing declaration names, signatures and the chosen realization definition are unchanged. No theorem hole is added."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of total derived inverse limit adjunction with scalar extension and a map of quotient towers",
+   "results": "Eight unrelated search results; no normalized compact-support realization theorem.",
+   "date": "2026-10-27",
+   "verdict": "no matching geometric theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "Generic adjunction Hom-equivalence identities; used for transposition and uniqueness of left adjoints.",
+   "date": "2026-10-27",
+   "verdict": "formal categorical tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "support.*realization|realization.*support|normalizedLift; local rg qcqsCompactSupport_strictReductionComparison and homEquiv_unit",
+   "results": "The project strict reduction comparison supplies the whole-system map. Mathlib Adjunction.Basic and Adjunction.Unique provide naturality and unit_leftAdjointUniq_hom_app. No existing lift into an arbitrary input calculus with precisely the stated normalization was found.",
+   "date": "2026-10-27",
+   "verdict": "use existing geometric comparison and prove formal transport"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A canonical morphism from proper pushforward of extension by zero to the derived inverse limit of its finite quotient reductions",
+   "results": "ProfiniteGrp.toLimit_fun, ProfiniteGrp.isIso_toLimit, Profinite.isIso_asLimitCone_lift and Module.DirectLimit.of.zero_exact. No normalized derived compact-support realization.",
+   "date": "2026-10-26",
+   "verdict": "no exact Mathlib match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportScalarProjectionIdentification",
+  "date": "2026-10-27",
+  "group": "B3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportProjectionRealization",
+  "file": "lean/Sheaf/Paper/CompactSupportProjectionRealization.lean",
+  "declaration": "WeilConjectures.PurScalarProjection.realization_existsUnique",
+  "statement": "theorem realization_existsUnique\n    (S : CoefficientDerivedSystemCalculus.{u, u} l E X)\n    (M : DerivedCategory (scalarReductionSource l E X))\n    (_hM : finiteTorConstructibleIntegral l E X M) :\n    ∃! ρ : (image (completed l E) c).obj M ≅\n        (PurStrictScalar.scalarSupport l E c S).obj M,\n      ∀ n : ℕ,\n        (pbcDerivedExtend (projection l E (n + 1) (Nat.le_add_left 1 n) Y)).map\n            ρ.hom ≫ PurStrictScalar.scalarSupportCounit l E c S n M =\n          (comparison (reduction l E (n + 1) (Nat.le_add_left 1 n)) c).app M",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-27",
+  "declarations": [
+   "WeilConjectures.PurScalarProjection.realization_existsUnique",
+   "WeilConjectures.PurScalarProjection.realization"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-704ba",
+  "group": "B3",
+  "result": "fix",
+  "landing": "20261027T012808-L-2331698",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-704ba",
+  "group": "B3",
+  "result": "fix",
+  "landing": "20261027T012808-L-2331698",
+  "kind": "interface",
+  "note": "independent cc review: moved realization_existsUnique/realization/gamma_identification signatures vs item original (verbatim, same variable block); item node decls/deps vs Lean; new-node stmt/proof deps vs declarations used in the three new modules; finite-mates dep swap vs its Lean (uses only openComparison_isIso, comparison_factorization)"
+ }
+}

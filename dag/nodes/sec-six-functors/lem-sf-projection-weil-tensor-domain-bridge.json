@@ -1,0 +1,271 @@
+{
+ "id": "lem-sf-projection-weil-tensor-domain-bridge",
+ "kind": "statement",
+ "title": "Constructible coefficient and Frobenius bridge for the Weil projection inputs",
+ "statement": "Fix the finite-field datum $k_0=\\mathbf F_q$, $k=\\overline{k_0}$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R=\\mathcal O_E$ and a uniformizer $t$; put $A_n=R/(t^n)$ for $n\\ge1$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Use the operation datum [def-fix-six-functor-datum], not a datum assuming projection invertibility. Schemes are finite type over $k$ and their structure morphisms need not be separated. Let $f_0:X_0\\to Y_0$ be separated of finite type between separated finite-type $k_0$-schemes, and let $f:X\\to Y$ be its geometric base change. Use the Weil coefficient categories [def-wf-weil-category] and tensor [def-wf-tensor-product]. For $W=X,Y$ the integral constructible category underlying these conventions agrees, by the canonical completed coefficient identification, with the derived-complete constructible category [def-weil-derived-complete-integral-detailed] used by the operation datum. Its coefficient sheaf is $B_W=\\varprojlim_n(A_n)_W$ and its finite derived reductions and etale-origin witnesses are the same. For integral bounded constructible $M,N$ on $W$, the canonical comparison\n$$\\chi_W:M\\otimes^L_{B_W}N\\xrightarrow{\\sim}M\\widehat\\otimes_R^LN$$\nof [lem-fix-constructible-tensor-completion, def-weil-pbc-intrinsic-completion] identifies the ordinary and completed tensor models. If the inputs have Weil maps, it satisfies $\\chi_W\\varphi_{\\rm ord}=\\varphi_{\\rm comp}\\Phi_W^*(\\chi_W)$ for geometric Frobenius $\\Phi_W$. These identifications persist after rationalization and common finite-field scalar extension. For $K\\in D^b_c(X,R)$, $L\\in D^b_{ctf}(Y,R)$, completed pullback, the two tensor expressions and the compact-support outputs in the projection formula stay bounded constructible in these identified categories. Thus the underlying operation outputs of rational or common-stage Weil inputs lie in precisely the coefficient domains required for [lem-fix-weil-operations], with its tensor Weil map identified with [def-wf-tensor-product]. Integral representatives are required only for the underlying objects, not for their rational Weil isomorphisms.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Concrete repair of fix-prop-projection-formula, former proof step(s) 13, 14; Weil-equivariance sentence, after checking coefficient models and constructible domains"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-fix-six-functor-datum",
+  "def-wf-weil-category",
+  "def-wf-tensor-product",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-fix-constructible-tensor-completion",
+  "def-weil-pbc-intrinsic-completion",
+  "lem-fix-weil-operations"
+ ],
+ "proof": [
+  {
+   "text": "Geometric base-change preserves separatedness, local finite type and quasi-compactness by Mathlib MorphismProperty.overPullbackMap. The completed coefficient comparison satisfies every quotient projection by its unique normalization. Finite type over the geometric field supplies Noetherianity and finite dimension; the coefficient-prime unit maps to global sections. Apply integralStratifiedPerfectDetailed to identify the integral predicates on the actual completed coefficient rings.",
+   "uses": [
+    "def-weil-finite-field-fiber",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply WfTensorCompletion.integral to the pair. Its two membership clauses give the tensor domains. The full constructible inclusion reflects invertibility of the completion unit. Apply integral_equivariance for the specified integral Weil equation and wfTensorCompletionCommonField for the common-field isomorphism and its inclusion.",
+   "uses": [
+    "lem-wf-tensor-completion-frobenius"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the normalized package and ordinary/completed Weil isomorphisms from wfTensorCompletionFrobenius_exists; no uniqueness is required. For the completed bifunctor, precompose its ambient inclusion with the product of the two raw localization functors. The normalized integral functor equality, the uniquely normalized constructible inclusion and the pure-tensor formula of wfRationalTensorHom give equality there. Curry, apply injectivity of precomposition with scalar localization, flip, and apply it again to get equality on arbitrary rational arrows. On each unchanged integral object, the completedMu normalization, inclusion normalization and wfRationalTensorPullback_exists identify the actual ambient Frobenius component. Every rational object is an unchanged integral object. For two arbitrary rational Weil maps, use the bifunctor equality on their tensor and the component equality, compose these heterogeneous equalities, and remove the identity transports in wfWeilStructure. This proves its displayed hom is exactly wfTensorFrobenius, including all denominators.",
+   "uses": [
+    "lem-wf-tensor-completion-frobenius-existence",
+    "def-wf-tensor-product",
+    "def-wf-weil-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Scalar extension preserves the intrinsic integral predicate by sfIntegralScalarExtension_constructible. Apply the coefficient predicate equivalence at the target field to obtain the detailed coefficient-domain clause.",
+   "uses": [
+    "lem-weil-integral-scalar-extension-constructible",
+    "lem-weil-pbc-integral-stratified-perfect-characterization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose P,H,U,V,B to be the actual restricted integral operation outputs of the datum. The integral pullback and tensor normalizations give their ambient object equations. The supportConstruction object normalization and sfCompactSupportFiniteIntegralFunctor_obj identify U,V with the recorded compact-support values; sfQcqsCompactSupportRealization supplies their ambient proper/open isomorphisms. The normalized rational pullback and tensor object formulas and supportConstruction rational-value formula give all five rational output equalities.",
+   "uses": [
+    "def-fix-six-functor-datum",
+    "def-sf-operation-stages",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-integral-rational-qbar-compact-support",
+    "def-weil-compact-support-finite-action"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Repeat the preceding argument for the coefficientStages G component, using its finite-level and integral normalization fields. The commonStageComparison supplies pullback and support isomorphisms. For tensors, finiteCoefficientCompositum G G = G, the stage-system unit identifies identity transitions, and commonStageTensorComparison followed by the rational tensor normalization identifies both common-stage tensors with inclusions of the integral outputs.",
+   "uses": [
+    "def-fix-six-functor-datum",
+    "def-sf-operation-stages",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-field-fiber",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-pur-compact-support-integral-coefficient-comparison",
+  "def-weil-weil-sheaf-complex",
+  "lem-wf-tensor-completion-frobenius",
+  "def-wf-tensor-product",
+  "def-wf-weil-category",
+  "lem-weil-integral-scalar-extension-constructible",
+  "def-fix-six-functor-datum",
+  "def-sf-operation-stages",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-compact-support-finite-action",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-wf-tensor-completion-frobenius-existence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Weil-equivariance sentence; the remaining rational clause is assembled from normalized integral tensor and pullback components by localization precomposition injectivity and heterogeneous equality of composed ambient arrows."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Weil ordinary and completed tensor coefficient categories agree equivariantly for constructible integral complexes and compact support outputs",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M],\\n  ↑(AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M) = AdicCompletion.ofTensorProduct I M\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is linearly equivalent to the \"}\n  {\"name\": \"AdicCompletion.tensor_map_id_left_eq_map\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [inst_1 : IsNoetherianRing R] {M : Type u} [inst_2 : AddCommGroup M]\\n  [inst_3 : Module R M] {N : Type u} [inst_4 : AddCommGroup N] [inst_5 : Module R N] (f : M →ₗ[R] N)\\n  [inst_6 : Module.Finite R M] [inst_7 : Module.Finite R N],\\n  TensorProduct.Alge\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is isomorphic to the $ I $-adi\"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M] (x : TensorProduct R (AdicCompletion I R) M),\\n  (AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M) x = (AdicCompletion.o\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ (over $ R $) is isomorphic to \"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_naturality\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] (f : M →ₗ[R] N),\\n  AdicCompletion.map I f ∘ₗ AdicCompletion.ofTensorProduct I M =\\n    AdicCompletion.ofTensorProduct I N \", \"doc\": \"For any $ R $-linear map $ f : M \\to N $, the diagram involving the $ I $-adic completion maps and tensor products commutes, i.e., $\\\\text{map}_I(f) \\\\circ \\\\text{ofTensorProduct}_I(M) = \\\\text{ofTensorPro\"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfPiFintype\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      (ι : Type u_4) →\\n        [Fintype ι] →\\n          [DecidableEq ι] → TensorProduct R (AdicCompletion I R) (ι → R) ≃ₗ[AdicCompletion I R] AdicCompletion I (ι → R)\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, and a finite index type $ \\\\iota $ with decidable equality, this constructs a linear equivalence between the $ I $-adic completion of the product module $ \"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_tmul\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_2) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  (r : AdicCompletion I R) (x : M), (AdicCompletion.ofTensorProduct I M) (r ⊗ₜ[R] x) = r • (AdicCompletion.of I M) x\", \"doc\": \"For any element $ r $ in the $ I $-adic completion of a commutative ring $ R $ and any element $ x $ in an $ R $-module $ M $, the canonical linear map from the tensor product $ (\\\\varprojlim R/I^nR) \\\\\"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M] (x : M),\\n  (AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M).symm ((AdicCompletion.of I M) x) = 1 ⊗ₜ[R] x\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, applying the inverse of the linear equivalence between $ \\\\hat{R} \\\\otimes_R M $ and the $ I $-adic \"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      (M : Type u) →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] →\\n            [IsNoetherianRing R] →\\n              [Module.Finite R M] → TensorProduct R (AdicCompletion I R) M ≃ₗ[AdicCompletion I R] AdicCompletion I \", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is linearly equivalent to the \"}\n",
+   "date": "2026-10-22",
+   "verdict": "No exact match or one-line specialization: hits concern primitive adjunctions, ordinary modules or unrelated projections, not this specified derived compact-support comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite dimensional Noetherian geometric fibres identify the completed tensor Frobenius and the Weil tensor for rational projection inputs",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.tensor_map_id_left_eq_map\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \":\\n  (AlgebraTensorModule.map LinearMap.id f) =\\n    (ofTensorProductEquivOfFiniteNoetherian I N).symm.toLinearMap ∘ₗ\\n      map I f ∘ₗ (ofTensorProductEquivOfFiniteNoetherian I M).toLinearMap\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is isomorphic to the $ I $-adi\"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian.congr_simp\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M],\\n  AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M = AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is linearly equivalent to the \"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      (M : Type u) →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] →\\n            [IsNoetherianRing R] →\\n              [Module.Finite R M] → TensorProduct R (AdicCompletion I R) M ≃ₗ[AdicCompletion I R] AdicCompletion I \", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is linearly equivalent to the \"}\n  {\"name\": \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \"[Module.Finite R M] : ofTensorProductEquivOfFiniteNoetherian I M = ofTensorProduct I M\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is linearly equivalent to the \"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \"[Module.Finite R M] (x : AdicCompletion I R ⊗[R] M) :\\n  ofTensorProductEquivOfFiniteNoetherian I M x = ofTensorProduct I M x\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ (over $ R $) is isomorphic to \"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \"[Module.Finite R M] : Function.Bijective (ofTensorProduct I M)\", \"doc\": \"If $ R $ is a Noetherian ring, $ I $ is an ideal of $ R $, and $ M $ is a finitely generated $ R $-module, then the natural linear map from the tensor product of the $ I $-adic completion of $ R $ wit\"}\n  {\"name\": \"IsLocalFrameOn.fintype_of_finiteDimensional\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.LocalFrame\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u_2} →\\n      [inst_1 : NormedAddCommGroup E] →\\n        [inst_2 : NormedSpace 𝕜 E] →\\n          {H : Type u_3} →\\n            [inst_3 : TopologicalSpace H] →\\n              {I : ModelWithCorners 𝕜 E H} →\\n                {M : Type u_4}\", \"doc\": \"For a vector bundle with finite-dimensional fibers over a nontrivially normed field, any local frame over an open set in the base space has a finite indexing set. This follows because the fiber at eac\"}\n  {\"name\": \"IsLocalRing.instFiniteDimensionalResidueFieldCotangentSpaceOfIsNoetherianRing\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \"[IsNoetherianRing R] : FiniteDimensional (ResidueField R) (CotangentSpace R)\", \"doc\": \"For any Noetherian local ring $ R $, the cotangent space $ \\\\mathfrak{m}/\\\\mathfrak{m}^2 $ (where $ \\\\mathfrak{m} $ is the unique maximal ideal of $ R $) is finite-dimensional as a vector space over the \"}\n",
+   "date": "2026-10-22",
+   "verdict": "No exact match or one-line specialization: hits concern primitive adjunctions, ordinary modules or unrelated projections, not this specified derived compact-support comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"tensor\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"PresheafOfModulesOfCommRing.Monoidal.tensorObj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {R : CategoryTheory.Functor Cᵒᵖ CommRingCat} (M₁ M₂ : PresheafOfModulesOfCommRing R) : PresheafOfModulesOfCommRing R\", \"doc\": \"The tensor product of two presheaves of modules.\"}\n  {\"name\": \"PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {R : CategoryTheory.Functor Cᵒᵖ CommRingCat} (M₁ M₂ : PresheafOfModulesOfCommRing R) (X : Cᵒᵖ) : (PresheafOfModulesOfCommRing.Monoidal.tensorObj M₁ M₂).obj X = CategoryTheory.MonoidalCategoryStruct.tensorObj (M₁.obj X) (M₂.obj X)\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModulesOfCommRing.tensorObj_obj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {R : CategoryTheory.Functor Cᵒᵖ CommRingCat} (M₁ M₂ : PresheafOfModulesOfCommRing R) (X : Cᵒᵖ) : (CategoryTheory.MonoidalCategoryStruct.tensorObj M₁ M₂).obj X = CategoryTheory.MonoidalCategoryStruct.tensorObj (M₁.obj X) (M₂.obj X)\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {R : CategoryTheory.Functor Cᵒᵖ CommRingCat} (F : PresheafOfModulesOfCommRing R) : CategoryTheory.Limits.PreservesColimitsOfSize.{u, u, max u u_1, max u u_1, max (max (u + 1) u_1) v_1, max (max (u + 1) u_1) v_1} (CategoryTheory.MonoidalCategory.\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {R : CategoryTheory.Functor Cᵒᵖ CommRingCat} (F : PresheafOfModulesOfCommRing R) : CategoryTheory.Limits.PreservesColimitsOfSize.{u, u, max u u_1, max u u_1, max (max (u + 1) u_1) v_1, max (max (u + 1) u_1) v_1} (CategoryTheory.MonoidalCategory.\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModulesOfCommRing.Monoidal.tensorHom\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {R : CategoryTheory.Functor Cᵒᵖ CommRingCat} {M₁ M₂ M₃ M₄ : PresheafOfModulesOfCommRing R} (f : M₁ ⟶ M₂) (g : M₃ ⟶ M₄) : PresheafOfModulesOfCommRing.Monoidal.tensorObj M₁ M₃ ⟶ PresheafOfModulesOfCommRing.Monoidal.tensorObj M₂ M₄\", \"doc\": \"The tensor product of two morphisms of presheaves of modules.\"}\n  {\"name\": \"PresheafOfModulesOfCommRing.Monoidal.tensorObjMap\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {R : CategoryTheory.Functor Cᵒᵖ CommRingCat} (M₁ M₂ : PresheafOfModulesOfCommRing R) {X Y : Cᵒᵖ} (f : X ⟶ Y) : CategoryTheory.MonoidalCategoryStruct.tensorObj (M₁.obj X) (M₂.obj X) ⟶ (ModuleCat.restrictScalars (CommRingCat.Hom.hom (R.map f))).ob\", \"doc\": \"Auxiliary definition for `tensorObj`.\"}\n  {\"name\": \"PresheafOfModulesOfCommRing.Monoidal.tensorHom_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {R : CategoryTheory.Functor Cᵒᵖ CommRingCat} {M₁ M₂ M₃ M₄ : PresheafOfModulesOfCommRing R} (f : M₁ ⟶ M₂) (g : M₃ ⟶ M₄) (X : Cᵒᵖ) : (PresheafOfModulesOfCommRing.Monoidal.tensorHom f g).app X = CategoryTheory.MonoidalCategoryStruct.tensorHom (Pres\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModulesOfCommRing.tensorHom_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {R : CategoryTheory.Functor Cᵒᵖ CommRingCat} {M₁ M₂ M₃ M₄ : PresheafOfModulesOfCommRing R} (f : M₁ ⟶ M₂) (g : M₃ ⟶ M₄) (X : Cᵒᵖ) : PresheafOfModules.Hom.app' (CategoryTheory.MonoidalCategoryStruct.tensorHom f g) X = CategoryTheory.MonoidalCatego\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModulesOfCommRing.Monoidal.tensorObj_map_tmul\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {R : CategoryTheory.Functor Cᵒᵖ CommRingCat} {M₁ M₂ : PresheafOfModulesOfCommRing R} {X Y : Cᵒᵖ} (f : X ⟶ Y) (m₁ : ↑(M₁.obj X)) (m₂ : ↑(M₂.obj X)) : (ModuleCat.Hom.hom ((PresheafOfModulesOfCommRing.Monoidal.tensorObj M₁ M₂).map f)) (m₁ ⊗ₜ[↑(R.ob\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Sheaf.tensorUnit_isSheaf\", \"module\": \"Mathlib.CategoryTheory.Sites.CartesianMonoidal\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {A : Type u₂} [CategoryTheory.Category.{v₂, u₂} A] (J : CategoryTheory.GrothendieckTopology C) [CategoryTheory.CartesianMonoidalCategory A] : CategoryTheory.Presheaf.IsSheaf J (CategoryTheory.MonoidalCategoryStruct.tensorUnit (CategoryTheory.Functo\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Sheaf.tensorProd_isSheaf\", \"module\": \"Mathlib.CategoryTheory.Sites.CartesianMonoidal\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {A : Type u₂} [CategoryTheory.Category.{v₂, u₂} A] (J : CategoryTheory.GrothendieckTopology C) [CategoryTheory.CartesianMonoidalCategory A] (X Y : CategoryTheory.Sheaf J A) : CategoryTheory.Presheaf.IsSheaf J (CategoryTheory.MonoidalCategoryStruct.\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No exact match or one-line specialization: hits concern primitive adjunctions, ordinary modules or unrelated projections, not this specified derived compact-support comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ff]robenius.*tensor|tensor.*[Ff]robenius",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"line\": \"61\", \"text\": \"def frobeniusMorphism (h : L ⊣ F) (A : C) : TwoSquare (tensorLeft (F.obj A)) L L (tensorLeft A) :=\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No exact match or one-line specialization: hits concern primitive adjunctions, ordinary modules or unrelated projections, not this specified derived compact-support comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weil complexes completed tensor Frobenius equivariance constructible coefficient categories projection formula domains",
+   "results": " Actual hits: AdicCompletion.tensor_map_id_left_eq_map, WittVector.IsocrystalEquiv.frob_equivariant, WittVector.IsocrystalHom.frob_equivariant, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', AdicCompletion.ofTensorProduct_naturality, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition. Read AdicCompletion/AsTensorProduct.lean:74-78,328-331: module completion naturality/equivalence, not constructible completed-ring derived categories or Weil operations. Other hits concern isocrystals, condensed modules or generic sheaf limits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Weil|derivedComplete|completedTensor|constructibleTensor",
+   "results": "Search subdirectory: CategoryTheory.  Actual hits: none. Read AdicCompletion/AsTensorProduct.lean:74-78,328-331: module completion naturality/equivalence, not constructible completed-ring derived categories or Weil operations. Other hits concern isocrystals, condensed modules or generic sheaf limits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived complete constructible integral sheaves Weil Frobenius tensor comparison compact support preservation",
+   "results": " Actual hits: CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, CategoryTheory.Sheaf.instPreservesFiniteLimitsFunctorOppositeSheafToPresheafOfHasFiniteLimits, CategoryTheory.Presheaf.isSheaf_coherent_of_hasPullbacks_comp, CategoryTheory.instPreservesFiniteColimitsSheafExtensiveTopologyFunctorOppositeSheafToPresheafOfPreadditiveOfHasFiniteColimits, CategoryTheory.GrothendieckTopology.HasSheafCompose.mk, CategoryTheory.instIsConstantObjSheafSheafCompose, CondensedSet.LocallyConstant.functorFullyFaithful, PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification. Read AdicCompletion/AsTensorProduct.lean:74-78,328-331: module completion naturality/equivalence, not constructible completed-ring derived categories or Weil operations. Other hits concern isocrystals, condensed modules or generic sheaf limits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, CategoryTheory.MonoidalFunctor",
+   "results": "loogle: unknown identifier 'CategoryTheory.MonoidalFunctor' Actual hits: none. Read AdicCompletion/AsTensorProduct.lean:74-78,328-331: module completion naturality/equivalence, not constructible completed-ring derived categories or Weil operations. Other hits concern isocrystals, condensed modules or generic sheaf limits.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion.ofTensorProduct_naturality",
+   "results": " Actual hits: AdicCompletion.ofTensorProduct_naturality. Read AdicCompletion/AsTensorProduct.lean:74-78,328-331: module completion naturality/equivalence, not constructible completed-ring derived categories or Weil operations. Other hits concern isocrystals, condensed modules or generic sheaf limits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivalence of constructible adic coefficient categories ordinary tensor derived completion natural Frobenius compatible isomorphism",
+   "results": " Actual hits: AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct, AdicCompletion.ofTensorProduct_tmul. Read AdicCompletion/AsTensorProduct.lean:74-78,328-331: module completion naturality/equivalence, not constructible completed-ring derived categories or Weil operations. Other hits concern isocrystals, condensed modules or generic sheaf limits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "fix-prop-projection-formula",
+  "date": "2026-10-22",
+  "group": "Q132"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Proof: Weil-equivariance sentence, after checking coefficient models and constructible domains; extracted former concrete step(s) 13, 14",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-projection-weil-tensor-domain-bridge",
+  "worker": "stage1",
+  "summary": "Assembled existing coefficient-category equality, normalized tensor/Koszul comparison and Frobenius equivariance with independent integral pullback, tensor and compact-support constructibility. Retained the statement. No new nodes; no use of the cyclic full six-functor preservation package. All five steps have exact statement citations.",
+  "blueprint": "fix-prop-projection-formula.proof.md, penultimate sentence: checks the coefficient models, tensor Frobenius and bounded-constructible input/output domains needed for lem-fix-weil-operations (former concrete steps 13,14).",
+  "tool_uses": [
+   {
+    "node": "lem-pur-rational-lattice-adic-domain",
+    "why": "Identifies the proper-base-change integral category with the detailed integral category, with identical completed coefficients and reductions, on these separated finite-type geometric schemes; the interface unit has no independent coefficient-identification theorem."
+   },
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "Supplies completed pullback and tensor constructibility before any projection-formula or duality theorem; the interface remark assumes this generic operation-domain input."
+   },
+   {
+    "node": "lem-sf-integral-compact-support-constructible",
+    "why": "Supplies integral compact-support constructibility for each of the two source inputs, independently of the projection formula."
+   },
+   {
+    "node": "lem-weil-integral-scalar-extension-constructible",
+    "why": "Supplies constructibility of integral representatives at a common finite coefficient field; this is a generic coefficient-passage tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-integral-scalar-extension-constructible"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q78-146ed7b42",
+  "group": "Q78",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q78-146ed7b42 (reviewer sub-agent of L); spot-checked: Read in full: the item, the blueprint source fix-prop-projection-formula.proof.md (penultimate Weil-equivariance sentence) and the statements of all 12 cited nodes. No new nodes and no repair note, so the re-split rule does not apply. The statement is unchanged. Step 1: lem-pur-rational-lattice-adic-domain (X and Y are separated finite-type geometric fibres) shows that I_E is the derived-complete integral category with the same sheaf and reductions, and def-wf-weil-category rationalizes exactly that category. Step 2: lem-wf-constructible-tensor-koszul-unit gives rho*chi^quot = eta, eta invertible, and both T and C(T) in C_E, which is the normalized chi_W. Step 3: lem-wf-tensor-completion-frobenius states the displayed Frobenius equation and its rational and common-field persistence, with the tensor Frobenius as in def-wf-tensor-product. Step 4: the pullback and tensor clauses of lem-pur-integral-operations-preserve-constructible, with L in D^b_ctf, a full subcategory of D^b_c by def-weil-finite-tor-amplitude, together with lem-sf-integral-compact-support-constructible (field k, f separated of finite type, ell invertible), cover P, K⊗P, Rf_!K, Rf_!(K⊗P) and Rf_!K⊗L. These are the datum's operations by def-weil-derived-pullback-tensor-hom and def-weil-integral-rational-qbar-compact-support. Step 5: raw rationalization keeps the objects and scalar extension preserves D^b_c, so the domain hypothesis of lem-fix-weil-operations holds for pullback, f_! and tensor only; internal Hom and f^! are not used. A cycle check over the snapshot finds no path from any dependency back to the item. There is no SGA citation, and the Mathlib searches are recorded honestly (one Loogle query unavailable). Small cases checked: empty scheme, f = id, the torsion representative R/t, and a rational Frobenius t^{-1} with no integral lattice. review_split's 'no such node' messages come from the tool not following the chapter symlinks. Advisories: the 4 off-unit tools in split_report.tool_uses are fine for the maintainer to record. Step 1 could have used the unit's own koszul-unit lemma for the category coincidence. The identification of lem-fix-weil-operations' 'canonical' tensor Weil structure with def-wf-tensor-product goes through the frobenius lemma's canonical mu-hat, which I accept. One hypothesis sentence in step 4 is misplaced, which is cosmetic."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProjectionWeilTensorDomainBridge",
+  "declaration": "WeilConjectures.sfProjectionWeilTensorDomainBridge",
+  "declarations": [
+   "WeilConjectures.sfProjectionWeilSpace",
+   "WeilConjectures.sfProjectionWeilMap",
+   "WeilConjectures.sfProjectionWeilMap_isSeparated",
+   "WeilConjectures.sfProjectionWeilMap_locallyOfFiniteType",
+   "WeilConjectures.sfProjectionWeilMap_quasiCompact",
+   "WeilConjectures.sfProjectionWeilCoefficientBridge",
+   "WeilConjectures.sfProjectionWeilIntegralTensorDomains",
+   "WeilConjectures.sfProjectionWeilIntegralTensorBridge",
+   "WeilConjectures.sfProjectionWeilRationalTensorBridge",
+   "WeilConjectures.sfProjectionWeilCommonTensorBridge",
+   "WeilConjectures.sfProjectionWeilScalarDomainBridge",
+   "WeilConjectures.sfProjectionWeilTensorDomainBridge",
+   "WeilConjectures.sfProjectionWeilCommonDomainBridge"
+  ],
+  "file": "lean/Sheaf/Paper/ProjectionWeilTensorDomainBridge.lean",
+  "statement": "theorem sfProjectionWeilTensorDomainBridge (D : FiniteFieldDatum.{u}) (c : D.CoefficientDatum) (E : Type u) [Field E] [Algebra (Padic c.l) E] [FiniteDimensional (Padic c.l) E] (n : ℕ) (hn : 1 ≤ n) (S : SixFunctorOperationDatum D c E n hn) (X₀ Y₀ : Over (Spec (.of D.k₀))) [IsSeparated X₀.hom] [IsSeparated Y₀.hom] [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] (f₀ : X₀ ⟶ Y₀) [IsSeparated f₀.left] [LocallyOfFiniteType f₀.left] [QuasiCompact f₀.left] (b : Compactification (sfProjectionWeilMap D f₀).hom.left) (K : sfIntegralConstructibleCategory c.l E (D.geometricFiber X₀).left) (L : sfIntegralConstructibleCategory c.l E (D.geometricFiber Y₀).left) (_hL : finiteTorConstructibleIntegral c.l E (D.geometricFiber Y₀).left L.obj) : ∃ P H : sfIntegralConstructibleCategory c.l E (D.geometricFiber X₀).left, ∃ U V B : sfIntegralConstructibleCategory c.l E (D.geometricFiber Y₀).left, P.obj = (integralDerivedPullback c.l E (sfProjectionWeilMap D f₀).hom.left).obj L.obj ∧ H.obj = (integralCompletedTensor c.l E (D.geometricFiber X₀).left).obj (K.obj, P.obj) ∧ Nonempty (U.obj ≅ (PurCompactSupport.image (PurCompactSupport.completed c.l E) b).obj K.obj) ∧ Nonempty (V.obj ≅ (PurCompactSupport.image (PurCompactSupport.completed c.l E) b).obj H.obj) ∧ B.obj = (integralCompletedTensor c.l E (D.geometricFiber Y₀).left).obj (U.obj, L.obj) ∧ P = (S.higher.integral.pull (sfProjectionWeilMap D f₀)).obj L ∧ H = ((S.higher.integralTensor (sfProjectionWeilSpace D X₀)).obj K).obj P ∧ U = (S.higher.integral.support (sfProjectionWeilMap D f₀) b).obj K ∧ V = (S.higher.integral.support (sfProjectionWeilMap D f₀) b).obj H ∧ B = ((S.higher.integralTensor (sfProjectionWeilSpace D Y₀)).obj U).obj L ∧ (S.higher.rational.pull (sfProjectionWeilMap D f₀)).obj ((sfRationalConstructibleLocalization c.l E (D.geometricFiber Y₀).left).obj L) = (sfRationalConstructibleLocalization c.l E (D.geometricFiber X₀).left).obj P ∧ ((S.higher.rationalTensor (sfProjectionWeilSpace D X₀)).obj ((sfRationalConstructibleLocalization c.l E (D.geometricFiber X₀).left).obj K)).obj ((sfRationalConstructibleLocalization c.l E (D.geometricFiber X₀).left).obj P) = (sfRationalConstructibleLocalization c.l E (D.geometricFiber X₀).left).obj H ∧ (S.higher.rational.support (sfProjectionWeilMap D f₀) b).obj ((sfRationalConstructibleLocalization c.l E (D.geometricFiber X₀).left).obj K) = (sfRationalConstructibleLocalization c.l E (D.geometricFiber Y₀).left).obj U ∧ (S.higher.rational.support (sfProjectionWeilMap D f₀) b).obj ((sfRationalConstructibleLocalization c.l E (D.geometricFiber X₀).left).obj H) = (sfRationalConstructibleLocalization c.l E (D.geometricFiber Y₀).left).obj V ∧ ((S.higher.rationalTensor (sfProjectionWeilSpace D Y₀)).obj ((sfRationalConstructibleLocalization c.l E (D.geometricFiber Y₀).left).obj U)).obj ((sfRationalConstructibleLocalization c.l E (D.geometricFiber Y₀).left).obj L) = (sfRationalConstructibleLocalization c.l E (D.geometricFiber Y₀).left).obj B",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The node is stated clausewise: coefficient projection normalization and predicate equivalence, ordinary/completed integral tensor domains, integral Weil equation, normalized rational comparison with the recorded tensor Frobenius, its actual common-stage image, scalar extension, and all five integral/rational/common-stage operation outputs. The two helper definitions only bundle the existing geometric base change in SixFunctorSpace; their data are explicit."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-88f4bc498",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Only the item lean record changed (non-lean fields identical to live); statement verbatim. Coefficient bridge = projection-normalized integralDetailedCoefficientComparison + integralStratifiedPerfectDetailed predicate equivalence (pbcStageDatum G = pbcIntegralDatum (Shrink G) = Coefficient G links Weil Integral category). chi = actual completion unit; Weil equation types/direction checked; rational clause HEq to wfTensorFrobenius well-posed via Normalized object equations; WeilD inputs arbitrary rational isos. Main theorem P,H,U,V,B: ambient Lf*L, K⊗̂P, ≅ completed proper/open images, U⊗̂L, each = S integral output, rationalizations = S rational outputs. True via integralPullback/TensorNormalization, rationalDerivedPullback/Tensor object equations, supportConstruction values; ℓ-invertibility from ℓ≠p. Common-stage and scalar-domain clauses present. Hypotheses: separated/LFT/QC exactly as node; b universally quantified; universes u. Edge cases ok. Advisories: integral/common tensor theorems restate WfTensorCompletion proof-dep facts (node recall sentences; own content separately stated); decls from non-stmt_dep owners (stmt_deps unchanged); sfProjectionWeilSpace/Map duplicate PodConstructibleMate.fiberModels; constructibleTensorCompletion unreferenced; Nonempty isos where sfQcqsCompactSupportRealization exists; _hL unused; second reading is the author's own pass. No compile (no FIX)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-3f320",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261026T070749-L-3655085",
+  "kind": "interface",
+  "note": "independent cc review: sfProjectionWeilRationalTensorBridge proof (sorryAx only via upstream wfTensorCompletionFrobenius_exists) against node lem-sf-projection-weil-tensor-domain-bridge; ScalarLocalization tensorHom alias against old category (definitionally identical, change record present); 8 extra uncompiled importers compiled OK"
+ }
+}

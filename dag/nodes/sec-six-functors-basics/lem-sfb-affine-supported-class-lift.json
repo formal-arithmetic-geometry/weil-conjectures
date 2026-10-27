@@ -1,0 +1,340 @@
+{
+ "id": "lem-sfb-affine-supported-class-lift",
+ "kind": "statement",
+ "title": "A cohomology class lifts from a supported perfect object on an affine scheme",
+ "statement": "Let $Y$ be an affine scheme [def-pc-scheme], let $T\\subseteq Y$ be closed, and put $U=Y\\setminus T$. Let $s\\ge0$ be an integer such that $U$ is a union of $s$ affine open subschemes. Let $E\\in D_{\\mathrm{QCoh}}(\\mathcal O_Y)$ [def-pc-derived-category] satisfy $H^j(E)_y=0$ for every $y\\in U$ and every integer $-s+1\\le j\\le0$. For every section $c\\in\\Gamma(Y,H^0(E))$, there exist a perfect object $K\\in D_{\\mathrm{QCoh}}(\\mathcal O_Y)$ [def-pc-perfect-complex], a morphism $a:K\\to E$, and a section $b\\in\\Gamma(Y,H^0(K))$ such that $\\Gamma(Y,H^0(a))(b)=c$, $H^i(K)=0$ for every $i>0$, and $H^i(K)_y=0$ for every integer $i$ and every $y\\in U$. No pseudo-coherence hypothesis on $E$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08E3, lemma-represent-cohomology-class-on-closed, with its proof using the given finite affine cover for the cohomological-dimension bound; the Koszul complex is in nonpositive degrees."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex"
+ ],
+ "proof": [
+  {
+   "text": "Write $Y=\\operatorname{Spec}A$. For any $L\\in D_{\\mathrm{QCoh}}(\\mathcal O_Y)$ let $\\beta_L:\\operatorname{Hom}(\\mathcal O_Y,L)\\xrightarrow{\\sim}\\Gamma(Y,H^0(L))$ be the composite of [lem-pc-derived-structure-sheaf-hom-hypercohomology] with the affine cohomology identification of [lem-sc-qcoh-acyclic-derived-sections-comparison], applied to the identity $Y\\to Y$ and the affine open $Y$. The identity is quasi-compact and quasi-separated, and its direct image is exact, so its positive derived images vanish. Both identifications are natural in $L$. Let $\\psi:\\mathcal O_Y\\to E$ be the unique morphism with $\\beta_E(\\psi)=c$.",
+   "uses": [
+    "lem-pc-derived-structure-sheaf-hom-hypercohomology",
+    "lem-sc-qcoh-acyclic-derived-sections-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08E3, view the section as a structure-sheaf morphism; Tag 08D4 with N=1 as in Tag 0AVW, affine cohomology identification for the identity morphism"
+   }
+  },
+  {
+   "text": "Put $R=E|_U$. The stalk hypothesis gives $H^j(R)=0$ for $-s+1\\le j\\le0$ by [pqf-lem-sheaf-zero-stalks]; restriction to an open is termwise exact. If $s=0$, then $U=\\varnothing$, its module category is zero, and $\\operatorname{Hom}(\\mathcal O_U,R)=0$. Otherwise form $L=\\tau_{\\le0}R\\to R\\to B=\\tau_{\\ge1}R\\to L[1]$ using [def-sbc-standard-tstructure-derived-category]. Its cohomology shows $L\\in D_{\\mathrm{QCoh}}(\\mathcal O_U)^{\\le-s}$. The functor $F=\\Gamma(U,-)$ commutes with countable products, since products of sheaves are computed on sections. By [lem-sfb-affine-open-finite-cover-cohomology-bound] its higher derived functors on quasi-coherent modules vanish for $p\\ge s$. Apply [lem-pc-unbounded-derived-functor-cohomological-bound] with $N=s$ and $b=-s$: $H^i(R\\Gamma(U,L))=0$ for $i>-1$. Hence $\\operatorname{Hom}(\\mathcal O_U,L)=0$ by [lem-pc-derived-structure-sheaf-hom-hypercohomology]. Also $\\mathcal O_U\\in D^{\\le0}$ and $B\\in D^{\\ge1}$, so $\\operatorname{Hom}(\\mathcal O_U,B)=0$ by the orthogonality in [def-weil-t-structure]. Exactness at the middle of $\\operatorname{Hom}(\\mathcal O_U,-)$ for this triangle, [lem-weil-pbc-hom-into-triangle-exact], now gives $\\operatorname{Hom}(\\mathcal O_U,R)=0$. In particular $\\psi|_U=0$.",
+   "uses": [
+    "pqf-lem-sheaf-zero-stalks",
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-sfb-affine-open-finite-cover-cohomology-bound",
+    "lem-pc-unbounded-derived-functor-cohomological-bound",
+    "lem-pc-derived-structure-sheaf-hom-hypercohomology",
+    "def-weil-t-structure",
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08E3, first paragraph, using Tag 08D4 and the truncation triangle instead of the bounded-below spectral sequence"
+   }
+  },
+  {
+   "text": "Choose a finite principal-open presentation $U=\\bigcup_{i=1}^{r}D(f_i)$, with $f_i\\in A$. Indeed each member of the given finite affine cover is quasi-compact by [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact], hence their union is quasi-compact: restrict an open cover to each member and take the union of its finitely many finite subcovers. The principal opens contained in $U$ cover it by [lem-weil-pbc-spec-localization-away-basic-open], so a finite subcover exists. For $U=\\varnothing$ take $r=0$. The number $r$ need not equal $s$, and will not enter the cohomological bound. Use the tail objects $I_e$, augmentations $u_e$, full Koszul objects $K_e$, and inclusions $v_e:\\mathcal O_Y\\to K_e$ of [def-sc-koszul-open-system], indexed here by the positive exponent $e$.",
+   "uses": [
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "def-sc-koszul-open-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08E3 in Situation situation-complex; choose finitely many principal opens without identifying their count with s"
+   }
+  },
+  {
+   "text": "The morphism $\\varphi=\\psi\\circ u_1:I_1\\to E$ restricts to zero, since $\\psi|_U=0$. By [lem-sc-koszul-open-hom-restriction-eventually-zero] some later exponent $e\\ge1$ makes $I_e\\to I_1\\xrightarrow{\\varphi}E$ zero. The power transitions commute with the augmentations by [lem-sc-affine-perfect-open-represent-cohomology], so this composite is $\\psi\\circ u_e$. Thus $\\psi\\circ u_e=0$. (For a zero-based implementation index, the exponent is index plus one.)",
+   "uses": [
+    "lem-sc-koszul-open-hom-restriction-eventually-zero",
+    "lem-sc-affine-perfect-open-represent-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08E3, second paragraph: the restricted class dies at a finite Koszul stage; Tag 08DD, proposition-represent-cohomology-class-on-open"
+   }
+  },
+  {
+   "text": "The canonical distinguished triangle of [lem-sc-affine-perfect-open-represent-cohomology] is $I_e\\xrightarrow{u_e}\\mathcal O_Y\\xrightarrow{v_e}K_e\\to I_e[1]$. Apply [lem-weil-pbc-hom-out-of-triangle-exact](i) with target $E$ to the equality $\\psi\\circ u_e=0$. It gives $a:K_e\\to E$ satisfying $a\\circ v_e=\\psi$.",
+   "uses": [
+    "lem-sc-affine-perfect-open-represent-cohomology",
+    "lem-weil-pbc-hom-out-of-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08E3, final sentence: factor the structure morphism through the Koszul cone"
+   }
+  },
+  {
+   "text": "Set $K=K_e$. Apply [lem-pc-affine-koszul-geometric-properties] to the tuple $(f_1^e,\\ldots,f_r^e)$: $K$ is perfect, and $H^i(K)_y=0$ whenever some $f_j^e\\notin\\mathfrak p_y$. For $e\\ge1$ and a prime $\\mathfrak p_y$, $f_j^e\\notin\\mathfrak p_y$ is equivalent to $f_j\\notin\\mathfrak p_y$, so this covers every $y\\in U$. By [def-weil-pbc-koszul-complex] the representing cochain complex is zero in positive degrees, so $H^i(K)=0$ for $i>0$. It belongs to $D_{\\mathrm{QCoh}}(\\mathcal O_Y)$ because it is the termwise associated sheaf of an $A$-complex, hence in the image of [lem-pc-affine-qcoh-derived-equivalence].",
+   "uses": [
+    "lem-pc-affine-koszul-geometric-properties",
+    "def-weil-pbc-koszul-complex",
+    "lem-pc-affine-qcoh-derived-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Koszul construction preceding Tag 08E3; nonpositive grading, perfection, and support on the closed complement"
+   }
+  },
+  {
+   "text": "Define $b=\\beta_K(v_e)\\in\\Gamma(Y,H^0(K))$, using the natural bijection established in step 1 from [lem-pc-derived-structure-sheaf-hom-hypercohomology] and [lem-sc-qcoh-acyclic-derived-sections-comparison]. Naturality for $a$ gives $\\Gamma(Y,H^0(a))(b)=\\beta_E(a\\circ v_e)=\\beta_E(\\psi)=c$. Together with step 6 this proves every required clause. The argument has used only quasi-coherence of the cohomology of $E$, never pseudo-coherence.",
+   "uses": [
+    "lem-pc-derived-structure-sheaf-hom-hypercohomology",
+    "lem-sc-qcoh-acyclic-derived-sections-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08E3, class lies in the image of H^0(Y,K_e) -> H^0(Y,E), with the affine edge identification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-structure-sheaf-hom-hypercohomology",
+  "lem-sc-qcoh-acyclic-derived-sections-comparison",
+  "pqf-lem-sheaf-zero-stalks",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-sfb-affine-open-finite-cover-cohomology-bound",
+  "lem-pc-unbounded-derived-functor-cohomological-bound",
+  "def-weil-t-structure",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "def-sc-koszul-open-system",
+  "lem-sc-koszul-open-hom-restriction-eventually-zero",
+  "lem-sc-affine-perfect-open-represent-cohomology",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "lem-pc-affine-koszul-geometric-properties",
+  "def-weil-pbc-koszul-complex",
+  "lem-pc-affine-qcoh-derived-equivalence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08E3, lemma-represent-cohomology-class-on-closed; its first paragraph uses the given s-affine cover, Tag 01XI, and Tag 08D4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Koszul.*(support|cohomology)|represent.*cohomology.*class|class.*perfect.*support",
+   "results": "{\"t\": \"2026-10-23T15:54:06Z\", \"tool\": \"grep\", \"query\": \"Koszul.*(support|cohomology)|represent.*cohomology.*class|class.*perfect.*support\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: affine-limit section vanishing, abstract cocycle classes and mapping-cone lifts do not give a perfect source with prescribed closed support from this finite cohomology-vanishing interval."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Represent a hypercohomology class by a map from a Koszul complex on powers of generators of a finitely generated ideal",
+   "results": "{\"t\": \"2026-10-23T15:54:07Z\", \"tool\": \"leansearch\", \"query\": \"Represent a hypercohomology class by a map from a Koszul complex on powers of generators of a finitely generated ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_mk_hom\", \"CochainComplex.HomComplex.CohomologyClass\", \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk\", \"CochainComplex.HomComplex.CohomologyClass.mkAddMonoidHom_apply\", \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass\", \"CochainComplex.HomComplex.leftHomologyData_π_hom_apply\", \"CochainComplex.HomComplex.CohomologyClass.descAddMonoidHom_cohomologyClass\", \"CochainComplex.HomComplex.CohomologyClass.mk_surjective\"], \"digest\": \"0e809e92a258df83\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: affine-limit section vanishing, abstract cocycle classes and mapping-cone lifts do not give a perfect source with prescribed closed support from this finite cohomology-vanishing interval."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Koszul\", \"DerivedCategory\"",
+   "results": "{\"t\": \"2026-10-23T15:54:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"Koszul\\\", \\\"DerivedCategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: affine-limit section vanishing, abstract cocycle classes and mapping-cone lifts do not give a perfect source with prescribed closed support from this finite cohomology-vanishing interval."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cohomology class of a quasi coherent derived object on an affine scheme lifts from a perfect complex supported on a closed subset when a finite interval of cohomology vanishes on the complement",
+   "results": "{\"t\": \"2026-10-23T15:54:08Z\", \"tool\": \"leanfinder\", \"query\": \"A cohomology class of a quasi coherent derived object on an affine scheme lifts from a perfect complex supported on a closed subset when a finite interval of cohomology vanishes on the complement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"CochainComplex.HomComplex.CohomologyClass.toSmallShiftedHom_mk\", \"CategoryTheory.Sheaf.H\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\"], \"digest\": \"08cb6d0093144402\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: affine-limit section vanishing, abstract cocycle classes and mapping-cone lifts do not give a perfect source with prescribed closed support from this finite cohomology-vanishing interval."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Koszul powers lift individual hypercohomology classes from a derived object when its cohomology sheaves vanish in a finite interval on the open complement",
+   "results": "{\"t\": \"2026-10-23T15:54:46Z\", \"tool\": \"leanfinder\", \"query\": \"Koszul powers lift individual hypercohomology classes from a derived object when its cohomology sheaves vanish in a finite interval on the open complement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.liftCocycle_coe\", \"CochainComplex.mappingCone.liftCocycle\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"CochainComplex.cm5b\", \"CochainComplex.isKInjective_of_injective_aux\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"CochainComplex.mappingCone.ofHom_lift\"], \"digest\": \"a1d6ac6a966db443\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: affine-limit section vanishing, abstract cocycle classes and mapping-cone lifts do not give a perfect source with prescribed closed support from this finite cohomology-vanishing interval."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cohomology class of a quasi coherent complex on an affine scheme is represented by a perfect complex supported on a closed subset",
+   "results": "{\"t\": \"2026-10-23T18:50:35Z\", \"tool\": \"leanfinder\", \"query\": \"A cohomology class of a quasi coherent complex on an affine scheme is represented by a perfect complex supported on a closed subset\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"CategoryTheory.Sheaf.H\", \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\"], \"digest\": \"085bb880bd08c0fb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: section-vanishing, abstract cocycle classes, derived fraction factorization, and local cohomology diagrams do not construct this supported perfect source."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Koszul\", \"DerivedCategory\"",
+   "results": "{\"t\": \"2026-10-23T18:50:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"Koszul\\\", \\\"DerivedCategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: section-vanishing, abstract cocycle classes, derived fraction factorization, and local cohomology diagrams do not construct this supported perfect source."
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul.*(support|cohomology)|represent.*cohomology.*class|perfect.*supported",
+   "results": "{\"t\": \"2026-10-23T18:50:36Z\", \"tool\": \"grep\", \"query\": \"Koszul.*(support|cohomology)|represent.*cohomology.*class|perfect.*supported\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: section-vanishing, abstract cocycle classes, derived fraction factorization, and local cohomology diagrams do not construct this supported perfect source."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A cohomology class lifts from a perfect complex supported on a closed subset of an affine scheme",
+   "results": "{\"t\": \"2026-10-23T18:50:37Z\", \"tool\": \"leansearch\", \"query\": \"A cohomology class lifts from a perfect complex supported on a closed subset of an affine scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.CohomologyClass\", \"AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support\", \"CochainComplex.HomComplex.CohomologyClass.descAddMonoidHom\", \"CochainComplex.HomComplex.CohomologyClass.mkAddMonoidHom\", \"CochainComplex.isIso_liftCycles_iff\", \"HomologicalComplex.instIsSupportedOfIsStrictlySupported\", \"CochainComplex.HomComplex.CohomologyClass.toSmallShiftedHom\", \"CategoryTheory.ShortComplex.liftCycles\"], \"digest\": \"7702ba7c32b39a0d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: section-vanishing, abstract cocycle classes, derived fraction factorization, and local cohomology diagrams do not construct this supported perfect source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Koszul complexes on powers of ideal generators represent morphisms into an unbounded quasi coherent derived object with a class vanishing on an open complement",
+   "results": "{\"t\": \"2026-10-23T18:51:17Z\", \"tool\": \"leanfinder\", \"query\": \"Koszul complexes on powers of ideal generators represent morphisms into an unbounded quasi coherent derived object with a class vanishing on an open complement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"localCohomology.diagram\", \"CochainComplex.cm5b.I\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"PresheafOfModules.HasDifferentials.exists_universal_derivation\", \"CochainComplex.cm5b\"], \"digest\": \"85937352af547942\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: section-vanishing, abstract cocycle classes, derived fraction factorization, and local cohomology diagrams do not construct this supported perfect source."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-supported-perfect-approximation",
+  "date": "2026-10-24",
+  "group": "Q17"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 2, Lemma 2.5 (printed pp.178--179), using Section 1, Corollary 1.5 and Lemma 1.6: multiplication and the pushforward exact sequences, retaining the twist by minus the old-marking divisor. Lemma 2.5, first paragraph and final evaluation: Corollary 1.5 supplies vanishing, base-flat direct images, arbitrary base change and generation for the five divisor modules. Corollary 1.5, printed p.167: the general cohomology-and-base-change tool whose conditions (1) and (2) the exceptional-fibre calculation must verify. General tool for Corollary 1.5: finite presentation of the acyclic image: detect pseudo-coherence by perfect tensor tests on V, using proper-support perfect direct image for U -> S. Supporting tool: 0CSH (lemma-perfect-enough). In Stacks 0CSH proof, choose a perfect approximation P to E at degree m-N-1-b; this is the 08ES approximation theorem with support T=X. The affine base case of Tag 08ES. Tag 08EQ proof: lift each generator of the highest cohomology by the closed-support cohomology-class construction, Tag 08E3; distinguish the number of affine opens from the number of ideal generators.",
+   "via": [
+    "lem-sfb-affine-supported-perfect-approximation",
+    "lem-sfb-pseudocoherent-perfect-approximation",
+    "lem-sfb-perfect-to-pseudocoherent-tensor-tests",
+    "lem-sfb-perfect-tests-detect-pseudocoherence",
+    "lem-sfb-relative-acyclic-direct-image",
+    "lem-sfb-rational-contraction-line-cohomology",
+    "lem-sfb-elementary-contraction-evaluation",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-affine-supported-class-lift",
+  "worker": "stage1",
+  "summary": "Split Tag 08E3 by removing the negative tail with the existing unbounded derived bound, then using the existing Koszul eventual-vanishing and triangle factorization results. Added only the sharp finite-affine-cover cohomology bound, retained s independently of the principal-cover size r, and handled the empty complement.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 2, Lemma 2.5 (printed pp.178--179), using Section 1, Corollary 1.5 and Lemma 1.6: multiplication and the pushforward exact sequences, retaining the twist by minus the old-marking divisor. Lemma 2.5, first paragraph and final evaluation: Corollary 1.5 supplies vanishing, base-flat direct images, arbitrary base change and generation for the five divisor modules. Corollary 1.5, printed p.167: the general cohomology-and-base-change tool whose conditions (1) and (2) the exceptional-fibre calculation must verify. General tool for Corollary 1.5: finite presentation of the acyclic image: detect pseudo-coherence by perfect tensor tests on V, using proper-support perfect direct image for U -> S. Supporting tool: 0CSH (lemma-perfect-enough). In Stacks 0CSH proof, choose a perfect approximation P to E at degree m-N-1-b; this is the 08ES approximation theorem with support T=X. The affine base case of Tag 08ES. Tag 08EQ proof: lift each generator of the highest cohomology by the closed-support cohomology-class construction, Tag 08E3; distinguish the number of affine opens from the number of ideal generators. Steps 1-7 realize the Tag 08E3 class-lifting input of the affine Tag 08EQ approximation, below the retained direct-image/alteration route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-derived-structure-sheaf-hom-hypercohomology",
+    "why": "Generic Zariski module/derived-category tool used with its stated hypotheses in the Tag 08E3 affine approximation route; the unit has no corresponding general tool statement."
+   },
+   {
+    "node": "lem-sc-qcoh-acyclic-derived-sections-comparison",
+    "why": "Generic Zariski module/derived-category tool used with its stated hypotheses in the Tag 08E3 affine approximation route; the unit has no corresponding general tool statement."
+   },
+   {
+    "node": "pqf-lem-sheaf-zero-stalks",
+    "why": "Generic Zariski module/derived-category tool used with its stated hypotheses in the Tag 08E3 affine approximation route; the unit has no corresponding general tool statement."
+   },
+   {
+    "node": "lem-pc-unbounded-derived-functor-cohomological-bound",
+    "why": "Generic Zariski module/derived-category tool used with its stated hypotheses in the Tag 08E3 affine approximation route; the unit has no corresponding general tool statement."
+   },
+   {
+    "node": "lem-weil-pbc-hom-into-triangle-exact",
+    "why": "Generic Zariski module/derived-category tool used with its stated hypotheses in the Tag 08E3 affine approximation route; the unit has no corresponding general tool statement."
+   },
+   {
+    "node": "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "why": "Generic Zariski module/derived-category tool used with its stated hypotheses in the Tag 08E3 affine approximation route; the unit has no corresponding general tool statement."
+   },
+   {
+    "node": "lem-weil-pbc-spec-localization-away-basic-open",
+    "why": "Generic Zariski module/derived-category tool used with its stated hypotheses in the Tag 08E3 affine approximation route; the unit has no corresponding general tool statement."
+   },
+   {
+    "node": "lem-sc-koszul-open-hom-restriction-eventually-zero",
+    "why": "Generic Zariski module/derived-category tool used with its stated hypotheses in the Tag 08E3 affine approximation route; the unit has no corresponding general tool statement."
+   },
+   {
+    "node": "lem-sc-affine-perfect-open-represent-cohomology",
+    "why": "Generic Zariski module/derived-category tool used with its stated hypotheses in the Tag 08E3 affine approximation route; the unit has no corresponding general tool statement."
+   },
+   {
+    "node": "lem-weil-pbc-hom-out-of-triangle-exact",
+    "why": "Generic Zariski module/derived-category tool used with its stated hypotheses in the Tag 08E3 affine approximation route; the unit has no corresponding general tool statement."
+   },
+   {
+    "node": "lem-pc-affine-koszul-geometric-properties",
+    "why": "Generic Zariski module/derived-category tool used with its stated hypotheses in the Tag 08E3 affine approximation route; the unit has no corresponding general tool statement."
+   },
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "Generic Zariski module/derived-category tool used with its stated hypotheses in the Tag 08E3 affine approximation route; the unit has no corresponding general tool statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-derived-structure-sheaf-hom-hypercohomology",
+  "lem-sc-qcoh-acyclic-derived-sections-comparison",
+  "pqf-lem-sheaf-zero-stalks",
+  "lem-pc-unbounded-derived-functor-cohomological-bound",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-sc-koszul-open-hom-restriction-eventually-zero",
+  "lem-sc-affine-perfect-open-represent-cohomology",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "lem-pc-affine-koszul-geometric-properties",
+  "lem-pc-affine-qcoh-derived-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-cd9185242",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-cd9185242 (reviewer sub-agent of L); spot-checked: Read all of the item and the new node, every cited statement, and the sources: perfect.tex 08E3 and the Koszul construction before it, 08D4(3), 08DD, and coherent.tex 01XI (both proofs). The item statement is the same as on live (live still has it unsplit) and is true. The Stacks proof only uses that U is covered by r affines, so taking s affines with a separate count r of principal opens (chosen in step 3) is sound. Step 1: beta comes from structure-sheaf Hom = H^0 RGamma plus the qcoh-acyclic comparison for id_Y; both are natural. Step 2: L = tau<=0 of E|_U lies in D^{<=-s}; the 08D4(3) node with N=s, b=-s and the new 01XI node give Hom(O_U,L)=0; t-structure orthogonality kills Hom(O_U,tau>=1); Hom into the triangle is exact; s=0 means U is empty. Step 3: quasi-compactness and the basic-open basis give a finite cover by D(f_i) inside U. Step 4: eventual-zero node plus u_e compatibility (the Lean statement of the represent-cohomology node has koszulOpenMap ≫ koszulOpenUnit = koszulOpenUnit). Step 5: that triangle is distinguished in the Lean statement, and Hom-out-of-triangle (i) gives a with a∘v_e=ψ. Step 6: geometric Koszul properties for f^e (D(f^e)=D(f)), nonpositive degrees, D_QCoh via the affine equivalence. Step 7: naturality. New node lem-sfb-affine-open-finite-cover-cohomology-bound: a true specialization of 01XI (an open of an affine is separated, t(U)<=s, s=0 is fine). It is generic, not a clause of the item, and not a duplicate: lem-sc-picard-qcoh-finite-cd needs a field and gives only an unspecified d_X; space-global-sections-amplitude is existence only; the Cech nodes are tools. Edge cases checked: s=0, T empty, T=Y, non-Noetherian, unbounded E. No SGA. The one fault (C1): step 1 source.place named Tag 06Z0, which no node cited in that step carries; corrected to 08D4/0AVW, the source of the cited comparison, in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-affine-supported-class-lift.json. Every other field is verbatim.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineSupportedClassLift",
+  "declaration": "AlgebraicGeometry.affine_supported_class_lift",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineSupportedClassLift.lean",
+  "statement": "theorem affine_supported_class_lift (Y : Scheme.{u}) [IsAffine Y] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [∀ V : Y.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V))] (T : Set Y) (hT : IsClosed T) (s : ℕ) (V : Fin s → Y.Opens) (hV : ∀ i : Fin s, IsAffineOpen (V i)) (hcover : (⋃ i : Fin s, (V i : Set Y)) = Tᶜ) (E : schemeDerivedQCohCategory Y) (hE : ∀ (j : ℤ), -(s : ℤ) + 1 ≤ j → j ≤ 0 → ∀ y : Y, y ∉ T → Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) j).obj E.obj).val.presheaf y))) (c : ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj E.obj).val.obj (Opposite.op ⊤)) : ∃ K : schemeDerivedQCohCategory Y, Scheme.IsPerfect Y K.obj ∧ ∃ a : K.obj ⟶ E.obj, ∃ b : ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj K.obj).val.obj (Opposite.op ⊤), ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).map a).val.app (Opposite.op ⊤) b = c ∧ (∀ i : ℤ, 0 < i → IsZero ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) i).obj K.obj)) ∧ ∀ (i : ℤ) (y : Y), y ∉ T → Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) i).obj K.obj).val.presheaf y))",
+  "branch": "newtargets-dag",
+  "by": "Q123",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d25e6a956",
+  "group": "Q123",
+  "result": "pass",
+  "note": "Only the lean field changed vs live; item not otherwise staged. Statement matches node and Stacks 08E3 clause by clause in quantifier order: IsAffine Y; closed T; explicit Fin s affine cover of Tᶜ (equivalent to existence); E in schemeDerivedQCohCategory; stalk Subsingleton of H^j for -s+1<=j<=0 off T; c in H^0 global sections; ∃ K QCoh with IsPerfect, a : K→E, b with H^0(a) on ⊤ sending b to c, IsZero H^i(K) for i>0, all-degree stalk vanishing off T. Stalk form matches cited affine_koszul_geometric_properties. HasDerivedCategory binders are exactly those IsPerfect needs; universes explicit; lean.statement verbatim (script-checked). Imports are recorded proof_dep modules. Edge cases s=0, T=Y, T=∅, empty Y, unbounded E all fine. Docstrings carry source place, blueprint tag and 7 steps; only sorry; no defs; no pro-etale. No compile run since no change."
+ }
+}

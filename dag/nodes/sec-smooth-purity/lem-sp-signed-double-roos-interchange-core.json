@@ -1,0 +1,159 @@
+{
+ "id": "lem-sp-signed-double-roos-interchange-core",
+ "kind": "statement",
+ "title": "Signed interchange of the two strict Roos directions",
+ "statement": "Let C, R, the existing complex and tower categories, rows, columns, and their specified coordinate and evaluation maps be as in [def-sp-signed-double-roos-tensor-exchange-data]. For every strict double inverse sequence of unbounded complexes, there is a natural chain isomorphism beta from rows to columns whose composite with columnCoordinate(p,q,k,n,j) is rowCoordinate(p,q,k,n,j), negated exactly if both p and q are true. The two evaluation squares commute: beta followed by Roos(innerEvaluation of the flipped tower at n) is evaluation at n of the row tower, and beta followed by evaluation at j of the column tower is Roos(innerEvaluation at j). No exactness, boundedness, torsion or regularity hypothesis is required.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+  "place": "Signed interchange of the two strict Roos directions; parent node lem-sp-signed-double-roos-tensor-exchange coordinate proof. Stacks 014E (derived.tex, definition-cone), 012Z (homology.tex, definition-associated-simple-complex), 03EK (sites-modules.tex, section-tensor-product), 0941 (sites-cohomology.tex, lemma-derived-limit-is-ok)."
+ },
+ "stmt_deps": [
+  "def-sp-signed-double-roos-tensor-exchange-data"
+ ],
+ "proof": [
+  {
+   "text": "Put $P^a=\\prod_n\\prod_jX_{n,j}^a$ and let $A=1-s_n$, $B=1-s_j$ on $P$. Define the product interchange by requiring its $(j,n)$ projection to equal the original $(n,j)$ projection. The reversed prescription is inverse, since every projection of either composite is the corresponding projection of the identity. Strict commutation of the transitions gives $AB=BA$ by the same projection test. We also use the canonical identification $\\prod_i(M_i\\oplus N_i)\\cong(\\prod_iM_i)\\oplus(\\prod_iN_i)$: send a pair of product vectors to its pairs of projections; the inverse has first and second components the products of the two biproduct projections. Both composites are identities on all components. These constructions commute with component maps and differentials. Thus the two iterated Roos complexes may be expanded using the same $P$.",
+   "uses": [
+    "def-weil-category-product",
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014E, definition-cone: expansion of its finite biproducts by the product universal property"
+   }
+  },
+  {
+   "text": "In total degree $k$, expand the source $\\mathsf R_n\\mathsf R_jX$ in the order $(a,b,c,h)$ of Roos degrees $(0,0),(0,1),(1,0),(1,1)$. Its four summands are $P^k,P^{k-1},P^{k-1},P^{k-2}$. Apply the differential $(dv,-du-(1-s)v)$ twice. The result is\n$$D(a,b,c,h)=(da,-db-Ba,-dc-Aa,dh+Bc-Ab).$$\nFor example the last component is the negative of the second component of the inner differential on $(c,h)$, minus $A$ applied to $b$, namely $dh+Bc-Ab$. This also fixes the sign of the doubly shifted coordinate without any totalization convention left implicit.",
+   "uses": [
+    "def-weil-strict-roos-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014E, definition-cone, applied twice with the shift sign"
+   }
+  },
+  {
+   "text": "The target order is $(j\\text{-degree},n\\text{-degree})$. Define $\\beta(a,b,c,h)=(a,c,b,-h)$ after the product interchange. Using step 2 with $A,B$ exchanged, both $D\\beta$ and $\\beta D$ have components\n$$(da,-dc-Aa,-db-Ba,-dh-Bc+Ab).$$\nThus $\\beta$ is a chain map. Its reversed-coordinate formula is its inverse. It is exactly multiplication by $(-1)^{pq}$ on bidegree $(p,q)$, with no sign on the other three coordinates.",
+   "uses": [
+    "def-weil-strict-roos-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014E, definition-cone: four-coordinate chain-map calculation"
+   }
+  },
+  {
+   "text": "For a strict double-tower map, the induced maps on the four coordinates are the respective product maps; these commute with permutation, negation, and both shifts. This proves naturality. Evaluation at $n$ in the outer source retains $(a,b)$ and projects their $n$ index. In the target it retains the coordinates with $n$-Roos degree zero, also $(a,b)$ after $\\beta$. Evaluation at $j$ likewise retains $(a,c)$ on either side. The sign on $h$ never enters either evaluation. Hence both evaluation squares commute as chain-map squares.",
+   "uses": [
+    "def-weil-strict-roos-model",
+    "def-weil-category-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, strict cone evaluation maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-category-product",
+  "def-sp-abelian",
+  "def-weil-strict-roos-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 014E, definition-cone; literal coordinate argument of the parent node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Interchanging two mapping cocones has sign minus one on the doubly shifted component and preserves the two evaluations",
+   "results": [
+    "CochainComplex.mappingCone.shiftIso",
+    "CochainComplex.mappingCone.shiftTriangleIso",
+    "CategoryTheory.Functor.commShiftIso_map₂CochainComplex_flip_hom_app"
+   ],
+   "date": "2026-10-25",
+   "verdict": "No matching double Roos interchange or its coordinate/tensor interface. Cone and shift APIs are ingredients only."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCocone",
+   "results": [
+    "CochainComplex.mappingCocone",
+    "CochainComplex.mappingCocone.inl",
+    "CochainComplex.mappingCocone.inr",
+    "CochainComplex.mappingCocone.snd",
+    "CochainComplex.mappingCocone.liftCochain"
+   ],
+   "date": "2026-10-25",
+   "verdict": "The construction and its basic maps exist; no theorem combines a double product interchange or the principal Koszul tensor/augmentation equations."
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCocone.*(tensor|prod)|roos.*(interchange|flip)",
+   "results": [],
+   "date": "2026-10-25",
+   "verdict": "No Mathlib hits. Local source search also found no result with this generality; KoszulRoosProjectionComparison uses pro-etale sites and regular coefficients and its left-tensor normalization does not supply this statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.SignedDoubleRoosTensorExchange",
+  "date": "2026-10-25",
+  "group": "M5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-sp-tower",
+   "place": "Signed interchange of the two strict Roos directions; refinement of the completeness calculation.",
+   "via": [
+    "lem-sp-signed-double-roos-tensor-exchange",
+    "lem-sp-power-torsion-sheaf-limit-complete"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.SignedDoubleRoosTensorExchangeInterchange",
+  "file": "lean/Sheaf/Algebra/Homology/SignedDoubleRoosTensorExchangeInterchange.lean",
+  "declaration": "CategoryTheory.SignedDoubleRoos.signed_double_roos_interchange_core",
+  "declarations": [
+   "CategoryTheory.SignedDoubleRoos.signed_double_roos_interchange_core"
+  ],
+  "statement": "theorem signed_double_roos_interchange_core : ∃ β : rows R ≅ columns R, (∀ (X : ℕᵒᵖ ⥤ Tower R) (p q : Bool) (k : ℤ) (n j : ℕ), (β.hom.app X).f k ≫ columnCoordinate R X p q k n j = if p && q then -rowCoordinate R X p q k n j else rowCoordinate R X p q k n j) ∧ (∀ (X : ℕᵒᵖ ⥤ Tower R) (n : ℕ), β.hom.app X ≫ (roos R).map (innerEvaluation R X.flip n) = evaluation R (X ⋙ roos R) n) ∧ (∀ (X : ℕᵒᵖ ⥤ Tower R) (j : ℕ), β.hom.app X ≫ evaluation R (X.flip ⋙ roos R) j = (roos R).map (innerEvaluation R X j))",
+  "branch": "sheaf-dag",
+  "by": "M5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-332c9",
+  "group": "M5",
+  "result": "pass",
+  "landing": "20261025T163857-L-882743",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-332c9",
+  "group": "M5",
+  "result": "pass",
+  "landing": "20261025T163857-L-882743",
+  "kind": "interface",
+  "note": "independent cc review: 18 moved definitions byte-identical to published item module (clone c84b68f); item theorem signature unchanged; two new sorry cores = parent conjuncts 1-3 (minus unneeded exactness) and the tensor conjunct for any β with the coordinate formula (which determines β); nodes follow the assembly proof"
+ }
+}

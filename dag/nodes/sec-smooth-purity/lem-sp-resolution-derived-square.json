@@ -1,0 +1,152 @@
+{
+ "id": "lem-sp-resolution-derived-square",
+ "kind": "statement",
+ "title": "Localized coefficient square and its derived comparison identity",
+ "statement": "Let f:X to Y be a morphism of schemes, R and S coefficient ring sheaves with an identified inverse image, F the exact complex pullback, L its derived functor, epsilon its specified factors, and a,b any specified tensor models. Let P,H,M be arbitrary cochain complexes, P,H and FP,FH flat-term K-flat, and q:H to M any map. Let eY and eX be isomorphisms between the localized total tensors for (P,H),(P,M) and (FP,FH),(FP,FM), whose forward maps are Q(1 tensor q) and Q(1 tensor Fq). Then epsilon at Tot(P,M), followed by Q(sigma(P,M)) and eX inverse followed by the b representative comparison and tensor(1,QFq), equals L of eY inverse followed by the a representative comparison and tensor(1,Qq), then tau(QP,QM), then tensor(epsilonP,epsilonM). Dependencies: the pro-etale operations, signed total tensor and canonical representative comparisons in the statement dependencies below.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YP, 06YS, normalized construction preceding 06YU, and 07A4 (lemma-pullback-tensor-product)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-operations",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-quasi-iso-modules"
+ ],
+ "proof": [
+  {
+   "text": "Localize the chain comparison square, and rewrite its two vertical maps with the prescribed forward maps of eY,eX. Naturality of epsilon at 1 tensor q relates the left vertical map to L(eY.hom).",
+   "uses": [
+    "lem-sp-resolution-sigma-naturality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YP, 06YS, normalized construction preceding 06YU, and 07A4 (lemma-pullback-tensor-product)"
+   }
+  },
+  {
+   "text": "Precompose the final asserted identity by the invertible L(Q(u)). Naturality of epsilon at u and the localized chain square turn its left side into epsilon_T Q(sigma_PH) r_X tensor(1,QFq), cancelling Q(v) with eX inverse. Substitute the top representative square. Naturality of epsilon at q and bifunctoriality combine tensor(epsilon_P,epsilon_H) with tensor(1,QFq) into tensor(1,LQq) followed by tensor(epsilon_P,epsilon_M). Naturality of tau moves the first factor across tau. Finally functoriality of L and cancellation of Q(u) with eY inverse give the right side. No step requires flatness of N or K-flatness of Tot(P tensor N[0]).",
+   "uses": [
+    "lem-sp-resolution-representative-square"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YP, 06YS, normalized construction preceding 06YU, and 07A4 (lemma-pullback-tensor-product)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-resolution-sigma-naturality",
+  "lem-sp-resolution-representative-square"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YP, 06YS, 06YU, 07A4; normalized localization and canonical representative comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of tensor pullback comparison on cochain complexes and independence of K flat coefficient resolutions",
+   "results": "{\"t\": \"2026-10-27T00:03:12Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality of tensor pullback comparison on cochain complexes and independence of K flat coefficient resolutions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.mapBifunctorShift₁Iso_hom_naturality₁\", \"CochainComplex.mapBifunctorShift₂Iso_hom_naturality₂\", \"CategoryTheory.Tor'_obj_map\", \"HomologicalComplex.rightUnitor'_inv_comm\", \"HomologicalComplex.leftUnitor'_inv_comm\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"CategoryTheory.Tor'_map_app\", \"HomologicalComplex.leftUnitor'_inv_comm_assoc\"], \"digest\": \"0cd0887b588e34a3\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact result: Mathlib has general localization and naturality, but not this specified pro-etale tensor-model comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"naturality\"",
+   "results": "{\"t\": \"2026-10-27T00:03:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"tensor\\\", \\\"naturality\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory.id_tensor_associator_inv_naturality\", \"CategoryTheory.MonoidalCategory.id_tensor_associator_naturality\", \"CategoryTheory.MonoidalCategory.id_tensor_associator_inv_naturality_assoc\", \"CategoryTheory.MonoidalCategory.id_tensor_associator_naturality_assoc\", \"CategoryTheory.NatTrans.tensor_naturality\", \"CategoryTheory.NatTrans.tensor_naturality_assoc\", \"Mathlib.Tactic.Monoidal.naturality_tensorHom\", \"CategoryTheory.tensorLeftHomEquiv_naturality\"], \"digest\": \"6e71165f57a142c1\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact result: Mathlib has general localization and naturality, but not this specified pro-etale tensor-model comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorPullback.*naturality|one_sided_tensor|coefficient_resolution",
+   "results": "{\"t\": \"2026-10-27T00:03:13Z\", \"tool\": \"grep\", \"query\": \"tensorPullback.*naturality|one_sided_tensor|coefficient_resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact result: Mathlib has general localization and naturality, but not this specified pro-etale tensor-model comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural comparison between derived tensor with a fixed K flat complex and ordinary tensor followed by localization normalized on flat representatives",
+   "results": "{\"t\": \"2026-10-27T00:35:33Z\", \"tool\": \"leansearch\", \"query\": \"Natural comparison between derived tensor with a fixed K flat complex and ordinary tensor followed by localization normalized on flat representatives\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.instIsLocalizedModuleTensorProductMap\", \"IsLocalization.tensorProduct_isLocalizedModule\", \"Module.Flat.of_isLocalizedModule\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison\", \"Module.Flat.lTensor_shortComplex_exact\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"IsLocalizedModule.rTensor\", \"Module.Flat.iff_flat_tensorProduct\"], \"digest\": \"87defc39581e2f31\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact result: Mathlib has general localization and naturality, but not this specified pro-etale tensor-model comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProEtaleTensorCoefficientResolutionSquare",
+  "date": "2026-10-27",
+  "group": "V8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-reduction-direct-image",
+   "place": "det-sp-reduction-direct-image proof Step 1, tensor-pullback identification; resolving a nonflat coefficient and identifying the canonical representative square, normalization Steps 5–6",
+   "via": [
+    "lem-sp-proetale-tensor-coefficient-resolution-square",
+    "lem-sp-proetale-scalar-tensor-normalization",
+    "lem-sp-direct-image-change-ring-transpose"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleResolutionDerivedSquare",
+  "file": "lean/Sheaf/Paper/ProEtaleResolutionDerivedSquare.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtale_resolution_derived_square",
+  "statement": "theorem proEtale_resolution_derived_square\n    (a : ProEtaleTensorModel Y R) (b : ProEtaleTensorModel X S)\n    (P H M : CochainComplex (proEtaleRingModules Y R) ℤ)\n    (hP : proEtaleFlatRepresentatives Y R P)\n    (hH : proEtaleFlatRepresentatives Y R H)\n    (hFP : proEtaleFlatRepresentatives X S ((((proEtaleRingModulePullback f R S\n        c).mapHomologicalComplex (.up ℤ))).obj P))\n    (hFH : proEtaleFlatRepresentatives X S ((((proEtaleRingModulePullback f R S\n        c).mapHomologicalComplex (.up ℤ))).obj H))\n    (q : H ⟶ M)\n    (eY : DerivedCategory.Q.obj (((Functor.uncurry.obj ((proEtaleOrdinaryTensor Y\n        R).map₂HomologicalComplex\n        (ComplexShape.up ℤ) (ComplexShape.up ℤ) (ComplexShape.up ℤ)))).obj (P, H)) ≅\n      DerivedCategory.Q.obj (((Functor.uncurry.obj ((proEtaleOrdinaryTensor Y\n          R).map₂HomologicalComplex\n        (ComplexShape.up ℤ) (ComplexShape.up ℤ) (ComplexShape.up ℤ)))).obj (P, M)))\n    (eX : DerivedCategory.Q.obj (((Functor.uncurry.obj ((proEtaleOrdinaryTensor X\n        S).map₂HomologicalComplex\n        (ComplexShape.up ℤ) (ComplexShape.up ℤ) (ComplexShape.up ℤ)))).obj\n        ((((proEtaleRingModulePullback f R S c).mapHomologicalComplex (.up ℤ))).obj P,\n          (((proEtaleRingModulePullback f R S c).mapHomologicalComplex (.up ℤ))).obj H)) ≅\n      DerivedCategory.Q.obj (((Functor.uncurry.obj ((proEtaleOrdinaryTensor X\n          S).map₂HomologicalComplex\n        (ComplexShape.up ℤ) (ComplexShape.up ℤ) (ComplexShape.up ℤ)))).obj\n        ((((proEtaleRingModulePullback f R S c).mapHomologicalComplex (.up ℤ))).obj P,\n          (((proEtaleRingModulePullback f R S c).mapHomologicalComplex (.up ℤ))).obj M)))\n    (heY : eY.hom = DerivedCategory.Q.map (((Functor.uncurry.obj ((proEtaleOrdinaryTensor Y\n        R).map₂HomologicalComplex\n        (ComplexShape.up ℤ) (ComplexShape.up ℤ) (ComplexShape.up ℤ))).map (Prod.mkHom (𝟙 P) q))))\n    (heX : eX.hom = DerivedCategory.Q.map (((Functor.uncurry.obj ((proEtaleOrdinaryTensor X\n        S).map₂HomologicalComplex\n        (ComplexShape.up ℤ) (ComplexShape.up ℤ) (ComplexShape.up ℤ))).map (Prod.mkHom\n      (𝟙 ((((proEtaleRingModulePullback f R S c).mapHomologicalComplex (.up ℤ))).obj P))\n      ((((proEtaleRingModulePullback f R S c).mapHomologicalComplex (.up ℤ))).map q))))) :\n        (proEtaleRingDerivedPullbackFactors f R S c).hom.app\n            (((Functor.uncurry.obj ((proEtaleOrdinaryTensor Y R).map₂HomologicalComplex\n        (ComplexShape.up ℤ) (ComplexShape.up ℤ) (ComplexShape.up ℤ)))).obj (P, M)) ≫\n          DerivedCategory.Q.map\n            ((proEtaleTensorPullbackTotalIso f R S c P M).symm).hom ≫\n          (eX.inv ≫ b.representative.hom.app\n            (⟨(((proEtaleRingModulePullback f R S c).mapHomologicalComplex (.up ℤ))).obj P, hFP⟩,\n              ⟨(((proEtaleRingModulePullback f R S c).mapHomologicalComplex (.up ℤ))).obj H, hFH⟩) ≫\n            b.tensor.map (Prod.mkHom\n              (𝟙 (DerivedCategory.Q.obj ((((proEtaleRingModulePullback f R S\n                  c).mapHomologicalComplex (.up ℤ))).obj P)))\n              (DerivedCategory.Q.map ((((proEtaleRingModulePullback f R S c).mapHomologicalComplex\n                  (.up ℤ))).map q)))) =\n        (proEtaleRingDerivedPullback f R S c).map\n            (eY.inv ≫ a.representative.hom.app (⟨P, hP⟩, ⟨H, hH⟩) ≫\n              a.tensor.map (Prod.mkHom (𝟙 (DerivedCategory.Q.obj P))\n                (DerivedCategory.Q.map q))) ≫\n          (proEtaleCanonicalTensorComparison f R S c a b).hom.app\n            (DerivedCategory.Q.obj P, DerivedCategory.Q.obj (M)) ≫\n          b.tensor.map (Prod.mkHom\n            ((proEtaleRingDerivedPullbackFactors f R S c).hom.app P)\n            ((proEtaleRingDerivedPullbackFactors f R S c).hom.app\n              (M)))",
+  "branch": "sheaf-dag",
+  "by": "V8",
+  "date": "2026-10-27"
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-sp-resolution-derived-square",
+  "worker": "stage3",
+  "summary": "Proved helper extracted from the complete coefficient-resolution proof for efficient kernel checking. No new hole.",
+  "blueprint": "det-sp-reduction-direct-image proof Step 1, tensor-pullback identification; resolving a nonflat coefficient and identifying the canonical representative square, normalization Steps 5–6",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V8",
+  "result": "pass",
+  "landing": "20261027T012958-L-2355212",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V8",
+  "result": "pass",
+  "landing": "20261027T012958-L-2355212",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

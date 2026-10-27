@@ -1,0 +1,152 @@
+{
+ "id": "lem-route-ringed-over-functor-preserves-finite-colimits",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "via": [
+    "def-weil-pbc-locally-derived-ringed-ideal-complete",
+    "lem-weil-pbc-extended-cech-completion-model",
+    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "place": "Detailed form, final Stacks comparison of completed pullback: exact localization of modules used by RingedDerivedRestriction, through locally derived ringed ideal completeness and the extended Cech completion model."
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Slice restriction preserves finite colimits.",
+ "statement": "Let $\\mathcal C$ be a small category in universe $u$, with morphisms in the same universe, let $J$ be a Grothendieck topology on $\\mathcal C$, let $\\mathcal O$ be a sheaf of commutative rings with values in universe $u$, and let $U\\in\\mathcal C$. Let $R$ be the underlying sheaf of rings of $\\mathcal O$. Use the category $\\operatorname{Mod}(R)$ of sheaves of $R$-modules with values in universe $u$ [def-weil-sheaf-of-modules-category] and the localized ringed site $(\\mathcal C/U,R|_U)$ [def-pur-localized-ringed-site]. Then sectionwise restriction $j_U^*: \\operatorname{Mod}(R)\\to\\operatorname{Mod}(R|_U)$, defined by $(j_U^*M)(V\\to U)=M(V)$ and $(j_U^*f)_{V\\to U}=f_V$, preserves finite colimits. Equivalently, for every finite indexing category $I$ and every diagram $D:I\\to\\operatorname{Mod}(R)$, restriction takes each colimit cocone of $D$ to a colimit cocone of $D\\mathbin{\\circ}j_U^*$ (composition in application order).",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "def-weil-pbc-locally-derived-ringed-ideal-complete: the Lean of this node (its module Sheaf.CategoryTheory.LocallyDerivedRingedIdealComplete imports Sheaf.CategoryTheory.RingedDerivedRestriction (1 step)) reaches CategoryTheory.ringedOverFunctor_preservesFiniteColimits, a sorry on the sorry route of batch3, batch4 with no node; Lean: SHEAF file lean/Sheaf/CategoryTheory/RingedDerivedRestriction.lean, declaration CategoryTheory.ringedOverFunctor_preservesFiniteColimits (module Sheaf.CategoryTheory.RingedDerivedRestriction, lines 73-82, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof": [
+  {
+   "text": "Let R be the underlying ring sheaf of O, F = SheafOfModules.overFunctor R U, T = SheafOfModules.toSheaf (R.over U), and H = J.overPullback AddCommGrpCat U. Over.forget U is continuous and cocontinuous by Mathlib Sites.Over. Mathlib Functor.sheafAdjunctionCocontinuous makes H a left adjoint, so it preserves colimits of size u and hence finite colimits. This works for an arbitrary small site, without assuming products or pullbacks.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The proved source-library instance SheafOfModules.preservesFiniteColimits_toSheaf, realizing the forgetful-colimit clause of lem-weil-pbc-module-sheaves-colimits-forgetful, makes module forgetting preserve finite colimits on both sites. F followed by T is definitionally the composite of module forgetting on the original site with H. Thus F followed by T preserves finite colimits.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "T reflects isomorphisms, and finite colimits exist in its source and are preserved by T. Therefore reflectsColimitsOfShape_of_reflectsIsomorphisms supplies reflection of each finite colimit, assembled into ReflectsFiniteColimits T. Apply preservesFiniteColimits_of_reflects_of_preserves to F and T. This proves the original restriction functor preserves finite colimits, with no additional hypotheses.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B9",
+  "date": "2026-10-25",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03DJ; Mathlib Sites.Over and Sites.CoverLifting.sheafAdjunctionCocontinuous, and the proved source-library module-forgetting colimit instance"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rlw 'ringedOverFunctor_preservesFiniteColimits' lean/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-25",
+   "verdict": "no match",
+   "note": "name grep by tools/route_nodes.py only; the stage-1 worker adds LeanSearch / Loogle / LeanFinder searches"
+  },
+  {
+   "tool": "grep",
+   "query": "overFunctor|PreservesColimits",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean",
+   "date": "2026-10-25",
+   "verdict": "no match: hits do not assert finite-colimit preservation for restriction of module sheaves to an arbitrary slice site"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of sheaves of modules to a slice site preserves colimits",
+   "results": "CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall, PresheafOfModules.hasColimit, SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat, SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat, CategoryTheory.Sheaf.instHasExactLimitsOfShapeOfHasFiniteColimitsOfPreservesFiniteColimitsFunctorOppositeSheafToPresheaf, PresheafOfModules.isSheaf_of_isLimit, CategoryTheory.instPreservesColimitsOfShapeSheafExtensiveTopologyFunctorOppositeSheafToPresheafOfPreservesFiniteProductsColim, SheafOfModules.over",
+   "date": "2026-10-25",
+   "verdict": "no match: hits do not assert finite-colimit preservation for restriction of module sheaves to an arbitrary slice site"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.overFunctor",
+   "results": "SheafOfModules.overFunctor, SheafOfModules.overFunctorMap, AlgebraicGeometry.Scheme.Modules.overFunctorEquiv",
+   "date": "2026-10-25",
+   "verdict": "no match: hits do not assert finite-colimit preservation for restriction of module sheaves to an arbitrary slice site"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of sheaves of modules to a slice site preserves finite colimits",
+   "results": "CategoryTheory.instPreservesFiniteColimitsSheafExtensiveTopologyFunctorOppositeSheafToPresheafOfPreadditiveOfHasFiniteColimits, SheafOfModules.Finite.forgetPreservesFiniteLimits, CategoryTheory.Sheaf.instHasFiniteColimits, PresheafOfModules.Finite.toPresheaf_preservesFiniteColimits, PresheafOfModules.Finite.evaluation_preservesFiniteColimits, SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat, SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat, SheafOfModules.Finite.hasFiniteLimits",
+   "date": "2026-10-25",
+   "verdict": "no match: hits do not assert finite-colimit preservation for restriction of module sheaves to an arbitrary slice site"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The restriction functor to the localized site is a left adjoint and hence preserves colimits of sheaves of modules",
+   "results": "SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat, SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat, PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification, SheafOfModules.Presentation.isColimit, SheafOfModules.mapFree, SheafOfModules.isColimitFreeCofan, CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall, ModuleCat.instPreservesFiniteColimitsLocalizationLocalizedModule_functor",
+   "date": "2026-10-25",
+   "verdict": "no match: hits do not assert finite-colimit preservation for restriction of module sheaves to an arbitrary slice site"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "def-weil-pbc-locally-derived-ringed-ideal-complete",
+  "date": "2026-10-25",
+  "tool": "tools/route_nodes.py",
+  "why": "PROVISIONAL: sorried declaration on the sorry route (local/sorry-route.json) with no DAG node, recorded automatically after the route recompute (the human, 2026-10-23: every proof-related upstream sorry gets a node, and a node without a written proof goes to stage 1). The statement is only the Lean signature and docstring: the stage-1 worker writes it in words with [node] citations and stmt_deps, does the Mathlib searches (LeanSearch, Loogle or LeanFinder, local grep), fills blueprint.same_as, and splits it"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.CategoryTheory.RingedDerivedRestriction",
+  "file": "lean/Sheaf/CategoryTheory/RingedDerivedRestriction.lean",
+  "declaration": "CategoryTheory.ringedOverFunctor_preservesFiniteColimits",
+  "declarations": [
+   "CategoryTheory.ringedOverFunctor_preservesFiniteColimits"
+  ],
+  "statement": "theorem ringedOverFunctor_preservesFiniteColimits (U : C) :\n    PreservesFiniteColimits (SheafOfModules.overFunctor.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O) U) := by\n  sorry",
+  "by": "maintainer",
+  "date": "2026-10-25",
+  "note": "SHEAF declaration attached as it stands, proof still `sorry`; recorded by tools/route_nodes.py"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-route-ringed-over-functor-preserves-finite-colimits",
+  "worker": "stage1",
+  "summary": "Replaced the provisional Lean/docstring dump by its full natural-language statement without changing its hypotheses or conclusion. Reused the existing exact-restriction theorem for arbitrary ring sheaves, specialized to the underlying ring sheaf of O. Added no nodes. Checked all citation statements and searched Mathlib by all required methods, with a second semantic phrasing. The old Tag 03DJ describes exactness of extension by zero, not directly this restriction claim; the report distinguishes this source mismatch.",
+  "blueprint": "Realizes the exact module-localization ingredient of the completed-pullback final Stacks comparison through the recorded extended-Cech/local-completeness chain; the ancestor is def-weil-pbc-completed-pullback. Current latest blueprint unit sk-thm-properbasechange was read. No unit or chapter route changed."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-cc-NI-1db782873",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-1db782873 (reviewer sub-agent of L); spot-checked: I read the item, all three cited nodes in full, Stacks sites-modules.tex 03DH/Definition 04IX (line 2019) and Lemma 03DJ (line 2160), and the Lean sources RingedDerivedRestriction.lean:1-90 and FiniteTypeRestrictionExact.lean (read only, nothing compiled). The delivered statement matches the sorried Lean signature hypothesis by hypothesis: C : Type u small, any J, O a sheaf of commutative rings in u, overFunctor.{u} applied to the underlying RingCat sheaf, conclusion PreservesFiniteColimits. Nothing was weakened or added. The statement is true, because j_U^* has both a left adjoint (j_{U!}) and a right adjoint (j_{U*}). I checked the zero ring, the empty diagram and the identity-only one-object site. Step 1 is elementary from def-pur-localized-ringed-site's formula F|_U(V/U)=F(V) and (φ|_U)_{V/U}=φ_V. Step 2 specializes lem-weil-pbc-finite-type-restriction-exact. That node holds for any sheaf of rings on a small site, with no finite-type hypothesis despite its id, and its Lean record overFunctor_exact uses the same universes. It is in the same unit sk-thm-properbasechange, so no tool_use is needed. Its dependency closure (120 nodes) does not contain the item, so there is no cycle. There are no new nodes. The item is a required route node for its own Lean declaration, so reducing it to one clause of the existing node is the right disposition, not a duplicate. The report's source error is correct: 03DJ is exactness of j_{U!}, not of restriction, and the maintainer source field was kept. The Mathlib searches were recorded with real results. One minor point: the report mentions citations.json, which is not among the delivered files. No fixes were made."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261025T070854-L-4146960",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

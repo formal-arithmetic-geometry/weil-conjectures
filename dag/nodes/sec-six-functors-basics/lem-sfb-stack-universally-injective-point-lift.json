@@ -1,0 +1,276 @@
+{
+ "id": "lem-sfb-stack-universally-injective-point-lift",
+ "kind": "statement",
+ "title": "Same-field lifting over the image of a universally injective stack morphism",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with universes as in [def-weil-size-convention]. Stacks in groupoids, representability by algebraic spaces and 2-fibre products use [def-sfb-stable-pointed-moduli-groupoids], and algebraic spaces use [def-trf-algebraic-space]. An algebraic stack means a stack in groupoids with diagonal representable by algebraic spaces and a smooth surjective scheme atlas; smoothness is tested on scheme charts using [def-sbc-smooth-morphisms]. Its underlying point space consists of field-valued objects modulo isomorphism after common field extension, with topology detected by a smooth scheme atlas. Let $f:\\mathcal X\\to\\mathcal Y$ be a morphism of algebraic stacks over $S$. Say that $f$ is universally injective if for every morphism of algebraic stacks $\\mathcal Z\\to\\mathcal Y$, the map $|\\mathcal X\\times_{\\mathcal Y}\\mathcal Z|\\to|\\mathcal Z|$ is injective. Suppose that $f$ is universally injective. For every algebraically closed field $K$ [def-weil-field, def-weil-algebraic-closure] with $\\operatorname{Spec}K\\to S$, and every object $y\\in\\mathcal Y(K)$ whose underlying point $[y]$ belongs to the image of $|f|:|\\mathcal X|\\to|\\mathcal Y|$, there are an object $x\\in\\mathcal X(K)$ and an isomorphism $f(x)\\xrightarrow{\\sim}y$ in $\\mathcal Y(K)$. The field $K$ itself is used for the lift, without replacing it by an extension.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 0DTM (lemma-universally-injective-point), including its complete statement; universal injectivity is definition-universally-injective in the same section."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-sbc-smooth-morphisms",
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-dm-stack-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Form $\\mathcal P=\\mathcal X\\times_{\\mathcal Y}\\operatorname{Spec}K$ using [lem-sfb-algebraic-stack-fibre-products]. Its objects are triples $(x,y,\\alpha:f(x)\\simeq y)$, with the specified pullback of $y$. The image hypothesis and the definition of equality of point classes give a common field extension over which $y$ is isomorphic to an image object, hence a field-valued object of $\\mathcal P$; thus $|\\mathcal P|$ is nonempty. The map $\\mathcal P\\to\\operatorname{Spec}K$ is universally injective: each of its base changes is, by associativity of the triple construction, a base change of $f$. A $K$-object of $\\mathcal P$ will give exactly the required object and isomorphism.",
+   "uses": [
+    "lem-sfb-algebraic-stack-fibre-products",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DTM (lemma-universally-injective-point), proof"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-stack-locally-closed-finite-type-point] to the whole nonempty point space of $\\mathcal P$. This supplies a field $L$ and a locally finite type representative $a:\\operatorname{Spec}L\\to\\mathcal P$. Its structural map makes $L$ a field extension of $K$. The representative is representable by algebraic spaces by [lem-sfb-stack-diagonal-space-source-representability]. No flatness of $a$, reduction of $\\mathcal P$, or local Noetherian hypothesis is needed.",
+   "uses": [
+    "lem-sfb-stack-locally-closed-finite-type-point",
+    "lem-sfb-stack-diagonal-space-source-representability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DTM (lemma-universally-injective-point), proof"
+   }
+  },
+  {
+   "text": "Put $R=\\operatorname{Spec}L\\times_{\\mathcal P}\\operatorname{Spec}L$. This is an algebraic space by representability of $a$. Both projections to $\\operatorname{Spec}L$ are locally of finite type, being base changes of $a$, by [lem-sfb-stack-chartwise-smooth-etale-calculus]. By [lem-sfb-stack-universal-injectivity-criteria], the relative diagonal $\\Delta:\\mathcal P\\to\\mathcal P\\times_K\\mathcal P$ is surjective on points. It is representable: a scheme test of it is the sheaf of isomorphisms between the two tested objects, which is the corresponding scheme base change of the representable diagonal over $S$. Therefore [lem-sfb-representable-stack-point-surjectivity] makes its base change\n$$R\\longrightarrow T=\\operatorname{Spec}L\\times_K\\operatorname{Spec}L$$\nsurjective. The identification with this base change sends an isomorphism between two pullbacks of $a$ to the matching pair; it is the triple description of the 2-fibre product.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-stack-universal-injectivity-criteria",
+    "lem-sfb-representable-stack-point-surjectivity",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DTM (lemma-universally-injective-point), proof"
+   }
+  },
+  {
+   "text": "The affine tensor-product construction identifies $T$ with $\\operatorname{Spec}B$ for $B=L\\otimes_K L$: the two ring maps into $B$ are $l\\mapsto l\\otimes1$ and $l\\mapsto1\\otimes l$, and their universal property is [lem-weil-pbc-algebra-tensor-pushout-universal-property], dual to the affine spectrum and fibre-product universal properties. The ring $B$ is nonzero: by [lem-weil-pbc-algebra-tensor-pushout-universal-property](2) with $C=L$ and $f=g=\\mathrm{id}_L$, multiplication $l\\otimes l'\\mapsto ll'$ is a ring map from $B$ to the field $L$. Suppose $B$ had a nonzero zero-divisor. By [lem-weil-pbc-tensor-finite-type-limit](2), there are finitely generated $K$-subalgebras $R',S'\\subseteq L$ such that $R'\\otimes_KS'$ has a nonzero zero-divisor. As subrings of the field $L$, both are domains, and $S'$ is a finite type $K$-algebra. Since $K$ is algebraically closed, [lem-weil-pbc-algclosed-finite-type-tensor-domain] with $R=R'$ and $S=S'$ says that $R'\\otimes_KS'$ is a domain, a contradiction. Hence $B$ is a domain. Its zero prime is a point of $T$. Surjectivity in step 3 gives a field-valued point $r:\\operatorname{Spec}F\\to R$ mapping to this zero prime. Thus $B\\to F$ is injective: its kernel is precisely the prime corresponding to the image point. Apply [lem-sfb-space-two-field-scalar-algebraicity] to $R$ with its two locally finite type maps to $\\operatorname{Spec}L$. For every $\\lambda\\in L$ this makes the image of $\\lambda\\otimes1$ algebraic over the image of $1\\otimes L$ in $F$.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-affine-spectrum",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-tensor-finite-type-limit",
+    "lem-weil-pbc-algclosed-finite-type-tensor-domain",
+    "def-weil-algebraic-closure",
+    "lem-sfb-space-two-field-scalar-algebraicity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DTM (lemma-universally-injective-point), proof"
+   }
+  },
+  {
+   "text": "Fix $\\lambda\\in L$. The algebraicity from step 4 gives coefficients $b_0,\\ldots,b_n\\in L$, not all zero, with $\\sum_i b_i\\lambda_1^i=0$ in $F$, where $\\lambda_1$ is the image of $\\lambda\\otimes1$ and $b_i$ is embedded from the second factor. The injection $B\\hookrightarrow F$ gives $\\sum_i\\lambda^i\\otimes b_i=0$ in $L\\otimes_K L$. If $\\lambda$ were transcendental over $K$, the finite list $1,\\lambda,\\ldots,\\lambda^n$ would be $K$-linearly independent. By [lem-weil-pbc-vector-space-basis-through-vector], extend this list to a $K$-basis of $L$ and take its coordinate functionals $c_j:L\\to K$. Applying $c_j\\otimes\\mathrm{id}_L$ to that relation gives $b_j=0$ for every $j$, a contradiction. Thus every $\\lambda\\in L$ is algebraic over $K$. This is a finite linear-independence argument in the defining tensor product, not a new geometric assertion.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-vector-space-basis-through-vector"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DTM (lemma-universally-injective-point), proof"
+   }
+  },
+  {
+   "text": "Since $K$ is algebraically closed, each nonzero polynomial over $K$ factors into linear factors over $K$ by successive extraction of roots. Its value at any element of the field $L$ can vanish only when one linear factor vanishes. The algebraicity just proved therefore implies $L=K$ through its specified structural embedding. Transport $a$ along the inverse of this field isomorphism to obtain a $K$-object of $\\mathcal P$. Projecting the triple gives $x\\in\\mathcal X(K)$ and its specified isomorphism $f(x)\\simeq y$. The lift uses $K$ itself.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DTM (lemma-universally-injective-point), proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-algebraic-stack-fibre-products",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-stack-locally-closed-finite-type-point",
+  "lem-sfb-stack-diagonal-space-source-representability",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-stack-universal-injectivity-criteria",
+  "lem-sfb-representable-stack-point-surjectivity",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-tensor-finite-type-limit",
+  "lem-weil-pbc-algclosed-finite-type-tensor-domain",
+  "def-weil-algebraic-closure",
+  "lem-sfb-space-two-field-scalar-algebraicity",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-vector-space-basis-through-vector"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 0DTM (lemma-universally-injective-point): use the existing finite-type-point lemma in place of the reduced-singleton flat-cover reduction, which is stronger than needed; use the same diagonal, two-scalar and tensor-independence argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(AlgebraicStack|algebraic.stack).*(point|lift)|universally.injective.point",
+   "results": "[grep] OK 0 hit(s). No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, not morphisms of algebraic stacks or their fibre groupoids"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For algebraic stacks a geometric point in the image of a universally injective map has a rational lift without extending the algebraically closed field",
+   "results": "[leansearch] OK 8 hit(s). AlgebraicGeometry.UniversallyInjective, AlgebraicGeometry.Scheme.Hom.injective, AlgebraicGeometry.UniversallyInjective.mk, AlgebraicGeometry.UniversallyInjective.universally_injective, AlgebraicGeometry.UniversallyInjective.iff_diagonal, AlgebraicGeometry.universallyInjective_eq, AlgebraicGeometry.universallyInjective_isZariskiLocalAtTarget, AlgebraicGeometry.universallyInjective_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, not morphisms of algebraic stacks or their fibre groupoids"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"UniversallyInjective\", \"IsAlgClosed\"",
+   "results": "[loogle] OK 0 hit(s). No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, not morphisms of algebraic stacks or their fibre groupoids"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A universally injective morphism of algebraic stacks lifts any algebraically closed field valued point in its topological image over the same field",
+   "results": "[leanfinder] OK 8 hit(s). AlgebraicGeometry.UniversallyInjective.universally_injective, AlgebraicGeometry.universallyInjective_eq, AlgebraicGeometry.UniversallyInjective, AlgebraicGeometry.universallyInjective_iff, AlgebraicGeometry.universallyInjective_isZariskiLocalAtTarget, AlgebraicGeometry.universallyInjective_eq_diagonal, AlgebraicGeometry.ValuativeCriterion.Existence.eq, AlgebraicGeometry.instIsMultiplicativeSchemeUniversallyInjective",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, not morphisms of algebraic stacks or their fibre groupoids"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universally injective morphisms of algebraic stacks lift geometric points in their image over the same algebraically closed field",
+   "results": "[leanfinder] OK 8 hit(s). AlgebraicGeometry.universallyInjective_isZariskiLocalAtTarget; AlgebraicGeometry.UniversallyInjective; AlgebraicGeometry.universallyInjective_eq_diagonal; AlgebraicGeometry.instIsMultiplicativeSchemeUniversallyInjective; AlgebraicGeometry.UniversallyInjective.universally_injective; AlgebraicGeometry.universallyInjective_eq; AlgebraicGeometry.Scheme.Hom.injective; AlgebraicGeometry.universallyInjective_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, not algebraic-stack fibre groupoids and same-field object lifting."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"UniversallyInjective\", \"IsAlgClosed\"",
+   "results": "[loogle] OK 0 hit(s). ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, not algebraic-stack fibre groupoids and same-field object lifting."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|algebraic.stack|universally.injective.point",
+   "results": "[grep] OK 0 hit(s). ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, not algebraic-stack fibre groupoids and same-field object lifting."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A radicial map of Artin stacks is essentially surjective on algebraically closed field objects in its image",
+   "results": "[leansearch] OK 8 hit(s). AlgebraicGeometry.AffineScheme.Spec_essSurj; AlgebraicGeometry.surjectiveOnStalks_iff; AlgebraicGeometry.Scheme.Hom.isClosedMap; AlgebraicGeometry.SurjectiveOnStalks.surj_on_stalks; AlgebraicGeometry.instIsDominantOfSurjective; AlgebraicGeometry.IsClosedImmersion.toSurjectiveOnStalks; AlgebraicGeometry.SurjectiveOnStalks.mk; AlgebraicGeometry.SurjectiveOnStalks.stalkMap_surjective",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, not algebraic-stack fibre groupoids and same-field object lifting."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-universal-homeomorphism-geometric-points",
+  "date": "2026-10-23",
+  "group": "Q28"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Coarse-morphism input to the finite inertia-free cover argument, before composing with the finite cover. Finite-inertia categorical quotient used before deriving finite type and discrete fibres. Keel--Mori construction: Geometric points of a universal homeomorphism from a stack. Supporting input: same-field lifting over the topological image, before concluding surjectivity on geometric objects.",
+   "via": [
+    "lem-sfb-stack-universal-homeomorphism-geometric-points",
+    "lem-sfb-keel-mori-finite-inertia-quotient",
+    "lem-sfb-dm-coarse-proper-locally-quasifinite",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stack-universally-injective-point-lift",
+  "worker": "stage1",
+  "summary": "Read Stacks 0DTM and 04MK and all cited statements. Used an existing finite-type-point theorem, avoiding reduction and flatness. Proved that L tensor_K L is a domain from the existing finite-subalgebra reduction and the algebraically-closed finite-type tensor-domain lemma (reviewer FIX: the earlier finite-extension criterion is a route node dropped on 2026-10-19). Added only the scalar-algebraicity consequence for algebraic spaces. Cited the existing basis-extension Mathlib leaf in the explicit tensor-coordinate argument.",
+  "blueprint": "Current latest det-thm-sf-ctf-stability-direct-images proof (3) is the direct-image preservation context. The inherited moduli/coarse-quotient descendant route is retained; blueprint_refs.py ancestor returns None for this creation chain, so from.node remains null. These steps discharge its 0DTM same-field lifting prerequisite.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "why": "Generic ring tensor-product universal property used to identify the affine fibre product, with no change to the unit proof route."
+   },
+   {
+    "node": "lem-weil-pbc-tensor-finite-type-limit",
+    "why": "Generic reduction of a zero-divisor in a tensor product over a field to finitely generated subalgebras (step 4); the unit has no algebra node for it."
+   },
+   {
+    "node": "lem-weil-pbc-algclosed-finite-type-tensor-domain",
+    "why": "Generic fact that R tensor_k S is a domain over an algebraically closed field for domains R, S with S of finite type (step 4, the domain property of L tensor_K L used by Stacks 0DTM); the unit has no substitute."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-tensor-finite-type-limit",
+  "lem-weil-pbc-algclosed-finite-type-tensor-domain"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-e02b6291f",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-e02b6291f (reviewer sub-agent of L); spot-checked: Read Stacks 0DTM, 0CPN (stacks-morphisms.tex), 04MK (varieties.tex), the item, the new node and every cited statement. One fault, repaired: step 4 cited lem-per-geometric-integrality-finite-field-test. That node is on the 2026-10-19 dropped list (route-pivot-dropped.txt line 1623), and the item used it only to show that L⊗_K L is a domain for K algebraically closed. The corrected step 4 proves this from live generic algebra nodes. First, B≠0 because multiplication is a ring map to L (pushout universal property (2)). Second, a nonzero zero-divisor would, by lem-weil-pbc-tensor-finite-type-limit (2), give one in R'⊗S' for finitely generated subalgebras R', S' of L. Third, lem-weil-pbc-algclosed-finite-type-tensor-domain makes R'⊗S' a domain, a contradiction. proof_deps and split_report.tool_uses are updated; both new citations are generic sk-thm-iff tools, not dropped, outside batch 5. The other steps are correct. Step 1: base change P = X×_Y Spec K is nonempty and universally injective over K. Step 2: a locally finite type point Spec L→P from 06G2; flatness and surjectivity of the point are never used. Step 3: the relative diagonal is surjective by 0CPN (1)⇒(2), so its base change R→Spec(L⊗L) is surjective by 04XI. Step 5: the coordinate-functional argument shows L is algebraic over K. Step 6: L=K and the point transports. New node lem-sfb-space-two-field-scalar-algebraicity is true: 04MK applied to the reduced closure of a lifted point in an étale chart, which is integral and of locally finite type over both fields. Checked with E=Spec F, an automorphism or non-surjective embedding of ℂ, and empty E. It is not a duplicate (rg -L for 04MK and key words) and not a clause of the item. Batch-5 flags: def-trf-algebraic-space is a general definition, and the five sfb stack-foundation citations reach batch 5 only through it; all accepted. There is no SGA, Qbar, adic, Gabber or alteration content.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackUniversallyInjectivePointLift",
+  "declaration": "CategoryTheory.stack_universallyInjective_point_lift",
+  "declarations": [
+   "CategoryTheory.moduliFieldFiberPoint",
+   "CategoryTheory.stack_universallyInjective_point_lift"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StackUniversallyInjectivePointLift.lean",
+  "statement": "theorem stack_universallyInjective_point_lift {S : Scheme.{u}} {X Y : BasedCategory.{max u v, max (u + 1) w} (Over S)} (f : BasedFunctor X Y) (hX : IsAlgebraicModuliStack X) (hY : IsAlgebraicModuliStack Y) (hf : ∀ (Z : BasedCategory.{max u v, max (u + 1) w} (Over S)), IsAlgebraicModuliStack Z → ∀ g : BasedFunctor Z Y, Function.Injective (moduliPointMap (moduliTwoFiberFst g f))) (K : Type u) [Field K] [IsAlgClosed K] (a : Spec (.of K) ⟶ S) (y : Functor.Fiber Y.p (Over.mk a)) (hy : moduliFieldFiberPoint a y ∈ Set.range (moduliPointMap f)) : ∃ x : Functor.Fiber X.p (Over.mk a), Nonempty ((moduliFiberMap f (Over.mk a)).obj x ≅ y)",
+  "branch": "newtargets-dag",
+  "by": "Q110",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the landed algebraic-stack and point-class definitions; their owning nodes are added to stmt_deps. The helper constructs the canonical quotient class of a fibre object directly from its field-scheme equality. The theorem lifts over the original specified Spec K, retaining an isomorphism in that fibre."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2c80ee3f8",
+  "group": "Q110",
+  "result": "pass",
+  "note": "Read 0DTM (stacks-morphisms.tex l.2764), node, all stmt_deps, module. Hypotheses: S, X/Y with IsAlgebraicModuliStack, f BasedFunctor, hf = verbatim the universal-injectivity clause of landed stack_universalInjectivity_criteria (Z×_Y X→Z via moduliTwoFiberFst, checked def), K:Type u alg. closed with a:Spec K⟶S, y in strict fibre, hy image of point class. Conclusion ∃ x over same Over.mk a with f(x)≅y in fibre: same field, matches node/source. Helper moduliFieldFiberPoint = Quot.mk of existing ModuliFieldRelation with real data; defeq helper moduliFiberPoint exists but is owned by theorem node lem-sfb-dm-stabilizer-isomorphism-open-locus (not citable) — advisory only. Item diff vs live only stmt_deps(+def-sfb-algebraic-moduli-stack, +def-sfb-dm-stack-morphism-properties, both landed def owners) and lean; 9 dep records identical to live; lean.statement verbatim; imports exist; no prior landing. Proof sorry only, docstrings with source/blueprint and 6 steps; report has Worker report and Second reading by Q110. No compile (no change)."
+ }
+}

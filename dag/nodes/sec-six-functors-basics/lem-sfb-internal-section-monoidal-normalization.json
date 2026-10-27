@@ -1,0 +1,173 @@
+{
+ "id": "lem-sfb-internal-section-monoidal-normalization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-int-tensor-product",
+   "place": "First paragraph: actual local dual and evaluation, with the internal/sectionwise tensor and Hom identifications.",
+   "via": [
+    "lem-sfb-internal-derived-closed-localization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Normalized monoidal section equivalence with actual derived counit",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring and $X$ a scheme, with internal modules and the exact section-action equivalence $E$ [sk-def-sfb-condensed-ring, def-pc-scheme, def-weil-pbc-internal-abelian-sheaf-module-equivalence]. Use the native uncompleted derived tensor and internal Hom [sk-def-sfb-derived-tensor-hom]. There exist a normalized ringed-site duality model $S$ [def-zl-ringed-site-duality-model], a K-flat-normalized tensor comparison $t$ [def-sfb-internal-section-derived-tensor-comparison], a strong monoidal core $m$ on $D(E)$, and a natural derived Hom isomorphism $\\theta$. The inverse tensorator of $m$ equals $t$; $m$ carries the actual native Koszul braiding to the symmetry of $S$; and $D(E)$ carries the actual Hom-first evaluation to the composite of $t$, $\\theta\\otimes 1$, and the counit of $S$. These assertions hold on arbitrary unbounded derived inputs.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+  "place": "First paragraph: actual local dual and evaluation, with the internal/sectionwise tensor and Hom identifications."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-pc-scheme",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "sk-def-sfb-derived-tensor-hom",
+  "def-zl-ringed-site-duality-model",
+  "def-sfb-internal-section-derived-tensor-comparison"
+ ],
+ "proof": [
+  {
+   "text": "The size convention fixes the site and coefficient universes. The sheaf tensor-closed theorem supplies exact abelian sheafification and monoidal local equivalences on the pro-etale site. Use the exact section-action equivalence, its coherent pure-tensor and unit comparisons, and preservation and reflection of K-flatness. The total comparison has the same Koszul summand formula.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison",
+    "def-sfb-internal-section-total-comparison",
+    "lem-weil-pbc-sheaf-tensor-closed",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+    "place": "First paragraph: actual local dual and evaluation, with the internal/sectionwise tensor and Hom identifications."
+   }
+  },
+  {
+   "text": "Descend these coherent comparisons along flat-term K-flat localization. Their inverse tensor maps define a strong monoidal core for the derived section functor; its associativity, unitality and symmetry are the equations on K-flat representatives. Normalize the ringed closed model with these constraints, obtaining the RingedSiteDualityModel and its TensorComparison.",
+   "uses": [
+    "lem-sfb-ringed-equivalence-resolving-tensor-descent",
+    "lem-sfb-ringed-site-duality-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+    "place": "First paragraph: actual local dual and evaluation, with the internal/sectionwise tensor and Hom identifications."
+   }
+  },
+  {
+   "text": "The evaluation-normalized Hom isomorphism identifies the counits. On the K-flat representatives its tensor factor is exactly the comparison descended in the preceding step, by its normalization square. Uniqueness of parametrized right adjoints identifies its Hom map with θ, giving the displayed evaluation identity.",
+   "uses": [
+    "lem-sfb-module-object-ringed-site-derived-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+    "place": "First paragraph: actual local dual and evaluation, with the internal/sectionwise tensor and Hom identifications."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pe-internal-section-tensor-comparison",
+  "def-sfb-internal-section-total-comparison",
+  "lem-sfb-ringed-equivalence-resolving-tensor-descent",
+  "lem-sfb-ringed-site-duality-maps",
+  "lem-sfb-module-object-ringed-site-derived-comparison",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "def-weil-size-convention"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+  "place": "First paragraph: actual local dual and evaluation, with the internal/sectionwise tensor and Hom identifications."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The exact section equivalence between internal module sheaves and modules over the section ring sheaf preserves the K-flat derived tensor, Koszul symmetry and derived internal Hom counit",
+   "results": "SheafOfModules.sections, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm, SheafOfModules.sectionsFunctor, Module.Flat.iff_rTensor_preserves_shortComplex_exact, PresheafOfModules.unitHomEquiv, SheafOfModules.unitHomEquiv_comp_apply, SheafOfModules.mk.inj, SheafOfModules.Hom",
+   "date": "2026-10-23",
+   "verdict": "no match: these general constructions do not give the stated normalized comparison",
+   "digest": "47ce723d14cb25ec"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The section action equivalence of internal module sheaves and modules over a ring sheaf descends to a closed symmetric monoidal equivalence of unbounded derived categories with K-flat normalization",
+   "results": "CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, DerivedCategory.instLinearCochainComplexIntQ, DerivedCategory.instLinearHomotopyCategoryIntUpQh, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, DerivedCategory.instLinear, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app",
+   "date": "2026-10-23",
+   "verdict": "no match: these general constructions do not give the stated normalized comparison",
+   "digest": "9bda27d73fa3f016"
+  },
+  {
+   "tool": "grep",
+   "query": "ihomComparison|leftDerived.*Braided|CoreMonoidal",
+   "results": "Mathlib/CategoryTheory/Shift/Basic.lean, Mathlib/CategoryTheory/Monoidal/Subcategory.lean, Mathlib/CategoryTheory/Monoidal/Subcategory.lean, Mathlib/CategoryTheory/Monoidal/Multifunctor.lean, Mathlib/CategoryTheory/Monoidal/Multifunctor.lean, Mathlib/CategoryTheory/Monoidal/Multifunctor.lean, Mathlib/CategoryTheory/Monoidal/FunctorCategory.lean, Mathlib/CategoryTheory/Monoidal/Free/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: these general constructions do not give the stated normalized comparison",
+   "digest": "6557349df9d17b01"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.InternalDerivedClosedLocalization",
+  "date": "2026-10-24",
+  "group": "F7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-tensor",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.InternalSectionMonoidalNormalization",
+  "file": "lean/Sheaf/Paper/InternalSectionMonoidalNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison.internal_section_monoidal_normalization",
+  "statement": "theorem internal_section_monoidal_normalization\n    (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] (X : Scheme.{u}) :\n    ∃ (S : RingedSiteDualityModel.{u + 1, u, u, u + 1}\n        (Scheme.ProEt.topology X) (ring Λ.X X))\n      (t : TensorComparison Λ.X X S.closed S.models)\n      (m : @Functor.CoreMonoidal _ _ _ _ _ S.closed.monoidal (forward Λ.X X))\n      (θ : Functor.uncurry.obj (CondensedRing.derivedHom Λ.X X) ⋙ forward Λ.X X ≅\n        ((forward Λ.X X).op.prod (forward Λ.X X)) ⋙ hom Λ.X X),\n      (∀ K N, (@Functor.CoreMonoidal.μIso _ _ _ _ _ S.closed.monoidal\n        (forward Λ.X X) m K N).inv = t.iso.hom.app (K, N)) ∧\n      (∀ K N, (@Functor.CoreMonoidal.μIso _ _ _ _ _ S.closed.monoidal\n          (forward Λ.X X) m K N).hom ≫\n          (forward Λ.X X).map (β_ K N).hom =\n        (S.symmetric.braiding _ _).hom ≫\n          (@Functor.CoreMonoidal.μIso _ _ _ _ _ S.closed.monoidal\n            (forward Λ.X X) m N K).hom) ∧\n      (∀ K N, (forward Λ.X X).map\n          ((β_ ((ihom K).obj N) K).hom ≫ (ihom.ev K).app N) =\n        t.iso.hom.app ((ihom K).obj N, K) ≫\n          S.closed.tensor.map\n            (X := ((forward Λ.X X).obj ((ihom K).obj N), (forward Λ.X X).obj K))\n            (Y := ((hom Λ.X X).obj (op ((forward Λ.X X).obj K),\n              (forward Λ.X X).obj N), (forward Λ.X X).obj K))\n            (θ.hom.app (op K, N), 𝟙 _) ≫\n          S.closed.evaluation ((forward Λ.X X).obj K) ((forward Λ.X X).obj N))",
+  "branch": "sheaf-dag",
+  "by": "F7",
+  "date": "2026-10-24"
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-internal-section-monoidal-normalization",
+  "worker": "stage3",
+  "summary": "A strict part of the assigned theorem, with its own sourced comparison argument. Searched Mathlib by three kinds and checked against the constant-coefficient restriction theorem and existing section comparison.",
+  "blueprint": "First paragraph: actual local dual and evaluation, with the internal/sectionwise tensor and Hom identifications.",
+  "tool_uses": [
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Generic tensor/closed comparison on ringed sites or internal modules; it supplies the comparison calculation and does not replace the finite-free local-model and cover-detection route of this unit."
+   },
+   {
+    "node": "lem-sfb-ringed-equivalence-resolving-tensor-descent",
+    "why": "Generic tensor/closed comparison on ringed sites or internal modules; it supplies the comparison calculation and does not replace the finite-free local-model and cover-detection route of this unit."
+   },
+   {
+    "node": "lem-sfb-ringed-site-duality-maps",
+    "why": "Generic tensor/closed comparison on ringed sites or internal modules; it supplies the comparison calculation and does not replace the finite-free local-model and cover-detection route of this unit."
+   },
+   {
+    "node": "lem-sfb-module-object-ringed-site-derived-comparison",
+    "why": "Generic tensor/closed comparison on ringed sites or internal modules; it supplies the comparison calculation and does not replace the finite-free local-model and cover-detection route of this unit."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F7",
+  "result": "pass",
+  "landing": "20261024T185251-L-3494252",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F7",
+  "result": "pass",
+  "landing": "20261024T185251-L-3494252",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

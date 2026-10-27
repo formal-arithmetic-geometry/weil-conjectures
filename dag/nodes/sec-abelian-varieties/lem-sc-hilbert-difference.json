@@ -25,72 +25,59 @@
  ],
  "proof": [
   {
-   "text": "The assertion is local on X. By clause (1) of [lem-sc-hilbert-denominator-ideal-nowhere-dense], X is covered by affine opens U = Spec(A) on which L is trivial, s is a/b with a and b non-zero-divisors of A, and I(U) = {x in A | x(a/b) in A}. The module of sections M of F is finite, has support all of Spec(A), and has no embedded associated primes. Apply [lem-sc-hilbert-affine-denominator-module] to obtain injective maps I M \\to M and I M \\to M (the latter representing multiplication by s), with cokernels annihilated by I and by s(I). These local maps agree on overlaps, so they glue to the two canonical maps in the statement. [lem-sc-hilbert-denominator-ideal-nowhere-dense] supplies the quasi-coherent denominator ideal and says that V(I) and the support of O_X/s(I) are contained in closed nowhere-dense subsets.",
+   "text": "Use [lem-sc-hilbert-denominator-maps] to obtain the canonical jF, its factorization and injectivity, and the two pointwise cokernel-support implications. The denominator ideal lemma supplies its quasi-coherence and the closed nowhere-dense sets containing the supports of coker(i) and coker(j).",
    "uses": [
-    "lem-sc-hilbert-affine-denominator-module",
+    "lem-sc-hilbert-denominator-maps",
     "lem-sc-hilbert-denominator-ideal-nowhere-dense"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 02P2 (Lemma 31.25.5), affine reduction and gluing"
-   }
+   "elementary": false
   },
   {
-   "text": "On an affine Noetherian open U, the affine auxiliary identifies I(U) with an ideal of the Noetherian ring O_X(U), so it is finitely generated; hence the quasi-coherent ideal I is of finite type and coherent by [pqf-lem-coherent-ft-locnoeth]. The product I F is quasi-coherent and has affine sections I(U) F(U) by [lem-weil-pbc-ideal-times-quasi-coherent-affine-sections]. As a quasi-coherent submodule of the coherent module F, I F is coherent by clause (2) of [lem-weil-pbc-coherent-kernel-cokernel-locnoeth]. The same lemma then makes the cokernels of the maps I F to F and F tensor L coherent; F tensor L is coherent because L is locally free of rank one and tensoring is locally finite free on affine trivializations.",
+   "text": "Quasi-coherent tensor products and closure under cokernels and kernels make image(i tensor F to F) quasi-coherent: identify the categorical image with the abelian kernel of the cokernel. Apply coherent submodule and cokernel closure to this image inside F. Coherence of F tensor L follows from the quasi-coherent finite-type criterion and tensoring by an invertible module. This proves coherence of both desired cokernels without an affine product-section identification.",
    "uses": [
-    "lem-sc-hilbert-affine-denominator-module",
-    "pqf-lem-coherent-ft-locnoeth",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
     "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "pqf-lem-coherent-ft-locnoeth",
     "def-sc-invertible-module"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Tags 01XZ and 01Y0/01Y1, affine coherence and kernel-cokernel closure"
-   }
+   "elementary": false
   },
   {
-   "text": "The first cokernel is annihilated by I, so its support is contained in V(I), and the second is annihilated by s(I), so its support is contained in the closed support supplied by [lem-sc-hilbert-denominator-ideal-nowhere-dense]. Both closed sets are nowhere dense. Since X is nonempty, locally Noetherian, and finite-dimensional, [lem-sc-hilbert-nowhere-dense-dimension-drop] gives dimension strictly less than dim X for both supports.",
+   "text": "The support implications of the maps lemma place both nonzero-stalk loci inside the respective closed nowhere-dense sets. The subtype inclusion is inducing, so topological Krull dimension of each support is at most that of its containing closed set. Apply [lem-sc-hilbert-nowhere-dense-dimension-drop] to get both strict inequalities.",
    "uses": [
-    "lem-sc-hilbert-denominator-ideal-nowhere-dense",
     "lem-sc-hilbert-nowhere-dense-dimension-drop"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 02P2, support on the nowhere-dense set T and dimension conclusion"
-   }
+   "elementary": false
   },
   {
-   "text": "For every integer n, tensor the short exact sequence 0 \\to I F \\to F \\to Q \\to 0 by L^n, and tensor the short exact sequence 0 \\to I F \\to F tensor L \\to Q' \\to 0 by L^n. Tensoring by the invertible module L^n is exact by [lem-sc-ext-tensor-exact]. Apply [lem-pc-euler-additive] to the two resulting short exact sequences: the common middle term I F tensor L^n cancels, yielding chi(X, F tensor L^(n+1)) - chi(X, F tensor L^n) = chi(X, Q' tensor L^n) - chi(X, Q tensor L^n).",
+   "text": "Coherent affine sections are finite over Noetherian section rings, hence finitely presented. The affine finite-presentation criterion and the affine open cover give finite presentation of F and its coherent image. For every integer n, P=L^n is invertible. Apply the already-proved source theorem eulerChar_tensorObj_sub_eulerChar_tensorObj_eq in Modules.HilbertPolynomial (the twisted consequence of [lem-pc-euler-additive]) to each injection. Its kernel term is zero, so chi(B tensor P)=chi(A tensor P)+chi(coker tensor P). Prove L tensor L^n is isomorphic to L^(n+1) by the tensor-power recursion when n is nonnegative, dual evaluation at n=-1, and associativity and dual cancellation when n<-1. Euler invariance under this isomorphism identifies the second middle term, and subtraction cancels the common image term.",
    "uses": [
-    "lem-sc-ext-tensor-exact",
-    "lem-pc-euler-additive"
+    "lem-weil-pbc-coherent-affine-sections-finite",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-pc-euler-additive",
+    "def-sc-invertible-module"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0BEM, forward-difference identity after Tag 02P2"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-hilbert-affine-denominator-module",
+  "lem-sc-hilbert-denominator-maps",
   "lem-sc-hilbert-denominator-ideal-nowhere-dense",
-  "pqf-lem-coherent-ft-locnoeth",
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
   "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "pqf-lem-coherent-ft-locnoeth",
   "def-sc-invertible-module",
   "lem-sc-hilbert-nowhere-dense-dimension-drop",
-  "lem-sc-ext-tensor-exact",
+  "lem-weil-pbc-coherent-affine-sections-finite",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
   "lem-pc-euler-additive"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/divisors.tex",
-  "place": "Tag 02P2 (Lemma 31.25.5), with Tag 02P0 for the denominator ideal; Euler identity from varieties.tex Tag 0BEM"
+  "place": "Tag 02P2; kernel comparison isolates its affine multiplication argument. The Lean proof constructs the global image factor categorically and proves coherence and support bounds. Integer-twist Euler subtraction follows Varieties Tag 0BEM using the existing proved four-term Euler identity in WeilConjectures.AlgebraicGeometry.Modules.HilbertPolynomial."
  },
  "mathlib_searches": [
   {
@@ -159,5 +146,26 @@
   "result": "fix",
   "note": "Matched k field, X.Over Spec k, IsProper, Nonempty, IsLocallyNoetherian, finite dim, F coherent, full support (nonzero stalks), no embedded points (affine Ass minimal), L invertible, s with K_X->K_X(L) mono, I = landed pullback, IF = landed idealModuleProduct, jF characterized by a*m -> m (x) as, both Mono, both cokernels coherent, both support dims < dim X, forward difference chi(F L^{n+1})-chi(F L^n)=chi(Q' L^n)-chi(Q L^n) for all n:Z (signs checked against the two SESs). FIX: dropped tensorIntPow second twist form for H1's inline if/tensorPow/dual.tensorPow; removed let binders.; dropped duplicate new node(s) def-sc-invertible-tensor-integer-power (--drop-nodes; not merged, the item points at the landed declaration); left out new module(s) lean/Sheaf/AlgebraicGeometry/IntegerTensorPower.lean (--drop-files, or a record fixed to existing: true)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261023T135105-L-2833884",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

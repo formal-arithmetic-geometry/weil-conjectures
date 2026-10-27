@@ -167,5 +167,62 @@
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.exists_geometricStalkComparison_constant"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.exists_geometricStalkComparison_constant",
+     "module": "WeilConjectures.AlgebraicGeometry.GeometricStalkComparisonConstant",
+     "lines": [
+      90,
+      158
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $X$ be a scheme [def-weil-pbc-scheme-conventions] and $\\Lambda$ a commutative ring. Let $s:\\operatorname{Spec}\\Omega\\to X$ and $t:\\operatorname{Spec}\\Omega'\\to X$ have the same image point, where $\\Omega,\\Omega'$ are separably closed fields. On the category of sheaves of $\\Lambda$-modules on the small etale site [def-weil-pbc-etale-site], there exists a natural isomorphism $\\beta:(-)_{s}\\simeq(-)_{t}$ between the stalk functors [def-weil-pbc-geometric-stalks]. For every $\\Lambda$-module $M$, the component $\\beta_{M_X}$ is the identity of $M$ under the canonical identifications of the stalks of the constant sheaf $M_X$ [def-constructible-constant] with $M$. No monomorphism, subsheaf, genericity or finiteness is assumed.",
+  "proof": [
+   {
+    "text": "A morphism from the spectrum of a field to $X$ is the same as a point $x\\in X$ together with an embedding of $\\kappa(x)$ into the field. Thus $s$ and $t$ correspond to their common image $x$ and embeddings $\\kappa(x)\\to\\Omega$, $\\kappa(x)\\to\\Omega'$. Let $K$ be a separable closure of $\\kappa(x)$; since $\\Omega$ and $\\Omega'$ are separably closed, both embeddings extend to $\\kappa(x)$-embeddings $K\\to\\Omega$ and $K\\to\\Omega'$. Hence both geometric points factor through the point $r:\\operatorname{Spec}K\\to X$. ([def-pd-separable-closure]).",
+    "uses": [
+     "def-pd-separable-closure"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Precomposition with each field embedding gives a natural transformation of the point fibre functors, with naturality given by associativity. Its components are bijections. Injectivity: precomposition with $\\operatorname{Spec}$ of a field embedding is injective on morphisms from $\\operatorname{Spec}$ of the smaller field, since that morphism of spectra is an epimorphism. Surjectivity: for an etale $U\\to X$, a lift of the geometric point through $U$ lands at a point $u$ over $x$ whose residue field $\\kappa(u)$ is a finite separable extension of $\\kappa(x)$ ($U\\to X$ is unramified and locally of finite type), so the corresponding embedding $\\kappa(u)\\to\\Omega$ factors through $K$ over $\\kappa(x)$; this gives a lift of $r$ through $U$ compatible over $X$. A natural transformation whose components are bijections is an isomorphism, which gives the two fibre-functor isomorphisms.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Composing the inverse of the first fibre-functor isomorphism with the second gives an isomorphism of the points of the site defined by $s$ and $t$, and hence a natural isomorphism $\\beta$ of the induced stalk functors on sheaves of $\\Lambda$-modules. For the normalization we prove the stronger statement that any morphism of site points is compatible with the identifications of the stalks of constant sheaves with $M$. The stalk of the sheafification of the constant presheaf agrees with the stalk of the presheaf, compatibly with morphisms of points by naturality, so it suffices to check the compatibility on presheaf stalks. The stalk of the constant presheaf with value $M$ is the colimit of the constant diagram over the connected category of etale neighbourhoods, identified with $M$; a morphism of points only changes the chosen neighbourhood lift of a germ and leaves the constant value unchanged, so it induces the identity of $M$. Applying this to the inverse of the constructed point isomorphism gives $\\beta_{M_X}=\\mathrm{id}_M$. ([def-weil-pbc-geometric-stalks], [def-constructible-constant]).",
+    "uses": [
+     "def-weil-pbc-geometric-stalks",
+     "def-constructible-constant"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

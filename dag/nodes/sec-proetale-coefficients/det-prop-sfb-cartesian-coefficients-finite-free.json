@@ -24,106 +24,78 @@
  ],
  "proof": [
   {
-   "text": "An integral basis exists by [lem-sfb-local-field-integral-basis]. Fix any such basis. Since $|\\ell|=\\ell^{-1}<1$, multiplying an element of $F$, or finitely many relation coefficients in $E$, by a sufficiently large $\\ell$-power makes them integral. Integral spanning and independence therefore give an $E$-basis of $F$.",
+   "text": "Use the adopted source theorem PadicAlgCl.finite_integersMap for the actual integer inclusion. The lower integer ring is a PID, both integer rings are integrally closed in their fraction fields, and finiteness makes the upper ring integral over the lower one. Thus IsIntegralClosure.of_isIntegrallyClosed identifies the upper integer ring as the integral closure. Mathlib IsIntegralClosure.module_free and IsIntegralClosure.rank give a basis indexed by Fin [F:E]. This is the private integral_basis_exists proof, with all scalar towers explicitly supplied.",
    "uses": [
-    "lem-sfb-local-field-integral-basis",
-    "def-weil-l-adic-coefficient-extension"
+    "def-weil-l-adic-coefficient-extension",
+    "lem-sfb-integral-closure-rank"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
-    "place": "opening sentence: basis existence and field rank"
-   }
+   "elementary": false
   },
   {
-   "text": "[lem-sfb-condensed-subfield-basis] makes the field coordinate map $c:F\\to E^d$ a homeomorphism. The integral basis gives $c^{-1}(\\mathcal O_E^d)=\\mathcal O_F$. Restrict $c$ and its inverse to these subspaces. On every profinite $S$, composition with these inverse maps identifies $C(S,\\mathcal O_F)$ with $C(S,\\mathcal O_E)^d$; the formulas commute with precomposition and pointwise scalar multiplication.",
+   "text": "For any chosen integral basis, its finite-sum map from the product of integer rings is continuous and bijective. Its domain is compact and its target Hausdorff, so its inverse coordinate maps are continuous. The proved private continuous_basis_iso applies the existing continuousAddHom and continuousLinearAction API from CondensedSubfieldBasis to the coordinates and basis vectors. Form the biproduct lift and desc, and check their inverse identities sectionwise using sum_repr and coordinate evaluation on basis vectors. Its injection equation is exactly finiteCoefficientPointSummand.",
    "uses": [
-    "lem-sfb-condensed-subfield-basis",
     "def-sfb-padic-integers-condensed-ring",
-    "sk-def-sfb-condensed-ring"
+    "sk-def-sfb-condensed-ring",
+    "sk-def-sfb-sheaf-tensor",
+    "lem-sfb-condensed-subfield-basis"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
-    "place": "topological basis and continuous-functions sentences"
-   }
+   "elementary": false
   },
   {
-   "text": "The cited sheafification theorem makes both abelian-sheaf categories abelian. For the sheafified tensor, the strong monoidal left adjoint $p_X^*$ preserves finite colimits and is additive by the cited preservation lemmas. Apply [lem-sfb-monoidal-finite-free-transport]: $\\Psi_{X,0}:\\mathcal O_{E,X}^d\\cong\\mathcal O_{F,X}$ has summands $p_X^*(a\\mapsto ab_i)$.",
+   "text": "The point inverse image is a strong monoidal left adjoint, hence preserves coproducts and is additive. Apply monoidalFiniteFreeTransport. Compose its result with mapModComapIso and the identity underlying isomorphism from the transported regular module to the regular module of the transported ring. This gives the integral isomorphism and its exact summand formulas on every scheme.",
    "uses": [
     "sk-def-sfb-pullback-from-point",
     "lem-weil-pbc-left-adjoint-preserves-colimits",
     "lem-sfb-preserving-colimits-additive",
     "lem-sfb-monoidal-finite-free-transport",
-    "sk-def-sfb-pulled-back-coefficients",
-    "lem-sfb-grothendieck-sheafification",
-    "sk-def-sfb-sheaf-tensor"
+    "sk-def-sfb-pulled-back-coefficients"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
-    "place": "Apply the additive monoidal functor p_X^*"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-sfb-localized-basis-coefficients] at $t=\\ell$. The cited localization isomorphisms give $\\Psi_{X,1}:E_X^d\\cong F_X$ and its square with $\\mathcal O\\to E$. The square of coefficient inclusions commutes on continuous functions, hence after $p_X^*$. Uniqueness in the new lemma identifies its scalar map with the specified $E_X\\to F_X$.",
+   "text": "Localize the chosen integral basis using Mathlib Basis.localizationLocalization and IsIntegralClosure.isLocalization. Its image is a field basis consisting of exactly the same vectors. The field coordinates are continuous after restriction of scalars to Q_ell. Apply continuous_basis_iso and the same monoidal pullback construction to obtain the rational isomorphism with the prescribed rational summands. This performs the rational basis passage directly on the actual coefficient fields; no sequential sheaf-localization comparison is necessary.",
    "uses": [
-    "lem-sfb-localized-basis-coefficients",
-    "det-prop-sfb-qlbar-colimit-x-invert-ell",
-    "def-sfb-integers-to-subfield",
-    "def-sfb-subfield-coefficient-map",
-    "def-sfb-coefficient-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
-    "place": "Invert ell and retain the integral-to-field square"
-   }
-  },
-  {
-   "text": "For $f:X\\to Y$, naturality of $\\alpha:f^*p_Y^*\\cong p_X^*$ on each multiplication map $t_i:a\\mapsto ab_i$ says $\\alpha_T f^*p_Y^*(t_i)=p_X^*(t_i)\\alpha_R$. This gives the integral summand squares, hence the integral square by the coproduct property. Applying [lem-sfb-monoidal-finite-free-transport] to the field basis isomorphism of [lem-sfb-condensed-subfield-basis] shows that the rational maps $p_X^*(E\\to F,a\\mapsto ab_i)$ are the summands of an $E_X$-linear map $E_X^d\\to F_X$; they extend the integral summands ($p_X^*$ of the commuting point-level square), so the uniqueness clause of [lem-sfb-localized-basis-coefficients] identifies this map with $\\Psi_{X,1}$; the same equation gives their squares.",
-   "uses": [
-    "sk-def-sfb-pullback-from-point-comp",
-    "sk-def-sfb-coefficient-morphisms",
+    "lem-sfb-integral-closure-rank",
     "lem-sfb-condensed-subfield-basis",
     "lem-sfb-monoidal-finite-free-transport",
-    "lem-sfb-localized-basis-coefficients"
+    "def-sfb-subfield-coefficient-map",
+    "sk-def-sfb-pullback-from-point"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
-    "place": "last sentence: inverse-image compatibility"
-   }
+   "elementary": false
   },
   {
-   "text": "For either finite-free pair $A\\to B$, namely $\\mathcal O_{E,X}\\to\\mathcal O_{F,X}$ with $\\Psi_{X,0}$ or $E_X\\to F_X$ with $\\Psi_{X,1}$, [lem-sfb-finite-free-scalar-coordinates] gives a natural isomorphism of $A$-module valued functors $\\operatorname{Res}(B\\otimes_A-)\\cong(-)^d$. Apply [lem-sfb-scalar-coordinate-limit-criterion] on the small pro-étale site of $X$ with $T=B\\otimes_A-$ of [sk-def-sfb-change-of-scalars]: $T$ preserves every finite limit, including the empty one. Thus both scalar extensions preserve finite limits, which is the asserted flatness.",
+   "text": "The integral-to-field summand square is equality of the two pointwise formulas phi(a)*b in the upper field. Apply the point inverse-image functor and its composition equation. For either coefficient ring, rewrite the injection composite using the established summand formula; naturality of upperStarFromPointComp on that point summand is exactly the requested inverse-image square.",
+   "uses": [
+    "def-sfb-integers-to-subfield",
+    "def-sfb-subfield-coefficient-map",
+    "sk-def-sfb-pullback-from-point-comp",
+    "sk-def-sfb-coefficient-morphisms"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the proved generic finiteCoordinateIso construction and its naturality from FiniteFreeScalarCoordinates to identify scalar extension followed by restriction with the finite-power functor. Finite powers preserve limits. The module forgetful functors create limits, so composing with the lower forgetful functor and reflecting through the upper forgetful functor proves integral finite-limit preservation. The rational clause is the existing source instance preservesFiniteLimits_extendScalars_padicSubfieldRingObjMap.",
    "uses": [
     "lem-sfb-finite-free-scalar-coordinates",
-    "lem-sfb-scalar-coordinate-limit-criterion",
+    "lem-sfb-modobj-forget-creates",
+    "lem-sfb-subfield-flat",
     "sk-def-sfb-change-of-scalars"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
-    "place": "flatness conclusion: finite tensor coordinates and sectionwise limits"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sfb-coefficient-map",
   "def-sfb-integers-to-subfield",
   "def-sfb-padic-integers-condensed-ring",
   "def-sfb-subfield-coefficient-map",
   "def-weil-l-adic-coefficient-extension",
-  "det-prop-sfb-qlbar-colimit-x-invert-ell",
   "lem-sfb-condensed-subfield-basis",
   "lem-sfb-finite-free-scalar-coordinates",
-  "lem-sfb-grothendieck-sheafification",
-  "lem-sfb-local-field-integral-basis",
-  "lem-sfb-localized-basis-coefficients",
+  "lem-sfb-integral-closure-rank",
+  "lem-sfb-modobj-forget-creates",
   "lem-sfb-monoidal-finite-free-transport",
   "lem-sfb-preserving-colimits-additive",
-  "lem-sfb-scalar-coordinate-limit-criterion",
+  "lem-sfb-subfield-flat",
   "lem-weil-pbc-left-adjoint-preserves-colimits",
   "sk-def-sfb-change-of-scalars",
   "sk-def-sfb-coefficient-morphisms",
@@ -135,8 +107,8 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
-  "place": "Short assembly following the integral basis, condensed sections, monoidal pullback, localization and naturality route; existing structural lemmas replace expanded arguments."
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
+  "place": "B9: concrete source-library integer finiteness, Mathlib integral-closure rank and localization, compact integral coordinates, condensed basis maps, monoidal transport and naturality; finite-power coordinates for integral flatness and the existing rational-flatness instance."
  },
  "mathlib_searches": [
   {
@@ -209,9 +181,7 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-left-adjoint-preserves-colimits",
-  "lem-sfb-grothendieck-sheafification"
+  "lem-weil-pbc-left-adjoint-preserves-colimits"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -221,7 +191,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-8ef8f437b (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, both new nodes, the statements of all 22 cited nodes, the 2026-10-21 re-split note (8834 chars, at least 2 nodes) and the base proof (9 steps, side-live). The statement is byte-identical to the main-20261015 blueprint. I read Stacks sites-modules.tex 0EMC/0EMD (lemma-simple-invert, lines 8649 and 8684). No SGA source is used. Every base step has a carrier. Base steps 1-2 go to existing lem-sfb-local-field-integral-basis plus an inline E-basis argument. Steps 3-4 go to lem-sfb-condensed-subfield-basis plus the integral restriction. Step 5 goes to lem-sfb-monoidal-finite-free-transport, whose hypotheses I checked for p_X^* and the sheaf tensor. Step 6 (2222 chars) goes to the new lem-sfb-localized-basis-coefficients. That node is true: A=(R[1/t])^#, T[1/t]=T tensor_R R[1/t]=R[1/t]^I sectionwise, then sheafify. I checked it on t=0, nilpotent t, I empty, non-injective phi and a rank-1 unit basis. It duplicates no existing node. Step 4 identifies its phi_t with iota_X by uniqueness, using qlbar-colimit-x-invert-ell (localization ring structure). Step 7 stays as naturality. Step 8 goes to lem-sfb-finite-free-scalar-coordinates. Step 9 went to the new limit-creation node. Faults fixed: (1) C5/D, a race: lem-sfb-internal-module-limit-creation is word for word clause 1 of NM lem-sfb-modobj-forget-creates, merged 03:50 after this 03:33 commit. The whole step-6 limit argument is also stated by Q84 lem-sfb-scalar-coordinate-limit-criterion (merged 03:40, same unit). I dropped the node and step 6 now cites the criterion plus the finite-free coordinates; this is the same application as landed lem-sfb-subfield-flat step 5. (2) C1/C2: step 5 used E_X-linearity of the rational transported summands and the uniqueness clause of the localization lemma without citing them, and was marked elementary. It now cites condensed-subfield-basis, monoidal-finite-free-transport and localized-basis-coefficients, and is marked non-elementary. The proof is now 2700 chars and has no cycle. Accepted tool_uses: lem-weil-pbc-left-adjoint-preserves-colimits and lem-sfb-grothendieck-sheafification. Maintainer notes: after the drop the delivery has 1 new node, but every base argument is carried by nodes that landed in parallel today. Attach CategoryTheory.Mod.createsLimit (WeilConjectures/CategoryTheory/Monoidal/Mod/Limits.lean:108-115, sorry-free) to lem-sfb-modobj-forget-creates clause 1.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
@@ -253,5 +234,35 @@
   "date": "2026-10-18",
   "existing": false,
   "fixed_by": "NT-stage2-Codex-0d8d9940c"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $E\\subset F$ be finite extensions of $\\mathbf Q_\\ell$ inside $\\Qlb$, of degree $d=[F:E]$, and\nlet $X$ be a scheme. Then a choice of $\\cO_E$-basis $b_1,\\dots,b_d$ of $\\cO_F$ induces\nisomorphisms of $\\cO_{E,X}$-modules, resp. $E_X$-modules,\n$$\n\\cO_{E,X}^{\\,d}\\xrightarrow{\\ \\sim\\ }\\cO_{F,X},\\qquad E_X^{\\,d}\\xrightarrow{\\ \\sim\\ }F_X,\n\\qquad (a_i)\\mapsto\\textstyle\\sum_ia_ib_i ,\n$$\ncompatible with the maps $\\cO_{E,X}\\to E_X$ and $\\cO_{F,X}\\to F_X$ and with inverse image\nalong morphisms of schemes. In particular $\\cO_{F,X}$ and $F_X$ are flat\n([lem-sfb-subfield-flat]).",
+  "proof": [
+   {
+    "text": "$\\cO_F$ is a finite torsion-free, hence free, module over the discrete valuation ring\n$\\cO_E$, of rank $d$. The map $\\cO_E^d\\to\\cO_F$, $(a_i)\\mapsto\\sum a_ib_i$, is a continuous\n$\\cO_E$-linear bijection between compact Hausdorff spaces, hence a homeomorphism. So for\nevery profinite $S$ it induces a bijection $C(S,\\cO_E)^d=C(S,\\cO_E^d)\\to C(S,\\cO_F)$, natural in\n$S$ and $C(S,\\cO_E)$-linear: an isomorphism of condensed $\\underline{\\cO_E}$-modules\n$\\underline{\\cO_E}^{\\,d}\\cong\\underline{\\cO_F}$ ([det-def-sfb-condensed-ring]). Apply the\nadditive, monoidal functor $p_X^*$ ([det-def-sfb-pullback-from-point]): it gives\n$\\cO_{E,X}^{\\,d}\\cong\\cO_{F,X}$ as $\\cO_{E,X}$-modules. Inverting $\\ell$\n([det-prop-sfb-qlbar-colimit-x-invert-ell]) gives $E_X^{\\,d}\\cong F_X$, and the two\nisomorphisms are compatible with $\\cO\\to E$ by construction. Compatibility with inverse\nimage follows from naturality of $f^{-1}p_Y^*\\cong p_X^*$.",
+    "uses": [
+     "det-def-sfb-condensed-ring",
+     "det-def-sfb-pullback-from-point",
+     "det-prop-sfb-qlbar-colimit-x-invert-ell"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-188d3",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261023T230503-L-3433485",
+  "kind": "interface",
+  "note": "independent cc review: delivered CartesianCoefficientsFiniteFree.lean vs live clone (public imports identical, only private helpers and file-local commands added), node diff vs live (only proof fields and tool_uses changed), unit realized list (only the unit node), 6 direct importers compiled against the delivered module, axioms clean"
  }
 }

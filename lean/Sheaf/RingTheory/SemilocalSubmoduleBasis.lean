@@ -9,11 +9,9 @@ public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
 public import Mathlib.RingTheory.LocalRing.Module
 
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.LinearAlgebra.Dimension.Finrank
-import Mathlib.RingTheory.OrzechProperty
-import Mathlib.RingTheory.LocalProperties.Exactness
-import WeilConjectures.Mathlib.GroupTheory.CosetCover
+import Sheaf.RingTheory.LocalTrivializationResidueRank
+import Sheaf.RingTheory.SimultaneousResidueBases
+import Sheaf.RingTheory.BasisOfMaximalResidueBases
 
 /-!
 # A generating submodule contains a basis over a semilocal algebra
@@ -73,6 +71,72 @@ theorem exists_basis_mem_submodule_of_semilocal
         (LocalizedModule.Away f P)))
     (N : Submodule D P) (hspan : Submodule.span E (N : Set P) = ⊤) :
     ∃ b : Module.Basis (Fin r) E P, ∀ i : Fin r, b i ∈ N := by
-  sorry
+  classical
+  have _ := hr
+  obtain ⟨s, hcover, htriv⟩ := hfree
+  have hlocal (q : Ideal E) [q.IsMaximal] :
+      Nonempty (Basis (Fin r) (Localization.AtPrime q)
+        (LocalizedModule q.primeCompl P)) ∧
+      Module.Finite (E ⧸ q) (P ⧸ q • (⊤ : Submodule E P)) ∧
+      finrank (E ⧸ q) (P ⧸ q • (⊤ : Submodule E P)) = r := by
+    obtain ⟨f, hf, hfq⟩ := hcover ⟨q, inferInstance⟩
+    obtain ⟨hb, _, _, hfin, hdim⟩ :=
+      local_trivialization_residue_rank P q f hfq r (htriv f hf)
+    exact ⟨hb, hfin, hdim⟩
+  let K (q : MaximalSpectrum E) := E ⧸ q.asIdeal
+  let F (q : MaximalSpectrum E) := P ⧸ q.asIdeal • (⊤ : Submodule E P)
+  let (q : MaximalSpectrum E) : Field (K q) := Ideal.Quotient.field q.asIdeal
+  let (q : MaximalSpectrum E) : AddCommGroup (F q) := inferInstance
+  let (q : MaximalSpectrum E) : Module (K q) (F q) := inferInstance
+  let (q : MaximalSpectrum E) : Module.Finite (K q) (F q) :=
+    (hlocal q.asIdeal).2.1
+  have hdim (q : MaximalSpectrum E) : finrank (K q) (F q) = r :=
+    (hlocal q.asIdeal).2.2
+  have hkill (q : MaximalSpectrum E) (a : D)
+      (ha : a ∈ IsLocalRing.maximalIdeal D) :
+      Ideal.Quotient.mk q.asIdeal (algebraMap D E a) = 0 := by
+    apply Ideal.Quotient.eq_zero_iff_mem.mpr
+    have hle : Ideal.jacobson (⊥ : Ideal E) ≤ q.asIdeal :=
+      sInf_le ⟨bot_le, q.isMaximal⟩
+    exact hle (hjac (Ideal.mem_map_of_mem _ ha))
+  let ι (q : MaximalSpectrum E) : IsLocalRing.ResidueField D →+* K q :=
+    Ideal.Quotient.lift (IsLocalRing.maximalIdeal D)
+      ((Ideal.Quotient.mk q.asIdeal).comp (algebraMap D E)) (hkill q)
+  let ρ (q : MaximalSpectrum E) :
+      N →ₛₗ[(ι q).comp (IsLocalRing.residue D)] F q :=
+    { toFun := fun n ↦ (q.asIdeal • (⊤ : Submodule E P)).mkQ n
+      map_add' := fun x y ↦ map_add _ _ _
+      map_smul' := fun a n ↦ by
+        change Submodule.Quotient.mk (a • (n : P)) =
+          Ideal.Quotient.mk q.asIdeal (algebraMap D E a) •
+            Submodule.Quotient.mk (n : P)
+        rw [Module.Quotient.mk_smul_mk, IsScalarTower.algebraMap_smul] }
+  have hresSpan (q : MaximalSpectrum E) :
+      Submodule.span (K q) (Set.range (ρ q)) = ⊤ := by
+    let U := Submodule.span (K q) (Set.range (ρ q))
+    apply top_unique
+    intro x hx
+    clear hx
+    obtain ⟨p, rfl⟩ := (q.asIdeal • (⊤ : Submodule E P)).mkQ_surjective x
+    have hp : p ∈ Submodule.span E (N : Set P) := by rw [hspan]; trivial
+    induction hp using Submodule.span_induction with
+    | mem p hp => exact Submodule.subset_span ⟨⟨p, hp⟩, rfl⟩
+    | zero => exact U.zero_mem
+    | add p p' hp hp' ih ih' => exact U.add_mem ih ih'
+    | smul a p hp ih =>
+      change Submodule.Quotient.mk (a • p) ∈ U
+      rw [← Module.Quotient.mk_smul_mk]
+      exact U.smul_mem _ ih
+  obtain ⟨n, hn⟩ := IsLocalRing.exists_simultaneous_residue_bases
+    D N (MaximalSpectrum E) r K ι F hdim ρ hresSpan
+  have hbij : Function.Bijective (Fintype.linearCombination E fun i ↦ (n i : P)) := by
+    apply bijective_linearCombination_of_maximal_residue_bases r
+    · intro q hq
+      exact (hlocal q).1
+    · intro q hq
+      exact hn ⟨q, hq⟩
+  let e := LinearEquiv.ofBijective (Fintype.linearCombination E fun i ↦ (n i : P)) hbij
+  refine ⟨Basis.ofEquivFun e.symm, fun i ↦ ?_⟩
+  simp [Basis.coe_ofEquivFun, e]
 
 end Module

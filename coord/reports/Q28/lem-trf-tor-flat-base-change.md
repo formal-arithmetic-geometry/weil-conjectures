@@ -1,0 +1,94 @@
+## Worker report
+
+Repair by Q28, 2026-10-22, of the explicit batch5 re-split return. The supplied sandbox contained only launcher markers: no node, report, citations or prior search log. I used the current read-only repository item, including its five complete proof steps, as the returned baseline. No git command, Lean edit, compiler, Lake or local checker was run. The deliver tool will rebase split-owned fields on the current server tip.
+
+1. Files written: `dag/nodes/sec-trace-formula/lem-trf-tor-flat-base-change.json` (item, split, original statement unchanged); `lem-trf-tor-resolution-coefficient-actions.json` (new statement, unsplit, no exact Mathlib match); `lem-trf-tor-coefficient-resolution-map.json` (new statement, unsplit, no exact Mathlib match). Both new nodes have empty proof/proof_deps, null proof_origin/mathlib_match, and full hypotheses. Also report.md and the required citations.json; searches.jsonl is the search command's unmodified log.
+2. Attachments: none. I searched `lean/WeilConjectures/` for the item blueprint tag and Tor base-change names and inspected `lean/Sheaf/RingTheory/TorFlatBaseChange.lean`. Its main theorem `ModuleCat.tor_flat_base_change` and scalar-tower helper both contain sorry. The coefficient-action support module also contains sorry. These are interfaces, not finished proofs.
+3. WANTED: none. All needed source material is present locally.
+4. The return concerns granularity, not a false statement. The original source label 00M8 changes the base ring, whereas this item fixes R and changes coefficients. I preserve the item statement and maintainer-owned source metadata, and explicitly record the proof as an agent adaptation. No SGA route is used. The current blueprint ancestor and the unit's contracting-local-term route are preserved.
+5. Nothing remains unfinished within this stage-1 repair. The two new nodes intentionally leave their separate proof tasks to other workers.
+
+## Repair of the return and allocation of the original proof
+
+The repaired item has three assembly steps, 1904 characters in total (all text counted, including the retained faithful-flat argument); each non-elementary step is below 2000 characters. It adds two comparable statement-only tasks, of 1268 and 1590 characters. Neither has flatness in its hypotheses and neither asserts bijectivity of the canonical comparison. Thus neither restates the parent or its faithfully-flat clause.
+
+The first new node isolates the coefficient-linear free-resolution computation, including the compatibility of the independently specified A and B coefficient actions. The second isolates the commuting square between the actual Tor coefficient map and the homology adjunct on a chosen resolution. The new tasks introduce all objects, take arbitrary exact augmented free resolutions, and cover n=0 as well as positive n. The resolution itself is obtained in the parent from the existing free-resolution existence node, rather than making another existence node.
+
+Original step 1 goes to `lem-trf-tor-resolution-coefficient-actions`, except the invocation supplying P, which remains assembly step 1. Original step 4 goes to `lem-trf-tor-coefficient-resolution-map`; its explicit cycle formula is stated in that new task, not replaced by an unnamed identification. The full scalar-tower compatibility implicit in those old steps is made explicit in the first task.
+
+For original steps 2 and 3 I found an existing node stating their combined argument: `lem-pc-flat-scalar-extension-homology-adjunct`. Creating another node for it would violate the duplicate rule. Its statement allows an arbitrary unbounded complex Q, arbitrary A→E, flat E→D, and a chain map with the specified pure-tensor coefficient formula, and asserts exactly invertibility of the induced homology adjunct. Its module `WeilConjectures.Algebra.Homology.FlatScalarExtensionHomologyAdjunct`, theorem `ModuleCat.flatScalarExtensionHomologyAdjunct_isIso`, contains a complete proof: the extension-of-scalars composition isomorphism, its unit formula, preservation of finite limits under flatness, and the homology/adjunction compatibility. This is the same argument as old steps 2–3, with all the canonical maps fixed. Parent step 2 now cites that existing theorem rather than allocating a duplicate new task. The tensor switches and indexing are stated in the assembly, so the existing cochain/left-tensor convention is not silently equated with the parent's chain/right-tensor convention.
+
+Original step 5 remains verbatim as assembly step 3, because it is an elementary use of the faithfully-flat definition. All five original arguments are reproduced below for the reviewer, without shortening them. The extracted work is two different Tor-specific comparisons; the existing generic tensor/homology argument is reused, not lost or silently assumed.
+
+## Mathlib and duplicate searches
+
+All new searches ran through the prescribed msearch.py command and remain in searches.jsonl. Each new node records the exact tool/query strings actually run, including two semantic phrasings and a source grep. LeanSearch initially returned HTTP rate-limit errors; those attempts are recorded as unavailable. A later semantic search for the canonical-map factorization succeeded and returned tensor base-change algebra, not Tor compatibility. Loogle and LeanFinder were available.
+
+I read Mathlib/CategoryTheory/Monoidal/Tor.lean (Tor at line 44 and Tor' at line 50), CategoryTheory/Abelian/LeftDerived.lean (isoLeftDerivedObj at 111, resolution naturality at 123 and the following derived-natural-transformation infrastructure), and Algebra/Homology/ShortComplex/PreservesHomology.lean (mapHomologyIso at 455, and its mapped kernel/cokernel construction). The first file defines the two Tor conventions; it does not prove the requested coefficient-action tower identification. The generic derived-functor computation and naturality are tools for the new tasks. Identifying their R-module maps with the coefficient-linear maps, and then proving the tensor-extension square for the specified coefficient actions, requires those tasks' arguments; it is not one application to the same objects and conclusion. Consequently both nodes are unsplit, not mislabeled Mathlib leaves.
+
+Before creating the nodes I searched all DAG node statements and source tags, and the whole imported blueprint with blueprint_refs.py: tensor associativity, resolution coefficient, homology flat, Tor coefficient, Tor base change, coefficient action, kernel quotient tensor, Tor resolution, Tor coefficient multiplication, and Tor coefficient comparison. Broad substring Tor searches also produce irrelevant words such as functor; I inspected the relevant algebraic statements rather than treating those counts as mathematical matches. No imported blueprint node states either new task; same_as is []. The ancestor command gives lem-trf-local-term-locality, and each new node's via starts with the item then its inherited via chain. The current main-20261015 ancestor text was read as well as its current DAG statement; neither gives these algebraic coefficient comparisons.
+
+## Not duplicates
+
+lem-trf-tor-resolution-coefficient-actions vs def-trf-tor-coefficient-module: the existing node defines the action by functorial multiplication and coefficient map linearity; it does not identify a chosen free-resolution computation as coefficient-linear or identify the A-action with restriction of the B-action.
+lem-trf-tor-coefficient-resolution-map vs lem-trf-tor-flat-base-change: the new statement identifies a concrete map on any chosen resolution with no flatness and no isomorphism conclusion; the parent proves invertibility under flatness and descent of vanishing under faithful flatness.
+lem-trf-tor-coefficient-resolution-map vs lem-trf-tor-localization-on-spec: localization-on-Spec is an invertibility and local-vanishing theorem for prime localizations; it gives neither the arbitrary coefficient-map square nor its free-resolution cycle formula.
+lem-trf-tor-resolution-coefficient-actions vs lem-weil-pbc-tor-map-via-resolution-lift: the existing statement computes underlying R-linear Tor maps; the new task proves compatibility with the coefficient S-linear structures and restriction of scalar actions in a ring tower.
+lem-trf-tor-coefficient-resolution-map vs lem-weil-pbc-tor-map-via-resolution-lift: the existing statement computes Tor(M,ψ) before extending coefficients; it does not state the B-linear tensor-extension square for the coefficient actions or the equality with the homology adjunct.
+lem-trf-tor-resolution-coefficient-actions vs lem-pc-flat-resolution-tor-comparison: the existing statement gives an R-linear Tor/homology isomorphism for a flat resolution, not coefficient-ring linearity or the scalar tower.
+lem-trf-tor-coefficient-resolution-map vs lem-pc-flat-scalar-extension-tor-comparison: the existing statement changes the base ring of Tor under a flat map; the new task holds without flatness, keeps R fixed, and computes the specified coefficient map.
+lem-trf-tor-coefficient-resolution-map vs lem-pc-flat-scalar-extension-homology-adjunct: the existing statement concerns an arbitrary coefficient complex and its homology adjunct, with a flat final extension; the new task identifies the independently defined Tor tensor map with that adjunct on a free resolution, without flatness or bijectivity.
+lem-trf-tor-coefficient-resolution-map vs lem-pc-flat-tensor-complex-cohom: the existing statement is the homology/base-change isomorphism for a bounded A-cochain complex under flat A→B, not the compatibility with the functorial Tor map for an unbounded resolution and arbitrary coefficient extension.
+
+## Review by Q28
+
+I read algebra.tex section-tor (00LY), section-functoriality-tor (00M7) item (1), and lemma-flat-base-change-tor (00M8), along with definition-flat (00HB), homology.tex lemma-exact-functor (010N), and the source statements of every cited DAG node. The source of the first new statement is 00M7's action through multiplication, realized using the canonical free-resolution computation of 00LY. The source of the second is the resolution comparison behind 00M8, with the coefficient variable changed at fixed R; this map computation does not require flatness. I distinguish this adaptation from a literal citation of 00M8. A proof of each new statement will have to show its stated compatibility, not pick arbitrary isomorphisms. No new definition chooses mathematical data from a mere existence proof.
+
+Assembly step 1 cites the full free-resolution short-exact-sequence theorem. It really supplies free resolutions of all three modules in 0→M→M→0→0, so retaining the first is permitted. The action task supplies the precise coefficient-linear resolution identifications and scalar restriction needed later. The resolution is nonnegative and unaugmented when computing Tor; its negative terms are zero. I did not use the augmentation as the differential out of degree zero.
+
+Assembly step 2 cites the new canonical-map task for the actual chain map and its homology extension and commuting square; all of these occur in that node's statement. It cites the existing flat-scalar-extension homology adjunct for invertibility, with the substitutions (source A,E,D)=(R,A,B), Q^j=P_{-j}, and i=-n. Since d_Q^j=d_P,-j, the next cochain degree uses d_P,-j-1, so d_Q squared is zero with no sign change. The source has no lower bound, finiteness, flatness of R→A, or resolution hypothesis. These are exactly the missing hypotheses that could have invalidated the use; none are required. Switching the tensor factors converts the pure-tensor formula to the one explicitly required by the generic theorem. The tensor definition supplies the switches, and equality follows on pure tensors. The new square then conjugates the resulting isomorphism to c_n; no abstract module isomorphism is substituted for the canonical map. This is the only off-unit tool use and is declared in split_report, with no geometric route change.
+
+Assembly step 3 cites precisely the faithfully-flat definition's reflection of exactness, and the tensor universal property for the switch. It does not infer detection of zero from the flatness definition. Tensoring 0→T→0 gives an exact zero complex only after T tensor B=0 is known; reflection then says ker(T→0)=im(0→T), hence T=0. This entire old argument is retained.
+
+I tested the new statements with M=0, all terms zero, identity coefficient extension, zero coefficient rings, and n=0. I also checked R=Z, M=Z/2, A=Z/4, B=(Z/4)[x]: the degree-one cycle 2 in the standard two-term free resolution becomes 2 times the polynomial coefficient, and both new formulas agree, while the parent is an isomorphism. For the deliberately nonflat extension A=Z/4→B=Z/2, the degree-one cycle 2 reduces to 0, so the canonical Tor tensor map can be zero between nonzero modules. The new map task correctly asserts equality, not invertibility, in that case. This rules out silently placing the parent's conclusion in a new node. For faithful descent, Z→Q and T=Z/2 show why flatness alone is insufficient: T tensor Q=0 while T is nonzero. These checks use no finite generation or nonzero-ring assumption.
+
+Against delivery-errors B–E: each new node is a self-contained TeX statement with definition dependencies and no proof sketch in its statement, proof steps or proof dependencies. Its source gives the checked Stacks tag and label. All searches recorded were run and read; unavailable means unavailable. The pairwise comparisons above distinguish same-tag nodes and the nearest general results. Every assembly use is backed by a verbatim quote in citations.json, with all statements re-opened; definitions are used only for their constructions, and generic exactness is taken from the theorem that actually asserts it. New-node statements never assume a cycle has an individually closed pure-tensor representative: they allow finite sums, and use only that the whole sum is a cycle. There is no assertion of an isomorphism of complexes or derived objects concealed as a per-degree theorem: the new statements concern coefficient actions and equality of module maps. Neither is a clause of the parent with its proof relabeled. All new statements and steps were checked against the original argument and hypotheses; the retained faithful-flat step remains elementary. I corrected the proposed split when the search exposed the existing generic flat-homology-adjunct theorem, avoiding a duplicate node and preserving its full argument by citation.
+
+## Original proof retained verbatim for review
+
+### Original step 1
+
+Choose a free resolution $P_\bullet\to M$ over $R$: existence follows, for example, by applying [lem-weil-pbc-free-resolution-ses-split] to $0\to M\xrightarrow{1}M\to0\to0$ and retaining its first resolution. Put $C_\bullet=P_\bullet\otimes_R A$ and $D_\bullet=P_\bullet\otimes_R B$, with $C_{-1}=D_{-1}=0$ (the augmentations to $M$ are not included in these complexes). By [def-weil-pbc-tor-modules], $H_n(C_\bullet)=\operatorname{Tor}^R_n(M,A)$ and $H_n(D_\bullet)=\operatorname{Tor}^R_n(M,B)$ for all $n\ge0$. Multiplication on the second tensor factor makes $C_\bullet$ a complex of $A$-modules and $D_\bullet$ a complex of $B$-modules; these actions induce the coefficient actions on Tor.
+
+Uses: lem-weil-pbc-free-resolution-ses-split, def-weil-pbc-tor-modules.
+
+### Original step 2
+
+Write $g:A\to B$ for the coefficient map. The tensor universal property [def-weil-pbc-module-tensor-product] gives mutually inverse $B$-linear maps in each degree
+$$\theta_j:(P_j\otimes_R A)\otimes_A B\longrightarrow P_j\otimes_R B,\quad(p\otimes a)\otimes b\longmapsto p\otimes g(a)b,$$
+$$\eta_j:p\otimes b\longmapsto(p\otimes1)\otimes b.$$
+The $R$-balancing relation holds because the two maps $R\to B$ agree, and the $A$-balancing relation holds because $g(aa')b=g(a)g(a')b$. The composites are identities on generators: $\theta_j\eta_j(p\otimes b)=p\otimes b$ and $\eta_j\theta_j((p\otimes a)\otimes b)=(p\otimes1)\otimes g(a)b=(p\otimes a)\otimes b$. Both differential composites send $(p\otimes a)\otimes b$ to $d_P(p)\otimes g(a)b$. Thus $\theta:C_\bullet\otimes_A B\xrightarrow{\sim}D_\bullet$ is an isomorphism of complexes.
+
+Uses: def-weil-pbc-module-tensor-product.
+
+### Original step 3
+
+Since $B$ is flat over $A$, [lem-weil-pbc-flat-tensor-exact] makes $F=-\otimes_A B:\operatorname{Mod}_A\to\operatorname{Mod}_B$ exact: apply its assertion to each three-term part of a short exact sequence, including the zeros at its ends. Tensor is additive by its defining formula on maps. Apply [lem-sp-exact-functor-preserves-homology](c) to $C_{n+1}\to C_n\to C_{n-1}$ for each $n\ge0$. Its inverse comparison gives
+$$\kappa_n:H_n(C_\bullet)\otimes_A B\xrightarrow{\sim}H_n(C_\bullet\otimes_A B).$$
+The cited statement says that this comparison is induced by cycles and their quotient by boundaries: if $z\in\ker d_{C,n}$, then $\kappa_n([z]\otimes b)=[z\otimes b]$. There is no boundedness assumption; only these three terms are used, including $C_{-1}=0$ for $n=0$.
+
+Uses: lem-weil-pbc-flat-tensor-exact, lem-sp-exact-functor-preserves-homology.
+
+### Original step 4
+
+Compose $\kappa_n$ with $H_n(\theta)$. In the Tor identifications of step 1 this is a $B$-linear isomorphism from $\operatorname{Tor}^R_n(M,A)\otimes_A B$ to $\operatorname{Tor}^R_n(M,B)$. To identify the map, let $z=\sum_i p_i\otimes a_i$ be a cycle in $C_n$. The composite sends
+$$[z]\otimes b\longmapsto\left[\sum_i p_i\otimes g(a_i)b\right].$$
+By functoriality in the coefficient module in [def-weil-pbc-tor-modules], the map $A\to B$ induces $[z]\mapsto[\sum_i p_i\otimes g(a_i)]$. Its $B$-linear extension across tensor with $B$ gives exactly the displayed formula, hence the canonical coefficient-base-change map. Equality on these generators proves equality of the maps by [def-weil-pbc-module-tensor-product]; the isomorphism therefore proves the assertion for the specified map, not just an abstract isomorphism of the modules.
+
+Uses: def-weil-pbc-tor-modules, def-weil-pbc-module-tensor-product.
+
+### Original step 5
+
+Now assume $A\to B$ is faithfully flat and $\operatorname{Tor}^R_n(M,B)=0$. Put $T=\operatorname{Tor}^R_n(M,A)$. The proved isomorphism gives $T\otimes_A B=0$. The tensor universal property [def-weil-pbc-module-tensor-product] gives the switch isomorphism $B\otimes_A T\cong T\otimes_A B$, $b\otimes t\mapsto t\otimes b$, whose inverse is the same switch. Thus tensoring the complex $0\to T\to0$ on the left with $B$ produces an exact zero complex. By the reflection of exactness in [def-weil-pbc-faithfully-flat-ring-map], $0\to T\to0$ is exact at $T$. Its kernel there is $T$ and its image is $0$, so $T=0$, as required.
+
+Uses: def-weil-pbc-faithfully-flat-ring-map, def-weil-pbc-module-tensor-product.

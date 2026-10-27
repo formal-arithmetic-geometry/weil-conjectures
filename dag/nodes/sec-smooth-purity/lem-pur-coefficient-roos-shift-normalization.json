@@ -1,0 +1,137 @@
+{
+ "id": "lem-pur-coefficient-roos-shift-normalization",
+ "kind": "statement",
+ "title": "Signed normalized Roos triangles on arbitrary K-injective tower models",
+ "statement": "Fix a prime l, a finite extension E/Q_l and an arbitrary scheme W, in independent universes. Use the actual sequence module category, exact restriction U and L = Rlim composed with D(U) of [def-coef-ringed-sequence-site], the unbounded cochain derived categories and integer shifts of [def-weil-abstract-derived-category], and the normalized helpers and equations of [def-coef-reduction-limit-shift-data]. Assume countable products in D(scalarReductionSource). Fix on L the canonical composite shift totalLimitCommShift of [lem-pur-sequence-kinjective-comparison-shifts]. There exists a family roos assigning to every complex N, every K-injective tower I in the sense of [def-pur-kinjective-complex] and every quasi-isomorphism j:U(N)→I a PurCoefficientRoosTriangle, with its actual limit-cone projections. For every integer r such that I[r] is K-injective and the canonical shifted replacement j_r is a quasi-isomorphism, these chosen triangles satisfy both roos_triangle_shift equations of [def-coef-reduction-limit-shift-data]: the first arrow commutes with the localization/product shift, and the boundary commutes with the localization/limit shift multiplied by (-1)^r and the shift commutator comm(1,r). No termwise injectivity of the supplied I is assumed. This statement concerns only L and its Roos triangles, and has no reduction functor or adjunction. In addition, for every supplied replacement and shifted replacement the canonical limit_shift_resolution equation of [def-coef-reduction-limit-shift-data] holds. This is the right-derived normalization preceding the signed Roos equations.",
+ "stmt_deps": [
+  "def-coef-ringed-sequence-site",
+  "def-weil-abstract-derived-category",
+  "def-coef-reduction-limit-shift-data",
+  "lem-pur-sequence-kinjective-comparison-shifts",
+  "def-pur-kinjective-complex"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Coefficient-comparison sentence: transport through the actual reduction/total-limit adjunction, with its unit and counit."
+ },
+ "proof": [
+  {
+   "text": "Choose a simultaneous K-injective replacement with injective tower terms using the ringed-site resolution theorem. Evaluation gives K-injective component complexes, and their termwise product is a product after localization.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pc-ringed-space-product-kinjective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the signed injective-tower Roos theorem: prefix-tower lifting splits the transitions, so 1-s is degreewise split epic and its kernel is the actual limit. The map x↦(0,x) to Cone(1-s)[-1] is a quasi-isomorphism. Its inverse rotation and localization give the distinguished Roos triangle with the limit projections. The cone comparison (y,x)↦((-1)^r y,x) fixes this inclusion and the projection to x and multiplies insertion in y by (-1)^r. Thus its boundary has exactly the asserted sign and comm(1,r).",
+   "uses": [
+    "lem-pur-injective-tower-roos-shifts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an arbitrary supplied K-injective I, compare to the preceding injective-term replacement. A quasi-isomorphism between K-injectives is a homotopy equivalence. Limit, evaluation, product and the Roos cone preserve tower homotopies, so transport the triangle, the normalized projections and the boundary back to I. Naturality of the boundary under comparison maps implies independence of this transport and simultaneous compatibility with every shift, including the independently chosen replacement for I[r].",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-pur-injective-tower-roos-shifts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the first vertex along purCoefficientLimitModel for the given j. The proved generic replacement-shift square identifies its shift with totalLimitCommShift, giving exactly the two displayed equations. At r=0 the maps are identities, at r=±1 the first cone coordinate is negated, and signs multiply. Zero towers and the empty scheme give the zero triangle. Products need not be exact.",
+   "uses": [
+    "lem-pur-sequence-kinjective-comparison-shifts"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ringed-space-product-kinjective",
+  "lem-pur-injective-tower-roos-shifts",
+  "lem-pur-sequence-kinjective-comparison-shifts",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "lemma-derived-limit-is-ok, Tag 0941, and the signed cochain-cone refinement already proved in lem-pur-injective-tower-roos-shifts; transport to arbitrary K-injective models."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Signed Roos triangle of a K-injective tower, transported to any K-injective replacement, commutes with every integer shift with sign on the connecting map",
+   "results": "8 generic homology-sequence and mapping-cone results: CategoryTheory.Functor.homologySequenceδ_comp, comp_homologySequenceδ, homologySequence_comp, CochainComplex.mappingCone.inl_v_triangle_mor₃_f, DerivedCategory.triangleOfSESδ, CochainComplex.mappingCone.mapTriangleIso, HomotopyCategory.Pretriangulated.shift_distinguished_triangle and Functor.homologySequenceδ. No normalized arbitrary-replacement Roos theorem.",
+   "verdict": "Generic tools only.",
+   "date": "2026-10-25"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShift",
+   "results": "12 generic CommShift declarations including id, ofIso and of_core; no coefficient normalization theorem.",
+   "verdict": "Generic tools only.",
+   "date": "2026-10-25"
+  },
+  {
+   "tool": "grep",
+   "query": "Roos.*[Ss]hift|[Ss]hift.*Roos|finite.*shift.*model",
+   "results": "0 Mathlib hits. Project search found the existing injective-term Roos theorem and the geometrically restricted sequence-adjoint comparison; neither supplies the statement here.",
+   "verdict": "No exact match.",
+   "date": "2026-10-25"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurReductionLimitShiftAdjunction",
+  "date": "2026-10-25",
+  "group": "C1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Unit Step 2: transport the normalized strict-system construction through the reduction/total-limit adjunction; Signed normalized Roos triangles on arbitrary K-injective tower models",
+   "via": [
+    "lem-pur-reduction-limit-shift-adjunction",
+    "lem-pur-integral-realization-shift-coherence",
+    "lem-pur-adic-projection-shift-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurCoefficientRoosShiftNormalization",
+  "file": "lean/Sheaf/Paper/PurCoefficientRoosShiftNormalization.lean",
+  "declaration": "WeilConjectures.purCoefficientRoosShiftNormalization",
+  "statement": "theorem purCoefficientRoosShiftNormalization\n    [products : HasCountableProducts (DerivedCategory (scalarReductionSource l E W))] :\n    letI := SequenceKInjectiveComparison.totalLimitCommShift l E W\n    (∀ (N : CochainComplex (coefficientSequenceModules l E W) ℤ)\n    (I : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ)\n    (j : ((coefficientSequenceRestriction l E W).mapHomologicalComplex\n      (.up ℤ)).obj N ⟶ I) [I.IsKInjective] [QuasiIso j]\n    (r : ℤ) [(I⟦r⟧).IsKInjective]\n    [QuasiIso (purCoefficientShiftedResolution l E W N I j r)],\n    (coefficientSequenceLimit l E W).map\n        ((DerivedCategory.Q.commShiftIso r).hom.app N) ≫\n      ((coefficientSequenceLimit l E W).commShiftIso r).hom.app\n        (DerivedCategory.Q.obj N) ≫\n      (purCoefficientLimitModel l E W N I j).hom⟦r⟧' =\n    (purCoefficientLimitModel l E W (N⟦r⟧) (I⟦r⟧)\n      (purCoefficientShiftedResolution l E W N I j r)).hom ≫\n      DerivedCategory.Q.map\n        ((((lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤\n          scalarReductionSource l E W).mapHomologicalComplex (.up ℤ)).commShiftIso r).hom.app I) ≫\n      (DerivedCategory.Q.commShiftIso r).hom.app\n        (((lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤\n          scalarReductionSource l E W).mapHomologicalComplex (.up ℤ)).obj I)) ∧\n    (∃ roos : (∀ (N : CochainComplex (coefficientSequenceModules l E W) ℤ)\n      (I : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ)\n      (j : ((coefficientSequenceRestriction l E W).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj N ⟶ I) [I.IsKInjective] [QuasiIso j],\n      PurCoefficientRoosTriangle l E W N I j),\n      (∀ (N : CochainComplex (coefficientSequenceModules l E W) ℤ)\n      (I : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ)\n      (j : ((coefficientSequenceRestriction l E W).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj N ⟶ I) [I.IsKInjective] [QuasiIso j]\n      (r : ℤ) [(I⟦r⟧).IsKInjective]\n      [QuasiIso (purCoefficientShiftedResolution l E W N I j r)],\n      ((roos (N⟦r⟧) (I⟦r⟧) (purCoefficientShiftedResolution l E W N I j r)).p ≫\n        (purCoefficientRoosProductShift l E W I r).hom =\n      (coefficientSequenceLimit l E W).map\n          ((DerivedCategory.Q.commShiftIso r).hom.app N) ≫\n        ((coefficientSequenceLimit l E W).commShiftIso r).hom.app\n          (DerivedCategory.Q.obj N) ≫ (roos N I j).p⟦r⟧') ∧\n      ((roos (N⟦r⟧) (I⟦r⟧) (purCoefficientShiftedResolution l E W N I j r)).δ ≫\n        ((coefficientSequenceLimit l E W).map\n          ((DerivedCategory.Q.commShiftIso r).hom.app N) ≫\n          ((coefficientSequenceLimit l E W).commShiftIso r).hom.app\n            (DerivedCategory.Q.obj N))⟦(1 : ℤ)⟧' =\n      r.negOnePow • ((purCoefficientRoosProductShift l E W I r).hom ≫\n        (roos N I j).δ⟦r⟧' ≫ (shiftFunctorComm _ 1 r).hom.app\n          ((coefficientSequenceLimit l E W).obj (DerivedCategory.Q.obj N))))))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-5840a",
+  "group": "C1",
+  "result": "fix",
+  "landing": "20261025T205419-L-3232844",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-5840a",
+  "group": "C1",
+  "result": "fix",
+  "landing": "20261025T205419-L-3232844",
+  "kind": "interface",
+  "note": "independent cc review: item proof (assembly from totalLimitCommShift, left-adjoint mate shift, the two new split lemmas, derived products, Mathlib unit/counit shift lemmas) against lem-pur-reduction-limit-shift-adjunction and the unchanged PurReductionLimitShiftData fields; the two new sorry statements against their nodes and def-coef-reduction-limit-shift-data; the moved declarations against the published module; all 9 direct importers compiled against the delivered modules"
+ }
+}

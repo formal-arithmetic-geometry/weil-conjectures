@@ -1,0 +1,219 @@
+{
+ "id": "lem-trf-base-change-fibre-flat-qcoherent",
+ "kind": "statement",
+ "title": "Flat fibre base change with compatible quasi-coherent coefficients",
+ "statement": "Let $f:X\\to S$ be a locally finite type morphism of schemes [def-weil-finite-type-morphism], $g:S'\\to S$ any morphism, and $\\mathcal F$ any quasi-coherent $\\mathcal O_X$-module [pqf-def-coherent]. Form $X'=X\\times_SS'$ with projections $g':X'\\to X$ and $f':X'\\to S'$ [def-pc-base-change], and put $\\mathcal F'=(g')^*\\mathcal F$ [def-pc-module-pullback]. Let $r'\\in S'$, $r=g(r')$, $k=\\kappa(r)$, $k'=\\kappa(r')$ [def-weil-residue-field], $Y=X_r$ and $Y'=X'_{r'}$ [def-pc-scheme-fibre]. Write $i:Y\\to X$, $i':Y'\\to X'$ for the fibre projections and $\\pi:Y\\to\\operatorname{Spec}k$, $\\pi':Y'\\to\\operatorname{Spec}k'$ for the structure maps [def-weil-affine-spectrum]. Then there is a canonical morphism $h:Y'\\to Y$ with $i\\circ h=g'\\circ i'$ and $\\pi\\circ h=\\operatorname{Spec}(k\\to k')\\circ\\pi'$, making $Y'=Y\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k'$. The morphism $h$ is flat [def-weil-flat-morphism], $Y$ is locally Noetherian [pqf-def-locnoeth], $\\mathcal F_r=i^*\\mathcal F$ is quasi-coherent, and there is a canonical isomorphism of $\\mathcal O_{Y'}$-modules $\\mathcal F'_{r'}=(i')^*\\mathcal F'\\cong h^*\\mathcal F_r$.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 05DC (lemma-base-change-relative-assassin), proof, first paragraph before the use of 05DB: fibre square, coefficient comparison, flatness, and locally Noetherian fibre."
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "pqf-def-coherent",
+  "def-pc-base-change",
+  "def-pc-module-pullback",
+  "def-weil-residue-field",
+  "def-pc-scheme-fibre",
+  "def-weil-affine-spectrum",
+  "def-weil-flat-morphism",
+  "pqf-def-locnoeth"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-fibre-of-base-change] to $f,g,r\\prime$. It gives the canonical $h:Y\\prime\\to Y$, both asserted projection equations, and the cartesian square over $\\operatorname{Spec}(k\\to k\\prime)$. Thus $Y\\prime=Y\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k\\prime$ with these projections.",
+   "uses": [
+    "lem-weil-pbc-fibre-of-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 05DC, lemma-base-change-relative-assassin, proof, first sentence and fibre-product display."
+   }
+  },
+  {
+   "text": "The residue map $k\\to k\\prime$ is a field extension by [def-weil-residue-field]. Hence $a=\\operatorname{Spec}(k\\to k\\prime):\\operatorname{Spec}k\\prime\\to\\operatorname{Spec}k$ is flat by [lem-pc-field-extension-flat]. By step 1, $(Y\\prime,\\pi\\prime,h)$ is a fibre product $\\operatorname{Spec}k\\prime\\times_{\\operatorname{Spec}k}Y$ of $a$ and $\\pi:Y\\to\\operatorname{Spec}k$ (the cartesian square of step 1 with its two factors listed in the other order), and $h$ is its projection to $Y$. Apply [lem-weil-pbc-flat-morphism-base-change] to the flat morphism $a$ and the morphism $\\pi$: the projection to $Y$, that is $h$, is flat [def-weil-flat-morphism].",
+   "uses": [
+    "def-weil-residue-field",
+    "lem-pc-field-extension-flat",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "def-weil-flat-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01U9, lemma-base-change-flat; used in Tag 05DC (divisors.tex, lemma-base-change-relative-assassin), proof, first paragraph."
+   }
+  },
+  {
+   "text": "The structure map $\\pi:Y\\to\\operatorname{Spec}k$ is locally of finite type by [lem-weil-pbc-lft-base-change], applied to $f$ and $\\operatorname{Spec}k\\to S$. Every ideal of a field is either zero or the unit ideal, generated respectively by $0$ or $1$; thus $k$ is Noetherian. Its spectrum has the one-member affine cover with ring $k$, so is locally Noetherian by [pqf-def-locnoeth]. Apply [pqf-lem-locnoeth-lft] to $\\pi$ to obtain that $Y$ is locally Noetherian. Only local finite type is used; $Y$ need not be quasi-compact.",
+   "uses": [
+    "lem-weil-pbc-lft-base-change",
+    "pqf-def-locnoeth",
+    "pqf-lem-locnoeth-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 05DC, proof, first paragraph; Morphisms Tag 01T6, lemma-finite-type-noetherian, locally Noetherian case."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-module-pullback-quasi-coherent] to $i:Y\\to X$ and the given quasi-coherent $\\mathcal F$. Its conclusion is exactly that $\\mathcal F_r=i^*\\mathcal F$ is quasi-coherent; no coherence or finite-generation assumption on $\\mathcal F$ is needed.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-quasi-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01BG, lemma-pullback-quasi-coherent; used in Tag 05DC, first paragraph."
+   }
+  },
+  {
+   "text": "Use the canonical tensor-pullback composition isomorphisms explicitly included in [def-pc-module-pullback]. The equation $g\\prime\\circ i\\prime=i\\circ h$ from step 1 gives the composite of canonical isomorphisms $$\\mathcal F\\prime_{r\\prime}=(i\\prime)^*(g\\prime)^*\\mathcal F\\cong(g\\prime\\circ i\\prime)^*\\mathcal F=(i\\circ h)^*\\mathcal F\\cong h^*i^*\\mathcal F=h^*\\mathcal F_r.$$ The first comparison is inverse composition and the second is forward composition, so this specifies a canonical $\\mathcal O_{Y\\prime}$-linear isomorphism.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 0097, lemma-push-pull-composition-modules, applied to the two composites; coefficient identification in Tag 05DC, proof, first paragraph."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-of-base-change",
+  "def-weil-residue-field",
+  "lem-pc-field-extension-flat",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-lft-base-change",
+  "pqf-def-locnoeth",
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "def-pc-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 05DC, lemma-base-change-relative-assassin, proof, first paragraph; expanded using Tags 01U9, 01T6, 01BG and 0097."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "fiber.*[Ff]lat|[Ff]lat.*fiber|pullback.*[Qq]uasicoherent|[Qq]uasicoherent.*pullback",
+   "results": "3 hits: Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean, Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean, Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean; digest=37f8e2463273fefd.  Flatness/base-change and finite-type results are ingredients only; no hit gives the fibre square together with the tensor-pullback coefficient isomorphism and the two finiteness conditions.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The fibre morphism under arbitrary scheme base change is a flat field extension pullback with locally Noetherian target and compatible pullback of quasi coherent sheaves",
+   "results": "8 hits: Module.Flat.isBaseChange, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Scheme.Hom.fiber, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange, AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.isAffineHom_isStableUnderBaseChange, AlgebraicGeometry.flat_iff, AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme; digest=f1069200cfbeb039.  Flatness/base-change and finite-type results are ingredients only; no hit gives the fibre square together with the tensor-pullback coefficient isomorphism and the two finiteness conditions.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, AlgebraicGeometry.LocallyOfFiniteType",
+   "results": "1 hits: AlgebraicGeometry.instDescendsAlongSchemeLocallyOfFiniteTypeMinMorphismPropertySurjectiveFlatQuasiCompact; digest=879fe59f8aca4a57.  Flatness/base-change and finite-type results are ingredients only; no hit gives the fibre square together with the tensor-pullback coefficient isomorphism and the two finiteness conditions.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a locally finite type scheme morphism and arbitrary base change the induced map between fibres is flat, its target is locally Noetherian and the fibre of a quasi coherent module pulls back compatibly",
+   "results": "8 hits: AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange, AlgebraicGeometry.Flat.instSndScheme, AlgebraicGeometry.Flat.instFstScheme, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme; digest=6d3bf25094fa3384.  Flatness/base-change and finite-type results are ingredients only; no hit gives the fibre square together with the tensor-pullback coefficient isomorphism and the two finiteness conditions.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical base change isomorphism for restrictions of quasi coherent modules to scheme fibres and flatness and local Noetherianity of finite type fibres",
+   "results": "8 hits: AlgebraicGeometry.Flat.instResLE, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Flat.flat_appLE, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, AlgebraicGeometry.Flat.instMorphismRestrict, SheafOfModules.pullbackObjFreeIso, AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; digest=d6c6d2fe07619fe3.  Flatness/base-change and finite-type results are ingredients only; no hit gives the fibre square together with the tensor-pullback coefficient isomorphism and the two finiteness conditions.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a locally finite type scheme morphism and arbitrary base change the induced map between fibres is flat and restriction of a quasi coherent module commutes with fibre pullback",
+   "results": "8 hits: AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite, AlgebraicGeometry.Flat, AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.Flat.instResLE, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Scheme.Hom.flat_appLE; digest=c9e73cf699205257. Ingredients only: none states all the fibre, finiteness and coefficient clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fiber.*[Ff]lat|[Ff]lat.*fiber|pullback.*[Qq]uasicoherent|[Qq]uasicoherent.*pullback",
+   "results": "3 hits: Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean, Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean, Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean; digest=37f8e2463273fefd. Ingredients only: none states all the fibre, finiteness and coefficient clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, AlgebraicGeometry.LocallyOfFiniteType",
+   "results": "1 hits: AlgebraicGeometry.instDescendsAlongSchemeLocallyOfFiniteTypeMinMorphismPropertySurjectiveFlatQuasiCompact; digest=879fe59f8aca4a57. Ingredients only: none states all the fibre, finiteness and coefficient clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scheme fibre under base change is flat locally Noetherian with compatible quasi coherent module pullback",
+   "results": "8 hits: AlgebraicGeometry.Flat.isStableUnderBaseChange, Module.Flat.isBaseChange, RingHom.Flat.isStableUnderBaseChange, Module.FaithfullyFlat.instTensorProduct, AlgebraicGeometry.Scheme.Hom.fiber, IsSMulRegular.of_flat_of_isBaseChange, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.Flat; digest=af92e9ca55509e85. Ingredients only: none states all the fibre, finiteness and coefficient clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical isomorphism of iterated sheaf module pullbacks along the commutative square of scheme fibres",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullbackComp, SheafOfModules.pullbackObjFreeIso, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, SheafOfModules.pullback_assoc, SheafOfModules.pullbackIso, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc, SheafOfModules.pullbackComp, SheafOfModules.conjugateEquiv_pullbackComp_inv; digest=2105aaac197a0fb6. Ingredients only: none states all the fibre, finiteness and coefficient clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-relative-assassin-base-change",
+  "date": "2026-10-22",
+  "group": "Q33"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: the flat-family dimension argument for the curve and horizontal boundary, through the component-closure input. Pointwise specialization input to Stacks 0GSJ. In the proof of 0GSI: first and second paragraphs: ascend the generic associated point and descend the special associated point, retaining the generic-residue-fibre condition. In the inherited 05DC argument: Tag 05DC (lemma-base-change-relative-assassin), proof, first paragraph before the use of 05DB: fibre square, coefficient comparison, flatness, and locally Noetherian fibre.",
+   "via": [
+    "lem-trf-relative-assassin-base-change",
+    "lem-trf-flat-relative-associated-specialization",
+    "lem-trf-flat-associated-equidimensional",
+    "lem-trf-flat-fibre-component-closure-dimension",
+    "lem-trf-flat-dense-generic-fibre-pure-dimension",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-base-change-fibre-flat-qcoherent",
+  "worker": "stage1",
+  "summary": "Expanded the first paragraph of Stacks 05DC into fibre-square, pointwise flatness, local Noetherianity, quasi-coherence and explicit coefficient-comparison steps. All ingredients already have DAG nodes; no new nodes or statement changes. Checked upstream declarations, both natural-language Mathlib phrasings, and every cited statement. Maintainer reader (2026-10-23): step 2 now cites the Mathlib leaf lem-weil-pbc-flat-morphism-base-change (Stacks 01U9) instead of the off-unit split node lem-sfb-pointwise-flatness-base-change, and the tool-use declaration is removed.",
+  "blueprint": "The inherited semistable-alteration/nearby-cycle branch of lem-trf-local-term-locality, through relative-assassin-base-change: first paragraph of 05DC, before applying 05DB. Steps 1-2 give its flat fibre square; step 3 its locally Noetherian target; steps 4-5 its quasi-coherent coefficients and their pullback identification."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-53013ff62",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-53013ff62 (reviewer sub-agent of L); spot-checked: I read the item in full against Stacks 05DC (divisors.tex lemma-base-change-relative-assassin, statement and first paragraph of the proof). The statement matches the source hypothesis by hypothesis (f locally of finite type, F quasi-coherent, g arbitrary, F'=(g')^*F) and is unchanged from live, where the item is still unsplit; there are no new nodes. Step 1: lem-weil-pbc-fibre-of-base-change (leaf) gives the unique h, both projection equations and the cartesian square. Step 3: lem-weil-pbc-lft-base-change and pqf-lem-locnoeth-lft (01T6), with the Noetherianity of the field k proved inline; no quasi-compactness is used. Step 4: lem-weil-pbc-module-pullback-quasi-coherent, which is Lean-closed in slopmaster2 (isQuasicoherent_pullback), so the off-unit citation is acceptable. Step 5: the composition isomorphisms stated in def-pc-module-pullback, correctly marked elementary. Edge cases checked: empty fibre, g=id, F=0, non-flat g, an infinite disjoint union as Y, and infinite or inseparable residue field extensions. FIX (C5/C8): step 2 took flatness of h from clause (1) of the off-unit, still-unfinished node lem-sfb-pointwise-flatness-base-change through a split_report.tool_uses declaration. The step's own source, Tag 01U9, is already the Mathlib leaf lem-weil-pbc-flat-morphism-base-change (Flat.isStableUnderBaseChange). Step 2 now cites that leaf, reading the step-1 square as Spec k' ×_{Spec k} Y with h as the projection to Y. The tool_uses entry is removed, proof_deps is recomputed and the 047C reference is dropped from proof_origin. The corrected item is at fixes/dag/nodes/sec-trace-formula/lem-trf-base-change-fibre-flat-qcoherent.json.; 1 file(s) fixed by the reviewer"
+ }
+}

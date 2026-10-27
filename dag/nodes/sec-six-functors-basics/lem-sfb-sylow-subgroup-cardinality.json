@@ -1,0 +1,94 @@
+{
+ "id": "lem-sfb-sylow-subgroup-cardinality",
+ "kind": "statement",
+ "title": "Cardinality of a Sylow subgroup of a finite group",
+ "statement": "Let $H$ be a finite group [def-sfb-finite-infinite-set] (a finite set with associative multiplication, identity $1$, and inverses), and let $p$ be a prime natural number. Let $P\\subseteq H$ be a subgroup, meaning a subset containing $1$ and closed under multiplication and inverse. Suppose every $x\\in P$ satisfies $x^{p^a}=1$ for some integer $a\\geq0$, and $P$ is maximal among subgroups with this property. If $e$ is the largest integer $a\\geq0$ for which $p^a$ divides $|H|$, then $|P|=p^e$.",
+ "source": {
+  "document": "Mathlib/GroupTheory/Sylow.lean",
+  "place": "Sylow definition at lines 52-55 (maximal subgroup whose elements have p-power order); Sylow.card_eq_multiplicity at lines 759-767. IsPGroup is defined elementwise in Mathlib/GroupTheory/PGroup.lean, lines 24-27."
+ },
+ "stmt_deps": [
+  "def-sfb-finite-infinite-set"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "Sylow, Nat.card",
+   "results": "12 hits; not_dvd_card_sylow, card_sylow_modEq_one, Sylow.card_dvd_index, Sylow.ne_bot_of_dvd_card, Sylow.card_eq_index_normalizer, Sylow.card_coprime_index, Sylow.card_eq_card_quotient_normalizer, Sylow.dvd_card_of_dvd_card",
+   "date": "2026-10-23",
+   "verdict": "match: Sylow.card_eq_multiplicity; maximality is precisely the Sylow structure definition, not an additional theorem",
+   "digest": "89d52f86298729fa"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Sylow p subgroup of a finite group has order p to the exponent of p in the group cardinality",
+   "results": "8 hits; Sylow.ofCard, Sylow, Sylow.card_eq_multiplicity, Sylow.coe_ofCard, Sylow.pow_dvd_card_of_pow_dvd_card, Sylow.exists_subgroup_card_pow_prime, Sylow.mk, Sylow.exists_subgroup_card_pow_prime_le",
+   "date": "2026-10-23",
+   "verdict": "match: Sylow.card_eq_multiplicity; maximality is precisely the Sylow structure definition, not an additional theorem",
+   "digest": "2c77e6f8df3cbfd5"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cardinality of a maximal p subgroup of a finite group is p raised to the p adic valuation of the order of the group",
+   "results": "8 hits; Sylow.card_eq_multiplicity, Sylow.ofCard, Sylow.exists_subgroup_card_pow_prime, IsPGroup.exists_card_eq, Sylow.exists_subgroup_card_pow_prime_le, Sylow.pow_dvd_card_of_pow_dvd_card, not_dvd_card_sylow, Sylow.exists_subgroup_card_pow_prime_of_le_card",
+   "date": "2026-10-23",
+   "verdict": "match: Sylow.card_eq_multiplicity; maximality is precisely the Sylow structure definition, not an additional theorem",
+   "digest": "166e57c5a1fc86db"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem card_eq_multiplicity|structure Sylow",
+   "results": "2 hits; Mathlib/GroupTheory/Sylow.lean, Mathlib/GroupTheory/Sylow.lean",
+   "date": "2026-10-23",
+   "verdict": "match: Sylow.card_eq_multiplicity; maximality is precisely the Sylow structure definition, not an additional theorem",
+   "digest": "2d5eca3a53f793a5"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Sylow.card_eq_multiplicity",
+  "file": "Mathlib/GroupTheory/Sylow.lean",
+  "line": 761,
+  "how": "specializes in one line: package P with its assumed elementwise IsPGroup property and maximality as Sylow.mk (definition at lines 52-55), and apply Sylow.card_eq_multiplicity (lines 761-767). Nat.factorization |H| p is the exponent e in the prime factorization of the positive integer |H|. No commutativity assumption is required."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-group-scheme-primary-order",
+  "date": "2026-10-23",
+  "group": "Q89"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Proposition 14.4(a), printed p.62; polarization convention in I §11, printed p.53. Supporting fact for Proposition 14.4(a): Chapter I §14, printed p.61 (Rosati formula and involution), Theorem 14.3, printed p.62 (positive trace form); §11 p.53 (polarization isogeny); Proposition 10.20, printed pp.50–52 (trace on Tate modules). Supporting input: Chapter I, Theorem 10.9 and Remark 10.11, pp.46–48; Proposition 10.20 and proof, pp.50–52. Rational extension by clearing denominators as in Remark 10.11. Supporting input in the present split: Chapter I, proof of Proposition 10.20, printed p.52, first display (isogeny case); positive-dimensional kernels and Tate rank give the non-isogeny case, as detailed in the report. Finite-group input to the first equality on Milne AV I p.52: the ell-primary part of the scheme kernel order is measured by its points. Abstract finite-group counting input: order of a maximal ell-subgroup.",
+   "via": [
+    "lem-sfb-finite-group-scheme-primary-order",
+    "lem-sfb-abelian-degree-tate-valuation",
+    "lem-sfb-abelian-tate-charpoly",
+    "lem-sfb-rosati-trace-positive",
+    "lem-sfb-polarized-abelian-automorphisms-finite",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

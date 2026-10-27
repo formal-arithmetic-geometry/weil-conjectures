@@ -1,0 +1,247 @@
+{
+ "id": "lem-per-separable-regular-affinoid-residual-conormal",
+ "kind": "statement",
+ "title": "Residual conormal injectivity at a regular affinoid point with separable residue field",
+ "statement": "Let $F$ be a field complete for a nontrivial real-valued nonarchimedean absolute value and let $r\\geq0$. Put $T=F\\langle x_1,\\ldots,x_r\\rangle$, the ring of series $\\sum_{\\nu\\in\\mathbf N^r}a_\\nu x^\\nu$ for which, for every $\\epsilon>0$, only finitely many coefficients have $|a_\\nu|\\geq\\epsilon$, with coefficientwise addition and Cauchy multiplication. Choose $s\\geq0$ and $f_1,\\ldots,f_s\\in T$, put $I=(f_1,\\ldots,f_s)$ and $B=T/I$, and let $\\mathfrak n\\subset T$ be a maximal ideal containing $I$. Put $\\mathfrak m=\\mathfrak n/I\\subset B$ and $\\kappa=T/\\mathfrak n=B/\\mathfrak m$. Suppose $\\kappa/F$ is a finite separable extension (each element has a minimal polynomial over $F$ with distinct roots), and the local ring $B_{\\mathfrak m}$ [def-weil-pbc-localization-at-prime] is regular local [def-weil-regular-scheme]. Give $I/\\mathfrak n I$ its quotient $\\kappa$-vector-space structure. The rule taking $g\\in I$ to its termwise derivatives modulo $\\mathfrak n$ descends to an injective $\\kappa$-linear map\n$$I/\\mathfrak n I\\longrightarrow\\kappa^{\\oplus r},\\qquad [g]\\longmapsto\\bigl(\\partial g/\\partial x_i\\bmod\\mathfrak n\\bigr)_{i=1}^r.$$\nOnly regularity at the specified point is assumed; no regularity after coefficient-field extension is assumed. The cases $r=0$, $s=0$, and $I=0$ are included.",
+ "source": {
+  "document": "https://www.numdam.org/article/AIF_1999__49_2_473_0.pdf",
+  "place": "Conrad, Irreducible components of rigid spaces, proof of Lemma 3.3.1, printed p.510: regular point with separable residue extension is smooth; section 1.1, printed p.477: algebraic and analytic local rings have the same completion. Continuous conormal residue-fibre consequence from Temkin, Excellent_Desingularization.pdf, Proposition 3.3.2 proof, printed pp.20--21. Agent-formulated algebraic-localization version; both archival PDFs WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-regular-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Write $D_i$ for the termwise derivative. Its coefficients are $(\\nu_i+1)a_{\\nu+e_i}$, and $|\\nu_i+1|\\leq1$; hence it is again restricted. Comparing the finite sums for each coefficient gives $D_i(ab)=aD_i(b)+bD_i(a)$. For $a\\in\\mathfrak n$ and $g\\in I\\subseteq\\mathfrak n$, this puts $D_i(ag)$ in $\\mathfrak n$. Thus $D_i$ kills $\\mathfrak nI$ after reduction, and $D_i(ag)\\bmod\\mathfrak n=\\bar a(D_i(g)\\bmod\\mathfrak n)$ for every $a\\in T$, $g\\in I$. This proves that the displayed map $d:I/\\mathfrak nI\\to\\kappa^r$ exists and is $\\kappa$-linear.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/aws.pdf",
+    "place": "Theorem 1.1.5(1), PDF p.4, regularity of Tate algebras; separable-point first-order refinement formulated by the agent using Conrad, Irreducible components of rigid spaces, https://www.numdam.org/article/AIF_1999__49_2_473_0.pdf, section 1.1 printed p.477 and proof of Lemma 3.3.1 printed p.510. Read online 2026-10-24; archival copies WANTED."
+   }
+  },
+  {
+   "text": "Put $R=T_{\\mathfrak n}$, $\\mathfrak p=\\mathfrak nR$ and $J=IR$. Apply [lem-per-tate-separable-local-cotangent-coordinates]: $R$ is regular local, $R/\\mathfrak p=\\kappa$, and $\\theta:\\mathfrak p/\\mathfrak p^2\\simeq\\kappa^r$ has the stated derivative formula. Its hypotheses are exactly the completeness, nontrivial absolute value, maximality and finite separability assumed here. Since $I\\subseteq\\mathfrak n$, we have $J\\subseteq\\mathfrak p$. By [lem-weil-pbc-localization-at-prime-of-quotient], $R/J\\simeq B_{\\mathfrak m}$, so $R/J$ is regular local by the hypothesis of the item.",
+   "uses": [
+    "lem-per-tate-separable-local-cotangent-coordinates",
+    "lem-weil-pbc-localization-at-prime-of-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NR, lemma-regular-quotient-regular; Tag 00CT, proposition-localize-quotient; explicit residual-fraction and linear-combination arguments supplied by the agent."
+   }
+  },
+  {
+   "text": "The rule $\\alpha:I/\\mathfrak nI\\to J/\\mathfrak pJ$, $[g]\\mapsto[g/1]$, is an isomorphism. Here is the fraction argument, using [def-weil-pbc-localization-at-prime]. Every element of $J$ is $g/u$ with $g\\in I$ and $u\\notin\\mathfrak n$ (combine the finitely many denominators). Choose $a\\in T$ with $au\\equiv1\\pmod{\\mathfrak n}$. Then $g/u-ag=(1-au)g/u\\in\\mathfrak pJ$, proving surjectivity. If $g/1\\in\\mathfrak pJ=(\\mathfrak nI)R$, write $g/1=h/u$ with $h\\in\\mathfrak nI$, $u\\notin\\mathfrak n$. Equality of fractions supplies $v\\notin\\mathfrak n$ with $v(ug-h)=0$, so $vug\\in\\mathfrak nI$. Choose $b\\in T$ with $bvu\\equiv1\\pmod{\\mathfrak n}$. Then $g=bvug+(1-bvu)g\\in\\mathfrak nI$. Thus $\\alpha$ is injective as well. All maps respect $\\kappa$-scalars via the residue map.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NR, lemma-regular-quotient-regular; Tag 00CT, proposition-localize-quotient; explicit residual-fraction and linear-combination arguments supplied by the agent."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-regular-local-quotient-independent-generators] to $R$ and $J$. Both $R$ and $R/J$ are regular local by Step 2, and $J\\subseteq\\mathfrak p$. It gives generators $u_1,\\ldots,u_c$ of $J$ whose classes in $\\mathfrak p/\\mathfrak p^2$ are linearly independent over $\\kappa$.",
+   "uses": [
+    "lem-weil-pbc-regular-local-quotient-independent-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NR, lemma-regular-quotient-regular; Tag 00CT, proposition-localize-quotient; explicit residual-fraction and linear-combination arguments supplied by the agent."
+   }
+  },
+  {
+   "text": "Inclusion induces $\\beta:J/\\mathfrak pJ\\to\\mathfrak p/\\mathfrak p^2$, since $\\mathfrak pJ\\subseteq\\mathfrak p^2$. If $z=\\sum_jb_ju_j\\in J$ maps to zero, then $\\sum_j\\bar b_j[u_j]=0$. The independence from Step 4 forces all $\\bar b_j=0$, hence $b_j\\in\\mathfrak p$ and $z\\in\\mathfrak pJ$. Thus $\\beta$ is injective. This includes $c=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NR, lemma-regular-quotient-regular; Tag 00CT, proposition-localize-quotient; explicit residual-fraction and linear-combination arguments supplied by the agent."
+   }
+  },
+  {
+   "text": "For $g\\in I$, the coordinate formula in [lem-per-tate-separable-local-cotangent-coordinates] gives $(\\theta\\beta\\alpha)([g])=(\\overline{D_i g})_i=d([g])$. Therefore $d$ is the composite of an isomorphism, an injective map and an isomorphism, and is injective. When $r=0$, $T=F$ and the only maximal ideal is $0$, so $I=0$. When $s=0$ or $I=0$ the source vector space is zero. No scalar extension of $B$ has been used.",
+   "uses": [
+    "lem-per-tate-separable-local-cotangent-coordinates"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/aws.pdf",
+    "place": "Theorem 1.1.5(1), PDF p.4, regularity of Tate algebras; separable-point first-order refinement formulated by the agent using Conrad, Irreducible components of rigid spaces, https://www.numdam.org/article/AIF_1999__49_2_473_0.pdf, section 1.1 printed p.477 and proof of Lemma 3.3.1 printed p.510. Read online 2026-10-24; archival copies WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "lem-per-tate-separable-local-cotangent-coordinates",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-regular-local-quotient-independent-generators"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/aws.pdf",
+  "place": "Regular-local kernel argument from Stacks Tag 00NR, assembled with ambient separable-point Tate cotangent coordinates; Conrad sources read online, archival copies WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a quotient of a Tate algebra at a regular closed point with finite separable residue field the continuous derivative map from the residual relation ideal to the coordinate vector space is injective",
+   "results": "{\"t\": \"2026-10-24T07:03:38Z\", \"tool\": \"leanfinder\", \"query\": \"For a quotient of a Tate algebra at a regular closed point with finite separable residue field the continuous derivative map from the residual relation ideal to the coordinate vector space is injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.cotangentComplexAux_injective\", \"Algebra.SubmersivePresentation.cotangentComplex_injective\", \"Algebra.Extension.h1Cotangentι_injective\", \"Ideal.injective_algebraMap_quotient_residueField\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"Algebra.Generators.CotangentSpace.map_toComp_injective\", \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"MvPolynomial.quotient_mk_comp_C_injective\"], \"digest\": \"690ef14216831724\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib/RingTheory/Smooth/Local.lean:34--55 concerns ordinary Kahler differentials and algebraic formal smoothness; it does not identify the finite continuous differential module of restricted series or infer analytic smoothness from local regularity. StandardSmoothCotangent assumes a submersive polynomial presentation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a regular local quotient of a restricted power series ring with separable residue field the residual conormal derivative map is injective",
+   "results": "{\"t\": \"2026-10-24T07:06:14Z\", \"tool\": \"leansearch\", \"query\": \"For a regular local quotient of a restricted power series ring with separable residue field the residual conormal derivative map is injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.cotangentComplex_injective\", \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"Ideal.injective_algebraMap_quotient_residueField\", \"IsLocalRing.residue\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"Derivation.coe_injective\", \"Ideal.powQuotSuccInclusion_injective\", \"IsLocalRing.residue_surjective\"], \"digest\": \"56d9bdcabd36be51\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib/RingTheory/Smooth/Local.lean:34--55 concerns ordinary Kahler differentials and algebraic formal smoothness; it does not identify the finite continuous differential module of restricted series or infer analytic smoothness from local regularity. StandardSmoothCotangent assumes a submersive polynomial presentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Analytic smoothness criterion regular local affinoid ring with finite separable residue field implies linearly independent conormal differentials",
+   "results": "{\"t\": \"2026-10-24T07:06:21Z\", \"tool\": \"leanfinder\", \"query\": \"Analytic smoothness criterion regular local affinoid ring with finite separable residue field implies linearly independent conormal differentials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmooth\", \"Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential\", \"Algebra.IsStandardSmooth.of_basis_kaehlerDifferential\", \"Algebra.IsSmoothAt\", \"Algebra.Smooth\", \"Algebra.smoothLocus_eq_compl_support_inter\", \"Algebra.instSmoothOfIsStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension\"], \"digest\": \"9ef4ce6c74ff7af1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib/RingTheory/Smooth/Local.lean:34--55 concerns ordinary Kahler differentials and algebraic formal smoothness; it does not identify the finite continuous differential module of restricted series or infer analytic smoothness from local regularity. StandardSmoothCotangent assumes a submersive polynomial presentation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cotangentComplex\", \"injective\"",
+   "results": "{\"t\": \"2026-10-24T07:06:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"cotangentComplex\\\", \\\"injective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Algebra.Extension.cotangentComplex_injective_iff\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"Algebra.SubmersivePresentation.cotangentComplexAux_injective\", \"Algebra.SubmersivePresentation.cotangentComplex_injective\"], \"digest\": \"9901715e7ae60dc8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib/RingTheory/Smooth/Local.lean:34--55 concerns ordinary Kahler differentials and algebraic formal smoothness; it does not identify the finite continuous differential module of restricted series or infer analytic smoothness from local regularity. StandardSmoothCotangent assumes a submersive polynomial presentation."
+  },
+  {
+   "tool": "grep",
+   "query": "cotangentComplexBaseChange_residueField|iff_injective_lTensor_residueField",
+   "results": "{\"t\": \"2026-10-24T07:06:14Z\", \"tool\": \"grep\", \"query\": \"cotangentComplexBaseChange_residueField|iff_injective_lTensor_residueField\", \"sub\": \"RingTheory/Smooth\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/Fiber.lean\"], \"digest\": \"2c5c82c3be01a3f7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib/RingTheory/Smooth/Local.lean:34--55 concerns ordinary Kahler differentials and algebraic formal smoothness; it does not identify the finite continuous differential module of restricted series or infer analytic smoothness from local regularity. StandardSmoothCotangent assumes a submersive polynomial presentation.",
+   "subdirectory": "RingTheory/Smooth"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangentComplexBaseChange_residueField|iff_injective_lTensor_residueField",
+   "results": "{\"t\": \"2026-10-24T07:39:23Z\", \"tool\": \"grep\", \"query\": \"cotangentComplexBaseChange_residueField|iff_injective_lTensor_residueField\", \"sub\": \"RingTheory/Smooth\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/Fiber.lean\"], \"digest\": \"2c5c82c3be01a3f7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Smooth/Local.lean:34–55 assumes ordinary algebraic formal smoothness and finite free ordinary Kahler differentials; StandardSmoothCotangent assumes a submersive polynomial presentation. Neither supplies the continuous Tate derivative statement under local regularity.",
+   "subdirectory": "RingTheory/Smooth"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Regular local quotient of restricted power series algebra has injective conormal map at a separable closed point",
+   "results": "{\"t\": \"2026-10-24T07:39:24Z\", \"tool\": \"leansearch\", \"query\": \"Regular local quotient of restricted power series algebra has injective conormal map at a separable closed point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.powQuotSuccInclusion_injective\", \"Ideal.injective_algebraMap_quotient_residueField\", \"Algebra.FormallyUnramified.iff_comp_injective\", \"IsLocalization.injectiveₛ\", \"Ideal.algebraMap_quotient_injective\", \"Algebra.FormallyUnramified.comp_injective\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"Ideal.quotientToQuotientRangePowQuotSucc_injective\"], \"digest\": \"b0efe6f1b78ca726\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Smooth/Local.lean:34–55 assumes ordinary algebraic formal smoothness and finite free ordinary Kahler differentials; StandardSmoothCotangent assumes a submersive polynomial presentation. Neither supplies the continuous Tate derivative statement under local regularity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cotangentComplex\", \"injective\"",
+   "results": "{\"t\": \"2026-10-24T07:39:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"cotangentComplex\\\", \\\"injective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Algebra.Extension.cotangentComplex_injective_iff\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"Algebra.SubmersivePresentation.cotangentComplexAux_injective\", \"Algebra.SubmersivePresentation.cotangentComplex_injective\"], \"digest\": \"9901715e7ae60dc8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Smooth/Local.lean:34–55 assumes ordinary algebraic formal smoothness and finite free ordinary Kahler differentials; StandardSmoothCotangent assumes a submersive polynomial presentation. Neither supplies the continuous Tate derivative statement under local regularity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The conormal derivative map of an ideal in a Tate algebra is injective at a regular quotient point with finite separable residue field",
+   "results": "{\"t\": \"2026-10-24T07:39:26Z\", \"tool\": \"leanfinder\", \"query\": \"The conormal derivative map of an ideal in a Tate algebra is injective at a regular quotient point with finite separable residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.cotangentComplexAux_injective\", \"Algebra.SubmersivePresentation.cotangentComplex_injective\", \"Algebra.FormallyUnramified.comp_injective\", \"Ideal.injective_algebraMap_quotient_residueField\", \"Ideal.quotientToQuotientRangePowQuotSucc_injective\", \"Algebra.Extension.h1Cotangentι_injective\", \"Algebra.FormallyUnramified.iff_comp_injective\", \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\"], \"digest\": \"aada91cd3639ea91\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Smooth/Local.lean:34–55 assumes ordinary algebraic formal smoothness and finite free ordinary Kahler differentials; StandardSmoothCotangent assumes a submersive polynomial presentation. Neither supplies the continuous Tate derivative statement under local regularity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-perfect-affinoid-local-jacobian-chart",
+  "date": "2026-10-24",
+  "group": "NG"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Inherited Step 3 formal-algebraization support below lem-per-artin-gabber-affine-curve: perfect-field regular affinoid local Jacobian input, residual continuous conormal injectivity before choosing a subset of equations.",
+   "via": [
+    "lem-per-perfect-affinoid-local-jacobian-chart",
+    "lem-per-regular-affinoid-complete-field-extension",
+    "lem-per-regular-generic-continuous-jacobian",
+    "lem-per-rig-principal-formal-algebraization",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-separable-regular-affinoid-residual-conormal",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Added one ambient separable Tate cotangent-coordinate input; reused the regular local quotient independent-generator theorem. Wrote out derivative descent, the residual ideal localization isomorphism, and the independent-generator kernel argument. No geometric regularity or scalar extension of the quotient is assumed.",
+  "blueprint": "Supports the inherited Step 3 formal-algebraization branch of lem-per-artin-gabber-affine-curve, through perfect-affinoid local Jacobian charts. No chapter or unit route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-localization-at-prime-of-quotient",
+    "why": "General localization/quotient identity used to identify the given regular local quotient; the unit has no specialized replacement."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-quotient-independent-generators",
+    "why": "Stacks 00NR is the general regular-local kernel generator theorem needed for the conormal argument; reused from the existing DAG."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-regular-local-quotient-independent-generators"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-056b19f29",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-056b19f29 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-per-tate-separable-local-cotangent-coordinates and every cited statement in full. This is a first split: there is no repair note, and the item statement is byte-identical to live. Step 1 (restrictedness via |n|<=1, coefficientwise Leibniz, D_i killing nI, kappa-linearity) is elementary and correct. Step 2: the new node is applied with exactly the item's hypotheses (complete, nontrivial, n maximal, kappa/F finite separable). lem-weil-pbc-localization-at-prime-of-quotient (Stacks 00CT, Mathlib leaf) with p-bar=m gives R/J = B_m, which is regular local at that point only. Step 3: I checked the fraction argument line by line: surjectivity via (1-au)g/u, pJ=(nI)R, injectivity via vug in nI and g=bvug+(1-bvu)g. Step 4: I checked the hypotheses of the 00NR node (R regular local, J in p, R/J regular local) against algebra.tex lemma-regular-quotient-regular. Step 5 (beta injective by independence, c=0 included) and Step 6 (d = theta beta alpha via the explicit formula with u=1; r=0, s=0 and I=0 handled) are correct. The new node is true: T is regular with every maximal ideal of height r, so dim p/p^2=r; theta is well defined by the quotient rule; it is onto because the conormal sequence n/n^2 -> kappa^r -> Omega_{kappa/F}=0 is exact for separable kappa. I tested it on r=0, rational points (the existing rational-coordinates node), Q_p with n=(x^2-u), and the inseparable counterexample F_p((t)) with n=(x^p-t). It is statement-only, self-contained, cites its definitions, and is not a clause of the item: it is ambient-only and asserts regularity and surjectivity, while the item keeps the 00NR kernel argument and the localization. Duplicate search with rg -L over dag/nodes (Tate/cotangent and separable/cotangent hits, including separable-residue-cotangent-injective, tate-rational-local-coordinates, trf-affinoid-polynomial-closed-point-comparison) found no duplicate, and the blueprint has no affinoid/Tate node. I accept the declared tool_uses: the 00CT Mathlib leaf and the Lean-closed 00NR node, the same tools as the landed sibling Q159. No SGA, no cycle, and proof_deps equals the union of the step uses. The Conrad sources are online only and recorded as WANTED. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SeparableRegularAffinoidResidualConormal",
+  "declaration": "RestrictedSeries.separable_regular_affinoid_residual_conormal",
+  "declarations": [
+   "RestrictedSeries.quotientConstantsAlgebra",
+   "RestrictedSeries.separable_regular_affinoid_residual_conormal"
+  ],
+  "file": "lean/Sheaf/RingTheory/SeparableRegularAffinoidResidualConormal.lean",
+  "statement": "theorem separable_regular_affinoid_residual_conormal (F : Type u) [NormedField F] [IsUltrametricDist F] [CompleteSpace F] (hF : ∃ a : F, a ≠ 0 ∧ ‖a‖ ≠ 1) (r s : ℕ) (f : Fin s → ↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin r ↦ (1 : ℝ)))) (I : Ideal ↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin r ↦ (1 : ℝ)))) (hf : Ideal.span (Set.range f) = I) (n : Ideal ↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin r ↦ (1 : ℝ)))) [n.IsMaximal] (hIn : I ≤ n) [Module.Finite F (↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin r ↦ (1 : ℝ))) ⧸ n)] [Algebra.IsSeparable F (↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin r ↦ (1 : ℝ))) ⧸ n)] (hregular : IsRegularLocalRing (@Localization.AtPrime _ _ (n.map (Ideal.Quotient.mk I)) (Ideal.isPrime_map_quotientMk_of_isPrime hIn))) : ∃ d : (I ⧸ n • (⊤ : Submodule ↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin r ↦ (1 : ℝ))) I)) →ₗ[ ↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin r ↦ (1 : ℝ))) ⧸ n] (Fin r → ↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin r ↦ (1 : ℝ))) ⧸ n), Function.Injective d ∧ ∀ (g : I) (i : Fin r), ∃ dg : ↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin r ↦ (1 : ℝ))), dg.val = MvPowerSeries.pderiv F i g.val.val ∧ d (Submodule.Quotient.mk g) i = Ideal.Quotient.mk n dg",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The quotient coefficient algebra is the actual constant-series map followed by Ideal.Quotient.mk. The residual module and its residue-field scalar action are Mathlib quotient modules. The existential map is uniquely specified on every representative by the formal partial derivative; restrictedness of those derivatives is included through witnesses with that precise underlying series. No definition is chosen from a bare existence theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-03430821a",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Read the item node, both stmt_deps (Localization.AtPrime, IsRegularLocalRing), the delivered module, the report (Worker report + Second reading by Q10 present), RestrictedSeriesPresentation.constants, and Mathlib IsRestricted/subring/pderiv. Every hypothesis matches the node with nothing extra: NormedField+IsUltrametricDist+CompleteSpace+nontrivial norm, radius-1 restricted subring, span(range f)=I, maximal n ⊇ I, Module.Finite/IsSeparable F (T⧸n) via the real constants∘mk instance (no diamond), IsRegularLocalRing of the actual B_m. The conclusion is an injective T⧸n-linear map on I ⧸ n•⊤, pinned on representatives by pderiv with restricted witnesses. The node is unchanged except for lean; lean.statement equals the file signature verbatim; r=0, s=0, I=0, characteristic and universes are fine; the proof is sorry only; docstrings are present. Notes: constants comes from def-trf-restricted-series-presentation, which is not in stmt_deps (acceptable reuse of a landed definition node); the cotangent-coordinates proof dependency should reuse quotientConstantsAlgebra. No compile run, no files changed."
+ }
+}

@@ -1,0 +1,154 @@
+{
+ "id": "lem-sf-native-adic-encoding-constructibility",
+ "kind": "statement",
+ "title": "Constructibility under the normalized native adic encoding",
+ "statement": "Fix a prime l [def-weil-l-adic-numbers]. Let T be a Noetherian scheme [def-weil-scheme-morphism-properties], and let M be a native adic sheaf on T: a module object in sheaves of vector spaces over the locally finite continuous algebraic-closure coefficient sheaf, as in [def-sf-native-weil-derived-framework]. Let R_T be the pulled-back bounded-image condensed algebraic closure of Q_l [sk-def-sfb-qlbar-condensed, sk-def-sfb-pulled-back-coefficients]. Let E_T be the normalized native encoding [lem-sf-native-adic-encoding-ordinary-operations]: forget to abelian module sheaves and restrict scalars through its canonical coefficient isomorphism. Then M is native constructible (locally on T a finite constructible locally closed partition with pro-etale locally finite-free restrictions) if and only if E_T(M) is a constructible R_T-module [def-sfb-constructible-module] (a finite constructible immersed stratification on which the raw inverse-image module is locally finitely presented). This includes empty T and zero or varying finite ranks.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definitions 6.8.3 and 6.8.8. Agent-formulated comparison of the two concrete constructibility predicates, using the already stated local-presentation/local-freeness characterization."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-numbers",
+  "def-weil-scheme-morphism-properties",
+  "def-sf-native-weil-derived-framework",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pulled-back-coefficients",
+  "lem-sf-native-adic-encoding-ordinary-operations",
+  "def-sfb-constructible-module"
+ ],
+ "proof": [
+  {
+   "text": "The canonical coefficient isomorphism identifies the native regular module with the condensed regular module after encoding. An additive equivalence preserves finite biproducts, so it identifies every finite-free module, including rank zero. Restriction of scalars along a ring isomorphism preserves and reflects finite freeness; a finite-free module has a finite cokernel presentation by the zero map. These elementary module-object facts are proved as private helpers.",
+   "uses": [
+    "lem-sf-native-adic-encoding-ordinary-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a native lisse sheaf, take its pro-etale finite-free trivializing presieve and reduce its cover index universe using the smallness of the pro-etale precoverage. On each member apply pullComparison, the encoded trivialization, and the finite-free comparison from step 1. The invertible coefficient pullback and extendScalarsIsoComapInv identify the condensed pullback with raw inverse image, giving local finite presentation. Conversely apply [lem-weil-pbc-condensed-qbar-lfp-local-triviality] on the topologically Noetherian scheme to obtain a cover with finite-free condensed pullbacks. PullComparison, the inverse finite-free comparison and full faithfulness of encoding lift these to native trivializations.",
+   "uses": [
+    "lem-sf-native-adic-encoding-ordinary-operations",
+    "lem-weil-pbc-condensed-qbar-lfp-local-triviality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every immersed stratum of T has Noetherian underlying space, since its inclusion is a topological embedding. Thus step 2 applies on each stratum. The pullback comparison and the invertible coefficient pullback identify native lisse restriction with local finite presentation of the raw condensed inverse-image module. Transport finite presentation with the proved localFinitePresentation_of_iso, localFinitePresentation_comap and localFinitePresentation_of_comap helpers of [lem-weil-pbc-module-constructible-pullback].",
+   "uses": [
+    "lem-sf-native-adic-encoding-ordinary-operations",
+    "lem-weil-pbc-module-constructible-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A Noetherian scheme is qcqs. By [lem-sf-native-adic-qcqs-stratification], native constructibility gives a finite global immersed stratification with constructible images and lisse restrictions. Enumerate its finite index type by Fin n, retain the actual stratum schemes and immersions, and apply step 3 on each. This is exactly the condensed constructibility witness. Conversely a condensed constructible stratification gives native lisse restrictions by step 3. Its disjoint images and union provide the required unique covering stratum, so it is a native stratified-lisse witness and hence native constructible. The construction permits empty strata and empty index types.",
+   "uses": [
+    "lem-sf-native-adic-qcqs-stratification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J1",
+  "date": "2026-10-25",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definitions 6.8.3 and 6.8.8; explicit finite-free and immersed-stratification comparison of the native and condensed Lean predicates."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Constructibility of adic sheaves is preserved by the equivalence with condensed Qbar coefficient module sheaves",
+   "results": [
+    "Condensed",
+    "Padic.adicCompletionEquiv",
+    "CondensedMod.isDiscrete_tfae",
+    "CondensedSet.isDiscrete_tfae",
+    "Condensed.ofSheafProfinite",
+    "Condensed.free",
+    "CondensedSet.LocallyConstant.iso",
+    "Condensed.ofSheafForgetCompHaus"
+   ],
+   "date": "2026-10-25",
+   "verdict": "No match: general condensed constructions and discrete characterizations do not compare these two pro-etale constructibility predicates."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructibility of native adic sheaves is equivalent to local finite presentation on a stratification under the condensed coefficient encoding",
+   "results": "Eight generic sheaf finite-presentation hits, including SheafOfModules.IsFinitePresentation and SheafOfModules.isFinitePresentation; no native/condensed pro-etale comparison.",
+   "date": "2026-10-25",
+   "verdict": "No matching comparison theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapBiproduct",
+   "results": "Six general biproduct mapping results from Mathlib.CategoryTheory.Limits.Preserves.Shapes.Biproducts.",
+   "date": "2026-10-25",
+   "verdict": "Supporting finite-free comparison only; not the constructibility theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "IsConstructibleModuleObject|IsAdicConstructibleSheaf",
+   "results": [],
+   "date": "2026-10-25",
+   "verdict": "Neither project-specific predicate appears in Mathlib."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AdicProjectiveSpaceFiniteness",
+  "date": "2026-10-25",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Coefficient comparison in the projective-space proper input to the affine compactification proof of sk-prop-sf-finiteness; the current item created.item chain has no imported blueprint ancestor (blueprint_refs.py ancestor returns None).",
+   "via": [
+    "lem-sf-adic-projective-space-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-finiteness",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.NativeAdicConstructibilityEncoding",
+  "file": "lean/Sheaf/AlgebraicGeometry/NativeAdicConstructibilityEncoding.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.encoding_constructible_iff",
+  "statement": "theorem encoding_constructible_iff {T : Scheme.{u}} [IsNoetherian T]\n    (M : AdicSheaf l T) :\n    IsAdicConstructibleSheaf M ↔\n      IsConstructibleModuleObject (condensedRingObj (Profinite.padicAlgClRingObj l) T)\n        ((NativeEncoding.encoding l T).obj M)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-25"
+ },
+ "proof_deps": [
+  "lem-sf-native-adic-encoding-ordinary-operations",
+  "lem-weil-pbc-condensed-qbar-lfp-local-triviality",
+  "lem-weil-pbc-module-constructible-pullback",
+  "lem-sf-native-adic-qcqs-stratification"
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-83faf",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261025T043250-L-1693096",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-83faf",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261025T043250-L-1693096",
+  "kind": "interface",
+  "note": "independent cc review: Item proof, new encoding_constructible_iff, and the 13 declarations moved into NativeAdicEncodingCore checked against clone originals (signatures byte-identical) and their nodes; need for each adaptation shown by the import cycle its original recreates; delivered set plus all 10 direct importers compiled in a /tmp sandbox; #print axioms shows sorryAx only from statements that were already sorry"
+ }
+}

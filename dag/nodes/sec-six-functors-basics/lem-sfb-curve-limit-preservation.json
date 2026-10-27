@@ -1,0 +1,260 @@
+{
+ "id": "lem-sfb-curve-limit-preservation",
+ "kind": "statement",
+ "title": "Limit preservation for proper flat curves",
+ "statement": "On schemes over $\\operatorname{Spec}\\mathbf Z$ [def-pc-scheme, def-weil-affine-spectrum], let $\\mathcal C(T)$ be the groupoid of flat proper finitely presented morphisms $X\\to T$ of algebraic spaces whose geometric fibres have dimension at most one [def-weil-geometric-fibre, def-kun-topological-krull-dimension]. Arrows in $\\mathcal C(T)$ are $T$-isomorphisms and pullback is cartesian base change; arrows over $T'\\to T$ are isomorphisms $X'\\cong X\\times_TT'$ [def-pc-fibre-product]. Algebraic spaces are as in [def-trf-algebraic-space], with the universe convention [def-weil-size-convention]. Flatness and local finite presentation for their morphisms are tested on etale scheme charts using [def-weil-flat-morphism, def-sbc-locally-finite-presentation]. A morphism of algebraic spaces is proper if it is separated, of finite type and universally closed: separated means its diagonal is a closed immersion, finite type means quasi-compact and locally of finite type on etale charts, and universally closed means closed on underlying spaces after every algebraic-space base change (the scheme conventions are [def-weil-proper-morphism, def-weil-finite-type-morphism]). For every small directed inverse system $(T_i)$ of affine schemes with affine transition maps and limit $T$, the natural functor $\\mathop{2\\!\\operatorname{colim}}_i\\mathcal C(T_i)\\to\\mathcal C(T)$ is an equivalence. Explicitly, each family over $T$ descends to a stage; every isomorphism between the pullbacks of two stage families descends to a sufficiently late common stage; and two such isomorphisms equal over $T$ become equal at a sufficiently late common stage. Smallness is in [def-weil-size-convention].",
+ "source": {
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tag 0D55 (lemma-curves-limits)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-geometric-fibre",
+  "def-kun-topological-krull-dimension",
+  "def-pc-fibre-product",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "Let $X\\to T$ be an object of $\\mathcal C(T)$. Apply [lem-sfb-fp-space-limit-category] to its underlying finitely presented algebraic space: choose $i_0$, a finitely presented $X_{i_0}\\to T_{i_0}$, and a $T$-isomorphism $X_{i_0}\\times_{T_{i_0}}T\\cong X$. For $i\\ge i_0$ write $X_i=X_{i_0}\\times_{T_{i_0}}T_i$. No flatness, properness, or fibre-dimension condition on this initial model is asserted. All morphisms in this application are morphisms of algebraic spaces, not just morphisms of schemes.",
+   "uses": [
+    "lem-sfb-fp-space-limit-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D55 (lemma-curves-limits), expanded through the proof of lemma-spaces-limits."
+   }
+  },
+  {
+   "text": "The limiting morphism is flat, so [lem-sfb-space-eventually-flat] gives $i_f\\ge i_0$ such that every $X_j\\to T_j$, $j\\ge i_f$, is flat. Its finite-presentation hypothesis is exactly what the model in step 1 supplies; no Noetherian assumption is needed.",
+   "uses": [
+    "lem-sfb-space-eventually-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D55 (lemma-curves-limits), expanded through the proof of lemma-spaces-limits."
+   }
+  },
+  {
+   "text": "The limiting morphism is proper, so [lem-sfb-space-eventually-proper] gives $i_p\\ge i_0$ such that every $X_j\\to T_j$, $j\\ge i_p$, is proper. The lemma applies before the initial model has been made separated or proper: finite presentation is its only extra hypothesis on that model.",
+   "uses": [
+    "lem-sfb-space-eventually-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D55 (lemma-curves-limits), expanded through the proof of lemma-spaces-limits."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-eventually-fibre-dimension] with $d=1$ to obtain $i_d\\ge i_0$ such that every $X_j\\to T_j$, $j\\ge i_d$, has all geometric fibres of dimension at most one. Choose a common upper bound $j$ for $i_f,i_p,i_d$. The conclusions of steps 2--4 all hold at $j$, and finite presentation holds because the transition functors in [lem-sfb-fp-space-limit-category] are base change on finitely presented objects. Thus $X_j\\in\\mathcal C(T_j)$, and its pullback is the original $X$. This proves essential surjectivity.",
+   "uses": [
+    "lem-sfb-space-eventually-fibre-dimension",
+    "lem-sfb-fp-space-limit-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D55 (lemma-curves-limits), expanded through the proof of lemma-spaces-limits."
+   }
+  },
+  {
+   "text": "For two families at possibly different stages, choose a common stage $i$ and call their pullbacks $Y_i,Z_i$. They are still objects of $\\mathcal C(T_i)$ by its stipulated cartesian pullback. Given a $T$-isomorphism $a:Y_i\\times_{T_i}T\\to Z_i\\times_{T_i}T$, apply the morphism-descent clause of [lem-sfb-fp-space-limit-category] to $a$ and separately to $a^{-1}$. At a common later stage $j$ both maps exist, say $a_j:Y_j\\to Z_j$ and $b_j:Z_j\\to Y_j$. Their composites pull back to the identity maps. Apply the eventual-equality clause of the same node to $b_ja_j$ and $\\mathrm{id}_{Y_j}$, and to $a_jb_j$ and $\\mathrm{id}_{Z_j}$. At a common later stage $k$ both equations hold. Hence $a_k$ and $b_k$ are inverse isomorphisms in $\\mathcal C(T_k)$. This proves fullness without assuming that a descended morphism is automatically invertible.",
+   "uses": [
+    "lem-sfb-fp-space-limit-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D55 (lemma-curves-limits), expanded through the proof of lemma-spaces-limits."
+   }
+  },
+  {
+   "text": "If two stage isomorphisms have equal pullbacks over $T$, bring them to a common stage. The eventual-equality clause of [lem-sfb-fp-space-limit-category], applied to the underlying algebraic-space morphisms, makes them equal at a later stage. Isomorphisms have no extra data whose equality must be checked. Thus the functor is faithful. In the displayed filtered $2$-colimit, arrows are precisely stage isomorphisms modulo eventual equality; steps 5 and 6 make the arrow map bijective, and steps 1--4 give every object up to isomorphism. These are exactly the asserted equivalence and its three explicit clauses.",
+   "uses": [
+    "lem-sfb-fp-space-limit-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D55 (lemma-curves-limits), expanded through the proof of lemma-spaces-limits."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-fp-space-limit-category",
+  "lem-sfb-space-eventually-flat",
+  "lem-sfb-space-eventually-proper",
+  "lem-sfb-space-eventually-fibre-dimension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tag 0D55 (lemma-curves-limits), with the expansion of Tag 0D1I (lemma-spaces-limits) through Tags 07SK, 08K0, 08K1; dimension descent is Tag 0D4K."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The groupoid of proper flat finitely presented curves commutes with filtered inverse limits of affine bases",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"A morphism $ i' \\to i $ in the index category $\\\\mathcal{I}$, chosen to ensure compatibility of the induced morphism $X \\to \\\\varprojlim D$ with the diagonal cover's open subsets. This morphism satisfies \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For each index $ j $ in the zeroth component of the affine refinement cover $ \\\\mathcal{U}_D $, the cone $ A.c' j $ constructed via the pullback along the affine open immersion $ \\\\mathcal{U}_D(j) \\\\to D\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj i)] [AlgebraicGeometry.LocallyOfFiniteType f]\\n \", \"doc\": \"Given a diagram $ D: \\\\mathcal{I} \\\\to \\\\text{Sch} $ of schemes, a natural transformation from $ D $ to the constant diagram at $ S $, and a morphism $ X \\\\to S $, there exists an index $ j $ in the refin\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.i'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [∀ (i : I), CompactSpace ↥(D.obj i)] →\\n  \", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, this function returns \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  [∀ (i : I), CompactSpace ↥(D.obj i)] [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : \", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, there exists an index \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A family of proper algebraic spaces of relative dimension at most one descends to a finite stage",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsProper f\", \"doc\": \"Every finite morphism of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  AlgebraicGeometry.IsFinite f ↔ AlgebraicGeometry.IsProper f ∧ AlgebraicGeometry.IsAffineHom f\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is finite if and only if it is proper and affine, i.e., $ \\\\text{IsFinite}(f) \\\\leftrightarrow \\\\text{IsProper}(f) \\\\land \\\\text{IsAffineHom}(f) $.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"@AlgebraicGeometry.IsProper =\\n  @AlgebraicGeometry.IsSeparated ⊓ @AlgebraicGeometry.UniversallyClosed ⊓ @AlgebraicGeometry.LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsProper\", \"limit\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "curveStack|limitPreserving|eventually.*relativeDimension",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The groupoid of proper flat finitely presented curves commutes with filtered inverse limits of affine bases",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Limits.colimitLimitIso\", \"module\": \"Mathlib.CategoryTheory.Limits.FilteredColimitCommutesFiniteLimit\", \"type\": \"(F : J ⥤ K ⥤ C) : colimit (limit F) ≅ limit (colimit F.flip)\", \"doc\": \"In a category with all filtered colimits and finite limits, the canonical morphism from the colimit of a filtered diagram of finite limits to the finite limit of the corresponding colimits is an isomo\"}\n  {\"name\": \"GrpCat.FilteredColimits.colimit\", \"module\": \"Mathlib.Algebra.Category.Grp.FilteredColimits\", \"type\": \": GrpCat.{max v u}\", \"doc\": \"The filtered colimit of a diagram in the category of groups is constructed by first taking the colimit in the category of monoids via the forgetful functor, then equipping the resulting monoid with a \"}\n  {\"name\": \"AlgebraicGeometry.isBasis_preimage_isAffineOpen\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[IsCofiltered I] [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] :\\n  TopologicalSpace.Opens.IsBasis {(c.π.app i ⁻¹ᵁ V : c.pt.Opens) | (i : I) (V : (D.obj i).Opens) (_ : IsAffineOpen V)}\", \"doc\": \"Given a cofiltered diagram of schemes where all transition maps are affine morphisms, the collection of preimages of affine open subsets under the projection maps forms a basis for the topology on the\"}\n  {\"name\": \"GrpCat.FilteredColimits.colimit_inv_mk_eq\", \"module\": \"Mathlib.Algebra.Category.Grp.FilteredColimits\", \"type\": \"(x : Σ j, F.obj j) : (G.mk.{v, u} F x)⁻¹ = G.mk F ⟨x.1, x.2⁻¹⟩\", \"doc\": \"In the filtered colimit of a diagram of groups, the inverse of the equivalence class represented by an element $ g $ from a group in the diagram is equal to the equivalence class of the inverse of $ g\"}\n  {\"name\": \"CommGrpCat.FilteredColimits.colimitCoconeIsColimit\", \"module\": \"Mathlib.Algebra.Category.Grp.FilteredColimits\", \"type\": \": IsColimit (colimitCocone.{v, u} F)\", \"doc\": \"For any filtered diagram $ F : \\\\mathcal{J} \\\\to \\\\mathsf{CommGrp} $, if the composition of the forgetful functor $ \\\\mathsf{CommGrp} \\\\to \\\\mathsf{Grp} $ with $ F $ has a colimit in $ \\\\mathsf{Grp} $, then \"}\n  {\"name\": \"CommGrpCat.FilteredColimits.colimit\", \"module\": \"Mathlib.Algebra.Category.Grp.FilteredColimits\", \"type\": \": CommGrpCat\", \"doc\": \"The filtered colimit of a diagram in the category of commutative groups is constructed by composing the diagram with the forgetful functor to groups, taking the filtered colimit in the category of gro\"}\n  {\"name\": \"AlgebraicGeometry.Flat.comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y Z : Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [hf : Flat f] [hg : Flat g] : Flat (f ≫ g)\", \"doc\": \"Flat morphisms of schemes form a category, where the objects are schemes and the morphisms are flat morphisms between them. Composition and identity morphisms are inherited from the category of scheme\"}\n  {\"name\": \"GrpCat.FilteredColimits.colimitInvAux\", \"module\": \"Mathlib.Algebra.Category.Grp.FilteredColimits\", \"type\": \"(x : Σ j, F.obj j) : G.{v, u} F\", \"doc\": \"The function that maps an element $x$ in the disjoint union of a filtered diagram of groups to the inverse of $x$ in the filtered colimit group, constructed by taking the inverse of $x$ in its origina\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The groupoid of proper flat finitely presented algebraic spaces with fibres of dimension at most one commutes with inverse limits of affine bases",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n  {\"name\": \"AlgebraicGeometry.isAffineHom_π_app\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (i : I), A\", \"doc\": \"Let $ I $ be a cofiltered category and $ D: I \\to \\text{Sch} $ a functor to the category of schemes. If every transition morphism $ D(f): D(i) \\to D(j) $ in the diagram is affine, then for any cone $ c $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of schemes where all transition morphisms are affine, each object is compact and quasi-separated, and the limit of the diagram is affine, there exists an object in the diagram \"}\n  {\"name\": \"AlgebraicGeometry.exists_map_preimage_eq_map_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"In a cofiltered diagram of schemes where all transition morphisms are affine, if two compact open subsets $U$ and $V$ of an object $D(i)$ have equal preimages under the cone projection map $c.\\\\pi.app_\"}\n  {\"name\": \"AlgebraicGeometry.exists_map_eq_top\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of schemes where each morphism is affine and each object is a compact space, if an open subset $U$ of an object $D(i)$ satisfies $c.\\\\pi_{i}^{-1}(U) = \\\\top$ (the entire space), \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For each index $ j $ in the zeroth component of the affine refinement cover $ \\\\mathcal{U}_D $, the cone $ A.c' j $ constructed via the pullback along the affine open immersion $ \\\\mathcal{U}_D(j) \\\\to D\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme and ring results do not give this assertion for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of proper flat algebraic space curves and their isomorphisms to a finite stage of a filtered ring colimit",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"(CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme).DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an isomorphism descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is su\"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Surjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"AlgebraicGeometry.IsOpenImmersion.DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an open immersion descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes an open \"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyOpen)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally open descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes universally open after base change al\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyClosed)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally closed descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is surjective, flat, and quas\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyInjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally injective descends along morphisms that are simultaneously surjective, flat, and quasi-compact. Specifically, if a morphism $ f: X \\to Y $ of schemes is surjective, fl\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instDescScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {ι : Type v} [inst : Small.{u, v} ι] {Y : ι → AlgebraicGeometry.Scheme}\\n  {f : (i : ι) → Y i ⟶ X} [∀ (i : ι), AlgebraicGeometry.Flat (f i)],\\n  AlgebraicGeometry.Flat (CategoryTheory.Limits.Sigma.desc f)\", \"doc\": \"Given a scheme $X$ and a small family of schemes $\\\\{Y_i\\\\}$ indexed by $i : Ι$, if each morphism $f_i : Y_i \\to X$ is flat, then the coproduct morphism $\\\\coprod f_i : \\\\coprod Y_i \\to X$ is also flat. Thi\"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.descendsAlong\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  (Q Q' : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometr\", \"doc\": \"If a ring homomorphism property $ Q $ codescends along another property $ Q' $, then any property $ P $ descends along the intersection of $ P' $ and quasi-compact morphisms.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme and ring results do not give this assertion for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsProper\", \"limit\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme and ring results do not give this assertion for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "curveStack|limitPreserving|eventually.*relativeDimension",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme and ring results do not give this assertion for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper flat algebraic space curves commute with inverse limits of affine bases",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineScheme.hasLimits\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \": HasLimits AffineScheme.{u}\", \"doc\": \"The category of affine schemes has all limits, meaning that for every diagram in this category, the limit exists within it.\"}\n  {\"name\": \"AlgebraicGeometry.isBasis_preimage_isAffineOpen\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[IsCofiltered I] [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] :\\n  TopologicalSpace.Opens.IsBasis {(c.π.app i ⁻¹ᵁ V : c.pt.Opens) | (i : I) (V : (D.obj i).Opens) (_ : IsAffineOpen V)}\", \"doc\": \"Given a cofiltered diagram of schemes where all transition maps are affine morphisms, the collection of preimages of affine open subsets under the projection maps forms a basis for the topology on the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isAffine_of_isLimit\", \"module\": \"Mathlib.AlgebraicGeometry.Limits\", \"type\": \"{I : Type*} [Category* I] {D : I ⥤ Scheme.{u}} (c : Cone D) (hc : IsLimit c) [∀ i, IsAffine (D.obj i)] : IsAffine c.pt\", \"doc\": \"If $\\\\{X_i\\\\}_{i \\\\in I}$ is a diagram of affine schemes indexed by a category $I$, and $c$ is a limit cone over this diagram in the category of schemes, then the apex of the cone $c$ is also an affine s\"}\n  {\"name\": \"AlgebraicGeometry.AffineScheme.forgetToScheme_preservesLimits\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \": PreservesLimits forgetToScheme\", \"doc\": \"The inclusion functor from the category of affine schemes to the category of all schemes preserves limits. This means that any limit constructed in the category of affine schemes is also a limit in th\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for any affine open subset $ U \\\\subseteq Y $ and affine open subset $ V \\\\subseteq X $ satisfying $ V \\\\subseteq f^{-1}(U) $, the induced ring homo\"}\n  {\"name\": \"CommRingCat.Under.instPreservesLimitsOfShapeUnderWalkingParallelPairTensorProdOfFlatCarrier\", \"module\": \"Mathlib.Algebra.Category.Ring.Under.Limits\", \"type\": \"[Module.Flat R S] : PreservesLimitsOfShape WalkingParallelPair (tensorProd R S)\", \"doc\": \"If $ S $ is a flat $ R $-module, then the tensor product functor between the under categories of commutative rings preserves limits of diagrams shaped like the walking parallel pair.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme and ring results do not give this assertion for algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-curve-stack-smooth",
+  "date": "2026-10-22",
+  "group": "Q36"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D55 (lemma-curves-limits).",
+   "via": [
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-curve-limit-preservation",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 0D55 and its invocation of 0D1I into finite-presentation descent and separate eventual flatness, properness, and dimension bounds for algebraic spaces. Descended an isomorphism and its inverse and enforced both inverse equations using eventual equality. Four new statement-only inputs, with five logged searches apiece; no Mathlib match or project attachment. Statement unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D55 (lemma-curves-limits). This split supplies the limit-preservation input to algebraicity of the curve stack in that chain; it expands Stacks 0D55 via the three ingredients of 0D1I and 0D4K."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q68-8ce86867a",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-8ce86867a (reviewer sub-agent of L); spot-checked: Read Stacks 0D55 and 0D1I (quot.tex), 07SK, Situation 084W, 08K0 (last assertion), 08K1 and 0D4K (spaces-limits.tex), 03XR, 03MO, 04WP, 06LR and 04NS (spaces-morphisms.tex), and decent-spaces lemma-dimension-decent-space, which gives dim|X| = dim X; every tag matches its label. The item statement and stmt_deps are identical to the Q36-reviewed base, and this is a first split with no repair note. The four new unsplit nodes are true specializations of 07SK, 08K0, 08K1 and 0D4K to finitely presented spaces over affine bases. Their hypotheses hold: fp over an affine scheme gives qcqs and lfp, and the transition maps are affine. The 'every j >= i' clauses follow by base change (03MO, 04WP, 04NS). The geometric-fibre topological-dimension convention is equivalent to Stacks' relative dimension <= d through the decent-spaces lemma and field-extension invariance; empty fibres impose no condition. No new node restates a clause of the item; the only DAG hits are scheme analogues (lem-weil-pbc-eventually-proper, lem-weil-pbc-descend-flat-finite-presentation, lem-trf-limit-fibre-dimension-bound), which are distinct, and same_as is []. Steps 1-4 follow the 0D1I route plus the 0D55 dimension bound, with a common index found by directedness and fp preserved by base change. Step 5 descends a and its inverse separately and imposes both composite identities by eventual equality. Step 6 is faithfulness. Edge cases checked: empty X, zero-dimensional fibres, automorphisms. No off-unit statement citations, no tool_uses and no SGA. Batch-5: the four citations of def-trf-algebraic-space point to a general definition of algebraic spaces that the item already cited on base, not part of the trace formula or Poincare duality or their proofs, so all four are accepted. Advisory only: fibre products of spaces are cited via the scheme node def-pc-fibre-product, and |X| of a space has no node; both are inherited from the item's own convention. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CurveLimitPreservation",
+  "declaration": "AlgebraicGeometry.properCurve_limit_preservation",
+  "declarations": [
+   "AlgebraicGeometry.ProperCurveFamily.presheafOver",
+   "AlgebraicGeometry.ProperCurveModuli.limitBaseChangeIso",
+   "AlgebraicGeometry.properCurve_limit_preservation"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CurveLimitPreservation.lean",
+  "statement": "theorem properCurve_limit_preservation (I : Type u) [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Over (Spec (.of (ULift.{u} ℤ)))) (c : Cone D) (hc : IsLimit c) [∀ i : I, IsAffine (D.obj (op i)).left] : (∀ X : ProperCurveFamily c.pt, ∃ (i : I) (Y : ProperCurveFamily (D.obj (op i))), Nonempty ((Over.pullback (yoneda.map (c.π.app (op i)))).obj Y.presheafOver ≅ X.presheafOver)) ∧ (∀ (i j : I) (X : ProperCurveFamily (D.obj (op i))) (Y : ProperCurveFamily (D.obj (op j))) (a : (Over.pullback (yoneda.map (c.π.app (op i)))).obj X.presheafOver ≅ (Over.pullback (yoneda.map (c.π.app (op j)))).obj Y.presheafOver), ∃ (k : I) (hik : i ≤ k) (hjk : j ≤ k) (b : (Over.pullback (yoneda.map (D.map (homOfLE hik).op))).obj X.presheafOver ≅ (Over.pullback (yoneda.map (D.map (homOfLE hjk).op))).obj Y.presheafOver), ProperCurveModuli.limitBaseChangeIso D c hik X.presheafOver ≪≫ (Over.pullback (yoneda.map (c.π.app (op k)))).mapIso b ≪≫ (ProperCurveModuli.limitBaseChangeIso D c hjk Y.presheafOver).symm = a) ∧ (∀ (i : I) (X Y : ProperCurveFamily (D.obj (op i))) (a b : X.presheafOver ≅ Y.presheafOver), (Over.pullback (yoneda.map (c.π.app (op i)))).mapIso a = (Over.pullback (yoneda.map (c.π.app (op i)))).mapIso b → ∃ (j : I) (hij : i ≤ j), (Over.pullback (yoneda.map (D.map (homOfLE hij).op))).mapIso a = (Over.pullback (yoneda.map (D.map (homOfLE hij).op))).mapIso b)",
+  "branch": "sheaf-dag",
+  "by": "Q134",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The equivalence is stated by its three explicit equivalent clauses: object descent, descent of isomorphisms between families at any two stages, and eventual equality. The curve predicate is reused from the landed def-sfb-proper-curve-moduli. Helpers merely package the existing projection in Over and instantiate the canonical pullback-composition isomorphism; both have real data."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ab109f1e3",
+  "group": "Q134",
+  "result": "pass",
+  "note": "Read the node, report, module, def-sfb-proper-curve-moduli and the landed ProperCurveModuli.lean. The node differs from side-live only in lean and stmt_deps; stmt_deps gains the landed def-sfb-proper-curve-moduli, which brief-stage2 l.167 permits. The lean.statement matches the file verbatim. ProperCurveFamily/IsProperCurveFamily match the node's flat/proper/fp/geometric-fibre-dim<=1 conditions on algebraic spaces. Base is Over(Spec ULift Z). Index is I : Type u, directed and nonempty; stages are affine (so transitions are affine); IsLimit is given. Conjunct 1 (descent), conjunct 2 (iso descent from stages i,j to k, pinned by the canonical eqToIso+pullbackComp limitBaseChangeIso) and conjunct 3 (eventual equality) match the node's clauses. Helpers are canonical with docstrings. All six proof steps are in the docstring; only sorry; one universe. Edge cases checked: empty, zero-dimensional, automorphisms, singleton index, any characteristic. No duplicates found. Advisory: conjunct 3 is stated for same-stage families; the pullback case follows from base-change stability (proof step 6). No compile, since no file was changed."
+ }
+}

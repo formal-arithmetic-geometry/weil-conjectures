@@ -1,0 +1,251 @@
+{
+ "id": "lem-sfb-augmented-scalar-roos-resolution",
+ "kind": "statement",
+ "title": "Scalar restriction of augmented Roos cones with resolution-normalized units",
+ "statement": "Let $Z$ be a scheme, $i:C\\to R$ a morphism of commutative ring sheaves on a small skeleton of $Z_{\\mathrm{proét}}$, and $r:\\operatorname{Mod}(R)\\to\\operatorname{Mod}(C)$ scalar restriction [def-weil-pbc-proetale-site, def-weil-sheaf-of-modules-category, def-pc-sheaf-restrict-scalars]. For a strict inverse tower $W$ of possibly unbounded cochain complexes, let $B_W=\\prod_{n\\geq1}W_n$ degreewise, $F_W=1-s_W$ with $(s_Ww)_n=t_nw_{n+1}$, and\n$$\\mathsf R(W)=\\operatorname{Cone}(F_W)[-1],\\quad \\mathsf R(W)^q=B_W^{q-1}\\oplus B_W^q,\\quad D(y,x)=(-dy-F_Wx,dx)$$\n[def-pc-cochain-complex-modules, def-weil-inverse-system, def-weil-tower-transition-endomorphism]. Restriction $r$ is exact; its canonical product comparison $rB_W\\cong B_{rW}$ is the identity on tuples of sections and respects projections, differentials, and $F_W$. Finite direct sums are unchanged. Thus the coordinate formula gives a natural chain isomorphism $c_W:r\\mathsf R(W)\\cong\\mathsf R(rW)$.\n\nFor a strict tower isomorphism $f:W\\cong W'$ over either ring, the diagonal product formula defines a chain isomorphism $\\mathsf R(f)(y,x)=((\\prod f_n)y,(\\prod f_n)x)$, with inverse the diagonal product of $f_n^{-1}$. The same diagonal formula defines the chain map for any strict tower map. A transition-compatible homotopy $h$ induces the Roos homotopy $(y,x)\\mapsto(-h^\\Pi y,h^\\Pi x)$, where $h^\\Pi=\\prod_nh_n$. For any compatible chain augmentation $b:L\\to W$, write $b^\\Pi=(b_n)_n$ and $\\alpha_W(b)(z)=(0,b^\\Pi z)$. This is a chain map. If $f_nr(b_n)=b'_nv$ for a strict tower map $f:rW\\to W'$ and a chain map $v:rL\\to L'$, then\n$$\\mathsf R(f)c_W\\,r\\alpha_W(b)=\\alpha_{W'}(b')v.$$\nThe same formula without $r,c_W$ holds for maps over one ring.\n\nWrite $Q_R,Q_C$ for derived localization [def-weil-abstract-derived-category]. There are natural isomorphisms in the respective derived categories\n$$\\rho_W:Q_R\\mathsf R(W)\\xrightarrow{\\sim}R\\!\\lim W,$$\nwhere $R\\!\\lim$ is total right derived ordinary inverse limit [lem-weil-pbc-ringed-strict-tower-homotopy-limit]; these are the comparisons of [lem-weil-strict-roos-comparison] over $R$ and over $C$. For every K-injective tower resolution $q:W\\to I$, both arrows in $\\mathsf R(W)\\xrightarrow{\\mathsf R(q)}\\mathsf R(I)\\xleftarrow{j_I}\\lim I_n$ are quasi-isomorphisms, where $j_I(z)=(0,(z_n)_n)$, and $\\rho_W$ is this zigzag followed by the universal derived-limit unit on $I$. Under $\\rho_W$, $Q_R\\alpha_W(b)$ is the actual canonical augmented map $Q_RL\\to R\\!\\lim W$: the constant-tower unit followed by $R\\!\\lim(b)$. This equality holds also when that unit is computed using a separate resolution $\\Delta L\\to I'$ and a comparison $I'\\to I$ commuting with the augmented map up to homotopy. The resulting isomorphism $D(r)(R\\!\\lim W)\\cong R\\!\\lim(rW)$ obtained from $Q_Cc_W$ and the two $\\rho$'s respects these canonical augmented maps and is natural in strict maps. No boundedness or completeness assumption is made.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-pullback.proof.md",
+  "place": "First paragraph: compatible reductions define c_K; Comparison with the Stacks Project: scalar restriction is exact, preserves products, and commutes with R lim. Returned proof steps 6–9: signed cone, augmentation and resolution-normalized derived comparison. Agent-written strict cochain refinement; Stacks sites-cohomology.tex Tag 0941 (lemma-derived-limit-is-ok); derived.tex Tag 07KC (lemma-products)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pc-cochain-complex-modules",
+  "def-weil-inverse-system",
+  "def-weil-tower-transition-endomorphism",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-strict-roos-comparison",
+  "def-weil-strict-roos-model"
+ ],
+ "proof": [
+  {
+   "text": "Scalar restriction composed with the faithful forgetful functor to abelian sheaves is definitionally the original forgetful functor. The module-sheaf colimit/limit theorem and reflection therefore give preservation of limits and colimits. Apply exact products on the pro-etale site over each ring.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "det-pe-products-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the already-proved roos_cone_d and roos_cone_coords from StrictRoosDerivation for the shifted mapping-cone differential in its canonical coordinates. The existing strict-map formula gives maps and inverses. Apply the strict Roos homotopy theorem and product projection extensionality to identify its product homotopy with productHomotopy. Prove augmentation naturality by the two biproduct coordinates and product projections.",
+   "uses": [
+    "def-weil-strict-roos-model",
+    "lem-pur-strict-roos-homotopy-functor",
+    "lem-weil-strict-roos-derivation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The additive Roos comparison gives the scalar cone isomorphism with the canonical product comparison. Coordinate extensionality identifies its naturality witnesses with roosF.map. Product projections show compatibility with one minus shift. The two coordinates and the given compatibility equation prove the scalar augmentation identity.",
+   "uses": [
+    "lem-pur-roos-additive-comparison",
+    "def-weil-strict-roos-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the explicit Roos derived universal pair and uniqueness of right derived functors to obtain rho with Q(roosι) rho = eta. The arbitrary-K-injective strict Roos comparison identifies roosι as a quasi-isomorphism. Naturality of rho gives preservation of quasi-isomorphisms and the normalization formula with epsilon=Q(roosι) and d=eta_I RF(Qq) inverse. The augmentation equation follows from roosAugment_eq and the unit equation.",
+   "uses": [
+    "lem-weil-strict-roos-derivation",
+    "lem-sf-strict-roos-derived-limit-comparison",
+    "def-weil-strict-roos-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a separate constant-tower resolution, compose the constant augmentation with Roos(p) and identify it with lam roosι_J by product projections. Apply the strict Roos homotopy theorem to the supplied comparison homotopy; its localization equates the two augmented composites. Naturality of roosι, the unit equation, and cancellation of RF(Qq) give precisely the separate-resolution clause.",
+   "uses": [
+    "lem-pur-strict-roos-homotopy-functor",
+    "def-weil-strict-roos-model",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Set Dr to the exact functor induced on derived categories and phi to its localization factorization. Define beta as Dr(rhoR inverse), phi, Q(c), rhoC. Naturality follows successively from rhoR inverse, phi, c, rhoC. The chain augmentation identity and the same naturality equations prove the final derived augmentation identity.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-abstract-derived-category",
+  "def-weil-strict-roos-model",
+  "det-pe-products-exact",
+  "lem-pur-roos-additive-comparison",
+  "lem-pur-strict-roos-homotopy-functor",
+  "lem-sf-strict-roos-derived-limit-comparison",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-strict-roos-derivation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-pullback.proof.md",
+  "place": "First and final paragraphs, with explicit signed coordinates and normalization from Stacks 0941 and 070I; V3 proof uses existing strict additive comparison, homotopy functor, derivation, and arbitrary-K-injective comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars of a strict tower commutes with the shifted cone of one minus transition on products and its augmentation equals the canonical total derived inverse limit unit",
+   "results": "AlgHom.restrictScalars [Mathlib.Algebra.Algebra.Tower]; RestrictScalars [Mathlib.Algebra.Algebra.RestrictScalars]; ModuleCat.preservesLimit_restrictScalars [Mathlib.Algebra.Category.ModuleCat.ChangeOfRings]; ModuleCat.RestrictScalars.obj' [Mathlib.Algebra.Category.ModuleCat.ChangeOfRings]; Submodule.restrictScalars [Mathlib.Algebra.Module.Submodule.RestrictScalars]; PresheafOfModules.restrictScalarsObj [Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings]; ModuleCat.restrictScalars [Mathlib.Algebra.Category.ModuleCat.ChangeOfRings]; RingCat.moduleCatRestrictScalarsPseudofunctor [Mathlib.Algebra.Category.ModuleCat.Pseudofunctor]",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the normalized sheaf-complex assertion, including its specified strict maps and units"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact scalar restriction preserves products and yields a diagonal chain isomorphism of Roos cones whose augmentation is normalized by a K injective tower resolution zigzag",
+   "results": "CategoryTheory.Abelian.LeftResolution.chainComplexXIso [Mathlib/Algebra/Homology/LeftResolution/Basic]; CategoryTheory.Abelian.LeftResolution.exactAt_map_chainComplex_succ [Mathlib/Algebra/Homology/LeftResolution/Basic]; Profinite.NobelingProof.succ_exact [Mathlib/Topology/Category/Profinite/Nobeling/Successor]; Rep.standardComplex.compForgetAugmentedIso [Mathlib/RepresentationTheory/Homological/Resolution]; AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace [Mathlib/AlgebraicTopology/SingularHomology/Basic]; AlgebraicTopology.DoldKan.N₁_iso_normalizedMooreComplex_comp_toKaroubi [Mathlib/AlgebraicTopology/DoldKan/Normalized]; CategoryTheory.Abelian.LeftResolution.chainComplexXOneIso [Mathlib/Algebra/Homology/LeftResolution/Basic]; AlgebraicTopology.DoldKan.Γ₀NondegComplexIso [Mathlib/AlgebraicTopology/DoldKan/GammaCompN]",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the normalized sheaf-complex assertion, including its specified strict maps and units"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone",
+   "results": "CochainComplex.mappingCone.fst [Mathlib.Algebra.Homology.HomotopyCategory.MappingCone]; CochainComplex.mappingCone.snd [Mathlib.Algebra.Homology.HomotopyCategory.MappingCone]; CochainComplex.mappingCone.inl [Mathlib.Algebra.Homology.HomotopyCategory.MappingCone]; CochainComplex.mappingCone [Mathlib.Algebra.Homology.HomotopyCategory.MappingCone]; CochainComplex.mappingCone.descCochain [Mathlib.Algebra.Homology.HomotopyCategory.MappingCone]; CochainComplex.mappingCone.liftCochain [Mathlib.Algebra.Homology.HomotopyCategory.MappingCone]; CochainComplex.mappingCone.liftCochain_snd [Mathlib.Algebra.Homology.HomotopyCategory.MappingCone]; CochainComplex.mappingCone.inl_descCochain [Mathlib.Algebra.Homology.HomotopyCategory.MappingCone]; CochainComplex.mappingCone.inr [Mathlib.Algebra.Homology.HomotopyCategory.MappingCone]; CochainComplex.mappingCone.inr_descCochain [Mathlib.Algebra.Homology.HomotopyCategory.MappingCone]; CochainComplex.mappingCone.inr_snd_assoc [Mathlib.Algebra.Homology.HomotopyCategory.MappingCone]; CochainComplex.mappingCone.isZero_X_iff [Mathlib.Algebra.Homology.HomotopyCategory.MappingCone]",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the normalized sheaf-complex assertion, including its specified strict maps and units"
+  },
+  {
+   "tool": "grep",
+   "query": "[Rr]oos|restrictScalars.*[Ll]imit|[Ll]imit.*restrictScalars",
+   "results": "Mathlib/Algebra/Category/ModuleCat/ChangeOfRingsExact.lean:41 instance : Limits.PreservesFiniteLimits (ModuleCat.restrictScalars.{v} f) := by; Mathlib/Algebra/Category/ModuleCat/ChangeOfRingsExact.lean:46 instance : Limits.PreservesFiniteColimits (ModuleCat.restrictScalars.{v} f) := by; Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean:63     HasColimit (F ⋙ evaluation R Y ⋙ (ModuleCat.restrictScalars (R.map f).hom)) :=; Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean:64   ⟨_, isColimitOfPreserves (ModuleCat.restrictScalars (R.map f).hom); Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean:75     (preservesColimitIso (ModuleCat.restrictScalars (R.map f).hom) (F ⋙ evaluation R Y)).inv; Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean:80     erw [ι_preservesColimitIso_inv (G := ModuleCat.restrictScalars (R.map (𝟙 X)).hom)]; Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean:87     erw [ι_preservesColimitIso_inv (G := ModuleCat.restrictScalars (R.map (f ≫ g)).hom),; Mathlib/Algebra/Category/ModuleCat/Presheaf/Limits.lean:45         apply (isLimitOfPreserves (ModuleCat.restrictScalars (R.map f).hom) (hc Y)).hom_ext; Mathlib/Algebra/Category/ModuleCat/Presheaf/Limits.lean:63     HasLimit (F ⋙ evaluation R Y ⋙ ModuleCat.restrictScalars (R.map f).hom) := by; Mathlib/Algebra/Category/ModuleCat/Presheaf/Limits.lean:64   change HasLimit ((F ⋙ evaluation R Y) ⋙ ModuleCat.restrictScalars (R.map f).hom); Mathlib/Algebra/Category/ModuleCat/Presheaf/Limits.lean:75     (preservesLimitIso (ModuleCat.restrictScalars (R.map f).hom) (F ⋙ evaluation R Y)).inv; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:932 noncomputable instance preservesLimit_restrictScalars; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:935     PreservesLimit F (restrictScalars f) :=; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:940 instance preservesColimit_restrictScalars {R S : Type*} [Ring R] [Ring S]; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:943     PreservesColimit F (ModuleCat.restrictScalars.{v} f) := by; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:944   have : HasColimit ((F ⋙ restrictScalars f) ⋙ forget₂ (ModuleCat R) AddCommGrpCat) :=; Mathlib/Algebra/Category/ModuleCat/Descent.lean:37     PreservesFiniteLimits <| tensorLeft ((restrictScalars f).obj (ModuleCat.of B B)) := by; Mathlib/Algebra/Category/ModuleCat/Descent.lean:44   have : PreservesFiniteLimits (extendScalars.{_, _, u} f ⋙ restrictScalars.{_, _, u} f) :=; Mathlib/Algebra/Category/ModuleCat/Descent.lean:46   exact preservesFiniteLimits_of_reflects_of_preserves (extendScalars f) (restrictScalars f)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the normalized sheaf-complex assertion, including its specified strict maps and units"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For unbounded module sheaf towers with exact countable products the explicit zero shifted coordinate augmentation into the Roos cone agrees with the derived constant tower adjunction unit through a K injective resolution",
+   "results": "CochainComplex.cm5b.i_f_comp [Mathlib/Algebra/Homology/Factorizations/CM5b]; CochainComplex.cm5b.i_f_comp_assoc [Mathlib/Algebra/Homology/Factorizations/CM5b]; CochainComplex.cm5b.instInjectiveXIntMappingConeIdI [Mathlib/Algebra/Homology/Factorizations/CM5b]; CochainComplex.cm5b [Mathlib/Algebra/Homology/Factorizations/CM5b]; CochainComplex.mappingCone.mapHomologicalComplexXIso [Mathlib/Algebra/Homology/HomotopyCategory/MappingCone]; CochainComplex.cm5b.p [Mathlib/Algebra/Homology/Factorizations/CM5b]; CochainComplex.cm5b.fac [Mathlib/Algebra/Homology/Factorizations/CM5b]; CochainComplex.mappingCone.mapHomologicalComplexXIso' [Mathlib/Algebra/Homology/HomotopyCategory/MappingCone]",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the normalized sheaf-complex assertion, including its specified strict maps and units"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars for sheaves of modules preserves products and the augmented Roos complex computes the total derived inverse limit naturally including its unit",
+   "results": "CondensedMod.ofSheafProfinite; LightCondMod.ofSheafLightProfinite; LightCondAb.ofSheafLightProfinite; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; CondensedMod.ofSheafCompHaus; Condensed.profiniteSolid; PresheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatCompSheafOfModulesSheafificationToSheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state the augmented cross-ring Roos comparison, including its normalized canonical units"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The augmented mapping fiber of one minus shift on an inverse sequence of unbounded sheaf complexes represents derived inverse limit and its adjunction unit",
+   "results": "CategoryTheory.Adjunction.shift_unit_app; CategoryTheory.Adjunction.derivedη; CategoryTheory.Sheaf.adjunction_unit_app_val; CochainComplex.augmentTruncate_inv_f_succ; CategoryTheory.Adjunction.LeftAdjointCommShift.compatibilityUnit_iso; CategoryTheory.Adjunction.LeftAdjointCommShift.iso_inv_app_assoc; CategoryTheory.Adjunction.CommShift.compatibilityUnit_right; CategoryTheory.Adjunction.CommShift.mk",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state the augmented cross-ring Roos comparison, including its normalized canonical units"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural comparison between a Roos mapping cone and inverse limit of a K injective resolution, compatible with scalar restriction and chain homotopies",
+   "results": "CochainComplex.cm5b.p; CochainComplex.cm5b.i; CochainComplex.cm5b.i_f_comp; CochainComplex.cm5b.i_f_comp_assoc; CochainComplex.cm5b.fac; CategoryTheory.InjectiveResolution.descFSucc; CategoryTheory.InjectiveResolution.descHomotopyZeroOne; CategoryTheory.InjectiveResolution.descHomotopyZeroZero",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state the augmented cross-ring Roos comparison, including its normalized canonical units"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-pullback-strict-roos-normalization",
+  "date": "2026-10-22",
+  "group": "O3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-tensor",
+ "blueprint": {
+  "from": {
+   "node": "det-lem-int-tensor-pullback",
+   "place": "First paragraph and returned proof steps 6–9: scalar restriction exactness/product comparison, signed cone and augmentation formulas, and resolution-normalized derived comparison.",
+   "via": [
+    "lem-sfb-integral-pullback-strict-roos-normalization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-augmented-scalar-roos-resolution",
+  "worker": "stage1",
+  "summary": "Nine proof steps reuse exact sectionwise pro-etale products and the existing strict Roos comparison, including the arbitrary K-injective zigzag. Explicit calculations prove the signed homotopy, augmentation, naturality of the universal derived-limit unit, the separate-resolution homotopy equation, and the conjugated scalar comparison. No new nodes or statement changes.",
+  "blueprint": "First paragraph: compatible reduction maps define the completion comparison (Steps 2–7). Final Comparison with the Stacks Project paragraph: exact scalar restriction preserves products and R lim and preserves the completion map (Steps 1, 8–9). Historical returned proof steps 6–9 named in the item source are realized by these explicit refinements.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Generic pro-etale sheaf theorem supplies exact sectionwise countable products for each of R and C, without altering the integral-pullback unit route."
+   },
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "Generic normalized strict Roos model and strict augmentation theorem; scalar restriction is proved by coordinates in the item."
+   },
+   {
+    "node": "lem-sf-strict-roos-derived-limit-comparison",
+    "why": "Generic comparison proves both zigzag arrows are quasi-isomorphisms for every K-injective resolution, even without injective terms."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Generic total right derived inverse limit and its K-injective computation supply the functor the unit compares with."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-strict-roos-comparison",
+  "lem-sf-strict-roos-derived-limit-comparison",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-af90fafec",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-af90fafec (reviewer sub-agent of L); spot-checked: PASS with no changes and no fixes written. Shape: one commit (the item plus its report), no new nodes. Statement and stmt_deps are byte-identical to the live node, which is still unsplit in live and side-live. The item is not on the drop list and has no repair note. proof_deps equals the union of uses, all cited ids exist and none is merged, the 216-node closure has no cycle, and there is no SGA citation. Source: the main-20261015 det-lem-int-tensor-pullback proof, first paragraph and the final 'restriction of scalars is exact and preserves products, hence commutes with R lim' paragraph; the item makes this precise at chain level and proof_origin.by=agent is correct. Stacks 0941/07KC/070I labels checked; they are background only, never cited as facts. I recomputed every step. Step 2: the cone sign D(y,x)=(-dy-Fx,dx) follows from the abstract-derived-category C(f) and [-1] conventions. Step 3: the homotopy K=(-H,H) gives D'K+KD=diag(f-g), with the mixed term HF-F'H=0 by transition compatibility. Step 4: Fb^Π=0, so the augmentation is a chain map. Step 5, checked independently: ρ_I Qj_I=η_I follows from the strict-roos augmentation clause and η-naturality; naturality of ρ along q then gives ρ_W=d_I(Qj_I)^{-1}QR(q) for any K-injective I, with d_I invertible. Step 6 identifies the augmentation with the actual unit η_{ΔL}. Step 7 handles a separate resolution: the tower homotopy lands in lim I. Steps 8-9: the conjugated β is natural through ρ, φ and c_W, and respects the augmented maps. The elementary marks are justified. Edge cases tested: constant tower, zero tower, R=0, nonflat i (r is never claimed to preserve K-injectives), unbounded complexes. Duplicate search: the nearest candidates (pbc-strict-scalar-completion-unit, scalar-pullback-strict-cone-naturality, a1-principal-augmented-roos-descent, restriction-of-scalars-exact) all state something different. Tool uses accepted: proetale-countable-products-exact, strict-roos-comparison, sf-strict-roos-derived-limit-comparison, pbc-ringed-strict-tower-homotopy-limit."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AugmentedScalarRoosResolution",
+  "declaration": "CategoryTheory.augmentedScalarRoosResolution",
+  "declarations": [
+   "CategoryTheory.AugmentedScalarRoos.productHomotopy",
+   "CategoryTheory.AugmentedScalarRoos.ChainFormulas",
+   "CategoryTheory.AugmentedScalarRoos.ConeCoordinates",
+   "CategoryTheory.AugmentedScalarRoos.constantTower",
+   "CategoryTheory.AugmentedScalarRoos.ResolutionNormalized",
+   "CategoryTheory.AugmentedScalarRoos.mapTower",
+   "CategoryTheory.AugmentedScalarRoos.ScalarFormulas",
+   "CategoryTheory.AugmentedScalarRoos.Modules",
+   "CategoryTheory.augmentedScalarRoosResolution"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/AugmentedScalarRoosResolution.lean",
+  "statement": "theorem augmentedScalarRoosResolution (Z : AlgebraicGeometry.Scheme.{t}) (C R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology Z) RingCat.{max r (t + 1)}) (_hC : ∀ (U : Z.ProEtᵒᵖ) (a b : C.obj.obj U), a * b = b * a) (_hR : ∀ (U : Z.ProEtᵒᵖ) (a b : R.obj.obj U), a * b = b * a) (i : C ⟶ R) [HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology Z) AddCommGrpCat.{max r (t + 1)}] [(AlgebraicGeometry.Scheme.ProEt.topology Z).WEqualsLocallyBijective AddCommGrpCat.{max r (t + 1)}] [HasDerivedCategory.{w} (Modules Z R)] [HasDerivedCategory.{w} (Modules Z C)] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ Modules Z R)] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ Modules Z C)] (RF_R : DerivedCategory.{w} (ℕᵒᵖ ⥤ Modules Z R) ⥤ DerivedCategory.{w} (Modules Z R)) (ηR : roosLimitFunctor (A := Modules Z R) ⋙ DerivedCategory.Q.{w} (C := Modules Z R) ⟶ DerivedCategory.Q.{w} (C := ℕᵒᵖ ⥤ Modules Z R) ⋙ RF_R) (_hRF_R : RF_R.IsRightDerivedFunctor ηR (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ Modules Z R) (.up ℤ))) (RF_C : DerivedCategory.{w} (ℕᵒᵖ ⥤ Modules Z C) ⥤ DerivedCategory.{w} (Modules Z C)) (ηC : roosLimitFunctor (A := Modules Z C) ⋙ DerivedCategory.Q.{w} (C := Modules Z C) ⟶ DerivedCategory.Q.{w} (C := ℕᵒᵖ ⥤ Modules Z C) ⋙ RF_C) (_hRF_C : RF_C.IsRightDerivedFunctor ηC (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ Modules Z C) (.up ℤ))) : ScalarFormulas (A := Modules Z R) (B := Modules Z C) (SheafOfModules.restrictScalars.{max r (t + 1)} i) RF_R ηR RF_C ηC",
+  "branch": "sheaf-dag",
+  "by": "O3",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the existing strict Roos model, including its actual cone coordinates, augmentation, ordinary-limit lift and inclusion. The public formula predicates collect only clauses of this node; no new Roos construction or unspecified comparison is introduced. The natural derived comparisons are normalized by the universal derived-limit units for every K-injective tower resolution, including a separate constant-tower resolution comparison up to homotopy."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-617b7e261",
+  "group": "O3",
+  "result": "pass",
+  "note": "Read the node, all 10 stmt_deps (strict-roos-model added; landed, allowed) and the module. Each clause is rendered: exactness and biproduct preservation; P pinned by projections and roosU; c pinned by ConeCoordinates and natural; cone differential sign (-dy-Fx,dx) re-derived from Mathlib mappingCone[-1]; diagonal maps and inverses; Roos homotopy (-H,H) matches Mathlib Homotopy convention; augmentation (0,b^Pi) with one-ring and cross-ring naturality; rhoR/rhoC pinned for every K-injective q via d≫RF(Qq)=η_I with both zigzag arrows quasi-isos; canonical augmented map Q(aug)≫ρ=Q(augLimit)≫η; separate-resolution clause re-derived by η-naturality; β is the conjugation of Q(c) by φ and the two ρ, with naturality and chain+derived augmented compatibility. ∃Dr φ is a localization lift, unique up to compatible iso, so not arbitrary. No extra hypotheses (sheafify and locally-bijective instances as in the deps; no universe equality, flatness or boundedness). Edge cases: empty Z, R=0, zero/identity transitions, nonflat i, all degrees. Record verbatim, 9 declarations present, docstrings with source and blueprint, sorry only. Advisory: def-pur-kinjective-complex not in stmt_deps (Mathlib IsKInjective); two ChainFormulas conjuncts repeat StrictRoosModel lemmas; Dr/φ could use Mathlib mapDerivedCategory; proof-only imports are non-public. No compile: no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261023T135712-L-2960301",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

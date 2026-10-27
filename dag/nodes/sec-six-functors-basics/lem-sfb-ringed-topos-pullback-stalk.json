@@ -1,0 +1,253 @@
+{
+ "id": "lem-sfb-ringed-topos-pullback-stalk",
+ "kind": "statement",
+ "title": "Stalks of tensor pullback for a morphism of ringed topoi",
+ "statement": "Let $(u,u^\\sharp):(\\operatorname{Sh}(\\mathcal C),R)\\to(\\operatorname{Sh}(\\mathcal D),S)$ be a morphism of ringed topoi [def-weil-pbc-ringed-topos-morphism], with sites and sheaf values in the universes of [def-weil-size-convention]. Let $p:\\mathbf{Set}\\to\\operatorname{Sh}(\\mathcal C)$ be a point (a geometric morphism [def-trf-geometric-morphism]), and put $q=u\\circ p$ (the composite geometric morphism). For a sheaf $G$ on $\\mathcal C$ write $G_p=p^{-1}G$, and similarly write $H_q=q^{-1}H$ on $\\mathcal D$. The composition comparison canonically identifies $(u^{-1}H)_p$ with $H_q$, for sheaves of sets, abelian groups and commutative rings, respecting their operations. For every $S$-module sheaf $M$ [def-weil-sheaf-of-modules-category], put $u^*M=R\\otimes_{u^{-1}S}u^{-1}M$ [def-pur-sheaf-tensor-product]. There is a canonical natural $R_p$-linear isomorphism\n$$(u^*M)_p\\cong M_q\\otimes_{S_q}R_p.$$\nHere the ring map $S_q\\to R_p$ is the stalk of $u^\\sharp$. This comparison sends the stalk of a local pure tensor $r\\otimes m$ to $m_q\\otimes r_p$, with $m_q$ the image of the inverse-image germ under the composition comparison. It applies termwise to cochain complexes [def-pc-cochain-complex-modules] and commutes with their differentials.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 05V5, lemma-pullback-stalk."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-cochain-complex-modules",
+  "def-trf-geometric-morphism",
+  "def-sfb-ringed-site-point",
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-weil-pbc-ringed-tensor-section-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Construct A=f⁻¹S and its algebraic module lift I using the already proved ringImage and algebraicImage helpers in CochainCompositeConstruction, which reconstruct the finite-product transport on sections. Apply its proved structuralMap helper to bundle I.ringUnderlying.inv followed by f.ringMap as c, using the ring graph equations of f. This is direct reuse of the construction helpers, not an application of the composite existence theorem, and proves the required normalization of c.",
+   "uses": [
+    "lem-pur-independent-composite-algebraic-image",
+    "def-weil-pbc-ringed-topos-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 05V5, lemma-pullback-stalk, proof; Tag 03EL, lemma-tensor-product-pullback, proof."
+   }
+  },
+  {
+   "text": "Take a normalized point presentation a of A at p. Define the composite point t with ring a.ring and modules I.modules followed by a.modules. Its ring identification is p.mapIso(I.ringUnderlying) followed by a.ringUnderlying; its module identification is the corresponding composite natural isomorphism. Apply first the graph equations of I and then those of a to prove every graph equation of t. Naturality and the transported addition graph prove additivity of the composite module functor.",
+   "uses": [
+    "def-sfb-ringed-site-point",
+    "def-weil-pbc-algebraic-inverse-image",
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 05V5, lemma-pullback-stalk, proof; Tag 03EL, lemma-tensor-product-pullback, proof."
+   }
+  },
+  {
+   "text": "Apply the point scalar-extension comparison to c, a and s. Its equivalences evaluated at I(M) give e(M). The ring-map normalization together with I.ringUnderlying.hom followed by c=f.ringMap gives the required normalization of b. Its scalar and module-map equations give linearity and naturality. Cancel I.moduleUnderlying.hom followed by its inverse under p.inverse to identify its generalized-section pure formula with the required composite-point formula.",
+   "uses": [
+    "lem-sfb-point-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 05V5, lemma-pullback-stalk, proof; Tag 03EL, lemma-tensor-product-pullback, proof."
+   }
+  },
+  {
+   "text": "Apply naturality to L.d i j for each pair of integers. This is exactly the displayed differential compatibility, with no flatness or boundedness assumption.",
+   "uses": [
+    "def-pc-cochain-complex-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 05V5, lemma-pullback-stalk, proof; Tag 03EL, lemma-tensor-product-pullback, proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-sfb-ringed-site-point",
+  "def-trf-geometric-morphism",
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-weil-pbc-ringed-topos-morphism",
+  "lem-pur-independent-composite-algebraic-image",
+  "lem-sfb-point-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 05V5, lemma-pullback-stalk, proof; Tag 03EL, lemma-tensor-product-pullback, proof.",
+  "note": "Concrete inverse-image construction and composition of normalized presentations; tensor and scalar-action steps isolated as the point scalar-extension theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The stalk of pullback of a sheaf of modules on a ringed site is the tensor product of its stalk at the image point with the target stalk ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"TopCat.Presheaf.stalkPullbackHom\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Limits.HasColimits C] →\\n      {X Y : TopCat} →\\n        (f : X ⟶ Y) →\\n          (F : TopCat.Presheaf C Y) →\\n            (x : ↑X) →\\n              F.stalk ((CategoryTheory.ConcreteCategory.hom f) x) ⟶ ((TopCat.Pre\", \"doc\": \"Given a continuous map $f: X \\\\to Y$ between topological spaces, a presheaf $\\\\mathcal{F}$ on $Y$ with values in a category $\\\\mathcal{C}$, and a point $x \\\\in X$, this defines the canonical morphism from\"}\n  {\"name\": \"TopCat.Presheaf.stalkPullbackIso\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Limits.HasColimits C] →\\n      {X Y : TopCat} →\\n        (f : X ⟶ Y) →\\n          (F : TopCat.Presheaf C Y) →\\n            (x : ↑X) →\\n              F.stalk ((CategoryTheory.ConcreteCategory.hom f) x) ≅ ((TopCat.Pre\", \"doc\": \"For any category $\\\\mathcal{C}$ with colimits, topological spaces $X$ and $Y$, a continuous map $f: X \\\\to Y$, a presheaf $\\\\mathcal{F}$ on $Y$, and a point $x \\\\in X$, there is an isomorphism between the\"}\n  {\"name\": \"TopCat.Presheaf.stalkPullbackInv\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Limits.HasColimits C] →\\n      {X Y : TopCat} →\\n        (f : X ⟶ Y) →\\n          (F : TopCat.Presheaf C Y) →\\n            (x : ↑X) →\\n              ((TopCat.Presheaf.pullback C f).obj F).stalk x ⟶ F.stalk ((Categor\", \"doc\": \"Let $f: X \\\\to Y$ be a continuous map between topological spaces, $F$ be a presheaf on $Y$ with values in a category $C$ that has colimits, and $x$ be a point in $X$. This definition constructs the can\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Spec\", \"type\": \"∀ {R S : CommRingCat} (f : R ⟶ S) (p : PrimeSpectrum ↑R),\\n  CategoryTheory.CategoryStruct.comp f (AlgebraicGeometry.StructureSheaf.toPushforwardStalk f p) =\\n    CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.StructureSheaf.toStalk (↑R) p)\\n      ((TopCat.Presheaf.stalkFunctor CommRingCat p).ma\", \"doc\": \"For a ring homomorphism $ f : R \\to S $ and a point $ p $ in $ \\\\operatorname{Spec}(R) $, the composition of $ f $ with the canonical morphism from $ R $ to the pushforward of the structure sheaf on $ \\\\\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Spec\", \"type\": \"∀ {R S : CommRingCat} (f : R ⟶ S) (p : PrimeSpectrum ↑R) {Z : CommRingCat}\\n  (h :\\n    ((TopCat.Presheaf.pushforward CommRingCat (AlgebraicGeometry.Spec.topMap f)).obj\\n            (AlgebraicGeometry.Spec.structureSheaf ↑S).val).stalk\\n        p ⟶\\n      Z),\\n  CategoryTheory.CategoryStruct.comp f\\n      \", \"doc\": \"Let $R$ and $S$ be commutative rings, and let $f: R \\\\to S$ be a ring homomorphism. Let $p$ be a prime ideal of $R$. This theorem establishes the commutativity of a diagram involving canonical maps to \"}\n  {\"name\": \"TopCat.Presheaf.germ_stalkPullbackHom\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X Y : TopCat}\\n  (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (x : ↑X) (U : TopologicalSpace.Opens ↑Y)\\n  (hU : (CategoryTheory.ConcreteCategory.hom f) x ∈ U),\\n  CategoryTheory.CategoryStruct.comp (F.germ\", \"doc\": \"Let $f: X \\\\to Y$ be a continuous map between topological spaces, and let $\\\\mathcal{F}$ be a presheaf on $Y$ with values in a category $\\\\mathcal{C}$. For any point $x \\\\in X$ and any open neighborhood $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Modules X.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this defines the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s st\"}\n  {\"name\": \"TopCat.Presheaf.germ_stalkPullbackInv\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X Y : TopCat}\\n  (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (x : ↑X) (V : TopologicalSpace.Opens ↑X) (hV : x ∈ V),\\n  CategoryTheory.CategoryStruct.comp (((TopCat.Presheaf.pullback C f).obj F).germ V x \", \"doc\": \"Let $f: X \\\\to Y$ be a continuous map between topological spaces, $\\\\mathcal{C}$ a category with all colimits, and $\\\\mathcal{F}$ a presheaf on $Y$ with values in $\\\\mathcal{C}$. For any point $x$ in an o\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: topological stalkPullbackIso and open-immersion restrictStalkNatIso do not state tensor stalk comparison for arbitrary ringed topoi"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of ringed topoi the fibre of tensor pullback is extension of scalars of the fibre",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackObjUnitToUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"PresheafOfModules.Monoidal.tensorObjMap\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {R : CategoryTheory.Functor Cᵒᵖ CommRingCat} →\\n      (M₁ M₂ : PresheafOfModules (R.comp (CategoryTheory.forget₂ CommRingCat RingCat))) →\\n        {X Y : Cᵒᵖ} →\\n          (f : X ⟶ Y) →\\n            CategoryTheory.MonoidalCategoryStr\", \"doc\": \"For a presheaf of modules $ M_1, M_2 $ over a presheaf of commutative rings $ R $ on a category $ \\\\mathcal{C} $, and a morphism $ f: X \\\\to Y $ in $ \\\\mathcal{C}^\\\\text{op} $, this defines the $ R(X) $-l\"}\n  {\"name\": \"SheafOfModules.pullbackIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"The pullback functor for sheaves of modules is isomorphic to the composition of the forgetful functor, the presheaf pullback along the underlying natural transformation, and sheafification with respec\"}\n  {\"name\": \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: topological stalkPullbackIso and open-immersion restrictStalkNatIso do not state tensor stalk comparison for arbitrary ringed topoi"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"pullback\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"TopCat.Presheaf.stalkPullbackIso\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X Y : TopCat} (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (x : ↑X) : F.stalk ((CategoryTheory.ConcreteCategory.hom f) x) ≅ ((TopCat.Presheaf.pullback C f).obj F).stalk x\", \"doc\": \"The isomorphism `ℱ_{f(x)} ≅ (f⁻¹ℱ)ₓ`.\"}\n  {\"name\": \"TopCat.Presheaf.stalkPullbackHom\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X Y : TopCat} (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (x : ↑X) : F.stalk ((CategoryTheory.ConcreteCategory.hom f) x) ⟶ ((TopCat.Presheaf.pullback C f).obj F).stalk x\", \"doc\": \"The morphism `ℱ_{f x} ⟶ (f⁻¹ℱ)ₓ` that factors through `(f_*f⁻¹ℱ)_{f x}`.\"}\n  {\"name\": \"TopCat.Presheaf.stalkPullbackInv\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X Y : TopCat} (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (x : ↑X) : ((TopCat.Presheaf.pullback C f).obj F).stalk x ⟶ F.stalk ((CategoryTheory.ConcreteCategory.hom f) x)\", \"doc\": \"The morphism `(f⁻¹ℱ)ₓ ⟶ ℱ_{f(x)}`.\"}\n  {\"name\": \"TopCat.Presheaf.germToPullbackStalk\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X Y : TopCat} (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (U : TopologicalSpace.Opens ↑X) (x : ↑X) (hx : x ∈ U) : ((TopCat.Presheaf.pullback C f).obj F).obj (Opposite.op U) ⟶ F.stalk ((CategoryTheory.ConcreteCategory.h\", \"doc\": \"The morphism `(f⁻¹ℱ)(U) ⟶ ℱ_{f(x)}` for some `U ∋ x`.\"}\n  {\"name\": \"TopCat.Presheaf.germToPullbackStalk_stalkPullbackHom\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X Y : TopCat} (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (U : TopologicalSpace.Opens ↑X) (x : ↑X) (hx : x ∈ U) : CategoryTheory.CategoryStruct.comp (TopCat.Presheaf.germToPullbackStalk C f F U x hx) (TopCat.Presheaf.s\", \"doc\": \"\"}\n  {\"name\": \"TopCat.Presheaf.germ_stalkPullbackInv\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X Y : TopCat} (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (x : ↑X) (V : TopologicalSpace.Opens ↑X) (hV : x ∈ V) : CategoryTheory.CategoryStruct.comp (((TopCat.Presheaf.pullback C f).obj F).germ V x hV) (TopCat.Presheaf\", \"doc\": \"\"}\n  {\"name\": \"TopCat.Presheaf.germToPullbackStalk_stalkPullbackHom_assoc\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X Y : TopCat} (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (U : TopologicalSpace.Opens ↑X) (x : ↑X) (hx : x ∈ U) {Z : C} (h : ((TopCat.Presheaf.pullback C f).obj F).stalk x ⟶ Z) : CategoryTheory.CategoryStruct.comp (Top\", \"doc\": \"\"}\n  {\"name\": \"TopCat.Presheaf.germ_stalkPullbackInv_assoc\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X Y : TopCat} (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (x : ↑X) (V : TopologicalSpace.Opens ↑X) (hV : x ∈ V) {Z : C} (h : F.stalk ((CategoryTheory.ConcreteCategory.hom f) x) ⟶ Z) : CategoryTheory.CategoryStruct.comp\", \"doc\": \"\"}\n  {\"name\": \"TopCat.Presheaf.pullbackPushforwardAdjunction_unit_app_app_germToPullbackStalk\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X Y : TopCat} (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (V : (TopologicalSpace.Opens ↑Y)ᵒᵖ) (x : ↑X) (hx : (CategoryTheory.ConcreteCategory.hom f) x ∈ Opposite.unop V) : CategoryTheory.CategoryStruct.comp (((TopCat.P\", \"doc\": \"\"}\n  {\"name\": \"TopCat.Presheaf.germ_stalkPullbackHom\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X Y : TopCat} (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (x : ↑X) (U : TopologicalSpace.Opens ↑Y) (hU : (CategoryTheory.ConcreteCategory.hom f) x ∈ U) : CategoryTheory.CategoryStruct.comp (F.germ U ((CategoryTheory.Co\", \"doc\": \"\"}\n  {\"name\": \"TopCat.Presheaf.pullbackPushforwardAdjunction_unit_app_app_germToPullbackStalk_assoc\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X Y : TopCat} (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (V : (TopologicalSpace.Opens ↑Y)ᵒᵖ) (x : ↑X) (hx : (CategoryTheory.ConcreteCategory.hom f) x ∈ Opposite.unop V) {Z : C} (h : F.stalk ((CategoryTheory.ConcreteCa\", \"doc\": \"\"}\n  {\"name\": \"TopCat.Presheaf.germ_stalkPullbackHom_assoc\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X Y : TopCat} (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (x : ↑X) (U : TopologicalSpace.Opens ↑Y) (hU : (CategoryTheory.ConcreteCategory.hom f) x ∈ U) {Z : C} (h : ((TopCat.Presheaf.pullback C f).obj F).stalk x ⟶ Z) :\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: topological stalkPullbackIso and open-immersion restrictStalkNatIso do not state tensor stalk comparison for arbitrary ringed topoi"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*(tensor|pullback)|(tensor|pullback).*stalk",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: topological stalkPullbackIso and open-immersion restrictStalkNatIso do not state tensor stalk comparison for arbitrary ringed topoi"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Stalk of pullback module equals tensor product over the source stalk ring",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TopCat.Presheaf.germToPullbackStalk_stalkPullbackHom\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \"(f : X ⟶ Y) (F : Y.Presheaf C) (U : Opens X) (x : X) (hx : x ∈ U) :\\n  germToPullbackStalk C f F U x hx ≫ stalkPullbackHom C f F x = ((pullback C f).obj F).germ _ x hx\", \"doc\": \"Let $f: X \\\\to Y$ be a continuous map between topological spaces, and let $\\\\mathcal{F}$ be a presheaf on $Y$ with values in a category $\\\\mathcal{C}$ that has colimits. For any point $x \\\\in X$ and any o\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(f : X ⟶ Y) [IsOpenImmersion f] (x : X) :\\n  restrictFunctor f ⋙ toPresheaf _ ⋙ TopCat.Presheaf.stalkFunctor _ x ≅\\n    toPresheaf _ ⋙ TopCat.Presheaf.stalkFunctor _ (f x)\", \"doc\": \"For an open immersion of schemes $f: X \\\\to Y$ and a point $x \\\\in X$, this definition establishes a natural isomorphism between the functor that computes the stalk at $x$ of the pullback of a sheaf of \"}\n  {\"name\": \"TopCat.Presheaf.stalkPullbackHom\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \"(f : X ⟶ Y) (F : Y.Presheaf C) (x : X) : F.stalk (f x) ⟶ ((pullback C f).obj F).stalk x\", \"doc\": \"Given a continuous map $f: X \\\\to Y$ between topological spaces, a presheaf $\\\\mathcal{F}$ on $Y$ with values in a category $\\\\mathcal{C}$, and a point $x \\\\in X$, this defines the canonical morphism from\"}\n  {\"name\": \"SheafOfModules.pullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": SheafOfModules.{v} S ⥤ SheafOfModules.{v} R\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"TopCat.Presheaf.germ_stalkPullbackInv\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \"(f : X ⟶ Y) (F : Y.Presheaf C) (x : X) (V : Opens X) (hV : x ∈ V) :\\n  ((pullback C f).obj F).germ _ x hV ≫ stalkPullbackInv C f F x = F.germToPullbackStalk _ f V x hV\", \"doc\": \"Let $f: X \\\\to Y$ be a continuous map between topological spaces, $\\\\mathcal{C}$ a category with all colimits, and $\\\\mathcal{F}$ a presheaf on $Y$ with values in $\\\\mathcal{C}$. For any point $x$ in an o\"}\n  {\"name\": \"TopCat.Presheaf.germ_stalkPullbackHom\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \"(f : X ⟶ Y) (F : Y.Presheaf C) (x : X) (U : Opens Y) (hU : f x ∈ U) :\\n  F.germ U (f x) hU ≫ stalkPullbackHom C f F x =\\n    ((pushforwardPullbackAdjunction C f).unit.app F).app _ ≫ ((pullback C f).obj F).germ ((Opens.map f).obj U) x hU\", \"doc\": \"Let $f: X \\\\to Y$ be a continuous map between topological spaces, and let $\\\\mathcal{F}$ be a presheaf on $Y$ with values in a category $\\\\mathcal{C}$. For any point $x \\\\in X$ and any open neighborhood $\"}\n  {\"name\": \"TopCat.Presheaf.stalkPullbackIso\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \"(f : X ⟶ Y) (F : Y.Presheaf C) (x : X) : F.stalk (f x) ≅ ((pullback C f).obj F).stalk x\", \"doc\": \"For any category $\\\\mathcal{C}$ with colimits, topological spaces $X$ and $Y$, a continuous map $f: X \\\\to Y$, a presheaf $\\\\mathcal{F}$ on $Y$, and a point $x \\\\in X$, there is an isomorphism between the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_inv_app\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(f : X ⟶ Y) [IsOpenImmersion f] (x : X) (M : Y.Modules) (hxU : x ∈ U) :\\n  M.presheaf.germ _ _ (by simpa) ≫ (restrictStalkNatIso f x).inv.app M =\\n    ((restrictFunctor f).obj M).presheaf.germ U _ hxU\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes, and let $\\\\mathcal{M}$ be a sheaf of $\\\\mathcal{O}_Y$-modules. Let $f^*\\\\mathcal{M}$ be the pullback of $\\\\mathcal{M}$ to $X$. For any point $x \\\\in X$, th\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: topological stalkPullbackIso and open-immersion restrictStalkNatIso do not state tensor stalk comparison for arbitrary ringed topoi"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any geometric morphism of topoi inverse image commutes with tensor products of modules over a sheaf of commutative rings",
+   "results": "SheafOfModules.pullbackComp, SheafOfModules.pullbackIso, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv, PresheafOfModules.Monoidal.tensorObj_map_tmul, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+   "date": "2026-10-23",
+   "verdict": "no match: topological stalks, continuous-site module pullbacks, presheaf tensor operations and cartesian tensor facts do not give the ringed-topos stalk formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"tensor\"",
+   "results": "PresheafOfModulesOfCommRing.Monoidal.tensorObj, PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj, PresheafOfModulesOfCommRing.tensorObj_obj, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight, PresheafOfModulesOfCommRing.Monoidal.tensorHom, PresheafOfModulesOfCommRing.Monoidal.tensorObjMap, PresheafOfModulesOfCommRing.Monoidal.tensorHom_app",
+   "date": "2026-10-23",
+   "verdict": "no match: topological stalks, continuous-site module pullbacks, presheaf tensor operations and cartesian tensor facts do not give the ringed-topos stalk formula"
+  },
+  {
+   "tool": "grep",
+   "query": "inverseImage.*tensor|tensor.*inverseImage|pullback.*[Tt]ensor|[Tt]ensor.*pullback",
+   "results": "Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean, Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean, Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean, Mathlib/CategoryTheory/Monoidal/Cartesian/Over.lean, Mathlib/CategoryTheory/Monoidal/Cartesian/Over.lean, Mathlib/CategoryTheory/Dialectica/Monoidal.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: topological stalks, continuous-site module pullbacks, presheaf tensor operations and cartesian tensor facts do not give the ringed-topos stalk formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A stalk of tensor pullback of modules on ringed topoi is extension of scalars of the stalk",
+   "results": "TopCat.Presheaf.stalkPullbackHom, TopCat.Presheaf.stalk, ModuleCat.ExtendScalars.obj', TopCat.Presheaf.stalkPullbackIso, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_inv_app, TopCat.Presheaf.stalkPullbackInv, PresheafOfModules.Monoidal.tensorObjMap",
+   "date": "2026-10-23",
+   "verdict": "no match: topological stalks, continuous-site module pullbacks, presheaf tensor operations and cartesian tensor facts do not give the ringed-topos stalk formula"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-scheme-naive-cotangent-etale-comparison",
+  "date": "2026-10-23",
+  "group": "Q83"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), supporting alteration chain recorded in the item: coherent naive cotangent cohomology via the scheme-to-space comparison, Stacks Tag 0D0X; the pullback-stalk formula in the omitted-details paragraph of Tag 0D0X.",
+   "via": [
+    "lem-sfb-scheme-naive-cotangent-etale-comparison",
+    "lem-sfb-affine-etale-naive-cotangent-presentation",
+    "lem-sfb-space-naive-cotangent-finite-local-model",
+    "lem-sfb-space-naive-cotangent-coherent",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-ringed-topos-pullback-stalk",
+  "worker": "stage1",
+  "summary": "Q105 follows Stacks 05V5, reusing the existing arbitrary-geometric-inverse-image tensor theorem, with explicit composite operation, scalar action, tensor swap and differential arguments; no new nodes. Corrected imported doubled TeX escapes only.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images, proof (3), through the recorded alteration/cotangent chain: Tag 0D0X uses the ringed-topos pullback-stalk formula. Latest blueprint proof (3) read; no unit route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-geometric-module-construction",
+    "why": "Generic construction of module inverse image from a finite-limit-preserving left adjoint; the unit does not reconstruct algebraic operations."
+   },
+   {
+    "node": "lem-pur-independent-inverse-image-tensor-comparison",
+    "why": "Generic normalized tensor preservation for arbitrary geometric inverse images, used at the point p; no unit-specific replacement route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-geometric-module-construction",
+  "lem-pur-independent-inverse-image-tensor-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q105-c32c46403",
+  "group": "Q105",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-c32c46403 (reviewer sub-agent of L); spot-checked: I read Stacks 05V5 (sites-modules.tex:6969), 03EL and 05V2 (sites.tex:8639). The item matches 05V5 hypothesis by hypothesis. There are no new nodes. The only statement change from live is 'complexes' becoming 'cochain complexes [def-pc-cochain-complex-modules]', which is a clarification and not a weakening; I checked it against both citers. Steps 1-5 check out. Step 1: the composite inverse image is literal by def-trf-geometric-morphism, and the operations transport because finite products are preserved. Step 2: the hypotheses of geometric-module-construction hold for u^{-1} (with A=u^{-1}S and c=id) and for p^{-1}, and zero and one are transported by uniqueness of neutral elements. Step 3: lem-pur-independent-inverse-image-tensor-comparison applies with F=p^{-1}, A, M=R and N=u^{-1}M. Step 4: R_p-linearity holds because the universal tuple surjects onto R_p×R_p×N_p, and the tensor swap is balanced and its own inverse. Step 5: the chain-map equation follows from naturality. Edge cases tested: u=id, M=0, R_p=0, and the nonflat map Z→Z/2. Duplicate search (rg -L for 05V5/05V2 and stalk-pullback phrases): only specialized appliers exist, so no duplicate. Batch-5 flag def-trf-geometric-morphism: a general definition whose closure is only def-weil-pbc-topos and the size convention, not a step of the trace formula or Poincaré duality proofs, so accepted. tool_uses (geometric-module-construction, independent tensor comparison) are generic and accepted. FIX (B3): the statement used 'point (a geometric morphism)' and the composite q=u∘p without citing a definition. I added [def-trf-geometric-morphism] there, plus a note that q is the composite geometric morphism, and added the id to stmt_deps. That node is already in proof_deps and the change creates no cycle.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedToposPullbackStalk",
+  "declaration": "CategoryTheory.RingedToposMorphism.pullback_stalk",
+  "declarations": [
+   "CategoryTheory.RingedToposMorphism.geometric",
+   "CategoryTheory.pullbackStalkTensor",
+   "CategoryTheory.pullbackStalkTmul",
+   "CategoryTheory.pullbackStalkScale",
+   "CategoryTheory.pullbackStalkTensorMap",
+   "CategoryTheory.RingedToposMorphism.pullback_stalk"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RingedToposPullbackStalk.lean",
+  "statement": "theorem RingedToposMorphism.pullback_stalk {C D : Type u} [SmallCategory C] [SmallCategory D] {J : GrothendieckTopology C} {K : GrothendieckTopology D} (R : Sheaf J CommRingCat.{u}) (S : Sheaf K CommRingCat.{u}) (f : RingedToposMorphism (ringSheaf R) (ringSheaf S)) (p : GeometricMorphism (Type u) (Sheaf J (Type u))) (s : RingedSitePoint R p) : ∃ (A : Sheaf J CommRingCat.{u}) (I : AlgebraicInverseImage f.inverse S A) (c : A ⟶ R), (sheafCompose J (forget CommRingCat.{u})).map c = I.ringUnderlying.inv ≫ f.ringMap ∧ ∃ (t : RingedSitePoint S (p.comp f.geometric)) (b : t.ring →+* s.ring), (∀ x : p.inverse.obj (f.inverse.obj ((sheafCompose K (forget CommRingCat.{u})).obj S)), b (t.ringUnderlying.hom x) = s.ringUnderlying.hom (p.inverse.map f.ringMap x)) ∧ ∃ e : ∀ M : ringedSiteModules.{u} (ringSheaf S), s.modules.obj (changeOfRings.{u, u, u} c (I.modules.obj M)) ≃+ pullbackStalkTensor b (t.modules.obj M), (∀ (M : ringedSiteModules.{u} (ringSheaf S)) (r : s.ring) (x : s.modules.obj (changeOfRings.{u, u, u} c (I.modules.obj M))), e M (r • x) = pullbackStalkScale b (t.modules.obj M) r (e M x)) ∧ (∀ (M N : ringedSiteModules.{u} (ringSheaf S)) (a : M ⟶ N) (x : s.modules.obj (changeOfRings.{u, u, u} c (I.modules.obj M))), e N (s.modules.map (changeOfRingsHom.{u, u, u} c (I.modules.obj M) (I.modules.map a)) x) = pullbackStalkTensorMap b (t.modules.map a) (e M x)) ∧ (∀ (M : ringedSiteModules.{u} (ringSheaf S)) (T : Sheaf J (Type u)) (r : T ⟶ (sheafCompose J (forget CommRingCat.{u})).obj R) (m : T ⟶ (SheafOfModules.RingedTensor.underlying A).obj (I.modules.obj M)) (z : T ⟶ (SheafOfModules.RingedTensor.underlying R).obj (changeOfRings.{u, u, u} c (I.modules.obj M))), (∀ (W : Cᵒᵖ) (x : T.obj.obj W), z.hom.app W x = ((PresheafOfModules.sheafificationAdjunction.{u, u, u, u} (𝟙 (ringSheaf R).obj)).unit.app (changeOfRingsPresheaf.{u, u, u} c (I.modules.obj M))).app W ((@id (R.obj.obj W) (r.hom.app W x)) ⊗ₜ[A.obj.obj W, (c.hom.app W).hom] (@id ((I.modules.obj M).val.obj W) (m.hom.app W x)))) → ∀ x : p.inverse.obj T, e M ((s.moduleUnderlying.inv.app (changeOfRings.{u, u, u} c (I.modules.obj M))) (p.inverse.map z x)) = pullbackStalkTmul b (t.modules.obj M) ((t.moduleUnderlying.inv.app M) (p.inverse.map (m ≫ I.moduleUnderlying.hom.app M) x)) (s.ringUnderlying.hom (p.inverse.map r x))) ∧ ∀ (L : CochainComplex (ringedSiteModules.{u} (ringSheaf S)) ℤ) (i j : ℤ) (x : s.modules.obj (changeOfRings.{u, u, u} c (I.modules.obj (L.X i)))), e (L.X j) (s.modules.map (changeOfRingsHom.{u, u, u} c (I.modules.obj (L.X i)) (I.modules.map (L.d i j))) x) = pullbackStalkTensorMap b (t.modules.map (L.d i j)) (e (L.X i) x)",
+  "branch": "sheaf-dag",
+  "by": "Q158",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-81dce5e86",
+  "group": "Q158",
+  "result": "pass",
+  "note": "Read node, Stacks 05V5 (sites-modules.tex), all 9 stmt_deps' Lean (RingedToposMorphism, GeometricMorphism.comp, RingedSitePoint, AlgebraicInverseImage, changeOfRings/Presheaf/Hom, RingedTensor.ringSheaf/underlying, CochainComplex). Composite point is literal p.comp f.geometric; c pinned to u♯ via faithful forget; b pinned as stalk of u♯ on all elements; e additive equiv to Mathlib M_q⊗_{S_q}R_p with R_p-linearity, naturality, generalized pure-tensor formula m_q⊗r_p (determines e) and the differential equation for every ℤ-cochain complex, a chain-level iso and not per-degree cohomology, so the derived-form rule does not apply. s is a parameter, but RingedSitePoint.nonempty makes it no extra hypothesis; t, A, I are existential but normalized and canonical up to iso; universe u is forced by the recorded RingedToposMorphism. Edge cases M=0, R_p=0, no point, non-flat u♯ covered. lean.statement verbatim; node statement unchanged; added stmt_deps are 3 landed definition nodes, acyclic; helpers have real data and docstrings, no name clash; proof sorry only; report has Worker report and Second reading. Minor note: the ring/group form of the (u^{-1}H)_p≅H_q comparison is implicit (definitional plus normalized presentations), accepted. No compile (no FIX)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261027T094446-L-230316",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

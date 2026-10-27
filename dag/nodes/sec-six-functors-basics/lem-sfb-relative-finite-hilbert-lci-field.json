@@ -1,0 +1,281 @@
+{
+ "id": "lem-sfb-relative-finite-hilbert-lci-field",
+ "kind": "statement",
+ "title": "A positive-degree finite unramified lci slice in a space over a field",
+ "statement": "Let $k$ be any field [def-weil-field], and let $X$ be a nonempty algebraic space over $\\operatorname{Spec}k$ [def-weil-affine-spectrum, def-trf-algebraic-space], with universes as in [def-weil-size-convention]. Suppose $X\\to\\operatorname{Spec}k$ is locally of finite presentation on etale scheme charts [def-sbc-locally-finite-presentation]. There exist an integer $d\\geq1$, a scheme $Z$ finite locally free of degree $d$ over $k$ [def-pc-finite-locally-free], and a $k$-map $Z\\to X$ which is unramified and a local complete intersection morphism in the chartwise Koszul-regular sense defined in [def-sfb-relative-finite-hilbert-groupoids]. No perfection or algebraic closedness of $k$, nor smoothness, separation, or quasi-compactness of $X$, is assumed. The field $k$ is not replaced by an extension.",
+ "source": {
+  "document": "literature/stacks-project/criteria.tex",
+  "place": "Tag 06DA (lemma-lci-surjective), proof applied to a nonempty locally finitely presented algebraic space over a field."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-finite-locally-free",
+  "def-sfb-relative-finite-hilbert-groupoids"
+ ],
+ "proof": [
+  {
+   "text": "Choose an etale scheme atlas of $X$ and a nonempty affine open chart $V$ of that atlas. This is possible because the atlas covers the nonempty space. The structure map $V\\to\\operatorname{Spec}k$ is locally of finite presentation by the chartwise hypothesis; since $V$ is affine it is of finite type. Its Cohen–Macaulay locus $C$ is a nonempty open by the generic Cohen–Macaulay theorem for finite-type $k$-algebras. The Jacobson theorem supplies a point $v\\in C$ closed in $V$: closed points of $V$ are dense, so they meet the nonempty open $C$. In particular $\\mathcal O_{V,v}$ is Noetherian and its depth equals its dimension. The structure map is flat, since every module over a field has a basis and tensoring a vector-space injection preserves injectivity.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism",
+    "lem-trf-generic-cm-locus-field",
+    "lem-sc-lft-over-field-jacobson-space",
+    "def-weil-flat-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06DA (lemma-lci-surjective), proof: choose V and a closed Cohen–Macaulay point"
+   }
+  },
+  {
+   "text": "Apply the regular slicing theorem to $V\\to\\operatorname{Spec}k$ and the closed point $v$. Its fibre is $V$ itself, its flatness was checked in Step 1, and its fibre stalk is the Cohen–Macaulay Noetherian ring just obtained. We obtain a regular immersion $i:Z\\to V$ with $Z\\ne\\varnothing$, $|Z|$ a singleton, and $Z\\to\\operatorname{Spec}k$ flat and locally of finite presentation. Choose an affine open neighbourhood of its sole point; it is all of $Z$, since an open subscheme with full underlying open set is the whole scheme. Thus $Z$ is affine and of finite type over $k$, and its singleton space has dimension zero.",
+   "uses": [
+    "lem-sfb-cm-closed-fibre-regular-slice",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06DA (lemma-lci-surjective), proof: apply More on Morphisms Tag 0570"
+   }
+  },
+  {
+   "text": "Apply the finite-type dimension-zero theorem to $Z$: its structure morphism is finite. Together with the flatness and local finite presentation from Step 2, this is finite locally free. Write $Z=\\operatorname{Spec}B$; finiteness means that $B$ is a finite-dimensional $k$-vector space. Set $d=\\dim_k B$. Since $Z$ has a point, $B\\ne0$, so $d\\ge1$. The sole fibre over $\\operatorname{Spec}k$ is $Z$ itself; hence its dimension of global sections is $d$, exactly the degree condition in the definition.",
+   "uses": [
+    "lem-pc-algebraic-dim-zero-affine-finite",
+    "def-weil-finite-integral-morphism",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06DA (lemma-lci-surjective), proof: finite and then finite locally free of positive degree"
+   }
+  },
+  {
+   "text": "The immersion $i$ is unramified directly from the scheme definition: locally it is a quotient of rings followed by an open inclusion, hence is locally of finite type and a monomorphism; its diagonal is an isomorphism onto $Z\\times_VZ$, therefore an open immersion. The etale map $e:V\\to X$ is unramified, and the space-composition theorem makes $e\\circ i$ unramified.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-unramified-morphism",
+    "lem-sfb-space-unramified-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06DA (lemma-lci-surjective), proof: unramifiedness of the composite"
+   }
+  },
+  {
+   "text": "Regularity of $i$ means that near each source point its closed-immersion factor has ideal generated by a regular sequence. Such a sequence is Koszul-regular by the regular-to-Koszul theorem. Its other factor is an open immersion, hence smooth: an affine infinitesimal lifting problem factors through the open exactly when its underlying topological image does, and a nilpotent thickening does not change that image; open restrictions are locally finitely presented. Therefore this is a factorization witnessing the chartwise lci condition. The etale map $e$ is lci by the space-lci theorem, and its composition with $i$ is lci by that same theorem. Both maps and the composite are over $k$, so the finite locally free $Z$ and $d$ from Step 3 give the required slice over the original field.",
+   "uses": [
+    "lem-sfb-cm-closed-fibre-regular-slice",
+    "lem-weil-pbc-regular-sequence-koszul-regular",
+    "def-sbc-smooth-morphisms",
+    "def-sfb-relative-finite-hilbert-groupoids",
+    "lem-sfb-space-lci-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06DA (lemma-lci-surjective), proof: regular immersion is lci and compose with the etale chart"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "lem-trf-generic-cm-locus-field",
+  "lem-sc-lft-over-field-jacobson-space",
+  "def-weil-flat-morphism",
+  "lem-sfb-cm-closed-fibre-regular-slice",
+  "lem-pc-algebraic-dim-zero-affine-finite",
+  "def-weil-finite-integral-morphism",
+  "def-pc-finite-locally-free",
+  "def-weil-closed-immersion",
+  "def-weil-unramified-morphism",
+  "lem-sfb-space-unramified-permanence",
+  "lem-weil-pbc-regular-sequence-koszul-regular",
+  "def-sbc-smooth-morphisms",
+  "def-sfb-relative-finite-hilbert-groupoids",
+  "lem-sfb-space-lci-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/criteria.tex",
+  "place": "Tag 06DA (lemma-lci-surjective), geometric construction in the proof; finiteness via the existing Tag 06LH theorem rather than the equivalent isolated-point formulation 00PJ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every nonempty locally finitely presented algebraic space over a field contains an unramified local complete intersection finite locally free scheme of positive degree",
+   "results": "8 hits; Algebra.isOpen_unramifiedLocus, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified, Algebra.Smooth.exists_finiteType, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.instFormallyUnramified",
+   "date": "2026-10-23",
+   "verdict": "no match: unramified-locus and smooth-chart facts do not produce a finite positive-degree lci slice in an arbitrary nonempty space over an imperfect field"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Surjectivity on field objects of the union of positive degree unramified lci Hilbert stacks of a flat surjective presentation",
+   "results": "8 hits; AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass, RingHom.FormallyUnramified.of_surjective, Algebra.FormallyUnramified.of_surjective, AlgebraicGeometry.instSurjectiveDescI₀SchemeF, AlgebraicGeometry.pointsPi_surjective, AlgebraicGeometry.specTargetImageRingHom_surjective, AlgebraicGeometry.Surjective.sigmaDesc_of_union_range_eq_univ, AlgebraicGeometry.pointsPi_surjective_of_isAffine",
+   "date": "2026-10-23",
+   "verdict": "no match: unramified-locus and smooth-chart facts do not produce a finite positive-degree lci slice in an arbitrary nonempty space over an imperfect field"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every nonempty locally finitely presented algebraic space over a field contains an unramified local complete intersection finite locally free scheme of positive degree",
+   "results": "8 hits; AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.Scheme.mk.noConfusion, AlgebraicGeometry.FormallyUnramified.recOn, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.FormallyUnramified.casesOn, Algebra.Unramified.finiteType, AlgebraicGeometry.Scheme.local_affine, Algebra.unramifiedLocus",
+   "date": "2026-10-23",
+   "verdict": "no match: unramified-locus and smooth-chart facts do not produce a finite positive-degree lci slice in an arbitrary nonempty space over an imperfect field"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsFinite\"",
+   "results": "12 hits; AlgebraicGeometry.IsFinite.instContainsIdentitiesScheme, AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme, AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated, AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsFinite.instIsIntegralHom, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType",
+   "date": "2026-10-23",
+   "verdict": "no match: unramified-locus and smooth-chart facts do not produce a finite positive-degree lci slice in an arbitrary nonempty space over an imperfect field"
+  },
+  {
+   "tool": "grep",
+   "query": "HilbertStack|lci.*surjective|slice.*Cohen",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: unramified-locus and smooth-chart facts do not produce a finite positive-degree lci slice in an arbitrary nonempty space over an imperfect field"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every nonempty locally finitely presented algebraic space over a field admits a finite locally free positive degree unramified local complete intersection slice",
+   "results": "8 hits: AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.LocallyOfFinitePresentation, Algebra.Smooth.exists_finiteType, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, Algebra.isOpen_unramifiedLocus",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme smooth-chart and unramified facts do not construct a finite positive-degree unramified lci slice in an arbitrary algebraic space."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every nonempty locally finitely presented algebraic space over a field admits a finite locally free positive degree unramified local complete intersection slice",
+   "results": "8 hits: AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, Algebra.Unramified.finiteType, Algebra.unramifiedLocus, AlgebraicGeometry.FormallyUnramified.casesOn, AlgebraicGeometry.FormallyUnramified.recOn, AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE, Algebra.IsStandardSmooth.finitePresentation, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme smooth-chart and unramified facts do not construct a finite positive-degree unramified lci slice in an arbitrary algebraic space."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonempty finite type scheme over any field has a finite subscheme regularly immersed in an etale chart",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, Algebra.Etale.exists_subalgebra_fg, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme smooth-chart and unramified facts do not construct a finite positive-degree unramified lci slice in an arbitrary algebraic space."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalCompleteIntersection\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme smooth-chart and unramified facts do not construct a finite positive-degree unramified lci slice in an arbitrary algebraic space."
+  },
+  {
+   "tool": "grep",
+   "query": "HilbertStack|lci.*surjective|finite.*lci.*slice",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme smooth-chart and unramified facts do not construct a finite positive-degree unramified lci slice in an arbitrary algebraic space."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fppf-stack-algebraicity-bootstrap",
+  "date": "2026-10-23",
+  "group": "O2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Power lifting implies universal submersiveness of an affine invariant quotient. Fppf presentation used after the affine invariant quotient construction. Supporting input: Apply the flat-groupoid algebraicity theorem to the action groupoid; unlike the smooth-groupoid theorem this does not require H smooth. Algebraicity step: criteria.tex Tag 06FI applies the general bootstrap theorem Tag 06DC to the flat locally finitely presented quotient presentation. Supporting input: Tag 06DA (lemma-lci-surjective), proof applied to a nonempty locally finitely presented algebraic space over a field.",
+   "via": [
+    "lem-sfb-fppf-stack-algebraicity-bootstrap",
+    "lem-sfb-flat-groupoid-algebraic-quotient",
+    "lem-sfb-flat-affine-action-stack-presentation",
+    "lem-sfb-power-lifting-quotient-submersive",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-relative-finite-hilbert-lci-field",
+  "worker": "stage1",
+  "summary": "Followed the actual field-slice construction in Tag 06DA. Used existing generic Cohen–Macaulay locus, Jacobson and zero-dimensional finiteness theorems; added the regularity-retaining 0570 slice and general lci-composition/etale theorem. Checked all cited statements, retained the original statement and original field, and wrote all citation quotes.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Power lifting implies universal submersiveness of an affine invariant quotient. Fppf presentation used after the affine invariant quotient construction. Supporting input: Apply the flat-groupoid algebraicity theorem to the action groupoid; unlike the smooth-groupoid theorem this does not require H smooth. Algebraicity step: criteria.tex Tag 06FI applies the general bootstrap theorem Tag 06DC to the flat locally finitely presented quotient presentation. Supporting input: Tag 06DA (lemma-lci-surjective), proof applied to a nonempty locally finitely presented algebraic space over a field. The current latest blueprint direct-image proof (3) provides the high-level ancestor route. The inherited ancestor is null (blueprint_refs.py ancestor prints None); retained its via chain. Steps 1–5 realize the supporting 06DA field-slice construction.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-generic-cm-locus-field",
+    "why": "Generic algebraic-geometric or commutative-algebra tool for the Tag 06DA construction; the six-functor unit has no replacement for this foundational result."
+   },
+   {
+    "node": "lem-sc-lft-over-field-jacobson-space",
+    "why": "Generic algebraic-geometric or commutative-algebra tool for the Tag 06DA construction; the six-functor unit has no replacement for this foundational result."
+   },
+   {
+    "node": "lem-pc-algebraic-dim-zero-affine-finite",
+    "why": "Generic algebraic-geometric or commutative-algebra tool for the Tag 06DA construction; the six-functor unit has no replacement for this foundational result."
+   },
+   {
+    "node": "lem-weil-pbc-regular-sequence-koszul-regular",
+    "why": "Generic algebraic-geometric or commutative-algebra tool for the Tag 06DA construction; the six-functor unit has no replacement for this foundational result."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-generic-cm-locus-field",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-pc-algebraic-dim-zero-affine-finite",
+  "lem-weil-pbc-regular-sequence-koszul-regular"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NW-f11275410",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-f11275410 (reviewer sub-agent of L); spot-checked: The delivery follows Stacks 06DA (criteria.tex, lemma-lci-surjective) step by step, and I checked each step against the statements it cites. Step 1: a nonempty affine chart V of finite type over k; the Cohen–Macaulay locus is dense open (lem-trf-generic-cm-locus-field = 00RG); the Jacobson node gives a closed point in it; flatness over a field is elementary. Step 2: the new 0570 slice node applies with every hypothesis checked, so Z is a single point and therefore affine of dimension 0. Step 3: 06LH finiteness gives finite locally free of degree d=dim_k B, which is at least 1. Step 4: an immersion is unramified directly from the definition, and lem-sfb-space-unramified-permanence covers etale and composition. Step 5: a regular sequence is Koszul-regular, an open immersion is smooth, and the new lci node gives etale-lci and composition (06C8). The item statement is unchanged, agrees with 06DA's field claim and is not weakened. There is no cycle and proof_deps equals the union of the uses. New nodes: the regular slice keeps the regularity that lem-trf-cm-closed-point-flat-quasifinite-slice drops, and the lci-composition node (06C8/06C9) is true. Neither is a duplicate: I checked them against 06LI, 06LW, 0571, 06CE, the source-locus node, the syntomic node and the trf lci nodes. FIX: the slice node's regularity clause cited a ring-level regular sequence on an arbitrary open subscheme, which is not meaningful there. I restated it affine-locally in Stacks' form (Z' ≅ Spec(A/I) in an affine open Spec A, with I generated by an A-regular sequence, r=0 allowed), made 'Z→S' the composite f∘i, and added def-weil-affine-spectrum and def-weil-open-immersion to stmt_deps. I tested it on k[x,y]/(xy), the affine line over k at a closed point, k[ε], and the affine line over Z_p at (p,t). Batch-5 flags: lem-trf-generic-cm-locus-field is generic commutative algebra (00RG), and the other three flags reach the trace-formula chapter only through the general definition def-trf-algebraic-space. All are outside the trace-formula and Poincaré-duality statements and their proofs, so I accept them. I accept the four declared tool_uses as generic. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeFiniteHilbertLciField",
+  "declaration": "AlgebraicGeometry.exists_finiteLocallyFree_positiveDegree_unramified_lci_slice",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeFiniteHilbertLciField.lean",
+  "statement": "theorem exists_finiteLocallyFree_positiveDegree_unramified_lci_slice (k : Type u) [Field k] (X : AlgebraicSpace (Spec (.of k))) (hne : ∃ T : Over (Spec (.of k)), Nonempty T.left ∧ Nonempty (X.obj.obj.obj (op T))) (hlfp : ∀ (V : Over (Spec (.of k))) (a : yoneda.obj V ⟶ X.obj.obj), AlgebraicSpace.IsEtale a → LocallyOfFinitePresentation V.hom) : ∃ (d : ℕ) (_ : 1 ≤ d) (Z : Over (Spec (.of k))) (i : yoneda.obj Z ⟶ X.obj.obj), Z.hom.IsFiniteLocallyFreeOfDegree d ∧ RelativeFiniteHilbert.SpaceProperty (fun _ _ f ↦ IsUnramified f) i ∧ RelativeFiniteHilbert.SpaceProperty (fun _ _ f ↦ RelativeFiniteHilbert.SchemeLci f) i",
+  "branch": "newtargets-dag",
+  "by": "Q155",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d78de4d68",
+  "group": "Q155",
+  "result": "pass",
+  "note": "Checked lem-sfb-relative-finite-hilbert-lci-field against Stacks 06DA proof (criteria.tex l.2736-2801) clause by clause: any field k: Type u, X : AlgebraicSpace (Spec k), nonemptiness via a section over a nonempty test scheme (not a rational point), lfp over the scheme base rendered as every étale chart lfp over k (equivalent to the def node's existential SpaceProperty by étale-locality, so not stronger), ∃ d≥1, Z.hom.IsFiniteLocallyFreeOfDegree d, i : yoneda Z ⟶ X with SpaceProperty IsUnramified and SpaceProperty SchemeLci exactly as in def-sfb-relative-finite-hilbert-groupoids IsLciObject. No extra hypotheses or universe restriction; no field extension. Edge cases: empty X excluded, X=Spec k identity slice (empty Koszul sequence), imperfect k, d=0 excluded. Node unchanged except lean; lean.statement verbatim; sorry only, no definitions; source/blueprint/proof-step docstrings present; report has Worker report and Second reading by Q155. No file changed, so no compile."
+ }
+}

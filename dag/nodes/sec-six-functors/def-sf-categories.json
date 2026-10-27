@@ -137,45 +137,44 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q63-16b87a0dc (reviewer sub-agent of L); spot-checked: Read the full definition, all 26 dependency statements, unit/chapter route, and cited source passages. Completed-integral, scalar-localization, common-stage, finite-Tor and interval conventions check out on small cases. No new nodes, cycles or repairs. No comparison with upstream condensed coefficient categories is assumed. Detailed review written to review.md."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
-  "module": "Sheaf.SixFunctors.SfCategories",
-  "declaration": "WeilConjectures.sfAmbientDerivedCategory",
-  "declarations": [
-   "WeilConjectures.sfAmbientDerivedCategory",
-   "WeilConjectures.sfAmbientDerivedCategoryPlus",
-   "WeilConjectures.sfAmbientDerivedCategoryMinus",
-   "WeilConjectures.sfAmbientDerivedCategoryBounded",
-   "WeilConjectures.sfConstantDerivedCategory",
-   "WeilConjectures.sfEtaleAllowableTorsionCategory",
-   "WeilConjectures.sfProEtaleAllowableTorsionCategory",
-   "WeilConjectures.sfEtaleConstructibleCategory",
-   "WeilConjectures.sfEtaleConstructibleFiniteTorCategory",
-   "WeilConjectures.sfEtaleConstructibleIntervalCategory",
-   "WeilConjectures.sfFiniteConstructibleCategory",
-   "WeilConjectures.sfFiniteConstructibleFiniteTorCategory",
-   "WeilConjectures.sfFiniteConstructibleIntervalCategory",
-   "WeilConjectures.sfIntegralAmbientDerivedCategory",
-   "WeilConjectures.sfIntegralConstructibleIntervalCategory",
-   "WeilConjectures.sfRationalConstructibleIntervalCategory",
-   "WeilConjectures.sfRationalConstructibleFiniteTorCategory",
-   "WeilConjectures.sfCommonStageConstructibleFiniteTorCategory",
-   "WeilConjectures.sfCommonStageConstructibleIntervalCategory"
-  ],
-  "file": "lean/Sheaf/SixFunctors/SfCategories.lean",
-  "statement": "abbrev sfAmbientDerivedCategory",
-  "branch": "newtargets-dag",
-  "by": "Q94",
-  "date": "2026-10-17",
-  "existing": false,
-  "note": "Ambient aliases, ringed-module allowable torsion on both sites, and finite/higher-stage full subcategories. Existing integral, finite-Tor, rationalization and common-stage constructions are imported unchanged, as detailed in the module docstring and worker report. 2026-10-20 (U): module Sheaf.SixFunctors.SfCategories deleted (dead: no target reaches it); this node is not reached either."
+  "module": "Mathlib.Algebra.Homology.DerivedCategory.Basic",
+  "declaration": "DerivedCategory",
+  "statement": "def DerivedCategory : Type (max u v)",
+  "branch": "mathlib",
+  "by": "Q73",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "§1(B): the recorded Sheaf.SixFunctors.SfCategories module was deleted on 2026-10-20, and scompile.py --source confirms it is unavailable. Bind the ambient category notation to Mathlib DerivedCategory itself, specialized to the recorded ringed-site module category (no new definition). Its Plus, Minus and Bounded subcategories are the existing Mathlib t-structure subcategories; the constructible, Tor, interval and higher coefficient categories remain the existing notions explicitly cited in this node, rather than requiring the deleted aliases. The consumer uses the existing fixed-coefficient etale specialization DerivedCategoryModule and intrinsic proEtaleDerivedCategory, with the recorded constructibility and interval predicates."
  },
  "reviewed_lean": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-255d7c8d0",
-  "group": "Q94",
-  "result": "fix",
-  "note": "Reused the existing intrinsic interval construction through a transparent alias and corrected the report. Source, dependencies, clauses, universes, edge cases and route checks passed; corrected modules compile cleanly."
+  "reviewer": "NT-stage2-cc-b1edf1c35",
+  "group": "Q73",
+  "result": "pass",
+  "note": "Clause-by-clause match: PurityFiniteSetting; finite-type Z,T over k; closed i with quasi-compact complementary j; both HasOpenComplementCondition conjuncts; bounded constructible K; r<=s; i^! = canonical rightAdjoint of R(lowerStar i); C_p = canonical finiteCoefficientIntrinsicDerivedComparison. (a) has only the cohomology premise and gives etale isBoundedConstructible ∧ homologyConcentratedIn [r,s+c+1] plus pro-etale constructibleInterval. (b) has only the Tor premise and gives etale boundedConstructible ∧ hasTorAmplitudeIn, intrinsicFiniteTorsionConstructible, and HasProEtaleTorAmplitude, which tests every pro-etale module sheaf and underlies the stmt_dep finiteTorConstructible. Edge cases checked: empty Z, i=id with c=0, A^1 origin in [0,2]. lean.statement verbatim; docstrings with source, blueprint and proof steps; only sorry; public/plain imports correct. The def-sf-categories lean-only rebind to Mathlib DerivedCategory (existing:true, with note) is accepted: the old SfCategories module was deleted 2026-10-20 and no Lean uses it. Maintainer note: that record now binds only the ambient category. Advisory: canonical declarations whose owners are outside stmt_deps; stage 3 needs a coefficient transport for prop-exc-closed-tor (Type (u+1) E). No recompile, by instruction."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Fix a scheme $T$ and an admissible coefficient ring\n$\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\Qlb\\}$ of [def-sf-setting],\nregarded as a condensed ring, with coefficient sheaf\n$\\Lambda_T=p_T^*\\Lambda$ on the small pro-étale site\n([det-def-sfb-pulled-back-coefficients]). The *ambient* categories are the\nordinary derived categories of $\\Lambda_T$-modules on $T_{\\mathrm{pro\\acute et}}$\n([det-def-sfb-derived-categories])\n\n$$\nD(T,\\Lambda)=D(T_{\\mathrm{pro\\acute et}},\\Lambda),\\quad D^+(T,\\Lambda),\\quad D^-(T,\\Lambda),\\quad D^b(T,\\Lambda),\n$$\n\ntogether with, for a set of primes $P$ invertible on $T$, the full\nsubcategory $D^+_{P\\text{-tor}}(T,\\Lambda)$ of complexes whose geometric\nstalks are torsion with prime divisors in $P$\n(sbc-def-derived-categories-with-allowable-torsion). The *small*\ncategories are the full subcategories\n\n$$\n\\Dbc(T,\\Lambda)\\subseteq D^b(T,\\Lambda),\\qquad\n\\Dctf(T,\\Lambda)\\subseteq\\Dbc(T,\\Lambda),\\qquad\nD_c^{[a,b]}(T,\\Lambda)\\subseteq\\Dbc(T,\\Lambda)\n$$\n\nof bounded complexes with constructible cohomology sheaves, of those of\nfinite Tor amplitude over $\\Lambda_T$, and of those with cohomology\nconcentrated in $[a,b]$ ([sk-def-sfb-constructible],\n[det-def-sfb-bounded-constructible]). For $\\Lambda=\\mathcal O_E,E,\\Qlb$ one has\n$\\Dctf=\\Dbc$ ([lem-integral-ctf-equals-bc]).\n\nFor finite $\\Lambda=A_{E,n}$, and only there, the same definitions may be read\non the small étale site of def:weil-pbc-etale-site, with\n$\\Dbc(T_{\\mathrm{\\acute et}},A)$, $\\Dctf(T_{\\mathrm{\\acute et}},A)$ and\n$D_c^{[a,b]}(T_{\\mathrm{\\acute et}},A)$ as in\ndef:weil-finite-torsion-constructibility, def:weil-finite-tor-amplitude and\ndef:weil-constructible-intervals; the comparison $\\nu_T^*$ identifies them\nwith the pro-étale categories above ([def-sf-setting]).",
+  "proof": [],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

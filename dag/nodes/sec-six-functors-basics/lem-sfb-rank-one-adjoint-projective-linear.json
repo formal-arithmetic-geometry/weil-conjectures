@@ -1,0 +1,278 @@
+{
+ "id": "lem-sfb-rank-one-adjoint-projective-linear",
+ "kind": "statement",
+ "title": "The adjoint quotient in semisimple rank one is PGL2",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups are affine $F$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], with closed subgroup schemes [def-sc-group-scheme-subgroup]. Reductivity and maximal tori have the meanings of [def-sfb-reductive-torus-centralizer-terminology]. The centre $Z(G)$ is the subgroup functor of points commuting with every point after every commutative algebra extension. Quotients are represented fppf sheaf quotients as in [lem-sfb-affine-normal-quotient-geometry]. Let $G$ be reductive and $R(G)$ its largest smooth connected solvable normal subgroup. Solvable means that successive commutator subgroup schemes eventually become trivial. Assume that every maximal torus of $G/R(G)$ has dimension one. Then there exists a faithfully flat homomorphism $q:G\\to\\operatorname{PGL}_{2,F}$ with scheme-theoretic kernel exactly $Z(G)$; in particular $G/Z(G)\\simeq\\operatorname{PGL}_{2,F}$. Here $\\operatorname{PGL}_{2,F}$ is the fppf sheaf quotient of the invertible $2\\times2$ matrices by scalar matrices [lem-sfb-projective-matrix-central-cover]. No hypothesis on the characteristic is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 20.22, printed p.415, and Theorem 20.16, pp.412--413: action on the Borel quotient projective line has kernel the full scheme-theoretic centre."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "lem-sfb-projective-matrix-central-cover",
+  "def-sfb-rank-one-root-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "Choose a maximal torus $T$ and a Borel $B^+$ containing it using [lem-sfb-general-borel-flag-variety] and [lem-sfb-borel-maximal-torus-conjugacy] (start with the trivial torus). By [lem-sfb-rank-one-opposite-borel-intersection] there is the other Borel $B^-$. Put $C=G/B^+$. The homogeneous quotient exists and its $F$-points are $G(F)/B^+(F)$ by [lem-sfb-homogeneous-orbit-quotient-geometry]. The quotient map is flat, surjective and finitely presented by [lem-sfb-algebraic-group-homogeneous-quotient], so [lem-sfb-borel-quotient-proper-geometry] gives smoothness, properness and integrality of $C$. Finally [lem-sfb-rank-one-flag-curve] gives $\\dim C=1$.",
+   "uses": [
+    "lem-sfb-general-borel-flag-variety",
+    "lem-sfb-borel-maximal-torus-conjugacy",
+    "lem-sfb-rank-one-opposite-borel-intersection",
+    "lem-sfb-homogeneous-orbit-quotient-geometry",
+    "lem-sfb-algebraic-group-homogeneous-quotient",
+    "lem-sfb-borel-quotient-proper-geometry",
+    "lem-sfb-rank-one-flag-curve"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 20.16 (a)--(c), pp.412--413; Theorem 20.22, p.415."
+   }
+  },
+  {
+   "text": "Left multiplication descends to an action of $G$ on the right-coset fppf sheaf $C$: $g\\cdot(hB^+)=(gh)B^+$. This is well defined on cosets, commutes with scalar extension and hence sheafifies. It is transitive on $C(F)$ by the quotient description. It cannot be the trivial action: otherwise its orbit map $G\\to C$ at $eB^+$ would be constant, whereas it is the surjective quotient map onto the one-dimensional integral scheme $C$. Apply [lem-sfb-complete-curve-connected-linear-action] to obtain $C\\simeq\\mathbf P^1_F$. By [lem-sfb-projective-frames-pgl] its automorphism sheaf is $\\operatorname{PGL}_{2,F}$, giving a homomorphism $q:G\\to\\operatorname{PGL}_{2,F}$ that realizes this action.",
+   "uses": [
+    "lem-sfb-homogeneous-orbit-quotient-geometry",
+    "lem-sfb-complete-curve-connected-linear-action",
+    "lem-sfb-projective-frames-pgl"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 20.16 (c) implies (d), p.413; Proposition 20.7, pp.409--410."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-affine-homomorphism-flat-image] to factor $q$ as $G\\xrightarrow{u}I\\hookrightarrow\\operatorname{PGL}_2$, with $u$ faithfully flat. The map $F[I]\\to F[G]$ is injective by [lem-weil-pbc-faithfully-flat-universally-injective] with $N=F[I]$. Since $G$ is smooth its coordinate ring is reduced by [sbc-lem-smooth-geometrically-reduced], applied over the field $F$; thus $I$ is reduced. The spectrum map for $u$ is surjective by [lem-weil-pbc-faithfully-flat-surjective-spectrum]. Its continuous image is connected since $G$ is connected, so $I$ is connected. If $I$ were proper, [lem-sfb-pgl2-proper-connected-subgroup-solvable] would make $I$ smooth and solvable. Then [lem-sfb-solvable-proper-fixed-point] applied to its action on the nonempty proper curve $C$ gives a point fixed by $I$ and hence by $G$. This contradicts the transitivity on $C(F)$ and $C\\simeq\\mathbf P^1_F$, which has the distinct points $0$ and $\\infty$. Therefore $I=\\operatorname{PGL}_2$ and $q$ is faithfully flat.",
+   "uses": [
+    "lem-sfb-affine-homomorphism-flat-image",
+    "lem-weil-pbc-faithfully-flat-universally-injective",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "lem-sfb-pgl2-proper-connected-subgroup-solvable",
+    "lem-sfb-solvable-proper-fixed-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 20.16 (c) implies (d), p.413; Corollary 17.27, p.360."
+   }
+  },
+  {
+   "text": "Let $K=\\ker q$, a closed normal finite-type subgroup scheme (the fibre over the identity of the affine finite-type group). An element of $K(A)$ fixes every $A$-point of $C$, and in particular $eB^+$, whose stabilizer is $B^+$ by the quotient kernel-pair description. Thus $K\\subseteq B^+$. Choose $n\\in G(F)$ with $nB^+n^{-1}=B^-$ using [lem-sfb-torus-normalizer-borel-transitivity]. Normality gives $K=nKn^{-1}\\subseteq B^-$. Consequently [lem-sfb-rank-one-opposite-borel-intersection] gives $K\\subseteq T$ scheme-theoretically. By [lem-sfb-split-torus-subgroups-diagonalizable], $K\\simeq\\operatorname{Spec}F[M]$ for a finitely generated abelian group $M$. Conjugation by the smooth connected group $G$ acts on $K$ by group automorphisms; [lem-sfb-connected-action-multiplicative-type-rigidity] makes this action trivial. Hence $K\\subseteq Z(G)$, on every test algebra and every further extension.",
+   "uses": [
+    "lem-sfb-homogeneous-orbit-quotient-geometry",
+    "lem-sfb-torus-normalizer-borel-transitivity",
+    "lem-sfb-rank-one-opposite-borel-intersection",
+    "lem-sfb-split-torus-subgroups-diagonalizable",
+    "lem-sfb-connected-action-multiplicative-type-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 20.22, p.415; Corollary 12.38, p.243."
+   }
+  },
+  {
+   "text": "The centre is represented by a closed normal subgroup by [lem-sfb-affine-group-centre-base-change]. Every central element centralizes $T$ after every algebra extension; [lem-sfb-reductive-torus-self-centralizer] therefore gives $Z(G)\\subseteq T\\subseteq B^+$. For any $F$-algebra $A$, $z\\in Z(G)(A)$ and any $x\\in C(A)$, lift $x$ fppf locally to $g\\in G(A\\prime)$ using [lem-sfb-homogeneous-orbit-quotient-geometry]. There $z\\cdot x=zgB^+=gzB^+=gB^+=x$. Since $C$ is the represented fppf sheaf quotient these equalities descend, and persist after every further extension. Thus $z$ acts as the identity automorphism, $q(z)=1$, and $Z(G)\\subseteq K$. Combined with the preceding step this gives $K=Z(G)$ as subgroup schemes.",
+   "uses": [
+    "lem-sfb-affine-group-centre-base-change",
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-homogeneous-orbit-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 20.22, p.415; scheme-theoretic maximal-torus centralizer, Theorem 17.59, p.371."
+   }
+  },
+  {
+   "text": "Let $p:G\\to Q=G/Z(G)$ be the quotient of [lem-sfb-affine-normal-quotient-geometry], so $p$ is faithfully flat with kernel $Z(G)$. By [lem-sfb-faithfully-flat-group-quotient-universal], $q$ factors uniquely as $a\\circ p$ and $p$ factors uniquely as $b\\circ q$, because their kernels coincide. Uniqueness in that same statement, applied to $p$ and to $q$, gives $ba=\\operatorname{id}_Q$ and $ab=\\operatorname{id}_{\\operatorname{PGL}_2}$. Thus $a:Q\\simeq\\operatorname{PGL}_{2,F}$, and the asserted faithfully flat $q$ has exactly the full scheme-theoretic centre as kernel. No step required division by the characteristic or reducedness of the kernel.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-faithfully-flat-group-quotient-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 20.22, p.415; quotient universal property, Theorem 5.21."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-general-borel-flag-variety",
+  "lem-sfb-borel-maximal-torus-conjugacy",
+  "lem-sfb-rank-one-opposite-borel-intersection",
+  "lem-sfb-homogeneous-orbit-quotient-geometry",
+  "lem-sfb-algebraic-group-homogeneous-quotient",
+  "lem-sfb-borel-quotient-proper-geometry",
+  "lem-sfb-rank-one-flag-curve",
+  "lem-sfb-complete-curve-connected-linear-action",
+  "lem-sfb-projective-frames-pgl",
+  "lem-sfb-affine-homomorphism-flat-image",
+  "lem-weil-pbc-faithfully-flat-universally-injective",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-sfb-pgl2-proper-connected-subgroup-solvable",
+  "lem-sfb-solvable-proper-fixed-point",
+  "lem-sfb-torus-normalizer-borel-transitivity",
+  "lem-sfb-split-torus-subgroups-diagonalizable",
+  "lem-sfb-connected-action-multiplicative-type-rigidity",
+  "lem-sfb-affine-group-centre-base-change",
+  "lem-sfb-reductive-torus-self-centralizer",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "lem-sfb-faithfully-flat-group-quotient-universal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 20.22, p.415, with Theorem 20.16, pp.412--413; reverse centre inclusion through Theorem 17.59 and the coset action."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The quotient of a split reductive algebraic group of semisimple rank one by its scheme theoretic centre is PGL2",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"MatrixGroups.termPSL(_,_)\", \"module\": \"Mathlib/LinearAlgebra/Matrix/ProjectiveSpecialLinearGroup\", \"type\": \"Lean.ParserDescr\", \"doc\": \"The projective special linear group $ \\\\text{PSL}(m, n) $ is defined as the quotient group $ \\\\text{SL}(m, n)/Z(\\\\text{SL}(m, n)) $, where $ Z(\\\\text{SL}(m, n)) $ denotes the center of the special linear \"}\n  {\"name\": \"Matrix.ProjectiveSpecialLinearGroup\", \"module\": \"Mathlib/LinearAlgebra/Matrix/ProjectiveSpecialLinearGroup\", \"type\": \"(n : Type u) → [DecidableEq n] → [Fintype n] → (R : Type v) → [CommRing R] → Type (max (max u v) v u)\", \"doc\": \"The projective special linear group $\\\\text{PSL}(n, R)$ is defined as the quotient of the special linear group $\\\\text{SL}(n, R)$ by its center subgroup, which consists of scalar matrices in $\\\\text{SL}(\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V],\\n  Module.finrank R V ≤ 1 →\\n    ∀ (g : ↥(Subgroup.center (SpecialLinearGroup R V))), SpecialLinearGroup.centerEquivRootsOfUnity g = 1\", \"doc\": \"If the finite rank of the $ R $-module $ V $ is at most 1, then every element in the center of the special linear group $ \\\\text{SL}(V) $ is mapped to the multiplicative identity $ 1 $ under the isomor\"}\n  {\"name\": \"SpecialLinearGroup.center_eq_bot_of_finrank_le_one\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V] [Module.Free R V]\\n  [Module.Finite R V], Module.finrank R V ≤ 1 → Subgroup.center (SpecialLinearGroup R V) = ⊥\", \"doc\": \"If the finite rank of an $ R $-module $ V $ over a commutative ring $ R $ satisfies $ \\\\dim_R(V) \\\\leq 1 $, then the center of the special linear group $ \\\\text{SL}(V) $ is the trivial subgroup containin\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_apply\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V] (g : ↥(Subgroup.center (SpecialLinearGroup R V))),\\n  ↑↑↑g = SpecialLinearGroup.centerEquivRootsOfUnity g • LinearMap.id\", \"doc\": \"Every element $ g $ in the center of the special linear group $ \\\\text{SL}(V) $ over a commutative ring $ R $ and finite free $ R $-module $ V $ of rank $ n $ satisfies $ g = r \\\\cdot \\\\text{id}_V $, whe\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_symm_apply\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V] (r : ↥(rootsOfUnity (max (Module.finrank R V) 1) R)),\\n  ↑↑↑(SpecialLinearGroup.centerEquivRootsOfUnity.symm r) = r • LinearMap.id\", \"doc\": \"For a commutative ring $ R $ and a finite free $ R $-module $ V $ of rank $ n $, the center of the special linear group $ \\\\text{SL}(V) $ is isomorphic to the group of $ n $-th roots of unity in $ R $.\"}\n  {\"name\": \"SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_4} [inst : CommRing R] {V : Type u_5} [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V] {ι : Type u_6} [inst_5 : Fintype ι] [inst_6 : DecidableEq ι]\\n  (b : Module.Basis ι R V) (g : ↥(Subgroup.center (Matrix.SpecialLinearGroup ι R)\", \"doc\": \"For a commutative ring $ R $ and a finite free $ R $-module $ V $ of rank $ n $, the center of the special linear group $ \\\\text{SL}(V) $ is isomorphic to the group of $ n $-th roots of unity in $ R $.\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_apply\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V] (g : ↥(Subgroup.center (SpecialLinearGroup R V))) (x : V),\\n  SpecialLinearGroup.centerEquivRootsOfUnity g • x = (fun x => ↑↑g x) x\", \"doc\": \"For any element $ g $ in the center of the special linear group $ \\\\text{SL}(V) $ over a commutative ring $ R $ and any vector $ x \\\\in V $, the isomorphism between the center and the group of $ n $-th \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract matrix groups, Lie algebras or unrelated quotient constructions, not this assertion about affine algebraic group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProjectiveGeneralLinearGroup\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract matrix groups, Lie algebras or unrelated quotient constructions, not this assertion about affine algebraic group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "PGL|projective.*linear.*group|semisimple.rank",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/BoundedAtCusp.lean\", \"line\": \"95\", \"text\": \"    IsBoundedAt c f k ↔ ∃ γ : SL(2, ℤ), mapGL ℝ γ • ∞ = c ∧ IsBoundedAtImInfty (f ∣[k] γ) := by\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/BoundedAtCusp.lean\", \"line\": \"103\", \"text\": \"    IsZeroAt c f k ↔ ∃ γ : SL(2, ℤ), mapGL ℝ γ • ∞ = c ∧ IsZeroAtImInfty (f ∣[k] γ) := by\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/BoundedAtCusp.lean\", \"line\": \"111\", \"text\": \"    IsBoundedAt c f k ↔ ∀ γ : SL(2, ℤ), mapGL ℝ γ • ∞ = c → IsBoundedAtImInfty (f ∣[k] γ) := by\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/BoundedAtCusp.lean\", \"line\": \"117\", \"text\": \"    IsZeroAt c f k ↔ ∀ γ : SL(2, ℤ), mapGL ℝ γ • ∞ = c → IsZeroAtImInfty (f ∣[k] γ) := by\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/SlashActions.lean\", \"line\": \"153\", \"text\": \"  monoidHomSlashAction (Matrix.SpecialLinearGroup.mapGL ℝ)\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Basic.lean\", \"line\": \"717\", \"text\": \"  exact ⟨g, by simp [mapGL]⟩\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Basic.lean\", \"line\": \"724\", \"text\": \"  exact ⟨g, by simp [mapGL]⟩\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/ArithmeticSubgroups.lean\", \"line\": \"59\", \"text\": \"    HasDetOne (Γ.map <| mapGL S) where\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/ArithmeticSubgroups.lean\", \"line\": \"63\", \"text\": \"    HasDetOne (mapGL (n := n) (R := R) S).range where\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/ArithmeticSubgroups.lean\", \"line\": \"93\", \"text\": \"scoped[MatrixGroups] notation \\\"𝒮ℒ\\\" => MonoidHom.range (mapGL ℝ : SL(2, ℤ) →* GL (Fin 2) ℝ)\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/ArithmeticSubgroups.lean\", \"line\": \"98\", \"text\": \"  coe := map (mapGL ℝ)\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/ArithmeticSubgroups.lean\", \"line\": \"111\", \"text\": \"      comap_map_eq_self_of_injective mapGL_injective] using h\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/CongruenceSubgroups.lean\", \"line\": \"202\", \"text\": \"  ((toConjAct g⁻¹) • (Γ.map <| mapGL ℝ)).comap (mapGL ℝ)\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/CongruenceSubgroups.lean\", \"line\": \"206\", \"text\": \"  simp [conjGL, mapGL, Subgroup.mem_inv_pointwise_smul_iff, toConjAct_smul]\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/CongruenceSubgroups.lean\", \"line\": \"229\", \"text\": \"    ∃ N ≠ 0, ∀ x ∈ Gamma N, g * (mapGL ℚ x) * g⁻¹ ∈ (Gamma M).map (mapGL ℚ) := by\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/CongruenceSubgroups.lean\", \"line\": \"280\", \"text\": \"    ∃ N ≠ 0, (toConjAct <| g.map (Rat.castHom ℝ)) • (Gamma N).map (mapGL ℝ)\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/CongruenceSubgroups.lean\", \"line\": \"281\", \"text\": \"      ≤ (Gamma M).map (mapGL ℝ) := by\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/EisensteinSeries/Defs.lean\", \"line\": \"222\", \"text\": \"    simp [SpecialLinearGroup.mapGL, ← SL_slash, eisensteinSeries_slash_apply, Gamma_mem'.mp hA]\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Bounds.lean\", \"line\": \"147\", \"text\": \"  exists_bound_of_subgroup_invariant_of_isBigO hf_cont ht hf_infinity (Γ := Γ.comap (mapGL ℝ))\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Bounds.lean\", \"line\": \"198\", \"text\": \"    simpa [(show Rat.castHom ℝ = algebraMap ℚ ℝ by rfl), map_inv, map_mapGL]\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Bounds.lean\", \"line\": \"199\", \"text\": \"      using! Subgroup.IsArithmetic.conj Γ (mapGL ℚ g)⁻¹\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"line\": \"35\", \"text\": \"    ∃ g : SL(2, A), (mapGL K g) • ∞ = c := by\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"line\": \"119\", \"text\": \"    simpa only [hgp.smul_eq_self_iff.mp hgc] using ⟨(mapGL ℚ g).parabolicFixedPoint,\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"line\": \"124\", \"text\": \"    · suffices (mapGL ℝ ModularGroup.T).IsParabolic by simpa\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"line\": \"133\", \"text\": \"lemma isCusp_SL2Z_iff' {c : OnePoint ℝ} : IsCusp c 𝒮ℒ ↔ ∃ g : SL(2, ℤ), c = mapGL ℝ g • ∞ := by\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract matrix groups, Lie algebras or unrelated quotient constructions, not this assertion about affine algebraic group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rank one reductive group acts on its flag curve with central kernel and quotient PGL2",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"OnePoint.smul_some_eq_ite\", \"module\": \"Mathlib.Topology.Compactification.OnePoint.ProjectiveLine\", \"type\": \"{g : GL (Fin 2) K} {k : K} :\\n  g • (k : OnePoint K) = if g 1 0 * k + g 1 1 = 0 then ∞ else (g 0 0 * k + g 0 1) / (g 1 0 * k + g 1 1)\", \"doc\": \"For any invertible 2×2 matrix $ g = \\\\begin{pmatrix} g_{00} & g_{01} \\\\\\\\ g_{10} & g_{11} \\\\end{pmatrix} $ over a field $ K $ and any element $ k \\\\in K $, the action of $ g $ on $ k $ in the one-point com\"}\n  {\"name\": \"OnePoint.instGLAction\", \"module\": \"Mathlib.Topology.Compactification.OnePoint.ProjectiveLine\", \"type\": \": MulAction (GL (Fin 2) K) (OnePoint K)\", \"doc\": \"The general linear group $ \\\\mathrm{GL}(2, K) $ acts on the one-point compactification $ \\\\text{OnePoint}\\\\, K $ of a field $ K $, induced by its natural action on the projective line over $ K $. This ac\"}\n  {\"name\": \"ModularGroup.SLOnGLPos\", \"module\": \"Mathlib.Analysis.Complex.UpperHalfPlane.MoebiusAction\", \"type\": \": SMul SL(2, ℤ) GL(2, ℝ)⁺\", \"doc\": \"The modular group $ \\\\text{SL}(2, \\\\mathbb{Z}) $ acts on the positive general linear group $ \\\\text{GL}^+(2, \\\\mathbb{R}) $ by matrix multiplication. Specifically, for any $ s \\\\in \\\\text{SL}(2, \\\\mathbb{Z})\"}\n  {\"name\": \"IsCusp.smul\", \"module\": \"Mathlib.NumberTheory.ModularForms.Cusps\", \"type\": \"{c : OnePoint ℝ} {𝒢 : Subgroup (GL (Fin 2) ℝ)} (hc : IsCusp c 𝒢) (g : GL (Fin 2) ℝ) :\\n  IsCusp (g • c) (ConjAct.toConjAct g • 𝒢)\", \"doc\": \"If $ c $ is a cusp for a subgroup $ \\\\mathcal{G} \\\\subseteq \\\\mathrm{GL}(2,\\\\mathbb{R}) $, then for any $ g \\\\in \\\\mathrm{GL}(2,\\\\mathbb{R}) $, the image $ g \\\\cdot c $ under the natural action is a cusp for \"}\n  {\"name\": \"OnePoint.smul_infty_def\", \"module\": \"Mathlib.Topology.Compactification.OnePoint.ProjectiveLine\", \"type\": \"{g : GL (Fin 2) K} :\\n  g • ∞ =\\n    (equivProjectivization K).symm\\n      (.mk K (g 0 0, g 1 0) (fun h ↦ by simpa [det_fin_two, Prod.mk_eq_zero.mp h] using g.det_ne_zero))\", \"doc\": \"For any invertible $ 2 \\\\times 2 $ matrix $ g $ over a division ring $ K $, the action of $ g $ on the point at infinity $ \\\\infty $ in the one-point compactification $ \\\\text{OnePoint}\\\\, K $ corresponds\"}\n  {\"name\": \"instMulActionSubtypeGeneralLinearGroupFinOfNatNatRealMemSubgroup\", \"module\": \"Mathlib.NumberTheory.ModularForms.NormTrace\", \"type\": \": MulAction ℋ ℋ\", \"doc\": \"The subgroup $\\\\mathcal{H}$ of the general linear group over real numbers admits a canonical monoid action on itself via matrix multiplication, inherited from the monoid structure of the subgroup.\"}\n  {\"name\": \"SpecialLinearGroup.center_eq_bot_of_finrank_le_one\", \"module\": \"Mathlib.LinearAlgebra.SpecialLinearGroup\", \"type\": \"(h : Module.finrank R V ≤ 1) : Subgroup.center (SpecialLinearGroup R V) = ⊥\", \"doc\": \"If the finite rank of an $ R $-module $ V $ over a commutative ring $ R $ satisfies $ \\\\dim_R(V) \\\\leq 1 $, then the center of the special linear group $ \\\\text{SL}(V) $ is the trivial subgroup containin\"}\n  {\"name\": \"IsCusp.smul_of_mem\", \"module\": \"Mathlib.NumberTheory.ModularForms.Cusps\", \"type\": \"{c : OnePoint ℝ} {𝒢 : Subgroup (GL (Fin 2) ℝ)} (hc : IsCusp c 𝒢) {g : GL (Fin 2) ℝ} (hg : g ∈ 𝒢) : IsCusp (g • c) 𝒢\", \"doc\": \"If $ c $ is a cusp for a subgroup $ \\\\mathcal{G} $ of $ \\\\mathrm{GL}(2, \\\\mathbb{R}) $, and $ g \\\\in \\\\mathcal{G} $, then the image $ g \\\\cdot c $ under the natural action of $ \\\\mathcal{G} $ on the one-poin\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract matrix groups, Lie algebras or unrelated quotient constructions, not this assertion about affine algebraic group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flag variety of a rank one algebraic group is the projective line and automorphism group PGL2",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"OnePoint.instGLAction\", \"module\": \"Mathlib/Topology/Compactification/OnePoint/ProjectiveLine\", \"type\": \"{K : Type u_1} → [inst : Field K] → [DecidableEq K] → MulAction (GL (Fin 2) K) (OnePoint K)\", \"doc\": \"The general linear group $ \\\\mathrm{GL}(2, K) $ acts on the one-point compactification $ \\\\text{OnePoint}\\\\, K $ of a field $ K $, induced by its natural action on the projective line over $ K $. This ac\"}\n  {\"name\": \"OnePoint.smul_infty_def\", \"module\": \"Mathlib/Topology/Compactification/OnePoint/ProjectiveLine\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [inst_1 : DecidableEq K] {g : GL (Fin 2) K},\\n  g • OnePoint.infty = (OnePoint.equivProjectivization K).symm (Projectivization.mk K (↑g 0 0, ↑g 1 0) ⋯)\", \"doc\": \"For any invertible $ 2 \\\\times 2 $ matrix $ g $ over a division ring $ K $, the action of $ g $ on the point at infinity $ \\\\infty $ in the one-point compactification $ \\\\text{OnePoint}\\\\, K $ corresponds\"}\n  {\"name\": \"OnePoint.exists_mem_SL2\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [inst_1 : DecidableEq K] (A : Type u_2) [inst_2 : CommRing A] [IsDomain A]\\n  [inst_4 : Algebra A K] [IsFractionRing A K] [IsPrincipalIdealRing A] (c : OnePoint K),\\n  ∃ g, (Matrix.SpecialLinearGroup.mapGL K) g • OnePoint.infty = c\", \"doc\": \"For any commutative domain $ A $ that is a principal ideal ring and its fraction field $ K $, every cusp $ c $ in the one-point compactification $ \\\\text{OnePoint}\\\\, K $ can be represented as $ g \\\\cdot\"}\n  {\"name\": \"OnePoint.smul_some_eq_ite\", \"module\": \"Mathlib/Topology/Compactification/OnePoint/ProjectiveLine\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [inst_1 : DecidableEq K] {g : GL (Fin 2) K} {k : K},\\n  g • ↑k = if ↑g 1 0 * k + ↑g 1 1 = 0 then OnePoint.infty else ↑((↑g 0 0 * k + ↑g 0 1) / (↑g 1 0 * k + ↑g 1 1))\", \"doc\": \"For any invertible 2×2 matrix $ g = \\\\begin{pmatrix} g_{00} & g_{01} \\\\\\\\ g_{10} & g_{11} \\\\end{pmatrix} $ over a field $ K $ and any element $ k \\\\in K $, the action of $ g $ on $ k $ in the one-point com\"}\n  {\"name\": \"Matrix.ProjectiveSpecialLinearGroup\", \"module\": \"Mathlib/LinearAlgebra/Matrix/ProjectiveSpecialLinearGroup\", \"type\": \"(n : Type u) → [DecidableEq n] → [Fintype n] → (R : Type v) → [CommRing R] → Type (max (max u v) v u)\", \"doc\": \"The projective special linear group $\\\\text{PSL}(n, R)$ is defined as the quotient of the special linear group $\\\\text{SL}(n, R)$ by its center subgroup, which consists of scalar matrices in $\\\\text{SL}(\"}\n  {\"name\": \"SpecialLinearGroup.subsingleton_of_finrank_eq_one\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V] [Module.Free R V],\\n  Module.finrank R V = 1 → Subsingleton (SpecialLinearGroup R V)\", \"doc\": \"If $ V $ is a free $ R $-module of finite rank 1, then the special linear group $ \\\\text{SL}(V) $ is trivial, meaning it contains only the identity element.\"}\n  {\"name\": \"MatrixGroups.termPSL(_,_)\", \"module\": \"Mathlib/LinearAlgebra/Matrix/ProjectiveSpecialLinearGroup\", \"type\": \"Lean.ParserDescr\", \"doc\": \"The projective special linear group $ \\\\text{PSL}(m, n) $ is defined as the quotient group $ \\\\text{SL}(m, n)/Z(\\\\text{SL}(m, n)) $, where $ Z(\\\\text{SL}(m, n)) $ denotes the center of the special linear \"}\n  {\"name\": \"Projectivization.mk''\", \"module\": \"Mathlib/LinearAlgebra/Projectivization/Basic\", \"type\": \"{K : Type u_1} →\\n  {V : Type u_2} →\\n    [inst : DivisionRing K] →\\n      [inst_1 : AddCommGroup V] →\\n        [inst_2 : Module K V] → (H : Submodule K V) → Module.finrank K ↥H = 1 → Projectivization K V\", \"doc\": \"The projectivization of a module $ V $ over a division ring $ K $ is in bijection with the set of one-dimensional submodules of $ V $, specifically those submodules whose finite rank as $ K $-modules \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract matrix groups, Lie algebras or unrelated quotient constructions, not this assertion about affine algebraic group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "PGL|projective.*linear.*group|semisimple.rank",
+   "results": "{\"t\": \"2026-10-23T21:50:00Z\", \"tool\": \"grep\", \"query\": \"PGL|projective.*linear.*group|semisimple.rank\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/ModularForms/BoundedAtCusp.lean\", \"Mathlib/NumberTheory/ModularForms/BoundedAtCusp.lean\", \"Mathlib/NumberTheory/ModularForms/BoundedAtCusp.lean\", \"Mathlib/NumberTheory/ModularForms/BoundedAtCusp.lean\", \"Mathlib/NumberTheory/ModularForms/SlashActions.lean\", \"Mathlib/NumberTheory/ModularForms/Basic.lean\", \"Mathlib/NumberTheory/ModularForms/Basic.lean\", \"Mathlib/NumberTheory/ModularForms/ArithmeticSubgroups.lean\"], \"digest\": \"d09d99fe024a792a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract projective special linear groups and actions on projectivizations do not state the reductive group-scheme adjoint quotient theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A rank one reductive group acts faithfully modulo its full scheme theoretic center on its flag projective line",
+   "results": "{\"t\": \"2026-10-23T21:50:00Z\", \"tool\": \"leansearch\", \"query\": \"A rank one reductive group acts faithfully modulo its full scheme theoretic center on its flag projective line\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"OnePoint.smul_some_eq_ite\", \"Subgroup.instFaithfulSMulSubtypeMem\", \"FaithfulVAdd\", \"Projectivization.generalLinearGroup_smul_def\", \"FaithfulVAdd.mk\", \"OnePoint.instGLAction\", \"faithfulVAdd_iff\", \"AlgEquiv.apply_faithfulSMul\"], \"digest\": \"eb408acc40db8356\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract projective special linear groups and actions on projectivizations do not state the reductive group-scheme adjoint quotient theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProjectiveGeneralLinearGroup\"",
+   "results": "{\"t\": \"2026-10-23T21:50:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"ProjectiveGeneralLinearGroup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract projective special linear groups and actions on projectivizations do not state the reductive group-scheme adjoint quotient theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The quotient of a reductive algebraic group of semisimple rank one by its scheme theoretic center is the algebraic group PGL2",
+   "results": "{\"t\": \"2026-10-23T21:50:02Z\", \"tool\": \"leanfinder\", \"query\": \"The quotient of a reductive algebraic group of semisimple rank one by its scheme theoretic center is the algebraic group PGL2\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MatrixGroups.termPSL(_,_)\", \"Matrix.ProjectiveSpecialLinearGroup\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"SpecialLinearGroup.center_eq_bot_of_finrank_le_one\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply\", \"SpecialLinearGroup.instDiv\", \"SpecialLinearGroup.centerEquivRootsOfUnity_symm_apply\", \"SpecialLinearGroup.coe_div\"], \"digest\": \"44b0d5eb1392a490\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract projective special linear groups and actions on projectivizations do not state the reductive group-scheme adjoint quotient theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-rank-one-classification",
+  "date": "2026-10-24",
+  "group": "Q57"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: Construct the finite integral root datum from rank-one SL2 coroots, normalizer reflections and finite W, rather than presupposing the root datum. Supporting lemma: Explicit matrix models for reductive groups of semisimple rank one. Sub-argument: Theorem 20.22, printed p.415, and Theorem 20.16, pp.412--413: action on the Borel quotient projective line has kernel the full scheme-theoretic centre.",
+   "via": [
+    "lem-sfb-split-rank-one-classification",
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-rank-one-adjoint-projective-linear",
+  "worker": "stage1",
+  "summary": "Followed Milne 20.16 and 20.22. Four statement-only supporting nodes isolate flag dimension, the scheme-theoretic opposite Borel intersection, the complete-curve action theorem and proper connected PGL2 subgroup solvability. Reused projective automorphisms and multiplicative-type rigidity. Both kernel inclusions are checked on arbitrary test algebras; the reverse inclusion uses the homogeneous coset sheaf instead of an uncited centre calculation for PGL2.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: Construct the finite integral root datum from rank-one SL2 coroots, normalizer reflections and finite W, rather than presupposing the root datum. Supporting lemma: Explicit matrix models for reductive groups of semisimple rank one. Sub-argument: Theorem 20.22, printed p.415, and Theorem 20.16, pp.412--413: action on the Borel quotient projective line has kernel the full scheme-theoretic centre. The split supplies the rank-one adjoint quotient prerequisite along the existing alteration/invariant-theory branch."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N0-d5aa7c331",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-d5aa7c331 (reviewer sub-agent of L); spot-checked: I read the item and all 4 new nodes in full, plus every cited statement. Item statement and stmt_deps are byte-identical to live. The item is still unsplit live, there is no repair note, none of the new ids exists live, and no proof_dep reaches back to the item (no cycle). Source checks in Milne iAG2017: Thm 20.22 (p.415), 20.16 (a)-(d) (pp.412-413), 20.18 and 20.21 (B+ ∩ B- = T), 20.5 (p.408; the acting group must be affine, which the node requires), 17.27 (p.360). Steps: (1) Borel, maximal torus T, the opposite Borel, and C = G/B+ smooth, proper, integral of dimension 1. (2) The coset action is nontrivial because its orbit map is the quotient map onto a curve; complete-curve gives C ≅ P1, and projective-frames-pgl gives q (that PGL2 is a scheme and the Zariski quotient, so it equals the fpqc quotient). (3) The flat-image factorisation gives I, which is reduced (inside F[G]) and connected (surjective Spec); if I were proper the new node would make it solvable, the fixed-point node would give a G-fixed point, contradicting transitivity on P1; so q is faithfully flat. (4) ker q lies in B+ (stabiliser via the kernel pair) and in B- (normal, Borels conjugate), hence in T scheme-theoretically; it is diagonalizable, and multiplicative-type rigidity makes it central. (5) Z(G) ⊆ C_G(T) = T ⊆ B+, and zgB+ = gzB+ = gB+ fppf-locally, so Z(G) ⊆ ker q; this avoids needing Z(PGL2) = e. (6) The universal property applied to both quotient maps gives the isomorphism. New nodes are true; small cases checked: SL2 (kernel mu2, including char 2), GL2, PGL2, products with tori; nonsolvable A5 shows the reduced+connected hypothesis is needed; an elliptic curve acting on itself shows affineness is needed. No duplicates: the root-data intersection and dichotomy nodes sit downstream of the item, so citing them would be circular; other candidates checked. Batch 5: all 7 trf endpoints (projective bundle quotient geometry, split lattice torus projection, smooth fpqc descent, fppf covering base change, def scheme algebraic space, flat tensor injection, def cover descent datum) are generic foundations; their closures reach no trace-formula or Poincaré-duality theorem. No SGA. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.RankOneAdjointProjectiveLinear",
+  "declaration": "AlgebraicGeometry.rankOne_adjoint_projectiveLinear",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/RankOneAdjointProjectiveLinear.lean",
+  "statement": "theorem rankOne_adjoint_projectiveLinear {F : Type u} [Field F] [IsAlgClosed F] (G : Grp (Over (Spec (.of F)))) (hG : ReductiveTorusCentralizer.IsReductive G) (hRank : RankOneRoots.HasSemisimpleRankOne G) (P : Grp (Over (Spec (.of F)))) (π : GeneralLinearGroup (LinearGroupSchemes.Index.{u} 2) F ⟶ P.X) (j : StandardGroupSchemes.roots F 2 ⟶ LinearGroupSchemes.specialLinear F 2) (hP : ProjectiveMatrixCentralCover.Presentation F 2 (Nat.le_refl 2) P π j) : ∃ (Z : Grp (Over (Spec (.of F)))) (i : Z ⟶ G) (q : G ⟶ P), IsClosedSubgroupScheme i.hom.hom ∧ (∀ (A : Type u) [CommRing A] [Algebra F A], ReductiveTorusCentralizer.centralizerPoints (𝟙 G) A = Set.range (fun z : (algSpec (.of F)).obj (.op (CommAlgCat.of F A)) ⟶ Z.X ↦ z ≫ i.hom.hom)) ∧ q.hom.hom.left.appTop.hom.FaithfullyFlat ∧ IsFppfGroupQuotient i q ∧ ∀ (Q : Grp (Over (Spec (.of F)))) (p : G ⟶ Q), IsFppfGroupQuotient i p → ∃ e : Q ≅ P, p ≫ e.hom = q",
+  "branch": "newtargets-dag",
+  "by": "Q96",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reuses the landed semisimple-rank-one predicate and the PGL2 scalar-quotient presentation; no PGL object is chosen from bare existence. The centre is specified by centralizerPoints of the identity on every commutative algebra. IsFppfGroupQuotient fixes its scheme-theoretic kernel, and every other quotient is identified compatibly with PGL2. Reviewer FIX (stage 2): the uncited def-sc-gm-ga wrapper StandardGroupSchemes.affine in the centre clause is inlined as its Mathlib body (algSpec (.of F)).obj (.op (CommAlgCat.of F A)); the now-landed proof-dependency module PGL2ProperConnectedSubgroupSolvable is imported privately; statement otherwise unchanged.",
+  "fixed_by": "NT-stage2-cc-53b5ea567"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-53b5ea567",
+  "group": "Q96",
+  "result": "fix",
+  "note": "Maths correct clause by clause vs Milne 20.22/20.16: IsReductive + HasSemisimpleRankOne (largest smooth connected solvable normal radical, every maximal torus of the quotient Krull dim 1), PGL2 via the recorded Presentation, q faithfully flat on appTop, Z closed and equal to centralizerPoints (𝟙 G) on all algebras including nonreduced, IsFppfGroupQuotient i q gives scheme-theoretic kernel Z and the quotient, compatible iso with any other quotient. Edge cases SL2/μ2 in char 2, GL2, PGL2, G × torus OK; single universe u; only sorry; docstrings and 6-step plan present; node changed only in lean plus landed def stmt_dep def-sfb-rank-one-root-interfaces. FIX: uncited def-sc-gm-ga wrapper StandardGroupSchemes.affine inlined as (algSpec (.of F)).obj (.op (CommAlgCat.of F A)) with public import Mathlib.AlgebraicGeometry.Group.Affine; added private import of the now-landed PGL2ProperConnectedSubgroupSolvable; lean-record.json statement verbatim. nt_compile --json clean (exit 0, item 4.3 s). Advisory: the theorem stmt_deps projective-matrix-central-cover (Presentation) and affine-normal-quotient-geometry (IsFppfGroupQuotient) come from the stage-1 node text, not added here (NI pgl2 sibling PASS precedent); rebind later to def-sfb-fppf-group-quotient-presentation (landed) and def-sfb-projective-linear-group-presentation (PASSed, not yet landed)."
+ }
+}

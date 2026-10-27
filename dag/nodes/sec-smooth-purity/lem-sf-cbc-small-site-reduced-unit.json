@@ -1,0 +1,145 @@
+{
+ "id": "lem-sf-cbc-small-site-reduced-unit",
+ "kind": "statement",
+ "title": "Reduction of the completion unit on any small Noetherian coefficient site",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "statement": "Let S be a small site [lem-sp-completion-mate-comparison], A a commutative Noetherian ring, and I an ideal. Let R be its prescribed strict quotient reduction, C its total-derived-limit completion, and eta its specified quotient unit. The natural transformation R(eta): R → C ⋙ R is invertible on every unbounded derived A-module sheaf, with no completeness assumption on its input. No torsion, finite quotient or perfect quotient hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099M and 099N(3),(4); sites-cohomology.tex Tags 0B56, 0941 and 0A07; strict-diagram refinement of fix-lem-exchanges Step 5."
+ },
+ "stmt_deps": [
+  "lem-sp-completion-mate-comparison"
+ ],
+ "proof": [
+  {
+   "text": "An object over A/I^(n+1) is complete after restriction: each element of I acts nilpotently, its sequential localization is zero, and internal Hom from it is zero. Apply the restriction-section and constant-element completeness criteria. This includes I=0, I=A and the zero ring.",
+   "uses": [
+    "lem-sf-completion-finite-reduction",
+    "lem-weil-pbc-restriction-section-completeness",
+    "lem-sp-constant-direct-image-preserves-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099M and 099N(3),(4); sites-cohomology.tex Tags 0B56, 0941 and 0A07; strict-diagram refinement of fix-lem-exchanges Step 5."
+   }
+  },
+  {
+   "text": "Noetherianity provides finite generators of I. The normalized Koszul/quotient reflector gives Hom(CN,Res M) ≃ Hom(N,Res M). Transport across the finite scalar-extension adjunction. Coyoneda shows F_n(eta_N) is invertible. This is the finite-reduction argument with its unused extra datum assumptions removed.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-sp-completion-mate-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099M and 099N(3),(4); sites-cohomology.tex Tags 0B56, 0941 and 0A07; strict-diagram refinement of fix-lem-exchanges Step 5."
+   }
+  },
+  {
+   "text": "The finite-evaluation isomorphism identifies evaluation of R(eta_N) with restriction of F_n(eta_N). These are isomorphisms. Apply evaluation/homology comparison, levelwise isomorphism detection in the strict tower abelian category, and the derived homology criterion to conclude R(eta_N) is invertible. Componentwise invertibility gives the natural isomorphism.",
+   "uses": [
+    "lem-weil-tower-category-levelwise-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099M and 099N(3),(4); sites-cohomology.tex Tags 0B56, 0941 and 0A07; strict-diagram refinement of fix-lem-exchanges Step 5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-completion-finite-reduction",
+  "lem-weil-pbc-restriction-section-completeness",
+  "lem-sp-constant-direct-image-preserves-complete",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-sp-completion-mate-comparison",
+  "lem-weil-tower-category-levelwise-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099M and 099N(3),(4); sites-cohomology.tex Tags 0B56, 0941 and 0A07; strict-diagram refinement of fix-lem-exchanges Step 5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coherent reconstruction of finite composites from natural comparison maps between reduction functors",
+   "results": "8 hits about composable arrows, Dold-Kan comparisons, filtered functors and sequence composition. No derived sheaf completion result.",
+   "date": "2026-10-25",
+   "verdict": "No match; use the project normalized completion and derived strict tower interfaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.whiskerRight",
+   "results": "Whiskering, identities and isomorphism preservation; no completion or direct-image normalization theorem.",
+   "date": "2026-10-25",
+   "verdict": "These supply the formal composition operations only."
+  },
+  {
+   "tool": "grep",
+   "query": "completionUnit|derivedProjectionFormulaMate",
+   "results": "msearch Mathlib grep: 0 hits. Project rg found CompletionFiniteReduction, CompletedPullbackUnitTower, SfCbcDirectImageReductionUnit and ConstantTowerDirectImageNormalization; their signatures were inspected.",
+   "date": "2026-10-25",
+   "verdict": "Existing project results use other coefficient/site presentations or an unnecessary CompleteCoefficientDatum for finite reduction. The new statements isolate the required generalization and transport."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived reduction of the completion unit is an isomorphism and direct image commutes with the derived limit of quotient towers",
+   "results": "8 hits about ordinary AdicCompletion and profinite limits; no matching derived sheaf theorem.",
+   "date": "2026-10-25",
+   "verdict": "No matching theorem in Mathlib."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfCbcCompactSupportCompositionLimit",
+  "date": "2026-10-25",
+  "group": "M4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-lem-exchanges",
+   "place": "Proof Step 5, strict-diagram reconstruction: Reduction of the completion unit on any small Noetherian coefficient site",
+   "via": [
+    "lem-sf-cbc-compact-support-composition-limit"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SmallSiteReducedCompletionUnit",
+  "file": "lean/Sheaf/Paper/SmallSiteReducedCompletionUnit.lean",
+  "declaration": "CategoryTheory.AdicSites.reductionCompletionUnit_isIso",
+  "statement": "theorem reductionCompletionUnit_isIso (S : Site.{u}) (A : Type u) [CommRing A]\n    [IsNoetherianRing A] (I : Ideal A) :\n    IsIso (Functor.whiskerRight (S.unit A I) (S.reduction A I))",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-f1c28",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261025T123324-L-1858071",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-f1c28",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261025T123324-L-1858071",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 2 new modules/nodes against the clone (statement byte-identical, plain-import swap only), new sorry hole smallSiteDirectImageReconstruction against completionMateComparison/Stacks 0B54-0B56 projection formula (true, not a duplicate), unit realized lists (empty for sk-prop-sf-cbc; ringed-tower node kept via the split node's proof_deps); sandbox compile with #print axioms (sorryAx only from upstream sorried statements) and all 7 direct importers compile"
+ }
+}

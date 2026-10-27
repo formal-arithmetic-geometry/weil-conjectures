@@ -1,0 +1,108 @@
+{
+ "id": "sk-thm-tf-uniform-formula",
+ "kind": "statement",
+ "title": "Grothendieck–Lefschetz trace formula",
+ "statement": "Let $X_0$ be separated and of finite type over $\\mathbf F_q$, put\n$X=X_0\\times_{\\mathbf F_q}\\overline{\\mathbf F}_q$, and suppose\n$\\ell\\nmid q$. Let\n\n$$\n \\Lambda\\in\\{A,\\Zl,\\mathcal O_E,\\Ql,E,\\overline{\\mathbf Q}_\\ell\\},\n \\qquad K\\in\\Dctf(X,\\Lambda),\n$$\n\nwith a Weil structure as in [sk-def-sf-weil-complexes].\nHere $A$ is any finite commutative $\\ell$-primary ring, and for\nintegral and rational coefficients $\\Dctf(X,\\Lambda)=\\Dbc(X,\\Lambda)$.\nLet $\\operatorname{Frob}_{X,K}$\nbe the geometric Frobenius on $R\\Gamma_c(X_{\\mathrm{pro\\acute et}},K)$ and\n$\\operatorname{Frob}_{y,m}$ its local operator on $K_{\\bar y}$ at\n$y\\in X_0(\\mathbf F_{q^m})$. For every $m\\geq1$, in $\\Lambda$,\n\n$$\n \\boxed{\\quad\n \\operatorname{tr}_{\\Lambda}\n   \\bigl(\\operatorname{Frob}_{X,K}^m\\mid R\\Gamma_c(X_{\\mathrm{pro\\acute et}},K)\\bigr)\n =\\sum_{y\\in X_0(\\mathbf F_{q^m})}\n   \\operatorname{tr}_{\\Lambda}\n   \\bigl(\\operatorname{Frob}_{y,m}\\mid K_{\\bar y}\\bigr).\n \\quad}\n \\tag{1}\n$$\n\nThe complexes inside the traces are perfect over $\\Lambda$, and the\nformula is compatible with the coefficient comparisons of\n[sk-prop-scalar-six]. For $\\Lambda=\\Ql,E,\\overline{\\mathbf Q}_\\ell$, it reads\n\n$$\n \\sum_i(-1)^i\\operatorname{Tr}\n   \\bigl(\\operatorname{Frob}_{X,K}^m\\mid H_c^i(X_{\\mathrm{pro\\acute et}},K)\\bigr)\n =\\sum_{y\\in X_0(\\mathbf F_{q^m})}\\sum_j(-1)^j\n   \\operatorname{Tr}\\bigl(\\operatorname{Frob}_{y,m}\\mid H^j(K_{\\bar y})\\bigr),\n \\tag{2}\n$$\n\nwhere all sums over degrees are finite.",
+ "source": {
+  "document": "literature/blueprint/main-20261023/blueprint/sec-trace-formula/sk-thm-tf-uniform-formula/_section.md",
+  "place": "node sk-thm-tf-uniform-formula, order 2639"
+ },
+ "stmt_deps": [
+  "sk-def-sf-weil-complexes"
+ ],
+ "proof": [
+  {
+   "text": "For finite and integral rings, (1) is an identity\nof categorical traces of perfect complexes, which makes sense even\nwhen the cohomology modules are not projective.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "The Frobenius comparison $\\kappa_m$ of\n[sk-lem-tf-frobenius-convention] extends to the coefficient rings\n$\\mathcal O_E$, $E$ and $\\overline{\\mathbf Q}_\\ell$. For $K\\in\\Dbc(X,\\mathcal O_E)$ with\nnormalized reduction tower $(K_n)$ modulo $\\pi_E^n$\n([sk-def-pe-derived-completion]), both $(\\Phi_X^m)^*$ and\n$\\operatorname{Fr}_X^{m*}$ preserve derived completeness and commute\nwith reduction, so each is the derived limit of its values on the\n$K_n$. The finite comparisons $\\kappa_m$ come from one functorial\nidentification on the classical site, hence are compatible with\nreduction of coefficients; their derived limit is the integral\n$\\kappa_m$, with its iteration and adjoint-mate identities, and it\nidentifies the global operators with the geometric Weil operators.\nFor $E$ one localizes on integral models, the result being independent\nof the model by the localized Hom comparison, and for $\\overline{\\mathbf Q}_\\ell$ one\ndescends from finite extensions.",
+   "uses": [
+    "sk-lem-tf-frobenius-convention",
+    "sk-def-pe-derived-completion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For finite $A$ the theorem is [sk-thm-trace-formula]. For\n$\\mathcal O_E$, compose the Weil structure with the comparison\n$\\kappa_1$ between scheme and geometric Frobenius to obtain a\nFrobenius correspondence $\\Phi_X^*K\\to K$. Its compact and stalk operators\nare those of the Weil structure, so\n[sk-prop-tf-transport-integral] gives the identity. Taking\n$E=\\Ql$ includes $\\Zl$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "For coefficients $E$, apply [sk-lem-tf-rational-model] to this\nFrobenius correspondence. Apply the identity (1) of\n[sk-prop-tf-transport-integral] to $(K_0,\\theta)$,\nextend scalars to $E$, and multiply by $\\pi_E^{-Nm}$. Linearity and\nscalar compatibility of categorical traces\n([sk-p-trace]), together with the identities (1) of\n[sk-lem-tf-rational-model], give the identity for every $m$.\nThe case $E=\\Ql$ gives $\\Ql$.",
+   "uses": [
+    "sk-lem-tf-rational-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For $\\overline{\\mathbf Q}_\\ell$, [sk-thm-sfb-qlbar-two-colimit] descends $K$, its\nWeil map and the inverse of that map to a common finite extension\n$E/\\Ql$. The two inverse identities hold after a further finite\nextension, so this is a Weil complex at a finite stage, and scalar\nextension carries its $E$-formula to (1). If\nanother representative is chosen, an isomorphism respecting the Weil\nmaps descends to a common finite extension, and the resulting\noperators are conjugate. Scalar compatibility and conjugation\ninvariance of the trace prove independence of the stage and of the\nrepresentative.",
+   "uses": [
+    "sk-thm-sfb-qlbar-two-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Point-perfectness is [sk-lem-finite]. Compatibility\nwith the coefficient comparisons holds because the pullbacks, global\noperators and iterated Frobenius correspondences commute with the\ncomparisons of [sk-prop-scalar-six]. Finally, over a field\nthe categorical trace is the alternating trace on cohomology, by\n[sk-p-trace], which proves (2).",
+   "uses": [
+    "sk-lem-finite"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The form of (2) for Weil complexes over $E$ and $\\overline{\\mathbf Q}_\\ell$ in the\nnotation of the Weil-complex chapter, with the descent of the traces to a\nfinite coefficient field, is [det-thm-tf-uniform-formula-weil].",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-lem-tf-frobenius-convention",
+  "sk-def-pe-derived-completion",
+  "sk-lem-tf-rational-model",
+  "sk-thm-sfb-qlbar-two-colimit",
+  "sk-lem-finite"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261023/blueprint/sec-trace-formula/sk-thm-tf-uniform-formula/_section.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses",
+  "in_cycle"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2639,
+ "blueprint_uses": [
+  "sk-def-sf-weil-complexes",
+  "sk-prop-scalar-six",
+  "sk-lem-tf-frobenius-convention",
+  "sk-def-pe-derived-completion",
+  "sk-thm-trace-formula",
+  "sk-prop-tf-transport-integral",
+  "sk-lem-tf-rational-model",
+  "sk-p-trace",
+  "sk-thm-sfb-qlbar-two-colimit",
+  "sk-lem-finite"
+ ],
+ "blueprint_tags": [
+  "sketch"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261023",
+ "blueprint": {
+  "is": "sk-thm-tf-uniform-formula",
+  "from": null,
+  "same_as": null
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-tf-uniform-formula",
+ "blueprint_detail_nodes": [
+  "det-thm-tf-uniform-formula-weil"
+ ]
+}

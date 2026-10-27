@@ -16,123 +16,77 @@
  ],
  "proof": [
   {
-   "text": "By [lem-weil-l-adic-extension-integers-dvr], $O$ is a DVR with finite residue field and every nonzero element of $E$ is a unit times an integer power of $\\pi$. Apply this to $\\ell$. Since $|\\ell|_E=\\ell^{-1}<1$ and $0<|\\pi|_E<1$, its exponent $e$ is positive: $\\ell=u\\pi^e$ with $u\\in O^\\times$, $e\\geq1$. Thus $(\\ell^n)=(\\pi^{en})$, which proves cofinality (for each $j$, choose $n$ with $en\\geq j$; for each $n$, choose $j=en$). The hypotheses of [lem-weil-valued-dvr-finite-quotients] hold: $|\\cdot|_E$ is nonarchimedean by clause 1 of [def-weil-l-adic-coefficient-extension], and $O$ is a DVR with maximal ideal $\\{|x|_E<1\\}$, finite residue field and uniformizer $\\pi$ by the clauses just cited. Its finite-quotient clause gives finiteness of $O/\\pi^j$, and $O/\\ell^n=O/\\pi^{en}$ is finite as well.",
+   "text": "Apply [lem-sp-completed-coefficient-regular-quotients] to the given $\\ell,E,O,\\pi,T$. It gives the unit factorization, positive ramification exponent, cofinality, finite quotients, regularity on every site object, and the actual quotient identifications, with the specified coefficient projections and all transitions. These are exactly the coefficient hypotheses needed below.",
    "uses": [
-    "def-weil-l-adic-coefficient-extension",
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-valued-dvr-finite-quotients"
+    "lem-sp-completed-coefficient-regular-quotients"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
-    "place": "Coefficient tensor-product calculation in the first paragraph, expanded at chain level"
+    "place": "First proof paragraph, coefficient tensor and power transitions; assembly of the three extracted arguments."
    }
   },
   {
-   "text": "Clause (3) of [det-prop-sfb-qlbar-colimit-x-integral-limit], for the given arbitrary scheme $T$ and finite extension $E$, identifies the pulled-back ring $R$ with the inverse limit of the uniformizer-power constant quotient sheaves, with their reduction projections. These are precisely the coefficient projections of [sk-def-sp-coefficient-towers]. Apply [lem-pod-completed-integral-scalar-regular] to this inverse-limit sheaf: for every site object $U$, multiplication by $\\pi^j$ on $R(U)$ is injective. The image of the constant unit $u$ in $R(U)$ is invertible, so $\\ell^m=u^m\\pi^{em}$ also acts injectively. This is sectionwise injectivity, hence injectivity as a sheaf map; no hypothesis on the characteristic, dimension or finiteness of $T$ has been used.",
+   "text": "The tensor clause sp_ell_coefficient_tensor is proved directly. The constant scalar section ell is the natural-number section, since the sheafification unit and the map into the completion are ring homomorphisms. Consequently its multiplication map is ell times the identity, and its iterated composite is ell^(m+1) times the identity. Apply [lem-pc-tensor-mapping-cone-iso] to the actual total tensor with the principal Koszul cone. Both resulting tensor factors are the quotient single complex tensored with the degree-zero unit. The right unitor [def-pur-sheaf-tensor-product] identifies each with that quotient single complex. Additivity transports the differential to ell^(m+1) times its identity. The induced isomorphism of arrows gives the isomorphism of cones. No regularity or inequality m <= n is needed for this clause.",
    "uses": [
-    "det-prop-sfb-qlbar-colimit-x-integral-limit",
-    "sk-def-sp-coefficient-towers",
-    "lem-pod-completed-integral-scalar-regular"
+    "lem-pc-tensor-mapping-cone-iso",
+    "def-pur-sheaf-tensor-product"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
-    "place": "Coefficient tensor-product calculation in the first paragraph, expanded at chain level"
+    "place": "First proof paragraph, coefficient tensor and power transitions; assembly of the three extracted arguments."
    }
   },
   {
-   "text": "Write $\\rho_j:R\\to(O/\\pi^j)_T$ for a projection. It kills $\\pi^jR$, and [lem-sp-completed-integral-projection-divisibility], with its index $j-1\\geq0$, says conversely that every section in its kernel is $\\pi^j$ times a section of $R$. The projection is locally surjective: by [def-weil-pbc-constant-sheaf] and [lem-weil-pbc-site-sheafification-sections-local], a target section locally comes from a single element of $O/\\pi^j$; choose an $O$-representative $a$, and its compatible residue classes define a section of the inverse limit mapping to that element. Consequently the induced map $R/\\pi^jR\\to(O/\\pi^j)_T$ is locally bijective, hence an isomorphism of sheaves: local inverses agree on overlaps by injectivity and glue uniquely. Because all maps come from the same compatible residue projections, they preserve ring operations and quotient transitions. Substituting $j=en$ and using $\\ell^nR=\\pi^{en}R$ gives the canonical identification $R/\\ell^nR=B_n$. This proves the genuine sheaf quotient assertion, not merely the notation stipulated in [sk-def-sp-coefficient-towers].",
+   "text": "Apply [lem-sp-regular-scalar-quotient-exact-row] on $T_{\\mathrm{proét}}$ with $(R,t)=(\\mathcal O_{E,T},\\ell)$ and then with $t=\\pi$. Step 1 verifies sectionwise regularity and identifies the quotients with the stated constant sheaves through their actual augmentations. Thus both $K_m$ and $L_j$ are the asserted finite free K-flat resolutions; the normalized quotient augmentation gives $\\epsilon_{n,m}$ for the tensor model already identified above. Its exact row identifies $\\ker(\\ell^m)$ with $\\ell^{n-m}B_n\\cong B_m$, and its final cokernel is $B_m$. By the definition of cohomology these are $H^{-1}(P_{n,m})$ and $H^0(P_{n,m})$.",
    "uses": [
-    "lem-sp-completed-integral-projection-divisibility",
-    "def-weil-pbc-constant-sheaf",
-    "lem-weil-pbc-site-sheafification-sections-local",
-    "sk-def-sp-coefficient-towers"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
-    "place": "Coefficient tensor-product calculation in the first paragraph, expanded at chain level"
-   }
-  },
-  {
-   "text": "The two-term complexes have $H^{-1}=0$ by scalar injectivity, and $H^0$ equal to their indicated quotients by step 3. Thus their augmentations are quasi-isomorphisms, by the cohomology definition in [def-weil-abstract-derived-category]. Each is the mapping cone of the corresponding scalar map $R[0]\\to R[0]$. For any acyclic complex $A$, the total tensor $A\\otimes_RR[0]$ is $A$ by the unit identification, directly from [def-pc-tensor-complex-sheaves]. Both copies are therefore acyclic. Apply [lem-pc-kflat-tensor-cone-two-out-of-three] on the ringed site $(T_{\\mathrm{proét}},R)$ to conclude that its tensor with the cone is acyclic. This is exactly K-flatness [def-pc-kflat-complex]. Their two nonzero terms are $R$, so these are finite free K-flat resolutions.",
-   "uses": [
-    "def-weil-abstract-derived-category",
-    "def-pc-tensor-complex-sheaves",
-    "lem-pc-kflat-tensor-cone-two-out-of-three",
-    "def-pc-kflat-complex"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A3, lemma-K-flat-two-out-of-three; Definition 06YN; applied to the scalar cone"
-   }
-  },
-  {
-   "text": "Tensoring $K_m$ with $B_n[0]$ using [def-pc-tensor-complex-sheaves] gives exactly $P_{n,m}=[B_n\\xrightarrow{\\ell^m}B_n]$. Reduction $B_n\\to B_m$ kills its differential since $n\\geq m$, so $\\epsilon_{n,m}$ is a chain map. Define $a_{n,m}:B_m\\to B_n$ by $\\bar x\\mapsto\\ell^{n-m}\\bar x$: locally lift $\\bar x$ to $R$; changing the lift by $\\ell^my$ changes the answer by $\\ell^ny=0$ in $B_n$. These local formulas agree and glue. They are $B_n$-linear, with $B_m$ carrying its reduction action.",
-   "uses": [
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
-    "place": "Coefficient tensor-product calculation in the first paragraph, expanded at chain level"
-   }
-  },
-  {
-   "text": "The map $a_{n,m}$ identifies $B_m$ with $\\ker(\\ell^m:B_n\\to B_n)$. Indeed, locally lift a section $\\bar x\\in B_n$ to $x\\in R$. If $\\ell^m\\bar x=0$, then, after a further cover if needed, $\\ell^m x=\\ell^ny$ for some $y\\in R$. Cancellation of the injective scalar $\\ell^m$ gives $x=\\ell^{n-m}y$, proving local surjectivity onto the kernel. If $\\ell^{n-m}y=\\ell^nz$, cancellation gives $y=\\ell^mz$, proving injectivity (when $n=m$ this cancels the identity). Also $\\operatorname{im}(\\ell^m:B_n\\to B_n)=\\ker(B_n\\to B_m)$: both are locally the residue classes represented by $\\ell^my$, and reduction is locally surjective. Hence $H^{-1}(P_{n,m})=\\ell^{n-m}B_n\\cong B_m$ and $H^0(P_{n,m})=B_m$, by [def-weil-abstract-derived-category].",
-   "uses": [
+    "lem-sp-regular-scalar-quotient-exact-row",
     "def-weil-abstract-derived-category"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
-    "place": "Coefficient tensor-product calculation in the first paragraph, expanded at chain level"
+    "place": "First proof paragraph, coefficient tensor and power transitions; assembly of the three extracted arguments."
    }
   },
   {
-   "text": "Use the cone and shift signs of [def-weil-abstract-derived-category]. In degrees $-1,0,1$, the shifted cone $F_{n,m}=\\operatorname{Cone}(\\epsilon_{n,m})[-1]$ is the three-term complex $B_n\\xrightarrow{\\ell^m}B_n\\xrightarrow{-\\mathrm{red}}B_m$, zero elsewhere. The map $i_{n,m}:B_m[1]\\to F_{n,m}$ has degree $-1$ component $a_{n,m}$ and all other components zero; it is a chain map since $\\ell^m\\ell^{n-m}=\\ell^n=0$ in $B_n$. Step 6 says that $H^{-1}(i_{n,m})$ is an isomorphism. It also gives $H^0(F_{n,m})=\\ker(\\mathrm{red})/\\operatorname{im}(\\ell^m)=0$ and $H^1(F_{n,m})=\\operatorname{coker}(-\\mathrm{red})=0$. All remaining cohomology vanishes by the displayed terms. Thus $i_{n,m}$ is the specified quasi-isomorphism of $B_n$-complexes.",
+   "text": "Apply [lem-sp-exact-row-augmentation-fiber] over $S=B_n$ to the exact row of step 2, taking $(A,B,C,D)=(B_m,B_n,B_n,B_m)$, $a=a_{n,m}$, $d=\\ell^m$ and $q=\\mathrm{red}$. It identifies the shifted cone with $[B_n\\xrightarrow{\\ell^m}B_n\\xrightarrow{-\\mathrm{red}}B_m]$ and makes the specified coordinate map $i_{n,m}:B_m[1]\\to F_{n,m}$ a quasi-isomorphism.",
    "uses": [
-    "def-weil-abstract-derived-category"
+    "lem-sp-exact-row-augmentation-fiber"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
-    "place": "Coefficient tensor-product calculation in the first paragraph, expanded at chain level"
+    "place": "First proof paragraph, coefficient tensor and power transitions; assembly of the three extracted arguments."
    }
   },
   {
-   "text": "For $n'\\geq n\\geq m$, coefficient reduction on both terms of $P$ commutes with $\\epsilon$ and induces on the three displayed terms of $F$ the maps $(\\mathrm{red},\\mathrm{red},1_{B_m})$. The formula for the cone in [def-weil-abstract-derived-category] gives this chain map directly, with no choice of cone morphism. For any local lift $x\\in R$ of a section of $B_m$, its degree $-1$ component sends $\\ell^{n'-m}x\\bmod\\ell^{n'}$ to $\\ell^{n'-m}x\\bmod\\ell^n$, which equals $\\ell^{n-m}(\\ell^{n'-n}x)\\bmod\\ell^n$. All other components of $i$ are zero. Therefore the chain-level square is exactly $F_{n',m}\\to F_{n,m}$ composed with $i_{n',m}$ equals $i_{n,m}$ composed with $\\ell^{n'-n}:B_m[1]\\to B_m[1]$ (viewing both sources by restriction to $B_{n'}$). Inverting the quasi-isomorphisms proves the claimed transition formula. For $n=m$, $\\ell^m=0$ in $B_m$, $a_{m,m}=1$, and the remaining two-term summand is $B_m\\xrightarrow{-1}B_m$, so the same computation includes the boundary case.",
+   "text": "For $n\\prime\\geq n\\geq m$, regard both exact rows as $B_{n\\prime}$-linear by restriction of scalars [def-pc-sheaf-restrict-scalars]. Use $(\\beta,\\gamma,\\delta)=(\\mathrm{red},\\mathrm{red},1)$ and $\\alpha=\\ell^{n\\prime-n}$ on $B_m$. The middle and right squares commute with scalar multiplication and reduction. On a local lift $x\\in R$, the left square is $\\ell^{n\\prime-m}x\\bmod\\ell^n=\\ell^{n-m}(\\ell^{n\\prime-n}x)\\bmod\\ell^n$; local representatives suffice by step 1. Naturality in [lem-sp-exact-row-augmentation-fiber] now gives $r i_{n\\prime,m}=i_{n,m}\\ell^{n\\prime-n}$ strictly. Inverting the quasi-isomorphisms gives the claimed transition. At $n=m$, $a=1$, $d=0$ and the last two terms are $B_m\\xrightarrow{-1}B_m$; thus the same formulas include the boundary case.",
    "uses": [
-    "def-weil-abstract-derived-category"
+    "lem-sp-exact-row-augmentation-fiber",
+    "def-pc-sheaf-restrict-scalars"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
-    "place": "Coefficient tensor-product calculation in the first paragraph, expanded at chain level"
+    "place": "First proof paragraph, coefficient tensor and power transitions; assembly of the three extracted arguments."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-l-adic-coefficient-extension",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-valued-dvr-finite-quotients",
-  "det-prop-sfb-qlbar-colimit-x-integral-limit",
-  "sk-def-sp-coefficient-towers",
-  "lem-pod-completed-integral-scalar-regular",
-  "lem-sp-completed-integral-projection-divisibility",
-  "def-weil-pbc-constant-sheaf",
-  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-sp-completed-coefficient-regular-quotients",
+  "lem-pc-tensor-mapping-cone-iso",
+  "def-pur-sheaf-tensor-product",
+  "lem-sp-regular-scalar-quotient-exact-row",
   "def-weil-abstract-derived-category",
-  "def-pc-tensor-complex-sheaves",
-  "lem-pc-kflat-tensor-cone-two-out-of-three",
-  "def-pc-kflat-complex"
+  "lem-sp-exact-row-augmentation-fiber",
+  "def-pc-sheaf-restrict-scalars"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
-  "place": "Explicit expansion of the coefficient and fiber calculation in the first proof paragraph; Bhatt–Scholze §3.5 supplies the surrounding regular-ideal tower argument, not the omitted chain-coordinate computation."
+  "place": "J7 proves the tensor clause by the existing tensor-cone isomorphism, the right unitor, and natural-number scalar additivity. The existing coefficient regularity and fiber plans remain for the two unchanged named theorem holes."
  },
  "mathlib_searches": [
   {
@@ -334,41 +288,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-sp-ell-coefficient-fiber",
   "worker": "stage1",
-  "summary": "Q97 expanded the coefficient setup and the augmented quotient Koszul fiber into eight steps. Reused existing DVR, finite quotient, completed coefficient comparison, scalar regularity, projection divisibility, local sheafification and K-flat cone statements. Computed all cone signs and coefficient transitions explicitly, including n=m; no new nodes and no statement change.",
-  "blueprint": "sk-lem-sp-tower.proof.md, first paragraph: the coefficient setup, the displayed derived coefficient tensor product with H^0=H^-1=B_m, and the sentence that transitions on the fiber are powers of ell.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-l-adic-extension-integers-dvr",
-    "why": "DVR factorization and finite residue field for the coefficient ring; generic local-field algebra, not tower reconstruction."
-   },
-   {
-    "node": "lem-weil-valued-dvr-finite-quotients",
-    "why": "Finiteness of uniformizer-power quotient rings; generic DVR algebra absent from this unit."
-   },
-   {
-    "node": "det-prop-sfb-qlbar-colimit-x-integral-limit",
-    "why": "Identifies the pulled-back coefficient ring on any scheme with the uniformizer inverse limit used by the scalar and divisibility lemmas."
-   },
-   {
-    "node": "lem-pod-completed-integral-scalar-regular",
-    "why": "Injectivity of powers of the constant uniformizer on inverse-limit sections for every scheme; no point or finite-field restriction is present in its statement."
-   },
-   {
-    "node": "lem-sp-completed-integral-projection-divisibility",
-    "why": "Kernel of the actual finite projection consists of divisible sections; used as a coefficient algebra tool, not a reconstruction theorem."
-   },
-   {
-    "node": "lem-weil-pbc-site-sheafification-sections-local",
-    "why": "Local representation of sections of a constant sheaf by elements, needed for quotient epimorphisms on an arbitrary site."
-   },
-   {
-    "node": "lem-pc-kflat-tensor-cone-two-out-of-three",
-    "why": "K-flat scalar cone argument on a ringed site; this does not replace the tower calculation."
-   }
-  ]
+  "summary": "NX repairs the mandatory re-split return by extracting three statement-only unsplit nodes of comparable argument size: completed coefficient quotient/regularity, regular-scalar Koszul exact-row algebra, and natural shifted exact-row fiber comparison. The parent is a short assembly and retains the explicit power-transition square. The report preserves the eight original proof steps verbatim and assigns every argument to its new work package. Statement unchanged.",
+  "blueprint": "sk-lem-sp-tower.proof.md, first paragraph: coefficient setup, displayed tensor cohomology, truncation fiber and power-of-ell transitions; all eight returned proof steps retained in the report.",
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-weil-l-adic-extension-integers-dvr",
@@ -380,12 +305,12 @@
   "lem-pc-kflat-tensor-cone-two-out-of-three"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q97-cb57bf108",
-  "group": "Q97",
+  "reviewer": "NT-cc-NX-5e60f7983",
+  "group": "NX",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q97-cb57bf108 (reviewer sub-agent of L); spot-checked: I read the item in full: 8 steps, no new nodes, statement unchanged from the base and still unsplit on live and side-live. I also read the statement of every cited node, the sk-lem-sp-tower unit and its main-20261015 proof (first paragraph: H^0=H^-1=O/ℓ^m, transitions are powers of ℓ). The mathematics is correct. Steps 2–3: scalar regularity via lem-pod gives the sectionwise kernel π^jR together with the divisibility lemma; local surjectivity via the sheafification-sections lemma then gives R/ℓ^nR=B_n. Step 4: with the cone convention of def-weil-abstract-derived-category, Cone(ℓ^m:R[0]→R[0]) is exactly [R→R] in degrees −1,0, and K-flatness follows from the tensor-cone two-out-of-three lemma. Steps 6–8: I recomputed Cone(ε)[−1] = B_n --ℓ^m--> B_n --(−red)--> B_m and the chain identity ℓ^{n'-m}x ≡ ℓ^{n-m}(ℓ^{n'-n}x) mod ℓ^n. I tested Z_ℓ with n=m=1, n=m, n'−n≥m (transition zero), ramified E and empty T. Batch-5 citation lem-pod-completed-integral-scalar-regular: it is injectivity of π^m on lim(O/π^n)_T, pure coefficient algebra, and its 104-node closure contains no trace-formula, Poincaré-duality or assumption node, so it is genuinely outside the assumed statements; accepted. I accepted all seven declared tool uses as generic algebra. No duplicate, no cycle, no SGA. The one fix (E1, minor): step 1 applied lem-weil-valued-dvr-finite-quotients without the required nonarchimedean hypothesis. It now cites clause 1 of def-weil-l-adic-coefficient-extension, which is added to the step's uses and to proof_deps; the corrected file is fixes/dag/nodes/sec-smooth-purity/lem-sp-ell-coefficient-fiber.json.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-5e60f7983 (reviewer sub-agent of L); spot-checked: PASS: this re-split delivery meets the human's note of 2026-10-21 and the maths checks out; no fixes were needed. The repair note is released (6356 chars, 8 steps) and the item is still split live, so the delivery is not superseded. Compared with live, the item's statement, stmt_deps and lean fields are unchanged; only proof, proof_deps and split_report changed. All 8 old steps appear verbatim in the report. The new parent is a 4-step assembly of 2101 chars, and proof_deps equals the union of the step uses. Old steps 1-3 went to completed-coefficient-regular-quotients: ell=u pi^e with e>=1, cofinality, finite quotients, sectionwise regularity, kernel pi^jR via projection-divisibility, local surjectivity, and the sheaf quotient isomorphism. Old steps 4-6 went to regular-scalar-quotient-exact-row: the two-term resolution, the tensor with sign +, a_{n,m} well defined, and the row 0->B_m->B_n->B_n->B_m->0. I checked the row by cancellation and on Z, t=2, (3,1), n=m and a unit t. Old steps 7-8 went to exact-row-augmentation-fiber. With the def-weil cone C^r=L^r+K^{r+1}, d=(d_L,f;0,-d_K), and shift -d, I recomputed Cone(eps)[-1] as B -d-> C --q-> D, H^{-1}=im a, H^0=H^1=0, and r i'=beta a'=a alpha. Parent step 4: I checked the three squares by hand, including red(l^{n'-m}x)=l^{n-m}l^{n'-n}x mod l^n; restriction to B_{n'} keeps the cone; the n=m, n'=n and gap>=m cases hold. The three packages are about 2.6k, 2.0k and 1.7k chars and none restates the whole item. Node 1 does carry the item's coefficient clauses, but it is the genuine old 1-3 argument, made sharper with epimorphism and kernel. stmt_deps match the cited ids; each node has 4 search tools; there is no SGA and no Mathlib leaf. Advisory only: (1) node 1's pi case overlaps step 3 of lem-a1-principal-koszul-strict-replacement, which is in a later chapter, so citing it risks a cycle; (2) node 2's resolution clause is an instance of lem-sfb-finite-free-mono-cokernel-kflat and node 3's quasi-isomorphism follows from lem-weil-degreewise-epi-kernel-cocone-qis since eps is degreewise epi, and the future proofs should cite them; (3) the item's node-level tool_uses are stale (split_report.tool_uses is [])."
  },
  "lean": {
   "module": "Sheaf.Paper.EllCoefficientFiber",
@@ -430,5 +355,27 @@
   "group": "Q53",
   "result": "pass",
   "note": "Statement matches the node clause by clause, with Lean level n standing for paper level n+1. epsilon (inr ≫ ε = reduction), a (red ≫ a = ℓ^(n−m)) and i (degree −1 coordinate = a, QuasiIso) are uniquely determined. The transition r is forced to the coordinate reduction (red, red, id) and satisfies i' ≫ r = ℓ^(n'−n) ≫ i. The quotient isos are tied to the actual projections (sp_completed_coefficient_limit is ∃!). Both K-flat resolutions are stated with IsKFlatResolutionIndependentCoefficients. Statement field verbatim; all 23 declarations present. Added stmt_dep def-pur-principal-koszul-quotient-towers is a definition node, used, no cycle. Edge cases n=m, n'=n, empty T, ramified E, independent universes covered. Citers use only the pinned parts. Advisory: Nonempty-only H^{-1}/H^0/tensor clauses (implied, unused by citers); global priority-2000 Abelian instance; four proof-only imports; R/O/π owner nodes not in stmt_deps but exposed through sk-def-sp-coefficient-towers. No change, no compile."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261025T143512-L-1034585",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

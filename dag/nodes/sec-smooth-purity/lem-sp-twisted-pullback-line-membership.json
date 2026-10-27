@@ -1,0 +1,132 @@
+{
+ "id": "lem-sp-twisted-pullback-line-membership",
+ "kind": "statement",
+ "title": "Tate line tensor membership in the fixed integral closed model",
+ "statement": "For a prime l, finite extension E of Q_l, scheme X with l invertible in every residue field, integer m and an intrinsically integral constructible derived object M [def-weil-derived-complete-integral-detailed], tensor M with the degree-zero integralTwistLine l E X m using the integralClosed.tensor of the fixed coefficientDerivedSystemEvaluationCalculus. The resulting object is intrinsically integral constructible. This only concerns membership; it includes no pullback, cofinal transport, tower isomorphism or realization claim. Coefficient fields, completed coefficient sheaves, strict systems and the fixed derived presentations are as in [def-weil-l-adic-coefficient-extension], [def-weil-completed-integral-coefficients], [def-sp-twisted-pullback-reduction-data], [def-coefficient-twists-detailed], [def-coef-derived-system-calculus-data].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-bijection.proof.md",
+  "place": "Purity: pullback, twist and shift commute with reduction before total derived inverse limit"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-sp-twisted-pullback-reduction-data",
+  "def-weil-derived-complete-integral-detailed",
+  "def-coefficient-twists-detailed",
+  "def-coef-derived-system-calculus-data"
+ ],
+ "proof": [
+  {
+   "text": "The completed first Tate line is locally free of rank one and has finite locally constant reductions. Apply the integral signed-line reduction/restriction theorem; its PreservesIntegral clause gives integral constructibility of ordinary derived tensor with every signed power.",
+   "uses": [
+    "lem-pur-twist-sheaf-locally-free",
+    "lem-pur-integral-line-reduction-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-bijection.proof.md",
+    "place": "Purity: pullback, twist and shift commute with reduction before total derived inverse limit"
+   }
+  },
+  {
+   "text": "On a K-flat representative of M and the flat degree-zero signed line, the ordinary derived tensor and the fixed integralClosed tensor are localizations of the same total sheaf tensor. The universal derived tensor comparison and single localization identify them. The signed-power definition identifies the line with integralTwistLine for negative, zero and positive integers. Transport the constructibility predicate through this isomorphism.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-pur-ordinary-line-derived-scalar-comparison",
+    "def-coefficient-twists-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-bijection.proof.md",
+    "place": "Purity: pullback, twist and shift commute with reduction before total derived inverse limit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-pur-integral-line-reduction-restriction",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pur-ordinary-line-derived-scalar-comparison",
+  "def-coefficient-twists-detailed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-bijection.proof.md",
+  "place": "Purity: pullback, twist and shift commute with reduction before total derived inverse limit",
+  "description": "Isolated construction step of the parent proof, following the explicit proof in the theorem docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tensor with rank one locally free sheaf preserves derived complete constructible complexes",
+   "results": "IsLocalizedModule.rTensor; SheafOfModules.mapFree; Module.rankAtStalk_tensorProduct_of_isScalarTower; CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier; SheafOfModules.ιFree; SheafOfModules.free; Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier; Module.rankAtStalk_tensorProduct. No statement constructs the required strict model or proves this completed Tate-line assertion.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ordinary derived tensor locally free rank one preserves constructible derived complete",
+   "results": "LightCondensed.instMonoidalLightCondSetLightCondModFree; Module.free_of_lTensor_residueField_injective; Module.mem_freeLocus_iff_tensor; Module.free_of_flat_of_finrank_eq; Module.rankAtStalk_tensorProduct; Module.rankAtStalk_baseChange; Module.rankAtStalk_tensorProduct_of_isScalarTower; Module.comap_freeLocus_le. No statement constructs the required strict model or proves this completed Tate-line assertion.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "CofinalReduction|TateReduction",
+   "results": "No hits. Also searched Mathlib sheaf and derived-category files locally for Tate or DerivedComplete, without a matching declaration.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TwistedPullbackReductionTower",
+  "date": "2026-10-25",
+  "group": "X2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-integral-adjunction-bijection",
+   "place": "Purity: pullback, twist and shift commute with reduction before total derived inverse limit",
+   "via": [
+    "lem-sp-twisted-pullback-reduction-tower"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TwistedPullbackLineMembership",
+  "file": "lean/Sheaf/Paper/TwistedPullbackLineMembership.lean",
+  "declaration": "WeilConjectures.SpTwistedPullback.twistedPullbackLineMembership",
+  "statement": "theorem twistedPullbackLineMembership (X : Scheme.{u})\n    [∀ x : X, Invertible (l : X.residueField x)] (m : ℤ)\n    (M : sfIntegralConstructibleCategory l E X) :\n    sfIntegralConstructible l E X\n      ((coefficientDerivedSystemEvaluationCalculus l E X).choose.integralClosed.tensor.obj\n        (M.obj, (DerivedCategory.singleFunctor _ 0).obj (integralTwistLine l E X m)))",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261026T003137-L-149491",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261026T003137-L-149491",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

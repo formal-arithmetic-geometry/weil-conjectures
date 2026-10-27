@@ -18,9 +18,81 @@
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
   "place": "Expose XVI Definitions 3.2.1 and 3.2.2, printed p.244; canonical class: XVI 2.3.1--2.3.2."
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Construction obligations for the local pair. Put $R=\\mathcal O_{W,w}$ and $k=R/\\mathfrak m_R$. By [def-weil-regular-scheme], $R$ is Noetherian regular local. The finiteness assertion of [lem-weil-pbc-noetherian-local-system-of-parameters] gives $d=\\dim R\\in\\mathbb N$. The definition of regular local supplies $d$ generators $t_1,\\ldots,t_d$ of $\\mathfrak m_R$; [lem-weil-pbc-regular-local-generators-regular-sequence] says that this list is a regular sequence. Thus $j=\\operatorname{Spec}(R\\twoheadrightarrow k)$ is a regular closed immersion of codimension $d$: it is closed by the affine quotient criterion of [def-weil-closed-immersion], and its source has one point, at which the defining ideal is precisely $\\mathfrak m_R=(t_1,\\ldots,t_d)$. The affine scheme $\\operatorname{Spec}R$ is Noetherian since its coordinate ring is Noetherian, and $\\operatorname{Spec}k$ is Noetherian since $k$ is a field. The unit $\\ell^{-1}$ on $W$ maps to a unit in $R$, hence in $k$. These are exactly the hypotheses needed to evaluate the class-calculus node; none is a further hypothesis on $W$.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-noetherian-local-system-of-parameters",
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "def-weil-closed-immersion",
+    "def-weil-residue-field",
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00KQ (proposition-dimension) and 00NQ (lemma-regular-ring-CM); local closed-point specialization"
+   }
+  },
+  {
+   "text": "Coefficient and derived objects. Set $A=\\mathbb F_\\ell=\\Lambda_1$, $T=\\operatorname{Spec}R$, $Z=\\operatorname{Spec}k$, $M=A_Z$, and $K=A_T(d)[2d]$. Construct $A_T(d)$ by the tensor powers of the roots-of-unity sheaf in [def-asd-finite-etale-tate-twist], then regard it as a degree-zero complex and apply the cohomological shift in [def-weil-pbc-derived-categories]. Both $M$ and $K$ are bounded below, as each has a single possible nonzero cohomology degree. We use the fixed functors $F=j_*^+$ and $G=j^{!,+}$ and fixed adjunction $F\\dashv G$ of [def-per-closed-support-plus-adjunction]. In particular the target will be $G(K)=j^{!,+}(A_T(d)[2d])$; no tensor product is moved through $j^!$ in this construction.",
+   "uses": [
+    "def-asd-finite-etale-tate-twist",
+    "def-weil-pbc-derived-categories",
+    "def-per-closed-support-plus-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI 2.3.1 and 3.2.1; concrete finite-coefficient objects"
+   }
+  },
+  {
+   "text": "Take the level-$1$ untensored supported class $\\eta_{j,1}:A_Z\\to j_1^!A_T(d)[2d]$ of [lem-per-regular-immersion-class-calculus] for the pair $j:Z\\hookrightarrow T$ (there $\\Lambda_1=A$, $c=d$). Its supported direct-image form is its transpose under the $Rj_*\\dashv j_1^!$ adjunction named in that statement (the compact-support right adjoint; for the closed immersion $j$ the compactification is $(\\mathrm{id},j)$, so $Rj_!=Rj_*$): $b=\\varepsilon'_{A_T(d)[2d]}\\circ Rj_*(\\eta_{j,1}):Rj_*A_Z\\to A_T(d)[2d]$ in $D(T_{\\mathrm{et}},A)$, with $\\varepsilon'$ that adjunction's counit. Exact closed direct image agrees canonically with $Rj_*$ by [def-per-closed-support-plus-adjunction], so its source is the inclusion of $F(M)$. Both endpoints are in $D^+$; the strictly full-subcategory definition in [def-weil-pbc-bounded-derived-subcategories] identifies their Hom set with the Hom set in $D$. Let $b^+:F(M)\\to K$ be this same morphism under that identification. This specifies the supported class, including its Kummer normalization, rather than choosing an arbitrary element of the Hom set. Its independence of the regular generators is the explicit independence clause of the class-calculus statement.",
+   "uses": [
+    "lem-per-regular-immersion-class-calculus",
+    "def-per-closed-support-plus-adjunction",
+    "def-weil-pbc-bounded-derived-subcategories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI 2.3.1--2.3.2; level-1 supported class and its bounded-below realization"
+   }
+  },
+  {
+   "text": "Actual map and predicates. Let $u:\\mathrm{id}\\to GF$ be the unit of the fixed adjunction in [def-per-closed-support-plus-adjunction]. Define $\\alpha_{W,w}=G(b^+)\\circ u_M:M\\to G(K)$. This is exactly the adjunction transpose: by the triangle identities its image under $a\\mapsto\\varepsilon_K\\circ F(a)$ is $b^+$. Use the fixed shift comparison of that definition to write the target as $j_w^!(A_{W_w}(d_w))[2d_w]$. Define $\\operatorname{PunctuallyPureAt}_\\ell(W,w)$ to be $\\operatorname{IsIso}(\\alpha_{W,w})$, and define $\\operatorname{PunctuallyPure}_\\ell(W)$ to be $\\forall w\\in W,\\operatorname{PunctuallyPureAt}_\\ell(W,w)$. All data are the spectrum, quotient, tensor power, fixed supported class and fixed adjunction above. The only non-definitional obligations are the named dimension/regular-sequence results and the named class/adjunction interfaces already cited. In particular, no choice from a bare existence assertion of a class or a functor enters the definition.",
+   "uses": [
+    "def-per-closed-support-plus-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI Definitions 3.2.1--3.2.2, printed p.244; explicit adjunction-unit formula"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-regular-scheme",
+  "lem-weil-pbc-noetherian-local-system-of-parameters",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "def-weil-closed-immersion",
+  "def-weil-residue-field",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-asd-finite-etale-tate-twist",
+  "def-weil-pbc-derived-categories",
+  "def-per-closed-support-plus-adjunction",
+  "lem-per-regular-immersion-class-calculus",
+  "def-weil-pbc-bounded-derived-subcategories"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XVI Definitions 3.2.1--3.2.2 and 2.3.1; explicit construction and named well-definedness obligations, using the existing finite interfaces"
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -71,6 +143,48 @@
    "results": "No matching punctual purity of regular local pairs. Upstream WeilGroup/WeilSheaf purity predicates are Frobenius-weight conditions; fundamentalClassMap is restricted to smooth schemes over a field. No existing definition node carries this regular-local-pair predicate.",
    "date": "2026-10-18",
    "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsPunctuallyPure|punctualPurity|punctual.*purity",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "etale cohomological purity local scheme closed point Kummer class exceptional inverse image isomorphism",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.stalkClosedPointIso_inv\", \"AlgebraicGeometry.stalkClosedPointIso\", \"autAdjoinRootXPowSubCEquiv_symm_smul\", \"AlgebraicGeometry.Scheme.stalkClosedPointTo\", \"AlgebraicGeometry.Spec_stalkClosedPointIso\", \"AlgebraicGeometry.Scheme.isLocalHom_stalkClosedPointTo'\", \"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"IsLocalRing.comap_closedPoint\"], \"digest\": \"7ea90fdf17b54f67\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, CategoryTheory.IsIso",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsIsoSchemeMapOfCommRingCat\", \"AlgebraicGeometry.Scheme.Hom.isIso_toLRSHom\", \"AlgebraicGeometry.Scheme.Hom.homeomorph\", \"AlgebraicGeometry.Spec.map_inv\", \"AlgebraicGeometry.Scheme.Hom.isIso_toPshHom\", \"AlgebraicGeometry.Scheme.Hom.isIso_base\", \"AlgebraicGeometry.Scheme.Hom.homeomorph_apply\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp\"], \"digest\": \"d0b01b10c2b3949b\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Punctual purity of a regular scheme at a point means the canonical Kummer fundamental class of its local closed point is an isomorphism in the etale derived category",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsEtaleAt\", \"Algebra.mem_etaleLocus_iff\", \"Algebra.etaleLocus\", \"AlgebraicGeometry.stalkClosedPointIso\", \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField\", \"Algebra.basicOpen_subset_etaleLocus_iff\", \"Algebra.exists_etale_of_isEtaleAt\"], \"digest\": \"6ec7ad6d70a1b3fc\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "fundamentalClass|Gysin|Kummer.*class",
+   "results": "{\"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/KummerExtension.lean\", \"Mathlib/FieldTheory/KummerExtension.lean\", \"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"Mathlib/CategoryTheory/Sites/Canonical.lean\"], \"digest\": \"1ddbad1fafd6e281\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical supported fundamental class map from constant sheaf to extraordinary inverse image of Tate twist for a regular closed immersion",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.liftCoborder_app\", \"SheafOfModules.unitToPushforwardObjUnit\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"AlgebraicGeometry.Scheme.Modules.restrict\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"ModuleCat.Tilde.res_const\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\"], \"digest\": \"91e2cdeef40b5333\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match"
   }
  ],
  "created": {
@@ -98,42 +212,42 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-deligne-laumon-a1",
  "unit": "sk-p-dl-a1-perverse",
- "lean": {
-  "module": "Sheaf.AlgebraicGeometry.PunctualPurity",
-  "declaration": "AlgebraicGeometry.Etale.IsPunctuallyPure",
-  "declarations": [
-   "AlgebraicGeometry.Etale.regularImmersionClasses",
-   "AlgebraicGeometry.Etale.supportedExtPlusHom",
-   "AlgebraicGeometry.Etale.punctualPurityCoefficientsFinite",
-   "AlgebraicGeometry.Etale.punctualPurityClassMap",
-   "AlgebraicGeometry.Etale.IsPunctuallyPureAt",
-   "AlgebraicGeometry.Etale.IsPunctuallyPure"
-  ],
-  "file": "lean/Sheaf/AlgebraicGeometry/PunctualPurity.lean",
-  "statement": "def IsPunctuallyPure (ℓ : ℕ) (hℓ : ℓ.Prime) (W : Scheme.{u}) : Prop",
-  "branch": "newtargets-dag",
-  "by": "Q03",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.AlgebraicGeometry.PunctualPurity deleted (dead: no target reaches it); this node is not reached either."
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "def-per-punctual-purity",
+  "worker": "stage1",
+  "summary": "Reconstructs the reopened finite-coefficient definition without altering its statement, source, statement dependencies or blueprint provenance. Gives the local-pair witnesses by existing named theorems, the actual level-1 supported class, its unique bounded-below representative, and the fixed-unit transpose formula. No new nodes, deleted Lean attachment, excluded proof graph, arbitrary-field adic duality, or SGA route is used.",
+  "blueprint": "The inherited ancestor lem-per-artin-gabber-affine-curve records provenance only. Its current proof has no punctual-purity definition; this interface is independently re-admitted by coord/changes/20261024-Q84-gabber-purity-inputs.md and realizes ILO XVI 3.2.1--3.2.2 for the regular-pair input. No unit or chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "why": "step 1 takes from its statement (Stacks 00NQ) that a minimal generating set of the maximal ideal of a regular local ring is a regular sequence, so Spec k -> Spec R is a regular closed immersion; generic commutative algebra, no node of sk-p-dl-a1-perverse states it"
+   }
+  ]
  },
+ "tool_uses": [
+  "lem-weil-pbc-regular-local-generators-regular-sequence"
+ ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-64f1cbf59",
-  "group": "Q03",
-  "result": "fix",
-  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
- },
- "reviewed_lean": {
-  "date": "2026-10-18",
-  "by": "L",
-  "reviewer": "NT-stage2-cc-64f1cbf59",
-  "group": "Q03",
-  "result": "fix",
-  "note": "Item and new def node def-per-punctual-purity are correct clause by clause. Trait (domain, local, Noetherian, ringKrullDim 1, principal max ideal), ℓ unit, X regular and finite type over Spec R, q Smooth+LFT+QC, Y Noetherian; both conclusions. Purity = IsIso of the transpose of the ∃!-chosen level-1 class-calculus Ext class under closedSupportPlusAdjunction at Spec O_{W,w}, residue closed point, d = ringKrullDim; the witnesses always exist on regular Noetherian W with ℓ invertible, so no extra assumption. Edge cases ok. nt_compile --json with live dep text: rc 0, no warnings (PunctualPurity 32.4 s, item 4.0 s, RegularImmersionClassCalculus 41.0 s). F1 H13/H2: EtaleFiniteTwistPullback.lean re-pushed as live + 1 comment line, and the lem-asd-etale-finite-twist-pullback record rewritten (by N3->Q03, note, fixed_by dropped) to get around a stale published olean; no theorem stmt_dep added. FIX: fixes/EtaleFiniteTwistPullback.lean = live bytes; maintainer: land with --revert-nodes lem-asd-etale-finite-twist-pullback. Race note: Q30 def-per-punctual-cohomological-purity and Q22 def-per-punctual-kummer-purity (both RETURNed, unlanded) define the same notion; the first to land wins, later ones H12. Advisory H9: Mathlib.AlgebraicGeometry.Noetherian import belongs to no proof_dep record and is transitive."
+  "reviewer": "NT-cc-NO-7b4a22204",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-7b4a22204 (reviewer sub-agent of L); spot-checked: Read the full split of the def-per-punctual-purity definition (4 construction steps, no new nodes). Statement and stmt_deps are unchanged and identical to live, where the item is still unsplit, so the delivery is not superseded. The Q84 repair note is respected: no old proof graph, no node from route-pivot-dropped, no SGA. Checked against ILO XVI Def. 3.2.1–3.2.2 (PDF p.250) and Def. 2.3.1 (PDF p.239–240): the class is Cl_i: Λ→i^!Λ(c)[2c] in D+, the test is on the localization at each point, and Λ is specialised to F_ℓ as in the base statement. Step 1: regular local (02IT form), finite dimension (00KQ leaf), and minimal generators form a regular sequence (00NQ); together these give a regular closed immersion Spec k→Spec R of codimension d with Noetherian source and target and ℓ invertible, which are the class-calculus hypotheses. Step 2: the μ_ℓ twist is the same as the class-calculus twist at n=1, and both objects are in D+. Step 3: the transpose of η into its direct-image form was implicit. FIX states it as b=ε'∘Rj_*(η) under the Rj_*⊣j^! adjunction named in the class-calculus statement, with compactification (id,j). Moving b into D+ uses only strict fullness. Step 4: α=G(b+)∘u_M via the triangle identity, with IsIso and ∀w; α is an actual morphism, not hollow. The unbounded adjoint and the D+ adjoint are never silently identified. Edge cases checked: W empty, d=0, a trait, a non-closed point, characteristic ℓ. No duplicate definition exists in the DAG. FIX also declares split_report.tool_uses for lem-weil-pbc-regular-local-generators-regular-sequence (sk-thm-p1, a generic 00NQ fact); accepted.; 1 file(s) fixed by the reviewer"
  }
 }

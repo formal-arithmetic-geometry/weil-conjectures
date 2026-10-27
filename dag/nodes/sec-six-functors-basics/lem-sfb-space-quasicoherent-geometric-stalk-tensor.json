@@ -1,0 +1,236 @@
+{
+ "id": "lem-sfb-space-quasicoherent-geometric-stalk-tensor",
+ "kind": "statement",
+ "title": "Geometric module stalk on a space as tensor extension of an ordinary chart stalk",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $X$ an algebraic space over $S$ [def-trf-algebraic-space], and $M$ a quasi-coherent $\\mathcal O_X$-module on its small etale ringed site [def-trf-space-quasi-coherent-module]. Let $e:U\\to X$ be an etale morphism from a scheme and let $\\bar u:\\operatorname{Spec}\\Omega\\to U$ be a geometric point, where $\\Omega$ is algebraically closed, with image $u\\in U$; put $\\bar x=e\\bar u$. Let $M_U$ be the quasi-coherent Zariski module corresponding to the restriction $e^*M$ under [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence]. Write $\\mathcal O_{X,\\bar x}$ and $M_{\\bar x}$ for the geometric stalks, namely the colimits of regular functions and module sections over pointed etale scheme neighbourhoods of $\\bar x$. The ordinary local ring $\\mathcal O_{U,u}$ acts on $\\mathcal O_{X,\\bar x}$ by the natural germ homomorphism of [lem-sfb-space-strict-local-flatness]. There is a canonical $\\mathcal O_{X,\\bar x}$-linear isomorphism $$ (M_U)_u\\otimes_{\\mathcal O_{U,u}}\\mathcal O_{X,\\bar x}\\ \\xrightarrow{\\ \\sim\\ }\\ M_{\\bar x}. $$ Here $(M_U)_u$ is the ordinary Zariski module stalk [def-weil-pbc-module-stalk] and $\\otimes$ is the module tensor product [def-weil-pbc-module-tensor-product]; the map sends a tensor of a module germ with a ring germ to their product after restriction to a common pointed neighbourhood. No finiteness or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 05VP (lemma-stalk-quasi-coherent), with the chart ring map of Tag 04KF (lemma-describe-etale-local-ring)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-space-quasi-coherent-module",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sfb-space-strict-local-flatness",
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-module-tensor-product",
+  "def-trf-space-module-scheme-restriction",
+  "def-sfb-space-geometric-stalk-models",
+  "def-pc-module-stalk-functor"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=\\mathcal O_{U,u}$, $B=\\mathcal O_{X,\\bar x}$, $B_U=\\mathcal O_{U,\\bar u}$, and $G=e^*M$. Etale pullback is restriction on localized sites [def-trf-algebraic-space], so $G=M|_U$ and $e^{-1}\\mathcal O_X=\\mathcal O_U$. Let $\\Phi=L_{\\bar u}$ send $W\\in U_{\\mathrm{et}}$ to the set of lifts of $\\bar u$ to $W$; its category of elements is the cofiltered category of pointed etale neighbourhoods [lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered], and an etale covering of $W$ lifts any point of $\\Phi(W)$ to a member [lem-sfb-etale-geometric-point-specified-lift], so $\\Phi$ is a point and $\\Phi^*$ is the geometric stalk at $\\bar u$. Apply [lem-cbc-site-point-comap-germ] to the base-change functor $V\\mapsto V\\times_XU$ from $X_{\\mathrm{et}}$ to $U_{\\mathrm{et}}$ (it preserves finite limits and coverings, and $V\\times_XU$ is a scheme [def-trf-algebraic-space]) with left adjoint $e^{-1}$. Lifts of $\\bar u$ to $V\\times_XU$ are the lifts of $\\bar x$ to $V$, so $(\\Phi_F)^*$ is the geometric stalk at $\\bar x$, and the lemma gives a natural bijection $b:F_{\\bar x}\\cong(e^{-1}F)_{\\bar u}$ sending the germ of $m$ at $(V,\\bar v)$ to the germ of $\\mathrm{pr}_V^*m$ at $(V\\times_XU,(\\bar v,\\bar u))$. For $W\\in U_{\\mathrm{et}}$ the graph $W\\to W\\times_XU$ is a map of pointed neighbourhoods, so $b$ sends the germ at $(W\\to X,\\bar w)$ of $m\\in M(W)$ to its germ at $(W,\\bar w)$. For $F=\\mathcal O_X$ this is the restriction map $\\rho:B\\to B_U$, the canonical isomorphism of [lem-sfb-space-strict-local-flatness]. Naturality on the action maps $\\mathcal O_X\\times M\\to M$ makes $\\tau=b^{-1}:G_{\\bar u}\\to M_{\\bar x}$ a $\\rho$-semilinear bijection, i.e. a $B$-linear isomorphism when $G_{\\bar u}$ is a $B$-module through $\\rho$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "lem-sfb-etale-geometric-point-specified-lift",
+    "lem-cbc-site-point-comap-germ",
+    "lem-sfb-space-strict-local-flatness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 04K2 (lemma-stalk-pullback) (4), 04KF (lemma-describe-etale-local-ring); sites.tex Tag 05V1 (lemma-point-morphism-sites)"
+   }
+  },
+  {
+   "text": "By [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence], $G$ is identified with $\\epsilon_U^*M_U$, $\\epsilon_U:U_{\\mathrm{et}}\\to U_{\\mathrm{Zar}}$ the canonical morphism of ringed sites, by the counit $r\\otimes s\\mapsto rs$, and $M_U(W)=G(W)$ for Zariski opens $W$. By [lem-sfb-space-geometric-points-conservative] the geometric stalk at $\\bar u$ is the inverse image of a point $p_{\\bar u}$ of $\\operatorname{Sh}(U_{\\mathrm{et}})$; put $q=\\epsilon_U\\circ p_{\\bar u}$. Apply [lem-cbc-site-point-comap-germ] to the inclusion of Zariski opens into $U_{\\mathrm{et}}$ (it preserves intersections, $U$ and open covers) and the point $\\Phi$ of step 1: $\\Phi(W)$ is one point if $u\\in W$ and empty otherwise, so $(\\Phi_F)^*H=\\varinjlim_{W\\ni u}H(W)=H_u$ is the ordinary stalk [def-weil-pbc-module-stalk], and $H_u\\cong(\\epsilon_U^{-1}H)_{\\bar u}=q^{-1}H$ sends $s_u$ to the germ of the inverse-image section of $s$ on $(W,\\bar u)$. With this identification of $q$-stalks, [lem-sfb-ringed-topos-pullback-stalk] for $\\epsilon_U$ and $p_{\\bar u}$ gives a $B_U$-linear isomorphism $(\\epsilon_U^*M_U)_{\\bar u}\\cong(M_U)_u\\otimes_AB_U$ sending the germ of a local pure tensor $r\\otimes s$ to $s_u\\otimes r_{\\bar u}$; the ring map $A\\to B_U$ is the stalk of $\\epsilon_U^\\sharp$, i.e. the germ map $f_u\\mapsto f_{\\bar u}$. It is the germ map of the statement after $\\rho^{-1}$ (step 1).",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sfb-space-geometric-points-conservative",
+    "lem-cbc-site-point-comap-germ",
+    "def-weil-pbc-module-stalk",
+    "lem-sfb-ringed-topos-pullback-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 05VP; descent.tex Tags 03FH and 03DX; sites.tex Tag 05V1 (lemma-point-morphism-sites); sites-modules.tex Tag 05V5 (lemma-pullback-stalk)"
+   }
+  },
+  {
+   "text": "Let $\\psi:(M_U)_u\\otimes_AB_U\\to G_{\\bar u}$ be the inverse of the isomorphism of step 2 followed by the counit of step 2; it sends $s_u\\otimes r_{\\bar u}$ to the germ of $r\\,s$ at $\\bar u$, with $s\\in M_U(W)=G(W)$ and $r$ a function on a pointed neighbourhood over $W$. Compose with $\\tau$ of step 1 and transport the second factor along $\\rho^{-1}:B_U\\cong B$. The resulting $B$-linear isomorphism $(M_U)_u\\otimes_AB\\cong M_{\\bar x}$ sends $s_u\\otimes b$ to the germ at $\\bar x$ of the product of $s$ and a representative of $b$ on a common pointed neighbourhood: ordinary germs have section representatives [def-weil-pbc-module-stalk], ring geometric germs have representatives by the colimit definition, and every tensor is a finite sum of pure tensors [def-weil-pbc-module-tensor-product], so this is the map asserted in the item on every element. No finiteness condition entered the argument.",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "def-weil-pbc-module-stalk",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 05VP canonical map; sites-modules.tex Tag 05V5 pure-tensor formula; descent.tex Tag 03DX open-section normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+  "lem-sfb-etale-geometric-point-specified-lift",
+  "lem-cbc-site-point-comap-germ",
+  "lem-sfb-space-strict-local-flatness",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sfb-space-geometric-points-conservative",
+  "def-weil-pbc-module-stalk",
+  "lem-sfb-ringed-topos-pullback-stalk",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 05VP (lemma-stalk-quasi-coherent); its scheme reduction assembled with the already existing general point-pullback formula, sites-modules.tex Tag 05V5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "stalk.*[Tt]ensor|[Tt]ensor.*stalk|AlgebraicSpace",
+   "results": "OK 1 hits: Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary Zariski stalks/localization, scheme ideal zero loci, ring spectra, or the definition of quasi-coherence; none is the algebraic-space geometric module stalk comparison or support assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"tensor\"",
+   "results": "OK 6 hits: RingHom.SurjectiveOnStalks.tensorProductMap, PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks, PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks_aux, Module.rankAtStalk_tensorProduct, Module.rankAtStalk_tensorProduct_of_isScalarTower, Module.rankAtStalk_eq_finrank_tensorProduct",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary Zariski stalks/localization, scheme ideal zero loci, ring spectra, or the definition of quasi-coherence; none is the algebraic-space geometric module stalk comparison or support assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent sheaf geometric stalk is base change of Zariski stalk to strict henselization",
+   "results": "OK 8 hits: SheafOfModules.isQuasicoherent, SheafOfModules.IsQuasicoherent, AlgebraicGeometry.localRingHom_comp_stalkIso_apply, AlgebraicGeometry.localRingHom_comp_stalkIso_apply', ModuleCat.Tilde.stalkIso, AlgebraicGeometry.localRingHom_comp_stalkIso, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, SheafOfModules.IsQuasicoherent.casesOn",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary Zariski stalks/localization, scheme ideal zero loci, ring spectra, or the definition of quasi-coherence; none is the algebraic-space geometric module stalk comparison or support assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The geometric stalk of a quasi coherent module on an algebraic space is its ordinary stalk on an etale chart tensored with the etale local ring",
+   "results": "OK 8 hits: ModuleCat.Tilde.toStalk, ModuleCat.Tilde.stalkIso_hom, ModuleCat.Tilde.stalkIso, ModuleCat.Tilde.stalkToFiberLinearMap_toStalk, ModuleCat.Tilde.stalkToFiberLinearMap, ModuleCat.Tilde.localizationToStalk, ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap, ModuleCat.Tilde.stalkToFiberLinearMap_germ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary Zariski stalks/localization, scheme ideal zero loci, ring spectra, or the definition of quasi-coherence; none is the algebraic-space geometric module stalk comparison or support assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For quasicoherent sheaves extension from Zariski topology to the small etale site identifies a geometric stalk with the tensor product of its Zariski stalk and a strictly henselian local ring",
+   "results": "OK 8 hits: ModuleCat.Tilde.stalkIso_hom, ModuleCat.Tilde.stalkIso, ModuleCat.Tilde.toStalk, ModuleCat.Tilde.stalkToFiberLinearMap, ModuleCat.Tilde.stalkToFiberLinearMap_toStalk, ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap, ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap_assoc, ModuleCat.Tilde.stalkToFiberLinearMap_germ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary Zariski stalks/localization, scheme ideal zero loci, ring spectra, or the definition of quasi-coherence; none is the algebraic-space geometric module stalk comparison or support assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*[Tt]ensor|[Tt]ensor.*stalk|AlgebraicSpace",
+   "results": "{\"t\": \"2026-10-23T14:17:47Z\", \"tool\": \"grep\", \"query\": \"stalk.*[Tt]ensor|[Tt]ensor.*stalk|AlgebraicSpace\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks.lean\"], \"digest\": \"3d418f74629d4972\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary Zariski localization stalks, spectrum tensor facts and the quasi-coherence predicate do not state this algebraic-space geometric-stalk comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-23T14:17:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"stalk\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"RingHom.SurjectiveOnStalks.tensorProductMap\", \"PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks\", \"PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks_aux\", \"Module.rankAtStalk_tensorProduct\", \"Module.rankAtStalk_tensorProduct_of_isScalarTower\", \"Module.rankAtStalk_eq_finrank_tensorProduct\"], \"digest\": \"43b39f1ebb9173cf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary Zariski localization stalks, spectrum tensor facts and the quasi-coherence predicate do not state this algebraic-space geometric-stalk comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent sheaf geometric stalk is tensor base change of its Zariski stalk to the strict henselization",
+   "results": "{\"t\": \"2026-10-23T14:17:47Z\", \"tool\": \"leansearch\", \"query\": \"Quasi coherent sheaf geometric stalk is tensor base change of its Zariski stalk to the strict henselization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.isQuasicoherent\", \"SheafOfModules.IsQuasicoherent\", \"AlgebraicGeometry.StructureSheaf.stalkIso\", \"SheafOfModules.QuasicoherentData.I\", \"ModuleCat.Tilde.stalkIso\", \"SheafOfModules.IsQuasicoherent.casesOn\", \"AlgebraicGeometry.StructureSheaf.instIsIsoCommRingCatStalkToFiberRingHom\", \"AlgebraicGeometry.localRingHom_comp_stalkIso_apply\"], \"digest\": \"b0a4b412ecca06d6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary Zariski localization stalks, spectrum tensor facts and the quasi-coherence predicate do not state this algebraic-space geometric-stalk comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi coherent module on an algebraic space has geometric stalk equal to its ordinary etale chart stalk tensored with the geometric local ring",
+   "results": "{\"t\": \"2026-10-23T14:17:48Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi coherent module on an algebraic space has geometric stalk equal to its ordinary etale chart stalk tensored with the geometric local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.Tilde.stalkIso_hom\", \"ModuleCat.Tilde.toStalk\", \"ModuleCat.Tilde.stalkToFiberLinearMap_toStalk\", \"ModuleCat.Tilde.stalkIso\", \"ModuleCat.Tilde.stalkToFiberLinearMap\", \"ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap\", \"ModuleCat.Tilde.localizationToStalk\", \"ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap_assoc\"], \"digest\": \"aedb0d3cbb8846ce\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary Zariski localization stalks, spectrum tensor facts and the quasi-coherence predicate do not state this algebraic-space geometric-stalk comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension from Zariski modules to the small etale site has stalk given by scalar extension along the ordinary to geometric local ring map",
+   "results": "{\"t\": \"2026-10-23T14:17:49Z\", \"tool\": \"leanfinder\", \"query\": \"Extension from Zariski modules to the small etale site has stalk given by scalar extension along the ordinary to geometric local ring map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.Tilde.toStalk\", \"ModuleCat.Tilde.stalkIso_hom\", \"ModuleCat.Tilde.stalkToFiberLinearMap\", \"ModuleCat.Tilde.stalkIso\", \"ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap\", \"ModuleCat.Tilde.stalkToFiberLinearMap_toStalk\", \"ModuleCat.Tilde.localizationToStalk\", \"ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap_assoc\"], \"digest\": \"8d70c1a7fa069e3c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary Zariski localization stalks, spectrum tensor facts and the quasi-coherence predicate do not state this algebraic-space geometric-stalk comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-etale-chart-support",
+  "date": "2026-10-23",
+  "group": "Q63"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: affineness of the finite image of W in the last sentence of the proof of Tag 0ADD. Supporting input for the proof of Tag 07VP: Coherent subquotients have closed support on a locally Noetherian algebraic space. Proof of closed support, Tag 07TZ(1): identify the inverse image of support on each etale scheme chart using Tag 07TY. Supporting input for Tag 07TY: the tensor comparison of ordinary chart stalks and geometric module stalks, Tag 05VP (lemma-stalk-quasi-coherent).",
+   "via": [
+    "lem-sfb-space-etale-chart-support",
+    "lem-sfb-space-noetherian-coherent-support",
+    "lem-sfb-noetherian-space-finite-affine-descent",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-quasicoherent-geometric-stalk-tensor",
+  "worker": "stage1",
+  "summary": "NH: statement unchanged. Reused the existing scheme Zariski-etale stalk and general ringed-topos pullback nodes, verified the actual chart ring map is an isomorphism, and checked the prescribed pure-tensor map. No new nodes. Searches found no project attachment or Mathlib leaf.",
+  "blueprint": "Realizes the existing from.place supporting-input chain for the direct-images proof (3), at Tag 05VP: chart restriction, scheme scalar-extension formula and canonical germ multiplication. Latest blueprint direct-images node read; no unit route change.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic comparison of Zariski and etale quasi-coherent modules used for the chart restriction; the unit does not state this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NH-d98b44bcf",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-d98b44bcf (reviewer sub-agent of L); spot-checked: The statement matches Stacks 05VP (spaces-properties lemma-stalk-quasi-coherent; 04KF/04K0/04K2 also read) hypothesis by hypothesis and is unchanged. Edge cases checked: M=0, M=O_X, X a scheme with U=X, infinite sums, non-surjective or empty U. There are no new nodes. Three citation faults (C1/C3/C4), repaired in fixes/dag/nodes/sec-six-functors-basics/<item>.json. (1) Step 1 applied lem-sfb-ringed-topos-pullback-stalk to abstract topos points and read q^{-1}M as the colimit stalk M_x̄ without citing that geometric stalks are topos points and that the composite point lands on x̄ (04K0/04K2/Sites 05V1). (2) Step 3 read an element formula for step 2's isomorphism off the ringed-topos lemma applied to ε_U, but lem-sfb-etale-zariski-module-geometric-stalk gives only an abstract natural isomorphism. (3) The identification of the stalk at ε_U∘p_ū with the Zariski stalk (M_U)_u was uncited. Repair: step 1 now gets b: F_x̄≅(e^{-1}F)_ū with an explicit germ formula from lem-cbc-site-point-comap-germ (unit sk-prop-sf-comparison, on the route) applied to V↦V×_XU, using lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered and lem-sfb-etale-geometric-point-specified-lift; for O_X, b is ρ, iso by strict-local-flatness. Step 2 cites lem-sfb-space-geometric-points-conservative for the point p_ū, applies lem-cbc to the Zariski-open inclusion so that the q-stalks are ordinary stalks, then applies the ringed-topos lemma with its pure-tensor formula. Step 3 composes the maps, elementary. The unneeded lem-sfb-etale-zariski-module-geometric-stalk was removed from uses/proof_deps; proof_deps is the union of the uses; no cycles; steps are 1731, 1377 and 898 characters. Tool use lem-trf-scheme-zariski-etale-quasi-coherent-equivalence accepted as a generic comparison. No SGA cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceQuasiCoherentGeometricStalkTensor",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.quasiCoherent_geometricStalk_tensor",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceQuasiCoherentGeometricStalkTensor.lean",
+  "statement": "theorem quasiCoherent_geometricStalk_tensor {S : Scheme.{u}} {X : AlgebraicSpace S} (M : X.QCoh) (T : X.EtaleSite) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (t : Over.mk s ⟶ T.obj.left) : ∃ φ : (X.etaleForget.obj T).presheaf.stalk (Scheme.SpecToEquivOfField Ω (X.etaleForget.obj T) t.left).1 →+* stalkRing s (yoneda.map t ≫ T.obj.hom), (∀ (W : (X.etaleForget.obj T).Opens) (hu : (Scheme.SpecToEquivOfField Ω (X.etaleForget.obj T) t.left).1 ∈ W) (V : Neighbourhood (Over.mk s) (yoneda.map t ≫ T.obj.hom)) (f : (neighbourhoodChart.obj V) ⟶ (schemeOpens X T).obj W), (V.hom.left.left ≫ f.hom.left.left) ≫ W.ι = t.left → ∀ r : Γ(X.etaleForget.obj T, W), φ ((X.etaleForget.obj T).presheaf.germ W (Scheme.SpecToEquivOfField Ω (X.etaleForget.obj T) t.left).1 hu r) = (stalkModel s (yoneda.map t ≫ T.obj.hom)).ringCocone.ι.app (op V) ((Scheme.Γ.map f.hom.left.left.op) ((schemeOpensRingHom X T).app (op W) r))) ∧ ∃ E : (ModuleCat.extendScalars φ).obj ((RingedSpace.moduleStalkFunctor (X.etaleForget.obj T).toRingedSpace (Scheme.SpecToEquivOfField Ω (X.etaleForget.obj T) t.left).1).obj ((schemeRestriction X T).obj M.obj)) ≅ (stalkModel s (yoneda.map t ≫ T.obj.hom)).modules.obj M.obj, ∀ (W : (X.etaleForget.obj T).Opens) (hu : (Scheme.SpecToEquivOfField Ω (X.etaleForget.obj T) t.left).1 ∈ W) (V : Neighbourhood (Over.mk s) (yoneda.map t ≫ T.obj.hom)) (f : neighbourhoodChart.obj V ⟶ (schemeOpens X T).obj W), (V.hom.left.left ≫ f.hom.left.left) ≫ W.ι = t.left → ∀ (m : ((schemeRestriction X T).obj M.obj).val.obj (op W)) (r : (ringDiagram (yoneda.map t ≫ T.obj.hom)).obj (op V)), E.hom ((@id (stalkRing s (yoneda.map t ≫ T.obj.hom)) ((stalkModel s (yoneda.map t ≫ T.obj.hom)).ringCocone.ι.app (op V) r)) ⊗ₜ[_, φ] (TopCat.Presheaf.germ ((schemeRestriction X T).obj M.obj).val.presheaf W (Scheme.SpecToEquivOfField Ω (X.etaleForget.obj T) t.left).1 hu m)) = ((stalkModel s (yoneda.map t ≫ T.obj.hom)).germs M.obj).app (op V) (r • M.obj.val.map f.op m)",
+  "branch": "sheaf-dag",
+  "by": "Q48",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing normalized geometric stalk colimits and actual schemeRestriction. The ring homomorphism is constrained on every compatible function germ, and the linear isomorphism on every pure tensor represented on a common pointed neighbourhood; no arbitrary comparison is assumed. ModuleCat.extendScalars writes the same tensor product in ring-first order. Added statement dependencies are already-landed interfaces, as authorized by brief-stage2 section 5."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d1df3f0c0",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 05VP: X.QCoh, arbitrary étale chart T, geometric point t with u=SpecToEquivOfField image, M_U = actual schemeRestriction, ordinary stalk via RingedSpace.moduleStalkFunctor, geometric stalks via def-sfb-space-geometric-stalk-models owners. φ is pinned on all ordinary germs over pointed refinements (consistent: the diagonal of an étale representable map is an open immersion). E is a B-linear iso in ModuleCat B (ring-first extendScalars = module-first tensor by symmetry) and is pinned on pure tensors by germ multiplication after restriction. No finiteness/Noetherian hypotheses; single universe u (owner convention); lean.statement verbatim; sorry only; source/blueprint docstrings and 3-step proof present; added stmt_deps are landed def owners. Edge cases: empty X/U vacuous, M=0, identity chart, any characteristic. Note: the Second reading section was done by the same dispatcher worker, not a separate agent; it is substantive."
+ }
+}

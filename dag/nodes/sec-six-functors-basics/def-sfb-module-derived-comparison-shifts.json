@@ -1,0 +1,139 @@
+{
+ "id": "def-sfb-module-derived-comparison-shifts",
+ "kind": "definition",
+ "title": "Canonical exact comparison and fixed shifts of derived module functors",
+ "status": "split",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring], and let $f:X\\to Y$ be any morphism of schemes. For each scheme $T$, write $\\Lambda_T$ for the coefficient ring pulled back from the point [sk-def-sfb-pulled-back-coefficients], and $D_T=D(\\operatorname{Mod}_{\\Lambda_T})$ for the ordinary unbounded derived category [def-weil-abstract-derived-category] of module objects [sk-def-sfb-module-objects]. Let $P_f=Lf^*:D_Y\\to D_X$ and $G_f=Rf_*:D_X\\to D_Y$ be the specified total derived functors of the full ordinary module pullback and pushforward [sk-def-sfb-module-derived-pushpull]. Put $A_f=D(f^*)$, the exact termwise derived pullback, with its termwise integer shifts [def-weil-triangulated-category]. Define $c_f:P_f\\xrightarrow{\\sim}A_f$ to be the canonical exact comparison of [def-sfb-left-derived-exact] applied to the specified $P_f$ and its universal left-derived counit. Define the integer-shift structure on $P_f$ by transport of that on $A_f$ through $c_f^{-1}$ (the construction $\\operatorname{CommShift.ofIso}(c_f^{-1},\\mathbf Z)$). Define the integer-shift structure on $G_f$ to be the published K-injective shift structure of the total right derived functor of $f_*$, obtained from the inverse equivalence $K(\\mathrm{Inj})\\simeq D_X$ and termwise application of $f_*$; it is fixed independently of any adjunction.",
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-abstract-derived-category",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-weil-triangulated-category",
+  "def-sfb-left-derived-exact"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 015F (lemma-right-derived-exact-functor, dual left-derived comparison), 014X (lemma-additive-exact-homotopy-category, termwise shifts), and 05SE (proposition-derived-functor); specialized canonical definitions from def-sfb-left-derived-exact."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "modulePullbackExactComparison|modulePullbackDerivedCommShift|modulePushforwardDerivedCommShift",
+   "results": "{\"t\": \"2026-10-22T12:46:43Z\", \"tool\": \"grep\", \"query\": \"modulePullbackExactComparison|modulePullbackDerivedCommShift|modulePushforwardDerivedCommShift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "Reuse the existing three project declarations; Mathlib has the generic ingredients but not these named module specializations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical comparison from total left derived module pullback to exact termwise pullback, transported integer shifts and fixed K-injective pushforward shifts",
+   "results": "{\"t\": \"2026-10-22T12:46:44Z\", \"tool\": \"leansearch\", \"query\": \"Canonical comparison from total left derived module pullback to exact termwise pullback, transported integer shifts and fixed K-injective pushforward shifts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.totalLeftDerived\", \"DerivedCategory.instAdditiveShiftFunctorInt\", \"CategoryTheory.NatTrans.leftDerived\", \"CochainComplex.isKInjective_shift_iff\", \"CochainComplex.mappingCone.shiftIso\", \"CategoryTheory.Functor.IsLeftDerivedFunctor.mk\", \"SheafOfModules.pullbackIso\", \"HomologicalComplex₂.totalShift₂XIso.congr_simp\"], \"digest\": \"4937b3b62aada767\"}",
+   "date": "2026-10-22",
+   "verdict": "Reuse the existing three project declarations; Mathlib has the generic ingredients but not these named module specializations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CommShift.ofIso",
+   "results": "{\"t\": \"2026-10-22T12:46:44Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.CommShift.ofIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.CommShift.ofIso\", \"CategoryTheory.Functor.CommShift.ofIso_compatibility\", \"CategoryTheory.Functor.CommShift.ofIso_commShiftIso_hom_app\", \"CategoryTheory.Functor.CommShift.ofIso_commShiftIso_inv_app\"], \"digest\": \"0556024bcf2e8b25\"}",
+   "date": "2026-10-22",
+   "verdict": "Reuse the existing three project declarations; Mathlib has the generic ingredients but not these named module specializations."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"modulePullbackExactComparison|modulePullbackDerivedCommShift|modulePushforwardDerivedCommShift\" lean/WeilConjectures lean/Sheaf",
+   "results": "No WeilConjectures hits. Sheaf/Paper/ModuleDerivedFunctorCompositorShifts.lean defines the canonical comparison at line 46, the transported pullback shift instance at line 54, and the K-injective pushforward shift instance at line 60; all other hits are uses in that same module.",
+   "date": "2026-10-22",
+   "verdict": "Exact existing definitions reused with existing: true; no new Lean definition or module."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l \"modulePullbackExactComparison|modulePullbackDerivedCommShift|modulePushforwardDerivedCommShift\" dag/nodes; python3 tools/blueprint_refs.py search \"canonical exact comparison\"",
+   "results": "Only dag/nodes/sec-six-functors-basics/lem-sfb-module-derived-functor-compositor-shifts.json; 0 blueprint nodes match canonical exact comparison.",
+   "date": "2026-10-22",
+   "verdict": "The existing record is a theorem node, not a definition node owning these constructions. This definition node supplies their ownership as specifically requested by the maintainer return."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-kflat-derived-adjunction-transport-shifts",
+  "date": "2026-10-22",
+  "group": "Q87"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-rational",
+   "place": "proper base change rational proof paragraph (3), fixed comparisons and shifts used in the canonical derived-adjunction normalization",
+   "via": [
+    "lem-sfb-kflat-derived-adjunction-transport-shifts",
+    "lem-sfb-derived-exchange-exact-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "lean": {
+  "module": "Sheaf.Paper.ModuleDerivedFunctorCompositorShifts",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.modulePullbackExactComparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.modulePullbackExactComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.modulePullbackDerivedCommShift",
+   "AlgebraicGeometry.ProEtale.CondensedRing.modulePushforwardDerivedCommShift"
+  ],
+  "statement": "def modulePullbackExactComparison :\n    (moduleObjectDerivedPullback Λ f) ≅ (upperStar Λ f).mapDerivedCategory",
+  "branch": "newtargets-dag",
+  "by": "Q87",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Definition-node ownership of the three exact existing constructions in ModuleDerivedFunctorCompositorShifts.lean: canonical comparison via leftDerivedExactComparison applied to the actual leftDerivedFunctorCounit; pullback shifts via CommShift.ofIso of its inverse; pushforward shifts via inferInstanceAs of lowerStar.rightDerivedFunctor.CommShift. No theorem proof in that module is used to define these three declarations. This existing binding avoids duplicate definitions and changes no published module or instance."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-69b47b0e5",
+  "group": "Q87",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-69b47b0e5",
+  "group": "Q87",
+  "result": "pass",
+  "note": "Re-delivery fixes the only earlier RETURN (H2/H13): new def node def-sfb-module-derived-comparison-shifts records modulePullbackExactComparison, modulePullbackDerivedCommShift and modulePushforwardDerivedCommShift with existing:true in the unchanged ModuleDerivedFunctorCompositorShifts module; the item cites it instead of the theorem node. Item module unchanged apart from one docstring line. Re-checked: aP = derivedAdjunction and aA = mapDerivedCategoryRightDerivedAdjunction share rightDerivedFunctorUnit (same G and beta); c = leftDerivedUnique, so alphaA∘cQ = alphaP by construction; unit and counit formula directions correct; CommShift uses the transported P-shift and the fixed K-injective G-shift for all n in Z; no extra hypotheses or universe constraints; lean.statement verbatim; Stacks sources exist. Advisories: stale blueprint tag in the existing module docstrings; pre-existing upstream duplicate leftDerivedFunctorIsoMapDerivedCategory. No compile needed (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261023T231859-L-3654776",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.module_derived_functors_exact_and_comparison_shifts",
+   "AlgebraicGeometry.ProEtale.CondensedRing.module_pullback_compositor_commShift",
+   "AlgebraicGeometry.ProEtale.CondensedRing.module_pullback_compositor_exact_normalization",
+   "AlgebraicGeometry.ProEtale.CondensedRing.module_pullback_compositor_shift_degree",
+   "AlgebraicGeometry.ProEtale.CondensedRing.module_pullback_resolution_shift_normalization",
+   "AlgebraicGeometry.ProEtale.CondensedRing.module_pullback_square_shift"
+  ],
+  "sorry_after": []
+ }
+}

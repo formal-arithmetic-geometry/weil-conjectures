@@ -1,0 +1,115 @@
+{
+ "id": "lem-sfb-continuous-algcl-finite-model",
+ "kind": "statement",
+ "title": "Continuous algebraic p-adic representations have finite models",
+ "statement": "Let ell be prime, let G be any profinite group and let V be a finite-dimensional vector space over PadicAlgCl ell [def-pod-l-adic-representations]. Let rho be a group homomorphism to linear automorphisms. Assume that g maps to f(rho(g)(v)) is continuous for every linear functional f and vector v. Then Representation.IsLAdic holds: there is a finite intermediate field E, an actual G-invariant E-submodule W of V with continuous finite-dimensional action and the canonical scalar-extension equivalence sending each pure tensor a ⊗ w to a • w, for a in PadicAlgCl ell and w in W. The zero-dimensional case is included.",
+ "source": {
+  "document": "literature/stanford-weil2-seminar/L19.pdf",
+  "place": "Proposition 1.1.9, first bullet; blueprint clause (5), replacing original DAG steps 14--15 by the existing compact-matrix theorem"
+ },
+ "stmt_deps": [
+  "def-pod-l-adic-representations"
+ ],
+ "proof": [
+  {
+   "text": "Choose a finite basis. The dual-coordinate hypothesis makes the associated matrix homomorphism continuous entrywise. Apply compact matrix coefficient descent to find a finite intermediate field E containing all entries.",
+   "uses": [
+    "lem-real-compact-matrix-coefficient-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Corestrict the matrix coefficients to E. The field embedding is a closed embedding of finite-dimensional normed Q_ell vector spaces, so the corestricted entries are continuous for the spectral topology. Injectivity of E into the closure proves the matrix group laws. The finite sums expressing matrix-vector multiplication give a jointly continuous action on the coordinate E-space. Map that coordinate space to V by the basis and take its image W. Linear independence gives an E-linear equivalence onto W; transport gives its continuous action. The finite-basis scalar-extension equivalence is canonical on pure tensors, proving the recorded IsLAdic conclusion. All sums and basis identities remain valid for the empty basis.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-real-compact-matrix-coefficient-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stanford-weil2-seminar/L19.pdf",
+  "place": "Proposition 1.1.9, first bullet; blueprint clause (5), replacing original DAG steps 14--15 by the existing compact-matrix theorem"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "continuous representation of compact group on finite dimensional algebraic p-adic vector space descends to a finite extension",
+   "results": "Returned cyclotomic continuity and algebraic closure instances; no finite-model conclusion.",
+   "date": "2026-10-26",
+   "verdict": "No direct Mathlib match for finite model."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "continuous finite dimensional representation of a profinite group over algebraic closure of p adic numbers defined over a finite extension",
+   "results": "Returned cyclotomic characters and profinite Galois groups, not invariant finite-field models.",
+   "date": "2026-10-26",
+   "verdict": "No direct Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_finiteDimensional_forall_mem|lisse_qlbar_representations",
+   "results": "Remote msearch grep returned no hits. Local rg of both Lean roots found the assigned theorem, the existing compact matrix theorem in WeilConjectures.RepresentationTheory.IntegralModel, and the invariant-subspace transport helpers in Sheaf.RepresentationTheory.LAdicSubrepresentation. Read the proof-dependency signatures and relevant Mathlib site/module files. No other declaration supplies the new step in its full normalized interface; matrix descent supplies the entry-field step but not the invariant-subspace and continuity comparison.",
+   "date": "2026-10-26",
+   "verdict": "Use existing declarations as ingredients; a separate step is needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LisseQlbarRepresentations",
+  "date": "2026-10-26",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-lisse-qlbar-representations",
+   "place": "Proposition 1.1.9, first bullet; blueprint clause (5), replacing original DAG steps 14--15 by the existing compact-matrix theorem",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-lem-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RepresentationTheory.ContinuousAlgClFiniteModel",
+  "file": "lean/Sheaf/RepresentationTheory/ContinuousAlgClFiniteModel.lean",
+  "declaration": "Representation.isLAdic_of_continuous_dual_coefficients",
+  "statement": "theorem isLAdic_of_continuous_dual_coefficients\n    (l : ℕ) [Fact l.Prime] (G : ProfiniteGrp.{u})\n    (V : Type v) [AddCommGroup V] [Module (PadicAlgCl l) V]\n    [FiniteDimensional (PadicAlgCl l) V]\n    (ρ : G →* (V ≃ₗ[PadicAlgCl l] V))\n    (hρ : ∀ (f : Module.Dual (PadicAlgCl l) V) (v : V),\n      Continuous fun g : G ↦ f (ρ g v)) :\n    IsLAdic l (PadicAlgCl l) G V ρ",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-cbfb8",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261026T023429-L-565479",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-cbfb8",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261026T023429-L-565479",
+  "kind": "interface",
+  "note": "independent cc review: Defs module vs live item namespace body (verbatim apart from a local irreducible attribute); theorem signature byte-identical; 3 sorry statements vs thm-lisse-qlbar-representations clauses (1)-(4) and GaloisLisseFiniteCorrespondence fields; item node vs live (lean/proof/proof_deps/proof_origin plus an in-order tool_uses subsequence); scratch --all build with #print axioms"
+ }
+}

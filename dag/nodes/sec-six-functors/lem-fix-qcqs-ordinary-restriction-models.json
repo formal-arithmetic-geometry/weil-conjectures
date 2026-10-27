@@ -1,0 +1,143 @@
+{
+ "id": "lem-fix-qcqs-ordinary-restriction-models",
+ "kind": "statement",
+ "title": "Normalized ordinary restriction of strict quotient and Roos chain models",
+ "statement": "Fix ell and E as above [def-weil-l-adic-coefficient-extension]. Let s:S -> V be weakly etale and i:V -> T an immersion of qcqs schemes [def-pc-scheme, def-weil-quasi-separated-morphism], and put r=i s. Use the actual ordinary ringed pullback F_r, complex pullback and left derived pullback of [def-fix-qcqs-completion-ordinary-models], with independent scheme and coefficient universes. Then F_r preserves finite limits and colimits, and its specified completed coefficient map is invertible. There exist a natural strict quotient-tower isomorphism tau:F_r(tower_T P) ~= tower_S(F_r P), a natural Roos chain isomorphism chi:F_r(roos_T P) ~= roos_S(F_r P). Tau preserves the specified strict quotient augmentations. On both the product and shifted-product coordinates chi is exactly the canonical product comparison followed by the product of the components of tau. The towers and Roos functors are those of [def-pur-integral-derived-operations].",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AA, lemma-closed-immersion, clause (1); Tag 09BL, lemma-closed-immersion-affines-apply; weakly etale slice restriction in Tag 09AE, definition-extension-zero; Bhatt–Scholze Lemma 6.5.8(1). Tensor comparison: sites-cohomology.tex Tags 06YY, lemma-derived-base-change, and 07A4, lemma-pullback-tensor-product."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-abstract-derived-category",
+  "def-pur-integral-derived-operations",
+  "def-fix-qcqs-completion-ordinary-models",
+  "def-weil-quasi-separated-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Apply qcqsOrdinaryRestrictionExact for preservation of all small limits and the fixed coefficient-map isomorphism. Finite limits follow by specialization. Finite colimits are preserved because ordinaryPull is the left adjoint in ordinaryAdjunction; no geometric input is needed for this colimit clause.",
+   "uses": [
+    "lem-fix-qcqs-ordinary-restriction-exact",
+    "def-fix-qcqs-completion-ordinary-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Obtain the natural strict quotient-tower isomorphism tau and its augmentation equation from qcqsOrdinaryQuotientRestriction.",
+   "uses": [
+    "lem-fix-qcqs-ordinary-quotient-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the existing scalarRoosMap and podReindexingRoosCoordinates on each quotient tower. Its degreewise matrix is the additive biproduct comparison followed by the two countable-product comparisons, so it is invertible when ordinaryPull preserves countable products. Compose with integralOperationsRoosFunctor.mapIso(tau). Naturality is podReindexingRoosNaturality followed by the naturality of tau. The mapping-cocone first and shifted-second coordinate equations for integralOperationsRoosMap, followed by podReindexingRoosCoordinates, give precisely the two required product comparison equations. This argument needs neither derived descent nor exact countable products. For the exact shifted index j + -1, product extensionality applied to scalarRoosMap_existsUnique gives the coordinate formula directly at arbitrary compatible degrees; no dependent index rewrite or sign change is used.",
+   "uses": [
+    "lem-pod-reindexing-roos-comparison",
+    "def-sf-additive-roos-map",
+    "def-pur-integral-derived-operations",
+    "lem-pur-integral-ambient-operation-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-fix-qcqs-completion-ordinary-models",
+  "def-pur-integral-derived-operations",
+  "def-sf-additive-roos-map",
+  "lem-fix-qcqs-ordinary-quotient-restriction",
+  "lem-fix-qcqs-ordinary-restriction-exact",
+  "lem-pod-reindexing-roos-comparison",
+  "lem-pur-integral-ambient-operation-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 08TC; scalarRoosMap and podReindexingRoosCoordinates, with the degreewise additive biproduct/product matrix argument and the original geometric and quotient steps isolated separately."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical derived completion unit is an isomorphism exactly for derived complete complexes, and restriction to a covering family reflects isomorphisms",
+   "results": "DerivedCategory.instIsIsoMapCochainComplexIntQ; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors; DerivedCategory.instEssSurjCochainComplexIntQ; IsAdicComplete.of_comp_lift, plus unrelated Kan extension units.",
+   "date": "2026-10-25",
+   "verdict": "No matching derived quotient-tower completion or pro-etale local conservativity theorem; exact functor localization is reusable."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A completion unit is invertible if and only if an object is derived complete, and restriction to a covering family reflects isomorphisms",
+   "results": "Eight general sheaf isomorphism results; none gives the specified derived completion unit. Local search found WeilConjectures.roosIntrinsicCompletenessEquivalence.",
+   "date": "2026-10-25",
+   "verdict": "Use the existing intrinsic completeness equivalence; no direct Mathlib completion-locality theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.piComparison",
+   "results": "piComparison; piComparison_comp_π; map_lift_piComparison; piComparison_comp_π_assoc; map_lift_piComparison_assoc; instIsIsoPiComparison; PreservesProduct.of_iso_comparison; inv_piComparison_comp_map_π.",
+   "date": "2026-10-25",
+   "verdict": "These supply product-coordinate identities, not geometric coefficient restriction."
+  },
+  {
+   "tool": "grep",
+   "query": "completionUnit|ordinaryDerivedPull|roosUnit",
+   "results": "msearch grep returned zero hits. Local rg found the canonical slice completion unit, the item-owned ordinaryDerivedPull and the intrinsic Roos completeness equivalence.",
+   "date": "2026-10-25",
+   "verdict": "Reuse the existing models and equivalence, with separate geometric restriction and local-conservativity interfaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QcqsCompletionUnitLocality",
+  "date": "2026-10-25",
+  "group": "E3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning “For an admissible exceptional adjoint”, especially “Evaluation is natural in the two Weil maps and their inverses, so its square commutes”: the canonical-unit restriction and finite open–closed locality used in the ordinary-to-completed evaluation comparison.",
+   "via": [
+    "lem-fix-qcqs-completion-unit-locality",
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QcqsOrdinaryRestrictionModels",
+  "file": "lean/Sheaf/Paper/QcqsOrdinaryRestrictionModels.lean",
+  "declaration": "WeilConjectures.IntegralOnSlice.qcqsOrdinaryRestrictionModels",
+  "statement": "theorem qcqsOrdinaryRestrictionModels\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    {S V T : Scheme.{t}} [CompactSpace S] [QuasiSeparatedSpace S]\n    [CompactSpace V] [QuasiSeparatedSpace V] [CompactSpace T] [QuasiSeparatedSpace T]\n    (s : S ⟶ V) (i : V ⟶ T) [WeaklyEtale s] [IsImmersion i] :\n    let r := s ≫ i\n    PreservesFiniteLimits (ordinaryPull l E r) ∧\n    PreservesFiniteColimits (ordinaryPull l E r) ∧\n    IsIso (ordinaryCoefficientMap l E r) ∧\n    (∃ (τ : tower l E T none ⋙\n          (Functor.whiskeringRight ℕᵒᵖ (Cx l E T none) (Cx l E S none)).obj\n            (ordinaryComplexPull l E r) ≅\n          ordinaryComplexPull l E r ⋙ tower l E S none)\n        (χ : roos l E T none ⋙ ordinaryComplexPull l E r ≅\n          ordinaryComplexPull l E r ⋙ roos l E S none),\n        (∀ (P : Cx l E T none) (n : ℕ),\n          (ordinaryComplexPull l E r).map (((augmentation l E T none).app P).app (op n)) ≫\n              (τ.hom.app P).app (op n) =\n            ((augmentation l E S none).app ((ordinaryComplexPull l E r).obj P)).app (op n)) ∧\n        (∀ P : Cx l E T none,\n          χ.hom.app P ≫ CochainComplex.mappingCocone.fst\n              (ordinaryRoosEndomorphism l E ((ordinaryComplexPull l E r).obj P)) =\n            (ordinaryComplexPull l E r).map\n                (CochainComplex.mappingCocone.fst (ordinaryRoosEndomorphism l E P)) ≫\n              piComparison (ordinaryComplexPull l E r)\n                (fun n : ℕ ↦ ((tower l E T none).obj P).obj (op n)) ≫\n              Limits.Pi.map (fun n : ℕ ↦ (τ.hom.app P).app (op n))) ∧\n        (∀ (P : Cx l E T none) (i : ℤ),\n          (χ.hom.app P).f i ≫\n              (CochainComplex.mappingCocone.snd\n                (ordinaryRoosEndomorphism l E ((ordinaryComplexPull l E r).obj P))).v\n                  i (i + -1) rfl =\n            (ordinaryPull l E r).map\n                ((CochainComplex.mappingCocone.snd (ordinaryRoosEndomorphism l E P)).v\n                  i (i + -1) rfl) ≫\n              (piComparison (ordinaryComplexPull l E r)\n                (fun n : ℕ ↦ ((tower l E T none).obj P).obj (op n))).f (i + -1) ≫\n              (Limits.Pi.map (fun n : ℕ ↦ (τ.hom.app P).app (op n))).f (i + -1)))",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-25"
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-640b7",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261025T162253-L-392015",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261026T222619-L-674254",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

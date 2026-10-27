@@ -1,0 +1,309 @@
+{
+ "id": "lem-sfb-lattice-cubical-sheaf-resolution",
+ "kind": "statement",
+ "title": "Cubical translation resolution in internal lattice modules",
+ "statement": "Let $R$ be a commutative condensed ring [sk-def-sfb-condensed-ring], with internal module category $\\mathcal M_R$ [sk-def-sfb-module-objects], on the small coherent profinite site with the universe convention [def-weil-size-convention]. Let $r\\geq0$, $D=\\mathbf Z^r$, and $u_i$ its standard basis. Let $\\mathcal E_R=\\operatorname{Fun}(BD,\\mathcal M_R)$, where $BD$ has one object and automorphism group $D$. An object is an internal module with $r$ commuting automorphisms. The internal-module/section-ring equivalence [def-weil-pbc-internal-abelian-sheaf-module-equivalence] induces an exact equivalence on these action categories leaving underlying sections unchanged. The category $\\mathcal E_R$ is Grothendieck abelian [def-sp-grothendieck-abelian], has enough injectives [def-sp-injective-resolutions], and forgetting the action creates kernels and cokernels. Invariants $\\Gamma_D$ are right adjoint to exact trivial-action inflation, with transpose given by the invariant inclusion; in particular $\\Gamma_D$ is additive and left exact.\n\nFor an internal module $Q$ given trivial $D$-action, put $L_a(Q)=\\bigoplus_{|I|=a}\\bigoplus_{v\\in D}Q$ for $0\\leq a\\leq r$, zero otherwise. Write $[v,I](q)$ for its coproduct maps and give it the translation action $w[v,I](q)=[v+w,I](q)$. Set\n$$\\partial_a[v,I](q)=\\sum_{i\\in I}(-1)^{\\#\\{j\\in I:j<i\\}}\\bigl([v+u_i,I\\setminus\\{i\\}](q)-[v,I\\setminus\\{i\\}](q)\\bigr),\\qquad \\epsilon[v,\\varnothing](q)=q.$$\nThen $L_\\bullet(Q)\\to Q$ is an equivariant augmented chain complex whose underlying augmented complex is split exact. More precisely, the column-finite integral contraction matrices of [lem-sfb-integral-lattice-cubical-contraction], with each integer replaced by that multiple of $1_Q$, define maps $s_Q:Q\\to L_0(Q)$ and $h_a:L_a(Q)\\to L_{a+1}(Q)$ satisfying $\\epsilon s_Q=1$ and $\\partial h+h\\partial=1-s_Q\\epsilon$ (with $s_Q\\epsilon$ only in degree zero). These maps are natural in $Q$ and need not be equivariant. With the relative tensor [def-sfb-modobj-relative-tensor], the canonical identifications $Q\\otimes_R L_a(R)\\cong L_a(Q)$ respect boundaries, augmentations and translation. This includes $r=0$, where the augmentation and section are identities.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), algebraic discrete-lattice input to the tame-boundary calculation; returned lattice proof steps 1-2, internalization of the integral contraction; sites-modules.tex Tag 03DA (lemma-abelian) supplies underlying exactness only."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-module-objects",
+  "def-weil-size-convention",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-sp-grothendieck-abelian",
+  "def-sp-injective-resolutions",
+  "lem-sfb-integral-lattice-cubical-contraction",
+  "def-sfb-modobj-relative-tensor",
+  "def-sfb-condensed-action-module"
+ ],
+ "proof": [
+  {
+   "text": "Apply the internal/section tensor comparison to obtain the exact equivalence $E_R:\\mathcal M_R\\simeq\\operatorname{Mod}(R_{\\rm sec})$, identical on underlying sheaves and maps. Applying $E_R$ and its inverse to each value and structure map of a $BD$-diagram gives inverse equivalences on ordinary action categories. A kernel or cokernel in an action category has the underlying kernel or cokernel equipped with the induced automorphisms: the kernel inclusion or cokernel projection determines them uniquely, and their universal properties give the equivariant factorization. Thus this diagram equivalence is exact and leaves sections unchanged. Separately, apply the discrete-action comparison with $G=D$ to identify $\\mathcal E_R$ with the sectionwise condensed action category $\\mathcal A_R(D)$. This is a comparison with all locally constant $D$-valued maps, not just with their values at the one-point profinite set.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-sfb-discrete-condensed-action-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), internal-module and discrete-action comparisons preceding the cubical construction."
+   }
+  },
+  {
+   "text": "Use the condensed-action infrastructure with the discrete topological group $D$: it states that both underlying modules and condensed actions are Grothendieck abelian, and that forgetting actions creates kernels and cokernels. The equivalence of step 1 leaves underlying objects and maps fixed, so these assertions give the asserted Grothendieck structure and created kernels and cokernels on $\\mathcal E_R$. Apply the Grothendieck enough-injectives theorem. Trivial inflation is additive and exact by the same infrastructure. Its normalized adjunction has inverse transpose equal to composition with the invariant inclusion. For an ordinary action the invariant subsheaf is precisely the sections fixed by every $\\rho(d)$: the displayed clopen formula of the comparison shows such sections remain fixed by each locally constant map after every restriction, and constant maps give the converse. The infrastructure therefore gives the specified $\\Gamma_D$ and its additivity. The right-adjoint limit theorem applied to this adjunction gives preservation of finite limits, hence left exactness.",
+   "uses": [
+    "lem-sfb-condensed-action-injective-infrastructure",
+    "lem-sfb-discrete-condensed-action-equivalence",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-right-adjoint-preserves-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), exact action category and normalized invariants input."
+   }
+  },
+  {
+   "text": "For a set $B$ in the coefficient universe put $Q^{(B)}=\\coprod_{b\\in B}Q$ in $\\mathcal M_R$; the coproducts exist by the Grothendieck assertion already used. A column-finite integer matrix $A=(a_{cb})_{c\\in C,b\\in B}$ defines a map $A_Q:Q^{(B)}\\to Q^{(C)}$ by\n$$A_Q\\iota_b=\\sum_c a_{cb}\\iota_c.$$\nEach sum is finite, so the coproduct universal property defines the map. For a second column-finite matrix $B'$, the composite on $\\iota_b$ is $\\sum_{c,d}b'_{dc}a_{cb}\\iota_d$; only finitely many terms occur. Consequently $(B'A)_Q=B'_QA_Q$, $(A+A')_Q=A_Q+A'_Q$ and $(1)_Q=1$. Any integer-linear identity among these matrices therefore remains true in internal modules. This uses only finite addition and composition of module morphisms; no assertion that sections preserve infinite coproducts is needed.",
+   "uses": [
+    "lem-sfb-condensed-action-injective-infrastructure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), internalization of the integral cubical matrices by the coproduct universal property."
+   }
+  },
+  {
+   "text": "In degree $a$ take the basis set $B_a=\\{(v,I):v\\in D,\\ |I|=a\\}$ of the integral cubical complex. Its integral boundary has finite columns, and its realization by step 3 is exactly the boundary displayed in the statement. Realize the augmentation matrix to get $\\epsilon[v,\\varnothing]=1_Q$. The integral contraction node asserts $\\partial^2=0$ and $\\epsilon\\partial=0$; step 3 gives these identities for $L_\\bullet(Q)$. Realize translation as the permutation matrix $(v,I)\\mapsto(v+w,I)$. Permutation composition gives the $D$-action, and the integral commutation identities imply $w\\partial=\\partial w$ and $\\epsilon w=\\epsilon$, the latter using trivial action on $Q$. Thus these are maps in $\\mathcal E_R$ and form an equivariant augmented chain complex.",
+   "uses": [
+    "lem-sfb-integral-lattice-cubical-contraction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), integral differential and translation, then internal realization."
+   }
+  },
+  {
+   "text": "For each basis vector $b$, the element $h_a(b)$ furnished by the integral contraction node is a finite integral combination of basis vectors, by the definition of its free abelian target. Thus every column of $h_a$ is finite, even though there need not be a uniform finite bound for all columns. Realize these columns and the column of $s$ using step 3 to define $h_{a,Q}$ and $s_Q$. The integral equalities $\\epsilon s=1$ and $\\partial h+h\\partial=1-e$, where $e=s\\epsilon$ in degree zero and zero elsewhere, give exactly the claimed identities. Given $f:Q\\to Q'$, its coproduct map commutes with every integer multiple of the identity, hence with every realized matrix on every coproduct injection. This proves naturality of $s_Q,h_{a,Q}$ and all structure maps. No equivariance is asserted for $h$ or $s$.",
+   "uses": [
+    "lem-sfb-integral-lattice-cubical-contraction",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), column-finiteness, natural contracting homotopy, and its nonequivariant scope."
+   }
+  },
+  {
+   "text": "Write $Z_a$ for the kernel of $\\partial_a$ when $a>0$, and $Z_0=\\ker\\epsilon$, with kernel inclusion $z_a:Z_a\\to L_a(Q)$. Step 5 implies $\\partial_{a+1}h_az_a=z_a$, including degree zero since $\\epsilon z_0=0$. Since $\\partial_a\\partial_{a+1}=0$ (or $\\epsilon\\partial_1=0$), $\\partial_{a+1}$ factors through $Z_a$, and the induced map $L_{a+1}(Q)\\to Z_a$ has section $h_az_a$. This proves exactness and splits every short exact sequence of cycles and terms; at the augmentation use $\\epsilon s_Q=1$. The top cycle is zero because the same formula has $h_r=0$. These splittings are in $\\mathcal M_R$, as required for underlying split exactness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), explicit underlying splitting extracted from the contraction identity."
+   }
+  },
+  {
+   "text": "For completeness the tensor input applies to the actual internal relative tensor. The category of abelian sheaves on this small site is Grothendieck: apply the ringed-site Grothendieck theorem to the constant integer ring sheaf, whose modules are exactly abelian sheaves (the unique integer action is repeated addition, extended locally to integer sections). Its closed symmetric tensor is the sheaf tensor of the cited definition. Hence the internal-module Hom theorem applies and says that $Q\\otimes_R-$ is left adjoint to $\\operatorname{Hom}_R(Q,-)$. The left-adjoint colimit theorem gives, for every small set $B$,\n$$Q\\otimes_R\\bigoplus_{b\\in B}R\\cong\\bigoplus_{b\\in B}(Q\\otimes_RR)\\cong\\bigoplus_{b\\in B}Q.$$\nThe second map is the coproduct of the right unitors of the relative tensor. The comparison is characterized by carrying $1_Q\\otimes\\iota_b$, followed by the right-unitor identification of its source, to $\\iota_b:Q\\to Q^{(B)}$.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "sk-def-sfb-sheaf-tensor",
+    "def-sfb-modobj-internal-hom",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-sfb-modobj-relative-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), tensor compatibility; closed internal-module tensor adjunction, with Stacks 07A5 and 03EK as underlying sheaf inputs."
+   }
+  },
+  {
+   "text": "Under step 7 each translation permutation and each boundary matrix is carried to the same matrix of copies of $1_Q$: the relative tensor preserves colimits by step 7, so the finite-colimit additivity theorem makes it additive, and naturality of the right unitor carries $1_Q\\otimes(n1_R)$ to $n1_Q$. The augmentation is likewise the matrix whose entries are all $1$. Checking these formulas after each coproduct injection proves compatibility with boundaries, augmentation and translation. The construction is natural in $Q$ by the same injection formulas. If $r=0$, $D$ and the degree-zero basis set each have one element; $L_0(Q)=Q$, higher terms vanish, and the integral contraction prescribes $s_Q=\\epsilon=1_Q$, $h=0$. This also covers the zero module and zero ring.",
+   "uses": [
+    "def-sfb-modobj-internal-hom",
+    "def-sfb-modobj-relative-tensor",
+    "lem-sfb-integral-lattice-cubical-contraction",
+    "lem-sfb-preserving-colimits-additive"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), compatibility of the canonical tensor identifications and the rank-zero normalization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-sfb-discrete-condensed-action-equivalence",
+  "lem-sfb-condensed-action-injective-infrastructure",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-right-adjoint-preserves-limits",
+  "lem-sfb-integral-lattice-cubical-contraction",
+  "def-weil-pbc-free-module",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "sk-def-sfb-sheaf-tensor",
+  "def-sfb-modobj-internal-hom",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "def-sfb-modobj-relative-tensor",
+  "lem-sfb-preserving-colimits-additive"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), algebraic discrete-lattice input: explicit coproduct/matrix internalization of the existing integral contraction; categorical and tensor tools cited individually."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A discrete free abelian group acting on internal sheaf modules has a split exact augmented cubical resolution formed from coproducts indexed by lattice points",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace\", \"module\": \"Mathlib/AlgebraicTopology/SingularHomology/Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasCoproducts C]\\n  [inst_2 : CategoryTheory.Preadditive C] (n : ℕ) (R : C) (X : TopCat) [TotallyDisconnectedSpace ↑X],\\n  n ≠ 0 → HomologicalComplex.ExactAt (((AlgebraicTopology.singularChainComplexFunctor C).obj\", \"doc\": \"For any totally disconnected topological space $X$ and any non-zero integer $n$, the singular chain complex associated to $X$ is exact at degree $n$. This means the image of the differential map at de\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.Γ₀'_obj\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/FunctorGamma\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  [inst_2 : CategoryTheory.Limits.HasFiniteCoproducts C] (K : ChainComplex C ℕ),\\n  AlgebraicTopology.DoldKan.Γ₀'.obj K = SimplicialObject.Split.mk' (AlgebraicTopology.DoldKan.Γ₀.splitting K)\", \"doc\": \"The Γ₀' functor maps a chain complex $ K $ in a preadditive category $ \\\\mathcal{C} $ with finite coproducts to a split simplicial object by equipping $ K $ with a canonical splitting structure. This c\"}\n  {\"name\": \"SimplicialObject.Splitting.nondegComplex\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/SplitSimplicialObject\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {X : CategoryTheory.SimplicialObject C} →\\n      SimplicialObject.Splitting X → [inst_1 : CategoryTheory.Preadditive C] → ChainComplex C ℕ\", \"doc\": \"The non-degenerate complex associated to a split simplicial object in a preadditive category $\\\\mathcal{C}$, constructed as a chain complex indexed by natural numbers $\\\\mathbb{N}$. It is defined using \"}\n  {\"name\": \"AlgebraicTopology.DoldKan.Γ₀.splitting\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/FunctorGamma\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      [inst_2 : CategoryTheory.Limits.HasFiniteCoproducts C] →\\n        (K : ChainComplex C ℕ) → SimplicialObject.Splitting (AlgebraicTopology.DoldKan.Γ₀.obj K)\", \"doc\": \"For a chain complex $ K $ in a preadditive category $ \\\\mathcal{C} $ with finite coproducts, this defines a splitting of the simplicial object $ \\\\Gamma_0(K) $ constructed by the Γ₀ functor. The splitti\"}\n  {\"name\": \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule\", \"module\": \"Mathlib/RepresentationTheory/Homological/Resolution\", \"type\": \"(k G : Type u) →\\n  [inst : CommRing k] →\\n    [inst_1 : Monoid G] → (classifyingSpaceUniversalCover.compForgetAugmented.toModule k G).ExtraDegeneracy\", \"doc\": \"For a commutative ring $k$ and monoid $G$, this constructs an extra degeneracy structure on the augmented simplicial $k$-module object obtained by lifting the classifying space universal cover (compos\"}\n  {\"name\": \"classifyingSpaceUniversalCover.compForgetAugmented.toModule\", \"module\": \"Mathlib/RepresentationTheory/Homological/Resolution\", \"type\": \"(k G : Type u) → [inst : CommRing k] → [Monoid G] → CategoryTheory.SimplicialObject.Augmented (ModuleCat k)\", \"doc\": \"For a commutative ring $k$ and monoid $G$, this construction composes the classifying space universal cover (a simplicial object in $G$-actions on types) with the forgetful functor to types, then lift\"}\n  {\"name\": \"Rep.barResolution_complex\", \"module\": \"Mathlib/RepresentationTheory/Homological/Resolution\", \"type\": \"∀ (k G : Type u) [inst : CommRing k] [inst_1 : Group G], (Rep.barResolution k G).complex = Rep.barComplex k G\", \"doc\": \"For a commutative ring $ k $ and a group $ G $, the chain complex associated with the bar resolution of the trivial $ G $-representation over $ k $ coincides with the bar complex constructed from $ G \"}\n  {\"name\": \"AlgebraicTopology.DoldKan.Γ₀'\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/FunctorGamma\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      [CategoryTheory.Limits.HasFiniteCoproducts C] →\\n        CategoryTheory.Functor (ChainComplex C ℕ) (SimplicialObject.Split C)\", \"doc\": \"The Γ₀' functor maps chain complexes over a preadditive category $\\\\mathcal{C}$ with finite coproducts to split simplicial objects in $\\\\mathcal{C}$. It is constructed by equipping each chain complex $K\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Rep bar resolutions and Dold-Kan splitting do not give the finite cubical resolution in internal sheaf modules or its action-category assertions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Action\", \"Injective\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Function.Injective.addAction\", \"module\": \"Mathlib.Algebra.Group.Action.Defs\", \"type\": \" {M : Type u_1} {α : Type u_5} {β : Type u_6} [AddMonoid M] [AddAction M α] [VAdd M β] (f : β → α) (hf : Function.Injective f) (vadd : ∀ (c : M) (x : β), f (c +ᵥ x) = c +ᵥ f x) : AddAction M β\", \"doc\": \"Pullback an additive action along an injective map respecting `+ᵥ`.\"}\n  {\"name\": \"Function.Injective.mulAction\", \"module\": \"Mathlib.Algebra.Group.Action.Defs\", \"type\": \" {M : Type u_1} {α : Type u_5} {β : Type u_6} [Monoid M] [MulAction M α] [SMul M β] (f : β → α) (hf : Function.Injective f) (smul : ∀ (c : M) (x : β), f (c • x) = c • f x) : MulAction M β\", \"doc\": \"Pullback a multiplicative action along an injective map respecting `•`.\\nSee note [reducible non-instances].\"}\n  {\"name\": \"Function.Injective.subtractionMonoid\", \"module\": \"Mathlib.Algebra.Group.InjSurj\", \"type\": \" {M₁ : Type u_1} {M₂ : Type u_2} [Add M₁] [Zero M₁] [SMul ℕ M₁] [Neg M₁] [Sub M₁] [SMul ℤ M₁] [SubtractionMonoid M₂] (f : M₁ → M₂) (hf : Function.Injective f) (zero : f 0 = 0) (add : ∀ (x y : M₁), f (x + y) = f x + f y) (neg : ∀ (x : M₁), f (-x) = -f x) (sub : ∀ (x y : M₁), f (x - y) = f x - f y) (n\", \"doc\": \"A type endowed with `0`, `+`, unary `-`, and binary `-`\\nis a `SubtractionMonoid` if it admits an injective map that preserves `0`, `+`, unary `-`, and\\nbinary `-` to a `SubtractionMonoid`. This version\"}\n  {\"name\": \"Function.Injective.subtractionCommMonoid\", \"module\": \"Mathlib.Algebra.Group.InjSurj\", \"type\": \" {M₁ : Type u_1} {M₂ : Type u_2} [Add M₁] [Zero M₁] [SMul ℕ M₁] [Neg M₁] [Sub M₁] [SMul ℤ M₁] [SubtractionCommMonoid M₂] (f : M₁ → M₂) (hf : Function.Injective f) (zero : f 0 = 0) (add : ∀ (x y : M₁), f (x + y) = f x + f y) (neg : ∀ (x : M₁), f (-x) = -f x) (sub : ∀ (x y : M₁), f (x - y) = f x - f y\", \"doc\": \"A type endowed with `0`, `+`, unary `-`, and binary\\n`-` is a `SubtractionCommMonoid` if it admits an injective map that preserves `0`, `+`, unary `-`,\\nand binary `-` to a `SubtractionCommMonoid`. This\"}\n  {\"name\": \"Function.Injective.mulActionWithZero\", \"module\": \"Mathlib.Algebra.GroupWithZero.Action.Defs\", \"type\": \" {M₀ : Type u_2} {A : Type u_7} {A' : Type u_8} [MonoidWithZero M₀] [Zero A] [MulActionWithZero M₀ A] [Zero A'] [SMul M₀ A'] (f : ZeroHom A' A) (hf : Function.Injective ⇑f) (smul : ∀ (a : M₀) (b : A'), f (a • b) = a • f b) : MulActionWithZero M₀ A'\", \"doc\": \"Pullback a `MulActionWithZero` structure along an injective zero-preserving homomorphism.\"}\n  {\"name\": \"Function.Injective.distribMulAction\", \"module\": \"Mathlib.Algebra.GroupWithZero.Action.Defs\", \"type\": \" {M : Type u_1} {A : Type u_7} {B : Type u_9} [Monoid M] [AddMonoid A] [DistribMulAction M A] [AddMonoid B] [SMul M B] (f : B →+ A) (hf : Function.Injective ⇑f) (smul : ∀ (c : M) (x : B), f (c • x) = c • f x) : DistribMulAction M B\", \"doc\": \"Pullback a distributive multiplicative action along an injective additive monoid\\nhomomorphism.\\nSee note [reducible non-instances].\"}\n  {\"name\": \"AddAction.toPerm_injective\", \"module\": \"Mathlib.Algebra.Group.Action.Basic\", \"type\": \" {α : Type u_5} {β : Type u_6} [AddGroup α] [AddAction α β] [FaithfulVAdd α β] : Function.Injective AddAction.toPerm\", \"doc\": \"`AddAction.toPerm` is injective on faithful actions.\"}\n  {\"name\": \"MulAction.toPerm_injective\", \"module\": \"Mathlib.Algebra.Group.Action.Basic\", \"type\": \" {α : Type u_5} {β : Type u_6} [Group α] [MulAction α β] [FaithfulSMul α β] : Function.Injective MulAction.toPerm\", \"doc\": \"`MulAction.toPerm` is injective on faithful actions.\"}\n  {\"name\": \"AddAction.injective\", \"module\": \"Mathlib.Algebra.Group.Action.Basic\", \"type\": \" {α : Type u_5} {β : Type u_6} [AddGroup α] [AddAction α β] (g : α) : Function.Injective fun x => g +ᵥ x\", \"doc\": \"\"}\n  {\"name\": \"MulAction.injective\", \"module\": \"Mathlib.Algebra.Group.Action.Basic\", \"type\": \" {α : Type u_5} {β : Type u_6} [Group α] [MulAction α β] (g : α) : Function.Injective fun x => g • x\", \"doc\": \"\"}\n  {\"name\": \"Function.Injective.mulDistribMulAction\", \"module\": \"Mathlib.Algebra.Group.Action.Basic\", \"type\": \" {M : Type u_2} {A : Type u_3} {B : Type u_4} [Monoid M] [Monoid A] [MulDistribMulAction M A] [Monoid B] [SMul M B] (f : B →* A) (hf : Function.Injective ⇑f) (smul : ∀ (c : M) (x : B), f (c • x) = c • f x) : MulDistribMulAction M B\", \"doc\": \"Pullback a multiplicative distributive multiplicative action along an injective monoid\\nhomomorphism.\"}\n  {\"name\": \"AddAction.orbitRel.Quotient.orbit_injective\", \"module\": \"Mathlib.GroupTheory.GroupAction.Defs\", \"type\": \" {G : Type u_1} {α : Type u_2} [AddGroup G] [AddAction G α] : Function.Injective AddAction.orbitRel.Quotient.orbit\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Rep bar resolutions and Dold-Kan splitting do not give the finite cubical resolution in internal sheaf modules or its action-category assertions"
+  },
+  {
+   "tool": "grep",
+   "query": "(cubical|cube).*(resolution|contract)|(resolution|contract).*(cubical|cube)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Rep bar resolutions and Dold-Kan splitting do not give the finite cubical resolution in internal sheaf modules or its action-category assertions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The category of discrete lattice actions on sheaves of modules is Grothendieck and its cubical chain resolution is exact",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internalizing the contractible integral cellular chains of Euclidean cubes gives an equivariant sheaf module resolution with translation action",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Rep.barResolution_complex\", \"module\": \"Mathlib/RepresentationTheory/Homological/Resolution\", \"type\": \"∀ (k G : Type u) [inst : CommRing k] [inst_1 : Group G], (Rep.barResolution k G).complex = Rep.barComplex k G\", \"doc\": \"For a commutative ring $ k $ and a group $ G $, the chain complex associated with the bar resolution of the trivial $ G $-representation over $ k $ coincides with the bar complex constructed from $ G \"}\n  {\"name\": \"Rep.standardComplex\", \"module\": \"Mathlib/RepresentationTheory/Homological/Resolution\", \"type\": \"(k G : Type u) → [inst : CommRing k] → [inst_1 : Monoid G] → ChainComplex (Rep k G) ℕ\", \"doc\": \"The standard chain complex in the category $\\\\text{Rep}(k, G)$ of representations of a monoid $G$ over a commutative ring $k$, indexed by natural numbers. Each term at level $n$ is the free $k$-module \"}\n  {\"name\": \"Rep.standardComplex.forget₂ToModuleCat\", \"module\": \"Mathlib/RepresentationTheory/Homological/Resolution\", \"type\": \"(k G : Type u) → [inst : CommRing k] → [Monoid G] → HomologicalComplex (ModuleCat k) (ComplexShape.down ℕ)\", \"doc\": \"The image of the standard chain complex in the category $\\\\text{Rep}(k, G)$ under the forgetful functor to the category of $k$-modules. This constructs a homological complex indexed by natural numbers \"}\n  {\"name\": \"Rep.barComplex\", \"module\": \"Mathlib/RepresentationTheory/Homological/Resolution\", \"type\": \"(k G : Type u) → [inst : CommRing k] → [inst_1 : Group G] → ChainComplex (Rep k G) ℕ\", \"doc\": \"For a commutative ring $ k $ and group $ G $, this constructs a chain complex in the category of $ k $-representations of $ G $. The complex is indexed by natural numbers, where each degree $ n $ corr\"}\n  {\"name\": \"Rep.barResolution\", \"module\": \"Mathlib/RepresentationTheory/Homological/Resolution\", \"type\": \"(k G : Type u) → [inst : CommRing k] → [inst_1 : Group G] → CategoryTheory.ProjectiveResolution (Rep.trivial k G k)\", \"doc\": \"For a commutative ring $ k $ and group $ G $, this constructs a projective resolution of the trivial $ G $-representation over $ k $ using the bar complex. The resolution is built from free $ k[G] $-m\"}\n  {\"name\": \"Rep.standardResolution\", \"module\": \"Mathlib/RepresentationTheory/Homological/Resolution\", \"type\": \"(k G : Type u) → [inst : CommRing k] → [inst_1 : Group G] → CategoryTheory.ProjectiveResolution (Rep.trivial k G k)\", \"doc\": \"For a commutative ring $k$ and group $G$, this constructs a projective resolution of the trivial $G$-representation on $k$ within the category $\\\\text{Rep}(k, G)$. The resolution uses the standard chai\"}\n  {\"name\": \"Rep.standardComplex.xIso\", \"module\": \"Mathlib/RepresentationTheory/Homological/Resolution\", \"type\": \"(k G : Type u) →\\n  [inst : CommRing k] →\\n    [inst_1 : Monoid G] → (n : ℕ) → (Rep.standardComplex k G).X n ≅ Rep.ofMulAction k G (Fin (n + 1) → G)\", \"doc\": \"For a commutative ring $k$ and monoid $G$, this constructs an isomorphism in the category $\\\\text{Rep}(k, G)$ between the $n$th term of the standard chain complex (free $k$-module generated by $\\\\text{F\"}\n  {\"name\": \"ContinuousCohomology.homogeneousCochains\", \"module\": \"Mathlib/Algebra/Category/ContinuousCohomology/Basic\", \"type\": \"(R : Type u_1) →\\n  (G : Type u_2) →\\n    [inst : CommRing R] →\\n      [inst_1 : Group G] →\\n        [inst_2 : TopologicalSpace R] →\\n          [inst_3 : TopologicalSpace G] →\\n            [IsTopologicalGroup G] →\\n              CategoryTheory.Functor (Action (TopModuleCat R) G) (CochainComplex (TopModuleC\", \"doc\": \"The functor constructs cochain complexes in the category of topological $ R $-modules by first forming the $ G $-equivariant cochain complex $ \\\\text{MultiInd.complex} $, then applying the invariants f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Rep bar resolutions and Dold-Kan splitting do not give the finite cubical resolution in internal sheaf modules or its action-category assertions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A free abelian lattice has an equivariant cubical resolution in internal sheaves of modules with a nonequivariant integral contracting homotopy",
+   "results": "Available; 8 hits: Rep.barResolution, Rep.standardComplex.forget₂ToModuleCat, Rep.standardResolution, Rep.barResolution_complex, classifyingSpaceUniversalCover.compForgetAugmented.toModule, classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule, Rep.standardComplex.x_projective, Rep.standardComplex.forget₂ToModuleCatHomotopyEquiv",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary Rep bar resolutions, singular chains and Dold-Kan do not state this finite lattice cubical complex in internal modules over a condensed ring"
+  },
+  {
+   "tool": "grep",
+   "query": "(cubical|cube).*(resolution|contract)|(resolution|contract).*(cubical|cube)",
+   "results": "Available; 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary Rep bar resolutions, singular chains and Dold-Kan do not state this finite lattice cubical complex in internal modules over a condensed ring"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsGrothendieckAbelian, Functor",
+   "results": "Available; 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary Rep bar resolutions, singular chains and Dold-Kan do not state this finite lattice cubical complex in internal modules over a condensed ring"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Split exact cubical chain resolution of sheaves of modules for a discrete free abelian group",
+   "results": "Available; 8 hits: AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace, CategoryTheory.ProjectiveResolution.ofComplex, SheafOfModules.free, SheafOfModules.ιFree, CategoryTheory.ShortComplex.Splitting.exact, ModuleCat.projectiveResolution, CategoryTheory.ProjectiveResolution.complex, SheafOfModules.presentationOfIsCokernelFree",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary Rep bar resolutions, singular chains and Dold-Kan do not state this finite lattice cubical complex in internal modules over a condensed ring"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internalizing an integral chain contraction by replacing column finite integer matrices by multiples of identity morphisms in a category with coproducts",
+   "results": "Available; 8 hits: AlgebraicTopology.DoldKan.Γ₀.Obj.obj₂, AlgebraicTopology.DoldKan.Γ₀.Obj.map, AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand₀, AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand, CategoryTheory.HomOrthogonal.matrixDecomposition, AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand₀', CategoryTheory.HomOrthogonal.matrixDecomposition_apply, AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand'",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary Rep bar resolutions, singular chains and Dold-Kan do not state this finite lattice cubical complex in internal modules over a condensed ring"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-discrete-lattice-koszul-resolution",
+  "date": "2026-10-22",
+  "group": "Q73"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), algebraic discrete-lattice input to the tame-boundary calculation; returned lattice proof steps 1-2, internalization of the integral contraction; sites-modules.tex Tag 03DA (lemma-abelian) supplies underlying exactness only.",
+   "via": [
+    "lem-sfb-discrete-lattice-koszul-resolution",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-lattice-cubical-sheaf-resolution",
+  "worker": "stage1",
+  "summary": "Retained the full statement. Proved the internal cubical construction by finite-column integer matrix evaluation, with explicit cycle splittings and tensor/translation compatibility. Reused integral contraction and categorical infrastructure; isolated only the comparison between ordinary discrete actions and condensed actions as a new statement-only lemma.",
+  "blueprint": "Paragraph (3), open direct image, below tame-boundary invariants: steps 1-2 supply action/invariant infrastructure, steps 3-6 internalize the integral contraction, and steps 7-8 supply the tensor normalization. The ancestor command returns None for this inherited creation chain; existing via provenance is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Exact equivalence between internal and section modules, used only to compare the same action category; this unit has no separate internal/section equivalence theorem."
+   },
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic Grothendieck theorem for sheaves of modules, specialized to the constant integer ring to check the hypothesis of the internal-Hom tool."
+   },
+   {
+    "node": "lem-sfb-preserving-colimits-additive",
+    "why": "Generic additivity consequence of finite-colimit preservation, used for the internal tensor matrix calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sfb-preserving-colimits-additive"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-8c4885c0c",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-8c4885c0c (reviewer sub-agent of L); spot-checked: I read the item and all eight steps of the split in full, plus every cited statement. The item statement and stmt_deps are identical to the Q73 base snapshots, and the item is still unsplit in live, so nothing supersedes this delivery. Item proof: steps 3-6 build the complex from the column-finite integer matrices of lem-sfb-integral-lattice-cubical-contraction. I recomputed the composite matrix, the finiteness of the h columns (from def-weil-pbc-free-module), the identity ∂h+h∂=1−e, and the cycle splitting by hand: z=∂h z in degree a>0, z=∂h z−sεz in degree 0, and Z_r=0. Steps 1-2 move the Grothendieck, kernel/cokernel, inflation and Γ clauses of the condensed-action infrastructure (with J=D discrete) through the new comparison node. I checked by hand that ordinary invariants equal Γ_{R,D}. Steps 7-8 check the hypotheses for the relative tensor (Sh(Ab) is Grothendieck via the ringed-site theorem with constant Z, closed symmetric via sk-def-sfb-sheaf-tensor) and compare matrices on each coproduct injection using the unitor and additivity. The r=0 case, the zero module and the zero ring are covered. New node lem-sfb-discrete-condensed-action-equivalence: true. For discrete G a continuous map from a profinite set has finite image and clopen fibres, so the action glues uniquely from those fibres, and constant maps give the inverse. I tested it on G=1, empty S, G=Z on the Cantor set and the zero ring. It is statement-only and self-contained, and it does not restate a clause of the item. Duplicate search found nothing equivalent: the infrastructure, sheaf-action-grothendieck-inflation, action-site-presentation, complete-group automorphisms and small-module-diagrams-grothendieck nodes, and the bar-resolution nodes all state something else. Small-module-diagrams-grothendieck would have been an alternative route, but only through another unit. I accept the three tool_uses the worker wrote into split_report: the internal/section tensor comparison, ringed-site Grothendieck, and colimits-additive. Maintainer notes: blueprint.from.node=null on the item and the new node is inherited from the broken Q73/NA/NF creation chain, and lem-sfb-admissible-direct-image carries det-thm-sf-ctf-stability-direct-images. An external reference for the comparison is still wanted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LatticeCubicalSheafResolution",
+  "declaration": "Profinite.LatticeCubical.resolution",
+  "declarations": [
+   "Profinite.LatticeCubical.coproducts",
+   "Profinite.LatticeCubical.cellCoproduct",
+   "Profinite.LatticeCubical.matrix",
+   "Profinite.LatticeCubical.term",
+   "Profinite.LatticeCubical.termMap",
+   "Profinite.LatticeCubical.realize",
+   "Profinite.LatticeCubical.differential",
+   "Profinite.LatticeCubical.incoming",
+   "Profinite.LatticeCubical.augmentationMap",
+   "Profinite.LatticeCubical.sectionMapQ",
+   "Profinite.LatticeCubical.translation",
+   "Profinite.LatticeCubical.sectionActions",
+   "Profinite.LatticeCubical.categorical",
+   "Profinite.LatticeCubical.tensorComparison",
+   "Profinite.LatticeCubical.resolution"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/LatticeCubicalSheafResolution.lean",
+  "statement": "theorem resolution (r : ℕ) : ∃ h : (a : ℤ) → Chains r a →ₗ[ℤ] Chains r (a + 1), (∀ (a : ℤ) (_ : 0 ≤ a) (x : Chains r a), incomingBoundary r a (h a x) + LinearEquiv.cast (R := ℤ) (M := Chains r) (sub_add_cancel a 1) (h (a - 1) (boundary r a x)) = x - originProjection r a x) ∧ (∀ (Q : Modules R) (a : ℤ), differential R r a Q ≫ differential R r (a - 1) Q = 0) ∧ (∀ Q : Modules R, differential R r 1 Q ≫ augmentationMap R r Q = 0) ∧ (∀ (Q : Modules R) (a : ℤ), a < 0 ∨ (r : ℤ) < a → IsZero (term R r a Q)) ∧ (∀ (Q : Modules R) (a : ℤ), ∃ ρ : Multiplicative (Fin r → ℤ) →* End (term R r a Q), ∀ w : Fin r → ℤ, ρ (Multiplicative.ofAdd w) = translation R r a w Q) ∧ (∀ (Q : Modules R) (a : ℤ) (w : Fin r → ℤ), translation R r a w Q ≫ differential R r a Q = differential R r a Q ≫ translation R r (a - 1) w Q) ∧ (∀ (Q : Modules R) (w : Fin r → ℤ), translation R r 0 w Q ≫ augmentationMap R r Q = augmentationMap R r Q) ∧ (∀ Q : Modules R, sectionMapQ R r Q ≫ augmentationMap R r Q = 𝟙 Q) ∧ (∀ (Q : Modules R) (a : ℤ), 0 ≤ a → realize R r a (a + 1) (h a) Q ≫ incoming R r a Q + differential R r a Q ≫ realize R r (a - 1) a ((LinearEquiv.cast (R := ℤ) (M := Chains r) (sub_add_cancel a 1)).toLinearMap.comp (h (a - 1))) Q = 𝟙 (term R r a Q) - realize R r a a (originProjection r a) Q) ∧ (∀ Q : Modules R, realize R r 0 0 (originProjection r 0) Q = augmentationMap R r Q ≫ sectionMapQ R r Q) ∧ (∀ (Q : Modules R) (a : ℤ), a ≠ 0 → realize R r a a (originProjection r a) Q = 0) ∧ (∀ {Q Q' : Modules R} (f : Q ⟶ Q') (a : ℤ), realize R r a (a + 1) (h a) Q ≫ termMap R r (a + 1) f = termMap R r a f ≫ realize R r a (a + 1) (h a) Q') ∧ (∀ {Q Q' : Modules R} (f : Q ⟶ Q'), f ≫ sectionMapQ R r Q' = sectionMapQ R r Q ≫ termMap R r 0 f) ∧ (∀ {Q Q' : Modules R} (f : Q ⟶ Q') (a : ℤ), termMap R r a f ≫ differential R r a Q' = differential R r a Q ≫ termMap R r (a - 1) f) ∧ (∀ {Q Q' : Modules R} (f : Q ⟶ Q'), termMap R r 0 f ≫ augmentationMap R r Q' = augmentationMap R r Q ≫ f) ∧ (∀ {Q Q' : Modules R} (f : Q ⟶ Q') (a : ℤ) (w : Fin r → ℤ), termMap R r a f ≫ translation R r a w Q' = translation R r a w Q ≫ termMap R r a f) ∧ (∀ (Q : Modules R) (a : ℤ), 0 < a → ∃ hd : incoming R r a Q ≫ differential R r a Q = 0, (ShortComplex.mk (incoming R r a Q) (differential R r a Q) hd).Exact ∧ ∃ t : kernel (differential R r a Q) ⟶ term R r (a + 1) Q, t ≫ incoming R r a Q = kernel.ι (differential R r a Q)) ∧ (∀ Q : Modules R, ∃ hd : differential R r 1 Q ≫ augmentationMap R r Q = 0, (ShortComplex.mk (differential R r 1 Q) (augmentationMap R r Q) hd).Exact ∧ ∃ t : kernel (augmentationMap R r Q) ⟶ term R r 1 Q, t ≫ differential R r 1 Q = kernel.ι (augmentationMap R r Q)) ∧ (r = 0 → (∀ a : ℤ, h a = 0) ∧ ∀ Q : Modules R, augmentationMap R r Q ≫ sectionMapQ R r Q = 𝟙 (term R r 0 Q))",
+  "branch": "sheaf-dag",
+  "by": "Q57",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The categorical, tensor and cubical clauses are stated separately as categorical, tensorComparison and resolution. The canonical matrix realization and term maps are real constructions in the same module. The additional landed statement dependency supplies only the shared Modules abbreviation, avoiding a second specialization of internal modules. Invariants and trivial inflation use Mathlib lim and Functor.const on BD, identified with Action by Action.functorCategoryEquivalence; downstream Koszul/derived modules are deliberately not imported."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-91ffdf099",
+  "group": "Q57",
+  "result": "pass",
+  "note": "Only the item changed: lean added, and stmt_deps gains the landed def-sfb-condensed-action-module (used only for the Modules abbrev; no cycle). Every node clause is stated: categorical gives the exact mapAction equivalence with the underlying presheaf unchanged (true by construction of sectionModuleFunctor), IsGrothendieckAbelian.{u+1}, EnoughInjectives, forget creating kernels and cokernels, exact const inflation, additive and left-exact lim, and the const ⊣ lim adjunction pinned to limit.π. resolution gives the term coproduct over D×Directions, boundary/augmentation/translation realized from finite integer columns, d²=0, ε∂=0, a monoid-hom action, equivariance, the contraction with s ε only in degree 0 (composition order checked), naturality, split exactness with kernel sections, and r=0. tensorComparison pins e on injections via the right unitor and the actual Mod.monoidalCategory. Edge cases r=0, a<0, a>r, top degree and the zero ring are covered; the statement is verbatim and all 15 declarations exist; no hollow definitions, sorry only in theorems, docstrings carry source/blueprint. Advisory: EnoughInjectives is owned by def-sp-enough-injectives. No compile, since no file was changed."
+ }
+}

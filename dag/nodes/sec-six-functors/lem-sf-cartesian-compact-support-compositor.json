@@ -1,0 +1,142 @@
+{
+ "id": "lem-sf-cartesian-compact-support-compositor",
+ "kind": "statement",
+ "title": "Cartesian proper/open tower computes the canonical origin compositor",
+ "statement": "Let F be a finite-field datum and A a finite commutative ring in Type (u+1). In the category Spaces F of finite-type schemes over F.k, let j:X→V, b:V→W, i:Y→B be open immersions, with b and i quasi-compact; let q:V→Y, p:W→B and s:B→Z be proper. Suppose b p = q i and this square is Cartesian. For every bounded-below etale-origin object K on X, the raw proper/open triangle arrow alpha of [lem-sf-composition-projection-mate] equals the canonical origin compositor of [thm-sf-comp-composition], conjugated to the factor compactifications (j,q), (i,s), and (j b,p s) by [def-sf-origin-candidate-comparison]. The factor compactifications are those of [def-sf-operation-stages]. All morphisms are over F.k; no separatedness of a structure map, tensor input, projection formula or finite Tor hypothesis is used.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7J, lemma-shriek-composition; normalization steps 2--3 of lem-sf-projection-compatible-triangle-assembly"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "lem-sf-composition-projection-mate",
+  "thm-sf-comp-composition",
+  "def-sf-origin-candidate-comparison",
+  "def-sf-operation-stages",
+  "def-sf-cartesian-candidate-compositor"
+ ],
+ "proof": [
+  {
+   "text": "Choose an etale input E and the canonical full-origin isomorphism e:Phi(E) -> K by essential surjectivity of comparisonUpperStarPlusEtaleOrigin. Regard raw alpha as a natural transformation between the concrete three candidate functors, and apply its naturality to the underlying isomorphism e.",
+   "uses": [
+    "thm-sf-comp-composition"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Map the named-map equation of finiteSiteTower.paste through the D+ inclusion. Apply cartesianTowerRestriction to compute the pro-etale tower against the source and output inclusions. Apply cartesianCandidateSiteSquare with the chosen E,K,e to compute the canonical candidate compositor against the same site boundaries, retaining the source- and target-functor images of e.",
+   "uses": [
+    "lem-sp-finite-site-tower-paste",
+    "lem-sf-cartesian-tower-restriction",
+    "lem-sf-cartesian-candidate-site-square"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the proved categorical cancel_boundary_square helper to these three equations and raw-alpha naturality. The first input comparison D is invertible by finiteSiteTower.paste; sourceInclusion is an isomorphism by construction; the source functor preserves the chosen origin isomorphism. Cancel these three epimorphisms to get the required equality on K. Both the canonical site square and the conclusion refer to the same unchanged candidateCompositor construction; no unfolding of its four factors is needed.",
+   "uses": [
+    "lem-sp-finite-site-tower-paste",
+    "def-sf-origin-candidate-comparison",
+    "def-sf-cartesian-candidate-compositor"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "thm-sf-comp-composition",
+  "lem-sp-finite-site-tower-paste",
+  "lem-sf-cartesian-tower-restriction",
+  "lem-sf-cartesian-candidate-site-square",
+  "def-sf-origin-candidate-comparison",
+  "def-sf-cartesian-candidate-compositor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7J; separation of the raw D+ restriction and canonical site square, followed by finite-site tower pasting and full-origin naturality"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cartesian proper open derived mate computes canonical compact support compositor on bounded below etale origin complexes",
+   "results": "['DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE', 'Condensed.profiniteSolidCounit', 'Condensed.profiniteSolidification', 'DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE', 'DerivedCategory.left_fac_of_isStrictlyGE', 'AlgebraicGeometry.exists_map_preimage_le_map_preimage', 'CompHausLike.LocallyConstant.adjunction_left_triangle', 'AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset']; ",
+   "date": "2026-10-25",
+   "verdict": "No match for the specified derived Cartesian tower compositor; generic categorical mates or unrelated support lemmas only."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.Adjunction",
+   "results": "['CategoryTheory.mateEquiv', 'CategoryTheory.mateEquiv_counit', 'CategoryTheory.mateEquiv_counit_symm', 'CategoryTheory.unit_mateEquiv', 'CategoryTheory.unit_mateEquiv_symm', 'CategoryTheory.conjugateEquiv_mateEquiv_vcomp', 'CategoryTheory.mateEquiv_conjugateEquiv_vcomp', 'CategoryTheory.mateEquiv_vcomp']; ",
+   "date": "2026-10-25",
+   "verdict": "No match for the specified derived Cartesian tower compositor; generic categorical mates or unrelated support lemmas only."
+  },
+  {
+   "tool": "grep",
+   "query": "cartesian.*[Cc]ompositor|[Cc]ompositor.*cartesian",
+   "results": "[]; ",
+   "date": "2026-10-25",
+   "verdict": "No match for the specified derived Cartesian tower compositor; generic categorical mates or unrelated support lemmas only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartesian proper open derived mate computes canonical compact support compositor on etale origin complexes",
+   "results": "['HasCompactSupport.comp_isClosedEmbedding', 'HasCompactMulSupport.comp_isClosedEmbedding', 'AlgebraicGeometry.IsProper.instMorphismRestrict', 'TopologicalSpace.CompactOpens.Simps.coe', 'TopologicalSpace.CompactOpens.toCompacts', 'TopologicalSpace.CompactOpens.coe_mk', 'AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme', 'CompactlySupportedContinuousMap.comp']; ",
+   "date": "2026-10-25",
+   "verdict": "No match for the specified derived Cartesian tower compositor; generic categorical mates or unrelated support lemmas only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProjectionCompatibleTriangleAssembly",
+  "date": "2026-10-25",
+  "group": "C2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Proof steps 2--3: Cartesian proper/open normalization and tower site comparison",
+   "via": [
+    "lem-sf-projection-compatible-triangle-assembly"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CartesianCompactSupportCompositor",
+  "file": "lean/Sheaf/SixFunctors/CartesianCompactSupportCompositor.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.cartesianCompactSupportCompositor",
+  "statement": "theorem cartesianCompactSupportCompositor\n    (F : WeilConjectures.FiniteFieldDatum.{u})\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X V W Y B Z : Spaces F}\n    (j : X ⟶ V) (b : V ⟶ W) (q : V ⟶ Y) (p : W ⟶ B) (i : Y ⟶ B) (s : B ⟶ Z)\n    [IsOpenImmersion ((geometry F).map j)] [IsOpenImmersion ((geometry F).map b)]\n    [IsOpenImmersion ((geometry F).map i)] [QuasiCompact ((geometry F).map b)]\n    [QuasiCompact ((geometry F).map i)]\n    [IsProper ((geometry F).map q)] [IsProper ((geometry F).map p)]\n    [IsProper ((geometry F).map s)]\n    (hb : b ≫ p = q ≫ i)\n    (_sq : IsPullback b.hom.left q.hom.left p.hom.left i.hom.left)\n    (K : (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A)\n      X.obj.left).FullSubcategory) :\n    (alpha (ordinary F A) j b q p i s hb).app K.obj =\n    ProjectionTriangleAssembly.candidateCompositor A\n      (f := (j ≫ q).hom.left) (g := (i ≫ s).hom.left)\n    (WeilConjectures.sixFunctorFactorCompactification j q\n      ‹IsOpenImmersion ((geometry F).map j)› ‹IsProper ((geometry F).map q)›\n      (j ≫ q) rfl)\n    (WeilConjectures.sixFunctorFactorCompactification i s\n      ‹IsOpenImmersion ((geometry F).map i)› ‹IsProper ((geometry F).map s)›\n      (i ≫ s) rfl)\n    (WeilConjectures.sixFunctorFactorCompactification (j ≫ b) (p ≫ s)\n      (mappedCompositeOpen (geo := geometry F) j b)\n      (mappedCompositeProper (geo := geometry F) p s) ((j ≫ q) ≫ (i ≫ s)) (by\n        simp only [Category.assoc]\n        rw [← Category.assoc q i s, ← hb]\n        simp only [Category.assoc])) K",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-25",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.cartesianCompactSupportCompositor"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-9315d",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261025T201530-L-2565625",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-0f2d5",
+  "group": "F5",
+  "result": "fix",
+  "landing": "20261027T034638-L-3669558",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 2 new sorry lemmas + verbatim candidateCompositor move against clone, FiniteSiteTower.paste and alpha defs; sandbox compile incl. importer ProjectionCompatibleTriangleAssembly OK; axioms OK"
+ }
+}

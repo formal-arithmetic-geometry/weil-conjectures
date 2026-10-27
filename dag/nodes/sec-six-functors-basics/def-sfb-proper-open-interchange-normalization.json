@@ -1,0 +1,135 @@
+{
+ "id": "def-sfb-proper-open-interchange-normalization",
+ "kind": "definition",
+ "title": "Normalization equation for derived proper-open interchange",
+ "status": "split",
+ "import_flags": [
+  "unreachable"
+ ],
+ "statement": "Let $\\Lambda$ be a commutative condensed ring and write $D_T=D(\\operatorname{Mod}_{\\Lambda_T})$, $D(v^*)$ for exact termwise pullback, $Rv_*$ for total direct image, and $Lv^*\\dashv Rv_*$ for the derived adjunction, using [sk-def-sfb-module-derived-pushpull]. Let $p:X\\to Y$ be any scheme morphism, $i:Y\\hookrightarrow\\overline Y$ any open immersion, and $c=(j:X\\hookrightarrow W,r:W\\to\\overline Y)$ a compactification of $i\\circ p$ with quasi-compact open part, in the category of [det-nagata-definition-refinement]. No properness of $p$, density of $j$, or cartesianness of the square is needed for the following definitions. All functors act on the ordinary unbounded derived categories of [sk-def-sfb-derived-categories].\n\nLet $\\theta:D(i^*)D(p^*)\\xrightarrow{\\sim}D(r^*)D(j^*)$ be the canonical pullback comparison formed by the termwise derived composition isomorphisms of [def-sfb-module-upper-star-comp], the equality $ip=rj$, and the inverse composition identification. Let $\\beta_B:D(i^*)Rr_*B\\to Rp_*D(j^*)B$ be its adjoint mate: the adjunct under $D(p^*)\\dashv Rp_*$ of $\\theta_{Rr_*B}$ followed by $D(j^*)$ of the counit of $D(r^*)\\dashv Rr_*$. Here these exact-pullback adjunctions are the derived adjunctions transported along $Lv^*\\simeq D(v^*)$.\n\nWrite $J_a=D(a_!)$ for the termwise exact open extension of [def-sfb-module-open-lower-shriek], and $\\eta_a:\\mathrm{id}\\to D(a^*)J_a$ for the unit of the termwise derived adjunction induced from [def-sfb-module-open-lower-shriek-adjunction]. For $A\\in D_X$ and an arrow $m:J_iRp_*A\\to Rr_*J_jA$, define the predicate that $m$ is normalized to mean precisely\n$$\n\\operatorname{adj}_{J_i\\dashv D(i^*)}(m)\\,;\\,\\beta_{J_jA}=Rp_*(\\eta_{j,A}).\n$$\nThe semicolon denotes diagrammatic composition. Thus the left side starts at $Rp_*A$ and ends at $Rp_*D(j^*)J_jA$. This is a predicate on the specified arrow, not an assertion that any normalized arrow exists, is unique, or is invertible.",
+ "stmt_deps": [
+  "sk-def-sfb-module-derived-pushpull",
+  "det-nagata-definition-refinement",
+  "sk-def-sfb-derived-categories",
+  "def-sfb-module-upper-star-comp",
+  "def-sfb-module-open-lower-shriek",
+  "def-sfb-module-open-lower-shriek-adjunction"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md",
+  "place": "(2), identity-on-open adjunction normalization; used in det-prop-scalar-six-compact-support.proof.md, Composition."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "compositionInterchange(IsNormalized|Pullback|Restriction)|properOpenInterchange",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; use the existing project definitions in Sheaf.Paper.ProEtaleProperOpenInterchange."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalization of a derived proper open interchange map by the open adjunction unit and the canonical restriction mate",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsOpenMap.adjunction\", \"TopologicalSpace.Opens.adjunction_counit_app_self\", \"CategoryTheory.FreeMonoidalCategory.normalizeMapAux\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"Topology.IsInducing.adjunction\", \"IsOpenMap.adjunctionNhds\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict\"]}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; use the existing project definitions in Sheaf.Paper.ProEtaleProperOpenInterchange."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical derived proper open interchange restriction map normalized by identity on the open subset",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.restrictOpen\", \"AlgebraicGeometry.Scheme.Hom.resLE\", \"AlgebraicGeometry.morphismRestrict_appTop\", \"AlgebraicGeometry.morphismRestrict_appLE\", \"AlgebraicGeometry.morphismRestrict_app'\", \"AlgebraicGeometry.morphismRestrict_app\", \"AlgebraicGeometry.Γ_map_morphismRestrict\", \"AlgebraicGeometry.Scheme.Hom.resLE_eq_morphismRestrict\"]}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; use the existing project definitions in Sheaf.Paper.ProEtaleProperOpenInterchange."
+  },
+  {
+   "tool": "grep",
+   "query": "compositionInterchange(IsNormalized|Pullback|Restriction) in lean/WeilConjectures and lean/Sheaf",
+   "results": "No declarations in WeilConjectures. Exactly the three existing definitions in lean/Sheaf/Paper/ProEtaleProperOpenInterchange.lean:73,88,107; other Sheaf hits are uses of them.",
+   "date": "2026-10-24",
+   "verdict": "Exact existing project definitions; record existing:true, create no Lean module."
+  },
+  {
+   "tool": "grep",
+   "query": "compositionInterchangeIsNormalized|compositionInterchangePullback|compositionInterchangeRestriction in dag/nodes; blueprint_refs.py search interchange normalization; blueprint_refs.py search compositionInterchangeIsNormalized",
+   "results": "Two DAG files mention the names: the theorem record det-sf-comp-composition-interchange and consumer lem-sfb-interchange-proper-pasting. Neither is a definition node for normalization. Both blueprint searches return 0 matches.",
+   "date": "2026-10-24",
+   "verdict": "No existing definition node owns the plain normalization equation. Add the node required by the maintainer return."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "det-prop-scalar-six-compact-support",
+  "date": "2026-10-24",
+  "group": "NB"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-scalar-six-compact-support",
+   "place": "Composition: the proper/open interchange maps characterized by restriction to the identity on the open subscheme.",
+   "via": [
+    "det-prop-scalar-six-compact-support"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "lean": {
+  "module": "Sheaf.Paper.ProEtaleProperOpenInterchange",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.compositionInterchangeIsNormalized",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.compositionInterchangePullback",
+   "AlgebraicGeometry.ProEtale.CondensedRing.compositionInterchangeRestriction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.compositionInterchangeIsNormalized"
+  ],
+  "statement": "def compositionInterchangeIsNormalized\n    (A : DerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj Λ X)))\n    (m : (openImmersionLowerShriek Λ i).mapDerivedCategory.obj\n        ((lowerStar Λ p).rightDerivedFunctor.obj A) ⟶\n      (lowerStar Λ c.obj.obj.g).rightDerivedFunctor.obj\n        ((openImmersionLowerShriek Λ c.obj.obj.i).mapDerivedCategory.obj A)) : Prop",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Exact existing definitions at ProEtaleProperOpenInterchange.lean:73,88,107. The primary signature is verbatim, with section parameters universe u, Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u+1}, [MonObj Λ] [IsCommMonObj Λ], X Y Ybar : Scheme.{u}, p : X ⟶ Y, i : Y ⟶ Ybar, [IsOpenImmersion i], and c : Compactification.BoundaryCompactification (p ≫ i). Pullback is the termwise composition-square comparison; restriction is its exact-pullback/derived-direct-image adjoint mate. The normalization predicate is precisely adj_i(m) followed by that restriction comparison equals Rp_* of the j-open unit. This node owns only those plain definitions, not properOpenInterchange or its existence, uniqueness or invertibility conclusions. Requested by the return of immutable head 705fd9c15ed4; no new module or duplicate declaration."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c2e869fdb",
+  "group": "NB",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c2e869fdb",
+  "group": "NB",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 705fd9c1 (H2 only; maths previously accepted). Snapshot vs live: item differs only in stmt_deps+lean (statement/proof/proof_deps identical, no H7); other cited nodes identical (no H13). H2 fixed: det-sf-comp-coherence-cocycle -> landed def-sfb-compactification-refinement-component; det-sf-comp-composition-interchange -> new def-sfb-proper-open-interchange-normalization (existing:true on ProEtaleProperOpenInterchange.lean:73-118; theta/beta/IsNormalized text matches the code; signature verbatim; real data; deps all live; no other owner). Item Lean unchanged and re-checked: IsIso + Dctf endpoints, refinement square dense->arbitrary boundary model, composition with m/m' bound by the normalization predicate (unique by properOpenInterchange); no extra hypotheses; edge cases and universe u checked; only sorry; docstrings ok. Advisory: scalarDirectImageMate is declared in theorem node lem-sfb-scalar-direct-image-mate-coherence but used as in the landed direct-image sibling; other owner def nodes are reached through cited nodes. Nothing compiled (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-4c3f9",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261024T214851-L-723795",
+  "kind": "interface",
+  "note": "independent cc review: Delivered ProEtaleProperOpenInterchange.lean vs clone (definitions and theorem signature unchanged, sorry→proof, public imports unchanged); node det-sf-comp-composition-interchange proof/proof_deps vs imported modules; unit sk-thm-sf-comp-composition realized (empty) vs dropped CartesianCoefficients/CondensedModuleDerivedPushpull; 7/10 direct importers compiled against the delivered module",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.properOpenInterchange"
+  ],
+  "sorry_after": []
+ }
+}

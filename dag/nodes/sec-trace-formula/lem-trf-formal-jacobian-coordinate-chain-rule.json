@@ -14,45 +14,48 @@
  ],
  "proof": [
   {
-   "text": "Write the given coordinate isomorphism as $\\phi:F[[Y_1,\\ldots,Y_n]]\\xrightarrow{\\sim}T$, with $\\phi(Y_k)=y_k$, and let $\\mathfrak m=(x_1,\\ldots,x_n)$. Since the $y_k$ generate $\\mathfrak m$ [def-weil-pbc-regular-system-of-parameters], $\\phi$ maps $(Y_1,\\ldots,Y_n)^N$ onto $\\mathfrak m^N$ for every $N$. By definition $\\partial h/\\partial y_k=\\phi(\\partial\\phi^{-1}(h)/\\partial Y_k)$. Termwise differentiation is additive and obeys the Leibniz rule, as follows coefficientwise from the finite Cauchy sums defining multiplication; hence $\\partial/\\partial x_i$ and (by transport through $\\phi$) $\\partial/\\partial y_k$ are $F$-linear derivations of $T$, and each maps $\\mathfrak m^N$ into $\\mathfrak m^{N-1}$ for $N\\ge1$. Fix $h\\in T$ and $N\\ge1$, and let $H$ be the truncation of $\\phi^{-1}(h)$ to total degree $<N$, a polynomial in $Y_1,\\ldots,Y_n$; then $h-H(y_1,\\ldots,y_n)\\in\\mathfrak m^N$. For the polynomial $H$, the Leibniz rule for the derivation $\\partial/\\partial x_i$, applied monomial by monomial, gives $\\partial H(y)/\\partial x_i=\\sum_k(\\partial H/\\partial Y_k)(y)\\,\\partial y_k/\\partial x_i$, and $(\\partial H/\\partial Y_k)(y)=\\partial H(y)/\\partial y_k$ by the definition of $\\partial/\\partial y_k$. Since both derivatives of $h-H(y)$ lie in $\\mathfrak m^{N-1}$, $\\partial h/\\partial x_i\\equiv\\sum_k(\\partial h/\\partial y_k)(\\partial y_k/\\partial x_i)\\pmod{\\mathfrak m^{N-1}}$. This holds for every $N$, and $\\bigcap_N\\mathfrak m^N=0$ (a series in $\\mathfrak m^N$ has no coefficient of total degree $<N$), so the equality holds in $T$. Exchanging the roles of the two coordinate systems (truncate $h$ itself as a polynomial $G(x_1,\\ldots,x_n)$ and apply the derivation $\\partial/\\partial y_k$) gives the symmetric formula $\\partial h/\\partial y_k=\\sum_i(\\partial h/\\partial x_i)(\\partial x_i/\\partial y_k)$. For $n=0$ both sums are empty, $T=F$, all derivatives vanish, and the assertion is trivial.",
+   "text": "Put $S=F[[Y_1,\\ldots,Y_n]]$, $\\mathfrak a=(Y)$, $\\mathfrak m=(x)$, and write the given isomorphism as $\\phi:S\\to T$. The parameter definition gives $\\phi(\\mathfrak a)=\\mathfrak m$, hence $\\phi^{-1}(\\mathfrak m)=\\mathfrak a$ and $\\phi(\\mathfrak a^N)=\\mathfrak m^N$ for every $N$. The partial-derivative node supplies $F$-linearity and Leibniz. Thus $E=\\partial_{x_i}\\circ\\phi$ is a $\\phi$-relative derivation, with $E(Y_k)=\\partial_{x_i}y_k$. Apply the relative-derivation expansion to $\\phi^{-1}(h)$: its coefficient $\\phi(\\partial_{Y_k}\\phi^{-1}(h))$ is $\\partial_{y_k}h$, giving the first chain rule. For $D=\\phi\\partial_{Y_k}\\phi^{-1}$, algebra-linearity of $\\phi$ and its inverse makes $D$ $F$-linear, and Leibniz gives $D(uv)=uD(v)+vD(u)$. Also $D(x_i)=\\partial_{y_k}x_i$. Apply the expansion with source $T$, structural map $\\mathrm{id}_T$ (which preserves $\\mathfrak m$), and $E=D$ to obtain the symmetric chain rule. The lemma supplies the polynomial truncations, errors modulo $\\mathfrak m^{N-1}$ and separatedness required for both passages to formal series.",
    "uses": [
-    "def-weil-pbc-multivariate-power-series",
-    "def-weil-pbc-regular-system-of-parameters"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0C4B, coordinate-change paragraph after the second regular system of parameters (the source invokes the chain rule and omits details)."
-   }
-  },
-  {
-   "text": "The classes of $x_1,\\ldots,x_n$ form the coefficient basis of $\\mathfrak m/\\mathfrak m^2$: a series modulo $\\mathfrak m^2$ is its constant term plus its linear coefficients. The $F$-algebra isomorphism $\\phi$ and its inverse preserve $\\mathfrak m$ and induce inverse $F$-linear maps on this quotient. Since $y_k\\in\\mathfrak m$ (the $y_k$ generate $\\mathfrak m$) has no constant term, $y_k\\equiv\\sum_i q_{ki}x_i\\pmod{\\mathfrak m^2}$, where $q_{ki}$ is the constant term of $\\partial y_k/\\partial x_i$, the matrix of the induced map is exactly $Q(0)$. Its inverse map has matrix $P(0)$, so $Q(0)$ is invertible over $F$. When $n=0$, the quotient and both matrices are the unique zero-dimensional space and empty matrix, whose identity is the empty matrix.",
-   "uses": [
-    "def-weil-pbc-multivariate-power-series",
     "def-weil-pbc-regular-system-of-parameters",
-    "def-weil-matrix"
+    "def-trf-formal-power-series-partial-derivative",
+    "lem-trf-formal-relative-derivation-expansion"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0C4B, coordinate-change paragraph: the Jacobian matrix of a second regular system of parameters is invertible."
+    "place": "Tag 0C4B (lemma-fitting-ideal-well-defined), coordinate-change paragraph: the matrix (partial y_j/partial x_i) is invertible and the chain rule applies"
    }
   },
   {
-   "text": "Use the two chain-rule formulas on the coordinate elements themselves. With $h=x_j$ in the first formula, $\\delta_{ji}=\\sum_k(\\partial x_j/\\partial y_k)(\\partial y_k/\\partial x_i)$, which is the $(j,i)$ entry of $PQ$; hence $PQ=1$. With $h=y_j$ in the symmetric formula, $\\delta_{jk}=\\sum_i(\\partial y_j/\\partial x_i)(\\partial x_i/\\partial y_k)$, which is the $(j,k)$ entry of $QP$; hence $QP=1$. Therefore $P$ is a two-sided inverse of $Q$ in the matrix ring over $T$. The same computation is the empty-matrix identity when $n=0$.",
+   "text": "Apply cotangent linearization to $\\phi$ and $\\phi^{-1}$, which preserve the variable ideals by Step 1. Functoriality with the row convention gives $L_{\\phi^{-1}\\circ\\phi}=L_\\phi L_{\\phi^{-1}}=I$ and $L_{\\phi\\circ\\phi^{-1}}=L_{\\phi^{-1}}L_\\phi=I$. The coefficient formula for the formal derivative gives $L_\\phi=Q(0)$. It also gives $(L_{\\phi^{-1}})_{ik}=(\\partial_{Y_k}\\phi^{-1}(x_i))(0)=P_{ik}(0)$, since $\\phi$ preserves constant coefficients. Hence $Q(0)P(0)=P(0)Q(0)=I$, proving clause (2).",
    "uses": [
-    "def-weil-matrix"
+    "lem-trf-formal-hom-cotangent-linearization",
+    "def-trf-formal-power-series-partial-derivative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4B (lemma-fitting-ideal-well-defined), coordinate-change paragraph: the matrix (partial y_j/partial x_i) is invertible and the chain rule applies"
+   }
+  },
+  {
+   "text": "Use the two chain-rule formulas on the coordinate elements themselves. With $h=x_j$ in the first formula, $\\delta_{ji}=\\sum_k(\\partial x_j/\\partial y_k)(\\partial y_k/\\partial x_i)$, which is the $(j,i)$ entry of $PQ$; hence $PQ=1$. With $h=y_j$ in the symmetric formula, $\\delta_{jk}=\\sum_i(\\partial y_j/\\partial x_i)(\\partial x_i/\\partial y_k)$, which is the $(j,k)$ entry of $QP$; hence $QP=1$. Therefore $P$ is a two-sided inverse of $Q$ in the matrix ring over $T$. The same computation is the empty-matrix identity when $n=0$. The derivative node supplies the coordinate derivatives $\\partial_{x_i}x_j=\\delta_{ij}$ and $\\partial_{y_k}y_j=\\delta_{jk}$. Step 1 gives clause (1), Step 2 gives (2), and these identities give (3). For $n=0$, $T=F$, the expansion lemma has empty sums, the cotangent spaces vanish, and both matrix identities are the empty identity.",
+   "uses": [
+    "def-weil-matrix",
+    "def-trf-formal-power-series-partial-derivative"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0C4B, coordinate-change paragraph: apply the chain rule to the two coordinate systems and use invertibility of the Jacobian."
+    "place": "Tag 0C4B (lemma-fitting-ideal-well-defined), coordinate-change paragraph: the matrix (partial y_j/partial x_i) is invertible and the chain rule applies"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-multivariate-power-series",
   "def-weil-pbc-regular-system-of-parameters",
+  "def-trf-formal-power-series-partial-derivative",
+  "lem-trf-formal-relative-derivation-expansion",
+  "lem-trf-formal-hom-cotangent-linearization",
   "def-weil-matrix"
  ],
  "proof_origin": {
@@ -135,19 +138,19 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-formal-jacobian-coordinate-chain-rule",
   "worker": "stage1",
-  "summary": "Completed the omitted coordinate-change calculation from Stacks Tag 0C4B. The proof establishes the multivariate formal chain rule by finite polynomial truncations, identifies the constant Jacobian with the induced map on the cotangent quotient, and obtains the two-sided inverse P by applying the chain rule to the coordinate elements. Removed the seeded determinant dependency because the statement and proof use matrix multiplication and no determinant. Empty-variable conventions are handled explicitly.",
-  "blueprint": "Realizes the ancestor sentence that a second regular system of parameters has an invertible Jacobian and that the chain rule applies; Steps 1–3 supply the omitted details."
+  "summary": "Repair of the human-requested re-split: extracted the adic relative-derivation approximation and the functorial cotangent coefficient calculation as two independent statement-only unsplit nodes. The parent keeps its statement and now assembles the two chain rules, constant-term inverse matrices and elementary full-matrix inverse calculation. Existing formal-partial-derivative node supplies the coefficientwise derivation laws. No Lean changed. Rebased the retained Q149 delivery onto the current read-clone DAG after the side-completion promotion refusal; re-read every cited statement, verified the saved pre-split base is unchanged, and distinguished both auxiliary nodes from the newly present minimal-presentation-minors node (0C4B). On the current-base retry, made both relative-derivation values explicit in Step 1, checked all seven citation quotations against the current statements, and retained the two independently stated auxiliary tasks. Final landing-return repair on 2026-10-23: reconstructed the item from the current shared DAG, retained the released re-split and searches, and made inverse ideal preservation and both row-matrix composition identities explicit after rereading all current citations. No cited statement changed and no statement correction was required. Fresh return verification: the retained split passed the initial dry run at 51c88578cf3; reconstructed from the current item again, and explicitly verified the transported derivative's F-linearity, Leibniz law and identity-map locality in Step 1 before final delivery.",
+  "blueprint": "Preserves the existing ancestor and route: coordinate-invariance ingredient of the nodal local calculation, Stacks 0C4B final coordinate-change paragraph. New derivation node carries old Step 1 truncation/Leibniz/separatedness; new cotangent node carries old Step 2 coefficient quotient argument; parent Step 3 retains the entrywise inverse calculation."
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-Q33-98eeac97d",
-  "group": "Q33",
+  "reviewer": "NT-cc-Q149-c819441a5",
+  "group": "Q149",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-98eeac97d (reviewer sub-agent of L); spot-checked: I read the item in full against Stacks curves.tex Tag 0C4B (lemma-fitting-ideal-well-defined). The source's 'matrix (dy_j/dx_i) invertible, chain rule, details omitted' is what the item fills in. The statement is unchanged from the base; the only change is that the unused def-weil-pbc-matrix-determinant was correctly dropped from stmt_deps. The parent lem-trf-formal-jacobian-minor-invariance step 3 uses exactly clauses (1) and (3). I checked the cited definitions (multivariate power series, regular system of parameters, matrix). I tested n=0; y=x+x^2 in characteristic 0 and in characteristic 2 (x=y+y^2+y^4+..., so QP=1); and a 2-variable example. Step 1 (truncation, polynomial chain rule for a derivation, separatedness) is correct. Step 2 (cotangent matrices Q(0) and P(0)) is correct. Step 3 (h=x_j and h=y_j give PQ=QP=1) is correctly elementary. No duplicate exists in the DAG, there are no new nodes, no SGA is cited, and no tool use is needed. Three repairs are in fixes/: (1) blueprint.from.via listed the item itself first; I restored the base list starting at minor-invariance. (2) blueprint.from.place had been overwritten with a sentence the ancestor lem-trf-local-term-locality does not contain; I restored the base place. (3) Step 1 claimed congruence mod m^N, but differentiation only gives mod m^{N-1}. I corrected this, named the truncation of phi^{-1}(h), and cited regular-system for y_k generating m. Step 2 now says y_k has no constant term. proof_deps equal the union of uses.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q149-c819441a5 (reviewer sub-agent of L); spot-checked: PASS with no files changed; the full checks are in review.md. Source: I read Stacks curves.tex Tag 0C4B (lemma-fitting-ideal-well-defined), lines 4088-4091, where the source says the matrix is invertible and the chain rule applies, then omits the details. The item fills in those details. This is the fifth push of the split: heads 787b, 3da9, 1b95 and a0d2 were PASSed and then refused at landing or promotion. Against a0d2, both new nodes are byte-identical. In the item, only Step 1 changed: it now says that D=phi d_Y phi^{-1} is F-linear and Leibniz and that id_T preserves m, and split_report was updated. Against clones/live, only proof, proof_deps and split_report differ, and the live item still has the base 3-step proof, so no other group has superseded it. Re-split order: old Step 1 (truncation, Leibniz, the m^{N-1} error, separatedness) is now lem-trf-formal-relative-derivation-expansion, with every intermediate claim stated. Old Step 2 (the a/a^2 basis and the matrices) is now lem-trf-formal-hom-cotangent-linearization. Old Step 3 stays as an elementary step. The two nodes are of comparable size, each treats arbitrary local maps and claims no invertibility, so neither restates the item (D1/D2). I checked the mathematics myself. E(a^N) is in b^{N-1} by the monomial generators and Leibniz, with no continuity needed. All four truncation bounds and the exact identity hold, by separatedness. psi preserves constant terms, and L_{theta psi}=L_psi L_theta is the right order for the row convention. In the item: E=d_{x_i} o phi gives formula 1; D with psi=id_T gives formula 2; L_phi=Q(0) and L_{phi^-1}=P(0) through constant terms, which gives clause 2; h=x_j and h=y_j give PQ=QP=1. Edge cases checked: m=0, r=0 (a point derivation), N=1, characteristic p, t->z^2, a two-variable swap, n=0. Duplicates: I searched with rg -L and screened the 169 nodes new since a0d2. The new lem-trf-power-series-adic-gradient-control (Q33, 2026-10-22) shares two truncation bounds but not the relative-derivation statement, so it overlaps without being a duplicate. Advisory: the future proof worker for the expansion node can cite it. No SGA, no tool_uses, no cycle; proof_deps equal the union of uses. Maintainer note: this is the same split after four PASSes and refusals; please land or promote it."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -174,5 +177,16 @@
   ],
   "fixed_by": "NT-stage2-Codex-5e565964b"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

@@ -1,0 +1,114 @@
+{
+ "id": "lem-sf-finite-scalar-tensor-pullback-representative-equation",
+ "kind": "statement",
+ "title": "Finite scalar tensor realization equation on a fixed representative",
+ "statement": "For a finite commutative ring R, a scheme Y, a normalized pro-etale tensor model aY, and flat-term K-flat complexes P,Q on Y, the specified finiteScalarTensorRealization satisfies its representative equation on (P,Q), with the fixed tensor representative, the total tensor comparison, and aY.representative.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 07A6; representative tensor square in step 3 of lem-sf-finite-scalar-tensor-pullback-comparison"
+ },
+ "stmt_deps": [
+  "lem-sf-finite-scalar-tensor-realization",
+  "lem-sf-finite-scalar-tensor-complex"
+ ],
+ "proof": [
+  {
+   "text": "Instantiate finiteScalarTensorRealizationOfRepresentatives_fac with the finite-scalar realization, the fixed flat-term representative predicate, the normalized tensor model aY, and finiteScalarTotalTensorIso. Unfold finiteScalarTensorRealization and simplify the resulting representative equation.",
+   "uses": [
+    "lem-sf-finite-scalar-tensor-realization",
+    "lem-sf-finite-scalar-tensor-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-finite-scalar-tensor-realization",
+  "lem-sf-finite-scalar-tensor-complex"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "H9",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 04VK and 07A4, representative equation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence of module sheaves over a constant ring identifies derived tensor products compatibly with inverse image",
+   "results": "Eight ordinary sheaf monoidal and free condensed module results; no specified unbounded realization square.",
+   "date": "2026-10-27",
+   "verdict": "Use the concrete realization and project representative descent APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact equivalence of module sheaves identifies unbounded derived tensor functors uniquely on flat K flat representatives",
+   "results": "Eight hits about flat module kernels, sheaf pushforward congruence, sheaf equality and ordinary module pullback adjunctions; no exact normalized derived tensor statement.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.LaxMonoidal.μ",
+   "results": "The tensorator and its monoidal isomorphism API were found; no scalar realization compatibility theorem.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing localization tensorator."
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctorComparisonNatTrans|resolvingRepresentativesFullyFaithfulWhiskering",
+   "results": "Mathlib service found no hits. Repository search located the proved total comparison and resolving restriction APIs.",
+   "date": "2026-10-27",
+   "verdict": "Use the project general constructions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteScalarTensorPullbackRepresentatives",
+  "date": "2026-10-27",
+  "group": "H9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-finite-scalar-tensor-pullback-representatives",
+   "place": "Y-side representative equation substep",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteScalarTensorPullbackRepresentativeEquation",
+  "file": "lean/Sheaf/Paper/FiniteScalarTensorPullbackRepresentativeEquation.lean",
+  "declaration": "WeilConjectures.finiteScalarTensorRealization_Y_representative",
+  "statement": "theorem finiteScalarTensorRealization_Y_representative\n    (R : Type u) [CommRing R] [Finite R]\n    {Y : Scheme.{u}}\n    (aY : ProEtaleTensorModel Y (proEtaleConstantRing Y R))\n    (P Q : CochainComplex\n      (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1} R))) ℤ)\n    (hP : finiteScalarFlatRepresentatives Y R P)\n    (hQ : finiteScalarFlatRepresentatives Y R Q) :\n    (sfIntrinsicDerivedEquivalence Y R).functor.map\n        ((finiteScalarFixedTensorRepresentativeForCoefficients\n          (ModuleCat.{u + 1} (ULift.{u + 1} R)) Y\n          (finiteScalarFlatRepresentatives Y R)\n          (finiteScalarFlatRepresentatives_kFlat Y R)).hom.app (⟨P, hP⟩, ⟨Q, hQ⟩)) ≫\n      ((finiteScalarTensorRealization Y R aY).hom.app (DerivedCategory.Q.obj P)).app\n        (DerivedCategory.Q.obj Q) ≫\n      aY.tensor.map (Prod.mkHom\n        ((sfIntrinsicModuleEquivalence Y R).functor.mapDerivedCategoryFactors.hom.app P)\n        ((sfIntrinsicModuleEquivalence Y R).functor.mapDerivedCategoryFactors.hom.app Q)) =\n    (sfIntrinsicModuleEquivalence Y R).functor.mapDerivedCategoryFactors.hom.app\n        (CochainComplex.mapBifunctor P Q\n          (curriedTensor (Sheaf (ProEt.topology Y)\n            (ModuleCat.{u + 1} (ULift.{u + 1} R))))) ≫\n      DerivedCategory.Q.map\n        ((finiteScalarTotalTensorIso Y R).hom.app (P, Q)) ≫\n      aY.representative.hom.app\n        (⟨((sfIntrinsicModuleEquivalence Y R).functor.mapHomologicalComplex\n          (.up ℤ)).obj P, finiteScalarPreservesRepresentatives Y R P hP⟩,\n         ⟨((sfIntrinsicModuleEquivalence Y R).functor.mapHomologicalComplex\n          (.up ℤ)).obj Q, finiteScalarPreservesRepresentatives Y R Q hQ⟩)",
+  "branch": "sheaf-dag",
+  "by": "H9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261027T123453-L-2303046",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261027T123453-L-2303046",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

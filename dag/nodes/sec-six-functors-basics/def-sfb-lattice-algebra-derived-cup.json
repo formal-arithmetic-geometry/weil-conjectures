@@ -18,9 +18,28 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
   "place": "Paragraph (3), agent-expanded ordinary lattice input: canonical algebra-valued cup construction used in proof steps 9 and 13 of lem-sfb-lattice-koszul-triangulated-cup-comparison"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the proved cochain tensor identification and unique degree-zero multiplication of [def-sfb-lattice-algebra-cochain-multiplication]. Keep the actual original multiplication on the (0,0) summand; no coefficient flatness or characteristic hypothesis is introduced.",
+   "uses": [
+    "def-sfb-lattice-algebra-cochain-multiplication"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize the multiplication through the existing lax tensorator of Q, using singleQIso for the canonical single-complex presentations. Compose this localized algebra multiplication with the right-adjoint lax tensorator of derived invariants to form cup. Define cupUnit by the derived adjunction unit followed by the original equivariant algebra unit, exactly as in the existing definitions.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-lattice-algebra-cochain-multiplication"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), proof step 13; the existing single-multiplication docstring argument, formalized by G4 using coproduct descent and single-complex extensionality."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -71,10 +90,14 @@
  },
  "lean_audit": {
   "master": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
   "slopmaster2": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   }
  },
  "chapter": "sec-six-functors-basics",
@@ -83,25 +106,6 @@
   "module": "Sheaf.CategoryTheory.LatticeAlgebraDerivedCup",
   "declaration": "Profinite.DiscreteLattice.DerivedCup.cup",
   "declarations": [
-   "Profinite.DiscreteLattice.DerivedCup.actionCochainTensor",
-   "Profinite.DiscreteLattice.DerivedCup.moduleCochainTensor",
-   "Profinite.DiscreteLattice.DerivedCup.moduleTensorLeftEmpty",
-   "Profinite.DiscreteLattice.DerivedCup.moduleTensorRightEmpty",
-   "Profinite.DiscreteLattice.DerivedCup.moduleComplexMonoidal",
-   "Profinite.DiscreteLattice.DerivedCup.moduleComplexMonoidalStruct",
-   "Profinite.DiscreteLattice.DerivedCup.moduleHomotopyMonoidal",
-   "Profinite.DiscreteLattice.DerivedCup.moduleDerivedMonoidal",
-   "Profinite.DiscreteLattice.DerivedCup.moduleDerivedMonoidalStruct",
-   "Profinite.DiscreteLattice.DerivedCup.moduleLocalizationLax",
-   "Profinite.DiscreteLattice.DerivedCup.actionComplexMonoidal",
-   "Profinite.DiscreteLattice.DerivedCup.actionComplexMonoidalStruct",
-   "Profinite.DiscreteLattice.DerivedCup.actionHomotopyMonoidal",
-   "Profinite.DiscreteLattice.DerivedCup.actionDerivedMonoidal",
-   "Profinite.DiscreteLattice.DerivedCup.actionDerivedMonoidalStruct",
-   "Profinite.DiscreteLattice.DerivedCup.actionLocalizationLax",
-   "Profinite.DiscreteLattice.DerivedCup.Algebra",
-   "Profinite.DiscreteLattice.DerivedCup.cochainTensor_eq",
-   "Profinite.DiscreteLattice.DerivedCup.singleMultiplicationExists",
    "Profinite.DiscreteLattice.DerivedCup.singleMultiplication",
    "Profinite.DiscreteLattice.DerivedCup.ordinaryAlgebraUnit",
    "Profinite.DiscreteLattice.DerivedCup.singleQIso",
@@ -131,5 +135,15 @@
   "group": "Q09",
   "result": "pass",
   "note": "Re-delivery after RETURN bdc4ce08b4f8. H3(1) fixed: totalCommShift built from mapCochainComplexShiftIso + totalShift₂Iso (sign (-1)^(a·n)), and the new factorShiftCompatibility (NatTrans.CommShift factor.hom) fixes the descended functor's shift through the localization, so triangulated/shiftCompatibility are no longer vacuous. H3(2) fixed: new def node def-sfb-lattice-restriction-cup-comparison (Bridge/Compatible). The equivalence is tied to underlying+constants, invariants fixed by inclusion, derived by computation units on every complex, regular by underlying, the tensorator on flat K-flat representatives and the unit; cohomologyIso does not depend on the choice. Compatible equates the restriction-calculus cup and cupUnit (ring ⟨R.X⟩, G = ULift (Multiplicative (Fin r→ℤ)), the citer's Lattice r) with DerivedCup.cup and cupUnit of the regular algebra, via the raise u+1→u+2 transport and no universe equality. Not a duplicate of the rank-one RelativeCyclic.DiscreteBridge. Records: stmt_deps adds the new node, statement verbatim, declarations listed, 'structure Bridge' convention OK. The other two modules are byte-identical to bdc4 (checked there). Docstrings/H5/H6/H8 OK, no extra hypotheses. No compile (no file changed). Advisory: citer step 3 should name the Bridge for the connecting-class transport."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-47cd7",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261026T081908-L-2100276",
+  "kind": "interface",
+  "note": "independent cc review: the moved block against the published LatticeAlgebraDerivedCup (identical except blueprint ids and the 2 proofs); the delivered pair plus the 3 direct importers compiled in a sandbox (all OK, at most 36 s); #print axioms; both node JSONs against the clone"
  }
 }

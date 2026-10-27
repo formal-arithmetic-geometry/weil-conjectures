@@ -1,0 +1,284 @@
+{
+ "id": "lem-sfb-space-coherent-support-ideal-power",
+ "kind": "statement",
+ "title": "Support and annihilation by an ideal power on a Noetherian algebraic space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$ [def-trf-algebraic-space]. Noetherian means locally Noetherian on etale scheme charts [pqf-def-locnoeth], quasi-compact, and quasi-separated; the last two conditions mean that every open cover has a finite subcover and the diagonal is quasi-compact on scheme tests. Modules are on the small etale ringed site, with quasi-coherence as in [def-trf-space-quasi-coherent-module]. On a locally Noetherian space, coherent means quasi-coherent with coherent pullbacks on all etale scheme charts [pqf-def-coherent]. Write $\\operatorname{Supp}(M)$ for the locus of nonzero geometric stalks, with the atlas topology [def-a1-space-point-topology]. A closed immersion is representable and a closed immersion after every scheme base change [def-weil-closed-immersion]; reduced means that etale scheme charts have local rings without nonzero nilpotents, and irreducible means nonempty and not the union of two proper closed subsets. Assume $X$ is Noetherian. Let $F$ be a coherent $\\mathcal O_X$-module and let $i:Z\\hookrightarrow X$ be a closed subspace. Put $I=\\ker(\\mathcal O_X\\to i_*\\mathcal O_Z)$, its quasi-coherent defining ideal. Direct image is [def-trf-space-etale-module-functors]. Define $I^0F=F$ and $I^{n+1}F=I(I^nF)$, where $IM$ is the submodule generated locally by products of sections of $I$ and $M$. For every $n\\geq0$, $I^nF$ and $F/I^nF$ are coherent. One has $$\\operatorname{Supp}(F)\\subseteq |i|(|Z|)\\quad\\Longleftrightarrow\\quad\\exists n\\geq0,\\ I^nF=0.$$ No reducedness of $Z$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 07UK, lemma-power-ideal-kills-sheaf; coherence of the ideal products and quotients: Tag 07UD, lemma-coherent-Noetherian-quasi-coherent-sub-quotient (products of quasi-coherent modules are quasi-coherent, as on affine etale charts)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "pqf-def-locnoeth",
+  "def-trf-space-quasi-coherent-module",
+  "pqf-def-coherent",
+  "def-a1-space-point-topology",
+  "def-weil-closed-immersion",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-closed-ideal-filtration",
+  "def-trf-space-module-scheme-restriction"
+ ],
+ "proof": [
+  {
+   "text": "On an etale scheme chart $e:T\\to X$, pullback is restriction [def-trf-algebraic-space]. Write $J=I|_T$ and let $G$ be the quasi-coherent Zariski module corresponding to $F|_T$ under [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence]. The ideal correspondence [lem-sfb-space-ideal-closed-subspace-correspondence] makes $J$ the quasi-coherent ideal of $Z\\times_XT$. Restriction commutes with the locally generated products in the statement: a local finite sum $\\sum a_jm_j$ restricts to the identical sum, and every such sum on a chart object is already a sum on that object of $X_{\\mathrm{et}}$. Induction gives $(I^nF)|_T=(J^nG)_{\\mathrm{et}}$, starting with $n=0$. For quotients, local representatives modulo these submodules give the same comparison. Indeed the scheme product and quotient are quasi-coherent by [lem-weil-pbc-ideal-times-quasi-coherent-affine-sections], inductively on $n$; the exact associated-sheaf functor [lem-sfb-scheme-etale-module-exact-finiteness-comparison] identifies their inclusions and cokernels with the small-etale ones. Its section formula and the equivalence's identity on open sections identify the multiplication on both sides. Thus $I^nF$ and $F/I^nF$ are quasi-coherent: the local presentations of these chart modules are presentations on the slice sites, exactly the local condition in [def-trf-space-quasi-coherent-module].",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sfb-space-ideal-closed-subspace-correspondence",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+    "def-trf-space-quasi-coherent-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UD, lemma-coherent-Noetherian-quasi-coherent-sub-quotient, and the chart restriction used in Tag 07UK; scheme products: Tags 01I8/01IC; exact small-etale association: Tag 06VE(5)."
+   }
+  },
+  {
+   "text": "For every $n$, Step 1 supplies the quasi-coherent submodule $I^nF\\subseteq F$. Apply [lem-sfb-space-noetherian-coherent-support] to this submodule of the coherent module $F$ on the locally Noetherian space $X$. It states precisely that both the submodule and its quotient are coherent. This proves both coherence assertions, including $n=0$, where the submodule is $F$ and the quotient is zero.",
+   "uses": [
+    "lem-sfb-space-noetherian-coherent-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UD, lemma-coherent-Noetherian-quasi-coherent-sub-quotient."
+   }
+  },
+  {
+   "text": "Quasi-compactness gives an affine surjective etale atlas $p:U\\to X$ by [lem-sfb-qc-space-affine-etale-atlas]. The scheme $U$ is locally Noetherian because it is an etale chart of $X$ (the hypothesis explicitly includes every such chart). It is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs], hence Noetherian in the scheme sense. Set $G=F|_U$, viewed as a coherent Zariski module as in Step 1 and the definition of coherence in the item. Let $J=I|_U$ and $Z_U=Z\\times_XU$. By [lem-sfb-space-ideal-closed-subspace-correspondence], $J$ is the defining ideal of $Z_U$. Thus $V(J)=|p|^{-1}(|i|(|Z|))$: a point $u$ belongs to either side exactly when its field-valued map into $X$ factors through the closed subspace after a field extension, equivalently when the defining ideal maps to zero in the residue field. This is the affine closed-immersion description in [def-weil-closed-immersion].",
+   "uses": [
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-space-ideal-closed-subspace-correspondence",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UK, proof, choice of an affine surjective etale atlas and its Noetherianity; Tag 03MB, lemma-closed-immersion-ideals."
+   }
+  },
+  {
+   "text": "By [lem-sfb-space-etale-chart-support], $\\operatorname{Supp}_U(G)=|p|^{-1}(\\operatorname{Supp}_X(F))$. Since $|p|$ is surjective, taking inverse images detects the inclusion of these two subsets. Together with Step 3 this gives $\\operatorname{Supp}_X(F)\\subseteq|i|(|Z|)$ if and only if $\\operatorname{Supp}_U(G)\\subseteq V(J)$. Apply [lem-weil-pbc-coherent-support-power-ideal-kills] to the Noetherian scheme $U$, its coherent module $G$, and its quasi-coherent ideal $J$. The latter condition holds if and only if $J^tG=0$ for some $t\\geq0$, where that node's $J^tG$ is the product of the ideal power $J^t$ with $G$. This is the iterated module $J^nG=J(J^{n-1}G)$ of Step 1 for $t=n$: by [lem-weil-pbc-ideal-times-quasi-coherent-affine-sections] (1) all intermediate modules are quasi-coherent, and by its clause (2), by induction on $n$, both have sections $J(V)^nG(V)$ on every affine open $V\\subseteq U$. Quasi-coherent submodules of $G$ with the same sections on all affine opens are equal; for $n=0$ both are $G$. In particular this supplies one exponent on the whole affine atlas, rather than exponents on infinitely many charts.",
+   "uses": [
+    "lem-sfb-space-etale-chart-support",
+    "lem-weil-pbc-coherent-support-power-ideal-kills",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UK, proof, reduction of support to the atlas and application of coherent.tex Tag 01Y9, lemma-power-ideal-kills-sheaf; support comparison is Tag 07TY."
+   }
+  },
+  {
+   "text": "For a fixed $n$, Step 1 identifies $(I^nF)|_U$ with $(J^nG)_{\\mathrm{et}}$. The equivalence [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] detects zero, so this restriction vanishes exactly when $J^nG=0$. To see that restriction detects global zero without an unstated descent theorem, let $T\\to X$ be any scheme object. By [lem-trf-space-fibre-products-etale-covers], the map $T\\times_XU\\to T$ is a surjective etale cover by a scheme. It is also an object over $U$. If a sheaf $H$ restricts to zero over $U$, each section in $H(T)$ restricts to zero on this cover and is zero by the separatedness part of the sheaf axiom [def-weil-sheaf-of-modules-category]. Thus $H=0$; the converse is immediate. Apply this to $H=I^nF$ and combine with Step 4. This proves the equivalence in the item. No step uses reducedness of $Z$. If $X$ is empty or $F=0$, exponent zero works; if $Z$ is empty, the criterion says $F=0$; and if $Z=X$, exponent one works.",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UK, proof, assertion that restriction to the atlas detects vanishing; expanded directly by the sheaf axiom."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sfb-space-ideal-closed-subspace-correspondence",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+  "def-trf-space-quasi-coherent-module",
+  "lem-sfb-space-noetherian-coherent-support",
+  "lem-sfb-qc-space-affine-etale-atlas",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-weil-closed-immersion",
+  "lem-sfb-space-etale-chart-support",
+  "lem-weil-pbc-coherent-support-power-ideal-kills",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tags 07UK (lemma-power-ideal-kills-sheaf), proof by an affine etale atlas and scheme Tag 01Y9; 07UD for the coherent subquotients. Restriction and zero detection are written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|power.*ideal.*kills|support.*pow.*(smul|annihil)",
+   "results": "1 hits; recorded top results: Mathlib/RingTheory/MvPolynomial/MonomialOrder.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: these are scheme ideal-zero-locus statements, affine module support statements, or general sheaf constructions, not the stated algebraic-space result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Noetherian algebraic space coherent sheaf support contained in zero set of ideal implies an ideal power kills the sheaf",
+   "results": "8 hits; recorded top results: AlgebraicGeometry.Scheme.IdealSheafData.supportSet_subset_zeroLocus, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.Scheme.IdealSheafData.coe_support_ofIdealTop, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.Scheme.IdealSheafData.support_eq_bot_iff, AlgebraicGeometry.Scheme.IdealSheafData.zeroLocus_inter_subset_supportSet, AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support",
+   "date": "2026-10-23",
+   "verdict": "no match: these are scheme ideal-zero-locus statements, affine module support statements, or general sheaf constructions, not the stated algebraic-space result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"support\", \"annihilator\"",
+   "results": "3 hits; recorded top results: Module.annihilator_le_of_mem_support, Module.mem_support_iff_exists_annihilator, Module.supportDim_eq_ringKrullDim_quotient_annihilator",
+   "date": "2026-10-23",
+   "verdict": "no match: these are scheme ideal-zero-locus statements, affine module support statements, or general sheaf constructions, not the stated algebraic-space result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi coherent ideal on a Noetherian algebraic space has some power annihilating a coherent module exactly when its support lies in the closed subspace of the ideal",
+   "results": "8 hits; recorded top results: Module.support_quotient, AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal, AlgebraicGeometry.exists_of_res_zero_of_qcqs, Module.support_quotSMulTop, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.Scheme.IdealSheafData.mem_support_iff, AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff, AlgebraicGeometry.Scheme.IdealSheafData.mem_supportSet_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: these are scheme ideal-zero-locus statements, affine module support statements, or general sheaf constructions, not the stated algebraic-space result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Support of coherent sheaf contained in a closed subspace if and only if a power of its defining ideal annihilates the sheaf",
+   "results": "8 hits; recorded top results: AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal, AlgebraicGeometry.Scheme.IdealSheafData.le_support_iff_le_vanishingIdeal, AlgebraicGeometry.Scheme.IdealSheafData.coe_support_mkOfMemSupportIff, AlgebraicGeometry.Scheme.IdealSheafData.supportSet_subset_zeroLocus, AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff, AlgebraicGeometry.Scheme.IdealSheafData.coe_support_ofIdealTop, AlgebraicGeometry.Scheme.IdealSheafData.support, AlgebraicGeometry.Scheme.IdealSheafData.support_antitone",
+   "date": "2026-10-23",
+   "verdict": "no match: these are scheme ideal-zero-locus statements, affine module support statements, or general sheaf constructions, not the stated algebraic-space result"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|coherent.*support|support.*annihilator",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, affine modules, or local-cohomology indexing; none states the algebraic-space criterion together with coherent ideal products and quotients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Support of a coherent sheaf on a Noetherian algebraic space is contained in a closed subspace if and only if an ideal power annihilates it",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.support\", \"Module.mem_support_iff_of_finite\", \"AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet\", \"AlgebraicGeometry.Scheme.IdealSheafData.supportSet_subset_zeroLocus\", \"AlgebraicGeometry.Scheme.IdealSheafData.gc\", \"AlgebraicGeometry.Scheme.IdealSheafData.le_support_iff_le_vanishingIdeal\", \"AlgebraicGeometry.Scheme.IdealSheafData.support_eq_bot_iff\", \"AlgebraicGeometry.Scheme.IdealSheafData.mem_supportSet_iff\"]}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, affine modules, or local-cohomology indexing; none states the algebraic-space criterion together with coherent ideal products and quotients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a Noetherian algebraic space a coherent module is killed by a power of a quasi coherent ideal exactly when its support lies in the closed subspace",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.Scheme.IdealSheafData.coe_support_mkOfMemSupportIff\", \"AlgebraicGeometry.Scheme.IdealSheafData.support_eq_bot_iff\", \"localCohomology.ideal_powers_initial\"]}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, affine modules, or local-cohomology indexing; none states the algebraic-space criterion together with coherent ideal products and quotients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent module supported in the zero locus of a finitely generated ideal is annihilated by some power of that ideal and ideal multiples are coherent",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"localCohomology.ideal_powers_initial\", \"Module.support_eq_zeroLocus\", \"Ideal.exists_pow_inf_eq_pow_smul\", \"IdealFilter.IsTorsion\", \"Module.support_quotient\", \"Module.mem_support_iff_of_finite\", \"Module.support_quotSMulTop\", \"Submodule.exists_sub_one_mem_and_smul_eq_zero_of_fg_of_le_smul\"]}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, affine modules, or local-cohomology indexing; none states the algebraic-space criterion together with coherent ideal products and quotients"
+  },
+  {
+   "tool": "grep",
+   "query": "Noetherian.*AlgebraicSpace|IsNoetherian.*scheme|coherent.*quasi",
+   "results": "{\"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Artinian.lean\"]}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, affine modules, or local-cohomology indexing; none states the algebraic-space criterion together with coherent ideal products and quotients"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-coherent-ideal-filtration",
+  "date": "2026-10-23",
+  "group": "Q51"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: affineness of the finite image of W in the last sentence of the proof of Tag 0ADD. Supporting input for the proof of Tag 07VP: Higher-rank coherent devissage on a Noetherian algebraic space. Tag 07UT, the support and nilpotent-thickening reduction, packaged using the preceding Tag 07UR filtration. Supporting input for Tag 07UR: the irreducible-support paragraph of lemma-coherent-filter, applying lemma-power-ideal-kills-sheaf (07UK).",
+   "via": [
+    "lem-sfb-space-coherent-ideal-filtration",
+    "lem-sfb-space-coherent-devissage",
+    "lem-sfb-noetherian-space-finite-affine-descent",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-coherent-support-ideal-power",
+  "worker": "stage1",
+  "summary": "Read Stacks 07UK and 07UD and their scheme reduction. Reused the existing chart support, ideal correspondence, affine atlas, scheme support-power and coherent-subquotient nodes. Wrote chart product/quotient comparisons and the sheaf-axiom argument detecting zero. No new nodes or Mathlib leaves; corrected only doubled TeX escaping in the statement.",
+  "blueprint": "The inherited ancestry place points to the irreducible-support paragraph of Tag 07UR inside the coherent devissage input to det-thm-sf-ctf-stability-direct-images (3). These steps supply its use of Tag 07UK and coherence of the ideal filtration. The inherited from.node is null; ancestor reports None. No ancestry metadata is invented or changed.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "The scheme chart comparison identifies quasi-coherent Zariski and small-etale modules and their open sections; it is a generic change-of-topology tool, not a trace-formula argument."
+   },
+   {
+    "node": "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "why": "The scheme product calculation supplies quasi-coherence and the affine ideal/module product formula on etale charts; no algebraic-space clause of the item is delegated to it."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Only quasi-compactness of an affine chart is used to make its local Noetherianity into scheme Noetherianity."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-support-power-ideal-kills",
+    "why": "This is the scheme criterion explicitly invoked by the proof of Stacks 07UK, used on the affine etale atlas."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Base change of the atlas produces a scheme etale covering of each test object, allowing a direct sheaf-axiom proof of zero detection."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-coherent-support-power-ideal-kills",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q137-fb0c064b9",
+  "group": "Q137",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q137-fb0c064b9 (reviewer sub-agent of L); spot-checked: Read the whole item, a 0-new-node 5-step split, against Stacks spaces-cohomology 07UK (l.2122) and 07UD (l.1935). The statement agrees with both, and the only change to it is the TeX escaping. Steps 1-3 and 5 hold as written. Step 1: chart restriction plus the exact A_T. Step 2: noetherian-coherent-support is 07UD. Step 3: affine qc atlas, U Noetherian, and V(J)=|p|^{-1}|i||Z| from the point classes and the correspondence. Step 5: zero detection by the T×_XU cover and sheaf separation (elementary). One fault, fixed. Step 4 applied the scheme criterion, which is stated for the product with the ideal power K^tF (def-weil-pbc-coherent-formal-module (0)), to the item's iterated J(J^{n-1}G) without identifying the two. The FIX adds this identification through ideal-times-quasi-coherent-affine-sections (1)+(2), giving sections J(V)^nG(V) on affine opens, and adds that node to the step's uses. Edge cases checked: Z empty, Z=X, F=0, and the nonreduced k[t]/(t^3) with V(t^2) (exponent 2). Tool uses accepted as generic. Batch-5: the trf Zariski/etale qcoh equivalence, the fibre products of spaces and def-trf-algebraic-space are generic foundations, outside the assumed trace formula and duality. Maintainer note: lem-sfb-space-powerideal-kills (unsplit, Q28, also 2026-10-23) duplicates the 07UK clause. Merge it into this item, which is stronger and implies it. This delivery did not create it.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceCoherentSupportIdealPower",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.coherent_support_ideal_power",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceCoherentSupportIdealPower.lean",
+  "statement": "theorem coherent_support_ideal_power {S : Scheme.{u}} (X : AlgebraicSpace S) (hln : ∀ T : X.EtaleSite, IsLocallyNoetherian (X.etaleForget.obj T)) (hqc : CompactSpace (Point X.obj.obj)) (hqs : ∀ (U V : Over S) (a : yoneda.obj U ⟶ X.obj.obj) (b : yoneda.obj V ⟶ X.obj.obj), IsAffine U.left → IsAffine V.left → CompactSpace (Point (Limits.pullback a b))) (F : X.Modules) (hFqc : F.IsQuasicoherent) (hFcoh : ∀ T : X.EtaleSite, RingedSpace.IsCoherent (X.etaleForget.obj T).toRingedSpace ((X.schemeRestriction T).obj F)) {Z : AlgebraicSpace S} (i : Z ⟶ X) (hi : IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) i.hom.hom) : (∀ n : ℕ, ((closedIdealPowerModule i F n).IsQuasicoherent ∧ ∀ T : X.EtaleSite, RingedSpace.IsCoherent (X.etaleForget.obj T).toRingedSpace ((X.schemeRestriction T).obj (closedIdealPowerModule i F n))) ∧ ((closedIdealPowerQuotient i F n).IsQuasicoherent ∧ ∀ T : X.EtaleSite, RingedSpace.IsCoherent (X.etaleForget.obj T).toRingedSpace ((X.schemeRestriction T).obj (closedIdealPowerQuotient i F n)))) ∧ ((∀ (T : X.EtaleSite) (x : X.etaleForget.obj T), ¬ Subsingleton (((X.schemeRestriction T).obj F).presheaf.stalk x) → schemePointMap T.obj.hom x ∈ pointImage i.hom.hom) ↔ ∃ n : ℕ, IsZero (closedIdealPowerModule i F n))",
+  "branch": "sheaf-dag",
+  "by": "Q84",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Support containment is expanded on all etale scheme charts using the recorded schemeRestriction and schemePointMap. For quasi-coherent modules ordinary and geometric stalks vanish simultaneously, so this renders exactly the geometric-support containment without a separate support definition. Coherence is exactly site quasi-coherence plus chartwise RingedSpace.IsCoherent, as specified by the node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-51e0caa44",
+  "group": "Q84",
+  "result": "pass",
+  "note": "Item coherent_support_ideal_power read against node and Stacks 07UK/07UD: Noetherian = chartwise IsLocallyNoetherian + compact point space + affine-test qs (landed interface); coherent = IsQuasicoherent + chartwise RingedSpace.IsCoherent (pqf-def-coherent 01BV audit decl); closed immersion via IsRepresentableWith IsClosedImmersion; no reducedness. Ideal = ⨅ ker over ModuleChart (exactly ker O_X→i_*O_Z); product = sInf of sheaf submodules containing a•m (locally generated); I^0=⊤; quotient = cokernel through smallModuleEquivalence (canonical, universe u kept). Support written chartwise with ordinary stalks, equivalent under hFqc (faithfully flat strict henselization, 07TY); no space-support def exists. Both coherence clauses for all n incl. 0; iff with ∃ n : ℕ IsZero. New def node real data, named isSheaf theorem in its statement (H5 ok); no duplicate (Q56 BaseIdealQuotientTower is a base-ring ideal). lean.statement verbatim for both; stmt_deps cover all used decls; proof_dep imports exist; docstrings/source/blueprint present; report sections present. No faults; maintainer note: lem-sfb-space-powerideal-kills (Q28) duplicate to merge (inherited)."
+ }
+}

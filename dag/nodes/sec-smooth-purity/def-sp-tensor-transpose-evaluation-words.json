@@ -1,0 +1,129 @@
+{
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-sbc-smooth-morphisms",
+  "sk-def-sp-coefficient-towers",
+  "def-weil-abstract-derived-category",
+  "sk-def-sp-normalized-towers",
+  "def-weil-derived-tensor",
+  "def-coefficient-twists-detailed",
+  "det-sp-tower-gluing",
+  "def-weil-derived-pullback-tensor-hom",
+  "thm-pur-diagonal-dualizing-object",
+  "det-sp-tower-shriek-levels",
+  "def-exchange-projection",
+  "def-pur-co-smoothness",
+  "def-pur-smooth-purity-map"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+  "place": "(2), actual tower source, projection/counit composite and specified finite evaluation words"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the adjoint transpose of an inverse projection formula and counit tensor map",
+   "results": "8 hits, including tensorRightHomEquiv_symm_naturality and tensorLeftHomEquiv_naturality: abstract categorical identities only. No finite tower evaluation theorem.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "results": "One hit: CategoryTheory.Adjunction.homEquiv_naturality_left. Used for naturality, not the finite tower evaluation.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "evaluation functor preserves adjunction transpose unit counit natural isomorphisms",
+   "results": "8 hits including evaluationAdjunctionLeft and evaluationAdjunctionRight counit formulas. No geometric tower evaluation comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_naturality|projectionCounit|tensorMate",
+   "results": "25 Mathlib hits: abstract Hom-equivalence naturality, no projectionCounit or tensorMate. Local rg finds the item definitions and GroundFieldRetagging only; no existing finite evaluation theorem.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "id": "def-sp-tensor-transpose-evaluation-words",
+ "kind": "definition",
+ "title": "Specified tower transpose source and finite evaluation words",
+ "statement": "Fix a prime ell, a finite extension E of Q_ell, normalized tower data and the full constructible finite-Tor compact-support adjunction, together with an open/proper factorization f=j followed by p. Define originalSource as the inverse realization of the tensor source with its membership proof. Define originalComposite as the fully faithful preimage of the realized projection/counit composite. At a positive coefficient level define dualizingWord using the coefficient-unit isomorphism and counit-preserving right-adjoint comparison. Define tensorWord by the specified pullback and tensor comparisons, finiteTheta as finite gamma at identity orientation followed by the unique comparison, and intrinsicTheta by transporting this map through the inverse tensorWord comparison and fixed level comparisons. These are precisely the existing constructions of the tower tensor transpose, separated into a shared definitions module. Use the coefficient, tower adjunction, smooth purity, tensor and level-word notions in the listed statement dependencies.",
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerTensorTransposeEvaluation",
+  "group": "H9",
+  "date": "2026-10-25"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-integral-adjunction-bijection",
+   "place": "Normalization and Purity paragraphs; tower-geometric gamma proof (2), specified projection/counit source and finite evaluation words",
+   "via": [
+    "lem-sp-tower-tensor-transpose-evaluation",
+    "det-sp-tower-gamma"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerTensorTransposeWords",
+  "file": "lean/Sheaf/Paper/TowerTensorTransposeWords.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTensorTranspose.originalSource",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpTensorTranspose.originalSource",
+   "AlgebraicGeometry.ProEtale.SpTensorTranspose.originalComposite",
+   "AlgebraicGeometry.ProEtale.SpTensorTranspose.dualizingWord",
+   "AlgebraicGeometry.ProEtale.SpTensorTranspose.tensorWord",
+   "AlgebraicGeometry.ProEtale.SpTensorTranspose.finiteTheta",
+   "AlgebraicGeometry.ProEtale.SpTensorTranspose.intrinsicTheta"
+  ],
+  "statement": "def originalSource (K : SpTowerCalculus.C l E b q Y)\n    (hQ : spConstructibleTorTowers l E X (q.abelian X)\n      ((SpTowerCalculus.realization l E b X (q.abelian X)).inverse.obj\n        ((SpTowerGamma.tensorSource l E b o q (j ≫ p) ((SpTowerGamma.exceptional l E b q G).obj\n          ⟨SpTowerGamma.originalUnit l E b q Y, hU⟩)).obj K))) : SpTowerCalculus.C l E b q X",
+  "branch": "sheaf-dag",
+  "by": "H9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-fcb05",
+  "group": "H9",
+  "result": "fix",
+  "landing": "20261025T163710-L-784362",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-fcb05",
+  "group": "H9",
+  "result": "fix",
+  "landing": "20261025T163710-L-784362",
+  "kind": "interface",
+  "note": "independent cc review: item theorem stmt byte-identical to clone; new lemmas = item conjuncts (1)+(2) and (4) verbatim; six defs moved unchanged (diff: blueprint tags only); node lean.statements match files; item node diff only lean/proof/proof_deps/proof_origin"
+ }
+}

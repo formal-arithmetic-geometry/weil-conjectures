@@ -1,0 +1,169 @@
+{
+ "id": "lem-sf-integral-system-direct-evaluation",
+ "kind": "statement",
+ "title": "Evaluation and quotient transitions of normalized system direct image",
+ "statement": "For a prime l, a finite extension E of Q_l, a scheme map f:X→Y and any Direct d in [def-strict-coefficient-system-operation-data], there is a DirectEvaluation for d: its evaluation isomorphisms satisfy both adjunction equations, its restricted direct-image comparison is the specified sfDerivedImageRestriction, and its adjacent quotient transition equation holds. This concerns every derived system, without boundedness, cartesian or coefficient-invertibility hypotheses.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Strict-system realization: the construction argument recorded in lem-sf-integral-system-operation-models; Zheng Construction 4.1 and Lemma 4.10, Stacks 03DI, 09AE, 0E8I and 0941."
+ },
+ "stmt_deps": [
+  "def-strict-coefficient-system-operation-data"
+ ],
+ "proof": [
+  {
+   "text": "Define β_n to be the right mate of the inverse of the fixed pullbackTensorDerivedEvaluation under d.adj and finiteAdj_n. It is invertible by the canonical evaluation mate lemma, so asIso β_n supplies the evaluation isomorphism.",
+   "uses": [
+    "lem-sf-integral-direct-evaluation-mate-invertible"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The evaluated unit identity is unit_mateEquiv followed by the finite direct image of α_n.hom; functoriality cancels α_n.inv followed by α_n.hom. The counit identity is mateEquiv_counit followed by α_n.hom, cancelling α_n.hom followed by α_n.inv. These are proved in Lean without additional hypotheses or holed coherence statements.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use originRestrictionEquality and proof irrelevance for the exactness instances to identify the derived quotient-restriction presentations. Transport sfDerivedImageRestriction across those equalities, retaining its heterogeneous equality; restrictedDirect_exists proves this normalization with no hole. Let δ be the inverse mate of its inverse. Apply the pullback quotient square. Naturality of mates with respect to top and bottom transformations and mateEquiv_vcomp transfer this square to the direct-image equation with an extra factor r.inv. Postcompose with r.hom and cancel r.inv followed by r.hom. This proves the full specified transition equation.",
+   "uses": [
+    "lem-sf-integral-pull-evaluation-quotient-square",
+    "lem-sf-compact-support-restriction-of-scalars"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-integral-direct-evaluation-mate-invertible",
+  "lem-sf-integral-pull-evaluation-quotient-square",
+  "lem-sf-compact-support-restriction-of-scalars"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and Lemma 4.10; Q9 canonical-mate assembly, deriving both adjunction equations and the direct-image transition from the two strictly smaller geometric obligations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image of a coefficient system with evaluation compatibility and extension by zero",
+   "results": "8 hits, including localCohomology.diagram and locally constant module functors; none treats normalized sequence-site derived evaluation or its open mates.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem. Generic localization and adjunction results are used for assembly."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategory\"",
+   "results": "12 hits, including Functor.mapDerivedCategory, mapDerivedCategoryCompIso and mapDerivedCategoryIdIso. These construct exact localizations, without the specific sequence-site comparison.",
+   "date": "2026-10-27",
+   "verdict": "Exact localization API applies to the assembly, but does not state the missing comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "CoefficientDerivedImage|sequenceDirect|sequenceExtension",
+   "results": "msearch Mathlib grep returned 0 hits. Local searches found CoefficientSystemUnboundedComparison and SemilinearProperOpenMatePasting; their presentations must be identified with the fixed finite intrinsic comparisons.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate with the specified finite adjunction and cochain normalizations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralSystemOperationModels",
+  "date": "2026-10-27",
+  "group": "W4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Coefficient-comparison sentence: Evaluation and quotient transitions of normalized system direct image.",
+   "via": [
+    "lem-sf-integral-system-operation-models",
+    "lem-sf-integral-canonical-system-coherence",
+    "lem-sf-integral-canonical-ambient-models",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralSystemDirectEvaluation",
+  "file": "lean/Sheaf/SixFunctors/IntegralSystemDirectEvaluation.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.integralSystemDirectEvaluation",
+  "statement": "theorem integralSystemDirectEvaluation {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (d : Direct l E f) : Nonempty (DirectEvaluation l E d)",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261027T021417-L-2770290",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V8",
+  "result": "pass",
+  "landing": "20261027T103518-L-1094397",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "statement_change": {
+  "date": "2026-10-27",
+  "by": "V8 stage 2",
+  "old_statement": "For a prime l, a finite extension E of Q_l, a scheme map f:X→Y and any Direct d in [def-sf-integral-system-operations], there is a DirectEvaluation for d: its evaluation isomorphisms satisfy both adjunction equations, its restricted direct-image comparison is the specified sfDerivedImageRestriction, and its adjacent quotient transition equation holds. This concerns every derived system, without boundedness, cartesian or coefficient-invertibility hypotheses.",
+  "what": "Dependency-interface refinement only: replace a broad owner containing later compact-support/completion realization by the existing lower geometric or strict-system declarations actually used. The Lean statement, hypotheses, conclusion and proof stay verbatim. This prevents the lower ordinary construction from acquiring a circular dependency on strict proper reduction.",
+  "source": {
+   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+   "place": "Strict-system realization: the construction argument recorded in lem-sf-integral-system-operation-models; Zheng Construction 4.1 and Lemma 4.10, Stacks 03DI, 09AE, 0E8I and 0941."
+  },
+  "citers": [
+   {
+    "id": "lem-sf-integral-system-operation-models",
+    "holds": true,
+    "note": "Identical Lean declaration and mathematical assertion; only the cited interface is narrowed."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-sf-integral-system-operations"
+  ],
+  "old_proof": [
+   {
+    "text": "Define β_n to be the right mate of the inverse of the fixed pullbackTensorDerivedEvaluation under d.adj and finiteAdj_n. It is invertible by the canonical evaluation mate lemma, so asIso β_n supplies the evaluation isomorphism.",
+    "uses": [
+     "lem-sf-integral-direct-evaluation-mate-invertible"
+    ],
+    "elementary": true
+   },
+   {
+    "text": "The evaluated unit identity is unit_mateEquiv followed by the finite direct image of α_n.hom; functoriality cancels α_n.inv followed by α_n.hom. The counit identity is mateEquiv_counit followed by α_n.hom, cancelling α_n.hom followed by α_n.inv. These are proved in Lean without additional hypotheses or holed coherence statements.",
+    "uses": [],
+    "elementary": true
+   },
+   {
+    "text": "Use originRestrictionEquality and proof irrelevance for the exactness instances to identify the derived quotient-restriction presentations. Transport sfDerivedImageRestriction across those equalities, retaining its heterogeneous equality; restrictedDirect_exists proves this normalization with no hole. Let δ be the inverse mate of its inverse. Apply the pullback quotient square. Naturality of mates with respect to top and bottom transformations and mateEquiv_vcomp transfer this square to the direct-image equation with an extra factor r.inv. Postcompose with r.hom and cancel r.inv followed by r.hom. This proves the full specified transition equation.",
+    "uses": [
+     "lem-sf-integral-pull-evaluation-quotient-square",
+     "def-sf-integral-system-expression-domain"
+    ],
+    "elementary": true
+   }
+  ],
+  "old_proof_deps": [
+   "lem-sf-integral-direct-evaluation-mate-invertible",
+   "lem-sf-integral-pull-evaluation-quotient-square",
+   "def-sf-integral-system-expression-domain"
+  ]
+ }
+}

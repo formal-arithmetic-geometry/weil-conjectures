@@ -83,13 +83,19 @@
   "same_as": []
  },
  "lean": {
-  "existing": true,
-  "module": "WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition",
-  "declaration": "AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp",
+  "module": "Sheaf.AlgebraicGeometry.SfGraphCompactSupportComposition",
+  "declaration": "AlgebraicGeometry.Etale.sfGraphCompactSupportCompIso",
+  "declarations": [
+   "AlgebraicGeometry.Etale.sfGraphCompactificationComparison",
+   "AlgebraicGeometry.Etale.sfGraphCompactSupportCompIso"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SfGraphCompactSupportComposition.lean",
+  "statement": "def sfGraphCompactSupportCompIso {X Y T : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ T) (cf : Compactification f) (cg : Compactification g) (cfg : Compactification (f ≫ g)) : rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) cfg ≅ rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) cf ⋙ rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) cg",
   "branch": "sheaf-dag",
-  "by": "A2",
-  "date": "2026-10-18",
-  "statement": "theorem nonempty_iso_rightDerivedLowerShriek_comp {X Y T : Scheme.{u}} (f : X ⟶ Y)\n    (g : Y ⟶ T) [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)] :\n    Nonempty (R(f ≫ g)_![ModuleCat.{u + 1} Λ] ≅\n      R(f)_![ModuleCat.{u + 1} Λ] ⋙ R(g)_![ModuleCat.{u + 1} Λ])"
+  "by": "Q77",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The previous record exposes only Nonempty of a composition isomorphism. It supplies no specified arrow with which to form the morphism equations of the consumer. This module exposes the exact graph construction in the upstream proofs as definitions, with three explicitly supplied compactifications. The construction uses the published proper/open exchange, derived pushforward and open-extension compositors, without selecting an arbitrary isomorphism from Nonempty. The original existence theorem is retained by public import; this interface strengthens its usable data without changing the geometric hypotheses."
  },
  "reviewed": {
   "date": "2026-10-18",
@@ -111,5 +117,24 @@
   "kind": "interface",
   "note": "independent cc review: the delivered EtaleLocalization proof, GraphDerivedIso and GraphGeometricBaseChange generalizations and the new JointlySurjective module against the live tree, the change record and the 6 node files; compiled the delivery and its 7 downstream importers, ran #print axioms"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f219777bc",
+  "group": "Q77",
+  "result": "pass",
+  "note": "Clause-by-clause match of item Lean to node: c = conjugateIsoEquiv adjh (adja.comp adjb) of the graph compositor (Gh ≅ Gb⋙Ga, counit-preserving); δ = c_A ≫ inv θ_a(ω_b), IsIso of the specified arrow; composition equation with explicit reassociation (pullback comp hom, associator, inverse pullback-tensor iso; directions checked against upstream defs); tensor-invertibility consequence two-sided, redundant hyp kept; etale restriction λ = c⁻¹ρ⁻¹ via sfEtaleRightAdjointComparison + L≅D(a^*), equation with μ and comp.inv source identification; [Etale][IsSeparated]; no qc/Noetherian; universes as deps. §1(B) repair of lem-etale-unbounded-compact-support-composition: old record was a bare Nonempty (A2 existing:true); new defs copy the upstream proof bodies as data with supplied compactifications, no choice; not a duplicate of the qc-only unboundedEtaleLowerShriekCompIso; only lean changed, note present; no landed statement-level users of the old record (citers: coherence node without Lean, which names the graph comparison; two proof-only deps; old theorem still publicly imported). Both statements verbatim, lines ≤100, docstrings with source/blueprint and the 8 steps, only sorry proofs, report sections present. No compile (no change). Advisory: redundant Adjunction.Basic import; base-node finite-type citation inconsistency in the composition node (maintainer note)."
+ }
 }

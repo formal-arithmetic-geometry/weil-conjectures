@@ -1,0 +1,260 @@
+{
+ "id": "lem-sfb-finite-group-scheme-order-annihilator",
+ "kind": "statement",
+ "title": "The order annihilates a finite commutative group scheme",
+ "statement": "Let $k$ be a field [def-weil-field] and let $G$ be a finite commutative $k$-group scheme [def-sc-group-scheme]. Put $n=\\dim_k\\Gamma(G,\\mathcal O_G)$, its order. Then $n\\geq1$, and for every commutative $k$-algebra $R$ and every $x\\in G(R)$ one has $n x=0$. Equivalently the scheme morphism obtained by adding the identity morphism of $G$ to itself $n$ times is the zero homomorphism. No reducedness, etaleness or invertibility of $n$ in $k$ is assumed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 11.32, printed p.221, restricted to commutative finite group schemes; n is positive because the identity section makes the coordinate algebra nonzero."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Write $A=\\Gamma(G,\\mathcal O_G)$, finite-dimensional by [def-sc-group-scheme]. The identity gives a unital $k$-algebra map $\\epsilon:A\\to k$, so $A\\ne0$ and $n\\geq1$. Choose an algebraic closure $K/k$ by [def-weil-algebraic-closure]. By [lem-weil-pbc-fibre-product-affine-spectra], $G_K$ has coordinate algebra $A\\otimes_kK$. It suffices to prove the equality of the multiplication-by-$n$ and zero maps after extending scalars to $K$: a $k$-basis of $A$ becomes a $K$-basis of $A\\otimes_kK$, hence the dimension stays $n$ and the map $A\\to A\\otimes_kK$, $a\\mapsto a\\otimes1$, is injective. Equality of the extended coordinate maps therefore implies equality of the original ones. The scalar extension uses [def-weil-pbc-module-tensor-product]. From now on replace $k$ by $K$.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-weil-algebraic-closure",
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 11.32 and proof, printed p.221"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-finite-commutative-group-local-constant-product] to write $G\\simeq C\\times_KH_K$ with $C$ connected, $B=\\Gamma(C,\\mathcal O_C)$ local, $I=\\ker(\\epsilon:B\\to K)$ its maximal ideal, $d=\\dim_KB\\geq1$, $q=|H|\\geq1$ and $n=dq$. By [lem-sfb-finite-additive-group-card-annihilator], $[q]$ vanishes on $H$. Thus it vanishes on the constant group scheme $H_K$: on each component $\\operatorname{Spec}K$ it is the map labelled $qh=0$. Consequently $[n]=[d]\\circ[q]$ vanishes there as well. It remains to prove $[d]=0$ on $C$.",
+   "uses": [
+    "lem-sfb-finite-commutative-group-local-constant-product",
+    "lem-sfb-finite-additive-group-card-annihilator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 11.32 and proof, printed p.221"
+   }
+  },
+  {
+   "text": "In characteristic zero, $C$ is etale by the characteristic-zero clause of [lem-sc-fg-order-prime-etale]. Its finite coordinate algebra is a product of finite separable extensions of $K$ by [lem-sc-finite-etale-algebra-criterion]. Each factor equals $K$ because $K$ is algebraically closed. As $B$ is nonzero local, this product has exactly one factor. Hence $B=K$, $C=\\operatorname{Spec}K$ is the trivial group, $d=1$ and $[d]=0$.",
+   "uses": [
+    "lem-sc-fg-order-prime-etale",
+    "lem-sc-finite-etale-algebra-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 11.32 and proof, printed p.221"
+   }
+  },
+  {
+   "text": "Suppose instead that $K$ has positive characteristic $p$. A finite group scheme over a field is flat since its coordinate algebra is a vector space and thus free. Apply [lem-sc-connected-finite-order] to the connected finite flat group scheme $C$: there is $r\\geq0$ with $d=p^r$.",
+   "uses": [
+    "lem-sc-connected-finite-order"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 11.32 and proof, printed p.221"
+   }
+  },
+  {
+   "text": "We have $I^d=0$. Indeed each $I^j$ is finite as a $B$-module: a finite $K$-basis also generates it over $B$. If $I^{j+1}=I^j$, apply [lem-weil-pbc-nakayama-jacobson] to $M=I^j$ and the maximal ideal $I$ of the local ring $B$ (its Jacobson radical) to get $I^j=0$. Thus each inclusion $I^{j+1}\\subset I^j$ is strict while $I^j\\ne0$. Starting from $I^0=B$ of $K$-dimension $d$, $d$ strict decreases leave dimension at most zero, proving the assertion. This is the dimension-count argument used at the end of Milne 11.32, with Nakayama (Stacks Tag 00DV, lemma-NAK(2)) made explicit.",
+   "uses": [
+    "lem-weil-pbc-nakayama-jacobson"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 11.32 and proof, printed p.221"
+   }
+  },
+  {
+   "text": "Use [lem-sfb-finite-group-faithful-regular-matrices] on $C$, and put $U=(u_{ij})\\in\\operatorname{GL}_d(B)$. Surjectivity of its coordinate map shows that $I$ is generated by $u_{ij}-\\delta_{ij}$: the extra generator $\\det(U)^{-1}-1=-\\det(U)^{-1}(\\det(U)-1)$ lies in that ideal too. Since $C$ is commutative, multiplication by $p$ is a group-scheme endomorphism. For $f=[p]^*:B\\to B$ the representation identity gives $f(U)=U^p$, so $f(U-1)=U^p-1=(U-1)^p$. The last power is a MATRIX power: its entries are sums of products of $p$ entries of $U-1$, hence lie in $I^p$. Therefore $f(I)\\subseteq I^p$. Inductively $f^s(I)\\subseteq I^{p^s}$: it is tautological at $s=0$, and applying $f$ to $I^{p^s}$ gives a subideal of $(I^p)^{p^s}=I^{p^{s+1}}$. For $s=r$ this is zero by Step 5. The composite $f^r=[p^r]^*=[d]^*$ is the identity on $K$ and kills $I$, hence sends every $b$ to $\\epsilon(b)1$. This is exactly the coordinate map of the zero homomorphism of $C$, so $[d]=0$.",
+   "uses": [
+    "lem-sfb-finite-group-faithful-regular-matrices"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 11.32 and proof, printed p.221"
+   }
+  },
+  {
+   "text": "In both characteristic cases, $[d]=0$ on $C$ and $[q]=0$ on $H_K$. Since $n=dq$, the $n$-fold sum is zero on each factor of $G\\simeq C\\times_KH_K$ and therefore on $G_K$. The coordinate-map injectivity of Step 1 descends this equality to the original $k$. Evaluating the equality of morphisms on any commutative $k$-algebra $R$ gives $nx=0$ for every $x\\in G(R)$. Conversely these pointwise identities include $R=A$ and its universal point $\\operatorname{id}_A$, so they imply the equality of the coordinate maps and hence of the scheme morphisms. This proves every clause, including the asserted equivalence.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 11.32 and proof, printed p.221"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-group-scheme",
+  "def-weil-algebraic-closure",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-sfb-finite-commutative-group-local-constant-product",
+  "lem-sfb-finite-additive-group-card-annihilator",
+  "lem-sc-fg-order-prime-etale",
+  "lem-sc-finite-etale-algebra-criterion",
+  "lem-sc-connected-finite-order",
+  "lem-weil-pbc-nakayama-jacobson",
+  "lem-sfb-finite-group-faithful-regular-matrices"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 11.32 and proof, printed p.221"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "annihilat|orderOf|exponent|[Ff]inite.*[Gg]roup",
+   "results": "0 hits; ; logged results: ; Mathlib/AlgebraicGeometry/Group",
+   "date": "2026-10-23",
+   "verdict": "no match: card_nsmul_eq_zero concerns the cardinal of an abstract finite group, not the rank of a finite possibly nonreduced group scheme"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"orderOf\"",
+   "results": "0 hits; ; logged results: ",
+   "date": "2026-10-23",
+   "verdict": "no match: card_nsmul_eq_zero concerns the cardinal of an abstract finite group, not the rank of a finite possibly nonreduced group scheme"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Multiplication by the rank of a finite commutative group scheme is zero",
+   "results": "8 hits; ; logged results: card_nsmul_eq_zero', card_nsmul_eq_zero, ZModModule.char_nsmul_eq_zero, card_dvd_exponent_nsmul_rank', zsmul_eq_zero_iff_modEq, nsmulCoprime_zero, zsmul_smul_addOrderOf, MulZeroClass.toSMulWithZero",
+   "date": "2026-10-23",
+   "verdict": "no match: card_nsmul_eq_zero concerns the cardinal of an abstract finite group, not the rank of a finite possibly nonreduced group scheme"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite group scheme over a field is annihilated by its order on points over every algebra",
+   "results": "8 hits; ; logged results: exists_zsmul_eq_zero, AddMonoid.IsTorsion.module_of_finite, card_nsmul_eq_zero, AddCircle.finite_torsion_of_isSMulRegular, card_dvd_exponent_nsmul_rank', FiniteField.pow_card, FiniteField.pow_card_pow, FiniteField.forall_pow_eq_one_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: card_nsmul_eq_zero concerns the cardinal of an abstract finite group, not the rank of a finite possibly nonreduced group scheme"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite locally free commutative group scheme over a field of rank n is killed by n",
+   "results": "8 hits; ; logged results: card_dvd_exponent_nsmul_rank', ModN.natCard_eq, card_dvd_exponent_nsmul_rank, FiniteField.orderOf_frobeniusAlgEquivOfAlgebraic, FiniteField.orderOf_frobeniusAlgHom, card_dvd_exponent_pow_rank, card_dvd_exponent_pow_rank', VectorSpace.card_fintype",
+   "date": "2026-10-23",
+   "verdict": "no match: card_nsmul_eq_zero concerns the cardinal of an abstract finite group, not the rank of a finite possibly nonreduced group scheme"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multiplication by the order is zero for a finite locally free commutative group scheme",
+   "results": "8 hits; ; declarations: card_nsmul_eq_zero, card_dvd_exponent_nsmul_rank', Nat.cast_card_eq_zero, card_dvd_exponent_pow_rank', card_dvd_exponent_pow_rank, card_dvd_exponent_nsmul_rank, ModN.natCard_eq, IsAddCyclic.card_nsmul_eq_zero_le",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract-group cardinal identities do not treat the scheme rank or nonreduced test algebras"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, CategoryTheory.GrpObj",
+   "results": "0 hits; ; declarations: ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract-group cardinal identities do not treat the scheme rank or nonreduced test algebras"
+  },
+  {
+   "tool": "grep",
+   "query": "finrank.*(npow|nsmul)|order.*annihilat|npow.*finrank",
+   "results": "0 hits; ; declarations: ; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract-group cardinal identities do not treat the scheme rank or nonreduced test algebras"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-simple-isogeny-decomposition",
+  "date": "2026-10-23",
+  "group": "Q16"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Theorem 10.15, printed p.49 (finite free Hom conclusion); §10 endomorphism-ring convention, printed pp.42–43. Supporting argument: Chapter I, Proposition 10.1 and the simple-factor discussion following Remark 10.2, printed pp.42–43; Remark 8.6, printed p.36 (quasi-inverse isogenies). Auxiliary for this split: The order annihilates a finite commutative group scheme.",
+   "via": [
+    "lem-sfb-simple-isogeny-decomposition",
+    "lem-sfb-abelian-hom-finite-free",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-group-scheme-order-annihilator",
+  "worker": "stage1",
+  "summary": "Split Milne Proposition 11.32 via the local-constant product, faithful regular matrices, and a Mathlib finite additive group leaf. Reused the existing connected-order and characteristic-zero etaleness nodes. Wrote the maximal-ideal dimension argument using Nakayama inline and corrected the source’s entrywise reading of a matrix power. Original statement retained.",
+  "blueprint": "Supports the alteration/level-rigidity/isogeny input in the existing blueprint.from.place and via chain; nearest blueprint ancestor reported as null by blueprint_refs.py ancestor. All new nodes inherit that provenance. No chapter or unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-connected-finite-order",
+    "why": "Connected characteristic-p order is the group-scheme tool used in Milne 11.32, not a six-functor route replacement."
+   },
+   {
+    "node": "lem-sc-fg-order-prime-etale",
+    "why": "Characteristic-zero finite etaleness is the group-scheme tool used in Milne 11.31-11.32."
+   },
+   {
+    "node": "lem-sc-finite-etale-algebra-criterion",
+    "why": "Identifies the finite etale coordinate algebra in the characteristic-zero case; no node in the parent unit supplies this algebraic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-connected-finite-order",
+  "lem-sc-fg-order-prime-etale",
+  "lem-sc-finite-etale-algebra-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-c03a57900",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-c03a57900 (reviewer sub-agent of L); spot-checked: Read the item, all 3 new nodes, every cited statement and Milne iAG at Prop 11.32 and (74) on pp.220-221, Prop 11.3 on p.210 and Thm 4.9 on p.87. Item statement is byte-identical to live and side-live (both still unsplit, no proof); the new ids are not live. Source error in the report confirmed: in char 2, U=[[1,1],[1,0]] gives V^2=[[1,1],[1,0]], which is not the entrywise square of V; Step 6 uses only entries in I^p, which is correct. New nodes: (1) local-constant-product is true by 11.3 plus commutativity plus G°(K)=e; B is local with residue field K; dim=dq. It is not lem-sfb-group-neutral-component-translates. (2) faithful-regular-matrices is true by 4.9 with V=A; the right-translation convention makes rho multiplicative; eps(u_ij)=delta_ij. (3) card_nsmul_eq_zero' is an exact Mathlib leaf; the to_additive attribute is at line 1185 and pow_card_eq_one' at 1186. Steps: 1 base change with injective A->A⊗K; 2 [q]=0 on the finite group H only; 3 p=0 via fg-order-prime-etale plus etale-algebra criterion plus locality gives B=K; 4 connected order p^r; 5 Nakayama strict chain gives I^d=0; 6 I=(u_ij-delta_ij), f(U)=U^p via the universal point, f(I)⊂I^p, induction stated, f^r=eps·1; 7 d|n and q|n, descend, Yoneda equivalence. Edge cases checked: trivial group, r=0, nonperfect k, alpha_{p^r}, R=0. Accepted tool_uses: connected-finite-order, fg-order-prime-etale, finite-etale-algebra-criterion (Milne 11.30/11.31 tools; no unit node supplies them). No SGA citation. Blueprint provenance inherited correctly. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteGroupSchemeOrderAnnihilator",
+  "declaration": "AlgebraicGeometry.finite_commutative_group_scheme_order_annihilator",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteGroupSchemeOrderAnnihilator.lean",
+  "statement": "theorem finite_commutative_group_scheme_order_annihilator {k : Type u} [Field k] (G : Over (Spec (.of k))) [GrpObj G] [IsCommMonObj G] [IsFinite G.hom] : 1 ≤ G.hom.finrankΓ ∧ (𝟙 G : G ⟶ G) ^ G.hom.finrankΓ = 1 ∧ ∀ (R : Type u) [CommRing R] [Algebra k R] (x : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k R))) ⟶ G), x ^ G.hom.finrankΓ = 1",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c5116b162",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Clause-by-clause match: field k; G : Over (Spec k) with GrpObj, IsCommMonObj, IsFinite G.hom; order = G.hom.finrankΓ (FiberDegree:97, dim_k Γ(G,⊤)); 1 ≤ n; (𝟙 G)^n = 1 (zero hom, via the scoped MonObj Hom.group); ∀ R comm k-algebra, ∀ x : Spec R ⟶ G over k, x^n = 1. Stating both equivalent forms matches the node. No extra hypotheses. Edge cases (trivial group, order 0 ruled out by the conclusion, char 0/p, non-perfect k, alpha_p/mu_p, R=0) covered. R in universe u follows the existing GroupScheme.Defs convention. Item differs from side-live only in lean; dependency nodes unchanged; lean.statement verbatim in the file; name unused; no existing statement (rg). No defs; proof is sorry; docstrings cite Milne 11.32 p.221 and the blueprint id with 7 proof steps; lines ≤100; proof-dependency plain imports. Report has a Worker report and the standard Second reading section. No compile (no file changed)."
+ }
+}

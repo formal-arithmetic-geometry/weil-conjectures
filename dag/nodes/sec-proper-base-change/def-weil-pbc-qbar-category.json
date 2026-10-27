@@ -47,9 +47,64 @@
   "prop-weil-pbc-integral-tstructure",
   "lem-weil-l-adic-integers-localization-uniformizer"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "A scalar is algebraic over Q_l and thus integral. Mathlib IntermediateField.adjoin.finiteDimensional gives finiteness of its simple extension; subset_adjoin puts the scalar in that extension. Finite composita give common upper stages.",
+   "uses": [
+    "def-weil-finite-subextension-directed-set"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose the already constructed pbcRationalCoefficientEquiv with Shrink.algEquiv. Its integral normalization is scalarRationalCoefficient. IsLocalization.ringHom_ext proves that normalization determines the ring equivalence uniquely.",
+   "uses": [
+    "prop-weil-pbc-rational-transport",
+    "lem-weil-l-adic-integers-localization-uniformizer"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For unequal stages, the unique factorization through raw rationalization is the existing pbcRationalScalarExtension: check its integral composite on 1 tensor f using pbcRationalScalarHom_tmul. Its pure-tensor coefficient formula, the preceding normalized field equivalence and tensor induction give semilinearity for the actual intermediate-field inclusion. Equal stages use the literal identity functor.",
+   "uses": [
+    "def-weil-pbc-finite-stage-pair-category",
+    "prop-weil-pbc-scalar-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport is conjugation of transition functors, hence semilinearity and bilinearity of composition imply tr(a f)=inclusion(a) tr(f). Enlarge a stage witnessing representative equality to contain the two scalar composita. Transport-transitivity and equality of the scalar elements prove compatibility with the relation. The same comparison proves the action formula at any finite overfield, including the original stage.",
+   "uses": [
+    "def-weil-pbc-finite-stage-pair-category",
+    "prop-weil-pbc-common-stage-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent each identity at one common finite field containing the scalars. The normalized common-stage addition and zero equations reduce the six module laws to the field-module identities. The common-stage composition formula and finite-stage linearity give the two composition laws. Apply the resulting module and linearity laws to the constructed quotient action. The triangulated instance is the existing common-cone Verdier structure.",
+   "uses": [
+    "def-weil-pbc-finite-stage-pair-category",
+    "prop-weil-pbc-common-stage-calculus",
+    "thm-weil-pbc-verdier-axioms"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-subextension-directed-set",
+  "prop-weil-pbc-rational-transport",
+  "lem-weil-l-adic-integers-localization-uniformizer",
+  "def-weil-pbc-finite-stage-pair-category",
+  "prop-weil-pbc-scalar-extension",
+  "prop-weil-pbc-common-stage-calculus",
+  "thm-weil-pbc-verdier-axioms"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J7",
+  "date": "2026-10-25",
+  "document": "Blueprint def-weil-pbc-qbar-category, scalar-action paragraph; existing finite-stage tensor construction",
+  "place": "Common-field scalar action and its module laws; normalized localization equivalence and tensor semilinearity."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -110,7 +165,18 @@
    "where": "statement"
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "split_report": {
@@ -129,33 +195,28 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-710d82f01 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements and sources, and chapter/unit route. Corrected missing input context and Mathlib search records in fixes/dag/nodes/sec-proper-base-change/def-weil-pbc-qbar-category.json. Scalar transport and cone-arrow types check; the 160-node dependency closure has no missing nodes or cycles. The archived master’s condensed coefficient category still requires a comparison theorem; seeded target edges do not supply one. Concrete checks are recorded in review.md.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
-  "module": "Sheaf.Paper.IntrinsicQbarCategory",
-  "declaration": "WeilConjectures.intrinsicPbcQbarCategory",
-  "statement": "abbrev intrinsicPbcQbarCategory [AlgebraicGeometry.IsNoetherian Y] [Fact (∃ n : ℕ, topologicalKrullDim Y ≤ (n : WithBot ℕ∞))] [Fact (∀ y : Y, IsUnit (l : Y.presheaf.stalk y))]",
-  "branch": "newtargets-dag",
-  "by": "NM",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "Section 1(B): the legacy pbcQbarCategory is not literally the intrinsic finite-stage system used by the recorded sfCommonStageHeart and sfCommonStageWeilComplex. This module reexports both legacy and current pair categories, and supplies the source scalar action on the current literal finite-field pairs. It transports stage scalars by the normalized fraction-field and small-model equivalences, proves the prescribed transitions semilinear, applies the existing finite-compositum quotient scalar formula, and defines the uniquely specified Omega-linear structure on the existing colimit abelian groups. Shifts and common-stage cone triangles are the recorded intrinsic ones. No new carrier category, envelope, or derived category of unrestricted/Weil sheaves is introduced. All non-lean fields are unchanged. The primary intrinsicPbcQbarCategory alias explicitly retains all three source domain hypotheses: Noetherian, finite dimension, and coefficient invertibility; the literal carrier is the existing general pair type.",
-  "file": "lean/Sheaf/Paper/IntrinsicQbarCategory.lean",
+  "module": "Sheaf.Paper.PbcQbarCategory",
+  "declaration": "AlgebraicGeometry.Scheme.pbcQbarCategory",
   "declarations": [
-   "WeilConjectures.intrinsicPbcQbarCategory",
-   "WeilConjectures.intrinsicQbarStageFieldEquiv",
-   "WeilConjectures.intrinsicQbarStageLocalizedLinear",
-   "WeilConjectures.intrinsicQbarStageLinear",
-   "WeilConjectures.intrinsicQbarScalarCompatible",
-   "WeilConjectures.intrinsicQbarScalarAction",
-   "WeilConjectures.intrinsicQbarLinear_existsUnique",
-   "WeilConjectures.intrinsicQbarLinear"
-  ]
+   "AlgebraicGeometry.Scheme.pbcQbarCategory",
+   "AlgebraicGeometry.Scheme.pbcQbarScalarAction",
+   "AlgebraicGeometry.Scheme.pbcQbarLinear",
+   "AlgebraicGeometry.Scheme.pbcQbarTriangulated"
+  ],
+  "statement": "abbrev pbcQbarCategory",
+  "branch": "newtargets-dag",
+  "by": "Q57",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "§1(B): intrinsicPbcQbarCategory aliases the sf generalAlgebraicallyClosedConstructibleCategory, rather than the PBC finite stages required by this node and the codomain of the recorded J. Rebind to the already published PbcQbarCategory declaration, whose carrier is the actual PbcFiniteStagePairCategory of raw PBC rational categories, with its prescribed scalar action, shifts and common-stage triangles. No new category or copy is defined; IntrinsicQbarCategory remains publicly reexported by the consumer for compatibility."
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-d91059d0d",
-  "group": "NM",
+  "reviewer": "NT-stage2-cc-ba4c4e966",
+  "group": "Q57",
   "result": "pass",
-  "note": "Every node clause matches the Lean boundaryHomVanishing: MiddleExtensionCurve fields, GeometricallyConnected, reduced closed i0 with IsCompl complement, lisse via the landed HasCommonStageLisseLattice, and Homs in the common-stage category of the recorded heart. Both reverse clauses now have the shifted source A[1]. Weil clauses use adjunction-mate induced pairs. The exists-sΦ CommShift follows the landed parent pattern; pair Homs inject into the geometric ones, so it does not weaken the substance. New node def-dl-a1-boundary-ordinary-images: closed image is the right adjoint of zlHeartPull (canonical up to unique iso); the mate matches the node formula; postponed IsLeftAdjoint/IsIso are true Prop theorems with proof docstrings; no hollow data. §1(B) repair of def-weil-pbc-qbar-category is justified: PbcFiniteStagePairCategory is a different type from GeneralAlgebraicallyClosedCoefficients.Pair; only lean changed, note present, legacy module still public. Statements match their files verbatim and declarations exist. nt_compile --json of all three files exited 0 with no errors. Edge cases Z empty, U=C, E=0, F=0 and the constant sheaf on G_m are covered. Report sections present. Remarks only: exists-sΦ could later become forall; the node's 'Second paragraph' locator is a non-lean field."
+  "note": "Read the node, all 480 lines of the module and the dependency sources (FdCoefficientComparisonSystem/FdCoefficientComparison, FdPullbackChain, IntegralComparisonSystem, ContinuousRational At/Along/Identity/Family, SfConstructibleHeart, PbcQbarStandardCohomology, PbcQbarCategory, IntrinsicQbarCategory). Every clause matches: Noetherian/finite dimension/ell invertible as conclusions; integral, rational and common-stage halves in every degree with the same orientation; finite heart model with constructible degree-zero F and no rank or nonempty-stratum condition; arbitrary non-k-linear h comparison pinned by the whole-tower FdPullbackChain normalization and rationalization; unit, composition and scalar equations through the S.realization integral comparisons and the corrected inverse direction of the PBC scalar map; realization adapter pinned by eqToHom; immersion exactness. All S and R fields used are pinned, so arbitrary S/R binding is fine. Correct section 1(B) record fix: def-weil-pbc-qbar-category moved from intrinsicPbcQbarCategory (literally the sf pair category) to the existing PBC pbcQbarCategory, which is the codomain of the lem-fd J; the alias has no other users. stmt_deps unchanged from stage 1. One sorry, with the 9-step docstring; no hollow definitions; lines at most 100 characters; universes bound; statement verbatim. No compile run since no change; the delivery dry run compiled. Advisory: Zl pullback structures mirror the isomorphism-only Fd ones; the succession clause follows from unit plus binary composition; some imports unused; IntrinsicQbarCategory now has no owning node."
  },
  "blueprint_update": {
   "snapshot": "main-20261015",
@@ -164,17 +225,13 @@
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "G3",
+  "reviewer": "COMPILER",
+  "group": "J7",
   "result": "pass",
-  "landing": "20261019T093414-L-2307015",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.intrinsicQbarScalarCompatible"
-  ],
-  "sorry_after": []
+  "landing": "20261024T234246-L-2547565",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

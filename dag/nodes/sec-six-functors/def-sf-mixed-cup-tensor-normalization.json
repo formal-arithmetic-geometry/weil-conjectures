@@ -1,0 +1,201 @@
+{
+ "id": "def-sf-mixed-cup-tensor-normalization",
+ "kind": "definition",
+ "title": "Mixed-cup TensorNormalization",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix the stages, tensors and scalar changes of [def-sf-mixed-cup-coefficient-data] and the field coordinates of [def-sf-mixed-cup-field-normalization]. Define six elementary tensor-normalization predicates. For an arbitrary finite-ring homomorphism the tensor comparison, conjugated by the recorded tensor functor equalities and the finite model isomorphisms [def-pur-finite-pullback-tensor-comparison], is the unique ringed derived balancing tensor comparison [def-sf-compact-support-scalar-tensor-identification]. For a completed integral inclusion it is the recorded integral tensor scalar comparison, and for a finite-field inclusion it is the recorded rational tensor scalar comparison [def-weil-derived-pullback-tensor-hom].\n\nFor integral reduction require, on every pair of good flat K-flat integral representatives [def-a1-flat-term-kflat-complex] and their isomorphisms to the two inputs, equality to the actual integral-tensor finite-comparison map [def-sf-integral-tensor-finite-comparison] induced by the recorded Roos projection, inserting the two canonical reduction-model identifications and the finite K-flat tensor-model comparison [def-sf-operation-stages]. The reductions of good representatives are flat K-flat representatives. For rationalization the raw localized tensor-object comparison is the identity, with its fixed equality transports. For closure use the inverse common-stage tensor comparison of [def-weil-derived-pullback-tensor-hom] represented at the input finite field, with the normalized scalar unitors and the recorded common tensor object equation. These three specifications include equality transports; they do not leave any tensor isomorphism arbitrary. All field-point scalar identifications are those of [def-sf-mixed-cup-field-coordinates]. The separately named elementary and closure predicates are those of [def-sf-mixed-cup-tensor-elementary]. The separately named elementary and closure predicates are those of [def-sf-mixed-cup-tensor-closure].",
+ "stmt_deps": [
+  "def-sf-mixed-cup-coefficient-data",
+  "def-sf-mixed-cup-field-normalization",
+  "def-pur-finite-pullback-tensor-comparison",
+  "def-sf-compact-support-scalar-tensor-identification",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-sf-operation-stages",
+  "def-sf-mixed-cup-field-coordinates",
+  "def-sf-mixed-cup-tensor-elementary",
+  "def-sf-mixed-cup-tensor-closure",
+  "def-sf-integral-tensor-finite-comparison",
+  "def-a1-flat-term-kflat-complex"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/def-pod-mixed-support-cup-product.md",
+  "place": "Final coefficient compatibility sentence; item proof steps 2–9: canonical comparison normalizations."
+ },
+ "proof": [
+  {
+   "text": "For reducedGood, view the specified unrestricted finite reduction as the additive change-of-rings functor along the completed coefficient projection. Its defining existence witness gives its object and morphism equations. Convert flatness of each integral term from the site-sheaf tensor presentation to the monoidal tensor presentation using siteSheafTensorRightIso. Apply changeOfRings_isKFlat_of_flat_terms_independentCoefficients to P.property. Convert the resulting independent K-flat predicate to IsAcyclicTensorKFlat at the common universe u+1, and convert termwise exactness back through siteSheafTensorRightIso. Pair the two conclusions. The two normalization predicates and their prescribed maps are unchanged.",
+   "uses": [
+    "lem-pur-kflat-change-of-rings-independent",
+    "def-a1-flat-term-kflat-complex",
+    "def-pc-kflat-complex",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-integral-reduction-tower",
+    "def-pur-site-sheaf-tensor-presentation-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-kflat-change-of-rings-independent",
+  "def-a1-flat-term-kflat-complex",
+  "def-pc-kflat-complex",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-integral-reduction-tower",
+  "def-pur-site-sheaf-tensor-presentation-data"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "F1",
+  "date": "2026-10-25",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0G7E, coefficient-change case; specialization of the existing independent-universe change-of-rings theorem."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "Canonical tensor coefficient comparisons for reduction localization and algebraic closure",
+   "results": {
+    "t": "2026-10-24T22:32:37Z",
+    "tool": "leansearch",
+    "query": "Canonical tensor coefficient comparisons for reduction localization and algebraic closure",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct",
+     "Module.Basis.ofIsLocalizedModule_repr_apply",
+     "IsLocalization.tensorProduct_isLocalizedModule",
+     "MvPolynomial.coeff_rTensorAlgHom_tmul",
+     "TensorProduct.toIntegralClosure_bijective_of_isLocalization",
+     "IsLocalization.tensorProduct_tensorProduct",
+     "Algebra.isGeometricallyReduced_iff",
+     "Algebra.IsGeometricallyReduced.mk"
+    ],
+    "digest": "2a67b0fd8b8b0300"
+   },
+   "date": "2026-10-24",
+   "verdict": "No exact comparison-family normalization; reuse the recorded individual constructions."
+  },
+  {
+   "tool": "LeanFinder",
+   "query": "Canonical tensor coefficient comparisons for reduction localization and algebraic closure",
+   "results": {
+    "t": "2026-10-24T22:33:28Z",
+    "tool": "leanfinder",
+    "query": "Canonical tensor coefficient comparisons for reduction localization and algebraic closure",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct",
+     "Algebra.isGeometricallyReduced_iff",
+     "Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced",
+     "IsLocalization.Away.tensor",
+     "IsLocalization.tensor",
+     "Algebra.Presentation.tensorModelOfHasCoeffsInv",
+     "IsLocalization.Away.tensorRight",
+     "IsLocalization.tensorRight"
+    ],
+    "digest": "f1b373b716782aa9"
+   },
+   "date": "2026-10-24",
+   "verdict": "No exact comparison-family normalization; reuse the recorded individual constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "MixedCup|RingedCohomologyNormalized|FieldCohomologyNormalized|ReductionTensorNormalized|derivedSectionScalar|sectionScalar_existsUnique",
+   "results": {
+    "t": "2026-10-24T22:33:23Z",
+    "tool": "grep",
+    "query": "MixedCup|RingedCohomologyNormalized|FieldCohomologyNormalized|ReductionTensorNormalized|derivedSectionScalar|sectionScalar_existsUnique",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "Mathlib has no match. Project rg in lean/WeilConjectures and lean/Sheaf has no matches."
+  },
+  {
+   "tool": "blueprint_refs.py search / dag grep",
+   "query": "coefficient comparison normalization",
+   "results": "0 blueprint matches. Broader DAG point-section K-flat search found normed-field internal-module comparisons, not arbitrary ringed finite/integral scalar sections or these stage-normalization predicates.",
+   "date": "2026-10-24",
+   "verdict": "New assembly predicate/coordinate construction; individual maps are imported."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "prop-sf-mixed-cup-coefficient-change",
+  "date": "2026-10-24",
+  "group": "Q72"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pod-mixed-support-cup-product",
+   "place": "Canonical maps in the final coefficient-compatibility sentence.",
+   "via": [
+    "prop-sf-mixed-cup-coefficient-change"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "module": "Sheaf.Paper.MixedCupTensorNormalization",
+  "declaration": "WeilConjectures.MixedCupCoefficientChange.ReductionTensorNormalized",
+  "declarations": [
+   "WeilConjectures.MixedCupCoefficientChange.reducedGood",
+   "WeilConjectures.MixedCupCoefficientChange.ReductionTensorNormalized",
+   "WeilConjectures.MixedCupCoefficientChange.LocalizationTensorNormalized"
+  ],
+  "file": "lean/Sheaf/Paper/MixedCupTensorNormalization.lean",
+  "statement": "def ReductionTensorNormalized (S : Operations C) (X : SixFunctorSpace D) [IsSeparated X.obj.hom] (t : ∀ {a b : Stage C} (f : Passage C a b), TensorComparison C S X f) : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q72",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-848c6a174",
+  "group": "Q72",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-848c6a174",
+  "group": "Q72",
+  "result": "pass",
+  "note": "Re-delivery after 375e RETURN H2. Lean diff vs 375e: only moduleDerived made a scoped instance (same value, all modules open the scope, no live importers). F1 fixed: existing:true def-sf-integral-tensor-finite-comparison matches the live source verbatim (IntegralOperationsPreserveConstructible:77-83); its statement describes the actual homEquiv-transpose/Roos-projection composite with no extra hypotheses; signature owners scalarReductionDerivedExtension (def-weil-integral-derived-reduction), integralOperationsGoodComplex (def-a1-flat-term-kflat-complex) and integralCompletedTensor (def-weil-derived-pullback-tensor-hom) are cited; no duplicate live owner. F2 fixed: the passages node cites lem-pod-point-sections-derived-reduction-data (a definition node owning pointReductionQuotient) in text and stmt_deps. Item statement, proof and proof_deps unchanged; every lean.statement verbatim; no dangling deps; sorry only in named postponed theorems. Advisories: theorem stmt_dep for the adjunction assertion; integralTensorFiniteComplex still theorem-owned but used only inside the owner's type. No compile run (no files changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261025T162316-L-418628",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

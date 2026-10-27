@@ -1,0 +1,308 @@
+{
+ "id": "lem-sfb-closed-translation-stabilizer",
+ "kind": "statement",
+ "title": "Translation stabilizers and effective divisor supports",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], let $A/k$ be an abelian variety [def-sc-abelian-variety], and let $Z\\hookrightarrow A$ be a closed subscheme [def-weil-closed-immersion]. For a $k$-scheme $T$ and $a\\in A(T)$ let $t_a:A_T\\to A_T$ be translation by $a$. The functor $T\\mapsto\\{a\\in A(T):t_a(Z_T)=Z_T\\}$ is represented by a closed subgroup scheme $\\operatorname{Stab}_A(Z)\\hookrightarrow A$ [def-sc-group-scheme-subgroup]. Equality here is equality of closed subschemes, and the representation commutes with arbitrary base change. In addition, if $F$ is an effective Cartier divisor on $A$, meaning a closed subscheme locally cut out by one non-zero-divisor [def-pc-divisor-line-bundle], $Z$ is its support with the reduced closed subscheme structure, and $C=(\\operatorname{Stab}_A(Z)_{\\mathrm{red}})^0$, then the translation action $\\mu:A\\times C\\to A$ satisfies $\\mu^*F=p_1^*F$ as effective Cartier divisors on $A\\times C$, where $p_1$ is the projection to $A$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 1.79 and Corollaries 1.80–1.81, printed pp.30–31 (transporters and closed translation stabilizers). The final Cartier-divisor assertion is the supporting divisorial consequence needed for the omitted converse of Milne AV I Proposition 8.1; it is an agent-stated auxiliary, not a quotation of Corollary 1.81."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-abelian-variety",
+  "def-weil-closed-immersion",
+  "def-sc-group-scheme-subgroup",
+  "def-pc-divisor-line-bundle"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-constant-source-closed-factorization-locus] to the family $Z\\times_kA\\to A$, $(z,a)\\mapsto z+a$, and the closed subscheme $Z\\hookrightarrow A$. It gives a closed subscheme $P\\hookrightarrow A$ whose $T$-points are precisely those $a$ for which $t_a(Z_T)\\subseteq Z_T$. The source $Z$ is separated and finite type because it is closed in the proper finite-type scheme $A$; no reducedness of $Z$ is used.",
+   "uses": [
+    "lem-sfb-constant-source-closed-factorization-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.79 and Corollaries 1.80–1.81, pp.30–31; supporting divisor argument supplied by Q28 using the separately cited Stacks inputs."
+   }
+  },
+  {
+   "text": "Intersect $P$ with its inverse image under $[-1]:A\\to A$, obtaining $H=P\\times_A[-1]^{-1}P$. Locally this intersection is cut out by the sum of the two ideal sheaves. For any $T$, its points satisfy both $t_aZ_T\\subseteq Z_T$ and $t_{-a}Z_T\\subseteq Z_T$; translating the latter gives the reverse inclusion. Thus $H(T)$ is exactly the required equality functor. The identities $t_0=\\mathrm{id}$, $t_{a+b}=t_a t_b$, and $t_a^{-1}=t_{-a}$ make it a subgroup for every $T$. By [def-sc-group-scheme-subgroup] this closed subscheme is a closed subgroup scheme. For every $S\\to\\operatorname{Spec}k$ and every $T\\to S$, $H_S(T)=H(T)$ gives exactly the same equality for $(Z_S)_T=Z_T$. This is the asserted arbitrary base-change compatibility, including nonreduced bases.",
+   "uses": [
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.79 and Corollaries 1.80–1.81, pp.30–31; supporting divisor argument supplied by Q28 using the separately cited Stacks inputs."
+   }
+  },
+  {
+   "text": "Now let $Z=|F|_{\\mathrm{red}}$. By [lem-sfb-abelian-closed-subgroup-reduced-component], $C=(H_{\\mathrm{red}})^0$ is an abelian variety and a closed subgroup of $A$. By [lem-sc-abelian-variety-characterization], both $A$ and $C$ are integral (indeed geometrically integral). By [lem-trf-smooth-geometrically-normal], $A$ is normal. These assertions hold in every characteristic because $k$ is algebraically closed; we have not asserted that $H$ itself is smooth.",
+   "uses": [
+    "lem-sfb-abelian-closed-subgroup-reduced-component",
+    "lem-sc-abelian-variety-characterization",
+    "lem-trf-smooth-geometrically-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.79 and Corollaries 1.80–1.81, pp.30–31; supporting divisor argument supplied by Q28 using the separately cited Stacks inputs."
+   }
+  },
+  {
+   "text": "For any irreducible component $D$ of $Z$, give $D$ its reduced structure; it is a nonempty irreducible $k$-scheme. By step 3, $C$ is an abelian variety, so [lem-sc-abelian-variety-characterization] makes $C$ geometrically integral over $k$; in particular every base change $C_{k'}$ is irreducible, so $C$ is geometrically irreducible. By [lem-sc-product-irreducible-components-bijection], applied with $U=C$ and $V=D$, the projection $C\\times_kD\\to D$ induces a bijection between the irreducible components of $C\\times_kD$ and those of $D$. Since $D$ is irreducible, $C\\times_kD$ has exactly one irreducible component, so it is irreducible. Because $C\\subseteq H$, evaluating the functor of $H$ at the point $(c,z)\\mapsto c$ of $C\\times_kD$ shows that the action $C\\times_kD\\to A$, $(c,z)\\mapsto z+c$, factors through $Z$. Its image is therefore irreducible and lies in $Z$, and its closure contains $D$ because the identity slice maps identically to $D$. Maximality of the irreducible component $D$ forces this closure to equal $D$. Thus every $c\\in C(k)$ has $t_c(D)\\subseteq D$; applying the same argument to $-c$ gives equality. This is an argument about the image of the scheme product, not about a product topology on rational points.",
+   "uses": [
+    "lem-sc-abelian-variety-characterization",
+    "lem-sc-product-irreducible-components-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.79 and Corollaries 1.80–1.81, pp.30–31; supporting divisor argument supplied by Q28 using the separately cited Stacks inputs."
+   }
+  },
+  {
+   "text": "Fix $c\\in C(k)$. Translation fixes each generic point of each support component, by the preceding step. At such a point of codimension one it induces an isomorphism of the ambient discrete valuation local rings, preserving their maximal ideals and hence the order of a local equation of $F$. Consequently $F$ and $t_c^*F$ have the same orders at every height-one point: a height-one point containing a nonzero local equation is minimal over that equation (there is no nonzero prime properly below it), hence is the generic point of a support component; elsewhere both equations are units. To conclude equality of the Cartier divisors, choose an integral affine neighbourhood $U=\\operatorname{Spec}R$ on which both have equations $f,g$. Normality of $A$ makes $R$ normal. By [lem-trf-normal-domain-principal-divisor-kernel], $R_{\\mathfrak q}$ is a DVR at every height-one prime and $\\operatorname{div}_R(f/g)=0$ implies $f/g\\in R^\\times$. Thus $(f)=(g)$ on $U$, and these equalities cover $A$. We have proved $t_c^*F=F$ as closed subschemes for every $c\\in C(k)$.",
+   "uses": [
+    "lem-trf-normal-domain-principal-divisor-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.79 and Corollaries 1.80–1.81, pp.30–31; supporting divisor argument supplied by Q28 using the separately cited Stacks inputs."
+   }
+  },
+  {
+   "text": "Repeat steps 1–2 with the closed subscheme $F$ itself in place of $Z$, using [lem-sfb-constant-source-closed-factorization-locus], to construct a closed subgroup $K\\hookrightarrow A$ representing the translations preserving $F$ scheme-theoretically. Pull it back to the closed subscheme $K_C=K\\times_AC\\hookrightarrow C$. The preceding step says that $K_C$ contains every point of $C(k)$.",
+   "uses": [
+    "lem-sfb-constant-source-closed-factorization-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.79 and Corollaries 1.80–1.81, pp.30–31; supporting divisor argument supplied by Q28 using the separately cited Stacks inputs."
+   }
+  },
+  {
+   "text": "The set $C(k)$ is dense in $C$ by [lem-pc-rational-points-dense], since $C$ is smooth and $k$ is separably closed. Thus the closed subscheme $K_C$ has underlying space all of $C$. On every reduced affine open $\\operatorname{Spec}R\\subset C$, its ideal $I$ satisfies $V(I)=\\operatorname{Spec}R$, so every element of $I$ belongs to every prime and is nilpotent; reducedness gives $I=0$. Hence $K_C=C$ as schemes, and $C\\hookrightarrow A$ factors through $K$.",
+   "uses": [
+    "lem-pc-rational-points-dense"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.79 and Corollaries 1.80–1.81, pp.30–31; supporting divisor argument supplied by Q28 using the separately cited Stacks inputs."
+   }
+  },
+  {
+   "text": "Evaluate the representing property of $K$ at the universal point $C\\to K$. On $A_C=A\\times C$, the automorphism $\\tau(x,c)=(x+c,c)$ preserves $F_C$ as a closed subscheme. Therefore $\\tau^{-1}(F_C)=F_C$. Since $\\mu=p_1\\circ\\tau$, their ideal sheaves give $\\mu^*F=\\tau^*p_1^*F=p_1^*F$. The pullbacks are effective Cartier divisors: $p_1$ is flat (a base change of a scheme over a field), so [lem-pc-flat-pullback-effective-cartier-ideal] applies, and $\\tau$ is an isomorphism. This proves the universal divisor equality, including all subsequent nonreduced test schemes.",
+   "uses": [
+    "lem-pc-flat-pullback-effective-cartier-ideal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.79 and Corollaries 1.80–1.81, pp.30–31; supporting divisor argument supplied by Q28 using the separately cited Stacks inputs."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-constant-source-closed-factorization-locus",
+  "def-sc-group-scheme-subgroup",
+  "lem-sfb-abelian-closed-subgroup-reduced-component",
+  "lem-sc-abelian-variety-characterization",
+  "lem-trf-smooth-geometrically-normal",
+  "lem-sc-product-irreducible-components-bijection",
+  "lem-trf-normal-domain-principal-divisor-kernel",
+  "lem-pc-rational-points-dense",
+  "lem-pc-flat-pullback-effective-cartier-ideal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Milne Proposition 1.79 and Corollaries 1.80–1.81 for the transporter intersection; agent-written divisorial argument, using Stacks 038F (existing product-components node) and the existing normal-domain principal-divisor kernel."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The translations preserving the support of an effective divisor on an abelian variety form a closed subgroup; its reduced identity component preserves the divisor",
+   "results": "8 hits; recorded top results: WeierstrassCurve.Affine.Point.toClass, WeierstrassCurve.Affine.Point.toClass_apply, MeromorphicNFOn.zero_set_eq_divisor_support, WeierstrassCurve.Affine.Point.toClass_some, AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet, AlgebraicGeometry.Scheme.Hom.support_ker, WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal', WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract set stabilizers and topological closed stabilizers do not represent this scheme functor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scheme theoretic stabilizer of a closed subscheme under translations of an abelian variety",
+   "results": "8 hits; recorded top results: SubAddAction.ofStabilizer_carrier, SubAddAction.ofFixingAddSubgroup_of_singleton, SubMulAction.ofStabilizer, Ideal.Quotient.ker_stabilizerHom, Ideal.Quotient.map_ker_stabilizer_subtype, SubAddAction.ofStabilizer, VAdd.ofStabilizer, Ideal.inertia_le_stabilizer",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract set stabilizers and topological closed stabilizers do not represent this scheme functor"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stabilizer\"",
+   "results": "12 hits; recorded top results: AddAction.stabilizerAddSubmonoid, MulAction.stabilizerSubmonoid, AddAction.stabilizer, MulAction.stabilizer, AddAction.instDecidablePredMemAddSubgroupStabilizerOfDecidableEq, MulAction.instDecidablePredMemSubgroupStabilizerOfDecidableEq, AddAction.instDecidablePredMemAddSubmonoidStabilizerAddSubmonoidOfDecidableEq, MulAction.instDecidablePredMemSubmonoidStabilizerSubmonoidOfDecidableEq",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract set stabilizers and topological closed stabilizers do not represent this scheme functor"
+  },
+  {
+   "tool": "grep",
+   "query": "stabilizer|Stabilizer",
+   "results": "0 hits; recorded top results: ",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract set stabilizers and topological closed stabilizers do not represent this scheme functor"
+  },
+  {
+   "tool": "grep",
+   "query": "stabilizer.*[Cc]losed|[Cc]losed.*stabilizer",
+   "results": "2 hits; recorded top results: Mathlib/CategoryTheory/Galois/IsFundamentalgroup.lean, Mathlib/MeasureTheory/Measure/ContinuousPreimage.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract set stabilizers and topological closed stabilizers do not represent this scheme functor"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A closed subscheme of a projective scheme has a closed stabilizer subgroup under an algebraic group action",
+   "results": "8 hits; recorded top results: MulAction.stabilizer, MulAction.mem_stabilizer_set', MulAction.stabilizer_smul_eq_stabilizer_map_conj, AddAction.stabilizer, MulAction.mem_stabilizer_set_iff_subset_smul_set, MulAction.stabilizer_subgroup, MulAction.mem_stabilizer_finset, MulAction.isPreprimitive_stabilizer_subgroup",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract set stabilizers and topological closed stabilizers do not represent this scheme functor"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representability of the stabilizer of a subscheme under an algebraic group action",
+   "results": "8 hits; MulAction.stabilizer, MulAction.stabilizer_subgroup, AddAction.mem_stabilizer_set, MulAction.mem_stabilizer_set, MulAction.mem_stabilizer_set', MulAction.stabilizer_smul_eq_stabilizer_map_conj, AddAction.stabilizer, MulAction.le_stabilizer_iff_smul_le",
+   "date": "2026-10-23",
+   "verdict": "no match for the scheme-theoretic functor and universal Cartier-divisor assertion; abstract action stabilizers and ramification stabilizers have different objects"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stabilizer\"",
+   "results": "12 hits; AddAction.stabilizerAddSubmonoid, MulAction.stabilizerSubmonoid, AddAction.stabilizer, MulAction.stabilizer, AddAction.instDecidablePredMemAddSubgroupStabilizerOfDecidableEq, MulAction.instDecidablePredMemSubgroupStabilizerOfDecidableEq, AddAction.instDecidablePredMemAddSubmonoidStabilizerAddSubmonoidOfDecidableEq, MulAction.instDecidablePredMemSubmonoidStabilizerSubmonoidOfDecidableEq",
+   "date": "2026-10-23",
+   "verdict": "no match for the scheme-theoretic functor and universal Cartier-divisor assertion; abstract action stabilizers and ramification stabilizers have different objects"
+  },
+  {
+   "tool": "grep",
+   "query": "stabilizer|transporter",
+   "results": "0 hits in Mathlib/AlgebraicGeometry; ",
+   "date": "2026-10-23",
+   "verdict": "no match for the scheme-theoretic functor and universal Cartier-divisor assertion; abstract action stabilizers and ramification stabilizers have different objects"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The scheme theoretic stabilizer of a closed subscheme under translations of an abelian variety is a closed subgroup scheme and its connected reduced component preserves divisor multiplicities",
+   "results": "8 hits; NumberField.mixedEmbedding.fundamentalCone.integerSetTorsionSMul_stabilizer, Ideal.inertia_le_stabilizer, Ideal.Quotient.map_ker_stabilizer_subtype, SubAddAction.ENat_card_ofStabilizer_add_zero_eq, NumberField.InfinitePlace.nat_card_stabilizer_eq_one_or_two, SubMulAction.ENat_card_ofStabilizer_add_one_eq, Ideal.Quotient.ker_stabilizerHom, SubAddAction.nat_card_ofStabilizer_add_zero_eq",
+   "date": "2026-10-23",
+   "verdict": "no match for the scheme-theoretic functor and universal Cartier-divisor assertion; abstract action stabilizers and ramification stabilizers have different objects"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transporter functor for a finite type algebraic group acting on a scheme: elements carrying one closed subscheme into another are represented by a closed subscheme",
+   "results": "8 hits; AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset, CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen, AlgebraicGeometry.isClosedImmersion_diagonal_restrict_diagonalCoverDiagonalRange, AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty, CategoryTheory.FintypeCat.Action.imageComplement, CategoryTheory.PreGaloisCategory.autEmbedding_range_isClosed, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty'",
+   "date": "2026-10-23",
+   "verdict": "no match for the scheme-theoretic functor and universal Cartier-divisor assertion; abstract action stabilizers and ramification stabilizers have different objects"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-polarization-calculus",
+  "date": "2026-10-22",
+  "group": "Q46"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Dual abelian varieties and the line-bundle homomorphism. Auxiliary for this split: The scheme stabilizer of a closed subscheme under translation.",
+   "via": [
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-closed-translation-stabilizer",
+  "worker": "stage1",
+  "summary": "Constructed the inclusion transporter as a constant-source closed factorization locus, intersected with its inverse to represent equality and checked arbitrary base change. For the divisor assertion, used the existing reduced abelian identity component, proved it fixes every support component via irreducibility of the product C x D, checked multiplicities by DVR isomorphisms and the existing normal-domain unit criterion, then upgraded rational-point preservation through the closed stabilizer of F and reducedness of C. One new statement-only node (the product-integrality node was dropped at review in favour of the existing Stacks 038F node).",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Dual abelian varieties and the line-bundle homomorphism. Auxiliary for this split: The scheme stabilizer of a closed subscheme under translation. Steps 1–2 supply the closed translation stabilizer; steps 3–8 supply the divisorial consequence required in the omitted converse of Milne AV I Proposition 8.1. The current blueprint direct-image proof (3) is the distant route, and contains no direct duplicate of either auxiliary.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-abelian-variety-characterization",
+    "why": "Integrality of the complete group varieties A and C is needed in the support-component argument; this is a general abelian-variety tool, not an alternative six-functor route."
+   },
+   {
+    "node": "lem-trf-smooth-geometrically-normal",
+    "why": "Normality of a smooth scheme over a field is used solely for the affine divisor equation comparison."
+   },
+   {
+    "node": "lem-trf-normal-domain-principal-divisor-kernel",
+    "why": "The general affine normal-domain valuation and unit criterion converts equality of codimension-one multiplicities to equality of Cartier ideals; no same-unit node states it."
+   },
+   {
+    "node": "lem-pc-rational-points-dense",
+    "why": "Density for a smooth scheme over a separably closed field is used for the reduced closed-locus argument; this is a generic geometric tool."
+   },
+   {
+    "node": "lem-pc-flat-pullback-effective-cartier-ideal",
+    "why": "Flat pullback preserves the effective Cartier condition, needed for the final divisor pullbacks."
+   },
+   {
+    "node": "lem-sc-product-irreducible-components-bijection",
+    "why": "Step 4 needs only that C x_k D is irreducible for C geometrically irreducible and D irreducible; this existing Stacks 038F node (unit sk-prop-jacobian) states it, so no new product node is created."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-abelian-variety-characterization",
+  "lem-trf-smooth-geometrically-normal",
+  "lem-trf-normal-domain-principal-divisor-kernel",
+  "lem-pc-rational-points-dense",
+  "lem-pc-flat-pullback-effective-cartier-ideal",
+  "lem-sc-product-irreducible-components-bijection"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-2b33e35f1",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-2b33e35f1 (reviewer sub-agent of L); spot-checked: Read Milne iAG 1.77-1.81 and 1.100-1.105 (closed Mor-subfunctor via k-basis coordinates and a finite affine cover), and Stacks 05P3. The item statement is unchanged and true (first clause = Milne Cor 1.81 with G=A). Edge cases F=0, Z=A, a nonreduced stabilizer in characteristic p and unequal multiplicities all hold. Steps 1-2 (transporter locus, intersection with its inverse, subgroup, arbitrary base change) are correct. Steps 3, 5, 6, 7 and 8 cite statements that say what is used: reduced identity component is an abelian variety; normality via 056T; DVR plus ker div = R^x on a normal Noetherian domain; density of C(k); flat pullback of a Cartier ideal; tau(x,c)=(x+c,c) at the universal point. The new constant-source factorization-locus node is true, self-contained, general and not a restatement; no duplicate found. C5 fault: the new node lem-sfb-product-integral-varieties (05P3) is unneeded. Step 4 uses only irreducibility of C x_k D, which the existing lem-sc-product-irreducible-components-bijection (038F) gives, since C is geometrically integral by lem-sc-abelian-variety-characterization. The FIX drops the node, rewrites step 4 with these two citations and makes explicit why the action C x D -> A factors through Z. It updates proof_deps, the split_report summary and tool_uses; no cycle. Batch-5: lem-trf-smooth-geometrically-normal (056T) and lem-trf-normal-domain-principal-divisor-kernel (00PD/031T) are generic algebra outside the trace-formula and Poincare-duality assumptions. Their closures reach no assume leaf, trace-transport or batch-4 theorem, so I accept them. The other-unit tool_uses declared in split_report are accepted as generic tools.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianVariety.ClosedTranslationStabilizer",
+  "declaration": "AlgebraicGeometry.exists_closed_translation_stabilizer",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianVariety/ClosedTranslationStabilizer.lean",
+  "statement": "theorem exists_closed_translation_stabilizer (k : Type u) [Field k] [IsAlgClosed k] (A Z : Over (Spec (.of k))) [GrpObj A] [IsAbelianVariety A] (z : Z ⟶ A) [IsClosedImmersion z.left] : ∃ (H : Over (Spec (.of k))) (_ : GrpObj H) (i : H ⟶ A), IsClosedSubgroupScheme i ∧ (∀ (T : Over (Spec (.of k))) (a : T ⟶ A), (∃! b : T ⟶ H, b ≫ i = a) ↔ z.left.ker.comap ((fst A T * (snd A T ≫ a)).left) = z.left.ker.comap (fst A T).left) ∧ (∀ (S T : Over (Spec (.of k))) (s : T ⟶ S) (a : T ⟶ A), (∃! b : T ⟶ H ⊗ S, b ≫ fst H S ≫ i = a ∧ b ≫ snd H S = s) ↔ z.left.ker.comap ((fst A T * (snd A T ≫ a)).left) = z.left.ker.comap (fst A T).left) ∧ (∀ (F : A.left.IdealSheafData), F.IsInvertible → z.left.ker = F.radical → ∃ U : (GrpObj.reduced H).left.Opens, (U : Set (GrpObj.reduced H).left) = (GrpObj.reducedι H).left ⁻¹' connectedComponent (GrpObj.onePoint H) ∧ F.comap ((fst A (Over.mk (U.ι ≫ (GrpObj.reduced H).hom)) * (snd A (Over.mk (U.ι ≫ (GrpObj.reduced H).hom)) ≫ Over.homMk U.ι ≫ GrpObj.reducedι H ≫ i)).left) = F.comap (fst A (Over.mk (U.ι ≫ (GrpObj.reduced H).hom))).left)",
+  "branch": "newtargets-dag",
+  "by": "Q143",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4b1bdb8d9",
+  "group": "Q143",
+  "result": "pass",
+  "note": "Item lem-sfb-closed-translation-stabilizer: one sorry-only theorem exists_closed_translation_stabilizer; node diff = lean field only; statement verbatim; stmt_dep records unchanged. Clause check: IsAlgClosed k; IsAbelianVariety+GrpObj A; IsClosedImmersion z.left; translation via comap along fst*(snd≫a) = scheme preimage t_a^{-1}(Z_T) vs Z_T (Mathlib IdealSheafData.comap = ker of pullback.fst); IsClosedSubgroupScheme (extends IsMonHom, closed immersion) with ∃! factorization through fixed i; base change clause = unique lifts to H⊗S of (a,s) on A×T≅A_S×_S T; F.IsInvertible = locally regular principal; z.ker = F.radical = reduced support; U = reducedι^{-1}(connectedComponent onePoint) = (H_red)^0; F.comap μ = F.comap p1 on A×C. Edge cases Z=∅/A, T=∅, nonreduced, char p, F=0, dim 0 OK; single universe u. No existing decl (rg Mathlib/slopmaster2/Sheaf). Docstrings with Milne source and blueprint tag, 8-step proof; imports exist. Not recompiled (no change). Second-reading section is a worker self-check; accepted."
+ }
+}

@@ -13,16 +13,19 @@
  ],
  "proof": [
   {
-   "text": "If B is the zero ring, take n=0: the unique map from B to the empty product is an A-algebra isomorphism. Henceforth suppose B is nonzero. This case distinction does not impose any extra hypothesis in the conclusion.",
-   "uses": [],
-   "elementary": true,
+   "text": "Convert the scheme-etale hypothesis to RingHom.Etale with HasRingHomProperty.Spec_iff and RingHom.etale_algebraMap. Algebra.Etale.finitePresentation supplies finite presentation, hence finite type; its smoothness supplies Module.Flat through Algebra.Smooth.flat. No separate affine-global-sections calculation is needed.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-etale-algebra-flat"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 030C, empty finite product convention; elementary zero-ring case"
+    "place": "Etale affine dictionary and finite presentation, Tags 02GJ and 00U2"
    }
   },
   {
-   "text": "For every prime p of A, the localization-normal-domain lemma makes A_p a normal domain; hence A is a normal ring by definition. Apply etale normality ascent to A -> B to obtain that B is a normal ring. Thus every B_q is a domain and consequently reduced: if x^m=0 in a domain, repeated cancellation gives x=0. The jointly-injective prime-localizations lemma now gives that B is reduced.",
+   "text": "Localizations of the normal domain A at primes are normal domains. Apply RingHom.Etale.isNormalRing to get normality of B. All maximal-prime localizations of B are thus domains and reduced. Mathlib isReduced_ofLocalizationMaximal detects reducedness of B. This also applies when B is the zero ring.",
    "uses": [
     "lem-weil-pbc-localization-normal-domain",
     "def-weil-pbc-normal-ring",
@@ -32,109 +35,72 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 00GY, 00GV, 033C and 00HN: normal localizations, etale ascent and detection of reducedness"
+    "place": "Tags 00GY, 00GV, 033C and 00HN"
    }
   },
   {
-   "text": "The definition of etale gives that Spec B -> Spec A is locally of finite presentation. Apply the affine-opens finite-presentation lemma to the whole affine opens Spec B and Spec A. By the Spec-map global-sections identification the resulting ring map is the given A -> B. Therefore B is finitely presented, in particular it is generated as an A-algebra by finitely many elements b_1,...,b_r (the images of the presentation variables).",
+   "text": "Construct K=FractionRing A and C=K tensor_A B. Finite type is preserved by base change, so C is finite type over the field K. Since K is Noetherian, Algebra.FiniteType.isNoetherianRing and minimalPrimes.finite_of_isNoetherianRing show that C has finitely many minimal primes.",
    "uses": [
-    "def-weil-etale-morphism",
-    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
-    "lem-weil-pbc-spec-map-global-sections"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01TQ (1) => (2), applied to the whole affine spectra; Schemes Tags 01HV and 01I2 for the natural global-sections identification"
-   }
-  },
-  {
-   "text": "Put S=A\\{0}, K=Frac(A)=S^{-1}A, let W be the image of S in B, and put C=W^{-1}B. The fraction construction gives a K-algebra structure on C by (a/s)(b/t)=ab/(st), where images in B are understood; the fraction equivalence relation makes this well-defined. The images of b_1,...,b_r generate C over K: write any b/t as P(b_1,...,b_r)/t and replace each coefficient a of P by a/t in K. Thus C is a finite-type K-algebra. This constructs the algebra and its generators directly, without invoking a generic-fibre comparison theorem.",
-   "uses": [
-    "def-weil-pbc-module-localization"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Section Tag 00CM and Definition Tag 07JZ: fraction construction and its operations"
-   }
-  },
-  {
-   "text": "Every ideal of the field K is either zero or K (a nonzero element of an ideal has an inverse), so K is Noetherian. Since C is a finite-type K-algebra, the finite-type-algebra Noetherian lemma makes C Noetherian. The Noetherian minimal-prime lemma therefore says that C has finitely many minimal primes. No Noetherian assertion about A or B is used.",
-   "uses": [
+    "def-weil-pbc-module-localization",
     "lem-weil-pbc-finite-type-algebra-noetherian",
     "lem-weil-pbc-noetherian-finitely-many-minimal-primes"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 00FN and 00FR: finite-type algebras over Noetherian rings and finite minimal primes"
+    "place": "Fraction field construction, finite-type base change, Tags 00FN and 00FR"
    }
   },
   {
-   "text": "Let q be any minimal prime of B, and let p be its contraction to A. The etale-algebra flatness lemma and flat going-down, applied to the primes (0) subset p of the domain A, give a prime q_0 subset q contracting to (0). Minimality of q forces q_0=q, so p=(0). In particular q avoids W: the image of a nonzero s in A cannot belong to q.",
+   "text": "The inclusion A -> K is injective. Because B is flat over A, tensoring this inclusion with B embeds B into C; use Algebra.TensorProduct.includeRight_injective. Every minimal prime of B is therefore the contraction of a prime of C by Tag 00FK. Taking a minimal prime below the latter and contracting shows that it is the contraction of a minimal prime of C (lemma-minimal-prime-image-minimal-prime). In Lean Ideal.minimalPrimes_comap_subset and Ideal.comap_bot_of_injective perform this argument. Thus minimalPrimes B is contained in the finite image of minimalPrimes C under contraction.",
    "uses": [
     "lem-weil-pbc-etale-algebra-flat",
-    "lem-sc-flat-going-down"
+    "lem-weil-pbc-injective-minimal-prime-lift"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00HS, flat going-down; etale flatness as in Tag 00U2"
+    "place": "Flat tensor exactness; Tag 00FK and lemma-minimal-prime-image-minimal-prime"
    }
   },
   {
-   "text": "Apply clause (1) of the general localization-prime correspondence to B -> C and W. For a minimal prime q of B, Step 6 shows q avoids W, so qC is a prime of C with contraction q. It is minimal: if r is a prime of C contained in qC, its contraction is a prime of B contained in q, hence equals q; the inverse identities of the correspondence then give r=qC. Distinct q give distinct qC because contraction recovers q. We have injected the minimal primes of B into the finite set of minimal primes of C from Step 5. Hence B has finitely many minimal primes.",
-   "uses": [
-    "lem-weil-pbc-localization-prime-residue-field-iso"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00E3: extension and contraction of primes for an arbitrary multiplicative subset; elementary restriction of that bijection to minimal primes"
-   }
-  },
-  {
-   "text": "The ring B is reduced and normal by Step 2, and has finitely many minimal primes by Step 7. Apply implication (1) => (3) of the reduced-normal total-fractions criterion to B. It gives a finite list of normal integral domains B_1,...,B_n and a ring isomorphism theta:B -> product_j B_j. The reducedness and finite-minimal-prime hypotheses of that criterion have both been verified.",
+   "text": "Apply reduced_normal_iff_integrallyClosed_totalFractions B to the reducedness, normality and finite-minimal-prime results just proved. Its two equivalences give a finite family D of normal domains and a ring equivalence e:B -> product D. The theorem includes the empty family, so no nontriviality case split is required.",
    "uses": [
     "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 030C, implication (1) => (3)"
+    "place": "Tag 030C, implication (1) to (3)"
    }
   },
   {
-   "text": "Give each B_j the A-algebra structure a |-> pr_j(theta(a*1_B)). Then theta sends the structure image of a to the tuple of these coordinate images, so theta is an A-algebra homomorphism. Its inverse also respects A because theta is injective and theta(structure_B(a))=structure_product(a). Thus the ring isomorphism in Step 8 is an A-algebra isomorphism. The domains and their normality are unchanged. Together with Step 1 this proves every clause, including n=0 and the absence of any Noetherian hypothesis.",
+   "text": "Give D_i the A-algebra structure whose map is evaluation_i composed with e composed with algebraMap A B. The ring equivalence e commutes with the induced A maps definitionally. AlgEquiv.ofRingEquiv upgrades it to an A-algebra equivalence. No data are chosen from an unproved existence theorem inside a definition: all existential witnesses are eliminated inside this theorem proof.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 030C, elementary transport of the given A-algebra structure along the resulting ring isomorphism"
+    "place": "Tag 030C; elementary transport of the given algebra structure"
    }
   }
  ],
  "proof_deps": [
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-etale-algebra-flat",
   "lem-weil-pbc-localization-normal-domain",
   "def-weil-pbc-normal-ring",
   "lem-weil-pbc-etale-over-normal-ring-normal",
   "lem-weil-pbc-prime-localizations-jointly-injective",
-  "def-weil-etale-morphism",
-  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
-  "lem-weil-pbc-spec-map-global-sections",
   "def-weil-pbc-module-localization",
   "lem-weil-pbc-finite-type-algebra-noetherian",
   "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
-  "lem-weil-pbc-etale-algebra-flat",
-  "lem-sc-flat-going-down",
-  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-injective-minimal-prime-lift",
   "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Combination of Tags 033C, 00FN, 00FR, 00HS and 00E3 to verify the hypotheses of Tag 030C (1) => (3); the fraction-generation and A-algebra upgrade arguments are written out here."
+  "place": "Tag 030C combined with etale normality and finite-type generic fibre; shorter finite-minimal-prime argument uses flat tensor injectivity and Tag 00FK with lemma-minimal-prime-image-minimal-prime instead of going-down and localization-prime correspondence. Implemented by E2 on 2026-10-23."
  },
  "mathlib_searches": [
   {
@@ -264,7 +230,6 @@
  },
  "tool_uses": [
   "lem-weil-pbc-etale-over-normal-ring-normal",
-  "lem-weil-pbc-localization-prime-residue-field-iso",
   "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions"
  ],
  "reviewed": {
@@ -293,5 +258,26 @@
   "result": "pass",
   "note": "Statement, dependencies, docstrings, edge cases, route-pivot status, report sections, and server-confirmed per-file compile all check out."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261023T123446-L-1192438",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

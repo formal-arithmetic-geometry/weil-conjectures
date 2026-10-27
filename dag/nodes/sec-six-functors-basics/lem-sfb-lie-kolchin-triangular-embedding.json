@@ -1,0 +1,274 @@
+{
+ "id": "lem-sfb-lie-kolchin-triangular-embedding",
+ "kind": "statement",
+ "title": "Lie–Kolchin triangular embedding for smooth connected solvable group schemes",
+ "statement": "Let $k$ be a field [def-weil-field]. All groups below are affine group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism] over $k$; subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness are as in [def-sbc-smooth-morphisms] and [def-weil-connected-scheme]. For $n\\geq1$, let $B_n\\subseteq\\operatorname{GL}_n$ be the group of invertible upper triangular matrices and $U_n\\subseteq B_n$ its subgroup of matrices with every diagonal entry equal to $1$. Thus their $A$-points, for a commutative $k$-algebra $A$, are the matrices just described. The general linear group is [def-sc-general-linear-group]. Assume that $k$ is algebraically closed [def-weil-algebraic-closure], and let $J$ be smooth, connected and solvable. Here solvable means having a finite descending series of closed subgroups, each normal in its predecessor, whose successive fppf group-sheaf quotients are commutative. There exist $n\\geq1$ and a closed immersion of group schemes $J\\hookrightarrow B_n$. A closed immersion is as in [def-weil-closed-immersion]. No characteristic-zero hypothesis is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 16.30 (Lie–Kolchin), printed pp.334–335; Proposition 16.2(a)–(c), printed pp.324–325; faithful linear representations in Theorem 4.9. The solvability notion is the closed-subgroup normal-series notion of Chapter 6."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-general-linear-group",
+  "def-weil-algebraic-closure",
+  "def-weil-closed-immersion",
+  "def-sfb-solvable-group-structure"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\Gamma=J(k)$. A solvable series $J=J_0\\supseteq\\cdots\\supseteq J_t=1$ gives subgroups $\\Gamma_i=J_i(k)$. Since $J_i\\to J_i/J_{i+1}$ has kernel $J_{i+1}$ and commutative target, $[\\Gamma_i,\\Gamma_i]\\subseteq\\Gamma_{i+1}$. Thus the abstract derived series $D^0\\Gamma=\\Gamma$, $D^{a+1}\\Gamma=[D^a\\Gamma,D^a\\Gamma]$ satisfies $D^a\\Gamma\\subseteq\\Gamma_a$ and terminates. We prove by induction on $s$ the stronger assertion: for every smooth connected affine finite-type $k$-group $H$ with $D^s(H(k))=1$, all nonzero simple rational representations have dimension one; hence every nonzero rational representation contains a stable line. Here simple means no nonzero proper group-scheme-stable subspace. The implication after the semicolon follows by taking a stable subspace of least positive dimension. Smoothness gives reducedness by [sbc-lem-smooth-geometrically-reduced]; throughout, matrix equations holding at all $H(k)$ hold in $k[H]$ by [lem-wf-affine-nullstellensatz-vanishing](2). In the base $s=0$, $H(k)=1$, so every matrix coefficient of $r-I$ is zero and every line is stable. This proves the base, including zero-dimensional $H$.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-wf-affine-nullstellensatz-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.30, pp.334–335; Proposition 6.30, p.132. Same derived-group proof with induction on the abstract derived length instead of dimension."
+   }
+  },
+  {
+   "text": "For the induction step let $s\\geq1$, let $H$ satisfy the induction hypothesis at level $s$, and let $V\\ne0$ be a simple rational $H$-module. Take $N=D_H$ from [lem-sfb-smooth-connected-derived-subgroup]. It is smooth, connected, normal, affine and finite type, and $N(k)=[H(k),H(k)]$. Hence $D^{s-1}(N(k))=1$. Apply the already proved induction assertion at $s-1$ to the restriction of $V$ to $N$: it has a stable line. The action on this line is a character $\\chi:N\\to\\mathbf G_m$, so $V_\\chi\\ne0$. By [lem-sfb-character-eigenspaces-independent], the set $S=\\{\\psi:V_\\psi\\ne0\\}$ is finite, and its eigenspaces are independent. All eigenspaces mean the all-algebras spaces defined in that node.",
+   "uses": [
+    "lem-sfb-smooth-connected-derived-subgroup",
+    "lem-sfb-character-eigenspaces-independent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.30, p.334, through the finite set of characters; Corollary 6.19 and Proposition 6.20, pp.129–130."
+   }
+  },
+  {
+   "text": "For $g\\in H(k)$ and $n\\in N(A)$, normality gives $r_A(n)r_A(g)(1\\otimes v)=r_A(g)r_A(g^{-1}ng)(1\\otimes v)=\\chi_A(g^{-1}ng)r_A(g)(1\\otimes v)$ for $v\\in V_\\chi$. Thus $gV_\\chi=V_{\\chi^g}$ with $\\chi^g(n)=\\chi(g^{-1}ng)$, and $H(k)$ permutes $S$. The stabilizer of $E=V_\\chi$ therefore has finite index in $H(k)$. In a basis beginning with a basis of $E$, it is cut out on $H(k)$ by the lower-left matrix entries of $r(g)$, so it is the set of rational points of a closed subgroup $K\\subseteq H$. Its finitely many distinct cosets are closed. They cover $|H|$: otherwise the open complement contains a nonempty principal affine open, whose nonzero finitely generated coordinate algebra has a maximal ideal and hence a $k$-point by [lem-wf-affine-nullstellensatz-vanishing](1). Similarly, two such closed cosets cannot meet without a $k$-point in their intersection. They give a finite disjoint closed cover, hence a clopen partition. Connectedness forces just one coset. All lower-left entries vanish on $H(k)$ and therefore in $k[H]$ by reducedness and the vanishing principle. Consequently $E$ is $H$-stable as a group-scheme subspace. Simplicity gives $V=V_\\chi$.",
+   "uses": [
+    "lem-sfb-smooth-connected-derived-subgroup",
+    "lem-sfb-character-eigenspaces-independent",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-wf-affine-nullstellensatz-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.30, pp.334–335, conjugation equation and closed finite-index stabilizer argument."
+   }
+  },
+  {
+   "text": "Put $d=\\dim V\\geq1$. Every $n\\in N(k)$ acts by $\\chi(n)I_d$. By [lem-sfb-smooth-connected-derived-subgroup], it is a finite product of commutators in $H(k)$. The determinant-homomorphism clause of [def-sc-general-linear-group] gives $\\det(r([x,y]))=\\det(r(x))\\det(r(y))\\det(r(x))^{-1}\\det(r(y))^{-1}=1$, so $\\chi(n)^d=1$. By smooth reducedness and [lem-wf-affine-nullstellensatz-vanishing](2), the regular function $\\chi^d-1$ on $N$ is zero. The underlying space of $N$ is consequently partitioned by the finitely many closed fibres $\\chi^{-1}(a)$, where $a$ ranges over the distinct roots of $T^d-1$ in $k$. These fibres are disjoint and form a finite cover even when that polynomial has repeated roots: every prime of $k[N]$ contains one of its linear factors. Connectedness makes only one fibre nonempty; the identity lies over $1$, so every $n\\in N(k)$ has $\\chi(n)=1$. The vanishing principle again gives $\\chi-1=0$ in $k[N]$. Thus $N$ acts trivially on $V$ over every algebra. No reducedness of $\\mu_d$ is asserted or needed.",
+   "uses": [
+    "lem-sfb-smooth-connected-derived-subgroup",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-wf-affine-nullstellensatz-vanishing",
+    "def-sc-general-linear-group"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.30, p.335, determinant calculation and smooth-connected finite-image argument."
+   }
+  },
+  {
+   "text": "By [lem-sfb-affine-normal-quotient-geometry] the quotient $q:H\\to Q=H/N$ represents the fppf sheaf quotient. Since $N$ acts trivially, $r$ descends: on any fppf local lift $h$ of $u\\in Q(A)$ set $\\bar r(u)=r(h)$; two lifts differ by $N$, so these values agree and glue in $\\operatorname{GL}(V)$. This is a natural group homomorphism, hence a group-scheme morphism. The commutator morphism of $H$ factors through $N$ by [lem-sfb-smooth-connected-derived-subgroup]. Local lifts of two points of $Q$ therefore commute modulo $N$, and the sheaf property makes $Q$ commutative. Apply [lem-sfb-commutative-group-representation-eigenline] to $\\bar r$. Its stable line pulls back to an $H$-stable line, so simplicity of $V$ gives $d=1$. Together with the minimal-dimension argument of step 1, this completes the induction and gives a stable line in every nonzero rational representation of $J$.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-smooth-connected-derived-subgroup",
+    "lem-sfb-commutative-group-representation-eigenline"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.30, p.335, final descent to the commutative quotient and Corollary 16.14; fppf quotient interpretation: Section 5(j), pp.116–118."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-normal-subgroup-representation-kernel] to the trivial closed normal subgroup of $J$, obtaining $r:J\\to\\operatorname{GL}_n$, $n\\geq1$, with trivial scheme-theoretic kernel. Apply [lem-sfb-algebraic-group-homomorphism-factorization] to write it as $J\\to I\\hookrightarrow\\operatorname{GL}_n$, with $J\\to I$ identifying $I$ with the fppf quotient by that kernel. The quotient by the trivial subgroup is $J$ itself, so $J\\simeq I$ and $r$ is a closed immersion. In particular this is a faithful rational representation on $k^n$, not just an injective map on $k$-points.",
+   "uses": [
+    "lem-sfb-normal-subgroup-representation-kernel",
+    "lem-sfb-algebraic-group-homomorphism-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 16.2(b)⇒(c), p.325; Theorem 4.9 and Corollary 4.10, p.87. The existing prescribed-kernel and homomorphism nodes give the faithful representation."
+   }
+  },
+  {
+   "text": "Construct a full $J$-stable flag in $V=k^n$ by induction on $\\dim V$. For $V=0$ the empty flag suffices. For $V\\ne0$, the assertion proved in steps 1–5 gives a stable line $L$. The action on $V/L$ is rational: in a basis starting with $L$, stability says the lower-left block is identically zero in $k[J]$, and the lower-right block defines the quotient action with invertible determinant. The induction on dimension gives a full stable flag in $V/L$; its inverse images, preceded by $0\\subset L$, give a full stable flag in $V$. Choose successive basis vectors adapted to this flag. For every algebra $A$, preservation of each initial span says exactly that all entries below the diagonal vanish. Hence $r$ factors as a group homomorphism $f:J\\to B_n\\subseteq\\operatorname{GL}_n$. On coordinate algebras the surjection $k[\\operatorname{GL}_n]\\to k[J]$ kills the below-diagonal variables, so the induced map $k[B_n]=k[\\operatorname{GL}_n]/(x_{ij}:i>j)\\to k[J]$ is surjective. This is precisely a closed immersion of affine schemes. Thus $f$ is the required closed immersion of group schemes with $n\\geq1$.",
+   "uses": [
+    "def-sc-general-linear-group",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 16.2(a)⇒(b)⇒(c), p.325; adapted-flag basis and quotient of coordinate algebras."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-affine-normal-quotient-geometry",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "lem-sfb-smooth-connected-derived-subgroup",
+  "lem-sfb-character-eigenspaces-independent",
+  "def-sc-general-linear-group",
+  "lem-sfb-commutative-group-representation-eigenline",
+  "lem-sfb-normal-subgroup-representation-kernel",
+  "lem-sfb-algebraic-group-homomorphism-factorization",
+  "def-weil-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 16.30, pp.334–335, and Proposition 16.2(a)–(c), pp.324–325. Induction is indexed by abstract derived length rather than dimension; all conjugation and determinant arguments are unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every smooth connected solvable affine group scheme over an algebraically closed field has a faithful upper triangular matrix representation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieModule.instIsTriangularizableOfIsAlgClosed\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (K : Type u_1) (L : Type u_3) (M : Type u_4) [inst : LieRing L] [inst_1 : AddCommGroup M] [inst_2 : LieRingModule L M]\\n  [inst_3 : Field K] [inst_4 : LieAlgebra K L] [inst_5 : Module K M] [inst_6 : LieModule K L M] [FiniteDimensional K M]\\n  [IsAlgClosed K], LieModule.IsTriangularizable K L M\", \"doc\": \"Given a commutative ring $ R $, a Lie algebra $ L $ over $ R $, and an $ R $-module $ M $ equipped with a compatible Lie module structure over $ L $, if the field $ K $ is algebraically closed, then $\"}\n  {\"name\": \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"The Lie algebra constructed via the Geck construction from a root pairing over an algebraically closed field has a trivial radical, hence is semisimple. Specifically, the Lie subalgebra of the matrix \"}\n  {\"name\": \"IsSemisimpleRing.exists_algEquiv_pi_matrix_of_isAlgClosed\", \"module\": \"Mathlib/RingTheory/SimpleModule/IsAlgClosed\", \"type\": \"∀ (F : Type u_1) (R : Type u_2) [inst : Field F] [IsAlgClosed F] [inst_2 : Ring R] [inst_3 : Algebra F R]\\n  [IsSemisimpleRing R] [FiniteDimensional F R],\\n  ∃ n d, (∀ (i : Fin n), NeZero (d i)) ∧ Nonempty (R ≃ₐ[F] (i : Fin n) → Matrix (Fin (d i)) (Fin (d i)) F)\", \"doc\": \"Let `F` be an algebraically closed field and `R` be a finite-dimensional semisimple algebra over `F`. Then there exists a natural number `n` and a sequence of positive integers $d_0, d_1, \\\\ldots, d_{n\"}\n  {\"name\": \"LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas\", \"type\": \"∀ (k : Type u_1) (L : Type u_2) (M : Type u_3) [inst : Field k] [CharZero k] [inst_2 : LieRing L]\\n  [inst_3 : LieAlgebra k L] [Module.Finite k L] [inst_5 : AddCommGroup M] [inst_6 : Module k M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule k L M] [Module.Finite k M] [LieModule.IsIrreducible k L\", \"doc\": \"If a Lie algebra $\\\\mathfrak{g}$ over a field $k$ admits an irreducible and faithful module $M$ such that the trace of the endomorphism $\\\\mathrm{ad}_x \\\\in \\\\mathrm{End}_k(M)$ corresponding to each $x \\\\i\"}\n  {\"name\": \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas\", \"type\": \"∀ (k : Type u_1) (L : Type u_2) (M : Type u_3) [inst : Field k] [CharZero k] [inst_2 : LieRing L]\\n  [inst_3 : LieAlgebra k L] [Module.Finite k L] [inst_5 : AddCommGroup M] [inst_6 : Module k M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule k L M] [Module.Finite k M] [LieModule.IsIrreducible k L\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a field $k$ with an irreducible and faithful module $M$, the radical of $\\\\mathfrak{g}$ is central, and an element $x \\\\in \\\\mathfrak{g}$ lies in the center if and o\"}\n  {\"name\": \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"module\": \"Mathlib/Algebra/Lie/CartanExists\", \"type\": \"∀ (K : Type u_1) (L : Type u_2) [inst : Field K] [inst_1 : LieRing L] [inst_2 : LieAlgebra K L] [Module.Finite K L]\\n  [Infinite K], ∃ x, (LieSubalgebra.engel K x).IsCartanSubalgebra\", \"doc\": \"For an infinite field $ K $, there exists an element $ x $ in the Lie algebra $ L $ such that the Engel subalgebra associated with $ x $ forms a Cartan subalgebra of $ L $. This means the maximal gene\"}\n  {\"name\": \"LieAlgebra.instIsFaithfulOfHasTrivialRadical\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.HasTrivialRadical R L], LieModule.IsFaithful R L L\", \"doc\": \"If a Lie algebra $ L $ over a commutative ring $ R $ has a trivial radical (i.e., its radical is the zero ideal), then $ L $ is a faithful Lie module over itself. This means the action of $ L $ on its\"}\n  {\"name\": \"IsSolvable\", \"module\": \"Mathlib/GroupTheory/Solvable\", \"type\": \"(G : Type u_1) → [Group G] → Prop\", \"doc\": \"A group $ G $ is solvable.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: LieModule.IsTriangularizable is a Lie-algebra notion, and LieModule.exists_nontrivial_weightSpace_of_isSolvable is a characteristic-zero Lie-algebra theorem; neither supplies a closed immersion of group schemes in arbitrary characteristic."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lie Kolchin theorem triangularization of representations of connected solvable algebraic groups",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LieModule.IsTriangularizable\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"(R : Type u_2) →\\n  (L : Type u_3) →\\n    (M : Type u_4) →\\n      [inst : CommRing R] →\\n        [inst_1 : LieRing L] →\\n          [inst_2 : LieAlgebra R L] →\\n            [inst_3 : AddCommGroup M] → [inst_4 : Module R M] → [inst_5 : LieRingModule L M] → [LieModule R L M] → Prop\", \"doc\": \"Given a commutative ring $ R $, a Lie algebra $ L $ over $ R $, and an $ R $-module $ M $ equipped with a compatible Lie module structure over $ L $, the proposition that $ M $ is triangularizable as \"}\n  {\"name\": \"LieModule.IsTriangularizable.mk\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"∀ {R : Type u_2} {L : Type u_3} {M : Type u_4} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M],\\n  (∀ (x : L), ⨆ φ, ((LieModule.toEnd R L M) x).maxGenEigenspace φ = ⊤) → LieMod\", \"doc\": \"If for every element $ x $ in the Lie algebra $ L $, the supremum of the generalized eigenspaces of the endomorphism associated to $ x $ acting on $ M $ equals the entire module $ M $, then $ M $ is t\"}\n  {\"name\": \"LieModule.instIsTriangularizableOfIsAlgClosed\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"[IsAlgClosed K] : IsTriangularizable K L M\", \"doc\": \"Given a commutative ring $ R $, a Lie algebra $ L $ over $ R $, and an $ R $-module $ M $ equipped with a compatible Lie module structure over $ L $, if the field $ K $ is algebraically closed, then $\"}\n  {\"name\": \"LieModule.instIsTriangularizableSubtypeMemLieSubalgebra\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"(L' : LieSubalgebra R L) [IsTriangularizable R L M] : IsTriangularizable R L' M\", \"doc\": \"If a Lie module $ M $ over a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $ is triangularizable, then $ M $ is also triangularizable as a module over any Lie subalgebra $ \\\\mathfrak{g}' $ o\"}\n  {\"name\": \"LieModule.IsTriangularizable.congr_simp\", \"module\": \"Mathlib.Algebra.Lie.LieTheorem\", \"type\": \"∀ (R : Type u_2) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M],\\n  LieModule.IsTriangularizable R L M = LieModule.IsTriangularizable R L M\", \"doc\": \"The triangularizability condition for a Lie module is preserved under congruence, meaning that if two Lie modules are equivalent under the given commutative ring $ R $, Lie algebra $ L $, and module s\"}\n  {\"name\": \"LieModule.instIsTriangularizableSubtypeEndMemLieSubalgebraRangeToEnd\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"[IsTriangularizable R L M] : IsTriangularizable R (LieModule.toEnd R L M).range M\", \"doc\": \"If an $ R $-module $ M $ is triangularizable as a Lie module over a Lie algebra $ L $, then the image of the Lie algebra homomorphism from $ L $ to the endomorphism ring $ \\\\mathrm{End}_R(M) $ is also \"}\n  {\"name\": \"LieModule.instIsTriangularizableSubtypeMemLieSubmodule\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"(I : LieIdeal R L) [IsTriangularizable R L M] : IsTriangularizable R I M\", \"doc\": \"For any commutative ring $ R $, Lie algebra $ L $ over $ R $, Lie ideal $ I $ of $ L $, and $ R $-module $ M $ that is triangularizable as a Lie module over $ L $, the module $ M $ is also triangulari\"}\n  {\"name\": \"LieModule.exists_nontrivial_weightSpace_of_isSolvable\", \"module\": \"Mathlib.Algebra.Lie.LieTheorem\", \"type\": \"[IsSolvable L] [LieModule.IsTriangularizable k L V] : ∃ χ : Module.Dual k L, Nontrivial (weightSpace V χ)\", \"doc\": \"Let $\\\\mathfrak{g}$ be a solvable Lie algebra over a field $k$, and let $V$ be a triangularizable $\\\\mathfrak{g}$-module. Then there exists a linear functional $\\\\chi \\\\in \\\\mathfrak{g}^*$ (the dual space \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: LieModule.IsTriangularizable is a Lie-algebra notion, and LieModule.exists_nontrivial_weightSpace_of_isSolvable is a characteristic-zero Lie-algebra theorem; neither supplies a closed immersion of group schemes in arbitrary characteristic."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSolvable\", \"Triangularizable\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: LieModule.IsTriangularizable is a Lie-algebra notion, and LieModule.exists_nontrivial_weightSpace_of_isSolvable is a characteristic-zero Lie-algebra theorem; neither supplies a closed immersion of group schemes in arbitrary characteristic."
+  },
+  {
+   "tool": "grep",
+   "query": "Lie.?Kolchin|trigonalizable|solvable.*triangular",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/Algebra/Lie/LieTheorem.lean\", \"line\": \"214\", \"text\": \"    [IsSolvable L] [LieModule.IsTriangularizable k L V] [Module.Finite k L] :\"}\n  {\"file\": \"Mathlib/Algebra/Lie/LieTheorem.lean\", \"line\": \"242\", \"text\": \"    [IsSolvable L] [LieModule.IsTriangularizable k L V] :\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: LieModule.IsTriangularizable is a Lie-algebra notion, and LieModule.exists_nontrivial_weightSpace_of_isSolvable is a characteristic-zero Lie-algebra theorem; neither supplies a closed immersion of group schemes in arbitrary characteristic."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every smooth connected solvable affine group scheme over an algebraically closed field embeds as a closed subgroup of upper triangular matrices",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieModule.instIsTriangularizableOfIsAlgClosed\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (K : Type u_1) (L : Type u_3) (M : Type u_4) [inst : LieRing L] [inst_1 : AddCommGroup M] [inst_2 : LieRingModule L M]\\n  [inst_3 : Field K] [inst_4 : LieAlgebra K L] [inst_5 : Module K M] [inst_6 : LieModule K L M] [FiniteDimensional K M]\\n  [IsAlgClosed K], LieModule.IsTriangularizable K L M\", \"doc\": \"Given a commutative ring $ R $, a Lie algebra $ L $ over $ R $, and an $ R $-module $ M $ equipped with a compatible Lie module structure over $ L $, if the field $ K $ is algebraically closed, then $\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.isClosedEmbedding_mapGLInt\", \"module\": \"Mathlib/NumberTheory/ModularForms/ArithmeticSubgroups\", \"type\": \"∀ {n : Type u_1} [inst : Fintype n] [inst_1 : DecidableEq n],\\n  Topology.IsClosedEmbedding ⇑(Matrix.SpecialLinearGroup.mapGL ℝ)\", \"doc\": \"The canonical group homomorphism from the special linear group $\\\\mathrm{SL}(n, \\\\mathbb{Z})$ to the general linear group $\\\\mathrm{GL}(n, \\\\mathbb{R})$ induced by the ring homomorphism $\\\\mathbb{Z} \\\\to \\\\m\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.isClosedEmbedding_toGL\", \"module\": \"Mathlib/Topology/Instances/Matrix\", \"type\": \"∀ {n : Type u_5} {R : Type u_8} [inst : Fintype n] [inst_1 : DecidableEq n] [inst_2 : CommRing R]\\n  [inst_3 : TopologicalSpace R] [IsTopologicalRing R] [T0Space R],\\n  Topology.IsClosedEmbedding ⇑Matrix.SpecialLinearGroup.toGL\", \"doc\": \"For any T₀ topological space $ R $, the inclusion map from the special linear group $ \\\\mathrm{SL}(n, R) $ to the general linear group $ \\\\mathrm{GL}(n, R) $ is a closed embedding, meaning it is a homeo\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.isEmbedding_toGL\", \"module\": \"Mathlib/Topology/Instances/Matrix\", \"type\": \"∀ {n : Type u_5} {R : Type u_8} [inst : Fintype n] [inst_1 : DecidableEq n] [inst_2 : CommRing R]\\n  [inst_3 : TopologicalSpace R] [IsTopologicalRing R], Topology.IsEmbedding ⇑Matrix.SpecialLinearGroup.toGL\", \"doc\": \"The inclusion map from the special linear group $\\\\mathrm{SL}(n, R)$ to the general linear group $\\\\mathrm{GL}(n, R)$ is a topological embedding, meaning the subspace topology on $\\\\mathrm{SL}(n, R)$ (in\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.isEmbedding_mapGL\", \"module\": \"Mathlib/Topology/Instances/Matrix\", \"type\": \"∀ {n : Type u_11} [inst : Fintype n] [inst_1 : DecidableEq n] {A : Type u_12} {B : Type u_13} [inst_2 : CommRing A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [inst_5 : TopologicalSpace A] [inst_6 : TopologicalSpace B]\\n  [IsTopologicalRing B],\\n  Topology.IsEmbedding ⇑(algebraMap A B) → Topology.\", \"doc\": \"If the canonical ring homomorphism from $ A $ to $ B $ is a topological embedding, then the induced map from the special linear group $ \\\\mathrm{SL}(n, A) $ to the general linear group $ \\\\mathrm{GL}(n,\"}\n  {\"name\": \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"The Lie algebra constructed via the Geck construction from a root pairing over an algebraically closed field has a trivial radical, hence is semisimple. Specifically, the Lie subalgebra of the matrix \"}\n  {\"name\": \"RootPairing.GeckConstruction.instIsTriangularizableSubtypeMatrixSumMemFinsetSupportLieSubalgebraLieAlgebraCartanSubalgebra'Forall\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N}\\n  [inst_5 : P.IsCrystallographic] {b : P.Base} [inst_6 : Finite ι] [inst_7 : IsDomain R] [inst\", \"doc\": \"The Cartan subalgebra obtained via the Geck construction acts triangularizably on the module of functions from the disjoint union of the finite support set and $\\\\iota$ to the commutative ring $R$. Thi\"}\n  {\"name\": \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"module\": \"Mathlib/Algebra/Lie/CartanExists\", \"type\": \"∀ (K : Type u_1) (L : Type u_2) [inst : Field K] [inst_1 : LieRing L] [inst_2 : LieAlgebra K L] [Module.Finite K L]\\n  [Infinite K], ∃ x, (LieSubalgebra.engel K x).IsCartanSubalgebra\", \"doc\": \"For an infinite field $ K $, there exists an element $ x $ in the Lie algebra $ L $ such that the Engel subalgebra associated with $ x $ forms a Cartan subalgebra of $ L $. This means the maximal gene\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: LieModule triangularization is for Lie-algebra operators; Mathlib/Algebra/Lie/LieTheorem.lean:166 imposes CharZero for its solvable common-weight theorem. None supplies the all-characteristic algebraic-group closed immersion here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lie Kolchin triangularization of connected solvable algebraic groups in arbitrary characteristic",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LieModule.IsTriangularizable\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"(R : Type u_2) →\\n  (L : Type u_3) →\\n    (M : Type u_4) →\\n      [inst : CommRing R] →\\n        [inst_1 : LieRing L] →\\n          [inst_2 : LieAlgebra R L] →\\n            [inst_3 : AddCommGroup M] → [inst_4 : Module R M] → [inst_5 : LieRingModule L M] → [LieModule R L M] → Prop\", \"doc\": \"Given a commutative ring $ R $, a Lie algebra $ L $ over $ R $, and an $ R $-module $ M $ equipped with a compatible Lie module structure over $ L $, the proposition that $ M $ is triangularizable as \"}\n  {\"name\": \"LieModule.instIsTriangularizableOfIsAlgClosed\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"[IsAlgClosed K] : IsTriangularizable K L M\", \"doc\": \"Given a commutative ring $ R $, a Lie algebra $ L $ over $ R $, and an $ R $-module $ M $ equipped with a compatible Lie module structure over $ L $, if the field $ K $ is algebraically closed, then $\"}\n  {\"name\": \"LieModule.IsTriangularizable.mk\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"∀ {R : Type u_2} {L : Type u_3} {M : Type u_4} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M],\\n  (∀ (x : L), ⨆ φ, ((LieModule.toEnd R L M) x).maxGenEigenspace φ = ⊤) → LieMod\", \"doc\": \"If for every element $ x $ in the Lie algebra $ L $, the supremum of the generalized eigenspaces of the endomorphism associated to $ x $ acting on $ M $ equals the entire module $ M $, then $ M $ is t\"}\n  {\"name\": \"LieModule.IsTriangularizable.congr_simp\", \"module\": \"Mathlib.Algebra.Lie.LieTheorem\", \"type\": \"∀ (R : Type u_2) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M],\\n  LieModule.IsTriangularizable R L M = LieModule.IsTriangularizable R L M\", \"doc\": \"The triangularizability condition for a Lie module is preserved under congruence, meaning that if two Lie modules are equivalent under the given commutative ring $ R $, Lie algebra $ L $, and module s\"}\n  {\"name\": \"LieModule.instIsTriangularizableSubtypeMemLieSubalgebra\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"(L' : LieSubalgebra R L) [IsTriangularizable R L M] : IsTriangularizable R L' M\", \"doc\": \"If a Lie module $ M $ over a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $ is triangularizable, then $ M $ is also triangularizable as a module over any Lie subalgebra $ \\\\mathfrak{g}' $ o\"}\n  {\"name\": \"LieModule.instIsTriangularizableSubtypeMemLieSubmodule\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"(I : LieIdeal R L) [IsTriangularizable R L M] : IsTriangularizable R I M\", \"doc\": \"For any commutative ring $ R $, Lie algebra $ L $ over $ R $, Lie ideal $ I $ of $ L $, and $ R $-module $ M $ that is triangularizable as a Lie module over $ L $, the module $ M $ is also triangulari\"}\n  {\"name\": \"LieAlgebra.IsSolvable.solvable\", \"module\": \"Mathlib.Algebra.Lie.Solvable\", \"type\": \"[IsSolvable L] : ∃ k, derivedSeries R L k = ⊥\", \"doc\": \"For a solvable Lie algebra $ L $ over a commutative ring $ R $, there exists a non-negative integer $ k $ such that the $ k $-th term of the derived series of $ L $ is the zero submodule, i.e., $ L^{(\"}\n  {\"name\": \"LieModule.IsTriangularizable.rec\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"{R : Type u_2} →\\n  {L : Type u_3} →\\n    {M : Type u_4} →\\n      [inst : CommRing R] →\\n        [inst_1 : LieRing L] →\\n          [inst_2 : LieAlgebra R L] →\\n            [inst_3 : AddCommGroup M] →\\n              [inst_4 : Module R M] →\\n                [inst_5 : LieRingModule L M] →\\n                  [in\", \"doc\": \"Given a property that holds when every element of the Lie algebra has generalized eigenspaces covering the entire module, this recursor allows deriving that property for any triangularizable Lie modul\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: LieModule triangularization is for Lie-algebra operators; Mathlib/Algebra/Lie/LieTheorem.lean:166 imposes CharZero for its solvable common-weight theorem. None supplies the all-characteristic algebraic-group closed immersion here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSolvable\", \"Triangularizable\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: LieModule triangularization is for Lie-algebra operators; Mathlib/Algebra/Lie/LieTheorem.lean:166 imposes CharZero for its solvable common-weight theorem. None supplies the all-characteristic algebraic-group closed immersion here."
+  },
+  {
+   "tool": "grep",
+   "query": "Lie.?Kolchin|trigonalizable|solvable.*triangular",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/Algebra/Lie/LieTheorem.lean\", \"line\": \"214\", \"text\": \"    [IsSolvable L] [LieModule.IsTriangularizable k L V] [Module.Finite k L] :\"}\n  {\"file\": \"Mathlib/Algebra/Lie/LieTheorem.lean\", \"line\": \"242\", \"text\": \"    [IsSolvable L] [LieModule.IsTriangularizable k L V] :\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: LieModule triangularization is for Lie-algebra operators; Mathlib/Algebra/Lie/LieTheorem.lean:166 imposes CharZero for its solvable common-weight theorem. None supplies the all-characteristic algebraic-group closed immersion here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-perfect-solvable-unipotent-torus",
+  "date": "2026-10-23",
+  "group": "ND"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Unipotent part and torus quotient of a smooth connected solvable group over a perfect field. Supporting input in the present split: Milne Theorem 16.33 proof, first sentence: triangularize over the algebraic closure, in present proof step 1.",
+   "via": [
+    "lem-sfb-perfect-solvable-unipotent-torus",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-lie-kolchin-triangular-embedding",
+  "worker": "stage1",
+  "summary": "Q123 retained the statement, read Milne 16.30 and 16.2, reused the derived-subgroup, prescribed-kernel, homomorphism and quotient nodes, and split off only the commutative-group eigenline and independent character-eigenspace inputs. The induction, finite-index stabilizer, positive-characteristic determinant argument, flag and closed-immersion calculation remain in the item.",
+  "blueprint": "The item has no imported blueprint ancestor (from.node=null, existing via chain retained). Its inherited place is the triangularization input in Milne 16.33 used in the solvable-group prerequisite of det-thm-sf-ctf-stability-direct-images. Steps 1–5 realize Milne 16.30; steps 6–7 realize Proposition 16.2(a)–(c). Latest blueprint 7284bb09daf97437d544c51882b325f9c52cd345 was searched; no same-statement node found.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic smoothness implies reducedness, needed to apply rational-point vanishing; the unit has no replacement statement."
+   },
+   {
+    "node": "lem-wf-affine-nullstellensatz-vanishing",
+    "why": "Generic affine Nullstellensatz and reduced-function vanishing used for matrix equations and finite closed partitions; no statement of the present unit supplies these tests."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-wf-affine-nullstellensatz-vanishing"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q123-bc964f5ce",
+  "group": "Q123",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-bc964f5ce (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full, and checked them against Milne iAG2017: Th. 16.30 (pp.334-335), Def. 16.1 and Prop. 16.2 (pp.324-325), Cor. 16.14 (p.329), Cor. 4.24 and Th. 4.25 (pp.93-94). The statement is byte-identical to live and side-live, where the item is still unsplit, so nothing is superseded. Steps 1-5 follow Milne 16.30. The induction runs on the abstract derived length of H(k) instead of dimension; this works because the derived-subgroup node gives N(k)=[H(k),H(k)]. In step 3 the coset argument (closed cosets that cover |H| and are disjoint, checked via Nullstellensatz k-points) is written out. In step 4 I checked the case char p | d: the fibres over the distinct roots partition Spec k[N]. In step 5 descent to H/N uses the fppf-quotient clause and commutativity uses the factorization of the commutator morphism through D_H. Step 6 applies the prescribed-kernel node with N=1 and the factorization node, so the representation is a closed immersion. Step 7 is the flag argument of 16.2(a)=>(b) plus the coordinate-algebra surjection k[B_n]->k[J]. proof_deps equals the union of the steps' uses. New node commutative-group-representation-eigenline is Milne 16.14/16.1, true also for nonreduced groups via G=G_s x G_u; I tested it on G_a, G_m, mu_p and alpha_p. New node character-eigenspaces-independent is Milne 4.24/4.25; it is true for any affine G of finite type and does not claim the eigenspaces span V. Both nodes are self-contained statement-only nodes, strictly smaller than the item, and not restated clauses. Searching snapshot, live and side-live found no duplicate; I checked lem-wf-solvable-common-eigenvector, lem-per-monoid-characters-linear-independent, unipotent-rational-representation-fixed-vector, central-torus-faithful-weight-blocks and invariant-complements-eigenspace-span. Accepted tool_uses: sbc-lem-smooth-geometrically-reduced and lem-wf-affine-nullstellensatz-vanishing, both generic tools. No SGA source is used. Batch-5 flag: lem-sfb-affine-normal-quotient-geometry reaches def-trf-scheme-cover-descent-datum, which is only a general definition of descent data. Neither node is a step of the trace formula or Poincare duality, so this is not a fault. No changes written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.LieKolchinTriangularEmbedding",
+  "declaration": "AlgebraicGeometry.lieKolchin_triangular_embedding",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/LieKolchinTriangularEmbedding.lean",
+  "statement": "theorem lieKolchin_triangular_embedding {k : Type u} [Field k] [IsAlgClosed k] (J : Grp (Over (Spec (.of k)))) [IsAffine J.X.left] [LocallyOfFiniteType J.X.hom] [QuasiCompact J.X.hom] [Smooth J.X.hom] [ConnectedSpace J.X.left] (hsolv : SolvableGroupStructure.IsSolvable J) : ∃ (n : ℕ), 0 < n ∧ ∃ r : J.X ⟶ GeneralLinearGroup (ULift.{u} (Fin n)) k, IsClosedSubgroupScheme r ∧ ∀ (R : Type u) [CommRing R] [Algebra k R] (x : (Spec (.of R)).asOver (Spec (.of k)) ⟶ J.X) (i j : Fin n), j < i → (GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin n)) k R (x ≫ r)).val ⟨i⟩ ⟨j⟩ = 0",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reuses the landed SolvableGroupStructure.IsSolvable (finite closed subnormal series). The target B_n is expressed through its defining equations in the existing GL_n: a closed subgroup immersion whose below-diagonal entries vanish over every commutative k-algebra. This is equivalent to a closed immersion into B_n by factorization through its closed coordinate quotient. No condition on the diagonal is added; U_n is contextual notation and is not a hypothesis or conclusion. The added statement dependency is the already-landed definition node of solvability."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9df2ce925",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Read node, all 10 stmt_dep records, the item module, report, and the exact declarations IsSolvable (landed Q116), IsClosedSubgroupScheme/IsSubgroupScheme (GroupScheme/Defs.lean:81-103), GeneralLinearGroup.homMulEquiv (GeneralLinear.lean:68). Hypotheses match node: IsAlgClosed k, affine, LocallyOfFiniteType+QuasiCompact, Smooth, ConnectedSpace, landed solvable notion; no CharZero. Conclusion: ∃ n>0, closed subgroup immersion into GL(ULift (Fin n)) with entries (i,j), j<i, zero on all R-points; equivalent to closed immersion into B_n via the universal point Γ(J) and the quotient k[B_n]; diagonal unconstrained, U_n only notation. No B_n or Lie–Kolchin duplicate in Sheaf, WeilConjectures or Mathlib; the entry-wise form matches the landed IsUnipotent. Node statement unchanged vs side-live; stmt_dep def-sfb-solvable-group-structure is a landed node and is used (§5). lean.statement verbatim; sorry only; source and blueprint docstrings; 7-step proof docstring; imports exist as module files; report has Worker report and Second reading by Q12. Edge cases: trivial J (n=1), n=0 excluded, empty scheme, any characteristic, nonreduced R, universe u. No fixes, no compile."
+ }
+}

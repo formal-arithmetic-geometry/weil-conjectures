@@ -8,28 +8,12 @@ module
 public import Sheaf.Paper.FdCoefficientComparisonSystem
 public import Sheaf.Paper.FiniteFieldFiber
 public import Sheaf.Paper.IntegralPullbackShiftCoordinates
-import Sheaf.AlgebraicGeometry.ProEtale.IsoSectionwiseInverseImage
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.ScalarExtensionRingIso
-import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
-import Sheaf.CategoryTheory.StrictRoosComparison
-import Sheaf.Paper.IntegralOperationsWellDefined
-import Sheaf.Paper.IntegralOperationsPreserveConstructible
-import Sheaf.CategoryTheory.DerivedCategory.ConstantTowerNormalization
-import Sheaf.TraceFormula.CounitRealizationSubstitution
-import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import Sheaf.Paper.ConstantCompletionEquivalence
-import Sheaf.Paper.CompletedPullbackAdjunction
-import Sheaf.Paper.IntegralFinitePullbackComposition
-import Sheaf.TraceFormula.IsomorphismDerivedPullbackComparisonNormalization
-import Sheaf.Paper.FiniteFreeCompletedScalarComparison
-import Sheaf.Paper.SpecifiedPullbackComparisonAlpha
-import Sheaf.Paper.KFlatScalarComparisonNormalization
-import Sheaf.Paper.PbcScalarExtension
-import Sheaf.Paper.ExactProductFunctorRoosDescent
-import Sheaf.Paper.QuotientSystemMixedCoherence
+import Sheaf.Paper.FdCommonStageComparisonDescent
+import Sheaf.Paper.FdNormalizedPullbackMixed
+import Sheaf.Paper.FdNormalizedPullbackGeometry
+import Sheaf.Paper.FdNormalizedPullbackIntegralScalar
+import Sheaf.Paper.FdScalarPullbackRealizationIdentification
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Mathlib.CategoryTheory.Localization.Predicate
-import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Simultaneous normalized integral pullback comparison
 
@@ -265,6 +249,60 @@ theorem wholeTowerIntegralPullbackComparison (D : FiniteFieldDatum.{u}) (_hl : l
       [Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))],
       FdCoefficientComparison l Ω T) :
     Nonempty (FdWholeTowerIntegralComparison l Ω C) := by
-  sorry
+  classical
+  obtain ⟨R, _laws, coh, _roos, finite⟩ := fdPullbackAugmentationCounitMatching.{u, w} l Ω
+  have pullback_exists {U T : Scheme.{u}} [IsNoetherian U] [IsNoetherian T]
+      [Fact (∃ n : ℕ, topologicalKrullDim U ≤ n)]
+      [Fact (∀ t : U, IsUnit (l : U.presheaf.stalk t))]
+      [Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
+      [Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))] (h : U ≅ T) :
+      ∃ P : FdPullbackSystem l Ω (C U) (C T) h,
+        ∀ E, FdPullbackRoosMatching l Ω (C U) (C T) h E R (P.finite E) := by
+    let d := fun E ↦ (finite (C U) (C T) h E).choose
+    have hd : ∀ E, FdPullbackRoosMatching l Ω (C U) (C T) h E R (d E) :=
+      fun E ↦ (finite (C U) (C T) h E).choose_spec.1
+    obtain ⟨F, ⟨hF, hβ, hpair⟩, _⟩ :=
+      fdFrameworkPullbackFamily_existsUnique l Ω h
+    obtain ⟨mixed, hmixed⟩ :=
+      fdNormalizedPullbackMixed l Ω R (C U) (C T) h d hd F hF hβ
+    obtain ⟨P, hP, _, _⟩ :=
+      fdNormalizedPullbackDescent l Ω (C U) (C T) h d F hF hβ hpair
+        mixed hmixed
+    refine ⟨P, ?_⟩
+    intro E
+    simpa only [hP] using hd E
+  let P : ∀ {U T : Scheme.{u}} [IsNoetherian U] [IsNoetherian T]
+      [Fact (∃ n : ℕ, topologicalKrullDim U ≤ n)]
+      [Fact (∀ t : U, IsUnit (l : U.presheaf.stalk t))]
+      [Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
+      [Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]
+      (h : U ≅ T), FdPullbackSystem l Ω (C U) (C T) h :=
+    fun {_ _} _ _ _ _ _ _ h ↦ (pullback_exists h).choose
+  have matching {U T : Scheme.{u}} [IsNoetherian U] [IsNoetherian T]
+      [Fact (∃ n : ℕ, topologicalKrullDim U ≤ n)]
+      [Fact (∀ t : U, IsUnit (l : U.presheaf.stalk t))]
+      [Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
+      [Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]
+      (h : U ≅ T) (E : Padic.FiniteCoefficientFields l Ω) :
+      FdPullbackRoosMatching l Ω (C U) (C T) h E R ((P h).finite E) :=
+    (pullback_exists h).choose_spec E
+  obtain ⟨hu, hc, hs⟩ := fdNormalizedPullbackGeometry l Ω R C P matching
+  refine ⟨{ realization := R
+            realization_coherent := fun E L e ↦ coh _ _ (pbcFiniteFieldInclusion l Ω e)
+            pullback := P
+            unit := hu
+            composition := hc
+            scalar_realization := ?_
+            integral_scalar := fdNormalizedPullbackIntegralScalar l Ω R C P matching
+            shifts := hs }⟩
+  intro U T _ _ _ _ _ _ h E L e K
+  obtain ⟨bE⟩ := fdPullbackCommonStrictTowerModels l (pbcFiniteField.{u} l Ω E)
+    Fact.out Fact.out Fact.out Fact.out h
+  obtain ⟨bL⟩ := fdPullbackCommonStrictTowerModels l (pbcFiniteField.{u} l Ω L)
+    Fact.out Fact.out Fact.out Fact.out h
+  obtain ⟨_, _, _, _, hscalar⟩ := fdScalarPullbackRealizationIdentification l Ω E L e R h
+  obtain ⟨hF, _, hα, _⟩ := hscalar bE bL K
+  simpa only [integralPullbackScalarComparison, integralComparisonScalar, Iso.trans_hom,
+    Iso.symm_hom, ObjectProperty.isoMk, ObjectProperty.homMk_hom] using hα
 
 end WeilConjectures

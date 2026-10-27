@@ -190,7 +190,18 @@
   "thm-sf-pf-adic"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
  "unit": "sk-thm-sf-pf-field",
  "split_report": {
@@ -237,5 +248,39 @@
    "AlgebraicGeometry.Etale.isIso_reductionModIdeal_pow_map_projectionMap"
   ],
   "note": "attached by the lead's tool step2_attach.py 2026-10-18 03:19 UTC (L, propagation 2026-10-18), live declaration stated, proof open in WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Rational: the blueprint item thm-sf-pf-field's upstream Lean declarations as live states them; their proofs are still `sorry` in live (stage-3 route work)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "In the setting of [def-sf-datum], let $\\Lambda\\in\\{E,\\Qlb\\}$, regarded as a\ncondensed ring, and let $K\\in\\Dbc(X,\\Lambda)$ and $L\\in\\Dbc(Y,\\Lambda)$ be\nobjects of the condensed bounded constructible categories\n([det-def-sfb-bounded-constructible]). Then $\\operatorname{PF}_{f,K,L}$ is an\nisomorphism in $\\Dbc(Y,\\Lambda)$. It is compatible with localization\n$\\mathcal O_E\\to E$ and with extension of scalars $E\\to F\\to\\Qlb$: for\nintegral $K_0,L_0$ the map $\\operatorname{PF}_{f,K_0[1/\\ell],L_0[1/\\ell]}$ is\nthe localization of $\\operatorname{PF}_{f,K_0,L_0}$, and for $K_E,L_E$ over a\nfinite $E$ the map $\\operatorname{PF}_{f,(K_E)_\\Lambda,(L_E)_\\Lambda}$ is the\nextension of scalars of $\\operatorname{PF}_{f,K_E,L_E}$.",
+  "proof": [
+   {
+    "text": "*Compatibility.* The projection transformation of [def-sf-pf] is built from\nunits, counits and the associativity of $\\otimes^{\\mathbf L}$. Localization\n$\\mathcal O_E\\to E$ and extension of scalars $E\\to F\\to\\Qlb$ are flat\n($E_X=\\mathcal O_{E,X}[1/\\ell]$ by [sk-prop-sfb-qlbar-colimit-x], and\n[sk-prop-sfb-finite-extension-compatibility]), and their coefficient\ncomparisons for $Rf_!$, $Lf^*$ and $\\otimes^{\\mathbf L}$ are isomorphisms\nrespecting these units, counits and associativity maps\n([sk-prop-scalar-six]). Hence they carry $\\operatorname{PF}$ to\n$\\operatorname{PF}$, which is the compatibility in the statement.",
+    "uses": [
+     "def-sf-pf",
+     "sk-prop-sfb-qlbar-colimit-x"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*$\\Lambda=E$.* Fix $L$. Both sides of $\\operatorname{PF}_{f,K,L}$ are exact\nfunctors of $K$, so the $K$ for which it is an isomorphism form a\nsubcategory closed under cones and shifts. By [sk-lem-integral-models] (4)\nit suffices to treat $K=K_0[1/\\ell]$ with $K_0=a_!L'_0\\in\\Dbc(X,\\mathcal O_E)$,\nand in the same way, fixing such a $K$, to treat $L=L_0[1/\\ell]$ with\n$L_0\\in\\Dbc(Y,\\mathcal O_E)$. Then $\\operatorname{PF}_{f,K,L}$ is the\nlocalization of $\\operatorname{PF}_{f,K_0,L_0}$, an isomorphism by\n[thm-sf-pf-adic].",
+    "uses": [
+     "sk-lem-integral-models",
+     "thm-sf-pf-adic"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*$\\Lambda=\\Qlb$.* By [sk-thm-sfb-qlbar-two-colimit] (3) there are finite\nextensions over which $K$ and $L$ are defined; passing to their compositum\n$E$ by extension of scalars, $K\\cong(K_E)_{\\Qlb}$ and $L\\cong(L_E)_{\\Qlb}$ with\n$K_E\\in\\Dbc(X,E)$ and $L_E\\in\\Dbc(Y,E)$. By the compatibility,\n$\\operatorname{PF}_{f,K,L}$ is the extension of scalars of\n$\\operatorname{PF}_{f,K_E,L_E}$, an isomorphism by the case $\\Lambda=E$.",
+    "uses": [
+     "sk-thm-sfb-qlbar-two-colimit"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

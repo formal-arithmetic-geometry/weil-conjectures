@@ -1,0 +1,214 @@
+{
+ "id": "lem-trf-kernel-pair-restriction-quasicompact",
+ "kind": "statement",
+ "title": "Quasi-compact restriction of a kernel pair",
+ "statement": "Let $\\mathcal E$ be a Grothendieck topos presented on a small site, in the universes of [def-weil-size-convention], with quasi-compact and quasi-separated objects as in [def-trf-coherent-topos]. Let $p:P\\to A$ be any morphism, put $R=P\\times_A P$, and write $r_1,r_2:R\\rightrightarrows P$ for its projections. Suppose $P$ is quasi-separated and $R$ is quasi-compact. For any quasi-compact objects $K,L$ and maps $k:K\\to P$, $l:L\\to P$, put $T=K\\times_{k,P,r_1}R$, with projection $t_R:T\\to R$. There is a canonical isomorphism\n$$K\\times_{pk,A,pl}L\\ \\simeq\\ T\\times_{r_2t_R,P,l}L.$$\nIt commutes with the projections to $K$ and $L$ and is natural in maps $K'\\to K$, $L'\\to L$ over $P$ between such objects. In a site presentation its forward map sends $(x,y)$ to $(x,(k(x),l(y)),y)$ and its inverse forgets the $R$-component. Both $T$ and $K\\times_A L$ are quasi-compact. No epimorphism hypothesis on $p$, no quasi-compactness hypothesis on $P$, and no coherence hypothesis on $\\mathcal E$ is required.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Agent auxiliary extracting returned proof step 6 of lem-trf-coherent-epimorphic-quotient: kernel-pair restriction as two fibre products over P and two applications of quasi-separatedness. Tag 00W2 (lemma-limit-sheaf) supplies the sectionwise limits for the explicit natural isomorphism; quasi-compactness uses the definition of quasi-separated objects, not a coherence-of-products theorem."
+ },
+ "stmt_deps": [
+  "def-trf-coherent-topos",
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "Apply the defining quasi-separatedness condition of [def-trf-coherent-topos] to K and R = P ×_A P over P. The standard pullback square gives quasi-compactness of T = K ×_P R.",
+   "uses": [
+    "def-trf-coherent-topos"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00W2, lemma-limit-sheaf; universal-property version of the kernel-pair calculation in step 6 of lem-trf-coherent-epimorphic-quotient, and two applications of def-trf-coherent-topos."
+   }
+  },
+  {
+   "text": "Construct the forward morphism by three pullback lifts: from X = K ×_A L form the morphism to R with coordinates fst ≫ k and snd ≫ l, then lift to T, then lift to W = T ×_P L. The pullback condition in X makes the first lift well-defined, and the projection identities make the later lifts well-defined. Construct the inverse by forgetting the R coordinate: lift W → K and W → L to X, using the three pullback conditions to establish compatibility over A. By repeated pullback.hom_ext and the projection formulas the two composites are identities, yielding restrictionIso. This is the categorical universal-property version of the sectionwise formulas; it works in any category with finite limits and needs no sheaf presentation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00W2, lemma-limit-sheaf; universal-property version of the kernel-pair calculation in step 6 of lem-trf-coherent-epimorphic-quotient, and two applications of def-trf-coherent-topos."
+   }
+  },
+  {
+   "text": "The pullback lift projection formulas give all six forward and inverse coordinate identities. For morphisms a and b over P, prove naturality by successive applications of pullback.hom_ext to W, T, and R. Each resulting coordinate identity is pullback.map_fst or pullback.map_snd together with a ≫ k = k′ or b ≫ l = l′.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00W2, lemma-limit-sheaf; universal-property version of the kernel-pair calculation in step 6 of lem-trf-coherent-epimorphic-quotient, and two applications of def-trf-coherent-topos."
+   }
+  },
+  {
+   "text": "Apply the defining quasi-separatedness condition of [def-trf-coherent-topos] again to T and L. This definition accepts every object equipped with a pullback square, not only the chosen pullback. Equip X with the square whose legs are restrictionIso.hom followed by the projections of W; IsPullback.of_iso_pullback proves it is a pullback. Quasi-compactness of T and L therefore gives quasi-compactness of X directly, incorporating transport across the constructed isomorphism.",
+   "uses": [
+    "def-trf-coherent-topos"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00W2, lemma-limit-sheaf; universal-property version of the kernel-pair calculation in step 6 of lem-trf-coherent-epimorphic-quotient, and two applications of def-trf-coherent-topos."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-coherent-topos"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00W2; universal-property kernel-pair calculation from step 6 of lem-trf-coherent-epimorphic-quotient, formalized using pullback.lift, pullback.hom_ext, and IsPullback.of_iso_pullback. Quasi-compactness follows twice from def-trf-coherent-topos."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If P is a quasi separated sheaf and R is the quasi compact kernel pair of P to A then for quasi compact K and L mapping to P the pullback K times over A L is quasi compact by two pullbacks over P",
+   "results": "{\"t\": \"2026-10-22T06:44:57Z\", \"tool\": \"leanfinder\", \"query\": \"If P is a quasi separated sheaf and R is the quasi compact kernel pair of P to A then for quasi compact K and L mapping to P the pullback K times over A L is quasi compact by two pullbacks over P\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instQuasiCompactιSchemeOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instQuasiCompactSndScheme\", \"AlgebraicGeometry.instQuasiCompactFstScheme\", \"AlgebraicGeometry.instQuasiSeparatedFstScheme\", \"AlgebraicGeometry.instQuasiSeparatedSndScheme\", \"AlgebraicGeometry.QuasiCompactCover.instPullback₁Scheme\", \"AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatEqualizerSchemeOfQuasiSeparatedSpace\", \"AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatPullbackSchemeOfQuasiCompact_1\"], \"digest\": \"89e3139596d72956\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: pullback, kernel-pair and scheme pullback isomorphisms give limit ingredients, but none asserts quasi-compactness for these topos objects from quasi-separatedness of P. Scheme quasi-compactness and topological quasi-separatedness concern different objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.pullback",
+   "results": "{\"t\": \"2026-10-22T06:44:46Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits.pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.pullback\", \"CategoryTheory.Limits.pullback.fst\", \"CategoryTheory.Limits.pullback.snd\", \"CategoryTheory.Limits.pullbackSymmetry\", \"CategoryTheory.Limits.pullbackProdFstIsoProd\", \"CategoryTheory.Limits.pullbackProdSndIsoProd\", \"CategoryTheory.Limits.pullbackIsPullback\", \"CategoryTheory.Limits.pullback.lift\"], \"digest\": \"d7577420b2472a8f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: pullback, kernel-pair and scheme pullback isomorphisms give limit ingredients, but none asserts quasi-compactness for these topos objects from quasi-separatedness of P. Scheme quasi-compactness and topological quasi-separatedness concern different objects."
+  },
+  {
+   "tool": "grep",
+   "query": "kernelPair|kernel_pair|IsKernelPair|quasi.?separated",
+   "results": "{\"t\": \"2026-10-22T06:44:44Z\", \"tool\": \"grep\", \"query\": \"kernelPair|kernel_pair|IsKernelPair|quasi.?separated\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/EquivalenceRelation.lean\", \"Mathlib/CategoryTheory/EquivalenceRelation.lean\", \"Mathlib/CategoryTheory/EquivalenceRelation.lean\", \"Mathlib/CategoryTheory/Adhesive/Basic.lean\", \"Mathlib/CategoryTheory/Adhesive/Basic.lean\", \"Mathlib/CategoryTheory/Adhesive/Basic.lean\", \"Mathlib/CategoryTheory/Adhesive/Basic.lean\", \"Mathlib/CategoryTheory/Adhesive/Basic.lean\"], \"digest\": \"1045e1d7efa174f0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: pullback, kernel-pair and scheme pullback isomorphisms give limit ingredients, but none asserts quasi-compactness for these topos objects from quasi-separatedness of P. Scheme quasi-compactness and topological quasi-separatedness concern different objects."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restrict a quasi compact kernel pair along two maps to a quasi separated object to obtain a quasi compact fibre product of sheaves",
+   "results": "{\"t\": \"2026-10-22T06:45:23Z\", \"tool\": \"leansearch\", \"query\": \"Restrict a quasi compact kernel pair along two maps to a quasi separated object to obtain a quasi compact fibre product of sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatPullbackSchemeOfQuasiCompact_1\", \"AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact\", \"AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatPullbackSchemeOfQuasiCompact\", \"AlgebraicGeometry.QuasiCompact.of_comp\", \"IsQuasiSeparated\", \"AlgebraicGeometry.instQuasiSeparatedMorphismRestrict\", \"AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange\", \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\"], \"digest\": \"211851adb5df8ced\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: pullback, kernel-pair and scheme pullback isomorphisms give limit ingredients, but none asserts quasi-compactness for these topos objects from quasi-separatedness of P. Scheme quasi-compactness and topological quasi-separatedness concern different objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kernel pair fibre product K over A L is isomorphic to K over P times P over A P over P L for quasi compact objects in a topos",
+   "results": "{\"t\": \"2026-10-22T06:45:41Z\", \"tool\": \"leanfinder\", \"query\": \"Kernel pair fibre product K over A L is isomorphic to K over P times P over A P over P L for quasi compact objects in a topos\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso\", \"AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_hom_fst\", \"CategoryTheory.Over.prodComparisonIso_pullback_Spec_inv_left_fst_fst'\", \"AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_hom_snd\", \"CategoryTheory.PreGaloisCategory.fiberPullbackEquiv\", \"TopCat.Sheaf.pullbackIso\", \"AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_inv_snd\", \"AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_hom_fst_assoc\"], \"digest\": \"c72e2087be59562b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: pullback, kernel-pair and scheme pullback isomorphisms give limit ingredients, but none asserts quasi-compactness for these topos objects from quasi-separatedness of P. Scheme quasi-compactness and topological quasi-separatedness concern different objects."
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?separated|IsQuasiCompact|kernelPair",
+   "results": "{\"t\": \"2026-10-23T11:03:16Z\", \"tool\": \"grep\", \"query\": \"quasi.?separated|IsQuasiCompact|kernelPair\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/EquivalenceRelation.lean\", \"Mathlib/CategoryTheory/EquivalenceRelation.lean\", \"Mathlib/CategoryTheory/EquivalenceRelation.lean\", \"Mathlib/CategoryTheory/Adhesive/Basic.lean\", \"Mathlib/CategoryTheory/Adhesive/Basic.lean\", \"Mathlib/CategoryTheory/Adhesive/Basic.lean\", \"Mathlib/CategoryTheory/Adhesive/Basic.lean\", \"Mathlib/CategoryTheory/Adhesive/Basic.lean\"], \"digest\": \"9637f6d26d6b8ae7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme quasi-compactness and coherent site topologies concern different notions; general pullback isomorphisms supply categorical ingredients but not the asserted quasi-compactness of topos objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.pullbackRightPullbackFstIso",
+   "results": "{\"t\": \"2026-10-23T11:03:17Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits.pullbackRightPullbackFstIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.pullbackRightPullbackFstIso\", \"CategoryTheory.Limits.pullbackRightPullbackFstIso_hom_fst\", \"CategoryTheory.Limits.pullbackRightPullbackFstIso_inv_fst\", \"CategoryTheory.Limits.pullbackRightPullbackFstIso_hom_snd\", \"CategoryTheory.Limits.pullbackRightPullbackFstIso_inv_snd_snd\", \"CategoryTheory.Limits.pullbackRightPullbackFstIso_hom_fst_assoc\", \"CategoryTheory.Limits.pullbackRightPullbackFstIso_inv_fst_assoc\", \"CategoryTheory.Limits.pullbackRightPullbackFstIso_inv_snd_fst\"], \"digest\": \"01b1eee1a8a81a08\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme quasi-compactness and coherent site topologies concern different notions; general pullback isomorphisms supply categorical ingredients but not the asserted quasi-compactness of topos objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a Grothendieck topos pull back a quasi compact kernel pair twice over a quasi separated object to obtain a quasi compact fibre product",
+   "results": "{\"t\": \"2026-10-23T11:03:17Z\", \"tool\": \"leanfinder\", \"query\": \"In a Grothendieck topos pull back a quasi compact kernel pair twice over a quasi separated object to obtain a quasi compact fibre product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal\", \"AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact\", \"AlgebraicGeometry.instQuasiCompactιSchemeOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"AlgebraicGeometry.instQuasiCompactFstScheme\", \"AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatPullbackSchemeOfQuasiCompact_1\", \"AlgebraicGeometry.instQuasiCompactLiftSchemeIdOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated\"], \"digest\": \"6da021accc5be34d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme quasi-compactness and coherent site topologies concern different notions; general pullback isomorphisms supply categorical ingredients but not the asserted quasi-compactness of topos objects."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi compact objects pulled back over a quasi separated object in a category of sheaves are quasi compact",
+   "results": "{\"t\": \"2026-10-23T11:04:08Z\", \"tool\": \"leansearch\", \"query\": \"Quasi compact objects pulled back over a quasi separated object in a category of sheaves are quasi compact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatPullbackSchemeOfQuasiCompact\", \"AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatPullbackSchemeOfQuasiCompact_1\", \"AlgebraicGeometry.QuasiCompactCover.instPullback₁Scheme\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated\", \"AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact\", \"AlgebraicGeometry.quasiCompact_of_compactSpace\", \"AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal\"], \"digest\": \"a1e314c4542b410e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme quasi-compactness and coherent site topologies concern different notions; general pullback isomorphisms supply categorical ingredients but not the asserted quasi-compactness of topos objects."
+  },
+  {
+   "tool": "grep",
+   "query": "QuasiCompact|quasi.compact|QuasiSeparated|quasi.separated",
+   "results": "{\"t\": \"2026-10-23T11:05:24Z\", \"tool\": \"grep\", \"query\": \"QuasiCompact|quasi.compact|QuasiSeparated|quasi.separated\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme quasi-compactness and coherent site topologies concern different notions; general pullback isomorphisms supply categorical ingredients but not the asserted quasi-compactness of topos objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi separated object of a Grothendieck topos has quasi compact fibre products of quasi compact objects mapping into it",
+   "results": "{\"t\": \"2026-10-23T11:05:29Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi separated object of a Grothendieck topos has quasi compact fibre products of quasi compact objects mapping into it\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Precoherent\", \"CategoryTheory.coherentTopology\", \"CompHausLike.precoherent\", \"CategoryTheory.extensiveTopology\", \"AlgebraicGeometry.Scheme.grothendieckTopology\", \"LightProfinite.instWEqualsLocallyBijectiveCoherentTopology\", \"CategoryTheory.MorphismProperty.grothendieckTopology\", \"CategoryTheory.Presheaf.isSheaf_coherent_of_hasPullbacks_comp\"], \"digest\": \"34dcb15a004753dd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme quasi-compactness and coherent site topologies concern different notions; general pullback isomorphisms supply categorical ingredients but not the asserted quasi-compactness of topos objects."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-coherent-epimorphic-quotient",
+  "date": "2026-10-22",
+  "group": "Q12"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Constructibility input of lem-trf-local-term-locality, through the nearby-cycle constructibility descent chain: finite-cover-site coherence and coherent base-change in Orgogozo §8.1 and Lemma 9.1.5, as used in lem-trf-proper-base-change-coherent-conservative. The last step turning the transported finite epimorphic presentation into a coherent object. Extracted subargument: Agent auxiliary extracting returned proof step 6 of lem-trf-coherent-epimorphic-quotient: kernel-pair restriction as two fibre products over P and two applications of quasi-separatedness.",
+   "via": [
+    "lem-trf-coherent-epimorphic-quotient",
+    "lem-trf-finitary-site-coherent-generators",
+    "lem-trf-proper-base-change-coherent-conservative",
+    "lem-trf-psi-constructibility-descent",
+    "lem-trf-psi-good-oriented-cohomology-strata",
+    "lem-trf-nearby-cycle-sheaf-finiteness",
+    "lem-trf-nearby-cycle-finiteness-exchange",
+    "lem-trf-specialization-zero-section"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-kernel-pair-restriction-quasicompact",
+  "worker": "stage1",
+  "summary": "Retained the statement and all existing search records. Proved compactness by two direct applications of the defining quasi-separatedness condition, constructed the kernel-pair comparison and its inverse sectionwise using the existing 00W2 Mathlib leaf, and verified projections and naturality. No new nodes are needed.",
+  "blueprint": "The inherited constructibility descent subargument of lem-trf-local-term-locality is realized through the kernel-pair restriction used by lem-trf-coherent-epimorphic-quotient. The latest blueprint has no separate statement of this auxiliary; same_as remains empty."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NN-1172ffec0",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-1172ffec0 (reviewer sub-agent of L); spot-checked: I read the item in full: its statement, steps 1-4 and the citer lem-trf-coherent-epimorphic-quotient (its step 2 uses only the clause that K×_A L is quasi-compact). Compared with the earlier Q12 run snapshots, the statement, stmt_deps and blueprint are byte-identical, and all 5 earlier searches are kept. The statement is true. W=T×_P L consists of tuples (x,(kx,ly),y), so W≅K×_A L. I checked this in Sets with p not surjective, with K, L or P empty, and with p=id: no epi hypothesis on p and no quasi-compactness of P is needed. Step 1 applies the quasi-separated clause of def-trf-coherent-topos, which holds for any Grothendieck topos, to k and r_1, so T is quasi-compact. Step 2 uses lem-weil-pbc-site-sheaf-sets-limits-sectionwise, a Mathlib leaf for Stacks 00W2 lemma-limit-sheaf (sites.tex:1680, read). F and G are well defined, inverse to each other, and commute with restriction. Step 3: naturality checked tuple by tuple, including that the induced map on T' is well defined. Step 4: a second quasi-separatedness application plus the transfer of quasi-compactness along the isomorphism, written out, so elementary is correct. proof_deps equals the union of the uses, and there is no cycle. There are no new nodes. The DAG and blueprint search for kernel-pair and qc/qs topos nodes found no duplicate. The route is fine: the 00W2 node is a Mathlib leaf, so no tool_uses are needed. No SGA is cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.KernelPairRestrictionQuasicompact",
+  "declaration": "CategoryTheory.kernelPair_restriction_quasiCompact",
+  "file": "lean/Sheaf/CategoryTheory/Sites/KernelPairRestrictionQuasicompact.lean",
+  "statement": "theorem kernelPair_restriction_quasiCompact {E : Type u} [Category.{v} E] [HasCoproducts.{w} E] [HasFiniteLimits E] (hE : IsGrothendieckTopos.{w} E) {P A : E} (p : P ⟶ A) (hP : IsQuasiSeparatedObject.{w} P) (hR : IsQuasiCompactObject.{w} (pullback p p)) : ∃ e : ∀ (K L : E) (k : K ⟶ P) (l : L ⟶ P), IsQuasiCompactObject.{w} K → IsQuasiCompactObject.{w} L → (pullback (k ≫ p) (l ≫ p) ≅ pullback (pullback.snd k (pullback.fst p p) ≫ pullback.snd p p) l), ∀ (K L : E) (k : K ⟶ P) (l : L ⟶ P) (hK : IsQuasiCompactObject.{w} K) (hL : IsQuasiCompactObject.{w} L), (e K L k l hK hL).hom ≫ pullback.fst (pullback.snd k (pullback.fst p p) ≫ pullback.snd p p) l ≫ pullback.fst k (pullback.fst p p) = pullback.fst (k ≫ p) (l ≫ p) ∧ (e K L k l hK hL).hom ≫ pullback.snd (pullback.snd k (pullback.fst p p) ≫ pullback.snd p p) l = pullback.snd (k ≫ p) (l ≫ p) ∧ (e K L k l hK hL).hom ≫ pullback.fst (pullback.snd k (pullback.fst p p) ≫ pullback.snd p p) l ≫ pullback.snd k (pullback.fst p p) ≫ pullback.fst p p = pullback.fst (k ≫ p) (l ≫ p) ≫ k ∧ (e K L k l hK hL).hom ≫ pullback.fst (pullback.snd k (pullback.fst p p) ≫ pullback.snd p p) l ≫ pullback.snd k (pullback.fst p p) ≫ pullback.snd p p = pullback.snd (k ≫ p) (l ≫ p) ≫ l ∧ (e K L k l hK hL).inv ≫ pullback.fst (k ≫ p) (l ≫ p) = pullback.fst (pullback.snd k (pullback.fst p p) ≫ pullback.snd p p) l ≫ pullback.fst k (pullback.fst p p) ∧ (e K L k l hK hL).inv ≫ pullback.snd (k ≫ p) (l ≫ p) = pullback.snd (pullback.snd k (pullback.fst p p) ≫ pullback.snd p p) l ∧ IsQuasiCompactObject.{w} (pullback k (pullback.fst p p)) ∧ IsQuasiCompactObject.{w} (pullback (k ≫ p) (l ≫ p)) ∧ ∀ (K' L' : E) (k' : K' ⟶ P) (l' : L' ⟶ P) (hK' : IsQuasiCompactObject.{w} K') (hL' : IsQuasiCompactObject.{w} L') (a : K' ⟶ K) (b : L' ⟶ L) (ha : a ≫ k = k') (hb : b ≫ l = l'), pullback.map (k' ≫ p) (l' ≫ p) (k ≫ p) (l ≫ p) a b (𝟙 A) (by simp [← ha]) (by simp [← hb]) ≫ (e K L k l hK hL).hom = (e K' L' k' l' hK' hL').hom ≫ pullback.map (pullback.snd k' (pullback.fst p p) ≫ pullback.snd p p) l' (pullback.snd k (pullback.fst p p) ≫ pullback.snd p p) l (pullback.map k' (pullback.fst p p) k (pullback.fst p p) a (𝟙 (pullback p p)) (𝟙 P) (by simp [← ha]) (by simp)) b (𝟙 P) (by simp) (by simp [← hb])",
+  "branch": "newtargets-dag",
+  "by": "Q37",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-83c07e1e9",
+  "group": "Q37",
+  "result": "pass",
+  "note": "Read node, both stmt_deps (def-trf-coherent-topos: IsQuasiCompactObject/IsQuasiSeparatedObject in CoherentTopos.lean via recorded CoherentToposRepair; size convention), IsGrothendieckTopos, Stacks 00W2 (sites.tex:1680), module, report (Worker report + Second reading by Q37). Statement verbatim in file. All clauses match: iso K×_A L ≅ (K×_P R)×_P L pinned by 4 forward coordinate equations (unique by universal properties) + inverse forgets R; projections; naturality via pullback.map over 𝟙A / (a,𝟙R,𝟙P),b (side conditions checked); qc of T and K×_A L. No epi on p, no qc of P, no coherence; HasCoproducts.{w}/HasFiniteLimits are Prop classes implied by hE. Proof sorry only, no defs, docstrings with source/blueprint/4 steps, ≤100 cols, universes explicit. Edge cases (initial objects, p=id, non-epi p, non-qc P) covered. Minor notes: IsGrothendieckTopos owner def-weil-pbc-topos reached only via def-trf-coherent-topos; proof-only import of Sites.Limits. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261026T092440-L-3432570",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

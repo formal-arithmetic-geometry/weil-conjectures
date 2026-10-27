@@ -1,0 +1,137 @@
+{
+ "id": "lem-sfb-continuous-lattice-sum-internal-free",
+ "kind": "statement",
+ "title": "Internal freeness from a continuous finite lattice-sum presentation",
+ "statement": "Fix a prime $\\ell$, a finite normed extension $E/\\mathbf Q_\\ell$ whose topology is totally disconnected, and $A=\\mathcal O_E$ [def-weil-pbc-continuous-integral-coefficients]. Let $X$ be any scheme, $r\\geq0$, $J$ any nonempty finite set and $\\Lambda_j\\subset E^r$ submodules each admitting an $A$-basis whose vectors also form an $E$-basis of $E^r$. For an internal $A_X$-module $Q$, suppose supplied a continuous-function presentation of $Q$ with values in $\\sum_j\\Lambda_j$ [def-sfb-continuous-function-module-presentation], using the induced topology. Then $Q$ is a finite biproduct of regular internal $A_X$-modules [sk-def-sfb-module-objects].",
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients",
+  "def-sfb-continuous-function-module-presentation",
+  "sk-def-sfb-module-objects"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-trace.proof.md",
+  "place": "Local computation, second paragraph: the sum lattice has a natural free continuous-function sheaf"
+ },
+ "proof": [
+  {
+   "text": "Transport the coefficient subring using continuousIntegers_eq and take the restriction-compatible rank-r continuous-function coordinate equivalences supplied by the continuous lattice sum theorem. Compose their inverses with the given additive presentations and the universe-lift equivalence. The resulting sectionwise coordinate equivalences respect scalar multiplication and restriction.",
+   "uses": [
+    "lem-sfb-continuous-lattice-sum",
+    "def-weil-pbc-continuous-coefficient-module-encoding",
+    "def-sfb-continuous-function-module-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the coordinate maps as the projections of a product fan of unit module sheaves. Its lift sends a tuple of sections to the inverse coordinate map. Additivity and scalar compatibility make the lift linear, and naturality makes it a sheaf morphism. The coordinate equivalences prove the fan equations and uniqueness. This constructs an isomorphism from the encoded module to the finite product of units.",
+   "uses": [
+    "def-sfb-continuous-function-module-presentation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The coefficient encoding carries the regular internal module to the unit module sheaf and preserves finite biproducts. A finite biproduct is also the finite product in the additive category. Compose the two isomorphisms and use full faithfulness to obtain a finite free presentation of Q. Every step includes r=0 and the empty scheme.",
+   "uses": [
+    "def-weil-pbc-continuous-coefficient-module-encoding"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-continuous-lattice-sum",
+  "def-weil-pbc-continuous-coefficient-module-encoding",
+  "def-sfb-continuous-function-module-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B6",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-trace.proof.md",
+  "place": "Local computation, second paragraph: the sum lattice has a natural free continuous-function sheaf"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A module sheaf presented by continuous functions into a finite sum of full integral lattices is finite free",
+   "results": "8 hits, including SheafOfModules.IsFinitePresentation, SheafOfModules.IsFiniteType, SheafOfModules.Presentation.IsFinite and pullbackObjFreeIso.congr_simp. No internal module freeness bridge.",
+   "verdict": "no match",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural scalar-linear sectionwise continuous function presentation of a sheaf of modules gives a finite free module when the value module is a full lattice",
+   "results": "8 hits, including SheafOfModules.Presentation.IsFinite, SheafOfModules.IsFinitePresentation, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.IsFiniteType.localGeneratorsDataOfIsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType and SheafOfModules.GeneratingSections.IsFiniteType. No matching equivalence.",
+   "verdict": "no match",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "grep",
+   "query": "FiniteEtaleTraceFormula|ContinuousFunctionPresentation|trace.*[Ii]mage.*[Cc]hart|continuous.*[Ll]attice.*[Ff]ree",
+   "results": "0 hits",
+   "verdict": "no match",
+   "date": "2026-10-26"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousFiniteEtaleTraceLattice",
+  "date": "2026-10-26",
+  "group": "B6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-stratified-lattice",
+   "place": "Local computation, second paragraph: the sum lattice has a natural free continuous-function sheaf",
+   "via": [
+    "lem-sfb-continuous-finite-etale-trace-lattice"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-stratified-lattice",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousLatticeSumFree",
+  "file": "lean/Sheaf/Paper/ContinuousLatticeSumFree.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.continuousLatticeSum_isFree",
+  "statement": "theorem continuousLatticeSum_isFree\n    (l : ℕ) [Fact l.Prime] (E : Type) [NormedField E]\n    [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    [TotallyDisconnectedSpace E] (X : Scheme.{u}) (r : ℕ)\n    (J : Type w) [Finite J] [Nonempty J]\n    (L : J → Submodule (continuousIntegers l E) (Fin r → E))\n    (hL : ∀ j, ∃ b : Module.Basis (Fin r) (continuousIntegers l E) (L j),\n      ∃ c : Module.Basis (Fin r) E (Fin r → E), ∀ i, (b i : Fin r → E) = c i)\n    (Q : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (integralCoeff l E) X))\n    (p : ContinuousFunctionPresentation X (continuousIntegers l E) ↥(⨆ j, L j) Q) :\n    Mod.IsFree (condensedRingObj (integralCoeff l E) X) Q",
+  "branch": "sheaf-dag",
+  "by": "B6",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261026T022850-L-489971",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261026T022850-L-489971",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

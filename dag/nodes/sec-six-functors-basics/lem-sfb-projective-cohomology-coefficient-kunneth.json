@@ -1,0 +1,365 @@
+{
+ "id": "lem-sfb-projective-cohomology-coefficient-kunneth",
+ "kind": "statement",
+ "title": "Coherent external cup and arbitrary coefficients with projective cohomology",
+ "statement": "Let $R$ be a commutative ring, $T=\\operatorname{Spec}R$ a scheme [def-pc-scheme], and $X,Y$ algebraic spaces over $T$ [def-trf-algebraic-space]. Assume their structure maps are flat, quasi-compact and quasi-separated: flatness is tested on etale scheme charts using [def-weil-flat-morphism], quasi-compactness after every affine scheme test on the target, and quasi-separatedness means that the relative diagonal is quasi-compact. Put $P=X\\times_TY$, with projections $p_X,p_Y$ [lem-trf-space-fibre-products-etale-covers]. On each small etale site use structure-module sheaves [def-weil-sheaf-of-modules-category] and cohomology $H^i(Z,M)$ defined by right derived global sections of the underlying additive sheaf. Suppose $H_X^i=H^i(X,\\mathcal O_X)$ and $H_Y^i=H^i(Y,\\mathcal O_Y)$ are finite projective $R$-modules (direct summands of finite free modules) for all $i\\geq0$, and both families vanish for sufficiently large $i$. For any $R$-module $N$, without a flatness or finiteness assumption, write $N_Z=\\mathcal O_Z\\otimes_RN$ for $Z=X,Y,P$, using sheaf tensor [def-pur-sheaf-tensor-product]. For every $n\\geq0$, the canonical coefficient maps\n$$\\alpha_{Z,N}^n:H^n(Z,\\mathcal O_Z)\\otimes_RN\\longrightarrow H^n(Z,N_Z)$$\nare isomorphisms for $Z=X,Y,P$, and the external cup maps, built from the global cup product [def-sfb-ringed-site-module-cup-product], are isomorphisms\n$$\\kappa_N^n:\\left(\\bigoplus_{i+j=n}H_X^i\\otimes_R H_Y^j\\right)\\otimes_RN\\xrightarrow{\\sim}H^n(P,N_P),\\qquad(a\\otimes b)\\otimes n\\longmapsto(p_X^*a\\smile p_Y^*b)\\cdot n.$$\nHere $c\\cdot n$ means cup with the degree-zero section $1\\otimes n$ of $N_P$, so these formulas specify the actual maps. The coefficient maps are natural for homomorphisms of $N$ and for all $T$-morphisms between spaces satisfying the stated hypotheses; these pullbacks preserve identities, compositions, units and cup products. The assertions commute with localization $R\\to R_s$ and the corresponding base changes of the spaces and modules. Cup product is associative, unital, bilinear and graded commutative: $ba=(-1)^{ij}ab$ in degrees $i,j$. For $N=R$, $\\kappa_R^*$ is an isomorphism of graded algebras when the source has multiplication $(a\\otimes b)(c\\otimes d)=(-1)^{\\deg(b)\\deg(c)}ac\\otimes bd$. All these statements use ordinary quasi-coherent structure-module coefficients, not constant finite etale coefficients.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tags 08IN (lemma-cohomology-base-change, projection formula) and 08IR (lemma-compare-base-change, Tor-independent base change), for the algebraic-space coherent Kunneth construction; the finite-projective-cohomology specialization with arbitrary N and its naturality is agent-stated. Cup-product identities: sites-cohomology.tex Tags 0FPL (lemma-cup-product-associative), 0FPM (lemma-cup-product-commutative), 0H9A (lemma-base-change-cup-product). This is the cohomology-level external-cup theorem, not a newly chosen decomposition of a derived object."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-flat-morphism",
+  "def-sfb-ringed-site-module-cup-product",
+  "def-sfb-space-affine-global-sections",
+  "def-sfb-space-affine-hom-comparison",
+  "def-sfb-abelian-affine-reduced-coproduct",
+  "def-sfb-abelian-space-poincare-data",
+  "lem-sf-ringed-derived-native-tensor"
+ ],
+ "proof": [
+  {
+   "text": "Write $f:X\\to T$, $g:Y\\to T$, $h:P\\to T$. The projections are base changes of $g,f$, respectively. Quasi-compactness is preserved by base change by the cited space lemma. Composites of quasi-compact maps are quasi-compact: testing on a quasi-compact target gives successively two quasi-compact inverse images. The diagonal of $P/T$ is the composite of the two base changes imposing equality of the $X$ and $Y$ coordinates; thus it is quasi-compact by the same argument. The same diagonal argument proves preservation of quasi-separatedness by base change. Flatness of the projections follows from base-change stability; flatness of $h$ follows on etale charts from composition of flat ring maps. Consequently $X,Y,P$ and their localizations satisfy the flat qcqs hypotheses needed below.",
+   "uses": [
+    "lem-sfb-space-quasicompact-fppf-local",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-weil-pbc-flat-ring-map-comp"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 03HF (lemma-base-change-quasi-compact), 03HG (lemma-composition-quasi-compact); the diagonal factorization is written out here; flatness on charts"
+   }
+  },
+  {
+   "text": "Put $C_Z=R\\Gamma(Z,\\mathcal O_Z)$ in $D(R)$. The ringed-site module/abelian comparison identifies $H^i(C_Z)$ canonically with the cohomology in the statement, including its scalar action. The existing derived external-cup theorem gives the actual isomorphism $k:C_X\\otimes_R^{\\mathbf L}C_Y\\to C_P$, natural in $X,Y$, with its product, unit and base-change compatibilities. We use that theorem only in the derived form; neither ordinary tensor cohomology nor arbitrary-module coefficient comparison follows without the next steps.",
+   "uses": [
+    "lem-sfb-ringed-site-global-module-abelian-cohomology",
+    "lem-sfb-flat-space-derived-external-cup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tags 08IN and 08IR, as assembled in lem-sfb-flat-space-derived-external-cup; module/abelian comparison in sites-cohomology.tex"
+   }
+  },
+  {
+   "text": "Here is the elementary splitting needed for $C_X$ and $C_Y$, and later for $C_P$. For any representative complex $L$ of an object $C$ whose cohomology is projective and zero outside finitely many degrees, the quotient $Z^i(L)\\twoheadrightarrow H^i(L)$ has an $R$-linear section $s_i$ by the lifting definition of projectivity. Let $S_C^i=H^i(L)$ with zero differentials and define $S_C\\to L$ in degree $i$ by $s_i$ followed by $Z^i(L)\\hookrightarrow L^i$. It is a chain map and induces the identity on every cohomology module, hence becomes an isomorphism in the derived category. The complex $S_C$ is bounded; its terms are finite projective whenever the cohomology modules of $C$ are finite projective. Sections are used only to check invertibility, never to define a comparison map.",
+   "uses": [
+    "def-weil-pbc-projective-module",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05CF (lemma-characterize-projective), lifting along Z^i(L) -> H^i(L); explicit agent argument with the derived-category definition"
+   }
+  },
+  {
+   "text": "Each $S_C$ is K-flat: its terms are flat because projective modules are flat, and the bounded-above-flat criterion applies. A K-flat first factor computes derived tensor with an arbitrary complex. Thus the canonical cocycle tensor map $\\bigoplus_{i+j=n}H^i(C_X)\\otimes_RH^j(C_Y)\\to H^n(C_X\\otimes_R^{\\mathbf L}C_Y)$ is an isomorphism: on the models $S_{C_X},S_{C_Y}$ the total differential is zero and the degree-$n$ term is exactly that direct sum. It is the canonical map because the chosen sections induce the identity on cohomology and send $a\\otimes b$ to the tensor of cycle representatives. Composing with $H^n(k)$ gives precisely $\\kappa_R^n$ by the definition of the external cup. Each tensor of two finite projectives is a summand of a finite free module: tensor their finite-free retractions; finite direct sums preserve these retractions. Hence $H^n(C_P)$ is finite projective and vanishes above the sum of the two cohomological bounds.",
+   "uses": [
+    "lem-weil-pbc-projective-module-flat",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pc-source-kflat-module-tensor-model",
+    "def-sfb-ringed-site-module-cup-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "K-flat tensor computation; Tag 0B6C (remark-cup-product), canonical cocycle pairing; finite-free retract calculation written here"
+   }
+  },
+  {
+   "text": "Apply the flat affine-base projection formula to each $Z=X,Y,P$, with $E=\\mathcal O_Z[0]$ and the given arbitrary module $N$. The geometry was checked in Step 1. It gives the canonical natural isomorphism $\\pi_{Z,N}:C_Z\\otimes_R^{\\mathbf L}N[0]\\to R\\Gamma(Z,N_Z[0])$. Flatness over $R$ ensures that derived pullback of $N[0]$ is the ordinary quasi-coherent sheaf $N_Z[0]$; no flatness of $N$ is used. By Step 4 the cohomology of $C_P$, as well as that of $C_X,C_Y$, has the hypotheses of Step 3.",
+   "uses": [
+    "lem-sfb-space-affine-derived-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IN (lemma-cohomology-base-change), affine-base module specialization"
+   }
+  },
+  {
+   "text": "The canonical map $e_{Z,N}^n:H^n(C_Z)\\otimes_RN\\to H^n(C_Z\\otimes_R^{\\mathbf L}N[0])$ is an isomorphism: compute it on $S_{C_Z}\\otimes_RN[0]$, whose differential is zero and whose degree-$n$ term is $H^n(C_Z)\\otimes_RN$. The source is K-flat, so this computation allows arbitrary $N$. The composite $H^n(\\pi_{Z,N})e_{Z,N}^n$ is the specified $\\alpha_{Z,N}^n$. Indeed, let $u_n:R\\to N$ send $1$ to $n$. Naturality of the projection arrow in $u_n$ and its unit normalization show that on $a\\otimes n$ this composite is $H^n(\\mathcal O_Z\\to N_Z)(a)$, where $1\\mapsto1\\otimes n$. The tensor-of-counits definition of cup with that degree-zero section gives exactly the same map: its adjoint is the counit tensored with the pulled-back section, and the unit triangle cancels the extra unit/counit. Thus this is $a\\smile(1\\otimes n)$, and all three coefficient maps are isomorphisms.",
+   "uses": [
+    "lem-pc-source-kflat-module-tensor-model",
+    "lem-sfb-ringed-projection-tensor-composition",
+    "def-sfb-ringed-site-module-cup-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B6C (remark-cup-product) and the projection adjoint of Tag 0B56; explicit unit/counit and cocycle computation"
+   }
+  },
+  {
+   "text": "Now $\\kappa_N^n$ factors as $\\left(\\bigoplus_{i+j=n}H_X^i\\otimes_RH_Y^j\\right)\\otimes_RN\\xrightarrow{\\kappa_R^n\\otimes1}H^n(C_P)\\otimes_RN\\xrightarrow{\\alpha_{P,N}^n}H^n(P,N_P)$. Both arrows are isomorphisms: a functor sends an isomorphism and its inverse to inverse maps, so tensoring the first with $N$ needs no exactness assumption. On each generator $(a\\otimes b)\\otimes n$, the displayed factorization sends it to $(p_X^*a\\smile p_Y^*b)\\smile(1\\otimes n)$, exactly the formula in the statement.",
+   "uses": [
+    "def-sfb-ringed-site-module-cup-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Finite-projective specialization of Tags 08IN and 08IR; assembly from Steps 4 and 6"
+   }
+  },
+  {
+   "text": "For a module homomorphism $v:N\\to N'$ the sheaf maps satisfy $(1\\otimes v)u_n=u_{v(n)}$. For a $T$-morphism $t:Z'\\to Z$, the coefficient pullback square for $u_n$ commutes, since both maps send a local section $a$ to $t^\\sharp(a)\\otimes n$. Naturality of the adjunction unit makes the induced cohomology pullback commute with this square; the mate-pasting identity gives identity and composition for these pullbacks. The formula from Step 6, $\\alpha_{Z,N}^n(a\\otimes n)=H^n(u_n)(a)$, therefore proves the claimed naturality in both variables. Cup products and units for structure coefficients, and naturality of $\\kappa_R$, are supplied by the derived external-cup theorem. Applying the same coefficient square on $P$ and the factorization in Step 7 proves naturality of $\\kappa_N$. These arguments do not require the $T$-morphism $t$ to be flat.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "lem-sfb-flat-space-derived-external-cup",
+    "def-sfb-ringed-site-module-cup-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Adjunction-unit naturality and mate pasting; coefficient-map computation written here; structure-cup functoriality from the derived external-cup theorem"
+   }
+  },
+  {
+   "text": "For localization put $B=R_s$. The derived external-cup theorem supplies the canonical product-compatible isomorphisms $B\\otimes_R^{\\mathbf L}C_Z\\to C_{Z_B}$, commuting with pullbacks and $k$. Localization is flat, so tensoring a complex with $B$ preserves its cycles, boundaries and their quotient; hence $H^n(C_{Z_B})=B\\otimes_RH^n(C_Z)$. The localized modules are finite projective, since the original finite-free retractions remain retractions after tensoring. With $N_B=B\\otimes_RN$, the canonical coefficient identification is $(N_Z)|_{Z_B}=\\mathcal O_{Z_B}\\otimes_BN_B$; it sends $1\\otimes n$ to $1\\otimes(1\\otimes n)$. Consequently Step 6 identifies the localized $\\alpha$ with the $B$-coefficient $\\alpha$ on each pure tensor. The product compatibility of the derived base-change map does the same for $\\kappa_R$, and Step 7 then does it for $\\kappa_N$. This verifies the actual localization squares, including their maps, rather than just objectwise isomorphisms.",
+   "uses": [
+    "lem-sfb-flat-space-derived-external-cup",
+    "lem-weil-pbc-localization-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IR (lemma-compare-base-change), product compatibility; localization flatness and explicit coefficient generators"
+   }
+  },
+  {
+   "text": "Finally apply the associative, unital, symmetric derived algebra structure supplied by the external-cup theorem. On cocycles in degrees $i,j$ the derived symmetry is $x\\otimes y\\mapsto(-1)^{ij}y\\otimes x$, so the induced cup is graded commutative; bilinearity is part of the cup construction. In the product of $(p_X^*a\\smile p_Y^*b)$ and $(p_X^*c\\smile p_Y^*d)$, associativity and the single interchange of $p_Y^*b$ with $p_X^*c$ give $(-1)^{\\deg(b)\\deg(c)}p_X^*(ac)\\smile p_Y^*(bd)$. Units are preserved by the same theorem. Since every $\\kappa_R^n$ is already bijective, these identities prove that $\\kappa_R^*$ is the stated isomorphism of graded algebras.",
+   "uses": [
+    "lem-sfb-flat-space-derived-external-cup",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "def-sfb-ringed-site-module-cup-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0FPL and 0FPM; signed total-tensor symmetry and the displayed interchange calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-quasicompact-fppf-local",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-weil-pbc-flat-ring-map-comp",
+  "lem-sfb-ringed-site-global-module-abelian-cohomology",
+  "lem-sfb-flat-space-derived-external-cup",
+  "def-weil-pbc-projective-module",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-projective-module-flat",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-source-kflat-module-tensor-model",
+  "def-sfb-ringed-site-module-cup-product",
+  "lem-sfb-space-affine-derived-projection-formula",
+  "lem-sfb-ringed-projection-tensor-composition",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-localization-flat",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tags 08IN and 08IR via the existing derived external-cup and affine projection nodes; explicit finite-projective, coefficient, and sign arguments."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Kunneth formula for coherent cohomology of flat algebraic spaces over a ring when cohomology modules are finite projective, with arbitrary base module coefficients",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalClosed (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of sheaves on light profinite spaces (compact Hausdorff, totally disconnected, second-countable topological spaces) equipped with the coherent Grothendieck\"}\n  {\"name\": \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalCategory\\n      (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal category. This structure is defined by equipping the category of sheaves on light profinite spaces (compa\"}\n  {\"name\": \"Algebra.Extension.tensorH1Cotangent\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given commutative rings $ R, S, T $ with compatible algebra structures and an algebra homomorphism $ f: P \\\\to Q $, if $ f $ induces a formally étale ring homomorphism and the kernel map $ f.\\\\text{mapK\"}\n  {\"name\": \"Rep.isZero_Tor_succ_of_projective\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] (X Y : Rep k G) [CategoryTheory.Projective Y] (n : ℕ),\\n  CategoryTheory.Limits.IsZero (((Rep.Tor k G (n + 1)).obj X).obj Y)\", \"doc\": \"For any representations $X$ and $Y$ of a group $G$ over a commutative ring $k$, if $Y$ is a projective object in the category $\\\\text{Rep}(k, G)$, then the $(n+1)$-th Tor functor $\\\\text{Tor}_{n+1}^{kG}\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For a light condensed set $ P $, the free $ R $-module $ \\\\text{free}_R(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e : A \\\\to B\"}\n  {\"name\": \"Rep.torIso\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] →\\n    [inst_1 : Group G] →\\n      (A : Rep k G) →\\n        {B : Rep k G} →\\n          (P : CategoryTheory.ProjectiveResolution B) →\\n            (n : ℕ) →\\n              ((Rep.Tor k G n).obj A).obj B ≅\\n                HomologicalComplex.homology (HomologicalComplex.\", \"doc\": \"For a commutative ring $ k $ and group $ G $, given representations $ A $ and $ B $, and a projective resolution $ P $ of $ B $, the $ n $-th Tor functor $ \\\\text{Tor}_n(A, B) $ is isomorphic to the $ \"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal closed category. This structure arises from the adjunction between sheafification and inclusion functors,\"}\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S.toCondensed) ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light condensed $R$-module. $P$ is an internally projective object if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any ligh\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the inspected hits concern cotangent-complex cohomology, ordinary scheme pullback, abstract tensor products, or group cohomology, not the asserted coherent cohomology theorem on algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"tensor\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the inspected hits concern cotangent-complex cohomology, ordinary scheme pullback, abstract tensor products, or group cohomology, not the asserted coherent cohomology theorem on algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "[Kk]unneth|[Kk]ünneth|[Cc]ohomology.*[Pp]rojective|[Cc]ohomology.*[Ff]lat",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/Projective/Ext.lean\", \"line\": \"51\", \"text\": \"      CochainComplex.HomComplex.CohomologyClass.equivOfIsKProjective.{w}.symm\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Shapiro.lean\", \"line\": \"65\", \"text\": \"  (groupCohomologyIso A n ((resFunctor _).mapProjectiveResolution <| barResolution k G)).symm\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the inspected hits concern cotangent-complex cohomology, ordinary scheme pullback, abstract tensor products, or group cohomology, not the asserted coherent cohomology theorem on algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The external cup product is an isomorphism on coherent cohomology of a fibre product of flat algebraic spaces with projective cohomology over a commutative ring",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.MonoidalCategory.externalProductCompDiagIso\", \"module\": \"Mathlib.CategoryTheory.Monoidal.ExternalProduct.Basic\", \"type\": \": externalProductBifunctor J₁ J₁ C ⋙ (whiskeringLeft _ _ _ |>.obj <| Functor.diag J₁) ≅ tensor (J₁ ⥤ C)\", \"doc\": \"For categories $J_1$, $J_2$, and a monoidal category $\\\\mathcal{C}$, the composition of the external product bifunctor $J_1 \\\\times J_2 \\\\to \\\\mathcal{C}$ with the diagonal functor $J_1 \\\\to J_1 \\\\times J_1\"}\n  {\"name\": \"groupCohomology.cochainsIso₂\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.LowDegree\", \"type\": \": (inhomogeneousCochains A).X 2 ≅ ModuleCat.of k (G × G → A)\", \"doc\": \"The isomorphism identifies the degree 2 inhomogeneous cochains (as objects in the cochain complex for group cohomology) with the k-module of functions from $ G \\times G $ to $ A $, establishing an equi\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass\", \"module\": \"Mathlib.CategoryTheory.Abelian.Projective.Ext\", \"type\": \": Ext X Y n ≃ CohomologyClass R.cochainComplex ((singleFunctor C 0).obj Y) n\", \"doc\": \"For objects $ X $ and $ Y $ in an abelian category $ \\\\mathcal{C} $, the Ext group $ \\\\mathrm{Ext}^n(X, Y) $ is naturally equivalent to the $ n $-th cohomology class of the homomorphism complex between \"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk\", \"module\": \"Mathlib.CategoryTheory.Abelian.Projective.Ext\", \"type\": \"{n : ℕ} (f : R.complex.X n ⟶ Y) (m : ℕ) (hm : n + 1 = m) (hf : R.complex.d m n ≫ f = 0) :\\n  R.extEquivCohomologyClass (R.extMk f m hm hf) =\\n    (.mk\\n      (Cocycle.toSingleMk ((R.cochainComplexXIso (-n) n rfl).hom ≫ f) (by simp) (-m) (by lia)\\n        (by simpa [cochainComplex_d _ _ _ m n rfl rfl])))\", \"doc\": \"For objects $X$ and $Y$ in an abelian category $\\\\mathcal{C}$, the Ext group $\\\\mathrm{Ext}^n(X, Y)$ is naturally equivalent to the $n$-th cohomology class of the homomorphism complex between the cochai\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instFstScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"(f : X ⟶ Z) (g : Y ⟶ Z) [Flat g] : Flat (pullback.fst f g)\", \"doc\": \"If $ g : Y \\to Z $ is a flat morphism of schemes, then the first projection morphism from the fiber product $ X \\times_Z Y $ to $ X $ is also flat.\"}\n  {\"name\": \"CategoryTheory.MonoidalCategory.prodCompExternalProduct\", \"module\": \"Mathlib.CategoryTheory.Monoidal.ExternalProduct.Basic\", \"type\": \"(F₁ : I₁ ⥤ J₁) (G₁ : J₁ ⥤ C) (F₂ : I₂ ⥤ J₂) (G₂ : J₂ ⥤ C) : F₁.prod F₂ ⋙ G₁ ⊠ G₂ ≅ (F₁ ⋙ G₁) ⊠ (F₂ ⋙ G₂)\", \"doc\": \"For categories $J₁, J₂, C$ and functors $F₁ : I₁ → J₁$, $G₁ : J₁ → C$, $F₂ : I₂ → J₂$, $G₂ : J₂ → C$, the composition of the external product $G₁ × G₂ : J₁ × J₂ → C$ with the product functor $F₁ × F₂ \"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.extAddEquivCohomologyClass\", \"module\": \"Mathlib.CategoryTheory.Abelian.Projective.Ext\", \"type\": \": Ext X Y n ≃+ CohomologyClass R.cochainComplex ((singleFunctor C 0).obj Y) n\", \"doc\": \"For objects $X$ and $Y$ in an abelian category $\\\\mathcal{C}$, the inverse of the natural equivalence between the Ext group $\\\\mathrm{Ext}^n(X, Y)$ and the $n$-th cohomology class of the homomorphism co\"}\n  {\"name\": \"Algebra.Extension.tensorH1Cotangent\", \"module\": \"Mathlib.RingTheory.Etale.Kaehler\", \"type\": \"[alg : Algebra P.Ring Q.Ring] (halg : algebraMap P.Ring Q.Ring = f.toRingHom) [Module.Flat S T]\\n  (H₁ : f.toRingHom.FormallyEtale) (H₂ : Function.Bijective ((f.mapKer halg).liftBaseChange Q.Ring)) :\\n  T ⊗[S] P.H1Cotangent ≃ₗ[T] Q.H1Cotangent\", \"doc\": \"Given commutative rings $ R, S, T $ with compatible algebra structures and an algebra homomorphism $ f: P \\\\to Q $, if $ f $ induces a formally étale ring homomorphism and the kernel map $ f.\\\\text{mapK\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the inspected hits concern cotangent-complex cohomology, ordinary scheme pullback, abstract tensor products, or group cohomology, not the asserted coherent cohomology theorem on algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For proper flat morphisms over an affine ring with locally free structure sheaf cohomology, tensoring cohomology by any module commutes with cohomology and the external cup product",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Extension.tensorH1Cotangent\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given commutative rings $ R, S, T $ with compatible algebra structures and an algebra homomorphism $ f: P \\\\to Q $, if $ f $ induces a formally étale ring homomorphism and the kernel map $ f.\\\\text{mapK\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {x y z : AlgebraicGeometry.Scheme.Pullback.Triplet f g}\\n  (e : x = y) (e' : y = z) {Z : CommRingCat} (h : z.tensor ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr e).hom\\n      (CategoryTheo\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $f:X\\\\to S$ and $g:Y\\\\to S$, and three equal pullback triplets $x=y=z$, the composition of the tensor congruence homomorphisms $T_1.tensor \\\\to T_2.tensor$ and $T_2.t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (t : ↥(CategoryTheory.Limits.pullback f g))\\n  {Z : AlgebraicGeometry.Scheme} (h : CategoryTheory.Limits.pullback f g ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Pullback.ofPointTensor t)\", \"doc\": \"For morphisms $f : X \\\\to S$ and $g : Y \\\\to S$ of schemes, and a point $t$ in the fiber product $X \\\\times_S Y$, the composition of the canonical morphism from the spectrum of the tensor product of resi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {T T' : AlgebraicGeometry.Scheme.Pullback.Triplet f g}\\n  (h : T = T') {Z : AlgebraicGeometry.Scheme} (h_1 : CategoryTheory.Limits.pullback f g ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Spec.map (AlgebraicGeometry.\", \"doc\": \"For schemes $X,Y,S$ with morphisms $f:X\\\\to S$ and $g:Y\\\\to S$, and equal pullback triplets $T=T'$, the composition of the morphism induced by the tensor congruence isomorphism $\\\\operatorname{Spec}(T.te\"}\n  {\"name\": \"Algebra.tensorH1CotangentOfIsLocalization_toLinearMap\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] (M : Submonoid S)\\n  [inst_7 : IsLocalization M T],\\n  ↑(Algebra.tensorH1CotangentOfIsLoc\", \"doc\": \"For a submonoid $M$ of a commutative ring $S$ and its localization $T$ at $M$, the linear map associated to the tensor product of the first cotangent cohomology modules $H^1_{\\text{Cotangent}}(R \\to T)$\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For a light condensed set $ P $, the free $ R $-module $ \\\\text{free}_R(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e : A \\\\to B\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal closed category. This structure arises from the adjunction between sheafification and inclusion functors,\"}\n  {\"name\": \"Rep.torIso\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] →\\n    [inst_1 : Group G] →\\n      (A : Rep k G) →\\n        {B : Rep k G} →\\n          (P : CategoryTheory.ProjectiveResolution B) →\\n            (n : ℕ) →\\n              ((Rep.Tor k G n).obj A).obj B ≅\\n                HomologicalComplex.homology (HomologicalComplex.\", \"doc\": \"For a commutative ring $ k $ and group $ G $, given representations $ A $ and $ B $, and a projective resolution $ P $ of $ B $, the $ n $-th Tor functor $ \\\\text{Tor}_n(A, B) $ is isomorphic to the $ \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the inspected hits concern cotangent-complex cohomology, ordinary scheme pullback, abstract tensor products, or group cohomology, not the asserted coherent cohomology theorem on algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-h2-reduced-coproduct-injective",
+  "date": "2026-10-23",
+  "group": "Q06"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Infinitesimal lifting of algebraically trivial rigidified line modules. Supporting input: Injectivity of the reduced coproduct in degree-two coherent cohomology. Supporting input: coherent external cup and coefficient comparison over a ring with projective cohomology; used to identify the mixed degree-(1,1) component.",
+   "via": [
+    "lem-sfb-abelian-h2-reduced-coproduct-injective",
+    "lem-sfb-abelian-picard-infinitesimal-lift",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-projective-cohomology-coefficient-kunneth",
+  "worker": "stage1",
+  "summary": "N6 direct delivery: reuse the existing derived external-cup theorem and flat affine-base projection formula. Explicitly lift projective cohomology into cycles, compute canonical tensor edge maps on bounded zero-differential K-flat models, identify the actual coefficient maps by the projection unit, and verify naturality, localization and the Koszul multiplication sign. No new nodes; statement unchanged.",
+  "blueprint": "Current latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability, direct-images proof (3), supporting coherent-cup input in the inherited alteration/Picard chain. No blueprint node states this coefficient specialization; inherited from.node is null, as ancestor reports.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic algebra/derived-category tool used with its stated hypotheses in the coefficient argument; it does not replace the unit alteration route."
+   },
+   {
+    "node": "lem-pc-source-kflat-module-tensor-model",
+    "why": "Generic algebra/derived-category tool used with its stated hypotheses in the coefficient argument; it does not replace the unit alteration route."
+   },
+   {
+    "node": "lem-sfb-ringed-projection-tensor-composition",
+    "why": "Generic algebra/derived-category tool used with its stated hypotheses in the coefficient argument; it does not replace the unit alteration route."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic algebra/derived-category tool used with its stated hypotheses in the coefficient argument; it does not replace the unit alteration route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-source-kflat-module-tensor-model",
+  "lem-sfb-ringed-projection-tensor-composition",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N6-e9b956c1e",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-e9b956c1e (reviewer sub-agent of L); spot-checked: Read the item and all ten steps in full, with every cited statement and Stacks 08IN, 08IR, 03HF/03HG, 05CF, 0B6C, 0FPL/0FPM and 0H9A. This is a one-level split with no new nodes; the statement and stmt_deps are unchanged, there is no cycle and no SGA. Step 1 (base change, composition, diagonal Δ_X×Δ_Y, flat charts) is correct. Step 2 applies the existing derived external cup lem-sfb-flat-space-derived-external-cup, and Step 1 supplies its flat qcqs hypotheses. Step 3 splits cycles onto projective cohomology to get a quasi-isomorphism from a bounded zero-differential complex. Step 4 uses that this complex is K-flat (projective implies flat, then bounded-above flat implies K-flat), so its tensor has zero differential, the cup definition's K-flat cocycle pairing gives κ_R, and the product cohomology is finite projective. Steps 5–6 apply the affine projection formula with E=O_Z and arbitrary N; naturality in u_n: R→N, with π_R the unitor, gives α(a⊗n)=H^n(1↦1⊗n)(a). Steps 7–10 check the factorization of κ_N, naturality (unit plus mate pasting, no flatness of t needed), localization along the T-morphism Z_B→Z, and the Koszul sign (-1)^{|b||c|}. Edge cases (N=0, R/I, the zero ring, s=0 and 1, characteristic 2) were checked. The DAG search found no duplicate; the Picard Künneth nodes are over fields and for schemes. All four declared tool_uses (generic K-flat, projection, symmetric monoidal) are accepted. Batch 5: quasicompact-fppf-local, flat-proper-fp-locality and the affine projection formula are general permanence/coherent tools that reach sec-trace-formula only through the definition def-trf-algebraic-space, so they lie outside both assumptions. Minor: Step 6's unit normalization of π is the one-line adjunct computation, not a clause of lem-sfb-ringed-projection-tensor-composition; this is not a fault. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveCohomologyCoefficientKunneth",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.projective_cohomology_coefficient_kunneth",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.corner",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.H",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.moduleH",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.O",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.mapH",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.scalarRestriction",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.scalarRestriction_limits",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.scalarRestriction_colimits",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.SectionsComparisonNormalized",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.sectionsComparison_existsUnique",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.sectionsComparison",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.derivedSectionsComparison",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.cohomologyComparison",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.pullbackSingleCounit",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.derivedPullback",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.pullbackH",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.tensorModel",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.cup",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.sectionClass",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.castH",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.coefficients",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.alpha_existsUnique",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.alpha",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.structurePullback",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.coefficientPullback",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.multiply",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.productMap",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.productMap_snd",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.summands",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.includeTensor",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.external",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.kappa_existsUnique",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.kappa",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.kappaStructure_existsUnique",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.kappaStructure",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.kappa_structure_coefficients",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.projective_cohomology_coefficient_kunneth",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.external_signed_product",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.external_unit",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.kappa_natural",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.alpha_cup",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.alpha_natural",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.pullback_smul",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.alpha_geometric",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.pullback_id",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.pullback_comp",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.pullback_cup",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.cup_laws",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.baseModule",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.baseCoefficient_existsUnique",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.baseCoefficient",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.basePullback",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.localization_alpha",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.localization_cohomology",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.base_cup",
+   "AlgebraicGeometry.AlgebraicSpace.ProjectiveKunneth.localization_kappa"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveCohomologyCoefficientKunneth.lean",
+  "statement": "theorem projective_cohomology_coefficient_kunneth (hf : MapIsFlat f) (hg : MapIsFlat g) (hfc : MapIsQuasiCompact f.hom.hom) (hgc : MapIsQuasiCompact g.hom.hom) (hfs : MapIsQuasiCompact (pullback.diagonal f.hom.hom)) (hgs : MapIsQuasiCompact (pullback.diagonal g.hom.hom)) (hX : ∀ i : ℕ, Module.Finite R (H R T e X f (O X) i) ∧ Module.Projective R (H R T e X f (O X) i)) (hY : ∀ i : ℕ, Module.Finite R (H R T e Y g (O Y) i) ∧ Module.Projective R (H R T e Y g (O Y) i)) (bX : ∃ b : ℕ, ∀ i : ℕ, b < i → Subsingleton (H R T e X f (O X) i)) (bY : ∃ b : ℕ, ∀ i : ℕ, b < i → Subsingleton (H R T e Y g (O Y) i)) : ∀ (N : ModuleCat.{u} R) (n : ℕ), Function.Bijective (alpha R T e X f N n) ∧ Function.Bijective (alpha R T e Y g N n) ∧ Function.Bijective (alpha R T e _ (productMap T f g) N n) ∧ Function.Bijective (kappa R T e f g N n) ∧ Function.Bijective (kappaStructure R T e f g n)",
+  "branch": "newtargets-dag",
+  "by": "Q57",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The main theorem gives the coefficient and external-cup bijections. The other recorded declarations give the canonical constructions, coefficient and geometric naturality, identity/composition, cup laws, localization squares and cohomology isomorphism, and the signed graded-algebra product. All maps retain their pure-section or derived-adjunction normalization."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-092bc5f5f",
+  "group": "Q57",
+  "result": "fix",
+  "note": "Lean and records correct clause by clause: flat/qc/qs via MapIsFlat, MapIsQuasiCompact and the relative diagonal; finite projective cohomology with bounded vanishing; arbitrary N via affineScalarPullback. alpha, kappa and kappaStructure are ∃!-pinned on generators (adjunction-unit section 1⊗v; global cup of pulled classes; alpha_cup = cup with 1⊗v). Main theorem gives bijectivity of α_X, α_Y, α_P, κ_N and κ_R. Naturality in N and along arbitrary T-morphisms (pullbackH built from recorded derived unit/counit; the existing pullbackFamily is flat-only), id/comp/cup/unit, cup_laws with (−1)^{ij}, graded-algebra sign (−1)^{jk} and unit, localization squares and B⊗H≅H_B. Edge cases (n=0, N=0, R/I, zero ring, empty spaces, s=0/1, char 2) fine. lean.statement verbatim; all 56 decls present; only lean/stmt_deps differ from side-live; no dependency changes. Theorem stmt_dep lem-sf-ringed-derived-native-tensor is genuine: comparison = inverse of the lax tensorator via the proved isIso_mu, and the node was already in the closure via the cup-product def node → PASS on that point. No H4 duplicate. Sole fault H11 (self-audit second reading) → fixes/lem-sfb-projective-cohomology-coefficient-kunneth.report.md: worker report verbatim plus an independent clause-by-clause reading. No Lean changed, nothing compiled."
+ }
+}

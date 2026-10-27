@@ -1,0 +1,162 @@
+{
+ "id": "lem-weil-pbc-integral-continuous-encoding-constructible",
+ "kind": "statement",
+ "title": "Integral constructibility under continuous section encoding",
+ "statement": "Let l be prime, E a finite extension of Q_l in the scheme universe, K a small finite normed extension of Q_l, and X a noetherian scheme. Use the continuous coefficient rings and explicit internal/sectionwise module encodings of [def-weil-pbc-continuous-coefficient-module-encoding]. Given any isomorphism c from the continuous O_E coefficient sheaf to the continuous O_K coefficient sheaf on X, and an internal module M over the pulled-back continuous O_K condensed ring, assume M is constructible in the stratified local-finite-presentation sense. Then its continuous integer section encoding, followed by scalar transport along c, is constructible in the finite scalar-model sense of [def-weil-pbc-continuous-constructible-module]. No rational scalar extension or lattice-existence hypothesis or conclusion occurs.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.10 and Proposition 6.8.11(3); normalized coefficient and section-action comparisons."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-continuous-coefficient-module-encoding",
+  "def-weil-pbc-continuous-constructible-module",
+  "lem-sfb-integral-lfp-constant-model-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Postcompose continuous functions with the valuation-ring equivalence between WithAbs E and E. This gives an isomorphism of the condensed integral point rings. The integral local-finite-presentation/constant-model comparison and invariance under coefficient isomorphism identify constructible internal modules over the derived integer coefficient ring with modules admitting stratified finite scalar models.",
+   "uses": [
+    "lem-sfb-integral-lfp-constant-model-comparison",
+    "lem-sfb-integral-constant-model-heart-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.8.10 and Proposition 6.8.11(3); normalized coefficient and section-action comparisons."
+   }
+  },
+  {
+   "text": "Choose the uniquely normalized completed section-ring comparison and the normalized continuous integral coefficient comparison. Compose these with the supplied coefficient-sheaf isomorphism and the continuous chart comparison to obtain an isomorphism from the derived integer coefficient ring to the internal coefficient ring of M. Comap M along this isomorphism; it remains constructible. Apply the previous step and the existing integral section local-model theorem.",
+   "uses": [
+    "det-prop-integral-criterion-reductions",
+    "lem-sfb-integral-section-local-models",
+    "lem-weil-pbc-continuous-integral-coefficient-comparison",
+    "def-weil-pbc-continuous-coefficient-module-encoding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.8.10 and Proposition 6.8.11(3); normalized coefficient and section-action comparisons."
+   }
+  },
+  {
+   "text": "The section-action module obtained in step 2 is isomorphic to the continuous encoding in the statement transported to completed coefficients. The isomorphism is the identity on each section; scalar compatibility follows from the normalized section-ring comparison, inverse equations for the coefficient isomorphisms, and the section/comap comparison. Transport the stratified finite models along this isomorphism. The essentially-small-site section-action instances provide the monoidal sheaf structure, with the site size fixed explicitly.",
+   "uses": [
+    "det-prop-integral-criterion-reductions",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-weil-pbc-continuous-coefficient-module-encoding",
+    "lem-sfb-section-action-internal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.8.10 and Proposition 6.8.11(3); normalized coefficient and section-action comparisons."
+   }
+  },
+  {
+   "text": "On each stratum use the normalized integral slice-model comparison to turn completed constant models into continuous scalar-extension models. Replace covering sieves by their generating covering families and keep the same finite stratification. This is exactly continuous constructibility. Empty covers and zero presentations are preserved.",
+   "uses": [
+    "lem-weil-pbc-continuous-integral-slice-model-comparison",
+    "def-weil-pbc-continuous-constructible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.8.10 and Proposition 6.8.11(3); normalized coefficient and section-action comparisons."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-integral-lfp-constant-model-comparison",
+  "lem-sfb-integral-constant-model-heart-closure",
+  "det-prop-integral-criterion-reductions",
+  "lem-sfb-integral-section-local-models",
+  "lem-weil-pbc-continuous-integral-coefficient-comparison",
+  "def-weil-pbc-continuous-coefficient-module-encoding",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-weil-pbc-continuous-integral-slice-model-comparison",
+  "def-weil-pbc-continuous-constructible-module",
+  "lem-sfb-section-action-internal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.10 and Proposition 6.8.11(3); normalized coefficient and section-action comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Constructibility is preserved by the equivalence between internal modules of abelian sheaves and sheaves of modules over their section ring",
+   "results": "8 hits, including SheafOfModules.isFinitePresentation, SheafOfModules.isQuasicoherent and CondensedMod.ofSheafCompHaus; none gives this continuous integral finite-scalar-model comparison.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"restrictScalars\"",
+   "results": "12 hits concerning restriction of scalars for presheaves of modules; useful infrastructure but no constructibility comparison.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*section|section.*constructible",
+   "results": "0 Mathlib hits. Existing project normalized integral section and slice comparisons are used instead.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LisseEConstructibleIntegralLattice",
+  "group": "Y8",
+  "date": "2026-10-25"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof step 4: carry constructibility of the glued internal integral model through its explicit continuous section encoding.",
+   "via": [
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralContinuousEncodingConstructible",
+  "file": "lean/Sheaf/Paper/IntegralContinuousEncodingConstructible.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.integralContinuousEncoding_constructible",
+  "statement": "theorem integralContinuousEncoding_constructible\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (K : Type) [NormedField K] [NormedAlgebra ℚ_[l] K]\n    [FiniteDimensional ℚ_[l] K] (X : Scheme.{u}) [IsNoetherian X]\n    (c : latticeCoefficientSheaf X (latticeCoefficientIntegers l E) ≅\n      lisseIntegerSheaf l K X)\n    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (CondensedRing.integralCoeff l K) X))\n    (hM : IsConstructibleModuleObject\n      (condensedRingObj (CondensedRing.integralCoeff l K) X) M) :\n    IsContinuousConstructible X (latticeCoefficientIntegers l E)\n      ((CondensedRing.ringModuleEquivalenceOfIso X\n        ((sheafCompose (Scheme.ProEt.topology X)\n          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).mapIso c)).functor.obj\n        ((CondensedRing.continuousIntegerModuleEquivalence l K X).functor.obj M))",
+  "branch": "sheaf-dag",
+  "by": "Y8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y8",
+  "result": "pass",
+  "landing": "20261025T101957-L-3763524",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y8",
+  "result": "pass",
+  "landing": "20261025T101957-L-3763524",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

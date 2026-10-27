@@ -1,0 +1,155 @@
+{
+ "id": "lem-trf-connected-open-etale-refinement",
+ "kind": "statement",
+ "title": "Affine elementary étale refinement of a compact open with connected nonempty fibres",
+ "statement": "Let $h:Y\\to S$ and $g:W\\to S_0$ be morphisms of schemes [def-pc-scheme], with $g$ flat [def-weil-flat-morphism] and locally of finite presentation [def-sbc-locally-finite-presentation]. Let $j:W\\to Y$ and $b:S_0\\to S$ be open immersions [def-weil-open-immersion] satisfying $h\\circ j=b\\circ g$. Fix $s_0\\in S_0$ and an open $T\\subset Y_{b(s_0)}$ [def-pc-scheme-fibre] whose embedded equality is $\\iota_{b(s_0)}^{-1}(j(W))=T$, where $\\iota_{b(s_0)}:Y_{b(s_0)}\\to Y$ is the fibre inclusion. Let $U$ be affine [def-weil-affine-spectrum], $a:U\\to S_0$ etale [def-weil-etale-morphism], and $u_0\\in U$ satisfy $a(u_0)=s_0$ with the induced residue-field map an isomorphism [def-weil-residue-field]. Write $f:W_U=W\\times_{S_0}U\\to U$ [def-pc-base-change]. Suppose $i:X^0\\to W_U$ is an open immersion with $X^0$ quasi-compact [def-weil-pbc-quasi-compact-scheme], inducing an isomorphism $X^0_{u_0}\\to(W_U)_{u_0}$; suppose $(W_U)_{u_0}$ is nonempty, and each nonempty fibre of $f\\circ i$ is geometrically connected [def-pc-geometrically-irreducible]. Then there exist an affine scheme $S_1$, an etale $A:S_1\\to S$, a point $s_1$ mapping to $b(s_0)$ with isomorphic residue field, and a quasi-compact open $V\\subset Y\\times_S S_1$ such that $V\\to S_1$ is geometrically connected and $V_{s_1}$ equals the inverse image of $T$ under the canonical residue-field base-change map to $Y_{b(s_0)}$, as embedded open subschemes.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 055W, final paragraph of the proof of lemma-fibre-geometrically-connected-reduced: open image and final affine shrinking"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-open-immersion",
+  "def-weil-affine-spectrum",
+  "def-weil-etale-morphism",
+  "def-weil-residue-field",
+  "def-pc-scheme-fibre",
+  "def-pc-base-change",
+  "def-pc-geometrically-irreducible",
+  "def-weil-pbc-quasi-compact-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Let f:W_U→U be the projection and put r=i≫f. Both r and f are flat and locally of finite presentation by base change and open restriction. Hence r is open. The isomorphism on its designated fibre and nonemptiness of f_u₀ imply u₀ lies in its image. Choose an affine open B containing u₀ inside this image.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The comparison k₀:W_U→Y_U is an open immersion with image pr_Y⁻¹(j(W)). To verify this in Lean, use the cartesian square with id_W and the monomorphism b, paste it with W_U, and cancel the ambient pullback square. The generic range formula for a scheme pullback gives the image equality. At a point of Y_U above u₀, membership in the image of i≫k₀ is equivalent to membership of its Y-coordinate in j(W): the designated fibre isomorphism makes i surjective over u₀. These assertions are proved by the pullback universal property, fibre-map projection identities and the topological range formula, not by assuming underlying scheme pullbacks are pullbacks of sets.",
+   "uses": [
+    "def-pc-base-change",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Base change i≫k₀ to B, and use the canonical iterated pullback isomorphism to obtain an open immersion k:X0_B→Y_B. Its image is V. The map r is quasi-compact because X0 is compact and the affine U is quasi-separated. Its base change to affine B has compact total space, so the continuous image V is compact. Each fibre of r_B is nonempty because B lies in the image of r. The assumed geometric connectedness of nonempty fibres of r pulls back along the residue-field map to give geometrically connected fibres of r_B. Hence V→B is geometrically connected.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-pc-geometrically-irreducible",
+    "def-pc-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The composite B→U→S₀→S is étale. Open immersions induce residue-field isomorphisms, so its residue-field map at (u₀,huB) is an isomorphism. For a point z in the final designated fibre, the projection of z to Y lies in j(W) precisely when z lies in V, by the image formula and the entire-fibre property proved above. The naturality equation for the canonical map of fibres says its composite with the original fibre inclusion equals the final fibre inclusion followed by the projection to Y. Pulling back the assumed equality (h.fiberι (b s₀))⁻¹(j.opensRange)=T along this equation gives exactly the displayed equality of opens, including the equality transport hs.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-weil-open-immersion",
+    "def-weil-residue-field",
+    "def-pc-base-change"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-morphism-base-change",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-affine-opens-basis",
+  "def-pc-base-change",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-pc-geometrically-irreducible",
+  "def-weil-etale-morphism",
+  "def-weil-residue-field"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 055W, final paragraph of the proof of lemma-fibre-geometrically-connected-reduced: open image and final affine shrinking"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An open quasi compact family with connected nonempty fibres can be made surjective by restriction to an affine open neighbourhood in its open image",
+   "results": "8 hits, including Scheme.Hom.isCompact_preimage, QuasiCompactCover.exists_isAffineOpen_of_isCompact and affine-cover results. No theorem assembles the elementary etale refinement with embedded special fibre equality.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; the proof uses the elementary Mathlib results directly."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPullback\", \"range\"",
+   "results": "Types.range_fst_of_isPullback and Types.range_snd_of_isPullback; these concern categorical pullbacks of types, not arbitrary scheme pullbacks.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; the scheme range identity follows from Scheme.Pullback.exists_preimage_pullback."
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*[Aa]ffine.*[Cc]onnected|range_fst_of_isPullback|refinement_of_connected_open",
+   "results": "3 Mathlib hits in CategoryTheory/Limits/Types/Pullbacks.lean. Further direct reading found Scheme.Pullback.range_map and Scheme.pullback_map_isOpenImmersion, but no full refinement statement.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; relevant pullback and affine-basis API used in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.GeometricallyConnectedFibreNeighbourhood",
+  "date": "2026-10-26",
+  "group": "R9"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Final open-image shrinking and embedded fibre comparison in Tag 055W, used by lem-trf-geometrically-connected-fibre-open-spreading",
+   "via": [
+    "lem-trf-geometrically-connected-fibre-open-spreading"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.ConnectedOpenEtaleRefinement",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/ConnectedOpenEtaleRefinement.lean",
+  "declaration": "AlgebraicGeometry.exists_affine_etale_refinement_of_connected_open",
+  "statement": "theorem exists_affine_etale_refinement_of_connected_open\n    {Y S W S₀ U X0 : Scheme.{u}} (h : Y ⟶ S) (g : W ⟶ S₀)\n    (j : W ⟶ Y) (b : S₀ ⟶ S) [IsOpenImmersion j] [IsOpenImmersion b]\n    (hcomm : j ≫ h = g ≫ b) [Flat g] [LocallyOfFinitePresentation g]\n    (s₀ : S₀) (T : (h.fiber (b s₀)).Opens)\n    (hT : (h.fiberι (b s₀)) ⁻¹ᵁ j.opensRange = T)\n    [IsAffine U] (a : U ⟶ S₀) [Etale a] (u₀ : U) (hu : a u₀ = s₀)\n    [IsIso (a.residueFieldMap u₀)]\n    (i : X0 ⟶ pullback g a) [IsOpenImmersion i] [CompactSpace X0]\n    (hfull : IsIso (Scheme.Hom.fiberMap (a := i ≫ pullback.snd g a)\n      (b := pullback.snd g a) i rfl (U.fromSpecResidueField u₀)))\n    (hne : Nonempty ((pullback.snd g a).fiber u₀))\n    (hconn : ∀ t : U, Set.Nonempty (Set.range ((i ≫ pullback.snd g a).fiberι t)) →\n      GeometricallyConnected ((i ≫ pullback.snd g a).fiberToSpecResidueField t)) :\n    ∃ (S₁ : Scheme.{u}) (A : S₁ ⟶ S) (s₁ : S₁) (hs : A s₁ = b s₀),\n      IsAffine S₁ ∧ Etale A ∧ IsIso (A.residueFieldMap s₁) ∧\n      ∃ V : (pullback h A).Opens,\n        IsCompact (V : Set ↥(pullback h A)) ∧\n        GeometricallyConnected (V.ι ≫ pullback.snd h A) ∧\n        (pullback.snd h A).fiberι s₁ ⁻¹ᵁ V =\n          (pullback.map (pullback.snd h A) (S₁.fromSpecResidueField s₁)\n              h (S.fromSpecResidueField (A s₁))\n              (pullback.fst h A) (Spec.map (A.residueFieldMap s₁)) A\n              (pullback.condition (f := h) (g := A)).symm\n              (A.SpecMap_residueFieldMap_fromSpecResidueField s₁).symm ≫\n            eqToHom (congrArg h.fiber hs)) ⁻¹ᵁ T",
+  "branch": "sheaf-dag",
+  "by": "R9",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261026T100348-L-1945",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261026T100348-L-1945",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

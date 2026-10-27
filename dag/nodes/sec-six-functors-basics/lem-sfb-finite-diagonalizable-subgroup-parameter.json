@@ -1,0 +1,393 @@
+{
+ "id": "lem-sfb-finite-diagonalizable-subgroup-parameter",
+ "kind": "statement",
+ "title": "Quasi-affine parameter scheme for forms of a finite diagonalizable subgroup",
+ "statement": "Let $A$ be any commutative ring, $S=\\operatorname{Spec}A$ [def-weil-affine-spectrum], and let $G\\to S$ be a smooth affine group scheme of finite presentation [def-sbc-smooth-morphisms, pqf-def-affine-morphism, def-sbc-locally-finite-presentation]. A group scheme is a group object in schemes over $S$ [def-pc-scheme], with multiplication, identity and inverse satisfying the group diagrams. Finite presentation means locally of finite presentation, quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]. Let $M$ be a finite abelian group and let $H=D_A(M)\\hookrightarrow G$ be a closed subgroup [def-sfb-ring-diagonalizable-group, def-weil-closed-immersion]. For every $S$-scheme $W$, let $\\mathcal P_H(W)$ be the set of closed subgroup schemes $K\\hookrightarrow G_W=G\\times_SW$ [def-pc-fibre-product] such that there exists an fppf covering $\\{W_i\\to W\\}$ [def-pc-fppf-site] and isomorphisms of group schemes $K\\times_WW_i\\simeq H\\times_SW_i$. This condition is on the abstract groups, not on their embeddings into $G_{W_i}$. Pullback makes $\\mathcal P_H$ a contravariant functor. There is an $S$-scheme $Y_H$, with $Y_H\\to S$ quasi-affine [def-nagata-quasi-affine-morphism] and of finite presentation, together with bijections $$\\operatorname{Hom}_S(W,Y_H)\\simeq\\mathcal P_H(W)$$ natural for every $S$-scheme $W$. This includes the trivial group $M=0$, the empty base, and characteristics dividing the order of $M$; no reducedness or Noetherian assumption is imposed.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Lemma 2.3.4 and proof, printed pp.69-70. The functor is written using fppf forms of H; the source equivalently uses multiplicative-type subgroups geometrically isomorphic to H. The proof constructs it from the open embedding locus in Hom(H,G) modulo the finite constant automorphism group; no assertion about the conjugacy orbit or a homogeneous quotient is included here. Read online; WANTED locally as literature/conrad-reductive-group-schemes.pdf. No Stacks tag states this group-scheme structural assertion."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms",
+  "pqf-def-affine-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-sfb-ring-diagonalizable-group",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-pc-fppf-site",
+  "def-nagata-quasi-affine-morphism"
+ ],
+ "proof": [
+  {
+   "text": "The coordinate algebra $A[M]$ is free of rank $r=|M|\\geq1$ over $A$. It has a finite algebra presentation, with generators $e_m$ and relations $e_0=1$, $e_me_n=e_{m+n}$; these relations reduce every monomial to one basis vector. Thus $H\\to S$ is finite locally free. Apply the finite-flat-source group Hom theorem to $H,G$ to obtain an affine finitely presented scheme $B$ representing group homomorphisms $H_W\\to G_W$. The universal point gives a homomorphism $u:H_B\\to G_B$.",
+   "uses": [
+    "def-sfb-ring-diagonalizable-group",
+    "def-pc-finite-locally-free",
+    "lem-sfb-finite-flat-group-hom-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 2.1.3, pp.58-59; Lemma 2.3.4, p.70."
+   }
+  },
+  {
+   "text": "Apply the closed-embedding-locus theorem to $u$ over $B$. It gives a quasi-compact open $V\\subseteq B$ representing closed subgroup embeddings $H_W\\hookrightarrow G_W$. An open immersion is etale, hence locally of finite presentation; composition with $B\\to S$ is locally of finite presentation. Moreover $V$ is a quasi-compact open in the affine scheme $B$, so it is quasi-affine and separated, and $V\\to S$ is quasi-compact and quasi-separated. It follows that $V\\to S$ is of finite presentation. All of this holds over the original ring $A$.",
+   "uses": [
+    "lem-sfb-finite-locally-free-closed-embedding-locus",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-kun-etale-lfp",
+    "lem-sbc-locally-finite-presentation-composition",
+    "def-weil-pbc-scheme-conventions",
+    "def-nagata-quasi-affine-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 2.3.4, p.70, open embedding locus; arbitrary-ring refinement recorded in the locus node."
+   }
+  },
+  {
+   "text": "Put $\\Gamma=\\operatorname{Aut}(M)^{\\mathrm{op}}$. Character duality identifies $\\operatorname{Aut}_{W\\text{-gp}}(H_W)$ with the locally constant maps $|W|\\to\\Gamma$: apply its local description on nonempty affine opens, and glue the unique homomorphisms. The empty affine case has one section on either side. Since $M$ is finite, $\\Gamma$ is finite, so this automorphism functor is the constant group scheme $\\Gamma_S$. It acts on $B$ by precomposition and preserves $V$. On every scheme test, $j\\circ\\gamma=j$ for an embedding $j$ implies $\\gamma=1$, by cancellation of the monomorphism $j$. Hence the action on $V$ is free.",
+   "uses": [
+    "lem-sfb-relative-diagonalizable-character-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 2.3.4, p.70, constant automorphism group and its free action."
+   }
+  },
+  {
+   "text": "Every point orbit in $V$ is finite and is contained in an affine open of $V$. Indeed write $B=\\operatorname{Spec}C$ and $B\\setminus V=V(I)$. If the nonempty orbit corresponds to primes $\\mathfrak p_1,\\ldots,\\mathfrak p_n$, then $I\\not\\subset\\mathfrak p_i$. Prime avoidance gives $a\\in I\\setminus\\bigcup_i\\mathfrak p_i$, and the affine principal open $D(a)$ contains the orbit and lies in $V$. Also $V$ is absolutely separated, as an open of the affine $B$. The admissible free finite-group quotient theorem therefore gives a separated scheme $Q$, a finite etale surjection $q:V\\to Q$, and $V\\times_QV\\simeq\\Gamma_S\\times_SV$. As fppf covers are fpqc, $S$ is an fppf sheaf by representable descent, so the universal property descends the invariant map $V\\to S$ to $Q\\to S$. The represented fppf orbit quotient is also the orbit quotient on $S$-scheme tests.",
+   "uses": [
+    "lem-weil-pbc-prime-avoidance",
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "lem-sfb-admissible-free-finite-quotient",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 2.3.4, p.70, quotient construction; Stacks Tags 07S6 and 0BBM replace the source quotient citation."
+   }
+  },
+  {
+   "text": "The torsor $q$ has constant degree $|\\Gamma|\\geq1$: after pulling back by $q$ it is the projection from the disjoint union of $|\\Gamma|$ copies of $V$; equivalently its finite etale geometric fibres have exactly $|\\Gamma|$ points, by freeness and the orbit description. Being finite and etale, hence flat and locally of finite presentation, it is finite locally free of this degree, and quasi-affine reflection gives that $Q\\to S$ is quasi-affine. Local finite presentation of $V\\to S$ descends along the flat locally finitely presented surjection $q$. Finally, $Q$ is quasi-compact since $V$ is, and quasi-separated since it is separated. As $S$ is affine these imply quasi-compactness and quasi-separatedness of $Q\\to S$. Consequently $Q\\to S$ is of finite presentation.",
+   "uses": [
+    "lem-sfb-finite-locally-free-quasi-affine-reflection",
+    "def-pc-finite-locally-free",
+    "lem-sfb-admissible-free-finite-quotient",
+    "lem-trf-lfp-fppf-source-locality",
+    "def-weil-pbc-scheme-conventions",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 2.3.4, p.70, quasi-affineness and finite presentation; Stacks 0BD1, 0BD2 for quasi-affineness."
+   }
+  },
+  {
+   "text": "The universal embedding over $V$ gives a closed subgroup $K_V\\subseteq G_V$, finite locally free of degree $r$. On $V\\times_QV\\simeq\\Gamma_S\\times_SV$ the two pullbacks are equal as closed subschemes, since precomposition changes the embedding but not its image. The finite etale surjection $q$ is fppf, hence fpqc. Effective descent of finite locally free closed subschemes yields a unique $K_Q\\subseteq G_Q$ with pullback $K_V$ and degree $r$. Its group structure descends as well: on each test scheme, the identity, products and inverses of sections factor through $K_Q$ after the pulled-back fpqc cover; the local lifts into $K_Q$ agree by its monomorphism into $G_Q$ and glue by representable descent. This proves the subgroup diagrams, which can likewise be checked after that cover. Since $q^*K_Q\\simeq H_V$, every base change of $K_Q$ is an fppf form of $H$.",
+   "uses": [
+    "lem-sfb-admissible-free-finite-quotient",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-pc-descent-finite-flat-closed-subschemes",
+    "lem-galois-fpqc-covering-base-change",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 2.3.4, p.70, quotient identifies with the subgroup functor; Stacks 03I0 for embedded descent."
+   }
+  },
+  {
+   "text": "Conversely let $K\\subseteq G_W$ be an fppf form of $H_W$. Choose its stated trivializations over $W_i\\to W$. Their composites with $K_{W_i}\\hookrightarrow G_{W_i}$ give points $v_i:W_i\\to V$. On overlaps two embeddings with the same closed image differ by a unique automorphism of $H$, hence by a section of $\\Gamma$ from character duality. Thus $qv_i=qv_j$ on overlaps. Fppf covers are fpqc, so representable descent glues these maps to a unique $h:W\\to Q$. The pullback $h^*K_Q$ is $K$: check on the covering $W_i\\times_QV\\to W_i$ and use uniqueness of embedded descent. Starting with $h$ recovers $h$, because this construction agrees with it on the fppf cover $W\\times_QV\\to W$. Therefore the constructions are mutually inverse. Each construction uses pullback of embeddings, maps and closed subschemes, so the bijection commutes with every $W'\\to W$. Take $Y_H=Q$.",
+   "uses": [
+    "lem-sfb-relative-diagonalizable-character-duality",
+    "lem-sfb-admissible-free-finite-quotient",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-pc-descent-finite-flat-closed-subschemes",
+    "lem-galois-fpqc-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 2.3.4, p.70, injectivity and local surjectivity; fppf-forms formulation."
+   }
+  },
+  {
+   "text": "If $A=0$, all schemes over $S$ are empty and the construction gives the unique represented functor on that base. If $M=0$, $H$ is the trivial group; there is one embedding into any $G_W$, namely the identity section, and any form of the trivial group is trivial. Thus $B=V=Q=S$. In characteristics dividing $|M|$, $A[M]$ is still finite free and the automorphism scheme is still constant finite etale; no step requires $H$ to be reduced or its order to be invertible. These cases are therefore included.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Edge-case check of the same construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-ring-diagonalizable-group",
+  "def-pc-finite-locally-free",
+  "lem-sfb-finite-flat-group-hom-scheme",
+  "lem-sfb-finite-locally-free-closed-embedding-locus",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-kun-etale-lfp",
+  "lem-sbc-locally-finite-presentation-composition",
+  "def-weil-pbc-scheme-conventions",
+  "def-nagata-quasi-affine-morphism",
+  "lem-sfb-relative-diagonalizable-character-duality",
+  "lem-weil-pbc-prime-avoidance",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-sfb-admissible-free-finite-quotient",
+  "lem-sfb-finite-locally-free-quasi-affine-reflection",
+  "lem-trf-lfp-fppf-source-locality",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-pc-descent-finite-flat-closed-subschemes",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "def-weil-etale-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Lemma 2.3.4, printed pp.69-70, with Lemma 2.1.3, pp.58-59; finite-coordinate embedding-locus input and Stacks quotient/descent/norm replacements give the arbitrary-ring fppf-forms version without invoking SGA."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite diagonalizable subgroup schemes with fixed geometric isomorphism type in a smooth affine group scheme have a quasi-affine parameter scheme of finite presentation",
+   "results": "{\"t\": \"2026-10-24T11:04:24Z\", \"tool\": \"leanfinder\", \"query\": \"Finite diagonalizable subgroup schemes with fixed geometric isomorphism type in a smooth affine group scheme have a quasi-affine parameter scheme of finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.HasAffineProperty.diagonal_iff\"], \"digest\": \"eda1d6d805d34f2c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop; AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal; AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal; AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite; AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover; AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S; AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat; AlgebraicGeometry.HasAffineProperty.diagonal_iff; the hits concern abstract groups, scheme morphism properties, or unrelated parameter constructions, not this relative group-scheme assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite diagonalizable subgroup schemes with fixed geometric isomorphism type in a smooth affine group scheme have a quasi-affine parameter scheme of finite presentation",
+   "results": "{\"t\": \"2026-10-24T11:04:15Z\", \"tool\": \"leansearch\", \"query\": \"Finite diagonalizable subgroup schemes with fixed geometric isomorphism type in a smooth affine group scheme have a quasi-affine parameter scheme of finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine.recOn\", \"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.casesOn\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.AffineScheme\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.rec\"], \"digest\": \"7b9d2eef81779abc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AlgebraicGeometry.Scheme.IsQuasiAffine.recOn; AlgebraicGeometry.IsFinite.recOn; AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine; AlgebraicGeometry.Scheme.IsQuasiAffine.casesOn; AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation; AlgebraicGeometry.AffineScheme; AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite; AlgebraicGeometry.Scheme.IsQuasiAffine.rec; the hits concern abstract groups, scheme morphism properties, or unrelated parameter constructions, not this relative group-scheme assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"IsQuasiAffine\"",
+   "results": "{\"t\": \"2026-10-24T11:04:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"Scheme\\\", \\\"IsQuasiAffine\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion\"], \"digest\": \"587188b2b5e45570\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AlgebraicGeometry.Scheme.IsQuasiAffine; AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine; AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine; AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom; AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace; AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion; AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine; AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion; the hits concern abstract groups, scheme morphism properties, or unrelated parameter constructions, not this relative group-scheme assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "multiplicativeType|diagonalizable|Twist.*subgroup",
+   "results": "{\"t\": \"2026-10-24T11:04:14Z\", \"tool\": \"grep\", \"query\": \"multiplicativeType|diagonalizable|Twist.*subgroup\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits; the hits concern abstract groups, scheme morphism properties, or unrelated parameter constructions, not this relative group-scheme assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The functor of twisted finite multiplicative type subgroups is represented by a quasi affine scheme",
+   "results": "{\"t\": \"2026-10-24T11:04:22Z\", \"tool\": \"leanfinder\", \"query\": \"The functor of twisted finite multiplicative type subgroups is represented by a quasi affine scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.functor\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.AffineScheme\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.AffineSpace.functor_obj_obj\", \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\"], \"digest\": \"9f35281377979d34\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AlgebraicGeometry.AffineSpace.functor; AlgebraicGeometry.AffineSpace; AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S; AlgebraicGeometry.AffineScheme; AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop; AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat; AlgebraicGeometry.AffineSpace.functor_obj_obj; CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup; the hits concern abstract groups, scheme morphism properties, or unrelated parameter constructions, not this relative group-scheme assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite diagonalizable subgroups of a smooth affine group scheme have a quasi affine parameter scheme for their fppf forms",
+   "results": "{\"t\": \"2026-10-24T11:35:31Z\", \"tool\": \"leanfinder\", \"query\": \"Finite diagonalizable subgroups of a smooth affine group scheme have a quasi affine parameter scheme for their fppf forms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\"], \"digest\": \"72803cf056bfbb2b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal, AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal, AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover, AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite; none states this scheme-theoretic assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representability of forms of finite multiplicative type subgroup schemes",
+   "results": "{\"t\": \"2026-10-24T11:35:30Z\", \"tool\": \"leansearch\", \"query\": \"Representability of forms of finite multiplicative type subgroup schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instFiniteMultiplicative\", \"MulChar.finite\", \"Finite.exists_type_univ_nonempty_mulEquiv\", \"Multiplicative.fintype\", \"ModularForm\", \"AddSubgroup.fg_iff_mul_fg\", \"MulChar\", \"Rep.ofMulDistribMulAction\"], \"digest\": \"6dd15520f57afc7c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: instFiniteMultiplicative, MulChar.finite, Finite.exists_type_univ_nonempty_mulEquiv, Multiplicative.fintype, ModularForm, AddSubgroup.fg_iff_mul_fg, MulChar, Rep.ofMulDistribMulAction; none states this scheme-theoretic assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"IsQuasiAffine\"",
+   "results": "{\"t\": \"2026-10-24T11:35:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"Scheme\\\", \\\"IsQuasiAffine\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion\"], \"digest\": \"587188b2b5e45570\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AlgebraicGeometry.Scheme.IsQuasiAffine, AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine, AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine, AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom, AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace, AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion, AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine, AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion; none states this scheme-theoretic assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonalizable|multiplicativeType|Twist.*subgroup",
+   "results": "{\"t\": \"2026-10-24T11:35:30Z\", \"tool\": \"grep\", \"query\": \"diagonalizable|multiplicativeType|Twist.*subgroup\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits; none states this scheme-theoretic assertion or a one-line specialization of it"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-torus-normalizer-quasi-affine-quotient",
+  "date": "2026-10-24",
+  "group": "Q153"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Lemma 5.1.3 and Proposition 5.1.6, printed pp.136-138; Definition 6.1.1 and its following paragraph, p.186; affine localization of the etale neighborhoods; Theorem 3.2.6 and Corollary 3.2.7, printed pp.94-95; reductive specialization of the smooth surjective scheme of maximal tori, before choosing etale-local sections. No imported blueprint ancestor exists (blueprint_refs.py ancestor returns None). Supporting input to this split: Theorem 2.3.1, printed pp.67-71, normalizer-quotient assertion specialized to a split torus; smoothness of the quotient map is stated in Remark 2.3.5, printed p.71, using Proposition 2.1.2. Supporting input: Lemma 2.3.4 and proof, printed pp.69-70. The functor is written using fppf forms of H; the source equivalently uses multiplicative-type subgroups geometrically isomorphic to H. The proof constructs it from the open embedding locus in Hom(H,G) modulo the finite constant automorphism group; no assertion about the conjugacy orbit or a homogeneous quotient is included here.",
+   "via": [
+    "lem-sfb-split-torus-normalizer-quasi-affine-quotient",
+    "lem-sfb-maximal-torus-parameter-scheme",
+    "lem-sfb-reductive-etale-pinned-splitting",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-diagonalizable-subgroup-parameter",
+  "worker": "stage1",
+  "summary": "Constructed the parameter scheme from the embedding locus in Hom(H,G) and the finite constant automorphism action; reused character duality, admissible quotients, fppf/fpqc and embedded descent. Three new genuine inputs: group Hom representability, finite-source embedding locus, and quasi-affine norm reflection. Checked arbitrary rings, empty base, trivial group and bad characteristic. Statement unchanged.",
+  "blueprint": "No imported blueprint ancestor exists. Realizes the inherited Conrad Lemma 2.3.4 input to the normalizer-quotient route; no unit or chapter route changes.",
+  "tool_uses": [
+   {
+    "node": "def-pc-finite-locally-free",
+    "why": "Generic scheme, finite-group quotient, or descent input used with its stated hypotheses in the Hom/embedding/automorphism construction; no same-unit replacement is available."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Generic scheme, finite-group quotient, or descent input used with its stated hypotheses in the Hom/embedding/automorphism construction; no same-unit replacement is available."
+   },
+   {
+    "node": "lem-kun-etale-lfp",
+    "why": "Generic scheme, finite-group quotient, or descent input used with its stated hypotheses in the Hom/embedding/automorphism construction; no same-unit replacement is available."
+   },
+   {
+    "node": "lem-sbc-locally-finite-presentation-composition",
+    "why": "Generic scheme, finite-group quotient, or descent input used with its stated hypotheses in the Hom/embedding/automorphism construction; no same-unit replacement is available."
+   },
+   {
+    "node": "def-weil-pbc-scheme-conventions",
+    "why": "Generic scheme, finite-group quotient, or descent input used with its stated hypotheses in the Hom/embedding/automorphism construction; no same-unit replacement is available."
+   },
+   {
+    "node": "def-nagata-quasi-affine-morphism",
+    "why": "Generic scheme, finite-group quotient, or descent input used with its stated hypotheses in the Hom/embedding/automorphism construction; no same-unit replacement is available."
+   },
+   {
+    "node": "lem-weil-pbc-prime-avoidance",
+    "why": "Generic scheme, finite-group quotient, or descent input used with its stated hypotheses in the Hom/embedding/automorphism construction; no same-unit replacement is available."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "why": "Generic scheme, finite-group quotient, or descent input used with its stated hypotheses in the Hom/embedding/automorphism construction; no same-unit replacement is available."
+   },
+   {
+    "node": "lem-trf-lfp-fppf-source-locality",
+    "why": "Generic scheme, finite-group quotient, or descent input used with its stated hypotheses in the Hom/embedding/automorphism construction; no same-unit replacement is available."
+   },
+   {
+    "node": "lem-trf-fppf-covering-is-fpqc",
+    "why": "Generic scheme, finite-group quotient, or descent input used with its stated hypotheses in the Hom/embedding/automorphism construction; no same-unit replacement is available."
+   },
+   {
+    "node": "lem-pc-descent-finite-flat-closed-subschemes",
+    "why": "Generic scheme, finite-group quotient, or descent input used with its stated hypotheses in the Hom/embedding/automorphism construction; no same-unit replacement is available."
+   },
+   {
+    "node": "lem-galois-fpqc-covering-base-change",
+    "why": "Generic scheme, finite-group quotient, or descent input used with its stated hypotheses in the Hom/embedding/automorphism construction; no same-unit replacement is available."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-representable-descent",
+    "why": "Generic scheme, finite-group quotient, or descent input used with its stated hypotheses in the Hom/embedding/automorphism construction; no same-unit replacement is available."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pc-finite-locally-free",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-kun-etale-lfp",
+  "lem-sbc-locally-finite-presentation-composition",
+  "def-weil-pbc-scheme-conventions",
+  "def-nagata-quasi-affine-morphism",
+  "lem-weil-pbc-prime-avoidance",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-trf-lfp-fppf-source-locality",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-pc-descent-finite-flat-closed-subschemes",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-weil-pbc-fpqc-representable-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-3a2b0b727",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-3a2b0b727 (reviewer sub-agent of L); spot-checked: The mathematics is correct. I read Conrad Lemmas 2.1.3 and 2.3.4 (fetched read-only, printed pp.58-59 and 69-70); steps 1-7 follow 2.3.4's order: Hom-scheme, open monicity locus (equal to the closed-immersion locus for a finite source), free action of Gamma=Aut(M)^op, finite etale quotient, quasi-affineness, monomorphism and surjectivity onto the forms functor. Conrad's Noetherian reduction is replaced by a closed-embedding-locus node over arbitrary bases. The three new nodes are true and self-contained, and none duplicates an existing node. Hom node: Conrad 2.1.3 part 2 (Weil restriction plus group equalizers). Embedding-locus node: I checked the monomial-span/minor argument, rank 0 and varying rank. Reflection node: Stacks 0BD5(1) with 0BD1/0BD2, applied over affine opens of S. Batch-5 flags: fppf-is-fpqc, lfp fppf source locality, character duality (reaches trf via fppf=>fpqc) and the admissible free finite quotient (reaches trf via the etale-relation quotient) are general scheme theory. Neither assumption leaf gives them and none is a step of the trace-formula or Poincare-duality proofs, so I accepted them. FIX (C1, missing citations): step 4 descends V->S through Q, which needs S to be an fppf sheaf; I added lem-trf-fppf-covering-is-fpqc and lem-weil-pbc-fpqc-representable-descent. Step 5 uses finite etale => flat and lfp; I added def-weil-etale-morphism to the step uses and proof_deps. The corrected item is in fixes/dag/nodes/sec-six-functors-basics/. The worker-written tool_uses are generic scheme tools and are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteDiagonalizableSubgroupParameter",
+  "declaration": "AlgebraicGeometry.exists_finiteDiagonalizableSubgroupParameter",
+  "declarations": [
+   "AlgebraicGeometry.finiteDiagonalizableSubgroupParameters",
+   "AlgebraicGeometry.exists_finiteDiagonalizableSubgroupParameter"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteDiagonalizableSubgroupParameter.lean",
+  "statement": "theorem exists_finiteDiagonalizableSubgroupParameter (A : Type u) [CommRing A] (M : Type u) [AddCommGroup M] [Finite M] (G : Grp (Over (Spec (.of A)))) [Smooth G.X.hom] [IsAffineHom G.X.hom] [LocallyOfFinitePresentation G.X.hom] [QuasiCompact G.X.hom] [QuasiSeparated G.X.hom] (i : ringDiagonalizableGroup A M ⟶ G) [IsClosedImmersion i.hom.hom.left] : ∃ Y : Over (Spec (.of A)), IsQuasiAffineHom Y.hom ∧ LocallyOfFinitePresentation Y.hom ∧ QuasiCompact Y.hom ∧ QuasiSeparated Y.hom ∧ ∃ e : ∀ W : Over (Spec (.of A)), (W ⟶ Y) ≃ finiteDiagonalizableSubgroupParameters A M G W, ∀ (W' W : Over (Spec (.of A))) (f : W' ⟶ W) (x : W ⟶ Y), (e W' (f ≫ x)).val = (e W x).val.comap (pullback.map G.X.hom W'.hom G.X.hom W.hom (𝟙 G.X.left) f.left (𝟙 _) ((Category.comp_id _).trans (Category.id_comp _).symm) ((Category.comp_id _).trans (Over.w f).symm))",
+  "branch": "sheaf-dag",
+  "by": "Q35",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The owning module also defines the parameter set P_H from this node, as ideal sheaves of closed embedded subgroup forms. Naturality is equality of pulled-back ideals, which identifies embedded closed subgroups without choosing their parametrizations."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-db015a065",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Node changes only in lean; one new module FiniteDiagonalizableSubgroupParameter.lean (P_H def + sorry theorem), statement verbatim, lines <=100. Every hypothesis matches the node with nothing extra: arbitrary CommRing A; G : Grp(Over Spec A) smooth, affine, LFP+QC+QS; recorded ringDiagonalizableGroup with a closed-immersion Grp hom; M : Type u forced by the dependency signature. P_H(W) = ideal sheaves of G_W that are Hom.ker of a closed-immersion group hom from some K, fppf-locally isomorphic to H as abstract group objects with no embedding compatibility (fppfPrecoverage = recorded def-pc-fppf-site). Conclusion: quasi-affine (IsQuasiAffineHom) + finite presentation, bijections for all W, naturality via IdealSheafData.comap along the canonical pullback.map G_W' -> G_W (comap = ker of pullback.fst, scheme-theoretic preimage, no QC needed); both commutativity proofs checked. Edge cases A=0, M=0, char p | |M|, disconnected W covered. No duplicate notion: IsClosedSubgroupScheme is field-only; no relative fppf-form def in Mathlib or the project. Imports, docstrings (Conrad 2.3.4 pp.69-70, blueprint id, 8 proof steps) and report sections are correct. Not compiled (no file changed); relied on the worker's reported clean compile. No findings."
+ }
+}

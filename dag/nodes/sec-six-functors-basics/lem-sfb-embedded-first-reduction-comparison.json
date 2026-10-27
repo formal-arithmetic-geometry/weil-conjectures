@@ -1,0 +1,128 @@
+{
+ "id": "lem-sfb-embedded-first-reduction-comparison",
+ "kind": "lemma",
+ "title": "Intrinsic comparison of the two first embedded reductions",
+ "statement": "Let ell be prime, E a finite intermediate field of PadicAlgCl ell, pi a generator of the maximal ideal of its integer ring, X a Noetherian scheme and K an arbitrary derived complex of continuous integral module objects, as in [def-sfb-embedded-integral-model-coefficients]. Assume the actual quotient completedResidue ell E pi 0 is finite and discrete. The finiteRealization of [def-sfb-embedded-finite-coefficient-realization] applied to the first constant reduction of restriction K is isomorphic to integralModelIntrinsicRealization applied to its first continuous reduction. Both functors use the given quotient maps. No constructibility, Tor amplitude or completeness is asserted or assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models.proof.md",
+  "place": "First paragraph, clauses (1) and (2); Stacks Tags 099L, 03ET, 00YV, 06YQ and 09AL."
+ },
+ "stmt_deps": [
+  "def-sfb-embedded-finite-coefficient-realization",
+  "def-sfb-embedded-integral-model-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Invert the specified finite residue scalar map. Choose a K-flat complex P quasi-isomorphic to a cochain representative of K. Restriction of embedded integral scalars preserves K-flatness.",
+   "uses": [
+    "lem-sfb-embedded-finite-scalar-is-iso",
+    "lem-sfb-embedded-integral-restriction-kflat",
+    "lem-sfb-abstract-kflat-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the left derived functor counits on P and its restricted complex. These are isomorphisms by K-flatness; scalar extension along the finite residue isomorphism is exact, so its counit is also invertible. Apply the ordinary natural comparison degreewise and localize to identify the two derived first reductions.",
+   "uses": [
+    "lem-sfb-embedded-first-reduction-ordinary",
+    "lem-derived-right-exact-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the right derived intrinsic realization to this isomorphism. Transport along the quasi-isomorphism from P to K using the two specified realization functors. This uses no boundedness, Tor, constructibility or completeness condition.",
+   "uses": [
+    "def-sfb-integral-model-generator-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-embedded-finite-scalar-is-iso",
+  "lem-sfb-embedded-integral-restriction-kflat",
+  "lem-sfb-abstract-kflat-resolution",
+  "lem-sfb-embedded-first-reduction-ordinary",
+  "def-sfb-integral-model-generator-data",
+  "lem-derived-right-exact-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Y2",
+  "date": "2026-10-25",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models.proof.md",
+  "place": "First paragraph, clauses (1) and (2); Stacks Tags 099L, 03ET, 00YV, 06YQ and 09AL."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite extension of the p-adic integers has finite discrete residue field and derived reduction of restriction of scalars agrees with reduction over the completed coefficients",
+   "results": "{\"t\": \"2026-10-25T06:26:56Z\", \"tool\": \"leanfinder\", \"query\": \"A finite extension of the p-adic integers has finite discrete residue field and derived reduction of restriction of scalars agrees with reduction over the completed coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PadicInt.toZMod_eq_residueField_comp_residue\", \"PadicInt.residueField\", \"BDeRhamPlus\", \"PreTilt\", \"PreTilt.coeff\", \"PadicInt.toZMod\", \"PadicInt.toZMod_spec\", \"IsLocalRing.ResidueField.finite_of_module_finite\"], \"digest\": \"47237880e1bcdc29\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact statement about the embedded module presentation. The library provides abstract scalar reduction and constant-field results, requiring the displayed coefficient and derived functor comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "On a ringed site, derived scalar extension commutes with restriction along a flat ring map with the same quotient. For a finite constant field, finite Tor amplitude is equivalent to bounded cohomology.",
+   "results": "{\"t\": \"2026-10-25T06:44:08Z\", \"tool\": \"leansearch\", \"query\": \"On a ringed site, derived scalar extension commutes with restriction along a flat ring map with the same quotient. For a finite constant field, finite Tor amplitude is equivalent to bounded cohomology.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.restrictScalarsObj\", \"SheafOfModules.restrictScalars\", \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"RestrictScalars\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction\", \"comonadicExtendScalars\", \"ModuleCat.restrictCoextendScalarsAdj\", \"Algebra.FormallyUnramified.flat_of_restrictScalars\"], \"digest\": \"3b3ffb0feec124e4\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact statement about the embedded module presentation. The library provides abstract scalar reduction and constant-field results, requiring the displayed coefficient and derived functor comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "SheafOfModules.restrictScalars|finiteTorAmplitude|constantSheaf|DerivedCategory.homologyFunctor",
+   "results": "{\"t\": \"2026-10-25T06:47:39Z\", \"tool\": \"grep\", \"query\": \"SheafOfModules.restrictScalars|finiteTorAmplitude|constantSheaf|DerivedCategory.homologyFunctor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Condensed/Discrete/Module.lean\", \"Mathlib/Condensed/Discrete/Module.lean\", \"Mathlib/Condensed/Discrete/Module.lean\", \"Mathlib/Condensed/Discrete/Module.lean\", \"Mathlib/Condensed/Discrete/Module.lean\", \"Mathlib/Condensed/Discrete/Basic.lean\", \"Mathlib/Condensed/Discrete/Basic.lean\", \"Mathlib/Condensed/Discrete/Basic.lean\"], \"digest\": \"1cbf3c307764061a\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact statement about the embedded module presentation. The library provides abstract scalar reduction and constant-field results, requiring the displayed coefficient and derived functor comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralModelsEmbeddedResidueComparison",
+  "date": "2026-10-25",
+  "group": "M9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-integral-models",
+   "place": "First paragraph, clauses (1) and (2); Stacks Tags 099L, 03ET, 00YV, 06YQ and 09AL.",
+   "via": [
+    "lem-sfb-embedded-integral-residue-comparison"
+   ]
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EmbeddedFirstReductionComparison",
+  "file": "lean/Sheaf/Paper/EmbeddedFirstReductionComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralModelsEmbedded.firstReductionComparison",
+  "statement": "theorem firstReductionComparison\n    (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)\n    (π : PadicAlgCl.integers ℓ E.1)\n    (hπ : Ideal.span {π} = IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E.1))\n    (X : Scheme.{u}) [IsNoetherian X]\n    [Finite (completedResidue ℓ E π 0)] [DiscreteTopology (completedResidue ℓ E π 0)]\n    (K : DerivedCategory.{u + 1} (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (integralCoefficientObject X ℓ E))) :\n    letI : HasSheafify (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1} :=\n      CategoryTheory.siteAbelianHasSheafify.{u + 1, u, u + 1} _\n    letI : (Scheme.ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=\n      CategoryTheory.siteAbelianWEqualsLocallyBijective.{u + 1, u, u + 1} _\n    Nonempty\n      ((constantResidueRealization ℓ E π X).obj K ≅\n        (continuousResidueRealization ℓ E π X).obj K)",
+  "branch": "sheaf-dag",
+  "by": "M9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-86877",
+  "group": "M9",
+  "result": "fix",
+  "landing": "20261025T123354-L-1866215",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261025T203744-L-2851161",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

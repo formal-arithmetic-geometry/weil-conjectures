@@ -1,0 +1,106 @@
+{
+ "id": "lem-sfb-nonzero-field-algebra-faithfully-flat",
+ "kind": "statement",
+ "title": "A nonzero algebra over a field is faithfully flat",
+ "statement": "Let $k$ be a field [def-weil-field], let $A$ be a nonzero commutative ring with identity (so $0\\ne1$ in $A$), and let $\\varphi:k\\to A$ be a unital ring homomorphism. Then $A$, as a $k$-module via $c\\cdot a=\\varphi(c)a$, is faithfully flat; equivalently $\\varphi$ is faithfully flat [def-weil-pbc-faithfully-flat-ring-map]. No finite-dimensionality, finite-generation, reducedness or domain assumption on $A$ is required.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 04VV, lemma-epimorphism-over-field, proof: parenthetical \"as any nonzero algebra over k is faithfully flat\"; supplies the field-algebra input in the inherited Tag 03DP/direct-image ancestry."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-faithfully-flat-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every nonzero algebra over a field is faithfully flat",
+   "results": "8 hits; directory (remote service). RingHom.faithfullyFlat_algebraMap_iff, Module.FaithfullyFlat.self, faithfulSMul, of_flat_of_isLocalHom, and tensor-product injectivity/descent. Read RingHom/FaithfullyFlat.lean:25-33.",
+   "date": "2026-10-24",
+   "verdict": "match via the free-module instance located by Loogle and grep"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FaithfullyFlat, Module.Free",
+   "results": "1 hits; directory (remote service). Module.FaithfullyFlat.instOfNontrivialOfFree (Mathlib.RingTheory.Flat.FaithfullyFlat.Basic) requires Nontrivial M and Module.Free R M, and concludes Module.FaithfullyFlat R M. Read Basic.lean:209-210.",
+   "date": "2026-10-24",
+   "verdict": "match: a nonzero vector space is free"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every nonzero vector space over a field is a faithfully flat module",
+   "results": "8 hits; directory (remote service). Module.Free.of_divisionRing, Module.FaithfullyFlat, Module.Flat.of_free and faithful-flatness characterizations. Read VectorSpace.lean:155-157 and Basic.lean:209-210.",
+   "date": "2026-10-24",
+   "verdict": "match via Module.Free.of_divisionRing and the nontrivial-free instance"
+  },
+  {
+   "tool": "grep",
+   "query": "instance \\[Nontrivial M\\].*Module.Free",
+   "results": "1 hits; directory RingTheory/Flat/FaithfullyFlat. Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean:209, instance [Nontrivial M] [Module.Free R M] : FaithfullyFlat R M.",
+   "date": "2026-10-24",
+   "verdict": "match: source and line read"
+  },
+  {
+   "tool": "grep",
+   "query": "of_divisionRing",
+   "results": "2 hits; directory LinearAlgebra/Basis/VectorSpace.lean. Mathlib/LinearAlgebra/Basis/VectorSpace.lean:156, Module.Free.of_divisionRing.",
+   "date": "2026-10-24",
+   "verdict": "match: automatic field free-module instance"
+  },
+  {
+   "tool": "grep",
+   "query": "faithfullyFlat_algebraMap_iff",
+   "results": "4 hits; directory RingTheory/RingHom/FaithfullyFlat.lean. Mathlib/RingTheory/RingHom/FaithfullyFlat.lean:29-33, RingHom.faithfullyFlat_algebraMap_iff; other occurrences at 44, 56, 77.",
+   "date": "2026-10-24",
+   "verdict": "match: module and ring-map faithful flatness agree"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.FaithfullyFlat.instOfNontrivialOfFree",
+  "file": "Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean",
+  "line": 209,
+  "how": "specializes in one line: give A the k-algebra structure induced by phi and apply Module.FaithfullyFlat.instOfNontrivialOfFree k A (Basic.lean:209-210); Module.Free.of_divisionRing (Mathlib/LinearAlgebra/Basis/VectorSpace.lean:156-157) supplies the free-module instance and 0 != 1 supplies Nontrivial A. The ring-map formulation is RingHom.faithfullyFlat_algebraMap_iff (Mathlib/RingTheory/RingHom/FaithfullyFlat.lean:29-33)."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-field-ring-epimorphism-trivial-or-iso",
+  "date": "2026-10-24",
+  "group": "Q52"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Tag 04VV, lemma-epimorphism-over-field, proof: parenthetical \"as any nonzero algebra over k is faithfully flat\"; supplies the field-algebra input in the inherited Tag 03DP/direct-image ancestry.",
+   "via": [
+    "lem-sfb-field-ring-epimorphism-trivial-or-iso",
+    "lem-sfb-monomorphism-into-field-coproduct",
+    "lem-sfb-locally-separated-space-decent",
+    "lem-sfb-locally-separated-rational-point-closed-immersion",
+    "lem-sfb-locally-separated-closure-equivalent-images",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -1,0 +1,254 @@
+{
+ "id": "lem-sfb-normal-product-square-descent",
+ "kind": "statement",
+ "title": "Generic descent of the square difference over a normal integral base",
+ "statement": "Let $S$ be a normal integral locally Noetherian scheme [def-pc-scheme, def-pc-integral-scheme, pqf-def-locnoeth, def-weil-pbc-normal-ring], where normal means that every local ring is an integrally closed domain. Let $\\eta=\\operatorname{Spec}k(S)$ be its generic point, whose residue field $k(S)$ is its function field [def-sc-generic-point, def-sc-function-field]. For $i=1,2,3$, let $X_i\\to S$ be smooth separated morphisms of finite presentation [def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation] with geometrically integral fibres [def-pc-geometrically-irreducible]: for each $s\\in S$, the fibre over its residue field $\\kappa(s)$ [def-weil-residue-field] is integral after every extension of $\\kappa(s)$. In particular all fibres are nonempty. Separated means that the diagonal is a closed immersion. Put $C=X_1\\times_SX_2\\times_SX_3$, $P=X_1\\times_SX_1\\times_SX_2\\times_SX_2$, and $\\pi:P\\times_SX_3\\to P$. At coordinates $(x_0,x_1,y_0,y_1,z)$ write $r_{ab}(x_0,x_1,y_0,y_1,z)=(x_a,y_b,z)$ for $a,b\\in\\{0,1\\}$. For an invertible module $A$ on $C$, define its square difference by $$D(A)=r_{00}^*A\\otimes r_{11}^*A\\otimes(r_{01}^*A)^{-1}\\otimes(r_{10}^*A)^{-1}.$$ Here inverse means the dual invertible module [def-sc-invertible-module], and all products, pullbacks and tensors are those of [def-pc-fibre-product, def-pc-module-pullback, def-pur-sheaf-tensor-product]. If there is an invertible $N_\\eta$ on $P_\\eta=P\\times_S\\eta$ with $$D(A)|_{(P\\times_SX_3)_\\eta}\\cong\\pi_\\eta^*N_\\eta,$$ then there is an invertible module $N$ on $P$ with $$D(A)\\cong\\pi^*N.$$",
+ "source": {
+  "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+  "url": "https://ningguomath.com/wp-content/uploads/2026/03/amplenew-1.pdf",
+  "place": "Guo Proposition 5.2(i), specialized to smooth separated finite-presentation factors with geometrically integral fibres; March 31, 2026 author version, printed pp.11-12, read online; local copy WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-geometrically-irreducible",
+  "def-pc-fibre-product",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-integral-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-normal-ring",
+  "def-sc-generic-point",
+  "def-sc-function-field",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "Form successively $B_0=S$, $B_1=X_1$, $B_2=X_1\\times_SX_1$, $B_3=B_2\\times_SX_2$, and $B_4=B_3\\times_SX_2=P$. Each projection $B_j\\to B_{j-1}$ is the base change of one of the given smooth maps, hence smooth by clause (2) of [lem-pc-proper-base-change]. For $b\\in B_{j-1}$ with image $s\\in S$, its fibre is $X_{i,s}\\times_{\\kappa(s)}\\operatorname{Spec}\\kappa(b)$. After any field extension of $\\kappa(b)$ it is still a field extension of $X_{i,s}$, so it is integral and nonempty by the hypothesis; in particular it is geometrically connected. Starting with normal integral $B_0$, apply [lem-sbc-smooth-connected-generic-geometry-core] at each projection to conclude that every $B_j$ is normal and integral. Nonemptiness holds at each stage because all its fibres over the nonempty previous stage are nonempty. By [lem-pc-smooth-flat] the projections are locally of finite presentation, hence locally of finite type (a finite presentation has finitely many generators). Starting with locally Noetherian $S$, [pqf-lem-locnoeth-lft] at each projection makes every $B_j$ locally Noetherian. Thus $P$ is normal integral locally Noetherian. Every projection is surjective by its nonempty fibres, so $P\\to S$ is surjective.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-sbc-smooth-connected-generic-geometry-core",
+    "lem-pc-smooth-flat",
+    "pqf-lem-locnoeth-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01VB (lemma-base-change-smooth) and 01T6 (lemma-finite-type-noetherian); normal integral total spaces as in the cited geometry-core statement (034F, 056T, 01UA)."
+   }
+  },
+  {
+   "text": "Put $Y=P\\times_SX_3$ and $M=D(A)$. The projection $\\pi:Y\\to P$ is smooth by clause (2) of [lem-pc-proper-base-change], and therefore flat and locally of finite presentation by [lem-pc-smooth-flat]. In particular it is locally of finite type. Apply [pqf-lem-locnoeth-lft] with the locally Noetherian base $P$ to obtain locally Noetherian $Y$. For every $p\\in P$ over $s\\in S$, the fibre $Y_p$ is $X_{3,s}\\times_{\\kappa(s)}\\operatorname{Spec}\\kappa(p)$, hence integral and nonempty by geometric integrality in the hypothesis. These are precisely the residue-field fibres of $\\pi$, not just its fibres over points of $S$.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-pc-smooth-flat",
+    "pqf-lem-locnoeth-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01VB (lemma-base-change-smooth), 01T6 (lemma-finite-type-noetherian); verification of hypotheses (1)--(4) of divisors.tex Tag 0BD7 (lemma-in-image-pullback)."
+   }
+  },
+  {
+   "text": "Let $\\xi=\\operatorname{Spec}k(P)$ be the generic point of the integral scheme $P$. Its image in $S$ is $\\eta$: every point of $P$ is a specialization of $\\xi$, so surjectivity of $P\\to S$ implies that every point of $S$ is a specialization of its image; an integral scheme has only one generic point. The map $\\xi\\to P$ therefore factors through $P_\\eta$; write this map as $j:\\xi\\to P_\\eta$. Pull back the assumed isomorphism along $Y_\\xi\\to Y_\\eta$. Functoriality of tensor pullback [def-pc-module-pullback] and the fibre-product identities give $M|_{Y_\\xi}\\cong\\pi_\\xi^*(j^*N_\\eta)$. By the rank-one local-frame definition [def-sc-invertible-module], $j^*N_\\eta$ is a one-dimensional vector space over $k(P)$; choosing a nonzero basis gives $j^*N_\\eta\\cong\\mathcal O_\\xi$, hence $M|_{Y_\\xi}\\cong\\mathcal O_{Y_\\xi}$. Also $M$ is invertible: near each point of $Y$, pull back local frames for the four factors of $D(A)$ and tensor them, using the dual frames for the two inverse factors. These frames locally identify $M$ with $\\mathcal O_Y$.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-sc-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD7 (lemma-in-image-pullback), hypothesis (5); elementary generic-point reduction, as in Guo Proposition 5.2(i), printed p.11."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-normal-noetherian-generic-line-pullback] to $f=\\pi:Y\\to P$ and $M=D(A)$. Its normal integral locally Noetherian base hypothesis is step 1; its locally Noetherian source, flatness, integral nonempty fibres and locally-of-finite-type alternative are step 2; its invertibility and generic-fibre triviality hypotheses are step 3. It yields an invertible $\\mathcal O_P$-module $N$ with $\\pi^*N\\cong D(A)$. Inverting this isomorphism gives the required $D(A)\\cong\\pi^*N$.",
+   "uses": [
+    "lem-sfb-normal-noetherian-generic-line-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD7 (lemma-in-image-pullback), conclusion; the generic-line input used in Guo Proposition 5.2(i)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-proper-base-change",
+  "lem-sbc-smooth-connected-generic-geometry-core",
+  "lem-pc-smooth-flat",
+  "pqf-lem-locnoeth-lft",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "lem-sfb-normal-noetherian-generic-line-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BD7, lemma-in-image-pullback, applied to the parameter projection after the generic-point reduction of Guo Proposition 5.2(i), printed p.11 (online author version read)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "generic.*(invertible|lineBundle)|((invertible|lineBundle).*generic)|theoremOfSquare",
+   "results": "{\"t\": \"2026-10-24T03:15:56Z\", \"tool\": \"grep\", \"query\": \"generic.*(invertible|lineBundle)|((invertible|lineBundle).*generic)|theoremOfSquare\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; tensor algebra, pullback carrier and normalization declarations do not assert the stated geometric square identity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The theorem of the square for line bundles on smooth geometrically integral families over a normal base can be checked on the generic fibre",
+   "results": "{\"t\": \"2026-10-24T03:15:56Z\", \"tool\": \"leansearch\", \"query\": \"The theorem of the square for line bundles on smooth geometrically integral families over a normal base can be checked on the generic fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.ValuativeCommSq.i₁\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.ValuativeCommSq.K\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"AlgebraicGeometry.ValuativeCommSq.algebra\", \"Bundle.mdifferentiableOn_zeroSection\"], \"digest\": \"c19a0673bf1af180\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; tensor algebra, pullback carrier and normalization declarations do not assert the stated geometric square identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegral\", \"IsInvertible\"",
+   "results": "{\"t\": \"2026-10-24T03:15:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsIntegral\\\", \\\"IsInvertible\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; tensor algebra, pullback carrier and normalization declarations do not assert the stated geometric square identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a normal integral Noetherian base the square difference of a line bundle on three smooth schemes with geometrically integral fibres descends from the parameter base if it does so on the generic fibre",
+   "results": "{\"t\": \"2026-10-24T03:15:58Z\", \"tool\": \"leanfinder\", \"query\": \"Over a normal integral Noetherian base the square difference of a line bundle on three smooth schemes with geometrically integral fibres descends from the parameter base if it does so on the generic fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensor\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\"], \"digest\": \"6782ee5fd9ca24b1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; tensor algebra, pullback carrier and normalization declarations do not assert the stated geometric square identity."
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*(invertible|lineBundle)|invertible.*generic|theoremOfSquare|in_image_pullback",
+   "results": "{\"t\": \"2026-10-24T03:42:04Z\", \"tool\": \"grep\", \"query\": \"generic.*(invertible|lineBundle)|invertible.*generic|theoremOfSquare|in_image_pullback\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern normalization, morphism-property descent or scalar square differences, not generic-fibre descent of an invertible module or its square difference."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The square difference of a line bundle on a product of smooth schemes over a normal base descends from the parameter space when it descends on the generic fibre",
+   "results": "{\"t\": \"2026-10-24T03:42:04Z\", \"tool\": \"leansearch\", \"query\": \"The square difference of a line bundle on a product of smooth schemes over a normal base descends from the parameter space when it descends on the generic fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsLocalAtTarget.descendsAlong\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"sq_tsub_sq\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\"], \"digest\": \"236f69752a9dfb2b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern normalization, morphism-property descent or scalar square differences, not generic-fibre descent of an invertible module or its square difference."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"IsInvertible\"",
+   "results": "{\"t\": \"2026-10-24T03:42:05Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme, \\\"IsInvertible\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern normalization, morphism-property descent or scalar square differences, not generic-fibre descent of an invertible module or its square difference."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A line bundle on a smooth family with geometrically integral fibres over a normal integral noetherian base descends if it is trivial on the generic fibre",
+   "results": "{\"t\": \"2026-10-24T03:42:05Z\", \"tool\": \"leanfinder\", \"query\": \"A line bundle on a smooth family with geometrically integral fibres over a normal integral noetherian base descends if it is trivial on the generic fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\"], \"digest\": \"db5ee436ceab70a6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern normalization, morphism-property descent or scalar square differences, not generic-fibre descent of an invertible module or its square difference."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For three smooth geometrically integral schemes over a normal base, the mixed tensor cross difference of a line bundle is a base pullback if this holds over the generic point",
+   "results": "{\"t\": \"2026-10-24T03:42:54Z\", \"tool\": \"leanfinder\", \"query\": \"For three smooth geometrically integral schemes over a normal base, the mixed tensor cross difference of a line bundle is a base pullback if this holds over the generic point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInr\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInl\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensor\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst\"], \"digest\": \"2dde448967c0e36b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern normalization, morphism-property descent or scalar square differences, not generic-fibre descent of an invertible module or its square difference."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-group-square-power",
+  "date": "2026-10-24",
+  "group": "Q138"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), inherited alteration and stable-Picard local-ample-line prerequisite; Guo Proposition 5.2(i), generic descent of the square difference, supporting lem-sfb-normal-group-square-power along the recorded via chain.",
+   "via": [
+    "lem-sfb-normal-group-square-power",
+    "lem-sfb-group-affine-section-ampleness",
+    "lem-sfb-normal-smooth-group-local-ample-line",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-normal-product-square-descent",
+  "worker": "stage1",
+  "summary": "Reused the existing Stacks 0BD7 generic-line pullback theorem. Verified the parameter space by successive smooth integral-fibre projections, checked all source/fibre/normality/finiteness hypotheses, and wrote the generic-point trivialization explicitly. No statement change or new nodes. Repaired the inherited null blueprint endpoint using the endpoint already recorded on lem-sfb-admissible-direct-image.",
+  "blueprint": "Latest blueprint det-thm-sf-ctf-stability-direct-images, proof (3); follows the inherited local-ample-line supporting route through Guo Proposition 5.2(i), rather than altering the unit route. No equivalent imported blueprint node was found.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Clause (2) is the generic smooth-base-change tool used on successive product projections; the unit gives no replacement for this scheme-geometric input."
+   },
+   {
+    "node": "lem-sbc-smooth-connected-generic-geometry-core",
+    "why": "Generic normality and integrality of a smooth family over a normal integral base, applied successively to build the parameter space; it supplies no smooth-base-change or Picard conclusion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "lem-sbc-smooth-connected-generic-geometry-core"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q96-53e22dd73",
+  "group": "Q96",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-53e22dd73 (reviewer sub-agent of L); spot-checked: I read the item in full. The statement and stmt_deps are identical to the base, there are 0 new nodes, and side-live still has the item unsplit, so no supersession or re-split note applies. I fetched Guo's author PDF read-only and converted it to text. §5.1 s(L;X1,X2), with pr1↔0 and pr2↔1, gives exactly D(A)=r00⊗r11⊗r01^{-1}⊗r10^{-1}. The item is the sq(L_eta)⇒sq(L) direction of Prop 5.2(i), specialised to smooth factors (strict (N)-type), all fibres geometrically integral, and S locally Noetherian; this is a stronger hypothesis, not a weakening. I read Stacks 0BD7 (divisors.tex lemma-in-image-pullback) locally; the existing node lem-sfb-normal-noetherian-generic-line-pullback matches its hypotheses (1)-(5). Step 1: the tower B_j=B_{j-1}×_S X_i is smooth by clause (2) of lem-pc-proper-base-change. Its fibres X_{i,s}⊗κ(b) are geometrically connected and nonempty, so lem-sbc-smooth-connected-generic-geometry-core makes each B_j normal integral (I checked that statement independently and it is true), and lfp→lft with 01T6 makes it locally Noetherian. Step 2: π is smooth, flat and lft, Y is locally Noetherian, and the fibres Y_p=X_{3,s}⊗κ(p) are integral by geometric integrality. Step 3 is correctly elementary: the generic point ξ of P maps to η by surjectivity and continuity, an invertible module over a field is free, and D(A) is invertible by local frames. Step 4 applies only the statement of the 0BD7 node, with every hypothesis matched. Edge cases checked: S a field, X3=S, X1 or X2=S (D(A)≅O), non-proper X3, normal singular S. Duplicate search (0BD7, square difference, theorem of the square) found no node that states the item; reusing the 0BD7 node is correct, and there is no cycle. I accept both tool_uses (smooth base change; smooth-connected normal integrality), which are generic geometry the unit lacks. Batch-5 flag: lem-trf-flat-module-torsionfree-domain is a Mathlib leaf saying flat over a domain implies torsion-free. It is general commutative algebra, not a step of the trace formula or of Poincaré duality, so it is outside the assumptions. blueprint.from.node is set to det-thm-sf-ctf-stability-direct-images; it is a blueprint node and the endpoint recorded on lem-sfb-admissible-direct-image, with the via chain kept, so I accept it. No SGA is cited. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalProductSquareDescent",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.normal_product_square_descent",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.squareParameter",
+   "AlgebraicGeometry.Scheme.Modules.squareCoordinate",
+   "AlgebraicGeometry.Scheme.Modules.squareDifference",
+   "AlgebraicGeometry.Scheme.Modules.squareProjection",
+   "AlgebraicGeometry.Scheme.Modules.normal_product_square_descent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalProductSquareDescent.lean",
+  "statement": "theorem normal_product_square_descent {S : Scheme.{u}} [IsIntegral S] [IsLocallyNoetherian S] (hS : ∀ s : S, IsDomain (S.presheaf.stalk s) ∧ IsIntegrallyClosed (S.presheaf.stalk s)) (X₁ X₂ X₃ : Over S) [Smooth X₁.hom] [IsSeparated X₁.hom] [LocallyOfFinitePresentation X₁.hom] [QuasiCompact X₁.hom] [GeometricallyIntegral X₁.hom] [Smooth X₂.hom] [IsSeparated X₂.hom] [LocallyOfFinitePresentation X₂.hom] [QuasiCompact X₂.hom] [GeometricallyIntegral X₂.hom] [Smooth X₃.hom] [IsSeparated X₃.hom] [LocallyOfFinitePresentation X₃.hom] [QuasiCompact X₃.hom] [GeometricallyIntegral X₃.hom] (A : ((X₁ ⨯ X₂) ⨯ X₃).left.Modules) [IsInvertible A] (hη : ∃ Nη : (Limits.pullback (squareParameter X₁ X₂).hom (S.fromSpecStalk (genericPoint S))).Modules, IsInvertible Nη ∧ Nonempty ((tensorPullback (pullback.fst (squareParameter X₁ X₂ ⨯ X₃).hom (S.fromSpecStalk (genericPoint S)))).obj (squareDifference X₁ X₂ X₃ A) ≅ (tensorPullback (((Over.pullback (S.fromSpecStalk (genericPoint S))).map (squareProjection X₁ X₂ X₃)).left)).obj Nη)) : ∃ N : (squareParameter X₁ X₂).left.Modules, IsInvertible N ∧ Nonempty (squareDifference X₁ X₂ X₃ A ≅ (tensorPullback (squareProjection X₁ X₂ X₃).left).obj N)",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2e703e883",
+  "group": "NF",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: normal integral locally Noetherian S (inline IsDomain∧IsIntegrallyClosed stalks per def-weil-pbc-normal-ring record), η=fromSpecStalk genericPoint, Smooth+IsSeparated+LFP+QuasiCompact = finite presentation (qs from separated, not stronger), GeometricallyIntegral ≡ geometrically integral fibres; r_ab coordinates and D(A)=r00⊗r11⊗homObj(r01,𝟙)⊗homObj(r10,𝟙) correct; hη uses pullback.fst Y η and canonical (Over.pullback η).map π; conclusion ∃ invertible N, D(A)≅π^*N. Node unchanged vs side-live except lean record, not superseded. Helpers are real constructions; docstrings with source and blueprint; sorry only; single universe u; no duplicate squareDifference anywhere. Advisory: sibling lem-sfb-field-product-square-power should reuse these helpers. No compile (no change); worker dry run OK."
+ }
+}

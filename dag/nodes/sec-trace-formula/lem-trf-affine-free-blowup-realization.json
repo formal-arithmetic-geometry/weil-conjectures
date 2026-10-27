@@ -1,0 +1,337 @@
+{
+ "id": "lem-trf-affine-free-blowup-realization",
+ "kind": "statement",
+ "title": "Realizing the affine algebraic blowup helper as a fibrewise free sheaf locus",
+ "statement": "Let $R$ be a commutative ring, $S=\\operatorname{Spec}R$, $h\\in R$ a nonzerodivisor, and $U=D(h)\\subset S$ [def-weil-affine-spectrum]. Let $f:X\\to S$ be affine, flat and of finite presentation, with geometrically integral fibres, meaning integral after every field extension. Let $\\mathcal F$ be a finite-type quasi-coherent $\\mathcal O_X$-module whose restriction to $X_U$ is of finite presentation. Fix $r\\in\\mathbf N$ and assume that for every $u\\in U$, the stalk $\\mathcal F_{\\xi_u}$ at the generic point $\\xi_u$ of the fibre is free of rank $r$ over $\\mathcal O_{X,\\xi_u}$. Then there is a finitely generated ideal $I\\subset R$ with $V(I)=V(h)$ and an open $V\\subset X\\times_S\\operatorname{Bl}_I(S)$ whose map to $\\operatorname{Bl}_I(S)$ is surjective and on which the module strict transform of $\\mathcal F$ is locally isomorphic to $\\mathcal O_V^{\\oplus r}$. Blowups and strict transforms are as in [def-nagata-global-blowup], [def-trf-module-strict-transform]; in particular this is a $U$-admissible blowup [def-nagata-admissible-blowup]. Schemes, morphism properties, quasi-coherent modules, finite type and finite presentation, relative module flatness, integral schemes, fibres, generic points and residue fields are as in [def-pc-scheme], [def-weil-pbc-scheme-conventions], [pqf-def-coherent], [def-weil-pbc-module-finite-type-presentation], [def-pc-scheme-module-flat-over], [def-pc-integral-scheme], [def-pc-scheme-fibre], [def-sc-generic-point], [def-weil-residue-field].",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 0811, lemma-flatten-module-pre, final paragraph, realizing Tag 0810, lemma-helper-blowup-affine-space, on blowup charts."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-nagata-global-blowup",
+  "def-trf-module-strict-transform",
+  "def-nagata-admissible-blowup",
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-coherent",
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-pc-scheme-module-flat-over",
+  "def-pc-integral-scheme",
+  "def-pc-scheme-fibre",
+  "def-sc-generic-point",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "Since $S$ is affine and $f$ is affine, write $X=\\operatorname{Spec}B$ over $\\operatorname{Spec}R$ by [pqf-def-affine-morphism, def-weil-affine-spectrum]. The affine flatness criterion [lem-weil-pbc-flat-morphism-affine-criterion] makes $B$ flat over $R$, and [lem-weil-pbc-lfp-affine-opens-finite-presentation] makes $R\\to B$ finitely presented. Put $N=\\Gamma(X,\\mathcal F)$. The counit in [lem-weil-pbc-affine-tilde-gamma-adjunction](3) gives $\\widetilde N\\cong\\mathcal F$. Apply [lem-weil-pbc-quasi-coherent-finite-type-affine](a) on $X$ to see that $N$ is finite over $B$. The open $X_U=f^{-1}(D(h))$ is the principal open $D(h)\\subset\\operatorname{Spec}B$ of the image of $h$ (a prime of $B$ avoids it exactly when its contraction to $R$ does), and by [lem-weil-pbc-affine-ideals-closed-subscheme](0) it is an affine open of $X$ whose restriction map $B\\to\\mathcal O_X(D(h))$ is a localization at $h$. By [lem-weil-pbc-spec-module-tilde-sections], its section module is $N_h$ over $B_h$; applying the same affine criterion (b) to this affine open shows that $N_h$ is finitely presented.",
+   "uses": [
+    "pqf-def-affine-morphism",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-affine-ideals-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0811, lemma-flatten-module-pre, final paragraph: affine translation before invoking Tag 0810; Properties Tags 01PB/01PC."
+   }
+  },
+  {
+   "text": "For $\\mathfrak p\\in\\operatorname{Spec}R$ and a field extension $K/\\kappa(\\mathfrak p)$, [lem-weil-pbc-fibre-product-affine-spectra] identifies the extended fibre with $\\operatorname{Spec}(B\\otimes_RK)$. Geometric integrality and [def-pc-integral-scheme] imply that this ring is a nonzero domain. In particular put $C_{\\mathfrak p}=B\\otimes_R\\kappa(\\mathfrak p)$ and $\\mathfrak q_{\\mathfrak p}=\\ker(B\\to C_{\\mathfrak p})$. By [lem-weil-pbc-spec-domain-stalks-function-field](2), the fibre's generic point is its zero prime; the projection to $X$ sends it to $\\mathfrak q_{\\mathfrak p}$ by the spectrum definition. Thus [lem-weil-pbc-spec-tilde-stalk-localization] identifies the assumed free stalk with $N_{\\mathfrak q_{\\mathfrak p}}\\cong B_{\\mathfrak q_{\\mathfrak p}}^{\\oplus r}$ whenever $h\\notin\\mathfrak p$. Every hypothesis of [lem-trf-affine-generic-rank-blowup] now holds. Choose its finitely generated ideal $I$ with $V(I)=V(h)$ and retain its conclusion for every $a\\in I$ and every prime of $R[I/a]$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-spec-tilde-stalk-localization",
+    "lem-trf-affine-generic-rank-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0810, lemma-helper-blowup-affine-space, hypotheses and conclusion; Tag 0811 final paragraph."
+   }
+  },
+  {
+   "text": "Choose a nonempty finite generating list $a_1,\\ldots,a_t$ of $I$, adding a zero generator if necessary. By [prop-nagata-affine-blowup-chart-cover] the opens $T_i=\\operatorname{Spec}R_i$, $R_i=R[I/a_i]$, cover $T=\\operatorname{Bl}_I(S)$. By [lem-weil-pbc-fibre-product-affine-spectra], $Y_i=X\\times_ST_i=\\operatorname{Spec}B_i$, $B_i=B\\otimes_RR_i$, cover $Y=X\\times_ST$. The extended ideal on $R_i$ is $(a_i)$: each $x\\in I$ equals $a_i(x/a_i)$ in the chart subring of $R[1/a_i]$ [def-nagata-blowup-chart-ring], and $a_i\\in I$. Consequently the exceptional inverse image on $Y_i$ is $V(a_i)$. By [lem-weil-pbc-tilde-pullback-base-change], the ordinary pullback of $\\mathcal F$ to $Y_i$ is $\\widetilde{P_i}$ for $P_i=N\\otimes_RR_i$; here $B_i\\otimes_BN\\cong N\\otimes_RR_i$ sends $(b\\otimes c)\\otimes n$ to $bn\\otimes c$, with inverse $n\\otimes c\\mapsto(1\\otimes c)\\otimes n$.",
+   "uses": [
+    "prop-nagata-affine-blowup-chart-cover",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-nagata-blowup-chart-ring",
+    "lem-weil-pbc-tilde-pullback-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0804, lemma-blowing-up-affine; Tag 0806, lemma-universal-property-blowing-up; affine chart calculation in lemma-strict-transform (Tag 080E)."
+   }
+  },
+  {
+   "text": "On $Y_i$, the subsheaf removed in [def-trf-module-strict-transform] consists exactly of sections of $\\widetilde{P_i}$ zero off $V(a_i)$. Apply clause (1) of [lem-trf-principal-support-quotient-exact] over the ring $B_i$, with its element $a_i$, to the sequence $0\\to0\\to P_i\\xrightarrow{1}P_i\\to0$. This sequence is short exact and every map $0/a_i^n0\\to P_i/a_i^nP_i$ is injective, so all hypotheses hold. The result identifies the removed subsheaf with $\\widetilde{\\Gamma_{(a_i)}P_i}$ and the quotient with $\\widetilde{Q_i}$, where $Q_i=P_i/\\{m:\\exists n\\ge0,\\ a_i^nm=0\\}$. Hence the actual strict transform $\\mathcal F^b$ restricted to $Y_i$ is $\\widetilde{Q_i}$. This uses the sheaf quotient identification of the cited statement, not exactness of global sections for arbitrary sheaves.",
+   "uses": [
+    "def-trf-module-strict-transform",
+    "lem-trf-principal-support-quotient-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080E, lemma-strict-transform, final affine-module paragraph; Tag 080W, lemma-strict-transform-universally-injective, principal-support quotient calculation."
+   }
+  },
+  {
+   "text": "For every $\\mathfrak p'\\in\\operatorname{Spec}R_i$, the algebraic helper gives $g\\in B_i$ with nonzero image in $B_i\\otimes_{R_i}\\kappa(\\mathfrak p')$ and $(Q_i)_g\\cong(B_i)_g^{\\oplus r}$. Let $W_{i,\\mathfrak p'}=D(g)\\subset Y_i$, an open by [lem-weil-pbc-spec-localization-away-basic-open]. The localization description [lem-weil-pbc-spec-module-tilde-sections], together with [lem-weil-pbc-spec-tilde-free-module], gives $\\mathcal F^b|_{W_{i,\\mathfrak p'}}\\cong\\mathcal O_{W_{i,\\mathfrak p'}}^{\\oplus r}$. This open meets the fibre over $\\mathfrak p'$: writing $\\mathfrak p$ for its image in $S$, the field extension $\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak p')$ and tensor associativity identify the fibre algebra with $B\\otimes_R\\kappa(\\mathfrak p')$, a nonzero domain by geometric integrality as in Step 2. Its zero prime avoids the nonzero image of $g$, and its inverse image in $B_i$ is a point of $D(g)$ lying over $\\mathfrak p'$.",
+   "uses": [
+    "lem-trf-affine-generic-rank-blowup",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-spec-tilde-free-module",
+    "def-weil-residue-field",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0810, lemma-helper-blowup-affine-space, conclusion; Tag 0811, lemma-flatten-module-pre, final paragraph, fibrewise nonempty free opens."
+   }
+  },
+  {
+   "text": "Set $V=\\bigcup_{i,\\mathfrak p'}W_{i,\\mathfrak p'}\\subset Y$. A union of opens is open. Every point of $T$ belongs to some $T_i$ and has a preimage in the corresponding $W_{i,\\mathfrak p'}$, so $V\\to T$ is surjective. The displayed free identifications on these opens prove the required local isomorphism on $V$; no compatibility between chosen bases is needed. Finally $V(I)=V(h)$ implies that the ideal sheaf associated to $I$ restricts to the unit ideal on $D(h)$: at each such prime some generator of $I$ is invertible. Its finite generators give local finite generation of that quasi-coherent ideal, and $D(h)$ is quasi-compact since it is affine. Thus $I$ with its blowup is a $U$-admissible datum by [def-nagata-admissible-blowup].",
+   "uses": [
+    "def-nagata-admissible-blowup",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0811, lemma-flatten-module-pre, final paragraph; elementary union and admissibility check after applying Tag 0810."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-affine-morphism",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-affine-ideals-closed-subscheme",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "lem-trf-affine-generic-rank-blowup",
+  "prop-nagata-affine-blowup-chart-cover",
+  "def-nagata-blowup-chart-ring",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "def-trf-module-strict-transform",
+  "lem-trf-principal-support-quotient-exact",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-spec-tilde-free-module",
+  "def-weil-residue-field",
+  "def-nagata-admissible-blowup",
+  "lem-weil-pbc-affine-scheme-qcqs"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 0811, lemma-flatten-module-pre, final paragraph; algebraic input Tag 0810 with affine module strict-transform interpretation from divisors.tex Tag 080E."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An affine flat finitely presented family with geometrically integral fibers and a finite module generically free of constant rank admits a blowup with fiberwise nonempty free locus",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for any affine open subset $ U \\\\subseteq Y $ and affine open subset $ V \\\\subseteq X $ satisfying $ V \\\\subseteq f^{-1}(U) $, the induced ring homo\"}\n  {\"name\": \"AlgebraicGeometry.flat_and_surjective_SpecMap_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {R S : CommRingCat} (f : R ⟶ S),\\n  AlgebraicGeometry.Flat (AlgebraicGeometry.Spec.map f) ∧ AlgebraicGeometry.Surjective (AlgebraicGeometry.Spec.map f) ↔\\n    (CommRingCat.Hom.hom f).FaithfullyFlat\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R → S $ induces a morphism of schemes $ \\\\operatorname{Spec}(S) → \\\\operatorname{Spec}(R) $ via $ \\\\operatorname{Spec}.\\\\text{map} $. This \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Flatness and free-locus results do not construct the blowup or identify its strict-transform quotient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict transform sheaf on affine blowup charts is quotient by power torsion and free principal opens meet every fiber",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) {U V : ↑X.affineOpens} (h : U ≤ V)\\n  (f : ↑(X.presheaf.obj (Opposite.op ↑V))),\\n  U = X.affineBasicOpen f →\\n    IsLocalization.Away ((Ideal.Quotient.mk (I.ideal V)) f) (↑(X.presheaf.obj (Opposite.op ↑U)) ⧸ I.ideal U)\", \"doc\": \"For affine open subsets $U \\\\subseteq V$ of a scheme $X$, the ideal $I(V)$ in the ring of sections $\\\\Gamma(V, \\\\mathcal{O}_X)$ is contained in the preimage of the ideal $I(U)$ in $\\\\Gamma(U, \\\\mathcal{O}_\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n      ∃ n y, TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.restrictOpen f (X.basicOpen f) ⋯ ^\", \"doc\": \"For any affine open subset $ U $ of a scheme $ X $, a section $ f $ over $ U $, and a section $ x $ over the basic open set $ D(f) $ defined by $ f $, there exists a natural number $ n $ and a section\"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, if a section $ x $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ vanishes on the basic open set $ D(f) $ defined by a section $ f \\\\in \\\\Gamma(U,\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.map_ideal_basicOpen\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (self : X.IdealSheafData) (U : ↑X.affineOpens)\\n  (f : ↑(X.presheaf.obj (Opposite.op ↑U))),\\n  Ideal.map (CommRingCat.Hom.hom (X.presheaf.map (CategoryTheory.homOfLE ⋯).op)) (self.ideal U) =\\n    self.ideal (X.affineBasicOpen f)\", \"doc\": \"For a scheme $X$ with ideal sheaf data, an affine open subset $U$ of $X$, and a section $f$ of the structure sheaf over $U$, the ideal sheaf restricted to the basic open subset $D(f)$ is equal to the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  (I : X.IdealSheafData) →\\n    (U : ↑X.affineOpens) →\\n      I.subscheme.presheaf.obj (Opposite.op ((TopologicalSpace.Opens.map I.subschemeι.base).obj ↑U)) ≅\\n        { carrier := ↑(X.presheaf.obj (Opposite.op ↑U)) ⧸ I.ideal U, commRing := Ideal.Quotient.commRing (I.id\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $ and a closed subscheme defined by an ideal sheaf $ \\\\mathcal{I} $, the global sections of the subscheme's structure sheaf over the intersection with $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.opensRange_glueDataObjMap\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) {V : ↑X.affineOpens} (f : ↑(X.presheaf.obj (Opposite.op ↑V))),\\n  AlgebraicGeometry.Scheme.Hom.opensRange (I.glueDataObjMap ⋯) =\\n    (TopologicalSpace.Opens.map (I.glueDataObjι V).base).obj\\n      ((TopologicalSpace.Opens.map (↑V).ι.base).obj (X.\", \"doc\": \"For a scheme $X$ with ideal sheaf data $\\\\mathcal{I}$, an affine open subset $V \\\\subseteq X$, and a section $f \\\\in \\\\Gamma(V, \\\\mathcal{O}_X)$, the image of the gluing morphism $\\\\mathcal{I}.\\\\text{glueDat\"}\n  {\"name\": \"AlgebraicGeometry.isLocalization_away_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X] (r : ↑(X.presheaf.obj (Opposite.op ⊤))),\\n  IsLocalization.Away r ↑(X.presheaf.obj (Opposite.op (X.basicOpen r)))\", \"doc\": \"For a scheme $ X $, an open subset $ U $ of $ X $, and a section $ f $ of the structure sheaf over $ U $, the ring of sections over the basic open set $ D(f) $ (consisting of points where the germ of \"}\n  {\"name\": \"AlgebraicGeometry.Γ_restrict_isLocalization\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X] (r : ↑(X.presheaf.obj (Opposite.op ⊤))),\\n  IsLocalization.Away r ↑((↑(X.basicOpen r)).presheaf.obj (Opposite.op ⊤))\", \"doc\": \"For any affine scheme $X$ and an element $r$ in its ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$, the ring of sections over the basic open set $X_{r}$ is canonically isomorphic to the localizati\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Flatness and free-locus results do not construct the blowup or identify its strict-transform quotient."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"strictTransform\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: Flatness and free-locus results do not construct the blowup or identify its strict-transform quotient."
+  },
+  {
+   "tool": "grep",
+   "query": "strictTransform|powerTorsion|blowup.*[Ff]ree",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: Flatness and free-locus results do not construct the blowup or identify its strict-transform quotient."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite module strict transform on an affine blowup is locally free on an open surjecting onto the base",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.freeLocus\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \": Set (PrimeSpectrum R)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p}$ in the prime spectrum of a commutative ring $R$ such that the localization of the $R$-module $M$ at $\\\\mathfrak{p}$ (i.e., the module obtained by inverting all el\"}\n  {\"name\": \"Module.basicOpen_subset_freeLocus_iff\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \"[Module.FinitePresentation R M] {f : R} :\\n  (basicOpen f : Set (PrimeSpectrum R)) ⊆ freeLocus R M ↔\\n    Module.Projective (Localization.Away f) (LocalizedModule (.powers f) M)\", \"doc\": \"For a finitely presented module $ M $ over a commutative ring $ R $ and an element $ f \\\\in R $, the basic open set $ D(f) $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ is contained in the free lo\"}\n  {\"name\": \"Module.isOpen_freeLocus\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \"[Module.FinitePresentation R M] : IsOpen (freeLocus R M)\", \"doc\": \"For a finitely presented module $ M $ over a commutative ring $ R $, the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R) $ where the localization $ M_{\\\\mathfrak{p}} $ is a free module ov\"}\n  {\"name\": \"Module.free_of_maximalIdeal_rTensor_injective\", \"module\": \"Mathlib.RingTheory.LocalRing.Module\", \"type\": \"[Module.FinitePresentation R M] (H : Function.Injective ((𝔪).subtype.rTensor M)) : Module.Free R M\", \"doc\": \"Let $ R $ be a local ring with maximal ideal $ \\\\mathfrak{m} $, and let $ M $ be a finitely presented $ R $-module. If the natural linear map $ \\\\mathfrak{m} \\\\otimes_R M \\\\to R \\\\otimes_R M \\\\cong M $ indu\"}\n  {\"name\": \"Module.free_of_isLocalizedModule\", \"module\": \"Mathlib.RingTheory.LocalProperties.Projective\", \"type\": \"{Rₛ Mₛ} [AddCommGroup Mₛ] [Module R Mₛ] [CommRing Rₛ] [Algebra R Rₛ] [Module Rₛ Mₛ] [IsScalarTower R Rₛ Mₛ] (S)\\n  (f : M →ₗ[R] Mₛ) [IsLocalization S Rₛ] [IsLocalizedModule S f] [Module.Free R M] : Module.Free Rₛ Mₛ\", \"doc\": \"If $ M $ is a free $ R $-module and $ M' $ is the localization of $ M $ at a submonoid $ S $ of $ R $, then $ M' $ is a free $ R' $-module, where $ R' $ denotes the localization of $ R $ at $ S $.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [Flat f] : Flat (f ∣_ V)\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, then its restriction to any open subset $ V $ of the target scheme $ Y $ remains flat. This means the property of flatness is maintained when restricti\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \": HasAffineProperty @IsFinite (fun X _ f _ ↦ IsAffine X ∧ RingHom.Finite (f.appTop).hom)\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n  {\"name\": \"ModuleCat.Tilde.openToLocalization\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Tilde\", \"type\": \"(U : Opens (PrimeSpectrum R)) (x : PrimeSpectrum R) (hx : x ∈ U) :\\n  (tildeInModuleCat M).obj (op U) ⟶ ModuleCat.of R (LocalizedModule x.asIdeal.primeCompl M)\", \"doc\": \"Given an open subset $ U $ of the prime spectrum $ \\\\operatorname{Spec}(R) $ containing a prime ideal $ \\\\mathfrak{p} $, this morphism maps sections of the sheaf $ \\\\widetilde{M} $ over $ U $ to the loca\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Flatness and free-locus results do not construct the blowup or identify its strict-transform quotient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine flat finitely presented family with geometrically integral fibers admits a blowup making a module strict transform free on an open surjecting onto the base",
+   "results": "{\"t\": \"2026-10-23T09:59:36Z\", \"tool\": \"leanfinder\", \"query\": \"An affine flat finitely presented family with geometrically integral fibers admits a blowup making a module strict transform free on an open surjecting onto the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\"], \"digest\": \"8ca0facd9533952d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: The hits give flatness, openness, or spreading of an already free localization, but do not construct a blowup with the stated strict-transform and fibre-surjectivity conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"strictTransform\"",
+   "results": "{\"t\": \"2026-10-23T10:00:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"strictTransform\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: The hits give flatness, openness, or spreading of an already free localization, but do not construct a blowup with the stated strict-transform and fibre-surjectivity conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "strictTransform|blowup.*free|free.*blowup",
+   "results": "{\"t\": \"2026-10-23T10:00:56Z\", \"tool\": \"grep\", \"query\": \"strictTransform|blowup.*free|free.*blowup\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: The hits give flatness, openness, or spreading of an already free localization, but do not construct a blowup with the stated strict-transform and fibre-surjectivity conclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A module strict transform becomes locally free on a fiberwise nonempty open after blowing up the base",
+   "results": "{\"t\": \"2026-10-23T10:00:56Z\", \"tool\": \"leansearch\", \"query\": \"A module strict transform becomes locally free on a fiberwise nonempty open after blowing up the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.freeLocus\", \"Module.mem_freeLocus_of_isLocalization\", \"Module.isLocallyConstant_rankAtStalk_freeLocus\", \"Module.isOpen_freeLocus\", \"IsBaseChange.free\", \"Module.mem_freeLocus\", \"AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso\", \"Module.free_of_isLocalizedModule\"], \"digest\": \"3c5cd9b1d79f6908\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: The hits give flatness, openness, or spreading of an already free localization, but do not construct a blowup with the stated strict-transform and fibre-surjectivity conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Blowing up the coefficient Fitting ideal gives a rank r locally free locus of the strict transform meeting every fiber",
+   "results": "{\"t\": \"2026-10-23T10:04:37Z\", \"tool\": \"leanfinder\", \"query\": \"Blowing up the coefficient Fitting ideal gives a rank r locally free locus of the strict transform meeting every fiber\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.freeLocus\", \"Module.isLocallyConstant_rankAtStalk_freeLocus\", \"Module.isOpen_freeLocus\", \"Module.mem_freeLocus\", \"Module.basicOpen_subset_freeLocus_iff\", \"Module.mem_freeLocus_of_isLocalization\", \"Module.FinitePresentation.exists_free_localizedModule_powers\", \"Module.Grassmannian.rankAtStalk_eq\"], \"digest\": \"9df5b66b0de6e5c5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: The hits give flatness, openness, or spreading of an already free localization, but do not construct a blowup with the stated strict-transform and fibre-surjectivity conclusion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-generic-free-blowup",
+  "date": "2026-10-22",
+  "group": "Q65"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument is applied to the finite-type module i_* O_X on an affine-space neighbourhood. Stacks 0815 proof paragraph 3: apply lemma-flatten-module-pre before subtracting a free module. Stacks 0811/080Y refinement: Realizing the affine algebraic blowup helper as a fibrewise free sheaf locus.",
+   "via": [
+    "lem-trf-generic-free-blowup",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-affine-free-blowup-realization",
+  "worker": "stage1",
+  "summary": "Reused the existing algebraic blowup helper, affine module dictionary and principal-support quotient statement; supplied the affine translation, chart strict-transform identification, fibre point construction and union argument. No new nodes and no statement changes. Mathlib and project source searches did not find a finished declaration of the entire item.",
+  "blueprint": "Retains the recorded semistable-alteration ancestry through lem-trf-local-term-locality; realizes Stacks 0811 final paragraph via 0810. The latest blueprint locality proof has changed to contracting correspondences, so this supporting node is treated on its recorded flattening branch, without changing any chapter or unit. Whole-blueprint blowup and quasi-coherent searches found no equivalent item.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-flat-morphism-affine-criterion",
+    "why": "Generic affine-scheme/module dictionary or chart-cover tool used to realize the given Stacks 0810/0811 route; no statement of this unit supplies this interface."
+   },
+   {
+    "node": "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "why": "Generic affine-scheme/module dictionary or chart-cover tool used to realize the given Stacks 0810/0811 route; no statement of this unit supplies this interface."
+   },
+   {
+    "node": "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "why": "Generic affine-scheme/module dictionary or chart-cover tool used to realize the given Stacks 0810/0811 route; no statement of this unit supplies this interface."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Generic affine-scheme/module dictionary or chart-cover tool used to realize the given Stacks 0810/0811 route; no statement of this unit supplies this interface."
+   },
+   {
+    "node": "lem-weil-pbc-spec-module-tilde-sections",
+    "why": "Generic affine-scheme/module dictionary or chart-cover tool used to realize the given Stacks 0810/0811 route; no statement of this unit supplies this interface."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic affine-scheme/module dictionary or chart-cover tool used to realize the given Stacks 0810/0811 route; no statement of this unit supplies this interface."
+   },
+   {
+    "node": "lem-weil-pbc-spec-domain-stalks-function-field",
+    "why": "Generic affine-scheme/module dictionary or chart-cover tool used to realize the given Stacks 0810/0811 route; no statement of this unit supplies this interface."
+   },
+   {
+    "node": "lem-weil-pbc-spec-tilde-stalk-localization",
+    "why": "Generic affine-scheme/module dictionary or chart-cover tool used to realize the given Stacks 0810/0811 route; no statement of this unit supplies this interface."
+   },
+   {
+    "node": "prop-nagata-affine-blowup-chart-cover",
+    "why": "Generic affine-scheme/module dictionary or chart-cover tool used to realize the given Stacks 0810/0811 route; no statement of this unit supplies this interface."
+   },
+   {
+    "node": "lem-weil-pbc-tilde-pullback-base-change",
+    "why": "Generic affine-scheme/module dictionary or chart-cover tool used to realize the given Stacks 0810/0811 route; no statement of this unit supplies this interface."
+   },
+   {
+    "node": "lem-weil-pbc-spec-localization-away-basic-open",
+    "why": "Generic affine-scheme/module dictionary or chart-cover tool used to realize the given Stacks 0810/0811 route; no statement of this unit supplies this interface."
+   },
+   {
+    "node": "lem-weil-pbc-spec-tilde-free-module",
+    "why": "Generic affine-scheme/module dictionary or chart-cover tool used to realize the given Stacks 0810/0811 route; no statement of this unit supplies this interface."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic affine-scheme/module dictionary or chart-cover tool used to realize the given Stacks 0810/0811 route; no statement of this unit supplies this interface."
+   },
+   {
+    "node": "lem-weil-pbc-affine-ideals-closed-subscheme",
+    "why": "Clause (0) only: a principal open of an affine scheme is an affine open with coordinate ring the localization, needed to apply the affine finite-presentation criterion on X_U=D(h); generic scheme foundation (Mathlib-matched), no node of this unit supplies it. Added by the maintainer reader Q129."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "prop-nagata-affine-blowup-chart-cover",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-spec-tilde-free-module",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-affine-ideals-closed-subscheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q129-c81830be7",
+  "group": "Q129",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q129-c81830be7 (reviewer sub-agent of L); spot-checked: Read in full: the item's 6 steps (no new nodes), every cited statement, Stacks flat.tex Tag 0811 (lemma-flatten-module-pre: statement, proof, final affine-Cartier paragraph) and Tag 0810 (lemma-helper-blowup-affine-space: statement and proof). The item is the affine constant-rank case to which 0811 reduces, and it is not weaker than the source; its hypotheses match those of the helper lem-trf-affine-generic-rank-blowup. The helper's q_p (kernel of B→B⊗κ(p)) equals pB under flatness and integral fibres, and the step uses only the helper's statement. Steps 2–6 are correct. Step 2: the generic point is the zero prime and its image in X is q_p, by spec-domain-stalks (2) and tilde-stalk. Step 3: the chart cover and IR_i=(a_i), plus the tilde pullback. Step 4: principal-support-quotient (1) applied to 0→0→P→P→0. Step 5: the fibre-point argument keeps the domain hypothesis, and the preimage contracts to p'. Step 6: admissibility is checked against both forms of def-nagata-admissible-blowup. Edge cases checked: R=0, I=0, h a unit, r=0, non-Noetherian R. No duplicate (0811 search found only the parent and its siblings), no cycle, no SGA. FIX (C1): step 1 applied quasi-coherent-finite-type-affine (b) on X_U=D(h) without any cited node saying that D(h) is an affine open with ring B_h; tilde-sections gives only the sections and spec-localization only a homeomorphism. Fixed by citing lem-weil-pbc-affine-ideals-closed-subscheme clause (0) (status mathlib) and writing out f⁻¹(D(h)) = D(image of h). The new id is added to the step's uses, to proof_deps and to tool_uses. The statement and stmt_deps are unchanged.; 1 file(s) fixed by the reviewer"
+ }
+}

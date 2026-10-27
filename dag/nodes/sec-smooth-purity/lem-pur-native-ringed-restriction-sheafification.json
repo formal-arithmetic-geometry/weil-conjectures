@@ -1,0 +1,113 @@
+{
+ "id": "lem-pur-native-ringed-restriction-sheafification",
+ "kind": "statement",
+ "title": "Native Ringed Restriction Sheafification",
+ "status": "split",
+ "statement": "For a continuous and cocontinuous functor of sites, a commutative ring sheaf R, and a module presheaf P over its ring presheaf, direct restriction of the module sheafification of P is isomorphic to sheafification of the restricted module presheaf. Assume additive sheafification and its locally bijective criterion on both sites, with the common coefficient universe containing both site sizes. Dependencies: [lem-pur-native-ringed-restriction-hom], [def-weil-presheaf-modules-sheafification].",
+ "stmt_deps": [
+  "lem-pur-native-ringed-restriction-hom",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0999, 099B and 0A0E; sites.tex Tags 03A0 and 03CH for equivalent sites and slices; sites-modules.tex Tags 03DA and 03DG for abelian module categories and intrinsic properties; sites-cohomology.tex Tags 08J7, 0A95 and 0941 for Hom and strict Roos comparisons. See the declaration docstrings for the particular step."
+ },
+ "proof": [
+  {
+   "text": "the sheafification unit is locally bijective. Cocontinuity preserves this property after restriction, and continuity makes its target a sheaf. The universal property of module sheafification therefore identifies the restricted target with the sheafification of the restricted presheaf.",
+   "uses": [
+    "lem-pur-native-ringed-restriction-hom",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-ringed-section-localization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-native-ringed-restriction-hom",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-ringed-section-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0999, 099B and 0A0E; sites.tex Tags 03A0 and 03CH for equivalent sites and slices; sites-modules.tex Tags 03DA and 03DG for abelian module categories and intrinsic properties; sites-cohomology.tex Tags 08J7, 0A95 and 0941 for Hom and strict Roos comparisons. See the declaration docstrings for the particular step.",
+  "note": "Fully proved in Lean by H4; no new sorry. This supplies the stated principal-cone argument, retaining the unit route."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a continuous and cocontinuous functor of sites, a commutative ring sheaf R, and a module presheaf P over its ring presheaf, direct restriction of the module sheafification of P is isomorphic to sheafification of the restricted module presheaf. Assume additive sheafification and its locally bijective criterion on both sites, with the common coefficient universe containing both site sizes.",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"PresheafOfModules.sheafification\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification\", \"type\": \": PresheafOfModules.{v} R₀ ⥤ SheafOfModules.{v} R\", \"doc\": \"The functor that maps each presheaf of modules $ M_0 $ over a presheaf of rings $ R_0 $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $ to its sheafification as a sheaf of modules over \"}\n  {\"name\": \"PresheafOfModules.sheafifyMap\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafify\", \"type\": \"(fac : (toPresheaf R₀).map τ₀ ≫ φ' = φ ≫ τ.val) : sheafify α φ ⟶ sheafify α φ'\", \"doc\": \"Given a presheaf of modules $ M_0 $ over a presheaf of rings $ R_0 $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, this constructs a morphism between the sheafifications of $ M_0 $ t\"}\n  {\"name\": \"SheafOfModules.sheafificationCompPullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \":\\n  PresheafOfModules.sheafification (𝟙 S.val) ⋙ pullback.{v} φ ≅\\n    PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)\", \"doc\": \"The natural isomorphism asserting that composing sheafification with the pullback functor (along a ring sheaf morphism) is equivalent to composing the pullback functor (on presheaves) with sheafificat\"}\n  {\"name\": \"PresheafOfModules.sheafifyHomEquiv'\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafify\", \"type\": \"{F : PresheafOfModules.{v} R.val} (hF : Presheaf.IsSheaf J F.presheaf) :\\n  ((sheafify α φ).val ⟶ F) ≃ (M₀ ⟶ (restrictScalars α).obj F)\", \"doc\": \"Given a presheaf of modules $M_0$ over a presheaf of rings $R_0$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, and a natural transformation $\\\\alpha: R_0 \\\\to R$ to a sheafified ring $R$, \"}\n  {\"name\": \"PresheafOfModules.sheafification_map\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.val)\\n  [inst_1 : CategoryTheory.Presheaf.IsLocallyInjective J α] [inst_2 : CategoryTheory.Presheaf.IsLo\", \"doc\": \"For a presheaf of rings $\\\\mathcal{O}$ on a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, and a morphism $f: X \\\\to Y$ between presheaves of $\\\\mathcal{O}$-modules, the sheafification functor \"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (forget S ⋙ PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)) ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafify\", \"type\": \"{F : PresheafOfModules.{v} R.val} (hF : Presheaf.IsSheaf J F.presheaf) (f : M₀ ⟶ (restrictScalars α).obj F) :\\n  φ ≫ (toPresheaf R.val).map ((sheafifyHomEquiv' α φ hF).symm f) = (toPresheaf R₀).map f\", \"doc\": \"Given a presheaf of modules $M_0$ over a presheaf of rings $R_0$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, and a natural transformation $\\\\alpha: R_0 \\\\to R$ to a sheafified ring $R$, \"}\n  {\"name\": \"PresheafOfModules.sheafify\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafify\", \"type\": \": SheafOfModules.{v} R\", \"doc\": \"Given a presheaf of modules $M_0$ over a presheaf of rings $R_0$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, this constructs the sheafification of $M_0$ as a sheaf of modules over the \"}",
+   "date": "2026-10-22",
+   "verdict": "Not the full statement. Results give individual categorical/sheaf constructions or unrelated completions; the required independent-universe comparisons and specified unit compatibility are proved explicitly in the delivery."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafification\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.GrothendieckTopology.sheafification\", \"module\": \"Mathlib.CategoryTheory.Sites.ConcreteSheafification\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) (D : Type w) [CategoryTheory.Category.{w', w} D] [∀ (P : CategoryTheory.Functor Cᵒᵖ D) (X : C) (S : J.Cover X), CategoryTheory.Limits.HasMultiequalizer (S.index P)] [∀ (X : C), CategoryTheory.Limits.HasColim\", \"doc\": \"The sheafification of a presheaf `P`, as a functor.\\n*NOTE:* Additional hypotheses are needed to obtain a proof that this is a sheaf!\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.sheafification_obj\", \"module\": \"Mathlib.CategoryTheory.Sites.ConcreteSheafification\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) (D : Type w) [CategoryTheory.Category.{w', w} D] [∀ (P : CategoryTheory.Functor Cᵒᵖ D) (X : C) (S : J.Cover X), CategoryTheory.Limits.HasMultiequalizer (S.index P)] [∀ (X : C), CategoryTheory.Limits.HasColim\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.toSheafification\", \"module\": \"Mathlib.CategoryTheory.Sites.ConcreteSheafification\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) (D : Type w) [CategoryTheory.Category.{w', w} D] [∀ (P : CategoryTheory.Functor Cᵒᵖ D) (X : C) (S : J.Cover X), CategoryTheory.Limits.HasMultiequalizer (S.index P)] [∀ (X : C), CategoryTheory.Limits.HasColim\", \"doc\": \"The canonical map from `P` to its sheafification, as a natural transformation.\\n*Note:* We only show this is a sheaf under additional hypotheses on `D`.\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.toSheafification_app\", \"module\": \"Mathlib.CategoryTheory.Sites.ConcreteSheafification\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) (D : Type w) [CategoryTheory.Category.{w', w} D] [∀ (P : CategoryTheory.Functor Cᵒᵖ D) (X : C) (S : J.Cover X), CategoryTheory.Limits.HasMultiequalizer (S.index P)] [∀ (X : C), CategoryTheory.Limits.HasColim\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.sheafification_map\", \"module\": \"Mathlib.CategoryTheory.Sites.ConcreteSheafification\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) (D : Type w) [CategoryTheory.Category.{w', w} D] [∀ (P : CategoryTheory.Functor Cᵒᵖ D) (X : C) (S : J.Cover X), CategoryTheory.Limits.HasMultiequalizer (S.index P)] [∀ (X : C), CategoryTheory.Limits.HasColim\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.sheafificationWhiskerLeftIso\", \"module\": \"Mathlib.CategoryTheory.Sites.CompatibleSheafification\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type u_1} [CategoryTheory.Category.{v_1, u_1} D] {E : Type u_2} [CategoryTheory.Category.{v_2, u_2} E] [∀ (J : CategoryTheory.Limits.MulticospanShape), CategoryTheory.Limits.HasLimitsOfShape (CategoryTh\", \"doc\": \"The isomorphism between the sheafification of `P` composed with `F` and\\nthe sheafification of `P ⋙ F`, functorially in `F`.\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.sheafificationWhiskerRightIso\", \"module\": \"Mathlib.CategoryTheory.Sites.CompatibleSheafification\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type u_1} [CategoryTheory.Category.{v_1, u_1} D] {E : Type u_2} [CategoryTheory.Category.{v_2, u_2} E] (F : CategoryTheory.Functor D E) [∀ (J : CategoryTheory.Limits.MulticospanShape), CategoryTheory.Li\", \"doc\": \"The isomorphism between the sheafification of `P` composed with `F` and\\nthe sheafification of `P ⋙ F`, functorially in `P`.\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.sheafificationWhiskerLeftIso_hom_app\", \"module\": \"Mathlib.CategoryTheory.Sites.CompatibleSheafification\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type u_1} [CategoryTheory.Category.{v_1, u_1} D] {E : Type u_2} [CategoryTheory.Category.{v_2, u_2} E] [∀ (J : CategoryTheory.Limits.MulticospanShape), CategoryTheory.Limits.HasLimitsOfShape (CategoryTh\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.sheafificationWhiskerLeftIso_inv_app\", \"module\": \"Mathlib.CategoryTheory.Sites.CompatibleSheafification\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type u_1} [CategoryTheory.Category.{v_1, u_1} D] {E : Type u_2} [CategoryTheory.Category.{v_2, u_2} E] [∀ (J : CategoryTheory.Limits.MulticospanShape), CategoryTheory.Limits.HasLimitsOfShape (CategoryTh\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.sheafificationWhiskerRightIso_hom_app\", \"module\": \"Mathlib.CategoryTheory.Sites.CompatibleSheafification\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type u_1} [CategoryTheory.Category.{v_1, u_1} D] {E : Type u_2} [CategoryTheory.Category.{v_2, u_2} E] (F : CategoryTheory.Functor D E) [∀ (J : CategoryTheory.Limits.MulticospanShape), CategoryTheory.Li\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.sheafificationWhiskerRightIso_inv_app\", \"module\": \"Mathlib.CategoryTheory.Sites.CompatibleSheafification\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type u_1} [CategoryTheory.Category.{v_1, u_1} D] {E : Type u_2} [CategoryTheory.Category.{v_2, u_2} E] (F : CategoryTheory.Functor D E) [∀ (J : CategoryTheory.Limits.MulticospanShape), CategoryTheory.Li\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.sheafification\", \"module\": \"Mathlib.CategoryTheory.Sites.Sheafification\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (J : CategoryTheory.GrothendieckTopology C) (D : Type u_1) [CategoryTheory.Category.{v_1, u_1} D] [CategoryTheory.HasWeakSheafify J D] : CategoryTheory.Functor (CategoryTheory.Functor Cᵒᵖ D) (CategoryTheory.Functor Cᵒᵖ D)\", \"doc\": \"The sheafification of a presheaf `P`, as a functor.\"}",
+   "date": "2026-10-22",
+   "verdict": "Not the full statement. Results give individual categorical/sheaf constructions or unrelated completions; the required independent-universe comparisons and specified unit compatibility are proved explicitly in the delivery."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n sheafification.*(iso|Iso|equiv) Mathlib/ (local read-only Mathlib source)",
+   "results": "25 matching source lines. First matches:\nMathlib/Condensed/Light/Small.lean:57:    (sheafificationAdjunction _ _)).comp (equivSmall C).toAdjunction)).symm <|\nMathlib/Topology/Sheaves/Sheafify.lean:19:We show that the stalks of the sheafification are isomorphic to the original stalks,\nMathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean:169:  (sheafificationAdjunction.{v} α).fullyFaithfulROfIsIsoCounit.full\nMathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean:172:  (sheafificationAdjunction.{v} α).fullyFaithfulROfIsIsoCounit.faithful\nMathlib/CategoryTheory/Sites/CompatibleSheafification.lean:56:noncomputable def sheafificationWhiskerLeftIso (P : Cᵒᵖ ⥤ D)\nMathlib/CategoryTheory/Sites/CompatibleSheafification.lean:69:theorem sheafificationWhiskerLeftIso_hom_app (P : Cᵒᵖ ⥤ D) (F : D ⥤ E)\nMathlib/CategoryTheory/Sites/CompatibleSheafification.lean:73:    (sheafificationWhiskerLeftIso J P).hom.app F = (J.sheafifyCompIso F P).hom := by\nMathlib/CategoryTheory/Sites/CompatibleSheafification.lean:74:  dsimp [sheafificationWhiskerLeftIso, sheafifyCompIso]\nMathlib/CategoryTheory/Sites/CompatibleSheafification.lean:80:theorem sheafificationWhiskerLeftIso_inv_app (P : Cᵒᵖ ⥤ D) (F : D ⥤ E)\nMathlib/CategoryTheory/Sites/CompatibleSheafification.lean:84:    (sheafificationWhiskerLeftIso J P).inv.app F = (J.sheafifyCompIso F P).inv := by\nMathlib/CategoryTheory/Sites/CompatibleSheafification.lean:85:  dsimp [sheafificationWhiskerLeftIso, sheafifyCompIso]\nMathlib/CategoryTheory/Sites/CompatibleSheafification.lean:90:noncomputable def sheafificationWhiskerRightIso :",
+   "date": "2026-10-22",
+   "verdict": "Not the full statement. Results give individual categorical/sheaf constructions or unrelated completions; the required independent-universe comparisons and specified unit compatibility are proved explicitly in the delivery."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralPrincipalConeLocalCriterion",
+  "date": "2026-10-22",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-integral-principal-cone-local-criterion",
+   "place": "Independent-universe restriction, localization tests and normalized singleton cone comparison in the proof of the principal local criterion.",
+   "via": [
+    "lem-pur-integral-principal-cone-local-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sf-mate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.NativeRingedRestrictionSheafification",
+  "file": "lean/Sheaf/CategoryTheory/NativeRingedRestrictionSheafification.lean",
+  "declaration": "CategoryTheory.NativeRestriction.sheafificationRestriction",
+  "statement": "theorem sheafificationRestriction\n    {C : Type c} {D : Type d} [Category.{vc} C] [Category.{vd} D]\n    {K : GrothendieckTopology C} {J : GrothendieckTopology D}\n    (F : C ⥤ D) [Functor.IsContinuous F K J] [F.IsCocontinuous K J]\n    (R : Sheaf J CommRingCat.{max c d vc vd r})\n    [HasSheafify J AddCommGrpCat.{max c d vc vd r}]\n    [J.WEqualsLocallyBijective AddCommGrpCat.{max c d vc vd r}]\n    [HasSheafify K AddCommGrpCat.{max c d vc vd r}]\n    [K.WEqualsLocallyBijective AddCommGrpCat.{max c d vc vd r}]\n    (P : PresheafOfModules.{max c d vc vd r}\n      (NativeRings.{max c d vc vd r, d, vd} R).obj) :\n    let T := restrictModules.{_, _, _, _, r} (K := K) F R\n    let R' := NativeRings.{max c d vc vd r, c, vc}\n      (restrictedCommRing.{_, _, _, _, r} (K := K) F R)\n    Nonempty (T.obj ((PresheafOfModules.sheafification (𝟙 _)).obj P) ≅\n      (PresheafOfModules.sheafification (𝟙 R'.obj)).obj\n        ((PresheafOfModules.pushforward₀ F _).obj P))",
+  "declarations": [
+   "CategoryTheory.NativeRestriction.sheafificationRestriction"
+  ],
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261022T114029-L-514678",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261022T114029-L-514678",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

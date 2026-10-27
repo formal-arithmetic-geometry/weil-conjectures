@@ -177,20 +177,38 @@
   "module": "Sheaf.RingTheory.CompletedRetractionConormalTorsion",
   "declaration": "AdicCompletion.exists_pow_annihilates_completed_retraction_conormal",
   "file": "lean/Sheaf/RingTheory/CompletedRetractionConormalTorsion.lean",
-  "statement": "theorem exists_pow_annihilates_completed_retraction_conormal (R : Type u) [CommRing R] [IsNoetherianRing R] (J : Ideal R) (S : Type u) [CommRing S] [Algebra R S] (hS : RingHom.FiniteType (algebraMap R S)) (hetale : Etale (Spec.map (CommRingCat.ofHom (algebraMap R S)) ∣_ ⟨(PrimeSpectrum.zeroLocus (J : Set R))ᶜ, (PrimeSpectrum.isClosed_zeroLocus (J : Set R)).isOpen_compl⟩)) (σ : AdicCompletion (J.map (algebraMap R S)) S →ₐ[R] AdicCompletion J R) : ∃ c : ℕ, ∀ r ∈ J ^ c, ∀ x : (RingHom.ker σ.toRingHom).Cotangent, algebraMap R (AdicCompletion (J.map (algebraMap R S)) S) r • x = 0",
+  "statement": "theorem exists_pow_annihilates_completed_retraction_conormal (R S : Type u) [CommRing R] [CommRing S] [Algebra R S] [IsNoetherianRing R] (J : Ideal R) (hfinite : (algebraMap R S).FiniteType) (hetale : Etale (morphismRestrict (Spec.map (CommRingCat.ofHom (algebraMap R S))) (⟨(PrimeSpectrum.zeroLocus (J : Set R))ᶜ, (PrimeSpectrum.isClosed_zeroLocus (J : Set R)).isOpen_compl⟩ : (Spec (CommRingCat.of R)).Opens))) (σ : AdicCompletion (J.map (algebraMap R S)) S →ₐ[R] AdicCompletion J R) : ∃ c : ℕ, ∀ (r : R), r ∈ J ^ c → ∀ x : (RingHom.ker σ.toRingHom).Cotangent, algebraMap R (AdicCompletion (J.map (algebraMap R S)) S) r • x = 0",
   "branch": "newtargets-dag",
-  "by": "Q65",
-  "date": "2026-10-19",
+  "by": "Q150",
+  "date": "2026-10-24",
   "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.RingTheory.CompletedRetractionConormalTorsion deleted (dead: no target reaches it); this node is not reached either."
+  "note": "Uses the equivalent R-algebra encoding of maps over the completed base: any such map is adically continuous, hence commutes with the completed structural map by density of R. Its restriction to the completed base is the identity. The scalar action is explicitly through R to the completed S."
  },
  "reviewed_lean": {
-  "date": "2026-10-19",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-fec4a766c",
-  "group": "Q65",
+  "reviewer": "NT-stage2-cc-442100616",
+  "group": "Q150",
   "result": "pass",
-  "note": "Q65 fec4a766: the AdicCompletion.exists_pow_annihilates_completed_retraction_conormal statement matches the node clause by clause (Noetherian R, ideal J, RingHom.FiniteType, Etale of the restriction over the complement of zeroLocus J, AdicCompletion J R and of J.map, R-algebra retraction σ, Ideal.Cotangent of ker σ, ∃ c ∀ r ∈ J^c, algebraMap r • x = 0). The R-algebra encoding of σ is equivalent to the node's completed-base-algebra maps since R is Noetherian, and matches Stacks 0AKJ and the consumers' forms. Only the item's lean field changed; the stmt_dep node files are identical to live; the statement field matches the file verbatim; docstrings are complete; lines ≤ 91 characters; the two plain imports are allowed by brief rule 7. The nt_compile --json per-file compile is clean (3.1 s). No findings."
+  "note": "Re-statement after lean_removed (live lean null); only the item lean field and one new module changed. Every clause matches the node: IsNoetherianRing, RingHom.FiniteType, Etale of morphismRestrict over the complement of zeroLocus J, AdicCompletion J R and of J.map, Ideal.Cotangent of ker σ, ∃ c ∀ r ∈ J^c acting via algebraMap R Ŝ. The R-algebra encoding of σ was checked equivalent to completed-base algebra maps (J f.g.: R̂ = R + J^nR̂, ⋂J^nR̂ = 0, so σ∘i = id and σ is R̂-linear). Edge cases J=0 and J=R are covered. Docstrings with source and blueprint, sorry only, Mathlib imports, statement verbatim, no duplicates in side-live. Not compiled because no file changed; worker and earlier reviewer report clean compiles. No findings."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean_removed": {
+  "commit": "8a6a58ff1c5",
+  "path": "lean/Sheaf/RingTheory/CompletedRetractionConormalTorsion.lean",
+  "module": "Sheaf.RingTheory.CompletedRetractionConormalTorsion",
+  "declaration": "AdicCompletion.exists_pow_annihilates_completed_retraction_conormal",
+  "reason": "dead module deleted (no target reaches it by imports, node not reached); the declaration survives nowhere in Sheaf or Mathlib, so the node has no Lean statement"
+ }
 }

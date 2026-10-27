@@ -1,0 +1,268 @@
+{
+ "id": "lem-sp-integral-compositor-limit-realization",
+ "kind": "statement",
+ "title": "Reduction and total-limit realization of adjoint compositors",
+ "statement": "Fix a finite field $k_0$ of characteristic $p$ and its algebraic closure $k$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$, and separated finite-type $k$-schemes $X,Y,Z$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension, sk-def-sfb-dc-setting]. Let $X\\xrightarrow fY\\xrightarrow gZ$ be smooth of pure relative dimensions $d,e\\geq0$ [def-sbc-smooth-morphisms]. For each $T=X,Y,Z$ use the completed coefficient sheaf $R_T=\\varprojlim_n(\\mathcal O_E/\\ell^n)_T$ and the derived-complete integral constructible category $\\mathcal I_T=\\Dbc(T,\\mathcal O_E)$ [def-weil-derived-complete-integral-detailed]. Let $\\mathcal N_T$ be the normalized strict varying-coefficient towers with uniform bounded constructible cohomology and finite Tor amplitude [sk-def-sp-coefficient-towers, sk-def-sp-normalized-towers]. Write\n$$r_T=\\operatorname{red}_T:\\mathcal I_T\\rightleftarrows\\mathcal N_T:L_T=R\\varprojlim$$\nfor the reduction/total-derived-limit equivalence of [det-sp-normalized-equivalence], whose counit is $\\kappa_T:r_TL_T\\xrightarrow{\\sim}1$. For $h=f,g,gf$ use the integral functors $F_{h,\\mathcal O_E}=Rh_{!,\\mathcal O_E}$ and $H_{h,\\mathcal O_E}=h^!_{\\mathcal O_E}$, and the specified natural comparisons\n$$F_{h,\\mathcal O_E}\\simeq L_{\\mathrm{target}(h)}F_{h,\\bullet}r_{\\mathrm{source}(h)},\\qquad H_{h,\\mathcal O_E}\\simeq L_{\\mathrm{source}(h)}H_{h,\\bullet}r_{\\mathrm{target}(h)}$$\nincluding units and counits [det-sp-integral-direct-image-tower, det-sp-integral-adjunction-bijection]. Suppose given the actual tower compositors $\\alpha_\\bullet:F_{g,\\bullet}F_{f,\\bullet}\\cong F_{gf,\\bullet}$ and their unique counit-preserving adjoint comparison $\\theta_\\bullet:H_{gf,\\bullet}\\cong H_{f,\\bullet}H_{g,\\bullet}$ on $\\mathcal N$ [lem-sp-tower-adjoint-compositor-realization].\n\nThe following expressions, through the specified integral comparisons, define natural composition isomorphisms on $\\mathcal I$:\n$$L_ZF_{g,\\bullet}r_YL_YF_{f,\\bullet}r_X\\xrightarrow{L_ZF_{g,\\bullet}\\kappa_YF_{f,\\bullet}r_X}L_ZF_{g,\\bullet}F_{f,\\bullet}r_X\\xrightarrow{L_Z\\alpha_\\bullet r_X}L_ZF_{gf,\\bullet}r_X,$$\n$$L_XH_{gf,\\bullet}r_Z\\xrightarrow{L_X\\theta_\\bullet r_Z}L_XH_{f,\\bullet}H_{g,\\bullet}r_Z\\xrightarrow{(L_XH_{f,\\bullet}\\kappa_YH_{g,\\bullet}r_Z)^{-1}}L_XH_{f,\\bullet}r_YL_YH_{g,\\bullet}r_Z.$$\nTheir reductions are exactly $\\alpha_\\bullet,\\theta_\\bullet$ through the specified equivalence maps. The second is the unique adjunction comparison for the first: the integral composite counit is $\\varepsilon_{g,\\mathcal O_E}\\circ F_{g,\\mathcal O_E}(\\varepsilon_{f,\\mathcal O_E}H_{g,\\mathcal O_E})$, with the integral units and counits identified with the tower ones. In particular the construction applies to $E=\\mathbf Q_\\ell$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-comparisons.proof.md",
+  "place": "(3), derived reduction/total-limit equivalence and integral adjunction comparisons; returned proof step 10"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-dc-setting",
+  "def-sbc-smooth-morphisms",
+  "def-weil-derived-complete-integral-detailed",
+  "sk-def-sp-coefficient-towers",
+  "sk-def-sp-normalized-towers",
+  "det-sp-normalized-equivalence",
+  "det-sp-integral-direct-image-tower",
+  "det-sp-integral-adjunction-bijection",
+  "lem-sp-tower-adjoint-compositor-realization"
+ ],
+ "proof": [
+  {
+   "text": "Work through the specified integral functor comparisons, writing $F_h,H_h$ for the tower functors and $\\bar F_h=L_tF_hr_s$, $\\bar H_h=L_sH_hr_t$ for their integral realizations, where $h:s\\to t$. These functors have the required domains: the tower functors preserve $\\mathcal N$ and the equivalences identify $\\mathcal I_T$ with $\\mathcal N_T$. The given direct-image and adjunction comparisons identify the original integral adjunctions with these realized ones. Put\n$$b_h(M)=\\kappa_{t,F_hr_sM}:r_t\\bar F_hM\\xrightarrow{\\sim}F_hr_sM,\\qquad c_h(K)=\\kappa_{s,H_hr_tK}:r_s\\bar H_hK\\xrightarrow{\\sim}H_hr_tK.$$\nAll these identifications are natural on the full normalized categories. Reduction is fully faithful there because it is an equivalence; we will use its injectivity on Hom sets, rather than an assertion about separate finite evaluations.",
+   "uses": [
+    "det-sp-normalized-equivalence",
+    "lem-sp-tower-adjoint-compositor-realization",
+    "det-sp-integral-direct-image-tower",
+    "det-sp-integral-adjunction-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-comparisons.proof.md",
+    "place": "(3), final sentence: the normalized-tower equivalence and total-limit realization, with (1) for the adjunction normalization"
+   }
+  },
+  {
+   "text": "For $M\\in\\mathcal I_X$, define\n$$\\bar\\alpha_M=L_Z\\bigl(\\alpha_{\\bullet,r_XM}\\circ F_g(\\kappa_{Y,F_fr_XM})\\bigr).$$\nFor $K\\in\\mathcal I_Z$, define\n$$\\bar\\theta_K=L_X\\bigl(H_f(\\kappa_{Y,H_gr_ZK})^{-1}\\circ\\theta_{\\bullet,r_ZK}\\bigr).$$\nExpanding $\\bar F_g\\bar F_f$ and $\\bar H_f\\bar H_g$ gives precisely the two expressions of the statement. Every component inside these formulas is an isomorphism in $\\mathcal N$, so applying $L$ and composing gives isomorphisms in $\\mathcal I$. Naturality follows by applying the functors to the naturality squares of $\\kappa,\\alpha_\\bullet,\\theta_\\bullet$ and composing those squares. Thus these are natural isomorphisms of the specified integral functors.",
+   "uses": [
+    "det-sp-normalized-equivalence",
+    "lem-sp-tower-adjoint-compositor-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-comparisons.proof.md",
+    "place": "(3), final sentence: the normalized-tower equivalence and total-limit realization, with (1) for the adjunction normalization"
+   }
+  },
+  {
+   "text": "Define the composite reduction identifications\n$$b_{g,f}(M)=F_g(b_f(M))\\circ b_g(\\bar F_fM),\\qquad c_{f,g}(K)=H_f(c_g(K))\\circ c_f(\\bar H_gK).$$\nNaturality of the equivalence counit says $\\kappa_B\\circ rL(v)=v\\circ\\kappa_A$ for each tower map $v:A\\to B$. For $v=\\alpha_\\bullet\\circ F_g\\kappa_Y$ this gives\n$$b_{gf}(M)\\circ r_Z(\\bar\\alpha_M)=\\alpha_{\\bullet,r_XM}\\circ b_{g,f}(M).$$\nFor $v=(H_f\\kappa_Y)^{-1}\\circ\\theta_\\bullet$, multiply that naturality equation on the left by $H_f\\kappa_Y$; it gives\n$$c_{f,g}(K)\\circ r_X(\\bar\\theta_K)=\\theta_{\\bullet,r_ZK}\\circ c_{gf}(K).$$\nThese are the claimed reductions, with all middle equivalence maps inserted. They also determine the comparisons on arbitrary normalized towers: every $C$ is identified with $rLC$ by $\\kappa_C$, and the displayed identities extend along this identification by naturality.",
+   "uses": [
+    "det-sp-normalized-equivalence",
+    "lem-sp-tower-adjoint-compositor-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-comparisons.proof.md",
+    "place": "(3), final sentence: the normalized-tower equivalence and total-limit realization, with (1) for the adjunction normalization"
+   }
+  },
+  {
+   "text": "Let $\\varepsilon_h$ be a tower counit and $\\bar\\varepsilon_h$ its specified integral counterpart. Apply the fully faithful adjunction-restriction formula with $i=r_s$, $j=r_t$, and comparisons $b_h,c_h$. Its Hom chain is exactly the one specifying the integral adjunction, hence\n$$r_t(\\bar\\varepsilon_{h,K})=\\varepsilon_{h,r_tK}\\circ F_h(c_h(K))\\circ b_h(\\bar H_hK).$$\nIt also gives the unit formula $r_s(\\bar\\eta_{h,M})=c_h(\\bar F_hM)^{-1}\\circ H_h(b_h(M)^{-1})\\circ\\eta_{h,r_sM}$, so the adjunction structures, not just their functors, are identified. The composite-adjunction node gives\n$$\\bar\\varepsilon_{c,K}=\\bar\\varepsilon_{g,K}\\circ\\bar F_g(\\bar\\varepsilon_{f,\\bar H_gK}),\\qquad \\varepsilon_{c,N}=\\varepsilon_{g,N}\\circ F_g(\\varepsilon_{f,H_gN}).$$\nComposing the two restricted Hom chains cancels the intermediate full-faithfulness bijection for $r_Y$. The resulting chain is the restriction of the composite tower adjunction with comparisons $b_{g,f},c_{f,g}$. Applying the same counit formula therefore gives\n$$r_Z(\\bar\\varepsilon_{c,K})=\\varepsilon_{c,r_ZK}\\circ F_gF_f(c_{f,g}(K))\\circ b_{g,f}(\\bar H_f\\bar H_gK).$$",
+   "uses": [
+    "lem-sp-fully-faithful-adjunction-restriction",
+    "det-sp-integral-adjunction-bijection",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-comparisons.proof.md",
+    "place": "(3), final sentence: the normalized-tower equivalence and total-limit realization, with (1) for the adjunction normalization"
+   }
+  },
+  {
+   "text": "Check the adjunction normalization as an equality of integral morphisms. Fix $K$, put $N=r_ZK$, $U=\\bar H_{gf}K$, and abbreviate $F=F_gF_f$, $\\bar F=\\bar F_g\\bar F_f$, $b=b_{g,f}$, $c=c_{f,g}$. Naturality of $b$ and step 3 give\n$$r_Z\\bigl(\\bar\\varepsilon_{c,K}\\circ\\bar F(\\bar\\theta_K)\\bigr)=\\varepsilon_{c,N}\\circ F(\\theta_{\\bullet,N})\\circ F(c_{gf}(K))\\circ b(U).$$\nThe actual tower comparison is counit preserving, namely $\\varepsilon_{c,N}\\circ F(\\theta_{\\bullet,N})=\\varepsilon_{gf,N}\\circ\\alpha_{\\bullet,H_{gf}N}$. Substitute this identity, then use naturality of $\\alpha_\\bullet$ for $c_{gf}(K):r_XU\\to H_{gf}N$ and the first reduction identity of step 3. The result is\n$$\\begin{aligned}\n&\\varepsilon_{gf,N}\\circ F_{gf}(c_{gf}(K))\\circ\\alpha_{\\bullet,r_XU}\\circ b(U)\\\\\n&=\\varepsilon_{gf,N}\\circ F_{gf}(c_{gf}(K))\\circ b_{gf}(U)\\circ r_Z(\\bar\\alpha_U)\\\\\n&=r_Z\\bigl(\\bar\\varepsilon_{gf,K}\\circ\\bar\\alpha_U\\bigr).\n\\end{aligned}$$\nFaithfulness of $r_Z$ proves $\\bar\\varepsilon_{c,K}\\circ\\bar F(\\bar\\theta_K)=\\bar\\varepsilon_{gf,K}\\circ\\bar\\alpha_{\\bar H_{gf}K}$. This is precisely the required counit equation through the specified left compositor.",
+   "uses": [
+    "lem-sp-tower-adjoint-compositor-realization",
+    "det-sp-normalized-equivalence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-comparisons.proof.md",
+    "place": "(3), final sentence: the normalized-tower equivalence and total-limit realization, with (1) for the adjunction normalization"
+   }
+  },
+  {
+   "text": "For uniqueness, apply the inverse Hom equivalence of the composite integral adjunction to each component of an arbitrary candidate t. Its image is F_composite(t_K) followed by the composite counit. The assumed counit equation and the equation proved in step 5 identify this image with that of the displayed right compositor. Injectivity of the inverse Hom equivalence proves equality componentwise; natural-transformation extensionality gives equality of the transformations. This uses the same elementary uniqueness argument as det-sp-unique-right-adjoint, without constructing a second adjunction or its unique isomorphism. The composite counit itself is exactly Adjunction.comp_counit_app. No degree restriction on E is used.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-comparisons.proof.md",
+    "place": "(3), final sentence: the normalized-tower equivalence and total-limit realization, with (1) for the adjunction normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-sp-normalized-equivalence",
+  "lem-sp-tower-adjoint-compositor-realization",
+  "det-sp-integral-direct-image-tower",
+  "det-sp-integral-adjunction-bijection",
+  "lem-sp-fully-faithful-adjunction-restriction",
+  "def-weil-pbc-composite-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-comparisons.proof.md",
+  "place": "(1), (3), explicit categorical implementation of the six-step proof; uniqueness directly by inverse Hom-equivalence injectivity",
+  "group": "N4",
+  "date": "2026-10-26"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport compact support and exceptional composition isomorphisms through the derived reduction and derived inverse limit equivalence of normalized constructible towers",
+   "results": "{\"t\": \"2026-10-22T06:57:14Z\", \"tool\": \"leanfinder\", \"query\": \"Transport compact support and exceptional composition isomorphisms through the derived reduction and derived inverse limit equivalence of normalized constructible towers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"localCohomology.diagramComp\", \"localCohomology.isoOfFinal\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh\", \"DerivedCategory.quotientCompQhIso\"], \"digest\": \"e5613be6dced022b\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: generic adjunction/equivalence or unrelated algebraic results do not state the specified pro-etale coefficient, derived-tower, and counit-normalized comparison theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence.trans",
+   "results": "{\"t\": \"2026-10-22T06:57:03Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Equivalence.trans\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Equivalence.trans\", \"CategoryTheory.Equivalence.trans_functor\", \"CategoryTheory.Equivalence.trans_inverse\", \"CategoryTheory.Equivalence.trans_counitIso\", \"CategoryTheory.Equivalence.trans_unitIso\", \"CategoryTheory.Equivalence.trans_toAdjunction\", \"CategoryTheory.Equivalence.instMonoidalFunctorTrans\", \"CategoryTheory.Equivalence.instMonoidalInverseTrans\"], \"digest\": \"e36e61705f2905c6\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: generic adjunction/equivalence or unrelated algebraic results do not state the specified pro-etale coefficient, derived-tower, and counit-normalized comparison theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*complete|normalized.*tower|Rlim|shriek",
+   "results": "{\"t\": \"2026-10-22T06:57:02Z\", \"tool\": \"grep\", \"query\": \"derived.*complete|normalized.*tower|Rlim|shriek\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/ObjectProperty/Local.lean\", \"Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean\", \"Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean\", \"Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean\", \"Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean\", \"Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Ind.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Ind.lean\"], \"digest\": \"14de8b13bd723783\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: generic adjunction/equivalence or unrelated algebraic results do not state the specified pro-etale coefficient, derived-tower, and counit-normalized comparison theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral exceptional inverse images composition via reduction and derived inverse limit with compatible counits",
+   "results": "{\"t\": \"2026-10-22T06:57:02Z\", \"tool\": \"leansearch\", \"query\": \"Integral exceptional inverse images composition via reduction and derived inverse limit with compatible counits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ring.DirectLimit.congr_symm_apply_of\", \"CategoryTheory.Limits.HasLimit.isoOfNatIso_inv_π\", \"AlgebraicGeometry.IsIntegralHom.instCompScheme\", \"AlgebraicGeometry.IsIntegralHom.instIsStableUnderCompositionScheme\", \"AddCommGroup.DirectLimit.congr_symm_apply_of\", \"InverseSystem.invLimEquiv_symm_apply_coe\", \"Module.DirectLimit.congr_symm_apply_of\", \"CategoryTheory.Limits.image.compIso_inv_comp_image_ι\"], \"digest\": \"b053addf535ac408\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: generic adjunction/equivalence or unrelated algebraic results do not state the specified pro-etale coefficient, derived-tower, and counit-normalized comparison theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Conjugate composition of compactly supported direct images by reduction and total derived inverse limit equivalences",
+   "results": "{\"t\": \"2026-10-22T06:57:13Z\", \"tool\": \"leanfinder\", \"query\": \"Conjugate composition of compactly supported direct images by reduction and total derived inverse limit equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"localCohomology.diagramComp\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app\", \"DerivedCategory.singleFunctorCompHomologyFunctorIso\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app_assoc\", \"CompHausLike.LocallyConstant.sigmaComparison_comp_sigmaIso\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"DerivedCategory.singleFunctorIsoCompQ\"], \"digest\": \"1fe50d2587820929\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: generic adjunction/equivalence or unrelated algebraic results do not state the specified pro-etale coefficient, derived-tower, and counit-normalized comparison theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp",
+   "results": "{\"t\": \"2026-10-24T00:13:12Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.comp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.comp\", \"CategoryTheory.Equivalence.trans_toAdjunction\", \"CategoryTheory.Adjunction.comp_homEquiv\", \"CategoryTheory.Adjunction.comp_counit_app\", \"CategoryTheory.Adjunction.comp_unit_app\", \"CategoryTheory.Adjunction.comp_counit_app_assoc\", \"CategoryTheory.Adjunction.comp_unit_app_assoc\", \"CategoryTheory.Adjunction.comp_counit\"], \"digest\": \"ac2dfcadb3e25da5\"}",
+   "date": "2026-10-24",
+   "verdict": "No match for the integral derived-tower theorem: the hits supply generic adjunction calculus or ordinary algebraic adic completion only. The generic categorical results are already represented by existing DAG Mathlib leaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Conjugate composition isomorphisms of adjoint functors by equivalences with compatible units and counits",
+   "results": "{\"t\": \"2026-10-24T00:13:13Z\", \"tool\": \"leanfinder\", \"query\": \"Conjugate composition isomorphisms of adjoint functors by equivalences with compatible units and counits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.conjugateIsoEquiv\", \"CategoryTheory.conjugateEquiv_comp\", \"CategoryTheory.conjugateEquiv_iso\", \"CategoryTheory.conjugateIsoEquiv_apply_hom\", \"CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv\", \"CategoryTheory.conjugateEquiv_comm\", \"CategoryTheory.conjugateEquiv_apply_app\", \"CategoryTheory.conjugateEquiv_comp_assoc\"], \"digest\": \"b7beb85b5dabce2d\"}",
+   "date": "2026-10-24",
+   "verdict": "No match for the integral derived-tower theorem: the hits supply generic adjunction calculus or ordinary algebraic adic completion only. The generic categorical results are already represented by existing DAG Mathlib leaves."
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointUniq|comp_counit|counit.*naturality",
+   "results": "{\"t\": \"2026-10-24T00:13:41Z\", \"tool\": \"grep\", \"query\": \"rightAdjointUniq|comp_counit|counit.*naturality\", \"sub\": \"CategoryTheory/Adjunction\", \"ok\": true, \"n_hits\": 24, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Triple.lean\", \"Mathlib/CategoryTheory/Adjunction/Triple.lean\"], \"digest\": \"8feb7e72efe739a8\"}",
+   "date": "2026-10-24",
+   "verdict": "No match for the integral derived-tower theorem: the hits supply generic adjunction calculus or ordinary algebraic adic completion only. The generic categorical results are already represented by existing DAG Mathlib leaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of adjunctions has counit equal to the composite of the counits and right adjoints are uniquely isomorphic",
+   "results": "{\"t\": \"2026-10-24T00:13:41Z\", \"tool\": \"leansearch\", \"query\": \"Composition of adjunctions has counit equal to the composite of the counits and right adjoints are uniquely isomorphic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.comp_counit\", \"CategoryTheory.Adjunction.comp_counit_app\", \"CategoryTheory.Adjunction.rightAdjointUniq_hom_counit_assoc\", \"CategoryTheory.Adjunction.comp\", \"CategoryTheory.Adjunction.rightAdjointUniq_trans_app\", \"CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_assoc\", \"CategoryTheory.Bicategory.Adjunction.comp_counit\", \"CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_app\"], \"digest\": \"08ecdb72c73f6bde\"}",
+   "date": "2026-10-24",
+   "verdict": "No match for the integral derived-tower theorem: the hits supply generic adjunction calculus or ordinary algebraic adic completion only. The generic categorical results are already represented by existing DAG Mathlib leaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Realize normalized adic tower adjoint composition isomorphisms on derived complete integral sheaves by reduction and total inverse limit",
+   "results": "{\"t\": \"2026-10-24T00:14:50Z\", \"tool\": \"leanfinder\", \"query\": \"Realize normalized adic tower adjoint composition isomorphisms on derived complete integral sheaves by reduction and total inverse limit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.eval_comp_of\", \"IsAdicComplete.of_comp_lift\", \"AdicCompletion.of_ofLinearEquiv_symm\", \"IsAdicComplete.StrictMono.of_comp_lift\", \"IsAdicComplete.ofAlgEquiv_comp_liftRingHom\", \"AdicCompletion.ofLinearEquiv_apply\", \"AdicCompletion.ofLinearEquiv\", \"AdicCompletion.of_ofAlgEquiv_symm\"], \"digest\": \"3b089dbb8638cb8e\"}",
+   "date": "2026-10-24",
+   "verdict": "No match for the integral derived-tower theorem: the hits supply generic adjunction calculus or ordinary algebraic adic completion only. The generic categorical results are already represented by existing DAG Mathlib leaves."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-composition-comparisons",
+  "date": "2026-10-22",
+  "group": "NF"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-composition",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-composition-comparisons",
+   "place": "(3), derived reduction/total-limit equivalence and integral adjunction comparisons; returned proof step 10",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sp-integral-compositor-limit-realization",
+  "worker": "stage1",
+  "summary": "Expanded normalized-equivalence transport into explicit natural isomorphisms, both reduction equations, the restricted and composite counit formulas, and a faithful-reduction verification of the counit-preserving uniqueness condition. Reused existing categorical Mathlib leaves; no new nodes and no statement change.",
+  "blueprint": "det-sp-composition-comparisons proof (3), final sentence, realizes R inverse limit transport on the integral constructible categories; proof (1) supplies the counit normalization.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q71-c565031a7",
+  "group": "Q71",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-c565031a7 (reviewer sub-agent of L); spot-checked: I read the 0-new-node, 6-step split of lem-sp-integral-compositor-limit-realization in full; the statement is unchanged (sha1 c6fabda4bc, same as live). Source: blueprint main-20261015 det-sp-composition-comparisons proof (3) with (1); the main-20261024 proof is byte-identical. The item states it for any finite E, and E=Q_ell is its special case; this is a generalisation, not a weakening, and matches the unit route 'Rlim gives the integral identity'. I read every cited statement: det-sp-normalized-equivalence (counit kappa invertible on normalized towers; separated finite-type schemes are Noetherian, so the equivalence applies), lem-sp-tower-adjoint-compositor-realization (alpha and theta, counit preservation, the six functors preserve normalized towers), det-sp-integral-direct-image-tower(2), det-sp-integral-adjunction-bijection (Hom chain, units and counits), and the Mathlib leaves ff-adjunction-restriction, composite-adjunction and unique-right-adjoint. I recomputed each step by hand. Step 3: kappa naturality gives b_gf∘r(alpha-bar)=alpha∘b_{g,f} and c_{f,g}∘r(theta-bar)=theta∘c_gf. Step 4: expanding r_Z of the composite integral counit gives eps_c∘F(c_{f,g})∘b_{g,f}. Step 5: the counit equation follows from b-naturality, the tower counit preservation, alpha-naturality and step 3. Step 6: the counit of the adjunction transported along alpha-bar is eps_gf∘alpha-bar, and uniqueness gives theta-bar. Every equation checks. Edge cases: identity f or g, kappa equal to the identity, d=e=0, zero objects; no use of ell-inversion or of faithfulness of finite evaluation. There is no cycle (the transitive closure of the cited nodes does not contain the item), no SGA source, and no tool_uses are needed. The 0-node split is legitimate: short, fully written categorical steps and no relabelling. Maintainer note: Q33 delivered the same item in parallel (d026dc5f972a, still under review), so merge only one of the two."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralCompositorLimitRealization",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralCompositorLimit.integralCompositorLimitRealization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IntegralCompositorLimit.realize",
+   "AlgebraicGeometry.ProEtale.IntegralCompositorLimit.realizationReduction",
+   "AlgebraicGeometry.ProEtale.IntegralCompositorLimit.realizationComposition",
+   "AlgebraicGeometry.ProEtale.IntegralCompositorLimit.Space",
+   "AlgebraicGeometry.ProEtale.IntegralCompositorLimit.inclusion",
+   "AlgebraicGeometry.ProEtale.IntegralCompositorLimit.restrict",
+   "AlgebraicGeometry.ProEtale.IntegralCompositorLimit.TowerEdge",
+   "AlgebraicGeometry.ProEtale.IntegralCompositorLimit.towerLeft",
+   "AlgebraicGeometry.ProEtale.IntegralCompositorLimit.towerRight",
+   "AlgebraicGeometry.ProEtale.IntegralCompositorLimit.towerAdjunction",
+   "AlgebraicGeometry.ProEtale.IntegralCompositorLimit.IntegralEdge",
+   "AlgebraicGeometry.ProEtale.IntegralCompositorLimit.leftReduction",
+   "AlgebraicGeometry.ProEtale.IntegralCompositorLimit.leftCompositor",
+   "AlgebraicGeometry.ProEtale.IntegralCompositorLimit.rightCompositor",
+   "AlgebraicGeometry.ProEtale.IntegralCompositorLimit.Laws",
+   "AlgebraicGeometry.ProEtale.IntegralCompositorLimit.integralCompositorLimitRealization"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralCompositorLimitRealization.lean",
+  "statement": "theorem integralCompositorLimitRealization (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p) [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [Z.Over (Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (Y ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] [IsSeparated (Z ↘ Spec (.of D.k))] [LocallyOfFiniteType (Z ↘ Spec (.of D.k))] [QuasiCompact (Z ↘ Spec (.of D.k))] [f.IsOver (Spec (.of D.k))] [g.IsOver (Spec (.of D.k))] (d e : ℕ) [SmoothOfRelativeDimension d f] [SmoothOfRelativeDimension e g] (alpha : towerLeft l E b o q Pf ⋙ towerLeft l E b o q Pg ≅ towerLeft l E b o q Ph) (theta : towerRight l E b o q Ph ≅ towerRight l E b o q Pg ⋙ towerRight l E b o q Pf) (_towerCounit : ∀ K, (towerLeft l E b o q Pf ⋙ towerLeft l E b o q Pg).map (theta.hom.app K) ≫ ((towerAdjunction l E b o q Pf).comp (towerAdjunction l E b o q Pg)).counit.app K = alpha.hom.app ((towerRight l E b o q Ph).obj K) ≫ (towerAdjunction l E b o q Ph).counit.app K) : Laws l E b o q S T U Pf Pg Ph Jf Jg Jh alpha theta",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-25",
+  "existing": false,
+  "note": "The helper records package the specified equivalence restrictions, actual normalized tower operations and integral Hom-chain comparisons. All functor and isomorphism data are explicit. Space identifies both functors and both adjunction maps with the recorded completed reduction/total-limit adjunction. IntegralEdge fixes its left functor to the independently constructed completed-ring compactification composite, its right to total-limit realization, and its adjunction to the specified full-faithfulness Hom chain. The main theorem is the sole postponed proof."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3396d13e0",
+  "group": "NK",
+  "result": "pass",
+  "note": "Read item node (only lean differs from live; lean.statement verbatim in file), module, and the dependency Lean: SpNormalizedEquivalence, SpIntegralAdjunction reduction/limit/support/homChain/Realization, TowerAdjointCompositor Pair/left/PreservesNormalized/Laws. Space pins equivalence functors and unit/counit to the recorded reduction/limit adjunction; TowerEdge uses the recorded Pair restricted to normalized towers; IntegralEdge uses the recorded support, H̄ = L H r, and the adjunction pinned to the restrictFullyFaithful Hom chain. leftCompositor and rightCompositor are the two displayed expressions; left/right_reduction recomputed by hand via κ and φ naturality; counit, unique (over all nat trans) and composite_counit (= Adjunction.comp_counit_app) are correct in orientation; _towerCounit matches TowerAdjointCompositor.Laws.counit. No hollow defs, only sorry is the main theorem, 6-step docstring, no stronger assumptions, single universe u, E=Q_ell admitted. Advisory: geometric hypotheses unused (generalisation over compactifications, comparisons and α); NK second reading is a self-pass. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261025T202654-L-2739747",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

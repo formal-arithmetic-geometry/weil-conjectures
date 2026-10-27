@@ -1,0 +1,134 @@
+{
+ "id": "lem-weil-pbc-global-section-module-monoidal-oplax",
+ "kind": "statement",
+ "title": "Invertible normalized oplax data for global section scalar extension",
+ "statement": "For a sheaf of commutative rings O on a small site, the actual global-section scalar-extension functor admits invertible oplax tensor data whose unit component is exactly ringFamilyGlobalExtensionUnit.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0996 and 099E, final tensor base-change paragraph, sectionwise tensor comparison"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-global-section-scalar-extension",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "On the bottom-topology one-object site, the sheafification adjunction is an equivalence. Give its right adjoint the induced lax monoidal structure; its unit and tensor maps are invertible. Its inverse unit map is the identity, by the adjunction triangle identity and the defining sheafification unit comparison. Reindex this functor to obtain the constant module presheaf functor and transport its monoidal structure along the identity-on-sections comparison.",
+   "uses": [
+    "def-weil-pbc-global-section-scalar-extension",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the normalized strong monoidal presheaf scalar-extension theorem to evaluation from the constant global ring presheaf to O. Compose the resulting strong monoidal pullback with the constant functor and the existing strong monoidal sheafification.",
+   "uses": [
+    "lem-weil-pbc-presheaf-scalar-extension-monoidal",
+    "def-weil-pbc-global-section-scalar-extension",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the inverse unit map, the constant-functor component is the identity and the sheafification component is its adjunction counit. Apply the two adjunction Hom equivalences. Their naturality and triangle identities reduce the desired equality to the normalized coefficient formula of the presheaf scalar extension. For evaluation this formula is exactly s evaluated at X, which defines ringFamilyGlobalExtensionUnit. Invertibility of all comparison maps follows from the composed strong monoidal structure.",
+   "uses": [
+    "lem-weil-pbc-presheaf-scalar-extension-monoidal",
+    "def-weil-pbc-global-section-scalar-extension",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-global-section-scalar-extension",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-presheaf-scalar-extension-monoidal"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "P2",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0996 and 099E, scalar extension of the global extended Cech complex; sites-modules.tex Tags 03CS and 03EL for the sectionwise tensor calculation",
+  "note": "Complete construction from the existing sectionwise change-of-rings presheaf, ordinary module monoidal base change, and monoidal sheafification; no additional unproved comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "invertible oplax monoidal structure on extension of scalars",
+   "results": "No exact global-section match; generic adjunction oplax constructors found.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.Monoidal.ofOplaxMonoidal",
+   "results": "Found Functor.Monoidal.ofOplaxMonoidal and invertibility hypotheses.",
+   "date": "2026-10-26",
+   "verdict": "used constructor"
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointOplaxMonoidal extension scalars",
+   "results": "Found module and presheaf oplax APIs; no exact normalized global extension theorem.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-global-section-module-monoidal",
+   "place": "Sectionwise tensor comparison and unit normalization",
+   "via": [
+    "lem-weil-pbc-global-section-module-monoidal"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.GlobalSectionModuleOplaxNormalized",
+  "file": "lean/Sheaf/Paper/GlobalSectionModuleOplaxNormalized.lean",
+  "declaration": "CategoryTheory.ringFamilyGlobalExtension_oplax_normalized",
+  "declarations": [
+   "CategoryTheory.ringFamilyGlobalExtension_oplax_normalized"
+  ],
+  "statement": "theorem ringFamilyGlobalExtension_oplax_normalized\n    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}\n    (O : Sheaf J CommRingCat.{u}) :\n    letI := SheafOfModules.monoidalCategory O\n    letI := SheafOfModules.monoidalCategory\n      (CochainComplex.onePointRingSheaf (ringFamilyGlobalRing O))\n    ∃ oplax : (ringFamilyGlobalExtension O).OplaxMonoidal,\n      IsIso oplax.η ∧ (∀ M N, IsIso (oplax.δ M N)) ∧\n        oplax.η = ringFamilyGlobalExtensionUnit O",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-26"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GlobalSectionModuleMonoidal",
+  "date": "2026-10-26",
+  "group": "J3"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261026T111904-L-1766244",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261026T130612-L-3481778",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

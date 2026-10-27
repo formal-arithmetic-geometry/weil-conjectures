@@ -1,0 +1,109 @@
+{
+ "id": "lem-pur-chart-dnc-square",
+ "kind": "statement",
+ "title": "Naturality of the normalized chart DNC comparison",
+ "statement": "Use the finite coefficient setting P of [def-pur-conventions], arbitrary finite E/Q_l and positive level n. Let V be affine with a finite-type map aV to Spec P.field.k; d is any natural number. Let C, B (and A where composable maps are used) be affine etale d-charts over V and e, v their etale maps over V, with the actual canonical comparisons of [def-pur-general-chart-comparisons] and [def-pur-chart-affine-comparison-data]. For every normalized compact-support presentation N (and every normalized finite twist transport t where used), the following equality holds, in the small pro-etale derived categories with the stated canonical pullback identity/composition constraints. Its complete formal statement is:\n\ntheorem chart_dnc_square (P : PurityFiniteSetting.{u})\n    {V : Scheme.{u}} [IsAffine V] {d : ℕ}\n    (aV : V ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aV] [QuasiCompact aV]\n    {C B : Chart V d} (e : Map C B)\n    (N : Etale.EtaleCompactSupportNormalization P.Coefficient) :\n    delta P aV C ≪≫ r P aV e = q P aV e N ≪≫\n      (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) e.hom).leftDerivedFunctor.mapIso\n        (delta P aV B)",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Naturality of the normalized chart DNC comparison; parent proof Step 6, parent proof Step 7"
+ },
+ "stmt_deps": [
+  "def-pur-general-chart-comparisons",
+  "def-pur-chart-affine-comparison-data",
+  "def-pur-conventions"
+ ],
+ "proof": [
+  {
+   "text": "cut out the off-diagonal complement so both diagonal centres are Cartesian.\nFlat conormal base change identifies the normal map induced by sourceLift and the\nbase-change map with normalMap: on each affine it sends the degree-one class of a\ncoordinate difference to the corresponding pulled-back difference. The extended\nRees map has exactly these one- and zero-fibre maps. Apply the endpoint equations\nof section-etale restriction to this Rees map, and normalized base compatibility of\nthe DNC comparison to the Cartesian factor. Cancel the restriction comparison for\nthe intermediate open neighbourhood. The remaining source comparison is q and the\nremaining normal comparison is r, by their definitions; the chosen DNC comparison\nis fixed by its endpoint at one. Transport through the site comparisons. The argument\nuses the actual normal map and covers rank zero and empty charts.",
+   "uses": [
+    "lem-pur-section-etale-restriction-coherence",
+    "lem-pur-conormal-algebra-flat-base-change",
+    "lem-pur-diagonal-difference-rees-frame",
+    "thm-pur-dnc-invariance"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-section-etale-restriction-coherence",
+  "lem-pur-conormal-algebra-flat-base-change",
+  "lem-pur-diagonal-difference-rees-frame",
+  "thm-pur-dnc-invariance"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Naturality of the normalized chart DNC comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coherence of exceptional composition mates for etale maps, source and normal comparison with diagonal purity, identity and composition",
+   "results": "Etale ring-map and etale-locus facts; no comparison equation",
+   "date": "2026-10-25",
+   "verdict": "No direct match; use the specified geometric and adjunction comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv",
+   "results": "Generic adjunction mate equations",
+   "date": "2026-10-25",
+   "verdict": "No direct match; use the specified geometric and adjunction comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "standingExceptionalComposition",
+   "results": "No Mathlib declaration; local library has the definition and composition-tensor-mate package",
+   "date": "2026-10-25",
+   "verdict": "No direct match; use the specified geometric and adjunction comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ChartExceptionalMateCoherence",
+  "date": "2026-10-25",
+  "group": "W3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-chart-exceptional-mate-coherence",
+   "place": "proof Step 6, proof Step 7"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ChartDncSquare",
+  "file": "lean/Sheaf/Paper/ChartDncSquare.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.ChartComparisons.chart_dnc_square",
+  "statement": "theorem chart_dnc_square (P : PurityFiniteSetting.{u})\n    {V : Scheme.{u}} [IsAffine V] {d : ℕ}\n    (aV : V ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aV] [QuasiCompact aV]\n    {C B : Chart V d} (e : Map C B)\n    (N : Etale.EtaleCompactSupportNormalization P.Coefficient) :\n    delta P aV C ≪≫ r P aV e = q P aV e N ≪≫\n      (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) e.hom).leftDerivedFunctor.mapIso\n        (delta P aV B)",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261025T101744-L-3732556",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261025T101744-L-3732556",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

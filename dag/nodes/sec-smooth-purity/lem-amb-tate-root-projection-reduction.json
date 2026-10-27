@@ -20,65 +20,35 @@
  ],
  "proof": [
   {
-   "text": "Give $L_T$ its $Z_T$-action by $(a x)_s=x_s^{a\\bmod\\ell^s}$; the power transitions respect reduction of the exponent, so this is an action on compatible tuples. In additive module notation, define $j_T((x\\otimes b)\\otimes a)=x\\otimes ba$ and its inverse by $x\\otimes a\\mapsto(x\\otimes1)\\otimes a$. The balancing relations make both maps well defined, and their composites are the identity on pure tensors. Sheafify these natural sectionwise formulas. The definition of $P_T$ identifies the first source with the prescribed finite twist.",
+   "text": "Apply the proved scalarExtensionTowerIso to the actual maps from constant Z_l to constant O_E and from constant O_E to A. Its forward pure-tensor formula is a tensor (b tensor x) mapped to (a q(b)) tensor x, exactly j_pure. The inverse and both identities are part of the existing isomorphism. The recorded coordinate module is unchanged.",
    "uses": [
-    "def-pur-roots-of-unity-sheaf",
-    "def-pur-sheaf-inverse-limit",
-    "def-coefficient-twists-detailed",
-    "def-pur-sheaf-tensor-product"
+    "lem-sp-scalar-extension-dual-tower-core",
+    "def-sp-canonical-scalar-extension-maps"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
     "place": "Tag 03EK, section-tensor-product: sheaf tensors and associativity; finite twist definition in the cited blueprint"
    }
   },
   {
-   "text": "The projections $p_{r,T}$ are locally surjective. Indeed, apply lem-pur-twist-root-transitions to every consecutive power map. The general-site abelian epi criterion makes it locally surjective on underlying sets, and the set epi criterion makes it an epimorphism of set sheaves. Given an object $U$ and $u\\in\\mu_{\\ell^r}(U)$, cover $U$ by the affine objects $V_i$ weakly contractible for the full $T_{\\mathrm{proet}}$ site. On each fixed $V_i$, every consecutive transition is surjective on sections by that precise weak contractibility assertion. Set $x_r=u|_{V_i}$, define $x_s=u|_{V_i}^{\\ell^{r-s}}$ for $s<r$, and choose recursively $x_{s+1}$ above $x_s$ for $s\\geq r$. This gives a compatible tuple, hence an element of $L_T(V_i)$ with $r$th projection $u|_{V_i}$. All uses are on the full site; no infinite refinement of etale covers is asserted.",
+   "text": "Apply [lem-amb-root-tower-finite-tensor] with $B=A$. It gives locally surjective root projections, their shift-kernel description, and the normalized isomorphism $\\alpha_{r,T}:L_T\\otimes_{Z_T}A_T\\xrightarrow{\\sim}D_{r,T}$. The hypotheses hold because $A$ is a commutative $\\mathbf Z_\\ell$-algebra and $\\ell^rA=0$. Set $\\theta_{r,T}=\\alpha_{r,T}j_T$. Its pure-tensor formula is the one asserted, including the inverse prescribed by local root lifts. In Lean apply the theorem to ULift A to match its coefficient universe, identify the scalar maps by functoriality of constant sheaves and uniqueness of ring homomorphisms from ZMod, and transport the normalized existence statement. Pure scalar-extension tensors determine the chosen isomorphism uniquely.",
    "uses": [
-    "lem-pur-twist-root-transitions",
-    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
-    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
-    "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
-    "def-pur-sheaf-inverse-limit"
+    "lem-amb-root-tower-finite-tensor"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 0990, lemma-proetale-enough-w-contractible; sites.tex Tag 090K, lemma-w-contractible; Kummer transitions from etale-cohomology.tex Tag 03PK"
+    "place": "Tag 0990, lemma-proetale-enough-w-contractible; agent extraction of returned root-projection reduction steps 2-4. The root-kernel shift and normalized tensor inverse are agent arguments, not assertions of Tag 0990."
    }
   },
   {
-   "text": "Compute the kernel on every object $U$. If $x=(x_s)_s\\in L_T(U)$ has $x_r=1$, put $y_s=x_{s+r}$. Since $x_{s+r}^{\\ell^s}=x_r=1$, this really belongs to $\\mu_{\\ell^s}(U)$, and $y_{s+1}^\\ell=y_s$. Also $y_s^{\\ell^r}=x_s$. Conversely $(\\ell^r y)_r=y_r^{\\ell^r}=1$ for every $y$. Thus in additive notation $\\ker p_r(U)=\\ell^rL_T(U)$, with an explicit division map on the kernel, compatible with restrictions.",
+   "text": "Define the transition D_s to D_r as alpha_s inverse followed by alpha_r. To check the required power-map formula on a tensor a tensor x, use local surjectivity of p_s to lift x locally to a root-limit section y. There the formula follows from alpha normalization and p_s followed by the tower power map equalling p_r. The arbitrary tower map has exponent l^(s-r): prove this by induction from the successor maps using the kernel inclusion into units. Separatedness glues the section equality. The transition-theta equation, invertibility, identity, and composition are then the isomorphism cancellation identities.",
    "uses": [
     "def-pur-roots-of-unity-sheaf",
-    "def-pur-sheaf-inverse-limit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Elementary coordinate calculation for the root inverse system; applied below the vector-bundle integration coefficient convention"
-   }
-  },
-  {
-   "text": "Put $H=L_T\\otimes_{Z_T}A_T$, which is killed by $\\ell^r$ since $\\ell^rA=0$. For local sections $u$ of $\\mu_{\\ell^r}$ and $a$ of $A_T$, choose local lifts $x$ of $u$ by step 2 and set $B(u,a)=x\\otimes a$. Two lifts differ by $\\ell^r y$ by step 3, so their tensors differ by $y\\otimes\\ell^ra=0$. The local outputs therefore glue uniquely and commute with restrictions. Addition in either input follows by choosing lifts $x+x'$ and by distributivity of the tensor. For fixed $a$ this is an additive map to $H$ on the slice site, so lem-pur-torsion-sheaf-constant-module (2) makes it $R_{r,T}$-linear; both source and target are killed by $\\ell^r$. Consequently $B(cu,a)=B(u,ca)$ for local $c\\in R_{r,T}$, and $B(u,aa')=a'B(u,a)$. The universal property of the sheaf tensor gives an $A_T$-linear map $D_{r,T}\\to H$. Conversely $x\\otimes a\\mapsto p_r(x)\\otimes a$ is $Z_T$-balanced, since the action in step 1 projects to exponent reduction. Both composites are identity: on $x\\otimes a$ choose the lift $x$, and on $u\\otimes a$ use any local lift of $u$. The pure-tensor determination statement proves equality of the resulting sheaf maps. Compose $H\\cong D_{r,T}$ with $j_T$ to obtain precisely $\\theta_{r,T}$. No exactness of tensoring with $A$ was used.",
-   "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-weil-pbc-ringed-tensor-section-calculus",
-    "lem-pur-torsion-sheaf-constant-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03EK, section-tensor-product, and 03CY, lemma-sheafification-presheaf-modules; agent-written local-lift inverse using steps 2-3"
-   }
-  },
-  {
-   "text": "For $r'\\geq r$, apply both sides of the asserted transition equation to $j_T^{-1}(x\\otimes a)$. They give respectively $x_{r'}^{\\ell^{r'-r}}\\otimes a$ and $x_r\\otimes a$, which agree by compatibility of the tuple. Pure tensors determine the maps, so $(P_{r',r}\\otimes1)\\theta_{r',T}=\\theta_{r,T}$. In particular the transition is $\\theta_{r,T}\\theta_{r',T}^{-1}$ and is invertible. For three levels, the exponent identity $\\ell^{r''-r'}\\ell^{r'-r}=\\ell^{r''-r}$ proves composition; at equal levels the exponent is $1$. The tensors over the different finite rings are well defined because each power map is linear after restriction to the larger finite ring and $A$ factors through the smaller quotient.",
-   "uses": [
-    "def-pur-roots-of-unity-sheaf",
-    "def-pur-sheaf-tensor-product",
-    "def-weil-pbc-ringed-tensor-section-calculus"
+    "lem-amb-root-tower-finite-tensor",
+    "lem-sp-scalar-extension-binary-coherence",
+    "def-sp-scalar-tensor-comparison-data"
    ],
    "elementary": true,
    "source": {
@@ -87,86 +57,33 @@
    }
   },
   {
-   "text": "For $v:T'\\to T$, lem-pur-roots-of-unity-inverse-image-iso (1)-(2) says exactly that $c^v_s$ commutes with the power transitions and is semilinear over the constant finite ring maps. It also obeys identity and composition laws under the canonical inverse-image identifications: by def-pur-roots-of-unity-inverse-image its adjunct on an object $U\\to T$ is the pullback of the same unit along $T'\\times_TU\\to U$. For $w:T''\\to T'$, the iterated pullback on $T''\\times_{T'}(T'\\times_TU)$ is the pullback on $T''\\times_TU$, because the canonical fibre-product identification commutes with the projections and pullback of global functions respects composition. Hence these adjuncts are equal, and the adjunction bijection gives $c^{v\\circ w}_s=c^w_s\\,w^{-1}(c^v_s)$ after the comparison isomorphism. The identity projection gives $c^{\\mathrm{id}}_s=\\mathrm{id}$. These are equalities of the specified maps, rather than choices of isomorphisms.",
+   "text": "Apply [lem-amb-root-tower-pullback-coherence] with $B=A$. This gives the unique specified $c^v_L$, its identity/composition laws, and $h_v$ on $H_T=L_T\\otimes_{Z_T}A_T$ with $\\alpha_{r,T\\prime}h_v=(c^v_r\\otimes1)v^*\\alpha_{r,T}$. Define $b_v=j_{T\\prime}^{-1}h_v(v^*j_T)$. Substitute $\\theta=\\alpha j$ to get $\\theta_{r,T\\prime}b_v=(c^v_r\\otimes1)v^*\\theta_{r,T}$. In the identity and composite expressions for $b$, the adjacent $v^*j$ and its inverse cancel; the corresponding laws for $h$ give precisely the asserted laws for $b$. On the empty scheme these are unique maps of zero sheaves. The two new results use ordinary tensors, and the only annihilation hypothesis in the finite comparison is $\\ell^rA=0$. Identify the coherence theorem projection map with the finite normalized isomorphism using scalar-extension hom extensionality. Constant-ring naturality under the specified direct-image adjuncts follows from the sheafification adjunction and naturality of its unit. This proves the integral quotient compatibility needed for the double pure tensor formula. All transports are isomorphisms with specified pure-tensor normalizations.",
    "uses": [
-    "lem-pur-roots-of-unity-inverse-image-iso",
-    "def-pur-roots-of-unity-inverse-image",
-    "def-weil-proetale-inverse-image",
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
-    "place": "Paragraph 1, functorial finite Tate coefficients; explicit adjunct computation using the root comparison definition and canonical site inverse-image composition"
-   }
-  },
-  {
-   "text": "The maps $c^v_s\\,v^{-1}p_{s,T}$ form a cone by the transition equation in step 6. Apply the universal property of the limit on $T'_{\\mathrm{proet}}$ to obtain $c^v_L:v^{-1}L_T\\to L_{T'}$. Its projection equations are exactly those of the statement, and joint uniqueness of maps to a limit proves uniqueness. It is semilinear for the constant $\\mathbf Z_\\ell$ map: after $p_{s,T'}$ this says that pulling back an exponent and reducing it modulo $\\ell^s$ gives the same scalar as reducing first, followed by the finite constant-ring map. This is the semilinearity in step 6 and the coordinatewise action in step 1, so the projections prove the assertion. This construction uses a cone into $L_{T'}$, never an assertion that $v^{-1}$ preserves the infinite limit.",
-   "uses": [
-    "def-pur-sheaf-inverse-limit",
-    "lem-pur-roots-of-unity-inverse-image-iso",
-    "def-weil-proetale-inverse-image",
-    "def-pur-roots-of-unity-sheaf"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Root inverse-limit universal property; def-pur-sheaf-inverse-limit (Stacks Tags 03DB and 03CO)"
-   }
-  },
-  {
-   "text": "The structure maps $c^v_\\Lambda:v^{-1}\\Lambda_T\\to\\Lambda_{T'}$ of the constant coefficient rings ($\\Lambda=\\mathbf Z_\\ell,\\mathbf Z/\\ell^r,A$) are the canonical ring-sheaf isomorphisms of lem-pe-constant-left-module-inverse-image for the geometric morphism $v_{\\mathrm{proet}}$; this is the identification of the statement. Apply lem-weil-pbc-ringed-topoi-module-pullback-tensor to the pro-etale geometric morphism and these constant coefficient ring maps. Together with $j_T,j_{T'}$ this identifies $v^*P_T$ with $v^{-1}L_T\\otimes_{v^{-1}Z_T}A_{T'}$. The semilinear map of step 7 induces $x\\otimes a\\mapsto c^v_L(x)\\otimes a$; this is the required $b_v$ after the stated identifications. On a pure tensor, the two sides of the required square are $p_{r,T'}c^v_L(x)\\otimes a$ and $c^v_r(v^{-1}p_{r,T}(x))\\otimes a$. Step 7 equates these expressions. The pure-tensor determination property gives equality of the sheaf morphisms, proving the full square with the specified root maps.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "def-weil-pbc-ringed-tensor-section-calculus",
-    "def-weil-proetale-inverse-image",
-    "def-pur-sheaf-inverse-limit",
-    "lem-pe-constant-left-module-inverse-image"
+    "lem-amb-root-tower-pullback-coherence",
+    "lem-sp-scalar-extension-binary-coherence",
+    "def-weil-proetale-inverse-image"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, lemma-tensor-product-pullback, with Tag 03EK pure tensors and the root projection equations"
-   }
-  },
-  {
-   "text": "For the identity morphism, every projection of $c_L^{\\mathrm{id}}$ equals $p_s$, so $c_L^{\\mathrm{id}}=\\mathrm{id}$. For $T''\\xrightarrow w T'\\xrightarrow v T$, project $c_L^w\\,w^{-1}(c_L^v)$ to level $s$. Using step 7 twice gives $c_s^w\\,w^{-1}(c_s^v)\\,(v\\circ w)^{-1}p_{s,T}$ after the canonical comparison; step 6 identifies this with $c_s^{v\\circ w}\\,(v\\circ w)^{-1}p_{s,T}$. Limit uniqueness gives the composition law for $c_L$. On a pure tensor both the composite pullback map for $b_w,w^*b_v$ and $b_{v\\circ w}$ therefore send $x\\otimes a$ to $c_L^{v\\circ w}(x)\\otimes a$. Identity and composition follow from pure-tensor determination, the canonical monoidal inverse-image comparisons, and the compatibility of the constant-ring identifications with composition of geometric morphisms stated in lem-pe-constant-left-module-inverse-image. On the empty scheme all these formulas are the unique maps of zero sheaves. Every inverse constructed in step 4 uses only $\\ell^rA=0$, so the proof imposes neither flatness over $\\mathbf Z/\\ell^r$ nor any divisibility of $n$ by the ramification index.",
-   "uses": [
-    "def-pur-sheaf-inverse-limit",
-    "def-weil-pbc-ringed-tensor-section-calculus",
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "lem-pe-constant-left-module-inverse-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
-    "place": "Paragraph 1, Tate coefficient pullback in vector-bundle integration; explicit root-coordinate and tensor coherence calculation"
+    "place": "Tag 03EL, lemma-tensor-product-pullback; agent extraction of returned root-projection reduction steps 6-9, with canonical root adjuncts and the inverse-limit cone as in thm-amb-vector-bundle-purity proof paragraph 1."
    }
   }
  ],
  "proof_deps": [
+  "lem-sp-scalar-extension-dual-tower-core",
+  "def-sp-canonical-scalar-extension-maps",
+  "lem-amb-root-tower-finite-tensor",
   "def-pur-roots-of-unity-sheaf",
-  "def-pur-sheaf-inverse-limit",
-  "def-coefficient-twists-detailed",
-  "def-pur-sheaf-tensor-product",
-  "lem-pur-twist-root-transitions",
-  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
-  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
-  "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
-  "def-weil-pbc-ringed-tensor-section-calculus",
-  "lem-pur-torsion-sheaf-constant-module",
-  "lem-pur-roots-of-unity-inverse-image-iso",
-  "def-pur-roots-of-unity-inverse-image",
-  "def-weil-proetale-inverse-image",
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-  "lem-pe-constant-left-module-inverse-image"
+  "lem-sp-scalar-extension-binary-coherence",
+  "def-sp-scalar-tensor-comparison-data",
+  "lem-amb-root-tower-pullback-coherence",
+  "def-weil-proetale-inverse-image"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
-  "place": "Paragraph 1: Tate coefficient in the integration formula; local-lift proof from Kummer transition epimorphisms and weakly contractible pro-etale covers, with all root and tensor coherence written out."
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/_section.md",
+  "place": "Vector-bundle purity proof paragraph 1, following the existing four-step split with the proved scalar-extension tower and binary section APIs; Lean proof by group B8, 2026-10-23."
  },
  "mathlib_searches": [
   {
@@ -268,68 +185,21 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-amb-tate-root-projection-reduction",
   "worker": "stage1",
-  "summary": "Preserved the statement and split it into nine steps, reusing existing Kummer transition, full-site weak-contractibility, general-site epi, torsion-module and tensor-pullback nodes. The explicit shift division computes the projection kernel; local lifts construct the ordinary tensor inverse without flatness or a constant/completed coefficient identification. Wrote root-adjunct, inverse-limit and pure-tensor coherence formulas. No new nodes.",
+  "summary": "Repair of the 7523-character re-split return. Statement unchanged. Added two independent statement-only tasks of comparable argument size: root lifting/kernel/local-tensor inverse (old steps 2-4), and canonical root-adjunct/limit/tensor coherence (old steps 6-9). Retained reassociation and finite-transition calculations in the parent; all nine old arguments are preserved verbatim in report.md with their new ownership. No Lean changes. Corrected stale completion-flat source attribution.",
   "blueprint": "thm-amb-vector-bundle-purity proof paragraph 1: the prescribed finite Tate coefficient in the integration formula. These steps supply the root-reduction part factored from lem-amb-finite-tate-site-descent (old steps 1, 2, 5, and the limit-construction part of 6).",
-  "tool_uses": [
-   {
-    "node": "lem-pur-twist-root-transitions",
-    "why": "Generic sheaf tool used by the explicit root and tensor calculation. No statement of the vector-bundle model unit supplies this generic site operation; no purity argument or unit step is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
-    "why": "Converts abelian Kummer epimorphisms to local surjectivity on the full pro-etale site. No statement of the vector-bundle model unit supplies this generic site operation; no purity argument or unit step is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
-    "why": "Converts the same local-surjectivity condition into set epimorphisms so weak contractibility applies. No statement of the vector-bundle model unit supplies this generic site operation; no purity argument or unit step is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
-    "why": "Supplies full-site projective evaluation objects on which all root lifts can be chosen on one cover. No statement of the vector-bundle model unit supplies this generic site operation; no purity argument or unit step is replaced."
-   },
-   {
-    "node": "lem-pur-torsion-sheaf-constant-module",
-    "why": "Generic sheaf tool used by the explicit root and tensor calculation. No statement of the vector-bundle model unit supplies this generic site operation; no purity argument or unit step is replaced."
-   },
-   {
-    "node": "lem-pur-roots-of-unity-inverse-image-iso",
-    "why": "Generic sheaf tool used by the explicit root and tensor calculation. No statement of the vector-bundle model unit supplies this generic site operation; no purity argument or unit step is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-    "why": "Supplies the canonical monoidal identity/composition comparisons for the pro-etale inverse images. No statement of the vector-bundle model unit supplies this generic site operation; no purity argument or unit step is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "why": "Identifies the ordinary tensor pullback used in the prescribed definition of b_v. No statement of the vector-bundle model unit supplies this generic site operation; no purity argument or unit step is replaced."
-   },
-   {
-    "node": "lem-pe-constant-left-module-inverse-image",
-    "why": "Supplies the canonical isomorphism between the inverse image of a constant ring sheaf and the target constant ring, and its compatibility with composition, used to form v^*P_T and the coherence of b_v. No statement of the vector-bundle model unit supplies this generic site operation; no purity argument or unit step is replaced."
-   }
-  ]
+  "tool_uses": []
  },
- "tool_uses": [
-  "lem-pur-twist-root-transitions",
-  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
-  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
-  "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
-  "lem-pur-torsion-sheaf-constant-module",
-  "lem-pur-roots-of-unity-inverse-image-iso",
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-  "lem-pe-constant-left-module-inverse-image"
- ],
+ "tool_uses": [],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q19-a84ac8145",
-  "group": "Q19",
+  "reviewer": "NT-cc-Q143-9c4c150fe",
+  "group": "Q143",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-a84ac8145 (reviewer sub-agent of L); spot-checked: Read the item and all nine steps in full; the statement is unchanged and there are 0 new nodes. The item is not superseded (live and side-live have it unsplit), has no repair note and cites no SGA source. The statement is true: theta_r follows from p_r being an epimorphism with kernel ell^r L and from ell^r A=0, without flatness. I tested it on Spec of a separably closed field, on a ramified E with n=3 (ell^2 A=0 but ell A not 0), on the nonflat case A=F_l over Z/l^2, and on the empty scheme. It uses the constant (Z_l)_T exactly as def-coefficient-twists-detailed does, not the completed sheaf. Step checks: 2 has the correct hypotheses for lem-pur-twist-root-transitions, the general-site epi criteria and weak contractibility on the full site (Stacks 0990 proetale.tex:2913, 090K sites.tex:9480), and its recursive lift is correct. 3: the shift-division kernel calculation is correct. 4: the local-lift inverse uses lem-pur-torsion-sheaf-constant-module (2) on a slice and is correct. 5-7: the transitions, the c^v_s composition via adjuncts, and the limit cone without commuting v^-1 with the limit are correct. 8-9: the pure-tensor squares and coherence are correct. Two faults, both fixed. (1) C1: steps 8 and 9 use that the inverse image of a constant ring sheaf is the target constant ring, and its compatibility with composition, but no cited node proves it (def-weil-proetale-inverse-image only defines c^f_A). I cited lem-pe-constant-left-module-inverse-image (closure checked, no cycle), added it to proof_deps and to split_report.tool_uses, and set step 9 to elementary=false. (2) B5: the item-level source was still Stacks 093M completion-flat applied to lem-pur-twist-sheaf-locally-free (2), which the proof no longer uses, although the report claims it was changed. I replaced it with 0990/090K and 03EK/03EL. Overlap with lem-pur-twist-sheaf-locally-free and lem-pur-twist-root-local-models is not a duplicate: neither states the normalized theta_r, the transition equation or the b_v square. I accept the declared tool_uses as generic sheaf tools that replace no step of unit sk-prop-an.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q143-9c4c150fe (reviewer sub-agent of L); spot-checked: I read the whole re-split delivery: the item and both new nodes. The re-split note (released 2026-10-22, the same in live and side-live) asks for at least 2 nodes and a parent proof of at most 3000 characters. Item: the statement and stmt_deps are byte-identical to the base. The parent proof is 2396 characters: old steps 1 and 5 verbatim (elementary), plus two applications. The parent sets θ=α∘j_T and b_v=j_{T'}^{-1}h_v v^*j_T; I checked the types, and the j factors cancel in the identity/composition laws. All nine old step texts are preserved verbatim in the report. Old steps 2-4 go to lem-amb-root-tower-finite-tensor: p_r locally surjective; ker p_r(U)=ℓ^r L(U) via d_r(x)_s=x_{s+r} (checked x_{s+r}^{ℓ^s}=x_r=1 and ℓ^r d_r x=x); α_r: L⊗_{Z_T}B ≅ μ_{ℓ^r}⊗_{R_r}B for any B with ℓ^r B=0, with no flatness needed. Old steps 6-9 go to lem-amb-root-tower-pullback-coherence: identity/composition of c^v_s, the cone map c^v_L, h_v and the α-square, none assuming invertibility. The two nodes carry about 2.5k and 3.8k characters of old argument, which I count as comparable, and each holds real arguments rather than restated existing nodes. Neither has proof_deps, so there is no cycle, and both are in the item's unit sk-prop-an. Small cases tested: a separably closed point, B=F_ℓ with r=2, B=0, empty T, v=id, and ramified E with n=3. Duplicates checked and rejected: lem-pur-twist-sheaf-locally-free (completed coefficient sheaf), lem-pur-twist-root-local-models, lem-pur-finite-kummer-level (needs e|n), lem-amb-finite-root-site-comparison (finite level only), and lem-pur-integral-twist-line-inverse-image (2) (gives only that τ is an isomorphism). lem-pur-tate-inverse-limit-base-change assumes invertible β_r that satisfy the identity/composition laws, and no node states those laws for c^v_{μ_N}; the worker who proves the pullback node may use it as a tool afterwards. Sources checked: Tag 0990 at proetale.tex:2913, 03EL at sites-modules.tex:3649, 03EK at :3551. No SGA. One fault, fixed. B5: the item source still cited Tag 093M completion-flat applied to lem-pur-twist-sheaf-locally-free (2), which nothing uses, although the report claims it was removed. I replaced it with 0990/090K and 03EK/03EL. Cosmetic, not changed: the pullback node's search verdicts are copied from the sibling node.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.AmbTateRootProjectionReduction",
@@ -365,5 +235,27 @@
   "group": "Q21",
   "result": "pass",
   "note": "Single new module AmbTateRootProjectionReduction plus the item lean record; dep nodes byte-identical to live. All clauses match: j/j_pure (a⊗(b⊗x)↦(a·q b)⊗x); theta/theta_pure via limit.π of the recorded root tower (index r↦μ_{l^{r+1}}); AmbTateLevel requires only (l^{r+1}:A)=0 (no flatness, no e|n); D_r via the unique ZMod.castHom scalar map; transition (power map P) with _pure/_theta/_isIso/_id/_comp; c_L as direct-image adjunct pinned by c_projection+c_unique, using the recorded proEtaleRootsOfUnityDirectImageMap; b_v and delta adjuncts pinned on pure tensors; square = exact adjunct of the node's square; c/b id/comp via Over.pullbackId/pullbackComp (directions checked). P_T = purTwistFiniteOne = finiteCoefficientTwist at m=1. AmbTateBase = l unit in stalks, empty scheme allowed; single universe u. No hollow data; docstrings carry the source places and all 9 steps; sorry only; lean.statement verbatim; plain imports are the proof_deps modules. No compile run (no file changed); worker reports a clean scompile. Notes: the item source still says Tag 093M (the Q19 stage-1 source fix is missing from live; re-apply); purScalarSection/purTwist* owners outside stmt_deps and helpers parallel to the PurityFiniteKummerLevel kummer* helpers are advisory."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261023T230452-L-3430818",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

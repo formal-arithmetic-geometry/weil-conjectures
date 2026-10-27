@@ -1,0 +1,106 @@
+{
+ "id": "def-sf-derived-scalar-restriction-compositors",
+ "kind": "definition",
+ "title": "Canonical derived scalar restriction compositors",
+ "status": "split",
+ "statement": "Let $\\mathcal C$ be a site with topology $J$ [def-weil-pbc-sites-and-cohomology]. For commutative ring sheaves $A,B,D$ on it let $\\operatorname{Mod}(A)$ be the category of sheaves of modules over the underlying ring sheaf [def-weil-sheaf-of-modules-category], and use ordinary unbounded derived categories [def-weil-abstract-derived-category] in a universe admitting these categories. For $f:A\\to B$, define $\\operatorname{res}_f:\\operatorname{Mod}(B)\\to\\operatorname{Mod}(A)$ by restriction of scalars [def-pc-sheaf-restrict-scalars], and $\\operatorname{Res}_f=D(\\operatorname{res}_f)$ by termwise restriction localized at quasi-isomorphisms. For $g:B\\to D$, $h:A\\to D$ and an equality $g f=h$, define the ordinary comparison $c_{f,g,h}:\\operatorname{res}_g\\operatorname{res}_f\\cong\\operatorname{res}_h$ (functor composition in diagrammatic order) to be the unique comparison whose component is the identity on every underlying module section. Define its derived comparison $\\operatorname{Res}_g\\operatorname{Res}_f\\cong\\operatorname{Res}_h$ by the canonical derived-composition isomorphism followed by the derived natural isomorphism of $c_{f,g,h}$. Define $\\operatorname{Res}_{1_A}\\cong 1_{D(\\operatorname{Mod}(A))}$ by deriving the ordinary identity comparison and using the canonical derived-identity isomorphism.",
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-sheaf-restrict-scalars"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+  "place": "Integral stage, reductions of the open unit and finite exceptional objects; scalar-restriction identifications in returned step 7. Existing construction: DerivedCoefficientSequenceRealization, scalar section; Stacks Tags 03CW, 015F and 04VG."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived restriction of scalars along composable maps of sheaves of rings canonical identity on sections comparison",
+   "results": "8 hits: ModuleCat.restrictScalarsComp'App_hom_apply, ModuleCat.restrictScalarsComp'App_hom_naturality, ModuleCat.restrictScalars, ModuleCat.restrictScalarsComp'App_hom_naturality_assoc, ModuleCat.restrictScalarsComp', ModuleCat.restrictScalarsComp, ModuleCat.RestrictScalars.obj', ModuleCat.restrictScalarsComp'.congr_simp. These are constituent module/scalar-restriction APIs; the exact existing sheaf derived compositor is CategoryTheory.DerivedCoefficientSequence.comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived restriction of scalars compositor along composable sheaf ring maps",
+   "results": "8 hits: SheafOfModules.restrictScalars, SheafOfModules.restrictScalars_map_val, PresheafOfModules.map_comp, SheafOfModules.restrictScalars_obj_val, ModuleCat.restrictScalarsComp', ModuleCat.restrictScalarsComp'_hom_app, SheafOfModules.instAdditiveRestrictScalars, ModuleCat.restrictScalarsComp. These are constituent module/scalar-restriction APIs; the exact existing sheaf derived compositor is CategoryTheory.DerivedCoefficientSequence.comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalarsComp|mapDerivedCategoryCompIso|mapDerivedCategoryIdIso",
+   "results": "20 hits: Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean. These are constituent module/scalar-restriction APIs; the exact existing sheaf derived compositor is CategoryTheory.DerivedCoefficientSequence.comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-exceptional-reduction-transition-comparison",
+  "date": "2026-10-23",
+  "group": "Q94"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-localization-all-stages",
+   "place": "Integral stage: reductions of the units and Q_n = Ri_n^! K_n, using canonical scalar-restriction identifications; returned step 7 quotient-transition coherence.",
+   "via": [
+    "lem-sf-exceptional-reduction-transition-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-localization",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedCoefficientSequenceRealization",
+  "declaration": "CategoryTheory.DerivedCoefficientSequence.comparison",
+  "declarations": [
+   "CategoryTheory.DerivedCoefficientSequence.Modules",
+   "CategoryTheory.DerivedCoefficientSequence.restriction",
+   "CategoryTheory.DerivedCoefficientSequence.ordinaryComparison",
+   "CategoryTheory.DerivedCoefficientSequence.derivedRestriction",
+   "CategoryTheory.DerivedCoefficientSequence.comparison",
+   "CategoryTheory.DerivedCoefficientSequence.derivedIdentity"
+  ],
+  "statement": "def comparison (f : A ⟶ B) (g : B ⟶ D) (h : A ⟶ D)\n    (hfg : f ≫ g = h) :\n    derivedRestriction g ⋙ derivedRestriction f ≅ derivedRestriction h",
+  "branch": "sheaf-dag",
+  "by": "Q94",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "R1: record only the already-published definitions used in the consumer; no assertion of sequence realization, comparison coherence or normalization theorem is a statement dependency. ordinaryComparison is selected from a unique identity-on-sections characterization, not a free comparison."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aedbf62b9",
+  "group": "Q94",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aedbf62b9",
+  "group": "Q94",
+  "result": "pass",
+  "note": "Item Lean byte-identical to 1a0d (sha 19ee00d3); re-read vs node: alpha IsIso NatTrans, open-unit square, counit uniqueness and triangle-morphism equivalence (TR3 with free distinguished boundaries and the triangulated CommShift witness), transition intertwining, cocycle, t_nn=1; edge cases n=0, m=n, r=m, Z/U empty, K=0 covered. Mechanical theorem-stmt_dep finding: finiteImageRestriction = .choose of proEtaleDerivedDirectImage_restrictScalars (pinned on K-injectives) and transition/directReduction use .choose of derivedScalarExtensionRestrictionAdjunction (unit pinned on K-flat): genuine theorem-constructed objects, PASS on that point. R1: def-sf-derived-scalar-restriction-compositors existing:true on the proved DerivedCoefficientSequenceRealization module, six defs exist, statement verbatim, stmt_deps exist live. R2': dep record = live plus the six intrinsic names appended (by Q50, reviewed_proof kept); fixed-scalar module = live plus one public import; no cycle; no double ownership; 12 current importers all within the worker's 13-importer probe. R3: adjunction theorem now cited. Advisory: unused base-era stmt_deps (incl. def-weil-derived-tensor) and an unused import (H9). No file changed, no compile run."
+ }
+}

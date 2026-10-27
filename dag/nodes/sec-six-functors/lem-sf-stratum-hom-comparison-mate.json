@@ -1,0 +1,262 @@
+{
+ "id": "lem-sf-stratum-hom-comparison-mate",
+ "kind": "statement",
+ "title": "The stratum Hom composite is the normalized evaluation comparison",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$, uniformizer $\\varpi_E$, and $n\\ge1$. Put $A=\\mathcal O_E/\\varpi_E^n$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Let $s:S\\hookrightarrow X$ be a locally closed immersion between separated finite-type $k$-schemes, factored as $S\\xrightarrow{c}V\\xrightarrow{v}X$ with $c$ closed and $v$ open [def-weil-scheme-morphism-properties, def-weil-closed-immersion, def-weil-open-immersion]. Work in ordinary constant-$A$ module derived categories on the small sites $\\tau=e,p$ (etale, pro-etale) [def-weil-pbc-derived-categories, def-weil-pbc-proetale-modules]. Put $C_T=\\nu_T^*$ [def-weil-pbc-site-comparison-morphism], $H_\\tau=R\\mathcal Hom_A$ [def-pur-derived-internal-hom], $Q_\\tau=v_{\\tau,!}c_{\\tau,*}$ and $J_\\tau=Rc_\\tau^!v_\\tau^*$, with the ambient closed right adjoints and pasted counits of [lem-weil-finite-duality-locally-closed-comparison]. Let $L$ be an etale locally constant finite $A$-module sheaf with flat stalks on $S$, and let $M\\in D^b_c(X_e,A)$ [def-weil-pbc-constructible-complexes]. Assume $N=J_eM\\in D^b_c(S_e,A)$.\n\nLet $\\Delta_L:C_XQ_eL\\xrightarrow{\\sim}Q_pC_SL$ and $\\gamma_M:C_SN\\xrightarrow{\\sim}J_pC_XM$ be the canonical counit-compatible comparisons of [lem-weil-finite-duality-locally-closed-comparison]. Let $b_s:C_XRs_{e,*}H_e(L,N)\\xrightarrow{\\sim}Rs_{p,*}C_SH_e(L,N)$ be the specified ordinary direct-image mate of [lem-weil-pbc-comparison-direct-image-canonical-mate]. Let $\\chi_\\tau:H_\\tau(Q_\\tau P,B)\\xrightarrow{\\sim}Rs_{\\tau,*}H_\\tau(P,J_\\tau B)$ be the canonical stratum isomorphism, specifying the normalization of the natural isomorphism in [lem-weil-stratum-ambient-hom] as follows. Put $K_\\tau=H_\\tau(P,J_\\tau B)$ and write $\\varepsilon^{\\star,\\tau}:s_\\tau^*Rs_{\\tau,*}\\to1$ for the ordinary counit. The tensor transpose of $\\chi_\\tau^{-1}$ is\n$$Rs_{\\tau,*}K_\\tau\\otimes_A^LQ_\\tau P\\xrightarrow{\\pi^\\tau}Q_\\tau(s_\\tau^*Rs_{\\tau,*}K_\\tau\\otimes_A^LP)\\xrightarrow{Q_\\tau(\\varepsilon^{\\star,\\tau}\\otimes1)}Q_\\tau(K_\\tau\\otimes_A^LP)\\xrightarrow{Q_\\tau(\\mathrm{ev})}Q_\\tau J_\\tau B\\xrightarrow{\\epsilon^\\tau_B}B,$$\nusing the projection isomorphism of [lem-sf-immersion-projection-site-comparison] and the pasted exceptional counit $\\epsilon^\\tau$. Let $\\beta$ denote the evaluation transpose of [def-sf-evaluation-hom-site-comparison]. Then, as morphisms in $D(X_p,A)$,\n$$\\chi_p\\circ H_p(\\Delta_L^{-1},1)\\circ\\beta_{Q_eL,M}\n=Rs_{p,*}\\!\\bigl(H_p(1,\\gamma_M)\\circ\\beta_{L,N}\\bigr)\\circ b_s\\circ C_X(\\chi_e).$$\nThe identity uses the canonical tensor identifications throughout. All the displayed arrows are isomorphisms whenever $\\beta_{L,N}$ is; in that case $\\beta_{Q_eL,M}$ is an isomorphism. Only the ambient closed right adjoints entering $J_\\tau$ are used.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-weil-finite-duality-site-comparison.md",
+  "place": "Proof, second paragraph: stratum internal-Hom identity, locally closed exceptional comparison, and direct-image comparison; equality with the specified map"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-pur-derived-internal-hom",
+  "lem-weil-finite-duality-locally-closed-comparison",
+  "def-weil-pbc-constructible-complexes",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-stratum-ambient-hom",
+  "def-sf-evaluation-hom-site-comparison",
+  "lem-sf-immersion-projection-site-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Finite type over the coefficient field makes X Noetherian; the locally closed immersion is quasi-compact. The tensor-left adjunction and the degree-zero bound show H_e(L,J_e M) is bounded below by DerivedCategory.isGE_obj_of_adjunction.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conjugate the immersion projection isomorphism by the derived/exact extension isomorphisms. Its naturality and invertibility allow the existing parametrized tensor-Hom conjugate-isomorphism construction to give chi on each site. The counit formula is exactly the inverse-transpose normalization for the actual supplied right adjoints.",
+   "uses": [
+    "def-sf-stratum-hom-comparison-data",
+    "lem-sf-etale-generic-stratum-mate",
+    "lem-sf-immersion-projection-site-comparison",
+    "lem-weil-finite-duality-locally-closed-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the normalized stratum pairing identity with these two constructed isomorphisms and the boundedness witness. This supplies just the displayed equality.",
+   "uses": [
+    "lem-sf-stratum-hom-pairing-identity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If beta on the stratum is invertible, then stratumMap is invertible since gamma is. The fixed ordinary mate is invertible for the qcqs immersion. Functors preserve these inverses. The two chi components and homChange are invertible. The displayed equality and cancellation therefore make ambient beta invertible and establish all seven requested IsIso clauses.",
+   "uses": [
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-weil-finite-duality-locally-closed-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "def-sf-stratum-hom-comparison-data",
+  "lem-sf-etale-generic-stratum-mate",
+  "lem-sf-immersion-projection-site-comparison",
+  "lem-sf-stratum-hom-pairing-identity",
+  "lem-weil-finite-duality-locally-closed-comparison",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-finite-type-over-noetherian"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "M3",
+  "date": "2026-10-25",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-weil-finite-duality-site-comparison.proof.md",
+  "place": "Second paragraph: stratum internal-Hom comparison and the canonical ordinary and exceptional counits.",
+  "note": "Constructs the normalized isomorphisms and derives all invertibility clauses; only the comparison of normalized evaluation pairings is split off."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a locally closed immersion the derived Hom site comparison is the composite of direct image comparison internal Hom comparison and exceptional pullback comparison",
+   "results": "8 hits; CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val; CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso; SheafOfModules.PullbackConstruction.adjunction; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility; SheafOfModules.pullbackComp. Generic mate calculus is available, but no hit states the displayed equation combining the two stratum Hom isomorphisms with the exceptional counit and direct-image comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Counit normalized direct image adjunction mate identifies evaluation comparison on extension by zero with the stratum Hom formula",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app; CompHausLike.LocallyConstant.incl_of_counitAppApp; CompHausLike.LocallyConstant.adjunction_left_triangle; CompHausLike.LocallyConstant.counitAppApp; AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app; Rep.resIndAdjunction_counit_app; ModuleCat.RestrictionCoextensionAdj.counit'; CompHausLike.LocallyConstant.adjunction_counit. Generic mate calculus is available, but no hit states the displayed equation combining the two stratum Hom isomorphisms with the exceptional counit and direct-image comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"mate\"",
+   "results": "12 hits; CategoryTheory.mateEquiv; CategoryTheory.mateEquiv_counit; CategoryTheory.mateEquiv_counit_symm; CategoryTheory.unit_mateEquiv; CategoryTheory.unit_mateEquiv_symm; CategoryTheory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.mateEquiv_vcomp. Generic mate calculus is available, but no hit states the displayed equation combining the two stratum Hom isomorphisms with the exceptional counit and direct-image comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]tratum|[Ss]trata|[Ee]xceptional.*[Hh]om|[Hh]om.*[Ee]xceptional",
+   "results": "8 hits; Mathlib/Algebra/Order/Module/HahnEmbedding.lean; Mathlib/Algebra/Order/Module/HahnEmbedding.lean; Mathlib/Algebra/Order/Module/HahnEmbedding.lean; Mathlib/Algebra/Order/Module/HahnEmbedding.lean; Mathlib/Algebra/Order/Module/HahnEmbedding.lean; Mathlib/RingTheory/HahnSeries/HahnEmbedding.lean; Mathlib/RingTheory/HahnSeries/HahnEmbedding.lean; Mathlib/RingTheory/HahnSeries/HahnEmbedding.lean. Generic mate calculus is available, but no hit states the displayed equation combining the two stratum Hom isomorphisms with the exceptional counit and direct-image comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale proetale comparison of stratum internal Hom respects evaluation and exceptional adjunction counits",
+   "results": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The internal Hom adjunction for extension by zero along an immersion is normalized by the projection formula evaluation and the exceptional counit",
+   "results": "; 8 hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, AlgebraicGeometry.Scheme.ofRestrict_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app. Generic closed-category evaluation and mate lemmas do not state this two-site immersion Hom comparison identity; the returned algebraic or scheme-module restriction declarations do not specialize to it.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "stratum.*[Hh]om|[Hh]om.*stratum|proetale.*[Hh]om",
+   "results": "; 1 hits: Mathlib/RingTheory/HahnSeries/HahnEmbedding.lean. Generic closed-category evaluation and mate lemmas do not state this two-site immersion Hom comparison identity; the returned algebraic or scheme-module restriction declarations do not specialize to it.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation normalized internal Hom adjunction for locally closed immersion on etale and proetale module derived categories",
+   "results": "; 8 hits: CategoryTheory.exp.ev, CategoryTheory.ihom.ihom_adjunction_counit, CategoryTheory.ihom.adjunction, CategoryTheory.exp.adjunction, CategoryTheory.ihom.ev, CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj, CategoryTheory.MonoidalClosed.internalHomAdjunction₂, CategoryTheory.ihom.coev. Generic closed-category evaluation and mate lemmas do not state this two-site immersion Hom comparison identity; the returned algebraic or scheme-module restriction declarations do not specialize to it.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"mate\"",
+   "results": "; 12 hits: CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp. Generic closed-category evaluation and mate lemmas do not state this two-site immersion Hom comparison identity; the returned algebraic or scheme-module restriction declarations do not specialize to it.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation comparison of derived internal Hom commutes with extension by zero exceptional counits and ordinary direct image mate",
+   "results": "; 8 hits: CategoryTheory.coev_expComparison, CategoryTheory.expComparison_ev, CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerLeft, CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerRight, CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft, CategoryTheory.ihom.ev_coev, CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight, CategoryTheory.exp.ev_coev. Generic closed-category evaluation and mate lemmas do not state this two-site immersion Hom comparison identity; the returned algebraic or scheme-module restriction declarations do not specialize to it.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula and exceptional adjunction identify derived Hom out of immersion extension by zero with ordinary pushforward internal Hom",
+   "results": "; 8 hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, SheafOfModules.pushforwardSections_unitHomEquiv. Generic closed-category evaluation and mate lemmas do not state this two-site immersion Hom comparison identity; the returned algebraic or scheme-module restriction declarations do not specialize to it.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionFormula\", \"Sheaf\"",
+   "results": "service unavailable: ; 0 hits: . Search unavailable.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-finite-duality-site-comparison",
+  "date": "2026-10-22",
+  "group": "Q02"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": "lem-weil-finite-duality-site-comparison",
+   "place": "Proof, second paragraph: stratum internal-Hom identity, locally closed exceptional comparison, and direct-image comparison; equality with the specified map",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-stratum-hom-comparison-mate",
+  "worker": "stage1",
+  "summary": "Expanded the actual named-map transposition into seven steps. Repaired the unsupported normalization reference by specifying chi explicitly and constructing it from the Hom bijections. Checked both bounded-below inputs of the ordinary mate. Added one strictly smaller geometric tensor tool for immersion projection compatibility; all Hom/evaluation/counit algebra remains in the item. No hypotheses or conclusions changed.",
+  "blueprint": "Realizes the second proof paragraph of lem-weil-finite-duality-site-comparison: the displayed stratum internal-Hom identity followed by locally closed exceptional comparison and ordinary direct-image comparison, identifying their composite with the specified evaluation map.",
+  "tool_uses": [
+   {
+    "node": "lem-per-bounded-above-rhom-hyperext",
+    "why": "Only its final boundedness conclusion is used with a degree-zero source; this is a general small-ringed-site tool, not its spectral-sequence proof or a change of the unit route."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic tensor-Hom adjunction and its evaluation normalization on both small ringed sites, absent as a statement of this unit."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic monoidal coherence of the specified pullback comparisons, ensuring that the two tensor transposes use the same identifications."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "why": "Generic ordinary direct-image counit normalization and its bounded-below isomorphism assertion, explicitly required by the ancestor stratum argument."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Canonical ordinary unbounded ringed-site derived adjunction on both sites; a general tool independent of constructibility and the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "General scheme finiteness tool verifies the Noetherian target hypothesis from finite type over a field."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-finite-type-over-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-0f735d0f1",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-0f735d0f1 (reviewer sub-agent of L); spot-checked: No repair note for this item, so this is a plain first split of the unsplit Q02 node. Base statement taken from the Q02 run snapshot. The only statement change replaces the unsupported phrase 'evaluation-and-counit normalized χ [lem-weil-stratum-ambient-hom]' (that node only asserts that an isomorphism exists) with the explicit tensor transpose of χ^{-1} (π, then Q(ε⋆⊗1), then Q(ev), then ε). This pins the intended arrow and weakens nothing. The parent's step 4 uses only the invertibility of β_{Q_eL,M}. The route stays on the second proof paragraph of the master blueprint lem-weil-finite-duality-site-comparison, and no SGA is cited. I re-derived steps 2-6 arrow by arrow. Step 2: the backward bijection image of the identity is the stated normalization. Step 4: the mate normalization ε^p s^*(b)=C_S(ε^e)a^{-1} gives w̃=d C_S(u) a^{-1}, and the definition of β gives γ C_S(t) t_S^{-1}(a^{-1}⊗1). Step 5: the new node's square, naturality of Δ on D^+, and the counit equation ε^p Q_p(γ)Δ_N=C_X(ε^e) give C_X(ev). Step 6: H(Δ_L,1)z=β, which is exactly the displayed identity. Step 1 boundedness: the last sentence of the hyperext node with r=0; the Noetherian hypothesis via the finite-type leaf; s is qcqs. Edge cases S=∅, L=0, s=id and purely open/closed are consistent. The six declared tool uses are generic and I accept them. New node lem-sf-immersion-projection-site-comparison: true, statement-only, strictly smaller than the item (no Hom, J or χ), with searches recorded. It is not a duplicate of closed-underived-projection (pro-étale only), etale-generic-immersion-projection (étale only) or comparison-open-tensor-coherence (open only); these supply its pieces. FIX (B2): D' was undefined and the open component was not written out. The fixed file defines D'=v^*D and P'=c_*P and names both component maps and the c^*⊣c_* transpose.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StratumHomComparisonMate",
+  "declaration": "AlgebraicGeometry.StratumHomComparisonMate.stratumHomComparisonMate",
+  "declarations": [
+   "AlgebraicGeometry.StratumHomComparisonMate.stratumHomComparisonMate"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StratumHomComparisonMate.lean",
+  "statement": "theorem stratumHomComparisonMate (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type (u + 1)) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) {S V X : Scheme.{u}} (aS : S ⟶ Spec (.of D.k)) (aX : X ⟶ Spec (.of D.k)) [LocallyOfFiniteType aS] [QuasiCompact aS] [IsSeparated aS] [LocallyOfFiniteType aX] [QuasiCompact aX] [IsSeparated aX] (c : S ⟶ V) (v : V ⟶ X) [IsClosedImmersion c] [IsOpenImmersion v] (_hs : (c ≫ v) ≫ aX = aS) : ∃ hX : IsNoetherian X, ∃ hqc : QuasiCompact (c ≫ v), @Conclusion (Padic.coefficientExtensionRing l E (n + 1)) inferInstance (Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_le_succ (Nat.zero_le n))) S V X hX c v inferInstance inferInstance hqc",
+  "branch": "sheaf-dag",
+  "by": "NP",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The original canonical definitions are publicly re-exported from StratumHomComparisonData, whose definition node records them. Main theorem signature and mathematical conclusion unchanged. One strictly smaller equality lemma is postponed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-98baadad6",
+  "group": "NP",
+  "result": "pass",
+  "note": "Read node, module (443 lines), report, and the Lean of the locally-closed comparison, immersion projection, direct-image mate, evaluation Hom, derived immersion normalization and stratum ambient Hom dependencies. Every clause matches: k/ℓ/E/level n+1 and the scheme hypotheses are identical to the landed dependency; Q,J and the pasted counits come literally from z.adjoints; gamma = z.gamma; b_s = Plus.ι of fixedComparisonDirectImageMatePlus conjugated by the published Plus compatibility isos, with the D+ witness concluded; beta = siteComparisonEvaluationHom; chi_e and chi_p are existential natural isos pinned uniquely by the full inverse-transpose normalization for all P,B (π, Q(ε*⊗1), Q(ev), ε), and step 2 constructs them; the displayed identity and all 7 conditional IsIso clauses are present. Statement field verbatim; all 25 declarations exist; no dependency record changes; first S2 delivery, no repair note. Advisory: Δ uses the projection-node termwise presentation, equal on D+ to locallyClosedExtensionComparison via the proof_dep lem-sf-derived-immersion-comparison-normalization; IsFiniteLocallyConstantSheaf is owned by pur9-def-finite-locally-constant, not a stmt_dep; StratumAmbientHom imported but not used (correct, since χ is pinned in the item); docstring cites the latest blueprint path. Edge cases checked: empty S, L=0, identity factors, level 1, universes. No compile, since no file was changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-bb5b0",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261025T163849-L-876411",
+  "kind": "interface",
+  "note": "independent cc review: Moved StratumHomComparisonData defs vs clone item defs (bodies identical; HomIso/Normalized unfold to old formulas); item theorem signature vs clone (byte-identical); split normalizedComparisonIdentity vs node lem-sf-stratum-hom-pairing-identity and plan steps 3-6; item node proof_deps vs Lean uses"
+ }
+}

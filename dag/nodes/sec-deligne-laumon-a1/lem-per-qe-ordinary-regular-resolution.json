@@ -1,0 +1,292 @@
+{
+ "id": "lem-per-qe-ordinary-regular-resolution",
+ "kind": "statement",
+ "title": "Regular-functorial ordinary resolution of quasi-excellent rational schemes",
+ "statement": "On the category of reduced Noetherian quasi-excellent schemes over $\\mathbf Q$ [def-pc-reduced-scheme], [pqf-def-locnoeth], [def-exc-excellent-ring], including finite disjoint unions, there exists one ordinary desingularization rule $F$. For every input $X$ it assigns a finite tower $X_n\\to\\cdots\\to X_0=X$ of ordinary blowups [def-nagata-global-blowup] with coherent ideal centers $I_i\\subset\\mathcal O_{X_i}$. Each $V(I_i)$ is nonempty, nowhere dense and regular, and $X_n$ is regular [def-weil-regular-scheme]. For every regular morphism $f:Y\\to X$ between inputs, meaning flat with geometrically regular fibres, $F(Y)$ is the contraction of the scheme-theoretic pullback $f^*F(X)$ obtained by deleting exactly the unit-ideal centers. The comparisons retain all other extended ideal sheaves in their original order, respect identities and composition, and delete no stage when $f$ is surjective. The empty input has the tower of length zero. Noetherian schemes here admit finite affine covers by spectra of Noetherian rings; quasi-excellence for schemes means quasi-excellence of their affine coordinate rings. Coherent modules and flatness are as in [pqf-def-coherent] and [def-weil-flat-morphism].",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII Theorem 2.3.10, with 2.3.1, 2.3.4 and Remark 2.3.5, printed pp.91--93; this is the ordinary, not normalized, algorithm No Stacks tag states this combined result; the cited place is in the archived ILO volume."
+ },
+ "stmt_deps": [
+  "def-pc-reduced-scheme",
+  "pqf-def-locnoeth",
+  "def-exc-excellent-ring",
+  "def-nagata-global-blowup",
+  "def-weil-regular-scheme",
+  "pqf-def-coherent",
+  "def-weil-flat-morphism",
+  "def-per-qe-ordinary-resolution-rule"
+ ],
+ "proof": [
+  {
+   "text": "Choose once the rule $H$ for small-singular-locus pairs supplied by [lem-per-small-singular-locus-resolution]. Apply [lem-per-codimension-resolution-improvement]: start with its length-zero rule $R_0$, and recursively take the prescribed successor of the prefix $R_0,\\ldots,R_d$. Successors retain the earlier rules, so this defines one sequence of rules on the entire category, including all finite disjoint unions. Write $T_d(X)$ for the closed unresolved sets. The input is reduced and Noetherian and quasi-excellent over $\\mathbf Q$, precisely the category of these two cited statements. In particular $T_e(X)\\subseteq T_d(X)$ for $e\\ge d$ and $T_d(X)\\cap X^{\\le d}=\\varnothing$.",
+   "uses": [
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-codimension-resolution-improvement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+    "place": "Theorem 3.4.1 and §4.3, printed pp.26,29--31"
+   }
+  },
+  {
+   "text": "Fix $X$. By [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal], the nonempty family $\\{T_d(X):d\\ge0\\}$ has a minimal member $T_N(X)$. Since the sets decrease, $T_e(X)=T_N(X)$ for every $e\\ge N$. If this set contained $x$, take an affine neighbourhood $\\operatorname{Spec}A$ from the Noetherian cover and its prime $\\mathfrak p$ corresponding to $x$. By [lem-trf-noetherian-prime-finite-height] there is a finite bound $h$ on lengths of prime chains ending at $\\mathfrak p$. Primes of $A_{\\mathfrak p}$ are precisely primes of $A$ contained in $\\mathfrak p$ with the same inclusions, so $c_X(x)\\le h$. Taking $e\\ge\\max(N,h)$ contradicts $x\\in T_e(X)$ and $T_e(X)\\cap X^{\\le e}=\\varnothing$. Hence $T_N(X)=\\varnothing$. This uses pointwise finite height, not finite dimension of $X$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-trf-noetherian-prime-finite-height",
+    "lem-per-codimension-resolution-improvement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+    "place": "Lemma 4.1.3(ii), printed pp.27--28; finite-height detail made explicit (Stacks Tag 0BBZ)"
+   }
+  },
+  {
+   "text": "For every $e\\ge N$, the compatibility in [lem-per-codimension-resolution-improvement], restricted to $X\\setminus T_N(X)=X$, identifies $R_e(X)$ and $R_N(X)$ with ordered centers: there are no empty stages in either tower to remove. Define $F(X)$ to be this eventual constant tower (equivalently take the first index at which $T_N(X)$ is empty). The definition of the unresolved set now gives regularity of the last scheme and of every center. Coherence, nonemptiness, nowhere density, finiteness and ordinary blowups are supplied by the same lemma. For $X=\\varnothing$, $R_0(X)$ already has empty unresolved set and length zero. Thus the definition gives the required empty-input convention.",
+   "uses": [
+    "lem-per-codimension-resolution-improvement"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+    "place": "Lemma 4.1.3(ii), printed pp.27--28"
+   }
+  },
+  {
+   "text": "Let $f:Y\\to X$ be regular. Take $d$ at least the two stabilization indices of $X$ and $Y$. At this one common index [lem-per-codimension-resolution-improvement] gives $F(Y)=R_d(Y)=(f^*R_d(X))^c=(f^*F(X))^c$, including the ideals and their order. Since $f$ is flat, the pullback is an ordinary scheme-theoretic blowup tower: the level maps remain flat by [lem-weil-pbc-flat-morphism-base-change], so apply [thm-nagata-blowup-flat-base-change] successively at each cartesian level. An empty closed center has unit ideal, and conversely; blowing up the unit ideal is an isomorphism by [cor-nagata-blowup-cartier-iso], since the unit ideal is invertible. Thus precisely the unit-center stages are removed, even if a retained nonempty Cartier center also induces an isomorphism.",
+   "uses": [
+    "lem-per-codimension-resolution-improvement",
+    "thm-nagata-blowup-flat-base-change",
+    "cor-nagata-blowup-cartier-iso",
+    "lem-weil-pbc-flat-morphism-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII §§2.1.9,2.3.4 and Remark 2.3.5(i), printed pp.88,91--92"
+   }
+  },
+  {
+   "text": "The comparisons respect composition as follows. For $Z\\xrightarrow gY\\xrightarrow fX$, the ideal at an original stage pulls back first to $I\\mathcal O_{Y_i}$ and then to $I\\mathcal O_{Z_i}$, which is its direct extension along $fg$. A unit ideal remains unit after extension. Deleting those unit stages after the first pullback and then deleting newly unit stages therefore retains exactly the same original ordered indices as direct pullback to $Z$. At retained stages the maps are the canonical flat base-change maps [def-nagata-blowup-flat-base-change-map]: on affine blowup charts they send each coefficient and each fraction $a/b$ to its image, so the maps for a composite agree with the composites on all chart generators. The chart maps glue to the same comparison, and the identity sends those generators to themselves. This proves both composition and identity compatibility, retaining the actual extended ideals.",
+   "uses": [
+    "def-nagata-blowup-flat-base-change-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII §§2.1.9,2.3.4, printed pp.88,91--92; explicit chart and ordered-index verification"
+   }
+  },
+  {
+   "text": "If $f$ is surjective, each map $Y_i=X_i\\times_XY\\to X_i$ in the uncontracted pullback is surjective by [lem-weil-pbc-surjective-base-change]. Apply the same statement to the nonempty closed center $V(I_i)\\to X_i$: its inverse image is nonempty. Its extended ideal cannot be unit, so no index is deleted. This proves the surjective clause for the same rule $F$.",
+   "uses": [
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Remark 2.3.5(i), printed p.92"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-small-singular-locus-resolution",
+  "lem-per-codimension-resolution-improvement",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-trf-noetherian-prime-finite-height",
+  "thm-nagata-blowup-flat-base-change",
+  "cor-nagata-blowup-cartier-iso",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "def-nagata-blowup-flat-base-change-map",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII Theorem 2.3.10 and §§2.3.1,2.3.4--2.3.5, pp.91--93; assembly from the finite approximation inputs of Temkin §§3.4,4.3 and explicit Noetherian stabilization. Temkin read online; archival copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-qe-ordinary-regular-resolution: Ordinary resolution of reduced Noetherian quasi excellent schemes over rational numbers by regular nowhere dense centers functorial for all regular morphisms",
+   "results": "{\"t\": \"2026-10-24T01:30:24Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-qe-ordinary-regular-resolution: Ordinary resolution of reduced Noetherian quasi excellent schemes over rational numbers by regular nowhere dense centers functorial for all regular morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.IsReduced\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.IsLocallyNoetherian\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsLocallyArtinian\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\"], \"digest\": \"a4848caa560cd634\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; none states the asserted resolution, log geometry, or regular base-change theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-qe-ordinary-regular-resolution: Canonical desingularization over Q commuting with geometrically regular flat morphisms on quasi excellent schemes",
+   "results": "{\"t\": \"2026-10-24T01:30:24Z\", \"tool\": \"leansearch\", \"query\": \"lem-per-qe-ordinary-regular-resolution: Canonical desingularization over Q commuting with geometrically regular flat morphisms on quasi excellent schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.ker_toNormalization\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.Flat\"], \"digest\": \"e3642653367d7881\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; none states the asserted resolution, log geometry, or regular base-change theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"desingularization\"",
+   "results": "{\"t\": \"2026-10-24T01:30:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"desingularization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; none states the asserted resolution, log geometry, or regular base-change theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?excellent|desingulari[sz]",
+   "results": "{\"t\": \"2026-10-24T01:30:25Z\", \"tool\": \"grep\", \"query\": \"quasi.?excellent|desingulari[sz]\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; none states the asserted resolution, log geometry, or regular base-change theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-qe-ordinary-regular-resolution: Canonical desingularization over Q commuting with geometrically regular flat morphisms on quasi excellent schemes",
+   "results": "{\"t\": \"2026-10-24T01:30:34Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-qe-ordinary-regular-resolution: Canonical desingularization over Q commuting with geometrically regular flat morphisms on quasi excellent schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\"], \"digest\": \"b33d5c37a451c923\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; none states the asserted resolution, log geometry, or regular base-change theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"desingularization\"",
+   "results": "{\"t\": \"2026-10-24T02:14:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"desingularization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned normalization, smoothness, flatness and scheme-limit declarations do not assert this resolution theorem; the name/grep searches have no hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-qe-ordinary-regular-resolution: Resolution of singularities of reduced Noetherian quasi excellent schemes over Q by ordinary blowups in regular centers functorial for regular morphisms",
+   "results": "{\"t\": \"2026-10-24T02:17:01Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-qe-ordinary-regular-resolution: Resolution of singularities of reduced Noetherian quasi excellent schemes over Q by ordinary blowups in regular centers functorial for regular morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\"], \"digest\": \"ce16d4581e6f6fd2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned normalization, smoothness, flatness and scheme-limit declarations do not assert this resolution theorem; the name/grep searches have no hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-qe-ordinary-regular-resolution: Canonical strong desingularization commuting with flat geometrically regular morphisms",
+   "results": "{\"t\": \"2026-10-24T02:17:02Z\", \"tool\": \"leansearch\", \"query\": \"lem-per-qe-ordinary-regular-resolution: Canonical strong desingularization commuting with flat geometrically regular morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange\", \"IsSMulRegular.of_flat_of_isBaseChange\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization\", \"RingTheory.Sequence.IsRegular.of_faithfullyFlat\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"Algebra.smoothLocus\"], \"digest\": \"56ce936e33721c04\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned normalization, smoothness, flatness and scheme-limit declarations do not assert this resolution theorem; the name/grep searches have no hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"desingularization\"",
+   "results": "{\"t\": \"2026-10-24T02:17:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"desingularization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned normalization, smoothness, flatness and scheme-limit declarations do not assert this resolution theorem; the name/grep searches have no hits"
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?excellent|desingulari[sz]",
+   "results": "{\"t\": \"2026-10-24T02:17:03Z\", \"tool\": \"grep\", \"query\": \"quasi.?excellent|desingulari[sz]\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned normalization, smoothness, flatness and scheme-limit declarations do not assert this resolution theorem; the name/grep searches have no hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-qe-ordinary-regular-resolution: A functorial finite sequence of blowups resolving characteristic zero singular schemes with regular nonempty centers",
+   "results": "{\"t\": \"2026-10-24T02:17:04Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-qe-ordinary-regular-resolution: A functorial finite sequence of blowups resolving characteristic zero singular schemes with regular nonempty centers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.isSmooth_iff\", \"Algebra.smoothLocus\"], \"digest\": \"47cce73b0fe44c24\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned normalization, smoothness, flatness and scheme-limit declarations do not assert this resolution theorem; the name/grep searches have no hits"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-characteristic-zero-log-resolution-independence",
+  "date": "2026-10-24",
+  "group": "Q129"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3 (regular finite-torsion local model and purity), geometric equivariant-modification input through XVI 3.7: VIII Lemma 5.5.2 and proof, printed pp.127--128; characteristic-zero independence used there is Theorem 3.4.15, printed pp.113--114. VIII Theorem 2.3.10 and Remarks 2.3.11--2.3.12, pp.93--94 (existence and normalized regular functoriality); 3.2.19 and Theorem 3.4.15 with its proof and Remark 3.4.16(i), pp.106,113--114 (induced rule, independence, and synchronization). Supporting input: VIII Theorem 2.3.10, with 2.3.1, 2.3.4 and Remark 2.3.5, printed pp.91--93; this is the ordinary, not normalized, algorithm",
+   "via": [
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-qe-ordinary-regular-resolution",
+  "worker": "stage1",
+  "summary": "Read ILO VIII pp.88,91--94 and Temkin arXiv:0904.1592v2 §§1.3,2.3,3.4,4.1,4.3 online. Split off small-singular-locus resolution and finite codimension induction; give the global stabilization, pullback, ordered contraction, identity/composition and surjective arguments explicitly. No finite-dimensional assumption and no normalized blowups. No matching project declaration or Mathlib result found.",
+  "blueprint": "Nearest blueprint ancestor lem-per-artin-gabber-affine-curve, proof Step 3 through characteristic-zero log-resolution independence and ILO VIII 2.3.10; these two inputs unpack the ordinary resolution used in that supporting result. Latest blueprint searched; no same statement found.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "why": "Generic Noetherian minimal-closed-set principle for termination; this unit has no such topology result."
+   },
+   {
+    "node": "lem-trf-noetherian-prime-finite-height",
+    "why": "Pointwise finite height of primes, needed without a finite dimension hypothesis; generic commutative algebra."
+   },
+   {
+    "node": "thm-nagata-blowup-flat-base-change",
+    "why": "Ordinary blowup flat base-change isomorphism, not a Fourier/perverse result."
+   },
+   {
+    "node": "cor-nagata-blowup-cartier-iso",
+    "why": "Unit-ideal blowup is the identity since the unit ideal is invertible."
+   },
+   {
+    "node": "def-nagata-blowup-flat-base-change-map",
+    "why": "The concrete coefficientwise map proves identity/composition of comparisons."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-base-change",
+    "why": "Surjective maps stay surjective at every pulled-back level and center."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-base-change",
+    "why": "Keeps each uncontracted level map flat to apply ordinary blowup flat base change recursively."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-trf-noetherian-prime-finite-height",
+  "thm-nagata-blowup-flat-base-change",
+  "cor-nagata-blowup-cartier-iso",
+  "def-nagata-blowup-flat-base-change-map",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-flat-morphism-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-e08735138",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-e08735138 (reviewer sub-agent of L); spot-checked: Live item still unsplit, no repair note, so no supersession and no re-split rule. Only the statement changes are clarifications: qe = qe of affine coordinate rings, plus cites for coherent and flat. Checked against ILO VIII 2.3.1, 2.3.4, 2.3.5(i), Th. 2.3.10 and Rem. 2.3.11 (pp.91-93). New node small-singular-locus-resolution (Temkin Th. 3.4.1 pairs) is a true special case of the 2.3.11-strengthened theorem; it is self-contained, claims no divisor independence, and is strictly smaller than the item. New node codimension-resolution-improvement (Temkin §4.3) claims prefixes resolved through codimension d with equicodimensional centers, decreasing T_d and agreement off T_d. It does not claim stabilization, composition or the surjective clause. Checked: R_0 is resolved through codim 0, T is closed, equicodimensionality survives flat pullback (going-down), and the regular-X and cusp cases behave. Temkin is not archived; the report records WANTED. Steps: step 2 is correct (Noetherian minimal closed set plus pointwise finite height, no finite-dimension hypothesis); step 3 gives regularity of X_n and all centers once T_N is empty; step 4 holds at a common index via 01U9 flatness, Nagata flat blowup base change and the unit-ideal isomorphism; steps 5 and 6 are elementary and correct (index retention, chart maps, 01S1). proof_deps equal the union of uses. No duplicate: lem-trf-smooth-functorial-ordinary-resolution covers finite type over Q with smooth morphisms only. No SGA. Tool uses accepted (generic Mathlib leaves and Nagata blowup interfaces). Batch 5: lem-trf-noetherian-prime-finite-height is a Mathlib leaf (Krull finite height) with empty closure; it is generic commutative algebra outside the trace formula and Poincaré duality, so kept. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QEOrdinaryRegularResolution",
+  "declaration": "AlgebraicGeometry.exists_regular_functorial_qe_ordinary_resolution",
+  "file": "lean/Sheaf/AlgebraicGeometry/QEOrdinaryRegularResolution.lean",
+  "statement": "theorem exists_regular_functorial_qe_ordinary_resolution : Nonempty (RegularFunctorialQEOrdinaryResolution.{u})",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8aa3d4dfb",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Clause-by-clause check of QERationalResolutionInput (IsReduced, IsNoetherian, GabberModification.QuasiExcellent, map to Spec ULift Q), IsResolutionRegular (Flat plus regular Y x_X Spec K for all finite K/kappa(x)) and RegularFunctorialQEOrdinaryResolution (towers, coherent/nonempty/nowhere-dense/regular centers, cartesian contracted comparisons deleting exactly the unit ideals, identity/composition on counts and level maps, surjective no-deletion, empty input length 0) against the item and ILO VIII 2.3.1/2.3.4/2.3.5(i)/2.3.10: not stronger, not hollow, statement fields verbatim, docstrings carry the 6 steps, item record changes only lean plus the new stmt_dep, no cycle, gabber-modification-data on base. Maintainer note (H4, parallel): NY def-per-regular-scheme-morphism IsRegularSchemeMorphism landed 03:53 UTC, after the 03:45 UTC base, and is equivalent to IsResolutionRegular by pullback pasting; no name clash; repoint impossible at this base, so repoint on the next touch."
+ }
+}

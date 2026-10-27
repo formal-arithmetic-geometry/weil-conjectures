@@ -119,7 +119,101 @@
    "where": "statement"
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjι_relProjHom",
+     "module": "WeilConjectures.AlgebraicGeometry.RelativeProj.Basic",
+     "lines": [
+      136,
+      141
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjHom_preimage",
+     "module": "WeilConjectures.AlgebraicGeometry.RelativeProj.Basic",
+     "lines": [
+      143,
+      149
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.GradedAlgebraData.isPullback_relProjι",
+     "module": "WeilConjectures.AlgebraicGeometry.RelativeProj.Basic",
+     "lines": [
+      151,
+      158
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjFunctor_map_relProjι",
+     "module": "WeilConjectures.AlgebraicGeometry.RelativeProj.Basic",
+     "lines": [
+      160,
+      167
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjRestrictIso",
+     "module": "WeilConjectures.AlgebraicGeometry.RelativeProj.Basic",
+     "lines": [
+      180,
+      184
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjRestrictIso_hom_naturality",
+     "module": "WeilConjectures.AlgebraicGeometry.RelativeProj.Basic",
+     "lines": [
+      196,
+      210
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.GradedAlgebraData.isColimitRestrict",
+     "module": "WeilConjectures.AlgebraicGeometry.RelativeProj.Universal",
+     "lines": [
+      213,
+      228
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.GradedAlgebraData.existsUnique_relProjIso",
+     "module": "WeilConjectures.AlgebraicGeometry.RelativeProj.Universal",
+     "lines": [
+      199,
+      211
+     ],
+     "kind": "theorem",
+     "sorry": false,
+     "partial": "`lemma-nagata-relative-proj-exists`, uniqueness"
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-nagata-compactification",
  "unit": "sk-def-nagata-sketch-data",
  "split_report": {
@@ -176,23 +270,38 @@
   ]
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "The relative Proj construction in\n[def-nagata-relative-proj] exists as a scheme, is independent up to a\nunique isomorphism compatible with the chosen affine-chart\nidentifications, and restricts over every affine open $V\\subseteq X$ to\n$\\operatorname{Proj}(\\Gamma(V,\\mathcal A))$. These restriction\nisomorphisms commute with further restriction and with the structural maps.",
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\mathcal A$ be a quasi-coherent graded $\\mathcal O_X$-algebra. The\nrelative Proj $\\pi\\colon\\operatorname{Proj}_X(\\mathcal A)\\to X$ of\n[def-nagata-relative-proj] exists, and:\n\n1. for every affine open $V\\subseteq X$, the chart $\\iota_V$ is an open\n   immersion, $\\pi\\circ\\iota_V$ is the structure morphism\n   $\\operatorname{Proj}(\\mathcal A(V))\\to V$ followed by $V\\subseteq X$,\n   and $\\pi^{-1}(V)$ is the image of $\\iota_V$;\n1. the square formed by $\\iota_V$, $\\pi$, the structure morphism\n   $\\operatorname{Proj}(\\mathcal A(V))\\to V$ and $V\\subseteq X$ is\n   cartesian, giving a restriction isomorphism\n   $\\operatorname{Proj}(\\mathcal A(V))\\cong V\\times_X\\operatorname{Proj}_X(\\mathcal A)$;\n1. for affine opens $U\\subseteq V$, $\\iota_U$ is the transition morphism\n   $\\operatorname{Proj}(\\mathcal A(U))\\to\\operatorname{Proj}(\\mathcal A(V))$\n   followed by $\\iota_V$, and under the restriction isomorphisms this\n   transition morphism is the inclusion\n   $U\\times_X\\operatorname{Proj}_X(\\mathcal A)\\to V\\times_X\\operatorname{Proj}_X(\\mathcal A)$;\n1. (uniqueness) if $p\\colon P\\to X$ is a scheme over $X$ with morphisms\n   $j_V\\colon\\operatorname{Proj}(\\mathcal A(V))\\to P$ for all affine opens\n   $V$, such that each $j_V$ exhibits $\\operatorname{Proj}(\\mathcal A(V))$ as\n   $V\\times_XP$ over the structure morphism and such that $j_U$ is the\n   transition morphism followed by $j_V$ for $U\\subseteq V$, then there is a\n   unique isomorphism $e\\colon\\operatorname{Proj}_X(\\mathcal A)\\to P$ with\n   $e\\circ\\iota_V=j_V$ for all $V$, and $p\\circ e=\\pi$;\n1. (independence of the cover) if $(V_i)_{i\\in I}$ is a family of affine\n   opens indexed by a preordered set, monotone in $i$, covering $X$, and such\n   that for all $i,i'$ and $x\\in V_i\\cap V_{i'}$ there is $k\\le i,i'$ with\n   $x\\in V_k$, then $\\operatorname{Proj}_X(\\mathcal A)$ with the charts\n   $\\iota_{V_i}$ is also the colimit of the diagram\n   $i\\mapsto\\operatorname{Proj}(\\mathcal A(V_i))$.",
   "proof": [
    {
-    "text": "Choose the index set of all affine opens $V\\subseteq X$. For each $V$ put\n$P_V=\\operatorname{Proj}(\\Gamma(V,\\mathcal A))$. If $W\\subseteq V$ is a\nprincipal affine open, quasi-coherence gives the coefficientwise graded\nlocalization\n\n$$\n\\Gamma(V,\\mathcal A)[s^{-1}]\\;\\xrightarrow{\\sim}\\;\n\\Gamma(W,\\mathcal A),\n$$\n\nand the affine Proj construction gives an isomorphism from $P_W$ onto the\ninverse image of $W$ in $P_V$. To cover an arbitrary overlap $V\\cap V'$,\nindex the gluing datum by triples $(V,V',W)$ with $W$ affine and\n$W\\subseteq V\\cap V'$, together with a principal refinement inside $W$.\nThe associated isomorphism is the map on each standard chart induced by the\ndisplayed localization. Every overlap is covered by such indices, and the\nmaps are isomorphisms because localization is transitive.",
-    "uses": [],
-    "elementary": null
-   },
-   {
-    "text": "The identity and inverse axioms are the cases $V=V'$ and exchange of the two\naffine indices. On a triple overlap all routes send a fraction\n$x/s^m$ to its image in the localization at the product of the three\ndenominators; hence the cocycle axiom is exactly\n[lemma-nagata-proj-chart-ring-cocycle]. The datum therefore satisfies\nthe scheme-gluing axioms, so the Mathlib\nconstruction `AlgebraicGeometry.Scheme.GlueData.glued` produces a\nscheme $P$ and a morphism $P\\to X$ (the degree-zero maps agree on every\noverlap). Its restriction to $V$ is the specified $P_V$ by the restriction\nfield of the same gluing construction. A second affine cover produces the\nsame overlap datum after passing to the common refinement by affine opens;\nthe uniqueness field of `Scheme.GlueData.glued` gives a unique\nisomorphism over $X$ that\nrespects all the local identifications. (No uniqueness among arbitrary\nautomorphisms over $X$ is asserted.) The same argument on a third\nrefinement proves compatibility with further restrictions.",
+    "text": "**The local squares.** Let $U\\subseteq V$ be affine opens and put\n$R=\\Gamma(V,\\mathcal O_X)$, $S=\\Gamma(U,\\mathcal O_X)$, $C=\\mathcal A(V)$.\n$\\operatorname{Proj}(C)$ is covered by the standard opens $D_+(s)$, $s\\in C$\nhomogeneous of positive degree, with $D_+(s)\\cong\\operatorname{Spec}C_{(s),0}$.\nSince $\\mathcal A(U)=S\\otimes_RC$ coefficientwise, and the degree-zero\nhomogeneous localization is a filtered colimit of homogeneous pieces, it\ncommutes with the base change:\n$S\\otimes_RC_{(s),0}\\cong\\mathcal A(U)_{(s),0}$. So the preimage of\n$D_+(s)$ in $\\operatorname{Proj}(\\mathcal A(U))$ is\n$\\operatorname{Spec}(S\\otimes_RC_{(s),0})=U\\times_VD_+(s)$. These chart\nidentifications are compatible on the overlaps $D_+(st)$ by\n[lemma-nagata-proj-chart-ring-cocycle], hence glue: the square formed by the\ntransition morphism, the two structure morphisms and $U\\subseteq V$ is\ncartesian. In particular each transition morphism is an open immersion\nonto the preimage of $U$.",
     "uses": [
      "lemma-nagata-proj-chart-ring-cocycle"
     ],
     "elementary": false
+   },
+   {
+    "text": "**Gluing.** The diagram $V\\mapsto\\operatorname{Proj}(\\mathcal A(V))$ over\nthe poset of affine opens, with its structure morphisms to the opens $V$,\ntherefore has open immersions as transition maps and cartesian\ntransition squares. Glue the schemes $\\operatorname{Proj}(\\mathcal A(V))$\nalong these open immersions: for affine opens $V,V'$, the preimages of\n$V\\cap V'$ are covered by the images of $\\operatorname{Proj}(\\mathcal A(W))$,\n$W\\subseteq V\\cap V'$ affine, and are identified through these common\npieces; since the diagram is a functor on a poset, all identifications are\ncomposites of transition maps and the cocycle condition holds automatically.\nThe glued scheme is the colimit $\\operatorname{Proj}_X(\\mathcal A)$, the\ncolimit maps $\\iota_V$ are open immersions, and the compatible morphisms\n$\\operatorname{Proj}(\\mathcal A(V))\\to V\\subseteq X$ induce $\\pi$. This gives\n(1) and the first half of (3); as for any gluing along cartesian\ntransition squares, $\\pi^{-1}(V)$ is the image of $\\iota_V$, so $\\iota_V$\nidentifies $\\operatorname{Proj}(\\mathcal A(V))$ with $\\pi^{-1}(V)$ over $V$,\nwhich is (2). The compatibility in (3) follows by composing with the\nprojections of the fibre products.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "**Uniqueness.** In the situation of (4) the $j_V$ form a cocone on the\ndiagram, so they induce a unique $e$ with $e\\circ\\iota_V=j_V$, and\n$p\\circ e=\\pi$ because both agree after composing with every $\\iota_V$.\nOver each affine $V\\subseteq X$, $e$ restricts to\n$j_V\\circ\\iota_V^{-1}\\colon\\pi^{-1}(V)\\to p^{-1}(V)$, an isomorphism by\n(2) and the hypothesis on $j_V$. As the $V$ cover $X$, $e$ is an\nisomorphism.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "**Independence of the cover.** The family $(V_i)$ covers $X$ and the\nhypothesis on $k$ ensures that every overlap $V_i\\cap V_{i'}$ is covered by\nopens $V_k$ with $k\\le i,i'$. The gluing argument above, run over the\npreordered set $I$, shows that the colimit over $I$ is a scheme over $X$\nwhose charts satisfy (2); comparing it with $\\operatorname{Proj}_X(\\mathcal A)$\nchart by chart, as in the uniqueness step, identifies the two.",
+    "uses": [],
+    "elementary": null
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  },
  "reviewed_proof": {
   "date": "2026-10-21",

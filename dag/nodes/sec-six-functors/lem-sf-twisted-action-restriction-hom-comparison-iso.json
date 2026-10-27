@@ -1,0 +1,148 @@
+{
+ "id": "lem-sf-twisted-action-restriction-hom-comparison-iso",
+ "kind": "statement",
+ "title": "Invertibility of the canonical restriction map on local sheaf Hom",
+ "statement": "Let $(C,J)$ be a small site with pullbacks, $s:C\\simeq C$ continuous in both directions, $R$ a sheaf of commutative rings, and $a:(s^{-1})^*R\\simeq R$. Let $P$ be a RestrictionPresentation [def-sf-twisted-action-presentation-data] and $T$ normalized TensorComparisons [lem-sf-twisted-action-tensor-comparisons]. Write $A$ for its action-site coefficient and $U$ for underlying module restriction. For module sheaves $M,N$ over $A$, define $b_{M,N}:U\\mathcal Hom_A(M,N)\\to\\mathcal Hom_R(UM,UN)$ by transposing $t_{M,\\mathcal Hom(M,N)}^{-1}\\,U(\\mathrm{ev}_{M,N})$ under the sheaf tensor-Hom adjunction [def-pur-sheaf-hom], in diagrammatic order. Then $b_{M,N}$ is an isomorphism for every $M,N$. No translation Hom comparison is asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "section-internal-hom, lemma-internal-hom-restriction, lemma-internal-hom-adjoint-tensor; restriction half of steps 11--12 of the agent-formulated twisted action-site proof. Stacks 00W0 is motivation only."
+ },
+ "stmt_deps": [
+  "def-sf-twisted-action-presentation-data",
+  "lem-sf-twisted-action-tensor-comparisons",
+  "def-pur-sheaf-hom"
+ ],
+ "proof": [
+  {
+   "text": "Apply the proved conjugate-Hom-action and equivariant-currying theorem. It constructs the invertible action on the ordinary base-site Hom and identifies equivariant Hom maps with equivariant tensor maps. Its proof uses translation equivalence, tensor naturality and the ordinary tensor-Hom adjunction, independently of any restriction Hom assertion.",
+   "uses": [
+    "lem-sf-twisted-action-hom-pair-currying"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The equation T.tensor_action and equivariance of evaluation show that the canonical restriction comparison b commutes with the actions, using the preceding currying criterion. Tensor naturality and the definition of b show that the image of any action-site untranspose is T.tensor.hom followed by the untranspose of the underlying restricted map composed with b.",
+   "uses": [
+    "def-sf-twisted-action-presentation-data",
+    "def-pur-sheaf-hom",
+    "def-pur-sheaf-tensor-product",
+    "lem-sf-twisted-action-tensor-comparisons",
+    "lem-sf-tensor-hom-comparison-precomposition"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each action-site Q, postcomposition with b on fixed-pair maps from P.modules(Q) is injective: lift two maps by full faithfulness, untranspose them, use the preceding identity and faithfulness of underlying restriction. It is surjective: untranspose the supplied equivariant map; the currying criterion and T.tensor_action make T.tensor.hom followed by this untranspose equivariant. Lift it by full faithfulness and transpose on the action site. The preceding identity and cancellation of T.tensor prove that its restricted transpose composed with b is the supplied map. Essential surjectivity of P.modules extends bijectivity to every fixed pair. Yoneda proves b is invertible in fixed pairs, hence its underlying map is invertible. No slice theorem, pure-tensor normalization, or sheafification calculation is needed.",
+   "uses": [
+    "def-sf-twisted-action-presentation-data",
+    "def-pur-sheaf-hom",
+    "def-pur-sheaf-tensor-product",
+    "lem-sf-twisted-action-tensor-comparisons"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-twisted-action-hom-pair-currying",
+  "def-sf-twisted-action-presentation-data",
+  "def-pur-sheaf-hom",
+  "def-pur-sheaf-tensor-product",
+  "lem-sf-twisted-action-tensor-comparisons",
+  "lem-sf-tensor-hom-comparison-precomposition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Formal fixed-pair argument using lemma-internal-hom-adjoint-tensor, the restriction equivalence of P and normalized tensor comparisons T. Written by D4; replaces slice normalization by the conjugate Hom action, equivariant currying, full faithfulness and Yoneda."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of module sheaves from an integer action site to the base preserves internal Hom, and the transpose of restricted evaluation is an isomorphism",
+   "results": "SheafOfModules.restrictScalars; PresheafOfModules.restrictHomEquivOfIsLocallySurjective; PullbackConstruction.adjunction. None gives the normalized action-site comparison.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal equivalence preserves internal Hom with evaluation comparison; restriction to equivalent slice sites preserves sheaf internal Hom",
+   "results": "Functor.IsCoverDense.restrictHomEquivHom and LightCondensed.ihomPoints application lemmas. These do not identify the canonical module sheaf comparison for RestrictionPresentation. Read NativeRingedRestrictionHom and ElementRestrictionHom: their slice-Hom constructions are private, have unchanged restricted coefficients, and do not state the evaluation equation for T.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homEvaluationComparisons|homComplexRestriction|isIso_of_yoneda_map_bijective; restrictionHomComparison; blueprint_refs.py search internal hom restriction and internal-hom",
+   "results": "Mathlib Yoneda criterion proves the translation half. No normalized action-site restriction comparison exists in Mathlib or the source library. The imported blueprint has no duplicate of this restriction-only assertion.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.TwistedActionHomEvaluationComparisons",
+  "date": "2026-10-27",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The parent obligation has no created.item blueprint ancestor. Its recorded provenance is lem-a1-local-boundary-duality and the evaluation/biduality sentence of thm-coef-qbar-verdier. This site realization supplies the abelian-category foundation for the internal-Hom and evaluation argument of cor-coef-verdier-weil-equivariance, without replacing the native derived category by fixed pairs in a derived category. Original twisted-site proof steps 9--13; sheafification and localized-site Hom calculation. Substep: Original closed-comparisons proof steps 3--4 and evaluation portion of step 5 (original action-site steps 11--13); sites-modules.tex, section-internal-hom, lemma-internal-hom-restriction and lemma-internal-hom-adjoint-tensor. Restriction-only substep: invertibility of the transpose of restricted evaluation; translation preservation and both evaluation equations are proved in the parent.",
+   "via": [
+    "lem-sf-twisted-action-hom-evaluation-comparisons",
+    "lem-sf-twisted-action-closed-comparisons",
+    "lem-sf-twisted-action-ringed-site",
+    "lem-sf-weil-native-closed-forgetful",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.TwistedActionRestrictionHomComparison",
+  "file": "lean/Sheaf/CategoryTheory/TwistedActionRestrictionHomComparison.lean",
+  "declaration": "CategoryTheory.TwistedActionRingedSite.restrictionHomComparison_isIso",
+  "declarations": [
+   "CategoryTheory.TwistedActionRingedSite.restrictionHomComparison",
+   "CategoryTheory.TwistedActionRingedSite.restrictionHomComparison_isIso"
+  ],
+  "statement": "theorem restrictionHomComparison_isIso [HasPullbacks C]\n    (P : RestrictionPresentation J s R a) (T : TensorComparisons J s R a P) :\n    letI := P.category\n    ∀ (M N : Modules P.coefficient), IsIso (restrictionHomComparison J s R a P T M N)",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261027T070608-L-2637090",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261027T094343-L-217340",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -35,87 +35,54 @@
  ],
  "proof": [
   {
-   "text": "Write $A=\\mathcal O_E$, $t=\\varpi_E$, $R_W=\\widehat{\\mathcal O}_{E,W}$ and $S_{W,n}=(A/t^n)_W$. The principal-Koszul replacement lemma verifies the adic coefficient hypotheses and supplies one strict objectwise K-flat replacement of each quotient tower. The unit-comparison lemma makes the actual intrinsic unit invertible for our derived-complete $K$. Thus $Lg^*_{\\mathrm{comp}}K$ has the required domain.",
+   "text": "The unique finite quotient equivalences agree with the normalized ULift coefficient equivalences. Jointly monic finite projections then identify the completed coefficient isomorphism with the coefficient-completeness model. Apply that model’s predicate equivalence to obtain intrinsic completeness from Complete.",
    "uses": [
-    "lem-a1-principal-koszul-strict-replacement",
-    "lem-a1-roos-intrinsic-unit-comparison"
+    "def-a1-integral-completed-pullback-interfaces",
+    "def-sfb-integral-completed-coefficient-transport",
+    "lem-weil-pbc-integral-coefficient-completeness-transport"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099N(5), lemma-pushforward-Noetherian-case; strict-model assembly from the extracted lemmas."
-   }
+   "elementary": false
   },
   {
-   "text": "The finite-pullback tower lemma gives a natural, coefficient-linear isomorphism $b_K:VK_\\bullet\\xrightarrow{\\sim}B_g(K)$, where $V=Lg^*_{\\operatorname{Tow}}$ and $B_g(P)_n=\\operatorname{Res}_ng_n^*(P\\otimes S_{T,n})$ on a flat-term K-flat representative. Its evaluations are the specified finite comparisons, and it commutes with all integer shifts.",
+   "text": "Take the existing normalized finite pullback strict-tower comparison C. The signed-shift construction gives coherent chain and derived shifts c,d with the exact ShiftCoordinates and ShiftDescent predicates.",
    "uses": [
-    "lem-a1-finite-pullback-strict-tower-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099N(5), lemma-pushforward-Noetherian-case; strict-model assembly from the extracted lemmas."
-   }
-  },
-  {
-   "text": "Countable products on $T'$ are exact. The integral definition is $\\mathsf C(B_g(K))$, as a functor of $K$ by the integral well-definedness lemma; the completed definition is $R\\lim(VK_\\bullet)$. Set $\\gamma_{g,K}=(R\\lim b_K)^{-1}\\circ\\rho_{B_g(K)}$. The strict Roos comparison and functorial total limit make this an isomorphism. Naturality of $b$ and $\\rho$ proves naturality of $\\gamma$; all factors are $R_{T'}$-linear.",
-   "uses": [
-    "lem-weil-proetale-countable-products-exact",
-    "def-pur-integral-derived-operations",
-    "lem-pur-integral-operations-well-defined",
-    "def-weil-pbc-completed-pullback",
-    "lem-weil-strict-roos-comparison",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099N(5), lemma-pushforward-Noetherian-case; strict-model assembly from the extracted lemmas."
-   }
-  },
-  {
-   "text": "For the $n$-th limit projection $e_n:R\\lim B_g(K)\\to B_g(K)_n$, normalized Roos comparison gives $p_n^{\\mathrm{int}}=e_n\\rho$, while the finite normalization of $b$ gives $p_n^{\\mathrm{comp}}=e_nR\\lim b_K$. Hence $p_n^{\\mathrm{comp}}\\gamma_{g,K}=p_n^{\\mathrm{int}}$, or $p_n^{\\mathrm{int}}\\gamma_{g,K}^{-1}=p_n^{\\mathrm{comp}}$. This proves the requested projection equation through the fixed finite identifications.",
-   "uses": [
-    "lem-weil-strict-roos-comparison",
-    "lem-a1-finite-pullback-strict-tower-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099N(5), lemma-pushforward-Noetherian-case; strict-model assembly from the extracted lemmas."
-   }
-  },
-  {
-   "text": "The normalized Roos shift lemma gives $\\sigma^{\\lim}\\rho_{B[r]}=\\rho_B[r]\\sigma^C$, with $\\sigma^C(y,x)=((-1)^ry,x)$. Combine this with the shift square for $b$ from the tower lemma in the formula for $\\gamma$. It yields $\\sigma^{\\mathrm{comp}}\\gamma_{K[r]}=\\gamma_K[r]\\sigma^{\\mathrm{int}}$. The completed shift is the specified reduction/tower-pullback/limit comparison of the triangle lemma; the integral shift is the termwise Roos shift. Thus this is exactly the asserted equality for every $r\\in\\mathbf Z$.",
-   "uses": [
-    "lem-a1-normalized-roos-shift-comparison",
     "lem-a1-finite-pullback-strict-tower-comparison",
-    "lem-cbc-completed-pullback-triangles"
+    "lem-a1-integral-pullback-signed-shift"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099N(5), lemma-pushforward-Noetherian-case; strict-model assembly from the extracted lemmas."
-   }
+   "elementary": false
+  },
+  {
+   "text": "Let H be the total derived limit of C.B after the fixed coefficient restriction. The integral Roos realization gives a:integral≅H, natural on the entire category, with its defining projections and retained shift. The independent published coefficient/tower transport gives finite generator-normalized e_n and b:transportedStrict≅H. On a complete K compose the existing actual-to-strict tower isomorphism with b to form beta_K:completed(K)≅H(K). Put gamma_K=a_K beta_K^{-1}.",
+   "uses": [
+    "lem-a1-integral-roos-finite-tower-realization",
+    "lem-a1-completed-integral-finite-tower-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the tower isomorphism on the intrinsic full subcategory, exact coefficient restriction and b prove naturality of beta for every derived arrow between complete objects. Cancel beta in gamma’s naturality square and use naturality of a. For every good representative, cancel a in the integral projection normalization and substitute beta’s published projection normalization. This is exactly the original representative equation with e_n.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Both a and beta commute with their retained shifts. Cancel the shifted beta isomorphism in the desired square for a beta^{-1}, then use their two squares. The transport lemma also provides completeness of K[r]. This proves the original shifts clause for every integer.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-a1-principal-koszul-strict-replacement",
-  "lem-a1-roos-intrinsic-unit-comparison",
+  "def-a1-integral-completed-pullback-interfaces",
+  "def-sfb-integral-completed-coefficient-transport",
+  "lem-weil-pbc-integral-coefficient-completeness-transport",
   "lem-a1-finite-pullback-strict-tower-comparison",
-  "lem-weil-proetale-countable-products-exact",
-  "def-pur-integral-derived-operations",
-  "lem-pur-integral-operations-well-defined",
-  "def-weil-pbc-completed-pullback",
-  "lem-weil-strict-roos-comparison",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-a1-normalized-roos-shift-comparison",
-  "lem-cbc-completed-pullback-triangles"
+  "lem-a1-integral-pullback-signed-shift",
+  "lem-a1-integral-roos-finite-tower-realization",
+  "lem-a1-completed-integral-finite-tower-transport"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 099N(5), lemma-pushforward-Noetherian-case; strict-model assembly from the extracted lemmas."
+  "place": "Tag 099N(5), finite-tower/normalized-Roos assembly with exact coefficient-presentation comparisons; sites-cohomology.tex Tag 0941."
  },
  "mathlib_searches": [
   {
@@ -179,7 +146,18 @@
  },
  "chapter": "sec-deligne-laumon-a1",
  "unit": "sk-thm-dl-a1-upper",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
   "date": "2026-10-21",
   "item": "lem-a1-integral-pullback-completed-comparison",
@@ -236,25 +214,6 @@
   "module": "Sheaf.Paper.IntegralPullbackCompletedComparison",
   "declaration": "WeilConjectures.IntegralCompletedComparison.integralPullback_completedComparison",
   "declarations": [
-   "WeilConjectures.IntegralCompletedComparison.modules",
-   "WeilConjectures.IntegralCompletedComparison.complexes",
-   "WeilConjectures.IntegralCompletedComparison.derived",
-   "WeilConjectures.IntegralCompletedComparison.derived_commShift",
-   "WeilConjectures.IntegralCompletedComparison.finiteIntegral",
-   "WeilConjectures.IntegralCompletedComparison.finiteIntegral_additive",
-   "WeilConjectures.IntegralCompletedComparison.finiteCompleted",
-   "WeilConjectures.IntegralCompletedComparison.finiteCompleted_additive",
-   "WeilConjectures.IntegralCompletedComparison.finiteComplexComparison",
-   "WeilConjectures.IntegralCompletedComparison.FiniteNormalization",
-   "WeilConjectures.IntegralCompletedComparison.integralComputation",
-   "WeilConjectures.IntegralCompletedComparison.integralProjection",
-   "WeilConjectures.IntegralCompletedComparison.towerIso",
-   "WeilConjectures.IntegralCompletedComparison.completedProjection",
-   "WeilConjectures.IntegralCompletedComparison.finiteComputation",
-   "WeilConjectures.IntegralCompletedComparison.integral",
-   "WeilConjectures.IntegralCompletedComparison.completed",
-   "WeilConjectures.IntegralCompletedComparison.Complete",
-   "WeilConjectures.IntegralCompletedComparison.Comparison",
    "WeilConjectures.IntegralCompletedComparison.integralPullback_completedComparison"
   ],
   "file": "lean/Sheaf/Paper/IntegralPullbackCompletedComparison.lean",
@@ -273,5 +232,15 @@
   "group": "NY",
   "result": "fix",
   "note": "Statement checked clause by clause against the node and Stacks 099N(5); correct. Hypotheses: ell invertible on X and Y; K complete in the recorded IntegralOnSlice.IsComplete sense. Conclusions: intrinsic completeness; gamma natural iso on complete objects; projection clause over all good K-flat representatives with generator-normalized finite comparison and canonical finiteComputation; shifts pinned by ShiftCoordinates and ShiftDescent (integralDerivedPullback has no CommShift instance); completed shift checked by rfl to be pbcActualCompletedPullShift composed with derived_commShift. The common universe for E and the schemes comes from the recorded pbcIntegralDatum and is documented. The previous return is resolved: the item's stmt_deps add only the new existing:true definition node, whose recorded declarations all exist. Gates pass: sorry only in the theorem proof, no hollow definitions, docstrings with source and blueprint and the 11 proof steps, lean.statement verbatim, all 27 declarations present, no live write, no global build, no pro-etale substitute. nt_compile clean in 31.8 s, plus a check file for axioms, universes and shift instances. Fixes: (1) the item lean.note still described the removed theorem-node dependencies; rewritten in the lean-record.json, record otherwise unchanged; (2) the new node's source.document named a directory; now the blueprint file lem-a1-finite-map-purity.proof.md with the place and 099N(5)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-48c08",
+  "group": "X3",
+  "result": "fix",
+  "landing": "20261025T124343-L-1983617",
+  "kind": "interface",
+  "note": "independent cc review: item lem-a1-integral-pullback-completed-comparison (Nonempty Comparison) assembled from finite_pullback_strict_tower_comparison + proved integralPullback_signedShift + sorried integralPullback_roosFiniteTower / completedIntegral_finiteTowerTransport (read against their new nodes, true); moved interface type hashes compared old olean vs sandbox build; 12 direct importers compiled rc 0 against sandbox"
  }
 }

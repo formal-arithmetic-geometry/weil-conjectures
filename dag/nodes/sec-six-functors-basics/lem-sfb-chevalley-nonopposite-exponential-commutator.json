@@ -1,0 +1,262 @@
+{
+ "id": "lem-sfb-chevalley-nonopposite-exponential-commutator",
+ "kind": "statement",
+ "title": "Integral nonopposite Chevalley exponential commutator identity",
+ "statement": "Let $\\mathfrak g$ be a finite-dimensional split semisimple Lie algebra over $\\mathbf Q$ [def-wf-lie-algebra, def-wf-semisimple-lie-algebra], with split Cartan subalgebra $\\mathfrak h$, reduced crystallographic root system $R\\subset\\mathfrak h^\\vee$ and Chevalley basis in the conventions of [lem-sfb-chevalley-admissible-representation]. Explicitly $\\mathfrak g=\\mathfrak h\\oplus\\bigoplus_{\\gamma\\in R}\\mathbf Qe_\\gamma$, the simple coroots form a basis of $\\mathfrak h$, $[h,e_\\gamma]=\\gamma(h)e_\\gamma$, $[e_\\gamma,e_{-\\gamma}]=h_\\gamma$, and $[e_\\gamma,e_\\delta]=\\pm(p_{\\gamma,\\delta}+1)e_{\\gamma+\\delta}$ when the sum is a root, where $p_{\\gamma,\\delta}=\\max\\{p\\ge0:\\delta-p\\gamma\\in R\\}$; the bracket is zero if the sum is neither a root nor zero. Let $\\rho:\\mathfrak g\\to\\operatorname{End}_{\\mathbf Q}(W)$ be a representation on a finite-dimensional rational vector space. Let $\\Lambda\\subset W$ be a full lattice, meaning finite free over $\\mathbf Z$ with $\\Lambda\\otimes\\mathbf Q=W$, stable under $D_{\\gamma,m}=\\rho(e_\\gamma)^m/m!$ for all $\\gamma\\in R$ and $m\\ge0$, and assume each $\\rho(e_\\gamma)$ is nilpotent. For each commutative ring $A$ put $x_\\gamma(a)=\\sum_{m\\ge0}(D_{\\gamma,m}\\otimes1)a^m\\in\\operatorname{End}_A(\\Lambda\\otimes A)$ for $a\\in A$; the sum is finite. Fix $\\alpha,\\beta\\in R$ with $\\alpha\\ne\\beta$ and $\\alpha\\ne-\\beta$. Order the finite set $S_{\\alpha,\\beta}=\\{(i,j)\\in\\mathbf Z_{>0}^2:i\\alpha+j\\beta\\in R\\}$ by any total order refining nondecreasing $i+j$. There are integers $c_{\\alpha,\\beta;i,j}$, depending only on the chosen Chevalley basis and this order, such that for every $A$ and $u,v\\in A$ one has\n$$x_\\alpha(u)x_\\beta(v)x_\\alpha(-u)x_\\beta(-v)=\\prod_{(i,j)\\in S_{\\alpha,\\beta}}x_{i\\alpha+j\\beta}(c_{\\alpha,\\beta;i,j}u^iv^j).$$\nThis is a polynomial matrix identity over $\\mathbf Z[u,v]$, not only an equality on field-valued points; no faithfulness, weight-lattice generation or reductivity hypothesis is needed. An empty product is the identity.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 23.71, printed pp.508-509, fixes the assumed bracket normalization; equation (153), p.510, fixes the exponentials. Agent-stated missing two-root calculation. WANTED: Steinberg, Lectures on Chevalley Groups, integral construction and Chevalley commutator relations (precise edition/lemma to be verified)."
+ },
+ "stmt_deps": [
+  "def-wf-lie-algebra",
+  "def-wf-semisimple-lie-algebra",
+  "lem-sfb-chevalley-admissible-representation"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-chevalley-string-central-parity] to $(\\alpha,\\beta)$, obtaining its ordering $(a,b)$, the independent roots $a,b$, and $q,Y_k,c_k,C_d,z_d$. Fix this choice in the rational Lie algebra, before choosing a representation. Write $B=\\operatorname{End}_{\\mathbf Q}(W)$, $H=\\rho(e_a)$, and $\\bar Y_k=\\rho(Y_k)$. By [def-wf-lie-algebra], $\\rho$ preserves brackets. Thus $\\bar Y_k=c_k\\rho(e_{b+ka})$ for $0\\leq k\\leq q$, and every $[\\bar Y_i,\\bar Y_j]$ commutes with every $\\bar Y_k$. Their brackets also commute with each other: an element commuting with $X$ and $Y$ commutes with $XY-YX$, by expanding the products. Work in $B[[s,t]]$, with central variables; all formal exponentials below have arguments in $(s,t)B[[s,t]]$. Put $E_\\gamma(w)=\\exp(w\\rho(e_\\gamma))$.",
+   "uses": [
+    "lem-sfb-chevalley-string-central-parity",
+    "def-wf-lie-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, Theorem 23.71, printed pp.508--509, and equation (153), p.510; agent-written formal calculation from the cited root-string/parity and class-two identities. Appendix C, pp.621--622, explains the rank-two input."
+   }
+  },
+  {
+   "text": "Repeated expansion of $[H,-]$ gives\n$$(\\operatorname{ad}H)^n(V)=\\sum_{j=0}^n(-1)^j\\binom nj H^{n-j}VH^j.$$\nThe induction step follows by subtracting the right multiplication by $H$ from the left multiplication and using Pascal's identity. Comparing coefficients of $s^n$ therefore gives\n$$E_a(s)\\rho(e_b)E_a(-s)=\\sum_{k=0}^q s^k\\bar Y_k.$$\nHere the truncation is precisely $Y_k=0$ for $k>q$ in [lem-sfb-chevalley-string-central-parity]. Also $E_a(s)E_a(-s)=1$: its positive-degree coefficient is $H^n(1-1)^n/n!$. Conjugation by this inverse pair preserves every power of $\\rho(e_b)$, so expansion in powers of $t$ yields\n$$K_{ab}:=E_a(s)E_b(t)E_a(-s)E_b(-t)=\\exp\\!\\left(t\\sum_{k=0}^q s^k\\bar Y_k\\right)E_b(-t).$$\nEach coefficient comparison uses finite sums, with no convergence assertion.",
+   "uses": [
+    "lem-sfb-chevalley-string-central-parity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, Theorem 23.71, printed pp.508--509, and equation (153), p.510; agent-written formal calculation from the cited root-string/parity and class-two identities. Appendix C, pp.621--622, explains the rank-two input."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-formal-class-two-exponential] to the list\n$$ts\\bar Y_1,\\ ts^2\\bar Y_2,\\ldots,ts^q\\bar Y_q,\\ t\\bar Y_0.$$\nAll triple brackets vanish by [lem-sfb-chevalley-string-central-parity]. Reversing the positions of $Y_0,Y_k$ relative to the increasing list $Y_0,\\ldots,Y_q$ changes its half-bracket sum by $-[Y_0,Y_k]$. With $Y_d=0$ for $d>q$, set\n$$D_d=-C_d+[Y_0,Y_d]\\quad(1\\leq d\\leq2q).$$\nThe correction argument is therefore $\\sum_{d=1}^{2q}s^dt^2\\rho(D_d)$. It commutes with every $\\bar Y_k$, by Step 1. Move it past $E_b(-t)$; the adjacent $E_b(t)E_b(-t)$ cancel by the binomial calculation in Step 2. Thus\n$$K_{ab}=\\left(\\prod_{k=1}^q E_{b+ka}(c_ks^kt)\\right)\\exp\\!\\left(\\sum_{d=1}^{2q}s^dt^2\\rho(D_d)\\right).$$\nThe first product is in increasing $k$. The formula also applies when $q=0$, giving $K_{ab}=1$.",
+   "uses": [
+    "lem-sfb-formal-class-two-exponential",
+    "lem-sfb-chevalley-string-central-parity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, Theorem 23.71, printed pp.508--509, and equation (153), p.510; agent-written formal calculation from the cited root-string/parity and class-two identities. Appendix C, pp.621--622, explains the rank-two input."
+   }
+  },
+  {
+   "text": "Each $D_d$ is an integer multiple $w_de_{2b+da}$ if $2b+da\\in R$, and is zero otherwise. Indeed $C_d=z_de_{2b+da}$ with $z_d\\in\\mathbf Z$ by [lem-sfb-chevalley-string-central-parity]; for $d\\leq q$, $[Y_0,Y_d]=c_d[e_b,e_{b+da}]$ has an integer coefficient by the assumed Chevalley bracket formula, and for $d>q$ it is zero. Independence of $a,b$ excludes opposite roots in this bracket. The $D_d$ commute with all $Y_k$ and with each other, since they are linear combinations of their central brackets. Applying [lem-sfb-formal-class-two-exponential] to these commuting correction summands gives\n$$K_{ab}=\\left(\\prod_{k=1}^q E_{b+ka}(c_ks^kt)\\right)\\left(\\prod_{\\substack{1\\leq d\\leq2q\\\\2b+da\\in R}}E_{2b+da}(w_ds^dt^2)\\right).$$\nEvery nonidentity factor is indexed by a pair of positive integers, and every coefficient was fixed in $\\mathfrak g$ independently of $\\rho$.",
+   "uses": [
+    "lem-sfb-chevalley-string-central-parity",
+    "lem-sfb-formal-class-two-exponential"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, Theorem 23.71, printed pp.508--509, and equation (153), p.510; agent-written formal calculation from the cited root-string/parity and class-two identities. Appendix C, pp.621--622, explains the rank-two input."
+   }
+  },
+  {
+   "text": "Arrange these factors in the specified order on $S$. A correction factor commutes with every string factor, so moving it changes no coefficient. To reverse the order of two string factors with arguments $X=\\varepsilon s^kt\\bar Y_k$ and $Y=\\varepsilon' s^lt\\bar Y_l$ ($\\varepsilon,\\varepsilon'\\in\\{1,-1\\}$), compare [lem-sfb-formal-class-two-exponential] for the lists $(X,Y)$ and $(Y,X)$. Since their bracket is central by [lem-sfb-chevalley-string-central-parity], it gives\n$$\\exp X\\exp Y=\\exp Y\\exp X\\exp([X,Y]).$$\nThe last bracket is $s^{k+l}t^2$ times the image of $\\varepsilon\\varepsilon'[Y_k,Y_l]$. Its Chevalley coefficient is an integer, and its root is $2b+(k+l)a$; if that is not a root the bracket is zero. Such new factors are central, so they can be collected immediately. Combining factors on the same root adds their parameters, by the binomial theorem. Adjacent inversion removal terminates, since it decreases the inversion count of the finite list of string factors; central insertions do not enter that count. If $(a,b)=(\\alpha,\\beta)$, use $s=u,t=v$. If $(a,b)=(\\beta,\\alpha)$, first use the group identity $K_{ba}=K_{ab}^{-1}$: invert the displayed product by reversing its factors and negating their arguments, then apply the same swaps and put $s=v,t=u$. This proves the required ordered formal identity in either orientation. Insert identity factors (coefficient zero) at all unused pairs of $S$. All swaps preserve root bidegrees, so parameters remain integer multiples of the required monomials $u^iv^j$.",
+   "uses": [
+    "lem-sfb-formal-class-two-exponential",
+    "lem-sfb-chevalley-string-central-parity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, Theorem 23.71, printed pp.508--509, and equation (153), p.510; agent-written formal calculation from the cited root-string/parity and class-two identities. Appendix C, pp.621--622, explains the rank-two input."
+   }
+  },
+  {
+   "text": "Choose a $\\mathbf Z$-basis of the finite free lattice $\\Lambda$. Every $D_{\\gamma,m}$ has an integer matrix in this basis by lattice stability, and is zero for sufficiently large $m$ by the assumed nilpotence. Thus each $E_\\gamma(cu^iv^j)$ occurring in Step 5 is a finite matrix polynomial over $\\mathbf Z[u,v]$; the same holds for the four factors on the left. Their difference maps to zero in $\\operatorname{Mat}_{\\operatorname{rank}\\Lambda}(\\mathbf Q[[u,v]])$ by Step 5. The map $\\mathbf Z[u,v]\\to\\mathbf Q[[u,v]]$ is injective: each integer coefficient maps to that identical rational coefficient, which can vanish only if the integer is zero. Hence the difference is zero already over $\\mathbf Z[u,v]$. Applying the coefficient map $\\mathbf Z[u,v]\\to A$, $u\\mapsto u$, $v\\mapsto v$, proves the identity over every commutative ring $A$, including rings with torsion or nilpotents. Rank-zero lattices cause no exception, since there are no matrix entries to check. If $S$ is empty, every factor in Step 4 is absent, so the product is the identity. The construction of the integers used only the chosen root vectors, root-string choice and order, and required no faithfulness or group-theoretic hypothesis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, Theorem 23.71, printed pp.508--509, and equation (153), p.510; agent-written formal calculation from the cited root-string/parity and class-two identities. Appendix C, pp.621--622, explains the rank-two input."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-chevalley-string-central-parity",
+  "def-wf-lie-algebra",
+  "lem-sfb-formal-class-two-exponential"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 23h, Theorem 23.71, printed pp.508--509, and equation (153), p.510; agent-written formal calculation from the cited root-string/parity and class-two identities. Appendix C, pp.621--622, explains the rank-two input."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Chevalley|commutator|exp",
+   "results": "{\"t\": \"2026-10-23T22:57:06Z\", \"tool\": \"grep\", \"query\": \"Chevalley|commutator|exp\", \"sub\": \"Algebra/Lie\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Engel.lean\", \"Mathlib/Algebra/Lie/SerreConstruction.lean\", \"Mathlib/Algebra/Lie/Solvable.lean\", \"Mathlib/Algebra/Lie/Solvable.lean\", \"Mathlib/Algebra/Lie/Rank.lean\", \"Mathlib/Algebra/Lie/Nilpotent.lean\", \"Mathlib/Algebra/Lie/Nilpotent.lean\", \"Mathlib/Algebra/Lie/Basic.lean\"], \"digest\": \"f5d12cf4df7671e6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are root-string combinatorics, Geck Lie brackets, ordinary group commutators or characteristic-zero analytic/derivation exponentials; none gives integral nonopposite Chevalley exponential commutator identities."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Chevalley commutator formula for root subgroup exponential matrices on an integral admissible lattice",
+   "results": "{\"t\": \"2026-10-23T22:57:06Z\", \"tool\": \"leansearch\", \"query\": \"Chevalley commutator formula for root subgroup exponential matrices on an integral admissible lattice\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.exp_sum_of_commute\", \"Matrix.exp_add_of_commute\", \"RootPairing.GeckConstruction.lie_h_e\", \"Subgroup.commutator\", \"Matrix.exp_conj'\", \"commutator_def\", \"LieDerivation.exp_map_apply\", \"RootPairing.GeckConstruction.e_lie_u\"], \"digest\": \"f5f3a19d35016f66\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are root-string combinatorics, Geck Lie brackets, ordinary group commutators or characteristic-zero analytic/derivation exponentials; none gives integral nonopposite Chevalley exponential commutator identities."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LieAlgebra\", \"commutator\"",
+   "results": "{\"t\": \"2026-10-23T22:57:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"LieAlgebra\\\", \\\"commutator\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"LieAlgebra.instInhabitedCommutatorRing\", \"LieAlgebra.instLieRingCommutatorRing\", \"LieAlgebra.instNonemptyCommutatorRing\", \"LieAlgebra.instCommutatorRing\", \"LieAlgebra.matrix_trace_commutator_zero\"], \"digest\": \"d995a63cc42aaa46\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are root-string combinatorics, Geck Lie brackets, ordinary group commutators or characteristic-zero analytic/derivation exponentials; none gives integral nonopposite Chevalley exponential commutator identities."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The commutator of exponentials of two non opposite Chevalley root vectors is a product of higher root exponentials with integer constants",
+   "results": "{\"t\": \"2026-10-23T22:57:08Z\", \"tool\": \"leanfinder\", \"query\": \"The commutator of exponentials of two non opposite Chevalley root vectors is a product of higher root exponentials with integer constants\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.e_lie_v_ne\", \"RootPairing.GeckConstruction.e_lie_u\", \"RootPairing.GeckConstruction.f_lie_v_ne\", \"RootPairing.GeckConstruction.lie_e_lie_f_apply\", \"RootPairing.GeckConstruction.lie_e_f_mul_ω\", \"RootPairing.GeckConstruction.lie_e_f_ne\", \"RootPairing.GeckConstruction.lie_h_e\", \"RootPairing.GeckConstruction.lie_e_f_same\"], \"digest\": \"7346ab838ddecf99\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are root-string combinatorics, Geck Lie brackets, ordinary group commutators or characteristic-zero analytic/derivation exponentials; none gives integral nonopposite Chevalley exponential commutator identities."
+  },
+  {
+   "tool": "grep",
+   "query": "Chevalley|root.*commutator|commutator.*root|divided.?power.*exp",
+   "results": "{\"t\": \"2026-10-23T22:57:30Z\", \"tool\": \"grep\", \"query\": \"Chevalley|root.*commutator|commutator.*root|divided.?power.*exp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Combinatorics/Additive/ErdosGinzburgZiv.lean\", \"Mathlib/Combinatorics/Additive/ErdosGinzburgZiv.lean\", \"Mathlib/Combinatorics/Additive/ErdosGinzburgZiv.lean\", \"Mathlib/LinearAlgebra/JordanChevalley.lean\", \"Mathlib/LinearAlgebra/JordanChevalley.lean\", \"Mathlib/LinearAlgebra/JordanChevalley.lean\", \"Mathlib/LinearAlgebra/JordanChevalley.lean\", \"Mathlib/LinearAlgebra/JordanChevalley.lean\"], \"digest\": \"34a74d020c4cca8d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are root-string combinatorics, Geck Lie brackets, ordinary group commutators or characteristic-zero analytic/derivation exponentials; none gives integral nonopposite Chevalley exponential commutator identities."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Commutators of nilpotent root vector divided power polynomial exponentials have integral rank two root string formulas",
+   "results": "{\"t\": \"2026-10-23T22:57:34Z\", \"tool\": \"leanfinder\", \"query\": \"Commutators of nilpotent root vector divided power polynomial exponentials have integral rank two root string formulas\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.e_lie_v_ne\", \"RootPairing.GeckConstruction.f_lie_v_ne\", \"RootPairing.chainBotCoeff_mul_chainTopCoeff\", \"LieAlgebra.IsKilling.chainLength_zero_right\", \"LieAlgebra.IsKilling.chainLength_nsmul\", \"LieAlgebra.IsKilling.chainLength\", \"LieAlgebra.IsKilling.chainLength_smul\", \"LieAlgebra.IsKilling.chainTopCoeff_of_eq_zsmul_add\"], \"digest\": \"96653f9097c67b79\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are root-string combinatorics, Geck Lie brackets, ordinary group commutators or characteristic-zero analytic/derivation exponentials; none gives integral nonopposite Chevalley exponential commutator identities."
+  },
+  {
+   "tool": "grep",
+   "query": "Chevalley|commutator|exp",
+   "results": "{\"t\": \"2026-10-23T23:44:19Z\", \"tool\": \"grep\", \"query\": \"Chevalley|commutator|exp\", \"sub\": \"Algebra/Lie\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Engel.lean\", \"Mathlib/Algebra/Lie/SerreConstruction.lean\", \"Mathlib/Algebra/Lie/Rank.lean\", \"Mathlib/Algebra/Lie/Solvable.lean\", \"Mathlib/Algebra/Lie/Solvable.lean\", \"Mathlib/Algebra/Lie/CartanCriterion.lean\", \"Mathlib/Algebra/Lie/CartanCriterion.lean\", \"Mathlib/Algebra/Lie/CartanCriterion.lean\"], \"digest\": \"97a6feb20c147a95\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned Geck root-bracket formulas, nilpotent Lie derivation exponentials, commutative divided-power exponentials, or abstract group commutators do not state the integral nonopposite root exponential matrix identity. Read DividedPowers/Basic.lean:175--195, Lie/Derivation/Basic.lean:400--427, and GeckConstruction/Basic.lean:351--374."
+  },
+  {
+   "tool": "grep",
+   "query": "root.*commutator|commutator.*root|divided.?power.*exp",
+   "results": "{\"t\": \"2026-10-23T23:44:19Z\", \"tool\": \"grep\", \"query\": \"root.*commutator|commutator.*root|divided.?power.*exp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/DividedPowers/Basic.lean\", \"Mathlib/RingTheory/DividedPowers/Basic.lean\", \"Mathlib/RingTheory/DividedPowers/Basic.lean\", \"Mathlib/RingTheory/DividedPowers/Basic.lean\", \"Mathlib/GroupTheory/Solvable.lean\", \"Mathlib/GroupTheory/Solvable.lean\", \"Mathlib/GroupTheory/Solvable.lean\", \"Mathlib/GroupTheory/Solvable.lean\"], \"digest\": \"b56a21d368af39e2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned Geck root-bracket formulas, nilpotent Lie derivation exponentials, commutative divided-power exponentials, or abstract group commutators do not state the integral nonopposite root exponential matrix identity. Read DividedPowers/Basic.lean:175--195, Lie/Derivation/Basic.lean:400--427, and GeckConstruction/Basic.lean:351--374."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LieAlgebra\", \"commutator\"",
+   "results": "{\"t\": \"2026-10-23T23:44:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"LieAlgebra\\\", \\\"commutator\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"LieAlgebra.instInhabitedCommutatorRing\", \"LieAlgebra.instLieRingCommutatorRing\", \"LieAlgebra.instNonemptyCommutatorRing\", \"LieAlgebra.instCommutatorRing\", \"LieAlgebra.matrix_trace_commutator_zero\"], \"digest\": \"d995a63cc42aaa46\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned Geck root-bracket formulas, nilpotent Lie derivation exponentials, commutative divided-power exponentials, or abstract group commutators do not state the integral nonopposite root exponential matrix identity. Read DividedPowers/Basic.lean:175--195, Lie/Derivation/Basic.lean:400--427, and GeckConstruction/Basic.lean:351--374."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral Chevalley root subgroup exponential commutator formula on an admissible lattice",
+   "results": "{\"t\": \"2026-10-23T23:44:19Z\", \"tool\": \"leansearch\", \"query\": \"Integral Chevalley root subgroup exponential commutator formula on an admissible lattice\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.commutator\", \"commutator\", \"closureCommutatorRepresentatives\", \"instNormalCommutator\", \"LieAlgebra.rootSpace\", \"LieDerivation.exp_map_apply\", \"LieDerivation.exp\", \"RootPairing.weylGroup\"], \"digest\": \"075e131813be194a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned Geck root-bracket formulas, nilpotent Lie derivation exponentials, commutative divided-power exponentials, or abstract group commutators do not state the integral nonopposite root exponential matrix identity. Read DividedPowers/Basic.lean:175--195, Lie/Derivation/Basic.lean:400--427, and GeckConstruction/Basic.lean:351--374."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Product of exponentials of non opposite nilpotent Chevalley root vectors has universal integer root string commutator constants",
+   "results": "{\"t\": \"2026-10-23T23:44:25Z\", \"tool\": \"leanfinder\", \"query\": \"Product of exponentials of non opposite nilpotent Chevalley root vectors has universal integer root string commutator constants\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.e_lie_v_ne\", \"RootPairing.GeckConstruction.e_lie_u\", \"RootPairing.GeckConstruction.f_lie_v_ne\", \"RootPairing.GeckConstruction.ω_mul_e\", \"RootPairing.GeckConstruction.lie_e_lie_f_apply\", \"RootPairing.GeckConstruction.lie_e_f_mul_ω\", \"RootPairing.GeckConstruction.ω_mul_f\", \"RootPairing.GeckConstruction.lie_e_f_same\"], \"digest\": \"8c3ccf0ea8b15408\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned Geck root-bracket formulas, nilpotent Lie derivation exponentials, commutative divided-power exponentials, or abstract group commutators do not state the integral nonopposite root exponential matrix identity. Read DividedPowers/Basic.lean:175--195, Lie/Derivation/Basic.lean:400--427, and GeckConstruction/Basic.lean:351--374."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Chevalley commutator formula for nonopposite root vector divided power exponentials over an arbitrary commutative ring",
+   "results": "{\"t\": \"2026-10-23T23:44:26Z\", \"tool\": \"leanfinder\", \"query\": \"Chevalley commutator formula for nonopposite root vector divided power exponentials over an arbitrary commutative ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.e_lie_v_ne\", \"RootPairing.GeckConstruction.f_lie_v_ne\", \"RootPairing.GeckConstruction.lie_e_lie_f_apply\", \"RootPairing.GeckConstruction.lie_e_f_mul_ω\", \"RootPairing.GeckConstruction.e_lie_u\", \"CartanMatrix.Relations.adE\", \"RootPairing.GeckConstruction.lie_h_e\", \"RootPairing.GeckConstruction.lie_e_f_same\"], \"digest\": \"38a31b9a71058e94\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned Geck root-bracket formulas, nilpotent Lie derivation exponentials, commutative divided-power exponentials, or abstract group commutators do not state the integral nonopposite root exponential matrix identity. Read DividedPowers/Basic.lean:175--195, Lie/Derivation/Basic.lean:400--427, and GeckConstruction/Basic.lean:351--374."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-chevalley-unipotent-polynomial-coordinates",
+  "date": "2026-10-24",
+  "group": "Q147"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.55: realize the explicitly constructed reduced root datum on L. Supporting proof of root-datum realization: Section 23h, equation (153) and Theorem 23.72, printed pp.510--511, with the full-weight representation of Corollary 23.73; torus defined by its weight characters. Supporting Section 23h, Theorem 23.72 proof, pp.510-511: omitted details needed to use the weight-character torus rather than the full diagonal torus. The open-cell strengthening is an agent-stated construction lemma. Supporting calculation: Closedness and uniqueness of the ordered one-sign exponential products on an admissible full-weight lattice; integral root-string collection, without an ambient reductive group. Supporting two-root calculation: integral nonopposite exponential commutator relations for collecting a one-sign word.",
+   "via": [
+    "lem-sfb-chevalley-unipotent-polynomial-coordinates",
+    "lem-sfb-chevalley-exponential-big-cell",
+    "lem-sfb-chevalley-root-exponential-group",
+    "lem-sfb-root-datum-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-chevalley-nonopposite-exponential-commutator",
+  "worker": "stage1",
+  "summary": "Reused the existing integral root-string central-parity and formal class-two exponential nodes; wrote explicit conjugation, last-position cancellation, integral central corrections, inversion/reordering, and coefficientwise descent to arbitrary rings. No new nodes and no statement changes.",
+  "blueprint": "Current latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md (3), inherited alteration/moduli/reductivity supporting chain, specifically the nonopposite two-root collection needed by chevalley-unipotent-polynomial-coordinates. Existing from.node=null and via chain retained; blueprint_refs ancestor returns None.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-fd033513e",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-fd033513e (reviewer sub-agent of L); spot-checked: Read the item's six steps and both cited lemmas in full: lem-sfb-chevalley-string-central-parity and lem-sfb-formal-class-two-exponential, both in the same unit sk-thm-sf-ctf-stability. Shape: no new nodes; statement and stmt_deps are unchanged from the base; the item is still unsplit in live and side-live; there is no repair note; proof_deps equals the union of uses; there is no SGA citation and no tool_uses. Source: Milne iAG2017 Theorem 23.71 (N=±(p+1), with p taken for β−pα) and eq. (153) match the item's conventions; proof_origin agent is correct. Recomputed: step 2's conjugation formula exp(s ad H); step 3's half-bracket sum with Y_0 moved last, which gives D_d=−C_d+[Y_0,Y_d]; step 4's integrality D_d=w_d e_{2b+da}, using the bracket ±(p+1), z_d, and 2b+da≠0 by independence; step 5's swap formula expX expY=expY expX exp[X,Y], obtained from the class-two lemma in both orders with no halving; K_ba=K_ab^{-1} for the reversed orientation, with identity factors at unused pairs; step 6's injectivity ℤ[u,v]→ℚ[[u,v]] followed by specialization. Tested q=0, A2, B2 in both orientations (D_1=C_1 integral because p_{b,b+a}=1), G2 C_3 parity, rank 0, and torsion/nilpotent rings. Duplicate search: rank-two-straightening, opposite-rational-collection and borel-kostant-distribution-comparison state different things; no duplicate found. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Lie.ChevalleyNonoppositeExponentialCommutator",
+  "declaration": "LieAlgebra.chevalley_nonopposite_exponential_commutator",
+  "declarations": [
+   "LieAlgebra.admissibleRootExponential",
+   "LieAlgebra.chevalley_nonopposite_exponential_commutator"
+  ],
+  "file": "lean/Sheaf/Algebra/Lie/ChevalleyNonoppositeExponentialCommutator.lean",
+  "statement": "theorem chevalley_nonopposite_exponential_commutator (L : Type u) [LieRing L] [LieAlgebra ℚ L] [FiniteDimensional ℚ L] [HasTrivialRadical ℚ L] (H : LieSubalgebra ℚ L) [H.IsCartanSubalgebra] [LieModule.IsTriangularizable ℚ H L] (I : Type v) [Finite I] (P : RootPairing I ℚ (Module.Dual ℚ H) H) [P.IsRootSystem] [P.IsCrystallographic] [P.IsReduced] (heval : ∀ (f : Module.Dual ℚ H) (h : H), P.toLinearMap f h = f h) (Δ : P.Base) (e : I → L) (he : ∀ i : I, e i ≠ 0 ∧ ∀ h : H, ⁅(h : L), e i⁆ = P.root i h • e i) (hopp : ∀ i : I, ⁅e i, e (P.reflectionPerm i i)⁆ = (P.coroot i : L)) (hadd : ∀ i j k : I, P.root i + P.root j = P.root k → ∃ ε : ℤ, (ε = 1 ∨ ε = -1) ∧ ⁅e i, e j⁆ = ((ε : ℚ) * (P.chainBotCoeff i j + 1)) • e k) (hzero : ∀ i j : I, P.root i + P.root j ∉ Set.range P.root → P.root i + P.root j ≠ 0 → ⁅e i, e j⁆ = 0) (B : Module.Basis (Δ.support ⊕ I) ℚ L) (Bh : ∀ i : Δ.support, B (Sum.inl i) = (P.coroot i : L)) (Be : ∀ i : I, B (Sum.inr i) = e i) (α β : I) (hne : α ≠ β) (hnopp : P.root α ≠ -P.root β) (s : List (ℕ × ℕ × I)) (hs : s.Nodup) (hmem : ∀ d : ℕ × ℕ × I, d ∈ s ↔ 0 < d.1 ∧ 0 < d.2.1 ∧ d.1 • P.root α + d.2.1 • P.root β = P.root d.2.2) (horder : s.Pairwise (fun d d' ↦ d.1 + d.2.1 ≤ d'.1 + d'.2.1)) : ∃ c : ℕ × ℕ → ℤ, ∀ (W : Type w) [AddCommGroup W] [Module ℚ W] [FiniteDimensional ℚ W] [LieRingModule L W] [LieModule ℚ L W] (Λ : Submodule ℤ W) [Submodule.IsLattice ℚ Λ] [Module.Free ℤ Λ] (hnil : ∀ i : I, IsNilpotent (LieModule.toEnd ℚ L W (e i))) (hstable : ∀ (i : I) (m : ℕ) (w : W), w ∈ Λ → ((Nat.factorial m : ℚ)⁻¹ • LieModule.toEnd ℚ L W (e i) ^ m) w ∈ Λ) (A : Type z) [CommRing A] (a b : A), admissibleRootExponential (LieModule.toEnd ℚ L W (e α)) Λ (hstable α) A a * admissibleRootExponential (LieModule.toEnd ℚ L W (e β)) Λ (hstable β) A b * admissibleRootExponential (LieModule.toEnd ℚ L W (e α)) Λ (hstable α) A (-a) * admissibleRootExponential (LieModule.toEnd ℚ L W (e β)) Λ (hstable β) A (-b) = (s.map (fun d ↦ admissibleRootExponential (LieModule.toEnd ℚ L W (e d.2.2)) Λ (hstable d.2.2) A ((c (d.1, d.2.1) : A) * a ^ d.1 * b ^ d.2.1))).prod",
+  "branch": "sheaf-dag",
+  "by": "Q75",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3c0fed5d2",
+  "group": "Q75",
+  "result": "pass",
+  "note": "Item node identical to side-live except lean; lean.statement verbatim in file; single sorry. Clause check: HasTrivialRadical semisimple, Cartan+triangularizable split Cartan (implied by the Chevalley data, same encoding as landed RankTwoStraightening/RootNormalization/IntegralRootModel), RootPairing with heval, hopp, hadd via chainBotCoeff (= p_{γ,δ}: max n with root j - n root i in R, independence forced in reduced system), hzero, basis over Δ.support⊕I; α≠β, nonopposite; s Nodup + exact iff membership (root injective) + Pairwise height order = any total order refining i+j; ∃ c before W/ρ/Λ/A/u/v; arbitrary non-faithful representation, IsLattice+Free lattice, hnil, hstable for all m; admissibleRootExponential is a real truncated sum of base-changed restricted divided powers, exact for nilpotent T (T^dim=0), m=0 term 1; LHS order αβα⁻¹β⁻¹, RHS List.prod in s order with c·u^i v^j; ∀ CommRing A gives the ℤ[u,v] identity. Edge cases W=0, S=∅, u=0, torsion/nilpotent rings, independent universes OK. Advisories: inline (m!)⁻¹ divided power rather than Algebra.rationalDividedPower (not a stmt_dep; matches landed admissible-representation dep); second reading by the same worker. No compile (no changes)."
+ }
+}

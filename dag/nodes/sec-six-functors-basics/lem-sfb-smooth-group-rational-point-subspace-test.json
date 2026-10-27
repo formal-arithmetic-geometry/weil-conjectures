@@ -1,0 +1,244 @@
+{
+ "id": "lem-sfb-smooth-group-rational-point-subspace-test",
+ "kind": "statement",
+ "title": "Rational points detect stable subspaces for smooth affine groups",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], let $G$ be a smooth affine group scheme [def-sc-group-scheme, def-sbc-smooth-morphisms] of finite type over $k$ [def-weil-finite-type-morphism], and let $V$ be a finite-dimensional $k$-vector space [def-weil-finite-dimensional-subspace]. A rational representation is a homomorphism $\\rho:G\\to\\operatorname{GL}(V)$, with the general linear group interpreted after a basis choice as [def-sc-general-linear-group]; for $V=0$ it is the trivial group scheme. For every $k$-linear subspace $W\\subseteq V$, the following conditions are equivalent: (i) $\\rho_k(g)W=W$ for every $g\\in G(k)$; (ii) for every commutative $k$-algebra $A$ and every $g\\in G(A)$ one has $\\rho_A(g)(W\\otimes_k A)=W\\otimes_k A$. In condition (ii) the tensors are viewed as submodules of $V\\otimes_k A$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollaries 4.4--4.5, printed p.85, with Proposition 4.3 (closed subspace stabilizer); Propositions 1.10--1.12 for schematic density of rational points of a reduced scheme over an algebraically closed field."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-dimensional-subspace",
+  "def-sc-general-linear-group"
+ ],
+ "proof": [
+  {
+   "text": "Condition (ii) implies (i) by taking $A=k$ and the canonical identification $W\\otimes_k k=W$. If $V=0$, then $W=0$ and both conditions hold. Hence assume $n=\\dim_k V>0$ and (i).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 4.3 and Corollaries 4.4--4.5, printed p.85; Proposition 1.10, printed pp.9--10"
+   }
+  },
+  {
+   "text": "Choose a basis $e_1,\\ldots,e_n$ of $V$ whose first $r$ vectors form a basis of $W$. For every $k$-algebra $A$, these give $V\\otimes_k A=A^n$ and identify $W\\otimes_k A$ with the first $r$ coordinates: the projection onto their span is a left inverse to the inclusion, also after tensoring. Let $B=\\Gamma(G,\\mathcal O_G)$. Pulling back the matrix coordinate $x_{ij}$ along $\\rho$ gives $b_{ij}\\in B$. By the coordinate description of $\\mathrm{GL}_{n,k}$, for $g:\\operatorname{Spec}A\\to G$ the matrix of $\\rho_A(g)$ has entries $g^*(b_{ij})$. Thus its image of $W\\otimes_k A$ is contained in $W\\otimes_k A$ exactly when $g^*(b_{ij})=0$ for $i>r$, $j\\le r$.",
+   "uses": [
+    "def-sc-general-linear-group"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 4.3 and Corollaries 4.4--4.5, printed p.85; Proposition 1.10, printed pp.9--10"
+   }
+  },
+  {
+   "text": "Apply [sbc-lem-smooth-geometrically-reduced] to $G\\to\\operatorname{Spec}k$. Its fibre over the unique point is $G$, so $G$ is reduced. By [def-weil-finite-type-morphism] choose an affine open cover $U_a=\\operatorname{Spec}B_a$ of $G$ with each $B_a$ finitely generated over $k$. By [def-pc-reduced-scheme], each section ring $B_a$ is reduced. These are precisely the hypotheses needed for the vanishing principle on each chart.",
+   "uses": [
+    "sbc-lem-smooth-geometrically-reduced",
+    "def-weil-finite-type-morphism",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 056T, lemma-smooth-geometrically-normal; finite-type affine cover and reduced section rings as in the cited definitions"
+   }
+  },
+  {
+   "text": "Fix $i>r$, $j\\le r$. Every $k$-point $u$ of $U_a$ gives a $k$-point $g$ of $G$. Hypothesis (i) and the coordinate calculation in step 2 give $b_{ij}(g)=0$. Hence $b_{ij}|_{U_a}$ vanishes at every $k$-point of $\\operatorname{Spec}B_a$. Clause (2) of [lem-wf-affine-nullstellensatz-vanishing] applies because $k$ is algebraically closed and $B_a$ is reduced and finitely generated; it gives $b_{ij}|_{U_a}=0$. Sections equal on an open cover are equal, so $b_{ij}=0$ in $B$.",
+   "uses": [
+    "lem-wf-affine-nullstellensatz-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 4.3 and Corollaries 4.4--4.5, printed p.85; Proposition 1.10, printed pp.9--10"
+   }
+  },
+  {
+   "text": "For any $k$-algebra $A$ and $g\\in G(A)$, evaluation sends these zero $b_{ij}$ to zero. Step 2 therefore gives $\\rho_A(g)(W\\otimes_k A)\\subseteq W\\otimes_k A$. The same assertion for $g^{-1}\\in G(A)$ gives the reverse inclusion after applying $\\rho_A(g)$, since $\\rho_A(g)\\rho_A(g^{-1})=1$. This proves (ii), including $r=0$ and $r=n$, when the relevant coordinate equations are empty. The zero algebra also causes no exception: both tensor modules are zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 4.3 and Corollaries 4.4--4.5, printed p.85; Proposition 1.10, printed pp.9--10"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-general-linear-group",
+  "sbc-lem-smooth-geometrically-reduced",
+  "def-weil-finite-type-morphism",
+  "def-pc-reduced-scheme",
+  "lem-wf-affine-nullstellensatz-vanishing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 4.3 and Corollaries 4.4--4.5, printed p.85; Proposition 1.10, printed pp.9--10"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "schematicallyDense|schematically_dense|stabilizer",
+   "results": "{\"t\": \"2026-10-23T14:30:50Z\", \"tool\": \"grep\", \"query\": \"schematicallyDense|schematically_dense|stabilizer\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract-group invariant submodules and their stabilizers do not detect rational group-scheme stability on every algebra from rational points."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Subrepresentation of algebraic group tested on Zariski dense rational points",
+   "results": "{\"t\": \"2026-10-23T14:30:50Z\", \"tool\": \"leansearch\", \"query\": \"Subrepresentation of algebraic group tested on Zariski dense rational points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subrepresentation.ofSubmodule\", \"Representation.invariants_eq_inter\", \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"AlgebraicGeometry.IsDominant.mk\", \"Subrepresentation.toSubmodule\", \"Representation.invariants\", \"Subrepresentation.mem_asSubmodule'_iff\", \"AlgebraicGeometry.IsDominant\"], \"digest\": \"e38deea03d9e9b98\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract-group invariant submodules and their stabilizers do not detect rational group-scheme stability on every algebra from rational points."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stabilizer\", \"Submodule\"",
+   "results": "{\"t\": \"2026-10-23T14:30:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"stabilizer\\\", \\\"Submodule\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Submodule.stabilizer_coe\", \"Submodule.mem_stabilizer_submodule_iff_map_eq\", \"LinearEquiv.mem_stabilizer_fixedSubmodule\", \"LinearEquiv.mem_stabilizer_submodule_of_le_fixedSubmodule\"], \"digest\": \"1fd907e0769449c2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract-group invariant submodules and their stabilizers do not detect rational group-scheme stability on every algebra from rational points."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rational representation of a smooth algebraic group over an algebraically closed field has a stable subspace if the subspace is preserved by all rational points",
+   "results": "{\"t\": \"2026-10-23T14:30:51Z\", \"tool\": \"leanfinder\", \"query\": \"A rational representation of a smooth algebraic group over an algebraically closed field has a stable subspace if the subspace is preserved by all rational points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsInvariant.isInvariant\", \"Algebra.isInvariant_iff\", \"ax_grothendieck_of_definable\", \"ax_grothendieck_zeroLocus\", \"ax_grothendieck_univ\", \"top_fixedByFinite\", \"IntermediateField.fixingSubgroup_isClosed\", \"IntermediateField.fixingSubgroup_isOpen\"], \"digest\": \"ae9d830b82b8cfb3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract-group invariant submodules and their stabilizers do not detect rational group-scheme stability on every algebra from rational points."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Zariski dense points detect an invariant linear subspace of a finite dimensional algebraic group representation",
+   "results": "{\"t\": \"2026-10-23T14:31:20Z\", \"tool\": \"leanfinder\", \"query\": \"Zariski dense points detect an invariant linear subspace of a finite dimensional algebraic group representation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Representation.invtSubmodule\", \"Representation.invariants\", \"Algebra.isInvariant_iff\", \"Representation.invtSubmodule.nontrivial_iff\", \"Representation.invtSubmodule.top_mem\", \"Representation.invtSubmodule.instNontrivialSubtypeSubmoduleMemSublattice\", \"Representation.mem_invtSubmodule\", \"Algebra.IsInvariant.isInvariant\"], \"digest\": \"523aab8a36c2444d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract-group invariant submodules and their stabilizers do not detect rational group-scheme stability on every algebra from rational points."
+  },
+  {
+   "tool": "grep",
+   "query": "schematicallyDense|schematically_dense|stabilizer",
+   "results": "{\"t\": \"2026-10-23T19:24:09Z\", \"tool\": \"grep\", \"query\": \"schematicallyDense|schematically_dense|stabilizer\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract group actions or affine schemes, and do not state rational-point detection of subspaces over every algebra."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rational points of a smooth algebraic group detect stable subspaces of a finite dimensional representation",
+   "results": "{\"t\": \"2026-10-23T19:24:10Z\", \"tool\": \"leansearch\", \"query\": \"Rational points of a smooth algebraic group detect stable subspaces of a finite dimensional representation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Representation.invariants\", \"Representation.le_comap_invariants\", \"Representation.mem_invtSubmodule\", \"Representation.invariants_eq_inter\", \"Representation.invtSubmodule.instNontrivialSubtypeSubmoduleMemSublattice\", \"Rep.instInjective\", \"Representation.invtSubmodule.top_mem\", \"subsingleton_rat_module\"], \"digest\": \"6fbf7dda63a7f67e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract group actions or affine schemes, and do not state rational-point detection of subspaces over every algebra."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stabilizer\", \"Submodule\"",
+   "results": "{\"t\": \"2026-10-23T19:24:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"stabilizer\\\", \\\"Submodule\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Submodule.stabilizer_coe\", \"Submodule.mem_stabilizer_submodule_iff_map_eq\", \"LinearEquiv.mem_stabilizer_fixedSubmodule\", \"LinearEquiv.mem_stabilizer_submodule_of_le_fixedSubmodule\"], \"digest\": \"1fd907e0769449c2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract group actions or affine schemes, and do not state rational-point detection of subspaces over every algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rational representation of a smooth affine group scheme over an algebraically closed field has a stable subspace if all rational points preserve it",
+   "results": "{\"t\": \"2026-10-23T19:24:11Z\", \"tool\": \"leanfinder\", \"query\": \"A rational representation of a smooth affine group scheme over an algebraically closed field has a stable subspace if all rational points preserve it\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.term𝔸(_;_)\", \"AlgebraicGeometry.IsAffine\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.AffineSpace.instIsAffine\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty\", \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.Scheme.IsQuasiAffine\"], \"digest\": \"647aa3fde596d99f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract group actions or affine schemes, and do not state rational-point detection of subspaces over every algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invariant subspace under the k-points of a reduced affine algebraic group is invariant under its action over every k-algebra",
+   "results": "{\"t\": \"2026-10-23T19:24:53Z\", \"tool\": \"leanfinder\", \"query\": \"An invariant subspace under the k-points of a reduced affine algebraic group is invariant under its action over every k-algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsInvariant.isInvariant\", \"Algebra.isInvariant_iff\", \"IsGaloisGroup.isInvariant\", \"Algebra.IsInvariant\", \"Rep.invariantsFunctor_obj_carrier\", \"instIsInvariantSubtypeMemSubalgebraSubalgebraSubgroupQuotient\", \"Algebra.IsInvariant.isIntegral\", \"FixedPoints.subalgebra\"], \"digest\": \"99f56dacc141ec4d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract group actions or affine schemes, and do not state rational-point detection of subspaces over every algebra."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-subgroup-character-inversion",
+  "date": "2026-10-23",
+  "group": "Q156"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Affine normal quotients and the geometry of their exact sequences. Supporting argument: A closed normal subgroup is a representation kernel. Milne Lemma 5.17: Lemma 5.16, printed pp.102--103: the negative multiple of an occurring character, including the Frobenius reduction for nonreduced groups. Multiplicative notation chi^(-m) replaces additive -m chi. Supporting input for the rational-point stability argument in Milne Lemma 5.16.",
+   "via": [
+    "lem-sfb-normal-subgroup-character-inversion",
+    "lem-sfb-normal-subgroup-representation-kernel",
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-group-rational-point-subspace-test",
+  "worker": "stage1",
+  "summary": "Q28 follows Milne 4.3--4.5 by writing the subspace-preservation matrix equations, proving their vanishing chartwise using the existing smooth-reduced and Nullstellensatz nodes, and evaluating over every algebra. No new nodes, no statement change, and no attachment for the full item.",
+  "blueprint": "Supporting input to Milne Lemma 5.16 in the inherited det-thm-sf-ctf-stability-direct-images alteration chain, as recorded in blueprint.from.place. The current blueprint has no node stating this all-algebra equivalence; same_as remains empty.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Smoothness implies reducedness of G; generic geometric input in the matrix-coordinate proof, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-wf-affine-nullstellensatz-vanishing",
+    "why": "Clause (2) kills regular functions on the reduced finite-type affine charts of G; generic algebraic tool with no characteristic-zero hypothesis."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-wf-affine-nullstellensatz-vanishing"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-41fcbf6eb",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-41fcbf6eb (reviewer sub-agent of L); spot-checked: Five-step split, no new nodes, statement unchanged against the live item. Live is still unsplit and there is no repair or re-split note. Milne iAG2017 p.85: Prop 4.3 (adapted basis, (W⊗R)⊆(W⊗R) iff g(a_ij)=0 for i∈I, j∈J) and Cor 4.4–4.5. The delivery's index convention i>r, j≤r matches Milne. Steps: step 1 handles (ii)⇒(i) with A=k, and V=0, which is needed because GL_c requires c≥1. Step 2 cites def-sc-general-linear-group (R-points are invertible matrices with coordinates x_ij) and writes out the split injection. Step 3 cites sbc-lem-smooth-geometrically-reduced for the single fibre G→Spec k with K=k, finite-type affine charts with finitely generated B_a, and def-pc-reduced-scheme for O(U) reduced. Step 4 cites lem-wf-affine-nullstellensatz-vanishing clause (2) with all three hypotheses checked, and glues the zero sections. Step 5 gets equality from g^{-1} and the homomorphism law. Tests: α_p shows smoothness is needed; V=0, W=0, W=V, A=0, disconnected G and characteristic p all hold. Duplicate scan (stabilizer, schematically dense, k-points dense): lem-wf-stabilizer-density only gives a closed stabilizer and k-point stability; lem-ag-cartier-reduced is characteristic 0 only; neither duplicates the item. tool_uses accepted: both tools are Lean-closed generic inputs (Smooth.geometricallyReduced, eq_zero_of_forall_algHom_apply_eq_zero). review_split 'no such node' errors are a symlink artifact; every cited node was opened. Minor: the adapted basis differs from the statement's GL(V) basis choice only by a constant conjugation automorphism of GL_n, which is legitimate because the statement leaves the basis open. No SGA."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothGroupRationalPointSubspaceTest",
+  "declaration": "AlgebraicGeometry.GeneralLinearGroup.map_subspace_eq_iff_forall_algebra",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothGroupRationalPointSubspaceTest.lean",
+  "statement": "theorem map_subspace_eq_iff_forall_algebra {k : Type u} [Field k] [IsAlgClosed k] (G : Over (Spec (.of k))) [GrpObj G] [IsAffine G.left] [Smooth G.hom] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] {V : Type v} [AddCommGroup V] [Module k V] [FiniteDimensional k V] {m : Type u} [Fintype m] [DecidableEq m] (b : Module.Basis m k V) (ρ : G ⟶ GeneralLinearGroup m k) [IsMonHom ρ] (W : Submodule k V) : (∀ g : AlgebraicGeometry.points G k, W.map (Matrix.toLin b b (homMulEquiv m k k (g ≫ ρ))) = W) ↔ ∀ (A : Type u) [CommRing A] [Algebra k A] (g : AlgebraicGeometry.points G A), (W.baseChange A).map (Matrix.toLin (b.baseChange A) (b.baseChange A) (homMulEquiv m k A (g ≫ ρ))) = W.baseChange A",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cf20799e8",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Read the item node, all 7 stmt_dep records, the module, the report and the upstream GeneralLinearGroup/homMulEquiv/points sources. Every hypothesis and clause matches Milne 4.3–4.5: affine smooth finite-type GrpObj over IsAlgClosed k; ρ is an IsMonHom morphism to upstream GL m k through basis b; (i) quantifies over points G k; (ii) quantifies over all k-algebras A in universe u, acting on W.baseChange A through b.baseChange A, with submodule equalities on both sides. Universe u for m and A is forced by the upstream interfaces and loses nothing; V's universe v is free. Edge cases V=0 (empty m), W=0, W=V, A=0, char p and disconnected G are covered. lean.statement is verbatim; no new definitions; single sorry; docstrings give source and blueprint; no duplicate in Mathlib or Sheaf/WeilConjectures (DenseRestrictionSemisimple only cites the node). Minor: the finite-type instances are redundant but harmless and follow the dependency record. Not compiled because no file changed; the worker reports a clean scompile."
+ }
+}

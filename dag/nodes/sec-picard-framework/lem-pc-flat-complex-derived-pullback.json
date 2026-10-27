@@ -74,7 +74,40 @@
   "def-pc-scheme"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.isIso_derivedPullbackCounit_app",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.Derived.Pullback",
+     "lines": [
+      139,
+      149
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.derivedPullbackObjIsoOfFlat",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.Derived.Pullback",
+     "lines": [
+      151,
+      163
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "split_report": {
@@ -126,5 +159,24 @@
    "AlgebraicGeometry.flatComplexDerivedPullback"
   ],
   "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $g:T\\to S$ be a morphism of schemes and let $E$ be a bounded above\ncomplex of flat $\\mathcal{O}_S$-modules. Then the derived pullback\n$Lg^*E$ of [def-pc-derived-pullback] is represented by the complex\n$g^*E$ obtained by pulling $E$ back term by term: the canonical map\n$Lg^*E\\to g^*E$ is an isomorphism in $D(\\mathcal O_T)$.",
+  "proof": [
+   {
+    "text": "By [def-pc-derived-pullback], $Lg^*$ is the left derived functor of\nthe termwise pullback $g^*$, and $g^*E\\leftarrow Lg^*E$ is its canonical\ncomparison map. A left derived functor is computed on any class of\ncomplexes which is stable under the relevant constructions and on which\n$g^*$ preserves acyclicity. Bounded above complexes of flat\n$\\mathcal O_S$-modules form such a class: every bounded above complex admits\na quasi-isomorphism from one of them, and if $P$ is a bounded above\nacyclic complex of flat modules then $g^*P$ is acyclic. Indeed, inverse\nimage $g^{-1}$ is exact and preserves flatness, a bounded above acyclic\ncomplex of flat modules has flat cycle modules (descending induction in\nthe short exact sequences $0\\to Z^n\\to P^n\\to Z^{n+1}\\to0$), and\n$\\mathcal O_T\\otimes_{g^{-1}\\mathcal O_S}-$ is exact on short exact sequences\nof flat modules (Cohomology of Sheaves, Lemma 20.26.9, Tag\n[06YD](https://stacks.math.columbia.edu/tag/06YD), for the\nK-flatness of such complexes). Hence $Lg^*E\\to g^*E$ is an isomorphism in\n$D(\\mathcal O_T)$ for $E$ bounded above with flat terms, which is the\nclaim.",
+    "uses": [
+     "def-pc-derived-pullback"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

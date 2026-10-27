@@ -38,11 +38,12 @@
  ],
  "proof": [
   {
-   "text": "Work entirely in the target's condensed categories C_T = D_cons(T,Qlb). Write F=Rp_!, U=Lp^*, G=Rp_* and V=Rp^!, and write H_T for the restricted internal Hom. By [sk-def-sfb-dc-restricted-functors] and [def-sfb-dc-tensor-hom-adjunction], U is left adjoint to G and A tensor - is left adjoint to H_T(A,-) in these full subcategories. By [sk-def-sfb-dc-upper-shriek], F is left adjoint to V on the same categories. Thus every object and Hom set in the following argument lies in C_X or C_S; no comparison with the common-stage Qlb category is being assumed.",
+   "text": "Work in $\\mathcal C_T=D_{\\mathrm{cons}}(T,\\Lambda)$ for the target's condensed $\\Lambda$. Set $F=Rp_!$, $U=Lp^*$, $G=Rp_*$, $V=Rp^!$. The restricted adjunctions $U\\dashv G$, $F\\dashv V$ and $A\\otimes-\\dashv H_T(A,-)$ are supplied by [sk-def-sfb-dc-restricted-functors, sk-def-sfb-dc-upper-shriek, def-sfb-dc-tensor-hom-adjunction]. Apply [lem-pd-compactification-projection-inverse] to the chosen compactification of $p$. It gives the target's actual $PF^!_{K,B}$, invertible and natural in $B$; both its proper and open factors have the specified normalization. All Hom objects below lie in these same full subcategories.",
    "uses": [
     "sk-def-sfb-dc-restricted-functors",
+    "sk-def-sfb-dc-upper-shriek",
     "def-sfb-dc-tensor-hom-adjunction",
-    "sk-def-sfb-dc-upper-shriek"
+    "lem-pd-compactification-projection-inverse"
    ],
    "elementary": false,
    "source": {
@@ -51,26 +52,9 @@
    }
   },
   {
-   "text": "Use the target's chosen compactification $p=q\\circ j:X\\xrightarrow j Z\\xrightarrow q S$. By [sk-def-sfb-dc-lower-shriek], $F=Rq_*j_!$; by [sk-def-sfb-dc-restricted-functors], $j_!K,Lq^*B$ are bounded constructible and $U\\cong Lj^*Lq^*$ by the specified composition comparison. The definition of $PF^!$ is the proper projection arrow followed by $Rq_*$ of the inverse open projection and this composition comparison:\n$$Rq_*j_!K\\otimes B\\longrightarrow Rq_*(j_!K\\otimes Lq^*B)\\xrightarrow{Rq_*(q_{j,K,Lq^*B}^{-1})}Rq_*j_!(K\\otimes Lj^*Lq^*B).$$\nHere the module-object proper arrow is adjoint to $(\\varepsilon\\otimes1)\\delta_q$, whereas the open map $q_j$ is adjoint to $\\mu_j(\\eta_K\\otimes1)$. By [lem-pd-module-ringed-topos-derived-comparison], the actual module-object $\\delta_q$, its inverse lax map $\\mu_j$, the derived adjunctions and the tensor/pullback identifications agree with the ringed-topos structures. Thus the proper arrow is exactly the map $\\alpha$ to which clause (3) of [det-thm-sfb-proper-base-change-rational] applies. It is invertible. By [lem-pd-condensed-open-exceptional-projection-formula], the displayed canonical $q_j$, including its use of the actual lax structure, is invertible. Applying $Rq_*$ to its inverse preserves its inverse identities. Composing these two isomorphisms with $Lj^*Lq^*\\cong Lp^*$ proves invertibility and naturality of this specified $PF^!_{K,B}$. All objects and inverse morphisms are in the full bounded-constructible subcategories by the cited restriction statements.",
+   "text": "Take $K=\\Lambda_X$, $L=\\Lambda_S$, $E=G H_X(K,VL)$ and $D=H_S(FK,L)$. Apply [lem-pd-condensed-hom-chain-realization] with $P_B=PF^!_{K,B}$ from Step 1. It gives bijections $b_B(h)=\\Phi h$ for the target's specified exchange $\\Phi:E\\to D$, for every $B\\in\\mathcal C_S$. Surjectivity at $B=D$ gives $r:D\\to E$ with $\\Phi r=1_D$. Since $\\Phi(r\\Phi)=\\Phi=\\Phi1_E$, injectivity at $B=E$ gives $r\\Phi=1_E$. Thus this very $\\Phi$ is invertible.",
    "uses": [
-    "sk-def-sfb-dc-lower-shriek",
-    "sk-def-sfb-dc-restricted-functors",
-    "det-thm-sfb-proper-base-change-rational",
-    "lem-pd-condensed-open-exceptional-projection-formula",
-    "lem-pd-module-ringed-topos-derived-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
-    "place": "Open immersions and Derived version, combined with the specified proper and open comparison maps; canonical-map equality delegated to lem-pd-module-ringed-topos-derived-comparison"
-   }
-  },
-  {
-   "text": "Fix K=Qlb_X and L=Qlb_S, and put E=G H_X(K,VL) and D=H_S(FK,L). For every B in C_S there is a bijection b_B:Hom_S(B,E) → Hom_S(B,D), formed by the following chain in this direction:\nHom_S(B,G H_X(K,VL)) = Hom_X(UB,H_X(K,VL)) = Hom_X(K tensor UB,VL) = Hom_S(F(K tensor UB),L) = Hom_S(FK tensor B,L) = Hom_S(B,H_S(FK,L)).\nThe first and third equalities are the two geometric adjunction bijections; the second and fifth are the tensor-Hom adjunction bijections of [def-sfb-dc-tensor-hom-adjunction]. The fourth precomposes with the isomorphism PF_{K,B} from Step 2. The cited restricted adjunctions justify each change of Hom set. They apply to all B in C_S, including E and D, since their functors and internal Hom have codomains C_T. The chain is natural in B because its constituent adjunction bijections and PF are natural.",
-   "uses": [
-    "sk-def-sfb-dc-restricted-functors",
-    "def-sfb-dc-tensor-hom-adjunction",
-    "sk-def-sfb-dc-upper-shriek"
+    "lem-pd-condensed-hom-chain-realization"
    ],
    "elementary": false,
    "source": {
@@ -79,28 +63,10 @@
    }
   },
   {
-   "text": "The bijection b_B is postcomposition with the specified exchange Phi:E → D, not merely with some isomorphism of these objects. Write epsilon:UG → id and epsilon!:FV → id for the two counits. For h:B → E the chain sends h to the tensor-Hom transpose of\nFK tensor B --PF_{K,B}-→ F(K tensor UB) --F(1_K tensor (epsilon_{H_X(K,VL)} composed with U(h)))-→ F(K tensor H_X(K,VL)) --F(ev)-→ FVL --epsilon!_L-→ L.\nNaturality of PF in B rewrites the first two arrows as (1_{FK} tensor h), followed by PF_{K,E}, followed by F(1_K tensor epsilon_{H_X(K,VL)}). The remaining evaluation and epsilon! arrows are unchanged. This is exactly the pairing used in the target to define Phi, precomposed with 1_{FK} tensor h; naturality of currying therefore gives b_B(h)=Phi composed with h. No duality comparison of coefficient categories is used.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-tensor-hom/sk-thm-sf-tensor-hom.proof.md",
-    "place": "displayed Hom-adjunction chain, reconstructed in the condensed categories without coefficient-category identification"
-   }
-  },
-  {
-   "text": "Since postcomposition with Phi is bijective on every Hom_S(B,-) by Steps 3-4, Phi is invertible. Explicitly, surjectivity for B=D gives r:D → E with Phi composed with r=id_D. Then Phi composed with (r composed with Phi)=Phi=Phi composed with id_E, and injectivity for B=E gives r composed with Phi=id_E. Thus r is a two-sided inverse. This is the elementary representability argument, with the inverse and both identities written out.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-tensor-hom/sk-thm-sf-tensor-hom.proof.md",
-    "place": "displayed Hom-adjunction chain, reconstructed in the condensed categories without coefficient-category identification"
-   }
-  },
-  {
-   "text": "Let T=Qlb_X(d)[2d]. The target's pur_p:VQlb_S ~= T is the bounded-constructible preimage of the smooth purity isomorphism supplied by [nt-target-smooth-purity-qbar]. Its inverse T → VQlb_S is therefore invertible. Applying G preserves its inverse identities, giving an isomorphism GT → G VQlb_S. The target already supplies T as an object of C_X through [nt-target-poincare-tate-bc]. Its current hypothesis that l is invertible on X holds here: the image of l in the field k is nonzero since char(k) differs from l, so its inverse in k pulls back to an inverse in every structure sheaf of a k-scheme. Its conclusion uses precisely the upstream boundedConstructible predicate of the target; no new choice of purity or of normalization is made.",
+   "text": "Put $T=\\Lambda_X(d)[2d]$. Since $\\ell\\ne\\operatorname{char}k$, the image of $\\ell$ has an inverse in $k$, pulling back to every structure sheaf of a $k$-scheme. Thus [nt-target-poincare-tate-bc] with $n=2d$ puts exactly the target's $T$ in $\\mathcal C_X$. The target's $\\mathrm{pur}_p:V\\Lambda_S\\xrightarrow{\\sim}T$ is the fully faithful preimage of the chosen isomorphism of [nt-target-smooth-purity-qbar]. Its inverse is invertible, and applying $G$ preserves its inverse identities.",
    "uses": [
-    "nt-target-smooth-purity-qbar",
-    "nt-target-poincare-tate-bc"
+    "nt-target-poincare-tate-bc",
+    "nt-target-smooth-purity-qbar"
    ],
    "elementary": false,
    "source": {
@@ -109,25 +75,23 @@
    }
   },
   {
-   "text": "For A=VQlb_S, the unit-Hom map u:A → H_X(Qlb_X,A), the transpose of the left unitor Qlb_X tensor A → A, is an isomorphism. Indeed, for any B, adjunction identifies postcomposition Hom(B,A) → Hom(B,H_X(Qlb_X,A)) with h mapping to h composed with the unitor on Qlb_X tensor B, which is a bijection with inverse precomposition by the inverse unitor. The same explicit inverse argument of Step 5 makes u invertible; applying G preserves this. By the target's definition, PD_p is G(pur_p inverse), then G(u), then Phi at K=Qlb_X,L=Qlb_S. All three factors are isomorphisms by Steps 5-6 and the present argument, so their composite PD_p is an isomorphism.",
+   "text": "For $A=V\\Lambda_S$, let $u:A\\to H_X(\\Lambda_X,A)$ transpose the left unitor. By [def-sfb-dc-tensor-hom-adjunction], postcomposition with $u$ on $\\operatorname{Hom}(B,A)$ corresponds to precomposition with the unitor $\\Lambda_X\\otimes B\\to B$. The inverse unitor makes this bijective for every $B$; the explicit inverse argument of Step 2 makes $u$ invertible. Applying $G$ preserves this. By the target's definition, $PD_p=\\Phi\\circ G(u)\\circ G(\\mathrm{pur}_p^{-1})$. These three factors are invertible by Steps 2-3 and this unitor argument, so $PD_p$ is an isomorphism.",
    "uses": [
     "def-sfb-dc-tensor-hom-adjunction"
    ],
    "elementary": true,
    "source": {
     "document": "literature/upstream-master-20261017/WeilConjectures/PoincareDuality/Poincare.lean",
-    "place": "poincareMap and isIso_poincareMap, factors through purity, unit transpose and exchange"
+    "place": "boundedConstructibleSmoothPurityIso and poincareMap"
    }
   }
  ],
  "proof_deps": [
   "def-sfb-dc-tensor-hom-adjunction",
-  "det-thm-sfb-proper-base-change-rational",
-  "lem-pd-condensed-open-exceptional-projection-formula",
-  "lem-pd-module-ringed-topos-derived-comparison",
+  "lem-pd-compactification-projection-inverse",
+  "lem-pd-condensed-hom-chain-realization",
   "nt-target-poincare-tate-bc",
   "nt-target-smooth-purity-qbar",
-  "sk-def-sfb-dc-lower-shriek",
   "sk-def-sfb-dc-restricted-functors",
   "sk-def-sfb-dc-upper-shriek"
  ],
@@ -246,11 +210,11 @@
   "place": "displayed Hom-adjunction chain, reconstructed in the condensed categories without coefficient-category identification"
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "nt-target-poincare-isiso",
   "worker": "stage1",
-  "summary": "Repair of the returned long Step 2: two real statement-only lemmas now carry the canonical condensed open projection formula (including invertibility of the open adjunction unit) and the module-object/ringed-topos derived comparison (including flat/K-flat tensors, actual lax mu, oplax delta, adjunctions and the proper projection mate). Step 2 applies these tools to the chosen compactification and explicitly identifies the map inverted on each leg. All seven original Hom/purity steps and the target statement are retained. Searches and source comparisons are recorded; no forbidden source route.",
-  "blueprint": "Retains the imported ancestry. Realizes the tensor-Hom chain used by sk-thm-sf-verdier-exchange Step 2 and sk-thm-sf-tensor-hom, directly on condensed module objects: chosen-compactification projection formula, five Hom bijections, identification of the canonical exchange, then purity and the unit transpose. The common-stage theorem is a proof-route reference only, never a theorem applied to a different coefficient category.",
+  "summary": "Repair of the human 2026-10-21 re-split return. Two comparable statement-only nodes extract the compactification projection normalization/inverse and the two-adjunction Hom-chain/counit realization. The four-step target assembly retains the explicit Yoneda inverse, exact chosen purity and unit-Hom argument; its statement is unchanged. The report retains every former proof step verbatim and maps all arguments to the two extracted tasks and the assembly.",
+  "blueprint": "Same original route: sk-thm-sf-verdier-exchange via the tensor-Hom Hom-adjunction chain, reconstructed on the exact condensed bounded-constructible categories. Former Step 2 is the first new task; former Steps 3-4 are the second. Former Step 1 types both, Step 5 remains explicit in assembly Step 2, and Steps 6-7 remain in assembly Steps 3-4.",
   "tool_uses": [
    {
     "node": "sk-def-sfb-dc-restricted-functors",
@@ -263,14 +227,6 @@
    {
     "node": "sk-def-sfb-dc-upper-shriek",
     "why": "The condensed exceptional adjunction, not a duality theorem."
-   },
-   {
-    "node": "sk-def-sfb-dc-lower-shriek",
-    "why": "The chosen-compactification construction of the target lower shriek."
-   },
-   {
-    "node": "det-thm-sfb-proper-base-change-rational",
-    "why": "Clause (3) inverts the proper projection map on the proper leg; its precise map is identified by the new comparison lemma."
    },
    {
     "node": "nt-target-smooth-purity-qbar",
@@ -303,12 +259,41 @@
   "def-sfb-module-upper-star"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q94-b3205724d",
-  "group": "Q94",
+  "reviewer": "NT-cc-Q59-fd90fac24",
+  "group": "Q59",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-b3205724d (reviewer sub-agent of L); spot-checked: I read the target and its seven steps, both new statement-only nodes and every cited statement against the exact master source. That source is upstream-master-20261017 Poincare.lean (variable block, pur_p, poincareMap, isIso_poincareMap) and the upstream tree read-only: ProjectionFormula.lean l.91-160, OpenImmersionProjection.lean l.70-90 and VerdierExchange.lean l.136-214. The coefficient ring is exactly padicAlgClRingObj l. The smoothness instance is required because smoothPurityIso (Defs.lean l.80-93) is declared under it. The order of the three factors of PD_p and the exchange pairing match upstream. Nothing is weakened. Step 2 inverts the actual PF^!: the proper projection map (adjoint to (eps tensor 1) delta), then Rq_* of the inverse of q_j, then the composition iso. det-thm-sfb-proper-base-change-rational clause (3) is about the ringed-topos alpha: its stmt_deps contain the ringed projection-mate lemma and its step 9 uses that alpha, and none of its dependencies defines a module-object projection map. So the new comparison lemma is a genuine input. The new open lemma's q_j = eps o e(mu) o e(eta tensor 1) is exactly upstream openImmersionProjectionComparison. It is true: j^*j_!=id, mu is invertible, and the essential-image argument of the main-20261015 det-lem-int-tensor-projection proof (open-sheaf and derived paragraphs) applies. I tested it with j=id, U empty and K=0. It is not a duplicate. det-lem-int-tensor-projection gives only an unspecified iso. lem-sfb-open-projection-formula is underived. lemma-weil-pbc-projection-formula-open-piece needs strict-perfect F. pur713-def-open-projection-module is a definition only. The slopmaster2 OpenImmersionLowerShriekProjection is A-valued, not module objects. The comparison lemma is true: both relative tensors are the sheafified sectionwise tensor, pullback is literally R_X tensor_{f^-1R_Y} f^-1M, and an exact monoidal equivalence preserves and reflects (K-)flatness. The directions of delta, mu and alpha agree with the ringed lemmas. I tested it on a one-point site, f=id and zero objects. Neither new node restates a clause of PD. I recomputed Steps 3-5 (Hom chain orientation, PF naturality giving Phi o h, Yoneda inverse), Step 6 (l invertible since l != char k; tate-bc at n=2d) and Step 7 (curry of the left unitor is an iso). proof_deps equals the union of the uses; every id exists and none is merged; there is no cycle and no SGA source. The new-node forms are fine. I accept the 7 declared tool uses. Minor and unchanged: Step 2's mention of mu_j from the comparison lemma is superfluous; the new nodes lack the tool-maintained lean_audit/merged_into fields; their from is (null,[item]) as the ancestor tool computes. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-fd90fac24 (reviewer sub-agent of L); spot-checked: I read the re-split in full and changed no files. The item statement is byte-identical to live. Old step 2 (compactification PF^!) became lem-pd-compactification-projection-inverse. Its P^c = Rq_*j_!(1⊗a)∘Rq_*(Q^{-1})∘α matches the factor order of the current project ProjectionFormula.lean exceptionalProjectionMorphismOfCompactification, which I checked line by line. The node is true: α via lem-pd-condensed-proper-projection-formula (covers Q̄_ℓ), Q via lem-pd-condensed-open-exceptional-projection-formula, normalizations via lem-pd-module-ringed-topos-derived-comparison. Its inverse and naturality also check. Old steps 3-4 (Hom chain) became lem-pd-condensed-hom-chain-realization. I recomputed b_B(h)=curry(ε^!∘F(ev)∘F(1⊗ε_W Uh)∘P_B)=Φ∘h from P's naturality; it matches Abstract.lean exchangePairing/curry. It is not a duplicate of lem-pod-hom-chain-counit-formula or live NH lem-pod-structure-hom-chain-realization: those are on D^b_ctf four-stage/Poincaré conventions, with no node relating them to condensed module objects. The closed-projection generic nodes give the other exchange. Old steps 5-7 stay explicit in assembly steps 2-4: the Yoneda inverse r is written out, ℓ is invertible from char k ≠ ℓ for tate-bc at n=2d, pur_p is the preimage of the chosen purity iso, and the unit-Hom map is iso via h↦hλ_B. The assembly is 2114 characters. The two new nodes are comparable, statement-only, self-contained, single-escaped and logged-searched, and neither restates the item. proof_deps = union of uses. No cycle, no SGA. I accept the 5 declared tool uses. Maintainer note: the open-projection, rational-PBC and proper-projection nodes become proof inputs of the unsplit node 1 and are uncited until it is split. Prefer lem-pd-condensed-proper-projection-formula for α there."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "WeilConjectures.PoincareDuality.Poincare",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.isIso_poincareMap",
+  "statement": "theorem isIso_poincareMap : IsIso (poincareMap ℓ p d)",
+  "branch": "sheaf-dag",
+  "by": "NB",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Exact existing upstream theorem, confirmed by scompile.py --source on the live server. poincareMap is the specified Verdier composite formed from boundedConstructibleSmoothPurityIso, the transpose of the left unitor, and boundedConstructibleExceptionalProjection, on the actual condensed padicAlgClRingObj bounded-constructible internal-module categories. The field, prime, characteristic, finite-type and separation parameters are inherited section binders. The source explicitly omits SmoothOfRelativeDimension from this theorem, exactly as the node explains; no replacement purity choice or coefficient-category identification is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a2cb9248a",
+  "group": "NB",
+  "result": "pass",
+  "note": "Binding to the existing upstream AlgebraicGeometry.ProEtale.CondensedRing.isIso_poincareMap (live lean/WeilConjectures/PoincareDuality/Poincare.lean, imported by WeilConjectures.lean); only the node's lean field changes (diffed against side-live), and the statement string is the exact signature. poincareMap = Verdier.poincareMap(UpperStarLowerStar adj, UpperShriek adj, ExceptionalProjection, boundedConstructibleSmoothPurityIso = (asIso smoothPurityMap).symm). Abstract.lean poincareMap = G.map(pur.inv ≫ curry λ) ≫ curry(pf ≫ P(K◁ε) ≫ P(ev) ≫ ε'), which matches the node's factors in order. Hypotheses match (ℓ prime, field k with prime char ≠ ℓ, X and S separated and of finite type over Spec k, Qlb Dᵇc categories); no extra assumptions. The upstream smoothness omission is recorded by the node itself (the defs drop the unused instance; smoothTrace is sorry), advisory only. Report sections present; no new module, so no compile. Advisory: the landed nt-target-poincare-tate-bc lean record has an older signature (now SmoothPurity/Defs.lean:94); refresh it separately."
+ }
 }

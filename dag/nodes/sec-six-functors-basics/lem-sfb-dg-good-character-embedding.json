@@ -1,0 +1,379 @@
+{
+ "id": "lem-sfb-dg-good-character-embedding",
+ "kind": "statement",
+ "title": "DG embeddings preserving differential cokernels with two dual-free layers",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $A=\\bigoplus_{j\\in\\mathbf Z}A^j$ be an associative unital differential graded algebra over $\\mathbf Z$: $d_A$ has degree $1$, $d_A^2=0$, and $d_A(ab)=d_A(a)b+(-1)^j a\\,d_A(b)$ for $a\\in A^j$. A right DG $A$-module $M$ is a graded right module with a degree-$1$ differential satisfying $d_M^2=0$ and $d_M(ma)=d_M(m)a+(-1)^j m\\,d_A(a)$ for $m\\in M^j$. Use shifts $M[k]^n=M^{n+k}$ with differential $(-1)^k d_M$ and unchanged right action. Write $(A^\\vee)^n=\\operatorname{Hom}_{\\mathbf Z}(A^{-n},\\mathbf Q/\\mathbf Z)$, with $(d\\lambda)(a)=(-1)^{n+1}\\lambda(d_Aa)$ for $\\lambda\\in(A^\\vee)^n$, and right action $(\\lambda a)(b)=\\lambda(ab)$. Products of graded modules are taken degree by degree. For every right DG $A$-module $M$ there are a DG map $u:M\\to E$ and a short exact sequence of DG modules $0\\to E^{\\prime}\\to E\\to E^{\\prime\\prime}\\to0$ such that $u$ is injective in each degree, the induced map $M^n/d_M(M^{n-1})\\to E^n/d_E(E^{n-1})$ is injective for every integer $n$, and $E^{\\prime},E^{\\prime\\prime}$ are each isomorphic as DG modules to a product of shifts of $A^\\vee$. The displayed short exact sequence splits as a sequence of graded right $A$-modules, without requiring the splitting to commute with differentials. No boundedness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09KT, lemma-good-sub; the graded splitting follows from the graded injectivity of products of shifts of the character dual in section-modules-noncommutative-graded and Tag 09K2, lemma-source-graded-injective."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sfb-dg-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Put $D=A^\\vee$ and, for $k\\in\\mathbf Z$, $V_k=D[-k]$. For each $k$ define a right DG module $J_k$ by $J_k^p=V_k^p\\oplus V_k^{p+1}$, componentwise action, and $d_J(v,w)=(d_Vv+w,-d_Vw)$. Squaring gives $(d_V^2v+d_Vw-d_Vw,d_V^2w)=0$. For homogeneous $a$ and $(v,w)\\in J_k^p$, the Leibniz rules for $v\\in V_k^p$ and $w\\in V_k^{p+1}$ give $d_J((v,w)a)=d_J(v,w)a+(-1)^p(v,w)d_Aa$; the second component uses $-(-1)^{p+1}=(-1)^p$. Thus $0\\to V_k\\xrightarrow{v\\mapsto(v,0)}J_k\\xrightarrow{(v,w)\\mapsto w}V_k[1]\\to0$ is DG exact. The section $w\\mapsto(0,w)$ is graded right $A$-linear. Its two layers are $D[-k]$ and $D[1-k]$. This realizes the two-layer disk construction in the first paragraph of the source proof with its graded splitting explicit.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KT, lemma-good-sub, first proof paragraph: the duals of Q_k and their two character-dual layers; explicit matrix form of the same disk."
+   }
+  },
+  {
+   "text": "For every $\\alpha=(k,\\lambda)$ with $\\lambda:M^k\\to\\mathbf Q/\\mathbf Z$ additive, define a graded map $g_\\alpha:M\\to V_k$ by $g_\\alpha^p(m)(a)=\\lambda(ma)$ for $a\\in A^{k-p}$. Associativity gives $g_\\alpha(ma)(b)=\\lambda(mab)=(g_\\alpha(m)a)(b)$, so it is graded right $A$-linear. Put $t_\\alpha=g_\\alpha d_M-d_Vg_\\alpha$, of degree $1$. Expanding the two Leibniz rules gives $t_\\alpha(ma)=t_\\alpha(m)a$: their $(-1)^p g_\\alpha(m)d_Aa$ terms cancel. Therefore $f_\\alpha(m)=(g_\\alpha(m),t_\\alpha(m))$ is a graded map $M\\to J_k$. It is a DG map because $d_Jf_\\alpha(m)=(g_\\alpha d_Mm,-d_Vg_\\alpha d_Mm)=f_\\alpha d_M(m)$, using both squared differentials zero. In degree $k$, evaluation of its first component at $1\\in A^0$ is $\\lambda(m)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KT, lemma-good-sub, first proof paragraph: the map into the dual of the free sum of Q_k; coordinate expansion of each dual-disk map."
+   }
+  },
+  {
+   "text": "Take the set $S=\\coprod_{k\\in\\mathbf Z}\\operatorname{Hom}_{\\mathbf Z}(M^k,\\mathbf Q/\\mathbf Z)$ and put $E_0=\\prod_{\\alpha=(k,\\lambda)\\in S}J_k$, degree by degree, with componentwise differential and action. The maps $f_\\alpha$ define a DG map $f_0:M\\to E_0$. If $m\\in M^p$ is nonzero, [lem-sfb-abelian-character-separates-points] applied to the additive group $M^p$ gives $\\lambda(m)\\ne0$. In the $(p,\\lambda)$ coordinate the first component of $f_0(m)$ evaluates to $\\lambda(m)$ at $1$, so $f_0(m)\\ne0$. Additivity then proves degreewise injectivity. The coordinatewise sequence $0\\to\\prod_{S}V_k\\to E_0\\to\\prod_{S}V_k[1]\\to0$ is DG exact, with graded section $(w_\\alpha)_\\alpha\\mapsto((0,w_\\alpha))_\\alpha$.",
+   "uses": [
+    "lem-sfb-abelian-character-separates-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KT, lemma-good-sub, first proof paragraph: injectivity into a product of dual disks and property (3); character separation is Tag 01DB, lemma-ev-injective, proof."
+   }
+  },
+  {
+   "text": "Write $C_k=M^k/d_M(M^{k-1})$ and let $T$ be the set of all pairs $\\beta=(k,\\chi)$ with $\\chi:C_k\\to\\mathbf Q/\\mathbf Z$ additive. Let $q_k:M^k\\to C_k$ be the quotient and put $\\lambda=\\chi q_k$. The formula of step 2 now gives a DG map $h_\\beta=g_{(k,\\lambda)}:M\\to V_k$ without a disk. Indeed, for $m\\in M^p$ and $a\\in A^{k-p-1}$, $\\lambda(d_M(ma))=0$ implies $\\lambda((d_Mm)a)=(-1)^{p+1}\\lambda(m d_Aa)$. On the other hand the shift and character-dual differential give $(d_Vg(m))(a)=(-1)^k(-1)^{p-k+1}\\lambda(m d_Aa)=(-1)^{p+1}\\lambda(m d_Aa)$. Thus $g(d_Mm)=d_Vg(m)$. Also $d_A1=0$, since the Leibniz rule at $1\\cdot1$ says $d_A1=2d_A1$. Every boundary in $V_k^k=D^0$ evaluates to zero at $1$: for $v\\in V_k^{k-1}=D^{-1}$, $(d_Vv)(1)=(-1)^k v(d_A1)=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KT, lemma-good-sub, last proof paragraph, and Tag 09K4, lemma-hom-into-shift-dual-free: the closed character gives a DG map to A^vee[-k]; its formula and boundary detection are verified here rather than used as an uncited lemma."
+   }
+  },
+  {
+   "text": "Put $W=\\prod_{\\beta=(k,\\chi)\\in T}V_k$, $E=E_0\\times W$, and $u=(f_0,(h_\\beta)_\\beta)$. These are DG modules and a DG map by the componentwise formulas. Let $E^{\\prime}=(\\prod_{\\alpha=(k,\\lambda)\\in S}V_k)\\times W$ and $E^{\\prime\\prime}=\\prod_{\\alpha=(k,\\lambda)\\in S}V_k[1]$. Include $E^{\\prime}$ in $E$ using $(v_\\alpha)\\mapsto((v_\\alpha,0))$ in its first factor and the identity on $W$; project $E$ to $E^{\\prime\\prime}$ by $((v_\\alpha,w_\\alpha),z)\\mapsto(w_\\alpha)$. The kernel is exactly $E^{\\prime}$ and the graded right $A$-linear section is $(w_\\alpha)\\mapsto(((0,w_\\alpha))_\\alpha,0)$. This proves DG exactness and graded splitting without a theorem about exactness of arbitrary products. The first layer is a product of shifts of $D$ indexed by $S\\amalg T$, and the second by $S$. Since $f_0$ is degreewise injective, so is $u$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KT, lemma-good-sub, last sentence: add a product of character-dual shifts while retaining property (3); explicit kernel, graded section and product reindexing."
+   }
+  },
+  {
+   "text": "The DG map $u$ induces maps $C_k\\to E^k/d_E(E^{k-1})$. Suppose $\\overline m\\in C_k$ is nonzero. By [lem-sfb-abelian-character-separates-points] there is an additive $\\chi:C_k\\to\\mathbf Q/\\mathbf Z$ with $\\chi(\\overline m)\\ne0$. In the $\\beta=(k,\\chi)$ coordinate of $W$, the image of a representative $m$ is $h_\\beta(m)$, whose evaluation at $1$ equals $\\chi(\\overline m)$. It cannot be a boundary in $V_k$, by step 4. If $u(m)$ were a boundary in $E$, its projection to this DG factor would be a boundary, a contradiction. Hence the induced map has zero kernel, and by additivity is injective for every $k$. Together with step 5 this is every required clause, with no boundedness or finiteness assumption.",
+   "uses": [
+    "lem-sfb-abelian-character-separates-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KT, lemma-good-sub, last proof paragraph: detection of every nonzero differential-cokernel class by the added product; Tag 01DB for the required character."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-abelian-character-separates-points"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09KT, lemma-good-sub. Agent-written coordinate expansion of the source dual-disk construction and the final character detection argument; all DG signs and the graded sections are explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "good.sub|dual.free|cofree|graded.injective",
+   "results": {
+    "t": "2026-10-24T01:24:12Z",
+    "tool": "grep",
+    "query": "good.sub|dual.free|cofree|graded.injective",
+    "sub": "Algebra/Homology",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: searches return ordinary complex embeddings and character modules. CM5b concerns bounded-below complexes in an abelian category (Factorizations/CM5b.lean:35-92); CharacterModule concerns ungraded modules over a commutative ring. Neither provides the DG-linear good embedding or its two dual-free layers."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Differential graded module embeds into product of shifts of character dual algebra with injective map on cokernels",
+   "results": {
+    "t": "2026-10-24T01:24:12Z",
+    "tool": "leansearch",
+    "query": "Differential graded module embeds into product of shifts of character dual algebra with injective map on cokernels",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "TensorAlgebra.GradedAlgebra.ι",
+     "ExteriorAlgebra.GradedAlgebra.ι",
+     "ExteriorAlgebra.GradedAlgebra.liftι_eq",
+     "CliffordAlgebra.GradedAlgebra.ι",
+     "HomogeneousSubmodule.toSubmodule_injective",
+     "ExteriorAlgebra.GradedAlgebra.ι_apply",
+     "CochainComplex.degreewiseEpiWithInjectiveKernel",
+     "CharacterModule.surjective_of_dual_injective"
+    ],
+    "digest": "c35f8932cfdcfeb2"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: searches return ordinary complex embeddings and character modules. CM5b concerns bounded-below complexes in an abelian category (Factorizations/CM5b.lean:35-92); CharacterModule concerns ungraded modules over a commutative ring. Neither provides the DG-linear good embedding or its two dual-free layers."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Injective\", \"cokernel\"",
+   "results": {
+    "t": "2026-10-24T01:24:12Z",
+    "tool": "loogle",
+    "query": "\"Injective\", \"cokernel\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: searches return ordinary complex embeddings and character modules. CM5b concerns bounded-below complexes in an abelian category (Factorizations/CM5b.lean:35-92); CharacterModule concerns ungraded modules over a commutative ring. Neither provides the DG-linear good embedding or its two dual-free layers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Good embedding of differential graded module into a graded split extension of products of dual free modules inducing injection on differential cokernels",
+   "results": {
+    "t": "2026-10-24T01:24:13Z",
+    "tool": "leanfinder",
+    "query": "Good embedding of differential graded module into a graded split extension of products of dual free modules inducing injection on differential cokernels",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ComplexShape.Embedding.liftExtend.f",
+     "ComplexShape.Embedding.liftExtend",
+     "HomologicalComplex.extend.rightHomologyData.d_comp_desc_eq_zero_iff",
+     "ComplexShape.Embedding.liftExtend.f_eq",
+     "HomologicalComplex.extend.leftHomologyData.lift_d_comp_eq_zero_iff",
+     "ComplexShape.Embedding.HasLift",
+     "HomologicalComplex.extendSingleIso",
+     "ComplexShape.Embedding.homRestrict.f"
+    ],
+    "digest": "0c02555a2c52c8a1"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: searches return ordinary complex embeddings and character modules. CM5b concerns bounded-below complexes in an abelian category (Factorizations/CM5b.lean:35-92); CharacterModule concerns ungraded modules over a commutative ring. Neither provides the DG-linear good embedding or its two dual-free layers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every DG module has a monomorphism preserving differential cokernels into a two step extension of products of shifted character duals of its DG ring",
+   "results": {
+    "t": "2026-10-24T01:26:25Z",
+    "tool": "leanfinder",
+    "query": "Every DG module has a monomorphism preserving differential cokernels into a two step extension of products of shifted character duals of its DG ring",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CochainComplex.cm5b.instMonoIntI",
+     "CochainComplex.cm5b",
+     "CochainComplex.cm5b.instMonoFIntI",
+     "DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE",
+     "CochainComplex.isKInjective_of_injective_aux",
+     "DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE",
+     "CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p",
+     "HomologicalComplex.HomologySequence.instMonoMap'ComposableArrows₃OfNatNat"
+    ],
+    "digest": "613e7d64d5c3db47"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: searches return ordinary complex embeddings and character modules. CM5b concerns bounded-below complexes in an abelian category (Factorizations/CM5b.lean:35-92); CharacterModule concerns ungraded modules over a commutative ring. Neither provides the DG-linear good embedding or its two dual-free layers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Differential graded module embeds in two character dual free layers and induces injective maps modulo boundaries",
+   "results": {
+    "t": "2026-10-24T01:57:28Z",
+    "tool": "leanfinder",
+    "query": "Differential graded module embeds in two character dual free layers and induces injective maps modulo boundaries",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.NobelingProof.succ_exact",
+     "CharacterModule.dual_injective_of_surjective",
+     "Algebra.Extension.h1Cotangentι_injective",
+     "Module.Flat.iff_characterModule_injective",
+     "Profinite.NobelingProof.succ_mono",
+     "groupCohomology.instMonoModuleCatFShortComplexH0",
+     "CochainComplex.cm5b.instInjectiveXIntI",
+     "Module.map_eval_injective"
+    ],
+    "digest": "590078ecbab8eb32"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the complete item: CharacterModule concerns ordinary additive characters, used only through the separate Mathlib leaf. EnoughInjectives and CM5b concern ordinary modules or complexes, not DG-A-linear embeddings with these two specified layers and injective differential cokernels. The DG-specific grep has no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "good.sub|dual.free|graded.injective|DifferentialGraded",
+   "results": {
+    "t": "2026-10-24T01:57:49Z",
+    "tool": "grep",
+    "query": "good.sub|dual.free|graded.injective|DifferentialGraded",
+    "sub": "Algebra/Homology",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the complete item: CharacterModule concerns ordinary additive characters, used only through the separate Mathlib leaf. EnoughInjectives and CM5b concern ordinary modules or complexes, not DG-A-linear embeddings with these two specified layers and injective differential cokernels. The DG-specific grep has no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A differential graded module admits an embedding injective on differential cokernels into an extension of products of shifted character modules",
+   "results": {
+    "t": "2026-10-24T01:57:49Z",
+    "tool": "leansearch",
+    "query": "A differential graded module admits an embedding injective on differential cokernels into an extension of products of shifted character modules",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AddCommGrpCat.enoughInjectives",
+     "ModuleCat.enoughInjectives",
+     "instEnoughInjectivesModuleCatOfSmall",
+     "instEnoughInjectivesModuleCatInt",
+     "CochainComplex.cm5b.I",
+     "Module.Injective.recOn",
+     "HomologicalComplex.extend.leftHomologyData.cokernelCofork",
+     "CategoryTheory.InjectiveResolution.descFSucc"
+    ],
+    "digest": "21f7f45b31f76dd3"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the complete item: CharacterModule concerns ordinary additive characters, used only through the separate Mathlib leaf. EnoughInjectives and CM5b concern ordinary modules or complexes, not DG-A-linear embeddings with these two specified layers and injective differential cokernels. The DG-specific grep has no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CharacterModule\"",
+   "results": {
+    "t": "2026-10-24T01:57:50Z",
+    "tool": "loogle",
+    "query": "\"CharacterModule\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CharacterModule.int",
+     "CharacterModule.int.divByNat",
+     "CharacterModule",
+     "CharacterModule.instAddCommGroup",
+     "CharacterModule.instFunLikeAddCircleRatOfNat",
+     "CharacterModule.instModule",
+     "CharacterModule.ext",
+     "CharacterModule.ext_iff"
+    ],
+    "digest": "738e4772aa6e91f4"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the complete item: CharacterModule concerns ordinary additive characters, used only through the separate Mathlib leaf. EnoughInjectives and CM5b concern ordinary modules or complexes, not DG-A-linear embeddings with these two specified layers and injective differential cokernels. The DG-specific grep has no hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dg-injective-resolution-localization",
+  "date": "2026-10-24",
+  "group": "Q21"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 0CRM, lemma-countable, implication (2) to (1); derived.tex Tags 090Z, definition-derived-colimit and 0CRH, remark-map-from-derived-colimit, for the legs. Supporting input for 0CRM (2) to (1): the reduction to the countable subalgebra A' by Tag 09S6, lemma-qis-equivalence. Supporting input for Tag 09S6: Tag 09LT, lemma-tensor-hom-adjoint; its derived tensor and Hom constructions and the canonical tensor/Hom shift comparisons in the preceding sections. Within Tag 09LT: Tags 09KU, lemma-right-resolution; 09KS, lemma-property-I-K-injective, applied also to all shifts; 09KY, lemma-hom-derived, part (2) and its proof, which only uses homotopical injectivity. Supporting input: Tag 09KT, lemma-good-sub; the graded splitting follows from the graded injectivity of products of shifts of the character dual in section-modules-noncommutative-graded and Tag 09K2, lemma-source-graded-injective.",
+   "via": [
+    "lem-sfb-dg-injective-resolution-localization",
+    "lem-sfb-dg-bimodule-derived-adjunction",
+    "lem-sfb-dg-qis-restriction-equivalence",
+    "lem-sfb-dg-countable-compact-telescope",
+    "lem-sfb-space-countable-telescope",
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dg-good-character-embedding",
+  "worker": "stage1",
+  "summary": "Checked Tag 09KT and expanded the dual two-generator disks using J_k = A^vee[-k] plus A^vee[1-k] with a matrix differential. The explicit formulas prove graded splitting and all DG compatibilities. Added one exact Mathlib leaf for character separation and used it for the degreewise injection and the cokernel detection. The statement is unchanged.",
+  "blueprint": "Current latest blueprint, sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, (3): proper/open direct-image stability. This item is the inherited DG-resolution prerequisite ending in Tag 09KT as recorded in blueprint.from.place; steps 1-3 realize the first paragraph of 09KT and steps 4-6 its last paragraph. Whole-blueprint searches for differential graded, character dual, cogenerator, 09KT and 01DB found no equivalent imported node. ancestor prints None for this inherited chain, retained without inventing an ancestor."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-0a0e705f1",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-0a0e705f1 (reviewer sub-agent of L); spot-checked: I read the whole split, made no changes, and wrote the review to review.md. Source check: Stacks dga.tex Tag 09KT lemma-good-sub, definition-shift, 09K2 and lemma-hom-into-shift-dual-free, plus more-algebra.tex Tag 01DB lemma-ev-injective. The item statement is identical to live and side-live, where the item is still unsplit with no proof; it matches 09KT clauses (1)-(3), with 'admissible' written out as split in graded modules, and nothing is weakened. I rechecked every sign. In step 1 the disk J_k=V_k plus V_k^{+1} has square-zero differential, satisfies the Leibniz rule (second component -(-1)^{p+1}=(-1)^p), and the inclusion and the projection to V[1] (differential -d_V) commute with the differentials; the section is only claimed to be graded A-linear. In step 2, t=g d_M-d_V g is A-linear because the (-1)^p g(m)d_A a terms cancel, and d_J f=f d_M; evaluation at 1 recovers lambda. In step 4 the two signs agree: (-1)^k(-1)^{p-k+1}=(-1)^{p+1}. Also d_A1=0, so boundaries in D^0 vanish at 1, and no cocycle hypothesis is needed. Steps 3 and 6 use the new leaf only for its statement, applied to M^p and to C_k. Step 5 builds the kernel and the graded section coordinate by coordinate, with E' indexed by S plus T and E'' by S. The report's source error is correct: under M[k]^n=M^{n+k} the target must be A^vee[-k] (example A=Z, M=Z[-1]); the item, being an existence statement, is unaffected. The new node lem-sfb-abelian-character-separates-points is a statement-only, self-contained, exact Mathlib leaf: CharacterModule.exists_character_apply_ne_zero_of_ne_zero at lines 220-223, with CharacterModule defined at line 46 as maps to AddCircle 1, i.e. Q/Z. I tested it on Z/n, Z, Q and the zero group. It has no duplicate in the snapshot or live DAG: the lem-per-divisible-* nodes are extension statements and the torus nodes are about algebraic characters. The leaf is from Mathlib, so the route is unchanged; there are no tool_uses and no SGA citation. Minor: the report names citations.json and searches.jsonl, which are not in the commit."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DgGoodCharacterEmbedding",
+  "declaration": "CategoryTheory.DgAlgebra.dg_good_character_embedding",
+  "statement": "theorem dg_good_character_embedding (A : Algebra.{u}) : ∀ (M : RightModule A), ∃ (E E' E'' : RightModule A) (u : M ⟶ E), Nonempty (GradedSplitShortExact A E' E E'') ∧ (∀ n : ℤ, Function.Injective (((underlying A).map u).f n)) ∧ DGMapInducesCokernelInjection A u ∧ (∃ P' P'' : CharacterDualShiftProduct A, Nonempty (E' ≅ P'.module) ∧ Nonempty (E'' ≅ P''.module))",
+  "by": "Q50",
+  "date": "2026-10-24",
+  "file": "lean/Sheaf/CategoryTheory/DgGoodCharacterEmbedding.lean",
+  "declarations": [
+   "CategoryTheory.DgAlgebra.GradedSplitShortExact",
+   "CategoryTheory.DgAlgebra.CharacterDualShiftProduct",
+   "CategoryTheory.DgAlgebra.differentialBoundarySubgroup",
+   "CategoryTheory.DgAlgebra.DifferentialCokernel",
+   "CategoryTheory.DgAlgebra.DGMapInducesCokernelInjection",
+   "CategoryTheory.DgAlgebra.dg_good_character_embedding"
+  ],
+  "branch": "newtargets-dag",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f1db11088",
+  "group": "Q50",
+  "result": "pass",
+  "note": "Checked against Stacks 09KT lemma-good-sub: all three conclusion clauses match, the cokernel map is pinned by its equation and injective, and the section is additive and right-A-linear with no differential condition. Dual shift degree, sign (-1)^(n+1) and action (λa)(b)=λ(ab) verified, including the regular-module multiplication order via MonObj.mul.mop; identical to the landed CompleteDualFreeFiltration. Empty index, zero module, all degrees and universe u covered. No name clashes in side-live or other runs. stmt_dep def-sfb-dg-derived-category is landed and its record covers Algebra/RightModule/underlying/act/regular. lean.statement verbatim; node statement equals live. Docstrings carry source and blueprint tag; proof is sorry only; report has both sections. No changes, no compile. Advisory: the filtration could factor through CharacterDualShiftProduct."
+ }
+}

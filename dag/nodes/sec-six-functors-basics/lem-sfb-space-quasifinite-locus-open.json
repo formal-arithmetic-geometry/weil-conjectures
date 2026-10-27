@@ -1,0 +1,294 @@
+{
+ "id": "lem-sfb-space-quasifinite-locus-open",
+ "kind": "statement",
+ "title": "The quasi-finite locus of a locally finite type algebraic space map",
+ "statement": "Algebraic spaces use [def-trf-algebraic-space], schemes use [def-pc-scheme], and universes use [def-weil-size-convention]. Their point spaces have the atlas topology [def-a1-space-point-topology]; fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Locally of finite type is tested on etale scheme charts [def-weil-finite-type-morphism]. For a map $h:E\\to T$ to a scheme, quasi-finite at $x\\in|E|$ means that for every representable etale scheme chart $U\\to E$ and every $u\\in U$ above $x$, the scheme map $U\\to T$ is quasi-finite at $u$ [pqf-def-quasifinite]. Let $S$ be a scheme, $E$ an algebraic space over $S$, and $h:E\\to S$ locally of finite type. The set $Q_h=\\{x\\in|E|:h\\text{ is quasi-finite at }x\\}$ is open in $|E|$, and is the point set of an open subspace (its inclusion becomes an open immersion on every scheme base change [def-weil-open-immersion]). For every scheme morphism $S^{\\prime}\\to S$, its inverse image in $E\\times_SS^{\\prime}$ is exactly the quasi-finite locus of $E\\times_SS^{\\prime}\\to S^{\\prime}$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 04NW (lemma-locally-finite-type-quasi-finite-part)."
+ },
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-a1-space-point-topology",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-finite-type-morphism",
+  "pqf-def-quasifinite",
+  "def-weil-open-immersion",
+  "def-a1-space-open-subspace",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "Choose a representable surjective etale atlas $p:U\\to E$ using [def-trf-algebraic-space]. Put $f=hp$. It is locally of finite type by the chartwise hypothesis. By [lem-sc-quasi-finite-points-open], its quasi-finite locus $V\\subseteq U$ is open and $V\\to S$ is locally quasi-finite. Set $O=p(V)$. The point map of $p$ is open by [lem-a1-space-point-open-calculus], so $O$ is open. We will prove $O=Q_h$, including the identity $p^{-1}(Q_h)=V$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sc-quasi-finite-points-open",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04NW (lemma-locally-finite-type-quasi-finite-part), with the scheme-chart reduction expanded using Morphisms 01TI, 01TM and Descent 03X4."
+   }
+  },
+  {
+   "text": "Let $a:A\\to E$ be any representable etale scheme chart and set $A_O=a^{-1}(O)$, an open subscheme by continuity. Form $W=V\\times_E A$. It is a scheme by [lem-trf-space-fibre-products-etale-covers]: $V\\to E$ is representable etale, since each scheme test is the open restriction of the corresponding test of $U\\to E$, hence etale by [lem-a1-etale-open-restriction]. Both projections $W\\to V$ and $W\\to A$ are etale. The image formula of [lem-a1-space-point-open-calculus] says that the second projection has image $A_O$. Its factorization $W\\to A_O$ is surjective etale, using [lem-a1-etale-open-restriction]. By [lem-a1-scheme-lqf-etale-source-locality], $W\\to S$ is locally quasi-finite, as its factor $V\\to S$ is; the converse of that same lemma for $W\\to A_O$ then gives local quasi-finiteness of $A_O\\to S$. Its affine witnesses are affine opens also in $A$, so [pqf-def-quasifinite] makes $A\\to S$ quasi-finite at every point over $O$. Since $a$ was arbitrary, $O\\subseteq Q_h$. Conversely, for $x\\in Q_h$ every lift in the atlas $U$ is in $V$ by the definition of $Q_h$; there is a lift by surjectivity on points. Hence $Q_h\\subseteq O$, and the same two implications give $p^{-1}(Q_h)=V$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-a1-etale-open-restriction",
+    "lem-a1-space-point-open-calculus",
+    "lem-a1-scheme-lqf-etale-source-locality",
+    "pqf-def-quasifinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04NW (lemma-locally-finite-type-quasi-finite-part), with the scheme-chart reduction expanded using Morphisms 01TI, 01TM and Descent 03X4."
+   }
+  },
+  {
+   "text": "Apply [lem-a1-space-invariant-open-quotient] to $O=Q_h$ and the atlas $U\\to E$. It constructs an algebraic space $J$ with point image $Q_h$ and inclusion representable by open immersions. This proves precisely the asserted open-subspace clause, with no separation or quasi-compactness assumption.",
+   "uses": [
+    "lem-a1-space-invariant-open-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04NW (lemma-locally-finite-type-quasi-finite-part), with the scheme-chart reduction expanded using Morphisms 01TI, 01TM and Descent 03X4."
+   }
+  },
+  {
+   "text": "Let $b:S^{\\prime}\\to S$ be arbitrary and put $E^{\\prime}=E\\times_SS^{\\prime}$ and $U^{\\prime}=U\\times_SS^{\\prime}$. By [lem-a1-space-lqf-atlas-refinement], $p^{\\prime}:U^{\\prime}\\to E^{\\prime}$ is a representable surjective etale atlas. Its composite $f^{\\prime}:U^{\\prime}\\to S^{\\prime}$ is locally of finite type by [lem-weil-pbc-lft-base-change]. The argument of Steps 1 and 2 uses only local finite type of the chosen atlas composite and scheme etale locality; it therefore applies to $p^{\\prime}$ and identifies $(p^{\\prime})^{-1}(Q_{h^{\\prime}})$ with the scheme quasi-finite locus $V^{\\prime}$ of $f^{\\prime}$. By [lem-sfb-scheme-quasifinite-at-base-change], $V^{\\prime}$ is the inverse image of $V$ under $U^{\\prime}\\to U$. Step 2 gives $V=p^{-1}(Q_h)$, so the inverse images in $U^{\\prime}$ of $Q_{h^{\\prime}}$ and of the inverse image of $Q_h$ in $E^{\\prime}$ agree. Surjectivity of $|p^{\\prime}|$ now gives equality of those subsets in $|E^{\\prime}|$. For the corresponding open subspaces the base change of $J$ has this inverse-image point set, and uniqueness follows from the inclusion criterion in [lem-a1-space-point-open-calculus].",
+   "uses": [
+    "lem-a1-space-lqf-atlas-refinement",
+    "lem-weil-pbc-lft-base-change",
+    "lem-sfb-scheme-quasifinite-at-base-change",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04NW (lemma-locally-finite-type-quasi-finite-part), with the scheme-chart reduction expanded using Morphisms 01TI, 01TM and Descent 03X4."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-a1-etale-open-restriction",
+  "lem-a1-scheme-lqf-etale-source-locality",
+  "lem-a1-space-invariant-open-quotient",
+  "lem-a1-space-lqf-atlas-refinement",
+  "lem-a1-space-point-open-calculus",
+  "lem-sc-quasi-finite-points-open",
+  "lem-sfb-scheme-quasifinite-at-base-change",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-lft-base-change",
+  "pqf-def-quasifinite"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 04NW (lemma-locally-finite-type-quasi-finite-part), with the scheme-chart reduction expanded using Morphisms 01TI, 01TM and Descent 03X4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a locally finite type morphism of algebraic spaces the quasi-finite locus is open and commutes with arbitrary base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.LocallyQuasiFinite (CategoryTheory.CategoryStruct.comp f g)],\\n  AlgebraicGeometry.LocallyQuasiFinite f\", \"doc\": \"If the composition of morphisms $ f: X \\to Y $ and $ g: Y \\to Z $ between schemes is locally quasi-finite, then the morphism $ f $ itself is locally quasi-finite.\"}\n  {\"name\": \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyQuasiFinite f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is locally quasi-finite if and only if for every pair of affine open subsets $U \\\\subseteq Y$ and $V \\\\subseteq X$ such that $f(V) \\\\subseteq U$, the induced ring homom\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.LocallyQuasiFinite f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"For a locally quasi-finite morphism $ f: X \\\\to Y $ of schemes, if $ U \\\\subseteq Y $ is an affine open subset and $ V \\\\subseteq X $ is an affine open subset contained in $ f^{-1}(U) $, then the induced\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.LocallyQuasiFinite f\", \"doc\": \"Every finite morphism of schemes is quasi-finite. That is, if $ f: X \\to Y $ is a finite morphism of schemes, then $ f $ satisfies the conditions of being quasi-finite, which typically requires it to b\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.LocallyQuasiFinite\", \"doc\": \"The property of being locally quasi-finite is multiplicative, meaning that the composition of two locally quasi-finite morphisms of schemes is again locally quasi-finite.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteCompScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [AlgebraicGeometry.LocallyQuasiFinite f]\\n  [AlgebraicGeometry.LocallyQuasiFinite g],\\n  AlgebraicGeometry.LocallyQuasiFinite (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two locally quasi-finite morphisms of schemes is again a locally quasi-finite morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteMorphismRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (V : Y.Opens) [AlgebraicGeometry.LocallyQuasiFinite f],\\n  AlgebraicGeometry.LocallyQuasiFinite (f ∣_ V)\", \"doc\": \"For any morphism $ f: X \\to Y $ of schemes and any open subset $ V $ of $ Y $, if $ f $ is locally quasi-finite, then the restriction of $ f $ to $ V $ is also locally quasi-finite.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are scheme, ring, or topological results, not the stated algebraic-space assertion; this is not a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The open subspace of relative dimension zero for a morphism of algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsPreimmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Preimmersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A property on morphisms $ f : X \\\\to Y $ between schemes, defined inductively to characterize when $ f $ satisfies the conditions of a preimmersion in algebraic geometry.\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism between schemes $ X $ and $ Y $ is an immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme\", \"doc\": \"A morphism $ f: X \\\\to Y $ between schemes is an open immersion if its underlying morphism of locally ringed spaces satisfies the open immersion condition: the continuous map is a topological open embe\"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension 0 f\", \"doc\": \"Every open immersion of schemes is smooth of relative dimension 0. That is, if $ f: X \\to Y $ is an open immersion (a morphism that is a topological open embedding with isomorphic stalks on its image),\"}\n  {\"name\": \"AlgebraicGeometry.IsPreimmersion.instOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Preimmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f], AlgebraicGeometry.IsPreimmersion f\", \"doc\": \"Every open immersion between schemes is a preimmersion. Specifically, if $ f: X \\to Y $ is an open immersion of schemes (i.e., a morphism whose underlying continuous map is a topological open embedding\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsPreimmersion.isEmbedding\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Preimmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.IsPreimmersion f],\\n  Topology.IsEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f : X \\\\to Y $ is a preimmersion of schemes, then the underlying continuous map $ f_{\\\\text{base}} : X \\\\to Y $ is a topological embedding in the category of topological spaces.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are scheme, ring, or topological results, not the stated algebraic-space assertion; this is not a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyQuasiFinite, IsOpen",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are scheme, ring, or topological results, not the stated algebraic-space assertion; this is not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "[Qq]uasi[Ff]inite.*[Ll]ocus|[Ll]ocus.*[Qq]uasi[Ff]inite|algebraic.?space",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"316\", \"text\": \"def Scheme.Hom.quasiFiniteLocus [LocallyOfFiniteType f] : X.Opens :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"321\", \"text\": \"lemma Scheme.Hom.mem_quasiFiniteLocus [LocallyOfFiniteType f]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"322\", \"text\": \"    {x : X} : x ∈ f.quasiFiniteLocus ↔ f.QuasiFiniteAt x := .rfl\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"325\", \"text\": \"    IsOpenImmersion (f.quasiFiniteLocus.ι ≫ f.toNormalization) := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"330\", \"text\": \"        ((X.isoOfEq (U := f.quasiFiniteLocus) (SetLike.coe_injective e.symm)).hom ≫\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are scheme, ring, or topological results, not the stated algebraic-space assertion; this is not a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The quasi-finite locus of a locally finite type morphism of algebraic spaces is open",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiFiniteAt.*(pullback|baseChange)|quasiFiniteAt_.*iff|QuasiFiniteAt",
+   "results": "{\"t\": \"2026-10-23T10:06:37Z\", \"tool\": \"grep\", \"query\": \"quasiFiniteAt.*(pullback|baseChange)|quasiFiniteAt_.*iff|QuasiFiniteAt\", \"sub\": \"AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"339\", \"343\", \"344\", \"346\", \"358\"], \"digest\": \"392aec4ffdcd6774\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean:339-444 and RingTheory/QuasiFinite/Basic.lean. The hits give the stalk predicate, isolated-point criterion, global stability or forward pointwise ascent; none gives this bidirectional arbitrary scheme-base-change statement in the Stacks finite-type notion. This requires a comparison and scheme fibre argument, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt",
+   "results": "{\"t\": \"2026-10-23T10:06:37Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt\", \"AlgebraicGeometry.Scheme.Hom.quasiFiniteAt\", \"AlgebraicGeometry.Scheme.Hom.quasiFiniteAt_comp_iff\", \"AlgebraicGeometry.Scheme.Hom.quasiFiniteAt_iff\", \"AlgebraicGeometry.Scheme.Hom.quasiFiniteAt_comp_iff_of_isOpenImmersion\", \"AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt.isClopen_singleton_asFiber\", \"AlgebraicGeometry.Scheme.Hom.quasiFiniteAt_iff_isOpen_singleton_asFiber\", \"AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt.quasiFiniteAt\"], \"digest\": \"d03761b9a2e45fff\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean:339-444 and RingTheory/QuasiFinite/Basic.lean. The hits give the stalk predicate, isolated-point criterion, global stability or forward pointwise ascent; none gives this bidirectional arbitrary scheme-base-change statement in the Stacks finite-type notion. This requires a comparison and scheme fibre argument, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "quasiFiniteAt.*(baseChange|pullback)|QuasiFiniteAt.*(baseChange|pullback)|baseChange.*QuasiFiniteAt|quasiFiniteAt_comp_iff",
+   "results": "{\"t\": \"2026-10-23T10:09:06Z\", \"tool\": \"grep\", \"query\": \"quasiFiniteAt.*(baseChange|pullback)|QuasiFiniteAt.*(baseChange|pullback)|baseChange.*QuasiFiniteAt|quasiFiniteAt_comp_iff\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\"], \"digest\": \"3d14ac4e5880e159\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean:339-444 and RingTheory/QuasiFinite/Basic.lean. The hits give the stalk predicate, isolated-point criterion, global stability or forward pointwise ascent; none gives this bidirectional arbitrary scheme-base-change statement in the Stacks finite-type notion. This requires a comparison and scheme fibre argument, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The quasi finite locus of a locally finite type algebraic space morphism is open and its inverse image under arbitrary base change is the quasi finite locus",
+   "results": "{\"t\": \"2026-10-23T10:04:30Z\", \"tool\": \"leanfinder\", \"query\": \"The quasi finite locus of a locally finite type algebraic space morphism is open and its inverse image under arbitrary base change is the quasi finite locus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE\", \"AlgebraicGeometry.instLocallyQuasiFiniteMorphismRestrict\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"AlgebraicGeometry.locallyQuasiFinite_iff\"], \"digest\": \"db5874c9aa05905a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme and ring stability hits do not state the full algebraic-space open-locus assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The quasi finite locus of a locally finite type algebraic space is open and commutes with base change",
+   "results": "{\"t\": \"2026-10-23T10:06:37Z\", \"tool\": \"leansearch\", \"query\": \"The quasi finite locus of a locally finite type algebraic space is open and commutes with base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.QuasiFinite.baseChange\", \"Algebra.QuasiFinite.recOn\", \"RingHom.QuasiFinite.isStableUnderBaseChange\", \"Algebra.QuasiFiniteAt.baseChange\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"Algebra.QuasiFinite.casesOn\", \"AlgebraicGeometry.LocallyQuasiFinite.recOn\", \"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite\"], \"digest\": \"f911246fdbd5e86f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme and ring stability hits do not state the full algebraic-space open-locus assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-closed-subset-finite-fibre-open",
+  "date": "2026-10-22",
+  "group": "Q25"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Finite-fibre base open for a closed subset in a proper algebraic space. Supporting input: The quasi-finite locus of a locally finite type algebraic space map.",
+   "via": [
+    "lem-sfb-space-closed-subset-finite-fibre-open",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-quasifinite-locus-open",
+  "worker": "stage1",
+  "summary": "Checked Stacks 04NW and its scheme-atlas reduction; reused scheme openness, etale locality, point-image calculus and invariant-open construction. Added only the missing scheme pointwise bidirectional base-change result, Stacks 01TM(1). Statement unchanged.",
+  "blueprint": "Current latest blueprint, det-thm-sf-ctf-stability-direct-images proof (3); supporting geometric prerequisite along the recorded alteration/isolated-lci chain. No unit route replaced.",
+  "tool_uses": [
+   {
+    "node": "def-trf-algebraic-space",
+    "why": "Generic scheme/space atlas geometry needed for Stacks 04NW; the unit concerns six-functor stability and has no replacement for this foundational geometric tool."
+   },
+   {
+    "node": "lem-a1-etale-open-restriction",
+    "why": "Generic scheme/space atlas geometry needed for Stacks 04NW; the unit concerns six-functor stability and has no replacement for this foundational geometric tool."
+   },
+   {
+    "node": "lem-a1-scheme-lqf-etale-source-locality",
+    "why": "Generic scheme/space atlas geometry needed for Stacks 04NW; the unit concerns six-functor stability and has no replacement for this foundational geometric tool."
+   },
+   {
+    "node": "lem-a1-space-invariant-open-quotient",
+    "why": "Generic scheme/space atlas geometry needed for Stacks 04NW; the unit concerns six-functor stability and has no replacement for this foundational geometric tool."
+   },
+   {
+    "node": "lem-a1-space-lqf-atlas-refinement",
+    "why": "Generic scheme/space atlas geometry needed for Stacks 04NW; the unit concerns six-functor stability and has no replacement for this foundational geometric tool."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic scheme/space atlas geometry needed for Stacks 04NW; the unit concerns six-functor stability and has no replacement for this foundational geometric tool."
+   },
+   {
+    "node": "lem-sc-quasi-finite-points-open",
+    "why": "Generic scheme/space atlas geometry needed for Stacks 04NW; the unit concerns six-functor stability and has no replacement for this foundational geometric tool."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic scheme/space atlas geometry needed for Stacks 04NW; the unit concerns six-functor stability and has no replacement for this foundational geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-lft-base-change",
+    "why": "Generic scheme/space atlas geometry needed for Stacks 04NW; the unit concerns six-functor stability and has no replacement for this foundational geometric tool."
+   },
+   {
+    "node": "pqf-def-quasifinite",
+    "why": "Generic scheme/space atlas geometry needed for Stacks 04NW; the unit concerns six-functor stability and has no replacement for this foundational geometric tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-trf-algebraic-space",
+  "lem-a1-etale-open-restriction",
+  "lem-a1-scheme-lqf-etale-source-locality",
+  "lem-a1-space-invariant-open-quotient",
+  "lem-a1-space-lqf-atlas-refinement",
+  "lem-a1-space-point-open-calculus",
+  "lem-sc-quasi-finite-points-open",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-lft-base-change",
+  "pqf-def-quasifinite"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q151-5ef2c4b88",
+  "group": "Q151",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q151-5ef2c4b88 (reviewer sub-agent of L); spot-checked: Live and side-live still have the item unsplit with the same statement, so the delivery is not superseded. Steps 1-4 hold against the cited statements. Step 1: 01TI gives the open V; the representable etale point map is open, so O=p(V) is open. Step 2: W=V x_E A is a scheme with image A_O; lqf etale-source locality is used in both directions, and an affine witness in A_O is affine in A, so O is in Q_h; U is one of the charts, which gives p^{-1}(Q_h)=V and Q_h=O. Step 3: the invariant-open-quotient node constructs the open subspace. Step 4: the atlas-refinement node and lft base change apply, the new 01TM(1) node gives V'=inverse image of V, and surjectivity of |p'| gives the base-change equality. The new node lem-sfb-scheme-quasifinite-at-base-change matches Stacks 01TM(1) exactly (morphisms.tex l.3925) and keeps the lft hypothesis. It is statement-only, has four search kinds, and is not a duplicate: isolated-fibre-point-base-change is one-way and the other candidates are global only. Mathlib QuasiFiniteAt.baseChange (Basic.lean:361) gives only the forward direction. Small cases tested: A^1 under a field extension, a finite scheme, mixed components, empty. Batch-5: the three lem-a1-space-* citations reach sec-trace-formula only through def-trf-algebraic-space, the general definition of algebraic spaces, which is outside both assumptions, so they are kept. All ten tool_uses are generic geometry and accepted. from.node=null is inherited from the base chain. No SGA source. Minor: the argument is the atlas reduction of 0ABM (spaces-morphisms l.5107) rather than 04NW's relative-dimension proof. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceQuasiFiniteLocusOpen",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.isOpen_mapToSchemeQuasiFiniteAt",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.MapToSchemeQuasiFiniteAt",
+   "AlgebraicGeometry.AlgebraicSpace.isOpen_mapToSchemeQuasiFiniteAt"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceQuasiFiniteLocusOpen.lean",
+  "statement": "theorem isOpen_mapToSchemeQuasiFiniteAt {S : Scheme.{u}} (T : Over S) (E : AlgebraicSpace S) (h : E.obj.obj ⟶ yoneda.obj T) (hft : MapToSchemeIsLocally (@LocallyOfFiniteType) E T h) : IsOpen {x : Point E.obj.obj | MapToSchemeQuasiFiniteAt h x} ∧ (∃ J : OpenSubspace E, pointImage J.val.ι = {x : Point E.obj.obj | MapToSchemeQuasiFiniteAt h x}) ∧ ∀ (T' : Over S) (b : T' ⟶ T), mapPoint (Limits.pullback.fst h (yoneda.map b)) ⁻¹' {x : Point E.obj.obj | MapToSchemeQuasiFiniteAt h x} = {x : Point (Limits.pullback h (yoneda.map b)) | MapToSchemeQuasiFiniteAt (Limits.pullback.snd h (yoneda.map b)) x}",
+  "branch": "newtargets-dag",
+  "by": "O3",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The helper spells out the chartwise point predicate already specified in this node. Added the landed definition dependencies for OpenSubspace and the existing mapPoint/MapToSchemeIsLocally helpers. Schemes are objects of Over S for a fixed ambient base; the actual target is T.left, and every scheme map into T.left induces an object and arrow of Over S, so the base-change quantifier is unrestricted."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3ae56b7f3",
+  "group": "O3",
+  "result": "pass",
+  "note": "Clause-by-clause match to node (étale-chart LFT hypothesis via MapToSchemeIsLocally; chartwise every-lift IsQuasiFiniteAtPoint predicate keeping 01TD finite type; IsOpen; ∃ OpenSubspace with pointImage = Q_h exactly; ∀ T' b inverse image under pullback.fst = locus of pullback.snd). Helper predicate is real and node-owned; no duplicate in Sheaf/WeilConjectures, no competing citer declaration. Added stmt_deps def-a1-space-open-subspace and def-sfb-proper-curve-moduli used and on base; Point via def chain. lean.statement verbatim; single universe u; sorry only; docstrings with source/blueprint. Edge cases (empty E, A^1 over field, arbitrary b) covered. No fixes."
+ }
+}

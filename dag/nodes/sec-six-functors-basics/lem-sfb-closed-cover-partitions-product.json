@@ -1,0 +1,200 @@
+{
+ "id": "lem-sfb-closed-cover-partitions-product",
+ "kind": "statement",
+ "title": "Partition product embeddings and closed-family retractions",
+ "statement": "Let $S$ be a nonempty compact metric totally disconnected space in the universes of [def-weil-size-convention], and let $A_j$, for $j\\in\\mathbf N_{>0}$, be nonempty closed subsets of $S$. There exist shrinking refining finite clopen partitions $P_i$ with atom diameter $<(1/2)^i$, continuous maps $\\rho_j:S\\to A_j$ fixing $A_j$, and an embedding $e:S\\to\\prod_i P_i$ where each factor has the discrete topology and $e(s)_i$ is the unique atom containing $s$. Each $e(A_j)$ is nonempty and closed in the entire product. No covering assumption on the family is needed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Inherited scalar analytic expansion of paragraph (3), old steps 5–6, as written in lem-sfb-closed-cover-retractions-stabilizing-selectors. The current blueprint paragraph (3) no longer writes out this auxiliary argument; this node formalizes the retained parent proof, not a new assertion of the current blueprint."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "Take the partitions from [lem-sfb-shrinking-clopen-partitions]. Choose the unique atom containing each point at each level. A coordinate of the atom map is constant on each open atom, hence continuous. Points with equal coordinates lie in common atoms with arbitrarily small diameters and therefore have distance zero. Compactness and Hausdorffness make this continuous injection a closed embedding. The continuous image of each nonempty closed A_j is nonempty and closed.",
+   "uses": [
+    "lem-sfb-shrinking-clopen-partitions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reindex the coordinates by n+1 to obtain a closed embedding e_N into a natural-number-indexed product of discrete factors. Apply [lem-sfb-countable-discrete-product-closed-retraction] to e_N(A_j), which is nonempty and closed. The restriction A_j to e_N(A_j) is a homeomorphism. Compose e_N, the retraction, and the inverse restricted homeomorphism to obtain rho_j. The fixing identity follows by applying the restricted homeomorphism and using that the product retraction fixes every point of e_N(A_j).",
+   "uses": [
+    "lem-sfb-countable-discrete-product-closed-retraction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-shrinking-clopen-partitions",
+  "lem-sfb-countable-discrete-product-closed-retraction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/Topology/ClosedCoverPartitionProduct.lean",
+  "place": "Fully proved from the indicated Mathlib declarations and elementary set/order/metric arguments; no postponed proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "PiNat.exists_retraction_subtype_of_isClosed",
+   "results": {
+    "t": "2026-10-26T06:38:59Z",
+    "tool": "loogle",
+    "query": "PiNat.exists_retraction_subtype_of_isClosed",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "PiNat.exists_retraction_subtype_of_isClosed"
+    ],
+    "digest": "50851967af4b203e"
+   },
+   "date": "2026-10-26",
+   "verdict": "Partial ingredients found and inspected in the pinned Mathlib source; no exact match for this composite construction. The implementation uses finite clopen refinements, partition infima, compact closed embeddings, and the existing PiNat retraction leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compact totally disconnected metric space has refining finite clopen partitions of arbitrarily small diameter and embeds into a countable product of finite discrete spaces",
+   "results": {
+    "t": "2026-10-26T06:39:01Z",
+    "tool": "leanfinder",
+    "query": "A compact totally disconnected metric space has refining finite clopen partitions of arbitrarily small diameter and embeds into a countable product of finite discrete spaces",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightProfinite.of",
+     "exists_clopen_partition_of_clopen_cover",
+     "Metric.PiNatEmbed.toPiNatHomeo",
+     "cantorSetHomeomorphNatToBool",
+     "CompHaus.toProfiniteObj",
+     "Metric.PiNatEmbed.isHomeomorph_toPiNat",
+     "Metric.PiNatEmbed.exists_embedding_to_hilbert_cube",
+     "TopologicalSpace.IsOpenCover.exists_finite_clopen_cover"
+    ],
+    "digest": "7ac3ab30fd183ce7"
+   },
+   "date": "2026-10-26",
+   "verdict": "Partial ingredients found and inspected in the pinned Mathlib source; no exact match for this composite construction. The implementation uses finite clopen refinements, partition infima, compact closed embeddings, and the existing PiNat retraction leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "(retract|selector|selection).*(closed|clopen)|(closed|clopen).*(retract|selector|selection)",
+   "results": {
+    "t": "2026-10-26T06:45:02Z",
+    "tool": "grep",
+    "query": "(retract|selector|selection).*(closed|clopen)|(closed|clopen).*(retract|selector|selection)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 14,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/MetricSpace/PiNat.lean",
+     "Mathlib/Topology/MetricSpace/PiNat.lean",
+     "Mathlib/Topology/MetricSpace/PiNat.lean",
+     "Mathlib/Topology/MetricSpace/PiNat.lean",
+     "Mathlib/Topology/MetricSpace/PiNat.lean",
+     "Mathlib/Topology/MetricSpace/HausdorffAlexandroff.lean",
+     "Mathlib/Topology/MetricSpace/HausdorffAlexandroff.lean",
+     "Mathlib/Topology/MetricSpace/HausdorffAlexandroff.lean"
+    ],
+    "digest": "cace69bdda7b2f78"
+   },
+   "date": "2026-10-26",
+   "verdict": "Partial ingredients found and inspected in the pinned Mathlib source; no exact match for this composite construction. The implementation uses finite clopen refinements, partition infima, compact closed embeddings, and the existing PiNat retraction leaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Refining finite clopen partitions with arbitrarily small diameters in a compact totally disconnected metric space",
+   "results": {
+    "t": "2026-10-26T06:46:25Z",
+    "tool": "leansearch",
+    "query": "Refining finite clopen partitions with arbitrarily small diameters in a compact totally disconnected metric space",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "exists_clopen_partition_of_clopen_cover",
+     "isTopologicalBasis_isClopen",
+     "compact_exists_isClopen_in_isOpen",
+     "loc_compact_Haus_tot_disc_of_zero_dim",
+     "TopologicalSpace.IsOpenCover.exists_finite_clopen_cover",
+     "exists_clopen_of_closed_subset_open",
+     "TopologicalSpace.IsOpenCover.exists_finite_nonempty_disjoint_clopen_cover",
+     "isClopen_iInter_of_finite"
+    ],
+    "digest": "634960ba258a67b8"
+   },
+   "date": "2026-10-26",
+   "verdict": "Partial ingredients found and inspected in the pinned Mathlib source; no exact match for this composite construction. The implementation uses finite clopen refinements, partition infima, compact closed embeddings, and the existing PiNat retraction leaf."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.ClosedCoverStabilizingSelectors",
+  "date": "2026-10-26",
+  "group": "P1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "same_as": [],
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Inherited scalar analytic expansion of paragraph (3), old steps 5–6. This auxiliary construction has no recorded imported blueprint ancestor, as in its parent; the exact argument is preserved in the parent theorem docstring.",
+   "via": [
+    "lem-sfb-closed-cover-retractions-stabilizing-selectors",
+    "lem-sfb-parameter-cochain-completion-boundary-descent",
+    "lem-sfb-procyclic-scalar-cochain-evaluation",
+    "lem-sfb-ind-unipotent-procyclic-difference",
+    "lem-sfb-polynomial-translation-acyclic",
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.ClosedCoverPartitionProduct",
+  "file": "lean/Sheaf/Topology/ClosedCoverPartitionProduct.lean",
+  "declaration": "TopologicalSpace.exists_closedCover_partitions_product",
+  "statement": "theorem exists_closedCover_partitions_product\n    (S : Type u) [MetricSpace S] [CompactSpace S] [TotallyDisconnectedSpace S]\n    [Nonempty S] (A : ℕ+ → Set S) (hclosed : ∀ j, IsClosed (A j))\n    (hnonempty : ∀ j, (A j).Nonempty) :\n    ∃ P : ℕ+ → Finpartition (Set.univ : Set S),\n      (∀ i, P (i + 1) ≤ P i) ∧\n      (∀ i p, p ∈ (P i).parts → IsClopen p ∧ Metric.diam p < (1 / 2 : ℝ) ^ (i : ℕ)) ∧\n      ∃ ρ : ∀ j, C(S, A j),\n        (∀ j (a : A j), ρ j a = a) ∧\n        ∃ e : S → ∀ i : ℕ+, WithDiscreteTopology (P i).parts,\n          (∀ s i, s ∈ (e s i).ofTopology.val) ∧ IsEmbedding e ∧\n          (∀ j, (e '' A j).Nonempty ∧ IsClosed (e '' A j))",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261026T082623-L-2197176",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261026T082623-L-2197176",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,311 @@
+{
+ "id": "lem-sfb-gerbe-qc-diagonal-descent",
+ "kind": "statement",
+ "title": "A quasi-compact relative diagonal descends along a gerbe",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] in the universes of [def-weil-size-convention]. Use algebraic stacks [def-sfb-algebraic-moduli-stack], algebraic spaces [def-trf-algebraic-space], and morphisms and $2$-fibre products of fibred groupoids [def-sfb-stable-pointed-moduli-groupoids]. Quasi-compactness is [def-sfb-stack-qcqs-morphism], and point spaces have the topology of [lem-sfb-stack-point-topology]. A morphism $p:\\mathcal U\\to Q$ to an algebraic space is a gerbe if for every scheme $T\\to Q$ its fibre groupoid has objects fppf locally on $T$, and any two objects of that fibre groupoid are isomorphic fppf locally on $T$ [def-pc-fppf-site]. Let $p:\\mathcal U\\to Q$ be a gerbe, with $\\mathcal U$ an algebraic stack and $Q$ an algebraic space over $S$. If $\\Delta_{\\mathcal U/S}:\\mathcal U\\to\\mathcal U\\times_S\\mathcal U$ is quasi-compact, then $\\Delta_{Q/S}:Q\\to Q\\times_SQ$ is quasi-compact. In particular $Q$ is quasi-separated relative to $S$, meaning that every scheme test of this diagonal is a quasi-compact morphism of algebraic spaces. There is no quasi-compactness assumption on $\\mathcal U$, $Q$ or $S$, and no separatedness, finite-type or Noetherian hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 0DQL (lemma-gerbe-diagonal-quasi-compact), relative over the common base scheme S."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-sfb-stack-qcqs-morphism",
+  "def-pc-fppf-site",
+  "lem-sfb-stack-point-topology",
+  "def-sfb-gerbe-moduli-map",
+  "def-sfb-relative-moduli-inertia"
+ ],
+ "proof": [
+  {
+   "text": "Choose a smooth surjective scheme atlas $u:V\\to\\mathcal U$. The atlas clause of [lem-sfb-gerbe-smooth-universal-homeomorphism] says that $h=pu:V\\to Q$ is surjective, flat and locally of finite presentation. Put $B=V\\times_SV$, $D=Q\\times_SQ$, $R=V\\times_{\\mathcal U}V$ and $W=V\\times_QV$. The scheme $B$ exists by [def-pc-fibre-product], and $D,W$ are algebraic spaces by [lem-trf-space-fibre-products-etale-covers]. The space-source representability theorem [lem-sfb-stack-diagonal-space-source-representability], applied to $V\\to\\mathcal U$, makes $R$ an algebraic space. All these objects are over the original $S$; no absolute diagonal over a different base is substituted.",
+   "uses": [
+    "def-sfb-algebraic-moduli-stack",
+    "lem-sfb-gerbe-smooth-universal-homeomorphism",
+    "def-pc-fibre-product",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-stack-diagonal-space-source-representability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DQL (lemma-gerbe-diagonal-quasi-compact), diagram; Tag 06QI (lemma-gerbe-fppf), after choosing an atlas."
+   }
+  },
+  {
+   "text": "The morphism $R\\to B$ is the base change of $\\Delta_{\\mathcal U/S}$ along $u\\times_Su:B\\to\\mathcal U\\times_S\\mathcal U$. Indeed a section of $R$ is a pair $(v_1,v_2)$ together with an isomorphism $u(v_1)\\simeq u(v_2)$, which is precisely the diagonal pullback; eliminating the repeated object gives inverse functors on the defining triples. The product $\\mathcal U\\times_S\\mathcal U$ is an algebraic stack by [lem-sfb-algebraic-stack-fibre-products] (the scheme $S$ viewed as the final algebraic stack), so $\\Delta_{\\mathcal U/S}$ is a morphism of algebraic stacks; it is representable by algebraic spaces by the algebraic-stack definition. Its assumed quasi-compactness, and the equivalence of scheme and stack tests in [lem-sfb-representable-stack-quasicompact-tests], therefore imply that $R\\to B$ is quasi-compact as a morphism of algebraic spaces. Forgetting the displayed isomorphism defines $r:R\\to W$, since applying $p$ to it gives equality in the discrete groupoid $Q$. Its composite with $W\\to B$ is the preceding map.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-sfb-algebraic-moduli-stack",
+    "lem-sfb-representable-stack-quasicompact-tests",
+    "lem-sfb-algebraic-stack-fibre-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DQL, top horizontal composite and cartesian diagonal test; Tag 050T (lemma-characterize-representable-quasi-compact)."
+   }
+  },
+  {
+   "text": "For every affine scheme $T\\to B$, write $R_T=R\\times_BT$ and $W_T=W\\times_BT$. The map $|R_T|\\to|W_T|$ is surjective: a field-valued section of $W_T$ consists of the fixed $T$-section and two $V$-sections whose images in $Q$ coincide. Their images in $\\mathcal U$ are consequently two objects of the same gerbe fibre. By the gerbe hypothesis they are isomorphic on an fppf cover of that field spectrum. Some member of this jointly surjective cover is nonempty; taking the residue field at any of its points gives a field extension and the required isomorphism, hence a point of $R_T$ mapping to the given point class. The $V$-sections and $T$-section are kept fixed under extension. This is the elementary local-isomorphism clause in the definition of a gerbe, not a claim that $r$ is smooth or quasi-compact.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-pc-fppf-site",
+    "lem-sfb-stack-point-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DQL, surjectivity of the top left arrow, checked after the atlas and arbitrary affine base change; Tag 0CPS (proposition-when-gerbe-over), local-isomorphism direction."
+   }
+  },
+  {
+   "text": "The quasi-compactness of $R\\to B$ gives quasi-compactness of $R_T$ for each affine $T\\to B$, by [lem-sfb-space-quasicompact-affine-tests]. The space and topological predicates agree by the last sentence of [lem-a1-space-etale-open-image]. The map $|R_T|\\to|W_T|$ is continuous by [lem-a1-space-point-open-calculus] and surjective by step 3. Apply [lem-weil-pbc-continuous-image-quasi-compact]: its image is all of $|W_T|$, so that space is quasi-compact. The same atlas/topology equivalence makes $W_T$ quasi-compact as an algebraic space. The affine-test equivalence of [lem-sfb-space-quasicompact-affine-tests] now gives quasi-compactness of $W\\to B$. This is quasi-compactness for quasi-compact scheme tests; for a quasi-compact space $Z\\to B$ with a surjective etale map $Z'\\to Z$ from a quasi-compact scheme, $W\\times_BZ'$ is quasi-compact and $W\\times_BZ'\\to W\\times_BZ$ is surjective etale by [lem-trf-space-fibre-products-etale-covers], so $|W\\times_BZ|$ is a continuous image of a quasi-compact space and $W\\times_BZ$ is quasi-compact by the same three point-topology nodes. Thus $W\\to B$ is quasi-compact in the space-test sense of [lem-sfb-space-quasicompact-fppf-local] used in step 6. This is the atlas form of the surjective-image argument in Tag 050X; it assumes no quasi-compactness of the atlas $V$ itself.",
+   "uses": [
+    "lem-sfb-space-quasicompact-affine-tests",
+    "lem-a1-space-etale-open-image",
+    "lem-a1-space-point-open-calculus",
+    "lem-weil-pbc-continuous-image-quasi-compact",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-quasicompact-fppf-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DQL, application of Tag 050X (lemma-surjection-from-quasi-compact); topology.tex Tag 04Z9 (lemma-image-quasi-compact)."
+   }
+  },
+  {
+   "text": "The map $b=h\\times_Sh:B\\to D$ factors as $V\\times_SV\\to V\\times_SQ\\to Q\\times_SQ$. The first arrow is the base change of $h$ along $V\\times_SQ\\to Q$ (second projection), and the second is the base change of $h$ along $Q\\times_SQ\\to Q$ (first projection). The base-change and composition laws of [lem-sfb-stack-chartwise-smooth-etale-calculus] show that $b$ is surjective, flat and locally of finite presentation. These laws are applied to morphisms of algebraic spaces, thus representable by algebraic spaces; representability can also be read from [lem-sfb-stack-diagonal-space-source-representability] with the target a discrete algebraic-space stack. No quasi-compactness is required of $h$ or $b$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-stack-diagonal-space-source-representability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DQL, right vertical arrow; Tags 06PX (lemma-composition-flat), 06PY (lemma-base-change-flat), 06Q3 (lemma-composition-finite-presentation), 06Q4 (lemma-base-change-finite-presentation); stacks-properties.tex Tags 04ZT, 04ZU for surjectivity."
+   }
+  },
+  {
+   "text": "The square with horizontal maps $W\\to B$ and $\\Delta_{Q/S}:Q\\to D$ is cartesian. On sections, $B\\times_DQ$ consists of $(v_1,v_2,q)$ with $h(v_1)=q=h(v_2)$; deleting $q$ gives $W$ and reinserting their common value is the inverse. Thus $W\\to B$ is the base change of $\\Delta_{Q/S}$ by the surjective flat locally finitely presented map $b$. Apply [lem-sfb-space-quasicompact-fppf-local] to the singleton family $\\{b:B\\to D\\}$: step 4 supplies the quasi-compact base change, and step 5 supplies every covering hypothesis. Hence $\\Delta_{Q/S}$ is quasi-compact. By [def-sfb-stack-qcqs-morphism] this says that $Q/S$ is quasi-separated. The base-change clause of the fppf-locality node also gives quasi-compactness on every scheme test of the diagonal. This proves all the conclusions over the original base without additional finiteness or separation assumptions.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-space-quasicompact-fppf-local",
+    "def-sfb-stack-qcqs-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DQL, final descent; spaces-descent.tex Tag 041L (lemma-descending-property-quasi-compact), using an algebraic-space atlas in place of stack descent Tag 0DQK."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-algebraic-moduli-stack",
+  "lem-sfb-gerbe-smooth-universal-homeomorphism",
+  "def-pc-fibre-product",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-stack-diagonal-space-source-representability",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-representable-stack-quasicompact-tests",
+  "lem-sfb-algebraic-stack-fibre-products",
+  "def-pc-fppf-site",
+  "lem-sfb-stack-point-topology",
+  "lem-sfb-space-quasicompact-affine-tests",
+  "lem-a1-space-etale-open-image",
+  "lem-a1-space-point-open-calculus",
+  "lem-weil-pbc-continuous-image-quasi-compact",
+  "lem-sfb-space-quasicompact-fppf-local",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "def-sfb-stack-qcqs-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 0DQL (lemma-gerbe-diagonal-quasi-compact), with its surjective-image and descent steps carried out on a smooth scheme atlas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If an algebraic stack is a gerbe over an algebraic space then quasi compactness of its relative diagonal descends to the base space",
+   "results": "{\"t\": \"2026-10-23T13:40:32Z\", \"tool\": \"leanfinder\", \"query\": \"If an algebraic stack is a gerbe over an algebraic space then quasi compactness of its relative diagonal descends to the base space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact\", \"AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact\", \"AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal\", \"AlgebraicGeometry.quasiSeparated_iff\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated\", \"AlgebraicGeometry.instQuasiCompactLiftSchemeIdOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift\", \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\"], \"digest\": \"09c74ed46b629aaf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes or abstract spectral topology; no algebraic-stack or gerbe theorem. Read the scheme QuasiCompact and QuasiSeparated definitions and their diagonal instances; these do not specialize to stacks."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\", \"QuasiCompact\"",
+   "results": "{\"t\": \"2026-10-23T13:40:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicStack\\\", \\\"QuasiCompact\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes or abstract spectral topology; no algebraic-stack or gerbe theorem. Read the scheme QuasiCompact and QuasiSeparated definitions and their diagonal instances; these do not specialize to stacks."
+  },
+  {
+   "tool": "grep",
+   "query": "gerbe.*diagonal|diagonal.*gerbe",
+   "results": "{\"t\": \"2026-10-23T13:40:31Z\", \"tool\": \"grep\", \"query\": \"gerbe.*diagonal|diagonal.*gerbe\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes or abstract spectral topology; no algebraic-stack or gerbe theorem. Read the scheme QuasiCompact and QuasiSeparated definitions and their diagonal instances; these do not specialize to stacks."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi compact diagonal descends along a gerbe of algebraic stacks",
+   "results": "{\"t\": \"2026-10-23T13:40:31Z\", \"tool\": \"leansearch\", \"query\": \"Quasi compact diagonal descends along a gerbe of algebraic stacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact\", \"AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal\", \"AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact\", \"AlgebraicGeometry.quasiSeparated_iff\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift\", \"AlgebraicGeometry.QuasiSeparated.mk\", \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"AlgebraicGeometry.instQuasiCompactLiftSchemeIdOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\"], \"digest\": \"688296f0f83ace12\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes or abstract spectral topology; no algebraic-stack or gerbe theorem. Read the scheme QuasiCompact and QuasiSeparated definitions and their diagonal instances; these do not specialize to stacks."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi separatedness of the algebraic space quotient of an algebraic gerbe with quasi compact diagonal",
+   "results": "{\"t\": \"2026-10-23T13:46:32Z\", \"tool\": \"leanfinder\", \"query\": \"Quasi separatedness of the algebraic space quotient of an algebraic gerbe with quasi compact diagonal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact\", \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instQuasiSeparatedToSpecΓOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.quasiSeparated_iff\", \"AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace\", \"AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated\", \"AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift\"], \"digest\": \"4490fc63eae96ec8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes or abstract spectral topology; no algebraic-stack or gerbe theorem. Read the scheme QuasiCompact and QuasiSeparated definitions and their diagonal instances; these do not specialize to stacks."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A gerbe of algebraic stacks has surjective flat locally finitely presented structure morphism and relative diagonal",
+   "results": "{\"t\": \"2026-10-23T14:51:36Z\", \"tool\": \"leanfinder\", \"query\": \"A gerbe of algebraic stacks has surjective flat locally finitely presented structure morphism and relative diagonal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.universallyInjective_eq_diagonal\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.UniversallyOpen.of_flat\"], \"digest\": \"e32b986ecca99b8f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme quasi-separatedness, scheme flat descent and universally-open maps do not state a result about an algebraic-stack gerbe. Read QuasiSeparated.lean lines 45-54 and 103-104; all its variables are schemes. Grep found no algebraic-stack or gerbe implementation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\", \"QuasiCompact\"",
+   "results": "{\"t\": \"2026-10-23T14:51:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicStack\\\", \\\"QuasiCompact\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme quasi-separatedness, scheme flat descent and universally-open maps do not state a result about an algebraic-stack gerbe. Read QuasiSeparated.lean lines 45-54 and 103-104; all its variables are schemes. Grep found no algebraic-stack or gerbe implementation."
+  },
+  {
+   "tool": "grep",
+   "query": "gerbe|AlgebraicStack|ArtinStack",
+   "results": "{\"t\": \"2026-10-23T14:52:48Z\", \"tool\": \"grep\", \"query\": \"gerbe|AlgebraicStack|ArtinStack\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme quasi-separatedness, scheme flat descent and universally-open maps do not state a result about an algebraic-stack gerbe. Read QuasiSeparated.lean lines 45-54 and 103-104; all its variables are schemes. Grep found no algebraic-stack or gerbe implementation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi compact relative diagonal descends from an algebraic stack gerbe to its algebraic space base",
+   "results": "{\"t\": \"2026-10-23T14:52:48Z\", \"tool\": \"leansearch\", \"query\": \"Quasi compact relative diagonal descends from an algebraic stack gerbe to its algebraic space base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact\", \"AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal\", \"AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact\", \"AlgebraicGeometry.quasiSeparated_iff\", \"AlgebraicGeometry.QuasiSeparated.mk\"], \"digest\": \"62b8c1b0c03a269a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme quasi-separatedness, scheme flat descent and universally-open maps do not state a result about an algebraic-stack gerbe. Read QuasiSeparated.lean lines 45-54 and 103-104; all its variables are schemes. Grep found no algebraic-stack or gerbe implementation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi separatedness of the algebraic space base of an algebraic gerbe with quasi compact relative diagonal",
+   "results": "{\"t\": \"2026-10-23T15:00:21Z\", \"tool\": \"leanfinder\", \"query\": \"Quasi separatedness of the algebraic space base of an algebraic gerbe with quasi compact relative diagonal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact\", \"AlgebraicGeometry.quasiSeparated_iff\", \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instQuasiSeparatedToSpecΓOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace\", \"AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiSeparated\", \"AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated\"], \"digest\": \"e8ad8ac3bae9f00b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme quasi-separatedness, scheme flat descent and universally-open maps do not state a result about an algebraic-stack gerbe. Read QuasiSeparated.lean lines 45-54 and 103-104; all its variables are schemes. Grep found no algebraic-stack or gerbe implementation."
+  },
+  {
+   "tool": "grep",
+   "query": "quasiSeparated_eq_diagonal_is_quasiCompact|quasiCompact_diagonal",
+   "results": "{\"t\": \"2026-10-23T15:00:22Z\", \"tool\": \"grep\", \"query\": \"quasiSeparated_eq_diagonal_is_quasiCompact|quasiCompact_diagonal\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\"], \"digest\": \"edf3c30fa5c9a612\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme quasi-separatedness, scheme flat descent and universally-open maps do not state a result about an algebraic-stack gerbe. Read QuasiSeparated.lean lines 45-54 and 103-104; all its variables are schemes. Grep found no algebraic-stack or gerbe implementation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qc-stack-spectral-point-space",
+  "date": "2026-10-23",
+  "group": "Q132"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: Lemma 8.3.1 applied to the diagonal, keeping its closed-point and integral-base hypotheses explicit Supporting input: existence of closed points in the source and target of the integral Zariski-main factor; Noetherianity is only used for the original finite-type stacks. General topological input: Tag 0DQN, used for sobriety before selecting minimal closed subsets. Supporting lemma: Tag 0DQL (lemma-gerbe-diagonal-quasi-compact), relative over the common base scheme S.",
+   "via": [
+    "lem-sfb-qc-stack-spectral-point-space",
+    "lem-sfb-finite-type-stack-closed-specialization",
+    "lem-sfb-adequate-integral-comparison-finite",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-gerbe-qc-diagonal-descent",
+  "worker": "stage1",
+  "summary": "Realized Stacks 0DQL on a smooth scheme atlas: its two relations R=V×_U V and W=V×_Q V, field-extension lifting of isomorphisms, continuous surjective images of quasi-compact affine tests, and fppf descent of the space diagonal. All inputs already exist; no new nodes and no mathematical statement changes. Retained and read inherited Mathlib searches and appended actual Q55 searches.",
+  "blueprint": "Supports latest sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3), through the inherited alteration/moduli prerequisite chain. The nearest blueprint ancestor is None according to blueprint_refs.py; preserved inherited from.node and via. Whole-blueprint searches gerbe, gerbe diagonal, quasi-compact diagonal and 050X found no duplicates. The six steps realize Stacks 0DQL diagram, surjective-image step and final fppf descent on the atlas.",
+  "tool_uses": [
+   {
+    "node": "def-pc-fibre-product",
+    "why": "Generic algebraic-space/topological foundation for the atlas realization of Stacks 0DQL, rather than a replacement of the unit route."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space/topological foundation for the atlas realization of Stacks 0DQL, rather than a replacement of the unit route."
+   },
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "Generic algebraic-space/topological foundation for the atlas realization of Stacks 0DQL, rather than a replacement of the unit route."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic algebraic-space/topological foundation for the atlas realization of Stacks 0DQL, rather than a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-image-quasi-compact",
+    "why": "Generic algebraic-space/topological foundation for the atlas realization of Stacks 0DQL, rather than a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pc-fibre-product",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-a1-space-etale-open-image",
+  "lem-a1-space-point-open-calculus",
+  "lem-weil-pbc-continuous-image-quasi-compact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q55-445d1cf6c",
+  "group": "Q55",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-445d1cf6c (reviewer sub-agent of L); spot-checked: Read the item in full. The statement is unchanged from live (unsplit, no repair note) and there are zero new nodes. The proof is a faithful atlas-level rendering of Stacks 0DQL: R=V×_U V→W=V×_Q V is surjective by the gerbe local-isomorphism clause (the 0CPS half, an elementary unwinding); the 050X image argument runs on affine T; b=h×h is surjective, flat and lfp by chartwise base change and composition; the cartesian square B×_D Q=W gives fppf-local descent of quasi-compactness. I checked all cited statements and confirmed every step tag against tags/tags. No cycle, no duplicate (searched 0DQL/0DQK and the 36 gerbe nodes). Edge cases checked: Q empty, U=Q, BG with non-smooth G, non-quasi-compact S or V. Two repairs, written to fixes/dag/nodes/sec-six-functors-basics/lem-sfb-gerbe-qc-diagonal-descent.json. (1) C1/C4: step 2 applies lem-sfb-representable-stack-quasicompact-tests to the diagonal of U over S, which needs U×_S U to be an algebraic stack; added lem-sfb-algebraic-stack-fibre-products. (2) E6: step 4 gets quasi-compactness in the scheme-test sense of lem-sfb-space-quasicompact-affine-tests, while step 6 (lem-sfb-space-quasicompact-fppf-local) needs the space-test sense; added the bridge through a quasi-compact étale scheme atlas Z'→Z, using lem-trf-space-fibre-products-etale-covers and the point-topology nodes. proof_deps equals the union of uses. The off-unit tool uses (fibre products, a1 point topology, continuous-image Mathlib leaf) are accepted as generic. Batch-5 flags: every flagged closure reaches sec-trace-formula only through def-trf-algebraic-space and generic algebraic-space foundations (the finite-étale algebra trace and pod base-change lemmas also appear), never the Lefschetz trace formula, Poincaré duality or their proofs, so they are not a RETURN.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GerbeQcDiagonalDescent",
+  "declaration": "CategoryTheory.gerbe_qc_diagonal_descent",
+  "file": "lean/Sheaf/AlgebraicGeometry/GerbeQcDiagonalDescent.lean",
+  "statement": "theorem gerbe_qc_diagonal_descent {S : Scheme.{u}} (F : BasedCategory.{v, w} (Over S)) (Q : AlgebraicSpace S) (p : BasedFunctor F (discreteModuli Q.obj.obj)) (hF : IsAlgebraicModuliStack F) (hp : IsGerbeModuliMap p) (hΔ : IsQuasiCompactAlgebraicModuliMap.{u, _, _, _, _, v', w'} (moduliRelativeDiagonal (moduliBaseStructure F))) : AlgebraicSpace.MapIsQuasiCompact (prod.lift (𝟙 Q.obj.obj) (𝟙 Q.obj.obj))",
+  "branch": "sheaf-dag",
+  "by": "Q71",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-98163b281",
+  "group": "Q71",
+  "result": "pass",
+  "note": "Re-delivery after H4 RETURN of 39d8: duplicate IsGerbeOver/def-sfb-gerbe-over removed; theorem now uses canonical landed CategoryTheory.IsGerbeModuliMap (def-sfb-gerbe-moduli-map, Q117), whose two clauses are fppf-local lifts and local 2-isos of lifts, matching the node. Item node differs from side-live only in lean (was null) and stmt_deps (+def-sfb-gerbe-moduli-map, +def-sfb-relative-moduli-inertia, both landed with Lean records). Clauses checked: IsAlgebraicModuliStack F; Q : AlgebraicSpace S; p a BasedFunctor to discreteModuli Q; hΔ = IsQuasiCompactAlgebraicModuliMap of moduliRelativeDiagonal(moduliBaseStructure F), where the identity-category target makes the 2-fibre product F×_S F and the diagonal x↦(x,x,𝟙); test universes v',w' free. Conclusion MapIsQuasiCompact(prod.lift 𝟙 𝟙) = Δ_{Q/S}, the presheaf product being over S; same predicate as MapIsQuasiSeparated. No extra qc/sep/ft/Noetherian/representability hypotheses. Edge cases (empty S/Q/F, identity gerbe, BG, non-qc S) admitted. lean.statement verbatim; single sorry; no defs; source/blueprint docstrings and 6 proof steps; all 11 Sheaf imports exist; no name clash. No file changed, so no compile; worker reports clean scompile and dry-run OK. Advisory: Second-reading section is a worker self-reread (dispatcher forbade agents), as accepted for Q117."
+ }
+}

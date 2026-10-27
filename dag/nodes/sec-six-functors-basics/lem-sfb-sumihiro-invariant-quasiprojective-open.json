@@ -1,0 +1,258 @@
+{
+ "id": "lem-sfb-sumihiro-invariant-quasiprojective-open",
+ "kind": "statement",
+ "title": "Invariant quasi-projective neighborhoods for connected affine groups",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $G$ be a smooth affine $k$-group scheme of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism, def-weil-affine-spectrum]. Assume $G$ is connected [def-weil-connected-scheme]. Let $X$ be a normal separated finite-type $k$-scheme [def-pc-scheme, def-weil-proper-morphism, def-weil-finite-type-morphism]; normal means that every local ring is an integral domain integrally closed in its fraction field [def-weil-pbc-normal-ring]. An action is a morphism $G\\times_k X\\to X$ [def-pc-fibre-product] satisfying the identity and associativity identities. For any action of $G$ on $X$ and every $x\\in |X|$, there is a $G$-invariant normal quasi-projective open subscheme $W\\subseteq X$ containing $x$, separated and of finite type over $k$. Invariance means that the action factors through $G\\times_k W\\to W$. Here quasi-projective means admitting an immersion into some $\\mathbf P^n_k=\\operatorname{Proj}(k[z_0,\\ldots,z_n])$, with the total-degree grading [def-pc-proj]; an immersion factors as a closed immersion into an open subscheme [def-weil-closed-immersion, def-weil-open-immersion]. No integrality, smoothness or projectivity of $X$, faithfulness of its action, or characteristic restriction is assumed. The empty $X$ case is vacuous.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Supporting geometric input to the linear-action discussion, Section 7e and Lemma 13.46; NOT a theorem asserted to occur in Milne. WANTED: H. Sumihiro, Equivariant completion, J. Math. Kyoto Univ. 14 (1974), 1--28, Theorem 1 and Lemma 8 (invariant quasi-projective neighborhoods). Online corroboration: M. Brion, Algebraic group actions on normal varieties, arXiv:1703.09506v3, Introduction and Theorem 1. Agent extension from integral varieties to finitely many disjoint normal components."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-normal-ring",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-pc-proj",
+  "def-weil-connected-scheme"
+ ],
+ "proof": [
+  {
+   "text": "If $X$ is empty the assertion has no point to treat. Otherwise fix $x\\in|X|$. By [lem-weil-pbc-affine-opens-basis] choose an affine open $U\\subseteq X$ containing $x$. Apply [lem-sfb-affine-saturation-cartier-boundary] to the given action and this $U$. It gives the open $W=\\bigcup_{g\\in G(k)}gU$, with its restricted scheme-level $G$-action, and an effective Cartier divisor $D\\subset W$ with complement $U$. The same cited statement gives normality, separatedness, finite type over $k$ and quasi-compactness of $W$. The identity element shows $x\\in U\\subset W$. No irreducibility hypothesis on $X$ or rationality hypothesis on $x$ has been introduced.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-sfb-affine-saturation-cartier-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/brion-algebraic-group-actions-on-normal-varieties_arXiv-1703.09506.pdf",
+    "place": "Section 3.2, affine saturation in the proof of Theorem 1 and Cartier part of Proposition 3.3; disconnected extension is in the supporting node. Local PDF WANTED."
+   }
+  },
+  {
+   "text": "Let $\\mathcal I_D$ be the Cartier ideal. It is invertible by [lemma-nagata-effective-cartier-is-invertible]. Put $\\mathcal L=\\mathcal O_W(D)=\\mathcal Hom(\\mathcal I_D,\\mathcal O_W)$ as in [def-pc-divisor-line-bundle]. Locally $\\mathcal I_D=f\\mathcal O_W$ for a non-zero-divisor $f$, so its dual is free of rank one, hence $\\mathcal L$ is invertible by [def-sc-invertible-module]. The inclusion $\\mathcal I_D\\to\\mathcal O_W$ is a global section $s$ of $\\mathcal L$. In the frame dual to $f$ its coefficient is $f$. Thus the nonvanishing locus of $s$ is exactly $W\\setminus|D|=U$. This explicitly constructs the section; it uses no theorem asserting ampleness of a boundary divisor.",
+   "uses": [
+    "lemma-nagata-effective-cartier-is-invertible",
+    "def-pc-divisor-line-bundle",
+    "def-sc-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 01WX, definition-invertible-sheaf-effective-Cartier-divisor; elementary calculation in a rank-one frame."
+   }
+  },
+  {
+   "text": "By the existing node [lem-sfb-normal-line-bundle-power-linearization] choose $m\\geq1$ and a $G$-linearization $\\theta$ of $\\mathcal M=\\mathcal L^{\\otimes m}$. All hypotheses hold for $W$ by step 1. Let $t=s^{\\otimes m}$. In the frame of step 2 its coefficient is $f^m$, so $W_t=U$: in every residue field $f^m\\ne0$ exactly when $f\\ne0$. For each $g\\in G(k)$ pull $t$ back by the automorphism $a_{g^{-1}}$ and apply the isomorphism supplied by $\\theta$ to obtain a regular global section $t_g$ of $\\mathcal M$. Explicitly $(t_g)(y)=\\theta_{g,g^{-1}y}(t(g^{-1}y))$. As an isomorphism of line bundles preserves nonzero values in residue-field fibres, $W_{t_g}=gU$. This is an equality of open subschemes, and applies to all schematic points, not only closed points.",
+   "uses": [
+    "lem-sfb-normal-line-bundle-power-linearization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/brion-algebraic-group-actions-on-normal-varieties_arXiv-1703.09506.pdf",
+    "place": "Lemma 2.9 for linearization; agent local-frame construction of translated sections. Local PDF WANTED."
+   }
+  },
+  {
+   "text": "The opens $W_{t_g}=gU$ cover $W$ by its definition in step 1. Each is affine: the action automorphism $a_g$ restricts to an isomorphism $U\\xrightarrow{\\sim}gU$, with inverse $a_{g^{-1}}$, and composing an affine presentation of $U$ with this inverse presents $gU$ as an affine scheme. Since $W$ is quasi-compact, [def-weil-pbc-ample-invertible-module] now says exactly that $\\mathcal M$ is ample: at each point take a covering section $t_g$ and exponent $n=1$. This establishes ampleness from the displayed sections; it is not an assumption in either supporting lemma.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01PS, definition-ample, applied directly to the affine nonvanishing cover."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-ample-very-ample-immersion-affine-base] with $A=k$, the structure morphism $W\\to\\operatorname{Spec}k$, and the ample invertible module $\\mathcal M$. Its locally-finite-type hypothesis follows from the finite-type conclusion in step 1. Its conclusion supplies a $k$-immersion $W\\hookrightarrow\\operatorname{Proj}(k[z_0,\\ldots,z_n])=\\mathbf P^n_k$ for some $n\\geq0$. This is the definition of quasi-projectivity in the item. Together with $x\\in W$, the restricted action, normality, separatedness and finite type already obtained in step 1, this proves every clause. The argument neither replaces normality by smoothness nor restricts the characteristic or the effectiveness of the action.",
+   "uses": [
+    "lem-weil-pbc-ample-very-ample-immersion-affine-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01VS (lemma-quasi-projective-finite-type-over-S) and 01VT (lemma-finite-type-over-affine-ample-very-ample), over Spec(k)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-divisor-line-bundle",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-sfb-affine-saturation-cartier-boundary",
+  "lem-sfb-normal-line-bundle-power-linearization",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-ample-very-ample-immersion-affine-base",
+  "lemma-nagata-effective-cartier-is-invertible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/brion-algebraic-group-actions-on-normal-varieties_arXiv-1703.09506.pdf",
+  "place": "Brion Section 3.2, affine saturation and Cartier boundary, with Lemma 2.9 in the affine-group case and the direct translated-section ampleness argument. Local PDF WANTED; primary text read online. Nonintegral normal schemes are covered by the stated supporting extensions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sumihiro normal variety connected algebraic group invariant quasi-projective open neighborhoods",
+   "results": "{\"t\": \"2026-10-24T00:55:07Z\", \"tool\": \"leanfinder\", \"query\": \"Sumihiro normal variety connected algebraic group invariant quasi-projective open neighborhoods\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen\", \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.openCoverBasicOpenTop\", \"AlgebraicGeometry.Scheme.Hom.normalization\"], \"digest\": \"4bff72bcb71a9ba9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary affine covers, normalization and quasi-affineness; none supplies invariant quasi-projective neighborhoods for an algebraic group action."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"invariant\"",
+   "results": "{\"t\": \"2026-10-24T00:55:08Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme, \\\"invariant\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary affine covers, normalization and quasi-affineness; none supplies invariant quasi-projective neighborhoods for an algebraic group action."
+  },
+  {
+   "tool": "grep",
+   "query": "Sumihiro|[Ii]nvariant.*[Qq]uasi.?[Pp]rojective|[Ee]quivariant.*[Ii]mmersion",
+   "results": "{\"t\": \"2026-10-24T00:55:08Z\", \"tool\": \"grep\", \"query\": \"Sumihiro|[Ii]nvariant.*[Qq]uasi.?[Pp]rojective|[Ee]quivariant.*[Ii]mmersion\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary affine covers, normalization and quasi-affineness; none supplies invariant quasi-projective neighborhoods for an algebraic group action."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normal variety under a connected affine algebraic group has a cover by invariant quasi projective open subvarieties",
+   "results": "{\"t\": \"2026-10-24T00:55:08Z\", \"tool\": \"leansearch\", \"query\": \"A normal variety under a connected affine algebraic group has a cover by invariant quasi projective open subvarieties\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsInvariant.isIntegral\", \"AlgebraicGeometry.Scheme.openCoverBasicOpenTop\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization_preimage\", \"AlgebraicGeometry.Scheme.affineBasisCover\", \"AlgebraicGeometry.instIsAffineXSchemeAffineCover\", \"AlgebraicGeometry.Proj.affineOpenCover\", \"Representation.le_comap_invariants\"], \"digest\": \"80bdddc499b90274\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary affine covers, normalization and quasi-affineness; none supplies invariant quasi-projective neighborhoods for an algebraic group action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sumihiro local linearity theorem normal variety invariant quasi projective open cover",
+   "results": "{\"t\": \"2026-10-24T00:59:45Z\", \"tool\": \"leanfinder\", \"query\": \"Sumihiro local linearity theorem normal variety invariant quasi projective open cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop\", \"AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop\", \"AlgebraicGeometry.Proj.affineOpenCover\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization_preimage\", \"AlgebraicGeometry.reduce_to_affine_global\"], \"digest\": \"a8980d9c87dcc740\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary affine covers, normalization and quasi-affineness; none supplies invariant quasi-projective neighborhoods for an algebraic group action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sumihiro normal variety connected affine group invariant quasi projective open cover",
+   "results": "{\"t\": \"2026-10-24T01:35:09Z\", \"tool\": \"leanfinder\", \"query\": \"Sumihiro normal variety connected affine group invariant quasi projective open cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Proj.affineOpenCover\", \"AlgebraicGeometry.Scheme.instInhabitedOpenCover\", \"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.instIsAffineXSchemeAffineCover\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.Scheme.AffineOpenCover\", \"AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop\"], \"digest\": \"65b0254961ca0cbd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary affine and quasi-affine covers, normalization, or unrelated abstract invariance; no invariant quasi-projective neighborhood theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normal variety under a connected affine algebraic group has invariant quasi projective open neighborhoods",
+   "results": "{\"t\": \"2026-10-24T01:36:26Z\", \"tool\": \"leansearch\", \"query\": \"A normal variety under a connected affine algebraic group has invariant quasi projective open neighborhoods\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ProperlyDiscontinuousVAdd.exists_nhds_image_vadd_eq_self\", \"Representation.le_comap_invariants\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization_preimage\", \"Algebra.IsInvariant\", \"Algebra.IsInvariant.casesOn\", \"Subgroup.Normal.conjAct\", \"OpenNormalAddSubgroup.isNormal'\", \"Algebra.IsInvariant.mk\"], \"digest\": \"bb240be2d31b184b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary affine and quasi-affine covers, normalization, or unrelated abstract invariance; no invariant quasi-projective neighborhood theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "Ramanujam|Sumihiro|[Cc]artier.*[Ss]aturat|[Ss]aturat.*[Cc]artier",
+   "results": "{\"t\": \"2026-10-24T01:38:07Z\", \"tool\": \"grep\", \"query\": \"Ramanujam|Sumihiro|[Cc]artier.*[Ss]aturat|[Ss]aturat.*[Cc]artier\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary affine and quasi-affine covers, normalization, or unrelated abstract invariance; no invariant quasi-projective neighborhood theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normal scheme algebraic group action invariant quasi projective neighborhood Sumihiro local linearity theorem",
+   "results": "{\"t\": \"2026-10-24T01:40:09Z\", \"tool\": \"leanfinder\", \"query\": \"Normal scheme algebraic group action invariant quasi projective neighborhood Sumihiro local linearity theorem\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.reduce_to_affine_nbhd\", \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.reduce_to_affine_global\", \"AlgebraicGeometry.Proj.affineOpenCover\", \"AlgebraicGeometry.Scheme.openCoverBasicOpenTop\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen\", \"AlgebraicGeometry.Proj.isAffineOpen_basicOpen\"], \"digest\": \"58c44a59d70c398e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary affine and quasi-affine covers, normalization, or unrelated abstract invariance; no invariant quasi-projective neighborhood theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+  "date": "2026-10-24",
+  "group": "Q26"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: First obtain an invariant quasi-projective neighborhood, before making any affine claim.",
+   "via": [
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-sumihiro-invariant-quasiprojective-open",
+  "worker": "stage1",
+  "summary": "Q57 repair: preserved the full statement and five-step Cartier-boundary/translated-section proof; rebased onto the current DAG by reusing the existing normal-line-bundle-power-linearization node instead of overwriting or duplicating it. Only the Cartier-boundary lemma is new. Re-read all cited live statements, refreshed the linearization quotation, and corrected doubled TeX escapes in proof text. The original searches, source review and disconnected/empty/arbitrary-point checks are retained.",
+  "blueprint": "Realizes the inherited normal-case neighborhood prerequisite under det-thm-sf-ctf-stability-direct-images proof (3), through the recorded alteration/concentration chain; latest blueprint direct-images proof was read. The item has no imported blueprint ancestor according to blueprint_refs.py ancestor, so the inherited null ancestor and full via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-effective-cartier-is-invertible",
+    "why": "General Cartier ideal invertibility, used only in the local dual-ideal construction; no node of this unit states that general fact."
+   },
+   {
+    "node": "lem-weil-pbc-ample-very-ample-immersion-affine-base",
+    "why": "General passage from an ample line bundle to a finite-dimensional projective immersion over an affine base, after the group-action argument proves ampleness. It is a generic tool, not a replacement for the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-effective-cartier-is-invertible",
+  "lem-weil-pbc-ample-very-ample-immersion-affine-base"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-9362d53e6",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-9362d53e6 (reviewer sub-agent of L); spot-checked: I read the item, the one new node (lem-sfb-affine-saturation-cartier-boundary) and every cited statement in full. Source check: in Brion arXiv:1703.09506v3 (HTML), Lemma 2.9 has a connected affine G and normal X and gives a positive power of L that is G-linearizable. Prop. 3.3 has a smooth connected G, normal X = G·U and an affine open U, and proves the boundary Weil divisor Cartier via Ramanujam-Samuel before proving ampleness. The new node is exactly that Cartier half. I checked its extension to disconnected X: the integral components are clopen and preserved by connected G, U∩X_i is affine and dense in W∩X_i, and the ideals glue. I also checked at all points that the union of gU over g in G(k) equals α(G×U), using a k-point in the open projection and stability of opens under generization. The node meets B1-B7: statement only, self-contained, definitions cited, single TeX backslashes, searches recorded. It contains no ampleness and is strictly smaller than the item. Duplicate search over dag/nodes found none (smooth-affine-cartier-boundary needs smooth integral X; affine-open-boundary-codimension-one gives only codimension one). Steps: 1 uses affine-opens-basis and the new node with matching hypotheses. 2 shows by a local frame that the canonical section of O(D) is ι = fφ, so its nonvanishing locus is U. 3 restricts the existing linearization θ to {g}×W to give M ≅ a_g^*M, so the translated section vanishes off gU. 4 is the 01PS ample definition with n=1, since W is quasi-compact and gU ≅ U is affine. 5 is the ample-to-immersion lemma (01VS/01VT) over A=k. Small cases checked: empty X or U, trivial G, G_a on P1 minus a point, non-rational x. The declared tool_uses (Nagata Cartier-invertibility; ample-very-ample-immersion-affine-base) are accepted as generic tools. The earlier return (overwriting the live linearization node) is repaired by reusing that node unchanged. No SGA citations, no cycle, statement unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SumihiroInvariantQuasiprojectiveOpen",
+  "declaration": "AlgebraicGeometry.exists_sumihiro_invariant_quasiprojective_open",
+  "file": "lean/Sheaf/AlgebraicGeometry/SumihiroInvariantQuasiprojectiveOpen.lean",
+  "statement": "theorem exists_sumihiro_invariant_quasiprojective_open (k : Type u) [Field k] [IsAlgClosed k] (G : Grp (Over (Spec (.of k)))) [Smooth G.X.hom] [IsAffine G.X.left] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] [ConnectedSpace G.X.left] (X : CategoryTheory.Mod (Over (Spec (.of k))) G.X) [IsSeparated X.X.hom] [LocallyOfFiniteType X.X.hom] [QuasiCompact X.X.hom] (hnormal : ∀ p : X.X.left, IsDomain (X.X.left.presheaf.stalk p) ∧ IsIntegrallyClosed (X.X.left.presheaf.stalk p)) (x : X.X.left) : ∃ (W : CategoryTheory.Mod (Over (Spec (.of k))) G.X) (i : W ⟶ X), IsOpenImmersion i.hom.left ∧ x ∈ Set.range i.hom.left ∧ (∀ p : W.X.left, IsDomain (W.X.left.presheaf.stalk p) ∧ IsIntegrallyClosed (W.X.left.presheaf.stalk p)) ∧ IsSeparated W.X.hom ∧ LocallyOfFiniteType W.X.hom ∧ QuasiCompact W.X.hom ∧ ∃ (n : ℕ) (j : W.X.left ⟶ Proj.projectiveSpaceOverAffine (ULift.{u} (Fin (n + 1))) k), IsImmersion j ∧ j ≫ Proj.projectiveSpaceOverAffineToSpec (ULift.{u} (Fin (n + 1))) k = W.X.hom",
+  "branch": "newtargets-dag",
+  "by": "Q57",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0bd9aeedf",
+  "group": "Q57",
+  "result": "pass",
+  "note": "Read item node, 14 stmt_dep records, module, report (Worker report + Second reading present; the second reading is by the author). Clause by clause: k alg closed; G : Grp (Over Spec k) smooth/affine/LOFT+QC/ConnectedSpace; X : Mod (Over Spec k) G.X (action plus both laws, tensor = pullback via the AlgebraicGeometry.Pullbacks instance), separated/LOFT/QC, stalkwise domain+integrally closed; arbitrary point x; conclusion ∃ equivariant open immersion W→X hitting x (open immersion is mono, so equivalent to the action factoring), W normal/separated/finite type, ∃ n and IsImmersion j into Proj.projectiveSpaceOverAffine (ULift (Fin (n+1))) k over Spec k = Proj of MvPolynomial with total-degree grading (def-pc-proj). No extra hypotheses; edge cases empty/disconnected X, trivial G, n=0, nonclosed x, universe u OK. Statement verbatim; node differs from live only in lean; no defs, whole proof sorry; source/blueprint/proof-step docstrings present; encoding matches the landed torus sibling and the citers' absolute-Proj convention. Advisory only: projectiveSpaceOverAffine is owned by def-nagata-affine-proj (not a stmt_dep), faithful to def-pc-proj. No compile run (no file changed)."
+ }
+}

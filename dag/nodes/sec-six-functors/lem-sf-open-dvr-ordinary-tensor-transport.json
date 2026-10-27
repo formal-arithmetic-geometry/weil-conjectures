@@ -1,0 +1,158 @@
+{
+ "id": "lem-sf-open-dvr-ordinary-tensor-transport",
+ "kind": "statement",
+ "title": "Ordinary DVR tensor tower and augmentation transport",
+ "statement": "Fix l, E, d, T and a canonical coefficient model C as in [def-sf-open-quotient-koszul-models], and an ordinary quotient tensor/limit model M of [def-trf-completion-unit-models]. The functors C.modules.functor followed by the completed-adic ordinary quotient tower and M.tensor followed by exact scalar restriction followed by C.ordinaryTowers are naturally isomorphic. This isomorphism carries the ordinary completion unit followed by each quotient projection to the coefficient transport of the ordinary constant/limit adjunct of M.adjunction.unit. For every complex Q the restricted strict tensor complex of M has a tower isomorphism kappa with unrestrictedIntegralComplexTower Q, carrying that same strict adjunct to unrestrictedTowerUnit at every level. These are ordinary module and cochain assertions: no derived reduction, derived-system calculus S or total derived-limit identity occurs.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK (sheafified change of rings and tensor universal property); ordinary tensor transport step of lem-sf-open-dvr-strict-reduction-comparison."
+ },
+ "stmt_deps": [
+  "def-sf-open-quotient-koszul-models",
+  "def-trf-completion-unit-models",
+  "def-weil-integral-reduction-tower",
+  "lem-weil-integral-reduction-tower-well-defined",
+  "lem-sf-open-dvr-scalar-unit-formula"
+ ],
+ "proof": [
+  {
+   "text": "Lift C.finite to an isomorphism of commutative ring sheaves. C.completed_projection is the resulting scalar-extension square. Use the normalized ordinary scalar square from ring-iso transport, together with the proved sheaf tensor/scalar-extension comparison and uniqueness of left adjoints, to construct a natural isomorphism at every finite level. The pure-tensor and right-unitor formulas identify insertion of one with the scalar adjunction unit.",
+   "uses": [
+    "lem-pur-ring-iso-quotient-system-transport",
+    "lem-pe-restricted-kflat-tensor-identification",
+    "lem-a1-quotient-tensor-scalar-tower-comparison",
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "prop-weil-pbc-koszul-reconstruction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The scalar completion projections are locally surjective; conjugating by C.completed and C.finite gives local surjectivity of the completed-adic projections. The reconstruction quotient unit has these same underlying section maps and is epic. Tensor preserves colimits and hence epimorphisms, so every quotient-tensor unit is epic. Compose the finite comparisons with M.evaluation and exact scalar restriction. M.unit_tensor gives their normalization against the cone obtained from M.adjunction.unit. Cancel the epic unit to prove each adjacent transition square, assemble using NatTrans.ofOpSequence and NatIso.ofComponents, and use the reconstruction unit projection formula to obtain the required augmentation identity.",
+   "uses": [
+    "lem-pur-integral-operations-well-defined",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "def-trf-completion-unit-models",
+    "prop-weil-pbc-koszul-reconstruction",
+    "lem-sf-open-dvr-scalar-unit-formula"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the already proved ordinaryFiniteComparison, ordinaryChainSquare, unitStepDegree and assembleObjectTowerIso helpers to the evaluation isomorphisms of M. M.transition supplies the scalar quotient squares, so these comparisons assemble to kappa. Degreewise M.unit_tensor and unrestrictedTowerUnit_condition identify the two augmentations. The auxiliary finite-field datum used by the existing helpers is chosen with prime 3 when l=2 and prime 2 otherwise; it puts no restriction on the scheme.",
+   "uses": [
+    "lem-pur-integral-operation-roos-effectivity",
+    "def-trf-completion-unit-models",
+    "def-weil-integral-reduction-tower",
+    "lem-weil-integral-reduction-tower-well-defined"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-ring-iso-quotient-system-transport",
+  "lem-pe-restricted-kflat-tensor-identification",
+  "lem-a1-quotient-tensor-scalar-tower-comparison",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "prop-weil-pbc-koszul-reconstruction",
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "def-trf-completion-unit-models",
+  "lem-sf-open-dvr-scalar-unit-formula",
+  "lem-pur-integral-operation-roos-effectivity",
+  "def-weil-integral-reduction-tower",
+  "lem-weil-integral-reduction-tower-well-defined"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK, normalized finite scalar-extension comparison; ordinary epic-unit tower assembly. The cochain comparison reuses the proved strict-tower helpers of lem-pur-integral-operation-roos-effectivity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "leftAdjointUniq|mapDerivedCategoryCompIso",
+   "results": "{\"t\": \"2026-10-27T00:03:22Z\", \"tool\": \"grep\", \"query\": \"leftAdjointUniq|mapDerivedCategoryCompIso\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Triple.lean\", \"Mathlib/CategoryTheory/Sites/Pullback.lean\", \"Mathlib/CategoryTheory/Sites/Sheafification.lean\"], \"digest\": \"48b19d2a65cc12bd\"}",
+   "date": "2026-10-27",
+   "verdict": "No match for the normalized strict sheaf quotient tower assertion. Ordinary scalar restriction and adjoint uniqueness exist; the derived assembly is handled using existing completion models instead."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction.leftAdjointUniq\"",
+   "results": "{\"t\": \"2026-10-27T00:03:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"Adjunction.leftAdjointUniq\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.leftAdjointUniq\", \"CategoryTheory.Adjunction.leftAdjointUniq_refl\", \"CategoryTheory.Adjunction.leftAdjointUniq_inv_app\", \"CategoryTheory.Adjunction.leftAdjointUniq_hom_counit\", \"CategoryTheory.Adjunction.leftAdjointUniq_trans\", \"CategoryTheory.Adjunction.leftAdjointUniq_trans_app\", \"CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit\", \"CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit_assoc\"], \"digest\": \"45052fae1b4ae681\"}",
+   "date": "2026-10-27",
+   "verdict": "No match for the normalized strict sheaf quotient tower assertion. Ordinary scalar restriction and adjoint uniqueness exist; the derived assembly is handled using existing completion models instead."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact equivalence transports the derived quotient tensor tower and its adjunction unit",
+   "results": "{\"t\": \"2026-10-27T00:03:33Z\", \"tool\": \"leanfinder\", \"query\": \"An exact equivalence transports the derived quotient tensor tower and its adjunction unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"rTensor.inverse_comp_rTensor\", \"rTensor.inverse_apply\", \"lTensor.inverse_comp_lTensor\", \"lTensor.inverse_apply\", \"rTensor.inverse_of_rightInverse_comp_rTensor\", \"lTensor.inverse_of_rightInverse_comp_lTensor\", \"rTensor.inverse_of_rightInverse\", \"rTensor_exact\"], \"digest\": \"cbf2e80afca66964\"}",
+   "date": "2026-10-27",
+   "verdict": "No match for the normalized strict sheaf quotient tower assertion. Ordinary scalar restriction and adjoint uniqueness exist; the derived assembly is handled using existing completion models instead."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar restriction along an isomorphism of ring sheaves identifies strict quotient tensor towers and preserves K-flat complexes",
+   "results": "{\"t\": \"2026-10-27T00:07:52Z\", \"tool\": \"leansearch\", \"query\": \"Scalar restriction along an isomorphism of ring sheaves identifies strict quotient tensor towers and preserves K-flat complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RestrictScalars\", \"ModuleCat.restrictScalars\", \"ModuleCat.RestrictScalars.obj'\", \"SheafOfModules.restrictScalars\", \"PresheafOfModules.restrictScalars\", \"PresheafOfModules.restrictScalarsObj\", \"RingCat.moduleCatRestrictScalarsPseudofunctor\", \"Algebra.FormallyUnramified.flat_of_restrictScalars\"], \"digest\": \"53736f9a00ae1d0f\"}",
+   "date": "2026-10-27",
+   "verdict": "No match for the normalized strict sheaf quotient tower assertion. Ordinary scalar restriction and adjoint uniqueness exist; the derived assembly is handled using existing completion models instead."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenDvrStrictReductionComparison",
+  "date": "2026-10-27",
+  "group": "Q8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Coefficient coherence: ordinary tensor reassociation and scalar adjunction units underlying the strict DVR quotient comparison.",
+   "via": [
+    "lem-sf-open-dvr-strict-reduction-comparison",
+    "lem-sf-open-dvr-augmented-reduction-comparison",
+    "lem-sf-open-quotient-koszul-completeness",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OpenDvrOrdinaryTensorTransport",
+  "file": "lean/Sheaf/SixFunctors/OpenDvrOrdinaryTensorTransport.lean",
+  "declaration": "WeilConjectures.openDvrOrdinaryTensorTransport",
+  "declarations": [
+   "WeilConjectures.openDvrOrdinaryTensorTransport"
+  ],
+  "statement": "theorem openDvrOrdinaryTensorTransport\n    (d : AdicCoefficientDatum (Padic.coefficientExtensionIntegers l E))\n    (T : Scheme.{u}) (C : OpenDvrCoefficientModel l E d T)\n    (M : CompletionUnit.OrdinaryModel l E T) :\n    ∃ ν : C.modules.functor ⋙ completedAdicOrdinaryTower T d ≅\n        M.tensor ⋙ coefficientSequenceRestriction.{u, u} l E T ⋙ C.ordinaryTowers,\n      (∀ (Q : CochainComplex (scalarReductionSource.{u, u} l E T) ℤ)\n        (i : ℤ) (n : ℕ),\n        (reconstructionOrdinaryUnit T d).app (C.modules.functor.obj (Q.X i)) ≫\n            limit.π ((completedAdicOrdinaryTower T d).obj\n              (C.modules.functor.obj (Q.X i))) (op n) ≫ (ν.hom.app (Q.X i)).app (op n) =\n          C.modules.functor.map\n            (((openScalarComplexAugmentation l E T M Q).f i).app (op n))) ∧\n      (∀ Q : CochainComplex (scalarReductionSource.{u, u} l E T) ℤ,\n        ∃ κ : HomologicalComplex.complexOfFunctorsToFunctorToComplex.obj\n            ((CompletionUnit.tower l E T).obj ((M.quotient l E T).obj Q)) ≅\n              unrestrictedIntegralComplexTower.{u, u} l E T Q,\n          ∀ n : ℕ, HEq\n            ((HomologicalComplex.complexOfFunctorsToFunctorToComplex.map\n                (openScalarComplexAugmentation l E T M Q)).app (op n) ≫ κ.hom.app (op n))\n            (unrestrictedTowerUnit.{u, u} l E T Q n))",
+  "branch": "sheaf-dag",
+  "by": "Q8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q8",
+  "result": "pass",
+  "landing": "20261027T021353-L-2762671",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S6",
+  "result": "pass",
+  "landing": "20261027T034741-L-3681527",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

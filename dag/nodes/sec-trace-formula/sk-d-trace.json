@@ -46,7 +46,32 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-trace-formula",
  "unit": "sk-d-trace",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "CategoryTheory.MonoidalCategory.trace"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "CategoryTheory.MonoidalCategory.trace",
+     "module": "WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided",
+     "lines": [
+      66,
+      79
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "lean": {
   "module": "WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided",
   "declaration": "CategoryTheory.MonoidalCategory.trace",
@@ -64,5 +89,15 @@
   "group": "Q49",
   "result": "pass",
   "note": "Existing-declaration attachment of sk-d-trace to CategoryTheory.MonoidalCategory.trace (slopmaster2 WeilConjectures/Mathlib/CategoryTheory/Monoidal/Rigid/Braided.lean, tagged blueprint sk-d-trace). The node statement equals source _section.md order 2617, whose lean field names this declaration. Clause check: braided monoidal C with no extra structure; HasRightDual X gives coev/ev as an ExactPairing; composite eta, f whiskered by the dual, forward braiding hom, eps; value in End(unit). Universes u_1,u_2 independent; no sorry; no axioms. The Perf(R) scalar case is already the landed def-trf-categorical-trace DerivedCategory.perfectCategoricalTrace = perfectTraceScalar (trace v), with no duplicate introduced. The commit changes only the node lean record and the report; both report sections are present. lcompile check of the upstream declaration: exit 0. nt_compile --json side-overlay check including PerfectCategoricalTrace: clean. No findings."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $A$ be the coefficient ring, a finite commutative $\\ell$-primary ring.\nFor $P\\in\\operatorname{Perf}(A)$ put $P^\\vee=R\\operatorname{Hom}_A(P,A)$. If\n$v:P\\to P$ is a morphism in $D(A)$, its trace is the scalar\n\n$$\n\\operatorname{tr}_A(v\\mid P)=\n\\left[A\\xrightarrow{\\operatorname{coev}}P\\dt P^\\vee\n\\xrightarrow{v\\dt1}P\\dt P^\\vee\n\\xrightarrow{\\mathrm{sym}}P^\\vee\\dt P\n\\xrightarrow{\\operatorname{ev}}A\\right]\\in A.\n$$\n\nHere $\\operatorname{coev}$ and $\\operatorname{ev}$ are the coevaluation and\nevaluation of the dual pair $(P,P^\\vee)$ in $D(A)$, and the symmetry includes\nthe Koszul sign.\n\n*General form.* The same composite defines the trace in any braided monoidal\ncategory $\\mathcal C$ with unit $\\mathbf 1$. If $P\\in\\mathcal C$ has a right\ndual $P^\\vee$, with coevaluation $\\mathrm{coev}:\\mathbf 1\\to P\\otimes P^\\vee$ and\nevaluation $\\mathrm{ev}:P^\\vee\\otimes P\\to\\mathbf 1$, then for $v:P\\to P$\n\n$$\n\\tr(v\\mid P)=\n\\bigl[\\mathbf 1\\xrightarrow{\\mathrm{coev}}P\\otimes P^\\vee\n\\xrightarrow{v\\otimes1}P\\otimes P^\\vee\n\\xrightarrow{\\mathrm{sym}}P^\\vee\\otimes P\n\\xrightarrow{\\mathrm{ev}}\\mathbf 1\\bigr]\\in\\operatorname{End}(\\mathbf 1),\n$$\n\nwhere $\\mathrm{sym}$ is the braiding. For a commutative ring $R$ and\n$P\\in\\Perf(R)$, with $P^\\vee=R\\operatorname{Hom}_R(P,R)$, evaluation and\ncoevaluation give its duality in the symmetric monoidal category\n$(\\Perf(R),\\otimes_R^{\\mathrm L},R)$, whose unit has endomorphism ring $R$; this\ngives $\\tr_R(v\\mid P)\\in R$, and for $R=A$ it is the trace defined above.",
+  "proof": [],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

@@ -1,0 +1,858 @@
+{
+ "id": "lem-trf-completed-algebraic-closure-cartesian",
+ "kind": "statement",
+ "title": "Completed algebraic closure over a complete stable field",
+ "statement": "Let $k$ be a field [def-weil-field], complete for a nontrivial real-valued multiplicative nonarchimedean absolute value, and stable [def-trf-stable-nonarchimedean-field]. Choose an algebraic closure $k^a/k$ [def-weil-algebraic-closure] with its spectral absolute value, and let $k'$ be its metric completion, with the extending absolute value. Then $k'$ is an algebraically closed complete field extending $k$ isometrically. Every finite-dimensional $k$-linear subspace $V\\subset k'$ has an orthogonal $k$-basis for the restricted absolute value: $|\\sum_i a_iv_i|=\\max_i|a_i||v_i|$ for all $a_i\\in k$. The zero subspace has the empty basis. No spherical completeness or discreteness of the valuation is assumed.",
+ "source": {
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Proposition 3.4.1/3 and Corollary 2.4.3/10; their application in Section 5.3.4, opening paragraph and Lemma 1 proof, printed pp.218–219 (scan PDF pp.224–225). Primary scan read online 2026-10-24; local archival copy WANTED.",
+  "url": "https://math.arizona.edu/~cais/scans/BGR-Non_Archimedean_Analysis.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-stable-nonarchimedean-field",
+  "def-weil-algebraic-closure"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-trf-spectral-norm-algebraic-extension], the spectral norm on $k^a$ is a multiplicative nonarchimedean norm restricting to that of $k$. By [lem-sfb-normed-field-completion], its completion $k'$ is a complete normed field and $k^a\\to k'$ is an isometric field inclusion. The image of $k^a$ is dense by the definition of metric completion. For $x,y\\in k'$, choose sequences $x_j,y_j\\in k^a$ converging to them. Taking limits in $|x_j+y_j|\\le\\max(|x_j|,|y_j|)$ proves the same inequality in $k'$. The composite $k\\to k^a\\to k'$ is isometric, so its absolute value is nontrivial.",
+   "uses": [
+    "lem-trf-spectral-norm-algebraic-extension",
+    "lem-sfb-normed-field-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Sections 3.2.4 and 3.4.1: extending the spectral valuation and taking the metric completion."
+   }
+  },
+  {
+   "text": "Let $f\\in k'[T]$ be monic of degree $n\\ge1$. Choose an algebraic closure $\\Omega$ of $k'$ using [def-weil-algebraic-closure]. Equip it with the extending multiplicative nonarchimedean spectral norm by [lem-trf-spectral-norm-algebraic-extension], applied over the complete nontrivially valued field $k'$. Choose a root $a\\in\\Omega$ of $f$ and set $M=\\max(|a|,1)$. For any real $r>0$, put $\\varepsilon=(r/M)^n/(n+1)>0$. Apply [lem-sfb-monic-dense-approximation] to the dense subfield $k^a\\subset k'$: there is a monic $g\\in k^a[T]$ of degree $n$ whose coefficientwise image $h\\in k'[T]$ satisfies $|h_i-f_i|<\\varepsilon$ for every $i$.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "lem-trf-spectral-norm-algebraic-extension",
+    "lem-sfb-monic-dense-approximation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proposition 3.4.1/3, proof, printed pp.146–147 (PDF pp.154–155): approximate the finitely many coefficients in the dense algebraically closed subfield."
+   }
+  },
+  {
+   "text": "Since $k^a$ is algebraically closed, [lem-weil-alg-closed-linear-factorization] factors $g$ into $n$ linear factors with roots $c_j\\in k^a$. The same factorization makes $h$ split over $\\Omega$. Thus [lem-sfb-roots-coefficient-proximity], applied to $\\Omega/k'$ with its extending norm, gives $b\\in\\Omega$ with $h(b)=0$ and $|a-b|<((n+1)\\varepsilon)^{1/n}M=r$. Evaluating the factorization gives $\\prod_j(b-c_j)=0$. A finite product in a field is zero only if a factor is zero, so $b=c_j\\in k^a\\subset k'$. Therefore every positive-radius ball about $a$ meets $k'$.",
+   "uses": [
+    "lem-weil-alg-closed-linear-factorization",
+    "lem-sfb-roots-coefficient-proximity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proposition 3.4.1/3, proof, printed p.147 (PDF p.155): approximate roots; the quantitative root bound is the cited Mathlib input and works also in positive characteristic."
+   }
+  },
+  {
+   "text": "The image of $k'$ in $\\Omega$ is a one-dimensional $k'$-linear subspace. Apply [lem-sfb-finite-dimensional-subspace-closed] with scalar field $k'$ and ambient vector space $\\Omega$. Its scalar field is complete and nontrivially valued by step 1. The norm metric on $\\Omega$ is Hausdorff, and its vector-space operations are continuous: addition satisfies $|(x+y)-(x_0+y_0)|\\le\\max(|x-x_0|,|y-y_0|)$, negation is an isometry, and $|cx-dy|\\le\\max(|c||x-y|,|c-d||y|)$ with $|c|\\le\\max(|d|,|c-d|)$ locally bounded. The inclusion is isometric by step 2. Thus $k'$ is closed in $\\Omega$. Step 3 puts $a$ in its closure, hence $a\\in k'$. Every monic polynomial of positive degree over $k'$ has a root in $k'$; dividing a nonconstant polynomial by its nonzero leading coefficient reduces to this case. This is algebraic closedness as in [def-weil-algebraic-closure].",
+   "uses": [
+    "lem-sfb-finite-dimensional-subspace-closed",
+    "def-weil-algebraic-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proposition 3.4.1/3, proof, printed p.147 (PDF p.155): the approximate roots have limit in the complete subfield; closedness states this without choosing a subsequence."
+   }
+  },
+  {
+   "text": "Every finite-dimensional $k$-linear subspace $U\\subset k^a$ has an orthogonal basis. Indeed, choose a finite $k$-basis $u_1,\\ldots,u_d$ of $U$. These elements are algebraic over $k$, so [lem-weil-pbc-algebraic-generators-finite-extension] shows that $E=k(u_1,\\ldots,u_d)$ is finite over $k$. The restricted norm on $E$ is its minimal-polynomial spectral norm: for an element of $E$, the monic polynomial of least degree over $k$ is unchanged by embedding $E\\subset k^a$, since evaluation vanishes before the embedding exactly when it vanishes after it. Stability [def-trf-stable-nonarchimedean-field] therefore gives a finite orthogonal $k$-basis of $E$. Applying [lem-trf-cartesian-subspace] to $U\\subset E$ gives the desired orthogonal basis. For $U=0$ take the empty basis.",
+   "uses": [
+    "lem-weil-pbc-algebraic-generators-finite-extension",
+    "def-trf-stable-nonarchimedean-field",
+    "lem-trf-cartesian-subspace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Corollary 2.4.3/10 as used in Lemma 5.3.4/1, printed p.219 (PDF p.225): first verify that the algebraic closure is k-cartesian using stability and Proposition 2.4.1/5."
+   }
+  },
+  {
+   "text": "Let $V\\subset k'$ have positive finite dimension $d$. By [lem-trf-finite-ultrametric-almost-orthogonal-basis] with $r=1/2$, choose a basis $e_1,\\ldots,e_d$ with $|\\sum_i a_i e_i|\\ge\\tfrac12\\max_i|a_i||e_i|$. Set $\\alpha=\\tfrac12\\min_i|e_i|>0$. Then $|\\sum_i a_i e_i|\\ge\\alpha\\max_i|a_i|$ for all coefficients. Density of $k^a$ gives $w_i\\in k^a$ with $|w_i-e_i|<\\alpha$ for every $i$. This uses completeness only of the scalar field $k$, exactly as required in the almost-orthogonal-basis lemma.",
+   "uses": [
+    "lem-trf-finite-ultrametric-almost-orthogonal-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proposition 2.4.3/7, printed p.101 (PDF p.109): the lower coordinate bound and approximation of the finitely many basis vectors; weak cartesianness is supplied by the cited almost-orthogonal basis."
+   }
+  },
+  {
+   "text": "For coefficients not all zero put $A=\\max_i|a_i|>0$, $x=\\sum_i a_i e_i$ and $y=\\sum_i a_i w_i$. The finite ultrametric sum inequality gives $|y-x|\\le\\max_i|a_i||w_i-e_i|<\\alpha A\\le|x|$. The inequalities $|y|\\le\\max(|x|,|y-x|)$ and $|x|\\le\\max(|y|,|y-x|)$ force $|y|=|x|$. This equality also holds when all coefficients vanish. Thus the assignment $e_i\\mapsto w_i$ defines a linear isometry $T:V\\to U=\\sum_i kw_i\\subset k^a$: it is well-defined on basis coordinates; the norm equality makes it injective; and the definition of $U$ makes it surjective.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proposition 2.4.3/7, proof, printed p.101 (PDF p.109): explicit strict ultrametric perturbation calculation."
+   }
+  },
+  {
+   "text": "Apply step 5 to $U$ and let $v_1,\\ldots,v_d$ be its orthogonal basis. Then $T^{-1}v_i$ is a basis of $V$, and the isometry gives $|\\sum_i a_iT^{-1}v_i|=|\\sum_i a_iv_i|=\\max_i|a_i||v_i|=\\max_i|a_i||T^{-1}v_i|$. When $V=0$ its empty basis has sum and maximum both zero. This proves every asserted orthogonality clause without discreteness or spherical completeness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proposition 2.4.3/7 and Corollary 2.4.3/10, printed pp.101–102 (PDF pp.109–110); transfer across the explicit isometry."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-spectral-norm-algebraic-extension",
+  "lem-sfb-normed-field-completion",
+  "def-weil-algebraic-closure",
+  "lem-sfb-monic-dense-approximation",
+  "lem-weil-alg-closed-linear-factorization",
+  "lem-sfb-roots-coefficient-proximity",
+  "lem-sfb-finite-dimensional-subspace-closed",
+  "lem-weil-pbc-algebraic-generators-finite-extension",
+  "def-trf-stable-nonarchimedean-field",
+  "lem-trf-cartesian-subspace",
+  "lem-trf-finite-ultrametric-almost-orthogonal-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "BGR Proposition 3.4.1/3, Proposition 2.4.3/7 and Corollary 2.4.3/10, applied in 5.3.4. Primary scan read online; local archival copy absent (WANTED in report). Explicit proof assembled with existing Mathlib/DAG inputs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The completion of an algebraic closure of a complete stable valued field is algebraically closed and every finite dimensional subspace over the base field has an orthogonal basis",
+   "results": {
+    "t": "2026-10-24T15:47:25Z",
+    "tool": "leanfinder",
+    "query": "The completion of an algebraic closure of a complete stable valued field is algebraically closed and every finite dimensional subspace over the base field has an orthogonal basis",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm.completeSpace",
+     "Valued.completable",
+     "NumberField.InfinitePlace.Completion.instAlgebra",
+     "spectralNorm.nontriviallyNormedField",
+     "NormedField.instCompletableTopField",
+     "IsNonarchimedeanLocalField.instCompleteSpace",
+     "NumberField.InfinitePlace.Completion",
+     "WithAbs.instFiniteDimensional"
+    ],
+    "digest": "75c0e8b6d2f72d5c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: PadicComplex is a particular completion of Q_p; general valuedCompletion provides a valued completion, not algebraic closedness and exact orthogonality over every complete stable field."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAlgClosed\", \"Completion\"",
+   "results": {
+    "t": "2026-10-24T15:47:25Z",
+    "tool": "loogle",
+    "query": "\"IsAlgClosed\", \"Completion\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: PadicComplex is a particular completion of Q_p; general valuedCompletion provides a valued completion, not algebraic closedness and exact orthogonality over every complete stable field."
+  },
+  {
+   "tool": "grep",
+   "query": "IsAlgClosed.*Completion|Completion.*IsAlgClosed|cartesian",
+   "results": {
+    "t": "2026-10-24T15:47:25Z",
+    "tool": "grep",
+    "query": "IsAlgClosed.*Completion|Completion.*IsAlgClosed|cartesian",
+    "sub": "",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/NumberTheory/Padics/Complex.lean",
+     "Mathlib/SetTheory/ZFC/Basic.lean",
+     "Mathlib/Order/CompleteLattice/MulticoequalizerDiagram.lean",
+     "Mathlib/Order/CompleteLattice/MulticoequalizerDiagram.lean",
+     "Mathlib/Order/CompleteLattice/MulticoequalizerDiagram.lean",
+     "Mathlib/Order/CompleteLattice/MulticoequalizerDiagram.lean",
+     "Mathlib/Analysis/Analytic/Constructions.lean",
+     "Mathlib/Analysis/Analytic/Constructions.lean"
+    ],
+    "digest": "0312b27c4683265d"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: PadicComplex is a particular completion of Q_p; general valuedCompletion provides a valued completion, not algebraic closedness and exact orthogonality over every complete stable field."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The completion of an algebraic closure of a complete stable valued field is algebraically closed and every finite dimensional subspace over the base field has an nonarchimedean orthogonal basis",
+   "results": {
+    "t": "2026-10-24T15:47:26Z",
+    "tool": "leansearch",
+    "query": "The completion of an algebraic closure of a complete stable valued field is algebraically closed and every finite dimensional subspace over the base field has an nonarchimedean orthogonal basis",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PadicComplex",
+     "algebraicClosure.isAlgClosure",
+     "Submodule.HasOrthogonalProjection.ofCompleteSpace",
+     "Valued.valuedCompletion",
+     "Valued.completable",
+     "IsNonarchimedeanLocalField.instCompleteSpace",
+     "Ring.instFiniteDimensionalFractionRingSubtypeAlgebraicClosureMemIntermediateFieldNormalClosure",
+     "spectralNorm.completeSpace"
+    ],
+    "digest": "14b520cdf2133315"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: PadicComplex is a particular completion of Q_p; general valuedCompletion provides a valued completion, not algebraic closedness and exact orthogonality over every complete stable field."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completion of a cartesian algebraic extension of a complete stable valued field is cartesian and algebraically closed",
+   "results": {
+    "t": "2026-10-24T15:52:10Z",
+    "tool": "leanfinder",
+    "query": "Completion of a cartesian algebraic extension of a complete stable valued field is cartesian and algebraically closed",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Valued.completable",
+     "NumberField.InfinitePlace.Completion.instAlgebra",
+     "CompletableTopField",
+     "Subfield.completableTopField",
+     "LaurentSeries.instAlgebraRatFuncAdicCompl",
+     "IsUniformInducing.completableTopField",
+     "IsNonarchimedeanLocalField.instCompleteSpace",
+     "Valued.valuedCompletion"
+    ],
+    "digest": "ed9b54b672b13885"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: PadicComplex is a particular completion of Q_p; general valuedCompletion provides a valued completion, not algebraic closedness and exact orthogonality over every complete stable field."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The completion of an algebraically closed nonarchimedean normed field is algebraically closed",
+   "results": {
+    "t": "2026-10-24T16:25:06Z",
+    "tool": "leanfinder",
+    "query": "The completion of an algebraically closed nonarchimedean normed field is algebraically closed",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "NormedField.instCompletableTopField",
+     "spectralNorm.completeSpace",
+     "Valued.completable",
+     "UniformSpace.Completion.instNormedFieldOfCompletableTopField",
+     "PadicAlgCl.normedField",
+     "IsNonarchimedeanLocalField.instCompleteSpace",
+     "NumberField.InfinitePlace.Completion.instAlgebra",
+     "NumberField.InfinitePlace.Completion.instNormedField"
+    ],
+    "digest": "8dd465077dec8abc"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: no exact orthogonal-basis assertion; IsAlgClosed.of_denseRange additionally assumes CharZero (Dense.lean:45–48). Existing partial Mathlib inputs are cited through existing DAG nodes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAlgClosed\", \"Completion\"",
+   "results": {
+    "t": "2026-10-24T16:25:55Z",
+    "tool": "loogle",
+    "query": "\"IsAlgClosed\", \"Completion\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: no exact orthogonal-basis assertion; IsAlgClosed.of_denseRange additionally assumes CharZero (Dense.lean:45–48). Existing partial Mathlib inputs are cited through existing DAG nodes."
+  },
+  {
+   "tool": "grep",
+   "query": "IsAlgClosed.*Completion|Completion.*IsAlgClosed|IsUltrametricDist.*Completion",
+   "results": {
+    "t": "2026-10-24T16:26:29Z",
+    "tool": "grep",
+    "query": "IsAlgClosed.*Completion|Completion.*IsAlgClosed|IsUltrametricDist.*Completion",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/NumberTheory/Padics/Complex.lean"
+    ],
+    "digest": "87c8efc955ab5b5e"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: no exact orthogonal-basis assertion; IsAlgClosed.of_denseRange additionally assumes CharZero (Dense.lean:45–48). Existing partial Mathlib inputs are cited through existing DAG nodes."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem.*of_denseRange|lemma.*of_denseRange|instance.*Completion|isometry_coe",
+   "results": {
+    "t": "2026-10-24T16:27:56Z",
+    "tool": "grep",
+    "query": "theorem.*of_denseRange|lemma.*of_denseRange|instance.*Completion|isometry_coe",
+    "sub": "RingTheory/Polynomial",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: no exact orthogonal-basis assertion; IsAlgClosed.of_denseRange additionally assumes CharZero (Dense.lean:45–48). Existing partial Mathlib inputs are cited through existing DAG nodes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The metric completion of an algebraically closed normed field is algebraically closed",
+   "results": {
+    "t": "2026-10-24T16:27:57Z",
+    "tool": "leansearch",
+    "query": "The metric completion of an algebraically closed normed field is algebraically closed",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicClosure.isAlgClosed",
+     "PadicComplex.norm_extends",
+     "AbsoluteValue.Completion",
+     "PadicComplex",
+     "PadicComplex.nnnorm_extends",
+     "NormedField.instCompletableTopField",
+     "Complex.instIsComplete",
+     "PadicAlgCl.instIsUltrametricDist"
+    ],
+    "digest": "590de677a401735f"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: no exact orthogonal-basis assertion; IsAlgClosed.of_denseRange additionally assumes CharZero (Dense.lean:45–48). Existing partial Mathlib inputs are cited through existing DAG nodes."
+  },
+  {
+   "tool": "grep",
+   "query": "of_denseRange",
+   "results": {
+    "t": "2026-10-24T16:28:45Z",
+    "tool": "grep",
+    "query": "of_denseRange",
+    "sub": "Analysis",
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Normed/Field/Dense.lean",
+     "Mathlib/Analysis/Normed/Field/Dense.lean",
+     "Mathlib/Analysis/Normed/Field/Dense.lean",
+     "Mathlib/Analysis/Normed/Field/Approximation.lean"
+    ],
+    "digest": "f4992286adf9cbb2"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: no exact orthogonal-basis assertion; IsAlgClosed.of_denseRange additionally assumes CharZero (Dense.lean:45–48). Existing partial Mathlib inputs are cited through existing DAG nodes."
+  },
+  {
+   "tool": "grep",
+   "query": "normedField|norm_mul|spectralNorm_extends|norm_extends",
+   "results": {
+    "t": "2026-10-24T16:29:39Z",
+    "tool": "grep",
+    "query": "normedField|norm_mul|spectralNorm_extends|norm_extends",
+    "sub": "Analysis/Normed/Unbundled/SpectralNorm.lean",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "65",
+     "68",
+     "231",
+     "370",
+     "376"
+    ],
+    "digest": "8a8c57ad80c663e8"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: no exact orthogonal-basis assertion; IsAlgClosed.of_denseRange additionally assumes CharZero (Dense.lean:45–48). Existing partial Mathlib inputs are cited through existing DAG nodes."
+  },
+  {
+   "tool": "grep",
+   "query": "instNormedField|norm_coe|isometry_coe|denseRange_coe|CompleteSpace",
+   "results": {
+    "t": "2026-10-24T16:29:39Z",
+    "tool": "grep",
+    "query": "instNormedField|norm_coe|isometry_coe|denseRange_coe|CompleteSpace",
+    "sub": "Analysis/Normed/Module/Completion.lean",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "50",
+     "81"
+    ],
+    "digest": "691faed6d88666c0"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: no exact orthogonal-basis assertion; IsAlgClosed.of_denseRange additionally assumes CharZero (Dense.lean:45–48). Existing partial Mathlib inputs are cited through existing DAG nodes."
+  },
+  {
+   "tool": "grep",
+   "query": "instance.*completeSpace|instance.*CompleteSpace|theorem.*norm_coe|isometry_coe|denseRange_coe|IsUltrametricDist",
+   "results": {
+    "t": "2026-10-24T16:32:49Z",
+    "tool": "grep",
+    "query": "instance.*completeSpace|instance.*CompleteSpace|theorem.*norm_coe|isometry_coe|denseRange_coe|IsUltrametricDist",
+    "sub": "Analysis/Normed",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Normed/Algebra/Ultra.lean",
+     "Mathlib/Analysis/Normed/Algebra/Ultra.lean",
+     "Mathlib/Analysis/Normed/Algebra/Ultra.lean",
+     "Mathlib/Analysis/Normed/Algebra/Ultra.lean",
+     "Mathlib/Analysis/Normed/Algebra/Ultra.lean",
+     "Mathlib/Analysis/Normed/Field/Dense.lean",
+     "Mathlib/Analysis/Normed/Algebra/Unitization.lean",
+     "Mathlib/Analysis/Normed/Field/Krasner.lean"
+    ],
+    "digest": "d033f3d98da9c17e"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: no exact orthogonal-basis assertion; IsAlgClosed.of_denseRange additionally assumes CharZero (Dense.lean:45–48). Existing partial Mathlib inputs are cited through existing DAG nodes."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem spectralAlgNorm_mul|def normedField|def normedAlgebra|theorem spectralNorm_extends|theorem isNonarchimedean_spectralNorm",
+   "results": {
+    "t": "2026-10-24T16:34:14Z",
+    "tool": "grep",
+    "query": "theorem spectralAlgNorm_mul|def normedField|def normedAlgebra|theorem spectralNorm_extends|theorem isNonarchimedean_spectralNorm",
+    "sub": "Analysis/Normed/Unbundled",
+    "ok": true,
+    "n_hits": 7,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/RingSeminorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/RingSeminorm.lean"
+    ],
+    "digest": "1c976bcde8afdd70"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: no exact orthogonal-basis assertion; IsAlgClosed.of_denseRange additionally assumes CharZero (Dense.lean:45–48). Existing partial Mathlib inputs are cited through existing DAG nodes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The spectral norm gives an isometric normed field structure on an algebraic extension of a complete nonarchimedean field",
+   "results": {
+    "t": "2026-10-24T16:34:14Z",
+    "tool": "leansearch",
+    "query": "The spectral norm gives an isometric normed field structure on an algebraic extension of a complete nonarchimedean field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm.normedField",
+     "spectralAlgNorm",
+     "spectralNorm.normedSpace",
+     "spectralNorm.nontriviallyNormedField",
+     "spectralNorm_unique",
+     "spectralNorm",
+     "spectralAlgNorm_mul",
+     "spectralNorm.seminormedAddCommGroup"
+    ],
+    "digest": "e10cde99d3d6e804"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: no exact orthogonal-basis assertion; IsAlgClosed.of_denseRange additionally assumes CharZero (Dense.lean:45–48). Existing partial Mathlib inputs are cited through existing DAG nodes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spectralAlgNorm_mul\"",
+   "results": {
+    "t": "2026-10-24T16:34:15Z",
+    "tool": "loogle",
+    "query": "\"spectralAlgNorm_mul\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "spectralAlgNorm_mul"
+    ],
+    "digest": "dc593cfbf6008e90"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: no exact orthogonal-basis assertion; IsAlgClosed.of_denseRange additionally assumes CharZero (Dense.lean:45–48). Existing partial Mathlib inputs are cited through existing DAG nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The spectral norm on any algebraic extension of a complete nonarchimedean nontrivially normed field is multiplicative and extends the base norm",
+   "results": {
+    "t": "2026-10-24T16:34:15Z",
+    "tool": "leanfinder",
+    "query": "The spectral norm on any algebraic extension of a complete nonarchimedean nontrivially normed field is multiplicative and extends the base norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralMulAlgNorm",
+     "spectralMulAlgNorm_def",
+     "spectralAlgNorm",
+     "spectralNorm.normedField",
+     "spectralAlgNorm_def",
+     "spectralAlgNorm_mul",
+     "spectralNorm.normedSpace",
+     "spectralNorm.nontriviallyNormedField"
+    ],
+    "digest": "d8b95aa100c2bb5a"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: no exact orthogonal-basis assertion; IsAlgClosed.of_denseRange additionally assumes CharZero (Dense.lean:45–48). Existing partial Mathlib inputs are cited through existing DAG nodes."
+  },
+  {
+   "tool": "grep",
+   "query": "NormedField \\(UniformSpace.Completion|NormedAlgebra 𝕜 \\(Completion|toComplₗᵢ|norm_coe",
+   "results": {
+    "t": "2026-10-24T16:35:03Z",
+    "tool": "grep",
+    "query": "NormedField \\(UniformSpace.Completion|NormedAlgebra 𝕜 \\(Completion|toComplₗᵢ|norm_coe",
+    "sub": "Analysis/Normed/Module",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Normed/Module/Completion.lean",
+     "Mathlib/Analysis/Normed/Module/Completion.lean",
+     "Mathlib/Analysis/Normed/Module/Completion.lean",
+     "Mathlib/Analysis/Normed/Module/Completion.lean",
+     "Mathlib/Analysis/Normed/Module/Completion.lean",
+     "Mathlib/Analysis/Normed/Module/RCLike/Basic.lean",
+     "Mathlib/Analysis/Normed/Module/RCLike/Basic.lean",
+     "Mathlib/Analysis/Normed/Module/RCLike/Basic.lean"
+    ],
+    "digest": "5efdd49d82068c30"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: no exact orthogonal-basis assertion; IsAlgClosed.of_denseRange additionally assumes CharZero (Dense.lean:45–48). Existing partial Mathlib inputs are cited through existing DAG nodes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The completion of a normed field is a normed field with dense isometric embedding",
+   "results": {
+    "t": "2026-10-24T16:35:03Z",
+    "tool": "leansearch",
+    "query": "The completion of a normed field is a normed field with dense isometric embedding",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "UniformSpace.Completion.instNormedFieldOfCompletableTopField",
+     "NormedField.instCompletableTopField",
+     "AbsoluteValue.Completion",
+     "AbsoluteValue.Completion.extensionEmbedding_of_comp",
+     "UniformSpace.Completion.instNormedSpace",
+     "AbsoluteValue.Completion.instCoe",
+     "DenselyNormedField",
+     "UniformSpace.Completion.isDenseEmbedding_coe"
+    ],
+    "digest": "854f39832bbcd6eb"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: no exact orthogonal-basis assertion; IsAlgClosed.of_denseRange additionally assumes CharZero (Dense.lean:45–48). Existing partial Mathlib inputs are cited through existing DAG nodes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Completion\", \"norm_coe\"",
+   "results": {
+    "t": "2026-10-24T16:35:03Z",
+    "tool": "loogle",
+    "query": "\"Completion\", \"norm_coe\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "UniformSpace.Completion.norm_coe",
+     "UniformSpace.Completion.nnnorm_coe",
+     "UniformSpace.Completion.enorm_coe",
+     "NumberField.InfinitePlace.Completion.norm_coe"
+    ],
+    "digest": "5c3f63b9ce982914"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: no exact orthogonal-basis assertion; IsAlgClosed.of_denseRange additionally assumes CharZero (Dense.lean:45–48). Existing partial Mathlib inputs are cited through existing DAG nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normed field has a complete normed field completion and the canonical embedding is an isometry with dense image",
+   "results": {
+    "t": "2026-10-24T16:35:04Z",
+    "tool": "leanfinder",
+    "query": "A normed field has a complete normed field completion and the canonical embedding is an isometry with dense image",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "NormedField.instCompletableTopField",
+     "UniformSpace.Completion.instNormedFieldOfCompletableTopField",
+     "RCLike.toCompleteSpace",
+     "AbsoluteValue.Completion.isometry_extensionEmbedding_of_comp",
+     "AbsoluteValue.Completion.isClosedEmbedding_extensionEmbedding_of_comp",
+     "UniformSpace.Completion.norm_toComplL",
+     "completeSpace_of_cauSeq_isComplete",
+     "UniformSpace.Completion.instNormedSpace"
+    ],
+    "digest": "734c0f83a204caf0"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: no exact orthogonal-basis assertion; IsAlgClosed.of_denseRange additionally assumes CharZero (Dense.lean:45–48). Existing partial Mathlib inputs are cited through existing DAG nodes."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem exists_roots_norm_sub_lt_of_norm_coeff_sub_lt|theorem exists_aroots_norm_sub_lt_of_norm_coeff_sub_lt",
+   "results": {
+    "t": "2026-10-24T16:36:46Z",
+    "tool": "grep",
+    "query": "theorem exists_roots_norm_sub_lt_of_norm_coeff_sub_lt|theorem exists_aroots_norm_sub_lt_of_norm_coeff_sub_lt",
+    "sub": "Analysis/Normed/Field",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Normed/Field/Approximation.lean",
+     "Mathlib/Analysis/Normed/Field/Approximation.lean"
+    ],
+    "digest": "74e516b71b1ac888"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: no exact orthogonal-basis assertion; IsAlgClosed.of_denseRange additionally assumes CharZero (Dense.lean:45–48). Existing partial Mathlib inputs are cited through existing DAG nodes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For close monic polynomials of equal degree every root of one is close to a root of the other if it splits",
+   "results": {
+    "t": "2026-10-24T16:36:46Z",
+    "tool": "leansearch",
+    "query": "For close monic polynomials of equal degree every root of one is close to a root of the other if it splits",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Polynomial.rootOfSplits'",
+     "Polynomial.rootOfSplits.congr_simp",
+     "Polynomial.splits_of_natDegree_le_one_of_monic",
+     "Polynomial.rootOfSplits'_eq_rootOfSplits",
+     "Polynomial.exists_root_of_splits'",
+     "Polynomial.aeval_root_derivative_of_splits",
+     "Polynomial.splits_of_degree_le_one_of_monic",
+     "Polynomial.Splits.comp_of_natDegree_le_one_of_monic"
+    ],
+    "digest": "6b524ea2b6768afd"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: no exact orthogonal-basis assertion; IsAlgClosed.of_denseRange additionally assumes CharZero (Dense.lean:45–48). Existing partial Mathlib inputs are cited through existing DAG nodes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Polynomial.exists_roots_norm_sub_lt_of_norm_coeff_sub_lt\"",
+   "results": {
+    "t": "2026-10-24T16:36:46Z",
+    "tool": "loogle",
+    "query": "\"Polynomial.exists_roots_norm_sub_lt_of_norm_coeff_sub_lt\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Polynomial.exists_roots_norm_sub_lt_of_norm_coeff_sub_lt"
+    ],
+    "digest": "55d5a62b81fe33d8"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: no exact orthogonal-basis assertion; IsAlgClosed.of_denseRange additionally assumes CharZero (Dense.lean:45–48). Existing partial Mathlib inputs are cited through existing DAG nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuity of roots: sufficiently close monic polynomials of the same degree have nearby roots when the second polynomial splits",
+   "results": {
+    "t": "2026-10-24T16:36:47Z",
+    "tool": "leanfinder",
+    "query": "Continuity of roots: sufficiently close monic polynomials of the same degree have nearby roots when the second polynomial splits",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Polynomial.rootOfSplits'_eq_rootOfSplits",
+     "Polynomial.coeff_bdd_of_roots_le",
+     "Polynomial.rootOfSplits",
+     "Polynomial.coeff_le_of_roots_le",
+     "Polynomial.map_rootOfSplits'",
+     "Polynomial.map_rootOfSplits",
+     "AlgebraicClosure.finEquivRoots",
+     "Polynomial.aeval_eq_prod_aroots_sub_of_monic_of_splits"
+    ],
+    "digest": "11ab75f09db6d185"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: no exact orthogonal-basis assertion; IsAlgClosed.of_denseRange additionally assumes CharZero (Dense.lean:45–48). Existing partial Mathlib inputs are cited through existing DAG nodes."
+  },
+  {
+   "tool": "grep",
+   "query": "def normedField|def normedAlgebra|def nontriviallyNormedField",
+   "results": {
+    "t": "2026-10-24T16:37:43Z",
+    "tool": "grep",
+    "query": "def normedField|def normedAlgebra|def nontriviallyNormedField",
+    "sub": "Analysis/Normed/Unbundled",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Normed/Unbundled/RingSeminorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/RingSeminorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean"
+    ],
+    "digest": "9771320e46d3247f"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: no exact orthogonal-basis assertion; IsAlgClosed.of_denseRange additionally assumes CharZero (Dense.lean:45–48). Existing partial Mathlib inputs are cited through existing DAG nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every finite dimensional subspace of the completion of an algebraic closure over a complete stable valued field admits an exact orthogonal basis",
+   "results": {
+    "t": "2026-10-24T16:40:17Z",
+    "tool": "leanfinder",
+    "query": "Every finite dimensional subspace of the completion of an algebraic closure over a complete stable valued field admits an exact orthogonal basis",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm.completeSpace",
+     "exists_hilbertBasis",
+     "NumberField.mixedEmbedding.fundamentalCone.completeBasis",
+     "Field.Emb.Cardinal.wellOrderedBasis",
+     "FiniteDimensional.complete",
+     "Orthonormal.exists_orthonormalBasis_extension",
+     "LinearMap.exists_basis_basis_of_span_eq_top_of_mem_algebraMap",
+     "NumberField.mixedEmbedding.euclidean.stdOrthonormalBasis"
+    ],
+    "digest": "6e19ca5964e50a61"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: no exact orthogonal-basis assertion; IsAlgClosed.of_denseRange additionally assumes CharZero (Dense.lean:45–48). Existing partial Mathlib inputs are cited through existing DAG nodes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-gauss-rational-function-stability",
+  "date": "2026-10-24",
+  "group": "Q58"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: Norm-preserving lifts for a Tate epimorphism surjective on canonical reductions. Independent analytic input: Finite affinoid maps are finite on spectral unit balls over an algebraically closed field. Proof input: Orthogonal spectral norm on the fraction field of a finite affinoid domain. Supporting input: Stability of the Gauss fraction field of a Tate algebra. BGR stability proof input: Sections 5.3.3–5.3.4, especially Proposition 5.3.3/3 and the conclusion of Section 5.3.4, printed pp.215 and 218–220 (scan PDF pp.221 and 224–226); Section 5.3.4 removes the divisible-value-group restriction. Supporting input for the present split: Proposition 3.4.1/3 and Corollary 2.4.3/10; their application in Section 5.3.4, opening paragraph and Lemma 1 proof, printed pp.218–219 (scan PDF pp.224–225).",
+   "via": [
+    "lem-trf-gauss-rational-function-stability",
+    "lem-trf-tate-gauss-fraction-stability",
+    "lem-trf-tate-fraction-orthogonal-spectral-norm",
+    "lem-trf-finite-affinoid-unit-ball-finiteness",
+    "lem-trf-tate-reduction-norm-lifting",
+    "lem-trf-affinoid-distinguished-presentation",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-trf-completed-algebraic-closure-cartesian",
+  "worker": "stage1",
+  "summary": "O1 checked BGR primary scan and current blueprint; retained the statement and all historical searches. Eight explicit steps prove field completion, characteristic-free algebraic closedness by nearby roots and closedness, and orthogonality by finite stable extensions and strict perturbation. All inputs already have DAG nodes; no new nodes. Mathlib IsAlgClosed.of_denseRange is not used because it assumes characteristic zero.",
+  "blueprint": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: Norm-preserving lifts for a Tate epimorphism surjective on canonical reductions. Independent analytic input: Finite affinoid maps are finite on spectral unit balls over an algebraically closed field. Proof input: Orthogonal spectral norm on the fraction field of a finite affinoid domain. Supporting input: Stability of the Gauss fraction field of a Tate algebra. BGR stability proof input: Sections 5.3.3–5.3.4, especially Proposition 5.3.3/3 and the conclusion of Section 5.3.4, printed pp.215 and 218–220 (scan PDF pp.221 and 224–226); Section 5.3.4 removes the divisible-value-group restriction. Supporting input for the present split: Proposition 3.4.1/3 and Corollary 2.4.3/10; their application in Section 5.3.4, opening paragraph and Lemma 1 proof, printed pp.218–219 (scan PDF pp.224–225). This split supplies only the historical analytic input, through BGR 3.4.1/3 and 2.4.3/10; the current contracting-correspondence blueprint route is unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-O1-8226f7c90",
+  "group": "O1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-8226f7c90 (reviewer sub-agent of L); spot-checked: I read all 8 steps and every cited statement. The statement is unchanged and correct. Step 1: the spectral norm on k^a (lem-trf-spectral-norm-algebraic-extension, F=k) and normed-field completion give a complete, ultrametric, nontrivial k' containing k isometrically. Steps 2-3: monic dense approximation (D=k^a dense in k') and root proximity in Ω/k' (h splits via the linear factorization in k^a) give a root b with |a-b|<r, since ((n+1)ε)^{1/n}M=r. Then ∏(b-c_j)=0 puts b in k^a; this uses no separability and no characteristic assumption. Step 4: the finite-dimensional-subspace-closed lemma with E=k' complete and nontrivial makes k' closed in Ω, so k' is algebraically closed. Step 5: the restriction of the k^a spectral norm to E=k(u_i) equals s_{E/k}. Both depend only on the minimal polynomial over k, and the formula max|a_i|^{1/i} matches sup|p_j|^{1/(d-j)}. Stability and lem-trf-cartesian-subspace then give an orthogonal basis of U. Step 6: the almost-orthogonal lemma over complete k with r=1/2 gives α=½min|e_i|>0, and density gives the w_i. Step 7 is elementary (BGR 2.4.3/7): the error bound is strict because the max is finite and A>0, so |y|=|x| and T is a linear isometry onto the span of the w_i. Step 8 moves the basis back through T^{-1}. proof_deps equal the union of the steps' uses, and there is no cycle. The off-unit inputs are all mathlib leaves, so no tool_uses are needed. No SGA. Edge cases checked: V=0, k already algebraically closed, Q_p→C_p, char p and inseparable f. BGR is not in local literature (WANTED). Advisory: the existing lem-trf-sepclosed-rank-one-completion and lem-sfb-dense-subfield-algebraic-root-approximation could replace steps 2-4. The delivery creates no new nodes, so it adds no duplicates. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.CompletedAlgebraicClosureCartesian",
+  "declaration": "completedAlgebraicClosure_cartesian",
+  "file": "lean/Sheaf/FieldTheory/CompletedAlgebraicClosureCartesian.lean",
+  "statement": "theorem completedAlgebraicClosure_cartesian (K : Type u) [NontriviallyNormedField K] [IsUltrametricDist K] [CompleteSpace K] (hK : IsStableNonarchimedeanField K) (L : Type v) [NormedField L] [NormedAlgebra K L] [IsAlgClosure K L] : IsAlgClosed (UniformSpace.Completion L) ∧ CompleteSpace (UniformSpace.Completion L) ∧ IsUltrametricDist (UniformSpace.Completion L) ∧ Isometry (algebraMap K (UniformSpace.Completion L)) ∧ ∀ (V : Submodule K (UniformSpace.Completion L)) [FiniteDimensional K V], ∃ b : Module.Basis (Fin (Module.finrank K V)) K V, ∀ a : Fin (Module.finrank K V) → K, ‖∑ i, a i • b i‖₊ = Finset.univ.sup (fun i ↦ ‖a i‖₊ * ‖b i‖₊)",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ba8057b94",
+  "group": "NG",
+  "result": "pass",
+  "note": "Read the node, the 3 stmt_deps, the module and the report. Hypotheses match the node: nontrivial norm, ultrametric, complete, IsStableNonarchimedeanField, any IsAlgClosure L. The NormedField/NormedAlgebra structure on L equals the spectral norm by Mathlib NormedAlgebra.norm_eq_spectralNorm (SpectralNorm.lean:790), whose hypotheses all hold, so it adds no restriction. Conclusion matches every clause: IsAlgClosed, CompleteSpace, IsUltrametricDist and Isometry of algebraMap for Completion L; a finrank-indexed basis with exact ℝ≥0-sup orthogonality, so V=0 gives the empty basis. The body-only universe of IsStableNonarchimedeanField is generalized as a theorem universe parameter; stability is universe-invariant, so this is harmless. Node differs from side-live only in the lean field, and lean.statement is verbatim. No defs, sorry only, docstrings carry source and blueprint and all 8 proof steps. Report has Worker report and a Second reading section (self-review). Edge cases checked: char p, inseparable polynomials, K algebraically closed, nondiscrete value groups. No changes, not recompiled."
+ }
+}

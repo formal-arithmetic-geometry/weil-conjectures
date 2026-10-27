@@ -1,0 +1,112 @@
+{
+ "id": "def-kun-scalar-restriction-comparison-maps",
+ "kind": "definition",
+ "title": "Canonical ambient derived scalar restriction comparison maps",
+ "status": "split",
+ "statement": "Let $A,B$ be commutative rings in $\\mathrm{Type}(u+1)$, $\\varphi:A\\to B$ a unital ring homomorphism, and $f:Z\\to W$ a morphism of schemes in universe $u$ [def-pc-scheme]. Use their small etale sites [def-weil-pbc-etale-site] and constant-coefficient derived categories [def-weil-pbc-derived-categories]. Write $U_V:D(V_{\\mathrm{et}},B)\\to D(V_{\\mathrm{et}},A)$ for the exact termwise descent of restriction of scalars [def-pc-sheaf-restrict-scalars]. Write $L f_A^{-1}\\dashv Rf_{*,A}$ and $L f_B^{-1}\\dashv Rf_{*,B}$ for the derived inverse/direct-image adjunctions [def-weil-pbc-inverse-image] [def-weil-pbc-direct-image]. Define $\\rho_f:Lf_A^{-1}U_W\\xrightarrow{\\sim}U_ZLf_B^{-1}$ by exact derived descent of the canonical sheaf inverse-image/restriction isomorphism: that sheaf isomorphism is the uniqueness-of-left-adjoints isomorphism for the common direct-image/coextension-of-scalars right adjoint; transport its descent through the canonical identifications of exact inverse image with its left derived functor. Define $d_f:U_WRf_{*,B}\\to Rf_{*,A}U_Z$ as the right-adjunction mate [def-weil-pbc-adjunction-mate] of $\\rho_f$. These are the specified ambient natural isomorphism and natural transformation; invertibility of $d_f$ on bounded-below inputs is a separate theorem, not part of this definition.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-derived-categories",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03FD and 0D6J(3), coefficient restriction comparisons; Tag 07A7, remark-base-change, adjunction-mate construction. Canonical exact inverse-image descent as implemented in Sheaf.Paper.EtaleUnboundedRestrictionComparison."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "scalarRestrictionPullbackIso|scalarRestrictionDirectImageMap",
+   "results": "{\"t\": \"2026-10-22T11:18:22Z\", \"tool\": \"grep\", \"query\": \"scalarRestrictionPullbackIso|scalarRestrictionDirectImageMap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib match. Reuse the existing ambient definitions from Sheaf.Paper.EtaleUnboundedRestrictionComparison; no new Lean declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse image commutes with restriction of scalars and canonical direct image mate",
+   "results": "{\"t\": \"2026-10-22T11:18:22Z\", \"tool\": \"leansearch\", \"query\": \"Derived inverse image commutes with restriction of scalars and canonical direct image mate\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.restrictScalarsObj\", \"ModuleCat.RestrictScalars.obj'\", \"PresheafOfModules.restrictScalars\", \"ModuleCat.restrictScalars\", \"PresheafOfModules.pushforward_obj_map_apply'\", \"SheafOfModules.restrictScalars\", \"Derivation.restrictScalars\", \"ModuleCat.restrictScalarsId'App_inv_naturality\"], \"digest\": \"b951d7fb99459627\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib match. Reuse the existing ambient definitions from Sheaf.Paper.EtaleUnboundedRestrictionComparison; no new Lean declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "scalarRestrictionPullbackIso, scalarRestrictionDirectImageMap",
+   "results": "{\"t\": \"2026-10-22T11:18:22Z\", \"tool\": \"loogle\", \"query\": \"scalarRestrictionPullbackIso, scalarRestrictionDirectImageMap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'scalarRestrictionPullbackIso'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib match. Reuse the existing ambient definitions from Sheaf.Paper.EtaleUnboundedRestrictionComparison; no new Lean declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarRestrictionPullbackIso|scalarRestrictionDirectImageMap in dag/nodes, lean/WeilConjectures and lean/Sheaf; tools/blueprint_refs.py search restriction of scalars; ancestor lem-kun-flat-coefficient-tensor-exchange-comparison",
+   "results": "Both definitions occur in Sheaf/Paper/EtaleUnboundedRestrictionComparison.lean and in the theorem-node record lem-sbc-canonical-restrict-scalars-functor-comparisons; no definition node owns them. No WeilConjectures declaration has these names. Blueprint search finds 58 related nodes (condensed comparisons are different). Ancestor returns None via lem-kun-tensor-base-change-bounded-below, as recorded on the item. Live server source read with scompile.py --source matches the local module.",
+   "date": "2026-10-22",
+   "verdict": "Attach the existing definitions to a new definition node as required by the independent stage-2 return; retain the bounded-below comparison theorem only as a proof dependency."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-kun-flat-coefficient-tensor-exchange-comparison",
+  "date": "2026-10-22",
+  "group": "Q16"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Coefficient tensor comparisons in lem-kun-0f1j.proof.md, reduction to prime torsion: canonical inverse-image coefficient square and its direct-image mate used to normalize a and b. Ancestor returns None through maintainer-created lem-kun-tensor-base-change-bounded-below (created.item=null).",
+   "via": [
+    "lem-kun-flat-coefficient-tensor-exchange-comparison",
+    "lem-kun-tensor-base-change-bounded-below"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "module": "Sheaf.Paper.EtaleUnboundedRestrictionComparison",
+  "declaration": "AlgebraicGeometry.Etale.scalarRestrictionDirectImageMap",
+  "declarations": [
+   "AlgebraicGeometry.Etale.scalarRestrictionPullbackIso",
+   "AlgebraicGeometry.Etale.scalarRestrictionDirectImageMap"
+  ],
+  "statement": "def scalarRestrictionDirectImageMap\n    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)\n    {Z W : Scheme.{u}} (f : Z ⟶ W) :\n    R(lowerStar (ModuleCat.{u + 1} B) f) ⋙\n        Sheaf.derivedRestrictScalars W.smallEtaleTopology φ ⟶\n      Sheaf.derivedRestrictScalars Z.smallEtaleTopology φ ⋙\n        R(lowerStar (ModuleCat.{u + 1} A) f)",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Existing definitions, not theorem choices: scalarRestrictionPullbackIso is a composite of exact-derived-functor comparison isomorphisms; scalarRestrictionDirectImageMap is its mateEquiv. The two signatures are quoted verbatim in the worker report. This node owns the constructions only; the bounded-below invertibility theorem remains a proof dependency of the consumer."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-007c48cb0",
+  "group": "Q16",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-007c48cb0",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Re-delivery after 52f4 H2 RETURN. Item Lean byte-identical (sha256 0b28255a); the only node change is stmt_dep lem-sbc-canonical-restrict-scalars-functor-comparisons -> new def-kun-scalar-restriction-comparison-maps (theorem kept in proof_deps). New node: existing:true on live Sheaf.Paper.EtaleUnboundedRestrictionComparison; scalarRestrictionPullbackIso (composite of comparison isos) and scalarRestrictionDirectImageMap (mateEquiv) are plain defs, verbatim signature, orientation and universes match the node text, stmt_deps all live defs, sources 03FD/0D6J/07A7/07A4 in sites-cohomology.tex. No live def node owns these decls; live item has no lean yet. All other statement decls owned by def nodes in stmt_deps. Maths per 52f4 review re-read and agreed. Advisory: tensorBaseChangeMap and Sheaf.derivedRestrictScalars have no recording node (existing project defs, α defined explicitly in the item statement). No compile (no file changed)."
+ }
+}

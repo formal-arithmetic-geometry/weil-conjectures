@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Q59
 -/
-import Mathlib.Algebra.MonoidAlgebra.Basic
-import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
-import Sheaf.AlgebraicGeometry.FineFanBlowup
+module
+
+public import Mathlib.Algebra.MonoidAlgebra.Basic
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+public import Sheaf.AlgebraicGeometry.FineFanBlowup
 
 /-!
 # Integrality of monomials over a submonoid algebra
@@ -14,6 +16,8 @@ Source: ILO, Exposé VIII, 3.1.17 and Lemma 3.2.9, printed pp. 101, 104.
 The coefficient argument is the supporting algebraic argument supplied in the DAG,
 not a quotation of the ILO proof (blueprint: lem-trf-monomial-integrality).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

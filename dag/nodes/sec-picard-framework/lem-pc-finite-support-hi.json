@@ -109,7 +109,42 @@
   "def-pc-scheme"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.Modules.exists_isZero_higherDirectImage_of_isPullback"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.exists_isZero_higherDirectImage_of_isPullback",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.Projective",
+     "lines": [
+      56,
+      142
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.isQuasicoherent_higherDirectImage",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections",
+     "lines": [
+      52,
+      79
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-coherence",
  "split_report": {
@@ -199,5 +234,24 @@
   "landing": "20261013T100014-L-2465154",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $f:X\\to S$ be a quasi-compact, quasi-separated morphism of schemes.\nFor every quasi-coherent $\\mathcal{O}_X$-module $\\mathcal{F}$:\n\n1. the $R^if_*\\mathcal{F}$ are quasi-coherent;\n1. if $S$ is quasi-compact, there is an integer $n=n(X,S,f)$ such\nthat $R^pf_*\\mathcal{F}=0$ for all $p\\ge n$ and all quasi-coherent $\\mathcal{F}$; the\nsame integer works for every base change\n$S'\\to S$ (i.e. $R^p(f')_*\\mathcal{F}'=0$ for $p\\ge n$ and quasi-coherent\n$\\mathcal{F}'$ on $X'=S'\\times_SX$).",
+  "proof": [
+   {
+    "text": "It suffices to prove the statements on affine open subschemes\n$V=\\operatorname{Spec}(A)$ of $S$ (the sheaf $R^if_*\\mathcal{F}$ is determined by its\nsections on affines, and $(R^if_*\\mathcal{F})|_V=R^i(f|_V)_*\\mathcal{F}|$): after\nreplacing $S$ by $V$ and $X$ by $f^{-1}(V)$ we have an affine $S$,\nand $X$ is quasi-compact and quasi-separated. Choose a finite affine\nopen covering $X=U_1\\cup\\dots\\cup U_t$ (quasi-compactness) with all\nintersections affine (quasi-separatedness: the intersection of two\naffine open subschemes of a quasi-separated scheme is affine; or\nrefine). We prove by induction on $t$ the assertion\n$P(t)$: $H^p(X,\\mathcal{F})=0$ for $p\\ge t$ and $H^p(X,\\mathcal{F})=\\check H^p(\\mathcal U,\\mathcal{F})$\nfor all $p$, for every quasi-coherent $\\mathcal{F}$. For $t=1$, $X$ affine and\n$P(1)$ is [pqf-lem-affine-vanishing]. For $t>1$ write\n$U=U_1$, $V=U_2\\cup\\cdots\\cup U_t$ ($V$ is quasi-compact, covered by\n$t-1$ affine opens with affine intersections) and consider the short\nexact sequence of sheaves on $X$\n\n$$\n0\\to\\mathcal{F}\\longrightarrow j_{U,*}\\mathcal{F}|_U\\oplus j_{V,*}\\mathcal{F}|_V\n\\longrightarrow j_{U\\cap V,*}\\mathcal{F}|_{U\\cap V}\\to0\n$$\n\n(exactness is immediate on stalks: at $x$, the sequence is\n$0\\to\\mathcal{F}_x\\to\\mathcal{F}_x\\oplus\\mathcal{F}_x\\to\\mathcal{F}_x\\to0$ for $x\\in U\\cap V$, and\n$0\\to\\mathcal{F}_x\\to\\mathcal{F}_x\\to0\\to0$ otherwise, with the maps the diagonal and\nthe difference). Its long exact cohomology sequence, together with\n$H^p(U,\\cdot)=H^p(V,\\cdot)=0$ for $p\\ge t-1$ and the identifications\n$H^p(U,\\mathcal{F})=\\check H^p(U,\\mathcal{F})$ etc. (the induction hypothesis applied\nto $U$ ($t=1$) and to $V$ ($t-1$ opens) and the standard equality for\na two-open cover), gives $H^p(X,\\mathcal{F})=0$ for $p\\ge t$ and the Cech\nidentification for lower $p$ (the classical devissage of Cohomology of\nSchemes, Lemma 30.4.5, Tag [01XJ](https://stacks.math.columbia.edu/tag/01XJ),\nwhich also uses [lem-pc-cech-computes] for the Cech comparison).\nThis proves (1) and the first statement of (2) (the integer $n=t$).\nThe base-change uniformity: the same $t$ bounds the coverings obtained\nby base change $S'\\to S$: the $U_i$'s pull back to affine opens of\n$X'$ with affine intersections covering $X'$ (base change of affine\nalong $S'\\to S$ is affine; $\\mathcal{F}$ replaced by an arbitrary\nquasi-coherent $\\mathcal{F}'$), so the same induction proves $R^p(f')_*\\mathcal{F}'=0$\nfor $p\\ge t$. This proves (2).",
+    "uses": [
+     "pqf-lem-affine-vanishing",
+     "lem-pc-cech-computes"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

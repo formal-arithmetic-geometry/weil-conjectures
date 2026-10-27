@@ -1,0 +1,130 @@
+{
+ "id": "def-pur-finite-proper-product-maps",
+ "kind": "definition",
+ "title": "Canonical ordinary maps in the finite proper external product",
+ "statement": "Use the finite coefficient datum $k,A=A_{E,n}$ of [def-pur-conventions]. Let $B,Y,Z$ be separated finite-type $k$-schemes and $a:Y\\to B$, $b:Z\\to B$ proper morphisms [def-weil-proper-morphism]. Put $C=Y\\times_BZ$, with projections $r:C\\to Y$, $t:C\\to Z$ and $c=ar=bt$ [def-pc-fibre-product]. Work in ordinary unbounded constant-$A$ derived categories on the small pro-etale sites, with the pullback, tensor and signed symmetry of [def-weil-derived-pullback-tensor-hom]. For arbitrary $H\\in D(Y_{\\mathrm{proet}},A)$, $J\\in D(Z_{\\mathrm{proet}},A)$ write $F=Ra_*H$, $G=Rb_*J$, $E=Lr^*H\\otimes_A^LLt^*J$. Let $x=\\operatorname{Ex}_{*,a,b,H}:Lb^*F\\to Rt_*Lr^*H$ and $\\pi_u$ be exactly the ordinary counit-defined exchange and projection maps of [def-exchange-projection]. Define\n$$\\begin{aligned}\nv&=\\pi_{t,Lr^*H,J}\\circ(x\\otimes1_J):Lb^*F\\otimes_A^LJ\\longrightarrow Rt_*E,\\\\\nw&=Rb_*(\\sigma_{J,Lb^*F})\\circ\\pi_{b,J,F}\\circ\\sigma_{F,G}:F\\otimes_A^LG\\longrightarrow Rb_*(Lb^*F\\otimes_A^LJ),\\\\\n\\Omega_{a,b}(H,J)&=\\kappa_{b,t}^{-1}\\circ Rb_*(v)\\circ w:F\\otimes_A^LG\\longrightarrow Rc_*E,\n\\end{aligned}$$\nwhere $\\kappa_{b,t}:Rc_*\\xrightarrow{\\sim}Rb_*Rt_*$ is the canonical finite-level compositor of [lem-weil-derived-direct-image-composition]. Use the canonical pullback tensor and composition comparisons [lem-pur-derived-pullback-tensor-iso, lem-weil-pbc-proetale-derived-pullback-composition] and the ordinary derived adjunctions $Lu^*\\dashv Ru_*$. Write $\\varepsilon_{u,K}:Lu^*Ru_*K\\to K$ for their counits.  The operations and displayed maps are constructions only, without any asserted identities. Also write pairEvaluation(e,d) for the tensor of arbitrary evaluation arrows e:P_a F→H and d:P_b G→J after the same pullback tensor and composition comparisons; swapStructure is the projection equality s;c′=c and swapPull is its pullback comparison. The same equality comparison is also presented objectwise by objectwiseComparison; its naturality is equality elimination followed by naturality of the given comparison. swapPull uses this presentation to expose its object components without expanding the concrete functors.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 07A6, 0D6D, 0D6E and 0E48 (remark-compatible-with-diagram and equation-projection-formula-map); agent-formulated normalization and symmetry consequences used in the proper-product paragraph of literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-proper-morphism",
+  "def-pc-fibre-product",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-exchange-projection",
+  "lem-weil-derived-direct-image-composition",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "def-weil-pbc-composite-adjunction"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The transpose of the ordinary external product defined by exchange and projection is the tensor of pullback counits and is invariant under swapping the factors",
+   "results": "8 hits including CategoryTheory.MonoidalCategory.externalProductSwap, externalProductFlip and frobeniusMorphism_mate. They concern abstract external products or cartesian closed functors, not the specified intrinsic derived comparisons and transported direct-image compositor.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse direct image compositor is the adjunction mate of pullback composition for intrinsic constant coefficient derived sheaves",
+   "results": "8 hits including SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, and Functor.sheafPullbackConstruction.sheafAdjunctionContinuous. These are underived module-sheaf comparisons or abstract adjunctions; the intrinsic derived realization transport is not supplied.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sfIntrinsicDerivedPullbackComp|canonicalFinitePullbackTensor_composition_condition|conjugateEquiv_counit",
+   "results": "Mathlib CategoryTheory/Adjunction/Mates.lean:285 and 291 give conjugateEquiv_counit and its converse. These prove formal transpose consequences after the intrinsic compositor conjugacy is supplied, not that conjugacy itself. Local rg also inspected the actual intrinsic composition and realization constructions.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteProperProductTranspose",
+  "date": "2026-10-26",
+  "group": "S9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Steps 3--4, canonical maps used for the finite proper external-product interchange; extraction of the existing construction-only declarations to break their theorem/leg import cycle.",
+   "via": [
+    "lem-pur-finite-proper-product-transpose",
+    "lem-pur-finite-forward-product-symmetry",
+    "lem-pur-affine-space-trace-factorization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteProperProductMaps",
+  "file": "lean/Sheaf/Paper/FiniteProperProductMaps.lean",
+  "declaration": "WeilConjectures.FiniteProperProduct.comp",
+  "statement": "def comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :\n    pull P (f ≫ g) ≅ pull P g ⋙ pull P f",
+  "branch": "sheaf-dag",
+  "by": "S9",
+  "date": "2026-10-26",
+  "declarations": [
+   "WeilConjectures.FiniteProperProduct.A",
+   "WeilConjectures.FiniteProperProduct.D",
+   "WeilConjectures.FiniteProperProduct.tensor",
+   "WeilConjectures.FiniteProperProduct.pull",
+   "WeilConjectures.FiniteProperProduct.push",
+   "WeilConjectures.FiniteProperProduct.adj",
+   "WeilConjectures.FiniteProperProduct.comp",
+   "WeilConjectures.FiniteProperProduct.sigma",
+   "WeilConjectures.FiniteProperProduct.residueInverse",
+   "WeilConjectures.FiniteProperProduct.mu",
+   "WeilConjectures.FiniteProperProduct.realization",
+   "WeilConjectures.FiniteProperProduct.pushModel",
+   "WeilConjectures.FiniteProperProduct.iteratedPushModel",
+   "WeilConjectures.FiniteProperProduct.kappa",
+   "WeilConjectures.FiniteProperProduct.theta",
+   "WeilConjectures.FiniteProperProduct.exchange",
+   "WeilConjectures.FiniteProperProduct.projection",
+   "WeilConjectures.FiniteProperProduct.external",
+   "WeilConjectures.FiniteProperProduct.v",
+   "WeilConjectures.FiniteProperProduct.w",
+   "WeilConjectures.FiniteProperProduct.omega",
+   "WeilConjectures.FiniteProperProduct.swapTensor",
+   "WeilConjectures.FiniteProperProduct.swapPush",
+   "WeilConjectures.FiniteProperProduct.pairEvaluation",
+   "WeilConjectures.FiniteProperProduct.swapStructure",
+   "WeilConjectures.FiniteProperProduct.swapPull",
+   "WeilConjectures.FiniteProperProduct.objectwiseComparison_naturality",
+   "WeilConjectures.FiniteProperProduct.objectwiseComparison"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-5f2f8",
+  "group": "S9",
+  "result": "fix",
+  "landing": "20261026T002706-L-108957",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-5f2f8",
+  "group": "S9",
+  "result": "fix",
+  "landing": "20261026T002706-L-108957",
+  "kind": "interface",
+  "note": "independent cc review: re-delivery 5f2f vs 1cd1 (Lean+nodes byte-identical); item/leg vs clone; 5 downstream modules compiled against delivered set; change-record Users vs computed users"
+ }
+}

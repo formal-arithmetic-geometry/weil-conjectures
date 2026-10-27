@@ -1,0 +1,221 @@
+{
+ "id": "lem-sfb-space-separated-diagonal-closed",
+ "kind": "statement",
+ "title": "Separatedness of algebraic spaces tested by universal closedness of the diagonal",
+ "statement": "Let $B$ be a scheme [def-pc-scheme], and use algebraic spaces over $B$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention], with fibre products [lem-trf-space-fibre-products-etale-covers]. A closed immersion of algebraic spaces means a representable map whose every base change to a scheme is a closed immersion of schemes [def-weil-closed-immersion]. Give the point spaces their quotient topology from surjective etale scheme atlases [def-a1-space-point-topology]. Let $g:U\\to V$ be any morphism of algebraic spaces, and let $\\Delta_g:U\\to U\\times_VU$ be its diagonal. Call a morphism universally closed if every algebraic-space base change induces a closed map on point spaces. Then $g$ is separated, meaning that $\\Delta_g$ is a closed immersion, if and only if $\\Delta_g$ is universally closed. No quasi-compactness or finite type assumption on $g$ is required.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 04Y0 (lemma-separated-diagonal-proper), equivalence (1) and (2)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-closed-immersion",
+  "def-a1-space-point-topology",
+  "def-sfb-space-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "If $g$ is separated, its diagonal is a closed immersion by the definition in the statement. Apply [lem-sfb-space-closed-subspace-proper] to $\\Delta_g$ over $B$: it is proper and hence universally closed, by the explicit definition of properness in that cited statement. This proves the forward implication.",
+   "uses": [
+    "lem-sfb-space-closed-subspace-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04Y0, (1) implies (3) implies (2); Tag 04XZ."
+   }
+  },
+  {
+   "text": "Conversely suppose $\\Delta_g$ is universally closed. Put $W=U\\times_VU$ and take any scheme $T\\to W$. By [lem-sfb-space-diagonal-scheme-tests], $D_T=U\\times_WT$ is a scheme and $d_T:D_T\\to T$ is a locally finite type monomorphism. For a scheme $Y$, the point space $|h_Y|$ of [def-a1-space-point-topology] is the underlying space of $Y$: by [def-a1-algebraic-space-point-classes] the map $|\\mathrm{id}_Y|:|Y|\\to|h_Y|$ sends $y$ to its residue-field point; it is surjective because a field point $\\operatorname{Spec}K\\to Y$ with image $y$ factors through $\\operatorname{Spec}\\kappa(y)$, and injective because equivalent field points have a common extension and hence the same image point. A subset is open in the final topology iff its preimage under $|\\mathrm{id}_Y|$ is open: $\\mathrm{id}_Y$ is one of the etale charts, and conversely the preimage of a Zariski open under any etale scheme map $T''\\to Y$ is open. Now $d_T$ is universally closed as a scheme morphism: for every scheme $T'\\to T$, the fibre-product universal property [lem-trf-space-fibre-products-etale-covers] identifies $D_T\\times_TT'$ with $U\\times_WT'$ over $T'$, and the projection $|U\\times_WT'|\\to|h_{T'}|$ is closed by the assumed algebraic-space universal closedness of $\\Delta_g$ along $h_{T'}\\to W$; by the identification just made, this is the map of underlying spaces of the scheme projection $D_T\\times_TT'\\to T'$. This is precisely the scheme definition [def-weil-proper-morphism].",
+   "uses": [
+    "lem-sfb-space-diagonal-scheme-tests",
+    "def-a1-space-point-topology",
+    "def-a1-algebraic-space-point-classes",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04Y0, converse: use Tag 03HK and restrict to scheme base changes."
+   }
+  },
+  {
+   "text": "For this scheme map $d_T$, [lem-trf-scheme-monomorphism-separated] gives separatedness and [lem-weil-pbc-universally-closed-quasi-compact] gives quasi-compactness. Along with local finite type from step 2, this gives finite type [def-weil-finite-type-morphism], hence properness [def-weil-proper-morphism]. Thus [lem-pc-proper-monomorphism-closed] makes $d_T$ a closed immersion. This holds for every scheme $T\\to W$, and the diagonal is representable by step 2. By the stated definition of closed immersions of algebraic spaces, $\\Delta_g$ is a closed immersion, so $g$ is separated. The only local finite type assertion used is about the diagonal; none is required of $g$.",
+   "uses": [
+    "lem-trf-scheme-monomorphism-separated",
+    "lem-weil-pbc-universally-closed-quasi-compact",
+    "def-weil-finite-type-morphism",
+    "def-weil-proper-morphism",
+    "lem-pc-proper-monomorphism-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04Y0, (2) implies (1), using Tag 04XV (6) implies (1), assembled through its proper-monomorphism formulation (2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-closed-subspace-proper",
+  "lem-sfb-space-diagonal-scheme-tests",
+  "def-a1-space-point-topology",
+  "def-a1-algebraic-space-point-classes",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-proper-morphism",
+  "lem-trf-scheme-monomorphism-separated",
+  "lem-weil-pbc-universally-closed-quasi-compact",
+  "def-weil-finite-type-morphism",
+  "lem-pc-proper-monomorphism-closed"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 04Y0 (lemma-separated-diagonal-proper), equivalence (1) and (2)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of algebraic spaces is separated if and only if its diagonal is universally closed",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isSeparated_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSeparated f ↔\\n    autoParam (AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal._autoParam\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, $ f $ is separated if and only if the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"@AlgebraicGeometry.IsSeparated = CategoryTheory.MorphismProperty.diagonal @AlgebraicGeometry.IsClosedImmersion\", \"doc\": \"A morphism of schemes is separated if and only if its diagonal morphism is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [X.IsSeparated], AlgebraicGeometry.IsSeparated f\", \"doc\": \"A scheme $ X $ is separated if it satisfies the condition $ X.\\\\text{IsSeparated} $, which asserts that the diagonal morphism $ X \\\\to X \\\\times X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ constructed as the pullback of $ f $ against itself is a closed immersion. This characteriz\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ X \\\\to X \\\\times_Y X $ (constructed as the pullback of $ f $ against itself) is a closed immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A predicate indicating that a morphism $ f: X \\\\to Y $ of schemes is separated.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme},\\n  X.IsSeparated ↔\\n    AlgebraicGeometry.IsClosedImmersion\\n      (CategoryTheory.Limits.prod.lift (CategoryTheory.CategoryStruct.id X) (CategoryTheory.CategoryStruct.id X))\", \"doc\": \"For any scheme $X$, $X$ is separated if and only if the diagonal morphism $\\\\Delta: X \\\\to X \\\\times X$ defined by $\\\\Delta = \\\\text{prod.lift}(\\\\text{id}_X, \\\\text{id}_X)$ is a closed immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsClosedImmersionLiftIdOfIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [X.IsSeparated],\\n  AlgebraicGeometry.IsClosedImmersion\\n    (CategoryTheory.Limits.prod.lift (CategoryTheory.CategoryStruct.id X) (CategoryTheory.CategoryStruct.id X))\", \"doc\": \"For any separated scheme $X$, the diagonal morphism $X \\to X \\times X$ given by the product of identity maps is a closed immersion. This follows from the definition of separatedness, which requires the \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes or topological spaces, not morphisms of algebraic spaces; their specialization cannot supply this assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The diagonal of an algebraic space morphism is a closed immersion exactly when it is universally closed",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"@AlgebraicGeometry.IsSeparated = CategoryTheory.MorphismProperty.diagonal @AlgebraicGeometry.IsClosedImmersion\", \"doc\": \"A morphism of schemes is separated if and only if its diagonal morphism is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.isSeparated_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSeparated f ↔\\n    autoParam (AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal._autoParam\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, $ f $ is separated if and only if the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ constructed as the pullback of $ f $ against itself is a closed immersion. This characteriz\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ X \\\\to X \\\\times_Y X $ (constructed as the pullback of $ f $ against itself) is a closed immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsClosedImmersion f],\\n  AlgebraicGeometry.UniversallyClosed f\", \"doc\": \"Every closed immersion of schemes is a universally closed morphism. Specifically, if $ f: X \\to Y $ is a closed immersion (i.e., it induces a homeomorphism of $ X $ onto a closed subset of $ Y $ with s\"}\n  {\"name\": \"AlgebraicGeometry.universallyClosed_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.UniversallyClosed f ↔ (AlgebraicGeometry.topologically @IsClosedMap).universally f\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is universally closed if and only if, for every base change, the induced morphism is a closed map in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.universallyClosed_eq\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"@AlgebraicGeometry.UniversallyClosed = (AlgebraicGeometry.topologically @IsClosedMap).universally\", \"doc\": \"The property of a morphism of schemes being universally closed coincides with the property that its underlying continuous map is a closed map and this property is preserved under all base changes.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is universally closed if for every base change, the induced morphism is a closed map in the topological sense.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes or topological spaces, not morphisms of algebraic spaces; their specialization cannot supply this assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"diagonal\", \"UniversallyClosed\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes or topological spaces, not morphisms of algebraic spaces; their specialization cannot supply this assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Uu]niversallyClosed.*diagonal|diagonal.*[Uu]niversallyClosed",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"line\": \"250\", \"text\": \"      have := UniversallyClosed.of_valuativeCriterion (pullback.diagonal f) h\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes or topological spaces, not morphisms of algebraic spaces; their specialization cannot supply this assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Separatedness of a morphism of algebraic spaces is equivalent to universal closedness of its diagonal",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": @IsSeparated = MorphismProperty.diagonal @IsClosedImmersion\", \"doc\": \"A morphism of schemes is separated if and only if its diagonal morphism is a closed immersion.\"}\n  {\"name\": \"isSeparatedMap_iff_isClosed_diagonal\", \"module\": \"Mathlib.Topology.SeparatedMap\", \"type\": \"{f : X → Y} : IsSeparatedMap f ↔ IsClosed f.pullbackDiagonal\", \"doc\": \"A function $ f: X \\\\to Y $ is a separated map if and only if the diagonal subset of the pullback of $ f $ with itself is closed in the product topology.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{X : Scheme.{u}} : X.IsSeparated ↔ IsClosedImmersion (prod.lift (𝟙 X) (𝟙 X))\", \"doc\": \"For any scheme $X$, $X$ is separated if and only if the diagonal morphism $\\\\Delta: X \\\\to X \\\\times X$ defined by $\\\\Delta = \\\\text{prod.lift}(\\\\text{id}_X, \\\\text{id}_X)$ is a closed immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.isSeparated_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSeparated f ↔\\n    autoParam (AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal._autoParam\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, $ f $ is separated if and only if the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.QuasiSeparated f ↔\\n    autoParam (AlgebraicGeometry.QuasiCompact (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal._autoParam\", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is quasi-separated if and only if the diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ constructed as the pullback of $ f $ against itself is a closed immersion. This characteriz\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \": @QuasiSeparated = MorphismProperty.diagonal @QuasiCompact\", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is quasi-separated if and only if its diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact. This establishes the equivalence between the quasi-separatedness p\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ X \\\\to X \\\\times_Y X $ (constructed as the pullback of $ f $ against itself) is a closed immersion of schemes.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes or topological spaces, not morphisms of algebraic spaces; their specialization cannot supply this assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Uu]niversallyClosed.*diagonal|diagonal.*[Uu]niversallyClosed",
+   "results": "{\"t\": \"2026-10-23T09:59:17Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|[Uu]niversallyClosed.*diagonal|diagonal.*[Uu]niversallyClosed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\"], \"digest\": \"29e23962b9ec9c8f\"}; Read returned hits: scheme-only diagonal/immersion and base-change lemmas, not the algebraic-space assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Separatedness of algebraic spaces is equivalent to universal closedness of the relative diagonal",
+   "results": "{\"t\": \"2026-10-23T09:59:18Z\", \"tool\": \"leansearch\", \"query\": \"Separatedness of algebraic spaces is equivalent to universal closedness of the relative diagonal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"isSeparatedMap_iff_isClosed_diagonal\", \"AlgebraicGeometry.isSeparated_iff\", \"AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift\", \"AlgebraicGeometry.quasiSeparated_iff\", \"isSeparatedMap_iff_isClosedEmbedding\", \"AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact\", \"AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion\"], \"digest\": \"a831834fb616044e\"}; Read returned hits: scheme-only diagonal/immersion and base-change lemmas, not the algebraic-space assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"diagonal\", \"UniversallyClosed\"",
+   "results": "{\"t\": \"2026-10-23T09:59:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"diagonal\\\", \\\"UniversallyClosed\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned hits: scheme-only diagonal/immersion and base-change lemmas, not the algebraic-space assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of algebraic spaces is separated if and only if its diagonal is universally closed",
+   "results": "{\"t\": \"2026-10-23T09:59:28Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism of algebraic spaces is separated if and only if its diagonal is universally closed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"AlgebraicGeometry.isSeparated_iff\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeUniversallyClosedIsSeparated\", \"AlgebraicGeometry.IsSeparated\", \"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\", \"AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion\", \"AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated\"], \"digest\": \"a11e8c535b94f34e\"}; Read returned hits: scheme-only diagonal/immersion and base-change lemmas, not the algebraic-space assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-thickening-topological-properties",
+  "date": "2026-10-22",
+  "group": "Q89"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D56 (lemma-curves-RS-star). Properness recovery inside the Tag 0D1J input to Tag 0D56: use Tag 09ZY with local finite presentation already known, without a finite-order assumption. Supporting input to Tag 09ZY: the separatedness criterion for the diagonal, Tag 04Y0.",
+   "via": [
+    "lem-sfb-space-thickening-topological-properties",
+    "lem-sfb-curve-infinitesimal-pushout",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-separated-diagonal-closed",
+  "worker": "stage1",
+  "summary": "Followed Tag 04Y0 through scheme base changes of the diagonal. Added one statement-only prerequisite for Tag 03HK; reused existing proper-monomorphism, universally-closed quasi-compactness, and monomorphism-separatedness nodes. Added the explicit atlas-topology definition dependency without changing the assertion. No Lean edits or compiles.",
+  "blueprint": "Inherited from.place: the Tag 04Y0 separatedness input to Tag 09ZY, along det-thm-sf-ctf-stability-direct-images proof (3). The ancestor tool returns None; retain the inherited null ancestor and provenance chain. Latest blueprint searched for diagonal and universally closed; no equivalent imported algebraic-space node found.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Step 2 takes only the fibre-product universal property of sheaf fibre products of algebraic spaces (pasting D_T x_T T' = U x_W T'); a generic foundational tool (unit sk-i-curve-zero) that no node of sk-thm-sf-ctf-stability states, accepted the same way on 72 sibling sfb nodes."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q153-644b2e8a6",
+  "group": "Q153",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q153-644b2e8a6 (reviewer sub-agent of L); spot-checked: Read in full: the item, the new node lem-sfb-space-diagonal-scheme-tests and every cited statement, plus Stacks 04Y0 and its proof, 03HK (1)-(5) and its proof, and etale 04XV with the (6)=>(1) proof. Live item is still unsplit, first delivery, no repair note; the statement is unchanged apart from the added citation [def-a1-space-point-topology]. Step 1: lem-sfb-space-closed-subspace-proper (04XZ) gives proper, which includes point-space universal closedness. Step 3 is exactly 04XV (6)=>(1): 01L4 separated, 04XU quasi-compact, lft+qc = finite type, so proper, then the proper-mono criterion gives a closed immersion; the closed-immersion-of-spaces definition concludes. New node = 03HK (1)-(3) as scheme tests; true, tested on id, empty U and schemes; statement-only, self-contained, 5 searches. Duplicate search (rg -L over all nodes for 03HK/04Y0 and diagonal+monomorphism+lft+space): the stack nodes 04YQ/050N/0DUY, 0463 and the scheme nodes do not state it. FIX 1 (C1/E5): step 2 silently identified |h_T'| (atlas topology) with the Zariski space of T'; I wrote out the bijection and topology argument and added def-a1-space-point-topology and def-a1-algebraic-space-point-classes to the step's uses, with proof_deps set to the union. FIX 2: lem-trf-space-fibre-products-etale-covers (unit sk-i-curve-zero, not closed, outside the unit route; the report wrongly says all statements are in-unit) is accepted as a generic fibre-product tool, as on 72 sibling sfb nodes, and added to split_report.tool_uses. Batch-5 flags all accepted as generic: def-trf-algebraic-space and def-a1-space-point-topology are definitions; lem-trf-space-fibre-products-etale-covers is foundational 02X2/04T9 with a definitions-only closure; lem-trf-scheme-monomorphism-separated is the Mathlib leaf 01L4. None is part of the trace formula or Poincare duality proofs. No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceSeparatedDiagonalClosed",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.separated_iff_diagonal_universallyClosed",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceSeparatedDiagonalClosed.lean",
+  "statement": "theorem separated_iff_diagonal_universallyClosed {B : Scheme.{u}} (U V : AlgebraicSpace B) (g : U ⟶ V) : MapIsSeparated g ↔ MapIsUniversallyClosed (ObjectProperty.homMk (Limits.pullback.diagonal g.hom) : U ⟶ ⟨Limits.pullback g.hom g.hom, (fibreProduct_isAlgebraicSpace U U V g g).1⟩)",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d2c582348",
+  "group": "NE",
+  "result": "pass",
+  "note": "Lean matches node and Stacks 04Y0 (1)<=>(2): arbitrary g : U ⟶ V of AlgebraicSpace B (B : Scheme.{u}), no qc/finite-type/representability hypotheses; MapIsSeparated g = IsRepresentableWith closed-immersion scheme tests on the diagonal; RHS = MapIsUniversallyClosed of ObjectProperty.homMk (pullback.diagonal g.hom) into the sheaf fibre product bundled by fibreProduct_isAlgebraicSpace, with all algebraic-space base changes, atlas point topology and canonical mapPoint. Reuses the landed def-sfb-space-morphism-properties, added to stmt_deps as permitted for landed nodes; no duplicate of 04Y0 in the DAG, Sheaf or Mathlib. Only lean and stmt_deps changed against live; the 7 dependency records are identical; live item still has no lean, so not a rebind. lean.statement verbatim; source and blueprint docstrings present with all 3 proof steps; sorry-only proof; no new definitions; report has Worker report and Second reading by NE. Edge cases (empty U, isomorphism g, schemes, non-qc g, non-separated B) checked. No fixes, no compile."
+ }
+}

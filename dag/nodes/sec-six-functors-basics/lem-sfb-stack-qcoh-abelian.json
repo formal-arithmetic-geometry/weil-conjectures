@@ -1,0 +1,228 @@
+{
+ "id": "lem-sfb-stack-qcoh-abelian",
+ "kind": "statement",
+ "title": "Quasi-coherent modules on an algebraic stack form an abelian category",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and $\\mathcal X$ an algebraic stack over $S$ [def-sfb-algebraic-moduli-stack]. Let $\\operatorname{QCoh}(\\mathcal X)$ be the full subcategory of sheaves of $\\mathcal O_{\\mathcal X}$-modules [def-weil-sheaf-of-modules-category] on its big fppf site whose objects locally admit presentations by small direct sums of the structure module, as in [def-sfb-stack-quasi-coherent-algebra]. Then $\\operatorname{QCoh}(\\mathcal X)$ is an abelian category [def-sp-abelian]. No finiteness or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 06WV (lemma-quasi-coherent-algebraic-stack), part (2)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-abelian"
+ ],
+ "proof": [
+  {
+   "text": "Choose a smooth surjective scheme atlas $a:U\\to\\mathcal X$ using [def-sfb-algebraic-moduli-stack]. By [lem-sfb-stack-chartwise-smooth-etale-calculus], $a$ is flat and locally of finite presentation. Clause (2) of [lem-sfb-fppf-groupoid-stack-presentations] supplies the self-relation groupoid $R=U\\times_{\\mathcal X}U$, with flat projections $s=p_1,t=p_2$. The relation is an algebraic space, with no assertion that it is a scheme.",
+   "uses": [
+    "def-sfb-algebraic-moduli-stack",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-fppf-groupoid-stack-presentations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04T5, lemma-stack-presentation; Tag 04WY, remark-flat-fp-presentation."
+   }
+  },
+  {
+   "text": "By [lem-sfb-smooth-atlas-module-descent], restriction is an equivalence $E$ from $\\operatorname{QCoh}(\\mathcal X)$ to pairs $(M,\\delta:p_1^*M\\simeq p_2^*M)$ with $\\delta_{13}=\\delta_{23}\\delta_{12}$. Replace $\\delta$ by $\\alpha=\\delta^{-1}$: its equation becomes $\\alpha_{13}=\\alpha_{12}\\alpha_{23}$, and $\\delta_Np_1^*v=p_2^*v\\delta_M$ becomes $p_1^*v\\alpha_M=\\alpha_Np_2^*v$. Thus this is the groupoid-module category of [lem-sfb-flat-space-groupoid-abelian], which is abelian since both projections are flat by step 1. This applies to arbitrary modules and algebraic-space relations.",
+   "uses": [
+    "lem-sfb-smooth-atlas-module-descent",
+    "lem-sfb-flat-space-groupoid-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex; literature/stacks-project/spaces-groupoids.tex",
+    "place": "Tag 06WV, lemma-quasi-coherent-algebraic-stack, proof of (2) via Tag 06WT, proposition-quasi-coherent, and Tag 06VZ, lemma-abelian."
+   }
+  },
+  {
+   "text": "The full category $\\operatorname{QCoh}(\\mathcal X)$ is preadditive [def-weil-preadditive-category]: addition of module maps is sectionwise, stays a module map, and composition distributes sectionwise. It has finite products: for a quasi-inverse $H$ of $E$ and a finite family $(F_j)$, take $P=H(\\prod_j E(F_j))$. The product exists in the abelian category of step 2 [def-sp-abelian]. Full faithfulness and the two inverse isomorphisms give $\\operatorname{Hom}(F,P)\\cong\\operatorname{Hom}(E(F),\\prod_j E(F_j))\\cong\\prod_j\\operatorname{Hom}(F,F_j)$ naturally in $F$, with the corresponding projections. The same formula for the empty family supplies a terminal object.",
+   "uses": [
+    "def-weil-preadditive-category",
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WV, lemma-quasi-coherent-algebraic-stack, categorical inference in proof of (2), with finite products transported by their defining universal property."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-preadditive-abelian-equivalence] to the preadditive category with finite products from step 3 and the equivalence to the abelian category in step 2. This proves the asserted abelianity. No finiteness or Noetherian condition has entered.",
+   "uses": [
+    "lem-sfb-preadditive-abelian-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex; literature/stacks-project/homology.tex",
+    "place": "Tag 06WV, lemma-quasi-coherent-algebraic-stack, proof of (2); Tag 03A3, lemma-adjoint-get-abelian, equivalence case."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-algebraic-moduli-stack",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-fppf-groupoid-stack-presentations",
+  "lem-sfb-smooth-atlas-module-descent",
+  "lem-sfb-flat-space-groupoid-abelian",
+  "def-weil-preadditive-category",
+  "def-sp-abelian",
+  "lem-sfb-preadditive-abelian-equivalence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 06WV (lemma-quasi-coherent-algebraic-stack), proof of (2), using Tag 06WT and spaces-groupoids.tex Tag 06VZ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "quasi.?coherent.*[Aa]belian|[Aa]belian.*quasi.?coherent|algebraic.?[Ss]tack",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: ambient sheaf-module abelianity and scheme pullback/flat-module facts do not provide the quasi-coherent algebraic-stack assertion. Sources of the candidate declarations were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicoherent\", \"Abelian\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: ambient sheaf-module abelianity and scheme pullback/flat-module facts do not provide the quasi-coherent algebraic-stack assertion. Sources of the candidate declarations were read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Abelian category of quasi coherent modules on an algebraic stack",
+   "results": "8 hits: SheafOfModules.IsQuasicoherent.mk, SheafOfModules.isQuasicoherent, SheafOfModules.IsQuasicoherent, SheafOfModules.QuasicoherentData.ctorIdx, SheafOfModules.QuasicoherentData, SheafOfModules.instAbelian, SheafOfModules.QuasicoherentData.I, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData",
+   "date": "2026-10-23",
+   "verdict": "no match: ambient sheaf-module abelianity and scheme pullback/flat-module facts do not provide the quasi-coherent algebraic-stack assertion. Sources of the candidate declarations were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent modules on an algebraic stack form an abelian category",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instAbelian, AlgebraicGeometry.Scheme.Modules.instCategory, instAbelianLightCondMod, SheafOfModules.instAbelian, instAbelianCondensedMod, AlgebraicGeometry.Scheme.Modules.instHasColimits, PresheafOfModules.instAbelian, SheafOfModules.QuasicoherentData.X",
+   "date": "2026-10-23",
+   "verdict": "no match: ambient sheaf-module abelianity and scheme pullback/flat-module facts do not provide the quasi-coherent algebraic-stack assertion. Sources of the candidate declarations were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The full subcategory of quasicoherent sheaves on an Artin stack is abelian",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instAbelian, CategoryTheory.sheafIsAbelian, instAbelianCondensedMod, CategoryTheory.Sheaf.instIsGrothendieckAbelian, instAbelianLightCondMod, SheafOfModules.instAbelian, LightCondensed.instIsGrothendieckAbelianLightCondMod, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall",
+   "date": "2026-10-23",
+   "verdict": "no match: ambient sheaf-module abelianity and scheme pullback/flat-module facts do not provide the quasi-coherent algebraic-stack assertion. Sources of the candidate declarations were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent sheaves on an algebraic stack form an abelian category via a smooth presentation",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instAbelian, AlgebraicGeometry.Scheme.Modules.instCategory, SheafOfModules.QuasicoherentData.presentation, SheafOfModules.instAbelian, SheafOfModules.QuasicoherentData.X, instAbelianLightCondMod, instAbelianCondensedMod, SheafOfModules.QuasicoherentData.I",
+   "date": "2026-10-24",
+   "verdict": "no match: ambient module-sheaf abelianity does not establish abelianity of stack QCoh; the stack presentation and flat descent category are absent from these hits. Read the ambient sheaf-module abelian instance and quasi-coherence definitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The full subcategory of quasicoherent sheaves on an Artin stack is abelian",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instAbelian, CategoryTheory.sheafIsAbelian, instAbelianCondensedMod, CategoryTheory.Sheaf.instIsGrothendieckAbelian, instAbelianLightCondMod, SheafOfModules.instAbelian, LightCondensed.instIsGrothendieckAbelianLightCondMod, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall",
+   "date": "2026-10-24",
+   "verdict": "no match: ambient module-sheaf abelianity does not establish abelianity of stack QCoh; the stack presentation and flat descent category are absent from these hits. Read the ambient sheaf-module abelian instance and quasi-coherence definitions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent modules on an algebraic stack form an abelian category",
+   "results": "8 hits: SheafOfModules.IsQuasicoherent.mk, SheafOfModules.instAbelian, SheafOfModules.IsQuasicoherent, ModuleCat.abelian, AlgebraicGeometry.Scheme.Modules.instAbelian, SheafOfModules.QuasicoherentData, SheafOfModules.isQuasicoherent, instIsGrothendieckAbelianModuleCat",
+   "date": "2026-10-24",
+   "verdict": "no match: ambient module-sheaf abelianity does not establish abelianity of stack QCoh; the stack presentation and flat descent category are absent from these hits. Read the ambient sheaf-module abelian instance and quasi-coherence definitions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicoherent\", \"Abelian\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: ambient module-sheaf abelianity does not establish abelianity of stack QCoh; the stack presentation and flat descent category are absent from these hits. Read the ambient sheaf-module abelian instance and quasi-coherence definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*abelian|abelian.*groupoid|quasi.?coherent.*abelian|abelian.*quasi.?coherent",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: ambient module-sheaf abelianity does not establish abelianity of stack QCoh; the stack presentation and flat descent category are absent from these hits. Read the ambient sheaf-module abelian instance and quasi-coherence definitions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-algebra-smooth-image",
+  "date": "2026-10-23",
+  "group": "Q20"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: the adequate moduli space for the product, before the finiteness criterion; Q44 product-affinization proof: composition of the product projections and the structural map; affine Y to Spec k; Proposition 4.2.1(1), proof first sentence: follows from Lemma 4.1.7, applied to g and the universally adequate map f_*A to f_*B; Quasi-coherent algebra image factorization on smooth tests; module prerequisite: Quasi-coherent modules on an algebraic stack form an abelian category",
+   "via": [
+    "lem-sfb-stack-algebra-smooth-image",
+    "lem-sfb-adequate-algebra-pushforward",
+    "lem-sfb-adequately-affine-composition",
+    "lem-sfb-adequate-product-affinization",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-stack-qcoh-abelian",
+  "worker": "stage1",
+  "summary": "Followed Stacks 06WV(2) through smooth-atlas module descent and flat algebraic-space groupoid abelianity, then the exact Mathlib transfer theorem. Kept the statement unchanged. Separated the flat space-groupoid input from the existing scheme-only result; checked that no kernel is computed in the big-fppf ambient category. Two new nodes: one statement-only input and one Mathlib leaf.",
+  "blueprint": "Supporting quasi-coherent abelianity input to the existing adequate-algebra image-factorization branch of det-thm-sf-ctf-stability-direct-images, proof (3), as located by the inherited blueprint.from.place; realizes it by the Stacks 06WV(2) presentation argument. The latest unit text has no competing node or proof for this module-theoretic input.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q68-a0457c287",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-a0457c287 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement, Stacks 06WV (stacks-sheaves.tex 2383-2424, with the non-exactness warning at 2372), 06VZ (spaces-groupoids.tex 1151-1176) and Mathlib abelianOfEquivalence (Transfer.lean 112-116). The route is exactly the 06WV(2) proof: a smooth atlas; flat lfp from the chartwise calculus; the self-relation groupoid from clause (2) of fppf-groupoid-stack-presentations; the 06WT equivalence from smooth-atlas-module-descent; the new 06VZ node for flat algebraic-space groupoids; transfer via the Mathlib leaf. I recomputed the step-2 convention: with s=p1, t=p2 we get pr0=p23, pr1=p12, c=p13, so alpha=delta^-1 turns delta13=delta23 delta12 into c*alpha=pr1*alpha∘pr0*alpha, and the morphism condition matches. Step 3 (preadditive, finite products transported through the equivalence) is genuinely elementary. The Mathlib leaf is exact and needs no additivity of F. The new flat-groupoid node matches 06VZ hypothesis for hypothesis. It is not a duplicate: 077S covers scheme groupoids only, and the space-groupoid descent node has no abelianity clause. It is not a restatement of the item, and it holds in the edge cases checked (Spec A, empty U). Batch-5 flags: def-trf-algebraic-space, def-trf-space-quasi-coherent-module, def-trf-space-etale-module-functors and def-sfb-algebraic-space-groupoid are general definitions. The three cited stack lemmas reach sec-trace-formula only through def-trf-algebraic-space and are general stack/descent theory outside both assumptions, so all flags are accepted. There is no SGA, no cycle, the step uses equal proof_deps, and tool_uses is empty."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackQcohAbelian",
+  "declaration": "CategoryTheory.stack_qcoh_abelian",
+  "file": "lean/Sheaf/AlgebraicGeometry/StackQcohAbelian.lean",
+  "statement": "theorem stack_qcoh_abelian {S : AlgebraicGeometry.Scheme.{u}} (F : BasedCategory.{v, w} (Over S)) (hF : IsAlgebraicModuliStack F) : Nonempty (Abelian (SheafOfModules.isQuasicoherent.{max (u + 1) v w} (moduliModuleRings F hF.1.1)).FullSubcategory)",
+  "branch": "newtargets-dag",
+  "by": "Q71",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6dabdd8d0",
+  "group": "Q71",
+  "result": "pass",
+  "note": "Read the item node (only lean differs from side-live), Stacks 06WV(2) at stacks-sheaves.tex 2384-2391, all 6 stmt_dep records, the live StackQuasiCoherentAlgebra source (moduliModuleRings/moduliFppfTopology/slice instances at max(u+1) v w), IsAlgebraicModuliStack (hF.1.1 = IsFibredInGroupoids) and Mathlib Quasicoherent.lean (Presentation by small direct sums, QuasicoherentData covering the terminal object). Statement: Nonempty (Abelian (SheafOfModules.isQuasicoherent (moduliModuleRings F hF.1.1)).FullSubcategory); this is the same QCoh predicate the dep uses; Nonempty Abelian is equivalent to 'is abelian' because the preadditive structure is unique. No finiteness or Noetherian hypothesis, no universe equalities, no exactness claim. Edge cases (empty stack/base, infinite presentations) covered. Docstrings give source, blueprint and the 4 proof steps; sorry only; statement verbatim; imports are stmt_dep plus proof_dep modules; no duplicate in side-live. No change, no recompile."
+ }
+}

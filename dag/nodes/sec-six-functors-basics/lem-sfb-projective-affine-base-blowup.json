@@ -1,0 +1,255 @@
+{
+ "id": "lem-sfb-projective-affine-base-blowup",
+ "kind": "statement",
+ "title": "Blowups on a projective scheme over an affine Noetherian base are H-projective",
+ "statement": "Let $S=\\operatorname{Spec}A$ for a commutative Noetherian ring $A$ [def-weil-affine-spectrum] [def-weil-pbc-noetherian-ring]. Let $f:X\\to S$ be H-projective, meaning that it factors as a closed immersion into some finite-dimensional projective space $\\mathbf P^N_S$ followed by projection [def-kun-projective] [def-weil-closed-immersion]. For any finite-type quasi-coherent ideal $\\mathcal I\\subseteq\\mathcal O_X$ [pqf-def-coherent], the ordinary blowup $b:B=\\operatorname{Bl}_{\\mathcal I}X\\to X$ [def-nagata-global-blowup] is H-projective, and so is $f b:B\\to S$. The empty blowup for $\\mathcal I=0$ and the identity blowup for $\\mathcal I=\\mathcal O_X$ are allowed. No integrality, regularity or excellence hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 02NS (lemma-blowing-up-projective), combined with morphisms.tex Tag 087S (lemma-projective-over-quasi-projective-is-H-projective) and Tag 01WE (lemma-H-projective-composition); an H-projective scheme over an affine base has an ample invertible sheaf by Tag 01VR/01VG and absolute ampleness over an affine base."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-noetherian-ring",
+  "def-kun-projective",
+  "def-weil-closed-immersion",
+  "pqf-def-coherent",
+  "def-nagata-global-blowup"
+ ],
+ "proof": [
+  {
+   "text": "Choose the factorization $X\\xrightarrow{i}\\mathbf P^N_S\\xrightarrow{q}S$ in [def-kun-projective]. Apply [lem-weil-pbc-projective-ample-invertible] with the given ring $A$, this $N$, and this closed immersion $i$. Its statement supplies an invertible sheaf $\\mathcal L=i^*\\mathcal O_{\\mathbf P^N_A}(1)$ which is ample on $X$ in the absolute sense. Thus the base $X$ of the blowup admits exactly the ample invertible sheaf required later; no passage from relative to absolute ampleness is left implicit.",
+   "uses": [
+    "def-kun-projective",
+    "lem-weil-pbc-projective-ample-invertible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 01PS (definition-ample), 01PU (lemma-ample-on-closed), together with Constructions Tag 01NG (lemma-standard-covering-projective-space); the existing projective-ample node gives the absolute affine-base conclusion"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-sheaf-rees-symmetric-presentation] to $X,\\mathcal I$. It supplies the quasi-coherent graded algebra $\\mathcal R$, the restriction-compatible affine Rees identifications $\\theta_V$ (identity in degree zero), and the degreewise surjective graded morphism $\\varphi:\\operatorname{Sym}(\\mathcal I)\\to\\mathcal R$. Since $\\mathcal I$ is of finite type, all hypotheses of [lem-sfb-rees-presentation-blowup-immersion] hold with $\\mathcal C=\\mathcal R$. Its closed immersion $j:B\\hookrightarrow\\mathbf P_X(\\mathcal I)$ is over $X$ and has composite $b$. Taking $\\mathcal E=\\mathcal I$ in [def-trf-projective-bundle-morphism] proves that $b$ is projective in the projective-bundle sense.",
+   "uses": [
+    "lem-sfb-sheaf-rees-symmetric-presentation",
+    "lem-sfb-rees-presentation-blowup-immersion",
+    "def-trf-projective-bundle-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02NS (lemma-blowing-up-projective), proof of clause (1): assembly of the graded presentation and chart-compatible closed immersion."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-projective-bundle-to-h-projective] to $b:B\\to X$. Step 2 supplies its projective-bundle hypothesis, and Step 1 supplies an ample invertible sheaf on its base $X$. Therefore $b$ is H-projective in the finite-projective-space convention of the item. In particular this step uses no integrality or nonzero-ideal hypothesis.",
+   "uses": [
+    "lem-trf-projective-bundle-to-h-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 087S (lemma-projective-over-quasi-projective-is-H-projective), clause (1)"
+   }
+  },
+  {
+   "text": "The given $f:X\\to S$ is H-projective, and Step 3 proves the same for $b$. Apply [lem-trf-h-projective-composition] with $g=b$ and $h=f$ to obtain that $fb:B\\to S$ is H-projective as well. All steps apply to every finite-type quasi-coherent ideal, including $0$ and $\\mathcal O_X$, and to an empty $X$. The argument has imposed no additional hypothesis on $X$ or $A$.",
+   "uses": [
+    "lem-trf-h-projective-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WE (lemma-H-projective-composition)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-projective",
+  "lem-weil-pbc-projective-ample-invertible",
+  "lem-sfb-sheaf-rees-symmetric-presentation",
+  "lem-sfb-rees-presentation-blowup-immersion",
+  "def-trf-projective-bundle-morphism",
+  "lem-trf-projective-bundle-to-h-projective",
+  "lem-trf-h-projective-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 02NS (lemma-blowing-up-projective), clause (1) and symmetric-to-Rees proof, combined with morphisms.tex Tags 087S and 01WE; absolute ampleness is supplied by the existing affine-base projective-ample theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The blowup of a coherent ideal on a scheme projective over an affine Noetherian scheme is H projective over the original scheme and its affine base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.IsProper (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If the zero-graded component $ \\\\mathcal{A}_0 $ of a graded ring $ \\\\mathcal{A} $ is a finitely generated $ A $-algebra, then the canonical morphism from the projective spectrum $ \\\\operatorname{Proj}(\\\\m\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.UniversallyClosed (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finite type algebra over a base ring $A$, the canonical morphism $\\\\operatorname{Proj}(\\\\mathcal{A}) \\\\to \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.ValuativeCriterion.Existence (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$ satisfies the valuative criterion for existence, provided t\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], (AlgebraicGeometry.Proj 𝒜).IsSeparated\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is a separated scheme.\"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_isIso\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ},\\n  f ∈ 𝒜 m → 0 < m → CategoryTheory.IsIso (AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec 𝒜 f).base\", \"doc\": \"For a homogeneous element $ f $ of positive degree $ m $ in a graded ring $ A $, the continuous base map underlying the morphism from the basic open set $ D_+(f) \\\\subseteq \\\\operatorname{Proj}(A) $ to \"}\n  {\"name\": \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.LocallyOfFiniteType (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finitely generated algebra over a base ring $A$, the canonical morphism from the projective spectrum $\\\\operatorname{P\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: The absolute Proj properness and closed-immersion declarations do not provide finite-projective-space projectivity of a global coherent-ideal blowup."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsProjective\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: The absolute Proj properness and closed-immersion declarations do not provide finite-projective-space projectivity of a global coherent-ideal blowup."
+  },
+  {
+   "tool": "grep",
+   "query": "blowup|blowUp|Blowup|IsProjective",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: The absolute Proj properness and closed-immersion declarations do not provide finite-projective-space projectivity of a global coherent-ideal blowup."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Blowing up a coherent ideal on a Noetherian scheme with an ample line bundle gives a closed embedding into a finite projective space over that scheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is a closed immersion if it induces a homeomorphism of the underlying topological space of $ X $ onto a closed subset of $ Y $ and the induced map on structure she\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsClosedImmersion f] : IsAffineHom f\", \"doc\": \"Every closed immersion of schemes is an affine morphism. Specifically, if $ f: X \\to Y $ is a closed immersion (i.e., induces a homeomorphism of $ X $ onto a closed subset of $ Y $ with surjective stru\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.Spec_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{R : CommRingCat} {f : X ⟶ Spec R} :\\n  IsClosedImmersion f ↔\\n    ∃ I : Ideal R, ∃ e : X ≅ Spec (.of <| R ⧸ I), f = e.hom ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))\", \"doc\": \"A morphism $ f: X \\\\to \\\\operatorname{Spec}(R) $ is a closed immersion if and only if there exists an ideal $ I \\\\subseteq R $ and an isomorphism $ X \\\\cong \\\\operatorname{Spec}(R/I) $ such that $ f $ equa\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instOfIsClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"(f : X ⟶ Y) [IsClosedImmersion f] : IsFinite f\", \"doc\": \"Every closed immersion of schemes is a finite morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes induces a homeomorphism of the underlying topological space of $ X $ onto a closed subset o\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subscheme\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \": Scheme\", \"doc\": \"For a scheme $X$ and ideal sheaf data $\\\\mathcal{I}$ on $X$, the closed subscheme associated to $\\\\mathcal{I}$ is constructed by gluing local affine models $\\\\operatorname{Spec}(\\\\mathcal{O}_X(U)/\\\\mathcal\"}\n  {\"name\": \"AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \"[IsClosedImmersion f] : UniversallyClosed f\", \"doc\": \"Every closed immersion of schemes is a universally closed morphism. Specifically, if $ f: X \\to Y $ is a closed immersion (i.e., it induces a homeomorphism of $ X $ onto a closed subset of $ Y $ with s\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \"{r : A} {n : ℕ} (hn : 0 < n) (hr : r ∈ 𝒜 n) :\\n  (fromOfGlobalSections 𝒜 f hf).resLE _ _ (fromOfGlobalSections_preimage_basicOpen _ _ _ hn hr).ge =\\n    toBasicOpenOfGlobalSections 𝒜 f rfl hn hr\", \"doc\": \"For a graded ring $\\\\mathcal{A}$, a positive integer $n$, and an element $r \\\\in \\\\mathcal{A}_n$, the restriction of the morphism induced by global sections composed with the preimage of the basic open s\"}\n  {\"name\": \"AlgebraicGeometry.instIsClosedImmersionInclusion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{I J : X.IdealSheafData} (h : I ≤ J) : IsClosedImmersion (I.inclusion h)\", \"doc\": \"For any scheme $X$ and ideal sheaf data $\\\\mathcal{I} \\\\leq \\\\mathcal{J}$ on $X$, the inclusion morphism from the closed subscheme defined by $\\\\mathcal{J}$ to the closed subscheme defined by $\\\\mathcal{I}\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: The absolute Proj properness and closed-immersion declarations do not provide finite-projective-space projectivity of a global coherent-ideal blowup."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ample invertible sheaf makes every blowup along a finite type ideal projective in finite dimensional projective space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.IsProper (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If the zero-graded component $ \\\\mathcal{A}_0 $ of a graded ring $ \\\\mathcal{A} $ is a finitely generated $ A $-algebra, then the canonical morphism from the projective spectrum $ \\\\operatorname{Proj}(\\\\m\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.LocallyOfFiniteType (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finitely generated algebra over a base ring $A$, the canonical morphism from the projective spectrum $\\\\operatorname{P\"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.UniversallyClosed (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finite type algebra over a base ring $A$, the canonical morphism $\\\\operatorname{Proj}(\\\\mathcal{A}) \\\\to \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.QuasiCompact (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If a graded ring $\\\\mathcal{A}$ is finitely generated as an algebra over its zero-graded component $\\\\mathcal{A}_0$, then the canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathca\"}\n  {\"name\": \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.ValuativeCriterion.Existence (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$ satisfies the valuative criterion for existence, provided t\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], (AlgebraicGeometry.Proj 𝒜).IsSeparated\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is a separated scheme.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: The absolute Proj properness and closed-immersion declarations do not provide finite-projective-space projectivity of a global coherent-ideal blowup."
+  },
+  {
+   "tool": "grep",
+   "query": "blowup|blowUp|Blowup|IsHProjective|IsProjective",
+   "results": "OK 0 hit(s): ",
+   "date": "2026-10-22",
+   "verdict": "no match: absolute Proj maps and properness, or projective modules, do not assert H-projectivity of a global blowup."
+  },
+  {
+   "tool": "leansearch",
+   "query": "On a scheme admitting an ample invertible sheaf the blowup of a finite type ideal is H projective",
+   "results": "OK 8 hit(s): Module.Invertible.instProjective, AlgebraicGeometry.Proj.fromOfGlobalSections_resLE, AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop, AlgebraicGeometry.ProjIsoSpecTopComponent.ToSpec.toFun_asIdeal, AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop, AlgebraicGeometry.Proj.instIsSeparated, ProjectiveSpectrum.mk, AlgebraicGeometry.Proj.instIsOpenImmersionAwayι",
+   "date": "2026-10-22",
+   "verdict": "no match: absolute Proj maps and properness, or projective modules, do not assert H-projectivity of a global blowup."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsHProjective\"",
+   "results": "OK 0 hit(s): ",
+   "date": "2026-10-22",
+   "verdict": "no match: absolute Proj maps and properness, or projective modules, do not assert H-projectivity of a global blowup."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A blowup of a finite type quasi coherent ideal on a scheme projective over an affine base embeds into finite projective space over the scheme and the base",
+   "results": "OK 8 hit(s): AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj, AlgebraicGeometry.Proj.awayι, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instIsOpenImmersionAwayι",
+   "date": "2026-10-22",
+   "verdict": "no match: absolute Proj maps and properness, or projective modules, do not assert H-projectivity of a global blowup."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative Proj of the Rees algebra of a coherent ideal factors through a closed immersion into finite dimensional projective space when the base has an ample line bundle",
+   "results": "OK 8 hit(s): AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj.awayι, AlgebraicGeometry.Proj.pullbackAwayιIso, AlgebraicGeometry.Proj, AlgebraicGeometry.Proj.instIsOpenImmersionAwayι, AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero, AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero_assoc, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat",
+   "date": "2026-10-22",
+   "verdict": "no match: absolute Proj maps and properness, or projective modules, do not assert H-projectivity of a global blowup."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-trait-rational-domination",
+  "date": "2026-10-22",
+  "group": "NU"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong Lemma 3.13, rational exceptional-curve geometry before contraction; H-projectivity bookkeeping for the point-blowup tower in the rational-exceptional-curve argument",
+   "via": [
+    "lem-sfb-nodal-trait-rational-domination",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-projective-affine-base-blowup",
+  "worker": "stage1",
+  "group": "Q56",
+  "summary": "Repair of the 5547-character proof: two independent statement-only work items carry the sheaf Rees presentation (old Steps 2--3) and the chart-compatible immersion from a graded Rees presentation (old Steps 4--5). The statement is unchanged. The four-step assembly retains absolute ampleness, projective-bundle identification, the ample-base conversion and H-projective composition. Full transferred arguments and precise work allocation are retained in report.md.",
+  "blueprint": "The inherited from.place records the projectivity bookkeeping in the nodal-trait point-blowup tower, below det-thm-sf-ctf-stability-direct-images (3). Steps 1--6 justify the individual H-projective blowup maps and Step 7 their H-projective composites over the affine base. This is below the unit route; the chapter and unit are untouched.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-projective-bundle-to-h-projective",
+    "why": "Its ample-base conversion is Stacks 087S, needed to distinguish the two projectivity conventions; it is generic projectivity bookkeeping."
+   },
+   {
+    "node": "lem-trf-h-projective-composition",
+    "why": "Its statement composes the two H-projective morphisms, a generic scheme tool required for the composite clause."
+   },
+   {
+    "node": "lem-weil-pbc-projective-ample-invertible",
+    "why": "Its absolute ample line bundle over an affine base verifies the base hypothesis of Stacks 087S; it is a generic embedding tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+  "lem-weil-pbc-symmetric-algebra-graded",
+  "lemma-nagata-relative-proj-exists",
+  "prop-nagata-relative-proj-functoriality",
+  "lem-trf-projective-bundle-to-h-projective",
+  "lem-trf-h-projective-composition",
+  "lem-weil-pbc-projective-ample-invertible",
+  "prop-nagata-affine-blowup-restrict"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-3731ac53d",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-3731ac53d (reviewer sub-agent of L); spot-checked: Re-split answering the live repair note of 2026-10-22, which asked for at least 2 statement-only nodes and an assembly of at most 3000 characters. Step-by-step comparison: old Steps 2–3 (affine sections Γ(V,⊕Iⁿ)≅R_R(I_V) with coefficientwise restriction, and the graded, degreewise surjective φ:Sym(I)→R) are now the statement of lem-sfb-sheaf-rees-symmetric-presentation. Old Steps 4–5 (B≅Proj_X(C) through chart and overlap compatibility on affine refinements, and the closed immersion Proj(φ) into P_X(I) with π∘j=b) are now lem-sfb-rees-presentation-blowup-immersion. That node takes θ_V and φ as hypotheses, so it can be worked on in parallel. Old Steps 1, 6 and 7 stay verbatim as single citations. Nothing was shortened. The item's assembly is 1893 characters. The new nodes carry about 1840 and 2505 characters of old work, which is comparable, and neither restates the item: the H-projectivity, the ample base and the composition stay in the item. Truth checked: Γ commutes with ⊕ on affines; ideal powers on affines; the universal property and clause (b) of lem-weil-pbc-quasi-coherent-symmetric-algebra; surjectivity needs no finite type; degreewise surjectivity means C is generated in degree 1, so Proj(φ) is an everywhere-defined closed immersion (Stacks 07ZK; 02NS proof at divisors.tex l.8633). Edge cases checked: I=0 (all empty), I=O_X (identity), a nilpotent ideal on k[ε], X empty, A=0. Assembly: Step 1 lem-weil-pbc-projective-ample-invertible gives an absolutely ample sheaf; Step 2 composes the two new nodes with C=R, and def-trf-projective-bundle-morphism applies with E=I finite type; Step 3 is 087S; Step 4 is 01WE. Duplicate search with rg -L over the snapshot DAG: no node states B≅Proj_X(R_X(I)) or the Sym→Rees surjection. thm-nagata-blowup-universal-property and def-nagata-blowup-flat-base-change-map use the identification only inside a definition or proof; the integral, generalized and conormal blowup nodes have different hypotheses. Batch-5 flag: all three citations (def-trf-canonical-symmetric-graded-algebra twice, def-trf-projective-bundle-morphism) are general definitions, not steps of the trace formula or Poincaré duality, and the base item already cited both, so the closure gains nothing. The base-accepted generic tool_uses are accepted. No SGA. Minor, not changed: 'canonical local identification b⁻¹(V)=Proj R_R(I_V)' for an affine V outside the glue cover is for the node's proof to construct, read the same way as on the base; the new nodes lack a lean_audit field. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveAffineBaseBlowup",
+  "declaration": "AlgebraicGeometry.isHProjective_blowupMap_and_comp_of_affine_base",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveAffineBaseBlowup.lean",
+  "statement": "theorem isHProjective_blowupMap_and_comp_of_affine_base (A : Type u) [CommRing A] [IsNoetherianRing A] {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of A)) [IsHProjective f] (I : X.IdealSheafData) (hI : I.toModules.IsQuasiCoherentFiniteType) : IsHProjective I.blowupMap ∧ IsHProjective (I.blowupMap ≫ f)",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cdecdfded",
+  "group": "NV",
+  "result": "pass",
+  "note": "Signature matches the node clause by clause: Noetherian A : Type u, Spec (CommRingCat.of A), [IsHProjective f] (finite-coordinate-type form, equivalent to P^N per the def-kun-projective note), I : X.IdealSheafData with finite type via I.toModules.IsQuasiCoherentFiniteType (quasicoherent and finite type, not finite presentation), conclusion IsHProjective I.blowupMap and IsHProjective (I.blowupMap ≫ f), using the glued structure morphism, not blowupι. No extra hypotheses; I=0, I=O_X, empty X and A=0 are all allowed; single universe u. lean.statement is verbatim in the file; the node copy differs from live only in lean; all 14 proof_dep imports exist live; docstrings carry the source tags, the blueprint id and the 7 proof steps. Stacks 02NS + 087S + 01WE give the statement under exactly these hypotheses. No duplicate in Mathlib or the project, no hollow definitions, sorry only. Report has both sections (the second reading is an openly stated self-review). No recompile because no file changed."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

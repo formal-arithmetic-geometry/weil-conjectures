@@ -26,147 +26,155 @@
  ],
  "proof": [
   {
-   "text": "Choose compatible primitive roots $\\zeta_r\\in\\mu_{\\ell^r}(k)$, $\\zeta_{r+1}^{\\ell}=\\zeta_r$: the cyclicity and orders in [lem-pur-frobenius-roots-of-unity-power] give a primitive $\\zeta_1$, and an $\\ell$-th root of $\\zeta_r$ exists in the algebraically closed field $k$ and has order $\\ell^{r+1}$. These choices trivialize the sheaves [def-pur-roots-of-unity-sheaf] on $s$, not just their groups of global sections. Indeed, for a section $u$ on any $U\\to s$, the factorization $X^{\\ell^r}-1=\\prod_{j=0}^{\\ell^r-1}(X-\\zeta_r^j)$ has pairwise unit differences. The Lagrange expressions $e_j=\\prod_{i\\ne j}(u-\\zeta_r^i)/(\\zeta_r^j-\\zeta_r^i)$ satisfy $e_je_i=0$ for $i\\ne j$, $e_j^2=e_j$, $\\sum e_j=1$, and $(u-\\zeta_r^j)e_j=0$; these identities follow by reducing polynomial identities modulo $X^{\\ell^r}-1$. The clopen pieces $D(e_j)$ therefore cover $U$ and on them $u=\\zeta_r^j$. The unique label $j$ gives the inverse of $(\\mathbf Z/\\ell^r)_s\\to\\mu_{\\ell^r,s}$, $j\\mapsto\\zeta_r^j$, as sheaves. The transitions are reduction of labels since $(\\zeta_{r+1}^j)^\\ell=\\zeta_r^j$. Taking the sectionwise inverse limit [def-pur-sheaf-inverse-limit] gives $\\Zl(1)_s\\cong\\widehat{\\Zl}_s$, with generator $e=(\\zeta_r)_r$.",
+   "text": "Apply [lem-pur-point-tate-root-coordinates] to choose $e$ and identify the finite and integral twist sections with $\\Lambda e_{m,\\Lambda}$. Since $a_s=\\operatorname{id}_s$, [def-weil-ordinary-compact-cohomology] identifies $\\RGamma$ with the point fiber. Exact point sections [lem-weil-point-proetale-sections-exact] give no cohomology outside degree zero. The rational and common-stage fiber formulas [def-weil-finite-coefficient-point] extend these free lines to $E$ and $\\Qlb$. Thus every stated $H^0$ is free of rank one.",
    "uses": [
-    "lem-pur-frobenius-roots-of-unity-power",
-    "def-pur-roots-of-unity-sheaf",
-    "def-pur-sheaf-inverse-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/deligne-weil-I_PMIHES-1974-43.pdf",
-    "place": "(2.2), pp. 280-281; explicit primitive-root trivialization"
-   }
-  },
-  {
-   "text": "The completed coefficient identification and reduction in [lem-pur-twist-sheaf-locally-free], clause 3, turn the preceding trivialization into $\\mathcal O_E(1)_s\\cong\\widehat{\\mathcal O}_{E,s}$ and $A_{E,n}(1)_s\\cong(A_{E,n})_s$, with generators $e_{\\mathcal O_E}=e\\otimes1$ and $e_A=e_{\\mathcal O_E}\\otimes1$. For $\\Lambda=\\mathcal O_E,A_{E,n}$, [def-coefficient-twists-detailed] now identifies $\\Lambda(m)_s$ with the free coefficient sheaf on $e_m=e_\\Lambda^{\\otimes m}$ for $m>0$, on $e_0=1$ for $m=0$, and on the dual generator $e_{-r}$ defined by $e_{-r}(e_r)=1$ for $r>0$. The tensor and Hom identifications have explicit inverses $a e_r\\mapsto a$ and $\\varphi\\mapsto\\varphi(e_r)$; no commutation of arbitrary sheaf Hom with sections is being assumed. The sections of the coefficient sheaves are $A_{E,n}$ and $\\mathcal O_E$. For the finite constant sheaf, a section over the terminal object $s$ is represented after sheafification by compatible labels in $A_{E,n}$ on a pro-etale cover of $s$; the equalizer condition on every pairwise fibre product forces all nonempty labels to agree (a product of two nonempty schemes over the field $k$ is nonempty), and a single label gives such a section. Hence $\\Gamma(s,(A_{E,n})_s)=A_{E,n}$. For the integral object use [lem-weil-pbc-continuous-coefficients-immersion-restriction] with $X=s$, identifying the completed sheaf with continuous $\\mathcal O_E$-valued functions, whose sections on the one-point space $|s|$ are $\\mathcal O_E$. Here $s$ is noetherian. Thus $\\Gamma(s,\\Lambda(m)_s)$ is free of rank one with generator $e_m$.",
-   "uses": [
-    "lem-pur-twist-sheaf-locally-free",
-    "def-coefficient-twists-detailed",
-    "lem-weil-pbc-continuous-coefficients-immersion-restriction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
-    "place": "Tate-twist construction and finite reduction; completed integral coefficients on the geometric point"
-   }
-  },
-  {
-   "text": "For $Y=s$ the structure morphism $a_Y$ is the identity, so the definition [def-weil-ordinary-compact-cohomology] gives $\\RGamma(s,M)=\\operatorname{Fib}_s(M)$. By [lem-weil-point-proetale-sections-exact], for a sheaf placed in degree zero this is its sections in degree zero, with no higher or negative cohomology. Apply this to the finite and integral free lines just constructed. At rational coefficients [def-weil-finite-coefficient-point] computes the fiber of the integral representative by termwise tensor with $E$, and at algebraically closed coefficients it uses the common finite stage. In each case the result is the free rank-one $\\Lambda$-module in degree zero. This proves both assertions about $H^i$, without treating a pro-etale topos as the category of sets or using an unproved equivalence of coefficient categories.",
-   "uses": [
+    "lem-pur-point-tate-root-coordinates",
     "def-weil-ordinary-compact-cohomology",
     "lem-weil-point-proetale-sections-exact",
     "def-weil-finite-coefficient-point"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/deligne-weil-I_PMIHES-1974-43.pdf",
-    "place": "(2.2), pp. 280-281; exact evaluation and the coefficient fiber definitions"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+    "place": "Scalar-action and finite-reduction/scalar-extension sentences; assembly of the separated coordinate lemmas"
    }
   },
   {
-   "text": "Identify the operator specified in the statement, rather than only an abstract Galois action. The ordinary transport [def-weil-frobenius-cohomology-transport] for $a_Y=\\operatorname{id}_s$ is the point transport: the mate formula in [def-weil-frobenius-square-exchange] is the identity exchange after the identity direct-image identifications, since its unit and counit are identities. By [def-weil-frobenius-point-transport] the point transport is $\\Gamma(s,\\kappa_M)\\circ\\sigma_M$, where $\\sigma_M$ is restriction along $g_s:(s,g_s)\\to(s,\\operatorname{id})$ followed by the inverse-image coprojection. The Weil structure [def-weil-frobenius-coefficient-twists] is $\\tau_m^\\Lambda\\circ\\lambda_M$. On these free lines the canonical identification $\\lambda_M$ of [lem-weil-isomorphism-derived-pullback] cancels $\\kappa_M$: at finite level, the comparison [def-weil-inverse-image-pullback-comparison] sends $x$ to $x\\otimes1$, and the identification sends $x\\otimes a$ to $c_\\Lambda^{-1}(a)x$. At integral level, the displayed construction of $\\kappa$ in [def-weil-inverse-image-pullback-comparison] has, after reduction to each $A_{E,r}$, the coordinate map $x\\mapsto x\\otimes1$; the canonical identification back to the inverse-image line sends $x\\otimes a$ to $c_{A_{E,r}}^{-1}(a)x$. These coordinate composites are $x$ and commute with the reduction transitions, so the induced composite on the completed inverse-limit model is the identity. Consequently $H^0(F_m)=\\Gamma(s,\\tau_m^\\Lambda)\\circ\\sigma_{\\Lambda(m)}$ for $\\Lambda=A_{E,n},\\mathcal O_E$. In particular the constant coefficient transport followed by $c_\\Lambda$ fixes every scalar: restriction of a constant section is the same section, and for completed coefficients this holds at every quotient. This calculation also shows that restriction and the inverse-image coprojection send tensor generators to tensor generators and commute with evaluation of a dual on its generator.",
+   "text": "For $\\Lambda=A_{E,n},\\mathcal O_E$, the transport normalization [lem-pur-point-frobenius-transport-normalization], applied to $M=\\Lambda(m)_s$ and $v=\\tau_m^\\Lambda$, identifies the specified composite $F_m$ with $\\Gamma(s,\\tau_m^\\Lambda)\\sigma_{\\Lambda(m)}$. Here $\\theta_m=v\\lambda_M$ is exactly the canonical Weil structure of [def-weil-frobenius-coefficient-twists]. The coordinate formula [lem-pur-point-signed-cyclotomic-action] therefore gives $F_m(b e_m)=bq^{-m}e_m$ for every integer $m$.",
    "uses": [
-    "def-weil-frobenius-cohomology-transport",
-    "def-weil-frobenius-square-exchange",
-    "def-weil-frobenius-point-transport",
+    "lem-pur-point-frobenius-transport-normalization",
     "def-weil-frobenius-coefficient-twists",
-    "lem-weil-isomorphism-derived-pullback",
-    "def-weil-inverse-image-pullback-comparison"
+    "lem-pur-point-signed-cyclotomic-action"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
-    "place": "(1.1.7), pp. 150-151, transport of structure; explicit point transport and canonical pullback comparisons"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+    "place": "Scalar-action and finite-reduction/scalar-extension sentences; assembly of the separated coordinate lemmas"
    }
   },
   {
-   "text": "At level $\\mu_{\\ell^r}$, the restriction in $\\sigma$ is pullback of units along $\\operatorname{Spec}(\\gamma)$, and hence sends $\\zeta\\in k^\\times$ to $\\gamma(\\zeta)$. The roots-of-unity inverse-image comparison of [lem-pur-roots-of-unity-inverse-image-iso], clause 3, is the identity on the roots of unity of the unchanged underlying scheme at the object $(s,g_s)$, so it introduces no further field automorphism. Clause 1 of that lemma gives compatibility with $\\zeta\\mapsto\\zeta^\\ell$. By [lem-pur-frobenius-roots-of-unity-power], clauses 2 and 3, $\\gamma(\\zeta)=\\zeta^{q'}$ with $qq'\\equiv1\\pmod{\\ell^r}$, and on $T_\\ell\\mu(k)$ the resulting operator is multiplication by $q^{-1}\\in\\mathbf Z_\\ell^\\times$. The limit in the canonical Weil structure [def-weil-frobenius-coefficient-twists], clause 2, is exactly this componentwise action. Thus the composite on $\\Zl(1)$ sends $e$ to $q^{-1}e$; it is geometric, not arithmetic, Frobenius.",
+   "text": "The rational and common-stage transports are the images of the integral transport [lem-pur-point-frobenius-transport-normalization], and their Weil structures are the images of $\\theta_m$ [def-weil-frobenius-coefficient-twists]. Consequently the same scalar acts after localization and at every finite stage of $\\Qlb$. The canonical coefficient comparisons [lem-pur-point-tate-fiber-coefficient-comparisons] send $e_m\\otimes b$ to $b e'_m$ and are transitive, including for dual generators. Via the point-fiber formulas [def-weil-finite-coefficient-point] these are precisely the comparisons of the statement. For $u=q^{-m}$, each comparison $c$ satisfies $c((ux)\\otimes b)=u\\,c(x\\otimes b)=F_m c(x\\otimes b)$; the transitivity makes the $\\Qlb$ equality independent of stage.",
    "uses": [
-    "lem-pur-roots-of-unity-inverse-image-iso",
-    "lem-pur-frobenius-roots-of-unity-power",
-    "def-weil-frobenius-coefficient-twists"
+    "lem-pur-point-frobenius-transport-normalization",
+    "def-weil-frobenius-coefficient-twists",
+    "lem-pur-point-tate-fiber-coefficient-comparisons",
+    "def-weil-finite-coefficient-point"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/deligne-weil-I_PMIHES-1974-43.pdf",
-    "place": "(2.2), pp. 280-281, arithmetic Frobenius acts by q; Weil II (1.1.7), geometric Frobenius is its inverse"
-   }
-  },
-  {
-   "text": "Use the formulas defining $\\tau_1^{\\mathcal O_E}$ and $\\tau_1^{A_{E,n}}$ in [def-weil-frobenius-coefficient-twists], clause 2. Their coefficient factors fix $1$ by step 4, so $F_1(e_\\Lambda)=q^{-1}e_\\Lambda$ for $\\Lambda=\\mathcal O_E,A_{E,n}$. Clause 3 defines $\\tau_m^\\Lambda$ for positive $m$ by tensor powers. Starting with $m=1$, if $F_m(e_m)=q^{-m}e_m$, then $F_{m+1}(e_m\\otimes e_\\Lambda)=(q^{-m}e_m)\\otimes(q^{-1}e_\\Lambda)=q^{-(m+1)}e_{m+1}$. This proves the assertion for every $m>0$. The operator is $\\Lambda$-linear since the restriction/comparison on the coefficient factor fixes scalars, so the equation on a generator determines it on the whole module.",
-   "uses": [
-    "def-weil-frobenius-coefficient-twists"
-   ],
-   "elementary": true,
-   "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
-    "place": "The clauses for E(1), E(m), and finite reduction, proved first on the integral and finite lines"
+    "place": "Scalar-action and finite-reduction/scalar-extension sentences; assembly of the separated coordinate lemmas"
    }
   },
   {
-   "text": "For $m=0$, clause 3 of [def-weil-frobenius-coefficient-twists] uses the constant coefficient structure, so step 4 gives $F_0(1)=1=q^0$. For $m=-r<0$, that clause defines the dual structure by $\\varphi\\mapsto c_\\Lambda\\circ\\varphi\\circ(\\tau_r^\\Lambda)^{-1}$. Together with the evaluation compatibility in step 4, this is the contragredient of the operator $F_r$ computed in step 6. Explicitly, $F_{-r}(e_{-r})(e_r)=e_{-r}(F_r^{-1}e_r)=e_{-r}(q^r e_r)=q^r$. Hence $F_{-r}=q^r\\operatorname{id}$, giving $q^{-m}$ for all integers $m$. Invertibility of $q$ is essential here and holds since $q=p^a$ and $\\ell\\ne p$.",
+   "text": "The global operator of [def-weil-global-geometric-frobenius] is the same transport-then-Weil-structure composite, so its $H^0$ action is the one computed above. Substitution of $m=1$ and $m=-d$ gives $q^{-1}$ and $q^d$, respectively.",
    "uses": [
-    "def-weil-frobenius-coefficient-twists"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/deligne-weil-I_PMIHES-1974-43.pdf",
-    "place": "(2.2), p. 280, negative twists are dual tensor powers"
-   }
-  },
-  {
-   "text": "Finite reduction of the integral generator sends $e_{\\mathcal O_E}$ to $e_A$. The tensor/dual definitions [def-coefficient-twists-detailed] therefore send $e_m\\otimes1$ to $e_{m,A}$ for every integer $m$: for negative $m$, the reduced functional is the unique one taking the reduced positive generator to $1$. Thus the canonical map $\\Gamma(s,\\mathcal O_E(m))\\otimes A_{E,n}\\to\\Gamma(s,A_{E,n}(m))$ is the isomorphism of free lines taking one generator to the other. This argument uses the rank-one bases, and makes no general assertion that sections commute with nonflat tensor. With $u=q^{-m}\\in\\mathbf Z_\\ell^\\times$, a pure tensor $x\\otimes a$ satisfies $\\operatorname{red}(F_m x\\otimes a)=\\operatorname{red}(ux\\otimes a)=\\bar u\\,\\operatorname{red}(x\\otimes a)=F_m\\operatorname{red}(x\\otimes a)$. This is the required finite-reduction intertwining, including in ramified extensions and at $n=1$.",
-   "uses": [
-    "def-coefficient-twists-detailed"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
-    "place": "These actions commute with finite reduction; explicit generator and scalar calculation"
-   }
-  },
-  {
-   "text": "For $E$ the Weil structure is the image of the integral structure under scalar localization [def-weil-frobenius-coefficient-twists], clause 4; the point transport and fiber are also the integral ones tensored with $E$ [def-weil-frobenius-point-transport, def-weil-finite-coefficient-point]. Thus the computed endomorphism is $q^{-m}\\operatorname{id}$ on $\\mathcal O_E e_m\\otimes E$, and the integral-to-rational comparison is an isomorphism intertwining it. For a finite extension $E\\subset E'$ the point-sections comparison [lem-weil-point-sections-scalar-extension] identifies the sections of integral scalar extension with $\\Gamma(s,\\mathcal O_E(m))\\otimes_{\\mathcal O_E}\\mathcal O_{E'}$, and after rationalizing identifies $H^0(s,E'(m))$ with $H^0(s,E(m))\\otimes_E E'$. The common root system $e$ supplies the same generator after extension, including its tensor powers and duals, by [def-coefficient-twists-detailed]. The scalar $q^{-m}$ has the same image under all these coefficient homomorphisms. On each pure tensor the intertwining equality is $(u x)\\otimes b=u(x\\otimes b)$, as in step 8. At $\\Qlb$ take the common-stage class of these isomorphisms; the identity and composition compatibilities in [lem-weil-point-sections-scalar-extension] make the class independent of stage. Finally [def-weil-global-geometric-frobenius] defines $F$ by precisely the transport-then-Weil-structure composite used here, so the $E$ and $\\Qlb$ operators are the stated global geometric Frobenius. Substituting $m=1$ and $m=-d$ gives $q^{-1}$ and $q^d$.",
-   "uses": [
-    "def-weil-frobenius-coefficient-twists",
-    "def-weil-frobenius-point-transport",
-    "def-weil-finite-coefficient-point",
-    "lem-weil-point-sections-scalar-extension",
-    "def-coefficient-twists-detailed",
     "def-weil-global-geometric-frobenius"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
-    "place": "Scalar extension to E, E prime and Q_l bar; in particular the action on E(-d)"
+    "place": "Scalar-action and finite-reduction/scalar-extension sentences; assembly of the separated coordinate lemmas"
+   }
+  },
+  {
+   "text": "For the normalized scalarSheafLine_existsUnique helper, compose the inverse of the ordinary-to-completed tensor-model isomorphism of [lem-weil-isomorphism-comparison-scalar-extension] with twistLineScalarIso of [def-coefficient-twists-detailed]. Its formula on local pure tensors is the required one; composing a competing map with the model isomorphism reduces uniqueness to twistLineScalarIso_existsUnique. The least coefficient embedding is constructed using Shrink.algEquiv and IntermediateField.botEquiv, and its uniqueness follows from injectivity of the embedding into the coefficient closure. The ordinary coefficient-size comparison and localization tensor comparison are natural linear equivalences built from ULift.moduleEquiv and TensorProduct.AlgebraTensorModule.uliftEquiv/congr; pure tensors prove naturality and uniqueness. IntegralPointSections_eq is definitional after unfolding the unchanged-object rationalization and integral operation wrappers. These helper proofs leave the four main assembly steps above unchanged.",
+   "uses": [
+    "lem-weil-isomorphism-comparison-scalar-extension",
+    "def-coefficient-twists-detailed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the derived reduction helper, the integral first Tate line is locally free of rank one, so coefficientTwistLine_exact makes every signed line flat. FlatSingleDerivedNormalization makes its degree-zero single complex K-flat. The universal reduction counit of integralReductionTowerWellDefinedUnrestricted is therefore invertible. Compose it with the single-complex comparison and reductionSheafLine. The defining equality specifies its hom literally, hence uniqueness follows by Iso.ext.",
+   "uses": [
+    "lem-pur-twist-sheaf-locally-free",
+    "def-coefficient-twists-detailed",
+    "lem-pur-flat-single-derived-normalization",
+    "lem-weil-integral-reduction-tower-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+    "place": "Finite-reduction clause; K-flat degree-zero line computation"
+   }
+  },
+  {
+   "text": "For scalarIntegralLine_existsUnique, the normalized isomorphismScalarModel comparison identifies its composite with completedScalarCounit with a composite of isomorphisms. Cancel that isomorphism to see that the specified counit is invertible. Convert the intrinsic completeness included in integralLine.property to legacy completeness using sfDerivedComplete_iff_legacy with an auxiliary finite-field datum in universe zero. finiteFreeCompletedScalarComparison makes the specified completion comparison chi invertible. Compose chi inverse, the ordinary scalar counit, the single-complex comparison, and single.mapIso scalarSheafLine. The proved generic isoFactor_existsUnique lemma gives the defining equation and uniqueness by categorical cancellation. No coefficient map or line normalization is changed.",
+   "uses": [
+    "lem-weil-isomorphism-comparison-scalar-extension",
+    "lem-sf-derived-complete-legacy-comparison",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+    "place": "Finite-reduction and scalar-extension clause; normalized completed scalar comparison for signed lines"
+   }
+  },
+  {
+   "text": "The four independently stated component theorems provide the finite/integral, rational/common-stage, reduction/localization, and field-extension conjuncts. Conjunction introduction assembles them into the displayed target without changing any statement.",
+   "uses": [
+    "lem-pur-twist-frobenius-scalar-finite-integral",
+    "lem-pur-twist-frobenius-scalar-rational-qbar",
+    "lem-pur-twist-frobenius-scalar-reduction-localization",
+    "lem-pur-twist-frobenius-scalar-field-extensions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.7), pp. 150-151; conjunction assembly"
+   }
+  },
+  {
+   "text": "For signedQuotients_existsUnique, first generalize the geometric point to an arbitrary scheme S (no property of the point is needed for this helper). Construct normalized quotient isomorphisms on every nonnegative tensor power using signedTwistFirstReduction and induction with the unit and binary scalar-extension isomorphisms of [lem-sp-scalar-extension-binary-coherence]. The existing private positiveComparison construction in SignedLineScalarTensorTower implements precisely this induction without a rank-one hypothesis; the signed comparison theorem is not applied. Their units form an AdicPurityRootQuotients family: the coefficient formula proves degree zero, the first-root quotient formula proves degree one on original root tensors, and the tensor formula proves the recursion. Uniqueness of adicPurityRootQuotients identifies this family with the specified nonnegative maps. For a negative exponent, extend the positive-power functional by scalarDualBaseMap and precompose with the inverse positive-power isomorphism. Its evaluation on the positive quotient is the coefficient projection of the original evaluation. To compare two such negative maps, precompose with the positive-power isomorphism on each slice and test on scalar-extension pure tensors. Naturality reduces arbitrary slice evaluations to identity slices, where the prescribed evaluation equation applies; scalar linearity treats the extra quotient scalar. This proves uniqueness of the entire signed family. No invertibility of l on the scheme, root basis, or flatness of the quotient coefficient map is needed for this helper.",
+   "uses": [
+    "lem-weil-twist-first-quotient-normalization",
+    "lem-sp-scalar-extension-binary-coherence",
+    "lem-pur-signed-line-scalar-tensor-tower",
+    "def-pur-adic-root-comparisons",
+    "lem-sp-scalar-extension-dual-evaluation",
+    "lem-sp-scalar-extension-dual-tower-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+    "place": "finite-reduction compatibility; signed tensor powers and internal dual evaluation"
    }
   }
  ],
  "proof_deps": [
-  "lem-pur-frobenius-roots-of-unity-power",
-  "def-pur-roots-of-unity-sheaf",
-  "def-pur-sheaf-inverse-limit",
-  "lem-pur-twist-sheaf-locally-free",
-  "def-coefficient-twists-detailed",
-  "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+  "lem-pur-point-tate-root-coordinates",
   "def-weil-ordinary-compact-cohomology",
   "lem-weil-point-proetale-sections-exact",
   "def-weil-finite-coefficient-point",
-  "def-weil-frobenius-cohomology-transport",
-  "def-weil-frobenius-square-exchange",
-  "def-weil-frobenius-point-transport",
+  "lem-pur-point-frobenius-transport-normalization",
   "def-weil-frobenius-coefficient-twists",
-  "lem-weil-isomorphism-derived-pullback",
-  "def-weil-inverse-image-pullback-comparison",
-  "lem-pur-roots-of-unity-inverse-image-iso",
-  "lem-weil-point-sections-scalar-extension",
-  "def-weil-global-geometric-frobenius"
+  "lem-pur-point-signed-cyclotomic-action",
+  "lem-pur-point-tate-fiber-coefficient-comparisons",
+  "def-weil-global-geometric-frobenius",
+  "lem-weil-isomorphism-comparison-scalar-extension",
+  "def-coefficient-twists-detailed",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-pur-flat-single-derived-normalization",
+  "lem-weil-integral-reduction-tower-well-defined",
+  "lem-sf-derived-complete-legacy-comparison",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-pur-twist-frobenius-scalar-finite-integral",
+  "lem-pur-twist-frobenius-scalar-rational-qbar",
+  "lem-pur-twist-frobenius-scalar-reduction-localization",
+  "lem-pur-twist-frobenius-scalar-field-extensions",
+  "lem-weil-twist-first-quotient-normalization",
+  "lem-sp-scalar-extension-binary-coherence",
+  "lem-pur-signed-line-scalar-tensor-tower",
+  "def-pur-adic-root-comparisons",
+  "lem-sp-scalar-extension-dual-evaluation",
+  "lem-sp-scalar-extension-dual-tower-core"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/deligne-weil-I_PMIHES-1974-43.pdf",
-  "place": "(2.2), pp. 280-281, with Weil II (1.1.7), pp. 150-151; explicit site, tensor, dual and coefficient-compatibility arguments supplied here"
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+  "place": "Existing scalar-theorem proof plan, with the signed quotient helper proved by normalized positive scalar extension and dual evaluation (C4, 2026-10-26)."
  },
  "mathlib_searches": [
   {
@@ -217,6 +225,27 @@
    "results": "5 hits: Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean, Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean, Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean, Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean, Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean",
    "date": "2026-10-16",
    "verdict": "no match for the complete item: cyclotomic characters, finite-field Frobenius and Witt isocrystals do not state cohomology of these coefficient twists or its reduction and extension compatibilities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric Frobenius acts by q to minus m on cohomology of all finite integral rational and algebraically closed Tate twists on a point compatibly with canonical coefficient comparison maps",
+   "results": "8 hits: WittVector.StandardOneDimIsocrystal.frobenius_apply, IsArithFrobAt.arithFrobAt, arithFrobAt, WittVector.instIsocrystalStandardOneDimIsocrystal, WittVector.exists_frobenius_solution_fractionRing_aux, groupCohomology.exists_mul_galRestrict_of_norm_eq_one, WittVector.isocrystal_classification, WittVector.IsocrystalEquiv.frob_equivariant",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: abstract cyclotomic characters, field automorphisms and Witt isocrystals do not provide the specified finite/integral/cohomological maps and coefficient compatibilities"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cyclotomicCharacter\"",
+   "results": "12 hits: cyclotomicCharacter.toFun, modularCyclotomicCharacter.aux, modularCyclotomicCharacter.toFun, modularCyclotomicCharacter.pow_dvd_aux_pow_sub_aux_pow, cyclotomicCharacter.toFun_apply, cyclotomicCharacter, modularCyclotomicCharacter.toFun_spec'', modularCyclotomicCharacter",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: abstract cyclotomic characters, field automorphisms and Witt isocrystals do not provide the specified finite/integral/cohomological maps and coefficient compatibilities"
+  },
+  {
+   "tool": "grep",
+   "query": "cyclotomicCharacter|frobeniusAlgEquivOfAlgebraic",
+   "results": "23 hits: Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean, Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean, Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean, Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean, Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean, Mathlib/RingTheory/Polynomial/Cyclotomic/Factorization.lean, Mathlib/RingTheory/Polynomial/Cyclotomic/Factorization.lean, Mathlib/RingTheory/Polynomial/Cyclotomic/Factorization.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: abstract cyclotomic characters, field automorphisms and Witt isocrystals do not provide the specified finite/integral/cohomological maps and coefficient compatibilities"
   }
  ],
  "mathlib_match": null,
@@ -227,42 +256,33 @@
   "item": "def-weil-frobenius-coefficient-twists",
   "date": "2026-10-09"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "import_flags": [
   "unreachable"
  ],
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-purity-conv",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-22",
   "item": "lem-pur-twist-frobenius-scalar",
   "worker": "stage1",
-  "summary": "Verified Deligne Weil I (2.2), Weil II (1.1.7), the unchanged scalar clauses of main-20261015 and all cited DAG statements. No complete Lean attachment exists. Reused the roots-of-unity action, completed-line comparison and exact point evaluation; wrote out primitive-root sheaf coordinates, transport, signed tensor powers and coefficient intertwining. No new nodes. The previously unbound index n is explicitly quantified with n >= 1, as required by the cited coefficient construction; no mathematical clause is changed.",
-  "blueprint": "Realizes the scalar-action and reduction/scalar-extension sentences of def-weil-frobenius-coefficient-twists; the current snapshot moves the same text to sec-six-functors-basics/sk-def-purity-conv. The fixed item metadata and historical ancestry are retained.",
+  "summary": "Repair of the 2026-10-22 re-split return. Statement unchanged. Four comparable statement-only unsplit nodes now carry the primitive-root sheaf coordinates, canonical coefficient comparison normalizations, cancellation in point transport, and signed cyclotomic section action. Exact point evaluation and the final pure-tensor scalar assembly remain in the item. All nine former steps are preserved verbatim and assigned to their new tasks in report.md; the item assembly is under 3000 characters.",
+  "blueprint": "Keeps the nearest blueprint ancestor def-weil-frobenius-coefficient-twists and realizes its scalar-action and finite-reduction/scalar-extension sentences in main-20261015; root coordinates and point comparisons supply the unchanged conventions route.",
   "tool_uses": [
    {
-    "node": "lem-pur-twist-sheaf-locally-free",
-    "why": "Clause 3 identifies the completed integral Tate line and its finite reductions; this is the coefficient construction, not a replacement of the purity-conventions route."
-   },
-   {
-    "node": "lem-weil-pbc-continuous-coefficients-immersion-restriction",
-    "why": "Identifies the completed integral coefficient sheaf with continuous-valued functions on the point, so its sections are O_E; no purity argument is involved."
-   },
-   {
     "node": "lem-weil-point-proetale-sections-exact",
-    "why": "Exact evaluation on the algebraically closed point supplies the cohomological concentration missing from the conventions unit."
-   },
-   {
-    "node": "lem-weil-isomorphism-derived-pullback",
-    "why": "Identifies derived pullback along the point automorphism with termwise inverse image; the conventions unit has no derived-comparison statement."
-   },
-   {
-    "node": "lem-pur-roots-of-unity-inverse-image-iso",
-    "why": "Its identity-on-underlying-roots and transition clauses identify the canonical roots comparison used by the defined Weil structure."
-   },
-   {
-    "node": "lem-weil-point-sections-scalar-extension",
-    "why": "Supplies the canonical finite-extension comparison and its transitivity when passing from the point to rational and common-stage coefficients."
+    "why": "Exact evaluation on the algebraically closed pro-etale point identifies sheaf coordinates with cohomology; this is a coefficient tool, not an alternative purity route."
    }
   ]
  },
@@ -275,12 +295,12 @@
   "lem-weil-point-sections-scalar-extension"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-NB-5713ef655",
-  "group": "NB",
+  "reviewer": "NT-cc-Q122-482987a95",
+  "group": "Q122",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NB-5713ef655 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, report, blueprint route, cited DAG statements, and literature. All nine proof steps are valid, hypotheses and coefficient categories match, geometric Frobenius gives q^{-m}, base-change and scalar-extension maps intertwine, and edge cases were checked. No new nodes or repairs are needed. Review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-482987a95 (reviewer sub-agent of L); spot-checked: Re-split meets the 2026-10-21/22 note. The live node is still the base 9-step split and the item is not dropped. Four comparable statement-only unsplit nodes carry the old steps: tate-root-coordinates (old 1-2), frobenius-transport-normalization (old 4), signed-cyclotomic-action (old 5-7), tate-fiber-coefficient-comparisons (old 8-9). Old step 3 stays as parent step 1, a short assembly of existing nodes. Parent proof: 4 steps, 2030 characters, proof_deps = union of uses. No new node restates the item. Sources checked: Weil I (2.2) pp. 280-281 (phi acts on Q_l(1) by q, negative twists are duals); Weil II (1.1.7) (F = phi^{-1}, matching gamma = Frob_q = phi_q^{-1} of def-weil-frobenius-detailed); blueprint main-20261015 def-weil-frobenius-coefficient-twists.md lines 15-17. No SGA anywhere. Every parent step checked against the cited statements: F_m = Gamma(tau_m)sigma via iota = Gamma(kappa)sigma, theta_m = tau_m lambda (clause 4), rational and common-stage transports are images by the definitions, pure-tensor intertwining. Edge cases checked: m = 0, 1, -1 and negative m (dual recomputed: Psi_{-r}(e_{-r})(e_r) = q^r), n = 1, l = 2, ramified E, E' = E and three-stage associativity. About 12 candidate duplicates read; none states a new node. Accepted tool use: lem-weil-point-proetale-sections-exact (generic point-section exactness). Advisory, no change: lambda of lem-weil-isomorphism-derived-pullback is only existential, so the lambda-kappa = id clause of the transport node, like twists clause 4 and the base step 4 reviewed PASS on 2026-10-16, needs the canonical lambda (finite: x tensor b -> c^{-1}(b)x; integral: G(u)^{-1}theta from the comparison-normalization node). In the transport node v should be B_s-linear. The new nodes' from.place values are source descriptions rather than blueprint sentences."
  },
  "lean": {
   "module": "Sheaf.Paper.TwistFrobeniusScalar",
@@ -353,5 +373,15 @@
   "group": "Q94",
   "result": "pass",
   "note": "Re-delivery of the a229ddce H3 RETURN. CoefficientCompatibility is now IsIso e ∧ square for the named canonical maps reductionH, localizationH, scalarRationalH (∀ L, ι) and scalarQbarH (∀ ι : E→Ω). Each is built from published interfaces: reduction unit/counit and adicPurityRootQuotients; pointRationalNormalization; frobeniusCohomologyRationalScalar; frobeniusCoefficientTower via the pinned baseEmbedding. Helpers are fixed by pure-tensor or literal-hom normalizations. The sorry'd integralPointSections_eq behind eqToIso is true (with_unfolding_all rfl compiles; plain rfl does not). The other clauses are unchanged from the previously reviewed head. The node differs only in lean; the global-frobenius dep record equals live (drift). Statement verbatim, 51 declarations match, docstrings and blueprint tags present, sorry only. nt_compile --json clean: 32.0 s (dep AdicPurityRootComparisons 29.4 s). Advisory: qbarF duplicates the published globalGeometricFrobeniusQbar false branch (definitionally equal); proof-route plain imports; second reading is a self-check."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261026T022950-L-509738",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,105 @@
+{
+ "id": "lem-sf-stage-comparison-naturality",
+ "kind": "statement",
+ "title": "Naturality of compatible stagewise comparisons",
+ "statement": "Let S be a StageSystem of categories C_i over a directed preorder I, and let F and H be functors from its pair category to any category B. For each i let e_i be a natural isomorphism between inclusion_i followed by F and inclusion_i followed by H. Suppose that for every pair A, every i above its stage and h witnessing this, F(isoToStage(A,h)) followed by e_i(A.toStage(h)) equals e_A.stage(A.obj) followed by H(isoToStage(A,h)). Then for every arrow f : A → A′, F(f) followed by e_A′.stage(A′.obj) equals e_A.stage(A.obj) followed by H(f).",
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/StageSystem/Basic.lean",
+  "place": "PairCategory.hom_induction and mkHom_eq_isoToStage; elementary three-factor naturality argument."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Represent f at one common stage. Factor it as the source isoToStage, the stage inclusion of the representative, and the inverse target isoToStage. The assumed compatibility is naturality of the proposed components for the source factor. Cancel the mapped target transition isomorphism in the target compatibility equation to derive naturality for its inverse. Compose those equations with the naturality of e at the representative. Associativity gives the desired equation for f.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/CategoryTheory/StageSystem/Basic.lean",
+  "place": "Direct proof from the existing representative factorization and naturality of each finite-stage isomorphism."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A compatible natural isomorphism on every stage descends to the filtered common-stage category",
+   "results": "Eight results, including CategoryTheory.Sigma.natIso and filtered colimit comparison isomorphisms. Sigma has no transition morphisms, so its descent theorem does not apply to StageSystem.PairCategory.",
+   "date": "2026-10-27",
+   "verdict": "No direct match; use existing common-stage representative factorization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between functors from a filtered pair category is determined by natural isomorphisms on each stage compatible with transition isomorphisms",
+   "results": "Eight results on parallel-pair and reflexive-pair diagrams, including CategoryTheory.Sigma.natIso. None handles transition morphisms in the adopted StageSystem.PairCategory.",
+   "date": "2026-10-27",
+   "verdict": "No direct StageSystem match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "Twelve results: CategoryTheory.NatIso.ofComponents, its component equations and applications to standard equivalences. The constructor needs precisely the naturality equation proved here.",
+   "date": "2026-10-27",
+   "verdict": "Use NatIso.ofComponents in the consumer; prove its naturality using the stage representative API."
+  },
+  {
+   "tool": "grep",
+   "query": "StageSystem|NativeGeometry|IntegralNormalization",
+   "results": "Sixteen matches concern polynomial integralNormalization only; none concerns StageSystem or NativeGeometry. Project rg found StageSystem.PairCategory.hom_induction and StageSystem.mkHom_eq_isoToStage in the adopted source library.",
+   "date": "2026-10-27",
+   "verdict": "Use the project representative factorization."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LocallyFiniteAdicCompactSupportRealization",
+  "date": "2026-10-27",
+  "group": "C7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": null,
+   "place": "Current cor-coef-verdier-weil-equivariance, final common-field-comparisons paragraph; Bhatt--Scholze Remark 6.8.15. Common-field descent, original proof step 10.",
+   "via": [
+    "lem-sf-locally-finite-adic-compact-support-realization",
+    "thm-sf-weil-compact-direct-image-right-adjoint"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.StageComparisonNaturality",
+  "file": "lean/Sheaf/CategoryTheory/StageComparisonNaturality.lean",
+  "declaration": "CategoryTheory.StageSystem.stageComparison_naturality",
+  "statement": "theorem stageComparison_naturality {I : Type*} [Preorder I] [IsDirectedOrder I] {C : I → Type*} [∀ i, Category (C i)] {B : Type*} [Category B] (S : StageSystem C) (F H : S.PairCategory ⥤ B) (e : ∀ i, S.ι i ⋙ F ≅ S.ι i ⋙ H) (he : ∀ (A : S.PairCategory) (i : I) (h : A.stage ≤ i), F.map (S.isoToStage A h).hom ≫ (e i).hom.app (A.toStage h) = (e A.stage).hom.app A.obj ≫ H.map (S.isoToStage A h).hom) {A A' : S.PairCategory} (f : A ⟶ A') : F.map f ≫ (e A'.stage).hom.app A'.obj = (e A.stage).hom.app A.obj ≫ H.map f",
+  "branch": "sheaf-dag",
+  "by": "C7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-4750d",
+  "group": "C7",
+  "result": "fix",
+  "landing": "20261027T021303-L-2752918",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-4750d",
+  "group": "C7",
+  "result": "fix",
+  "landing": "20261027T021303-L-2752918",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 4 new modules/nodes + verbatim Data split (diff vs clone) + Brown adaptation timed (published orig 75 s main / 76 s vs delivery, adapted 8.9 s) + axioms + 6 importers OK"
+ }
+}

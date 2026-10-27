@@ -211,5 +211,40 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-03c272120 (reviewer sub-agent of L); spot-checked: Read the item, the report and all five dependency statements in full; the dependency SHA-256 hashes match the report's table. The statement is verbatim identical to main-20261015 def-sfb-pull-iso.md (order 1734), and stmt_deps equals the source's uses list. Unit sk-def-sfb-coefficient-comparisons steps 1–2 give this item as the conjugate of def-sfb-comap-lower-star-iso, and the unit's last paragraph says the underived (Pull) holds without flatness, which matches the item. Typing check of the def-sfb-conjugate-pull-iso specialization: A'=Mod_{Λ_Y}, A=Mod_{Λ_X}, B=Mod_{Λ'_X}, B'=Mod_{Λ'_Y}, E_1=Ext_{a_X}, E_2=Ext_{a_Y}, U_i=f^*, L_i=f_*. With these, e : Res_{a_Y}∘f_{*Λ'} ≅ f_{*Λ}∘Res_{a_X} has exactly the type and direction of the comap-lower-star iso, and the output is Ext_{a_X}∘f^* ≅ f^*∘Ext_{a_Y}. Read pinned Mathlib Mates.lean:275, 425–433 (conjugateIsoEquiv : (L₂≅L₁)≃(R₁≅R₂)) and Basic.lean:567 (comp : F⋙H ⊣ I⋙G): (conjugateIsoEquiv (A_Y.comp B') (B.comp A_X)).symm e is correctly oriented, a one-line leaf (B6, B8). Master ChangeOfCoefficients.lean:150–164 pullIso has the same direction and coefficient category (internal module objects over IsCommMonObj condensed Λ in Sh(X_proét,Ab)); its flatness variable enters only at line 204, for the derived comparisons. Hypotheses of Ext⊣Res (change-of-scalars clause 2) hold for Sh(X_proét,Ab) with commutative Λ_X, and dependencies 1–2 already use them. rg over the DAG for pullIso / the formula / Underived (Pull): the only hits are derived or bounded pbc comparisons and the generic conjugation node, so no duplicate and same_as=[] is correct. Edge cases checked: a=id, Λ'=0, f=id, empty X, non-flat Z→F_p. No new nodes and no proof steps, so C/D are vacuous. No fixes, no tool_uses, no SGA."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.CondensedRing.pullIso"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.pullIso",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients",
+     "lines": [
+      156,
+      164
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "For a morphism $a\\colon\\Lambda\\to\\Lambda'$ of commutative condensed rings\n([sk-def-sfb-coefficient-change]) and a morphism of schemes $f\\colon X\\to Y$, the underived\n*(Pull)* comparison is the natural isomorphism\n\n$$\n\\operatorname{Ext}_{a_X}\\circ f^*\\;\\cong\\;f^*\\circ\\operatorname{Ext}_{a_Y}\\colon\n\\Mod_{\\Lambda_Y}\\longrightarrow\\Mod_{\\Lambda'_X},\n$$\n\nwith $f^*$ the pullback of module objects ([det-def-sfb-module-pushforward-pullback]), defined as\nthe conjugate of the isomorphism of [def-sfb-comap-lower-star-iso] along the adjunctions\n$f^*\\dashv f_*$ (over $\\Lambda$ and over $\\Lambda'$) and\n$\\operatorname{Ext}\\dashv\\operatorname{Res}$ ([det-def-sfb-change-of-scalars]), in the sense of\n[def-sfb-conjugate-pull-iso].",
+  "proof": [],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

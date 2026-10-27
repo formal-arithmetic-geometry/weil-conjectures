@@ -1,0 +1,117 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Coherence paragraph: The composition, refinement, exchange and proper-coincidence identities are prop-sf-pf-coherence; composition and associativity part at finite coefficients."
+ },
+ "stmt_deps": [
+  "def-sf-operation-stages",
+  "def-sf-constructible-projection-mates"
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportProjectionFiniteStages",
+  "date": "2026-10-26",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Finite geometric-fiber step and the sentence: The composition, refinement, exchange and proper-coincidence identities are prop-sf-pf-coherence.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "id": "lem-sf-finite-projection-composition-transport",
+ "title": "Finite projection composition square and operation-compositor pentagon",
+ "statement": "For D,C,E,n and a finite operation stage S [def-sf-operation-stages], the canonical component [def-sf-constructible-projection-mates] satisfies the composition square for separated locally finite type quasi-compact f:X→Y and g:Y→Z, arbitrary compactifications cf,cg,cfg, bounded constructible K on X and finite-Tor constructible L on Z. The comparison is the recorded S.finite.composition and the pullback comparison is torPullComposition. In addition, for three such maps f,g,h the two recorded composition paths are HEq, with the final compactification transported along Category.assoc. This statement asserts only composition and associativity, not projection invertibility, naturality, compactification independence or proper coincidence. Explicitly, with sigma: F_(gf)→F_g F_f the recorded compositor, PF_(gf);sigma_(K tensor P_(gf)L);F_g F_f(id_K tensor chi) equals (sigma_K tensor id_L);PF_g;F_g(PF_f), where chi:P_(gf)L→P_f P_g L is torPullComposition. The pentagon asserts sigma_(gf,h);F_h(sigma_(f,g)) = sigma_(f,hg);sigma_(g,h)(F_f K), after transporting the compactification of ((f≫g)≫h) to that of (f≫(g≫h)).",
+ "proof": [
+  {
+   "text": "Choose cf and cfg from exists_component_binary_square with cg prescribed. Transport its square to arbitrary cf,cfg. Apply component_input_naturality to the first input of PF_g, component_compactification to PF_f and PF_fg, and composition_comparison to the support compositor. Naturality of the first support comparison at the tensor pullback compositor identifies the final target. Postcompose by the invertible G(rho_f) and cancel it. The Lean proof writes both boundary calculations explicitly.",
+   "uses": [
+    "lem-sf-finite-projection-binary-square",
+    "lem-sf-finite-projection-input-naturality",
+    "lem-sf-finite-projection-compactification-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the canonical origin inclusion and support comparisons. Apply the binary normalization four times. The proved generic reflect_associativity calculation uses naturality of the outer support comparison and of the origin compositor to cancel internal comparison maps and reflect the existing originComposition_assoc equation. Faithfulness of originInclusion reflects the equation of inverse-compositor paths. Take inverses and transport the final compactification along Category.assoc; supportCongr_cancel gives exactly the required HEq. No projection is inverted.",
+   "uses": [
+    "lem-sf-finite-support-origin-binary-normalization",
+    "thm-sf-comp-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-finite-projection-binary-square",
+  "lem-sf-finite-projection-input-naturality",
+  "lem-sf-finite-projection-compactification-transport",
+  "lem-sf-finite-support-origin-binary-normalization",
+  "thm-sf-comp-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Composition and coherence sentence, realized using the specified finite operation normalizations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "compact support direct image composition projection formula associativity pentagon",
+   "results": "Eight unrelated compactly supported continuous maps, cocompact maps and profinite results.",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib statement or one-line specialization of this prescribed operation-coordinate coherence law."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.pentagon",
+   "results": "Functor.pentagon is a formal associator identity, not the normalized operation-compositor assertion.",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib statement or one-line specialization of this prescribed operation-coordinate coherence law."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*composition|composition.*projection",
+   "results": "25 unrelated Mathlib hits: manifolds, matrices, topology and linear algebra; no compact-support projection composition.",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib statement or one-line specialization of this prescribed operation-coordinate coherence law."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteProjectionCompositionTransport",
+  "file": "lean/Sheaf/Paper/FiniteProjectionCompositionTransport.lean",
+  "declaration": "WeilConjectures.CompactSupportFiniteProjection.component_composition_coherence",
+  "statement": "theorem component_composition_coherence\n    {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}\n    {E : Type u} [Field E] [Algebra (Padic C.l) E]\n    [FiniteDimensional (Padic C.l) E] {n : ℕ} {hn : 1 ≤ n}\n    (S : SixFunctorFiniteOperations D C E n hn) :\n    (∀ {X Y Z : SixFunctorSpace D} (f : X ⟶ Y) (g : Y ⟶ Z)\n    [IsSeparated f.hom.left] [LocallyOfFiniteType f.hom.left] [QuasiCompact f.hom.left]\n    [IsSeparated g.hom.left] [LocallyOfFiniteType g.hom.left] [QuasiCompact g.hom.left]\n    (cf : Compactification f.hom.left) (cg : Compactification g.hom.left)\n    (cfg : Compactification (f ≫ g).hom.left) (K : sixFunctorFiniteCategory D C E n hn X)\n    (L : finiteTorConstructibleCategory C.l E n hn Z.obj.left),\n      ((partialTensor S Z).map ((S.finite.composition f g cf cg cfg).hom.app K)).app L ≫\n          component S g cg ((S.finite.support f cf).obj K) L ≫\n          (S.finite.support g cg).map\n            (component S f cf K ((torPull S g).obj L)) =\n        component S (f ≫ g) cfg K L ≫\n          (S.finite.composition f g cf cg cfg).hom.app\n            (((partialTensor S X).obj K).obj ((torPull S (f ≫ g)).obj L)) ≫\n          (S.finite.support g cg).map ((S.finite.support f cf).map\n            (((partialTensor S X).obj K).map (torPullComposition S f g L).hom))) ∧\n    (∀ {X Y Z W : SixFunctorSpace D}\n    (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ W)\n    [IsSeparated f.hom.left] [LocallyOfFiniteType f.hom.left] [QuasiCompact f.hom.left]\n    [IsSeparated g.hom.left] [LocallyOfFiniteType g.hom.left] [QuasiCompact g.hom.left]\n    [IsSeparated h.hom.left] [LocallyOfFiniteType h.hom.left] [QuasiCompact h.hom.left]\n    (cf : Compactification f.hom.left) (cg : Compactification g.hom.left)\n    (ch : Compactification h.hom.left) (cfg : Compactification (f ≫ g).hom.left)\n    (cgh : Compactification (g ≫ h).hom.left)\n    (cfgh : Compactification ((f ≫ g) ≫ h).hom.left) (K : sixFunctorFiniteCategory D C E n hn X),\n    HEq ((S.finite.composition (f ≫ g) h cfg ch cfgh).hom.app K ≫\n      (S.finite.support h ch).map ((S.finite.composition f g cf cg cfg).hom.app K))\n      ((S.finite.composition f (g ≫ h) cf cgh\n        (Eq.mp (congrArg (fun t : X ⟶ W ↦ Compactification t.hom.left)\n          (Category.assoc f g h)) cfgh)).hom.app K ≫\n        (S.finite.composition g h cg ch cgh).hom.app ((S.finite.support f cf).obj K)))",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261026T024025-L-631712",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261026T183654-L-3761937",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,134 @@
+{
+ "id": "lem-pur-finite-cd-unbounded-comparison",
+ "kind": "statement",
+ "title": "Unbounded étale to pro-étale comparison from finite étale cohomological dimension",
+ "statement": "Let A be a finite commutative ring and g:X→Y a quasi-compact quasi-separated morphism of schemes. Use the ordinary module-sheaf unbounded derived categories [def-weil-pbc-derived-categories, def-weil-pbc-proetale-site] and comparison inverse images [def-weil-pbc-site-comparison-morphism]. Assume there is d∈ℕ such that R^q g_et,* M=0 for every A-module sheaf M and every q>d. For every K∈D(X_et,A), the actual mate ν_Y^* Rg_et,* K→Rg_proet,* ν_X^* K of the canonical derived pullback comparison square is invertible. There is no boundedness assumption on K and no cohomological-dimension assumption for arbitrary pro-étale sheaves.",
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-site-comparison-morphism"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "lemma-morphism-comparison (bounded-below canonical mate); literature/stacks-project/derived.tex, Tag 07K7 (finite cohomological dimension); left-completeness truncation argument as in lem-sfb-derived-left-complete-truncation-bound."
+ },
+ "proof": [
+  {
+   "text": "Normalize the native total-left-derived comparison functors to their exact termwise mapDerivedCategory models by their canonical isomorphisms. The resulting natural transformation is a conjugate of the specified mate; invertibility of either one is equivalent to invertibility of the other. The uniform heart bound puts Rg_et,* of an upper-bounded object L in degrees at most b+d, and exact comparison preserves the bound.",
+   "uses": [
+    "lem-etale-derived-functor-upper-amplitude"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On every lower truncation of L, bounded-below comparison identifies Rg_proet,* ν_X^* with ν_Y^* Rg_et,*. Exact comparison commutes with truncation, so every image of a truncation of ν_X^*L has upper bound b+d. Pro-étale modules have exact countable products, and Rg_proet,* preserves products as a right adjoint. The left-completeness Milnor triangle therefore puts its value on ν_X^*L in degrees at most b+d+1. No claim of finite cohomological dimension for all pro-étale sheaves is made.",
+   "uses": [
+    "sk-thm-pe-direct-image-comparison",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-sfb-derived-left-complete-truncation-bound"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any degree m choose N=m-d-2. The first term τ_<N K of the truncation triangle has upper bound N-1. The two functors just bounded send it to degrees at most N-1+d and N+d respectively, so H^m and H^(m+1) vanish. The homology long exact sequences make the maps from their values on K to the values on τ_>=N K isomorphisms in degree m.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact",
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality gives a square with these two invertible degree-m truncation maps and the bounded-below comparison on τ_>=N K. Thus the specified comparison on K is invertible on H^m, for every m. Homology detects isomorphisms; conjugating back gives invertibility of the original native mate. Empty schemes, zero rings and complexes unbounded in both directions are included.",
+   "uses": [
+    "sk-thm-pe-direct-image-comparison",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "J3",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Extend lemma-morphism-comparison using literature/stacks-project/derived.tex, Tag 07K7, and the existing left-completeness argument; all steps implemented in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A uniform bound on higher etale direct images implies etale proetale comparison for unbounded derived categories",
+   "results": "8 hits: IsEtale.of_comp, etale-composition instances, Scheme.etaleTopology and Scheme.smallEtaleTopology; no comparison or finite-dimension result.",
+   "date": "2026-10-26",
+   "verdict": "No match; use project bounded-below comparison and finite-dimensional derived amplitude."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "12 hits: mateEquiv and its unit/counit/composition formulas.",
+   "date": "2026-10-26",
+   "verdict": "Generic mates only; no unbounded site comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteCohomologicalDimension|unbounded.*comparison|comparison.*unbounded",
+   "results": "0 Mathlib hits. Project UnboundedDirectImageComparison requires finite-type schemes over a field, absent from this application.",
+   "date": "2026-10-26",
+   "verdict": "No applicable duplicate; prove the generic finite-CD version."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalAffineTraceCoordinates",
+  "date": "2026-10-26",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-diagonal-affine-trace-coordinates",
+   "place": "Existence of the inverse coefficient-first compact-support projection",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleFiniteCDComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleFiniteCDComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.isIso_comparisonMate_of_finiteCohomologicalDimension",
+  "statement": "theorem isIso_comparisonMate_of_finiteCohomologicalDimension\n    (A : Type (u + 1)) [CommRing A] [Finite A] {X Y : Scheme.{u}}\n    (g : X ⟶ Y) [QuasiCompact g] [QuasiSeparated g]\n    (hcd : ∃ d : ℕ,\n      ∀ (M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) (q : ℕ), d < q →\n        IsZero (((Etale.lowerStar (ModuleCat.{u + 1} A) g).rightDerived q).obj M))\n    (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) :\n    IsIso ((mateEquiv\n      (Etale.derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) g)\n      (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) g)\n      (leftDerivedComparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} A) g).hom).app K)",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-26"
+ },
+ "proof_deps": [
+  "lem-etale-derived-functor-upper-amplitude",
+  "sk-thm-pe-direct-image-comparison",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-sfb-derived-left-complete-truncation-bound",
+  "lem-sf-derived-homology-long-exact",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261026T001845-L-36522",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261026T001845-L-36522",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

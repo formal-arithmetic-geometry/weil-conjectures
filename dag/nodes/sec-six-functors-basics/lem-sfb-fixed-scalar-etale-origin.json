@@ -1,0 +1,129 @@
+{
+ "id": "lem-sfb-fixed-scalar-etale-origin",
+ "kind": "statement",
+ "title": "Etale-origin witnesses in two scalar presentations",
+ "statement": "Let X be a Noetherian scheme in universe u, k a field in universe u+1, and T any cochain complex of fixed-k pro-etale module sheaves. Let M be its fixedScalarDerivedModel [def-sfb-fixed-scalar-complex-model]. Then M has an etale antecedent C on the coefficient-sized constant-ring site, bounded constructible [def-pe-etale-constructible-module] with finite Tor amplitude [def-weil-proetale-tor-amplitude] and a cochain representative whose comparison pullback is isomorphic to M, if and only if there is a bounded constructible fixed-k etale complex D on the original site with Q(T) isomorphic to Q of its comparison pullback and one ordered interval outside which D tensor N has zero homology for every degree-zero fixed-k etale sheaf N. The right-hand predicates and termwise tensor are exactly those in [def-sfb-adic-stratified-perfect-data], with no integral ring or completeness datum.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "lemma-compare-constructible-derived (Tag 09AL), in the two equivalent presentations; sites-modules.tex Tag 03CY; Bhatt--Scholze Remark 6.3.2"
+ },
+ "stmt_deps": [
+  "def-sfb-fixed-scalar-complex-model",
+  "def-pe-etale-constructible-module",
+  "def-weil-proetale-tor-amplitude",
+  "def-sfb-adic-stratified-perfect-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the explicit exact cochain and derived scalar equivalences. The ordinary comparison square lifts termwise and then localizes, identifying origin isomorphisms in both presentations.",
+   "uses": [
+    "def-sfb-fixed-scalar-etale-model",
+    "lem-sfb-fixed-scalar-ordinary-comparison",
+    "lem-pe-constructible-comparison-module-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport homology along the exact scalar equivalence and the localization factors. Use the constructibility bridge for each cohomology sheaf; preserve and reflect zero objects to keep the same cohomological interval.",
+   "uses": [
+    "lem-sfb-fixed-scalar-etale-constructible-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In the forward direction apply fixed-field tensor bounds on the original site. In the reverse direction use the coefficient-field bounded-flat criterion. Compose the comparison isomorphisms; full faithfulness of the pro-etale derived equivalence recovers the original origin isomorphism.",
+   "uses": [
+    "lem-sfb-etale-field-tensor-bounds",
+    "lem-sfb-coefficient-field-tor-bounds"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-fixed-scalar-etale-model",
+  "lem-sfb-fixed-scalar-ordinary-comparison",
+  "lem-pe-constructible-comparison-module-exact",
+  "lem-sfb-fixed-scalar-etale-constructible-sheaf",
+  "lem-sfb-etale-field-tensor-bounds",
+  "lem-sfb-coefficient-field-tor-bounds"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AL in two scalar presentations, reusing the ordinary comparison square; Bhatt--Scholze Remark 6.3.2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact equivalence between modules over a constant ring sheaf and sheaves of modules preserves constructible cohomology and Tor amplitude",
+   "date": "2026-10-25",
+   "results": "8 hits: PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm, PresheafOfModules.sheafifyHomEquiv', CondensedMod.LocallyConstant.instFullModuleCatSheafCompHausCoherentTopologyConstantSheaf, PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification, PresheafOfModules.sheafifyHomEquiv, CompHausLike.LocallyConstantModule.functor, PresheafOfModules.sheafificationAdjunction_homEquiv_apply, PresheafOfModules.sheafificationHomEquiv",
+   "verdict": "General sheafification infrastructure, no exact match for these project coefficient presentations; reuse the existing constant-scalar restriction equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact equivalence between modules over a constant ring sheaf and sheaves of modules preserves constructible cohomology and Tor amplitude",
+   "date": "2026-10-25",
+   "results": "8 hits: CondensedMod.ofSheafCompHaus, SheafOfModules.isFinitePresentation, instAbelianCondensedMod, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, LightCondensed.instIsGrothendieckAbelianLightCondMod, SheafOfModules.isQuasicoherent, CondensedMod.IsSolid, SheafOfModules.instAbelian",
+   "verdict": "No matching derived comparison with these project constructibility and Tor predicates."
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*module.*equiv|finiteTorAmplitude",
+   "date": "2026-10-25",
+   "results": "1 hit: Mathlib/Topology/Category/Profinite/Nobeling/Induction.lean:109, Nobeling_aux",
+   "verdict": "No matching scalar-presentation transport theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IntegralModelsResidueTransport",
+  "date": "2026-10-25",
+  "group": "S7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Unit proof (1)--(2): comparison of the first reductions and their etale origin",
+   "via": [
+    "lem-sfb-integral-models-residue-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FixedScalarEtaleOrigin",
+  "file": "lean/Sheaf/AlgebraicGeometry/FixedScalarEtaleOrigin.lean",
+  "declaration": "AlgebraicGeometry.Scheme.fixedScalar_etaleOrigin",
+  "statement": "theorem fixedScalar_etaleOrigin (X : Scheme.{u}) [IsNoetherian X]\n    (k : Type (u + 1)) [Field k]\n    (T : CochainComplex (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} k)) ℤ) :\n    (∃ C : ConstantCompletion.D (ConstantCompletion.constant\n        (smallModelComparisonEtaleTopology.{u, u} X) k),\n      IsCoefficientBoundedConstructibleEtale.{u, u} X k C ∧\n        (∃ a b : ℤ, HasCoefficientModelTorAmplitude _ C a b) ∧\n        ∃ P : ConstantCompletion.Cx (ConstantCompletion.constant\n            (smallModelComparisonEtaleTopology.{u, u} X) k),\n          Nonempty ((ConstantCompletion.Q _).obj P ≅ C) ∧\n            Nonempty ((ConstantCompletion.Q _).obj\n              ((ProEtale.constructibleComparisonComplexPullback.{u, u} X k).obj P) ≅\n                fixedScalarDerivedModel X k T)) ↔\n      ∃ C : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} k)) ℤ,\n        (∃ a b : ℤ, a ≤ b ∧ ∀ q : ℤ, (q < a ∨ b < q) → IsZero (C.homology q)) ∧\n        (∀ q : ℤ, IsConstructibleSheaf (C.homology q)) ∧\n        Nonempty (DerivedCategory.Q.obj T ≅ DerivedCategory.Q.obj\n          (((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} k) X).mapHomologicalComplex\n             (.up ℤ)).obj C)) ∧\n        ∃ a b : ℤ, a ≤ b ∧\n          ∀ (N : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} k)) (q : ℤ),\n            (q < a ∨ b < q) →\n              IsZero ((sfbEtaleTensorDegreeZero X k C N).homology q)",
+  "branch": "sheaf-dag",
+  "by": "S7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261025T144020-L-1152388",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261025T180900-L-4047669",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -446,17 +446,7 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N2-5ac9730d6 (reviewer sub-agent of L); spot-checked: I read the item, the new node, all 30 proof_deps and 6 stmt_deps, and the parent's Steps 1 and 4. Sources read: BS §6.7, Thm 6.7.1 and Lemmas 6.7.2/6.7.17/6.7.18/6.7.19 (pp.55, 57-58); ILO Introduction Thm 1 and Exposé XIII 1.1.1. Statement and coefficient category are unchanged, and there is no SGA. Batch 5: lem-etale-upper-shriek-bounded-below-from-amplitude and cor-amb-affine-space-adjunction are general ordinary-étale finite-coefficient six-functor results. Neither assumption gives them (both are stated for Q̄ℓ pro-étale coefficients over a field), and neither is a step of the TF or PD proofs. The flagged endpoints (lem-pod-lisse-module-sheaves-as-module-objects, lem-pod-etale-stalk-tensor-scalar) are generic sheaf lemmas. Both nodes are already in both batch-5 closures without this delivery (via thm-sf-ambient-adjoint-class and thm-sf-ctf-stability→lem-coef-finite-dualizing, and via the statement closure of nt-assume-poincare-duality), so there is no RETURN on that ground. Steps 1-9, 11 and 12 check: I recomputed the Step 6 Hom chain (affine-space adjunction N=ℓ over Noetherian V, closed adjoint, Yoneda in D+) and the Step 12 transpose. Two repairable faults, both fixed. (1) E2/E1: the new node asserted one uniform cohomological-dimension bound for all sheaves in the nonproper quasi-excellent case, copied from BS 6.7.1's wording. ILO says that uniform bound is known only for finite-dimensional bases (Nagata's quasi-excellent examples have infinite dimension); XIII 1.1.1 gives only a bound that depends on the sheaf. The item uses the uniform bound only for proper p (Step 2). The node now states the uniform bound for proper g only, keeps D^b_c preservation in both cases, and cites ILO in source.place. (2) E5: Step 10 defined c as a map in D(Y,B) and argued it was C-linear from the matrix action, which does not give a morphism of D(Y,C). c is now defined as the T⊣U transpose of (Step 9)∘F_B(η) (lem-pur-sheaf-ring-derived-coefficient-adjunction added to the step's uses), and its components F_B(s_{e_a}) are computed from it. Off-unit tools lem-kun-04ca and lem-sbc-canonical-restrict-scalars-functor-comparisons are accepted; the other declared tool_uses are on the route. No duplicate (checked lem-per-finite-exceptional-system-adjunction, lem-coef-finite-exceptional/dualizing, lem-sf-*-direct-image-*, lem-fin-proper-bounded-constructible, thm-dg-finite-type-constructibility) and no cycle. Fixed files are under fixes/dag/nodes/sec-deligne-laumon-a1/.; 2 file(s) fixed by the reviewer"
  },
- "lean": {
-  "module": "Sheaf.Paper.FiniteFieldExceptionalPreservation",
-  "declaration": "AlgebraicGeometry.Etale.finiteField_exceptional_preservation",
-  "file": "lean/Sheaf/Paper/FiniteFieldExceptionalPreservation.lean",
-  "statement": "theorem finiteField_exceptional_preservation (l : ℕ) [Fact l.Prime] (B : Type (u + 1)) [Field B] [Finite B] [CharP B l] {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] (_hX : Orgogozo.IsExcellentScheme X) (_hY : Orgogozo.IsExcellentScheme Y) (_hlX : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (_hlY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [HasCompactification f] : HasBoundedBelowUpperShriek (ModuleCat.{u + 1} B) f ∧ (∀ K : DerivedCategoryModule B X, DerivedCategory.isBoundedConstructible B X K → DerivedCategory.isBoundedConstructible B Y ((rightDerivedLowerShriek (ModuleCat.{u + 1} B) f).obj K)) ∧ (∀ L : DerivedCategoryModule B Y, DerivedCategory.isBoundedConstructible B Y L → DerivedCategory.isBoundedConstructible B X ((rightDerivedUpperShriek (ModuleCat.{u + 1} B) f).obj L)) ∧ (∃ (F : BoundedConstructibleDerivedCategory B X ⥤ BoundedConstructibleDerivedCategory B Y) (G : BoundedConstructibleDerivedCategory B Y ⥤ BoundedConstructibleDerivedCategory B X) (a : F ⊣ G) (eF : F ⋙ (DerivedCategory.isBoundedConstructible B Y).ι ≅ (DerivedCategory.isBoundedConstructible B X).ι ⋙ rightDerivedLowerShriek (ModuleCat.{u + 1} B) f) (eG : G ⋙ (DerivedCategory.isBoundedConstructible B X).ι ≅ (DerivedCategory.isBoundedConstructible B Y).ι ⋙ rightDerivedUpperShriek (ModuleCat.{u + 1} B) f), ∀ (K : BoundedConstructibleDerivedCategory B X) (L : BoundedConstructibleDerivedCategory B Y) (h : F.obj K ⟶ L), (DerivedCategory.isBoundedConstructible B X).ι.map (a.homEquiv K L h) ≫ eG.hom.app L = (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} B) f).homEquiv K.obj L.obj (eF.inv.app K ≫ (DerivedCategory.isBoundedConstructible B Y).ι.map h)) ∧ (∀ (C : Type (u + 1)) [Field C] [Finite C] [Algebra B C], ∃ c : _root_.DerivedCategory.Plus.ι ⋙ rightDerivedLowerShriek (ModuleCat.{u + 1} B) f ⋙ scalarExtension (algebraMap B C) Y ≅ _root_.DerivedCategory.Plus.ι ⋙ scalarExtension (algebraMap B C) X ⋙ rightDerivedLowerShriek (ModuleCat.{u + 1} C) f, (∀ K : _root_.DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)), c.hom.app K = ExceptionalCoefficients.compactSupportMap (algebraMap B C) (HasCompactification.compactification f) K.obj) ∧ ∃ α : (DerivedCategory.isBoundedConstructible B Y).ι ⋙ rightDerivedUpperShriek (ModuleCat.{u + 1} B) f ⋙ scalarExtension (algebraMap B C) X ≅ (DerivedCategory.isBoundedConstructible B Y).ι ⋙ scalarExtension (algebraMap B C) Y ⋙ rightDerivedUpperShriek (ModuleCat.{u + 1} C) f, (∀ L : BoundedConstructibleDerivedCategory B Y, α.hom.app L = ExceptionalCoefficients.mateMap (algebraMap B C) f L.obj) ∧ ∀ L : BoundedConstructibleDerivedCategory B Y, (rightDerivedLowerShriek (ModuleCat.{u + 1} C) f).map (α.hom.app L) ≫ (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} C) f).counit.app ((scalarExtension (algebraMap B C) Y).obj L.obj) = ExceptionalCoefficients.comparisonInverse (algebraMap B C) (HasCompactification.compactification f) ((rightDerivedUpperShriek (ModuleCat.{u + 1} B) f).obj L.obj) ≫ (scalarExtension (algebraMap B C) Y).map ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} B) f).counit.app L.obj))",
-  "branch": "newtargets-dag",
-  "by": "Q06",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.Paper.FiniteFieldExceptionalPreservation deleted (dead: no target reaches it); this node is not reached either."
- },
+ "lean": null,
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
@@ -465,5 +455,23 @@
   "result": "pass",
   "note": "Re-delivery after the 6aa5671b409f H2 RETURN. Item Lean file byte-identical (sha256 c937bce5); the only item change swaps the theorem stmt_dep lem-pur-exceptional-coefficient-comparison for the new def node def-per-exceptional-coefficient-maps. That node is existing:true on the unchanged ExceptionalCoefficientComparison and lists openIso/compactSupportMap/comparisonInverse/mateMap (plain defs, no .choose of the theorem). Its statement matches the compactSupportMap signature verbatim and its TeX matches the defining terms. check_new_node passes, the id is free, no other node owns these declarations, and there is no cycle. Item clauses re-confirmed: hypotheses, D^b_c preservation, restricted adjunction, c pinned to compactSupportMap, alpha pinned to mateMap, counit equation, edge cases. nt_compile timed out twice in side override OrientedNearbyCycles at load 115-133; judged from the earlier clean 6.6 s compile of the identical file. Advisory: scalarExtension has no owner node; the new node cites lem-sbc for the plain scalarRestrictionPullbackIso used only in openIso's body."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean_removed": {
+  "commit": "f6bf55e2b05",
+  "path": "lean/Sheaf/Paper/FiniteFieldExceptionalPreservation.lean",
+  "module": "Sheaf.Paper.FiniteFieldExceptionalPreservation",
+  "declaration": "AlgebraicGeometry.Etale.finiteField_exceptional_preservation",
+  "reason": "module deleted as dead (no target reaches it by imports; this node is not reached either); the declaration does not live on elsewhere, so the node has no Lean statement"
+ }
 }

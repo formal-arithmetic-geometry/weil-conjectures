@@ -1,0 +1,310 @@
+{
+ "id": "lem-sfb-product-action-exact-forgetting",
+ "kind": "statement",
+ "title": "Exact free induction for forgetting a commuting profinite action",
+ "statement": "Let $R$ be a commutative condensed ring on the small coherent profinite site in a universe containing all parameter sets [sk-def-sfb-condensed-ring, def-weil-size-convention]. Use internal $R$-modules $\\mathcal M_R$ [sk-def-sfb-module-objects] and action categories $\\mathcal A_P(R)$ for the condensed group $\\underline P(S)=C(S,P)$ [def-sfb-condensed-action-module]. Let $G$ be profinite and $J$ be either a profinite group or $\\mathbf Z_{\\mathrm{disc}}$. All of $\\mathcal A_G(R)$, $\\mathcal A_J(R)$ and $\\mathcal A_{G\\times J}(R)$ are Grothendieck abelian and have enough injectives. Their kernels are underlying kernels and their cokernels are underlying sheafified cokernels. Trivial-$J$ inflation $L_J^G$ is exact and has as right adjoint the submodule $\\Gamma_J^G$ of sections fixed by $J$ after every profinite base change. The adjunction transpose restricts the codomain to this submodule and its inverse composes with its inclusion.\n\nForgetting $G$, written $U_J:\\mathcal A_{G\\times J}(R)\\to\\mathcal A_J(R)$ and $U_0:\\mathcal A_G(R)\\to\\mathcal M_R$, is exact and conservative both on modules and on the full ordinary unbounded derived categories. There are exact left adjoints\n$$F_{G,J}(M)=R[\\underline G]\\otimes_R M\\dashv U_J,\\qquad F_{G,1}\\dashv U_0,$$\nwhere $G$ translates the free generators and $J$ acts on $M$. The adjunction sends $f:M\\to U_JN$ to $[g]\\otimes m\\mapsto g f(m)$; its inverse evaluates at $[1]\\otimes m$. The free module is canonically $R[\\underline G]=j_{G!}R_G$ for the representable profinite test object $G$ and is flat. In particular $U_J,U_0$ preserve injective objects and bounded-below injective resolutions. These assertions include $G=1$, $J=1$ and the zero ring.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), auxiliary relative cyclic calculation. Agent-formulated extracted task from the returned proof of lem-sfb-relative-cyclic-restriction-model, steps 1,2,3,4. Exact combined reference WANTED; argument and ingredient references retained in report.md."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-module-objects",
+  "def-weil-size-convention",
+  "def-sfb-condensed-action-module",
+  "def-weil-abstract-derived-category",
+  "def-sp-grothendieck-abelian",
+  "def-sp-injective-resolutions",
+  "def-pc-flat-sheaf-modules",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-localized-ringed-site",
+  "def-weil-extension-by-zero-presheaf",
+  "def-sfb-condensed-free-module-adjunction",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-sfb-modobj-relative-tensor",
+  "det-def-sfb-sheaf-tensor-structure",
+  "lem-pe-internal-section-tensor-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Pass between internal modules and sectionwise module sheaves using [def-weil-pbc-internal-abelian-sheaf-module-equivalence]. This leaves sections, restriction maps and equivariance equations unchanged. For $P=G,J,G\\times J$, compatible continuous maps $S_i\\to P$ on a finite jointly surjective profinite cover descend to a unique set map $S\\to P$: agreement on $S_i\\times_S S_j$ makes it well-defined. The surjection $\\coprod_iS_i\\to S$ is closed, since its source is compact and $S$ is Hausdorff, hence quotient; the descended map is continuous. Thus $\\underline P$ is a group sheaf, including discrete $J=\\mathbf Z$. Apply [lem-sfb-sheaf-action-grothendieck-inflation] to $P=G,J,G\\times J,1$. It supplies the asserted Grothendieck abelian structures, underlying kernels and sheafified cokernels, exact restriction of actions, and detection of zero objects. Apply [lem-sp-grothendieck-enough-injectives] to obtain enough injectives.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-sfb-sheaf-action-grothendieck-inflation",
+    "lem-sp-grothendieck-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written categorical expansion: action sheaves and abelian infrastructure"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-sheaf-product-fixed-adjunction] to the group sheaves $\\underline G,\\underline J$, noting $\\underline{G\\times J}=\\underline G\\times\\underline J$ by the continuous-map product property. This gives $L_J^G\\dashv\\Gamma_J^G$ with exactly the base-change fixed-section condition and the two stated transpose formulas. Inflation is exact by [lem-sfb-sheaf-action-grothendieck-inflation] applied to the first projection. For $U_J$, instead restrict along $J\\to G\\times J$, $j\\mapsto(1,j)$; for $U_0$, restrict along $1\\to G$. These functors are exact. If $f:M\\to N$ becomes invertible after restriction, let $v$ be its inverse, regarded as a module map. For every test object $S$ and parameter $p\\in P(S)$, equivariance gives $f_Sa_p=b_pf_S$, hence $a_pv_S=v_Sb_p$. Thus $v$ commutes with the full $P$-action, not just the retained subgroup; its restriction compatibility and linearity already hold because it is a module map. It is therefore an inverse in the original action category, proving conservativity of both restrictions.",
+   "uses": [
+    "lem-sfb-sheaf-product-fixed-adjunction",
+    "lem-sfb-sheaf-action-grothendieck-inflation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written expansion: normalized product invariants and restriction of actions"
+   }
+  },
+  {
+   "text": "Let $P_G(S)=\\bigoplus_{g\\in C(S,G)}R(S)$ with restriction carrying $[g]$ to $[g|_T]$. Its sheafification is $R[\\underline G]$: a restriction-natural linear map $P_G\\to N$ is uniquely specified by the restriction-natural generator map $\\underline G\\to U_RN$, and factors uniquely through sheafification. This is precisely the free universal property of [def-sfb-condensed-free-module-adjunction]. By [def-weil-extension-by-zero-presheaf] the same presheaf is the extension of $R_G$ from the slice at $G$. Hence $R[\\underline G]=j_{G!}R_G$ canonically, with the generator maps identified. Apply [lem-pc-sites-modules-j-shriek-flat] to the object $G$ and ring sheaf $R$ to conclude flatness. This uses representability of $G$, and does not treat $\\mathbf Z_{\\mathrm{disc}}$ as a profinite test object.",
+   "uses": [
+    "def-sfb-condensed-free-module-adjunction",
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pc-sites-modules-j-shriek-flat"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI (lemma-extension-by-zero), 03CY (lemma-sheafification-presheaf-modules), 03EV (lemma-j-shriek-flat), applied to the represented object G"
+   }
+  },
+  {
+   "text": "For $M\\in\\mathcal A_J(R)$ define the presheaf $Q_M(S)=\\bigoplus_{g\\in C(S,G)}M(S)$. The tensor/sheafification comparison [lem-pc-sites-module-sheafification-tensor] identifies $Q_M^\\#$ with $R[\\underline G]\\otimes_RM$, by the maps $r[g]\\otimes m\\mapsto rm$ in summand $g$ and $m$ in summand $g\\mapsto[g]\\otimes m$. The relation $(rs)[g]\\otimes m=r[g]\\otimes sm$ has the same image $rsm$, so the first map is balanced. The composites are identities on each summand and each pure tensor, and restrictions carry both formulas to the same formulas over the restricted section ring. In internal modules the same identification follows directly from the balanced universal property: both sides parametrize restriction-natural families of $R(S)$-linear maps $M(S)\\to N(S)$ indexed by $g$, using [def-weil-pbc-internal-abelian-sheaf-module-equivalence] and the sheaf tensor definition. Define $(a,j)([g]\\otimes m)=[ag]\\otimes jm$ on every $S$. These operations commute with restrictions and extend uniquely over sheafification; $a(b g)=(ab)g$ and $j(km)=(jk)m$ check the action laws, and the two factors commute. To define the operation on a sheafified section, lift it on a cover, apply the restricted parameter there, and glue; uniqueness follows from local equality. Thus this is a genuine internal action, including nonconstant local parameters. On morphisms use $[g]\\otimes m\\mapsto[g]\\otimes h(m)$; identity and composition hold on these generators.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-tensor",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0GMW (lemma-sheafification-tensor), Section 03EK balanced tensor universal property; agent-written commuting action formula"
+   }
+  },
+  {
+   "text": "For a $J$-equivariant map $f:M\\to U_JN$, the maps $[g]\\otimes m\\mapsto g f(m)$ define a restriction-natural linear map from $Q_M$ and hence a unique map from its sheafification. It is $G$-equivariant since $a(g f(m))=(ag)f(m)$, and $J$-equivariant since $g f(jm)=g j f(m)=j g f(m)$; the middle commutation is the product-action law in $N$. Conversely a $G\\times J$-equivariant map $h$ gives $m\\mapsto h([1]\\otimes m)$, which is $J$-equivariant. The first composite is $1 f(m)=f(m)$; the second is $g h([1]\\otimes m)=h([g]\\otimes m)$ and therefore equals $h$ on the sheafification. For a $J$-map $u:M'\\to M$ and product-action map $v:N\\to N'$, both transposing $vfu$ and composing the transpose of $f$ with $F_{G,J}(u)$ and $v$ send $[g]\\otimes m$ to $g\\,v(f(u(m)))$, since $v$ is $G$-equivariant. Equality extends by sheafification. This proves naturality in both arguments, giving the stated adjunction. Setting $J=1$ gives $F_{G,1}\\dashv U_0$.",
+   "uses": [
+    "def-sfb-condensed-action-module",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written exact induction expansion: generator/evaluation adjunction"
+   }
+  },
+  {
+   "text": "The underlying module functor of $F_{G,J}$ is tensoring with the flat module of step 3, hence is exact by [lem-pc-sites-modules-j-shriek-flat]. The forgetful functors from both action categories detect exactness by [lem-sfb-sheaf-action-grothendieck-inflation]. Therefore $F_{G,J}$ is exact, and likewise $F_{G,1}$. Apply [lem-sp-right-adjoint-preserves-injectives] with the exact left adjoint $F_{G,J}:\\mathcal A_J(R)\\to\\mathcal A_{G\\times J}(R)$ and right adjoint $U_J$, then with $F_{G,1}:\\mathcal M_R\\to\\mathcal A_G(R)$ and right adjoint $U_0$. These right adjoints preserve injectives in precisely the directions required. Applying an exact functor termwise preserves the exact augmentation and the lower degree bound of any bounded-below injective resolution; every resulting term is injective, so the result is again such a resolution.",
+   "uses": [
+    "lem-pc-sites-modules-j-shriek-flat",
+    "lem-sfb-sheaf-action-grothendieck-inflation",
+    "lem-sp-right-adjoint-preserves-injectives"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 015Z (lemma-adjoint-preserve-injectives); flatness from sites-modules Tag 03EV"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-exact-functor-derived-factorization] for each exact restriction $U$ to obtain its triangulated functor on the full ordinary unbounded derived categories, computed termwise. Since $U$ preserves kernels and cokernels, $H^n(UK)=U(H^nK)$ naturally: write $H^n$ as the cokernel of the factorization of $d^{n-1}$ through $\\ker d^n$. The comparison is natural on complexes. For an inverted quasi-isomorphism $s$ its naturality square remains commutative after taking inverses of $H^n(s)$ and $U(H^n(s))$; composing these squares gives naturality for every localization morphism, including roofs. Thus it compares the cohomology of $D(U)(f)$ with $U(H^n f)$ for every derived morphism $f$. If $D(U)(f)$ is invertible, all $U(H^n f)$ are invertible. Module-level conservativity from step 2 makes every $H^n f$ invertible. By [lem-weil-pbc-unbounded-derived-iso-cohomology], $f$ is invertible. This proves derived conservativity without any boundedness assumption. For $G=1$ the generator module is $R$ and induction is the identity; $J=1$ was already used above. For the zero ring every module is zero, and every formula and assertion remains valid.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor), Tag 05RT (lemma-acyclic), and the cohomology definition; explicit reflection argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-sfb-sheaf-action-grothendieck-inflation",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-sfb-sheaf-product-fixed-adjunction",
+  "def-sfb-condensed-free-module-adjunction",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pc-sites-modules-j-shriek-flat",
+  "lem-pc-sites-module-sheafification-tensor",
+  "def-pur-sheaf-tensor-product",
+  "def-sfb-condensed-action-module",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), categorical expansion below the relative cyclic restriction model; free-sheaf flatness follows Stacks Tags 03DI, 03EV, 0GMW; exact derived localization follows 015F and 05RT."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For commuting actions of profinite G and topological J on internal condensed ring modules forgetting G has exact free induction left adjoint and preserves injectives",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Condensed.profiniteFree\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor Profinite (CondensedMod R)\", \"doc\": \"The functor from the category of profinite spaces to the category of condensed $ R $-modules, defined as the composition of the canonical inclusion functor from profinite spaces to condensed sets and \"}\n  {\"name\": \"Condensed.freeForgetAdjunction\", \"module\": \"Mathlib/Condensed/Module\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → Condensed.free R ⊣ Condensed.forget R\", \"doc\": \"For any ring $ R $, the free condensed $ R $-module functor from condensed sets to condensed $ R $-modules is left adjoint to the forgetful functor that forgets the $ R $-module structure. This adjunc\"}\n  {\"name\": \"Condensed.profiniteSolid\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor Profinite (CondensedMod R)\", \"doc\": \"The functor from the category of profinite spaces to the category of condensed $ R $-modules, defined as the right Kan extension of the embedding functor from finite types to profinite spaces along th\"}\n  {\"name\": \"LightCondensed.freeForgetAdjunction\", \"module\": \"Mathlib/Condensed/Light/Module\", \"type\": \"(R : Type u) → [inst : Ring R] → LightCondensed.free R ⊣ LightCondensed.forget R\", \"doc\": \"The adjunction between the free light condensed $ R $-module functor (constructed by applying the free module functor and sheafifying with respect to the coherent Grothendieck topology on light profin\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal closed category. This structure arises from the adjunction between sheafification and inclusion functors,\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For a light condensed set $ P $, the free $ R $-module $ \\\\text{free}_R(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e : A \\\\to B\"}\n  {\"name\": \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightProfinite),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P.toCondensed) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStr\", \"doc\": \"For a light profinite space $ P $, the free $ R $-module $ \\\\text{Free}(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e: A \\\\to B \"}\n  {\"name\": \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightProfinite),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P.toCondensed) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStr\", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light profinite space. The free light condensed $R$-module on the condensed set associated with $P$, denoted $\\\\mathcal{F}(P)$, is internally projective if an\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: freeForgetAdjunction and profiniteFree concern condensed modules over an ordinary ring, not exact induction between internal condensed-ring product-action categories, and give no derived conservativity or injective preservation for this forgetting functor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free sheaf on a profinite set is flat and induction makes forgetting a residual group action exact conservative on derived categories",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CondensedMod.ofSheafProfinite\", \"module\": \"Mathlib/Condensed/Explicit\", \"type\": \"(R : Type (u + 1)) →\\n  [inst : Ring R] →\\n    (F : CategoryTheory.Functor Profiniteᵒᵖ (ModuleCat R)) →\\n      [CategoryTheory.Limits.PreservesFiniteProducts F] →\\n        CategoryTheory.regularTopology.EqualizerCondition F → CondensedMod R\", \"doc\": \"Given a functor $ F: \\text{Profinite}^\\\\text{op} \\\\to \\\\text{ModuleCat}\\\\, R $ that preserves finite products and satisfies the Equalizer Condition for the regular topology, this constructs the correspondi\"}\n  {\"name\": \"LightCondMod.ofSheafLightProfinite\", \"module\": \"Mathlib/Condensed/Light/Explicit\", \"type\": \"(R : Type u) →\\n  [inst : Ring R] →\\n    (F : CategoryTheory.Functor LightProfiniteᵒᵖ (ModuleCat R)) →\\n      [CategoryTheory.Limits.PreservesFiniteProducts F] →\\n        CategoryTheory.regularTopology.EqualizerCondition F → LightCondMod R\", \"doc\": \"Given a functor $ F: \\\\mathbf{LightProfinite}^{\\\\text{op}} \\\\to \\\\text{ModuleCat}\\\\, R $ that preserves finite products and satisfies the Equalizer Condition for the regular topology, this constructor form\"}\n  {\"name\": \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"∀ (R : Type u) [inst : Ring R],\\n  CategoryTheory.HasSheafify (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R)\", \"doc\": \"For the coherent Grothendieck topology on the category of totally disconnected, second-countable compact Hausdorff spaces (light profinite spaces), there exists a sheafification functor from the categ\"}\n  {\"name\": \"Condensed.profiniteFree\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor Profinite (CondensedMod R)\", \"doc\": \"The functor from the category of profinite spaces to the category of condensed $ R $-modules, defined as the composition of the canonical inclusion functor from profinite spaces to condensed sets and \"}\n  {\"name\": \"Condensed.profiniteSolid\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor Profinite (CondensedMod R)\", \"doc\": \"The functor from the category of profinite spaces to the category of condensed $ R $-modules, defined as the right Kan extension of the embedding functor from finite types to profinite spaces along th\"}\n  {\"name\": \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/AB\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.IsGrothendieckAbelian.{u, u + 1, u + 1} (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules is a Grothendieck abelian category. This follows from the fact that it is constructed as the category of sheaves on the site of light \"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal closed category. This structure arises from the adjunction between sheafification and inclusion functors,\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For a light condensed set $ P $, the free $ R $-module $ \\\\text{free}_R(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e : A \\\\to B\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: freeForgetAdjunction and profiniteFree concern condensed modules over an ordinary ring, not exact induction between internal condensed-ring product-action categories, and give no derived conservativity or injective preservation for this forgetting functor."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Action\", \"injective\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Function.Injective.addAction\", \"module\": \"Mathlib.Algebra.Group.Action.Defs\", \"type\": \" {M : Type u_1} {α : Type u_5} {β : Type u_6} [AddMonoid M] [AddAction M α] [VAdd M β] (f : β → α) (hf : Function.Injective f) (vadd : ∀ (c : M) (x : β), f (c +ᵥ x) = c +ᵥ f x) : AddAction M β\", \"doc\": \"Pullback an additive action along an injective map respecting `+ᵥ`.\"}\n  {\"name\": \"Function.Injective.mulAction\", \"module\": \"Mathlib.Algebra.Group.Action.Defs\", \"type\": \" {M : Type u_1} {α : Type u_5} {β : Type u_6} [Monoid M] [MulAction M α] [SMul M β] (f : β → α) (hf : Function.Injective f) (smul : ∀ (c : M) (x : β), f (c • x) = c • f x) : MulAction M β\", \"doc\": \"Pullback a multiplicative action along an injective map respecting `•`.\\nSee note [reducible non-instances].\"}\n  {\"name\": \"Function.Injective.subtractionMonoid\", \"module\": \"Mathlib.Algebra.Group.InjSurj\", \"type\": \" {M₁ : Type u_1} {M₂ : Type u_2} [Add M₁] [Zero M₁] [SMul ℕ M₁] [Neg M₁] [Sub M₁] [SMul ℤ M₁] [SubtractionMonoid M₂] (f : M₁ → M₂) (hf : Function.Injective f) (zero : f 0 = 0) (add : ∀ (x y : M₁), f (x + y) = f x + f y) (neg : ∀ (x : M₁), f (-x) = -f x) (sub : ∀ (x y : M₁), f (x - y) = f x - f y) (n\", \"doc\": \"A type endowed with `0`, `+`, unary `-`, and binary `-`\\nis a `SubtractionMonoid` if it admits an injective map that preserves `0`, `+`, unary `-`, and\\nbinary `-` to a `SubtractionMonoid`. This version\"}\n  {\"name\": \"Function.Injective.subtractionCommMonoid\", \"module\": \"Mathlib.Algebra.Group.InjSurj\", \"type\": \" {M₁ : Type u_1} {M₂ : Type u_2} [Add M₁] [Zero M₁] [SMul ℕ M₁] [Neg M₁] [Sub M₁] [SMul ℤ M₁] [SubtractionCommMonoid M₂] (f : M₁ → M₂) (hf : Function.Injective f) (zero : f 0 = 0) (add : ∀ (x y : M₁), f (x + y) = f x + f y) (neg : ∀ (x : M₁), f (-x) = -f x) (sub : ∀ (x y : M₁), f (x - y) = f x - f y\", \"doc\": \"A type endowed with `0`, `+`, unary `-`, and binary\\n`-` is a `SubtractionCommMonoid` if it admits an injective map that preserves `0`, `+`, unary `-`,\\nand binary `-` to a `SubtractionCommMonoid`. This\"}\n  {\"name\": \"Function.Injective.mulActionWithZero\", \"module\": \"Mathlib.Algebra.GroupWithZero.Action.Defs\", \"type\": \" {M₀ : Type u_2} {A : Type u_7} {A' : Type u_8} [MonoidWithZero M₀] [Zero A] [MulActionWithZero M₀ A] [Zero A'] [SMul M₀ A'] (f : ZeroHom A' A) (hf : Function.Injective ⇑f) (smul : ∀ (a : M₀) (b : A'), f (a • b) = a • f b) : MulActionWithZero M₀ A'\", \"doc\": \"Pullback a `MulActionWithZero` structure along an injective zero-preserving homomorphism.\"}\n  {\"name\": \"Function.Injective.distribMulAction\", \"module\": \"Mathlib.Algebra.GroupWithZero.Action.Defs\", \"type\": \" {M : Type u_1} {A : Type u_7} {B : Type u_9} [Monoid M] [AddMonoid A] [DistribMulAction M A] [AddMonoid B] [SMul M B] (f : B →+ A) (hf : Function.Injective ⇑f) (smul : ∀ (c : M) (x : B), f (c • x) = c • f x) : DistribMulAction M B\", \"doc\": \"Pullback a distributive multiplicative action along an injective additive monoid\\nhomomorphism.\\nSee note [reducible non-instances].\"}\n  {\"name\": \"AddAction.toPerm_injective\", \"module\": \"Mathlib.Algebra.Group.Action.Basic\", \"type\": \" {α : Type u_5} {β : Type u_6} [AddGroup α] [AddAction α β] [FaithfulVAdd α β] : Function.Injective AddAction.toPerm\", \"doc\": \"`AddAction.toPerm` is injective on faithful actions.\"}\n  {\"name\": \"MulAction.toPerm_injective\", \"module\": \"Mathlib.Algebra.Group.Action.Basic\", \"type\": \" {α : Type u_5} {β : Type u_6} [Group α] [MulAction α β] [FaithfulSMul α β] : Function.Injective MulAction.toPerm\", \"doc\": \"`MulAction.toPerm` is injective on faithful actions.\"}\n  {\"name\": \"AddAction.injective\", \"module\": \"Mathlib.Algebra.Group.Action.Basic\", \"type\": \" {α : Type u_5} {β : Type u_6} [AddGroup α] [AddAction α β] (g : α) : Function.Injective fun x => g +ᵥ x\", \"doc\": \"\"}\n  {\"name\": \"MulAction.injective\", \"module\": \"Mathlib.Algebra.Group.Action.Basic\", \"type\": \" {α : Type u_5} {β : Type u_6} [Group α] [MulAction α β] (g : α) : Function.Injective fun x => g • x\", \"doc\": \"\"}\n  {\"name\": \"Function.Injective.mulDistribMulAction\", \"module\": \"Mathlib.Algebra.Group.Action.Basic\", \"type\": \" {M : Type u_2} {A : Type u_3} {B : Type u_4} [Monoid M] [Monoid A] [MulDistribMulAction M A] [Monoid B] [SMul M B] (f : B →* A) (hf : Function.Injective ⇑f) (smul : ∀ (c : M) (x : B), f (c • x) = c • f x) : MulDistribMulAction M B\", \"doc\": \"Pullback a multiplicative distributive multiplicative action along an injective monoid\\nhomomorphism.\"}\n  {\"name\": \"AddAction.orbitRel.Quotient.orbit_injective\", \"module\": \"Mathlib.GroupTheory.GroupAction.Defs\", \"type\": \" {G : Type u_1} {α : Type u_2} [AddGroup G] [AddAction G α] : Function.Injective AddAction.orbitRel.Quotient.orbit\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: freeForgetAdjunction and profiniteFree concern condensed modules over an ordinary ring, not exact induction between internal condensed-ring product-action categories, and give no derived conservativity or injective preservation for this forgetting functor."
+  },
+  {
+   "tool": "grep",
+   "query": "(induc|forget).*(njective|xact)|(njective|xact).*(induc|forget)",
+   "results": "[grep] OK 12 hit(s)\n  {\"file\": \"Mathlib/Condensed/Discrete/Characterization.lean\", \"line\": \"153\", \"text\": \"    exact ⟨isColimitOfPreserves (forget (ModuleCat R)) (h S).some⟩\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Characterization.lean\", \"line\": \"159\", \"text\": \"    exact ⟨isColimitOfReflects (forget (ModuleCat R)) (h S).some⟩\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Characterization.lean\", \"line\": \"257\", \"text\": \"    exact ⟨isColimitOfPreserves (forget (ModuleCat R)) (h S).some⟩\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Characterization.lean\", \"line\": \"263\", \"text\": \"    exact ⟨isColimitOfReflects (forget (ModuleCat R)) (h S).some⟩\"}\n  {\"file\": \"Mathlib/Condensed/Light/TopCatAdjunction.lean\", \"line\": \"76\", \"text\": \"      exact continuous_coinducingCoprod _ _ }\"}\n  {\"file\": \"Mathlib/Condensed/Light/TopCatAdjunction.lean\", \"line\": \"190\", \"text\": \"    exact continuous_coinducingCoprod X.toLightCondSet x\"}\n  {\"file\": \"Mathlib/Condensed/Light/Epi.lean\", \"line\": \"75\", \"text\": \"    exact (Presheaf.isLocallySurjective_iff_whisker_forget _ f.hom).mpr hf\"}\n  {\"file\": \"Mathlib/Condensed/Light/Epi.lean\", \"line\": \"80\", \"text\": \"    exact (Presheaf.isLocallySurjective_iff_whisker_forget _ f.hom).mp hf\"}\n  {\"file\": \"Mathlib/Condensed/Light/Epi.lean\", \"line\": \"117\", \"text\": \"  · exact fun _ ↦ (forget R).map_epi _\"}\n  {\"file\": \"Mathlib/Condensed/TopCatAdjunction.lean\", \"line\": \"73\", \"text\": \"      exact continuous_coinducingCoprod Y _ }\"}\n  {\"file\": \"Mathlib/Condensed/TopCatAdjunction.lean\", \"line\": \"159\", \"text\": \"  exact fun ⟨S, s⟩ ↦ h S ⟨_, continuous_coinducingCoprod X _⟩\"}\n  {\"file\": \"Mathlib/Condensed/TopCatAdjunction.lean\", \"line\": \"198\", \"text\": \"    exact fun _ _ ↦ continuous_coinducingCoprod X.toCondensedSet _\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: freeForgetAdjunction and profiniteFree concern condensed modules over an ordinary ring, not exact induction between internal condensed-ring product-action categories, and give no derived conservativity or injective preservation for this forgetting functor."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal condensed module product group actions exact free induction forgetting preserves injectives",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"Action\"",
+   "results": "Logged search: 0 hits; top declarations/files: ; digest 4f53cda18c2baa0c. ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary-ring Condensed.free/profiniteFree and abstract Action/Rep results do not state exact induction for internal condensed-ring product actions, its normalized invariants adjunction and full unbounded derived conservativity."
+  },
+  {
+   "tool": "grep",
+   "query": "freeForgetAdjunction|profiniteFree|induction.*Adjunction",
+   "results": "Logged search: 15 hits; top declarations/files: Mathlib/Condensed/Module.lean, Mathlib/Condensed/Module.lean, Mathlib/Condensed/Solid.lean, Mathlib/Condensed/Solid.lean, Mathlib/Condensed/Light/InternallyProjective.lean, Mathlib/Condensed/Light/InternallyProjective.lean, Mathlib/Condensed/Light/InternallyProjective.lean, Mathlib/Condensed/Light/Module.lean; digest 7f0547787fe48ca7. ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary-ring Condensed.free/profiniteFree and abstract Action/Rep results do not state exact induction for internal condensed-ring product actions, its normalized invariants adjunction and full unbounded derived conservativity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact induction left adjoint to forgetting an internal condensed group action",
+   "results": "Logged search: 8 hits; top declarations/files: Rep.resIndAdjunction, GrpCat.abelianizeAdj, GrpCat.adj, Condensed.freeForgetAdjunction, Action.instReflectsColimitForget, GrpCat.instIsRightAdjointForget, Action.preservesLimits_forget, LightCondensed.freeForgetAdjunction; digest 9863bbbbab394e27. ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary-ring Condensed.free/profiniteFree and abstract Action/Rep results do not state exact induction for internal condensed-ring product actions, its normalized invariants adjunction and full unbounded derived conservativity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For internal condensed ring modules with two commuting group actions forgetting one action has exact free induction left adjoint and is conservative on unbounded derived categories",
+   "results": "Logged search: 8 hits; top declarations/files: Condensed.freeForgetAdjunction, LightCondensed.freeForgetAdjunction, CondensedMod.LocallyConstant.adjunction, Condensed.free, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondMod.LocallyConstant.adjunction, Condensed.profiniteFree; digest fcf06ee3eea61943. ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary-ring Condensed.free/profiniteFree and abstract Action/Rep results do not state exact induction for internal condensed-ring product actions, its normalized invariants adjunction and full unbounded derived conservativity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves of modules with internal group actions free sheaf on a profinite object tensor module provides exact induction preserving injectives",
+   "results": "Logged search: 8 hits; top declarations/files: LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, Condensed.free, Condensed.profiniteFree, CondensedMod.ofSheafProfinite, LightCondensed.free; digest f55bd734c92e2b86. ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary-ring Condensed.free/profiniteFree and abstract Action/Rep results do not state exact induction for internal condensed-ring product actions, its normalized invariants adjunction and full unbounded derived conservativity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-cyclic-restriction-model",
+  "date": "2026-10-22",
+  "group": "NE"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: relative cyclic restriction and residual-action forgetting below the tame-boundary analytic condensed calculation; explicit rank-one row augmentation and bar evaluation at the chosen generator. Returned relative-cyclic proof steps 1,2,3,4: Exact free induction for forgetting a commuting profinite action.",
+   "via": [
+    "lem-sfb-relative-cyclic-restriction-model",
+    "lem-sfb-ind-unipotent-procyclic-difference",
+    "lem-sfb-polynomial-translation-acyclic",
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-product-action-exact-forgetting",
+  "worker": "stage1",
+  "summary": "Repair of the side-completion landing refusal, rebased by the delivery tool over the current unsplit live item. Re-read the 15 current cited proof-dependency statements and all statement definitions; all 22 retained quotations still agree. Preserve the statement, dependencies, searches and seven-step induction route. In this retry explicitly verify balancing and both composites in the tensor/direct-sum identification, and naturality of the induction transpose in both arguments. No new nodes.",
+  "blueprint": "Paragraph (3), open direct image: categorical exact-forgetting input to the relative cyclic restriction calculation; realizes the extracted task in the returned relative-cyclic model steps 1–4.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sites-modules-j-shriek-flat",
+    "why": "Generic flatness of the represented free module on a ringed site; the action-category unit does not provide this general site lemma."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-tensor",
+    "why": "Generic comparison between tensor and module sheafification used for the explicit induction model."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sites-modules-j-shriek-flat",
+  "lem-pc-sites-module-sheafification-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q137-717052b62",
+  "group": "Q137",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q137-717052b62 (reviewer sub-agent of L); spot-checked: PASS, no changes. I read the item's 7 steps and all 26 cited statements. Fourth push of this split: heads 66aafd0f, 8c688bb1 and a9f4dc09 all PASSed and were refused at landing because the side completion was not promoted. Against a9f4 only step 4 (tensor iso r[g]⊗m↦rm written out, with balancing, both composites and restriction compatibility) and step 5 (transpose natural in both arguments, both sides give g·v(f(u(m)))) changed; I checked both and they are correct. Live item is still unsplit with no repair note. Statement, stmt_deps, source, blueprint, chapter and unit are identical to live, and all 26 cited statements match live verbatim with none merged. proof_deps equals the union of the uses; no cycle (item not in the 300-node closure). Steps: 1) A_P(R)=E_{P̲}(R) through the identity-on-sections equivalence; C(−,P) is a sheaf by the compact-to-Hausdorff quotient argument, discrete Z included; Grothendieck structure and exactness from lem-sfb-sheaf-action-grothendieck-inflation (small site with finite limits); enough injectives from the Mathlib leaf. 2) product-fixed adjunction with K=G̲, L=J̲ gives the normalized Γ_J^G and both transposes; U_J and U_0 are exact inflations; conservativity via a_p v=v b_p. 3) P_G is the extension-by-zero presheaf at U=G; flatness from lem-pc-sites-modules-j-shriek-flat at the representable G only. 4–5) explicit action and adjunction formulas verified. 6) exact left adjoints in the right direction for lem-sp-right-adjoint-preserves-injectives. 7) termwise derived functor, H^n commutes with U, unbounded iso criterion, no boundedness used. Edge cases G=1, J=1, zero ring, empty S, J=Z_disc checked. Source: main-20261015 direct-images paragraph (3); agent-formulated, WANTED recorded, no SGA. Tool uses accepted: lem-pc-sites-modules-j-shriek-flat and lem-pc-sites-module-sheafification-tensor, generic site lemmas. Maintainer note: overlaps lem-sfb-condensed-action-injective-restriction (N5, profinite H only); not a duplicate, since the item also covers J=Z_disc, the normalized Γ and derived conservativity."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ProductActionExactForgetting",
+  "declaration": "Profinite.CondensedAction.ProductForgetting.exists_datum",
+  "declarations": [
+   "Profinite.CondensedAction.ProductForgetting.ringSheaf",
+   "Profinite.CondensedAction.ProductForgetting.freeGroup",
+   "Profinite.CondensedAction.ProductForgetting.generator",
+   "Profinite.CondensedAction.ProductForgetting.extendedUnit",
+   "Profinite.CondensedAction.ProductForgetting.extendedGenerator",
+   "Profinite.CondensedAction.ProductForgetting.forgetFirst",
+   "Profinite.CondensedAction.ProductForgetting.Induction",
+   "Profinite.CondensedAction.ProductForgetting.PlainInduction",
+   "Profinite.CondensedAction.ProductForgetting.ExactForgetting",
+   "Profinite.CondensedAction.ProductForgetting.ActionProperties",
+   "Profinite.CondensedAction.ProductForgetting.Datum",
+   "Profinite.CondensedAction.ProductForgetting.exists_datum"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ProductActionExactForgetting.lean",
+  "statement": "theorem exists_datum (hJ : (CompactSpace J ∧ T2Space J ∧ TotallyDisconnectedSpace J) ∨ Nonempty (J ≃ₜ* Multiplicative ℤ)) : Nonempty (Datum R G J)",
+  "branch": "sheaf-dag",
+  "by": "NB",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "All clauses are retained in Datum, with actual free-module and extension-by-zero constructions and normalized induction data. The retained group may be profinite or continuously isomorphic to discrete Multiplicative ℤ. ExactForgetting uses the canonical termwise unbounded derived functor and preserves the actual injective resolution and its lower bound. No object is chosen from the postponed existence theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3a0bb33ff",
+  "group": "NB",
+  "result": "pass",
+  "note": "Every node clause has a matching Lean field: action categories with abelian structure tied to actionPreadditive, Grothendieck and enough injectives, underlying kernels and sheafified cokernels; existing ProductInvariants for inflate fst ⊣ Γ; ExactForgetting for forgetFirst = inflate inr and forgetAction (exact, conservative on modules and on the canonical unbounded mapDerivedCategory, preserves injectives and bounded-below resolutions); Induction and PlainInduction pinned to tensorLeft (freeGroup R G) with action and transpose formulas on pure tensors; actual free module, extension by zero with the iso fixed on generators, and ObjectProperty.flat. hJ is profinite or J ≃ₜ* Multiplicative ℤ, with no stronger assumption. Edge cases G=1, J=1, zero ring, empty S, discrete J checked. Statement field verbatim, 12 declarations listed, docstrings with source and all 7 steps, only exists_datum is sorry. Mechanical finding: the theorem stmt_dep lem-pe-internal-section-tensor-comparison supplies the instance theorems comparison_sheafTensorLeft/Right required by Mod.monoidalCategory for tensorLeft, pure tensors and flatness on Modules R; this is a genuine dependency, so PASS on that point. Advisories: pureTensor/onSections are owned only by the uncited theorem node lem-sfb-condensed-internal-bar-resolution (landed precedent lem-sfb-pointed-free-deletion-contraction; give them an existing:true definition record); Mod.instAbelian owner lem-sfb-modobj-abelian is not cited; sheafCokernels is a redundant Nonempty iso; forgetFirst has the same body as RelativeCyclic.forgetResidual. No files changed, so no compile was run."
+ }
+}

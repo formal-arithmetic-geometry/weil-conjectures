@@ -1,0 +1,153 @@
+{
+ "id": "lem-pur-closed-immersion-graded-algebra-descent",
+ "kind": "statement",
+ "title": "Descent of homogeneous algebra operations through a closed immersion",
+ "statement": "Let $i:Z\\to X$ be a closed immersion of schemes [def-weil-closed-immersion]. Let $B_n$ be $\\mathcal O_X$-modules and $C_n$ be $\\mathcal O_Z$-modules [def-weil-sheaf-of-modules-category], indexed by $n\\in\\mathbb N$, with specified isomorphisms $e_n:i_*C_n\\simeq B_n$ [def-pc-module-pullback]. Given a commutative unital graded sheaf algebra structure $A$ on $B$ [def-weil-pbc-graded-sheaf-structures], there is a graded sheaf algebra structure $D$ on $C$ such that $e_0 i_*D_{\\rm unit} i^\\sharp=A_{\\rm unit}$. For each ambient open $U$, degrees $m,n$ and sections $a\\in C_m(i^{-1}U), b\\in C_n(i^{-1}U)$, the equality $e_{m+n}(D_{m,n}(a,b))=A_{m,n}(e_m(a),e_n(b))$ holds. This statement constructs homogeneous operations only; it asserts no total algebra, coproduct or affine chart.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Lemma 08KS (lemma-i-star-equivalence); applied to homogeneous operations in Divisors, Tag 0630, paragraph preceding definition-conormal-sheaf."
+ },
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback",
+  "def-weil-pbc-graded-sheaf-structures"
+ ],
+ "proof": [
+  {
+   "text": "Use the inducing underlying map of the closed immersion [def-weil-closed-immersion]. Mathlib Topology.IsInducing.functorObj assigns an ambient open Q(V) to every open V of Z, with inverse image V. Every inclusion of opens of Z admits compatible ambient representatives, by intersecting an ambient representative with Q(V). Restriction along the equalities gives rawPairing: any natural binary family on the inverse-image opens extends to all opens of Z. Naturality proves that the extension recovers the family on every ambient open, not only the chosen representatives. This is proved directly in the private helpers ambient, rawPairing_eq and rawPairing_natural.",
+   "uses": [
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each m,n transport A.mul through e_m, e_n and the inverse of e_(m+n), producing a natural O_X-bilinear family on the pushforwards [def-pc-module-pullback, def-weil-pbc-graded-sheaf-structures]. Apply rawPairing to obtain additive operations on C. To prove O_Z-linearity, check equality locally by the sheaf condition. For a point z over an ambient U, choose an affine W containing i(z) inside U. The affine description of a closed immersion [def-weil-closed-immersion], implemented by Scheme.Hom.app_surjective, lifts the restriction of any O_Z-scalar to O_X(W). Naturality and ambient bilinearity then prove scalar linearity over i^(-1)W. These neighborhoods cover i^(-1)U. Repeat with the two arguments exchanged. The private descend_bilinear theorem packages the resulting bilinear maps, naturality and the exact normalization.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-pc-module-pullback",
+    "def-weil-pbc-graded-sheaf-structures"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transport A.unit through e_0 inverse. A map from the structure-sheaf module is the same as a compatible global section (Mathlib SheafOfModules.unitHomEquiv). Its value at 1 on the ambient top open is already a section of C_0 on the top open of Z, since inverse image preserves top. Restrict this section to all opens of Z, and use unitHomEquiv inverse to obtain the O_Z-linear unit. Naturality at the inclusions into top, together with the structure-sheaf map preserving 1, proves the required equality of unit morphisms. This is the private descend_unit construction.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Evaluate the specified isomorphisms e_n on each ambient open; they give injective linear equivalences on sections. For an arbitrary open of Z choose an ambient representative. Apply these injections in the two equal degrees (using the natural-number associativity, commutativity or unit equality) and rewrite with the multiplication normalization. Associativity and commutativity become exactly the corresponding laws of A. For either unit law first evaluate the equality of unit morphisms at 1, then use the corresponding unit law of A. Package these proved laws, the descended bilinear operations and the descended unit into GradedSheafAlgebra C. The multiplication normalization is the asserted section equation.",
+   "uses": [
+    "def-weil-pbc-graded-sheaf-structures"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-pc-module-pullback",
+  "def-weil-pbc-graded-sheaf-structures"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Lemma 08KS (lemma-i-star-equivalence), applied to homogeneous operations as in Divisors, Tag 0630, paragraph preceding definition-conormal-sheaf.",
+  "method": "Direct sectionwise proof of descent: extend operations along the inducing map on opens, check quotient-ring linearity on affine neighborhoods, descend the unit using global sections, and reflect the algebra laws through the given section isomorphisms. This replaces the earlier stalk/tensor/fully-faithful plan."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A graded sheaf algebra on modules supported on a closed subscheme descends through specified pushforward isomorphisms",
+   "results": "8 hits: SheafOfModules.pushforwardSections, SheafOfModules.pushforward_map_val, AlgebraicGeometry.Scheme.Modules.pushforward, SheafOfModules.pushforward, SheafOfModules.pushforward_obj_val, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pushforwardPushforwardAdj, AlgebraicGeometry.Scheme.Modules.pushforward_map_app",
+   "date": "2026-10-25",
+   "verdict": "No exact match: the hits do not supply this sheaf construction or its normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "graded.*sheaf|sheaf.*graded|conormal|coprodIsoDirectSum",
+   "results": "9 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/Algebra/Category/ModuleCat/Products.lean, Mathlib/Algebra/Category/ModuleCat/Products.lean, Mathlib/Algebra/Category/ModuleCat/Products.lean, Mathlib/Algebra/Category/ModuleCat/Products.lean, Mathlib/Algebra/Category/ModuleCat/Products.lean, Mathlib/Algebra/Category/FGModuleCat/Colimits.lean, Mathlib/RingTheory/Extension/Cotangent/Basic.lean",
+   "date": "2026-10-25",
+   "verdict": "No exact match: the hits do not supply this sheaf construction or its normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A graded sheaf algebra on modules supported on a closed subscheme descends through specified pushforward isomorphisms",
+   "results": "8 hits: AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf, AlgebraicGeometry.Proj.fromOfGlobalSections_resLE, AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict, AlgebraicGeometry.Proj.toSheafedSpace, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType, AlgebraicGeometry.Proj.awayMap_awayToSection_assoc, AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app, AlgebraicGeometry.Proj.fromOfGlobalSections",
+   "date": "2026-10-25",
+   "verdict": "No exact match: the hits do not supply this sheaf construction or its normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "graded|[Dd]irect[Ss]um|[Cc]oproduct",
+   "results": "9 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean",
+   "date": "2026-10-25",
+   "verdict": "No exact match: the hits do not supply this sheaf construction or its normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConormalGradedAlgebraConstruction",
+  "date": "2026-10-26",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-normal-bundle",
+   "place": "Definition of the normal cone as relative Spec of the direct sum of ideal-power quotients: Descent of homogeneous algebra operations through a closed immersion.",
+   "via": [
+    "lem-pur-conormal-graded-algebra-construction",
+    "lem-pur-conormal-graded-algebra"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedImmersionGradedAlgebraDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedImmersionGradedAlgebraDescent.lean",
+  "declaration": "AlgebraicGeometry.exists_gradedAlgebra_closed_descent",
+  "statement": "theorem exists_gradedAlgebra_closed_descent {X Z : Scheme.{u}} (i : Z ⟶ X)\n    [IsClosedImmersion i] (B : ℕ → X.Modules) (C : ℕ → Z.Modules)\n    (e : ∀ n, (Scheme.Modules.pushforward i).obj (C n) ≅ B n)\n    (A : GradedSheafAlgebra B) :\n    ∃ D : GradedSheafAlgebra C,\n      (SheafOfModules.unitToPushforwardObjUnit i.toRingCatSheafHom ≫\n        (Scheme.Modules.pushforward i).map D.unit) ≫ (e 0).hom = A.unit ∧\n      ∀ (m n : ℕ) (U : X.Opens)\n        (a : (C m).val.obj (op (i ⁻¹ᵁ U))) (b : (C n).val.obj (op (i ⁻¹ᵁ U))),\n        (e (m + n)).hom.val.app (op U) (D.mul m n (i ⁻¹ᵁ U) a b) =\n          A.mul m n U ((e m).hom.val.app (op U) a) ((e n).hom.val.app (op U) b)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261026T001706-L-22631",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261026T070338-L-3552234",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

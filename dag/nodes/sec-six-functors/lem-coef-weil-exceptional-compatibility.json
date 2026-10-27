@@ -1,0 +1,121 @@
+{
+ "id": "lem-coef-weil-exceptional-compatibility",
+ "kind": "statement",
+ "title": "Exceptional Weil equivariance from normalized left exchanges",
+ "statement": "For the actual coefficient exceptional system $A$ of [def-sf-common-stage-verdier-data], coefficient duality structures $W_X,W_Y$ of [def-coef-verdier-weil-data], and specified normalized left exchanges satisfying [lem-coef-weil-left-exchange-compatibility], the right mates of inverse left exchanges, with the same underlying adjunctions, give a record Adjunctions. In particular the original units and counits are equivariant, and the given finite scalar and inclusion comparisons are equivariant on both left and right operations.",
+ "stmt_deps": [
+  "def-coef-verdier-weil-data",
+  "def-sf-common-stage-verdier-data",
+  "lem-coef-weil-left-exchange-compatibility"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Proof paragraphs 1–3; Exceptional Weil equivariance from normalized left exchanges"
+ },
+ "proof": [
+  {
+   "text": "Use the supplied normalized left exchanges of [lem-coef-weil-left-exchange-compatibility]. Frobenius pullbacks are equivalences by [lem-pod-semilinear-field-operation-lifts]. Apply the proved IsoAlgebra.mateIso to the inverse left exchange under the specified adjunction. Its proved unit and counit formulas give the required equations without changing either adjunction. The proved generic pinByLeft constructor transports both normalization predicates along the left-projection equations before geometric specialization.",
+   "uses": [
+    "lem-coef-weil-left-exchange-compatibility",
+    "lem-pod-semilinear-field-operation-lifts",
+    "lem-sf-fixed-pair-adjunction-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the desired right coefficient square under the target adjunction. Precompose with the invertible composite Q(alpha) then left exchange. The left coefficient square, naturality of alpha, both mate-counit identities, and the prescribed scalar counit equation reduce both sides to t at FG followed by M(Q(epsilon)). The remaining equality is naturality of t. This calculation is the private proved mate_scalar_square helper. Naturality at an arbitrary Weil structure then gives both ExceptionalComparison equations. Use the given finite coefficient counit equation and the common-stage counit descent equation for A to complete scalar and stage.",
+   "uses": [
+    "def-sf-common-stage-verdier-data",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-weil-left-exchange-compatibility",
+  "lem-pod-semilinear-field-operation-lifts",
+  "lem-sf-fixed-pair-adjunction-lift",
+  "def-sf-common-stage-verdier-data",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "V3",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Exceptional Weil equivariance from normalized left exchanges"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural compact support Frobenius exchange commutes with extension of coefficient fields and descends to the common coefficient category",
+   "results": "8 hits, including ModuleCat.extendScalarsComp, ModuleCat.homEquiv_extendScalarsComp, comonadicExtendScalars, and field Frobenius identities. No constructible-sheaf compact-support normalization result.",
+   "date": "2026-10-25",
+   "verdict": "no exact match; the project geometric exchange interface is needed"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\"",
+   "results": "12 hits in Mathlib.CategoryTheory.Adjunction.Mates, including mateEquiv, unit_mateEquiv, mateEquiv_counit and mateEquiv_vcomp. These supply the generic mate calculus, not the geometric or coefficient normalizations.",
+   "date": "2026-10-25",
+   "verdict": "generic mate calculus reused; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Weil|Verdier|mateEquiv|IsoAlgebra",
+   "results": "Search restricted to Mathlib/CategoryTheory/Adjunction: 5 hits in Mathlib/CategoryTheory/Adjunction/Mates.lean, lines 53, 84, 123, 124, 128. Direct project rg searches also read the coefficient duality, exchange, and IsoAlgebra interfaces.",
+   "date": "2026-10-25",
+   "verdict": "no exact geometric statement; reuse the project definitions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefVerdierWeilEquivariance",
+  "date": "2026-10-25",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-coef-verdier-weil-equivariance",
+   "place": "Proof paragraphs 1–3; Exceptional Weil equivariance from normalized left exchanges",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CoefWeilExceptionalCompatibility",
+  "file": "lean/Sheaf/SixFunctors/CoefWeilExceptionalCompatibility.lean",
+  "declaration": "WeilConjectures.coef_weil_exceptional_compatibility",
+  "declarations": [
+   "WeilConjectures.coef_weil_exceptional_compatibility"
+  ],
+  "statement": "theorem coef_weil_exceptional_compatibility\n    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]\n    (X₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType X₀.hom]\n    [QuasiCompact X₀.hom] [IsSeparated X₀.hom]\n    {Y₀ : Over (Spec (.of D.k₀))} [LocallyOfFiniteType Y₀.hom]\n    [QuasiCompact Y₀.hom] [IsSeparated Y₀.hom]\n    (f₀ : X₀ ⟶ Y₀) [IsSeparated f₀.left] [LocallyOfFiniteType f₀.left]\n    [QuasiCompact f₀.left] (c₀ : Compactification f₀.left)\n    (A : CoefVerdierWeil.FiberExceptional D l hl Ω X₀ f₀\n      (FrobeniusExchange.geometricCompactification D f₀ c₀))\n    {BX : CoefVerdierWeil.FiberDuality D l hl Ω X₀}\n    {BY : CoefVerdierWeil.FiberDuality D l hl Ω Y₀}\n    (WX : CoefVerdierWeil.Coefficients D l hl Ω X₀ BX)\n    (WY : CoefVerdierWeil.Coefficients D l hl Ω Y₀ BY)\n    (L : CoefVerdierWeil.LeftExchanges D l hl Ω X₀ f₀ c₀ A WX WY) :\n    Nonempty (CoefVerdierWeil.Adjunctions D l hl Ω X₀ f₀ c₀ A WX WY)",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-c479c",
+  "group": "V3",
+  "result": "fix",
+  "landing": "20261026T003041-L-142554",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-c479c",
+  "group": "V3",
+  "result": "fix",
+  "landing": "20261026T003041-L-142554",
+  "kind": "interface",
+  "note": "independent cc review: re-delivery c479 Lean/JSON byte-identical to 4fd08 (whose FIX never landed: report fix name refused); holes vs IntegralVerdier.SignedSymmetry (still unpinned in clone 03f3c71); 5 modules + 3 direct importers compiled"
+ }
+}

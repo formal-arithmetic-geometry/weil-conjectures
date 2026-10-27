@@ -1,0 +1,262 @@
+{
+ "id": "lem-sfb-normal-coefficient-branch-conjugacy",
+ "kind": "statement",
+ "title": "Normal coefficient automorphisms conjugate normalized branches without completeness",
+ "statement": "Let $A\\to B$ be an injective local map of discrete valuation rings [def-sc-discrete-valuation-ring], with fraction fields $K\\subseteq L$ [def-pc-field-extension]. Let $N/K$ be finite-dimensional and normal, meaning that every irreducible polynomial over $K$ with a root in $N$ splits into linear factors over $N$. Put $E=(L\\otimes_KN)_{\\mathrm{red}}$, $R=\\operatorname{IntCl}_A(N)$ and $C=\\operatorname{IntCl}_B(E)$ [def-weil-pbc-integral-closure, def-weil-pbc-module-tensor-product], with reduction the quotient by nilpotents. The group $G=\\operatorname{Aut}_K(N)$ acts on $R$ by restriction and on $C$ by restriction of $\\sigma(\\overline{l\\otimes x})=\\overline{l\\otimes\\sigma(x)}$. Its action on the maximal ideals of $C$ is transitive. More precisely, for maximal ideals $q,q'\\subset C$ there is $\\sigma\\in G$ with $\\sigma(q)=q'$, and it sends $n=q\\cap R$ to $n'=q'\\cap R$ and induces a commuting isomorphism of local ring maps $R_n\\to C_q$ and $R_{n'}\\to C_{q'}$, given on fractions by $b/s\\mapsto\\sigma(b)/\\sigma(s)$ [def-weil-pbc-localization-at-prime]. No completeness or henselianity of either DVR, and no separability of $N/K$, is assumed. There is no assertion that $R$ is local or that $n=n'$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09EU (lemma-galois-relative), statement and the orbit-separation proof. In the possibly inseparable case the invariant-power formulation of lem-sfb-normal-tensor-invariant-powers replaces the erroneous fixed-field identity K=N^G in the source proof. Local isomorphisms are the explicit localization of that action."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-pc-field-extension",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-dvr-algebraic-normalization-structure], case (a), with $P=N$: $E$ is a nonempty finite product of fields, and for every maximal $q\\subset C$ its contraction $n=q\\cap R$ is maximal and $R_n,C_q$ are DVRs. In particular $E\\ne0$. The canonical unital maps $L\\to E$ and $N\\to E$ have zero kernels, since a proper ideal in a field is zero; we use these inclusions. An $A$-monic equation for $r\\in R$ becomes a $B$-monic equation in $E$, so $R\\subset C$ by [def-weil-pbc-integral-closure]. Every element of $C$ is integral over $B$ by that definition. Hence [lem-weil-pbc-integral-maximal-contracts-maximal] gives $q\\cap B=\\mathfrak m_B$ for every maximal $q$, since $B$ is local. Also $B$ is a PID by [def-sc-discrete-valuation-ring], so [lem-weil-pbc-pid-noetherian-normal] says $B$ is integrally closed in $L$.",
+   "uses": [
+    "lem-sfb-dvr-algebraic-normalization-structure",
+    "def-weil-pbc-integral-closure",
+    "lem-weil-pbc-integral-maximal-contracts-maximal",
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-pid-noetherian-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EU (lemma-galois-relative), proof; finite tensor-normalization setup of Tag 09EM (remark-construction)."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-finite-extension-finitely-many-embeddings] with source $N/K$ and target $N/K$, the set of $K$-homomorphisms $N\\to N$ is finite; the automorphisms form a subset, so $G$ is finite. For $\\sigma\\in G$, [lem-weil-pbc-algebra-tensor-pushout-universal-property] constructs $1\\otimes\\sigma$ on $L\\otimes_KN$, with inverse $1\\otimes\\sigma^{-1}$. If $z^a=0$, then $((1\\otimes\\sigma)z)^a=0$, so this map preserves the nilradical and induces an $L$-automorphism of $E$. Tensor uniqueness gives the identity and composition laws. Applying $\\sigma$ to a monic equation over $A$, or the induced map to one over $B$, leaves its coefficients fixed. By [def-weil-pbc-integral-closure] these maps restrict to automorphisms of $R$ and $C$, with inverses given by $\\sigma^{-1}$. They agree on $R\\subset C$ because both send $r$ to the image of $\\sigma(r)$. Ring automorphisms carry maximal ideals to maximal ideals: their inverse identifies the quotient rings, preserving the field property.",
+   "uses": [
+    "lem-weil-pbc-finite-extension-finitely-many-embeddings",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EU (lemma-galois-relative), proof; finite tensor-normalization setup of Tag 09EM (remark-construction)."
+   }
+  },
+  {
+   "text": "Suppose two maximal ideals $q,q'\\subset C$ lie in different $G$-orbits $O,O'$. These are disjoint finite sets by step 2. Distinct maximal ideals $v,w$ are comaximal: choose $a\\in w\\setminus v$; the ideal $v+(a)$ strictly contains $v$, hence equals $C$, and is contained in $v+w$. Apply [lem-pc-crt-ideal-quotient-product] to the finite family $O\\cup O'$. Its quotient-product isomorphism supplies $b\\in C$ with $b\\equiv0\\pmod v$ for $v\\in O$ and $b\\equiv1\\pmod v$ for $v\\in O'$ (choose the corresponding tuple, then a representative in $C$). For $v\\in O$, $\\sigma^{-1}(v)\\in O$, hence $\\sigma(b)\\in v$. For $v\\in O'$, $b-1\\in\\sigma^{-1}(v)$, hence $\\sigma(b)\\equiv1\\pmod v$. Thus $x=\\prod_{\\sigma\\in G}\\sigma(b)$ lies in every ideal of $O$ and is congruent to $1$ modulo every ideal of $O'$. Each $\\tau\\in G$ fixes $x$, since $\\sigma\\mapsto\\tau\\sigma$ permutes the finite product.",
+   "uses": [
+    "lem-pc-crt-ideal-quotient-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EU (lemma-galois-relative), orbit-separating element and product; Chinese remainder is Algebra Tag 00DT (lemma-chinese-remainder), not the mistagged 00U3 in the existing CRT node."
+   }
+  },
+  {
+   "text": "View $x\\in C$ as an invariant element of $E$. By [lem-sfb-normal-tensor-invariant-powers], applied with its coefficient field $E$ renamed $N$ and its reduced ring renamed $E$, there are $d\\ge1$ and $l\\in L$ with $x^d=\\overline{l\\otimes1}$. Because $x^d\\in C$, [def-weil-pbc-integral-closure] gives a monic equation over $B$ for this element of $E$. The inclusion $L\\hookrightarrow E$ from step 1 makes the same equation hold for $l$ in $L$. By the normality of $B$ from [lem-weil-pbc-pid-noetherian-normal], $l\\in B$. Now $x\\in q$ implies $l=x^d\\in q\\cap B=\\mathfrak m_B$. But $x\\equiv1\\pmod {q'}$ implies $l=x^d\\equiv1\\pmod {q'}$, whereas $\\mathfrak m_B=q'\\cap B\\subset q'$. This contradicts $1\\notin q'$. Therefore $O=O'$: for arbitrary $q,q'$ there is $\\sigma\\in G$ with $\\sigma(q)=q'$. Only an invariant power is used, never the generally false equality $N^G=K$.",
+   "uses": [
+    "lem-sfb-normal-tensor-invariant-powers",
+    "def-weil-pbc-integral-closure",
+    "lem-weil-pbc-pid-noetherian-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EU (lemma-galois-relative), proof; finite tensor-normalization setup of Tag 09EM (remark-construction)."
+   }
+  },
+  {
+   "text": "Choose this $\\sigma$ and put $n=q\\cap R$, $n'=q'\\cap R$. For $r\\in R$, $\\sigma(r)\\in n'$ is equivalent to $\\sigma(r)\\in q'$, to $r\\in q$, and to $r\\in n$; hence $\\sigma(n)=n'$. Use the fraction description of [def-weil-pbc-localization-at-prime]. The inclusions induce $R_n\\to C_q$ and $R_{n'}\\to C_{q'}$ by $r/s\\mapsto r/s$, since $s\\notin n$ implies $s\\notin q$. These maps are local: $r/s$ belongs to the extended prime precisely when its numerator does. Indeed a fraction $r/s$ in $pR_p$ can be written $a/t$ with $a\\in p$; its equality with $r/s$ gives $u(rt-as)=0$ with $u,s,t\\notin p$, so primality forces $r\\in p$. The converse is immediate. Applying this for $p=n,q$ shows the preimage of $qC_q$ is $nR_n$, and the same argument works for $n',q'$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EM (remark-construction), local branch square; explicit fraction and extended-prime calculation using Algebra Tag 00CO (definition-localization)."
+   }
+  },
+  {
+   "text": "Define $\\phi_R:R_n\\to R_{n'}$ and $\\phi_C:C_q\\to C_{q'}$ by $b/s\\mapsto\\sigma(b)/\\sigma(s)$. Denominators stay outside the corresponding primes by $\\sigma(n)=n'$ and $\\sigma(q)=q'$. If $b/s=b'/s'$, [def-weil-pbc-localization-at-prime] gives $u(bs'-b's)=0$ for some $u$ outside the source prime. Apply $\\sigma$ to obtain $\\sigma(u)(\\sigma(b)\\sigma(s')-\\sigma(b')\\sigma(s))=0$ with $\\sigma(u)$ outside the target prime; thus the formula is well defined. The fraction addition and multiplication formulas show it preserves sums, products and $1$. The maps defined using $\\sigma^{-1}$ are two-sided inverses on every fraction. The numerator test of step 5 shows these isomorphisms are local. Finally, on $r/s\\in R_n$, either route around the square has value $\\sigma(r)/\\sigma(s)\\in C_{q'}$, because the actions agree on $R\\subset C$. Thus the square of local ring maps commutes. The argument permits distinct $n,n'$ and uses no completeness, henselianity or separability.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EU (lemma-galois-relative), restricted coefficient action; explicit localization of this action using Algebra Tag 00CO (definition-localization)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-dvr-algebraic-normalization-structure",
+  "def-weil-pbc-integral-closure",
+  "lem-weil-pbc-integral-maximal-contracts-maximal",
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-weil-pbc-finite-extension-finitely-many-embeddings",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-pc-crt-ideal-quotient-product",
+  "lem-sfb-normal-tensor-invariant-powers",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09EU (lemma-galois-relative), orbit-separation proof, using the existing corrected invariant-power lemma for inseparable normal extensions; Tag 09EM (remark-construction) for the branch rings. The localization formulas are written out from Algebra Tag 00CO."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Automorphisms of a finite normal coefficient field extension act transitively on maximal ideals of the integral closure of a DVR in a reduced tensor product",
+   "results": "OK: 8 hits. Ideal.exists_comap_galRestrict_eq, Ideal.coe_smul_primesOver_mk_eq_map_galRestrict, Ideal.coe_smul_primesOver_eq_map_galRestrict, Ideal.ncard_primesOver_mul_ncard_primesOver, Ideal.isPretransitive_of_isGaloisGroup, Ideal.isPretransitive_of_isGalois, Ideal.instMulActionAlgEquivElemPrimesOver, Ideal.exists_smul_eq_of_isGaloisGroup. ",
+   "date": "2026-10-24",
+   "verdict": "no match: Ideal.isPretransitive_of_isGaloisGroup assumes an invariant-ring Galois action; construction of that action on a reduced tensor normalization and the purely inseparable fixed-field correction are additional arguments. galLift and AlgEquiv.liftNormal concern field isomorphisms, not this transitivity statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "MulAction.IsPretransitive, Ideal",
+   "results": "OK: 2 hits. Ideal.isPretransitive_of_isGaloisGroup, Polynomial.Splits.surjective_toPermHom_of_iSup_inertia_eq_top. ",
+   "date": "2026-10-24",
+   "verdict": "no match: Ideal.isPretransitive_of_isGaloisGroup assumes an invariant-ring Galois action; construction of that action on a reduced tensor normalization and the purely inseparable fixed-field correction are additional arguments. galLift and AlgEquiv.liftNormal concern field isomorphisms, not this transitivity statement."
+  },
+  {
+   "tool": "grep",
+   "query": "isPretransitive.*[Gg]alois|isPretransitive_of_isGaloisGroup|IsGaloisGroup.*isPretransitive",
+   "results": "OK: 6 hits. Mathlib/NumberTheory/RamificationInertia/Galois.lean, Mathlib/CategoryTheory/Galois/GaloisObjects.lean, Mathlib/CategoryTheory/Galois/Prorepresentability.lean, Mathlib/CategoryTheory/Galois/Prorepresentability.lean, Mathlib/CategoryTheory/Galois/IsFundamentalgroup.lean, Mathlib/CategoryTheory/Galois/Action.lean. ",
+   "date": "2026-10-24",
+   "verdict": "no match: Ideal.isPretransitive_of_isGaloisGroup assumes an invariant-ring Galois action; construction of that action on a reduced tensor normalization and the purely inseparable fixed-field correction are additional arguments. galLift and AlgEquiv.liftNormal concern field isomorphisms, not this transitivity statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transitive action on primes of normalized reduced tensor algebra for a finite normal possibly inseparable field extension",
+   "results": "OK: 8 hits. Ideal.isPretransitive_of_isGalois, Ideal.isPretransitive_of_isGaloisGroup, Ideal.instMulActionElemPrimesOver, Ideal.coe_smul_primesOver_eq_map_galRestrict, PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable, Ideal.coe_smul_primesOver_mk, Ideal.exists_smul_eq_of_isGaloisGroup, Ideal.coe_smul_primesOver. ",
+   "date": "2026-10-24",
+   "verdict": "no match: Ideal.isPretransitive_of_isGaloisGroup assumes an invariant-ring Galois action; construction of that action on a reduced tensor normalization and the purely inseparable fixed-field correction are additional arguments. galLift and AlgEquiv.liftNormal concern field isomorphisms, not this transitivity statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normal possibly inseparable coefficient extensions conjugate all normalized DVR branches without completeness",
+   "results": "OK: 8 hits. galLift, galLiftEquiv_apply, AlgEquiv.liftNormal, galLiftEquiv, galLiftEquiv_symm_apply, IsArithFrobAt.exists_primesOver_isConj, KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk, AlgEquiv.liftNormal_commutes. ",
+   "date": "2026-10-24",
+   "verdict": "no match: Ideal.isPretransitive_of_isGaloisGroup assumes an invariant-ring Galois action; construction of that action on a reduced tensor normalization and the purely inseparable fixed-field correction are additional arguments. galLift and AlgEquiv.liftNormal concern field isomorphisms, not this transitivity statement."
+  },
+  {
+   "tool": "grep",
+   "query": "isPretransitive_of_isGalois|IsInvariant.*exists_smul|exists_smul_of_under_eq",
+   "results": "OK: 14 hits. Mathlib/NumberTheory/RamificationInertia/Galois.lean, Mathlib/NumberTheory/RamificationInertia/Galois.lean, Mathlib/NumberTheory/RamificationInertia/Galois.lean, Mathlib/CategoryTheory/Galois/GaloisObjects.lean, Mathlib/CategoryTheory/Galois/Prorepresentability.lean, Mathlib/CategoryTheory/Galois/Prorepresentability.lean, Mathlib/CategoryTheory/Galois/Action.lean, Mathlib/RingTheory/Frobenius.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: the Galois prime-transitivity results require an invariant-ring action, which need not hold for the possibly inseparable coefficient extension; the tensor normalization, invariant-power argument and compatible local square require additional proof. Field conjugacy and galRestrict/galLift alone do not state the item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Primes in the normalization of a reduced tensor product of a normal field extension are conjugate under coefficient automorphisms",
+   "results": "OK: 8 hits. Ideal.instMulActionAlgEquivElemPrimesOver, PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable, Algebra.norm_eq_prod_automorphisms, Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced, Ideal.coe_smul_primesOver_mk_eq_map_galRestrict, Ideal.coe_smul_primesOver_eq_map_galRestrict, IsConjRoot.exists_algEquiv, isConjRoot_iff_exists_algEquiv",
+   "date": "2026-10-24",
+   "verdict": "no match: the Galois prime-transitivity results require an invariant-ring action, which need not hold for the possibly inseparable coefficient extension; the tensor normalization, invariant-power argument and compatible local square require additional proof. Field conjugacy and galRestrict/galLift alone do not state the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Automorphisms of a finite normal field extension act transitively on maximal ideals of the integral closure of a DVR in the reduced tensor product with an arbitrary field extension",
+   "results": "OK: 8 hits. Ideal.exists_comap_galRestrict_eq, Ideal.coe_smul_primesOver_mk_eq_map_galRestrict, Ideal.coe_smul_primesOver_eq_map_galRestrict, Ideal.isPretransitive_of_isGaloisGroup, Ideal.ncard_primesOver_mul_ncard_primesOver, Ideal.isPretransitive_of_isGalois, Ideal.exists_smul_eq_of_isGaloisGroup, Ideal.instMulActionAlgEquivElemPrimesOver",
+   "date": "2026-10-24",
+   "verdict": "no match: the Galois prime-transitivity results require an invariant-ring action, which need not hold for the possibly inseparable coefficient extension; the tensor normalization, invariant-power argument and compatible local square require additional proof. Field conjugacy and galRestrict/galLift alone do not state the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite normal possibly inseparable extension N of K and a local DVR map A to B, the coefficient action on the normalization of (Frac(B) tensor K N) reduced has conjugate maximal ideals and induces compatible localization isomorphisms",
+   "results": "OK: 8 hits. galLiftEquiv_apply, galRestrict, galLift, galRestrict'_galLift, galLift_galRestrict', galRestrictHom, galRestrict', Ideal.coe_smul_primesOver_mk_eq_map_galRestrict",
+   "date": "2026-10-24",
+   "verdict": "no match: the Galois prime-transitivity results require an invariant-ring action, which need not hold for the possibly inseparable coefficient extension; the tensor normalization, invariant-power argument and compatible local square require additional proof. Field conjugacy and galRestrict/galLift alone do not state the item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-etale-weak-solution-transfer",
+  "date": "2026-10-24",
+  "group": "Q71"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through the creation chain of lem-sfb-epp-essentially-finite-type-traits. Current latest direct-image proof (3) does not state this auxiliary algebra result. Weak Epp at each normalized branch over the perfect-residue algebraic preparation. Supporting Strict residue and completion reduction in the proof of Epp. Strict residue extension before completion: the general 09ET input, including preservation of the lower uniformizer. Supporting input: 09ET third paragraph, finite-etale coefficient transfer after finite field descent; only the finite coefficient step, with the upper DVR already strictly henselian. Returned-delivery correction: this finite transfer is restricted to perfect lower residue; construction of the square is unchanged. Supporting input: normal enlargement and conjugacy of upper normalized branches; no lower completeness.",
+   "via": [
+    "lem-sfb-finite-etale-weak-solution-transfer",
+    "lem-sfb-dvr-strict-residue-square",
+    "lem-sfb-epp-strict-complete-reduction",
+    "lem-sfb-epp-weak-perfect-residue",
+    "lem-sfb-epp-essentially-finite-type-traits",
+    "lem-sfb-raynaud-faltings-normalized-reduction",
+    "lem-sfb-group-model-potential-smooth-normalization",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-normal-coefficient-branch-conjugacy",
+  "worker": "stage1",
+  "summary": "Six-step split with no new nodes: finite tensor-normalization structure and maximal contraction; finite coefficient action; CRT separation of two finite orbits; invariant-power and DVR-normality contradiction; contraction and explicit compatible localization isomorphisms. Statement and hypotheses unchanged. Existing CRT source tag 00U3 is erroneous (actual 00DT); reported without changing that node. No exact project attachment or Mathlib match.",
+  "blueprint": "Ancestor command returns None. Preserved the inherited null from.node and via chain: historical supporting input to det-thm-sf-ctf-stability-direct-images proof (3), via finite-etale weak-solution transfer and normal enlargement. Latest direct-images proof (3) no longer states this algebra lemma; this split supplies only the historical auxiliary input and changes neither chapter nor unit. Whole-blueprint searches normal coefficient, 09EU and conjugacy found no equivalent statement."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q65-30cdfdf6f",
+  "group": "Q65",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-30cdfdf6f (reviewer sub-agent of L); spot-checked: I read the item in full. It has six steps, no new nodes, and the statement and stmt_deps are identical to the live item. I checked it against Stacks 09EU (lemma-galois-relative), statement and proof. The source's K=(K_1)^G is false for inseparable normal extensions (example: F_p(t^{1/p})/F_p(t), where G is trivial). The report discloses this, and the proof uses lem-sfb-normal-tensor-invariant-powers instead; that node's notion of normal is equivalent to the item's and its action is the same. Step 1: case (a) of the normalization-structure node applies (finite N, injective local map of DVRs). This gives E nonzero, so L and N inject into E. R lies in C. The integral-maximal-contraction leaf gives q∩B=m_B, and the PID-normal leaf makes B normal in L. Step 2: G is finite by the embeddings leaf, which needs no separability. 1⊗σ comes from clauses (2) and (3) of the tensor universal property. Nilradical and integral closures are preserved, and the actions agree on R⊂C. Step 3: the comaximality argument is correct. The CRT node is used only through its isomorphism. Membership of σ(b) in each orbit and the invariance of the product are checked. Step 4: the invariant power x^d is the image of some l in L, and l lies in B. Then l is in m_B, which lies in q', while l≡1 mod q', a contradiction. Nothing is cancelled in the possibly non-domain E. Steps 5 and 6 are elementary from def-weil-pbc-localization-at-prime. The numerator test handles annihilators, the localization maps are well defined and local, the inverses come from σ^{-1}, and the square commutes. I tested N=K; Z_(5)[i] over Z_(5), where n≠n' as the item allows; and the purely inseparable and L=N cases. proof_deps equals the union of the uses, and there is no cycle. All inputs are in the same unit sk-thm-sf-ctf-stability or are Mathlib leaves and definitions, so no tool_uses are needed. lem-sfb-epp-normal-base-branch-conjugacy assumes completeness and is not a duplicate. The inherited blueprint chain is preserved. Maintainer note: the existing lem-pc-crt-ideal-quotient-product cites Tag 00U3, which is algebra-lemma-etale-over-field; the Chinese remainder lemma is 00DT. That fault is in the existing node, not this delivery."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.NormalCoefficientBranchConjugacy",
+  "declaration": "Algebra.normalCoefficientBranchConjugacy",
+  "file": "lean/Sheaf/RingTheory/NormalCoefficientBranchConjugacy.lean",
+  "statement": "theorem normalCoefficientBranchConjugacy (A : Type uA) (B : Type uB) (K : Type uK) (L : Type uL) (N : Type uN) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A] [CommRing B] [IsDomain B] [IsDiscreteValuationRing B] [Field K] [Field L] [Field N] [Algebra A B] [IsLocalHom (algebraMap A B)] (hAB : Function.Injective (algebraMap A B)) [Algebra A K] [IsFractionRing A K] [Algebra B L] [IsFractionRing B L] [Algebra K L] [Algebra A L] [IsScalarTower A B L] [IsScalarTower A K L] [Algebra K N] [Algebra A N] [IsScalarTower A K N] [FiniteDimensional K N] [Normal K N] : ∃ (i : integralClosure A N →+* integralClosure B ((L ⊗[K] N) ⧸ nilradical (L ⊗[K] N))) (ρN : (N ≃ₐ[K] N) →* (integralClosure A N ≃+* integralClosure A N)) (ρE : (N ≃ₐ[K] N) →* (((L ⊗[K] N) ⧸ nilradical (L ⊗[K] N)) ≃+* ((L ⊗[K] N) ⧸ nilradical (L ⊗[K] N)))) (ρC : (N ≃ₐ[K] N) →* (integralClosure B ((L ⊗[K] N) ⧸ nilradical (L ⊗[K] N)) ≃+* integralClosure B ((L ⊗[K] N) ⧸ nilradical (L ⊗[K] N)))), (∀ r : integralClosure A N, (i r).val = Ideal.Quotient.mk (nilradical (L ⊗[K] N)) (1 ⊗ₜ[K] r.val)) ∧ (∀ (σ : N ≃ₐ[K] N) (r : integralClosure A N), (ρN σ r).val = σ r.val) ∧ (∀ (σ : N ≃ₐ[K] N) (l : L) (x : N), ρE σ (Ideal.Quotient.mk (nilradical (L ⊗[K] N)) (l ⊗ₜ[K] x)) = Ideal.Quotient.mk (nilradical (L ⊗[K] N)) (l ⊗ₜ[K] σ x)) ∧ (∀ (σ : N ≃ₐ[K] N) (c : integralClosure B ((L ⊗[K] N) ⧸ nilradical (L ⊗[K] N))), (ρC σ c).val = ρE σ c.val) ∧ ∀ (q q' : PrimeSpectrum (integralClosure B ((L ⊗[K] N) ⧸ nilradical (L ⊗[K] N)))), q.asIdeal.IsMaximal → q'.asIdeal.IsMaximal → ∃ (σ : N ≃ₐ[K] N) (n n' : PrimeSpectrum (integralClosure A N)) (hn : n.asIdeal = q.asIdeal.comap i) (hn' : n'.asIdeal = q'.asIdeal.comap i), Ideal.map (ρC σ).toRingHom q.asIdeal = q'.asIdeal ∧ Ideal.map (ρN σ).toRingHom n.asIdeal = n'.asIdeal ∧ ∃ (hN : ∀ s : n.asIdeal.primeCompl, ρN σ s ∈ n'.asIdeal.primeCompl) (hC : ∀ s : q.asIdeal.primeCompl, ρC σ s ∈ q'.asIdeal.primeCompl) (eN : Localization.AtPrime n.asIdeal ≃+* Localization.AtPrime n'.asIdeal) (eC : Localization.AtPrime q.asIdeal ≃+* Localization.AtPrime q'.asIdeal), IsLocalHom eN.toRingHom ∧ IsLocalHom eC.toRingHom ∧ eC.toRingHom.comp (Localization.localRingHom n.asIdeal q.asIdeal i hn) = (Localization.localRingHom n'.asIdeal q'.asIdeal i hn').comp eN.toRingHom ∧ (∀ (b : integralClosure A N) (s : n.asIdeal.primeCompl), eN (IsLocalization.mk' (Localization.AtPrime n.asIdeal) b s) = IsLocalization.mk' (Localization.AtPrime n'.asIdeal) (ρN σ b) ⟨ρN σ s, hN s⟩) ∧ (∀ (b : integralClosure B ((L ⊗[K] N) ⧸ nilradical (L ⊗[K] N))) (s : q.asIdeal.primeCompl), eC (IsLocalization.mk' (Localization.AtPrime q.asIdeal) b s) = IsLocalization.mk' (Localization.AtPrime q'.asIdeal) (ρC σ b) ⟨ρC σ s, hC s⟩)",
+  "branch": "sheaf-dag",
+  "by": "Q126",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0024115c0",
+  "group": "Q126",
+  "result": "fix",
+  "note": "Lean statement exact against node/09EU-09EM: DVR local injective A→B, towers pin K→L, FiniteDimensional+Normal, no separability; E=quotient by nilradical with leftAlgebra B-structure, actual integral closures, i pinned by [1⊗r], ρN/ρE/ρC pinned by restriction and pure-tensor formula; transitivity via Ideal.map; n,n' exact contractions; canonical localRingHom; eN/eC local isos pinned on fractions; square correct; n≠n' allowed. lean.statement verbatim; node differs from live only in lean; no H4 duplicate. Only fault H11 (worker's own second pass) → fixes/lem-sfb-normal-coefficient-branch-conjugacy.report.md (worker report verbatim + independent second reading). No Lean change, no compile needed."
+ }
+}

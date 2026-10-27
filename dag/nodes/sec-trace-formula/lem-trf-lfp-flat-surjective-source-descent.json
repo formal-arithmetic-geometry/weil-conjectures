@@ -1,0 +1,133 @@
+{
+ "id": "lem-trf-lfp-flat-surjective-source-descent",
+ "kind": "statement",
+ "title": "Local finite presentation descends along a flat surjective locally finitely presented source map",
+ "statement": "Let $X′,X,S$ be schemes [def-pc-scheme], let $q:X′\\to X$ and $f:X\\to S$ be morphisms, and assume $q$ is flat [def-weil-flat-morphism], surjective [def-weil-surjective-morphism], and locally of finite presentation [def-sbc-locally-finite-presentation]. If $f\\circ q$ is locally of finite presentation, then $f$ is locally of finite presentation. No quasi-compactness, separation or Noetherian hypothesis is imposed; empty schemes are allowed.",
+ "source": {
+  "document": "lean/WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean",
+  "place": "LocallyOfFinitePresentation.of_comp_of_flat_of_surjective, lines 127-152; Stacks Project Descent, Tag 02KL, lemma-flat-finitely-presented-permanence, locally finite presentation case."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-weil-surjective-morphism",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing proved source declaration LocallyOfFinitePresentation.of_comp_of_flat_of_surjective with exactly the displayed hypotheses. Its proof first treats affine source, intermediate scheme and base: the coordinate map of q is flat, finitely presented and surjective on spectra, hence faithfully flat; the finitely presented composite then gives finite presentation of the intermediate algebra by Algebra.FinitePresentation.of_finitePresentation_of_faithfullyFlat.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For affine intermediate scheme and base, openness of the flat locally finitely presented q gives a cover of the intermediate affine by images of affine source opens. Quasi-compactness selects finitely many of these. Their coproduct is affine, and its induced map is flat, surjective and locally of finite presentation; the composite is locally of finite presentation, by Zariski source locality on its open components. Apply the all-affine case. In general restrict around each point to an affine source neighbourhood mapping into an affine base neighbourhood. Target restriction preserves the hypotheses on q and source restriction preserves those on its composite. Apply the preceding case to these neighbourhoods and then Zariski source locality to f. Empty targets give empty point-indexed covers, so the proof also includes that case.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "lean/WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean",
+  "place": "The complete existing proofs of LocallyOfFinitePresentation.of_comp_of_flat_of_surjective_of_isAffine, .of_comp_of_flat_of_surjective_of_isAffine_of_isAffine and .of_comp_of_flat_of_surjective, lines 62-152 (Stacks 02KL)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A scheme morphism is locally of finite presentation if its composite with a flat surjective locally finitely presented morphism is locally of finite presentation",
+   "results": "Search returned LocallyOfFinitePresentation, its mk and finitePresentation_appLE, composition, and finite-type cancellation. None gives source descent. Read the complete source-library proof at FinitePresentation.lean:62-152; it states precisely this result.",
+   "date": "2026-10-26",
+   "verdict": "Existing proved source declaration; no duplicate declaration or Lean module needed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local finite presentation descends along a jointly surjective family of flat locally finitely presented source maps",
+   "results": "Mathlib hits include target-side DescendsAlong, composition and base change. Inspected the existing source-library singleton theorem separately; it imposes exactly flat, surjective and locally finitely presented source hypotheses.",
+   "date": "2026-10-26",
+   "verdict": "Attach the source-library singleton theorem, not target-base-change descent."
+  },
+  {
+   "tool": "grep",
+   "query": "of_comp_of_flat_of_surjective|sigmaDesc_of_union_range_eq_univ",
+   "results": "Mathlib UnderlyingMap.lean:116 supplies surjectivity of coproduct maps. Local rg in lean/WeilConjectures found FinitePresentation.lean:127, whose complete proof was read. An exact declaration-name scan of all DAG lean attachments found no singleton finite-presentation source-descent node. Blueprint searches for 02KL and finite presentation source found no duplicate (the 02KL hit is a different fpqc/base-change statement).",
+   "date": "2026-10-26",
+   "verdict": "New attachment node for an already proved source theorem; no new proof obligation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.LocallyOfFinitePresentationFppfSource",
+  "date": "2026-10-26",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical semistable auxiliary branch of lem-trf-local-term-locality, Proof (1)--(2), via the strictification input to Temkin Remark 4.5.2: Nodal curves are etale local on the source. This is a general local tool for the explicit symmetric blowup calculation, not an alternate trace-formula route. Auxiliary input to the source-locality proof of Stacks Tag 0C5D: Tag 036N, lemma-locally-finite-presentation-fppf-local-source. Singleton source-cover descent used after replacing the family by a point-indexed coproduct; proved source-library Tag 02KL.",
+   "via": [
+    "lem-trf-lfp-fppf-source-locality",
+    "lem-trf-nodal-family-etale-source-locality",
+    "lem-trf-valuation-symmetric-nodal-blowup",
+    "lem-trf-valuation-marked-strictification",
+    "lem-trf-valuation-common-strict-semistable-refinement",
+    "lem-trf-valuation-semistable-dominates-stable",
+    "lem-trf-stable-modification-uniqueness-normal",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation",
+  "declaration": "AlgebraicGeometry.LocallyOfFinitePresentation.of_comp_of_flat_of_surjective",
+  "statement": "theorem LocallyOfFinitePresentation.of_comp_of_flat_of_surjective {X' X S : Scheme.{u}}\n    (u : X' ⟶ X) (f : X ⟶ S) [Flat u] [Surjective u] [LocallyOfFinitePresentation u]\n    [LocallyOfFinitePresentation (u ≫ f)] : LocallyOfFinitePresentation f",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261026T083550-L-2386067",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261026T083550-L-2386067",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,348 @@
+{
+ "id": "lem-sfb-smooth-generic-nodal-trait-normality",
+ "kind": "statement",
+ "title": "Normality and integrality of a smooth-generic nodal trait family",
+ "statement": "Let $A$ be a discrete valuation ring with fraction field $F$, uniformizer $\\pi$, residue field $k$, and $T=\\operatorname{Spec}A$ [def-sc-discrete-valuation-ring, def-weil-affine-spectrum]. Let $f:X\\to T$ be flat and finitely presented [def-weil-flat-morphism, def-sbc-locally-finite-presentation]. Suppose $X_F$ is smooth [def-sbc-smooth-morphisms]. Suppose each nonempty geometric fibre is reduced of pure dimension one, and every nonsmooth closed point of such a fibre over an algebraically closed field $\\Omega$ has completed local ring $\\Omega[[u,v]]/(uv)$ [def-weil-geometric-fibre, def-pc-reduced-scheme, def-weil-pure-dimension, def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series]. Then every local ring of $X$ is an integrally closed domain. The open subscheme $X_F$ is dense in $X$. If $X_F$ is integral, then $X$ is integral [def-pc-integral-scheme]. Neither projectivity nor connectedness of the geometric fibres is assumed.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0CBY (lemma-etale-local-structure-nodal-family), specialized to a DVR with smooth generic fibre; normality follows from the xy=pi^n local calculation. Agent-formulated global consequence, carrying returned Step 1; supporting de Jong, Lemma 3.13 proof, printed p.609 (primary PDF read online; archival PDF WANTED)."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-smooth-morphisms",
+  "def-weil-geometric-fibre",
+  "def-pc-reduced-scheme",
+  "def-weil-pure-dimension",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-pc-integral-scheme",
+  "def-sfb-nodal-geometric-fibre-local-rings"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-nodal-trait-finite-singular-charts] with $R=A$: its flatness, finite presentation, smooth generic fibre and geometric nodal-fibre hypotheses are exactly ours, including empty or disconnected fibres. Thus $X$ is Noetherian and the nonsmooth locus $Z$ is a finite set of closed special-fibre points. Every point outside $Z$ has a regular total-space local ring, and every $z\\in Z$ has $\\dim\\mathcal O_{X,z}=2$. Consequently every point with local dimension at most one lies outside $Z$ and is regular. We use the nonsmooth locus here, not the potentially smaller nonregular locus: a node with chart exponent $n=1$ can already be regular. These conclusions are clauses of the cited statement; no completion or excellence assertion is needed.",
+   "uses": [
+    "lem-sfb-nodal-trait-finite-singular-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tags 0CDD (lemma-etale-local-at-worst-nodal) and 0CDE (lemma-blowup-at-worst-nodal), first proof paragraph"
+   }
+  },
+  {
+   "text": "The ordinary special fibre $X_k$ is reduced: apply [lem-trf-geometric-reducedness-algebraic-closure-test] to $X_k/k$, whose base change to an algebraic closure is reduced by hypothesis, and then take the identity field extension $k/k$. This includes the empty special fibre. By [def-pc-reduced-scheme], every local ring of $X_k$ is reduced.",
+   "uses": [
+    "lem-trf-geometric-reducedness-algebraic-closure-test",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 035X (lemma-geometrically-reduced), algebraic-closure test; reducedness for the identity extension"
+   }
+  },
+  {
+   "text": "Put $W=X\\setminus Z$. It is locally Noetherian and all its local rings are regular by step 1; [def-weil-regular-scheme] therefore makes $W$ regular. At $x\\in W$, choose a regular Noetherian affine neighbourhood $V=\\operatorname{Spec}C\\subset W$, as that definition permits. By [lem-weil-pbc-regular-ring-normal], $C$ is normal, so [lem-weil-pbc-serre-criterion-normal] gives $(S_2)$ for $C$. The identification $C_{\\mathfrak p_x}\\simeq\\mathcal O_{X,x}$ of [lem-weil-pbc-affine-open-stalk-localization] transfers its depth bound: $\\operatorname{depth}\\mathcal O_{X,x}\\ge\\min(2,\\dim\\mathcal O_{X,x})$. Here the stalk is unchanged on the open neighbourhood $V$, directly from restriction of the structure sheaf.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-regular-ring-normal",
+    "lem-weil-pbc-serre-criterion-normal",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0567 (lemma-regular-normal), Tag 031S (lemma-criterion-normal); properties.tex Tags 02IS/02IT (definition-regular, lemma-characterize-regular)"
+   }
+  },
+  {
+   "text": "Fix $z\\in Z$ and set $S=\\mathcal O_{X,z}$ and $Q=S/\\pi S$. Flatness [def-weil-flat-morphism] gives a flat local map $A\\to S$; both rings are Noetherian. By [lem-sbc-scheme-fibre-stalk-quotient], $Q$ is the actual local ring of $X_k$ at $z$, so is reduced by step 2. Apply the local form of [lem-weil-pbc-flat-height-formula] to $A\\to S$ at their maximal ideals. Since $\\dim A=1$ [def-sc-discrete-valuation-ring] and $\\dim S=2$ by step 1, it gives $\\dim Q=1$. By [lem-weil-pbc-serre-criterion-reduced], the reduced Noetherian local ring $Q$ satisfies $(S_1)$ and hence has depth at least one. The uniformizer $\\pi$ is a nonzerodivisor in the domain $A$ and $A/\\pi A=k\\ne0$, so it is a regular sequence of length one and $\\operatorname{depth}A\\ge1$ [def-weil-pbc-depth, def-weil-pbc-regular-sequence]. Now [lem-weil-pbc-flat-local-depth-formula] yields $\\operatorname{depth}S=\\operatorname{depth}A+\\operatorname{depth}Q\\ge2$. This treats every point not covered by step 3.",
+   "uses": [
+    "def-weil-flat-morphism",
+    "lem-sbc-scheme-fibre-stalk-quotient",
+    "lem-weil-pbc-flat-height-formula",
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-serre-criterion-reduced",
+    "def-weil-pbc-depth",
+    "def-weil-pbc-regular-sequence",
+    "lem-weil-pbc-flat-local-depth-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00ON (lemma-dimension-base-fibre-equals-total), 031R (lemma-criterion-reduced), 0337 (lemma-apply-grothendieck); schemes.tex Tag 0HA1 (lemma-local-ring-fibre)"
+   }
+  },
+  {
+   "text": "Choose any affine open $U=\\operatorname{Spec}B$ in a Noetherian affine cover of $X$. Under [lem-weil-pbc-affine-open-stalk-localization], all $B_{\\mathfrak p}$ are the corresponding local rings of $X$. Step 1 makes them regular whenever $\\dim B_{\\mathfrak p}\\le1$, and steps 3--4 give their depth bounds $\\operatorname{depth}B_{\\mathfrak p}\\ge\\min(2,\\dim B_{\\mathfrak p})$. These are exactly $(R_1)$ and $(S_2)$ [def-weil-pbc-serre-conditions-rk-sk]. Apply [lem-weil-pbc-serre-criterion-normal] to the Noetherian ring $B$: every $B_{\\mathfrak p}$ is an integrally closed domain. The affine cover and its stalk identifications prove the first conclusion for every point of $X$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-pbc-serre-conditions-rk-sk",
+    "lem-weil-pbc-serre-criterion-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 031S (lemma-criterion-normal), implication (R1)+(S2) implies normality; Tag 031P (definition-conditions)"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-flat-lfp-open], $f$ is open. If $O\\subset X$ is any nonempty open, then $f(O)$ is a nonempty open of $\\operatorname{Spec}A$. Such an open contains its generic point: the only points of the spectrum of a DVR are $(0)$ and $(\\pi)$, and every open containing $(\\pi)$ contains $(0)$. Thus $O$ meets the generic fibre. Since $\\operatorname{Spec}F=D(\\pi)\\subset\\operatorname{Spec}A$, its inverse image is exactly the open subscheme $X_F$, and we have proved that $X_F$ is dense. If $X$ is empty the density assertion is immediate.",
+   "uses": [
+    "lem-weil-pbc-flat-lfp-open",
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01UA (lemma-fppf-open); elementary topology of the spectrum of a DVR"
+   }
+  },
+  {
+   "text": "Finally assume $X_F$ is integral. It is nonempty and irreducible by [def-pc-integral-scheme]. For closed subsets $C,D\\subset X$ with $X=C\\cup D$, the intersections with $X_F$ give a closed cover of $X_F$, so irreducibility gives $X_F\\subset C$ or $X_F\\subset D$. Density from step 6 then gives $X=C$ or $X=D$, proving that $X$ is irreducible and nonempty. Every local ring of $X$ is a domain by step 5, hence reduced: a nilpotent element in a domain is zero. Thus $X$ is reduced [def-pc-reduced-scheme], and the equivalence in [def-pc-integral-scheme] proves that $X$ is integral. No connectedness or projectivity has entered the argument.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01ON (lemma-characterize-integral); elementary dense-irreducible-subspace argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-nodal-trait-finite-singular-charts",
+  "lem-trf-geometric-reducedness-algebraic-closure-test",
+  "def-pc-reduced-scheme",
+  "def-weil-regular-scheme",
+  "lem-weil-pbc-regular-ring-normal",
+  "lem-weil-pbc-serre-criterion-normal",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-weil-flat-morphism",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-weil-pbc-flat-height-formula",
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-serre-criterion-reduced",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-regular-sequence",
+  "lem-weil-pbc-flat-local-depth-formula",
+  "def-weil-pbc-serre-conditions-rk-sk",
+  "lem-weil-pbc-flat-lfp-open",
+  "def-pc-integral-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Assembly of the existing nodal-chart input (models.tex 0CDD/0CDE) with Serre criteria 031R/031S, flat height formula 00ON and flat local depth formula 0337; density through morphisms.tex 01UA."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "nodal|semistable|normal.*trait",
+   "results": "{\"t\": \"2026-10-22T06:07:46Z\", \"tool\": \"grep\", \"query\": \"nodal|semistable|normal.*trait\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization constructions and integrality of Weierstrass coefficients do not prove normality of a flat nodal trait family or density of its generic fibre."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsNormal, AlgebraicGeometry.Flat",
+   "results": "{\"t\": \"2026-10-22T06:07:46Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsNormal, AlgebraicGeometry.Flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsNormal'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization constructions and integrality of Weierstrass coefficients do not prove normality of a flat nodal trait family or density of its generic fibre."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat finitely presented family of nodal curves over a discrete valuation ring with smooth generic fibre has normal total space, integral if its generic fibre is integral",
+   "results": "{\"t\": \"2026-10-22T06:07:51Z\", \"tool\": \"leanfinder\", \"query\": \"A flat finitely presented family of nodal curves over a discrete valuation ring with smooth generic fibre has normal total space, integral if its generic fibre is integral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.instIsIntegralOfIsMinimal\", \"WeierstrassCurve.integralModel\", \"WeierstrassCurve.IsGoodReduction\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\"], \"digest\": \"75ec8e8572258615\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization constructions and integrality of Weierstrass coefficients do not prove normality of a flat nodal trait family or density of its generic fibre."
+  },
+  {
+   "tool": "grep",
+   "query": "normal|IsIntegrallyClosed",
+   "results": "{\"t\": \"2026-10-22T06:08:10Z\", \"tool\": \"grep\", \"query\": \"normal|IsIntegrallyClosed\", \"sub\": \"AlgebraicGeometry/Normalization\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization constructions and integrality of Weierstrass coefficients do not prove normality of a flat nodal trait family or density of its generic fibre."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The total space of a flat family of nodal curves over a trait is normal when the generic fibre is smooth",
+   "results": "{\"t\": \"2026-10-22T06:08:10Z\", \"tool\": \"leansearch\", \"query\": \"The total space of a flat family of nodal curves over a trait is normal when the generic fibre is smooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Flat.mk\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.Flat.casesOn\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\"], \"digest\": \"5c86e2f913a97691\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization constructions and integrality of Weierstrass coefficients do not prove normality of a flat nodal trait family or density of its generic fibre."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsNormal\"",
+   "results": "{\"t\": \"2026-10-22T06:08:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsNormal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Aesop.Goal.isNormal\", \"Aesop.NormalizationState.isNormal\", \"Order.IsNormal\", \"Order.IsNormal.id\", \"Order.IsNormal.comp\", \"Order.IsNormal.monotone\", \"Order.IsNormal.strictMono\", \"Order.IsNormal.dirSupClosed_range\"], \"digest\": \"c8ea3781ee4a4d29\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization constructions and integrality of Weierstrass coefficients do not prove normality of a flat nodal trait family or density of its generic fibre."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normality of a semistable arithmetic surface and integrality by density of the integral generic fibre",
+   "results": "{\"t\": \"2026-10-22T06:08:21Z\", \"tool\": \"leanfinder\", \"query\": \"Normality of a semistable arithmetic surface and integrality by density of the integral generic fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\"], \"digest\": \"50da5e6d10ed63f8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization constructions and integrality of Weierstrass coefficients do not prove normality of a flat nodal trait family or density of its generic fibre."
+  },
+  {
+   "tool": "grep",
+   "query": "normal|IsIntegrallyClosed",
+   "results": "{\"t\": \"2026-10-22T06:09:01Z\", \"tool\": \"grep\", \"query\": \"normal|IsIntegrallyClosed\", \"sub\": \"AlgebraicGeometry/Normalization.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"15\", \"17\", \"19\", \"20\", \"24\"], \"digest\": \"e2f17bf45c1b6886\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization constructions and integrality of Weierstrass coefficients do not prove normality of a flat nodal trait family or density of its generic fibre."
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|semistable|normal.*trait",
+   "results": "{\"t\": \"2026-10-23T04:24:53Z\", \"tool\": \"grep\", \"query\": \"nodal|semistable|normal.*trait\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: nodal polynomial interpolation, elliptic reduction, normalization of morphisms and smoothness constructors do not assert normality of this supplied total space with density and integrality."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegrallyClosed\", \"Flat\"",
+   "results": "{\"t\": \"2026-10-23T04:24:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsIntegrallyClosed\\\", \\\"Flat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: nodal polynomial interpolation, elliptic reduction, normalization of morphisms and smoothness constructors do not assert normality of this supplied total space with density and integrality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat finitely presented family of nodal curves over a discrete valuation ring with smooth generic fibre is normal and has dense generic fibre",
+   "results": "{\"t\": \"2026-10-23T04:25:03Z\", \"tool\": \"leanfinder\", \"query\": \"A flat finitely presented family of nodal curves over a discrete valuation ring with smooth generic fibre is normal and has dense generic fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.IsGoodReduction\", \"AlgebraicGeometry.ValuativeCommSq.domain\", \"WeierstrassCurve.minimal\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\"], \"digest\": \"244b33b4c0290c1e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: nodal polynomial interpolation, elliptic reduction, normalization of morphisms and smoothness constructors do not assert normality of this supplied total space with density and integrality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The total space of a flat nodal curve family over a trait with smooth generic fibre is normal",
+   "results": "{\"t\": \"2026-10-23T04:26:03Z\", \"tool\": \"leansearch\", \"query\": \"The total space of a flat nodal curve family over a trait with smooth generic fibre is normal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso\"], \"digest\": \"f9566eae9e5b4f72\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: nodal polynomial interpolation, elliptic reduction, normalization of morphisms and smoothness constructors do not assert normality of this supplied total space with density and integrality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normality of a semistable arithmetic surface and integrality of the total space from its integral generic fibre",
+   "results": "{\"t\": \"2026-10-23T04:26:09Z\", \"tool\": \"leanfinder\", \"query\": \"Normality of a semistable arithmetic surface and integrality of the total space from its integral generic fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\"], \"digest\": \"ec771367eed4178e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: nodal polynomial interpolation, elliptic reduction, normalization of morphisms and smoothness constructors do not assert normality of this supplied total space with density and integrality."
+  },
+  {
+   "tool": "grep",
+   "query": "instIsIntegralNormalization|instIsReducedNormalization|IsSmoothOfRelativeDimension",
+   "results": "{\"t\": \"2026-10-23T04:28:23Z\", \"tool\": \"grep\", \"query\": \"instIsIntegralNormalization|instIsReducedNormalization|IsSmoothOfRelativeDimension\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\"], \"digest\": \"a6373df8c0acf59a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: nodal polynomial interpolation, elliptic reduction, normalization of morphisms and smoothness constructors do not assert normality of this supplied total space with density and integrality."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"nodal\"",
+   "results": "{\"t\": \"2026-10-23T04:31:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"nodal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lagrange.nodalWeight\", \"Lagrange.nodal\", \"Lagrange.nodal_monic\", \"Lagrange.natDegree_nodal\", \"Lagrange.degree_nodal\", \"Lagrange.nodal_empty\", \"Lagrange.nodal_ne_zero\", \"Lagrange.eval_nodal_at_node\"], \"digest\": \"6fe8341e0729cc44\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: nodal polynomial interpolation, elliptic reduction, normalization of morphisms and smoothness constructors do not assert normality of this supplied total space with density and integrality."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-trait-rational-domination",
+  "date": "2026-10-22",
+  "group": "Q48"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong Lemma 3.13, rational exceptional-curve geometry before contraction; returned nodal-trait-rational-domination proof Steps 1; geometric argument before contraction",
+   "via": [
+    "lem-sfb-nodal-trait-rational-domination",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-smooth-generic-nodal-trait-normality",
+  "worker": "stage1",
+  "summary": "Repair of the returned head e1ee067427d on the current DAG. Statement and proof route unchanged. Compared every cited node at the returned head and the fresh delivery base 28e9ddea0354: only finite-singular-charts changed, acquiring its reviewed split without changing its statement. Re-read that node and its source; step 1 now explicitly distinguishes nonsmooth from nonregular points and verifies the empty/disconnected hypotheses. Rechecked all citation quotes and the chart dependency closure. Reused existing nodes only; no new nodes or Mathlib leaves.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong Lemma 3.13, rational exceptional-curve geometry before contraction; returned nodal-trait-rational-domination proof Steps 1; geometric argument before contraction; the seven steps supply the normality/density/integrality input without replacing any unit-level step; blueprint_refs ancestor returns None.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-geometric-reducedness-algebraic-closure-test",
+    "why": "Generic local algebra or scheme-local input: its statement gives exactly the fact used in the indicated step. The constructible-finite-Tor unit has no replacement for this geometric prerequisite; no unit-level step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-normal",
+    "why": "Generic local algebra or scheme-local input: its statement gives exactly the fact used in the indicated step. The constructible-finite-Tor unit has no replacement for this geometric prerequisite; no unit-level step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-serre-criterion-normal",
+    "why": "Generic local algebra or scheme-local input: its statement gives exactly the fact used in the indicated step. The constructible-finite-Tor unit has no replacement for this geometric prerequisite; no unit-level step is replaced."
+   },
+   {
+    "node": "lem-sbc-scheme-fibre-stalk-quotient",
+    "why": "Generic local algebra or scheme-local input: its statement gives exactly the fact used in the indicated step. The constructible-finite-Tor unit has no replacement for this geometric prerequisite; no unit-level step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-serre-criterion-reduced",
+    "why": "Generic local algebra or scheme-local input: its statement gives exactly the fact used in the indicated step. The constructible-finite-Tor unit has no replacement for this geometric prerequisite; no unit-level step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-flat-local-depth-formula",
+    "why": "Generic local algebra or scheme-local input: its statement gives exactly the fact used in the indicated step. The constructible-finite-Tor unit has no replacement for this geometric prerequisite; no unit-level step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-geometric-reducedness-algebraic-closure-test",
+  "lem-weil-pbc-regular-ring-normal",
+  "lem-weil-pbc-serre-criterion-normal",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-weil-pbc-serre-criterion-reduced",
+  "lem-weil-pbc-flat-local-depth-formula"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q119-3ea8c9be0",
+  "group": "Q119",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q119-3ea8c9be0 (reviewer sub-agent of L); spot-checked: This is a re-delivery of e1ee0674, which an earlier run PASSed and which was returned only for a rebase. It has no new nodes. Statement, stmt_deps, source, proof_deps and steps 2-7 are byte-identical to e1ee. Only the wording of step 1 and split_report.summary changed: step 1 now names empty and disconnected fibres and separates the nonsmooth locus from the nonregular one (xy=pi is nonsmooth but regular), and both statements are correct. There is no re-split note. Every cited statement was re-read on this snapshot. finite-singular-charts (now split, same statement; models.tex 0CDE l.5974 checked) has exactly the item's hypotheses and gives Noetherian X, a finite closed nonsmooth set Z in X_k, regular stalks on the smooth locus, and dim 2 at closed points of X_k. Step 2: the 035X test with L=k gives X_k reduced. Step 3: off Z the scheme is regular, so normal, so (S2) through the affine stalk identification. Step 4: A->S is flat local; 00ON gives 2=1+dim Q; Q=O_{X_k,z} (0HA1) is reduced, so (S1) gives depth Q>=1; 0337 (algebra.tex l.46374) gives depth S>=2. Step 5: (R1)+(S2) and 031S give integrally closed domain stalks. Step 6: 01UA openness and the DVR spectrum give density of X_F. Step 7: a dense irreducible X_F plus domain stalks give integral X by 01ON. Edge cases checked: empty X, smooth families, xy=pi^n for n=1,2,3, a disjoint union of two smooth families, a non-excellent DVR, and xy=0 (excluded). No duplicate: the rg -L candidates (trf smooth-connected-fibre-normal-integrality, valuation-symmetric-nodal-blowup, strict-semistable-model-normal) differ. Batch-5: lem-trf-geometric-reducedness-algebraic-closure-test (Stacks 035X) and lem-trf-generic-fibre-points-smooth (056V, via chart closure) are generic scheme theory, not the trace formula or Poincare duality nor steps of their proofs, so both are accepted. The six generic tool_uses are accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothGenericNodalTraitNormality",
+  "declaration": "AlgebraicGeometry.normal_dense_integral_of_smooth_generic_nodal_trait",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothGenericNodalTraitNormality.lean",
+  "statement": "theorem normal_dense_integral_of_smooth_generic_nodal_trait (A : CommRingCat.{u}) [IsDomain A] [IsDiscreteValuationRing A] (F : Type u) [Field F] [Algebra A F] [IsFractionRing A F] {X : Scheme.{u}} (f : X ⟶ Spec A) [Flat f] [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] (hgeneric : Smooth (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap A F))))) (hfibres : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ Spec A), IsReduced (pullback (C := Scheme) f g) ∧ (pullback (C := Scheme) f g).IsPureDimension 1 ∧ ∀ z : pullback (C := Scheme) f g, IsClosed ({z} : Set (pullback (C := Scheme) f g)) → ¬ ((NodalFiber.projection f Ω g).stalkMap z).hom.FormallySmooth → Nonempty (NodalFiber.completedLocalRing z ≃+* NodalFiber.powerSeriesQuotient Ω)) : (∀ x : X, IsDomain (X.presheaf.stalk x) ∧ IsIntegrallyClosed (X.presheaf.stalk x)) ∧ DenseRange (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap A F)))) ∧ (IsIntegral (pullback f (Spec.map (CommRingCat.ofHom (algebraMap A F)))) → IsIntegral X)",
+  "branch": "sheaf-dag",
+  "by": "Q16",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0e64c18b4",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Clause check vs node/0CBY/0CDD: DVR A (CommRingCat, IsDomain, IsDiscreteValuationRing) with fraction field F; finitely presented = LocallyOfFinitePresentation+QuasiCompact+QuasiSeparated; smooth generic fibre via pullback.snd; reduced + IsPureDimension 1 geometric fibres over every alg-closed Ω : Type u (vacuous on empty fibres); closed non-formally-smooth stalk points (= Mathlib smoothLocus) with completion ≃+* Ω[[u,v]]/(uv), identical to the landed DvrNodalEtaleLocalForm hypothesis. Conclusions: IsDomain ∧ IsIntegrallyClosed for every stalk, DenseRange of pullback.fst, IsIntegral X_F → IsIntegral X; no projectivity or connectedness assumed. Universes consistent and non-vacuous. Statement verbatim (script). Node diff vs live: lean only, plus stmt_dep def-sfb-nodal-geometric-fibre-local-rings (landed 2026-10-22, used in the signature). No duplicate (DvrNodalChartBlowupCalculus.smooth_properties covers only smooth f). Docstrings carry source and blueprint and all 7 steps; sorry only; all imported modules exist; both report sections present. No compile (no file changed)."
+ }
+}

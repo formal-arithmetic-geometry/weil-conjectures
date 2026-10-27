@@ -93,7 +93,43 @@
   "thm-pc-semicontinuity-base-change"
  ],
  "proof_split_by": "labels",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.Modules.exists_opens_range_subset_iff_isFiniteLocallyFreeInDegree",
+    "AlgebraicGeometry.Scheme.Modules.exists_forall_hFiber_eq_zero"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.exists_opens_range_subset_iff_isFiniteLocallyFreeInDegree",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectLocusOfRank",
+     "lines": [
+      199,
+      222
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.exists_forall_hFiber_eq_zero",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Semicontinuity",
+     "lines": [
+      248,
+      294
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-perfect",
  "split_report": {
@@ -162,35 +198,40 @@
   "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
   "statement": "Let\n$f:X\\to S$ be a proper morphism of finite presentation and let $\\mathcal{F}$ be an\n$\\mathcal{O}_X$-module of finite presentation, flat over $S$. Fix integers $i,r\\ge0$.\nThen there exists an open subscheme $U\\subset S$, namely the set $U_{i,r}$ of points\n$s\\in S$ with $H^q(X_s,\\mathcal F_s)=0$ for $q\\neq i$ and\n$\\dim_{\\kappa(s)}H^i(X_s,\\mathcal F_s)=r$, such that a morphism\n$T\\to S$ factors through $U$ if and only if $Rf_{T,*}\\mathcal{F}_T$ is isomorphic\nto a finite locally free $\\mathcal{O}_T$-module of rank $r$ placed in degree $i$,\nthat is, $R^qf_{T,*}\\mathcal F_T=0$ for $q\\neq i$ and $R^if_{T,*}\\mathcal F_T$ is\nfinite locally free of rank $r$. Here $f_T:X_T\\to T$ is the base change of $f$ and\n$\\mathcal F_T$ the pullback of $\\mathcal F$ to $X_T$.",
   "proof": [
    {
-    "text": "Put $E=Rf_*\\mathcal{F}\\in D(\\mathcal{O}_S)$ (see [def-pc-derived-category]).\nBy [lem-pc-rf-perfect-base-change], $E$ is perfect and for every\n$g:T\\to S$ the canonical map $Lg^*E\\to Rf_{T,*}\\mathcal{F}_T$ is an\nisomorphism, with $Lg^*$ the [def-pc-derived-pullback]. For $s\\in S$\nwrite $\\beta^q(s)=\\dim_{\\kappa(s)}H^q(X_s,\\mathcal{F}_s)$.",
+    "text": "For $s\\in S$ write $\\beta^q(s)=\\dim_{\\kappa(s)}H^q(X_s,\\mathcal{F}_s)$, and let\n$U\\subseteq S$ be the set of points $s$ with $\\beta^q(s)=0$ for all $q\\neq i$\nand $\\beta^i(s)=r$. Base changes are as in [def-pc-base-change].",
     "uses": [
-     "def-pc-derived-category",
-     "lem-pc-rf-perfect-base-change",
-     "def-pc-derived-pullback"
+     "def-pc-base-change"
     ],
     "elementary": false
    },
    {
-    "text": "*The locus.* Let $U\\subseteq S$ be the set of points $s$ with\n$\\beta^q(s)=0$ for all $q\\neq i$ and $\\beta^i(s)=r$. We show $U$ is\nopen. Fix $t\\in S$. As in the proof of\n[thm-pc-semicontinuity-base-change], by [def-pc-perfect-complex] there is\nan affine open $V=\\operatorname{Spec}(A)\\ni t$ on which $E|_V$ is\nrepresented by a bounded complex\n$K:\\;0\\to K^a\\to\\cdots\\to K^b\\to0$ with $K^q\\cong A^{n_q}$, and for\n$s\\in V$, since the terms of $K$ are flat,\n[lem-pc-flat-complex-derived-pullback] and the base-change isomorphism\ngive\n\n$$\nH^q(X_s,\\mathcal{F}_s)\\cong H^q(K\\otimes_A\\kappa(s)).\n$$\n\nIn particular $\\beta^q\\equiv0$ on $V$ for $q\\notin[a,b]$, so on $V$ only\nthe finitely many conditions with $q\\in[a,b]$ matter. By\n[thm-pc-semicontinuity-base-change](2) each $\\beta^q$ is upper\nsemicontinuous, so\n\n$$\nW=\\{s\\in V:\\ \\beta^q(s)\\le0\\ (q\\neq i,\\ a\\le q\\le b),\\ \\beta^i(s)\\le r\\}\n$$\n\nis a finite intersection of open subsets of $V$, hence open. For $s\\in W$\nthe complex $K\\otimes_A\\kappa(s)$ of finite dimensional vector spaces has\ncohomology only in degree $i$, so\n\n$$\n(-1)^i\\beta^i(s)=\\sum_q(-1)^q\\dim_{\\kappa(s)}H^q(K\\otimes_A\\kappa(s))\n=\\sum_q(-1)^qn_q ,\n$$\n\nwhich does not depend on $s\\in V$. Hence $\\beta^i$ is constant on $W$,\nand $U\\cap V$ is either $W$ or empty. In either case it is open, and\nsince such $V$ cover $S$, $U$ is open.",
+    "text": "*The local model.* Fix $t\\in S$ and an affine open $S_0\\ni t$. Applying\n[lem-pc-rf-perfect-base-change](1) to the restriction\n$f^{-1}(S_0)\\to S_0$ of $f$, which is again proper of finite presentation\nwith $\\mathcal F|_{f^{-1}(S_0)}$ of finite presentation and flat over $S_0$,\ngives an open $V\\ni t$ contained in $S_0$ and a bounded complex $P$ of finite\nfree $\\mathcal{O}_V$-modules, concentrated in degrees $[0,d]$, such that for\nevery morphism $g:T\\to V$, with $f_T:X_T\\to T$ and $\\mathcal F_T$ the base\nchanges of $f$ and $\\mathcal F$ along $T\\to V\\subseteq S$,\n\n$$\n\\mathcal H^q(g^*P)\\cong R^qf_{T,*}\\mathcal F_T\\qquad(q\\ge0).\n$$\n\nFor $s\\in V$ and $g=g_s:\\operatorname{Spec}\\kappa(s)\\to V$ the target is a\npoint, on which the higher direct images are the cohomology groups of the\nfibre; hence $H^q(X_s,\\mathcal F_s)\\cong H^q(P\\otimes\\kappa(s))$ for all $q$\n(both sides vanish for $q<0$ and $q>d$).",
     "uses": [
-     "thm-pc-semicontinuity-base-change",
-     "def-pc-perfect-complex",
-     "lem-pc-flat-complex-derived-pullback"
+     "lem-pc-rf-perfect-base-change"
     ],
     "elementary": false
    },
    {
-    "text": "*The functorial characterization.* Let $g:T\\to S$. Both sides of the\nclaimed equivalence are local on $T$: $g$ factors through the open $U$ iff\nit does so over each member of an open cover of $T$, and the vanishing and\nlocal freeness of the $R^qf_{T,*}\\mathcal F_T$ are local on $T$, while\nhigher direct images are compatible with restriction to opens of $T$. So\nwe may assume that $g$ maps $T$ into one of the affine opens\n$V=\\operatorname{Spec}(A)$ above, on which $E|_V$ is represented by the\nbounded complex $K$ of finite free modules; padding $K$ with zero terms we\nmay assume $a\\le i$, so that after shifting by $-a$ it is concentrated in\ndegrees $[0,b-a]$ and $i$ becomes $i-a\\ge0$. Let $U_K\\subseteq V$ be the\nopen subscheme attached to this complex and to $i-a,r$ by\n[lem-pc-perfect-locus]; undoing the shift, a morphism into $V$ factors\nthrough $U_K$ iff the pullback of $K$ is a finite locally free module of\nrank $r$ placed in degree $i$. A point $s\\in V$ lies in $U_K$ iff\n$g_s:\\operatorname{Spec}\\kappa(s)\\to V$ factors through $U_K$, i.e. iff\n$K\\otimes_A\\kappa(s)$, which computes $Lg_s^*E\\cong Rf_{s,*}\\mathcal{F}_s$,\nis isomorphic to $\\kappa(s)^{r}$ placed in degree $i$. As\n$\\operatorname{Spec}\\kappa(s)$ is a point, the cohomology of\n$Rf_{s,*}\\mathcal{F}_s$ is $H^*(X_s,\\mathcal{F}_s)$, and a complex over a\nfield is quasi-isomorphic to the sum of its shifted cohomology groups; so\nthis holds iff $s\\in U$. Thus $U\\cap V=U_K$. By [lem-pc-perfect-locus],\n$g:T\\to V$ factors through $U_K=U\\cap V$ iff $Lg^*E$ is isomorphic to a\nfinite locally free $\\mathcal{O}_T$-module of rank $r$ placed in degree\n$i$, i.e. by the base-change isomorphism iff $Rf_{T,*}\\mathcal{F}_T$ is;\nsince $Rf_{T,*}\\mathcal F_T$ has cohomology sheaves\n$R^qf_{T,*}\\mathcal F_T$, this is the condition of the statement.\nOn $U$ itself this gives (Nakayama, as in [lem-pc-perfect-locus]) that\n$Rf_*\\mathcal{F}|_U$ is locally a free module of rank $r$ in degree $i$;\nno reducedness of $S$ is needed.",
+    "text": "*The criterion over $V$.* Let $U_P\\subseteq V$ be the open subscheme attached\nto $P$ and to $i,r$ by [lem-pc-perfect-locus]: a morphism $g:T\\to V$ factors\nthrough $U_P$ if and only if $\\mathcal H^q(g^*P)=0$ for $q\\neq i$ and\n$\\mathcal H^i(g^*P)$ is finite locally free of rank $r$. Since $P$ lives in\ndegrees $\\ge0$, the local model turns this into: $R^qf_{T,*}\\mathcal F_T=0$ for\n$q\\neq i$ and $R^if_{T,*}\\mathcal F_T$ is finite locally free of rank $r$. For\n$g=g_s$ ($s\\in V$) a finite locally free module of rank $r$ over the point\n$\\operatorname{Spec}\\kappa(s)$ is an $r$-dimensional vector space, so\n$s\\in U_P$ if and only if $\\beta^q(s)=0$ for $q\\neq i$ and $\\beta^i(s)=r$,\ni.e. $s\\in U$. Thus $U\\cap V=U_P$, an open subset of $V$.",
     "uses": [
      "lem-pc-perfect-locus"
     ],
     "elementary": false
+   },
+   {
+    "text": "*Globalisation.* Such opens $V$ cover $S$, so $U$ is open. Let $g:T\\to S$ be a\nmorphism. Whether $g$ factors through $U$ is local on $T$, and so is the\ncondition on the $R^qf_{T,*}\\mathcal F_T$, since higher direct images are\ncompatible with restriction to opens of $T$. Cover $T$ by the opens\n$g^{-1}(V)$ for the $V$ above. Over $g^{-1}(V)$ the restriction of $f_T$ is\nthe base change of $f$ along $g^{-1}(V)\\to V\\subseteq S$, and by the\ncriterion over $V$, $g|_{g^{-1}(V)}$ factors through $U\\cap V=U_P$ if and only\nif the higher direct images of $\\mathcal F_T$ restricted over $g^{-1}(V)$\nvanish outside degree $i$ and are finite locally free of rank $r$ in degree\n$i$. Hence $g$ factors through $U$ if and only if $R^qf_{T,*}\\mathcal F_T=0$\nfor $q\\neq i$ and $R^if_{T,*}\\mathcal F_T$ is finite locally free of rank $r$,\nwhich is the claim. No reducedness of $S$ is needed.",
+    "uses": [],
+    "elementary": null
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

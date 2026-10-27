@@ -1,0 +1,144 @@
+{
+ "id": "lem-sp-coefficient-unit-tower-normalized",
+ "kind": "statement",
+ "title": "The strict coefficient unit tower is normalized",
+ "statement": "Fix a prime ell and a finite extension E of Q_ell. Let R_n = O_E/(ell^(n+1)) for n in N. For any scheme T, let b be a section-preserving sequence-site realization of the ordinary abelian category of strict coefficient towers, and q the section-preserving evaluation and adjunction-normalized scalar coordinates [def-sp-tower-shriek-data, def-sp-coefficient-tower-shriek-interfaces]. Let U be the degree-zero single complex of the actual coefficient module on the ringed sequence site, whose levels are the constant quotient rings R_n and whose transitions are their quotient homomorphisms [def-sp-tower-class-systems, def-sp-tower-class-coefficients]. The inverse derived realization of U is normalized [sk-def-sp-normalized-towers]: for every m <= n its canonical derived reduction, from its n-th evaluation extended to R_m to its m-th evaluation, is an isomorphism. This statement imposes no geometric finiteness or smoothness hypothesis on T and no flatness on R_m over R_n.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+  "place": "(1), the actual rank-one coefficient tower, and (3), normalization of its derived coefficient reductions; finite-orientation-reduction proof step 6, first two sentences"
+ },
+ "stmt_deps": [
+  "def-sp-tower-shriek-data",
+  "def-sp-coefficient-tower-shriek-interfaces",
+  "def-sp-tower-class-systems",
+  "def-sp-tower-class-coefficients",
+  "sk-def-sp-normalized-towers"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate the inverse ordinary realization of the actual coefficient module. Compose the inverse ordinaryEvaluation comparison, the realization counit and the identity identification of the evaluated coefficient ring to identify each level with its regular module. Coordinates.sections also makes the inverse comparison fix sections. The sections and transitions fields identify a strict transition with the horizontal restriction in the realized sequence-site module. Naturality of the realization counit carries it to the horizontal restriction of the coefficient unit. Reconstructing the coefficient sequence from its adjacent arrows has an identity-component natural transformation to the original ring sequence, so that horizontal restriction is exactly its quotient ring homomorphism. These are ordinary section computations, including identity arrows.",
+   "uses": [
+    "det-sp-coefficient-towers-abelian",
+    "def-sp-tower-shriek-data",
+    "def-sp-coefficient-tower-shriek-interfaces",
+    "def-sp-tower-class-systems"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any ring sheaf map phi and any left adjoint F to restriction of scalars, transpose the canonical map from the source regular module to the restricted target regular module. This transpose is invertible: the adjunction identifies precomposition by it, on maps to any module N, with evaluation at 1 on global sections, and phi(1)=1. Thus the induced coyoneda map is bijective. By ordinaryReduction_eq, naturality of the scalar adjunction and the preceding transition equation, conjugating ordinaryReduction by the level identifications gives this invertible transpose.",
+   "uses": [
+    "det-sp-coefficient-towers-abelian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact evaluation sends the degree-zero single complex of the inverse ordinary coefficient module to the single of its evaluated regular module, up to the standard singleMapHomologicalComplex comparison. The regular module is the tensor unit and hence flat; the other terms vanish. Transfer categorical flatness to site flatness through siteSheafTensorRightIso and apply the bounded-above flat K-flat criterion. No flatness of a quotient over the larger coefficient ring is used.",
+   "uses": [
+    "def-pur-site-sheaf-tensor-presentation-data",
+    "lem-weil-pbc-independent-bounded-flat-kflat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The scalar model computes on this evaluated K-flat complex, so its epsilon comparison is invertible. The chain map of ordinaryReduction is invertible termwise: degree zero is the ordinary isomorphism above and the other degrees are maps between zero objects. reduction_rep therefore expresses the derived reduction at the localized single complex as a composite of isomorphisms. Finally transport along the derived-realization unit and its single-functor comparison followed by the ordinary counit. This is precisely the prescribed inverse derived realization of the coefficient unit.",
+   "uses": [
+    "det-sp-coefficient-towers-abelian",
+    "def-sp-tower-shriek-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-sp-coefficient-towers-abelian",
+  "def-sp-tower-shriek-data",
+  "def-sp-coefficient-tower-shriek-interfaces",
+  "def-sp-tower-class-systems",
+  "def-pur-site-sheaf-tensor-presentation-data",
+  "lem-weil-pbc-independent-bounded-flat-kflat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+  "place": "(1) and (3); U1 proves the ordinary section-coordinate calculation, the scalar adjunct isomorphism by unitHomEquiv, and the K-flat reduction representative calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The derived coefficient unit tower is normalized: extension of scalars from each quotient ring to a smaller quotient sends the unit to the unit",
+   "results": "8 hits, concerning normalize_coe_units, normUnit, normed scalar restriction, factorPowSucc.isUnit_of_isUnit_image, and polynomial normUnit; none concerns derived module towers.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension of constant coefficient unit has invertible reduction maps in a strict coefficient tower",
+   "results": "8 hits concerning scalar towers of invertible algebra elements, MvPolynomial units, and standard etale pairs; no strict derived coefficient tower result.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIso\", CategoryTheory.Functor.map",
+   "results": "Generic map_isIso and reflection lemmas exist. These transport an established isomorphism but do not compute the actual coefficient-unit reductions.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "unit.*reduction|orientation.*coefficient",
+   "results": "Two Mathlib hits, in Submonoid/Units and StackTuringMachine, neither about derived strict towers. Project source searches found no existing theorem computing normalization of this inverse-realized coefficient unit.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteOrientationReduction",
+  "date": "2026-10-26",
+  "group": "E3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-finite-orientation-reduction",
+   "place": "Proof step 6, unit normalization before applying the exceptional reduction equation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientUnitTowerNormalized",
+  "file": "lean/Sheaf/Paper/CoefficientUnitTowerNormalized.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpFiniteOrientation.coefficient_unit_tower_normalized",
+  "statement": "theorem coefficient_unit_tower_normalized\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (b : SpTowerShriek.Base l E) (q : SpTowerCalculus.Coordinates l E b)\n    (T : Scheme.{u}) :\n    IsSpNormalizedTower l E T (q.abelian T)\n      ((SpTowerCalculus.realization l E b T (q.abelian T)).inverse.obj\n        (SpTowerClasses.unit T (SpTowerClasses.Arings l E T)))",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-c9105",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261026T023051-L-517874",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261026T071142-L-3868234",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

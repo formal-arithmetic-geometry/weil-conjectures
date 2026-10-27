@@ -1,0 +1,471 @@
+{
+ "id": "lem-pur-legacy-ordinary-scalar-realization",
+ "kind": "statement",
+ "title": "Ordinary scalar realization of the specified older integral and raw rational stages",
+ "statement": "Fix a finite-field datum $D=(p,a,q,k_0,k)$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, an arbitrary scheme $Y$, finite extensions $E,F$ of $\\mathbf Q_\\ell$, and a $\\mathbf Q_\\ell$-algebra map $i:E\\to F$ [def-weil-l-adic-coefficient-extension]. On the small pro-etale site of $Y$ [def-weil-pbc-proetale-site] put $R_H=\\varprojlim_{n\\geq1}(\\mathcal O_H/\\varpi_H^n)_Y$ for $H=E,F$ [def-weil-completed-integral-coefficients]. Let $\\widehat i:R_E\\to R_F$ be the published completed coefficient map induced on finite quotient projections. Use sheaves of modules, their sheafified tensor product and ordinary unbounded derived categories [def-weil-sheaf-of-modules-category, def-pur-sheaf-tensor-product, def-weil-abstract-derived-category].\n\nLet $\\mathcal A_H^{\\rm old}$ be exactly $\\mathrm{boundedConstructibleDerivedCompleteIntegralCategory}(D,\\ell,\\ell\\ne p,H,Y)$: the full category of derived-complete complexes whose specified $\\mathrm{integralDerivedReduction}$ at every positive level is finite-torsion constructible, with a single finite cohomological support interval independent of the level [def-weil-derived-complete-integral-detailed]. Put $C_H^{\\rm old}=\\mathcal A_H^{\\rm old}[1/\\varpi_H]$, the raw Hom tensor localization with unchanged objects [def-weil-rationalization-karoubi]. Write $I_i$ for the published completed integral scalar extension [def-weil-integral-scalar-extension] restricted to these older categories, and $T_i=\\mathrm{rationalScalarExtension}(D,\\ell,\\ell\\ne p,E,Y,F,i)$.\n\nThe ordinary module-sheaf functor $B_i=R_F\\otimes_{R_E}-$ is additive and exact. Its termwise unbounded derived functor $D(B_i)=\\mathrm{integralOrdinaryDerivedScalar}(\\ell,E,F,i,Y)$ preserves these specified older full subcategories. Denote its restriction by $J_i=\\mathrm{integralConstructibleScalarExtension}(D,\\ell,\\ell\\ne p,E,F,i,Y)$. There is a unique natural isomorphism $\\sigma_i:J_i\\xrightarrow{\\sim}I_i$ with the published quotient-completion normalization: on every flat-term K-flat complex [def-pc-kflat-complex, def-pc-flat-sheaf-modules] representing an object of $\\mathcal A_E^{\\rm old}$, after the completed representative comparison, its component is the ordinary derived factorization followed by the localization of the map to the strict product-cone scalar tower having all finite quotient tensor projections and zero shifted-product coordinate.\n\nThe raw scalar localization of $J_i$ is $S_i=\\mathrm{rationalOrdinaryScalarExtension}(D,\\ell,\\ell\\ne p,E,Y,F,i)$: on objects it is $J_i$ and on pure Hom tensors it sends $f\\otimes e$ to $J_i(f)\\otimes i(e)$. There is a unique natural isomorphism $c_i=\\mathrm{rationalOrdinaryComparison}(D,\\ell,\\ell\\ne p,E,Y,F,i):S_i\\xrightarrow{\\sim}T_i$ whose component at every integral object $K$ is the localized component $\\sigma_{i,K}\\otimes1$, with the specified endpoint equalities. These assertions include identity coefficient maps and do not identify the older integral predicate with any other integral presentation.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sp-scalar-extension/sk-def-sp-scalar-extension-functor.proof.md",
+  "place": "Step (4), ordinary tensor associativity; retained legacy construction in lean/Sheaf/Paper/IntegralScalarExtension.lean:273-320, IntegralScalarExtensionConstructible.lean:473-496 and 650-690, RationalizationKaroubi.lean:253-284."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "def-weil-integral-scalar-extension",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-completed-integral-finite-free] to the published map $\\widehat i$: its finite projection equations are precisely the hypothesis of that theorem. It gives an $R_E$-linear basis of $R_F$ of rank $[F:E]$. A field homomorphism $i$ is injective, so the finite-extension statements written for inclusions apply to its image, with the coefficient identifications induced by $i$. Apply [lem-sfb-derived-finite-free-scalar-coordinates] to this basis. Thus $B_i$ is exact and its termwise functor computes ordinary derived scalar extension on all unbounded complexes. Additivity follows directly from $1\\otimes(f+g)(x)=1\\otimes f(x)+1\\otimes g(x)$ and the tensor relations [def-pur-sheaf-tensor-product]. The exact-functor factorization [lem-weil-pbc-exact-functor-derived-factorization] identifies $D(B_i)(QP)$ with $Q(B_iP)$ by its specified factorization map, which is the published integralOrdinaryDerivedScalar construction.",
+   "uses": [
+    "lem-weil-completed-integral-finite-free",
+    "lem-sfb-derived-finite-free-scalar-coordinates",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1); ordinary tensor realization of blueprint scalar-extension proof (4); exact-functor factorization on cochain representatives."
+   }
+  },
+  {
+   "text": "Take the ambient normalized transformation $\\chi_i:D(B_i)\\to\\text{integralScalarExtension}_i$ of [lem-weil-normalized-scalar-completion]. For $K\\in\\mathcal A_E^{\\rm old}$, derived completeness is its first defining condition [def-weil-derived-complete-integral-detailed], so $\\chi_{i,K}$ is invertible. The completed image belongs to exactly the category defined by the same reductions and the uniform support interval, by [lem-weil-integral-scalar-extension-constructible]. Closure of this full subcategory under isomorphisms [lem-weil-integral-constructible-triangulated] therefore puts $D(B_i)K$ in $\\mathcal A_F^{\\rm old}$. Restrict the ordinary functor to obtain $J_i$. Fullness restricts $\\chi_i$ and its inverse to a natural isomorphism $\\sigma_i:J_i\\cong I_i$. Its good-representative equation is the normalization of $\\chi_i$, with precisely the ordinary factorization, finite quotient tensor projections and zero shifted-product coordinate. This uses the older predicate as stated; it does not pass through another integral constructibility predicate.",
+   "uses": [
+    "lem-weil-normalized-scalar-completion",
+    "def-weil-derived-complete-integral-detailed",
+    "lem-weil-integral-scalar-extension-constructible",
+    "lem-weil-integral-constructible-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 3.5.1 and Lemma 6.8.2(1); restrict the quotient-normalized comparison to the specified full subcategories."
+   }
+  },
+  {
+   "text": "For uniqueness, let $\\sigma'_i$ satisfy the same normalization. Given any $K\\in\\mathcal A_E^{\\rm old}$, [lem-pc-kflat-resolution] supplies a flat-term K-flat representative $P$ and an isomorphism $e:QP\\cong K$. Isomorphism closure [lem-weil-integral-constructible-triangulated] makes $QP$ an object of the older category. The two normalization equations at $P$ have the same right-hand side [lem-weil-normalized-scalar-completion]. Cancel the invertible completed representative comparison to get $\\sigma'_{i,QP}=\\sigma_{i,QP}$. Naturality with $e$ gives $\\sigma'_{i,K}=I_i(e)\\,\\sigma_{i,QP}\\,J_i(e)^{-1}=\\sigma_{i,K}$. Equality of all components proves uniqueness of the natural isomorphism.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-integral-constructible-triangulated",
+    "lem-weil-normalized-scalar-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 3.5.1; good representative normalization and transport along a K-flat resolution."
+   }
+  },
+  {
+   "text": "The ordinary tensor relations give $B_i(af)=i(a)B_i(f)$ for $a\\in\\mathcal O_E$: on a pure tensor both maps send $s\\otimes x$ to $s\\otimes af(x)=i(a)s\\otimes f(x)$ [def-pur-sheaf-tensor-product]. The same equality holds termwise and, since the localization functors are linear for the induced actions [lem-weil-linear-abelian-derived-category], after localization (also for inverses of quasi-isomorphisms); the $\\mathcal O_E$- and $\\mathcal O_F$-actions on the derived categories and on the older full subcategories are those through constant sections [lem-weil-integral-constructible-linear], and $\\widehat i$ sends the constant section $a$ to the constant section $i(a)$ because it commutes with every finite quotient projection. Hence $J_i$ is $\\mathcal O_E$-linear through $i$. In the raw Hom tensor localization [def-weil-linear-scalar-localization, def-weil-rationalization-karoubi], define $S_i(f\\otimes e)=J_i(f)\\otimes i(e)$. This respects the balancing relation because $J_i(af)\\otimes i(e)=J_i(f)\\otimes i(ae)$, and it is additive in both variables. Tensor bilinearity makes it a unique additive map on each Hom group. It preserves identities since $J_i(1)\\otimes i(1)=1\\otimes1$; on two pure tensors preservation of composition is $J_i(gf)\\otimes i(de)=(J_i(g)\\otimes i(d))(J_i(f)\\otimes i(e))$, and distributivity proves it for sums. This is exactly the published rationalOrdinaryScalarExtension, with unchanged raw-localization objects.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-linear-scalar-localization",
+    "def-weil-rationalization-karoubi",
+    "lem-weil-linear-abelian-derived-category",
+    "lem-weil-integral-constructible-linear"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sp-scalar-extension/sk-def-sp-scalar-extension-functor.proof.md",
+    "place": "Step (4), ordinary scalar tensor realization; retained raw rational Hom construction, RationalizationKaroubi.lean:210-264."
+   }
+  },
+  {
+   "text": "Set $c_{i,K}=\\sigma_{i,K}\\otimes1$ in the raw target Hom group [def-weil-rationalization-karoubi, def-weil-linear-scalar-localization]. The published $T_i$ uses $I_i$ on integral objects and $I_i(f)\\otimes i(e)$ on pure Hom tensors. For such a tensor, the naturality square is the integral equation $I_i(f)\\sigma_{i,K}=\\sigma_{i,M}J_i(f)$ multiplied by $i(e)$; every Hom tensor is a finite sum of pure tensors, so additivity gives naturality everywhere. The components $\\sigma_{i,K}^{-1}\\otimes1$ give the inverse, as both composites are $1\\otimes1$. Every raw object is an integral object, so the required component formula fixes the entire natural isomorphism and proves uniqueness, with precisely the specified endpoints. For $i=1_E$ these arguments still use the normalized completeness comparison, not an asserted literal identity for $I_i$; all formulas remain valid. Zero objects and the empty scheme require no separate choices.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sp-scalar-extension/sk-def-sp-scalar-extension-functor.proof.md",
+    "place": "Step (4); retained normalized rational comparison, RationalizationKaroubi.lean:266-284."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-completed-integral-finite-free",
+  "lem-sfb-derived-finite-free-scalar-coordinates",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-normalized-scalar-completion",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-weil-integral-scalar-extension-constructible",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-pc-kflat-resolution",
+  "def-weil-linear-scalar-localization",
+  "def-weil-rationalization-karoubi",
+  "lem-weil-linear-abelian-derived-category",
+  "lem-weil-integral-constructible-linear"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sp-scalar-extension/sk-def-sp-scalar-extension-functor.proof.md",
+  "place": "Step (4), expanded using the existing finite-free and normalized completion nodes, and the retained legacy raw rational construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact ordinary completed coefficient sheaf scalar extension preserves the legacy bounded constructible derived complete category and compares naturally with strict tower scalar extension",
+   "results": {
+    "t": "2026-10-27T07:53:10Z",
+    "tool": "leanfinder",
+    "query": "Exact ordinary completed coefficient sheaf scalar extension preserves the legacy bounded constructible derived complete category and compares naturally with strict tower scalar extension",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AdicCompletion.map_exact",
+     "Condensed.profiniteSolid",
+     "instAbelianCondensedMod",
+     "CondensedMod",
+     "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+     "AdicCompletion.instModuleOfIsScalarTower",
+     "CondensedMod.IsSolid",
+     "LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat"
+    ],
+    "digest": "ea7b9d1149c0ebb6"
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: module completion, condensed modules, ordinary restriction of sheaf scalars and finite-limit evaluation do not give preservation of this specified older predicate or its normalized integral/raw comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.changeOfRings",
+   "results": {
+    "t": "2026-10-27T07:53:10Z",
+    "tool": "loogle",
+    "query": "SheafOfModules.changeOfRings",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'SheafOfModules.changeOfRings'",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: module completion, condensed modules, ordinary restriction of sheaf scalars and finite-limit evaluation do not give preservation of this specified older predicate or its normalized integral/raw comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "integralOrdinaryScalar|rationalOrdinaryComparison|integralConstructibleScalarComparison",
+   "results": {
+    "t": "2026-10-27T07:53:11Z",
+    "tool": "grep",
+    "query": "integralOrdinaryScalar|rationalOrdinaryComparison|integralConstructibleScalarComparison",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: module completion, condensed modules, ordinary restriction of sheaf scalars and finite-limit evaluation do not give preservation of this specified older predicate or its normalized integral/raw comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite field embedding induces exact ordinary scalar extension and a quotient completion comparison on derived complete integral sheaf categories",
+   "results": {
+    "t": "2026-10-27T07:53:11Z",
+    "tool": "leansearch",
+    "query": "Finite field embedding induces exact ordinary scalar extension and a quotient completion comparison on derived complete integral sheaf categories",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Field.embProdEmbOfIsAlgebraic",
+     "Field.Emb",
+     "AbsoluteValue.Completion.instCoe",
+     "NumberField.FinitePlace.embedding",
+     "NumberField.FinitePlace.embedding_apply",
+     "NumberField.Embeddings.instNonemptyRingHomOfIsAlgebraicRatOfIsAlgClosed",
+     "Field.embEquivOfAdjoinSplits",
+     "Field.embEquivOfIsAlgClosed"
+    ],
+    "digest": "d3a4674fbc88c368"
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: module completion, condensed modules, ordinary restriction of sheaf scalars and finite-limit evaluation do not give preservation of this specified older predicate or its normalized integral/raw comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite free coefficient sheaf tensor functor on all modules is exact; its derived functor preserves uniformly bounded constructible reductions and has the canonical comparison to completed tensor",
+   "results": {
+    "t": "2026-10-27T07:53:50Z",
+    "tool": "leanfinder",
+    "query": "A finite free coefficient sheaf tensor functor on all modules is exact; its derived functor preserves uniformly bounded constructible reductions and has the canonical comparison to completed tensor",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondensed.free_internallyProjective_iff_tensor_condition",
+     "LightCondensed.instMonoidalLightCondSetLightCondModFree",
+     "LightCondensed.free_internallyProjective_iff_tensor_condition'",
+     "LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'",
+     "LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition",
+     "LightCondensed.internallyProjective_iff_tensor_condition'",
+     "LightCondensed.internallyProjective_iff_tensor_condition",
+     "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat"
+    ],
+    "digest": "e85f72053eeca045"
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: module completion, condensed modules, ordinary restriction of sheaf scalars and finite-limit evaluation do not give preservation of this specified older predicate or its normalized integral/raw comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRings|extendScalars.*exact|[Pp]reservesFiniteLimits",
+   "results": {
+    "t": "2026-10-27T07:53:50Z",
+    "tool": "grep",
+    "query": "changeOfRings|extendScalars.*exact|[Pp]reservesFiniteLimits",
+    "sub": "Algebra/Category/ModuleCat/Sheaf",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean"
+    ],
+    "digest": "32282fb86b025404"
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: module completion, condensed modules, ordinary restriction of sheaf scalars and finite-limit evaluation do not give preservation of this specified older predicate or its normalized integral/raw comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "integralOrdinaryDerivedScalar|rationalOrdinaryComparison|integralConstructibleScalarExtension",
+   "results": {
+    "t": "2026-10-27T08:13:19Z",
+    "tool": "grep",
+    "query": "integralOrdinaryDerivedScalar|rationalOrdinaryComparison|integralConstructibleScalarExtension",
+    "sub": "Sheaf/Paper",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: project-specific path query returned zero hits; not used as absence evidence. The subsequent Algebra/Category/ModuleCat/Sheaf query corrects the search directory."
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite free ordinary scalar extension exact derived category natural comparison with completed scalar extension",
+   "results": {
+    "t": "2026-10-27T08:13:19Z",
+    "tool": "leansearch",
+    "query": "finite free ordinary scalar extension exact derived category natural comparison with completed scalar extension",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ModuleCat.instIsLeftAdjointExtendScalars",
+     "ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars",
+     "ModuleCat.preservesFiniteLimits_extendScalars_of_flat",
+     "CategoryTheory.Free.ext",
+     "ModuleCat.ExtendRestrictScalarsAdj.homEquiv",
+     "CommRingCat.moduleCatExtendScalarsPseudofunctor",
+     "LinearEquiv.extendScalarsOfIsLocalizationEquiv",
+     "ModuleCat.extendRestrictScalarsAdj"
+    ],
+    "digest": "2c81166c738cabe7"
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: results concern ordinary modules, algebraic adic completion or condensed tensor infrastructure, not this specified older full category and its normalized integral and raw rational comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, IsIso, derived scalar extension, tensor associator",
+   "results": {
+    "t": "2026-10-27T08:13:20Z",
+    "tool": "loogle",
+    "query": "CategoryTheory.Functor, IsIso, derived scalar extension, tensor associator",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'IsIso'",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: query rejected for an unknown identifier; not used as absence evidence. The later ModuleCat.extendScalars query is the valid replacement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ordinary derived scalar extension by a finite free completed coefficient sheaf preserves bounded constructible derived complete integral complexes and compares to strict quotient completion",
+   "results": {
+    "t": "2026-10-27T08:13:21Z",
+    "tool": "leanfinder",
+    "query": "ordinary derived scalar extension by a finite free completed coefficient sheaf preserves bounded constructible derived complete integral complexes and compares to strict quotient completion",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsAdicComplete.StrictMono.of_comp_lift",
+     "BDeRhamPlus",
+     "IsAdicComplete.StrictMono.of_lift",
+     "Condensed.profiniteSolid",
+     "localCohomology.diagram",
+     "AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian",
+     "AdicCompletion.map_exact",
+     "AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply"
+    ],
+    "digest": "c4f46d4d56e8ce33"
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: results concern ordinary modules, algebraic adic completion or condensed tensor infrastructure, not this specified older full category and its normalized integral and raw rational comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRings|extendScalars|PreservesFiniteLimits",
+   "results": {
+    "t": "2026-10-27T08:14:08Z",
+    "tool": "grep",
+    "query": "changeOfRings|extendScalars|PreservesFiniteLimits",
+    "sub": "Algebra/Category/ModuleCat/Sheaf",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean"
+    ],
+    "digest": "32282fb86b025404"
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: results concern ordinary modules, algebraic adic completion or condensed tensor infrastructure, not this specified older full category and its normalized integral and raw rational comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring module sheaves with a finite free ring sheaf is exact and descends termwise to the unbounded derived category",
+   "results": {
+    "t": "2026-10-27T08:14:09Z",
+    "tool": "leanfinder",
+    "query": "Tensoring module sheaves with a finite free ring sheaf is exact and descends termwise to the unbounded derived category",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondensed.instMonoidalLightCondSetLightCondModFree",
+     "LightCondensed.internallyProjective_iff_tensor_condition",
+     "LightCondensed.free_internallyProjective_iff_tensor_condition",
+     "LightCondensed.free_internallyProjective_iff_tensor_condition'",
+     "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+     "LightCondensed.internallyProjective_iff_tensor_condition'",
+     "LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat",
+     "LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition"
+    ],
+    "digest": "095bff0f281b5fba"
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: results concern ordinary modules, algebraic adic completion or condensed tensor infrastructure, not this specified older full category and its normalized integral and raw rational comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalars",
+   "results": {
+    "t": "2026-10-27T08:15:57Z",
+    "tool": "loogle",
+    "query": "ModuleCat.extendScalars",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "ModuleCat.extendScalars",
+     "ModuleCat.instIsLeftAdjointExtendScalars",
+     "ModuleCat.extendRestrictScalarsAdj",
+     "ModuleCat.extendScalarsId",
+     "ModuleCat.ExtendRestrictScalarsAdj.Counit.map",
+     "ModuleCat.ExtendRestrictScalarsAdj.Unit.map",
+     "ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars",
+     "ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars"
+    ],
+    "digest": "75b3fad4f701d582"
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: results concern ordinary modules, algebraic adic completion or condensed tensor infrastructure, not this specified older full category and its normalized integral and raw rational comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-legacy-rational-tensor-pentagon",
+  "date": "2026-10-27",
+  "group": "NS"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-algebraically-closed-coefficients",
+   "place": "Retained owning proof argument 5: ordinary tensor realization and normalized completion comparisons needed before the untransported pentagon used in AlgebraicallyClosedCoefficients.lean:75-91.",
+   "via": [
+    "lem-pur-legacy-rational-tensor-pentagon",
+    "lem-pur-general-legacy-stage-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-pur-legacy-ordinary-scalar-realization",
+  "worker": "stage1",
+  "summary": "Reused existing finite-free scalar, exact-derived coordinate, normalized completion and completed constructibility statements. Proved restriction, representative uniqueness, semilinear raw Hom functor laws and the normalized raw comparison explicitly. Preserved the older predicate, arbitrary scheme, identity maps and all imported metadata; no new nodes.",
+  "blueprint": "Retained owning argument 5 of def-weil-algebraically-closed-coefficients, via lem-pur-general-legacy-stage-coherence and lem-pur-legacy-rational-tensor-pentagon: supplies their ordinary realization and fixed completion comparisons. Latest scalar-extension-functor proof (4) gives the ordinary tensor route; no equal blueprint node found by ordinary scalar / quotient-completion searches.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-derived-finite-free-scalar-coordinates",
+    "why": "Generic exact tensor computation for a specified finite-free ring sheaf, used after the unit's own completed integral finite-freeness theorem; no geometric unit step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic exact-functor factorization fixes the published termwise derived representative comparison; the unit has no separate general localization factorization statement."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic existence of a good representative is needed only for uniqueness of the unit's normalized scalar comparison; no geometric proof route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-derived-finite-free-scalar-coordinates",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-pc-kflat-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NS-b3df460ab",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-b3df460ab (reviewer sub-agent of L); spot-checked: FIX: the mathematics is correct and complete; two missing citations are repaired in fixes/dag/nodes/sec-smooth-purity/lem-pur-legacy-ordinary-scalar-realization.json. This is a first split (no repair note), the statement is unchanged from its creator lem-pur-legacy-rational-tensor-pentagon, and there are no new nodes. Statement checked clause by clause against the retained Lean: IntegralScalarExtension.lean:273-309; IntegralScalarExtensionConstructible.lean:473-496 and 650-680; RationalizationKaroubi.lean:200-284; IntegralOperationsScalarComparisons.lean:224-248, where the source of scalarCompletion is exactly integralOrdinaryDerivedScalar with the same good-complex normalization. It keeps the older predicate def-weil-derived-complete-integral-detailed, arbitrary Y, i a map and the raw localization with no Karoubi completion. Step 1: the hypothesis of lem-weil-completed-integral-finite-free (finite-projection equations) is the published map, its product gives the basis for lem-sfb-derived-finite-free-scalar-coordinates, and the exact-functor factorization gives D(B_i). The inclusion-to-i(E) transport is one line. Step 2: invertibility of the normalized completion on derived-complete inputs, preservation of the same D^b_c, isomorphism closure and full restriction all checked. Step 3: K-flat representative, cancellation, and naturality direction I(e)σJ(e)^{-1} checked. Step 5: naturality on pure tensors, inverse and uniqueness checked. Edge cases checked: identity map, rank d, zero complex, empty Y, torsion Homs. Fix C1/C4: step 4 used the O_E-linear structure through constant sections and the linearity of Q without citing them; added lem-weil-integral-constructible-linear (same unit) and lem-weil-linear-abelian-derived-category (Mathlib) to its uses and proof_deps, one sentence on hat-i(a)=i(a), and elementary=false. Fix: added lem-weil-pbc-exact-functor-derived-factorization (Mathlib leaf) to stmt_deps, because the statement uses its F_D and φ_K. No cycles. The declared tool_uses (finite-free coordinates, K-flat resolution, exact factorization) are generic and accepted. DAG search found no duplicate. No SGA citation.; 1 file(s) fixed by the reviewer"
+ }
+}

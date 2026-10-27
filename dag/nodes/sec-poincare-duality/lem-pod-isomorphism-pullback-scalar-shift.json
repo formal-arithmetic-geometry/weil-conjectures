@@ -1,0 +1,132 @@
+{
+ "id": "lem-pod-isomorphism-pullback-scalar-shift",
+ "kind": "statement",
+ "title": "Scalar comparison preserves the specified integral and rational shifts",
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "statement": "Fix a prime ell, an algebraic closure Omega/Q_ell, finite subextensions E≤L and a scheme isomorphism g:X→Y with ell invertible [def-weil-algebraically-closed-coefficients]. Specify integral and rational shifts for the pullbacks at E and L. For each endpoint suppose that an inverse-image comparison has the prescribed inverseImagePullbackComparisonDerived components and commutes with the integral shift, and that the rational degree-one comparison is localization of the integral one. Let alpha be any integral natural isomorphism whose components are exactly integralPullbackScalarComparison [def-weil-derived-pullback-tensor-hom]. Then alpha commutes with the two specified integral shifts and the canonical integral transition shifts. The already prescribed rationalPullbackScalarComparison commutes with the specified rational pullback shifts and canonical rational transition shifts. No stages, exactness, standard-half preservation, or coherence equations are concluded.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-constructible-truncations.proof.md",
+  "place": "Proof, final sentence on automorphism pullback: completed-to-termwise comparison, t-exactness, and rational scalar/shift coherence (previous steps 8-9); agent extraction of the existing corrected stage-1 argument, not a quoted theorem of the blueprint"
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-integral-scalar-extension",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-inverse-image-pullback-comparison",
+  "def-pod-isomorphism-coefficient-inclusions"
+ ],
+ "proof": [
+  {
+   "text": "Apply the proved integral normalization-and-conjugation lemma to the specified sE, sL, eE, eL and alpha. Its hypotheses are exactly the integral part of the hypotheses here. No rational shift structure is needed for this step.",
+   "uses": [
+    "lem-pod-isomorphism-pullback-scalar-integral-shift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the normalized object and pure-tensor map formulas for rational pullback and rational scalar extension, the fixed rational triangulation datum, and the specified degree-one equations hrE and hrL to transport the two composite shift components through rationalization. The prescribed rational scalar comparison has component Q_L(alpha). Thus its degree-one square is the image under Q_L of the integral square.",
+   "uses": [
+    "def-sf-finite-rational-derived-operations",
+    "def-weil-rationalization-karoubi",
+    "lem-general-algebraically-closed-coefficient-stages"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A degree-one CommShiftCore equation implies the equations in all integer degrees: use the addition law for positive integers; faithfulness of the shift functor and the inverse shift-addition isomorphisms give the negative-degree equation. Apply integer induction and CommShift.of_core. All shifts and comparisons remain the ones specified in the statement.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-isomorphism-pullback-scalar-integral-shift",
+  "def-sf-finite-rational-derived-operations",
+  "def-weil-rationalization-karoubi",
+  "lem-general-algebraically-closed-coefficient-stages"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "G6",
+  "date": "2026-10-27",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-constructible-truncations.proof.md",
+  "place": "Integral compatibility is factored into its proved module to meet the per-file compilation limit; the rational degree-one transfer and integer induction remain in the item."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Scheme isomorphism completed constructible integral pullback normalized exact shifts rational scalar extension unit tower coherence",
+   "results": "8 normalization-of-schemes hits; none concerns completed constructible complexes",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CommShift\", \"IsTriangulated\"",
+   "results": "CategoryTheory.Adjunction.IsTriangulated.commShift",
+   "date": "2026-10-26",
+   "verdict": "generic exact-adjunction API, no specified completed pullback or scalar normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*(scalar|tExact)|scalar.*(tower|unit)",
+   "results": "25 unrelated algebraic scalar-tower and completion hits",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scheme isomorphism completed constructible integral pullback normalized exact shifts rational scalar extension unit tower coherence",
+   "results": "8 hits: scheme normalization, isomorphisms as affine or closed immersions, ideal-sheaf comap, and CategoryTheory.pullbackShiftIso.",
+   "date": "2026-10-26",
+   "verdict": "no match: pullbackShiftIso changes the indexing monoid of a shift action; none of the hits treats completed constructible pullback, rational localization, or its coefficient coherence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IsomorphismPullbackTExactCoefficients",
+  "date": "2026-10-26",
+  "group": "S5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": "lem-pod-isomorphism-pullback-texact-coefficients"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IsomorphismPullbackScalarShift",
+  "file": "lean/Sheaf/Paper/IsomorphismPullbackScalarShift.lean",
+  "declaration": "WeilConjectures.isomorphismPullbackScalarShift",
+  "statement": "theorem isomorphismPullbackScalarShift\n    (l : ℕ) [Fact l.Prime]\n    (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))\n    (hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y))\n    (E L : Index l Ω) (h : E ≤ L)\n    (sE : (constructibleIntegralPullback l (Coefficient.{u} l Ω E) g).CommShift ℤ)\n    (rE : (rationalDerivedPullback l (Coefficient.{u} l Ω E) g).CommShift ℤ)\n    (eE : (sfIntegralConstructible l (Coefficient.{u} l Ω E) Y).ι ⋙ inverseImageIntegralDerived\n      l (Coefficient.{u} l Ω E) g ≅\n      (constructibleIntegralPullback l (Coefficient.{u} l Ω E) g) ⋙ (sfIntegralConstructible l\n      (Coefficient.{u} l Ω E) X).ι)\n    (heE : ∀ K, HEq (eE.hom.app K)\n      (inverseImagePullbackComparisonDerived l (Coefficient.{u} l Ω E) g hX hY K.obj))\n    (hsE : (fun [_s : (constructibleIntegralPullback l (Coefficient.{u} l Ω E) g).CommShift ℤ] ↦\n      NatTrans.CommShift eE.hom ℤ) (_s := sE))\n    (hrE : ∀ K, HEq (((rationalDerivedPullback l (Coefficient.{u} l Ω E) g).commShiftIso (self\n      := rE) (1 : ℤ)).hom.app\n        ((sfRationalConstructibleLocalization l (Coefficient.{u} l Ω E) Y).obj K))\n      ((sfRationalConstructibleLocalization l (Coefficient.{u} l Ω E) X).map\n      (((constructibleIntegralPullback l (Coefficient.{u} l Ω E) g).commShiftIso (self := sE) (1\n      : ℤ)).hom.app K)))\n    (sL : (constructibleIntegralPullback l (Coefficient.{u} l Ω L) g).CommShift ℤ)\n    (rL : (rationalDerivedPullback l (Coefficient.{u} l Ω L) g).CommShift ℤ)\n    (eL : (sfIntegralConstructible l (Coefficient.{u} l Ω L) Y).ι ⋙ inverseImageIntegralDerived\n      l (Coefficient.{u} l Ω L) g ≅\n      (constructibleIntegralPullback l (Coefficient.{u} l Ω L) g) ⋙ (sfIntegralConstructible l\n      (Coefficient.{u} l Ω L) X).ι)\n    (heL : ∀ K, HEq (eL.hom.app K)\n      (inverseImagePullbackComparisonDerived l (Coefficient.{u} l Ω L) g hX hY K.obj))\n    (hsL : (fun [_s : (constructibleIntegralPullback l (Coefficient.{u} l Ω L) g).CommShift ℤ] ↦\n      NatTrans.CommShift eL.hom ℤ) (_s := sL))\n    (hrL : ∀ K, HEq (((rationalDerivedPullback l (Coefficient.{u} l Ω L) g).commShiftIso (self\n      := rL) (1 : ℤ)).hom.app\n        ((sfRationalConstructibleLocalization l (Coefficient.{u} l Ω L) Y).obj K))\n      ((sfRationalConstructibleLocalization l (Coefficient.{u} l Ω L) X).map\n      (((constructibleIntegralPullback l (Coefficient.{u} l Ω L) g).commShiftIso (self := sL) (1\n      : ℤ)).hom.app K)))\n    (α : (constructibleIntegralPullback l (Coefficient.{u} l Ω E) g) ⋙\n      (GeneralAlgebraicallyClosedCoefficients.integralTransition l Ω X E L h) ≅\n      (GeneralAlgebraicallyClosedCoefficients.integralTransition l Ω Y E L h) ⋙\n      (constructibleIntegralPullback l (Coefficient.{u} l Ω L) g))\n    (hα : ∀ K, α.app K = integralPullbackScalarComparison l (Coefficient.{u} l Ω E)\n      (Coefficient.{u} l Ω L) (isomorphismCoefficientInclusion l Ω E L h) g K) :\n    (fun [_sE : (constructibleIntegralPullback l (Coefficient.{u} l Ω E) g).CommShift ℤ]\n      [_sL : (constructibleIntegralPullback l (Coefficient.{u} l Ω L) g).CommShift ℤ] ↦\n      NatTrans.CommShift α.hom ℤ) (_sE := sE) (_sL := sL) ∧\n    (fun [_rE : (rationalDerivedPullback l (Coefficient.{u} l Ω E) g).CommShift ℤ]\n      [_rL : (rationalDerivedPullback l (Coefficient.{u} l Ω L) g).CommShift ℤ] ↦\n      @NatTrans.CommShift _ _ _ _ _ _\n        (rationalPullbackScalarComparison l (Coefficient.{u} l Ω E) (Coefficient.{u} l Ω L)\n          (isomorphismCoefficientInclusion l Ω E L h) g).hom ℤ _ _ _\n        (@Functor.CommShift.comp _ _ _ _ _ _ _ _ ℤ _ _ _ _ _\n          (GeneralAlgebraicallyClosedCoefficients.transitionCommShift l Ω X E L h))\n        (@Functor.CommShift.comp _ _ _ _ _ _ _ _ ℤ _ _ _ _\n          (GeneralAlgebraicallyClosedCoefficients.transitionCommShift l Ω Y E L h) _))\n      (_rE := rE) (_rL := rL)",
+  "branch": "sheaf-dag",
+  "by": "S5",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-4d672",
+  "group": "S5",
+  "result": "pass",
+  "landing": "20261026T002644-L-105314",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261027T131453-L-2940045",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

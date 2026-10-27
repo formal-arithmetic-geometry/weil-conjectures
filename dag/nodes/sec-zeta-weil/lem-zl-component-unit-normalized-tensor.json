@@ -1,0 +1,135 @@
+{
+ "id": "lem-zl-component-unit-normalized-tensor",
+ "kind": "statement",
+ "title": "Tensor comparison after explicit unit normalization",
+ "statement": "For the relative component inverse image of [def-zl-condensed-lisse-evaluation-model], equipped with any braided structure, let m0 be its canonical sheafified Kan-extension monoidal structure. Let e be the ratio epsilon(m0) followed by epsilon(m)^(-1), an automorphism of the target tensor unit. Define gamma at each value to be scalar action by e through the left unitor. Then mu(m) followed by gamma on the tensor product equals the tensor of the two gamma components followed by mu(m0). The unit equation and invertibility of gamma are constructed separately and are not assumptions or conclusions of this lemma.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Construction (4.1), Proposition 4.3(3), Remark 3.2"
+ },
+ "stmt_deps": [
+  "def-zl-condensed-lisse-evaluation-model",
+  "lem-zl-component-relative-profinite-site"
+ ],
+ "proof": [
+  {
+   "text": "Construct two natural transformations of tensor bifunctors: supplied tensorator followed by the explicit correction, and tensor of corrections followed by the canonical tensorator. The scalar ratio gives the unit equation by naturality of the left unitors. Both transformations agree whenever the first argument is the tensor unit, by the two left-unit laws and cancellation of invertible unit comparisons.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Construction (4.1), Proposition 4.3(3), Remark 3.2"
+   }
+  },
+  {
+   "text": "For free test sheaves A and B, postcompose both transformations with the inverse canonical tensorator. Apply integral-function detection. For every a:A->1 and b:B->1, naturality of both transformations and of the inverse tensorator reduces the equation to the already proved unit-unit case.",
+   "uses": [
+    "lem-zl-component-free-tensor-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Construction (4.1), Proposition 4.3(3), Remark 3.2"
+   }
+  },
+  {
+   "text": "The integral unit separates abelian groups, so Mathlib Sheaf.isSeparating gives the family of free test sheaves as a separating family. An adjunction transports domain separation to hom-extensionality after a left adjoint. Apply this twice to the two tensor-bifunctor transformations: the inverse image is a left adjoint, and tensoring in the target is a left adjoint by monoidal closedness. Their equality on free pairs extends to all sheaves.",
+   "uses": [
+    "def-zl-condensed-lisse-evaluation-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Construction (4.1), Proposition 4.3(3), Remark 3.2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-component-free-tensor-detection",
+  "def-zl-condensed-lisse-evaluation-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Construction (4.1), Proposition 4.3(3), Remark 3.2",
+  "note": "D4: formal adjunction/separating-family extension and monoidal unitality; isolate only integral-function detection on free component tensors."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tensor structures on the inverse image of sheaves of abelian groups are determined up to scalar correction by the unit comparison",
+   "results": "SheafOfModules.pullbackObjFreeIso, sheaf monoidal localization; no normalization of an arbitrary braided inverse-image structure.",
+   "date": "2026-10-25",
+   "verdict": "Use explicit scalar correction; retain only the tensor equation as the residual step."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.Monoidal, NatTrans.IsMonoidal",
+   "results": "No hits (identifier not recognized by the search index).",
+   "date": "2026-10-25",
+   "verdict": "The local monoidal adjunction API proves the canonical comparison only."
+  },
+  {
+   "tool": "grep",
+   "query": "unit.*normaliz.*tensor|tensor.*normaliz.*unit",
+   "results": "No hits. Local inspection of Monoidal.NaturalTransformation and site monoidal files found no arbitrary-structure normalization theorem.",
+   "date": "2026-10-25",
+   "verdict": "A separate tensor identity is needed; the unit correction is constructed and its unit identity proved."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ComponentPointMonoidalFactorization",
+  "date": "2026-10-25",
+  "group": "W5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "HRS Construction (4.1), monoidal component factorization: tensor compatibility after normalization of the supplied unit comparison.",
+   "via": [
+    "lem-zl-component-point-monoidal-factorization",
+    "lem-zl-condensed-component-pullback-compatibility",
+    "lem-zl-condensed-wcontractible-lisse-evaluation",
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ComponentTensorNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/ComponentTensorNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.component_unit_normalized_tensor",
+  "statement": "theorem component_unit_normalized_tensor\n    (X Y : Sheaf ((coherentTopology Profinite.{u}).over (affineComponentSpace T))\n      Ab.{u + 1}) :\n    Functor.LaxMonoidal.μ (componentInverse T) X Y ≫\n        (componentUnitCorrection T).hom.app (X ⊗ Y) =\n      ((componentUnitCorrection T).hom.app X ⊗ₘ\n        (componentUnitCorrection T).hom.app Y) ≫\n          (componentCanonicalMonoidal T).toLaxMonoidal.μ X Y",
+  "branch": "sheaf-dag",
+  "by": "W5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W5",
+  "result": "pass",
+  "landing": "20261025T144248-L-1219610",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261025T180600-L-4007163",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

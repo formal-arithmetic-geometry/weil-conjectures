@@ -1,0 +1,116 @@
+{
+ "id": "def-sfb-homogeneous-polynomial-resolution-data",
+ "kind": "definition",
+ "title": "Pinned polynomial resolution and contraction data",
+ "statement": "Fix a prime $\\ell$, a normed field $F$ with a normed $\\mathbf Q_\\ell$-algebra structure, and $r\\in\\mathbf N$. Use the all-continuous scalar ring [def-sfb-bundled-continuous-scalar-ring], lattice [def-sfb-ladic-lattice], internal modules and actions [def-sfb-condensed-action-module, def-sfb-condensed-equivariant-bar-data], and ordinary derived category [def-weil-abstract-derived-category]. Define polynomialArrow as the finite integer linear combination of monomial coprojections, deletion as the alternating block-renaming sum, insertZero by setting the leading block to zero, and translatedMonomial by diagonal substitution $y_{a,i}\\mapsto y_{a,i}-g_i$. Model is the specification of an equivariant integer-indexed cochain complex zero in negative degrees, with monomial coproducts, the sectionwise translation formula, individual equivariant deletion faces, alternating differential and constant augmentation. Contraction specifies underlying internal linear maps given by zero evaluation/insertion and the split, zero-degree and positive-degree identities. Assertion says that a Model exists and that every Model has a Contraction, quasi-isomorphic augmentation and invertible image of the augmentation in the ordinary derived category. These are the existing definitions, moved verbatim; no existence result is included in this definition node.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), direct-image stability. This is the inherited agent-formulated polynomial-resolution expansion recorded in lem-sfb-homogeneous-polynomial-augmented-resolution, not a quotation from the current paragraph. Exact literature reference WANTED."
+ },
+ "stmt_deps": [
+  "def-sfb-continuous-map-condensed-ring",
+  "def-sfb-ladic-lattice",
+  "sk-def-sfb-module-objects",
+  "def-sfb-condensed-action-module",
+  "def-weil-size-convention",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-condensed-derived-restriction-calculus",
+  "def-sfb-bundled-continuous-scalar-ring",
+  "def-sfb-condensed-equivariant-bar-data",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The polynomial deletion complex is contracted by insertion of zero and resolves the constants",
+   "results": "Polynomial.contract_C, Polynomial.update_zero_eq_erase, Polynomial.comp_zero, Polynomial.contract, Polynomial.contract_expand, Polynomial.contract_one, Polynomial.erase, Poly.coe_zero. None constructs the internal polynomial complex or inserted-zero contraction.",
+   "date": "2026-10-26",
+   "verdict": "No match for this internal-module construction; polynomial substitution APIs are ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An augmented cochain complex with a contracting homotopy is a quasi-isomorphism from the single coefficient object",
+   "results": "Rep.standardComplex.instQuasiIsoNatεToSingle₀, CochainComplex.exists_iso_single, CochainComplex.cm5b.instQuasiIsoIntP, CochainComplex.augmentTruncate, CochainComplex.quasiIsoAt₀_iff, Rep.standardComplex.quasiIso_forget₂_εToSingle₀, CochainComplex.truncateAugment, HomotopyCategory.singleFunctorPostcompQuotientIso. Abstract group resolutions do not provide the internal polynomial model or its monomial formulas.",
+   "date": "2026-10-26",
+   "verdict": "No direct construction. The parent proves the formal homological consequence directly from ShortComplex exactness."
+  },
+  {
+   "tool": "grep",
+   "query": "polynomial.*(contract|homotop|resolution)|(contract|homotop|resolution).*polynomial; HomogeneousPolynomial in lean/Sheaf, lean/WeilConjectures and dag/nodes; blueprint_refs.py search homogeneous polynomial",
+   "results": "Existing HomogeneousPolynomialAugmentedResolution contains precisely the data being relocated; no separate model or contraction construction was found. Mathlib has abstract homotopy and polynomial substitution APIs. Blueprint search returned def-sc-cr-field and lem-sc-p1-monomial, neither the deletion construction.",
+   "date": "2026-10-26",
+   "verdict": "Reuse the existing definitions verbatim; split the construction and its contraction, not a duplicate of the conclusion."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.HomogeneousPolynomialAugmentedResolution",
+  "date": "2026-10-26",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), direct-image stability. This is the inherited agent-formulated polynomial-resolution expansion recorded in lem-sfb-homogeneous-polynomial-augmented-resolution, not a quotation from the current paragraph. Exact literature reference WANTED.",
+   "via": [
+    "lem-sfb-homogeneous-polynomial-augmented-resolution",
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.HomogeneousPolynomialResolutionData",
+  "file": "lean/Sheaf/CategoryTheory/HomogeneousPolynomialResolutionData.lean",
+  "declaration": "Profinite.CondensedAction.HomogeneousPolynomial.Assertion",
+  "statement": "def Assertion : Prop",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-26",
+  "declarations": [
+   "Profinite.CondensedAction.HomogeneousPolynomial.polynomialArrow",
+   "Profinite.CondensedAction.HomogeneousPolynomial.deletion",
+   "Profinite.CondensedAction.HomogeneousPolynomial.insertZero",
+   "Profinite.CondensedAction.HomogeneousPolynomial.translatedMonomial",
+   "Profinite.CondensedAction.HomogeneousPolynomial.Model",
+   "Profinite.CondensedAction.HomogeneousPolynomial.Contraction",
+   "Profinite.CondensedAction.HomogeneousPolynomial.Assertion"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-9227f",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261026T081728-L-2053750",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-9227f",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261026T081728-L-2053750",
+  "kind": "interface",
+  "note": "independent cc review: item theorem + split nodes (model/contraction existence, resolution-data def) against verbatim-moved data block, Assertion conjuncts and scratch axioms compile"
+ }
+}

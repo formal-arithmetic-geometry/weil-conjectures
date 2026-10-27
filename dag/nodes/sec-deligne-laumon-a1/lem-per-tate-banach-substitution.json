@@ -1,0 +1,307 @@
+{
+ "id": "lem-per-tate-banach-substitution",
+ "kind": "statement",
+ "title": "Contractive substitution of bounded tuples in restricted series",
+ "statement": "Let $F$ be a complete field with a nontrivial real-valued multiplicative nonarchimedean absolute value. For $r\\ge0$, let $T_r(F)=F\\langle x_1,\\ldots,x_r\\rangle$ be the restricted-series ring [def-trf-restricted-series-presentation]: $f=\\sum_{\\nu\\in\\mathbf N^r}c_\\nu x^\\nu$ has, for every $\\epsilon>0$, only finitely many $|c_\\nu|\\ge\\epsilon$, and its Gauss norm is $\\|f\\|=\\sup_\\nu|c_\\nu|$. Let $B$ be a commutative unital $F$-algebra with a complete norm satisfying $\\|1\\|=1$, $\\|b\\|=0\\Leftrightarrow b=0$, $\\|b+b'\\|\\le\\max(\\|b\\|,\\|b'\\|)$, $\\|bb'\\|\\le\\|b\\|\\|b'\\|$ and $\\|cb\\|=|c|\\|b\\|$ for $c\\in F$. For any tuple $b_1,\\ldots,b_r\\in B$ with $\\|b_i\\|\\le1$, the net of finite partial sums $\\sum_{\\nu\\in E}c_\\nu b_1^{\\nu_1}\\cdots b_r^{\\nu_r}$, indexed by finite subsets $E\\subset\\mathbf N^r$, converges. Its limit defines the unique continuous $F$-algebra homomorphism $\\operatorname{sub}_b:T_r(F)\\to B$ sending $x_i$ to $b_i$. Moreover $\\|\\operatorname{sub}_b(f)\\|\\le\\|f\\|$ for every $f$. For $r=0$ this is the scalar map $F\\to B$.",
+ "source": {
+  "document": "literature/conrad-several-approaches-non-archimedean-geometry.pdf",
+  "place": "Conrad, Several approaches to non-archimedean geometry, Exercise 1.2.8(3), PDF p.7; norm-at-most-one specialization with contractivity. Local archival copy WANTED; read https://math.stanford.edu/~conrad/papers/aws.pdf online 2026-10-24."
+ },
+ "stmt_deps": [
+  "def-trf-restricted-series-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Put $T=T_r(F)$ and let $P\\subseteq T$ be the $F$-linear subspace of finite-support coefficient families, that is, polynomials. By [lem-trf-restricted-series-gauss-completion], the Gauss norm is finite, separates points, satisfies the ultrametric inequality and $\\|fg\\|\\le\\|f\\|\\|g\\|$, and total-degree truncations converge to every $f\\in T$. In particular $P$ is dense. The coefficient formula also gives $\\|cf\\|=|c|\\|f\\|$: for $c=0$ both sides vanish, and for $c\\ne0$ multiplication by the positive real number $|c|$ commutes with the finite-valued supremum of the bounded coefficient values. Thus $T$ is a normed $F$-vector space with the Gauss metric, and $P$ has its induced norm. These assertions include $r=0$, with one coefficient and $T=P=F$.",
+   "uses": [
+    "lem-trf-restricted-series-gauss-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-several-approaches-non-archimedean-geometry.pdf",
+    "place": "Conrad, Several approaches to non-archimedean geometry, Exercise 1.2.8(3), PDF p.7, norm-at-most-one case. Agent-written proof using dense polynomial evaluation; archival copy WANTED, exercise read online at https://math.stanford.edu/~conrad/papers/aws.pdf on 2026-10-24."
+   }
+  },
+  {
+   "text": "For $p=\\sum_\\nu c_\\nu x^\\nu\\in P$ define $u(p)=\\sum_\\nu c_\\nu b^\\nu$, a finite sum, where $b^\\nu=\\prod_{i=1}^r b_i^{\\nu_i}$. Induction on the exponents and submultiplicativity give $\\|b^\\nu\\|\\le1$, including $b^0=1$. The finite-sum ultrametric bound, proved by induction on the number of summands, gives $\\|u(p)\\|\\le\\max_\\nu |c_\\nu|=\\|p\\|$ (the zero polynomial is immediate). Coefficientwise addition and scalar multiplication make $u$ $F$-linear. For two polynomials, finite distributivity and commutativity in $B$ give $u(p)u(q)=\\sum_{\\alpha,\\beta}c_\\alpha d_\\beta b^{\\alpha+\\beta}=\\sum_\\gamma(\\sum_{\\alpha+\\beta=\\gamma}c_\\alpha d_\\beta)b^\\gamma=u(pq)$. Also $u(1)=1$, $u(c)=c1_B$ and $u(x_i)=b_i$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/conrad-several-approaches-non-archimedean-geometry.pdf",
+    "place": "Conrad, Several approaches to non-archimedean geometry, Exercise 1.2.8(3), PDF p.7, norm-at-most-one case. Agent-written proof using dense polynomial evaluation; archival copy WANTED, exercise read online at https://math.stanford.edu/~conrad/papers/aws.pdf on 2026-10-24."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-dense-subspace-contractive-extension] with base field $F$, ambient vector space $E=T$, dense subspace $D=P$, complete target vector space $B$ and map $u$. The hypotheses on the norm of $B$ imply the ordinary triangle inequality as well as $\\|cv\\|=|c|\\|v\\|$; completeness and separation are assumed. Step 1 gives the required normed domain and density; step 2 gives the linear contraction. The cited statement requires no completeness of the domain. Obtain a continuous $F$-linear map $v:T\\to B$, equal to $u$ on $P$, with $\\|v(f)\\|\\le\\|f\\|$ for every $f$. In particular it preserves the unit and scalar map and sends $x_i$ to $b_i$.",
+   "uses": [
+    "lem-sfb-dense-subspace-contractive-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-several-approaches-non-archimedean-geometry.pdf",
+    "place": "Conrad, Several approaches to non-archimedean geometry, Exercise 1.2.8(3), PDF p.7, norm-at-most-one case. Agent-written proof using dense polynomial evaluation; archival copy WANTED, exercise read online at https://math.stanford.edu/~conrad/papers/aws.pdf on 2026-10-24."
+   }
+  },
+  {
+   "text": "It remains to check multiplication. For $f,g\\in T$, write $p_N,q_N$ for their total-degree truncations. They converge to $f,g$, and $\\|p_N\\|\\le\\|f\\|$. The product bound of [lem-trf-restricted-series-gauss-completion] gives\n$$\\|p_Nq_N-fg\\|\\le\\max(\\|p_N\\|\\|q_N-g\\|,\\|p_N-f\\|\\|g\\|)\\longrightarrow0.$$\nBy linearity and contractivity of $v$, $v(p_Nq_N)\\to v(fg)$. Likewise the assumed product bound in $B$ gives\n$$\\|v(p_N)v(q_N)-v(f)v(g)\\|\\le\\max(\\|f\\|\\|q_N-g\\|,\\|p_N-f\\|\\|g\\|)\\longrightarrow0.$$\nStep 2 gives $v(p_Nq_N)=v(p_N)v(q_N)$. The ultrametric inequality applied to the difference of the two proposed limits bounds its norm by the maximum of these two errors, hence by every positive real number. Its norm is zero, so $v(fg)=v(f)v(g)$. Thus $v$ is a continuous $F$-algebra homomorphism.",
+   "uses": [
+    "lem-trf-restricted-series-gauss-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-several-approaches-non-archimedean-geometry.pdf",
+    "place": "Conrad, Several approaches to non-archimedean geometry, Exercise 1.2.8(3), PDF p.7, norm-at-most-one case. Agent-written proof using dense polynomial evaluation; archival copy WANTED, exercise read online at https://math.stanford.edu/~conrad/papers/aws.pdf on 2026-10-24."
+   }
+  },
+  {
+   "text": "For a finite subset $E\\subset\\mathbf N^r$ put $p_E=\\sum_{\\nu\\in E}c_\\nu x^\\nu$. Given $\\epsilon>0$, restrictedness [def-trf-restricted-series-presentation] makes $E_0=\\{\\nu:|c_\\nu|\\ge\\epsilon/2\\}$ finite. If $E\\supseteq E_0$, every coefficient of $f-p_E$ has absolute value smaller than $\\epsilon/2$, so $\\|f-p_E\\|\\le\\epsilon/2<\\epsilon$. Thus the whole finite-subset net $p_E$ converges to $f$. By step 3,\n$$\\left\\|v(f)-\\sum_{\\nu\\in E}c_\\nu b^\\nu\\right\\|=\\|v(f-p_E)\\|\\le\\|f-p_E\\|\\longrightarrow0.$$\nIts limit is therefore exactly $v(f)$, so defining $\\operatorname{sub}_b$ by the net gives the homomorphism already constructed and its contraction bound.",
+   "uses": [
+    "def-trf-restricted-series-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/conrad-several-approaches-non-archimedean-geometry.pdf",
+    "place": "Conrad, Several approaches to non-archimedean geometry, Exercise 1.2.8(3), PDF p.7, norm-at-most-one case. Agent-written proof using dense polynomial evaluation; archival copy WANTED, exercise read online at https://math.stanford.edu/~conrad/papers/aws.pdf on 2026-10-24."
+   }
+  },
+  {
+   "text": "If $w:T\\to B$ is another continuous $F$-algebra homomorphism with $w(x_i)=b_i$, finite expansion of polynomials gives $w(p)=u(p)=v(p)$ on $P$. For the total-degree truncations of step 1, continuity gives $w(p_N)\\to w(f)$ and $v(p_N)\\to v(f)$. The same difference-of-limits norm argument as in step 4 gives $w(f)=v(f)$. Hence the continuous homomorphism is unique. For $r=0$, $\\mathbf N^0$ has one element, the monomial is the empty product $1$, and $T_0(F)=F$. Every finite-subset net is eventually its single constant term; the constructed map is $c\\mapsto c1_B$, as asserted.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/conrad-several-approaches-non-archimedean-geometry.pdf",
+    "place": "Conrad, Several approaches to non-archimedean geometry, Exercise 1.2.8(3), PDF p.7, norm-at-most-one case. Agent-written proof using dense polynomial evaluation; archival copy WANTED, exercise read online at https://math.stanford.edu/~conrad/papers/aws.pdf on 2026-10-24."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-restricted-series-gauss-completion",
+  "lem-sfb-dense-subspace-contractive-extension",
+  "def-trf-restricted-series-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/conrad-several-approaches-non-archimedean-geometry.pdf",
+  "place": "Exercise 1.2.8(3), PDF p.7, read online; explicit density-and-contraction proof supplied by Q74. The exercise states the universal property but leaves its proof to the reader."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(eval|aeval|subst|lift).*([Cc]omplete|[Rr]estricted)|([Cc]omplete|[Rr]estricted).*(eval|aeval|subst)",
+   "results": "{\"t\": \"2026-10-24T07:37:47Z\", \"tool\": \"grep\", \"query\": \"(eval|aeval|subst|lift).*([Cc]omplete|[Rr]estricted)|([Cc]omplete|[Rr]estricted).*(eval|aeval|subst)\", \"sub\": \"RingTheory/PowerSeries\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected PowerSeries/Restricted.lean and MvPowerSeries/Evaluation.lean. Formal-series evaluation requires topological nilpotence and an ideal-linear topology; polynomial and algebraic cotangent results do not give the norm-bounded restricted-series assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "IsRestricted.*(eval|aeval|subst)|TateAlgebra|RestrictedPowerSeries",
+   "results": "{\"t\": \"2026-10-24T07:37:47Z\", \"tool\": \"grep\", \"query\": \"IsRestricted.*(eval|aeval|subst)|TateAlgebra|RestrictedPowerSeries\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected PowerSeries/Restricted.lean and MvPowerSeries/Evaluation.lean. Formal-series evaluation requires topological nilpotence and an ideal-linear topology; polynomial and algebraic cotangent results do not give the norm-bounded restricted-series assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal property of restricted power series over a complete nonarchimedean field evaluated in a Banach algebra",
+   "results": "{\"t\": \"2026-10-24T07:37:48Z\", \"tool\": \"leansearch\", \"query\": \"Universal property of restricted power series over a complete nonarchimedean field evaluated in a Banach algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.aeval_eq_sum\", \"PowerSeries.comp_aeval\", \"PowerSeries.eval₂_eq_tsum\", \"PowerSeries.eval₂Hom\", \"PowerSeries.IsRestricted\", \"PowerSeries.aeval_unique\", \"MvPowerSeries.aeval\", \"PowerSeries.coe_aeval\"], \"digest\": \"3a91d86f687c7c08\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected PowerSeries/Restricted.lean and MvPowerSeries/Evaluation.lean. Formal-series evaluation requires topological nilpotence and an ideal-linear topology; polynomial and algebraic cotangent results do not give the norm-bounded restricted-series assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRestricted\", \"eval\"",
+   "results": "{\"t\": \"2026-10-24T07:37:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsRestricted\\\", \\\"eval\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected PowerSeries/Restricted.lean and MvPowerSeries/Evaluation.lean. Formal-series evaluation requires topological nilpotence and an ideal-linear topology; polynomial and algebraic cotangent results do not give the norm-bounded restricted-series assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A tuple of elements of norm at most one in a complete nonarchimedean normed commutative algebra defines a continuous homomorphism from the Tate algebra by summing restricted power series",
+   "results": "{\"t\": \"2026-10-24T07:37:50Z\", \"tool\": \"leanfinder\", \"query\": \"A tuple of elements of norm at most one in a complete nonarchimedean normed commutative algebra defines a continuous homomorphism from the Tate algebra by summing restricted power series\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPowerSeries.eval₂Hom\", \"MvPowerSeries.aeval\", \"PowerSeries.aeval\", \"PowerSeries.eval₂Hom\", \"PadicInt.continuousAddCharEquiv_of_norm_mul\", \"PadicInt.continuousAddCharEquiv\", \"PadicInt.continuous_addChar_of_value_at_one\", \"MvPowerSeries.hasSum_eval₂\"], \"digest\": \"3c5b7ed6f73fb14d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected PowerSeries/Restricted.lean and MvPowerSeries/Evaluation.lean. Formal-series evaluation requires topological nilpotence and an ideal-linear topology; polynomial and algebraic cotangent results do not give the norm-bounded restricted-series assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend polynomial evaluation at norm bounded elements uniquely to the Gauss norm completion of polynomials as a contractive algebra homomorphism",
+   "results": "{\"t\": \"2026-10-24T07:37:51Z\", \"tool\": \"leanfinder\", \"query\": \"Extend polynomial evaluation at norm bounded elements uniquely to the Gauss norm completion of polynomials as a contractive algebra homomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"padic_polynomial_dist\", \"Polynomial.gaussNorm_coe_powerSeries\", \"limit_zero_of_norm_tendsto_zero\", \"Polynomial.exists_eq_gaussNorm\", \"Polynomial.gaussNorm_intAdicAbv_le_one\", \"Polynomial.exists_forall_norm_le\", \"PowerSeries.aeval_coe\", \"ContinuousMap.polynomial_comp_attachBound\"], \"digest\": \"7a6f3810443689c6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected PowerSeries/Restricted.lean and MvPowerSeries/Evaluation.lean. Formal-series evaluation requires topological nilpotence and an ideal-linear topology; polynomial and algebraic cotangent results do not give the norm-bounded restricted-series assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A family in a complete nonarchimedean normed additive commutative group is summable if and only if it tends to zero along the cofinite filter, with the norm of its sum bounded by a uniform bound on its terms",
+   "results": {
+    "t": "2026-10-24T08:04:41Z",
+    "tool": "leanfinder",
+    "query": "A family in a complete nonarchimedean normed additive commutative group is summable if and only if it tends to zero along the cofinite filter, with the norm of its sum bounded by a uniform bound on its terms",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "NonarchimedeanAddGroup.summable_iff_tendsto_cofinite_zero",
+     "NonarchimedeanAddGroup.summable_of_tendsto_cofinite_zero",
+     "summable_iff_vanishing_norm",
+     "Summable.of_norm_bounded_eventually",
+     "NonarchimedeanAddGroup.cauchySeq_sum_of_tendsto_cofinite_zero",
+     "Summable.of_nnnorm",
+     "Summable.of_norm",
+     "summable_iff_vanishing"
+    ],
+    "digest": "df4f6c4a7dc2c918"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the item: the complete ultrametric group summability criterion is a possible smaller tool, but it states neither restricted-series multiplication nor the algebra-homomorphism universal property. The proof instead reuses the existing dense-subspace extension node."
+  },
+  {
+   "tool": "grep",
+   "query": "TateAlgebra|IsRestricted.*(eval|aeval|subst)|RestrictedPowerSeries",
+   "results": {
+    "t": "2026-10-24T08:05:06Z",
+    "tool": "grep",
+    "query": "TateAlgebra|IsRestricted.*(eval|aeval|subst)|RestrictedPowerSeries",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: inspected MvPowerSeries/Evaluation.lean:67-69 (HasEval requires topologically nilpotent coordinates) and the evaluation interfaces. Formal-series evaluation with its product topology does not give restricted-series substitution at arbitrary norm-one elements. Continuous-function evaluation concerns another domain. Dense linear extension is reused through the existing DAG leaf, rather than claimed as an exact match for this algebra assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The universal property of the Tate algebra: bounded elements of a complete normed algebra determine a unique continuous algebra homomorphism by evaluation of restricted power series",
+   "results": {
+    "t": "2026-10-24T08:05:07Z",
+    "tool": "leansearch",
+    "query": "The universal property of the Tate algebra: bounded elements of a complete normed algebra determine a unique continuous algebra homomorphism by evaluation of restricted power series",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousMap.evalAlgHom",
+     "PowerSeries.aeval",
+     "MvPowerSeries.aeval",
+     "MvPowerSeries.aeval_unique",
+     "MvPowerSeries.eval₂Hom",
+     "MvPowerSeries.eval₂_unique",
+     "ContinuousMap.algHom_ext_map_X",
+     "PowerSeries.aeval_unique"
+    ],
+    "digest": "abe7750570d27515"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: inspected MvPowerSeries/Evaluation.lean:67-69 (HasEval requires topologically nilpotent coordinates) and the evaluation interfaces. Formal-series evaluation with its product topology does not give restricted-series substitution at arbitrary norm-one elements. Continuous-function evaluation concerns another domain. Dense linear extension is reused through the existing DAG leaf, rather than claimed as an exact match for this algebra assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A contractive polynomial evaluation extends uniquely by density to the Tate algebra of restricted power series with the Gauss norm, valued in a Banach algebra",
+   "results": {
+    "t": "2026-10-24T08:06:09Z",
+    "tool": "leanfinder",
+    "query": "A contractive polynomial evaluation extends uniquely by density to the Tate algebra of restricted power series with the Gauss norm, valued in a Banach algebra",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MvPowerSeries.eval₂_unique",
+     "PowerSeries.eval₂_unique",
+     "PowerSeries.aeval_coe",
+     "MvPowerSeries.aeval_coe",
+     "PowerSeries.aeval",
+     "MvPowerSeries.eval₂Hom",
+     "PowerSeries.aeval_unique",
+     "PowerSeries.eval₂Hom"
+    ],
+    "digest": "ea630b00ddd2ef4f"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: inspected MvPowerSeries/Evaluation.lean:67-69 (HasEval requires topologically nilpotent coordinates) and the evaluation interfaces. Formal-series evaluation with its product topology does not give restricted-series substitution at arbitrary norm-one elements. Continuous-function evaluation concerns another domain. Dense linear extension is reused through the existing DAG leaf, rather than claimed as an exact match for this algebra assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-tate-rational-local-coordinates",
+  "date": "2026-10-24",
+  "group": "Q51"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Inherited formal-algebraization branch supporting ancestor Step 3, via lem-per-regular-generic-continuous-jacobian and lem-per-geometric-affinoid-jacobian-unit: the residue-fibre continuous conormal criterion in the proof of Temkin Proposition 3.3.2, printed pp.20–21. The latest blueprint ancestor Step 3 discusses duality, without a separate formal-algebraization sentence. Analytic prerequisite: regular rational Tate local ring and its first-order coordinates. Supporting substitution theorem used to recenter the unit polydisc before taking its rational local ring.",
+   "via": [
+    "lem-per-tate-rational-local-coordinates",
+    "lem-per-affinoid-residual-conormal-injective",
+    "lem-per-geometric-affinoid-jacobian-unit",
+    "lem-per-regular-generic-continuous-jacobian",
+    "lem-per-rig-principal-formal-algebraization",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-tate-banach-substitution",
+  "worker": "stage1",
+  "summary": "Q74 retained the statement and original searches, found no project attachment, and wrote the bounded polynomial-evaluation proof in six steps. Reused existing Gauss-completion and dense-linear-extension nodes; created no nodes. Checked multiplicativity with explicit norm errors, the full finite-subset net, uniqueness among all continuous algebra maps and the zero-variable case. Conrad Exercise 1.2.8(3) was read online; its missing local archive is WANTED.",
+  "blueprint": "Inherited analytic prerequisite of the historical formal-algebraization branch recorded in blueprint.from, via lem-per-tate-rational-local-coordinates: the bounded substitution required to recenter a rational Tate point. The latest blueprint ancestor lem-per-artin-gabber-affine-curve and current sk-p-dl-a1-perverse do not state this analytic fact; no new perverse/Fourier route or unit realization is claimed or changed.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-restricted-series-gauss-completion",
+    "why": "Generic Gauss-norm inequalities and density of polynomial truncations for the identical restricted-series ring; no statement in this unit provides these analytic properties. This is a prerequisite tool, not a replacement for a unit proof step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-restricted-series-gauss-completion"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-5ab23304c",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-5ab23304c (reviewer sub-agent of L); spot-checked: There are no new nodes. The statement and stmt_deps are unchanged, and the six proof steps are complete. Source: I read Conrad, Several approaches, Exercise 1.2.8(3)-(4) (printed p.7) from the online PDF, converted to text; there is no local copy, and it is WANTED. Part (3) is bijectivity of Hom(T_n,A) with tuples of power-bounded elements. The item is its ‖b_i‖≤1 case plus contractivity, which is exactly what the citer lem-per-tate-rational-local-coordinates uses to recentre the polydisc. Step 1 takes norm, separation, product bound and truncation density from lem-trf-restricted-series-gauss-completion and proves homogeneity inline. Step 2 is finite polynomial evaluation, with ‖b^ν‖≤1. Step 3 applies the Mathlib leaf lem-sfb-dense-subspace-contractive-extension (extendOfNorm); every hypothesis is matched, and B's completeness, homogeneity and separation are assumed. Step 4: multiplicativity follows from the two displayed error estimates, which I checked algebraically. Step 5: the full finite-subset net converges, using an ε/2 exceptional set. Step 6: uniqueness by density, continuity and separation; r=0 holds. Edge cases checked: r=0, b_i=1 (not topologically nilpotent), b_i=0, B with nilpotents; B=0 is excluded by ‖1‖=1 and separation. No duplicate in the DAG (rg -L over restricted series, Tate, substitution, Gauss). Batch-5 flag: gauss-completion is generic Gauss-norm analysis whose closure is only def-trf-restricted-series-presentation plus a Mathlib BoundedContinuousFunction leaf. It is not part of the trace formula or Poincaré duality and is not given by them, so the citation stands. tool_uses entry for that node accepted: no node of the unit gives these analytic properties."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TateBanachSubstitution",
+  "declaration": "RestrictedSeries.exists_contractive_substitution",
+  "file": "lean/Sheaf/RingTheory/TateBanachSubstitution.lean",
+  "statement": "theorem exists_contractive_substitution (F : Type u) [NontriviallyNormedField F] [IsUltrametricDist F] [CompleteSpace F] (B : Type v) [NormedCommRing B] [NormOneClass B] [IsUltrametricDist B] [NormedAlgebra F B] [CompleteSpace B] (r : ℕ) (b : Fin r → B) (hb : ∀ i : Fin r, ‖b i‖ ≤ 1) : ∃ φ : (MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin r ↦ (1 : ℝ))) →+* B, φ.comp (constants F r) = algebraMap F B ∧ (∀ f ε, 0 < ε → ∃ δ : ℝ, 0 < δ ∧ ∀ g, MvPowerSeries.gaussNorm (norm : F → ℝ) (fun _ : Fin r ↦ 1) (g.val - f.val) < δ → ‖φ g - φ f‖ < ε) ∧ (∀ i : Fin r, φ ⟨MvPowerSeries.X i, MvPowerSeries.isRestricted_monomial _ (Finsupp.single i 1) (1 : F)⟩ = b i) ∧ (∀ f, HasSum (fun ν : Fin r →₀ ℕ ↦ algebraMap F B (MvPowerSeries.coeff ν f.val) * ν.prod (fun i n ↦ b i ^ n)) (φ f)) ∧ (∀ f, ‖φ f‖ ≤ MvPowerSeries.gaussNorm (norm : F → ℝ) (fun _ : Fin r ↦ 1) f.val) ∧ (∀ ψ : (MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin r ↦ (1 : ℝ))) →+* B, ψ.comp (constants F r) = algebraMap F B → (∀ f ε, 0 < ε → ∃ δ : ℝ, 0 < δ ∧ ∀ g, MvPowerSeries.gaussNorm (norm : F → ℝ) (fun _ : Fin r ↦ 1) (g.val - f.val) < δ → ‖ψ g - ψ f‖ < ε) → (∀ i : Fin r, ψ ⟨MvPowerSeries.X i, MvPowerSeries.isRestricted_monomial _ (Finsupp.single i 1) (1 : F)⟩ = b i) → ψ = φ) ∧ (r = 0 → ∀ f, φ f = algebraMap F B (MvPowerSeries.constantCoeff f.val))",
+  "branch": "newtargets-dag",
+  "by": "Q18",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-61bfe0615",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Read node, stmt_dep def-trf-restricted-series-presentation (RestrictedSeries.constants), the module, report (Worker report + Second reading present), Mathlib IsRestricted/subring/isRestricted_monomial/gaussNorm/HasSum (unconditional default). Hypotheses match: NontriviallyNormedField+IsUltrametricDist+CompleteSpace F; NormedCommRing+NormOneClass+IsUltrametricDist+NormedAlgebra+CompleteSpace B; ‖b i‖≤1; independent universes u v. Conclusions all present: scalar-compatible RingHom, ε-δ Gauss continuity, X_i↦b_i, HasSum over all finite subsets, contractivity, uniqueness among all continuous scalar-compatible ring homs (ψ not assumed contractive), r=0 scalar map. Edge cases r=0, b_i=0/1, B=0 excluded by ‖1‖=1, zero series. lean.statement verbatim; sorry only; source and blueprint docstrings; 6-step proof docstring; node diff vs live = lean only. No duplicate in Mathlib or project (lem-wf-nonarchimedean-series-substitution is a different one-variable statement). No changes, no compile needed."
+ }
+}

@@ -1,0 +1,222 @@
+{
+ "id": "lem-route-bounded-constructible-derived-complete-integral-is-triangulated",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-finite-tor-amplitude",
+   "via": [
+    "lem-weil-integral-ctf-triangulated"
+   ],
+   "place": "Well-definedness paragraph of def-weil-finite-tor-amplitude: D^b_ctf is the intersection of the finite-Tor subcategory with the triangulated D^b_c; this route node supplies the integral D^b_c triangulation used by lem-weil-integral-ctf-triangulated, via the existing lem-weil-integral-constructible-triangulated."
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The full subcategory of derived-complete integral objects with constructible reductions in one common cohomological interval is closed under isomorphi",
+ "statement": "Fix the global finite-field datum of characteristic $p$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and an arbitrary scheme $Y$. Put $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ for $n\\ge1$ and $B=\\widehat{\\mathcal O}_{E,Y}=\\varprojlim_n(A_{E,n})_Y$ on the small pro-etale site, and work in $\\mathcal T=D(Y_{\\mathrm{proet}},B)$ [def-weil-completed-integral-coefficients]. Let $P(K)$ be membership in $D^b_c(Y,\\mathcal O_E)$ [def-weil-derived-complete-integral-detailed]: $K$ is derived complete [def-weil-derived-complete], each derived reduction $K\\otimes_B^L(A_{E,n})_Y$ [def-weil-integral-derived-reduction] is bounded constructible with the finite-torsion constructibility condition [def-weil-finite-torsion-constructibility], and there exist integers $r\\le s$, independent of $n$, containing every reduction's cohomological support [def-weil-cohomological-support]. Then $P$ is closed under isomorphisms and is a triangulated object property: $P(0)$ holds, $P(K)$ implies $P(K[m])$ for every $m\\in\\mathbf Z$, and every distinguished triangle $K'\\to K\\to K''\\to K'[1]$ with $P(K')$ and $P(K'')$ has $P(K)$. Thus the full subcategory on $P$ has the inherited triangulated structure and its inclusion into $\\mathcal T$ is exact [def-weil-triangulated-subcategory]. No finite-type, Noetherian, dimension, or invertibility hypothesis on $Y$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "lem-weil-integral-ctf-triangulated: the Lean of this node (its declaration uses) reaches WeilConjectures.boundedConstructibleDerivedCompleteIntegral_isTriangulated, a sorry on the sorry route of batch3, batch4 with no node; Lean: SHEAF file lean/Sheaf/Paper/IntegralConstructibleTriangulated.lean, declaration WeilConjectures.boundedConstructibleDerivedCompleteIntegral_isTriangulated (module Sheaf.Paper.IntegralConstructibleTriangulated, lines 78-158, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-complete",
+  "def-weil-integral-derived-reduction",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-cohomological-support",
+  "def-weil-triangulated-subcategory"
+ ],
+ "proof": [
+  {
+   "text": "Identify the legacy boundedConstructibleDerivedCompleteIntegral predicate with sfIntegralConstructible pointwise. Apply sfDerivedComplete_iff_legacy for the fixed auxiliary datum D and hl. integralDerivedReduction is definitionally scalarReductionDerivedExtension, and a support bound written pointwise is definitionally containment in Set.Icc. No boundedness, geometric or coefficient hypothesis is changed.",
+   "uses": [
+    "lem-sf-derived-complete-legacy-comparison",
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-integral-derived-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Replay the proved private completion argument of SfIntegralConstructibleTriangulated locally, without importing its cyclic coefficient-presentation aggregate. Transport an augmented Roos triangle along an isomorphism by product maps. Intrinsic completion is also isomorphism-closed. For a reflective property with unit compatible with shifts, reflection Hom bijections and triangle Hom exactness put every unit cone in the left orthogonal. An object in the right orthogonal of that left orthogonal therefore has a unit cone whose identity is zero, so its unit is invertible. Thus the property equals its double orthogonal and Mathlib makes it triangulated.",
+   "uses": [
+    "def-weil-derived-complete",
+    "def-weil-pbc-intrinsic-completion",
+    "lem-weil-pbc-ringed-koszul-completion-reflector"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply this general reflection argument to the published intrinsic completion reflector and its normalized shift. The exact coefficient restriction and purCoefficientModel_predicates identify IsSfDerivedComplete with its inverse image, using the presentation counit and Roos isomorphism closure. Inverse image along the exact restriction is triangulated on an arbitrary scheme.",
+   "uses": [
+    "def-pur-completed-coefficient-presentation-transport",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-ringed-koszul-completion-reflector"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define privately the uniform constructible-reduction property. Each derived reduction has its recorded exact triangulated structure, and each coefficient quotient is finite. The finite-level constructible triangulation theorem therefore proves zero, isomorphism, shift and middle-vertex constructibility. Zero has empty support. Reduction and cohomology shift comparisons translate a support interval [a,b] to [a-m,b-m], uniformly in the reduction level.",
+   "uses": [
+    "def-weil-integral-derived-reduction",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-proetale-dbc-triangulated",
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-cohomological-support",
+    "lem-sp-derived-cohomology-shift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a distinguished triangle whose outside objects have uniform reduction intervals [a1,b1] and [a3,b3], choose [min(a1,a3),max(b1,b3)]. Outside that interval the two outside cohomology objects are zero. The homology exact segment kills the middle cohomology object. This proves middle-vertex closure with a single interval for all exponents.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact",
+    "def-weil-cohomological-support",
+    "def-weil-integral-derived-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The integral object property is the intersection of completeness with the uniform constructible-reduction property. Mathlib intersection instances combine their isomorphism and triangulated closure. Rewrite by the equality in the first step to obtain exactly the original legacy theorem, with all universes and hypotheses unchanged. The full subcategory inherits its triangulation and exact inclusion from Mathlib.",
+   "uses": [
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-triangulated-subcategory"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-derived-complete-legacy-comparison",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-integral-derived-reduction",
+  "def-weil-derived-complete",
+  "def-weil-pbc-intrinsic-completion",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "def-pur-completed-coefficient-presentation-transport",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-proetale-dbc-triangulated",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-cohomological-support",
+  "lem-sp-derived-cohomology-shift",
+  "lem-sf-derived-homology-long-exact",
+  "def-weil-triangulated-subcategory"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "G3",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.5 after Definition 6.5.1; Stacks algebraization.tex, Tag 0999; proved private argument replayed from Q9 SfIntegralConstructibleTriangulated to avoid its aggregate-import cycle, then transported by C7 sfDerivedComplete_iff_legacy."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rlw 'boundedConstructibleDerivedCompleteIntegral_isTriangulated' lean/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-26",
+   "verdict": "no match",
+   "note": "name grep by tools/route_nodes.py only; the stage-1 worker adds LeanSearch / Loogle / LeanFinder searches"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived complete integral complexes whose reductions have constructible cohomology in a uniform bounded interval form a triangulated subcategory",
+   "results": "DerivedCategory.TStructure.t, DerivedCategory.IsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.IsLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsGEObjSingleFunctor",
+   "date": "2026-10-26",
+   "verdict": "no match",
+   "note": "No match: only general derived-category or triangulated-object-property interfaces, not the completed integral constructibility predicate."
+  },
+  {
+   "tool": "grep",
+   "query": "boundedConstructibleDerivedCompleteIntegral|[Dd]erived[Cc]omplete|[Cc]onstructible",
+   "results": "none",
+   "date": "2026-10-26",
+   "verdict": "no match",
+   "note": "No match for this coefficient-specific theorem.",
+   "subdirectory": "Algebra/Homology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived complete integral complexes with uniformly bounded constructible reductions form a triangulated subcategory",
+   "results": "CategoryTheory.Triangulated.Subcategory, DerivedCategory.instIsTriangulated, CategoryTheory.ObjectProperty.IsTriangulated, CategoryTheory.ObjectProperty.instIsTriangulatedLeftOrthogonalOfIsStableUnderShiftInt, CategoryTheory.ObjectProperty.instIsTriangulatedClosed₃OfIsTriangulated, CategoryTheory.ObjectProperty.instIsTriangulatedIsoClosure, CategoryTheory.ObjectProperty.IsTriangulated.mk, CategoryTheory.Triangulated.TStructure.mk",
+   "date": "2026-10-26",
+   "verdict": "no match",
+   "note": "No match: only general derived-category or triangulated-object-property interfaces, not the completed integral constructibility predicate."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.IsTriangulated, CategoryTheory.ObjectProperty.IsClosedUnderIsomorphisms",
+   "results": "CategoryTheory.ObjectProperty.instIsClosedUnderBinaryProductsOfIsTriangulatedOfIsClosedUnderIsomorphisms, CategoryTheory.ObjectProperty.instIsClosedUnderFiniteProductsOfIsTriangulatedOfIsClosedUnderIsomorphisms, CategoryTheory.ObjectProperty.instIsTriangulatedMinOfIsClosedUnderIsomorphisms, CategoryTheory.ObjectProperty.instIsTriangulatedMinOfIsClosedUnderIsomorphisms_1, CategoryTheory.ObjectProperty.instIsTriangulatedInverseImage, CategoryTheory.ObjectProperty.IsVerdierLeftLocalizing.fac', CategoryTheory.ObjectProperty.IsVerdierRightLocalizing.fac', CategoryTheory.ObjectProperty.isVerdierLeftLocalizing_iff",
+   "date": "2026-10-26",
+   "verdict": "no match",
+   "note": "No match: only general derived-category or triangulated-object-property interfaces, not the completed integral constructibility predicate."
+  },
+  {
+   "tool": "grep",
+   "query": "IsTriangulated|IsClosedUnderIsomorphisms",
+   "results": "18, 29, 63, 69, 75",
+   "date": "2026-10-26",
+   "verdict": "no match",
+   "note": "No match for this coefficient-specific theorem.",
+   "subdirectory": "CategoryTheory/Triangulated/Subcategory.lean"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The bounded constructible subcategory of the derived category of adically complete sheaves is stable under shifts isomorphisms and extensions",
+   "results": "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.isLE_Q_obj_iff",
+   "date": "2026-10-26",
+   "verdict": "no match",
+   "note": "No match: only general derived-category or triangulated-object-property interfaces, not the completed integral constructibility predicate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "lem-weil-integral-ctf-triangulated",
+  "date": "2026-10-26",
+  "tool": "tools/route_nodes.py",
+  "why": "PROVISIONAL: sorried declaration on the sorry route (local/sorry-route.json) with no DAG node, recorded automatically after the route recompute (the human, 2026-10-23: every proof-related upstream sorry gets a node, and a node without a written proof goes to stage 1). The statement is only the Lean signature and docstring: the stage-1 worker writes it in words with [node] citations and stmt_deps, does the Mathlib searches (LeanSearch, Loogle or LeanFinder, local grep), fills blueprint.same_as, and splits it"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.Paper.IntegralConstructibleTriangulated",
+  "file": "lean/Sheaf/Paper/IntegralConstructibleTriangulated.lean",
+  "declaration": "WeilConjectures.boundedConstructibleDerivedCompleteIntegral_isTriangulated",
+  "declarations": [
+   "WeilConjectures.boundedConstructibleDerivedCompleteIntegral_isTriangulated"
+  ],
+  "statement": "theorem boundedConstructibleDerivedCompleteIntegral_isTriangulated\n    (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    (E : Type u) [Field E] [Algebra (Padic l) E]\n    [FiniteDimensional (Padic l) E] (Y : AlgebraicGeometry.Scheme.{u}) :\n    ObjectProperty.IsClosedUnderIsomorphisms.{u + 2, u + 2}\n      (C := completedIntegralDerivedCategory.{d, u, u} l E Y D hl)\n      (boundedConstructibleDerivedCompleteIntegral.{d, u} D l hl E Y) ∧\n    ObjectProperty.IsTriangulated.{u + 2, u + 2}\n      (C := completedIntegralDerivedCategory.{d, u, u} l E Y D hl)\n      (boundedConstructibleDerivedCompleteIntegral.{d, u} D l hl E Y) := by\n  sorry",
+  "by": "maintainer",
+  "date": "2026-10-26",
+  "note": "SHEAF declaration attached as it stands, proof still `sorry`; recorded by tools/route_nodes.py"
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "lem-route-bounded-constructible-derived-complete-integral-is-triangulated",
+  "worker": "stage1",
+  "summary": "Replaced the provisional machine docstring and truncated Lean signature by the exact completed-integral object-property statement. Reused the existing identical integral constructibility triangulation theorem after checking definitions, hypotheses and absence of a dependency path back to this item. No new nodes. All six actual Mathlib searches logged; no matching Mathlib theorem.",
+  "blueprint": "Realizes the triangulated D^b_c input in the well-definedness paragraph of def-weil-finite-tor-amplitude; retains the legacy completed-sheaf coefficient interface of the recorded Lean declaration. The latest ancestor now discusses condensed coefficients; no equivalence with that category is asserted here."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-cc-NA-4f369760f",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-4f369760f (reviewer sub-agent of L); spot-checked: I read the full item, the report, every cited node's statement, the legacy Lean (DerivedCompleteIntegralDetailed.lean lines 39-55 and IntegralConstructibleTriangulated.lean) and the sources. The item's words match the recorded legacy predicate clause by clause, and the predicate matches def-weil-derived-complete-integral-detailed: derived complete; every reduction for n ≥ 1 bounded and finite-torsion constructible (the Lean index n+1); one interval r ≤ s, independent of n, containing all cohomological supports. The ambient category is D(Y_proet, Ô_{E,Y}) with the finite-field datum and ℓ ≠ p. The conclusion is isomorphism closure together with IsTriangulated. Y stays arbitrary, no hypothesis is added and no target is weakened. Step 1 is a correct unfolding of the definitions. Step 2 cites the existing lem-weil-integral-constructible-triangulated, whose statement has the same definition node, the same ambient category, any scheme Y, and closure under zero, isomorphisms, every shift in ℤ and extensions. The legacy declaration's docstring is that theorem's 8-step proof word for word, so this route item is the theorem's old Lean attachment and reusing it is correct. Step 3 uses def-weil-triangulated-subcategory correctly (extension closure up to isomorphism holds with the identity). Following stmt_deps, proof_deps and step uses from the cited theorem reaches 11,339 nodes and never the item, so there is no cycle. No new nodes, nothing to drop. Sources checked: Bhatt–Scholze §6.5, Definition 6.5.1 and the next sentence; Stacks Tag 0999 (algebraization.tex lines 909-927); Tags 05QM and 05QX (derived.tex lines 220 and 860). No SGA. Edge cases checked: empty Y, the zero object (support in [0,0]), exponent 1, shifts of either sign, and outer intervals that differ. Advisory, nothing changed: the machine-generated title is truncated and the source field is the maintainer's. The cited theorem's Lean is now sfIntegralConstructible_isTriangulated while this item's Lean is the legacy boundedConstructibleDerivedCompleteIntegral, so a later stage must prove the legacy declaration directly or identify the two Lean predicates; no such identification is published (Q22). No tool_uses are needed (same unit)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-1e13c",
+  "group": "G3",
+  "result": "fix",
+  "landing": "20261025T204616-L-2982087",
+  "kind": "proof",
+  "note": "independent cc review: delivered IntegralConstructibleTriangulated.lean (proof of boundedConstructibleDerivedCompleteIntegral_isTriangulated, replay of the private Q9 SfIntegralConstructibleTriangulated argument plus sfDerivedComplete_iff_legacy; import cycle verified) and its node against the published node after the split at ac048c8c; both importers compiled against the delivered item"
+ }
+}

@@ -1,0 +1,107 @@
+{
+ "id": "lem-asd-ordinary-finite-single-unit-naturality",
+ "kind": "statement",
+ "title": "Naturality of the inverse right unit with ordinary constant coefficients",
+ "statement": "For every commutative ring A, every scheme X, and every morphism f:K->Kprime in the ordinary unbounded derived category of A-module sheaves on X_et, f followed by the inverse of derivedTensorSingleUnitIso(Kprime) equals the inverse of derivedTensorSingleUnitIso(K) followed by tensor(f,id_{A_X}). The tensor and constant coefficient object are exactly those of def-asd-ordinary-finite-p1-arrows. No finiteness, torsion, invertibility or Noetherian hypothesis is required.",
+ "stmt_deps": [
+  "def-asd-ordinary-finite-p1-arrows"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
+  "place": "Definition of h by inverse tensor right unit, Chern class, and evaluation; the base-change argument uses naturality of this right unit."
+ },
+ "proof": [
+  {
+   "text": "For an abstract coefficient category, express the inverse constant-unit comparison as the inverse derived right unitor followed by tensoring with singleFunctorObjUnitIso.inv. This is the comparison constant_unit_iso in lem-asd-ordinary-finite-derived-right-unit-pullback.",
+   "uses": [
+    "lem-asd-ordinary-finite-derived-right-unit-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The composite is the component of derivedTensorRightUnitorInvComp. Its naturality, which follows from inverse right-unitor naturality and tensor interchange, gives the desired equation. Specialize the coefficient category to ModuleCat A and retain the prescribed ordinaryFiniteTensor and ordinaryFiniteUnit encodings. This is purely categorical and also applies to zero coefficients and empty schemes.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-ordinary-finite-derived-right-unit-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
+  "place": "Tensor right-unit normalization and naturality; extracted as a proved helper after profiling concrete normalization costs (A7, 2026-10-27)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the inverse of the tensor right unitor after identifying a constant sheaf in degree zero with the tensor unit",
+   "date": "2026-10-27",
+   "results": "8 hits, including sheafToPresheaf tensor coherences and tensoringRight_ε; no exact ordinary derived constant-unit comparison.",
+   "verdict": "Use existing derivedTensorRightUnitorInvComp and its naturality, found by local source search."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.rightUnitor_inv_naturality",
+   "date": "2026-10-27",
+   "results": "1 hit: CategoryTheory.MonoidalCategory.rightUnitor_inv_naturality, Mathlib.CategoryTheory.Monoidal.Category.",
+   "verdict": "This is the generic monoidal identity underlying the existing derived inverse-unit natural transformation."
+  },
+  {
+   "tool": "grep",
+   "query": "rightUnitor_inv_naturality|derivedTensorSingleUnitIso|derivedTensorRightUnitorInvComp",
+   "date": "2026-10-27",
+   "results": "15 Mathlib hits, including the right-unitor identity and its graded-object version. Local rg found derivedTensorRightUnitorInvComp in WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Unit and constant_unit_iso in OrdinaryFiniteDerivedRightUnitPullback.",
+   "verdict": "Reuse those proved constructions; the displayed cached ordinary-coefficient statement has no existing exact declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryFiniteP1KummerBaseChange",
+  "date": "2026-10-27",
+  "group": "A7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-ordinary-finite-p1-kummer-base-change",
+   "place": "Proof: naturality of the inverse tensor right unit in the evaluation recipe.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryFiniteSingleUnitNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryFiniteSingleUnitNaturality.lean",
+  "declaration": "AlgebraicGeometry.Etale.ordinaryFiniteSingleUnit_naturality",
+  "statement": "theorem ordinaryFiniteSingleUnit_naturality (A : Type (u + 1)) [CommRing A]\n    (X : Scheme.{u}) {K K' : DerivedCategoryModule A X} (f : K ⟶ K') :\n    f ≫ (derivedTensorSingleUnitIso K').inv = (derivedTensorSingleUnitIso K).inv ≫\n      ((ordinaryFiniteTensor A X).map f).app (ordinaryFiniteUnit A X)",
+  "branch": "sheaf-dag",
+  "by": "A7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261027T012803-L-2330500",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261027T012803-L-2330500",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,173 @@
+{
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "Paragraph 2: transposing the ordered composite integrations; explicit unit and tensor calculations for the adjoint transpose."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "Paragraph 2: transposing the ordered composite integrations; explicit unit and tensor calculations for the adjoint transpose."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compact support projection formula compatibility with tensor unit and iterated integration",
+   "results": {
+    "hits": 8,
+    "top": [
+     "MeasureTheory.integral_integral_swap_of_hasCompactSupport",
+     "CompactlySupportedContinuousMap.integralLinearMap_apply",
+     "MeasureTheory.GridLines.T_univ",
+     "CompactlySupportedContinuousMap.integralLinearMap",
+     "continuousOn_integral_bilinear_of_locally_integrable_of_compact_support",
+     "ContinuousMapZero.integral_apply",
+     "CompactlySupportedContinuousMap.integralPositiveLinearMap_toFun",
+     "continuousOn_integral_of_compact_support"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "No exact match: analytic integration/support and abstract adjunction results do not state the canonical small-etale projection calculations."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(assoc|unit)|integration.*comp",
+   "results": {
+    "hits": 25,
+    "top": [
+     "Mathlib/Algebra/Algebra/NonUnitalHom.lean",
+     "Mathlib/Algebra/Algebra/NonUnitalHom.lean",
+     "Mathlib/Algebra/Algebra/NonUnitalHom.lean",
+     "Mathlib/Algebra/Algebra/Unitization.lean",
+     "Mathlib/Algebra/Algebra/Unitization.lean",
+     "Mathlib/Algebra/Algebra/Unitization.lean",
+     "Mathlib/Algebra/Algebra/Unitization.lean",
+     "Mathlib/Condensed/Discrete/LocallyConstant.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "No exact match: analytic integration/support and abstract adjunction results do not state the canonical small-etale projection calculations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp_homEquiv",
+   "results": {
+    "hits": 1,
+    "top": [
+     "CategoryTheory.Adjunction.comp_homEquiv"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "No exact match: analytic integration/support and abstract adjunction results do not state the canonical small-etale projection calculations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical compact support projection formula preserves the tensor unit and composition of integration traces",
+   "results": {
+    "hits": 8,
+    "top": [
+     "hasCompactSupport_comp_left",
+     "HasCompactMulSupport.comp_homeomorph",
+     "Pi.comul_comp_finsuppLcoeFun",
+     "HasCompactSupport.comp_homeomorph",
+     "HasCompactMulSupport.comp_isClosedEmbedding",
+     "HasCompactMulSupport.comp₂_left",
+     "HasCompactSupport.comp_isClosedEmbedding",
+     "HasCompactSupport.mul_left"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "No exact match: analytic integration/support and abstract adjunction results do not state the canonical small-etale projection calculations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegrationTransposeComposition",
+  "date": "2026-10-24",
+  "group": "K6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-vector-bundle-purity",
+   "place": "Paragraph 2: transposing the ordered composite integrations; explicit unit and tensor calculations for the adjoint transpose.",
+   "via": [
+    "lem-pur-integration-transpose-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "id": "lem-pur-iterated-integration",
+ "kind": "statement",
+ "title": "Composition of ordered integrations before taking adjoint transposes",
+ "statement": "Let $A$ be a finite commutative ring and $X\\xrightarrow fY\\xrightarrow gZ$ compactifiable separated finite-type morphisms of Noetherian schemes. In the ordinary unbounded etale categories [def-weil-pbc-derived-categories], write $F_a=Ra_!$ [def-amb-etale-compact-support], $h=gf$, $W_h=D_fW_g\\otimes W_f$, and use the integration and reassociation constructions $I_a,a_K$ of [def-pur-integration-transpose-data]. Let traces $t_f,t_g,t_h$ be supplied, and assume the canonical projections [def-pur-compact-support-projection-map] with $W_f,W_g,W_h$ are invertible on every coefficient. Let $\\alpha:F_gF_f\\simeq F_h$ be the specified compositor [def-sf-etale-support-compositor], and assume $t_h\\alpha_{W_h}=t_gF_g(I_f(W_g))$. Then for every $K\\in D(Z_{\\mathrm{et}},A)$, $I_h(K)\\alpha_{D_hK\\otimes W_h}=I_g(K)F_g(I_f(D_gK\\otimes W_g)F_f(a_K))$. No exceptional right adjoints are used.",
+ "stmt_deps": [
+  "def-pur-integration-transpose-data",
+  "def-weil-pbc-derived-categories",
+  "def-amb-etale-compact-support",
+  "def-pur-compact-support-projection-map",
+  "def-sf-etale-support-compositor"
+ ],
+ "proof": [
+  {
+   "text": "Use the proved source-library projectionMapOfCompactification_assoc and leftDerivedUpperStar_map_braiding_hom_δ. Naturality and the braid hexagons convert the ordinary right-factor law to the coefficient-first convention. Transport along the natural exact-to-derived pullback isomorphism; its inverse cancels and its tensor comparison becomes pullTensorIso. Invert the resulting equality by cancelling the two projections and the associator. Right-unitor naturality gives integration_tensor_law.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+    "place": "Paragraph 2: transposing the ordered composite integrations; explicit unit and tensor calculations for the adjoint transpose."
+   }
+  },
+  {
+   "text": "Apply this tensor law at D_gK and W_g. Naturality of the g projection in its sheaf argument, applied to beta=I_f(W_g), moves the tensor of beta through its inverse. Use the inverse composition equation [lem-amb-shriek-tensor-composition] and naturality of alpha to combine the two inverse projections. The pullback compositor cancels its inverse. The remaining tensor of alpha inverse followed by F_g(beta) and t_g is the tensor of t_h by the trace hypothesis. This is the displayed integration equality.",
+   "uses": [
+    "lem-amb-shriek-tensor-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+    "place": "Paragraph 2: transposing the ordered composite integrations; explicit unit and tensor calculations for the adjoint transpose."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-shriek-tensor-composition"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IteratedIntegration",
+  "file": "lean/Sheaf/Paper/IteratedIntegration.lean",
+  "declaration": "AlgebraicGeometry.Etale.IntegrationComposition.iterated_integration",
+  "statement": "theorem iterated_integration [Finite A] [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z] (f : X ⟶ Y) (g : Y ⟶ Z) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g] [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)] (Wf : DerivedCategoryModule A X) (Wg : DerivedCategoryModule A Y) (tf : (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).obj Wf ⟶ 𝟙_ _) (tg : (rightDerivedLowerShriek (ModuleCat.{u + 1} A) g).obj Wg ⟶ 𝟙_ _) (th : (rightDerivedLowerShriek (ModuleCat.{u + 1} A) (f ≫ g)).obj (object f Wf Wg) ⟶ 𝟙_ _) (hPf : ∀ L : DerivedCategoryModule A Y, IsIso (compactSupportProjectionMap A f Wf L)) (hPg : ∀ K : DerivedCategoryModule A Z, IsIso (compactSupportProjectionMap A g Wg K)) (hPh : ∀ K : DerivedCategoryModule A Z, IsIso (compactSupportProjectionMap A (f ≫ g) (object f Wf Wg) K)) (ht : (unboundedEtaleLowerShriekCompIso A f g).hom.app (object f Wf Wg) ≫ th = (rightDerivedLowerShriek (ModuleCat.{u + 1} A) g).map (integration f Wf tf hPf Wg) ≫ tg) (K : DerivedCategoryModule A Z) : (unboundedEtaleLowerShriekCompIso A f g).hom.app (object (f ≫ g) (object f Wf Wg) K) ≫ integration (f ≫ g) (object f Wf Wg) th hPh K = (rightDerivedLowerShriek (ModuleCat.{u + 1} A) g).map ((rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).map (reassociation f g Wf Wg K).hom ≫ integration f Wf tf hPf (object g Wg K)) ≫ integration g Wg tg hPg K",
+  "branch": "sheaf-dag",
+  "by": "K6",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-bc644",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261025T013218-L-3940996",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-bc644",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261025T013218-L-3940996",
+  "kind": "interface",
+  "note": "independent cc review: integrationTransposeComposition and the new modules IntegrationTransposeCompositionData/IntegrationUnitNormalization/IteratedIntegration against node lem-pur-integration-transpose-composition, the 3 new nodes, the change record, and the clone's original module (9 constructions preserved; unitObjectIso via an identical irreducible wrapper); direct importer AffineOrderedIntegrationTransposes compiled clean; axioms only propext/choice/Quot.sound"
+ }
+}

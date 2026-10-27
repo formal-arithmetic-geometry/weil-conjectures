@@ -87,7 +87,32 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "Rep.exists_categorical_filtration_of_invariant_flag"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "Rep.exists_categorical_filtration_of_invariant_flag",
+     "module": "WeilConjectures.RepresentationTheory.InvariantFlagCategoricalFiltration",
+     "lines": [
+      59,
+      162
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "lean": {
   "existing": false,
   "module": "WeilConjectures.RepresentationTheory.InvariantFlagCategoricalFiltration",
@@ -117,5 +142,31 @@
   "landing": "20261012T034934-L-1564424",
   "kind": "interface",
   "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $\\ell$ be a prime, $P$ a group and $M$ a representation of $P$ on a finite-dimensional $\\mathbf Z/\\ell\\mathbf Z$-vector space; put $n=\\dim M$. Let $(F_i)_{i\\in\\mathbf N}$ be subspaces of $M$ with $F_0=0$ and $F_n=M$, such that $F_i$ is $P$-stable for every $i\\le n$ and, for every $i<n$, $F_i\\subseteq F_{i+1}$, $\\dim F_{i+1}=i+1$ and $gx-x\\in F_i$ for all $g\\in P$ and $x\\in F_{i+1}$. Then there exist $m\\in\\mathbf N$, representations $(W_i)_{i\\in\\mathbf N}$ of $P$ over $\\mathbf Z/\\ell\\mathbf Z$ and morphisms of representations $\\iota_i:W_i\\to W_{i+1}$ such that $W_0=0$, $W_m\\cong M$, and for every $i<m$ the morphism $\\iota_i$ is a monomorphism whose cokernel is isomorphic to the trivial one-dimensional representation $\\mathbf Z/\\ell\\mathbf Z$. (A representation is a vector space with a linear action of $P$; morphisms are equivariant linear maps.)",
+  "proof": [
+   {
+    "text": "Set n=dim M and B_i=F_min(i,n), and equip each B_i with its restricted representation W_i. For i<n use the given inclusions and thereafter the identity on F_n. They are equivariant and injective, hence monic by Rep.mono_iff_injective. W_0 is zero by Rep.isZero_iff since F_0=0. The subtype map W_n→M is injective and surjective since F_n=M, so is an isomorphism in the abelian category Rep.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "For stable A⊆B put K=A.comap(B.subtype). The inclusion A→B followed by B→B/K is exact after forgetting to modules: an element mapped to zero lies in K and therefore comes from A. The second map is surjective. The faithful exact forgetful functor reflects exactness by ShortComplex.exact_map_iff_of_faithful. Exact.gIsCokernel gives the quotient cokernel, which is isomorphic to the chosen categorical cokernel. This is the proved private helper cokernel_inclusion_iso_quotient.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "For i<n the ranks satisfy dim B_i=i (use F_0=0 at zero and the preceding step otherwise), and dim B_(i+1)=i+1. Submodule.comapSubtypeEquivOfLe identifies K with B_i; Submodule.finrank_quotient_add_finrank gives dimension one for B_(i+1)/K. For any g, the condition g*x-x∈F_i makes the quotient action trivial. A linear equivalence to ULift(ZMod ℓ) exists by FiniteDimensional.nonempty_linearEquiv_of_finrank_eq and finrank_ulift. Its trivial action makes the equivalence equivariant; Rep.mkIso and the quotient/cokernel isomorphism give the required cokernel identification. Every step is proved in Lean from Mathlib, without sorry.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

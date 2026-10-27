@@ -1,0 +1,80 @@
+{
+ "id": "lem-pur-coherent-shift-from-core",
+ "kind": "statement",
+ "title": "Construct coherent shifts from zero and addition core data",
+ "statement": "Let $C$ be a category [def-nagata-category] and $A$ an additive monoid, with independent universes. For each $a\\in A$ let $F_a:C\\to C$ be a functor. Suppose given natural isomorphisms $z:F_0\\xrightarrow{\\sim}\\operatorname{id}_C$ and $c_{a,b}:F_{a+b}\\xrightarrow{\\sim}F_bF_a$. Assume, for all $a,b,d\\in A$ and $X\\in C$,\n$$F_d(c_{a,b,X})\\circ c_{a+b,d,X}=c_{b,d,F_aX}\\circ c_{a,b+d,X},$$\n$$c_{0,a,X}=F_a(z_X^{-1}),\\qquad c_{a,0,X}=z_{F_aX}^{-1},$$\nwhere the equalities use the canonical transports along associativity and unit equalities in $A$. There is a coherent shift structure $\\mathrm{HasShift}(C,A)$ whose shift functor at $a$ is $F_a$, whose shift-zero isomorphism is $z$, and whose shift-add isomorphism is $c_{a,b}$. Here a coherent shift structure means a monoidal functor from the discrete monoidal category of $A$ [def-sfb-monoidal-category] to the category of endofunctors of $C$, with the stated zero and addition identifications.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+  "place": "Retained order-1462 coherent shift construction; generic core formalization: Mathlib/CategoryTheory/Shift/Basic.lean, ShiftMkCore (71-87), hasShiftMk (153), ShiftMkCore.shiftFunctor_eq (204), shiftFunctorZero_eq (208), shiftFunctorAdd_eq (212)."
+ },
+ "stmt_deps": [
+  "def-nagata-category",
+  "def-sfb-monoidal-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "hasShiftMk|ShiftMkCore|shift.*[Ee]xt",
+   "results": "18 hits: Mathlib/CategoryTheory/Shift/Induced.lean, Mathlib/CategoryTheory/Shift/Induced.lean, Mathlib/CategoryTheory/Shift/Induced.lean, Mathlib/CategoryTheory/Shift/Induced.lean, Mathlib/CategoryTheory/Shift/Induced.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/Basic.lean",
+   "date": "2026-10-27",
+   "verdict": "match: CategoryTheory.hasShiftMk and the ShiftMkCore comparison equations; source read."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShiftMkCore, CategoryTheory.HasShift",
+   "results": "3 hits: CategoryTheory.hasShiftMk, CategoryTheory.HasShift.mkShiftCoreOp, CategoryTheory.TwistShiftData.shiftMkCore",
+   "date": "2026-10-27",
+   "verdict": "match: CategoryTheory.hasShiftMk and the ShiftMkCore comparison equations; source read."
+  },
+  {
+   "tool": "grep",
+   "query": "hasShiftMk",
+   "results": "8 hits: Mathlib/CategoryTheory/Shift/Induced.lean, Mathlib/CategoryTheory/Shift/Opposite.lean, Mathlib/CategoryTheory/Shift/Basic.lean, Mathlib/CategoryTheory/Shift/Basic.lean, Mathlib/CategoryTheory/Shift/Basic.lean, Mathlib/CategoryTheory/Shift/Basic.lean, Mathlib/CategoryTheory/Shift/Basic.lean, Mathlib/CategoryTheory/Shift/Twist.lean",
+   "date": "2026-10-27",
+   "verdict": "match: CategoryTheory.hasShiftMk and the ShiftMkCore comparison equations; source read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent integer shifts on a category can be constructed from functors indexed by an additive monoid with zero and addition natural isomorphisms satisfying associativity and unit axioms",
+   "results": "8 hits: CategoryTheory.hasShiftMk, CategoryTheory.ShiftMkCore, CategoryTheory.HasShift, CategoryTheory.HasShift.shift, CategoryTheory.TwistShiftData.shiftMkCore, CategoryTheory.HasShift.induced, CategoryTheory.Functor.ShiftSequence, CategoryTheory.TwistShiftData",
+   "date": "2026-10-27",
+   "verdict": "match: CategoryTheory.hasShiftMk and the ShiftMkCore comparison equations; source read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct a coherent shift indexed by an additive monoid from ShiftMkCore with shift functors zero isomorphism and addition isomorphisms",
+   "results": "8 hits: CategoryTheory.ShiftMkCore.mk, CategoryTheory.Functor.FullyFaithful.hasShift, CategoryTheory.TwistShiftData.shiftMkCore, CategoryTheory.hasShiftMk, CategoryTheory.HasShift.induced, CategoryTheory.ShiftMkCore.F, CategoryTheory.HasShift.mk, CategoryTheory.Functor.shift",
+   "date": "2026-10-27",
+   "verdict": "match: CategoryTheory.hasShiftMk and the ShiftMkCore comparison equations; source read."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.hasShiftMk",
+  "file": "Mathlib/CategoryTheory/Shift/Basic.lean",
+  "how": "specializes in one line: construct ShiftMkCore (lines 71-87) from the displayed F,z,c and equations, then apply CategoryTheory.hasShiftMk at line 153. Its prescribed values are CategoryTheory.ShiftMkCore.shiftFunctor_eq at line 204, shiftFunctorZero_eq at line 208 and shiftFunctorAdd_eq at line 212 in the same file. These equalities are rfl; no comparison of different notions is required.",
+  "line": 153
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-general-pair-shift-normalization",
+  "date": "2026-10-27",
+  "group": "NR"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-algebraically-closed-coefficients",
+   "place": "Retained order-1462 clause (E,K)[1]=(E,K[1]): packaging the descended zero and addition isomorphisms as the full integer-shift structure. Mathlib CategoryTheory/Shift/Basic.lean:64-87,119-155,204-214.",
+   "via": [
+    "lem-pur-general-pair-shift-normalization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

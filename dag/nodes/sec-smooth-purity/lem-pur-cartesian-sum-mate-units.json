@@ -1,0 +1,153 @@
+{
+ "id": "lem-pur-cartesian-sum-mate-units",
+ "kind": "statement",
+ "title": "The derived Cartesian sum mate satisfies the sheaf right-derived unit equation",
+ "statement": "Let A be any commutative ring and let (b,q,p,v) be a Cartesian square of arbitrary schemes with b,v etale. Form the sheaf sum base-change isomorphism beta:S_v p^* -> q^* S_b [def-weil-pbc-etale-shriek-base-change-map, def-weil-pbc-etale-sum-extension] and its right mate theta:q_* S_v -> S_b p_*. In the unbounded derived categories [def-weil-pbc-derived-categories], let sumEx be inverse sum mate of the exact-derived inverse-image composition square, assume sumEx invertible, and let gamma be the proper-image-side mate of inverse sumEx [def-kun-unbounded-exchange]. Precomposing gamma with the canonical unit for Rq_* followed by D(S_v) equals Q_h of degreewise theta followed by the canonical unit for D(S_b) followed by Rp_*. The precise factors are in the Lean statement. No properness, separatedness, compactification, Noetherianity, boundedness, or coefficient finiteness is used.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7F: derive the sheaf transpose equation using adjunction units. The Lean proof uses the existing abstract exact-localization and mixed-derived mate theorems."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-etale-sum-extension",
+  "def-weil-pbc-etale-shriek-base-change-map",
+  "def-kun-unbounded-exchange"
+ ],
+ "proof": [
+  {
+   "text": "Use the composite leftAdjointUniq unit identity and iterated-mates identity to identify beta inverse with the inverse sheaf sum mate.",
+   "uses": [
+    "def-weil-pbc-etale-shriek-base-change-map",
+    "def-kun-unbounded-exchange"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exact_localization_inverse_mate to identify inverse sumEx with the exact-derived square of beta, including its chosen comparison isomorphisms.",
+   "uses": [
+    "lem-sf-exact-localization-inverse-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The exact-derived-square Q_h component formula satisfies the normalization hypothesis of derivedExact_mateEquiv_app_fac. Apply that theorem to the q and p inverse-image/direct-image adjunctions, then cancel exact localization factors. The canonical composite right-derived unit formulas yield the stated natural-transformation equality componentwise.",
+   "uses": [
+    "lem-pur-exact-derived-mate",
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-shriek-base-change-map",
+  "def-kun-unbounded-exchange",
+  "lem-sf-exact-localization-inverse-mate",
+  "lem-pur-exact-derived-mate",
+  "def-weil-pbc-derived-categories"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7F: derive the sheaf transpose equation using adjunction units. The Lean proof uses the existing abstract exact-localization and mixed-derived mate theorems.",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a Cartesian square of schemes with separated etale horizontal arrows, the sheaf mate of sum base change agrees with the canonical inclusion into the common direct image",
+   "results": "Eight hits: pullbackPushforwardAdjunction, mateEquiv_square, relative gluing, pullback carriers, separatedness under base change, coproduct pullback, MayerVietorisSquare. No sheaf support normalization.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper direct image etale sum extension commute Cartesian square derived mate compact support",
+   "results": "Eight general etale and scheme-limit matches; none identifies the chosen compact-support comparison.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "Twelve generic adjunction-mate identities; useful for categorical calculations only.",
+   "date": "2026-10-27",
+   "verdict": "Use abstract mate identities, not a replacement for geometric normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "etaleLowerShriekToLowerStar.*baseChange|baseChange.*etaleLowerShriekToLowerStar",
+   "results": "No Mathlib hits. Project searches found the graph normalization and nested-etale-summand theorem, but no normalization of the Cartesian sheaf mate.",
+   "date": "2026-10-27",
+   "verdict": "The geometric steps need statements; existing derived-mate lemmas handle the categorical part."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A derived mate square between exact functors and right derived direct images satisfies the same unit equation as the ordinary sheaf mate",
+   "results": "Eight generic derived adjunction unit facts. The local library already proves derivedExact_mateEquiv_app_fac and exact_localization_inverse_mate, which are used in the new complete categorical proof.",
+   "date": "2026-10-27",
+   "verdict": "Use existing project categorical lemmas."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper support composition comparison for a commuting square of schemes is normalized by the sheaf inclusion into the common direct image and the unbounded right derived functor unit",
+   "results": "Eight generic scheme and sheaf pushforward-composition matches. No compact-support tower normalization against the right-derived unit.",
+   "date": "2026-10-27",
+   "verdict": "No exact normalization theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleGraphProperInterchange",
+  "date": "2026-10-27",
+  "group": "P1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Tags 0F7B (lemma-shriek-proper-and-open), 0F7F (lemma-shriek-proper-and-open-base-change), 0F7J (lemma-shriek-composition), and item (3) in the final paragraph of Tag 0F7L; parent steps 3, 4 and 5. The common-support identification is the sheaf composition used explicitly in the proof of 0F7B.",
+   "via": [
+    "lem-pur-etale-horizontal-support-tower",
+    "lem-pur-finite-etale-dualizing-normalization",
+    "lem-pur-diagonal-section-pasting",
+    "lem-pur-etale-horizontal-support-mate",
+    "lem-pur-etale-graph-proper-tower",
+    "lem-pur-graph-proper-interchange"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CartesianSumMateUnits",
+  "file": "lean/Sheaf/AlgebraicGeometry/CartesianSumMateUnits.lean",
+  "declaration": "AlgebraicGeometry.Etale.cartesian_sum_mate_units",
+  "statement": "theorem cartesian_sum_mate_units\n    (A : Type (u + 1)) [CommRing A]\n    {W Y' Z Y : Scheme.{u}}\n    (q : W ⟶ Y') (p : Z ⟶ Y)\n    (b : W ⟶ Z) [Etale b]\n    (v : Y' ⟶ Y) [Etale v]\n    (sq : IsPullback b q p v)\n    [IsIso (((mateEquiv\n      (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) v inferInstance)\n      (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) b inferInstance)).symm\n      (TwoSquare.mk _ _ _ _ (exactDerivedSquareUpperStarIso (ModuleCat.{u + 1} A)\n        sq.toCommSq).hom)).natTrans)] :\n    let θ := (mateEquiv\n      (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) q)\n      (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) p)\n      (TwoSquare.mk _ _ _ _ (etaleLowerShriekBaseChangeIso A sq).hom)).natTrans\n    let sumEx := ((mateEquiv\n      (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) v inferInstance)\n      (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) b inferInstance)).symm\n      (TwoSquare.mk _ _ _ _\n        (exactDerivedSquareUpperStarIso (ModuleCat.{u + 1} A) sq.toCommSq).hom)).natTrans\n    let gam := (mateEquiv\n      (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) q)\n      (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) p)\n      (TwoSquare.mk _ _ _ _ (inv sumEx))).natTrans\n    (Functor.rightDerivedFunctorCompMapDerivedCategoryUnit\n      (lowerStar (ModuleCat.{u + 1} A) q)\n      (etaleLowerShriek (ModuleCat.{u + 1} A) v inferInstance)) ≫\n      Functor.whiskerLeft DerivedCategory.Qh gam =\n    Functor.whiskerRight (NatTrans.mapHomotopyCategory θ (.up ℤ)) DerivedCategory.Qh ≫\n      Functor.mapDerivedCategoryCompRightDerivedFunctorUnit\n        (etaleLowerShriek (ModuleCat.{u + 1} A) b inferInstance)\n        (lowerStar (ModuleCat.{u + 1} A) p)",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261027T065854-L-2484616",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261027T065854-L-2484616",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

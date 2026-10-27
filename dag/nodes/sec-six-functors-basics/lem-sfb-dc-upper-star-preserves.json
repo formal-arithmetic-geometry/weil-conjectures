@@ -279,7 +279,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-0609ecc99 (reviewer sub-agent of L); spot-checked: Read in full: the item, both new nodes, every cited statement, the main-20261015 blueprint statement and proof, the unit sk-def-sfb-dc-restricted-functors, the repair note, the old 7153-character proof and the live Q25 proof. Shape: this head is the rebased re-push of the PASSed 3cb0f7e4, which the landing refused for lean_audit drift. The new nodes are byte-identical to that head, the proof is identical, and the item differs from live only in proof, proof_deps, proof_origin and split_report; the statement is verbatim. Mathematics: steps 1-7 are correct. Exactness for any Lambda and any f comes from det-prop-sfb-module-pullback-exact-main. Lf^* is identified with F_D by the left Kan extension of lem-weil-pbc-exact-functor-derived-functor, and the H^q formula for all q comes from lem-weil-pbc-exact-functor-bounded-below. The strata are the base changes X x_Y Y_a, which are locally closed strata as def-constructible-stratification requires. The Ext/Res directions along alpha are right (Ext_alpha = Res_{alpha^-1}). The inverse-image node is true: base change of a pro-etale covering, monoidal composition iso beta_i, regular module sent to regular module via beta^-1, exact transport and Res, same ranks. It was tested on f=id, empty schemes, ranks 0, R=0 and Z/4. Fault C5: the new lem-sfb-local-finite-presentation-coefficient-iso duplicates lem-sfb-lfp-scalar-isomorphism, which is in the base, in the same unit, split and reviewed as a pass (Q24, merged 03:23, landed for stage 2 at 07:08). It states that Res and Ext along a ring-object isomorphism preserve and reflect local finite presentation on the same covers with the same ranks; the worker and the first reader both missed it. FIX: the node is dropped and steps 3, 5 and 6 and proof_deps cite the existing node; there is no cycle (item not in its 304-node closure). B3: added [def-pc-fibre-product] to the inverse-image node's statement and stmt_deps. After the fix the proof is 2155 characters. Every old argument has a carrier: steps 3 and 6-8 are in the new inverse-image node, relabelling is in lem-sfb-lfp-scalar-isomorphism, and exactness, cohomology and stratification are in existing nodes. Tools accepted: the sk-def-exchange exact-functor nodes and lemma-constructible-pullback-stratification. No SGA. Maintainer note: 1 new node remains against the note's 2, but a second node could only duplicate existing ones and the item is already Lean-proved, so close the note with this landing. The live tool_uses still list lem-weil-pbc-module-constructible-pullback and det-prop-sfb-module-pullback-exact-lifted, which are now stale.; 2 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "tool_uses": [
   "det-prop-sfb-module-pullback-exact-lifted",
   "lem-sfb-alpha-iso",
@@ -300,21 +311,37 @@
   "note": "attached by the lead's tool step2_attach.py 2026-10-18 03:07 UTC (L, propagation 2026-10-18), live declaration proved in WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible: Lf^* preserves bounded constructible complexes for a morphism of the setting, any commutative condensed ring Lambda: the lemma's statement, proved in live (no sorry; the module's own sorries are other declarations)"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "A4",
+  "reviewer": "C-46b2a",
+  "group": "J7",
   "result": "pass",
-  "landing": "20261021T013334-L-2287154",
+  "landing": "20261025T101203-L-3669421",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "note": "independent cc review: boundedConstructible_rightDerivedLowerStar_obj proof (devissage + triangulated inverse image) against lem-sfb-dc-lower-star-preserves node and the two new single-sheaf nodes/modules; removed plain imports against unit sk-prop-open-coefficients (realized empty) and 4 direct importers compiled with the delivered modules",
   "sorry_before": [
-   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_obj",
-   "AlgebraicGeometry.ProEtale.CondensedRing.isMonoidalClosed_boundedConstructible"
+   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_obj"
   ],
-  "sorry_after": [
-   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_obj",
-   "AlgebraicGeometry.ProEtale.CondensedRing.isMonoidalClosed_boundedConstructible"
-  ]
+  "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\Lambda$ be a commutative condensed ring and let $f\\colon X\\to Y$ be a morphism of the\nsetting of [sk-def-sfb-dc-setting]. If $K\\in D(\\Mod_{\\Lambda_Y})$ is bounded constructible\n([det-def-sfb-bounded-constructible]), then so is $Lf^*K\\in D(\\Mod_{\\Lambda_X})$\n([sk-def-sfb-module-derived-pushpull]).",
+  "proof": [
+   {
+    "text": "The module-object pullback $f^*$ is exact ([det-prop-sfb-module-pullback-exact-main]), and\n$Lf^*\\cong D(f^*)$ is computed levelwise ([sk-prop-sfb-module-derived-factorization]). Hence\n$H^q(Lf^*K)\\cong f^*H^q(K)$ for all $q$, so $Lf^*K$ is bounded. It remains to show that $f^*M$\nis constructible ([sk-def-sfb-constructible]) for a constructible $\\Lambda_Y$-module $M$. Let\n$Y=\\bigsqcup_aY_a$ be a finite stratification such that each $M|_{Y_a}$ is locally finitely\npresented. Then the preimages $X_a=f^{-1}(Y_a)$ form a finite stratification of $X$ by locally\nclosed subschemes. Since pullbacks compose ([det-def-sfb-module-pushforward-pullback]),\n$(f^*M)|_{X_a}$ is the pullback of $M|_{Y_a}$ along $f_a\\colon X_a\\to Y_a$. Choose a pro-étale cover\n$\\{U_i\\to Y_a\\}$ with $M|_{U_i}\\cong\\operatorname{coker}(\\Lambda^m\\to\\Lambda^n)$. Its base change\n$\\{U_i\\times_{Y_a}X_a\\to X_a\\}$ is a pro-étale cover. The pullback is right exact, and it carries\nfree modules of finite rank to free modules of the same rank. So on this cover the restrictions\nof $f^*M$ are again cokernels of maps between finite free modules.",
+    "uses": [
+     "sk-def-sfb-constructible",
+     "det-def-sfb-module-pushforward-pullback"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

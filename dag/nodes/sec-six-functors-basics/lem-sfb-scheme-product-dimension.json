@@ -1,0 +1,270 @@
+{
+ "id": "lem-sfb-scheme-product-dimension",
+ "kind": "statement",
+ "title": "Dimension of a binary product of nonempty algebraic schemes",
+ "statement": "Let $k$ be a field [def-weil-field], and let $X,Y$ be nonempty schemes [def-pc-scheme] of finite type over $k$ [def-weil-finite-type-morphism]. For the fibre product over $k$ [def-pc-fibre-product], their Krull dimensions [def-pc-dimension] satisfy $\\dim(X\\times_kY)=\\dim X+\\dim Y$.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0B2M, lemma-dimension-product-locally-algebraic, clause (2), specialized to nonempty finite-type schemes over a field."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "def-pc-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Write $a:X\\to\\operatorname{Spec}k$, $b:Y\\to\\operatorname{Spec}k$, $P=X\\times_kY$, and $p:P\\to Y$. Every affine coordinate ring of $X$ is a $k$-vector space, hence flat by [lem-weil-pbc-module-over-field-flat]. The affine criterion [lem-weil-pbc-flat-morphism-affine-criterion] therefore makes $a$ flat. Applying [lem-weil-pbc-flat-morphism-base-change] to $a$ along $b$ makes $p$ flat. By [lem-sfb-finite-type-composition-base-change], $p$ and $b\\circ p$ are finite type, so in particular $p$ and $b$ are locally of finite type.",
+   "uses": [
+    "lem-weil-pbc-module-over-field-flat",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2M, lemma-dimension-product-locally-algebraic, proof of (1), flatness paragraph; Morphisms Tags 01U5, 01U9, 01T3, 01T4"
+   }
+  },
+  {
+   "text": "Fix $z\\in P$ and write $x=\\operatorname{pr}_X(z)$, $y=p(z)$. Apply [lem-sc-fibre-dimension-after-base-change] to the square obtained by base changing $a:X\\to\\operatorname{Spec}k$ along $b:Y\\to\\operatorname{Spec}k$. Its conclusion is $\\dim_z(P_y)=\\dim_x(X)$: the fibre of $a$ over the unique point is $X$, and the fibre $P_y$ is the base change to $\\kappa(y)$. These are dimensions at points, namely the minima of dimensions of open neighbourhoods, not dimensions of local rings [def-kun-dimension].",
+   "uses": [
+    "lem-sc-fibre-dimension-after-base-change",
+    "def-kun-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2M, proof of (1), equality of fibre dimensions; Morphisms Tag 02FY, lemma-dimension-fibre-after-base-change (1)"
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-flat-composite-fibre-dimension-at-point] with $U=P$, intermediate scheme $Y$, final scheme $\\operatorname{Spec}k$, and first morphism $p$. Step 1 verified local finite type for both morphisms and flatness at $z$. The fibres over the unique point of $\\operatorname{Spec}k$ identify with $P$ and $Y$ themselves, since $\\kappa(*)=k$ and base change along its identity changes nothing [def-pc-scheme-fibre, def-pc-fibre-product]. Thus $\\dim_z(P)=\\dim_z(P_y)+\\dim_y(Y)=\\dim_x(X)+\\dim_y(Y)$ by step 2.",
+   "uses": [
+    "lem-sbc-flat-composite-fibre-dimension-at-point",
+    "def-pc-scheme-fibre",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2M, proof of (1), application of Morphisms Tag 02JS, lemma-dimension-fibre-at-a-point-additive"
+   }
+  },
+  {
+   "text": "Every pair $(x,y)\\in X\\times Y$ has a lift $z\\in P$. Indeed [lem-weil-pbc-field-extension-base-change-faithfully-flat], with $D=\\kappa(x)$ and field extension $\\kappa(y)/k$, makes $\\kappa(x)\\to\\kappa(x)\\otimes_k\\kappa(y)$ faithfully flat. By [lem-weil-pbc-faithfully-flat-surjective-spectrum] the prime $(0)$ of the field $\\kappa(x)$ lifts to a prime of this tensor product. The point correspondence [lem-weil-pbc-fibre-product-points] produces the desired $z$. Since $X,Y$ are nonempty, this also proves $P$ nonempty.",
+   "uses": [
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "lem-weil-pbc-fibre-product-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2M, deduction of (2) from (1), pair-lifting detail; Schemes Tag 01JT, lemma-points-fibre-product; Algebra Tags 00HI, lemma-flat-base-change, and 00HQ, lemma-ff-rings"
+   }
+  },
+  {
+   "text": "Use topological Krull dimensions temporarily. By [lem-kun-dimension-finite-type], $d=\\dim X$ and $e=\\dim Y$ are finite, and they are nonnegative because $X,Y$ contain points. By [lem-weil-pbc-dimension-supremum-local-dimensions], they are the suprema of the point dimensions. These are nonempty sets of nonnegative integers bounded by $d,e$ [def-kun-dimension]; consequently each supremum is attained: otherwise every value would be at most $d-1$ (respectively $e-1$), contradicting the supremum, with the zero case immediate. Choose $x,y$ attaining $d,e$, and lift them by step 4. Step 3 gives $\\dim_zP=d+e$, so the same supremum formula gives $\\dim P\\ge d+e$. Conversely every $w\\in P$ has $\\dim_wP=\\dim_{\\operatorname{pr}_X(w)}X+\\dim_{p(w)}Y\\le d+e$ by step 3. Taking the supremum gives $\\dim P\\le d+e$. Finally [lem-pc-scheme-dimension-local-rings] identifies each topological dimension with the supremum of the local-ring dimensions, which is exactly the dimension used in the item [def-pc-dimension]. Thus the required equality follows.",
+   "uses": [
+    "lem-kun-dimension-finite-type",
+    "lem-weil-pbc-dimension-supremum-local-dimensions",
+    "def-kun-dimension",
+    "lem-pc-scheme-dimension-local-rings",
+    "def-pc-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2M, proof of (2), taking suprema, with finite-type maximum detail; Topology Tag 0B7I, lemma-dimension-supremum-local-dimensions; Properties Tag 04MU, lemma-dimension"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-over-field-flat",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sc-fibre-dimension-after-base-change",
+  "def-kun-dimension",
+  "lem-sbc-flat-composite-fibre-dimension-at-point",
+  "def-pc-scheme-fibre",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-fibre-product-points",
+  "lem-kun-dimension-finite-type",
+  "lem-weil-pbc-dimension-supremum-local-dimensions",
+  "lem-pc-scheme-dimension-local-rings",
+  "def-pc-dimension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0B2M, lemma-dimension-product-locally-algebraic, proof of (1) and deduction of (2); pair-lifting and finite-supremum details written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Dimension of the fiber product of finite type schemes over a field equals sum of dimensions",
+   "results": "{\"t\": \"2026-10-23T11:34:53Z\", \"tool\": \"leanfinder\", \"query\": \"Dimension of the fiber product of finite type schemes over a field equals sum of dimensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instFstScheme\", \"AlgebraicGeometry.IsFinite.instSndScheme\", \"AlgebraicGeometry.instLocallyOfFiniteTypeFstScheme\", \"AlgebraicGeometry.instLocallyOfFiniteTypeSndScheme\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor\", \"AlgebraicGeometry.instLocallyQuasiFiniteFstScheme\"], \"digest\": \"0182e7fb3410e043\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned polynomial/module/presentation dimensions and pullback finiteness facts do not assert the scheme product dimension formula"
+  },
+  {
+   "tool": "grep",
+   "query": "krullDim.*(pullback|prod)|topologicalKrullDim.*(pullback|prod)|(pullback|prod).*topologicalKrullDim",
+   "results": "{\"t\": \"2026-10-23T11:43:20Z\", \"tool\": \"grep\", \"query\": \"krullDim.*(pullback|prod)|topologicalKrullDim.*(pullback|prod)|(pullback|prod).*topologicalKrullDim\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned polynomial/module/presentation dimensions and pullback finiteness facts do not assert the scheme product dimension formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Krull dimension of a product of two algebraic schemes over a field is the sum of their dimensions",
+   "results": "{\"t\": \"2026-10-23T11:43:20Z\", \"tool\": \"leansearch\", \"query\": \"Krull dimension of a product of two algebraic schemes over a field is the sum of their dimensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.length_prod\", \"SSet.hasDimensionLE_prod\", \"Polynomial.ringKrullDim_of_isNoetherianRing\", \"MvPolynomial.ringKrullDim_of_isNoetherianRing\", \"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"Algebra.PreSubmersivePresentation.dimension_comp_eq_dimension_add_dimension\", \"ringKrullDim\", \"ringKrullDim_eq_zero_of_isField\"], \"digest\": \"61563b373e3abd9d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned polynomial/module/presentation dimensions and pullback finiteness facts do not assert the scheme product dimension formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"dim\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-23T11:43:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"dim\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isPullback_of_isClosedImmersion\"], \"digest\": \"524b601578a3f26e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned polynomial/module/presentation dimensions and pullback finiteness facts do not assert the scheme product dimension formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For nonempty finite type schemes X and Y over a field, Krull dimension of X times Y is dim X plus dim Y",
+   "results": "{\"t\": \"2026-10-23T11:43:23Z\", \"tool\": \"leanfinder\", \"query\": \"For nonempty finite type schemes X and Y over a field, Krull dimension of X times Y is dim X plus dim Y\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_add_natCard_le_ringKrullDim_mvPolynomial\", \"Algebra.PreSubmersivePresentation.dimension_comp_eq_dimension_add_dimension\", \"MvPolynomial.ringKrullDim_of_isNoetherianRing\", \"ringKrullDim_add_enatCard_le_ringKrullDim_mvPolynomial\", \"Polynomial.ringKrullDim_le\", \"ringKrullDim_succ_le_ringKrullDim_polynomial\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim\"], \"digest\": \"1553174ca6203603\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned polynomial/module/presentation dimensions and pullback finiteness facts do not assert the scheme product dimension formula"
+  },
+  {
+   "tool": "grep",
+   "query": "ringKrullDim.*[Tt]ensor|[Tt]ensor.*ringKrullDim|dimension.*product",
+   "results": "{\"t\": \"2026-10-23T11:50:02Z\", \"tool\": \"grep\", \"query\": \"ringKrullDim.*[Tt]ensor|[Tt]ensor.*ringKrullDim|dimension.*product\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/KrullDimension/Polynomial.lean\"], \"digest\": \"bef1e921606e977f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned polynomial/module/presentation dimensions and pullback finiteness facts do not assert the scheme product dimension formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Krull dimension of the fiber product of two nonempty finite type schemes over a field is the sum of their dimensions",
+   "results": "{\"t\": \"2026-10-23T13:13:41Z\", \"tool\": \"leanfinder\", \"query\": \"Krull dimension of the fiber product of two nonempty finite type schemes over a field is the sum of their dimensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instFstScheme\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor\", \"AlgebraicGeometry.IsFinite.instSndScheme\", \"AlgebraicGeometry.instLocallyOfFiniteTypeFstScheme\", \"AlgebraicGeometry.instLocallyOfFiniteTypeSndScheme\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\"], \"digest\": \"ec0f517d9994eb0e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern pullback finite-type/finite properties, submersive-presentation dimension, simplicial-set dimensions or module length, not Krull dimension of a scheme fibre product"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dimension of a product of algebraic schemes equals sum of dimensions",
+   "results": "{\"t\": \"2026-10-23T13:21:58Z\", \"tool\": \"leansearch\", \"query\": \"Dimension of a product of algebraic schemes equals sum of dimensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.hasDimensionLE_prod\", \"Module.length_prod\", \"Algebra.PreSubmersivePresentation.dimension_comp_eq_dimension_add_dimension\", \"SSet.hasDimensionLT_prod\", \"AlgebraicGeometry.instIsIsoSchemeCoprodSpec\", \"SSet.instHasDimensionLETensorObjHAddNat\", \"AlgebraicGeometry.instHasFiniteCoproductsScheme\", \"SSet.instHasDimensionLTTensorObjHAddNat\"], \"digest\": \"553f26f1447912f2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern pullback finite-type/finite properties, submersive-presentation dimension, simplicial-set dimensions or module length, not Krull dimension of a scheme fibre product"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"topologicalKrullDim\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-23T13:21:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"topologicalKrullDim\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern pullback finite-type/finite properties, submersive-presentation dimension, simplicial-set dimensions or module length, not Krull dimension of a scheme fibre product"
+  },
+  {
+   "tool": "grep",
+   "query": "krullDim.*(pullback|prod)|(pullback|prod).*krullDim",
+   "results": "{\"t\": \"2026-10-23T13:21:59Z\", \"tool\": \"grep\", \"query\": \"krullDim.*(pullback|prod)|(pullback|prod).*krullDim\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern pullback finite-type/finite properties, submersive-presentation dimension, simplicial-set dimensions or module length, not Krull dimension of a scheme fibre product"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-finite-product",
+  "date": "2026-10-23",
+  "group": "Q101"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Theorem 10.15, printed p.49 (finite free Hom conclusion); §10 endomorphism-ring convention, printed pp.42–43. Supporting argument: Chapter I, Proposition 10.1 and the simple-factor discussion following Remark 10.2, printed pp.42–43; Remark 8.6, printed p.36 (quasi-inverse isogenies). Auxiliary for this split: Finite products and the zero abelian variety. Dimension calculation in the finite-product auxiliary: binary product dimension, Stacks Tag 0B2M.",
+   "via": [
+    "lem-sfb-abelian-finite-product",
+    "lem-sfb-simple-isogeny-decomposition",
+    "lem-sfb-abelian-hom-finite-free",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-scheme-product-dimension",
+  "worker": "stage1",
+  "summary": "Retained the statement and six prior Mathlib searches. Expanded Stacks 0B2M through flatness of the projection, fibre dimension under base change, and flat composite fibre additivity. Made explicit the lift of every pair of points and the finite supremum argument. Every supporting fact already has a DAG node; no new nodes. Checked local topological dimension versus local-ring dimension and used the existing comparison only for the final global dimensions.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images proof (3), alteration-reduction auxiliary chain recorded in blueprint.from.place, specifically the binary dimension calculation used by lem-sfb-abelian-finite-product. The latest blueprint has no separate product-dimension node. Steps 1--3 realize 0B2M(1), and steps 4--5 its passage to (2).",
+  "tool_uses": [
+   {
+    "node": "lem-sc-fibre-dimension-after-base-change",
+    "why": "Generic geometric tool: invariance of pointwise fibre dimension under arbitrary base change (02FY); the unit has no replacement for this dimension input."
+   },
+   {
+    "node": "lem-sbc-flat-composite-fibre-dimension-at-point",
+    "why": "Generic geometric tool: additivity of local fibre dimension for a flat locally finite type first morphism (02JS); directly the route of 0B2M."
+   },
+   {
+    "node": "lem-pc-scheme-dimension-local-rings",
+    "why": "Generic comparison tool: identifies the topological dimension in Stacks 0B2M with the local-ring supremum of def-pc-dimension; no alternative unit-specific comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-sbc-flat-composite-fibre-dimension-at-point",
+  "lem-pc-scheme-dimension-local-rings"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q119-a5387062a",
+  "group": "Q119",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q119-a5387062a (reviewer sub-agent of L); spot-checked: This is an ordinary first split of an item that was unsplit on the base and is still unsplit live. It has no new nodes and no repair note, so the re-split rule does not apply. The statement, stmt_deps and source are unchanged. The only metadata change is blueprint.from.node null→det-thm-sf-ctf-stability-direct-images, which matches the via chain's last link lem-sfb-admissible-direct-image. I read Stacks varieties.tex 0B2M (lemma-dimension-product-locally-algebraic) and Morphisms 02FY(1) and 02JS. The steps follow the source proof. Step 1: k-modules are flat, then the affine criterion 01U5, then base change 01U9 make p:X×_kY→Y flat, and 01T3/01T4 make p and b∘p finite type. Step 2: 02FY gives dim_z(P_y)=dim_x X; X_s≅X because Spec κ(s)→Spec k is the identity. It correctly uses dim at a point rather than the dimension of the local ring. Step 3: 02JS with first map p flat and both maps locally finite type gives dim_z P=dim_x X+dim_y Y. Step 4: faithful flatness of κ(x)→κ(x)⊗_kκ(y), surjectivity on Spec (00HQ) and the points of a fibre product (01JT) lift every pair (x,y), which also makes P nonempty. Step 5: dimensions are finite (Lean-closed node), dim is the supremum of dim_x (0B7I, Lean-closed), the bounded suprema are attained, and 04MU converts to def-pc-dimension. Step 5 is marked elementary although it cites lemmas; this is cosmetic. Small cases checked: points, A^m×A^n, split and inseparable tensor products of residue fields, disconnected X with components of unequal dimension, and generic points. Duplicate search over 0B2M and product/dimension wording found nothing. Tool use accepted: lem-sbc-flat-composite-fibre-dimension-at-point (02JS, unit sk-thm-vanishing), which is a generic black box and the source's own route. The other two declared tools are on the route. No SGA is cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeProductDimension",
+  "declaration": "AlgebraicGeometry.Scheme.dim_pullback_of_finiteType_over_field",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeProductDimension.lean",
+  "statement": "theorem Scheme.dim_pullback_of_finiteType_over_field {k : Type u} [Field k] {X Y : Scheme.{u}} [Nonempty X] [Nonempty Y] (a : X ⟶ Spec (CommRingCat.of k)) (b : Y ⟶ Spec (CommRingCat.of k)) [LocallyOfFiniteType a] [QuasiCompact a] [LocallyOfFiniteType b] [QuasiCompact b] : (pullback a b).dim = X.dim + Y.dim",
+  "branch": "sheaf-dag",
+  "by": "Q34",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2fe85dae8",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Statement matches the node and Stacks 0B2M(2) clause by clause: Field k, Scheme.{u} X Y, Nonempty X/Y, a,b to Spec k with LocallyOfFiniteType+QuasiCompact (the recorded finite-type conjunction), pullback a b, Scheme.dim (sup of stalk Krull dims); conclusion (pullback a b).dim = X.dim + Y.dim. No extra hypotheses; single universe u is the standard Spec convention. lean.statement verbatim in file; node diff vs live = lean record only; not superseded (no live module, live node split without lean). Only sorry, no defs; source/blueprint docstrings present, all 5 proof steps in docstring; plain imports are existing proof-dep modules. Worker report and Second reading by Q34 present. No compile run (no file changed); worker reports scompile passed both checks."
+ }
+}

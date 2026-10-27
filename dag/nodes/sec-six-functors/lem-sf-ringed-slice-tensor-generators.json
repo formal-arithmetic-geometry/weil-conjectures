@@ -1,0 +1,411 @@
+{
+ "id": "lem-sf-ringed-slice-tensor-generators",
+ "kind": "statement",
+ "title": "Generator-normalized tensor comparison for a ringed-site slice",
+ "statement": "Let $\\mathcal C$ be a small Grothendieck site, $O$ a sheaf of commutative rings, and $V\\in\\mathcal C$ [def-weil-pbc-sites-and-cohomology]. Use the localized ringed site with $O_V(W,f)=O(W)$ [def-pur-localized-ringed-site], sheaf tensor products [def-pur-sheaf-tensor-product], and exact extension $j_!\\dashv j^*$ [lem-pur-site-restriction-module-adjunction-exact]. For an $O_V$-module sheaf $G$ and an $O$-module sheaf $H$ [def-weil-sheaf-of-modules-category], write $[x]_f$ for the image under module sheafification of $x\\in G(W,f)$ in the summand indexed by $f:W\\to V$ of the extension presheaf [def-weil-extension-by-zero-presheaf, def-weil-presheaf-modules-sheafification].\n\nThere is a unique $O$-linear map\n$$\\psi_{G,H}:j_!G\\otimes_OH\\longrightarrow j_!(G\\otimes_{O_V}j^*H)$$\nwhose composite on each pair of original presheaf sections is $[x]_f\\otimes a\\mapsto[x\\otimes a|_{(W,f)}]_f$. It is an isomorphism, natural in both module morphisms. Its inverse $\\kappa_{G,H}$ is the $j_!\\dashv j^*$-adjunct of\n$$G\\otimes j^*H\\xrightarrow{\\eta_G\\otimes1}j^*j_!G\\otimes j^*H\\cong j^*(j_!G\\otimes H),$$\nwhere $\\eta$ is the actual extension-presheaf adjunction unit and the last isomorphism is the pure-tensor restriction comparison [lem-sfb-localized-site-tensor-restriction]. On original sections $\\eta_G(x)=[x]_f$ and $\\kappa([x\\otimes a]_f)=[x]_f\\otimes a$. Both inverse identities are identities of sheaf maps with these prescribed generators, not just an existence of an unnormalized tensor isomorphism. No flatness or constant-ring hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0E8I (lemma-j-shriek-and-tensor); agent generator and coefficient refinement of the ringed-slice projection formula."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-pur-localized-ringed-site",
+  "def-pur-sheaf-tensor-product",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-sfb-localized-site-tensor-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Use the prescribed unit equation of the actual extension/restriction adjunction. Adjunction then identifies evaluation of the adjunct of f at x with f([x]_φ). This proves extensionality on original extension sections, and naturality of these sections in the slice module and under restriction.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "At V distribute the tensor of the extension direct sum with H(V) using Mathlib TensorProduct.directSumLeft. On the φ summand apply the slice tensor sheafification unit and then the extension sheafification unit. The resulting linear maps send i_φ(x) tensor a to [x tensor a]_φ. Restrictions preserve this formula: use direct-sum induction and tensor induction, allowing colliding indices to add. This constructs a morphism from the tensor presheaf to the extension of the slice tensor.",
+   "uses": [
+    "def-weil-extension-by-zero-presheaf",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The module sheafification unit of the extension presheaf is locally bijective. By lem-weil-pbc-tensor-local-bijection-universes, its tensor with the identity of H becomes invertible after sheafification. Compose its inverse with the sheafification adjunct of the previous presheaf morphism to obtain psi. Naturality of the sheafification unit gives the stated generator formula. Cancellation of this invertible map, followed by the sheafification adjunction, tensor induction and direct-sum induction, proves that maps out of j_!G tensor H are detected on [x]_φ tensor a.",
+   "uses": [
+    "lem-weil-pbc-tensor-local-bijection-universes",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-extension-by-zero-presheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define kappa to be the inverse adjunction image of (eta_G tensor id) followed by the inverse of the prescribed restriction comparison. Its formula on extended slice pure tensors follows from the adjunct formula, the normalized unit and the normalized restriction comparison.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sfb-localized-site-tensor-restriction",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The composite psi followed by kappa fixes [x]_φ tensor a, so extension-tensor extensionality proves the first inverse identity. For the other identity apply extension adjunction and slice tensor extensionality: both maps agree on all x tensor a by their two generator formulas. Assemble these maps and identities into an isomorphism.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The forward generator formula and extension-tensor extensionality give uniqueness. For g and h both naturality composites send [x]_φ tensor a to [g(x) tensor h(a)]_φ, using naturality of the tensor and extension sheafification units. This proves naturality in both variables. The inverse is the specified adjunct by construction, and the last clause is the normalized unit equation.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-extension-by-zero-presheaf"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pur-localized-ringed-site",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-tensor-local-bijection-universes",
+  "lem-sfb-localized-site-tensor-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0E8I, generator-normalized refinement via 03DI and 03EK; M4 formalization uses proved tensor descent through a locally bijective sheafification unit (05V4)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "jShriek|extensionByZero|extension_by_zero|ringed.*slice.*tensor",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "sub": "CategoryTheory"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"tensor\"",
+   "results": {
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "PresheafOfModulesOfCommRing.Monoidal.tensorObj",
+     "PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj",
+     "PresheafOfModulesOfCommRing.tensorObj_obj",
+     "PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft",
+     "PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight",
+     "PresheafOfModulesOfCommRing.Monoidal.tensorHom",
+     "PresheafOfModulesOfCommRing.Monoidal.tensorObjMap",
+     "PresheafOfModulesOfCommRing.Monoidal.tensorHom_app"
+    ],
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero on a ringed site has a generator normalized tensor comparison inverse to the adjunction transpose of the unit",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.homAddEquiv_symm_zero",
+     "SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal",
+     "ModuleCat.ExtendRestrictScalarsAdj.unit",
+     "AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction_counit",
+     "CategoryTheory.Adjunction.CommShift.compatibilityUnit_isoZero",
+     "CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_zero",
+     "AlgebraicGeometry.ΓSpec.adjunction_counit_app",
+     "SheafOfModules.pullbackObjUnitToUnit"
+    ],
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf module localization projection formula sends extension generators tensor sections to extended pure tensors with inverse normalized by adjunction unit",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ModuleCat.Tilde.openToLocalization",
+     "ModuleCat.Tilde.toOpen",
+     "SheafOfModules.Presentation.mapGenerators",
+     "ModuleCat.Tilde.const",
+     "Module.FinitePresentation.linearEquivMapExtendScalars",
+     "Module.FinitePresentation.linearEquivMapExtendScalars_apply",
+     "Module.FinitePresentation.linearEquivMapExtendScalars_symm_apply",
+     "PresheafOfModules.Sheafify.SMulCandidate.mk'"
+    ],
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On an arbitrary ringed site the extension by zero tensor projection isomorphism is the sheafification of the lift indexed pure tensor map and its inverse is adjoint to the open unit",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom",
+     "PresheafOfModules.sheafificationCompToSheaf",
+     "PresheafOfModules.sheafificationCompForgetCompToPresheaf",
+     "PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm",
+     "PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app",
+     "PresheafOfModules.sheafifyHomEquiv'",
+     "PresheafOfModules.sheafificationAdjunction_homEquiv_apply",
+     "PresheafOfModules.toPresheaf_map_sheafificationHomEquiv"
+    ],
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "jShriek|extensionByZero|extension_by_zero|lowerShriek.*tensor",
+   "results": {
+    "t": "2026-10-22T06:24:00Z",
+    "tool": "grep",
+    "query": "jShriek|extensionByZero|extension_by_zero|lowerShriek.*tensor",
+    "sub": "Algebra/Category/ModuleCat",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero for modules on a localized ringed site commutes with tensor product by a sheaf on the base",
+   "results": {
+    "t": "2026-10-22T06:24:00Z",
+    "tool": "leansearch",
+    "query": "Extension by zero for modules on a localized ringed site commutes with tensor product by a sheaf on the base",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsLocalization.instIsLocalizedModuleTensorProductMap",
+     "FractionalIdeal.extended_zero",
+     "IsLocalization.tensorProduct_isLocalizedModule",
+     "TensorProduct.zero_tmul",
+     "IsLocalizedModule.rTensor",
+     "LinearMap.lTensor_zero",
+     "KaehlerDifferential.mulActionBaseChange_smul_zero",
+     "Algebra.tensorH1CotangentOfIsLocalization"
+    ],
+    "digest": "c5ece52ede714714"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"tensor\"",
+   "results": {
+    "t": "2026-10-22T06:24:00Z",
+    "tool": "loogle",
+    "query": "\"SheafOfModules\", \"tensor\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "PresheafOfModulesOfCommRing.Monoidal.tensorObj",
+     "PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj",
+     "PresheafOfModulesOfCommRing.tensorObj_obj",
+     "PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft",
+     "PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight",
+     "PresheafOfModulesOfCommRing.Monoidal.tensorHom",
+     "PresheafOfModulesOfCommRing.Monoidal.tensorObjMap",
+     "PresheafOfModulesOfCommRing.Monoidal.tensorHom_app"
+    ],
+    "digest": "81c0a719217fb4bb"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula for extension by zero of modules on the slice of a ringed site with prescribed pure tensor generators",
+   "results": {
+    "t": "2026-10-22T06:24:10Z",
+    "tool": "leanfinder",
+    "query": "Projection formula for extension by zero of modules on the slice of a ringed site with prescribed pure tensor generators",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.Presentation.mapGenerators",
+     "SheafOfModules.Presentation.map_generators_I",
+     "SheafOfModules.Presentation.map_π_eq",
+     "ModuleCat.Tilde.toOpen",
+     "SheafOfModules.generatorsOfIsCokernelFree_π",
+     "SheafOfModules.Presentation.mapRelations",
+     "SheafOfModules.Presentation.mapRelations_mapGenerators",
+     "SheafOfModules.presentationOfIsCokernelFree_generators"
+    ],
+    "digest": "baa1692e58cdc734"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a localization functor from a slice site, the left adjoint on sheaves of modules satisfies Frobenius reciprocity with its canonical adjunction unit",
+   "results": {
+    "t": "2026-10-22T06:24:42Z",
+    "tool": "leanfinder",
+    "query": "For a localization functor from a slice site, the left adjoint on sheaves of modules satisfies Frobenius reciprocity with its canonical adjunction unit",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.PullbackConstruction.adjunction",
+     "SheafOfModules.pushforwardPushforwardAdj",
+     "SheafOfModules.pullbackPushforwardAdjunction",
+     "SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+     "SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app",
+     "SheafOfModules.instIsRightAdjointPushforward",
+     "SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous"
+    ],
+    "digest": "fbad2e143031cbdf"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-open-semilinear-tensor-model",
+  "date": "2026-10-22",
+  "group": "Q86"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Proof sentence “The maps used here are tensor reassociation, evaluation, and adjunction units and counits”; open coefficient factor: original steps 1-2 of lem-sf-open-semilinear-tensor-model, construction and inverse of the ordinary generator pairing",
+   "via": [
+    "lem-sf-open-semilinear-tensor-model",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-ringed-slice-tensor-generators",
+  "worker": "stage1",
+  "summary": "Constructed the pairing by finite sums on the extension presheaf, extended it using existing bilinear sheafification and tensor universal-property nodes, constructed the specified inverse by the actual direct-sum adjunction, and proved both inverse identities and naturality. No new nodes and no statement change.",
+  "blueprint": "Realizes the sentence “The maps used here are tensor reassociation, evaluation, and adjunction units and counits” in fix-prop-coherence.proof.md, ordinary ringed-slice generator and unit normalization underlying the open coefficient comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic ringed-slice module adjunction; computes the specified extension and its actual Hom bijection."
+   },
+   {
+    "node": "lem-sfb-localized-site-tensor-restriction",
+    "why": "Generic restriction tensor comparison preserving original pure tensors; fixes the map used in the adjunct."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-bilinear-extension",
+    "why": "Generic extension and uniqueness of bilinear maps through module sheafification; needed to descend and compare the prescribed generator pairing."
+   },
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Generic sheaf tensor universal property, on the base site and its slice; needed for map construction and equality, with no geometric coefficient restriction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-pc-sites-module-sheafification-bilinear-extension",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q64-f69936b23",
+  "group": "Q64",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-f69936b23 (reviewer sub-agent of L); spot-checked: I read the whole delivery against the sources; it is a correct split with no new nodes and no statement change. The item is still unsplit live, is not on the drop list and has no repair note, so the re-split rule does not apply. Stacks 0E8I (sites-modules.tex l.4051) proves j_!G⊗F≅j_!(G⊗F|_U) only via a Yoneda/internal-Hom chain, so the generator-normalized proof is the agent's own, correctly recorded as by=agent, built on 03DI (l.2058, direct-sum adjunction) and 0GMW/03EK (bilinear universal property). Step 1 builds the actual adjunction from the extension-presheaf and sheafification definitions and gets η(x)=[x]_f. Step 2 shows the pairing respects restriction, including indices f≠f' with fh=f'h, whose terms add in one summand. Step 3 applies bilinear extension with O^#=O and H^#≅H, then the tensor bijection, and gets existence and uniqueness. Step 4 gets κ([t]_f)=q(t) for every section t, using lem-sfb-localized-site-tensor-restriction (pure tensors to pure tensors, no flatness). Step 5 proves κψ=1 by comparing pairings on summand generators and extending uniquely; no sheaf section is assumed to lift. Step 6 proves ψκ=1 by taking adjuncts and applying the tensor universal property on C/V, where G and j*H are sheaves, so every section is tested. Step 7 proves naturality by the same uniqueness. Edge cases checked: Hom(W,V) empty, several arrows W→V, H=O, zero modules, trivial topology. I accept the four declared tool_uses: the two lem-pc-sites-* nodes are generic universal properties, and the other two lie in units the item's unit cites. lem-weil-pbc-ringed-slice-extension-tensor gives the isomorphism without fixing the maps, so it is not a duplicate. Maintainer note: lem-sf-cbc-slice-tensor-generator-coherence (NG, unsplit, created the same day) contains η_{M,S}, which is the case H=S of this item with the same formula; when that node is split it should cite this item instead of re-proving it."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedSliceTensorGenerators",
+  "declaration": "SheafOfModules.exists_ringedSliceTensorGenerators",
+  "declarations": [
+   "SheafOfModules.ringedSliceExtensionSection",
+   "SheafOfModules.ringedSliceTensorRestriction",
+   "SheafOfModules.exists_ringedSliceTensorGenerators"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RingedSliceTensorGenerators.lean",
+  "statement": "theorem exists_ringedSliceTensorGenerators [HasWeakSheafify (J.over U) AddCommGrpCat.{max c v r}] [(J.over U).WEqualsLocallyBijective AddCommGrpCat.{max c v r}] : ∃ e : ∀ (G : ringedSiteModules.{max c v r} (((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj A).over U)) (H : ringedSiteModules.{max c v r} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj A)), (siteSheafTensorRight H).obj ((localizedSystemExtension.{c, v, r} A U).obj G) ≅ (localizedSystemExtension.{c, v, r} A U).obj ((siteSheafTensorRight (A := A.over U) (H.over U)).obj G), (∀ (G : ringedSiteModules.{max c v r} (((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj A).over U)) (H : ringedSiteModules.{max c v r} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj A)) (W : Over U) (x : G.val.obj (op W)) (a : H.val.obj (op W.left)), (e G H).hom.val.app (op W.left) (siteSheafTensorTmul _ H (op W.left) (ringedSliceExtensionSection.{c, v, r} A U G W x) a) = ringedSliceExtensionSection.{c, v, r} A U _ W (siteSheafTensorTmul (A := A.over U) G (H.over U) (op W) x a)) ∧ (∀ (G : ringedSiteModules.{max c v r} (((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj A).over U)) (H : ringedSiteModules.{max c v r} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj A)) (φ : (siteSheafTensorRight H).obj ((localizedSystemExtension.{c, v, r} A U).obj G) ⟶ (localizedSystemExtension.{c, v, r} A U).obj ((siteSheafTensorRight (A := A.over U) (H.over U)).obj G)), (∀ (W : Over U) (x : G.val.obj (op W)) (a : H.val.obj (op W.left)), φ.val.app (op W.left) (siteSheafTensorTmul _ H (op W.left) (ringedSliceExtensionSection.{c, v, r} A U G W x) a) = ringedSliceExtensionSection.{c, v, r} A U _ W (siteSheafTensorTmul (A := A.over U) G (H.over U) (op W) x a)) → φ = (e G H).hom) ∧ (∀ (G G' : ringedSiteModules.{max c v r} (((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj A).over U)) (H H' : ringedSiteModules.{max c v r} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj A)) (g : G ⟶ G') (h : H ⟶ H'), (siteSheafTensorRight H).map ((localizedSystemExtension.{c, v, r} A U).map g) ≫ siteSheafTensorSecondMap (A := A) ((localizedSystemExtension.{c, v, r} A U).obj G') h ≫ (e G' H').hom = (e G H).hom ≫ (localizedSystemExtension.{c, v, r} A U).map ((siteSheafTensorRight (A := A.over U) (H.over U)).map g ≫ siteSheafTensorSecondMap (A := A.over U) G' (h.over U))) ∧ (∀ (G : ringedSiteModules.{max c v r} (((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj A).over U)) (H : ringedSiteModules.{max c v r} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj A)), ((localizedSystemAdjunction.{c, v, r} A U).homEquiv _ _) (e G H).inv = (siteSheafTensorRight (A := A.over U) (H.over U)).map ((localizedSystemAdjunction.{c, v, r} A U).unit.app G) ≫ (ringedSliceTensorRestriction.{c, v, r} A U ((localizedSystemExtension.{c, v, r} A U).obj G) H).inv) ∧ (∀ (G : ringedSiteModules.{max c v r} (((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj A).over U)) (H : ringedSiteModules.{max c v r} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj A)) (W : Over U) (x : G.val.obj (op W)) (a : H.val.obj (op W.left)), (e G H).inv.val.app (op W.left) (ringedSliceExtensionSection.{c, v, r} A U _ W (siteSheafTensorTmul (A := A.over U) G (H.over U) (op W) x a)) = siteSheafTensorTmul _ H (op W.left) (ringedSliceExtensionSection.{c, v, r} A U G W x) a) ∧ (∀ (G : ringedSiteModules.{max c v r} (((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj A).over U)) (W : Over U) (x : G.val.obj (op W)), ((localizedSystemAdjunction.{c, v, r} A U).unit.app G).val.app (op W) x = ringedSliceExtensionSection.{c, v, r} A U G W x)",
+  "branch": "newtargets-dag",
+  "by": "Q134",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5ec809fbb",
+  "group": "Q134",
+  "result": "pass",
+  "note": "Delivery touches only the item module and its lean record; the 8 stmt_dep records are identical to live; lean.statement is verbatim in the file. Every node clause is rendered with the right direction: forward generator formula, uniqueness against any sheaf map phi, naturality in g and h, inverse = homEquiv adjunct of (unit tensor 1) followed by the lem-sfb restriction iso inverse, inverse generator formula, unit formula. Helpers are real: ringedSliceExtensionSection = actual sheafification unit applied to DirectSum.lof at W.hom (same as the dep's unit pin); ringedSliceTensorRestriction = .choose of exists_localizedSiteTensorRestriction, uniquely fixed by its pure-tensor formula. Universe max c v r comes from localizedSystemExtension.{c,v,r}; no flatness or extra hypotheses. Not a duplicate: ringedSlice_extension_tensor is only a Nonempty iso. Docstrings, sources, blueprint tags and the 7-step proof (condensed to 5) are present; proof imports are the recorded lem-pc-sites modules. Advisory: the unit clause restates the dep's unit pin and the inverse formula follows from the adjunct and unit clauses; both kept because the node states them. No file changed, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261024T190309-L-4017559",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

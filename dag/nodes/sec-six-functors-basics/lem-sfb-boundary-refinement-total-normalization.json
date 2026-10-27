@@ -1,0 +1,156 @@
+{
+ "id": "lem-sfb-boundary-refinement-total-normalization",
+ "kind": "lemma",
+ "title": "Total-derived normalization of one boundary refinement",
+ "statement": "Fix a prime ell, an admissible coefficient Lambda as in [sk-def-localizing-closure], and a field k of positive characteristic different from ell. For separated finite-type k-schemes X,Y, a k-morphism f:X→Y and quasi-compact compactifications c,d of f, let r:c→d be a boundary-preserving refinement. For K in Loc(Dbc(X,Lambda)) and Loc(Dctf(X,Lambda)), the extension-by-zero object on d is canonically isomorphic to Rr_* of the extension-by-zero object on c. This isomorphism satisfies the total-derived open-adjunction unit equation of [def-sfb-integral-compact-support-interface], and the inverse of its pushed-forward refinementIso is the canonical compactificationRefinementComponent of [det-sf-comp-coherence-cocycle]. No density of c or d is required.",
+ "stmt_deps": [
+  "def-sfb-integral-compact-support-interface",
+  "sk-def-localizing-closure",
+  "det-sf-comp-coherence-cocycle",
+  "det-sf-comp-coherence-refinement"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-int-brown/sk-prop-int-brown-construction.proof.md",
+  "place": "Final comparison paragraph; total-derived normalization of one boundary refinement."
+ },
+ "proof": [
+  {
+   "text": "Use the supplied Loc(Dctf) membership of K. Choose a dense refinement of the source with itself. Boundary vanishing makes the canonical localizing maps for that dense refinement and its composite invertible. Their composition law then makes the map for the original boundary refinement invertible.",
+   "uses": [
+    "det-nagata-refinement-common-dense",
+    "det-sf-comp-coherence-cocycle",
+    "det-sf-comp-coherence-refinement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take e to be the canonical localizing refinement map with its proved inverse. Transport its normalization from the exact open adjunction along the canonical comparison with total pullback. Naturality cancels the transport factors, proving the displayed open-unit equation.",
+   "uses": [
+    "det-sf-comp-coherence-refinement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conjugate the total pullback compositor under the derived adjunctions to identify pushComp with the inverse recorded derived pushforward compositor. Expanding refinementIso inverse gives the proper pushforward of e, the inverse compositor and the equality transport, which is the canonical refinement component. This proves the heterogeneous equality without asserting a comparison family.",
+   "uses": [
+    "det-sf-comp-coherence-refinement",
+    "det-sf-comp-coherence-cocycle"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-nagata-refinement-common-dense",
+  "det-sf-comp-coherence-cocycle",
+  "det-sf-comp-coherence-refinement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-int-brown/sk-prop-int-brown-construction.proof.md",
+  "place": "Final comparison paragraph; total-derived normalization of one boundary refinement."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralNormalizedComparisons",
+  "date": "2026-10-26",
+  "group": "M6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-total-derived-normalized-comparisons",
+   "place": "Single-refinement normalization and inverse-component identification.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-int-brown",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralBoundaryRefinementNormalization",
+  "file": "lean/Sheaf/SixFunctors/IntegralBoundaryRefinementNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.integral_boundaryRefinement_normalization",
+  "statement": "theorem integral_boundaryRefinement_normalization\n    (ℓ : ℕ) [Fact ℓ.Prime] (hadm : IsLocalizingAdmissibleCoefficient ℓ Λ)\n    [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]\n    {X Y : Spaces k} (f : X ⟶ Y) (c d : Compactifications k f)\n    (r : c.obj.Refinement d.obj)\n    (hb : r.hom ⁻¹ᵁ d.obj.i.opensRange = c.obj.i.opensRange)\n    (K : (localizing Λ X.obj.left).FullSubcategory)\n    (hK : localizingClosureProEtale Λ X.obj.left K.obj) :\n    ∃ e : (extend Λ d.obj.i).obj K.obj ≅\n        (push Λ r.hom).obj ((extend Λ c.obj.i).obj K.obj),\n      (openAdjunction Λ d.obj.i).homEquiv _ _ e.hom ≫\n          refinementRestriction Λ r K.obj = (openAdjunction Λ c.obj.i).unit.app K.obj ∧\n      HEq (refinementIso Λ r K.obj e).inv\n        (compactificationRefinementComponent Λ\n          (⟨ObjectProperty.homMk r, hb⟩ :\n            (⟨c⟩ : Compactification.BoundaryCompactification f.hom.left) ⟶ ⟨d⟩) K.obj)",
+  "branch": "sheaf-dag",
+  "by": "M6",
+  "date": "2026-10-26"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "refinement.*[Nn]orm|[Nn]orm.*refinement",
+   "results": {
+    "hits": 1,
+    "top": [
+     "Mathlib/Topology/ShrinkingLemma.lean"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-26",
+   "verdict": "No theorem for pro-etale compactification normalization. The conjugateIsoEquiv hits supply generic mate identities only; other hits concern topological compactification or refinements."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The boundary preserving refinement of a compactification gives an invertible extension by zero map whose proper pushforward agrees with the canonical derived compactification refinement map",
+   "results": {
+    "hits": 8,
+    "top": [
+     "BoundedContinuousFunction.extend_apply",
+     "stoneCechExtend_extends",
+     "stoneCechExtend_stoneCechUnit",
+     "preStoneCechExtend_extends",
+     "BoundedContinuousFunction.extend_comp",
+     "BoundedContinuousFunction.extend_apply'",
+     "preStoneCechExtend_preStoneCechUnit",
+     "BoundedContinuousFunction.extend"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-26",
+   "verdict": "No theorem for pro-etale compactification normalization. The conjugateIsoEquiv hits supply generic mate identities only; other hits concern topological compactification or refinements."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateIsoEquiv",
+   "results": {
+    "hits": 5,
+    "top": [
+     "CategoryTheory.conjugateIsoEquiv",
+     "CategoryTheory.conjugateIsoEquiv_apply_hom",
+     "CategoryTheory.conjugateIsoEquiv_apply_inv",
+     "CategoryTheory.conjugateIsoEquiv_symm_apply_hom",
+     "CategoryTheory.conjugateIsoEquiv_symm_apply_inv"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-26",
+   "verdict": "No theorem for pro-etale compactification normalization. The conjugateIsoEquiv hits supply generic mate identities only; other hits concern topological compactification or refinements."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261026T070312-L-3532293",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261026T070312-L-3532293",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

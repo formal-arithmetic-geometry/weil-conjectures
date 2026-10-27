@@ -10,15 +10,8 @@ public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 public import WeilConjectures.Mathlib.AlgebraicGeometry.QuasiAffine
 public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.AlgebraicGeometry.PullbackCarrier
-import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
-import Mathlib.RingTheory.Spectrum.Prime.Topology
-import WeilConjectures.AlgebraicGeometry.AffineFpqcDescent
-import WeilConjectures.AlgebraicGeometry.FpqcDescendingTypesMorphisms
-import Sheaf.AlgebraicGeometry.QuasiAffineBaseChange
+import Sheaf.AlgebraicGeometry.IndQuasiAffineFpqcDescent
 
 /-!
 # Effective fpqc descent of quasi-affine morphisms
@@ -92,6 +85,14 @@ Proof:
 theorem isEffective_of_isQuasiAffineHom_fpqc {A B : Scheme.{u}} (p : A ⟶ B)
     (hp : Presieve.singleton p ∈ Scheme.fpqcPrecoverage B) {V : Over A}
     [IsQuasiAffineHom V.hom] (D : Over.DescentDatum p V) : D.IsEffective := by
-  sorry
+  apply isEffective_of_indQuasiAffine_fpqc p hp ?_ D
+  intro U hU K hK
+  have : IsAffine U.toScheme := hU
+  have : (V.hom ⁻¹ᵁ U).toScheme.IsQuasiAffine := hU.isQuasiAffine_preimage V.hom
+  have : (Limits.pullback V.hom U.ι).IsQuasiAffine :=
+    Scheme.IsQuasiAffine.of_isIso (pullbackRestrictIsoRestrict V.hom U).hom
+  have : CompactSpace K.toScheme := isCompact_iff_compactSpace.mp hK
+  have : K.toScheme.IsQuasiAffine := Scheme.IsQuasiAffine.of_isImmersion K.ι
+  infer_instance
 
 end CategoryTheory.Over.DescentDatum

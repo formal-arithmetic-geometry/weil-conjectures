@@ -1,0 +1,163 @@
+{
+ "id": "def-sfb-invariant-symmetric-power-lifting",
+ "kind": "definition",
+ "title": "Invariant symmetric-power lifting over an arbitrary ring",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $R$ be a commutative ring and $C$ a commutative Hopf $R$-algebra, with comultiplication $\\Delta:C\\to C\\otimes_R C$, counit $\\epsilon:C\\to R$ and antipode, satisfying the Hopf identities. Tensor products are [def-weil-pbc-module-tensor-product]. For an arbitrary $R$-module $M$, a rational right coaction is an $R$-linear map $\\rho:M\\to M\\otimes_R C$ with $(1\\otimes\\epsilon)\\rho=1$ and $(\\rho\\otimes1)\\rho=(1\\otimes\\Delta)\\rho$, using the standard unit and associator identifications. The induced symmetric algebra coaction is the unique algebra map extending $(\\iota_M\\otimes1)\\rho$ by [lem-weil-pbc-symmetric-algebra-universal-property]. Use the degree-$n$ tensor-image submodule of [lem-weil-pbc-symmetric-algebra-graded] for $\\operatorname{Sym}^n_R M$. Define $P(R,C)$ to mean: for every such $M,\\rho$, with no finiteness or flatness assumption, and every surjective $R$-linear $\\lambda:M\\to R$ satisfying $(\\lambda\\otimes1)\\rho(m)=\\lambda(m)\\otimes1$, there exist $n>0$ and $q\\in\\operatorname{Sym}^n_R M$ with $\\operatorname{Sym}(\\rho)(q)=q\\otimes1$ and $\\widetilde\\lambda(q)=1$, where $\\widetilde\\lambda:\\operatorname{Sym}_R M\\to R$ is the unique algebra map extending $\\lambda$. In degree $n$ this is $\\operatorname{Sym}^n(\\lambda)$ under $\\operatorname{Sym}^n_R R\\simeq R$.",
+ "stmt_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-symmetric-algebra-universal-property",
+  "lem-weil-pbc-symmetric-algebra-graded"
+ ],
+ "source": {
+  "document": "literature/alper-adequate-moduli-spaces.pdf",
+  "place": "Lemma 9.2.5(5), p.522; Theorem 9.7.5 and preceding split-group convention, pp.526–527. Online original: https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Invariant symmetric power lifting for every rational module of a reductive group scheme over a ring",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SymmetricPower\", \"module\": \"Mathlib.LinearAlgebra.TensorPower.Symmetric\", \"type\": \"(R : Type u) →\\n  Type u → [inst : CommSemiring R] → (M : Type v) → [inst_1 : AddCommMonoid M] → [Module R M] → Type (max u v)\", \"doc\": \"The symmetric power of an $ R $-module $ M $, constructed as the quotient of the tensor product $ \\\\bigotimes_R M $ by the equivalence relation identifying tensors that differ by permutation of factors\"}\n  {\"name\": \"SymmetricPower.instAddCommGroup\", \"module\": \"Mathlib.LinearAlgebra.TensorPower.Symmetric\", \"type\": \"(ι R : Type u) →\\n  [inst : CommRing R] →\\n    (M : Type v) → [inst_1 : AddCommGroup M] → [inst_2 : Module R M] → AddCommGroup (SymmetricPower R ι M)\", \"doc\": \"Given a commutative ring $ R $, an index type $ \\\\iota $, and an $ R $-module $ M $ equipped with an additive commutative group structure, the symmetric power $ \\\\text{Sym}^{\\\\iota}(M) $ inherits the str\"}\n  {\"name\": \"SymmetricPower.module\", \"module\": \"Mathlib.LinearAlgebra.TensorPower.Symmetric\", \"type\": \"(R ι : Type u) →\\n  [inst : CommSemiring R] →\\n    (M : Type v) → [inst_1 : AddCommMonoid M] → [inst_2 : Module R M] → Module R (SymmetricPower R ι M)\", \"doc\": \"Given a commutative semiring $ R $, an additive commutative monoid $ M $, and an $ R $-module structure on $ M $, the $ n $-th symmetric power $ \\\\text{Sym}^n(M) $ inherits an $ R $-module structure fr\"}\n  {\"name\": \"SymmetricPower.instAddCommMonoid\", \"module\": \"Mathlib.LinearAlgebra.TensorPower.Symmetric\", \"type\": \"(R ι : Type u) →\\n  [inst : CommSemiring R] →\\n    (M : Type v) → [inst_1 : AddCommMonoid M] → [inst_2 : Module R M] → AddCommMonoid (SymmetricPower R ι M)\", \"doc\": \"The $ n $-th symmetric power $ \\\\text{Sym}^n(M) $ of an $ R $-module $ M $, constructed as the quotient of the tensor product $ \\\\bigotimes_R M $ by the equivalence relation identifying tensors that dif\"}\n  {\"name\": \"SymmetricPower.domDomCongr_tprod\", \"module\": \"Mathlib.LinearAlgebra.TensorPower.Symmetric\", \"type\": \"(e : Perm ι) : (tprod R (ι := ι) (M := M)).domDomCongr e = tprod R\", \"doc\": \"For any permutation $ e $ of the index set $ \\\\iota $, the canonical multilinear map $ \\\\text{Sym}^n(M) $ constructed from the product of an $ R $-module $ M $ indexed by $ \\\\iota $ is invariant under do\"}\n  {\"name\": \"SymmetricPower.mk\", \"module\": \"Mathlib.LinearAlgebra.TensorPower.Symmetric\", \"type\": \"(R ι : Type u) →\\n  [inst : CommSemiring R] →\\n    (M : Type v) →\\n      [inst_1 : AddCommMonoid M] → [inst_2 : Module R M] → (PiTensorProduct R fun x => M) →ₗ[R] SymmetricPower R ι M\", \"doc\": \"The canonical $ R $-linear map from the tensor product $ \\bigotimes_R M $ to the symmetric power $ \\text{Sym}^n(M) $, induced by quotienting the symmetric tensor relation that identifies tensors differi\"}\n  {\"name\": \"SymmetricPower.tprod_equiv\", \"module\": \"Mathlib.LinearAlgebra.TensorPower.Symmetric\", \"type\": \"(e : Perm ι) (f : ι → M) : (⨂ₛ[R] i, f (e i)) = ⨂ₛ[R] i, f i\", \"doc\": \"For any permutation $\\\\sigma$ of the index set $\\\\iota$ and any function $f : \\\\iota \\\\to M$, the symmetric tensor product $\\\\bigotimes^{\\\\text{sym}}_{R} f(\\\\sigma(i))$ equals the symmetric tensor product $\\\\\"}\n  {\"name\": \"SymmetricPower.tprod\", \"module\": \"Mathlib.LinearAlgebra.TensorPower.Symmetric\", \"type\": \"(R : Type u) →\\n  {ι : Type u} →\\n    [inst : CommSemiring R] →\\n      {M : Type v} →\\n        [inst_1 : AddCommMonoid M] → [inst_2 : Module R M] → MultilinearMap R (fun x => M) (SymmetricPower R ι M)\", \"doc\": \"The canonical multilinear map from the product of an $ R $-module $ M $ indexed by $ \\\\iota $ to its $ n $-th symmetric power $ \\\\text{Sym}^n(M) $, constructed by composing the canonical multilinear map\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact arbitrary-ring lifting or relative group-condition definition; reuse the existing symmetric algebra, tensor and group-object constructions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative reductive semisimple simply connected group schemes geometric fibres split maximal torus Borel pair",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"The Lie algebra constructed via the Geck construction from a root pairing over an algebraically closed field has a trivial radical, hence is semisimple. Specifically, the Lie subalgebra of the matrix \"}\n  {\"name\": \"LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas\", \"type\": \"∀ (k : Type u_1) (L : Type u_2) (M : Type u_3) [inst : Field k] [CharZero k] [inst_2 : LieRing L]\\n  [inst_3 : LieAlgebra k L] [Module.Finite k L] [inst_5 : AddCommGroup M] [inst_6 : Module k M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule k L M] [Module.Finite k M] [LieModule.IsIrreducible k L\", \"doc\": \"If a Lie algebra $\\\\mathfrak{g}$ over a field $k$ admits an irreducible and faithful module $M$ such that the trace of the endomorphism $\\\\mathrm{ad}_x \\\\in \\\\mathrm{End}_k(M)$ corresponding to each $x \\\\i\"}\n  {\"name\": \"LieAlgebra.IsSemisimple\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Defs\", \"type\": \"(R : Type u_1) → (L : Type u_2) → [inst : CommRing R] → [inst_1 : LieRing L] → [LieAlgebra R L] → Prop\", \"doc\": \"The Lie algebra $ L $ over the commutative ring $ R $ is semisimple.\"}\n  {\"name\": \"LieAlgebra.InvariantForm.isSemisimple_of_nondegenerate\", \"module\": \"Mathlib/Algebra/Lie/InvariantForm\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : LieRing L] [inst_2 : LieAlgebra K L] [Module.Finite K L]\\n  (Φ : LinearMap.BilinForm K L),\\n  Φ.Nondegenerate →\\n    LinearMap.BilinForm.lieInvariant L Φ →\\n      Φ.IsRefl → (∀ (I : LieIdeal K L), IsAtom I → ¬IsLieAbelian ↥I) → LieAlgebra.IsSemi\", \"doc\": \"If a Lie algebra $\\\\mathfrak{g}$ over a field $K$ admits a non-degenerate invariant bilinear form, then $\\\\mathfrak{g}$ is semisimple.\"}\n  {\"name\": \"LieAlgebra.IsKilling.instSemisimple\", \"module\": \"Mathlib/Algebra/Lie/Killing\", \"type\": \"∀ (K : Type u_2) (L : Type u_3) [inst : Field K] [inst_1 : LieRing L] [inst_2 : LieAlgebra K L]\\n  [LieAlgebra.IsKilling K L] [Module.Finite K L], LieAlgebra.IsSemisimple K L\", \"doc\": \"If a Lie algebra $ L $ over a field $ K $ is finite-dimensional as a vector space and its Killing form is non-degenerate, then $ L $ is a semisimple Lie algebra. This means that $ L $ has no nontrivia\"}\n  {\"name\": \"LieAlgebra.IsSemisimple.instHasTrivialRadical\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsSemisimple R L], LieAlgebra.HasTrivialRadical R L\", \"doc\": \"Every semisimple Lie algebra over a commutative ring has a trivial radical, meaning its radical (the largest solvable ideal) is the zero ideal.\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected\", \"module\": \"Mathlib/CategoryTheory/Galois/Decomposition\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C]\\n  (F : CategoryTheory.Functor C FintypeCat) [CategoryTheory.PreGaloisCategory.FiberFunctor F] (X : C)\\n  [CategoryTheory.PreGaloisCategory.IsConnected X], ∃ A x, CategoryTheory.PreGaloisCategory.IsG\", \"doc\": \"For any connected object $ X $ in a pre-Galois category $ \\\\mathcal{C} $, there exists a Galois object $ A $ in $ \\\\mathcal{C} $ and a morphism $ A \\\\to X $.\"}\n  {\"name\": \"LieAlgebra.IsKilling.isSemisimple_ad_of_mem_isCartanSubalgebra\", \"module\": \"Mathlib/Algebra/Lie/Weights/Killing\", \"type\": \"∀ {K : Type u_2} {L : Type u_3} [inst : LieRing L] [inst_1 : Field K] [inst_2 : LieAlgebra K L] [FiniteDimensional K L]\\n  {H : LieSubalgebra K L} [H.IsCartanSubalgebra] [LieAlgebra.IsKilling K L] [LieModule.IsTriangularizable K (↥H) L]\\n  [PerfectField K] {x : L}, x ∈ H → ((LieAlgebra.ad K L) x).IsSe\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ with non-degenerate Killing form, if $\\\\mathfrak{h}$ is a Cartan subalgebra of $\\\\mathfrak{g}$ and $x \\\\in \\\\mathfrak{h}$, then the adjoint end\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact arbitrary-ring lifting or relative group-condition definition; reuse the existing symmetric algebra, tensor and group-object constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "coaction|IsReductive|IsSemisimpleGroup|HasSplitBorelPair",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No exact arbitrary-ring lifting or relative group-condition definition; reuse the existing symmetric algebra, tensor and group-object constructions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative reductive group schemes with semisimple simply connected geometric fibres and a split maximal torus Borel subgroup",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineScheme\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The full subcategory of schemes consisting of those isomorphic to the prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative ring $R$, forming the essential image of the contravariant Spec functor f\"}\n  {\"name\": \"RootDatum\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Defs\", \"type\": \"(X₁ X₂ : Type*) [AddCommGroup X₁] [AddCommGroup X₂]\", \"doc\": \"A root datum is a root pairing between two additive commutative groups $X_1$ and $X_2$ over the integers $\\\\mathbb{Z}$, where each group is equipped with its canonical $\\\\mathbb{Z}$-module structure. Th\"}\n  {\"name\": \"RootPairing.isSimpleModule_weylGroupRootRep_iff\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Irreducible\", \"type\": \"[Nontrivial M] :\\n  IsSimpleModule R[P.weylGroup] P.weylGroupRootRep.asModule ↔\\n    ∀ (q : Submodule R M), (∀ i, q ∈ invtSubmodule (P.reflection i)) → q ≠ ⊥ → q = ⊤\", \"doc\": \"Let $ R $ be a commutative ring and $ P $ a root pairing over $ R $ with underlying $ R $-module $ M $. Assume $ M $ is nontrivial. The $ R[P.\\\\text{WeylGroup}] $-module structure on $ M $ induced by t\"}\n  {\"name\": \"RootPairing.isSimpleModule_weylGroupRootRep\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Irreducible\", \"type\": \"[P.IsIrreducible] : IsSimpleModule R[P.weylGroup] P.weylGroupRootRep.asModule\", \"doc\": \"If a root pairing $ P $ is irreducible, then the module associated with the Weyl group representation of $ P $ over the group ring $ R[P.\\text{WeylGroup}] $ is a simple module, meaning its only submodu\"}\n  {\"name\": \"CommRing.relPic\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": Subgroup (Pic R)\", \"doc\": \"The subgroup of $ \\\\mathrm{Pic}(R) $ consisting of isomorphism classes of invertible $ R $-semimodules that become trivial when extended to the $ R $-algebra $ A $ via the tensor product. This is defin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The type of schemes in algebraic geometry.\"}\n  {\"name\": \"AlgebraicGeometry.IsReduced.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {motive : AlgebraicGeometry.IsReduced X → Sort u} →\\n    (t : AlgebraicGeometry.IsReduced X) →\\n      ((component_reduced : ∀ (U : X.Opens), IsReduced ↑(X.presheaf.obj (Opposite.op U))) → motive ⋯) → motive t\", \"doc\": \"Given a scheme $X$ and a type family $P$ over the predicate that $X$ is reduced, if every open subset $U \\\\subseteq X$ has a reduced ring of sections $\\\\mathcal{O}_X(U)$, then this recursor constructs a\"}\n  {\"name\": \"AlgebraicGeometry.IsReduced.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {motive : AlgebraicGeometry.IsReduced X → Sort u} →\\n    (t : AlgebraicGeometry.IsReduced X) →\\n      ((component_reduced : ∀ (U : X.Opens), IsReduced ↑(X.presheaf.obj (Opposite.op U))) → motive ⋯) → motive t\", \"doc\": \"Given a scheme $X$ and a type family $P$ over the predicate that $X$ is reduced, if for every open subset $U \\\\subseteq X$ the ring of sections $\\\\mathcal{O}_X(U)$ is reduced (contains no nonzero nilpot\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact relative reductive conditions or arbitrary-ring module invariant-power property. Existing tensors and symmetric algebra are reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, LinearMap",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"TensorProduct.mk\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Defs\", \"type\": \" (R : Type u_1) [CommSemiring R] (M : Type u_5) (N : Type u_6) [AddCommMonoid M] [AddCommMonoid N] [Module R M] [Module R N] : M →ₗ[R] N →ₗ[R] TensorProduct R M N\", \"doc\": \"The canonical bilinear map `M → N → M ⊗[R] N`.\"}\n  {\"name\": \"TensorProduct.mk_apply\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Defs\", \"type\": \" {R : Type u_1} [CommSemiring R] {M : Type u_5} {N : Type u_6} [AddCommMonoid M] [AddCommMonoid N] [Module R M] [Module R N] (m : M) (n : N) : ((TensorProduct.mk R M N) m) n = m ⊗ₜ[R] n\", \"doc\": \"\"}\n  {\"name\": \"TensorProduct.Neg.aux\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Basic\", \"type\": \" (R : Type u_1) [CommSemiring R] {M : Type u_2} {N : Type u_3} [AddCommGroup M] [AddCommMonoid N] [Module R M] [Module R N] : TensorProduct R M N →ₗ[R] TensorProduct R M N\", \"doc\": \"Auxiliary function to defining negation multiplication on tensor product.\"}\n  {\"name\": \"TensorProduct.liftAux\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Basic\", \"type\": \" {R : Type u_1} {R₂ : Type u_2} [CommSemiring R] [CommSemiring R₂] {σ₁₂ : R →+* R₂} {M : Type u_6} {N : Type u_7} {P₂ : Type u_11} [AddCommMonoid M] [AddCommMonoid N] [AddCommMonoid P₂] [Module R M] [Module R N] [Module R₂ P₂] (f' : M →ₛₗ[σ₁₂] N →ₛₗ[σ₁₂] P₂) : TensorProduct R M N →+ P₂\", \"doc\": \"Auxiliary function to constructing a linear map `M ⊗ N → P` given a bilinear map `M → N → P`\\nwith the property that its composition with the canonical bilinear map `M → N → M ⊗ N` is\\nthe given bilinea\"}\n  {\"name\": \"TensorProduct.curry\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Basic\", \"type\": \" {R : Type u_1} {R₂ : Type u_2} [CommSemiring R] [CommSemiring R₂] {σ₁₂ : R →+* R₂} {M : Type u_6} {N : Type u_7} {P₂ : Type u_11} [AddCommMonoid M] [AddCommMonoid N] [AddCommMonoid P₂] [Module R M] [Module R N] [Module R₂ P₂] (f : TensorProduct R M N →ₛₗ[σ₁₂] P₂) : M →ₛₗ[σ₁₂] N →ₛₗ[σ₁₂] P₂\", \"doc\": \"Given a semilinear map `M ⊗ N → P`, compose it with the canonical bilinear map\\n`M → N → M ⊗ N` to form a bilinear map `M → N → P`.\"}\n  {\"name\": \"TensorProduct.lift\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Basic\", \"type\": \" {R : Type u_1} {R₂ : Type u_2} [CommSemiring R] [CommSemiring R₂] {σ₁₂ : R →+* R₂} {M : Type u_6} {N : Type u_7} {P₂ : Type u_11} [AddCommMonoid M] [AddCommMonoid N] [AddCommMonoid P₂] [Module R M] [Module R N] [Module R₂ P₂] (f' : M →ₛₗ[σ₁₂] N →ₛₗ[σ₁₂] P₂) : TensorProduct R M N →ₛₗ[σ₁₂] P₂\", \"doc\": \"Constructing a linear map `M ⊗ N → P` given a bilinear map `M → N → P` with the property that\\nits composition with the canonical bilinear map `M → N → M ⊗ N` is\\nthe given bilinear map `M → N → P`.\\n\\nTh\"}\n  {\"name\": \"TensorProduct.lift_mk\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Basic\", \"type\": \" {R : Type u_1} [CommSemiring R] {M : Type u_6} {N : Type u_7} [AddCommMonoid M] [AddCommMonoid N] [Module R M] [Module R N] : TensorProduct.lift (TensorProduct.mk R M N) = LinearMap.id\", \"doc\": \"\"}\n  {\"name\": \"TensorProduct.curry_injective\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Basic\", \"type\": \" {R : Type u_1} {R₂ : Type u_2} [CommSemiring R] [CommSemiring R₂] {σ₁₂ : R →+* R₂} {M : Type u_6} {N : Type u_7} {P₂ : Type u_11} [AddCommMonoid M] [AddCommMonoid N] [AddCommMonoid P₂] [Module R M] [Module R N] [Module R₂ P₂] : Function.Injective TensorProduct.curry\", \"doc\": \"\"}\n  {\"name\": \"TensorProduct.lift_mk_compr₂ₛₗ\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Basic\", \"type\": \" {R : Type u_1} {R₂ : Type u_2} [CommSemiring R] [CommSemiring R₂] {σ₁₂ : R →+* R₂} {M : Type u_6} {N : Type u_7} {P₂ : Type u_11} [AddCommMonoid M] [AddCommMonoid N] [AddCommMonoid P₂] [Module R M] [Module R N] [Module R₂ P₂] (g : TensorProduct R M N →ₛₗ[σ₁₂] P₂) : TensorProduct.lift ((TensorProduc\", \"doc\": \"\"}\n  {\"name\": \"TensorProduct.lift_compr₂ₛₗ\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Basic\", \"type\": \" {R : Type u_1} {R₂ : Type u_2} {R₃ : Type u_3} [CommSemiring R] [CommSemiring R₂] [CommSemiring R₃] {σ₁₂ : R →+* R₂} {σ₂₃ : R₂ →+* R₃} {σ₁₃ : R →+* R₃} {M : Type u_6} {N : Type u_7} {P₂ : Type u_11} {P₃ : Type u_12} [AddCommMonoid M] [AddCommMonoid N] [AddCommMonoid P₂] [AddCommMonoid P₃] [Module R\", \"doc\": \"\"}\n  {\"name\": \"TensorProduct.ext'\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Basic\", \"type\": \" {R : Type u_1} {R₂ : Type u_2} [CommSemiring R] [CommSemiring R₂] {σ₁₂ : R →+* R₂} {M : Type u_6} {N : Type u_7} {P₂ : Type u_11} [AddCommMonoid M] [AddCommMonoid N] [AddCommMonoid P₂] [Module R M] [Module R N] [Module R₂ P₂] {g h : TensorProduct R M N →ₛₗ[σ₁₂] P₂} (H : ∀ (x : M) (y : N), g (x ⊗ₜ[R\", \"doc\": \"\"}\n  {\"name\": \"TensorProduct.mapOfCompatibleSMul\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Basic\", \"type\": \" (R : Type u_1) [CommSemiring R] (A : Type u_13) (S : Type u_14) (M : Type u_15) (N : Type u_16) [AddCommMonoid M] [AddCommMonoid N] [Module R M] [Module R N] [CommSemiring A] [Module A M] [Module A N] [SMulCommClass R A M] [CommSemiring S] [Module S M] [SMulCommClass R S M] [SMulCommClass A S M] [T\", \"doc\": \"If M and N are both R- and A-modules and their actions on them commute,\\nand if the A-action on `M ⊗[R] N` can switch between the two factors, then there is a\\ncanonical S-linear map from `M ⊗[A] N` to \"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact relative reductive conditions or arbitrary-ring module invariant-power property. Existing tensors and symmetric algebra are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "comodule|coaction|SymmetricAlgebra",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Bialgebra/SymmetricAlgebra.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic\"}\n  {\"file\": \"Mathlib/RingTheory/Bialgebra/SymmetricAlgebra.lean\", \"line\": \"13\", \"text\": \"# Bialgebra structure on `SymmetricAlgebra R M`\"}\n  {\"file\": \"Mathlib/RingTheory/Bialgebra/SymmetricAlgebra.lean\", \"line\": \"15\", \"text\": \"`SymmetricAlgebra R M` is the cocommutative commutative `R`-bialgebra on `M`\"}\n  {\"file\": \"Mathlib/RingTheory/Bialgebra/SymmetricAlgebra.lean\", \"line\": \"22\", \"text\": \"namespace SymmetricAlgebra\"}\n  {\"file\": \"Mathlib/RingTheory/Bialgebra/SymmetricAlgebra.lean\", \"line\": \"28\", \"text\": \"instance instBialgebra : Bialgebra R (SymmetricAlgebra R M) :=\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact relative reductive conditions or arbitrary-ring module invariant-power property. Existing tensors and symmetric algebra are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "rg in lean/WeilConjectures, lean/Sheaf and dag/nodes; blueprint_refs.py search symmetric power / split torus",
+   "results": "No existing arbitrary-ring invariant symmetric-power lifting property or relative reductive/simply-connected/Borel-pair definition. Found and reused IsSemisimpleGroupScheme, IsBorelGroupScheme, IsReductive, IsMaximalTorus and relativeSplitTorus. HopfAction coactions, RelativeHopf.Coaction and EquivariantCoherent.RationalModule are field-only; the latter is finite-dimensional. Upstream has no declaration carrying this item id.",
+   "date": "2026-10-24",
+   "verdict": "New definitions are necessary; existing field predicates and constructions are reused."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-symmetric-power-dvr-reduction",
+  "date": "2026-10-24",
+  "group": "Q31"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Theorem 9.7.5 reduction to split semisimple simply connected DVR groups: definition of the lifting property and geometric fibre hypotheses.",
+   "via": [
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.InvariantSymmetricPowerLifting",
+  "declaration": "AlgebraicGeometry.InvariantSymmetricPower.HasInvariantPowerLifting",
+  "declarations": [
+   "AlgebraicGeometry.InvariantSymmetricPower.IsCoaction",
+   "AlgebraicGeometry.InvariantSymmetricPower.symmetricCoaction",
+   "AlgebraicGeometry.InvariantSymmetricPower.HasInvariantPowerLifting"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/InvariantSymmetricPowerLifting.lean",
+  "statement": "def HasInvariantPowerLifting : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q31",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-177bf0a61",
+  "group": "Q31",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-177bf0a61",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Clause check done: canonical Mathlib HopfAlgebra on Γ(G,⊤); IsCoaction counit/coassoc; equivariant surjection lam.rTensor C (ρ m) = lam m ⊗ 1; Sym^n = recorded tensor-image grade, 0<n; symmetricCoaction = SymmetricAlgebra.lift of (ι⊗1)∘ρ. HasSimplyConnectedSemisimpleFibres / HasSplitBorelPair / HasReductiveFibres match node text and reuse landed IsSemisimpleGroupScheme, IsBorelGroupScheme, IsMaximalTorus, IsReductive, relativeSplitTorus; no stronger hypotheses on G; same module universe max u v in premise and conclusion. Edge cases fine (R=0, rank 0, torsion modules, nonreduced kernels). Item: only lean and stmt_deps changed vs live; statements verbatim; new def nodes complete; no sorry in helper modules; item proof is sorry; docstrings OK. No landed duplicate (Q41/Q110 parent deliveries define algebra coactions, a different notion). Note: parallel Q03 S2 delivery ab20b34c2 of the same item has its own copies of both notions; only one can land, the later one must be rebound."
+ }
+}

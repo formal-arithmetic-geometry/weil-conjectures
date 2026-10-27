@@ -1,0 +1,403 @@
+{
+ "id": "lem-sfb-hypercover-derived-unit-chain-squares",
+ "kind": "statement",
+ "title": "Derived-unit representatives and cross-site hypercover chain squares",
+ "statement": "Let $h:X'\\to X$ be a morphism of schemes [def-pc-scheme] with small pro-etale sites and compatible universes [def-weil-pbc-proetale-site, def-weil-size-convention]. Let $R,R'$ be sheaves of commutative rings with a specified isomorphism $h^{-1}R\\cong R'$, giving the actual exact module inverse image $h^*$ and its adjoint $h_*$ [def-weil-pbc-ringed-topos-morphism, def-weil-proetale-inverse-image, def-weil-pbc-proetale-operations]. Let $U_\\bullet\\to X$ and $V_\\bullet\\to X'$ be augmented simplicial site objects [def-weil-pbc-simplicial-object], with maps $g_p:V_p\\to U_p$ over $h$ commuting with every simplicial operator and augmentation. No matching-cover, weak-contractibility or cartesian-square assumption is imposed. Let $E$ be a strictly bounded-below complex of $R$-module sheaves [def-weil-sheaf-of-modules-category], and choose quasi-isomorphisms $i:E\\to I$ and $j:h^*E\\to J$ into strictly bounded-below termwise-injective module complexes. Use the signed totals $T_U,T_V$ and their actual restriction augmentations $\\alpha$ [def-weil-pbc-proetale-hypercover-total, def-weil-pbc-proetale-hypercover-augmentation]. Write $Q$ for localization into the relevant ordinary derived categories [def-weil-abstract-derived-category] and compute right derived functors with K-injective resolutions [def-sfb-right-derived-functor].\n\nThere is a chain map $b:h^*I\\to J$, unique up to homotopy subject to $b h^*i\\simeq j$. For every such $b$, let $a=h_*b\\circ\\eta_I:I\\to h_*J$, where $\\eta$ is the specified ordinary adjunction unit. Then $h_*J$ is K-injective and $ai\\simeq h_*j\\circ\\eta_E$. Under the canonical resolution identifications, $Qa\\circ Qi$ represents the actual derived adjunction unit $QE\\to Rh_*h^*QE$. Consequently the chain map $\\Gamma(a):I(X)\\to J(X')$, with $\\Gamma(X,h_*J)=\\Gamma(X',J)$, represents the canonical unit-induced derived section map $R\\Gamma(X,QE)\\to R\\Gamma(X',h^*QE)$. Here the composition comparison for derived direct images is the canonical one, evaluated using the identity resolution of the K-injective $h_*J$, not a chosen isomorphism of functors.\n\nRestriction along $g$ gives a chain map $c_{g,E}:T_U(E)\\to T_V(h^*E)$. Define $G:T_U(I)\\to T_V(J)$ on bidegree $(p,q)$ by restriction along $g_p$ followed by $b^q$. These are chain maps for the differential $\\delta+(-1)^p d$, and satisfy\n$$G\\alpha_I=\\alpha_J\\Gamma(a)\\quad\\text{strictly},\\qquad G T_U(i)\\simeq T_V(j)c_{g,E}.$$\nIf $s:b h^*i\\simeq j$ is a coefficient homotopy, the latter homotopy on bidegree $(p,q)$ is $(-1)^p$ times restriction along $g_p$ followed by $s^q$.\n\nThe maps $c_{g,E}$ commute strictly with coefficient chain maps and with refinements whenever the augmented simplicial diagrams commute. For consecutive scheme maps and consecutive augmented simplicial maps they commute with composition and identity after the canonical coefficient and ordinary pullback comparisons [def-sfb-proetale-composite-coefficients, def-sfb-proetale-ordinary-pullback-comparison]. Explicitly, identifying $(hk)^*E\\cong k^*h^*E$, the composite of the degree-$p$ restrictions is the restriction along the composite degree-$p$ map; thus $c_{g',h^*E}c_{g,E}=c_{gg',E}$.\n\nInjective objects and resolutions are as in [def-sp-injective-resolutions]; coefficient homotopies and K-injectivity are as in [def-pur-kinjective-complex].",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09A2, label lemma-compute-cohomology, restriction augmentation model; derived.tex Tags 0DVC/09T5, labels lemma-pre-derived-adjoint-functors / lemma-derived-adjoint-functors; sites-cohomology.tex Tag 0D6E, label lemma-derived-pushforward-composition. Agent refinement: explicit cross-site chain squares and composition."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-pbc-simplicial-object",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-proetale-hypercover-total",
+  "def-weil-pbc-proetale-hypercover-augmentation",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-proetale-operations",
+  "def-sfb-proetale-composite-coefficients",
+  "def-sfb-proetale-ordinary-pullback-comparison",
+  "def-sfb-right-derived-functor",
+  "def-sp-injective-resolutions",
+  "def-pur-kinjective-complex"
+ ],
+ "proof": [
+  {
+   "text": "Both $I$ and $J$ are K-injective by bounded-below termwise injectivity. Exactness of $h^*$ implies that $h^*i:h^*E\\to h^*I$ is a quasi-isomorphism. Apply the K-injective comparison principle with target $J$: precomposition with $h^*i$ is a bijection from $\\operatorname{Hom}_{K}(h^*I,J)$ to $\\operatorname{Hom}_{K}(h^*E,J)$. The preimage of $[j]$ has a chain representative $b$, and bijectivity says exactly that all admissible $b$ have the same homotopy class. Thus there is a coefficient homotopy $s$ with $b h^*i-j=d_Js+s d_{h^*E}$.",
+   "uses": [
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-sp-kinjective-comparison-principle",
+    "def-pur-kinjective-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Labels lemma-bounded-below-injectives-K-injective and lemma-K-injective, implication (1) to (2)."
+   }
+  },
+  {
+   "text": "For an acyclic module complex $A$ on $X$, exactness makes $h^*A$ acyclic. The termwise homotopy adjunction gives $\\operatorname{Hom}_{K}(A,h_*J)\\cong\\operatorname{Hom}_{K}(h^*A,J)=0$. This is precisely K-injectivity of $h_*J$; no assertion that $h^*I$ is injective is needed.",
+   "uses": [
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-pur-kinjective-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Label lemma-adjoint-preserve-K-injectives: its displayed Hom argument."
+   }
+  },
+  {
+   "text": "The termwise unit is a chain map, hence so is $a=h_*b\\,\\eta_I$. Naturality gives $\\eta_I i=h_*h^*i\\,\\eta_E$, and therefore $ai=h_*(b h^*i)\\eta_E\\simeq h_*j\\eta_E$. Explicitly the homotopy is $h_*s\\,\\eta_E$, since additive direct image preserves the differential identity defining $s$.",
+   "uses": [
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "def-pur-kinjective-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Label lemma-adjoint-preserve-K-injectives, termwise adjunction; explicit naturality calculation."
+   }
+  },
+  {
+   "text": "Use the actual canonical adjunction of def-weil-pbc-proetale-operations, which is now the source library mapDerivedCategoryRightDerivedAdjunction of the normalized ordinary module adjunction. Its Mathlib derived unit equation derivedη_fac_app on the homotopy category states ηD(Qh E) followed by Rh_*(φh_E) equals Qh(η_E) followed by the right-derived unit. The proved cochain normalization lemma [lem-sfb-derived-adjunction-cochain-unit] transports this equation along quotientCompQhIso and mapDerivedCategoryFactorsh_hom_app to obtain ηD(QE) followed by Rh_*(φ_E) = Q(η_E) followed by γ_(h^*E). Naturality of γ at j then gives Q(transpose j) followed by γ_J = ηD(QE) followed by Rh_*(φ_E followed by Qj). Apply the localized homotopy from step 3 to replace Q(transpose j) by Qi followed by Q(transpose b). All units and factorizations are the published canonical constructions; no existential choice of a derived adjunction is used.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-sfb-derived-adjunction-cochain-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Labels lemma-pre-derived-adjoint-functors and lemma-derived-adjoint-functors: normalized transpose of the resolved identity, with exact left adjoint."
+   }
+  },
+  {
+   "text": "Evaluate the universal normalization of the source library rightDerivedFunctorCompIso' for F=h_* and G=Gamma_X. Its homotopy-category unit equation follows directly from rightDerivedUnique and rightDerivedNatTrans_app. Transport along quotientCompQhIso to obtain γ_G(FJ) followed by RG(γ_F(J)) followed by the canonical composition comparison = γ_(FG)(J). The literal equality Gamma_X h_*=Gamma_Y identifies the last unit with γ_Y(J). Naturality of γ_X at any a:I→h_*J gives sections_composition_representative, without a K-injectivity hypothesis. For sections_representative, the units at I and J are invertible by bounded-below injectivity. Apply RGamma_X to the equality of step 4, use naturality of the composition comparison, and cancel the invertible RGamma_X(Qi). This gives exactly the displayed canonical derived section map.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-bounded-below-injectives-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Label lemma-derived-pushforward-composition, canonical resolution normalization; identity resolution when the first image is already K-injective."
+   }
+  },
+  {
+   "text": "For a module sheaf $F$ and $g_p:V_p\\to U_p$, let $\\widetilde g_p:V_p\\to X\\!\\prime\\times_XU_p$ be its factorization through the fibre product. Define $r_p^F:F(U_p)\\to(h^*F)(V_p)$ as the section of the module unit at $U_p$, followed by restriction along $\\widetilde g_p$. It is natural in $F$. The simplicial commutation assumption and the restriction identity $(uv)^*=v^*u^*$ give $r_{p+1}^F d_i^*=d_i^*r_p^F$ for every face. The same equality holds for degeneracies. Thus $r$ commutes with the alternating sum $\\delta$ and with coefficient differentials. Applying it in every bidegree defines $c_{g,E}$, and composing it with $b^q$ defines $G$. Both commute with $\\delta+(-1)^p d$ and so induce the asserted chain maps on the signed totals.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-proetale-operations",
+    "def-weil-pbc-simplicial-object",
+    "def-weil-pbc-proetale-hypercover-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Label lemma-compute-cohomology, section bicomplex; explicit cross-site restriction using the specified adjunction."
+   }
+  },
+  {
+   "text": "For $x\\in I^q(X)$, both $G\\alpha_I(x)$ and $\\alpha_J\\Gamma(a)(x)$ lie in bidegree $(0,q)$. The first is $b^q_{V_0}r_0^{I^q}(x|_{U_0})$. By naturality of the unit with respect to restriction and commutativity of the augmented diagram, this equals $b^q_{V_0}((\\eta_Ix)|_{V_0})$. By naturality of the sheaf map $b^q$ it equals $(b^q_{X\\prime}\\eta_Ix)|_{V_0}$, which is the second expression. All other bidegrees are zero, giving $G\\alpha_I=\\alpha_J\\Gamma(a)$ strictly.",
+   "uses": [
+    "def-weil-pbc-proetale-hypercover-augmentation",
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Label lemma-compute-cohomology, actual restriction augmentations; explicit evaluation of the square."
+   }
+  },
+  {
+   "text": "On bidegree $(p,q)$ put $H=(-1)^p s^q_{V_p}r_p^{E^q}$, of total degree $-1$. Naturality of restriction makes $s$ commute with the coface restrictions. In $DH+HD$, for $D=\\delta+(-1)^p d$, the horizontal terms cancel because their signs are $(-1)^p$ and $(-1)^{p+1}$. The vertical terms have sign $(-1)^{2p}=1$ and sum to $(d_Js+s d_{h^*E})r_p^E=(b h^*i-j)r_p^E$. Naturality in the coefficient map $i$ identifies this with the bidegree component of $GT_U(i)-T_V(j)c_{g,E}$. Therefore $H$ is precisely the required homotopy. The total degree sums have finite support because the complexes are strictly bounded below.",
+   "uses": [
+    "def-pur-kinjective-complex",
+    "def-weil-pbc-proetale-hypercover-total",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Label lemma-compute-cohomology, signed total model; agent calculation of the coefficient homotopy sign."
+   }
+  },
+  {
+   "text": "For a coefficient chain map $t:E\\to F$, naturality of the ordinary unit and of section restriction gives $(h^*t)_{V_p}r_p^E=r_p^Ft_{U_p}$ in every bidegree. Hence $T_V(h^*t)c_{g,E}=c_{g,F}T_U(t)$ strictly. For refinements on the two sides, a commuting augmented simplicial diagram says the two degree-$p$ composite scheme maps coincide; functoriality of the restrictions in the definition of $r_p$ gives equality of the degree-$p$ section maps. Their total maps are therefore equal, with no appeal to a comparison isomorphism of cohomology groups.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-proetale-hypercover-total",
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Label lemma-compute-cohomology, functorial restriction model; explicit coefficient and refinement equalities."
+   }
+  },
+  {
+   "text": "For consecutive maps $Z\\xrightarrow{k}X\\prime\\xrightarrow{h}X$, write $A:(hk)^*\\xrightarrow{\\sim}k^*h^*$ and $B:h_*k_*\\xrightarrow{\\sim}(hk)_*$ for the specified ordinary comparisons. The definition of $A$ as the mate of $B$ means, on a coefficient sheaf $F$, that $B_{k^*h^*F}\\,h_*(\\eta^k_{h^*F})\\,\\eta^h_F=(hk)_*(A_F)\\eta^{hk}_F$. Evaluate this equality at $U_p$, then restrict to the degree-$p$ object on $Z$. The section formula for $B$ is exactly fibre-product pasting. The resulting equality says that restriction along $g_p$ followed by that along $g_p\\prime$ equals restriction along $g_pg_p\\prime$ after $A_F$. The composite coefficient action is exactly the specified composite ring identification. This holds termwise for $F=E^q$, hence $c_{g\\prime,h^*E}c_{g,E}=c_{gg\\prime,E}$ after the stated comparisons. For an identity map the direct-image pasting map is identity; its mate identifies its unit with identity, so the same calculation gives the identity total map.",
+   "uses": [
+    "def-sfb-proetale-ordinary-pullback-comparison",
+    "def-sfb-proetale-composite-coefficients",
+    "def-weil-pbc-proetale-operations",
+    "def-weil-pbc-proetale-hypercover-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Label lemma-push-pull-composition-modules; normalized mate and fibre-product section formula of the ordinary comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sp-kinjective-comparison-principle",
+  "def-pur-kinjective-complex",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-simplicial-object",
+  "def-weil-pbc-proetale-hypercover-total",
+  "def-weil-pbc-proetale-hypercover-augmentation",
+  "def-sfb-proetale-ordinary-pullback-comparison",
+  "def-sfb-proetale-composite-coefficients",
+  "lem-sfb-derived-adjunction-cochain-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 0DVC and 09T5, with sites-cohomology.tex Tag 0D6E and proetale.tex Tag 09A2. A6 stage-3 implementation uses the canonical source-library derived adjunction and composition APIs directly for steps 1-5; steps 6-10 remain the recorded total-complex plan."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(unit|Unit).*(rightDerived|RightDerived)|(rightDerived|RightDerived).*(unit|Unit)",
+   "results": "14 hits: Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: general injective-resolution/derived-functor or truncated-hypercover infrastructure does not state this cross-site chain-square theorem with its canonical unit and composition normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Actual derived adjunction unit chain representative and augmentation square for maps of hypercover section total complexes",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"rightDerived\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: general injective-resolution/derived-functor or truncated-hypercover infrastructure does not state this cross-site chain-square theorem with its canonical unit and composition normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an exact inverse image of ringed topoi a chain map from a pulled back injective resolution to a target injective resolution represents the actual derived adjunction unit and commutes with hypercover restriction augmentations",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero', CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles, CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility, CategoryTheory.InjectiveResolution.iso_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality",
+   "date": "2026-10-22",
+   "verdict": "no match: general injective-resolution/derived-functor or truncated-hypercover infrastructure does not state this cross-site chain-square theorem with its canonical unit and composition normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "(Adjunction|adjunction).*(derived|Derived)|(derived|Derived).*(Adjunction|adjunction)",
+   "results": "4 hits: Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: general injective-resolution/derived-functor or truncated-hypercover infrastructure does not state this cross-site chain-square theorem with its canonical unit and composition normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simplicial section restriction map followed by a lift between injective resolutions forms a homotopy commutative coefficient square and strict augmentation square representing the canonical derived unit, functorially under composition",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.InjectiveResolution.rightDerivedToHomotopyCategory_app_eq, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero', CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality",
+   "date": "2026-10-22",
+   "verdict": "no match: general injective-resolution/derived-functor or truncated-hypercover infrastructure does not state this cross-site chain-square theorem with its canonical unit and composition normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "(hypercover|Hypercover).*(unit|homotop)|(unit|homotop).*(hypercover|Hypercover)",
+   "results": "12 hits: Mathlib/CategoryTheory/Sites/CoproductSheafCondition.lean, Mathlib/CategoryTheory/Sites/Hypercover/Saturate.lean, Mathlib/CategoryTheory/Sites/Hypercover/Saturate.lean, Mathlib/CategoryTheory/Sites/Hypercover/Saturate.lean, Mathlib/CategoryTheory/Sites/Hypercover/Saturate.lean, Mathlib/CategoryTheory/Sites/Hypercover/Saturate.lean, Mathlib/CategoryTheory/Sites/Hypercover/Homotopy.lean, Mathlib/CategoryTheory/Sites/Hypercover/Homotopy.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give general derived-unit or injective-resolution infrastructure or truncated hypercover homotopies, not the full cross-site signed-total chain-square statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"rightDerived\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give general derived-unit or injective-resolution infrastructure or truncated hypercover homotopies, not the full cross-site signed-total chain-square statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived adjunction unit represented by injective resolution chain map and signed simplicial section total augmentation square",
+   "results": "8 hits: CategoryTheory.Adjunction.derivedη.congr_simp, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.unit, CategoryTheory.Adjunction.derivedη_fac_app, CategoryTheory.Adjunction.CoreUnitCounit.unit, CategoryTheory.Adjunction.injectivePresentationOfMap, CategoryTheory.Adjunction.CoreHomEquivUnitCounit.unit",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give general derived-unit or injective-resolution infrastructure or truncated hypercover homotopies, not the full cross-site signed-total chain-square statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact sheaf inverse image and an injective resolution give the derived adjunction unit; cross-site simplicial restriction total maps commute with augmentations and coefficient homotopies",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles, CategoryTheory.InjectiveResolution.toRightDerivedZero', CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give general derived-unit or injective-resolution infrastructure or truncated hypercover homotopies, not the full cross-site signed-total chain-square statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of a simplicial section double complex total with respect to a change of ringed site and homotopy of coefficient chain maps, using the sign minus one to the simplicial degree",
+   "results": "8 hits: AlgebraicTopology.DoldKan.QInfty_f_naturality_assoc, AlgebraicTopology.DoldKan.PInfty_f_naturality_assoc, AlgebraicTopology.DoldKan.Γ₀.Obj.Termwise.mapMono_naturality_assoc, AlgebraicTopology.DoldKan.hσ'_naturality, AlgebraicTopology.DoldKan.Q_f_naturality_assoc, AlgebraicTopology.DoldKan.P_f_naturality_assoc, AlgebraicTopology.DoldKan.PInftyToNormalizedMooreComplex_naturality_assoc, AlgebraicTopology.DoldKan.Γ₂N₁.natTrans_app_f_app",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give general derived-unit or injective-resolution infrastructure or truncated hypercover homotopies, not the full cross-site signed-total chain-square statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-acyclic-hypercover-pullback-normalization",
+  "date": "2026-10-22",
+  "group": "Q75"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: the unpunctured one-term root-tower calculation underlying coordinate-face restriction in the tame-boundary expansion. Hypercover descent: identification of the section-complex map with the specified adjunction-unit pullback. Re-split: old steps 6-7 and cross-site functoriality/composition part of step 8.",
+   "via": [
+    "lem-sfb-acyclic-hypercover-pullback-normalization",
+    "lem-sfb-wstrict-lisse-component-cohomology",
+    "lem-sfb-root-tower-coordinate-face",
+    "lem-sfb-root-tower-inner-support",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-hypercover-derived-unit-chain-squares",
+  "worker": "stage1",
+  "summary": "Q36: use existing K-injective comparison, normalized derived adjunction and ringed composition nodes; write the cross-site unit restrictions, augmentation equality, signed coefficient homotopy and composition formula explicitly. No statement change and no new nodes.",
+  "blueprint": "Realizes the inherited hypercover unit-normalization subargument of paragraph (3), open direct image, and the old steps 6-7/composition clause of step 8 of the parent normalization node. The ancestor lookup returns null; retained the inherited ancestry rather than inventing an imported ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "why": "General bounded-below injective criterion, applied to the specified I and J. No hypercover-specific node of this unit supplies this generic homological tool."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "General exact-functor preservation of quasi-isomorphisms, applied to h*. No hypercover-specific node of this unit supplies this generic homological tool."
+   },
+   {
+    "node": "lem-sp-kinjective-comparison-principle",
+    "why": "General precomposition bijection into a K-injective target, used to construct b. No hypercover-specific node of this unit supplies this generic homological tool."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "General additive adjunction on chain maps and homotopies, used for a and K-injectivity of h*J. No hypercover-specific node of this unit supplies this generic homological tool."
+   },
+   {
+    "node": "lem-pc-pre-derived-adjoint-functors-general",
+    "why": "Canonical derived-adjunction bijection and its representative formula (Stacks 0DVC/0FND), the very construction by which def-weil-pbc-proetale-operations defines the actual adjunction Lh^* -| Rh_*; used at identity resolutions to compute its unit. No node of this unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "General canonical composition normalization, specialized to global sections with the identity resolution of h_*J. No hypercover-specific node of this unit supplies this generic homological tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sp-kinjective-comparison-principle",
+  "lem-weil-pbc-termwise-adjunction-homotopy"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-95adfe52d",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-95adfe52d (reviewer sub-agent of L); spot-checked: Read the whole item: the statement is unchanged against live (still unsplit, so not superseded) and the split has 10 steps and no new nodes. Read every cited statement, the Stacks sources 09A2 (proetale l.3066), 0FND/0DVC/09T5 (derived l.9517–9596) and 0D6E, and the parent's old steps 6–8; every argument of those steps reappears here. Steps 1–3, 5–10 check out. Step 1: J is K-injective by bounded-below injectivity, h^*i is a quasi-isomorphism by exactness, and the comparison principle gives b with homotopy s. Step 2: K-injectivity of h_*J follows from the termwise adjunction. Step 3: the homotopy h_*s η_E. Step 5: the identity-resolution composition comparison for global sections. Step 6: r_p (unit then restriction along V_p→X'×_X U_p) commutes with every operator. Step 7: the strict (0,q) augmentation square. Step 8: the sign of H=(-1)^p s r was checked bidegree by bidegree, with p=0,1. Step 9: coefficient and refinement squares. Step 10: the conjugate equation for A against the pasting B. No cycles (closures of all cited lemmas computed), no SGA, no duplicate in the DAG (rg over dag/nodes). FIX (C4/E5) in step 4: it cited lem-sfb-resolving-derived-adjunction-normalization, which only asserts that some adjunction with the transpose formula exists, and then called its unit the actual derived unit. The actual adjunction of def-weil-pbc-proetale-operations is the bijection of lem-pc-pre-derived-adjoint-functors-general. Rewrote step 4 to apply that lemma's characterizing formula at s=id_J (cocone γ_J), t=id_E (cone φ_E) and f=h_*j η_E, giving η^D=Rh_*(Qj)^{-1}γ_J Q(ai). Updated proof_deps and replaced the one split_report.tool_uses entry. Accepted tool uses: bounded-below-injectives-kinjective, exact-functor-derived-factorization, kinjective-comparison-principle, termwise-adjunction-homotopy, ringed-topoi-derived-pushforward-composition, pre-derived-adjoint-functors-general.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.HypercoverDerivedUnitChainSquares",
+  "declaration": "AlgebraicGeometry.Scheme.HypercoverUnit.unit_representative",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.HypercoverUnit.pull",
+   "AlgebraicGeometry.Scheme.HypercoverUnit.push",
+   "AlgebraicGeometry.Scheme.HypercoverUnit.total",
+   "AlgebraicGeometry.Scheme.HypercoverUnit.summand",
+   "AlgebraicGeometry.Scheme.HypercoverUnit.restrictSection",
+   "AlgebraicGeometry.Scheme.HypercoverUnit.RestrictionFormula",
+   "AlgebraicGeometry.Scheme.HypercoverUnit.restriction_existsUnique",
+   "AlgebraicGeometry.Scheme.HypercoverUnit.restriction",
+   "AlgebraicGeometry.Scheme.HypercoverUnit.sections",
+   "AlgebraicGeometry.Scheme.HypercoverUnit.sections_additive",
+   "AlgebraicGeometry.Scheme.HypercoverUnit.augmentation",
+   "AlgebraicGeometry.Scheme.HypercoverUnit.transpose",
+   "AlgebraicGeometry.Scheme.HypercoverUnit.directImageSections",
+   "AlgebraicGeometry.Scheme.HypercoverUnit.derivedSectionsComposition",
+   "AlgebraicGeometry.Scheme.HypercoverUnit.derivedSectionMap",
+   "AlgebraicGeometry.Scheme.HypercoverUnit.comparison",
+   "AlgebraicGeometry.Scheme.HypercoverUnit.unit_representative",
+   "AlgebraicGeometry.Scheme.HypercoverUnit.sections_composition_representative",
+   "AlgebraicGeometry.Scheme.HypercoverUnit.sections_representative",
+   "AlgebraicGeometry.Scheme.HypercoverUnit.augmentation_square",
+   "AlgebraicGeometry.Scheme.HypercoverUnit.coefficient_homotopy",
+   "AlgebraicGeometry.Scheme.HypercoverUnit.coefficient_naturality",
+   "AlgebraicGeometry.Scheme.HypercoverUnit.RefinementFormula",
+   "AlgebraicGeometry.Scheme.HypercoverUnit.refinement_existsUnique",
+   "AlgebraicGeometry.Scheme.HypercoverUnit.refinement",
+   "AlgebraicGeometry.Scheme.HypercoverUnit.refinement_naturality",
+   "AlgebraicGeometry.Scheme.HypercoverUnit.compositeDiagram",
+   "AlgebraicGeometry.Scheme.HypercoverUnit.restriction_comp_section",
+   "AlgebraicGeometry.Scheme.HypercoverUnit.restriction_comp",
+   "AlgebraicGeometry.Scheme.HypercoverUnit.identity_directImage_existsUnique",
+   "AlgebraicGeometry.Scheme.HypercoverUnit.identityDirectImage",
+   "AlgebraicGeometry.Scheme.HypercoverUnit.identityPullback",
+   "AlgebraicGeometry.Scheme.HypercoverUnit.restriction_id"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/HypercoverDerivedUnitChainSquares.lean",
+  "statement": "theorem unit_representative {X Y : Scheme.{u}} (h : Y ⟶ X) (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (S : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) (c : (proEtaleSheafInverseImage h CommRingCat.{u + 1}).obj R ≅ S) (E I : CochainComplex.Plus (proEtaleRingModules X R)) (J : CochainComplex.Plus (proEtaleRingModules Y S)) (hI : ∀ n : ℤ, Injective (I.obj.X n)) (hJ : ∀ n : ℤ, Injective (J.obj.X n)) (i : E.obj ⟶ I.obj) (j : (pull h R S c).obj E.obj ⟶ J.obj) [QuasiIso i] [QuasiIso j] (b : (pull h R S c).obj I.obj ⟶ J.obj) (s : Homotopy ((pull h R S c).map i ≫ b) j) : I.obj.IsKInjective ∧ J.obj.IsKInjective ∧ CochainComplex.IsKInjective ((push h R S c).obj J.obj) ∧ Nonempty (Homotopy (i ≫ transpose h R S c b) (transpose h R S c j)) ∧ DerivedCategory.Q.map i ≫ DerivedCategory.Q.map (transpose h R S c b) ≫ (proEtaleRingModuleDirectImage h R S c).rightDerivedFunctorUnitQ J.obj = (proEtaleRingDerivedAdjunction h R S c).unit.app (DerivedCategory.Q.obj E.obj) ≫ (proEtaleRingDerivedDirectImage h R S c).map ((proEtaleRingDerivedPullbackFactors h R S c).hom.app E.obj ≫ DerivedCategory.Q.map j)",
+  "branch": "sheaf-dag",
+  "by": "Q139",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "One declaration per clause: comparison and unit_representative; sections_representative with the canonical identity-resolution composition; restriction_existsUnique and its component-characterized construction; augmentation_square, coefficient_homotopy, coefficient_naturality, refinement_naturality, restriction_comp_section, restriction_comp, and restriction_id. The totals and augmentations are the recorded module constructions, viewed faithfully on underlying abelian groups to compare different coefficient rings. W = ProEt.mk (𝟙 X) is the global-section specialization. No node statement or dependency is changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5d060abaf",
+  "group": "Q139",
+  "result": "pass",
+  "note": "Every node clause is rendered. comparison: b exists and is unique up to homotopy. unit_representative: I, J and h_*J K-injective, ai≃h_*jη_E, and Qi≫Qa≫γ_J = η^D≫Rh_*(φ_E≫Qj) with the published derived adjunction, rightDerivedFunctorUnitQ and the exact-pullback factorization (proof step 4). sections_representative and sections_composition_representative use the canonical rightDerivedFunctorCompIso' and the Iso.refl section identification; derived by hand. restriction/refinement/identityDirectImage are chosen from ∃! summand or section formulas that fix the data, so not hollow. augmentation_square is strict; hg is equivalent to its n=0 case. coefficient_homotopy has H=(-1)^p·s∘r, checked against Mathlib's Homotopy convention and the up-ℤ total sign (-1)^p after the flip. coefficient_naturality, refinement_naturality, restriction_comp_section (checked via unit_conjugateEquiv and the compositionIso pasting) and restriction_id (checked via the mate) are correct. Universes u and w only; no extra hypotheses; edge cases ok; docstrings ok; lines ≤100; all theorems sorry. Only the item's lean field changed against live; no dependency node changed. No compile: no file changed. Advisories: proEtaleRingInverseImageId owner def-per-proetale-ring-inverse-image-comparisons is not in stmt_deps (S2 cannot add it); the identity ordinary comparison helper could become a def node (same formula as the private modulePushId_generic); proEtaleRingModuleAdjunction is not listed in the operations record's declarations."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261026T091058-L-3304495",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,367 @@
+{
+ "id": "lem-sfb-relative-pseudocoherence-fppf-descent",
+ "kind": "statement",
+ "title": "Relative m-pseudo-coherence descends along fppf scheme coverings",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $f:X\\to B$ be a locally finite type morphism of schemes [def-pc-scheme, def-pc-morphism-conventions], let $m\\in\\mathbf Z$, and let $E\\in D(\\mathcal O_X)$ [def-pc-derived-category] have quasi-coherent cohomology sheaves [pqf-def-coherent]. Let $J$ be a set and let $\\{p_j:X_j\\to X\\}_{j\\in J}$ be an fppf covering of schemes [def-pc-fppf-site], meaning that every $p_j$ is flat and locally of finite presentation and their images jointly cover $X$. Each $X_j$ is viewed over $B$ by $f\\circ p_j$. Then $E$ is $m$-pseudo-coherent relative to $B$ [def-sfb-relative-pseudo-coherent-complex] if and only if $Lp_j^*E$ is $m$-pseudo-coherent relative to $B$ for every $j\\in J$ [def-pc-derived-pullback]. There is no Noetherian, quasi-compactness, separation, or global cohomological boundedness hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0CSN, lemma-relative-pseudo-coherent-descends-fppf"
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-pc-derived-category",
+  "pqf-def-coherent",
+  "def-pc-fppf-site",
+  "def-sfb-relative-pseudo-coherent-complex",
+  "def-pc-derived-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Assume $E$ is $m$-pseudo-coherent relative to $B$. Each $p_j$ is flat and locally of finite presentation, so $\\mathcal O_{X_j}[0]$ is pseudo-coherent relative to $X$ by the flat-lfp structure lemma. Local finite presentation implies local finite type directly from the affine finite-presentation definition, and local finite type is closed under composition. Apply the relative pullback lemma to $X_j\\to X\\to B$, for this same $m$, to obtain the forward implication.",
+   "uses": [
+    "lem-sfb-flat-lfp-structure-relative-pseudocoherence",
+    "lem-sfb-relative-pseudocoherent-pullback",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CSN, lemma-relative-pseudo-coherent-descends-fppf, proof"
+   }
+  },
+  {
+   "text": "We first prepare the converse for a surjective finite locally free $\\pi:Y\\to Z$, where $Z\\to B$ is locally of finite type. By the definition of finite locally free morphisms, $\\pi$ is finite, flat and locally of finite presentation, so its algebra $A=\\pi_*\\mathcal O_Y$ is finite locally free. Locally trivialize it near $z\\in Z$, and write the section $1$ as $(a_1,\\ldots,a_d)$. Affine pushforward base change identifies $A\\otimes\\kappa(z)$, as a unital algebra, with the coordinate ring of the fibre. The image of $1$ is nonzero: the fibre of the surjective map $\\pi$ is a nonempty affine scheme, hence its coordinate ring has $1\\ne0$. Thus some $a_i$ is a unit in $\\mathcal O_{Z,z}$. Shrink so it is invertible and define $r:A\\to\\mathcal O_Z$ by $r(b_1,\\ldots,b_d)=a_i^{-1}b_i$. Then $r(1)=1$, and the explicit maps $b\\mapsto(r(b),b-r(b)1)$ and $(c,q)\\mapsto c1+q$ identify $A$ with $\\mathcal O_Z\\oplus\\ker r$. This argument uses no division by the rank; it also applies in residue characteristic dividing $d$.",
+   "uses": [
+    "lem-sc-finite-pushforward-locally-free",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-pushforward-base-change",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CSN, lemma-relative-pseudo-coherent-descends-fppf, proof"
+   }
+  },
+  {
+   "text": "Let $F\\in D_{\\mathrm{QCoh}}(\\mathcal O_Z)$ and assume $L\\pi^*F$ is $m$-pseudo-coherent relative to $B$. Derived pullback preserves quasi-coherent cohomology. Hence the finite-pushforward lemma makes $R\\pi_*L\\pi^*F$ $m$-pseudo-coherent relative to $B$. The source $Y\\to B$ is locally of finite type by composition. The map $\\pi$ is finite, hence proper, thus quasi-compact and separated by definition and quasi-separated by the separatedness lemma. It is affine by the definition of finite. Apply the projection formula with $\\mathcal O_Y[0]$ and $F$. For this affine map, termwise pushforward of a K-injective resolution of the quasi-coherent complex $\\mathcal O_Y[0]$ is a quasi-isomorphism from $\\pi_*\\mathcal O_Y[0]=A[0]$ by the affine resolution comparison, so $R\\pi_*\\mathcal O_Y\\cong A[0]$ by the definition of derived direct image. With the unit isomorphism $\\mathcal O_Y\\otimes^{\\mathbf L}L\\pi^*F\\cong L\\pi^*F$ and the symmetry of the derived tensor structure, the formula gives an isomorphism in $D(\\mathcal O_Z)$:\n$$R\\pi_*L\\pi^*F\\cong F\\otimes^{\\mathbf L}_{\\mathcal O_Z} A[0].$$",
+   "uses": [
+    "lem-pc-derived-pullback-tensor-qcoh",
+    "lem-sfb-finite-relative-pseudocoherent-pushforward",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-finite-integral-morphism",
+    "lem-pc-projection-formula",
+    "lem-pc-affine-pushforward-resolution-quasi-iso",
+    "lem-weil-pbc-finite-proper",
+    "def-weil-proper-morphism",
+    "lem-pc-separated-quasi-separated",
+    "def-pc-derived-direct-image",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CSN, lemma-relative-pseudo-coherent-descends-fppf, proof"
+   }
+  },
+  {
+   "text": "On each neighbourhood of step 2, the displayed splitting of $A$ induces\n$$F\\otimes^{\\mathbf L}A[0]\\cong F\\oplus(F\\otimes^{\\mathbf L}(\\ker r)[0]).$$\nIndeed tensor a K-flat representative of $F$ with the two inverse module maps of step 2: additivity of the total tensor gives the two inverse complex maps, and localization gives this isomorphism. By step 3, $F\\otimes^{\\mathbf L}A[0]$ is $m$-pseudo-coherent relative to $B$ on $Z$; by the all-affine-charts criterion (every affine chart of the open neighbourhood is a chart of $Z$, and such charts exist), its restriction to each neighbourhood is $m$-pseudo-coherent relative to $B$. Relative $m$-pseudo-coherence is invariant under isomorphism by its definition, so the relative direct-summand lemma gives it for $F$ on these neighbourhoods. Source locality glues them. We have therefore proved descent along each surjective finite locally free map, keeping the fixed $m$.",
+   "uses": [
+    "lem-sfb-relative-m-pseudocoherent-summands",
+    "def-pc-scheme-derived-tensor-structure",
+    "def-sfb-relative-pseudo-coherent-complex",
+    "lem-sfb-relative-pseudocoherence-local-on-source",
+    "lem-sfb-relative-pseudocoherence-all-affine-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CSN, lemma-relative-pseudo-coherent-descends-fppf, proof"
+   }
+  },
+  {
+   "text": "Now assume every $Lp_j^*E$ is $m$-pseudo-coherent relative to $B$. Apply the fppf refinement lemma to the scheme $X$ and the covering $\\{X_j\\to X\\}$. It supplies opens $X=\\bigcup_a U_a$, surjective finite locally free $W_a\\to U_a$, opens $W_a=\\bigcup_b W_{ab}$, surjective finite locally free $T_{ab}\\to W_{ab}$, indices $j(a,b)$, and $X$-morphisms $\\alpha_{ab}:T_{ab}\\to X_{j(a,b)}$. Write $q_{ab}:T_{ab}\\to X$ for the whole composite; then $p_{j(a,b)}\\alpha_{ab}=q_{ab}$. The refinement is on $X$, not on $B$.",
+   "uses": [
+    "lem-trf-fppf-local-finite-free-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CSN, lemma-relative-pseudo-coherent-descends-fppf, proof"
+   }
+  },
+  {
+   "text": "Each $q_{ab}$ is flat and locally of finite presentation: its factors are open immersions or finite locally free maps. For flatness, on local rings use composition of flat maps; for local finite presentation use its composition lemma. The open-immersion factors are localizations and thus flat and locally of finite presentation. Hence $\\mathcal O_{T_{ab}}[0]$ is pseudo-coherent relative to $X$, as is $\\mathcal O_{X_{j(a,b)}}[0]$. The maps to $X$ are locally of finite type, and $\\alpha_{ab}$ is locally of finite type by cancellation from $p_{j(a,b)}\\alpha_{ab}=q_{ab}$. Apply relative-composition invariance to $T_{ab}\\xrightarrow{\\alpha_{ab}}X_{j(a,b)}\\to X$, with the object $\\mathcal O_{T_{ab}}[0]$, for every integer degree. It is therefore pseudo-coherent relative to $X_{j(a,b)}$. No flatness of $\\alpha_{ab}$ is needed.",
+   "uses": [
+    "def-pc-finite-locally-free",
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-flat-ring-map-comp",
+    "lem-sbc-locally-finite-presentation-composition",
+    "lem-sfb-flat-lfp-structure-relative-pseudocoherence",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-sfb-relative-pseudocoherence-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CSN, lemma-relative-pseudo-coherent-descends-fppf, proof"
+   }
+  },
+  {
+   "text": "Apply relative pullback to $\\alpha_{ab}$ and $Lp_{j(a,b)}^*E$. All three morphisms in $T_{ab}\\to X_{j(a,b)}\\to B$ are locally of finite type by step 6 and composition with $X\\to B$. The result and the composition isomorphism for derived pullback give\n$$Lq_{ab}^*E\\cong L\\alpha_{ab}^*Lp_{j(a,b)}^*E$$\n$m$-pseudo-coherent relative to $B$. Every pulled-back complex that occurs in the refinement has quasi-coherent cohomology by preservation under derived pullback.",
+   "uses": [
+    "lem-sfb-relative-pseudocoherent-pullback",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-pc-derived-pullback-tensor-qcoh"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CSN, lemma-relative-pseudo-coherent-descends-fppf, proof"
+   }
+  },
+  {
+   "text": "Use the finite locally free descent proved in steps 2--4 on $T_{ab}\\to W_{ab}$. It gives $m$-pseudo-coherence relative to $B$ for the pullback of $E$ to each $W_{ab}$. Source locality glues this on $W_a$. Use steps 2--4 again on $W_a\\to U_a$, and source locality again on $X=\\bigcup_a U_a$. The result is $m$-pseudo-coherence of $E$ relative to $B$. All intermediate structure maps to $B$ are locally of finite type, and all intermediate objects have quasi-coherent cohomology, as checked above. If $X$ is empty, the definition is vacuous and the same empty-cover assembly applies. No finite subcover or uniform cohomological bound is used.",
+   "uses": [
+    "lem-sfb-relative-pseudocoherence-local-on-source",
+    "def-sfb-relative-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CSN, lemma-relative-pseudo-coherent-descends-fppf, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-flat-lfp-structure-relative-pseudocoherence",
+  "lem-sfb-relative-pseudocoherent-pullback",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-sc-finite-pushforward-locally-free",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "def-pc-finite-locally-free",
+  "lem-pc-derived-pullback-tensor-qcoh",
+  "lem-sfb-finite-relative-pseudocoherent-pushforward",
+  "lem-pc-projection-formula",
+  "lem-pc-affine-pushforward-resolution-quasi-iso",
+  "lem-weil-pbc-finite-proper",
+  "def-weil-proper-morphism",
+  "lem-pc-separated-quasi-separated",
+  "def-pc-derived-direct-image",
+  "def-pc-scheme-derived-tensor-structure",
+  "lem-sfb-relative-m-pseudocoherent-summands",
+  "def-sfb-relative-pseudo-coherent-complex",
+  "lem-sfb-relative-pseudocoherence-local-on-source",
+  "lem-sfb-relative-pseudocoherence-all-affine-charts",
+  "lem-trf-fppf-local-finite-free-refinement",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-flat-ring-map-comp",
+  "lem-sbc-locally-finite-presentation-composition",
+  "lem-sfb-relative-pseudocoherence-composition",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0CSN, lemma-relative-pseudo-coherent-descends-fppf; repair the converse refinement base from S to X, the displayed pullback target, and retain m in the finite locally free argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Relative pseudo coherent complexes descend along fppf covering families of schemes",
+   "results": "8 hits; AlgebraicGeometry.IsLocalAtTarget.descendsAlong, AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact, AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong, AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd, AlgebraicGeometry.HasRingHomProperty.descendsAlong, AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact. ",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned statements; ordinary morphism descent, projective resolutions and finite-presentation sheaves do not state relative pseudo-coherence of derived scheme objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative m pseudo coherence of a quasi coherent derived complex is local for faithfully flat locally finitely presented coverings",
+   "results": "8 hits; SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation. ",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned statements; ordinary morphism descent, projective resolutions and finite-presentation sheaves do not state relative pseudo-coherence of derived scheme objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Faithfully flat descent of relative finiteness of projective resolutions of complexes on schemes",
+   "results": "8 hits; CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex, CategoryTheory.ProjectiveResolution.instProjectiveXNatOfComplex, Algebra.FormallyUnramified.projective_of_restrictScalars, Module.Flat.projective_of_finitePresentation, CategoryTheory.ProjectiveResolution.ofComplex, CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex, CategoryTheory.ProjectiveResolution.instHasProjectiveResolutions, CategoryTheory.ProjectiveResolution.projective. ",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned statements; ordinary morphism descent, projective resolutions and finite-presentation sheaves do not state relative pseudo-coherence of derived scheme objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "0 hits; . ",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned statements; ordinary morphism descent, projective resolutions and finite-presentation sheaves do not state relative pseudo-coherence of derived scheme objects."
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]seudo[Cc]oheren|relative.*[Cc]oheren",
+   "results": "1 hits; Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean. Directory Mathlib/AlgebraicGeometry. ",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned statements; ordinary morphism descent, projective resolutions and finite-presentation sheaves do not state relative pseudo-coherence of derived scheme objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative m pseudo coherence of a quasi coherent derived complex descends under faithfully flat locally finitely presented scheme coverings",
+   "results": "OK: 8 hits; AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget; AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact; AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact; AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact; SheafOfModules.quasicoherentDataOfIsFinitePresentation; SheafOfModules.instIsQuasicoherentOfIsFinitePresentation; SheafOfModules.QuasicoherentData.IsFinitePresentation; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; ordinary module functors, morphism properties, cohomological bounds and finite presentation of individual sheaves do not assert the stated relative fixed-degree pseudo-coherence theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative pseudo coherence of derived complexes is local for fppf coverings of schemes",
+   "results": "OK: 8 hits; CategoryTheory.ObjectProperty.IsLocal.mk; AlgebraicGeometry.Scheme.overPretopology; AlgebraicGeometry.Scheme.instIsLocalAtTargetIsomorphismsZariskiPrecoverage; AlgebraicGeometry.sourceLocalClosure; AlgebraicGeometry.IsZariskiLocalAtSource.of_openCover; SheafOfModules.QuasicoherentData.IsFinitePresentation; SheafOfModules.instIsQuasicoherentOfIsFinitePresentation; SheafOfModules.QuasicoherentData.recOn",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; ordinary module functors, morphism properties, cohomological bounds and finite presentation of individual sheaves do not assert the stated relative fixed-degree pseudo-coherence theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free resolutions relative to a base ring descend under faithfully flat extensions of algebras",
+   "results": "OK: 8 hits; RingHom.FaithfullyFlat.isStableUnderBaseChange; RingHom.FaithfullyFlat.codescendsAlong_injective; RingHom.FaithfullyFlat.codescendsAlong_surjective; RingHom.FaithfullyFlat.codescendsAlong_bijective; Module.FaithfullyFlat.trans; Algebra.FormallyUnramified.flat_of_restrictScalars; Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing; RingHom.faithfullyFlat_algebraMap_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; ordinary module functors, morphism properties, cohomological bounds and finite presentation of individual sheaves do not assert the stated relative fixed-degree pseudo-coherence theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; ordinary module functors, morphism properties, cohomological bounds and finite presentation of individual sheaves do not assert the stated relative fixed-degree pseudo-coherence theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher|relative.*coheren",
+   "results": "OK: 1 hits; Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; ordinary module functors, morphism properties, cohomological bounds and finite presentation of individual sheaves do not assert the stated relative fixed-degree pseudo-coherence theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-sfb-space-relative-pseudocoherence-etale-locality",
+  "by": "worker",
+  "date": "2026-10-23"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect pseudo-coherent tensor tests on flat algebraic spaces. Supporting input: Tag 0CTT, lemma-characterize-pseudo-coherent. Supporting proof input: 0CTT proof, first paragraph: etale neighbourhoods of all x suffice. Scheme input in Tag 0CSX, implication (2) to (1): source descent over a fixed scheme base (Tag 0CSN).",
+   "via": [
+    "lem-sfb-space-relative-pseudocoherence-etale-locality",
+    "lem-sfb-space-pseudocoherent-tests-relative",
+    "lem-sfb-space-perfect-tests-pseudocoherence",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-pseudocoherence-fppf-descent",
+  "worker": "stage1",
+  "group": "Q57",
+  "summary": "Split Stacks 0CSN using its 05WN refinement and a written finite locally free descent argument. Three statement-only inputs isolate 09US relative pullback, 09UK finite pushforward and 09UN fixed-degree summands. Preserved the item statement. Corrected source proof indexing/base typos, kept the fixed integer m, and proved unit splitting by a unit coordinate, without dividing by the rank. All cited node statements were read; all new-node searches were run and read.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images proof (3) chain at 0CSX (2) => (1), via 0CSN source descent. Read the latest chapter, unit and direct-images proof; no relative pseudo-coherence node there. blueprint_refs.py ancestor returns None for this inherited chain, so preserve null ancestor and extend its exact place/via for each new node. No unit or chapter record is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-pushforward-base-change",
+    "why": "Identifies the finite algebra residue fibre with the nonempty scheme fibre as a unital algebra. The unit has no replacement statement for this generic tool."
+   },
+   {
+    "node": "lem-sc-finite-pushforward-locally-free",
+    "why": "Gives the locally free algebra for the unit-coordinate splitting; no fixed degree or Noetherian hypothesis is used. The unit has no replacement statement for this generic tool."
+   },
+   {
+    "node": "lem-pc-derived-pullback-tensor-qcoh",
+    "why": "Ensures the quasi-coherence hypothesis of finite pushforward at every refinement stage; it is a general derived scheme tool. The unit has no replacement statement for this generic tool."
+   },
+   {
+    "node": "lem-pc-affine-pushforward-resolution-quasi-iso",
+    "why": "Computes R pi_* O_Y as pi_* O_Y[0] for the affine finite map; a general unbounded affine comparison. The unit has no replacement statement for this generic tool."
+   },
+   {
+    "node": "lem-trf-fppf-local-finite-free-refinement",
+    "why": "Exactly the Zariski/two finite locally free refinement invoked by 0CSN; reuses the existing 05WN tool without duplicating it. The unit has no replacement statement for this generic tool."
+   },
+   {
+    "node": "lem-pc-ringed-spaces-derived-pullback-composition",
+    "why": "Identifies the iterated derived pullback with the composite pullback in the refinement diagram. The unit has no replacement statement for this generic tool."
+   },
+   {
+    "node": "lem-pc-projection-formula",
+    "why": "Unbounded qcqs projection formula giving R pi_* L pi^* F = F (x)^L pi_* O_Y for the finite map; a general derived scheme tool (0CSN cites perfect 08EU). The unit has no replacement statement for this generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "lem-sc-finite-pushforward-locally-free",
+  "lem-pc-derived-pullback-tensor-qcoh",
+  "lem-pc-affine-pushforward-resolution-quasi-iso",
+  "lem-trf-fppf-local-finite-free-refinement",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-projection-formula"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-5a50047cf",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-5a50047cf (reviewer sub-agent of L); spot-checked: This is the first delivery. The item is still unsplit with no proof on the base, on live and on side-live, and there is no repair note. Its statement and stmt_deps are unchanged and agree with Stacks 0CSN (more-morphisms l.20630) hypothesis by hypothesis. I agree with the worker's Source-error list for the 0CSN proof: the refinement must be over X, not S, the displayed pullback is ill-typed, and the last paragraph drops the fixed m. The three new statement-only nodes are faithful to 09US (l.17155), 09UK (l.16995, D_QCoh kept) and 09UN (l.17070). I tested each on small cases (identity map, Y⊔Y→Y, an infinite-dimensional vector space for the summand lemma). Each has its searches recorded. None restates a clause of the item, and an rg -L search over the snapshot, live and side-live found no duplicates (all-affine-charts, 09VD, 09VC, 09UU, closed-support and the absolute summand nodes differ). I checked all 8 steps against the statements of the cited nodes. Step 2's unit-coordinate splitting is correct, including when the characteristic divides the degree. Steps 5-8 use the 05WN refinement over X correctly, and the composition node, the pullback node and source locality have all their hypotheses. I fixed three citation faults: (1) step 4 needs the restriction of relative m-pseudo-coherence to the open neighbourhoods V; local-on-source only glues and the definition only asserts some charts, so I cited lem-sfb-relative-pseudocoherence-all-affine-charts (09UJ, same unit, reviewed, no cycle) and added a sentence. (2) Step 2 now cites def-pc-finite-locally-free, and step 3 now cites def-pc-derived-direct-image and def-pc-scheme-derived-tensor-structure for Rπ_*O_Y≅A[0] and the unit and symmetry isomorphisms. (3) The off-unit lem-pc-projection-formula is now declared in split_report.tool_uses. I accept the six declared generic tool uses. Batch 5: the newly cited lem-trf-fppf-local-finite-free-refinement is Stacks 05WN, a pure fppf refinement lemma (unit sk-i-curve-zero). Its 933-node closure contains only commutative-algebra and foundation nodes, with no nt-*, trace-transport or Poincaré node. It is neither part of nor a consequence of the trace-formula or Poincaré-duality assumptions, so I accept the flag. The corrected item is in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-relative-pseudocoherence-fppf-descent.json; no node is dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativePseudoCoherenceFppfDescent",
+  "declaration": "AlgebraicGeometry.Scheme.isMPseudoCoherentRelativeTo_iff_fppf",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativePseudoCoherenceFppfDescent.lean",
+  "statement": "theorem isMPseudoCoherentRelativeTo_iff_fppf [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] {X B : Scheme.{u}} (f : X ⟶ B) [LocallyOfFiniteType f] (m : ℤ) (E : schemeDerivedCategory X) (hE : schemeDerivedQCohProperty X E) {J : Type v} (Xj : J → Scheme.{u}) (p : ∀ j : J, Xj j ⟶ X) [∀ j : J, Flat (p j)] [∀ j : J, LocallyOfFinitePresentation (p j)] (hcover : ∀ x : X, ∃ (j : J) (y : Xj j), p j y = x) : IsMPseudoCoherentRelativeTo f m E ↔ ∀ j : J, IsMPseudoCoherentRelativeTo (p j ≫ f) m ((derivedPullback (p j)).obj E)",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b1aee3961",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Statement matches Stacks 0CSN and the node clause by clause: LocallyOfFiniteType f, the same m on both sides, E with quasi-coherent cohomology only (schemeDerivedQCohProperty), cover spelled out as Flat, LocallyOfFinitePresentation and jointly surjective (the same as Mathlib fppfPrecoverage, the recorded def-pc-fppf-site declaration), X_j over B by p j ≫ f, iff with derivedPullback; no extra hypotheses. J in its own universe v is a harmless generalization. Edge cases checked: empty J, empty X, empty or non-surjective members, infinite J, any m, unbounded E. Node differs from side-live only in lean, and the Q57 5a50 FIX citations are present. lean.statement is verbatim the file signature. Docstrings give the source place, blueprint id and all 8 proof steps. Proof is sorry only, no new definitions. The 11 imported project modules exist, no duplicate declaration, and the report has both sections. Not recompiled (no change); worker reports a clean compile and an OK dry run. No findings."
+ }
+}

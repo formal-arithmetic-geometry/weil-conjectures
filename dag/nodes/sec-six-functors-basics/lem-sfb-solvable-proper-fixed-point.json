@@ -1,0 +1,182 @@
+{
+ "id": "lem-sfb-solvable-proper-fixed-point",
+ "kind": "statement",
+ "title": "Borel fixed point theorem for a solvable acting group",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups are affine group schemes [def-sc-group-scheme] of finite type, and all subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness, connectedness and morphism properties have the meanings of [def-sbc-smooth-morphisms, def-weil-connected-scheme, def-pc-morphism-conventions]. A group is solvable if its successive scheme-theoretic commutator subgroups eventually become trivial. Let $H$ be smooth, connected and solvable. Let $X$ be a nonempty proper finite-type $F$-scheme, with an action $a:H\\times_F X\\to X$ satisfying the group-action identities. There is $x\\in X(F)$ fixed scheme-theoretically by $H$: for every commutative $F$-algebra $A$ and every $h\\in H(A)$, $a(h,x_A)=x_A$. The scheme $X$ need not be reduced or connected.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 17.3 (Borel fixed point theorem), p.353, from Theorem 17.1, p.352, and the orbit lemma 1.66; the theorem is for the solvable acting group, not for a reductive group."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-pc-morphism-conventions"
+ ],
+ "proof": [
+  {
+   "text": "The scheme $X$ has a closed point by [lem-sc-lft-over-field-jacobson-space], since it is nonempty. By [lem-weil-pbc-closed-point-residue-field-base], closed points are $F$-rational. The dimension of $X$ is finite by [lem-kun-dimension-finite-type]. For every $y\\in X(F)$, [lem-sfb-smooth-group-orbit-geometry] gives a nonempty locally closed orbit $O_y$. Its dimension is a nonnegative integer bounded by $\\dim X$: chains in a subspace inject into chains of their closures in the ambient space, since intersecting back recovers each chain member. Choose $x\\in X(F)$ for which $\\dim O_x$ is least among these integers.",
+   "uses": [
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-kun-dimension-finite-type",
+    "lem-sfb-smooth-group-orbit-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.3, printed p.353; orbit lemma 1.66, pp.27--28. Rational closed points: Stacks 0478 (varieties.tex, lemma-locally-finite-type-Jacobson) and 00FV (algebra.tex, theorem-nullstellensatz)."
+   }
+  },
+  {
+   "text": "Put $O=O_x$. The reduced orbit closure and its boundary $B=\\overline O\\setminus O$ are invariant, and every orbit in $B$ has smaller dimension, by [lem-sfb-smooth-group-orbit-geometry]. Because $O$ is locally closed, it is open in $\\overline O$, so $B$ is a closed subset of $X$. If $B$ were nonempty, [lem-sc-lft-over-field-jacobson-space] applied to this closed subset would give a point $y$ closed in $X$ and lying in $B$. It is $F$-rational by [lem-weil-pbc-closed-point-residue-field-base]. Then $\\dim O_y<\\dim O_x$, contradicting step 1. Hence $B$ is empty and $O$ is closed in $X$.",
+   "uses": [
+    "lem-sfb-smooth-group-orbit-geometry",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.3, printed p.353, closed-minimum-orbit argument; Corollary 1.66 and Proposition 7.5, pp.27--28 and 140."
+   }
+  },
+  {
+   "text": "Give $O$ the reduced orbit structure supplied by [lem-sfb-smooth-group-orbit-geometry]. Since its support is closed, its locally closed immersion into $X$ is a closed immersion. It is proper by [lem-weil-pbc-proper-fp-permanence](c), and composing with $X\\to\\operatorname{Spec}F$ is proper by (a). In particular $O$ is a separated finite-type $F$-scheme. Write $K=H_x$ for the closed stabilizer subgroup scheme. The orbit map $q:H\\to O$, $h\\mapsto hx$, is faithfully flat by [lem-sfb-smooth-group-orbit-geometry]; $K$ is not assumed smooth.",
+   "uses": [
+    "lem-sfb-smooth-group-orbit-geometry",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.3 and Corollary 17.2, printed p.353; Proposition 7.4(b) and stabilizer definition, pp.139--140. Stacks 01W3 (morphisms.tex, lemma-composition-proper); closed immersions are proper."
+   }
+  },
+  {
+   "text": "The action identities give $q(hb)=q(h)$ for $b\\in K(A)$, for every commutative $F$-algebra $A$. More precisely, $q(h)=q(h')$ holds exactly when $h^{-1}h'\\in K(A)$, by the defining equation $K(A)=\\{b:bx_A=x_A\\}$ in [lem-sfb-smooth-group-orbit-geometry]. Thus the morphism $H\\times_F K\\to H\\times_O H$ given by $(h,b)\\mapsto(h,hb)$ has inverse $(h,h')\\mapsto(h,h^{-1}h')$. Both formulas are scheme morphisms, obtained from multiplication and inverse on $H$; the second component of the inverse factors through the stabilizer fibre because $h^{-1}h'x_A=x_A$. The two composites are identities by the group laws. The fibre products have the universal property of [def-pc-fibre-product]. These verify the precise quotient hypotheses of the next step, on all test algebras rather than only on $F$-points.",
+   "uses": [
+    "lem-sfb-smooth-group-orbit-geometry",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 7.11, printed pp.141--142; the orbit-stabilizer quotient identification used in Corollary 17.2, printed p.353."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-solvable-homogeneous-proper-subschemes] with $G=H$, this closed subgroup $K$, $Q=O$, and $q$ from steps 3--4. Its hypotheses on $H$ are exactly the smoothness, connectedness, affineness, finite type and solvability in the item. Step 3 supplies properness of $Q$. Its final assertion gives $K=H$ as subgroup schemes. By the defining stabilizer equation in [lem-sfb-smooth-group-orbit-geometry], this means $a(h,x_A)=x_A$ for every commutative $F$-algebra $A$ and $h\\in H(A)$, as required. The orbit construction allowed nonreduced $X$ throughout and used no connectedness assumption on $X$.",
+   "uses": [
+    "lem-sfb-solvable-homogeneous-proper-subschemes",
+    "lem-sfb-smooth-group-orbit-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.1, printed p.352, final assertion, applied to the closed orbit as in Corollaries 17.2--17.3, printed p.353."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-kun-dimension-finite-type",
+  "lem-sfb-smooth-group-orbit-geometry",
+  "lem-weil-pbc-proper-fp-permanence",
+  "def-pc-fibre-product",
+  "lem-sfb-solvable-homogeneous-proper-subschemes"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 17.3, printed p.353, through Theorem 17.1 and the orbit lemma 1.66. The quotient identification in Corollary 17.2 is expanded using the explicit stabilizer equations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected solvable algebraic group acting on a nonempty proper scheme over an algebraically closed field has a fixed rational point",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] {G : Type u_1} [inst_2 : Group G]\\n  [inst_3 : (X : C) → MulAction G (F.obj X).carrier] [inst_4 : TopologicalSpace G] [inst_5 : IsTopologicalGroup G]\\n  [i\", \"doc\": \"In the context of a Galois category $\\\\mathcal{C}$ with a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$ and a compact topological group $G$ equipped with a multiplicative action on each $F(X)$, this con\"}\n  {\"name\": \"CategoryTheory.FintypeCat.Action.pretransitive_of_isConnected\", \"module\": \"Mathlib/CategoryTheory/Galois/Examples\", \"type\": \"∀ (G : Type u) [inst : Group G] (X : Action FintypeCat G) [CategoryTheory.PreGaloisCategory.IsConnected X],\\n  MulAction.IsPretransitive G X.V.carrier\", \"doc\": \"For a group action on the category of finite types, if the underlying object is connected, then the action is pretransitive. That is, for any two elements $x, y$ in the underlying finite type $X.V$, t\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected\", \"module\": \"Mathlib/CategoryTheory/Galois/Decomposition\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C]\\n  (F : CategoryTheory.Functor C FintypeCat) [CategoryTheory.PreGaloisCategory.FiberFunctor F] (X : C)\\n  [CategoryTheory.PreGaloisCategory.IsConnected X], ∃ A x, CategoryTheory.PreGaloisCategory.IsG\", \"doc\": \"For any connected object $ X $ in a pre-Galois category $ \\\\mathcal{C} $, there exists a Galois object $ A $ in $ \\\\mathcal{C} $ and a morphism $ A \\\\to X $.\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial'\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{u₂, u₁} C} {F : CategoryTheory.Functor C FintypeCat}\\n  {inst_1 : CategoryTheory.GaloisCategory C} {G : Type u_1} {inst_2 : Group G}\\n  {inst_3 : (X : C) → MulAction G (F.obj X).carrier} {inst_4 : TopologicalSpace G} {inst_5 : IsTopologicalGroup G}\\n  {i\", \"doc\": \"Given a Galois category $\\\\mathcal{C}$, a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, a compact topological group $G$, and a continuous multiplicative action of $G$ on each $F(X)$ for $X \\\\in \\\\mathcal\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] (G : Type u_1) [inst_2 : Group G]\\n  [inst_3 : (X : C) → MulAction G (F.obj X).carrier] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  [inst_5 : Topo\", \"doc\": \"Given a Galois category $\\\\mathcal{C}$, a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, a compact topological group $G$, and a multiplicative action of $G$ on each $F(X)$ for $X \\\\in \\\\mathcal{C}$, this \"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.toAut_surjective_of_isPretransitive\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat) (G : Type u_1)\\n  [inst_1 : Group G] [inst_2 : (X : C) → MulAction G (F.obj X).carrier]\\n  [inst_3 : CategoryTheory.PreGaloisCategory.IsNaturalSMul F G] [inst_4 : CategoryTheory.GaloisCategory C]\\n  [C\", \"doc\": \"Let $\\\\mathcal{C}$ be a pre-Galois category equipped with a fiber functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, and let $G$ be a compact topological group acting continuously on $F(X)$ for all $X \\\\i\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.isPretransitive_of_surjective\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat) (G : Type u_1)\\n  [inst_1 : Group G] [inst_2 : (X : C) → MulAction G (F.obj X).carrier]\\n  [inst_3 : CategoryTheory.PreGaloisCategory.IsNaturalSMul F G] [inst_4 : CategoryTheory.GaloisCategory C]\\n  [C\", \"doc\": \"If the group homomorphism $\\\\phi: G \\\\to \\\\mathrm{Aut}(F)$ is surjective, then for every connected object $X$ in the pre-Galois category $\\\\mathcal{C}$, the induced action of $G$ on the finite set $F(X)$ \"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat) (G : Type u_1)\\n  [inst_1 : Group G] [inst_2 : (X : C) → MulAction G (F.obj X).carrier]\\n  [CategoryTheory.PreGaloisCategory.IsNaturalSMul F G] [inst_4 : CategoryTheory.GaloisCategory C]\\n  [CategoryTh\", \"doc\": \"In a pre-Galois category $\\\\mathcal{C}$ with fiber functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, if $X$ is a Galois object and the group $G$ acts transitively on $F(X)$, then every automorphism $t :\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern abstract groups, characteristic-zero Lie algebras, or abstract root pairings, not this group-scheme statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Borel fixed point theorem for solvable linear algebraic groups on complete varieties",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.IsInvariant.isIntegral\", \"module\": \"Mathlib.RingTheory.Invariant.Basic\", \"type\": \"[Finite G] : Algebra.IsIntegral A B\", \"doc\": \"If $ G $ is a finite group acting invariantly on the algebra $ A $ over $ B $, then $ A $ is integral over $ B $. In other words, every element of $ A $ satisfies a monic polynomial equation with coef\"}\n  {\"name\": \"LieAlgebra.radical_eq_top_of_isSolvable\", \"module\": \"Mathlib.Algebra.Lie.Solvable\", \"type\": \"[IsSolvable L] : radical R L = ⊤\", \"doc\": \"If $ \\\\mathfrak{g} $ is a solvable Lie algebra over a commutative ring $ R $, then its radical (the sum of all solvable ideals) is equal to the entire Lie algebra $ \\\\mathfrak{g} $, i.e., $ \\\\mathrm{radi\"}\n  {\"name\": \"LieAlgebra.ofAbelianIsSolvable\", \"module\": \"Mathlib.Algebra.Lie.Solvable\", \"type\": \"[IsLieAbelian L] : IsSolvable L\", \"doc\": \"Every abelian Lie algebra is solvable.\"}\n  {\"name\": \"ContinuousLinearMap.instBorelSpace\", \"module\": \"Mathlib.MeasureTheory.Constructions.BorelSpace.ContinuousLinearMap\", \"type\": \": BorelSpace (E →L[𝕜] F)\", \"doc\": \"The space of continuous linear maps from $ E $ to $ F $ is equipped with the Borel $\\\\sigma$-algebra generated by the topology of uniform convergence on von Neumann bounded subsets of $ E $. This $\\\\sig\"}\n  {\"name\": \"borel_eq_generateFrom_isClosed\", \"module\": \"Mathlib.MeasureTheory.Constructions.BorelSpace.Basic\", \"type\": \"[TopologicalSpace α] : borel α = .generateFrom {s | IsClosed s}\", \"doc\": \"The Borel σ-algebra on a topological space $\\\\alpha$ is equal to the σ-algebra generated by the collection of all closed subsets of $\\\\alpha$.\"}\n  {\"name\": \"borel_eq_generateFrom_Ici\", \"module\": \"Mathlib.MeasureTheory.Constructions.BorelSpace.Order\", \"type\": \": borel α = MeasurableSpace.generateFrom (range Ici)\", \"doc\": \"For a linearly ordered topological space $\\\\alpha$, the Borel $\\\\sigma$-algebra on $\\\\alpha$ coincides with the $\\\\sigma$-algebra generated by the collection of all left-closed intervals $[a, \\\\infty)$ for\"}\n  {\"name\": \"borel_eq_top_of_discrete\", \"module\": \"Mathlib.MeasureTheory.Constructions.BorelSpace.Basic\", \"type\": \"[TopologicalSpace α] [DiscreteTopology α] : borel α = ⊤\", \"doc\": \"If $\\\\alpha$ is equipped with the discrete topology, then the Borel $\\\\sigma$-algebra on $\\\\alpha$ is equal to the maximal $\\\\sigma$-algebra $\\\\top$ on $\\\\alpha$.\"}\n  {\"name\": \"QuotientGroup.borelSpace\", \"module\": \"Mathlib.MeasureTheory.Constructions.Polish.Basic\", \"type\": \"{G : Type*} [TopologicalSpace G] [PolishSpace G] [Group G] [IsTopologicalGroup G] [MeasurableSpace G] [BorelSpace G]\\n  {N : Subgroup G} [N.Normal] [IsClosed (N : Set G)] : BorelSpace (G ⧸ N)\", \"doc\": \"If $ G $ is a Polish topological group and $ N $ is a closed normal subgroup of $ G $, then the quotient group $ G/N $ is equipped with the Borel $ \\\\sigma $-algebra generated by the quotient topology \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern abstract groups, characteristic-zero Lie algebras, or abstract root pairings, not this group-scheme statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSolvable\", \"fixedPoints\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern abstract groups, characteristic-zero Lie algebras, or abstract root pairings, not this group-scheme statement"
+  },
+  {
+   "tool": "grep",
+   "query": "Borel.*fixed|fixed.*point.*solvable|solvable.*proper",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern abstract groups, characteristic-zero Lie algebras, or abstract root pairings, not this group-scheme statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-borel-pair-structure",
+  "date": "2026-10-23",
+  "group": "Q07"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: Conjugate an arbitrary Borel into the maximum-dimensional one by its action on the already proper quotient.",
+   "via": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-solvable-proper-fixed-point",
+  "worker": "stage1",
+  "summary": "Followed Milne Corollary 17.3. Reused the existing orbit-geometry theorem, closed-point and dimension results, proved closedness of a minimum-dimensional orbit, verified the scheme quotient equations, and applied the separate homogeneous-quotient geometric input (Theorem 17.1). No mathematical statement change; inherited doubled TeX escaping normalized.",
+  "blueprint": "Supports the inherited direct-images proof (3), alteration/moduli/Haboush/Borel-pair chain, specifically the conjugacy step using the solvable group acting on the proper flag quotient. The latest direct-images proof (3) was read. The creation chain has no machine-resolvable imported ancestor (blueprint_refs.py ancestor returns None); inherited from.node is retained and new nodes inherit it.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NH-b248590bb",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-b248590bb (reviewer sub-agent of L); spot-checked: Read Milne iAG2017 Thm 17.1, Cor 17.2 and Cor 17.3 (pp. 352–353, PDF 364–365). The item is Cor 17.3 over F = F̄ with the fixed point stated scheme-theoretically. The new node lem-sfb-solvable-homogeneous-proper-subschemes is exactly Thm 17.1. Its explicit quotient data (faithfully flat finite-type q, K-invariant, with G×K ≅ G×_Q G) identifies Q with the fppf quotient G/K. K is arbitrary, as in the source. Steps checked against the cited statements. Step 1: Jacobson density applied to X gives a closed point, which is rational by the residue-field node; the dimension node is Lean-closed and serves as a tool; the orbit-geometry hypotheses (G smooth, connected, affine, finite type; X separated, finite type) all hold. Step 2: the boundary is closed in X because O is open in its closure; Jacobson on that boundary gives a rational point whose orbit has smaller dimension, contradicting the minimum. Step 3: the reduced orbit with closed support is a closed immersion, and proper-fp-permanence (c) then (a) makes it proper. Step 4 (elementary): O→X is a monomorphism, so q(h)=q(h') iff h⁻¹h'∈K(A); the inverse map is built from multiplication and inverse. Step 5: every hypothesis of the new node holds, giving K=H, which with the stabilizer equation is the item's conclusion. Nonreduced X is handled legitimately because the orbit node allows it. New node B1–B4 and B7 are OK; it is not a restatement of a clause of the item (D1). Tested on K=G, G_a/G_m with K=1, B₂/T ≅ A¹, and G_a/α_p in characteristic p. SL₂/B = P¹ shows the solvability hypothesis is needed. rg -L over the DAG found no duplicate (checked lie-kolchin, solvable-subgroup-flag-realization, homogeneous-orbit-quotient-geometry, algebraic-group-homogeneous-quotient, derived-subgroup nodes) and no cycle; the only citer is reductive-borel-pair-structure. Route is fine and tool_uses is empty. Advisory only: the inline phrase 'scheme-theoretic commutator subgroup' is inherited wording and could cite the precise derived-subgroup definition (lem-sfb-smooth-connected-derived-subgroup)."
+ }
+}

@@ -1,0 +1,295 @@
+{
+ "id": "lem-sfb-ringed-kflat-pullback-ses-triangle",
+ "kind": "statement",
+ "title": "Derived pullback of ringed topoi carries canonical SES triangles of flat-term K-flat complexes to canonical triangles",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be sites small relative to the universe of the module sheaves, with sheaves of commutative rings $R$ on $\\mathcal C$ and $S$ on $\\mathcal D$, and let $u:\\operatorname{Sh}(\\mathcal D)\\to\\operatorname{Sh}(\\mathcal C)$ be a morphism of topoi, an adjunction $u^{-1}\\dashv u_*$ with $u^{-1}$ preserving finite limits, equipped with a ring map $c:u^{-1}R\\to S$. On module sheaves [def-weil-sheaf-of-modules-category] put $u^*M=S\\otimes_{u^{-1}R}u^{-1}M$ [def-pur-sheaf-tensor-product], applied termwise to cochain complexes. Let $Q_R,Q_S$ be the derived-category localizations with their shift isomorphisms $Q(K[1])\\cong(QK)[1]$ [def-weil-abstract-derived-category], and let $Lu^*:D(R)\\to D(S)$, with its shift isomorphisms $\\sigma_X:Lu^*(X[1])\\xrightarrow{\\sim}(Lu^*X)[1]$ and its canonical comparison $\\epsilon:Lu^*Q_R\\to Q_Su^*$, be the exact derived pullback of [lem-weil-pbc-ringed-topoi-derived-pullback]. Then: (1) $\\epsilon$ commutes with shifts: for every complex $P$ of $R$-modules, $\\epsilon_{P[1]}$ equals $\\epsilon_P[1]\\circ\\sigma_{Q_RP}$ after the shift isomorphisms of $Q_R$ and $Q_S$ and the identity $u^*(P[1])=(u^*P)[1]$. (2) Let $0\\to A\\xrightarrow{f}B\\xrightarrow{g}C\\to0$ be a degreewise short exact sequence of cochain complexes of $R$-modules, each of which is K-flat [def-pc-kflat-complex] with flat terms [def-pc-flat-sheaf-modules]. Then $0\\to u^*A\\to u^*B\\to u^*C\\to0$ is degreewise short exact. Let $\\delta:Q_RC\\to(Q_RA)[1]$ and $\\delta':Q_Su^*C\\to(Q_Su^*A)[1]$ be the canonical boundaries of these two sequences [lem-weil-pbc-complex-ses-triangle], namely $\\delta=-Q(p)\\circ Q(q)^{-1}$, where $\\operatorname{Cone}(f)^r=B^r\\oplus A^{r+1}$ with differential $(x,a)\\mapsto(d_Bx+f(a),-d_Aa)$, $q:\\operatorname{Cone}(f)\\to C$ is induced by $g$ and $p:\\operatorname{Cone}(f)\\to A[1]$ is the projection, and likewise for $\\delta'$ with $u^*f,u^*g$. Then $(\\epsilon_A,\\epsilon_B,\\epsilon_C)$ is an isomorphism of triangles from\n$$Lu^*Q_RA\\xrightarrow{Lu^*Q_Rf}Lu^*Q_RB\\xrightarrow{Lu^*Q_Rg}Lu^*Q_RC\\xrightarrow{\\sigma_{Q_RA}\\circ Lu^*(\\delta)}(Lu^*Q_RA)[1]$$\nto $Q_Su^*A\\xrightarrow{Q_Su^*f}Q_Su^*B\\xrightarrow{Q_Su^*g}Q_Su^*C\\xrightarrow{\\delta'}(Q_Su^*A)[1]$; in particular $\\epsilon_A[1]\\circ\\sigma_{Q_RA}\\circ Lu^*(\\delta)=\\delta'\\circ\\epsilon_C$. No boundedness of the complexes and no flatness of $u$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0152 (lemma-derived-canonical-delta-functor), boundary $-p\\circ q^{-1}$ with the cone of Tag 014F (lemma-functorial-cone); Tags 05SU (lemma-derived-shift) and 05SC (lemma-2-out-of-3-defined) for the shift and triangle structure of a left derived functor; sites-cohomology.tex Section 06YV (section-derived-pullback) and Tag 0G7E (lemma-pullback-K-flat) for derived pullback computed on flat-term K-flat complexes. The combined statement is reviewer-stated."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-complex-ses-triangle"
+ ],
+ "proof": [
+  {
+   "text": "Put $T=u^*$ and $F=Q_ST:K(R)\\to D(S)$. Exact geometric inverse image is additive. Tensor is additive on morphisms by its bilinear relations and preserves finite coproducts by the tensor-colimits lemma, so $T$ is additive. Applying $T$ to a chain homotopy preserves the equation $h d+d h$, hence defines the indicated functor on homotopy categories. The biproduct comparison gives $T\\operatorname{Cone}(a)\\cong\\operatorname{Cone}(Ta)$: in degree $r$ both differentials are the matrix $\\left(\\begin{smallmatrix}T(d)&T(a)\\\\0&-T(d)\\end{smallmatrix}\\right)$. It identifies inclusions, projections and their negatives. Also $T(P[1])\\cong(TP)[1]$ has differential $-T(d_P)$. Thus $F$ commutes with shifts and sends cone triangles to cone triangles, and is exact by the cone description of the triangulation.",
+   "uses": [
+    "lem-trf-geometric-inverse-image-exact",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014F (lemma-functorial-cone), cone matrix; Tag 05RU (definition-derived-category), cone-induced triangulation; sites-modules.tex Tag 04JC (lemma-flat-pullback-exact), inverse-image assertion"
+   }
+  },
+  {
+   "text": "Take $\\mathcal P$ to be the flat-term K-flat complexes. The K-flat-resolution lemma supplies a quasi-isomorphism from an object of $\\mathcal P$ to every complex. The ringed-topoi-derived-pullback lemma states that $T$ preserves quasi-isomorphisms between these complexes. Therefore the resolving-class criterion, applied to the exact $F$ of step 1, supplies the right Kan universal property of $(Lu^*,\\epsilon)$; this is the canonical derived pair, identified by its universal comparison. Apply the coherent-shift theorem for right Kan extensions to $Q_R,F,Lu^*,\\epsilon$. Its conclusion says precisely that the canonical shifts of the derived functor make $\\epsilon$ shift-compatible. With the localization shift identifications and the termwise shift identification of step 1 this reads $\\epsilon_{P[1]}=\\epsilon_P[1]\\circ\\sigma_{Q_RP}$. This proves (1) for every complex $P$, without any K-flatness assumption on $P$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-pur-left-derived-from-kflat-class",
+    "lem-pur-right-kan-extension-coherent-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 06XN (lemma-find-existence-computes), dual part, and 05SU (lemma-derived-shift); sites-cohomology.tex Tag 06YY (lemma-derived-base-change)"
+   }
+  },
+  {
+   "text": "Fix a degree $r$. Exactness of geometric inverse image gives $0\\to u^{-1}A^r\\to u^{-1}B^r\\to u^{-1}C^r\\to0$ over $u^{-1}R$. Apply flat-module pullback to the ringed-topos morphism $(u,u^{-1}R)$ with coefficient map $\\mathrm{id}_{u^{-1}R}$: since $C^r$ is flat, $u^{-1}C^r$ is flat over $u^{-1}R$. The flat-quotient sheaf tensor lemma with $N=S$ now makes this sequence short exact after tensoring with $S$. Tensor symmetry identifies it with $0\\to TA^r\\to TB^r\\to TC^r\\to0$, so the image complex sequence is degreewise short exact. In particular this uses flatness of the quotient terms, not flatness of $S$ over $u^{-1}R$.",
+   "uses": [
+    "lem-trf-geometric-inverse-image-exact",
+    "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "lem-weil-pbc-site-flat-quotient-tensor-ses"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0G6R (lemma-pullback-ses), proof using Tags 04JC (lemma-flat-pullback-exact), 05VD (lemma-pullback-flat), and 03EX (lemma-flat-tor-zero)"
+   }
+  },
+  {
+   "text": "Set $V=\\operatorname{Cone}(f)$ and $V'=\\operatorname{Cone}(Tf)$. The cone-projection quasi-isomorphism lemma, applied to the original sequence and the sequence of step 3, makes $q:V\\to C$ and $q':V'\\to TC$ quasi-isomorphisms. Hence $Q_Rq,Q_Sq'$ are invertible. Write $h:TV\\xrightarrow{\\sim}V'$ for the strict cone identification of step 1. Directly on the two summands, $q'h=Tq$ and $p'h=Tp$, where shifts are identified. Thus $Fq=Q_S(q'h)$ is invertible too. By the definitions of the two boundaries in the statement, $\\delta=-Q_Rp\\,(Q_Rq)^{-1}$ and $\\delta'=-Q_Sp'\\,(Q_Sq')^{-1}$. Each is the cone triangle's last map transported along its cone projection, so these are distinguished triangles by the cone-induced triangulation; this also fixes the same minus sign on both sides.",
+   "uses": [
+    "lem-pc-cone-short-exact-quasi-iso",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Section 014Z (section-canonical-delta-functor), paragraphs preceding Tag 0152 (lemma-derived-canonical-delta-functor): q and the boundary -p q^{-1}"
+   }
+  },
+  {
+   "text": "Naturality of $\\epsilon$ at $p:V\\to A[1]$ and $q:V\\to C$ gives $\\epsilon_{A[1]}Lu^*(Q_Rp)=Fp\\,\\epsilon_V$ and $\\epsilon_C Lu^*(Q_Rq)=Fq\\,\\epsilon_V$. Since $Q_Rq$ and $Fq$ are invertible, the second equation gives $\\epsilon_V Lu^*((Q_Rq)^{-1})=(Fq)^{-1}\\epsilon_C$. Substituting these equations and step 2 into the prescribed boundary yields\n$$\\epsilon_A[1]\\,\\sigma_{Q_RA}\\,Lu^*(\\delta)=-Fp\\,(Fq)^{-1}\\epsilon_C=-Q_Sp'\\,(Q_Sq')^{-1}\\epsilon_C=\\delta'\\epsilon_C.$$\nThe middle equality cancels $Q_Sh$ using $Fp=Q_S(p'h)$ and $Fq=Q_S(q'h)$ from step 4. Additivity preserves the minus sign. Naturality at $f,g$ gives the other two squares. Finally the ringed-topoi-derived-pullback lemma makes $\\epsilon_A,\\epsilon_B,\\epsilon_C$ invertible, since all three complexes are flat-term K-flat. These three squares and three isomorphisms are the asserted triangle isomorphism. Exactness of $Lu^*$ makes its source triangle distinguished. No inverse to $\\epsilon_V$, no boundedness, and no flatness of $u$ was used.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0152 (lemma-derived-canonical-delta-functor), signed cone-boundary calculation; Tag 05SU (lemma-derived-shift), counit-compatible shift"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-geometric-inverse-image-exact",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "def-weil-abstract-derived-category",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-pur-right-kan-extension-coherent-shift",
+  "lem-weil-pbc-ringed-topos-flat-module-pullback",
+  "lem-weil-pbc-site-flat-quotient-tensor-ses",
+  "lem-pc-cone-short-exact-quasi-iso",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Assembly of Tags 0152 and 05SU with sites-modules.tex Tag 0G6R and sites-cohomology.tex Tag 06YY; all non-elementary inputs are existing DAG nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of ringed topoi derived pullback on flat term K-flat complexes commutes with shifts and canonical connecting maps of short exact sequences",
+   "results": "SheafOfModules.pullbackComp; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullback_assoc; CategoryTheory.ShortComplex.ShortExact.singleδ; CategoryTheory.Functor.comp_homologySequenceδ; CategoryTheory.Functor.homologySequenceδ_comp; SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLeftDerivedFunctor, NatTrans.CommShift",
+   "results": "No hits; loogle: unknown identifier 'IsLeftDerivedFunctor'",
+   "date": "2026-10-24",
+   "verdict": "query rejected: unknown identifier; not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "map_triangleOfSES|triangleOfSESδ|IsLeftDerivedFunctor",
+   "results": "Search directory Mathlib/Algebra/Homology/DerivedCategory. Mathlib/Algebra/Homology/DerivedCategory/SingleTriangle.lean; Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean; Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean; Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean; Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean; Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; read Ext/Map.lean:52-75: map_triangleOfSESδ assumes the original additive functor preserves finite limits and colimits, which u* need not do. ShortExact.lean:38-95 supplies only the underlying SES triangle.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback preserves connecting morphisms of a short exact sequence of K-flat complexes of sheaves of modules",
+   "results": "CategoryTheory.ShortComplex.ShortExact.singleδ.congr_simp; CategoryTheory.ShortComplex.ShortExact.singleδ; CategoryTheory.ShortComplex.SnakeInput.functorP_map; SheafOfModules.pullback; CategoryTheory.ShortComplex.SnakeInput.L₀'_exact; CategoryTheory.ShortComplex.SnakeInput.P; DerivedCategory.triangleOfSESδ; CategoryTheory.ShortComplex.SnakeInput.functorP",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.IsLeftDerivedFunctor",
+   "results": "No hits; loogle: unknown identifier 'Functor.IsLeftDerivedFunctor'",
+   "date": "2026-10-24",
+   "verdict": "query rejected: unknown identifier; not evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left derived functor comparison counit is compatible with integer shifts and with the mapping cone description of the boundary of a short exact sequence",
+   "results": "CategoryTheory.ShortComplex.ShortExact.singleδ; DerivedCategory.triangleOfSESδ; DerivedCategory.triangleOfSESIso; CategoryTheory.Functor.comp_homologySequenceδ; CategoryTheory.Functor.homologySequenceδ_comp; CategoryTheory.Functor.comp_homologySequenceδ_assoc; CategoryTheory.Functor.homologySequenceδ_comp_assoc; CategoryTheory.Functor.homologySequence_comp",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.triangleOfSESδ",
+   "results": "DerivedCategory.triangleOfSESδ; DerivedCategory.triangleOfSES_mor₃; DerivedCategory.triangleOfSESδ_naturality; DerivedCategory.triangleOfSESδ_naturality_assoc; DerivedCategory.descShortComplex_triangleOfSESδ; DerivedCategory.descShortComplex_triangleOfSESδ_assoc; CategoryTheory.DerivedCategory.map_triangleOfSESδ",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLeftDerivedFunctor|CommShift",
+   "results": "Search directory Mathlib/CategoryTheory/Functor/Derived. Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean; Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean; Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean; Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean; Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean; Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean; Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean; Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "CategoryTheory.DerivedCategory.map_triangleOfSESδ",
+  "file": "Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+  "how": "Lines 52 and 59-75: compatibility for the derived-category functor of an exact additive functor. The original u* here need not be exact, so this does not state the item."
+ },
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "reviewer",
+  "item": "lem-sfb-space-derived-hom-mayer-vietoris",
+  "date": "2026-10-24",
+  "group": "Q48"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 0A1P (lemma-base-change-tensor-perfect), perfectness assertion; perfect means sites-cohomology.tex Tag 08G5 (definition-perfect). Supporting input: Tag 0A1P (lemma-base-change-tensor-perfect), Noetherian-approximation paragraph, only the data preceding K_i. Inputs: spaces-limits.tex Tags 07SK (lemma-descend-finite-presentation), 07V7 (lemma-descend-modules-finite-presentation), 08K0 (lemma-descend-flat), 08K2 (lemma-eventually-proper-support); spaces-perfect.tex Tag 09RJ (lemma-perfect-on-limit); spaces-cohomology.tex Tag 07UB (lemma-coherent-Noetherian). Supporting limit input: Tag 09RJ (lemma-perfect-on-limit), in Situation 09RH (situation-descent); derived pullback preserves perfect objects by sites-cohomology.tex Tag 08H6 (lemma-perfect-pullback). Supporting input: proof of Tag 09RJ, first paragraph, full faithfulness from Tag 09RI (1). Excision input to Tag 09RI, proof paragraph 1: Mayer–Vietoris for Hom and its canonical transition maps. Reviewer-added input for lem-sfb-space-derived-hom-mayer-vietoris step 7: derived pullback carries the canonical extension-by-zero short-exact-sequence triangle, computed on a flat-term K-flat representative, to the canonical triangle of the pulled-back sequence, including its boundary and shift comparison.",
+   "via": [
+    "lem-sfb-space-derived-hom-mayer-vietoris",
+    "lem-sfb-space-perfect-source-hom-continuity",
+    "lem-sfb-space-perfect-limit-category",
+    "lem-sfb-space-perfect-flat-proper-model",
+    "lem-sfb-proper-support-tensor-perfect",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-ringed-kflat-pullback-ses-triangle",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Five steps: termwise cone and shift formulas, universal counit-compatible shifts, exactness on flat-quotient terms, canonical cone projections, and explicit signed boundary cancellation. All prerequisites already exist; zero new nodes.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 0A1P (lemma-base-change-tensor-perfect), perfectness assertion; perfect means sites-cohomology.tex Tag 08G5 (definition-perfect). Supporting input: Tag 0A1P (lemma-base-change-tensor-perfect), Noetherian-approximation paragraph, only the data preceding K_i. Inputs: spaces-limits.tex Tags 07SK (lemma-descend-finite-presentation), 07V7 (lemma-descend-modules-finite-presentation), 08K0 (lemma-descend-flat), 08K2 (lemma-eventually-proper-support); spaces-perfect.tex Tag 09RJ (lemma-perfect-on-limit); spaces-cohomology.tex Tag 07UB (lemma-coherent-Noetherian). Supporting limit input: Tag 09RJ (lemma-perfect-on-limit), in Situation 09RH (situation-descent); derived pullback preserves perfect objects by sites-cohomology.tex Tag 08H6 (lemma-perfect-pullback). Supporting input: proof of Tag 09RJ, first paragraph, full faithfulness from Tag 09RI (1). Excision input to Tag 09RI, proof paragraph 1: Mayer–Vietoris for Hom and its canonical transition maps. Reviewer-added input for lem-sfb-space-derived-hom-mayer-vietoris step 7: derived pullback carries the canonical extension-by-zero short-exact-sequence triangle, computed on a flat-term K-flat representative, to the canonical triangle of the pulled-back sequence, including its boundary and shift comparison. The five steps supply precisely the reviewer-added canonical boundary and shift comparison input to Mayer–Vietoris step 7. The latest direct-images proof (3) is followed without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-geometric-inverse-image-exact",
+    "why": "Exactness of inverse image with transported scalars for arbitrary geometric morphisms; the unit has no replacement for this generic ringed-topos tool."
+   },
+   {
+    "node": "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "why": "Finite coproduct preservation of sheaf tensor in the module universe; used only to identify the termwise cone."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Resolutions of arbitrary unbounded complexes by flat-term K-flat complexes, needed for the right Kan criterion."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "why": "The specified canonical derived pair, its naturality, K-flat computation and quasi-isomorphism invariance."
+   },
+   {
+    "node": "lem-pur-left-derived-from-kflat-class",
+    "why": "Universal right Kan property of a derived functor computed by a resolving class; general homological algebra, not a substitute for the direct-image route."
+   },
+   {
+    "node": "lem-pur-right-kan-extension-coherent-shift",
+    "why": "Canonical counit-compatible integer shifts on the universal derived pair; general categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "why": "Preservation of flat modules under geometric inverse image with transported coefficient ring; does not assume a flat coefficient map."
+   },
+   {
+    "node": "lem-weil-pbc-site-flat-quotient-tensor-ses",
+    "why": "Exactness after arbitrary tensoring of a sheaf sequence with flat quotient; used degreewise, with no geometric specialization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-pur-right-kan-extension-coherent-shift",
+  "lem-weil-pbc-ringed-topos-flat-module-pullback",
+  "lem-weil-pbc-site-flat-quotient-tensor-ses"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q65-69a483923",
+  "group": "Q65",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-69a483923 (reviewer sub-agent of L); spot-checked: Zero-new-node split of lem-sfb-ringed-kflat-pullback-ses-triangle; statement unchanged. Sources read: Stacks 0152 (δ=−p∘q⁻¹; cone convention matches the item and def-weil-abstract-derived-category), 0G6R (step 3 follows its proof: f⁻¹ exact → f⁻¹H flat → tensor), 0G7E. All 16 cited statements checked. Step 1: additive T gives T Cone ≅ Cone T and T(P[1]) = (TP)[1], so F = Q_S T is exact; elementary, correct. Step 2: K-flat resolutions plus the qis-preservation clause of the ringed-topoi node satisfy the resolving-class criterion; the Kan coherent-shift lemma then gives (1) for every P. Step 3: flat-module pullback with c = id and flat-quotient tensor with N = S, no flatness of S needed. Step 4: the cone quasi-isomorphism lemma, with q′h = Tq and p′h = Tp. Step 5: I redid the signed cancellation; it gives δ′ε_C with no ε_V inverse used. Edge cases checked: A = 0, C = 0, split sequences, ℤ→ℤ/2; the non-flat quotient ℤ→ℤ→ℤ/2 is correctly excluded. No duplicate found by rg over dag/nodes; no SGA source. Batch-5 flag lem-trf-geometric-inverse-image-exact: Stacks 04JC with generic pbc/galois proof_deps, a general topos fact outside the trace formula and Poincaré duality, so accepted. The pbc site-pullback alternative covers only morphisms of sites and abelian sheaves. tool_uses accepted as generic. Advisory: the ringed-topoi node does not pin σ beyond exactness; the canonical Kan shift is unique, and that is the reading used here and by the parent's step 7."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RingedKFlatPullbackSESTriangle",
+  "declaration": "SheafOfModules.ringedKFlatPullbackSESTriangle",
+  "file": "lean/Sheaf/Paper/RingedKFlatPullbackSESTriangle.lean",
+  "statement": "theorem ringedKFlatPullbackSESTriangle {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D] [EssentiallySmall.{r} C] [EssentiallySmall.{r} D] {JC : GrothendieckTopology C} {JD : GrothendieckTopology D} {R : Sheaf JC CommRingCat.{r}} {S RI : Sheaf JD CommRingCat.{r}} (uInv : Sheaf JC (Type r) ⥤ Sheaf JD (Type r)) (uPush : Sheaf JD (Type r) ⥤ Sheaf JC (Type r)) (adj : uInv ⊣ uPush) [PreservesFiniteLimits uInv] (I : AlgebraicInverseImage uInv R RI) (c : RI ⟶ S) (uStar : Mod JC R ⥤ Mod JD S) (hobj : ∀ M : Mod JC R, uStar.obj M = changeOfRings c (I.modules.obj M)) (hmap : ∀ {M N : Mod JC R} (a : M ⟶ N), uStar.map a = eqToHom (hobj M) ≫ changeOfRingsHom c (I.modules.obj M) (I.modules.map a) ≫ eqToHom (hobj N).symm) [uStar.Additive] [HasDerivedCategory.{w} (Mod JC R)] [HasDerivedCategory.{w} (Mod JD S)] (LF : DerivedCategory (Mod JC R) ⥤ DerivedCategory (Mod JD S)) (epsilon : DerivedCategory.Q ⋙ LF ⟶ uStar.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q) (hLF : LF.IsLeftDerivedFunctor epsilon (HomologicalComplex.quasiIso (Mod JC R) (.up ℤ))) : ∃ (_ : LF.CommShift ℤ), (∀ P : CochainComplex (Mod JC R) ℤ, epsilon.app (P⟦(1 : ℤ)⟧) ≫ ((uStar.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q).commShiftIso (1 : ℤ)).hom.app P = ((DerivedCategory.Q ⋙ LF).commShiftIso (1 : ℤ)).hom.app P ≫ (epsilon.app P)⟦(1 : ℤ)⟧') ∧ LF.IsTriangulated ∧ ∀ (E : ShortComplex (CochainComplex (Mod JC R) ℤ)) (hE : E.ShortExact), E.X₁.IsKFlatIndependentCoefficients → (∀ n : ℤ, IsFlatOnSite (J := JC) (R := R) (E.X₁.X n)) → E.X₂.IsKFlatIndependentCoefficients → (∀ n : ℤ, IsFlatOnSite (J := JC) (R := R) (E.X₂.X n)) → E.X₃.IsKFlatIndependentCoefficients → (∀ n : ℤ, IsFlatOnSite (J := JC) (R := R) (E.X₃.X n)) → ∃ (hT : (E.map (uStar.mapHomologicalComplex (.up ℤ))).ShortExact), ∃ (e : LF.mapTriangle.obj (DerivedCategory.triangleOfSES hE) ≅ DerivedCategory.triangleOfSES hT), e.hom.hom₁ = epsilon.app E.X₁ ∧ e.hom.hom₂ = epsilon.app E.X₂ ∧ e.hom.hom₃ = epsilon.app E.X₃ ∧ LF.map (DerivedCategory.triangleOfSESδ hE) ≫ (LF.commShiftIso (1 : ℤ)).hom.app (DerivedCategory.Q.obj E.X₁) ≫ (epsilon.app E.X₁)⟦(1 : ℤ)⟧' = epsilon.app E.X₃ ≫ DerivedCategory.triangleOfSESδ hT",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The universal derived pair is expressed on cochain complexes, as in the item, using Q rather than Qh. Restriction along the homotopy quotient identifies this with the dependency’s universal pair via quotientCompQhIso. The existential CommShift structure is the canonical comparison-compatible shift: the first conjunct explicitly pins its [1] comparison on every complex. No arbitrary exact shift or exactness of the underived pullback is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-308053ad1",
+  "group": "NP",
+  "result": "pass",
+  "note": "Only the item's lean record changed (diffed against side-live); lean.statement is verbatim the file signature; one sorry theorem with source, blueprint and five-step proof docstrings. Clauses: sites with independent universes and EssentiallySmall.{r}; uInv/uPush/adj/left-exact; AlgebraicInverseImage I and c:RI→S; uStar pinned by hobj/hmap, exactly the dependency's interface; LF/epsilon/hLF are the universal pair written on complexes with Q, equivalent to the dependency's Qh form, and the statement holds for any such pair since they are uniquely isomorphic. The existential CommShift is uniquely pinned by clause (1) for every P through the universal property, so it is the canonical shift; IsTriangulated holds for it. Six K-flat/flat-term hypotheses; hT is a conclusion; triangle iso with components ε_A, ε_B, ε_C; mapTriangle mor3 = σ∘LF(δ); Mathlib triangleOfSESδ has sign -p∘q⁻¹ (mappingCone triangleδ = -fst), matching Stacks 0152; the explicit boundary equation is in diagrammatic order. Edge cases (A=0 or C=0, split sequences, non-flat quotient excluded, unbounded P) are fine. Notes, not faults: AlgebraicInverseImage is owned by def-weil-pbc-algebraic-inverse-image, not an item stmt_dep, and comes through the cited dependency's interface (base stmt_deps unchanged); both derived categories share one universe w, copied from the dependency. No compile run since no file changed."
+ }
+}

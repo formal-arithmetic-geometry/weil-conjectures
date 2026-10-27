@@ -1,0 +1,128 @@
+{
+ "id": "lem-sfb-koszul-subset-shuffle-binary",
+ "kind": "statement",
+ "title": "Binary shuffle formula on single-term subset inclusions",
+ "statement": "Let $R$ be any commutative condensed ring [sk-def-sfb-condensed-ring], using internal modules [sk-def-sfb-module-objects], relative tensor [def-sfb-modobj-relative-tensor], and the universe convention [def-weil-size-convention]. Let $r\\in\\mathbb N$, let $K$ be a Koszul model [lem-sfb-discrete-lattice-koszul-resolution], $c$ its comparison, and cup its triangulated cup comparison for the trivial regular algebra [lem-sfb-lattice-koszul-triangulated-cup-comparison]. Write $S_q$ for the single complex with $R$ in degree $q$. Suppose $u_I:S_{|I|}\\to K(R)$ has coordinate $\\delta_{I,J}$, and $m_{p,q}:S_p\\otimes_R S_q\\cong S_{p+q}$ has unsigned regular-multiplication coordinate. Then $(u_A\\otimes_Ru_C)\\star$ is zero when $A,C$ intersect; when disjoint it is $(-1)^{\\#\\{(a,c)\\in A\\times C:c<a\\}}m_{|A|,|C|}u_{A\\cup C}$ with the canonical cardinality transport. This is an equality of chain maps over the internal relative tensor, including empty subsets and the zero ring.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Step 4, the finite-free internal coordinate calculation. Extracted below the ordered-Koszul lemma; agent-formulated internal calculation."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-size-convention",
+  "sk-def-sfb-module-objects",
+  "def-weil-abstract-derived-category",
+  "def-sfb-modobj-relative-tensor",
+  "def-sfb-lattice-derived-invariants-tensor",
+  "lem-sfb-discrete-lattice-koszul-resolution",
+  "lem-sfb-lattice-koszul-triangulated-cup-comparison"
+ ],
+ "proof": [
+  {
+   "text": "the tensor of the two single complexes is concentrated in degree |A|+|C|.\nTest the composite against every target subset projection in that degree and\nprecompose with the inclusion of its unique input tensor summand. Substitute\nthe prescribed inclusion coordinates and the cup comparison's matrix formula.\nThe only possible summand has inputs exactly A and C. If these intersect, the\ncup coordinate condition is false for every output, hence the morphism is zero.\nOtherwise its sole output is A union C, with coefficient (-1)^inv(A,C).\nThe specified unsigned tensor coordinate identifies its regular multiplication\nwith mul, and the target degree equality is exactly card_union_of_disjoint.\nThe resulting componentwise equations imply equality by biproduct and complex\nextensionality. Empty subsets give inv=0 and the same regular multiplication;\nin the zero ring both sides vanish, and in characteristic two the sign is one.",
+   "uses": [
+    "lem-sfb-relative-tensor-finite-free-coordinates",
+    "lem-sfb-lattice-koszul-triangulated-cup-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-relative-tensor-finite-free-coordinates",
+  "lem-sfb-lattice-koszul-triangulated-cup-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Step 4, the finite-free internal coordinate calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Koszul shuffle pairing tested on subset inclusions is zero on intersecting subsets and the inversion sign times the union inclusion on disjoint subsets",
+   "results": "8 hits: exteriorPower.pairingDual_apply_apply_eq_one_zero and unrelated pairings. None is an equality of internal-module complex morphisms.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomologicalComplex\", \"single\"",
+   "results": "12 hits including single, singleObjXSelf, singleObjXIsoOfEq and mkHomFromSingle. Constructors and extensionality apply, but no theorem assembles the required normalization or subset calculation.",
+   "date": "2026-10-26",
+   "verdict": "building blocks only, not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "from_single_hom_ext|ιTensorObj|biproduct.*single",
+   "results": "21 hits including HomologicalComplex.from_single_hom_ext, HomologicalComplex.ιTensorObj and graded tensor summand naturality. No specified Koszul subset formula or complete single-term normalization.",
+   "date": "2026-10-26",
+   "verdict": "no exact match; local rg also checked WeilConjectures and Sheaf"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.LatticeOrderedKoszulProducts",
+  "date": "2026-10-26",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), algebraic dense-lattice normalization below the ordinary-open-direct-image route; returned parent proof steps 1 and 4, and rank-zero part of step 5: zero differential, subset inclusions, trivial-action shuffle pairing and ordered tensor normalization. Step 4, the finite-free internal coordinate calculation.",
+   "via": [
+    "lem-sfb-lattice-ordered-koszul-products",
+    "lem-sfb-discrete-lattice-cup-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.KoszulSubsetShuffleBinary",
+  "file": "lean/Sheaf/CategoryTheory/KoszulSubsetShuffleBinary.lean",
+  "declaration": "Profinite.DiscreteLattice.OrderedKoszul.subset_shuffle_binary",
+  "statement": "theorem subset_shuffle_binary (r : ℕ) (K : KoszulModel R r)\n    (c : Comparison R r K)\n    (cup : TriangulatedCup.CupComparison R r K c (Mon.trivial (Equivariant R r)))\n    (incl : ∀ I : Finset (Fin r), S I.card ⟶ K.functor.obj (𝟙_ (Equivariant R r)))\n    (mul : ∀ p q : ℕ, S p ⊗ S q ≅ S (p + q))\n    (hi : ∀ (I : Finset (Fin r)) (J : Subsets r (I.card : ℤ)),\n    (HomologicalComplex.singleObjXSelf (.up ℤ) (I.card : ℤ) (𝟙_ (Modules R))).inv ≫\n      (incl I).f (I.card : ℤ) ≫ (K.coordinates (𝟙_ (Equivariant R r)) I.card).hom ≫\n      biproduct.π _ J = if I = J.val then 𝟙 _ else 0)\n    (hm : ∀ p q : ℕ,\n    ((HomologicalComplex.singleObjXSelf (.up ℤ) (p : ℤ) (𝟙_ (Modules R))).inv ⊗ₘ\n      (HomologicalComplex.singleObjXSelf (.up ℤ) (q : ℤ) (𝟙_ (Modules R))).inv) ≫\n      HomologicalComplex.ιTensorObj (S p) (S q) (p : ℤ) (q : ℤ)\n        ((p + q : ℕ) : ℤ) (Nat.cast_add p q).symm ≫\n      (mul p q).hom.f ((p + q : ℕ) : ℤ) ≫\n      (HomologicalComplex.singleObjXSelf (.up ℤ) ((p + q : ℕ) : ℤ)\n        (𝟙_ (Modules R))).hom = (λ_ (𝟙_ (Modules R))).hom) :\n    ∀ A C : Finset (Fin r), (incl A ⊗ₘ incl C) ≫ cup.star =\n    if h : Disjoint A C then\n      ((-1 : ℤ) ^ ((A.product C).filter (fun ac ↦ ac.2 < ac.1)).card) •\n        ((mul A.card C.card).hom ≫\n          eqToHom (congrArg (S) (Finset.card_union_of_disjoint h).symm) ≫ incl (A ∪ C))\n    else 0",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261026T080745-L-1560557",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261026T080745-L-1560557",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

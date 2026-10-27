@@ -1,0 +1,213 @@
+{
+ "id": "lem-dl-a1-profinite-restriction-full-faithful",
+ "kind": "statement",
+ "title": "Surjectivity detected by restriction of finite continuous actions",
+ "statement": "Let $H$ and $G$ be profinite groups, meaning compact Hausdorff topological groups with a neighbourhood basis of the identity consisting of open normal subgroups. Let $h:H\\to G$ be a continuous group homomorphism. For $T=G,H$, write $\\mathrm{FinCont}(T)$ for the category of finite sets with left $T$-actions continuous for the discrete topology, and equivariant maps, as in the finite discrete continuous set convention of [def-pod-finite-continuous-module]. The restriction functor\n$$\\operatorname{Res}_h:\\mathrm{FinCont}(G)\\longrightarrow\\mathrm{FinCont}(H),\\qquad t\\cdot_{\\operatorname{Res}_h E}e=h(t)\\cdot_E e,$$\nacts as the identity on underlying functions. Then $h$ is surjective if and only if $\\operatorname{Res}_h$ is fully faithful, that is, for every $E,D\\in\\mathrm{FinCont}(G)$ the map\n$$\\operatorname{Hom}_G(E,D)\\longrightarrow\\operatorname{Hom}_H(\\operatorname{Res}_h E,\\operatorname{Res}_h D)$$\nis bijective.",
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BN6, lemma-functoriality-galois-surjective, equivalence (1) with (2), and its proof for finite continuous group actions."
+ },
+ "stmt_deps": [
+  "def-pod-finite-continuous-module"
+ ],
+ "proof": [
+  {
+   "text": "Restriction preserves equivariance and is the identity on underlying functions, so it is faithful. If $h$ is surjective and $a:E\\to D$ is $H$-equivariant, then for $g\\in G$ choose $t\\in H$ with $h(t)=g$. For every $e\\in E$, $a(ge)=a(h(t)e)=h(t)a(e)=ga(e)$. Thus the same function is $G$-equivariant, proving fullness and hence full faithfulness. This includes empty actions. The action and morphism conventions are those of [def-pod-finite-continuous-module].",
+   "uses": [
+    "def-pod-finite-continuous-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BN6, lemma-functoriality-galois-surjective, proof of (1) implies (2), and final paragraph proving the converse using an open subgroup and its coset action."
+   }
+  },
+  {
+   "text": "Conversely assume full faithfulness and suppose $h$ is not onto. Put $K=h(H)$, a subgroup since $h$ preserves multiplication and inverses. By [lem-dl-a1-compact-hausdorff-closed-map] applied to $h:H\\to G$, the image $K$ is closed: the source is compact, the target Hausdorff and $h$ continuous. Choose $g\\in G\\setminus K$.",
+   "uses": [
+    "lem-dl-a1-compact-hausdorff-closed-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BN6, lemma-functoriality-galois-surjective, proof of (1) implies (2), and final paragraph proving the converse using an open subgroup and its coset action."
+   }
+  },
+  {
+   "text": "The open set $g^{-1}(G\\setminus K)=\\{x\\in G:gx\\notin K\\}$ is a neighbourhood of $1$. By the normal-subgroup neighbourhood basis in the hypothesis choose an open normal $N\\leq G$ inside it, so $gN\\cap K=\\varnothing$. Set $U=KN$. Normality of $N$ makes this a subgroup: $(kn)(k_1 n_1)=kk_1(k_1^{-1}nk_1)n_1\\in KN$, and $(kn)^{-1}=k^{-1}(kn^{-1}k^{-1})\\in KN$. It contains $K$ and is open, being the union of translates $kN$ for $k\\in K$; translation and its inverse are continuous by the group axioms. If $g=kn$ belonged to $KN$, then $k=gn^{-1}\\in gN\\cap K$, a contradiction. Hence $U$ is a proper open subgroup containing $K$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BN6, lemma-functoriality-galois-surjective, proof of (1) implies (2), and final paragraph proving the converse using an open subgroup and its coset action."
+   }
+  },
+  {
+   "text": "Apply [lem-dl-a1-open-subgroup-finite-cosets] to this $U$. It gives a finite discrete continuous $G$-action $M=G/U$ by left multiplication, without requiring $U$ normal. The coset $U\\in M$ is fixed by $H$, because $h(H)=K\\subseteq U$. Therefore the function $b:*\\to\\operatorname{Res}_h M$ with $b(*)=U$ is $H$-equivariant, where $*$ is the singleton with trivial action. Both $M$ and $*$ are objects of the finite-action category, with singleton and equivariant-map conventions from [def-pod-finite-continuous-module].",
+   "uses": [
+    "lem-dl-a1-open-subgroup-finite-cosets",
+    "def-pod-finite-continuous-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BN6, lemma-functoriality-galois-surjective, proof of (1) implies (2), and final paragraph proving the converse using an open subgroup and its coset action."
+   }
+  },
+  {
+   "text": "Fullness lifts $b$ to a $G$-equivariant map $a:*\\to M$. Restriction is the identity on functions, so $a(*)=U$. Equivariance says $xU=x\\cdot a(*)=a(x\\cdot *)=a(*)=U$ for every $x\\in G$. Equality of these left cosets means $x\\in U$, contradicting $g\\notin U$ from step 3. Thus $h$ is onto. Together with step 1 this proves the equivalence.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BN6, lemma-functoriality-galois-surjective, proof of (1) implies (2), and final paragraph proving the converse using an open subgroup and its coset action."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pod-finite-continuous-module",
+  "lem-dl-a1-compact-hausdorff-closed-map",
+  "lem-dl-a1-open-subgroup-finite-cosets"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BN6, lemma-functoriality-galois-surjective, proof of (1) implies (2), and final paragraph proving the converse using an open subgroup and its coset action."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A continuous homomorphism of profinite groups is surjective if restriction of finite continuous group actions is fully faithful",
+   "results": "8 hits: ProfiniteGrp.toLimit_surjective, CategoryTheory.PreGaloisCategory.toAut_surjective_of_isPretransitive, CategoryTheory.PreGaloisCategory.instEssSurjContActionFintypeCatAutFunctorFunctorToContAction, CategoryTheory.PreGaloisCategory.instEssSurjContActionFintypeCatAutFunctorFunctorToContActionOfFiberFunctor, CategoryTheory.PreGaloisCategory.instFullContActionFintypeCatAutFunctorFunctorToContAction, LightProfinite.surjective_transitionMap, CategoryTheory.PreGaloisCategory.AutGalois.π_surjective, LightProfinite.proj_surjective. Read Mathlib/CategoryTheory/Action/Basic.lean 345-359 and Action/Continuous.lean 96-110: they construct restriction but do not give this criterion. Galois/Equivalence.lean 42-49 proves fullness for the canonical fibre functor, not restriction along an arbitrary continuous homomorphism. IsFundamentalgroup.toAut_surjective_of_isPretransitive requires transitivity hypotheses, not full faithfulness.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction along a profinite group homomorphism is a fully faithful functor on finite continuous sets exactly when the homomorphism is onto",
+   "results": "8 hits: lightToProfiniteFullyFaithful, FintypeCat.toProfiniteFullyFaithful, FintypeCat.toLightProfiniteFullyFaithful, lightProfiniteToLightCondSetFullyFaithful, instFullFintypeCatProfiniteToProfinite, instFullFintypeCatLightProfiniteToLightProfinite, instFullLightProfiniteLightCondSetLightProfiniteToLightCondSet, CondensedSet.LocallyConstant.functorFullyFaithful. Read Mathlib/CategoryTheory/Action/Basic.lean 345-359 and Action/Continuous.lean 96-110: they construct restriction but do not give this criterion. Galois/Equivalence.lean 42-49 proves fullness for the canonical fibre functor, not restriction along an arbitrary continuous homomorphism. IsFundamentalgroup.toAut_surjective_of_isPretransitive requires transitivity hypotheses, not full faithfulness.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ContAction, CategoryTheory.Functor.Full",
+   "results": "1 hits: CategoryTheory.PreGaloisCategory.instFullContActionFintypeCatFunObjFiniteAutFunctorFunctorToContAction. Read Mathlib/CategoryTheory/Action/Basic.lean 345-359 and Action/Continuous.lean 96-110: they construct restriction but do not give this criterion. Galois/Equivalence.lean 42-49 proves fullness for the canonical fibre functor, not restriction along an arbitrary continuous homomorphism. IsFundamentalgroup.toAut_surjective_of_isPretransitive requires transitivity hypotheses, not full faithfulness.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrict.*[Ff]ull|[Ff]ull.*restrict|[Ss]urjective.*[Ff]ull|[Ff]ull.*[Ss]urjective",
+   "results": "25 hits: Mathlib/CategoryTheory/PathCategory/Basic.lean, Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean, Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/Functor/KanExtension/Dense.lean, Mathlib/CategoryTheory/Functor/KanExtension/Dense.lean, Mathlib/CategoryTheory/Functor/KanExtension/Dense.lean, Mathlib/CategoryTheory/Functor/KanExtension/Dense.lean. Read Mathlib/CategoryTheory/Action/Basic.lean 345-359 and Action/Continuous.lean 96-110: they construct restriction but do not give this criterion. Galois/Equivalence.lean 42-49 proves fullness for the canonical fibre functor, not restriction along an arbitrary continuous homomorphism. IsFundamentalgroup.toAut_surjective_of_isPretransitive requires transitivity hypotheses, not full faithfulness.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrict|[Ff]ull|surjective",
+   "results": "10 hits: Mathlib/CategoryTheory/Action/Basic.lean 345-359 (Action.res) and Mathlib/CategoryTheory/Action/Continuous.lean 96-110 (ContAction.res), read in full. Neither gives the full-faithfulness/surjectivity criterion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A continuous homomorphism of profinite groups is surjective if and only if restriction of finite continuous actions is fully faithful",
+   "results": "8 hits: Profinite.epi_iff_surjective, ProfiniteGrp.ofHom, ProfiniteGrp.toLimit_surjective, FintypeCat.toProfiniteFullyFaithful, ProfiniteGrp.Hom.hom', ProfiniteGrp.hom_ext_iff, ProfiniteGrp.ofHom_apply, ProfiniteGrp.Hom.ext_iff. Read Mathlib/CategoryTheory/Action/Basic.lean 345-359 and Action/Continuous.lean 96-110: they construct restriction but do not give this criterion. Galois/Equivalence.lean 42-49 proves fullness for the canonical fibre functor, not restriction along an arbitrary continuous homomorphism. IsFundamentalgroup.toAut_surjective_of_isPretransitive requires transitivity hypotheses, not full faithfulness.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrict.*[Ff]ull|[Ff]ull.*restrict|surjective",
+   "results": "{\"t\": \"2026-10-24T00:16:54Z\", \"tool\": \"grep\", \"query\": \"restrict.*[Ff]ull|[Ff]ull.*restrict|surjective\", \"sub\": \"CategoryTheory/Action\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Action/Basic.lean\", \"Mathlib/CategoryTheory/Action/Basic.lean\", \"Mathlib/CategoryTheory/Action/Basic.lean\"], \"digest\": \"a200a54bb02f7cc3\"} Read source: Action/Basic.lean:402-419 proves faithful restriction and fullness for surjective monoid homomorphisms. Action/Continuous.lean:96-110 defines continuous restriction. Galois/Equivalence.lean:42-49 concerns the canonical fibre-functor action, not arbitrary h. None states the converse criterion.",
+   "date": "2026-10-24",
+   "verdict": "no match for the equivalence; Action.full_res gives only the easy algebraic forward implication"
+  },
+  {
+   "tool": "loogle",
+   "query": "ContAction, CategoryTheory.Functor.Full",
+   "results": "{\"t\": \"2026-10-24T00:16:55Z\", \"tool\": \"loogle\", \"query\": \"ContAction, CategoryTheory.Functor.Full\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.instFullContActionFintypeCatFunObjFiniteAutFunctorFunctorToContAction\"], \"digest\": \"ab95a5c89fad3e19\"} Read source: Action/Basic.lean:402-419 proves faithful restriction and fullness for surjective monoid homomorphisms. Action/Continuous.lean:96-110 defines continuous restriction. Galois/Equivalence.lean:42-49 concerns the canonical fibre-functor action, not arbitrary h. None states the converse criterion.",
+   "date": "2026-10-24",
+   "verdict": "no match for the equivalence; Action.full_res gives only the easy algebraic forward implication"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of finite continuous group actions along a continuous profinite group homomorphism is fully faithful exactly when the map is surjective",
+   "results": "{\"t\": \"2026-10-24T00:16:56Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of finite continuous group actions along a continuous profinite group homomorphism is fully faithful exactly when the map is surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FintypeCat.toLightProfiniteFullyFaithful\", \"lightToProfiniteFullyFaithful\", \"FintypeCat.toProfiniteFullyFaithful\", \"Action.full_res\", \"lightProfiniteToLightCondSetFullyFaithful\", \"instFullFintypeCatProfiniteToProfinite\", \"instFullFintypeCatLightProfiniteToLightProfinite\", \"CategoryTheory.PreGaloisCategory.toAut_surjective_of_isPretransitive\"], \"digest\": \"403bbe9f1e4a8b64\"} Read source: Action/Basic.lean:402-419 proves faithful restriction and fullness for surjective monoid homomorphisms. Action/Continuous.lean:96-110 defines continuous restriction. Galois/Equivalence.lean:42-49 concerns the canonical fibre-functor action, not arbitrary h. None states the converse criterion.",
+   "date": "2026-10-24",
+   "verdict": "no match for the equivalence; Action.full_res gives only the easy algebraic forward implication"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A continuous homomorphism of profinite groups is onto if restriction on finite discrete continuous actions is fully faithful",
+   "results": "{\"t\": \"2026-10-24T00:17:44Z\", \"tool\": \"leansearch\", \"query\": \"A continuous homomorphism of profinite groups is onto if restriction on finite discrete continuous actions is fully faithful\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ProfiniteGrp.ofHom\", \"ProfiniteGrp.toLimit_surjective\", \"FintypeCat.toProfiniteFullyFaithful\", \"ProfiniteGrp.ofHom_apply\", \"ProfiniteAddGrp.ofHom_apply\", \"ProfiniteGrp\", \"ProfiniteGrp.Hom.hom'\", \"ProfiniteAddGrp.Hom.hom\"], \"digest\": \"fc37e4047228a322\"} Read source: Action/Basic.lean:402-419 proves faithful restriction and fullness for surjective monoid homomorphisms. Action/Continuous.lean:96-110 defines continuous restriction. Galois/Equivalence.lean:42-49 concerns the canonical fibre-functor action, not arbitrary h. None states the converse criterion.",
+   "date": "2026-10-24",
+   "verdict": "no match for the equivalence; Action.full_res gives only the easy algebraic forward implication"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Full restriction functor on finite continuous actions detects dense image of a topological group homomorphism",
+   "results": "{\"t\": \"2026-10-24T00:17:46Z\", \"tool\": \"leanfinder\", \"query\": \"Full restriction functor on finite continuous actions detects dense image of a topological group homomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Action.full_res\", \"ProfiniteGrp.denseRange_toLimit\", \"CategoryTheory.PreGaloisCategory.toAut_surjective_of_isPretransitive\", \"CategoryTheory.PreGaloisCategory.instFullContActionFintypeCatAutFunctorFunctorToContAction\", \"CategoryTheory.PreGaloisCategory.instEssSurjContActionFintypeCatAutFunctorFunctorToContAction\", \"CategoryTheory.PreGaloisCategory.functorToAction_full\", \"CategoryTheory.PreGaloisCategory.instEssSurjContActionFintypeCatAutFunctorFunctorToContActionOfFiberFunctor\", \"CategoryTheory.PreGaloisCategory.functorToContAction\"], \"digest\": \"b048f4e880e785e5\"} Read source: Action/Basic.lean:402-419 proves faithful restriction and fullness for surjective monoid homomorphisms. Action/Continuous.lean:96-110 defines continuous restriction. Galois/Equivalence.lean:42-49 concerns the canonical fibre-functor action, not arbitrary h. None states the converse criterion.",
+   "date": "2026-10-24",
+   "verdict": "no match for the equivalence; Action.full_res gives only the easy algebraic forward implication"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-dl-a1-field-point-full-faithful-galois-map",
+  "date": "2026-10-23",
+  "group": "NK"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-d-dl-a1-setup",
+ "blueprint": {
+  "from": {
+   "node": "rem-dl-a1-conventions",
+   "place": "Unramified-at-infinity paragraph of rem-dl-a1-conventions: extension across infinity iff trivial inertia; finite-action full-faithfulness criterion used in the field-point comparison on the inertia-presentation route.",
+   "via": [
+    "lem-dl-a1-field-point-full-faithful-galois-map",
+    "lem-dl-a1-normal-scheme-galois-inertia-presentation",
+    "lem-dl-a1-weil-kernel-inertia"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-dl-a1-profinite-restriction-full-faithful",
+  "worker": "stage1",
+  "summary": "Proved the equivalence by equivariance descent and the fixed coset of a proper open subgroup. Expanded the closed-image and neighbourhood-basis argument. Added two exact Mathlib leaves for compact-to-Hausdorff closed maps and general open-subgroup finite discrete continuous coset actions; preserved the statement. Checked every citation against its statement and the Stacks proof, including its final condition-number slip.",
+  "blueprint": "Unramified-at-infinity paragraph of rem-dl-a1-conventions: extension across infinity iff trivial inertia; finite-action full-faithfulness criterion used in the field-point comparison on the inertia-presentation route. Steps 1-5 implement the finite-action criterion on this route; no change to chapter or unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q100-f5761e92c",
+  "group": "Q100",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-f5761e92c (reviewer sub-agent of L); spot-checked: I read the item in full: it is Stacks 0BN6 (1)<=>(2) (pione.tex l.737-783) for finite continuous G-sets, with the statement unchanged and stmt_dep def-pod-finite-continuous-module. Step 1 (surjective => full, via a preimage of g) is elementary. Step 2 shows h(H) is closed using the new leaf, whose hypotheses (H compact, G Hausdorff, h continuous) are in force. Step 3 writes out the proper open subgroup U = KN that Stacks leaves unproved: the open normal N inside {x : gx not in K} comes from the basis hypothesis, and KN being a subgroup, open, and missing g all check. Step 4 builds G/U with the fixed coset U and the H-map *->U. Step 5 lifts that map by fullness and gets G = U, a contradiction. New node lem-dl-a1-compact-hausdorff-closed-map is exactly Continuous.isClosedMap (Hausdorff.lean:673-674); its source 08YD (topology.tex l.3257) is correct. New node lem-dl-a1-open-subgroup-finite-cosets matches, clause by clause, Subgroup.quotient_finite_of_isOpen (OpenSubgroup.lean:287-290), QuotientGroup.discreteTopology (Group/Quotient.lean:115-117) and instContinuousSMul (68-72); none of these needs normality. Edge cases tested: U = G, U = 1, C2 <= S3 for the leaf; 1 -> C2, h = id, trivial G and empty actions for the item. There are no duplicates: lem-exc-etale-open-subgroup-quotient-finite-discrete is only for Galois groups, lem-sfb-compact-hausdorff-surjection-quotient needs a surjection, and I grepped the DAG for the same Mathlib declarations and for 0BN6. Neither leaf restates a clause of the item, there is no cycle, no SGA source, and no tool_uses are needed. Batch-5: def-pod-finite-continuous-module is a general definition that neither assumption states or proves, and it was already the item's stmt_dep, so I accept it. A minor report inaccuracy: G/U also contradicts Stacks (3), since Res(G/U) is disconnected; it does not affect the delivery."
+ },
+ "lean": {
+  "module": "Sheaf.GroupTheory.ProfiniteRestrictionFullFaithful",
+  "declaration": "ContAction.surjective_iff_bijective_finite_res",
+  "file": "lean/Sheaf/GroupTheory/ProfiniteRestrictionFullFaithful.lean",
+  "statement": "theorem surjective_iff_bijective_finite_res (H : Type u) [Group H] [TopologicalSpace H] [IsTopologicalGroup H] [CompactSpace H] [T2Space H] (G : Type v) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [T2Space G] (hH : (𝓝 (1 : H)).HasBasis (fun _ : OpenNormalSubgroup H ↦ True) (fun N ↦ (N : Set H))) (hG : (𝓝 (1 : G)).HasBasis (fun _ : OpenNormalSubgroup G ↦ True) (fun N ↦ (N : Set G))) (h : H →ₜ* G) : Function.Surjective h ↔ ∀ E D : ContAction FintypeCat.{w} G, Function.Bijective ((ContAction.res FintypeCat.{w} h).map (X := E) (Y := D))",
+  "branch": "sheaf-dag",
+  "by": "Q98",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0b0b61573",
+  "group": "Q98",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0BN6 (1)<=>(2) clause by clause: compact T2 topological groups with HasBasis over all OpenNormalSubgroups (equivalent to the node's basis condition), h : H →ₜ* G, ContAction FintypeCat.{w} with scoped FintypeCatDiscrete (stmt_dep convention), Mathlib's canonical ContAction.res (direction G→H), Surjective h ↔ ∀ E D, Bijective (res.map). Universes u v w independent and bound; w free is valid because finite G/U exists in every universe. Edge cases (empty actions, trivial groups, non-normal U) correct. Only the item's lean field changed vs live; dep record identical; lean.statement verbatim. No duplicate in Mathlib or project (Action.full_res is forward only). No new defs, proof sorry only, docstrings carry source, blueprint id and 5 steps, both report sections present. Not recompiled since no file changed."
+ }
+}

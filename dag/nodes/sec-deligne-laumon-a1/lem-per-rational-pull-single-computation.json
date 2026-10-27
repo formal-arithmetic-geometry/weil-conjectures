@@ -1,0 +1,158 @@
+{
+ "kind": "statement",
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "status": "split",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback of a finite locally free sheaf is concentrated in degree zero",
+   "results": "SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackIso, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal",
+   "date": "2026-10-25",
+   "verdict": "No matching normalized continuous-coefficient assertion; generic ordinary free and derived-functor APIs only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A single complex on a finite locally free module sheaf computes derived pullback by ordinary pullback",
+   "results": "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.pullback, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullbackObjFreeIso.congr_simp, SheafOfModules.freeFunctorCompPullbackIso, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+   "date": "2026-10-25",
+   "verdict": "No matching normalized continuous-coefficient assertion; generic ordinary free and derived-functor APIs only."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedUnique",
+   "results": "CategoryTheory.Functor.leftDerivedUnique",
+   "date": "2026-10-25",
+   "verdict": "No matching normalized continuous-coefficient assertion; generic ordinary free and derived-functor APIs only."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedUnique|IsLeftDerivedFunctor",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean",
+   "date": "2026-10-25",
+   "verdict": "No matching normalized continuous-coefficient assertion; generic ordinary free and derived-functor APIs only."
+  },
+  {
+   "tool": "grep",
+   "query": "blueprint_refs.py search: finite free pullback; single flat; derived pullback composition; K-flat counit",
+   "results": "All four searches returned zero blueprint nodes. Existing generic source nodes were inspected; none states these exact continuous-rational normalization transports.",
+   "date": "2026-10-25",
+   "verdict": "No duplicate blueprint statement."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "group": "U1",
+  "item": "Sheaf.Paper.RationalStratumPullbackModels",
+  "date": "2026-10-25"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "id": "lem-per-rational-pull-single-computation",
+ "title": "RationalPullSingleComputation",
+ "statement": "For any scheme map f:Y $\\to$ X, coefficient structure map c, supplied normalized Pull model p [def-per-rational-stratum-pullback-data] and source module M, the canonical derived-to-ordinary single map p.singleMap M is invertible if either c is invertible or M is finite locally free. This asserts computation of one single sheaf, not any stratum square, chart data or comparison to a realization.",
+ "stmt_deps": [
+  "def-per-rational-stratum-pullback-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY, lemma-derived-base-change, bounded above flat complexes; Bhatt–Scholze Definition 6.8.3 and Remark 6.8.15."
+ },
+ "proof": [
+  {
+   "text": "if the coefficient map is invertible, its scalar extension is exact, as is\nmodule inverse image. Their derived functor is their termwise functor, and its\ncanonical counit is invertible on every complex. The normalization of p identifies\nits counit with this counit, so the single comparison is invertible. Otherwise,\ntrivialize the finite locally free sheaf on a covering. Tensoring its degree-zero\ncomplex is locally a finite direct sum of the identity on complexes. This preserves\nacyclicity, including the empty sum. Exact restriction commutes with cohomology,\nand sheaf separatedness detects vanishing on the cover, so this single is K-flat.\nApply p.computes. The remaining map is the canonical termwise single isomorphism,\nwhich is invertible. No flatness of the structural coefficient map is required.",
+   "uses": [
+    "lem-per-continuous-coefficient-slice-normalization",
+    "def-pc-kflat-complex",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, lemma-derived-base-change, bounded above flat complexes; Bhatt–Scholze Definition 6.8.3 and Remark 6.8.15."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-continuous-coefficient-slice-normalization",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY, lemma-derived-base-change, bounded above flat complexes; Bhatt–Scholze Definition 6.8.3 and Remark 6.8.15."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "Steps 1, 5 and 6: exact restriction and K-flat locally free singles.",
+   "via": [
+    "lem-per-rational-stratum-pullback-models",
+    "lem-per-adic-stratified-pullback-texact",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-per-smooth-pullback-support-dimension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalPullSingleComputation",
+  "file": "lean/Sheaf/Paper/RationalPullSingleComputation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.RationalStratumPullback.rational_pull_single_computation",
+  "statement": "theorem rational_pull_single_computation {X Y : Scheme.{u}} (f : Y ⟶ X)\n    {c : (adicTowerInverseImage f).obj (rationalCoefficientSheaf l X E) ⟶\n      rationalCoefficientSheaf l Y E} (p : Pull l E f c)\n    (M : pbcModules X (rationalCoefficientSheaf l X E))\n    (hM : IsIso c ∨ M.IsFiniteLocallyFree) : IsIso (p.singleMap l E M)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-25"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-per-rational-pull-single-computation",
+  "worker": "U1",
+  "summary": "Strictly smaller supporting step extracted from the unchanged stratum pullback theorem. The complete proof in words is also in the declaration docstring.",
+  "blueprint": "Steps 1, 5 and 6: exact restriction and K-flat locally free singles.",
+  "tool_uses": [
+   {
+    "node": "lem-per-continuous-coefficient-slice-normalization",
+    "why": "Generic ambient ringed-topos or module-sheaf tool used only for this normalization/computation step, without replacing any unit route."
+   },
+   {
+    "node": "def-pc-kflat-complex",
+    "why": "Generic ambient ringed-topos or module-sheaf tool used only for this normalization/computation step, without replacing any unit route."
+   },
+   {
+    "node": "def-pc-flat-sheaf-modules",
+    "why": "Generic ambient ringed-topos or module-sheaf tool used only for this normalization/computation step, without replacing any unit route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b9c09",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261025T164433-L-1013788",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b9c09",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261025T164433-L-1013788",
+  "kind": "interface",
+  "note": "independent cc review: the 16 relocated data declarations against the old item module (identical); the item statement against the clone (unchanged); the four new sorry statements against the ContinuousRational, pbc and continuous-coefficient definitions (all true and smaller than the item); the item node diff (only proof, proof_deps, proof_origin, tool_uses and lean changed)"
+ }
+}

@@ -1,0 +1,142 @@
+{
+ "id": "def-trf-scheme-etale-line-comparison-data",
+ "kind": "definition",
+ "title": "Structure ring and canonical comparison data for etale line modules",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], with small etale site $X_{\\mathrm{et}}$ [def-weil-pbc-etale-site], in the universes of [def-weil-size-convention]. Put $\\mathcal O_{X_{\\mathrm{et}}}(u:U\\to X)=\\Gamma(U,\\mathcal O_U)$. For an ordinary invertible $\\mathcal O_X$-module $L$ [def-sc-invertible-module], let $A_X(L)=L_{\\mathrm{et}}$ be the associated sheaf [def-sc-etale-qcoherent-module], with its sectionwise $\\mathcal O_{X_{\\mathrm{et}}}$-module action; for a module morphism $h:L\\to K$, let $A_X(h)_u=\\Gamma(U,u^*h)$, where module pullback is [def-pc-module-pullback]. A line module on $X_{\\mathrm{et}}$ is a sheaf of $\\mathcal O_{X_{\\mathrm{et}}}$-modules [def-weil-sheaf-of-modules-category] which becomes isomorphic to $\\mathcal O_{X_{\\mathrm{et}}}$ on the localized sites of some jointly surjective etale family $U_a\\to X$.  The identity, unit and composition comparisons are the unit-normalized tensor-pullback comparisons [def-pc-module-pullback].",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 03DX (proposition-equivalence-quasi-coherent), part (2); Tag 05VG (lemma-equivalence-quasi-coherent-properties), finite local freeness, specialized to rank one; Tag 03LC (proposition-equivalence-quasi-coherent-functorial), part (1), for pullback compatibility. The equivalence is restricted to invertible modules."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-size-convention",
+  "def-sc-invertible-module",
+  "def-sc-etale-qcoherent-module",
+  "def-pc-module-pullback",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "A functor is an equivalence if it is full faithful and essentially surjective",
+   "results": [
+    "CategoryTheory.Functor.IsEquivalence.mk",
+    "CategoryTheory.Functor.asEquivalence"
+   ],
+   "date": "2026-10-26",
+   "verdict": "Mathlib supplies the categorical assembly; the specified tensor-section comparisons are project-specific."
+  },
+  {
+   "tool": "Loogle",
+   "query": "CategoryTheory.Functor.asEquivalence",
+   "results": [
+    "CategoryTheory.Functor.asEquivalence",
+    "CategoryTheory.Functor.asEquivalence_functor"
+   ],
+   "date": "2026-10-26",
+   "verdict": "Retains exactly the original functor in the resulting equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "isSheaf_comp_of_isSheaf; etaleExtension_free_presentations_hom; etale_line_frame_transition_units; etale_framed_line_effective_gluing",
+   "results": [
+    "Mathlib/CategoryTheory/Sites/Sheaf.lean",
+    "Sheaf/AlgebraicGeometry/EtaleExtensionFreePresentationsHom.lean",
+    "Sheaf/AlgebraicGeometry/EtaleLineFrameTransitionUnits.lean",
+    "Sheaf/AlgebraicGeometry/EtaleFramedLineEffectiveGluing.lean"
+   ],
+   "date": "2026-10-26",
+   "verdict": "The existing lemmas give the mathematical inputs; linear conjugation and frame transport supply the glue."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.TraceFormula.SchemeEtaleInvertibleComparison",
+  "date": "2026-10-26",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Structure ring and canonical comparison data for etale line modules in the rank-one comparison used for polarized scheme descent",
+   "via": [
+    "lem-trf-scheme-etale-invertible-comparison",
+    "lem-trf-algebraic-space-invertible-descent",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.TraceFormula.SchemeEtaleLineDefinitions",
+  "file": "lean/Sheaf/SixFunctors/TraceFormula/SchemeEtaleLineDefinitions.lean",
+  "declaration": "AlgebraicGeometry.Scheme.trfEtaleStructureRing",
+  "statement": "def trfEtaleStructureRing (X : Scheme.{u}) : Sheaf X.smallEtaleTopology RingCat.{u}",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-26",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.trfEtaleStructureRing_isSheaf",
+   "AlgebraicGeometry.Scheme.trfEtaleStructureRing",
+   "AlgebraicGeometry.Scheme.TrfInvertibleModules",
+   "AlgebraicGeometry.Scheme.TrfIsEtaleLine",
+   "AlgebraicGeometry.Scheme.TrfEtaleLineModules",
+   "AlgebraicGeometry.Scheme.trfInvertibleSections",
+   "AlgebraicGeometry.Scheme.trfEtaleCompose",
+   "AlgebraicGeometry.Scheme.trfTensorId",
+   "AlgebraicGeometry.Scheme.trfEtaleIdArrow",
+   "AlgebraicGeometry.Scheme.trfEtaleCompArrow",
+   "AlgebraicGeometry.Scheme.trfStructureInvertible",
+   "AlgebraicGeometry.Scheme.trfTensorUnit",
+   "AlgebraicGeometry.Scheme.trfLineSections",
+   "AlgebraicGeometry.Scheme.trfComparisonMap"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-9daea",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261026T082814-L-2225263",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-9daea",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261026T082814-L-2225263",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement + lean.statement vs clone (unchanged); moved defs vs original (verbatim, public re-export); FF/EssSurj Lean vs new nodes; adapted NormalizedComparisons (1 import line, cycle-forced) vs clone; §3b 7 importers OK"
+ }
+}

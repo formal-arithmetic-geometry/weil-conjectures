@@ -1,0 +1,238 @@
+{
+ "id": "lem-per-affinoid-residual-conormal-injective",
+ "kind": "statement",
+ "title": "Continuous conormal injectivity on residue fibres of a geometrically regular affinoid quotient",
+ "statement": "Let $K$ be a field complete for a nontrivial real-valued nonarchimedean absolute value. Let $r,s\\geq0$ and let $A=K\\langle x_1,\\ldots,x_r\\rangle$ be the ring of series $\\sum_\\nu a_\\nu x^\\nu$ such that for every $\\epsilon>0$ only finitely many coefficients satisfy $|a_\\nu|\\geq\\epsilon$. Fix $f_1,\\ldots,f_s\\in A$, put $I=(f_1,\\ldots,f_s)$ and $C=A/I$, and assume that for every isometric embedding $K\\hookrightarrow L$ into a complete real-valued nonarchimedean field the coefficient-extended quotient $L\\langle x_1,\\ldots,x_r\\rangle/(f_{1,L},\\ldots,f_{s,L})$ is regular Noetherian [def-weil-regular-scheme]. Let $\\mathfrak n\\subset A$ be any maximal ideal containing $I$; maximal means proper and maximal among proper ideals. Put $\\kappa=A/\\mathfrak n$, a field, and give $I/\\mathfrak n I$ its quotient $\\kappa$-vector space structure. For $g\\in I$, let $[g]$ denote its class in this quotient. Then the $\\kappa$-linear map\n$$d_{\\mathfrak n}: I/\\mathfrak n I\\longrightarrow\\kappa^{\\oplus r},\\qquad [g]\\longmapsto\\bigl(\\partial g/\\partial x_i\\bmod\\mathfrak n\\bigr)_{i=1}^r$$\nis injective. Here partial derivatives are termwise continuous derivatives of the restricted series. The assertion includes $r=0$, $s=0$, and the zero quotient (in the latter case there is no such maximal ideal).",
+ "source": {
+  "document": "https://math.huji.ac.il/~temkin/papers/Excellent_Desingularization.pdf",
+  "place": "Proposition 3.3.2 proof, printed pp.20--21, the continuous conormal criterion and the choice of independent defining equations at a maximal ideal; geometric regularity versus analytic smoothness for general complete nonarchimedean fields: Conrad, Irreducible components of rigid spaces, https://www.numdam.org/article/AIF_1999__49_2_473_0.pdf, section 3.3, printed pp.509--512. Agent-formulated residue-fibre version; neither analytic source is archived locally (WANTED)."
+ },
+ "stmt_deps": [
+  "def-weil-regular-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Termwise differentiation preserves restrictedness: $|n|\\leq1$ for every integer $n$ in a nonarchimedean field, so a differentiated coefficient has magnitude at most that of its originating coefficient. The finite coefficient formulas for Cauchy multiplication give Leibniz. If $h\\in\\mathfrak n I$, write $h=\\sum a_jg_j$ with $a_j\\in\\mathfrak n$ and $g_j\\in I\\subseteq\\mathfrak n$; then every $\\partial h/\\partial x_i$ lies in $\\mathfrak n$. The same product formula shows $d(ag)\\equiv a\\,dg\\pmod{\\mathfrak n}$ for $g\\in I$. Thus the displayed map is well defined and $\\kappa$-linear.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Excellent_Desingularization.pdf",
+    "place": "Proposition 3.3.2 proof: the continuous differential on the conormal module; explicit coefficient verification by the agent."
+   }
+  },
+  {
+   "text": "Apply [lem-per-tate-maximal-residue-evaluation] to $A$ and $\\mathfrak n$. Set $L=\\kappa=A/\\mathfrak n$ with its finite-extension absolute value, and $a_i=x_i\\bmod\\mathfrak n$. Then $K\\hookrightarrow L$ is isometric and $L$ is complete, including in the inseparable case. Set $B=L\\langle x_1,\\ldots,x_r\\rangle$ and let $\\varphi:A\\to B$ extend coefficients. Evaluation $B\\to L$ restricts on $A$ to the given quotient map. Its kernel $\\mathfrak q$ therefore satisfies $\\varphi^{-1}(\\mathfrak q)=\\mathfrak n$ and contains $IB$.",
+   "uses": [
+    "lem-per-tate-maximal-residue-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/aws.pdf",
+    "place": "Theorem 1.1.5(1), Exercise 1.1.4 and subsequent residue-evaluation discussion; finite residue extension reduction."
+   }
+  },
+  {
+   "text": "By [lem-per-tate-finite-scalar-extension], $\\varphi$ is flat. By [lem-per-tate-rational-local-coordinates], $R=B_{\\mathfrak q}$ is regular local, its maximal ideal is $\\mathfrak m=\\mathfrak qR$, its residue field is $L$, and the derivative coordinates give $\\theta:\\mathfrak m/\\mathfrak m^2\\simeq L^r$. Put $J=(IB)R\\subseteq\\mathfrak m$. The hypothesis of the item applied to this particular $L$ says $B/IB$ is regular Noetherian. By [lem-weil-pbc-localization-at-prime-of-quotient], $R/J\\simeq(B/IB)_{\\mathfrak q/IB}$, which is regular local by [def-weil-regular-scheme].",
+   "uses": [
+    "lem-per-tate-finite-scalar-extension",
+    "lem-per-tate-rational-local-coordinates",
+    "lem-weil-pbc-localization-at-prime-of-quotient",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/aws.pdf",
+    "place": "Theorem 1.1.5(1), Exercise 1.2.8(4); ordinary localization of the geometrically regular quotient."
+   }
+  },
+  {
+   "text": "Use the affine assertion of [lem-weil-pbc-closed-immersion-conormal-flat-base-change] first for the flat map $A\\to B$, then for $B\\to R$, flat by [lem-weil-pbc-localization-flat]. It gives $(I/I^2)\\otimes_A B\\simeq IB/(IB)^2$ and $(IB/(IB)^2)\\otimes_B R\\simeq J/J^2$, both carrying an equation to its image. Tensor these isomorphisms with the residue field $L$. Balancing pure tensors [def-weil-pbc-module-tensor-product] gives $(I/I^2)\\otimes_A L\\simeq(J/J^2)\\otimes_R L$. Since $A\\to L$ has kernel $\\mathfrak n$ and $R\\to L$ has kernel $\\mathfrak m$, these modules are $I/\\mathfrak n I$ and $J/\\mathfrak m J$: the maps are $[g]\\otimes\\lambda\\mapsto[ag]$, for any lift $a$ of $\\lambda$, with inverse $[g]\\mapsto[g]\\otimes1$ (and similarly over $R$). Lift independence follows from $\\mathfrak n I$ or $\\mathfrak m J$; $I^2\\subseteq\\mathfrak n I$ and $J^2\\subseteq\\mathfrak m J$. We obtain an $L$-linear isomorphism $\\alpha:I/\\mathfrak n I\\simeq J/\\mathfrak m J$, $[g]\\mapsto[\\varphi(g)/1]$. The scalar action on the source is the original $\\kappa=L$ action, not a new tensor extension of that field.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-conormal-flat-base-change",
+    "lem-weil-pbc-localization-flat",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0473, lemma-conormal-functorial-flat, affine proof; the residue quotient formulas are written out here."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-regular-local-quotient-independent-generators] to the regular local ring $R$, the ideal $J\\subseteq\\mathfrak m$, and its regular local quotient $R/J$. It supplies finitely many $u_1,\\ldots,u_c\\in J$ generating $J$ whose classes are linearly independent in $\\mathfrak m/\\mathfrak m^2$ over $L$.",
+   "uses": [
+    "lem-weil-pbc-regular-local-quotient-independent-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NR, lemma-regular-quotient-regular, independent kernel generators."
+   }
+  },
+  {
+   "text": "The inclusion $J\\subseteq\\mathfrak m$ induces $\\beta:J/\\mathfrak m J\\to\\mathfrak m/\\mathfrak m^2$. If $z=\\sum_{j=1}^c b_ju_j\\in J$ represents a kernel element, then $0=[z]=\\sum_j\\bar b_j[u_j]$ in $\\mathfrak m/\\mathfrak m^2$. The independence obtained in Step 5 forces every $b_j\\in\\mathfrak m$, so $z\\in\\mathfrak m J$. Thus $\\beta$ is injective. This argument also applies when $c=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NR independent generators; elementary linear combination argument from Step 5."
+   }
+  },
+  {
+   "text": "For each $g\\in I$, [lem-per-tate-rational-local-coordinates] gives $(\\theta\\beta\\alpha)([g])=((\\partial\\varphi(g)/\\partial x_i)(a))_i$. Coefficient extension commutes with termwise derivatives, and evaluation at $a$ restricts to reduction modulo $\\mathfrak n$ by Step 2. Hence this vector is exactly $d_{\\mathfrak n}([g])$. Thus $d_{\\mathfrak n}=\\theta\\beta\\alpha$ is injective. If $r=0$ the rational local ring is $L$ and $J=0$; if $s=0$ then $I=0$; if $C=0$ there is no maximal ideal containing $I=A$.",
+   "uses": [
+    "lem-per-tate-rational-local-coordinates"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Excellent_Desingularization.pdf",
+    "place": "Proposition 3.3.2 proof, continuous differential formula; residue-fibre factorization supplied by Steps 2–6."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-regular-scheme",
+  "lem-per-tate-finite-scalar-extension",
+  "lem-per-tate-maximal-residue-evaluation",
+  "lem-per-tate-rational-local-coordinates",
+  "lem-weil-pbc-closed-immersion-conormal-flat-base-change",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-regular-local-quotient-independent-generators"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/aws.pdf",
+  "place": "Finite residue-extension reduction and first-order local-coordinate argument, using Conrad §1.1, Exercise 1.2.8(4), Exercise 2.2.3(3), and Stacks Tags 0473 and 00NR. Analytic references read online but not archived locally; archival copies WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "TateAlgebra|RestrictedPowerSeries|affinoid|continuous.*conormal",
+   "results": "{\"t\": \"2026-10-24T05:36:16Z\", \"tool\": \"grep\", \"query\": \"TateAlgebra|RestrictedPowerSeries|affinoid|continuous.*conormal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern algebraic formal smoothness and algebraic Kahler differentials, not continuous derivatives of Tate series or geometric regularity under completed field extension"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cotangentComplex\", \"residueField\"",
+   "results": "{\"t\": \"2026-10-24T05:36:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"cotangentComplex\\\", \\\"residueField\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\"], \"digest\": \"6a6fba0800cdb1a1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern algebraic formal smoothness and algebraic Kahler differentials, not continuous derivatives of Tate series or geometric regularity under completed field extension"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric regularity of a Tate algebra quotient implies injectivity of the continuous conormal differential on every residue fibre",
+   "results": "{\"t\": \"2026-10-24T05:36:17Z\", \"tool\": \"leansearch\", \"query\": \"Geometric regularity of a Tate algebra quotient implies injectivity of the continuous conormal differential on every residue fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"Ideal.injective_algebraMap_quotient_residueField\", \"Algebra.SubmersivePresentation.cotangentComplex_injective\", \"Algebra.Extension.h1Cotangentι_injective\", \"Algebra.FormallySmooth.kerCotangentToTensor_injective_iff\", \"Algebra.Extension.Cotangent\", \"Algebra.Extension.formallySmooth_iff_split_injection\"], \"digest\": \"d84d153a101f2f50\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern algebraic formal smoothness and algebraic Kahler differentials, not continuous derivatives of Tate series or geometric regularity under completed field extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a geometrically regular quotient C of a Tate algebra A over a complete nonarchimedean field and maximal m in C, the continuous differential map from (I/I squared) tensor C/m to (C/m) to the power r is injective",
+   "results": "{\"t\": \"2026-10-24T05:36:18Z\", \"tool\": \"leanfinder\", \"query\": \"For a geometrically regular quotient C of a Tate algebra A over a complete nonarchimedean field and maximal m in C, the continuous differential map from (I/I squared) tensor C/m to (C/m) to the power r is injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.cotangentComplexAux_injective\", \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"Algebra.SubmersivePresentation.cotangentComplex_injective\", \"Algebra.Extension.h1Cotangentι_injective\", \"Algebra.FormallyUnramified.comp_injective\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"Algebra.Generators.CotangentSpace.map_toComp_injective\", \"Algebra.FormallySmooth.kerCotangentToTensor_injective_iff\"], \"digest\": \"e0297962d5f61a0a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern algebraic formal smoothness and algebraic Kahler differentials, not continuous derivatives of Tate series or geometric regularity under completed field extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The analytic cotangent criterion for smoothness says the residue conormal map of a geometrically regular affinoid algebra is injective",
+   "results": "{\"t\": \"2026-10-24T05:36:19Z\", \"tool\": \"leanfinder\", \"query\": \"The analytic cotangent criterion for smoothness says the residue conormal map of a geometrically regular affinoid algebra is injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"Algebra.Smooth\", \"RingHom.IsStandardSmooth.smooth\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"Algebra.smoothLocus_eq_compl_support_inter\", \"Algebra.instSmoothOfIsStandardSmooth\", \"Algebra.IsSmoothAt\"], \"digest\": \"27e031356f1186d1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern algebraic formal smoothness and algebraic Kahler differentials, not continuous derivatives of Tate series or geometric regularity under completed field extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric regularity of a Tate algebra quotient implies injectivity of the continuous conormal differential on every residue fibre",
+   "results": "{\"t\": \"2026-10-24T07:02:44Z\", \"tool\": \"leanfinder\", \"query\": \"Geometric regularity of a Tate algebra quotient implies injectivity of the continuous conormal differential on every residue fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.cotangentComplexAux_injective\", \"Algebra.SubmersivePresentation.cotangentComplex_injective\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"Algebra.Extension.h1Cotangentι_injective\", \"Algebra.Generators.CotangentSpace.map_toComp_injective\", \"Ideal.injective_algebraMap_quotient_residueField\"], \"digest\": \"995060731e4425df\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic cotangent criteria and restrictedness definitions do not assert the continuous Tate residue-fibre theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A regular quotient of a restricted power series ring has an injective Jacobian differential on the relation space at a closed point",
+   "results": "{\"t\": \"2026-10-24T07:03:27Z\", \"tool\": \"leanfinder\", \"query\": \"A regular quotient of a restricted power series ring has an injective Jacobian differential on the relation space at a closed point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.cotangentComplexAux_injective\", \"Algebra.SubmersivePresentation.cotangentComplex_injective\", \"Algebra.PreSubmersivePresentation.isUnit_jacobian_of_cotangentRestrict_bijective\", \"Algebra.SubmersivePresentation.isStandardSmooth\", \"StandardEtalePair.instEtaleRing\", \"StandardEtalePresentation.toSubmersivePresentation\", \"Algebra.IsStandardSmooth\", \"Algebra.PreSubmersivePresentation.isUnit_jacobian_iff_aevalDifferential_bijective\"], \"digest\": \"28a10f5cdeed5f66\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic cotangent criteria and restrictedness definitions do not assert the continuous Tate residue-fibre theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "IsRestricted|restricted.*(tensor|finite|regular|maximal)|residueFieldOfPowerSeries",
+   "results": "{\"t\": \"2026-10-24T07:06:04Z\", \"tool\": \"grep\", \"query\": \"IsRestricted|restricted.*(tensor|finite|regular|maximal)|residueFieldOfPowerSeries\", \"sub\": \"RingTheory/PowerSeries\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/PowerSeries/Restricted.lean\", \"Mathlib/RingTheory/PowerSeries/Restricted.lean\", \"Mathlib/RingTheory/PowerSeries/Restricted.lean\", \"Mathlib/RingTheory/PowerSeries/Restricted.lean\", \"Mathlib/RingTheory/PowerSeries/Restricted.lean\", \"Mathlib/RingTheory/PowerSeries/Inverse.lean\", \"Mathlib/RingTheory/PowerSeries/Inverse.lean\"], \"digest\": \"afdc74bddcbd311c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic cotangent criteria and restrictedness definitions do not assert the continuous Tate residue-fibre theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-geometric-affinoid-jacobian-unit",
+  "date": "2026-10-24",
+  "group": "Q14"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proposition 3.3.2, printed pp.20--21: affinoid Jacobian criterion and the formula for the Jacobian ideal immediately preceding the proposition; apply the smoothness criterion to the geometric-regularity hypothesis. Supporting the inherited formal-algebraization branch of ancestor Step 3 through lem-per-regular-generic-continuous-jacobian; the latest ancestor has no separate formal-algebraization sentence. Specifically: the continuous conormal criterion in Temkin Proposition 3.3.2 used to select independent equations at a closed point.",
+   "via": [
+    "lem-per-geometric-affinoid-jacobian-unit",
+    "lem-per-regular-generic-continuous-jacobian",
+    "lem-per-rig-principal-formal-algebraization",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-affinoid-residual-conormal-injective",
+  "worker": "stage1",
+  "summary": "Kept the statement and all edge cases. Reduced to the finite residue extension, constructed the residue conormal identification by two flat base changes, and used existing independent generators of a regular local quotient. Added only three analytic prerequisites, with recorded Mathlib searches; no SGA, no Lean writing or compilation.",
+  "blueprint": "Inherited formal-algebraization branch supporting ancestor Step 3, via lem-per-regular-generic-continuous-jacobian and lem-per-geometric-affinoid-jacobian-unit: the residue-fibre continuous conormal criterion in the proof of Temkin Proposition 3.3.2, printed pp.20–21. The latest blueprint ancestor Step 3 discusses duality, without a separate formal-algebraization sentence. Steps 1 and 7 identify the continuous differential; Steps 2–4 perform the finite residue-extension reduction; Steps 5–6 supply conormal injectivity from regular local algebra."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q159-d70c920f4",
+  "group": "Q159",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q159-d70c920f4 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes and every cited statement in full; review.md has the details. This is a first split (no prior run, no re-split note), and the item statement is unchanged. Step 1 (well-definedness via |n|<=1, Leibniz and the nI computation) is elementary and correct. Step 2: lem-per-tate-maximal-residue-evaluation gives kappa finite and complete, |a_i|<=1 and h mod n = sum c_nu a^nu, so ev_a∘phi is the quotient map, phi^{-1}(q)=n and IB⊆q. Step 3: the finite-scalar-extension node gives phi flat, and the rational-local-coordinates node (F=L) gives R regular local, m=qR, residue L and theta. The item hypothesis is used only at L=kappa. localization-at-prime-of-quotient plus def-weil-regular-scheme give R/J regular local. Step 4: the affine clause of the Lean-closed closed-immersion-conormal-flat-base-change is applied twice (A->B, then B->R, flat by localization-flat). Since A->B->R->L is A->A/n, the tensors are I/nI and J/mJ, and alpha[g]=[phi(g)/1]. Step 5: the Lean-closed regular-local-quotient-independent-generators gets every hypothesis (R regular local, J⊆m, R/J regular local). Step 6 (beta injective by independence) is elementary. Step 7: d_n = theta beta alpha; the edge cases r=0, s=0 and C=0 are checked. New nodes are true statements tested on small cases: Q_p(sqrt p)/Q_p with n=(x^2-p) and a=sqrt p; (1-px) is a unit; L=K; r=0; a=1 gives a DVR with theta = h'(1)/u(1). They are statement-only and self-contained, cite their definitions, and each is strictly smaller than the item, so there is no D1. Their source is Conrad's AWS notes, online only (WANTED), which matches sibling practice in this chapter; I checked the content (Tate Nullstellensatz, regularity of T_r, finite scalar extension) by direct argument. Duplicate search: rg -L over dag/nodes (30 Tate/affinoid hits, all candidates read: trf closed-point comparison, Gauss completion, Weierstrass, spectral norm, perfect-affinoid chart, certificate-regular, regular-affinoid field extension) found none; the blueprint main-20261015 has no affinoid/Tate hits, and Mathlib Restricted.lean has only restrictedness. Off-unit tools are Mathlib leaves or slopmaster2-closed. No SGA, no cycle, proof_deps = union of uses. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.AffinoidResidualConormalInjective",
+  "declaration": "RestrictedSeries.affinoid_residual_conormal_injective",
+  "file": "lean/Sheaf/RingTheory/AffinoidResidualConormalInjective.lean",
+  "statement": "theorem affinoid_residual_conormal_injective (K : Type u) [NontriviallyNormedField K] [IsUltrametricDist K] [CompleteSpace K] (r s : ℕ) (f : Fin s → ↥(IsRestricted.subring (R := K) (1 : Fin r → ℝ))) (I : Ideal ↥(IsRestricted.subring (R := K) (1 : Fin r → ℝ))) (hI : I = Ideal.span (Set.range f)) (hgeom : ∀ (L : Type (max u v)) [NormedField L] [IsUltrametricDist L] [CompleteSpace L] (φ : K →+* L), Isometry φ → IsRegularRing (↥(IsRestricted.subring (R := L) (1 : Fin r → ℝ)) ⧸ Ideal.span {g : ↥(IsRestricted.subring (R := L) (1 : Fin r → ℝ)) | ∃ j : Fin s, g.val = MvPowerSeries.map φ (f j).val})) (n : Ideal ↥(IsRestricted.subring (R := K) (1 : Fin r → ℝ))) [n.IsMaximal] (hIn : I ≤ n) : ∃ d : (I ⧸ (n • ⊤ : Submodule ↥(IsRestricted.subring (R := K) (1 : Fin r → ℝ)) I)) →ₗ[ ↥(IsRestricted.subring (R := K) (1 : Fin r → ℝ)) ⧸ n] (Fin r → ↥(IsRestricted.subring (R := K) (1 : Fin r → ℝ)) ⧸ n), (∀ (g : I) (i : Fin r), ∃ dg : ↥(IsRestricted.subring (R := K) (1 : Fin r → ℝ)), dg.val = MvPowerSeries.pderiv K i g.val.val ∧ d (Submodule.Quotient.mk g) i = Ideal.Quotient.mk n dg) ∧ Function.Injective d",
+  "branch": "sheaf-dag",
+  "by": "Q93",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The canonical linear map is specified existentially by its values on all quotient representatives, which determine it uniquely. The coefficient-extended equation ideal is the span of the restricted series whose underlying series are the actual coefficient images. All rings, quotient modules, scalar actions and derivatives are existing Mathlib constructions; no auxiliary notion or definition is introduced. The ring clause of def-weil-regular-scheme is its unchanged mathlib_match IsRegularRing, including Noetherianity."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6907404f6",
+  "group": "Q93",
+  "result": "pass",
+  "note": "Node unchanged except lean (diffed against side-live). Lean matches every clause: K NontriviallyNormedField+ultrametric+complete; A = IsRestricted.subring at radius 1 (exactly the node's eps-finiteness condition); I = span(range f); hgeom ranges over all complete ultrametric L in Type (max u v) with isometric φ and the real MvPowerSeries.map coefficient extension, concluding IsRegularRing (Noetherian included, the stmt_dep's mathlib_match ring clause). One universe is weaker than the node's 'every L' and contains a lift of the residue field, so there is no silent restriction. n maximal with I ≤ n; source I ⧸ n•⊤ with Mathlib's canonical (A⧸n)-module; target Fin r → A⧸n; d is fixed on every representative by termwise pderiv, so it is the canonical map (not arbitrary), plus injectivity. Edge cases r=0, s=0, zero quotient and char p are covered. No H4 duplicate (Sheaf restricted-series modules reuse the same subring; no Tate def node). No definitions; proof is sorry; docstrings carry source place, blueprint tag and all proof steps; lean.statement verbatim; stmt_deps complete; report has Worker report and Second reading by Q93. No findings."
+ }
+}

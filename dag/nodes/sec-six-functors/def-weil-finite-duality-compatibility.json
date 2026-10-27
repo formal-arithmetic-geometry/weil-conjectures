@@ -1,0 +1,117 @@
+{
+ "id": "def-weil-finite-duality-compatibility",
+ "kind": "definition",
+ "title": "Evaluation and biduality compatibility for fixed site-duality comparisons",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $C$ be a Grothendieck abelian closed symmetric monoidal coefficient category with additive tensor product and functorial flat resolutions. For a scheme $X$, use the ordinary etale and pro-etale derived categories [def-weil-pbc-derived-categories, def-weil-pbc-proetale-modules], and suppose comparison inverse image preserves flat objects. Write $F=\\nu_X^*$ for exact derived comparison [def-sf-comparison-derived-pullback], with canonical tensor comparison $c_{U,V}:F(U\\otimes^LV)\\cong FU\\otimes^LFV$ and evaluation-defined internal-Hom comparison $a_{K,W}:FR\\mathcal Hom(K,W)\\to R\\mathcal Hom(FK,FW)$ [def-sf-evaluation-hom-site-comparison]. Fix objects $W$ and $W'$ on the two sites and an isomorphism $w:FW\\cong W'$. Put $D=R\\mathcal Hom(-,W)$ and $D'=R\\mathcal Hom(-,W')$ [def-pur-derived-internal-hom]. Fix normalized ambient duality pairings on both sites, so evaluation is the canonical tensor-Hom counit with the signed symmetry and $\\delta$ is its double-dual transpose [lem-weil-duality-pairing].\n\nFor any etale derived object $K$, define finite-duality compatibility to mean that there exist isomorphisms $\\chi_K:FDK\\cong D'FK$ and $\\chi_{DK}:FDDK\\cong D'FDK$ whose homs are, respectively, $R\\mathcal Hom(FK,w)\\circ a_{K,W}$ and $R\\mathcal Hom(FDK,w)\\circ a_{DK,W}$, and which satisfy both\n$${\\rm ev}'_{FK}\\circ(\\chi_K\\otimes1)=w\\circ F({\\rm ev}_K)\\circ c_{DK,K}^{-1},$$\n$$D'(\\chi_K^{-1})\\circ\\chi_{DK}\\circ F(\\delta_K)=\\delta'_{FK}.$$\nThe first equation has source $FDK\\otimes^LFK$; the second has source $FK$ and target $D'D'FK$. This is a compatibility predicate with normalized comparison arrows. It imposes no constructibility or Tor hypothesis, and makes no assertion that it holds for all $K$.",
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-modules",
+  "def-sf-comparison-derived-pullback",
+  "def-sf-evaluation-hom-site-comparison",
+  "def-pur-derived-internal-hom",
+  "lem-weil-duality-pairing"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-weil-boundary-duality-discharge.proof.md",
+  "place": "Second paragraph: restriction of evaluation through tensor-Hom and exceptional adjunction, and its double-dual compatibility; ordinary-to-pro-etale realization."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Comparison pullback preserves evaluation and double dual transposes with fixed dualizing objects",
+   "results": "8 hits: CategoryTheory.Limits.pullbackComparison; LinearEquiv.trans_dualMap_symm_flip; CategoryTheory.Limits.pullbackComparison_comp_fst; Module.Dual.eval_naturality; CategoryTheory.Limits.pullbackComparison_comp_fst_assoc; Module.Dual.eval; CategoryTheory.Limits.instIsIsoPullbackComparison; CategoryTheory.expComparison_ev",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match. Reuse the existing project definition without copying its data."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Comparison pullback identifies evaluation internal Hom and biduality maps between etale and proetale derived categories",
+   "results": "8 hits: LightCondensed.ihomPoints_symm_comp; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullbackObjUnitToUnit; CategoryTheory.ExponentiableMorphism.ev_coev; SheafOfModules.pullbackObjFreeIso; SheafOfModules.freeFunctorCompPullbackIso; SheafOfModules.pullbackIso",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match. Reuse the existing project definition without copying its data."
+  },
+  {
+   "tool": "grep",
+   "query": "ProjectionComparison|FiniteDualityCompatibility|boundaryDualizingEtaleIso in Mathlib, lean/WeilConjectures, lean/Sheaf and dag/nodes; blueprint_refs.py search projection comparison / duality compatibility",
+   "results": "msearch grep: 0 Mathlib hits. Exact definition at lean/Sheaf/SixFunctors/FiniteDualitySiteComparison.lean:167-202. No exact upstream declaration. DAG definition-record scan finds no owner; lem-weil-finite-duality-site-comparison is the theorem attachment. Blueprint search duality compatibility: zero; generic evaluation and linear duality hits do not define this site comparison predicate.",
+   "date": "2026-10-24",
+   "verdict": "The exact project definition is attached only to a theorem node; add an existing:true definition attachment, not a second definition."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-boundary-finite-site-realization",
+  "date": "2026-10-24",
+  "group": "Q48"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-weil-boundary-duality-discharge",
+   "place": "Second paragraph: restriction of evaluation through tensor-Hom and exceptional adjunction, and its double-dual compatibility; ordinary-to-pro-etale realization.",
+   "via": [
+    "lem-weil-boundary-finite-site-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.SixFunctors.FiniteDualitySiteComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteDualityCompatibility",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FiniteDualityCompatibility"
+  ],
+  "statement": "noncomputable def FiniteDualityCompatibility\n    (A : Type (u + 2)) [Category.{u + 1} A] [Abelian A]\n    [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A]\n    [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]\n    [Abelian.HasFunctorialFlatResolution A]\n    (X : Scheme.{u}) [(comparisonUpperStar A X).PreservesFlat]\n    (W : DerivedCategory (Sheaf X.smallEtaleTopology A))\n    (W' : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))\n    (ω : (comparisonUpperStar A X).mapDerivedCategory.obj W ≅ W')\n    (hEt : Etale.AmbientDualityPairing A X W)\n    (hPro : AmbientDualityPairing A X W')\n    (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q48",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition-only attachment requested by the independent return of immutable head 6aea078378b6. The declaration remains in its published module; no construction or theorem is copied or redefined."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d2863f38f",
+  "group": "Q48",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d2863f38f",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Re-delivery of a6f095b71d2e (passed review, refused at landing because it carried def-weil-boundary-composition-mate, which Q54 had landed). This head drops that node file and cites the landed node, whose declarations include boundaryDualizingEtaleIso/ProIso/ComparisonIso. cmp against a6f0: the Lean module and all three node jsons are byte-identical; the report changes only in its repair and provenance paragraphs. Item statement, proof and proof_deps are unchanged; +7 stmt_deps, all existing; the new existing:true nodes def-weil-boundary-projection-comparison-data and def-weil-finite-duality-compatibility are not present on live or side-live, and no other def node owns these declarations. Spot checks: hypotheses add nothing beyond the node; EtaleHypotheses matches the node; BasicConclusion and EvaluationConclusion clauses complete; AmbientDualityPairing is a Prop with b, e and delta uniquely pinned, so the existentials hide no free data; theta, chi and q^p are pinned; alpha and beta have the node's factor order; edge cases empty Z/T, i=id, n=1. Gates OK. No file changed, no compile run."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-4f7d0",
+  "group": "E9",
+  "result": "fix",
+  "landing": "20261026T001410-L-4189220",
+  "kind": "interface",
+  "note": "independent cc review: 4f7d Lean+node byte-identical to eb28 (reviewed FIX); change record lost eb28's FiniteConstructibleHom user row; reader gate re-run on current build: item + adapted FiniteStageVerdierBiduality + 18 direct importers + BoundaryFiniteSiteData all compiled; removed unit-route imports are def nodes of other units, not in item unit realized",
+  "sorry_before": [
+   "WeilConjectures.finite_duality_site_comparison"
+  ],
+  "sorry_after": []
+ }
+}

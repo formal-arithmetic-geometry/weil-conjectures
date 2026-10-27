@@ -1,0 +1,252 @@
+{
+ "id": "lem-trf-depth-fitting-quadratic-lci",
+ "kind": "statement",
+ "title": "Depth and first Fitting ideal give a quadratic completion and LCI neighbourhood",
+ "statement": "Let $k$ be a field, $S$ a finitely generated $k$-algebra [def-weil-pbc-finite-type-algebra], $\\mathfrak p\\subset S$ a maximal ideal, $A=S_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime], $\\mathfrak m=\\mathfrak pA$, and $F=S/\\mathfrak p$. Assume $F/k$ is finite separable [def-weil-pbc-separable-algebraic-extension], $\\operatorname{depth}A=1$ [def-weil-pbc-depth], and $\\operatorname{Fit}_1(\\Omega_{S/k})A=\\mathfrak m$, using Kähler differentials [def-weil-pbc-kahler-differentials] and the index-$1$ presentation-minor ideal [lem-trf-fitting-ideal-independence-base-change]. Then there exist a $k$-algebra section $\\sigma:F\\to\\widehat A$ of the residue map, $a,b,c\\in F$ with $b^2-4ac\\ne0$, and a continuous isomorphism of complete local $F$-algebras $\\widehat A\\cong F[[u,v]]/(au^2+buv+cv^2)$ inducing the identity on $F$, where $\\widehat A$ is the $\\mathfrak m$-adic completion [def-weil-pbc-adic-completion], $F$ acts through $\\sigma$, and power series have the variable-ideal-adic topology [def-weil-pbc-multivariate-power-series]. Moreover, some $g\\in S\\setminus\\mathfrak p$ has $S_g$ a local complete intersection over $k$ [def-weil-ring-localization-away, def-weil-pbc-complete-intersection-over-field].",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tags 0C4D (lemma-nodal), equivalence (5) and (2), 0C4C (lemma-fitting-ideal), 0C49 (lemma-nodal-algebraic), and 0C4E (lemma-nodal-lci), final complete-intersection paragraph."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-kahler-differentials",
+  "lem-trf-fitting-ideal-independence-base-change",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-complete-intersection-over-field"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-separable-closed-point-formal-presentation] to the given finite type algebra and maximal ideal with finite separable residue field. Put $R=\\widehat A$ and $\\mathfrak m_R=\\mathfrak mR$. It gives Noetherian local rings $A,R$, residue field $F$, a $k$-algebra residue section $\\sigma:F\\to R$, and a continuous surjection $T=F[[t_1,\\ldots,t_n]]\\twoheadrightarrow R$ with $n\\ge2$ and kernel $I=(f_1,\\ldots,f_s)\\subseteq(t_1,\\ldots,t_n)$. Its Jacobian cokernel presents $\\Omega_{A/k}\\otimes_AR$. Fix this section and presentation throughout.",
+   "uses": [
+    "lem-trf-separable-closed-point-formal-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C52 (lemma-complete-local-ring-structure-as-algebra); completed Jacobian comparison as in curves.tex, Tag 0C4D (lemma-nodal)."
+   }
+  },
+  {
+   "text": "Choose finite algebra generators $s_i$ of $S$ [def-weil-pbc-finite-type-algebra]. Additivity and the Leibniz rule in [def-weil-pbc-kahler-differentials] express every $\\mathrm dP(s_i)$ as an $S$-linear combination of the $\\mathrm ds_i$, so $\\Omega_{S/k}$ is finite. By [lem-weil-pbc-kahler-differentials-localization], its localization is $\\Omega_{A/k}$, with $\\mathrm d(s/t)=t^{-1}\\mathrm ds-st^{-2}\\mathrm dt$. Apply [lem-trf-fitting-ideal-independence-base-change](2) first to $S\\to A$ and then to $A\\to R$. The hypothesis therefore gives $\\operatorname{Fit}_1(\\Omega_{A/k}\\otimes_AR)=\\mathfrak mR=\\mathfrak m_R$. In the presentation of step 1 this is precisely the ideal $J$ of $(n-1)$-minors of $(\\partial f_j/\\partial t_i)$: the relation module is spanned by its rows, and multilinearity expands any minor of relation rows into a linear combination of the generator-row minors. Thus $J=\\mathfrak m_R$.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-pbc-kahler-differentials",
+    "lem-weil-pbc-kahler-differentials-localization",
+    "lem-trf-fitting-ideal-independence-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4D (lemma-nodal), Jacobian presentation and first Fitting ideal; algebra.tex Tag 00RT (lemma-differentials-localize), part (2); more-algebra.tex Tags 07Z8 and 07ZA, part (3)."
+   }
+  },
+  {
+   "text": "The completion map $A\\to R$ is flat by [lem-weil-pbc-local-completion-faithfully-flat] and local because $\\mathfrak mR=\\mathfrak m_R$. Both rings are Noetherian by step 1, so [lem-weil-pbc-flat-local-depth-formula] applies. Its closed fibre is $R/\\mathfrak mR=F$. This field has depth zero: its maximal ideal is zero, and multiplication by zero on the nonzero module $F$ is not injective, so only the empty regular sequence contributes in [def-weil-pbc-depth]. Consequently $\\operatorname{depth}R=\\operatorname{depth}A+0=1$.",
+   "uses": [
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "lem-weil-pbc-flat-local-depth-formula",
+    "def-weil-pbc-depth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07NW (lemma-completion-depth), proved using algebra.tex Tag 0337 (lemma-apply-grothendieck); flatness is algebra.tex Tag 00MC."
+   }
+  },
+  {
+   "text": "For $R=T/I$, steps 2 and 3 verify condition (a) of [lem-trf-formal-jacobian-quadratic-criterion], with $F$ a field, $n\\ge2$, and $I$ in the variable ideal as required. Condition (b) supplies $a,b,c\\in F$ with $b^2-4ac\\ne0$ and a continuous isomorphism of complete local $F$-algebras $R\\cong F[[u,v]]/(Q)$, $Q=au^2+buv+cv^2$. The $F$-structure on $R$ is the fixed $\\sigma$ from step 1; $F$-linearity makes the residue map of this isomorphism the identity on $F$. This proves the quadratic-completion assertion with its required normalization.",
+   "uses": [
+    "lem-trf-formal-jacobian-quadratic-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4C (lemma-fitting-ideal), implication (3) to (1); Tag 0C49 (lemma-nodal-algebraic), implication (2) to (3)."
+   }
+  },
+  {
+   "text": "The discriminant inequality implies that $a,b,c$ are not all zero, hence $Q\\ne0$ by its coefficients. By [lem-weil-pbc-power-series-domain], $F[[u,v]]$ is a domain, so multiplication by $Q$ is injective. Also $Q\\in(u,v)^2$, and evaluation at $u=v=0$ induces a surjection $F[[u,v]]/(Q)\\twoheadrightarrow F$, so this quotient is nonzero. Thus $(Q)$ is a regular sequence of length one in $(u,v)$ by [def-weil-pbc-regular-sequence]. The isomorphism of step 4 verifies condition (2) of [lem-trf-completion-local-complete-intersection] with $r=2,c=1$. Its condition (1) gives $g\\in S\\setminus\\mathfrak p$ with $S_g$ a local complete intersection over $k$, as required.",
+   "uses": [
+    "lem-weil-pbc-power-series-domain",
+    "def-weil-pbc-regular-sequence",
+    "lem-trf-completion-local-complete-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4E (lemma-nodal-lci), final paragraph, using dpa.tex Tag 09Q6 (lemma-check-lci-agrees) and algebra.tex Tag 00SG (lemma-lci-at-prime)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-separable-closed-point-formal-presentation",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-kahler-differentials-localization",
+  "lem-trf-fitting-ideal-independence-base-change",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-flat-local-depth-formula",
+  "def-weil-pbc-depth",
+  "lem-trf-formal-jacobian-quadratic-criterion",
+  "lem-weil-pbc-power-series-domain",
+  "def-weil-pbc-regular-sequence",
+  "lem-trf-completion-local-complete-intersection"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tags 0C4C (lemma-fitting-ideal), 0C49 (lemma-nodal-algebraic), 0C4D (lemma-nodal), and 0C4E (lemma-nodal-lci), final paragraph; the finite separable coefficient-field presentation follows varieties.tex Tag 0C52, and depth preservation is more-algebra.tex Tag 07NW via algebra.tex Tag 0337."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite type local algebra with separable residue field depth one and maximal first Fitting ideal has nondegenerate quadratic completion and local complete intersection neighborhood",
+   "results": "{\"t\": \"2026-10-22T06:10:44Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type local algebra with separable residue field depth one and maximal first Fitting ideal has nondegenerate quadratic completion and local complete intersection neighborhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.finrank_cotangentSpace_eq_zero_iff\", \"Algebra.IsSmoothAt\", \"IsLocalRing.finrank_cotangentSpace_le_one_iff\", \"IsLocalRing.subsingleton_cotangentSpace_iff\", \"Algebra.Etale\", \"IsLocalRing.finrank_CotangentSpace_eq_one_iff\", \"Algebra.IsStandardSmooth\", \"Algebra.IsEtaleAt\"], \"digest\": \"b74ceba4d187956c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned statements; they do not give this local singularity assertion or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, KaehlerDifferential",
+   "results": "{\"t\": \"2026-10-22T06:10:44Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries, KaehlerDifferential\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned statements; they do not give this local singularity assertion or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "Fitting|fittingIdeal|quadratic.*completion|completion.*quadratic",
+   "results": "{\"t\": \"2026-10-22T06:10:44Z\", \"tool\": \"grep\", \"query\": \"Fitting|fittingIdeal|quadratic.*completion|completion.*quadratic\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Artinian/Module.lean\", \"Mathlib/RingTheory/Artinian/Module.lean\"], \"digest\": \"39ce9b936c9e89e8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned statements; they do not give this local singularity assertion or a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Jacobian minors generate the maximal ideal of a depth one completed local ring implies a nondegenerate binary quadratic hypersurface",
+   "results": "{\"t\": \"2026-10-22T06:10:44Z\", \"tool\": \"leansearch\", \"query\": \"Jacobian minors generate the maximal ideal of a depth one completed local ring implies a nondegenerate binary quadratic hypersurface\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Depth one and the maximal first Fitting ideal characterize a quadratic formal hypersurface and yield a local complete intersection open",
+   "results": "{\"t\": \"2026-10-22T06:11:01Z\", \"tool\": \"leanfinder\", \"query\": \"Depth one and the maximal first Fitting ideal characterize a quadratic formal hypersurface and yield a local complete intersection open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"Algebra.smoothLocus\", \"Algebra.isOpen_smoothLocus\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.smoothLocus_eq_compl_support_inter\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"Algebra.IsStandardSmooth\"], \"digest\": \"684587f87e9e4f4b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned statements; they do not give this local singularity assertion or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "Fitting|fittingIdeal|quadratic.*completion|completion.*quadratic",
+   "results": "{\"t\": \"2026-10-23T04:07:29Z\", \"tool\": \"grep\", \"query\": \"Fitting|fittingIdeal|quadratic.*completion|completion.*quadratic\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Artinian/Module.lean\", \"Mathlib/RingTheory/Artinian/Module.lean\"], \"digest\": \"39ce9b936c9e89e8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned smooth/etale or cotangent-space criteria, elliptic-curve nonsingularity, or Fitting decomposition of an endomorphism; none states the depth/Fitting nodal-completion criterion or its LCI conclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A depth one local algebra with maximal first Fitting ideal of Kahler differentials has nodal completed local ring",
+   "results": "{\"t\": \"2026-10-23T04:07:30Z\", \"tool\": \"leansearch\", \"query\": \"A depth one local algebra with maximal first Fitting ideal of Kahler differentials has nodal completed local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.subsingleton_kaehlerDifferential\", \"Algebra.FormallyUnramified.subsingleton_kaehlerDifferential\", \"Algebra.formallyEtale_iff\", \"Algebra.formallyUnramified_iff\", \"IsLocalRing.finrank_CotangentSpace_eq_one_iff\", \"Algebra.FormallyUnramified.mk\", \"Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential\", \"Algebra.IsSmoothAt\"], \"digest\": \"e61bff897298409c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned smooth/etale or cotangent-space criteria, elliptic-curve nonsingularity, or Fitting decomposition of an endomorphism; none states the depth/Fitting nodal-completion criterion or its LCI conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, KaehlerDifferential",
+   "results": "{\"t\": \"2026-10-23T04:07:30Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries, KaehlerDifferential\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned smooth/etale or cotangent-space criteria, elliptic-curve nonsingularity, or Fitting decomposition of an endomorphism; none states the depth/Fitting nodal-completion criterion or its LCI conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type local algebra of depth one whose first Fitting ideal of differentials is the maximal ideal has a nondegenerate quadratic completion and is a local complete intersection",
+   "results": "{\"t\": \"2026-10-23T04:07:35Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type local algebra of depth one whose first Fitting ideal of differentials is the maximal ideal has a nondegenerate quadratic completion and is a local complete intersection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmooth\", \"Algebra.Etale\", \"Algebra.SubmersivePresentation.isStandardSmooth\", \"Algebra.Smooth\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsSmoothAt\", \"Algebra.IsEtaleAt\", \"Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential\"], \"digest\": \"5b1a8ef300e80dbb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned smooth/etale or cotangent-space criteria, elliptic-curve nonsingularity, or Fitting decomposition of an endomorphism; none states the depth/Fitting nodal-completion criterion or its LCI conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Jacobian ideal equal to the maximal ideal characterizes an ordinary double point as a binary quadratic hypersurface in the completed local ring",
+   "results": "{\"t\": \"2026-10-23T04:08:37Z\", \"tool\": \"leanfinder\", \"query\": \"The Jacobian ideal equal to the maximal ideal characterizes an ordinary double point as a binary quadratic hypersurface in the completed local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Jacobian.NonsingularLift\", \"WeierstrassCurve.Jacobian.nonsingularLift_zero\", \"WeierstrassCurve.Jacobian.Point.nonsingular\", \"WeierstrassCurve.Jacobian.nonsingularLift_iff\", \"WeierstrassCurve.Jacobian.nonsingular_zero\", \"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.Jacobian.nonsingularLift_some\", \"WeierstrassCurve.Affine.Nonsingular\"], \"digest\": \"0379ad67865252fd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned smooth/etale or cotangent-space criteria, elliptic-curve nonsingularity, or Fitting decomposition of an endomorphism; none states the depth/Fitting nodal-completion criterion or its LCI conclusion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-nodal-point-local-criterion",
+  "date": "2026-10-22",
+  "group": "Q95"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Pointwise nodal characterization used in the proof of the nodal lci criterion (Stacks Tags 0C4D and 0C4E). Re-split of the pointwise proof: old steps (6, 8); Depth and first Fitting ideal give a quadratic completion and LCI neighbourhood.",
+   "via": [
+    "lem-trf-nodal-point-local-criterion",
+    "lem-trf-nodal-curve-lci-criterion",
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-depth-fitting-quadratic-lci",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reused the existing separable closed-point formal presentation, Fitting base change, formal Jacobian quadratic criterion and completion-to-LCI criterion. Explicitly checked finite generation of differentials, the flat-local depth formula with field closed fibre, residue-field normalization, and regularity of the single nonzero quadratic equation. No new nodes. No exact project Lean attachment or Mathlib match was found.",
+  "blueprint": "Realizes the pointwise depth/Fitting-to-quadratic-completion and LCI-neighbourhood argument in the existing ancestor chain recorded by blueprint.from, specifically the nodal algebraic input to the specialization/nearby-cycle route under lem-trf-local-term-locality. This is a commutative-algebra refinement below the unit route, not a change to the contracting-correspondence theorem.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-flat-local-depth-formula",
+    "why": "General flat-local depth formula applied to A to its completion, with field closed fibre. The trace-formula unit has no independent commutative-algebra depth formula."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-flat-local-depth-formula"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NL-e378d0593",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-e378d0593 (reviewer sub-agent of L); spot-checked: I read the item and its new five-step proof in full; the delivery has no new nodes and keeps the statement unchanged, matching its use in lem-trf-nodal-point-local-criterion steps 3-4. There is no repair note, so this is not a re-split. Sources read: Stacks 0C4C (condition (3), depth 1 and minors generate I+m, gives the quadratic), 0C4D proof of (5)⇒(2) via the Jacobian presentation and completion, 0C4E (LCI) and 07NW/0337 (depth under flat maps). Step 1: every hypothesis of separable-closed-point-formal-presentation is in the item. Step 2: Ω_{S/k} is finite; Fitting base change (2) is applied S→A→Â; the Jacobian rows span the relations, and by multilinearity J=m_R. Advisory: the step also uses clause (1) of the same node (the ideal does not depend on the presentation) without naming it. Step 3: the completion map is flat and local and both rings are Noetherian, so the flat-local depth formula applies; the closed fibre F has depth 0, so depth Â=1. Step 4: hypotheses of formal-jacobian-quadratic-criterion (a)⇒(b) checked (n≥2, I in the variable ideal, F acting through σ); the local isomorphism is bicontinuous and induces the identity on residue fields. Step 5: Q≠0 in a domain and Q∈(u,v), so it is a regular sequence of length 1; completion-local-complete-intersection (2)⇒(1) applies with r=2, c=1. I accept the declared tool use of lem-weil-pbc-flat-local-depth-formula (from unit sk-thm-p1, used as a generic black box). No duplicate of the item exists in the DAG; the nearby quadratic-completion nodes all assume dimension one and a geometric uv node. Edge cases checked: uv, characteristic 2, the cusp, a smooth point, an Artinian ring. No SGA citation. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.DepthFittingQuadraticLCI",
+  "declaration": "Algebra.depth_fitting_quadratic_lci",
+  "declarations": [
+   "Algebra.BinaryQuadraticQuotient",
+   "Algebra.depth_fitting_quadratic_lci"
+  ],
+  "file": "lean/Sheaf/TraceFormula/DepthFittingQuadraticLCI.lean",
+  "statement": "theorem depth_fitting_quadratic_lci {k : Type u} {S : Type v} [Field k] [CommRing S] [Algebra k S] [Algebra.FiniteType k S] (p : Ideal S) [p.IsMaximal] [FiniteDimensional k p.ResidueField] [Algebra.IsSeparable k p.ResidueField] (hdepth : IsLocalRing.depth (R := Localization.AtPrime p) (Localization.AtPrime p) = 1) {n : ℕ} (π : (Fin n → S) →ₗ[S] KaehlerDifferential k S) (hπ : Function.Surjective π) (hfitting : Ideal.map (algebraMap S (Localization.AtPrime p)) (π.presentationFittingIdeal 1) = IsLocalRing.maximalIdeal (Localization.AtPrime p)) : (∃ σ : p.ResidueField →ₐ[k] AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime p)) (Localization.AtPrime p), (∀ z : p.ResidueField, AdicCompletion.evalOneₐ (IsLocalRing.maximalIdeal (Localization.AtPrime p)) (σ z) = z) ∧ ∃ (a b c : p.ResidueField), b ^ 2 - 4 * a * c ≠ 0 ∧ ∃ e : AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime p)) (Localization.AtPrime p) ≃+* BinaryQuadraticQuotient a b c, (∀ z : p.ResidueField, e (σ z) = algebraMap p.ResidueField _ z) ∧ @Continuous _ _ ((IsLocalRing.maximalIdeal (Localization.AtPrime p)).map (algebraMap (Localization.AtPrime p) (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime p)) (Localization.AtPrime p)))).adicTopology ((Ideal.span (Set.range (fun i : Fin 2 ↦ (MvPowerSeries.X i : MvPowerSeries (Fin 2) p.ResidueField)))).map (Ideal.Quotient.mk _)).adicTopology e ∧ @Continuous _ _ ((Ideal.span (Set.range (fun i : Fin 2 ↦ (MvPowerSeries.X i : MvPowerSeries (Fin 2) p.ResidueField)))).map (Ideal.Quotient.mk _)).adicTopology ((IsLocalRing.maximalIdeal (Localization.AtPrime p)).map (algebraMap (Localization.AtPrime p) (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime p)) (Localization.AtPrime p)))).adicTopology e.symm ∧ (∀ f : MvPowerSeries (Fin 2) p.ResidueField, AdicCompletion.evalOneₐ (IsLocalRing.maximalIdeal (Localization.AtPrime p)) (e.symm (Ideal.Quotient.mk _ f)) = MvPowerSeries.constantCoeff f)) ∧ ∃ g : S, g ∉ p ∧ IsLocalCompleteIntersection k (Localization.Away g)",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The presentation π is any finite free surjection onto KaehlerDifferential k S; the recorded presentation-independence theorem makes its index-1 ideal intrinsic. At a maximal ideal p.ResidueField is canonically S/p. The coefficient equation makes the ring equivalence F-linear for the action through σ; explicit residue and both adic-continuity equations record the normalization. BinaryQuadraticQuotient is a transparent abbreviation for the displayed quotient, with real data."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9bab59550",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Only the item node's lean record changed (other fields identical to side-live) plus one module. Checked every clause against the node, Stacks 0C4C/0C4D(5)/0C4E and the dependency Lean (Depth, PresentationFittingIdeal, CompleteIntersectionOverField, formal-Jacobian criterion, completion-LCI, separable presentation). Hypotheses: Algebra.FiniteType, p maximal, p.ResidueField finite separable (canonically S/p), depth A = 1; the Fitting ideal via an arbitrary surjection onto Ω is equivalent by the recorded independence theorem. Conclusions: k-algebra section via evalOneₐ, b^2-4ac≠0 including char 2, ring equivalence to the transparent BinaryQuadraticQuotient made F-linear through σ, continuity both ways for the adic topologies, residue identity (implied by the node, not a strengthening), and the separate ∃ g ∉ p LCI conjunct. Quantifier order matches; universes are independent and bound; lean.statement is verbatim in the file; sorry only; source/blueprint docstrings and five proof steps present; report has Worker report and Second reading by Q24. Edge cases: zero ring, field, smooth point, uv split node, char 2, n≤1 presentations. Advisory: QuadraticSeries.CurveRing is a theorem-node-owned helper with different bracketing, so the local abbrev is acceptable. No compile: no file changed."
+ }
+}

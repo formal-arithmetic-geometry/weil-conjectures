@@ -1,0 +1,120 @@
+{
+ "id": "lem-weil-pbc-ordered-reconstruction-equations",
+ "kind": "statement",
+ "title": "Source and target reconstruction under restriction",
+ "statement": "For the datum and square of [def-weil-pbc-ordered-coefficient-comparison-data], every derived-complete K satisfies the four displayed reconstruction equations: restricted sourceReconstruction followed by lambda and Rlim rhoM is iotaS; lambda followed by Rlim rhoPull is phi followed by constant reconstruction; restricted sourceA followed by lambda and Rlim beta is iotaS followed by S; restricted targetA followed by lambda and Rlim delta is iotaT followed by T. Every map is the specified universal comparison, with no properness or finite-origin hypothesis.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
+  "place": "Second paragraph, specified conjugating maps; agent-supplied strict coefficient comparison supplement. Ingredient sources only: proetale.tex Tag 099M (lemma-naive-completion), Tag 099N (lemma-pushforward-Noetherian-case); sites-cohomology.tex Tag 0A07 (lemma-Rf-commutes-with-Rlim), Tag 0E48 (remark-compatible-with-diagram). None states this combined comparison."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ordered-coefficient-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": " the completion reflector identifies the completed pullback with quotient\ntower reconstruction, and restriction preserves its actual unit by rho_unit.\nThe unit equation defining phi therefore identifies the restricted reconstruction\nwith constant reconstruction. Uniqueness follows by injective precomposition with\nthe completion unit into a complete target. This proves the target reconstruction\nequation. Apply the same equation to the complete object Rf_*K, use chi to replace\nits restriction by the constant direct image, and use naturality of its quotient\nunit; this proves the source reconstruction equation. Compose the source equation\nwith the strict projection formula comparison. Its scalar compatibility and\nnaturality of lambda give the displayed sourceA equation. On the target, write\ntargetA as the specified direct-image/derived-limit comparison. The scalar limit\nsquare, followed by naturality for the pullback reconstruction, converts it to\nthe constant direct-image/limit comparison. Substitute the target reconstruction\nequation to get the final displayed equality. All comparisons are the specified\nunit and counit comparisons, and direct image preserves completeness, so each\napplication is on the stated full complete category.",
+   "uses": [
+    "def-weil-pbc-completed-pullback",
+    "lem-sp-completion-mate-comparison",
+    "lem-weil-pbc-completed-scalar-unit-adjunction",
+    "lem-weil-pbc-flat-scalar-tower-limit-square",
+    "lem-weil-pbc-ordered-strict-coefficient-equations",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-weil-pbc-strict-quotient-scalar-balancing",
+    "prop-weil-pbc-direct-image-limits",
+    "prop-weil-pbc-rlim-functoriality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-completed-pullback",
+  "lem-sp-completion-mate-comparison",
+  "lem-weil-pbc-completed-scalar-unit-adjunction",
+  "lem-weil-pbc-flat-scalar-tower-limit-square",
+  "lem-weil-pbc-ordered-strict-coefficient-equations",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-strict-quotient-scalar-balancing",
+  "prop-weil-pbc-direct-image-limits",
+  "prop-weil-pbc-rlim-functoriality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
+  "place": "Separated existing ordered coefficient comparison interfaces and proof steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of adic coefficients commutes with strict quotient tower exchange and completion reconstruction",
+   "results": "Mathlib ordinary AdicCompletion algebra declarations; no derived sheaf/tower comparison",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived restriction identifies the strict quotient tower exchange and its projection maps, and identifies completed pullback reconstruction units and inverse limit maps",
+   "results": "Generic scalar and adjunction tools only; no specified ordered coefficient maps",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exchange.*coefficient|reconstruct.*scalar|rawComponent in Mathlib CategoryTheory, Algebra/Homology and WeilConjectures",
+   "results": "Finite and duality comparisons have other domains; none supplies these completed strict maps",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.OrderedExchangeCoefficientComparison",
+  "date": "2026-10-25",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-completed-exchange-coherence",
+   "place": "Source and target reconstruction under restriction; second proof paragraph of completed exchange coherence.",
+   "via": [
+    "lem-weil-pbc-ordered-exchange-coefficient-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OrderedExchangeReconstructionEquations",
+  "file": "lean/Sheaf/Paper/OrderedExchangeReconstructionEquations.lean",
+  "declaration": "AlgebraicGeometry.Scheme.OrderedExchange.reconstructionCoefficientEquations",
+  "statement": "theorem reconstructionCoefficientEquations (sq : ChosenCartesianSquare g' f' f g) : ∀ (K : d.derived X) (hK : d.TowerComplete X K), ((res d Y').map (sourceReconstruction (f := f) (g := g) d K).hom ≫ (lambda d Y').hom.app ((completedReductionTower Y' d).obj ((d.pull g).obj ((d.push f).obj K))) ≫ (rlim (A := A) Y').map (rhoM (f := f) (g := g) d K).hom = (iotaS (f := f) (g := g) d K hK).hom) ∧ ((lambda d X').hom.app ((d.towerPull g').obj ((completedReductionTower X d).obj K)) ≫ (rlim (A := A) X').map (rhoPull (g' := g') d K).hom = (phi d g').hom.app ⟨K, hK⟩ ≫ (reconstruction d g' ((res d X).obj K)).hom) ∧ ((res d Y').map (sourceA (f := f) (f' := f') (g := g) (g' := g') d K).hom ≫ (lambda d Y').hom.app ((d.towerPull g).obj ((d.towerPush f).obj ((completedReductionTower X d).obj K))) ≫ (rlim (A := A) Y').map (beta (f := f) (g := g) d K).hom = (iotaS (f := f) (g := g) d K hK).hom ≫ (S (f := f) (g := g) d ((res d X).obj K)).hom) ∧ ((res d Y').map (targetA (g' := g') (f' := f') d K).hom ≫ (lambda d Y').hom.app ((d.towerPush f').obj ((d.towerPull g').obj ((completedReductionTower X d).obj K))) ≫ (rlim (A := A) Y').map (delta (f' := f') (g' := g') d K).hom = (iotaT (f' := f') (g' := g') d K hK).hom ≫ (T (f' := f') (g' := g') d ((res d X).obj K)).hom)",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2f828",
+  "group": "F3",
+  "result": "fix",
+  "landing": "20261025T201906-L-2637152",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2f828",
+  "group": "F3",
+  "result": "fix",
+  "landing": "20261025T201906-L-2637152",
+  "kind": "interface",
+  "note": "independent cc review: 2f828bc vs e69069ed (previous FIX review): only scoped set_option/-instance in lambda_existsUnique & normalized_naturality plus change-record/report text differ; data module vs clone item = verbatim move; 5 modules + 4 direct importers compile (exit 0)"
+ }
+}

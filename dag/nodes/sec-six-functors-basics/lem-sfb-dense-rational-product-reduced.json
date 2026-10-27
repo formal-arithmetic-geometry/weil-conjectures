@@ -1,0 +1,261 @@
+{
+ "id": "lem-sfb-dense-rational-product-reduced",
+ "kind": "statement",
+ "title": "Reducedness and rational-point density for a scheme product",
+ "statement": "Let $k$ be a field [def-weil-field], and let $X,Y$ be reduced finite-type $k$-schemes [def-pc-reduced-scheme, def-weil-finite-type-morphism]. Let $A\\subseteq X(k)$ and $B\\subseteq Y(k)$ [def-weil-field-valued-points] have dense images in the underlying Zariski spaces $|X|$ and $|Y|$. Put $P=X\\times_{\\operatorname{Spec}k}Y$ [def-pc-fibre-product], and let $C\\subseteq P(k)$ consist of the paired rational points $(a,b):\\operatorname{Spec}k\\to P$ for $a\\in A$ and $b\\in B$, characterized by their two projections. Then $P$ is reduced, and the image of $C$ is dense in $|P|$. Empty schemes and empty dense subsets are allowed; $k$ need not be perfect and $X,Y$ need not be smooth or affine.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 1(a), Proposition 1.10 (printed pp.9-10), Proposition 1.11 and Remark 1.14 (printed p.10), applied successively to the two factors; Appendix A.43 (printed p.576), product reducedness; Section 1(c), proof of Theorem 1.45 (printed p.19)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-reduced-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-field-valued-points",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Choose affine open covers of $X$ and $Y$. For members $U=\\operatorname{Spec}R$ and $V=\\operatorname{Spec}S$, the open subscheme $W=p^{-1}(U)\\cap q^{-1}(V)$ of $P$ is $U\\times_k V$: apply the open-preimage fibre-product statement twice and the defining universal property. The affine-product statement identifies $W$ with $\\operatorname{Spec}T$, $T=R\\otimes_k S$, with its two specified projections. These $W$ cover $P$. Write $A_U$ and $B_V$ for the rational points in $A$ and $B$ whose images lie in $U$ and $V$. Their images are dense in $U$ and $V$, since every nonempty open in either affine open is also open in the original scheme. The pairs from $A_U\\times B_V$ lie in $W$ by their projections.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-preimage-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.10, proof (b) implies (c), affine localization; Appendix A.43, reduction to affine products. Stacks Tags 01JR and 01I4."
+   }
+  },
+  {
+   "text": "For $a\\in A_U$, let $e_a:R\\to k$ be the $k$-algebra homomorphism corresponding to $a$ by the affine-spectrum statement; similarly put $e_b:S\\to k$ for $b\\in B_V$. These families detect zero. Indeed, if $e_a(r)=0$ for every $a\\in A_U$, the closed set $V((r))$ contains the dense image of $A_U$, hence is all of $\\operatorname{Spec}R$. The radical/intersection statement for the zero ideal gives $r\\in\\sqrt{(0)}$, so $r$ is nilpotent. The reducedness definition makes $R=\\mathcal O_X(U)$ reduced, hence $r=0$. The identical argument with $S,B_V$ proves its zero-detection assertion.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.10, proof (b) implies (c), printed p.10; use all prime ideals for the full scheme topology (Stacks Tag 00E0(7))."
+   }
+  },
+  {
+   "text": "For every pair $(a,b)\\in A_U\\times B_V$, the algebra tensor-product universal property gives $E_{a,b}:T\\to k$, $E_{a,b}(r\\otimes s)=e_a(r)e_b(s)$. The affine-product projection formulas and uniqueness of the paired point identify $\\operatorname{Spec}E_{a,b}$ with $(a,b)$. We show that the $E_{a,b}$ detect zero. Suppose $E_{a,b}(t)=0$ for all pairs. For fixed $a$, form the linear contraction $L_a:T\\to S$, $r\\otimes s\\mapsto e_a(r)s$. On every pure tensor $e_b L_a=E_{a,b}$, so these maps agree everywhere since pure tensors generate. Step 2 gives $L_a(t)=0$. The canonical map $\\mu:k\\otimes_k S\\to S$, $c\\otimes s\\mapsto cs$, has inverse $s\\mapsto1\\otimes s$: the two inverse equations follow from $c\\otimes s=1\\otimes cs$ and generation by pure tensors. Thus $L_a=\\mu\\circ(e_a\\otimes\\mathrm{id}_S)$ implies $(e_a\\otimes\\mathrm{id}_S)(t)=0$ for all $a$. Apply the cited tensor-family zero-detection lemma with $M=R$, $N=S$, $J=A_U$, $P_a=k$, and $f_a=e_a$, whose hypothesis was verified in step 2. It gives $t=0$.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-pbc-module-tensor-product",
+    "lem-sfb-vector-space-tensor-family-zero-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.11 and Remark 1.14, printed p.10, with the family-injectivity argument supplied by the cited tensor lemma and successive evaluations in the two factors."
+   }
+  },
+  {
+   "text": "If $t\\in T$ is nilpotent, then $E_{a,b}(t)$ is nilpotent in the field $k$ for every pair, hence zero: for $z\\ne0$ an equation $z^n=0$ contradicts multiplication by $(z^{-1})^n$. Step 3 gives $t=0$. Thus $T$ is reduced, and the affine-scheme reducedness equivalence makes $W=\\operatorname{Spec}T$ reduced. Applying reducedness on the open cover of step 1 shows that $P$ is reduced.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-reduced-iff",
+    "lem-trf-reduced-scheme-open-cover"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.10 (c) implies (b), and Appendix A.43; Stacks Tags 01J2 and 01J1."
+   }
+  },
+  {
+   "text": "The paired points are dense in each $W=\\operatorname{Spec}T$. To see this, let $F\\subseteq W$ be a closed subset containing their images. In the Zariski topology $F=V(I)$ for an ideal $I\\subseteq T$. For $t\\in I$ and every pair, membership $\\ker E_{a,b}\\in V(I)$ says $E_{a,b}(t)=0$. Step 3 implies $t=0$, so $I=(0)$ and $F=W$. The closure in $P$ of the image of $C$ therefore contains every $W$ of step 1: its intersection with $W$ is closed in $W$ and contains all these local pairs. As those $W$ cover $P$, that closure is $P$. This proves the required density. If a factor is empty, the product is empty and reduced, with empty dense image. The same argument already allows empty $A_U$ or $B_V$: step 2 then forces the corresponding coordinate ring to be zero, and step 3 uses a lemma that explicitly allows an empty index set.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.10, affine evaluation criterion, applied to paired points; Proposition 1.11 and Remark 1.14, successive evaluation. Zariski closed sets as in Stacks Tag 00E0."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-weil-pbc-open-preimage-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+  "def-pc-reduced-scheme",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-pbc-module-tensor-product",
+  "lem-sfb-vector-space-tensor-family-zero-detection",
+  "lem-weil-pbc-affine-scheme-reduced-iff",
+  "lem-trf-reduced-scheme-open-cover"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 1.10, Proposition 1.11 and Remark 1.14, printed pp.9–10; affine-local double-evaluation argument, with tensor-family injectivity supplied by the existing Lean-closed node. Compare Appendix A.43, printed p.576."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(rational|fieldPoints).{0,60}(dense|reduced)|(dense|reduced).{0,60}(rational|fieldPoints)",
+   "results": "OK; 10 hits; Mathlib/AlgebraicGeometry/Birational/Birational.lean, Mathlib/AlgebraicGeometry/Birational/Birational.lean, Mathlib/AlgebraicGeometry/Birational/Birational.lean, Mathlib/AlgebraicGeometry/Birational/Birational.lean, Mathlib/AlgebraicGeometry/Birational/Birational.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: Dense.prod concerns the topological product, not the underlying space of a scheme product. The geometrically-reduced pullback instances assume geometric reducedness and do not give density of paired rational points. Tensor-product search returns linear-disjointness and nontriviality statements, not this evaluation-separation criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A dense subset of rational points in a reduced scheme remains schematically dense in products of schemes over a field",
+   "results": "OK; 8 hits; dense_pi, Dense.prod, AlgebraicGeometry.Scheme.Hom.denseRange, AlgebraicGeometry.Scheme.RationalMap.dense_domain, IsDenseEmbedding.prodMap, AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_homOfLE, IsDenseInducing.prodMap, AlgebraicGeometry.isReduced_of_isReduced_stalk",
+   "date": "2026-10-24",
+   "verdict": "no match: Dense.prod concerns the topological product, not the underlying space of a scheme product. The geometrically-reduced pullback instances assume geometric reducedness and do not give density of paired rational points. Tensor-product search returns linear-disjointness and nontriviality statements, not this evaluation-separation criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsReduced, CategoryTheory.Limits.pullback",
+   "results": "OK; 2 hits; AlgebraicGeometry.instIsReducedPullbackSchemeOfGeometricallyReducedOfFlatOfIsLocallyNoetherian, AlgebraicGeometry.instIsReducedPullbackSchemeOfGeometricallyReducedOfFlatOfIsLocallyNoetherian_1",
+   "date": "2026-10-24",
+   "verdict": "no match: Dense.prod concerns the topological product, not the underlying space of a scheme product. The geometrically-reduced pullback instances assume geometric reducedness and do not give density of paired rational points. Tensor-product search returns linear-disjointness and nontriviality statements, not this evaluation-separation criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The product of two reduced schemes over a field with dense subsets of rational points is reduced and the pairs of these points are Zariski dense",
+   "results": "OK; 8 hits; AlgebraicGeometry.IsReduced, AlgebraicGeometry.instIsMultiplicativeSchemeIsDominant, AlgebraicGeometry.Scheme.RationalMap.dense_domain, AlgebraicGeometry.Scheme.Hom.denseRange, AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme, AlgebraicGeometry.IsDominant.denseRange, AlgebraicGeometry.dominant_eq_topologically, AlgebraicGeometry.IsDominant",
+   "date": "2026-10-24",
+   "verdict": "no match: Dense.prod concerns the topological product, not the underlying space of a scheme product. The geometrically-reduced pullback instances assume geometric reducedness and do not give density of paired rational points. Tensor-product search returns linear-disjointness and nontriviality statements, not this evaluation-separation criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If k algebra homomorphisms A to k and B to k separate elements then evaluation at pairs separates elements of the tensor product A tensor k B",
+   "results": "OK; 8 hits; IntermediateField.LinearDisjoint.isDomain', IntermediateField.LinearDisjoint.of_isField', Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_isDomain, Subalgebra.LinearDisjoint.of_isField', Subalgebra.LinearDisjoint.isDomain_of_injective, Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_flat_right, Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_flat_left, Subalgebra.LinearDisjoint.exists_field_of_isDomain_of_injective",
+   "date": "2026-10-24",
+   "verdict": "no match: Dense.prod concerns the topological product, not the underlying space of a scheme product. The geometrically-reduced pullback instances assume geometric reducedness and do not give density of paired rational points. Tensor-product search returns linear-disjointness and nontriviality statements, not this evaluation-separation criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "schematic.*dens|dens.*schematic|geometricallyReduced.*(rational|fieldPoints)|(rational|fieldPoints).*geometricallyReduced",
+   "results": "OK; 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: Dense.prod concerns the topological product, not the underlying space of a scheme product. The geometrically-reduced pullback instances assume geometric reducedness and do not give density of paired rational points. Tensor-product search returns linear-disjointness and nontriviality statements, not this evaluation-separation criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyReduced",
+   "results": "OK; 12 hits; AlgebraicGeometry.instIsStableUnderBaseChangeSchemeGeometricallyReduced, AlgebraicGeometry.GeometricallyReduced, AlgebraicGeometry.GeometricallyReduced.eq_geometrically, AlgebraicGeometry.GeometricallyReduced.geometrically_isReduced, AlgebraicGeometry.GeometricallyReduced.mk, AlgebraicGeometry.geometricallyReduced_iff, AlgebraicGeometry.GeometricallyReduced.isReduced_of_flat_of_isLocallyNoetherian, AlgebraicGeometry.instIsReducedFiberOfGeometricallyReduced",
+   "date": "2026-10-24",
+   "verdict": "no match: Dense.prod concerns the topological product, not the underlying space of a scheme product. The geometrically-reduced pullback instances assume geometric reducedness and do not give density of paired rational points. Tensor-product search returns linear-disjointness and nontriviality statements, not this evaluation-separation criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "(rational|fieldPoints).{0,60}(dense|reduced)|(dense|reduced).{0,60}(rational|fieldPoints)",
+   "results": "{\"t\": \"2026-10-24T13:43:51Z\", \"tool\": \"grep\", \"query\": \"(rational|fieldPoints).{0,60}(dense|reduced)|(dense|reduced).{0,60}(rational|fieldPoints)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 24, \"note\": \"\", \"top\": [\"Mathlib/Dynamics/Circle/RotationNumber/TranslationNumber.lean\", \"Mathlib/Topology/Algebra/Order/Archimedean.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\"], \"digest\": \"aefd5a98383e5a08\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the item is about scheme products with arbitrary dense rational subsets; topological products and geometric-reducedness pullback instances do not give both clauses. The tensor-family ingredient already has an exact project declaration and existing node, reused in step 3."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsReduced, CategoryTheory.Limits.pullback",
+   "results": "{\"t\": \"2026-10-24T13:43:52Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsReduced, CategoryTheory.Limits.pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsReducedPullbackSchemeOfGeometricallyReducedOfFlatOfIsLocallyNoetherian\", \"AlgebraicGeometry.instIsReducedPullbackSchemeOfGeometricallyReducedOfFlatOfIsLocallyNoetherian_1\"], \"digest\": \"3b0153cf1e15454c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the item is about scheme products with arbitrary dense rational subsets; topological products and geometric-reducedness pullback instances do not give both clauses. The tensor-family ingredient already has an exact project declaration and existing node, reused in step 3."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A dense subset of rational points of each of two reduced schemes gives a dense subset of rational points of their reduced scheme product",
+   "results": "{\"t\": \"2026-10-24T13:43:52Z\", \"tool\": \"leansearch\", \"query\": \"A dense subset of rational points of each of two reduced schemes gives a dense subset of rational points of their reduced scheme product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Dense.prod\", \"dense_pi\", \"IsDenseEmbedding.prodMap\", \"DenseRange.piMap\", \"DenseRange.prodMap\", \"IsDenseInducing.prodMap\", \"AlgebraicGeometry.pointsPi_surjective_of_isAffine\", \"AlgebraicGeometry.Scheme.Hom.denseRange\"], \"digest\": \"2e1a1c8dcf041520\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the item is about scheme products with arbitrary dense rational subsets; topological products and geometric-reducedness pullback instances do not give both clauses. The tensor-family ingredient already has an exact project declaration and existing node, reused in step 3."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-sfb-dense-rational-product-reduced: the product of reduced schemes over a field with dense subsets of rational points is reduced and the paired rational points are dense",
+   "results": "{\"t\": \"2026-10-24T13:43:53Z\", \"tool\": \"leanfinder\", \"query\": \"lem-sfb-dense-rational-product-reduced: the product of reduced schemes over a field with dense subsets of rational points is reduced and the paired rational points are dense\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"AlgebraicGeometry.Scheme.Hom.denseRange\", \"AlgebraicGeometry.Scheme.PartialMap.dense_domain\", \"AlgebraicGeometry.IsDominant.denseRange\", \"AlgebraicGeometry.dominant_eq_topologically\", \"AlgebraicGeometry.isDominant_iff\", \"AlgebraicGeometry.pointsPi_surjective\", \"AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\"], \"digest\": \"28cc0e07fdbb23cb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the item is about scheme products with arbitrary dense rational subsets; topological products and geometric-reducedness pullback instances do not give both clauses. The tensor-family ingredient already has an exact project declaration and existing node, reused in step 3."
+  },
+  {
+   "tool": "grep",
+   "query": "schematic.*dens|dens.*schematic|geometricallyReduced.*(rational|fieldPoints)|(rational|fieldPoints).*geometricallyReduced",
+   "results": "{\"t\": \"2026-10-24T13:44:50Z\", \"tool\": \"grep\", \"query\": \"schematic.*dens|dens.*schematic|geometricallyReduced.*(rational|fieldPoints)|(rational|fieldPoints).*geometricallyReduced\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the item is about scheme products with arbitrary dense rational subsets; topological products and geometric-reducedness pullback instances do not give both clauses. The tensor-family ingredient already has an exact project declaration and existing node, reused in step 3."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-sfb-dense-rational-product-reduced: injectivity of evaluations at pairs of rational points of the tensor product of coordinate algebras",
+   "results": "{\"t\": \"2026-10-24T13:44:52Z\", \"tool\": \"leanfinder\", \"query\": \"lem-sfb-dense-rational-product-reduced: injectivity of evaluations at pairs of rational points of the tensor product of coordinate algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.Gal.restrictProd_injective\", \"minpoly.aux_inj_roots_of_min_poly\", \"Algebra.PreSubmersivePresentation.map_inj\", \"Algebra.IsEpi.injective_lift_mul\", \"AlgebraicIndependent\", \"Subalgebra.LinearDisjoint.exists_field_of_isDomain_of_injective\", \"Algebra.Generators.σ_injective\", \"algebraicIndependent_iff_injective_aeval\"], \"digest\": \"5431e525949c816e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the item is about scheme products with arbitrary dense rational subsets; topological products and geometric-reducedness pullback instances do not give both clauses. The tensor-family ingredient already has an exact project declaration and existing node, reused in step 3."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-closed-rational-subgroup-realization",
+  "date": "2026-10-24",
+  "group": "Q83"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Milne Theorem 1.45, proof: dense rational points of the reduced closure imply reducedness of its product; the multiplication restriction also needs density of paired rational points. This is the auxiliary algebraic-group argument under the inherited admissible-direct-image branch.",
+   "via": [
+    "lem-sfb-closed-rational-subgroup-realization",
+    "lem-sfb-closed-submonoid-group-subscheme",
+    "lem-sfb-rational-boundary-positive-stabilizer",
+    "lem-sfb-rosenlicht-nonproper-affine-subgroup",
+    "lem-sfb-pseudoabelian-proper-algclosed",
+    "lem-sfb-barsotti-chevalley-decomposition",
+    "lem-sfb-smooth-connected-semiabelian-subgroup",
+    "lem-sfb-semiabelian-closed-subgroup-trivial-torsion-finite",
+    "lem-sfb-generically-isomorphic-semiabelian-open-immersion",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dense-rational-product-reduced",
+  "worker": "stage1",
+  "summary": "Checked Milne Propositions 1.10–1.11 and Remark 1.14, and Appendix A.43; retained the statement, including imperfect fields and empty schemes. Wrote the affine double-evaluation proof and reused the existing Lean-closed tensor-family zero-detection node instead of introducing a duplicate. Every remaining argument is a short consequence of cited affine-product, reducedness, tensor universal-property and prime-radical statements. No new nodes.",
+  "blueprint": "The item is an auxiliary descendant with blueprint.from.node = null (blueprint_refs ancestor confirms None), not a blueprint unit statement. Its inherited from.place identifies Milne Theorem 1.45 in the admissible-direct-image branch. Steps 1–5 supply the reduced-product and paired-point density input used there; the latest sk-thm-sf-ctf-stability/direct-images unit was read and no unit step or route is replaced. Whole-blueprint searches found no equivalent node."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-8cea933be",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-8cea933be (reviewer sub-agent of L); spot-checked: I read the whole delivery and the source: Milne AG2017 Def 1.9, Props 1.10/1.11 and Rem 1.14 (pp.9-10), A.43 (p.576). There are no new nodes, and compared with clones/live the item's statement, source, stmt_deps and blueprint are unchanged. The statement is true. It fails to apply only when no dense set of rational points exists, e.g. k=F_p(t), x^p=t has no k-points. The empty cases hold. Steps 1-5 check against the cited statements. (1) Opens W=p^-1U∩q^-1V are Spec(R⊗S) by the open-preimage node used twice and the affine-spectra node. (2) Dense-evaluation zero detection holds by the radical clause √0=∩p plus reducedness. (3) E_{a,b} comes from the algebra-tensor universal property. The contraction plus the same-unit node lem-sfb-vector-space-tensor-family-zero-detection gives t=0; that node allows an empty J and its hypothesis is exactly step 2. (4) T is reduced, then P is reduced by the affine-reduced node and the open-cover node. (5) A closed V(I) containing every ker E forces I=0, so the pairs are dense; this is a separate argument from step 4. Batch-5 flag: lem-trf-reduced-scheme-open-cover is a Mathlib leaf (IsReduced.iff_of_openCover, Properties.lean:140), a general fact about schemes. Neither the trace-formula nor the Poincaré-duality assumption gives it, and it is not a step of their proofs, so I accept the citation. FIX: step 3 uses the uniqueness of the paired point (a,b) from the fibre-product universal property but did not cite def-pc-fibre-product; I added it to step 3's uses (C1/C4). No tool_uses to record, no SGA source.; 1 file(s) fixed by the reviewer"
+ }
+}

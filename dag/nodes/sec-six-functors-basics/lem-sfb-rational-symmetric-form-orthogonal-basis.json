@@ -1,0 +1,87 @@
+{
+ "id": "lem-sfb-rational-symmetric-form-orthogonal-basis",
+ "kind": "statement",
+ "title": "Orthogonal basis for a symmetric rational bilinear form",
+ "statement": "Let $V$ be a finite-dimensional $\\mathbf Q$-vector space, meaning that it has a finite basis [def-weil-pbc-free-module]. Let $B:V\\times V\\to\\mathbf Q$ be linear over $\\mathbf Q$ in each variable and symmetric: $B(v,w)=B(w,v)$ for all $v,w\\in V$. There exist a nonnegative integer $n$ and a basis $(u_i)_{1\\le i\\le n}$ of $V$ such that $B(u_i,u_j)=0$ whenever $i\\ne j$. The zero-dimensional space and degenerate forms are included.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, proof of Proposition 14.4(a), printed p.62: auxiliary finite-dimensional diagonalization input to the bounded-ellipsoid argument (not separately stated there). Exact formal statement: Mathlib LinearAlgebra/QuadraticForm/Basic.lean, LinearMap.BilinForm.exists_orthogonal_basis, lines 1342-1343."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "theorem exists_orthogonal_basis|def IsOrtho",
+   "results": "7 hits; Mathlib/LinearAlgebra/QuadraticForm/Basic.lean, Mathlib/LinearAlgebra/QuadraticForm/Basic.lean, Mathlib/LinearAlgebra/BilinearForm/Orthogonal.lean, Mathlib/LinearAlgebra/RootSystem/Defs.lean, Mathlib/LinearAlgebra/SesquilinearForm/Basic.lean, Mathlib/LinearAlgebra/SesquilinearForm/Basic.lean, Mathlib/LinearAlgebra/SesquilinearForm/Basic.lean; verified LinearMap.BilinForm.exists_orthogonal_basis at Mathlib/LinearAlgebra/QuadraticForm/Basic.lean:1342-1343; IsOrthoᵢ means B(v_i,v_j)=0 for i≠j (SesquilinearForm/Basic.lean:82-87).",
+   "date": "2026-10-23",
+   "verdict": "match: specializes in one line with K=ℚ; no positivity or nondegeneracy hypothesis is required"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every symmetric bilinear form on a finite dimensional vector space in characteristic not two admits an orthogonal basis",
+   "results": "8 hits; LinearMap.BilinForm.exists_orthogonal_basis, LinearMap.BilinForm.IsOrtho, LinearMap.IsSymmetric.eigenvectorBasis.congr_simp, QuadraticMap.basisRepr_eq_of_iIsOrtho, LinearMap.BilinForm.ext_of_isSymm, LinearMap.IsSymmetric.eigenvectorBasis_def, LinearMap.BilinForm.isOrtho_def, LinearMap.BilinForm.isSymm_iff_basis; verified LinearMap.BilinForm.exists_orthogonal_basis at Mathlib/LinearAlgebra/QuadraticForm/Basic.lean:1342-1343; IsOrthoᵢ means B(v_i,v_j)=0 for i≠j (SesquilinearForm/Basic.lean:82-87).",
+   "date": "2026-10-23",
+   "verdict": "match: specializes in one line with K=ℚ; no positivity or nondegeneracy hypothesis is required"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.BilinForm.exists_orthogonal_basis",
+   "results": "1 hits; LinearMap.BilinForm.exists_orthogonal_basis; verified LinearMap.BilinForm.exists_orthogonal_basis at Mathlib/LinearAlgebra/QuadraticForm/Basic.lean:1342-1343; IsOrthoᵢ means B(v_i,v_j)=0 for i≠j (SesquilinearForm/Basic.lean:82-87).",
+   "date": "2026-10-23",
+   "verdict": "match: specializes in one line with K=ℚ; no positivity or nondegeneracy hypothesis is required"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A symmetric bilinear form on a finite dimensional vector space over a field of characteristic different from two has an orthogonal basis",
+   "results": "8 hits; LinearMap.BilinForm.exists_orthogonal_basis, LinearMap.IsSymmetric.eigenvectorBasis, LinearMap.IsSymmetric.eigenvectorBasis_def, LinearMap.IsSymmetric.diagonalization, LinearMap.IsSymmetric.directSumDecomposition, LinearMap.IsSymmetric.hasEigenvector_eigenvectorBasis, LinearMap.IsSymmetric.direct_sum_isInternal, LinearMap.IsSymmetric.diagonalization_symm_apply; verified LinearMap.BilinForm.exists_orthogonal_basis at Mathlib/LinearAlgebra/QuadraticForm/Basic.lean:1342-1343; IsOrthoᵢ means B(v_i,v_j)=0 for i≠j (SesquilinearForm/Basic.lean:82-87).",
+   "date": "2026-10-23",
+   "verdict": "match: specializes in one line with K=ℚ; no positivity or nondegeneracy hypothesis is required"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "LinearMap.BilinForm.exists_orthogonal_basis",
+  "file": "Mathlib/LinearAlgebra/QuadraticForm/Basic.lean",
+  "line": 1342,
+  "how": "specializes in one line: K=ℚ in exists_orthogonal_basis (lines 1342-1343); 2 is invertible in ℚ. It returns a basis indexed by Fin (Module.finrank ℚ V), orthogonal in the sense of LinearMap.IsOrthoᵢ, i.e. B(u_i,u_j)=0 for i≠j (Mathlib/LinearAlgebra/SesquilinearForm/Basic.lean:82-87). No nondegeneracy or positivity assumption. The finite index convention 1≤i≤n is merely relabelling Fin n."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-positive-form-lattice-sublevels-finite",
+  "date": "2026-10-23",
+  "group": "N0"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Proposition 14.4(a), printed p.62; polarization convention in I §11, printed p.53. Supporting fact for Proposition 14.4(a): Chapter I, proof of Proposition 14.4(a), printed p.62, lattice-in-a-bounded-ellipsoid argument; rational bilinear-form formulation of the linear-algebra input implicit there. Auxiliary rational diagonalization: choose an orthogonal basis before bounding the integer coordinates.",
+   "via": [
+    "lem-sfb-positive-form-lattice-sublevels-finite",
+    "lem-sfb-polarized-abelian-automorphisms-finite",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

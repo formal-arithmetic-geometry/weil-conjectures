@@ -1,0 +1,125 @@
+{
+ "id": "def-sfb-polynomial-rank-one-model-data",
+ "kind": "definition",
+ "title": "Interfaces for the finite polynomial system and normalized rank-one presentation",
+ "statement": "Fix a prime $\\ell$, normed $\\mathbf Q_\\ell$-algebra fields $E,F$, an $E$-algebra structure on $F$, and $k,m\\geq0$. All groups and sites use [def-weil-size-convention]. Put $J=\\mathrm{Fin}(k+1)\\sqcup\\mathrm{Fin}(m)$, $I_n=\\{d:J\\to_0\\mathbf N:\\sum_i d_i\\leq n\\}$ and $G=\\mathbf Z_\\ell^k$. For $(g,t)\\in G\\times\\mathbf Z_\\ell$, its coordinates put $t$ first and then the coordinates of $g$. Define translation on $E[J]$ [def-weil-pbc-mv-polynomial-ring] by replacing $y_i$ by $y_i-u_i$ and leaving $z_j$ fixed.\n\nA PolynomialSystem consists of a system [def-sfb-ind-unipotent-system] over $E$ and $G$, injective $E$-linear embeddings of its stages in $E[J]$ with image exactly the polynomials supported in $I_n$, finiteness of $I_n$, and bases indexed by $I_n$ whose embedded vectors are the corresponding monomials. The embeddings intertwine successive transitions with inclusion, operators with minus the first formal derivative [def-weil-pbc-polynomial-partial-derivative], and actions with the displayed translations. The exponent at stage $n$ is $n+1$. Every action-matrix entry is the evaluation of an $E$-polynomial in the coordinates, and every such entry is continuous.\n\nFor such a system Q define tensorPolynomial on $F\\otimes_E V_n$ by scalar extension of the polynomial embedding followed by the canonical polynomial tensor equivalence. For a polynomial translation Model T [def-sfb-polynomial-translation-model], polynomialSection sends a finite polynomial and a continuous coefficient section to the finite sum of the corresponding monomial coprojections multiplied by their scalar coefficients.\n\nPresentationAssertion(Q,F) is the following specification. There is a continuous homomorphism $\\pi:G\\times\\mathbf Z_\\ell\\to\\mathbf Z_\\ell^{k+1}$ whose coordinates are exactly the displayed splitting. For every T there is a continuous-section Presentation P [def-sfb-ind-unipotent-system], equivariant stage maps w into the inflation of T, underlying-module injections j indexed by I_n and projections p. The j form a finite coproduct, map under w to precisely T's monomial coprojections, and give the pure tensors of Q's basis on every continuous section. The p are exactly the coefficient projections of tensorPolynomial. The w commute with P's specified transitions. There is a colimit c of P both in actions and after forgetting the action, and an isomorphism c.pt to inflated T normalized by w on every stage. There are equivariant endomorphisms D, expD and delta of inflated T. D realizes the scalar-extended stage operators on every continuous section and minus the first derivative on each generalized monomial. expD realizes the stage action of the element (1,1) where the second 1 denotes additive one. delta=expD-id; on every section it is this group action minus identity, and on every generalized monomial it is the finite polynomial difference obtained by translation of y_1 by minus one. All generalized sections are taken on every profinite S, with coefficients in all continuous maps C(S,F); no completeness of F or common degree bound is imposed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image; agent-formulated expansion in lem-sfb-polynomial-rank-one-difference-model. Specifically: definition interfaces already in the original Lean module."
+ },
+ "stmt_deps": [
+  "def-sfb-continuous-map-condensed-ring",
+  "def-weil-size-convention",
+  "def-weil-pbc-mv-polynomial-ring",
+  "sk-def-sfb-module-objects",
+  "def-sfb-condensed-action-module",
+  "def-sfb-ind-unipotent-system",
+  "def-weil-pbc-polynomial-partial-derivative",
+  "def-sfb-polynomial-translation-model"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The bounded degree monomials form a finite dimensional polynomial translation representation with nilpotent derivative exponential",
+   "results": "8 hits: LieDerivation.exp; Polynomial.degreeLT.basis; Module.End.exp_mul_of_derivation; MvPolynomial.restrictDegree; IsNilpotent.exp; MvPolynomial.instFiniteSubtypeMemSubmoduleRestrictDegreeOfFinite; MvPolynomial.degreesLE; Polynomial.basisMonomials.",
+   "date": "2026-10-26",
+   "verdict": "No exact match for the specified finite-system and internal continuous-section presentation interfaces. The hits supply polynomial algebra tools, not the whole obligation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded degree multivariate polynomial spaces with translation action and nilpotent partial derivative have Taylor exponential equal to translation",
+   "results": "8 hits: Polynomial.coe_taylorEquiv; Polynomial.taylor_apply; Polynomial.taylor_eval; Polynomial.taylor_taylor; Polynomial.taylorLinearEquiv_apply_coe; Polynomial.taylorEquiv_symm; Polynomial.taylorEquiv; Polynomial.toAlgHom_taylorEquiv.",
+   "date": "2026-10-26",
+   "verdict": "No exact match for the specified finite-system and internal continuous-section presentation interfaces. The hits supply polynomial algebra tools, not the whole obligation."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial.pderiv, MvPolynomial.totalDegree",
+   "results": "0 hits.",
+   "date": "2026-10-26",
+   "verdict": "No exact match for the specified finite-system and internal continuous-section presentation interfaces. The hits supply polynomial algebra tools, not the whole obligation."
+  },
+  {
+   "tool": "grep",
+   "query": "taylor|totalDegree|degreeLE|restrictTotalDegree",
+   "results": "25 hits, including MvPowerSeries.totalDegree_truncFinset, totalDegree_trunc', Polynomial.map_taylor and analytic Taylor-series results. Local source inspection additionally found MvPolynomial.restrictDegree, degreesLE, le_totalDegree and coeff_pderiv.",
+   "date": "2026-10-26",
+   "verdict": "No exact match for the specified finite-system and internal continuous-section presentation interfaces. The hits supply polynomial algebra tools, not the whole obligation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PolynomialRankOneDifferenceModel",
+  "date": "2026-10-26",
+  "group": "A6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image; agent-formulated expansion in lem-sfb-polynomial-rank-one-difference-model.",
+   "via": [
+    "lem-sfb-polynomial-rank-one-difference-model",
+    "lem-sfb-polynomial-translation-acyclic",
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PolynomialRankOneDifferenceModelData",
+  "file": "lean/Sheaf/Paper/PolynomialRankOneDifferenceModelData.lean",
+  "declaration": "Profinite.CondensedAction.PolynomialRankOne.PolynomialSystem",
+  "statement": "structure PolynomialSystem",
+  "branch": "sheaf-dag",
+  "by": "A6",
+  "date": "2026-10-26",
+  "declarations": [
+   "Profinite.CondensedAction.PolynomialRankOne.Variables",
+   "Profinite.CondensedAction.PolynomialRankOne.Indices",
+   "Profinite.CondensedAction.PolynomialRankOne.Residual",
+   "Profinite.CondensedAction.PolynomialRankOne.coordinates",
+   "Profinite.CondensedAction.PolynomialRankOne.translate",
+   "Profinite.CondensedAction.PolynomialRankOne.PolynomialSystem",
+   "Profinite.CondensedAction.PolynomialRankOne.tensorPolynomial",
+   "Profinite.CondensedAction.PolynomialRankOne.polynomialSection",
+   "Profinite.CondensedAction.PolynomialRankOne.PresentationAssertion"
+  ],
+  "note": "Verbatim extraction of the nine data declarations from PolynomialRankOneDifferenceModel. The original module publicly reexports this module; names, signatures, fields and definition bodies are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-96f37",
+  "group": "A6",
+  "result": "fix",
+  "landing": "20261026T080838-L-1626806",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-96f37",
+  "group": "A6",
+  "result": "fix",
+  "landing": "20261026T080838-L-1626806",
+  "kind": "interface",
+  "note": "independent cc review: data module vs old item module (verbatim apart from blueprint tags); item statement unchanged; the 2 sorried splits (system existence, presentation for arbitrary Q) against the item node's plan steps 1-5/6-9 and IndUnipotent.System/exists_presentation"
+ }
+}

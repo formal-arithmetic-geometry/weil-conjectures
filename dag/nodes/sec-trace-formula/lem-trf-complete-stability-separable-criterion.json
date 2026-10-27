@@ -1,0 +1,374 @@
+{
+ "id": "lem-trf-complete-stability-separable-criterion",
+ "kind": "statement",
+ "title": "Stability of a complete field can be tested on separable extensions",
+ "statement": "Let $K$ be a field [def-weil-field] complete for a nontrivial real-valued multiplicative nonarchimedean absolute value. Equip each finite field extension $E/K$ with its minimal-polynomial spectral norm $s_{E/K}$ [lem-trf-incomplete-spectral-algebra-norm]. Then $K$ is stable [def-trf-stable-nonarchimedean-field] if and only if every finite separable extension $E/K$ [def-weil-pbc-separable-algebraic-extension] admits a $K$-basis $e_1,\\ldots,e_n$ such that $$s_{E/K}\\left(\\sum_i a_i e_i\\right)=\\max_i|a_i|s_{E/K}(e_i)\\qquad(a_i\\in K).$$ The stability conclusion includes all finite extensions, including inseparable ones.",
+ "source": {
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Proposition 3.6.2/2, printed pp.157-158; used at the start of the ascent proof of Proposition 3.6.2/3 Local archival copy absent; WANTED in report.",
+  "url": "https://math.arizona.edu/~cais/scans/BGR-Non_Archimedean_Analysis.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "lem-trf-incomplete-spectral-algebra-norm",
+  "def-trf-stable-nonarchimedean-field",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "proof": [
+  {
+   "text": "If $K$ is stable, its defining orthogonal-basis property applies to every finite field extension, hence in particular to the finite separable ones. This proves the forward implication.",
+   "uses": [
+    "def-trf-stable-nonarchimedean-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Definition 3.6.1/1 and Proposition 3.6.2/2, forward implication"
+   }
+  },
+  {
+   "text": "Conversely assume the stated property for finite separable extensions. Choose an algebraic closure $\\Omega/K$. Its spectral norm is a multiplicative nonarchimedean absolute value extending that of $K$, so $\\Omega$ is a normed $K$-vector space. The subfield $K_s$ of separable algebraic elements is a separable closure of $K$ and is dense in $\\Omega$ by the spectral-density lemma.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "lem-trf-spectral-norm-algebraic-extension",
+    "def-weil-pbc-relative-separable-closure",
+    "lem-trf-separable-closure-spectral-density"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proposition 3.6.2/2, proof, first sentence"
+   }
+  },
+  {
+   "text": "For a finite-dimensional $K$-subspace $U\\subseteq K_s$, choose a finite basis. The filtered-union description of a separable closure puts these finitely many elements in one finite separable subextension $L/K$ of $K_s$. Its spectral norm is the restriction of $s_{\\Omega/K}$: the monic minimal polynomial of an element over $K$ is unchanged by the inclusion. By the assumption $L$ has an orthogonal $K$-basis, and the cartesian-subspace lemma gives one for $U$ with its restricted norm. This includes $U=0$.",
+   "uses": [
+    "def-pd-separable-closure",
+    "lem-trf-incomplete-spectral-algebra-norm",
+    "lem-trf-cartesian-subspace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proposition 3.6.2/2, proof, last sentence, finite-subextension interpretation of cartesianness"
+   }
+  },
+  {
+   "text": "Apply dense cartesian permanence with $V=\\Omega$, $W=K_s$ and $N=s_{\\Omega/K}$. The base field is complete, density is Step 2, and the required orthogonality on finite subspaces of $W$ is Step 3. Thus every finite-dimensional $K$-subspace of $\\Omega$ has an orthogonal basis.",
+   "uses": [
+    "lem-trf-dense-cartesian-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proposition 3.6.2/2, proof, application of Proposition 2.4.3/8"
+   }
+  },
+  {
+   "text": "Let $E/K$ now be any finite extension, with no separability assumption. Choose an algebraic closure $\\Omega_E$ of $E$. Algebraic-closure equivalence for the algebraic extension $E/K$ gives a $K$-isomorphism $\\Omega_E\\simeq\\Omega$ and hence an embedding $j:E\\hookrightarrow\\Omega$. For every $z\\in E$, injectivity gives $p(j(z))=0$ exactly when $p(z)=0$ for $p\\in K[T]$; consequently the monic minimal polynomials, and their spectral coefficient formulas, agree. Thus $j$ is a $K$-linear isometry. Apply Step 4 to the finite-dimensional subspace $j(E)$ and pull its basis back along $j$. This gives the defining orthogonality formula for $E$, so $K$ is stable.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "lem-pod-algebraic-extension-closure-equivalence",
+    "lem-trf-incomplete-spectral-algebra-norm",
+    "def-trf-stable-nonarchimedean-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proposition 3.6.2/2, proof, conclusion from cartesianness of the algebraic closure"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-stable-nonarchimedean-field",
+  "def-weil-algebraic-closure",
+  "lem-trf-spectral-norm-algebraic-extension",
+  "def-weil-pbc-relative-separable-closure",
+  "lem-trf-separable-closure-spectral-density",
+  "def-pd-separable-closure",
+  "lem-trf-incomplete-spectral-algebra-norm",
+  "lem-trf-cartesian-subspace",
+  "lem-trf-dense-cartesian-permanence",
+  "lem-pod-algebraic-extension-closure-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "BGR 3.6.2/2, printed pp.157-158; online scan proof read, local archival copy WANTED; expanded assembly with the density and cartesian-permanence inputs stated separately."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A complete nonarchimedean field is stable if every finite separable extension admits an orthogonal basis for the spectral norm",
+   "results": {
+    "t": "2026-10-24T15:57:25Z",
+    "tool": "leanfinder",
+    "query": "A complete nonarchimedean field is stable if every finite separable extension admits an orthogonal basis for the spectral norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm.nontriviallyNormedField",
+     "spectralNorm.normedField",
+     "spectralNorm.completeSpace",
+     "isNonarchimedean_spectralNorm_of_finiteDimensional_normal",
+     "spectralNorm.normedSpace",
+     "spectralNorm.normedAddCommGroup",
+     "spectralNorm.metricSpace",
+     "spectralNorm_eq_invariantExtension"
+    ],
+    "digest": "b6d75552e41fcd7c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectral norm field/completeness instances and separable-closure algebra do not imply the separable testing criterion for exact orthogonal bases."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stability of a complete nonarchimedean field can be tested using only finite separable extensions",
+   "results": {
+    "t": "2026-10-24T16:09:01Z",
+    "tool": "leanfinder",
+    "query": "Stability of a complete nonarchimedean field can be tested using only finite separable extensions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsUltrametricDist.isNonarchimedean_invariantExtension",
+     "IsSepClosed",
+     "IsNonarchimedeanLocalField.instCompleteSpace",
+     "spectralNorm.nontriviallyNormedField",
+     "spectralNorm.completeSpace",
+     "krullTopology_isTotallySeparated",
+     "Valued.integer.properSpace_iff_completeSpace_and_isDiscreteValuationRing_integer_and_finite_residueField",
+     "WithAbs.instIsSeparable"
+    ],
+    "digest": "caafd4694c6694b5"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectral norm field/completeness instances and separable-closure algebra do not imply the separable testing criterion for exact orthogonal bases."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsSeparable, spectralNorm",
+   "results": {
+    "t": "2026-10-24T16:08:58Z",
+    "tool": "loogle",
+    "query": "Algebra.IsSeparable, spectralNorm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectral norm field/completeness instances and separable-closure algebra do not imply the separable testing criterion for exact orthogonal bases."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Testing stability of a complete valued field on finite separable extensions",
+   "results": {
+    "t": "2026-10-24T15:57:23Z",
+    "tool": "leansearch",
+    "query": "Testing stability of a complete valued field on finite separable extensions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsNonarchimedeanLocalField.instCompleteSpace",
+     "Valued.completable",
+     "separableClosure",
+     "Valued.extensionValuation_apply_coe",
+     "IsSepClosure.recOn",
+     "WithAbs.instIsSeparable",
+     "Valued.extension",
+     "Valued.extensionValuation"
+    ],
+    "digest": "5c80bce076f48656"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectral norm field/completeness instances and separable-closure algebra do not imply the separable testing criterion for exact orthogonal bases."
+  },
+  {
+   "tool": "grep",
+   "query": "stable.*separable|separable.*cartesian|stable.*orthogonal",
+   "results": {
+    "t": "2026-10-24T16:08:58Z",
+    "tool": "grep",
+    "query": "stable.*separable|separable.*cartesian|stable.*orthogonal",
+    "sub": "",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/RingHom/PurelyInseparable.lean",
+     "Mathlib/CategoryTheory/Triangulated/Orthogonal.lean",
+     "Mathlib/CategoryTheory/Triangulated/Orthogonal.lean",
+     "Mathlib/CategoryTheory/Triangulated/Orthogonal.lean",
+     "Mathlib/CategoryTheory/Triangulated/Orthogonal.lean"
+    ],
+    "digest": "f07065d092040b35"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectral norm field/completeness instances and separable-closure algebra do not imply the separable testing criterion for exact orthogonal bases."
+  },
+  {
+   "tool": "grep",
+   "query": "stable.*separable|separable.*cartesian|orthogonal.*spectralNorm",
+   "results": {
+    "t": "2026-10-24T16:52:28Z",
+    "tool": "grep",
+    "query": "stable.*separable|separable.*cartesian|orthogonal.*spectralNorm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/RingHom/PurelyInseparable.lean"
+    ],
+    "digest": "551520540756f52c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectral norm structures and separability do not provide the criterion for exact orthogonal bases in every finite extension."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Testing stability of complete nonarchimedean fields on finite separable extensions",
+   "results": {
+    "t": "2026-10-24T16:52:28Z",
+    "tool": "leansearch",
+    "query": "Testing stability of complete nonarchimedean fields on finite separable extensions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsNonarchimedeanLocalField.instCompleteSpace",
+     "separableClosure",
+     "isNonarchimedean_spectralNorm_of_finiteDimensional_normal",
+     "IsSepClosure.recOn",
+     "WithAbs.instIsSeparable",
+     "exists_nonarchimedean_pow_mul_seminorm_of_finiteDimensional",
+     "Algebra.FormallyUnramified.iff_isSeparable",
+     "SeparableClosure.isSepClosed"
+    ],
+    "digest": "e372183a2d72a706"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectral norm structures and separability do not provide the criterion for exact orthogonal bases in every finite extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "spectralNorm, Algebra.IsSeparable",
+   "results": {
+    "t": "2026-10-24T16:52:28Z",
+    "tool": "loogle",
+    "query": "spectralNorm, Algebra.IsSeparable",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectral norm structures and separability do not provide the criterion for exact orthogonal bases in every finite extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complete nonarchimedean field is stable if all its finite separable extensions admit exact orthogonal spectral norm bases",
+   "results": {
+    "t": "2026-10-24T16:52:30Z",
+    "tool": "leanfinder",
+    "query": "A complete nonarchimedean field is stable if all its finite separable extensions admit exact orthogonal spectral norm bases",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm.nontriviallyNormedField",
+     "spectralNorm.normedField",
+     "spectralNorm.completeSpace",
+     "spectralNorm_eq_invariantExtension",
+     "isNonarchimedean_spectralNorm_of_finiteDimensional_normal",
+     "spectralNorm.normedSpace",
+     "spectralNorm_unique_field_norm_ext",
+     "spectralMulAlgNorm"
+    ],
+    "digest": "8ec6cbb7a2afe73d"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectral norm structures and separability do not provide the criterion for exact orthogonal bases in every finite extension."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-stable-field-completion",
+  "date": "2026-10-25",
+  "group": "NR"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: Norm-preserving lifts for a Tate epimorphism surjective on canonical reductions. Independent analytic input: Finite affinoid maps are finite on spectral unit balls over an algebraically closed field. Proof input: Orthogonal spectral norm on the fraction field of a finite affinoid domain. Supporting input: Stability of the Gauss fraction field of a Tate algebra. BGR stability proof input: Proposition 3.6.2/3, printed p.158 (scan PDF p.166), applied through the common completion of a dense isometric field inclusion; this is the generic dense-field transfer used explicitly in the proof of Proposition 5.3.2/3, printed p.214 (scan PDF p.220). Completion ascent half of the BGR criterion. Supporting input to BGR 3.6.2/3: Proposition 3.6.2/2, printed pp.157-158; used at the start of the ascent proof of Proposition 3.6.2/3",
+   "via": [
+    "lem-trf-stable-field-completion",
+    "lem-trf-dense-weak-stability-transfer",
+    "lem-trf-tate-gauss-fraction-stability",
+    "lem-trf-tate-fraction-orthogonal-spectral-norm",
+    "lem-trf-finite-affinoid-unit-ball-finiteness",
+    "lem-trf-tate-reduction-norm-lifting",
+    "lem-trf-affinoid-distinguished-presentation",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-trf-complete-stability-separable-criterion",
+  "worker": "stage1",
+  "summary": "NN preserved the statement, checked BGR 3.6.2/2 online and expanded its density/permanence proof. Two statement-only analytic inputs isolate separable spectral density and dense cartesian permanence; existing subspace, separable-closure and algebraic-closure nodes handle the assembly. All finite extensions, including inseparable ones, are retained.",
+  "blueprint": "Below the historical analytic ancestry of lem-trf-local-term-locality: BGR 3.6.2/2 used in the ascent proof of BGR 3.6.2/3. The current latest blueprint contracting-correspondence statement and unit were read; no current unit or chapter route is replaced. Whole-blueprint searches for stable field, orthogonal basis, separable algebraic closure and dense cartesian found no equivalent blueprint node; same_as remains [].",
+  "tool_uses": [
+   {
+    "node": "def-pd-separable-closure",
+    "why": "The filtered union of finite separable subfields is the generic algebraic description of a separable closure; used only as a tool, not as a replacement of the analytic route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pd-separable-closure"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NN-289251def",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-289251def (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited node's statement, the unit and delivery-errors A–F. The source (BGR 3.6.2/2, 3.4.1/6, 2.4.3/8) is not in literature/: it is WANTED and the proof is marked agent-written, so I checked the mathematics myself and could not compare against the page. The statement is unchanged and correct, and it covers inseparable E. Step 1 is an elementary specialisation of def-trf-stable-nonarchimedean-field. Step 2: lem-trf-spectral-norm-algebraic-extension needs a complete, nontrivial base, which holds, and gives a multiplicative norm on Omega; relative-separable-closure makes K_s a separable closure; density comes from the new node. Step 3: the finite basis lies in one finite separable L (def-pd-separable-closure), whose spectral norm is the restriction of s_Omega (same minimal polynomial; the two formulas differ only by reindexing). The hypothesis gives L an orthogonal basis and lem-trf-cartesian-subspace passes it to U, U=0 included. Step 4: every hypothesis of permanence holds (K complete, N an ultrametric definite homogeneous norm, W dense, step 3). Step 5: IsAlgClosure.equivOfAlgebraic gives a K-embedding E→Omega that is an isometry; pulling back the basis gives stability. New node separable-closure-spectral-density is true: for inseparable x, P+εT is separable with a root y where s(x−y)≤(|ε|s(x))^{1/d}. It is not a duplicate; lem-trf-separable-monic-approximation plus lem-sfb-roots-coefficient-proximity is a route for its proof. New node dense-cartesian-permanence is true: norm equivalence over complete K, approximation, then an isometry onto a subspace of W. The same argument appears inline only in lem-trf-completed-algebraic-closure-cartesian steps 6–8, not as a node, so it is not a duplicate. Neither new node restates a clause of the item. Form: statement-only, single backslashes, correct created/blueprint/unit fields; lean_audit is omitted, as in other landed trf nodes. The declared tool use of def-pd-separable-closure is a definition, which is harmless; I accept it. No fixes."
+ }
+}

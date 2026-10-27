@@ -1,0 +1,226 @@
+{
+ "id": "lem-sfb-field-finite-type-over-subring-localization",
+ "kind": "statement",
+ "title": "A field finite type over a subring is finite over a principal localization which is a field",
+ "statement": "Let $K$ be a field [def-weil-field] and let $R\\subseteq K$ be a commutative subring containing $1$. Suppose $K$ is a finitely generated $R$-algebra [def-weil-pbc-finite-type-algebra]. Then there exists $s\\in R$, $s\\ne0$, such that the principal localization $R_s=R[1/s]$ [def-weil-ring-localization-away], embedded in $K$ by $r/s^n\\mapsto r s^{-n}$, is a field and $K$ is finite-dimensional as a vector space over $R_s$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00FY (lemma-field-finite-type-over-domain)"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-ring-localization-away"
+ ],
+ "proof": [
+  {
+   "text": "Since $R\\subseteq K$ contains $1\\ne0$, $R$ is a domain, so $(0)$ is a prime of $R$ whose closure $V(0)$ is all of $T=\\operatorname{Spec}R$: it is a generic point of $T$. Let $h:P=\\operatorname{Spec}K\\to T$ be the morphism induced by the inclusion [def-weil-affine-spectrum], $\\mathfrak q\\mapsto\\mathfrak q\\cap R$. The only prime of $K$ is $(0)$ and $(0)\\cap R=(0)$, so $P$ is one point and $h(P)=\\{(0)\\}$. By [lem-weil-pbc-lft-pointwise-criterion] with $U=P$, $V=T$ and the finite type ring map $R\\to K$, $h$ is locally of finite type; it is quasi-compact since $P$ is a single point, hence of finite type [def-weil-finite-type-morphism]. Apply [lem-sbc-generic-closed-subset-fibre-nonempty] with $C=P$ and $\\eta=(0)$: the fibre over $\\eta$ contains the point of $P$, so there is an open $U\\ni(0)$ of $T$ with $h^{-1}(t)\\ne\\emptyset$ for every $t\\in U$, that is $(0)\\in U\\subseteq h(P)=\\{(0)\\}$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-lft-pointwise-criterion",
+    "def-weil-finite-type-morphism",
+    "lem-sbc-generic-closed-subset-fibre-nonempty"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FY (lemma-field-finite-type-over-domain), proof"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-spec-localization-away-basic-open](i), choose $s$ with $(0)\\in D(s)\\subseteq U$; thus $s\\ne0$ and $D(s)=\\{(0)\\}$. Set $A=R_s$. The fraction formulas in [def-weil-ring-localization-away] show that $r/s^n\\mapsto rs^{-n}$ is a ring homomorphism into $K$. If its value is zero, then $r=0$ in $K$ and hence in $R$, so it is injective. In particular $A$ is a nonzero domain. Part (ii) of the basic-open node identifies $\\operatorname{Spec}A$ with $D(s)$, so it has just the prime $(0)$.",
+   "uses": [
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FY (lemma-field-finite-type-over-domain), proof"
+   }
+  },
+  {
+   "text": "Every nonzero $a\\in A$ is a unit: otherwise $(a)$ is proper and [lem-weil-pbc-proper-ideal-contained-in-maximal] places it inside a maximal ideal $\\mathfrak m$. A maximal ideal is prime: if $bc\\in\\mathfrak m$ and $b\\notin\\mathfrak m$, write $1=u+vb$ with $u\\in\\mathfrak m$ and multiply by $c$ to get $c\\in\\mathfrak m$. Thus $\\mathfrak m=(0)$ by Step 2, contradicting $0\\ne a\\in\\mathfrak m$. Consequently $A$ is a field by [def-weil-field].",
+   "uses": [
+    "lem-weil-pbc-proper-ideal-contained-in-maximal",
+    "def-weil-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FY (lemma-field-finite-type-over-domain), proof"
+   }
+  },
+  {
+   "text": "Choose finite $R$-algebra generators $x_1,\\ldots,x_n$ of $K$ using [def-weil-pbc-finite-type-algebra]. Every element of $K$ is a polynomial in them with coefficients in $R\\subseteq A$, so they also generate $K$ as an $A$-algebra. Since $A$ and $K$ are fields, [lem-weil-pbc-zariski-lemma] gives $\\dim_A K<\\infty$. Together with the embedding of Step 2 and $s\\ne0$, this proves every clause.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "lem-weil-pbc-zariski-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FY (lemma-field-finite-type-over-domain), proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-lft-pointwise-criterion",
+  "def-weil-finite-type-morphism",
+  "lem-sbc-generic-closed-subset-fibre-nonempty",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
+  "def-weil-field",
+  "def-weil-pbc-finite-type-algebra",
+  "lem-weil-pbc-zariski-lemma"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00FY (lemma-field-finite-type-over-domain), proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If a field K is a finitely generated algebra over a subring R then some principal localization of R is a field and K is finite over it",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.EssFiniteType.cond\", \"module\": \"Mathlib/RingTheory/EssentialFiniteness\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {inst : CommRing R} {inst_1 : CommRing S} {inst_2 : Algebra R S}\\n  [self : Algebra.EssFiniteType R S],\\n  ∃ s, IsLocalization (Submonoid.comap (algebraMap (↥(Algebra.adjoin R ↑s)) S) (IsUnit.submonoid S)) S\", \"doc\": \"For commutative rings $ R $ and $ S $ with an $ R $-algebra structure on $ S $, if $ S $ is of essential finite type over $ R $, then there exists a finite set $ s $ such that $ S $ is the localizatio\"}\n  {\"name\": \"Algebra.essFiniteType_iff_exists_subalgebra\", \"module\": \"Mathlib/RingTheory/EssentialFiniteness\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  Algebra.EssFiniteType R S ↔ ∃ S₀ M, Algebra.FiniteType R ↥S₀ ∧ IsLocalization M S\", \"doc\": \"A commutative ring $ S $ is of essential finite type over a commutative ring $ R $ if and only if there exists a finitely generated $ R $-subalgebra $ S_0 \\\\subseteq S $ and a submonoid $ M \\\\subseteq S\"}\n  {\"name\": \"Algebra.EssFiniteType.isLocalization\", \"module\": \"Mathlib/RingTheory/EssentialFiniteness\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [h : Algebra.EssFiniteType R S], IsLocalization (Algebra.EssFiniteType.submonoid R S) S\", \"doc\": \"If $ S $ is a commutative ring of essential finite type over a commutative ring $ R $, then $ S $ is the localization of $ R $ at the submonoid consisting of units in $ S $ whose images under the cano\"}\n  {\"name\": \"instFiniteLocalizationAlgebraMapSubmonoidPrimeCompl\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Instances\", \"type\": \"∀ {R : Type u_1} (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] {P : Ideal R} [inst_4 : P.IsPrime] [inst_5 : Algebra S T] [inst_6 : Algebra R T]\\n  [inst_7 : IsScalarTower R S T] [Module.Finite S T],\\n  Module.Finite (Localization\", \"doc\": \"If $ S $ is a finitely generated module over $ T $, then the localization of $ S $ at the complement of a prime ideal $ P $ is a finitely generated module over the localization of $ T $ at the complem\"}\n  {\"name\": \"RingHom.finite_ofLocalizationSpan\", \"module\": \"Mathlib/RingTheory/RingHom/Finite\", \"type\": \"RingHom.OfLocalizationSpan @RingHom.Finite\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with a ring homomorphism $ f : R → S $. If $ s ⊆ R $ is a subset whose ideal span equals $ R $, and for every $ s ∈ s $ the localization of $ f $ at $ s $ is a\"}\n  {\"name\": \"Algebra.QuasiFinite.instOfIsFractionRing\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [IsFractionRing R S],\\n  Algebra.QuasiFinite R S\", \"doc\": \"If $ S $ is the fraction ring of a commutative semiring $ R $, then $ S $ is a quasi-finite $ R $-algebra. This means $ S $, as an $ R $-module, is finitely generated.\"}\n  {\"name\": \"Algebra.instEssFiniteTypeLocalization\", \"module\": \"Mathlib/RingTheory/EssentialFiniteness\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.EssFiniteType R S] (M : Submonoid S), Algebra.EssFiniteType R (Localization M)\", \"doc\": \"If $ S $ is an $ R $-algebra of essential finite type and $ M $ is a submonoid of $ S $, then the localization $ S[M^{-1}] $ is also an $ R $-algebra of essential finite type. This follows because loc\"}\n  {\"name\": \"Algebra.FiniteType.of_span_eq_top_target\", \"module\": \"Mathlib/RingTheory/RingHom/FiniteType\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (s : Set S),\\n  Ideal.span s = ⊤ → (∀ x ∈ s, Algebra.FiniteType R (Localization.Away x)) → Algebra.FiniteType R S\", \"doc\": \"If the ideal generated by a set $ s $ in $ S $ is the entire ring (i.e., $ \\\\text{span}(s) = \\\\top $), and for every $ x \\\\in s $ the localization $ S_x $ is a finitely generated $ R $-algebra, then $ S \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: essential finite type and localization finiteness results do not supply a principal localization of an arbitrary subring that is a field."
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*(isField|is_field)|[Ff]ield.*[Ff]inite[Tt]ype|[Ff]inite[Tt]ype.*[Ff]ield",
+   "results": "[grep] OK 21 hit(s)\n  {\"file\": \"Mathlib/RingTheory/QuasiFinite/Basic.lean\", \"line\": \"291\", \"text\": \"  have : IsJacobsonRing (P.Fiber S) := isJacobsonRing_of_finiteType (A := P.ResidueField)\"}\n  {\"file\": \"Mathlib/RingTheory/QuasiFinite/Basic.lean\", \"line\": \"294\", \"text\": \"  exact ⟨Algebra.FiniteType.isNoetherianRing P.ResidueField _,\"}\n  {\"file\": \"Mathlib/RingTheory/QuasiFinite/Basic.lean\", \"line\": \"549\", \"text\": \"lemma _root_.Ideal.Fiber.lift_residueField_surjective [Algebra.FiniteType R S]\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Basic.lean\", \"line\": \"466\", \"text\": \"theorem exists_primeSpectrum_prod_le_and_ne_bot_of_domain (h_fA : ¬IsField A) {I : Ideal A}\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Field.lean\", \"line\": \"54\", \"text\": \"    [PerfectField K] [Algebra.EssFiniteType K L] : Algebra.FormallySmooth K L := by\"}\n  {\"file\": \"Mathlib/RingTheory/RingHom/EssFiniteType.lean\", \"line\": \"56\", \"text\": \"    (IsLocalRing.ResidueField.map f).EssFiniteType := by\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/Basic.lean\", \"line\": \"250\", \"text\": \"theorem exists_not_isUnit_of_not_isField [Nontrivial R] (hf : ¬IsField R) :\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/Basic.lean\", \"line\": \"262\", \"text\": \"  obtain ⟨x, hx0, hxu⟩ := exists_not_isUnit_of_not_isField hf\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/Basic.lean\", \"line\": \"265\", \"text\": \"theorem exists_maximal_of_not_isField [Nontrivial R] (h : ¬ IsField R) :\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/Basic.lean\", \"line\": \"279\", \"text\": \"  obtain ⟨I, hI, hIm⟩ := exists_maximal_of_not_isField h\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/Basic.lean\", \"line\": \"285\", \"text\": \"  obtain ⟨I, hI, hIm⟩ := exists_maximal_of_not_isField h\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/Field.lean\", \"line\": \"217\", \"text\": \"theorem iff_isSeparable (L : Type u) [Field L] [Algebra K L] [EssFiniteType K L] :\"}\n  {\"file\": \"Mathlib/RingTheory/DedekindDomain/Ideal/Lemmas.lean\", \"line\": \"543\", \"text\": \"theorem ideal_ne_top_iff_exists (hR : ¬IsField R) (I : Ideal R) :\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/LocalRing.lean\", \"line\": \"58\", \"text\": \"  have : EssFiniteType R (ResidueField S) := .comp _ S _\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/LocalRing.lean\", \"line\": \"59\", \"text\": \"  have : EssFiniteType (ResidueField R) (ResidueField S) := .of_comp R _ _\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/LocalRing.lean\", \"line\": \"75\", \"text\": \"  have : EssFiniteType (ResidueField R) (S ⧸ mR) := .of_comp R _ _\"}\n  {\"file\": \"Mathlib/RingTheory/LocalRing/ResidueField/Ideal.lean\", \"line\": \"195\", \"text\": \"instance (p : Ideal R) [p.IsPrime] : Algebra.EssFiniteType R p.ResidueField :=\"}\n  {\"file\": \"Mathlib/RingTheory/LocalRing/ResidueField/Ideal.lean\", \"line\": \"202\", \"text\": \"    Algebra.EssFiniteType p.ResidueField q.ResidueField := by\"}\n  {\"file\": \"Mathlib/RingTheory/LocalRing/ResidueField/Ideal.lean\", \"line\": \"203\", \"text\": \"  have : Algebra.EssFiniteType R q.ResidueField := .comp _ A _\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Field.lean\", \"line\": \"175\", \"text\": \"lemma of_formallyUnramified_of_field [EssFiniteType K A] [FormallyUnramified K A] :\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Field.lean\", \"line\": \"185\", \"text\": \"lemma iff_formallyUnramified_of_field [EssFiniteType K A] :\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: essential finite type and localization finiteness results do not supply a principal localization of an arbitrary subring that is a field."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A field finitely generated as an algebra over a subring is finite over a principal localization of that subring which is a field",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IntermediateField.finite_of_fg_of_isAlgebraic\", \"module\": \"Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra\", \"type\": \"∀ {F : Type u_1} [inst : Field F] {E : Type u_2} [inst_1 : Field E] [inst_2 : Algebra F E] [Algebra.EssFiniteType F E]\\n  [Algebra.IsAlgebraic F E], Module.Finite F E\", \"doc\": \"If $ E $ is a field extension of $ F $ that is finitely generated as an $ F $-algebra and algebraic over $ F $, then $ E $ is a finite-dimensional vector space over $ F $. In other words, under the as\"}\n  {\"name\": \"Module.Finite.of_isLocalizedModule\", \"module\": \"Mathlib.RingTheory.Localization.Finiteness\", \"type\": \"[Module.Finite R M] : Module.Finite Rₚ Mₚ\", \"doc\": \"If $ M $ is a finitely generated $ R $-module and $ S $ is a submonoid of $ R $, then the localization $ M_S $ is a finitely generated module over the localized ring $ R_S $.\"}\n  {\"name\": \"RingHom.finite_localizationPreserves\", \"module\": \"Mathlib.RingTheory.RingHom.Finite\", \"type\": \": RingHom.LocalizationPreserves @RingHom.Finite\", \"doc\": \"If $ f : A \\\\to B $ is a ring homomorphism making $ B $ a finitely generated $ A $-module, then for any submonoid $ M \\\\subseteq A $, the localized homomorphism $ A_M \\\\to B_{f(M)} $ also makes $ B_{f(M)\"}\n  {\"name\": \"Module.Finite.instLocalizationLocalizedModule\", \"module\": \"Mathlib.RingTheory.Localization.Finiteness\", \"type\": \"[Module.Finite R M] : Module.Finite (Localization S) (LocalizedModule S M)\", \"doc\": \"If $ M $ is a finitely generated module over a semiring $ R $, then the localization of $ M $ with respect to an Ore set $ S $ is a finitely generated module over the localization $ R[S^{-1}] $.\"}\n  {\"name\": \"Algebra.EssFiniteType.of_isLocalization\", \"module\": \"Mathlib.RingTheory.EssentialFiniteness\", \"type\": \"(M : Submonoid R) [IsLocalization M S] : EssFiniteType R S\", \"doc\": \"If $ S $ is a localization of a commutative ring $ R $ at a submonoid $ M $, then $ S $ is finitely generated as an $ R $-algebra.\"}\n  {\"name\": \"IntermediateField.fg_of_fg_toSubalgebra\", \"module\": \"Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra\", \"type\": \"(S : IntermediateField F E) (h : S.toSubalgebra.FG) : S.FG\", \"doc\": \"If the subalgebra corresponding to an intermediate field $ S $ is finitely generated over $ F $, then $ S $ is finitely generated as an intermediate field over $ F $.\"}\n  {\"name\": \"RingHom.finitePresentation_ofLocalizationSpanTarget\", \"module\": \"Mathlib.RingTheory.RingHom.FinitePresentation\", \"type\": \": OfLocalizationSpanTarget @FinitePresentation\", \"doc\": \"If the target of a localization is finitely generated as an algebra, then the induced ring homomorphism is finitely presented.\"}\n  {\"name\": \"RingHom.finiteType_localizationPreserves\", \"module\": \"Mathlib.RingTheory.RingHom.FiniteType\", \"type\": \": RingHom.LocalizationPreserves @RingHom.FiniteType\", \"doc\": \"If a ring homomorphism $ f : A \\\\to B $ makes $ B $ a finitely generated $ A $-algebra, then for any submonoid $ M \\\\subseteq A $, the induced homomorphism between the localizations $ A_M \\\\to B_{f(M)} $\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: essential finite type and localization finiteness results do not supply a principal localization of an arbitrary subring that is a field."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FiniteType, IsLocalization.Away",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"Algebra.QuasiFinite.of_isIntegral_of_finiteType\", \"module\": \"Mathlib.RingTheory.QuasiFinite.Basic\", \"type\": \" {R : Type u_1} {S : Type u_2} {T : Type u_3} [CommRing R] [CommRing S] [CommRing T] [Algebra R S] [Algebra R T] [Algebra S T] [IsScalarTower R S T] [Algebra.IsIntegral R S] [Algebra.FiniteType R T] (s : S) [IsLocalization.Away s T] : Algebra.QuasiFinite R T\", \"doc\": \"If `T` is both a finite type `R`-algebra, and the localization of an integral `R`-algebra\\n(away from an element), then `T` is quasi-finite over `R`\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: essential finite type and localization finiteness results do not supply a principal localization of an arbitrary subring that is a field."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A field is finite type as an algebra over a domain only if a localization at one nonzero element of the domain is a field with finite extension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.essFiniteType_iff_exists_subalgebra\", \"module\": \"Mathlib/RingTheory/EssentialFiniteness\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  Algebra.EssFiniteType R S ↔ ∃ S₀ M, Algebra.FiniteType R ↥S₀ ∧ IsLocalization M S\", \"doc\": \"A commutative ring $ S $ is of essential finite type over a commutative ring $ R $ if and only if there exists a finitely generated $ R $-subalgebra $ S_0 \\\\subseteq S $ and a submonoid $ M \\\\subseteq S\"}\n  {\"name\": \"Algebra.EssFiniteType.cond\", \"module\": \"Mathlib/RingTheory/EssentialFiniteness\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {inst : CommRing R} {inst_1 : CommRing S} {inst_2 : Algebra R S}\\n  [self : Algebra.EssFiniteType R S],\\n  ∃ s, IsLocalization (Submonoid.comap (algebraMap (↥(Algebra.adjoin R ↑s)) S) (IsUnit.submonoid S)) S\", \"doc\": \"For commutative rings $ R $ and $ S $ with an $ R $-algebra structure on $ S $, if $ S $ is of essential finite type over $ R $, then there exists a finite set $ s $ such that $ S $ is the localizatio\"}\n  {\"name\": \"instFiniteFractionRingLocalizationAlgebraMapSubmonoidNonZeroDivisors\", \"module\": \"Mathlib/RingTheory/RingHom/Finite\", \"type\": \"∀ {A : Type u_5} {C : Type u_6} [inst : CommRing A] [inst_1 : CommRing C] [inst_2 : Algebra A C] [Module.Finite A C],\\n  Module.Finite (FractionRing A) (Localization (Algebra.algebraMapSubmonoid C (nonZeroDivisors A)))\", \"doc\": \"If $ A $ and $ C $ are commutative rings with $ C $ an $ A $-algebra finitely generated as an $ A $-module, then the fraction ring of $ A $ is finitely generated as a module over the localization of $\"}\n  {\"name\": \"instFiniteDimensionalFractionRingOfFinite\", \"module\": \"Mathlib/RingTheory/Algebraic/Integral\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [inst_3 : IsDomain R]\\n  [inst_4 : IsDomain S] [inst_5 : Module.IsTorsionFree R S] [Module.Finite R S],\\n  FiniteDimensional (FractionRing R) (FractionRing S)\", \"doc\": \"If $ R $ and $ S $ are integral domains with $ S $ being a finitely generated and torsion-free $ R $-module, then the fraction field of $ S $ is a finite-dimensional vector space over the fraction fie\"}\n  {\"name\": \"RingHom.finiteType_holdsForLocalizationAway\", \"module\": \"Mathlib/RingTheory/RingHom/FiniteType\", \"type\": \"RingHom.HoldsForLocalizationAway @RingHom.FiniteType\", \"doc\": \"For commutative rings $ R $ and $ S $, where $ S $ is the localization of $ R $ at an element $ r $, the canonical ring homomorphism from $ R $ to $ S $ is of finite type. This means $ S $ is a finite\"}\n  {\"name\": \"Algebra.EssFiniteType.isLocalization\", \"module\": \"Mathlib/RingTheory/EssentialFiniteness\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [h : Algebra.EssFiniteType R S], IsLocalization (Algebra.EssFiniteType.submonoid R S) S\", \"doc\": \"If $ S $ is a commutative ring of essential finite type over a commutative ring $ R $, then $ S $ is the localization of $ R $ at the submonoid consisting of units in $ S $ whose images under the cano\"}\n  {\"name\": \"Algebra.FiniteType.of_span_eq_top_target\", \"module\": \"Mathlib/RingTheory/RingHom/FiniteType\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (s : Set S),\\n  Ideal.span s = ⊤ → (∀ x ∈ s, Algebra.FiniteType R (Localization.Away x)) → Algebra.FiniteType R S\", \"doc\": \"If the ideal generated by a set $ s $ in $ S $ is the entire ring (i.e., $ \\\\text{span}(s) = \\\\top $), and for every $ x \\\\in s $ the localization $ S_x $ is a finitely generated $ R $-algebra, then $ S \"}\n  {\"name\": \"Algebra.EssFiniteType.of_isLocalization\", \"module\": \"Mathlib/RingTheory/EssentialFiniteness\", \"type\": \"∀ {R : Type u_1} (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (M : Submonoid R)\\n  [IsLocalization M S], Algebra.EssFiniteType R S\", \"doc\": \"If $ S $ is a localization of a commutative ring $ R $ at a submonoid $ M $, then $ S $ is finitely generated as an $ R $-algebra.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: essential finite type and localization finiteness results do not supply a principal localization of an arbitrary subring that is a field."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FiniteType, IsLocalization.Away",
+   "results": "Search returned 1 hits: Algebra.QuasiFinite.of_isIntegral_of_finiteType.",
+   "date": "2026-10-23",
+   "verdict": "no match: localization finiteness and finite algebraic field extensions do not give the required principal localization of an arbitrary subring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A field finite type over a domain is module finite over some principal localization of that domain which is a field",
+   "results": "Search returned 8 hits: instFiniteDimensionalFractionRingOfFinite, instFiniteFractionRingLocalizationAlgebraMapSubmonoidNonZeroDivisors, Algebra.EssFiniteType.cond, instFiniteLocalizationAlgebraMapSubmonoidPrimeCompl, Algebra.essFiniteType_iff_exists_subalgebra, instFiniteAtPrimeLocalizationAlgebraMapSubmonoidPrimeCompl, Algebra.EssFiniteType.isLocalization, RingHom.finiteType_holdsForLocalizationAway.",
+   "date": "2026-10-23",
+   "verdict": "no match: localization finiteness and finite algebraic field extensions do not give the required principal localization of an arbitrary subring."
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*(isField|is_field)|[Ff]ield.*[Ff]inite[Tt]ype|[Ff]inite[Tt]ype.*[Ff]ield",
+   "results": "Search returned 21 hits: Mathlib/RingTheory/Ideal/Basic.lean, Mathlib/RingTheory/Ideal/Basic.lean, Mathlib/RingTheory/Ideal/Basic.lean, Mathlib/RingTheory/Ideal/Basic.lean, Mathlib/RingTheory/Ideal/Basic.lean, Mathlib/RingTheory/Spectrum/Prime/Basic.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean.",
+   "date": "2026-10-23",
+   "verdict": "no match: localization finiteness and finite algebraic field extensions do not give the required principal localization of an arbitrary subring."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A field finitely generated as an algebra over a subring is finite over a localization of the subring at one nonzero element",
+   "results": "Search returned 8 hits: Module.Finite.of_isLocalizedModule, IntermediateField.finite_of_fg_of_isAlgebraic, Module.Finite.instLocalizationLocalizedModule, RingHom.finite_localizationPreserves, Algebra.EssFiniteType.of_isLocalization, Algebra.essFiniteType_iff_exists_subalgebra, Subalgebra.FG, RingHom.finiteType_holdsForLocalizationAway.",
+   "date": "2026-10-23",
+   "verdict": "no match: localization finiteness and finite algebraic field extensions do not give the required principal localization of an arbitrary subring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a field is generated by finitely many elements as an algebra over a subring then inverting a single nonzero base element makes the base a field and the extension finite dimensional",
+   "results": "Search returned 8 hits: fieldOfFiniteDimensional, IntermediateField.finiteDimensional_adjoin, IntermediateField.fg_adjoin_finset, IntermediateField.adjoin.finiteDimensional, divisionRingOfFiniteDimensional, IntermediateField.fg_top, Field.Emb.Cardinal.instFiniteDimensionalSubtypeMemIntermediateFieldAdjoinImageToTypeOrdRankCompCoeBasisWellOrderedBasisLeastExtIioSingletonSet, IntermediateField.finite_of_fg_of_isAlgebraic.",
+   "date": "2026-10-23",
+   "verdict": "no match: localization finiteness and finite algebraic field extensions do not give the required principal localization of an arbitrary subring."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-type-field-point-characterization",
+  "date": "2026-10-23",
+  "group": "Q91"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 07Y4 (lemma-diagonal-representable), specialized to Spec Z; section-axioms [-1] through [3], definition-versal and definition-openness-versality. The specialization uses that Z and its localizations are G-rings. Local supporting input: first sentence of the proof of Tag 07Y4: apply lemma-get-smooth to each finite type field and object. Supporting input in Tag 07XY: apply lemma-versal-smooth after shrinking to the versal locus; residue-field restriction argument of Stacks 07XT via 07XG; algebraic input to Tag 01TA, (2) implies (3): apply Algebra Tag 00FY to the image subring A/p inside l",
+   "via": [
+    "lem-sfb-finite-type-field-point-characterization",
+    "lem-sfb-artin-versal-field-lifting",
+    "lem-sfb-artin-smooth-point-neighbourhood",
+    "lem-sfb-artin-representable-diagonal-criterion",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-field-finite-type-over-subring-localization",
+  "worker": "stage1",
+  "summary": "Followed Stacks 00FY without imposing Noetherianity or finite presentation. The image-neighbourhood input (00FH for E = Spec K) is the existing lem-sbc-generic-closed-subset-fibre-nonempty applied to Spec K -> Spec R with C = Spec K (reviewer FIX: the delivered new domain-image node was a specialization of it and is dropped). Reused basic-open localization, maximal-ideal existence, and Zariski lemma leaves. Wrote the localization embedding, the singleton-spectrum field argument, and preservation of algebra generators explicitly. Statement unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 07Y4 (lemma-diagonal-representable), specialized to Spec Z; section-axioms [-1] through [3], definition-versal and definition-openness-versality. The specialization uses that Z and its localizations are G-rings. Local supporting input: first sentence of the proof of Tag 07Y4: apply lemma-get-smooth to each finite type field and object. Supporting input in Tag 07XY: apply lemma-versal-smooth after shrinking to the versal locus; residue-field restriction argument of Stacks 07XT via 07XG; algebraic input to Tag 01TA, (2) implies (3): apply Algebra Tag 00FY to the image subring A/p inside l The supporting 00FY input is realized by its image-neighbourhood, principal-open, field, and finite-extension steps."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NV-161fdaf24",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-161fdaf24 (reviewer sub-agent of L); spot-checked: Read Stacks 00FY (algebra.tex:6611-6627) and 00FH (5770-5816) in full. The item statement is unchanged and correct. Steps 2-4 check out against their cited nodes: in step 2 the principal open D(s)={(0)}, the embedding R_s->K is well defined and injective, and Spec R_s is one point; in step 3 the maximal ideal is shown to be prime, so a nonzero nonunit is impossible and R_s is a field; in step 4 the generators carry over and the Zariski lemma applies. The new node lem-sfb-finite-type-domain-image-open is a true statement (00FH with E=Spec S and xi=(0); checked on identity, polynomial and localization maps). It is, however, a direct specialization of the existing node lem-sbc-generic-closed-subset-fibre-nonempty with P=Spec S, T=Spec R, C=P and eta=(0) (C5 duplicate). FIX: I dropped the node and rewrote step 1 of the item. Step 1 now gets finite type of Spec K->Spec R from lem-weil-pbc-lft-pointwise-criterion plus a one-point quasi-compactness argument, then applies lem-sbc-generic-closed-subset-fibre-nonempty with C=Spec K, which gives (0) in U and U inside the image {(0)}. proof_deps was recomputed and the split_report summary updated. There is no cycle. Accepted tool use: lem-sbc-generic-closed-subset-fibre-nonempty from unit sk-prop-normal-form, a generic fact that this unit gives nowhere else; the maintainer should record it in tool_uses. No SGA is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FieldFiniteTypeSubringLocalization",
+  "declaration": "Subring.exists_isField_away_finite_of_finiteType",
+  "file": "lean/Sheaf/RingTheory/FieldFiniteTypeSubringLocalization.lean",
+  "statement": "theorem exists_isField_away_finite_of_finiteType {K : Type u} [Field K] (R : Subring K) (hfinite : R.subtype.FiniteType) : ∃ (s : R) (hs : s ≠ 0), IsField (Localization.Away s) ∧ Function.Injective (IsLocalization.Away.lift (S := Localization.Away s) s (g := R.subtype) (isUnit_iff_ne_zero.mpr (Subtype.coe_injective.ne hs))) ∧ RingHom.Finite (IsLocalization.Away.lift (S := Localization.Away s) s (g := R.subtype) (isUnit_iff_ne_zero.mpr (Subtype.coe_injective.ne hs)))",
+  "branch": "newtargets-dag",
+  "by": "Q69",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c1b6d6c65",
+  "group": "Q69",
+  "result": "pass",
+  "note": "Read node, Stacks 00FY (algebra.tex:6611-6627), the 3 stmt_deps, the module, the report and the briefs. Lean: Field K, R : Subring K, R.subtype.FiniteType => exists s with s ≠ 0, IsField (Localization.Away s), and the canonical IsLocalization.Away.lift of R.subtype injective and RingHom.Finite: clause-exact, no extra assumptions, universe forced. Edge cases R=K (s=1), finite fields, all characteristics ok. H4: no existing copy in Mathlib, side-live or slopmaster2 (GeometricFieldStalkDescent cites 00FY but states something else). Only a sorry proof; source/blueprint docstrings and the 4-step proof docstring present; plain imports = proof_dep modules (brief-stage2 l.114); lines <= 100; lean.statement verbatim; node otherwise identical to live; report has Worker report and Second reading by Q69. No compile run (no file changed)."
+ }
+}

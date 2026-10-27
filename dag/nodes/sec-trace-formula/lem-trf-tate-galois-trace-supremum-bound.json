@@ -1,0 +1,356 @@
+{
+ "id": "lem-trf-tate-galois-trace-supremum-bound",
+ "kind": "statement",
+ "title": "The Galois field trace decreases the Tate supremum norm",
+ "statement": "Let $K$ be a complete field [def-weil-field] with a nontrivial real-valued nonarchimedean absolute value, and let $T=K\\langle U_1,\\ldots,U_d\\rangle$ ($d\\ge0$) be a restricted-series ring [def-trf-restricted-series-presentation] with its Gauss norm. Let $T\\hookrightarrow B$ be an injective $K$-algebra map, where $B$ is a nonzero normal affinoid domain finite as a $T$-module and $L=\\operatorname{Frac}(B)$ is finite Galois over $F=\\operatorname{Frac}(T)$. A normal domain is a domain integrally closed in its fraction field. Put $\\rho_B(b)=\\sup_{\\mathfrak m\\in\\operatorname{Max}B}|b\\bmod\\mathfrak m|$, using the unique absolute values on the finite residue fields as in [lem-trf-affinoid-supremum-seminorm-calculus]. Then $\\operatorname{Tr}_{L/F}(b)\\in T$ and $\\|\\operatorname{Tr}_{L/F}(b)\\|_G\\le\\rho_B(b)$ for every $b\\in B$, where the field trace is the trace of the $F$-linear map $z\\mapsto bz$ on $L$.",
+ "source": {
+  "document": "https://kskedlaya.org/18.727/spectra2.pdf",
+  "place": "Proof of Theorem 4(b), PDF pp.2-3, trace contraction before the trace-dual-basis estimates. Read online 2026-10-24. Specialization to the finite Galois integral closure of a Tate algebra; uses maximal-ideal lying over. Archival copy WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-restricted-series-presentation",
+  "lem-trf-affinoid-supremum-seminorm-calculus"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-finite-algebra-is-integral], every $b\\in B$ is integral over $T$. Mapping its monic equation into $L$ preserves that equation. By [lem-trf-field-trace-integrality], $\\tau=\\operatorname{Tr}_{L/F}(b)\\in F$ is integral over $T$. Since $T$ is integrally closed in $F$ by [lem-trf-tate-integrally-closed], $\\tau\\in T$.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-trf-field-trace-integrality",
+    "lem-trf-tate-integrally-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kskedlaya.org/18.727/spectra2.pdf",
+    "place": "Theorem 4(b), printed/PDF pp.2-3, trace contraction; details reconstructed by Q142 using the cited algebraic and maximal-residue statements."
+   }
+  },
+  {
+   "text": "Each $\\sigma\\in G=\\operatorname{Aut}_F(L)$ fixes $T$. Apply $\\sigma$ to a monic $T$-equation for $b$: it gives a monic $T$-equation, hence a monic $B$-equation, for $\\sigma(b)$. Normality of $B$ in $L=\\operatorname{Frac}(B)$ gives $\\sigma(b)\\in B$. Doing the same for $\\sigma^{-1}$ shows $\\sigma(B)=B$. The restrictions are $K$-algebra automorphisms.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kskedlaya.org/18.727/spectra2.pdf",
+    "place": "Theorem 4(b), printed/PDF pp.2-3, trace contraction; details reconstructed by Q142 using the cited algebraic and maximal-residue statements."
+   }
+  },
+  {
+   "text": "Apply the functorial contraction in [lem-trf-affinoid-supremum-seminorm-calculus] to $\\sigma:B\\to B$ and its inverse. It gives $\\rho_B(\\sigma b)\\le\\rho_B(b)\\le\\rho_B(\\sigma b)$, so $\\rho_B(\\sigma b)=\\rho_B(b)$. Both algebras are the given nonzero affinoid algebra.",
+   "uses": [
+    "lem-trf-affinoid-supremum-seminorm-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kskedlaya.org/18.727/spectra2.pdf",
+    "place": "Theorem 4(b), printed/PDF pp.2-3, trace contraction; details reconstructed by Q142 using the cited algebraic and maximal-residue statements."
+   }
+  },
+  {
+   "text": "By [lem-trf-galois-trace-sum], $\\tau=\\sum_{\\sigma\\in G}\\sigma b$ in $L$, hence in $B$. At each maximal ideal $\\mathfrak n$ of $B$, the residue absolute value is nonarchimedean: it extends $|\\cdot|_K$, so $|k\\cdot1|\\le1$ for every integer $k$, hence $|x+y|^N\\le\\sum_{i=0}^N|x|^i|y|^{N-i}\\le(N+1)\\max(|x|,|y|)^N$ by the binomial theorem, and taking $N$-th roots as $N\\to\\infty$ gives $|x+y|\\le\\max(|x|,|y|)$. This inequality, iterated over the finite sum, gives $|\\tau\\bmod\\mathfrak n|\\le\\max_{\\sigma\\in G}|\\sigma b\\bmod\\mathfrak n|\\le\\rho_B(b)$. The residue values and finite supremum exist by [lem-trf-affinoid-supremum-seminorm-calculus]. Taking the supremum gives $\\rho_B(\\tau)\\le\\rho_B(b)$.",
+   "uses": [
+    "lem-trf-galois-trace-sum",
+    "lem-trf-affinoid-supremum-seminorm-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kskedlaya.org/18.727/spectra2.pdf",
+    "place": "Theorem 4(b), printed/PDF pp.2-3, trace contraction; details reconstructed by Q142 using the cited algebraic and maximal-residue statements."
+   }
+  },
+  {
+   "text": "For every maximal $\\mathfrak m\\subset T$, lying over [pqf-lem-lying-over] supplies a prime $\\mathfrak n\\subset B$ over it, since $T\\hookrightarrow B$ is injective and integral by step 1. By [lem-weil-pbc-integral-prime-over-maximal-maximal], $\\mathfrak n$ is maximal. The inclusion $T/\\mathfrak m\\hookrightarrow B/\\mathfrak n$ preserves absolute values: restricting the latter value extends $|\\cdot|_K$, so uniqueness in [lem-trf-affinoid-supremum-seminorm-calculus] identifies it with the former. Thus $|\\tau\\bmod\\mathfrak m|\\le\\rho_B(\\tau)$. Taking the supremum and using the same node's Tate comparison gives $\\|\\tau\\|_G=\\rho_T(\\tau)\\le\\rho_B(\\tau)\\le\\rho_B(b)$.",
+   "uses": [
+    "pqf-lem-lying-over",
+    "lem-weil-pbc-integral-prime-over-maximal-maximal",
+    "lem-trf-affinoid-supremum-seminorm-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kskedlaya.org/18.727/spectra2.pdf",
+    "place": "Theorem 4(b), printed/PDF pp.2-3, trace contraction; details reconstructed by Q142 using the cited algebraic and maximal-residue statements."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-trf-field-trace-integrality",
+  "lem-trf-tate-integrally-closed",
+  "lem-trf-affinoid-supremum-seminorm-calculus",
+  "lem-trf-galois-trace-sum",
+  "pqf-lem-lying-over",
+  "lem-weil-pbc-integral-prime-over-maximal-maximal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kskedlaya.org/18.727/spectra2.pdf",
+  "place": "Theorem 4(b), printed/PDF pp.2-3, trace contraction; details reconstructed by Q142 using the cited algebraic and maximal-residue statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a normal domain finite over a Tate algebra with Galois fraction field extension, field trace belongs to the Tate algebra and its Gauss norm is bounded by the supremum norm",
+   "results": {
+    "t": "2026-10-24T08:52:13Z",
+    "tool": "leanfinder",
+    "query": "For a normal domain finite over a Tate algebra with Galois fraction field extension, field trace belongs to the Tate algebra and its Gauss norm is bounded by the supremum norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "prod_galRestrict_eq_norm",
+     "Algebra.algebraMap_intNorm",
+     "Algebra.intNormAux",
+     "Algebra.algebraMap_intNorm_of_isGalois",
+     "Algebra.map_intNormAux",
+     "Algebra.normalizedTrace",
+     "Algebra.intNorm",
+     "Algebra.normalizedTrace_surjective"
+    ],
+    "digest": "6ff4f1a3391745f6"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: trace_eq_sum_automorphisms and Algebra.intTraceAux give algebraic formulas only, without the comparison of the Gauss norm on T and the maximal-ideal supremum on B."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nonarchimedean trace estimate for integral closure of restricted convergent power series rings in finite Galois extensions: the trace has Gauss norm at most the maximum absolute value at maximal ideals",
+   "results": {
+    "t": "2026-10-24T08:52:14Z",
+    "tool": "leanfinder",
+    "query": "Nonarchimedean trace estimate for integral closure of restricted convergent power series rings in finite Galois extensions: the trace has Gauss norm at most the maximum absolute value at maximal ideals",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "prod_galRestrict_eq_norm",
+     "Algebra.intTraceAux",
+     "Algebra.map_intTraceAux",
+     "Algebra.algebraMap_intNorm",
+     "Algebra.intNormAux",
+     "Algebra.map_intNormAux",
+     "Algebra.intNorm_intNorm",
+     "Algebra.algebraMap_intNorm_of_isGalois"
+    ],
+    "digest": "064591dc645f920d"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: trace_eq_sum_automorphisms and Algebra.intTraceAux give algebraic formulas only, without the comparison of the Gauss norm on T and the maximal-ideal supremum on B."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The field trace from a finite Galois affinoid cover of a Tate algebra decreases the supremum seminorm",
+   "results": {
+    "t": "2026-10-24T08:52:07Z",
+    "tool": "leansearch",
+    "query": "The field trace from a finite Galois affinoid cover of a Tate algebra decreases the supremum seminorm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "trace_eq_sum_automorphisms",
+     "Algebra.normalizedTrace_eq_of_fininteDimensional",
+     "Algebra.normalizedTrace",
+     "Algebra.normalizedTrace_eq_of_finiteDimensional",
+     "Algebra.intTrace",
+     "FiniteField.algebraMap_trace_eq_sum_pow",
+     "Algebra.trace_surjective",
+     "trace_eq_trace_adjoin"
+    ],
+    "digest": "dda8191931098002"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: trace_eq_sum_automorphisms and Algebra.intTraceAux give algebraic formulas only, without the comparison of the Gauss norm on T and the maximal-ideal supremum on B."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"trace_eq_sum_automorphisms\"",
+   "results": {
+    "t": "2026-10-24T08:52:07Z",
+    "tool": "loogle",
+    "query": "\"trace_eq_sum_automorphisms\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "trace_eq_sum_automorphisms"
+    ],
+    "digest": "a93f55983fa9729e"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: trace_eq_sum_automorphisms and Algebra.intTraceAux give algebraic formulas only, without the comparison of the Gauss norm on T and the maximal-ideal supremum on B."
+  },
+  {
+   "tool": "grep",
+   "query": "intTrace|trace_eq_sum_automorphisms",
+   "results": {
+    "t": "2026-10-24T08:52:07Z",
+    "tool": "grep",
+    "query": "intTrace|trace_eq_sum_automorphisms",
+    "sub": "RingTheory",
+    "ok": true,
+    "n_hits": 14,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/Trace/Quotient.lean",
+     "Mathlib/RingTheory/Trace/Quotient.lean",
+     "Mathlib/RingTheory/Trace/Quotient.lean",
+     "Mathlib/RingTheory/DedekindDomain/Different.lean",
+     "Mathlib/RingTheory/DedekindDomain/Different.lean",
+     "Mathlib/RingTheory/DedekindDomain/Different.lean",
+     "Mathlib/RingTheory/DedekindDomain/Different.lean",
+     "Mathlib/RingTheory/DedekindDomain/Different.lean"
+    ],
+    "digest": "9118f78eece5a988"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: trace_eq_sum_automorphisms and Algebra.intTraceAux give algebraic formulas only, without the comparison of the Gauss norm on T and the maximal-ideal supremum on B."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"trace_eq_sum_automorphisms\"",
+   "results": {
+    "t": "2026-10-24T09:31:47Z",
+    "tool": "loogle",
+    "query": "\"trace_eq_sum_automorphisms\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "trace_eq_sum_automorphisms"
+    ],
+    "digest": "a93f55983fa9729e"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: field-trace formulas and norm-extension constructions do not compare the affinoid maximal-ideal supremum with the Tate Gauss norm. The exact algebraic trace formula is delivered separately as a Mathlib leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The field trace from a finite Galois affinoid cover of a Tate algebra has Gauss norm bounded by the maximal ideal supremum norm",
+   "results": {
+    "t": "2026-10-24T09:31:49Z",
+    "tool": "leanfinder",
+    "query": "The field trace from a finite Galois affinoid cover of a Tate algebra has Gauss norm bounded by the maximal ideal supremum norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "prod_galRestrict_eq_norm",
+     "Algebra.intNormAux",
+     "Algebra.normalizedTrace",
+     "isNonarchimedean_spectralNorm_of_finiteDimensional_normal",
+     "Algebra.algebraMap_intNorm_of_isGalois",
+     "Algebra.algebraMap_intNorm",
+     "spectralNorm_eq_invariantExtension",
+     "Algebra.map_intNormAux"
+    ],
+    "digest": "9268566b625cbd26"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: field-trace formulas and norm-extension constructions do not compare the affinoid maximal-ideal supremum with the Tate Gauss norm. The exact algebraic trace formula is delivered separately as a Mathlib leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "trace.*norm|norm.*trace|affinoid|TateAlgebra",
+   "results": {
+    "t": "2026-10-24T09:33:09Z",
+    "tool": "grep",
+    "query": "trace.*norm|norm.*trace|affinoid|TateAlgebra",
+    "sub": "RingTheory/Trace",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: field-trace formulas and norm-extension constructions do not compare the affinoid maximal-ideal supremum with the Tate Gauss norm. The exact algebraic trace formula is delivered separately as a Mathlib leaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The field trace on a finite Galois extension of a Tate algebra decreases the Gauss supremum norm",
+   "results": {
+    "t": "2026-10-24T09:33:09Z",
+    "tool": "leansearch",
+    "query": "The field trace on a finite Galois extension of a Tate algebra decreases the Gauss supremum norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "trace_eq_sum_automorphisms",
+     "Algebra.normalizedTrace",
+     "Algebra.norm_eq_prod_automorphisms",
+     "Algebra.normalizedTrace_eq_of_fininteDimensional",
+     "IsUltrametricDist.invariantExtension",
+     "Algebra.normalizedTrace_eq_of_finiteDimensional",
+     "FiniteField.algebraMap_trace_eq_sum_pow",
+     "Algebra.normalizedTrace_def"
+    ],
+    "digest": "a3c070639bf72738"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: field-trace formulas and norm-extension constructions do not compare the affinoid maximal-ideal supremum with the Tate Gauss norm. The exact algebraic trace formula is delivered separately as a Mathlib leaf."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-affinoid-spectral-banach-norm",
+  "date": "2026-10-24",
+  "group": "Q96"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: The spectral norm gives the Banach topology of a reduced affinoid. Supporting input: The Galois field trace decreases the Tate supremum norm.",
+   "via": [
+    "lem-trf-affinoid-spectral-banach-norm",
+    "lem-trf-affinoid-distinguished-presentation",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-tate-galois-trace-supremum-bound",
+  "worker": "stage1",
+  "group": "Q142",
+  "summary": "Statement unchanged. Expanded trace contraction into integrality of the trace, preservation of B by conjugation, invariance of its supremum, the residue triangle bound, and maximal-ideal lying over for comparison with the Tate Gauss norm. Added normality of Tate algebras as a statement-only input and two exact Mathlib trace leaves. All new-node searches were run and read.",
+  "blueprint": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: The spectral norm gives the Banach topology of a reduced affinoid. Supporting input: The Galois field trace decreases the Tate supremum norm. Steps 1-5 realize the inherited historical analytic trace-contraction ingredient, not any replacement of the current curve contracting-correspondence route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q142-f46af3f44",
+  "group": "Q142",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q142-f46af3f44 (reviewer sub-agent of L); spot-checked: Read the item, the three new nodes, every cited statement and the two Mathlib sources. The item statement is unchanged and true. Tested on d=0, B=T, b=0 and scalar b where the characteristic divides [L:F]. Step 1: finite => integral (lem-weil-pbc-finite-algebra-is-integral), the trace is integral over T (lem-trf-field-trace-integrality, Algebra.isIntegral_trace at Mathlib/RingTheory/Trace/Basic.lean:162-171 with variables at 155-156, exact, no separability needed), and T is normal (new unsplit lem-trf-tate-integrally-closed, true since Tate algebras are UFDs; DAG search found no existing statement; the envelope node only covers its own T_i over an algebraically closed K). Step 2 is elementary: sigma(B)=B because B is normal. Step 3: the calculus node's contraction holds for any K-algebra map, with no continuity assumption, so applying it to sigma and sigma^{-1} gives equality. Step 4: trace equals the sum over the Galois group (trace_eq_sum_automorphisms at Basic.lean:263-264, exact). Step 5: lying over and prime-over-maximal (both Mathlib leaves) plus uniqueness of the residue values give rho_T<=rho_B, and the Tate clause gives rho_T equal to the Gauss norm; this is the correct direction. FIX: step 4 used the nonarchimedean inequality for the residue absolute value, but the calculus node's statement only says 'unique extending absolute value'. I added the elementary binomial and N-th-root argument to step 4 (fixes/dag/nodes/sec-trace-formula/lem-trf-tate-galois-trace-supremum-bound.json). No other changes and no dropped nodes. The off-unit citations are all Mathlib leaves, so no tool_use is needed. The Kedlaya PDFs are not in literature/ (recorded as WANTED), so I checked the argument directly; proof_origin is agent.; 1 file(s) fixed by the reviewer"
+ }
+}

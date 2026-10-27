@@ -1,0 +1,126 @@
+{
+ "id": "lem-trf-fan-chart-section-is-chart",
+ "kind": "statement",
+ "title": "Characteristic fan criterion for a lifted section homomorphism to be a log chart",
+ "statement": "Let X be an fs locally Noetherian Zariski log scheme, c its characteristic chart to a fine fan F, x a point, and L a normalized affine localization at c(x) [def-trf-fs-log-blowup] [def-trf-fine-fan-blowup] [lem-trf-fine-fan-point-localization]. Suppose P=P_F,c(x) is fs. For any open U, homomorphism h:P → N_Z(U), and morphism a from the restricted sharp space of X to L, assume a followed by the inclusion is c|U. Assume also that at every y in U and for every p the sharpening of h(p) equals the canonical section of p pulled back along a, as germs on the restricted sharp space. Then h is an etale log chart on U [def-trf-fs-log-blowup]. No marked group section or germ of h at x is prescribed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VI 1.1, p.69; VIII 3.1.4(iii), 3.1.8(ii), pp.98--99; 3.3.12, p.108; explicit pushout verification in the parent node, steps 4--5."
+ },
+ "stmt_deps": [
+  "lem-trf-fan-chart-stalk-model"
+ ],
+ "proof": [
+  {
+   "text": "At a geometric point over y let E be the face of P whose chart images are ring units. The given equality of characteristic germs and factorization through c identify the geometric characteristic with the sharpening of P localized at E, using the actual Zariski and etale unit comparisons.",
+   "uses": [
+    "lem-trf-affine-fan-localization-sections",
+    "lem-trf-zariski-prelog-logification-comparison",
+    "lem-trf-zariski-log-stalk-unit-extension",
+    "lem-trf-fs-face-sharpening"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The associated-log stalk is the pushout P plus_E B^units and the induced map sends [p,u] to h(p)u. Each characteristic class is represented by p/e, so the map is surjective after absorbing h(e) into the unit.",
+   "uses": [
+    "lem-trf-associated-log-universal-stalks"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For equal images h(p)u=h(p')u', equality of localized characteristic classes gives e,e' in E with p*e'=p'*e. Integrality gives u*h(e)=u'*h(e'). The defining pushout relations identify the representatives via [p*e',u/h(e')]=[p'*e,u'/h(e)]. Hence the kernel is exactly the pushout congruence. This is IsStalkChart at every geometric point, which is the definition of IsChart.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-affine-fan-localization-sections",
+  "lem-trf-zariski-prelog-logification-comparison",
+  "lem-trf-zariski-log-stalk-unit-extension",
+  "lem-trf-fs-face-sharpening",
+  "lem-trf-associated-log-universal-stalks"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VI 1.1, p.69; VIII 3.1.4(iii), 3.1.8(ii), pp.98--99; 3.3.12, p.108; explicit pushout verification in the parent node, steps 4--5. Explicit subargument of lem-trf-fan-chart-local-monoid-lift."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A homomorphism to a fine logarithmic structure inducing the prescribed characteristic fan map is a logarithmic chart",
+   "results": "Returned manifold charts, smooth monoid morphisms, and categorical Fan.ext_hom_hom. None is a logarithmic chart criterion.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsChart\"",
+   "results": "Twelve elliptic curve normal form results, no logarithmic chart theorem.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Presheaf.*stalk|stalk.*germ",
+   "results": "Ordinary sheaf stalks and germs, local surjectivity, and sheafification. No logarithmic characteristic comparison, finite monoid lift, or chart criterion.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FanChartLocalMonoidLift",
+  "date": "2026-10-26",
+  "group": "F8"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, 3.3.2--3.3.13, pp.106--109, especially 3.3.4(ii), 3.3.8--3.3.11, 3.3.13(i),(iii); finite cover as in proof of 3.3.15. Subargument: returned log-fan-chart-blowup proof step(s) 3,4,5; Expose VIII 3.1.4(iii), 3.1.8(ii), 3.1.10(ii), pp.98--100; 3.3.12--3.3.13, pp.108--109: Zariski local lift expanded using free characteristic groups (VI 1.6, p.70). Subargument: Characteristic fan criterion for a lifted section homomorphism to be a log chart.",
+   "via": [
+    "lem-trf-fan-chart-local-monoid-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FanChartSectionIsChart",
+  "file": "lean/Sheaf/AlgebraicGeometry/FanChartSectionIsChart.lean",
+  "declaration": "AlgebraicGeometry.fan_chart_section_is_chart",
+  "declarations": [
+   "AlgebraicGeometry.fan_chart_section_is_chart"
+  ],
+  "statement": "theorem fan_chart_section_is_chart\n    {X : FineSaturatedLogScheme.{u}} {F : FineFan.Fan.{u}}\n    (c : LogFanChart X F) (x : X.scheme)\n    (L : FineFan.PointLocalization F (c.map.hom.base x))\n    (hP : IsFineSaturatedMonoid\n      (FineFan.stalk F.space.presheaf (c.map.hom.base x)))\n    (U : X.scheme.Opens)\n    (h : FineFan.stalk F.space.presheaf (c.map.hom.base x) →*\n      X.logStructure.monoidSheaf.obj.obj (op ((logOpenEtale X.scheme).obj U)))\n    (a : X.logStructure.sharpSpace.restrict U.isOpenEmbedding ⟶\n      F.space.restrict L.openSet.isOpenEmbedding)\n    (ha : a ≫ F.space.ofRestrict L.openSet.isOpenEmbedding =\n      X.logStructure.sharpSpace.ofRestrict U.isOpenEmbedding ≫ c.map)\n    (hh : ∀ (p : FineFan.stalk F.space.presheaf (c.map.hom.base x))\n      (y : X.scheme) (hy : y ∈ U),\n      FineFan.stalkMap (X.logStructure.sharpSpace.ofRestrict U.isOpenEmbedding)\n          ⟨y, hy⟩ (FineFan.germ X.logStructure.sharpSpace.presheaf U y hy\n            (X.logStructure.sharpSection U (h p))) =\n        FineFan.germ (X.logStructure.sharpSpace.restrict U.isOpenEmbedding).presheaf\n          ⊤ ⟨y, hy⟩ (by trivial) (FineFan.affinePullback (a ≫ L.iso.hom) p)) :\n    X.logStructure.IsChart ((logOpenEtale X.scheme).obj U) h",
+  "branch": "sheaf-dag",
+  "by": "F8",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-29bc9",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261026T081837-L-2086505",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-29bc9",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261026T081837-L-2086505",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement unchanged vs clone; three relocated defs byte-identical and publicly re-exported (zero external users/importers in clone); three new holes checked true against LogFanChart (zariski field) and node statements; item node proof/proof_deps vs Lean proof"
+ }
+}

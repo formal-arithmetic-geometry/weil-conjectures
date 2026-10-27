@@ -1,0 +1,296 @@
+{
+ "id": "lem-sfb-semiabelian-prime-to-torsion-schematic-density",
+ "kind": "statement",
+ "title": "Schematic density of invertible torsion points in a semiabelian variety",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $G\\to\\operatorname{Spec}F$ be a smooth separated commutative group scheme of finite type [def-pc-scheme, def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism] with semiabelian geometric fibres [def-sfb-semiabelian-geometric-fibres]. Separated means that the diagonal is a closed immersion [def-weil-closed-immersion]. For $n\\geq1$ write $[n]_G$ for the morphism given by adding a point to itself $n$ times using the group law. A rational point $x:\\operatorname{Spec}F\\to G$ [def-pc-rational-point] is killed by $n$ when $[n]_G\\circ x$ is the identity point. If $Z\\hookrightarrow G$ is a closed subscheme and every $x\\in G(F)$ killed by some positive integer whose image in $F$ is nonzero factors through $Z$, then $Z=G$ as a closed subscheme. Rank zero tori and zero-dimensional abelian quotients are allowed.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "I section 10, torsion and isogenies; supporting abelian density is the existing lem-sfb-abelian-prime-to-torsion-dense. Agent-formulated semiabelian extension and schematic version, using the torus extension definition; not asserted verbatim in Milne. Split-torus density is carried by the existing lem-sfb-smooth-diagonal-prime-to-characteristic-torsion-density."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-pc-scheme",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-sfb-semiabelian-geometric-fibres",
+  "def-weil-closed-immersion",
+  "def-pc-rational-point"
+ ],
+ "proof": [
+  {
+   "text": "Apply [def-sfb-semiabelian-geometric-fibres] to the identity geometric point of $\\operatorname{Spec}F$. It gives an abelian variety $B$, a split torus $T=(\\mathbf G_m)^r$, and homomorphisms $i:T\\to G$, $q:G\\to B$, with $T=\\ker q$ and $q$ fppf-locally surjective. Write group laws additively, including that of $T$. The torus over any $F$-scheme $S$ is affine and finitely presented: over $\\operatorname{Spec}R\\subseteq S$ its algebra is $R[t_1,v_1,\\ldots,t_r,v_r]/(t_jv_j-1)_j$. It is smooth by [def-sbc-smooth-morphisms]: across an affine square-zero thickening, lift the $r$ units specifying a point; if $ab=1+c$ with $c^2=0$, then $b(1-c)$ is an inverse of the lift $a$. Thus every such lift is still a point of the torus. The same calculation works for $r=0$, when the torus over $S$ is $S$. Over $F$ its Laurent monomial basis identifies its Hopf algebra with $F[\\mathbf Z^r]$, with comultiplication $t^v\\mapsto t^v\\otimes t^v$.",
+   "uses": [
+    "def-sfb-semiabelian-geometric-fibres",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tags 0498 (definition-pseudo-torsor), 0499 (lemma-characterize-trivial-pseudo-torsors); extension data from the cited semiabelian definition; elementary Laurent presentation and unit-lifting calculation"
+   }
+  },
+  {
+   "text": "The exact sequence in step 1 is an exact sequence of fppf sheaves. Its fibre over the tautological $B$-point is the sheaf represented by $G\\to B$, with the left $T_B$-action $t\\cdot y=i(t)+y$. Local surjectivity supplies an fppf cover $B_a\\to B$ and sections $s_a$ of $q$ on it. For every test scheme $U\\to B_a$, the maps $t\\mapsto s_a+i(t)$ and $y\\mapsto i^{-1}(y-s_a)$ are inverse: $q(y-s_a)=0$, so the second expression is defined by the scheme-theoretic kernel. The formulas are natural in $U$ and equivariant. Apply [lem-sfb-smooth-affine-group-torsor-representability] to this sheaf and the affine smooth finitely presented group $T_B$ of step 1. It gives a representing scheme $P\\to B$ which is smooth, surjective and universally open. Both $P$ and $G$ represent this same sheaf. The bijection of [lem-galois-yoneda-fully-faithful] sends the two inverse natural isomorphisms to inverse morphisms over $B$. Hence $q:G\\to B$ itself has these properties. In particular $q$ is an open map.",
+   "uses": [
+    "lem-sfb-smooth-affine-group-torsor-representability",
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tags 0499 (lemma-characterize-trivial-pseudo-torsors), 049B (lemma-torsor), 049C (remark-fun-with-torsors); smoothness descent: descent.tex Tag 02VL; openness: morphisms.tex Tag 056G"
+   }
+  },
+  {
+   "text": "Let $b\\in B(F)$ satisfy $nb=0$ for $n\\geq1$ nonzero in $F$. The sheaf fibre $G_b$ of the epimorphism in step 1 is an fppf-locally trivial $T$-torsor: pull back its local lifts and use exactly the two translation formulas of step 2. Apply [lem-sfb-smooth-affine-group-torsor-representability] now over $\\operatorname{Spec}F$, and identify the representing scheme with $G_b$ by [lem-galois-yoneda-fully-faithful]. Thus $G_b$ is smooth and nonempty. Since $F$ is algebraically closed, it is separably closed: an irreducible polynomial has a root in $F$ by [def-weil-algebraic-closure], hence is linear, so every finite separable extension is trivial. Therefore [lem-pc-rational-points-dense] gives $y\\in G_b(F)$. We have $ny\\in i(T(F))$ because $q(ny)=nb=0$; write $ny=i(a)$. In each multiplicative coordinate choose an $n$th root of $a_j\\in F^\\times$ by algebraic closedness. These roots are nonzero, so they define $t\\in T(F)$ with $nt=a$. Then $g=y-i(t)$ satisfies $q(g)=b$ and $ng=0$. For $r=0$ this correction is the identity, and the same computation applies.",
+   "uses": [
+    "lem-sfb-smooth-affine-group-torsor-representability",
+    "lem-galois-yoneda-fully-faithful",
+    "def-weil-algebraic-closure",
+    "lem-pc-rational-points-dense"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tags 0499 (lemma-characterize-trivial-pseudo-torsors), 049B (lemma-torsor); rational points from the cited existing density lemma; explicit root correction supplied by the agent"
+   }
+  },
+  {
+   "text": "For $b$ and $g$ as in step 3, translation gives an isomorphism $\\tau_g:T\\xrightarrow{\\sim}G_b$, $t\\mapsto g+i(t)$: its inverse is $y\\mapsto i^{-1}(y-g)$, defined on every test scheme by $q(y-g)=0$. The inverse maps are scheme morphisms by the universal property of the kernel fibre product; their composites are identities by the group laws. Pull back $Z\\hookrightarrow G$ along $T\\xrightarrow{\\tau_g}G_b\\to G$. The result $W\\hookrightarrow T$ is closed by [lem-pc-closed-subscheme-base-change-ideal-image]. If $t\\in T(F)$ satisfies $mt=0$ with $m\\geq1$ nonzero in $F$, then $nm(g+i(t))=0$. The product $nm$ is nonzero in the field, so the hypothesis on $Z$ implies that this point factors through $Z$, equivalently $t$ factors through $W$. By [lem-sfb-smooth-diagonal-prime-to-characteristic-torsion-density], applied to the smooth diagonalizable group $T$ of step 1, every $T[m]$ for such $m$ is a finite disjoint union of copies of $\\operatorname{Spec}F$. On each copy its inclusion factors through $W$ by the preceding pointwise assertion; the component maps therefore assemble to a factorization of $T[m]\\hookrightarrow T$ through $W$. The schematic-density clause of the same node now gives $W=T$. Consequently the whole scheme fibre $G_b\\to G$ factors through $Z$.",
+   "uses": [
+    "lem-pc-closed-subscheme-base-change-ideal-image",
+    "lem-sfb-smooth-diagonal-prime-to-characteristic-torsion-density"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 12.3 and Remark 12.5, printed pp.231–232; Theorem 12.32, printed p.242; closed pullback: Stacks schemes.tex Tag 01JU (lemma-fibre-product-immersion)"
+   }
+  },
+  {
+   "text": "Suppose $U=G\\setminus |Z|$ were nonempty. By step 2, $q(U)$ is a nonempty open subset of $B$. By [lem-sfb-abelian-prime-to-torsion-dense], it contains the image of a rational point $b\\in B(F)$ killed by a positive integer nonzero in $F$. Thus $U$ meets the image of $G_b\\to G$: for a rational point of $B$, its residue field is $F$, so $\\operatorname{Spec}F\\to B$ is the canonical morphism $\\operatorname{Spec}\\kappa(b)\\to B$ and $G_b=G\\times_B\\operatorname{Spec}F$ is the scheme-theoretic fibre of $q$ over $b$; by [def-pc-scheme-fibre] its first projection is a homeomorphism onto the topological fibre $q^{-1}(b)$, which contains a point of $U$. But step 4 puts this entire fibre in $|Z|$, a contradiction. Hence $|Z|=|G|$. This also treats $B$ of dimension zero: the same density statement includes that case.",
+   "uses": [
+    "lem-sfb-abelian-prime-to-torsion-dense",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I section 10, printed pp.42–45, supporting abelian torsion input; the actual topological density statement used is the existing cited node; open-image assembly supplied by the agent"
+   }
+  },
+  {
+   "text": "Apply [sbc-lem-smooth-geometrically-reduced] to the given smooth structure map $G\\to\\operatorname{Spec}F$. Its fibre is $G$, so $G$ is reduced. By [def-pc-reduced-scheme], every affine open $\\operatorname{Spec}R\\subseteq G$ has reduced ring $R$. By [def-weil-closed-immersion], the restriction of $Z$ is $\\operatorname{Spec}(R/I)$ for an ideal $I\\subseteq R$. Step 5 says $V(I)=\\operatorname{Spec}R$. Apply [lem-sc-reduced-ideals-zero-intersection] with both of its ideals equal to $I$: its hypothesis $V(I)\\cup V(I)=\\operatorname{Spec}R$ holds, and its conclusion gives $I=I\\cap I=0$. Thus $Z$ restricts to the whole of each affine open of $G$, and $Z=G$ as a closed subscheme. This is the required schematic conclusion, including the trivial group, $n=1$, and all allowed torus ranks.",
+   "uses": [
+    "sbc-lem-smooth-geometrically-reduced",
+    "def-pc-reduced-scheme",
+    "def-weil-closed-immersion",
+    "lem-sc-reduced-ideals-zero-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 056T (lemma-smooth-geometrically-normal); Tag 09NW (remark-conductor), specialized to equal ideals; reduced rings of affine opens: schemes.tex Tag 01J1 (lemma-reduced)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-reduced-scheme",
+  "def-pc-scheme-fibre",
+  "def-sbc-smooth-morphisms",
+  "def-sfb-semiabelian-geometric-fibres",
+  "def-weil-algebraic-closure",
+  "def-weil-closed-immersion",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-pc-closed-subscheme-base-change-ideal-image",
+  "lem-pc-rational-points-dense",
+  "lem-sc-reduced-ideals-zero-intersection",
+  "lem-sfb-abelian-prime-to-torsion-dense",
+  "lem-sfb-smooth-affine-group-torsor-representability",
+  "lem-sfb-smooth-diagonal-prime-to-characteristic-torsion-density",
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 12.32, printed p.242, and Aside 12.51, printed p.248 (torsion-density property is preserved by toroidal extensions), with the existing abelian-density node; explicit fibrewise lifting, open-image argument and reduced-scheme upgrade supplied here. Torsor properties follow Stacks 0499, 049B, 049C, 02VL and 056G."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Prime to characteristic torsion points of a semiabelian variety over an algebraically closed field are schematically dense",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.denseRange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsDominant f],\\n  DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"For any dominant morphism $ f: X \\to Y $ of schemes, the underlying continuous map between their topological spaces has dense image in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant.denseRange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsDominant f],\\n  DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f: X \\\\to Y $ is a dominant morphism of schemes, then the underlying continuous map between their topological spaces has a dense image in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X.RationalMap Y), Dense ↑f.domain\", \"doc\": \"For any rational map $ f $ between schemes $ X $ and $ Y $, the domain of $ f $ is a dense subset of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.dense_domain\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (self : X.PartialMap Y), Dense ↑self.domain\", \"doc\": \"For any partial map between schemes $X$ and $Y$, the open subset of $X$ on which the partial map is defined is dense in $X$.\"}\n  {\"name\": \"AlgebraicGeometry.dominant_eq_topologically\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"@AlgebraicGeometry.IsDominant =\\n  AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => DenseRange\", \"doc\": \"A morphism of schemes $ f : X \\to Y $ is dominant if and only if the underlying continuous map between their topological spaces has dense image in $ Y $. This establishes the equivalence between the al\"}\n  {\"name\": \"AlgebraicGeometry.isDominant_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsDominant f ↔ DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"A morphism $ f : X \\to Y $ of schemes is dominant if and only if the underlying continuous function of its base map $ f_{\\\\text{base}} : X \\to Y $ has dense image in $ Y $, i.e., the closure of the image\"}\n  {\"name\": \"AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X], AlgebraicGeometry.IsDominant X.toSpecΓ\", \"doc\": \"For any compact scheme $X$, the canonical morphism from $X$ to the affine scheme $\\\\operatorname{Spec}(\\\\Gamma(X))$ is dominant, meaning its image is dense in $\\\\operatorname{Spec}(\\\\Gamma(X))$.\"}\n  {\"name\": \"AlgebraicGeometry.instIsDominantιCoborderRange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsImmersion f],\\n  AlgebraicGeometry.IsDominant (AlgebraicGeometry.Scheme.Hom.coborderRange f).ι\", \"doc\": \"For any immersion $ f: X \\to Y $ of schemes, the inclusion morphism of the cobord of the image of $ f $ into $ Y $ is dominant. This means the image of this open subset is dense in $ Y $, as the cobord\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract torsion groups, dominant maps and nilradical support do not assert schematic density of semiabelian torsion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Torsion of order invertible in an algebraically closed field is Zariski dense in an extension of an abelian variety by a torus",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AddCommGroup.torsion\", \"module\": \"Mathlib.GroupTheory.Torsion\", \"type\": \"(G : Type u_1) → [inst : AddCommGroup G] → AddSubgroup G\", \"doc\": \"The additive subgroup of an additive commutative group $ G $ consisting of all elements with finite additive order, i.e., elements $ g $ for which there exists a positive integer $ n $ such that $ n \\\\\"}\n  {\"name\": \"CommGroup.torsion\", \"module\": \"Mathlib.GroupTheory.Torsion\", \"type\": \": Subgroup G\", \"doc\": \"The torsion subgroup of a commutative group $G$ consists of all elements of finite order. For any element $x$ in this subgroup, there exists a positive integer $n$ such that $x^n = 1$, and the inverse\"}\n  {\"name\": \"Submodule.torsion\", \"module\": \"Mathlib.Algebra.Module.Torsion.Basic\", \"type\": \"(R : Type u_1) →\\n  (M : Type u_2) → [inst : CommSemiring R] → [inst_1 : AddCommMonoid M] → [inst_2 : Module R M] → Submodule R M\", \"doc\": \"The submodule of $ M $ consisting of elements annihilated by some non-zero divisor of $ R $, i.e., $ \\\\{x \\\\in M \\\\mid \\\\exists a \\\\in R $, a is a non-zero divisor, and $ a \\\\cdot x = 0\\\\} $. This forms a su\"}\n  {\"name\": \"IsAlgClosure.isAlgClosed\", \"module\": \"Mathlib.FieldTheory.IsAlgClosed.Basic\", \"type\": \"∀ (R : Type u) {K : Type v} {inst : CommRing R} {inst_1 : Field K} {inst_2 : Algebra R K}\\n  {inst_3 : Module.IsTorsionFree R K} [self : IsAlgClosure R K], IsAlgClosed K\", \"doc\": \"If $ K $ is an algebraic closure of a commutative ring $ R $, meaning $ K $ is a field equipped with an $ R $-algebra structure, torsion-free as an $ R $-module, and every element of $ K $ is algebrai\"}\n  {\"name\": \"Algebra.ZariskisMainProperty.restrictScalars\", \"module\": \"Mathlib.RingTheory.ZariskisMainTheorem\", \"type\": \"[Algebra S T] [IsScalarTower R S T] [Algebra.IsIntegral R S] {p : Ideal T} (H : ZariskisMainProperty S p) :\\n  ZariskisMainProperty R p\", \"doc\": \"If $ S \\\\subseteq T $ is an algebra extension with integral closure containing $ R \\\\subseteq S $, and an ideal $ \\\\mathfrak{p} \\\\subseteq T $ satisfies Zariski's Main Theorem property over $ S $, then $ \"}\n  {\"name\": \"Algebra.IsGeometricallyReduced.casesOn\", \"module\": \"Mathlib.RingTheory.Nilpotent.GeometricallyReduced\", \"type\": \"{k : Type u_3} →\\n  {A : Type u_4} →\\n    [inst : Field k] →\\n      [inst_1 : Ring A] →\\n        [inst_2 : Algebra k A] →\\n          {motive : Algebra.IsGeometricallyReduced k A → Sort u} →\\n            (t : Algebra.IsGeometricallyReduced k A) →\\n              ((isReduced_algebraicClosure_tensorProduct : I\", \"doc\": \"If $ A $ is geometrically reduced over a field $ k $, then the tensor product $ A \\\\otimes_k \\\\overline{k} $ is a reduced ring, where $ \\\\overline{k} $ denotes the algebraic closure of $ k $.\"}\n  {\"name\": \"IsAlgClosure.isAlgebraic\", \"module\": \"Mathlib.FieldTheory.IsAlgClosed.Basic\", \"type\": \"∀ {R : Type u} {K : Type v} {inst : CommRing R} {inst_1 : Field K} {inst_2 : Algebra R K}\\n  {inst_3 : Module.IsTorsionFree R K} [self : IsAlgClosure R K], Algebra.IsAlgebraic R K\", \"doc\": \"If $ K $ is an algebraic closure of a commutative ring $ R $, then every element of $ K $ is algebraic over $ R $. This holds under the conditions that $ K $ is a field equipped with an $ R $-algebra \"}\n  {\"name\": \"AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \": IsZariskiLocalAtTarget @IsDominant\", \"doc\": \"The property of being a dominant morphism is Zariski local at the target. This means that for any morphism $ f: X \\to Y $, if there exists a Zariski covering sieve on $ Y $ such that the pullback of $ \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract torsion groups, dominant maps and nilradical support do not assert schematic density of semiabelian torsion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ZariskiDense\", \"torsion\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract torsion groups, dominant maps and nilradical support do not assert schematic density of semiabelian torsion."
+  },
+  {
+   "tool": "grep",
+   "query": "torsion.*[Dd]ense|[Dd]ense.*torsion|semi.?abelian",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract torsion groups, dominant maps and nilradical support do not assert schematic density of semiabelian torsion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed subscheme of a semi abelian group containing all invertible n torsion geometric points is the whole group",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AddMonoid.IsTorsion.torsion_eq_top\", \"module\": \"Mathlib/GroupTheory/Torsion\", \"type\": \"∀ {G : Type u_1} [inst : AddCommMonoid G], AddMonoid.IsTorsion G → AddCommMonoid.addTorsion G = ⊤\", \"doc\": \"If $ G $ is an additive commutative monoid where every element has finite additive order (i.e., $ G $ is a torsion additive monoid), then the additive torsion submonoid of $ G $ (the set of all elemen\"}\n  {\"name\": \"Monoid.IsTorsion.torsion_eq_top\", \"module\": \"Mathlib/GroupTheory/Torsion\", \"type\": \"∀ {G : Type u_1} [inst : CommMonoid G], Monoid.IsTorsion G → CommMonoid.torsion G = ⊤\", \"doc\": \"In a torsion monoid $G$, the submonoid consisting of all elements of finite order coincides with $G$ itself, i.e., $\\\\mathrm{torsion}(G) = G$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.support_nilradical\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), X.nilradical.support = ⊤\", \"doc\": \"The support of the nilradical of a scheme $X$ is equal to the entire underlying topological space of $X$, i.e., $\\\\text{supp}(\\\\text{nilradical}(X)) = X$.\"}\n  {\"name\": \"AddCircle.finite_torsion\", \"module\": \"Mathlib/Topology/Instances/AddCircle/Defs\", \"type\": \"∀ {𝕜 : Type u_1} [inst : AddCommGroup 𝕜] (p : 𝕜) [inst_1 : LinearOrder 𝕜] [IsOrderedAddMonoid 𝕜] {n : ℕ},\\n  0 < n → {u | n • u = 0}.Finite\", \"doc\": \"For any positive integer $n$, the set of elements $u$ in the additive circle $\\\\mathbb{K}/\\\\langle p \\\\rangle$ satisfying $n \\\\cdot u = 0$ is finite. Here, $\\\\mathbb{K}$ is an additive commutative group an\"}\n  {\"name\": \"AddCircle.finite_torsion_of_isSMulRegular\", \"module\": \"Mathlib/Topology/Instances/AddCircle/Defs\", \"type\": \"∀ {𝕜 : Type u_1} [inst : AddCommGroup 𝕜] (p : 𝕜) (n : ℕ), IsSMulRegular 𝕜 n → {x | n • x = 0}.Finite\", \"doc\": \"If $ n $ is a natural number and scalar multiplication by $ n $ is injective on the additive circle $ \\\\mathbb{K}/\\\\langle p \\\\rangle $, then the set $ \\\\{x \\\\in \\\\mathbb{K}/\\\\langle p \\\\rangle \\\\mid n \\\\cdot x\"}\n  {\"name\": \"AddCircle.card_torsion_le_of_isSMulRegular_int\", \"module\": \"Mathlib/Topology/Instances/AddCircle/Defs\", \"type\": \"∀ {𝕜 : Type u_1} [inst : AddCommGroup 𝕜] (p : 𝕜) (n : ℤ), n ≠ 0 → IsSMulRegular 𝕜 n → {x | n • x = 0}.encard ≤ ↑n.natAbs\", \"doc\": \"For a non-zero integer $ n $ and a scalar multiplication by $ n $ that is injective on an additive commutative group $ \\\\mathbb{K} $, the cardinality of the set $ \\\\{x \\\\in \\\\mathbb{K}/\\\\langle p \\\\rangle \\\\\"}\n  {\"name\": \"AddCircle.finite_torsion_of_isSMulRegular_int\", \"module\": \"Mathlib/Topology/Instances/AddCircle/Defs\", \"type\": \"∀ {𝕜 : Type u_1} [inst : AddCommGroup 𝕜] (p : 𝕜) (n : ℤ), IsSMulRegular 𝕜 n → {x | n • x = 0}.Finite\", \"doc\": \"Given an integer $ n $ acting as an injective scalar multiplication on the additive circle $ \\\\mathbb{K}/\\\\langle p\\\\rangle $, the set of elements $ x $ in the additive circle satisfying $ n \\\\cdot x = 0 \"}\n  {\"name\": \"AddCircle.card_torsion_le_of_isSMulRegular\", \"module\": \"Mathlib/Topology/Instances/AddCircle/Defs\", \"type\": \"∀ {𝕜 : Type u_1} [inst : AddCommGroup 𝕜] (p : 𝕜) (n : ℕ), n ≠ 0 → IsSMulRegular 𝕜 n → {x | n • x = 0}.encard ≤ ↑n\", \"doc\": \"For any positive natural number $n$ and element $p$ in an additive commutative group $\\\\mathbb{K}$, if scalar multiplication by $n$ is injective on $\\\\mathbb{K}$, then the set of torsion elements $\\\\{x \\\\\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract torsion groups, dominant maps and nilradical support do not assert schematic density of semiabelian torsion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Prime to characteristic torsion rational points are schematically dense in a semiabelian variety over an algebraically closed field",
+   "results": "Search command OK; 8 hit(s); names/files read: AlgebraicGeometry.Scheme.RationalMap.dense_domain, AlgebraicGeometry.Scheme.Hom.denseRange, AlgebraicGeometry.IsDominant.denseRange, AlgebraicGeometry.Scheme.PartialMap.dense_domain, AlgebraicGeometry.dominant_eq_topologically, AlgebraicGeometry.isDominant_iff, AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.IsDominant",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract torsion groups, rational-map domains, dominant maps or general ideal-sheaf identities, not torsion density in a semiabelian variety."
+  },
+  {
+   "tool": "grep",
+   "query": "torsion.*[Dd]ense|[Dd]ense.*torsion|semi.?abelian",
+   "results": "Search command OK; 3 hit(s); names/files read: Mathlib/Analysis/Convex/Segment.lean, Mathlib/Analysis/Convex/Segment.lean, Mathlib/Analysis/Convex/Extreme.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract torsion groups, rational-map domains, dominant maps or general ideal-sheaf identities, not torsion density in a semiabelian variety."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Torsion points of order prime to the characteristic are Zariski dense in a torus extension of an abelian variety",
+   "results": "Search command OK; 8 hit(s); names/files read: AddSubgroup.torsionBy, AddCircle.dense_addSubgroup_iff_ne_zmultiples, AddSubgroup.torsionBy.nsmul, AddCommGroup.torsion, CommGroup.torsion, IsTorsion.addSubgroup, AlgebraicGeometry.Scheme.AffineZariskiSite.instIsDenseSubsiteOpensCarrierCarrierCommRingCatGrothendieckTopologyGrothendieckTopologyToOpensFunctor, Ideal.torsionOf_eq_span_pow_pOrder",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract torsion groups, rational-map domains, dominant maps or general ideal-sheaf identities, not torsion density in a semiabelian variety."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torsion\", \"Dense\"",
+   "results": "Search command OK; 0 hit(s); names/files read: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract torsion groups, rational-map domains, dominant maps or general ideal-sheaf identities, not torsion density in a semiabelian variety."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed subscheme of a semiabelian group containing every point killed by an integer invertible in the ground field equals the entire group scheme",
+   "results": "Search command OK; 8 hit(s); names/files read: AlgebraicGeometry.Scheme.default_asIdeal, AlgebraicGeometry.Scheme.IdealSheafData.instIsEmptyCarrierCarrierCommRingCatSubschemeTop, AlgebraicGeometry.Scheme.support_nilradical, AlgebraicGeometry.Scheme.ker_toSpecΓ, AlgebraicGeometry.Scheme.IdealSheafData.ideal_top, AlgebraicGeometry.Scheme.IdealSheafData.support_top, AlgebraicGeometry.Scheme.IdealSheafData.radical_top, AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal_bot",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract torsion groups, rational-map domains, dominant maps or general ideal-sheaf identities, not torsion density in a semiabelian variety."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semiabelian-trait-specialization-agreement",
+  "date": "2026-10-24",
+  "group": "Q19"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Inherited independent power-prolongation route below sk-thm-sf-ctf-stability: Faltings II section 2 Lemma 1, valuation-ring comparison of graph fibres; torsion/normality compatibility input.",
+   "via": [
+    "lem-sfb-semiabelian-trait-specialization-agreement",
+    "lem-sfb-semiabelian-generic-graph-finite-fibres",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-semiabelian-prime-to-torsion-schematic-density",
+  "worker": "stage1",
+  "summary": "Proved schematic torsion density from the existing abelian-density, diagonalizable-density and smooth-affine torsor nodes, without creating duplicates. Checked local fppf lifts and all-test-scheme translation formulas, corrected torsion lifts by coordinate roots, used the finite reduced torus kernels to pass from rational-point factorization to schematic containment, and upgraded topological support equality using reducedness. Statement and statement dependencies unchanged; no Lean attachment found.",
+  "blueprint": "Current latest main-20261024, sec-six-functors-basics/sk-thm-sf-ctf-stability: inherited independent power-prolongation route below its direct-image finiteness input. This item has no individual blueprint ancestor (blueprint_refs.py ancestor returns None); its existing precise from.place and via chain are retained. All six steps supply the semiabelian torsion/normality compatibility input named there. Whole-blueprint searches for semiabelian, prime-to and smooth affine group torsor found no equivalent node.",
+  "tool_uses": [
+   {
+    "node": "lem-galois-yoneda-fully-faithful",
+    "why": "Uniqueness of a representing scheme identifies the torsor lemma output with the given quotient and fibre; this is a generic categorical tool."
+   },
+   {
+    "node": "lem-pc-rational-points-dense",
+    "why": "A nonempty smooth fibre over the algebraically closed field has a rational point; this is a generic field-point tool."
+   },
+   {
+    "node": "lem-pc-closed-subscheme-base-change-ideal-image",
+    "why": "Pulling the given closed subscheme back to a translated torus gives a closed subscheme; this is a generic closed-immersion tool."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "The given smooth group over a field is reduced; this is a generic smoothness tool."
+   },
+   {
+    "node": "lem-sc-reduced-ideals-zero-intersection",
+    "why": "With its two ideals equal this eliminates the closed ideal of full support in a reduced affine ring; this is a generic commutative algebra tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-galois-yoneda-fully-faithful",
+  "lem-pc-rational-points-dense",
+  "lem-pc-closed-subscheme-base-change-ideal-image",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-sc-reduced-ideals-zero-intersection"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NP-2f3e2a10b",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-2f3e2a10b (reviewer sub-agent of L); spot-checked: Read the item's six steps, all 13 cited statements, and Milne iAG Thm 12.32 (p.242) and Aside 12.51; the proof is correct. Step 1: the semiabelian definition at s=id gives the torus T=ker q and an fppf-locally surjective q; torus smoothness via the b(1-c) unit lift; Hopf algebra F[Z^r]. Step 2: the torsor node's hypotheses hold (T_B affine, smooth, finitely presented; local translation trivializations s_a+i(t) with inverse i^{-1}(y-s_a) on all test schemes); Yoneda gives P≅G, so q is open. Step 3: G_b is nonempty and smooth; algebraically closed implies separably closed, giving a rational point; the n-th-root correction g=y-i(t) checked. Step 4: nm(g+i(t))=0 with nm invertible; the finite reduced T[m] turns pointwise containment into factorization through W; density gives W=T. Step 6: reducedness of G and I∩I=0. No cycle (closure of 4351 nodes does not contain the item); no SGA; statement unchanged; no new nodes. Batch-5: lem-trf-rational-sequence-polynomial-forward-difference (polynomial interpolation) and def-trf-scheme-cover-descent-datum (general descent definition) are outside the trace-formula and Poincaré-duality assumptions, so both are accepted. FIX (C1): step 5 used, with no citation, that the underlying space of G×_B Spec F is the topological fibre q^{-1}(b); it now cites the existing def-pc-scheme-fibre, which states exactly this, notes κ(b)=F, and adds the node to proof_deps.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SemiabelianPrimeToTorsionSchematicDensity",
+  "declaration": "AlgebraicGeometry.semiabelian_isIso_of_contains_primeToTorsion",
+  "file": "lean/Sheaf/AlgebraicGeometry/SemiabelianPrimeToTorsionSchematicDensity.lean",
+  "statement": "theorem semiabelian_isIso_of_contains_primeToTorsion (F : Type u) [Field F] [IsAlgClosed F] (G : Grp (Over (Spec (.of F)))) [IsCommMonObj G.X] [Smooth G.X.hom] [IsSeparated G.X.hom] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] (hG : HasSemiabelianGeometricFibres G) {Z : Scheme.{u}} (i : Z ⟶ G.X.left) [IsClosedImmersion i] (hT : ∀ (n : ℕ), 0 < n → (n : F) ≠ 0 → ∀ x : G.X.hom.fieldPoints F, x.1 ≫ (𝟙 G.X ^ n).left = (MonObj.one (X := G.X)).left → ∃ z : Spec (.of F) ⟶ Z, z ≫ i = x.1) : IsIso i",
+  "branch": "newtargets-dag",
+  "by": "O2",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9e750f70f",
+  "group": "O2",
+  "result": "pass",
+  "note": "Clause-by-clause match: Field/IsAlgClosed F; G : Grp (Over (Spec F)) with IsCommMonObj, Smooth, IsSeparated, LocallyOfFiniteType+QuasiCompact (finite-type record); HasSemiabelianGeometricFibres read live (k : Type u, r : ℕ incl. 0, abelian A with no dim bound, kernel pullback square, fppf local surjectivity); [n] = Hom-monoid power 𝟙 G.X ^ n under open MonObj (project convention, as torsionSubgroupScheme); fieldPoints F = sections; identity = MonObj.one.left over (𝟙_).left = Spec F; 0<n and (n:F)≠0; closed immersion i with conclusion IsIso i (schematic equality). No extra hypotheses; n=0 excluded, n=1 and r=0/dim 0 covered; single universe u. Node copy differs from live only in lean; lean.statement verbatim; no existing duplicate (abelian analogue imported as proof dep); docstrings give source, blueprint id and all 6 proof steps; sorry only; worker scompile clean and dry run OK; no fixes, no recompile."
+ }
+}

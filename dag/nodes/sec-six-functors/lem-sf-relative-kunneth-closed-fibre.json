@@ -1,0 +1,145 @@
+{
+ "id": "lem-sf-relative-kunneth-closed-fibre",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sf-kunneth-relative",
+   "place": "Proof step (5) and final compact-support display",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Point-fibre specialization on ordinary closed restrictions",
+ "statement": "Fix a six-functor datum at any of the four coefficient stages and a normalized relative-product presentation R. Let J be a closed-subscheme square over the geometric point, as defined in [def-sf-relative-kunneth-constructions], whose i,j,r are ordinary closed immersions with both product projection equations. For every finite-Tor pair K,L on the original factors and every compactifications cz,cw,ct of the two closed schemes and their product, there is an isomorphism RΓ_c(Z,i*K) tensor^L RΓ_c(W,j*L) ≅ RΓ_c(Z times_k W,r*(K box L)), in exactly the finite, integral, rational or common-stage module derived category of the recorded compact-section definitions. This is relativeKunnethClosedFormula R J, and asserts no coefficient or cube compatibility.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
+  "place": "Proof step (5) and final compact-support display"
+ },
+ "stmt_deps": [
+  "def-sf-relative-kunneth-constructions"
+ ],
+ "proof": [
+  {
+   "text": "Closed immersions are proper and separated; their structure maps and finite-type domains are recorded in J and SixFunctorSpace. Pullback-domain preservation of the datum puts all three ordinary restrictions in finite-Tor domains.",
+   "uses": [
+    "def-sf-datum",
+    "lem-weil-pbc-closed-immersion-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
+    "place": "Proof step (5) and final compact-support display"
+   }
+  },
+  {
+   "text": "Use relative_product_presentation_exists for Q'. Evaluate its six factors on i*K and j*L and compose them. Monoidal pullback and pullback composition, with both projection equations of J, identify their external tensor with r*(K box L). The specified compactification comparisons identify the structural support images for cz,cw,ct.",
+   "uses": [
+    "lem-sf-relative-product-coefficient-factor-squares",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
+    "place": "Proof step (5) and final compact-support display"
+   }
+  },
+  {
+   "text": "Apply the geometric-point fibre to the inverse composite. Use the canonical tensorIso from pointFibreDerivedTensor, and the tensorClosed/model comparison, to identify the source with the tensor of the two fibres. Exact finite sections, completed integral fibre, rational localization and one common finite field with pointFdQbarRealization are precisely the four compact-section definitions, so this is the desired ordinary-restriction formula.",
+   "uses": [
+    "lem-sf-point-fibre-derived-tensor",
+    "def-weil-ordinary-compact-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
+    "place": "Proof step (5) and final compact-support display"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-datum",
+  "def-weil-ordinary-compact-cohomology",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-sf-point-fibre-derived-tensor",
+  "lem-sf-relative-product-coefficient-factor-squares",
+  "lem-weil-pbc-closed-immersion-proper"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
+  "place": "Proof step (5) and final compact-support display; expansion and coordinate transport of the stated argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "relative Kunneth base change commuting factor squares closed subscheme compact cohomology",
+   "results": "8 hits: CategoryTheory.TwoSquare.lanBaseChange, KaehlerDifferential.tensorKaehlerEquiv, KaehlerDifferential.cotangentComplexBaseChange_tmul, KaehlerDifferential.tensorKaehlerEquivBase, CategoryTheory.TwoSquare.lanBaseChange_app, AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatPullbackSchemeOfQuasiCompact_1, Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex",
+   "date": "2026-10-25",
+   "verdict": "no match: the specified four-stage presentations and their normalized comparisons are not Mathlib declarations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Kunneth\"",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "no match: the specified four-stage presentations and their normalized comparisons are not Mathlib declarations"
+  },
+  {
+   "tool": "grep",
+   "query": "Kunneth|kunneth|RelativeKunnethCube",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "no match: the specified four-stage presentations and their normalized comparisons are not Mathlib declarations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RelativeKunneth",
+  "date": "2026-10-26",
+  "group": "A4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-kunneth-relative",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RelativeKunnethClosedFibre",
+  "file": "lean/Sheaf/Paper/RelativeKunnethClosedFibre.lean",
+  "declaration": "WeilConjectures.relativeKunneth_closed_fibre",
+  "statement": "theorem relativeKunneth_closed_fibre\n    {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}\n    {E : Type u} [Field E] [Algebra (Padic C.l) E]\n    [FiniteDimensional (Padic C.l) E] {n : ℕ} {hn : 1 ≤ n}\n    {S : SixFunctorDatum D C E n hn} {s : PodCoefficientStage}\n    {Q Q' : SixFunctorCompactifiedSquare D}\n    [IsSeparated Q.g.hom.left] [IsSeparated Q.g'.hom.left] [IsSeparated Q.f'.hom.left]\n    (R : RelativeProductPresentation S s Q) (J : RelativeKunnethClosedSquare Q Q') :\n    relativeKunnethClosedFormula R J",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2b2e9",
+  "group": "A4",
+  "result": "fix",
+  "landing": "20261025T201243-L-2368212",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2b2e9",
+  "group": "A4",
+  "result": "fix",
+  "landing": "20261025T201243-L-2368212",
+  "kind": "interface",
+  "note": "independent cc review: relativeKunneth statement byte-identical to published; 12 moved declarations have identical type and value Expr hashes in the sandbox and published builds; two new sorry lemmas checked against the item's closed and base-change clauses and their nodes; 3 direct importers compiled against the delivered modules"
+ }
+}

@@ -1,0 +1,257 @@
+{
+ "id": "lem-sfb-field-monomorphism-finite-chart-decency-criterion",
+ "kind": "statement",
+ "title": "Finite affine etale chart fibres imply quasi-compact field representatives",
+ "statement": "Let $X$ be an algebraic space over $\\operatorname{Spec}\\mathbf Z$ [def-trf-algebraic-space, def-weil-affine-spectrum], and let $x\\in|X|$ [def-a1-space-point-topology]. Suppose there are a field $k$ [def-weil-field] and a monomorphism $j:\\operatorname{Spec}k\\to X$ representing $x$ such that, for every affine scheme $U$ and every representable etale morphism $U\\to X$ [def-weil-etale-morphism], the scheme $U\\times_X\\operatorname{Spec}k$ is finite over $k$ [def-weil-finite-integral-morphism, lem-trf-space-fibre-products-etale-covers]. Monomorphism means injectivity on morphisms from every test scheme. Then every field-valued representative $\\operatorname{Spec}L\\to X$ of $x$ is quasi-compact: for every affine scheme $T\\to X$, with no etale hypothesis on this test, $T\\times_X\\operatorname{Spec}L$ is a quasi-compact scheme [def-weil-pbc-quasi-compact-scheme].",
+ "source": {
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 03JV (lemma-UR-finite-above-x), implication (3) to (6)."
+ },
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-affine-spectrum",
+  "def-a1-space-point-topology",
+  "def-weil-field",
+  "def-weil-etale-morphism",
+  "def-weil-finite-integral-morphism",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-pbc-quasi-compact-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Choose an etale atlas $\\coprod_i U_i\\to X$ with all $U_i$ affine, by [lem-a1-space-affine-etale-cover]. Put $F_i=U_i\\times_X\\operatorname{Spec}k$. By hypothesis $F_i\\to\\operatorname{Spec}k$ is finite, hence affine by [def-weil-finite-integral-morphism]; since the target is affine, $F_i$ is affine by [lem-weil-pbc-affine-morphism-permanence](2). Thus $F_i$ is quasi-compact and $U_i$ is quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]. Consequently $F_i\\to U_i$ is quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence](1). The empty $F_i$ is allowed. These conclusions concern the maps to $U_i$, not just the finite maps to $\\operatorname{Spec}k$.",
+   "uses": [
+    "lem-a1-space-affine-etale-cover",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03JV (lemma-UR-finite-above-x), (3) implies (4) and (4) implies (6)."
+   }
+  },
+  {
+   "text": "The family $\\{U_i\\to X\\}$ is jointly surjective and etale; on scheme tests its maps are flat and locally of finite presentation by [def-weil-etale-morphism]. Apply [lem-sfb-space-quasicompact-fppf-local] to this family and $j:\\operatorname{Spec}k\\to X$, using step 1. The scheme and algebraic-space notions of quasi-compactness agree for these representable maps by the last sentence of [lem-sfb-space-quasicompact-affine-tests]. This proves that $j$ is quasi-compact. In particular its pullback over every affine scheme $T\\to X$ has quasi-compact source, even when $T\\to X$ is not etale.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-sfb-space-quasicompact-fppf-local",
+    "lem-sfb-space-quasicompact-affine-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03JV (lemma-UR-finite-above-x), (3) implies (4) and (4) implies (6)."
+   }
+  },
+  {
+   "text": "Let $q:\\operatorname{Spec}L\\to X$ represent $x$. Set $Y=\\operatorname{Spec}k\\times_X\\operatorname{Spec}L$ with projections $a:Y\\to\\operatorname{Spec}k$ and $b:Y\\to\\operatorname{Spec}L$. This is a scheme: it is the pullback of the representable diagonal of $X$ along the scheme $\\operatorname{Spec}k\\times_{\\operatorname{Spec}\\mathbf Z}\\operatorname{Spec}L$ [def-trf-algebraic-space]. By [def-a1-algebraic-space-point-classes], equality of the point classes supplies a common field $\\Omega$ and compatible maps from $\\operatorname{Spec}\\Omega$; their pair defines a map to $Y$, so $Y$ is nonempty. For any scheme $H$, if two maps $H\\to Y$ agree after $b$, their composites with $a$ agree after $j$ and hence agree, since $j$ is monic. The fibre-product property makes the two maps equal, so $b$ is monic. Apply [lem-sfb-monomorphism-into-field-coproduct] with a singleton indexing set: $Y$ is either empty or isomorphic over $\\operatorname{Spec}L$ to $\\operatorname{Spec}L$. Nonemptiness excludes the first case. Therefore $b$ is an isomorphism, and $h=a b^{-1}$ satisfies $q=jh$. This writes out the factorization of Stacks Tag 0H2X rather than assuming it.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-a1-algebraic-space-point-classes",
+    "lem-sfb-monomorphism-into-field-coproduct"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0H2X (lemma-equivalence-class-point-monomorphism), proof, using schemes.tex Tag 03DP (lemma-mono-towards-spec-field)."
+   }
+  },
+  {
+   "text": "Fix an arbitrary affine scheme $T\\to X$ and write $F=T\\times_X\\operatorname{Spec}k$, $E=T\\times_X\\operatorname{Spec}L$. Both are schemes by the representable diagonal [def-trf-algebraic-space], as in step 3. Step 2 and [lem-sfb-space-quasicompact-affine-tests] give quasi-compactness of $F$. The affine scheme $\\operatorname{Spec}L$ is quasi-compact and $\\operatorname{Spec}k$ is quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]; hence $h:\\operatorname{Spec}L\\to\\operatorname{Spec}k$ is quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence](1). The equality $q=jh$ identifies $E$ with $F\\times_{\\operatorname{Spec}k}\\operatorname{Spec}L$: a map into either side is precisely a pair of maps into $T$ and $\\operatorname{Spec}L$ whose composites to $X$ agree, with the map to $\\operatorname{Spec}k$ forced by $h$. Thus $E\\to F$ is a base change of $h$, so is quasi-compact by part (3) of that same permanence node. Since $F$ is quasi-compact, part (2) gives quasi-compactness of $E$. This proves the required assertion for every affine test $T$, without any etale or separation hypothesis on its map to $X$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-space-quasicompact-affine-tests",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03JV (lemma-UR-finite-above-x), (3) implies (4) and (4) implies (6)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-space-affine-etale-cover",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-weil-etale-morphism",
+  "lem-sfb-space-quasicompact-fppf-local",
+  "lem-sfb-space-quasicompact-affine-tests",
+  "def-trf-algebraic-space",
+  "def-a1-algebraic-space-point-classes",
+  "lem-sfb-monomorphism-into-field-coproduct"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 03JV (lemma-UR-finite-above-x), (3) implies (4) and (4) implies (6)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If an algebraic space point has a field monomorphism with finite fibres on every affine etale chart then all its field representatives are quasi compact",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.QuasiCompact fun X x x_1 x_2 => CompactSpace ↥X\", \"doc\": \"For any quasi-compact morphism of schemes $ f: X \\to Y $ where the target $ Y $ is affine, the underlying topological space of $ Y $ is compact. This instance establishes that the quasi-compactness pro\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_over_affine_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [QuasiSeparatedSpace ↥Y] [CompactSpace ↥Y],\\n  AlgebraicGeometry.QuasiCompact f ↔ CompactSpace ↥X\", \"doc\": \"For any schemes $X$ and $Y$, and a morphism $f: X \\to Y$, if $Y$ is quasi-separated and compact, then $f$ is quasi-compact if and only if $X$ is compact.\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactOfIsAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffineHom f], AlgebraicGeometry.QuasiCompact f\", \"doc\": \"Every affine morphism of schemes is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_of_compactSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [CompactSpace ↥X] [QuasiSeparatedSpace ↥Y],\\n  AlgebraicGeometry.QuasiCompact f\", \"doc\": \"Any morphism $ f: X \\to Y $ of schemes is quasi-compact if $ X $ is a compact topological space and $ Y $ is a quasi-separated scheme. This follows from the property that compactness of $ X $ ensures f\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_iff_forall_affine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  AlgebraicGeometry.QuasiCompact f ↔\\n    ∀ (U : Y.Opens), AlgebraicGeometry.IsAffineOpen U → IsCompact ↑((TopologicalSpace.Opens.map f.base).obj U)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is quasi-compact if and only if for every affine open subset $ U \\\\subseteq Y $, the preimage $ f^{-1}(U) $ is a compact subset of the topological space underlying \"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X], AlgebraicGeometry.QuasiCompact X.toSpecΓ\", \"doc\": \"For any scheme $X$ that is a compact topological space, the canonical morphism from $X$ to the affine scheme $\\\\operatorname{Spec}(\\\\Gamma(X))$ is quasi-compact. This morphism arises as the unit of the \"}\n  {\"name\": \"AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatFiberOfQuasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] (y : ↥Y),\\n  CompactSpace ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a quasi-compact morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ is a compact space.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme, spectrum, or category-theoretic statements do not give this assertion; no exact match or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi compact field representatives of a point are characterized by finite etale chart fibres of a field monomorphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatFiberOfQuasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] (y : ↥Y),\\n  CompactSpace ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a quasi-compact morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ is a compact space.\"}\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"Algebra.mem_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {p : PrimeSpectrum A},\\n  p ∈ Algebra.etaleLocus R A ↔ Algebra.IsEtaleAt R p.asIdeal\", \"doc\": \"A prime ideal $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ belongs to the étale locus of the $R$-algebra $A$ if and only if $A$ is étale at the prime ideal $\\\\mathfrak{p}$. This equivalence characterizes \"}\n  {\"name\": \"Algebra.Etale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib/RingTheory/Etale/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A],\\n  Algebra.Etale K A ↔\\n    ∃ I, ∃ (_ : Finite I), ∃ Ai x x_1 x_2, ∀ (i : I), Module.Finite K (Ai i) ∧ Algebra.IsSeparable K (Ai i)\", \"doc\": \"An algebra $ A $ over a field $ K $ is étale if and only if there exists a finite index set $ I $ and a family of fields $ \\\\{A_i\\\\}_{i \\\\in I} $, each equipped with a $ K $-algebra structure, such that \"}\n  {\"name\": \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.LocallyOfFiniteType f],\\n  JacobsonSpace ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes that is locally of finite type, and let $y$ be a point in $Y$. Then the fiber of $f$ over $y$, denoted $X_y$, is a Jacobson space.\"}\n  {\"name\": \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (P : Ideal R) [inst_1 : P.IsPrime] (p : Polynomial R)\\n  (f g : Polynomial P.ResidueField),\\n  p.Monic →\\n    f.Monic →\\n      g.Monic →\\n        Polynomial.map (algebraMap R P.ResidueField) p = f * g →\\n          IsCoprime f g →\\n            ∃ R' x x_1,\\n              ∃ (\", \"doc\": \"Given a ring homomorphism $ f : A → B $ between commutative rings and prime ideals $ I ⊆ A $, $ J ⊆ B $ such that $ I $ is the preimage of $ J $ under $ f $, there exists a unique $ R $-algebra homomo\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme, spectrum, or category-theoretic statements do not give this assertion; no exact match or one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"QuasiCompact\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme, spectrum, or category-theoretic statements do not give this assertion; no exact match or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Dd]ecent|[Ff]ield.*[Qq]uasi[Cc]ompact",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme, spectrum, or category-theoretic statements do not give this assertion; no exact match or one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic space field monomorphism finite on every affine etale chart gives quasi compactness of every field representative",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.QuasiCompact.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ (U : Set ↥Y), IsOpen U → IsCompact U → IsCompact (⇑(CategoryTheory.ConcreteCategory.hom f.base) ⁻¹' U)) →\\n    AlgebraicGeometry.QuasiCompact f\", \"doc\": \"Given a morphism $ f: X \\\\to Y $ of schemes, if for every open subset $ U \\\\subseteq Y $ that is quasi-compact, the preimage $ f^{-1}(U) $ is quasi-compact in $ X $, then $ f $ is a quasi-compact morphi\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_iff_forall_isAffineOpen\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \": QuasiCompact f ↔ ∀ U : Y.Opens, IsAffineOpen U → IsCompact (f ⁻¹ᵁ U : Set X)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is quasi-compact if and only if for every affine open subset $ U $ of $ Y $, the preimage $ f^{-1}(U) $ is a compact subset of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_iff_forall_affine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  AlgebraicGeometry.QuasiCompact f ↔\\n    ∀ (U : Y.Opens), AlgebraicGeometry.IsAffineOpen U → IsCompact ↑((TopologicalSpace.Opens.map f.base).obj U)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is quasi-compact if and only if for every affine open subset $ U \\\\subseteq Y $, the preimage $ f^{-1}(U) $ is a compact subset of the topological space underlying \"}\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactOfIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \"[IsAffineHom f] : QuasiCompact f\", \"doc\": \"Every affine morphism of schemes is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_of_noetherianSpace_source\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{X Y : Scheme} [NoetherianSpace X] (f : X ⟶ Y) : QuasiCompact f\", \"doc\": \"Any morphism of schemes with a Noetherian source is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompact.compactSpace_of_compactSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [CompactSpace Y] : CompactSpace X\", \"doc\": \"If $ f: X \\\\to Y $ is a quasi-compact morphism of schemes and $ Y $ is a compact space (i.e., every open cover of $ Y $ has a finite subcover), then the domain scheme $ X $ is also a compact space.\"}\n  {\"name\": \"AlgebraicGeometry.compactSpace_of_universallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \"{K} [Field K] (f : X ⟶ Spec (.of K)) [UniversallyClosed f] : CompactSpace X\", \"doc\": \"If $ f: X \\\\to \\\\operatorname{Spec}(K) $ is a universally closed morphism of schemes, where $ K $ is a field, then the underlying topological space of $ X $ is compact.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme, spectrum, or category-theoretic statements do not give this assertion; no exact match or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Dd]ecent|[Ff]ield.*[Qq]uasi[Cc]ompact",
+   "results": "1 hits: Mathlib/Data/Ordmap/Ordset.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: grep found only an unrelated data-structure comment"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A point of an algebraic space with a monomorphic field representative finite on affine etale charts has all field representatives quasi compact",
+   "results": "8 hits: AlgebraicGeometry.instQuasiCompactOfIsAffineHom, AlgebraicGeometry.instQuasiSeparatedOfMonoScheme, AlgebraicGeometry.instQuasiCompactOfUniversallyClosed, AlgebraicGeometry.Scheme.compactSpace_of_isAffine, AlgebraicGeometry.compactSpace_of_universallyClosed, AlgebraicGeometry.quasiCompact_iff_forall_isAffineOpen, AlgebraicGeometry.QuasiCompact.mk, AlgebraicGeometry.QuasiCompactCover.singleton. ",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space field-representative criterion; returned scheme statements do not specialize to this assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"QuasiCompact\"",
+   "results": "0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space field-representative criterion; returned scheme statements do not specialize to this assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space field monomorphism with finite pullbacks to affine etale charts makes every field representative of that point quasi compact",
+   "results": "8 hits: AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.instQuasiCompactOfIsAffineHom, AlgebraicGeometry.quasiCompact_over_affine_iff, AlgebraicGeometry.instQuasiCompactToSpecΓOfCompactSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.quasiCompact_of_compactSpace, AlgebraicGeometry.compactSpace_iff_quasiCompact, AlgebraicGeometry.quasiCompact_iff_forall_affine. ",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space field-representative criterion; returned scheme statements do not specialize to this assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite fibres over affine etale charts of a monomorphic point imply quasi compactness for every field valued map representing the same point of an algebraic space",
+   "results": "8 hits: AlgebraicGeometry.quasiCompact_over_affine_iff, AlgebraicGeometry.QuasiCompact, AlgebraicGeometry.quasiCompact_iff_forall_affine, AlgebraicGeometry.instQuasiCompactOfIsAffineHom, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatFiberOfQuasiCompact, AlgebraicGeometry.quasiCompact_of_compactSpace, AlgebraicGeometry.quasiCompact_iff_forall_isAffineOpen. ",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space field-representative criterion; returned scheme statements do not specialize to this assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-locally-separated-space-decent",
+  "date": "2026-10-23",
+  "group": "Q31"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Adequate moduli spaces are universal for separated targets. Alper Theorem 7.2.1, locally separated case through Proposition 7.1.1: Proposition 7.1.1, proof, printed p.36: surjectivity of the diagonal pullback W from condition (a), expanded as its closure-equivalence input. Rational points of a locally separated space over an algebraically closed field have closed images; continuity gives the assertion. This is the geometric-points sublemma, not the universality conclusion. Supporting geometric input: rational sections after field base change are closed immersions. Supporting input: The absolute locally separated space has quasi-compact field-valued representatives. Last paragraph of Tag 088J, interpreted by 03JV (3) implies (6): conclude the stated definition of decency from the finite chart fibres.",
+   "via": [
+    "lem-sfb-locally-separated-space-decent",
+    "lem-sfb-locally-separated-rational-point-closed-immersion",
+    "lem-sfb-locally-separated-closure-equivalent-images",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-field-monomorphism-finite-chart-decency-criterion",
+  "worker": "stage1",
+  "summary": "Q83 proves the stated 03JV (3) to (6) implication in four steps, retaining the statement and statement dependencies. Finite chart fibres yield quasi-compactness by existing fppf descent; the common-point factorization is written out using the existing 03DP field-coproduct monomorphism result; arbitrary affine tests are handled by scheme quasi-compactness base change and permanence. No new nodes, no Mathlib leaves and no attachments.",
+  "blueprint": "Read latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/_section.md and sk-thm-sf-ctf-stability-direct-images.proof.md (3). This realizes the finite-chart decency prerequisite in the inherited from.place chain through locally separated spaces; the direct-image route is unchanged. Whole-blueprint searches for decent, monomorphism, quasi-compact, 03JV and 03DP found no equivalent imported node. Retain inherited null from.node and via chain: blueprint_refs.py ancestor returns None.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-affine-etale-cover",
+    "why": "Generic affine-component etale atlas existence, Stacks 03FX; used only to test quasi-compactness on charts."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Only part (2), affine source over an affine target, is used for a finite field fibre; generic scheme infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Scheme quasi-compactness from compact source and quasi-separated target, preservation by base change, and compact source over compact base; generic scheme infrastructure, not a replacement of a direct-image step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-affine-etale-cover",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-qcqs-morphism-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q83-c94c69a7b",
+  "group": "Q83",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-c94c69a7b (reviewer sub-agent of L); spot-checked: Statement and stmt_deps match the base dagsnap 2951e501 byte for byte. Only status, proof, proof_deps, proof_origin, mathlib_searches and split_report changed. The item is unsplit in every snapshot, there is no re-split note, and the delivery has no new nodes. The statement is Stacks 03JV (3)=>(6) with S=Spec Z; I read the source and its full proof. Step 1: from a finite fibre to an affine F_i (finite-integral def, affine permanence (2)), then F_i->U_i is quasi-compact (qcqs node, permanence (1)). Step 2: the fppf-local descent applies to the affine etale atlas. Joint surjectivity comes from |w|, and representable etale gives flat and lfp. Scheme and space quasi-compactness agree by the last sentence of affine-tests; the space-test versus scheme-test difference is an elementary check. This gives j quasi-compact over every affine T. Step 3 writes out 0H2X correctly: Y=Spec k x_X Spec L is a scheme by the representable diagonal and is nonempty from the common-field point classes. b is monic because j is monic on test schemes, and 03DP with a singleton index (lem-sfb-monomorphism-into-field-coproduct) makes b an isomorphism, so q=jh. Step 4: E is isomorphic to F x_{Spec k} Spec L; h is quasi-compact by permanence (1) with no finiteness of L/k, then (3) and (2) give E quasi-compact. Tested on X=Spec k, on charts that miss x, and on an infinite extension L/k. No duplicate: the related 03JV nodes are (2)=>(6), (6)=>(4) and the quasi-separated case. No cycle and no SGA citation. Batch-5: the four flagged citations reach only general algebraic-space foundation nodes in sec-trace-formula (def-trf-algebraic-space, fibre products, fppf descent). These are not trace-formula or Poincare-duality material, so no assumption leaf is needed. I accept the three generic tool_uses. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FieldMonomorphismFiniteChartDecencyCriterion",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.quasiCompact_field_representatives_of_finite_etale_chart_fibres",
+  "file": "lean/Sheaf/AlgebraicGeometry/FieldMonomorphismFiniteChartDecencyCriterion.lean",
+  "statement": "theorem quasiCompact_field_representatives_of_finite_etale_chart_fibres (X : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))) (x : Point X.obj.obj) (K : Type u) [Field K] (b : Spec (.of K) ⟶ Spec (.of (ULift.{u} ℤ))) (j : yoneda.obj (Over.mk b) ⟶ X.obj.obj) (hj : schemePointMap j (IsLocalRing.closedPoint K) = x) (hmono : ∀ H : Over (Spec (.of (ULift.{u} ℤ))), Function.Injective (fun a : yoneda.obj H ⟶ yoneda.obj (Over.mk b) ↦ a ≫ j)) (hfinite : ∀ (U : Over (Spec (.of (ULift.{u} ℤ)))), IsAffine U.left → ∀ a : yoneda.obj U ⟶ X.obj.obj, IsEtale a → ∃ (V : Over (Spec (.of (ULift.{u} ℤ)))) (p : V ⟶ Over.mk b) (r : yoneda.obj V ⟶ yoneda.obj U), IsPullback r (yoneda.map p) a j ∧ IsFinite p.left) : ∀ (L : Type u) [Field L] (c : Spec (.of L) ⟶ Spec (.of (ULift.{u} ℤ))) (q : yoneda.obj (Over.mk c) ⟶ X.obj.obj), schemePointMap q (IsLocalRing.closedPoint L) = x → ∀ (T : Over (Spec (.of (ULift.{u} ℤ)))), IsAffine T.left → ∀ t : yoneda.obj T ⟶ X.obj.obj, ∃ (V : Over (Spec (.of (ULift.{u} ℤ)))) (p : V ⟶ T) (r : yoneda.obj V ⟶ yoneda.obj (Over.mk c)), IsPullback r (yoneda.map p) q t ∧ CompactSpace V.left",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1180e0b5e",
+  "group": "NW",
+  "result": "pass",
+  "note": "Stacks 03JV (3)=>(6) over Spec(ULift Z) rendered faithfully: hj via schemePointMap closedPoint; hmono = injectivity of (· ≫ j) on all Over-S yoneda tests (all schemes); hfinite = forall affine U, IsEtale a (includes representability) -> exists pullback square r≫a = yoneda.map p≫j with IsFinite p.left (projection to Spec K); conclusion forall L, c, q representing x, forall affine T, arbitrary t (no etale premise) -> exists pullback square r≫q = yoneda.map p≫t with CompactSpace V.left (recorded def-weil-pbc-quasi-compact-scheme); exists-forms equivalent by Yoneda uniqueness; agrees with the decency encoding in DecentAlgebraicFieldImageClosed. No extra assumptions; single universe u per recorded defs. lean.statement byte-identical to file; node differs from live only in lean; no name collision; no defs, sorry only; source/blueprint docstrings with 4-step proof; report has Worker report and Second reading by NW. Edge cases (empty X/U/T, X=Spec k, infinite L/K) covered. No compile needed (no change)."
+ }
+}

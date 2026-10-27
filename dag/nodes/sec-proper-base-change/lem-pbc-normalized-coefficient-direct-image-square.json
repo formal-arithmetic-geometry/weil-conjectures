@@ -1,0 +1,143 @@
+{
+ "id": "lem-pbc-normalized-coefficient-direct-image-square",
+ "kind": "statement",
+ "title": "Normalized direct-image squares commute with coefficient presentations",
+ "statement": "Let $f:X\\to Y$, ring sheaves $R_0,R,S_Y$ on $Y$ and $R_X,S_X$ on $X$, and ring-sheaf isomorphisms $b:R_0\\cong R$, $c_R:f^{-1}R\\cong R_X$, $c_S:f^{-1}S_Y\\cong S_X$ be given. Let $\\varphi_Y:R\\to S_Y$ and $\\varphi_X:R_X\\to S_X$ satisfy $c_R;\\varphi_X=f^{-1}\\varphi_Y;c_S$. Put $\\chi=b;\\varphi_Y$, $q=f^{-1}b;c_R$. Let $F,G$ be additive presentations equal to the corresponding ordinary ringed direct images. Let $i:\\operatorname{Res}_{\\varphi_X}F\\cong G\\operatorname{Res}_{\\varphi_Y}$ be identity on sections, and let its derived comparison $e$ satisfy the universal-derived-unit normalization on all complexes. Put $H=Rf_{*,R_0}$, $J=Rf_{*,S_Y}$ with literal inverse-image coefficients, $r:\\operatorname{Res}_b\\operatorname{Res}_{\\varphi_Y}\\cong\\operatorname{Res}_\\chi$ and $k:\\operatorname{Res}_q\\operatorname{Res}_{\\varphi_X}\\cong\\operatorname{Res}_{f^{-1}\\chi}\\operatorname{Res}_{c_S}$ the canonical exact restriction comparisons [def-weil-pbc-bounded-constructible-tower, lem-pbc-scalar-coefficient-equivalence]. The canonical natural isomorphisms $p:\\operatorname{Res}_bF\\cong H\\operatorname{Res}_q$ and $z:G\\cong J\\operatorname{Res}_{c_S}$ satisfy the following equality for every $M\\in D(S_X)$, $\\operatorname{Res}_b(e_M);r_{GM};\\operatorname{Res}_\\chi(z_M)=p_{\\operatorname{Res}_{\\varphi_X}M};H(k_M);d^{-1}_{\\operatorname{Res}_{c_S}M}$, where $d=\\operatorname{restrictionPush}(f,\\chi)$ of [lem-sfb-derived-scalar-mate-thick-locus]. No scalar extension or scalar mate occurs in this assertion.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-pbc-scalar-coefficient-equivalence",
+  "lem-sfb-derived-scalar-mate-thick-locus"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "lemma-derived-pushforward-composition (0D6E) and lemma-adjoint (07A6), expanded normalization by uniqueness of right derivation"
+ },
+ "proof": [
+  {
+   "text": "Substitute the two presentation equalities. Invert the supplied complex-unit normalization using cancellation of the ordinary comparison, the exact-localization factors and the derived comparison. This gives the forward unit-normalized square with ordinary comparison i inverse and derived comparison e inverse.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the canonical unit-normalization theorem for the three ringed direct-image comparisons: b with q, the identity on SY with cS, and chi with its literal inverse image. Form the ordinary restriction compositors a and d. Their hom and inverse maps, and all three ordinary direct-image comparisons, are identity on sections. The HEq hypothesis hi implies the same for i and its inverse. Extensionality of module-sheaf morphisms therefore proves the ordinary commuting cube.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "def-weil-pbc-bounded-constructible-tower",
+    "lem-pbc-coefficient-direct-image-restriction-cube"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved normalized_cube consequence of naturality of right-derived-unit normalized squares to those four ordinary and derived comparisons. Exact localization sends the ordinary restriction squares to derivedRestrictionSquare and the corresponding derived restriction compositors. The identity coefficient compositor equals the whiskering of coefficientDerivedRestrictIdentity, by ordinary sectionwise uniqueness, naturality of the exact-derived compositor and its left unit law.",
+   "uses": [
+    "lem-pur-derived-square-normalization-naturality",
+    "lem-pbc-scalar-coefficient-equivalence",
+    "def-weil-pbc-bounded-constructible-tower",
+    "lem-pbc-exact-restriction-derived-identity-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precompose the resulting cube equality with restriction by b of e.hom. Cancel e.hom followed by e.inv. Postcompose the requested equation with the canonical restrictionPush.hom and cancel its inverse. Expanding the two prescribed coefficient comparisons gives exactly the requested equation for every derived object.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-pbc-coefficient-direct-image-restriction-cube",
+  "lem-pur-derived-square-normalization-naturality",
+  "lem-pbc-scalar-coefficient-equivalence",
+  "lem-pbc-exact-restriction-derived-identity-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6E and 07A6; N4 specialization of the proved normalized-cube lemma in DerivedExactSquareCoherence, with sectionwise ordinary coherence and exact-localization unit coherence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized right derived direct image coefficient restriction comparisons commute with composition",
+   "results": "8 hits; ['HomologicalComplex.restrictionMap_comp', 'CategoryTheory.Functor.rightDerivedNatTrans_comp', 'CategoryTheory.NatTrans.rightDerived_comp', 'CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp', 'AlgebraicGeometry.Scheme.Modules.restrictFunctorComp', 'SheafOfModules.pushforwardComp', 'CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp_assoc', 'CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality']",
+   "date": "2026-10-27",
+   "verdict": "No complete coefficient compatibility statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derived direct image restriction of scalars coefficient isomorphism normalized comparison compatibility with composition",
+   "results": "8 hits; [\"ModuleCat.restrictScalarsComp'App_inv_naturality\", \"ModuleCat.restrictScalarsComp'App_inv_naturality_assoc\", \"ModuleCat.restrictScalarsComp'App_hom_naturality\", \"ModuleCat.restrictScalarsComp'App_hom_naturality_assoc\", \"ModuleCat.restrictScalarsComp'_inv_app\", \"ModuleCat.restrictScalarsComp'_hom_app\", 'PresheafOfModules.restrictScalarsCompToPresheaf', 'CommRingCat.moduleCatRestrictScalarsPseudofunctor_mapComp']",
+   "date": "2026-10-27",
+   "verdict": "No complete coefficient compatibility statement"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorCompMapDerivedCategory|mapDerivedCategoryCompIso",
+   "results": "0 hits; []",
+   "date": "2026-10-27",
+   "verdict": "No complete statement; use mate calculus"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedScalarMateCoefficientTransport",
+  "date": "2026-10-27",
+  "group": "F6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-direct-image-limits",
+   "place": "Finite-level coefficient reduction in the proof: Normalized direct-image squares commute with coefficient presentations",
+   "via": [
+    "lem-pbc-completed-scalar-projection-tensor-comparison",
+    "lem-pbc-completed-scalar-mate-coefficient-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedCoefficientDirectImageSquare",
+  "file": "lean/Sheaf/Paper/NormalizedCoefficientDirectImageSquare.lean",
+  "declaration": "AlgebraicGeometry.Scheme.normalizedCoefficientDirectImageSquare",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.normalizedCoefficientSourceComparison",
+   "AlgebraicGeometry.Scheme.normalizedCoefficientTargetComparison",
+   "AlgebraicGeometry.Scheme.normalizedCoefficientDirectImageSquare"
+  ],
+  "statement": "theorem normalizedCoefficientDirectImageSquare\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (R₀ R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})\n    (RX : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (b : R₀ ≅ R)\n    (SY : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})\n    (SX : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (φY : R ⟶ SY) (φX : RX ⟶ SX)\n    (cR : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ RX)\n    (cS : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj SY ≅ SX)\n    (hc : cR.hom ≫ φX =\n      (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map φY ≫ cS.hom)\n    (F : pbcModules X RX ⥤ pbcModules Y R) [F.Additive]\n    (hF : F = proEtaleRingModuleDirectImage f R RX cR)\n    (G : pbcModules X SX ⥤ pbcModules Y SY) [G.Additive]\n    (hG : G = proEtaleRingModuleDirectImage f SY SX cS)\n    (i : pbcRestrict φX ⋙ F ≅ G ⋙ pbcRestrict φY)\n    (hi : ∀ (M : pbcModules X SX) (U : Y.ProEtᵒᵖ),\n      HEq (fun x ↦ (i.hom.app M).val.app U x)\n        (fun x : ((proEtaleRingModuleDirectImage f SY SX cS).obj M).val.obj U ↦ x))\n    (e : pbcDerivedRestrict φX ⋙ F.rightDerivedFunctor ≅\n      G.rightDerivedFunctor ⋙ pbcDerivedRestrict φY)\n    (he : ∀ C : CochainComplex (pbcModules X SX) ℤ,\n      F.rightDerivedFunctorUnitQ\n          (((pbcRestrict φX).mapHomologicalComplex (.up ℤ)).obj C) ≫\n        F.rightDerivedFunctor.map\n          ((pbcRestrict φX).mapDerivedCategoryFactors.inv.app C) ≫\n        e.hom.app (DerivedCategory.Q.obj C) =\n      DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex i.hom (.up ℤ)).app C) ≫\n        (pbcRestrict φY).mapDerivedCategoryFactors.inv.app\n          ((G.mapHomologicalComplex (.up ℤ)).obj C) ≫\n        (pbcDerivedRestrict φY).map (G.rightDerivedFunctorUnitQ C)) :\n    let χ := b.hom ≫ φY\n    let q := (proEtaleSheafInverseImage f CommRingCat.{u + 1}).mapIso b ≪≫ cR\n    let hq : q.hom ≫ φX = DerivedScalarMate.inverseMap f χ ≫ cS.hom := by\n      dsimp only [q, χ, Iso.trans_hom, Functor.mapIso_hom, DerivedScalarMate.inverseMap]\n      rw [Category.assoc, hc, ← Category.assoc, ← Functor.map_comp]\n    let k := derivedRestrictionSquare q.hom φX cS.hom\n      (DerivedScalarMate.inverseMap f χ) hq\n    let r := pbcDerivedRestrictComp b.hom φY χ rfl\n    let p := normalizedCoefficientSourceComparison f R₀ R RX b cR F hF\n    let z := normalizedCoefficientTargetComparison f SY SX cS G hG\n    ∀ M : DerivedCategory (pbcModules X SX),\n      (pbcDerivedRestrict b.hom).map (e.hom.app M) ≫\n          r.hom.app (G.rightDerivedFunctor.obj M) ≫\n          (pbcDerivedRestrict χ).map (z.hom.app M) =\n        p.hom.app ((pbcDerivedRestrict φX).obj M) ≫\n          (DerivedScalarMate.push f R₀).map (k.hom.app M) ≫\n          (DerivedScalarMate.restrictionPush f χ).inv.app\n            ((pbcDerivedRestrict cS.hom).obj M)",
+  "branch": "sheaf-dag",
+  "by": "F6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261027T034639-L-3669835",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261027T050628-L-246847",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

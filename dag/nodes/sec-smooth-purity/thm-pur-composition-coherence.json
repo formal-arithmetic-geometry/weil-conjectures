@@ -26,183 +26,45 @@
  ],
  "proof": [
   {
-   "text": "Domains and the composition comparison. Work with $\\Lambda=A_{E,n}$ on the finite-type $k$-schemes of the purity conventions. By [lem-sbc-smooth-relative-dimension-permanence](2), $gf$ is smooth of relative dimension $d+e$. Its separatedness and finite type are preserved by composition, so the maps in [def-pur-smooth-purity-map] are defined. Let $\\alpha_{g,f}:Rg_!Rf_!\\xrightarrow{\\sim}R(gf)_!$ be [thm-sf-comp-composition]. The adjunctions in [def-weil-exceptional-inverse-image] and [def-weil-pbc-composite-adjunction] give the composite adjunction, with counit $\\varepsilon_g\\circ Rg_!(\\varepsilon_fRg^!)$. As specified in [pur9-def-upper-shriek-composition], define $c_{g,f}:R(gf)^!\\to Rf^!Rg^!$ as the conjugate of $\\alpha_{g,f}$. By [def-weil-pbc-adjunction-conjugate] it is an isomorphism; its transpose is $\\varepsilon_{gf}\\circ\\alpha_{g,f}$. Finite-Tor preservation in [def-weil-exceptional-inverse-image] puts $Rg^!K$ and $\\omega_g=Rg^!\\Lambda_Z$ in $D^b_{ctf}$ whenever $K\\in D^b_{ctf}(Z,\\Lambda)$. Bounded constructible inputs have etale-origin witnesses by [lem-sf-proetale-constructible-origin](ii), so the compact-support composition is used on its stated witnessed domain.",
+   "text": "Transport the intrinsic finite-Tor constructible domain through the canonical coefficient equivalence. Bounded constructibility is compositionInput_bounded; Tor amplitude is transported along the equivalence counit and the intrinsic Tor comparison. Apply the existing tensor-mate theorem and retain lhs=rhs and its identification of c with the specified standing compositor.",
    "uses": [
-    "lem-sbc-smooth-relative-dimension-permanence",
-    "def-pur-smooth-purity-map",
-    "thm-sf-comp-composition",
-    "def-weil-exceptional-inverse-image",
-    "def-weil-pbc-composite-adjunction",
-    "def-weil-pbc-adjunction-conjugate",
-    "pur9-def-upper-shriek-composition",
-    "lem-sf-proetale-constructible-origin"
+    "def-pur-composition-comparisons",
+    "lem-exc-intrinsic-tor-amplitude-transport",
+    "lem-pur-composition-tensor-mate"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
-    "place": "Proof Step 1: domains and exceptional-composition comparison"
-   }
+   "elementary": false
   },
   {
-   "text": "The specified tensor comparison. Let $\\theta_{h,K}$ be [def-pur-co-smoothness](2) and $\\omega_h=Rh^!\\Lambda$. For $h=f,g,gf$, [thm-pur-cohomological-smoothness](1) makes $\\theta$ invertible. Define\n$$\\sigma=c_{g,f,\\Lambda}^{-1}\\circ\\theta_{f,\\omega_g}\\circ\\mathrm{sym}:\\omega_f\\otimes^LLf^*\\omega_g\\xrightarrow{\\sim}\\omega_{gf}.$$\nThis fixes the comparison underlying [lem-pur-co-smooth-composition]. With $r_K$ the canonical reassociation\n$$L(gf)^*K\\otimes^L\\omega_f\\otimes^LLf^*\\omega_g\\cong Lf^*(Lg^*K\\otimes^L\\omega_g)\\otimes^L\\omega_f,$$\nthe composition formula is\n$$(*)\\quad c_{g,f,K}\\theta_{gf,K}(1\\otimes\\sigma)=\\theta_{f,Rg^!K}(Lf^*\\theta_{g,K}\\otimes1)r_K.$$\nHere pullback composition is [lem-weil-pbc-proetale-derived-pullback-composition]. The following step verifies this precise reading of the composition clause of [thm-pur-cohomological-smoothness](4).",
+   "text": "Apply model orientation descent. It gives sigma;o_{gf}=V;mu for the actual orientations. Multiply on the left by mu inverse and V inverse and on the right by o_{gf} inverse to obtain mu inverse;V inverse;sigma=o_{gf} inverse. Tensor this equation with S_{gf}M and substitute lhs=rhs. This gives the equality of the two oriented tensor routes.",
    "uses": [
-    "def-pur-co-smoothness",
-    "thm-pur-cohomological-smoothness",
-    "lem-pur-co-smooth-composition",
-    "lem-weil-pbc-proetale-derived-pullback-composition"
+    "lem-pur-composition-model-orientation-descent",
+    "lem-pur-composition-tensor-mate"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
-    "place": "Proof Step 1: specified orientation-free tensor comparison"
-   }
+   "elementary": false
   },
   {
-   "text": "Verification of $(*)$ by adjunction. Put $T_f=\\varepsilon_{f,\\Lambda}:Rf_!\\omega_f\\to\\Lambda_Y$. Under $Rg_!Rf_!\\dashv Rf^!Rg^!$, the transpose defining $\\sigma$ is the map\n$$Rg_!Rf_!(\\omega_f\\otimes Lf^*\\omega_g)\\xrightarrow{Rg_!\\mathrm{PF}_f^{-1}}Rg_!(Rf_!\\omega_f\\otimes\\omega_g)\\xrightarrow{Rg_!(T_f\\otimes1)}Rg_!\\omega_g\\xrightarrow{T_g}\\Lambda_Z.$$\nThis follows by applying the hom bijections in [def-weil-pbc-composite-adjunction] to the specified transpose in [def-pur-co-smoothness], with $K=\\omega_g$, and the defining mate in [pur9-def-upper-shriek-composition]. Transpose both sides of $(*)$ under that same composite adjunction. The right side first uses the inverse projection formula for $f$, then its counit, then those for $g$. On the left, naturality moves $\\sigma$ through the inverse projection formula for $gf$; substitute the displayed transpose of $\\sigma$. The composition pentagon and naturality in [fix-prop-projection-formula] identify the resulting inverse projection maps with the successive ones for $f,g$. Both transposes are therefore the displayed map tensored with $K$, after the same projection and tensor reassociations. The composite counit is $\\varepsilon_g Rg_!(\\varepsilon_f)$ by [def-weil-pbc-composite-adjunction]. The hom bijection gives $(*)$. No orientation enters this calculation.",
+   "text": "The iterated-mate expansion expresses the first three arrows as J followed by the tensor route with the two separate inverse orientations and the intermediate realization unit. Substitute the oriented route equality. The single-map presentation expresses the remaining first factors as gamma_{gf}. The identification of c with the standing mate identifies the final c and realization unit with compositionExceptionalMap. Cancel its specified inverse, obtaining exactly the original three-arrow equation.",
    "uses": [
-    "def-weil-pbc-composite-adjunction",
-    "def-pur-co-smoothness",
-    "pur9-def-upper-shriek-composition",
-    "fix-prop-projection-formula"
+    "lem-pur-composition-iterated-mate-expansion",
+    "lem-pur-composition-single-mate-presentation",
+    "def-pur-composition-comparisons",
+    "lem-pur-composition-tensor-mate"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
-    "place": "Proof Step 2: explicit projection-formula mate calculation"
-   }
-  },
-  {
-   "text": "Local orientation assembly. For $h=f,g,gf$, write $\\vartheta_h:\\omega_h\\xrightarrow{\\sim}\\Lambda(m_h)[2m_h]$, with $m_f=d,m_g=e,m_{gf}=d+e$. Apply [lem-pur-diagonal-dnc-chart-normalization]: on affine source and target opens the specified orientation is $\\beta_h\\delta_h\\alpha_h^{-1}$, and these assemblies restrict compatibly. Here $\\alpha_h:C_h\\to\\omega_h$ is diagonal base change, $\\delta_h:C_h\\to C(\\pi_{N_h},0)$ is normalized DNC, and $\\beta_h$ is zero-section vector-bundle purity. We will prove\n$$(\\ast\\ast)\\quad\\vartheta_{gf}\\circ\\sigma=\\mu\\circ(\\vartheta_f\\otimes Lf^*\\vartheta_g),$$\nwhere $\\mu$ is the twist/shift identification constructed in Step 9. The cited lemma states the assembly and its coordinate-adjunction normalization for every $A_{E,n}$.",
-   "uses": [
-    "lem-pur-diagonal-dnc-chart-normalization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
-    "place": "Proof Step 1: diagonal/DNC/vector-bundle assembly"
-   }
-  },
-  {
-   "text": "Compatible charts. Apply [sbc-thm-etale-local-normal-form] to $g$ near $f(x)$ and then to $f$ near $x$. Shrink to affine opens $U\\subseteq X$, $V\\subseteq Y$, $Z'\\subseteq Z$ with $f(U)\\subseteq V$, $g(V)\\subseteq Z'$ and etale charts $U\\to\\mathbf A^d_V$, $V\\to\\mathbf A^e_{Z'}$. This is possible at every $x$, hence the $U$ cover $X$. The composite chart $U\\to\\mathbf A^d_V\\to\\mathbf A^{d+e}_{Z'}$ is etale: its second arrow is the base change of the second etale chart, followed by the identification $\\mathbf A^d_{\\mathbf A^e_{Z'}}=\\mathbf A^{d+e}_{Z'}$. The coordinates are the ordered blocks $(x_1,\\ldots,x_d,y_1,\\ldots,y_e)$. By [lem-pur-dnc-section-geometry](2) the corresponding coordinate differences carry the three diagonal sections to standard zero sections. Their normal bundles are the tangent bundles by [lem-pur-diagonal-regular-immersion]; in these frames the tangent maps are inclusion into and projection from $\\mathcal O_U^d\\oplus\\mathcal O_U^e$. Thus the normal sequence is split with $N_{gf}=N_f\\oplus f^*N_g$ on $U$. All bases and total spaces used for DNC here are separated finite-type $k$-schemes, since the chosen schemes are affine and the diagonal projections are separated.",
-   "uses": [
-    "sbc-thm-etale-local-normal-form",
-    "lem-pur-dnc-section-geometry",
-    "lem-pur-diagonal-regular-immersion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
-    "place": "Proof Step 1: compatible etale normal forms and tangent splitting"
-   }
-  },
-  {
-   "text": "The normalized DNC maps and the section decomposition. On a chart $U$ of Step 5, use the map $\\kappa$ of [lem-pur-diagonal-section-pasting], which states\n$$\\alpha_{gf}\\kappa=\\sigma(\\alpha_f\\otimes Lf^*\\alpha_g).$$\nIts coordinate clause specifies $\\kappa$ as $\\nu_{d,e}$, the zero-section pullback of $\\sigma_{q,P_e}$ for the standard projection tower over $U$; thus no undefined section version of $\\sigma$ is used. By [lem-pur-diagonal-dnc-chart-normalization], the three $\\delta$ maps, under these coordinate identifications, are $1_{D_d},1_{D_e},1_{D_{d+e}}$. The same frames identify the normal bundles with $\\mathcal O_U^d$, $\\mathcal O_U^e$, $\\mathcal O_U^d\\oplus\\mathcal O_U^e$. Consequently, under these specific identifications,\n$$\\delta_{gf}\\kappa=1_{D_{d+e}}\\nu_{d,e}=\\nu_{d,e}(1_{D_d}\\otimes1_{D_e})=\\nu_{d,e}(\\delta_f\\otimes Lf^*\\delta_g).$$\nThis is the required compatibility of DNC with the decomposition on this chart: its two sides are the same explicitly defined morphism $\\nu_{d,e}$. The normalization lemma supplies compatibility of the identifications with etale restriction.",
-   "uses": [
-    "lem-pur-diagonal-section-pasting",
-    "lem-pur-diagonal-dnc-chart-normalization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
-    "place": "Proof Step 1: diagonal-section pasting and the explicit normalized DNC square"
-   }
-  },
-  {
-   "text": "The coordinate model and the orientation identity. Over $B=U$ let $P_r,z_r,D_r,\\nu_{d,e}$ be as in Step 6. Write $b_r=Lz_r^*(\\Gamma_{P_r,\\Lambda}^{-1})$, with the twist restriction; these are exactly the zero-section bundle orientations by [lem-pur-diagonal-dnc-chart-normalization]. Use [prop-pur-affine-space-composition-law] at $K=\\Lambda_B$. By [lem-pur-projection-purity-agreement] its affine maps are the smooth tensor-form maps on these projections. Substituting their definition [def-pur-smooth-purity-map] and the definition of $\\sigma$ from Step 2, and cancelling the invertible $\\theta_{q,\\omega_{P_e}}$, rewrites this law as\n$$\\Gamma_{P_{d+e},\\Lambda}^{-1}\\sigma_{q,P_e}=\\mu(\\Gamma_{q,\\Lambda}^{-1}\\otimes Lq^*\\Gamma_{P_e,\\Lambda}^{-1}).$$\nHere the orientation for $q$ is the base change of the rank-$d$ bundle orientation by [cor-pur-vector-bundle-purity]. Pull back along $z_{d+e}$ to get\n$$b_{d+e}\\nu_{d,e}=\\mu(b_d\\otimes b_e).$$\nThe affine composition theorem assumes $d,e\\geq1$. If either is zero, the same identity is the unit law, since $\\Gamma_{P_0,-}=1$ by [def-pur-affine-space-comparison] and rank-zero normalization is part of the chart lemma. Combine this $b$ identity with the explicit DNC identity of Step 6 to get $\\beta_{gf}\\delta_{gf}\\kappa=\\mu((\\beta_f\\delta_f)\\otimes Lf^*(\\beta_g\\delta_g))$. Substitute the assembly $\\vartheta_h=\\beta_h\\delta_h\\alpha_h^{-1}$ of Step 4 and the $\\alpha$ identity of Step 6. Cancelling $\\alpha_f\\otimes Lf^*\\alpha_g$ proves $(**)$ on $U$. The even-shift sign in $\\mu$ is computed in Step 9.",
-   "uses": [
-    "lem-pur-diagonal-dnc-chart-normalization",
-    "prop-pur-affine-space-composition-law",
-    "lem-pur-projection-purity-agreement",
-    "def-pur-smooth-purity-map",
-    "cor-pur-vector-bundle-purity",
-    "def-pur-affine-space-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
-    "place": "Proof Step 1: affine-space coordinate composition followed by diagonal/DNC assembly"
-   }
-  },
-  {
-   "text": "From charts to $X$. Both sides of $(\\ast\\ast)$ are isomorphisms to $T=\\Lambda_X(d+e)[2d+2e]$. Their quotient is an automorphism $h$ of $T$. The restriction assertions in [lem-pur-diagonal-section-pasting] and [lem-pur-diagonal-dnc-chart-normalization], and twist pullback in [det-prop-sfb-cartesian-coefficients-twists], identify its restrictions with the comparisons in Step 7. Hence $h|_U=1$ on the covering charts. By [lem-pur-twist-sheaf-locally-free] and the tensor-power definition [def-coefficient-twists-detailed], removing the common shift makes $T$ a rank-one sheaf in degree zero. Full faithfulness [lem-weil-pbc-derived-single-fully-faithful] makes $h$ a sheaf automorphism. The uniqueness clause of [lem-pur-sheaf-hom-cover-gluing] now gives $h=1$, proving $(\\ast\\ast)$ globally. For empty $X$ this is the unique morphism in the zero category, so no chart is required.",
-   "uses": [
-    "lem-pur-diagonal-section-pasting",
-    "lem-pur-diagonal-dnc-chart-normalization",
-    "det-prop-sfb-cartesian-coefficients-twists",
-    "lem-pur-twist-sheaf-locally-free",
-    "def-coefficient-twists-detailed",
-    "lem-weil-pbc-derived-single-fully-faithful",
-    "lem-pur-sheaf-hom-cover-gluing"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
-    "place": "Proof Step 1: local-to-global equality of orientations"
-   }
-  },
-  {
-   "text": "The canonical source identification. By [def-coefficient-twists-detailed], $\\Lambda(m)$ is the $m$-fold tensor power of $\\Lambda(1)$ for $m\\ge0$, so associativity of tensor powers gives $\\Lambda_X(d)\\otimes\\Lambda_X(e)\\cong\\Lambda_X(d+e)$; the twist-pullback isomorphism $Lf^*(\\Lambda_Y(e))\\cong\\Lambda_X(e)$ is [det-prop-sfb-cartesian-coefficients-twists], and the pullback-composition $L(gf)^*\\cong Lf^*Lg^*$ is [lem-weil-pbc-proetale-derived-pullback-composition]. The shifts combine as $[2d][2e]=[2d+2e]$; interchanging the two blocks of degrees $-2d,-2e$ carries the Koszul sign $(-1)^{(2d)(2e)}=+1$. Composing these gives $\\mu:\\Lambda_X(d)[2d]\\otimes^LLf^*\\Lambda_Y(e)[2e]\\cong\\Lambda_X(d+e)[2d+2e]$ and the canonical identification of the statement,\n$$L(gf)^*K(d+e)[2d+2e]\\cong Lf^*Lg^*K(d)[2d](e)[2e],$$\nboth natural in $K$.",
-   "uses": [
-    "def-coefficient-twists-detailed",
-    "det-prop-sfb-cartesian-coefficients-twists",
-    "lem-weil-pbc-proetale-derived-pullback-composition"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
-    "place": "Proof Step 2: twist isomorphisms compatible with the pullback-composition"
-   }
-  },
-  {
-   "text": "Transposition to the $K$-form. Let $K$ be in the domain of the purity maps in the statement, i.e. $K\\in D^b_{ctf}(Z,\\Lambda)$ as required by [def-pur-smooth-purity-map] for $\\gamma_{g,K}$ and $\\gamma_{gf,K}$. Then $Rg^!K\\in D^b_{ctf}(Y,\\Lambda)$ by the finite-Tor preservation of [def-weil-exceptional-inverse-image], so $\\gamma_{f,Rg^!K}$ is defined. By [def-pur-smooth-purity-map] (with the middle arrow the inverse of $\\vartheta$ of [thm-pur-diagonal-dualizing-object]) $\\gamma_{h,M}=\\theta_{h,M}\\circ(1\\otimes\\vartheta_h^{-1})\\circ\\rho_{h,M}$, $\\rho$ the twist reassociation of [def-coefficient-twists-detailed]. Using naturality of $\\rho$ and of $\\theta_f$ in the coefficient object (the tensor map is natural, being the transpose of a natural composite in [def-pur-co-smoothness](2)),\n$$\\gamma_{f,Rg^!K}\\circ Lf^*(\\gamma_{g,K})(d)[2d]=\\theta_{f,Rg^!K}\\circ(Lf^*\\theta_{g,K}\\otimes1_{\\omega_f})\\circ r_K\\circ\\bigl(1\\otimes(\\vartheta_f\\otimes Lf^*\\vartheta_g)^{-1}\\bigr)\\circ(\\text{source identification of Step 9}).$$\nBy $(\\ast)$ of Step 2 the first three factors equal $c_{g,f,K}\\circ\\theta_{gf,K}\\circ(1\\otimes\\sigma)$, and by $(\\ast\\ast)$ of Step 8, $\\sigma\\circ(\\vartheta_f\\otimes Lf^*\\vartheta_g)^{-1}=\\vartheta_{gf}^{-1}\\circ\\mu$. With the identification of Step 9 the remaining factors are $(1\\otimes\\vartheta_{gf}^{-1})\\circ\\rho_{gf,K}$. Therefore $\\gamma_{f,Rg^!K}\\circ Lf^*(\\gamma_{g,K})(d)[2d]=c_{g,f,K}\\circ\\gamma_{gf,K}$ under the canonical identification, i.e.\n$$\\gamma_{gf,K}=c_{g,f}^{-1}\\circ\\gamma_{f,Rg^!K}\\circ Lf^*(\\gamma_{g,K})(d)[2d],$$\nthe displayed composite, in the stated order.",
-   "uses": [
-    "def-pur-smooth-purity-map",
-    "def-weil-exceptional-inverse-image",
-    "thm-pur-diagonal-dualizing-object",
-    "def-coefficient-twists-detailed",
-    "def-pur-co-smoothness"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
-    "place": "Proof Step 2: transposition to the K-form"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sbc-smooth-relative-dimension-permanence",
-  "def-pur-smooth-purity-map",
-  "thm-sf-comp-composition",
-  "def-weil-exceptional-inverse-image",
-  "def-weil-pbc-composite-adjunction",
-  "def-weil-pbc-adjunction-conjugate",
-  "pur9-def-upper-shriek-composition",
-  "lem-sf-proetale-constructible-origin",
-  "def-pur-co-smoothness",
-  "thm-pur-cohomological-smoothness",
-  "lem-pur-co-smooth-composition",
-  "lem-weil-pbc-proetale-derived-pullback-composition",
-  "fix-prop-projection-formula",
-  "lem-pur-diagonal-dnc-chart-normalization",
-  "sbc-thm-etale-local-normal-form",
-  "lem-pur-dnc-section-geometry",
-  "lem-pur-diagonal-regular-immersion",
-  "lem-pur-diagonal-section-pasting",
-  "prop-pur-affine-space-composition-law",
-  "lem-pur-projection-purity-agreement",
-  "cor-pur-vector-bundle-purity",
-  "def-pur-affine-space-comparison",
-  "det-prop-sfb-cartesian-coefficients-twists",
-  "lem-pur-twist-sheaf-locally-free",
-  "def-coefficient-twists-detailed",
-  "lem-weil-pbc-derived-single-fully-faithful",
-  "lem-pur-sheaf-hom-cover-gluing",
-  "thm-pur-diagonal-dualizing-object"
+  "def-pur-composition-comparisons",
+  "lem-exc-intrinsic-tor-amplitude-transport",
+  "lem-pur-composition-tensor-mate",
+  "lem-pur-composition-model-orientation-descent",
+  "lem-pur-composition-iterated-mate-expansion",
+  "lem-pur-composition-single-mate-presentation"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
-  "place": "Proof Steps 1–2"
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+  "place": "Steps 1–2, using the existing tensor-mate and orientation-descent statements; two coordinate interfaces extracted in Lean"
  },
  "mathlib_searches": [
   {
@@ -288,12 +150,27 @@
   "def-weil-scheme-morphism-properties"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-thm-smooth-purity",
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Work in the purity conventions of [def-pur-conventions], with the\nglobal finite-field datum $(p,a,q,k_0,k)$\nwith $q=p^a$, the prime $\\ell\\neq p$, the finite extension\n$E/\\Ql$ with valuation ring $\\mathcal O_E$ and uniformizer\n$\\varpi_E$, the level $n\\geq1$, and the finite coefficient ring\n$A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$; let\n$f:X\\to Y$ and $g:Y\\to Z$ be smooth separated\nmorphisms of relative dimensions $d$ and $e$. Under the canonical\nidentification\n\n$$\nL(gf)^*(-)(d+e)[2d+2e]\n\\cong Lf^*Lg^*(-)(d)[2d](e)[2e],\n$$\n\nthe smooth purity map $\\gamma_{gf,K}$ equals the composite\n\n$$\n\\begin{array}{l}\nL(gf)^*K(d+e)[2d+2e]\n\\xrightarrow{\\ Lf^*(\\gamma_{g,K})(d)[2d]\\ }\nLf^*Rg^!K(d)[2d]\n\\xrightarrow{\\ \\gamma_{f,Rg^!K}\\ }\nRf^!Rg^!K\\\\\n\\hphantom{L(gf)^*K(d+e)[2d+2e]}\n\\xrightarrow{\\ c_{g,f}^{-1}\\ }R(gf)^!K,\n\\end{array}\n$$\n\nwhere $c_{g,f}:R(gf)^!\\cong Rf^!Rg^!$ is the composition isomorphism for\nthe exceptional inverse image.",
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Work in the purity conventions of [def-pur-conventions], with the\nglobal finite-field datum $(p,a,q,k_0,k)$\nwith $q=p^a$, the prime $\\ell\\neq p$, the finite extension\n$E/\\Ql$ with valuation ring $\\mathcal O_E$ and uniformizer\n$\\pi_E$, the level $n\\geq1$, and the finite coefficient ring\n$A=A_{E,n}=\\mathcal O_E/\\pi_E^n$; let\n$f:X\\to Y$ and $g:Y\\to Z$ be smooth separated\nmorphisms of relative dimensions $d$ and $e$. Under the canonical\nidentification\n\n$$\nL(gf)^*(-)(d+e)[2d+2e]\n\\cong Lf^*Lg^*(-)(d)[2d](e)[2e],\n$$\n\nthe smooth purity map $\\gamma_{gf,K}$ equals the composite\n\n$$\n\\begin{array}{l}\nL(gf)^*K(d+e)[2d+2e]\n\\xrightarrow{\\ Lf^*(\\gamma_{g,K})(d)[2d]\\ }\nLf^*Rg^!K(d)[2d]\n\\xrightarrow{\\ \\gamma_{f,Rg^!K}\\ }\nRf^!Rg^!K\\\\\n\\hphantom{L(gf)^*K(d+e)[2d+2e]}\n\\xrightarrow{\\ c_{g,f}^{-1}\\ }R(gf)^!K,\n\\end{array}\n$$\n\nwhere $c_{g,f}:R(gf)^!\\cong Rf^!Rg^!$ is the composition isomorphism for\nthe exceptional inverse image.",
   "proof": [
    {
     "text": "Step 1: the dualizing-object version. By\n[thm-pur-cohomological-smoothness] (the tensor\nformula for the smooth morphisms $f,g,gf$) and the composition rule\nof [def-weil-exceptional-inverse-image], the identity\n\n$$\n\\omega_{gf}\\cong\\omega_f\\otimes^L_{\\Lambda_X}Lf^*\\omega_g\n$$\n\nholds; and the identification of\n[thm-pur-diagonal-dualizing-object] applied to $gf$, to $g$\nand to $f$ is compatible with this identity. Indeed, both\nidentifications are built from the DNC invariance of the section\ninvariant ([thm-pur-dnc-invariance]) and the vector-bundle purity\nof the relative tangent bundle ([cor-pur-vector-bundle-purity]);\nthe diagonal of $gf$ is the transverse composite of the diagonals of\n$g$ and of $f$ through the canonical Cartesian product\nidentifications of the twofold fibred products, and the canonical exact\nsequence of the relative tangent bundles\n\n$$\n0\\longrightarrow T_{X/Y}\\longrightarrow T_{X/Z}\\longrightarrow\nf^*T_{Y/Z}\\longrightarrow0\n$$\n\nsplits in the standard coordinates of the etale local normal forms\n([sbc-thm-etale-local-normal-form]); the direct-sum compatibility\nof [cor-pur-vector-bundle-purity] and, above all, the uniqueness\nclause of [thm-pur-dnc-invariance] – one and the same\nidentification is forced by being the identity on the standard pairs\nand compatible with etale localization and base change, and the two\nassemblies have exactly these properties – make the two assemblies\nagree after the canonical reassociation (the coherence of the package's\ncomposition isomorphisms and the pentagon for the twofold diagonal).\nThe remaining constituents of [thm-pur-diagonal-dualizing-object]\n– the smooth base change ([lem-pur-diagonal-base-change]) and the\nco-projection – are compatible with composition by the definition of\nthe canonical maps (the base-change squares of the composite and the\nassociativity of the derived tensor product).\nStep 2: the $K$-form. The identity of Step 1 transposes to the\nstatement: the tensor formula is compatible with composition by its\ndefinition (the mate of the projection formula), the twist\nisomorphisms [def-coefficient-twists-detailed] are compatible with the\npullback-composition, and composing gives the composite of the\nstatement, the identifications being those displayed.",
@@ -310,32 +187,23 @@
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; a worker who touches the node follows it"
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "thm-pur-composition-coherence",
   "worker": "stage1",
-  "summary": "Substantive repair of the returned split. Defined the section-pasting map and its affine zero-section model explicitly; stated the A_{E,n} chart normalization as a separately searched lemma because the existing chart lemma only covers Z/l^n; used the on-route affine-space composition law and displayed the normalized DNC square. Added the prescribed mate definition of c, verified the tensor identity by projection-formula transposition, and retained the source identification and final K-form substitution. Two new statement-only lemmas; target statement unchanged.",
-  "blueprint": "Current main-20261015 composition proof Step 1 is realized by Steps 1–2 and 4–8 (specified mate, diagonal/DNC assembly, compatible charts, explicit section and DNC comparisons, affine model, gluing); proof Step 2 by Steps 3,9,10 (tensor-map transposition, twist reassociation, final substitution).",
-  "tool_uses": [
-   {
-    "node": "fix-prop-projection-formula",
-    "why": "Its concrete composition pentagon verifies the tensor-map identity by adjunction; no purity orientation is assumed."
-   },
-   {
-    "node": "pur9-def-upper-shriek-composition",
-    "why": "Definition of exactly the exceptional-composition mate c used in the item, requested by the return."
-   }
-  ]
+  "summary": "Repair of the human-directed re-split: three comparable statement-only work packages replace the ten-step 11322-character argument. Tensor/counit calculus, compatible chart/DNC pasting, and affine-model orientation with descent are separate unsplit nodes. The parent statement and all imported and Lean metadata are retained; its proof is a short explicit substitution. Every old argument is preserved verbatim in report.md with its new owner.",
+  "blueprint": "main-20261015 Step 1 is carried by the tensor-mate, compatible-DNC-charts and model-orientation-descent nodes; Step 2 is carried by the tensor mate calculation, the source comparison in model-orientation-descent and parent assembly Step 3.",
+  "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q95-f5a62b4ac",
-  "group": "Q95",
+  "reviewer": "NT-cc-Q91-3b4ee2cc0",
+  "group": "Q91",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-f5a62b4ac (reviewer sub-agent of L); spot-checked: Verdict FIX. I read the item and both new nodes in full; the mathematics is correct and complete, and the only changes are B3 inline citations. Statement: it matches the master source verbatim and the main-20261015 statement clause by clause. It is unchanged and not weakened. Coefficients are A_{E,n} for every finite E and every n, in pro-etale D^b_ctf. c_{g,f} is the mate of alpha_{g,f} with counit eps_g Rg_!(eps_f), which agrees with pur9-def-upper-shriek-composition and sk-prop-sp-composition. Steps: I checked (*) and its transposition in Step 3 against fix-prop-projection-formula's pentagon. I checked the Step 7 substitution at K=Lambda (Gamma_{p,Lambda}=vartheta_p^{-1} by lem-pur-projection-purity-agreement, affine composition law for d,e>=1 at any n, zero-section pullback through z_e plus bundle base change), the d=0/e=0 unit law, the Step 6 DNC square, the Step 8 rank-one gluing, the Koszul sign +1 in Step 9 and the final substitution in Step 10. New node lem-pur-diagonal-section-pasting: I checked by hand that a is the base change of f along Q->Y, b is that of g along gf, at=s, ba=p_gf, X x_Q W = X x_Y X giving C_f=Lt^*omega_a, and Q = X x_Y (Y x_Z Y) giving Lf^*C_g=Ls^*omega_b. It uses no orientation and does not restate (**). New node lem-pur-diagonal-dnc-chart-normalization: it follows the main-20261015 sk-prop-sp-orientation-charts proof and generalizes det-sp-orientation-charts (which only covers E=Q_l) to every E; it is not a duplicate. Its coordinate map W_h->A^d_U is etale and carries Delta to the zero section. Ramified E with n=1 is covered because the affine-line comparison is defined for every n. No duplicates turned up in an rg search of dag/nodes; candidates read: det-sp-composition-factors (circular), det-sp-orientation-vector-bundle, lem-pur-diagonal-orientation-compatibility, lem-pur-finite-smooth-adjunction-general-base. Route: every cited statement is on the unit's route except fix-prop-projection-formula; accepted tool_uses are fix-prop-projection-formula (generic pentagon) and pur9-def-upper-shriek-composition (the definition of c). No cycle; no SGA source. Fixes: inline citations of notions already in stmt_deps, statement field only: [def-pc-fibre-product], [def-sbc-affine-space] and [def-weil-etale-morphism] in the section-pasting node; [def-pur-normal-bundle], [def-asd-vector-bundle-zero-section], [def-pur-affine-space-comparison] and [pur9-def-upper-shriek-composition] in the chart node. Caveats, not faults: (1) the orientation vartheta_f is fixed by the construction in thm-pur-diagonal-dualizing-object, whose statement only says canonical; this was accepted in earlier reviews. (2) The blueprint_update of lem-pur-diagonal-regular-immersion drops the N=T clause; the current DAG statement still gives it, and these proofs do not really depend on it.; 2 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-3b4ee2cc0 (reviewer sub-agent of L); spot-checked: FIX with one wording repair; I read the item and all three new nodes in full. The delivery answers the 2026-10-21 re-split note. The 10-step, 11322-character base proof (the live node) is split into three statement-only nodes of comparable size. Old Steps 1-3 go to lem-pur-composition-tensor-mate: the domains, c as the counit mate, the definition of sigma, the explicit transpose t of c sigma, and (*). Old Steps 4-6 go to lem-pur-composition-compatible-dnc-charts: the simultaneous composable etale charts, the split tangent sequence, and the chart-local identities kappa=nu_{d,e} (from section-pasting), delta=1 (from chart-normalization) and the square (dagger). Old Steps 7-9 go to lem-pur-composition-model-orientation-descent: the affine identity Gamma^{-1} sigma = mu(Gamma^{-1} tensor Gamma^{-1}) via prop-pur-affine-space-composition-law and projection-purity-agreement, the d=0/e=0 unit cases, mu and I_K matching the 8 factors of def-pur-composition-comparisons, the sign +1, and injectivity of Aut on the rank-one sheaf under restriction to the cover. The parent is a 1897-character assembly; I checked its Step 3 types and the substitution sigma V^{-1} mu^{-1} = vartheta_gf^{-1}. The statement is unchanged. No argument was dropped and no node restates the item. det-sp-composition-factors has the same content but is downstream of the item (via det-sp-tower-gamma, thm-pur-finite-coefficient-smooth-purity and cor-pur-dualizing-object-purity), so citing it would be circular. lem-pur-system-tensor-transpose-composition is a systems analogue with extra hypotheses: an advisory overlap only. The route follows the main-20261015 proof (DNC invariance, vector-bundle purity, tangent splitting); no SGA is used. Batch-5 flags: the closure of the item's dependencies goes from 17949 to 17953 nodes; the only additions are the 3 new nodes and the definition def-pur-composition-comparisons, with no trace-formula or Poincare-duality node added. All flagged citations were already in the base closure and their chains end in generic content (fully faithful plus essentially surjective, centred section coordinates, lisse-module objects, the affine translation trace normalizing Gamma). None is a step of the trace formula or Poincare duality, so all are accepted. Fix: the charts node defined delta_h globally through thm-pur-dnc-invariance, which needs separated schemes, while X, Y, Z are not assumed separated. alpha_h, delta_h and beta_h are now formed on the affine chart restrictions (fixes/dag/nodes/sec-smooth-purity/lem-pur-composition-compatible-dnc-charts.json). Inherited from the base, not this delivery: def-pur-smooth-purity-map assumes X, Y separated while the item does not.; 1 file(s) fixed by the reviewer"
  },
  "tool_uses": [
   "fix-prop-projection-formula",
@@ -353,44 +221,6 @@
   "module": "Sheaf.Paper.PurityCompositionCoherence",
   "declaration": "WeilConjectures.PurityFiniteSetting.smoothPurityCompositionCoherence",
   "declarations": [
-   "WeilConjectures.PurityFiniteSetting.compositionTwistShift",
-   "WeilConjectures.PurityFiniteSetting.compositionShiftedPullback",
-   "WeilConjectures.PurityFiniteSetting.compositionTensorMapIso",
-   "WeilConjectures.PurityFiniteSetting.compositionOrderedPowerAdd",
-   "WeilConjectures.PurityFiniteSetting.compositionEtalePowerAssembly",
-   "WeilConjectures.PurityFiniteSetting.compositionEtalePowerZero",
-   "WeilConjectures.PurityFiniteSetting.compositionEtalePowerSuccessor",
-   "WeilConjectures.PurityFiniteSetting.compositionEtalePowerAdd",
-   "WeilConjectures.PurityFiniteSetting.compositionComparisonPowerAdd",
-   "WeilConjectures.PurityFiniteSetting.compositionPowerAdd",
-   "WeilConjectures.PurityFiniteSetting.compositionTwistPullback",
-   "WeilConjectures.PurityFiniteSetting.existsUnique_compositionPullbackTensor",
-   "WeilConjectures.PurityFiniteSetting.compositionPullbackTensor",
-   "WeilConjectures.PurityFiniteSetting.compositionCoefficientNoetherian",
-   "WeilConjectures.PurityFiniteSetting.CompositionPullbackTensorType",
-   "WeilConjectures.PurityFiniteSetting.CompositionPullbackTensorNormalized",
-   "WeilConjectures.PurityFiniteSetting.existsUnique_compositionPullbackTensorFixed",
-   "WeilConjectures.PurityFiniteSetting.compositionPullbackTensorFixed",
-   "WeilConjectures.PurityFiniteSetting.compositionExactDerivedComp",
-   "WeilConjectures.PurityFiniteSetting.compositionPullbackComp",
-   "WeilConjectures.PurityFiniteSetting.existsUnique_compositionFixedPullbackComp",
-   "WeilConjectures.PurityFiniteSetting.compositionFixedPullbackComp",
-   "WeilConjectures.PurityFiniteSetting.CompositionTensorAssociatorType",
-   "WeilConjectures.PurityFiniteSetting.CompositionTensorAssociatorNormalized",
-   "WeilConjectures.PurityFiniteSetting.existsUnique_compositionTensorAssociatorFixed",
-   "WeilConjectures.PurityFiniteSetting.compositionTensorAssociatorFixed",
-   "WeilConjectures.PurityFiniteSetting.CompositionSourceType",
-   "WeilConjectures.PurityFiniteSetting.compositionSourceStage",
-   "WeilConjectures.PurityFiniteSetting.CompositionSourceNormalized",
-   "WeilConjectures.PurityFiniteSetting.existsUnique_compositionSourceFixed",
-   "WeilConjectures.PurityFiniteSetting.compositionSourceFixed",
-   "WeilConjectures.PurityFiniteSetting.compositionSourceIdentification",
-   "WeilConjectures.PurityFiniteSetting.compositionExceptional",
-   "WeilConjectures.PurityFiniteSetting.compositionExceptional_ctf",
-   "WeilConjectures.PurityFiniteSetting.compositionInput_bounded",
-   "WeilConjectures.PurityFiniteSetting.compositionExceptionalMap",
-   "WeilConjectures.PurityFiniteSetting.isIso_compositionExceptionalMap",
-   "WeilConjectures.PurityFiniteSetting.compositionExceptionalIso",
    "WeilConjectures.PurityFiniteSetting.smoothPurityCompositionCoherence"
   ],
   "file": "lean/Sheaf/Paper/PurityCompositionCoherence.lean",
@@ -400,5 +230,15 @@
   "date": "2026-10-18",
   "existing": false,
   "note": "Section 1(B), returned R1: remove the three absolute IsSeparated scheme variables from the owning composition module. Retain all 39 names, constructions and theorem conclusions. The existing exceptional functor, its finite-Tor preservation and its canonical standing counit compositor now apply to the full finite-type field domain of the node and the corollary. No compositionExceptionalAll aliases or duplicate maps are introduced."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-6e650",
+  "group": "F3",
+  "result": "fix",
+  "landing": "20261026T001447-L-738",
+  "kind": "interface",
+  "note": "independent cc review: thm-pur-composition-coherence node and its two new lemma nodes against PurityCompositionCoherence / CompositionSingleMatePresentation / CompositionIteratedMateExpansion; PurityCompositionComparisons against the clone's old item module (verbatim extraction); all 14 direct importers compiled in sandbox"
  }
 }

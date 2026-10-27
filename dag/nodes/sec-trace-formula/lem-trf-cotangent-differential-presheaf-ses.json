@@ -1,0 +1,258 @@
+{
+ "id": "lem-trf-cotangent-differential-presheaf-ses",
+ "kind": "statement",
+ "title": "Canonical differential presheaf sequence on polynomial pairs",
+ "statement": "Let $A\\to B\\to C$ be homomorphisms of commutative rings. Use a common infinite size bound and small skeletons [def-weil-size-convention]. Let $\\mathcal C_{T/S}$ be the opposite category of augmented polynomial $S$-algebras $P\\to T$, and let $\\mathcal E$ be the opposite category of pairs $U=(P\\to B,Q\\to C)$ with $P$ polynomial over $A$, $Q$ polynomial over $P$, and compatible augmentations; morphisms before opposites are compatible algebra maps preserving the augmentations. Give these categories the identity-cover topology. Define $u_1(U)=P\\to B$, $u_2(U)=Q\\to C$, $u_3(U)=Q\\otimes_P B\\to C$ and $g_i^{-1}$ by precomposition, with structural rings and augmentations as in [lem-trf-cotangent-lower-shriek]. Write $F_{T/S}(P\\to T)=\\Omega_{P/S}\\otimes_P T$ with its differential restriction maps [lem-trf-cotangent-sheaf-model, def-weil-pbc-kahler-differentials], and form the constant-$C$ module presheaves\n$$M_1=g_1^{-1}F_{B/A}\\otimes_{\\underline B}\\underline C,\\qquad M_2=g_2^{-1}F_{C/A},\\qquad M_3=g_3^{-1}F_{C/B}$$\nusing [def-pur-sheaf-tensor-product]. There is a canonical short exact sequence $0\\to M_1\\xrightarrow{a}M_2\\xrightarrow{b}M_3\\to0$. Its values at $U$ identify canonically with\n$$0\\to\\Omega_{P/A}\\otimes_P C\\xrightarrow{a_U}\\Omega_{Q/A}\\otimes_Q C\\xrightarrow{b_U}\\Omega_{Q/P}\\otimes_Q C\\to0.$$\nHere the third identification is $\\Omega_{Q\\otimes_P B/B}\\otimes_{Q\\otimes_P B}C\\simeq\\Omega_{Q/P}\\otimes_Q C$, taking $\\mathrm d(q\\otimes1)\\otimes c$ to $\\mathrm dq\\otimes c$; $a_U$ takes $\\mathrm dp\\otimes c$ to $\\mathrm dp\\otimes c$, and $b_U$ takes $\\mathrm dq\\otimes c$ to its relative differential. These two maps commute with every restriction map. For any polynomial coordinates $P=A[x_s]$, $Q=P[y_t]$, the displayed sequence is the inclusion and projection sequence $0\\to\\bigoplus_s C\\,\\mathrm dx_s\\to(\\bigoplus_s C\\,\\mathrm dx_s)\\oplus(\\bigoplus_t C\\,\\mathrm dy_t)\\to\\bigoplus_t C\\,\\mathrm dy_t\\to0$. No naturality of the coordinate splitting and no flatness of $C$ over $Q$ are asserted or required.",
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08QU (lemma-triangle-ses), the canonical differential sequence on the pair site; Algebra Tags 00RV (lemma-differentials-base-change) and 00RX (lemma-differentials-polynomial-ring)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "lem-trf-cotangent-lower-shriek",
+  "lem-trf-cotangent-sheaf-model",
+  "def-weil-pbc-kahler-differentials",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Obtain a bar system from lem-trf-derived-colimit-bar and the projection record from lem-trf-cotangent-lower-shriek. Construct the coefficient presheaf on the full presentation site by the universal property of Kahler differentials followed by scalar extension: a presentation map sends c tensor dx to c tensor d(h(x)). Equality on these generators proves the functor identities. The first evaluation identification is the composite of the ring-isomorphism transport and extension-of-scalars transitivity, sending c tensor (b tensor dp) to c g(b) tensor dp. The second is induced by the second projection ring isomorphism. These are actual module isomorphisms with the stated generator formulas.",
+   "uses": [
+    "lem-trf-derived-colimit-bar",
+    "lem-trf-cotangent-lower-shriek",
+    "def-weil-pbc-kahler-differentials",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QU (lemma-triangle-ses), proof, evaluation at a polynomial pair and assembly of the sequence."
+   }
+  },
+  {
+   "text": "Apply differential base change with $R=P$, $R'=B$, $S=Q$, interchanging the tensor factors $B\\otimes_P Q\\simeq Q\\otimes_P B=D$ by $b\\otimes q\\mapsto q\\otimes b$. It gives $\\Omega_{D/B}\\simeq D\\otimes_Q\\Omega_{Q/P}$, taking $\\mathrm d(q\\otimes1)$ to $1\\otimes\\mathrm d_{Q/P}q$. Tensor with $C$ via the given augmentation $D\\to C$ and cancel $D$ by $(d\\otimes\\eta)\\otimes c\\mapsto\\eta\\otimes d c$, inverse $\\eta\\otimes c\\mapsto(1\\otimes\\eta)\\otimes c$. Thus $M_3(U)\\simeq\\Omega_{Q/P}\\otimes_Q C$ with precisely the stated generator formula. For a pair map $(\\phi:P\\to P',\\psi:Q\\to Q')$, the induced $D\\to D'$ sends $q\\otimes b$ to $\\psi(q)\\otimes b$; both routes on $\\mathrm d(q\\otimes1)\\otimes c$ give $\\mathrm d_{Q'/P'}\\psi(q)\\otimes c$. These elements generate, proving naturality of this identification.",
+   "uses": [
+    "lem-weil-pbc-kahler-differentials-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RV (lemma-differentials-base-change), statement and generator formula in the proof; used in Tag 08QU."
+   }
+  },
+  {
+   "text": "The $A$-derivation $p\\mapsto\\mathrm d_{Q/A}p$ and the $A$-derivation $q\\mapsto\\mathrm d_{Q/P}q$ induce maps of differential modules by the defining universal property; extending scalars gives $a_U$ and $b_U$. The second derivation kills $P$, so $b_Ua_U=0$. For a pair map $(\\phi,\\psi)$ before opposites, restrictions send $\\mathrm dp\\otimes c$ to $\\mathrm d\\phi(p)\\otimes c$ and $\\mathrm dq\\otimes c$ to $\\mathrm d\\psi(q)\\otimes c$. The $a$ square commutes because $\\psi(p)=\\phi(p)$ inside $Q'$; the $b$ square commutes because both routes send $\\mathrm d_{Q/A}q\\otimes c$ to $\\mathrm d_{Q'/P'}\\psi(q)\\otimes c$. Universal differentials generate their modules, so these checks prove equality on all elements. With step 2 they define $C$-linear presheaf morphisms $a:M_1\\to M_2$ and $b:M_2\\to M_3$, canonically and independently of coordinates.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "lem-trf-cotangent-lower-shriek"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QU (lemma-triangle-ses), proof, evaluation at a polynomial pair and assembly of the sequence."
+   }
+  },
+  {
+   "text": "Choose polynomial coordinates $P=A[x_s]$, $Q=P[y_t]=A[x_s,y_t]$; the last identification is substitution of finite polynomials, with inverse fixing $A,x_s,y_t$. Apply the arbitrary-variable differential-basis lemma to $P/A$, $Q/A$ and $Q/P$, and its scalar-extension clause with algebra $C$. The bases are respectively $(\\mathrm dx_s)$, $(\\mathrm dx_s,\\mathrm dy_t)$ and $(\\mathrm dy_t)$. Step 3 sends $\\mathrm dx_s$ to $\\mathrm dx_s$, and sends $(\\mathrm dx_s,\\mathrm dy_t)$ to $(0,\\mathrm dy_t)$, since the relative derivation kills $P$. Thus the maps are $v\\mapsto(v,0)$ and $(v,w)\\mapsto w$ on the displayed direct sums. They are respectively injective and surjective, and the kernel of the projection consists exactly of $(v,0)$. This proves all objectwise short exactness and coordinate-form assertions. Every sum has finite support even for infinite variable sets. No tensor-preservation-of-injections or flatness assumption is used.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RX (lemma-differentials-polynomial-ring), basis calculation, extended to arbitrary variable sets as in the cited node; implements the split polynomial sequence in Tag 08QU."
+   }
+  },
+  {
+   "text": "For each pair, choose its polynomial coordinates and apply step 4. Transport its short exact module sequence through the three evaluation isomorphisms. Objectwise monomorphisms and epimorphisms give the corresponding presheaf monomorphism and epimorphism. To prove middle exactness, lift every presheaf map killed by b through the objectwise kernel a. Uniqueness of the lift, checked after composing with the monomorphism a, proves its naturality. This is the kernel universal property in the functor category, hence the presheaf short complex is exact and short exact. No passage through a chain complex or free-nerve evaluation lemma is needed.",
+   "uses": [
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QU (lemma-triangle-ses), proof, evaluation at a polynomial pair and assembly of the sequence."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-derived-colimit-bar",
+  "lem-trf-cotangent-lower-shriek",
+  "def-weil-pbc-kahler-differentials",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08QU (lemma-triangle-ses), proof, evaluation at a polynomial pair and assembly of the sequence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical short exact sequence of Kahler differential module presheaves on the category of pairs of polynomial presentations for A to B to C",
+   "results": "8 hits; top=['Algebra.Generators.H1Cotangent.δ', 'Algebra.Generators.H1Cotangent.exact_δ_map', 'Algebra.Generators.CotangentSpace.exact', 'CommRingCat.KaehlerDifferential', 'Algebra.Generators.Cotangent.exact', 'Algebra.H1Cotangent.δ', 'Algebra.Extension.exact_cotangentComplex_toKaehler', 'Algebra.Presentation.differentialsSolution']; note=; digest=e6c4a91b387db2a8. Full output retained in lem-trf-cotangent-differential-presheaf-ses.search-0.txt.",
+   "date": "2026-10-22",
+   "verdict": "No match: KaehlerDifferential.exact_mapBaseChange_map gives only module right exactness; the new assertion includes the left injection after arbitrary C-tensor, the specified third base-change identification and the natural presheaf sequence. See Kaehler/Basic.lean:655-671,715-758 and Extension/Cotangent/Basic.lean:53-65; the JacobiZariski results concern naive presentation cotangent modules, not this presheaf statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential.map, KaehlerDifferential",
+   "results": "12 hits; top=['KaehlerDifferential.map', 'KaehlerDifferential.map_surjective', 'KaehlerDifferential.map_surjective_of_surjective', 'KaehlerDifferential.range_mapBaseChange', 'KaehlerDifferential.map_D', 'KaehlerDifferential.exact_mapBaseChange_map', 'KaehlerDifferential.ker_map_of_surjective', 'KaehlerDifferential.mapBaseChange_tmul']; note=; digest=3461a55d329cf3b1. Full output retained in lem-trf-cotangent-differential-presheaf-ses.search-1.txt.",
+   "date": "2026-10-22",
+   "verdict": "No match: KaehlerDifferential.exact_mapBaseChange_map gives only module right exactness; the new assertion includes the left injection after arbitrary C-tensor, the specified third base-change identification and the natural presheaf sequence. See Kaehler/Basic.lean:655-671,715-758 and Extension/Cotangent/Basic.lean:53-65; the JacobiZariski results concern naive presentation cotangent modules, not this presheaf statement."
+  },
+  {
+   "tool": "grep",
+   "query": "KaehlerDifferential.*(exact|transitiv)|differential.*(presheaf|sheaf)|cotangent.*shortExact [sub=RingTheory]",
+   "results": "7 hits; top=['Mathlib/RingTheory/Kaehler/JacobiZariski.lean', 'Mathlib/RingTheory/Unramified/LocalRing.lean', 'Mathlib/RingTheory/Kaehler/Basic.lean', 'Mathlib/RingTheory/Kaehler/Basic.lean', 'Mathlib/RingTheory/Kaehler/Basic.lean', 'Mathlib/RingTheory/Kaehler/Basic.lean', 'Mathlib/RingTheory/Etale/Kaehler.lean']; note=; digest=00d2a0cfe8743f50. Full output retained in lem-trf-cotangent-differential-presheaf-ses.search-2.txt.",
+   "date": "2026-10-22",
+   "verdict": "No match: KaehlerDifferential.exact_mapBaseChange_map gives only module right exactness; the new assertion includes the left injection after arbitrary C-tensor, the specified third base-change identification and the natural presheaf sequence. See Kaehler/Basic.lean:655-671,715-758 and Extension/Cotangent/Basic.lean:53-65; the JacobiZariski results concern naive presentation cotangent modules, not this presheaf statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A polynomial tower gives a natural split exact sequence of differential modules after arbitrary scalar extension",
+   "results": "8 hits; top=['Polynomial.splits_of_isScalarTower', 'Polynomial.IsSplittingField.IsScalarTower.splits', 'Polynomial.Splits.of_isScalarTower', \"IsIntegral.minpoly_splits_tower_top'\", 'IsIntegral.minpoly_splits_tower_top', 'Derivation.instIsScalarTower', 'instIsScalarTowerPolynomial', 'PolynomialModule.instIsScalarTower']; note=; digest=85d929889944c0fc. Full output retained in lem-trf-cotangent-differential-presheaf-ses.search-3.txt.",
+   "date": "2026-10-22",
+   "verdict": "No match: KaehlerDifferential.exact_mapBaseChange_map gives only module right exactness; the new assertion includes the left injection after arbitrary C-tensor, the specified third base-change identification and the natural presheaf sequence. See Kaehler/Basic.lean:655-671,715-758 and Extension/Cotangent/Basic.lean:53-65; the JacobiZariski results concern naive presentation cotangent modules, not this presheaf statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For polynomial A algebra P and polynomial P algebra Q the sequence of differentials Omega P A tensor C to Omega Q A tensor C to Omega Q P tensor C is exact naturally in presentations",
+   "results": "8 hits; top=['Algebra.Generators.CotangentSpace.exact', 'Algebra.Generators.Cotangent.exact', 'Algebra.Generators.H1Cotangent.exact_δ_map', 'Algebra.Generators.H1Cotangent.exact_map_δ', \"Algebra.Generators.H1Cotangent.exact_map_δ'\", 'KaehlerDifferential.exact_kerCotangentToTensor_mapBaseChange', 'KaehlerDifferential.exact_mapBaseChange_map', 'Algebra.H1Cotangent.exact_δ_mapBaseChange']; note=; digest=44b444df67040012. Full output retained in lem-trf-cotangent-differential-presheaf-ses.search-4.txt.",
+   "date": "2026-10-22",
+   "verdict": "No match: KaehlerDifferential.exact_mapBaseChange_map gives only module right exactness; the new assertion includes the left injection after arbitrary C-tensor, the specified third base-change identification and the natural presheaf sequence. See Kaehler/Basic.lean:655-671,715-758 and Extension/Cotangent/Basic.lean:53-65; the JacobiZariski results concern naive presentation cotangent modules, not this presheaf statement."
+  },
+  {
+   "tool": "grep",
+   "query": "KaehlerDifferential.*(exact|transitiv)|differential.*(presheaf|sheaf)|cotangent.*shortExact",
+   "results": "7 hits; top=['Mathlib/RingTheory/Kaehler/JacobiZariski.lean', 'Mathlib/RingTheory/Kaehler/Basic.lean', 'Mathlib/RingTheory/Kaehler/Basic.lean', 'Mathlib/RingTheory/Kaehler/Basic.lean', 'Mathlib/RingTheory/Kaehler/Basic.lean', 'Mathlib/RingTheory/Etale/Kaehler.lean', 'Mathlib/RingTheory/Unramified/LocalRing.lean']; note=; digest=84f9eea4e127c253. Full output retained as search-0.txt through search-4.txt in this sandbox.",
+   "date": "2026-10-22",
+   "verdict": "No match for the whole presheaf assertion. KaehlerDifferential.exact_mapBaseChange_map gives module right exactness only (Basic.lean:756); map_surjective is at Basic.lean:713. PresheafOfModules.DifferentialsConstruction.relativeDifferentials' constructs the differential presheaf, not its polynomial-pair short exact sequence. Polynomial bases are already a DAG Mathlib leaf and are reused. Jacobi-Zariski hits concern presentation cotangent modules or their homology, not this full assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural short exact sequence of Kahler differential presheaves on the category of polynomial algebra pairs",
+   "results": "8 hits; top=[\"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'\", 'KaehlerDifferential', 'CommRingCat.KaehlerDifferential', 'KaehlerDifferential.exact_mapBaseChange_map', 'Algebra.Extension.exact_cotangentComplex_toKaehler', 'CommRingCat.KaehlerDifferential.map', \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map_d\", 'Algebra.Presentation.differentials']; note=; digest=f481723587b0d470. Full output retained as search-0.txt through search-4.txt in this sandbox.",
+   "date": "2026-10-22",
+   "verdict": "No match for the whole presheaf assertion. KaehlerDifferential.exact_mapBaseChange_map gives module right exactness only (Basic.lean:756); map_surjective is at Basic.lean:713. PresheafOfModules.DifferentialsConstruction.relativeDifferentials' constructs the differential presheaf, not its polynomial-pair short exact sequence. Polynomial bases are already a DAG Mathlib leaf and are reused. Jacobi-Zariski hits concern presentation cotangent modules or their homology, not this full assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical short exact sequence of Kahler differential module presheaves on polynomial pairs P over A and Q over P with arbitrary coefficient algebra C",
+   "results": "8 hits; top=['Algebra.Generators.H1Cotangent.exact_δ_map', 'Algebra.Generators.Cotangent.exact', 'Algebra.Generators.CotangentSpace.exact', 'Algebra.Generators.H1Cotangent.δ', 'Algebra.Generators.H1Cotangent.exact_map_δ', 'KaehlerDifferential.cotangentComplexBaseChange', 'Algebra.Extension.exact_cotangentComplex_toKaehler', \"Algebra.Generators.H1Cotangent.exact_map_δ'\"]; note=; digest=ccc74c93ea5e2d76. Full output retained as search-0.txt through search-4.txt in this sandbox.",
+   "date": "2026-10-22",
+   "verdict": "No match for the whole presheaf assertion. KaehlerDifferential.exact_mapBaseChange_map gives module right exactness only (Basic.lean:756); map_surjective is at Basic.lean:713. PresheafOfModules.DifferentialsConstruction.relativeDifferentials' constructs the differential presheaf, not its polynomial-pair short exact sequence. Polynomial bases are already a DAG Mathlib leaf and are reused. Jacobi-Zariski hits concern presentation cotangent modules or their homology, not this full assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For polynomial rings P over A and Q over P the transitivity differential sequence remains split exact after tensoring with any Q algebra C",
+   "results": "8 hits; top=['Algebra.Generators.Cotangent.exact', 'Algebra.Generators.CotangentSpace.exact', 'Algebra.Generators.H1Cotangent.exact_δ_map', 'Algebra.Generators.H1Cotangent.exact_map_δ', 'KaehlerDifferential.exact_mapBaseChange_map', 'Algebra.H1Cotangent.exact_δ_mapBaseChange', \"Algebra.Generators.H1Cotangent.exact_map_δ'\", 'Algebra.H1Cotangent.exact_map_δ']; note=; digest=ee9f8cb8e3916a6a. Full output retained as search-0.txt through search-4.txt in this sandbox.",
+   "date": "2026-10-22",
+   "verdict": "No match for the whole presheaf assertion. KaehlerDifferential.exact_mapBaseChange_map gives module right exactness only (Basic.lean:756); map_surjective is at Basic.lean:713. PresheafOfModules.DifferentialsConstruction.relativeDifferentials' constructs the differential presheaf, not its polynomial-pair short exact sequence. Polynomial bases are already a DAG Mathlib leaf and are reused. Jacobi-Zariski hits concern presentation cotangent modules or their homology, not this full assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-cotangent-transitivity-triangle",
+  "date": "2026-10-22",
+  "group": "Q19"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Re-split component: old steps 1--2: differential sheaves, base-change identification, polynomial basis sequence and restriction naturality.",
+   "via": [
+    "lem-trf-cotangent-transitivity-triangle",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-cotangent-differential-presheaf-ses",
+  "worker": "stage1",
+  "summary": "Q27: statement unchanged. Checked Stacks 08QU, 00RV and 00RX and the actual statements of all cited nodes. Five proof steps identify the presheaf values, identify the third term by base change, construct the canonical arrows and check restriction compatibility on differential generators, prove arbitrary-coefficient exactness using polynomial bases, and assemble by existing objectwise exactness. All supporting nodes already exist; no new nodes or Lean files. Fresh logged searches with two semantic phrasings find no Mathlib theorem for the whole assertion.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Re-split component: old steps 1--2: differential sheaves, base-change identification, polynomial basis sequence and restriction naturality.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-presheaf-free-nerve-exact-eval-glue",
+    "why": "Generic objectwise-exactness reflection for a chain complex of constant-ring module presheaves, applied in degrees 2,1,0. No node of the item unit states this categorical tool; it does not change the unit route (and is independently Lean-closed)."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-30d7aac0f",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-30d7aac0f (reviewer sub-agent of L); spot-checked: Item lem-trf-cotangent-differential-presheaf-ses is the only file delivered, with no new nodes and no changes to the unit or chapter. Its statement, stmt_deps and blueprint are byte-identical to live, where the item is still unsplit; the delivery is not superseded and there is no repair note. proof_deps equals the union of the step uses. The five steps follow Stacks cotangent.tex Tag 08QU (lemma-triangle-ses) and its proof. Step 1 (elementary) evaluates the three presheaves through the precomposition in lower-shriek; with identity covers the sheaf tensor is objectwise, and the balanced map is explicit. Step 2 applies the 00RV leaf (tensorKaehlerEquiv) with R=P, R'=B, S=Q and swaps the tensor factors. D→C is well defined because P→Q→C equals P→B→C, so cancelling D is legitimate, and naturality checks on d(q⊗1)⊗c using ψ|_P=φ. Step 3 (elementary) builds a and b from the universal property without coordinates; b∘a=0 and both restriction squares are checked on generators. Step 4 uses the arbitrary-variable 00RX basis leaf to show the maps are inclusion and projection, with no flatness of C. Step 5 cites the Lean-closed exactAt_of_presheaf_evaluations, which holds for any RingCat presheaf and any ℕ-indexed complex; exactness in degrees 2, 1 and 0 gives mono, middle exactness and epi. I accept the declared tool use of sk-prop-cd as generic. Edge cases checked: P=A, Q=P, empty and infinite variable sets, C=0, and non-flat C=A[x][y]/(y). The automorphism y↦y+x shows the coordinate splitting is not natural, and the item correctly does not claim it is. No duplicate in the DAG: the bar-term and bar-arrow nodes cite this item consistently, and the parent transitivity-triangle step 1 matches the statement. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CotangentDifferentialPresheafSes",
+  "declaration": "Algebra.CotangentDifferentialSequence.sequence_nonempty",
+  "declarations": [
+   "Algebra.CotangentSheaf.tensorTerm",
+   "Algebra.CotangentSheaf.tensorD",
+   "Algebra.CotangentSheaf.SiteCoefficients",
+   "Algebra.CotangentDifferentialSequence.pBase",
+   "Algebra.CotangentDifferentialSequence.qBase",
+   "Algebra.CotangentDifferentialSequence.leftTerm",
+   "Algebra.CotangentDifferentialSequence.middleTerm",
+   "Algebra.CotangentDifferentialSequence.rightTerm",
+   "Algebra.CotangentDifferentialSequence.leftD",
+   "Algebra.CotangentDifferentialSequence.middleD",
+   "Algebra.CotangentDifferentialSequence.rightD",
+   "Algebra.CotangentDifferentialSequence.firstModule",
+   "Algebra.CotangentDifferentialSequence.secondModule",
+   "Algebra.CotangentDifferentialSequence.thirdModule",
+   "Algebra.CotangentDifferentialSequence.Sequence",
+   "Algebra.CotangentDifferentialSequence.sequence_nonempty"
+  ],
+  "file": "lean/Sheaf/RingTheory/CotangentDifferentialPresheafSes.lean",
+  "statement": "theorem sequence_nonempty {A B C : CommRingCat.{u}} (f : A ⟶ B) (g : B ⟶ C) : Nonempty (Sequence f g)",
+  "branch": "newtargets-dag",
+  "by": "Q69",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The Sequence record expands every clause: actual tensor values, all generator identifications, natural arrows, categorical short exactness and six polynomial-coordinate formulas. The data are not chosen from the postponed theorem. Tensor factors are reversed using the standard symmetry, as in the recorded coefficient model."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ed2eb5820",
+  "group": "Q69",
+  "result": "pass",
+  "note": "Re-delivery after the H13 RETURN of d6231536. Route (a) applied exactly: the lem-trf-cotangent-sheaf-model and lower-shriek JSON are byte-identical to side-live; tensorTerm/tensorD/SiteCoefficients moved unchanged into the item module (blueprint tag now the item) and listed in lean.declarations; the CotangentSheafSiteCoefficients module is removed; the rest of the module is unchanged; the item node differs from live only in lean. No name clash in live lean. Clauses rechecked against 08QU/00RV/00RX: Projections pinned (ring isos with base/aug laws, IsPushout for Q⊗_P B); SiteCoefficients pinned by actual KaehlerDifferential terms and the generator restriction formula; M1 = extendScalars g after precomposition, the objectwise identity-cover tensor; value1-3 pinned on generators, third d(q⊗1)⊗c↦d_P q⊗c; a and b are NatTrans with generator formulas; ShortExact in the functor category (equivalent to objectwise); coordinate clause ∀ S,T,eP,eQ with six normalizations. Edge cases checked: empty S or T, C=0, infinite variables, non-flat Q→C, no natural splitting claimed. Universes: rings u, AsSmall sites. Docstrings, 5 proof steps, single sorry and verbatim statement all OK. Advisories: tensorTerm repeats coefficientTerm, justified by the different site indexing; 58.2 s library compile is close to the 60 s limit. No compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z7",
+  "result": "pass",
+  "landing": "20261024T022604-L-3015213",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -29,11 +29,101 @@
   "def-pc-fibre-product",
   "def-weil-pbc-reduced-normalization",
   "def-weil-pbc-adic-completion",
-  "def-weil-pbc-multivariate-power-series"
+  "def-weil-pbc-multivariate-power-series",
+  "def-sfb-quasi-split-nodal-fibres",
+  "def-trf-nodal-geometric-fibres",
+  "def-weil-pure-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $K=k(Y)$ and $F=k(C)$. Apply equivariant flat preparation to $(g,H,E)$, obtaining $S,P,f,M,a,b_0$ with $K_0=k(S)/K$ finite purely inseparable. Put $F_0=k(P)=F\\otimes_K K_0$. The generic curve of $P/S$ is smooth geometrically integral and its reduced generic marking is finite etale. The $H$-action is retained. Fields are excellent, finite-type algebras and their localizations are excellent, and finite-type schemes over a field are Noetherian; hence all bases constructed below are excellent Noetherian. This step prepares the generic curve and the target, and makes no stable-modification claim.",
+   "uses": [
+    "lem-sfb-equivariant-flat-curve-preparation",
+    "lem-exc-fields-excellent",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "Returned Step 1."
+   }
+  },
+  {
+   "text": "Apply genus-raising-equivariant-stable-model to $P/S,M,H$. Retain its $Q/S_1,H_1,S_2,H_2,(W,s_i)$ and generic identification. Write $K_i=k(S_i)$ and $F_1=k(Q)$. Its fixed-field equalities give $F_1^{\\ker(H_1\\to H)}=F_0$, $K_1^{\\ker(H_1\\to H)}=K_0$, and $K_2^{\\ker(H_2\\to H_1)}=K_1$.",
+   "uses": [
+    "lem-sfb-genus-raising-equivariant-stable-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "§§3.2--3.8, pp.605--609; returned proof Steps 2--4, including genus raising, rational markings, stable extension, Isom rigidity and projective-bundle conversion."
+   }
+  },
+  {
+   "text": "Apply equivariant-stable-model-evaluation to $W/S_2$, $Q\\times_{S_1}S_2$ and the generic identification. The no-rational-curve hypothesis follows from the preceding cover on geometric fibres. Obtain $S_3,H_3,W_3$ and an equivariant map $W_3\\to Q\\to P\\to C$. The lemma supplies integrality after every subsequent dominant integral base change and the finite-extension tensor description of its function field.",
+   "uses": [
+    "lem-sfb-equivariant-stable-model-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "§§3.9--3.13, p.609; returned proof Steps 5--6, including equivariant normal domination of Hom closure and flat generic-field calculation."
+   }
+  },
+  {
+   "text": "Apply curve-field-kernel-invariant-tower first to $F_1/K_1$ and $K_2/K_1$, then to $k(W)/K_2$ and $k(S_3)/K_2$. Geometric integrality supplies its tensor-domain hypothesis. The equivariant generic identification of genus-raising-equivariant-stable-model gives $k(W)=F_1\\otimes_{K_1}K_2$ with the diagonal $H_2$-action. The evaluation lemma supplies the second tensor identification and kernel base-field equality. Starting with $F_0/F$ and $K_0/K$ purely inseparable, the tower conclusion gives $k(W_3)^{A_3}/F$ and $k(S_3)^{A_3}/K$ purely inseparable, where $A_3=\\ker(H_3\\to H)$.",
+   "uses": [
+    "lem-sfb-curve-field-kernel-invariant-tower",
+    "lem-sfb-equivariant-stable-model-evaluation",
+    "lem-sfb-genus-raising-equivariant-stable-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "Remarks 2.3(iii), §2.6 and §§3.2,3.5,3.11; returned proof Steps 7--8, tensor fixed fields and characteristic powers. Agent-expanded field algebra."
+   }
+  },
+  {
+   "text": "Use quasisplit-regular-constant-alteration with $S=S_3,W=W_3$, its equivariant evaluation to $C$ and the preceding invariant fields. Evaluation is dominant and generically finite by its generic identification and the finite auxiliary cover. The base map $S_3\\to Y$ is a composite of alterations, hence an alteration; the lemma asks for no H-projectivity of it. Obtain $e,G,B,V,v,b,c,\\alpha$ with all three kernel-invariant conclusions, H-projective alterations, stable markings, quasi-split fibres, and smooth geometrically integral generic fibre. If $\\dim Y=0$, it gives $B=\\operatorname{Spec}e$.",
+   "uses": [
+    "lem-sfb-quasisplit-regular-constant-alteration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "Lemmas 5.5 and 5.7, pp.614--615, and §3.11; returned proof Steps 9--11, finite quasi-splitting, radicial constants and H-projective graph alterations."
+   }
+  },
+  {
+   "text": "Set $Z=c^{-1}E$. The generic identification and the genus-raising cover identify its reduced generic inverse image with marked points. Apply marked-nodal-boundary-control to obtain the invariant nowhere dense $D$, smoothness off $D$ and the required containment. The same lemma gives all asserted arbitrary-base-change properties and, when $B=\\operatorname{Spec}e$, $D=\\varnothing$. Together these data satisfy every clause of the unchanged statement.",
+   "uses": [
+    "lem-sfb-marked-nodal-boundary-control",
+    "lem-sfb-genus-raising-equivariant-stable-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "Remark 2.5, p.603, §§3.3,5.5--5.7; returned proof Steps 12--13, exceptional boundary images, arbitrary base change and dimension-zero case."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-fields-excellent",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-sfb-curve-field-kernel-invariant-tower",
+  "lem-sfb-equivariant-flat-curve-preparation",
+  "lem-sfb-equivariant-stable-model-evaluation",
+  "lem-sfb-genus-raising-equivariant-stable-model",
+  "lem-sfb-marked-nodal-boundary-control",
+  "lem-sfb-quasisplit-regular-constant-alteration",
+  "lem-weil-pbc-finite-type-over-noetherian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+  "place": "Assembly of the five extracted arguments from the returned 13-step proof, on the same de Jong genus-raising route."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -69,10 +159,31 @@
    "results": "{\"t\": \"2026-10-22T02:38:11Z\", \"tool\": \"leanfinder\", \"query\": \"Galois semistable reduction of curves with disjoint boundary sections over a normal variety\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.isGoodReduction_iff_isElliptic_reduction\", \"WeierstrassCurve.minimal\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.reduction\", \"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.isGoodReduction_iff\", \"WeierstrassCurve.IsGoodReduction.goodReduction\"], \"digest\": \"6314d6e5931e687d\"}",
    "date": "2026-10-22",
    "verdict": "no match: read returned signatures; no equivariant curve construction or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "semistable|quasi.?split|equivariant.*nodal",
+   "results": "{\"t\": \"2026-10-22T03:14:51Z\", \"tool\": \"grep\", \"query\": \"semistable|quasi.?split|equivariant.*nodal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned declarations; properness permanence and elliptic curve models do not give this equivariant nodal family alteration"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper relative curve admits a projective equivariant alteration into a quasi split nodal family with disjoint sections",
+   "results": "{\"t\": \"2026-10-22T03:14:51Z\", \"tool\": \"leansearch\", \"query\": \"A proper relative curve admits a projective equivariant alteration into a quasi split nodal family with disjoint sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.isProper_iff\", \"AlgebraicGeometry.IsProper.toIsSeparated\", \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"AlgebraicGeometry.IsProper\", \"AlgebraicGeometry.IsProper.mk\", \"AlgebraicGeometry.IsProper.casesOn\", \"AlgebraicGeometry.IsProper.recOn\"], \"digest\": \"a1f6c94049f8b8b0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned declarations; properness permanence and elliptic curve models do not give this equivariant nodal family alteration"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivariant marked nodal reduction of a proper family of geometrically integral curves with purely inseparable kernel invariant fields",
+   "results": "{\"t\": \"2026-10-22T03:14:53Z\", \"tool\": \"leanfinder\", \"query\": \"Equivariant marked nodal reduction of a proper family of geometrically integral curves with purely inseparable kernel invariant fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.reduction\", \"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.minimal\", \"WeierstrassCurve.IsIntegral.integral\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.Affine.Point.map_some\", \"WeierstrassCurve.baseChange_integralModel_eq\", \"WeierstrassCurve.isIntegral_iff\"], \"digest\": \"73e74d1d8278474e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned declarations; properness permanence and elliptic curve models do not give this equivariant nodal family alteration"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-equivariant-plurinodal-field-alteration",
@@ -98,5 +209,82 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-equivariant-single-curve-nodal-reduction",
+  "worker": "stage1",
+  "summary": "Re-split the returned 10713-character proof into five independent statement-only tasks, covering old Steps 2--4, 5--6, 7--8, 9--11 and 12--13. Keep old Step 1 and assemble the five results in fewer than 3000 characters. Statement unchanged; every original argument retained verbatim in the report with its destination. No Lean edits or compilation.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; same fixed genus-raising route, partitioned into five arguments. The inherited ancestor is null as blueprint_refs.py reports.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-fields-excellent",
+    "why": "General algebra or geometry used at the indicated proof step; no stable-modification, trace-formula or duality theorem is taken from this node."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "General algebra or geometry used at the indicated proof step; no stable-modification, trace-formula or duality theorem is taken from this node."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "General algebra or geometry used at the indicated proof step; no stable-modification, trace-formula or duality theorem is taken from this node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-fields-excellent",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-pc-projective-base-change",
+  "lem-pc-projective-proper",
+  "lem-sc-flat-invertible-sections-torsion-free",
+  "lem-trf-h-projective-composition",
+  "lem-trf-nodal-family-fitting-singular",
+  "lem-trf-projective-bundle-to-h-projective",
+  "lem-trf-semistable-marked-base-change",
+  "lem-weil-pbc-finite-dimensional-domain-is-field",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-weil-pbc-projective-ample-invertible",
+  "lem-weil-pbc-proper-closed-image",
+  "lem-weil-pbc-tensor-field-extension-galois-invariants"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q80-22c0f56b4",
+  "group": "Q80",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-22c0f56b4 (reviewer sub-agent of L); spot-checked: This is the 2026-10-21 human re-split (repair note in clones/live; asks for at least 3 nodes). The live base still holds the 13-step proof, so the delivery is not superseded. All 13 old steps appear verbatim in the report, each with one destination: 1→parent; 2–4→lem-sfb-genus-raising-equivariant-stable-model; 5–6→lem-sfb-equivariant-stable-model-evaluation; 7–8→lem-sfb-curve-field-kernel-invariant-tower; 9–11→lem-sfb-quasisplit-regular-constant-alteration; 12–13→lem-sfb-marked-nodal-boundary-control. The five nodes are statement-only and of comparable size, and none restates the item. The item statement is byte-identical to live and the parent is a 6-step assembly (2698 characters, 2920 after the fixes). Each node is true when checked against its cited existing nodes. Genus-raising: high-genus cover, then stable-pointed generic extension, then separable domination giving K_2^{N_2}=K_1, then Isom-finite uniqueness for the H_2 action, then projective-bundle→H-projective. Evaluation: Hom closure, equivariant domination of R (separable, so (L')^N=L), and flat torsion-free integrality with D⊗L_T a field. Field tower: N acts trivially on L, so (D_M⊗_M L')^N=D_M by tensor invariants; A'→A is surjective, so p-powers propagate along kernels. Quasisplit: quasi-splitting, then constant regularization, then the graph H-projective argument; V integral is advisory because the old Step-6 argument must be redone there. Boundary: dominating components of Z lie in the closed sections; other images and the nonsmooth image are proper closed subsets; dim 0 gives D=∅; base-change persistence holds. Small cases checked: char 0, empty marking, nonfaithful or trivial actions, dim 0. de Jong 1997 has no local PDF (already WANTED on base); the places given (Thm 2.4/Rem 2.5, §3.2–3.13, Lemmas 5.5/5.7) match the paper's structure. No SGA. I made two fixes. (C3/E1) Step 5 never verified the quasisplit node's hypothesis that b_0:S_3→Y is H-projective; S_1→S is only finite. The hypothesis is redundant (graph argument: S projective over k, Y separated), so I deleted 'H-projective' from it in the new node and Step 5 now says the base map is an alteration. (C1) Step 4 used k(W)=F_1⊗_{K_1}K_2 with the diagonal action without citing genus-raising; cite and sentence added. Batch-5 flags: def-sfb-stable-pointed-curve (4 citations) reaches def-trf-projective-bundle-morphism only as a general definition, and def-trf-nodal-geometric-fibres is a generic definition already in the base stmt_deps. Neither is trace-formula or Poincaré-duality content, so both are accepted. Maintainer: the item's tool_uses field still lists the old proof's tools.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EquivariantSingleCurveNodalReduction",
+  "declaration": "AlgebraicGeometry.exists_equivariant_single_curve_nodal_reduction",
+  "file": "lean/Sheaf/AlgebraicGeometry/EquivariantSingleCurveNodalReduction.lean",
+  "statement": "theorem exists_equivariant_single_curve_nodal_reduction (k : Type u) [Field k] (Y C : Scheme.{u}) (pY : Y ⟶ Spec (.of k)) (pC : C ⟶ Spec (.of k)) [IsIntegral Y] [IsIntegral C] [IsHProjective pY] [GeometricallyIntegral pY] [IsProper pC] (hnormal : ∀ y : Y, IsDomain (Y.presheaf.stalk y) ∧ IsIntegrallyClosed (Y.presheaf.stalk y)) (g : C ⟶ Y) [IsProper g] [IsDominant g] (hg : g ≫ pY = pC) [GeometricallyIntegral (g.fiberToSpecResidueField (genericPoint Y))] (hdim : topologicalKrullDim (g.fiber (genericPoint Y)) = 1) (H : Type v) [Group H] [Finite H] (σk : H →* (k ≃+* k)) (σC : H →* Aut C) (σY : H →* Aut Y) (hC : ∀ h : H, (σC h).hom ≫ pC = pC ≫ Spec.map (CommRingCat.ofHom (σk h⁻¹).toRingHom)) (hY : ∀ h : H, (σY h).hom ≫ pY = pY ≫ Spec.map (CommRingCat.ofHom (σk h⁻¹).toRingHom)) (heq : ∀ h : H, (σC h).hom ≫ g = g ≫ (σY h).hom) (E : Closeds C) (hE : IsNowhereDense (E : Set C)) (hEstable : ∀ h : H, (σC h).hom '' (E : Set C) = (E : Set C)) : ∃ (e : Type u) (_ : Field e) (_ : Algebra k e), Module.Finite k e ∧ ∃ (G : Type (max u v)) (_ : Group G) (_ : Finite G) (α : G →* H) (γ : G →* (e ≃+* e)), Function.Surjective α ∧ (∀ (a : G) (z : k), γ a (algebraMap k e z) = algebraMap k e (σk (α a) z)) ∧ (∃ K : IntermediateField k e, (∀ z : e, z ∈ K ↔ ∀ a : α.ker, γ a.val z = z) ∧ IsPurelyInseparable k K) ∧ ∃ (B V : Scheme.{u}) (_ : IsIntegral B) (_ : IsIntegral V) (q : B ⟶ Spec (.of e)) (v : V ⟶ B) (b : B ⟶ Y) (c : V ⟶ C) (τB : G →* Aut B) (τV : G →* Aut V), IsHProjective q ∧ GeometricallyIntegral q ∧ (∀ t : B, IsDomain (B.presheaf.stalk t) ∧ IsIntegrallyClosed (B.presheaf.stalk t)) ∧ b ≫ pY = q ≫ Spec.map (CommRingCat.ofHom (algebraMap k e)) ∧ c ≫ g = v ≫ b ∧ (∀ a : G, (τB a).hom ≫ q = q ≫ Spec.map (CommRingCat.ofHom (γ a⁻¹).toRingHom)) ∧ (∀ a : G, (τV a).hom ≫ v = v ≫ (τB a).hom) ∧ (∀ a : G, (τB a).hom ≫ b = b ≫ (σY (α a)).hom) ∧ (∀ a : G, (τV a).hom ≫ c = c ≫ (σC (α a)).hom) ∧ IsHProjective b ∧ IsProper b ∧ Surjective b ∧ IsDominant b ∧ IsHProjective c ∧ IsProper c ∧ Surjective c ∧ IsDominant c ∧ (∃ U : Y.Opens, Dense (U : Set Y) ∧ IsFinite (b ∣_ U)) ∧ (∃ U : C.Opens, Dense (U : Set C) ∧ IsFinite (c ∣_ U)) ∧ (∃ (hb : b (genericPoint B) = genericPoint Y) (_ : Algebra Y.functionField B.functionField), algebraMap Y.functionField B.functionField = (Y.presheaf.stalkSpecializes (specializes_of_eq hb) ≫ b.stalkMap (genericPoint B)).hom ∧ Module.Finite Y.functionField B.functionField ∧ ∃ K : IntermediateField Y.functionField B.functionField, (∀ z : B.functionField, z ∈ K ↔ ∀ a : α.ker, (Scheme.functionFieldAut (τB a.val)).hom z = z) ∧ IsPurelyInseparable Y.functionField K) ∧ (∃ (hc : c (genericPoint V) = genericPoint C) (_ : Algebra C.functionField V.functionField), algebraMap C.functionField V.functionField = (C.presheaf.stalkSpecializes (specializes_of_eq hc) ≫ c.stalkMap (genericPoint V)).hom ∧ Module.Finite C.functionField V.functionField ∧ ∃ K : IntermediateField C.functionField V.functionField, (∀ z : V.functionField, z ∈ K ↔ ∀ a : α.ker, (Scheme.functionFieldAut (τV a.val)).hom z = z) ∧ IsPurelyInseparable C.functionField K) ∧ IsHProjective v ∧ Flat v ∧ Smooth (v.fiberToSpecResidueField (genericPoint B)) ∧ GeometricallyIntegral (v.fiberToSpecResidueField (genericPoint B)) ∧ ∃ (m : ℕ) (s : Fin m → (B ⟶ V)) (hs : ∀ j, s j ≫ v = 𝟙 B) (D : Closeds B) (hfp : LocallyOfFinitePresentation v), HasNodalGeometricFibres v ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ B), IsReduced (pullback v t) ∧ (pullback v t).IsPureDimension 1) ∧ HasQuasiSplitNodalFibres v ∧ Pairwise (fun j l : Fin m ↦ Disjoint (Set.range (s j)) (Set.range (s l))) ∧ (∀ j : Fin m, Set.range (s j) ⊆ (v.smoothLocus : Set V)) ∧ (∀ a : G, (τV a).hom '' (⋃ j : Fin m, Set.range (s j)) = ⋃ j : Fin m, Set.range (s j)) ∧ IsNowhereDense (D : Set B) ∧ (∀ a : G, (τB a).hom '' (D : Set B) = (D : Set B)) ∧ Smooth (v ∣_ (⟨(D : Set B)ᶜ, D.isClosed.isOpen_compl⟩ : B.Opens)) ∧ c ⁻¹' (E : Set C) ⊆ v ⁻¹' (D : Set B) ∪ ⋃ j : Fin m, Set.range (s j) ∧ (∀ (B' : Scheme.{u}) (a : B' ⟶ B), IsHProjective (pullback.snd v a) ∧ Flat (pullback.snd v a) ∧ ∃ hfp' : LocallyOfFinitePresentation (pullback.snd v a), HasNodalGeometricFibres (pullback.snd v a) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ B'), IsReduced (pullback (pullback.snd v a) t) ∧ (pullback (pullback.snd v a) t).IsPureDimension 1) ∧ HasQuasiSplitNodalFibres (pullback.snd v a) ∧ (∀ j : Fin m, v.baseChangeSection (s j) (hs j) a ≫ pullback.snd v a = 𝟙 B') ∧ Pairwise (fun j l : Fin m ↦ Disjoint (Set.range (v.baseChangeSection (s j) (hs j) a)) (Set.range (v.baseChangeSection (s l) (hs l) a))) ∧ ∀ j : Fin m, Set.range (v.baseChangeSection (s j) (hs j) a) ⊆ ((pullback.snd v a).smoothLocus : Set (pullback (C := Scheme.{u}) v a))) ∧ (topologicalKrullDim Y = 0 → IsIso q ∧ (D : Set B) = ∅)",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-733324c58",
+  "group": "ND",
+  "result": "pass",
+  "note": "Item not dropped, not superseded live. Node diff: only lean + stmt_deps (new def-sfb-quasi-split-nodal-fibres + landed def-trf-nodal-geometric-fibres, def-weil-pure-dimension). lean.statement verbatim. All hypotheses (normal/H-projective/geom. integral Y, proper integral C, proper dominant g with geom. integral 1-dim generic fibre, semilinear H-actions, H-stable nowhere dense E) and conclusions (finite e, surjective α, γ extending σk, ker-α fixed fields purely inseparable for e, k(B), k(V) with canonical generic-stalk algebra maps and functionFieldAut, alterations b,c, H-projective flat LFP v, nodal+reduced+pure-1 geometric fibres, smooth geom. integral generic fibre, disjoint smooth sections with G-stable union, G-stable nowhere dense D, smooth off D, boundary containment, quasi-split, arbitrary base change via canonical baseChangeSection, dim 0 → IsIso q and D=∅) checked; ⋃/⊆/∧ precedence OK. New HasQuasiSplitNodalFibres is real, matches node and the citer's inline conjunct, distinct from HasStrictSplitNodalFibres; node fields OK. Docstrings carry 13 steps, source, blueprint. Only the item has sorry. Worker compile clean; no recompile, no changes."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

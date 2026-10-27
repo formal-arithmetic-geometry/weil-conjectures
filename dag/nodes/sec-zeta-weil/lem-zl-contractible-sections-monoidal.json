@@ -1,0 +1,133 @@
+{
+ "id": "lem-zl-contractible-sections-monoidal",
+ "kind": "statement",
+ "title": "Transport of normalized evaluation tensor data",
+ "statement": "For an essentially small ringed site and any object U as in [def-zl-condensed-lisse-evaluation-model], assume the small sectionwise derived category exists and evaluation at U has [lem-zl-contractible-derived-sections-tensor]. For every choice of finite-limit and finite-colimit preservation proofs for ordinary internal-module sections, the induced termwise derived functor (sections U).mapDerivedCategory has a strong monoidal structure for the fixed native derived tensor products. U need not be terminal. This is tensor transport only, with no realization or adjunction assertion.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 4.1(1), equations (3.1)-(3.2), Remark 3.2"
+ },
+ "stmt_deps": [
+  "def-zl-condensed-lisse-evaluation-model",
+  "lem-zl-contractible-derived-sections-tensor"
+ ],
+ "proof": [
+  {
+   "text": "The internal-section tensor comparison gives natural invertible ordinary tensor and unit comparisons satisfying associativity and both unit laws. Package their inverses as the strong monoidal structure on the exact section-module equivalence.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the cochain-level exact monoidal equivalence to categorical K-flat complexes. Functorial flat resolutions identify the restricted localization with the derived category; monoidal equivalences preserve K-flat complexes. The localization tensorator is invertible on this subcategory. Apply monoidal functor descent to the canonical factorization of the exact derived functor. This works with the actual localization choices in the statement.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-sf-ringed-derived-native-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved native-model identification to the coefficient tensor model contained in heval. Its tensor natural isomorphism, common localized unit and constraint equations give a strong monoidal identity functor from the native derived tensor to that model. Compose with the given monoidal evaluation datum.",
+   "uses": [
+    "lem-pd-ringed-kflat-native-model-identification",
+    "lem-zl-contractible-derived-sections-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the two strong monoidal derived functors, and transport their structure through the exact derived composition isomorphism to the fixed termwise derived sections functor. Finite-limit and finite-colimit preservation witnesses are proofs, so this proves the conclusion for each pair appearing in the statement.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-pd-ringed-kflat-native-model-identification",
+  "lem-zl-contractible-derived-sections-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 4.1(1), equations (3.1)-(3.2), Remark 3.2",
+  "note": "P9: ordinary tensor comparison, direct monoidal localization on K-flat complexes, and the existing native-model identification; no new unproved obligations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The left derived functor of sheafified scalar extension from modules over global sections is the composition of constant module realization and derived extension of rings",
+   "results": "IsLeftDerivedFunctor.mk, ModuleCat.extendScalars and its adjunction, and sheafification adjunction; no fixed-composite comparison theorem.",
+   "date": "2026-10-25",
+   "verdict": "Reuse ordinary tensor and localization APIs; no exact statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact coproduct preserving sections of module sheaves over global section ring fully faithful unit of left adjoint",
+   "results": "SheafOfModules.unitHomEquiv, freeHomEquiv, PresheafOfModules.sheafificationAdjunction; condensed locally constant adjunctions are special cases.",
+   "date": "2026-10-25",
+   "verdict": "Useful ordinary Hom equivalences; no general ringed-site fixed realization theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "sheaf.*tensor|constant.*module.*adjunction|derived.*tensor.*evaluation",
+   "results": "Mathlib presheaf module tensor, Sites.Point.Monoidal and presheaf closed tensor; no internal-section derived comparison.",
+   "date": "2026-10-25",
+   "verdict": "The representative comparison and ordinary unit still require proof."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ContractibleEvaluationAdjunction",
+  "date": "2026-10-25",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Proof Step 3, paragraph beginning “The field-stage projection formula”: continuous-coefficient realization in lem-zl-adic-hom-tensor-lisse-criterion uses the dualizable truncation and heart theorem. This lemma supplies Section 3 equations (3.1)-(3.2), Remark 3.2; Lemma 4.1(1)-(2) and Proposition 4.3(3). Lemma 4.1(1), equations (3.1)-(3.2), Remark 3.2; ordinary realization, unit, or tensor comparison in Lemma 4.1(1).",
+   "via": [
+    "lem-zl-contractible-realization-adjunction",
+    "lem-zl-condensed-wcontractible-lisse-evaluation",
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ContractibleSectionsMonoidal",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.contractible_sections_monoidal",
+  "file": "lean/Sheaf/AlgebraicGeometry/ContractibleSectionsMonoidal.lean",
+  "statement": "theorem contractible_sections_monoidal\n    {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]\n    (J : GrothendieckTopology C) [(J.W (A := Ab.{u + 1})).IsMonoidal]\n    (O : Sheaf J Ab.{u + 1}) [MonObj O] [IsCommMonObj O]\n    (U : C)\n    [HasDerivedCategory.{u + 1} (SheafOfModules.{u + 1}\n      ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (ringSheaf J O)))]\n    (heval : ContractibleDerivedSectionsTensor.{u + 1, u, 0} J (ringSheaf J O) (op U)) :\n    ∀ (hlim : PreservesFiniteLimits (sections J O U))\n      (hfin : PreservesFiniteColimits (sections J O U)),\n      letI := hlim\n      letI := hfin\n      Nonempty (sections J O U).mapDerivedCategory.Monoidal",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261025T143331-L-983233",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P9",
+  "result": "pass",
+  "landing": "20261025T180940-L-4055275",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

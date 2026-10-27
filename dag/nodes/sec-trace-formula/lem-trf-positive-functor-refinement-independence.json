@@ -1,0 +1,226 @@
+{
+ "id": "lem-trf-positive-functor-refinement-independence",
+ "kind": "statement",
+ "title": "Independence of ordered refinements from binary-compatible functor comparisons",
+ "chapter": "sec-trace-formula",
+ "unit": "sk-d-weil",
+ "statement": "Let $\\mathcal C$ be a category [def-nagata-category]. For every positive integer $r$ let $P_r:\\mathcal C\\to\\mathcal C$ be an endofunctor, and put $T=P_1$. Use the powers of [def-trf-endofunctor-powers], with $T^1=T$ and $T^{r+1}=T\\circ T^r$. Composition is in functional order. A natural transformation $u:F\\Rightarrow G$ means maps $u_M:F(M)\\to G(M)$ with $G(f)\\circ u_M=u_N\\circ F(f)$ for every $f:M\\to N$; a natural isomorphism has invertible components. For a transformation $u$, write $(uH)_M=u_{H(M)}$ and $(H(u))_M=H(u_M)$. All iterated compositions are compared by the canonical functor associators, whose components are identity maps.\nFor positive $a,b$ let $C_{a,b}:P_{a+b}\\xrightarrow{\\sim}P_a\\circ P_b$ be natural isomorphisms. Suppose given natural isomorphisms $d_r:P_r\\xrightarrow{\\sim}T^r$ with $d_1=\\mathrm{id}_T$ satisfying\n$$d_{a+b}=T^a(d_b)\\circ(d_aP_b)\\circ C_{a,b}\\qquad(a,b\\geq1).$$\nFor any positive integer $r$, a complete ordered splitting tree has root weight $r$, each internal vertex of weight $a+b$ has ordered children of positive weights $a,b$, and every leaf has weight $1$. At an internal vertex apply $C_{a,b}$ inside its current functor context, and identify the functor product at the leaves with the prescribed $T^r$ using canonical associators. Then every evaluation of every such tree, with vertices processed in any order in which a parent precedes its children and with any intervening canonical reassociations, is the same natural isomorphism $d_r:P_r\\xrightarrow{\\sim}T^r$. In particular, for every positive partition $r=r_1+\\cdots+r_j$, every binary parenthesization of its $j$ ordered parts followed by complete refinements of the parts gives $d_r$, independently of the order of refining those parts. This includes $r=1$ and $j=1$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+  "place": "Categorical expansion of the m-th-iterate assertion: induction over ordered splitting trees, naturality interchange, multiway partitions and reassociation (returned proof step 5)."
+ },
+ "stmt_deps": [
+  "def-nagata-category",
+  "def-trf-endofunctor-powers",
+  "def-trf-positive-functor-refinement"
+ ],
+ "proof": [
+  {
+   "text": "Work componentwise in $\\mathcal C$. By [def-trf-endofunctor-powers], $T^aT^b$ and $T^{a+b}$ have identical actions on objects and morphisms: induction on $a$, with $a=0$ the identity and the successor obtained by applying $T$. Canonical functor associators, their inverses and their whiskerings have identity components, since functors preserve identities. Thus every chain of canonical reassociations acts by the identity on the underlying nested object and morphism. We may suppress those identities in component calculations, using composition associativity from [def-nagata-category].",
+   "uses": [
+    "def-trf-endofunctor-powers",
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Definition 001I (definition-transformation-functors); component calculations underlying Definition 003E (definition-horizontal-composition) and Lemma 003F (lemma-properties-2-cat-cats)."
+   }
+  },
+  {
+   "text": "For a parenthesized expression $E$ in the symbols $P_s$, let $|E|$ be its total weight, and define a completion $D_E:E\\Rightarrow T^{|E|}$ recursively by $D_{P_s}=d_s$ and\n$$D_{AB,M}=T^{|A|}(D_{B,M})\\circ D_{A,B(M)}.$$\nThese are natural transformations. Indeed, for natural $u:F\\Rightarrow F'$ and $v:G\\Rightarrow G'$, the family $w_M=F'(v_M)\\circ u_{G(M)}$ is natural: for $f:M\\to N$, its naturality equation follows from\n$$F'G'(f)F'(v_M)u_{G(M)}=F'(v_N)F'G(f)u_{G(M)}=F'(v_N)u_{G(N)}FG(f).$$\nHere the first equality is naturality of $v$ followed by functoriality of $F'$, and the second is naturality of $u$. Apply this recursively with $u=D_A$, $v=D_B$. All components are invertible because functors send an inverse to an inverse and composites of invertible maps are invertible.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Definition 001I (definition-transformation-functors); component calculations underlying Definition 003E (definition-horizontal-composition) and Lemma 003F (lemma-properties-2-cat-cats)."
+   }
+  },
+  {
+   "text": "Completion is unchanged by reassociation. For expressions $A,B,C$ of weights $a,b,c$, expanding the recursive definition and using $T^aT^b=T^{a+b}$ gives, for BOTH bracketings,\n$$D_{(AB)C,M}=T^{a+b}(D_{C,M})\\circ T^a(D_{B,C(M)})\\circ D_{A,B(C(M))}=D_{A(BC),M}.$$\nFor the right bracketing use preservation of composition by $T^a$; for the left bracketing simply substitute $C(M)$ in $D_{AB}$. Hence inserting or removing a canonical associator preserves completion; the same remains true inside any surrounding expression by substituting equal components in the recursive formula. This proves reassociation invariance without invoking a general coherence theorem.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Definition 001I (definition-transformation-functors); component calculations underlying Definition 003E (definition-horizontal-composition) and Lemma 003F (lemma-properties-2-cat-cats)."
+   }
+  },
+  {
+   "text": "At a single split $P_{a+b}\\to P_aP_b$, the binary-compatibility hypothesis says exactly $D_{P_aP_b}\\circ C_{a,b}=D_{P_{a+b}}$. This equality persists inside every context, by induction on the number of enclosing products, as follows. Suppose $e:E\\Rightarrow E'$ has equal source and target weights and $D_{E'}e=D_E$. For a fixed expression $B$, the left-factor insertion satisfies\n$$D_{E'B,M}\\circ e_{B(M)}=T^{|E|}(D_{B,M})\\circ D_{E',B(M)}\\circ e_{B(M)}=D_{EB,M}.$$\nFor a fixed expression $A$, naturality of $D_A$ at $e_M:E(M)\\to E'(M)$ gives the right-factor insertion:\n$$D_{AE',M}\\circ A(e_M)=T^{|A|}(D_{E',M})\\circ T^{|A|}(e_M)\\circ D_{A,E(M)}=D_{AE,M}.$$\nThe final equality uses functoriality and $D_{E'}e=D_E$. Starting with the split equality and applying these two calculations for the successive enclosing products proves that every allowed vertex operation, wherever it occurs, preserves completion. Each calculation uses only the stated naturality equation and the recursive formula of step 2.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Definition 001I (definition-transformation-functors); component calculations underlying Definition 003E (definition-horizontal-composition) and Lemma 003F (lemma-properties-2-cat-cats)."
+   }
+  },
+  {
+   "text": "Fix any complete ordered splitting tree and any permitted processing order, including arbitrary canonical reassociations. After $k$ operations let $E_k$ be its current functor expression and $q_k:P_r\\Rightarrow E_k$ the composite so far. Induction on $k$ gives $D_{E_k}q_k=d_r$: initially $E_0=P_r$, $q_0=\\mathrm{id}$; a split preserves the equality by step 4, and a reassociation by step 3. At the end every symbol is $P_1=T$. By induction on that final expression, its completion has identity components: its leaf completion is $d_1=\\mathrm{id}_T$, and the product formula in step 2 composes identities and their functor images. After the prescribed identification with $T^r$, the invariant therefore says that the evaluated map itself is $d_r$. It is an isomorphism because each vertex operation and each associator is an isomorphism. No comparison of processing orders is needed: the invariant holds for each one separately.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Definition 001I (definition-transformation-functors); component calculations underlying Definition 003E (definition-horizontal-composition) and Lemma 003F (lemma-properties-2-cat-cats)."
+   }
+  },
+  {
+   "text": "Given a positive partition $r=r_1+\\cdots+r_j$, its binary parenthesization is an ordered tree whose leaves have weights $r_i$. Graft the chosen complete tree for each $r_i$ onto that leaf. The result is a complete ordered splitting tree of weight $r$. Every interleaving of refinements of these parts with each parent preceding its children is one of the processing orders just considered; all have value $d_r$. For $j=1$ this is simply the complete tree for the sole part. For $r=1$ no positive split is possible, so the tree has one leaf and the empty composite is $\\mathrm{id}_T=d_1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Definition 001I (definition-transformation-functors); component calculations underlying Definition 003E (definition-horizontal-composition) and Lemma 003F (lemma-properties-2-cat-cats)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-endofunctor-powers",
+  "def-nagata-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+  "place": "Categorical expansion of the iterate assertion: completion invariant for intermediate ordered functor expressions, using the component calculus of Stacks 001I/003E/003F."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Binary compatible natural isomorphisms from a family of endofunctors to functor powers give equal maps for all ordered splitting trees and all refinement orders by naturality",
+   "results": "8 hits: CategoryTheory.SmallObject.SuccStruct.Iteration.subsingleton.MapEq.w, CategoryTheory.SmallObject.SuccStruct.Iteration.subsingleton.mapEq_refl, CategoryTheory.Functor.map_comp_heq, CategoryTheory.Functor.map_comp_heq', CategoryTheory.SmallObject.SuccStruct.Iteration.subsingleton.ext, CategoryTheory.SmallObject.SuccStruct.Iteration.subsingleton.MapEq.src, CategoryTheory.SmallObject.SuccStruct.Iteration.subsingleton.MapEq.tgt, CategoryTheory.Functor.OfSequence.congr_f",
+   "date": "2026-10-22",
+   "verdict": "no match: whisker_exchange exchanges two adjacent whiskerings and free monoidal coherence concerns structural associators and unitors; neither states evaluation of arbitrary weighted splitting trees carrying the given C and d maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Independence of parenthesization and order of refining a binary tree of natural isomorphisms of endofunctors",
+   "results": "UNAVAILABLE: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"whisker\", \"exchange\"",
+   "results": "12 hits: CategoryTheory.Bicategory.whisker_exchange, CategoryTheory.Bicategory.whisker_exchange_assoc, CategoryTheory.MonoidalCategory.whisker_exchange, CategoryTheory.MonoidalCategory.whisker_exchange_assoc, CategoryTheory.eHom_whisker_exchange, CategoryTheory.eHom_whisker_exchange_assoc, CategoryTheory.FreeBicategory.Rel.whisker_exchange, CategoryTheory.Localization.Monoidal.whisker_exchange",
+   "date": "2026-10-22",
+   "verdict": "no match: whisker_exchange exchanges two adjacent whiskerings and free monoidal coherence concerns structural associators and unitors; neither states evaluation of arbitrary weighted splitting trees carrying the given C and d maps."
+  },
+  {
+   "tool": "grep",
+   "query": "coherence|whisker_exchange|whisker.*comm",
+   "results": "25 hits: Mathlib/CategoryTheory/Monoidal/End.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean; subdirectory Mathlib/CategoryTheory/Monoidal",
+   "date": "2026-10-22",
+   "verdict": "no match: whisker_exchange exchanges two adjacent whiskerings and free monoidal coherence concerns structural associators and unitors; neither states evaluation of arbitrary weighted splitting trees carrying the given C and d maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a family of comparison natural isomorphisms respects binary splits, evaluation of any parenthesized positive partition agrees with its canonical comparison",
+   "results": "8 hits: instDecidableEqOrderedFinpartition.decEq, OrderedFinpartition.ext_iff, OrderedFinpartition.ext, instDecidableEqOrderedFinpartition, Nat.Partition.ofComposition_parts, OrderedFinpartition.extendEquiv, OrderedFinpartition.compAlongOrderFinpartition_apply, OrderedFinpartition.compAlongOrderedFinpartitionₗ_apply_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: whisker_exchange exchanges two adjacent whiskerings and free monoidal coherence concerns structural associators and unitors; neither states evaluation of arbitrary weighted splitting trees carrying the given C and d maps."
+  },
+  {
+   "tool": "grep",
+   "query": "whisker_exchange|splittingTree|refinement_independence|refinementIndependence",
+   "results": "25 hits: Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean; subdirectory Mathlib/CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern structural functor associators, unrelated ordered partitions or small-object iterations; none evaluates arbitrary C-labelled weighted splitting trees using binary-compatible d maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherence of a family of endofunctors with natural isomorphisms to powers respecting binary composition",
+   "results": "8 hits: CategoryTheory.endofunctorMonoidalCategory, CategoryTheory.Pseudofunctor.mapComp, Mathlib.Tactic.BicategoryLike.CoherenceHom.unfold, CategoryTheory.Functor.associator, CategoryTheory.obj_η_app_assoc, CategoryTheory.Pseudofunctor.ObjectProperty.mapComp, Mathlib.Tactic.BicategoryLike.Mor₂.coherenceComp, Mathlib.Tactic.BicategoryLike.Mor₂Iso.coherenceComp",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern structural functor associators, unrelated ordered partitions or small-object iterations; none evaluates arbitrary C-labelled weighted splitting trees using binary-compatible d maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.associator, CategoryTheory.NatTrans.naturality",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern structural functor associators, unrelated ordered partitions or small-object iterations; none evaluates arbitrary C-labelled weighted splitting trees using binary-compatible d maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Binary compatible natural isomorphisms from endofunctors to powers are independent of all ordered splitting trees and refinement orders",
+   "results": "8 hits: CategoryTheory.SmallObject.SuccStruct.Iteration.subsingleton.ext, SimplicialObject.Splitting.ofIso_N, CategoryTheory.SmallObject.SuccStruct.Iteration.subsingleton.mapEq_refl, CategoryTheory.SmallObject.SuccStruct.Iteration.subsingleton.MapEq.w, CategoryTheory.Endofunctor.Algebra.functorOfNatTransEq, CategoryTheory.Functor.isoCopyObj, CategoryTheory.Endofunctor.Coalgebra.functorOfNatTransEq, CategoryTheory.Functor.isoCopyObj_hom_app",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern structural functor associators, unrelated ordered partitions or small-object iterations; none evaluates arbitrary C-labelled weighted splitting trees using binary-compatible d maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of any parenthesized positive partition of functor comparisons equals its given comparison if compatible with binary composition",
+   "results": "8 hits: CategoryTheory.SmallObject.SuccStruct.Iteration.subsingleton.mapEq_trans, CategoryTheory.Functor.map_comp_heq, Nat.Partition.ofComposition_parts, OrderedFinpartition.compAlongOrderedFinpartitionₗ, Nat.Partition.ofComposition, Nat.instDecidableEqPartition.decEq, OrderedFinpartition.compAlongOrderedFinpartitionL_apply, OrderedFinpartition.ext",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern structural functor associators, unrelated ordered partitions or small-object iterations; none evaluates arbitrary C-labelled weighted splitting trees using binary-compatible d maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-frobenius-pullback-comparison-coherence",
+  "date": "2026-10-22",
+  "group": "N7"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-frobenius-operator-compact-description",
+   "place": "Categorical expansion of the m-th-iterate assertion: induction over ordered splitting trees, naturality interchange, multiway partitions and reassociation (returned proof step 5).",
+   "via": [
+    "lem-trf-frobenius-pullback-comparison-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-positive-functor-refinement-independence",
+  "worker": "stage1",
+  "summary": "Retained the statement and its hypotheses. Supplied a componentwise completion invariant, its explicit reassociation and both context-insertion calculations, and induction along any evaluation. No new nodes: every auxiliary identity is a few-line consequence of naturality and the recursive definition, not an additional categorical theorem. Checked the partition clause and r=1, j=1. No matching finished project declaration or Mathlib theorem was found.",
+  "blueprint": "Realizes the ordered-refinement portion of the m-th-iterate assertion of lem-trf-frobenius-operator-compact-description through lem-trf-frobenius-pullback-comparison-coherence: every complete ordered splitting tree, every refinement order, every multiway partition and intervening reassociation."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q160-20e6008ac",
+  "group": "Q160",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q160-20e6008ac (reviewer sub-agent of L); spot-checked: I read the whole delivery and pass it unchanged. The statement, stmt_deps, source and blueprint are byte-identical to the live node, which is still unsplit; only the proof, search and status fields changed, and no repair note or re-split order applies. Each step checks: T^aT^b=T^{a+b} holds strictly by induction from def-trf-endofunctor-powers; the completion D_{AB,M}=T^{|A|}(D_{B,M})∘D_{A,B(M)} is natural (I re-derived the naturality chain); D is invariant under reassociation (both bracketings expand to T^{a+b}(D_C)∘T^a(D_B)∘D_A); the split at a leaf is exactly the binary-compatibility hypothesis, and the left-factor and right-factor insertions preserve it (the right one by naturality of D_A at e_M); step 5 states the invariant D_{E_k}q_k=d_r with its base and preservation, and at the end every symbol is T with identity completion, so the evaluation equals d_r. Step 6 grafts the part trees for the partition clause and covers j=1 and r=1. Small cases agree with the hypothesis: r=2 gives C_{1,1}=d_2, and both r=3 trees, (1,(1,1)) and ((1,1),1), give d_3. All six steps are honestly elementary, proof_deps equals the union of the uses, and the citations are only a definition node and a Mathlib-leaf category node, so there are no route or tool_uses issues. Stacks tags 001I, 003E and 003F match their labels at categories.tex lines 291, 5012 and 5044, there is no SGA source, and proof_origin is correctly marked as agent-written. I found no duplicate: the sibling binary-comparison node constructs d from a cocycle, which is a different statement. The Mathlib searches cover all three kinds, with LeanSearch recorded as unavailable."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PositiveFunctorRefinementIndependence",
+  "declaration": "CategoryTheory.PositiveFunctorRefinement.evaluation_eq_comparison",
+  "declarations": [
+   "CategoryTheory.PositiveFunctorRefinement.evaluation_eq_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/PositiveFunctorRefinementIndependence.lean",
+  "statement": "theorem evaluation_eq_comparison {C : Type u} [Category.{v} C] (P : ℕ+ → C ⥤ C) (c : ∀ a b : ℕ+, P (a + b) ≅ P b ⋙ P a) (d : ∀ r : ℕ+, P r ≅ NaturalTransport.power (P 1) (r : ℕ)) (hd : d 1 = Iso.refl (P 1)) (hbinary : ∀ a b : ℕ+, d (a + b) = c a b ≪≫ Functor.isoWhiskerLeft (P b) (d a) ≪≫ Functor.isoWhiskerRight (d b) (NaturalTransport.power (P 1) (a : ℕ)) ≪≫ powerProductIso (P 1) (a : ℕ) (b : ℕ)) : ∀ (r : ℕ+) (E : Expression) (q : P r ≅ E.eval P), Evaluation P c (.atom r) E q → ∀ h : E.Complete, HEq (q ≪≫ E.normalize P h) (d r)",
+  "branch": "newtargets-dag",
+  "by": "Q47",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-427ea135f",
+  "group": "Q47",
+  "result": "pass",
+  "note": "Item delta vs live = lean record + new def node in stmt_deps only. Statement fields match the files exactly. Clause check: C:Type u/Category.{v}; P:ℕ+→C⥤C; recorded NaturalTransport.power (T∘T^n); c a b : P(a+b) ≅ P b ⋙ P a = P_a∘P_b; hd d 1 = refl; hbinary = c ≫ whiskerLeft(P b)(d a) ≫ whiskerRight(d b)T^a ≫ canonical powerProductIso, correct order and orientation. Evaluation paths: split at atoms only, both associator directions (orientation checked), outer/inner real whiskerings, refl/trans, so every tree, schedule, partition and reassociation is covered. normalize does not use d, so the theorem is not tautological. HEq is Eq because weight is preserved. Re-derived the invariant, so the statement is true and not stronger than the node; r=1 reduces to hd. New def node fields correct, real data, three search kinds, no owner in Mathlib or the project. Docstrings and proof steps present, sorry only, imports used. Second reading is an in-thread reread under dispatcher policy: advisory. No recompile (no file changed). Advisory: consumer FrobeniusPullbackComparisonCoherence keeps private trfPositiveFunctorPower/Split duplicating power/powerProductIso."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261022T144345-L-1610299",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.PositiveFunctorRefinement.evaluation_eq_comparison"
+  ],
+  "sorry_after": []
+ }
+}

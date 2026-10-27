@@ -1,0 +1,241 @@
+{
+ "id": "lem-trf-separated-local-isomorphism-generic-injectivity",
+ "kind": "statement",
+ "title": "A separated local isomorphism injective on generic points is an open immersion",
+ "statement": "Let $g:Y\\to X$ be a separated morphism of schemes [def-pc-scheme, def-weil-proper-morphism]. Let $Y^0$ be the generic points [def-sc-generic-point] of the irreducible components [def-weil-irreducible-components] of $Y$. Suppose there is an open cover $Y=\\bigcup_{i\\in I}V_i$ such that every restriction $g|_{V_i}:V_i\\to X$ is an open immersion [def-weil-open-immersion]. If for every two distinct $\\eta,\\eta\\prime\\in Y^0$ one has $g(\\eta)\\ne g(\\eta\\prime)$, then $g$ itself is an open immersion. There is no quasi-compactness or finite-component hypothesis, and $g(Y^0)\\subseteq X^0$ is not assumed.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 09NG, label lemma-characterize-open-immersion, statement and proof; applied in the final paragraph of Tag 09NI."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-sc-generic-point",
+  "def-weil-irreducible-components",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Fix $y,y\\prime\\in Y$ with $g(y)=g(y\\prime)=x$. Choose cover members $V_i,V_j$ containing them. By [def-weil-open-immersion] their images $U_i,U_j$ are open and the chart maps identify $V_i,V_j$ with these open subschemes. Put $W=U_i\\cap U_j$, so $x\\in W$. By [lem-sc-irreducible-components-cover] choose an irreducible component $C$ of $X$ containing $x$, and by [lem-sc-scheme-sober] let $\\xi$ be its generic point. Thus $\\xi\\leadsto x$, meaning $x\\in\\overline{\\{\\xi\\}}$. Every open containing $x$ contains $\\xi$ (otherwise its closed complement would contain both $\\xi$ and its closure). Hence $\\xi\\in W$. The inverse homeomorphisms of the two charts give points $\\eta_i\\in V_i$ and $\\eta_j\\in V_j$ mapping to $\\xi$, with $\\eta_i\\leadsto y$ and $\\eta_j\\leadsto y\\prime$.",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-sc-irreducible-components-cover",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NG, lemma-characterize-open-immersion, first three sentences; component existence is Topology Tag 004W (3)-(4), sobriety is Schemes Tag 01IS"
+   }
+  },
+  {
+   "text": "We verify that either lifted point $\\eta=\\eta_i$ or $\\eta_j$ belongs to $Y^0$, without assuming $X$ irreducible. Choose an irreducible component $D$ of $Y$ containing $\\eta$ by [lem-sc-irreducible-components-cover], and its generic point $\\zeta$ by [lem-sc-scheme-sober]. Since $\\zeta\\leadsto\\eta$, the corresponding chart $V$ contains $\\zeta$. Continuity gives $g(\\zeta)\\leadsto\\xi$, so $C=\\overline{\\{\\xi\\}}\\subseteq\\overline{\\{g(\\zeta)\\}}$. A singleton closure is irreducible: if covered by two closed subsets, the subset containing the point contains its closure. Maximality of the irreducible component $C$ therefore gives $\\overline{\\{g(\\zeta)\\}}=C$. The uniqueness in [lem-sc-scheme-sober] implies $g(\\zeta)=\\xi$. Injectivity of the chart homeomorphism then gives $\\zeta=\\eta$, proving that $\\eta$ is generic in $D$.",
+   "uses": [
+    "lem-sc-irreducible-components-cover",
+    "lem-sc-scheme-sober",
+    "def-weil-irreducible-components",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NG, lemma-characterize-open-immersion, sentence “Note that ...” expanded using maximality of components and Tag 01IS"
+   }
+  },
+  {
+   "text": "Both $\\eta_i,\\eta_j\\in Y^0$ map to $\\xi$, so the assumed injectivity on $Y^0$ gives $\\eta_i=\\eta_j=: \\eta$. In particular $\\eta\\in V_i\\cap V_j$. We will use separatedness only to propagate this coincidence from $\\xi$ to its specialization $x$, as an equality of points, without asserting that a topologically dense agreement locus determines morphisms on a nonreduced scheme.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NG, lemma-characterize-open-immersion, assumption (3) identifies the two lifted generic points"
+   }
+  },
+  {
+   "text": "Let $P=V_i\\times_X V_j$. The chart isomorphisms identify $P$ with the open subscheme $W$: maps $T\\to V_i$ and $T\\to V_j$ with equal composites to $X$ are precisely one map $T\\to X$ factoring through both opens, hence through $W$ [def-weil-open-immersion, def-pc-fibre-product]. Pull back the closed diagonal $\\Delta_g:Y\\to Y\\times_XY$ along the map $P\\to Y\\times_XY$ induced by the inclusions. Its pullback is $V_i\\cap V_j\\to P$: indeed its test morphisms consist of maps $a:T\\to V_i$, $b:T\\to V_j$ whose composites to $Y$ are the same map $h:T\\to Y$; exactly such an $h$ factors uniquely through the intersection of the two open subschemes. These descriptions give the two inverse maps by the fibre-product universal property. Separatedness gives that $\\Delta_g$ is a closed immersion [def-weil-proper-morphism]; [lem-weil-pbc-closed-immersion-base-change] gives that this pullback is a closed immersion. By [def-weil-closed-immersion] its image $E=g(V_i\\cap V_j)$ is closed in $W$. It contains $\\xi=g(\\eta)$, so it contains $x$, since $\\xi\\leadsto x$ also in the open subspace $W$.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-pc-fibre-product",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NG, lemma-characterize-open-immersion, penultimate sentence, with the closed-diagonal argument written out; Schemes Tag 01JY and definition Tag 01KK"
+   }
+  },
+  {
+   "text": "Choose $z\\in V_i\\cap V_j$ with $g(z)=x$, which exists because $x\\in E$. The two chart maps are injective, so $z=y$ in $V_i$ and $z=y\\prime$ in $V_j$. Thus $y=y\\prime$, proving injectivity of $g$ on all points. Now apply [lem-weil-pbc-open-immersion-injective-local-source]: the given cover supplies its source open immersions and the required open-immersion composites. It follows that $g$ is an open immersion. If $Y$ is empty, injectivity is vacuous and the same criterion applies.",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-weil-pbc-open-immersion-injective-local-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NG, lemma-characterize-open-immersion, last two sentences; final source-local criterion is Mathlib IsOpenImmersion.of_forall_source_exists"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-open-immersion",
+  "lem-sc-irreducible-components-cover",
+  "lem-sc-scheme-sober",
+  "def-weil-irreducible-components",
+  "def-pc-fibre-product",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-open-immersion-injective-local-source"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 09NG, lemma-characterize-open-immersion; the separatedness sentence is expanded by its closed-diagonal definition and Schemes Tag 01JY."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A separated morphism locally on its source an open immersion and injective on generic points of irreducible components is an open immersion",
+   "results": "{\"t\": \"2026-10-23T12:55:33Z\", \"tool\": \"leanfinder\", \"query\": \"A separated morphism locally on its source an open immersion and injective on generic points of irreducible components is an open immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsOpenImmersion.of_forall_source_exists\", \"AlgebraicGeometry.IsOpenImmersion\", \"AlgebraicGeometry.IsOpenImmersion.of_openCover_source\", \"AlgebraicGeometry.isOpenImmersion_isZariskiLocalAtTarget\", \"AlgebraicGeometry.IsImmersion\", \"AlgebraicGeometry.isOpenImmersion_eq_inf\", \"AlgebraicGeometry.IsPreimmersion\", \"AlgebraicGeometry.IsImmersion.instOfIsOpenImmersion\"], \"digest\": \"3615de6c7f8a2160\"}; No match: the open-cover criterion requires injectivity on all points; the missing implication from separatedness and generic-point injectivity is precisely the assertion here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsLocalIso, AlgebraicGeometry.IsSeparated",
+   "results": "[loogle] OK 0 hit(s)\n\nNo match: the open-cover criterion requires injectivity on all points; the missing implication from separatedness and generic-point injectivity is precisely the assertion here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*[Ii]nject|[Ii]nject.*generic|[Ii]s[Ll]ocal[Ii]so.*[Ii]s[Oo]pen[Ii]mmersion|[Ii]s[Ss]eparated",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"37\", \"line\": \"    @IsLocalIso = sourceLocalClosure IsOpenImmersion IsOpenImmersion \", \"text\": \"= by\"}\n\nNo match: the open-cover criterion requires injectivity on all points; the missing implication from separatedness and generic-point injectivity is precisely the assertion here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Separated local isomorphism injective on the generic points of irreducible components is an open immersion",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsLocalIso.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalIso\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ (x : ↥X), ∃ U, x ∈ U ∧ AlgebraicGeometry.IsOpenImmersion (CategoryTheory.CategoryStruct.comp U.ι f)) →\\n    AlgebraicGeometry.IsLocalIso f\", \"doc\": \"If for every point $x$ in $X$, there exists an open neighborhood $U$ of $x$ such that the composition of the inclusion $U \\\\to X$ with $f$ is an open immersion, then $f$ is a local isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Immersion\", \"type\": \"(f : X ⟶ Y) [IsOpenImmersion f] : IsImmersion f\", \"doc\": \"Any open immersion between schemes is an immersion. Specifically, if a morphism $ f: X \\to Y $ of schemes satisfies the open immersion condition (being a topological open embedding with stalk isomorphi\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.stalk_iso\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \"(x : X) : IsIso (f.stalkMap x)\", \"doc\": \"A morphism $ f: X \\to Y $ between locally ringed spaces is an open immersion if its underlying continuous map is a topological open embedding and the induced sheaf morphism restricts to isomorphisms on\"}\n  {\"name\": \"AlgebraicGeometry.isOpenImmersion_eq_inf\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion\", \"type\": \": @IsOpenImmersion = (topologically IsOpenEmbedding) ⊓ stalkwise (Function.Bijective ·)\", \"doc\": \"A morphism of schemes is an open immersion if and only if it is a topological open embedding and induces bijective maps on all stalks.\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_isIso\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"[IsIso g] : IsOpenImmersion g\", \"doc\": \"Every isomorphism between schemes is an open immersion. Specifically, if $ g: X \\to Y $ is an isomorphism of schemes, then it satisfies the open immersion condition: the underlying continuous map is a \"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \"{X Y : LocallyRingedSpace} (f : X ⟶ Y) : Prop\", \"doc\": \"A morphism $ f: X \\to Y $ between locally ringed spaces is an open immersion if its underlying morphism of sheafed spaces (obtained by forgetting the local ring structure on stalks) satisfies the open \"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.of_isIso\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \"[IsIso g] : LocallyRingedSpace.IsOpenImmersion g\", \"doc\": \"Every isomorphism between locally ringed spaces is an open immersion. This follows because an isomorphism induces a homeomorphism on the underlying topological spaces (hence an open embedding) and an \"}\n  {\"name\": \"AlgebraicGeometry.IsLocalIso.exists_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalIso\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsLocalIso f] (x : ↥X),\\n  ∃ U, x ∈ U ∧ AlgebraicGeometry.IsOpenImmersion (CategoryTheory.CategoryStruct.comp U.ι f)\", \"doc\": \"For any point $x$ in the scheme $X$, there exists an open neighborhood $U$ of $x$ such that the composition of the inclusion morphism $U \\to X$ with the morphism $f: X \\to Y$ is an open immersion from $\"}\n\nNo match: the open-cover criterion requires injectivity on all points; the missing implication from separatedness and generic-point injectivity is precisely the assertion here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separated local isomorphism of schemes whose different irreducible components have different generic images is injective and hence an open immersion",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme\", \"doc\": \"A morphism $ f: X \\\\to Y $ between schemes is an open immersion if its underlying morphism of locally ringed spaces satisfies the open immersion condition: the continuous map is a topological open embe\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_forall_source_exists\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  Function.Injective ⇑(CategoryTheory.ConcreteCategory.hom f.base) →\\n    (∀ (x : ↥X),\\n        ∃ U i,\\n          ∃ (x_1 : AlgebraicGeometry.IsOpenImmersion i),\\n            x ∈ AlgebraicGeometry.Scheme.Hom.opensRange i ∧\\n              AlgebraicGeometry.Is\", \"doc\": \"Let $ f: X \\\\to Y $ be a morphism of schemes. If $ f $ is injective and for every point $ x \\\\in X $, there exists an open immersion $ i: U \\\\to X $ with $ x \\\\in \\\\text{im}(i) $ such that the composition \"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism between schemes $ X $ and $ Y $ is an immersion.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsGermInjective\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme $ X $ is called germ-injective if, for every point $ x $ in $ X $, the natural map from the local ring $ \\\\mathcal{O}_{X,x} $ to the stalk of the structure sheaf at $ x $ is injective.\"}\n  {\"name\": \"AlgebraicGeometry.IsPreimmersion.instMonoScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Preimmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsPreimmersion f], CategoryTheory.Mono f\", \"doc\": \"Every preimmersion between schemes is a monomorphism in the category of schemes, meaning that for any pair of morphisms $ Z \\to X $ with a common domain, if their compositions with the preimmersion $ f\"}\n  {\"name\": \"AlgebraicGeometry.injective_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget\\n  (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => Function.Injective)\", \"doc\": \"The property of a scheme morphism having an injective underlying continuous map is Zariski-local at the target. That is, if $ f $ is a morphism of schemes whose underlying continuous map is injective,\"}\n  {\"name\": \"AlgebraicGeometry.IsPreimmersion.isEmbedding\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Preimmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.IsPreimmersion f],\\n  Topology.IsEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f : X \\\\to Y $ is a preimmersion of schemes, then the underlying continuous map $ f_{\\\\text{base}} : X \\\\to Y $ is a topological embedding in the category of topological spaces.\"}\n  {\"name\": \"AlgebraicGeometry.IsPreimmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Preimmersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A property on morphisms $ f : X \\\\to Y $ between schemes, defined inductively to characterize when $ f $ satisfies the conditions of a preimmersion in algebraic geometry.\"}\n\nNo match: the open-cover criterion requires injectivity on all points; the missing implication from separatedness and generic-point injectivity is precisely the assertion here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*inject|inject.*generic|of_forall_source_exists|IsLocalIso",
+   "results": "{\"t\": \"2026-10-23T14:13:51Z\", \"tool\": \"grep\", \"query\": \"generic.*inject|inject.*generic|of_forall_source_exists|IsLocalIso\", \"sub\": \"AlgebraicGeometry/Morphisms\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/OpenImmersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/LocalIso.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/LocalIso.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/LocalIso.lean\"], \"digest\": \"ea086bb597e3cce9\"}; Read the hits: the source-local open-immersion criterion requires injectivity on all points; LocalIso gives only source charts. Neither proves generic-point injectivity implies global injectivity under separatedness.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Separated local isomorphism of schemes injective on generic points is an open immersion",
+   "results": "{\"t\": \"2026-10-23T14:13:51Z\", \"tool\": \"leansearch\", \"query\": \"Separated local isomorphism of schemes injective on generic points is an open immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsLocalIso.mk\", \"AlgebraicGeometry.IsOpenImmersion\", \"AlgebraicGeometry.IsPreimmersion.instOfIsOpenImmersion\", \"AlgebraicGeometry.IsImmersion.instOfIsOpenImmersion\", \"AlgebraicGeometry.IsOpenImmersion.of_isIso\", \"AlgebraicGeometry.isOpenImmersion_iff_stalk\", \"AlgebraicGeometry.IsOpenImmersion.of_stalk_iso\", \"AlgebraicGeometry.IsOpenImmersion.of_forall_source_exists\"], \"digest\": \"354f4c4137854490\"}; Read the hits: the source-local open-immersion criterion requires injectivity on all points; LocalIso gives only source charts. Neither proves generic-point injectivity implies global injectivity under separatedness.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsLocalIso, AlgebraicGeometry.IsSeparated",
+   "results": "{\"t\": \"2026-10-23T14:13:51Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsLocalIso, AlgebraicGeometry.IsSeparated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the hits: the source-local open-immersion criterion requires injectivity on all points; LocalIso gives only source charts. Neither proves generic-point injectivity implies global injectivity under separatedness.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separated local isomorphism of schemes injective on the generic points of its irreducible components is an open immersion",
+   "results": "{\"t\": \"2026-10-23T14:13:52Z\", \"tool\": \"leanfinder\", \"query\": \"A separated local isomorphism of schemes injective on the generic points of its irreducible components is an open immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsOpenImmersion.of_forall_source_exists\", \"AlgebraicGeometry.IsOpenImmersion\", \"AlgebraicGeometry.IsLocalIso.exists_isOpenImmersion\", \"AlgebraicGeometry.isLocalIso_iff\", \"AlgebraicGeometry.isOpenImmersion_eq_inf\", \"AlgebraicGeometry.IsImmersion\", \"AlgebraicGeometry.IsOpenImmersion.of_stalk_iso\", \"AlgebraicGeometry.IsOpenImmersion.of_isIso_stalkMap\"], \"digest\": \"9365ccad3516a232\"}; Read the hits: the source-local open-immersion criterion requires injectivity on all points; LocalIso gives only source charts. Neither proves generic-point injectivity implies global injectivity under separatedness.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme morphism locally an open immersion with closed diagonal and at most one generic point over each point is injective",
+   "results": "{\"t\": \"2026-10-23T14:22:44Z\", \"tool\": \"leanfinder\", \"query\": \"A scheme morphism locally an open immersion with closed diagonal and at most one generic point over each point is injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsPreimmersion.instMonoScheme\", \"AlgebraicGeometry.Scheme.Hom.injective\", \"AlgebraicGeometry.UniversallyInjective\", \"AlgebraicGeometry.UniversallyInjective.universally_injective\", \"AlgebraicGeometry.IsSeparated\", \"AlgebraicGeometry.IsImmersion\", \"AlgebraicGeometry.isSeparated_of_injective\", \"AlgebraicGeometry.Scheme.IsGermInjective\"], \"digest\": \"145c752ec94525fa\"}; Read the hits: the source-local open-immersion criterion requires injectivity on all points; LocalIso gives only source charts. Neither proves generic-point injectivity implies global injectivity under separatedness.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-affine-source-stalk-isomorphism-neighbourhood",
+  "date": "2026-10-23",
+  "group": "Q100"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Supporting 09NI proof, final paragraph: the union of the local-isomorphism neighbourhoods is an open immersion by generic-point injectivity and separatedness.",
+   "via": [
+    "lem-trf-affine-source-stalk-isomorphism-neighbourhood",
+    "lem-trf-integral-codimension-one-affine-neighbourhood",
+    "lem-trf-codimension-one-points-affine-neighbourhood",
+    "lem-trf-relative-nodal-point-pinching",
+    "lem-trf-exceptional-contraction-diamond",
+    "lem-trf-valuation-stable-blowdown-uniqueness",
+    "lem-trf-valuation-contracted-component-inclusion",
+    "lem-trf-valuation-semistable-dominates-stable",
+    "lem-trf-stable-modification-uniqueness-normal",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-separated-local-isomorphism-generic-injectivity",
+  "worker": "stage1",
+  "summary": "Q115 follows Stacks 09NG with no new nodes. Existing component-cover and sobriety leaves supply generic lifts; maximality of components proves the lifts are generic. The base change of the separated diagonal identifies the overlap of two source charts with a closed subscheme of the intersection of their target images. This proves pointwise injectivity without reducedness; the existing source-local open-immersion leaf finishes. Statement unchanged.",
+  "blueprint": "Supporting 09NI final paragraph in the chain from lem-trf-local-term-locality: the union of local-isomorphism neighborhoods is an open immersion by generic-point injectivity and separatedness. This supplies exactly the 09NG tool already named by the parent.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q115-4f68c69db",
+  "group": "Q115",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-4f68c69db (reviewer sub-agent of L); spot-checked: I read Stacks varieties.tex Tag 09NG (lemma-characterize-open-immersion), statement and proof. The item matches it hypothesis by hypothesis (separated, open cover by open-immersion charts, injectivity on Y^0) with the conclusion unweakened. Its stmt_deps are complete. The parent lem-trf-affine-source-stalk-isomorphism-neighbourhood applies it with matching hypotheses. The delivery has no new nodes and no SGA citations, and all 9 cited nodes are Mathlib leaves whose statements I read, so there is no route or tool_use question. Step 1 lifts the generic point ξ of a component through x into both charts. Step 2 shows the lifts lie in Y^0 by maximality of C and sober uniqueness. Step 3 identifies η_i=η_j by hypothesis (3). Step 4 base-changes the closed diagonal of g along V_i×_X V_j≅W; I checked both identifications on T-points, and the diagonal base is X. This makes g(V_i∩V_j) closed in W, so it contains x. Step 5 gives injectivity from the charts and applies the local-source leaf, which I checked against Mathlib IsOpenImmersion.of_forall_source_exists, OpenImmersion.lean:87-95. The fact that a morphism factors through an open subscheme exactly when its image lies in it is used without a node; I accept it as a one-line consequence of def-weil-open-immersion (no Stacks 01IN node exists). proof_deps equals the union of the uses. The only DAG hits for 09NG are the item and its parent, so it is not a duplicate. Edge cases: empty Y, Y=A^1⊔A^1 (hypothesis fails), the doubled-origin line (fails exactly at step 4 without separatedness), non-reduced X, infinitely many components."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.SeparatedLocalIsoGenericInjectivity",
+  "declaration": "AlgebraicGeometry.isOpenImmersion_of_separated_of_generic_injOn",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/SeparatedLocalIsoGenericInjectivity.lean",
+  "statement": "theorem isOpenImmersion_of_separated_of_generic_injOn {Y X : Scheme.{u}} (g : Y ⟶ X) [IsSeparated g] {I : Type v} (V : I → Y.Opens) (hcover : ∀ y : Y, ∃ i : I, y ∈ V i) (hlocal : ∀ i : I, IsOpenImmersion ((V i).ι ≫ g)) (hgeneric : Set.InjOn g (genericPoints Y)) : IsOpenImmersion g",
+  "branch": "sheaf-dag",
+  "by": "Q43",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-47c48358b",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Stmt matches Stacks 09NG (X,Y swapped) and node clause by clause: [IsSeparated g], I:Type v with V:I→Y.Opens, pointwise hcover, IsOpenImmersion ((V i).ι ≫ g), Set.InjOn g (genericPoints Y) (Mathlib genericPoints = closures in irreducibleComponents = Y⁰), conclusion IsOpenImmersion g; no extra hypotheses. Node unchanged vs side-live 8f11b24d apart from lean, no competing landing; lean.statement verbatim in file; single sorry; no defs/new nodes; docstrings carry source+blueprint+5-step proof; Mathlib-only imports with public stmt_dep modules. Edge cases empty Y/empty I/infinite covers/doubled origin fine. Report has Worker report + Second reading (by the writer, openly stated). No file changed, so no compile; worker reports clean scompile."
+ }
+}

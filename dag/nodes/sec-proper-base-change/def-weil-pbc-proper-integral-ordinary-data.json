@@ -1,0 +1,164 @@
+{
+ "id": "def-weil-pbc-proper-integral-ordinary-data",
+ "kind": "definition",
+ "title": "Normalized ordinary integral input interfaces",
+ "statement": "Fix a prime l, a finite extension E of Q_l, and its published adic datum [def-weil-l-adic-coefficient-extension, def-weil-pbc-adic-coefficient-datum]. For schemes T and U and h:U→T define the coefficient-edge conditions (invertible projection-preserving coefficient map, exact ordinary module pullback, adjunction, and uniquely tensor-unit-normalized inverse-image identification); membership agreement with both stratified-perfect presentations; the module and derived pullback comparison normalized by the adjunction generators and derived computation counits; the transported actual strict quotient tower, its counit and augmentation; and its Roos coordinate comparison. Model matching means that the tower comparison respects the actual augmentations and both cone coordinates, and for every K-injective resolution with injective terms the derived comparison is computed using the limit inclusion (limit projections,0) followed by the Roos map of the resolution. Completion matching means that this same model comparison identifies the ordinary completion comparison with the actual strict-tower completion unit after every presentation isomorphism. These are exactly the thirteen existing interfaces extracted verbatim from the ordinary input module; no data or mathematical condition changes. [def-weil-pbc-completed-pullback, def-sf-ordinary-integral-pullback-construction, def-sf-ordinary-integral-derived-pullback, lem-tw-integral-comparison-descent, lem-weil-pbc-integral-stratified-perfect-characterization].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.6.11, Lemma 6.5.9, Remark 6.8.15; coefficient/exactness and proper-preservation hypothesis verification from returned proof steps 1–2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-derived-complete-integral-detailed",
+  "def-sf-ordinary-integral-pullback-construction",
+  "def-sf-ordinary-integral-derived-pullback",
+  "lem-tw-integral-comparison-descent"
+ ],
+ "proof": [
+  {
+   "text": "These interfaces use the published ordinary operations and reduction towers, not new choices. The countable-products instance is the first component of [lem-weil-proetale-countable-products-exact]. All other bodies are the stated structures, predicates, or composites of existing functors and counits.",
+   "uses": [
+    "lem-weil-proetale-countable-products-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-countable-products-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Integral-lattice proof paragraph: interfaces for the ordinary operations and strict quotient-tower completion comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Roos|roos|completedPullbackComparison",
+   "results": "msearch: 0 Mathlib hits",
+   "date": "2026-10-24",
+   "verdict": "No normalized strict quotient tower or Roos completion comparison in Mathlib."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackPushforwardAdjunction",
+   "results": "5 hits: pullbackPushforwardAdjunction, conjugateEquiv_pullbackId_hom, conjugateEquiv_pullbackComp_inv, and two unit formulas.",
+   "date": "2026-10-24",
+   "verdict": "Module adjunction only; does not compare these integral coefficient presentations or strict derived-limit models."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction along a ring sheaf isomorphism identifies derived pullback, strict quotient towers, the Roos derived limit and the completion augmentation",
+   "results": "8 hits: pullback free module formulas, pullbackObjFreeIso, pullbackIso, open immersion restrictFunctorIsoPullback, localCohomology.diagramComp.",
+   "date": "2026-10-24",
+   "verdict": "No matching normalized tower comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a ring sheaf isomorphism scalar restriction commutes with ordinary derived pullback and identifies the strict quotient tower completion unit with the Roos augmentation",
+   "results": "8 hits: restrictFunctorIsoPullback, AlgHom.restrictScalars, PresheafOfModules.restrictScalarsObj, SheafOfModules.restrictScalars, ModuleCat.RestrictScalars.obj, PresheafOfModules.restrictScalars, RestrictScalars, SheafOfModules.restrictScalars_map_val.",
+   "date": "2026-10-24",
+   "verdict": "Only basic restriction and open-immersion module formulas; no normalized strict integral tower comparison."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProperIntegralOrdinaryInputs",
+  "date": "2026-10-24",
+  "group": "Q5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Integral-lattice proof paragraph: interfaces for the ordinary operations and strict quotient-tower completion comparison.",
+   "via": [
+    "lem-weil-pbc-proper-integral-ordinary-inputs",
+    "lem-weil-pbc-realization-completed-mate",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProperIntegralOrdinaryData",
+  "file": "lean/Sheaf/Paper/ProperIntegralOrdinaryData.lean",
+  "declaration": "WeilConjectures.PbcProperIntegralCompletionMatching",
+  "statement": "def PbcProperIntegralCompletionMatching (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    {U T : Scheme.{u}} (h : U ⟶ T)\n    (K : PbcCompletedDerived T (pbcIntegralDatum l E)) : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q5",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "WeilConjectures.PbcProperIntegralEdgeInputs",
+   "WeilConjectures.PbcProperIntegralMembershipAgreement",
+   "WeilConjectures.pbcIntegralDetailedTransportFactors",
+   "WeilConjectures.PbcProperIntegralPullbackIdentification",
+   "WeilConjectures.pbcIntegralTransportModules",
+   "WeilConjectures.pbcIntegralTransportComplex",
+   "WeilConjectures.pbcIntegralActualTower",
+   "WeilConjectures.pbcIntegralActualTowerCounit",
+   "WeilConjectures.pbcIntegralActualTowerAugmentation",
+   "WeilConjectures.pbcIntegralActualProducts",
+   "WeilConjectures.PbcIntegralRoosTransportCoordinates",
+   "WeilConjectures.PbcProperIntegralModelMatching",
+   "WeilConjectures.PbcProperIntegralCompletionMatching"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-c65db",
+  "group": "Q5",
+  "result": "fix",
+  "landing": "20261024T015835-L-2458186",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0c664",
+  "group": "V2",
+  "result": "fix",
+  "landing": "20261025T101620-L-3714355",
+  "kind": "interface",
+  "note": "independent cc review: item proof (characterization + new integralStratifiedPerfect_pullback + existing sorried strict-model comparison + actual-tower unit) against lem-tw-ordinary-completed-integral-pullback; construction module vs live item (verbatim move + local irreducible/private helpers); adapted modules and node stmt_deps/lean records vs clone; sandbox --all compile incl. importer ProperIntegralOrdinaryInputs"
+ },
+ "statement_change": {
+  "date": "2026-10-25",
+  "by": "V2 stage 2",
+  "old_statement": "Fix a prime l, a finite extension E of Q_l, and its published adic datum [def-weil-l-adic-coefficient-extension, def-weil-pbc-adic-coefficient-datum]. For schemes T and U and h:U→T define the coefficient-edge conditions (invertible projection-preserving coefficient map, exact ordinary module pullback, adjunction, and uniquely tensor-unit-normalized inverse-image identification); membership agreement with both stratified-perfect presentations; the module and derived pullback comparison normalized by the adjunction generators and derived computation counits; the transported actual strict quotient tower, its counit and augmentation; and its Roos coordinate comparison. Model matching means that the tower comparison respects the actual augmentations and both cone coordinates, and for every K-injective resolution with injective terms the derived comparison is computed using the limit inclusion (limit projections,0) followed by the Roos map of the resolution. Completion matching means that this same model comparison identifies the ordinary completion comparison with the actual strict-tower completion unit after every presentation isomorphism. These are exactly the thirteen existing interfaces extracted verbatim from the ordinary input module; no data or mathematical condition changes. [def-weil-pbc-completed-pullback, lem-tw-ordinary-completed-integral-pullback, lem-weil-pbc-integral-stratified-perfect-characterization].",
+  "what": "The original node cited the entire ordinaryCompletedIntegralPullback theorem for its earlier ordinary functors and completion comparison constructors. After separating the constructor module, this reference is repaired to the construction, total-derived and comparison-descent nodes. The mathematical assertion and Lean signature are unchanged; the final constructibility/isomorphism theorem is not a premise.",
+  "source": {
+   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+   "place": "Proposition 6.6.11, Lemma 6.5.9, Remark 6.8.15; coefficient/exactness and proper-preservation hypothesis verification from returned proof steps 1–2"
+  },
+  "citers": [
+   {
+    "id": "lem-weil-pbc-proper-integral-strict-model-comparison",
+    "holds": true,
+    "note": "Only construction dependency references change. The mathematical statement and public Lean signature are identical, so this use is preserved."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-l-adic-coefficient-extension",
+   "def-weil-pbc-cartesian-square",
+   "def-weil-pbc-adic-coefficient-datum",
+   "def-weil-pbc-bounded-constructible-complete",
+   "def-weil-pbc-proetale-operations",
+   "def-weil-pbc-completed-pullback",
+   "def-weil-derived-complete-integral-detailed",
+   "lem-tw-ordinary-completed-integral-pullback"
+  ]
+ }
+}

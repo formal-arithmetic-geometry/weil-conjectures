@@ -1,0 +1,358 @@
+{
+ "id": "lem-coef-tower-right-derived-evaluation",
+ "kind": "statement",
+ "title": "Unbounded right derivation of an additive tower functor commutes with evaluation",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories [def-sp-abelian], let $F:\\mathcal A\\to\\mathcal B$ be additive [def-weil-pbc-additive-functor], and let $\\operatorname{Tow}(\\mathcal A)=\\operatorname{Fun}(\\mathbf N_{\\geq1}^{op},\\mathcal A)$, with the analogous notation for $\\mathcal B$ [def-weil-inverse-system]. Use ordinary unbounded derived categories [def-weil-abstract-derived-category]. Assume every cochain complex in $\\mathcal A$ and in $\\operatorname{Tow}(\\mathcal A)$ admits a quasi-isomorphism to a K-injective complex; K-injective means that every chain map from an acyclic complex is null-homotopic. Let $F^{\\operatorname{Tow}}$ apply $F$ to all tower objects and transitions. Both total right derived functors $RF:D(\\mathcal A)\\to D(\\mathcal B)$ and $R(F^{\\operatorname{Tow}}):D(\\operatorname{Tow}(\\mathcal A))\\to D(\\operatorname{Tow}(\\mathcal B))$ exist with universal units $\\eta_F,\\eta_{F^{\\operatorname{Tow}}}$ [def-sfb-right-derived-functor]. If $e_n$ denotes exact evaluation and its termwise derived functor, there are specified natural isomorphisms\n$$\\beta_n:e_nR(F^{\\operatorname{Tow}})\\xrightarrow{\\sim}(RF)e_n.$$\nFor every tower complex $P$, with the canonical localization/evaluation identifications, they satisfy\n$$\\beta_{n,QP}\\circ e_n(\\eta_{F^{\\operatorname{Tow}},P})=\\eta_{F,P_n}.$$\nFor any K-injective tower resolution $P\\to I$, the evaluated map $P_n\\to I_n$ is a quasi-isomorphism, $I_n$ is K-injective, and $\\beta_{n,QP}$ is the identification of both sides with $Q(F(I_n))$ induced by that same resolution and the derived units. These identifications are independent of resolution and natural for every morphism in $D(\\operatorname{Tow}(\\mathcal A))$. For every $m\\geq n$, write $t^{\\mathcal A}_{m,n}:e_m\\to e_n$ and $t^{\\mathcal B}_{m,n}:e_m\\to e_n$ for the transformations induced by the actual tower arrows, localized degreewise [def-coef-tower-derived-evaluation-transition]. Then\n$$\\beta_n\\circ(t^{\\mathcal B}_{m,n}R(F^{\\operatorname{Tow}}))=((RF)t^{\\mathcal A}_{m,n})\\circ\\beta_m.$$\nThis includes identity and composite transitions. No exactness of $F$, left-adjoint hypothesis on $F$, boundedness, or exactness of infinite products is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, lemma-derived-limit-is-ok, proof paragraph on the exact left adjoint to evaluation; agent generalization to an arbitrary additive functor and unit-normalized total right derivation, extracted from former steps 2-4."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-pbc-additive-functor",
+  "def-weil-inverse-system",
+  "def-weil-abstract-derived-category",
+  "def-sfb-right-derived-functor",
+  "def-coef-tower-derived-evaluation-transition"
+ ],
+ "proof": [
+  {
+   "text": "Use the universal pairs and invertibility on K-injectives from [def-sfb-right-derived-functor] (constructed by [lem-weil-pbc-kinjective-total-derived]). By [lem-weil-tower-category-levelwise-abelian] evaluation is exact additive. Its canonical factor is [lem-weil-pbc-exact-functor-derived-factorization]. Transport the homotopy units to cochain units along the quotient/Qh comparisons. Since termwise F commutes strictly with evaluation, the evaluated tower unit a and the evaluated-input unit b are natural transformations with a common source.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "On a K-injective tower I both a and b are invertible: for b, apply [lem-weil-tower-evaluation-kinjective] before using unit invertibility from [def-sfb-right-derived-functor]. Define d_I = a_I inverse followed by b_I. Naturality of a and b proves naturality of d on complex maps. By [lem-weil-pbc-kinjective-hom-derived], every derived map between QI and QJ is represented by a homotopy class, and the homotopy quotient is full, so this proves naturality for every such derived map.",
+   "uses": [
+    "lem-weil-tower-evaluation-kinjective",
+    "def-sfb-right-derived-functor",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Choose a representative complex for each derived object X and apply the given resolution hypothesis to obtain e_X : X ≅ QI_X. Define beta_X = R(a tower)(e_X), followed by d_I_X, followed by RF(evaluated e_X inverse). Naturality on maps between K-injective representatives proves naturality of beta and its agreement with d_I on every QI. The components are invertible, giving a natural isomorphism on the entire derived category [def-weil-abstract-derived-category]. Naturality along any resolution K → I and cancellation of the isomorphism on its target gives a_K beta_QK = b_K for every complex K. Postcompose with RF of the evaluation factor to obtain exactly the stated cochain-unit equation.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For every resolution f:P → I, evaluation preserves the quasi-isomorphism by [lem-weil-pbc-exact-functor-derived-factorization] and preserves K-injectivity by [lem-weil-tower-evaluation-kinjective]. Directly unfold the canonical comparison c_f of [def-sfb-right-derived-functor] and cancel its inverse unit to obtain c_f eta_I = RF(Qf). Postcompose the desired resolution equation with the invertible unit at I_n. Naturality of the evaluation factor and beta, the unit equation at I, and the same identity for the tower comparison identify the two sides. This works for every resolution and the same beta; its natural-isomorphism type already supplies naturality for all derived morphisms.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-tower-evaluation-kinjective",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The definition [def-coef-tower-derived-evaluation-transition] and Localization.liftNatTrans_app identify each transition on QI, conjugated by the evaluation factors, with Q of the actual transition of complexes. Naturality of the tower unit and the base unit gives a_m t_B = Q(F(I(t))) a_n and b_m RF(t_A) = Q(F(I(t))) b_n. Substitute a beta = b and cancel a_m on K-injective I. The two sides are natural transformations on the derived category; naturality along a resolution of any complex, then localization extensionality, gives equality on every object. Identity and composite arrows are included because t is arbitrary. No product exactness or adjunction for F is needed.",
+   "uses": [
+    "def-coef-tower-derived-evaluation-transition",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-right-derived-functor",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-tower-evaluation-kinjective",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-weil-abstract-derived-category",
+  "def-coef-tower-derived-evaluation-transition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 070I, 070Y and 070K; direct cochain-unit descent of the exact-square argument, with evaluation preserving K-injectives as in sites-cohomology.tex Tag 0941. Formalized by C6 on 2026-10-22."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Ee]val|[Ee]val.*rightDerived|KInjective.*[Ee]val|[Ee]val.*KInjective",
+   "results": "; 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract derived-functor and exact-functor formulas do not provide the unbounded evaluation comparison for an arbitrary additive functor without an exact left adjoint"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right derived functor on inverse sequences commutes with evaluation using K injective resolutions",
+   "results": "; 8 hits: CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.Functor.rightDerived, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract derived-functor and exact-functor formulas do not provide the unbounded evaluation comparison for an arbitrary additive functor without an exact left adjoint"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsRightDerivedFunctor",
+   "results": "; 12 hits: CategoryTheory.Functor.IsRightDerivedFunctor, CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit, CategoryTheory.Functor.HasRightDerivedFunctor.mk', CategoryTheory.Functor.IsRightDerivedFunctor.isLeftKanExtension, CategoryTheory.Functor.IsRightDerivedFunctor.mk, CategoryTheory.Functor.isRightDerivedFunctor_iff_isLeftKanExtension, CategoryTheory.Functor.rightDerivedDesc, CategoryTheory.Functor.rightDerivedUnique",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract derived-functor and exact-functor formulas do not provide the unbounded evaluation comparison for an arbitrary additive functor without an exact left adjoint"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an additive functor between abelian categories with K injective resolutions in the source and its tower category, total right deriving the termwise tower functor commutes naturally with evaluation and tower transitions",
+   "results": "; 8 hits: CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract derived-functor and exact-functor formulas do not provide the unbounded evaluation comparison for an arbitrary additive functor without an exact left adjoint"
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*IsKInjective|IsKInjective.*evaluation|evaluation.*totalRightDerived|totalRightDerived.*evaluation",
+   "results": "; 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract derived-functor and exact-functor formulas do not provide the unbounded evaluation comparison for an arbitrary additive functor without an exact left adjoint"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Total derived functor of a functor category on inverse sequences evaluated at an index is naturally isomorphic to deriving the original additive functor and evaluating the input",
+   "results": "; 8 hits: CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.rightDerived, CategoryTheory.NatTrans.rightDerived, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract derived-functor and exact-functor formulas do not provide the unbounded evaluation comparison for an arbitrary additive functor without an exact left adjoint"
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*totalRightDerived|totalRightDerived.*evaluation|evaluation.*IsKInjective|IsKInjective.*evaluation",
+   "results": {
+    "t": "2026-10-22T06:22:41Z",
+    "tool": "grep",
+    "query": "evaluation.*totalRightDerived|totalRightDerived.*evaluation|evaluation.*IsKInjective|IsKInjective.*evaluation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits are finite-degree right derivation, exact-functor localization (which requires exactness of F), or a general derived-functor universal property; none gives the unbounded tower evaluation comparison and its normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unbounded derived functor of an additive functor on inverse systems naturally commutes with evaluation",
+   "results": {
+    "t": "2026-10-22T06:22:41Z",
+    "tool": "leansearch",
+    "query": "Unbounded derived functor of an additive functor on inverse systems naturally commutes with evaluation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Limits.colimitIsoFlipCompColim",
+     "CategoryTheory.Functor.mapDerivedCategorySingleFunctor",
+     "CategoryTheory.Limits.limitObjIsoLimitCompEvaluation_inv_π_app_assoc",
+     "CategoryTheory.Functor.instAdditiveObjEvaluation",
+     "CategoryTheory.Functor.rightDerived",
+     "CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality",
+     "CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt",
+     "CategoryTheory.Limits.limitObjIsoLimitCompEvaluation_inv_limit_map"
+    ],
+    "digest": "4f0aacec64b8dc94"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits are finite-degree right derivation, exact-functor localization (which requires exactness of F), or a general derived-functor universal property; none gives the unbounded tower evaluation comparison and its normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsRightDerivedFunctor",
+   "results": {
+    "t": "2026-10-22T06:22:42Z",
+    "tool": "loogle",
+    "query": "CategoryTheory.Functor.IsRightDerivedFunctor",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.IsRightDerivedFunctor",
+     "CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit",
+     "CategoryTheory.Functor.HasRightDerivedFunctor.mk'",
+     "CategoryTheory.Functor.IsRightDerivedFunctor.isLeftKanExtension",
+     "CategoryTheory.Functor.IsRightDerivedFunctor.mk",
+     "CategoryTheory.Functor.isRightDerivedFunctor_iff_isLeftKanExtension",
+     "CategoryTheory.Functor.rightDerivedDesc",
+     "CategoryTheory.Functor.rightDerivedUnique"
+    ],
+    "digest": "e5fccbe6aa25833e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits are finite-degree right derivation, exact-functor localization (which requires exactness of F), or a general derived-functor universal property; none gives the unbounded tower evaluation comparison and its normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Total right derived additive functor on inverse towers commutes with exact evaluation via K injective resolutions",
+   "results": {
+    "t": "2026-10-22T06:22:42Z",
+    "tool": "leanfinder",
+    "query": "Total right derived additive functor on inverse towers commutes with exact evaluation via K injective resolutions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.rightDerived_map_eq",
+     "CategoryTheory.InjectiveResolution.rightDerived_app_eq",
+     "CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc",
+     "CategoryTheory.Functor.mapDerivedCategoryFactorsh",
+     "CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc",
+     "CategoryTheory.NatTrans.rightDerived_comp_assoc",
+     "CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app_assoc",
+     "CategoryTheory.Functor.mapDerivedCategoryFactors"
+    ],
+    "digest": "8b017919b5391ff4"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits are finite-degree right derivation, exact-functor localization (which requires exactness of F), or a general derived-functor universal property; none gives the unbounded tower evaluation comparison and its normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an additive functor total right derivation commutes with evaluation on a functor category when evaluation preserves K injective complexes, including unit normalization and transition naturality",
+   "results": {
+    "t": "2026-10-22T06:23:19Z",
+    "tool": "leanfinder",
+    "query": "For an additive functor total right derivation commutes with evaluation on a functor category when evaluation preserves K injective complexes, including unit normalization and transition naturality",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.InjectiveResolution.rightDerived_app_eq",
+     "CategoryTheory.NatTrans.rightDerived_comp_assoc",
+     "CategoryTheory.Functor.rightDerived_map_eq",
+     "CategoryTheory.Functor.toRightDerivedZero",
+     "CategoryTheory.Functor.mapDerivedCategorySingleFunctor",
+     "CategoryTheory.InjectiveResolution.toRightDerivedZero_eq",
+     "CategoryTheory.NatTrans.rightDerived_comp",
+     "CategoryTheory.NatTrans.rightDerived"
+    ],
+    "digest": "4cb34125ea26a2cb"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits are finite-degree right derivation, exact-functor localization (which requires exactness of F), or a general derived-functor universal property; none gives the unbounded tower evaluation comparison and its normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "def rightDerived|def mapDerivedCategory|def rightDerivedUnique|class IsRightDerivedFunctor",
+   "results": {
+    "t": "2026-10-22T06:23:36Z",
+    "tool": "grep",
+    "query": "def rightDerived|def mapDerivedCategory|def rightDerivedUnique|class IsRightDerivedFunctor",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean",
+     "Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+     "Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean"
+    ],
+    "digest": "49bb689cbb160d68"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits are finite-degree right derivation, exact-functor localization (which requires exactness of F), or a general derived-functor universal property; none gives the unbounded tower evaluation comparison and its normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-sequence-global-sections-evaluation",
+  "date": "2026-10-22",
+  "group": "Q76"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, first and last mapping-complex comparisons, through lem-coef-derived-system-evaluation-calculus, returned step 12 first half; extracted from the global-sections evaluation proof in response to the 2026-10-22 re-split note. Constant-coefficient tower resolution and evaluation (former steps 2-4).",
+   "via": [
+    "lem-coef-sequence-global-sections-evaluation",
+    "lem-coef-derived-system-evaluation-calculus"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-coef-tower-right-derived-evaluation",
+  "worker": "stage1",
+  "summary": "Construct the evaluation comparison using the same K-injective tower resolution on both sides; prove arbitrary-derived-morphism naturality, resolution independence, the unit equation, and every actual tower-transition equation. Reuse existing nodes only; no statement change. Maintainer-reader FIX (2026-10-22): steps 3-5 re-proved the r=s=e_n case of the reviewed node lem-weil-pbc-kinjective-exact-square-comparison (unit sk-thm-properbasechange, on the route). Steps 3-4 now cite it. The K-injective resolution formula, the unit equation and the transition steps are kept.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint proof paragraph 2, first and last mapping-complex comparisons: termwise global-sections evaluation in lem-coef-derived-system-evaluation-calculus via lem-coef-sequence-global-sections-evaluation. The seven steps supply the abstract evaluation calculus behind these comparisons.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-tower-category-levelwise-abelian",
+    "why": "Generic tower abelianness and exact evaluation for arbitrary abelian categories; this unit has no replacement for this categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Exact evaluation descends to ordinary unbounded derived categories with its localization factors; generic exact-localization tool."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Generic existence and universal-unit computation under the two explicit K-injective-resolution assumptions; no geometric or coefficient route is substituted."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-kinjective-total-derived"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NX-61f224ee6",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-61f224ee6 (reviewer sub-agent of L); spot-checked: I read all seven steps and every cited statement, and the mathematics is correct. Shape: one commit; only the item and the report change; no new nodes; statement, stmt_deps and blueprint unchanged against the Q76 creation snapshot. This is a first split, not a re-split. I checked steps 1-7 by hand. The direction beta=(c^F_{a_n})^{-1}e_n(c^T_a) is right, the unit equation follows from eta-naturality, and the transition square follows from a_n P(m->n)=I(m->n)a_m plus the uniqueness clause of lem-sf-kinjective-derived-map-computation. Step 2 writes out Stacks 014X (derived.tex l.3431) inline, and the Stacks sources check out: 0941 (sites-cohomology l.5067), 070Y (l.9747) and 070K (l.9767). Indexing N_{>=1}^op against N^op is a relabelling only. Every cited statement is on the route; the three declared tool_uses are accepted. review_split.py's 'no such node' lines are a symlink artifact. One fault (C5 / brief section 2: a special case of an existing node should be cited). Steps 3-5 re-prove the r=s=e_n case of the reviewed node lem-weil-pbc-kinjective-exact-square-comparison (NZ pass 2026-10-21, whose review already records the r=s=e_n application). FIX in fixes/dag/nodes/sec-six-functors/lem-coef-tower-right-derived-evaluation.json: new step 3 applies that node with A'=Tow(A), B'=Tow(B), H'=F^Tow, H=F, r=s=e_n, checks each hypothesis, and regroups its formula with u=Qa into the resolution identification (c^F_{a_n})^{-1}e_n(c^T_a). New step 4 takes naturality and independence of resolution from that node. Old step 5 is removed; the unit and transition steps are kept. proof_deps equals the union of the step uses. Statement and all other fields are unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.TowerRightDerivedEvaluation",
+  "declaration": "CategoryTheory.TowerRightDerivedEvaluation.exists_normalized",
+  "declarations": [
+   "CategoryTheory.TowerRightDerivedEvaluation.cochainUnit",
+   "CategoryTheory.TowerRightDerivedEvaluation.exists_normalized"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/TowerRightDerivedEvaluation.lean",
+  "statement": "theorem exists_normalized {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B] [Abelian A] [Abelian B] [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wB} B] [HasDerivedCategory.{wTA} (ℕᵒᵖ ⥤ A)] [HasDerivedCategory.{wTB} (ℕᵒᵖ ⥤ B)] (F : A ⥤ B) [F.Additive] (enough : ∀ K : CochainComplex A ℤ, ∃ (I : CochainComplex A ℤ) (a : K ⟶ I), I.IsKInjective ∧ QuasiIso a) (enoughT : ∀ K : CochainComplex (ℕᵒᵖ ⥤ A) ℤ, ∃ (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (a : K ⟶ I), I.IsKInjective ∧ QuasiIso a) : ∃ β : ∀ n : ℕᵒᵖ, (((Functor.whiskeringRight ℕᵒᵖ A B).obj F).rightDerivedFunctorOfQuasiIsoResolutions enoughT) ⋙ ((evaluation ℕᵒᵖ B).obj n).mapDerivedCategory ≅ ((evaluation ℕᵒᵖ A).obj n).mapDerivedCategory ⋙ F.rightDerivedFunctorOfQuasiIsoResolutions enough, (∀ (n : ℕᵒᵖ) (P : CochainComplex (ℕᵒᵖ ⥤ A) ℤ), ((evaluation ℕᵒᵖ B).obj n).mapDerivedCategoryFactors.inv.app ((((Functor.whiskeringRight ℕᵒᵖ A B).obj F).mapHomologicalComplex (.up ℤ)).obj P) ≫ ((evaluation ℕᵒᵖ B).obj n).mapDerivedCategory.map (cochainUnit ((Functor.whiskeringRight ℕᵒᵖ A B).obj F) enoughT P) ≫ (β n).hom.app (DerivedCategory.Q.obj P) ≫ (F.rightDerivedFunctorOfQuasiIsoResolutions enough).map (((evaluation ℕᵒᵖ A).obj n).mapDerivedCategoryFactors.hom.app P) = cochainUnit F enough ((((evaluation ℕᵒᵖ A).obj n).mapHomologicalComplex (.up ℤ)).obj P)) ∧ (∀ (n : ℕᵒᵖ) (P I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (a : P ⟶ I) [I.IsKInjective] [QuasiIso a], ∃ (hI : CochainComplex.IsKInjective ((((evaluation ℕᵒᵖ A).obj n).mapHomologicalComplex (.up ℤ)).obj I)) (ha : QuasiIso ((((evaluation ℕᵒᵖ A).obj n).mapHomologicalComplex (.up ℤ)).map a)), (β n).hom.app (DerivedCategory.Q.obj P) ≫ (F.rightDerivedFunctorOfQuasiIsoResolutions enough).map (((evaluation ℕᵒᵖ A).obj n).mapDerivedCategoryFactors.hom.app P) ≫ (@Functor.rightDerivedFunctorOfQuasiIsoResolutionsObjIso A B _ _ _ _ _ _ F _ enough _ _ hI ((((evaluation ℕᵒᵖ A).obj n).mapHomologicalComplex (.up ℤ)).map a) ha).hom = ((evaluation ℕᵒᵖ B).obj n).mapDerivedCategory.map (Functor.rightDerivedFunctorOfQuasiIsoResolutionsObjIso ((Functor.whiskeringRight ℕᵒᵖ A B).obj F) enoughT a).hom ≫ ((evaluation ℕᵒᵖ B).obj n).mapDerivedCategoryFactors.hom.app ((((Functor.whiskeringRight ℕᵒᵖ A B).obj F).mapHomologicalComplex (.up ℤ)).obj I)) ∧ (∀ (m n : ℕᵒᵖ) (t : m ⟶ n) (M : DerivedCategory (ℕᵒᵖ ⥤ A)), (towerDerivedEvaluationTransition B t).app ((Functor.rightDerivedFunctorOfQuasiIsoResolutions ((Functor.whiskeringRight ℕᵒᵖ A B).obj F) enoughT).obj M) ≫ (β n).hom.app M = (β m).hom.app M ≫ (F.rightDerivedFunctorOfQuasiIsoResolutions enough).map ((towerDerivedEvaluationTransition A t).app M))",
+  "branch": "sheaf-dag",
+  "by": "Q117",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fe0c7d3c0",
+  "group": "Q117",
+  "result": "pass",
+  "note": "Item node differs from side-live only in lean; lean.statement verbatim in file. Clauses checked against node: independent universes (uA vA uB vB wA wB wTA wTB; functorCategoryAbelian imposes none), ℕᵒᵖ towers = N≥1 relabel consistent with def-weil-inverse-system and the transition dependency, exactly the two K-injective-resolution hypotheses, recorded rightDerivedFunctorOfQuasiIsoResolutions for F and whiskeringRight F. β is a NatIso RT⋙e_nD ≅ e_nD⋙RF; the unit clause (canonical mapDerivedCategoryFactors, cochainUnit) has the node's direction and pins β; the resolution clause asserts I_n K-injective and a_n quasi-iso via ∃ and gives β=(c^F_{a_n})^{-1} e_n(c^T_a) through ObjIso ending at Q(F I_n); the transition clause uses towerDerivedEvaluationTransition for all t:m⟶n (identities and composites). The cochainUnit helper is real data with correct mapHomotopyCategoryFactors.inv direction; only private analogues exist elsewhere. Source and blueprint docstrings present, six proof steps, sorry only, no extra hypotheses. KInjectiveExactSquare.existsUnique_normalized is a proof dependency, not an existing match. Not recompiled (no FIX). Advisory: the public OfSequence import is unused in the statement."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261022T143024-L-925793",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

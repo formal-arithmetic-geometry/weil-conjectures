@@ -16,94 +16,44 @@
  ],
  "proof": [
   {
-   "text": "By [def-pc-fibre-product], for every $S$-scheme $T$ a $T$-point of $R'$ is a triple $(a,r,b)$ with $a,b\\in U'(T)$, $r\\in R(T)$, $s(r)=g(a)$ and $t(r)=g(b)$. Thus the induced relation on $U'(T)$ is $a\\sim' b$ if and only if $g(a)\\sim g(b)$. Reflexivity, symmetry and transitivity follow respectively from these three properties of the relation on $U(T)$. Since $R(T)$ is an equivalence relation, its arrow with specified endpoints is unique, so the triple is determined by $(a,b)$; this also verifies the monomorphism into $U'\\times_SU'$. These identifications are natural in $T$, giving the required equivalence relation over $S$.",
+   "text": "Apply [lem-trf-etale-pullback-relation-presheaf]. Substitute its first two canonical projection equalities. Its conclusions give monicity, the equivalence-relation axioms and etaleness of both restricted projections. Retain its sectionwise injective quotient-presheaf map v and its compatibility with the coequalizer projections.",
    "uses": [
-    "def-pc-fibre-product"
+    "lem-trf-etale-pullback-relation-presheaf"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/groupoids.tex",
-    "place": "Tags 02V8 (lemma-restrict-relation) and 02V9 (definition-restrict-relation); explicit fibre-product argument."
-   }
+   "elementary": false
   },
   {
-   "text": "For the first projection put $A=U'\\times_{g,U,s}R$, with maps $p:A\\to U'$ and $v=t\\circ\\operatorname{pr}_R:A\\to U$. Then $R'=A\\times_{v,U,g}U'$, and $s':R'\\to U'$ factors as $R'\\to A\\xrightarrow{p}U'$. The first map is a base change of $g$, and the second is a base change of $s$. Both are etale by [lem-weil-pbc-etale-scheme-base-change], so their composite is etale by clause (2) of [lem-weil-pbc-etale-composition-cancellation]. For $t'$ use $B=R\\times_{t,U,g}U'$: the map $R'\\to B$ is a base change of $g$ along $s\\circ\\operatorname{pr}_R$, and $B\\to U'$ is a base change of $t$. The same two cited statements make $t'$ etale. Together with Step 1 this proves that $R'$ is an etale equivalence relation.",
+   "text": "The universal property [def-weil-pbc-sheafification] of the given restricted quotient sheaf extends v followed by η to α with η′ followed by α equal to v followed by η. Composing with the restricted coequalizer projection and using Step 1 gives exactly the asserted canonical compatibility. For either universal map, sheafify its image subfunctor inside the target sheaf. The universal property gives a retraction of the inclusion, and uniqueness gives that the retraction is a right inverse. Hence the locally generated image is the whole target, proving local surjectivity without a global small-valued sheafification instance.",
    "uses": [
-    "lem-weil-pbc-etale-scheme-base-change",
-    "lem-weil-pbc-etale-composition-cancellation"
+    "def-weil-pbc-sheafification"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/spaces.tex",
-    "place": "Tag 02WT (lemma-pullback-etale-equivalence-relation), proof: composition of base changes of etale morphisms."
-   }
+   "elementary": true
   },
   {
-   "text": "Write $P(T)=U(T)/R(T)$ and $P'(T)=U'(T)/R'(T)$ for the presheaf quotients. The formula $[a]\\mapsto[g\\circ a]$ gives a natural map $v:P'\\to P$ by the relation calculation in Step 1. Moreover it is injective on each $T$: if $[g\\circ a]=[g\\circ b]$, some $r:T\\to R$ has endpoints $g\\circ a,g\\circ b$, so $(a,r,b):T\\to R'$ witnesses $[a]=[b]$. Let $F'=P'^\\#$ and $F=P^\\#$. The universal property in [def-weil-pbc-sheafification] applied to $P'\\xrightarrow{v}P\\to F$ gives the canonical map $\\alpha:F'\\to F$, with $\\alpha(\\eta'[a])=\\eta[g\\circ a]$ for the sheafification units $\\eta',\\eta$.",
+   "text": "By [lem-trf-fppf-universal-unit-locally-injective], η is locally injective in the stated small value universe. Sectionwise injectivity of v implies local injectivity, so v followed by η is locally injective. Mathlib Presheaf.isLocallyInjective_of_isLocallyInjective_of_isLocallySurjective_fac cancels the locally surjective η′ in the equality of Step 2. Thus α is locally injective. Separatedness of F′ makes every component injective, giving Mono α.",
    "uses": [
-    "def-weil-pbc-sheafification",
-    "def-pc-fibre-product"
+    "lem-trf-fppf-universal-unit-locally-injective"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/groupoids.tex",
-    "place": "Tag 045Z, relation calculation and canonical quotient map; Tag 02VG (definition-quotient-sheaf)."
-   }
+   "elementary": false
   },
   {
-   "text": "To prove injectivity fix $\\xi,\\zeta\\in F'(T)$ with $\\alpha(\\xi)=\\alpha(\\zeta)$. The local-representative assertion of [lem-weil-pbc-site-sheafification-sections-local], applied to $P'$, gives coverings representing each section by a quotient class. Pull back one covering along the other and compose, using the site axioms of [def-weil-pbc-sites-and-cohomology], to obtain a common covering $T_i\\to T$ and representatives $a_i,b_i:T_i\\to U'$ for $\\xi|_{T_i},\\zeta|_{T_i}$. Their images give classes $[g a_i],[g b_i]\\in P(T_i)$ with equal images in $F(T_i)$. The local-equality assertion of [lem-weil-pbc-site-sheafification-sections-local], now applied to $P$, gives a further covering of each $T_i$ where these classes agree. Step 3's injectivity of $v$ then gives $[a_i]=[b_i]$ on that refinement. Hence $\\xi$ and $\\zeta$ agree on a covering of $T$, and the sheaf equalizer condition of [def-weil-pbc-sites-and-cohomology] gives $\\xi=\\zeta$. This proves sectionwise injectivity of $\\alpha$ for every $T$.",
+   "text": "If g is surjective, its flatness and local finite presentation make its singleton family an fppf cover [def-pc-fppf-site]. Pull back the generated covering sieve along a section into U; every arrow in the resulting sieve factors through g, so yoneda.map g is locally surjective. The original coequalizer projection is sectionwise surjective by Step 1. Composing it with η and yoneda.map g gives a locally surjective map. Step 2 identifies this map with the restricted quotient projection followed by η′ and α; Mathlib Presheaf.isLocallySurjective_of_isLocallySurjective_fac gives local surjectivity of α. Apply Sheaf.isLocallyBijective_iff_isIso and map the resulting sheaf isomorphism to presheaves.",
    "uses": [
-    "lem-weil-pbc-site-sheafification-sections-local",
-    "def-weil-pbc-sites-and-cohomology"
+    "def-pc-fppf-site"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/groupoids.tex",
-    "place": "Tag 045Z, injectivity proof; local representatives and local equality supplied by Sites Tags 00WB and 00WK."
-   }
-  },
-  {
-   "text": "Suppose now that $g$ is surjective. By [def-weil-etale-morphism], $g$ is flat and locally of finite presentation, so $\\{g\\}$ is an fppf covering by [def-pc-fppf-site]. For $z\\in F(T)$, [lem-weil-pbc-site-sheafification-sections-local] applied to $P$ supplies an fppf covering $T_i\\to T$ where $z$ is represented by a map $a_i:T_i\\to U$. Pull back the singleton etale surjective family $\\{g\\}$ along $a_i$. By [lem-weil-pbc-etale-covering-base-change], the projection $W_i=T_i\\times_{a_i,U,g}U'\\to T_i$ is etale and surjective, hence again an fppf covering by the same two definitions. Its second projection $b_i:W_i\\to U'$ satisfies $g b_i=a_i\\operatorname{pr}_{T_i}$, so $\\eta'[b_i]\\in F'(W_i)$ maps to $z|_{W_i}$. The site composition axiom of [def-weil-pbc-sites-and-cohomology] makes $\\{W_i\\to T\\}$ a covering. Thus every section of $F$ lifts locally through $\\alpha$.",
-   "uses": [
-    "def-weil-etale-morphism",
-    "def-pc-fppf-site",
-    "lem-weil-pbc-site-sheafification-sections-local",
-    "lem-weil-pbc-etale-covering-base-change",
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/groupoids.tex",
-    "place": "Tag 045Z, surjective-cover clause; explicit pullback lifting of a representative, also the covering clause of Tag 02VH."
-   }
-  },
-  {
-   "text": "For the local lifts from Step 5, their two restrictions to each overlap have the same $\\alpha$-image, namely the restriction of $z$. Step 4, applied to that overlap, makes the restrictions equal. The sheaf equalizer condition of [def-weil-pbc-sites-and-cohomology] therefore glues the lifts uniquely to $\\widetilde z\\in F'(T)$, and separation of $F$ gives $\\alpha(\\widetilde z)=z$. Step 4 gives uniqueness of this preimage. Restricting $\\widetilde z$ along any test-scheme morphism gives the unique preimage of the restricted $z$, so these inverses are natural in $T$. They define an inverse of $\\alpha$, proving the asserted isomorphism when $g$ is surjective.",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/groupoids.tex",
-    "place": "Tag 045Z, final isomorphism conclusion, with the sheaf gluing argument written out."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-fibre-product",
-  "def-pc-fppf-site",
-  "def-weil-etale-morphism",
+  "lem-trf-etale-pullback-relation-presheaf",
   "def-weil-pbc-sheafification",
-  "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-etale-composition-cancellation",
-  "lem-weil-pbc-etale-covering-base-change",
-  "lem-weil-pbc-etale-scheme-base-change",
-  "lem-weil-pbc-site-sheafification-sections-local"
+  "lem-trf-fppf-universal-unit-locally-injective",
+  "def-pc-fppf-site"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/groupoids.tex",
-  "place": "Tag 045Z (lemma-quotient-pre-equivalence-relation-restrict), proof; Spaces Tag 02WT (lemma-pullback-etale-equivalence-relation)."
+  "place": "Tag 045Z, using the existing small-valued local-injectivity theorem and Mathlib local-bijectivity API to implement the local-representative and gluing argument."
  },
  "mathlib_searches": [
   {
@@ -300,33 +250,21 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-etale-relation-restriction-quotient",
   "worker": "stage1",
-  "summary": "Proved the restriction directly: identify the inverse-image equivalence relation on test schemes; factor both projections into base changes of etale maps and invoke etale composition; construct the quotient presheaf injection; prove injectivity after sheafification using local representatives and local equality; lift sections along the pulled-back surjective etale cover and glue a natural inverse. No new nodes or Mathlib leaves are required. The statement is unchanged.",
-  "blueprint": "Realizes the existing blueprint.from.place input to lem-trf-local-term-locality through lem-trf-etale-relation-quotient: Spaces Tag 02WT for etale restriction and Groupoids Tag 045Z (also 02VH in the groupoid case) for quotient restriction. Steps 1-2 verify the restricted relation, Steps 3-4 prove quotient injectivity, and Steps 5-6 prove invariance under a surjective etale refinement.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-site-sheafification-sections-local",
-    "why": "Generic set-presheaf sheafification theorem supplies local representatives and local equality on the big fppf site. The current unit does not separately state these general sheafification properties."
-   },
-   {
-    "node": "def-weil-pbc-sites-and-cohomology",
-    "why": "Only clause (1), the site covering axioms and the equalizer definition of set sheaves, is used for common refinements and gluing; no cohomology or alternate unit proof route is used."
-   }
-  ]
+  "summary": "Rebased the retained, independently approved two-child repair onto the current live DAG after landing return L. The live parent and returned head agree in every field; only proof, proof_deps and split_report are replaced. Re-read current citation interfaces and sources; distinguished both children from the new affine-open-cover node. Two independent statement-only unsplit children allocate all six original arguments, preserved verbatim in report.md; the parent is the 1105-character assembly. Statement and all maintainer-owned fields are unchanged.",
+  "blueprint": "Realizes the existing blueprint.from.place input to lem-trf-local-term-locality through lem-trf-etale-relation-quotient: Spaces Tag 02WT for etale restriction and Groupoids Tag 045Z (also 02VH in the groupoid case) for quotient restriction. Steps 1-2 verify the restricted relation, Steps 3-4 prove quotient injectivity, and Steps 5-6 prove invariance under a surjective etale refinement. The first new node carries old Steps 1-2 and the presheaf part of Step 3; the second carries the canonical-map part of Step 3 and Steps 4-6.",
+  "tool_uses": []
  },
- "tool_uses": [
-  "lem-weil-pbc-site-sheafification-sections-local",
-  "def-weil-pbc-sites-and-cohomology"
- ],
+ "tool_uses": [],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q74-7a17ea351",
-  "group": "Q74",
+  "reviewer": "NT-cc-Q155-5ed634490",
+  "group": "Q155",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q74-7a17ea351 (reviewer sub-agent of L); spot-checked: Read the item, all cited nodes, unit/chapter route, coordination files, and exact Stacks sources (Tags 02WT and 045Z). All six steps are mathematically sound, hypotheses and etale base-change/composition factorizations check out, quotient sheaf injectivity and surjective-cover gluing are correctly proved, edge cases were tested, searches and tool uses are recorded, and no duplicate/new-node or route violation remains. Review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q155-5ed634490 (reviewer sub-agent of L); spot-checked: This delivery is the same split as head ed20c92a, delivered again after the landing refused it with 'completed in this project's DAG but not in the live DAG'. That refusal is about promotion, not the mathematics, and ed20c92a had passed review. Compared as sorted JSON with that snapshot, both new nodes (lem-trf-etale-pullback-relation-presheaf and lem-trf-fppf-generator-sheafification-comparison) are byte-identical. The item differs only in split_report.summary, and its statement, stmt_deps, lean and reviewed fields are unchanged. The re-split note is met: all 6 old steps (4461 characters) are kept as explicit clauses of the two statement-only children, and the item proof is a 2-step assembly of 1105 characters. Node A carries old Steps 1-2 and the presheaf part of Step 3: the triples (a,r,b) with r unique, the monomorphism, a~'b iff ga~gb, s' and t' etale as composites of base changes, and the sectionwise injective v with vq'=q h_g. Node B carries the sheafification part of Step 3 and Steps 4-6: the unique alpha with alpha eta'=eta v, alpha injective, and for surjective g the local lifts over W_i=T_i x_{a_i,U,g} U' (etale surjective, so fppf by def-weil-etale-morphism and def-pc-fppf-site), gluing in F', and a natural inverse. The two children are of comparable size, neither restates the item, and they do not depend on the parent or on each other. I re-checked the mathematics against Stacks spaces.tex 02WT and groupoids.tex 045Z (line 3819). Edge cases U' empty and g=id hold. A non-surjective open immersion D(x) into the affine line, with the diagonal relation, gives alpha injective but not an isomorphism, so the surjectivity hypothesis is needed. The new Q104 node lem-trf-etale-quotient-affine-open-cover, which covers only the affine-coproduct refinement, does not duplicate either child. The Mathlib leaf lem-cbc-set-presheaf-sheafification-local-bijection could serve as an ingredient for B's isomorphism clause but is not a duplicate. No SGA is cited, both cited nodes are in the item's unit, and no fixes were made."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -353,5 +291,26 @@
   "existing": false,
   "note": "The restricted relation and its projections are the actual iterated pullbacks in Over S. The two sheaf quotients are specified by their sheafification universal properties at the presheaf coequalizers, following the existing EtaleRelationQuotient interface. The quotient-projection compatibility uniquely determines the canonical map alpha; Mono alpha is equivalent to injectivity on every test scheme. No global sheafification-existence assumption is imposed on the big site."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261026T083522-L-2376245",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

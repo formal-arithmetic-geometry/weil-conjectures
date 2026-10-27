@@ -1,0 +1,103 @@
+{
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-condensed-e-system-exchange",
+ "kind": "statement",
+ "title": "CondensedERealizationSystemExchange",
+ "statement": "For prime l, finite normed E/Q_l and positive-characteristic field k with characteristic different from l, every normalized Data l E k admits Exchange l E k D. This constructs the integral restriction of the ordered completed exchange and proves its rational tensor and condensed mate equations; no existence of Data is asserted.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 4.2.12, Lemma 4.2.13; Proposition 6.8.14(2), Remark 6.8.15; adapted comparison with the archived definitions in ProEtaleModule/Def.lean and ModuleObject/Basic.lean (the exact module-object and local-finite-presentation bridge is an additional claim, not a verbatim statement of the paper); equality of the specified completed exchange and the adjunction mate is an additional comparison obligation"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-condensed-e-realization-records"
+ ],
+ "proof": [
+  {
+   "text": "Proof. For each square, conjugate the ordered ambient completed exchange by the\nspecified pull and push comparisons. The fully faithful integral inclusion lifts this\nnatural transformation uniquely, giving its required ambient normalization. Form the\nintegral pullback square using the specified compositors and equality of composite\nmorphisms. Its right mate is the same transformation: the normalized units, counits\nand compositors rewrite its ambient image to the ordinary exchange followed by the\ncompletion units. The completed-exchange unit equation rewrites the ordered formula\nto the same expression. On complete constructible inputs the completion unit is\ninvertible, so cancel it. Tensor localization preserves composition and sends each\nunit, compositor, and counit to its tensor with one. The rational mate is consequently\none tensor the constructed integral exchange. Finally the system's unit and counit\ncomparison laws and its composition law identify its realization with the continuous\nmate: composition coherence identifies the pullback square; naturality moves the\ncomparison maps through it; the counit equations give the mate equality by adjunction.\nNo exchange map is claimed invertible. The argument uses only the displayed laws of\nthe supplied system and also covers zero objects and empty squares.",
+   "uses": [
+    "lem-weil-pbc-realization-completed-mate",
+    "lem-weil-pbc-realization-adjoint-comparisons",
+    "prop-weil-pbc-rational-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-realization-completed-mate",
+  "lem-weil-pbc-realization-adjoint-comparisons",
+  "prop-weil-pbc-rational-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 4.2.12, Lemma 4.2.13; Proposition 6.8.14(2), Remark 6.8.15; adapted comparison with the archived definitions in ProEtaleModule/Def.lean and ModuleObject/Basic.lean (the exact module-object and local-finite-presentation bridge is an additional claim, not a verbatim statement of the paper); equality of the specified completed exchange and the adjunction mate is an additional comparison obligation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence between constructible pro-etale E-sheaves and the rationalization of derived complete integral constructible sheaves, compatible with pullback and proper direct image",
+   "results": "8 hits: lightProfiniteToLightCondSetIsoTopCatToLightCondSet, CategoryTheory.Equivalence.sheafCongrPrecoherent_counitIso_hom_app_val_app, Condensed.lanSheafProfinite, CategoryTheory.Equivalence.sheafCongr.counitIso, CategoryTheory.Equivalence.sheafCongr.counitIso_hom_app_val_app, CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val, CategoryTheory.Equivalence.sheafCongrPreregular_counitIso_hom_app_val_app, CategoryTheory.Equivalence.sheafCongrPrecoherent_counitIso_inv_app_val_app",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Realization of integral constructible complexes after inverting a uniformizer identifies derived pullbacks and proper pushforwards with sheaf derived functors",
+   "results": "8 hits: SheafOfModules.pullbackComp, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pushforwardNatIso, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pushforwardNatIso_inv, SheafOfModules.pushforwardNatIso_hom",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence, \"constructible\"",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedERealization",
+  "date": "2026-10-25",
+  "group": "K9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-condensed-e-realization",
+   "place": "Separate the individual realization system from the ordered-square comparison"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedERealizationSystemExchange",
+  "file": "lean/Sheaf/Paper/CondensedERealizationSystemExchange.lean",
+  "declaration": "WeilConjectures.condensedE_realization_system_exchange",
+  "statement": "theorem condensedE_realization_system_exchange\n    (l : ℕ) [Fact l.Prime] (E : Type u) [NormedField E] [NormedAlgebra ℚ_[l] E]\n    [FiniteDimensional ℚ_[l] E] (k : Type u) [Field k]\n    [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)] (D : CondensedERealization.Data l E k) :\n    Nonempty (CondensedERealization.Exchange l E k D)",
+  "branch": "sheaf-dag",
+  "by": "K9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-20811",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261025T163831-L-860874",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-20811",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261025T163831-L-860874",
+  "kind": "interface",
+  "note": "independent cc review: delivered CondensedERealizationDefinitions vs live CondensedERealization (bodies identical; types restated explicitly, local attributes only); new system/system_exchange statements vs node lem-weil-pbc-condensed-e-realization; 15 live direct importers compiled against the delivered modules"
+ }
+}

@@ -1,0 +1,507 @@
+{
+ "id": "lem-zl-finite-counit-restriction-towers",
+ "kind": "statement",
+ "title": "Finite exchange and counit restrictions form strict isomorphism towers",
+ "statement": "Fix the finite-field datum $p,a,q,k_0=\\mathbf F_q,k=\\overline{\\mathbf F}_q$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$, uniformizer $\\varpi$, and $A_n=\\mathcal O_E/\\varpi^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Let $f:X\\to Y$ be a finite morphism of separated finite-type $k$-schemes [def-weil-finite-integral-morphism, def-weil-scheme-morphism-properties]. For a scheme $W$, write $R_W=\\varprojlim_n(A_n)_W$ on the small pro-etale site $W_{\\mathrm{proet}}$ [def-weil-completed-integral-coefficients, def-weil-pbc-proetale-site]. Use $D^b_c(W,\\mathcal O_E)$ of [def-weil-derived-complete-integral-detailed], the strict derived reductions $K_n=K\\otimes^L_{R_W}(A_n)_W$, and exact restriction of scalars $\\operatorname{Res}_n$ [def-pur-integral-derived-operations]. Let $Rf_*$ be the tower direct image of [def-weil-derived-direct-image].\n\nFor a geometric point $y:s=\\operatorname{Spec}k\\to Y$ [def-weil-geometric-point], set $S=X\\times_Ys$ with projections $v:S\\to X$, $h:S\\to s$ [def-pc-base-change], and $P_y=\\{x:s\\to X\\mid fx=y\\}$. For $x\\in P_y$ let $i_x:s\\to S$ be the unique lift, so $vi_x=x$ and $hi_x=\\operatorname{id}_s$. This is a finite set; an empty sum indexed by $P_y$ is the zero object. Write $L(-)^*$ for the completed integral pullback of [def-pur-integral-derived-operations], and $(-)_n^*$ for its exact finite-coefficient inverse image.\n\nFix $K\\in D^b_c(X,\\mathcal O_E)$ and one flat-term K-flat representative $Q\\to K$, with strict quotients $Q_n=Q\\otimes_{R_X}(A_n)_X$ and quotient maps $Q_{n+1}\\to Q_n$ [def-pc-kflat-complex, def-pur-integral-derived-operations]. There are specified maps of strict coefficient-system complexes on $s$:\n$$B_n=y_n^*f_{*,n}Q_n\\xrightarrow{b_n}C_n=h_{*,n}v_n^*Q_n\\xrightarrow{r_n}D_n=\\bigoplus_{x\\in P_y}x_n^*Q_n.$$\nThe first is the exchange map defined by the pullback/direct-image adjunction counit. The $x$-component of the second is $i_{x,n}^*$ of the counit $h_n^*h_{*,n}v_n^*Q_n\\to v_n^*Q_n$, with $hi_x=\\operatorname{id}_s$; thus it sends a section to its germ at $i_x$. The maps preserve addition and the $A_n$-action. For each $n$ their two squares with the quotient transitions commute as maps of complexes, before passing to derived categories. They are natural in maps of representatives and determine natural maps of derived coefficient systems independent of the chosen representative.\n\nEvery evaluated $b_n$ and $r_n$ is a quasi-isomorphism. Under etale/pro-etale comparison [def-weil-pbc-site-comparison-morphism] they are the canonical etale finite exchange and geometric-stalk restriction maps, with the direct-image comparison normalized as the counit mate. Sheaves on $s_{\\mathrm{et}}$ are identified with their sections at $s$, and the summands are the individual point restrictions. All finite direct images occurring here, on both sites, are exact, so termwise maps compute the derived maps. In particular the two maps of restricted strict towers are isomorphisms in their derived category, and their total derived inverse limits are isomorphisms [def-weil-derived-limit, def-weil-abstract-derived-category].",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Stacks Tags 0959, etale-cohomology.tex lemma-finite-pushforward-commutes-with-base-change, and 03QP, proposition-finite-higher-direct-image-zero; counit-normalized strict quotient compatibility realizes returned steps 4–5."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-integral-morphism",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-proetale-site",
+  "def-weil-derived-complete-integral-detailed",
+  "def-pur-integral-derived-operations",
+  "def-weil-derived-direct-image",
+  "def-weil-geometric-point",
+  "def-pc-base-change",
+  "def-pc-kflat-complex",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-derived-limit",
+  "def-weil-abstract-derived-category",
+  "def-trf-integral-comparison-sequence-systems",
+  "def-coef-ringed-sequence-site",
+  "def-pur-coefficient-reduction-presentation",
+  "def-weil-pbc-proetale-modules",
+  "det-pe-classical-definition-continuity-map",
+  "def-coef-derived-system-calculus-data",
+  "def-weil-pbc-underived-exchange"
+ ],
+ "proof": [
+  {
+   "text": "The base change $h:S\\to s$ is finite by [lem-weil-pbc-finite-morphism-permanence]. A field is Noetherian (its only ideals are $0,k$), so [pqf-lem-locnoeth-lft] makes $Y$ locally Noetherian. A finite map is of finite type by [lem-weil-pbc-finite-proper] and the definition of properness; hence [pqf-lem-lft-fp-locnoeth] applies to $f$ and to $h$, whose target is $\\operatorname{Spec}k$. Thus both are locally of finite presentation. Finiteness also makes both maps quasi-compact and quasi-separated, since they are proper. The points $i_x$ correspond bijectively to the $x$ in the statement by the universal property of $S$. Finiteness of $P_y$ follows from [lem-weil-pbc-finite-stalk-formula-restriction], applied to $f$ at $y$; this assertion concerns the index set, independently of the input sheaf. The Lean helper finitePoints identifies its reducible Points subtype with Scheme.Hom.GeometricFiber and directly reuses the existing GeometricFiber.finite instance, independently of the stalk formula.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "pqf-lem-locnoeth-lft",
+    "lem-weil-pbc-finite-proper",
+    "pqf-lem-lft-fp-locnoeth",
+    "lem-weil-pbc-finite-stalk-formula-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01WL (lemma-base-change-finite), 01WN (lemma-finite-proper), 01T6; finite presentation over a locally Noetherian target; etale-cohomology.tex Tag 03QP"
+   }
+  },
+  {
+   "text": "Apply [lem-zl-finite-fp-proetale-pushforward-exact] to $f,h$: it gives exactness on the entire finite-coefficient module categories on the pro-etale sites. On the etale sites [lemma-weil-pbc-finite-direct-image-exact] gives exactness on underlying abelian sheaves; the identical module kernels and cokernels give exactness for $A_n$-modules. Every finite-coefficient inverse image used here is exact by [prop-weil-pbc-proetale-constant-exact]. Consequently [lem-weil-pbc-exact-functor-derived-functor] identifies the termwise direct images and inverse images with their derived functors, even for an unbounded representative. In particular this applies to $Q_n$ and $v_n^*Q_n$. The resolution and reduction construction of [def-pur-integral-derived-operations] identifies $Q_n$ with the derived reduction $K_n$. The helper push_additive already follows without finiteness from the existing right-adjoint structure of integralComparisonSequenceDirectImage: a right adjoint preserves binary products, and an additive-category functor preserving binary products is additive. The pointSum_additive helper is proved by composing with its jointly monic product projections, whose component pullback functors are additive. The strict-system helper pushExact is proved by forgetting module structure, restricting to each vertical coefficient slice, and applying the abelian-sheaf exactness of lem-zl-finite-fp-proetale-pushforward-exact. Vertical slice restriction is a left adjoint because the slice inclusion is cocontinuous, so it preserves epimorphisms. The image sieve of the whole sequence direct-image map pulls back on each vertical slice to the image sieve of this levelwise direct image. Thus these image sieves cover by the definition of coefficientSequenceTopology, giving local surjectivity and an epimorphism on abelian sheaves. The faithful forgetful functor reflects epimorphisms and preserves them by lem-weil-pbc-module-sheaves-colimits-forgetful. The existing right-adjoint structure gives finite limits; preservation of epimorphisms and kernels then gives homology preservation and finite colimits. No nonempty-fibre hypothesis is used.",
+   "uses": [
+    "lem-zl-finite-fp-proetale-pushforward-exact",
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "prop-weil-pbc-proetale-constant-exact",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "def-pur-integral-derived-operations",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A8 (lemma-finite); etale-cohomology.tex Tag 03QP; derived.tex Tag 015F (lemma-right-derived-exact-functor)"
+   }
+  },
+  {
+   "text": "Use the module adjunction of [lem-weil-pbc-ringed-topoi-module-adjunction] on each small pro-etale site. For an $A_n$-module sheaf $M$, the adjoint defining exchange is\n$$h_n^*y_n^*f_{*,n}M\\simeq v_n^*f_n^*f_{*,n}M\\xrightarrow{v_n^*\\varepsilon_{f,n,M}}v_n^*M.$$\nIts transpose is $b_{n,M}$. Define $r_{n,x,M}$ by applying $i_{x,n}^*$ to $\\varepsilon_{h,n,v_n^*M}$, identifying $(hi_x)_n^*$ with the identity and $(vi_x)_n^*$ with $x_n^*$. The inverse-image and direct-image constructions in [def-weil-proetale-inverse-image, def-weil-proetale-module-direct-image] show the counit explicitly: a local inverse-image representative $[V,\\phi,m]$, with $m\\in M(X\\times_YV)$, is sent to its restriction along $\\phi$. In the module tensor notation this sends $a\\otimes[V,\\phi,m]$ to $a(m|_\\phi)$. Therefore $r_{n,x}$ is restriction at $i_x$. These formulas are additive and $A_n$-linear. Apply them in each degree to $M=Q_n^j$. Naturality for the differential $d^j$ makes them chain maps, and their finite tuple is the stated map to the direct sum.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "def-weil-proetale-inverse-image",
+    "def-weil-proetale-module-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D6 (definition-pushforward), 03D7 (lemma-adjoint-pullback-pushforward-modules); sites.tex Section 06UM (section-pullback), evaluation counit on colimit representatives"
+   }
+  },
+  {
+   "text": "Write $t_n:Q_{n+1}\\to Q_n$ for the actual quotient map. Regard its target as an $A_{n+1}$-module via $A_{n+1}\\to A_n$. Direct image is evaluation on the same fibre products, so it commutes literally with this scalar restriction. Since pullback of a constant coefficient ring is the same constant ring, inverse image after scalar restriction is the same underlying inverse image with the restricted action. The counit formula in Step 3 is unchanged under this identification: restricting the coefficient ring changes only the action, and\n$$t_n(a(m|_\\phi))=\\bar a\\,(t_n(m)|_\\phi).$$\nHere $\\bar a$ is the image in $A_n$ of a local $A_{n+1}$-coefficient; this identity follows from linearity of $t_n$ and its compatibility with restrictions. Taking the transpose in the displayed exchange adjunction, or using its restriction formula on $[V,\\phi,m]$, gives\n$$C(t_n)b_{n+1}=b_nB(t_n),\\qquad D(t_n)r_{n+1}=r_nC(t_n).$$\nThese are equalities of chain maps. The same identity works for arbitrary successive quotients. Finally restriction to $R_s$ makes all transitions and both families $R_s$-linear, since $R_s\\to(A_n)_s$ factors through $(A_{n+1})_s$ as specified in [def-pur-integral-derived-operations]. This constructs the two maps of strict restricted towers. In Lean, transitionSquares follows degreewise from naturality of coefficientSequenceTransition, applied to the components of the strict chain maps b and r; HomologicalComplex.hom_ext combines the degreewise equations.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-weil-proetale-module-direct-image",
+    "prop-weil-pbc-proetale-constant-exact",
+    "def-pur-integral-derived-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D6 and 03D7, explicit action and counit; proetale.tex Tag 09A5 (section-morphism); strict quotient transitions in def-pur-integral-derived-operations"
+   }
+  },
+  {
+   "text": "Fix $n$. By the definition of $D^b_c(X,\\mathcal O_E)$, the reduction $K_n$ has bounded constructible cohomology. The ring $A_n$ is finite and hence Noetherian, and $X$ is quasi-compact and quasi-separated by its separated finite-type hypothesis. Therefore [sk-thm-pe-constructible-comparison] gives a bounded constructible etale complex $L_n$ and an isomorphism $\\alpha_n:\\nu_X^*L_n\\simeq K_n$. This choice is only for proving invertibility and identifying arrows in the derived category; no etale origin of each individual term $Q_n^j$ is asserted.",
+   "uses": [
+    "def-weil-derived-complete-integral-detailed",
+    "sk-thm-pe-constructible-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AI (lemma-compare-constructible), 09AL (lemma-compare-constructible-derived)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-discrete-exchange-site-comparison] with $\\Lambda=A_n$, $g=y$, $f'=h$, $g'=v$ and $L=L_n$. Step 1 checks its quasi-compact and quasi-separated hypotheses for $f,h$; $L_n$ is bounded below. The derived exchange $e^p$ is the mate, for $Lf_n^*\\dashv Rf_{*,n}$ and $Lh_n^*\\dashv Rh_{*,n}$, of the composition comparison $h_n^*y_n^*\\simeq v_n^*f_n^*$; all four functors are exact (Step 2). Hence [lem-pur-exact-derived-mate], with $L=f_n^*$, $L'=h_n^*$, $G=y_n^*$, $H=v_n^*$ and $\\sigma$ that termwise comparison, shows that $e^p$ at the class of $Q_n$ is the localization of the termwise exchange $b_n$ of Step 3 (the units $f_{*,n}\\to Rf_{*,n}$, $h_{*,n}\\to Rh_{*,n}$ are invertible by exactness). Its equation $T_{L_n}\\nu_s^*(e_{L_n})=e^p_{\\nu_X^*L_n}S_{L_n}$ then identifies $b_n$ with the canonical etale exchange, through the specified counit-normalized comparison. The etale exchange is invertible by [lemma-weil-pbc-finite-exchange]. This theorem for abelian sheaves also gives the module assertion: the restriction maps are $A_n$-linear, and an inverse to a bijective $A_n$-linear map is $A_n$-linear. All comparisons are natural, so transporting along $\\alpha_n$ proves that $b_n$ is a quasi-isomorphism of pro-etale complexes.",
+   "uses": [
+    "lem-weil-pbc-discrete-exchange-site-comparison",
+    "lemma-weil-pbc-finite-exchange",
+    "lem-pur-exact-derived-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0959 (lemma-finite-pushforward-commutes-with-base-change); proetale.tex Tag 09A6 (lemma-morphism-comparison); sites-cohomology.tex Tag 07A7 (remark-base-change)"
+   }
+  },
+  {
+   "text": "For $h$ and $v^*L_n$, [sk-thm-pe-direct-image-comparison] supplies the canonical direct-image comparison and the inverse-image comparisons. The counit identity of [lem-pe-direct-image-mate-compatibility], applied to $h$, says exactly that its pro-etale counit, after this comparison and pullback, is $\\nu_S^*$ of the etale counit. By [lem-sc-derived-adjunction-from-underived], applied to $h^*\\dashv h_*$ on both sites with $h_*$ exact (Step 2), the derived counits are the localized termwise counits on every complex model; so the termwise counit used in Step 3 for $r_n$ is this derived pro-etale counit at the class of $v_n^*Q_n$, and the etale one is computed degreewise. Apply $i_x^*$ to this equality. The identity and composition equations of [lem-pe-inverse-image-comparison-coherence] identify the resulting sources by $hi_x=\\mathrm{id}_s$ and the targets by $vi_x=x$. Thus the $x$-component of $r_n$ is the comparison image of the etale counit restriction at $i_x$. This identifies the actual component maps, rather than choosing an unrelated isomorphism of their endpoints. The statements apply to the bounded-below object $v_e^*L_n$, since inverse image is exact, and to $h$, which is quasi-compact and quasi-separated. The underived helper comparisonCounit is proved directly from mateEquiv_counit_symm and iterated_mateEquiv_conjugateEquiv_symm, followed by cancellation of the inverse-image comparison isomorphism; no derived result is needed for this helper.",
+   "uses": [
+    "sk-thm-pe-direct-image-comparison",
+    "lem-pe-direct-image-mate-compatibility",
+    "lem-pe-inverse-image-comparison-coherence",
+    "lem-sc-derived-adjunction-from-underived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A6 (lemma-morphism-comparison), normalized via the counit; sites-cohomology.tex Tag 07A7, mate compatibility with inverse-image composition"
+   }
+  },
+  {
+   "text": "For any etale module sheaf $F$ on $S$, apply [lem-weil-pbc-finite-stalk-formula-restriction] to $h$ at $\\mathrm{id}_s$. It gives the finite product of actual germs $(h_*F)_{\\mathrm{id}_s}\\simeq\\prod_{x\\in P_y}F_{i_x}$. The pointed identity neighbourhood $(s,\\mathrm{id}_s)$ is initial in the category of pointed etale neighbourhoods of $\\mathrm{id}_s$: its unique map to a pointed neighbourhood is the specified lift of that point. The opposite indexing category therefore has a terminal object. The categorical colimit lemma isIso_ι_of_isTerminal shows that the actual sections-to-stalk germ at the identity neighbourhood is invertible; this is the Lean helper etGerm_isIso and holds directly for module-valued sheaves. Thus the etale sheaf map with components $i_x^*\\varepsilon_h$ is an isomorphism, and is identified on sections with the product-of-germs map just cited. The product is the direct sum since $P_y$ is finite. Apply this degreewise to a representative of $v_e^*L_n$, using exactness from Step 2 and, as in Step 7, [lem-sc-derived-adjunction-from-underived] to read the derived etale counit degreewise; then Step 7 transports this isomorphism to $r_n$. Thus $r_n$ is a quasi-isomorphism as a sheaf-complex map. If $P_y$ is empty, the same stalk formula has zero product in abelian groups, so the map to the zero complex is still a quasi-isomorphism.",
+   "uses": [
+    "lem-weil-pbc-finite-stalk-formula-restriction",
+    "lem-sc-derived-adjunction-from-underived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03QP (proposition-finite-higher-direct-image-zero), 03QT (theorem-equivalence-sheaves-point), 03QU (lemma-compare-cohomology-point)"
+   }
+  },
+  {
+   "text": "The formulas in Steps 3-4 commute with every map of representatives: for a sheaf map $u$, $u(m|_\\phi)=u(m)|_\\phi$, and this equality holds in every degree. For a quasi-isomorphism $u:Q\\to Q'$ between flat-term K-flat representatives, [lem-pur-change-of-rings-kflat-quasi-iso] makes each $u\\otimes(A_n)_X$ a quasi-isomorphism. Step 2 and exact scalar restriction [lem-weil-restriction-of-scalars-exact] therefore make all three induced tower maps levelwise quasi-isomorphisms. The same constructions preserve chain homotopies, since they are additive termwise functors. To justify passage from representatives to all derived morphisms, [lem-pc-kflat-resolution] gives replacements, and [lem-pur-kflat-map-factorization] factors a map from a K-flat complex through a K-flat resolution of its target up to chain homotopy, retaining flat terms. Hence roofs may be computed with flat-term K-flat vertices, and two choices are compared after such refinements. Applying the strict naturality identities to the roofs and inverting their quasi-isomorphisms gives the same maps for every choice. Equivalently use the natural-transformation part of [lem-weil-pbc-localization-universal-property]. This proves naturality and representative independence in the derived categories of coefficient systems.",
+   "uses": [
+    "lem-pur-change-of-rings-kflat-quasi-iso",
+    "lem-weil-restriction-of-scalars-exact",
+    "lem-pc-kflat-resolution",
+    "lem-pur-kflat-map-factorization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 06YT (lemma-derived-tor-quasi-isomorphism-other-side); categories.tex Tags 04VG/04VK for localization and its natural transformations"
+   }
+  },
+  {
+   "text": "In the abelian category of inverse systems of $R_s$-module sheaves, kernels, images and cokernels are computed levelwise: the transition on each kernel is the restriction of the given transition, and the transition on a cokernel is induced by its quotient universal property. Thus the cohomology of a complex of systems is also computed levelwise. Steps 6 and 8 say that both strict tower maps induce isomorphisms on this cohomology at every level; exact restriction of scalars preserves those assertions. By the definition of the derived category [def-weil-abstract-derived-category], they become isomorphisms in the derived category of systems. Applying exact point sections [lem-weil-point-proetale-sections-exact] also shows that every evaluated $b_n$ and $r_n$ is a quasi-isomorphism, with precisely the etale section and point-restriction interpretations established in Steps 6-8.",
+   "uses": [
+    "lem-weil-restriction-of-scalars-exact",
+    "def-weil-abstract-derived-category",
+    "lem-weil-point-proetale-sections-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Definition 05RU (definition-derived-category); levelwise kernels and cokernels in the category of systems; proetale.tex Tags 0982/098H for exact point sections"
+   }
+  },
+  {
+   "text": "Finally use the strict Roos model $\\operatorname{Cone}(1-s)[-1]$ in [def-pur-integral-derived-operations]. By [lem-weil-proetale-countable-products-exact, lem-weil-derived-limit-existence], the termwise products represent the derived products and their cohomology is the product of the cohomologies. Therefore the product of either family of levelwise quasi-isomorphisms is a quasi-isomorphism. The strict commuting squares of Step 4 give a square with the two $1-s$ maps, hence an actual map of their cone complexes. In the associated cone triangles the maps on the two product terms are isomorphisms in the derived category, so the cone map is an isomorphism as well (or apply the cohomology long exact sequences and the five lemma). Thus both total derived inverse-limit maps are isomorphisms. This argument uses the chosen strict systems; it requires no choice of a cone map from a bare morphism of towers in a triangulated category.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-derived-limit-existence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Definition 08TC (definition-derived-limit); exact-product Roos model; Bhatt-Scholze Proposition 3.1.9"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-morphism-permanence",
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-finite-proper",
+  "pqf-lem-lft-fp-locnoeth",
+  "lem-weil-pbc-finite-stalk-formula-restriction",
+  "lem-zl-finite-fp-proetale-pushforward-exact",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "def-pur-integral-derived-operations",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "def-weil-proetale-inverse-image",
+  "def-weil-proetale-module-direct-image",
+  "def-weil-derived-complete-integral-detailed",
+  "sk-thm-pe-constructible-comparison",
+  "lem-weil-pbc-discrete-exchange-site-comparison",
+  "lemma-weil-pbc-finite-exchange",
+  "sk-thm-pe-direct-image-comparison",
+  "lem-pe-direct-image-mate-compatibility",
+  "lem-pe-inverse-image-comparison-coherence",
+  "lem-pur-change-of-rings-kflat-quasi-iso",
+  "lem-weil-restriction-of-scalars-exact",
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-map-factorization",
+  "lem-weil-pbc-localization-universal-property",
+  "def-weil-abstract-derived-category",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-derived-limit-existence",
+  "lem-pur-exact-derived-mate",
+  "lem-sc-derived-adjunction-from-underived",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0959 and 03QP for finite exchange and germs; proetale.tex Tags 09A8, 09A6 and 09AL; explicit strict counit/reduction assembly and derived-system descent written by NS. Partial stage-3 proof by X2, 2026-10-25: finitePoints uses the existing geometric-fibre finite instance; push_additive uses preservation of binary products by the right adjoint; pointSum_additive uses the product projections; comparisonCounit uses the existing iterated mate identities; transitionSquares uses degreewise naturality; etGerm_isIso uses the initial identity neighbourhood. The other stated theorem proofs and their dependency plan remain pending. The Step 8 helper now removes lem-exc-etale-sheaves-gsets-point and lem-weil-pbc-geometric-point-cohomology from the planned dependencies: its actual germ proof uses the initial identity neighbourhood directly. Stage-3 continuation by X7, 2026-10-25: pushExact uses vertical-slice local surjectivity, the existing finite-pushforward exactness theorem for abelian sheaves, and exactness of the module-sheaf forgetful functor. No new statements or holes are introduced; the remaining seven theorem proofs retain their plan."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite morphism geometric fibre base change counit restriction maps form compatible isomorphisms of coefficient reduction towers",
+   "results": "[leanfinder] OK 8 hit(s); RingHom.finite_isStableUnderBaseChange; RingHom.finiteType_isStableUnderBaseChange; AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo; Ideal.fiberIsoOfBijectiveResidueField; Ideal.comap_fiberIsoOfBijectiveResidueField_apply; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd; AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst. Topological stalkPushforward and open-immersion structure-sheaf counits do not give the finite etale/pro-etale exchange and counit maps as compatible coefficient systems.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"pushforward\"",
+   "results": "[loogle] OK 12 hit(s); TopCat.Presheaf.stalkPushforward; TopCat.Presheaf.stalkPushforward.stalkPushforward_iso_of_isInducing; TopCat.Presheaf.stalkPushforward.id; TopCat.Presheaf.stalkSpecializes_stalkPushforward; TopCat.Presheaf.stalkPushforward_germ; TopCat.Presheaf.stalkSpecializes_stalkPushforward_assoc; TopCat.Presheaf.stalkPushforward.comp; TopCat.Presheaf.stalkPushforward_germ_assoc; TopCat.Presheaf.pullbackPushforwardAdjunction_unit_app_app_germToPullbackStalk; TopCat.Presheaf.pullbackPushforwardAdjunction_unit_app_app_germToPullbackStalk_assoc; TopCat.Presheaf.pullbackPushforwardAdjunction_unit_pullback_map_germToPullbackStalk; TopCat.Presheaf.pullbackPushforwardAdjunction_unit_pullback_map_germToPullbackStalk_assoc. Topological stalkPushforward and open-immersion structure-sheaf counits do not give the finite etale/pro-etale exchange and counit maps as compatible coefficient systems.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*pushforward|pushforward.*stalk|finite.*baseChange",
+   "results": "[grep] OK 25 hit(s); Mathlib/RingTheory/Finiteness/Descent.lean:113; Mathlib/RingTheory/RingHom/QuasiFinite.lean:61; Mathlib/RingTheory/RingHom/FiniteType.lean:51; Mathlib/RingTheory/RingHom/FiniteType.lean:61; Mathlib/RingTheory/RingHom/FinitePresentation.lean:38; Mathlib/RingTheory/RingHom/FinitePresentation.lean:48; Mathlib/RingTheory/RingHom/Finite.lean:47; Mathlib/RingTheory/RingHom/Smooth.lean:113; Mathlib/RingTheory/QuasiFinite/Basic.lean:361; Mathlib/RingTheory/QuasiFinite/Basic.lean:525; Mathlib/RingTheory/QuasiFinite/Basic.lean:559; Mathlib/RingTheory/QuasiFinite/Weakly.lean:167; Mathlib/RingTheory/QuasiFinite/Weakly.lean:192; Mathlib/RingTheory/ZariskisMainTheorem.lean:397; Mathlib/RingTheory/FiniteStability.lean:59; Mathlib/RingTheory/Etale/Finite.lean:103; Mathlib/RingTheory/Etale/Finite.lean:109; Mathlib/RingTheory/Etale/Finite.lean:134; Mathlib/RingTheory/Etale/Finite.lean:136; Mathlib/RingTheory/Etale/Finite.lean:153; Mathlib/RingTheory/Extension/Presentation/Submersive.lean:404; Mathlib/RingTheory/EssentialFiniteness.lean:168; Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean:211; Mathlib/AlgebraicGeometry/Spec.lean:334; Mathlib/AlgebraicGeometry/Spec.lean:336. Topological stalkPushforward and open-immersion structure-sheaf counits do not give the finite etale/pro-etale exchange and counit maps as compatible coefficient systems.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite morphism geometric fibre base change counit restriction maps form compatible isomorphisms of coefficient reduction towers",
+   "results": "[leansearch] OK 8 hit(s); ModuleCat.RestrictionCoextensionAdj.counit'; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app; AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction; AlgebraicGeometry.IsFinite.instMorphismRestrict; AlgebraicGeometry.IsFinite.recOn; AlgebraicGeometry.IsFinite. Topological stalkPushforward and open-immersion structure-sheaf counits do not give the finite etale/pro-etale exchange and counit maps as compatible coefficient systems.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical etale proetale finite exchange and germ maps commute with quotient transition maps",
+   "results": "[leansearch] OK 8 hit(s); AlgebraicGeometry.Scheme.Hom.germ_stalkMap_assoc; AlgebraicGeometry.Scheme.stalkMap_germ_assoc; AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_hom_app; AlgebraicGeometry.Scheme.stalkMap_germ; TopCat.Presheaf.stalkPushforward_germ; AlgebraicGeometry.LocallyRingedSpace.stalkMap_germ; TopCat.Presheaf.stalkFunctor_map_germ; AlgebraicGeometry.Scheme.Hom.germ_stalkMap. Topological stalkPushforward and open-immersion structure-sheaf counits do not give the finite etale/pro-etale exchange and counit maps as compatible coefficient systems.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite morphism etale proetale base change counit germ maps commute with coefficient quotient towers",
+   "results": "Actual msearch result: 8 hits; StandardEtalePair.HasMap.map, StandardEtalePair.homEquiv_symm_apply, StandardEtalePresentation.toSubmersivePresentation_toPreSubmersivePresentation_toPresentation, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, StandardEtalePresentation.toPresentation_algebra_algebraMap_apply, StandardEtalePair.lift, Algebra.Etale.comp, StandardEtalePair.homEquiv_apply_coe.  The hits concern topological/structure-sheaf stalk maps, scalar adjunctions, or finite algebra maps, and do not assert the finite etale/pro-etale strict-tower statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale.*(baseChange|counit)|finite.*stalk|stalk.*finite",
+   "results": "Actual msearch result: 25 hits; Mathlib/Topology/Sheaves/Abelian.lean, Mathlib/Topology/Sheaves/Abelian.lean, Mathlib/Topology/Sheaves/Abelian.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Properties.lean.  The hits concern topological/structure-sheaf stalk maps, scalar adjunctions, or finite algebra maps, and do not assert the finite etale/pro-etale strict-tower statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Counit restriction and finite base change form quasi-isomorphisms of strict coefficient reduction towers",
+   "results": "Actual msearch result: 8 hits; ModuleCat.RestrictionCoextensionAdj.counit', Rep.coindResAdjunction_counit_app, ModuleCat.ExtendRestrictScalarsAdj.counit, Condensed.profiniteSolidCounit, Rep.resIndAdjunction_counit_app, RingHom.QuasiFinite.isStableUnderBaseChange, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, Algebra.QuasiFinite.of_restrictScalars.  The hits concern topological/structure-sheaf stalk maps, scalar adjunctions, or finite algebra maps, and do not assert the finite etale/pro-etale strict-tower statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"pushforward\"",
+   "results": "Actual msearch result: 12 hits; TopCat.Presheaf.stalkPushforward, TopCat.Presheaf.stalkPushforward.stalkPushforward_iso_of_isInducing, TopCat.Presheaf.stalkPushforward.id, TopCat.Presheaf.stalkSpecializes_stalkPushforward, TopCat.Presheaf.stalkPushforward_germ, TopCat.Presheaf.stalkSpecializes_stalkPushforward_assoc, TopCat.Presheaf.stalkPushforward.comp, TopCat.Presheaf.stalkPushforward_germ_assoc.  The hits concern topological/structure-sheaf stalk maps, scalar adjunctions, or finite algebra maps, and do not assert the finite etale/pro-etale strict-tower statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical etale proetale finite exchange and germ maps commute with quotient transition maps",
+   "results": "Actual msearch result: 8 hits; AlgebraicGeometry.Scheme.Hom.germ_stalkMap_assoc, AlgebraicGeometry.Scheme.stalkMap_germ_assoc, AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_hom_app, AlgebraicGeometry.Scheme.stalkMap_germ, TopCat.Presheaf.stalkPushforward_germ, AlgebraicGeometry.LocallyRingedSpace.stalkMap_germ, TopCat.Presheaf.stalkFunctor_map_germ, AlgebraicGeometry.Scheme.Hom.germ_stalkMap.  The hits concern topological/structure-sheaf stalk maps, scalar adjunctions, or finite algebra maps, and do not assert the finite etale/pro-etale strict-tower statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-finite-adic-direct-image",
+  "date": "2026-10-22",
+  "group": "Q03"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "blueprint": {
+  "from": {
+   "node": "lem-zl-finite-pushforward",
+   "place": "lem-zl-finite-pushforward.proof.md, opening exactness and finite geometric stalk formula; strict finite-level exchange and counit restrictions needed to lift that formula to integral reduction towers.",
+   "via": [
+    "lem-zl-finite-adic-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-zl-finite-counit-restriction-towers",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Constructed the strict counit maps and quotient-compatibility equations explicitly, used existing finite-fp exactness and counit-normalized site comparisons only on bounded constructible derived reductions, proved the finite product-of-germs comparison and descended through K-flat representatives and strict Roos complexes. No new nodes and no Lean changes.",
+  "blueprint": "Realizes the opening exact finite pushforward and geometric-stalk formula in the main-20261015 proof of lem-zl-finite-pushforward; this item is the strict finite-system input to the integral proof of lem-zl-finite-adic-direct-image. The unit weight-filtration and Frobenius route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-stalk-formula-restriction",
+    "why": "The finite etale stalk theorem with its germ components is the existing geometric restriction tool."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-direct-image-exact",
+    "why": "Ordinary etale finite-image exactness supplies the finite-level computation, not a change of the weight argument."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Generic exact-functor, scalar-restriction, K-flat-resolution or derived-limit infrastructure for strict coefficient systems; no step of this unit replaces this categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic exact-functor, scalar-restriction, K-flat-resolution or derived-limit infrastructure for strict coefficient systems; no step of this unit replaces this categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic exact-functor, scalar-restriction, K-flat-resolution or derived-limit infrastructure for strict coefficient systems; no step of this unit replaces this categorical tool."
+   },
+   {
+    "node": "sk-thm-pe-constructible-comparison",
+    "why": "Constructible reductions have etale origin; no coefficient-category identification is taken from a definition."
+   },
+   {
+    "node": "lem-weil-pbc-discrete-exchange-site-comparison",
+    "why": "The canonical discrete ringed-topos mate square identifies the actual exchange arrow; this unit has no site comparison theorem."
+   },
+   {
+    "node": "sk-thm-pe-direct-image-comparison",
+    "why": "The qcqs direct-image site comparison is used only to normalize finite counit arrows."
+   },
+   {
+    "node": "lem-pe-direct-image-mate-compatibility",
+    "why": "The explicit counit mate identity identifies the components of the restriction map."
+   },
+   {
+    "node": "lem-pe-inverse-image-comparison-coherence",
+    "why": "Identity and composition coherence identify hi_x=id and vi_x=x in the counit square."
+   },
+   {
+    "node": "lem-exc-etale-sheaves-gsets-point",
+    "why": "The field-site classification is used only for the trivial Galois group over algebraically closed k."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-point-cohomology",
+    "why": "The actual germ map identifies point sections with the etale identity stalk."
+   },
+   {
+    "node": "lem-pur-change-of-rings-kflat-quasi-iso",
+    "why": "Generic exact-functor, scalar-restriction, K-flat-resolution or derived-limit infrastructure for strict coefficient systems; no step of this unit replaces this categorical tool."
+   },
+   {
+    "node": "lem-weil-restriction-of-scalars-exact",
+    "why": "Generic exact-functor, scalar-restriction, K-flat-resolution or derived-limit infrastructure for strict coefficient systems; no step of this unit replaces this categorical tool."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic exact-functor, scalar-restriction, K-flat-resolution or derived-limit infrastructure for strict coefficient systems; no step of this unit replaces this categorical tool."
+   },
+   {
+    "node": "lem-pur-kflat-map-factorization",
+    "why": "Generic exact-functor, scalar-restriction, K-flat-resolution or derived-limit infrastructure for strict coefficient systems; no step of this unit replaces this categorical tool."
+   },
+   {
+    "node": "lem-weil-point-proetale-sections-exact",
+    "why": "Generic exact-functor, scalar-restriction, K-flat-resolution or derived-limit infrastructure for strict coefficient systems; no step of this unit replaces this categorical tool."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Generic exact-functor, scalar-restriction, K-flat-resolution or derived-limit infrastructure for strict coefficient systems; no step of this unit replaces this categorical tool."
+   },
+   {
+    "node": "lem-pur-exact-derived-mate",
+    "why": "Generic exact-adjunction mate formula (maintainer FIX): identifies the derived pro-etale exchange with the termwise exchange b_n; no step of this unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-stalk-formula-restriction",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "sk-thm-pe-constructible-comparison",
+  "lem-weil-pbc-discrete-exchange-site-comparison",
+  "sk-thm-pe-direct-image-comparison",
+  "lem-pe-direct-image-mate-compatibility",
+  "lem-pe-inverse-image-comparison-coherence",
+  "lem-pur-change-of-rings-kflat-quasi-iso",
+  "lem-weil-restriction-of-scalars-exact",
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-map-factorization",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-pur-exact-derived-mate"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NS-92b7fd687",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-92b7fd687 (reviewer sub-agent of L); spot-checked: First stage-1 split of the item: 11 steps, no new nodes, statement byte-identical to base, no repair note, no SGA citation. Sources checked: proetale 09A8 lemma-finite (finite and finitely presented f_* exact), 09AL lemma-compare-constructible-derived, 09A6 lemma-morphism-comparison, and etale-cohomology 0959 (finite base change), against the main-20261015 lem-zl-finite-pushforward proof (exact g_* plus the finite stalk formula). Duplicate check: integral-finite-exchange-comparison, cbc strict open exchange, coef-finite-counit-restriction-square and intrinsic-finite-exchange-rectangle; none states this. Step checks: Step 1 gets finite, locally finitely presented and qcqs for f and h through Y locally Noetherian, and finiteness of P_y. Step 2 is exactness on both sites. Step 3 is the colimit counit formula. Step 4 gives the strict transition squares through t(a(m|φ))=ā(t(m)|φ). Step 5 gives étale origin (A_n finite, X qcqs). Steps 7-8: the counit mate equation, i_x^* and the identity/composition coherences; then the finite stalk formula at id_s, trivial Galois group and point sections. Step 9: K-flat change of rings plus roof refinement. Steps 10-11: exact point sections and the Roos cone with exact products. Edge cases tested: empty fibre, f=id, nonreduced fibre, n=1, K=0. Fault (C3/E5): Steps 6-8 identified the termwise exchange b_n and the termwise counits with the derived e^p and derived counits of lem-weil-pbc-discrete-exchange-site-comparison and lem-pe-direct-image-mate-compatibility. The only justification was 'derived functors are termwise', which says nothing about units, counits or mates. Fixed by citing lem-pur-exact-derived-mate in Step 6 (L=f_n^*, L'=h_n^*, G=y_n^*, H=v_n^*, with the units invertible by exactness) and lem-sc-derived-adjunction-from-underived in Steps 7-8. Both closures are generic and contain no trf node; the mate node was added to tool_uses. The worker-written tool_uses entries are generic infrastructure and are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteCounitRestrictionTowers",
+  "declaration": "WeilConjectures.FiniteCounitTowers.finiteCounitRestrictionTowers",
+  "declarations": [
+   "WeilConjectures.FiniteCounitTowers.pull",
+   "WeilConjectures.FiniteCounitTowers.push",
+   "WeilConjectures.FiniteCounitTowers.adj",
+   "WeilConjectures.FiniteCounitTowers.Points",
+   "WeilConjectures.FiniteCounitTowers.lift",
+   "WeilConjectures.FiniteCounitTowers.square",
+   "WeilConjectures.FiniteCounitTowers.exchange",
+   "WeilConjectures.FiniteCounitTowers.pointRestriction",
+   "WeilConjectures.FiniteCounitTowers.component",
+   "WeilConjectures.FiniteCounitTowers.pointSum",
+   "WeilConjectures.FiniteCounitTowers.restriction",
+   "WeilConjectures.FiniteCounitTowers.finitePoints",
+   "WeilConjectures.FiniteCounitTowers.pushExact",
+   "WeilConjectures.FiniteCounitTowers.push_additive",
+   "WeilConjectures.FiniteCounitTowers.pushAdditive",
+   "WeilConjectures.FiniteCounitTowers.B",
+   "WeilConjectures.FiniteCounitTowers.C",
+   "WeilConjectures.FiniteCounitTowers.pointSum_additive",
+   "WeilConjectures.FiniteCounitTowers.pointSumAdditive",
+   "WeilConjectures.FiniteCounitTowers.D",
+   "WeilConjectures.FiniteCounitTowers.b",
+   "WeilConjectures.FiniteCounitTowers.r",
+   "WeilConjectures.FiniteCounitTowers.level",
+   "WeilConjectures.FiniteCounitTowers.sections",
+   "WeilConjectures.FiniteCounitTowers.restricted",
+   "WeilConjectures.FiniteCounitTowers.Ring",
+   "WeilConjectures.FiniteCounitTowers.fixed",
+   "WeilConjectures.FiniteCounitTowers.fixedEvaluation",
+   "WeilConjectures.FiniteCounitTowers.fixedDirect_eq",
+   "WeilConjectures.FiniteCounitTowers.fixedPull_existsUnique",
+   "WeilConjectures.FiniteCounitTowers.fixedPull",
+   "WeilConjectures.FiniteCounitTowers.proExchange",
+   "WeilConjectures.FiniteCounitTowers.proComponent",
+   "WeilConjectures.FiniteCounitTowers.etExchange",
+   "WeilConjectures.FiniteCounitTowers.etComponent",
+   "WeilConjectures.FiniteCounitTowers.fixedExchange",
+   "WeilConjectures.FiniteCounitTowers.fixedComponent",
+   "WeilConjectures.FiniteCounitTowers.comparisonCounit",
+   "WeilConjectures.FiniteCounitTowers.comparisonArrows",
+   "WeilConjectures.FiniteCounitTowers.DirectExact",
+   "WeilConjectures.FiniteCounitTowers.transitionSquares",
+   "WeilConjectures.FiniteCounitTowers.etGerm",
+   "WeilConjectures.FiniteCounitTowers.etGerm_isIso",
+   "WeilConjectures.FiniteCounitTowers.etComponent_stalk",
+   "WeilConjectures.FiniteCounitTowers.Descent",
+   "WeilConjectures.FiniteCounitTowers.finiteCounitRestrictionTowers"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteCounitRestrictionTowers.lean",
+  "statement": "theorem finiteCounitRestrictionTowers (F : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ F.p) (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of F.k)) (aY : Y ⟶ Spec (.of F.k)) [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX] [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY] (f : X ⟶ Y) [IsFinite f] (hf : f ≫ aY = aX) (y : Spec (.of F.k) ⟶ Y) (K : DerivedCategory (scalarReductionSource l E X)) (hK : sfIntegralConstructible l E X K) (Q : CochainComplex (scalarReductionSource l E X) ℤ) (hQ : CochainComplex.IsKFlatIndependentCoefficients (J := Scheme.ProEt.topology X) (R := completedIntegralCommRingSheafUnrestricted l E X) Q) (hflat : ∀ j : ℤ, SheafOfModules.IsFlatOnSite (J := Scheme.ProEt.topology X) (R := completedIntegralCommRingSheafUnrestricted l E X) (Q.X j)) (eQ : DerivedCategory.Q.obj Q ≅ K) : Finite (Points f y) ∧ (∀ n : ℕ, DirectExact l E f n ∧ DirectExact l E (pullback.snd f y) n) ∧ Descent l E f y ∧ (∃ (T : CochainComplex (coefficientSequenceModules l E X) ℤ) (κ : ∀ n : ℕ, (level l E X n).obj T ≅ ((scalarReductionExtension l E X n).mapHomologicalComplex (.up ℤ)).obj Q) (eT : (coefficientDerivedSystemEvaluationCalculus l E X).choose.reduction.obj (DerivedCategory.Q.obj Q) ≅ DerivedCategory.Q.obj T), CoefficientReductionPresentation l E X (CoefficientDerivedSystemFibers.toCoefficientDerivedSystemReduction (CoefficientDerivedSystemCalculus.toCoefficientDerivedSystemFibers (coefficientDerivedSystemEvaluationCalculus l E X).choose)) Q hQ T eT κ) ∧ (∀ (T : CochainComplex (coefficientSequenceModules l E X) ℤ) (κ : ∀ n : ℕ, (level l E X n).obj T ≅ ((scalarReductionExtension l E X n).mapHomologicalComplex (.up ℤ)).obj Q) (eT : (coefficientDerivedSystemEvaluationCalculus l E X).choose.reduction.obj (DerivedCategory.Q.obj Q) ≅ DerivedCategory.Q.obj T), CoefficientReductionPresentation l E X (CoefficientDerivedSystemFibers.toCoefficientDerivedSystemReduction (CoefficientDerivedSystemCalculus.toCoefficientDerivedSystemFibers (coefficientDerivedSystemEvaluationCalculus l E X).choose)) Q hQ T eT κ → (∀ n : ℕ, QuasiIso ((level l E (Spec (.of F.k)) n).map ((b l E f y).app T)) ∧ QuasiIso ((level l E (Spec (.of F.k)) n).map ((r l E f y).app T)) ∧ QuasiIso ((sections l E F.k n).map ((level l E (Spec (.of F.k)) n).map ((b l E f y).app T))) ∧ QuasiIso ((sections l E F.k n).map ((level l E (Spec (.of F.k)) n).map ((r l E f y).app T)))) ∧ QuasiIso ((b l E f y).app T) ∧ QuasiIso ((r l E f y).app T) ∧ QuasiIso ((restricted l E (Spec (.of F.k))).map ((b l E f y).app T)) ∧ QuasiIso ((restricted l E (Spec (.of F.k))).map ((r l E f y).app T)) ∧ IsIso (DerivedCategory.Q.map ((b l E f y).app T)) ∧ IsIso (DerivedCategory.Q.map ((r l E f y).app T)) ∧ IsIso (DerivedCategory.Q.map ((restricted l E (Spec (.of F.k))).map ((b l E f y).app T))) ∧ IsIso (DerivedCategory.Q.map ((restricted l E (Spec (.of F.k))).map ((r l E f y).app T))) ∧ (IsEmpty (Points f y) → IsZero ((D l E f y).obj T)) ∧ IsIso ((coefficientSequenceLimit l E (Spec (.of F.k))).map (DerivedCategory.Q.map ((b l E f y).app T))) ∧ IsIso ((coefficientSequenceLimit l E (Spec (.of F.k))).map (DerivedCategory.Q.map ((r l E f y).app T))))",
+  "branch": "newtargets-dag",
+  "by": "Q57",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Natural chain transformations on the actual coefficient sequence site; fixed-level evaluation and site-comparison arrows are normalized by the ordinary adjunction unit and counit. Finite products represent the canonical finite direct sums. Positive level n is exponent n+1. All helpers belong to this node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ee2c1bccd",
+  "group": "Q57",
+  "result": "pass",
+  "note": "Read node, 22 stmt_deps, module (735 lines), report, and the upstream integralComparisonSequence*, CoefficientReductionPresentation, ProEtale/Etale upper/lower star, comparison mates and baseChangeMap. Clause-by-clause match: l≠p, E finite over Q_l with level n = exponent n+1, separated finite-type X,Y over k, f finite with hf, y : Spec k → Y, K constructible with flat K-flat Q and eQ; strict quotients via CoefficientReductionPresentation (∃ and ∀ T); exchange = mateEquiv of compositors pinned to the same ofIsRightAdjoint adjunction; point restriction = i_x^* of the h-counit with lift_fst/lift_snd; Pi.lift into a finite product (biproduct), empty case stated; transitionSquares as chain-map equalities for all n≤m; Descent gives derived natural transformations with factorization equations (not vacuous: B,C,D termwise exact); arrow-level comparison via fixedDirect_eq (same Over.pullback functor), unit-normalized ∃! fixedPull, fixedExchange/fixedComponent, comparisonCounit/comparisonArrows (both comparisons are mates of lowerStarCompComparisonLowerStarIso), etGerm_isIso, etComponent_stalk = Etale.stalkRestrict; DirectExact for f and h; level/section/system/restricted QuasiIso and IsIso, coefficientSequenceLimit IsIso. Edge cases: empty fibre, nonreduced fibre, f=id, n=0, K=0, universes (single u from sfIntegralConstructible, site u+1/u). Gates: no hollow def, 14 sorry all theorem proofs, docstrings with source and blueprint, lines ≤100, statement verbatim, declarations list equals file, 7 added stmt_deps all landed def nodes (no theorem node). No compile (no change; worker 17-22 s clean). Advisories: Points duplicates Scheme.Hom.GeometricFiber (def-weil-pbc-geometric-fibre) as an inline reducible copy generalized to any s, node defines P_y inline → note only; calculus chosen from theorem lem-coef-derived-system-evaluation-calculus as in ≥10 landed modules; upstream framework owners outside stmt_deps; docstring merges proof steps 10-11."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X7",
+  "result": "pass",
+  "landing": "20261025T164747-L-1075390",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,129 @@
+{
+ "id": "lem-pur-system-singleton-scalar-representative",
+ "kind": "statement",
+ "title": "Normalized singleton scalar comparison on cochain representatives",
+ "statement": "For an essentially small site C, inverse ring-sheaf sequences B,D, natural ring map a : B → D, normalized scalar models S with coherence T, and sequence scalar model A, use the fixed ordinary and derived singleton/scalar comparisons [def-pur-system-singleton-scalar-comparisons]. For every n and every unbounded B_n-complex P, d_n(Q(P)) followed by the target composite universal comparison equals the source composite universal comparison followed by localization of the ordinary singleton scalar comparison. No K-flatness hypothesis is required for this equality (it is required only for invertibility of its universal comparisons).",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Parent Steps 7--8: Stacks 0FND, 09T5 and 0D6D, with Zheng Construction 4.1."
+ },
+ "stmt_deps": [
+  "def-pur-system-singleton-scalar-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Transport the normalized singleton transpose across the exact sequence equivalence and its canonical derived compositor, retaining the ordinary adjunction. Compose this normalized transpose with scalar transpose on each side of the evaluation/restriction square. The normalizedAdjunction_composition identity gives the transpose formulas for both composite universal comparisons.",
+   "uses": [
+    "lem-pur-system-single-derived-extension",
+    "lem-pur-system-ringed-sequence-site",
+    "lem-pur-normalized-adjunction-composition",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In each degree the ordinary left-adjoint uniqueness map transposes to the target composite unit. The right square is the identity on sections; its exact localization satisfies the corresponding equation with the inverse factorization comparisons. Apply normalizedAdjunction_uniqueness to these two normalized transpose formulas and this right comparison equation. Identify the ordinary uniqueness map on complexes degreewise with NatIso.mapHomologicalComplex. The resulting equality is exactly the asserted equation for all P.",
+   "uses": [
+    "lem-pur-normalized-adjunction-composition",
+    "lem-pur-system-ordinary-single-extension",
+    "lem-pur-system-scalar-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-system-single-derived-extension",
+  "lem-pur-system-ringed-sequence-site",
+  "lem-pur-normalized-adjunction-composition",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-pur-system-ordinary-single-extension",
+  "lem-pur-system-scalar-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Parent Steps 7--8: Stacks 0FND, 09T5 and 0D6D, with Zheng Construction 4.1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Uniqueness of left adjoints and composition of normalized derived adjunctions",
+   "results": "CategoryTheory.Adjunction.leftAdjointUniq_trans_app_assoc; CategoryTheory.Adjunction.leftAdjointUniq_trans_assoc; CategoryTheory.Adjunction.homEquiv_leftAdjointUniq_hom_app; CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit_assoc; CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app; CategoryTheory.Adjunction.leftAdjointUniq_inv_app; CategoryTheory.Adjunction.unit_leftAdjointUniq_hom; CategoryTheory.Adjunction.leftAdjointUniq",
+   "date": "2026-10-26",
+   "verdict": "Generic adjoint uniqueness is available but not the normalized representative comparison for the transported singleton."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized derived adjunction comparison commutes with the ordinary comparison on cochain complexes",
+   "results": "CategoryTheory.Adjunction.derivedε_fac_app; CategoryTheory.Adjunction.derivedη_fac_app; CategoryTheory.Adjunction.derivedε_fac_app_assoc; CategoryTheory.Adjunction.derivedη_fac_app_assoc; CategoryTheory.Adjunction.derivedε; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.Adjunction.derived'_unit; CategoryTheory.Adjunction.derived_unit",
+   "date": "2026-10-26",
+   "verdict": "Generic derived units and counits are available; the normalized composition theorem in Sheaf still needs the transported singleton normalization and right square."
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointUniq|mapDerivedCategoryFactors|IsKFlat",
+   "results": "Mathlib/CategoryTheory/Sites/ConstantSheaf.lean; Mathlib/CategoryTheory/Sites/ConstantSheaf.lean; Mathlib/CategoryTheory/Sites/LeftExact.lean; Mathlib/CategoryTheory/Sites/LeftExact.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean",
+   "date": "2026-10-26",
+   "verdict": "Mathlib supplies the generic comparison factors; rg in Sheaf and WeilConjectures found normalizedAdjunction_uniqueness, not the transported singleton equation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SystemSingletonScalarExtension",
+  "date": "2026-10-26",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Proof Step 2 of thm-pur-rational-and-qbar-purity: independence of finite coefficient extension; sk-thm-sf-compatibility clause (7). Extracted from quotient-diagram-projection-evaluation, old proof step 4, compose the singleton adjunction with scalar extension and compare the actual tensor transposes. This node extracts Parent Steps 7--8: Stacks 0FND, 09T5 and 0D6D, with Zheng Construction 4.1.",
+   "via": [
+    "lem-pur-system-singleton-scalar-extension",
+    "lem-pur-quotient-diagram-projection-evaluation",
+    "lem-pur-compact-support-completed-projection-coherence",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SystemSingletonScalarRepresentative",
+  "file": "lean/Sheaf/CategoryTheory/SystemSingletonScalarRepresentative.lean",
+  "declaration": "SheafOfModules.singletonScalarDerivedIso_rep",
+  "declarations": [
+   "SheafOfModules.singletonScalarDerivedIso_rep"
+  ],
+  "statement": "theorem singletonScalarDerivedIso_rep (n : ℕ)\n    (P : CochainComplex (systemLevel B n) ℤ) :\n      (singletonScalarDerivedIso S T a A n).hom.app (DerivedCategory.Q.obj P) ≫\n          singletonScalarTargetComparison S T a n P =\n        singletonScalarSourceComparison S T a A n P ≫ DerivedCategory.Q.map\n          ((NatIso.mapHomologicalComplex (singletonScalarOrdinaryIso S T a A n)\n            (.up ℤ)).hom.app P)",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-8be55",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261026T102348-L-345827",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-8be55",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261026T102348-L-345827",
+  "kind": "interface",
+  "note": "independent cc review: item statement vs clone (identical); SystemSingletonScalarBasic vs the clone item's 18 constructions (verbatim except blueprint tags); 3 new sorry statements vs their nodes and library normalization lemmas; 3 direct importers compiled against delivered modules (all OK); axioms of singletonScalarExtension"
+ }
+}

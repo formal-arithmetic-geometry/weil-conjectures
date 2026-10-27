@@ -1,0 +1,138 @@
+{
+ "id": "lem-pur-proetale-signed-tensor-pullback-total",
+ "kind": "lemma",
+ "title": "Ordinary pro-etale pullback commutes with signed total exchange",
+ "statement": "Let $f:X\\to Y$ be a scheme morphism, $R$ a commutative-ring sheaf on the small pro-etale site of $Y$, $S$ one on that of $X$, and $c:f^{-1}R\\simeq S$. Use the normalized ordinary module pullback and total comparison $\\kappa_{P,Q}:\\operatorname{Tot}(f^*P\\otimes_S f^*Q)\\simeq f^*\\operatorname{Tot}(P\\otimes_R Q)$ of [def-sp-proetale-ordinary-tensor-pullback-total], and the signed total exchange $\\sigma$ of [def-pur-finite-pullback-tensor-braiding]. For arbitrary unbounded integer-indexed cochain complexes $P,Q$ of $R$-module sheaves, the termwise pullback $L$ satisfies: $L(\\sigma_{P,Q})$ followed by $\\kappa_{Q,P}^{-1}$ equals $\\kappa_{P,Q}^{-1}$ followed by $\\sigma_{LP,LQ}$. No K-flatness, flatness, boundedness, or finite coefficient hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product, final displayed total comparison; sites-modules.tex, Tag 03EL, ordinary pullback tensor comparison; more-algebra.tex, Tag 0FNG, item-flip-tensor-product."
+ },
+ "stmt_deps": [
+  "def-sp-proetale-ordinary-tensor-pullback-total",
+  "def-pur-finite-pullback-tensor-braiding"
+ ],
+ "proof": [
+  {
+   "text": "Take adjuncts of the two ordinary symmetry composites. The prescribed unit-section tensor formula and moduleTmul_braiding give the same flipped pair on every pure tensor. The sheafification adjunction and sectionwise tensor extensionality therefore identify these adjuncts, and hence the ordinary composites.",
+   "uses": [
+    "def-sp-proetale-ordinary-tensor-pullback-total",
+    "lem-pur-module-tensor-generator-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Test the total chain composites on each degree-n summand indexed by p+q=n. The definition of tensorPullbackTotalComponent and the proved native formula CochainComplex.Monoidal.ι_braiding_hom make both maps equal to the ordinary flipped composite times (p*q).negOnePow. Additivity transports this integer scalar through pullback. Use the ordinary symmetry equation, then coproduct and complex extensionality.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-finite-pullback-tensor-braiding",
+    "def-sp-proetale-ordinary-tensor-pullback-total"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The uniquely normalized signed exchange is the native complex braiding by pullbackTensorSignedTotal_eq. Substitute it into the total equation and cancel the two invertible total comparisons to obtain the stated inverse-direction square.",
+   "uses": [
+    "def-pur-finite-pullback-tensor-braiding",
+    "def-sp-proetale-ordinary-tensor-pullback-total"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-proetale-ordinary-tensor-pullback-total",
+  "lem-pur-module-tensor-generator-calculus",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-finite-pullback-tensor-braiding"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "W4",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4 total comparison and More on Algebra 0FNG Koszul exchange; explicit adjunct and tensor-summand calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An additive functor preserving tensor products commutes with the signed braiding on unbounded cochain complexes",
+   "results": "8 hits: CategoryTheory.Functor.Braided.toMonoidal, ModuleCat.MonoidalCategory.instBraidedSemimoduleCatFunctorEquivalenceSemimoduleCat, CategoryTheory.Monoidal.functorCategoryBraided, CategoryTheory.MonoidalCategory.tensorMonoidal, CategoryTheory.Functor.Braided.ofChosenFiniteProducts.congr_simp, CategoryTheory.Functor.LaxBraided.toLaxMonoidal, CategoryTheory.Functor.Braided, CategoryTheory.Functor.Braided.ofChosenFiniteProducts",
+   "date": "2026-10-26",
+   "verdict": "No matching theorem for the selected pro-etale total comparison. Use native tensor summand formulas and its prescribed ordinary unit normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tensor pullback comparison commutes with symmetry braiding on cochain complexes",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl, CategoryTheory.Over.μ_pullback_left_snd, CategoryTheory.ChosenPullbacksAlong.Over.tensorHom_left, SheafOfModules.conjugateEquiv_pullbackComp_inv, CategoryTheory.Over.tensorHom_left_snd, CategoryTheory.Limits.pullbackSymmetry_hom_comp_snd",
+   "date": "2026-10-26",
+   "verdict": "No matching theorem for the selected pro-etale total comparison. Use native tensor summand formulas and its prescribed ordinary unit normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorPullback.*braid|braid.*tensorPullback|mapBifunctor.*braid",
+   "results": "0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "No matching theorem for the selected pro-etale total comparison. Use native tensor summand formulas and its prescribed ordinary unit normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePullbackTensorSignedRepresentatives",
+  "date": "2026-10-26",
+  "group": "W4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "The clause \"These actions commute with finite reduction and scalar extension to Qlb\"; via lem-pur-derived-pullback-tensor-iso and def-pur-finite-pullback-tensor-comparison, using the fixed finite tensor/pullback comparison and its signed coherence. The signed chain-square step before localization.",
+   "via": [
+    "lem-pur-finite-pullback-tensor-signed-representatives",
+    "def-pur-finite-pullback-tensor-comparison",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleSignedTensorPullbackTotal",
+  "file": "lean/Sheaf/Paper/ProEtaleSignedTensorPullbackTotal.lean",
+  "declaration": "WeilConjectures.proEtaleSignedTensorPullbackTotal",
+  "statement": "theorem proEtaleSignedTensorPullbackTotal {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})\n    (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S)\n    (P Q : CochainComplex (proEtaleRingModules Y R) ℤ) :\n    let L := (proEtaleRingModulePullback f R S c).mapHomologicalComplex (.up ℤ)\n    L.map (pullbackTensorSignedTotal (ProEt.topology Y) R P Q).hom ≫\n        (proEtaleTensorPullbackTotalIso f R S c Q P).inv =\n      (proEtaleTensorPullbackTotalIso f R S c P Q).inv ≫\n        (pullbackTensorSignedTotal (ProEt.topology X) S (L.obj P) (L.obj Q)).hom",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261026T202949-L-3495292",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261026T202949-L-3495292",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,307 @@
+{
+ "id": "lem-sfb-proper-birational-surface-factorization",
+ "kind": "statement",
+ "title": "Point-blowup factorization of a proper birational surface morphism",
+ "statement": "Let $X$ and $Y$ be integral regular Noetherian schemes of dimension $2$ [def-pc-integral-scheme, def-weil-regular-scheme, pqf-def-locnoeth, def-kun-topological-krull-dimension], with Noetherian meaning locally Noetherian and quasi-compact. Let $f:X\\to Y$ be proper [def-weil-proper-morphism] and birational: there are dense open subschemes $V\\subseteq X$ and $U\\subseteq Y$ such that $f|_V$ factors through an isomorphism $V\\xrightarrow{\\sim}U$ [def-weil-open-immersion]. Then $f$ is a finite composition of blowups of reduced closed points [def-nagata-global-blowup]. A composition is understood up to isomorphism over $Y$; length zero is allowed, in which case $f$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tag 0C5R (resolve-lemma-proper-birational-regular-surfaces)."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-pc-integral-scheme",
+  "def-weil-regular-scheme",
+  "def-kun-topological-krull-dimension",
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion",
+  "def-nagata-global-blowup",
+  "def-trf-ordinary-resolution-rule"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-sfb-exceptional-curve-count] and put $r=|B(f)|$. Prove the assertion simultaneously for all proper birational morphisms of integral regular Noetherian surfaces by strong induction on $r$. The base $r=0$ says precisely that $f$ is an isomorphism, so the length-zero composition works. For the inductive step assume $r>0$ and the assertion for every such morphism with fewer contracted curves; choose $y\\in Y\\setminus U_f$. The same cited statement ensures that $y$ is closed and $\\dim\\mathcal O_{Y,y}=2$.",
+   "uses": [
+    "lem-sfb-exceptional-curve-count"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5R, first paragraph: induction on the number of curves in fibres, including the omitted finiteness and base-case details."
+   }
+  },
+  {
+   "text": "Blow up the reduced point $y$, obtaining $b:Y'\\to Y$. By [lem-sfb-regular-point-blowup-geometry], $Y'$ is integral regular Noetherian, $b$ is proper and is an isomorphism off $y$, and every closed point over $y$ has local dimension $2$. Thus $b$ is birational. It is surjective: its closed image contains the dense open $Y\\setminus\\{y\\}$. Hence its fibre over $y$ is nonempty and has a closed point. Every closed point of $Y'$ has local dimension at most $2$, by the cited bound over $y$ and the isomorphism elsewhere; one over $y$ has local dimension $2$. The chain definition of dimension [def-kun-topological-krull-dimension] therefore gives $\\dim Y'=2$. It remains to produce a lift $X\\to Y'$.",
+   "uses": [
+    "lem-sfb-regular-point-blowup-geometry",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5R, first paragraph and the point blowup used in the second paragraph."
+   }
+  },
+  {
+   "text": "Set $U=X\\setminus f^{-1}(y)$. This is dense because $f$ identifies dense opens and $y$ is a closed point of a surface. The inverse of $b$ away from $y$ defines a $Y$-morphism $U\\to Y'$. Apply [lem-sfb-surface-rational-map-point-resolution] with base $Y$ and proper target $Y'\\to Y$. Obtain a tower $X_n\\to\\cdots\\to X_0=X$ and a $Y$-morphism $h:X_n\\to Y'$. All its surfaces are integral regular Noetherian of dimension $2$; every centre lies over $y$. Choose a solution with $n$ minimal. Write $p_i:X_i\\to X$ for the partial composites. Each point blowup is proper by [lemma-nagata-blowup-proper], so all $p_i$ and $f p_i$ are proper by [lem-weil-pbc-proper-composition]. Each point blowup is an isomorphism over the complement of its centre by [thm-nagata-global-blowup-complement], and every centre lies outside the inverse image of $U$; hence every $p_i$ is an isomorphism over the dense open $U$, and so is $f p_i$ over the dense open where $f$ is an isomorphism. They are therefore birational. In particular they are surjective, their images being closed and dense. Since $b$ is separated, [lemma-nagata-proper-to-separated-target] applied over $Y$ shows $h$ is proper; it is birational by the common dense open where both $b$ and $f p_n$ are isomorphisms.",
+   "uses": [
+    "lem-sfb-surface-rational-map-point-resolution",
+    "lemma-nagata-blowup-proper",
+    "lem-weil-pbc-proper-composition",
+    "lemma-nagata-proper-to-separated-target",
+    "thm-nagata-global-blowup-complement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5R, second paragraph: resolve the rational lift by point blowups over the fibre."
+   }
+  },
+  {
+   "text": "Suppose $n>0$, put $a:X_n\\to X_{n-1}$, and denote its closed centre by $x$. Put $E=a^{-1}(x)$ and $F=b^{-1}(y)$. The morphism $a$ is proper by [lemma-nagata-blowup-proper] and an isomorphism over the dense open $X_{n-1}\\setminus\\{x\\}$ by [thm-nagata-global-blowup-complement], so its closed image is dense and $a$ is surjective; in particular $E$ is nonempty. As $x$ lies over $y$, the identity $b h=f p_n$ induces a morphism $v:E\\to F$ of the scheme-theoretic fibres. If $v(E)$ contains more than one point, apply [lem-sfb-point-exceptional-isomorphism-neighbourhood] to the two point blowups $a,b$ and the proper birational map $h$. Its hypotheses hold even if $x$ has local dimension one: that lemma requires dimension two only at the target centre $y$. It gives $h^{-1}(|F|)=|E|$. Consequently the underlying fibre $(f p_n)^{-1}(y)$ is $|E|$. Surjectivity of $a$ then gives $(f p_{n-1})^{-1}(y)=\\{x\\}$, and surjectivity of $p_{n-1}$ gives $f^{-1}(y)=\\{p_{n-1}(x)\\}$.",
+   "uses": [
+    "lem-sfb-point-exceptional-isomorphism-neighbourhood",
+    "lemma-nagata-blowup-proper",
+    "thm-nagata-global-blowup-complement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5R, final three paragraphs: the nonconstant exceptional-image case forces a singleton original fibre."
+   }
+  },
+  {
+   "text": "The singleton fibre in the preceding case contradicts the choice of $y$. Indeed $Y$ is normal by [rem-pc-regular-normal], and $X$ is reduced because it is integral. The dense-open isomorphism in the hypothesis identifies the unique generic points and their local fields, so it gives the birational hypothesis of [lem-sfb-normal-modification-codimension-one]. Clause (3) of that statement puts every point with a finite underlying fibre and normal target local ring into $U_f$. Thus $y\\in U_f$, a contradiction. We conclude that the nonempty image $v(E)$ is a single point.",
+   "uses": [
+    "rem-pc-regular-normal",
+    "lem-sfb-normal-modification-codimension-one"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5R, final sentences: the finite-fibre clause of the normal modification criterion gives the contradiction."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-point-blowdown-factorization] to $a:X_n\\to X_{n-1}$ and $h:X_n\\to Y'$. Since $h(E)$ is one point, obtain $h_{n-1}:X_{n-1}\\to Y'$ with $h=h_{n-1}a$. This is a $Y$-morphism: the two maps $b h_{n-1}$ and $f p_{n-1}$ to $Y$ have the same composite with $a$, namely $f p_n$; uniqueness in the same blowdown-factorization statement identifies them. The tower of length $n-1$ with this map is therefore another solution, contradicting minimality. Hence $n=0$, and $h$ itself is the desired lift $g:X\\to Y'$ with $f=b g$.",
+   "uses": [
+    "lem-sfb-point-blowdown-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5R, second and third paragraphs: descend the final point blowup; minimality makes the induction on the source tower explicit."
+   }
+  },
+  {
+   "text": "By [lemma-nagata-proper-to-separated-target], the lift $g$ is proper, since $f$ is proper and $b$ is separated. It is birational on the dense open where $f$ and $b$ are isomorphisms. The schemes $X,Y'$ satisfy the surface hypotheses established above. By [lem-sfb-exceptional-curve-count], $B(g)\\subsetneq B(f)$, so $|B(g)|<r$. The strong induction hypothesis gives a finite point-blowup factorization of $g$. Append the blowup $b$ at its target to obtain the required factorization of $f$. All compositions and the length-zero base case are understood up to isomorphism over the target, as in the statement.",
+   "uses": [
+    "lemma-nagata-proper-to-separated-target",
+    "lem-sfb-exceptional-curve-count"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5R, first paragraph: the strict decrease in contracted curves completes the outer induction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-exceptional-curve-count",
+  "lem-sfb-regular-point-blowup-geometry",
+  "def-kun-topological-krull-dimension",
+  "lem-sfb-surface-rational-map-point-resolution",
+  "lemma-nagata-blowup-proper",
+  "lem-weil-pbc-proper-composition",
+  "lemma-nagata-proper-to-separated-target",
+  "thm-nagata-global-blowup-complement",
+  "lem-sfb-point-exceptional-isomorphism-neighbourhood",
+  "rem-pc-regular-normal",
+  "lem-sfb-normal-modification-codimension-one",
+  "lem-sfb-point-blowdown-factorization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tag 0C5R (resolve-lemma-proper-birational-regular-surfaces), proof, with the omitted induction measure exposed as a separate node and source-tower induction made explicit by minimality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every proper birational morphism between integral regular Noetherian surfaces factors into blowups at closed points",
+   "results": "{\"t\": \"2026-10-22T04:46:45Z\", \"tool\": \"leanfinder\", \"query\": \"Every proper birational morphism between integral regular Noetherian surfaces factors into blowups at closed points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp_assoc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\"], \"digest\": \"f8c55692e99686de\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: birational partial isomorphisms, normalization morphisms and properness permanence do not give factorization as point blowups."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Factorization of proper birational morphisms between nonsingular surfaces as quadratic transforms",
+   "results": "{\"t\": \"2026-10-22T04:46:42Z\", \"tool\": \"leansearch\", \"query\": \"Factorization of proper birational morphisms between nonsingular surfaces as quadratic transforms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.isProper_iff\", \"AlgebraicGeometry.IsProper.mk\", \"AlgebraicGeometry.IsProper.instCompScheme\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"AlgebraicGeometry.IsProper.recOn\"], \"digest\": \"13dbfd9267818106\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: birational partial isomorphisms, normalization morphisms and properness permanence do not give factorization as point blowups."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Birational\"",
+   "results": "{\"t\": \"2026-10-22T04:46:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"Birational\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Birational\", \"AlgebraicGeometry.Scheme.Birational.refl\", \"AlgebraicGeometry.Scheme.Birational.partialIso\", \"AlgebraicGeometry.Scheme.Birational.symm\", \"AlgebraicGeometry.Scheme.Birational.trans\", \"AlgebraicGeometry.Scheme.BirationalOver.refl\", \"AlgebraicGeometry.Scheme.BirationalOver\", \"AlgebraicGeometry.Scheme.Hom.birational\"], \"digest\": \"b1297fdaf32f7b52\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: birational partial isomorphisms, normalization morphisms and properness permanence do not give factorization as point blowups."
+  },
+  {
+   "tool": "grep",
+   "query": "birational.*regular|regular.*surface|factor.*blow|blow.*factor",
+   "results": "{\"t\": \"2026-10-22T04:46:41Z\", \"tool\": \"grep\", \"query\": \"birational.*regular|regular.*surface|factor.*blow|blow.*factor\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: birational partial isomorphisms, normalization morphisms and properness permanence do not give factorization as point blowups."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper modification of a nonsingular two dimensional Noetherian scheme is a finite composition of point blowups",
+   "results": "{\"t\": \"2026-10-22T04:46:46Z\", \"tool\": \"leanfinder\", \"query\": \"A proper modification of a nonsingular two dimensional Noetherian scheme is a finite composition of point blowups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\", \"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\"], \"digest\": \"c015935422eef507\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: birational partial isomorphisms, normalization morphisms and properness permanence do not give factorization as point blowups."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every proper birational morphism between regular integral Noetherian surfaces is a sequence of blowups in closed points",
+   "results": "{\"t\": \"2026-10-22T05:10:49Z\", \"tool\": \"leanfinder\", \"query\": \"Every proper birational morphism between regular integral Noetherian surfaces is a sequence of blowups in closed points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.exists_rep\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\"], \"digest\": \"e9190157d311c1a0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: rational-map representatives, normalization maps, birational partial isomorphisms and properness permanence do not give a finite point-blowup factorization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Factorization of a proper morphism between nonsingular surfaces as quadratic transformations",
+   "results": "{\"t\": \"2026-10-22T05:10:41Z\", \"tool\": \"leansearch\", \"query\": \"Factorization of a proper morphism between nonsingular surfaces as quadratic transformations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper\", \"AlgebraicGeometry.IsProper.mk\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.IsSmooth\", \"CategoryTheory.MorphismProperty.MapFactorizationData\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.isProper_iff\", \"AlgebraicGeometry.IsProper.instCompScheme\"], \"digest\": \"202d6278301c80c2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: rational-map representatives, normalization maps, birational partial isomorphisms and properness permanence do not give a finite point-blowup factorization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Birational\"",
+   "results": "{\"t\": \"2026-10-22T05:10:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"Birational\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Birational\", \"AlgebraicGeometry.Scheme.Birational.refl\", \"AlgebraicGeometry.Scheme.Birational.partialIso\", \"AlgebraicGeometry.Scheme.Birational.symm\", \"AlgebraicGeometry.Scheme.Birational.trans\", \"AlgebraicGeometry.Scheme.BirationalOver.refl\", \"AlgebraicGeometry.Scheme.BirationalOver\", \"AlgebraicGeometry.Scheme.Hom.birational\"], \"digest\": \"b1297fdaf32f7b52\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: rational-map representatives, normalization maps, birational partial isomorphisms and properness permanence do not give a finite point-blowup factorization."
+  },
+  {
+   "tool": "grep",
+   "query": "birational.*regular|regular.*surface|factor.*blow|blow.*factor",
+   "results": "{\"t\": \"2026-10-22T05:10:41Z\", \"tool\": \"grep\", \"query\": \"birational.*regular|regular.*surface|factor.*blow|blow.*factor\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: rational-map representatives, normalization maps, birational partial isomorphisms and properness permanence do not give a finite point-blowup factorization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper modification of a nonsingular two dimensional Noetherian scheme factors as finitely many point blowups",
+   "results": "{\"t\": \"2026-10-22T05:11:11Z\", \"tool\": \"leanfinder\", \"query\": \"A proper modification of a nonsingular two dimensional Noetherian scheme factors as finitely many point blowups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\"], \"digest\": \"7521101ef04822c7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: rational-map representatives, normalization maps, birational partial isomorphisms and properness permanence do not give a finite point-blowup factorization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-common-regular-surface-resolution",
+  "date": "2026-10-22",
+  "group": "NI"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Common domination of marked nodal models over a discrete valuation ring; Common point-blowup resolution of regular proper surfaces; Tag 0C5R (resolve-lemma-proper-birational-regular-surfaces).",
+   "via": [
+    "lem-sfb-common-regular-surface-resolution",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-proper-birational-surface-factorization",
+  "worker": "stage1",
+  "summary": "Q40 follows Stacks 0C5R without changing the statement. Seven steps use a finite contracted-curve measure, rational-map elimination, the exceptional-curve conormal rigidity input, descent of the last source point blowup, and strong induction. Two strictly smaller statement-only inputs expose the omitted measure argument and the nonconstant exceptional-fibre subargument. Existing point resolution, blowdown descent and normal modification nodes are reused; no excellence is imposed.",
+  "blueprint": "Realizes the inherited provenance from det-thm-sf-ctf-stability-direct-images proof (3), through the common regular-surface resolution prerequisite: the 0C5R point-blowup factorization. The current main-20261015 direct-images proof and the unit record were read. blueprint_refs.py ancestor reports null because the inherited created.item chain has no imported ancestor; that inherited node/via data is retained, and new nodes prepend this item to the same via chain.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-blowup-proper",
+    "why": "Properness of point blowups is a generic blowup tool; the unit has no alternate proof of this scheme-theoretic input."
+   },
+   {
+    "node": "lem-weil-pbc-proper-composition",
+    "why": "Composition permanence for proper scheme morphisms is a generic geometric tool, used for partial source towers."
+   },
+   {
+    "node": "lemma-nagata-proper-to-separated-target",
+    "why": "A map from a proper scheme to a separated scheme over the same base is proper; needed for the resolved lift and descended lift."
+   },
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Regularity implies normality, a generic local-algebra tool for the finite-fibre isomorphism criterion."
+   },
+   {
+    "node": "thm-nagata-global-blowup-complement",
+    "why": "A blowup is an isomorphism over the complement of its centre; generic blowup tool used for partial composites of the source tower and surjectivity of its last blowup."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-blowup-proper",
+  "lem-weil-pbc-proper-composition",
+  "lemma-nagata-proper-to-separated-target",
+  "rem-pc-regular-normal",
+  "thm-nagata-global-blowup-complement"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-8a8ce699c",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-8a8ce699c (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and Stacks 0C5R (resolve.tex l.4891 ff.). The item statement is unchanged and matches 0C5R. Item steps 1-7 follow the source; the source's tower induction becomes a choice of minimal n, which is valid. New node lem-sfb-exceptional-curve-count is true: the complement of U_f is finite with only codimension-2 closed points by 0BFP(1)/(2); every contracted curve is a component of a fibre of dimension at most 1; B(f) is empty iff f is an isomorphism, by 0BFP(3); strictness comes from the generic point of the exceptional curve, where g is an isomorphism by 0BFP(2). New node lem-sfb-point-exceptional-isomorphism-neighbourhood is the nonconstant subcase of 0C5R. Its argument checks out: v is a proper birational map between regular P^1's, the conormal O(1) map is an isomorphism, 067L gives unramifiedness, and 0BFP(4) finishes; a local-dimension-1 centre makes it vacuous. Neither node is a duplicate: the per excellent-surface nodes and regular-point-blowup-domination differ, and neither node restates the item. One repairable fault, a missing citation used twice, is fixed in the item file. Step 3 said the partial composites p_i are birational with no node (the resolution node gives the isomorphism over U only for the full composite). Step 4 used surjectivity of the last blowup a without justification. Both now cite thm-nagata-global-blowup-complement, and step 4 also cites lemma-nagata-blowup-proper. proof_deps is recomputed and a tool_uses entry is added. Batch-5 check: lem-trf-blowup-chart-regular-sequence-presentation (Stacks 0BIQ, commutative algebra) and lem-trf-proper-finite-fibre-finite-near (Stacks 02UP) are generic and are not steps of the trace formula or Poincare duality, so both are accepted. The four declared generic tool uses are accepted. The null blueprint.from.node is inherited from the base node.; 1 file(s) fixed by the reviewer"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperBirationalSurfaceFactorization",
+  "declaration": "AlgebraicGeometry.exists_point_blowup_factorization_of_proper_birational",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperBirationalSurfaceFactorization.lean",
+  "statement": "theorem exists_point_blowup_factorization_of_proper_birational (X Y : Scheme.{u}) [IsIntegral X] [IsIntegral Y] [IsNoetherian X] [IsNoetherian Y] (hX : IsRegularScheme X) (hY : IsRegularScheme Y) (hdimX : topologicalKrullDim X = 2) (hdimY : topologicalKrullDim Y = 2) (f : X ⟶ Y) [IsProper f] (hbirational : ∃ (V : X.Opens) (U : Y.Opens), Dense (V : Set X) ∧ Dense (U : Set Y) ∧ ∃ e : V.toScheme ≅ U.toScheme, V.ι ≫ f = e.hom ≫ U.ι) : ∃ (A : OrdinaryBlowupTower Y) (e : X ≅ A.level (Fin.last A.length)), e.hom ≫ A.toBase (Fin.last A.length) = f ∧ ∀ i : Fin A.length, ∃ (p : A.level i.castSucc) (hp : IsClosed ({p} : Set _)), A.center i = Scheme.IdealSheafData.vanishingIdeal ⟨{p}, hp⟩",
+  "branch": "newtargets-dag",
+  "by": "Q41",
+  "date": "2026-10-22",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-ba549c8e6"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ba549c8e6",
+  "group": "Q41",
+  "result": "fix",
+  "note": "Statement matches node and Stacks 0C5R clause by clause: IsIntegral/IsNoetherian (=locNoeth+qc)/IsRegularScheme/topologicalKrullDim=2 on X,Y; IsProper f; dense opens V,U with iso e and V.ι≫f=e.hom≫U.ι; conclusion ∃ OrdinaryBlowupTower Y with X≅top over Y, centres = vanishingIdeal of closed singletons (reduced points); length 0 gives iso. No extra hyps, single universe, no new defs, sorry-only, docstrings with source+blueprint and 7-step plan, statement field verbatim. Finding (rule 3(7)/H9): proof-dep module Sheaf.AlgebraicGeometry.SurfaceRationalMapPointResolution (lem-sfb-surface-rational-map-point-resolution, landed 2026-10-22 13:50 before this delivery) not imported; fixes/ProperBirationalSurfaceFactorization.lean adds the plain import, no cycle; nt_compile --json clean 2.0 s exit 0."
+ }
+}

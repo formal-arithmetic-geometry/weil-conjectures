@@ -1,0 +1,244 @@
+{
+ "id": "lem-sfb-wcontractible-jacobson-henselian",
+ "kind": "statement",
+ "title": "The Jacobson radical of a w-contractible ring is henselian",
+ "statement": "Let $R$ be a commutative ring such that $\\operatorname{Spec}R$ is w-contractible [sk-def-pe-wlocal], and let $J=\\bigcap_{\\mathfrak m\\in\\operatorname{MaxSpec}R}\\mathfrak m$. Then $(R,J)$ is a henselian pair [def-weil-pbc-henselian-terminology]. Explicitly, for every finite $R$-algebra $B$, reduction induces a bijection between the idempotents of $B$ and the idempotents of $B/JB$. The zero ring is allowed.",
+ "source": {
+  "document": "literature/ruimy-tubach-wolf-proetale-motives-solid-rigidity_arXiv-2601.07358.pdf",
+  "place": "Proposition 1.1.2: W is its henselization along its reduced closed-point scheme; hence the resulting affine pair is henselian. This node records only the henselian-pair consequence."
+ },
+ "stmt_deps": [
+  "sk-def-pe-wlocal",
+  "def-weil-pbc-henselian-terminology"
+ ],
+ "proof": [
+  {
+   "text": "Put J = jacobson of zero. Apply [lem-weil-pbc-pair-henselization] to obtain an essentially small filtered diagram of etale R-algebras trivial modulo J and a colimit eta : R → H, with (H,JH) henselian and R/J → H/JH bijective. The vertex is in the universe of R. Reindex by a small model of the diagram to obtain the ind-etale predicate [def-weil-pbc-ind-etale-algebra].",
+   "uses": [
+    "lem-weil-pbc-pair-henselization",
+    "def-weil-pbc-ind-etale-algebra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Flatness is [lem-weil-pbc-henselization-flat-quotients]. For each maximal ideal m of R, J is contained in m. Invert the quotient isomorphism to construct H → H/JH ≃ R/J → R/m. This map composed with eta is the quotient map R → R/m, so it kills mH. Since R/m is nonzero, mH is proper. Apply [lem-weil-pbc-flat-faithfully-flat-maximal-ideals] to conclude faithful flatness. This argument also covers R = 0: there are no maximal ideals to test.",
+   "uses": [
+    "lem-weil-pbc-henselization-flat-quotients",
+    "lem-weil-pbc-flat-faithfully-flat-maximal-ideals"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The existing source class IsWContractibleRing [sk-def-pe-wlocal] already packages the geometric hypotheses of [lem-weil-pbc-existing-wcontractible-indetale-retraction], including IsWLocalRing as a superclass. Apply its retraction theorem to H to get rho : H → R with rho eta = id. No additional comparison of w-locality definitions is needed in Lean.",
+   "uses": [
+    "sk-def-pe-wlocal",
+    "lem-weil-pbc-existing-wcontractible-indetale-retraction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Descend the simple-root condition of [def-weil-pbc-henselian-terminology] along rho. Given a monic f over R and a0 with f(a0) in J and invertible derivative modulo J, map f and a0 into H. Polynomial evaluation and derivative commute with ring maps. The induced quotient map sends the given unit to a unit modulo JH. Henselianity of H gives a root a congruent to eta(a0) modulo JH. Then rho(a) is a root of f, because f mapped by eta then rho is f. Moreover rho(JH) = J by Ideal.map_map and rho eta = id, so rho(a) - a0 belongs to J. The other field of HenselianRing is J ≤ jacobson of zero, reflexivity here. This is the proved private helper henselian_of_retraction.",
+   "uses": [
+    "def-weil-pbc-henselian-terminology"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Install the resulting HenselianRing R J. Every module-finite R-algebra B is integral over R. Apply [lem-weil-pbc-henselian-pair-integral-idempotent-lifting], which is already proved and permits arbitrary universes and the zero ring, to get the unique lift of every idempotent of B/JB. Pair this clause with the henselian structure from the preceding step.",
+   "uses": [
+    "lem-weil-pbc-henselian-pair-integral-idempotent-lifting"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-pair-henselization",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-weil-pbc-henselization-flat-quotients",
+  "lem-weil-pbc-flat-faithfully-flat-maximal-ideals",
+  "sk-def-pe-wlocal",
+  "lem-weil-pbc-existing-wcontractible-indetale-retraction",
+  "def-weil-pbc-henselian-terminology",
+  "lem-weil-pbc-henselian-pair-integral-idempotent-lifting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0A02, 0AGU and 09XI, with proetale.tex Tag 0982: retain the pair-henselization and retraction route, descend simple roots directly along the retraction, and use the existing integral-algebra idempotent lifting theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The Jacobson radical of a weakly contractible ring is a henselian ideal",
+   "results": "{\"t\": \"2026-10-22T04:48:45Z\", \"tool\": \"leanfinder\", \"query\": \"The Jacobson radical of a weakly contractible ring is a henselian ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianRing.jac\", \"instHenselianRingMaximalIdeal\", \"HenselianRing\", \"HenselianLocalRing\", \"IsAdicComplete.henselianRing\", \"Field.henselian\", \"Ideal.jacobson_bot_polynomial_of_jacobson_bot\", \"Ring.jacobson_le_of_eq_bot\"], \"digest\": \"8782193ccea3bb76\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state this scheme/pro-etale coefficient transfer or henselian-pair theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A weakly contractible affine scheme is the henselization of its reduced closed point subscheme",
+   "results": "{\"t\": \"2026-10-22T04:48:45Z\", \"tool\": \"leansearch\", \"query\": \"A weakly contractible affine scheme is the henselization of its reduced closed point subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineScheme\", \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"AlgebraicGeometry.IsAffine.recOn\", \"AlgebraicGeometry.affine_isReduced_iff\", \"AlgebraicGeometry.isReduced_of_isReduced_stalk\", \"HenselianLocalRing.toIsLocalRing\", \"AlgebraicGeometry.IsReduced.mk\", \"AlgebraicGeometry.isReduced_of_isAffine_isReduced\"], \"digest\": \"2eb029a7c0c85784\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state this scheme/pro-etale coefficient transfer or henselian-pair theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianRing, Ideal.jacobson",
+   "results": "{\"t\": \"2026-10-22T04:48:46Z\", \"tool\": \"loogle\", \"query\": \"HenselianRing, Ideal.jacobson\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"HenselianRing.jac\", \"HenselianRing.mk\"], \"digest\": \"aecf2317920a8259\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state this scheme/pro-etale coefficient transfer or henselian-pair theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "w[Cc]ontract|[Ww]eakly.?[Cc]ontract|henselian.*jacobson|jacobson.*henselian",
+   "results": "{\"t\": \"2026-10-22T04:48:46Z\", \"tool\": \"grep\", \"query\": \"w[Cc]ontract|[Ww]eakly.?[Cc]ontract|henselian.*jacobson|jacobson.*henselian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state this scheme/pro-etale coefficient transfer or henselian-pair theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite algebra idempotents lift uniquely modulo the intersection of maximal ideals in a w contractible ring",
+   "results": "{\"t\": \"2026-10-22T04:48:47Z\", \"tool\": \"leanfinder\", \"query\": \"Finite algebra idempotents lift uniquely modulo the intersection of maximal ideals in a w contractible ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.pi_bijective_of_isIdempotentElem\", \"CompleteOrthogonalIdempotents.bijective_pi'\", \"CompleteOrthogonalIdempotents.bijective_pi\", \"OrthogonalIdempotents.lift_of_isNilpotent_ker\", \"OrthogonalIdempotents.surjective_pi\", \"CompleteOrthogonalIdempotents.lift_of_isNilpotent_ker\", \"CompleteOrthogonalIdempotents.lift_of_isNilpotent_ker_aux\", \"OrthogonalIdempotents.lift_of_isNilpotent_ker_aux\"], \"digest\": \"3c71b1306e0eb020\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state this scheme/pro-etale coefficient transfer or henselian-pair theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "WContractible|henselian.*jacobson|jacobson.*henselian",
+   "results": "{\"t\": \"2026-10-22T05:19:16Z\", \"tool\": \"grep\", \"query\": \"WContractible|henselian.*jacobson|jacobson.*henselian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: HenselianRing gives the simple-root predicate; the hits supply neither the w-contractible hypothesis nor this finite-algebra lifting theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A retract of the henselization along the Jacobson radical is a henselian pair",
+   "results": "{\"t\": \"2026-10-22T05:19:16Z\", \"tool\": \"leansearch\", \"query\": \"A retract of the henselization along the Jacobson radical is a henselian pair\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing.TFAE\", \"HenselianRing.jac\", \"instHenselianRingMaximalIdeal\", \"HenselianRing.mk\", \"HenselianRing.recOn\", \"HenselianRing.casesOn\", \"IsAdicComplete.henselianRing\", \"HenselianRing.rec\"], \"digest\": \"098cf339f0844904\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: HenselianRing gives the simple-root predicate; the hits supply neither the w-contractible hypothesis nor this finite-algebra lifting theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianRing, Ideal.jacobson",
+   "results": "{\"t\": \"2026-10-22T05:19:16Z\", \"tool\": \"loogle\", \"query\": \"HenselianRing, Ideal.jacobson\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"HenselianRing.jac\", \"HenselianRing.mk\"], \"digest\": \"aecf2317920a8259\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: HenselianRing gives the simple-root predicate; the hits supply neither the w-contractible hypothesis nor this finite-algebra lifting theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A w contractible ring is henselian along its Jacobson radical",
+   "results": "{\"t\": \"2026-10-22T05:19:18Z\", \"tool\": \"leanfinder\", \"query\": \"A w contractible ring is henselian along its Jacobson radical\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instHenselianRingMaximalIdeal\", \"HenselianRing.jac\", \"HenselianLocalRing\", \"IsAdicComplete.henselianRing\", \"HenselianRing\", \"Field.henselian\", \"HenselianLocalRing.toIsLocalRing\", \"HenselianRing.is_henselian\"], \"digest\": \"7cd956f1bde1c608\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: HenselianRing gives the simple-root predicate; the hits supply neither the w-contractible hypothesis nor this finite-algebra lifting theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Idempotents of every finite algebra lift uniquely modulo the Jacobson radical for a weakly contractible ring",
+   "results": "{\"t\": \"2026-10-22T05:19:43Z\", \"tool\": \"leanfinder\", \"query\": \"Idempotents of every finite algebra lift uniquely modulo the Jacobson radical for a weakly contractible ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"existsUnique_isIdempotentElem_eq_of_ker_isNilpotent\", \"RingHom.pi_bijective_of_isIdempotentElem\", \"CompleteOrthogonalIdempotents.lift_of_isNilpotent_ker\", \"OrthogonalIdempotents.lift_of_isNilpotent_ker\", \"CompleteOrthogonalIdempotents.lift_of_isNilpotent_ker_aux\", \"OrthogonalIdempotents.lift_of_isNilpotent_ker_aux\", \"CompleteOrthogonalIdempotents.of_ker_isNilpotent\", \"exists_isIdempotentElem_eq_of_ker_isNilpotent\"], \"digest\": \"76b4f22a8e99e712\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: HenselianRing gives the simple-root predicate; the hits supply neither the w-contractible hypothesis nor this finite-algebra lifting theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-wcontractible-closed-fibre-rigidity",
+  "date": "2026-10-22",
+  "group": "NA"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement proof (2), first paragraph: direct-sum preservation on the ordinary ambient localizing hull; local geometric inputs for the uniform heart estimate before the lower-tail passage.",
+   "via": [
+    "lem-sfb-proper-wcontractible-closed-fibre-rigidity",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-wcontractible-jacobson-henselian",
+  "worker": "stage1",
+  "summary": "Proved the henselian-pair consequence by a retraction of the pair henselization. Existing DAG nodes supply henselization, flatness, the maximal-fibre faithful-flatness criterion, and w-contractible retractions. Finite generation after tensoring and existence/uniqueness of idempotent lifts are written out. Zero ring handled separately. Statement unchanged; no new nodes.",
+  "blueprint": "det-sf-comp-coherence-cocycle, refinement-isomorphism boundary argument: local henselian-pair input for lem-sfb-proper-wcontractible-closed-fibre-rigidity within the uniform heart estimate. This is the henselian-pair consequence recorded by the item, not a change of the compactification route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-pair-henselization",
+    "why": "Generic pair-henselization existence and quotient identification; this unit has no replacement construction."
+   },
+   {
+    "node": "lem-weil-pbc-henselization-flat-quotients",
+    "why": "Generic flatness of that henselization, needed to test faithful flatness at maximal ideals."
+   },
+   {
+    "node": "lem-weil-pbc-existing-wcontractible-indetale-retraction",
+    "why": "Generic retraction theorem for a w-contractible ring; the henselian-pair consequence is proved here from its retraction, not imported."
+   },
+   {
+    "node": "det-pe-wlocal-components",
+    "why": "Agreement of the w-local notion of sk-def-pe-wlocal (unique closed specialization) with def-weil-pbc-w-local (one closed point per connected component) required by the retraction theorem; reviewer FIX."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-pair-henselization",
+  "lem-weil-pbc-henselization-flat-quotients",
+  "lem-weil-pbc-existing-wcontractible-indetale-retraction"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-78d46f8c0",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-78d46f8c0 (reviewer sub-agent of L); spot-checked: Read RTW Prop 1.1.2 (p.10, Hens_W(W^c)=W); the item records only the consequence that (R,J) is a henselian pair, with J the ideal of the closed-point subscheme. The statement is unchanged and there are no new nodes. All seven steps check out against the statements of the cited nodes. Step 1: R=0 trivial. Step 2: lem-weil-pbc-pair-henselization gives (H,JH) henselian and R/J=H/JH; H is ind-etale (directed colimit of etale maps, finite presentation on affines). Step 3: flat by 0AGU; H/mH=R/m≠0, so faithfully flat by 00HP (4)=>(1). Step 4: retraction rho by the 0982 node. Steps 5-7: v(b⊗h)=b·rho(h) is balanced because rho is R-linear and is a ring map with vu=1; it is compatible with J; existence and uniqueness of idempotent lifts transfer through C=B⊗H, a finite H-algebra. Edge cases R=0, a field, a strictly henselian local ring, B=0 and B=R×R are fine. No duplicate in the DAG. One fault, fixed (C4/E1): step 4 got 'w-local' from sk-def-pe-wlocal (unique closed specialization), but the retraction node needs def-weil-pbc-w-local (one closed point per connected component). The fix cites the existing det-pe-wlocal-components (clauses 2-3) and def-weil-pbc-w-local in step 4, adds both to proof_deps, and adds a tool_uses entry. I accept the tool_uses for the generic pbc henselization, flatness and retraction nodes. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.WContractibleJacobsonHenselian",
+  "declaration": "RingTheory.wcontractible_jacobson_henselian",
+  "file": "lean/Sheaf/RingTheory/WContractibleJacobsonHenselian.lean",
+  "statement": "theorem wcontractible_jacobson_henselian (R : Type u) [CommRing R] [IsWContractibleRing R] : HenselianRing R (Ideal.jacobson (⊥ : Ideal R)) ∧ ∀ (B : Type (max u v)) [CommRing B] [Algebra R B] [Module.Finite R B] (e₀ : B ⧸ (Ideal.jacobson (⊥ : Ideal R)).map (algebraMap R B)), IsIdempotentElem e₀ → ∃! e : B, IsIdempotentElem e ∧ Ideal.Quotient.mk ((Ideal.jacobson (⊥ : Ideal R)).map (algebraMap R B)) e = e₀",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d9dae9b2b",
+  "group": "NC",
+  "result": "pass",
+  "note": "Only change to the node is the new lean record; no new nodes, dependency repairs or statement change. IsWContractibleRing (recorded existing class) = w-strictly local + extremally disconnected component space, exact for sk-def-pe-wlocal; J = Ideal.jacobson ⊥ is exactly the intersection of maximal ideals; HenselianRing is def-weil-pbc-henselian-terminology's recorded Mathlib declaration; the idempotent clause (Module.Finite B in Type (max u v), ∃! idempotent lift mod J.map algebraMap) is exactly the bijection, with no universe restriction. Edge cases R=0, field, strictly henselian local, B=0, B=R×R covered. Single sorry, no definitions; docstrings carry source place, blueprint tag and all 7 proof steps; statement verbatim in the file; all 7 imported modules exist; no Mathlib/side-live duplicate; not dropped. Not compiled (no change); relies on the worker's scompile + deliver2 dry run. Cosmetic: the NC second reading is a self-pass by the worker."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261022T143929-L-1446890",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

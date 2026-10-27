@@ -1,0 +1,173 @@
+{
+ "id": "lem-sfb-leray-section-resolution-quasi-iso",
+ "kind": "statement",
+ "title": "Objectwise quasi-isomorphism of direct-image K-injective resolutions",
+ "statement": "Let $(C,J,A)$ and $(D,K,B)$ be small ringed sites in universe $u$, with commutative ring sheaves, as in [def-weil-size-convention, def-weil-pbc-sites-and-cohomology]. Let $u:D\\to C$ be continuous with left-exact inverse image on sheaves of sets, and $a:B\\to u_*A$ a morphism of ring sheaves. Write $f_*$ for the induced module direct image [def-sfb-ringed-site-section-functors]. For every K-injective complex $I$ of $A$-module sheaves, every K-injective complex $T$ of $B$-module sheaves [def-pur-kinjective-complex], every quasi-isomorphism $j:f_*I\\to T$, and every $V\\in D$, the map $j(V):I(u(V))\\to T(V)$ is a quasi-isomorphism of complexes of abelian groups after forgetting the section-ring action. Evaluation and module categories are those of [def-sfb-ringed-site-section-functors, def-weil-sheaf-of-modules-category].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6H (lemma-Leray-unbounded), proof of the second assertion; Tags 0D6G and 0D6E."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sfb-ringed-site-section-functors",
+  "def-pur-kinjective-complex",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Fix small ringed sites (C,A) and (D,B), a continuous u:D→C with left-exact sheaf pullback, and the structural ring map B→u_*A. Let I be K-injective, T K-injective, j:f_*I→T a quasi-isomorphism, and V in D. Localize at u(V) and V. The localized direct-image comparison identifies (f_*I)|V with (f_V)_*(I|u(V)). Restriction preserves K-injectivity and is exact, so j|V is a K-injective resolution.",
+   "uses": [
+    "lem-weil-pbc-localize-ringed-site-morphism",
+    "lem-pur-kinjective-restrict-localized",
+    "lem-weil-pbc-finite-type-restriction-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6H (lemma-Leray-unbounded), proof of the second assertion; Tags 0D6G and 0D6E."
+   }
+  },
+  {
+   "text": "On D/V the terminal object is id_V. Constant sheafification is left adjoint to evaluation there and preserves finite limits. The identity of B(V) gives the structural ring map from the constant B(V)-sheaf to B|V. This defines the punctual ringed-topos morphism p_V. The singleton module equivalence identifies its module direct image with evaluation at id_V.",
+   "uses": [
+    "lem-weil-pbc-constant-sheaf-maps-global-sections",
+    "lem-weil-pbc-sheafification-sets-exact",
+    "def-weil-pbc-ringed-topos-morphism",
+    "lem-weil-pbc-singleton-site-module-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6H (lemma-Leray-unbounded), proof of the second assertion; Tags 0D6G and 0D6E."
+   }
+  },
+  {
+   "text": "Apply the K-injective-resolution normalization of derived direct-image composition to f_V followed by p_V. It says that (p_V)_*(j|V) is a quasi-isomorphism. Under the sectionwise identifications this map is j(V):I(u(V))→T(V). Forgetting the B(V)-action preserves cohomology, hence the corresponding map of abelian group complexes is a quasi-isomorphism. No preservation of K-injectives by f_* is used.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6H (lemma-Leray-unbounded), proof of the second assertion; Tags 0D6G and 0D6E."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localize-ringed-site-morphism",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-weil-pbc-finite-type-restriction-exact",
+  "lem-weil-pbc-constant-sheaf-maps-global-sections",
+  "lem-weil-pbc-sheafification-sets-exact",
+  "def-weil-pbc-ringed-topos-morphism",
+  "lem-weil-pbc-singleton-site-module-comparison",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6H (lemma-Leray-unbounded), proof of the second assertion; Tags 0D6G and 0D6E."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A K injective resolution of the direct image of a K injective complex of module sheaves is a quasi isomorphism after evaluation at a site object",
+   "results": "8 hits: CategoryTheory.InjectiveResolution, .quasiIso, .self; CategoryTheory.injectiveResolution, injectiveResolutions, InjectiveResolution.of, .instQuasiIsoIntι′, .instHasInjectiveResolution. These concern ordinary injective resolutions.",
+   "date": "2026-10-25",
+   "verdict": "no match: no sectionwise acyclicity for ringed-site direct images"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation at every object sends a K injective resolution of the module sheaf direct image of a K injective complex to a quasi isomorphism without flatness of the ring map",
+   "results": "8 hits: CochainComplex.IsKInjective.Qh_map_bijective, CategoryTheory.InjectiveResolution.instQuasiIsoIntι′, .quasiIso, CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective, CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex, CochainComplex.cm5b.instQuasiIsoIntP, CochainComplex.IsKInjective, CategoryTheory.InjectiveResolution.isoRightDerivedObj.",
+   "date": "2026-10-25",
+   "verdict": "no match: Qh_map_bijective gives maps into K-injectives but not evaluation acyclicity"
+  },
+  {
+   "tool": "grep",
+   "query": "(section|evaluation|pushforward).*([Qq]uasiIso|[Kk]Injective)|([Qq]uasiIso|[Kk]Injective).*(section|evaluation|pushforward)",
+   "results": "5 hits in Mathlib/Algebra/Homology/Functor.lean: ShortComplex.quasiIso_iff_evaluation and HomologicalComplex.quasiIsoAt_iff_evaluation and their bodies. These are evaluation in functor categories, not evaluation of sheaves.",
+   "date": "2026-10-25",
+   "verdict": "no match: sheaf evaluation is not exact in general"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Sites.UnboundedLeraySections",
+  "date": "2026-10-25",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Right adjoint of quasi-coherent pushforward for qcqs algebraic spaces. Supporting input: 0E55 Brown hypotheses: qcqs derived direct image and direct-sum comparison 08FA/08FB. Auxiliary input: Uniform upper bound for unbounded quasi-coherent space pushforward. Supporting input: 08FA proof of (2): the derived equality R Gamma(V, Rf_*E) = R Gamma(V times_Y X, E). The sectionwise quasi-isomorphism in proof steps 2–4.",
+   "via": [
+    "lem-sfb-ringed-site-unbounded-leray-sections",
+    "lem-sfb-space-derived-pushforward-upper-bound",
+    "lem-sfb-space-derived-pushforward-coproducts",
+    "lem-sfb-qcqs-space-pushforward-right-adjoint",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Sites.LeraySectionResolutionQuasiIso",
+  "file": "lean/Sheaf/CategoryTheory/Sites/LeraySectionResolutionQuasiIso.lean",
+  "declaration": "CategoryTheory.UnboundedSectionsLocalization.leraySectionResolution_quasiIso",
+  "statement": "theorem leraySectionResolution_quasiIso\n    {C D : Type u} [SmallCategory C] [SmallCategory D]\n    {J : GrothendieckTopology C} {K : GrothendieckTopology D}\n    (A : Sheaf J CommRingCat.{u}) (B : Sheaf K CommRingCat.{u})\n    (u : D ⥤ C) [u.IsContinuous K J]\n    (a : B ⟶ (u.sheafPushforwardContinuous CommRingCat.{u} K J).obj A)\n    [PreservesFiniteLimits (u.sheafPullback (Type u) K J)]\n    (I : CochainComplex (ringedSiteModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A)) ℤ) [I.IsKInjective]\n    (T : CochainComplex (ringedSiteModules.{u}\n      ((sheafCompose K (forget₂ CommRingCat RingCat)).obj B)) ℤ) [T.IsKInjective]\n    (j : ((SheafOfModules.pushforward.{u} (sectionModuleMap u a)).mapHomologicalComplex\n      (.up ℤ)).obj I ⟶ T) [QuasiIso j] (V : D) :\n    QuasiIso (((sectionEvaluation\n      ((sheafCompose K (forget₂ CommRingCat RingCat)).obj B) V).mapHomologicalComplex\n        (.up ℤ)).map j)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261025T095200-L-3308632",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261025T095200-L-3308632",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

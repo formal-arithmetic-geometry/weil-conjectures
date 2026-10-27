@@ -1,0 +1,252 @@
+{
+ "id": "lem-sfb-regular-surface-vector-bundle-extension",
+ "kind": "statement",
+ "title": "Vector bundles extend across codimension two on a regular surface",
+ "statement": "Let $X$ be an integral Noetherian regular scheme [def-pc-integral-scheme, def-weil-regular-scheme] of Krull dimension at most two [def-weil-pbc-krull-dimension-ring], and let $j:U\\hookrightarrow X$ be an open subscheme such that $\\dim\\mathcal O_{X,x}\\geq2$ for every $x\\in X\\setminus U$. Restriction from finite locally free $\\mathcal O_X$-modules to finite locally free $\\mathcal O_U$-modules [def-sc-finite-locally-free-sheaf] is an equivalence of categories, with inverse $j_*$. In particular, $j_*V$ is finite locally free for every finite locally free $V$ on $U$, the restriction $(j_*V)|_U\\to V$ is an isomorphism, and every map between two bundles on $U$ extends uniquely between their extensions on $X$.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0EBJ (lemma-reflexive-S2-extend), combined with Tag 0B3N (lemma-reflexive-over-regular-dim-2); finite locally free form used in Section 2, Claim 2 of Alper--Halpern-Leistner--Heinloth."
+ },
+ "stmt_deps": [
+  "def-pc-integral-scheme",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-sc-finite-locally-free-sheaf",
+  "def-kun-topological-krull-dimension",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-open-immersion",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "The open subscheme $U$ is regular: its local rings are the corresponding local rings of $X$, which are regular local rings. Both schemes are locally Noetherian. Also $\\dim U\\leq\\dim X\\leq2$: taking closures in $X$ sends a strict chain of irreducible closed subsets of $U$ to a strict chain in $X$, since intersecting these closures with $U$ recovers the original chain. Restriction preserves finite locally free modules, by restricting their local trivializations.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-regular-scheme",
+    "def-kun-topological-krull-dimension",
+    "def-sc-finite-locally-free-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Setup for Tag 0B3N (lemma-reflexive-over-regular-dim-2), applied to X and its open subscheme; elementary restriction and dimension observations."
+   }
+  },
+  {
+   "text": "On either $T=X$ or $T=U$, a finite locally free module is quasi-coherent of finite type: refine a trivializing cover by affine opens $\\operatorname{Spec}A$, where it is $\\widetilde{A^{\\oplus r}}$ and has its finite standard generators. The coherent/finite-type criterion therefore makes it coherent. Applying the regular-dimension-two reflexivity criterion on each $T$ now identifies the finite locally free modules with the coherent reflexive modules. These are full subcategories of the same module category, so the identification keeps every module morphism.",
+   "uses": [
+    "def-sc-finite-locally-free-sheaf",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-sfb-regular-surface-reflexive-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex; literature/stacks-project/divisors.tex",
+    "place": "Tag 01XZ (coherent-lemma-coherent-Noetherian), followed by Tag 0B3N (divisors-lemma-reflexive-over-regular-dim-2)."
+   }
+  },
+  {
+   "text": "The regular scheme $X$ is normal by the first clause of the regular-normal theorem. It is integral and locally Noetherian, and every omitted point has local dimension at least two by hypothesis. Apply the normal reflexive open-equivalence theorem to this very inclusion $j$. For a bundle $V$ on $U$, step 2 makes $V$ coherent reflexive, so $j_*V$ is coherent reflexive and the counit $(j_*V)|_U\\to V$ is an isomorphism. The regular-dimension-two criterion on $X$ makes this actual direct image $j_*V$ finite locally free. For a bundle $E$ on $X$, the same equivalence gives the natural unit $\\eta_E:E\\to j_*(E|_U)$ as an isomorphism. Thus restriction and this direct image are quasi-inverse on the bundle categories.",
+   "uses": [
+    "rem-pc-regular-normal",
+    "lem-sfb-normal-reflexive-open-equivalence",
+    "lem-sfb-regular-surface-reflexive-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex; literature/stacks-project/divisors.tex",
+    "place": "Tag 0569 (properties-lemma-regular-normal); Tag 0EBJ (divisors-lemma-reflexive-S2-extend) in its existing normal specialization; Tag 0B3N (divisors-lemma-reflexive-over-regular-dim-2)."
+   }
+  },
+  {
+   "text": "Explicitly, for bundles $E,F$ on $X$ and a morphism $a:E|_U\\to F|_U$, its extension is $\\eta_F^{-1}\\circ j_*a\\circ\\eta_E$. The unit/counit identities show its restriction is $a$. If $b:E\\to F$ is any extension, naturality of the unit gives $\\eta_F\\circ b=j_*a\\circ\\eta_E$, forcing the displayed formula. This proves existence and uniqueness for all maps, including maps between the direct-image extensions of two bundles on $U$.",
+   "uses": [
+    "lem-sfb-normal-reflexive-open-equivalence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0EBJ (divisors-lemma-reflexive-S2-extend): the unit and counit of the stated equivalence."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-open-immersion",
+  "def-weil-regular-scheme",
+  "def-kun-topological-krull-dimension",
+  "def-sc-finite-locally-free-sheaf",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-sfb-regular-surface-reflexive-locally-free",
+  "rem-pc-regular-normal",
+  "lem-sfb-normal-reflexive-open-equivalence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tags 0EBJ (lemma-reflexive-S2-extend) and 0B3N (lemma-reflexive-over-regular-dim-2), using coherent.tex Tag 01XZ and properties.tex Tag 0569 for their hypotheses."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Vector bundles on a punctured regular surface extend uniquely to finite locally free sheaves on the surface",
+   "results": "8 hits: smoothSheaf.obj_eq, ContMDiffSection.ext, AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, instNontrivialStalkPresheafSmoothSheaf, ModuleCat.Tilde.const, ModuleCat.Tilde.exists_const, AlgebraicGeometry.Scheme.Modules.isSheaf, smoothSheafCommRing.isUnit_stalk_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: Hits concern ordinary representations, topological bundles, valuations, or basic scheme morphisms, not this scheme-theoretic assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite locally free sheaves extend across codimension two on a regular scheme of dimension at most two and restriction is fully faithful",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.fullyFaithfulToPresheafOfModules, AlgebraicGeometry.IsFinite.instMorphismRestrict, AlgebraicGeometry.Scheme.Modules.restrict, AlgebraicGeometry.instLocallyOfFiniteTypeResLE, AlgebraicGeometry.exists_lift_of_germInjective_aux, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.instLocallyOfFiniteTypeMorphismRestrict, AlgebraicGeometry.instLocallyQuasiFiniteResLE",
+   "date": "2026-10-24",
+   "verdict": "no match: Hits concern ordinary representations, topological bundles, valuations, or basic scheme morphisms, not this scheme-theoretic assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsReflexive\"",
+   "results": "12 hits: Lean.InductiveVal.isReflexive, Lean.InductiveVal.isReflexiveEx, Module.IsReflexive, Module.IsReflexive.to_isTorsionFree, MulOpposite.instModuleIsReflexive, Module.IsReflexive.of_split, Module.instIsReflexiveDual, Module.IsReflexive.bijective_dual_eval'",
+   "date": "2026-10-24",
+   "verdict": "no match: The named structures and their basic operations do not state this extension, quotient, or equivalence theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "reflexive.*regular|regular.*reflexive|Hartogs|punctured",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: No declaration gives this assertion; the few keyword hits concern other notions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite locally free sheaves extend uniquely across codimension two on regular surfaces",
+   "results": "8 hits: TopCat.Presheaf.IsSheaf.section_ext, SheafOfModules.ιFree, AlgebraicGeometry.Scheme.Modules.hom_ext_iff, SheafOfModules.isFinitePresentation, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.IsFiniteType.mk, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.ext",
+   "date": "2026-10-24",
+   "verdict": "no match: The returned sheaf, scheme, flatness, or abstract group declarations do not give this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite locally free sheaves extend uniquely across codimension two on a regular Noetherian surface with inverse functor direct image",
+   "results": "8 hits: SheafOfModules.ιFree_mapFree_inv, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.localGeneratorsDataOfIsFiniteType, AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.isFinitePresentation, SheafOfModules.generatorsOfIsCokernelFree_I",
+   "date": "2026-10-24",
+   "verdict": "no match: basic sheaf generators and finite-presentation definitions do not give extension across the complement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of vector bundles across codimension two in a regular surface is an equivalence with inverse pushforward",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, SheafOfModules.conjugateEquiv_pullbackId_hom, VectorBundle.pullback, AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, SheafOfModules.pushforwardCongr_inv_app_val_app",
+   "date": "2026-10-24",
+   "verdict": "no match: restrictFunctorAdjCounitIso supplies the counit for any open immersion, not coherence or local freeness of the direct image, nor the unit for bundles."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsReflexive\"",
+   "results": "12 hits: Lean.InductiveVal.isReflexive, Lean.InductiveVal.isReflexiveEx, Module.IsReflexive, Module.IsReflexive.to_isTorsionFree, MulOpposite.instModuleIsReflexive, Module.IsReflexive.of_split, Module.instIsReflexiveDual, Module.IsReflexive.bijective_dual_eval'",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic reflexivity and its elementary properties do not give the scheme extension equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "reflexive.*regular|regular.*reflexive|codimension.*(two|2)|Hartogs",
+   "results": "12 hits: Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean, Mathlib/Algebra/Quandle.lean, Mathlib/Analysis/Normed/Module/Connected.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern categorical reflexive coequalizers and topological codimension, not algebraic vector bundles."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+  "date": "2026-10-24",
+  "group": "Q118"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: replace the punctured-surface general linear torsor by its finite locally free sheaf and extend by direct image.",
+   "via": [
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-regular-surface-vector-bundle-extension",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Reused the existing normal coherent-reflexive open-equivalence node and regular-normal/coherence criteria; added one statement-only node for Stacks 0B3N. Checked the two schemes meet the regular dimension bound, identified the full bundle subcategories, and gave the unit/counit and explicit unique morphism extension. All new-node Mathlib queries were run through msearch.py and read; no exact match.",
+  "blueprint": "Realizes the regular-surface vector-bundle extension prerequisite of Claim 2 in lem-sfb-reductive-nodal-equivariant-torsor-extension, proof step 2, within the inherited det-thm-sf-ctf-stability-direct-images (3) alteration chain. Read the latest blueprint unit and direct-image proof; no unit step or chapter route is replaced. blueprint_refs.py ancestor reports None, retained as the current item records it.",
+  "tool_uses": [
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Uses only clause (1), regular schemes are normal, to check the existing reflexive extension theorem; a generic scheme-theoretic tool, not a replacement for the unit route."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Uses the equivalence coherent iff quasi-coherent of finite type on the two locally Noetherian schemes; a generic coherence tool for recognizing bundles, not a replacement for any unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "rem-pc-regular-normal",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q78-62cc41e3b",
+  "group": "Q78",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q78-62cc41e3b (reviewer sub-agent of L); spot-checked: The item statement is identical to clones/live; stmt_deps were extended only by definitions. The base item was statement-only, so this is not a re-split. The new node lem-sfb-regular-surface-reflexive-locally-free matches Stacks 0B3N (divisors.tex lines 2336-2347): regular scheme of dim ≤ 2, coherent F, reflexive ⇔ finite locally free. Its reflexivity definition matches divisors definition-reflexive (line 2005). It is not a restatement of the item, since it has no open subset, no j_* and no equivalence. An rg -L search of the snapshot DAG for 0B3N and reflexive/free/depth patterns found no duplicate: the per- reflexive lemmas, new-affine-depth-two, lem-sfb-normal-reflexive-open-equivalence and lem-sc-regular-curve-torsionfree-free are all different statements. The Mathlib no-match is correct: IsReflexive.of_finite_of_free (Dual/Lemmas.lean:259) proves only the converse. Step 1 (U is regular and locally Noetherian, dim U ≤ dim X, restriction preserves bundles) is correct. The ring-vs-topological reading of dim X agrees by Stacks 04MU (dim X = sup dim O_{X,x}); noted, not a fault. Step 2 (bundles are qcoh of finite type, hence coherent by 01XZ; 0B3N on X and U identifies full subcategories) is correct. Step 3 (rem-pc-regular-normal (1) gives normal; lem-sfb-normal-reflexive-open-equivalence, the 0EBJ specialization, read in full, gives j_*V coherent reflexive, counit iso and unit iso; 0B3N on X makes j_*V locally free) is correct and all hypotheses are checked. Step 4 (extension η_F^{-1}∘j_*a∘η_E; triangle identity for restriction; naturality of η for uniqueness) is correct. Edge cases: dim ≤ 1 forces U = X; rank 0 is fine; (x,y) ⊂ k[x,y] and the quadric cone confirm the hypotheses are needed and present. Accepted tool_uses: rem-pc-regular-normal (1) and pqf-lem-coherent-ft-locnoeth, both generic. No SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RegularSurfaceVectorBundleExtension",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.regularSurfaceVectorBundleExtension",
+  "file": "lean/Sheaf/AlgebraicGeometry/RegularSurfaceVectorBundleExtension.lean",
+  "statement": "theorem regularSurfaceVectorBundleExtension (X U : Scheme.{u}) [IsIntegral X] [IsLocallyNoetherian X] [CompactSpace X] (hregular : IsRegularScheme X) (hdim : topologicalKrullDim X ≤ 2) (j : U ⟶ X) [IsOpenImmersion j] (hcodim : ∀ x : X, x ∉ Set.range j → 2 ≤ ringKrullDim (X.presheaf.stalk x)) : (∀ E : X.Modules, E.IsFiniteLocallyFree → ((restrictFunctor j).obj E).IsFiniteLocallyFree ∧ IsIso ((restrictAdjunction j).unit.app E)) ∧ (∀ V : U.Modules, V.IsFiniteLocallyFree → ((pushforward j).obj V).IsFiniteLocallyFree ∧ IsIso ((restrictAdjunction j).counit.app V)) ∧ (∀ (E F : X.Modules), E.IsFiniteLocallyFree → F.IsFiniteLocallyFree → ∀ a : (restrictFunctor j).obj E ⟶ (restrictFunctor j).obj F, ∃! b : E ⟶ F, (restrictFunctor j).map b = a) ∧ (∃ e : (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).FullSubcategory ≌ (SheafOfModules.isFiniteLocallyFree U.ringCatSheaf).FullSubcategory, Nonempty (e.functor ⋙ (SheafOfModules.isFiniteLocallyFree U.ringCatSheaf).ι ≅ (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι ⋙ restrictFunctor j) ∧ Nonempty (e.inverse ⋙ (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι ≅ (SheafOfModules.isFiniteLocallyFree U.ringCatSheaf).ι ⋙ pushforward j))",
+  "branch": "newtargets-dag",
+  "by": "Q119",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4da4c116a",
+  "group": "Q119",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0EBJ/0B3N (divisors.tex l.2224, l.2337); depth≥2 vs dim≥2 equivalent on regular X. Hypotheses: IsIntegral, IsLocallyNoetherian+CompactSpace (=Noetherian), IsRegularScheme, topologicalKrullDim≤2, IsOpenImmersion j, stalk ringKrullDim≥2 off range j; nothing stronger, single universe u. Conclusions: canonical restrictAdjunction unit/counit isos on bundles, j_*V finite locally free, ∃! extension of maps, full-subcategory equivalence naturally iso to restrictFunctor/pushforward (not arbitrary). IsFiniteLocallyFree is variable rank, universe fixed by the site. Node diff vs live is the lean field only; statement verbatim in file; imports exist live; docstrings carry source/blueprint and 4 proof steps; sorry only; no definitions. No compile (no file changed). No findings."
+ }
+}

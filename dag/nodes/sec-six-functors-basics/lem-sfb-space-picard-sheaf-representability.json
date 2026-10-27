@@ -1,0 +1,264 @@
+{
+ "id": "lem-sfb-space-picard-sheaf-representability",
+ "kind": "statement",
+ "title": "Unpointed Picard sheaf representability for proper flat algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $f:X\\to S$ a proper flat finitely presented morphism from an algebraic space [def-trf-algebraic-space]. Proper means separated, of finite type and universally closed; flatness and local finite presentation are tested on etale scheme charts, and finite presentation also includes quasi-compactness and quasi-separatedness. A geometric fibre is a base change to the spectrum of an algebraically closed field; integral means nonempty, reduced and irreducible. A line module means a module on the small etale structure sheaf locally isomorphic to that structure sheaf [def-trf-algebraic-space]; on a scheme it corresponds to an ordinary invertible module [def-sc-invertible-module]. For every $S$-scheme $T$, put $X_T=X\\times_ST$, and let $\\operatorname{Pic}(X_T)$ be the group of line-module isomorphism classes under tensor product. Let $F$ be the fppf sheafification of the presheaf $T\\mapsto\\operatorname{Pic}(X_T)$ on the big fppf site [def-pc-fppf-site]. Suppose $\\mathcal O_T\\to(f_T)_*\\mathcal O_{X_T}$ is an isomorphism for every $S$-scheme $T$. Then $F$ is represented by an algebraic space $Q\\to S$ which is quasi-separated and locally of finite presentation. Quasi-separated means that the diagonal is quasi-compact; local finite presentation is tested on etale scheme charts. The tensor product, trivial module and dual module induce a commutative group algebraic space structure on $Q$. No section, geometric integrality, dimension or Noetherian hypothesis is imposed. Direct image and tensor pullback are the canonical functors on small etale module sheaves [def-trf-space-etale-module-functors].",
+ "source": {
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tag 0D25, situation-pic; Tag 0D2C, proposition-pic-functor; moduli.tex Tag 0DNI, lemma-pic-functor-qs-lfp, with the standing hypotheses in section-picard-functor"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sc-invertible-module",
+  "def-pc-fppf-site",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-picard-presentation",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-module-structure-map",
+  "def-sfb-space-proper-quot-functor",
+  "def-sfb-smooth-integral-group-space"
+ ],
+ "proof": [
+  {
+   "text": "Let $\\mathcal P(T)$ be the groupoid of line modules on $X_T$ and tensor-pullback isomorphisms. Apply [lem-sfb-space-coherent-stack-general] with $B=S$: properness gives separatedness, and $f$ is finitely presented. Its coherent stack $\\mathcal C$ is algebraic and locally of finite presentation over $S$. By [lem-sfb-space-invertible-open-coherent], $\\mathcal P\\to\\mathcal C$ is fully faithful and representable by open immersions; flatness and properness of $f$ are exactly its hypotheses. Consequently [lem-sfb-open-stack-algebraic-lfp] makes $\\mathcal P$ algebraic and locally of finite presentation over $S$. In particular every line module used below is an object of this coherent stack, with the finite-presentation, relative-flatness and proper-support conditions stated there.",
+   "uses": [
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-invertible-open-coherent",
+    "lem-sfb-open-stack-algebraic-lfp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tags 09DS (theorem-coherent-algebraic-general), 0D03 (lemma-picard-stack-open-in-coh), 0D04 (proposition-pic); moduli.tex Tag 0DMB (lemma-pic-qs-lfp)."
+   }
+  },
+  {
+   "text": "For a line module $L$ on $X_T$, an automorphism is multiplication by a unique global unit: in a local frame it is a unit scalar, and change of frame does not change that scalar. The hypothesis $\\mathcal O_T\\simeq(f_T)_*\\mathcal O_{X_T}$ therefore gives $\\operatorname{Aut}(L)=\\Gamma(T,\\mathcal O_T)^\\times$, naturally after every further scheme base change. The inertia projection of $\\mathcal P$ thus pulls back at $L$ to $\\mathbf G_{m,T}\\to T$. Over an affine open $\\operatorname{Spec}A\\subseteq T$, this unit functor is represented by $\\operatorname{Spec}(A[z,w]/(zw-1))$ [def-weil-affine-spectrum], a finitely presented affine scheme [def-sbc-locally-finite-presentation]. It is formally smooth: for any square-zero ring surjection $R'\\twoheadrightarrow R$, lift a unit and its inverse to $a,b\\in R'$. If $ab=1+i$ with $i^2=0$, then $b(1-i)$ is an inverse of $a$, giving the required lift. By [def-sbc-smooth-morphisms] this scheme is smooth. Locality on the open affine cover and smooth-implies-flat-and-locally-finitely-presented in [lem-sfb-stack-chartwise-smooth-etale-calculus] imply that the inertia is flat and locally of finite presentation.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-sbc-locally-finite-presentation",
+    "def-sbc-smooth-morphisms",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/moduli.tex",
+    "place": "Tag 0DNH (lemma-pic-inertia); examples-stacks.tex Tag 0375 (example-inertia-stack-of-picard); explicit unit lifting calculation."
+   }
+  },
+  {
+   "text": "By [lem-sfb-flat-inertia-algebraic-space-quotient], the fppf sheafification of $T\\mapsto\\operatorname{Ob}\\mathcal P(T)/\\cong$ is an algebraic space $Q$. This presheaf is exactly $T\\mapsto\\operatorname{Pic}(X_T)$, so the sheaf is the $F$ of the statement. There has been no choice of a section of $f$. Work in a containing universe as in [def-pc-fppf-site]. By [lem-weil-pbc-site-sheafification-sections-local], sections of $F$ have local line-module representatives, and two representatives with equal images become isomorphic on a further fppf covering. Thus $\\pi:\\mathcal P\\to Q$ is a gerbe: over every scheme mapping to $Q$, its fibre has objects locally and any two objects are locally isomorphic.",
+   "uses": [
+    "lem-sfb-flat-inertia-algebraic-space-quotient",
+    "def-pc-fppf-site",
+    "lem-weil-pbc-site-sheafification-sections-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D2C (proposition-pic-functor), gerbe alternative explicitly indicated after the statement; moduli.tex Tag 0DME (lemma-pic-gerbe-over-pic-functor); stacks-morphisms.tex Tags 06QJ, 06QD."
+   }
+  },
+  {
+   "text": "Choose a smooth surjective scheme atlas $U\\to\\mathcal P$ with $U\\to S$ locally of finite presentation, available from step 1. The gerbe assertion of step 3 and [lem-sfb-gerbe-smooth-universal-homeomorphism] make the composite $U\\to Q$ surjective, flat and locally of finite presentation. Apply the source-locality clause of [lem-sfb-representable-fppf-etale-open-descent] to the space morphism $Q\\to S$, using the identity cover $V=S\\to S$ and the source cover $W=U\\to Q$. Since $U\\to S$ is locally of finite presentation, $Q\\to S$ is locally of finite presentation. This applies locality to morphisms of algebraic spaces, not to the nonrepresentable gerbe projection.",
+   "uses": [
+    "lem-sfb-gerbe-smooth-universal-homeomorphism",
+    "lem-sfb-representable-fppf-etale-open-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli.tex",
+    "place": "Tag 0DNI (lemma-pic-functor-qs-lfp), local-finite-presentation argument; stacks-morphisms.tex lemma-flat-finite-presentation-permanence; spaces-descent.tex Tag 06EV."
+   }
+  },
+  {
+   "text": "For every $S$-scheme $T$ and pair $L,M\\in\\mathcal P(T)$, the projection $f_T:X_T\\to T$ is of finite presentation by [lem-sfb-space-flat-proper-fp-locality]. Step 1 supplies finite presentation, relative flatness and proper support for both modules. Apply [lem-sfb-space-module-isom-affine] to $f_T,L,M$. It represents their isomorphism functor by an algebraic space affine and of finite presentation over $T$. This functor is precisely the pullback of $\\Delta_{\\mathcal P/S}$ by the object $(L,M)$ over $T$, by the definition of the two-fibre product. Hence that diagonal is of finite presentation and in particular quasi-compact. Apply [lem-sfb-gerbe-qc-diagonal-descent] to the gerbe of step 3. It gives quasi-compactness of $\\Delta_{Q/S}$, which is exactly the asserted quasi-separatedness of $Q\\to S$.",
+   "uses": [
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-module-isom-affine",
+    "lem-sfb-gerbe-qc-diagonal-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli.tex",
+    "place": "Tags 0DMA (lemma-pic-diagonal-affine-fp), 0DMF (lemma-pic-functor-diagonal-qc-immersion), 0DNI (lemma-pic-functor-qs-lfp); quot.tex Tag 08K9 (proposition-isom); stacks-morphisms.tex Tag 0DQL."
+   }
+  },
+  {
+   "text": "Tensor product, the trivial module, and dualization give each $\\operatorname{Pic}(X_T)$ its abelian group law and commute with tensor pullback. For $a,b\\in F(T)$ choose a common fppf covering with representatives $L_i,M_i$, using [lem-weil-pbc-site-sheafification-sections-local], and glue the images of $[L_i\\otimes M_i]$. On overlaps equality of input classes is, locally, an isomorphism of the inputs, so these tensor-product classes have equal images in $F$; the sheaf condition gives a unique glued section. The same argument defines inverse by $L_i^\\vee$ and identity by $\\mathcal O_{X_T}$, and proves independence of representatives and compatibility with restriction. Associativity, commutativity, identity and inverse equations hold on representatives and therefore in $F$. Since morphisms of algebraic spaces are natural transformations of the representing sheaves [def-trf-algebraic-space], and $Q\\times_SQ$ is the sheaf fibre product, which represents $F\\times F$ [lem-trf-space-fibre-products-etale-covers], these operations are morphisms $Q\\times_SQ\\to Q$, $S\\to Q$ and $Q\\to Q$ satisfying the group identities. This is the claimed commutative group algebraic space.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Situation 0D25 (situation-pic), tensor law on Picard classes and sheafification."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-coherent-stack-general",
+  "lem-sfb-space-invertible-open-coherent",
+  "lem-sfb-open-stack-algebraic-lfp",
+  "def-weil-affine-spectrum",
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-smooth-morphisms",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-flat-inertia-algebraic-space-quotient",
+  "def-pc-fppf-site",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-sfb-gerbe-smooth-universal-homeomorphism",
+  "lem-sfb-representable-fppf-etale-open-descent",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-space-module-isom-affine",
+  "lem-sfb-gerbe-qc-diagonal-descent",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tag 0D2C (proposition-pic-functor), its explicitly indicated gerbe alternative; moduli.tex Tags 0DMB, 0DMA, 0DNH, 0DNI; stacks-morphisms.tex Tags 06QJ, 06QD, 0DQL."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The fppf Picard functor of a proper flat finitely presented algebraic space with universally trivial structure sheaf pushforward is an algebraic space locally of finite presentation",
+   "results": "8 hits; top: AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.instLocallyOfFinitePresentationFstScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, ring modules or other notions; none states this result for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representability and local finite presentation of the unpointed relative Picard fppf sheaf for a proper flat algebraic space",
+   "results": "8 hits; top: SheafOfModules.isFinitePresentation, AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.LocallyOfFinitePresentation, SheafOfModules.IsFinitePresentation.mk, CommRing.relPic, SheafOfModules.QuasicoherentData.IsFinitePresentation.mk",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, ring modules or other notions; none states this result for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Picard\"",
+   "results": "0 hits; top: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, ring modules or other notions; none states this result for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "Picard|picardFunctor|rigidifi",
+   "results": "23 hits; top: Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean, Mathlib/Geometry/Manifold/IntegralCurve/ExistUnique.lean, Mathlib/Geometry/Manifold/IntegralCurve/ExistUnique.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/CategoryTheory/Skeletal.lean, Mathlib/RingTheory/PicardGroup.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, ring modules or other notions; none states this result for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "Picard|picardFunctor|cohomologicallyFlat",
+   "results": "23 hits; read returned names/types and grep lines: Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/RingTheory/PicardGroup.lean, Mathlib/RingTheory/PicardGroup.lean, Mathlib/RingTheory/PicardGroup.lean, Mathlib/RingTheory/PicardGroup.lean, Mathlib/RingTheory/PicardGroup.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: generic scheme representability, affine-space and finite-presentation facts and ring Picard groups do not represent the relative algebraic-space Picard sheaf"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representability of the unpointed relative Picard functor of an algebraic space family without a section",
+   "results": "8 hits; read returned names/types and grep lines: AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, CategoryTheory.Functor.relativelyRepresentable, CategoryTheory.Functor.relativelyRepresentable.toPullbackTerminal, CategoryTheory.Functor.IsRepresentedBy.mk, CategoryTheory.Functor.IsRepresentedBy, CategoryTheory.Functor.IsRepresentable.recOn, CategoryTheory.Functor.IsRepresentedBy.representableBy, CategoryTheory.Functor.relativelyRepresentable.diag_of_map_from_obj",
+   "date": "2026-10-24",
+   "verdict": "no match: generic scheme representability, affine-space and finite-presentation facts and ring Picard groups do not represent the relative algebraic-space Picard sheaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"picardFunctor\"",
+   "results": "0 hits; read returned names/types and grep lines: ",
+   "date": "2026-10-24",
+   "verdict": "no match: generic scheme representability, affine-space and finite-presentation facts and ring Picard groups do not represent the relative algebraic-space Picard sheaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fppf Picard sheaf of a proper flat finitely presented algebraic space with universally trivial pushforward of its structure sheaf is represented by a quasi-separated algebraic space locally of finite presentation",
+   "results": "8 hits; read returned names/types and grep lines: AlgebraicGeometry.Scheme.LocalRepresentability.representableBy, AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, SheafOfModules.quasicoherentDataOfIsFinitePresentation, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, SheafOfModules.isFinitePresentation, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+   "date": "2026-10-24",
+   "verdict": "no match: generic scheme representability, affine-space and finite-presentation facts and ring Picard groups do not represent the relative algebraic-space Picard sheaf"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rigidified-space-picard",
+  "date": "2026-10-23",
+  "group": "Q141"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Rigidified Picard representability for proper geometrically integral algebraic-space families. Supporting input: Represent the unpointed sheaf before identifying it with the rigidified functor; use 0DNI for quasi-separatedness and local finite presentation.",
+   "via": [
+    "lem-sfb-rigidified-space-picard",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-picard-sheaf-representability",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Used the source's gerbe alternative to prove representability without a section, then descended local finite presentation and quasi-compactness of the stack diagonal. Existing nodes cover the coherent/open stack, inertia quotient, gerbe and descent tools. Only new node is the general module Isom representability theorem 08K9, strictly smaller than the Picard theorem and without its universal-functions hypothesis. All cited statements read and quoted; no dimension, geometric-integrality or Noetherian hypothesis introduced.",
+  "blueprint": "Read literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3). The item supplies the unpointed Picard prerequisite named in blueprint.from.place in the existing alteration/level-structure supporting chain. Steps 1--3 supply representability, steps 4--5 the 0DNI properties, and step 6 the tensor group law. Whole-blueprint searches Picard, Picard functor, Isom, coherent diagonal, gerbe and 08K9 found no matching general algebraic-space theorem. No unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Generic local representatives and local equality in sheafification, needed to identify the gerbe and glue group operations; no node of this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-bf1c09bb6",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-bf1c09bb6 (reviewer sub-agent of L); spot-checked: I read every step against Stacks quot 08K9/08JT/0D25/0D2C and moduli 0DME/0DMF/0DNI/0DNH/0DMA, and every tag resolves to its stated label. The item statement is unchanged and matches the source hypotheses of moduli section-picard-functor (flat, proper, fp, universal O_T≅f_*O). Step 1: coherent-stack-general (proper gives separated), invertible-open-coherent and open-stack-lfp give P algebraic and lfp. Step 2: Aut(L)=Γ(T,O)^×, the unit lift b(1−i) is correct, so the inertia is smooth, hence flat and lfp (elementary, accepted). Step 3: flat-inertia quotient gives Q with Q=F, and sections-local gives the gerbe conditions. Step 4: gerbe-smooth makes U→Q flat, lfp and surjective, and the space source-locality clause with V=S, W=U gives Q→S lfp. Step 5: f_T is fp; the new 08K9 node applies to L,M (fp, flat, proper support from step 1); Isom is the pullback of the diagonal; 0DQL descent gives Δ_Q quasi-compact; the scheme-test to qc-stack reading of quasi-compactness is accepted as elementary. Step 6: the group law is glued from local representatives. FIX: step 6 lacked the citation that Q×_SQ represents F×F; I added lem-trf-space-fibre-products-etale-covers to the text, uses and proof_deps. New node lem-sfb-space-module-isom-affine matches 08K9 exactly. It is statement-only and not a duplicate (module-hom-affine 08K6 is Hom; coherent-diagonal 08W6 is representability only; noetherian-module-hom is Noetherian Hom). Small cases: GL_n, M=0/N=O, empty X. Batch-5: all trf citations are general algebraic-space definitions or foundational lemmas reaching sec-trace-formula only via def-trf-algebraic-space, not steps of the trace formula or Poincaré duality, so accepted. The tool_use of sections-local (a general site fact) is accepted. No SGA is cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpacePicardSheafRepresentability",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.space_picard_sheaf_representability",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpacePicardSheafRepresentability.lean",
+  "statement": "theorem space_picard_sheaf_representability {S : Scheme.{u}} {X : AlgebraicSpace S} (f : X ⟶ groupSpaceBase S) (hproper : MapIsProper f) (hflat : MapIsFlat f) (hfp : ProperQuotFinitePresentation f) (hO : ∀ T : ProperQuotTest (groupSpaceBase S), IsIso (moduleStructureMap (properQuotSnd f T))) : ∃ (Q : AlgebraicSpace S) (G : CommutativeSpaceGroup Q), Nonempty (SpacePicardPresentation f Q G) ∧ MapIsQuasiCompact (pullback.diagonal (groupSpaceProjection Q).hom.hom) ∧ MapIsLocallyOfFinitePresentation (groupSpaceProjection Q)",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e01736283",
+  "group": "NK",
+  "result": "fix",
+  "note": "Item matches Stacks 0D25/0D2C/0DNI with B=S: proper, flat, fp incl. qc+qs; canonical moduleStructureMap iso for every S-scheme T; Q represents the fppf sheafification via locally_represented plus the locally_equal iff; group law pinned by tensor_class/unit_class with inverse forced; diagonal qc relative over S; lfp; no extra hypotheses, one universe u. Base dependency records unchanged; added stmt_deps all used; report sections present; proof is sorry only. H4: new node def-sfb-space-picard-presentation copied commStructureSheaf/commStructurePresheaf_isSheaf (owner def-sfb-space-quasi-coherent-algebra, on base) as picardCommStructure(_isSheaf). FIX: fixes/SpacePicardPresentation.lean uses commStructureSheaf; fixes/def-sfb-space-picard-presentation.json adds the stmt_dep and citation and trims declarations; check_new_node and check_lean_text clean; nt_compile --json of both modules exit 0 (14.4 s, 15.8 s). Advisories: MapIsQuasiCompact owner only transitive; picardLineTensor is a second space-module tensor realization besides Poincare.smallMonoidal."
+ }
+}

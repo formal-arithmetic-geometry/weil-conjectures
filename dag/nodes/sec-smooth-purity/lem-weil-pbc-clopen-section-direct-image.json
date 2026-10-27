@@ -139,7 +139,18 @@
   "def-weil-pbc-scheme-conventions"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-operations",
  "split_report": {
@@ -206,5 +217,25 @@
   "landing": "20261018T062756-L-650986",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $p:V\\to X$ be a scheme morphism and\n$s:X\\hookrightarrow V$ an\nopen immersion with\nclosed image and $p s=\\operatorname{id}_X$.\nFor a commutative ring $\\Lambda$ and\n$K\\in\\hyperref[def-weil-pbc-derived-categories]{D^+(X_{\\Et},\\Lambda)}$,\nrestriction to this component gives a canonical isomorphism\n\n$$\nRp_*s_!K\\xrightarrow{\\sim}K,\n$$\n\nwhere $Rp_*$ and $s_!$ are the\nderived direct image and\nextension by zero.",
+  "proof": [
+   {
+    "text": "The disjoint open cover\n$V=s(X)\\amalg(V\\setminus s(X))$ identifies sheaves on $V_{\\Et}$\nwith pairs of sheaves on its components, by the sheaf gluing axiom.\nIn this product description the functor $s_!$ of\n[def-weil-pbc-extension-by-zero] is $F\\mapsto(F,0)$.\nIt is also right adjoint to the exact restriction to the first\ncomponent, and hence preserves injectives. For every etale $W\\to X$,\nthe direct image in [def-weil-pbc-direct-image] has\n\n$$\n(p_*s_!F)(W)\n=\\Gamma(V\\times_XW,s_!F)\n=\\Gamma(W,F),\n$$\n\nbecause $p s=\\operatorname{id}_X$ and the other component contributes\nzero. Apply this identity to a bounded-below injective resolution\nfrom [prop-weil-pbc-kinjective-resolutions-exist]; its extension\nby zero is still an injective resolution. The identity in each\ndegree is the asserted derived isomorphism.",
+    "uses": [
+     "def-weil-pbc-extension-by-zero",
+     "def-weil-pbc-direct-image",
+     "prop-weil-pbc-kinjective-resolutions-exist"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

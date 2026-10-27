@@ -1,0 +1,377 @@
+{
+ "id": "lem-coef-open-scalar-adjunction-counit",
+ "kind": "statement",
+ "title": "Open scalar adjunction and the factored exceptional counit",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ and a prime $\\ell\\ne\\operatorname{char}k$ [def-weil-finite-field-fiber]. Let $E,L/\\mathbf Q_\\ell$ be finite extensions, $m,n\\ge1$, $A=\\mathcal O_E/\\varpi_E^m$, $B=\\mathcal O_L/\\varpi_L^n$, and $\\varphi:A\\to B$ any unital map [def-weil-l-adic-coefficient-extension]. On each scheme $T$ use constant module sheaves on its small pro-etale site [def-weil-pbc-proetale-site], and write $S_T^{A,B}K=K_B=K\\otimes_A^LB$ for uncompleted derived scalar extension [lem-pur-derived-change-of-rings]. The notation $D^b_{ctf}$ means bounded constructible with finite Tor amplitude [def-weil-finite-tor-amplitude]. All schemes below are separated and finite type over $k$; all scheme maps are $k$-maps [def-weil-scheme-morphism-properties]. Use the constructible exceptional functors and their adjunctions on bounded constructible inputs of etale origin [def-weil-exceptional-inverse-image], and ordinary derived direct images [def-weil-derived-direct-image]. Let $h:W\\hookrightarrow X$ be factored as $W\\xrightarrow{t}V\\xrightarrow{j}X$, with $t$ closed and $j$ open. For each $R=A,B$, compact-support composition [def-compact-support-direct-image-detailed] identifies $Rh_{!,R}=j_{!,R}t_{*,R}$ on bounded-below etale-origin inputs; both intermediate compact-support operations preserve that class. The adjunction is the composite $j_{!,R}t_{*,R}\\dashv Rt_R^!j_R^*$ [def-weil-pbc-composite-adjunction], so $Rh_R^!=Rt_R^!j_R^*$ on bounded constructible inputs, with\n$$\\epsilon_{h,R}=\\epsilon_{j,R}\\circ j_{!,R}(\\epsilon_{t,R}).$$\nIn particular these are the constructible exceptional functor and its actual counit, and for $M\\in D^b_{ctf}(X,R)$, $j_R^*M$ and $Rt_R^!j_R^*M$ belong to their respective finite-Tor constructible domains.\n\nWrite $V_T=\\operatorname{Res}_{A\\to B}$ for exact restriction of scalars. On the entire ordinary derived categories [lem-pur-sheaf-ring-derived-coefficient-adjunction], $S_T\\dashv V_T$ and $j_A^*V_X=V_Vj_B^*$ canonically. The composite of these adjunctions with $j_!\\dashv j^*$ [prop-exc-open-adjoint] determines a natural $B$-linear isomorphism\n$$e_{j,Q}:S_Xj_{!,A}Q\\xrightarrow{\\sim}j_{!,B}S_VQ\\qquad(Q\\in D(V_{\\mathrm{proet}},A)),$$\nnormalized by the scalar unit $x\\mapsto x\\otimes1$ on flat-term K-flat models. For the canonical open restriction comparison $r_{j,M}:S_Vj_A^*M\\xrightarrow{\\sim}j_B^*S_XM$, one has, for every $M\\in D(X_{\\mathrm{proet}},A)$,\n$$\\epsilon_{j,B,S_XM}\\,j_{!,B}(r_{j,M})\\,e_{j,j_A^*M}=S_X(\\epsilon_{j,A,M}).$$\nThis equality holds in $D(X_{\\mathrm{proet}},B)$ for the actual scalar and open adjunctions. No coefficient flatness is imposed.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-closed-shriek.md",
+  "place": "Proof paragraph 3, locally closed factorization and the open coefficient comparison; returned steps 9–10, compact-support domains and B-linear scalar/open Hom calculation"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-derived-direct-image",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-pbc-composite-adjunction",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "prop-exc-open-adjoint",
+  "def-pc-kflat-complex",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-pbc-proetale-operations",
+  "def-sp-open-scalar-operations",
+  "thm-sf-comp-composition",
+  "def-sp-fixed-compact-support-comparison"
+ ],
+ "proof": [
+  {
+   "text": "First fix either coefficient ring $R$. The schemes are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], and the complementary opens of closed immersions are quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. For $t$, choose the compactification $(\\mathrm{id}_W,t)$ in [def-compact-support-direct-image-detailed]. Its compact-support functor is $Rt_*$, which is termwise $t_*$ by [lem-exc-proetale-closed-exact]. For $j$, choose $(j,\\mathrm{id}_X)$, giving $Rj_!=j_!$. Apply [thm-sf-comp-composition] with $f=t$, $g=j$: it gives $Rh_!\\cong j_!t_*$ and explicitly says that each compact-support functor preserves bounded-below etale origin. These assertions are used on that class only.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "def-compact-support-direct-image-detailed",
+    "lem-exc-proetale-closed-exact",
+    "thm-sf-comp-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-closed-shriek.md",
+    "place": "Proof paragraph 3: locally closed factorization, open restriction and exceptional-counit compatibility; agent expansion using the Stacks adjunction formulas"
+   }
+  },
+  {
+   "text": "Let $M\\in D^b_{ctf}(X,R)$. Restrict its finitely many constructible strata to $V$; restriction of a locally constant finite module sheaf remains locally constant finite. The exact inverse image of [def-weil-pbc-proetale-operations] identifies cohomology after restriction, so $j_R^*M$ is bounded constructible. To check finite Tor amplitude, take a bounded flat model of $M$ in an interval $[a,b]$ by [lem-sf-flat-model]. Its open pullback is again flat termwise and K-flat by [lem-weil-pbc-ringed-pullback-preserves-kflat], stays zero outside $[a,b]$, and represents $j_R^*M$ by exactness. The converse of [lem-sf-flat-model] gives the same Tor interval. Now [thm-sf-preservation-class], applied to the separated finite-type map $t:W\\to V$ over $k$, puts $Rt_R^!j_R^*M$ in $D^b_{ctf}(W,R)$. Both objects have bounded constructible etale origins by [lem-sf-proetale-constructible-origin]. This reasoning is applied separately over $A$ and $B$.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "lem-sf-flat-model",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "thm-sf-preservation-class",
+    "lem-sf-proetale-constructible-origin"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-closed-shriek.md",
+    "place": "Proof paragraph 3: locally closed factorization, open restriction and exceptional-counit compatibility; agent expansion using the Stacks adjunction formulas"
+   }
+  },
+  {
+   "text": "For $H$ of bounded-below etale origin on $W$ and bounded constructible $M$ on $X$, the actual open adjunction [prop-exc-open-adjoint] and the relative exceptional adjunction [thm-sf-ambient-adjoint-class] give\n$$\\operatorname{Hom}(j_!t_*H,M)\\cong\\operatorname{Hom}(t_*H,j^*M)\\cong\\operatorname{Hom}(H,Rt^!j^*M).$$\nThe first step's preservation assertion makes both Hom calculations legitimate. The actual constructible $Rh^!M$ of [def-weil-exceptional-inverse-image] represents the same Hom functor. Both representing objects are bounded constructible by [thm-sf-preservation-class] and the preceding step, hence of etale origin. On this full category the unique counit-compatible right-adjoint isomorphism [det-sp-unique-right-adjoint] identifies $Rh^!$ with $Rt^!j^*$. By the definition of composite adjunction [def-weil-pbc-composite-adjunction], the composite Hom bijection has counit $\\epsilon_j\\circ j_!(\\epsilon_t)$, and the uniqueness identification carries it to the actual counit of $Rh^!$. This proves the factored assertion without positing a general unbounded exceptional adjoint.",
+   "uses": [
+    "prop-exc-open-adjoint",
+    "thm-sf-ambient-adjoint-class",
+    "def-weil-exceptional-inverse-image",
+    "thm-sf-preservation-class",
+    "det-sp-unique-right-adjoint",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-closed-shriek.md",
+    "place": "Proof paragraph 3: locally closed factorization, open restriction and exceptional-counit compatibility; agent expansion using the Stacks adjunction formulas"
+   }
+  },
+  {
+   "text": "For the remaining steps work on the entire ordinary derived categories. Write $U_R=j_R^*$ and $J_R=j_{!,R}$. The exact scalar restrictions $V_T$ and the adjunctions $S_T\\dashv V_T$ with unit $x\\mapsto x\\otimes1$ are supplied by [lem-pur-sheaf-ring-derived-coefficient-adjunction]. The identified constant-ring pullbacks satisfy $U_AV_X\\cong V_VU_B$ by [lem-weil-pbc-ring-sheaf-change-adjunction], applied to $j$ and the compatible constant maps $A_T\\to B_T$. Its inverse is the same action identification in the opposite direction. The normalized balancing comparison of [lem-sfb-kflat-scalar-comparison-normalization] gives the invertible scalar mate $r:S_VU_A\\to U_BS_X$. In its left-tensor convention $1\\otimes x$ is $x\\otimes1$ after the symmetry for commutative rings; all maps retain the $B$-action. Thus $r$ is precisely the canonical open restriction comparison in the statement, including its scalar-unit normalization.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-sfb-kflat-scalar-comparison-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-closed-shriek.md",
+    "place": "Proof paragraph 3: locally closed factorization, open restriction and exceptional-counit compatibility; agent expansion using the Stacks adjunction formulas"
+   }
+  },
+  {
+   "text": "The two composite adjunctions of [def-weil-pbc-composite-adjunction] have left sides $S_XJ_A$ and $J_BS_V$, with right sides $U_AV_X$ and $V_VU_B$. Their Hom bijections, for any $Q\\in D(V,A)$ and $H\\in D(X,B)$, are\n$$\\operatorname{Hom}_B(S_XJ_AQ,H)\\cong\\operatorname{Hom}_A(J_AQ,V_XH)\\cong\\operatorname{Hom}_A(Q,U_AV_XH)\\cong\\operatorname{Hom}_A(Q,V_VU_BH)\\cong\\operatorname{Hom}_B(S_VQ,U_BH)\\cong\\operatorname{Hom}_B(J_BS_VQ,H).$$\nHere the scalar bijections are [lem-pur-sheaf-ring-derived-coefficient-adjunction], the open ones are [prop-exc-open-adjoint], and the middle identification is [lem-weil-pbc-ring-sheaf-change-adjunction]. Apply [lem-weil-pbc-conjugate-iso-unit-equation] to these composite adjunctions and that specified right-adjoint isomorphism. It gives a natural isomorphism $e:S_XJ_A\\xrightarrow{\\sim}J_BS_V$. It is a morphism in the $B$-module derived category, so its components are $B$-linear. The composite units use the specified scalar unit $x\\mapsto x\\otimes1$; this fixes the normalization, rather than merely choosing an isomorphism of the endpoints.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "prop-exc-open-adjoint",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-closed-shriek.md",
+    "place": "Proof paragraph 3: locally closed factorization, open restriction and exceptional-counit compatibility; agent expansion using the Stacks adjunction formulas"
+   }
+  },
+  {
+   "text": "Let $u_A:\\mathrm{id}\\to U_AJ_A$ be the actual open unit. The inverse $d_Q=e_Q^{-1}:J_BS_VQ\\to S_XJ_AQ$ is normalized by its open transpose\n$$S_VQ\\xrightarrow{S_V(u_{A,Q})}S_VU_AJ_AQ\\xrightarrow{r_{J_AQ}}U_BS_XJ_AQ.$$\nThis is exactly the inverse-transpose assertion of [lem-fix-open-scalar-tensor-normalization], with its $\\lambda_j^{-1}=r$ and its common-right-adjoint comparison equal to the one just constructed by uniqueness. By [lem-weil-pbc-adjunct-counit-identity] the displayed assertion says explicitly\n$$d_Q=\\epsilon_{j,B,S_XJ_AQ}\\circ J_B\\bigl(r_{J_AQ}\\circ S_V(u_{A,Q})\\bigr).$$\nThat cited result applies to finite commutative rings and arbitrary derived $Q$ without flatness or boundedness; therefore so does this formula.",
+   "uses": [
+    "lem-fix-open-scalar-tensor-normalization",
+    "lem-weil-pbc-adjunct-counit-identity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-closed-shriek.md",
+    "place": "Proof paragraph 3: locally closed factorization, open restriction and exceptional-counit compatibility; agent expansion using the Stacks adjunction formulas"
+   }
+  },
+  {
+   "text": "Take $Q=U_AM$. Substitute the formula for $d$ and use naturality first of $\\epsilon_{j,B}$ and then of $r$:\n$$\\begin{aligned}\nS_X(\\epsilon_{j,A,M})d_{U_AM}\n&=\\epsilon_{j,B,S_XM}\\,J_B\\bigl(U_BS_X(\\epsilon_{j,A,M})\\,r_{J_AU_AM}\\,S_V(u_{A,U_AM})\\bigr)\\\\\n&=\\epsilon_{j,B,S_XM}\\,J_B\\bigl(r_M\\,S_V(U_A(\\epsilon_{j,A,M})\\,u_{A,U_AM})\\bigr)\\\\\n&=\\epsilon_{j,B,S_XM}\\,J_B(r_M).\n\\end{aligned}$$\nThe last equality is the right triangle identity $U_A(\\epsilon_{j,A,M})u_{A,U_AM}=\\mathrm{id}_{U_AM}$ for the actual open adjunction; the unit/counit identities are as in [lem-weil-pbc-adjunct-counit-identity]. Precompose with $e_{U_AM}$ and cancel $d_{U_AM}e_{U_AM}=\\mathrm{id}$. This is precisely\n$$\\epsilon_{j,B,S_XM}\\,j_{!,B}(r_{j,M})\\,e_{j,j_A^*M}=S_X(\\epsilon_{j,A,M}).$$\nAll these are equations in $D(X,B)$, for arbitrary $M\\in D(X,A)$; no coefficient flatness or exceptional-functor domain is needed here.",
+   "uses": [
+    "lem-weil-pbc-adjunct-counit-identity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-closed-shriek.md",
+    "place": "Proof paragraph 3: locally closed factorization, open restriction and exceptional-counit compatibility; agent expansion using the Stacks adjunction formulas"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "def-compact-support-direct-image-detailed",
+  "lem-exc-proetale-closed-exact",
+  "thm-sf-comp-composition",
+  "def-weil-pbc-proetale-operations",
+  "lem-sf-flat-model",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "thm-sf-preservation-class",
+  "lem-sf-proetale-constructible-origin",
+  "prop-exc-open-adjoint",
+  "thm-sf-ambient-adjoint-class",
+  "def-weil-exceptional-inverse-image",
+  "det-sp-unique-right-adjoint",
+  "def-weil-pbc-composite-adjunction",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-fix-open-scalar-tensor-normalization",
+  "lem-weil-pbc-adjunct-counit-identity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-closed-shriek.md",
+  "place": "Proof paragraph 3: locally closed factorization, open restriction and exceptional-counit compatibility; agent expansion using the Stacks adjunction formulas"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a locally closed immersion factorization as closed then open the compact support adjunction is pasted and the open extension by zero coefficient isomorphism is B linear and respects the open exceptional counit",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      (AlgebraicGeometry.Scheme.Modules.pushforward f).comp (AlgebraicGeometry.Scheme.Modules.restrictFunctor f) ≅\\n        CategoryTheory.Functor.id X.Modules\", \"doc\": \"For a morphism $ f : X \\to Y $ of schemes, the composition of the pushforward functor along $ f $ followed by the restriction functor induced by $ f $ is naturally isomorphic to the identity functor on\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f] (M : X.Modules)\\n  (U : X.Opens),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.restrictAdjunction f).counit.app M) U =\\n    M.presheaf.map (CategoryTheory.eqToHom ⋯).op\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes. Let $f^*: \\\\mathbf{Mod}(\\\\mathcal{O}_Y) \\\\to \\\\mathbf{Mod}(\\\\mathcal{O}_X)$ and $f_*: \\\\mathbf{Mod}(\\\\mathcal{O}_X) \\\\to \\\\mathbf{O}_Y)$ be the restriction and\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f],\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Modules.restrictAdjunction f).counit\", \"doc\": \"For any open immersion $ f: X \\to Y $ of schemes, the counit of the adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mappi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      AlgebraicGeometry.Scheme.Modules.restrictFunctor f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"Given an open immersion $ f: X \\to Y $ of schemes, there is an adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mapping sh\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f] (M : Y.Modules)\\n  (U : Y.Opens),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.restrictAdjunction f).unit.app M) U =\\n    M.presheaf.map (CategoryTheory.homOfLE ⋯).op\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes. Let $f^*: \\\\text{Mod}(Y) \\\\to \\\\text{Mod}(X)$ be the restriction functor and $f_*: \\\\text{Mod}(X) \\\\to \\\\text{Mod}(Y)$ be the pushforward functor on sheaves\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n        [inst_1 : AlgebraicGeometry.IsOpenImmersion g] →\\n          AlgebraicGeometry.Scheme.Modules.restrictFunctor (CategoryTheory.CategoryStruct.comp f g) ≅\\n            (Alge\", \"doc\": \"For two open immersions $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ between schemes, the restriction functor for the composition $ g \\\\circ f $ is naturally isomorphic to the composition of the restriction fun\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) {U : X.Opens} [inst : AlgebraicGeometry.IsOpenImmersion f]\\n  [inst_1 : AlgebraicGeometry.IsOpenImmersion g] (M : Z.Modules),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.restrictFunctorComp f g).hom.app M) \", \"doc\": \"For schemes $X, Y, Z$ and open immersions $f: X \\\\to Y$, $g: Y \\\\to Z$, the composition of the functors induced by $g$ on open subsets of $Y$ and by $f$ on open subsets of $X$ (via opposite category ope\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {U : TopCat} (X : AlgebraicGeometry.Scheme) {f : U ⟶ { carrier := ↥X, str := X.instTopologicalSpaceCarrierCarrier }}\\n  (h : Topology.IsOpenEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f)) (V : (TopologicalSpace.Opens ↥X)ᵒᵖ),\\n  (AlgebraicGeometry.Scheme.Hom.toLRSHom (X.ofRestrict h)).c.app V =\\n \", \"doc\": \"For a scheme $X$, open subset $U$, open immersion $h: U \\\\to X$, and open set $V$ in $X$, the sheaf component of the morphism $X|_U \\\\to X$ at $V$ equals the map induced by the counit of the adjunction \"}",
+   "date": "2026-10-22",
+   "verdict": "No match: ordinary module scalar and Zariski restriction adjunctions do not state the pro-etale factored constructible exceptional adjunction and B-linear open counit comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Chaining scalar extension restriction adjunction with open extension restriction constructs the derived B linear extension by zero scalar comparison and its counit identity",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.counit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          (ModuleCat.restrictScalars f).comp (ModuleCat.extendScalars f) ⟶ CategoryTheory.Functor.id (ModuleCat S)\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\\\to S $, and an $ S $-module $ Y $, this is the counit natural transformation of the adjunction between extending scalars from $ R $ \"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.unit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          CategoryTheory.Functor.id (ModuleCat R) ⟶ (ModuleCat.extendScalars f).comp (ModuleCat.restrictScalars f)\", \"doc\": \"Given commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R \\to S $, this natural transformation provides for each $ R $-module $ X $ a canonical $ R $-linear map from $ X $ to the module \"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) → {Y : ModuleCat S} → ((ModuleCat.restrictScalars f).comp (ModuleCat.extendScalars f)).obj Y ⟶ Y\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\to S $, and an $ S $-module $ Y $, this is the counit morphism of the adjunction between extending and restricting scalars. It provid\"}\n  {\"name\": \"ModuleCat.homEquiv_extendScalarsComp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R₁ R₂ R₃ : Type u₁} [inst : CommRing R₁] [inst_1 : CommRing R₂] [inst_2 : CommRing R₃] (f₁₂ : R₁ →+* R₂)\\n  (f₂₃ : R₂ →+* R₃) (M : ModuleCat R₁),\\n  ((ModuleCat.extendRestrictScalarsAdj (f₂₃.comp f₁₂)).homEquiv M\\n        (((ModuleCat.extendScalars f₁₂).comp (ModuleCat.extendScalars f₂₃)).obj M))\\n  \", \"doc\": \"For commutative rings $ R_1, R_2, R_3 $ with ring homomorphisms $ f_{12} : R_1 → R_2 $ and $ f_{23} : R_2 → R_3 $, the hom-set equivalence induced by the adjunction between extension and restriction o\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.Unit.map\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) → {X : ModuleCat R} → X ⟶ ((ModuleCat.extendScalars f).comp (ModuleCat.restrictScalars f)).obj X\", \"doc\": \"Given commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R \\to S $, this natural transformation provides for each $ R $-module $ X $ a canonical $ R $-linear map from $ X $ to the module \"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) (x : ModuleCat S),\\n  (ModuleCat.ExtendRestrictScalarsAdj.counit f).app x = ModuleCat.ExtendRestrictScalarsAdj.Counit.map f\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\\\to S $, and an $ S $-module $ Y $, the counit of the adjunction between extending scalars from $ R $ to $ S $ and restricting scalar\"}\n  {\"name\": \"ModuleCat.homEquiv_extendScalarsId\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R : Type u₁} [inst : CommRing R] (M : ModuleCat R),\\n  ((ModuleCat.extendRestrictScalarsAdj (RingHom.id R)).homEquiv M ((CategoryTheory.Functor.id (ModuleCat R)).obj M))\\n      ((ModuleCat.extendScalarsId R).hom.app M) =\\n    (ModuleCat.restrictScalarsId R).inv.app M\", \"doc\": \"For any commutative ring $ R $ and $ R $-module $ M $, the natural bijection (hom equivalence) from the adjunction between extension and restriction of scalars, when applied to the identity extension \"}\n  {\"name\": \"ModuleCat.extendRestrictScalarsAdj\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → (f : R →+* S) → ModuleCat.extendScalars f ⊣ ModuleCat.restrictScalars f\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, the extension of scalars functor from $ R $-modules to $ S $-modules is left adjoint to the restriction of scalars functor\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: ordinary module scalar and Zariski restriction adjunctions do not state the pro-etale factored constructible exceptional adjunction and B-linear open counit comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback, \"adjunction\"",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [F\", \"doc\": \"Given a continuous functor between sites `F`, and a morphism of sheaves of rings\\n`S ⟶ (F.sheafPushforwardContinuous RingCat.{u} J K).obj R`, this is the adjunction\\nbetween the corresponding pullback a\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [F\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [F\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: ordinary module scalar and Zariski restriction adjunctions do not state the pro-etale factored constructible exceptional adjunction and B-linear open counit comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero.*(tensor|scalar|counit)|lowerShriek.*(tensor|scalar|counit)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "No match: ordinary module scalar and Zariski restriction adjunctions do not state the pro-etale factored constructible exceptional adjunction and B-linear open counit comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a locally closed immersion factorization as closed then open the compact support adjunction is pasted and the open extension by zero coefficient isomorphism is B linear and respects the open exceptional counit",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": restrictFunctor f ⊣ pushforward f\", \"doc\": \"Given an open immersion $ f: X \\to Y $ of schemes, there is an adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mapping sh\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": IsIso (restrictAdjunction f).counit\", \"doc\": \"For any open immersion $ f: X \\to Y $ of schemes, the counit of the adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mappi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(M : X.Modules) (U : X.Opens) :\\n  ((restrictAdjunction f).counit.app M).app U = M.presheaf.map (eqToHom (f.preimage_image_eq U).symm).op\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes. Let $f^*: \\\\mathbf{Mod}(\\\\mathcal{O}_Y) \\\\to \\\\mathbf{Mod}(\\\\mathcal{O}_X)$ and $f_*: \\\\mathbf{Mod}(\\\\mathcal{O}_X) \\\\to \\\\mathbf{O}_Y)$ be the restriction and\"}\n  {\"name\": \"IsOpenMap.adjunction\", \"module\": \"Mathlib.Topology.Category.TopCat.Opens\", \"type\": \"{X Y : TopCat} {f : X ⟶ Y} (hf : IsOpenMap f) : hf.functor ⊣ Opens.map f\", \"doc\": \"For topological spaces $X$ and $Y$ and a continuous open map $f : X \\to Y$, there exists an adjunction between the functor induced by $f$ and the functor mapping open subsets of $X$ to open subsets of \"}\n  {\"name\": \"HasCompactSupport.extend_zero\", \"module\": \"Mathlib.Topology.Algebra.Support\", \"type\": \"∀ {α : Type u_2} {α' : Type u_3} {β : Type u_4} [inst : TopologicalSpace α] [inst_1 : TopologicalSpace α']\\n  [inst_2 : Zero β] {f : α → β} [T2Space α'],\\n  HasCompactSupport f → ∀ {g : α → α'}, Continuous g → HasCompactSupport (Function.extend g f 0)\", \"doc\": \"Let $\\\\alpha$ and $\\\\alpha'$ be topological spaces, $\\\\beta$ a type with a zero element, $f : \\\\alpha \\\\to \\\\beta$ a function with compact support, and $g : \\\\alpha \\\\to \\\\alpha'$ a continuous function. Then t\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \": (isoRestrict f).inv ≫ f = Y.ofRestrict _\", \"doc\": \"For an open immersion $ f : X ⟶ Y $ between sheafed spaces, the composition of the inverse of the isomorphism $ X ≅ Y|_U $ (where $ U $ is the image of $ f $'s base map) with $ f $ equals the canonica\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \"(H' : Set.range g.base ⊆ Set.range f.base) : Y ⟶ X\", \"doc\": \"Given an open immersion $ f: X \\to Y $ and a morphism $ g: Z \\to Y $ whose underlying continuous map has image contained in the image of $ f $, this constructs a morphism $ Y \\to X $ by taking the invers\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict_assoc\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.LocallyRingedSpace} (f : X ⟶ Y) [H : AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion f]\\n  {Z : AlgebraicGeometry.LocallyRingedSpace} (h : Y ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict f).hom\\n      (Categ\", \"doc\": \"Given an open immersion $ f: X \\to Y $ between locally ringed spaces, there exists an isomorphism between $ X $ and the restriction of $ Y $ to the open subset defined by the underlying open embedding \"}",
+   "date": "2026-10-22",
+   "verdict": "No match: ordinary module scalar and Zariski restriction adjunctions do not state the pro-etale factored constructible exceptional adjunction and B-linear open counit comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars commutes with extension by zero for an open immersion and the canonical isomorphism respects the open adjunction counit",
+   "results": "Hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.IsOpenImmersion.app_ΓIso_hom",
+   "date": "2026-10-22",
+   "verdict": "No match for the whole item: the hits give ordinary modules, Zariski sheaves or abstract adjunction uniqueness, not every pro-etale exceptional-domain and counit clause."
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero.*(tensor|scalar|counit)|lowerShriek.*(tensor|scalar|counit)",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "No match for the whole item: the hits give ordinary modules, Zariski sheaves or abstract adjunction uniqueness, not every pro-etale exceptional-domain and counit clause."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars on unbounded derived categories of module sheaves commutes with open extension by zero and preserves its counit",
+   "results": "Hits: ModuleCat.ExtendRestrictScalarsAdj.Counit.map, ModuleCat.ExtendRestrictScalarsAdj.counit_app, ModuleCat.ExtendRestrictScalarsAdj.counit, ModuleCat.ExtendScalars.obj', ModuleCat.extendScalars, ModuleCat.RestrictionCoextensionAdj.counit', ModuleCat.coextendScalars, ModuleCat.instIsLeftAdjointExtendScalars",
+   "date": "2026-10-22",
+   "verdict": "No match for the whole item: the hits give ordinary modules, Zariski sheaves or abstract adjunction uniqueness, not every pro-etale exceptional-domain and counit clause."
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction, \"counit\"",
+   "results": "No hits. Note: loogle: unknown identifier 'Adjunction'",
+   "date": "2026-10-22",
+   "verdict": "No match for the whole item: the hits give ordinary modules, Zariski sheaves or abstract adjunction uniqueness, not every pro-etale exceptional-domain and counit clause."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism between two left adjoints obtained from the same right adjoint intertwines their units and counits",
+   "results": "Hits: CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app_assoc, CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq_trans_app_assoc, CategoryTheory.Adjunction.leftAdjointUniq_inv_app, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom, CategoryTheory.Adjunction.leftAdjointUniq_trans_assoc, CategoryTheory.Adjunction.homEquiv_leftAdjointUniq_hom_app",
+   "date": "2026-10-22",
+   "verdict": "No match for the whole item: the hits give ordinary modules, Zariski sheaves or abstract adjunction uniqueness, not every pro-etale exceptional-domain and counit clause."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "Hits: CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq_refl, CategoryTheory.Adjunction.leftAdjointUniq_inv_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom, CategoryTheory.Adjunction.leftAdjointUniq_trans, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-22",
+   "verdict": "No match for the whole item: the hits give ordinary modules, Zariski sheaves or abstract adjunction uniqueness, not every pro-etale exceptional-domain and counit clause."
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointUniq|unit_leftAdjointUniq|rightAdjointUniq",
+   "results": "Hits: Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean",
+   "date": "2026-10-22",
+   "verdict": "No match for the whole item: the hits give ordinary modules, Zariski sheaves or abstract adjunction uniqueness, not every pro-etale exceptional-domain and counit clause."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-finite-closed-shriek",
+  "date": "2026-10-22",
+  "group": "Q14"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "lem-coef-finite-closed-shriek",
+   "place": "Proof paragraph 3, locally closed factorization and the open coefficient comparison; returned steps 9–10, compact-support domains and B-linear scalar/open Hom calculation",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-coef-open-scalar-adjunction-counit",
+  "worker": "stage1",
+  "summary": "Separated bounded-below etale-origin compact-support composition and the actual constructible exceptional counit from the entirely unbounded open/scalar adjunction calculation. Proved the counit equation explicitly from the normalized inverse transpose and the open triangle identity. Reused existing nodes throughout; no new nodes or statement changes.",
+  "blueprint": "lem-coef-finite-closed-shriek, proof paragraph 3: locally closed factorization; open restriction commutes with coefficient tensor; same evaluation and counit compatibilities. Steps 1–3 justify the factored domains and counit, steps 4–7 give the B-linear open scalar calculation.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-proetale-closed-exact",
+    "why": "Generic adjunction, ordinary open/scalar comparison, compact-support composition or finite-coefficient domain tool used at the specific step cited; does not replace the biduality unit route."
+   },
+   {
+    "node": "thm-sf-comp-composition",
+    "why": "Generic adjunction, ordinary open/scalar comparison, compact-support composition or finite-coefficient domain tool used at the specific step cited; does not replace the biduality unit route."
+   },
+   {
+    "node": "lem-sf-flat-model",
+    "why": "Generic adjunction, ordinary open/scalar comparison, compact-support composition or finite-coefficient domain tool used at the specific step cited; does not replace the biduality unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "Generic adjunction, ordinary open/scalar comparison, compact-support composition or finite-coefficient domain tool used at the specific step cited; does not replace the biduality unit route."
+   },
+   {
+    "node": "thm-sf-preservation-class",
+    "why": "Generic adjunction, ordinary open/scalar comparison, compact-support composition or finite-coefficient domain tool used at the specific step cited; does not replace the biduality unit route."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Generic adjunction, ordinary open/scalar comparison, compact-support composition or finite-coefficient domain tool used at the specific step cited; does not replace the biduality unit route."
+   },
+   {
+    "node": "prop-exc-open-adjoint",
+    "why": "Generic adjunction, ordinary open/scalar comparison, compact-support composition or finite-coefficient domain tool used at the specific step cited; does not replace the biduality unit route."
+   },
+   {
+    "node": "thm-sf-ambient-adjoint-class",
+    "why": "Generic adjunction, ordinary open/scalar comparison, compact-support composition or finite-coefficient domain tool used at the specific step cited; does not replace the biduality unit route."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic adjunction, ordinary open/scalar comparison, compact-support composition or finite-coefficient domain tool used at the specific step cited; does not replace the biduality unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "Generic adjunction, ordinary open/scalar comparison, compact-support composition or finite-coefficient domain tool used at the specific step cited; does not replace the biduality unit route."
+   },
+   {
+    "node": "lem-sfb-kflat-scalar-comparison-normalization",
+    "why": "Generic adjunction, ordinary open/scalar comparison, compact-support composition or finite-coefficient domain tool used at the specific step cited; does not replace the biduality unit route."
+   },
+   {
+    "node": "lem-fix-open-scalar-tensor-normalization",
+    "why": "Generic adjunction, ordinary open/scalar comparison, compact-support composition or finite-coefficient domain tool used at the specific step cited; does not replace the biduality unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-proetale-closed-exact",
+  "thm-sf-comp-composition",
+  "lem-sf-flat-model",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "thm-sf-preservation-class",
+  "lem-sf-proetale-constructible-origin",
+  "prop-exc-open-adjoint",
+  "thm-sf-ambient-adjoint-class",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-fix-open-scalar-tensor-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-ec6b0a24d",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-ec6b0a24d (reviewer sub-agent of L); spot-checked: PASS with no changes. I read all 7 steps against the statements of their cited nodes. Source: blueprint lem-coef-finite-closed-shriek, proof paragraph 3 (open restriction, then the locally closed factorization); the main-20261015 text is the same and there is no blueprint_update. There are no new nodes, the statement is unchanged, there is no repair note so the 2026-10-21 re-split rule does not apply, there is no cycle and no SGA. Steps 1-3: (id,t) and (j,id) compactifications plus thm-sf-comp-composition give j_!t_* ≅ Rh_! and say these functors preserve the bounded-below etale-origin class. The closed-exactness node needs a quasi-compact complement, which holds because the schemes are Noetherian. Restricting the flat model to the open keeps the Tor interval; the K-flat pullback node is applied per term, which is fine. thm-sf-preservation-class clause 2 puts Rt^!j^*M in ctf. thm-sf-ambient-adjoint-class (relative adjunction) plus uniqueness of the right adjoint give eps_h = eps_j∘j_!(eps_t). Steps 4-7: r is the mate theta_j of the kflat-normalization node. e comes from the conjugate-iso-unit node with delta = the action identification b. lem-fix-open-scalar-tensor-normalization gives the inverse of e as the open adjunct of r∘S(u) (its lambda_j^{-1} is r). I redid the step-7 calculation (naturality of eps_B and of r, then the triangle identity) and it holds for every unbounded M. Nothing uses flatness of A→B, so Z/l^2→F_l is covered; the empty and identity cases also hold. Batch-5 flags: both go through kflat-normalization to lem-pod-derived-exact-square-composition, which is a general lemma about pasting derived compositors of exact functors on abelian categories, not part of the trace formula or Poincare duality, so I accept both as generic. Advisory: the unsplit lem-sf-constructible-exceptional-compositor states the same counit characterization on D_ctf; the item needs bounded constructible inputs, so its inline Yoneda argument is no fault. I accept the 12 proposed tool_uses as generic tools."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.OpenScalarAdjunctionCounit",
+  "declaration": "AlgebraicGeometry.ProEtale.CoefOpenCounit.open_scalar_adjunction_counit",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CoefOpenCounit.lower",
+   "AlgebraicGeometry.ProEtale.CoefOpenCounit.upper",
+   "AlgebraicGeometry.ProEtale.CoefOpenCounit.counit",
+   "AlgebraicGeometry.ProEtale.CoefOpenCounit.openCandidate",
+   "AlgebraicGeometry.ProEtale.CoefOpenCounit.closedCandidate",
+   "AlgebraicGeometry.ProEtale.CoefOpenCounit.originCandidate",
+   "AlgebraicGeometry.ProEtale.CoefOpenCounit.closedComparison",
+   "AlgebraicGeometry.ProEtale.CoefOpenCounit.openComparison",
+   "AlgebraicGeometry.ProEtale.CoefOpenCounit.factorization",
+   "AlgebraicGeometry.ProEtale.CoefOpenCounit.upperOrigin",
+   "AlgebraicGeometry.ProEtale.CoefOpenCounit.closedCounit",
+   "AlgebraicGeometry.ProEtale.CoefOpenCounit.Factored",
+   "AlgebraicGeometry.ProEtale.CoefOpenCounit.CoefficientFactored",
+   "AlgebraicGeometry.ProEtale.CoefOpenCounit.ScalarCounit",
+   "AlgebraicGeometry.ProEtale.CoefOpenCounit.open_scalar_adjunction_counit"
+  ],
+  "file": "lean/Sheaf/SixFunctors/OpenScalarAdjunctionCounit.lean",
+  "statement": "theorem open_scalar_adjunction_counit (F : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ F.p) (E L : Type u) [Field E] [Field L] [Algebra (Padic l) E] [Algebra (Padic l) L] [FiniteDimensional (Padic l) E] [FiniteDimensional (Padic l) L] (m n : ℕ) (hm : 1 ≤ m) (hn : 1 ≤ n) (φ : Padic.coefficientExtensionRing l E m →+* Padic.coefficientExtensionRing l L n) {W V X : Scheme.{u}} [W.Over (Spec (.of F.k))] [V.Over (Spec (.of F.k))] [X.Over (Spec (.of F.k))] [LocallyOfFiniteType (W ↘ Spec (.of F.k))] [QuasiCompact (W ↘ Spec (.of F.k))] [LocallyOfFiniteType (V ↘ Spec (.of F.k))] [QuasiCompact (V ↘ Spec (.of F.k))] [LocallyOfFiniteType (X ↘ Spec (.of F.k))] [QuasiCompact (X ↘ Spec (.of F.k))] [IsSeparated (W ↘ Spec (.of F.k))] [IsSeparated (V ↘ Spec (.of F.k))] [IsSeparated (X ↘ Spec (.of F.k))] (t : W ⟶ V) (j : V ⟶ X) [t.IsOver (Spec (.of F.k))] [j.IsOver (Spec (.of F.k))] [IsClosedImmersion t] [IsOpenImmersion j] (c : Compactification (t ≫ j)) : CoefficientFactored F.k l E m hm t j c ∧ CoefficientFactored F.k l L n hn t j c ∧ ScalarCounit φ j",
+  "branch": "newtargets-dag",
+  "by": "Q92",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the actual normalized scalar/open adjunctions and their existing canonical comparisons. Factored packages both coefficient stages, the full bounded-constructible counit characterization and finite-Tor preservation. All helpers contain real data or abbreviate published proofs; the sole postponed theorem is the item. CoefficientFactored derives finiteness and quasi-compactness rather than adding assumptions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2e3ca2dcb",
+  "group": "Q92",
+  "result": "pass",
+  "note": "Re-delivery after the f3f0 RETURN. Both H2 repairs are done exactly as instructed: stmt_deps lem-fix-open-scalar-exchange→def-sp-open-scalar-operations and thm-sf-ambient-adjoint-class→def-sp-fixed-compact-support-comparison. originCandidate inlines the literal body of fixedCompactSupportOriginIso (same canonical map; diff checked); no other Lean or node change; live node has no lean record and no parallel landing. Mechanical thm-sf-comp-composition finding: the node's own Lean declaration is def originComposition (the canonical α the theorem asserts), and the item uses originCompositionAmbient/originCompactSupport, the object it constructs → PASS on that point. Mathematics re-read: hypotheses no stronger than the node's (Finite/Noetherian V/QC j derived); ∃e pinned and unique by the counit equation; origin-preservation, exactness and finite-Tor clauses for both coefficient rings; ScalarCounit for all unbounded M with e=openScalarIso.hom, r=tensorPullbackIso.inv and the actual open counits, correct orientation, no flatness; universes kept; edge cases admitted; docstrings, blueprint tags and verbatim statement present; only sorry is the item. No compile (no file changed); worker compile clean. Advisory: Etale.rightDerivedLowerShriekOfCompactificationPlusιIso is now named directly, and its module's owner node lem-weil-pbc-etale-shriek-compactification-independence (which constructs the comparison) is not cited; covered by def-compact-support-direct-image-detailed's independence clause; maintainer note only."
+ }
+}

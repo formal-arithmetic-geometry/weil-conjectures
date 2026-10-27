@@ -15,7 +15,14 @@
   "place": "node sk-thm-sf-tensor-hom, order 2501"
  },
  "stmt_deps": [
-  "sk-def-sf-operations"
+  "sk-def-sf-operations",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-sfb-scalar-hom-comparison-data",
+  "def-weil-finite-tor-amplitude",
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-exchange-projection",
+  "def-coef-ringed-tensor-hom-model"
  ],
  "proof": [
   {
@@ -456,7 +463,22 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors",
  "unit": "sk-thm-sf-tensor-hom",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.nonempty_iso_derivedHom_rightDerivedLowerShriek"
+   ]
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.nonempty_iso_derivedHom_rightDerivedLowerShriek"
+   ]
+  }
+ },
  "split_report": {
   "date": "2026-10-17",
   "item": "sk-thm-sf-tensor-hom",
@@ -716,5 +738,108 @@
   "group": "N1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N1-4683ac477 (reviewer sub-agent of L); spot-checked: Read all fifteen steps, cited statements, source locations and unit/chapter route. Mathematics passes, including completed coefficients, finite-Tor Yoneda, evaluation-normalized comparisons and ramified levels. Corrected the missing unconditional-adjunction tool declaration and stale/duplicate tool entries; statement and proof unchanged. Full findings in review.md; corrected JSON under fixes/dag/nodes/sec-six-functors/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TensorHomExchange",
+  "declaration": "WeilConjectures.ConstructibleTensorHom.exists_family",
+  "declarations": [
+   "WeilConjectures.ConstructibleTensorHom.Ambient",
+   "WeilConjectures.ConstructibleTensorHom.hom",
+   "WeilConjectures.ConstructibleTensorHom.direct",
+   "WeilConjectures.ConstructibleTensorHom.Pairs",
+   "WeilConjectures.ConstructibleTensorHom.source",
+   "WeilConjectures.ConstructibleTensorHom.target",
+   "WeilConjectures.ConstructibleTensorHom.tensorPresentation",
+   "WeilConjectures.ConstructibleTensorHom.CanonicalExchange",
+   "WeilConjectures.ConstructibleTensorHom.inclusionCommShift",
+   "WeilConjectures.ConstructibleTensorHom.sourceFirstShift",
+   "WeilConjectures.ConstructibleTensorHom.targetFirstShift",
+   "WeilConjectures.ConstructibleTensorHom.sourceSecondShift",
+   "WeilConjectures.ConstructibleTensorHom.targetSecondShift",
+   "WeilConjectures.ConstructibleTensorHom.siteSmall",
+   "WeilConjectures.ConstructibleTensorHom.ScalarModel",
+   "WeilConjectures.ConstructibleTensorHom.scalarModelComparison",
+   "WeilConjectures.ConstructibleTensorHom.homChange",
+   "WeilConjectures.ConstructibleTensorHom.sourceChange",
+   "WeilConjectures.ConstructibleTensorHom.targetChange",
+   "WeilConjectures.ConstructibleTensorHom.pairShift",
+   "WeilConjectures.ConstructibleTensorHom.signedShift",
+   "WeilConjectures.ConstructibleTensorHom.ShiftExchange",
+   "WeilConjectures.ConstructibleTensorHom.scalarPairShift",
+   "WeilConjectures.ConstructibleTensorHom.ShiftNormalization",
+   "WeilConjectures.ConstructibleTensorHom.RingExchange",
+   "WeilConjectures.ConstructibleTensorHom.IntegralLift",
+   "WeilConjectures.ConstructibleTensorHom.rationalSource",
+   "WeilConjectures.ConstructibleTensorHom.rationalTarget",
+   "WeilConjectures.ConstructibleTensorHom.RationalDescent",
+   "WeilConjectures.ConstructibleTensorHom.commonSource",
+   "WeilConjectures.ConstructibleTensorHom.commonTarget",
+   "WeilConjectures.ConstructibleTensorHom.rationalDirectChange",
+   "WeilConjectures.ConstructibleTensorHom.rationalSourceChange",
+   "WeilConjectures.ConstructibleTensorHom.rationalTargetChange",
+   "WeilConjectures.ConstructibleTensorHom.Family",
+   "WeilConjectures.ConstructibleTensorHom.exists_family"
+  ],
+  "file": "lean/Sheaf/Paper/TensorHomExchange.lean",
+  "statement": "theorem exists_family : ∃ R : System.{u, u} l Ω D hl (f := f), ∀ c : Compactification f, Nonempty (Family l Ω D hl f R c)",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "All four coefficient regimes, with the unconditional published System supplied in the conclusion. Actual ringed derived Hom and ordinary pushforward, explicit bounded-below output, evaluation-transpose coefficient squares, signed shifts and raw rational/common-stage descent. Family.canonical fixes each ring exchange by the projection/counit tensor-Hom equation on every finite-Tor Yoneda test; integral realization, rationalization and common-stage normalization then fix the same canonical map at the higher stages. No ambient exceptional-adjoint or admissibility hypothesis. Added statement dependencies are already-landed definition nodes used by this interface; the mathematical node statement is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5f3f77889",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Re-delivery after the 4becf9ec H3 RETURN (unconstrained, sign-free exchange iso). New CanonicalExchange/Family.canonical: transpose_Y^-1(homEquiv_{f^*⊣f_*}(transpose_X t) ≫ e.hom) = (1⊗r)≫β≫PurCompactSupport.projectionMap≫f_!(β≫t)≫r^-1≫A.adjunction.counit for every finite-Tor test L and every t; this is the steps 7-9 Hom chain (PF^-1) written forward. The canonical map satisfies it; t ranges over all maps L→source and source is in D^b_ctf by steps 3-6, so Yoneda fixes e and its sign. Integral/rational/common maps are tied to it by the unchanged realization/normalization fields. The quantified closed models SX/TX/βX are inhabited (ringedDerived_closed_symmetric_monoidal) and rigid; projectionMap does not depend on aZ; hc is a landed coefficient fact; at integral coefficients the ordinary-tensor equation equals the completed chain via the completion reflector, with no added hypothesis. All other clauses are byte-identical to the previously verified version. Node differs from live only in stmt_deps (7 landed definition nodes, including the requested def-exchange-projection and def-coef-ringed-tensor-hom-model, no cycle) and lean; statement unchanged; lean.statement verbatim; only sorry is exists_family; docstrings present; both report sections present. Advisory: RingedDerivedTensorCoherence (owner def-zl-ringed-derived-closed-symmetric-monoidal-data) and ProEtaleTensorModel (no owner) used without being stmt_deps. No file changed, so no compile; worker scompile clean 32.4/34.5 s."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $\\Lambda$ be an admissible coefficient ring, and let $\\omega$, $\\mathbb D$\nand $\\delta$ be as in [sk-def-ops].\n\nLet $f:X\\to Y$ be a morphism, $K\\in\\Dctf(X,\\Lambda)$ and\n$L\\in\\Dctf(Y,\\Lambda)$. The maps built from the adjunctions\n$Rf_!\\dashv f^!$, $f^*\\dashv Rf_*$, tensor–Hom adjunction and\nthe projection formula are isomorphisms in\n$D(Y_{\\mathrm{pro\\acute et}},\\Lambda)$ (the first two) and in\n$D(X_{\\mathrm{pro\\acute et}},\\Lambda)$ (the third)\n\n$$\n \\cHom_Y(Rf_!K,L)\\simeq\n Rf_*\\cHom_X(K,f^!L),\\tag{1}\n$$\n\n$$\n \\mathbb D_YRf_!K\\simeq Rf_*\\mathbb D_XK,\\tag{2}\n$$\n\n$$\n f^!\\mathbb D_YL\\simeq\\mathbb D_Xf^*L.\\tag{3}\n$$\n\nThese isomorphisms preserve evaluation. In particular, for proper\n$f$, the two applications of (2) identify\n$Rf_*\\delta_K$ with $\\delta_{Rf_*K}$.\n\n*Complement.* Here $f$ is a separated finite-type morphism of finite-type\n$k$-schemes and $f^!=Rf^!$ is the constructible exceptional adjoint of\n[det-def-sf-operations] (vi); no admissibility datum is assumed. The\nisomorphism (1) is natural in $K$ and $L$ and compatible with finite\nreduction, scalar extension and shifts.",
+  "proof": [
+   {
+    "text": "The first formula is checked by the Yoneda lemma, localizing the\nexceptional adjunction. For $N\\in D(Y_{\\mathrm{pro\\acute et}},\\Lambda)$,\n\n$$\n \\Hom_Y(N,\\cHom_Y(Rf_!K,L))\n =\\Hom_Y(N\\otimes^{\\mathbf L}Rf_!K,L)\n =\\Hom_X(f^*N\\otimes^{\\mathbf L}K,f^!L),\n$$\n\nby the projection formula and $Rf_!\\dashv f^!$. Tensor–Hom\nadjunction and $f^*\\dashv Rf_*$ give the first formula. Taking\n$L=\\omega_Y$ and using composition\n$f^!\\omega_Y=\\omega_X$ gives the second. The same calculation,\nwith the tensor factor on $X$, gives\n$f^!\\cHom_Y(L,\\omega_Y)\\simeq\n\\cHom_X(f^*L,f^!\\omega_Y)$, which is the third formula.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Every map used is an adjunction map. For proper $f$, the pairing\nwhose adjoint is the exchange is\n\n$$\n Rf_*K\\otimes^{\\mathbf L}Rf_*\\mathbb D_XK\n \\longrightarrow Rf_*(K\\otimes^{\\mathbf L}\\mathbb D_XK)\n \\longrightarrow Rf_*\\omega_X\\longrightarrow\\omega_Y.\n$$",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Transposing evaluation twice in this pairing identifies\n$Rf_*\\delta_K$ with $\\delta_{Rf_*K}$. This\nproves the last assertion.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "The projection formula used here holds for every admissible $\\Lambda$ on\n$D(Y_{\\mathrm{pro\\acute et}},\\Lambda)$: [sk-thm-sf-pf-finite] and\n[sk-thm-sf-pf-proetale] for finite $\\Lambda$, [sk-thm-sf-pf-adic] and\n[sk-thm-sf-pf-field] for $\\mathcal O_E$, $E$ and $\\Qlb$ ([sk-rem-sf-pf-done]).\nThe Yoneda argument therefore applies to every admissible condensed\n$\\Lambda$ directly, with no transport between coefficient rings.",
+    "uses": [
+     "sk-thm-sf-pf-finite",
+     "sk-thm-sf-pf-proetale",
+     "sk-thm-sf-pf-adic",
+     "sk-rem-sf-pf-done"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-28ced",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261025T123239-L-1846000",
+  "kind": "proof",
+  "note": "independent cc review: delivered TensorHomExchange.lean vs quarantine/Sheaf/Paper/TensorHomExchange.lean (diff: transparency options, local irreducible, explicit .{u,u}, explicit commShiftι, heartbeat options removed); node lean.statement vs exists_family; C/inclusion universe structure in ConstructibleExceptionalAdjunctionCoefficientsData"
  }
 }

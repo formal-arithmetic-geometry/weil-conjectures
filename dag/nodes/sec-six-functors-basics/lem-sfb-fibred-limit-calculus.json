@@ -1,0 +1,248 @@
+{
+ "id": "lem-sfb-fibred-limit-calculus",
+ "kind": "statement",
+ "title": "Fibre products and equalizers in fibred groupoids",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and let $\\mathcal C,\\mathcal D$ be categories fibred in groupoids over $\\mathit{Sch}/S$, with functors over the base as in [def-sfb-stable-pointed-moduli-groupoids]. A fibre product means an ordinary categorical pullback in the total category: maps into it are pairs of maps with equal composites. An equalizer of parallel arrows $r,s:x\\to y$ means an arrow $e:z\\to x$ such that $re=se$ and every $t:w\\to x$ with $rt=st$ factors uniquely through $e$. Then $\\mathcal C$ has fibre products, and every functor $F:\\mathcal C\\to\\mathcal D$ over $\\mathit{Sch}/S$ preserves them. If $\\mathcal C$ is an algebraic stack [def-sfb-algebraic-moduli-stack], then its total category has equalizers. If $\\mathcal C$ has equalizers and $F$ is faithful, meaning that every map on Hom sets is injective, then $F$ preserves equalizers.",
+ "source": {
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tags 06WY (lemma-fibre-products), (1) and (3), and 06WZ (lemma-fibre-products-morphism), (1) and (2)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-algebraic-moduli-stack"
+ ],
+ "proof": [
+  {
+   "text": "Write $p:\\mathcal C\\to\\mathit{Sch}/S$ and $q:\\mathcal D\\to\\mathit{Sch}/S$ for the projections. Given $a:x\\to y$ and $b:z\\to y$, form $P=p(x)\\times_{p(y)}p(z)$ by [def-pc-fibre-product]; its structural map to $S$ is the common composite of its projections. By [def-sfb-stable-pointed-moduli-groupoids], choose $c:w\\to z$ over $P\\to p(z)$. Every arrow is strongly cartesian in the explicit sense of [lem-sfb-cartesian-lift-pullback-square]. Apply that node to $a,b,c$: it supplies $d:w\\to x$ over the other projection and proves that $(d,c)$ is an ordinary categorical pullback of $a,b$. This proves existence in $\\mathcal C$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-cartesian-lift-pullback-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WY, lemma-fibre-products (1); Categories Tag 06N4, lemma-strongly-cartesian-fibre-product"
+   }
+  },
+  {
+   "text": "Apply $F$ to the square constructed in step 1. Since $qF=p$, its base square is still the pullback $P$. Every arrow of $\\mathcal D$ is strongly cartesian by [def-sfb-stable-pointed-moduli-groupoids]. Thus [lem-sfb-cartesian-lift-pullback-square] applied to $F(a),F(b),F(c)$ proves that its upper arrow is $F(d)$ (the defining composite and base map coincide), and that this image square is a pullback. For any other pullback cone of $a,b$, the universal properties give comparison maps to and from $(w,d,c)$; both composites are identities because their composites with both projections agree with the identity. Applying $F$ preserves these inverse comparisons, and hence its image cone is a pullback too. Therefore $F$ preserves all fibre products, not just the choices of step 1.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-cartesian-lift-pullback-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WZ, lemma-fibre-products-morphism (1), with independence of pullback choices expanded"
+   }
+  },
+  {
+   "text": "If $\\mathcal C$ is an algebraic stack, [lem-sfb-algebraic-stack-total-equalizers] gives an equalizer for every pair of parallel arrows in its total category. Its hypotheses are precisely the universes, scheme base, fibred-groupoid structure and algebraic-stack hypothesis in the present statement. In particular this covers parallel arrows lying over different base maps, with no extra separatedness hypothesis.",
+   "uses": [
+    "lem-sfb-algebraic-stack-total-equalizers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WY, lemma-fibre-products (3)"
+   }
+  },
+  {
+   "text": "For the remaining assertion assume $F$ faithful and let $e:z\\to x$ equalize $r,s:x\\to y$ universally. The arrow $e$ is monic: if $eu=ev$, then $u,v$ are two factorizations through $e$ of the same arrow equalizing $r,s$, and so $u=v$. Consequently the cone $(\\mathrm{id}_z,\\mathrm{id}_z)$ is a pullback of $e$ with itself: a cone $(u,v)$ satisfies $eu=ev$, hence $u=v$, and has unique mediating arrow $u$. By step 2 its image $(\\mathrm{id}_{Fz},\\mathrm{id}_{Fz})$ is also a pullback. For arrows $u,v:t\\to Fz$ with $F(e)u=F(e)v$, its mediating arrow must equal both $u$ and $v$. Thus $F(e)$ is monic.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WZ, lemma-fibre-products-morphism (2), uniqueness detail via part (1)"
+   }
+  },
+  {
+   "text": "Let $t:w\\to F(x)$ equalize $F(r),F(s)$ and put $h=q(t):q(w)\\to p(x)$. Choose a lift $c:x_h\\to x$ over $h$ using [def-sfb-stable-pointed-moduli-groupoids]. The arrows $F(c)$ and $t$ have the same target and base arrow. Their cartesian universal properties give arrows $\\alpha:w\\to F(x_h)$ and $\\beta:F(x_h)\\to w$ over the identity, with $F(c)\\alpha=t$ and $t\\beta=F(c)$; the same uniqueness gives $\\alpha\\beta=\\mathrm{id}$ and $\\beta\\alpha=\\mathrm{id}$. Therefore $F(rc)\\alpha=F(r)t=F(s)t=F(sc)\\alpha$, and cancellation of $\\alpha$ followed by faithfulness gives $rc=sc$. The equalizer property of $e$ supplies $l:x_h\\to z$ with $el=c$. Then $v=F(l)\\alpha:w\\to F(z)$ satisfies $F(e)v=t$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WZ, lemma-fibre-products-morphism (2), cartesian-lift existence argument expanded"
+   }
+  },
+  {
+   "text": "Functoriality gives $F(r)F(e)=F(s)F(e)$. Every equalizing arrow $t$ has a factor $v$ by step 5, and any two factors are equal because $F(e)$ is monic by step 4. This is the ordinary equalizer universal property, so $F$ preserves equalizers whenever they exist in $\\mathcal C$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WZ, lemma-fibre-products-morphism (2), conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-cartesian-lift-pullback-square",
+  "lem-sfb-algebraic-stack-total-equalizers"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tags 06WY (lemma-fibre-products) (1), (3), and 06WZ (lemma-fibre-products-morphism) (1), (2), using Categories Tag 06N4 and expanding comparison and uniqueness arguments"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Faithful functor between categories fibered in groupoids over schemes preserves fiber products and equalizers; an algebraic stack has equalizers",
+   "results": "{\"t\": \"2026-10-23T22:07:37Z\", \"tool\": \"leanfinder\", \"query\": \"Faithful functor between categories fibered in groupoids over schemes preserves fiber products and equalizers; an algebraic stack has equalizers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasFiniteLimitsScheme\", \"AlgebraicGeometry.IsOpenImmersion.hasLimit_cospan_forget_of_left'\", \"AlgebraicGeometry.IsOpenImmersion.hasLimit_cospan_forget_of_right'\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc'\", \"AlgebraicGeometry.IsOpenImmersion.instPreservesLimitSchemeWalkingCospanCospanForget_1\", \"AlgebraicGeometry.IsOpenImmersion.hasLimit_cospan_forget_of_left\", \"AlgebraicGeometry.IsOpenImmersion.hasLimit_cospan_forget_of_right\", \"AlgebraicGeometry.IsOpenImmersion.instPreservesLimitSchemeWalkingCospanCospanForget\"], \"digest\": \"21ef3e949c27ce8f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Cartesian lift choices in FiberedCategory/Fibered.lean:80-88 and HasFibers.lean:179-188 do not give total-category equalizers or their preservation; finite limits of schemes do not give limits of a groupoid fibration."
+  },
+  {
+   "tool": "grep",
+   "query": "equalizer|equaliser|pullback",
+   "results": "{\"t\": \"2026-10-23T22:08:21Z\", \"tool\": \"grep\", \"query\": \"equalizer|equaliser|pullback\", \"sub\": \"CategoryTheory/FiberedCategory\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\"], \"digest\": \"199e1b44cf32a5d5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Cartesian lift choices in FiberedCategory/Fibered.lean:80-88 and HasFibers.lean:179-188 do not give total-category equalizers or their preservation; finite limits of schemes do not give limits of a groupoid fibration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A faithful morphism of groupoid fibrations preserves equalizers and algebraic stacks have equalizers in their total category",
+   "results": "{\"t\": \"2026-10-23T22:08:21Z\", \"tool\": \"leansearch\", \"query\": \"A faithful morphism of groupoid fibrations preserves equalizers and algebraic stacks have equalizers in their total category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.isLimitOfHasEqualizerOfPreservesLimit\", \"CategoryTheory.Limits.preservesEqualizers_of_preservesPullbacks_and_binaryProducts\", \"CategoryTheory.Grothendieck.faithful_ι\", \"CategoryTheory.PreGaloisCategory.instHasEqualizers\", \"HasFibers.instFaithfulFibι\", \"CategoryTheory.Limits.PreservesEqualizer.iso.congr_simp\", \"CategoryTheory.Abelian.hasEqualizers\", \"CategoryTheory.Functor.Fiber.instFaithfulFiberInclusion\"], \"digest\": \"8cc56426fe7006de\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Cartesian lift choices in FiberedCategory/Fibered.lean:80-88 and HasFibers.lean:179-188 do not give total-category equalizers or their preservation; finite limits of schemes do not give limits of a groupoid fibration."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFibered\", \"Equalizer\"",
+   "results": "{\"t\": \"2026-10-23T22:08:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsFibered\\\", \\\"Equalizer\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Cartesian lift choices in FiberedCategory/Fibered.lean:80-88 and HasFibers.lean:179-188 do not give total-category equalizers or their preservation; finite limits of schemes do not give limits of a groupoid fibration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equalizers in a category fibred in groupoids with representable Isom sheaves and preservation by a faithful functor over schemes",
+   "results": "{\"t\": \"2026-10-23T22:09:02Z\", \"tool\": \"leanfinder\", \"query\": \"Equalizers in a category fibred in groupoids with representable Isom sheaves and preservation by a faithful functor over schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.fiberEqualizerEquiv\", \"CategoryTheory.regularTopology.SingleEqualizerCondition\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc'\", \"CategoryTheory.Functor.IsLocallyFaithful.functorPushforward_equalizer_mem\", \"CategoryTheory.Functor.functorPushforward_equalizer_mem\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.c'\", \"CategoryTheory.regularTopology.mapToEqualizer_eq_comp\"], \"digest\": \"5900b68fb3bddec7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Cartesian lift choices in FiberedCategory/Fibered.lean:80-88 and HasFibers.lean:179-188 do not give total-category equalizers or their preservation; finite limits of schemes do not give limits of a groupoid fibration."
+  },
+  {
+   "tool": "grep",
+   "query": "equalizer|equaliser|IsPullback|PreservesLimit",
+   "results": "{\"t\": \"2026-10-23T22:39:35Z\", \"tool\": \"grep\", \"query\": \"equalizer|equaliser|IsPullback|PreservesLimit\", \"sub\": \"CategoryTheory/FiberedCategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Fibered.lean:76-105, HasFibers.lean:179-188 and Limits/Constructions/Equalizers.lean. Cartesian lift choices do not assert total-category limits. PreGaloisCategory concerns finite-set fibre functors; IsPullback.of_map_of_faithful reflects rather than preserves limits; preservesEqualizers_of_preservesPullbacks_and_binaryProducts requires binary products and their preservation, absent here. No algebraic-stack equalizer theorem in Mathlib."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic stack has equalizers and every faithful morphism of categories fibered in groupoids preserves equalizers",
+   "results": "{\"t\": \"2026-10-23T22:39:36Z\", \"tool\": \"leansearch\", \"query\": \"An algebraic stack has equalizers and every faithful morphism of categories fibered in groupoids preserves equalizers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.HasEqualizers\", \"CategoryTheory.Limits.preservesEqualizers_of_preservesPullbacks_and_binaryProducts\", \"CategoryTheory.Limits.hasEqualizers_of_hasWideEqualizers\", \"CategoryTheory.Functor.preservesEqualizers_of_preservesKernels\", \"CategoryTheory.Limits.HasEqualizer\", \"CategoryTheory.Limits.isLimitOfHasEqualizerOfPreservesLimit\", \"CategoryTheory.Limits.isLimitForkMapOfIsLimit\", \"CategoryTheory.Limits.PreservesEqualizer.iso.congr_simp\"], \"digest\": \"93ad3450725e9c8d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Fibered.lean:76-105, HasFibers.lean:179-188 and Limits/Constructions/Equalizers.lean. Cartesian lift choices do not assert total-category limits. PreGaloisCategory concerns finite-set fibre functors; IsPullback.of_map_of_faithful reflects rather than preserves limits; preservesEqualizers_of_preservesPullbacks_and_binaryProducts requires binary products and their preservation, absent here. No algebraic-stack equalizer theorem in Mathlib."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsStronglyCartesian\", \"PreservesLimit\"",
+   "results": "{\"t\": \"2026-10-23T22:39:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsStronglyCartesian\\\", \\\"PreservesLimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Fibered.lean:76-105, HasFibers.lean:179-188 and Limits/Constructions/Equalizers.lean. Cartesian lift choices do not assert total-category limits. PreGaloisCategory concerns finite-set fibre functors; IsPullback.of_map_of_faithful reflects rather than preserves limits; preservesEqualizers_of_preservesPullbacks_and_binaryProducts requires binary products and their preservation, absent here. No algebraic-stack equalizer theorem in Mathlib."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor over the base between categories fibered in groupoids preserves pullbacks and, if faithful, equalizers",
+   "results": "{\"t\": \"2026-10-23T22:39:43Z\", \"tool\": \"leanfinder\", \"query\": \"A functor over the base between categories fibered in groupoids preserves pullbacks and, if faithful, equalizers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.FiberFunctor.preservesPullbacks\", \"CategoryTheory.Functor.IsFibered.pullbackPullbackIso\", \"CategoryTheory.Functor.IsFibered.toIsPreFibered\", \"CategoryTheory.Over.faithful_pullback\", \"CategoryTheory.IsPullback.of_map_of_faithful\", \"CategoryTheory.PreGaloisCategory.fiberPullbackEquiv\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.instIsFiberedForget\", \"HasFibers.category\"], \"digest\": \"e7bd3bf50ce6527e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Fibered.lean:76-105, HasFibers.lean:179-188 and Limits/Constructions/Equalizers.lean. Cartesian lift choices do not assert total-category limits. PreGaloisCategory concerns finite-set fibre functors; IsPullback.of_map_of_faithful reflects rather than preserves limits; preservesEqualizers_of_preservesPullbacks_and_binaryProducts requires binary products and their preservation, absent here. No algebraic-stack equalizer theorem in Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "IsStronglyCartesian|pullbackObj|pullbackMap",
+   "results": "{\"t\": \"2026-10-23T22:40:34Z\", \"tool\": \"grep\", \"query\": \"IsStronglyCartesian|pullbackObj|pullbackMap\", \"sub\": \"CategoryTheory/FiberedCategory\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\"], \"digest\": \"ba37db20bb7d77f2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Fibered.lean:76-105, HasFibers.lean:179-188 and Limits/Constructions/Equalizers.lean. Cartesian lift choices do not assert total-category limits. PreGaloisCategory concerns finite-set fibre functors; IsPullback.of_map_of_faithful reflects rather than preserves limits; preservesEqualizers_of_preservesPullbacks_and_binaryProducts requires binary products and their preservation, absent here. No algebraic-stack equalizer theorem in Mathlib."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Total category of a groupoid fibration over a category with pullbacks has pullbacks; faithful base preserving functors preserve equalizers",
+   "results": "{\"t\": \"2026-10-23T22:40:35Z\", \"tool\": \"leanfinder\", \"query\": \"Total category of a groupoid fibration over a category with pullbacks has pullbacks; faithful base preserving functors preserve equalizers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.hasPullbacks\", \"CategoryTheory.PreGaloisCategory.FiberFunctor.preservesPullbacks\", \"CategoryTheory.Over.faithful_pullback\", \"HasFibers.mkPullback\", \"CategoryTheory.IsPullback.of_map_of_faithful\", \"CategoryTheory.Subobject.instFaithfulPullback\", \"CategoryTheory.PreGaloisCategory.fiberPullbackEquiv\", \"CategoryTheory.GlueData.instHasPullbackMapF\"], \"digest\": \"4f89178842560d62\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Fibered.lean:76-105, HasFibers.lean:179-188 and Limits/Constructions/Equalizers.lean. Cartesian lift choices do not assert total-category limits. PreGaloisCategory concerns finite-set fibre functors; IsPullback.of_map_of_faithful reflects rather than preserves limits; preservesEqualizers_of_preservesPullbacks_and_binaryProducts requires binary products and their preservation, absent here. No algebraic-stack equalizer theorem in Mathlib."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-representable-module-injective-transport",
+  "date": "2026-10-24",
+  "group": "N8"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Flat scalar-section comparison needed in the descent of a power lying in the image of a global algebra map; this does not assert adequate-moduli locality. General cohomological input: preservation of locally quasi-coherent modules and flat comparison maps under qcqs stack direct images. Supporting input: Smooth descent criterion for preservation by higher direct images. Supporting cohomological input: the relative smooth-Cech spectral sequence used in each of the four diagonal reductions. Supporting input: Injective module transport along representable stack morphisms. Supporting input: Fibre products and equalizers in fibred groupoids.",
+   "via": [
+    "lem-sfb-stack-representable-module-injective-transport",
+    "lem-sfb-stack-smooth-cech-module-spectral-sequence",
+    "lem-sfb-stack-smooth-descent-higher-image-criterion",
+    "lem-sfb-stack-higher-images-flat-comparison",
+    "lem-sfb-stack-flat-scalar-sections",
+    "lem-sfb-adequate-moduli-etale-locality",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-fibred-limit-calculus",
+  "worker": "stage1",
+  "summary": "Retained the complete statement and its hypotheses. Reused the existing lifted-pullback criterion and algebraic-stack-total-equalizers node; no new nodes. Expanded preservation of arbitrary pullback choices and the faithful equalizer argument, including monicity of the image equalizer arrow. Read every cited statement and Tags 06WY/06WZ, searched Lean and the entire blueprint, and repeated recorded Mathlib searches with two phrasings.",
+  "blueprint": "Read literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md (3), the current compactification/direct-image route. This is its inherited generic injective-transport prerequisite in blueprint.from.place, not a replacement of any unit step. ancestor returns None, so preserve its null ancestor and via chain. Whole-blueprint searches fibred, equalizer, 06WY and 06WZ found no equivalent imported statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NB-c13ef9c88",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-c13ef9c88 (reviewer sub-agent of L); spot-checked: I read the delivery in full and it passes: the split adds a proof only, and the statement and stmt_deps are byte-identical to the live base. It is a first split with 0 new nodes. No repair note exists for the item and no other group has split or reviewed it live. The statement matches Stacks stacks-sheaves.tex lemma-fibre-products (06WY) parts (1) and (3) and lemma-fibre-products-morphism (06WZ) parts (1) and (2); I read both proofs. Step 1: def-pc-fibre-product gives the base pullback, the CFG lifting and unique-factorization axiom of def-sfb-stable-pointed-moduli-groupoids makes every arrow strongly cartesian, and lem-sfb-cartesian-lift-pullback-square then gives the total-category pullback. Step 2: the same lemma in D, with uniqueness identifying the upper arrow as F(d), and the comparison isomorphisms show that every pullback cone is preserved. Step 3 cites the existing unsplit node lem-sfb-algebraic-stack-total-equalizers (made by Q22 for another item, does not depend on this one, hypotheses all present). It is not a new node restating a clause. Steps 4-6 are elementary and I checked them line by line: an equalizer is monic, (id,id) is the pullback of (e,e), and step 2 makes F(e) monic. Then the lift x_h of q(t) has cartesian comparisons α and β over the identity that are mutually inverse; cancelling α and using faithfulness gives rc=sc, so l exists and F(l)α factors t. A transitive cycle check over the snapshot DAG finds no cycle. The only citer (injective-transport step 4) uses the statement as written. Edge case: BG with g≠h maps to a point by a non-faithful functor, and the equalizer over ∅ is not preserved, so the faithfulness hypothesis is necessary. All cited nodes are in the item's unit or are Mathlib leaves; there are no SGA citations and no tool_uses. I made no changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FibredLimitCalculus",
+  "declaration": "CategoryTheory.fibred_limit_calculus",
+  "file": "lean/Sheaf/CategoryTheory/FibredLimitCalculus.lean",
+  "statement": "theorem fibred_limit_calculus {S : AlgebraicGeometry.Scheme.{u}} (C : BasedCategory.{v₁, w₁} (Over S)) (D : BasedCategory.{v₂, w₂} (Over S)) (F : BasedFunctor C D) (hC : IsFibredInGroupoids C) (hD : IsFibredInGroupoids D) : HasPullbacks C.obj ∧ PreservesLimitsOfShape WalkingCospan F.toFunctor ∧ (IsAlgebraicModuliStack C → HasEqualizers C.obj) ∧ (HasEqualizers C.obj → F.toFunctor.Faithful → PreservesLimitsOfShape WalkingParallelPair F.toFunctor)",
+  "branch": "sheaf-dag",
+  "by": "Q103",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8ffda18d1",
+  "group": "Q103",
+  "result": "pass",
+  "note": "Only the lean field changed vs live/side-live (live lean=None); lean.statement is verbatim in the file. Clauses match the node and Stacks 06WY(1),(3) / 06WZ(1),(2): HasPullbacks C.obj; PreservesLimitsOfShape WalkingCospan F (all cones); IsAlgebraicModuliStack C → HasEqualizers; HasEqualizers → Faithful → PreservesLimitsOfShape WalkingParallelPair. Objects use the recorded IsFibredInGroupoids (IsFibered + all arrows strongly cartesian), IsAlgebraicModuliStack, Mathlib BasedCategory/BasedFunctor (strict commutation), Scheme.{u}. Universes u v₁ w₁ v₂ w₂ independent; no extra hypotheses on D; different-base parallel arrows and empty cases covered; faithfulness needed (BG→pt). H4 searches adequate; sorry-only; docstrings carry source place, blueprint tag and 6 proof steps; private Pullbacks import serves proof_dep def-pc-fibre-product. No findings; no compile (no file changed)."
+ }
+}

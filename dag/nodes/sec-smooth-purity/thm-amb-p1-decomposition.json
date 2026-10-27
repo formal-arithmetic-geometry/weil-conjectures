@@ -161,7 +161,18 @@
   "def-weil-pbc-direct-image"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-cbc",
  "blueprint_update": {
@@ -228,11 +239,12 @@
    "AlgebraicGeometry.Etale.ordinaryFiniteP1Decomposition"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryFiniteP1Decomposition.lean",
-  "statement": "theorem ordinaryFiniteP1Decomposition (N : ℕ) (hN : 0 < N)\n    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)\n    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) :\n    ∃ c : ordinaryFiniteUnit A (ProjectiveLine S) ⟶\n        (ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧,\n      ordinaryFiniteP1ChernSpec A N hA S\n        ((map_natCast (ProjectiveLine S ↘ S).appTop.hom N) ▸\n            hS.map (ProjectiveLine S ↘ S).appTop.hom) c ∧\n      IsIso (p1DecompositionMap A N hN hA S hS c) ∧\n      ∀ (S' : Scheme.{u}) (g : S' ⟶ S),\n        ∃ c' : ordinaryFiniteUnit A (ProjectiveLine S') ⟶\n            (ordinaryFiniteLine A N hA (ProjectiveLine S'))⟦(2 : ℤ)⟧,\n          ordinaryFiniteP1ChernSpec A N hA S'\n            ((map_natCast (ProjectiveLine S' ↘ S').appTop.hom N) ▸\n              (((map_natCast g.appTop.hom N) ▸ hS.map g.appTop.hom).map\n                (ProjectiveLine S' ↘ S').appTop.hom)) c' ∧\n          IsIso (p1DecompositionMap A N hN hA S'\n            ((map_natCast g.appTop.hom N) ▸ hS.map g.appTop.hom) c') ∧\n          (ordinaryFinitePullback A g).map (p1DecompositionMap A N hN hA S hS c) ≫\n              ordinaryFiniteP1Exchange A g (ordinaryFiniteUnit A (ProjectiveLine S)) ≫\n              (ordinaryFinitePushforward A (ProjectiveLine S' ↘ S')).map\n                (ordinaryFiniteUnitPullback A (ProjectiveSpace.map (ULift.{u} (Fin 2)) g)).hom =\n            p1DecompositionSourceMap A N hN hA g hS ≫\n              p1DecompositionMap A N hN hA S'\n                ((map_natCast g.appTop.hom N) ▸ hS.map g.appTop.hom) c'",
+  "statement": "theorem ordinaryFiniteP1Decomposition (N : ℕ) (hN : 0 < N)\n    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)\n    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) :\n    ∃ c : ordinaryFiniteUnit A (ProjectiveLine S) ⟶\n        (ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧,\n      ordinaryFiniteP1ChernSpec A N hA S\n        ((map_natCast (ProjectiveLine S ↘ S).appTop.hom N) ▸\n            hS.map (ProjectiveLine S ↘ S).appTop.hom) c ∧\n      IsIso (p1DecompositionMap A N hN hA S hS c) ∧\n      ∀ (S' : Scheme.{u}) (g : S' ⟶ S),\n        ∃ c' : ordinaryFiniteUnit A (ProjectiveLine S') ⟶\n            (ordinaryFiniteLine A N hA (ProjectiveLine S'))⟦(2 : ℤ)⟧,\n          ordinaryFiniteP1ChernSpec A N hA S'\n            ((map_natCast (ProjectiveLine S' ↘ S').appTop.hom N) ▸\n              (((map_natCast g.appTop.hom N) ▸ hS.map g.appTop.hom).map\n                (ProjectiveLine S' ↘ S').appTop.hom)) c' ∧\n          IsIso (p1DecompositionMap A N hN hA S'\n            ((map_natCast g.appTop.hom N) ▸ hS.map g.appTop.hom) c') ∧\n          (ordinaryFinitePullback A g).map (p1DecompositionMap A N hN hA S hS c) ≫\n              ordinaryFiniteP1Exchange A g (ordinaryFiniteUnit A (ProjectiveLine S)) ≫\n              (ordinaryFinitePushforward A (ProjectiveLine S' ↘ S')).map\n                (ordinaryFiniteUnitPullback A\n                  (X := ProjectiveLine S') (Y := ProjectiveLine S)\n                  (ProjectiveSpace.map (ULift.{u} (Fin 2)) g)).hom =\n            p1DecompositionSourceMap A N hN hA g hS ≫\n              p1DecompositionMap A N hN hA S'\n                ((map_natCast g.appTop.hom N) ▸ hS.map g.appTop.hom) c'",
   "branch": "newtargets-dag",
   "by": "Q118",
   "date": "2026-10-16",
-  "existing": false
+  "existing": false,
+  "note": " U8 performance repair: explicit ProjectiveLine endpoint arguments only; the interface and maps remain definitionally identical. Reviewer: lean.statement updated verbatim to the delivered signature."
  },
  "reviewed_lean": {
   "date": "2026-10-16",
@@ -243,13 +255,13 @@
   "note": "Read node, report (Worker report + Second reading by Q118), module and the exact dependency declarations: OrdinaryFiniteP1Kummer (ChernSpec, class realization), OrdinaryFiniteP1Arrows (pullback, pushforward, tensor, unit pullback, P1 exchange), FiniteEtaleTateSheaf, and EtaleFiniteTwistPullback (all conjuncts). Every clause matches: N>0; finite CommRing A in u+1 with N=0; IsNoetherian S; IsUnit N on global sections; ProjectiveLine; ordinary small-etale unbounded D(A); A(1)/A(-1) as line/ihom; K = A(-1)[-2]; h is the homEquiv adjoint of right-unit, then (x c), then the normalized twist pullback, then evaluation (even shifts, no sign); the unit is the adjunct of the constant pullback; IsIso of biprod.desc; for all S' and g with no hypothesis, c' satisfies the same spec and the base-change square has the correct direction. ChernSpec determines c, so the existential is not weaker. The Classical.choice transport record is a subsingleton (roots via mono kernel inclusion, line via pure tensors/zero/power/negative-evaluation, product hom = ev), so the selection is canonical; not a duplicate of the positive-only OrdinaryFiniteTwistTransport. stmt_deps add only the landed def-asd-ordinary-finite-p1-arrows (no cycle); lean.statement is verbatim; no statement_change. Edge cases checked: A=0, N=1, empty S/S', non-flat Z/2 with N=4, non-Noetherian S'; universes bound, no added equality. nt_compile.py local overlay: 35.5 s and 38.2 s, clean. Only sorry; docstrings carry source and blueprint tags. Minor non-blocking: the docstring cites the main-20261015 source path while the node's source.document is the master path. No fixes."
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "C-1baf3",
-  "group": "A6",
-  "result": "pass",
-  "landing": "20261021T125938-L-2464238",
+  "reviewer": "C-51fb3",
+  "group": "U8",
+  "result": "fix",
+  "landing": "20261024T191435-L-356888",
   "kind": "interface",
-  "note": "independent cc review: Delivered files diff -r against the PASSed head cb4040740 (C-cb404): only the report differs; packet base blobs and node diffs unchanged; live: item still open, no collisions; delivered modules compile (item 131 s with a 560 s timeout at load ~157); reader gate: GeoP1Cohomology and PurityFrameKummer compile against the delivered .lbuild with no messages"
+  "note": "independent cc review: item proof of geoP1Cohomology and the 4 adapted unclaimed modules against nodes sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition/def-asd-ordinary-finite-p1-*, their change records, and a sandbox compile of all 100 modules that use a changed name or import a changed module"
  }
 }

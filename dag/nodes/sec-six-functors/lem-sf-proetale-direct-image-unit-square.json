@@ -1,0 +1,177 @@
+{
+ "id": "lem-sf-proetale-direct-image-unit-square",
+ "kind": "statement",
+ "title": "Direct-image composition respects the inverse-isomorphism units on the pro-etale site",
+ "statement": "Let $X,Y$ be schemes, $J:X\\to Y$ a morphism, and $a:X\\xrightarrow{\\sim}X$, $b:Y\\xrightarrow{\\sim}Y$ scheme isomorphisms such that $J\\circ a=b\\circ J$. On the small pro-etale sites [def-weil-pbc-proetale-site] use the direct images of abelian sheaves of [def-weil-proetale-inverse-image], namely evaluation after base change. Write products of functors in functional order. Put\n$$R=J_*,\\quad A=a_*,\\quad B=b_*,\\quad P=(a^{-1})_*,\\quad Q=(b^{-1})_*.$$\nUse the canonical composition comparisons $v_*u_*\\cong(v\\circ u)_*$ induced by isomorphisms of iterated fibre products. The equalities $J a=bJ$ and $J a^{-1}=b^{-1}J$ give the specified comparisons\n$$C:RA\\xrightarrow{\\sim}BR,\\qquad d:QR\\xrightarrow{\\sim}RP.$$\nExplicitly, $C$ goes through $(J a)_*=(bJ)_*$ and $d$ through $(b^{-1}J)_*=(J a^{-1})_*$. Let $\\nu^a:\\mathrm{id}\\to AP$ and $\\nu^b:\\mathrm{id}\\to BQ$ be the inverses of the canonical composition-and-identity comparisons $AP\\cong\\mathrm{id}$ and $BQ\\cong\\mathrm{id}$, respectively. For every abelian sheaf $M$ on $X_{\\mathrm{proet}}$ one has\n$$C_{PM}\\circ R(\\nu^a_M)=B(d_M)\\circ\\nu^b_{RM}:RM\\longrightarrow BRPM.$$\nAll the displayed maps use the chosen fibre products and their canonical universal-property isomorphisms; no strict equality between iterated fibre products is assumed.",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/ExchangeMate.lean",
+  "place": "lowerStar_map_unit_comp_lowerStarComp, lines 56–100, specialized to abelian sheaves; this is the sectionwise input used by mateEquiv_adicLowerStarComp_hom, lines 198–239."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "lowerStar_map_unit_comp_lowerStarComp|mateEquiv_eq_of_unit|sheafPushforwardContinuousComp",
+   "results": {
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Sites/Point/Map.lean",
+     "Mathlib/CategoryTheory/Sites/Over.lean",
+     "Mathlib/CategoryTheory/Sites/CoverLifting.lean",
+     "Mathlib/CategoryTheory/Sites/CoverLifting.lean",
+     "Mathlib/CategoryTheory/Sites/CoverLifting.lean",
+     "Mathlib/CategoryTheory/Sites/CoverLifting.lean",
+     "Mathlib/CategoryTheory/Sites/Continuous.lean",
+     "Mathlib/CategoryTheory/Sites/Continuous.lean"
+    ],
+    "digest": "bafe122af0ffdcd8"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib gives general mate bijections and direct-image compositors but not this compatibility for the chosen scheme base-change functors. Read Sites/Continuous.lean 365–429 and ModuleCat/Sheaf/PushforwardContinuous.lean 298–305: a sectionwise unit formula alone does not assert the commuting-square identity. Scheme.Modules hits concern Zariski structure-sheaf modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_eq_of_unit",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'CategoryTheory.mateEquiv_eq_of_unit'",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib gives general mate bijections and direct-image compositors but not this compatibility for the chosen scheme base-change functors. Read Sites/Continuous.lean 365–429 and ModuleCat/Sheaf/PushforwardContinuous.lean 298–305: a sectionwise unit formula alone does not assert the commuting-square identity. Scheme.Modules hits concern Zariski structure-sheaf modules."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pushforward composition along a commutative square of isomorphisms respects the adjunction units of the inverse direct image equivalences",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.ExponentiableMorphism.pushforwardComp",
+     "CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc",
+     "SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app",
+     "SheafOfModules.pushforwardPushforwardAdj",
+     "CategoryTheory.Functor.sheafPushforwardContinuousComp",
+     "CategoryTheory.CommSq.right_adjoint",
+     "CategoryTheory.ExponentiableMorphism.comp_pushforward",
+     "CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom"
+    ],
+    "digest": "36d4c2a62d9f038d"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib gives general mate bijections and direct-image compositors but not this compatibility for the chosen scheme base-change functors. Read Sites/Continuous.lean 365–429 and ModuleCat/Sheaf/PushforwardContinuous.lean 298–305: a sectionwise unit formula alone does not assert the commuting-square identity. Scheme.Modules hits concern Zariski structure-sheaf modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For commuting scheme isomorphisms a and b and a map f, the direct image composition comparison commutes with the units of inverse pushforward equivalences",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app",
+     "AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv",
+     "AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardCongr_inv_app_app",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app",
+     "SheafOfModules.pushforwardComp_inv_app_val_app",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardComp",
+     "CategoryTheory.Functor.sheafPushforwardContinuousComp'_inv_app_val_app"
+    ],
+    "digest": "d29e8f4d87d58856"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib gives general mate bijections and direct-image compositors but not this compatibility for the chosen scheme base-change functors. Read Sites/Continuous.lean 365–429 and ModuleCat/Sheaf/PushforwardContinuous.lean 298–305: a sectionwise unit formula alone does not assert the commuting-square identity. Scheme.Modules hits concern Zariski structure-sheaf modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\"",
+   "results": {
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CategoryTheory.mateEquiv",
+     "CategoryTheory.mateEquiv_counit",
+     "CategoryTheory.mateEquiv_counit_symm",
+     "CategoryTheory.unit_mateEquiv",
+     "CategoryTheory.unit_mateEquiv_symm",
+     "CategoryTheory.conjugateEquiv_mateEquiv_vcomp",
+     "CategoryTheory.mateEquiv_conjugateEquiv_vcomp",
+     "CategoryTheory.mateEquiv_vcomp"
+    ],
+    "digest": "b8ac30fd6644aa85"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib gives general mate bijections and direct-image compositors but not this compatibility for the chosen scheme base-change functors. Read Sites/Continuous.lean 365–429 and ModuleCat/Sheaf/PushforwardContinuous.lean 298–305: a sectionwise unit formula alone does not assert the commuting-square identity. Scheme.Modules hits concern Zariski structure-sheaf modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unit of pushforward along an inverse scheme isomorphism is compatible with a commutative square under canonical iterated fiber product restriction maps",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app",
+     "AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardCongr_inv_app_app",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardId_inv_app_app",
+     "AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app",
+     "SheafOfModules.pushforwardComp_inv_app_val_app",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardComp"
+    ],
+    "digest": "d532e227a49784cb"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib gives general mate bijections and direct-image compositors but not this compatibility for the chosen scheme base-change functors. Read Sites/Continuous.lean 365–429 and ModuleCat/Sheaf/PushforwardContinuous.lean 298–305: a sectionwise unit formula alone does not assert the commuting-square identity. Scheme.Modules hits concern Zariski structure-sheaf modules."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-native-adic-pullback-frobenius-mates",
+  "date": "2026-10-22",
+  "group": "N8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "fix-lem-tensor-adjunction.proof.md Step 1, final Hom bijection; the ordinary pullback/direct-image adjunction used in fix-cor-verdier-exchange.proof.md Steps 1–2, in the native derived-Weil realization. The seeded ancestor is null (blueprint_refs.py ancestor reports None); via lem-sf-weil-verdier-exchange. Underived geometric input: exact adic inverse image and the mate identity for its two actual Frobenius exchange maps. Auxiliary input: Direct-image composition respects the inverse-isomorphism units on the pro-etale site.",
+   "via": [
+    "lem-sf-native-adic-pullback-frobenius-mates",
+    "lem-sf-derived-weil-pullback-pushforward-adjunction",
+    "lem-sf-weil-verdier-exchange"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

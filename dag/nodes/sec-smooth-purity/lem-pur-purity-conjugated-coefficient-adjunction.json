@@ -1,0 +1,203 @@
+{
+ "id": "lem-pur-purity-conjugated-coefficient-adjunction",
+ "kind": "statement",
+ "title": "Purity conjugation of coefficient-adjunction diagrams and cocycles",
+ "statement": "Let $I$ be a preordered set and for every $i\\in I$ let $\\mathcal X_i,\\mathcal Y_i$ be categories [def-nagata-category], functors $P_i:\\mathcal X_i\\to\\mathcal Y_i$, $J_i,H_i:\\mathcal Y_i\\to\\mathcal X_i$, a specified adjunction $P_i\\dashv J_i$ with unit $\\eta_i^J$ and counit $\\epsilon_i^J$, and a natural isomorphism $\\gamma_i:H_i\\xrightarrow{\\sim}J_i$ [def-weil-pbc-adjunction-mate]. For $i\\le j$ let $C^X_{ji}:\\mathcal X_i\\to\\mathcal X_j$, $C^Y_{ji}:\\mathcal Y_i\\to\\mathcal Y_j$ be functors, and supply natural isomorphisms $b_{ji}:C^Y_{ji}P_i\\to P_jC^X_{ji}$ and $c_{ji}:C^X_{ji}J_i\\to J_jC^Y_{ji}$. Suppose, with composition right to left, that for every $M\\in\\mathcal X_i$, $K\\in\\mathcal Y_i$,\n$$J_j(b_{ji,M})c_{ji,P_iM}C^X_{ji}(\\eta_i^J(M))=\\eta_j^J(C^X_{ji}M),$$\n$$\\epsilon_j^J(C^Y_{ji}K)P_j(c_{ji,K})b_{ji,J_iK}=C^Y_{ji}(\\epsilon_i^J(K)).$$\nThen the formulas\n$$\\eta_i^H(M)=\\gamma_{i,P_iM}^{-1}\\eta_i^J(M),\\qquad \\epsilon_i^H(K)=\\epsilon_i^J(K)P_i(\\gamma_{i,K})$$\nare the unit and counit of an adjunction $P_i\\dashv H_i$, and\n$$a_{ji,K}=\\gamma_{j,C^Y_{ji}K}^{-1}c_{ji,K}C^X_{ji}(\\gamma_{i,K})$$\nis a natural isomorphism $C^X_{ji}H_i\\to H_jC^Y_{ji}$. It satisfies both typed identities\n$$H_j(b_{ji,M})a_{ji,P_iM}C^X_{ji}(\\eta_i^H(M))=\\eta_j^H(C^X_{ji}M),$$\n$$\\epsilon_j^H(C^Y_{ji}K)P_j(a_{ji,K})b_{ji,H_iK}=C^Y_{ji}(\\epsilon_i^H(K)).$$\n\nFor $i\\le j\\le k$ suppose natural associators $\\alpha^W_{kji}:C^W_{kj}C^W_{ji}\\xrightarrow{\\sim}C^W_{ki}$, $W=X,Y$, are specified, and that\n$$J_k(\\alpha^Y_{kji,K})c_{kj,C^Y_{ji}K}C^X_{kj}(c_{ji,K})=c_{ki,K}\\alpha^X_{kji,J_iK}.$$\nThen the conjugated comparisons satisfy exactly\n$$H_k(\\alpha^Y_{kji,K})a_{kj,C^Y_{ji}K}C^X_{kj}(a_{ji,K})=a_{ki,K}\\alpha^X_{kji,H_iK}.$$\nThe same $b$ cocycle remains valid because $b$ is unchanged. If identity-extension comparisons $b_{ii},c_{ii}$ are identities under specified coefficient unitors, then so is $a_{ii}$. No compatibility between the different $\\gamma_i$ is assumed: the middle $C^X_{kj}(\\gamma_j)$ and $C^X_{kj}(\\gamma_j^{-1})$ factors cancel. The conclusions require neither faithfulness of the $C$ functors nor any conservativity of a reduction functor.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension.proof.md",
+  "place": "Sole proof paragraph: unit/counit and purity compatibility before inversion of ell, and composition; old steps 1, 3 and 6 (purity conjugation); argument extracted from the previously reviewed DAG proof, not a verbatim source theorem"
+ },
+ "stmt_deps": [
+  "def-nagata-category",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof": [
+  {
+   "text": "For each i construct adjH_i := (adjJ_i).ofNatIsoRight (gamma_i).symm using Mathlib CategoryTheory.Adjunction.ofNatIsoRight. Its defining unit is eta^J followed by gamma_i inverse, and its counit is P_i(gamma_i) followed by epsilon^J. The Mathlib unit and counit formulas give exactly the first two asserted equalities. This uses the existing adjunction transport construction directly instead of reconstructing its natural Hom bijection.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint) and its following unit/counit discussion; explicit agent naturality calculations implementing the sole paragraph of sk-lem-sp-field-extension.proof.md"
+   }
+  },
+  {
+   "text": "Fix $i\\le j$ and abbreviate $U=C^X_{ji}$, $V=C^Y_{ji}$, $b=b_{ji}$, $c=c_{ji}$. Set $a_K=\\gamma_{j,VK}^{-1}c_KU(\\gamma_{i,K})$. Its inverse is $U(\\gamma_{i,K}^{-1})c_K^{-1}\\gamma_{j,VK}$. For $t:K\\to K'$, the three naturality equations give\n$$H_j(Vt)a_K=\\gamma_{j,VK'}^{-1}J_j(Vt)c_KU(\\gamma_{i,K})=\\gamma_{j,VK'}^{-1}c_{K'}U(J_i(t)\\gamma_{i,K})=a_{K'}U(H_i(t)).$$\nThe two inverse composites cancel adjacent inverse factors. Hence $a$ is a natural isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint) and its following unit/counit discussion; explicit agent naturality calculations implementing the sole paragraph of sk-lem-sp-field-extension.proof.md"
+   }
+  },
+  {
+   "text": "With the abbreviations of Step 2, substitute the formulas of Steps 1 and 2 in the unit expression and cancel $U(\\gamma_{i,P_iM})U(\\gamma_{i,P_iM}^{-1})$. Naturality of $\\gamma_j^{-1}$ at $b_M:VP_iM\\to P_jUM$ gives\n$$H_j(b_M)a_{P_iM}U(\\eta_i^H(M))=\\gamma_{j,P_jUM}^{-1}J_j(b_M)c_{P_iM}U(\\eta_i^J(M))=\\gamma_{j,P_jUM}^{-1}\\eta_j^J(UM)=\\eta_j^H(UM).$$\nThe middle equality is exactly the assumed $J$-unit identity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint) and its following unit/counit discussion; explicit agent naturality calculations implementing the sole paragraph of sk-lem-sp-field-extension.proof.md"
+   }
+  },
+  {
+   "text": "For the counit expression, substitution cancels $P_j(\\gamma_{j,VK})P_j(\\gamma_{j,VK}^{-1})$. Naturality of $b$ at $\\gamma_{i,K}:H_iK\\to J_iK$ then gives\n$$\\epsilon_j^H(VK)P_j(a_K)b_{H_iK}=\\epsilon_j^J(VK)P_j(c_K)P_jU(\\gamma_{i,K})b_{H_iK}=\\epsilon_j^J(VK)P_j(c_K)b_{J_iK}VP_i(\\gamma_{i,K})=V(\\epsilon_i^J(K))VP_i(\\gamma_{i,K})=V(\\epsilon_i^H(K)).$$\nThe penultimate equality is the assumed $J$-counit identity, applied at $K$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint) and its following unit/counit discussion; explicit agent naturality calculations implementing the sole paragraph of sk-lem-sp-field-extension.proof.md"
+   }
+  },
+  {
+   "text": "For $i\\le j\\le k$, substitute both $a$ formulas in the left side of the claimed cocycle. Naturality of $\\gamma_k^{-1}$ at $\\alpha^Y_K$, followed by cancellation of $C^X_{kj}(\\gamma_{j,C^Y_{ji}K})$ with its inverse, leaves\n$$\\gamma_{k,C^Y_{ki}K}^{-1}J_k(\\alpha^Y_K)c_{kj,C^Y_{ji}K}C^X_{kj}(c_{ji,K})C^X_{kj}C^X_{ji}(\\gamma_{i,K}).$$\nThe assumed $c$ cocycle changes this to\n$$\\gamma_{k,C^Y_{ki}K}^{-1}c_{ki,K}\\alpha^X_{J_iK}C^X_{kj}C^X_{ji}(\\gamma_{i,K})=\\gamma_{k,C^Y_{ki}K}^{-1}c_{ki,K}C^X_{ki}(\\gamma_{i,K})\\alpha^X_{H_iK}=a_{ki,K}\\alpha^X_{H_iK},$$\nwhere the equality is naturality of $\\alpha^X$ at $\\gamma_{i,K}$. This is precisely the required cocycle, with the specified associators.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint) and its following unit/counit discussion; explicit agent naturality calculations implementing the sole paragraph of sk-lem-sp-field-extension.proof.md"
+   }
+  },
+  {
+   "text": "For the identity clause, write the specified unitors as $u^W:C^W_{ii}\\xrightarrow{\\sim}1$. Being the identity under these unitors means $c_{ii,K}=J_i(u^Y_K)^{-1}u^X_{J_iK}$. Naturality of $\\gamma_i$ at $u^Y_K$ and of $u^X$ at $\\gamma_{i,K}$ gives\n$$a_{ii,K}=H_i(u^Y_K)^{-1}\\gamma_{i,K}^{-1}u^X_{J_iK}C^X_{ii}(\\gamma_{i,K})=H_i(u^Y_K)^{-1}u^X_{H_iK}.$$\nThus $a_{ii}$ is the identity under the same unitors. The $b$ comparisons, associators and unitors were unchanged, so any originally specified $b$ cocycle or identity equation remains literally the same equation. All cancellations used actual natural isomorphisms; no faithfulness, conservativity or relation between different $\\gamma_i$ was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint) and its following unit/counit discussion; explicit agent naturality calculations implementing the sole paragraph of sk-lem-sp-field-extension.proof.md"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension.proof.md",
+  "place": "Sole proof paragraph: purity conjugation, unit/counit compatibility and composition. Lean proof by W8 uses Mathlib Adjunction.ofNatIsoRight for Step 1 and the explicit naturality and inverse-cancellation calculations of Steps 2–6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Conjugate comparisons of a coherent coefficient extension system through right adjoint natural isomorphisms preserving the unit counit and three field cocycle",
+   "results": "CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₁₃_eq_conjugateEquiv_symm; CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₂₃_eq_conjugateEquiv_symm; CategoryTheory.conjugateEquiv_counit_symm; CategoryTheory.conjugateEquiv_iso; CategoryTheory.conjugateIsoEquiv; CategoryTheory.conjugateIsoEquiv_apply_hom; CategoryTheory.conjugateEquiv_of_iso; CategoryTheory.conjugateEquiv_counit",
+   "date": "2026-10-22",
+   "verdict": "no match: ofNatIsoRight gives the transported adjunction alone; mates formulas do not state the simultaneous comparison-system transport with the explicit coefficient cocycle and unitors"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"conjugate\"",
+   "results": "CategoryTheory.conjugateEquiv_adjunction_id; CategoryTheory.conjugateEquiv_adjunction_id_symm; CategoryTheory.Adjunction.conjugateEquiv_leftAdjointIdIso_hom; CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv; CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₁₃_eq_conjugateEquiv_symm; CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₂₃_eq_conjugateEquiv_symm; CategoryTheory.Bicategory.conjugateEquiv_adjunction_id; CategoryTheory.Bicategory.conjugateEquiv_adjunction_id_symm",
+   "date": "2026-10-22",
+   "verdict": "no match: ofNatIsoRight gives the transported adjunction alone; mates formulas do not state the simultaneous comparison-system transport with the explicit coefficient cocycle and unitors"
+  },
+  {
+   "tool": "grep",
+   "query": "(ofNatIsoRight|ofNatIsoLeft|mate.*comp|conjugate.*comp)",
+   "results": "Mathlib/CategoryTheory/Shift/Adjunction.lean; Mathlib/CategoryTheory/Shift/Adjunction.lean; Mathlib/CategoryTheory/Shift/Adjunction.lean; Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean; Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean; Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean; Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean; Mathlib/CategoryTheory/LocallyCartesianClosed/ChosenPullbacksAlong.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: ofNatIsoRight gives the transported adjunction alone; mates formulas do not state the simultaneous comparison-system transport with the explicit coefficient cocycle and unitors"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport an adjunction across a right adjoint isomorphism with unit counit and coefficient composition compatibility",
+   "results": "CategoryTheory.Adjunction.ofNatIsoRight; CategoryTheory.Monad.transport; CategoryTheory.Comonad.transport; CategoryTheory.Adjunction.RightAdjointCommShift.compatibilityUnit_iso; CategoryTheory.Adjunction.leftAdjointIdIso; CategoryTheory.Adjunction.counitAsIsoOfIso; CategoryTheory.Adjunction.natIsoOfRightAdjointNatIso; CategoryTheory.Adjunction.RightAdjointCommShift.iso_hom_app",
+   "date": "2026-10-22",
+   "verdict": "no match: ofNatIsoRight gives the transported adjunction alone; mates formulas do not state the simultaneous comparison-system transport with the explicit coefficient cocycle and unitors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport an adjunction through a natural isomorphism of right adjoints with conjugated unit counit and comparison cocycle",
+   "results": "CategoryTheory.Adjunction.ofNatIsoRight; CategoryTheory.Adjunction.ofNatIsoLeft; CategoryTheory.Adjunction.natIsoOfRightAdjointNatIso; CategoryTheory.conjugateIsoEquiv; CategoryTheory.Adjunction.natIsoOfLeftAdjointNatIso; CategoryTheory.Adjunction.leftAdjointCompIso_hom; CategoryTheory.Adjunction.leftAdjointCompIso; CategoryTheory.Adjunction.leftAdjointCompIso_hom_app",
+   "date": "2026-10-22",
+   "verdict": "no match for the full statement: ofNatIsoRight transports the adjunction only; rightAdjointUniq and conjugateEquiv do not assert the supplied coefficient squares, associators and unitors"
+  },
+  {
+   "tool": "grep",
+   "query": "ofNatIsoRight|ofNatIsoLeft",
+   "results": "Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the full statement: ofNatIsoRight transports the adjunction only; rightAdjointUniq and conjugateEquiv do not assert the supplied coefficient squares, associators and unitors"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport adjunction by natural isomorphism of right adjoint functors",
+   "results": "CategoryTheory.Adjunction.ofNatIsoRight; CategoryTheory.Functor.isRightAdjoint_of_iso; CategoryTheory.Adjunction.natIsoOfLeftAdjointNatIso; CategoryTheory.Adjunction.rightAdjointUniq; CategoryTheory.Adjunction.rightAdjointUniq_trans_app_assoc; CategoryTheory.Adjunction.rightAdjointUniq_trans_app; CategoryTheory.Adjunction.natIsoOfRightAdjointNatIso; CategoryTheory.Adjunction.rightAdjointUniq_inv_app",
+   "date": "2026-10-22",
+   "verdict": "no match for the full statement: ofNatIsoRight transports the adjunction only; rightAdjointUniq and conjugateEquiv do not assert the supplied coefficient squares, associators and unitors"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.ofNatIsoRight",
+   "results": "CategoryTheory.Adjunction.ofNatIsoRight; CategoryTheory.Adjunction.ofNatIsoRight_counit; CategoryTheory.Adjunction.ofNatIsoRight_unit; CategoryTheory.Adjunction.homEquiv_ofNatIsoRight_apply; CategoryTheory.Adjunction.homEquiv_ofNatIsoRight_symm_apply",
+   "date": "2026-10-22",
+   "verdict": "no match for the full statement: ofNatIsoRight transports the adjunction only; rightAdjointUniq and conjugateEquiv do not assert the supplied coefficient squares, associators and unitors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism of right adjoints transports an adjunction and conjugates coherent transition maps between categories",
+   "results": "CategoryTheory.Adjunction.ofNatIsoRight; CategoryTheory.Adjunction.rightAdjointUniq_trans_app; CategoryTheory.Adjunction.rightAdjointUniq_trans_app_assoc; CategoryTheory.Adjunction.natIsoOfRightAdjointNatIso; CategoryTheory.Adjunction.rightAdjointUniq_trans_assoc; CategoryTheory.Adjunction.rightAdjointUniq_trans; CategoryTheory.Adjunction.natIsoOfLeftAdjointNatIso; CategoryTheory.Adjunction.rightAdjointUniq_inv_app",
+   "date": "2026-10-22",
+   "verdict": "no match for the full statement: ofNatIsoRight transports the adjunction only; rightAdjointUniq and conjugateEquiv do not assert the supplied coefficient squares, associators and unitors"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "sk-lem-sp-field-extension",
+  "date": "2026-10-22",
+  "group": "NL"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-field-extension",
+ "blueprint": {
+  "from": {
+   "node": "sk-lem-sp-field-extension",
+   "place": "Sole proof paragraph: unit/counit and purity compatibility before inversion of ell, and composition; old steps 1, 3 and 6 (purity conjugation)",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-purity-conjugated-coefficient-adjunction",
+  "worker": "stage1",
+  "summary": "Transport the given Hom bijections using the existing Mathlib adjunction-construction leaf; prove comparison naturality, both typed adjunction squares, associator cocycle and coefficient identities by explicit substitution, naturality and inverse cancellation. No new nodes or statement changes.",
+  "blueprint": "Sole proof paragraph of sk-lem-sp-field-extension, the unit/counit and purity compatibility and composition before taking derived inverse limits and inverting ell."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NX-9bec595d2",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-9bec595d2 (reviewer sub-agent of L); spot-checked: Shape: one commit with the item and report only, no new nodes. Statement, stmt_deps, source and blueprint are byte-identical to live; only status, proof, proof_deps, proof_origin, mathlib_searches and split_report changed. No repair note exists, and live/side-live still have the item unsplit, so there is no supersession. Parent use: Step 2 of sk-lem-sp-field-extension takes η^H, ε^H, a0 = γ_F^{-1} c0 C^X(γ_E), both unit/counit squares with b0, the a0 cocycle and the identity normalization, and the item states all of them; the index set (finite subextensions of Q̄_ℓ under inclusion) is a preorder. Source: main-20261015 sk-lem-sp-field-extension.proof.md sole paragraph; Stacks categories.tex:3344 definition-adjoint = Tag 0037; no SGA. Step 1 cites the Mathlib leaf lem-weil-pbc-adjunction-of-natural-bijection (mkOfHomEquiv) for Ψ = γ^{-1}Φ, Ψ^{-1}(t) = Φ^{-1}(γt). I checked its naturality, η^H = γ^{-1}η^J and ε^H = Φ^{-1}(γ) = ε^J P(γ). Steps 2-6 are elementary and I checked each one with types. Step 2: a is natural via the γ_j^{-1}, c and γ_i squares. Step 3: γ_j^{-1} is natural at b_M, then the J-unit hypothesis applies. Step 4: b is natural at γ_{i,K}: H_iK → J_iK, then the J-counit hypothesis applies at K. Step 5: the middle C^X_kj(γ_j^{±1}) factors cancel, then naturality of γ_k^{-1} at α^Y, the c-cocycle hypothesis and naturality of α^X at γ_i give exactly a_ki α^X_{H_iK}. Step 6: c_ii = J_i(u^Y)^{-1} u^X_{J_iK} gives a_ii = H_i(u^Y)^{-1} u^X_{H_iK}. Edge cases checked: empty I or empty categories, identity C functors and γ, independent γ_i, non-faithful C, nontrivial unitors; none shows a missing hypothesis or a false clause. Duplicate search: lem-pur-normalized-mate-scalar-site-transport goes the other way (it derives the mate b from a given a), needs equivalence data and has no preorder cocycle or unitors, so it is not a duplicate. No fixes and no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PurityConjugatedCoefficientAdjunction",
+  "declaration": "CategoryTheory.purity_conjugated_coefficient_adjunction",
+  "file": "lean/Sheaf/CategoryTheory/PurityConjugatedCoefficientAdjunction.lean",
+  "statement": "theorem purity_conjugated_coefficient_adjunction {I : Type w} [Preorder I] (X : I → Type uX) (Y : I → Type uY) [∀ i : I, Category.{vX} (X i)] [∀ i : I, Category.{vY} (Y i)] (P : ∀ i : I, X i ⥤ Y i) (J H : ∀ i : I, Y i ⥤ X i) (adjJ : ∀ i : I, P i ⊣ J i) (γ : ∀ i : I, H i ≅ J i) (CX : ∀ (i j : I), i ≤ j → (X i ⥤ X j)) (CY : ∀ (i j : I), i ≤ j → (Y i ⥤ Y j)) (b : ∀ (i j : I) (hij : i ≤ j), P i ⋙ CY i j hij ≅ CX i j hij ⋙ P j) (c : ∀ (i j : I) (hij : i ≤ j), J i ⋙ CX i j hij ≅ CY i j hij ⋙ J j) (hunit : ∀ (i j : I) (hij : i ≤ j) (M : X i), (CX i j hij).map ((adjJ i).unit.app M) ≫ (c i j hij).hom.app ((P i).obj M) ≫ (J j).map ((b i j hij).hom.app M) = (adjJ j).unit.app ((CX i j hij).obj M)) (hcounit : ∀ (i j : I) (hij : i ≤ j) (K : Y i), (b i j hij).hom.app ((J i).obj K) ≫ (P j).map ((c i j hij).hom.app K) ≫ (adjJ j).counit.app ((CY i j hij).obj K) = (CY i j hij).map ((adjJ i).counit.app K)) : ∃ (adjH : ∀ i : I, P i ⊣ H i) (a : ∀ (i j : I) (hij : i ≤ j), H i ⋙ CX i j hij ≅ CY i j hij ⋙ H j), (∀ (i : I) (M : X i), (adjH i).unit.app M = (adjJ i).unit.app M ≫ (γ i).inv.app ((P i).obj M)) ∧ (∀ (i : I) (K : Y i), (adjH i).counit.app K = (P i).map ((γ i).hom.app K) ≫ (adjJ i).counit.app K) ∧ (∀ (i j : I) (hij : i ≤ j) (K : Y i), (a i j hij).hom.app K = (CX i j hij).map ((γ i).hom.app K) ≫ (c i j hij).hom.app K ≫ (γ j).inv.app ((CY i j hij).obj K)) ∧ (∀ (i j : I) (hij : i ≤ j) (M : X i), (CX i j hij).map ((adjH i).unit.app M) ≫ (a i j hij).hom.app ((P i).obj M) ≫ (H j).map ((b i j hij).hom.app M) = (adjH j).unit.app ((CX i j hij).obj M)) ∧ (∀ (i j : I) (hij : i ≤ j) (K : Y i), (b i j hij).hom.app ((H i).obj K) ≫ (P j).map ((a i j hij).hom.app K) ≫ (adjH j).counit.app ((CY i j hij).obj K) = (CY i j hij).map ((adjH i).counit.app K)) ∧ (∀ (αX : ∀ (i j k : I) (hij : i ≤ j) (hjk : j ≤ k), CX i j hij ⋙ CX j k hjk ≅ CX i k (le_trans hij hjk)) (αY : ∀ (i j k : I) (hij : i ≤ j) (hjk : j ≤ k), CY i j hij ⋙ CY j k hjk ≅ CY i k (le_trans hij hjk)), (∀ (i j k : I) (hij : i ≤ j) (hjk : j ≤ k) (K : Y i), (CX j k hjk).map ((c i j hij).hom.app K) ≫ (c j k hjk).hom.app ((CY i j hij).obj K) ≫ (J k).map ((αY i j k hij hjk).hom.app K) = (αX i j k hij hjk).hom.app ((J i).obj K) ≫ (c i k (le_trans hij hjk)).hom.app K) → ∀ (i j k : I) (hij : i ≤ j) (hjk : j ≤ k) (K : Y i), (CX j k hjk).map ((a i j hij).hom.app K) ≫ (a j k hjk).hom.app ((CY i j hij).obj K) ≫ (H k).map ((αY i j k hij hjk).hom.app K) = (αX i j k hij hjk).hom.app ((H i).obj K) ≫ (a i k (le_trans hij hjk)).hom.app K) ∧ (∀ (i : I) (uX : CX i i (le_refl i) ≅ 𝟭 (X i)) (uY : CY i i (le_refl i) ≅ 𝟭 (Y i)), (∀ M : X i, (b i i (le_refl i)).hom.app M = uY.hom.app ((P i).obj M) ≫ (P i).map (uX.inv.app M)) → (∀ K : Y i, (c i i (le_refl i)).hom.app K = uX.hom.app ((J i).obj K) ≫ (J i).map (uY.inv.app K)) → ∀ K : Y i, (a i i (le_refl i)).hom.app K = uX.hom.app ((H i).obj K) ≫ (H i).map (uY.inv.app K))",
+  "branch": "newtargets-dag",
+  "by": "Q150",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d6cab61da",
+  "group": "Q150",
+  "result": "pass",
+  "note": "Node differs from side-live only in lean; lean.statement verbatim. Every hypothesis and conclusion typed against the TeX: b/c directions, J-unit/counit squares, unit pinned to γ⁻¹η^J and counit to ε^J P(γ) (so adjH is canonical), a pinned to γ_j⁻¹ c C^X(γ_i), both H-squares with the same b, a-cocycle re-derived (cancel middle γ_j, naturality of γ_k⁻¹ and αX), identity clause with arbitrary unitors re-derived. Edge cases (empty I, empty categories, identity C/γ, independent universes) fine. No duplicate in Sheaf/WeilConjectures/Mathlib. Docstrings give source place, blueprint tag and 6-step plan; sorry only; no defs, SGA or pro-etale content. Advisories: associator clause is family-level, not per-triple (matches node and parent use); plain import Adjunction.Basic redundant. No compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W8",
+  "result": "pass",
+  "landing": "20261024T191648-L-458371",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

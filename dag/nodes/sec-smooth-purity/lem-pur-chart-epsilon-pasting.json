@@ -1,0 +1,109 @@
+{
+ "id": "lem-pur-chart-epsilon-pasting",
+ "kind": "statement",
+ "title": "Identity and composition of chart epsilon",
+ "statement": "Use the finite coefficient setting P of [def-pur-conventions], arbitrary finite E/Q_l and positive level n. Let V be affine with a finite-type map aV to Spec P.field.k; d is any natural number. Let C, B (and A where composable maps are used) be affine etale d-charts over V and e, v their etale maps over V, with the actual canonical comparisons of [def-pur-general-chart-comparisons] and [def-pur-chart-affine-comparison-data]. For every normalized compact-support presentation N (and every normalized finite twist transport t where used), the following equality holds, in the small pro-etale derived categories with the stated canonical pullback identity/composition constraints. Its complete formal statement is:\n\ntheorem chart_epsilon_pasting (P : PurityFiniteSetting.{u})\n    {V : Scheme.{u}} [IsAffine V] {d : ℕ}\n    (aV : V ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aV] [QuasiCompact aV]\n    :\n    (∀ (C : Chart V d) (N : Etale.EtaleCompactSupportNormalization P.Coefficient),\n      eps P aV (Map.id C) N ≪≫\n        (ProEtale.leftDerivedUpperStarId (ModuleCat.{u + 1} P.Coefficient) C.X).app\n          (omega P C.proj aV) = Iso.refl _) ∧\n    (∀ (C B A : Chart V d) (v : Map C B) (e : Map B A)\n      (N : Etale.EtaleCompactSupportNormalization P.Coefficient),\n      eps P aV (v.comp e) N ≪≫\n        (ProEtale.leftDerivedUpperStarComp (ModuleCat.{u + 1} P.Coefficient)\n          v.hom e.hom).app (omega P A.proj aV) = eps P aV v N ≪≫\n        (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) v.hom).leftDerivedFunctor.mapIso\n          (eps P aV e N))",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Identity and composition of chart epsilon; parent proof Step 9"
+ },
+ "stmt_deps": [
+  "def-pur-general-chart-comparisons",
+  "def-pur-chart-affine-comparison-data",
+  "def-pur-conventions"
+ ],
+ "proof": [
+  {
+   "text": "use associativity and identity of the canonical compact-support compositor.\nThe adjunction Hom bijections are injective, so transposing its associativity and\nidentity gives the corresponding equations for the specified exceptional compositor.\nSubstitute the counit-normalized etale identification. Its identity and composition\nlaws and naturality at the inner exceptional compositor show that the two composites\nof epsilon agree. Conjugate by diagonalDualizingComparison and the canonical site\npullback comparison; their identity and composition coherence cancels all intermediate\nfactors. Finally insert omegaCongr for the supplied chart projection equalities.\nProof irrelevance identifies the equality transports under associativity. This gives\nthe displayed laws including all open restrictions, rank zero and empty charts.",
+   "uses": [
+    "thm-sf-comp-composition",
+    "lem-weil-pbc-mate-pasting",
+    "lem-pur-finite-etale-dualizing-normalization",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "thm-sf-comp-composition",
+  "lem-weil-pbc-mate-pasting",
+  "lem-pur-finite-etale-dualizing-normalization",
+  "lem-weil-pbc-proetale-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Identity and composition of chart epsilon"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coherence of exceptional composition mates for etale maps, source and normal comparison with diagonal purity, identity and composition",
+   "results": "Etale ring-map and etale-locus facts; no comparison equation",
+   "date": "2026-10-25",
+   "verdict": "No direct match; use the specified geometric and adjunction comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv",
+   "results": "Generic adjunction mate equations",
+   "date": "2026-10-25",
+   "verdict": "No direct match; use the specified geometric and adjunction comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "standingExceptionalComposition",
+   "results": "No Mathlib declaration; local library has the definition and composition-tensor-mate package",
+   "date": "2026-10-25",
+   "verdict": "No direct match; use the specified geometric and adjunction comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ChartExceptionalMateCoherence",
+  "date": "2026-10-25",
+  "group": "W3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-chart-exceptional-mate-coherence",
+   "place": "proof Step 9"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ChartEpsilonPasting",
+  "file": "lean/Sheaf/Paper/ChartEpsilonPasting.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.ChartComparisons.chart_epsilon_pasting",
+  "statement": "theorem chart_epsilon_pasting (P : PurityFiniteSetting.{u})\n    {V : Scheme.{u}} [IsAffine V] {d : ℕ}\n    (aV : V ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aV] [QuasiCompact aV]\n    :\n    (∀ (C : Chart V d) (N : Etale.EtaleCompactSupportNormalization P.Coefficient),\n      eps P aV (Map.id C) N ≪≫\n        (ProEtale.leftDerivedUpperStarId (ModuleCat.{u + 1} P.Coefficient) C.X).app\n          (omega P C.proj aV) = Iso.refl _) ∧\n    (∀ (C B A : Chart V d) (v : Map C B) (e : Map B A)\n      (N : Etale.EtaleCompactSupportNormalization P.Coefficient),\n      eps P aV (v.comp e) N ≪≫\n        (ProEtale.leftDerivedUpperStarComp (ModuleCat.{u + 1} P.Coefficient)\n          v.hom e.hom).app (omega P A.proj aV) = eps P aV v N ≪≫\n        (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) v.hom).leftDerivedFunctor.mapIso\n          (eps P aV e N))",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261025T101744-L-3732556",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261025T101744-L-3732556",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

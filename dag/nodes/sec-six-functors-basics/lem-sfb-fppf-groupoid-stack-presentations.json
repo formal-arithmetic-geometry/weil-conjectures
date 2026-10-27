@@ -1,0 +1,303 @@
+{
+ "id": "lem-sfb-fppf-groupoid-stack-presentations",
+ "kind": "statement",
+ "title": "Fppf presentations and restriction of quotient groupoids",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention]. A groupoid in algebraic spaces means objects $U$ and arrows $R$ with source $s$, target $t$, unit $e$, inverse and composition giving groupoids on all test-scheme points, naturally under pullback; for schemes these are [def-a1-groupoid-scheme]. For such a groupoid, $[U/R]$ denotes the fppf stackification [lem-sfb-groupoid-stackification-local-description], [def-pc-fppf-site] of the presheaf of groupoids $T\\mapsto(U(T),R(T))$. (1) If $s,t$ are flat and locally of finite presentation [def-weil-flat-morphism], [def-sbc-locally-finite-presentation], the diagonal of $[U/R]$ is representable by algebraic spaces and $U\\to[U/R]$ is representable, surjective, flat and locally of finite presentation. Its self 2-fibre product is canonically $R$, with projections $s,t$. (2) If $a:U\\to\\mathcal Z$ is a representable surjective flat locally finitely presented scheme map to an algebraic stack, the self-relation groupoid $R=U\\times_{\\mathcal Z}U$ has flat locally finitely presented projections, and its canonical map $[U/R]\\to\\mathcal Z$ is an equivalence commuting with $a$. (3) If a groupoid $(U,R)$ is the restriction of a groupoid $(V,Q)$ along a surjective flat locally finitely presented scheme map $q:U\\to V$, meaning $R\\cong(U\\times_SU)\\times_{V\\times_SV}Q$ with all operations induced, then $[U/R]\\to[V/Q]$ is an equivalence commuting with the canonical maps from $U$ and $V$. Algebraic space means [def-trf-algebraic-space], and all representable properties are tested on scheme charts; surjectivity means field-extension local lifting. An algebraic stack means an etale stack in groupoids with diagonal representable by algebraic spaces and a smooth surjective scheme atlas (equivalently its fppf-stack convention, by [lem-sfb-etale-smooth-atlas-fppf-descent]); stack, 2-fibre products and representability use [def-sfb-stable-pointed-moduli-groupoids], [def-trf-algebraic-space]. Properties of representable maps are tested after scheme base change on etale scheme charts. Surjectivity means that every field-valued target object lifts after a field extension.",
+ "source": {
+  "document": "literature/stacks-project/algebraic.tex",
+  "place": "Tag 04WY (remark-flat-fp-presentation), with spaces-groupoids.tex Tags 04M9 (lemma-quotient-stack-2-cartesian), 046S (lemma-quotient-stack-restrict) and 046T (lemma-quotient-stack-restrict-equivalence). Diagonal and covering for a flat lfp quotient: algebraic.tex 04WZ/04X0, whose proofs use only these properties for these conclusions; no smooth-atlas existence for a flat groupoid is asserted."
+ },
+ "stmt_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-a1-groupoid-scheme",
+  "def-pc-fibre-product",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-fppf-site",
+  "lem-sfb-groupoid-stackification-local-description",
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "lem-sfb-etale-smooth-atlas-fppf-descent",
+  "def-sfb-algebraic-space-groupoid",
+  "def-sfb-space-groupoid-quotient-presentation",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-sfb-moduli-chart-normalization",
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-surjective-moduli-map"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-flat-groupoid-algebraic-quotient] to the groupoid of clause (1). Its hypotheses are precisely that $U,R$ are algebraic spaces, their operations form groupoids on test schemes, and $s,t$ are flat and locally of finite presentation. It gives the representable diagonal, the representable surjective flat locally finitely presented object map, and the specified arrow-map equivalence $R\\simeq U\\times_{[U/R]}U$. The projections are $s,t$ by that statement. This proves clause (1), using an existing stronger theorem; we do not need its additional smooth-atlas conclusion.",
+   "uses": [
+    "lem-sfb-flat-groupoid-algebraic-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tags 06FH (lemma-flat-quotient-flat-presentation), 06FI (theorem-flat-groupoid-gives-algebraic-stack); spaces-groupoids.tex Tag 04M9."
+   }
+  },
+  {
+   "text": "For clause (2), $\\mathcal Z$ is an fppf stack by [lem-sfb-etale-smooth-atlas-fppf-descent]: its etale stack, representable diagonal and smooth surjective scheme atlas are exactly the hypotheses of that node. Apply [lem-sfb-self-relation-quotient-embedding] to $a:U\\to\\mathcal Z$ (regarding the scheme $U$ as its algebraic space by [def-trf-scheme-algebraic-space]). It gives the algebraic space $R$, the self-relation groupoid, and a fibrewise fully faithful $i:[U/R]\\to\\mathcal Z$ with specified $i\\pi\\simeq a$. Each projection $R\\to U$ is a scheme base change of $a$; hence it is flat and locally of finite presentation by the hypothesis on $a$, whose meaning is the stated scheme-base-change test. The inverse and composition are inversion and composition of the displayed isomorphisms in $\\mathcal Z$, as the cited self-relation node specifies.",
+   "uses": [
+    "lem-sfb-etale-smooth-atlas-fppf-descent",
+    "lem-sfb-self-relation-quotient-embedding",
+    "def-trf-scheme-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04T4 (lemma-map-space-into-stack), parts (1), (4)-(6); Tag 04WY (remark-flat-fp-presentation). Fppf-stack convention: criteria.tex Tag 076V (lemma-stacks-etale)."
+   }
+  },
+  {
+   "text": "Fix a scheme $T$ and $z\\in\\mathcal Z(T)$. Representability of $a$ gives an algebraic space $F=U\\times_{\\mathcal Z}T$, and $F\\to T$ is flat and locally of finite presentation by the same test. Choose a surjective etale scheme chart $W\\to F$, allowed by [def-trf-algebraic-space]. By [lem-sfb-space-local-properties-chart-test] with target chart $T\\to T$, the scheme map $W\\to T$ is flat and locally of finite presentation. It is surjective: a point $t\\in T$ gives $z_t$ over $\\kappa(t)$; surjectivity of $a$ lifts it up to isomorphism to an element of $U(L)$ for some field extension $L/\\kappa(t)$. This is an element of $F(L)$, which lifts to the surjective chart $W$ after a further field extension. Thus every $t$ is in the image of $W\\to T$. Consequently $\\{W\\to T\\}$ is an fppf covering by [def-pc-fppf-site]. Its tautological element of $F(W)$ is a map $u:W\\to U$ and an isomorphism $a(u)\\simeq z|_W$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-space-local-properties-chart-test",
+    "def-pc-fppf-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04WY (remark-flat-fp-presentation), the local-lifting argument of Tag 04T5 (lemma-stack-presentation), with spaces-morphisms.tex Tags 03MM and 0410 (chart tests)."
+   }
+  },
+  {
+   "text": "The objects $\\pi(u)$ of step 3 map under $i$ to $z$ locally, since $i\\pi\\simeq a$. The source is an fppf stack by [lem-sfb-groupoid-stackification-local-description] and the target is an fppf stack by step 2. The functor $i$ is fibrewise fully faithful by step 2. Therefore [lem-sfb-stack-fully-faithful-local-equivalence], applied on the big fppf site [def-pc-fppf-site], makes $i$ an equivalence. The already specified $i\\pi\\simeq a$ proves the required compatibility. This finishes clause (2).",
+   "uses": [
+    "lem-sfb-groupoid-stackification-local-description",
+    "lem-sfb-stack-fully-faithful-local-equivalence",
+    "def-pc-fppf-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04WY (remark-flat-fp-presentation), using stacks.tex Tag 046N (lemma-characterize-essentially-surjective-when-ff)."
+   }
+  },
+  {
+   "text": "For clause (3), the morphism on groupoid points sends $u$ to $q(u)$ and an arrow to its specified image in $Q$. Because all operations on $R$ are induced from $Q$, these maps form a pullback-compatible functor between the two groupoid prestacks. Composing with the target stackification and applying the extension clause of [lem-sfb-groupoid-stackification-local-description] gives $j:[U/R]\\to[V/Q]$ and a specified isomorphism $j\\pi_U\\simeq\\pi_Vq$. For $u,v:T\\to U$ the arrow presheaf in the first groupoid is $T\\times_{(u,v),U\\times_SU,(s,t)}R$; in the second it is $T\\times_{(qu,qv),V\\times_SV,(s,t)}Q$. The restriction isomorphism in the hypothesis identifies these presheaves, respecting their maps to the two stackifications. They are algebraic spaces by [lem-trf-space-fibre-products-etale-covers], hence fppf sheaves by [def-trf-algebraic-space]. The Isom clause of stackification identifies their sheafifications with the Isom sheaves of the corresponding image objects. Sheafifying either of these sheaves fixes it, by [def-weil-pbc-sheafification]. Thus $j$ induces an isomorphism of Isom sheaves on these object pairs.",
+   "uses": [
+    "lem-sfb-groupoid-stackification-local-description",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-trf-algebraic-space",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "Tag 046S (lemma-quotient-stack-restrict), with Tag 044V (lemma-quotient-stack-morphisms)."
+   }
+  },
+  {
+   "text": "For arbitrary $x,y\\in[U/R](T)$, the local-object clause of [lem-sfb-groupoid-stackification-local-description] puts both in the form $\\pi_U(u),\\pi_U(v)$ on an fppf covering (take a common covering using the site axioms of [def-pc-fppf-site]). Conjugation by the chosen isomorphisms reduces the map of their Isom sheaves to step 5. A map of sheaves which is an isomorphism on a covering is an isomorphism: injectivity follows by restriction and sheaf uniqueness; for surjectivity take local inverse images, whose restrictions agree on overlaps by local injectivity, and glue them by the sheaf axiom. Hence the map on Isom sets over $T$ is bijective. This proves fibrewise full faithfulness of $j$, without assuming flatness or local finite presentation of the source and target maps of either groupoid.",
+   "uses": [
+    "lem-sfb-groupoid-stackification-local-description",
+    "def-pc-fppf-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "Tag 046S (lemma-quotient-stack-restrict), fppf-local test on Isom sheaves."
+   }
+  },
+  {
+   "text": "For $z\\in[V/Q](T)$, [lem-sfb-groupoid-stackification-local-description] gives an fppf covering on which $z\\simeq\\pi_V(v)$ for a map $v:T_i\\to V$. Pull back the given fppf scheme covering $q:U\\to V$ along $v$. By [lem-trf-fppf-covering-base-change], $W_i=T_i\\times_VU\\to T_i$ is an fppf covering. Its tautological map $u:W_i\\to U$ satisfies $qu=v|_{W_i}$, so $j\\pi_U(u)\\simeq z|_{W_i}$ by step 5. This is local essential surjectivity (successive coverings suffice by the site axioms [def-pc-fppf-site]). Both quotients are fppf stacks by the stackification node, and step 6 gives full faithfulness. Thus [lem-sfb-stack-fully-faithful-local-equivalence] makes $j$ an equivalence. The specified $j\\pi_U\\simeq\\pi_Vq$ is exactly the compatibility with the two canonical maps. This proves clause (3).",
+   "uses": [
+    "lem-sfb-groupoid-stackification-local-description",
+    "lem-trf-fppf-covering-base-change",
+    "def-pc-fppf-site",
+    "lem-sfb-stack-fully-faithful-local-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "Tag 046T (lemma-quotient-stack-restrict-equivalence), fppf-cover case; stacks.tex Tag 046N."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-flat-groupoid-algebraic-quotient",
+  "lem-sfb-etale-smooth-atlas-fppf-descent",
+  "lem-sfb-self-relation-quotient-embedding",
+  "def-trf-scheme-algebraic-space",
+  "def-trf-algebraic-space",
+  "lem-sfb-space-local-properties-chart-test",
+  "def-pc-fppf-site",
+  "lem-sfb-groupoid-stackification-local-description",
+  "lem-sfb-stack-fully-faithful-local-equivalence",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-pbc-sheafification",
+  "lem-trf-fppf-covering-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebraic.tex",
+  "place": "Tags 04T4, 04T5, 04WY; criteria.tex 06FH, 06FI and 076V; spaces-groupoids.tex 044V, 046S, 046T; stacks.tex 046N."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A surjective flat locally finitely presented atlas presents an algebraic stack as the quotient of its self relation, and fppf restriction of groupoids induces an equivalence of quotient stacks",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Surjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isQuotientMap_of_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] [AlgebraicGeometry.QuasiCompact f]\\n  [AlgebraicGeometry.Surjective f], Topology.IsQuotientMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"Let $ f : X \\\\to Y $ be a morphism of schemes. If $ f $ is flat, quasi-compact, and surjective, then the underlying continuous map of topological spaces is a quotient map, meaning the topology on $ Y $\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"(CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme).DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an isomorphism descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is su\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallySurjectiveHomObjForgetTypeYonedaGluedToSheafOfIsLocallySurjectiveZariskiTopologyDescFunctorOpposite\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val}\\n  (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i))\\n  [CategoryTheory.Presheaf.IsLocallySurjective\", \"doc\": \"The morphism from the Yoneda embedding of a glued scheme constructed via Zariski gluing data to a sheaf is locally surjective with respect to the Zariski topology. This means that for every scheme, th\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or ordinary groupoids and stack descent; none states this internal algebraic-space/groupoid or stack assertion, nor gives it by a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quotient stack of a flat locally finitely presented groupoid has its canonical fppf atlas and restriction along an fppf cover is an equivalence",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Pseudofunctor.isStackFor'\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat)\\n  {J : CategoryTheory.GrothendieckTopology C} [F.IsStack J] {S : C}, ∀ R ∈ J S, F.IsStackFor R.arrows\", \"doc\": \"A pseudofunctor $\\\\mathcal{F}$ from the locally discrete opposite category $\\\\mathcal{C}^{\\\\text{op}}$ to the category of small categories $\\\\mathsf{Cat}$ satisfies the stack conditions with respect to a \"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStack.of_isStackFor\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat}\\n  {J : CategoryTheory.GrothendieckTopology C}, (∀ (S : C), ∀ R ∈ J S, F.IsStackFor R.arrows) → F.IsStack J\", \"doc\": \"Let $\\\\mathcal{C}$ be a category equipped with a Grothendieck topology $J$, and let $\\\\mathcal{F}: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathsf{Cat}$ be a pseudofunctor from the locally discrete opposite categor\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStackFor.isEquivalence\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat} {S : C}\\n  {R : CategoryTheory.Presieve S}, F.IsStackFor R → (F.toDescentData fun f => f.obj.hom).IsEquivalence\", \"doc\": \"For a category $\\\\mathcal{C}$, a pseudofunctor $\\\\mathcal{F}: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$, an object $S \\\\in \\\\mathcal{C}$, and a presieve $R$ on $S$, if $\\\\mathcal{F}\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStack\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat →\\n      CategoryTheory.GrothendieckTopology C → Prop\", \"doc\": \"A predicate asserting that a pseudofunctor from the locally discrete opposite category of $\\\\mathcal{C}$ to the category of small categories satisfies the stack conditions with respect to a given Groth\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.isEquivalence_toDescentData\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat)\\n  {J : CategoryTheory.GrothendieckTopology C} [F.IsStack J] {ι : Type t} {S : C} {X : ι → C} (f : (i : ι) → X i ⟶ S),\\n  CategoryTheory.Sieve.ofArrows \", \"doc\": \"Let $\\\\mathcal{C}$ be a category equipped with a Grothendieck topology $J$, and let $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$ be a pseudofunctor satisfying the stack conditi\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStackFor.isPrestackFor\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat} {S : C}\\n  {R : CategoryTheory.Presieve S}, F.IsStackFor R → F.IsPrestackFor R\", \"doc\": \"If a pseudofunctor $\\\\mathcal{F}$ satisfies the stack condition for a presieve $R$ on an object $S$ in a category $\\\\mathcal{C}$, then $\\\\mathcal{F}$ also satisfies the prestack condition for $R$.\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.isStackFor\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat)\\n  {J : CategoryTheory.GrothendieckTopology C} [F.IsStack J] {S : C} (R : CategoryTheory.Presieve S),\\n  CategoryTheory.Sieve.generate R ∈ J S → F.IsSta\", \"doc\": \"A pseudofunctor $ \\\\mathcal{F} $ from the locally discrete opposite category of $ \\\\mathcal{C} $ to the category of small categories $ \\\\mathsf{Cat} $ satisfies the stack conditions with respect to a giv\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.isStackFor_ofArrows_iff\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat) {ι : Type t} {S : C}\\n  {X : ι → C} (f : (i : ι) → X i ⟶ S),\\n  F.IsStackFor (CategoryTheory.Presieve.ofArrows X f) ↔ (F.toDescentData f).IsEquivalence\", \"doc\": \"A pseudofunctor $ F $ satisfies the stack condition for the presieve generated by a family of morphisms $ f_i: X_i \\to S $ if and only if the induced functor from $ F(\\text{op}(S)) $ to the category of \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or ordinary groupoids and stack descent; none states this internal algebraic-space/groupoid or stack assertion, nor gives it by a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quotient stack of a flat locally finitely presented groupoid has its canonical fppf atlas and restriction along an fppf cover is an equivalence",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.IsCoverDense.restrictHomEquivHom\", \"module\": \"Mathlib.CategoryTheory.Sites.DenseSubsite.Basic\", \"type\": \": (G.op ⋙ ℱ ⟶ G.op ⋙ ℱ'.val) ≃ (ℱ ⟶ ℱ'.val)\", \"doc\": \"Given a cover-dense and locally full functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ with respect to a Grothendieck topology $ K $, there is a natural equivalence between the hom-set of natural transforma\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.isEquivalence_toDescentData\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.IsStack\", \"type\": \"[F.IsStack J] {ι : Type t} {S : C} {X : ι → C} (f : ∀ i, X i ⟶ S) (hf : Sieve.ofArrows _ f ∈ J S) :\\n  (F.toDescentData f).IsEquivalence\", \"doc\": \"Let $\\\\mathcal{C}$ be a category equipped with a Grothendieck topology $J$, and let $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$ be a pseudofunctor satisfying the stack conditi\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStackFor.isEquivalence\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat} {S : C}\\n  {R : CategoryTheory.Presieve S}, F.IsStackFor R → (F.toDescentData fun f => f.obj.hom).IsEquivalence\", \"doc\": \"For a category $\\\\mathcal{C}$, a pseudofunctor $\\\\mathcal{F}: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$, an object $S \\\\in \\\\mathcal{C}$, and a presieve $R$ on $S$, if $\\\\mathcal{F}\"}\n  {\"name\": \"StructureGroupoid.maximalAtlas\", \"module\": \"Mathlib.Geometry.Manifold.HasGroupoid\", \"type\": \": Set (OpenPartialHomeomorph M H)\", \"doc\": \"Let $M$ be a charted space with model space $H$, and let $G$ be a structure groupoid on $H$. The maximal atlas for $M$ is the set of all charts $e$ (partial homeomorphisms from open subsets of $M$ to \"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.isStackFor_ofArrows_iff\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \": F.IsStackFor (Presieve.ofArrows _ f) ↔ (F.toDescentData f).IsEquivalence\", \"doc\": \"A pseudofunctor $ F $ satisfies the stack condition for the presieve generated by a family of morphisms $ f_i: X_i \\to S $ if and only if the induced functor from $ F(\\text{op}(S)) $ to the category of \"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.isStackFor_iff\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat) {S : C}\\n  (R : CategoryTheory.Presieve S), F.IsStackFor R ↔ (F.toDescentData fun f => f.obj.hom).IsEquivalence\", \"doc\": \"For a category $\\\\mathcal{C}$, a pseudofunctor $\\\\mathcal{F}: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$, an object $S \\\\in \\\\mathcal{C}$, and a presieve $R$ on $S$, the pseudofunct\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStackFor.mk\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat} {S : C}\\n  {R : CategoryTheory.Presieve S}, (F.toDescentData fun f => f.obj.hom).IsEquivalence → F.IsStackFor R\", \"doc\": \"If the descent data functor associated to $ F $ is an equivalence of categories, then $ F $ satisfies the stack condition for the presieve $ R $ on $ S $.\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or ordinary groupoids and stack descent; none states this internal algebraic-space/groupoid or stack assertion, nor gives it by a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"Scheme\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or ordinary groupoids and stack descent; none states this internal algebraic-space/groupoid or stack assertion, nor gives it by a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "quotientStack|QuotientStack|GroupoidScheme",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or ordinary groupoids and stack descent; none states this internal algebraic-space/groupoid or stack assertion, nor gives it by a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quotient stack of a flat locally finitely presented groupoid has a representable fppf atlas and is unchanged by restriction along an fppf cover",
+   "results": "8 hits. CategoryTheory.compatiblePreservingOfFlat; CategoryTheory.Pseudofunctor.IsStack.of_isStackFor; CategoryTheory.Pseudofunctor.IsStackFor.isPrestackFor; CategoryTheory.Pseudofunctor.isStackFor'; CategoryTheory.Pseudofunctor.IsStack.toIsPrestack; CategoryTheory.Pseudofunctor.isStackFor; AlgebraicGeometry.Scheme.etaleTopology; AlgebraicGeometry.Scheme.LocalRepresentability.representableBy",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flat-descent and covering facts, abstract categorical stack conditions, and unrelated quotient results do not state the three-clause algebraic-space groupoid presentation theorem or specialize to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "quotientStack|QuotientStack|GroupoidScheme",
+   "results": "0 hits. ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flat-descent and covering facts, abstract categorical stack conditions, and unrelated quotient results do not state the three-clause algebraic-space groupoid presentation theorem or specialize to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"Scheme\"",
+   "results": "0 hits. ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flat-descent and covering facts, abstract categorical stack conditions, and unrelated quotient results do not state the three-clause algebraic-space groupoid presentation theorem or specialize to it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quotient stacks of algebraic space groupoids fppf presentation restriction equivalence",
+   "results": "8 hits. CategoryTheory.Pseudofunctor.IsStackFor.mk; CategoryTheory.Pseudofunctor.IsStackFor.isEquivalence; Submodule.Quotient.restrictScalarsEquiv_mk; CategoryTheory.Pseudofunctor.isStackFor_ofArrows_iff; CategoryTheory.Pseudofunctor.isStackFor_iff; CategoryTheory.Pseudofunctor.isStackFor_iff_of_sieve_eq; Rep.resOfQuotientIso; Submodule.Quotient.restrictScalarsEquiv",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flat-descent and covering facts, abstract categorical stack conditions, and unrelated quotient results do not state the three-clause algebraic-space groupoid presentation theorem or specialize to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic stack is the stackification of the groupoid of a surjective flat locally finitely presented scheme cover and its self fibre product",
+   "results": "8 hits. AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget; AlgebraicGeometry.Scheme.instOverXBind; AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact; AlgebraicGeometry.Scheme.Cover; AlgebraicGeometry.Scheme.JointlySurjective; AlgebraicGeometry.Scheme.jointlySurjectivePrecoverage; AlgebraicGeometry.Scheme.precoverage; AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flat-descent and covering facts, abstract categorical stack conditions, and unrelated quotient results do not state the three-clause algebraic-space groupoid presentation theorem or specialize to it in one line."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-unramified-diagonal-singleton-field-cover",
+  "date": "2026-10-23",
+  "group": "Q59"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas. Proof of the unramified-diagonal/etale-atlas criterion: Finite-type points admit field representatives with etale self-relation. Supporting input: Etale field cover of a reduced locally Noetherian singleton stack. Input for the field-cover construction: Fppf presentations and restriction of quotient groupoids.",
+   "via": [
+    "lem-sfb-unramified-diagonal-singleton-field-cover",
+    "lem-sfb-finite-type-point-etale-self-relation",
+    "lem-sfb-unramified-diagonal-etale-atlas",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-fppf-groupoid-stack-presentations",
+  "worker": "stage1",
+  "summary": "Reused the existing stronger flat-groupoid quotient theorem for (1), the self-relation fully faithful embedding for (2), and the general fully faithful/local-equivalence criterion for (2),(3). Wrote the fppf scheme-chart lifting argument, the Isom-sheaf restriction calculation and its sheaf-local full-faithfulness argument explicitly. No new nodes. Normalized doubled TeX escapes, made the inherited universe convention explicit and cited the existing etale-to-fppf stack comparison.",
+  "blueprint": "The ancestor command returns None, as in the inherited blueprint.from.node. Retained its exact place and via chain: det-thm-sf-ctf-stability-direct-images proof (3), stable pointed-curve alteration route, unramified-diagonal/etale-atlas criterion, singleton field cover. These seven steps supply precisely its fppf-presentation and restriction prerequisite. No chapter or unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space or fppf-site tool used only for its stated property; no theorem of the constructible-stability unit supplies it, and the stable-curve alteration route is retained."
+   },
+   {
+    "node": "lem-trf-fppf-covering-base-change",
+    "why": "Generic algebraic-space or fppf-site tool used only for its stated property; no theorem of the constructible-stability unit supplies it, and the stable-curve alteration route is retained."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-fppf-covering-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q121-2001e5978",
+  "group": "Q121",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q121-2001e5978 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps and every cited statement. No new nodes. Base comparison: the statement only adds the universe convention and makes the algebraic-stack convention explicit. 'Stack' was already an etale stack via def-sfb-stable-pointed-moduli-groupoids, so the target is not weakened; lem-sfb-etale-smooth-atlas-fppf-descent (076V) is added for the fppf comparison. The blueprint field is unchanged and live still has the item unsplit with no repair note. Step 1: lem-sfb-flat-groupoid-algebraic-quotient (06FI+06FH+04M9) is a stronger existing theorem that gives all of clause (1). The proof of 06DC (bootstrap via Hilbert stacks) does not go through the DM criterion, so there is no route loop, and the graph check finds no cycle. Steps 2-4: 076V makes Z an fppf stack. The self-relation node gives a fully faithful i with iπ≃a; the projections are base changes of a. Step 3 proves the fppf chart W→T in full: flat and lfp by the chart test with V=Y=T, and surjective via the two field extensions. 046N then gives clause (2), matching 04WY. Steps 5-7 follow spaces-groupoids 046S/046T exactly: the Isom presheaves T×R≅T×Q are algebraic spaces and hence sheaves; isomorphism is checked locally; {q} is an fppf covering and its base change gives local essential surjectivity; 046N applies. Edge cases tested: identity groupoid, Spec k→BG, clause (3) for non-flat groupoids, and non-surjective q (fails, so the hypothesis is needed). Batch-5: lem-sfb-etale-smooth-atlas-fppf-descent, def-trf-scheme-algebraic-space, lem-sfb-space-local-properties-chart-test, lem-trf-space-fibre-products-etale-covers and lem-trf-fppf-covering-base-change are generic algebraic-space/fppf definitions and lemmas. None is a step of the trace formula or Poincaré duality, so all are accepted, as are the two recorded tool_uses. No SGA source. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FppfGroupoidStackPresentations",
+  "declaration": "CategoryTheory.fppf_groupoid_stack_presentation",
+  "declarations": [
+   "CategoryTheory.fppf_groupoid_stack_presentation",
+   "CategoryTheory.fppf_self_relation_stack_presentation",
+   "CategoryTheory.fppf_groupoid_stack_restriction_equivalence"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FppfGroupoidStackPresentations.lean",
+  "statement": "theorem fppf_groupoid_stack_presentation {S : Scheme.{u}} {U R : AlgebraicSpace S} (s t : R ⟶ U) (e : U.obj.obj ⟶ R.obj.obj) (i : R.obj.obj ⟶ R.obj.obj) (c : pullback s.hom.hom t.hom.hom ⟶ R.obj.obj) (F : BasedCategory.{v, w} (Over S)) (a : BasedFunctor (discreteModuli U.obj.obj) F) (P : SpaceGroupoidQuotientPresentation s.hom.hom t.hom.hom e i c F a) (hs : MapIsFlat s) (ht : MapIsFlat t) (hsfp : MapIsLocallyOfFinitePresentation s) (htfp : MapIsLocallyOfFinitePresentation t) : HasAlgebraicSpaceDiagonal F ∧ IsRepresentableByAlgebraicSpaces a ∧ IsSurjectiveModuliMap a ∧ ModuliSpaceTest @Flat a ∧ ModuliSpaceTest @LocallyOfFinitePresentation a ∧ (moduliTwoFiberLift (discreteModuliMap s.hom.hom) (discreteModuliMap t.hom.hom) (BasedNatIso.mkNatIso P.arrows.val P.arrows.property)).toFunctor.IsEquivalence",
+  "branch": "sheaf-dag",
+  "by": "Q03",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of returned heads 74c0f01ddc7f and 4a1d99ac74ac: reuse the existing CategoryTheory.IsSurjectiveModuliMap from Sheaf.AlgebraicGeometry.StackChartwiseSmoothEtaleCalculus through its landed definition-node owner def-sfb-surjective-moduli-map. No extraction, duplicate definition, dependency-module modification, or calculus theorem statement dependency. All three item theorem signatures are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-11b197914",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Read node, 04WY/046S/046T source, delivered module and all used declarations (SpaceGroupoidQuotientPresentation, moduliTwoFiberLift, ModuliSpaceTest, existing IsSurjectiveModuliMap via def-sfb-surjective-moduli-map, IsAlgebraicModuliStack, MapIsFlat/LFP, HasAlgebraicSpaceDiagonal). Clause (1): only flat+lfp s,t; full conclusions including canonical R≃U×_F U. Clause (2): self-relation presentation of Z plus canonical H characterized on arrows. Clause (3): Cartesian restriction square with all operation compatibilities, fppf q, no groupoid flatness; arrow compatibility pins H. Node diff vs live: only lean + 8 landed def stmt_deps; statement verbatim; deps byte-identical; no duplicate defs (prior H4 returns resolved); sorry-only; docstrings OK; universes bound and independent. No findings; not recompiled (no change)."
+ }
+}

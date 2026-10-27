@@ -1,0 +1,115 @@
+{
+ "id": "lem-weil-compact-support-scalar-direct-normalization",
+ "kind": "statement",
+ "title": "Unit normalization of the specified scalar direct-image comparison",
+ "statement": "Let $g:Z\\to Y$ be a morphism of schemes and $\\varphi:A\\to B$ a map of finite commutative rings. For the ordinary direct-image functors $F=g_*^B$, $H=g_*^A$, scalar restrictions $x=\\operatorname{Res}_\\varphi^Z$, $y=\\operatorname{Res}_\\varphi^Y$, and the ordinary identity-on-sections comparison $c:F;y\\cong x;H$ [lem-weil-proetale-direct-image-restriction-of-scalars], the inverse of the specified comparison sfDerivedImageRestriction [lem-sf-compact-support-restriction-of-scalars] is unitNormalized [lem-pur-derived-square-normalization-naturality]. Explicitly, for every cochain complex $I$, $Dy(\\eta_F(I));\\chi^{-1}_{QI};RH(x_{\\mathrm{fac},I})=y_{\\mathrm{fac},FI};Q(c_I);\\eta_H(xI)$. No preservation of K-injectives by restriction is assumed.",
+ "stmt_deps": [
+  "lem-weil-proetale-direct-image-restriction-of-scalars",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "lem-pur-derived-square-normalization-naturality"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6E and 0D6J; comparison of the right-derived unit equation with its K-injective resolution equation."
+ },
+ "proof": [
+  {
+   "text": "Choose the all-complex unit-normalized coefficient comparison supplied by coefficientDerivedComparison_exists. On a K-injective B-complex J choose a K-injective replacement j of its A-restriction. Naturality of the target derived unit and the normalization equation express its inverse through the same localized direct-image replacement map as proEtaleDerivedDirectImage_restrictScalars. Cancel the latter quasi-isomorphism and the two localization isomorphisms to identify this inverse with sfDerivedImageRestriction on QJ. Naturality and K-injective representatives extend the equality to every derived object. Substitute it in the all-complex unit equation.",
+   "uses": [
+    "lem-weil-proetale-direct-image-restriction-of-scalars",
+    "lem-sf-compact-support-restriction-of-scalars",
+    "lem-pur-derived-square-normalization-naturality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-direct-image-restriction-of-scalars",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "lem-pur-derived-square-normalization-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6E and 0D6J; uniqueness of unit-normalized right derivation, verified through the specified K-injective resolution equation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image evaluation of inverse systems commutes with coefficient restriction transitions",
+   "results": "8 hits, including AdicCompletion.transitionMap_comp_eval, Module.DirectLimit.of_f and InverseSystem.limit; none concerns derived module-sheaf direct image.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of a derived system commutes with coefficient transitions under extension by zero and direct image",
+   "results": "8 hits, including AdicCompletion.transitionMap_comp_eval and InverseSystem.globalEquiv_compatibility; none treats module-sheaf derived evaluation.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits, including CategoryTheory.NatTrans.naturality. It supplies the categorical naturality used to paste squares but not either geometric square.",
+   "date": "2026-10-27",
+   "verdict": "Generic naturality only."
+  },
+  {
+   "tool": "grep",
+   "query": "evalP.*[Tt]ransition|evalJ.*[Tt]ransition|[Tt]ransition.*eval[JP]",
+   "results": "0 hits in Mathlib. Local project search finds SystemPushforwardRestrictionTransition in different Geometry coordinates, and the assigned compact-support theorem.",
+   "date": "2026-10-27",
+   "verdict": "No native single-operation statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportNativeDirectTransition",
+  "date": "2026-10-27",
+  "group": "C9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-compact-support-native-direct-transition",
+   "place": "Step 3: normalize the specified scalar comparison by the right-derived units.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportScalarDirectNormalization",
+  "file": "lean/Sheaf/Paper/CompactSupportScalarDirectNormalization.lean",
+  "declaration": "WeilConjectures.compactSupportScalarDirectNormalization",
+  "statement": "theorem compactSupportScalarDirectNormalization\n    {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]\n    {Z Y : Scheme.{u}} (g : Z ⟶ Y) (φ : A →+* B) :\n    CategoryTheory.ExactDerivedSquare.unitNormalized.{u + 1, u + 2}\n      (proEtaleConstantModuleDirectImage g B) (proEtaleConstantModuleDirectImage g A)\n      (proEtaleCoefficientRestrictScalars Z φ) (proEtaleCoefficientRestrictScalars Y φ)\n      (proEtaleCoefficientRestrictScalars Z φ).mapDerivedCategory\n      (proEtaleCoefficientRestrictScalars Y φ).mapDerivedCategory\n      (proEtaleCoefficientRestrictScalars Z φ).mapDerivedCategoryFactors\n      (proEtaleCoefficientRestrictScalars Y φ).mapDerivedCategoryFactors\n      (proEtaleCoefficientDirectImageComparison g φ).hom\n      (sfDerivedImageRestriction g φ).inv",
+  "branch": "sheaf-dag",
+  "by": "C9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261027T034626-L-3667110",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261027T034626-L-3667110",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

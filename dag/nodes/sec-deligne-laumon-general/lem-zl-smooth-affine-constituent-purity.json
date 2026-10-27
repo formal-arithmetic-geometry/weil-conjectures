@@ -1,0 +1,125 @@
+{
+ "id": "lem-zl-smooth-affine-constituent-purity",
+ "kind": "statement",
+ "title": "Purity of an irreducible lisse constituent on a smooth affine base",
+ "statement": "Let $k_0$ be a finite field, let $\\ell$ be a prime distinct from its characteristic, and let $\\iota:\\overline{\\mathbf Q}_\\ell\\to\\mathbf C$ be a field embedding [def-weil-punctual-weights]. Let $X_0$ be a smooth affine finite-type $k_0$-scheme. Let $G$ be a lisse constructible Weil sheaf [def-weil-weil-sheaf-complex; def-pod-lisse-l-adic-sheaves], real in the sense of [def-wf-iota-real]. Let $i:G_1\\hookrightarrow G_2$ and $j:G_2\\hookrightarrow G$ be monomorphisms of lisse Weil sheaves, and suppose $V=\\operatorname{coker}(i)$ is nonzero and has no nonzero proper lisse Weil subobject. Then there exists a real number $w$ such that $V$ is punctually $\\iota$-pure of weight $w$ at every closed point of $X_0$. The Lean specialization uses the source-library constructible pro-etale Weil category and its matching local Frobenius and purity predicates; no connectedness or positive-dimension hypothesis is imposed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraphs 1--5, applied to one irreducible subquotient; paragraph 7 for dimension zero."
+ },
+ "stmt_deps": [
+  "def-weil-punctual-weights",
+  "def-weil-weil-sheaf-complex",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-wf-iota-real"
+ ],
+ "proof": [
+  {
+   "text": "Nonzeroness of the irreducible quotient gives a nonzero stalk at a closed point, using the proved source theorem WeilSheaf.exists_nontrivial_stalk_of_not_isZero. Apply Module.End.exists_eigenvalue to that finite-dimensional stalk and fix one anchor eigenvalue alpha. Define w=2 log|iota(alpha)|/log(q_x).",
+   "uses": [
+    "def-weil-local-frobenius-trace",
+    "lem-zl-alg-closed-endomorphism-eigenvalue"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any closed y and any eigenvalue beta at y, apply the simultaneous geometric curve test to alpha,beta. Its real ambient lisse sheaf H and irreducible lisse cokernel satisfy the hypotheses of the proved curve purity theorem. Thus alpha^e at s and beta^f at t have one curve weight v, with q_s=q_x^e and q_t=q_y^f.",
+   "uses": [
+    "lem-zl-pair-eigenvalue-curve-test",
+    "thm-rp-real-lisse-purity-affine"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Since e,f are positive, log|iota(alpha^e)|=e log|iota(alpha)| and log(q_x^e)=e log(q_x) show that normalized weight is unchanged by matching positive powers. The same computation for beta proves its normalized weight equals w. The residue cardinalities exceed one and Frobenius eigenvalues are nonzero, so normalized weight w is equivalent to |iota(beta)|=q_y^(w/2). This gives punctual purity at every y, including zero stalks vacuously.",
+   "uses": [
+    "def-weil-punctual-weights"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-local-frobenius-trace",
+  "lem-zl-alg-closed-endomorphism-eigenvalue",
+  "lem-zl-pair-eigenvalue-curve-test",
+  "thm-rp-real-lisse-purity-affine",
+  "def-weil-punctual-weights"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraphs 1--3 and 7: geometric constituents, two-point curve restriction and local Frobenius powers; geometric socle/Frobenius orbit step in sk-i-dl-general-real."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "irreducible constituent of a real lisse Weil sheaf on a smooth affine variety is punctually pure",
+   "results": "8 hits; irreducibleComponents, AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced, Representation.IsIrreducible.mk, Representation.IsIrreducible, AlgebraicGeometry.irreducibleSpace_of_isIntegral, RootPairing.GeckConstruction.instIsIrreducible, Representation.IsIrreducible.recOn, isIrreducible_irreducibleComponent; no arbitrary-dimensional constituent purity theorem.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "irreducible constituent of a real lisse Weil sheaf on a smooth affine variety is punctually pure",
+   "results": "8 hits; AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced, AlgebraicGeometry.isIntegral_iff_irreducibleSpace_and_isReduced, AlgebraicGeometry.irreducibleSpace_of_isIntegral, AlgebraicGeometry.IsReduced.component_reduced, AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.isReduced_of_isAffine_isReduced, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top; no arbitrary-dimensional constituent purity theorem.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsPunctuallyPureOfWeight|WeilSheaf.IsReal",
+   "results": "0 hits; ; no arbitrary-dimensional constituent purity theorem.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.DeligneLaumon.Reduction.RealSheaves",
+  "date": "2026-10-25",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Paragraphs 1--5, applied to one irreducible subquotient; paragraph 7 for dimension zero.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.DeligneLaumon.SmoothAffineConstituentPurity",
+  "file": "lean/Sheaf/DeligneLaumon/SmoothAffineConstituentPurity.lean",
+  "declaration": "AlgebraicGeometry.WeilSheaf.IsReal.exists_isPunctuallyPureOfWeight_cokernel_of_smooth_affine",
+  "statement": "theorem IsReal.exists_isPunctuallyPureOfWeight_cokernel_of_smooth_affine\n    {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]\n    [Fact (ringChar k₀ ≠ l)] {X : Scheme.{u}}\n    [X.Over (Spec (CommRingCat.of k₀))] [IsAffine X]\n    [Smooth (X ↘ Spec (CommRingCat.of k₀))]\n    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]\n    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]\n    {ι : PadicAlgCl l →+* ℂ} {G : WeilSheaf k₀ l X}\n    (hG : G.IsLisse) (hreal : G.IsReal ι) {G₁ G₂ : WeilSheaf k₀ l X}\n    (i : G₁ ⟶ G₂) (j : G₂ ⟶ G) [Mono i] [Mono j]\n    (h₁ : G₁.IsLisse) (h₂ : G₂.IsLisse)\n    (hirr : (cokernel i).IsIrreducibleLisse) :\n    ∃ w : ℝ, (cokernel i).IsPunctuallyPureOfWeight ι w",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261025T123541-L-1878963",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261025T143545-L-1047851",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -116,7 +116,32 @@
   "def-weil-pbc-scheme-conventions",
   "thm-weil-pbc-stein-inputs"
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.bijective_appTop_idempotent_of_henselianRing"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.bijective_appTop_idempotent_of_henselianRing",
+     "module": "WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale",
+     "lines": [
+      115,
+      146
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
@@ -157,22 +182,34 @@
   "sorry_after": []
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $(A,I)$ be a henselian pair and let $Z\\to\\operatorname{Spec}A$ be proper,\nwith closed fibre $Z_0=Z\\times_AA/I$. Then every idempotent of\n$H^0(Z_0,\\mathcal O_{Z_0})$ lifts uniquely to an idempotent of $H^0(Z,\\mathcal\nO_Z)$; equivalently, restriction induces a bijection on idempotents, and the\nopen and closed subschemes of $Z_0$ are exactly the closed fibres of the open\nand closed subschemes of $Z$.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $(A,I)$ be a henselian pair [def-weil-pbc-henselian-terminology] and let\n$Z\\to\\operatorname{Spec}A$ be proper [def-weil-pbc-scheme-conventions],\nwith closed fibre $Z_0=Z\\times_AA/I$. Then every idempotent of\n$H^0(Z_0,\\mathcal O_{Z_0})$ lifts uniquely to an idempotent of $H^0(Z,\\mathcal\nO_Z)$; equivalently, restriction induces a bijection on idempotents, and the\nopen and closed subschemes of $Z_0$ are exactly the closed fibres of the open\nand closed subschemes of $Z$.",
   "proof": [
    {
-    "text": "Not proved in this blueprint; it is the object-level half of the classical\nproper base change package for henselian pairs. The argument: by input (ii)\nof [thm-weil-pbc-stein-inputs], every connected component of $Z$ meets $Z_0$.\nSo every open and closed subscheme of $Z_0$ is the closed fibre of one of\n$Z$, which gives surjectivity on idempotents. Uniqueness holds because\ndistinct open and closed subschemes of $Z$ have distinct traces on $Z_0$.",
+    "text": "The closed fibre $i:Z_0\\to Z$ is a closed immersion whose image is\n$p^{-1}(V(I))$, where $p:Z\\to\\operatorname{Spec}A$ is the structure map. By\n[lemma-weil-pbc-stein-connectedness], $Z$ is spectral and every irreducible\nclosed subset of $Z$ meets $Z_0$ in a nonempty connected subset. In particular\nevery nonempty closed subset $C\\subseteq Z$ meets $Z_0$: it contains the\nclosure of one of its points, which is irreducible.",
     "uses": [
-     "thm-weil-pbc-stein-inputs"
+     "lemma-weil-pbc-stein-connectedness"
     ],
     "elementary": false
    },
    {
-    "text": "The restriction map $H^0(Z,\\mathcal O_Z)\\to H^0(Z_0,\\mathcal O_{Z_0})$ itself\nis not an isomorphism. For $A=k[[t]]$, $I=(t)$ and $Z=\\mathbf P^1_A$ it is\n$k[[t]]\\to k$. So only idempotents are compared. The locally constant form of\nthe Zariski restriction criterion does not apply to $\\mathcal O_Z$, which is\nnot a torsion sheaf, so this correspondence has to be supplied separately.",
+    "text": "*Open and closed subsets.* Let $U,V\\subseteq Z$ be open and closed with\n$U\\cap Z_0=V\\cap Z_0$. Then $U\\setminus V$ is closed and does not meet $Z_0$,\nso it is empty; likewise $V\\setminus U$, hence $U=V$. Conversely let\n$Z_0=V_1\\sqcup V_2$ be a decomposition into open and closed subsets; each\n$V_k$ is closed in $Z$, hence quasi-compact. Put\n$W_k=\\{x\\in Z:\\overline{\\{x\\}}\\cap V_k\\neq\\emptyset\\}$, the set of\ngenerizations of $V_k$. Every $\\overline{\\{x\\}}\\cap Z_0$ is nonempty and\nconnected, so it lies in exactly one of $V_1,V_2$; hence $Z=W_1\\sqcup W_2$ and\n$W_k\\cap Z_0=V_k$. Each $W_k$ is closed. Since $Z$ is spectral and $V_k$ is\nquasi-compact, $W_k$ is the intersection of the quasi-compact opens containing\n$V_k$, so it is pro-constructible, and every point $x$ of its closure is a\nspecialization of some $x'\\in W_k$. A point $z\\in\\overline{\\{x\\}}\\cap Z_0$\nthen lies in $\\overline{\\{x'\\}}\\cap Z_0\\subseteq V_k$, so $x\\in W_k$. Hence\n$W_1$ is open and closed in $Z$ with closed fibre $V_1$. Thus $U\\mapsto U\\cap Z_0$ is a bijection from\nthe open and closed subsets of $Z$ to those of $Z_0$.",
     "uses": [],
     "elementary": null
+   },
+   {
+    "text": "*Idempotents.* On any scheme $X$, an idempotent $e\\in H^0(X,\\mathcal O_X)$\ndetermines the open and closed subset of points where its germ is $1$, and this\nis a bijection between idempotents of $H^0(X,\\mathcal O_X)$ and open and\nclosed subsets of $X$ [def-weil-pbc-scheme-conventions]; it is compatible with\npullback along morphisms of schemes. Applied to $Z$ and $Z_0$ and the\nrestriction along $i$, the bijection on open and closed subsets becomes the\nbijection on idempotents.\n\nThe restriction map $H^0(Z,\\mathcal O_Z)\\to H^0(Z_0,\\mathcal O_{Z_0})$ itself\nis not an isomorphism. For $A=k[[t]]$, $I=(t)$ and $Z=\\mathbf P^1_A$ it is\n$k[[t]]\\to k$. So only idempotents are compared.",
+    "uses": [
+     "def-weil-pbc-scheme-conventions"
+    ],
+    "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

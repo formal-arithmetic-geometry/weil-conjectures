@@ -1,0 +1,240 @@
+{
+ "id": "lem-sfb-strict-completion-restriction-comparison",
+ "kind": "statement",
+ "title": "Strict completion units under section-action equivalence and pro-étale restriction",
+ "statement": "Fix a prime $\\ell$, a finite extension $F/\\mathbf Q_\\ell$, its valuation ring $A=\\mathcal O_F$ with its induced $\\ell$-adic norm topology, and a uniformizer $\\pi$ [def-weil-l-adic-coefficient-extension]. For a scheme $T$, put $B_T=p_T^*\\underline A$ and $k_{n,T}=(A/\\pi^n)_T$ for $n\\ge1$. Use the small pro-étale sites and universes of [def-weil-size-convention] and the ordinary unbounded derived module categories [sk-def-sfb-module-derived-pushpull]. Write $C_T(K)=R\\varprojlim_{n\\ge1}\\operatorname{Res}_n(K\\otimes^L_{B_T}k_{n,T})$ and $c_{T,K}:K\\to C_T(K)$ for the specified strict-tower completion unit [sk-def-pe-derived-completion, lem-pe-completion-triangle-comparison].\nLet $E_T$ denote the section-action equivalence from internal $B_T$-module objects to sheaves of modules over its section-ring sheaf, and also its termwise derived equivalence [lem-sfb-module-object-ringed-site-derived-comparison, lem-pe-internal-section-tensor-comparison]. This equivalence identifies cohomology, finite constant scalar local models, the strict derived reduction towers, their quotient transition maps, and their augmentations; its product comparisons induce a natural isomorphism $E_TC_T(K)\\simeq C_T(E_TK)$ carrying $E_T(c_{T,K})$ to $c_{T,E_TK}$.\nLet $h:T\\to W$ be either a locally closed immersion (a closed immersion followed by an open immersion), a pro-étale site object, or a finite composite of such arrows. Identify inverse-image coefficient rings by the canonical maps $h^*B_W\\simeq B_T$ and $h^*k_{n,W}\\simeq k_{n,T}$. In these coordinates inverse image is exact, preserves products, and has natural isomorphisms\n$$h^*(K\\otimes^L_{B_W}k_{n,W})\\simeq h^*K\\otimes^L_{B_T}k_{n,T},\\qquad h^*C_W(K)\\simeq C_T(h^*K).$$\nThey commute with quotient transitions and carry $h^*c_{W,K}$ to $c_{T,h^*K}$. For the strict cone model $D_n(M)=\\operatorname{Cone}(\\pi^n:M\\to M)$, this compatibility includes the transition $(x,y)\\mapsto(x,\\pi y)$, the augmentation $m\\mapsto(m,0)$, the Roos map $1-T$, and the completion augmentation $m\\mapsto(((m,0))_n,0)$ [lem-pe-principal-reduction-cone-calculus, lem-pe-roos-cone-calculus]. No Noetherianity or invertibility hypothesis is imposed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+  "place": "Locality paragraph of the finite-model proof, expanded to the actual strict completion augmentation; returned proof steps 1--2. Stacks Tag 09AA (lemma-closed-immersion) supplies closed-immersion limit preservation; the cone/Roos comparison is an agent argument."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-size-convention",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-pe-derived-completion",
+  "lem-pe-completion-triangle-comparison",
+  "lem-sfb-module-object-ringed-site-derived-comparison",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-pe-principal-reduction-cone-calculus",
+  "lem-pe-roos-cone-calculus",
+  "sk-def-sfb-constructible"
+ ],
+ "proof": [
+  {
+   "text": "Choose the canonical integral presentations from strictIntegralCompletionPresentation. Prove finite constant local-model equivalence by strictCompletionFiniteConstantModels. For each scheme, construct a section scalar presentation, the actual section quotient tower B and its structure map iota. Obtain H, HM and the normalized TensorComparison from the existing module-object/ringed-site theorem; strictSectionPrincipalQuotientModels supplies the remaining normalized quotient models and augmented completion. Apply strictScalarCompletionFunctorComparison to the section equivalence, using its scalar equation and its preserved products. For a morphism in the allowed multiplicative closure, strictCompletionRestrictionLimits gives all coefficient-sized limits. Shrink to countable products on complexes, use strictIntegralScalarPullback for the scalar equation, and apply the same complete cone/Roos comparison theorem. All transitions, coordinate and unit equations are fields of that Comparison.",
+   "uses": [
+    "lem-sfb-strict-scalar-completion-functor-comparison",
+    "lem-sfb-strict-integral-completion-presentation",
+    "lem-sfb-strict-completion-restriction-limits",
+    "lem-sfb-strict-completion-finite-constant-models",
+    "lem-sfb-strict-section-scalar-presentation",
+    "lem-sfb-strict-integral-scalar-pullback",
+    "lem-sfb-strict-section-principal-quotient-models",
+    "lem-sfb-module-object-ringed-site-derived-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-strict-scalar-completion-functor-comparison",
+  "lem-sfb-strict-integral-completion-presentation",
+  "lem-sfb-strict-completion-restriction-limits",
+  "lem-sfb-strict-completion-finite-constant-models",
+  "lem-sfb-strict-section-scalar-presentation",
+  "lem-sfb-strict-integral-scalar-pullback",
+  "lem-sfb-strict-section-principal-quotient-models",
+  "lem-sfb-module-object-ringed-site-derived-comparison"
+ ],
+ "proof_origin": "F2 Lean proof: actual constructions of integral and section scalar presentations, complete generic cone/Roos comparison, finite local-model and geometric scalar proofs. The remaining separate assertion is the normalized principal quotient tensor and augmented section-Roos model.",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Proetale restriction along an immersion or a slice commutes with the strict derived completion unit and finite coefficient reduction",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PreTilt.mk_comp_untilt_eq_coeff_zero\", \"module\": \"Mathlib/RingTheory/Perfectoid/Untilt\", \"type\": \"∀ {O : Type u_1} [inst : CommRing O] {p : ℕ} [inst_1 : Fact (Nat.Prime p)] [inst_2 : Fact ¬IsUnit ↑p]\\n  [inst_3 : IsAdicComplete (Ideal.span {↑p}) O],\\n  ⇑(Ideal.Quotient.mk (Ideal.span {↑p})) ∘ ⇑PreTilt.untilt = ⇑(PreTilt.coeff 0)\", \"doc\": \"The composition of the canonical quotient ring homomorphism from $ O $ to $ O/(p) $ with the untilt homomorphism from the pretilt $ \\\\mathrm{PreTilt}(O, p) $ to $ O $ is equal to the 0th coefficient ho\"}\n  {\"name\": \"BDeRhamPlus\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The adic completion of the kernel of the Fontaine theta homomorphism (which inverts the prime $ p $) in the localization of Witt vectors away from $ p $.\"}\n  {\"name\": \"AdicCompletion.transitionMap_comp_reduceModIdeal\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] (f : M →ₗ[R] N) {m n : ℕ} (hmn : m ≤ n),\\n  AdicCompletion.transitionMap I N hmn ∘ₗ ↑R (LinearMap.reduceModIdeal (I ^ n) f\", \"doc\": \"For any $ R $-linear map $ f : M \\\\to N $ between modules over a commutative ring $ R $, and for natural numbers $ m \\\\leq n $, the composition of the transition map $ M/I^nM \\\\to M/I^mM $ with the reduc\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} (f : A →ₐ[R] S ⧸ I),\\n  ∃ g, (AlgHom.restrictScalars R (AdicCompletion.evalOneₐ I)).comp g = f\", \"doc\": \"For any commutative rings $R$ and $S$, an ideal $I$ of $S$, and a formally smooth $R$-algebra $A$, given an $R$-algebra homomorphism $f : A \\\\to S/I$, there exists an $R$-algebra homomorphism $g : A \\\\t\"}\n  {\"name\": \"AdicCompletion.transitionMap_comp_eval_apply\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_4) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {m n : ℕ} (hmn : m ≤ n) (x : AdicCompletion I M), (AdicCompletion.transitionMap I M hmn) (↑x n) = ↑x m\", \"doc\": \"For natural numbers $ m \\\\leq n $ and any element $ x $ in the $ I $-adic completion of an $ R $-module $ M $, applying the transition map from $ M/I^nM $ to $ M/I^mM $ to the $ n $-th component of $ x\"}\n  {\"name\": \"IsAdicComplete.StrictMono.of_comp_lift\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {a : ℕ → ℕ} (ha : StrictMono a)\\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ a n • ⊤) (hf : ∀ {m : ℕ}, Submodule.factorPow I N ⋯ ∘ₗ f\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, an $ R $-module $ M $ with additive commutative group structure, and a semiring $ S $ with compatible scalar actions on $ R $ and $ M $ satisfying the s\"}\n  {\"name\": \"StandardEtalePair.HasMap.map\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] {P : StandardEtalePair R} {x : S},\\n  P.HasMap x → ∀ (f : S →ₐ[R] T), P.HasMap (f x)\", \"doc\": \"For any $ R $-algebra homomorphism $ \\\\phi: S \\\\to T $, if $ x \\\\in S $ satisfies $ f(x) = 0 $ and $ g(x) $ is a unit in $ S $, then $ \\\\phi(x) $ satisfies $ f(\\\\phi(x)) = 0 $ and $ g(\\\\phi(x)) $ is a unit \"}\n  {\"name\": \"StandardEtalePair.homEquiv_symm_apply\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (x : { x // P.HasMap x }), P.homEquiv.symm x = P.lift ↑x ⋯\", \"doc\": \"For a commutative ring $ R $, a standard étale pair $ P $ over $ R $, and an $ R $-algebra $ S $, the inverse of the equivalence $ \\\\text{homEquiv} $ maps an element $ x \\\\in S $ satisfying $ P.\\\\text{Ha\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar adic completion, finite presentations, topological locally closed sets and generic complex limits do not state this pro-etale coefficient assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The section action equivalence of internal ring modules with ringed site modules preserves derived quotient towers and canonical adic completion maps",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.module\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      {M : Type u_3} →\\n        [inst_1 : AddCommGroup M] → [inst_2 : Module R M] → Module (AdicCompletion I R) (AdicCompletion I M)\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, and an $ R $-module $ M $, the $ I $-adic completion of $ M $ admits a scalar multiplication by the $ I $-adic completion of $ R $, making it a module ove\"}\n  {\"name\": \"AdicCompletion\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Type u_4\", \"doc\": \"The adic completion of an $ R $-module $ M $ with respect to an ideal $ I $ of a commutative ring $ R $ is the inverse limit of the quotient modules $ M/I^nM $, where $ I^n $ denotes the $ n $th power\"}\n  {\"name\": \"AdicCompletion.of_apply\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"(x : M) (n : ℕ) : (of I M x).1 n = mkQ (I ^ n • ⊤ : Submodule R M) x\", \"doc\": \"The canonical $ R $-linear map sending each element $ m $ of an $ R $-module $ M $ to its image in the $ I $-adic completion of $ M $, defined as the inverse limit $ \\\\varprojlim M/I^nM $. This map con\"}\n  {\"name\": \"IsAdicComplete\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Prop\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ R $-module $ M $, the proposition that $ M $ is adic complete with respect to $ I $.\"}\n  {\"name\": \"AdicCompletion.ofAlgEquiv_apply\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"(x : S) : ofAlgEquiv I x = of I S x\", \"doc\": \"For a commutative ring $ S $ and an ideal $ I $, if $ S $ is $ I $-adically complete, then the canonical $ S $-algebra homomorphism from $ S $ to its $ I $-adic completion $ \\\\varprojlim S/I^nS $ is an\"}\n  {\"name\": \"AdicCompletion.congr\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Functoriality\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      {M : Type u_2} →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] →\\n            {N : Type u_3} →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] → (M ≃ₗ[R] N) → AdicCompletion I M ≃ₗ\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, and $ R $-modules $ M $ and $ N $, an $ R $-linear equivalence between $ M $ and $ N $ induces a linear equivalence between their $ I $-adic completions\"}\n  {\"name\": \"AdicCompletion.instIsScalarTower\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} [inst : CommRing R] (I : Ideal R) (M : Type u_4)\\n  [inst_1 : AddCommGroup M] [inst_2 : Module R M] [inst_3 : SMul S T] [inst_4 : SMul S R] [inst_5 : SMul T R]\\n  [inst_6 : SMul S M] [inst_7 : SMul T M] [inst_8 : IsScalarTower S R M] [inst_9 : IsScalarTow\", \"doc\": \"Given a commutative ring $R$, an ideal $I$, an $R$-module $M$ with additive commutative group structure, and semirings $S$ and $T$ with compatible scalar actions on $R$ and $M$ satisfying the scalar t\"}\n  {\"name\": \"IsAdicComplete.StrictMono.of_comp_lift\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \": of I N ∘ₗ lift I ha f hf = AdicCompletion.lift I (extend ha f) (factorPow_comp_extend ha f hf)\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, an $ R $-module $ M $ with additive commutative group structure, and a semiring $ S $ with compatible scalar actions on $ R $ and $ M $ satisfying the s\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar adic completion, finite presentations, topological locally closed sets and generic complex limits do not state this pro-etale coefficient assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedComplete\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar adic completion, finite presentations, topological locally closed sets and generic complex limits do not state this pro-etale coefficient assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale.*complet|complet.*proetale|Roos|sectionAction",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar adic completion, finite presentations, topological locally closed sets and generic complex limits do not state this pro-etale coefficient assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact product preserving inverse image identifies the homotopy limit of the scalar cone tower and its augmentation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomologicalComplex.isLimitOfEval\", \"module\": \"Mathlib/Algebra/Homology/HomologicalComplexLimits\", \"type\": \"{C : Type u_1} →\\n  {ι : Type u_2} →\\n    {J : Type u_3} →\\n      [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n        [inst_1 : CategoryTheory.Category.{v_2, u_3} J] →\\n          {c : ComplexShape ι} →\\n            [inst_2 : CategoryTheory.Limits.HasZeroMorphisms C] →\\n              (F : CategoryTheor\", \"doc\": \"Given a functor $ F : \\\\mathcal{J} \\\\to \\\\text{HomologicalComplex}(\\\\mathcal{C}, c) $ and a cone $ s $ over $ F $, if for every index $ i \\\\in \\\\iota $ the evaluation of $ s $ at $ i $ is a limit cone in $ \"}\n  {\"name\": \"HomologicalComplex.coneOfHasLimitEval_pt_X\", \"module\": \"Mathlib/Algebra/Homology/HomologicalComplexLimits\", \"type\": \"∀ {C : Type u_1} {ι : Type u_2} {J : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_3} J] {c : ComplexShape ι}\\n  [inst_2 : CategoryTheory.Limits.HasZeroMorphisms C] (F : CategoryTheory.Functor J (HomologicalComplex C c))\\n  [inst_3 : ∀ (n : ι), Cat\", \"doc\": \"For a functor $ F : \\\\mathcal{J} \\\\to \\\\text{HomologicalComplex}(\\\\mathcal{C}, c) $, the $ n $-th object of the apex of the cone constructed by taking limits of evaluation functors at each index is equal \"}\n  {\"name\": \"HomologicalComplex.coneOfHasLimitEval_pt_d\", \"module\": \"Mathlib/Algebra/Homology/HomologicalComplexLimits\", \"type\": \"∀ {C : Type u_1} {ι : Type u_2} {J : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_3} J] {c : ComplexShape ι}\\n  [inst_2 : CategoryTheory.Limits.HasZeroMorphisms C] (F : CategoryTheory.Functor J (HomologicalComplex C c))\\n  [inst_3 : ∀ (n : ι), Cat\", \"doc\": \"Given a functor $ F : \\\\mathcal{J} \\\\to \\\\text{HomologicalComplex}(\\\\mathcal{C}, c) $ and indices $ n, m \\\\in \\\\iota $, the differential $ d_{n,m} $ at the apex of the cone constructed from limits of evalua\"}\n  {\"name\": \"HomologicalComplex.coneOfHasLimitEval\", \"module\": \"Mathlib/Algebra/Homology/HomologicalComplexLimits\", \"type\": \"{C : Type u_1} →\\n  {ι : Type u_2} →\\n    {J : Type u_3} →\\n      [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n        [inst_1 : CategoryTheory.Category.{v_2, u_3} J] →\\n          {c : ComplexShape ι} →\\n            [inst_2 : CategoryTheory.Limits.HasZeroMorphisms C] →\\n              (F : CategoryTheor\", \"doc\": \"Given a functor $ F : \\\\mathcal{J} \\\\to \\\\text{HomologicalComplex}(\\\\mathcal{C}, c) $, this constructs a cone over $ F $ by taking the limit of the evaluation functors at each index $ n $. The apex of the\"}\n  {\"name\": \"CochainComplex.MappingConeCompHomotopyEquiv.homotopyInvHomId\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/Triangulated\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      [inst_2 : CategoryTheory.Limits.HasBinaryBiproducts C] →\\n        {X₁ X₂ X₃ : CochainComplex C ℤ} →\\n          (f : X₁ ⟶ X₂) →\\n            (g : X₂ ⟶ X₃) →\\n              Homotopy\\n       \", \"doc\": \"In a preadditive category with binary biproducts, this homotopy establishes that the composition of the inverse homotopy $\\\\text{inv}(f,g)$ and the homomorphism $\\\\text{hom}(f,g)$ between mapping cones \"}\n  {\"name\": \"CochainComplex.cm5b.homotopyEquiv\", \"module\": \"Mathlib/Algebra/Homology/Factorizations/CM5b\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : CategoryTheory.EnoughInjectives C] →\\n        (K L : CochainComplex C ℤ) →\\n          HomotopyEquiv (CochainComplex.mappingCone (CategoryTheory.CategoryStruct.id (CochainComplex\", \"doc\": \"A homotopy equivalence between the mapping cone of the identity morphism on the injective cochain complex $ I K $ (with zero differentials) and the cochain complex $ L $, established via the second pr\"}\n  {\"name\": \"HomotopyCategory.spectralObjectMappingCone_ω₁\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/SpectralObject\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  [inst_2 : CategoryTheory.Limits.HasZeroObject C] [inst_3 : CategoryTheory.Limits.HasBinaryBiproducts C],\\n  (HomotopyCategory.spectralObjectMappingCone C).ω₁ =\\n    (HomotopyCategory.composableArro\", \"doc\": \"The first omega functor $\\\\omega_1$ of the spectral object in the homotopy category is defined as the composition of the composable arrows functor (which maps 1-composable arrows to their mapping cones\"}\n  {\"name\": \"HomologicalComplex.coneOfHasLimitEval_π_app_f\", \"module\": \"Mathlib/Algebra/Homology/HomologicalComplexLimits\", \"type\": \"∀ {C : Type u_1} {ι : Type u_2} {J : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_3} J] {c : ComplexShape ι}\\n  [inst_2 : CategoryTheory.Limits.HasZeroMorphisms C] (F : CategoryTheory.Functor J (HomologicalComplex C c))\\n  [inst_3 : ∀ (n : ι), Cat\", \"doc\": \"For a functor $ F : \\\\mathcal{J} \\\\to \\\\text{HomologicalComplex}(\\\\mathcal{C}, c) $, the component of the cone's projection at object $ j \\\\in \\\\mathcal{J} $ and index $ x \\\\in \\\\iota $ equals the projection \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar adic completion, finite presentations, topological locally closed sets and generic complex limits do not state this pro-etale coefficient assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image along a locally closed immersion of pro etale sites preserves products and the canonical derived adic completion unit",
+   "results": "Search succeeded; 8 hits: AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_apply, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality_assoc, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.app_inv_app', AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.forgetToTop_preservesPullback_of_left, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_invApp, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar adic completion, ordinary open immersions, and sheafification adjunctions do not state the augmented strict pro-etale completion comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivalence between internal modules and sheaves of modules over the section ring preserves cohomology derived tensor quotients and completion maps",
+   "results": "Search succeeded; 8 hits: SheafOfModules.freeHomEquiv_symm_comp, PresheafOfModules.sheafifyHomEquiv', PresheafOfModules.sheafificationAdjunction_homEquiv_apply, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, PresheafOfModules.sheafifyHomEquiv, SheafOfModules.unitHomEquiv_symm_comp, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm, PresheafOfModules.sheafificationHomEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar adic completion, ordinary open immersions, and sheafification adjunctions do not state the augmented strict pro-etale completion comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact functors preserving countable products commute with the strict cone tower for reduction modulo a uniformizer and its Roos completion augmentation",
+   "results": "Search succeeded; 8 hits: AdicCompletion.map_exact, Profinite.NobelingProof.succ_exact, AdicCompletion.transitionMap_comp_reduceModIdeal, LightCondensed.instCountableAB4StarLightCondMod, IsAdicComplete.StrictMono.of_comp_lift, localCohomology.diagram, localCohomology.diagramComp, IsAdicComplete.StrictMono.of_lift",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar adic completion, ordinary open immersions, and sheafification adjunctions do not state the augmented strict pro-etale completion comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qcqs-integral-finite-model-completeness",
+  "date": "2026-10-22",
+  "group": "Q153"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms, (2): the closed-complement proper-base-change calculation on bounded constructible finite-Tor generators; Adic completeness and classical reductions of qcqs finite-model integral inputs. Subargument: Locality paragraph of the finite-model proof, expanded to the actual strict completion augmentation; returned proof steps 1--2. Stacks Tag 09AA (lemma-closed-immersion) supplies closed-immersion limit preservation; the cone/Roos comparison is an agent argument.",
+   "via": [
+    "lem-sfb-qcqs-integral-finite-model-completeness",
+    "lem-sfb-qcqs-proper-constructible-closed-base-change",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-strict-completion-restriction-comparison",
+  "worker": "stage1",
+  "summary": "Kept the statement and reused existing nodes; proved section-action and restriction comparisons using exact product preservation, normalized derived tensors, and explicit scalar-cone/Roos projection calculations. No new nodes and no Lean attachment.",
+  "blueprint": "det-sf-comp-coherence-cocycle, Refinement isomorphisms (2): closed-complement calculation, via the integral finite-model completeness branch. Steps 1--4 realize the Locality paragraph of det-def-localizing-closure-ctf-equals-bc; Steps 5--7 supply the specified completion-unit normalization from the Cones paragraph of det-pe-derived-nakayama-first-reduction.",
+  "tool_uses": [
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Exact identity-on-sections tensor equivalence and its K-flat total-complex comparison; needed to pass between internal and section-module coordinates. This is a generic tool below the compactification unit, whose own route supplies no replacement."
+   },
+   {
+    "node": "lem-sfb-internal-module-inverse-image-comparison",
+    "why": "The normalized identity-on-underlying-sheaf comparison of internal and section inverse images; the coherence unit does not construct this scalar-action comparison. This is a generic tool below the compactification unit, whose own route supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "why": "General arbitrary-scheme exact limit preservation for locally closed inverse image, without the finite-type assumptions on narrower formal-support nodes. This is a generic tool below the compactification unit, whose own route supplies no replacement."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Identifies the site of any pro-etale site object with the slice, enabling the sectionwise product calculation. This is a generic tool below the compactification unit, whose own route supplies no replacement."
+   },
+   {
+    "node": "lem-sfb-proetale-object-inverse-image-restriction",
+    "why": "Identifies inverse image along a pro-etale site object with slice restriction (initial object of the inverse-image index category); needed so that the exactness and sectionwise product arguments apply to the actual inverse image. Generic site lemma; the coherence unit supplies no replacement. Added by the review."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "General exactness of module slice restriction, needed for arbitrary coefficient sheaves. This is a generic tool below the compactification unit, whose own route supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-limits-sectionwise",
+    "why": "General sectionwise module limits, needed to prove slice restriction preserves product projections. This is a generic tool below the compactification unit, whose own route supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "General unbounded derived tensor/pullback comparison with K-flat preservation; specializes under the coefficient ring isomorphism without scheme finiteness hypotheses. This is a generic tool below the compactification unit, whose own route supplies no replacement."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "General termwise localization of an exact additive functor, used for the actual restriction and equivalence. This is a generic tool below the compactification unit, whose own route supplies no replacement."
+   },
+   {
+    "node": "lem-pe-principal-reduction-cone-calculus",
+    "why": "Specifies the reduction tower, quotient transitions and augmentation in the cone coordinates used in the argument. This is a generic tool below the compactification unit, whose own route supplies no replacement."
+   },
+   {
+    "node": "lem-pe-roos-cone-calculus",
+    "why": "Specifies the actual Roos complex, differential and augmented chain map; an arbitrary derived-limit triangle cannot fix the unit. This is a generic tool below the compactification unit, whose own route supplies no replacement."
+   },
+   {
+    "node": "lem-pe-completion-triangle-comparison",
+    "why": "Identifies the strict Roos/cone model and its explicit augmentation with the specified completion and unit. This is a generic tool below the compactification unit, whose own route supplies no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-sfb-internal-module-inverse-image-comparison",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-pe-principal-reduction-cone-calculus",
+  "lem-pe-roos-cone-calculus",
+  "lem-pe-completion-triangle-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-fd81173e1",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-fd81173e1 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 7 steps and the statements of all 13 cited nodes. Sources checked: blueprint ctf-equals-bc Locality (l.18-20) and derived-nakayama-first-reduction Cones (l.10-22). Statement, stmt_deps and source are byte-identical to the Q153 re-split creation, so nothing was weakened; old parent step 2 is fully carried. No new nodes and no duplicate found (the open-restriction-completeness node is only the open case and assumes ell invertible). One fault, C1/C4: Step 3 never identifies the module inverse image along a pro-etale site object (def-weil-proetale-inverse-image) with slice restriction; the localization node only identifies the sites. Repaired in fixes/ by citing lem-sfb-proetale-object-inverse-image-restriction (clause 1, combined with alpha from Step 2), with matching proof_deps and tool_uses. Its closure has no cycle and no trf or Poincare-duality node. I checked the Step 5/6 algebra: cone differential, transition (x,pi y), augmentation, beta(1-T)=(1-T')beta and the augmentation ((Gm,0))_n,0. The strict model agrees with the Step 4 tensor comparison because pi^n is injective on B. Edge cases: n=1 with B/pi, empty scheme, identity, non-quasi-compact complement. Batch 5: the internal-module-inverse-image citation reaches only def-trf-geometric-morphism and def-trf-abelian-inverse-image-presentation. Both are general definitions, not trace-formula proof steps, so I accept them. I accept the 11 declared generic tool_uses and added a 12th.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.StrictCompletionRestrictionComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.StrictCompletionRestriction.strict_completion_restriction_comparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.StrictCompletionRestriction.strict_completion_restriction_comparison"
+  ],
+  "file": "lean/Sheaf/Paper/StrictCompletionRestrictionComparison.lean",
+  "statement": "theorem strict_completion_restriction_comparison : ∃ S : ∀ X : Scheme.{u}, Presentation.{u + 2, u + 1, u + 1} (AdicCompletion.Modules l E X), (∀ X : Scheme.{u}, IsIntegral l E X (S X)) ∧ (∀ (X : Scheme.{u}) (M : AdicCompletion.Modules l E X), HasFiniteConstantLocalModel (DerivedNakayama.integerRing l E) X M ↔ HasSectionFiniteConstantLocalModel l E X ((ModuleObjectRingedComparison.equivalence (DerivedNakayama.integerRing l E) X).functor.obj M)) ∧ (∀ X : Scheme.{u}, ∃ T : Presentation.{u + 2, u + 1, u + 1} (ModuleObjectRingedComparison.Modules (DerivedNakayama.integerRing l E) X), IsSectionIntegral l E X T ∧ Nonempty (Comparison.{u + 2, u + 1, u + 2, u + 1, u + 1, u + 1} (ModuleObjectRingedComparison.equivalence (DerivedNakayama.integerRing l E) X).functor (S X) T)) ∧ (∀ {X Y : Scheme.{u}} (h : X ⟶ Y), (MorphismProperty.multiplicativeClosure (fun {V W : Scheme.{u}} (f : V ⟶ W) ↦ IsImmersion f ∨ WeaklyEtale f)) h → (∀ I : Type (u + 1), PreservesLimitsOfShape (Discrete I) (CondensedRing.upperStar (DerivedNakayama.integerRing l E) h)) ∧ Nonempty (Comparison.{u + 2, u + 1, u + 2, u + 1, u + 1, u + 1} (CondensedRing.upperStar (DerivedNakayama.integerRing l E) h) (S Y) (S X)))",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e7bcd092a",
+  "group": "Q98",
+  "result": "pass",
+  "note": "Re-delivery after the c68f1910 H3 RETURN; both findings genuinely repaired. F1: T is now constrained by IsSectionIntegral. Scalar = section multiplication by sectionScalarValue of the canonical d. Tower B objects = sectionRingSheaf(finiteRing n); ι and transitions HEq to sectionScalarMap(quotient/transition); source types agree by abbrev, so the HEqs are provable. SectionReductionModels: T.reduction ≅ −⊗^L_H k_n, fixed on K-flats via CoefficientTensorModels.iso; single pinned on pure tensors; unit = Q(tensorUnit), step = KFlatRoos.transition. H has a TensorComparison. Completion ≅ Q(KFlatRoos.roos) carrying the unit to the augmentation. An arbitrary transport no longer satisfies the clause. F2: the right side is HasSectionFiniteConstantLocalModel: genuine InternalModuleOperations.upperStar, iso to the cokernel of a scalar A-matrix between finite biproducts of the unit sheaf, with no E on both sides; true via cokernel preservation and upperComparison. Advisories resolved: homology_eq pins the canonical iso; the h-clause states Discrete I products for I : Type (u+1). Unchanged and sound: IsIntegral, the upperStar h-clause, cone/Roos fields. Statement verbatim; only the item lean differs from live; docstrings OK; sorry only; edge cases (n=0, identity, empty, rank 0) covered. Advisory: section-module-operations, section-scalar-map-data and KFlatRoos owners are not in stmt_deps (public imports, no cycle); global universe instance harmless. No compile, no fixes; worker compile 54 s is near the 60 s limit."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-4ea87",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261023T231009-L-3529233",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clones/live; moved interface (Data module) vs live item module bodies; sorry statement strictSectionPrincipalQuotientModels vs IsSectionIntegral/Presentation/CoefficientTensorModels definitions; node proof_deps vs Lean proof"
+ }
+}

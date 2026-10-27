@@ -1,0 +1,119 @@
+{
+ "id": "lem-weil-pbc-global-sections-iso-over-transport",
+ "kind": "statement",
+ "title": "Transport of global-section pullback along isomorphisms over the coefficient scheme",
+ "statement": "Let p:Y→X, h:T→Y, rho:L→Y, w:W→T, k:W→L be scheme morphisms [def-pc-scheme] with wh=k rho. Let g:Z→X, v:V→Z, q:L≅Z and E:W≅V satisfy qg=rho p and Ev=kq. For an abelian etale sheaf G on X [def-weil-pbc-abelian-etale-sheaves], there are isomorphisms U:Gamma(L,rho^-1 p^-1 G)≅Gamma(Z,g^-1 G) and B:Gamma(W,w^-1 h^-1 p^-1 G)≅Gamma(V,(vg)^-1 G) [def-weil-pbc-global-sections-functor, def-weil-pbc-inverse-image]. The composite of pullback of sections along k, sections of the square inverse-image comparison for wh=k rho, and B equals U followed by pullback along v and sections of the inverse composition comparison [def-weil-pbc-underived-exchange, def-weil-pbc-finite-section-pullback].",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GJU, proof of lemma-beta-is-isomorphism; Tag 0GJP, equation-alpha-K"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-global-sections-functor",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-underived-exchange",
+  "def-weil-pbc-finite-section-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Construct U by sections of the square coefficient isomorphism and inverse pullback along q. Construct B by reversing pullback along E followed by coefficient composition, the composition comparisons along E,v and k,q, the inverse coefficient square along k, and the original square along w,h. All factors are isomorphisms.",
+   "uses": [
+    "def-weil-pbc-underived-exchange",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Cancel U inverse on the left and B inverse on the right. Naturality of pullback of global sections moves coefficient maps across the pullbacks. The composition law for k,q and E,v identifies both leading maps. The remaining coefficient maps cancel by functoriality and the isomorphism identities.",
+   "uses": [
+    "lem-weil-pbc-finite-pullback-identities"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-underived-exchange",
+  "lem-weil-pbc-finite-pullback-identities",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GJU, proof of lemma-beta-is-isomorphism; Tag 0GJP, equation-alpha-K"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LocalAcyclicityClosedFibreOrdinaryGerm",
+  "date": "2026-10-25",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-local-acyclicity-closed-fibre-ordinary-germ",
+   "place": "Proof: canonical ordinary comparison and transport of its unit equation",
+   "via": [
+    "lem-weil-pbc-local-acyclicity-closed-fibre-ordinary-germ"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pullback of global sections is functorial under isomorphisms over the coefficient scheme",
+   "results": "8 hits; scheme module pullback and ordinary right-derived-zero isomorphisms, no complete small-etale comparison.",
+   "date": "2026-10-25",
+   "verdict": "no exact Mathlib match; use existing library functoriality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functoriality of pullback of global sections under an isomorphism of schemes over a fixed scheme",
+   "results": "8 hits: Scheme.Modules.pullbackCongr and pullbackSpecIso projection equations; no etale global-sections transport theorem.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "globalSectionsUpperStarMap_comp_squareUpperStarIso|nonempty_arrowIso_baseChangeHomologyMap_zero",
+   "results": "msearch 0 hits; local rg finds the adopted global-sections composition identities and module-valued ordinary-arrow proof. These are used in the supplied proof.",
+   "date": "2026-10-25",
+   "verdict": "reuse existing source proofs and identities"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GlobalSectionsIsoOverTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/GlobalSectionsIsoOverTransport.lean",
+  "declaration": "AlgebraicGeometry.Etale.globalSections_iso_over_transport",
+  "statement": "theorem globalSections_iso_over_transport\n    {X Y T L Z W V : Scheme.{u}}\n    (p : Y ⟶ X) (h : T ⟶ Y) (ρ : L ⟶ Y)\n    (w : W ⟶ T) (k : W ⟶ L) (hw : w ≫ h = k ≫ ρ)\n    (g : Z ⟶ X) (v : V ⟶ Z) (q : L ≅ Z) (E : W ≅ V)\n    (hq : q.hom ≫ g = ρ ≫ p) (hE : E.hom ≫ v = k ≫ q.hom)\n    (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :\n    ∃ U : (Sheaf.Γ L.smallEtaleTopology AddCommGrpCat.{u + 1}).obj\n        ((upperStar AddCommGrpCat.{u + 1} ρ).obj\n          ((upperStar AddCommGrpCat.{u + 1} p).obj G)) ≅\n      (Sheaf.Γ Z.smallEtaleTopology AddCommGrpCat.{u + 1}).obj\n        ((upperStar AddCommGrpCat.{u + 1} g).obj G),\n    ∃ B : (Sheaf.Γ W.smallEtaleTopology AddCommGrpCat.{u + 1}).obj\n        ((upperStar AddCommGrpCat.{u + 1} w).obj\n          ((upperStar AddCommGrpCat.{u + 1} h).obj\n            ((upperStar AddCommGrpCat.{u + 1} p).obj G))) ≅\n      (Sheaf.Γ V.smallEtaleTopology AddCommGrpCat.{u + 1}).obj\n        ((upperStar AddCommGrpCat.{u + 1} (v ≫ g)).obj G),\n    globalSectionsUpperStarMap AddCommGrpCat.{u + 1} k\n        ((upperStar AddCommGrpCat.{u + 1} ρ).obj\n          ((upperStar AddCommGrpCat.{u + 1} p).obj G)) ≫\n      (Sheaf.Γ W.smallEtaleTopology AddCommGrpCat.{u + 1}).map\n        ((squareUpperStarIso AddCommGrpCat.{u + 1} (CommSq.mk hw)).hom.app\n          ((upperStar AddCommGrpCat.{u + 1} p).obj G)) ≫ B.hom =\n      U.hom ≫ globalSectionsUpperStarMap AddCommGrpCat.{u + 1} v\n        ((upperStar AddCommGrpCat.{u + 1} g).obj G) ≫\n      (Sheaf.Γ V.smallEtaleTopology AddCommGrpCat.{u + 1}).map\n        ((upperStarComp AddCommGrpCat.{u + 1} v g).inv.app G)",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261025T164537-L-1032605",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261025T164537-L-1032605",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

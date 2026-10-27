@@ -1,0 +1,343 @@
+{
+ "id": "lem-sfb-integral-coefficient-model-realization",
+ "kind": "statement",
+ "title": "Normalized realization of integral coefficients and ordinary direct image",
+ "statement": "Fix a prime $\\ell$, a finite intermediate field $E/\\mathbf Q_\\ell$ in $\\overline{\\mathbf Q}_\\ell$, its valuation ring $A=\\mathcal O_E$, a uniformizer $t$ and $P_n=A/(t^n)$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. For every scheme $T$ on its small pro-etale site [def-weil-pbc-proetale-site], put $C_T=p_T^*\\underline A$, $Q_{T,n}=p_T^*\\underline{P_n}$, with the continuous-function condensed rings and the specified reduction homomorphisms [sk-def-sfb-condensed-ring, sk-def-sfb-pulled-back-coefficients]. Let $R_T=\\varprojlim_n\\underline{P_n}_T$ with projections $\\pi_{T,n}$, where the underlined finite rings are constant sheaves [def-weil-pbc-constant-sheaf]. Use ordinary unbounded module derived categories [sk-def-sfb-derived-categories], the internal/section module equivalence [def-weil-pbc-internal-abelian-sheaf-module-equivalence], and total derived module direct image [sk-def-sfb-module-derived-pushpull].\n\nUse the ring isomorphism $C_T\\cong\\varprojlim_n\\underline{P_n}_T$ identifying every finite projection with the actual quotient, the flatness of $C_T$ over $\\underline A_T$, and the K-flat resolutions $[C_T\\xrightarrow{t^n}C_T]\\to Q_{T,n}[0]$ augmented by the actual quotient projection, of [lem-sfb-integral-quotient-resolution-normalization] (with $\\pi=t$; its $R_T$ and $S_{n,T}$ are $C_T$ and $Q_{T,n}$ here). Then every $P_n$ is annihilated by $\\ell^n$, and $(A,(t))$ satisfies the adic datum hypotheses [def-weil-pbc-adic-coefficient-datum]: $A$ is Noetherian, $A/(t)$ is additive torsion, and each $P_n$ is finite and perfect in $D(A)$. There exist coefficient models [def-sfb-integral-ambient-coefficient-presentation]: canonical ring isomorphisms $c_T:C_T\\cong R_T$ and $c_{T,n}:Q_{T,n}\\cong\\underline{P_n}_T$ taking each local constant residue class to the same class, with $\\pi_{T,n}c_T=c_{T,n}p_T^*(A\\to P_n)$; thus $c_T$ is the cited limit isomorphism. The harmless universe lift in that definition takes the class of $a$ to the class of $\\operatorname{up}a$.\n\nFor every scheme map $f:X\\to Y$, these ring identifications respect the canonical inverse-image maps $\\alpha_f$ of [sk-def-sfb-coefficient-morphisms] for $C_T,Q_{T,n}$ and $c_f,c_{f,n}$ of [lem-weil-pbc-profinite-coefficient-inverse-image] for $R_T,\\underline{P_n}_T$, and every quotient transition. For any such normalized coefficient models on $X,Y$, the exact internal-module encodings give AmbientEncoding and, at every positive level, FinitePushEncoding [def-sfb-integral-ambient-direct-image-encoding]. Explicitly, the ordinary direct-image comparison is identity on the underlying section groups with their induced scalar actions. The resulting natural isomorphisms of total right derived functors intertwine the universal right-derived units on every complex. Thus they identify the specified ordinary condensed-coefficient direct image with the ordinary $R_T$-module direct image, and the finite internal-module direct image with the fixed-$P_n$ direct image. No completeness, boundedness, properness, or constructibility condition is imposed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.5, coefficient sheaves and Lemma 6.5.9(3); normalized coefficient/section realization extracted from IntegralAmbientTower.finiteResolution, coefficientModel_exists and encodings (lean/Sheaf/Paper/IntegralAmbientTowerComparison.lean, lines 73-116)",
+  "external": [
+   {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093J, lemma-constant-exact; Tag 093M, lemma-completion-flat"
+   },
+   {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-pbc-constant-sheaf",
+  "sk-def-sfb-derived-categories",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-sfb-integral-ambient-coefficient-presentation",
+  "def-sfb-integral-ambient-direct-image-encoding",
+  "lem-sfb-integral-quotient-resolution-normalization",
+  "sk-def-sfb-coefficient-morphisms",
+  "lem-weil-pbc-profinite-coefficient-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-integral-quotient-resolution-normalization] with $\\pi=t$: $A$ is Noetherian and every $P_n$ is finite with the displayed length-one finite free resolution. This resolution is bounded and consists of finitely generated projectives, so $P_n[0]$ is perfect by [def-pc-perfect-ring-complex]. The absolute value in [def-weil-l-adic-coefficient-extension] restricts to the $\\ell$-adic absolute value: $|\\ell|_E=\\ell^{-1}<1$, hence $\\ell\\in\\mathfrak m_E=(t)$. Write $\\ell=ta$ with $a\\in A$. For any $\\bar b\\in P_n$, $\\ell^n\\bar b=\\overline{t^na^nb}=0$; in particular $A/(t)$ is additive torsion. The ideal $(t)$ has the one displayed generator. These verify exactly the arithmetic hypotheses of [def-weil-pbc-adic-coefficient-datum].",
+   "uses": [
+    "lem-sfb-integral-quotient-resolution-normalization",
+    "def-pc-perfect-ring-complex",
+    "def-weil-l-adic-coefficient-extension",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 6.5 (coefficient sheaves); agent-written normalized ordinary realization argument, extracted from IntegralAmbientTower.coefficientModel_exists and encodings, lean/Sheaf/Paper/IntegralAmbientTowerComparison.lean:84-116. The qcqs projection-formula assertion of Lemma 6.5.9 is not applied."
+   }
+  },
+  {
+   "text": "For each finite discrete ring $P_n$, [lem-sf-finite-discrete-normalized-encoding] supplies the canonical constant-ring/section-ring isomorphism, normalized on every constant scalar. Its inverse gives $c_{T,n}:Q_{T,n}\\xrightarrow{\\sim}\\underline{P_n}_T$, taking each local constant class to itself. The resolution lemma [lem-sfb-integral-quotient-resolution-normalization] gives $\\lambda_T:C_T\\cong\\varprojlim_nQ_{T,n}$ whose projections are the actual quotient maps $q_{n,T}=p_T^*(A\\to P_n)$. Put $c_T=(\\varprojlim_nc_{T,n})\\circ\\lambda_T$. Then $\\pi_{T,n}c_T=c_{T,n}p_T^*(A\\to P_n)$, and $c_T$ is an isomorphism. The definition [def-sfb-integral-ambient-coefficient-presentation] uses targets that are the adic-datum sheaves of $A^\\uparrow/(\\operatorname{up}t)^n$: sheafified continuous functions on $\\pi_0$. [lem-weil-pbc-integral-coefficient-presentation-comparison] supplies the canonical constants-to-functions isomorphisms $\\kappa_n:\\underline{A^\\uparrow/I^n}\\cong(A^\\uparrow/I^n)_T$ with $I=(\\operatorname{up}t)$, which send each constant to the constant function, and the universe-lift ring isomorphisms $e_n([x])=[x.\\mathrm{down}].\\mathrm{up}$. Both commute with all quotient transitions. Composing $c_{T,n}$ with $\\underline{e_n^{-1}}$ and $\\kappa_n$ gives the finite model field, which sends the local constant class of $a$ to the class of $\\operatorname{up}a$. Taking the limit of these composites, which commute with transitions, gives the completed field with the projection equation. Thus these are precisely the coefficient-model fields. Any normalized finite comparison agrees locally on constant classes, hence is unique. The jointly monic limit projections then make the completed comparison unique.",
+   "uses": [
+    "lem-sf-finite-discrete-normalized-encoding",
+    "lem-sfb-integral-quotient-resolution-normalization",
+    "lem-weil-pbc-integral-coefficient-presentation-comparison",
+    "def-sfb-integral-ambient-coefficient-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 6.5 (coefficient sheaves); agent-written normalized ordinary realization argument, extracted from IntegralAmbientTower.coefficientModel_exists and encodings, lean/Sheaf/Paper/IntegralAmbientTowerComparison.lean:84-116. The qcqs projection-formula assertion of Lemma 6.5.9 is not applied."
+   }
+  },
+  {
+   "text": "For a scheme map $f:X\\to Y$, the finite inverse-image comparison of [lem-weil-pbc-profinite-coefficient-inverse-image] sends a constant class to the same class after base change. The maps $\\alpha_f$ of [sk-def-sfb-coefficient-morphisms] are the canonical composition comparisons of inverse images from the point. Consequently the two maps $f^{-1}Q_{Y,n}\\to\\underline{P_n}_X$ obtained using $c_{Y,n}$ or $c_{X,n}$ agree on constant sections, and hence locally on every section by the normalized constant-ring identification of [lem-sf-finite-discrete-normalized-encoding]. The same calculation for $P_{n+1}\\to P_n$ gives compatibility with transitions. At integral level, compose the two maps $f^{-1}C_Y\\to R_X$ with $\\pi_{X,n}$. The projection equation of step 2 and the projection equation in [lem-weil-pbc-profinite-coefficient-inverse-image] reduce equality to the finite square just checked. Joint monicity of the projections proves the integral square. This uses the stated inverse-image comparison theorem, without assuming that inverse image preserves arbitrary limits.",
+   "uses": [
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "sk-def-sfb-coefficient-morphisms",
+    "lem-sf-finite-discrete-normalized-encoding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 6.5 (coefficient sheaves); agent-written normalized ordinary realization argument, extracted from IntegralAmbientTower.coefficientModel_exists and encodings, lean/Sheaf/Paper/IntegralAmbientTowerComparison.lean:84-116. The qcqs projection-formula assertion of Lemma 6.5.9 is not applied."
+   }
+  },
+  {
+   "text": "The internal/section equivalences preserve underlying section groups and restrictions identically by [def-weil-pbc-internal-abelian-sheaf-module-equivalence], and are additive exact by [lem-sfb-internal-module-operations-transport]. Scalar restriction along a ring isomorphism has inverse restriction along its inverse, retaining all additive maps; kernels and cokernels therefore retain the same underlying sheaves. Composing with $c_T$ gives the exact ambient encodings $U_X,U_Y$ specified by [def-sfb-integral-ambient-coefficient-presentation]. At finite level, the same argument with $c_{T,n}$ and the additive exact constant-scalar equivalence of [lem-sfb-constant-scalar-restriction-tensor] gives the specified finite fixed-scalar encodings. All these are equivalences on the whole abelian categories, not just on complete or constructible objects.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-sfb-internal-module-operations-transport",
+    "def-sfb-integral-ambient-coefficient-presentation",
+    "lem-sfb-constant-scalar-restriction-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 6.5 (coefficient sheaves); agent-written normalized ordinary realization argument, extracted from IntegralAmbientTower.coefficientModel_exists and encodings, lean/Sheaf/Paper/IntegralAmbientTowerComparison.lean:84-116. The qcqs projection-formula assertion of Lemma 6.5.9 is not applied."
+   }
+  },
+  {
+   "text": "Write $F=f_{*,\\mathrm{int}}$ and $G=f_{*,R}$ for the ordinary ambient direct images. The ordinary internal/section direct-image comparison is supplied by [lem-sfb-internal-module-operations-transport]; check its scalar transport here explicitly. On a site object $V$ of $Y$, both $U_YFM$ and $GU_XM$ have section group $M(V\\times_YX)$. For $r\\in R_Y(V)$ and a section $s$ of this group, their respective actions are $(f_C^\\sharp(c_Y^{-1}(r)))s$ and $(c_X^{-1}(f_R^\\sharp(r)))s$, with pullback to $V\\times_YX$ understood. These are equal by the adjunct of the integral ring square of step 3: $f_C^\\sharp c_Y^{-1}=f_*(c_X^{-1})f_R^\\sharp$. Thus the identity on section groups is linear, is invertible, and commutes with restrictions and module maps. It gives a natural isomorphism $U_YF\\cong GU_X$ with exactly the ordinary identity-on-sections property of [def-sfb-integral-ambient-direct-image-encoding]. This compares the prescribed ordinary functors, whose actions are fixed in [sk-def-sfb-module-derived-pushpull].",
+   "uses": [
+    "lem-sfb-internal-module-operations-transport",
+    "def-sfb-integral-ambient-direct-image-encoding",
+    "sk-def-sfb-module-derived-pushpull"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 6.5 (coefficient sheaves); agent-written normalized ordinary realization argument, extracted from IntegralAmbientTower.coefficientModel_exists and encodings, lean/Sheaf/Paper/IntegralAmbientTowerComparison.lean:84-116. The qcqs projection-formula assertion of Lemma 6.5.9 is not applied."
+   }
+  },
+  {
+   "text": "At a positive finite level, start with the ringed $\\underline{P_n}$-module direct image and apply the finite fixed-scalar encodings of step 4. Both sides have section group $M(V\\times_YX)$; for $b\\in P_n$ the induced action on either side is multiplication by the constant class $b$ on that base-changed object. The equality is precisely the finite constant-section square of step 3. The constant-scalar restriction in [lem-sfb-constant-scalar-restriction-tensor] retains the sheaf and its maps, so identity section maps define an invertible natural transformation to the ordinary direct image of sheaves of $P_n$-modules. This is the ordinary square and ordinary normalization required for FinitePushEncoding in [def-sfb-integral-ambient-direct-image-encoding].",
+   "uses": [
+    "lem-sfb-constant-scalar-restriction-tensor",
+    "def-sfb-integral-ambient-direct-image-encoding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 6.5 (coefficient sheaves); agent-written normalized ordinary realization argument, extracted from IntegralAmbientTower.coefficientModel_exists and encodings, lean/Sheaf/Paper/IntegralAmbientTowerComparison.lean:84-116. The qcqs projection-formula assertion of Lemma 6.5.9 is not applied."
+   }
+  },
+  {
+   "text": "Apply the right-derived comparison of [lem-derived-exact-equivalence-squares] to the ordinary square of step 5, with its source and target equivalences the exact encodings of step 4 and its right-derived pairs the prescribed total direct images of [sk-def-sfb-module-derived-pushpull]. To supply that lemma's unused left-derived data, take $L,L'$ to be zero functors and their left-derived functors to be zero; these are exact, so [lem-weil-pbc-exact-functor-derived-functor] supplies these left-derived pairs. Additivity identifies both ordinary left composites with zero. The resulting right-derived square uses the canonical termwise derived equivalences, via the localization factors in that lemma. Repeat with the two finite exact equivalences and the ordinary finite square of step 6. For either square, if $\\alpha_K:V(FK)\\to G(UK)$ is its ordinary comparison on a complex, its derived comparison $\\beta:DV\\,RF\\xrightarrow{\\sim}RG\\,DU$ satisfies $\\beta_{QK}\\,DV(\\eta^F_K)=\\eta^G_{UK}\\,Q(\\alpha_K)$ under those localization factors. The lemma states this equation on every complex, so it gives exactly the normalization in [def-sfb-integral-ambient-direct-image-encoding], hence AmbientEncoding and every FinitePushEncoding. All categories here are ordinary unbounded derived categories, and every preceding construction was for arbitrary $T,f$ and arbitrary modules; no additional scheme or complex hypothesis enters.",
+   "uses": [
+    "lem-derived-exact-equivalence-squares",
+    "sk-def-sfb-module-derived-pushpull",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "def-sfb-integral-ambient-direct-image-encoding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 6.5 (coefficient sheaves); agent-written normalized ordinary realization argument, extracted from IntegralAmbientTower.coefficientModel_exists and encodings, lean/Sheaf/Paper/IntegralAmbientTowerComparison.lean:84-116. The qcqs projection-formula assertion of Lemma 6.5.9 is not applied."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-integral-quotient-resolution-normalization",
+  "def-pc-perfect-ring-complex",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-sf-finite-discrete-normalized-encoding",
+  "def-sfb-integral-ambient-coefficient-presentation",
+  "lem-weil-pbc-integral-coefficient-presentation-comparison",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "sk-def-sfb-coefficient-morphisms",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-sfb-constant-scalar-restriction-tensor",
+  "def-sfb-integral-ambient-direct-image-encoding",
+  "sk-def-sfb-module-derived-pushpull",
+  "lem-derived-exact-equivalence-squares",
+  "lem-weil-pbc-exact-functor-derived-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.5 (coefficient sheaves); agent-written normalized ordinary realization argument, extracted from IntegralAmbientTower.coefficientModel_exists and encodings, lean/Sheaf/Paper/IntegralAmbientTowerComparison.lean:84-116. The qcqs projection-formula assertion of Lemma 6.5.9 is not applied."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(coefficientModel|AmbientEncoding|FinitePushEncoding|condensed.*adic|adic.*condensed)",
+   "results": "Actual search: 0 hits; top results: . ",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar adic completion, ordinary sheaf pushforward/restriction, and generic sheafification/derived adjunction constructions do not state normalized condensed integral coefficient models with the specified right-derived units"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, RingEquiv",
+   "results": "Actual search: 0 hits; top results: . ",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar adic completion, ordinary sheaf pushforward/restriction, and generic sheafification/derived adjunction constructions do not state normalized condensed integral coefficient models with the specified right-derived units"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized equivalences between condensed integral module sheaves and completed ring module sheaves preserve ordinary derived pushforward and finite quotient maps",
+   "results": "Actual search: 8 hits; top results: SheafOfModules.pushforward, SheafOfModules.pushforward_map_val, SheafOfModules.pushforwardNatTrans_app_val_app, SheafOfModules.pushforward_obj_val, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pushforward.congr_simp, SheafOfModules.pushforwardSections_unitHomEquiv. ",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar adic completion, ordinary sheaf pushforward/restriction, and generic sheafification/derived adjunction constructions do not state normalized condensed integral coefficient models with the specified right-derived units"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical coefficient models identify condensed l adic integers and finite quotients with the completed ring sheaf, preserving quotient projections and ordinary derived direct image actions",
+   "results": "Actual search: 8 hits; top results: AdicCompletion.piEquivFin_apply, AdicCompletion.piEquivFin, BDeRhamPlus, AdicCompletion.factor_evalₐ_eq_eval, AdicCompletion.evalₐ_of, AdicCompletion.piEquivOfFintype_apply, AdicCompletion.mk_smul_top_ofAlgEquiv_symm, AdicCompletion.mk_ofAlgEquiv_symm. ",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar adic completion, ordinary sheaf pushforward/restriction, and generic sheafification/derived adjunction constructions do not state normalized condensed integral coefficient models with the specified right-derived units"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact equivalences from internal modules over pulled back condensed valuation rings to completed section ring sheaves give normalized derived pushforward comparisons",
+   "results": "Actual search: 8 hits; top results: SheafOfModules.pushforwardSections_unitHomEquiv, SheafOfModules.pushforwardCongr, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pullbackObjUnitToUnit. ",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar adic completion, ordinary sheaf pushforward/restriction, and generic sheafification/derived adjunction constructions do not state normalized condensed integral coefficient models with the specified right-derived units"
+  },
+  {
+   "tool": "grep",
+   "query": "(ringModuleEquivalence|sectionModuleEquivalence|rightDerivedFunctor.*[Ee]quivalence|[Ee]quivalence.*rightDerivedFunctor)",
+   "results": "Actual search: 0 hits; top results: . ",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar adic completion, ordinary sheaf pushforward/restriction, and generic sheafification/derived adjunction constructions do not state normalized condensed integral coefficient models with the specified right-derived units"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Sheaf",
+   "results": "Actual search: 12 hits; top results: CategoryTheory.plusPlusAdjunction, CategoryTheory.sheafificationAdjunction, CategoryTheory.HasSheafify.mk', CategoryTheory.GrothendieckTopology.W_eq_inverseImage_isomorphisms_of_adjunction, CategoryTheory.GrothendieckTopology.W_iff_isIso_map_of_adjunction, CategoryTheory.GrothendieckTopology.W_adj_unit_app, CategoryTheory.sheafComposeNatIso, CategoryTheory.instIsIsoFunctorOppositeSheafSheafComposeNatTrans. ",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar adic completion, ordinary sheaf pushforward/restriction, and generic sheafification/derived adjunction constructions do not state normalized condensed integral coefficient models with the specified right-derived units"
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientModel|AmbientEncoding|FinitePushEncoding|rightDerivedFunctor.*[Ee]quivalence|[Ee]quivalence.*rightDerivedFunctor",
+   "results": "{\"t\": \"2026-10-22T07:14:15Z\", \"tool\": \"grep\", \"query\": \"coefficientModel|AmbientEncoding|FinitePushEncoding|rightDerivedFunctor.*[Ee]quivalence|[Ee]quivalence.*rightDerivedFunctor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give generic derived-functor, pushforward or discrete-condensed APIs, not the entire normalized integral coefficient model and its direct-image comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward, CategoryTheory.Equivalence",
+   "results": "{\"t\": \"2026-10-22T07:14:16Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.pushforward, CategoryTheory.Equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give generic derived-functor, pushforward or discrete-condensed APIs, not the entire normalized integral coefficient model and its direct-image comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact equivalences of abelian categories transport right derived functors with their universal units",
+   "results": "{\"t\": \"2026-10-22T07:14:16Z\", \"tool\": \"leansearch\", \"query\": \"Exact equivalences of abelian categories transport right derived functors with their universal units\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.totalRightDerivedUnit\", \"CategoryTheory.Functor.rightDerived\", \"CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_id\", \"CategoryTheory.Functor.rightDerived_map_eq\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_app_assoc\", \"CategoryTheory.Functor.isRightDerivedFunctor_iff_isIso_rightDerivedDesc\", \"CategoryTheory.Functor.isRightDerivedFunctor_iff_of_iso\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_assoc\"], \"digest\": \"62f8d60e96b91d51\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give generic derived-functor, pushforward or discrete-condensed APIs, not the entire normalized integral coefficient model and its direct-image comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized integral condensed coefficient ring isomorphisms commute with finite quotient projections and ordinary unbounded derived direct image",
+   "results": "{\"t\": \"2026-10-22T07:14:26Z\", \"tool\": \"leanfinder\", \"query\": \"Normalized integral condensed coefficient ring isomorphisms commute with finite quotient projections and ordinary unbounded derived direct image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CondensedMod.IsSolid.isIso_solidification_map\", \"localCohomology.diagramComp\", \"LightCondensed.ihomPoints_symm_comp\", \"Condensed.isoLocallyConstantOfIsColimit_inv\", \"LightCondensed.isoLocallyConstantOfIsColimit_inv\", \"lightProfiniteToLightCondSetIsoTopCatToLightCondSet\", \"Condensed.isoLocallyConstantOfIsColimit\", \"LightCondensed.isoLocallyConstantOfIsColimit\"], \"digest\": \"01fb3d25fd7bf243\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give generic derived-functor, pushforward or discrete-condensed APIs, not the entire normalized integral coefficient model and its direct-image comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforward_obj_val|pushforwardCongr|totalRightDerivedUnit|isRightDerivedFunctor_iff_of_iso",
+   "results": "{\"t\": \"2026-10-22T07:22:51Z\", \"tool\": \"grep\", \"query\": \"pushforward_obj_val|pushforwardCongr|totalRightDerivedUnit|isRightDerivedFunctor_iff_of_iso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 23, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\"], \"digest\": \"a415ec8f7974ee41\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give generic derived-functor, pushforward or discrete-condensed APIs, not the entire normalized integral coefficient model and its direct-image comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite discrete coefficient rings on the pro etale site are constant sheaves and identify module direct images under change of coefficient rings",
+   "results": "{\"t\": \"2026-10-22T07:22:53Z\", \"tool\": \"leanfinder\", \"query\": \"Finite discrete coefficient rings on the pro etale site are constant sheaves and identify module direct images under change of coefficient rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondMod.LocallyConstant.functorIsoDiscreteAux₂\", \"CondensedMod.LocallyConstant.functorIsoDiscreteAux₂\", \"LightCondMod.LocallyConstant.instFullModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf\", \"CompHausLike.LocallyConstantModule.functor\", \"LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf\", \"LightCondMod.LocallyConstant.functorIsoDiscreteComponents\", \"LightCondMod.LocallyConstant.functorToPresheaves\", \"Condensed.finFree\"], \"digest\": \"f16c359f5a1bbe6a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give generic derived-functor, pushforward or discrete-condensed APIs, not the entire normalized integral coefficient model and its direct-image comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-ambient-tower-comparison",
+  "date": "2026-10-22",
+  "group": "Q73"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-open-coefficients",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-dc-lower-star-preserves",
+   "place": "Integral paragraph: the valuation-ring finite quotient tower and the ordinary integral direct image; old comparison steps 1-3 and the sheaf resolution in step 4",
+   "via": [
+    "lem-sfb-integral-ambient-tower-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-integral-coefficient-model-realization",
+  "worker": "stage1",
+  "summary": "Proved the arithmetic conditions and assembled the normalized finite and completed coefficient models from existing nodes. Checked inverse-image and transition squares on local constants and finite projections. Wrote the ambient and finite direct-image scalar actions and used the existing exact-equivalence derived-square theorem with its equation on every complex. No new nodes and no statement change.",
+  "blueprint": "Realizes the integral paragraph of lem-sfb-dc-lower-star-preserves: valuation-ring quotient coefficients and the ordinary integral direct image used before reduction and finiteness. This is the coefficient realization extracted through lem-sfb-integral-ambient-tower-comparison, not a new finiteness route.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-finite-discrete-normalized-encoding",
+    "why": "Generic normalized finite-discrete coefficient-ring and section-module encoding for any scheme; the unit has no separate normalization theorem."
+   },
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Generic internal/section module operations and additive exact equivalences for arbitrary condensed rings; needed before applying the unit finiteness route."
+   },
+   {
+    "node": "lem-sfb-constant-scalar-restriction-tensor",
+    "why": "Use only its additive exact equivalence retaining underlying constant-scalar actions; no tensor or finiteness theorem is substituted."
+   },
+   {
+    "node": "lem-derived-exact-equivalence-squares",
+    "why": "Generic universal derived comparison through exact equivalences, including equations on every complex; no theorem of the unit replaces this formal tool."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic exact-functor derivation applied to zero functors solely to instantiate the unused left half of the existing derived-square theorem."
+   },
+   {
+    "node": "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "why": "Generic arbitrary-scheme inverse-image comparison for profinite coefficient towers, with the specified finite projections; no proper square or base-change theorem is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-finite-discrete-normalized-encoding",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-sfb-constant-scalar-restriction-tensor",
+  "lem-derived-exact-equivalence-squares",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-profinite-coefficient-inverse-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q130-2a8d6a96b",
+  "group": "Q130",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q130-2a8d6a96b (reviewer sub-agent of L); spot-checked: Read in full: the item, its 7 steps, all 14 stmt_deps and the 6 other proof_deps, unit sk-prop-open-coefficients (its route reaches sk-thm-sfb-proper-base-change and sk-thm-properbasechange), Bhatt-Scholze Lemma 6.5.9 (pp. 49-52, qcqs, not used), and the Lean docstrings for CoefficientModel, coefficientModel_exists and encodings. No new nodes, no statement change, no SGA. Step 1 is correct: |l|_E=1/l<1 puts l in (t); l=ta gives l^n*P_n=0 and A/(t) torsion; perfectness comes from the two-term resolution, including for ramified E. Steps 3-7 are correct. Step 3: naturality of f^*p_Y^*≅p_X^* preserves all constants, including residue-field constants not in the image of Z, and joint monicity gives the integral square. Step 5: the scalar actions agree via the adjunct f_*(c_X)η_f=f_R^♯c_Y. Step 7: lem-derived-exact-equivalence-squares applies with the left half filled by zero functors, which is legitimate because zero is exact, and gives the unit equation on every complex. Fault (C1/C4), fixed: step 2 built the finite model in constant sheaves, but def-sfb-integral-ambient-coefficient-presentation (Lean CoefficientModel) targets the adic-datum Cont(pi_0) sheaves of the universe-lifted quotient, via finiteOriginConstantIso. The step left the constants-to-functions isomorphism uncited, argued the universe lift inline, and called the cited limit isomorphism c_T without composing with lim c_{T,n}. Step 2 now sets c_T=(lim c_{T,n})∘λ_T, composes with e_n^{-1} and kappa_n, and cites the reviewed, on-route, acyclic node lem-weil-pbc-integral-coefficient-presentation-comparison, also added to proof_deps. The six declared tool_uses are accepted. Corrected file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-integral-coefficient-model-realization.json; details in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralCoefficientModelRealization",
+  "declaration": "AlgebraicGeometry.Scheme.IntegralAmbientTower.integral_coefficient_model_realization",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.IntegralAmbientTower.CoefficientModel.constantFinite",
+   "AlgebraicGeometry.Scheme.IntegralAmbientTower.CoefficientModel.constantCompleted",
+   "AlgebraicGeometry.Scheme.IntegralAmbientTower.realizationQuotientSystem",
+   "AlgebraicGeometry.Scheme.IntegralAmbientTower.integral_coefficient_model_realization"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralCoefficientModelRealization.lean",
+  "statement": "theorem integral_coefficient_model_realization (π : PadicAlgCl.integers l E.1) (hπ : Ideal.span {π} = IsLocalRing.maximalIdeal (PadicAlgCl.integers l E.1)) : IsNoetherianRing (integers.{u} l E) ∧ (Ideal.span ({ULift.up π} : Set (integers.{u} l E))).FG ∧ (∀ x : integers.{u} l E ⧸ Ideal.span {ULift.up π}, ∃ m : ℕ, 0 < m ∧ m • x = 0) ∧ (∀ n : ℕ, Finite (integers.{u} l E ⧸ (Ideal.span {ULift.up π}) ^ (n + 1))) ∧ (∀ n : ℕ, 1 ≤ n → adicQuotientPerfect (integers.{u} l E) (Ideal.span {ULift.up π}) n) ∧ (∀ (n : ℕ) (x : integers.{u} l E ⧸ (Ideal.span {ULift.up π}) ^ (n + 1)), l ^ (n + 1) • x = 0) ∧ (∀ T : Scheme.{u}, Nonempty (CoefficientModel l E π hπ T) ∧ ∀ C : CoefficientModel l E π hπ T, (∀ n : ℕ, (C.constantCompleted l E).hom ≫ limit.π (adicLisseRingSystem T (datum.{u} l E π hπ).ideal) (op n) = quotientProjection l E π T n ≫ (C.constantFinite l E n).hom) ∧ (∀ (a b : ℕᵒᵖ) (g : a ⟶ b), (realizationQuotientSystem l E π T).map g ≫ (C.constantFinite l E b.unop).hom = (C.constantFinite l E a.unop).hom ≫ (adicLisseRingSystem T (datum.{u} l E π hπ).ideal).map g)) ∧ (∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (CX : CoefficientModel l E π hπ X) (CY : CoefficientModel l E π hπ Y), (∀ (V : Y.ProEtᵒᵖ) (s : (integralRing l E Y).obj.obj V), (CX.completed.hom.hom.app ((proEtaleBaseChange f).op.obj V)) (((condensedPushforwardHom (Profinite.padicIntegersRingObj.{u} l E.1) f).hom.app V) s) = (((proEtaleSheafAdjunction f CommRingCat.{u + 1}).homEquiv _ _ ((datum.{u} l E π hπ).integralRingIso f).hom).hom.app V) (CY.completed.hom.hom.app V s)) ∧ (∀ (n : ℕ) (V : Y.ProEtᵒᵖ) (s : (quotientRing l E π Y n).obj.obj V), ((CX.finite n).hom.hom.app ((proEtaleBaseChange f).op.obj V)) (((condensedPushforwardHom (Profinite.continuousMapRingObj.{u} (completedResidue l E π n)) f).hom.app V) s) = (((proEtaleSheafAdjunction f CommRingCat.{u + 1}).homEquiv _ _ ((datum.{u} l E π hπ).finiteRingIso f n).hom).hom.app V) ((CY.finite n).hom.hom.app V s)) ∧ Nonempty (AmbientEncoding l E f CX CY) ∧ ∀ n : ℕ, Nonempty (FinitePushEncoding l E (π := π) (hπ := hπ) f n))",
+  "branch": "sheaf-dag",
+  "by": "Q152",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The helper definitions only express the recorded normalized coefficient-model fields in constant-sheaf coordinates and bundle the actual quotient transitions. All clauses are stated together; no replacement coefficient action or complete subcategory is used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d7a4d9dc1",
+  "group": "Q152",
+  "result": "pass",
+  "note": "Read item, 14 stmt_deps, CoefficientModel/AmbientEncoding/FinitePushEncoding/NormalizedSquare, FourCorners integralRingIso/finiteRingIso, pbc constant comparisons, condensedPushforwardHom (mate of α_f). Clauses all rendered: datum arithmetic (= AdicCoefficientDatum fields, n+1 indexing incl. first quotient), l^(n+1) annihilation, ∀T Nonempty CoefficientModel (projection+constants pinned), ∀C projection and all-arrow transition equations in constant coordinates, integral and finite inverse-image squares in adjunct form for arbitrary f, CX, CY, AmbientEncoding and every FinitePushEncoding (identity on sections + universal-unit normalization on every complex). No extra hypotheses or universe equalities; helpers have real data and docstrings; statement record verbatim; node changed only in its lean record. Advisory: conjuncts 1-5/6 and the existence/encodings clauses repeat arithmetic / finiteResolution / coefficientModel_exists / encodings of the def and parent modules (split by design; transition and coefficient squares are new content); projection clause follows from C.projection; uniqueness covered by ∀C; second reading is a self-check (H11 advisory). No compile (no file changed)."
+ }
+}

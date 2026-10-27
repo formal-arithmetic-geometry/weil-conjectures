@@ -1,0 +1,146 @@
+{
+ "id": "lem-sfb-internal-koszul-finite-acyclicity",
+ "kind": "statement",
+ "title": "One-level normalized singleton augmentation is a quasi-isomorphism",
+ "statement": "Let l be prime, E a finite extension of Q_l and X a Noetherian scheme. Use O and its residue map q [def-sfb-internal-completion-section-transport]. Let a be a global section whose singleton generates kernelIdeal(q) on every slice [def-weil-pbc-ringed-ideal-generators]. Let P be an actual integral K-flat complex [sk-def-pe-derived-completion] and n a natural number. Let v be any chain map from complex(P) tensor the level-n dual singleton Koszul complex [def-weil-pbc-ringed-koszul-system] to the actual transported quotient complex at n [def-sfb-internal-quotient-tower-model]. Assume that composing its degree-zero tensor unit with v gives the prescribed quotient unit, and that v vanishes on each total-tensor summand whose Koszul degree is nonzero. Then v is a quasi-isomorphism. This assertion uses only one level: no transition compatibility, tower map, or inverse-limit equation is assumed or concluded.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Lemma derived-completion-koszul (0A0E), singleton augmentation; also proetale.tex, Section derived-completion-noetherian (099L) and Lemma naive-completion (099M)."
+ },
+ "stmt_deps": [
+  "def-sfb-internal-quotient-tower-model",
+  "def-sfb-internal-completion-section-transport",
+  "sk-def-pe-derived-completion",
+  "def-weil-pbc-ringed-ideal-generators",
+  "def-weil-pbc-ringed-koszul-system"
+ ],
+ "proof": [
+  {
+   "text": "Choose the canonical principal reduction data. Its scalar is multiplication by the coefficient uniformizer. Apply the singleton coordinate comparison to identify the transported mapping cone with the dual Koszul tensor, preserving the unshifted unit and factoring the shifted inclusion through Koszul degree -1.",
+   "uses": [
+    "lem-pe-principal-reduction-cone-calculus",
+    "lem-sfb-internal-koszul-cone-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use CoefficientCone.coneToTensor_zero and CoefficientCone.coneToTensor_quasiIso, the proved private finite-level helpers in CompletionTriangleComparison. Removing the equality transport from data.hobj gives a quasi-isomorphism c from the actual scalar mapping cone to the actual finite tensor quotient for every K-flat P.",
+   "uses": [
+    "lem-pe-completion-triangle-comparison",
+    "sk-def-pe-derived-completion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify modules.mapHomologicalComplex.map(c) with e.hom followed by v, degree by degree. The mapped cone inclusions are jointly epic: map the cone identity decomposition through the additive modules functor. On the unshifted inclusion the two maps agree by hu and the normalized coordinate equation; on the shifted inclusion they are both zero by the cone desc formula and hz at bidegree (q+1,-1).",
+   "uses": [
+    "def-sfb-internal-quotient-tower-model",
+    "lem-sfb-internal-koszul-cone-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The exact additive modules functor preserves homology and quasi-isomorphisms. Thus e.hom followed by v is a quasi-isomorphism. Cancel the chain isomorphism e.hom to conclude QuasiIso v.",
+   "uses": [
+    "def-sfb-internal-quotient-tower-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pe-principal-reduction-cone-calculus",
+  "lem-sfb-internal-koszul-cone-coordinates",
+  "lem-pe-completion-triangle-comparison",
+  "sk-def-pe-derived-completion",
+  "def-sfb-internal-quotient-tower-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Lemma derived-completion-koszul (0A0E), finite free dual computation; blueprint det-thm-sf-pf-adic-open Reduction paragraph; existing finite K-flat cone augmentation proof in CompletionTriangleComparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The dual singleton Koszul complex resolves the quotient by a regular element compatibly with powers and quotient transition maps",
+   "results": "8 hits including Algebra.PreSubmersivePresentation.cotangentComplexAux, KaehlerDifferential.quotKerTotalEquiv and RingTheory.Sequence.IsWeaklyRegular.regular_mod_prev; none states a strict sheaf Koszul augmentation.",
+   "date": "2026-10-26",
+   "verdict": "No matching strict finite sheaf augmentation or normalized K-flat acyclicity theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The augmentation of the two term Koszul complex of a regular element tensor a K flat complex is a quasi isomorphism",
+   "results": "8 hits: general ShortComplex.QuasiIso and HomologicalComplex.quasiIso APIs, quasiIso_comp, QuasiIso, quasiIso_iff, quasiIsoAt_comp and quasiIso_iff_comp_left. No coefficient augmentation theorem.",
+   "date": "2026-10-26",
+   "verdict": "General quasi-isomorphism API only; no matching finite sheaf comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.ιMapBifunctor",
+   "results": "HomologicalComplex.ιMapBifunctor, ι_mapBifunctorDesc, mapBifunctor.hom_ext, ι_mapBifunctorMap and related inclusion formulas.",
+   "date": "2026-10-26",
+   "verdict": "Use the actual total-tensor summand inclusions to specify the zero components; no augmentation to the actual internal coefficient quotients."
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*[Qq]uotient|[Qq]uotient.*koszul",
+   "results": "No hits in the Mathlib search service. Local library search found RegularQuotientCompletionUnit, KoszulQuotientTensorAugmentation and CompletedKoszulQuotientRoosAugmentation, using different constant-module or cone models.",
+   "date": "2026-10-26",
+   "verdict": "No declaration has the actual internal-module quotient target and the specified dual singleton source."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProEtale.InternalKoszulQuotientResolution",
+  "date": "2026-10-26",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sf-pf-adic-open",
+   "place": "Reduction paragraph: the finite residue reduction is the cone of multiplication by the uniformizer; regularity and K-flat computation of one finite reduction",
+   "via": [
+    "lem-sfb-internal-koszul-quotient-resolution",
+    "lem-sfb-internal-quotient-koszul-unit-comparison",
+    "lem-sfb-internal-completion-stacks-comparison",
+    "lem-sfb-internal-integral-residue-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-pf-adic",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProEtale.InternalKoszulFiniteAcyclicity",
+  "file": "lean/Sheaf/SixFunctors/ProEtale/InternalKoszulFiniteAcyclicity.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.InternalCompletionTransport.koszul_finite_augmentation_quasiIso",
+  "statement": "theorem koszul_finite_augmentation_quasiIso [IsNoetherian X]\n    (a : ((ring l E X).obj ⋙ forget CommRingCat).sections)\n    (ha : ∀ U : Scheme.coefficientProEtaleSiteModel.{u, u} X,\n      IsRingedIdealGeneratingList (ring l E X)\n        (ConstantCompletion.kernelIdeal (residue l E X)).module\n        (ConstantCompletion.kernelIdeal (residue l E X)).inclusion U 1\n        (fun _ ↦ a.val (op U)))\n    (P : CochainComplex (AdicCompletion.Modules l E X) ℤ)\n    (hP : (HomologicalComplex.quasiIso (AdicCompletion.Modules l E X) (.up ℤ)).kFlat P)\n    (n : ℕ)\n    (v : ((ringedKoszulTensorTower (ring l E X) 1 (fun _ ↦ a)).obj\n        (complex l E X P)).obj (op n) ⟶ (quotients l E X P).obj (op n))\n    (hu : ringedKoszulTensorUnitComponent (ring l E X) 1 (fun _ ↦ a)\n        (complex l E X P) (op n) ≫ v = (quotientUnits l E X P).app (op n))\n    (hz : ∀ p j : ℤ, j ≠ 0 →\n      HomologicalComplex.ιMapBifunctor (complex l E X P)\n          ((ringedKoszulDualTower (ring l E X) 1 (fun _ ↦ a)).obj (op n))\n          (curriedTensor _) (.up ℤ) p j (p + j) rfl ≫ v.f (p + j) = 0) :\n    QuasiIso v",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261026T001925-L-41712",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261026T024046-L-634202",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

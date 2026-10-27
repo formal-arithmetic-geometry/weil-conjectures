@@ -1,0 +1,142 @@
+{
+ "id": "lem-sfb-kummer-root-rank-one",
+ "kind": "statement",
+ "title": "The integral Kummer root system is locally free of rank one",
+ "statement": "Let l be a prime and T a Noetherian scheme on which l is invertible. Let R be the ring-sheaf tower with nth level the constant sheaf Z/l^(n+1) and quotient transitions [def-sp-tower-class-coefficients]. Let F be a forgetful functor from R-module systems on the vertical sequence site to towers of abelian sheaves, satisfying all the section, restriction, transition and morphism equations of [def-sp-tower-class-systems]. Let M be an R-module system and e:F(M) ≅ mu_(l^(n+1)) a tower isomorphism to the actual roots-of-unity tower with power-l transitions [def-sp-tower-class-systems]. Then M is finite locally free of rank one [def-sc-finite-locally-free-sheaf]: on a family covering the terminal sheaf of the vertical sequence site, its restriction is isomorphic to the coefficient unit.",
+ "stmt_deps": [
+  "def-sp-tower-class-systems",
+  "def-sp-tower-class-coefficients",
+  "def-sc-finite-locally-free-sheaf"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), local rank-one root module and scalar extension; sk-prop-diagonal-tower/_section.md, Tate-twist paragraph"
+ },
+ "proof": [
+  {
+   "text": "Map the given global unit ell through Gamma-evaluation to obtain invertibility in every residue field. Apply the proved localTowerCover helper of PurTwistRootLocalModels: one pro-etale cover U_i has an additive diagram isomorphism from the actual positive roots tower to the underlying additive quotient-ring tower, including all power/reduction transitions. No coefficient field, completed line or signed Tate twist is needed.",
+   "uses": [
+    "lem-pur-twist-root-local-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Flatten abelian towers to presheaves on the product sequence category. The sections, restrictions and transitions equations of Forget give a natural isomorphism from its flattened tower to the underlying presheaf of M. Reconstructing a tower from its adjacent transitions is naturally isomorphic to that tower, so the underlying coefficient module has the flattened coefficient presheaf. Over each (n,U_i), the functor to N times Over(U_i) transports the additive diagram trivialization to an additive isomorphism of the two module sheaves.",
+   "uses": [
+    "def-sp-tower-class-systems",
+    "def-sp-tower-class-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The map from the constant presheaf of integers to the sequence coefficient ring is locally surjective: at level m, sheafification locally lifts each scalar to Z/ell^(m+1), and each such element has an integer representative. Covers are vertical, so these local lifts are also covers on the sequence site and on its slices. An additive map is linear over integers; the locally-surjective scalar restriction Hom equivalence uniquely promotes it to a coefficient-linear map. Apply this to both directions of the additive chart isomorphism; faithfulness preserves the inverse equations.",
+   "uses": [
+    "def-sp-tower-class-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The objects (n,U_i), indexed by all n and i, cover the terminal sheaf of the sequence site: the defining vertical slice of the sieve of this family contains the sieve of the covering family U_i at each n. The preceding linear chart isomorphisms identify M with the coefficient unit on each such object. Apply isInvertible_of_forall_over_unit and isInvertible_iff_isFiniteLocallyFreeOfRank_one. All constructions work on empty charts and zero section rings without requiring a nonzero ring.",
+   "uses": [
+    "def-sc-finite-locally-free-sheaf"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), local rank-one root module and scalar extension; sk-prop-diagonal-tower/_section.md, Tate-twist paragraph; W4: use the proved compatible-root diagram cover and locally-surjective integer scalar restriction",
+  "date": "2026-10-27",
+  "group": "W4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The roots of unity tower is a locally free rank one sheaf of modules over the tower of constant quotient rings",
+   "results": "8 hits: SheafOfModules.free, SheafOfModules.ιFree, Ideal.rootsOfUnityMapQuot, Ideal.rootsOfUnityMapQuot_apply, modularCyclotomicCharacter.toFun, SheafOfModules.unit, rootsOfUnityEquivNthRoots_apply, rootsOfUnity.fintype.",
+   "date": "2026-10-27",
+   "verdict": "No theorem about the ringed sequence-site root system."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The compatible roots of unity tower is locally free of rank one over the tower of constant rings ZMod prime powers",
+   "results": "8 hits on cyclotomicCharacter, primitive roots and cyclotomic number fields; no module-system local freeness theorem.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFiniteLocallyFreeOfRank",
+   "results": "0 hits; service reported unknown identifier SheafOfModules.IsFiniteLocallyFreeOfRank.",
+   "date": "2026-10-27",
+   "verdict": "No result from this index; the project defines this class."
+  },
+  {
+   "tool": "grep",
+   "query": "kummerRoot_rank_one|rootModule.*IsFiniteLocallyFreeOfRank",
+   "results": "0 Mathlib hits.",
+   "date": "2026-10-27",
+   "verdict": "No specialized root-tower theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.KummerLineTwisting",
+  "date": "2026-10-27",
+  "group": "G6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "Tate-twist paragraph: the sheaf of roots with power transitions is free of rank one on the primitive-root cover",
+   "via": [
+    "lem-sfb-kummer-line-twisting",
+    "lem-sfb-diagonal-trace-chern-twist-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.KummerRootRankOne",
+  "file": "lean/Sheaf/Paper/KummerRootRankOne.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.kummerRoot_rank_one",
+  "branch": "sheaf-dag",
+  "by": "G6",
+  "date": "2026-10-27",
+  "statement": "theorem kummerRoot_rank_one (l : ℕ) [Fact l.Prime]\n    (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (l : Γ(T, ⊤)))\n    (F : Forget T (Rrings l T)) (M : Systems T (Rrings l T))\n    (e : F.F.obj M ≅ roots l T) :\n    M.IsFiniteLocallyFreeOfRank 1"
+ },
+ "merged_into": null,
+ "proof_deps": [
+  "lem-pur-twist-root-local-models",
+  "def-sp-tower-class-systems",
+  "def-sp-tower-class-coefficients",
+  "def-sc-finite-locally-free-sheaf"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261027T021327-L-2757561",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261027T034803-L-3686605",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

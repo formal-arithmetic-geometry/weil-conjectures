@@ -1,0 +1,390 @@
+{
+ "id": "lem-sfb-cochain-closed-rectangle-certificates",
+ "kind": "statement",
+ "title": "Countable closed finite-field rectangle certificates for profinite parameter cochains",
+ "statement": "Fix a prime $\\ell$ and an algebraic closure $\\Omega/\\mathbf Q_\\ell$ with the extended norm topology [def-weil-l-adic-numbers], [def-weil-algebraic-closure]. Let $(F_N)_{N\\geq0}$ be increasing intermediate fields, each finite-dimensional over $\\mathbf Q_\\ell$ and closed in $\\Omega$, with $\\bigcup_N F_N=\\Omega$. Let $S$ be a nonempty compact metrizable Hausdorff totally disconnected space and $G$ a compact metrizable Hausdorff topological group with a basis of open normal subgroups. Let $n\\geq1$ and $z:S\\times G^n\\to\\Omega$ be continuous. Define\n$$f_z(s;g_0,\\ldots,g_n)=z(s;g_0^{-1}g_1,\\ldots,g_{n-1}^{-1}g_n).$$\nThere exist sequences indexed by $j\\geq1$ of open normal subgroups $H_j\\leq G$, elements $a_{j,0},\\ldots,a_{j,n}\\in G$, and integers $N_j\\geq0$, such that for\n$$R_j=H_ja_{j,0}\\times\\cdots\\times H_ja_{j,n},\\qquad A_j=\\{s\\in S:\\forall y\\in R_j,\\ f_z(s;y)\\in F_{N_j}\\},$$\nevery $A_j$ is nonempty and closed and $S=\\bigcup_{j\\geq1} A_j$. Repetitions in the sequences are allowed. Each index $[G:H_j]$ is finite. In addition $G$ has a countable clopen basis, its clopen subsets and open subgroups form countable sets, and the coset rectangles $Ha_0\\times\\cdots\\times Ha_n$ with $H$ open normal form a countable set. No cocycle condition on $z$ is required, and no $A_j$ is asserted to be open. All spaces use [def-weil-size-convention].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-formulated scalar analytic input, not a theorem asserted in the blueprint. Old proof steps 3–4: Baire certificates, countability of coset rectangles, closed certificate sets and finite indices. Exact literature reference WANTED; the full inherited argument is retained in the delivery report."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure"
+ ],
+ "proof": [
+  {
+   "text": "Every open subgroup $H$ is clopen: its right cosets are open by translation, and the complement of $H$ is the union of the other cosets. Compactness of $G$ applied to the disjoint open coset cover gives finitely many cosets, hence $[G:H]<\\infty$. The assumed open-normal basis at $1$, translated on the right, gives a clopen basis at every point. This separates distinct points: if $x\\ne y$, shrink a neighbourhood of $x$ avoiding $y$ to a coset. A connected subset containing $x,y$ would then be separated by that clopen set and its complement. Thus $G$ is totally disconnected.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), scalar analytic input, old steps 3–4. Elementary coset and compactness argument."
+   }
+  },
+  {
+   "text": "Use [lem-sfb-compact-metrizable-second-countable] to infer second countability of G and then [lem-sfb-profinite-countable-clopens] to count its clopens. The clopen basis from step 1 is countable by its injection into Clopens G, and open subgroups inject into Clopens G using their clopen carriers. The finite product G^(n+1) is again compact Hausdorff, totally disconnected and second countable. Apply the same clopen-countability theorem to this product. Every right-coset rectangle is clopen: each coset is a closed and open preimage under right translation, and a finite product of clopens is clopen. Thus the set of rectangles injects into the countable type Clopens(G^(n+1)). This avoids enumerating each finite coset quotient. Choose a subgroup-and-centres presentation for each selected rectangle only after forming the certificate index set.",
+   "uses": [
+    "lem-sfb-compact-metrizable-second-countable",
+    "lem-sfb-profinite-countable-clopens",
+    "lem-weil-pbc-tychonoff-product-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), scalar analytic input, old steps 3–4. Mathlib second countability and countability of clopens; finite-tuples counting."
+   }
+  },
+  {
+   "text": "The map f_z is continuous, since inversion, multiplication, coordinate projections and z are continuous. Fix s in S. On X = G^(n+1), let E_N be the preimage of F_N under f_z(s;-). These sets are closed by continuity and cover X by the field exhaustion. By [lem-weil-pbc-tychonoff-product-quasi-compact], X is compact; it is Hausdorff and nonempty (the identity tuple), hence locally compact and Baire. Apply [lem-sfb-baire-closed-cover-interior] to obtain N and a in the interior of E_N. The finite-product topology gives open coordinate neighbourhoods U_i of a_i whose product lies in that interior. The finite intersection V of the preimages of U_i under t ↦ t*a_i is a neighbourhood of 1. Apply the assumed open-normal identity basis once to V, obtaining H with H*a_i contained in U_i for every i. Consequently the common-subgroup rectangle lies in E_N.",
+   "uses": [
+    "lem-weil-pbc-tychonoff-product-quasi-compact",
+    "lem-sfb-baire-closed-cover-interior"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), scalar analytic input, old steps 3–4. Stacks Tags 08ZU (theorem-tychonov) and 0CQN (lemma-baire-category-locally-compact), followed by the assumed subgroup basis."
+   }
+  },
+  {
+   "text": "For each rectangle R and natural number N, define the parameter certificate A(R,N) = {s : for every y in R, f_z(s;y) belongs to F_N}. It is the intersection of the closed preimages of F_N under the continuous maps s ↦ f_z(s;y), hence closed. Step 3 shows that every s belongs to such a certificate. Form the subtype J of the countable product of the rectangle set with the natural numbers consisting exactly of pairs with nonempty certificate. J is nonempty because S is nonempty. A surjection e from the natural numbers onto J gives a surjection from the positive integers by j ↦ e(j-1), allowing repetitions. For each j in J choose an open normal subgroup and tuple of centres from the defining property of its rectangle. Define H_j and a_j by these presentations, N_j by the field index of the pair, and A_j by its certificate. The presentation equation identifies A_j with the required displayed formula; the subtype property gives nonemptiness and the preceding intersection argument gives closedness. Compactness and openness give finite subgroup quotients as in step 1. Surjectivity and the pointwise certificate construction give the asserted union S. No cocycle equation is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), scalar analytic input, old steps 3–4. Elementary closed preimages, intersections and enumeration of a nonempty countable set."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-compact-metrizable-second-countable",
+  "lem-sfb-profinite-countable-clopens",
+  "lem-weil-pbc-tychonoff-product-quasi-compact",
+  "lem-sfb-baire-closed-cover-interior"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), inherited scalar analytic input. Direct Lean proof by closed preimages of open subgroups, clopen countability on G and its finite power, fiberwise Baire category, a common normal-subgroup refinement, and enumeration of nonempty closed parameter certificates. The auxiliary assertion is not itself asserted in the blueprint; the Baire/Tychonoff ingredients are the existing Mathlib leaves attached to Stacks Tags 0CQN and 08ZU."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A continuous function from a compact metrizable profinite parameter space times powers of a profinite group to an algebraic closure of Q_p admits a countable closed parameter cover with finite field valued coset rectangles",
+   "results": {
+    "t": "2026-10-22T06:02:01Z",
+    "tool": "leanfinder",
+    "query": "A continuous function from a compact metrizable profinite parameter space times powers of a profinite group to an algebraic closure of Q_p admits a countable closed parameter cover with finite field valued coset rectangles",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousMap.exists_finite_sum_const_mulIndicator_approximation_of_mem_nhds_diagonal",
+     "ContinuousMap.exists_finite_sum_const_indicator_approximation_of_mem_nhds_diagonal",
+     "ContinuousMap.exists_finite_sum_smul_approximation_of_mem_uniformity",
+     "Profinite.NobelingProof.fin_comap_jointlySurjective",
+     "ContinuousMap.exists_finite_sum_mul_approximation_of_mem_uniformity",
+     "NumberField.mixedEmbedding.fundamentalCone.compactSet_eq_union_aux₁",
+     "MeasureTheory.Measure.haar.index_elim",
+     "ContinuousMap.exists_finite_approximation_of_mem_nhds_diagonal"
+    ],
+    "digest": "a7d1b0614e2ff0cb"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite clopen approximations and nonarchimedean subgroup bases do not supply the countable closed finite-field rectangle certificates."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Baire category closed cover and countably many open normal subgroup rectangles for continuous algebraic p-adic valued functions",
+   "results": {
+    "t": "2026-10-22T06:02:12Z",
+    "tool": "leanfinder",
+    "query": "Baire category closed cover and countably many open normal subgroup rectangles for continuous algebraic p-adic valued functions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousMap.exists_finite_sum_const_mulIndicator_approximation_of_mem_nhds_diagonal",
+     "PadicInt.totallyBounded_univ",
+     "Padic.instProperSpace",
+     "NonarchimedeanGroup.prod_subset",
+     "NonarchimedeanAddGroup.prod_subset",
+     "NonarchimedeanAddGroup.prod_self_subset",
+     "Padic.rat_dense",
+     "NonarchimedeanGroup.prod_self_subset"
+    ],
+    "digest": "c87897f095d3bba5"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite clopen approximations and nonarchimedean subgroup bases do not supply the countable closed finite-field rectangle certificates."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsClosed, IsCompact",
+   "results": {
+    "t": "2026-10-22T06:02:13Z",
+    "tool": "loogle",
+    "query": "IsClosed, IsCompact",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "IsClosed.isCompact",
+     "IsCompact.inter_left",
+     "IsCompact.inter_right",
+     "Filter.hasBasis_coclosedCompact",
+     "IsCompact.of_isClosed_subset",
+     "IsCompact.compl_mem_coclosedCompact_of_isClosed",
+     "Topology.IsInducing.isCompact_preimage",
+     "Pi.isCompact_iff_of_isClosed"
+    ],
+    "digest": "05ae2ad246ef4fe4"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite clopen approximations and nonarchimedean subgroup bases do not supply the countable closed finite-field rectangle certificates."
+  },
+  {
+   "tool": "grep",
+   "query": "(rectangle|certificate).*(Padic|cochain|IntermediateField)|(Padic|cochain|IntermediateField).*(rectangle|certificate)",
+   "results": {
+    "t": "2026-10-22T06:02:14Z",
+    "tool": "grep",
+    "query": "(rectangle|certificate).*(Padic|cochain|IntermediateField)|(Padic|cochain|IntermediateField).*(rectangle|certificate)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite clopen approximations and nonarchimedean subgroup bases do not supply the countable closed finite-field rectangle certificates."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous p-adic algebraic valued functions have countable closed rectangle certificates",
+   "results": {
+    "t": "2026-10-22T06:02:14Z",
+    "tool": "leansearch",
+    "query": "Continuous p-adic algebraic valued functions have countable closed rectangle certificates",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "mahler",
+     "PadicInt.mahlerSeries",
+     "PadicInt.hasSum_mahler",
+     "PadicInt.continuous_addChar_of_value_at_one",
+     "PadicInt.continuous_choose",
+     "PadicInt.mahlerEquiv",
+     "PadicInt.compactSpace",
+     "PadicInt.continuous_multichoose"
+    ],
+    "digest": "b34f4c818ce897f5"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite clopen approximations and nonarchimedean subgroup bases do not supply the countable closed finite-field rectangle certificates."
+  },
+  {
+   "tool": "grep",
+   "query": "(rectangle|certificate).*(Padic|cochain|IntermediateField)|(Padic|cochain|IntermediateField).*(rectangle|certificate)",
+   "results": {
+    "t": "2026-10-22T11:20:27Z",
+    "tool": "grep",
+    "query": "(rectangle|certificate).*(Padic|cochain|IntermediateField)|(Padic|cochain|IntermediateField).*(rectangle|certificate)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern compact sets, finite approximations or Mahler expansions, not exact finite-subfield rectangle certificates for all parameters."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous algebraic p-adic functions admit countably many closed parameter certificates on profinite coset rectangles",
+   "results": {
+    "t": "2026-10-22T11:20:27Z",
+    "tool": "leansearch",
+    "query": "Continuous algebraic p-adic functions admit countably many closed parameter certificates on profinite coset rectangles",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "mahler",
+     "Padic.adicCompletionEquiv",
+     "PadicInt.mahlerSeries",
+     "PadicInt",
+     "PadicInt.continuous_multichoose",
+     "PadicInt.mahlerTerm",
+     "PadicAlgCl.isAlgebraic",
+     "PadicInt.mahlerEquiv"
+    ],
+    "digest": "75c723d45c8e1ab5"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern compact sets, finite approximations or Mahler expansions, not exact finite-subfield rectangle certificates for all parameters."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsClosed\", \"IsCompact\"",
+   "results": {
+    "t": "2026-10-22T11:20:28Z",
+    "tool": "loogle",
+    "query": "\"IsClosed\", \"IsCompact\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "IsClosed.isCompact",
+     "IsCompact.of_isClosed_subset",
+     "Topology.IsClosedEmbedding.isCompact_preimage",
+     "IsCompact.compl_mem_coclosedCompact_of_isClosed",
+     "Pi.isCompact_iff_of_isClosed",
+     "IsCompact.nonempty_iInter_of_directed_nonempty_isCompact_isClosed",
+     "IsCompact.nonempty_iInter_of_sequence_nonempty_isCompact_isClosed",
+     "IsCompact.nonempty_sInter_of_directed_nonempty_isCompact_isClosed"
+    ],
+    "digest": "7232b88e6b24e92d"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern compact sets, finite approximations or Mahler expansions, not exact finite-subfield rectangle certificates for all parameters."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous functions on parameter times a profinite group have a countable closed parameter cover with finite field valued coset rectangles",
+   "results": {
+    "t": "2026-10-22T11:20:36Z",
+    "tool": "leanfinder",
+    "query": "Continuous functions on parameter times a profinite group have a countable closed parameter cover with finite field valued coset rectangles",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.NobelingProof.fin_comap_jointlySurjective",
+     "ContinuousMap.exists_finite_sum_mul_approximation_of_mem_uniformity",
+     "ContinuousMap.exists_finite_sum_const_mulIndicator_approximation_of_mem_nhds_diagonal",
+     "ContinuousMap.exists_finite_sum_smul_approximation_of_mem_uniformity",
+     "ContinuousMap.exists_finite_approximation_of_mem_nhds_diagonal",
+     "ContinuousMap.exists_finite_sum_const_indicator_approximation_of_mem_nhds_diagonal",
+     "Profinite.NobelingProof.isClosed_C'",
+     "MeasureTheory.Measure.haar.index_defined"
+    ],
+    "digest": "909d10594e8c3a2d"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern compact sets, finite approximations or Mahler expansions, not exact finite-subfield rectangle certificates for all parameters."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Use Baire category on fibers and countably many clopen rectangles to cover parameter space by closed finite subfield certificates",
+   "results": {
+    "t": "2026-10-22T11:20:37Z",
+    "tool": "leanfinder",
+    "query": "Use Baire category on fibers and countably many clopen rectangles to cover parameter space by closed finite subfield certificates",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.NobelingProof.fin_comap_jointlySurjective",
+     "ContinuousMap.exists_finite_sum_const_mulIndicator_approximation_of_mem_nhds_diagonal",
+     "NumberField.mixedEmbedding.fundamentalCone.closure_paramSet",
+     "Profinite.NobelingProof.isClosed_C'",
+     "ContinuousMap.exists_finite_sum_const_indicator_approximation_of_mem_nhds_diagonal",
+     "ContinuousMap.exists_disjoint_nonempty_clopen_cover_of_mem_nhds_diagonal",
+     "ContinuousMap.exists_finite_approximation_of_mem_nhds_diagonal",
+     "MeasureTheory.closedCompactCylinders.set"
+    ],
+    "digest": "66bd949c0756b95c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern compact sets, finite approximations or Mahler expansions, not exact finite-subfield rectangle certificates for all parameters."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-parameter-cochain-completion-boundary-descent",
+  "date": "2026-10-22",
+  "group": "Q49"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: scalar analytic base. Old proof steps 3–4: Baire certificates, countability of coset rectangles, closed certificate sets and finite indices.",
+   "via": [
+    "lem-sfb-parameter-cochain-completion-boundary-descent",
+    "lem-sfb-procyclic-scalar-cochain-evaluation",
+    "lem-sfb-ind-unipotent-procyclic-difference",
+    "lem-sfb-polynomial-translation-acyclic",
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-cochain-closed-rectangle-certificates",
+  "worker": "stage1",
+  "summary": "Reused the existing Baire closed-cover and Tychonoff leaves. Added two verified Mathlib countability leaves. Gave the clopen/finite-index argument, fiberwise Baire construction, common-subgroup rectangle refinement, closed parameter intersections and enumeration without a cocycle assumption. Statement unchanged.",
+  "blueprint": "Paragraph (3), scalar analytic expansion below open direct image, old proof steps 3–4: fiberwise Baire certificates and countably many closed parameter certificate sets. The blueprint itself does not assert this scalar input."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-16056b690",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-16056b690 (reviewer sub-agent of L); spot-checked: Q56 split of lem-sfb-cochain-closed-rectangle-certificates. The statement and stmt_deps are byte-identical to the statement-only node that the Q49 re-split created, so the target is not weakened. The blueprint source, main-20261015 direct-images paragraph (3), only motivates the result, so proof_origin=agent is right. Every argument of the parent's old steps 3-4 (O4 snapshots) is kept: fibrewise Baire, a common open normal H from finitely many translated neighbourhoods, countable clopens/open subgroups/rectangles, closed A_j, enumeration with repetition and finite index. The old diameter argument is now carried by two Mathlib leaves. Step 1 (elementary): open subgroups are clopen of finite index by compactness; right translates of the normal basis separate points, so G is totally disconnected. Step 2: compact metrizable gives second countable (Metrizable/Basic.lean:164 instance; CompactSpace to LindelofSpace at Lindelof.lean:529), and ClopenBox.lean:85 countable_iff_secondCountable (with CompactSpace X from the variable at line 54) gives countably many clopens, hence countably many cosets and rectangles, with one presentation chosen per set. Step 3: f_z is continuous and E_N is closed because F_N is assumed closed. G^{n+1} is compact by the Tychonoff leaf (08ZU), Hausdorff and nonempty, so the Baire closed-cover leaf (0CQN, read in topology.tex) applies with Y=X. A basic product around (a_i) and the intersection of open normal subgroups inside U_i a_i^-1 give Ha_i in U_i, matching the right-coset order of R_j. Step 4: each A(R,N) is an intersection of closed preimages; drop the empty pairs and enumerate the countable nonempty rest with repetition; no openness and no cocycle condition is used. Both new nodes are exact or one-line Mathlib leaves with four logged search kinds; I read both Mathlib sources at the stated lines. An rg -L and statement scan of all DAG nodes found no duplicates: profinite-clopen-basis and open-normal-subgroup-basis do not assert countability. Neither leaf restates a clause of the item. Edge cases checked: G finite, S a singleton, z=0, n=1, empty space for the leaves. No SGA citation; route is fine (Tychonoff is a Mathlib leaf, Baire is in the same unit); no tool_uses. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.CochainClosedRectangleCertificates",
+  "declaration": "ContinuousCohomology.exists_cochain_closed_rectangle_certificates",
+  "file": "lean/Sheaf/RepresentationTheory/CochainClosedRectangleCertificates.lean",
+  "statement": "theorem exists_cochain_closed_rectangle_certificates (ℓ : ℕ) [Fact ℓ.Prime] (Ω : Type u) [NormedField Ω] [NormedAlgebra (Padic ℓ) Ω] [IsAlgClosure (Padic ℓ) Ω] (F : ℕ → IntermediateField (Padic ℓ) Ω) (hFmono : Monotone F) (hFfinite : ∀ N : ℕ, FiniteDimensional (Padic ℓ) (F N)) (hFclosed : ∀ N : ℕ, IsClosed (F N : Set Ω)) (hFcover : (⋃ N : ℕ, (F N : Set Ω)) = Set.univ) (S : Type v) [TopologicalSpace S] [Nonempty S] [CompactSpace S] [TopologicalSpace.MetrizableSpace S] [T2Space S] [TotallyDisconnectedSpace S] (G : Type w) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [TopologicalSpace.MetrizableSpace G] [T2Space G] (hG : ∀ U ∈ nhds (1 : G), ∃ H : OpenNormalSubgroup G, (H : Set G) ⊆ U) (n : ℕ) (hn : 1 ≤ n) (z : C(S × (Fin n → G), Ω)) : (∃ (H : ℕ+ → OpenNormalSubgroup G) (a : ℕ+ → Fin (n + 1) → G) (N : ℕ+ → ℕ) (A : ℕ+ → Set S), (∀ j : ℕ+, A j = {s : S | ∀ y ∈ Set.pi Set.univ (fun i : Fin (n + 1) ↦ MulOpposite.op (a j i) • (H j : Set G)), z (s, fun i : Fin n ↦ (y i.castSucc)⁻¹ * y i.succ) ∈ F (N j)}) ∧ (∀ j : ℕ+, (A j).Nonempty ∧ IsClosed (A j) ∧ Finite (G ⧸ (H j).toSubgroup)) ∧ (⋃ j : ℕ+, A j) = Set.univ) ∧ (∃ B : Set (Set G), B.Countable ∧ TopologicalSpace.IsTopologicalBasis B ∧ ∀ U ∈ B, IsClopen U) ∧ Countable (TopologicalSpace.Clopens G) ∧ Countable (OpenSubgroup G) ∧ {R : Set (Fin (n + 1) → G) | ∃ H : OpenNormalSubgroup G, ∃ a : Fin (n + 1) → G, R = Set.pi Set.univ (fun i ↦ MulOpposite.op (a i) • (H : Set G))}.Countable",
+  "branch": "sheaf-dag",
+  "by": "NL",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-77a45bf2e",
+  "group": "NL",
+  "result": "pass",
+  "note": "Node unchanged except the lean record; lean.statement verbatim in the file; a single sorry, no definitions. Clause check: prime ℓ; NormedField+NormedAlgebra Q_ℓ+IsAlgClosure gives the unique extended norm topology (not stronger, no completeness assumed); F_N monotone, finite-dimensional, closed, covering Ω; S nonempty compact metrizable T2 totally disconnected; G compact metrizable T2 with open-normal basis hG; n≥1; f_z = z(s, y_i⁻¹y_{i+1}) via castSucc/succ; right-coset rectangles op(a)•H; A_j pinned by equation, nonempty, closed, finite index, ⋃ A_j = univ over ℕ+ with repetitions allowed; countable clopen basis, Clopens, OpenSubgroup and coset rectangles. Universes u v w independent. Statement true by the fibrewise Baire argument; edge cases (finite G, singleton S, constant z, n=1) checked. No duplicate: sibling profinite-map-finite-field-rectangle states something different. Docstrings carry source and blueprint tag; report has both sections. No compile run, per instructions."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261026T082546-L-2190716",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

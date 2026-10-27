@@ -1,0 +1,154 @@
+{
+ "id": "lem-sf-twisted-action-tensor-comparisons",
+ "kind": "statement",
+ "title": "Normalized tensor and unit comparisons for twisted action-site restriction",
+ "statement": "Let $(C,J)$ be a small site with pullbacks, $s:C\\simeq C$ continuous in both directions, $R$ a sheaf of commutative rings, $a:(s^{-1})^*R\\simeq R$, and $P$ a RestrictionPresentation [def-sf-twisted-action-presentation-data]. Write $D$, $A$, $U$, and $\\sigma$ for its action site, coefficient ring, underlying module restriction and scalar-transported inverse translation. There are isomorphisms $t_{M,N}:U(M\\otimes_A N)\\simeq UM\\otimes_R UN$ and $b_{L,K}:\\sigma(L\\otimes_R K)\\simeq\\sigma L\\otimes_R\\sigma K$, natural in both variables. The inverse of $t$, followed by the displayed restriction isomorphism of $P$, sends the ordinary sheafified pure tensor of $x,y$ to the action-site sheafified pure tensor of their restrictions. The map $b$ sends the pure tensor on the inverse-translated site to the pure tensor of its two translated factors. The structure map on $U(M\\otimes_A N)$ satisfies $\\theta_{M\\otimes N}t_{M,N}=\\sigma(t_{M,N})b_{UM,UN}(\\theta_M\\otimes\\theta_N)$. There are unit isomorphisms $U(A)\\simeq R$ and $\\sigma R\\simeq R$: the first has the section map of coefficient restriction in $P$, the second has section map $a$, and they intertwine the original unit action. Finally $t$ commutes with tensor symmetry. This is the TensorComparisons record; no internal-Hom data or induction data are asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Original closed-comparisons proof steps 1--2 and tensor portion of step 5 (original action-site steps 9--10 and 13); sites-modules.tex, section-tensor-product and lemma-sheafification-tensor. Agent-formulated twisted variant of Stacks 00W0; Tag 00W0 is motivation only."
+ },
+ "stmt_deps": [
+  "def-sf-twisted-action-presentation-data",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "The degree-zero inclusion is cocontinuous by the action-site cover-lifting step. Restriction of module presheaves along a continuous cocontinuous functor commutes with sheafification: transpose the restricted unit; its local injectivity and local surjectivity imply that the transpose is an isomorphism of sheaves.",
+   "uses": [
+    "lem-sf-twisted-action-inclusion-cocontinuous",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-sf-cocontinuous-ringed-tensor-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the inverse tensor comparison as tensorObjIsoSheafification, sheafification of the presheaf scalar-restriction tensorator, the canonical restriction/sheafification map, and restriction of tensorObjIsoSheafification.inv. The presheaf tensorator is invertible sectionwise: the coefficient ring isomorphism gives semilinear identity equivalences of the factors and their tensor. Its sheafification-unit equation proves the pure-tensor formula. Transport this isomorphism through P.restriction.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-sf-cocontinuous-ringed-tensor-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For inverse-site translation the same construction uses cocontinuity of the inverse equivalence, obtained from continuity of the forward equivalence. Local injectivity and surjectivity of the sheafification unit are preserved by this precomposition; the canonical transpose is therefore an isomorphism of sheaves. This proves sigmaTensor and its pure-tensor normalization without a new obligation.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-sheaf-tensor-product",
+    "lem-sf-cocontinuous-ringed-tensor-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the unit isomorphisms sectionwise from coefficientRestriction and a as linear equivalences of the rank-one modules. Their inverses are the inverse coefficient maps. The coefficient-generator and module-generator equations prove the unit-action equation.",
+   "uses": [
+    "def-sf-twisted-action-presentation-data",
+    "lem-sf-cocontinuous-ringed-tensor-restriction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Maps from the sheaf tensor are determined on sheafified pure tensors by the sheafification adjunction and sectionwise tensor induction. Tensor naturality and symmetry follow by these tests and P.restriction.naturality. For the tensor action, cancel the tensor comparison and precompose with the inverse sigmaTensor. Test on pure tensors, then apply the generator restriction map. That map is injective because P.module_generator expresses it as a composite of the invertible pair action and restriction maps on sections. The two sides now agree by the pure-tensor restriction formula and the module-generator identities for each factor.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-sf-twisted-action-presentation-data",
+    "lem-sf-cocontinuous-ringed-tensor-restriction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-twisted-action-inclusion-cocontinuous",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pur-sheaf-tensor-product",
+  "def-sf-twisted-action-presentation-data",
+  "lem-sf-cocontinuous-ringed-tensor-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Original closed-comparisons proof steps 1--2 and tensor portion of step 5 (original action-site steps 9--10 and 13); sites-modules.tex, section-tensor-product and lemma-sheafification-tensor. Agent-formulated twisted variant of Stacks 00W0; Tag 00W0 is motivation only. E1 formal reduction: construct all tensor and unit maps and prove their normalization, naturality, symmetry and action identities; retain only cover lifting for the degree-zero inclusion as a separate obligation."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of sheaves of modules along an integer action site preserves tensor products with diagonal action and coefficient unit",
+   "results": "PresheafOfModules.monoidalCategory, PresheafOfModules.Monoidal.tensorObj, SheafOfModules.restrictScalars; related primitives, no normalized action-site comparison.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "TensorComparisons action site restriction tensor and unit pure tensor normalization",
+   "results": "Action.tensor_ρ in Mathlib/CategoryTheory/Action/Monoidal and FreeMonoidalCategory normalization lemmas. The former gives a diagonal tensor action for ordinary actions of a monoid on objects of a fixed monoidal category, not semilinear site translation or a comparison to action-site sheaf tensor. Read the action and sheaf tensor interfaces; no exact match.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "TwistedActionTensorComparisons|tensorComparisons|HomEvaluationComparisons|homEvaluationComparisons in lean/Sheaf, lean/WeilConjectures and Mathlib; pushforward.*homObj|homObj.*pushforward|pushforward.*tensor|tensor.*pushforward in Mathlib module and site APIs",
+   "results": "Only unrelated affine tensorComparisons names; no match in Mathlib for the normalized action-site interfaces. Read PushforwardContinuous, MonoidalClosed, RingedCocontinuousMonoidal and RingedSiteEquivalenceTensor.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.TwistedActionClosedComparisons",
+  "date": "2026-10-27",
+  "group": "C9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The parent obligation has no created.item blueprint ancestor. Its recorded provenance is lem-a1-local-boundary-duality and the evaluation/biduality sentence of thm-coef-qbar-verdier. This site realization supplies the abelian-category foundation for the internal-Hom and evaluation argument of cor-coef-verdier-weil-equivariance, without replacing the native derived category by fixed pairs in a derived category. Original twisted-site proof steps 9--13; sheafification and localized-site Hom calculation. Substep: Original closed-comparisons proof steps 1--2 and tensor portion of step 5 (original action-site steps 9--10 and 13); sites-modules.tex, section-tensor-product and lemma-sheafification-tensor.",
+   "via": [
+    "lem-sf-twisted-action-closed-comparisons",
+    "lem-sf-twisted-action-ringed-site",
+    "lem-sf-weil-native-closed-forgetful",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.TwistedActionTensorComparisons",
+  "file": "lean/Sheaf/CategoryTheory/TwistedActionTensorComparisons.lean",
+  "declaration": "CategoryTheory.TwistedActionRingedSite.tensorComparisons",
+  "declarations": [
+   "CategoryTheory.TwistedActionRingedSite.TensorComparisons",
+   "CategoryTheory.TwistedActionRingedSite.tensorComparisons"
+  ],
+  "statement": "theorem tensorComparisons [HasPullbacks C] (P : RestrictionPresentation J s R a) :\n    Nonempty (TensorComparisons J s R a P)",
+  "branch": "sheaf-dag",
+  "by": "C9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261027T054554-L-963286",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261027T094344-L-217471",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

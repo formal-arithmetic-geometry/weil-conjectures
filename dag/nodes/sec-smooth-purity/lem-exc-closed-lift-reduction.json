@@ -161,7 +161,32 @@
   "lem-weil-pbc-ind-etale-stability"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "Algebra.ClosedLift.bijective_reduction"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "Algebra.ClosedLift.bijective_reduction",
+     "module": "WeilConjectures.RingTheory.ProEtale.ClosedLift",
+     "lines": [
+      308,
+      359
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-open-closed-triangle",
  "split_report": {
@@ -215,5 +240,32 @@
   "landing": "20261015T182203-L-785410",
   "kind": "interface",
   "note": "independent Codex review: Delivery packet, Lean/DAG changes, six direct importers, full lcompile build, and axiom probes all match the stage-3 review requirements."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $I\\subset A$ be an ideal and $\\overline C$ an ind-etale $A/I$-algebra. For\nthe lift $C=H_A(\\overline C)$ of [def-exc-ind-etale-closed-lift], the\nreduction $C/IC\\to\\overline C$ is an isomorphism.",
+  "proof": [
+   {
+    "text": "The construction of [def-exc-ind-etale-closed-lift] is ind-etale by\n[lem-exc-closed-lift-filtered]. Write $\\overline C$ as a filtered colimit of\netale finite-presentation $A/I$-algebras. Every term lifts by\n[lem-exc-etale-algebra-lift]; these lifts are objects of the indexing\ncategory. Every element of $\\overline C$ therefore comes from $C$, so\n$C/IC\\to\\overline C$ is surjective. Both its source and target are ind-etale\nover $A/I$. Their relative map is ind-etale and hence flat by the stability\nlemma for ind-etale algebras.",
+    "uses": [
+     "def-exc-ind-etale-closed-lift",
+     "lem-exc-closed-lift-filtered",
+     "lem-exc-etale-algebra-lift"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Let $J$ be the kernel of the preceding surjection $C/IC\\to\\overline C$.\nFlatness of the quotient implies that for each $x\\in J$ one has $x=ex$ for\nan $e\\in J$: tensor the injection $(x)\\subset C/IC$ with the quotient to\nobtain $(x)\\cap J=J(x)$. Lift $e$ to $C$. The element $1-e$ maps to one in\n$\\overline C$, so [lem-exc-closed-lift-units] makes it invertible in\n$C/IC$. Thus $x=0$, proving the reduction isomorphism.",
+    "uses": [
+     "lem-exc-closed-lift-units"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

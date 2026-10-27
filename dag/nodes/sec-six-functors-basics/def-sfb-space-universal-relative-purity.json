@@ -1,0 +1,144 @@
+{
+ "id": "def-sfb-space-universal-relative-purity",
+ "kind": "definition",
+ "title": "Universal relative purity by absence of associated-point impurities",
+ "statement": "Work over $\\operatorname{Spec}\\mathbf Z$ with schemes [def-pc-scheme], algebraic spaces [def-trf-algebraic-space] and the universes of [def-weil-size-convention]. Use sheaf fibre products [lem-trf-space-fibre-products-etale-covers], quasi-coherent modules on small etale ringed sites [def-trf-space-quasi-coherent-module], and tensor pullback and direct image [def-trf-space-etale-module-functors]. Let $X$ be an algebraic space and $Y$ a scheme, and let $f:X\\to Y$ be finite type and quasi-separated, with finite type as in [def-sfb-space-morphism-properties] and quasi-separated meaning that the diagonal is quasi-compact. Let $M$ be a finite type quasi-coherent $\\mathcal O_X$-module; finite type means locally finitely generated on etale scheme charts. For a scheme $B\\to Y$ put $X_B=X\\times_YB$, let $M_B$ be tensor pullback, and let $f_B:X_B\\to B$ be the projection. Define $\\operatorname{Ass}_{X_B/B}(M_B)$ to consist of the images of points $u\\in\\operatorname{Ass}_{U/B}(M_B|_U)$ as $U\\to X_B$ ranges over representable etale scheme charts, where the scheme relative assassin is [def-trf-relative-assassin]. Use the point classes and topology of [def-a1-space-point-topology]. A specialization $b\\prime\\leadsto b$ means $b\\in\\overline{\\{b\\prime\\}}$. An impurity consists of a scheme $B\\to Y$, such a specialization in $B$, and $\\xi\\in\\operatorname{Ass}_{X_B/B}(M_B)$ with $f_B(\\xi)=b\\prime$ and $b\\notin f_B(\\overline{\\{\\xi\\}})$. The module $M$ is universally pure relative to $Y$ if there are no impurities: for every such $B,b\\prime,b,\\xi$, there is a point $\\theta\\in\\overline{\\{\\xi\\}}\\subseteq|X_B|$ with $f_B(\\theta)=b$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-flat.tex",
+  "place": "Tags 0CV8 (definition-impurity), 0CVD (definition-pure), clauses (2) and (4); relative assassin by etale charts: spaces-divisors.tex Tag 0CV0 (definition-relative-weak-assassin), using lemma-relative-assassin and locally Noetherian fibres of a finite type quasi-separated morphism."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-morphism-properties",
+  "def-trf-relative-assassin",
+  "def-a1-space-point-topology",
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-space-sheaf-fibre-product",
+  "def-trf-space-module-scheme-restriction"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Universal relative purity of a quasi coherent module means every fibrewise associated point specializes over every specialization after any scheme base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget (AlgebraicGeometry.topologically @SpecializingMap)\", \"doc\": \"The property of being a specializing map for scheme morphisms is Zariski local at the target. This means that if a morphism $ f : X \\to Y $ of schemes has the property that its underlying continuous ma\"}\n  {\"name\": \"AlgebraicGeometry.universallyClosed_eq_universallySpecializing\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"@AlgebraicGeometry.UniversallyClosed =\\n  (AlgebraicGeometry.topologically @SpecializingMap).universally ⊓ @AlgebraicGeometry.QuasiCompact\", \"doc\": \"A morphism of schemes is universally closed if and only if it is both quasi-compact and universally specializing. Universally specializing means that for every base change, the induced morphism preser\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  (AlgebraicGeometry.topologically @SpecializingMap).universally f → AlgebraicGeometry.ValuativeCriterion.Existence f\", \"doc\": \"If a morphism of schemes is universally specializing (topologically), then it satisfies the valuative criterion for existence. Specifically, for any valuative commutative square involving the morphism\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOverMapStalkSpecializesCommRingCatPresheaf\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x y : ↥X} (h : x ⤳ y),\\n  AlgebraicGeometry.Scheme.Hom.IsOver (AlgebraicGeometry.Spec.map (X.presheaf.stalkSpecializes h)) X\", \"doc\": \"For any scheme $X$ and points $x,y$ in $X$ where $x$ specializes to $y$, the morphism of schemes obtained by applying the spectrum map to the specialization-induced morphism between stalks of the stru\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.ValuativeCriterion.Existence f → SpecializingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes satisfies the valuative criterion for existence, then $ f $ is a specializing map, meaning that specialization relations in the codomain can be lifted to the do\"}\n  {\"name\": \"Module.stableUnderSpecialization_support\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Module\", \"type\": \"∀ {R : Type u_1} {M : Type u_3} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  StableUnderSpecialization (Module.support R M)\", \"doc\": \"For a module $ M $ over a commutative semiring $ R $, the support of $ M $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ is stable under specialization. This means that if a prime ideal $ \\\\mathfrak\"}\n  {\"name\": \"AlgebraicGeometry.Flat.generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then the underlying continuous map $ f $ satisfies the generalizing property: for any $ x \\\\in X $ and $ y \\\\in Y $ such that $ y $ specializes to $ f(x\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.stalkSpecializes_stalk_to_fiber_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {x y : PrimeSpectrum R} (h : x ⤳ y) {Z : CommRingCat}\\n  (h_1 : { carrier := Localization.AtPrime x.asIdeal, commRing := OreLocalization.instCommRing } ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp ((AlgebraicGeometry.Spec.structureSheaf R).presheaf.stalkSpecializes \", \"doc\": \"For a commutative ring $ R $, points $ x, y $ in $ \\\\operatorname{Spec}(R) $ with $ x $ specializing to $ y $, and a ring homomorphism $ h_1 $ from the localization at $ x $ to a commutative ring $ Z $\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: specialization of module support and universally closed scheme morphisms do not define absence of relative associated-point impurities for modules on algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Definition of universally pure sheaves relative to a morphism of algebraic spaces using impurities and associated points",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyInjective\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is universally injective if for every base change, the induced morphism on the underlying topological spaces is injective.\"}\n  {\"name\": \"AlgebraicGeometry.universallyInjective_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective\", \"type\": \": @UniversallyInjective = universally (topologically (Injective ·))\", \"doc\": \"A morphism of schemes is universally injective if and only if it is injective on the underlying topological space and this injectivity is preserved under all base changes.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.UniversallyOpen f → Sort u_1} →\\n      (t : AlgebraicGeometry.UniversallyOpen f) →\\n        ((universally_isOpenMap : (AlgebraicGeometry.topologically @IsOpenMap).universally f) → motive ⋯) → motive t\", \"doc\": \"For a morphism $ f: X \\\\to Y $ of schemes that is universally open, this function enables defining functions on the property by leveraging the fact that for every base change $ Y' \\\\to Y $, the induced \"}\n  {\"name\": \"AlgebraicGeometry.UniversallyInjective.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] x =>\\n          Function.Injective x).universally\\n      f →\\n    AlgebraicGeometry.UniversallyInjective f\", \"doc\": \"If for every base change, the induced continuous map on topological spaces is injective, then the morphism $ f: X \\to Y $ of schemes is universally injective.\"}\n  {\"name\": \"AlgebraicGeometry.universally_isLocalAtSource\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtSource P],\\n  AlgebraicGeometry.IsZariskiLocalAtSource P.universally\", \"doc\": \"If a morphism property $ P $ on schemes is Zariski-local at the source, then the property that $ P $ is preserved under all pullbacks (denoted $ P.universally $) is also Zariski-local at the source. T\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is universally open if for every base change $ Y' \\\\to Y $, the induced morphism $ X \\\\times_Y Y' \\\\to Y' $ is an open map of topological spaces.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: specialization of module support and universally closed scheme morphisms do not define absence of relative associated-point impurities for modules on algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Pure\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: specialization of module support and universally closed scheme morphisms do not define absence of relative associated-point impurities for modules on algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "impurit|universally.?pure|relative.?purity",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: specialization of module support and universally closed scheme morphisms do not define absence of relative associated-point impurities for modules on algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A family of coherent sheaves is pure if associated points of fibres cannot escape under specialization",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Module.stableUnderSpecialization_support\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Module\", \"type\": \"∀ {R : Type u_1} {M : Type u_3} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  StableUnderSpecialization (Module.support R M)\", \"doc\": \"For a module $ M $ over a commutative semiring $ R $, the support of $ M $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ is stable under specialization. This means that if a prime ideal $ \\\\mathfrak\"}\n  {\"name\": \"skyscraperPresheafStalkOfNotSpecializes\", \"module\": \"Mathlib/Topology/Sheaves/Skyscraper\", \"type\": \"{X : TopCat} →\\n  (p₀ : ↑X) →\\n    [inst : (U : TopologicalSpace.Opens ↑X) → Decidable (p₀ ∈ U)] →\\n      {C : Type v} →\\n        [inst_1 : CategoryTheory.Category.{u, v} C] →\\n          (A : C) →\\n            [inst_2 : CategoryTheory.Limits.HasTerminal C] →\\n              [inst_3 : CategoryTheory.Limits.H\", \"doc\": \"For a topological space $X$, a point $p_0$, and a category $\\\\mathcal{C}$ with a terminal object, if $p_0$ does not specialize to a point $y$ (i.e., $y$ is not in the closure of $\\\\{p_0\\\\}$), then the st\"}\n  {\"name\": \"skyscraperPresheafStalkOfNotSpecializesIsTerminal\", \"module\": \"Mathlib/Topology/Sheaves/Skyscraper\", \"type\": \"{X : TopCat} →\\n  (p₀ : ↑X) →\\n    [inst : (U : TopologicalSpace.Opens ↑X) → Decidable (p₀ ∈ U)] →\\n      {C : Type v} →\\n        [inst_1 : CategoryTheory.Category.{u, v} C] →\\n          (A : C) →\\n            [inst_2 : CategoryTheory.Limits.HasTerminal C] →\\n              [inst_3 : CategoryTheory.Limits.H\", \"doc\": \"For a topological space $X$, a point $p_0$, and a category $\\\\mathcal{C}$ with a terminal object, if $p_0$ does not specialize to a point $y$ (i.e., $y$ is not in the closure of $\\\\{p_0\\\\}$), then the st\"}\n  {\"name\": \"skyscraperPresheafCoconeIsColimitOfNotSpecializes\", \"module\": \"Mathlib/Topology/Sheaves/Skyscraper\", \"type\": \"{X : TopCat} →\\n  (p₀ : ↑X) →\\n    [inst : (U : TopologicalSpace.Opens ↑X) → Decidable (p₀ ∈ U)] →\\n      {C : Type v} →\\n        [inst_1 : CategoryTheory.Category.{u, v} C] →\\n          (A : C) →\\n            [inst_2 : CategoryTheory.Limits.HasTerminal C] →\\n              {y : ↑X} → ¬p₀ ⤳ y → CategoryTheo\", \"doc\": \"In a topological space $X$, if a point $p_0$ does not specialize to a point $y$, then the cocone associated with the skyscraper presheaf at $p_0$ with values in a category $\\\\mathcal{C}$ having a termi\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"ModuleCat.Tilde.exists_const\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R)\\n  (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (s : ↑(M.tildeInModuleCat.obj (Opposite.op U))),\\n  ∀ x ∈ U,\\n    ∃ V,\\n      ∃ (_ : x ∈ V),\\n        ∃ i f g,\\n          ∃ (hg : ∀ x ∈ V, g ∈ x.asIdeal.primeCompl),\\n            Mo\", \"doc\": \"For any section $ s $ of the sheaf $ \\\\widetilde{M} $ over an open subset $ U \\\\subseteq \\\\operatorname{Spec}(R) $, and for any point $ x \\\\in U $, there exists an open neighborhood $ V \\\\subseteq U $ of $\"}\n  {\"name\": \"skyscraperPresheafCoconeOfSpecializes_pt\", \"module\": \"Mathlib/Topology/Sheaves/Skyscraper\", \"type\": \"∀ {X : TopCat} (p₀ : ↑X) [inst : (U : TopologicalSpace.Opens ↑X) → Decidable (p₀ ∈ U)] {C : Type v}\\n  [inst_1 : CategoryTheory.Category.{u, v} C] (A : C) [inst_2 : CategoryTheory.Limits.HasTerminal C] {y : ↑X}\\n  (h : p₀ ⤳ y), (skyscraperPresheafCoconeOfSpecializes p₀ A h).pt = A\", \"doc\": \"Given a topological space $X$, a point $p_0$ specializing to $y$, and a skyscraper presheaf at $p_0$ valued in an object $A$ of a category with a terminal object, the apex of the associated cocone is \"}\n  {\"name\": \"skyscraperSheaf\", \"module\": \"Mathlib/Topology/Sheaves/Skyscraper\", \"type\": \"{X : TopCat} →\\n  (p₀ : ↑X) →\\n    [(U : TopologicalSpace.Opens ↑X) → Decidable (p₀ ∈ U)] →\\n      {C : Type v} →\\n        [inst : CategoryTheory.Category.{u, v} C] → C → [CategoryTheory.Limits.HasTerminal C] → TopCat.Sheaf C X\", \"doc\": \"The skyscraper sheaf at point $ p_0 $ in a topological space $ X $, with value $ A $ in a category $ \\\\mathcal{C} $ having a terminal object, is the sheaf defined by the skyscraper presheaf that assign\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: specialization of module support and universally closed scheme morphisms do not define absence of relative associated-point impurities for modules on algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-proper-support-universal-flattening",
+  "date": "2026-10-24",
+  "group": "Q49"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tags 0CX4 (situation-existence), 0CXB (theorem-existence). Supporting input in 0CXB: Tags 0CVI (lemma-proper-pure), 0CX2 (lemma-when-universal-flattening), part (1), and 0CWX (situation-flat), defining the flat base-change functor; scheme representability: spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme), as invoked in 0CXB (theorem-existence). Subinput: Tags 0CV8 (definition-impurity), 0CVD (definition-pure), clauses (2) and (4); relative assassin by etale charts: spaces-divisors.tex Tag 0CV0 (definition-relative-weak-assassin), using lemma-relative-assassin and locally Noetherian fibres of a finite type quasi-separated morphism.",
+   "via": [
+    "lem-sfb-space-proper-support-universal-flattening",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "def-sfb-space-universal-relative-purity",
+  "worker": "stage1",
+  "summary": "Checked the definition against Stacks 0CV8 and 0CVD(2),(4), and its chart relative assassin against spaces-divisors definition-relative-weak-assassin and lemma-relative-assassin with V=B. All constituent notions are supplied by the nine existing statement dependencies or defined inline; no new nodes or theorem claims are needed. Made X explicitly an algebraic space, preserving the predicate and all hypotheses. Confirmed no project attachment and no Mathlib match after five logged searches, including two semantic phrasings. Proof and proof dependencies remain empty because this is a definition.",
+  "blueprint": "Inherited direct-image/compactification preservation prerequisite chain, through proper-support universal flattening. Read the current latest sec-six-functors-basics/sk-thm-sf-ctf-stability proof, paragraph beginning \"Proper direct image preserves\". The item supplies the relative-purity predicate for this existing chain and does not replace a unit step. The inherited from.node is null (blueprint_refs.py ancestor prints None); retained the existing explicit place and via list. Whole-blueprint searches found no equivalent definition.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NI-7e8e738f0",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-7e8e738f0 (reviewer sub-agent of L); spot-checked: Diffed the head item against clones/live and clones/side-live. The one statement change makes X explicitly an algebraic space; the base never gave X a type. Otherwise status goes unsplit→split and split_report is added. No new nodes, no proof steps, no unit edits. stmt_deps, source, blueprint and mathlib_searches are unchanged. No repair note exists for this item and no SGA source is cited. Source checks: Stacks spaces-flat situation-pre-pure (quasi-separated implies decent, per its footnote), definition-impurity 0CV8 and its no-θ rephrasing (closure in |X_B|, specialization direction b∈closure of {b'}), and definition-pure 0CVD (2)+(4) as the union over y. The chart assassin matches spaces-divisors 0CV0 with lemma-relative-assassin (3) taking V=B; Ass=WeakAss because U_b is locally Noetherian when U→B is locally of finite type. Read all nine stmt_deps statements; each supplies what the item uses (fibre products, QCoh on X_et, f^*, finite type, scheme Ass_{X/S}, |X| and its topology). Citers (proper-support-universal-purity, pure-dimension-flatness-representability) use Y a scheme and f finite type quasi-separated or stronger, so the target is not weakened. Small cases checked: M=0, the identity, D(t)⊂A¹ (an impurity), A¹_k (pure), proper-support i_*O_Z (pure), and b=b'. Inherited blueprint.from.node=null is a base fact and is left as a maintainer note. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceUniversalRelativePurity",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.IsUniversallyPureRelativeToScheme",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.relativeAssassin",
+   "AlgebraicGeometry.AlgebraicSpace.IsImpurityOverScheme",
+   "AlgebraicGeometry.AlgebraicSpace.IsUniversallyPureRelativeToScheme"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceUniversalRelativePurity.lean",
+  "statement": "def IsUniversallyPureRelativeToScheme {X : AlgebraicSpace (Spec (CommRingCat.of (ULift.{u} ℤ)))} (Y : Over (Spec (CommRingCat.of (ULift.{u} ℤ)))) (f : X ⟶ schemeSpace Y) (_hf : MapIsFiniteType f) (_hqs : MapIsQuasiCompact (pullback.diagonal f.hom.hom)) (M : X.QCoh) (_hM : SheafOfModules.IsFiniteType M.obj) : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q108",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The module defines the chartwise relative assassin and impurity predicate, and universal purity by specialization lifts after every scheme base change. Existing schemeSpace, enlargedFibreProduct/enlargedFibreProductFst and schemeRestriction are reused; their landed definition owners are added to stmt_deps. The original statement is unchanged. All definition data are explicit; no new theorem or sorry is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c71e3870f",
+  "group": "Q108",
+  "result": "pass",
+  "note": "Every clause matches Stacks 0CV8/0CVD(2),(4)/0CV0 and the node. f is finite type via MapIsFiniteType, quasi-separated as MapIsQuasiCompact of the diagonal; M is X.QCoh with SheafOfModules.IsFiniteType. Every base change B→Y uses the actual Yoneda map, enlargedFibreProduct, the actual snd projection and moduleTensorPullback of the fst projection. The relative assassin is the union over representable étale charts of Scheme.Modules.relativeAssassin along the canonical Yoneda-preimage chart map, with schemeRestriction. The specialization is b ∈ closure{b'}; θ lies in closure{ξ} in pointTopologicalSpace with mapPoint equal to the schemePointMap class; quantifier order is correct. Edge cases (empty, M=0, b=b', identity, non-Noetherian B, D(t)⊂A¹ impurity) are fine. Node diff vs side-live: only lean plus 3 landed definition-owner stmt_deps, all on base. No space-level assassin or purity duplicate in Sheaf/WeilConjectures/Mathlib. lean.statement is verbatim. No sorry, no theorems, docstrings carry source and blueprint. Advisory: Point/mapPoint owners are cited only transitively; IsImpurityOverScheme is an unused but correct helper. No recompile (no file changed)."
+ }
+}

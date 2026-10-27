@@ -1,0 +1,130 @@
+{
+ "id": "lem-sfb-finite-coefficient-serre-ind-heart",
+ "kind": "statement",
+ "title": "Finite coefficient weak Serre hull has ind-finite-heart presentations",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "statement": "Let A be a finite commutative discrete topological ring of Type 0, and Λ any commutative condensed ring isomorphic as a ring object to P ↦ C(P,A). Let X be any quasi-compact quasi-separated scheme [def-pc-scheme] with the fixed pro-etale site and universe [def-weil-pbc-proetale-site, def-weil-size-convention]. Every internal Λ_X-module in the weak Serre coproduct closure [sk-def-localizing-closure] of finite constant scalar-model constructible modules [sk-def-sfb-constructible] is an ambient small filtered colimit of finite constructible complex hearts [def-sfb-finite-constructible-complex-heart-presentations]. No Noetherian hypothesis or torsion annihilator is needed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "Refinement (2), first paragraph; the finite discrete subcase of the coefficient-transfer obligation. Stacks Project Tags 03SA(3), 099Y and 09B1 supply the classical comparison route."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-constructible",
+  "sk-def-localizing-closure",
+  "def-sfb-finite-constructible-complex-heart-presentations",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "Lift A to the scheme universe and construct explicitly the isomorphism between the two condensed coefficient encodings, by pointwise composition with the ULift ring equivalence. Compose with the supplied ring-object isomorphism. Restriction of scalars along this isomorphism is an exact equivalence. Constructibility transport and weak-Serre minimality place the transported module in the normalized weak Serre hull.",
+   "uses": [
+    "lem-sfb-condensed-coefficient-iso-constructible",
+    "sk-def-sfb-change-of-scalars",
+    "sk-def-localizing-closure"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the normalized finite discrete presentation theorem. Map its filtered cocone back along inverse restriction of scalars, and use the comap composition and identity isomorphisms to identify its colimit with M. The stages remain constructible, hence are finite complex hearts by their degree-zero single complexes.",
+   "uses": [
+    "lem-sfb-finite-discrete-serre-ind-constructible",
+    "lem-sfb-constructible-finite-heart",
+    "lem-sfb-condensed-coefficient-iso-constructible"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-condensed-coefficient-iso-constructible",
+  "sk-def-sfb-change-of-scalars",
+  "sk-def-localizing-closure",
+  "lem-sfb-finite-discrete-serre-ind-constructible",
+  "lem-sfb-constructible-finite-heart"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "Refinement (2), first paragraph; the finite discrete subcase of the coefficient-transfer obligation. Stacks Project Tags 03SA(3), 099Y and 09B1 supply the classical comparison route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restricting scalars along an isomorphism of condensed coefficient rings transports constructible filtered colimit presentations",
+   "results": "8 hits: instHasColimitsCondensedMod, CondensedMod, Condensed.profiniteSolid, Condensed.profiniteFree, CondensedMod.IsSolid, CondensedMod.LocallyConstant.functor, LightCondMod.isDiscrete_tfae, Condensed.isoLocallyConstantOfIsColimit",
+   "date": "2026-10-25",
+   "verdict": "No complete geometric match. Single-complex homology and abstract filtered-colimit APIs are used where applicable; the coefficient and constructibility argument remains project-specific."
+  },
+  {
+   "tool": "loogle",
+   "query": "ObjectProperty.ind",
+   "results": "0 hits: ; loogle: unknown identifier 'ObjectProperty.ind'",
+   "date": "2026-10-24",
+   "verdict": "No complete geometric match. Single-complex homology and abstract filtered-colimit APIs are used where applicable; the coefficient and constructibility argument remains project-specific."
+  },
+  {
+   "tool": "grep",
+   "query": "IsClosedUnderExtensions|singleObjHomologySelfIso|ind_inverseImage",
+   "results": "23 hits: Mathlib/CategoryTheory/ObjectProperty/Ind.lean, Mathlib/CategoryTheory/ObjectProperty/Ind.lean, Mathlib/CategoryTheory/ObjectProperty/Ind.lean, Mathlib/CategoryTheory/ObjectProperty/Extensions.lean, Mathlib/CategoryTheory/ObjectProperty/Extensions.lean, Mathlib/CategoryTheory/ObjectProperty/Extensions.lean, Mathlib/CategoryTheory/ObjectProperty/Extensions.lean, Mathlib/CategoryTheory/ObjectProperty/Extensions.lean",
+   "date": "2026-10-24",
+   "verdict": "No complete geometric match. Single-complex homology and abstract filtered-colimit APIs are used where applicable; the coefficient and constructibility argument remains project-specific."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite discrete coefficient constructible sheaves on a qcqs scheme generate a weak Serre coproduct hull contained in filtered colimits of finite constructible complex hearts, and derived sections preserve the resulting uniform vanishing bound",
+   "results": "8 hits: CategoryTheory.Sheaf.hasFilteredColimitsOfSize, AlgebraicGeometry.Scheme.Modules.instHasColimits, CategoryTheory.Sheaf.instHasFiniteCoproducts, instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology, CategoryTheory.Sheaf.instHasColimitsOfSize, CategoryTheory.Sheaf.instHasFiniteColimits, SheafOfModules.GeneratingSections.IsFiniteType, CategoryTheory.Sheaf.isColimitSheafifyCocone",
+   "date": "2026-10-25",
+   "verdict": "Only generic sheaf colimits and finite-type definitions were found, not the finite coefficient Serre-to-ind presentation or its cohomological bound."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TorsionCdTopologicalSerreTransfer",
+  "date": "2026-10-25",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-torsion-cd-topological-serre-transfer",
+   "place": "Finite discrete coefficient branch and conditional ind-finite-heart assembly",
+   "via": [
+    "lem-sfb-torsion-cd-topological-serre-transfer"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteCoefficientSerreIndHeart",
+  "file": "lean/Sheaf/Paper/FiniteCoefficientSerreIndHeart.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteCoefficient_serre_is_indFiniteHeart",
+  "statement": "theorem finiteCoefficient_serre_is_indFiniteHeart\n    (A : Type) [CommRing A] [TopologicalSpace A] [IsTopologicalRing A]\n    [Finite A] [DiscreteTopology A]\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ]\n    (e : Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj A))\n    (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]\n    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))\n    (hM : ObjectProperty.weakSerreCoproductClosure.{u + 1}\n      (IsConstantModelConstructible Λ X) M) :\n    indFiniteConstructibleComplexHearts Λ X M",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261025T011040-L-3638342",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261025T011040-L-3638342",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

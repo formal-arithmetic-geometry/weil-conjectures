@@ -1,0 +1,400 @@
+{
+ "id": "lem-sfb-dg-compact-bimodule-full-faithfulness",
+ "kind": "statement",
+ "title": "Compact DG bimodules with correct self extensions give fully faithful tensor",
+ "statement": "Work in the universes of [def-weil-size-convention]. A differential graded algebra over $\\mathbf Z$ means an associative unital graded ring $A=\\bigoplus_{i\\in\\mathbf Z}A^i$ with additive differential $d:A^i\\to A^{i+1}$ satisfying $d^2=0$ and $d(ab)=d(a)b+(-1)^ia\\,d(b)$ for $a\\in A^i$. A right differential graded $A$-module is a graded right module $M$ with $d^2=0$ and $d(ma)=d(m)a+(-1)^jm\\,d(a)$ for $m\\in M^j$. Write $D(A,d)$ for the homotopy category of these modules localized at the maps inducing isomorphisms on all cohomology groups; triangles are the distinguished mapping-cone triangles. Let $(A,d)$ and $(B,d)$ be such differential graded algebras. A differential graded $(A,B)$-bimodule $N$ has commuting unital graded left $A$- and right $B$-actions, with $d(an)=d(a)n+(-1)^{|a|}a\\,d(n)$ and $d(nb)=d(n)b+(-1)^{|n|}n\\,d(b)$ for homogeneous elements. Use the derived tensor functor $T_N=-\\otimes_A^{\\mathbf L}N$ of [lem-sfb-dg-bimodule-derived-adjunction]. Suppose that $N$ is compact in $D(B,d)$ [def-pc-compact-object], and for every $k\\in\\mathbf Z$ the map\n$$H^k(A)\\longrightarrow\\operatorname{Hom}_{D(B,d)}(N,N[k])$$\ninduced by the left $A$-action is an isomorphism of abelian groups. Explicitly, a degree-$k$ cycle $a$ gives the degree-$k$ right $B$-linear map $n\\mapsto an$, regarded as a map $N\\to N[k]$, and its class depends only on $[a]$. Then $T_N:D(A,d)\\to D(B,d)$ is fully faithful, meaning it induces a bijection on every morphism set. No generation assumption on $N$ is made.",
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09R9, lemma-tensor-with-compact-fully-faithful."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "lem-sfb-dg-bimodule-derived-adjunction",
+  "def-pc-compact-object"
+ ],
+ "proof": [
+  {
+   "text": "Put $T=T_N$ and $U=R\\operatorname{Hom}_B(N,-)$. The specified adjunction gives exact functors $T\\dashv U$ with shift-compatible unit $\\eta$. The DG categories $D(A,d)$ and $D(B,d)$ are triangulated and have all small coproducts, represented by DG direct sums. As a left adjoint, $T$ preserves these coproducts. These are the categorical hypotheses needed below, with actual target $\\mathcal T=D(B,d)$.",
+   "uses": [
+    "lem-sfb-dg-bimodule-derived-adjunction",
+    "lem-sfb-dg-derived-admissible-triangles",
+    "lem-sfb-dg-sequential-colimit-triangle",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09R9, lemma-tensor-with-compact-fully-faithful, proof; Tag 09LT, lemma-tensor-hom-adjoint."
+   }
+  },
+  {
+   "text": "Each $A[k]$ is semi-free with the one-step filtration $0\\subset A[k]$. The semi-free tensor computation therefore identifies $T(A[k])$ with $A[k]\\otimes_A N$. The map $x\\otimes n\\mapsto xn$ identifies this DG $B$-module with $N[k]$; its inverse is $n\\mapsto1\\otimes n$. Balancing proves that they are inverse, and the differential on both sides is $(-1)^k d_N$ after this identification. For a cycle $a\\in A^k$, the DG map $f_a:A\\to A[k]$, $x\\mapsto ax$, is sent by $T$ to $f_a\\otimes\\mathrm{id}_N$, hence to the map $N\\to N[k]$, $n\\mapsto an$. Thus the identification includes the specified action map on morphisms.",
+   "uses": [
+    "lem-sfb-dg-semifree-bimodule-tensor-computation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LS, lemma-derived-bc, proof; Tag 0FQN, remark-shift-tensor-no-sign; Tag 09R9, last proof sentence."
+   }
+  },
+  {
+   "text": "For every $k$, the free-module formula identifies $H^k(A)$ with $\\operatorname{Hom}_{D(A,d)}(A,A[k])$, taking $[a]$ to $f_a$. Under adjunction, postcomposition with $\\eta_{A[k]}$ corresponds to applying $T$ to this morphism: naturality gives $\\eta_{A[k]}f=UT(f)\\eta_A$, which is the adjunction transpose of $T(f)$. By step 2 this is exactly the assumed isomorphism $H^k(A)\\to\\operatorname{Hom}_{D(B,d)}(N,N[k])$. Hence $\\operatorname{Hom}(A,\\eta_{A[k]})$ is bijective. Shift compatibility of the unit identifies it with $\\operatorname{Hom}(A,\\eta_A[k])$.",
+   "uses": [
+    "lem-sfb-dg-free-module-hom-cohomology",
+    "lem-sfb-dg-bimodule-derived-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09R9, lemma-tensor-with-compact-fully-faithful, proof; Tag 09LT, lemma-tensor-hom-adjoint."
+   }
+  },
+  {
+   "text": "Choose a DG $A$-module representative $C$ for $UT(A)$. The shifted-free Hom formula at shift zero represents $\\eta_A$ by a DG map $u:A\\to C$. At every shift $k$, naturality of the free-module cohomology formula identifies $\\operatorname{Hom}(A,u[k])$ with $H^k(u)$. Step 3 makes all these maps bijective. Thus $u$ is a quasi-isomorphism, which is inverted in $D(A,d)$ by its definition. Consequently $\\eta_A$ is an isomorphism.",
+   "uses": [
+    "lem-sfb-dg-free-shift-derived-hom",
+    "lem-sfb-dg-free-module-hom-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09R9, lemma-tensor-with-compact-fully-faithful, proof; Tag 09LT, lemma-tensor-hom-adjoint."
+   }
+  },
+  {
+   "text": "Apply the compact-unit propagation lemma to $T\\dashv U$ and $\\mathcal T=D(B,d)$. Step 1 supplies its exactness, shifts and coproduct hypotheses, step 2 gives $T(A)\\cong N$, and step 4 gives the invertible unit at $A$. The assumed compactness of $N$ therefore gives its compactness hypothesis. Its conclusion is that every $\\eta_M$ is invertible and $T_N$ is fully faithful. This lemma requires no generation of $D(B,d)$ by $N$, so no such assumption has entered the argument.",
+   "uses": [
+    "lem-sfb-dg-adjunction-compact-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09R9, proof, reduction by compactness and property-(P) resolutions; Tag 0FQE, remark-P-resolution. The existing compact-unit lemma packages this argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-dg-bimodule-derived-adjunction",
+  "lem-sfb-dg-derived-admissible-triangles",
+  "lem-sfb-dg-sequential-colimit-triangle",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-sfb-dg-semifree-bimodule-tensor-computation",
+  "lem-sfb-dg-free-module-hom-cohomology",
+  "lem-sfb-dg-free-shift-derived-hom",
+  "lem-sfb-dg-adjunction-compact-unit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09R9, lemma-tensor-with-compact-fully-faithful; its property-(P) extension is the existing lem-sfb-dg-adjunction-compact-unit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Cc]ompact.*[Bb]imodule|[Bb]imodule.*[Ff]ully|DGAlgebra|DGModule",
+   "results": {
+    "t": "2026-10-23T23:56:17Z",
+    "tool": "grep",
+    "query": "[Cc]ompact.*[Bb]imodule|[Bb]imodule.*[Ff]ully|DGAlgebra|DGModule",
+    "sub": "CategoryTheory",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: generic full-faithful functor facts and ordinary derived single-functor full faithfulness do not assert the DG compact-bimodule criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCompactObject\", \"FullyFaithful\"",
+   "results": {
+    "t": "2026-10-23T23:56:18Z",
+    "tool": "loogle",
+    "query": "\"IsCompactObject\", \"FullyFaithful\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: generic full-faithful functor facts and ordinary derived single-functor full faithfulness do not assert the DG compact-bimodule criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor with a compact bimodule is fully faithful if all shifted endomorphisms agree with the cohomology of the source DG algebra",
+   "results": {
+    "t": "2026-10-23T23:56:18Z",
+    "tool": "leansearch",
+    "query": "Derived tensor with a compact bimodule is fully faithful if all shifted endomorphisms agree with the cohomology of the source DG algebra",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.FullyFaithful.ofFullyFaithful",
+     "CategoryTheory.Equivalence.fullyFaithfulToEssImage",
+     "DerivedCategory.instFaithfulSingleFunctor",
+     "DerivedCategory.instFaithfulFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh",
+     "DerivedCategory.instFullFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh",
+     "CategoryTheory.Adjunction.fullyFaithfulLOfCompIsoId",
+     "CategoryTheory.Functor.fullyFaithfulOfReflective",
+     "DerivedCategory.instFullSingleFunctor"
+    ],
+    "digest": "0384c713f2a19a7b"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: generic full-faithful functor facts and ordinary derived single-functor full faithfulness do not assert the DG compact-bimodule criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compact differential graded bimodule with cohomology algebra equal to its derived self extensions induces a fully faithful derived tensor functor",
+   "results": {
+    "t": "2026-10-23T23:56:21Z",
+    "tool": "leanfinder",
+    "query": "A compact differential graded bimodule with cohomology algebra equal to its derived self extensions induces a fully faithful derived tensor functor",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory",
+     "DerivedCategory.instFullSingleFunctor",
+     "DerivedCategory.instLinearCochainComplexIntQ",
+     "DerivedCategory.instFullFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh",
+     "CategoryTheory.hasExt_of_hasDerivedCategory",
+     "DerivedCategory.instEssSurjCochainComplexIntQ",
+     "CochainComplex.IsKProjective.Qh_map_bijective",
+     "DerivedCategory.instFaithfulFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh"
+    ],
+    "digest": "afd7fdc9ee5e0434"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: generic full-faithful functor facts and ordinary derived single-functor full faithfulness do not assert the DG compact-bimodule criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived tensor functor of a DG bimodule N is fully faithful when N is compact and Hn A equals Hom N N shifted by n",
+   "results": {
+    "t": "2026-10-23T23:56:23Z",
+    "tool": "leanfinder",
+    "query": "The derived tensor functor of a DG bimodule N is fully faithful when N is compact and Hn A equals Hom N N shifted by n",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DerivedCategory.instFullSingleFunctor",
+     "CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory",
+     "DerivedCategory.instFullFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh",
+     "DerivedCategory.instFaithfulFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh",
+     "CategoryTheory.Tor'",
+     "CochainComplex.IsKProjective.Qh_map_bijective",
+     "CategoryTheory.Tor'_obj_obj",
+     "CategoryTheory.Tor"
+    ],
+    "digest": "195bf08bf249aca2"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: generic full-faithful functor facts and ordinary derived single-functor full faithfulness do not assert the DG compact-bimodule criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "DGAlgebra|DGModule|compact.*bimodule|bimodule.*fully",
+   "results": {
+    "t": "2026-10-24T00:36:35Z",
+    "tool": "grep",
+    "query": "DGAlgebra|DGModule|compact.*bimodule|bimodule.*fully",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: singleFunctor full faithfulness and ordinary adjunction criteria do not assert this DG compact-bimodule self-extension criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor is fully faithful when its value on the regular dg module is compact and has the same shifted endomorphisms",
+   "results": {
+    "t": "2026-10-24T00:36:36Z",
+    "tool": "leansearch",
+    "query": "Derived tensor is fully faithful when its value on the regular dg module is compact and has the same shifted endomorphisms",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DerivedCategory.instFaithfulSingleFunctor",
+     "CategoryTheory.Equivalence.fullyFaithfulToEssImage",
+     "CategoryTheory.Functor.fullyFaithfulOfReflective",
+     "CondensedMod.LocallyConstant.fullyFaithfulFunctor",
+     "CategoryTheory.Adjunction.fullyFaithfulROfCompIsoId",
+     "LightCondMod.LocallyConstant.fullyFaithfulFunctor",
+     "CategoryTheory.instIsIsoFunctorToRightDerivedZero",
+     "DerivedCategory.instFullFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh"
+    ],
+    "digest": "ece69cf7e5f15a49"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: singleFunctor full faithfulness and ordinary adjunction criteria do not assert this DG compact-bimodule self-extension criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCompactObject\", \"FullyFaithful\"",
+   "results": {
+    "t": "2026-10-24T00:36:36Z",
+    "tool": "loogle",
+    "query": "\"IsCompactObject\", \"FullyFaithful\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: singleFunctor full faithfulness and ordinary adjunction criteria do not assert this DG compact-bimodule self-extension criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compact differential graded bimodule with correct self extension groups induces a fully faithful derived tensor functor",
+   "results": {
+    "t": "2026-10-24T00:36:37Z",
+    "tool": "leanfinder",
+    "query": "A compact differential graded bimodule with correct self extension groups induces a fully faithful derived tensor functor",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory",
+     "DerivedCategory.instFullSingleFunctor",
+     "DerivedCategory.instLinearCochainComplexIntQ",
+     "CochainComplex.IsKProjective.Qh_map_bijective",
+     "DerivedCategory.instFullFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh",
+     "DerivedCategory.instLinearHomotopyCategoryIntUpQh",
+     "DerivedCategory.instFaithfulFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh",
+     "CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory"
+    ],
+    "digest": "63914f53b0fd0529"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: singleFunctor full faithfulness and ordinary adjunction criteria do not assert this DG compact-bimodule self-extension criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Morita full faithfulness follows from compactness of the image of a regular differential graded algebra and isomorphisms on all its self Ext groups",
+   "results": {
+    "t": "2026-10-24T00:38:24Z",
+    "tool": "leanfinder",
+    "query": "Derived Morita full faithfulness follows from compactness of the image of a regular differential graded algebra and isomorphisms on all its self Ext groups",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DerivedCategory.instEssSurjCochainComplexIntQ",
+     "DerivedCategory.instFullSingleFunctor",
+     "DerivedCategory.instEssSurjHomotopyCategoryIntUpQh",
+     "CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory",
+     "CategoryTheory.hasExt_of_hasDerivedCategory",
+     "DerivedCategory.instFaithfulSingleFunctor",
+     "DerivedCategory.instFaithfulFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh",
+     "DerivedCategory.instFullFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh"
+    ],
+    "digest": "39a52db53cdbc5e4"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: singleFunctor full faithfulness and ordinary adjunction criteria do not assert this DG compact-bimodule self-extension criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dg-qis-restriction-equivalence",
+  "date": "2026-10-24",
+  "group": "Q89"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 0CRM, lemma-countable, implication (2) to (1); derived.tex Tags 090Z, definition-derived-colimit and 0CRH, remark-map-from-derived-colimit, for the legs. Supporting input for 0CRM (2) to (1): the reduction to the countable subalgebra A' by Tag 09S6, lemma-qis-equivalence. Supporting input for Tag 09S6: Tag 09R9, lemma-tensor-with-compact-fully-faithful.",
+   "via": [
+    "lem-sfb-dg-qis-restriction-equivalence",
+    "lem-sfb-dg-countable-compact-telescope",
+    "lem-sfb-space-countable-telescope",
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dg-compact-bimodule-full-faithfulness",
+  "worker": "stage1",
+  "summary": "Checked Tag 09R9 against its exact tensor-Hom adjunction; computed the regular-module unit on every shifted free-module Hom group, retaining the specified left action, and reused the existing general compact-unit propagation theorem. One new statement-only computational node records the property-(P) tensor computation in D(B,d); no generation hypothesis is added.",
+  "blueprint": "Current latest sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3), inherited affine/effectivity -> countable DG telescope -> quasi-isomorphic DG algebras route already recorded in blueprint.from.place. Steps 1-4 verify the unit test in Stacks 09R9; step 5 realizes its compact/property-(P) extension using the existing compact-unit node."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-aef1a8edc",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-aef1a8edc (reviewer sub-agent of L); spot-checked: I read the item and the new node in full against Stacks dga.tex: 09R9 (l.5469), 09LS lemma-derived-bc (l.5324), 09LT, 09LZ and remark-shift-tensor-no-sign. The item statement is unchanged and matches 09R9: N is compact, H^k(A) to Hom(N,N[k]) is an iso for every k, the conclusion is full faithfulness, and no generation hypothesis is added. Step 1: the adjunction node gives exact T and U with shift-compatible unit; admissible-triangles makes D triangulated; sequential-colimit-triangle gives small coproducts; the left-adjoint Mathlib leaf makes T preserve them. Step 2: I checked the signs of A[k] tensor N to N[k] by hand, and that f_a and n -> an are DG maps; naturality of the new node for f_a gives the item's action map. Step 3: H^k(A) = Hom(A,A[k]) by the free-module node; the transpose of T(f) is eta_{A[k]} composed with f, so Hom(A,eta_{A[k]}) is bijective, then shift compatibility. Elementary is fair. Step 4: the free-shift node represents eta_A by a DG map u; naturality is immediate since u(xb)=u(x)b; so u is a quasi-isomorphism. Step 5: lem-sfb-dg-adjunction-compact-unit, all hypotheses checked, T(A)=N compact. New node lem-sfb-dg-semifree-bimodule-tensor-computation is statement-only and self-contained; it is true because 09LS builds the derived tensor through the property-(P) collection, which makes the comparison a natural iso. Edge cases P=0, infinite sums and N=0 are fine. It duplicates no existing node: the bar-tensor node of sk-prop-sf-biduality-general is an integral complex, and the ringed-site node is the sheaf version. It is not a clause of the item. No cycle, all citations in-unit apart from the Mathlib leaf, no SGA, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DgCompactBimoduleFullFaithfulness",
+  "declaration": "CategoryTheory.DgAlgebra.derived_tensor_fully_faithful_of_compact_bimodule",
+  "declarations": [
+   "CategoryTheory.DgAlgebra.bimoduleRightModule",
+   "CategoryTheory.DgAlgebra.derived_tensor_fully_faithful_of_compact_bimodule"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DgCompactBimoduleFullFaithfulness.lean",
+  "statement": "theorem derived_tensor_fully_faithful_of_compact_bimodule (A B : Algebra.{u}) [DerivedStructure A] [DerivedStructure B] (N : Bimod A B) (F : RightModule A ⥤ RightModule B) (_tensor : BalancedTensorModel N F) (T : Derived A ⥤ Derived B) (α : Q A ⋙ T ⟶ F ⋙ Q B) [T.IsRightKanExtension α] (hcompact : IsCompactObject.{u} ((Q B).obj (bimoduleRightModule N))) (hself : ∀ k : ℤ, ∃ (S : RightModule B) (e : ShiftComparison B k (bimoduleRightModule N) S) (φ : A.X.homology k ≃+ ((Q B).obj (bimoduleRightModule N) ⟶ ((Q B).obj (bimoduleRightModule N))⟦k⟧)), ∀ z : A.X.cycles k, ∃ f : bimoduleRightModule N ⟶ S, (∀ (p : ℤ) (n : N.X.X p), HEq (shiftedElement k (bimoduleRightModule N) S e p ((((underlying B).map f).f p) n)) ((N.actLeft.f (k + p)) ((HomologicalComplex.ιTensorObj A.X N.X k p (k + p) rfl) (TensorProduct.tmul (ULift.{u} ℤ) ((A.X.iCycles k) z) n)))) ∧ φ ((A.X.homologyπ k) z) = (Q B).map f ≫ (DerivedStructure.shiftIso k (bimoduleRightModule N) S e).hom) : ∀ M P : Derived A, Function.Bijective (T.map : (M ⟶ P) → (T.obj M ⟶ T.obj P))",
+  "branch": "sheaf-dag",
+  "by": "NC",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1fc190fa2",
+  "group": "NC",
+  "result": "pass",
+  "note": "Item node changes only lean; deps unchanged; statement verbatim; one helper bimoduleRightModule (real data: X := mop N.X, smul := N.actRight.mop, laws = N's right-action laws), no duplicate found in side-live/sheaf Lean or Mathlib Bimod. Against Stacks 09R9: T is any right Kan extension of the BalancedTensorModel functor (same spec as bimodule_derived_tensor_hom_adjunction, existence from it); hcompact = IsCompactObject.{u} of N in D(B); hself fixes phi on every class [z] as Q(n -> zn) composed with shiftIso, so it is exactly bijectivity of the canonical map, independent of the shift representative by shift_natural; sign/chain-map/right-linearity of n -> zn checked by hand; conclusion is T.map bijective on all Hom sets; no generation or extra binders. Edge cases: all k, N=0, acyclic/noncommutative algebras, empty coproduct. Docstrings carry source, blueprint and the 5 proof steps; proof sorry; imports public for statement deps and plain for proof deps; lines <=100. Advisory: defs of def-sfb-dg-derived-category and def-sfb-dg-bimodule-models reached only through the base theorem stmt_dep (not added, so no theorem-stmt_dep finding); the helper lives in a theorem module, so later users need a def node. No file changed, so no compile; worker reports a clean compile."
+ }
+}

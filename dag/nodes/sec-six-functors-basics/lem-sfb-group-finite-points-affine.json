@@ -1,0 +1,266 @@
+{
+ "id": "lem-sfb-group-finite-points-affine",
+ "kind": "statement",
+ "title": "Finite sets of points of a locally algebraic group have a common affine open",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure] and let $H$ be a group scheme over $k$ [def-sc-group-scheme] locally of finite type [def-weil-finite-type-morphism]. For every integer $n\\geq0$ and every list of $k$-morphisms $h_1,\\ldots,h_n:\\operatorname{Spec}k\\to H$, there exists an affine open subscheme $U\\subseteq H$ [def-weil-affine-spectrum, def-weil-open-immersion] through which all the $h_i$ factor. The points need not be distinct, and $H$ need not be quasi-compact, connected, smooth or reduced.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 0B7S (lemma-points-in-affine); locally algebraic means locally of finite type over the field."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Put $C=H^0$. The identity-component theorem applies since $k$ is algebraically closed and $H/k$ is locally of finite type: $C$ is a clopen irreducible open subgroup scheme. For each connected component $D$ met by a marked point choose one such point $a\\in H(k)$. Left translation $L_a$ is a scheme isomorphism with inverse $L_{a^{-1}}$. It maps $C$ onto $D$: its image is connected and contains $a$, and the inverse image of the connected component $D$ is connected and contains the identity; maximality of the two connected components gives both inclusions. Thus $D$ is clopen and $L_a$ identifies its open-subscheme structure with $C$. Restricting the two inverse maps through the open subschemes is legitimate by the open-factorization lemma. Only finitely many components are met, since there are only $n$ indices; no finiteness assertion about all components of $H$ is needed.",
+   "uses": [
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "lem-sc-translation-automorphism",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0B7S (lemma-points-in-affine), component reduction; Tag 0B7R (proposition-connected-component)"
+   }
+  },
+  {
+   "text": "Fix one of these components and its chosen $a$. Translate its marked points to $b_i=a^{-1}h_i\\in C(k)$. Choose an affine open neighbourhood $V$ of the identity in the scheme $C$ (the local affine neighbourhood in the definition of a scheme). For each of these indices put $O_i=R_{b_i^{-1}}(V)\\subset C$. Right translation and its inverse preserve $C$, since $C$ is a subgroup; the open-factorization lemma restricts them to inverse isomorphisms of $C$. Hence each $O_i$ is nonempty and open. Their finite intersection $O$ is nonempty: in an irreducible space two nonempty opens meet, since otherwise their proper closed complements cover the space; induction gives the finite-intersection assertion. This uses irreducibility of the underlying space only and does not replace $C$ by its reduction.",
+   "uses": [
+    "def-pc-scheme",
+    "def-sc-group-scheme-translate",
+    "lem-sc-translation-automorphism",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0B7S (lemma-points-in-affine), intersection of translated affine opens"
+   }
+  },
+  {
+   "text": "Because $C/k$ is of finite type, it is locally of finite type. Apply the Jacobson-space statement with the closed subset $Z=C$: closed points of $C$ are dense, so the nonempty open $O$ contains a closed point $x$. The closed-residue-field statement applies with the same algebraically closed $k$ and locally finite type $C$; it says that $\\operatorname{Spec}\\kappa(x)\\to\\operatorname{Spec}k$ is an isomorphism. Compose its inverse with the residue point $\\operatorname{Spec}\\kappa(x)\\to C$ to obtain a $k$-rational point $g\\in O(k)$. This justifies the rational point required in the intersection without assuming that $O$ is quasi-compact.",
+   "uses": [
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0478 (lemma-locally-finite-type-Jacobson); morphisms.tex Tag 01TB (lemma-jacobson-finite-type-points); groupoids.tex Tag 0B7S rational-point choice"
+   }
+  },
+  {
+   "text": "For each index in the chosen component, $g\\in R_{b_i^{-1}}(V)$ implies $gb_i\\in V$, by applying the inverse translation $R_{b_i}$. Consequently $b_i\\in L_{g^{-1}}(V)$. Translation is an isomorphism, so $L_{g^{-1}}(V)$ is affine and open in $C$. Translate back by $a$: $U_D=L_aL_{g^{-1}}(V)$ is an affine open in $D$ and hence in $H$, and contains all marked points in $D$. The order of the products is as written: no commutativity of $H$ is being used.",
+   "uses": [
+    "def-sc-group-scheme-translate",
+    "lem-sc-translation-automorphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0B7S (lemma-points-in-affine), final translate"
+   }
+  },
+  {
+   "text": "Take $U=\\bigcup_D U_D$ over the finitely many components met by the list. These opens are pairwise disjoint. Each $U_D$ is also closed in $U$, since its complement is the union of the other opens. Its open inclusion into $U$ is a closed immersion: its map of structure sheaves is the identity on stalks in $U_D$ and has zero target stalks off $U_D$, hence is surjective, and its underlying image is closed. Thus the affine closed subschemes $U_D$ cover $U$, and the closed-affine-union theorem proves $U$ affine. Every $h_i$ factors uniquely through $U$ by the open-factorization lemma. For $n=0$ take $U=\\varnothing=\\operatorname{Spec}(0)$; the factorization condition is vacuous. Repeated points affect none of the argument.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-sc-closed-affine-union-affine",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0B7S (lemma-points-in-affine), disjoint component assembly; limits.tex Tag 09NL (lemma-affines-glued-in-closed-affine)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-locally-algebraic-group-identity-component",
+  "lem-sc-translation-automorphism",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "def-pc-scheme",
+  "def-sc-group-scheme-translate",
+  "def-weil-irreducible-components",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "def-weil-closed-immersion",
+  "lem-sc-closed-affine-union-affine"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 0B7S (lemma-points-in-affine); write its connected-component reduction as a finite partition of the marked indices; use the existing Tag 09NL node for disjoint affine assembly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every finite set of rational points of a group scheme locally of finite type over an algebraically closed field has an affine open neighbourhood",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsFinite fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineXSchemeAffineCover\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (x : ↥X), AlgebraicGeometry.IsAffine (X.affineCover.X x)\", \"doc\": \"Each element of the affine open cover of a scheme is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.local_affine\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ (self : AlgebraicGeometry.Scheme) (x : ↑self.toTopCat),\\n  ∃ U R, Nonempty (self.restrict ⋯ ≅ AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op R))\", \"doc\": \"For any scheme $X$ and any point $x$ in its underlying topological space, there exists an open neighborhood $U$ of $x$ and a commutative ring $R$ such that the restriction of $X$ to $U$ is isomorphic \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (x : ↑X.toTopCat), X.affineOpenCover.X x = Classical.choose ⋯\", \"doc\": \"For any scheme $X$ and any point $x$ in its underlying topological space, the $X$-component of the affine open cover at $x$ is the affine open neighborhood selected by the classical choice function, e\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [Finite ↥X] [DiscreteTopology ↥X], AlgebraicGeometry.IsAffine X\", \"doc\": \"If the underlying topological space of a scheme $X$ is finite and discrete, then $X$ is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.finiteType_of_affine_subset\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFiniteType f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is locally of finite type, $ U $ is an affine open subset of $ Y $, and $ V $ is an affine open subset of $ X $ contained in the preimage of $ U $ under $ f $, \"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyOfFiniteType f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n         \", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite type if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ with $ f(V) \\\\subseteq U $, t\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: single-point affine neighbourhoods, finite morphisms, and linear affine spaces do not supply a common affine open for finitely many group points"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite subsets of a locally algebraic group scheme are contained in an affine open subscheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsFinite fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.finite_app\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.IsFinite f] (U : Y.Opens),\\n  AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).Finite\", \"doc\": \"For any finite morphism $ f: X \\\\to Y $ of schemes and any affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\Gamma(Y, U) \\\\to \\\\Gamma(X, f^{-1}(U)) $ is finite, meaning that $ \\\\Gamma\"}\n  {\"name\": \"AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : Set ↥X}, IsCompact U ∧ IsOpen U ↔ ∃ s, s.Finite ∧ U = ⋃ i ∈ s, ↑↑i\", \"doc\": \"A subset $ U $ of a scheme $ X $ is both compact and open if and only if there exists a finite set $ s $ of affine open subsets of $ X $ such that $ U $ is the union of these affine open subsets.\"}\n  {\"name\": \"AlgebraicGeometry.exists_isAffineOpen_mem_and_subset\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x : ↥X} {U : X.Opens},\\n  x ∈ U → ∃ W, AlgebraicGeometry.IsAffineOpen W ∧ x ∈ W ∧ W.carrier ⊆ ↑U\", \"doc\": \"For any scheme $X$, point $x \\\\in X$, and open subset $U \\\\subseteq X$ containing $x$, there exists an affine open subset $W \\\\subseteq X$ such that $x \\\\in W$ and $W \\\\subseteq U$.\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [inst : CompactSpace ↥X] (𝒰 : X.OpenCover)\\n  [∀ (i : 𝒰.I₀), AlgebraicGeometry.IsAffine (𝒰.X i)] (i : 𝒰.finiteSubcover.I₀),\\n  AlgebraicGeometry.IsAffine (𝒰.finiteSubcover.X i)\", \"doc\": \"For any compact scheme $X$ and an open cover $\\\\mathcal{U}$ of $X$ consisting of affine open subschemes, every finite subcover of $\\\\mathcal{U}$ also consists of affine open subschemes. Specifically, if\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (x : ↑X.toTopCat), X.affineOpenCover.X x = Classical.choose ⋯\", \"doc\": \"For any scheme $X$ and any point $x$ in its underlying topological space, the $X$-component of the affine open cover at $x$ is the affine open neighborhood selected by the classical choice function, e\"}\n  {\"name\": \"AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_affineOpens\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : Set ↥X}, IsCompact U ∧ IsOpen U ↔ ∃ s, s.Finite ∧ U = ⋃ i ∈ s, ↑↑i\", \"doc\": \"A subset $ U $ of a scheme $ X $ is both quasi-compact and open if and only if there exists a finite collection $ s $ of affine open subsets of $ X $ such that $ U $ is the union of all elements in $ \"}\n  {\"name\": \"AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens}, IsCompact ↑U ↔ ∃ s, s.Finite ∧ U = ⨆ i ∈ s, ↑i\", \"doc\": \"An open subset $ U $ of a scheme $ X $ is quasi-compact if and only if there exists a finite set $ S $ of affine open subsets of $ X $ such that $ U $ equals the union of all elements in $ S $.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: single-point affine neighbourhoods, finite morphisms, and linear affine spaces do not supply a common affine open for finitely many group points"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAffineOpen\", \"GrpObj\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: single-point affine neighbourhoods, finite morphisms, and linear affine spaces do not supply a common affine open for finitely many group points"
+  },
+  {
+   "tool": "grep",
+   "query": "(finite|Finite|Finset).*[Pp]oint.*[Aa]ffine|[Aa]ffine.*[Pp]oint.*(finite|Finite)|[Gg]rpObj.*[Aa]ffineOpen",
+   "results": "[grep] OK 13 hit(s)\n  {\"file\": \"Mathlib/LinearAlgebra/AffineSpace/FiniteDimensional.lean\", \"line\": \"94\", \"text\": \"/-- An affine-independent family of points in a finite-dimensional affine space is finite. -/\"}\n  {\"file\": \"Mathlib/LinearAlgebra/AffineSpace/FiniteDimensional.lean\", \"line\": \"373\", \"text\": \"/-- The direction of the affine span of adding a point to a finite-dimensional subspace is\"}\n  {\"file\": \"Mathlib/LinearAlgebra/AffineSpace/FiniteDimensional.lean\", \"line\": \"391\", \"text\": \"/-- The direction of the affine span of adding a point to a set with a set with finite-dimensional\"}\n  {\"file\": \"Mathlib/LinearAlgebra/AffineSpace/FiniteDimensional.lean\", \"line\": \"432\", \"text\": \"/-- The direction of the affine span of collinear points is finite-dimensional. -/\"}\n  {\"file\": \"Mathlib/LinearAlgebra/AffineSpace/FiniteDimensional.lean\", \"line\": \"683\", \"text\": \"/-- The direction of the affine span of coplanar points is finite-dimensional. -/\"}\n  {\"file\": \"Mathlib/LinearAlgebra/AffineSpace/Centroid.lean\", \"line\": \"11\", \"text\": \"# Centroid of a Finite Set of Points in Affine Space\"}\n  {\"file\": \"Mathlib/LinearAlgebra/AffineSpace/Centroid.lean\", \"line\": \"13\", \"text\": \"This file defines the centroid of a finite set of points in an affine space over a division\"}\n  {\"file\": \"Mathlib/LinearAlgebra/AffineSpace/Centroid.lean\", \"line\": \"21\", \"text\": \"* `centroid`: the centroid of a `Finset` of points, defined as the affine combination using\"}\n  {\"file\": \"Mathlib/Geometry/Euclidean/MongePoint.lean\", \"line\": \"162\", \"text\": \"      (univ : Finset (PointsWithCircumcenterIndex (n + 2))).affineCombination ℝ\"}\n  {\"file\": \"Mathlib/Geometry/Euclidean/Circumcenter.lean\", \"line\": \"500\", \"text\": \"      (univ : Finset (PointsWithCircumcenterIndex n)).affineCombination ℝ s.pointsWithCircumcenter\"}\n  {\"file\": \"Mathlib/Geometry/Euclidean/Circumcenter.lean\", \"line\": \"532\", \"text\": \"      (univ : Finset (PointsWithCircumcenterIndex n)).affineCombination ℝ s.pointsWithCircumcenter\"}\n  {\"file\": \"Mathlib/Geometry/Euclidean/Circumcenter.lean\", \"line\": \"560\", \"text\": \"      (univ : Finset (PointsWithCircumcenterIndex n)).affineCombination ℝ s.pointsWithCircumcenter\"}\n  {\"file\": \"Mathlib/Geometry/Euclidean/Circumcenter.lean\", \"line\": \"589\", \"text\": \"      (univ : Finset (PointsWithCircumcenterIndex n)).affineCombination ℝ s.pointsWithCircumcenter\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: single-point affine neighbourhoods, finite morphisms, and linear affine spaces do not supply a common affine open for finitely many group points"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finitely many rational points of a group scheme locally of finite type over an algebraically closed field lie in an affine open",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.affineCover\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"(X : Scheme.{u}) : OpenCover X\", \"doc\": \"For a scheme $X$, this constructs an open cover consisting of affine open immersions $\\\\{\\\\operatorname{Spec}(R_x) \\\\to X\\\\}_{x \\\\in X}$ whose images form a jointly surjective family, ensuring every point \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCover\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"(X : Scheme.{u}) : X.AffineOpenCover\", \"doc\": \"For a scheme $X$, this constructs an open cover consisting of affine open immersions $\\\\{\\\\operatorname{Spec}(R_x) \\\\to X\\\\}_{x \\\\in X}$ whose images form a jointly surjective family, ensuring every point \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpens\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"(X : Scheme) : Set X.Opens\", \"doc\": \"For a scheme $ X $, the set of affine open subsets of $ X $, i.e., open subsets $ U $ for which the restricted scheme structure is affine.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{X : Scheme} (U : X.Opens) : Prop\", \"doc\": \"A predicate indicating that an open subset $ U $ of a scheme $ X $ is affine, meaning the restricted scheme structure on $ U $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.exists_isAffineOpen_mem_and_subset\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{X : Scheme.{u}} {x : X} {U : X.Opens} (hxU : x ∈ U) : ∃ W : X.Opens, IsAffineOpen W ∧ x ∈ W ∧ W.1 ⊆ U\", \"doc\": \"For any scheme $X$, point $x \\\\in X$, and open subset $U \\\\subseteq X$ containing $x$, there exists an affine open subset $W \\\\subseteq X$ such that $x \\\\in W$ and $W \\\\subseteq U$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_affine_mem_range_and_range_subset\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"{X : Scheme.{u}} {x : X} {U : X.Opens} (hxU : x ∈ U) :\\n  ∃ R, ∃ (f : Spec R ⟶ X), IsOpenImmersion f ∧ x ∈ Set.range f ∧ Set.range f ⊆ U\", \"doc\": \"For any point $x$ in an open subset $U$ of a scheme $X$, there exists an affine scheme $\\\\operatorname{Spec}(R)$ and an open immersion $f: \\\\operatorname{Spec}(R) \\\\to X$ such that $x$ lies in the image \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instInhabitedOpenCover\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \": Inhabited X.OpenCover\", \"doc\": \"For any scheme $X$, the type of open covers of $X$ is inhabited, with the canonical affine open cover constructed from affine open immersions $\\\\{\\\\operatorname{Spec}(R_x) \\\\to X\\\\}_{x \\\\in X}$ whose image\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.local_affine\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"∀ (self : AlgebraicGeometry.Scheme) (x : ↑self.toTopCat),\\n  ∃ U R, Nonempty (self.restrict ⋯ ≅ AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op R))\", \"doc\": \"For any scheme $X$ and any point $x$ in its underlying topological space, there exists an open neighborhood $U$ of $x$ and a commutative ring $R$ such that the restriction of $X$ to $U$ is isomorphic \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: single-point affine neighbourhoods, finite morphisms, and linear affine spaces do not supply a common affine open for finitely many group points"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every finite collection of rational points of a locally finite type group scheme over an algebraically closed field is contained in an affine open subscheme",
+   "results": "8 hits: AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.Scheme.affineOpenCover_X, AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover, AlgebraicGeometry.LocallyOfFiniteType.finiteType_of_affine_subset, AlgebraicGeometry.instIsAffineXSchemeAffineCover, AlgebraicGeometry.locallyOfFiniteType_iff, AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union, AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern individual affine neighbourhoods, affine covers, or finite morphisms, not a common affine open for finitely many group points"
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*[Ff]inite.*[Pp]oint|[Ff]inite.*[Pp]oint.*affine|[Gg]rpObj.*[Aa]ffineOpen",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern individual affine neighbourhoods, affine covers, or finite morphisms, not a common affine open for finitely many group points"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite sets in locally algebraic group schemes have affine open neighborhoods",
+   "results": "8 hits: AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.local_affine, AlgebraicGeometry.Scheme.affineOpens, AlgebraicGeometry.IsFinite.toIsAffineHom, AlgebraicGeometry.IsAffineOpen.of_subsingleton, AlgebraicGeometry.IsAffineOpen, AlgebraicGeometry.Scheme.isBasis_affineOpens, AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern individual affine neighbourhoods, affine covers, or finite morphisms, not a common affine open for finitely many group points"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite subset of a locally algebraic group lies in a common affine open neighborhood",
+   "results": "8 hits: AlgebraicGeometry.exists_isAffineOpen_mem_and_subset, AlgebraicGeometry.isBasis_affine_open, AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union, AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover, AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens, AlgebraicGeometry.Scheme.affineOpenCover_X, AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_affineOpens, AlgebraicGeometry.Scheme.affineOpenCover",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern individual affine neighbourhoods, affine covers, or finite morphisms, not a common affine open for finitely many group points"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-locally-separated-group-space-scheme",
+  "date": "2026-10-23",
+  "group": "Q39"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Dual abelian varieties and the line-bundle homomorphism. Auxiliary for this split: The rigidified Picard scheme of a smooth projective variety. Supporting lemma: A locally separated group algebraic space over a field is a scheme. Supporting argument: affine: Tag 0B8F proof, second input 0B7S; finite geometric point sets admit an affine neighbourhood.",
+   "via": [
+    "lem-sfb-locally-separated-group-space-scheme",
+    "lem-sfb-projective-picard-identity-representability",
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-group-finite-points-affine",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0B7S using the existing locally algebraic identity-component theorem, translation isomorphisms, Jacobson density and rational closed residue fields. Partitioned only the marked points by component, retained nilpotents, and assembled the finite disjoint affine opens via the existing 09NL node. No new nodes and no statement change.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Dual abelian varieties and the line-bundle homomorphism. Auxiliary for this split: The rigidified Picard scheme of a smooth projective variety. Supporting lemma: A locally separated group algebraic space over a field is a scheme. Supporting argument: affine: Tag 0B8F proof, second input 0B7S; finite geometric point sets admit an affine neighbourhood.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-translation-automorphism",
+    "why": "Generic translations of group schemes are isomorphisms; the unit supplies no replacement for this group-law tool."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "why": "Generic unique factorization through an open subscheme, used to restrict translations and factor the marked maps."
+   },
+   {
+    "node": "lem-sc-lft-over-field-jacobson-space",
+    "why": "Generic density of closed points in locally finite type schemes over a field, for the rational translating point."
+   },
+   {
+    "node": "lem-weil-pbc-closed-point-residue-field-base",
+    "why": "Generic Nullstellensatz residue-field identification over an algebraically closed field."
+   },
+   {
+    "node": "lem-sc-closed-affine-union-affine",
+    "why": "Generic affineness of a finite closed affine cover; used only to assemble disjoint affine opens, not to replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-translation-automorphism",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-sc-closed-affine-union-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q143-363d89537",
+  "group": "Q143",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q143-363d89537 (reviewer sub-agent of L); spot-checked: I read Stacks groupoids.tex Tag 0B7S (lemma-points-in-affine, l.1329-1362) and the identity-component node (0B7R). The statement is byte-identical to live, where the item was unsplit with an empty proof, so this is a first split, not a re-split. No new nodes, no SGA. The 5 steps follow the source: (1) G^0 is clopen, an irreducible finite-type subgroup, and L_a maps C onto each component D that a marked point meets (both inclusions by maximality of components); (2) an affine V at e and the nonempty opens O_i = R_{b_i^{-1}}(V) of irreducible C meet (elementary, topological only, valid for nonreduced C); (3) the Jacobson node with Z=C and the Nullstellensatz residue node give g in C(k) inside O; (4) b_i in L_{g^{-1}}V and h_i in U_D = L_a L_{g^{-1}}V, product order checked, no commutativity used; (5) U_D are disjoint and clopen, the open inclusion is a closed immersion by the stalk check, and 09NL gives U affine; n=0 gives Spec 0. Every cited statement says what its step takes from it. Hypotheses used: only k algebraically closed and locally of finite type. Edge cases checked: n=0, repeated points, constant Z, alpha_p/mu_p, an abelian variety, a nonabelian disconnected group. Duplicate search: rg -L for 0B7S hits only the item and its citer locally-separated-group-space-scheme, whose use matches the statement; 09NM componentwise-finite-set needs finitely many components and is not a duplicate. The five generic tool_uses are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupFinitePointsAffine",
+  "declaration": "AlgebraicGeometry.GrpObj.exists_isAffineOpen_fin_points",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupFinitePointsAffine.lean",
+  "statement": "theorem GrpObj.exists_isAffineOpen_fin_points (k : Type u) [Field k] [IsAlgClosed k] (H : Over (Spec (.of k))) [GrpObj H] [LocallyOfFiniteType H.hom] (n : ℕ) (h : Fin n → (Spec (.of k) ⟶ H.left)) (hh : ∀ i : Fin n, h i ≫ H.hom = 𝟙 (Spec (.of k))) : ∃ U : H.left.Opens, IsAffineOpen U ∧ ∀ i : Fin n, ∃ hU : Spec (.of k) ⟶ U.toScheme, hU ≫ U.ι = h i",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8cfb2c1ca",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0B7S (groupoids.tex l.1329) clause by clause: k:Type u [Field][IsAlgClosed]; H:Over(Spec k) [GrpObj H] per def-sc-group-scheme record; [LocallyOfFiniteType H.hom], no qc/ft/comm/connected/reduced; n:ℕ, h:Fin n→(Spec k⟶H.left) with hh over k; ∃ U:H.left.Opens, IsAffineOpen U ∧ ∀ i, ∃ factor hU ≫ U.ι = h i. Edge cases n=0 (∅ affine), repeats, nonreduced/disconnected/noncommutative, any char, single universe u. Node identical to live apart from the lean record; lean.statement verbatim in file; sole proof sorry; no defs; source/blueprint docstrings and 5 proof steps present; plain proof imports exist in side-live; no duplicate found in Mathlib or project lean; Worker report and Second reading by Q03 sections present. No file changed, so no compile."
+ }
+}

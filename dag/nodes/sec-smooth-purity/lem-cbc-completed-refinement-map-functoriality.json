@@ -1,0 +1,118 @@
+{
+ "id": "lem-cbc-completed-refinement-map-functoriality",
+ "kind": "statement",
+ "title": "Unit and composition laws of the completed-ring refinement maps",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-complete-proetale",
+   "place": "Proof step 8, refinement unit and composition only, before cofiltered choice independence.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "statement": "Let (A,I) be an adic coefficient datum [def-weil-pbc-adic-coefficient-datum]. On each scheme T take D_T = D(Mod(A_T)) for its completed coefficient sheaf. Let J_j be the exact ringed pro-etale extension by zero with its section-normalized adjunction [lem-pur-site-restriction-module-adjunction-exact], and P_h the canonical derived direct image [def-weil-pbc-proetale-operations], with the normalized identity/composition comparisons of [lem-weil-pbc-completed-ordinary-comparisons]. Let f:X→Y be separated of finite type, and c_i=(j_i:X→Z_i,p_i:Z_i→Y) compactifications [def-weil-pbc-projection-compactification], with proper refinements [def-weil-compactifications-refinements]. For u:c_1→c_2 let Q_u have top j_1, bottom j_2, left 1_X, right u. Define its proper/open gamma as the mate of the Cartesian open comparison followed by the clopen lift projector, with the normalized open units, as in [lem-cbc-proper-open-clopen-projector]. For K∈D_X put F_c(K)=P_p J_j K and define C_u:F_c2(K)→F_c1(K) to be P_p2 applied to J_j2(P_1X≅id)^{-1} followed by gamma_Qu, then the canonical P_u P_p2≅P_(u;p2) and equality u;p2=p1. For every K∈D_X, C_id(c)=id_Fc(K) and C_(u;v)=C_v;C_u for all composable refinements. The maps are exactly cbcRefinementMap, without any replacement isomorphism. No completeness, finite-origin, or boundedness hypothesis is required for these two equalities.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7C and 0F7D, lemmas shriek-proper-and-open-compose and shriek-proper-and-open-compose-horizontal; ringed completed-coefficient refinement-unit/composition specialization of thm-cbc-complete-proetale proof step 8."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-projection-compactification",
+  "def-weil-compactifications-refinements",
+  "lem-cbc-proper-open-clopen-projector",
+  "lem-weil-pbc-completed-ordinary-comparisons",
+  "def-cbc-completed-refinement-transformation"
+ ],
+ "proof": [
+  {
+   "text": "The identity-refinement component is the specialized normalized proper/open mate. Apply the identity component lemma for cbcRefinementMap.",
+   "uses": [
+    "lem-cbc-completed-refinement-map-identity-component"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For two composable refinements, the normalized proper/open mates paste; apply the composition component lemma.",
+   "uses": [
+    "lem-cbc-completed-refinement-map-composition-component"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-completed-refinement-map-identity-component",
+  "lem-cbc-completed-refinement-map-composition-component"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7C and 0F7D; decomposition of the refinement identity and composition clauses."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical proper open compactification refinement transformation on completed proetale sheaf derived categories preserves identity refinements and composition of refinements",
+   "results": "Eight general condensed sheaf constructions, including Condensed.lanSheafProfinite and Condensed.isSheafProfinite; none is the normalized refinement identity.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\", \"comp\"",
+   "results": "Ten hits, including CategoryTheory.mateEquiv_vcomp and mateEquiv_hcomp. These prove formal mate pasting, but not the identification of the actual ringed proper/open clopen comparison with its pasted map. They are used in the stated argument through lem-weil-pbc-mate-pasting.",
+   "date": "2026-10-26",
+   "verdict": "partial match: formal mate pasting only"
+  },
+  {
+   "tool": "grep",
+   "query": "refinement.*(comp|id)|Refinement.*(comp|id)",
+   "results": "Seventeen Mathlib results on topological, cover, and homological refinements; no pro-etale compactification refinement transformation.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompleteCompactSupportProetale",
+  "date": "2026-10-26",
+  "group": "Q3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompleteCompactSupportProetale",
+  "file": "lean/Sheaf/Paper/CompleteCompactSupportProetale.lean",
+  "declaration": "AlgebraicGeometry.Scheme.cbcRefinementMap_functoriality",
+  "statement": "theorem cbcRefinementMap_functoriality\n    {X Y : Scheme.{t}} {f : X ⟶ Y}\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (K : d.derived X) :\n    (∀ c : Compactification f,\n      cbcRefinementMap d (Compactification.Refinement.id c) K = 𝟙 _) ∧\n    (∀ (c₁ c₂ c₃ : Compactification f) (u : c₁.Refinement c₂) (v : c₂.Refinement c₃),\n      cbcRefinementMap d (u.comp v) K =\n        cbcRefinementMap d v K ≫ cbcRefinementMap d u K)",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-26",
+  "note": "The theorem is in the item module under coord/brief-stage3.md §3, since the actual cbcRefinementMap constructions are defined there. An external theorem module importing those constructions could not be imported by the consumer without a cycle. This is only the unit/composition portion of compactification coherence."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261026T002202-L-64499",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261026T023220-L-531509",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

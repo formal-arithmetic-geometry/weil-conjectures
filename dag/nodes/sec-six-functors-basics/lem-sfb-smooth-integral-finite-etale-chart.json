@@ -1,0 +1,385 @@
+{
+ "id": "lem-sfb-smooth-integral-finite-etale-chart",
+ "kind": "statement",
+ "title": "A smooth integral variety has a finite etale affine-space chart",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field], [def-weil-algebraic-closure] and let $X/k$ be a smooth integral separated scheme of finite type [def-sbc-smooth-morphisms], [def-pc-integral-scheme], [def-weil-finite-type-morphism]; separated means that the diagonal is a closed immersion. There exist integers $d\\geq0$ and $n\\geq1$, a nonempty affine open $V\\subseteq\\mathbf A^d_k=\\operatorname{Spec}k[t_1,\\ldots,t_d]$ [def-weil-affine-spectrum], [def-weil-open-immersion], a nonempty dense affine open subscheme $j:W\\hookrightarrow X$, and a finite etale surjective $k$-morphism $q:W\\to V$ [def-weil-finite-integral-morphism], [def-weil-etale-morphism], [def-weil-surjective-morphism]. The morphism $q$ is finite locally free of constant degree $n$ [def-pc-finite-locally-free]. For every $v\\in V(k)$ its scheme fibre $W_v=W\\times_V\\operatorname{Spec}k$ [def-pc-fibre-product] is isomorphic over $k$ to a disjoint union of $n$ copies of $\\operatorname{Spec}k$; in particular its points are $n$ distinct $k$-rational points of $W$. Both $W$ and $V$ are smooth integral schemes of finite type over $k$.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 054L, morphisms-lemma-smooth-etale-over-affine-space; Tag 02NW, morphisms-lemma-generically-finite, (1) iff (4), shrinking its affine etale chart over the generic point; Tag 04MH, morphisms-lemma-finite-locally-free, constant rank on the integral target; Tag 02GL, morphisms-lemma-etale-over-field, split rational fibres. This is the W to V chart in groupoids.tex, lemma-algebraic-quasi-projective."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sbc-smooth-morphisms",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-surjective-morphism",
+  "def-pc-finite-locally-free",
+  "def-pc-fibre-product",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Choose a point $x\\in X$, which exists by [def-pc-integral-scheme]. Apply [sbc-thm-etale-local-normal-form] to $X\\to\\operatorname{Spec}k$ at $x$. Its target affine neighbourhood is all of $\\operatorname{Spec}k$, so we obtain $d\\geq0$, a nonempty affine open $U\\subseteq X$ and an etale $k$-morphism $\\pi:U\\to A=\\mathbf A^d_k$. The affine-space identification in [def-sbc-affine-space] gives $A=\\operatorname{Spec}R$ for $R=k[t_1,\\ldots,t_d]$.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "sbc-thm-etale-local-normal-form",
+    "def-sbc-affine-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 054L, lemma-smooth-etale-over-affine-space, applied over the field; groupoids.tex Tag 0BF7, lemma-algebraic-quasi-projective, the diagram with U and W."
+   }
+  },
+  {
+   "text": "The ring $R$ is a finitely generated $k$-algebra, with generators $t_1,\\ldots,t_d$, so $A\\to\\operatorname{Spec}k$ is of finite type by [def-weil-finite-type-morphism]. The field $k$ is Noetherian because its only ideals are $0$ and $k$; thus $\\operatorname{Spec}k$ is locally Noetherian by [pqf-def-locnoeth], and quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. Apply [lem-weil-pbc-finite-type-over-noetherian] to conclude that $A$ is Noetherian.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian; polynomial finite type follows from its displayed finite generators."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-morphism-affine-schemes-affine] and [lem-weil-pbc-affine-morphism-permanence](3), $\\pi$ is affine, quasi-compact and quasi-separated. Its etaleness makes it unramified and locally of finite presentation [def-weil-etale-morphism]. The finite presentations of [def-sbc-locally-finite-presentation] give finite generating sets, hence $\\pi$ is locally of finite type. By [lem-weil-pbc-unramified-quasi-finite-at-points] every point is isolated in its fibre. Local finite type together with quasi-compactness is finite type [def-weil-finite-type-morphism], so this is quasi-finiteness [pqf-def-quasifinite]. Apply [pqf-lem-qf-finitefibres] to obtain finite set-theoretic fibres, in particular over every generic point of $A$.",
+   "uses": [
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "def-weil-etale-morphism",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "pqf-def-quasifinite",
+    "pqf-lem-qf-finitefibres",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02GI (definition-etale), 02V5 (lemma-unramified-quasi-finite), 02NH (lemma-quasi-finite) and 02NW (lemma-generically-finite), finite generic fibre hypothesis."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-generic-finite-morphism-open-neighborhood] to $\\pi$: step 2 supplies the Noetherian target, and step 3 supplies quasi-compactness, quasi-separatedness, local finite type and finite generic fibres. Obtain a dense open $O\\subseteq A$ such that $\\pi^{-1}O\\to O$ is finite. By [lem-weil-pbc-etale-morphism-open-map], $\\pi(U)$ is a nonempty open of $A$. Density of $O$ therefore gives a point $a\\in O\\cap\\pi(U)$. The basic-open basis [lem-weil-pbc-spec-localization-away-basic-open] gives $h\\in R$ with $a\\in D(h)\\subseteq O\\cap\\pi(U)$. Put $V=D(h)$. It is affine, with ring $R_h$, by [lem-weil-pbc-affine-open-section-vanishing-prime](b).",
+   "uses": [
+    "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+    "lem-weil-pbc-etale-morphism-open-map",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-affine-open-section-vanishing-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02NW, lemma-generically-finite, (1) implies (4), and Tag 03WT, lemma-etale-open; affine refinement by schemes basic opens, Tag 01HV."
+   }
+  },
+  {
+   "text": "Put $W=\\pi^{-1}V$, $q=\\pi|_W:W\\to V$, and let $j:W\\hookrightarrow X$ be the composite open immersion through $U$. The open-preimage fibre-product assertion [lem-weil-pbc-open-preimage-fibre-product] makes $q$ a base change of $\\pi^{-1}O\\to O$. Thus $q$ is finite by [lem-trf-finite-radicial-basechange], whose finite-morphism clause is independent of radiciality. It is etale by [lem-a1-etale-open-restriction]. Since $V\\subseteq\\pi(U)$, every point of $V$ has a preimage in $W$, so $q$ is surjective and $W$ is nonempty. Finiteness means affineness of the morphism [def-weil-finite-integral-morphism]; with affine target $V$, [lem-weil-pbc-affine-morphism-permanence](2) makes $W$ affine.",
+   "uses": [
+    "lem-weil-pbc-open-preimage-fibre-product",
+    "lem-trf-finite-radicial-basechange",
+    "lem-a1-etale-open-restriction",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WL, lemma-base-change-finite, finite clause; Tag 02GJ, lemma-etale-characterize, etale restriction; groupoids.tex Tag 0BF7, W equal to the inverse image of V."
+   }
+  },
+  {
+   "text": "The nonempty open $W$ of the integral scheme $X$ is integral: every nonempty affine open of $W$ is also a nonempty affine open of $X$, so its ring is a domain by [def-pc-integral-scheme]. It is dense because a nonempty open in an irreducible space meets every nonempty open. By [lem-weil-pbc-polynomial-ring-domain], $R$ is a domain. As $D(h)$ is nonempty, $h\\neq0$, and $R_h$ is a nonzero domain: a product of fractions can vanish only when a numerator product vanishes. Consequently $V=\\operatorname{Spec}R_h$ is integral by the domain-spectrum clause of [lem-weil-pbc-spec-domain-stalks-function-field](2).",
+   "uses": [
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-polynomial-ring-domain",
+    "lem-weil-pbc-spec-domain-stalks-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 01OK (definition-integral) and 01ON (lemma-characterize-integral), and schemes.tex Tag 01HV for the spectrum of a domain; elementary localization fraction computation."
+   }
+  },
+  {
+   "text": "The finite etale $q$ is finite, flat and locally of finite presentation by [def-weil-etale-morphism], hence finite locally free by [def-pc-finite-locally-free]. By [lem-weil-pbc-finite-locally-free-degree-locally-constant] its fibre dimension $\\delta_q(v)=\\dim_{\\kappa(v)}\\Gamma(W_v,\\mathcal O_{W_v})$ is locally constant. It is constant on the nonempty irreducible $V$: two nonempty open level sets for different values would be disjoint, contrary to irreducibility. Call its value $n$. Each fibre is finite by base change [lem-trf-finite-radicial-basechange], and is therefore the affine spectrum of its finite-dimensional coordinate algebra [lem-weil-pbc-finite-over-field-affine-finite-dim]. Surjectivity makes every fibre nonempty: by [def-pc-scheme-fibre] the underlying space of $W_v$ is homeomorphic to $q^{-1}(v)\\neq\\emptyset$. If $n=0$, its coordinate algebra would be the zero vector space and the zero ring, with empty spectrum; this contradicts nonemptiness. Thus $n\\geq1$, and the degree is constantly $n$.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-pc-finite-locally-free",
+    "lem-weil-pbc-finite-locally-free-degree-locally-constant",
+    "lem-trf-finite-radicial-basechange",
+    "lem-weil-pbc-finite-over-field-affine-finite-dim",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02KB, lemma-finite-flat, and 04MH, lemma-finite-locally-free, on the integral target; the positivity follows from surjectivity."
+   }
+  },
+  {
+   "text": "Let $v\\in V(k)$. Its residue field is $k$: the residue-field map into $k$ induced by the rational point is a $k$-linear field embedding, hence surjective since its image contains $k$. The rational point $\\operatorname{Spec}k\\to V$ has image $v$, so it factors through the canonical morphism $\\operatorname{Spec}\\kappa(v)\\to V$ by this isomorphism $\\operatorname{Spec}k\\cong\\operatorname{Spec}\\kappa(v)$; hence $W\\times_V\\operatorname{Spec}k$ is the scheme fibre $W_v$ of [def-pc-scheme-fibre]. Apply [lem-weil-pbc-etale-fibre-discrete-separable-points] to $q$ at $v$. It expresses $W_v$ over $k$ as a disjoint union of spectra of finite separable extensions $L/k$. Each is $k$: an element has an irreducible minimal polynomial, which over the algebraically closed $k$ has a root, so that polynomial is linear. The finite fibre in [def-pc-finite-locally-free] therefore consists of some finite number $m$ of copies of $\\operatorname{Spec}k$. The sheaf axiom on this disjoint cover gives global sections $k^m$, of dimension $m$; step 7 gives dimension $n$, so $m=n$. Its component points are distinct and their composites with $W_v\\to W$ are distinct $k$-rational points, because [def-pc-scheme-fibre] identifies its underlying points bijectively with the points of $W$ mapping to $v$.",
+   "uses": [
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "def-weil-algebraic-closure",
+    "def-pc-finite-locally-free",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GL, lemma-etale-over-field, (2), over an algebraically closed residue field; degree computation by the product of n copies of k."
+   }
+  },
+  {
+   "text": "Finally $W$ is smooth over $k$ by [lem-pc-open-immersion-smooth-composition] applied to $j$ and the given smooth $X/k$. The space $A$ is smooth over $k$ by [sbc-lem-affine-space-smooth], so the same open-immersion lemma makes $V$ smooth. Its coordinate ring is $R_h= k[t_1,\\ldots,t_d,z]/(hz-1)$, generated by the $d$ coordinates and $z$, so $V$ is of finite type over $k$ [def-weil-finite-type-morphism]. Since $q$ is finite, its affine coordinate ring is a finite $R_h$-module [def-weil-finite-integral-morphism]. Any finite module generating set is also an algebra generating set, so $q$ is of finite type. Composition [lem-sfb-finite-type-composition-base-change](1) makes $W/k$ of finite type. Step 6 gave both integrality assertions and density, and steps 5, 7 and 8 give all the remaining clauses.",
+   "uses": [
+    "lem-pc-open-immersion-smooth-composition",
+    "sbc-lem-affine-space-smooth",
+    "def-weil-finite-type-morphism",
+    "def-weil-finite-integral-morphism",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01VC (lemma-open-immersion-smooth), 01VA (lemma-composition-smooth), 01T3 (lemma-composition-finite-type); polynomial and localized-polynomial presentations; groupoids.tex Tag 0BF7, finite etale coordinate chart."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-integral-scheme",
+  "sbc-thm-etale-local-normal-form",
+  "def-sbc-affine-space",
+  "def-weil-finite-type-morphism",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "def-weil-etale-morphism",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-unramified-quasi-finite-at-points",
+  "pqf-def-quasifinite",
+  "pqf-lem-qf-finitefibres",
+  "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-weil-pbc-open-preimage-fibre-product",
+  "lem-trf-finite-radicial-basechange",
+  "lem-a1-etale-open-restriction",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-polynomial-ring-domain",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "def-pc-finite-locally-free",
+  "lem-weil-pbc-finite-locally-free-degree-locally-constant",
+  "lem-weil-pbc-finite-over-field-affine-finite-dim",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "def-weil-algebraic-closure",
+  "def-pc-scheme-fibre",
+  "lem-pc-open-immersion-smooth-composition",
+  "sbc-lem-affine-space-smooth",
+  "lem-sfb-finite-type-composition-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 0BF7, lemma-algebraic-quasi-projective, diagram G <- U -> affine space and W -> V; expanded with morphisms.tex Tags 054L, 02NW, 04MH, 02GL."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A nonempty smooth integral variety has an open subscheme finite etale surjective over a nonempty affine open of affine space",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instInhabitedOpenCover\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \": Inhabited X.OpenCover\", \"doc\": \"For any scheme $X$, the type of open covers of $X$ is inhabited, with the canonical affine open cover constructed from affine open immersions $\\\\{\\\\operatorname{Spec}(R_x) \\\\to X\\\\}_{x \\\\in X}$ whose image\"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_of_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsOpenImmersion f] [IsIntegral Y] [Nonempty X] : IsIntegral X\", \"doc\": \"If $X$ is a non-empty scheme equipped with an open immersion into an integral scheme $Y$, then $X$ is also an integral scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpens\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"(X : Scheme) : Set X.Opens\", \"doc\": \"For a scheme $ X $, the set of affine open subsets of $ X $, i.e., open subsets $ U $ for which the restricted scheme structure is affine.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{X : Scheme} (U : X.Opens) : Prop\", \"doc\": \"A predicate indicating that an open subset $ U $ of a scheme $ X $ is affine, meaning the restricted scheme structure on $ U $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isAffine_affineCover\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"(X : Scheme) (i : X.affineCover.I₀) : IsAffine (X.affineCover.X i)\", \"doc\": \"For any scheme $X$ and any index $i$ in the zeroth component of its affine open cover, the corresponding open subscheme $X.\\\\text{affineCover}.X(i)$ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"[IsEtale f] : IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"[IsAffine X] [Nonempty X] [IsDomain Γ(X, ⊤)] : IsIntegral X\", \"doc\": \"If $X$ is a non-empty affine scheme and the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is an integral domain, then $X$ is an integral scheme.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: standard-smooth polynomial charts and the etale-neighbourhood finite-part theorem do not provide a finite surjective chart over a Zariski open of affine space with the stated split fibres."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth integral scheme over an algebraically closed field has a nonempty affine open finite etale of positive constant degree over an open in affine space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Nonempty ↥S] [Nonempty n],\\n  ¬AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any nonempty scheme $ S $ and nonempty type $ n $, the canonical morphism from the affine $ n $-space $ \\\\mathbb{A}^n_S $ to $ S $ is not an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme),\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S) ↔ IsEmpty ↥S ∨ IsEmpty n\", \"doc\": \"The structure morphism of the affine space $\\\\mathbb{A}^n_S$ over a scheme $S$ is an integral morphism if and only if the base scheme $S$ is empty or the type $n$ is empty.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsIntegralHom fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f ⊤)).IsIntegral\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is integral if the target scheme $ Y $ is affine, the source scheme $ X $ is affine, and the induced ring homomorphism between their coordinate rings is integral (i\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isOpenMap_over\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme),\\n  IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.AffineSpace n S ↘ S).base)\", \"doc\": \"For any scheme $ S $ and natural number $ n $, the canonical morphism $ \\\\mathbb{A}^n_S \\\\to S $ from the affine $ n $-space over $ S $ to $ S $ is an open map, meaning the image of every open subset of\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: standard-smooth polynomial charts and the etale-neighbourhood finite-part theorem do not provide a finite surjective chart over a Zariski open of affine space with the stated split fibres."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, AlgebraicGeometry.IsFinite",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_etale_isCompl_of_quasiFiniteAt\", \"module\": \"Mathlib.AlgebraicGeometry.ZariskisMainTheorem\", \"type\": \" {X S : AlgebraicGeometry.Scheme} (f : X ⟶ S) [AlgebraicGeometry.LocallyOfFiniteType f] [AlgebraicGeometry.IsSeparated f] {x : ↥X} {s : ↥S} (h : f x = s) (hx : AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt f x) : ∃ U g, AlgebraicGeometry.Etale g ∧ s ∈ Set.range ⇑g ∧ ∃ V W v, IsCompl V W ∧ AlgebraicGeom\", \"doc\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: standard-smooth polynomial charts and the etale-neighbourhood finite-part theorem do not provide a finite surjective chart over a Zariski open of affine space with the stated split fibres."
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*etale|etale.*affineSpace|finite.*etale|etale.*finite",
+   "results": "[grep] OK 12 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"13\", \"text\": \"public import Mathlib.RingTheory.Etale.QuasiFinite\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"49\", \"text\": \"theorem exists_etale_isCompl_of_quasiFiniteAt [IsSeparated f]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"71\", \"text\": \"    Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"123\", \"text\": \"  obtain ⟨T, fT, _, ⟨u, hu⟩, V, W, v, hVW, _, hv₂⟩ := exists_etale_isCompl_of_quasiFiniteAt _ rfl hx\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"124\", \"text\": \"    @Etale (@LocallyOfFiniteType ⊓ @FormallyUnramified) := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"130\", \"text\": \"lemma of_comp {Z : Scheme.{u}} (g : Y ⟶ Z) [Etale (f ≫ g)] [LocallyOfFiniteType g]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"141\", \"text\": \"    Etale f ↔ Flat f ∧ FormallyUnramified f ∧ LocallyOfFinitePresentation f := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"142\", \"text\": \"  rw [etale_iff, flat_iff, formallyUnramified_iff, locallyOfFinitePresentation_iff]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"218\", \"text\": \"instance : PreservesFiniteLimits (Etale.forget X) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean\", \"line\": \"37\", \"text\": \"lemma exists_fac_of_etale_of_isSepClosed {X S : Scheme.{u}} (f : X ⟶ S) [Etale f]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean\", \"line\": \"89\", \"text\": \"    obtain ⟨l, hl₁, hl₂⟩ := exists_fac_of_etale_of_isSepClosed (𝒰.f i) φ _ hy\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean\", \"line\": \"120\", \"text\": \"  obtain ⟨l, hl, rfl⟩ := exists_fac_of_etale_of_isSepClosed\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: standard-smooth polynomial charts and the etale-neighbourhood finite-part theorem do not provide a finite surjective chart over a Zariski open of affine space with the stated split fibres."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Shrink an etale coordinate map on an irreducible smooth algebraic variety to get a finite surjective etale map with split finite rational fibres",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"StandardEtalePresentation.toSubmersivePresentation\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] → StandardEtalePresentation R S → Algebra.SubmersivePresentation R S (Fin 2) (Fin 2)\", \"doc\": \"Constructs a submersive presentation of an algebra $ S $ over a commutative ring $ R $ using the standard étale presentation with two generators and two relations. This presentation employs the identi\"}\n  {\"name\": \"StandardEtalePresentation\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"(R : Type u_4) → (S : Type u_5) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type (max u_4 u_5)\", \"doc\": \"A standard étale presentation of an algebra $ S $ over a commutative ring $ R $, providing a way to express $ S $ as a localization of a polynomial ring over $ R $ modulo an ideal, satisfying the nece\"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (P : Ideal A) [inst_4 : P.IsPrime] [Algebra.IsEtaleAt R P],\\n  ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"StandardEtalePair.hasMap_X\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {P : StandardEtalePair R}, P.HasMap P.X\", \"doc\": \"In the standard étale ring extension $ R[X,Y]/(f, Yg - 1) $, the image of the indeterminate $ X $ satisfies $ f(X) = 0 $ and $ g(X) $ is invertible (a unit) in the ring.\"}\n  {\"name\": \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension 0 R S], Algebra.Etale R S\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension 0 over a commutative ring $ R $, then $ S $ is an étale algebra over $ R $.\"}\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Etale A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Etale (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} {n : ℕ},\\n  RingHom.IsStandardSmoothOfRelativeDimension n f → ∃ g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"For any ring homomorphism $ f : R \\\\to S $ that is standard smooth of relative dimension $ n $, there exists an étale ring homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ such that $ g \\\\circ C = f $, whe\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: standard-smooth polynomial charts and the etale-neighbourhood finite-part theorem do not provide a finite surjective chart over a Zariski open of affine space with the stated split fibres."
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*[Ee]tale.*[Aa]ffine|exists.*[Ff]inite.*[Ee]tale|[Ee]tale.*[Aa]ffineSpace",
+   "results": "{\"t\": \"2026-10-23T23:01:22Z\", \"tool\": \"grep\", \"query\": \"exists.*[Ee]tale.*[Aa]ffine|exists.*[Ff]inite.*[Ee]tale|[Ee]tale.*[Aa]ffineSpace\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: standard-smooth ring charts, smooth affine neighbourhoods and their definitions do not assert the finite surjective scheme chart, constant positive rank and split rational fibres. The scheme-level chart in WeilConjectures.DeligneLaumon.Reduction.FiniteEtaleChart supplies only part of the item and is not a Mathlib result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth integral variety contains a nonempty affine open finite etale surjective over an affine open of affine space with constant degree and split fibres",
+   "results": "{\"t\": \"2026-10-23T23:01:23Z\", \"tool\": \"leansearch\", \"query\": \"A smooth integral variety contains a nonempty affine open finite etale surjective over an affine open of affine space with constant degree and split fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.isIntegral_of_isOpenImmersion\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\"], \"digest\": \"3ffa7be021eff34f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: standard-smooth ring charts, smooth affine neighbourhoods and their definitions do not assert the finite surjective scheme chart, constant positive rank and split rational fibres. The scheme-level chart in WeilConjectures.DeligneLaumon.Reduction.FiniteEtaleChart supplies only part of the item and is not a Mathlib result."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, AlgebraicGeometry.IsFinite",
+   "results": "{\"t\": \"2026-10-23T23:01:23Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Smooth, AlgebraicGeometry.IsFinite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: standard-smooth ring charts, smooth affine neighbourhoods and their definitions do not assert the finite surjective scheme chart, constant positive rank and split rational fibres. The scheme-level chart in WeilConjectures.DeligneLaumon.Reduction.FiniteEtaleChart supplies only part of the item and is not a Mathlib result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth integral variety has a finite etale chart over a nonempty open of affine space with positive constant degree",
+   "results": "{\"t\": \"2026-10-23T23:01:23Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth integral variety has a finite etale chart over a nonempty open of affine space with positive constant degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"AlgebraicGeometry.Scheme.Etale\"], \"digest\": \"564eb5ff268a6162\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: standard-smooth ring charts, smooth affine neighbourhoods and their definitions do not assert the finite surjective scheme chart, constant positive rank and split rational fibres. The scheme-level chart in WeilConjectures.DeligneLaumon.Reduction.FiniteEtaleChart supplies only part of the item and is not a Mathlib result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Shrink an etale coordinate map from a smooth variety so it is finite surjective with rational fibres of constant size",
+   "results": "{\"t\": \"2026-10-23T23:01:48Z\", \"tool\": \"leanfinder\", \"query\": \"Shrink an etale coordinate map from a smooth variety so it is finite surjective with rational fibres of constant size\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePresentation.toSubmersivePresentation\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePresentation.P\", \"StandardEtalePresentation\", \"StandardEtalePair.hasMap_X\", \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\"], \"digest\": \"3b6ce035a3038c91\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: standard-smooth ring charts, smooth affine neighbourhoods and their definitions do not assert the finite surjective scheme chart, constant positive rank and split rational fibres. The scheme-level chart in WeilConjectures.DeligneLaumon.Reduction.FiniteEtaleChart supplies only part of the item and is not a Mathlib result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-translated-cartier-parameter-family",
+  "date": "2026-10-24",
+  "group": "Q45"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Local prolongation of a tensor power of a symmetric line; Moret-Bailly II 3.3.3, printed p.53, opening parenthesis: the generic line is a difference of two ample lines; Stacks supplies this for all finite-type algebraic groups, not only abelian varieties. Supporting input for the present split: existence of one ample invertible module on a finite-type group scheme, before choosing a high twist of the supplied line. Smooth irreducible geometric construction in Groupoids Tag 0BF7, before Picard rigidity. Supporting input: Finite-chart step: choose U etale over affine space, shrink to nonempty affine V, and put W=pi inverse image of V, with finite etale positive degree.",
+   "via": [
+    "lem-sfb-translated-cartier-parameter-family",
+    "lem-sfb-finite-type-group-ample-line",
+    "lem-sfb-algebraic-group-ample-difference",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-integral-finite-etale-chart",
+  "worker": "stage1",
+  "summary": "Expanded the finite-chart argument of Stacks 0BF7 into coordinate choice, generic-finiteness hypotheses, a principal target refinement inside the open image, finite etale restriction, integrality, constant positive degree, split rational fibres, and smooth finite-type verification. Reused existing nodes throughout; no new nodes. Statement unchanged; added the existing multivariate polynomial definition dependency.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Local prolongation of a tensor power of a symmetric line; Moret-Bailly II 3.3.3, printed p.53, opening parenthesis: the generic line is a difference of two ample lines; Stacks supplies this for all finite-type algebraic groups, not only abelian varieties. Supporting input for the present split: existence of one ample invertible module on a finite-type group scheme, before choosing a high twist of the supplied line. Smooth irreducible geometric construction in Groupoids Tag 0BF7, before Picard rigidity. Supporting input: Finite-chart step: choose U etale over affine space, shrink to nonempty affine V, and put W=pi inverse image of V, with finite etale positive degree.",
+  "tool_uses": [
+   {
+    "node": "sbc-thm-etale-local-normal-form",
+    "why": "Generic scheme-theoretic tool: Etale-local normal form of a smooth morphism. It supplies a local algebraic-geometry input to the Stacks 0BF7 coordinate-chart argument, not an alternative route to the constructible-finiteness theorem."
+   },
+   {
+    "node": "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "why": "Generic scheme-theoretic tool: An unramified morphism is quasi-finite at every point. It supplies a local algebraic-geometry input to the Stacks 0BF7 coordinate-chart argument, not an alternative route to the constructible-finiteness theorem."
+   },
+   {
+    "node": "pqf-lem-qf-finitefibres",
+    "why": "Generic scheme-theoretic tool: Quasi-finite = finite type + quasi-compact + finite fibres. It supplies a local algebraic-geometry input to the Stacks 0BF7 coordinate-chart argument, not an alternative route to the constructible-finiteness theorem."
+   },
+   {
+    "node": "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+    "why": "Generic scheme-theoretic tool: Finite generic fibers become a finite morphism near the generic points. It supplies a local algebraic-geometry input to the Stacks 0BF7 coordinate-chart argument, not an alternative route to the constructible-finiteness theorem."
+   },
+   {
+    "node": "lem-weil-pbc-finite-locally-free-degree-locally-constant",
+    "why": "Generic scheme-theoretic tool: The fibre degree of a finite locally free morphism is locally constant. It supplies a local algebraic-geometry input to the Stacks 0BF7 coordinate-chart argument, not an alternative route to the constructible-finiteness theorem."
+   },
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "Generic scheme-theoretic tool: The fibres of an etale morphism are disjoint unions of spectra of finite separable field extensions. It supplies a local algebraic-geometry input to the Stacks 0BF7 coordinate-chart argument, not an alternative route to the constructible-finiteness theorem."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Generic scheme-theoretic tool: Affine space is smooth. It supplies a local algebraic-geometry input to the Stacks 0BF7 coordinate-chart argument, not an alternative route to the constructible-finiteness theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-thm-etale-local-normal-form",
+  "lem-weil-pbc-unramified-quasi-finite-at-points",
+  "pqf-lem-qf-finitefibres",
+  "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+  "lem-weil-pbc-finite-locally-free-degree-locally-constant",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "sbc-lem-affine-space-smooth"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q142-957a98305",
+  "group": "Q142",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q142-957a98305 (reviewer sub-agent of L); spot-checked: Read the item and all nine steps in full, and every cited statement (33 proof_deps plus stmt_deps). The source matches groupoids.tex 0BF7 (lemma-algebraic-quasi-projective), the paragraph with the diagram G<-U->A^d_k, W->V: finite étale of degree n, with (pi')^{-1}(v)={w_1..w_n} in W(k). The parent lem-sfb-translated-cartier-parameter-family steps 2-4 use exactly these clauses. There are no new nodes, the statement is unchanged, it is not a re-split, and no SGA is used. Steps check out: 054L chart at a point of the nonempty X; Spec k Noetherian, so A^d is Noetherian; pi affine/qcqs/lft and unramified, hence quasi-finite with finite fibres (02V5, 02NH); 02NW gives a dense O with finite preimage; the étale open image meets O; basic open D(h) with ring R_h; finiteness by base change through the open-preimage fibre product; étale restriction 02GJ; surjective since V lies in pi(U); W affine; W and V integral (h nonzero, R_h a domain); degree constant on the irreducible V, and n>=1 by surjectivity; 02GL fibres split over the algebraically closed k, Gamma=k^m so m=n; smoothness and finite type via 01VC/01VA and 01T3(1). Edge cases: d=0 (X=Spec k, n=1); any characteristic. Separatedness is unused but harmless. No duplicate found among dag/nodes finite-étale/A^d/0BF7 nodes. I accept the seven generic Stacks tool_uses (054L, 02V5, 02NH, 02NW, 02K9, 02GL, affine-space-smooth). FIX in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-smooth-integral-finite-etale-chart.json: (1) step 7 claimed fibre non-emptiness from surjectivity without the scheme-fibre point identification; I cited def-pc-scheme-fibre there and added it to the step's uses. (2) Step 8 treated W x_V Spec k, formed with the rational point, as the scheme fibre over Spec kappa(v); I added the factorization through Spec kappa(v), which is isomorphic to Spec k. proof_deps is unchanged and equals the union of the step uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothIntegralFiniteEtaleChart",
+  "declaration": "AlgebraicGeometry.exists_smooth_integral_finite_etale_chart",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothIntegralFiniteEtaleChart.lean",
+  "statement": "theorem exists_smooth_integral_finite_etale_chart (k : Type u) [Field k] [IsAlgClosed k] (X : Scheme.{u}) (f : X ⟶ Spec (.of k)) [Smooth f] [IsIntegral X] [LocallyOfFiniteType f] [QuasiCompact f] [IsClosedImmersion (pullback.diagonal f)] : ∃ (d n : ℕ) (V : (Spec (.of (MvPolynomial (Fin d) k))).Opens) (W : X.Opens) (q : W.toScheme ⟶ V.toScheme), 1 ≤ n ∧ IsAffineOpen V ∧ Nonempty V ∧ IsAffineOpen W ∧ Nonempty W ∧ Dense (W : Set X) ∧ IsFinite q ∧ Etale q ∧ Surjective q ∧ q ≫ V.ι ≫ Spec.map (CommRingCat.ofHom (algebraMap k (MvPolynomial (Fin d) k))) = W.ι ≫ f ∧ q.IsFiniteLocallyFreeOfDegree n ∧ Smooth (W.ι ≫ f) ∧ IsIntegral W.toScheme ∧ LocallyOfFiniteType (W.ι ≫ f) ∧ QuasiCompact (W.ι ≫ f) ∧ Smooth (V.ι ≫ Spec.map (CommRingCat.ofHom (algebraMap k (MvPolynomial (Fin d) k)))) ∧ IsIntegral V.toScheme ∧ LocallyOfFiniteType (V.ι ≫ Spec.map (CommRingCat.ofHom (algebraMap k (MvPolynomial (Fin d) k)))) ∧ QuasiCompact (V.ι ≫ Spec.map (CommRingCat.ofHom (algebraMap k (MvPolynomial (Fin d) k)))) ∧ ∀ v : Spec (.of k) ⟶ V.toScheme, v ≫ V.ι ≫ Spec.map (CommRingCat.ofHom (algebraMap k (MvPolynomial (Fin d) k))) = 𝟙 (Spec (.of k)) → ∃ a : Fin n → (Spec (.of k) ⟶ pullback q v), Nonempty (IsColimit (Cofan.mk (pullback q v) a)) ∧ (∀ i : Fin n, a i ≫ pullback.snd q v = 𝟙 (Spec (.of k))) ∧ Function.Injective (fun i : Fin n ↦ (a i ≫ pullback.fst q v) (IsLocalRing.closedPoint k)) ∧ Set.range (fun i : Fin n ↦ (a i ≫ pullback.fst q v) (IsLocalRing.closedPoint k)) = {x : W.toScheme | q x = v (IsLocalRing.closedPoint k)}",
+  "branch": "sheaf-dag",
+  "by": "Q16",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3a7020bf8",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Read the item node, all 13 stmt_dep records, the delivered module, report.md, upstream FiberDegree.lean (IsFiniteLocallyFreeOfDegree = finite+flat+lfp with fiberDegree = d at every point, i.e. def-pc-finite-locally-free) and the weaker existing exists_isFinite_etale_to_affineSpace (perfect field, no affine/dense/degree/split fibres: not a duplicate). Every clause matches: alg-closed k; smooth integral finite-type X with separatedness as IsClosedImmersion of the diagonal; d, n with 1 ≤ n; V affine nonempty open of Spec MvPolynomial (Fin d) k; W affine nonempty dense open; q finite, etale, surjective, over k; IsFiniteLocallyFreeOfDegree n; for every k-section v, a colimiting Fin n cofan of Spec k into pullback q v over k, with injective points whose range is the fibre; W and V smooth, integral, finite type over k. Edge cases d=0, n=0, empty X fine; no extra assumptions; universe u standard. lean.statement verbatim; node unchanged apart from lean; not landed by another group; no defs, sorry only, source and blueprint docstrings with the 9 steps; both report sections present. Advisory: Mathlib basics (IsClosedImmersion, IsAffineOpen, Dense, Cofan) used without a stmt_dep (base-node gap), stale line 778 in the def-pc-finite-locally-free record, possibly redundant plain Mathlib imports. No compile (no FIX); worker reports a clean compile."
+ }
+}

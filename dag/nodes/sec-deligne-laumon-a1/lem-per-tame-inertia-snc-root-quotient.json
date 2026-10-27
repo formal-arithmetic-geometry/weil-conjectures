@@ -1,0 +1,315 @@
+{
+ "id": "lem-per-tame-inertia-snc-root-quotient",
+ "kind": "statement",
+ "title": "Tame inertia normal form by roots of normal crossings parameters",
+ "statement": "Let $Y$ be a regular Noetherian scheme [def-weil-regular-scheme, pqf-def-locnoeth], let $D\\subset Y$ be a reduced normal crossings divisor (etale locally the zero set of a product of distinct regular parameters), and put $U=Y\\setminus D$. Let a finite group $G$ act on a normal Noetherian scheme $Z$, and let $q:Z\\to Y$ be a finite surjective quotient [def-weil-finite-integral-morphism] with invariant structure sheaf and orbit geometric fibres. Normal means that all local rings are integrally closed domains [def-weil-pbc-normal-ring]. Assume the action is generically free, $q$ is etale over $U$ [def-weil-etale-morphism], and for every geometric point $\\bar w$ of $Z$, lying over $w\\in Z$, the stabilizer $\\operatorname{Stab}_G(\\bar w)$ (the geometric inertia group) has order invertible in $\\kappa(w)$. Fix a geometric point $\\bar z$ above $\\bar y$ [def-weil-geometric-point], and put $H=\\operatorname{Stab}_G(\\bar z)$. There exist pointed affine etale neighbourhoods $W\\to Z$, $T=\\operatorname{Spec}A\\to Y$, a map $W\\to T$ over $q$, an integer $n\\geq1$ invertible in $A$, boundary equations $t_1,\\ldots,t_r$ with $r\\geq0$, a primitive root $\\zeta\\in A^\\times$ with $\\zeta^n=1$ and all $1-\\zeta^a$ invertible for $0<a<n$, and a subgroup $K\\subseteq(\\mathbf Z/n\\mathbf Z)^r$, such that the $t_i$ form part of a regular system of parameters [def-weil-pbc-regular-system-of-parameters] at the selected point and $U\\times_YT=D(t_1\\cdots t_r)$. Define\n$$B=A[x_1,\\ldots,x_r]/(x_i^n-t_i)_i,$$\nwith $(a_i)\\in(\\mathbf Z/n\\mathbf Z)^r$ acting by $x_i\\mapsto\\zeta^{a_i}x_i$ and fixing $A$. Then $W\\cong\\operatorname{Spec}(B^K)$ over $T$. On strict localizations [def-weil-pbc-strict-henselization-limit] at the selected points this isomorphism identifies the actual $H$-action with the action induced by the diagonal root group, with\n$$H\\cong(\\mathbf Z/n\\mathbf Z)^r/K.$$\nThe scheme $Z$ is not assumed regular or excellent, $D$ need not be strict globally, and $|G|$ need not be invertible on $Y$. When $r=0$, the selected strict-local cover is the identity and $H=1$. No log structure or logarithmic regularity conclusion is asserted.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "IX Proposition 2.1(i)--(iii), printed pp.133--134, local parameter-root invariant description, applied after strict localization to the inertia group; VI 2.2--2.3, pp.72--73, diagonal root actions. This is the underlying-scheme Abhyankar normal form used in VIII 5.3.8, p.125."
+ },
+ "stmt_deps": [
+  "def-weil-regular-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-normal-ring",
+  "def-weil-etale-morphism",
+  "def-weil-geometric-point",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-regular-system-of-parameters",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-trf-normal-crossings-divisor",
+  "def-sfb-parameter-root-algebra",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "def-weil-pbc-strict-henselization-point-evaluation",
+  "lem-weil-pbc-strict-henselization-functoriality"
+ ],
+ "proof": [
+  {
+   "text": "Apply the normal-crossings branch atlas with both boundaries equal to $D$. It supplies a pointed affine etale chart $T_0$ with $D_{T_0}=V(t_1\\cdots t_r)$, all selected factors vanishing at the selected point and every vanishing sublist belonging to a regular parameter system. Apply the inertia-slice lemma, refining this prescribed $T_0$. We obtain integral regular $T_1$, normal integral $V$, and the $H$-quotient $V\\to T_1$, with $V\\to Z$ pointed etale and $n=|H|$ invertible on $T_1$. Pull back the equations from $T_0$. Etale preservation of parameter systems and the parameter criterion make $D_{T_1}$ a strict normal crossings boundary. Only $|H|$, not $|G|$, has been inverted.",
+   "uses": [
+    "lem-trf-nc-subboundary-branch-atlas",
+    "lem-per-finite-quotient-inertia-slice",
+    "lem-trf-etale-coordinate-divisor-parameters",
+    "lem-sfb-snc-boundary-parameter-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 2.1, printed p.133, etale-local parameter reduction; inertia reduction as in VI p.74."
+   }
+  },
+  {
+   "text": "Write $T_1=\\operatorname{Spec}A_1$, $V=\\operatorname{Spec}C_1$ and $L_1=\\operatorname{Frac}(C_1)$. The slice supplies a connected finite etale $H$-torsor on the complement of $D_{T_1}$. The finite normal cover $V$ is precisely the normalization of $T_1$ in $L_1$: its elements are integral over $A_1$, and any element of $L_1$ integral over $A_1$ is integral over $C_1$, hence belongs to $C_1$ by integral closedness. Thus the parameter-root quotient theorem applies to this torsor and its finite normalization. It produces a further pointed affine etale $T=\\operatorname{Spec}A\\to T_1$, a pointed affine etale $W\\to V$, the specified root $\\zeta$, and $K\\leq\\Gamma=(\\mathbf Z/n\\mathbf Z)^r$, with $W\\simeq\\operatorname{Spec}(B^K)$ over $T$. Require its prescribed-parameter refinement clause, so the equations are the pulled-back $t_i$. Compose $W\\to V\\to Z$; the etale-composition theorem applies to these two etale maps. All neighbourhood and algebra assertions of the item now hold.",
+   "uses": [
+    "lem-per-finite-quotient-inertia-slice",
+    "def-fin-normalization-extension",
+    "lem-per-snc-parameter-root-quotient",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 2.1(ii) and local invariant-ring normal form, pp.133–134."
+   }
+  },
+  {
+   "text": "Put $R=\\mathcal O^{\\mathrm{sh}}_{Y,\\bar y}$ and $C=\\mathcal O^{\\mathrm{sh}}_{Z,\\bar z}$. Etale invariance identifies the strict local rings of $T$ and $W$ with $R$ and $C$. The slice gives $R=C^H$, $C$ finite normal local over $R$, and the actual faithful $H$-action on $C$. Strict-henselization regularity makes $R$ regular Noetherian local. The strict-henselization cotangent comparison preserves the parameter positions of the $t_i$. Therefore the root-algebra structure theorem applies to $\\widetilde B=R[x_i]/(x_i^n-t_i)$: it is a strictly henselian regular local domain, has the same residue field as $R$, and for $F=\\operatorname{Frac}(R)$, $E=\\operatorname{Frac}(\\widetilde B)$ it identifies $\\operatorname{Aut}_F(E)$ with the rotations $\\Gamma$.",
+   "uses": [
+    "lem-per-finite-quotient-inertia-slice",
+    "lem-trf-ind-etale-strict-local-invariance",
+    "lem-sc-strict-henselization-regular",
+    "lem-sc-strict-henselization-cotangent-dimension",
+    "lem-per-snc-root-algebra-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 2.1 local root algebra, p.133; VI 2.2–2.3, pp.72–73."
+   }
+  },
+  {
+   "text": "The monic relations give the basis $x^a$, $0\\le a_i<n$, of $B$ by successive polynomial division. A rotation $k\\in K$ multiplies this basis vector by $\\zeta^{\\sum k_ia_i}$. Every nontrivial such scalar differs from $1$ by a unit. Hence an invariant element has zero coefficient at every basis vector with nontrivial $K$-character; the remaining basis vectors freely span $B^K$. This calculation commutes with coefficient extension to $R$, so $(B^K)\\otimes_A R=\\widetilde B^K=:J$. In particular $J$ is finite free over $R$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 2.1 displayed root algebra and invariant quotient, p.133."
+   }
+  },
+  {
+   "text": "The ring $J\\subset\\widetilde B$ is a domain. The extension $J\\subset\\widetilde B$ is integral, since the root algebra is already integral over $R\\subset J$. Lying over lifts every maximal ideal of $J$ to a prime of $\\widetilde B$, and the integral prime-over-maximal theorem makes that prime maximal, so $J$ is local; its residue field is exactly that of $R$, since it lies between that field and the equal residue field of $\\widetilde B$. As a finite local algebra over the henselian ring $R$, $J$ is henselian by the finite-algebra product theorem. Thus $J$ is strictly henselian. For a pointed etale $J$-algebra $S$, the selected residue map lands in $k_J$ since that field is separably closed. Apply the henselian-local-target lifting theorem with base and target both $J$ (the identity algebra is module-finite and formally unramified): the residue map lifts uniquely to $S\\to J$. Uniqueness makes these maps compatible. Their colimit map retracts $J\\to J^{\\mathrm{sh}}$. To check the other composite, apply the same lifting bijection with base and target $J^{\\mathrm{sh}}$ to each etale algebra $S\\otimes_J J^{\\mathrm{sh}}$: the composite and its coprojection have equal residue maps, so are equal. Thus the colimit map is inverse. Consequently $\\operatorname{Spec}J=W\\times_T\\operatorname{Spec}R$ is its own strict localization at the selected point. Its map to $W$ is ind-etale (base change of the strict-local structural map), so strict-local invariance identifies $J$ with $C$. This is the strict-local extension of the isomorphism from Step 2; it identifies actual $H$-actions by transfer, without asserting an action of $H$ on $W$ itself.",
+   "uses": [
+    "lem-weil-pbc-finite-over-henselian-local-product",
+    "lem-trf-ind-etale-strict-local-invariance",
+    "pqf-lem-lying-over",
+    "lem-weil-pbc-integral-prime-over-maximal-maximal",
+    "lem-weil-pbc-henselian-local-target-etale-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 2.1 etale-local normal form, pp.133–134; VI p.74 strict-local quotient."
+   }
+  },
+  {
+   "text": "Inside $E$ one has $\\operatorname{Frac}(J)=E^K$. Indeed, for $u=a/b\\in E^K$ with $a,b\\in\\widetilde B$ and $b\\ne0$, put $d=\\prod_{k\\in K}k(b)$. Then $d\\in J$ is nonzero, and $du=a\\prod_{k\\ne1}k(b)$ is both in $\\widetilde B$ and $K$-fixed, hence in $J$. Conversely every fraction of invariant elements is fixed. The same denominator argument for $C$ and $H$ gives $\\operatorname{Frac}(C)^H=\\operatorname{Frac}(C^H)=F$. The faithful finite $H$-action on $C$ extends faithfully to its fraction field $L$, so the finite-field-action theorem gives $L/F$ Galois of degree $|H|$. The finite-Galois theorem says $|\\operatorname{Aut}_F(L)|=[L:F]=|H|$; thus the injective actual action $H\\to\\operatorname{Aut}_F(L)$ is an isomorphism.",
+   "uses": [
+    "lem-per-finite-quotient-inertia-slice",
+    "lem-wf-finite-field-action-fixed-degree",
+    "lem-weil-pbc-finite-galois-fixed-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 2.1 normalization and invariant-field argument, pp.133–134; Stacks 09I3 and 09DW."
+   }
+  },
+  {
+   "text": "The group $\\Gamma$ is abelian, so $K$ is normal. Apply the normal-fixed-field quotient theorem to $E/F$: restriction gives $\\Gamma/K\\simeq\\operatorname{Aut}_F(E^K)$. Steps 5–6 identify $E^K$ with $\\operatorname{Frac}(C)$. Compose this restriction isomorphism with the inverse of the actual $H$-action isomorphism in Step 6 to obtain $\\Gamma/K\\simeq H$. Every rotation preserves $\\widetilde B^K$ because it commutes with $K$. If a rotation class corresponds to $h\\in H$, their actions agree on the fraction field by construction; therefore they agree on its subring $C=\\widetilde B^K$. This proves the claimed equivariance on strict localizations, including its normalization as the actual action. When $r=0$, $\\Gamma=1$ and the root algebra and its invariant ring are $R$; hence $C=R$ and $H=1$.",
+   "uses": [
+    "lem-per-finite-galois-normal-fixed-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 2.2–2.3 diagonal root action, pp.72–73; IX 2.1, pp.133–134; Stacks 09DW."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-nc-subboundary-branch-atlas",
+  "lem-per-finite-quotient-inertia-slice",
+  "lem-trf-etale-coordinate-divisor-parameters",
+  "lem-sfb-snc-boundary-parameter-criterion",
+  "def-fin-normalization-extension",
+  "lem-per-snc-parameter-root-quotient",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-trf-ind-etale-strict-local-invariance",
+  "lem-sc-strict-henselization-regular",
+  "lem-sc-strict-henselization-cotangent-dimension",
+  "lem-per-snc-root-algebra-structure",
+  "lem-weil-pbc-finite-over-henselian-local-product",
+  "pqf-lem-lying-over",
+  "lem-weil-pbc-integral-prime-over-maximal-maximal",
+  "lem-weil-pbc-henselian-local-target-etale-maps",
+  "lem-wf-finite-field-action-fixed-degree",
+  "lem-weil-pbc-finite-galois-fixed-field",
+  "lem-per-finite-galois-normal-fixed-quotient"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "IX 2.1 proof, pp.133–134, with inertia-slice reduction and explicit strict-local equivariance from VI 2.2–2.3. Source route assembled with the existing parameter-root quotient theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Abhyankar|tame.*ramif|ramif.*tame",
+   "results": "{\"t\": \"2026-10-24T00:30:58Z\", \"tool\": \"grep\", \"query\": \"Abhyankar|tame.*ramif|ramif.*tame\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read hits: ordinary etale algebras, ordinary integral pushouts, field Kummer theory and scheme cover constructors do not state this fs-monoid or tame normal-crossings assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Abhyankar\"",
+   "results": "{\"t\": \"2026-10-24T00:30:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"Abhyankar\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read hits: ordinary etale algebras, ordinary integral pushouts, field Kummer theory and scheme cover constructors do not state this fs-monoid or tame normal-crossings assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normal tame covers of a regular scheme have local parameter root quotient presentations without the whole group order being invertible",
+   "results": "{\"t\": \"2026-10-24T00:30:58Z\", \"tool\": \"leansearch\", \"query\": \"Normal tame covers of a regular scheme have local parameter root quotient presentations without the whole group order being invertible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Cover.pullbackCoverOverProp'\", \"AlgebraicGeometry.Scheme.Cover.mkOfCovers\", \"IsQuotientCoveringMap.isCoveringMap\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Cover.Over.over\", \"AlgebraicGeometry.Scheme.Cover.Over.ctorIdx\", \"IsQuotientCoveringMap.mk\", \"AlgebraicGeometry.Scheme.Cover.sigma\"], \"digest\": \"dba7da755c398920\"}; Read hits: ordinary etale algebras, ordinary integral pushouts, field Kummer theory and scheme cover constructors do not state this fs-monoid or tame normal-crossings assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite tame group quotient normal cover of a regular normal crossings pair is etale locally the invariant algebra of roots of boundary parameters",
+   "results": "{\"t\": \"2026-10-24T00:30:59Z\", \"tool\": \"leanfinder\", \"query\": \"A finite tame group quotient normal cover of a regular normal crossings pair is etale locally the invariant algebra of roots of boundary parameters\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.instAlgebraRing\", \"StandardEtalePair.hasMap_X\", \"StandardEtalePair.instEtaleRing\", \"StandardEtalePair.instFormallyEtaleRing\", \"StandardEtalePair.instCommRingRing\", \"StandardEtalePresentation.P\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"Algebra.instIsStandardEtaleRing\"], \"digest\": \"22f5d2600bce7ea5\"}; Read hits: ordinary etale algebras, ordinary integral pushouts, field Kummer theory and scheme cover constructors do not state this fs-monoid or tame normal-crossings assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A tame finite normal quotient near a geometric point is an invariant algebra of roots of normal crossing parameters with exponent invertible locally",
+   "results": "{\"t\": \"2026-10-24T00:36:56Z\", \"tool\": \"leanfinder\", \"query\": \"A tame finite normal quotient near a geometric point is an invariant algebra of roots of normal crossing parameters with exponent invertible locally\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.Ring\", \"StandardEtalePresentation\", \"StandardEtalePair.X\", \"StandardEtalePair\", \"StandardEtalePair.instAlgebraRing\", \"Algebra.IsStandardEtale\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"StandardEtalePair.hasMap_X\"], \"digest\": \"0f2759482da868aa\"}; Read hits: ordinary etale algebras, ordinary integral pushouts, field Kummer theory and scheme cover constructors do not state this fs-monoid or tame normal-crossings assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Abhyankar|tame.*ramif|ramif.*tame",
+   "results": "{\"t\": \"2026-10-24T01:33:04Z\", \"tool\": \"grep\", \"query\": \"Abhyankar|tame.*ramif|ramif.*tame\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; no match: field Kummer extensions and ordinary etale/normalization constructions do not state the normal-crossings inertia normal form.",
+   "date": "2026-10-24",
+   "verdict": "no match: field Kummer extensions and ordinary etale/normalization constructions do not state the normal-crossings inertia normal form."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A tame normal cover along a normal crossings divisor is etale locally a quotient of a simultaneous Kummer root cover",
+   "results": "{\"t\": \"2026-10-24T01:33:04Z\", \"tool\": \"leansearch\", \"query\": \"A tame normal cover along a normal crossings divisor is etale locally a quotient of a simultaneous Kummer root cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"adjoinRootXPowSubCEquiv.congr_simp\", \"IsQuotientCoveringMap.isCoveringMap\", \"adjoinRootXPowSubCEquiv_root\", \"KummerExtension.termK[_√_]\", \"adjoinRootXPowSubCEquiv\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"autAdjoinRootXPowSubCEquiv_symm_smul\"], \"digest\": \"f86fb0b168ba7b1d\"}; no match: field Kummer extensions and ordinary etale/normalization constructions do not state the normal-crossings inertia normal form.",
+   "date": "2026-10-24",
+   "verdict": "no match: field Kummer extensions and ordinary etale/normalization constructions do not state the normal-crossings inertia normal form."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Abhyankar\"",
+   "results": "{\"t\": \"2026-10-24T01:33:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"Abhyankar\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; no match: field Kummer extensions and ordinary etale/normalization constructions do not state the normal-crossings inertia normal form.",
+   "date": "2026-10-24",
+   "verdict": "no match: field Kummer extensions and ordinary etale/normalization constructions do not state the normal-crossings inertia normal form."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite tame group quotient over a regular normal crossings pair has a local invariant parameter root algebra with the inertia group equal to the root group quotient",
+   "results": "{\"t\": \"2026-10-24T01:33:06Z\", \"tool\": \"leanfinder\", \"query\": \"A finite tame group quotient over a regular normal crossings pair has a local invariant parameter root algebra with the inertia group equal to the root group quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.inertiaDegIn_mul_inertiaDegIn\", \"Ideal.ncard_primesOver_mul_card_inertia_mul_finrank\", \"IsArithFrobAt.mul_inv_mem_inertia\", \"Ideal.card_inertia_eq_ramificationIdxIn\", \"Ideal.inertiaDegIn_ne_zero\", \"arithFrobAt\", \"Ideal.ramificationIdxIn_mul_ramificationIdxIn\", \"Ideal.ncard_primesOver_mul_ramificationIdxIn_mul_inertiaDegIn\"], \"digest\": \"f06bd958a6efe82a\"}; no match: field Kummer extensions and ordinary etale/normalization constructions do not state the normal-crossings inertia normal form.",
+   "date": "2026-10-24",
+   "verdict": "no match: field Kummer extensions and ordinary etale/normalization constructions do not state the normal-crossings inertia normal form."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-kummer-boundary-restriction",
+  "date": "2026-10-24",
+  "group": "Q11"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, regular-pair purity geometry via the absolute equivariant modification: IX Proposition 2.1(i)--(iii), printed pp.133--134, local parameter-root invariant description, applied after strict localization to the inertia group; VI 2.2--2.3, pp.72--73, diagonal root actions. This is the underlying-scheme Abhyankar normal form used in VIII 5.3.8, p.125.",
+   "via": [
+    "lem-per-kummer-boundary-restriction",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-tame-inertia-snc-root-quotient",
+  "worker": "stage1",
+  "summary": "Retained the statement, reused the existing parameter-root quotient and root-algebra nodes, and separated only the boundary-independent inertia-slice theorem and the exact Mathlib normal-fixed-field quotient theorem. Wrote the invariant basis, strict-local ring identification, fraction-field norm argument and actual-action comparison explicitly. Read ILO IX 2.1 and VI 2.2–2.3 and Stacks 0BST/09DW; checked nonexcellent, nonregular source, noninvertible whole-group order, empty-boundary and trivial-group cases.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve Step 3, regular-pair purity input through the existing created.item chain: ILO IX 2.1 parameter-root normalization and VI 2.2–2.3 actual diagonal action.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-nc-subboundary-branch-atlas",
+    "why": "Generic geometry/algebra tool for 1; used for its stated branch-chart, parameter-preservation, strict-localization or henselian-finite-algebra assertion. The perverse-curve unit supplies no alternative for this local algebra input."
+   },
+   {
+    "node": "lem-trf-etale-coordinate-divisor-parameters",
+    "why": "Generic geometry/algebra tool for 1; used for its stated branch-chart, parameter-preservation, strict-localization or henselian-finite-algebra assertion. The perverse-curve unit supplies no alternative for this local algebra input."
+   },
+   {
+    "node": "lem-trf-ind-etale-strict-local-invariance",
+    "why": "Generic geometry/algebra tool for 3, 5; used for its stated branch-chart, parameter-preservation, strict-localization or henselian-finite-algebra assertion. The perverse-curve unit supplies no alternative for this local algebra input."
+   },
+   {
+    "node": "lem-sc-strict-henselization-regular",
+    "why": "Generic geometry/algebra tool for 3; used for its stated branch-chart, parameter-preservation, strict-localization or henselian-finite-algebra assertion. The perverse-curve unit supplies no alternative for this local algebra input."
+   },
+   {
+    "node": "lem-sc-strict-henselization-cotangent-dimension",
+    "why": "Generic geometry/algebra tool for 3; used for its stated branch-chart, parameter-preservation, strict-localization or henselian-finite-algebra assertion. The perverse-curve unit supplies no alternative for this local algebra input."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-henselian-local-product",
+    "why": "Generic geometry/algebra tool for 5; used for its stated branch-chart, parameter-preservation, strict-localization or henselian-finite-algebra assertion. The perverse-curve unit supplies no alternative for this local algebra input."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-local-target-etale-maps",
+    "why": "Generic commutative-algebra or etale-composition theorem in Step 5. Its statement supplies exactly the prime-lifting, maximality, henselian lifting or composition assertion used; no perverse-curve unit step is replaced."
+   },
+   {
+    "node": "lem-sfb-snc-boundary-parameter-criterion",
+    "why": "Step 1: generic criterion on a regular Noetherian scheme (local ideal generated by a product of regular parameters iff strict normal crossings boundary); it replaces the identical per-chapter statement dropped on 2026-10-19. No live node of sk-p-dl-a1-perverse gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-nc-subboundary-branch-atlas",
+  "lem-trf-etale-coordinate-divisor-parameters",
+  "lem-trf-ind-etale-strict-local-invariance",
+  "lem-sc-strict-henselization-regular",
+  "lem-sc-strict-henselization-cotangent-dimension",
+  "lem-weil-pbc-finite-over-henselian-local-product",
+  "lem-weil-pbc-henselian-local-target-etale-maps",
+  "lem-sfb-snc-boundary-parameter-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-d2009d5fd",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-d2009d5fd (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, ILO IX Prop 2.1 and its proof (printed pp.133-134), Stacks 0BST and Mathlib Galois/Basic.lean:419-439. All 7 steps are correct. S1: the atlas and étale-parameter nodes plus the criterion make D_{T1} strict normal crossings, and the slice inverts only |H|. S2: the root-quotient hypotheses hold (T1 integral regular Noetherian, dense complement, connected H-torsor, and V is the finite normalization because C1 is integrally closed); the étale composite W->V->Z is cited. S3: strict-henselization regularity and the cotangent isomorphism keep the parameters, so the root-algebra node applies. S4 (elementary invariant basis) is correct. S5: J is local (lying-over plus maximal-over-maximal), henselian (finite-algebra product node), strictly henselian and equal to its own strict henselization; it is identified with C by ind-étale invariance under base change. S6: the norm-denominator argument and the fixed-degree node give H = Aut_F(Frac C). S7: Gamma/K = Aut(E^K) by restriction, and the two actions agree on C. New node lem-per-finite-quotient-inertia-slice is true: 0BST X/I étale near x, V connected because H fixes the point, faithful by generic freeness, trivial inertia over the étale locus. It is not a duplicate of the dl-a1 ring-level nodes and does not restate the item. New node lem-per-finite-galois-normal-fixed-quotient is an exact Mathlib leaf (normalAutEquivQuotient :431, _apply :437, of_fixedField_normal_subgroup :421). Batch-5 check: the 3 trf nodes are generic étale/strict-local tools and add 0 nodes; criterion and root-quotient reach only the generic def-trf-SNC definition. All are accepted. Dropped 2026-10-19 route: (1) FIX: lem-per-snc-boundary-parameter-criterion is repointed to its verbatim twin lem-sfb-snc-boundary-parameter-criterion in step 1 uses and proof_deps, with a tool_uses entry; no cycle. (2) lem-per-snc-parameter-root-quotient (step 2) and lem-per-snc-root-algebra-structure (step 3) are accepted. Both passed review before the drop and have no non-dropped twin. They are Abhyankar local algebra (ILO IX 2.1, the item's own source), none of the forbidden machinery (Qbar or adic, middle t-structure, Gabber finiteness or uniformization, alterations, stable reduction). They re-add 6 nodes, one of them the unsplit Zariski-Nagata purity node. The item itself is reached through the existing sfb ctf-stability chain. Note for the maintainer: the item's inherited blueprint.via still lists the dropped Q144 chain. Fixed file: fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-tame-inertia-snc-root-quotient.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TameInertiaSNCRootQuotient",
+  "declaration": "AlgebraicGeometry.exists_tame_inertia_snc_root_quotient",
+  "file": "lean/Sheaf/AlgebraicGeometry/TameInertiaSNCRootQuotient.lean",
+  "statement": "theorem exists_tame_inertia_snc_root_quotient (Y Z : Scheme.{u}) [IsNoetherian Y] [IsNoetherian Z] (hY : IsRegularScheme Y) (D : Y.IdealSheafData) (hD : D.IsNormalCrossingsDivisor) (hred : ∀ U : Y.affineOpens, (D.ideal U).IsRadical) (G : Type v) [Group G] [Finite G] (a : G →* Aut Z) (q : Z ⟶ Y) [IsFinite q] [Surjective q] (hnormal : ∀ z : Z, IsDomain (Z.presheaf.stalk z) ∧ IsIntegrallyClosed (Z.presheaf.stalk z)) (hinvariant : ∀ g : G, (a g).hom ≫ q = q) (hsheaf : ∀ U : Y.Opens, Function.Injective (q.app U).hom ∧ ∀ s : Γ(Z, q ⁻¹ᵁ U), s ∈ Set.range (q.app U).hom ↔ ∀ (g : G) (V : Z.Opens) (hV : V ≤ q ⁻¹ᵁ U) (hVg : V ≤ (a g).hom ⁻¹ᵁ (q ⁻¹ᵁ U)), ((a g).hom.appLE (q ⁻¹ᵁ U) V hVg).hom s = (Z.presheaf.map (homOfLE hV).op).hom s) (horbits : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (z₁ z₂ : Spec (.of Ω) ⟶ Z), z₁ ≫ q = z₂ ≫ q → ∃ g : G, z₁ ≫ (a g).hom = z₂) (hfree : ∃ V : Z.Opens, Dense (V : Set Z) ∧ (∀ (g : G) (z : Z), (a g).hom z ∈ V ↔ z ∈ V) ∧ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (z : Spec (.of Ω) ⟶ Z) (g : G), z (IsLocalRing.closedPoint Ω) ∈ V → z ≫ (a g).hom = z → g = 1) (hetale : Etale (q ∣_ D.support.compl)) (htame : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (z : Spec (.of Ω) ⟶ Z), IsUnit (Nat.card {g : G // z ≫ (a g).hom = z} : Ω)) (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (z : Spec (.of Ω) ⟶ Z) (H : Subgroup G) (hH : ∀ g : G, g ∈ H ↔ z ≫ (a g).hom = z) : ∃ (A : Type u) (_ : CommRing A) (_ : IsNoetherianRing A) (e : Spec (.of A) ⟶ Y) (yT : Spec (.of Ω) ⟶ Spec (.of A)), Etale e ∧ yT ≫ e = z ≫ q ∧ ∃ (n r : ℕ) (t : Fin r → A) (ζ : Aˣ), 0 < n ∧ IsUnit (n : A) ∧ (ζ : A) ^ n = 1 ∧ (∀ b : ℕ, 0 < b → b < n → IsUnit (1 - (ζ : A) ^ b)) ∧ (∃ s : List (Localization.AtPrime (yT (IsLocalRing.closedPoint Ω)).asIdeal), IsLocalRing.IsRegularSystemOfParameters s ∧ (List.ofFn (fun i : Fin r ↦ algebraMap A (Localization.AtPrime (yT (IsLocalRing.closedPoint Ω)).asIdeal) (t i))).Sublist s) ∧ e ⁻¹ᵁ D.support.compl = PrimeSpectrum.basicOpen (∏ i, t i) ∧ ∃ (K : Subgroup (Multiplicative (Fin r → ZMod n))) (ρ : Multiplicative (Fin r → ZMod n) →* (Algebra.pthRootAlgebra n r A t ≃ₐ[A] Algebra.pthRootAlgebra n r A t)) (S : Subalgebra A (Algebra.pthRootAlgebra n r A t)), (∀ (g : Multiplicative (Fin r → ZMod n)) (i : Fin r), ρ g (Ideal.Quotient.mk _ (MvPolynomial.X i)) = algebraMap A _ ((ζ : A) ^ (Multiplicative.toAdd g i).val) * Ideal.Quotient.mk _ (MvPolynomial.X i)) ∧ (∀ b : Algebra.pthRootAlgebra n r A t, b ∈ S ↔ ∀ k : K, ρ k.val b = b) ∧ ∃ (w : Spec (.of S) ⟶ Z) (zW : Spec (.of Ω) ⟶ Spec (.of S)), Etale w ∧ zW ≫ w = z ∧ Spec.map (CommRingCat.ofHom (algebraMap A S)) ≫ e = w ≫ q ∧ zW ≫ Spec.map (CommRingCat.ofHom (algebraMap A S)) = yT ∧ ∃ (c : A →+* Scheme.strictHenselizationRing (z ≫ q)), Spec.map (CommRingCat.ofHom c) ≫ e = Scheme.strictHenselizationStructuralMap (z ≫ q) ∧ Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationPointEvaluation (z ≫ q))) ≫ Spec.map (CommRingCat.ofHom c) = yT ∧ ∃ (ρR : Multiplicative (Fin r → ZMod n) →* (Algebra.pthRootAlgebra n r (Scheme.strictHenselizationRing (z ≫ q)) (fun i ↦ c (t i)) ≃ₐ[ Scheme.strictHenselizationRing (z ≫ q)] Algebra.pthRootAlgebra n r (Scheme.strictHenselizationRing (z ≫ q)) (fun i ↦ c (t i)))) (C : Subalgebra (Scheme.strictHenselizationRing (z ≫ q)) (Algebra.pthRootAlgebra n r (Scheme.strictHenselizationRing (z ≫ q)) (fun i ↦ c (t i)))) (j : Algebra.pthRootAlgebra n r A t →+* Algebra.pthRootAlgebra n r (Scheme.strictHenselizationRing (z ≫ q)) (fun i ↦ c (t i))) (jS : S →+* C) (ι : C ≃+* Scheme.strictHenselizationRing z) (θ : (Multiplicative (Fin r → ZMod n) ⧸ K) ≃* H) (α : H → (Scheme.strictHenselizationRing z ≃+* Scheme.strictHenselizationRing z)), (∀ (g : Multiplicative (Fin r → ZMod n)) (i : Fin r), ρR g (Ideal.Quotient.mk _ (MvPolynomial.X i)) = algebraMap _ _ (c ((ζ : A) ^ (Multiplicative.toAdd g i).val)) * Ideal.Quotient.mk _ (MvPolynomial.X i)) ∧ (∀ b : Algebra.pthRootAlgebra n r (Scheme.strictHenselizationRing (z ≫ q)) (fun i ↦ c (t i)), b ∈ C ↔ ∀ k : K, ρR k.val b = b) ∧ (∀ b : A, j (algebraMap A _ b) = algebraMap _ _ (c b)) ∧ (∀ i : Fin r, j (Ideal.Quotient.mk _ (MvPolynomial.X i)) = Ideal.Quotient.mk _ (MvPolynomial.X i)) ∧ (∀ b : S, (jS b : Algebra.pthRootAlgebra n r (Scheme.strictHenselizationRing (z ≫ q)) (fun i ↦ c (t i))) = j b) ∧ Spec.map (CommRingCat.ofHom ι.toRingHom) ≫ Spec.map (CommRingCat.ofHom (algebraMap _ C)) = Scheme.strictHenselizationMap q z ∧ Spec.map (CommRingCat.ofHom ι.toRingHom) ≫ Spec.map (CommRingCat.ofHom jS) ≫ w = Scheme.strictHenselizationStructuralMap z ∧ Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationPointEvaluation z)) ≫ Spec.map (CommRingCat.ofHom ι.toRingHom) ≫ Spec.map (CommRingCat.ofHom jS) = zW ∧ (∀ h : H, Spec.map (CommRingCat.ofHom (α h).toRingHom) ≫ Scheme.strictHenselizationStructuralMap z = Scheme.strictHenselizationStructuralMap z ≫ (a h.val).hom) ∧ (∀ h : H, (Scheme.strictHenselizationPointEvaluation z).comp (α h).toRingHom = Scheme.strictHenselizationPointEvaluation z) ∧ (∀ (g : Multiplicative (Fin r → ZMod n)) (b : C), ρR g b = ((ι.symm (α (θ (QuotientGroup.mk g)) (ι b)) : C) : Algebra.pthRootAlgebra n r (Scheme.strictHenselizationRing (z ≫ q)) (fun i ↦ c (t i)))) ∧ (r = 0 → Subsingleton H ∧ IsIso (Scheme.strictHenselizationMap q z))",
+  "branch": "newtargets-dag",
+  "by": "Q82",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-31d999584",
+  "group": "Q82",
+  "result": "pass",
+  "note": "Re-delivery of a0f43eb79054 (RETURN H2). The repair follows option (b): Algebra.ParameterRoot.Ring/root are written out as Algebra.pthRootAlgebra n r A t (arg order gives x_i^n − t_i) and Ideal.Quotient.mk _ (MvPolynomial.X i), and lem-sfb-simultaneous-root-algebra-api is removed from stmt_deps. Snapshot diff: no other change to the Lean file; the node differs from live only in lean and stmt_deps; lean.statement appears verbatim in the file. Mechanical finding: lem-weil-pbc-strict-henselization-functoriality is accepted, since Scheme.strictHenselizationMap is Classical.choose of strictHenselizationMap_existsUnique (derived from the theorem, blueprint-tagged, no def-node owner), a theorem-constructed object. Every other added stmt_dep is a def node used in the signature. Clause-by-clause recheck holds: regular Noetherian Y, reduced NC D, stalkwise normal Z, finite surjective invariant q with invariant sheaf and orbit fibres, generic freeness, étale over U, tameness from geometric stabilizers only, pointed affine étale T and W=Spec B^K, primitive ζ, n a unit, parameters a sublist of a regular system of parameters, U_T=D(∏t), pinned diagonal actions and invariants, pinned c/j/jS/ι/α, θ with equivariance, r=0 clause. Edge cases and universes checked. Proof is sorry only, docstrings present, report sections present. No compile (no file changed)."
+ }
+}

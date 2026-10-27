@@ -1,0 +1,123 @@
+{
+ "id": "lem-a1-relative-fpqc-affine-criterion",
+ "kind": "statement",
+ "title": "Relative affine criterion for fpqc sheaves",
+ "statement": "Let S be a scheme [def-pc-scheme] and F a set-valued presheaf on schemes over S. Suppose F is an fppf sheaf [def-pc-fppf-site]. If F satisfies the sheaf condition for every singleton Spec A -> Spec R induced by a flat surjective spectrum map, for each structure map Spec R -> S, then F is an fpqc sheaf on Over S [def-weil-pbc-fpqc-covering]. The value universe is the scheme universe; no finiteness or nonemptiness condition is imposed on covering families.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 0APL, first paragraph of proof: the omitted argument passing from all schemes to schemes over S; absolute input Tag 022H."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fppf-site",
+  "def-weil-pbc-fpqc-covering"
+ ],
+ "proof": [
+  {
+   "text": "Form H(T) as pairs (s:T->S,x in F(T,s)); its restriction sends (s,x) to (s composed with the test map,the restriction of x). The functor laws follow from the functor laws of F and associativity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For any covering family, first glue the structure maps to S by representable descent, then glue the sections on the resulting fixed S-scheme by the relative sheaf condition. Conversely, a gluing of pairs over a fixed S-scheme has the prescribed structure map by representable uniqueness. These arguments give the two explicit relative/absolute sheaf-condition implications, including empty families.",
+   "uses": [
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The fppf sheaf assumption gives Zariski descent of H. The affine singleton assumption gives the affine condition of the absolute fpqc criterion for H. Apply that criterion, then the reverse implication of the previous step to obtain fpqc descent for F.",
+   "uses": [
+    "def-pc-fppf-site",
+    "lem-a1-fpqc-sheaf-affine-criterion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fpqc-representable-descent",
+  "def-pc-fppf-site",
+  "lem-a1-fpqc-sheaf-affine-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 0APL, first paragraph of proof: the omitted argument passing from all schemes to schemes over S; absolute input Tag 022H."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A relative presheaf on schemes over a base is an fpqc sheaf if it is an fppf sheaf and satisfies descent for affine faithfully flat morphisms",
+   "results": "Eight hits on affine faithful flatness and descent of properties, no relative presheaf affine criterion or algebraic-space local extension.",
+   "date": "2026-10-26",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isSheaf_type_propQCTopology_iff\"",
+   "results": "AlgebraicGeometry.isSheaf_type_propQCTopology_iff, the absolute affine criterion.",
+   "date": "2026-10-26",
+   "verdict": "Used for the absolute part; the relative total-presheaf construction and chart extension are additional arguments."
+  },
+  {
+   "tool": "grep",
+   "query": "fpqc.*(sheaf|section)|IsSheaf.*fpqc",
+   "results": "Mathlib Sites/Fpqc and Sites/SheafQuasiCompact; constant-sheaf fpqc results. Local search found no algebraic-space etale local extension or relative affine criterion.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate; checked the source declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AlgebraicSpaceFpqcSheaf",
+  "date": "2026-10-26",
+  "group": "U2"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Tag 0APL, first paragraph of proof: the omitted argument passing from all schemes to schemes over S; absolute input Tag 022H. Supporting the fpqc descent input of the Loc_X-to-Cov_X argument.",
+   "via": [
+    "lem-a1-algebraic-space-fpqc-sheaf",
+    "lem-a1-space-fpqc-separated-valuative-descent",
+    "lem-a1-proetale-local-system-representability"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FpqcRelativeCriterion",
+  "file": "lean/Sheaf/AlgebraicGeometry/FpqcRelativeCriterion.lean",
+  "declaration": "AlgebraicGeometry.isSheaf_fpqc_over_of_affine",
+  "statement": "theorem isSheaf_fpqc_over_of_affine {S : Scheme.{u}} (F : (Over S)ᵒᵖ ⥤ Type u) (hF : Presieve.IsSheaf (Scheme.fppfTopology.over S) F) (haff : ∀ {R A : CommRingCat.{u}} (f : R ⟶ A), Flat (Spec.map f) → Surjective (Spec.map f) → ∀ s : Spec R ⟶ S, Presieve.IsSheafFor F (Presieve.singleton (Over.homMk (U := Over.mk (Spec.map f ≫ s)) (V := Over.mk s) (Spec.map f) rfl))) : Presieve.IsSheaf (Scheme.fpqcTopology.over S) F",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261026T083132-L-2278410",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261026T083132-L-2278410",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

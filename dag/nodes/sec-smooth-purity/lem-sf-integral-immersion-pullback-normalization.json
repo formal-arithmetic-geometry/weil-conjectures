@@ -1,0 +1,329 @@
+{
+ "id": "lem-sf-integral-immersion-pullback-normalization",
+ "kind": "statement",
+ "title": "Normalized integral immersion pullbacks over completed coefficients",
+ "statement": "Fix the global datum $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R=\\mathcal O_E$ and uniformizer $t$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Let $X$ be a separated finite-type $k$-scheme, $i:Z\\hookrightarrow X$ a closed immersion and $j:U\\hookrightarrow X$ its complementary open immersion [def-weil-scheme-morphism-properties]. Put $A_n=R/t^n$ for $n\\ge1$, $B_T=\\varprojlim_n(A_n)_T$ on the small pro-etale site of $T=X,U,Z$ [def-weil-completed-integral-coefficients, def-weil-pbc-proetale-site]. Write $\\mathcal C_T=D^b_c(T,R)$ for the full derived-complete integral constructible subcategory of $D(\\operatorname{Mod}(B_T))$, with uniformly bounded constructible finite reductions [def-weil-derived-complete-integral-detailed].\n\nThe schemes $X,U,Z$ are Noetherian and qcqs, $j$ is quasi-compact, and $(R,(t))$ has finite perfect quotients, with finite free resolutions $[R\\xrightarrow{t^n}R]$. The canonical coefficient maps $g^{-1}B_X\\xrightarrow{\\sim}B_Y$, for $g=i,j$ and $Y=Z,U$, preserve constant $R$-sections, quotient projections and quotient transitions [lem-weil-pbc-profinite-coefficient-inverse-image].\n\nLet $g_o^*$ be ordinary module inverse image along these coefficient identifications [def-sf-proetale-ring-sheaf-operations], let $g_c^*$ be the strict quotient-tower completed pullback [def-weil-pbc-completed-pullback], and let $g_R^*$ be the specified integral pullback [def-weil-derived-pullback-tensor-hom]. There are natural isomorphisms of functors on $\\mathcal C_X$\n$$g_R^*\\xrightarrow{\\gamma_g}g_c^*\\xleftarrow{c_g}g_o^*.$$\nHere $\\gamma_g$ identifies the defining strict-tower projection maps, and $c_g$ is the actual completion comparison. Both respect finite quotient projections, quotient transitions and shifts. The composite $c_g^{-1}\\gamma_g$ identifies the specified integral pullback with ordinary termwise inverse image, including its canonical shift comparison. These functors are exact and $R$-linear, preserve derived completeness, and carry $\\mathcal C_X$ to $\\mathcal C_Y$. If all finite reductions of $K$ have cohomology in an integer interval $[a,b]$, the same interval works for all reductions of $g_R^*K$. Neither coefficient category is replaced by modules over the constant $R$-sheaf.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "Integral-stage paragraph, pullback reductions; rational-stage paragraph, exact R-linear integral pullbacks. Returned steps 1, inverse-image parts of 2 and 3. Agent-extracted integral normalization lemma from the returned proof; precise Stacks tags and the complete retained argument are recorded in the delivery report."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-proetale-site",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "def-sf-proetale-ring-sheaf-operations",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pod-integral-completed-comparison-data",
+  "def-sf-integral-constructible-linear-structure",
+  "lem-weil-integral-constructible-triangulated",
+  "def-a1-integral-completed-pullback-interfaces",
+  "def-sf-immersion-completed-pullback-normalization-data",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-proetale-inverse-image",
+  "def-sf-completed-integral-scalar-action",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-four-corners"
+ ],
+ "proof": [
+  {
+   "text": "Use finite-type preservation over the Noetherian field spectrum and quasi-compactness to make X and Z Noetherian. The open embedding induces a Noetherian topology on U and U is locally Noetherian. Infer quasi-separatedness and quasi-compactness. The finite field cardinality gives characteristic p; l≠p gives a unit in the field and hence in every structure stalk.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extract the extension-ring part of standard_quotients_perfect, retaining the actual complex, its free terms, augmentation, differential and finiteness. Invertibility of the localized augmentation gives QuasiIso. Evaluate its degree-zero identity on sections.",
+   "uses": [
+    "lem-weil-pbc-standard-quotients-perfect"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The legacy global completeness predicate quantifies over FiniteFieldDatum in universe zero. Nat.exists_infinite_primes (l+1) supplies a prime p>l. The field ZMod p and its algebraic closure define such a datum with a=1, q=p, and p≠l. Apply the published Roos/legacy equivalence with this proof-only auxiliary datum. No data of the coefficient sheaf or pullback functor is changed.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For each immersion obtain the published integral comparison C. The identity round trip transports constructibility to transport(back K). The Roos/legacy completeness equivalence gives completeness of back K. C.gamma is natural. Compose it with the inverse round trip and inverse of the natural strict/reflector comparison to construct gamma, giving precisely its required normalization.",
+   "uses": [
+    "lem-a1-integral-pullback-completed-comparison",
+    "def-sf-integral-immersion-pullback-normalization-data",
+    "lem-weil-integral-constructible-triangulated",
+    "lem-sf-derived-complete-legacy-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The immersion comparison makes the actual strict completion unit invertible on back K. Whiskering and ordinaryPresentation construct c as asIso of the actual completion transformation. Map the two actualCompletedProjection_compatibility equations under coefficient transport to prove its projection and transition equations.",
+   "uses": [
+    "lem-sf-immersion-completed-pullback-comparison",
+    "def-sf-integral-immersion-pullback-normalization-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the two smaller compatibility statements to these already constructed natural isomorphisms. Exact termwise descent makes ordinary triangulated. Transport triangulation and constant-section linearity through c and gamma; their composite commutes with shifts by the general natural-transformation composition and inverse instances.",
+   "uses": [
+    "lem-sf-integral-immersion-coefficient-linearity",
+    "lem-sf-integral-immersion-shift-compatibility",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the common interval supplied by constructibility of transport(back K), apply the immersion theorem, and transport across ordinaryPresentation, c and gamma. For an arbitrary interval with a≤b use the same theorem and reduction homology isomorphisms. If a>b the source support is empty and lies in both [0,0] and [1,1]. The two immersion conclusions force target support empty, proving the requested interval without an extra hypothesis.",
+   "uses": [
+    "lem-sf-immersion-completed-pullback-comparison",
+    "lem-weil-integral-constructible-triangulated",
+    "def-sf-integral-immersion-pullback-normalization-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-standard-quotients-perfect",
+  "lem-a1-integral-pullback-completed-comparison",
+  "def-sf-integral-immersion-pullback-normalization-data",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-sf-derived-complete-legacy-comparison",
+  "lem-sf-immersion-completed-pullback-comparison",
+  "lem-sf-integral-immersion-coefficient-linearity",
+  "lem-sf-integral-immersion-shift-compatibility",
+  "lem-sf-exact-functor-derived-triangulated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AA and 099N; M3 Lean assembly using the existing comparisons, two smaller compatibility lemmas, and an explicit empty-interval argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "completed.*pullback|pullback.*completed|adic.*constructible",
+   "results": "2 hits: Mathlib/Order/CompleteBooleanAlgebra.lean, Mathlib/Order/CompleteBooleanAlgebra.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary structure-sheaf modules, abstract adjunctions or algebraic adic completion, not these normalized constructible completed-coefficient operations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral adic immersion inverse image agrees with strict derived inverse limit of finite reductions",
+   "results": "8 hits: AdicCompletion.ofAlgEquiv_symm_of, AdicCompletion.congr_symm_apply, AdicCompletion.mk_ofAlgEquiv_symm, AdicCompletion, AdicCompletion.map_val_apply, AdicCompletion.subring, AdicCompletion.ofLinearEquiv_symm_of, AdicCompletion.of_ofLinearEquiv_symm",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary structure-sheaf modules, abstract adjunctions or algebraic adic completion, not these normalized constructible completed-coefficient operations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullback\", \"exact\"",
+   "results": "2 hits: CategoryTheory.IsPullback.exact_shortComplex', CategoryTheory.Limits.IsColimit.pullbackOfHasExactColimitsOfShape",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary structure-sheaf modules, abstract adjunctions or algebraic adic completion, not these normalized constructible completed-coefficient operations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized integral pullbacks for open and closed immersions on derived complete constructible adic sheaves agree with ordinary exact module inverse images and preserve the uniform cohomological interval",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Hom.ι_toNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.Modules.restrict, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary structure-sheaf modules, abstract adjunctions or algebraic adic completion, not these normalized constructible completed-coefficient operations"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|derivedComplete|DerivedComplete|constructibleIntegralPullback",
+   "results": "10 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary structure-sheaf modules, abstract adjunctions or algebraic adic completion, not these normalized constructible completed-coefficient operations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"inverseImage\", \"exact\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary structure-sheaf modules, abstract adjunctions or algebraic adic completion, not these normalized constructible completed-coefficient operations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image of module sheaves along an immersion preserves derived completeness and identifies ordinary pullback with completed pullback",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.Modules.restrict, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.instFullPushforward, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary structure-sheaf modules, abstract adjunctions or algebraic adic completion, not these normalized constructible completed-coefficient operations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized integral immersion pullbacks on completed coefficient sheaves agree with ordinary inverse image and strict quotient tower pullback preserving constructible reductions",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.ι_toNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme normalization, structure-sheaf module restriction, ordinary algebraic adic completion, and categorical pullback exactness do not give these completed-coefficient derived comparison maps"
+  },
+  {
+   "tool": "grep",
+   "query": "completed.*pullback|pullback.*completed|adic.*constructible",
+   "results": "2 hits: Mathlib/Order/CompleteBooleanAlgebra.lean, Mathlib/Order/CompleteBooleanAlgebra.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme normalization, structure-sheaf module restriction, ordinary algebraic adic completion, and categorical pullback exactness do not give these completed-coefficient derived comparison maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral immersion inverse image on completed coefficient sheaves agrees with derived inverse limit of finite quotient pullbacks",
+   "results": "8 hits: Profinite.asLimitConeIso, AdicCompletion.ofAlgEquiv_symm_of, IsAdicComplete.of_lift, AdicCompletion, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_apply, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.app_invApp",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme normalization, structure-sheaf module restriction, ordinary algebraic adic completion, and categorical pullback exactness do not give these completed-coefficient derived comparison maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullback\", \"exact\"",
+   "results": "2 hits: CategoryTheory.IsPullback.exact_shortComplex', CategoryTheory.Limits.IsColimit.pullbackOfHasExactColimitsOfShape",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme normalization, structure-sheaf module restriction, ordinary algebraic adic completion, and categorical pullback exactness do not give these completed-coefficient derived comparison maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image of adic module sheaves along an open or closed immersion preserves derived completeness and commutes with canonical completion",
+   "results": "8 hits: AdicCompletion.map_exact, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc, AlgebraicGeometry.Scheme.Modules.restrict, AlgebraicGeometry.Scheme.Modules.restrictAdjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme normalization, structure-sheaf module restriction, ordinary algebraic adic completion, and categorical pullback exactness do not give these completed-coefficient derived comparison maps"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|derivedComplete|DerivedComplete|constructibleIntegralPullback",
+   "results": "10 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme normalization, structure-sheaf module restriction, ordinary algebraic adic completion, and categorical pullback exactness do not give these completed-coefficient derived comparison maps"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-rational-localization-triangle-orthogonality",
+  "date": "2026-10-22",
+  "group": "NR"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "blueprint": {
+  "from": {
+   "node": "prop-sf-open-closed-triangle-all-stages",
+   "place": "Integral-stage paragraph, pullback reductions; rational-stage paragraph, exact R-linear integral pullbacks. Returned steps 1, inverse-image parts of 2 and 3.",
+   "via": [
+    "lem-sf-rational-localization-triangle-orthogonality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-integral-immersion-pullback-normalization",
+  "worker": "stage1",
+  "summary": "Assembled both normalized comparison maps from existing general nodes. Verified geometric and coefficient hypotheses, whole-tower projections/transitions, integer shifts, exact R-linearity and unchanged uniform finite-reduction bounds. No new nodes and no statement change.",
+  "blueprint": "prop-sf-open-closed-triangle-all-stages.proof.md: integral-stage first paragraph, pullback reductions, and rational-stage first paragraph, exact R-linear integral pullbacks. These six steps supply those assertions without changing the open-closed triangle route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Verifies the Noetherian coefficient hypothesis; the localization unit does not prove local-field arithmetic."
+   },
+   {
+    "node": "lem-weil-pbc-standard-quotients-perfect",
+    "why": "Verifies the finite/perfect quotient datum used by both completed constructions."
+   },
+   {
+    "node": "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "why": "Supplies actual completed ring-sheaf identifications with their quotient and constant-section normalization."
+   },
+   {
+    "node": "lem-sf-immersion-completed-pullback-comparison",
+    "why": "Supplies the ordinary-to-strict-completed comparison for any locally closed immersion, before the open-closed triangle."
+   },
+   {
+    "node": "lem-a1-integral-pullback-completed-comparison",
+    "why": "Generic comparison of the two specified integral pullback constructions for any scheme map, including their projections and shifts."
+   },
+   {
+    "node": "lem-a1-finite-pullback-strict-tower-comparison",
+    "why": "Generic whole-quotient-diagram comparison used to retain transitions; no affine-line weight theorem is used."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "why": "Generic exactness and product preservation for immersion inverse image, needed for the shift-compatible strict-limit map."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Exact coefficient-module products permit the normalized Roos model."
+   },
+   {
+    "node": "lem-cbc-exact-product-functor-strict-limit",
+    "why": "Generic exact-product functor comparison, including augmentation and connecting maps, verifies the actual completion comparison shift."
+   },
+   {
+    "node": "lem-a1-normalized-roos-shift-comparison",
+    "why": "Generic signed Roos/derived-limit shift normalization; no affine-line geometric result is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-standard-quotients-perfect",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-sf-immersion-completed-pullback-comparison",
+  "lem-a1-integral-pullback-completed-comparison",
+  "lem-a1-finite-pullback-strict-tower-comparison",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "lem-a1-normalized-roos-shift-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-e9a75ece4",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-e9a75ece4 (reviewer sub-agent of L); spot-checked: PASS: 0-node, 6-step assembly; statement and stmt_deps unchanged; no SGA; the main-20261015 open-closed-triangle integral/rational paragraphs are the route. All six steps check: (1) the geometry hypotheses match (finite type over a Noetherian field; closed immersion is proper; open subscheme; locally Noetherian ⇒ quasi-separated; qcqs permanence makes j quasi-compact). (2) O_E is a DVR with finite residue field; [O_E -ϖ^n-> O_E]; profinite-coefficient inverse image keeps constants, projections and transitions. (3) lem-sf-immersion-completed-pullback-comparison applies to i and j as locally closed immersions and gives c_g, exactness, preservation of completeness and the same uniform interval. (4) lem-a1-integral-pullback-completed-comparison: ℓ is invertible over char p; the integral level of def-weil-derived-pullback-tensor-hom is literally def-pur-integral-derived-operations, the a1 integral functor; it gives γ_g with projection and shift equations; transitions follow from the derived-limit projections. (5) The augmentation (0,x) is fixed by the Roos shift ((-1)^r y,x) for every r; the hypotheses of the exact-product strict-limit lemma come from immersion-limit-preservation (c is an iso) and countable-products-exact. (6) R-linearity by conjugation, triangles transported, reductions and interval transferred. Edge cases (empty Z/U, zero K, negative shifts, n=1,2) are fine. Advisory: pre-existing unsplit lem-sf-integral-ordinary-recollement-realization contains the pullback-comparison clause inside a larger package; this overlap is not a new restatement. Batch-5 flag: lem-a1-finite-pullback-strict-tower-comparison → lem-trf-geometric-inverse-image-exact (sk-i-curve-zero) is the generic fact that inverse image of a geometric morphism is exact. It is not given by and not a step of the trace formula or Poincaré duality, so accepted. tool_uses accepted."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralImmersionPullbackNormalization",
+  "declaration": "WeilConjectures.IntegralImmersionNormalization.integralImmersionPullbackNormalization",
+  "declarations": [
+   "WeilConjectures.IntegralImmersionNormalization.integralImmersionPullbackNormalization"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralImmersionPullbackNormalization.lean",
+  "statement": "theorem integralImmersionPullbackNormalization (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p) (X U Z : Scheme.{u}) (aX : X ⟶ Spec (CommRingCat.of D.k)) [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX] (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j] (_hcomplement : Set.range j = (Set.range i)ᶜ) : IsNoetherian X ∧ IsNoetherian U ∧ IsNoetherian Z ∧ QuasiSeparatedSpace X ∧ QuasiSeparatedSpace U ∧ QuasiSeparatedSpace Z ∧ QuasiCompact j ∧ FinitePerfectQuotients l E ∧ Nonempty (Comparison l E i) ∧ Nonempty (Comparison l E j)",
+  "branch": "sheaf-dag",
+  "by": "Q72",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The three functors are compared over the recorded completed coefficient sheaves using the existing finite-projection-normalized coefficient transport. Comparison fixes gamma by the integral strict-projection comparison and c by the actual strict quotient unit. It retains finite projections, transitions, canonical shifts, exactness, constant-section R-linearity, constructibility and the unchanged reduction interval. Helpers belong to this normalization; moduleRoundTrip_exists is uniquely fixed on sections. Existing data are publicly reexported from IntegralImmersionPullbackNormalizationData."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bf8ab4f67",
+  "group": "Q72",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN of 7373c8c6. Lean is byte-identical except import→public import (R2); lean.statement verbatim. Item node: only stmt_deps changed. lem-a1-integral-pullback-completed-comparison→def-pod-integral-completed-comparison-data and lem-weil-integral-constructible-linear→def-sf-integral-constructible-linear-structure (R1). Added def-a1-integral-completed-pullback-interfaces, def-weil-pbc-bounded-constructible-tower, def-weil-proetale-inverse-image, def-sf-completed-integral-scalar-action, def-weil-pbc-adic-coefficient-datum, def-weil-pbc-four-corners and new existing:true def-sf-immersion-completed-pullback-normalization-data (R2). New node: all 17 decls exist in live SfImmersionCompletedPullbackComparison; primary actualCompletedProjection signature verbatim; NL statement matches the bodies (modulePull, moduleIso, ∃!-pinned derivedIso/strictIso, restrictedReduction level n=exponent n+1, units, transitions, comparisons, completedProjection); no overlap with def-a1 decls; no id collision. Mechanical finding: SfIntegralConstructibleTriangulated has no defs, only @[instance] IsTriangulated/IsClosedUnderIsomorphisms theorems; the *_exact clauses need that instance, so a genuine conclusion dependency → PASS on that point. Statement mathematics, edge cases, universes and gates as in the prior review. Advisories: free completedShift pinned via c; scalarReductionDerivedExtension theorem-only owner (inherited). No file changed, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-28c6d",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261026T070255-L-3512892",
+  "kind": "interface",
+  "note": "independent cc review: delivered item proof, data-module move (verbatim diff vs published item), two new sorry lemmas and their nodes against node lem-sf-integral-immersion-pullback-normalization, IntegralCompletedComparison.Comparison and the importer compiles"
+ }
+}

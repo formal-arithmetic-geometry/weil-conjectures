@@ -1,0 +1,372 @@
+{
+ "id": "lem-sfb-smooth-affine-normal-quotient-lifts",
+ "kind": "statement",
+ "title": "Smooth affine normal quotients and affine subgroup inverse images",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Group schemes and homomorphisms are as in [def-sc-group-scheme], closed and normal subgroup schemes as in [def-sc-group-scheme-subgroup], smoothness as in [def-sbc-smooth-morphisms], connectedness as in [def-weil-connected-scheme], and finite type as in [def-weil-finite-type-morphism]. Separated means that the diagonal is a closed immersion [def-weil-proper-morphism]. Affine means isomorphic to the spectrum of a commutative ring [def-pc-scheme]. Let $G$ be smooth, connected, separated and of finite type over $k$, and let $N\\hookrightarrow G$ be a smooth connected affine closed normal subgroup scheme. There exist a smooth connected separated finite-type $k$-group scheme $Q$ and a smooth surjective homomorphism $q:G\\to Q$ of finite presentation such that $N\\hookrightarrow G$ is its scheme-theoretic kernel. For every $k$-scheme $T\\to Q$, the projection $G\\times_Q T\\to T$ is flat, surjective and of finite presentation, hence a one-member covering in the big fppf topology [def-pc-fppf-site]. For every smooth connected affine closed normal subgroup scheme $S\\hookrightarrow Q$, its inverse image $P=G\\times_Q S$ [def-pc-fibre-product] is a smooth connected affine closed normal subgroup scheme of $G$ containing $N$, and $q|_P:P\\to S$ is surjective and has scheme-theoretic kernel $N$. Finite presentation means locally of finite presentation [def-sbc-locally-finite-presentation], quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]; flatness is as in [def-weil-flat-morphism]. Neither $G$ nor $Q$ is assumed affine or commutative.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 5.14, printed p.102 and proof on p.105; Propositions 5.24--5.25 and Corollary 5.26, printed pp.104--105; Proposition 1.62 and its proof, printed p.24; Theorem 5.55 and Proposition 5.59, printed pp.113--114; Proposition 8.1(a), printed p.149. These give quotient, smoothness, subgroup correspondence and preservation of affineness/smoothness/connectedness under extension. The covering clause is base change of the smooth surjective quotient. No Stacks tag states the combined group-scheme assertion."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-pc-scheme",
+  "def-pc-fppf-site",
+  "def-pc-fibre-product",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-flat-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-algebraic-group-homogeneous-quotient] to the closed subgroup $N\\hookrightarrow G$. It gives a separated finite-type scheme $Q$ and a flat surjective finitely presented map $q:G\\to Q$ with $q(a)=q(b)$ exactly when $a^{-1}b\\in N(U)$ for every test scheme $U$. As the subgroup inclusion is injective on points, the element $n$ with $b=an$ is unique. Hence $(a,n)\\mapsto(a,an)$ is a natural bijection $G(U)\\times N(U)\\to(G\\times_QG)(U)$ and, by [lem-galois-yoneda-fully-faithful], represents an isomorphism $\\theta:G\\times_kN\\simeq G\\times_QG$. The one-member family $\\{q\\}$ is an fpqc covering [def-weil-pbc-fpqc-covering]: over an affine open $V\\subset Q$, quasi-compactness of $q$ supplies finitely many affine opens covering $q^{-1}(V)$, and their images cover $V$ by surjectivity.",
+   "uses": [
+    "lem-sfb-algebraic-group-homogeneous-quotient",
+    "lem-galois-yoneda-fully-faithful",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 5.28, Definition 5.20 and Propositions 5.24--5.25, printed pp.104--105"
+   }
+  },
+  {
+   "text": "For any $k$-scheme $T$, put $q_T=q\\times\\mathrm{id}_T:G\\times_kT\\to Q\\times_kT$. It is an fpqc covering by [lem-galois-fpqc-covering-base-change]. Its kernel pair is $(G\\times_QG)\\times_kT$, identified by $\\theta$ with $G\\times_kN\\times_kT$, with projections $(g,n,t)\\mapsto(g,t)$ and $(g,n,t)\\mapsto(gn,t)$. Thus [lem-weil-pbc-fpqc-representable-descent] says precisely that a morphism $a:G\\times_kT\\to Y$ descends uniquely through $q_T$ if $a(gn,t)=a(g,t)$. In particular precomposition with $q_T$ is injective on morphisms. For $k$-morphisms the descended map is over $k$: its structure-map equality can be checked after $q_T$ by that same injectivity. Repeating this injectivity one variable at a time shows that morphisms out of $Q^r\\times_kT$ agree if they agree after $q^r\\times\\mathrm{id}_T$.",
+   "uses": [
+    "lem-galois-fpqc-covering-base-change",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023Q, lemma-fpqc-universal-effective-epimorphisms; parameterwise form of Milne Proposition 5.21"
+   }
+  },
+  {
+   "text": "Construct multiplication on $Q$. Normality [def-sc-group-scheme-subgroup] gives $g_2^{-1}n_1g_2\\in N(U)$ and hence\n$$q((g_1n_1)(g_2n_2))=q(g_1g_2(g_2^{-1}n_1g_2)n_2)=q(g_1g_2).$$\nThis calculation holds on affine test schemes by the definition of normality, and on every test scheme by restriction to affine opens. First apply step 2 with parameter $G$ to descend $(g_1,g_2)\\mapsto q(g_1g_2)$ in its first variable, giving $b:Q\\times_kG\\to Q$. The equality $b(x,g_2n_2)=b(x,g_2)$ can be checked after $q\\times\\mathrm{id}_{G\\times N}$; there it is the displayed calculation. Descend again in the second variable (interchanging the factors in step 2). This gives $m_Q:Q\\times_kQ\\to Q$ with $m_Q(q(g_1),q(g_2))=q(g_1g_2)$.",
+   "uses": [
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.12 and proof of Theorem 5.14 after Theorem 5.28, printed pp.101,105"
+   }
+  },
+  {
+   "text": "The inverse descends because $(gn)^{-1}=g^{-1}(gn^{-1}g^{-1})$ and $gn^{-1}g^{-1}\\in N(U)$, so $q((gn)^{-1})=q(g^{-1})$. Define $v_Q$ by step 2 and put $e_Q=q\\circ e_G$. The two associativity maps out of $Q^3$ agree after $q^3$, since their values are $q((g_1g_2)g_3)$ and $q(g_1(g_2g_3))$. The left and right unit maps agree with the identity after $q$, since $q(eg)=q(g)=q(ge)$. The left and right inverse identities likewise follow after $q$ from $q(g^{-1}g)=q(e)=q(gg^{-1})$. The injectivity proved in step 2 makes these equalities hold on $Q$. Thus these maps give a group scheme [def-sc-group-scheme], and the defining identity for $m_Q$ makes $q$ a homomorphism. No commutativity is used.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.12 and proof of Theorem 5.14, printed pp.101,105"
+   }
+  },
+  {
+   "text": "For every test scheme $U$, step 1 with $a=e_G$ gives $q(g)=e_Q$ if and only if $g=i(n)$ for a unique $n\\in N(U)$, where $i:N\\hookrightarrow G$ is the given inclusion. By [def-pc-fibre-product] these are exactly the $U$-points of $G\\times_{Q,q,e_Q}\\operatorname{Spec}k$. The bijections are natural, so [lem-galois-yoneda-fully-faithful] identifies $i$ with the scheme-theoretic kernel inclusion. In particular $q\\circ i=e_Q$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 5.14 and Proposition 5.24, printed pp.102,104--105"
+   }
+  },
+  {
+   "text": "Base change $q$ along itself. Under the factor swap of $G\\times_QG$, this base change $G\\times_QG\\to G$ is identified with the projection to the first factor, which becomes $G\\times_kN\\to G$ under $\\theta$. Since $N$ is affine, its structure map to $\\operatorname{Spec}k$ is affine by [pqf-def-affine-morphism]; its base change is affine by [lem-weil-pbc-affine-morphism-permanence](1). Since $N$ is smooth, the same projection is smooth by [lem-pc-proper-base-change](2). Apply [lem-weil-pbc-fpqc-descend-affine] and [lem-trf-smooth-fpqc-base-descent] to the fpqc covering $q:G\\to Q$ of step 1. They show that $q$ itself is affine and smooth. The hypotheses for smooth descent are flatness, quasi-compactness and surjectivity of $q$, all already supplied in step 1.",
+   "uses": [
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-fpqc-descend-affine",
+    "lem-trf-smooth-fpqc-base-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 02L5 (lemma-descending-property-affine) and 02VL (lemma-descending-property-smooth); Milne Proposition 1.62(a), printed p.24, and Proposition 8.1(a), printed p.149"
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-smooth-flat-surjective-source-descent] to $G\\xrightarrow{q}Q\\to\\operatorname{Spec}k$. The map $q$ is flat, surjective and locally of finite presentation by step 1, and the composite is smooth by the hypothesis on $G$. Thus $Q$ is smooth. It is nonempty because $e_Q$ is a $k$-point, and it is connected: a partition of $Q$ into two disjoint nonempty opens would pull back by the continuous surjection $q$ to such a partition of $G$, contradicting its connectedness [def-weil-connected-scheme]. Its separatedness and finite type were already obtained in step 1.",
+   "uses": [
+    "lem-sbc-smooth-flat-surjective-source-descent",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 5.26 and Proposition 5.59(b), printed pp.105,114; smooth source descent as in Stacks Tag 05B5"
+   }
+  },
+  {
+   "text": "For any $T\\to Q$, write $q_T:G\\times_QT\\to T$ for the base change. It is flat by [lem-weil-pbc-flat-morphism-base-change], surjective by [lem-weil-pbc-surjective-base-change], and of finite presentation by [lem-weil-pbc-qcqs-morphism-permanence](3). Hence $\\{q_T\\}$ is a covering of the big fppf site by the defining flat, locally finitely presented and jointly surjective condition of [def-pc-fppf-site]. This applies to arbitrary $T$, including nonreduced or non-quasi-compact $T$.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-pc-fppf-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01U9 (lemma-base-change-flat), 01TS (lemma-base-change-finite-presentation); topologies.tex Tag 021M (definition-fppf-covering)"
+   }
+  },
+  {
+   "text": "Let $S\\hookrightarrow Q$ be as in the statement and set $P=G\\times_QS$. The map $P\\to G$ is a closed immersion by [lem-weil-pbc-closed-immersion-base-change]. On every affine test scheme $U$, its image is $\\{g\\in G(U):q(g)\\in S(U)\\}$, a subgroup because $q$ is a homomorphism. Multiplication, inverse and unit therefore restrict to $P$ by the fibre-product universal property. Moreover, for $a\\in G(U)$ and $p\\in P(U)$, $q(apa^{-1})=q(a)q(p)q(a)^{-1}\\in S(U)$ by normality of $S$. Thus $P$ is a closed normal subgroup scheme by [def-sc-group-scheme-subgroup]. The homomorphism $q|_P:P\\to S$ is the pullback projection. Its kernel is $P\\times_S\\operatorname{Spec}k\\simeq G\\times_Q\\operatorname{Spec}k=N$ by pullback pasting [def-pc-fibre-product] and step 5; this also gives the inclusion $N\\subseteq P$. Its surjectivity and flatness follow from step 8 with $T=S$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-sc-group-scheme-subgroup",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 5.55 and Proposition 5.54, printed pp.112--113"
+   }
+  },
+  {
+   "text": "By step 6 and [lem-weil-pbc-affine-morphism-permanence](1), $P\\to S$ is affine. Since $S$ is affine, clause (2) of that same node gives that $P$ is affine. Also $P$ is of finite type over $k$: its closed immersion into $G$ is proper by [lem-weil-pbc-proper-fp-permanence](c), hence of finite type by [def-weil-proper-morphism], and its composite with $G\\to\\operatorname{Spec}k$ is of finite type by [lem-sfb-finite-type-composition-base-change](1). This establishes the finite-type hypotheses needed for the affine group-extension result below.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-proper-morphism",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.1(a), printed p.149, affineness clause via affine descent; Stacks Tags 01W5 and 01T3 for finite type"
+   }
+  },
+  {
+   "text": "The map $P\\to S$ is smooth by base change of the smooth map $q$ [lem-pc-proper-base-change](2). Since $S\\to\\operatorname{Spec}k$ is smooth by hypothesis, [lem-trf-smooth-composition] implies that $P\\to\\operatorname{Spec}k$ is smooth. Finally apply [lem-sfb-connected-group-extension] to $P\\to S$. Both groups are affine of finite type: $P$ by step 10, and $S$ because it is affine, hence quasi-compact, and smooth, hence locally of finite presentation [def-sbc-smooth-morphisms], so locally of finite type, since a finitely presented algebra is finitely generated [def-sbc-locally-finite-presentation, def-weil-finite-type-morphism]; the homomorphism is flat and surjective by step 8, and its scheme-theoretic kernel is $N$ by step 9. Both $N$ and $S$ are connected by hypothesis, so $P$ is connected. Together with steps 9--10 this proves every assertion about the inverse image, including its scheme-theoretic kernel and surjective restriction.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-trf-smooth-composition",
+    "lem-sfb-connected-group-extension",
+    "def-sbc-smooth-morphisms",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.62(a), printed p.24; Proposition 5.59(a), printed p.114; Proposition 8.1(a), printed p.149"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-fppf-site",
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-smooth-morphisms",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-fpqc-covering",
+  "def-weil-proper-morphism",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-pc-proper-base-change",
+  "lem-sbc-smooth-flat-surjective-source-descent",
+  "lem-sfb-algebraic-group-homogeneous-quotient",
+  "lem-sfb-connected-group-extension",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-trf-smooth-composition",
+  "lem-trf-smooth-fpqc-base-descent",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-fpqc-descend-affine",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-surjective-base-change",
+  "pqf-def-affine-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proof of Theorem 5.14 after Theorem 5.28, Propositions 5.24--5.25, Corollary 5.26, Proposition 1.62, Theorem 5.55, Proposition 5.59 and Proposition 8.1(a); explicit descent uses Stacks Tags 023Q, 02L5 and 02VL."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Quotient of a noncommutative algebraic group scheme by a smooth connected affine normal subgroup is a smooth group scheme and inverse images of affine subgroups are affine",
+   "results": "{\"t\": \"2026-10-24T07:34:16Z\", \"tool\": \"leanfinder\", \"query\": \"Quotient of a noncommutative algebraic group scheme by a smooth connected affine normal subgroup is a smooth group scheme and inverse images of affine subgroups are affine\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"instNonemptyObjOpenNormalSubgroupStabilizerHomSurjectiveAuxFunctor\", \"solvable_quotient_of_solvable\", \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"Subgroup.QuotientDiff\", \"instFiniteObjOpenNormalSubgroupStabilizerHomSurjectiveAuxFunctor\", \"QuotientGroup.Quotient.group\", \"QuotientGroup.rootableBy\"], \"digest\": \"cb6d62ead997a57b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; abstract/topological groups, Lie groups, general scheme morphisms or component predicates do not state this group-scheme assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representability of the fppf quotient of a group scheme by a closed normal subgroup and extensions of affine algebraic groups",
+   "results": "{\"t\": \"2026-10-24T07:34:14Z\", \"tool\": \"leansearch\", \"query\": \"Representability of the fppf quotient of a group scheme by a closed normal subgroup and extensions of affine algebraic groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.quotientToCoinvariants\", \"Rep.ofQuotient\", \"GroupExtension.Equiv.mk\", \"AddGroupExtension.quotientRangeInlEquivRight\", \"Representation.quotientToInvariants\", \"QuotientGroup.Quotient.group\", \"GroupExtension.quotientRangeInlEquivRight\", \"GroupExtension.Equiv\"], \"digest\": \"599bd9c5f2d51a1b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; abstract/topological groups, Lie groups, general scheme morphisms or component predicates do not state this group-scheme assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"IsMonHom\"",
+   "results": "{\"t\": \"2026-10-24T07:34:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"GrpObj\\\", \\\"IsMonHom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; abstract/topological groups, Lie groups, general scheme morphisms or component predicates do not state this group-scheme assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "quotient|normal|extension",
+   "results": "{\"t\": \"2026-10-24T07:34:13Z\", \"tool\": \"grep\", \"query\": \"quotient|normal|extension\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; abstract/topological groups, Lie groups, general scheme morphisms or component predicates do not state this group-scheme assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth connected normal subgroup quotient of a general non-affine algebraic group is representable and an extension of affine groups is affine",
+   "results": "{\"t\": \"2026-10-24T07:37:22Z\", \"tool\": \"leanfinder\", \"query\": \"Smooth connected normal subgroup quotient of a general non-affine algebraic group is representable and an extension of affine groups is affine\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"solvable_quotient_of_solvable\", \"AlgebraicGeometry.AffineSpace.instIsAffine\", \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected\", \"CategoryTheory.PreGaloisCategory.instFiniteAutOfIsConnected\", \"AddTorsor.connectedSpace\"], \"digest\": \"670322d83b92ee1e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; abstract/topological groups, Lie groups, general scheme morphisms or component predicates do not state this group-scheme assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth connected group scheme modulo a smooth affine normal subgroup is smooth and connected and inverse images of affine subgroups are affine",
+   "results": "{\"t\": \"2026-10-24T07:40:07Z\", \"tool\": \"leansearch\", \"query\": \"A smooth connected group scheme modulo a smooth affine normal subgroup is smooth and connected and inverse images of affine subgroups are affine\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.isSmooth_comp\", \"AlgebraicGeometry.instIsAffineHomCompScheme\"], \"digest\": \"ef718877074a2a29\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; abstract/topological groups, Lie groups, general scheme morphisms or component predicates do not state this group-scheme assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quotient of a separated algebraic group by a smooth affine normal subgroup is a smooth affine torsor over a group scheme",
+   "results": "{\"t\": \"2026-10-24T08:03:33Z\", \"tool\": \"leanfinder\", \"query\": \"A quotient of a separated algebraic group by a smooth affine normal subgroup is a smooth affine torsor over a group scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.AffineSpace.over\", \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"QuotientGroup.Quotient.group\", \"AlgebraicGeometry.AffineSpace.instIsAffine\", \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"Subgroup.QuotientDiff\"], \"digest\": \"f6fb9c4948ceec6f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned declarations; abstract and topological quotients and affine-space constructions do not supply the group-scheme quotient and inverse-image assertions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A non-affine smooth algebraic group quotient by a smooth normal affine subgroup exists and preimages of affine connected normal subgroups are affine connected",
+   "results": "{\"t\": \"2026-10-24T08:05:48Z\", \"tool\": \"leansearch\", \"query\": \"A non-affine smooth algebraic group quotient by a smooth normal affine subgroup exists and preimages of affine connected normal subgroups are affine connected\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"QuotientGroup.le_comap_mk'\", \"QuotientGroup.instIsTopologicalGroup\", \"QuotientAddGroup.sound\", \"QuotientGroup.Quotient.group\", \"QuotientGroup.preimage_image_coe\", \"Rep.quotientToCoinvariants\", \"MulActionHom.toQuotient\", \"QuotientAddGroup.le_comap_mk'\"], \"digest\": \"7a9ba45cc1502261\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned declarations; abstract and topological quotients and affine-space constructions do not supply the group-scheme quotient and inverse-image assertions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"IsSmooth\"",
+   "results": "{\"t\": \"2026-10-24T08:05:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"GrpObj\\\", \\\"IsSmooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned declarations; abstract and topological quotients and affine-space constructions do not supply the group-scheme quotient and inverse-image assertions."
+  },
+  {
+   "tool": "grep",
+   "query": "quotient|normal|torsor",
+   "results": "{\"t\": \"2026-10-24T08:05:48Z\", \"tool\": \"grep\", \"query\": \"quotient|normal|torsor\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned declarations; abstract and topological quotients and affine-space constructions do not supply the group-scheme quotient and inverse-image assertions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-barsotti-chevalley-decomposition",
+  "date": "2026-10-24",
+  "group": "NZ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Milne Theorem 8.27 proof via Proposition 8.2: quotient by the maximal affine normal subgroup and inverse images of putative affine normal subgroups of that quotient; steps 3--4, and quotient fppf surjectivity in step 6.",
+   "via": [
+    "lem-sfb-barsotti-chevalley-decomposition",
+    "lem-sfb-smooth-connected-semiabelian-subgroup",
+    "lem-sfb-semiabelian-closed-subgroup-trivial-torsion-finite",
+    "lem-sfb-generically-isomorphic-semiabelian-open-immersion",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-affine-normal-quotient-lifts",
+  "worker": "stage1",
+  "summary": "Constructed the normal quotient group law by parameterwise fpqc descent from the existing homogeneous quotient, with explicit noncommutative multiplication and inversion checks. Descended affineness and smoothness of the quotient morphism using its kernel pair; proved connectedness of Q directly and all inverse-image assertions using base change and the existing affine connected-extension lemma after proving P affine. No new nodes. Corrected doubled TeX escapes only; the mathematical statement is unchanged.",
+  "blueprint": "The item has no imported blueprint ancestor (blueprint_refs.py ancestor returns None). It serves the recorded Milne Theorem 8.27 / Proposition 8.2 quotient and inverse-image argument through its existing via chain in the sk-thm-sf-ctf-stability finiteness branch. The latest blueprint unit and chapter route were read; no unit or chapter changes. Whole-blueprint searches for normal subgroup, quotient group, homogeneous quotient and affine normal found no statement of this item.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-smooth-flat-surjective-source-descent",
+    "why": "Generic scheme/descent tool used with the explicit hypotheses in the proof; the unit has no replacement for this foundational property. It supports the Milne quotient-and-extension route."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-affine",
+    "why": "Generic scheme/descent tool used with the explicit hypotheses in the proof; the unit has no replacement for this foundational property. It supports the Milne quotient-and-extension route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-smooth-flat-surjective-source-descent",
+  "lem-weil-pbc-fpqc-descend-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q54-198811bad",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-198811bad (reviewer sub-agent of L); spot-checked: Ordinary stage-1 split with no new nodes; I read all 11 steps, every cited statement, and Milne iAG2017 at the proof of Thm 5.14 after 5.28 (p.105), Cor 5.26 and Prop 8.1/8.2. The route matches Milne: quotient from lem-sfb-algebraic-group-homogeneous-quotient, then the group law by parameterwise fpqc descent; the noncommutative identities are checked. Kernel N is identified via Yoneda. q is affine and smooth by descent from G×_QG≅G×N. Q is smooth by source descent and connected by a direct argument. The fppf covering clause follows from base change. P is a closed normal subgroup, affine, of finite type, smooth, and connected via lem-sfb-connected-group-extension. Small cases checked: N=1, N=G, S=1, an abelian-variety G (Q not forced affine). No duplicates: lem-sfb-affine-normal-quotient-geometry needs affine G, and homomorphism-factorization needs a given f. Two fixes in the item: step 6 now makes explicit the factor swap identifying the base change of q along q (the descent lemmas' second projection) with the first projection; step 11 now proves S is of finite type (affine and smooth, hence locally of finite presentation), citing def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation and def-weil-finite-type-morphism, and proof_deps is updated. Batch-5 flags all accepted: the homogeneous-quotient closure reaches only the general definition def-trf-scheme-algebraic-space; lem-trf-smooth-composition and lem-trf-smooth-fpqc-base-descent are general Mathlib-status scheme facts, not steps of the trace formula or Poincaré duality. tool_uses accepted: smooth-flat-surjective-source-descent and fpqc-descend-affine are generic tools the unit does not provide.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SmoothAffineNormalQuotient",
+  "declaration": "AlgebraicGeometry.exists_smoothAffineNormalQuotient",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SmoothAffineNormalQuotient.lean",
+  "statement": "theorem exists_smoothAffineNormalQuotient (k : Type u) [Field k] [IsAlgClosed k] (G N : Over (Spec (.of k))) [GrpObj G] [GrpObj N] [Smooth G.hom] [ConnectedSpace G.left] [IsSeparated G.hom] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [Smooth N.hom] [ConnectedSpace N.left] [IsAffine N.left] (i : N ⟶ G) [IsClosedSubgroupScheme i] [IsNormalSubgroupScheme i] : ∃ (Q : Over (Spec (.of k))) (_ : GrpObj Q) (q : G ⟶ Q) (_ : IsMonHom q), Smooth Q.hom ∧ ConnectedSpace Q.left ∧ IsSeparated Q.hom ∧ LocallyOfFiniteType Q.hom ∧ QuasiCompact Q.hom ∧ Smooth q.left ∧ Surjective q.left ∧ LocallyOfFinitePresentation q.left ∧ QuasiCompact q.left ∧ QuasiSeparated q.left ∧ (∃ e : N ≅ GrpObj.ker q, e.hom ≫ GrpObj.kerι q = i) ∧ (∀ (T : Over (Spec (.of k))) (t : T ⟶ Q), Flat (pullback.snd q t).left ∧ Surjective (pullback.snd q t).left ∧ LocallyOfFinitePresentation (pullback.snd q t).left ∧ QuasiCompact (pullback.snd q t).left ∧ QuasiSeparated (pullback.snd q t).left ∧ Presieve.ofArrows (fun _ : PUnit ↦ (pullback q t).left) (fun _ ↦ (pullback.snd q t).left) ∈ Scheme.fppfPrecoverage T.left) ∧ (∀ (S : Over (Spec (.of k))) [GrpObj S] [Smooth S.hom] [ConnectedSpace S.left] [IsAffine S.left] (j : S ⟶ Q) [IsClosedSubgroupScheme j] [IsNormalSubgroupScheme j], ∃ (P : Over (Spec (.of k))) (_ : GrpObj P) (a : P ⟶ G) (r : P ⟶ S) (_ : IsMonHom r), IsPullback a r q j ∧ IsClosedSubgroupScheme a ∧ IsNormalSubgroupScheme a ∧ Smooth P.hom ∧ ConnectedSpace P.left ∧ IsAffine P.left ∧ Surjective r.left ∧ ∃ e : N ≅ GrpObj.ker r, e.hom ≫ GrpObj.kerι r ≫ a = i)",
+  "branch": "sheaf-dag",
+  "by": "NX",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a1fc5b6cf",
+  "group": "NX",
+  "result": "pass",
+  "note": "I checked every clause against the Lean signature (G smooth/connected/separated/finite type; N smooth/connected/affine closed normal; Q and q; fp = LFP∧QC∧QS; kernel isos keep the inclusion; base change flat/surjective/fp plus a one-member fppfPrecoverage cover for arbitrary T; P as an IsPullback square, closed and normal (IsClosedSubgroupScheme carries IsMonHom), smooth/connected/affine, r surjective, ker r = N). lean.statement is verbatim the file signature; the node equals live apart from its new lean record; live has no lean record, so no race. Mathematically true (Milne 5.14/5.25/8.1). Edge cases N=1, N=G, S=1, S=Q, empty T, char p, single universe u all fine. Not a duplicate of affine_normal_quotient_geometry, algebraicGroup_homomorphism_factorization or exists_homogeneousQuotient. Gates: no defs, sorry only, source and blueprint docstrings, all 11 proof steps. Not recompiled; worker reports clean compiles."
+ }
+}

@@ -1,0 +1,262 @@
+{
+ "id": "lem-sfb-complete-dvr-torus-cocharacter-conjugacy",
+ "kind": "statement",
+ "title": "Integral conjugacy of cocharacters into a fixed split maximal torus",
+ "statement": "Let $A$ be a discrete valuation ring [def-sc-discrete-valuation-ring] with uniformizer $\\pi$ and $A\\simeq\\varprojlim_{n\\geq1}A/(\\pi^n)$ [def-weil-pbc-adic-completion]. An $A$-group scheme has multiplication, identity and inverse satisfying the diagrams of [def-sc-group-scheme] with base $\\operatorname{Spec}A$. A reductive $A$-group scheme here means a smooth [def-sbc-smooth-morphisms] affine finite-type [def-weil-finite-type-morphism] $A$-group scheme with reductive geometric fibres: over every algebraically closed field a fibre is connected [def-weil-connected-scheme], with no nontrivial smooth connected normal unipotent subgroup. Unipotent means that all geometric points are unipotent matrices in a faithful representation. Write $\\mathbf G_{m,A}=\\operatorname{Spec}A[z,z^{-1}]$ with multiplication of units. For an $A$-algebra $B$, $H(B)$ means $A$-scheme morphisms $\\operatorname{Spec}B\\to H$, with the induced group law. A cocharacter is an $A$-group homomorphism $\\mathbf G_{m,A}\\to H$. Let $H$ be a reductive $A$-group scheme, and let $S\\hookrightarrow H$ be a closed subgroup [def-weil-closed-immersion] with a specified isomorphism $S\\simeq\\mathbf G_{m,A}^r$, $r\\geq0$, such that every geometric fibre of $S$ is a maximal torus in the corresponding fibre of $H$. A torus over an algebraically closed field is a finite product of $\\mathbf G_m$, and maximal refers to inclusion of subgroup schemes. For every cocharacter $\\lambda:\\mathbf G_{m,A}\\to H$ there exist $c\\in H(A)$ and a cocharacter $\\nu:\\mathbf G_{m,A}\\to S$ such that $c\\lambda c^{-1}$ is the composite of $\\nu$ and $S\\hookrightarrow H$, as morphisms of $A$-group schemes. Equivalently this equality holds on all $B$-points for every commutative $A$-algebra $B$.",
+ "source": {
+  "document": "literature/alper-halpern-leistner-heinloth-cartan-iwahori-matsumoto.pdf",
+  "place": "WANTED locally; read author-hosted https://sites.math.washington.edu/~jarod/papers/iwahori.pdf. Remark 3.5, forward implication, printed p.5: integral conjugation into a fixed maximal split torus. Only the complete-DVR case is needed here; the statement is the conjugacy input, not a Cartan factorization."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-adic-completion",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-connected-scheme",
+  "def-weil-closed-immersion",
+  "def-sfb-split-torus-over-ring",
+  "def-sfb-reductive-torus-centralizer-terminology"
+ ],
+ "proof": [
+  {
+   "text": "Put $k=A/(\\pi)$ and $H_k=H\\times_A\\operatorname{Spec}k$. The base-change smoothness clause of [lem-pc-proper-base-change] makes $H_k$ smooth. Writing $H=\\operatorname{Spec}C$ identifies this fibre with $\\operatorname{Spec}(C/\\pi C)$, so it is affine of finite type. The hypothesis on geometric fibres says exactly that $H_k$ is geometrically connected and reductive. The prescribed splitting gives $S_k\\simeq\\mathbf G_{m,k}^r$, and geometric maximality implies maximality among $k$-split tori: an inclusion in a larger split torus would remain such an inclusion after algebraic closure. Apply [lem-sfb-field-split-torus-rational-containment] to $G=H_k$, $D=\\mathbf G_{m,k}$ and $f=\\lambda_k$. Obtain $c_1\\in H(k)$ and $\\nu_1:\\mathbf G_{m,k}\\to S_k$ with $c_1\\lambda_kc_1^{-1}=\\nu_1$.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-sfb-field-split-torus-rational-containment"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent assembly of the residue-field rational conjugacy input (Theorem 25.10, p.546, and Theorem 12.9, pp.233--234) and relative fixed-point lifting inspired by Theorem 13.1, p.254; completeness and Laurent-coordinate effectivity are written out. This avoids the prohibited source route in the imported reference."
+   }
+  },
+  {
+   "text": "Write each coordinate of $\\nu_1$ as a group-like Laurent polynomial $q(z)=\\sum_j a_jz^j\\in k[z,z^{-1}]$. Comparing coefficients in $q(zw)=q(z)q(w)$ gives $a_j^2=a_j$ and $a_i a_j=0$ for $i\\ne j$; the identity condition is $\\sum_j a_j=1$. Since $k$ is a field, precisely one coefficient is $1$, and the others vanish. Thus the coordinates are $z^{e_1},\\ldots,z^{e_r}$ for integers $e_i$. Define $\\nu:\\mathbf G_{m,A}\\to S$ using the same integer powers in the specified splitting. Integer powers preserve units and multiplication on every algebra, so this is an $A$-group homomorphism, and its reduction is $\\nu_1$. For $r=0$ it is the unique homomorphism to the trivial group.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent assembly of the residue-field rational conjugacy input (Theorem 25.10, p.546, and Theorem 12.9, pp.233--234) and relative fixed-point lifting inspired by Theorem 13.1, p.254; completeness and Laurent-coordinate effectivity are written out. This avoids the prohibited source route in the imported reference."
+   }
+  },
+  {
+   "text": "On the smooth affine $A$-scheme $H$ define $t*x=\\nu(t)x\\lambda(t)^{-1}$. This is a scheme morphism by the group operations, and $1*x=x$. Moreover $t*(u*x)=\\nu(t)\\nu(u)x\\lambda(u)^{-1}\\lambda(t)^{-1}=\\nu(tu)x\\lambda(tu)^{-1}$, so it is an action of $\\mathbf G_{m,A}$. A point $c$ over any $A$-algebra is fixed in the universal sense precisely when $\\nu(t)c=c\\lambda(t)$ after every further algebra extension, equivalently $c\\lambda(t)c^{-1}=\\nu(t)$. Step 1 says that $c_1$ is fixed for the reduction of this action to $k$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent assembly of the residue-field rational conjugacy input (Theorem 25.10, p.546, and Theorem 12.9, pp.233--234) and relative fixed-point lifting inspired by Theorem 13.1, p.254; completeness and Laurent-coordinate effectivity are written out. This avoids the prohibited source route in the imported reference."
+   }
+  },
+  {
+   "text": "Set $A_n=A/(\\pi^n)$ for $n\\geq1$. Inductively construct fixed points $c_n\\in H(A_n)$ with $c_{n+1}\\bmod\\pi^n=c_n$, starting with step 1. The kernel $J_n=(\\pi^n)/(\\pi^{n+1})$ of $A_{n+1}\\twoheadrightarrow A_n$ has square zero, since $2n\\geq n+1$. Apply [lem-sfb-gm-fixed-square-zero-lifting] over the base ring $R=A$, to the smooth affine scheme $X=H$ with the action in step 3 and to this surjection. Its conclusion supplies a fixed lift $c_{n+1}$ of the particular $c_n$ already chosen, which is the required compatibility. This establishes the induction for every positive $n$ without making any assumption on the residue field.",
+   "uses": [
+    "lem-sfb-gm-fixed-square-zero-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent assembly of the residue-field rational conjugacy input (Theorem 25.10, p.546, and Theorem 12.9, pp.233--234) and relative fixed-point lifting inspired by Theorem 13.1, p.254; completeness and Laurent-coordinate effectivity are written out. This avoids the prohibited source route in the imported reference."
+   }
+  },
+  {
+   "text": "By [def-weil-affine-spectrum], each $c_n$ is an $A$-algebra map $C\\to A_n$. Compatibility gives the $A$-algebra map $b:C\\to\\varprojlim_n A_n$, $h\\mapsto(c_n^*(h))_n$: it preserves sums, products and scalars componentwise. Completeness [def-weil-pbc-adic-completion] identifies the limit with $A$ through its canonical map, so $b$ gives $c\\in H(A)$ reducing to every $c_n$. The same completeness implies $\\bigcap_n\\pi^n A=0$: an element in that intersection has all zero coordinates and the canonical map is injective.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent assembly of the residue-field rational conjugacy input (Theorem 25.10, p.546, and Theorem 12.9, pp.233--234) and relative fixed-point lifting inspired by Theorem 13.1, p.254; completeness and Laurent-coordinate effectivity are written out. This avoids the prohibited source route in the imported reference."
+   }
+  },
+  {
+   "text": "Consider the two morphisms $\\mathbf G_{m,A}\\to H$ given by $t\\mapsto c\\lambda(t)c^{-1}$ and $t\\mapsto\\nu(t)$. Their reductions to $A_n$ agree as morphisms, because $c_n$ is fixed. On coordinate rings, for each $h\\in C$ the difference of its two pullbacks is a Laurent polynomial $\\sum_j b_jz^j$ whose image in $A_n[z,z^{-1}]$ is zero for every $n$. Uniqueness of Laurent coefficients gives $b_j\\in\\bigcap_n\\pi^nA=0$ for every $j$. Thus the pullbacks agree on every $h$, hence the morphisms agree by [def-weil-affine-spectrum]. Composition with the closed inclusion $S\\hookrightarrow H$ is understood in this equality. Equality of morphisms gives the claimed equality on all commutative $A$-algebras, including nonreduced ones. This proves the full assertion for the constructed $c$ and $\\nu$.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent assembly of the residue-field rational conjugacy input (Theorem 25.10, p.546, and Theorem 12.9, pp.233--234) and relative fixed-point lifting inspired by Theorem 13.1, p.254; completeness and Laurent-coordinate effectivity are written out. This avoids the prohibited source route in the imported reference."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-proper-base-change",
+  "lem-sfb-field-split-torus-rational-containment",
+  "lem-sfb-gm-fixed-square-zero-lifting",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Agent assembly of the residue-field rational conjugacy input (Theorem 25.10, p.546, and Theorem 12.9, pp.233--234) and relative fixed-point lifting inspired by Theorem 13.1, p.254; completeness and Laurent-coordinate effectivity are written out. This avoids the prohibited source route in the imported reference."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Over a local ring a cocharacter of a split reductive group is conjugate by an integral point to a cocharacter of a prescribed split maximal torus",
+   "results": "{\"t\": \"2026-10-24T03:15:43Z\", \"tool\": \"leanfinder\", \"query\": \"Over a local ring a cocharacter of a split reductive group is conjugate by an integral point to a cocharacter of a prescribed split maximal torus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.exists_coroot_ne\", \"RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff\", \"RootPairing.GeckConstruction.mem_ωConjLieSubmodule_iff\", \"LieModule.exists_forall_mem_corootSpace_smul_add_eq_zero\", \"LieAlgebra.IsKilling.cartanEquivDual_symm_apply_mem_corootSpace\", \"LieAlgebra.IsKilling.coroot\", \"LieAlgebra.IsKilling.exists_isSl2Triple_of_weight_isNonZero\", \"LieAlgebra.IsKilling.apply_coroot_eq_cast\"], \"digest\": \"d16a38d514f5e736\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: root-pairing Lie modules, abstract group conjugation and Hensel polynomial lifting do not conjugate a group-scheme cocharacter into an integral maximal torus."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Conjugacy of homomorphisms from the multiplicative group into a reductive group over a local ring into a maximal split torus",
+   "results": "{\"t\": \"2026-10-24T03:15:42Z\", \"tool\": \"leansearch\", \"query\": \"Conjugacy of homomorphisms from the multiplicative group into a reductive group over a local ring into a maximal split torus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MonoidHom.map_isConj\", \"MulAut.conj\", \"GroupExtension.conjAct\", \"GroupExtension.Splitting.conjAct\", \"ConjAct.instMulDistribMulAction\", \"AddAut.conj\", \"isConjRoot_algHom_iff\", \"GroupExtension.IsConj\"], \"digest\": \"7e96ff9651e943b3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: root-pairing Lie modules, abstract group conjugation and Hensel polynomial lifting do not conjugate a group-scheme cocharacter into an integral maximal torus."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalRing\", \"IsConj\"",
+   "results": "{\"t\": \"2026-10-24T03:15:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLocalRing\\\", \\\"IsConj\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: root-pairing Lie modules, abstract group conjugation and Hensel polynomial lifting do not conjugate a group-scheme cocharacter into an integral maximal torus."
+  },
+  {
+   "tool": "grep",
+   "query": "cocharacter|reductive.*torus|torus.*conjug",
+   "results": "{\"t\": \"2026-10-24T03:15:42Z\", \"tool\": \"grep\", \"query\": \"cocharacter|reductive.*torus|torus.*conjug\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: root-pairing Lie modules, abstract group conjugation and Hensel polynomial lifting do not conjugate a group-scheme cocharacter into an integral maximal torus."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homomorphisms Gm to a Chevalley group over a henselian local ring can be conjugated into the standard diagonal torus over that ring",
+   "results": "{\"t\": \"2026-10-24T03:16:19Z\", \"tool\": \"leanfinder\", \"query\": \"Homomorphisms Gm to a Chevalley group over a henselian local ring can be conjugated into the standard diagonal torus over that ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing.TFAE\", \"RootPairing.GeckConstruction.ωConj_mem_of_mem\", \"SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq\", \"Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity'_apply\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply\", \"CongruenceSubgroup.exists_Gamma_le_conj'\", \"SpecialLinearGroup.centerEquivRootsOfUnity_invFun\", \"SpecialLinearGroup.centerEquivRootsOfUnity_symm_apply\"], \"digest\": \"8887f54ea8c6463f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: root-pairing Lie modules, abstract group conjugation and Hensel polynomial lifting do not conjugate a group-scheme cocharacter into an integral maximal torus."
+  },
+  {
+   "tool": "grep",
+   "query": "cocharacter|torus.*conjug|conjug.*torus",
+   "results": "{\"t\": \"2026-10-24T03:39:24Z\", \"tool\": \"grep\", \"query\": \"cocharacter|torus.*conjug|conjug.*torus\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract conjugation, Lie algebra Cartan subalgebras, Henselian rings and root pairings do not state rational conjugacy of algebraic-group tori or integral cocharacters"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral conjugacy of cocharacters into a split maximal torus of a reductive group over a henselian local ring",
+   "results": "{\"t\": \"2026-10-24T03:39:24Z\", \"tool\": \"leansearch\", \"query\": \"Integral conjugacy of cocharacters into a split maximal torus of a reductive group over a henselian local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing.toIsLocalRing\", \"IsConjRoot.isIntegral\", \"IsConjRoot\", \"HenselianLocalRing.recOn\", \"instHenselianRingMaximalIdeal\", \"HenselianLocalRing\", \"Field.henselian\", \"IsIntegral\"], \"digest\": \"62ecedbe3d8f2f3d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract conjugation, Lie algebra Cartan subalgebras, Henselian rings and root pairings do not state rational conjugacy of algebraic-group tori or integral cocharacters"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalRing\", \"IsConj\"",
+   "results": "{\"t\": \"2026-10-24T03:39:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLocalRing\\\", \\\"IsConj\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract conjugation, Lie algebra Cartan subalgebras, Henselian rings and root pairings do not state rational conjugacy of algebraic-group tori or integral cocharacters"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a complete discrete valuation ring every cocharacter of a reductive group with a split maximal torus is conjugate into that torus by an integral point",
+   "results": "{\"t\": \"2026-10-24T03:39:25Z\", \"tool\": \"leanfinder\", \"query\": \"Over a complete discrete valuation ring every cocharacter of a reductive group with a split maximal torus is conjugate into that torus by an integral point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.ωConj_mem_of_mem\", \"RootPairing.exists_value\", \"RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff\", \"RootPairing.GeckConstruction.mem_ωConjLieSubmodule_iff\", \"RootPairing.IsValuedIn.exists_value\", \"LieModule.exists_forall_mem_corootSpace_smul_add_eq_zero\", \"LieAlgebra.IsKilling.cartanEquivDual_symm_apply_mem_corootSpace\", \"ValuationSubring.decompositionSubgroup\"], \"digest\": \"b80da4db8ec05fb0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract conjugation, Lie algebra Cartan subalgebras, Henselian rings and root pairings do not state rational conjugacy of algebraic-group tori or integral cocharacters"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "One parameter subgroups of a split reductive group over a complete local ring are conjugate into the diagonal torus",
+   "results": "{\"t\": \"2026-10-24T03:39:27Z\", \"tool\": \"leanfinder\", \"query\": \"One parameter subgroups of a split reductive group over a complete local ring are conjugate into the diagonal torus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.ωConj_mem_of_mem\", \"RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff\", \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra'\", \"SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq\", \"RootPairing.GeckConstruction.instIsTriangularizableSubtypeMatrixSumMemFinsetSupportLieSubalgebraLieAlgebraCartanSubalgebra'Forall\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply\", \"Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity'_apply\", \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra\"], \"digest\": \"50005b5f4fda11c0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract conjugation, Lie algebra Cartan subalgebras, Henselian rings and root pairings do not state rational conjugacy of algebraic-group tori or integral cocharacters"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-reductive-dvr-cartan-decomposition",
+  "date": "2026-10-24",
+  "group": "Q143"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Remark 3.5, forward implication, printed p.5: integral conjugation into a fixed maximal split torus. Only the complete-DVR case is needed here; the statement is the conjugacy input, not a Cartan factorization.",
+   "via": [
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-complete-dvr-torus-cocharacter-conjugacy",
+  "worker": "stage1",
+  "summary": "Preserved the complete-DVR statement and all imported metadata. Replaced the unavailable/prohibited-source black-box conjugacy input by residue-field rational split-torus conjugacy, an explicit integer-power lift, compatible square-zero lifts for a twisted multiplicative-group action, and coefficientwise effectivity over the complete ring. Two statement-only inputs remain; no Lean attachment or Mathlib match was found.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Remark 3.5, forward implication, printed p.5: integral conjugation into a fixed maximal split torus. Only the complete-DVR case is needed here; the statement is the conjugacy input, not a Cartan factorization.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Only its smoothness-under-base-change clause is used to form the residue fibre; the item unit has no competing smoothness permanence input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q59-3d0a9962d",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-3d0a9962d (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, the cited statements, the parent Cartan node and Milne 12.9, 13.1 and 25.10 (pdftotext); review.md has the details. In clones/live the item is still unsplit and has no repair note, so it is not superseded. Statement, stmt_deps and blueprint are unchanged from live; proof_deps equals the union of the step uses; no SGA anywhere. Steps: 1 gets smoothness of the residue fibre from clause (2) of lem-pc-proper-base-change. That off-unit tool_use is declared and is the same use already accepted on the parent, so I accept it. Geometric maximality of S implies maximality among k-split tori, and the field lemma's hypotheses match. 2 shows group-like elements of k[z^{±1}] are z^e by an explicit coefficient comparison plus the counit; marked elementary, correctly. 3 checks the twisted action law using commutativity of G_m; being fixed means cλc^{-1}=ν. 4 uses that (π^n)^2 lies in (π^{n+1}) and lifts the chosen c_n, so the lifts are compatible. 5 passes to the limit using completeness, which also gives that the intersection of the π^nA is 0. 6 compares Laurent coefficients to get equality of the two morphisms. New nodes: field-split-torus-rational-containment is true. The image of f is a split torus (12.9), it lies in a maximal split torus, and Milne 25.10 conjugates that into S. I checked trivial D, finite/imperfect fields and inseparable kernels. gm-fixed-square-zero-lifting is true; I verified the graded conormal-retraction argument (relative form of CGP A.8.10(2)) and the cases J=0, B0=0 and trivial action. Neither node duplicates the existing field/k̄ fixed-point or conjugacy nodes, neither restates the item, and both carry statements only with full searches. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.CompleteDVRTorusCocharacterConjugacy",
+  "declaration": "AlgebraicGeometry.completeDVR_torus_cocharacter_conjugacy",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/CompleteDVRTorusCocharacterConjugacy.lean",
+  "statement": "theorem completeDVR_torus_cocharacter_conjugacy (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A] (π : A) (hπ : IsLocalRing.maximalIdeal A = Ideal.span ({π} : Set A)) [IsAdicComplete (Ideal.span ({π} : Set A)) A] (H S : Grp (Over (Spec (.of A)))) [Smooth H.X.hom] [IsAffine H.X.left] [LocallyOfFiniteType H.X.hom] [QuasiCompact H.X.hom] (i : S ⟶ H) [IsClosedImmersion i.hom.hom.left] (r : ℕ) (e : S ≅ RingGroupSchemes.splitTorus A r) (hred : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (f : A →+* Ω), ReductiveTorusCentralizer.IsReductive ((Over.pullback (Spec.map (CommRingCat.ofHom f))).mapGrp.obj H)) (hmax : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (f : A →+* Ω), ReductiveTorusCentralizer.IsMaximalTorus ((Over.pullback (Spec.map (CommRingCat.ofHom f))).mapGrp.map i)) (mu : RingGroupSchemes.multiplicative A ⟶ H) : ∃ (c : 𝟙_ (Over (Spec (.of A))) ⟶ H.X) (ν : RingGroupSchemes.multiplicative A ⟶ S), (toUnit (RingGroupSchemes.multiplicative A).X ≫ c) * mu.hom.hom * (toUnit (RingGroupSchemes.multiplicative A).X ≫ c)⁻¹ = ν.hom.hom ≫ i.hom.hom",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9c69a3c57",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Delivery changes only the item node record (lean + 2 landed def stmt_deps used by the statement) and adds the new module; statement, proof and blueprint are identical to side-live. Clauses checked against the node: DVR + uniformizer + IsAdicComplete(span π); H smooth/affine/finite type as Grp over Spec A; closed i; S ≅ splitTorus A r (rank 0 trivial); hred/hmax via IsReductive/IsMaximalTorus on Over.pullback fibres for every algebraically closed Ω : Type u (no stronger than the node, equivalent; same binders as the landed Cartan consumer); arbitrary cocharacter mu; ∃ A-point c and ν with (const c)*mu*(const c)⁻¹ = ν ≫ i as morphisms. lean.statement verbatim; sorry only; source/blueprint docstrings and 6-step plan; imports justified (Proper = proof_dep module); no duplicate; edge cases r=0, trivial λ, imperfect/finite residue field, nonreduced algebras checked. No changes, no compile."
+ }
+}

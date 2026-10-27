@@ -1,0 +1,109 @@
+{
+ "id": "lem-pur-algebra-diagram-normalized-ordinary-comparisons",
+ "kind": "statement",
+ "title": "Normalized ordinary algebra-diagram comparisons",
+ "statement": "For an algebra-diagram adjunction presentation p, the ordinary comparisons p.OrdinaryComparisons exist. These compare direct image with evaluation and restriction, identify inverse image with evaluation, and satisfy the specified underlying-sheaf normalization and ordinary counit equation.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 and 0D6E, normalized diagram direct image and derived composition."
+ },
+ "stmt_deps": [
+  "def-pur-algebra-diagram-normalization-interface"
+ ],
+ "proof": [
+  {
+   "text": "Transport the underlying geometric direct-image comparison to module sheaves using the addition and scalar-linearity axioms. The structural ring-map identities give evaluation linearity. Use the coefficient square and naturality of structural maps for vertex and transition restriction. For inverse image construct the mate of the right comparison, compute its underlying sheaf through the normalized module adjunction, and show it is an isomorphism. The mates counit equation gives the ordinary counit field.",
+   "uses": [
+    "lem-pur-diagram-ring-restriction-pushforward",
+    "lem-pur-cartesian-module-pullback-underlying",
+    "lem-weil-pbc-diagram-site-realization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-diagram-ring-restriction-pushforward",
+  "lem-pur-cartesian-module-pullback-underlying",
+  "lem-weil-pbc-diagram-site-realization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "The ordinary and derived normalization parts of the parent proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of modules over a diagram of sheaf algebras commutes with geometric module direct image and its inverse-image adjunction",
+   "results": "No directly applicable library declaration; componentwise transport and induced module functors supply the construction.",
+   "date": "2026-10-25",
+   "verdict": "Construct normalized ordinary comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\", \"counit\"",
+   "results": "CategoryTheory.mateEquiv_counit and mateEquiv_counit_symm.",
+   "date": "2026-10-25",
+   "verdict": "Used to normalize the inverse-image comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedNatTrans.*(comp|fac)|mateEquiv_counit",
+   "results": "Mathlib adjunction-mates and right-derived natural-transformation APIs.",
+   "date": "2026-10-25",
+   "verdict": "Use these APIs with the concrete module comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.AlgebraDiagramEvaluationAdjunctionNormalization",
+  "date": "2026-10-25",
+  "group": "A5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "lem-pur-algebra-diagram-evaluation-adjunction-normalization",
+   "place": "Normalized ordinary algebra-diagram comparisons"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.AlgebraDiagramEvaluationOrdinaryComparisons",
+  "file": "lean/Sheaf/CategoryTheory/AlgebraDiagramEvaluationOrdinaryComparisons.lean",
+  "declaration": "CategoryTheory.AlgebraDiagramAdjunctionPresentation.ordinaryComparisons_exists",
+  "statement": "theorem ordinaryComparisons_exists : Nonempty (p.OrdinaryComparisons)",
+  "branch": "sheaf-dag",
+  "by": "A5",
+  "date": "2026-10-25",
+  "declarations": [
+   "CategoryTheory.AlgebraDiagramAdjunctionPresentation.OrdinaryComparisons",
+   "CategoryTheory.AlgebraDiagramAdjunctionPresentation.ordinaryComparisons_exists"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-dda57",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261025T122446-L-1774038",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-dda57",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261025T122446-L-1774038",
+  "kind": "interface",
+  "note": "independent cc review: dda572889e4d vs passed delivery 983832b9a42f (diff -r: only module/node rename + one local irreducible attr) and vs clone original module/node (Defs interface line-diffed; item node field-diffed: only lean/proof/proof_deps/proof_origin); 0 importers by grep"
+ }
+}

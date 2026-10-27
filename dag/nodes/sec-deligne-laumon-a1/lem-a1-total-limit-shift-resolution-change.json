@@ -1,0 +1,284 @@
+{
+  "id": "lem-a1-total-limit-shift-resolution-change",
+  "kind": "statement",
+  "title": "Termwise limit shifts agree across all K-injective tower resolutions",
+  "statement": "Let $\\mathcal C$ be a site small in the module universe, $R$ a sheaf of commutative rings, $\\mathcal A=\\operatorname{Mod}(R)$ [def-weil-sheaf-of-modules-category], and $\\mathcal T=\\operatorname{Fun}(\\mathbf N_{\\ge1}^{\\mathrm{op}},\\mathcal A)$ with levelwise exactness [lem-weil-tower-category-levelwise-abelian]. Fix unbounded derived localizations $Q_T,Q_A$ and the cochain shift convention [def-weil-abstract-derived-category]. Write $\\ell X=\\lim_nX_n$ for termwise inverse limit. Fix any total right derived inverse-limit functor $L:D(\\mathcal T)\\to D(\\mathcal A)$ with its derived unit $\\eta_X:Q_A\\ell X\\to L(Q_TX)$, in the sense of [def-sfb-right-derived-functor] for the additive functor $\\ell$, computed as in [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. A K-injective tower complex means one receiving only null-homotopic maps from acyclic tower complexes [def-pur-kinjective-complex]. No exactness of countable products is assumed.\n\nFor every quasi-isomorphism $q:X\\to I$ with $I$ K-injective, there is a unique isomorphism $d_q:Q_A\\ell I\\xrightarrow{\\sim}L(Q_TX)$ satisfying $L(Q_Tq)\\circ d_q=\\eta_I$. For another such resolution $q':X\\to J$, there exists a homotopy equivalence $v:I\\to J$ with $vq\\simeq q'$. Every such $v$ satisfies $d_{q'}\\circ Q_A(\\ell v)=d_q$, independently of its homotopy-class representative. Here termwise limit sends a tower homotopy $H$ to the homotopy $\\ell H$ characterized by its limit projections.\n\nFor every $r\\in\\mathbf Z$, $q[r]$ is again a K-injective resolution. Let $\\lambda_{I,r}:\\ell(I[r])\\xrightarrow{\\sim}(\\ell I)[r]$ be the chain isomorphism identity on compatible tuples. For every tower chain map $v:I\\to J$ one has $\\lambda_{J,r}\\circ\\ell(v[r])=(\\ell v)[r]\\circ\\lambda_{I,r}$. With the canonical $Q_A$ shift identifications, the isomorphism\n$$\\beta_{X,r}=d_q[r]\\circ Q_A(\\lambda_{I,r})\\circ d_{q[r]}^{-1}:L(Q_T(X[r]))\\xrightarrow{\\sim}L(Q_TX)[r]$$\nis independent of $q$, is natural for all derived tower morphisms, and is coherent for zero and addition of integer shifts. All assertions include K-injective resolutions without injective degree terms.",
+  "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective, (1) implies (3), and its homotopy-equivalence consequence; agent inverse-limit and shift refinement of returned proof steps 3 and 6."
+  },
+  "stmt_deps": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-tower-category-levelwise-abelian",
+    "def-weil-abstract-derived-category",
+    "def-sfb-right-derived-functor",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "def-pur-kinjective-complex"
+  ],
+  "proof": [
+    {
+      "text": "The inverse limit of a tower of module sheaves is the sheaf of compatible tuples: compatible local sections glue uniquely coordinate by coordinate, and the transition equations hold after gluing by uniqueness. Its projections are jointly monic. For tower maps $a,b$, projection to level $n$ gives $\\pi_n\\ell(a+b)=(a_n+b_n)\\pi_n=\\pi_n(\\ell a+\\ell b)$, so $\\ell$ is additive. Apply $\\ell$ degreewise to a tower homotopy $f-g=dH+Hd$. Additivity and functoriality give $\\ell f-\\ell g=(\\ell d)(\\ell H)+(\\ell H)(\\ell d)$. The degree-$i$ map $\\ell H^i$ is uniquely characterized by $\\pi_n\\ell H^i=H_n^i\\pi_n$. Thus termwise limit descends to homotopy classes and takes homotopy equivalences to homotopy equivalences. The module-sheaf description is [def-weil-sheaf-of-modules-category]; this argument uses no exactness of products.",
+      "uses": [
+        "def-weil-sheaf-of-modules-category"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/derived.tex",
+        "place": "Agent elementary compatible-tuple and homotopy calculation; homotopies as in Definition 070H (definition-K-injective)."
+      }
+    },
+    {
+      "text": "Use the total-derived computation supplied by [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. The universal pair and its unit are those of [def-sfb-right-derived-functor], applied to the additive functor $\\ell$ from step 1. In particular $\\eta_I$ is invertible for every K-injective tower complex $I$, without a condition on its degree terms. For a resolution $q:X\\to I$, localization [def-weil-abstract-derived-category] makes $Q_Tq$ invertible, hence so does $L$. Define $d_q=L(Q_Tq)^{-1}\\eta_I$. It is an isomorphism and satisfies the required normalization; multiplying that normalization by $L(Q_Tq)^{-1}$ proves uniqueness. This is the inverse of the canonical comparison $c_q$ in the general derived-functor notation.",
+      "uses": [
+        "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+        "def-sfb-right-derived-functor",
+        "def-weil-abstract-derived-category"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/derived.tex",
+        "place": "Tag 070Y (lemma-K-injective-defined), computation on every K-injective, and Tag 070K (lemma-enough-K-injectives-implies); tower application: sites-cohomology.tex Section 0940 (section-derived-limits)."
+      }
+    },
+    {
+      "text": "For resolutions $q:X\\to I$ and $q':X\\to J$, apply the Hom bijection [lem-weil-pbc-kinjective-hom-derived] with target $J$ to $Q_Tq'(Q_Tq)^{-1}$. Choose a chain representative $v:I\\to J$. Its composite with $q$ and $q'$ have the same derived image, so the same bijection with source $X$ gives $vq\\simeq q'$. Represent the inverse derived morphism with target $I$; injectivity of the two Hom bijections makes its composites with $v$ homotopic to the identities. Thus $v$ is a homotopy equivalence. Every comparison with $vq\\simeq q'$ represents the same homotopy class. Naturality of the unit [def-sfb-right-derived-functor] gives $\\eta_JQ_A(\\ell v)=L(Q_Tv)\\eta_I$, whence\n$$d_{q'}Q_A(\\ell v)=L(Q_Tq')^{-1}L(Q_Tv)\\eta_I=L(Q_Tq)^{-1}\\eta_I=d_q.$$\nThe first step shows independence from the chain representative.",
+      "uses": [
+        "lem-weil-pbc-kinjective-hom-derived",
+        "def-sfb-right-derived-functor"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/derived.tex",
+        "place": "Tag 070I (lemma-K-injective), (1) implies (3), applied three times; Tag 070Y (lemma-K-injective-defined), naturality of the computing unit."
+      }
+    },
+    {
+      "text": "By [lem-weil-pbc-kinjective-shift], $q[r]:X[r]\\to I[r]$ is again a K-injective resolution for every integer $r$. In degree $i$, both $\\ell(I[r])$ and $(\\ell I)[r]$ are $\\lim_n I_n^{i+r}$. Both differentials are $(-1)^r\\lim_n d_{I_n}^{i+r}$, by additivity of $\\ell$. Therefore identity on these compatible tuples is the asserted chain isomorphism $\\lambda_{I,r}$. For any tower chain map $v:I\\to J$, both sides of its asserted naturality square have degree-$i$ map $\\lim_n v_n^{i+r}$; hence the square commutes. Likewise $\\lambda_{I,0}=1$ and, after canonical reindexing, $\\lambda_{I,r+s}=\\lambda_{I,r}[s]\\lambda_{I[r],s}$: both sides are identity on tuples in degree $i+r+s$, with differential sign $(-1)^{r+s}=(-1)^r(-1)^s$. Localizing gives the same identities with the canonical shift identifications of [def-weil-abstract-derived-category].",
+      "uses": [
+        "lem-weil-pbc-kinjective-shift",
+        "def-weil-abstract-derived-category"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/derived.tex",
+        "place": "Definition 070H (definition-K-injective), translates of acyclic complexes; agent degreewise limit/shift calculation with the cochain convention."
+      }
+    },
+    {
+      "text": "Write $\\Lambda_{I,r}=Q_A(\\lambda_{I,r})$, using the canonical $Q_A$ shift identifications throughout. The formula in the statement is $\\beta^q_{X,r}=d_q[r]\\Lambda_{I,r}d_{q[r]}^{-1}$. For a second resolution $q':X\\to J$ choose $v$ as in step 3 and put $E=Q_A(\\ell v)$ and $E_r=Q_A(\\ell(v[r]))$. They are isomorphisms by step 1. Step 3 at $q,q'$ and at $q[r],q'[r]$ says $d_q=d_{q'}E$ and $d_{q[r]}=d_{q'[r]}E_r$. Step 4 says $\\Lambda_{J,r}E_r=E[r]\\Lambda_{I,r}$. Substitution gives\n$$\\beta^q_{X,r}=d_{q'}[r]E[r]\\Lambda_{I,r}E_r^{-1}d_{q'[r]}^{-1}=d_{q'}[r]\\Lambda_{J,r}d_{q'[r]}^{-1}=\\beta^{q'}_{X,r}.$$\nThus $\\beta_{X,r}$ is resolution independent.",
+      "uses": [],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/derived.tex",
+        "place": "Agent cancellation of the comparison identities established in steps 3 and 4; based on Tag 070I (lemma-K-injective)."
+      }
+    },
+    {
+      "text": "Let $h:Q_TX\\to Q_TY$ be any derived morphism and choose resolutions $q:X\\to I$, $p:Y\\to J$. The hypotheses of [lem-sf-kinjective-derived-map-computation] hold for $F=\\ell$: it is additive by step 1, and K-injective resolutions in the tower category and their total-derived computation are supplied by [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. The cited computation represents $h$ by a homotopy class $g:I\\to J$ with $Q_Tg=(Q_Tp)h(Q_Tq)^{-1}$ and gives\n$$L(h)d_q=d_pQ_A(\\ell g).$$\nWith the canonical localized shift identifications of [def-weil-abstract-derived-category], $g[r]$ represents $h[r]$ using $q[r],p[r]$, so the same formula gives $L(h[r])d_{q[r]}=d_{p[r]}Q_A(\\ell(g[r]))$. Step 4 now gives\n$$\\beta_{Y,r}L(h[r])d_{q[r]}=d_p[r]\\Lambda_{J,r}Q_A(\\ell(g[r]))=d_p[r]Q_A(\\ell g)[r]\\Lambda_{I,r}=L(h)[r]\\beta_{X,r}d_{q[r]}.$$\nCancel $d_{q[r]}$. This proves naturality for every derived morphism, including ones not represented by strict maps $X\\to Y$.",
+      "uses": [
+        "lem-sf-kinjective-derived-map-computation",
+        "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+        "def-weil-abstract-derived-category"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/derived.tex",
+        "place": "Tags 070I (lemma-K-injective) and 070Y (lemma-K-injective-defined); explicit arbitrary-derived-morphism square using the existing general computation node."
+      }
+    },
+    {
+      "text": "For zero shift, choose $q[0]=q$ under the canonical identification. Step 4 and cancellation give $\\beta_{X,0}=d_qd_q^{-1}=1$. For addition choose the resolutions $q$, $q[r]$, and $q[r][s]$ simultaneously. Substituting their formulas cancels the middle comparison:\n$$\\beta_{X,r}[s]\\beta_{X[r],s}=d_q[r][s]\\Lambda_{I,r}[s]\\Lambda_{I[r],s}d_{q[r][s]}^{-1}.$$\nThe tuple identity in step 4 identifies the two middle maps with $\\Lambda_{I,r+s}$, after the canonical addition-of-shifts isomorphisms. To check the remaining comparison under this reindexing, let $a_X:(X[r])[s]\\to X[r+s]$ and $a_I:(I[r])[s]\\to I[r+s]$ be the canonical chain isomorphisms. They satisfy $a_Iq[r][s]=q[r+s]a_X$. The morphism formula of step 6, applied to $Q_Ta_X$ and its representative $a_I$, gives\n$$L(Q_Ta_X)d_{q[r][s]}=d_{q[r+s]}Q_A(\\ell a_I).$$\nMoreover $Q_A$ takes these chain reindexings to the prescribed shift associators [def-weil-abstract-derived-category]. Consequently the preceding composite is precisely $\\beta_{X,r+s}$ with the source and target addition-of-shifts identifications inserted. This proves coherence, also when $r$ or $s$ is negative. All comparison arguments used K-injectivity alone, not injectivity of individual degree terms.",
+      "uses": [
+        "def-weil-abstract-derived-category"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/derived.tex",
+        "place": "Agent addition/zero coherence calculation; canonical localized cochain shifts from Definition 05RU and the conventions of def-weil-abstract-derived-category."
+      }
+    }
+  ],
+  "proof_deps": [
+    "def-sfb-right-derived-functor",
+    "def-weil-abstract-derived-category",
+    "def-weil-sheaf-of-modules-category",
+    "lem-sf-kinjective-derived-map-computation",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-kinjective-shift",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I (lemma-K-injective), 070Y (lemma-K-injective-defined), 070K (lemma-enough-K-injectives-implies); explicit termwise-limit and resolution-normalized shift/coherence calculations, using sites-cohomology.tex Section 0940 (section-derived-limits)."
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "Termwise inverse limit shifts computed on any K-injective tower resolution are independent of the resolution and are natural for derived morphisms",
+      "results": "Hits: CategoryTheory.InjectiveResolution.iso_inv_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.iso_inv_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc, CategoryTheory.InjectiveResolution.iso_hom_naturality_assoc, CategoryTheory.InjectiveResolution.iso_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc",
+      "date": "2026-10-22",
+      "verdict": "no match: the K-injective bijection and homotopy-equivalence criteria are ingredients; bounded-below InjectiveResolution results do not state the unbounded tower-limit, derived-unit-normalized shift formula for every K-injective resolution"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "A comparison homotopy equivalence between K-injective resolutions commutes with inverse limit shift and identifies the total right derived inverse limit unit",
+      "results": "Hits: CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality, CategoryTheory.InjectiveResolution.homotopyEquiv_inv_ι_assoc, CategoryTheory.InjectiveResolution.homotopyEquiv_inv_ι, CategoryTheory.InjectiveResolution.homotopyEquiv_hom_ι_assoc, CategoryTheory.InjectiveResolution.iso_inv_naturality_assoc",
+      "date": "2026-10-22",
+      "verdict": "no match: the K-injective bijection and homotopy-equivalence criteria are ingredients; bounded-below InjectiveResolution results do not state the unbounded tower-limit, derived-unit-normalized shift formula for every K-injective resolution"
+    },
+    {
+      "tool": "loogle",
+      "query": "CochainComplex.IsKInjective, CategoryTheory.Functor.CommShift",
+      "results": "No hits.",
+      "date": "2026-10-22",
+      "verdict": "no match: the K-injective bijection and homotopy-equivalence criteria are ingredients; bounded-below InjectiveResolution results do not state the unbounded tower-limit, derived-unit-normalized shift formula for every K-injective resolution"
+    },
+    {
+      "tool": "grep",
+      "query": "[Rr]oos|[Ll]imit.*[Kk][Ii]njective|[Kk][Ii]njective.*[Ll]imit",
+      "results": "No hits. Subdirectory: Algebra/Homology",
+      "date": "2026-10-22",
+      "verdict": "no match: the K-injective bijection and homotopy-equivalence criteria are ingredients; bounded-below InjectiveResolution results do not state the unbounded tower-limit, derived-unit-normalized shift formula for every K-injective resolution"
+    },
+    {
+      "tool": "leansearch",
+      "query": "Right derived inverse limit has a canonical coherent integer shift computed by termwise limit on every K-injective resolution without injective terms",
+      "results": "Hits: CategoryTheory.Functor.rightDerived, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.Functor.rightDerivedToHomotopyCategory, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.InjectiveResolution.cochainComplex",
+      "date": "2026-10-22",
+      "verdict": "no match: the K-injective bijection and homotopy-equivalence criteria are ingredients; bounded-below InjectiveResolution results do not state the unbounded tower-limit, derived-unit-normalized shift formula for every K-injective resolution"
+    },
+    {
+      "tool": "loogle",
+      "query": "CochainComplex.IsKInjective.Qh_map_bijective",
+      "results": "Hits: CochainComplex.IsKInjective.Qh_map_bijective",
+      "date": "2026-10-22",
+      "verdict": "no match: the K-injective bijection and homotopy-equivalence criteria are ingredients; bounded-below InjectiveResolution results do not state the unbounded tower-limit, derived-unit-normalized shift formula for every K-injective resolution"
+    },
+    {
+      "tool": "grep",
+      "query": "Qh_map_bijective|quasiIso_iff",
+      "results": "Hits: 41, 50, 55, 57, 75 Subdirectory: Algebra/Homology/DerivedCategory/KInjective.lean",
+      "date": "2026-10-22",
+      "verdict": "no match: the K-injective bijection and homotopy-equivalence criteria are ingredients; bounded-below InjectiveResolution results do not state the unbounded tower-limit, derived-unit-normalized shift formula for every K-injective resolution"
+    },
+    {
+      "tool": "grep",
+      "query": "limit.*commShift|commShift.*limit|limit.*KInjective|KInjective.*limit",
+      "results": "No hits. Subdirectory: Algebra/Homology",
+      "date": "2026-10-22",
+      "verdict": "no match: ingredients only; none states the unbounded arbitrary-K-injective inverse-limit shift formula and all its normalization, resolution-change and coherence clauses"
+    },
+    {
+      "tool": "loogle",
+      "query": "CochainComplex.IsKInjective, CategoryTheory.Functor.CommShift",
+      "results": "No hits.",
+      "date": "2026-10-22",
+      "verdict": "no match: ingredients only; none states the unbounded arbitrary-K-injective inverse-limit shift formula and all its normalization, resolution-change and coherence clauses"
+    },
+    {
+      "tool": "leansearch",
+      "query": "The canonical isomorphism between the derived inverse limit of a shifted complex and the shifted derived inverse limit is independent of K-injective resolutions and natural in all derived morphisms",
+      "results": "Hits: CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc, CategoryTheory.Functor.mapHomologicalComplex_commShiftIso_inv_app_f, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality, CategoryTheory.InjectiveResolution.iso_inv_naturality, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality_assoc, CochainComplex.mappingCone.shiftIso, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality_assoc",
+      "date": "2026-10-22",
+      "verdict": "no match: ingredients only; none states the unbounded arbitrary-K-injective inverse-limit shift formula and all its normalization, resolution-change and coherence clauses"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "For an additive inverse limit functor the shift on its unbounded right derived functor computed using any K-injective resolution is independent of that resolution",
+      "results": "Hits: CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, DerivedCategory.instCommShiftHomologicalComplexIntUpHomFunctorQuotientCompQhIso, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh, DerivedCategory.instCommShiftCochainComplexIntQ, CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism, DerivedCategory.instHasShiftInt, CategoryTheory.Functor.mapDerivedCategorySingleFunctor",
+      "date": "2026-10-22",
+      "verdict": "no match: ingredients only; none states the unbounded arbitrary-K-injective inverse-limit shift formula and all its normalization, resolution-change and coherence clauses"
+    },
+    {
+      "tool": "grep",
+      "query": "Qh_map_bijective|quasiIso_iff|commShiftIso|commShiftIso_zero|commShiftIso_add",
+      "results": "Hits: Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/DerivedCategory/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean Subdirectory: Algebra/Homology/DerivedCategory",
+      "date": "2026-10-22",
+      "verdict": "no match: ingredients only; none states the unbounded arbitrary-K-injective inverse-limit shift formula and all its normalization, resolution-change and coherence clauses"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "An additive functor commutes with cochain shifts and homotopies; its total derived functor has coherent shift isomorphisms computed on arbitrary unbounded K-injective resolutions",
+      "results": "Hits: CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, DerivedCategory.instCommShiftHomologicalComplexIntUpHomFunctorQuotientCompQhIso, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, DerivedCategory.instCommShiftHomotopyCategoryIntUpQh, HomotopyCategory.instCommShiftHomologicalComplexIntUpHomFunctorMapHomotopyCategoryFactors, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism",
+      "date": "2026-10-22",
+      "verdict": "no match: ingredients only; none states the unbounded arbitrary-K-injective inverse-limit shift formula and all its normalization, resolution-change and coherence clauses"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "lem-a1-normalized-roos-shift-comparison",
+    "date": "2026-10-22",
+    "group": "Q27"
+  },
+  "chapter": "sec-deligne-laumon-a1",
+  "unit": "sk-thm-dl-a1-upper",
+  "blueprint": {
+    "from": {
+      "node": "lem-a1-finite-map-purity",
+      "place": "First paragraph, geometric-stalk restriction by finite-map pullback; Old proof step 11: signed Roos coordinates and the shifted K-injective normalization of the cone/limit comparison. Returned step 3 and arbitrary-resolution comparison, limit homotopies, and limit shift square in step 6.",
+      "via": [
+        "lem-a1-normalized-roos-shift-comparison",
+        "lem-a1-integral-pullback-completed-comparison",
+        "lem-a1-constructible-pullback-t-exact",
+        "lem-a1-finite-etale-weil-fibre-comparison"
+      ]
+    },
+    "same_as": [],
+    "is": null
+  },
+  "split_report": {
+    "date": "2026-10-22",
+    "item": "lem-a1-total-limit-shift-resolution-change",
+    "worker": "stage1",
+    "summary": "Unchanged statement, seven explicit proof steps. Reused existing K-injective Hom, shift, total-derived unit, and arbitrary-derived-map computation nodes. Compatible-tuple calculations prove limit homotopy preservation and the natural coherent shift; cancellation proves resolution independence. No new nodes.",
+    "blueprint": "Ancestor lem-a1-finite-map-purity, first paragraph finite-map geometric-stalk restriction, via the recorded integral pullback and normalized Roos comparison ancestry; supplies the arbitrary-resolution total-limit shift in returned parent proof steps 3 and 6, without changing the finite-stalk route.",
+    "tool_uses": [
+      {
+        "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+        "why": "Generic total right derived inverse-limit computation on the strict-tower category, without exact products; needed for the integral comparison in this unit."
+      },
+      {
+        "node": "lem-sf-kinjective-derived-map-computation",
+        "why": "Generic formula computing arbitrary derived morphisms on K-injective resolutions; strict chain-map naturality alone would not give the requested derived naturality."
+      }
+    ]
+  },
+  "tool_uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-sf-kinjective-derived-map-computation"
+  ],
+  "reviewed": {
+    "date": "2026-10-22",
+    "by": "L",
+    "reviewer": "NT-cc-Q128-2cd930afc",
+    "group": "Q128",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-2cd930afc (reviewer sub-agent of L); spot-checked: I read the item and all 7 steps in full, along with every cited statement: sheaf-of-modules category, tower category, abstract derived category (including its blueprint_update), strict-tower homotopy-limit node, K-injective complex, def-sfb-right-derived-functor, the K-injective derived-map computation, the K-injective Hom-bijection leaf and the K-injective shift leaf. I also read Stacks derived.tex lemma-K-injective (070I, line 9632), where (1)⇒(3) gives the Hom bijection. All steps check out. Step 1: termwise limit is additive and takes homotopies to homotopies. Step 2: d_q=L(Q_Tq)^{-1}η_I; I checked the domains, the normalization and uniqueness. Step 3: the comparison v comes from the Hom bijection, vq≃q' follows from injectivity of the bijection, and naturality of the unit gives d_{q'}Q_A(ℓv)=d_q. Step 4: λ is the identity on tuples, with differential sign (−1)^r on both sides. Step 5: resolution independence follows by substitution; I checked the algebra. Step 6: c_a in the cited node equals d_a^{-1}, so naturality holds for every derived morphism h; I checked the chain of equalities. Step 7: zero and addition coherence, including the reindexing through a_X and a_I. Edge cases tested: X=0, the identity resolution, r=0, r=−1, r+s=0, and resolutions without injective terms. I accept both tool_uses, the strict-tower R lim node and the generic derived-map computation, as generic black-box tools. No new nodes were created and no SGA source is used. I searched the DAG and found no duplicate; the candidates I read state different things (lem-sp-shift-identification, lem-pur-reduction-limit-shift-adjunction, lem-weil-pbc-derived-square-shift-on-kinjectives, lem-sp-canonical-right-derived-adjunction-shift). One fault, B3/C4: the statement takes L with its derived unit η 'in the sense of lem-weil-pbc-ringed-strict-tower-homotopy-limit', but that node defines no unit; the unit comes from def-sfb-right-derived-functor, which step 2 uses and the statement does not cite. FIX: the statement now cites def-sfb-right-derived-functor for the additive functor ℓ, computed as in the strict-tower node, and def-sfb-right-derived-functor is added to stmt_deps. The meaning is unchanged, nothing is weakened, and no cycle is created. The corrected file is at fixes/dag/nodes/sec-deligne-laumon-a1/lem-a1-total-limit-shift-resolution-change.json.; 1 file(s) fixed by the reviewer"
+  },
+  "lean": {
+    "module": "Sheaf.CategoryTheory.TotalLimitShiftResolutionChange",
+    "declaration": "CategoryTheory.totalLimitShiftResolutionChange",
+    "declarations": [
+      "CategoryTheory.totalLimitShiftResolutionChange",
+      "CategoryTheory.ringedTowerLimit_additive"
+    ],
+    "file": "lean/Sheaf/CategoryTheory/TotalLimitShiftResolutionChange.lean",
+    "statement": "theorem totalLimitShiftResolutionChange {C : Type uC} [Category.{vC} C] [EssentiallySmall.{r} C] (J : GrothendieckTopology C) [HasSheafify J AddCommGrpCat.{r}] [J.WEqualsLocallyBijective AddCommGrpCat.{r}] (R : Sheaf J RingCat.{r}) (_hcomm : ∀ (U : Cᵒᵖ) (a b : R.obj.obj U), a * b = b * a) [HasDerivedCategory.{wA} (ringedSiteModules.{r, r, vC, uC} R)] [HasDerivedCategory.{wT} (ℕᵒᵖ ⥤ (ringedSiteModules.{r, r, vC, uC} R))] (L : DerivedCategory.{wT} (ℕᵒᵖ ⥤ (ringedSiteModules.{r, r, vC, uC} R)) ⥤ DerivedCategory.{wA} (ringedSiteModules.{r, r, vC, uC} R)) (η : (lim : (ℕᵒᵖ ⥤ (ringedSiteModules.{r, r, vC, uC} R)) ⥤ (ringedSiteModules.{r, r, vC, uC} R)).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q.{wA} ⟶ DerivedCategory.Q.{wT} ⋙ L) (_hL : L.IsRightDerivedFunctor η (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ (ringedSiteModules.{r, r, vC, uC} R)) (.up ℤ))) : (∀ (X Y : CochainComplex (ℕᵒᵖ ⥤ (ringedSiteModules.{r, r, vC, uC} R)) ℤ) (f g : X ⟶ Y) (H : Homotopy f g) (i j : ℤ) (n : ℕ), ((lim : (ℕᵒᵖ ⥤ (ringedSiteModules.{r, r, vC, uC} R)) ⥤ (ringedSiteModules.{r, r, vC, uC} R)).mapHomotopy H).hom i j ≫ limit.π (Y.X j) (op n) = limit.π (X.X i) (op n) ≫ (H.hom i j).app (op n)) ∧ (∀ (I : CochainComplex (ℕᵒᵖ ⥤ (ringedSiteModules.{r, r, vC, uC} R)) ℤ) (s i : ℤ), ((((lim : (ℕᵒᵖ ⥤ (ringedSiteModules.{r, r, vC, uC} R)) ⥤ (ringedSiteModules.{r, r, vC, uC} R)).mapHomologicalComplex (.up ℤ)).commShiftIso s).hom.app I).f i = 𝟙 _) ∧ (∀ (I I' : CochainComplex (ℕᵒᵖ ⥤ (ringedSiteModules.{r, r, vC, uC} R)) ℤ) (v : I ⟶ I') (s : ℤ), ((lim : (ℕᵒᵖ ⥤ (ringedSiteModules.{r, r, vC, uC} R)) ⥤ (ringedSiteModules.{r, r, vC, uC} R)).mapHomologicalComplex (.up ℤ)).map (v⟦s⟧') ≫ (((lim : (ℕᵒᵖ ⥤ (ringedSiteModules.{r, r, vC, uC} R)) ⥤ (ringedSiteModules.{r, r, vC, uC} R)).mapHomologicalComplex (.up ℤ)).commShiftIso s).hom.app I' = (((lim : (ℕᵒᵖ ⥤ (ringedSiteModules.{r, r, vC, uC} R)) ⥤ (ringedSiteModules.{r, r, vC, uC} R)).mapHomologicalComplex (.up ℤ)).commShiftIso s).hom.app I ≫ (((lim : (ℕᵒᵖ ⥤ (ringedSiteModules.{r, r, vC, uC} R)) ⥤ (ringedSiteModules.{r, r, vC, uC} R)).mapHomologicalComplex (.up ℤ)).map v)⟦s⟧') ∧ ∃ d : ∀ (X I : CochainComplex (ℕᵒᵖ ⥤ (ringedSiteModules.{r, r, vC, uC} R)) ℤ) (q : X ⟶ I) [QuasiIso q] [I.IsKInjective], DerivedCategory.Q.{wA}.obj (((lim : (ℕᵒᵖ ⥤ (ringedSiteModules.{r, r, vC, uC} R)) ⥤ (ringedSiteModules.{r, r, vC, uC} R)).mapHomologicalComplex (.up ℤ)).obj I) ≅ L.obj (DerivedCategory.Q.{wT}.obj X), (∀ (X I : CochainComplex (ℕᵒᵖ ⥤ (ringedSiteModules.{r, r, vC, uC} R)) ℤ) (q : X ⟶ I) [QuasiIso q] [I.IsKInjective], (d X I q).hom ≫ L.map (DerivedCategory.Q.{wT}.map q) = η.app I ∧ ∀ e : DerivedCategory.Q.{wA}.obj (((lim : (ℕᵒᵖ ⥤ (ringedSiteModules.{r, r, vC, uC} R)) ⥤ (ringedSiteModules.{r, r, vC, uC} R)).mapHomologicalComplex (.up ℤ)).obj I) ≅ L.obj (DerivedCategory.Q.{wT}.obj X), e.hom ≫ L.map (DerivedCategory.Q.{wT}.map q) = η.app I → e = d X I q) ∧ (∀ (X I I' : CochainComplex (ℕᵒᵖ ⥤ (ringedSiteModules.{r, r, vC, uC} R)) ℤ) (q : X ⟶ I) (q' : X ⟶ I') [QuasiIso q] [QuasiIso q'] [I.IsKInjective] [I'.IsKInjective], (∃ v : HomotopyEquiv I I', Nonempty (Homotopy (q ≫ v.hom) q')) ∧ ∀ (v : HomotopyEquiv I I'), Nonempty (Homotopy (q ≫ v.hom) q') → DerivedCategory.Q.{wA}.map (((lim : (ℕᵒᵖ ⥤ (ringedSiteModules.{r, r, vC, uC} R)) ⥤ (ringedSiteModules.{r, r, vC, uC} R)).mapHomologicalComplex (.up ℤ)).map v.hom) ≫ (d X I' q').hom = (d X I q).hom) ∧ (∀ (X I : CochainComplex (ℕᵒᵖ ⥤ (ringedSiteModules.{r, r, vC, uC} R)) ℤ) (q : X ⟶ I) [QuasiIso q] [I.IsKInjective] (s : ℤ), QuasiIso (q⟦s⟧') ∧ (I⟦s⟧).IsKInjective) ∧ ∃ c : L.CommShift ℤ, ∀ (X I : CochainComplex (ℕᵒᵖ ⥤ (ringedSiteModules.{r, r, vC, uC} R)) ℤ) (q : X ⟶ I) [QuasiIso q] [I.IsKInjective] (s : ℤ), (d (X⟦s⟧) (I⟦s⟧) (q⟦s⟧')).hom ≫ L.map ((DerivedCategory.Q.{wT}.commShiftIso s).hom.app X) ≫ (Functor.commShiftIso L (self := c) s).hom.app (DerivedCategory.Q.{wT}.obj X) = DerivedCategory.Q.{wA}.map ((((lim : (ℕᵒᵖ ⥤ (ringedSiteModules.{r, r, vC, uC} R)) ⥤ (ringedSiteModules.{r, r, vC, uC} R)).mapHomologicalComplex (.up ℤ)).commShiftIso s).hom.app I) ≫ (DerivedCategory.Q.{wA}.commShiftIso s).hom.app (((lim : (ℕᵒᵖ ⥤ (ringedSiteModules.{r, r, vC, uC} R)) ⥤ (ringedSiteModules.{r, r, vC, uC} R)).mapHomologicalComplex (.up ℤ)).obj I) ≫ (d X I q).hom⟦s⟧'",
+    "branch": "sheaf-dag",
+    "by": "NO",
+    "date": "2026-10-22",
+    "existing": false,
+    "note": "All K-injective resolutions are quantified without injective-term assumptions. The canonical degreewise limit shift is Mathlib’s mapCochainComplexShiftIso; the existential CommShift structure on the supplied universal pair is normalized by every resolution. Derived localization morphism universes are independent."
+  },
+  "reviewed_lean": {
+    "date": "2026-10-22",
+    "by": "L",
+    "reviewer": "NT-stage2-cc-0bbc1aeac",
+    "group": "NO",
+    "result": "pass",
+    "note": "Read the item node, all 6 stmt_dep records and their Lean (the RingedSiteModules / strict-tower / RightDerivedFunctorOfQuasiIsoResolutions conventions match: EssentiallySmall.{r}, RingCat with _hcomm, ℕᵒᵖ towers, arbitrary (L,η) with IsRightDerivedFunctor on quasiIso), Stacks 070I and Mathlib Shift.lean 247-282. Every clause matches: lim.mapHomotopy π-characterization; λ = commShiftMapCochainComplex with identity components (rfl) and naturality; ∃ d family with normalization and uniqueness; ∃ homotopy equivalence and the resolution-change equation for every v; shifted resolutions; ∃ CommShift c whose equation is exactly β∘d_{q[s]} = d_q[s]∘Λ for all q,s, giving resolution independence, naturality on all derived morphisms and zero/add coherence. c and d are pinned (enough K-injectives) and true (canonical CommShift making η compatible). Edge cases X=0, identity resolution, s=0, negative shifts, non-injective-term K-injectives, independent universes: all covered. Snapshot node differs from live only in lean; statement verbatim; docstrings present; sorry only; no collisions. Advisory: the sorry'd public instance ringedTowerLimit_additive is a one-liner via Functor.additive_of_preserves_binary_products; two unused public stmt_dep imports."
+  }
+}

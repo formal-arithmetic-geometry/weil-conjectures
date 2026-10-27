@@ -1,0 +1,297 @@
+{
+ "id": "lem-sfb-nodal-component-picard-gluing",
+ "kind": "statement",
+ "title": "Component restriction and graph gluing for nodal Picard groups",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure] and let $X/k$ be a connected projective reduced curve with only nodes [def-trf-nodal-geometric-fibres, def-kun-projective, def-pc-reduced-scheme]. Give each irreducible component its reduced induced structure and denote it by $X_v$. Its normalization $\\widetilde X_v$ [def-weil-pbc-reduced-normalization] is a smooth projective connected curve. For any such curve $Y$ (including $X$ and $X_v$), let $\\operatorname{Pic}^0(Y)$ be the group of invertible sheaves [def-sc-invertible-module] of degree zero after pullback to every normalized component. Let $\\Gamma$ be the finite loopless multigraph whose vertices are the $X_v$ and whose edges are the nodes lying on two different components, with those components as endpoints; multiple edges are retained. Choose one orientation of each edge. Set $H_1(\\Gamma,\\mathbf Z)=\\ker(\\partial:\\mathbf Z^{E(\\Gamma)}\\to\\mathbf Z^{V(\\Gamma)})$, with $\\partial e=t(e)-s(e)$, where $\\mathbf Z^S$ is the free abelian group on the finite set $S$. There is a natural exact sequence of ordinary abelian groups\n$$1\\longrightarrow\\operatorname{Hom}_{\\mathbf Z}(H_1(\\Gamma,\\mathbf Z),k^*)\\xrightarrow{\\iota}\\operatorname{Pic}^0(X)\\xrightarrow{r}\\prod_v\\operatorname{Pic}^0(X_v)\\longrightarrow1.$$\nHere $r$ is restriction and $\\iota$ glues the trivial sheaves on the $X_v$ at their intersection nodes, with gluing scalars modulo rescaling on each component. The sequence is equivariant for every $k$-automorphism of $X$: the right action permutes factors and pulls back along component isomorphisms, and the left action is precomposition with the induced signed map on $H_1(\\Gamma,\\mathbf Z)$. For a connected integral projective nodal curve $Y/k$, $\\operatorname{Pic}^0(Y)$ is trivial if and only if $Y\\simeq\\mathbf P^1_k$.",
+ "source": {
+  "document": "literature/deligne-mumford-irreducibility_PMIHES-1969-36.pdf",
+  "place": "Lemma 1.17 and its proof, printed p.86; component rather than full normalization. Stacks curves.tex Tag 0C1M, lemma-glue-points (units sequence and surjectivity); pic.tex Tag 0BA0, lemma-picard-pieces (normalization Jacobian); genus-zero classification curves.tex Tag 0C6N, lemma-genus-zero. Local Deligne–Mumford PDF WANTED; primary PDF read online.",
+  "url": "https://www.numdam.org/item/PMIHES_1969__36__75_0.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-invertible-module",
+  "def-trf-nodal-geometric-fibres",
+  "def-kun-projective",
+  "def-pc-reduced-scheme",
+  "def-weil-pbc-reduced-normalization",
+  "def-sc-pic0",
+  "def-sc-picard-group"
+ ],
+ "proof": [
+  {
+   "text": "Projectivity implies properness by [lem-pc-projective-proper]. Apply [lem-sfb-nodal-completed-normalization-model] to $X$: it gives finitely many nodes and smooth projective connected normalized components. Apply [lem-trf-nodal-subcurve-boundary] to each reduced component $X_v$: it is nodal and is smooth at every intersection with the complementary reduced subcurve. Thus the only nonsmooth points of $X_v$ are its self-nodes. In particular the same normalization model applies to $X_v$. The graph in the statement is finite and connected: a partition of its vertices with no crossing edge would partition $X$ into two disjoint nonempty closed unions of components. This also checks the asserted normalization and graph conventions.",
+   "uses": [
+    "lem-pc-projective-proper",
+    "lem-sfb-nodal-completed-normalization-model",
+    "lem-trf-nodal-subcurve-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0CBW (lemma-split-node), 0E38 (lemma-closed-subscheme-nodal-curve); normalization setup in Tag 0E68 (lemma-nodal-vector-fields)."
+   }
+  },
+  {
+   "text": "Put $X'=\\coprod_v X_v$, let $v:X'\\to X$ be the component map, and let $Z$ be the reduced finite union of nodes on two different components. Over an affine $U=\\operatorname{Spec}R$ of $X$, its inverse image has ring $\\prod_vR/I_v$, a finite $R$-module, so $v$ is finite. There is an affine fibre-product square with $Z'=X'\\times_XZ$ the disjoint union of two reduced $k$-points per edge. To check this, use [lem-trf-split-node-component-normalization]: at an intersection node there are exactly two minimal primes, one for each branch; use [lem-trf-nodal-subcurve-boundary] to identify their sum with the maximal ideal. Their intersection is zero since the local ring is reduced. The identity $R/(I\\cap J)=(R/I)\\times_{R/(I+J)}(R/J)$ follows directly by lifting a pair whose difference lies in $I+J$. Hence at that node the local ring is the fibre product of its component rings over $k$. Off $Z$ exactly one component is present and $v$ is an isomorphism. These stalk identities give the sheaf identity $\\mathcal O_X=v_*\\mathcal O_{X'}\\times_{\\mathcal O_{Z'}}\\mathcal O_Z$, and therefore the affine fibre-product description. The restriction from $v^{-1}U$ to its finite closed reduced subscheme $Z'_U$ is surjective, as a quotient of its affine ring. All hypotheses of the pinching theorem below are now checked.",
+   "uses": [
+    "lem-trf-split-node-component-normalization",
+    "lem-trf-nodal-subcurve-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E38 (lemma-closed-subscheme-nodal-curve), proof at a two-component point; Tag 0C1J (example-glue-points)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-finite-pinching-invertible-patching] to this square over $\\operatorname{Spec}k$. Eliminating the one-dimensional node lines from its triples shows that an invertible sheaf on $X$ is precisely a family $L_v$ on $X_v$ and one fibre isomorphism $\\lambda_e:(L_{s(e)})_{q_e}\\to(L_{t(e)})_{q_e}$ for each edge; morphisms are component maps commuting with every $\\lambda_e$. Indeed take the node line to be the source fibre and use $\\lambda_e$ for the other identification. Every pair of one-dimensional $k$-spaces admits an isomorphism, so every family $L_v$ lifts. Tensor products multiply the gluing parameters by the tensor compatibility in the cited equivalence. Restriction is therefore a surjective group homomorphism on full Picard groups.",
+   "uses": [
+    "lem-sfb-finite-pinching-invertible-patching"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C1M (lemma-glue-points), units-sequence proof, using the rank-one patching formulation."
+   }
+  },
+  {
+   "text": "The normalized component maps factor through the inclusions $X_v\\to X$. Thus the degree on every normalized component of a glued line bundle is the degree of the corresponding $L_v$. The construction of Step 3 consequently restricts to a surjection $r:\\operatorname{Pic}^0(X)\\to\\prod_v\\operatorname{Pic}^0(X_v)$. An element of its kernel admits trivializations of all $L_v$. In such frames its fibre maps are scalars $z_e\\in k^*$. By [lem-sc-global-functions], a trivial line bundle on each integral projective $X_v$ has automorphism group exactly $k^*$; each $X_v$ is reduced, proper and connected. Changing the component frames by $a_v$ gives $z_e\\mapsto a_{t(e)}z_ea_{s(e)}^{-1}$. Conversely the morphism description of Step 3 says that these are all identifications between trivial-component gluings. Hence $\\ker r$ is canonically $(k^*)^E/\\operatorname{im}\\delta$, injected into $\\operatorname{Pic}^0(X)$ by gluing; self-nodes are already part of the component bundles and introduce no extra edge here.",
+   "uses": [
+    "lem-sc-global-functions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C1M (lemma-glue-points), global-units and kernel calculation."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-finite-graph-cycle-character-quotient] with $A=k^*$. It identifies the quotient in Step 4 with $\\operatorname{Hom}_{\\mathbf Z}(H_1(\\Gamma,\\mathbf Z),k^*)$ by $[z]\\mapsto(h\\mapsto\\prod_ez_e^{h_e})$. Define $\\iota$ by the inverse of this isomorphism followed by the gluing injection of Step 4. Its injectivity, image equal to $\\ker r$, and surjectivity of $r$ give exactly the displayed short exact sequence, including the one-component and no-edge cases.",
+   "uses": [
+    "lem-sfb-finite-graph-cycle-character-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Agent graph-cycle identification of the quotient in Tag 0C1M (lemma-glue-points)."
+   }
+  },
+  {
+   "text": "Let $b$ be a $k$-automorphism and write $\\sigma$ for its permutation of components and intersection nodes. Pulling back a glued sheaf pulls back its component bundles along $b|_{X_v}:X_v\\to X_{\\sigma v}$ and pulls back its fibre identifications. In the equivalence of [lem-sfb-finite-pinching-invertible-patching], the component and node lines of a sheaf are its actual pullbacks. The commutative squares formed by $b$, its restrictions to $X_v$, and the component inclusions therefore identify the component lines of $b^*L$ with the corresponding pullbacks of $L_v$; the same commuting compositions on each branch identify their fibre maps. This is functoriality of restriction, not an appeal to arbitrary nonflat base-change naturality. On trivial bundles these fibre maps preserve the constant frame $1$. If $b$ preserves the orientation at $e$ the new scalar is $z_{\\sigma e}$; if it exchanges source and target it is $z_{\\sigma e}^{-1}$. Thus it is $z_{\\sigma e}^{\\epsilon_e}$. By [lem-sfb-finite-graph-cycle-character-quotient], evaluation on $h$ becomes $\\prod_e z_{\\sigma e}^{\\epsilon_e h_e}=\\chi(\\sigma_*h)$. This proves both equivariance equations, including the stated precomposition convention, and shows independence of the orientation choices.",
+   "uses": [
+    "lem-sfb-finite-pinching-invertible-patching",
+    "lem-sfb-finite-graph-cycle-character-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C1M gluing construction; automorphism and signed-cycle compatibility supplied explicitly by Q74."
+   }
+  },
+  {
+   "text": "For the last assertion apply [lem-sfb-integral-nodal-picard-normalization-action] to the integral projective nodal curve $Y$. If $\\operatorname{Pic}^0(Y)$ is trivial, $Y$ has no node: otherwise its injective gluing map $j_q:k^*\\to\\operatorname{Pic}^0(Y)$ contradicts the existence of a nonidentity element of $k^*$. Such an element exists because an algebraically closed field is infinite (a finite field of size $q$ would have no root of $T^q-T-1$). By [lem-sfb-nodal-completed-normalization-model], normalization is an isomorphism outside the nonsmooth locus, so now $Y\\simeq\\widetilde Y$ is smooth projective connected. The same cited normalization-action lemma gives surjectivity on degree-zero Picard groups, hence $\\operatorname{Pic}^0(\\widetilde Y)$ is trivial.",
+   "uses": [
+    "lem-sfb-integral-nodal-picard-normalization-action",
+    "lem-sfb-nodal-completed-normalization-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C1M (lemma-glue-points), injectivity when the two branches belong to the same proper component."
+   }
+  },
+  {
+   "text": "Write $g$ for the genus of the smooth curve $Y$. Choose a prime $n$ invertible in $k$ ($2$ unless the characteristic is $2$, then $3$). Every $n$-torsion Picard class has degree zero, since degree is the homomorphism to $\\mathbf Z$ of [def-sc-pic0] and $n\\deg L=0$ implies $\\deg L=0$. Thus its Picard $n$-torsion is trivial. But [lem-sc-pic-proper-ntorsion] identifies this group with $(\\mathbf Z/n\\mathbf Z)^{2g}$, which is nontrivial if $g>0$. Therefore $g=0$, and [lem-trf-genus-zero-smooth-proper-line] gives $Y\\simeq\\mathbf P^1_k$.",
+   "uses": [
+    "def-sc-pic0",
+    "lem-sc-pic-proper-ntorsion",
+    "lem-trf-genus-zero-smooth-proper-line"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C6U (proposition-projective-line); genus detected by prime-to-characteristic Picard torsion."
+   }
+  },
+  {
+   "text": "Conversely let $Y\\simeq\\mathbf P^1_k$. This is a smooth proper connected genus-zero curve by [lem-asd-projective-line-genus-zero]. For a degree-zero line bundle $L$, [sk-thm-picard-rr] gives $h^0(L)-h^1(L)=1$, hence a nonzero section. By [lem-trf-curve-section-degree-positivity], this section has no zero, since a zero would force positive degree. It therefore generates $L$ at every point and identifies $L\\simeq\\mathcal O_Y$. Thus every element of $\\operatorname{Pic}^0(Y)$ is trivial, completing the equivalence.",
+   "uses": [
+    "lem-asd-projective-line-genus-zero",
+    "sk-thm-picard-rr",
+    "lem-trf-curve-section-degree-positivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C6M (lemma-genus-zero-pic), Riemann–Roch and nonvanishing-section proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-projective-proper",
+  "lem-sfb-nodal-completed-normalization-model",
+  "lem-trf-nodal-subcurve-boundary",
+  "lem-trf-split-node-component-normalization",
+  "lem-sfb-finite-pinching-invertible-patching",
+  "lem-sc-global-functions",
+  "lem-sfb-finite-graph-cycle-character-quotient",
+  "lem-sfb-integral-nodal-picard-normalization-action",
+  "def-sc-pic0",
+  "lem-sc-pic-proper-ntorsion",
+  "lem-trf-genus-zero-smooth-proper-line",
+  "lem-asd-projective-line-genus-zero",
+  "sk-thm-picard-rr",
+  "lem-trf-curve-section-degree-positivity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tags 0E38, 0C1J and 0C1M; explicit component patching and signed graph evaluation, followed by genus-zero Picard criterion (lemma-genus-zero-pic)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a projective nodal curve restriction of multidegree zero Picard group to its integral components is surjective with kernel Hom of the first integral graph homology into the multiplicative group",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ClassGroup.mk0_surjective\", \"module\": \"Mathlib/RingTheory/ClassGroup\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDedekindDomain R],\\n  Function.Surjective ⇑ClassGroup.mk0\", \"doc\": \"For any Dedekind domain $ R $, the canonical group homomorphism from the multiplicative group of non-zero ideals of $ R $ to the class group of $ R $ is surjective. This means every element of the cla\"}\n  {\"name\": \"ClassGroup.mkMMem_surjective\", \"module\": \"Mathlib/NumberTheory/ClassNumber/Finite\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : EuclideanDomain R] [inst_1 : CommRing S] [inst_2 : IsDomain S]\\n  [inst_3 : Algebra R S] {abv : AbsoluteValue R ℤ} {ι : Type u_5} [inst_4 : DecidableEq ι] [inst_5 : Fintype ι]\\n  (bS : Module.Basis ι R S) (adm : abv.IsAdmissible) [inst_6 : Infinite R] [inst_7 : \", \"doc\": \"For a Dedekind domain $ S $ that is algebraic over $ R $, the canonical map from ideals containing the product of non-zero pairwise differences of elements in an injective sequence to the class group \"}\n  {\"name\": \"Submodule.range_unitsToPic\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ (R : Type u) (A : Type u_4) [inst : CommSemiring R] [inst_1 : CommSemiring A] [inst_2 : Algebra R A]\\n  [inst_3 : FaithfulSMul R A], (Submodule.unitsToPic R A).range = CommRing.relPic R A\", \"doc\": \"The image of the monoid homomorphism from invertible submodules of an $ R $-module $ A $ to the Picard group $ \\\\mathrm{Pic}(R) $ is equal to the relative Picard subgroup $ \\\\mathrm{relPic}(R, A) $, whi\"}\n  {\"name\": \"AlgebraicGeometry.Proj.lift_awayMapₐ_awayMapₐ_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {d e : ℕ} {f : A} (hf : f ∈ 𝒜 d) {g : A} (hg : g ∈ 𝒜 e) {x : A} (hx : x = f * g),\\n  0 < d →\\n    Function.Surjective\\n      ⇑(Algebra.TensorProduct.lift (Hom\", \"doc\": \"Given a graded algebra $\\\\mathcal{A}$ over a commutative semiring, for homogeneous elements $f \\\\in \\\\mathcal{A}_d$ and $g \\\\in \\\\mathcal{A}_e$ with $d > 0$, the canonical algebra homomorphism from the ten\"}\n  {\"name\": \"WeierstrassCurve.Projective.PointClass\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"(R : Type r) → [CommRing R] → Type r\", \"doc\": \"The quotient of the type of triples $(x_0, x_1, x_2)$ in $R^3$ by the equivalence relation identifying triples that are scalar multiples of each other under the action of the multiplicative group of u\"}\n  {\"name\": \"AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ},\\n  f ∈ 𝒜 m →\\n    0 < m →\\n      Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec \", \"doc\": \"For a homogeneous element $ f $ of positive degree $ m $ in a graded ring $ A $, the continuous map from the projective spectrum $ \\\\operatorname{Proj}(A) $ to the prime spectrum $ \\\\operatorname{Spec}(\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.toClass_apply\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] (P : W.Point),\\n  WeierstrassCurve.Affine.Point.toClass P =\\n    match P with\\n    | WeierstrassCurve.Affine.Point.zero => 0\\n    | WeierstrassCurve.Affine.Point.some h =>\\n      Additive.ofMul (ClassGroup.mk (Weiers\", \"doc\": \"The function maps each point $ P $ on an affine Weierstrass curve $ W $ over a field to an element in the additive class group of $ W $'s coordinate ring. The zero point maps to the additive identity,\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.toClass_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x y : F}\\n  (h : W.Nonsingular x y),\\n  WeierstrassCurve.Affine.Point.toClass (WeierstrassCurve.Affine.Point.some h) =\\n    ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h)\", \"doc\": \"For any commutative domain $ R $, its class group — defined as the quotient of the group of invertible fractional ideals by the subgroup of principal fractional ideals — forms an abelian group under i\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: relative Picard groups of rings, Dedekind class groups, abstract exactness and Weierstrass point classes do not give gluing at nodes or the component restriction sequence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Picard\", \"exact\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: relative Picard groups of rings, Dedekind class groups, abstract exactness and Weierstrass point classes do not give gluing at nodes or the component restriction sequence."
+  },
+  {
+   "tool": "grep",
+   "query": "Picard.*(nodal|gluing)|nodal.*Picard|generalized.Jacobian",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: relative Picard groups of rings, Dedekind class groups, abstract exactness and Weierstrass point classes do not give gluing at nodes or the component restriction sequence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact sequence for line bundles on a reducible nodal curve and its irreducible components",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Function.Exact.of_ladder_linearEquiv_of_exact\", \"module\": \"Mathlib.Algebra.Exact\", \"type\": \"(h₁₂ : g₁₂ ∘ₗ e₁ = e₂ ∘ₗ f₁₂) (h₂₃ : g₂₃ ∘ₗ e₂ = e₃ ∘ₗ f₂₃) (H : Exact f₁₂ f₂₃) : Exact g₁₂ g₂₃\", \"doc\": \"Given linear maps $ f_{12}: M_1 \\\\to M_2 $, $ f_{23}: M_2 \\\\to M_3 $ forming an exact sequence (i.e., $ \\\\mathrm{im}\\\\,f_{12} = \\\\ker f_{23} $), and bijective linear equivalences $ e_1: M_1 \\\\simeq M_1' $, \"}\n  {\"name\": \"Function.Exact.linearMap_comp_eq_zero\", \"module\": \"Mathlib.Algebra.Exact\", \"type\": \"(h : Exact f g) : g.comp f = 0\", \"doc\": \"If the sequence of linear maps $ f: M \\\\to N $ and $ g: N \\\\to P $ is exact at $ N $, then the composition $ g \\\\circ f $ is the zero map.\"}\n  {\"name\": \"CategoryTheory.ComposableArrows.Exact.mk\", \"module\": \"Mathlib.Algebra.Homology.ExactSequence\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  {n : ℕ} {S : CategoryTheory.ComposableArrows C n} (toIsComplex : S.IsComplex),\\n  (∀ (i : ℕ) (hi : autoParam (i + 2 ≤ n) CategoryTheory.ComposableArrows.Exact._auto_1),\\n      (S.sc toI\", \"doc\": \"Given a category $\\\\mathcal{C}$ with zero morphisms, a sequence $S$ of $n$ composable arrows forming a complex (consecutive compositions are zero morphisms), if for every index $i$ with $i + 2 \\\\leq n$ \"}\n  {\"name\": \"exact_of_isLocalized_span\", \"module\": \"Mathlib.RingTheory.LocalProperties.Exactness\", \"type\": \"(H : ∀ r : s, Function.Exact (map (.powers r.1) (f r) (g r) F) (map (.powers r.1) (g r) (h r) G)) : Function.Exact F G\", \"doc\": \"If for every element $ r $ in a submonoid $ S $ of a commutative semiring $ R $, the localized sequence of modules at the submonoid generated by the powers of $ r $ is exact, then the original sequenc\"}\n  {\"name\": \"CategoryTheory.ComposableArrows.Exact\", \"module\": \"Mathlib.Algebra.Homology.ExactSequence\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [CategoryTheory.Limits.HasZeroMorphisms C] → {n : ℕ} → CategoryTheory.ComposableArrows C n → Prop\", \"doc\": \"Given a category $\\\\mathcal{C}$ equipped with zero morphisms and a sequence of $n$ composable morphisms $A_0 \\\\to A_1 \\\\to \\\\cdots \\\\to A_n$ in $\\\\mathcal{C}$, this predicate asserts that the sequence is ex\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.contravariantSequence_exact\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences\", \"type\": \": (contravariantSequence hS Y n₀ n₁ h).Exact\", \"doc\": \"Given a short exact sequence in an abelian category, the contravariant sequence of additive homomorphisms between Ext groups constructed via precomposition with the sequence's differential maps forms \"}\n  {\"name\": \"CategoryTheory.ShortComplex.Exact.mk\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.Exact\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  {S : CategoryTheory.ShortComplex C}, (∃ h, CategoryTheory.Limits.IsZero h.left.H) → S.Exact\", \"doc\": \"If there exists homology data $ h $ for the short complex $ S $ such that the left homology object $ H $ of $ h $ is a zero object, then $ S $ is exact.\"}\n  {\"name\": \"Function.Exact.split_tfae'\", \"module\": \"Mathlib.Algebra.Exact\", \"type\": \"(h : Function.Exact f g) :\\n  List.TFAE\\n    [Function.Injective f ∧ ∃ l, g ∘ₗ l = LinearMap.id, Function.Surjective g ∧ ∃ l, l ∘ₗ f = LinearMap.id,\\n      ∃ e : N ≃ₗ[R] M × P, f = e.symm ∘ₗ LinearMap.inl R M P ∧ g = LinearMap.snd R M P ∘ₗ e]\", \"doc\": \"For linear maps $ f: M \\\\to N $ and $ g: N \\\\to P $ forming an exact sequence (i.e., $ \\\\operatorname{im} f = \\\\ker g $), the following are equivalent: (1) $ f $ is injective and $ g $ admits a right inve\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: relative Picard groups of rings, Dedekind class groups, abstract exactness and Weierstrass point classes do not give gluing at nodes or the component restriction sequence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gluing line bundles at nodes gives a graph torus kernel and the Picard group of an integral rational nodal curve is nontrivial",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CommRing.relPic\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"(R : Type u) →\\n  [inst : CommSemiring R] → (A : Type u_7) → [inst_1 : CommSemiring A] → [Algebra R A] → Subgroup (CommRing.Pic R)\", \"doc\": \"The subgroup of $ \\\\mathrm{Pic}(R) $ consisting of isomorphism classes of invertible $ R $-semimodules that become trivial when extended to the $ R $-algebra $ A $ via the tensor product. This is defin\"}\n  {\"name\": \"instInhabitedClassGroup\", \"module\": \"Mathlib/RingTheory/ClassGroup\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → [inst_1 : IsDomain R] → Inhabited (ClassGroup R)\", \"doc\": \"For any commutative domain $ R $, the class group of $ R $ is an abelian group under ideal multiplication. This follows because the group of invertible fractional ideals is abelian and the quotient of\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.XClass_ne_zero\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [Nontrivial R] (x : R),\\n  WeierstrassCurve.Affine.CoordinateRing.XClass W' x ≠ 0\", \"doc\": \"For any element $x$ in a non-trivial ring $R$, the equivalence class of $X - x$ in the coordinate ring of an affine Weierstrass curve $W'$ over $R$ is non-zero. This follows from the construction of t\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x₁ x₂ y₁ y₂ : F}\\n  (h₁ : W.Nonsingular x₁ y₁) (h₂ : W.Nonsingular x₂ y₂) (hxy : ¬(x₁ = x₂ ∧ y₁ = W.negY x₂ y₂)),\\n  ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h₁) *\\n      ClassGroup.mk (Weier\", \"doc\": \"For an affine Weierstrass curve $ W $ over a field $ F $, if $ (x_1, y_1) $ and $ (x_2, y_2) $ are nonsingular points on $ W $ that are not inverses (i.e., $ x_1 \\neq x_2 $ or $ y_1 \\neq -y_2 - a_1 x_2 \"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.toClass_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x y : F}\\n  (h : W.Nonsingular x y),\\n  WeierstrassCurve.Affine.Point.toClass (WeierstrassCurve.Affine.Point.some h) =\\n    ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h)\", \"doc\": \"For any commutative domain $ R $, its class group — defined as the quotient of the group of invertible fractional ideals by the subgroup of principal fractional ideals — forms an abelian group under i\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} {x y : F} (h : W.Nonsingular x y),\\n  ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' ⋯) *\\n      ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h) =\\n    1\", \"doc\": \"For a nonsingular point $(x, y)$ on an affine Weierstrass curve $W$ over a field $F$, the product of the class group elements corresponding to the invertible fractional ideals $XYIdeal'$ at $(x, y)$ a\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.YClass_ne_zero\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [Nontrivial R] (y : Polynomial R),\\n  WeierstrassCurve.Affine.CoordinateRing.YClass W' y ≠ 0\", \"doc\": \"For a non-trivial base ring $ R $, the element $ Y - y $ in the coordinate ring of an affine Weierstrass curve (defined as the quotient ring $ R[X,Y] $ modulo the Weierstrass polynomial ideal) is not \"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.toClass_apply\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] (P : W.Point),\\n  WeierstrassCurve.Affine.Point.toClass P =\\n    match P with\\n    | WeierstrassCurve.Affine.Point.zero => 0\\n    | WeierstrassCurve.Affine.Point.some h =>\\n      Additive.ofMul (ClassGroup.mk (Weiers\", \"doc\": \"The function maps each point $ P $ on an affine Weierstrass curve $ W $ over a field to an element in the additive class group of $ W $'s coordinate ring. The zero point maps to the additive identity,\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: relative Picard groups of rings, Dedekind class groups, abstract exactness and Weierstrass point classes do not give gluing at nodes or the component restriction sequence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Line bundles on projective nodal curve obtained by gluing line bundles on components at intersection nodes",
+   "results": "{\"t\": \"2026-10-23T11:39:48Z\", \"tool\": \"leansearch\", \"query\": \"Line bundles on projective nodal curve obtained by gluing line bundles on components at intersection nodes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.GlueData.casesOn\", \"AlgebraicGeometry.LocallyRingedSpace.GlueData.noConfusionType\", \"AlgebraicGeometry.Scheme.GlueData.Rel\", \"AlgebraicGeometry.Scheme.GlueData.gluedScheme\", \"AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val\", \"AlgebraicGeometry.LocallyRingedSpace.GlueData.noConfusion\", \"AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk\", \"AlgebraicGeometry.LocallyRingedSpace.GlueData\"], \"digest\": \"fb5ba40e68770663\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern open gluing of schemes, reducedness, function fields or Weierstrass ideal classes; none states closed-node invertible-sheaf patching or the component Picard sequence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Picard groups of nodal curves exact sequence restriction irreducible components graph first homology torus kernel",
+   "results": "{\"t\": \"2026-10-23T11:39:51Z\", \"tool\": \"leanfinder\", \"query\": \"Picard groups of nodal curves exact sequence restriction irreducible components graph first homology torus kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.H1Cotangent.exact_map_δ\", \"Algebra.Generators.H1Cotangent.exact_map_δ\", \"Algebra.Generators.H1Cotangent.exact_δ_map\", \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"Algebra.Generators.H1Cotangent.exact_map_δ'\", \"WeierstrassCurve.Affine.Point.toClass_some\", \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul\", \"WeierstrassCurve.Affine.Point.toClass_apply\"], \"digest\": \"0799a0fd8d5c6dc1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern open gluing of schemes, reducedness, function fields or Weierstrass ideal classes; none states closed-node invertible-sheaf patching or the component Picard sequence."
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|generalizedJacobian|gluing.*Pic|Pic.*gluing",
+   "results": "{\"t\": \"2026-10-23T12:41:15Z\", \"tool\": \"grep\", \"query\": \"nodal|generalizedJacobian|gluing.*Pic|Pic.*gluing\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern open gluing of schemes, reducedness, function fields or Weierstrass ideal classes; none states closed-node invertible-sheaf patching or the component Picard sequence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Line bundles on a reducible curve are invertible sheaves on each irreducible component with identifications of their fibres at the ordinary double points",
+   "results": "{\"t\": \"2026-10-23T12:41:17Z\", \"tool\": \"leanfinder\", \"query\": \"Line bundles on a reducible curve are invertible sheaves on each irreducible component with identifications of their fibres at the ordinary double points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"WeierstrassCurve.Affine.Point.toClass_some\", \"AlgebraicGeometry.IsReduced.component_reduced\", \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul\", \"WeierstrassCurve.Affine.FunctionField\", \"AlgebraicGeometry.Scheme.functionField\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'\", \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\"], \"digest\": \"50841b6f4224cb0f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern open gluing of schemes, reducedness, function fields or Weierstrass ideal classes; none states closed-node invertible-sheaf patching or the component Picard sequence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stable-picard-action-faithful",
+  "date": "2026-10-23",
+  "group": "Q118"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Deligne Lemma 3.5.1 applied to the closed-fibre curve only after the extended injection has forced trivial action on its Picard torsion. Supporting input in Deligne Lemma 3.5.1: last sentence, invoking Deligne–Mumford Theorem 1.13 after identity on all of Pic^0 has been established; this lemma assumes identity on all line bundles, not merely level torsion. Auxiliary: Lemma 1.17 and its proof, printed p.86; component rather than full normalization. Stacks curves.tex Tag 0C1M, lemma-glue-points (units sequence and surjectivity); pic.tex Tag 0BA0, lemma-picard-pieces (normalization Jacobian); genus-zero classification curves.tex Tag 0C6N, lemma-genus-zero. Local Deligne–Mumford PDF WANTED; primary PDF read online.",
+   "via": [
+    "lem-sfb-stable-picard-action-faithful",
+    "lem-sfb-stable-picard-torsion-faithfulness",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-nodal-component-picard-gluing",
+  "worker": "stage1",
+  "summary": "Proved component gluing using existing closed-subcurve geometry and finite pinching, with explicit quotient by component units and signed automorphism formula. Created one abstract finite-graph character quotient prerequisite; proved integral triviality by self-node injection, Picard torsion and genus-zero classification. Statement unchanged. Reviewed against the saved search log, the live cited statements, Stacks tags and the current blueprint. Corrected the final proof source to Tag 0C6M and made equivariance follow directly from restriction squares.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Deligne Lemma 3.5.1 applied to the closed-fibre curve only after the extended injection has forced trivial action on its Picard torsion. Supporting input in Deligne Lemma 3.5.1: last sentence, invoking Deligne–Mumford Theorem 1.13 after identity on all of Pic^0 has been established; this lemma assumes identity on all line bundles, not merely level torsion. Auxiliary: Lemma 1.17 and its proof, printed p.86; component rather than full normalization. Stacks curves.tex Tag 0C1M, lemma-glue-points (units sequence and surjectivity); pic.tex Tag 0BA0, lemma-picard-pieces (normalization Jacobian); genus-zero classification curves.tex Tag 0C6N, lemma-genus-zero. Local Deligne–Mumford PDF WANTED; primary PDF read online. The nine steps realize the component-gluing auxiliary input, with a separate abstract graph quotient lemma. Latest blueprint direct-images proof (3) is the inherited alteration/finiteness route, not replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-nodal-subcurve-boundary",
+    "why": "Generic Reduced nodal subcurves and their reduced boundary intersection used with its stated hypotheses for nodal Picard gluing or the genus-zero test; no node of this unit replaces this geometric/algebraic tool."
+   },
+   {
+    "node": "lem-trf-split-node-component-normalization",
+    "why": "Generic Completed normalization branches and component ideals at a split node used with its stated hypotheses for nodal Picard gluing or the genus-zero test; no node of this unit replaces this geometric/algebraic tool."
+   },
+   {
+    "node": "lem-trf-genus-zero-smooth-proper-line",
+    "why": "Generic Genus zero smooth proper curves over an algebraically closed field used with its stated hypotheses for nodal Picard gluing or the genus-zero test; no node of this unit replaces this geometric/algebraic tool."
+   },
+   {
+    "node": "lem-asd-projective-line-genus-zero",
+    "why": "Generic The projective line is a genus-zero smooth proper connected curve used with its stated hypotheses for nodal Picard gluing or the genus-zero test; no node of this unit replaces this geometric/algebraic tool."
+   },
+   {
+    "node": "lem-trf-curve-section-degree-positivity",
+    "why": "Generic A nonzero section with a zero has positive degree on a proper integral curve used with its stated hypotheses for nodal Picard gluing or the genus-zero test; no node of this unit replaces this geometric/algebraic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-nodal-subcurve-boundary",
+  "lem-trf-split-node-component-normalization",
+  "lem-trf-genus-zero-smooth-proper-line",
+  "lem-asd-projective-line-genus-zero",
+  "lem-trf-curve-section-degree-positivity"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-0c462ec26",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-0c462ec26 (reviewer sub-agent of L); spot-checked: Read in full: the item (statement unchanged, nine steps), the new unsplit node lem-sfb-finite-graph-cycle-character-quotient, every cited statement, and the Stacks curves.tex sources 0C1M lemma-glue-points, 0C6M lemma-genus-zero-pic and lemma-closed-subscheme-nodal-curve. Rechecked the mathematics step by step. Step 2: at an intersection node there are two minimal primes I and J with I+J=m (subcurve-boundary) and I∩J=0, so R=R/I×_k R/J, which gives the affine fibre product needed by the pinching node; off Z only one component passes. Step 3: triples (M,N,α) are equivalent to (L_v, λ_e=α_t^{-1}α_s), and morphisms and essential surjectivity were checked. Step 4: Aut of the trivial bundle is k* by global-functions; the frame change gives z'_e=a_t z_e a_s^{-1}, so ker r=(k*)^E/im δ. Step 6: the sign z_{σe}^{ε_e} gives Φ(σ^*z)=Φ(z)∘σ_*. Steps 7-9: self-node injection j_q; Pic[n]=(Z/n)^{2g} forces g=0, so Y≅P^1; on P^1, Riemann-Roch gives a section, and degree positivity shows it is nowhere vanishing. New node: true for any commutative A, checked by a spanning-forest basis of fundamental cycles; ∂σ_*=σ_V∂ in both sign cases. Tested on the empty graph, a tree, two parallel edges, a triangle, an edge swap and A=1. It is not a restatement of the item, it is more than a two-line fact, and no duplicate exists: nodal-normalization-picard-sequence, multidegree-zero-locus and integral-nodal-picard-normalization-action differ. Batch-5: all listed trf/pod/sk closures are generic curve geometry or definitions (subcurve boundary, node branches, g=0⇒P^1, section degree, schematically dense open, ring scalar extension, lines, nodal fibres); none is a step of the trace formula or Poincaré duality, and the item feeds finiteness, which is a hypothesis of the trace formula. Accepted tool_uses: lem-trf-nodal-subcurve-boundary, lem-trf-split-node-component-normalization, lem-trf-genus-zero-smooth-proper-line, lem-asd-projective-line-genus-zero, lem-trf-curve-section-degree-positivity, all generic and used within their hypotheses. No SGA citation. Minor, no change needed: Step 1 leaves pure dimension one implicit (elementary from connectedness). No fixes."
+ }
+}

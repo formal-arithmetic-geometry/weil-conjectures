@@ -1,0 +1,209 @@
+{
+ "id": "lem-sfb-quasiaffine-line-effective-divisor",
+ "kind": "statement",
+ "title": "Effective Cartier presentation of a line bundle on a Noetherian quasi-affine scheme",
+ "statement": "Let $V$ be a Noetherian scheme, meaning locally Noetherian [pqf-def-locnoeth] and quasi-compact (every open covering has a finite subcover). Suppose $V$ admits an open immersion into an affine scheme [def-pc-scheme, def-weil-open-immersion]. For every invertible $\\mathcal O_V$-module $M$ [def-sc-invertible-module] there is an effective Cartier divisor $D\\subset V$ with $M\\cong\\mathcal O_V(D)$, where an effective Cartier divisor and its associated invertible module are as in [def-pc-divisor-line-bundle]. The empty scheme and the empty divisor are allowed.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0AYM (lemma-quasi-projective-Noetherian-pic-effective-Cartier), quasi-affine clause: the second divisor can be empty."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-sc-invertible-module",
+  "def-pc-divisor-line-bundle"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-noetherian-associated-points-finite] to $V$, using the locally Noetherian and quasi-compact hypotheses. Thus $E=\\operatorname{Ass}(V)$ is a finite subset of $V$, including all embedded associated points, not just the generic points of its irreducible components.",
+   "uses": [
+    "lem-sfb-noetherian-associated-points-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 05AF, lemma-finite-ass, specialized to the coherent structure sheaf and the quasi-compact open X itself."
+   }
+  },
+  {
+   "text": "The given open immersion into an affine scheme, together with quasi-compactness, meets precisely the quasi-affine hypotheses of [lem-sfb-quasiaffine-invertible-finite-set-section]. Apply it to $X=V$, $L=M$ and the finite set $E$ of Step 1. Obtain $s\\in\\Gamma(V,M)$ whose image in $M_x/\\mathfrak m_xM_x$ is nonzero for every associated point $x$ of $V$. Neither affineness of $V$ nor closedness of these points is required.",
+   "uses": [
+    "lem-sfb-quasiaffine-invertible-finite-set-section"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0F20, lemma-quasi-affine-invertible-nonvanishing-section, with W=X and retaining the nonvanishing conclusion. Quasi-affine means quasi-compact and isomorphic to an open of an affine scheme, as in definition-quasi-affine."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-invertible-section-associated-criterion] to $(V,M,s)$, using local Noetherianity of $V$ and the nonvanishing from Step 2. On every affine trivializing open $U=\\operatorname{Spec}A$, write $s|_U=ae$. Multiplication by $a$ on $A$ is injective, so each such coefficient is a nonzerodivisor. This is exactly the regularity needed to construct a Cartier ideal.",
+   "uses": [
+    "lem-sfb-invertible-section-associated-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0AYL, lemma-regular-section-associated-points; the affine coefficient formulation of regularity is lemma-regular-section-structure-sheaf, Tag 01WZ."
+   }
+  },
+  {
+   "text": "Set $D=Z(s)$ by [def-pc-zero-scheme]. On an affine trivialization $M|_U=\\mathcal O_Ue$ with dual basis $e^\\vee$, the defining evaluation map sends $e^\\vee$ to $a$, so its image ideal is $(a)$. By Step 3 these local generators are nonzerodivisors. Hence this ideal is an effective Cartier ideal by [def-nagata-effective-cartier-ideal], and $D$ is an effective Cartier divisor by [def-pc-divisor-line-bundle]. The final assertion of [lem-pc-zero-scheme-divisor-iso] now gives $M\\cong\\mathcal O_V(Z(s))=\\mathcal O_V(D)$. If $V$ is empty the same construction has empty zero scheme and the assertions hold on the empty affine covering. A nowhere-vanishing $s$ gives the unit ideal and empty divisor, which is permitted.",
+   "uses": [
+    "def-pc-zero-scheme",
+    "def-nagata-effective-cartier-ideal",
+    "def-pc-divisor-line-bundle",
+    "lem-pc-zero-scheme-divisor-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0AYM, lemma-quasi-projective-Noetherian-pic-effective-Cartier, quasi-affine paragraph; zero-scheme evaluation and Tag 01X0, lemma-characterize-OD (2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-noetherian-associated-points-finite",
+  "lem-sfb-quasiaffine-invertible-finite-set-section",
+  "lem-sfb-invertible-section-associated-criterion",
+  "def-pc-zero-scheme",
+  "def-nagata-effective-cartier-ideal",
+  "def-pc-divisor-line-bundle",
+  "lem-pc-zero-scheme-divisor-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0AYM, lemma-quasi-projective-Noetherian-pic-effective-Cartier, the quasi-affine paragraph with the auxiliary avoided finite set empty."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a Noetherian quasi-affine scheme every invertible sheaf is the line bundle associated to an effective Cartier divisor",
+   "results": "8 hits: AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top, AlgebraicGeometry.noetherianSpace_of_isAffine, AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover, AlgebraicGeometry.noetherianSpace_of_isAffineOpen, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.IsLocallyNoetherian.component_noetherian, AlgebraicGeometry.isLocallyNoetherian_of_affine_cover, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern basic opens, Noetherianity, sections or ideal supports, not the asserted Cartier-divisor theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every line bundle on an open subscheme of a noetherian affine scheme has a regular global section and is O of an effective Cartier divisor",
+   "results": "8 hits: AlgebraicGeometry.IsLocallyNoetherian.component_noetherian, AlgebraicGeometry.noetherianSpace_of_isAffineOpen, AlgebraicGeometry.IsAffineOpen.basicOpen_basicOpen_is_basicOpen, AlgebraicGeometry.Scheme.affineOpens, AlgebraicGeometry.IsAffineOpen, AlgebraicGeometry.noetherianSpace_of_isAffine, AlgebraicGeometry.IsAffineOpen.isoSpec, AlgebraicGeometry.isAffineOpen_of_isAffineOpen_basicOpen",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern basic opens, Noetherianity, sections or ideal supports, not the asserted Cartier-divisor theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EffectiveCartierDivisor\", \"Pic\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern basic opens, Noetherianity, sections or ideal supports, not the asserted Cartier-divisor theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiAffine.*(invertible|divisor)|exists.*(effectiveCartier|EffectiveCartier)|effectiveCartier.*(pic|lineBundle)",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern basic opens, Noetherianity, sections or ideal supports, not the asserted Cartier-divisor theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every invertible sheaf on a Noetherian quasi-affine scheme is associated to an effective Cartier divisor",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, if a section $ x $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ vanishes on the basic open set $ D(f) $ defined by a section $ f \\\\in \\\\Gamma(U,\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n      ∃ n y, TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.restrictOpen f (X.basicOpen f) ⋯ ^\", \"doc\": \"For any affine open subset $ U $ of a scheme $ X $, a section $ f $ over $ U $, and a section $ x $ over the basic open set $ D(f) $ defined by $ f $, there exists a natural number $ n $ and a section\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.basicOpen_basicOpen_is_basicOpen\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (g : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n      ∃ f', X.basicOpen f' = X.basicOpen g\", \"doc\": \"For any affine scheme $X$ and basic open subset $X_{f}$ defined by a section $f$ of the structure sheaf, the open subset $X_{f}$ is itself an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.basicOpen\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : ↑(X.presheaf.obj (Opposite.op U))), AlgebraicGeometry.IsAffineOpen (X.basicOpen f)\", \"doc\": \"For a scheme $X$, the basic open set associated to a section $f$ of the structure sheaf over an open subset $U$ is an affine open subset of $X$. This means the restricted scheme structure on $\\\\text{ba\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.instIsAffineToSchemeBasicOpen\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X] (r : ↑(X.presheaf.obj (Opposite.op ⊤))),\\n  AlgebraicGeometry.IsAffine ↑(X.basicOpen r)\", \"doc\": \"For any affine scheme $X$ and global section $r$ of its structure sheaf, the basic open subset $X_{\\text{basicOpen}}(r)$ defined by $r$ is also an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $ X $ be a scheme and $ U $ an open subset of $ X $ that is both quasi-compact and quasi-separated. Suppose $ f $ and $ s $ are sections of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $, and th\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f g s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = TopCat.Presheaf.restrictOpen g (X.basicOpen s) ⋯ →\\n    ∃ n, s ^ n * f = s ^ n * g\", \"doc\": \"For a compact and quasi-separated scheme $X$, given global sections $f, g, s$ of the structure sheaf $\\\\mathcal{O}_X$, if the restrictions of $f$ and $g$ to the basic open set $D(s)$ (where $s$ is a un\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits about basic opens and clearing denominators do not construct a Cartier divisor representing an arbitrary invertible sheaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A line bundle on an open subscheme of an affine scheme has a global section which is a nonzerodivisor if the scheme is Noetherian",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.noetherianSpace_of_isAffineOpen\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"(U : X.Opens) (hU : IsAffineOpen U) [IsNoetherianRing Γ(X, U)] : NoetherianSpace U\", \"doc\": \"If $ U $ is an affine open subset of a scheme $ X $ and the ring of global sections $ \\\\Gamma(U) $ is Noetherian, then the underlying topological space of $ U $ is a Noetherian topological space.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian.component_noetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsLocallyNoetherian X] (U : ↑X.affineOpens),\\n  IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑U))\", \"doc\": \"For a locally Noetherian scheme $ X $, the ring of sections over every affine open subset $ U $ of $ X $ is a Noetherian ring, i.e., $ \\\\mathcal{O}_X(U) $ is Noetherian.\"}\n  {\"name\": \"AlgebraicGeometry.noetherianSpace_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"[IsAffine X] [IsNoetherianRing Γ(X, ⊤)] : NoetherianSpace X\", \"doc\": \"If $X$ is an affine scheme and the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a Noetherian ring, then the underlying topological space of $X$ is a Noetherian topological space (i.e., every \"}\n  {\"name\": \"AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{𝒰 : Scheme.OpenCover.{v, u} X} [Finite 𝒰.I₀] [∀ i, IsAffine (𝒰.X i)] :\\n  IsNoetherian X ↔ ∀ (i : 𝒰.I₀), IsNoetherianRing Γ(𝒰.X i, ⊤)\", \"doc\": \"For a scheme $X$ with a finite affine open cover $\\\\{U_i\\\\}$, $X$ is Noetherian if and only if the ring of global sections $\\\\Gamma(U_i, \\\\mathcal{O}_X)$ is a Noetherian ring for every $i$.\"}\n  {\"name\": \"AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{ι} [Finite ι] {S : ι → X.affineOpens} (hS : (⨆ i, S i : X.Opens) = ⊤) :\\n  IsNoetherian X ↔ ∀ i, IsNoetherianRing Γ(X, S i)\", \"doc\": \"For a scheme $X$ and a finite family of affine open subsets $\\\\{S_i\\\\}$ whose union is $X$, $X$ is Noetherian if and only if the ring of sections $\\\\Gamma(X, S_i)$ is a Noetherian ring for every $i$.\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_iff_of_affine_openCover\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"(𝒰 : Scheme.OpenCover.{v, u} X) [∀ i, IsAffine (𝒰.X i)] :\\n  IsLocallyNoetherian X ↔ ∀ (i : 𝒰.I₀), IsNoetherianRing Γ(𝒰.X i, ⊤)\", \"doc\": \"A scheme $X$ is locally Noetherian if and only if, for every affine open cover $\\\\{U_i\\\\}$ of $X$, the ring of global sections $\\\\Gamma(U_i, \\\\mathcal{O}_X)$ is a Noetherian ring for each index $i$.\"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"[IsAffine X] [Nonempty X] [IsDomain Γ(X, ⊤)] : IsIntegral X\", \"doc\": \"If $X$ is a non-empty affine scheme and the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is an integral domain, then $X$ is an integral scheme.\"}\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isAffine_isReduced\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"[IsAffine X] [_root_.IsReduced Γ(X, ⊤)] : IsReduced X\", \"doc\": \"If $X$ is an affine scheme and the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is reduced (i.e., contains no nonzero nilpotent elements), then the scheme $X$ itself is reduced (i.e., all its lo\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits about basic opens and clearing denominators do not construct a Cartier divisor representing an arbitrary invertible sheaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EffectiveCartier\", \"IsQuasiAffine\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits about basic opens and clearing denominators do not construct a Cartier divisor representing an arbitrary invertible sheaf."
+  },
+  {
+   "tool": "grep",
+   "query": "quasiAffine.*(invertible|divisor)|exists.*(effectiveCartier|EffectiveCartier)|regularSection",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits about basic opens and clearing denominators do not construct a Cartier divisor representing an arbitrary invertible sheaf."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-dvr-generic-line-extension",
+  "group": "Q72",
+  "date": "2026-10-23"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Dual abelian varieties and the line-bundle homomorphism. Auxiliary for this split: The rigidified Picard scheme of a smooth projective variety. Supporting lemma: Extension of a generic-fibre line bundle over a smooth DVR scheme. Supporting divisor-construction input: Effective Cartier presentation of a line bundle on a Noetherian quasi-affine scheme.",
+   "via": [
+    "lem-sfb-smooth-dvr-generic-line-extension",
+    "lem-sfb-projective-picard-identity-representability",
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-quasiaffine-line-effective-divisor",
+  "worker": "stage1",
+  "summary": "Read Stacks 0AYM and its inputs 05AF, 0F20 and 0AYL. Preserve the item statement and split its quasi-affine proof into finite associated points, finite-set section choice, the associated-point regularity criterion, and the explicit zero-ideal construction. Reuse the existing general zero-scheme/divisor isomorphism instead of duplicating it. Three new statement-only nodes, none a Mathlib leaf; all actual searches and results are recorded.",
+  "blueprint": "Supporting divisor input below the inherited direct-image/alteration/Picard route. The nearest imported blueprint ancestor is null, as blueprint_refs.py ancestor reports. The current latest sk-thm-sf-ctf-stability-direct-images proof (3) is the inherited high-level route; this split only supplies the quasi-affine prerequisite of the DVR extension lemma and realizes the three sentences of the quasi-affine paragraph of Stacks 0AYM. No unit or chapter route is changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-4acdf6504",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-4acdf6504 (reviewer sub-agent of L); spot-checked: I read the item, all 3 new nodes, the cited node statements and the Stacks sources (divisors.tex 0AYM l.3216, 05AF, 0AYL, 01WZ; properties.tex 0F20, definition-quasi-affine). The split follows 0AYM's quasi-affine paragraph with E = ∅. Step 1: Ass(V) is finite, from 05AF with F = O_X, U = X. Step 2: a section nonvanishing on Ass(V), from 0F20 with W = X; the hypotheses (quasi-compact plus open immersion into an affine scheme) match. Step 3: the 0AYL criterion gives a nonzerodivisor coefficient; I checked both directions myself via Ass, the zero divisors and flat localization, and tested k[ε]/(ε²), a disconnected scheme and the zero ring. Step 4: the image of s^∨ is (a) locally, which gives an effective Cartier ideal, and the last sentence of lem-pc-zero-scheme-divisor-iso closes the proof. The item statement is preserved; proof_deps is exactly the union of the step uses; each new node's stmt_deps exactly matches its citations; the tags check against tags/tags. There is no SGA citation and no re-split note. Duplicate search (rg -L): lem-sfb-affine-invertible-finite-set-section is only the affine special case, lem-pc-nonzero-section-integral-cartier needs X integral, and lem-sc-ass-weakass and the ring-level associated-primes-finite node are different results, so there are no duplicates and no restated clause. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuasiAffineLineEffectiveDivisor",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_invertibleIdeal_iso_dual_of_openImmersion_affine",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiAffineLineEffectiveDivisor.lean",
+  "statement": "theorem exists_invertibleIdeal_iso_dual_of_openImmersion_affine (V A : Scheme.{u}) [IsLocallyNoetherian V] [CompactSpace V] [IsAffine A] (j : V ⟶ A) [IsOpenImmersion j] (M : V.Modules) [M.IsInvertible] : ∃ J : V.IdealSheafData, J.IsInvertible ∧ Nonempty (M ≅ dual J.toModules)",
+  "branch": "newtargets-dag",
+  "by": "Q150",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7f5ba3ea8",
+  "group": "Q150",
+  "result": "pass",
+  "note": "Q150 lem-sfb-quasiaffine-line-effective-divisor 7f5ba3ea: one sorried theorem matching node/Stacks 0AYM quasi-affine clause clause-by-clause: IsLocallyNoetherian+CompactSpace = Noetherian; explicit affine A with IsOpenImmersion j (∀-witness ≡ ∃, same universe harmless); M.IsInvertible (def-sc-invertible-module record); ∃ J : IdealSheafData, J.IsInvertible (def-nagata-effective-cartier-ideal owner, regular principal locally) ∧ Nonempty (M ≅ dual J.toModules) = O(D) per def-pc-divisor-line-bundle record, correct orientation. No extra hypotheses; empty V and unit ideal allowed; lean.statement verbatim; only lean field changed; docstrings with source place, blueprint tag and 4 proof steps; report has Worker report and Second reading; no duplicate found by rg in side-live. No file changed, no compile run."
+ }
+}

@@ -1,0 +1,361 @@
+{
+ "id": "lem-sfb-ample-translation-difference-surjectivity",
+ "kind": "statement",
+ "title": "An ample line module realizes every homogeneous class as a translation difference",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], let $A/k$ be an abelian variety [def-sc-abelian-variety], and let $M$ be an ample invertible $\\mathcal O_A$-module [def-sc-ample, def-sc-invertible-module]. Let $L$ be an invertible $\\mathcal O_A$-module such that $t_b^*L\\cong L$ for every $b\\in A(k)$, where $t_b(x)=x+b$ is translation in $A$. Then there is $a\\in A(k)$ with $$L\\cong t_a^*M\\otimes_{\\mathcal O_A}M^{-1}.$$ Here pullbacks are tensor inverse image [def-pc-module-pullback], tensor products are sheaf tensor products [def-pur-sheaf-tensor-product], and $M^{-1}=\\mathcal Hom_{\\mathcal O_A}(M,\\mathcal O_A)$ is the dual invertible module. No restriction on the characteristic of $k$ or the dimension of $A$ is imposed.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I §8, Proposition 8.14, printed p.39, with the definition of Pic^0(A) by the equivalent conditions of Proposition 8.4(b), printed pp.35–36; lambda_M(a)=t_a^*M tensor M^{-1}, printed p.34. This uses the homogeneous definition of Pic^0, not an assumption identifying it with algebraic equivalence."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-abelian-variety",
+  "def-sc-ample",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "By [def-sc-abelian-variety] and [lem-sc-abelian-variety-characterization], $A$ is nonempty, proper, smooth and geometrically integral. By [def-sbc-smooth-morphisms], the relative dimension is locally constant, hence constant on connected $A$; denote it $g\\geq0$. The group law is commutative by [lem-sc-av-commutative]. By [def-sc-ample] choose $r\\geq1$ such that $B=M^{\\otimes r}$ is very ample. The defining closed immersion $i:A\\to\\mathbf P^N_k$, with $i^*\\mathcal O(1)\\cong B$, makes $A$ projective, and [lem-weil-pbc-projective-ample-invertible], applied to $i$ over $\\operatorname{Spec}k$, makes $B$ ample in the absolute sense of Stacks 01PS needed for twisting. By [lem-sc-smooth-omega-finite-locally-free], $\\Omega^1_{A/k}$ is locally free of rank $g$, so its top exterior power $\\omega=\\bigwedge^g\\Omega^1_{A/k}$ is invertible: in each frame the top wedge is one generator, and its change-of-frame scalar is the determinant, a unit. This includes $g=0$, when $\\omega=\\mathcal O_A$. By [lem-trf-proper-field-invertible-coherent], $\\mathcal O_A$ and $\\omega\\otimes L$ are coherent; tensoring their rank-one local frames shows that $\\omega\\otimes L$ is invertible.",
+   "uses": [
+    "def-sc-abelian-variety",
+    "lem-sc-abelian-variety-characterization",
+    "def-sbc-smooth-morphisms",
+    "lem-sc-av-commutative",
+    "def-sc-ample",
+    "lem-weil-pbc-projective-ample-invertible",
+    "lem-sc-smooth-omega-finite-locally-free",
+    "lem-trf-proper-field-invertible-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0FVV, lemma-duality-proper-over-field (7); smooth differential rank is Morphisms Tag 02G1; the ample-power convention is the statement of def-sc-ample."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-coherent-twist-global-generation] to the absolutely ample $B$ and separately to $\\mathcal O_A$ and $\\omega\\otimes L$. Choose a common integer $q\\geq1$ beyond both bounds and set $n=rq$ and $N=M^{\\otimes n}=B^{\\otimes q}$. Then $N$ and $\\omega\\otimes N\\otimes L$ are globally generated. Each has a nonzero fibre at the identity $0\\in A(k)$, and evaluation of the finite generating family surjects onto that fibre. Consequently at least one generating section has nonzero value there. Thus both $H^0(A,N)$ and $H^0(A,\\omega\\otimes N\\otimes L)$ are nonzero.",
+   "uses": [
+    "lem-weil-pbc-coherent-twist-global-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01Q3, proposition-characterize-ample, clause (7): sufficiently positive twists of a finite type quasi-coherent module are globally generated."
+   }
+  },
+  {
+   "text": "Use [lem-sfb-projective-line-module-serre-duality] on the smooth projective pure-$g$ scheme $A$ and the invertible module $E=\\omega\\otimes N\\otimes L$. Its assertion at $j=g$ gives $$H^g(A,N^{-1}\\otimes L^{-1})\\cong\\operatorname{Hom}_k(H^0(A,\\omega\\otimes N\\otimes L),k)\\ne0,$$ since $\\omega\\otimes E^\\vee\\cong N^{-1}\\otimes L^{-1}$ in local rank-one frames. The cohomology is finite dimensional by that node, so the dual of the nonzero space in step 2 is nonzero.",
+   "uses": [
+    "lem-sfb-projective-line-module-serre-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0FVV, lemma-duality-proper-over-field (5),(7), and Tag 0FW0, remark-rework-duality-locally-free-CM, specialized to an invertible module."
+   }
+  },
+  {
+   "text": "Let $m:A\\times_kA\\to A$ be addition and $p_1,p_2$ the projections. Write $D_b=t_b^*N\\otimes N^{-1}$. For $a,b\\in A(k)$ pull the identity of [thm-sc-theorem-of-cube] for $N$ back along $x\\mapsto(x,a,b)$, $A\\to A\\times_kA\\times_kA$. By composition [lem-pc-module-pullback-identity-composition] the partial sums $m_{123},m_1,m_{12},m_{13}$ become $t_{a+b},\\mathrm{id},t_a,t_b$, and $m_2,m_3,m_{23}$ become the constant maps with values $a,b,a+b$, which factor through $\\operatorname{Spec}k$; there an invertible module is a one-dimensional vector space, so these three pullbacks are trivial. With tensor pullback [lem-weil-pbc-module-pullback-tensor] this is the theorem of the square $t_{a+b}^*N\\otimes N\\cong t_a^*N\\otimes t_b^*N$, valid for every invertible module; thus $D_{a+b}\\cong D_a\\otimes D_b$. The same rules give $$t_a^*D_b\\otimes D_b^{-1}\\cong t_{a+b}^*N\\otimes(t_a^*N)^{-1}\\otimes(t_b^*N)^{-1}\\otimes N\\cong\\mathcal O_A.$$ Thus $D_b$ is homogeneous, and so is $D_b\\otimes L^{-1}$ by the hypothesis on $L$ and the same tensor rules. Form the invertible module $$\\mathcal F=m^*N\\otimes p_1^*(N^{-1}\\otimes L^{-1})$$ on $A\\times_k A$. Its fibre over $b$ for $p_2$ is $D_b\\otimes L^{-1}$. Suppose for contradiction that every such fibre is nontrivial. By [lem-sfb-homogeneous-coherent-acyclicity], $H^i(A,\\mathcal F_b)=0$ for every $i\\geq0$ and every $b\\in A(k)$. No identification of homogeneous with algebraically trivial classes is used.",
+   "uses": [
+    "thm-sc-theorem-of-cube",
+    "lem-weil-pbc-module-pullback-tensor",
+    "lem-pc-module-pullback-identity-composition",
+    "lem-sfb-homogeneous-coherent-acyclicity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I Theorem 5.5 (theorem of the square) with its proof from the cube via Corollary 5.3, printed pp.22–23; Remark 5.6 and §8, printed p.34; Proposition 8.4(b), printed pp.35–36; cohomological contradiction supplied by the agent."
+   }
+  },
+  {
+   "text": "The projection $p_2$ is proper by [lem-kun-proper-stability], smooth by [lem-sbc-smooth-relative-dimension-permanence], and flat and locally of finite presentation by [lem-pc-smooth-flat]. Properness adds quasi-compactness and separatedness, so it is of finite presentation. The line module $\\mathcal F$ is finitely presented and flat over the second factor: in local frames it is $\\mathcal O_{A\\times A}$. Therefore [lem-pc-universal-finite-free-complex] supplies locally on $A$ a finite free complex $P$ in $[0,d]$ computing all $R^ip_{2*}\\mathcal F$ and, after every base change, the fibre cohomology. Every closed point of $A$ has residue field $k$ by [lem-weil-pbc-closed-point-residue-field-base], so $P\\otimes k(b)$ is exact there by step 4.",
+   "uses": [
+    "lem-kun-proper-stability",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-pc-smooth-flat",
+    "lem-pc-universal-finite-free-complex",
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tags 0B91, lemma-flat-proper-perfect-direct-image-general, and 0A1H, lemma-base-change-tensor-perfect; the universal finite free complex is the cited node’s explicit statement."
+   }
+  },
+  {
+   "text": "At a closed point $b$, exactness of $P\\otimes k(b)$ makes its last differential surjective. Choose a square minor of size the rank of the last term with nonzero determinant at $b$, and invert its determinant on a neighbourhood. Row and column operations split off the identity complex in the last two degrees. Repeat for the remaining shorter complex; there are finitely many terms. In the final degree zero, exactness of the residue complex forces the rank of the surviving free term to be zero. Thus $P$ is contractible on some neighbourhood of $b$, and all $R^ip_{2*}\\mathcal F$ vanish there. These neighbourhoods cover $A$: if their union had nonempty closed complement, [lem-sc-lft-over-field-jacobson-space] would give a closed point in that complement, a contradiction. Hence $R^ip_{2*}\\mathcal F=0$ on all of $A$ for every $i\\geq0$. This is just finite-matrix cancellation applied to the universal complex of the previous step.",
+   "uses": [
+    "lem-sc-lft-over-field-jacobson-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Elementary cancellation of a bounded finite free complex at an exact residue fibre, applied to the complex of step 5; closed-point detection uses the cited Jacobson-space statement."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-ringed-site-leray-spectral-sequence] to $p_2$ on the Zariski ringed sites. Step 6 makes its entire $E_2$ page zero, and the finite abutment filtrations give $H^i(A\\times_kA,\\mathcal F)=0$ for all $i\\geq0$. On the other hand the group law defines an isomorphism $u:A\\times_kA\\to A\\times_kA$, $u(x,b)=(x,x+b)$, with inverse $(x,y)\\mapsto(x,y-x)$. Set $G=N^{-1}\\otimes L^{-1}$ and $\\mathcal E=p_1^*G\\otimes p_2^*N$. Then $p_1u=p_1$ and $p_2u=m$, so the pullback tensor and composition identities give $u^*\\mathcal E\\cong\\mathcal F$. By [lem-weil-pbc-module-cohomology-fmap-functorial], pullback along $u$ and its displayed inverse are mutually inverse on cohomology (use its composition and identity clauses with the canonical coefficient comparisons). Consequently $H^i(A\\times_kA,\\mathcal E)=0$ for all $i\\geq0$.",
+   "uses": [
+    "lem-sfb-ringed-site-leray-spectral-sequence",
+    "lem-weil-pbc-module-pullback-tensor",
+    "lem-pc-module-pullback-identity-composition",
+    "lem-weil-pbc-module-cohomology-fmap-functorial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0732, lemma-Leray; coordinate-change calculation and the contradiction are agent supplied."
+   }
+  },
+  {
+   "text": "Both factors $A$ are quasi-compact and separated because they are proper. Their diagonals are closed immersions, hence affine by [lem-weil-pbc-closed-immersion-integral-separated-uc](b). The invertible modules $G,N$ are quasi-coherent. Thus [lem-sc-picard-kunneth-qcoh] applies and gives $$H^g(A\\times_kA,\\mathcal E)\\cong\\bigoplus_{i+j=g}H^i(A,G)\\otimes_kH^j(A,N).$$ Its $(i,j)=(g,0)$ summand is nonzero by steps 2 and 3: nonzero vectors in vector spaces over a field have nonzero pure tensor, as extending them to bases shows. This contradicts step 7. Hence for some $b\\in A(k)$ the fibre $D_b\\otimes L^{-1}$ is trivial, or $L\\cong t_b^*N\\otimes N^{-1}$. This argument also covers $g=0$, with summand $(0,0)$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-integral-separated-uc",
+    "lem-sc-picard-kunneth-qcoh"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BED, lemma-kunneth, coherent Kunneth formula over a field; nonzero summand contradiction is agent supplied."
+   }
+  },
+  {
+   "text": "Tensor pullback [lem-weil-pbc-module-pullback-tensor] identifies $t_b^*(M^{\\otimes n})\\otimes(M^{\\otimes n})^{-1}$ with $(t_b^*M\\otimes M^{-1})^{\\otimes n}$. The theorem of the square of step 4, obtained from [thm-sc-theorem-of-cube] and pullback composition [lem-pc-module-pullback-identity-composition] for any invertible module and here applied to $M$, gives $t_{(j+1)b}^*M\\otimes M^{-1}\\cong(t_{jb}^*M\\otimes M^{-1})\\otimes(t_b^*M\\otimes M^{-1})$ for every $j\\geq0$; induction on $j$ identifies the latter module with $t_{nb}^*M\\otimes M^{-1}$. Take $a=nb\\in A(k)$. The isomorphism at the end of step 8 now yields exactly $L\\cong t_a^*M\\otimes M^{-1}$. No extraction of an $n$th root and no division by $n$ in $k$ occurs.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-tensor",
+    "thm-sc-theorem-of-cube",
+    "lem-pc-module-pullback-identity-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I Theorem 5.5 and Remark 5.6, printed pp.22–23 (a ↦ t_a^*M⊗M^{-1} is a homomorphism); tensor-power calculation completing Proposition 8.14."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-abelian-variety",
+  "lem-sc-abelian-variety-characterization",
+  "def-sbc-smooth-morphisms",
+  "lem-sc-av-commutative",
+  "def-sc-ample",
+  "lem-weil-pbc-projective-ample-invertible",
+  "lem-sc-smooth-omega-finite-locally-free",
+  "lem-trf-proper-field-invertible-coherent",
+  "lem-weil-pbc-coherent-twist-global-generation",
+  "lem-sfb-projective-line-module-serre-duality",
+  "thm-sc-theorem-of-cube",
+  "lem-weil-pbc-module-pullback-tensor",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-sfb-homogeneous-coherent-acyclicity",
+  "lem-kun-proper-stability",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-pc-smooth-flat",
+  "lem-pc-universal-finite-free-complex",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-sfb-ringed-site-leray-spectral-sequence",
+  "lem-weil-pbc-module-cohomology-fmap-functorial",
+  "lem-weil-pbc-closed-immersion-integral-separated-uc",
+  "lem-sc-picard-kunneth-qcoh"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "I Proposition 8.14 states the result but refers its proof to Mumford §8 p.77 or Lang p.99 (WANTED). The present cohomological proof is agent supplied, using homogeneous acyclicity, positive twists, Serre duality, universal finite free complexes and coherent Kunneth."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an ample line bundle M on an abelian variety every homogeneous line bundle is a translation difference t_a pullback M tensor M inverse",
+   "results": "8 hits: AlgebraicGeometry.Proj.pullbackAwayιIso, AmpleSet.preimage_iff, AmpleSet.preimage, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι, AlgebraicGeometry.AffineSpace.homOfVector, AlgebraicGeometry.AffineSpace.homOverEquiv_symm_apply_coe, AlgebraicGeometry.AffineSpace.homOverEquiv, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst. No hit states the geometric translation-difference surjectivity or algebraic-equivalence assertion. Ring Picard groups concern modules over rings; other hits concern affine/Proj morphisms, analytic ample sets, root systems, ODEs or linear algebra.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Surjectivity of the polarization map defined by an ample line bundle onto the translation invariant Picard classes of an abelian variety",
+   "results": "8 hits: ClassGroup.mkMMem_surjective, ClassGroup.mk0_surjective, AlgebraicGeometry.pointsPi_surjective, AlgebraicGeometry.Proj.lift_awayMapₐ_awayMapₐ_surjective, AlgebraicGeometry.Scheme.PartialMap.toRationalMap_surjective, AlgebraicGeometry.pointsPi_surjective_of_isAffine, AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass, PolynomialLaw.π_surjective. No hit states the geometric translation-difference surjectivity or algebraic-equivalence assertion. Ring Picard groups concern modules over rings; other hits concern affine/Proj morphisms, analytic ample sets, root systems, ODEs or linear algebra.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An ample invertible sheaf on an abelian variety maps the variety onto the subgroup of translation invariant line bundles",
+   "results": "8 hits: Submodule.range_unitsToPic, CommRing.relPic, AmpleSet.vadd, AmpleSet.vadd_iff, Module.Invertible.toSubmodule, Submodule.unitsQuotEquivRelPic_apply_coe, Submodule.unitsQuotEquivRelPic, Submodule.unitsToPic. No hit states the geometric translation-difference surjectivity or algebraic-equivalence assertion. Ring Picard groups concern modules over rings; other hits concern affine/Proj morphisms, analytic ample sets, root systems, ODEs or linear algebra.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\"",
+   "results": "0 hits: . No hit states the geometric translation-difference surjectivity or algebraic-equivalence assertion. Ring Picard groups concern modules over rings; other hits concern affine/Proj morphisms, analytic ample sets, root systems, ODEs or linear algebra.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Picard|polarization|translation.*(line|invertible)|homogeneous.*(line|invertible)",
+   "results": "4 hits: Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean. No hit states the geometric translation-difference surjectivity or algebraic-equivalence assertion. Ring Picard groups concern modules over rings; other hits concern affine/Proj morphisms, analytic ample sets, root systems, ODEs or linear algebra.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "polarization|translationInvariant|translation_invariant|algebraically.trivial",
+   "results": "25 hits: Mathlib/LinearAlgebra/BilinearForm/Properties.lean, Mathlib/LinearAlgebra/BilinearForm/Properties.lean, Mathlib/LinearAlgebra/BilinearForm/Properties.lean, Mathlib/LinearAlgebra/BilinearForm/Properties.lean, Mathlib/LinearAlgebra/BilinearForm/Properties.lean, Mathlib/LinearAlgebra/RootSystem/Finite/CanonicalBilinear.lean, Mathlib/LinearAlgebra/RootSystem/Finite/CanonicalBilinear.lean, Mathlib/LinearAlgebra/RootSystem/Finite/CanonicalBilinear.lean. No hit states the geometric translation-difference surjectivity or algebraic-equivalence assertion. Ring Picard groups concern modules over rings; other hits concern affine/Proj morphisms, analytic ample sets, root systems, ODEs or linear algebra.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "polarization|translationInvariant|translation_invariant|homogeneous.*line",
+   "results": "0 hits: . No hit is a theorem about homogeneous invertible modules on abelian varieties. The group-cohomology hits concern representations, the sheaf-cohomology hits define cohomology, and ring Picard groups and affine Weierstrass point classes do not state this geometric assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An ample invertible sheaf on an abelian variety realizes all translation invariant line bundle classes",
+   "results": "8 hits: AmpleSet.vadd_iff, AmpleSet.vadd, Submodule.unitsQuotEquivRelPic_apply_coe, Submodule.tensorInvEquiv, CommRing.Pic.instCoeSortType, CommRing.Pic.AsModule, Submodule.unitsQuotEquivRelPic, Module.Invertible.instTensorProduct_2. No hit is a theorem about homogeneous invertible modules on abelian varieties. The group-cohomology hits concern representations, the sheaf-cohomology hits define cohomology, and ring Picard groups and affine Weierstrass point classes do not state this geometric assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\"",
+   "results": "0 hits: . No hit is a theorem about homogeneous invertible modules on abelian varieties. The group-cohomology hits concern representations, the sheaf-cohomology hits define cohomology, and ring Picard groups and affine Weierstrass point classes do not state this geometric assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Surjectivity of the map from an abelian variety to homogeneous Picard classes induced by an ample line bundle",
+   "results": "8 hits: ClassGroup.mkMMem_surjective, ClassGroup.mk0_surjective, HomogeneousLocalization.mk_surjective, AlgebraicGeometry.Proj.lift_awayMapₐ_awayMapₐ_surjective, AlgebraicGeometry.Scheme.PartialMap.toRationalMap_surjective, AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_surjective, AlgebraicGeometry.pointsPi_surjective, Submodule.range_unitsToPic. No hit is a theorem about homogeneous invertible modules on abelian varieties. The group-cohomology hits concern representations, the sheaf-cohomology hits define cohomology, and ring Picard groups and affine Weierstrass point classes do not state this geometric assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every homogeneous line bundle on an abelian variety is the translation difference of a fixed ample invertible sheaf",
+   "results": "8 hits: CommRing.relPic, WeierstrassCurve.Affine.Point.toClass_apply, CommRing.relPic_eq_top, WeierstrassCurve.Affine.Point.toClass_some, WeierstrassCurve.Affine.Point.toClass, instCommGroupPic, AlgebraicGeometry.AffineSpace.homOverEquiv, AlgebraicGeometry.AffineSpace.homOverEquiv_symm_apply_coe. No hit is a theorem about homogeneous invertible modules on abelian varieties. The group-cohomology hits concern representations, the sheaf-cohomology hits define cohomology, and ring Picard groups and affine Weierstrass point classes do not state this geometric assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-homogeneous-line-algebraic-triviality",
+  "date": "2026-10-24",
+  "group": "Q104"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Local prolongation of a tensor power of a symmetric line; Moret-Bailly II 3.3.3 opening application of Raynaud XI 1.13 to generic ample modules; isolate the positive generic input before forming a tensor quotient and comparing over U. Supporting input for Q35: Local rational lifting of generic semiabelian Picard classes modulo algebraic equivalence. Q73: Field-level polarization: second difference and diagonal class. Supporting input for Q79: the abelian quotient multiplication formula modulo algebraic equivalence, applied with n=2. Supporting input for Q101: identifying translation-invariant invertible modules with algebraically trivial classes, before the cube recurrence. Milne I Proposition 8.14: surjectivity for a fixed ample line module onto the homogeneous Picard classes; this supplies the point used in the family construction.",
+   "via": [
+    "lem-sfb-abelian-homogeneous-line-algebraic-triviality",
+    "lem-sfb-abelian-multiplication-algebraic-equivalence",
+    "lem-sfb-semiabelian-second-difference-diagonal",
+    "lem-sfb-semiabelian-generic-picard-class-lifting",
+    "lem-sfb-raynaud-generic-ample-symmetrization",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-ample-translation-difference-surjectivity",
+  "worker": "stage1",
+  "summary": "Q24 retained the full homogeneous statement in every characteristic and dimension. Replaced the bare Milne reference with a cohomological contradiction on A times A, after taking a sufficiently positive power; returned to the specified ample module by the square homomorphism. Added only the genuinely weaker homogeneous acyclicity lemma, without assuming algebraic triviality or using the parent homogeneous-to-algebraically-trivial node. Verified all cited statements and recorded real Mathlib searches.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Local prolongation of a tensor power of a symmetric line; Moret-Bailly II 3.3.3 opening application of Raynaud XI 1.13 to generic ample modules; isolate the positive generic input before forming a tensor quotient and comparing over U. Supporting input for Q35: Local rational lifting of generic semiabelian Picard classes modulo algebraic equivalence. Q73: Field-level polarization: second difference and diagonal class. Supporting input for Q79: the abelian quotient multiplication formula modulo algebraic equivalence, applied with n=2. Supporting input for Q101: identifying translation-invariant invertible modules with algebraically trivial classes, before the cube recurrence. Milne I Proposition 8.14: surjectivity for a fixed ample line module onto the homogeneous Picard classes; this supplies the point used in the family construction.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-proper-field-invertible-coherent",
+    "why": "Supplies coherence of the invertible twisting modules on the proper field scheme."
+   },
+   {
+    "node": "lem-kun-proper-stability",
+    "why": "Properness of the product projection is needed for the coherent universal complex."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Smoothness of the product projection supplies flatness in the coherent-family argument."
+   },
+   {
+    "node": "lem-pc-universal-finite-free-complex",
+    "why": "Universal finite free cohomology model for a proper finitely presented flat line-module family."
+   },
+   {
+    "node": "lem-sc-picard-kunneth-qcoh",
+    "why": "Coherent Kunneth, a generic cohomological tool, supplies the nonzero product summand."
+   },
+   {
+    "node": "thm-sc-theorem-of-cube",
+    "why": "Theorem of the cube, pulled back along x↦(x,a,b) to give the theorem of the square in steps 4 and 9 (added by the maintainer reader in place of the polarization-calculus homomorphism, whose statement does not tie the group law of the dual to tensor product)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-proper-field-invertible-coherent",
+  "lem-kun-proper-stability",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-pc-universal-finite-free-complex",
+  "lem-sc-picard-kunneth-qcoh",
+  "thm-sc-theorem-of-cube"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-295bd1835",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-295bd1835 (reviewer sub-agent of L); spot-checked: Read in full: the item, the new node lem-sfb-homogeneous-coherent-acyclicity, every cited statement, and Milne AV I Prop 8.14 (p.39, proof is only a reference), Prop 8.4(b) (pp.35-36) and Thm 5.5/Rem 5.6 (pp.22-23). The statement is unchanged and matches Milne 8.14 with Pic^0 defined by 8.4(b). The route is correct. Replace M by N=M^n so that H^0(N)≠0 and H^0(ω⊗N⊗L)≠0, and Serre duality gives H^g(N^-1⊗L^-1)≠0. Then F=m^*N⊗p1^*(N^-1⊗L^-1) has p2-fibres D_b⊗L^-1. If every fibre is nontrivial, the new node, the universal finite free complex, elementary splitting of that complex, Jacobson density and Leray give H^*(F)=0. But u(x,b)=(x,x+b) identifies F with p1^*G⊗p2^*N, and the (g,0) Künneth summand is nonzero: contradiction. I checked the fibre computation, u and its inverse, and the edge cases g=0, L=O and elliptic curves. Ampleness is needed: with M=O the item is false. The new node is statement-only, self-contained and true (Mumford §8(vii): seesaw, then H^0=0 via P⊗[-1]^*P≅O, then induction with Künneth and a retraction). It is strictly smaller than the item. It is not a duplicate: lem-sfb-abelian-picard-zero-cohomology assumes algebraic triviality, and using it here would need the parent node, which cites this item (a cycle). No cycle exists in the delivery as written; no SGA citation. Two C4 faults, repaired in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-ample-translation-difference-surjectivity.json. (1) Step 1 cited lem-pc-very-ample-ample for absolute (Stacks 01PS) ampleness, but that node gives only def-sc-ample ampleness (some power very ample). Now it cites lem-weil-pbc-projective-ample-invertible. (2) Steps 4 and 9 took [D_{a+b}]=[D_a⊗D_b] from φ_N of lem-sfb-abelian-polarization-calculus, whose statement never ties the group law of A^∨ to tensor product. They now derive the theorem of the square by pulling thm-sc-theorem-of-cube back along x↦(x,a,b), as in Milne 5.5. proof_deps and step sources were updated, and thm-sc-theorem-of-cube was added to tool_uses. Batch-5 flags: proper-field-invertible-coherent, Serre duality, the universal finite free complex and coherent Künneth are generic tools outside both assumptions; their closures reach only generic trf/pod lemmas and definitions. Polarization-calculus is no longer cited, and the closure of its replacement, the cube node, is a subset of polarization-calculus's own closure.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianVariety.AmpleTranslationDifferenceSurjectivity",
+  "declaration": "AlgebraicGeometry.IsAbelianVariety.exists_iso_translation_tensor_dual_of_homogeneous",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianVariety/AmpleTranslationDifferenceSurjectivity.lean",
+  "statement": "theorem IsAbelianVariety.exists_iso_translation_tensor_dual_of_homogeneous {k : Type u} [Field k] [IsAlgClosed k] (A : Over (Spec (.of k))) [GrpObj A] [IsAbelianVariety A] (M : A.left.Modules) (hM : IsAmple A.hom M) (L : A.left.Modules) [Scheme.Modules.IsInvertible L] (homogeneous : ∀ b : 𝟙_ (Over (Spec (.of k))) ⟶ A, Nonempty ((Scheme.Modules.tensorPullback (GrpObj.mulRight A b).left).obj L ≅ L)) : ∃ a : 𝟙_ (Over (Spec (.of k))) ⟶ A, Nonempty (L ≅ (Scheme.Modules.tensorPullback (GrpObj.mulRight A a).left).obj M ⊗ Scheme.Modules.dual M)",
+  "branch": "newtargets-dag",
+  "by": "Q153",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fb0fa2b5f",
+  "group": "Q153",
+  "result": "pass",
+  "note": "Clause-by-clause match with Milne I 8.14/8.4(b): IsAlgClosed k, GrpObj+IsAbelianVariety A, IsAmple (includes invertible), IsInvertible L, homogeneity over rational points via mulRight + tensorPullback, conclusion ∃ a, L ≅ t_a^*M ⊗ dual M (homObj M unit). No extra hypotheses or restrictions; cochainModulesMonoidal is the same monoidalCategory up to a Prop argument (no diamond). Interface identical to sibling homogeneous-coherent-acyclicity and parent citer. Edge cases g=0, L=O, char p, ample necessity checked. No existing declaration (polarization calculus/isogeny modules checked). sorry-only theorem, docstrings with source place and blueprint tag, 9 steps carried; node differs from live only by lean field; statement verbatim (script). No cycle import. Not recompiled (no change)."
+ }
+}

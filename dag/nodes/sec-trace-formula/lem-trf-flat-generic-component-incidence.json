@@ -1,0 +1,216 @@
+{
+ "id": "lem-trf-flat-generic-component-incidence",
+ "kind": "statement",
+ "title": "Fibre components occur in closures of generic-fibre components",
+ "statement": "Let $S$ be an integral scheme [def-pc-integral-scheme] with generic point $\\eta$ [def-sc-generic-point], and let $f:X\\to S$ be a flat morphism of schemes [def-weil-flat-morphism]. For $s\\in S$ and an irreducible component $C$ [def-weil-irreducible-components] of the scheme-theoretic fibre $X_s$ [def-pc-scheme-fibre], there exists a generic point $x\\in X_s$ of $C$. For every such $x$, there exist an irreducible component $B$ of $X_\\eta$ and its generic point $z\\in X_\\eta$ such that, regarding $x,z$ as points of $X$ via the fibre inclusions, $x\\in\\overline{\\{z\\}}$. Moreover $C$, identified with its image in $f^{-1}(s)$, is an irreducible component of the subspace $\\overline{\\{z\\}}\\cap f^{-1}(s)$ of $X$. No local finite type, Noetherian, density, or equidimensionality hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0GSK (remark-flat-equidimensional), second list: reduction to closures of generic-fibre components; affine lifting uses Algebra Tag 00HS (lemma-flat-going-down), algebra.tex."
+ },
+ "stmt_deps": [
+  "def-pc-integral-scheme",
+  "def-sc-generic-point",
+  "def-weil-flat-morphism",
+  "def-weil-irreducible-components",
+  "def-pc-scheme-fibre"
+ ],
+ "proof": [
+  {
+   "text": "Write $i_t:X_t\\to X$ for the fibre inclusion. By [def-pc-scheme-fibre] this identifies $|X_t|$ homeomorphically with $f^{-1}(t)$. The component $C$ is closed and irreducible by [def-weil-irreducible-components]. Apply [lem-sc-scheme-sober] to the scheme $X_s$: it has a generic point $x$ with $C=\\overline{\\{x\\}}^{X_s}$. Fix any such $x$, so the remainder applies to every generic point required in the statement.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "def-weil-irreducible-components",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01K1 (lemma-fibre-topological), 01IS (lemma-scheme-sober); Topology Tag 004V (definition-irreducible-components)."
+   }
+  },
+  {
+   "text": "Since $\\eta$ is generic in $S$, $s\\in\\overline{\\{\\eta\\}}$ by [def-sc-generic-point]. Apply [lem-weil-pbc-flat-generalizations-lift] to $f$, $i_s(x)$ and $\\eta$: flatness supplies $y\\in X$ with $f(y)=\\eta$ and $i_s(x)\\in\\overline{\\{y\\}}$. Here “$v$ specializing to $f(t)$” in that node means $f(t)\\in\\overline{\\{v\\}}$. Use the fibre homeomorphism [def-pc-scheme-fibre] to regard $y$ as a point $y_\\eta\\in X_\\eta$.",
+   "uses": [
+    "def-sc-generic-point",
+    "lem-weil-pbc-flat-generalizations-lift",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 03HV (lemma-generalizations-lift-flat), the scheme form of Algebra Tag 00HS (lemma-flat-going-down); Schemes Tag 01K1."
+   }
+  },
+  {
+   "text": "By [lem-sc-irreducible-components-cover], choose an irreducible component $B$ of $X_\\eta$ containing $y_\\eta$. By [lem-sc-scheme-sober], choose its generic point $z$, so $y_\\eta\\in\\overline{\\{z\\}}^{X_\\eta}$. Under the embedding [def-pc-scheme-fibre], this says $y\\in\\overline{\\{i_\\eta(z)\\}}^X\\cap f^{-1}(\\eta)$. Put $Z=\\overline{\\{i_\\eta(z)\\}}^X$. As $Z$ is closed and contains $y$, it contains $\\overline{\\{y\\}}^X$, hence $i_s(x)\\in Z$.",
+   "uses": [
+    "lem-sc-irreducible-components-cover",
+    "lem-sc-scheme-sober",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 004W (lemma-irreducible), part (4); Schemes Tags 01IS and 01K1; assembly for More on Morphisms Tag 0GSK (remark-flat-equidimensional), second list."
+   }
+  },
+  {
+   "text": "The subspace $Z\\cap f^{-1}(s)$ is closed in $f^{-1}(s)$ and contains $i_s(x)$. The fibre homeomorphism [def-pc-scheme-fibre] therefore shows that it contains $i_s(C)$, the closure of $i_s(x)$ in that fibre. The set $i_s(C)$ remains irreducible in this intermediate subspace: its induced topology is unchanged. If an irreducible subset $D$ of $Z\\cap f^{-1}(s)$ contains $i_s(C)$, its topology as a subset of $f^{-1}(s)$ is also unchanged, so it is irreducible there. Maximality of $C$ in $X_s$ [def-weil-irreducible-components] forces $D=i_s(C)$. Thus $i_s(C)$ is an irreducible component of $Z\\cap f^{-1}(s)$, as asserted.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 004V (definition-irreducible-components), maximality; Schemes Tag 01K1 (lemma-fibre-topological)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-fibre",
+  "def-weil-irreducible-components",
+  "lem-sc-scheme-sober",
+  "def-sc-generic-point",
+  "lem-weil-pbc-flat-generalizations-lift",
+  "lem-sc-irreducible-components-cover"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0GSK (remark-flat-equidimensional), second list; the component-incidence reduction is written out using Tags 03HV, 01K1, 01IS, 004W and 004V. The remark itself does not supply a proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a flat morphism to an integral scheme every irreducible component of a fibre is an irreducible component of the fibre of the closure of a generic fibre component",
+   "results": "8 hits: AlgebraicGeometry.Flat.generalizingMap, RingHom.Flat.generalizingMap_comap, AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion, AlgebraicGeometry.Scheme.preimage_eq_top_of_closedPoint_mem, AlgebraicGeometry.Scheme.range_fromSpecStalk, AlgebraicGeometry.Flat; digest=0ff1c9301e3aa337. Read Flat.generalizingMap (Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean:134) and its proof: it lifts individual specializations, but does not choose a generic-fibre component or assert maximality inside its closure fibre. The other hits are going-down and generalizing-map tools, not the component-incidence statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift a fibre component to the generic fibre of a flat morphism using going down and take its closure",
+   "results": "8 hits: Algebra.HasGoingDown.of_flat, AlgebraicGeometry.IsIntegralHom.instUniversallyClosed, AlgebraicGeometry.Flat.generalizingMap, AlgebraicGeometry.Flat.stalkMap, RingHom.Flat.generalizingMap_comap, AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.Flat.casesOn, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact; digest=d283facbc4350be8. Read Flat.generalizingMap (Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean:134) and its proof: it lifts individual specializations, but does not choose a generic-fibre component or assert maximality inside its closure fibre. The other hits are going-down and generalizing-map tools, not the component-incidence statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, IsGenericPoint",
+   "results": "0 hits: ; digest=4f53cda18c2baa0c. Read Flat.generalizingMap (Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean:134) and its proof: it lifts individual specializations, but does not choose a generic-fibre component or assert maximality inside its closure fibre. The other hits are going-down and generalizing-map tools, not the component-incidence statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "generalizingMap|irreducibleComponents|IsGenericPoint",
+   "results": "17 hits: Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean, Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean, Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean; digest=72988220fb25b1d0. Read Flat.generalizingMap (Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean:134) and its proof: it lifts individual specializations, but does not choose a generic-fibre component or assert maximality inside its closure fibre. The other hits are going-down and generalizing-map tools, not the component-incidence statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat scheme over an integral base has every special fibre component contained in the closure of an irreducible generic fibre component",
+   "results": "8 hits: AlgebraicGeometry.Flat.generalizingMap, RingHom.Flat.generalizingMap_comap, AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints, AlgebraicGeometry.Scheme.range_fromSpecStalk, AlgebraicGeometry.Flat, AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget, AlgebraicGeometry.universallyClosed_eq_universallySpecializing, AlgebraicGeometry.Scheme.preimage_eq_top_of_closedPoint_mem; digest=046625589c495489. Read Flat.generalizingMap (Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean:134) and its proof: it lifts individual specializations, but does not choose a generic-fibre component or assert maximality inside its closure fibre. The other hits are going-down and generalizing-map tools, not the component-incidence statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "generalizingMap|irreducibleComponents|IsGenericPoint",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean; digest=13b2465c65f5f56d. Read Flat.generalizingMap (UniversallyOpen.lean:134), GeneralizingMap (Inseparable.lean:359), fibreHomeo (Fiber.lean:103), and scheme sobriety (Properties.lean:38,43). These supply ingredients, not the full generic-component incidence and maximality assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every irreducible component of a special fibre of a flat scheme over an integral base is a component of the fibre of the closure of a generic fibre component",
+   "results": "8 hits: genericPoints, genericPoints.component_ofComponent, AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian, genericPoints.component, AlgebraicGeometry.irreducibleSpace_of_isIntegral, genericPoints.component_surjective, AlgebraicGeometry.Flat.comp, AlgebraicGeometry.Flat.mk; digest=dd596d7111f0de72. Read Flat.generalizingMap (UniversallyOpen.lean:134), GeneralizingMap (Inseparable.lean:359), fibreHomeo (Fiber.lean:103), and scheme sobriety (Properties.lean:38,43). These supply ingredients, not the full generic-component incidence and maximality assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, IsGenericPoint",
+   "results": "0 hits: ; digest=4f53cda18c2baa0c. Read Flat.generalizingMap (UniversallyOpen.lean:134), GeneralizingMap (Inseparable.lean:359), fibreHomeo (Fiber.lean:103), and scheme sobriety (Properties.lean:38,43). These supply ingredients, not the full generic-component incidence and maximality assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat morphism to an integral scheme every fibre component occurs in the closure of a generic fibre component",
+   "results": "8 hits: AlgebraicGeometry.Flat.generalizingMap, RingHom.Flat.generalizingMap_comap, AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints, AlgebraicGeometry.Scheme.range_fromSpecStalk, AlgebraicGeometry.Scheme.preimage_eq_top_of_closedPoint_mem, AlgebraicGeometry.Flat, AlgebraicGeometry.Scheme.Hom.range_fiberι, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType; digest=c84fc5e0bd685bbe. Read Flat.generalizingMap (UniversallyOpen.lean:134), GeneralizingMap (Inseparable.lean:359), fibreHomeo (Fiber.lean:103), and scheme sobriety (Properties.lean:38,43). These supply ingredients, not the full generic-component incidence and maximality assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A component generic point of a fibre of a flat morphism specializes from a generic point of an irreducible generic fibre component",
+   "results": "8 hits: AlgebraicGeometry.Flat.generalizingMap, AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap, RingHom.Flat.generalizingMap_comap, AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget, genericPoint_specializes, AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion, AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk_assoc, AlgebraicGeometry.Scheme.SpecMap_stalkSpecializes_fromSpecStalk_assoc; digest=601e4871e08889ba. Read Flat.generalizingMap (UniversallyOpen.lean:134), GeneralizingMap (Inseparable.lean:359), fibreHomeo (Fiber.lean:103), and scheme sobriety (Properties.lean:38,43). These supply ingredients, not the full generic-component incidence and maximality assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-flat-dense-generic-fibre-pure-dimension",
+  "date": "2026-10-22",
+  "group": "Q83"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: after ILO X Theorem 3.4 Step 2 flatifies the curve and horizontal boundary, their dense generic fibres determine pure relative dimensions 1 and 0. Generic-fibre component incidence (old steps 1--2).",
+   "via": [
+    "lem-trf-flat-dense-generic-fibre-pure-dimension",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-flat-generic-component-incidence",
+  "worker": "stage1",
+  "summary": "Q56: statement unchanged. Four steps establish fibre sobriety, flat generalization lifting, a generic-fibre component and its generic point, and the elementary maximality argument in the closure fibre. All ingredients are existing Mathlib-leaf nodes; no new nodes. Checked source tags, project declarations, all cited statements, and empty/non-Noetherian/reducible fibre edge cases.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: after ILO X Theorem 3.4 Step 2 flatifies the curve and horizontal boundary, their dense generic fibres determine pure relative dimensions 1 and 0. Generic-fibre component incidence (old steps 1--2). This split realizes the generic-component incidence input to the pure-dimension reduction. The current main blueprint proof has no direct statement of this auxiliary lemma; the inherited nearby-cycle branch is retained."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-5a650939c",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-5a650939c (reviewer sub-agent of L); spot-checked: PASS, no fixes, no new nodes. The source is Stacks 0GSK (more-morphisms.tex remark-flat-equidimensional, lines 5312-5340): its second list defers the proof ('If we ever need these results...'), so the item's agent-written proof_origin is correct; 03HV and 00HS were confirmed in tags/tags. Step 1: def-pc-scheme-fibre (homeomorphism onto f^{-1}(s)), the component definition (maximal, closed) and lem-sc-scheme-sober applied to the scheme X_s; all three say what the step takes. Step 2: s in closure{eta} by def-sc-generic-point; lem-weil-pbc-flat-generalizations-lift is the leaf for Flat.generalizingMap (UniversallyOpen.lean:134, GeneralizingMap at Inseparable.lean:359); the direction checks out, giving y with f(y)=eta and x in closure{y}, from flatness alone. Step 3: lem-sc-irreducible-components-cover and sobriety give B and z; the closure of z in X_eta is the ambient closure cut with the fibre because the fibre inclusion is an embedding; Z=closure{z} is closed, so it contains closure{y}, which contains x. Step 4 is elementary (transitivity of subspace topology plus maximality) and does not claim Z_s irreducible. Edge cases: empty fibre (vacuous), s=eta, xy=t over k[t] (two special components under one generic component), non-Noetherian base with infinitely many components; a non-flat closed-point example shows flatness is needed. The statement is unchanged and matches the use in the parent lem-trf-flat-dense-generic-fibre-pure-dimension. A DAG scan found no duplicate (lem-trf-nodal-generic-component-closure is a special valuation-ring setting). All cited nodes are Mathlib leaves, so no tool_uses. No SGA, and no repair note."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatGenericComponentIncidence",
+  "declaration": "AlgebraicGeometry.Flat.generic_fibre_component_incidence",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatGenericComponentIncidence.lean",
+  "statement": "theorem Flat.generic_fibre_component_incidence {X S : Scheme.{u}} [IsIntegral S] (f : X ⟶ S) [Flat f] (η : S) (hη : IsGenericPoint η Set.univ) (s : S) (C : Set (f.fiber s)) (hC : C ∈ irreducibleComponents (f.fiber s)) : (∃ x : f.fiber s, IsGenericPoint x C) ∧ ∀ x : f.fiber s, IsGenericPoint x C → ∃ B : Set (f.fiber η), B ∈ irreducibleComponents (f.fiber η) ∧ ∃ z : f.fiber η, IsGenericPoint z B ∧ f.fiberι s x ∈ closure ({f.fiberι η z} : Set X) ∧ ∃ D : Set (Set.inter (closure ({f.fiberι η z} : Set X)) (f ⁻¹' {s})), D ∈ irreducibleComponents (Set.inter (closure ({f.fiberι η z} : Set X)) (f ⁻¹' {s})) ∧ Subtype.val '' D = (f.fiberι s) '' C",
+  "branch": "newtargets-dag",
+  "by": "Q118",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-867e75048",
+  "group": "Q118",
+  "result": "pass",
+  "note": "Clause-by-clause match of Flat.generic_fibre_component_incidence to node: IsIntegral S, IsGenericPoint η univ, Flat f, no extra finiteness binders; C ∈ irreducibleComponents (f.fiber s); ∃ generic x and separate ∀ x clause; ∃ B component of f.fiber η with generic z; fiberι s x ∈ closure{fiberι η z}; ∃ D component of subspace closure{z}∩f⁻¹{s} with val''D = fiberι s '' C (no irreducibility of intersection claimed). True via sobriety + Flat.generalizingMap (direction checked) + maximality. Edge cases empty fibre, s=η, xy=t, non-Noetherian, universes OK. Node identical to live except new lean record; lean.statement verbatim; sorry only; no defs; source/blueprint docstrings and 4-step proof docstring; stmt_dep modules public; no existing duplicate; report has Worker report and Second reading sections. No findings."
+ }
+}

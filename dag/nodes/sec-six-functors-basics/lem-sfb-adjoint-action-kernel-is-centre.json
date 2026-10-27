@@ -1,0 +1,212 @@
+{
+ "id": "lem-sfb-adjoint-action-kernel-is-centre",
+ "kind": "statement",
+ "title": "The adjoint-action kernel is the scheme-theoretic centre",
+ "statement": "Let $A$ be a nonzero commutative ring and let $G$ be a split reductive $A$-group scheme with split maximal torus $T=D_A(M)$, in the sense of [def-sfb-pinned-split-root-realization] after forgetting the pinning. The scheme-theoretic centre $Z(G)$ is the subgroup functor of elements whose conjugation action on $\\operatorname{Lie}(G)$ is the identity after every commutative algebra extension. Consequently, its intersection with $T$ is the subgroup functor of torus elements whose restricted conjugation action on $\\operatorname{Lie}(G)$ is the identity. These kernel identifications are functorial under every base change $A\\to B$, including nonreduced and disconnected base rings.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Theorem 3.3.4, Corollary 3.3.6(1), and Proposition 3.3.8, printed pp.98--102; the centre as adjoint-action kernel over arbitrary non-empty bases. Read online; local PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-sfb-pinned-split-root-realization"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\mathfrak g=\\operatorname{Lie}(G)$ and $K=\\ker(\\operatorname{Ad}_G)$. The adjoint-kernel calculus gives the representation, its affine finitely presented closed normal kernel, and their arbitrary base-change compatibility. The relative-centre theorem gives an affine flat finitely presented closed subgroup $Z=Z(G)$, also compatible with arbitrary base change. If $z\\in Z(B)$, its image commutes with every dual-number point of $G$ after every $B$-algebra extension, so its conjugation on the tangent module is the identity. Thus $Z\\subseteq K$ as subgroup functors, giving a closed immersion $i:Z\\hookrightarrow K$.",
+   "uses": [
+    "lem-sfb-smooth-affine-adjoint-kernel-calculus",
+    "lem-sfb-relative-centre-multiplicative-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 3.3.8, first two sentences, printed p.102; Theorem 3.3.4, pp.98--100"
+   }
+  },
+  {
+   "text": "First prove that $i$ is an isomorphism when the base is an algebraically closed field $k$. Write $N=K$ over this field, and let $H=N^0$ have its full open-subscheme structure. The identity-component theorem makes $H$ connected affine of finite type and open and closed in $N$; hence $\\operatorname{Lie}(H)=\\operatorname{Lie}(N)$, since tangent vectors at the identity are unchanged on an open neighborhood. The normal-subgroup criterion makes $H$ normal in $G$. The adjoint-kernel calculus identifies this tangent space with $\\ker(\\operatorname{ad}_{\\mathfrak g})$, which is stable under conjugation by the given maximal torus $T_k$. We will show that it has no nonzero root weight.",
+   "uses": [
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "lem-sfb-reductive-normal-subgroup-central-neutral-test",
+    "lem-sfb-smooth-affine-adjoint-kernel-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 3.3.8, identity-component and Lie-kernel reduction, printed p.102"
+   }
+  },
+  {
+   "text": "For each root $\\alpha$, the rank-one reflection theorem supplies the reductive semisimple-rank-one subgroup $G_\\alpha=C_G(T_\\alpha)$ and its nonzero root line $\\mathfrak g_\\alpha$. The torus $T_k$ is maximal in $G_\\alpha$, because a larger torus there would be larger in $G_k$. Apply the rank-one classification to this pair. In the $\\operatorname{SL}_2$ and $\\operatorname{GL}_2$ matrix factors, $[E_{12},E_{21}]=\\operatorname{diag}(1,-1)$ is nonzero, including in characteristic two. The extra torus factor is central. In the $\\operatorname{PGL}_2$ factor use the quotient map from $\\operatorname{GL}_2$. The projective-matrix description gives the chart with bottom-right entry normalized to $1$ around the identity, so the differential sends $E_{12}$ to a nonzero tangent vector (its upper-right coordinate is $\\epsilon$). Bracket functoriality sends $[E_{12},E_{11}]=-E_{12}$ to its nonzero negative there. The same computations with indices interchanged treat the negative root. In every model each root line therefore contains a vector with nonzero bracket with another vector. Injectivity and bracket compatibility of the subgroup tangent map carry this back to $\\mathfrak g$. Thus no root line is contained in $\\ker(\\operatorname{ad}_{\\mathfrak g})$.",
+   "uses": [
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-split-rank-one-classification",
+    "lem-sfb-projective-frames-pgl",
+    "lem-sfb-affine-group-lie-tangent-calculus",
+    "lem-sfb-affine-group-dual-number-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 3.3.8, rank-one reduction and final bracket calculations, printed p.102"
+   }
+  },
+  {
+   "text": "Use the weight decomposition for the $T_k$-representation on $\\operatorname{Lie}(N)$ and the root decomposition of $\\mathfrak g$. The inclusion is equivariant, so its $m$-weight subspace maps into the $m$-weight subspace of $\\mathfrak g$: compare coefficients of the linearly independent monomials in $k[M]$. Every nonzero weight in $\\mathfrak g$ is a root, and its space is one-dimensional. A nonzero intersection with such a line would contain the whole line, contrary to step 3. Hence $\\operatorname{Lie}(H)=\\operatorname{Lie}(N)\\subseteq\\operatorname{Lie}(T_k)$, the zero-weight subspace. The full torus action on $\\operatorname{Lie}(H)$ is consequently trivial. Torus-action Lie rigidity, applied to the connected possibly nonreduced group $H$, makes conjugation by $T_k$ trivial on $H$. Thus $H\\subseteq C_G(T_k)=T_k$ by the field self-centralizer theorem. All these inclusions concern subgroup schemes and all algebra-valued points.",
+   "uses": [
+    "lem-sfb-relative-torus-bundle-weights",
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-torus-action-connected-group-lie-rigidity",
+    "lem-sfb-reductive-torus-self-centralizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 3.3.8, torus-action rigidity and weight-space argument, printed p.102"
+   }
+  },
+  {
+   "text": "Since $H$ is a closed subgroup of the split torus $T_k$, the split-torus subgroup theorem makes it diagonalizable of finite type, with no reducedness assumption. Normality supplies the conjugation action $G\\times H\\to H$ by group automorphisms. The connected-action multiplicative-type rigidity theorem applies because $G$ is smooth connected, so this action is trivial: $H$ is central in $G$. The normal-subgroup centrality criterion now makes $N$ central. Thus $N\\subseteq Z(G)$ as subgroup functors, and step 1 gives the reverse inclusion. This proves $i$ is an isomorphism over every algebraically closed field in every characteristic.",
+   "uses": [
+    "lem-sfb-split-torus-subgroups-diagonalizable",
+    "lem-sfb-connected-action-multiplicative-type-rigidity",
+    "lem-sfb-reductive-normal-subgroup-central-neutral-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 3.3.8, central identity component implies central kernel, printed p.102; the multiplicative-type rigidity alternative avoids needing the intersection-of-all-tori clause of Corollary 3.3.6(2)"
+   }
+  },
+  {
+   "text": "Return to the arbitrary ring $A$. By the centre and adjoint-kernel base-change statements, every geometric fibre of $i$ is the isomorphism just proved. For each residue field $\\kappa(s)$, flatness of $i_s$ follows from flatness after the algebraic-closure extension by pointwise flat descent; that extension is faithfully flat, and every point lifts. The geometric fibre equalities also give surjectivity of $i$ on underlying points: for a point of $K$, extend its residue field to an algebraically closed field and lift along the corresponding geometric-fibre isomorphism. Apply the fibrewise flatness criterion to $Z\\xrightarrow{i}K\\to\\operatorname{Spec}A$: its source structure map is flat and locally of finite presentation by step 1, its target structure map is locally of finite type by step 1, and every fibre map is flat. Thus $i$ is flat. A flat surjective closed immersion is an isomorphism. This proves $Z(G)=K$ over $A$, with no Noetherian or reducedness assumption.",
+   "uses": [
+    "lem-sfb-relative-centre-multiplicative-base-change",
+    "lem-sfb-smooth-affine-adjoint-kernel-calculus",
+    "lem-sfb-pointwise-flatness-base-change",
+    "lem-sfb-fibrewise-flatness-criterion",
+    "lem-sfb-surjective-flat-closed-immersion-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 3.3.8, fibral reduction by Lemma B.3.1, printed p.102; here B.3.1 is expanded using the existing flatness and closed-immersion criteria"
+   }
+  },
+  {
+   "text": "For each $A$-algebra $B$, the kernel of the restricted conjugation action on $T(B)$ is $T(B)\\cap K(B)$ by the definition of a restricted action, hence $T(B)\\cap Z(G)(B)$. This identifies the two subgroup functors, not merely geometric points. For an arbitrary $A\\to B$, both $K_B$ and $Z(G)_B$ are the corresponding kernel and centre of $G_B$ by their base-change statements. Pulling back their equality and then intersecting with $T_B$ gives the asserted compatibilities under every further extension. If $B$ is the zero ring all represented functors have their unique empty-scheme point, so the equalities still hold. This includes nonreduced and disconnected $B$.",
+   "uses": [
+    "lem-sfb-relative-centre-multiplicative-base-change",
+    "lem-sfb-smooth-affine-adjoint-kernel-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 3.3.8 and restriction to the maximal torus; Theorem 3.3.4 base-change compatibility, printed pp.98--102"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-smooth-affine-adjoint-kernel-calculus",
+  "lem-sfb-relative-centre-multiplicative-base-change",
+  "lem-sfb-locally-algebraic-group-identity-component",
+  "lem-sfb-reductive-normal-subgroup-central-neutral-test",
+  "lem-sfb-reductive-rank-one-reflections",
+  "lem-sfb-split-rank-one-classification",
+  "lem-sfb-projective-frames-pgl",
+  "lem-sfb-affine-group-lie-tangent-calculus",
+  "lem-sfb-affine-group-dual-number-calculus",
+  "lem-sfb-relative-torus-bundle-weights",
+  "lem-sfb-torus-action-connected-group-lie-rigidity",
+  "lem-sfb-reductive-torus-self-centralizer",
+  "lem-sfb-split-torus-subgroups-diagonalizable",
+  "lem-sfb-connected-action-multiplicative-type-rigidity",
+  "lem-sfb-pointwise-flatness-base-change",
+  "lem-sfb-fibrewise-flatness-criterion",
+  "lem-sfb-surjective-flat-closed-immersion-isomorphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Proposition 3.3.8 proof, printed p.102, read online; expanded matrix calculations, fibral-flatness reduction and the equivalent multiplicative-type rigidity route after containing the neutral component in one maximal torus. Local PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Kernel of adjoint representation of a reductive group scheme is the scheme theoretic centre over a commutative ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieDerivation.ad_ker_eq_center\", \"module\": \"Mathlib/Algebra/Lie/Derivation/AdjointAction\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L],\\n  (LieDerivation.ad R L).ker = LieAlgebra.center R L\", \"doc\": \"For a Lie algebra $ L $ over a commutative ring $ R $, the kernel of the adjoint representation $ \\\\mathrm{ad}: L \\\\to \\\\mathrm{Der}(L) $, defined by $ \\\\mathrm{ad}_x(y) = [x, y] $, coincides with the cen\"}\n  {\"name\": \"LieAlgebra.self_module_ker_eq_center\", \"module\": \"Mathlib/Algebra/Lie/Abelian\", \"type\": \"∀ (R : Type u) (L : Type v) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L],\\n  LieModule.ker R L L = LieAlgebra.center R L\", \"doc\": \"For a Lie algebra $ L $ over a commutative ring $ R $, the kernel of the Lie module action of $ L $ on itself is equal to the center of $ L $.\"}\n  {\"name\": \"LieAlgebra.ad_ker_eq_bot_of_hasTrivialRadical\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.HasTrivialRadical R L], (LieAlgebra.ad R L).ker = ⊥\", \"doc\": \"If a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $ has a trivial radical (i.e., its radical is the zero ideal), then the kernel of the adjoint representation $ \\\\mathrm{ad}: \\\\mathfrak{g} \\\\\"}\n  {\"name\": \"LieAlgebra.ad_ker_eq_self_module_ker\", \"module\": \"Mathlib/Algebra/Lie/Abelian\", \"type\": \"∀ (R : Type u) (L : Type v) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L],\\n  (LieAlgebra.ad R L).ker = LieModule.ker R L L\", \"doc\": \"The kernel of the adjoint representation of a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ coincides with the kernel of its self-module action, i.e., $\\\\ker(\\\\mathrm{ad}) = \\\\ker(\\\\mathfrak{g} \\\\\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_apply\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V] (g : ↥(Subgroup.center (SpecialLinearGroup R V))),\\n  ↑↑↑g = SpecialLinearGroup.centerEquivRootsOfUnity g • LinearMap.id\", \"doc\": \"Every element $ g $ in the center of the special linear group $ \\\\text{SL}(V) $ over a commutative ring $ R $ and finite free $ R $-module $ V $ of rank $ n $ satisfies $ g = r \\\\cdot \\\\text{id}_V $, whe\"}\n  {\"name\": \"ConjAct.fixedPoints_eq_center\", \"module\": \"Mathlib/GroupTheory/GroupAction/ConjAct\", \"type\": \"∀ {G : Type u_3} [inst : Group G], MulAction.fixedPoints (ConjAct G) G = ↑(Subgroup.center G)\", \"doc\": \"The set of fixed points of the conjugation action of a group $ G $ on itself is equal to the center of $ G $, i.e., the subgroup consisting of all elements that commute with every element of $ G $.\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V],\\n  Module.finrank R V ≤ 1 →\\n    ∀ (g : ↥(Subgroup.center (SpecialLinearGroup R V))), SpecialLinearGroup.centerEquivRootsOfUnity g = 1\", \"doc\": \"If the finite rank of the $ R $-module $ V $ is at most 1, then every element in the center of the special linear group $ \\\\text{SL}(V) $ is mapped to the multiplicative identity $ 1 $ under the isomor\"}\n  {\"name\": \"LieAlgebra.center_eq_bot\", \"module\": \"Mathlib/Algebra/Lie/Abelian\", \"type\": \"∀ (R : Type u) (L : Type v) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieModule.IsFaithful R L L], LieAlgebra.center R L = ⊥\", \"doc\": \"For a Lie algebra $ L $ over a commutative ring $ R $, if the action of $ L $ on itself is faithful (i.e., the only element acting as zero on all of $ L $ is the zero element itself), then the center \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits do not state the group-scheme theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "LieDerivation.ad_ker_eq_center",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"LieDerivation.ad_ker_eq_center\", \"module\": \"Mathlib.Algebra.Lie.AdjointAction.Derivation\", \"type\": \" (R : Type u_1) (L : Type u_2) [CommRing R] [LieRing L] [LieAlgebra R L] : (LieDerivation.ad R L).ker = LieAlgebra.center R L\", \"doc\": \"The kernel of the adjoint action on a Lie algebra is equal to its center.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits do not state the group-scheme theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "adjoint.*cent(er|re)|cent(er|re).*adjoint|Ad.*ker",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/LucasLehmer.lean\", \"line\": \"32\", \"text\": \"extension and made to use kernel reductions by Kyle Miller.\"}\n  {\"file\": \"Mathlib/NumberTheory/SumTwoSquares.lean\", \"line\": \"16\", \"text\": \"sum of two squares; see `Nat.Prime.sq_add_sq` (which has the weaker assumption `p % 4 ≠ 3`).\"}\n  {\"file\": \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean\", \"line\": \"357\", \"text\": \"    rw [dist_eq_norm, PadicInt.norm_le_pow_iff_mem_span_pow, ← PadicInt.ker_toZModPow,\"}\n  {\"file\": \"Mathlib/Data/EReal/Operations.lean\", \"line\": \"162\", \"text\": \"/-- See also `EReal.add_lt_add_of_lt_of_le'` for a version with weaker but less convenient\"}\n  {\"file\": \"Mathlib/Probability/Moments/SubGaussian.lean\", \"line\": \"468\", \"text\": \"lemma integrable_exp_add_compProd {η : Kernel (Ω' × Ω) Ω''} [IsZeroOrMarkovKernel η]\"}\n  {\"file\": \"Mathlib/Probability/Moments/SubGaussian.lean\", \"line\": \"491\", \"text\": \"lemma add_compProd {η : Kernel (Ω' × Ω) Ω''} [IsZeroOrMarkovKernel η]\"}\n  {\"file\": \"Mathlib/Probability/Moments/SubGaussian.lean\", \"line\": \"521\", \"text\": \"lemma add_comp {η : Kernel Ω Ω''} [IsZeroOrMarkovKernel η]\"}\n  {\"file\": \"Mathlib/Probability/Moments/SubGaussian.lean\", \"line\": \"723\", \"text\": \"  have := (HasSubgaussianMGF_iff_kernel.1 hX).add (HasSubgaussianMGF_iff_kernel.1 hY)\"}\n  {\"file\": \"Mathlib/Data/ZMod/QuotientGroup.lean\", \"line\": \"40\", \"text\": \"  (quotientAddEquivOfEq (ZMod.ker_intCastAddHom _)).symm.trans <|\"}\n  {\"file\": \"Mathlib/Data/ZMod/Basic.lean\", \"line\": \"596\", \"text\": \"    (Int.castAddHom (ZMod n)).ker = AddSubgroup.zmultiples (n : ℤ) := by\"}\n  {\"file\": \"Mathlib/Data/ZMod/Basic.lean\", \"line\": \"598\", \"text\": \"  rw [Int.mem_zmultiples_iff, AddMonoidHom.mem_ker, Int.coe_castAddHom,\"}\n  {\"file\": \"Mathlib/Data/ZMod/Basic.lean\", \"line\": \"1178\", \"text\": \"  simp only [← AddMonoidHom.ker_eq_bot_iff, eq_bot_iff, SetLike.le_def,\"}\n  {\"file\": \"Mathlib/Data/ZMod/Basic.lean\", \"line\": \"1179\", \"text\": \"    ZMod.intCast_surjective.forall, ZMod.lift_coe, AddMonoidHom.mem_ker, AddSubgroup.mem_bot]\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/RingHoms.lean\", \"line\": \"27\", \"text\": \"* `PadicInt.ker_toZMod` / `PadicInt.ker_toZModPow`: the kernels of these maps are the ideals\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/RingHoms.lean\", \"line\": \"350\", \"text\": \"  (Ideal.quotEquivOfEq PadicInt.ker_toZMod.symm).trans <|\"}\n  {\"file\": \"Mathlib/NumberTheory/LSeries/HurwitzZetaEven.lean\", \"line\": \"83\", \"text\": \"lemma evenKernel_undef (a : UnitAddCircle) {x : ℝ} (hx : x ≤ 0) : evenKernel a x = 0 := by\"}\n  {\"file\": \"Mathlib/NumberTheory/LSeries/HurwitzZetaEven.lean\", \"line\": \"97\", \"text\": \"lemma cosKernel_undef (a : UnitAddCircle) {x : ℝ} (hx : x ≤ 0) : cosKernel a x = 0 := by\"}\n  {\"file\": \"Mathlib/NumberTheory/LSeries/HurwitzZetaEven.lean\", \"line\": \"104\", \"text\": \"  simp [← QuotientAddGroup.mk_zero, ← ofReal_inj, evenKernel_def, cosKernel_def]\"}\n  {\"file\": \"Mathlib/NumberTheory/LSeries/HurwitzZetaEven.lean\", \"line\": \"107\", \"text\": \"lemma evenKernel_neg (a : UnitAddCircle) (x : ℝ) : evenKernel (-a) x = evenKernel a x := by\"}\n  {\"file\": \"Mathlib/NumberTheory/LSeries/HurwitzZetaEven.lean\", \"line\": \"109\", \"text\": \"  | H => simp [← QuotientAddGroup.mk_neg, ← ofReal_inj, evenKernel_def, jacobiTheta₂_neg_left]\"}\n  {\"file\": \"Mathlib/NumberTheory/LSeries/HurwitzZetaOdd.lean\", \"line\": \"122\", \"text\": \"lemma oddKernel_undef (a : UnitAddCircle) {x : ℝ} (hx : x ≤ 0) : oddKernel a x = 0 := by\"}\n  {\"file\": \"Mathlib/NumberTheory/LSeries/HurwitzZetaOdd.lean\", \"line\": \"138\", \"text\": \"lemma sinKernel_undef (a : UnitAddCircle) {x : ℝ} (hx : x ≤ 0) : sinKernel a x = 0 := by\"}\n  {\"file\": \"Mathlib/NumberTheory/LSeries/HurwitzZetaOdd.lean\", \"line\": \"142\", \"text\": \"lemma oddKernel_neg (a : UnitAddCircle) (x : ℝ) : oddKernel (-a) x = -oddKernel a x := by\"}\n  {\"file\": \"Mathlib/NumberTheory/LSeries/HurwitzZetaOdd.lean\", \"line\": \"144\", \"text\": \"  | H a => simp [← ofReal_inj, ← QuotientAddGroup.mk_neg, oddKernel_def, jacobiTheta₂''_neg_left]\"}\n  {\"file\": \"Mathlib/NumberTheory/LSeries/HurwitzZetaOdd.lean\", \"line\": \"152\", \"text\": \"  | H a => simp [← ofReal_inj, ← QuotientAddGroup.mk_neg, sinKernel_def, jacobiTheta₂'_neg_left,\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits do not state the group-scheme theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a reductive algebraic group scheme elements acting identically on its Lie algebra are central",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LieAlgebra.self_module_ker_eq_center\", \"module\": \"Mathlib.Algebra.Lie.Abelian\", \"type\": \": LieModule.ker R L L = center R L\", \"doc\": \"For a Lie algebra $ L $ over a commutative ring $ R $, the kernel of the Lie module action of $ L $ on itself is equal to the center of $ L $.\"}\n  {\"name\": \"ConjAct.fixedPoints_eq_center\", \"module\": \"Mathlib.GroupTheory.GroupAction.ConjAct\", \"type\": \": fixedPoints (ConjAct G) G = center G\", \"doc\": \"The set of fixed points of the conjugation action of a group $ G $ on itself is equal to the center of $ G $, i.e., the subgroup consisting of all elements that commute with every element of $ G $.\"}\n  {\"name\": \"LieDerivation.ad_ker_eq_center\", \"module\": \"Mathlib.Algebra.Lie.Derivation.AdjointAction\", \"type\": \": (ad R L).ker = LieAlgebra.center R L\", \"doc\": \"For a Lie algebra $ L $ over a commutative ring $ R $, the kernel of the adjoint representation $ \\\\mathrm{ad}: L \\\\to \\\\mathrm{Der}(L) $, defined by $ \\\\mathrm{ad}_x(y) = [x, y] $, coincides with the cen\"}\n  {\"name\": \"LieAlgebra.center\", \"module\": \"Mathlib.Algebra.Lie.Abelian\", \"type\": \": LieIdeal R L\", \"doc\": \"The center of a Lie algebra $L$ over a commutative ring $R$ is the Lie ideal consisting of all elements $z \\\\in L$ such that $[x, z] = 0$ for all $x \\\\in L$.\"}\n  {\"name\": \"LieModule.ker\", \"module\": \"Mathlib.Algebra.Lie.Abelian\", \"type\": \": LieIdeal R L\", \"doc\": \"The Lie ideal of $\\\\mathfrak{g}$ consisting of all elements $x$ such that the Lie bracket $[x, m] = 0$ for all $m \\\\in M$, i.e., the elements of $\\\\mathfrak{g}$ that act trivially on the $R$-module $M$ u\"}\n  {\"name\": \"IsMulCentral\", \"module\": \"Mathlib.Algebra.Group.Center\", \"type\": \"{M : Type u_1} → [Mul M] → M → Prop\", \"doc\": \"An element $ a \\\\in M $ is central if $ ab = ba $ for all $ b \\\\in M $.\"}\n  {\"name\": \"LieAlgebra.center_eq_bot\", \"module\": \"Mathlib.Algebra.Lie.Abelian\", \"type\": \"[LieModule.IsFaithful R L L] : center R L = ⊥\", \"doc\": \"For a Lie algebra $ L $ over a commutative ring $ R $, if the action of $ L $ on itself is faithful (i.e., the only element acting as zero on all of $ L $ is the zero element itself), then the center \"}\n  {\"name\": \"LieAlgebra.isLieAbelian_iff_center_eq_top\", \"module\": \"Mathlib.Algebra.Lie.Abelian\", \"type\": \": IsLieAbelian L ↔ center R L = ⊤\", \"doc\": \"The Lie algebra $ L $ over a commutative ring $ R $ is abelian if and only if its center equals the entire Lie algebra, i.e., $ \\\\mathrm{center}_R(L) = L $.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits do not state the group-scheme theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Faithfulness of the adjoint group representation of an adjoint semisimple algebraic group in positive characteristic",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"instFaithfulSMul_1\", \"module\": \"Mathlib/Algebra/Algebra/IsSimpleRing\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : Semiring A] [inst_2 : Algebra R A] [IsSimpleRing R]\\n  [Nontrivial A], FaithfulSMul R A\", \"doc\": \"A commutative ring equipped with a faithful scalar multiplication has no nontrivial two-sided ideals, making it a simple ring.\"}\n  {\"name\": \"AlgEquiv.apply_faithfulSMul\", \"module\": \"Mathlib/Algebra/Algebra/Equiv\", \"type\": \"∀ {R : Type uR} {A₁ : Type uA₁} [inst : CommSemiring R] [inst_1 : Semiring A₁] [inst_2 : Algebra R A₁],\\n  FaithfulSMul (A₁ ≃ₐ[R] A₁) A₁\", \"doc\": \"The action of the group of R-algebra automorphisms on A₁ is faithful, meaning that if two automorphisms act identically on every element of A₁, then they are equal.\"}\n  {\"name\": \"IsGaloisGroup.faithful\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ {G : Type u_1} (A : Type u_2) {B : Type u_3} {inst : Group G} {inst_1 : CommSemiring A} {inst_2 : Semiring B}\\n  {inst_3 : Algebra A B} {inst_4 : MulSemiringAction G B} [self : IsGaloisGroup G A B], FaithfulSMul G B\", \"doc\": \"If $ G $ is the Galois group of the algebra $ B $ over $ A $, then the scalar multiplication action of $ G $ on $ B $ is faithful. This means that for any two distinct elements $ g_1, g_2 \\\\in G $, the\"}\n  {\"name\": \"FDRep.instFaithfulRepForget₂\", \"module\": \"Mathlib/RepresentationTheory/FDRep\", \"type\": \"∀ {R G : Type u} [inst : CommRing R] [inst_1 : Monoid G], (CategoryTheory.forget₂ (FDRep R G) (Rep R G)).Faithful\", \"doc\": \"For any commutative ring $ R $ and monoid $ G $, the forgetful functor from the category $ \\\\text{FDRep}_R(G) $ of finitely generated $ R $-modules with $ G $-action to the category $ \\\\text{Rep}_R(G) $\"}\n  {\"name\": \"LieModule.instIsFaithfulMatrixForall\", \"module\": \"Mathlib/Algebra/Lie/Matrix\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {n : Type w} [inst_1 : DecidableEq n] [inst_2 : Fintype n],\\n  LieModule.IsFaithful R (Matrix n n R) (n → R)\", \"doc\": \"For any commutative ring $ R $ and finite type $ n $, the Lie algebra of $ n \\\\times n $ matrices over $ R $ (equipped with the commutator bracket) acts as a Lie module on the space of $ n $-dimensiona\"}\n  {\"name\": \"LieAlgebra.instIsFaithfulOfHasTrivialRadical\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.HasTrivialRadical R L], LieModule.IsFaithful R L L\", \"doc\": \"If a Lie algebra $ L $ over a commutative ring $ R $ has a trivial radical (i.e., its radical is the zero ideal), then $ L $ is a faithful Lie module over itself. This means the action of $ L $ on its\"}\n  {\"name\": \"LieModule.instIsFaithfulEnd\", \"module\": \"Mathlib/Algebra/Lie/OfAssociative\", \"type\": \"∀ (R : Type u) (M : Type w) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  LieModule.IsFaithful R (Module.End R M) M\", \"doc\": \"The action of the endomorphism ring of an $ R $-module $ M $ on $ M $ is faithful, meaning that the only endomorphism acting as zero on all elements of $ M $ is the zero endomorphism itself.\"}\n  {\"name\": \"IsAzumaya.toFaithfulSMul\", \"module\": \"Mathlib/Algebra/Azumaya/Defs\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {inst : CommSemiring R} {inst_1 : Semiring A} {inst_2 : Algebra R A}\\n  [self : IsAzumaya R A], FaithfulSMul R A\", \"doc\": \"If $ A $ is an Azumaya algebra over a commutative semiring $ R $, then the scalar multiplication of $ R $ on $ A $ is faithful. This means that for any $ r_1, r_2 \\\\in R $, if $ r_1 \\\\cdot a = r_2 \\\\cdot\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits do not state the group-scheme theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "adjoint.*cent(er|re)|cent(er|re).*adjoint|ad_ker_eq_center",
+   "results": "[grep] OK 6 hit(s)\n  {\"file\": \"Mathlib/Algebra/Lie/Derivation/Killing.lean\", \"line\": \"85\", \"text\": \"  rwa [← LieHom.mem_ker, ad_ker_eq_center, LieAlgebra.center_eq_bot, LieSubmodule.mem_bot] at h\"}\n  {\"file\": \"Mathlib/Algebra/Lie/AdjointAction/Derivation.lean\", \"line\": \"27\", \"text\": \"- `LieDerivation.ad_ker_eq_center`: the kernel of the adjoint action is the center of `L`,\"}\n  {\"file\": \"Mathlib/Algebra/Lie/AdjointAction/Derivation.lean\", \"line\": \"65\", \"text\": \"/-- The kernel of the adjoint action on a Lie algebra is equal to its center. -/\"}\n  {\"file\": \"Mathlib/Algebra/Lie/AdjointAction/Derivation.lean\", \"line\": \"66\", \"text\": \"lemma ad_ker_eq_center : (ad R L).ker = LieAlgebra.center R L := by\"}\n  {\"file\": \"Mathlib/Algebra/Lie/AdjointAction/Derivation.lean\", \"line\": \"71\", \"text\": \"/-- If the center of a Lie algebra is trivial, then the adjoint action is injective. -/\"}\n  {\"file\": \"Mathlib/Algebra/Lie/AdjointAction/Derivation.lean\", \"line\": \"74\", \"text\": \"  rw [← LieHom.ker_eq_bot, ad_ker_eq_center, h]\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie-algebra or ordinary group-action facts do not provide the scheme-theoretic assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-adjoint-torus-root-coordinates",
+  "date": "2026-10-24",
+  "group": "Q104"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Theorem 3.3.4, Corollary 3.3.6(1), and Proposition 3.3.8, printed pp.98--102; the centre as adjoint-action kernel over arbitrary non-empty bases. Read online; local PDF WANTED.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-adjoint-action-kernel-is-centre",
+  "worker": "stage1",
+  "summary": "Split the adjoint-kernel theorem into seven steps, using existing arbitrary-base centre and flatness nodes. Three new statement-only support nodes record smooth adjoint calculus, torus tangent rigidity for nonreduced connected groups, and centrality of normal subgroups from their neutral components. The rank-one matrix computation and restricted-action/base-change assembly are explicit. Fixed the missing TeX backslash in operatorname only.",
+  "blueprint": "The inherited blueprint.from.node is null, confirmed by blueprint_refs.py ancestor. Current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), supporting the existing alteration/geometric-reductivity branch through the root-coordinate prerequisite lem-sfb-adjoint-torus-root-coordinates. This split realizes Conrad Proposition 3.3.8 at that supporting place; no change to the chapter or unit route. Whole-blueprint searches found no equivalent arbitrary-characteristic group-scheme result.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N0-eb25fd409",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-eb25fd409 (reviewer sub-agent of L); spot-checked: PASS, no fixes. Source check: Conrad's Reductive Group Schemes has no local copy, so I fetched the public PDF and read Thm 3.3.4 proof p.100 (normal subgroup central iff its identity component is central, CGP 5.3.2), Cor 3.3.6 p.101 and Prop 3.3.8 with its full proof p.102. The 7 steps follow Conrad: Z⊆K; Lie(ker Ad)=ker ad; no root line lies in ker ad, via the rank-one classification ([E12,E21]≠0 in sl2/gl2 even in char 2, [E12,E11]≠0 in pgl2 using the PGL2 chart); weights give Lie(N)⊂Lie(T); torus tangent rigidity puts N^0 inside C_G(T)=T. One difference from Conrad: instead of Cor 3.3.6(2) the delivery shows N^0 is diagonalizable and uses rigidity of a smooth connected action on a multiplicative-type group, a valid cited route. Step 6 is a fibral argument; all hypotheses checked (pointwise flat descent, Z flat and lfp, K lft, flat surjective closed immersion is an isomorphism). The three new statement-only nodes are true and not duplicates. The adjoint-kernel calculus node holds since L is dual to finite projective e^*Ω and GL(L) is affine fp; existing nodes are field-only, char-0-only or field-points-only. Torus Lie rigidity (CGP A.8.11) is proved via the T-action on O/m^n plus injectivity of O(H)→Ô for connected H; tested on α_{p^2}. The normal-subgroup neutral test (CGP 5.3.2) is proved via a commutator homomorphism into central N^0 that dies on the derived group and the central torus; tested on μ_p⊂SL_p and Frobenius kernels. None restates an item clause. Batch-5 flags: all five reached lem-trf nodes (smooth-fpqc-base-descent, fg-torsionfree-group-free, projective-bundle-quotient-geometry, split-lattice-torus-projection, localization-finite-presentation-ring-map) are general algebra/geometry leaves of unit sk-i-curve-zero, not trace-formula or Poincaré-duality proof steps, so all are accepted. No tool_uses."
+ }
+}

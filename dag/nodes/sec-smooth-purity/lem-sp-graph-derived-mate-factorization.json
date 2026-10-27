@@ -1,0 +1,313 @@
+{
+ "id": "lem-sp-graph-derived-mate-factorization",
+ "kind": "statement",
+ "title": "Derived mate factorization of compactified graph comparison",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "statement": "Let $A$ be a finite commutative ring and $p:Z\\to T$ a quasi-compact, quasi-separated morphism of schemes. Use constant-$A$ module sheaves on the small etale and pro-etale sites, ordinary derived categories, and exact site comparison $\\nu_X^*$ [def-weil-pbc-derived-categories, def-weil-pbc-proetale-modules, lem-sf-comparison-pullback-exact]. Write $Q$ for localization of complexes, $a:\\nu_Z^*p_{\\mathrm{et}}^*\\simeq p_{\\mathrm{proet}}^*\\nu_T^*$ for the canonical pullback comparison [lem-weil-pbc-comparison-pullback], $d_{p,F}:\\nu_T^*p_*^{\\mathrm{et}}F\\to p_*^{\\mathrm{proet}}\\nu_Z^*F$ for the underived counit mate of $a^{-1}$, and $b_{p,K}:\\nu_T^*Rp_*^{\\mathrm{et}}K\\to Rp_*^{\\mathrm{proet}}\\nu_Z^*K$ for its specified derived counit mate [def-weil-pbc-adjunction-mate, lem-weil-pbc-comparison-direct-image-canonical-mate]. For every bounded-below complex $P$ on $Z_{\\mathrm{et}}$, let\n$$\\gamma_P^{\\mathrm{et}}:Q(p_*^{\\mathrm{et}}P)\\to Rp_*^{\\mathrm{et}}QP,\\qquad \\gamma_{\\nu_Z^*P}^{\\mathrm{proet}}:Q(p_*^{\\mathrm{proet}}\\nu_Z^*P)\\to Rp_*^{\\mathrm{proet}}Q\\nu_Z^*P$$\nbe the canonical right-derived comparison maps. Then\n$$b_{p,QP}\\nu_T^*(\\gamma_P^{\\mathrm{et}})=\\gamma_{\\nu_Z^*P}^{\\mathrm{proet}}Q(d_{p,P}).$$\nMore precisely the two sides have the same adjoint transpose, namely both $\\nu_Z^*Q(\\varepsilon_P^{0,\\mathrm{et}})a^{-1}$ and $Q(\\varepsilon_{\\nu_Z^*P}^{0,\\mathrm{proet}}p_{\\mathrm{proet}}^*(d_{p,P}))$, where $\\varepsilon^{0,s}$ are the termwise ordinary counits. In particular, suppose $e:U\\to T$ is separated etale of finite type, $e=pj$ is a compactification with quasi-compact open $j:U\\hookrightarrow Z$ and proper $p$, and $G^s,\\sigma,o$ are the graph sheaf maps, the adjunction-preserving sum-extension site isomorphism, and the open site isomorphism specified in [lem-sp-et-proet-graph-sheaf-square]. Set $\\Theta^s=\\gamma^sQ(G^s)$ on complexes. For every bounded-below complex $K$ on $U_{\\mathrm{et}}$, with $P=j_!^{\\mathrm{et}}K$, one has\n$$\\Theta^{\\mathrm{proet}}(\\nu_U^*QK)\\sigma_{QK}=Rp_*^{\\mathrm{proet}}(o_{QK})\\gamma_{\\nu_Z^*P}^{\\mathrm{proet}}Q(d_{p,P})\\nu_T^*Q(G_K^{\\mathrm{et}})=Rp_*^{\\mathrm{proet}}(o_{QK})b_{p,QP}\\nu_T^*(\\Theta^{\\mathrm{et}}(QK)).$$\nThe representative compatibility is natural in bounded-below complexes $P$; the compactified graph chain is an identity of natural transformations on $D^+(U_{\\mathrm{et}},A)$. No preservation of injectives by $\\nu^*$ or invertibility of $\\gamma$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0FND (lemma-pre-derived-adjoint-functors-general), normalized Hom formula; agent derived mate and graph-square calculation; old item step 7 and the derived chain of step 8."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion",
+  "def-weil-etale-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-modules",
+  "lem-sf-comparison-pullback-exact",
+  "lem-weil-pbc-comparison-pullback",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "def-pc-cochain-complex-modules",
+  "lem-sp-et-proet-graph-sheaf-square"
+ ],
+ "proof": [
+  {
+   "text": "Identify the graph direct-image mate d with lowerStarComparisonUpperStarBaseChange by applying iterated_mateEquiv_conjugateEquiv_symm to the canonical comparison right-adjoint square. Both pullback comparisons are the same conjugate isomorphism (with opposite orientation). Thus the named b is exactly rightDerivedFunctorPlusBaseChange d, with no choice of a new comparison.",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback",
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/AlgebraicGeometry/FixedComparisonDirectImageMate.lean",
+    "place": "graphComparisonDirectImageMate, comparisonCoefficientPullbackIso, and the iterated_mateEquiv_conjugateEquiv_symm identity used in graphMate_underived_comparison"
+   }
+  },
+  {
+   "text": "Apply the existing source-library rightDerivedFunctorPlusBaseChange_fac_app to d. Its four factors are precisely W(gamma_et), respectively the exact W localization factor, Q(d), gamma_proet, and the inverse V localization factor. The homotopy composition isomorphisms of identity composite identifications are identities. Componentwise extensionality therefore gives graphMateLeft = graphMateRight for every bounded-below representative, including noninjective ones. This is the defining localization factorization of the canonical base-change map.",
+   "uses": [
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusBaseChangeNaturality.lean",
+    "place": "rightDerivedFunctorPlusBaseChange_fac_app"
+   }
+  },
+  {
+   "text": "For the left transpose, expand homEquiv.symm as L(-) followed by the derived counit. Use fixedComparisonDirectImageMatePlus_counit, cancel only the isomorphism a, and move gamma_et through a inverse by naturality. The existing normalized derivedPlus_counit_app_fac then gives exactly a inverse followed by V of the localized ordinary etale counit. For the right transpose, move the inverse V localization factor through the derived counit by naturality, and apply the primed derivedPlus_counit_app_fac. This gives precisely the stated pro-etale counit expression. The representative equality of the preceding step, transported through the same Hom equivalence, identifies these two expressions.",
+   "uses": [
+    "lem-trf-bounded-below-derived-adjunction",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusAdjunction.lean",
+    "place": "derivedPlus_counit_app_fac, together with FixedComparisonDirectImageMate.lean, fixedComparisonDirectImageMatePlus_counit"
+   }
+  },
+  {
+   "text": "Take the sheaf graph square for the specified compactification and its uniquely specified pro-etale graph map. Apply mapHomotopyCategoryPlus to the equality of natural transformations; this operation preserves composition and whiskering, so the square holds on all bounded-below homotopy representatives. The exact-functor composition and natural-isomorphism factorization formulas compute the derived sigma and open comparison o on those representatives. The localization preimage defining each graph transformation has exactly graphMateRepresentativeGraph as its whiskering with Qh.",
+   "uses": [
+    "lem-sp-et-proet-graph-sheaf-square",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/AlgebraicGeometry/EtaleProEtaleGraphSheafSquare.lean",
+    "place": "etale_proEtale_graph_sheaf_square, transported termwise using PlusBaseChangeNaturality.lean; graphMate_iso_factors and graphMateDerivedGraph_fac in this delivery"
+   }
+  },
+  {
+   "text": "Substitute those factorization equations into the left graph endpoint. The localized sheaf square and naturality of gamma_proet at the actual open comparison identify it with the displayed middle expression. Substitute graphMateRight = graphMateLeft, then use naturality of b at the inverse open-extension localization factor; the result is the whiskering of the right graph endpoint. Fully faithful precomposition with Qh detects equality of the descended endpoints. Only exact-functor localization isomorphisms are canceled; neither gamma nor comparison of injectives is assumed invertible.",
+   "uses": [
+    "lem-sp-et-proet-graph-sheaf-square",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/AlgebraicGeometry/GraphDerivedMateFactorization.lean",
+    "place": "graphMate_graph: sheaf-square transport, naturality, representative compatibility, and fullyFaithfulWhiskeringLeft faithfulness"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-comparison-pullback",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-trf-bounded-below-derived-adjunction",
+  "lem-sp-et-proet-graph-sheaf-square",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-extension-by-zero-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusAdjunction.lean",
+  "place": "derivedPlus_counit_app_fac; existing canonical derived adjunction, together with PlusBaseChangeNaturality.lean, rightDerivedFunctorPlusBaseChange_fac_app"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(rightDerived|derived).*(mate|counit)|mate.*(rightDerived|derived)",
+   "results": "{\"n_hits\": 6, \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Abelian/LeftDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general derived counit and comparison-factorization tools do not identify the specified geometric mate and graph transport."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"mate\"",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general derived counit and comparison-factorization tools do not identify the specified geometric mate and graph transport."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The right derived functor comparison unit is compatible with a mate between two exact inverse image adjunctions",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.Adjunction.derived_unit\", \"CategoryTheory.Adjunction.derivedη.congr_simp\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.Adjunction.Triple.rightToLeft_app_adj₂_unit_app\", \"CategoryTheory.mateEquiv\", \"CategoryTheory.Adjunction.derivedη\", \"CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_unit_app\", \"CategoryTheory.Adjunction.derived'_unit\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general derived counit and comparison-factorization tools do not identify the specified geometric mate and graph transport."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image comparison counit mate commutes with localization of the underived direct image comparison on complexes",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.Adjunction.derivedε_fac_app\", \"CategoryTheory.Adjunction.derivedε_fac_app_assoc\", \"CategoryTheory.Adjunction.derivedη_fac_app\", \"CategoryTheory.Adjunction.derivedη_fac_app_assoc\", \"CategoryTheory.Adjunction.derived'_counit\", \"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general derived counit and comparison-factorization tools do not identify the specified geometric mate and graph transport."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedε_fac_app|derived_counit|rightDerivedFunctorComparison_fac_app",
+   "results": "{\"n_hits\": 3, \"top\": [\"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general derived counit and comparison-factorization tools do not identify the specified geometric mate and graph transport."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedε_fac_app|derived_counit|rightDerivedFunctorComparison_fac_app",
+   "results": "{\"n_hits\": 3, \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read Adjunction.lean lines 38–150 and PointwiseRightDerived.lean lines 65–83; general derived-counit normalization and localization comparison are building blocks, not the specified geometric mate plus compactified graph identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.mateEquiv",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read Adjunction.lean lines 38–150 and PointwiseRightDerived.lean lines 65–83; general derived-counit normalization and localization comparison are building blocks, not the specified geometric mate plus compactified graph identity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived counit mate of an etale proetale pullback comparison agrees with the underived mate after the canonical right derived functor comparison",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.derivedε.congr_simp\", \"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac\", \"CategoryTheory.Adjunction.derivedε_fac_app\", \"CategoryTheory.Adjunction.derived_unit\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read Adjunction.lean lines 38–150 and PointwiseRightDerived.lean lines 65–83; general derived-counit normalization and localization comparison are building blocks, not the specified geometric mate plus compactified graph identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived right adjoint comparison unit carries a chain map to the localization of its ordinary adjoint transpose when the left adjoint is exact",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.Adjunction.derived_unit\", \"CategoryTheory.Adjunction.derived'_unit\", \"CategoryTheory.Adjunction.derivedε_fac_app\", \"CategoryTheory.Adjunction.derivedη_fac_app\", \"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.derivedη\", \"CategoryTheory.Adjunction.derivedε_fac_app_assoc\", \"CategoryTheory.Adjunction.derivedη_fac_app_assoc\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read Adjunction.lean lines 38–150 and PointwiseRightDerived.lean lines 65–83; general derived-counit normalization and localization comparison are building blocks, not the specified geometric mate plus compactified graph identity."
+  },
+  {
+   "tool": "grep",
+   "query": "lemma derivedε_fac_app|lemma derived_counit|def derived|variable|α :|β :",
+   "results": "{\"n_hits\": 5, \"top\": [\"38\", \"43\", \"52\", \"92\", \"96\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read Adjunction.lean lines 38–150 and PointwiseRightDerived.lean lines 65–83; general derived-counit normalization and localization comparison are building blocks, not the specified geometric mate plus compactified graph identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A square of adjunctions with exact left functors has a derived mate compatible with the ordinary mate and the universal comparison from termwise right functor to its derived functor",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.derivedε_fac_app\", \"CategoryTheory.Adjunction.derivedε_fac_app_assoc\", \"CategoryTheory.Adjunction.derivedη\", \"CategoryTheory.Adjunction.derivedη_fac_app\", \"CategoryTheory.Adjunction.derivedη_fac_app_assoc\", \"CategoryTheory.Adjunction.derived_unit\", \"CategoryTheory.Adjunction.derived'_counit\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read Adjunction.lean lines 38–150 and PointwiseRightDerived.lean lines 65–83; general derived-counit normalization and localization comparison are building blocks, not the specified geometric mate plus compactified graph identity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-varying-ring-graph-summand",
+  "date": "2026-10-22",
+  "group": "Q106"
+ },
+ "blueprint": {
+  "from": {
+   "node": "det-sp-tower-gluing",
+   "place": "Local pairs paragraph: 'the etale adjunction ... levelwise extension by zero, counit the fibre sum'; Levels paragraph: evaluation preserves the constructions. Derived mate normalization and representative-level graph transport (old steps 7–8).",
+   "via": [
+    "lem-sp-varying-ring-graph-summand",
+    "lem-sp-coefficient-tower-shriek-calculus"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-graph-derived-mate-factorization",
+  "worker": "stage1",
+  "summary": "Derived the counit normalization at arbitrary bounded-below complexes from the existing normalized Hom formula; calculated both transposes and applied the existing sheaf graph square and naturality of gamma. Reused all substantive facts: no new nodes. Clarified that Q p_* P is a representative-level source, while the graph chain descends to D+.",
+  "blueprint": "det-sp-tower-gluing proof, Local pairs paragraph: 'composing with the etale adjunction ... levelwise extension by zero, counit the fibre sum'; Levels paragraph: evaluation preserves the constructions. Steps 1–4 give the derived mate normalization; Steps 5–7 transport the representative graph square to derived local counits.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-pullback-abelian-exact",
+    "why": "Generic exact-pullback, derived-adjunction, localization, or comparison normalization tool used only for the specified graph comparison; it does not replace the tower-geometric unit route."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Generic exact-pullback, derived-adjunction, localization, or comparison normalization tool used only for the specified graph comparison; it does not replace the tower-geometric unit route."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Generic exact-pullback, derived-adjunction, localization, or comparison normalization tool used only for the specified graph comparison; it does not replace the tower-geometric unit route."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Generic exact-pullback, derived-adjunction, localization, or comparison normalization tool used only for the specified graph comparison; it does not replace the tower-geometric unit route."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic exact-pullback, derived-adjunction, localization, or comparison normalization tool used only for the specified graph comparison; it does not replace the tower-geometric unit route."
+   },
+   {
+    "node": "lem-pc-pre-derived-adjoint-functors-general",
+    "why": "Generic exact-pullback, derived-adjunction, localization, or comparison normalization tool used only for the specified graph comparison; it does not replace the tower-geometric unit route."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic exact-pullback, derived-adjunction, localization, or comparison normalization tool used only for the specified graph comparison; it does not replace the tower-geometric unit route."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "why": "Generic exact-pullback, derived-adjunction, localization, or comparison normalization tool used only for the specified graph comparison; it does not replace the tower-geometric unit route."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic exact-pullback, derived-adjunction, localization, or comparison normalization tool used only for the specified graph comparison; it does not replace the tower-geometric unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-extension-by-zero-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q101-93e242a03",
+  "group": "Q101",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-93e242a03 (reviewer sub-agent of L); spot-checked: Ordinary one-level split with no new nodes. The base is the Q106 node C, which is identical to live and side-live, still unsplit there, and has no repair note. The delivery changes only the final sentence of the statement. It now says the first display is natural in complexes P (its source Q(p_*P) does not descend), while the graph chain is an identity on D^+(U_et,A). This is correct and not a weakening: every display and hypothesis is unchanged, and the parent varying-ring-graph-summand step 2 uses the chain only at a bounded K. Dropping def-pc-fibre-product from stmt_deps is correct. I recomputed every step. Step 2: the 0FND formula with s=t=f=id gives e(γ_B)=Q(ε^0_B), which is the counit identity (*). On the pro-étale side the cocone at id is Q(u_*i_B); def-weil-pbc-proetale-operations defines the adjunction as this 0FND bijection, and canonical-mate cites it for both pairs. Step 3: the canonical-mate normalization (finite Λ, qcqs, D^+), naturality of a^{-1}, then (*). Step 4: the mate of α=a^{-1} with L_1=l, L_2=L, G=W, H=V gives ε^0L(d)=V(ε^0)a^{-1}; the two transposes are equal, and the Hom bijection is injective. Step 5: every hypothesis of the graph-sheaf-square node is present; the square holds degreewise, then naturality of γ at o_K. Step 6 is elementary. Step 7: e_Σ! and j_! are exact and o identifies the pro-étale target, so localization-universal-property (2)/(3) descends the outer terms. Small cases p=id, e=id, U=∅ and non-injective P all check. No SGA, no cycle. I accept the declared tool_uses (generic exactness, derived-adjunction, localization and normalization tools). Advisory: lem-trf-bounded-below-derived-mate-model (reviewed pass) is a generic form of the first clause. Its adjunction has the same counit identity (*), so the two adjunctions coincide. The report's search missed it, but re-deriving the clause from 0FND is correct and about as long, so it is not a fault. Review in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GraphDerivedMateFactorization",
+  "declaration": "AlgebraicGeometry.ProEtale.graph_derived_mate_factorization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.graphMateHomotopyComparison",
+   "AlgebraicGeometry.ProEtale.graphMateLeft",
+   "AlgebraicGeometry.ProEtale.graphMateRight",
+   "AlgebraicGeometry.ProEtale.graphMateEtaleCounitExpression",
+   "AlgebraicGeometry.ProEtale.graphMateProEtaleCounitExpression",
+   "AlgebraicGeometry.ProEtale.GraphMateRepresentativeCompatibility",
+   "AlgebraicGeometry.ProEtale.graphMateRepresentativeGraph",
+   "AlgebraicGeometry.ProEtale.graphMateDerivedGraph",
+   "AlgebraicGeometry.ProEtale.GraphMateGraphCompatibility",
+   "AlgebraicGeometry.ProEtale.GraphMateGeometricGraphCompatibility",
+   "AlgebraicGeometry.ProEtale.graph_derived_mate_factorization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GraphDerivedMateFactorization.lean",
+  "statement": "theorem graph_derived_mate_factorization (A : Type (u + 1)) [CommRing A] [Finite A] : (∀ {Z T : Scheme.{u}} (p : Z ⟶ T) [QuasiCompact p] [QuasiSeparated p], GraphMateRepresentativeCompatibility (Etale.upperStar (ModuleCat.{u + 1} A) p) (Etale.lowerStar (ModuleCat.{u + 1} A) p) (upperStar (ModuleCat.{u + 1} A) p) (lowerStar (ModuleCat.{u + 1} A) p) (comparisonUpperStar (ModuleCat.{u + 1} A) Z) (comparisonUpperStar (ModuleCat.{u + 1} A) T) (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) p) (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) p) (derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} A) p) (fixedComparisonPullbackPlus A p) (graphComparisonDirectImageMate A p) (fixedComparisonDirectImageMatePlus A p)) ∧ ∀ {U T : Scheme.{u}} (e : U ⟶ T) [Etale e] [IsSeparated e] [LocallyOfFiniteType e] [QuasiCompact e] (c : Compactification e), GraphMateGeometricGraphCompatibility A e c",
+  "branch": "newtargets-dag",
+  "by": "Q106",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The theorem instantiates categorical expression helpers with the existing canonical geometric maps. Representative equality is a natural-transformation equality on bounded-below homotopy categories (hence on complexes); the graph chain includes its actual localization descent on D+. No extra hypothesis or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c1063a070",
+  "group": "Q106",
+  "result": "pass",
+  "note": "Node unchanged except lean; statement verbatim; 11 decls recorded, only main proof sorry. a, b and d all come from comparisonUpperStarCompUpperStarIso (a = its derived symm; d = mate of comparisonCoefficientPullbackIso.inv, which is that iso's hom; b = derived base change of the same underived mate), so the main equation W(γ_et)≫b = Q(d)≫γ_proet and both transposes (a⁻¹·VQ(ε⁰) and Q(L(d)·ε'⁰) via homEquiv.symm of the derived L⊣R) match the node. qcqs p; étale/separated/finite-type/qc e with Compactification (proper g, open i) equals the node's hypotheses (j qc iff e qc). Graph chain uses graph-square G_et/G_proet, σ, o, d/b at c.g; Θ descended by fullyFaithfulWhiskeringLeft.preimage; pinned aliases are non-vacuous; left=middle, middle=right on reps and left=right on D+. No extra hypotheses, no hollow defs, docstrings complete, no compile needed (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z6",
+  "result": "pass",
+  "landing": "20261026T093118-L-3529544",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,280 @@
+{
+ "id": "lem-sfb-normal-principal-open-continuous-sections",
+ "kind": "statement",
+ "title": "Continuous coefficient sections across a normal principal open",
+ "statement": "Let $Q$ be a commutative normal ring, meaning that each prime localization is a domain integrally closed in its fraction field [def-weil-pbc-normal-ring]. Let $s\\in Q$ have injective multiplication on $Q$, put $X=\\operatorname{Spec}Q$ [def-weil-affine-spectrum], and let $i:X_s=\\operatorname{Spec}Q[1/s]\\hookrightarrow X$ be the principal open immersion, where localization is [def-weil-ring-localization-away]. Let $E$ be a nonarchimedean normed field, meaning that its absolute value satisfies $|a+b|\\leq\\max(|a|,|b|)$, with its metric topology. Define the commutative condensed ring $C_E(P)=C(P,E)$ on profinite sets using all continuous maps, and its coefficient sheaves $C_{E,Z}=p_Z^*C_E$ on small pro-etale sites [def-sfb-continuous-map-condensed-ring, sk-def-sfb-pulled-back-coefficients, def-weil-pbc-proetale-site]. Then inverse image induces a bijection on clopen subsets and a homeomorphism\n$$h:\\pi_0(X_s)\\xrightarrow{\\sim}\\pi_0(X),\\qquad hq_{X_s}=q_Xi,$$\nwhere $\\pi_0$ is the set of connected components with the quotient topology and $q$ is the component projection. Actual restriction induces ring bijections\n$$C(|X|,E)\\xrightarrow{\\sim}C(|X_s|,E),\\qquad\n\\Gamma(X,C_{E,X})\\xrightarrow{\\sim}\\Gamma(X_s,C_{E,X_s}).$$\nUnder the canonical continuous-function realization [lem-weil-pbc-condensed-field-continuous-realization] these are the same map. The inverse on functions sends $a=\\bar a q_{X_s}$ to $\\bar a h^{-1}q_X$. For every scheme $Z$ and affine pro-etale object $X\\to Z$, the same coefficient bijection holds for evaluation of $C_{E,Z}$ on $X$ and $X_s$. These bijections and their inverses are natural for every morphism $v:X'\\to X$ between such normal affine pairs with $v^{-1}(X_s)=X'_{s'}$: restriction commutes with precomposition by $v$ and $v|_{X'_{s'}}$. No Noetherian or integral-domain assumption on $Q$ is imposed. The zero ring and $s=1$ are included.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent consequence of Tag 034M (lemma-normal-ring-integrally-closed), via clopen idempotents; Bhatt–Scholze, The pro-etale topology for schemes, Lemma 4.2.12, and Hemo–Richarz–Scholbach, Constructible sheaves on schemes, Example 3.1. Extracts returned parent proof steps 2–5; not a verbatim Stacks assertion."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-normal-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-ring-localization-away",
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-condensed-field-continuous-realization",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+ ],
+ "proof": [
+  {
+   "text": "Write $K=S^{-1}Q$ for the total fraction ring, where $S$ is the set of nonzerodivisors. The fraction relations in [def-weil-ring-localization-away] and [def-weil-pbc-module-localization] give injections $Q\\to Q[1/s]\\to K$: every power of $s$ is regular, and if $u a=0$ for $u\\in S$, then $a=0$. Thus we may regard both rings as subrings of $K$. An idempotent $b\\in Q[1/s]$ satisfies the monic equation $b^2-b=0$ in $K$, hence is integral by [def-weil-pbc-integral-closure]. By [lem-weil-pbc-normal-ring-integrally-closed-total] it is the image of some $e\\in Q$. Injectivity gives $e^2=e$ and uniqueness. Conversely every idempotent of $Q$ remains idempotent after localization. Hence localization induces a bijection on idempotents.",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-integral-closure",
+    "lem-weil-pbc-normal-ring-integrally-closed-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 034M, lemma-normal-ring-integrally-closed; elementary fraction calculation and monic equation"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-spec-clopen-idempotent] to $Q$ and $Q[1/s]$. The clopen attached to $e$ is $D(e)$. A prime of $Q[1/s]$ contains the image of $e$ exactly when its contracted prime contains $e$, so $i^{-1}D(e)=D(e/1)$. The bijection on idempotents of step 1 therefore identifies actual inverse image on clopens with a bijection.",
+   "uses": [
+    "lem-weil-pbc-spec-clopen-idempotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00EE, lemma-disjoint-decomposition; inverse image under prime contraction"
+   }
+  },
+  {
+   "text": "Both $X$ and $X_s$ are affine, hence quasi-compact and quasi-separated by [lem-weil-pbc-affine-scheme-qcqs], and their underlying spaces are spectral by [lem-weil-pbc-qcqs-scheme-spectral]. Apply [lem-sfb-spectral-clopen-component-homeomorphism] to the continuous map $i$ and the clopen bijection of step 2. This gives precisely $h:\\pi_0(X_s)\\cong\\pi_0(X)$ with $hq_{X_s}=q_Xi$, using the quotient topologies stipulated in the statement.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-scheme-spectral",
+    "lem-sfb-spectral-clopen-component-homeomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0906, lemma-spectral-pi0; clopen criterion supplied by the cited existing node"
+   }
+  },
+  {
+   "text": "Use [lem-sfb-ultrametric-component-map-extension] with $Y=|X_s|$, $Z=|X|$, $A=E$, and the normalized $i,h$ of step 3. Its hypotheses require exactly the stated nonarchimedean absolute value. It gives total disconnectedness of $E$, the unique continuous factor $a=\\bar a q_{X_s}$, and the ring bijection given by actual restriction, with inverse $a\\mapsto\\bar a h^{-1}q_X$. No compactness or completeness hypothesis on $E$ is used.",
+   "uses": [
+    "lem-sfb-ultrametric-component-map-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.2.12, component factorization; existing ultrametric extension tool"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-condensed-field-continuous-realization], the totally disconnected normed field $E$ has its canonical ring-sheaf realization by continuous functions. Its normalization is the comparison of [def-sfb-continuous-ring-canonical-comparison]. The scheme-pullback equation of [lem-sfb-normalized-continuous-set-comparison-coherence], applied to its underlying set sheaves, says that this comparison intertwines the point-pullback coefficient identification and precomposition on functions. Thus the actual coefficient restriction for $i$ is the function restriction in step 4, and is bijective. Applying the same realization on any $Z$, its evaluation at objects $X\\to Z$ and $X_s\\to Z$ is $C(|X|,E)\\to C(|X_s|,E)$ with exactly this restriction. The normalization hypotheses of the coherence node hold because both comparisons are defined by the same profinite-test adjunct equations; its sheaf hypotheses hold by the ring-sheaf realization.",
+   "uses": [
+    "lem-weil-pbc-condensed-field-continuous-realization",
+    "def-sfb-continuous-ring-canonical-comparison",
+    "lem-sfb-normalized-continuous-set-comparison-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1 and following scheme-pullback paragraph, p.6; normalized comparison equation"
+   }
+  },
+  {
+   "text": "For a morphism of pairs $v:X\\prime\\to X$, let $v_s:X\\prime_{s\\prime}\\to X_s$ be its restriction. The equality $vi\\prime=iv_s$ gives $(g\\circ v)\\circ i\\prime=(g\\circ i)\\circ v_s$. This proves naturality of restriction. If $E_X$ and $E_{X\\prime}$ denote the inverses constructed in step 4, both $E_X(a)\\circ v$ and $E_{X\\prime}(a\\circ v_s)$ restrict to $a\\circ v_s$; injectivity for $X\\prime$ makes them equal. Step 5 transports these equalities to coefficients. If $Q=0$, both spectra are empty, their component spaces and clopen sets are empty and singleton respectively, and the function and section rings have one element. If $s=1$, all maps are identities. Each preceding argument also includes these cases.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary composition, uniqueness and empty-case verification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-integral-closure",
+  "lem-weil-pbc-normal-ring-integrally-closed-total",
+  "lem-weil-pbc-spec-clopen-idempotent",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-sfb-spectral-clopen-component-homeomorphism",
+  "lem-sfb-ultrametric-component-map-extension",
+  "lem-weil-pbc-condensed-field-continuous-realization",
+  "def-sfb-continuous-ring-canonical-comparison",
+  "lem-sfb-normalized-continuous-set-comparison-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 034M and Tag 00EE; spectral and continuous-coefficient assembly using the sources specified in the steps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a normal commutative ring R and a nonzerodivisor s, continuous p adic valued functions on Spec R restrict bijectively to the principal open D(s)",
+   "results": "8 hits: Rat.HeightOneSpectrum.adicCompletion.padicEquiv_bijOn, PrimeSpectrum.toPiLocalization_bijective, ValuationSubring.primeSpectrumEquiv_apply, Rat.HeightOneSpectrum.adicCompletion.padicEquiv, Rat.HeightOneSpectrum.adicCompletionIntegers.padicIntEquiv, Rat.HeightOneSpectrum.withValEquiv, Rat.HeightOneSpectrum.adicCompletionIntegers.coe_padicIntEquiv_symm_apply, Localization.AtPrime.mapPiEvalRingHom_bijective",
+   "date": "2026-10-22",
+   "verdict": "no match: normal topological spaces, structure-sheaf localizations and discrete-spectrum maps do not give the normal principal-open continuous-coefficient assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ContinuousMap\", \"PrimeSpectrum\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: normal topological spaces, structure-sheaf localizations and discrete-spectrum maps do not give the normal principal-open continuous-coefficient assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(normal|IsIntegrallyClosed).*(continuous|ContinuousMap)|(continuous|ContinuousMap).*(localization|PrimeSpectrum)",
+   "results": "25 hits: Mathlib/FieldTheory/Galois/Profinite.lean, Mathlib/FieldTheory/Galois/Profinite.lean, Mathlib/FieldTheory/Galois/Profinite.lean, Mathlib/Geometry/Euclidean/SignedDist.lean, Mathlib/Geometry/Euclidean/SignedDist.lean, Mathlib/Topology/Order/IsNormal.lean, Mathlib/Topology/Order/IsNormal.lean, Mathlib/Topology/Order/IsNormal.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: normal topological spaces, structure-sheaf localizations and discrete-spectrum maps do not give the normal principal-open continuous-coefficient assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous E valued functions extend uniquely from the nonzerodivisor principal open of the spectrum of a normal ring",
+   "results": "8 hits: BoundedContinuousFunction.exists_norm_eq_restrict_eq, LinearMap.extendOfNorm_unique, ContinuousMap.exists_restrict_eq, ContinuousMapZero.UniqueHom.mk, HasCompactMulSupport.continuous_extend_one, ContinuousMap.mem_idealOfSet_compl_singleton, NNReal.instContinuousMapZero.UniqueHom, MvPowerSeries.eval₂_unique",
+   "date": "2026-10-22",
+   "verdict": "no match: normal topological spaces, structure-sheaf localizations and discrete-spectrum maps do not give the normal principal-open continuous-coefficient assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization at a regular element of a normal ring induces a homeomorphism on connected component spaces of spectra and an isomorphism on pulled back continuous condensed field sections",
+   "results": "8 hits: AlgebraicGeometry.StructureSheaf.isIso_toBasicOpen, AlgebraicGeometry.StructureSheaf.isIso_to_global, AlgebraicGeometry.StructureSheaf.to_global_factors, AlgebraicGeometry.StructureSheaf.basicOpenIso, AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen, AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_iff, AlgebraicGeometry.StructureSheaf.instIsIsoCommRingCatStalkToFiberRingHom, AlgebraicGeometry.StructureSheaf.instIsIsoCommRingCatLocalizationToStalk",
+   "date": "2026-10-22",
+   "verdict": "no match: normal topological spaces, structure-sheaf localizations and discrete-spectrum maps do not give the normal principal-open continuous-coefficient assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(ContinuousMap|continuous).*(basicOpen|IsLocalization|nonZeroDivisors)|(basicOpen|IsLocalization|nonZeroDivisors).*(ContinuousMap|continuous)",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: normal topological spaces, structure-sheaf localizations and discrete-spectrum maps do not give the normal principal-open continuous-coefficient assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Idempotents and continuous nonarchimedean field valued functions extend uniquely from a regular principal open of the spectrum of a normal commutative ring",
+   "results": "8 hits: PrimeSpectrum.existsUnique_idempotent_basicOpen_eq_of_isClopen, AlgebraicGeometry.StructureSheaf.const_ext, PrimeSpectrum.coe_isIdempotentElemEquivClopens_apply, PrimeSpectrum.isIdempotentElemEquivClopens_apply_toOpens, PrimeSpectrum.basicOpen_injOn_isIdempotentElem, PrimeSpectrum.exists_idempotent_basicOpen_eq_of_isClopen, PrimeSpectrum.basicOpen_isIdempotentElemEquivClopens_symm, PrimeSpectrum.basicOpen_eq_zeroLocus_of_isIdempotentElem",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give clopen-idempotent correspondence, domain-only integral closure, or unrelated continuous functional calculus; none gives all clauses for arbitrary normal rings"
+  },
+  {
+   "tool": "grep",
+   "query": "(ContinuousMap|continuous).*(basicOpen|IsLocalization|nonZeroDivisors)|(basicOpen|IsLocalization|nonZeroDivisors).*(ContinuousMap|continuous)",
+   "results": "4 hits: Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/Topology/Convenient/Localization.lean, Mathlib/Topology/Convenient/Localization.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give clopen-idempotent correspondence, domain-only integral closure, or unrelated continuous functional calculus; none gives all clauses for arbitrary normal rings"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous functions on the spectrum of a normal ring extend uniquely from the principal open of a nonzerodivisor",
+   "results": "8 hits: NonUnitalStarAlgHom.ext_continuousMap, cfcHom_eq_of_continuous_of_map_id, cfcHom_eq_cfc_extend, Units.continuousOn_inv₀_spectrum, Units.continuousOn_zpow₀_spectrum, ContinuousMapZero.UniqueHom.mk, Continuous.cfc_of_mem_nhdsSet, ContinuousOn.cfc_of_mem_nhdsSet",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give clopen-idempotent correspondence, domain-only integral closure, or unrelated continuous functional calculus; none gives all clauses for arbitrary normal rings"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ContinuousMap\", \"PrimeSpectrum\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give clopen-idempotent correspondence, domain-only integral closure, or unrelated continuous functional calculus; none gives all clauses for arbitrary normal rings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A regular localization of a ring integrally closed in its total ring of fractions has exactly the same idempotents as the original ring",
+   "results": "8 hits: integralClosure_idem, IsFractionRing.idem, IsLocalization.away_of_isIdempotentElem, IsLocalization.away_of_isIdempotentElem_of_mul, isIntegrallyClosed_of_isLocalization, IsLocalization.Away.quotient_of_isIdempotentElem, IsIntegrallyClosed.of_localization_submonoid, IsIntegrallyClosed.of_localization",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give clopen-idempotent correspondence, domain-only integral closure, or unrelated continuous functional calculus; none gives all clauses for arbitrary normal rings"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-root-tower-lisse-morphism-extension",
+  "date": "2026-10-22",
+  "group": "Q12"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Direct-images paragraph (3), supplied-root lisse morphism argument: returned parent steps 2–5, normal principal-open clopens, component quotient and actual continuous coefficient sections. Nearest inherited blueprint ancestor is None; intended source anchor det-thm-sf-ctf-stability-direct-images (3).",
+   "via": [
+    "lem-sfb-root-tower-lisse-morphism-extension",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-normal-principal-open-continuous-sections",
+  "worker": "stage1",
+  "summary": "Proved the split by regular-localization idempotents, the existing clopen criterion for spectral components, the existing ultrametric extension theorem, and normalized coefficient realization. Reused all needed facts, with no new nodes or changed statement. Checked empty spectra and identity opens.",
+  "blueprint": "Realizes direct-images paragraph (3), supplied-root lisse-morphism argument, normal principal-open coefficient restriction; inherited blueprint ancestor is null as reported by blueprint_refs.py ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-normal-ring-integrally-closed-total",
+    "why": "Generic commutative algebra theorem used to bring an integral idempotent in the total fraction ring into Q; the unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-field-continuous-realization",
+    "why": "Generic coefficient realization identifies the actual coefficient sections with continuous functions, beyond the unit-specific direct-image argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-normal-ring-integrally-closed-total",
+  "lem-weil-pbc-condensed-field-continuous-realization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q101-ab8941d26",
+  "group": "Q101",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-ab8941d26 (reviewer sub-agent of L); spot-checked: I read the statement, all 6 steps and all 12 cited statements; the delivery adds no new nodes and keeps the base statement. Sources: Stacks algebra.tex 034M (normal rings are integrally closed in the total ring of fractions, with no minimal-prime hypothesis) and topology.tex lemma-spectral-pi0. Step 1: s regular makes Q→Q[1/s]→K injective; the monic t²−t and 034M give the idempotent bijection. Step 2: i⁻¹D(e)=D(e/1) plus the clopen-idempotent leaf gives a clopen bijection. Step 3: affine⇒qcqs⇒spectral, then the spectral clopen-component lemma gives h with hq_{X_s}=q_X i. Step 4: ultrametric component-extension, hypotheses matched, inverse formula identical. Step 5: realization (totally disconnected E from step 4) plus the coherence pullback square with D=E (Hausdorff, totally disconnected; normalization r_{X,S}=π_S) conjugate coefficient restriction to precomposition, and the Z-evaluation clause follows from naturality of the sheaf isomorphism. Step 6: naturality by injectivity, and the Q=0 and s=1 cases hold. Tested: k[x] with s=x, Z with s=2, k×k with s=(1,0) (non-regular, excluded), and the non-normal k[x,y]/(xy) with s=x+y, which disconnects the axes, so normality is needed. Duplicate search found nothing (punctured-idempotent-complement is a different statement). No cycle, no SGA. Accepted tool_uses: normal-ring-integrally-closed-total and condensed-field-continuous-realization (both generic). Advisory: step 5's move from ring-level p_X^* to set-level σ is elementary (left-exact inverse images commute with the forgetful functor)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalPrincipalOpenContinuousSections",
+  "declaration": "AlgebraicGeometry.ProEtale.normal_principal_open_continuous_sections",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.normalPrincipalOpenInclusion",
+   "AlgebraicGeometry.ProEtale.principalContinuousCoefficientSections",
+   "AlgebraicGeometry.ProEtale.principalContinuousCoefficientObjectRestriction",
+   "AlgebraicGeometry.ProEtale.principalContinuousCoefficientGlobalRestriction",
+   "AlgebraicGeometry.ProEtale.principalContinuousCoefficientRealization",
+   "AlgebraicGeometry.ProEtale.normal_principal_open_clopen_components",
+   "AlgebraicGeometry.ProEtale.normal_principal_open_continuous_sections",
+   "AlgebraicGeometry.ProEtale.normal_principal_open_coefficient_sections",
+   "AlgebraicGeometry.ProEtale.normal_principal_open_coefficient_object_sections",
+   "AlgebraicGeometry.ProEtale.normal_principal_open_continuous_sections_natural",
+   "AlgebraicGeometry.ProEtale.normal_principal_open_coefficient_sections_natural",
+   "AlgebraicGeometry.ProEtale.normal_principal_open_coefficient_object_sections_natural"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalPrincipalOpenContinuousSections.lean",
+  "statement": "theorem normal_principal_open_continuous_sections (Q : Type u) [CommRing Q] (hnormal : ∀ (p : Ideal Q) [p.IsPrime], IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)) (s : Q) (hs : Function.Injective (fun x : Q ↦ s * x)) (E : Type u) [NormedField E] [IsUltrametricDist E] : ∃ h : ConnectedComponents (Spec (.of (Localization.Away s))) ≃ₜ ConnectedComponents (Spec (.of Q)), ∃ r : C(Spec (.of Q), E) ≃+* C(Spec (.of (Localization.Away s)), E), (∀ x : Spec (.of (Localization.Away s)), h (ConnectedComponents.mk x) = ConnectedComponents.mk (normalPrincipalOpenInclusion Q s x)) ∧ (∀ a : C(Spec (.of Q), E), r a = a.comp (normalPrincipalOpenInclusion Q s).base.hom) ∧ (∀ a : C(Spec (.of (Localization.Away s)), E), ∃! b : C(ConnectedComponents (Spec (.of (Localization.Away s))), E), a = b.comp ⟨ConnectedComponents.mk, ConnectedComponents.continuous_coe⟩) ∧ (∀ (a : C(Spec (.of (Localization.Away s)), E)) (x : Spec (.of Q)), r.symm a x = a.continuous.connectedComponentsLift (h.symm (ConnectedComponents.mk x)))",
+  "branch": "sheaf-dag",
+  "by": "Q73",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The seven theorem declarations jointly state all clauses: actual clopen inverse image and normalized component homeomorphism; continuous-function ring bijection and component inverse; actual global coefficient restriction and its canonical realization square; evaluation on every affine pro-etale object; forward and inverse naturality for functions, global coefficients and ambient-site evaluation. The five helper declarations only package the actual Spec localization map, existing section-ring evaluation, sheaf restriction, the existing canonical coefficient mate on terminal sections, and the existing uniquely normalized realization. No hypothesis or natural-language statement is changed. The additional landed statement dependency supplies the existing tensor-induced section-ring reconstruction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-851c33851",
+  "group": "Q73",
+  "result": "pass",
+  "note": "Read node, all 8 stmt_deps and the side-live sources of continuousCoefficientRingObj, continuousMapRingObjOfUniverse, condensedFieldContinuousMapIso, condensedPullbackHom/condensedPushforwardHom and presheafRings. Every clause is rendered: clopen bijection; h : π0(X_s) ≃ₜ π0(X) with h q = q i; ring bijection r = actual precomposition with the unique component factor and the inverse ā h⁻¹ q_X; global coefficient restriction = η_i at X plus canonical X_s → X ×_X X_s restriction, pinned by the uniquely characterized realization square; evaluation on X→Z, X_s→Z for every Z; forward and inverse naturality squares for functions, global sections and object evaluations under hv/hopen. No extra hypotheses; Q=0 and s=1 covered; E : Type u forced by the landed realization dependency. Node diff vs live: only lean plus one added landed def stmt_dep (allowed by brief §5); statement verbatim; 12 declarations recorded; helpers are real data; docstrings carry source, blueprint and proof steps; only theorem sorries. No duplicate found. No compile run: no file changed. Advisories: A1 condensedPushforwardHom/condensedPullbackHom owners (sk-def-sfb-coefficient-morphisms, def-sfb-eta) not in stmt_deps; A2 continuousCoefficientRingObj (def-weil-pbc-condensed-e-module-category) is the same construction as def-sfb-continuous-map-condensed-ring's object at equal universes, required by the realization dependency; A3 presheafRings not in the added dependency's declarations list."
+ }
+}

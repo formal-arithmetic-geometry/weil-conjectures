@@ -1,0 +1,56 @@
+## Worker report
+
+Files written (all under this item's sandbox):
+- dag/nodes/sec-six-functors-basics/lem-sfb-space-relative-perfect-base-change.json: the existing item, now split into five steps, statement unchanged.
+- dag/nodes/sec-six-functors-basics/lem-sfb-space-ring-sheaf-tor-amplitude-stalk-test.json: statement, unsplit; no Mathlib match.
+- dag/nodes/sec-six-functors-basics/lem-sfb-space-tor-independent-relative-amplitude.json: statement, unsplit; no Mathlib match.
+- citations.json: one verbatim statement quotation for every node used by every proof step.
+- report.md: this report. searches.jsonl retains the actual searches executed through msearch.py.
+
+Attachments: none. Searches of lean/WeilConjectures for the exact blueprint tag, relative-perfect terminology and pseudo-coherent pullback yielded no declaration proving the item. Ring pseudo-coherence and scheme perfectness declarations do not state the algebraic-space assertion.
+
+WANTED: none.
+
+The imported node had no proof. Its hypotheses and conclusion agree with spaces-more-morphisms.tex definition-relatively-perfect (0DKN), lemma-affine-locally-rel-perfect (0DKQ), lemma-base-change-relatively-perfect (0DKT), and spaces-perfect.tex lemma-pseudo-coherent (08JL). Its inline local-model convention for pseudo-coherence is retained. I did not change the statement, source or maintainer fields. The new nodes isolate relative Tor amplitude without pseudo-coherence and a stalk criterion for arbitrary coefficient ring sheaves; they do not repackage clauses of relative perfectness.
+
+The chapter, the three levels in SETUP.md, the unit sk-thm-sf-ctf-stability, and the latest blueprint direct-images proof (3) were read. The inherited from.place records the much deeper stable-curve duality prerequisite; blueprint_refs.py ancestor returns None, which is retained rather than inventing an imported ancestor. The two new from records prepend this item to the inherited via chain and state the exact supporting role. No chapter or unit route is changed.
+
+## Searches and existing nodes
+
+Before creating nodes I searched the whole DAG by 0DKD, 0DJJ, 04K5, relative-perfectness, pseudo-coherence, Tor amplitude, stalks, and flat base change. Whole imported-blueprint searches via blueprint_refs.py for relatively perfect, relative perfect, pseudo-coherent, pseudo coherent, pseudo-coherent pullback, derived pullback pseudo, Tor-independent, tor amplitude stalk, finite tor dimension base change, 0DKQ, 0DKD, 0DJJ and 08H4 found no equivalent blueprint theorem. Broad tor amplitude results have constant finite coefficients, not an arbitrary inverse-image structure ring. Existing quasi-coherent kernels/colimits, etale presentation, K-flat restriction and bounded-above K-flat results are reused. Scheme and ringed-space Tor tests were opened and are not applicable as algebraic-space coefficient-ring-sheaf tests.
+
+Each new node records the exact executed semantic, Loogle and grep queries and the corresponding search log records. Two semantic phrasings were read for each question. No new node is a Mathlib leaf: the Tor searches return underived scalar base change, scheme flatness, and ordinary derived-category cohomological bounds; stalk-flat hits concern ranks of modules or scheme morphisms. I opened Mathlib/AlgebraicGeometry/Morphisms/Flat.lean around its base-change and stalk-map declarations and RingTheory/Spectrum/Prime/FreeLocus.lean around isLocallyConstant_rankAtStalk. They supply neither Tor-amplitude theorem. The pseudo-coherent search results only give underived module pullbacks and general derived-functor infrastructure; PullbackContinuous.lean explicitly defines an underived left adjoint.
+
+## Not duplicates
+
+lem-sfb-space-ring-sheaf-tor-amplitude-stalk-test vs lem-sf-direct-image-tor-amplitude-noetherian: the latter gives a direct-image bound for constant coefficients with geometric hypotheses; the new statement tests an arbitrary ring sheaf on an algebraic space, with no direct image.
+lem-sfb-space-ring-sheaf-tor-amplitude-stalk-test vs lem-sf-etale-stalk-tor-test: the existing theorem is on a scheme with a constant coefficient ring; the new one allows an algebraic space and any ring sheaf, including an inverse-image structure sheaf.
+lem-sfb-space-ring-sheaf-tor-amplitude-stalk-test vs lem-sf-etale-module-stalk-cohomology-test: exactness and cohomology detection for constant coefficients do not assert the arbitrary-ring derived tensor test.
+lem-sfb-space-ring-sheaf-tor-amplitude-stalk-test vs lem-sfb-space-stalk-ideal-pullback: the existing node assumes a square-zero thickening square and computes its ideal map; the new criterion assumes no thickening and tests derived tensor against all stalk-ring modules.
+lem-sfb-space-ring-sheaf-tor-amplitude-stalk-test vs lem-trf-ringed-tor-amplitude-stalk-test: the latter is on a topological space's open site, not the small etale site of an algebraic space.
+lem-sfb-space-tor-independent-relative-amplitude vs lem-sfb-space-relative-perfect-base-change: the new result has no pseudo-coherence or finite-presentation hypothesis and supplies only the fixed-interval Tor transport in a Tor-independent square; the item's proof separately proves locality, quasi-coherence, the new morphism hypotheses and pseudo-coherence of pullback.
+lem-sfb-space-tor-independent-relative-amplitude vs lem-sfb-flat-families-tor-independent: the latter concerns schemes and gives Tor independence from two flat families over a common base, not preservation of relative Tor amplitude on spaces.
+
+lem-sfb-space-tor-independent-relative-amplitude vs lem-sfb-space-strict-local-flatness: 04NG identifies flat morphisms with flat geometric-stalk ring maps; the new statement uses this only to recognize the flat sufficient case of Tor independence and then asserts preservation of relative derived Tor intervals, which the existing node does not state.
+
+## Source error
+
+In spaces-perfect.tex Tag 0DKD clause (1), the printed target ring is written using f inverse-image of O_(Y-prime), which is ill-typed because f has source X and target Y. The correct expression is f-prime inverse-image of O_(Y-prime) on X-prime. The new node writes this expression correctly, matching the diagram and the proof's stalk calculation. In spaces-properties.tex 04K5, the final sentence prints geometric points of S although the stalks in the statement and proof are geometric points of X; the new node uses X. These are source typos, not changes to the dispatched item's statement.
+
+## Review by Q86
+
+I reread B--E with the delivered files and the Stacks statements open. The first new statement is exactly the two implications of sites-cohomology.tex 0DJJ (lemma-tor-amplitude-stalk) on the small etale site, whose enough-points theorem is spaces-properties.tex 04K5. It permits arbitrary R: this matters because f inverse-image O_Y is generally neither constant nor O_X. It is stated independently of the item, without a proof or proof dependencies. The second new statement is spaces-perfect.tex 0DKD (lemma-tor-independence-and-tor-amplitude), clause (1), with Tor independence explicitly defined using 08IP. I checked the flat case against geometric-stalk flatness 04NG: a flat first module has no higher Tor with any second module. No flatness of g is smuggled in. It too has no proof steps or proof dependencies.
+
+Step 1 uses def-trf-algebraic-space for etale structure-ring restriction, the new stalk test for the Tor criterion for arbitrary ring sheaves, and lem-sfb-space-strict-local-flatness for the isomorphism of strict local rings on etale charts. Pseudo-coherence is local from the item's local free-model convention, and composing covering families proves the converse; no uniform global interval is asserted. This realizes 0DKQ's locality argument. Each cited node says the indicated fact in its statement.
+
+Step 2 uses def-trf-space-quasi-coherent-module for finite-free presentations and locality and lem-sfb-space-qcoh-kernels-colimits for kernels, images and cokernels. Writing H^i as ker(d^i)/im(d^(i-1)) is the full calculation in 08JL; no new node repeats that clause and no Noetherian coherent-sheaf result is substituted.
+
+Step 3 uses lem-trf-space-fibre-products-etale-covers for the actual fibre product and the pulled-back cover, lem-sfb-space-flat-proper-fp-locality only for its separate flat base-change clause, lem-sfb-space-etale-presentation-property-criterion for existence and sufficiency of presentation diagrams, lem-sfb-scheme-etale-source-target-properties for applicability to local finite presentation, and clause (3) of lem-weil-pbc-qcqs-morphism-permanence for its scheme base-change clause. This does not infer global finite presentation from local finite presentation or impose properness. The presentations cover Y-prime after pulling back an atlas of Y; the corresponding source charts cover X-prime. The scheme hypotheses of the scheme-only result are satisfied by these charts.
+
+Step 4 uses bounded-above-flat-K-flat on sites (lem-pc-bounded-above-flat-kflat-site) and K-flat restriction (lem-sfb-ringed-site-restriction-kflat), not the similarly named ringed-space-only lemma. On a refinement of a pulled-back chart the tensor formula in def-trf-space-etale-module-functors sends a finite free term of rank r to the same rank and applies the ring map to the differential matrix. Exact restriction of a K-flat resolution identifies this calculation with the restricted derived pullback. The step writes the finite-free calculation rather than hiding pseudo-coherence in a relative-perfectness node. The generic K-flat facts are declared as off-unit tools; fibre-product covers are likewise a generic tool, not the trace-formula proof route.
+
+Step 5 applies the new relative-amplitude node locally with the flat-case hypothesis furnished by the original f. The interval is chosen on the original chart, retained on its pullback, and can vary across charts; together with step 4 and the hypotheses verified in step 3 it gives precisely Y-prime-perfectness. The item never requires boundedness on the entire space.
+
+I tested the zero complex and empty spaces, identity base change, an arbitrary nonflat base change (for example Z to F_p of the flat identity family), and constant intervals over a point. The fixed-interval and stalk assertions allow zero objects and need no finiteness. Omitting Tor independence would fail already for Z to F_p compared with itself: derived tensor of F_p with F_p over Z has an extra negative cohomology group. This checks why the new hypothesis is needed. Non-quasi-compact sources permit different local intervals and the proof never takes their global maximum. I checked that no newly cited dependency reaches back to the item. All five steps are below 2000 characters; the longest is under 1000. The two new nodes have self-contained statements, exact Stacks tags and labels, single-escaped TeX, searched notions, and no inline proofs. citations.json contains the complete verbatim statement used for each citation. No Lean was written and no compiler, Lake or local DAG validator was run.
+
+Nothing mathematical remains unfinished in this one-level split; the two statement-only supporting nodes remain queued for their own subsequent splits. Required dry-run validation and delivery follow this report.

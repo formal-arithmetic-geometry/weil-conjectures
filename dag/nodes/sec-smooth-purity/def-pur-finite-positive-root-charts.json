@@ -1,0 +1,159 @@
+{
+ "id": "def-pur-finite-positive-root-charts",
+ "kind": "definition",
+ "title": "Ordinary and derived positive root charts of the actual integral-reduced line",
+ "status": "split",
+ "statement": "Fix the finite-coefficient setting [def-pur-conventions], the actual integral-reduced signed coefficient lines [def-pur-finite-tensor-reduction-data] and their normalized signed products [def-pur-finite-signed-twist-products]. Use the specified zero and first-root charts [def-pur-finite-first-root-chart]. Lift the specified derived first-root chart uniquely through the fully faithful degree-zero single functor to an ordinary coefficient sheaf chart. The ordinary positive chart family is uniquely characterized by sending each ordered local basis power of its first-root generator to the coefficient-one section, with coefficient one at zero. The signed products identify these charts with the ordered positive tensor-power recursion. Take their singles and the native single/unit comparison to obtain the positive derived charts.",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-finite-tensor-reduction-data",
+  "def-pur-finite-signed-twist-products",
+  "def-pur-finite-first-root-chart"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+  "place": "Proof Step 2: compatibility with the invertible twist by associativity of derived tensor, all signed twists and shifts; returned proof Step 1 (twist part)"
+ },
+ "proof": [
+  {
+   "text": "Lift the prescribed first derived chart through the fully faithful degree-zero single functor, after composing with the inverse single/unit comparison. Mathlib Functor.preimageIso gives the lift; mapIso_injective gives uniqueness. This is the existing proved singleUnitChart_existsUnique helper.",
+   "uses": [
+    "def-pur-finite-first-root-chart"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Construct the entire ordinary positive family by finiteTensorOrdinaryChartRecursion from the specified first ordinary chart. Its coefficient-unit zero chart and signed-product successor formula are explicit data. Apply the recursion normalization theorem to obtain FiniteTensorSheafChartsNormalized.",
+   "uses": [
+    "def-pur-finite-first-root-chart",
+    "lem-pur-finite-positive-chart-recursion"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For any other normalized family, fix a degree d. Its chart and the recursive chart both send every compatible frame vector to the same coefficient-one section. Their values agree by transitivity of equality. Apply finiteTensorPositiveChart_frame_ext to the hom maps, then Iso.ext and function extensionality. This proves uniqueness and hence the required existsUnique assertion.",
+   "uses": [
+    "lem-pur-finite-positive-chart-frame-ext"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-finite-first-root-chart",
+  "lem-pur-finite-positive-chart-recursion",
+  "lem-pur-finite-positive-chart-frame-ext"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "R4",
+  "date": "2026-10-25",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+  "place": "Step 2: explicit recursive construction and generator extensionality, expanding the existing positive-chart docstring proof."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "canonical signed powers of an invertible coefficient sheaf tensor addition and primitive root charts",
+   "results": "8 unrelated scheme section arithmetic hits: StructureSheaf.const_add, Proj.add_apply, Proj.pow_apply, exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, StructureSheaf.normalize_finite_fraction_representation, exists_eq_pow_mul_of_isAffineOpen, Proj.sub_apply, exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux. No signed coefficient product or root presentation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensorRight\", \"mapIso\"",
+   "results": "0 hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteTensorProduct|finiteTensorFirstSiteLine|finiteTensorPositiveChart",
+   "results": "Mathlib msearch grep: 0 hits. rg lean/WeilConjectures, lean/Sheaf and dag/nodes: no hits. blueprint_refs.py search signed twist products: 0 nodes.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical signed Tate coefficient line products finite reduction root charts derived pullback comparison",
+   "results": "8 hits: RootPairing.chainBotCoeff.congr_simp, RootPairing.chainTopCoeff.congr_simp, AlgebraicGeometry.Scheme.Pullback.residueFieldCongr_inv_residueFieldMap_ofPoint, RootPairing.chainBotCoeff_mul_chainTopCoeff, RootPairing.one_le_chainBotCoeff_of_root_add_mem, RootPairing.chainTopCoeff_sub_chainBotCoeff, AlgebraicGeometry.Scheme.Pullback.carrierEquiv, RootPairing.restrictScalars_coe_root. These concern root systems or scheme carrier/residue-field pullbacks, not finite signed coefficient products, normalized root charts or derived scalar/pullback comparisons.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-finite-tensor-presentation-reduction",
+  "date": "2026-10-22",
+  "group": "NX"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-finite-reduction-of-purity",
+   "place": "Proof Step 2, expanded Steps 5 and 8: actual signed products and integral-reduced/root positive presentations",
+   "via": [
+    "lem-pur-finite-tensor-presentation-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "module": "Sheaf.Paper.FinitePositiveRootCharts",
+  "declaration": "WeilConjectures.PurityFiniteSetting.finiteTensorPositiveChart",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.FiniteTensorSheafChartType",
+   "WeilConjectures.PurityFiniteSetting.FiniteTensorFirstSheafChartNormalized",
+   "WeilConjectures.PurityFiniteSetting.existsUnique_finiteTensorFirstSheafChart",
+   "WeilConjectures.PurityFiniteSetting.finiteTensorFirstSheafChart",
+   "WeilConjectures.PurityFiniteSetting.finiteTensorUnitSection",
+   "WeilConjectures.PurityFiniteSetting.FiniteTensorSheafChartsType",
+   "WeilConjectures.PurityFiniteSetting.FiniteTensorSheafChartsNormalized",
+   "WeilConjectures.PurityFiniteSetting.existsUnique_finiteTensorSheafCharts",
+   "WeilConjectures.PurityFiniteSetting.finiteTensorSheafCharts",
+   "WeilConjectures.PurityFiniteSetting.finiteTensorPositiveChart"
+  ],
+  "file": "lean/Sheaf/Paper/FinitePositiveRootCharts.lean",
+  "statement": "def finiteTensorPositiveChart (P : PurityFiniteSetting.{u}) (T : Scheme.{u}) [T.Over (Spec (.of P.field.k))] (ζ : P.field.k) (hζ : IsPrimitiveRoot ζ P.diagonalExponent) (d : ℕ)",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0f286afb2",
+  "group": "NX",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0f286afb2",
+  "group": "NX",
+  "result": "pass",
+  "note": "Re-delivery of aa2aa128e2c9 (RETURN H2). Lean byte-identical (9 modules); item statement/proof/lean record unchanged. stmt_deps repaired in item, def-pur-finite-tensor-fixed-comparisons, def-pur-finite-tensor-reduction-data: thm-pur-composition-coherence→def-pur-composition-comparisons (owns compositionFixedPullbackComp/PullbackTensorFixed/TwistShift/ShiftedPullback); lem-sp-supported-etale-tensor-origin→def-sp-coefficient-scalar-representatives + new existing:true def-sp-finite-scalar-realization-presentations on SupportedEtaleTensorOrigin (liftedHom/fixedScalar/fixedRestriction/restrictionPresentation/scalarPresentation; scalarPresentation = leftAdjointUniq conjugate of sectionwise-identity-pinned sfRealizationRestriction; statement verbatim; no competing owner). Mechanical finding lem-amb-finite-tate-site-descent: statement uses finite_tate_site_descent(...).choose (constructed comparison) → PASS on that point. No supersession on live. Advisories: non-stmt_dep owners of sfRealizationRestriction/sfIntrinsicDerivedEquivalence; Second reading is the author's own; degree-one HEq lemma advisory unchanged. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261025T143856-L-1097536",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

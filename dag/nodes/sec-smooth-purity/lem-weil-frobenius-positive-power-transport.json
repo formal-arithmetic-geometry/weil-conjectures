@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-frobenius-positive-power-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Expanded DAG clause 3, construction of all positive powers from the degree-one map.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Positive-power transport from one module comparison",
+ "statement": "Let g:X→Y be a scheme isomorphism, R and S commutative ring sheaves on their small pro-etale sites and c:g⁻¹R≅S. Let F be the identified-coefficient module pullback [def-weil-proetale-inverse-image]. For R-module M and S-module N, fix e:F(M)≅N. Using the nonnegative tensor powers with zeroth power the coefficient unit [def-pur-twist-sheaves, def-pur-sheaf-tensor-product], there exists P_d:F(M^tensor d)≅N^tensor d. P_0 sends a unit-inserted scalar a to its specified coefficient image, P_1=e, and P_(d+2) sends the unit-inserted pure tensor x tensor y to P_(d+1)(eta x) tensor e(eta y), for every site object, section x of M^tensor(d+1) and section y of M. This statement uses no root sections or local freeness.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "section-tensor-product, lemma-sheafification-tensor and lemma-tensor-product-pullback (Tags 03EK, 03EL); expanded DAG def-weil-frobenius-coefficient-twists clauses 2 and 3. The current blueprint natural-Weil-isomorphism sentence is literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md."
+ },
+ "stmt_deps": [
+  "def-weil-proetale-inverse-image",
+  "def-pur-twist-sheaves",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "The canonical ordinary tensor pullback comparison sends unit-inserted pure tensors to the tensors of their unit insertions. Compare its monoidal tensor presentation with the sheafified sectionwise tensor using tensorIsoSite and its two pure-section equations.",
+   "uses": [
+    "def-sp-proetale-ordinary-tensor-pullback-total",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pd-sheaf-scalar-extension-constraint-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "section-tensor-product, lemma-sheafification-tensor and lemma-tensor-product-pullback (Tags 03EK, 03EL); expanded DAG def-weil-frobenius-coefficient-twists clauses 2 and 3. The current blueprint natural-Weil-isomorphism sentence is literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md."
+   }
+  },
+  {
+   "text": "At zero use the canonical pullback-of-unit isomorphism and its adjunction normalization. At one use e. At each successor compose the binary tensor pullback comparison with the tensor of the preceding isomorphism and e. Nat.rec gives this family, and the two tensor functoriality equations give exactly the asserted pure-section recursion.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "section-tensor-product, lemma-sheafification-tensor and lemma-tensor-product-pullback (Tags 03EK, 03EL); expanded DAG def-weil-frobenius-coefficient-twists clauses 2 and 3. The current blueprint natural-Weil-isomorphism sentence is literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-proetale-ordinary-tensor-pullback-total",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pd-sheaf-scalar-extension-constraint-coherence",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B9",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "section-tensor-product, lemma-sheafification-tensor and lemma-tensor-product-pullback (Tags 03EK, 03EL); expanded DAG def-weil-frobenius-coefficient-twists clauses 2 and 3. The current blueprint natural-Weil-isomorphism sentence is literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Inverse image along an isomorphism of ringed sites extends the canonical inverse limit of roots of unity to integral and finite coefficient Tate lines",
+   "results": "Eight hits, including Scheme.inv_app and stalk isomorphism lemmas; none states the root-limit coefficient comparison. A second query on maps from sheafified tensor powers returns SheafOfModules.GeneratingSections and sheafification maps, which do not establish generation by these root tensors.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.ext",
+   "results": "TensorProduct.ext in Mathlib.LinearAlgebra.TensorProduct.Basic supplies ordinary tensor extensionality. It does not state sheafified root-power generation or normalized inverse-image maps. Earlier SheafOfModules, _ ≅ _ query returned general module isomorphisms only.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "TateTwist|purTwist|scalarTensorPower|rootLineMap",
+   "results": "msearch Mathlib grep: zero hits. Local library search finds the normalized signed-line API and integral tensor transport, but they require local freeness or invertibility of l; the present original theorem assumes only that g is an isomorphism. The canonical ordinary tensor pullback theorem is already proved and is used for power induction. Blueprint searches for root tensor, generator-normalized, internal Hom comparison and 03EL found no identical node.",
+   "date": "2026-10-27",
+   "verdict": "use existing tensor theorem; no duplicate of the remaining root lemmas"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FrobeniusCoefficientTwistsCanonical",
+  "date": "2026-10-27",
+  "group": "B9"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FrobeniusPositivePowerTransport",
+  "file": "lean/Sheaf/Paper/FrobeniusPositivePowerTransport.lean",
+  "declaration": "WeilConjectures.frobeniusPositivePowerTransport",
+  "statement": "theorem frobeniusPositivePowerTransport\n    (M : proEtaleRingModules Y R) (N : proEtaleRingModules X S)\n    (e : (proEtaleRingModulePullback g R S c).obj M ≅ N) :\n    ∃ P : ∀ d : ℕ, (proEtaleRingModulePullback g R S c).obj\n        (coefficientTwistPower Y (R := R) M d) ≅\n          coefficientTwistPower X (R := S) N d,\n      (∀ (V : Y.ProEt) (a : R.obj.obj (op V)),\n        (P 0).hom.val.app (op ((proEtaleBaseChange g).obj V))\n          (((proEtaleRingModuleAdjunction g R S c).unit.app _).val.app (op V) a) =\n          (proEtaleRingDirectImageMap g R S c).hom.app (op V) a) ∧\n      P 1 = e ∧\n      ∀ (d : ℕ) (V : Y.ProEt)\n        (x : (coefficientTwistPower Y (R := R) M (d + 1)).val.obj (op V))\n        (y : M.val.obj (op V)),\n        (P (d + 2)).hom.val.app (op ((proEtaleBaseChange g).obj V))\n          (((proEtaleRingModuleAdjunction g R S c).unit.app _).val.app (op V)\n            (SheafOfModules.siteSheafTensorTmul.{u + 1, u, u + 1, u + 1} _ _ (op V) x y)) =\n        SheafOfModules.siteSheafTensorTmul.{u + 1, u, u + 1, u + 1} _ _ (op ((proEtaleBaseChange\n          g).obj V))\n          ((P (d + 1)).hom.val.app _\n            (((proEtaleRingModuleAdjunction g R S c).unit.app _).val.app (op V) x))\n          (e.hom.val.app _\n            (((proEtaleRingModuleAdjunction g R S c).unit.app _).val.app (op V) y))",
+  "branch": "sheaf-dag",
+  "by": "B9",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-weil-frobenius-positive-power-transport",
+  "worker": "stage3",
+  "summary": "A generic tool is used with its canonical unit-section normalization.",
+  "blueprint": "Expanded DAG clause 3, construction of all positive powers from the degree-one map.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Only the generic ordinary tensor pullback comparison and its pure-section normalization are used; no proper-base-change argument is substituted."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261026T222559-L-669977",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261026T222559-L-669977",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,227 @@
+{
+ "id": "lem-sfb-artin-minimal-liftable-ideal",
+ "kind": "statement",
+ "title": "Smallest ideal allowing a lift over a socle extension",
+ "statement": "Let $R$ be a commutative Noetherian ring and $k$ a field of finite type over $R$ [def-weil-pbc-noetherian-ring], [def-weil-field], [def-weil-finite-type-morphism]. Use the category $\\mathcal C_{R,k}$ of Artinian local $R$-algebras with specified residue field $k$ and local maps inducing the identity on $k$ [def-sfb-artin-deformation-test-category]. Let $\\mathcal F$ be a predeformation category on $\\mathcal C_{R,k}$ satisfying (RS), as defined in [def-sfb-artin-deformation-test-category]. Let $B\\twoheadrightarrow A$ be a morphism with kernel $I$ annihilated by $\\mathfrak m_B$, and let $x\\in\\mathcal F(A)$. For an ideal $L\\subseteq I$, call $L$ liftable if there are $y\\in\\mathcal F(B/L)$ and an isomorphism $y|_A\\cong x$. The set of liftable ideals has a least member under inclusion, and this member is itself liftable.",
+ "source": {
+  "document": "literature/stacks-project/formal-defos.tex",
+  "place": "Tag 06SZ (lemma-largest-closed-where-lift); (RS) implies the (S1) hypothesis."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-field",
+  "def-weil-finite-type-morphism",
+  "def-sfb-artin-deformation-test-category",
+  "def-sfb-artin-test-quotient"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\mathcal J$ for the set of liftable ideals. The kernel $I$ lies in $\\mathfrak m_B$, since the given map induces the identity on residue fields. Every quotient $B/L$ for $L\\subseteq I$ is a test algebra: inverse images identify its ideals with the ideals of $B$ containing $L$, so descending chains stabilize; its unique maximal ideal is $\\mathfrak m_B/L$ and its residue field is $k$. The quotient maps are local and induce the identity on $k$. The map $B/I\\to A$ is an isomorphism, so transport of $x$ along its inverse shows $I\\in\\mathcal J$. If $L\\in\\mathcal J$ and $L\\subseteq L'\\subseteq I$, transport along $B/L\\to B/L'$ gives a lift whose restriction is still $x$, by the composition isomorphisms of the pseudofunctor.",
+   "uses": [
+    "def-sfb-artin-deformation-test-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06SZ (lemma-largest-closed-where-lift), proof; the displayed quotient formula has B in place of its typographical A."
+   }
+  },
+  {
+   "text": "Take $J,K\\in\\mathcal J$. The action of $B$ on $I$ factors through $B/\\mathfrak m_B=k$ because $\\mathfrak m_BI=0$. Thus $I$ is a $k$-vector space, and its $B$-ideals are exactly its $k$-subspaces: a scalar acts by any representative in $B$. Apply the complement lemma to $J+K\\subseteq I$, obtaining $I=(J+K)\\oplus Q$. The subspace $J'=J+Q$ is an ideal, contains $J$, and satisfies $J'+K=I$. Also $J'\\cap K=J\\cap K$: if $j+q\\in K$ with $j\\in J$, $q\\in Q$, then $q\\in Q\\cap(J+K)=0$. Step 1 shows that $J'$ is liftable.",
+   "uses": [
+    "lem-trf-vector-subspace-complement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06SZ (lemma-largest-closed-where-lift), proof; the displayed quotient formula has B in place of its typographical A."
+   }
+  },
+  {
+   "text": "The natural homomorphism $\\phi:B/(J'\\cap K)\\to(B/J')\\times_A(B/K)$ sends $b$ to $(b\\bmod J',b\\bmod K)$. It is injective because its kernel before quotienting is $J'\\cap K$. For surjectivity, represent a compatible pair by $b,c\\in B$. Their images in $A$ agree, so $b-c\\in I=J'+K$; write $b-c=j+u$ with $j\\in J'$ and $u\\in K$. Then $b-j=c+u$ represents both entries. These formulas prove that $\\phi$ is an $R$-algebra isomorphism commuting with projections and residue maps, identifying the ring fibre product with the test algebra $B/(J'\\cap K)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06SZ (lemma-largest-closed-where-lift), proof; the displayed quotient formula has B in place of its typographical A."
+   }
+  },
+  {
+   "text": "Choose lifts $y\\in\\mathcal F(B/J')$, $z\\in\\mathcal F(B/K)$ and isomorphisms $a:y|_A\\cong x$, $b:z|_A\\cong x$. The triple $(y,z,b^{-1}\\circ a)$ is an object of $\\mathcal F(B/J')\\times_{\\mathcal F(A)}\\mathcal F(B/K)$. The quotient $B/K\\to A$ is surjective, so the (RS) equivalence in the cited definition applies. Essential surjectivity supplies an object over the fibre product with an isomorphism of its first projection to $y$. Via the ring isomorphism of step 3 this gives an object over $B/(J'\\cap K)$. Restricting the projection isomorphism to $A$ and composing with $a$ identifies its restriction with $x$. Since $J'\\cap K=J\\cap K$, this proves $J\\cap K\\in\\mathcal J$.",
+   "uses": [
+    "def-sfb-artin-deformation-test-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06SZ (lemma-largest-closed-where-lift), proof; the displayed quotient formula has B in place of its typographical A."
+   }
+  },
+  {
+   "text": "The finite-length lemma supplies $N\\geq0$ bounding the number of strict inclusions in every chain of ideals of $B$. Starting with $I\\in\\mathcal J$, replace the current member by a strictly smaller member of $\\mathcal J$ whenever one exists. After at most $N$ replacements this stops at a minimal member $M\\in\\mathcal J$, since another replacement would give $N+1$ strict inclusions. For any $L\\in\\mathcal J$, step 4 makes $M\\cap L$ a member of $\\mathcal J$ contained in $M$. Minimality forces $M\\cap L=M$, hence $M\\subseteq L$. Thus $M$ is least, and is liftable because it belongs to $\\mathcal J$.",
+   "uses": [
+    "lem-weil-pbc-artinian-ring-self-finite-length"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06SZ (lemma-largest-closed-where-lift), proof; the displayed quotient formula has B in place of its typographical A."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-artin-deformation-test-category",
+  "lem-trf-vector-subspace-complement",
+  "lem-weil-pbc-artinian-ring-self-finite-length"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/formal-defos.tex",
+  "place": "Tag 06SZ (lemma-largest-closed-where-lift), proof; the displayed quotient formula has B in place of its typographical A."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Deformation category Schlessinger smallest ideal quotient where object lifts across extension killed by maximal ideal",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Extension.infinitesimal\", \"module\": \"Mathlib/RingTheory/Extension/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommRing R] → [inst_1 : CommRing S] → [inst_2 : Algebra R S] → Algebra.Extension R S → Algebra.Extension R S\", \"doc\": \"Given an algebra extension $ P $ of a commutative ring $ R $ over a commutative $ R $-algebra $ S $, the infinitesimal extension is constructed by quotienting the ring structure of $ P $ by the square\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_comp_surjective\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔\\n    ∀ ⦃B : Type (max u v)⦄ [inst_3 : CommRing B] [inst_4 : Algebra R B] (I : Ideal B),\\n      I ^ 2 = ⊥ → Function.Surjective (Ideal.Quotient.mkₐ R I).comp\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is formally smooth if and only if for every commutative ring $ B $ equipped with an $ R $-algebra structure and every ideal $ I $ of $ B $ with $ I^2 = 0\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_lift\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type u_1}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallySmooth R A] (I : Ideal B),\\n  IsNilpotent I → ∀ (g : A →ₐ[R] B ⧸ I), ∃ f, (Ideal.Quotient.mkₐ R I).comp f = g\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ a formally smooth $ R $-algebra, $ B $ a ring with a nilpotent ideal $ I $, and $ g: A \\\\to B/I $ an $ R $-algebra homomorphism. Then there exists an $ R $-algebr\"}\n  {\"name\": \"Algebra.Extension.toInfinitesimal\", \"module\": \"Mathlib/RingTheory/Extension/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → [inst_2 : Algebra R S] → (P : Algebra.Extension R S) → P.Hom P.infinitesimal\", \"doc\": \"The canonical homomorphism from an algebra extension $ P $ of a commutative ring $ R $ over an $ R $-algebra $ S $ to its infinitesimal extension $ P/I^2 $, constructed by quotienting $ P $ by the squ\"}\n  {\"name\": \"Algebra.Extension.homInfinitesimal\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          (P₁ : Algebra.Extension R A) →\\n            (P₂ : Algebra.Extension R A) → [Algebra.FormallySmooth R P₁.Ring] → P₁.infinitesimal.Hom P₂.infinitesimal\", \"doc\": \"Given commutative rings $ R $ and $ A $ with an $ R $-algebra structure on $ A $, and formally smooth algebra extensions $ P_1 $ and $ P_2 $ of $ R $ over $ A $, this constructs a homomorphism between\"}\n  {\"name\": \"Algebra.FormallySmooth.lift\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          {B : Type u_1} →\\n            [inst_3 : CommRing B] →\\n              [inst_4 : Algebra R B] →\\n                [Algebra.FormallySmooth R A] → (I : Ideal B) → IsNilpotent I \", \"doc\": \"Given a commutative ring $ R $, a formally smooth $ R $-algebra $ A $, a ring $ B $ with a nilpotent ideal $ I $, and an $ R $-algebra homomorphism $ g: A \\to B/I $, there exists an $ R $-algebra homom\"}\n  {\"name\": \"Algebra.FormallyUnramified.iff_comp_injective_of_small\", \"module\": \"Mathlib/RingTheory/Unramified/Basic\", \"type\": \"∀ {R : Type v} [inst : CommRing R] {A : Type u} [inst_1 : CommRing A] [inst_2 : Algebra R A] [Small.{w, u} A],\\n  Algebra.FormallyUnramified R A ↔\\n    ∀ ⦃B : Type w⦄ [inst_4 : CommRing B] [inst_5 : Algebra R B] (I : Ideal B),\\n      I ^ 2 = ⊥ → Function.Injective (Ideal.Quotient.mkₐ R I).comp\", \"doc\": \"For a small type $ A $, an $ R $-algebra $ A $ is formally unramified over $ R $ if and only if for every commutative $ R $-algebra $ B $ and every square-zero ideal $ I $ of $ B $, the induced map fr\"}\n  {\"name\": \"Algebra.FormallySmooth.of_comp_surjective\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  (∀ ⦃B : Type (max u v)⦄ [inst_3 : CommRing B] [inst_4 : Algebra R B] (I : Ideal B),\\n      I ^ 2 = ⊥ → Function.Surjective (Ideal.Quotient.mkₐ R I).comp) →\\n    Algebra.FormallySmooth R A\", \"doc\": \"Let $ R $ be a commutative ring and $ A $ an $ R $-algebra. If for every commutative $ R $-algebra $ B $ with a square-zero ideal $ I $ (i.e., $ I^2 = 0 $), the induced map $\\\\text{Hom}_{R\\\\text{-}\\\\text\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: formal smoothness lifts algebra maps, and LiftableCone concerns categorical limits, not the least obstruction ideal of a deformation object"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smallest obstruction ideal for lifting deformation over Artinian local ring square zero extension",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"liftOfDerivationToSquareZero_apply\", \"module\": \"Mathlib.RingTheory.Derivation.ToSquareZero\", \"type\": \"∀ {R : Type u} {A : Type v} {B : Type w} [inst : CommSemiring R] [inst_1 : CommSemiring A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra R B] (I : Ideal B) [inst_5 : Algebra A B] [inst_6 : IsScalarTower R A B]\\n  (hI : I ^ 2 = ⊥) (f : Derivation R A ↥I) (x : A),\\n  (liftOfDerivation\", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, a commutative ring $ B $ with a square-zero ideal $ I $, and a derivation $ f: A \\\\to I $ over $ R $, there exists an $ R $-algebra homomorph\"}\n  {\"name\": \"liftOfDerivationToSquareZero\", \"module\": \"Mathlib.RingTheory.Derivation.ToSquareZero\", \"type\": \"[IsScalarTower R A B] (hI : I ^ 2 = ⊥) (f : Derivation R A I) : A →ₐ[R] B\", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, a commutative ring $ B $ with a square-zero ideal $ I $, and a derivation $ f: A \\to I $ over $ R $, this constructs an $ R $-algebra homomor\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_lift\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[FormallySmooth R A] (I : Ideal B) (hI : IsNilpotent I) (g : A →ₐ[R] B ⧸ I) :\\n  ∃ f : A →ₐ[R] B, (Ideal.Quotient.mkₐ R I).comp f = g\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ a formally smooth $ R $-algebra, $ B $ a ring with a nilpotent ideal $ I $, and $ g: A \\\\to B/I $ an $ R $-algebra homomorphism. Then there exists an $ R $-algebr\"}\n  {\"name\": \"derivationToSquareZeroEquivLift\", \"module\": \"Mathlib.RingTheory.Derivation.ToSquareZero\", \"type\": \"[IsScalarTower R A B] :\\n  Derivation R A I ≃ { f : A →ₐ[R] B // (Ideal.Quotient.mkₐ R I).comp f = IsScalarTower.toAlgHom R A (B ⧸ I) }\", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, a commutative ring $ B $ equipped with $ R $-algebra and $ A $-algebra structures, and a square-zero ideal $ I $ of $ B $ (i.e., $ I^2 = 0 $\"}\n  {\"name\": \"derivationToSquareZeroOfLift_apply\", \"module\": \"Mathlib.RingTheory.Derivation.ToSquareZero\", \"type\": \"[IsScalarTower R A B] (f : A →ₐ[R] B) (e : (Ideal.Quotient.mkₐ R I).comp f = IsScalarTower.toAlgHom R A (B ⧸ I))\\n  (x : A) : (derivationToSquareZeroOfLift I hI f e x : B) = f x - algebraMap A B x\", \"doc\": \"For a commutative semiring $ R $, an $ R $-algebra $ A $, and an $ R $-algebra $ B $, given an algebra homomorphism $ f : A \\\\to B $, a square-zero ideal $ I \\\\subseteq A $, and a compatibility conditio\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_comp_surjective\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \":\\n  FormallySmooth R A ↔\\n    ∀ ⦃B : Type max u v⦄ [CommRing B] [Algebra R B] (I : Ideal B),\\n      I ^ 2 = ⊥ → Function.Surjective ((Ideal.Quotient.mkₐ R I).comp : (A →ₐ[R] B) → A →ₐ[R] B ⧸ I)\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is formally smooth if and only if for every commutative ring $ B $ equipped with an $ R $-algebra structure and every ideal $ I $ of $ B $ with $ I^2 = 0\"}\n  {\"name\": \"derivationToSquareZeroEquivLift_symm_apply_apply_coe\", \"module\": \"Mathlib.RingTheory.Derivation.ToSquareZero\", \"type\": \"∀ {R : Type u} {A : Type v} {B : Type w} [inst : CommSemiring R] [inst_1 : CommSemiring A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra R B] (I : Ideal B) [inst_5 : Algebra A B] (hI : I ^ 2 = ⊥)\\n  [inst_6 : IsScalarTower R A B] (f : { f // (Ideal.Quotient.mkₐ R I).comp f = IsScal\", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, a commutative ring $ B $ equipped with $ R $-algebra and $ A $-algebra structures, and a square-zero ideal $ I $ of $ B $ (i.e., $ I^2 = 0 $\"}\n  {\"name\": \"derivationToSquareZeroOfLift\", \"module\": \"Mathlib.RingTheory.Derivation.ToSquareZero\", \"type\": \"[IsScalarTower R A B] (hI : I ^ 2 = ⊥) (f : A →ₐ[R] B)\\n  (e : (Ideal.Quotient.mkₐ R I).comp f = IsScalarTower.toAlgHom R A (B ⧸ I)) : Derivation R A I\", \"doc\": \"Let $R$ and $A$ be commutative semirings, and $B$ be a commutative ring, forming a scalar tower with algebra homomorphisms $R \\\\to A \\\\to B$. Let $I$ be an ideal of $B$ such that $I^2 = \\\\{0\\\\}$. Let $f: \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: formal smoothness lifts algebra maps, and LiftableCone concerns categorical limits, not the least obstruction ideal of a deformation object"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"liftable\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.LiftableCocone\", \"module\": \"Mathlib.CategoryTheory.Limits.Creates\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : Type w} [CategoryTheory.Category.{w', w} J] (K : CategoryTheory.Functor J C) (F : CategoryTheory.Functor C D) (c : CategoryTheory.Limits.Cocone (K.comp F)) : Type (max (max (max u₁ v₁) v₂) w)\", \"doc\": \"Define the lift of a cocone: For a cocone `c` for `K ⋙ F`, give a cocone for\\n`K` which is a lift of `c`, i.e. the image of it under `F` is (iso) to `c`.\\n\\nWe will then use this as part of the definitio\"}\n  {\"name\": \"CategoryTheory.LiftableCone\", \"module\": \"Mathlib.CategoryTheory.Limits.Creates\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : Type w} [CategoryTheory.Category.{w', w} J] (K : CategoryTheory.Functor J C) (F : CategoryTheory.Functor C D) (c : CategoryTheory.Limits.Cone (K.comp F)) : Type (max (max (max u₁ v₁) v₂) w)\", \"doc\": \"Define the lift of a cone: For a cone `c` for `K ⋙ F`, give a cone for `K`\\nwhich is a lift of `c`, i.e. the image of it under `F` is (iso) to `c`.\\n\\nWe will then use this as part of the definition of c\"}\n  {\"name\": \"CategoryTheory.inhabitedLiftableCocone\", \"module\": \"Mathlib.CategoryTheory.Limits.Creates\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : Type w} [CategoryTheory.Category.{w', w} J] {K : CategoryTheory.Functor J C} (c : CategoryTheory.Limits.Cocone (K.comp (CategoryTheory.Functor.id C))) : Inhabited (CategoryTheory.LiftableCocone K (CategoryTheory.Functor.id C) c)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.inhabitedLiftableCone\", \"module\": \"Mathlib.CategoryTheory.Limits.Creates\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : Type w} [CategoryTheory.Category.{w', w} J] {K : CategoryTheory.Functor J C} (c : CategoryTheory.Limits.Cone (K.comp (CategoryTheory.Functor.id C))) : Inhabited (CategoryTheory.LiftableCone K (CategoryTheory.Functor.id C) c)\", \"doc\": \"Satisfy the inhabited linter\"}\n  {\"name\": \"CategoryTheory.LiftableCocone.liftedCocone\", \"module\": \"Mathlib.CategoryTheory.Limits.Creates\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : Type w} [CategoryTheory.Category.{w', w} J] {K : CategoryTheory.Functor J C} {F : CategoryTheory.Functor C D} {c : CategoryTheory.Limits.Cocone (K.comp F)} (self : CategoryTheory.LiftableCocon\", \"doc\": \"a cocone in the source category of the functor\"}\n  {\"name\": \"CategoryTheory.LiftableCone.liftedCone\", \"module\": \"Mathlib.CategoryTheory.Limits.Creates\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : Type w} [CategoryTheory.Category.{w', w} J] {K : CategoryTheory.Functor J C} {F : CategoryTheory.Functor C D} {c : CategoryTheory.Limits.Cone (K.comp F)} (self : CategoryTheory.LiftableCone K \", \"doc\": \"a cone in the source category of the functor\"}\n  {\"name\": \"CategoryTheory.LiftsToColimit.toLiftableCocone\", \"module\": \"Mathlib.CategoryTheory.Limits.Creates\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : Type w} [CategoryTheory.Category.{w', w} J] {K : CategoryTheory.Functor J C} {F : CategoryTheory.Functor C D} {c : CategoryTheory.Limits.Cocone (K.comp F)} {t : CategoryTheory.Limits.IsColimit\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.LiftsToLimit.toLiftableCone\", \"module\": \"Mathlib.CategoryTheory.Limits.Creates\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : Type w} [CategoryTheory.Category.{w', w} J] {K : CategoryTheory.Functor J C} {F : CategoryTheory.Functor C D} {c : CategoryTheory.Limits.Cone (K.comp F)} {t : CategoryTheory.Limits.IsLimit c} \", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.LiftableCocone.mk\", \"module\": \"Mathlib.CategoryTheory.Limits.Creates\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : Type w} [CategoryTheory.Category.{w', w} J] {K : CategoryTheory.Functor J C} {F : CategoryTheory.Functor C D} {c : CategoryTheory.Limits.Cocone (K.comp F)} (liftedCocone : CategoryTheory.Limit\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.LiftableCone.mk\", \"module\": \"Mathlib.CategoryTheory.Limits.Creates\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : Type w} [CategoryTheory.Category.{w', w} J] {K : CategoryTheory.Functor J C} {F : CategoryTheory.Functor C D} {c : CategoryTheory.Limits.Cone (K.comp F)} (liftedCone : CategoryTheory.Limits.Co\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.LiftableCocone.validLift\", \"module\": \"Mathlib.CategoryTheory.Limits.Creates\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : Type w} [CategoryTheory.Category.{w', w} J] {K : CategoryTheory.Functor J C} {F : CategoryTheory.Functor C D} {c : CategoryTheory.Limits.Cocone (K.comp F)} (self : CategoryTheory.LiftableCocon\", \"doc\": \"the isomorphism expressing that `liftedCocone` lifts the given cocone\"}\n  {\"name\": \"CategoryTheory.LiftableCone.validLift\", \"module\": \"Mathlib.CategoryTheory.Limits.Creates\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : Type w} [CategoryTheory.Category.{w', w} J] {K : CategoryTheory.Functor J C} {F : CategoryTheory.Functor C D} {c : CategoryTheory.Limits.Cone (K.comp F)} (self : CategoryTheory.LiftableCone K \", \"doc\": \"the isomorphism expressing that `liftedCone` lifts the given cone\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: formal smoothness lifts algebra maps, and LiftableCone concerns categorical limits, not the least obstruction ideal of a deformation object"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ll]iftable|[Oo]bstruction[Ii]deal|Schlessinger",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Tactic/CategoryTheory/Coherence.lean\", \"line\": \"209\", \"text\": \"which are \\\"liftable\\\" (i.e. expressible as compositions of unitors and associators).\"}\n  {\"file\": \"Mathlib/Tactic/CategoryTheory/Coherence.lean\", \"line\": \"211\", \"text\": \"elab (name := liftable_prefixes) \\\"liftable_prefixes\\\" : tactic => do\"}\n  {\"file\": \"Mathlib/Tactic/CategoryTheory/Coherence.lean\", \"line\": \"257\", \"text\": \"    evalTactic (← `(tactic| liftable_prefixes)) <|>\"}\n  {\"file\": \"Mathlib/Control/Random.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.Control.ULiftable\"}\n  {\"file\": \"Mathlib/Control/Random.lean\", \"line\": \"115\", \"text\": \"instance {α : Type u} [ULiftable m m'] [Random m α] : Random m' (ULift.{v} α) where\"}\n  {\"file\": \"Mathlib/Control/Random.lean\", \"line\": \"116\", \"text\": \"  random := ULiftable.up random\"}\n  {\"file\": \"Mathlib/Control/Random.lean\", \"line\": \"141\", \"text\": \"instance {α : Type u} [Preorder α] [ULiftable m m'] [BoundedRandom m α] [Monad m'] :\"}\n  {\"file\": \"Mathlib/Control/Random.lean\", \"line\": \"144\", \"text\": \"    let ⟨x⟩ ← ULiftable.up.{v} (BoundedRandom.randomR lo.down hi.down h)\"}\n  {\"file\": \"Mathlib/Control/ULiftable.lean\", \"line\": \"23\", \"text\": \"to transport over to `Option.{v}`. `ULiftable` is an attempt at improving the situation.\"}\n  {\"file\": \"Mathlib/Control/ULiftable.lean\", \"line\": \"25\", \"text\": \"`ULiftable Option.{u} Option.{v}` gives us a generic and composable way to use\"}\n  {\"file\": \"Mathlib/Control/ULiftable.lean\", \"line\": \"31\", \"text\": \"* `ULiftable` class\"}\n  {\"file\": \"Mathlib/Control/ULiftable.lean\", \"line\": \"53\", \"text\": \"class ULiftable (f : outParam (Type u₀ → Type u₁)) (g : Type v₀ → Type v₁) where\"}\n  {\"file\": \"Mathlib/Control/ULiftable.lean\", \"line\": \"56\", \"text\": \"namespace ULiftable\"}\n  {\"file\": \"Mathlib/GroupTheory/Coxeter/Length.lean\", \"line\": \"147\", \"text\": \"  simp_rw [CoxeterMatrix.IsLiftable, ← ofAdd_add, (by decide : (1 + 1 : ZMod 2) = 0)]\"}\n  {\"file\": \"Mathlib/GroupTheory/Coxeter/Basic.lean\", \"line\": \"298\", \"text\": \"def _root_.CoxeterMatrix.IsLiftable {G : Type*} [Monoid G] (M : CoxeterMatrix B) (f : B → G) :\"}\n  {\"file\": \"Mathlib/GroupTheory/Coxeter/Basic.lean\", \"line\": \"301\", \"text\": \"private theorem relations_liftable {G : Type*} [Group G] {f : B → G} (hf : IsLiftable M f)\"}\n  {\"file\": \"Mathlib/GroupTheory/Coxeter/Basic.lean\", \"line\": \"308\", \"text\": \"private def groupLift {G : Type*} [Group G] {f : B → G} (hf : IsLiftable M f) : W →* G :=\"}\n  {\"file\": \"Mathlib/GroupTheory/Coxeter/Basic.lean\", \"line\": \"309\", \"text\": \"  (PresentedGroup.toGroup (relations_liftable hf)).comp cs.mulEquiv.toMonoidHom\"}\n  {\"file\": \"Mathlib/GroupTheory/Coxeter/Basic.lean\", \"line\": \"312\", \"text\": \"private def restrictUnit {G : Type*} [Monoid G] {f : B → G} (hf : IsLiftable M f) (i : B) :\"}\n  {\"file\": \"Mathlib/Probability/ProbabilityMassFunction/Constructions.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.Control.ULiftable\"}\n  {\"file\": \"Mathlib/Probability/ProbabilityMassFunction/Constructions.lean\", \"line\": \"149\", \"text\": \"  let ⟨n⟩ ← ULiftable.up x\"}\n  {\"file\": \"Mathlib/Probability/ProbabilityMassFunction/Constructions.lean\", \"line\": \"154\", \"text\": \"instance : ULiftable PMF.{u} PMF.{v} where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Creates.lean\", \"line\": \"45\", \"text\": \"structure LiftableCone (K : J ⥤ C) (F : C ⥤ D) (c : Cone (K ⋙ F)) where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Creates.lean\", \"line\": \"59\", \"text\": \"structure LiftableCocone (K : J ⥤ C) (F : C ⥤ D) (c : Cocone (K ⋙ F)) where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Creates.lean\", \"line\": \"75\", \"text\": \"  lifts : ∀ c, IsLimit c → LiftableCone K F c\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: formal smoothness lifts algebra maps, and LiftableCone concerns categorical limits, not the least obstruction ideal of a deformation object"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Least ideal for lifting an object of a groupoid valued deformation functor satisfying Rim Schlessinger",
+   "results": "8 hits; top results: CategoryTheory.Localization.Lifting.iso, Algebra.FormallySmooth.exists_lift, CategoryTheory.Localization.Lifting₂.iso', CategoryTheory.Localization.Lifting.iso', CategoryTheory.Localization.Lifting, Algebra.FormallySmooth.lift, Quiver.FreeGroupoid.lift, Algebra.FormallySmooth.lift.congr_simp",
+   "date": "2026-10-23",
+   "verdict": "no match: algebra-map formal smoothness, categorical localization and Artinian chain results do not state the deformation-object obstruction-ideal assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "Schlessinger|predeformation|minimalLiftable|obstructionIdeal",
+   "results": "0 hits; top results: ",
+   "date": "2026-10-23",
+   "verdict": "no match: algebra-map formal smoothness, categorical localization and Artinian chain results do not state the deformation-object obstruction-ideal assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Schlessinger deformation functor least ideal quotient admitting a lift Artinian ring",
+   "results": "8 hits; top results: Algebra.FormallySmooth.exists_lift, IsLocalRing.exists_maximalIdeal_pow_le_of_isArtinianRing_quotient, instIsArtinianRingQuotientIdeal, IsLocalRing.exists_maximalIdeal_pow_le_of_finite_quotient, Algebra.FormallySmooth.iff_comp_surjective, Algebra.FormallyUnramified.iff_comp_injective_of_small, Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, IsLocalRing.quotient_artinian_of_mem_minimalPrimes_of_isLocalRing",
+   "date": "2026-10-23",
+   "verdict": "no match: algebra-map formal smoothness, categorical localization and Artinian chain results do not state the deformation-object obstruction-ideal assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Schlessinger\"",
+   "results": "0 hits; top results: ",
+   "date": "2026-10-23",
+   "verdict": "no match: algebra-map formal smoothness, categorical localization and Artinian chain results do not state the deformation-object obstruction-ideal assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Least obstruction subspace Artin deformation functor closed under intersections ideals Schlessinger condition",
+   "results": "8 hits; top results: AlgebraicGeometry.IsLocallyArtinian.isArtinianRing_presheaf_obj, CategoryTheory.not_strictAnti_of_isArtinianObject, Algebra.FormallyUnramified.ext_of_iInf, CategoryTheory.isArtinianObject_iff_not_strictAnti, localCohomology.idealPowersToSelfLERadical, CategoryTheory.antitone_chain_condition_of_isArtinianObject, AlgebraicGeometry.Scheme.isLocallyArtinianScheme_Spec, AlgebraicGeometry.Scheme.isArtinianScheme_Spec",
+   "date": "2026-10-23",
+   "verdict": "no match: algebra-map formal smoothness, categorical localization and Artinian chain results do not state the deformation-object obstruction-ideal assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "deformation|Schlessinger",
+   "results": "1 hits; top results: Mathlib/RingTheory/Perfectoid/FontaineTheta.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: algebra-map formal smoothness, categorical localization and Artinian chain results do not state the deformation-object obstruction-ideal assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-artin-rs-versal-formal-object",
+  "date": "2026-10-23",
+  "group": "Q15"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 07Y4 (lemma-diagonal-representable), specialized to Spec Z; section-axioms [-1] through [3], definition-versal and definition-openness-versality. The specialization uses that Z and its localizations are G-rings. Local supporting input: first sentence of the proof of Tag 07Y4: apply lemma-get-smooth to each finite type field and object. Supporting input in Tag 07XY: first three sentences of the proof, construction of a versal formal object before effectivity; Tag 06SZ (lemma-largest-closed-where-lift); (RS) implies the (S1) hypothesis.",
+   "via": [
+    "lem-sfb-artin-rs-versal-formal-object",
+    "lem-sfb-artin-smooth-point-neighbourhood",
+    "lem-sfb-artin-representable-diagonal-criterion",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-artin-minimal-liftable-ideal",
+  "worker": "stage1",
+  "summary": "NM checked Tag 06SZ, corrected its B/A typo in the proof, and expanded the complement, quotient-fibre-product and leastness arguments. Reused existing Mathlib leaves for complements and finite chain bounds; no new nodes. The statement is unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 07Y4 (lemma-diagonal-representable), specialized to Spec Z; section-axioms [-1] through [3], definition-versal and definition-openness-versality. The specialization uses that Z and its localizations are G-rings. Local supporting input: first sentence of the proof of Tag 07Y4: apply lemma-get-smooth to each finite type field and object. Supporting input in Tag 07XY: first three sentences of the proof, construction of a versal formal object before effectivity; Tag 06SZ (lemma-largest-closed-where-lift); (RS) implies the (S1) hypothesis. Realized here: Tag 06SZ, nonemptiness and upward closure; complementary enlargement; quotient fibre product and (RS) gluing; finite-chain minimality and leastness."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NM-47af0883a",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-47af0883a (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery has no new nodes. Stacks formal-defos.tex Tag 06SZ (lemma-largest-closed-where-lift) matches it, and I read its proof. (RS) of def-sfb-artin-deformation-test-category is stronger than (S1) with the same A_2->A surjectivity. The source's displayed A/(J∩K)=A/J×_{A/I}A/K is a typo for B/(J∩K)=B/J×_A B/K; the report names it under Source error, step 3 proves the correct form, and no statement changed. Step 1: quotients B/L are test algebras, I is liftable via (B/I->A)^-1, and upward closure uses the composition isos; correctly elementary. Step 2: since m_B I=0, B-ideals inside I are the same as k-subspaces; the complement Q of J+K gives J'+K=I and J'∩K=J∩K, both checked. Step 3: the kernel and the surjectivity (b-j=c+u) of B/(J'∩K)->B/J'×_A B/K are correct. Step 4: essential surjectivity of the (RS) equivalence on the triple (y,z,b^-1 a) gives a lift whose restriction to A is isomorphic to x. Step 5: the chain bound N gives a minimal member M, and intersection closure makes it least. Edge cases checked: I=0, x already lifting, J=K, J or K equal to I, J+K strictly smaller than I, and k[eps]->k. A grep of the DAG for liftable/06SZ finds only the item and its parent, whose use (only leastness and liftability) fits the statement. Batch-5: lem-trf-vector-subspace-complement is the Mathlib leaf Submodule.exists_isCompl (general linear algebra, unit sk-i-curve-zero, stmt_dep def-weil-field only). It is not part of the trace formula or Poincare duality or their proofs, so it is accepted. Both foreign-unit citations are Mathlib leaves, so no tool_uses is needed. The null blueprint from.node is inherited from the base node. No SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ArtinMinimalLiftableIdeal",
+  "declaration": "AlgebraicGeometry.ArtinDeformation.exists_isLeast_liftableIdeal",
+  "declarations": [
+   "AlgebraicGeometry.ArtinDeformation.IsLiftableIdeal",
+   "AlgebraicGeometry.ArtinDeformation.exists_isLeast_liftableIdeal"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ArtinMinimalLiftableIdeal.lean",
+  "statement": "theorem exists_isLeast_liftableIdeal (F : CofibredGroupoids.{u, v, w} R k) (hF : IsPredeformation F) (hRS : IsRimSchlessinger F) {B A : TestCategory R k} (f : B ⟶ A) (hf : Function.Surjective (map f)) (hI : ∀ b ∈ IsLocalRing.maximalIdeal (ring B), ∀ t ∈ RingHom.ker (map f).toRingHom, b * t = 0) (x : fibre F A) : ∃ L : Ideal (ring B), IsLeast {J : Ideal (ring B) | IsLiftableIdeal F f x J} L",
+  "branch": "newtargets-dag",
+  "by": "Q104",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-929aaa5fa",
+  "group": "Q104",
+  "result": "pass",
+  "note": "Item exists_isLeast_liftableIdeal matches node and Stacks 06SZ clause by clause: f surjective, hI = literal kernel killed by m_B, x : fibre F A, IsLiftableIdeal = ∃ hL ≤ ker, ∃ y over the literal quotient B/L, push along B/L→A ≅ x, IsLeast gives least + liftable. hF and hRS match the node; (RS) is stronger than (S1) as the node states. New node def-sfb-artin-test-quotient: real quotient via Ideal.Quotient.liftₐ, augmentation residue_A∘lift (= residue_B∘π), homMk triangle by rfl; helper testQuotient_isTestAlgebra is true (ker f ⊆ m_B, so the quotient is proper, local and Artinian with kernel m_B/L); no duplicate in live, DAG or Mathlib; fields complete. Item diff is only stmt_deps+new node and lean; dep record identical to live; both lean.statement fields verbatim in files. Edge cases I=0, x lifts, L=I, k[ε]→k, higher-dim socle covered; universes v,w free. Report has Worker report + Second reading; docstrings carry source and blueprint; A/(J∩K) typo noted. No file changed, so no compile."
+ }
+}

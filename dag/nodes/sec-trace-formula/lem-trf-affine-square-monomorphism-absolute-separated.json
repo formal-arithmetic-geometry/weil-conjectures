@@ -1,0 +1,237 @@
+{
+ "id": "lem-trf-affine-square-monomorphism-absolute-separated",
+ "kind": "statement",
+ "title": "Absolute affine-square embedding of a monic relative relation",
+ "statement": "Let $S,U,R$ be schemes [def-pc-scheme], with morphisms $U\\to S$ and $R\\to S$. Suppose a commutative ring $A$ and an isomorphism $U\\cong\\operatorname{Spec}A$ are given [def-weil-affine-spectrum]. Put $V=U\\times_SU$ and $P=U\\times_{\\operatorname{Spec}\\mathbf Z}U$ [def-pc-fibre-product]. Let $k:V\\to P$ be the canonical morphism whose two projections to $U$ are those of $V$. Let $j:R\\to V$ be an $S$-morphism which is a monomorphism, meaning that $j\\circ a=j\\circ b$ implies $a=b$ for every scheme $T$ and morphisms $a,b:T\\to R$. Then $P\\cong\\operatorname{Spec}(A\\otimes_{\\mathbf Z}A)$ compatibly with the two projections. Both $k$ and $q=k\\circ j$ are monomorphisms, $q:R\\to P$ is separated [def-weil-proper-morphism], and the absolute structure morphism $R\\to\\operatorname{Spec}\\mathbf Z$ is separated. No finite-type condition on $j$ and no separatedness condition on $S$ are required.",
+ "source": {
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 0265, lemma-presentation-quasi-compact, first proof paragraph: monomorphism of the relative square into the absolute affine square and separatedness of R."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-weil-proper-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-fibre-product-affine-spectra] with base ring $\\mathbf Z$ and both algebras $A$. The given isomorphism $U\\cong\\operatorname{Spec}A$ induces an isomorphism on the two-factor fibre products by their universal property [def-pc-fibre-product]. Thus $P\\cong\\operatorname{Spec}(A\\otimes_{\\mathbf Z}A)$, with the two projections given by $a\\mapsto a\\otimes1$ and $a\\mapsto1\\otimes a$. In particular $P$ is affine.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I4, lemma-fibre-product-affine-schemes; Stacks 0265 opening proof paragraph, absolute affine square."
+   }
+  },
+  {
+   "text": "Write $p_1,p_2:V\\to U$ and $r_1,r_2:P\\to U$ for the projections. The definition [def-pc-fibre-product] gives $r_i\\circ k=p_i$. For any scheme $T$ and $a,b:T\\to V$ with $k\\circ a=k\\circ b$, composing with $r_i$ gives $p_i\\circ a=p_i\\circ b$ for both $i$. Uniqueness in the universal property of $V$ gives $a=b$. Hence $k$ is monic. For $a,b:T\\to R$, the equation $q\\circ a=q\\circ b$ first cancels $k$ and then cancels the given monomorphism $j$, so $a=b$. Hence $q$ is monic.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 0265, lemma-presentation-quasi-compact, first proof paragraph: the monomorphism into U times U, expanded by the fibre-product universal property."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-scheme-monomorphism-separated] to the monomorphism $q:R\\to P$ proved in step 2. It gives precisely that $q$ is separated, without a finite-type hypothesis.",
+   "uses": [
+    "lem-trf-scheme-monomorphism-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01L4, lemma-monomorphism-separated; applied in the opening paragraph of Spaces Tag 0265."
+   }
+  },
+  {
+   "text": "The morphism $q:R\\to P$ is separated by step 3 and its target $P$ is affine by step 1. Therefore [lem-sc-separated-over-affine-scheme-separated] applied to $q$ says that $R\\to\\operatorname{Spec}\\mathbf Z$ is separated. These are all conclusions. The comparison argument used only the fibre-product universal property, and the separatedness result used only monicity and the affine target; neither finite type of $j$ nor separatedness of $S$ was used.",
+   "uses": [
+    "lem-sc-separated-over-affine-scheme-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01KN (lemma-affine-separated) and 01KU (lemma-separated-permanence), as used in Spaces Tag 0265 first proof paragraph."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-pc-fibre-product",
+  "lem-trf-scheme-monomorphism-separated",
+  "lem-sc-separated-over-affine-scheme-separated"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 0265, lemma-presentation-quasi-compact, first proof paragraph; affine-square and monomorphism details expanded using Schemes 01I4 and 01L4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isSeparated_of_mono|IsSeparated.*[Pp]ullback|IsSeparated.*[Pp]rod|[Mm]ono.*[Ii]sSeparated",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Morphisms/Separated.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the combined absolute affine-square embedding and source-separatedness statement; the monomorphism and affine separatedness hits are components, requiring the comparison construction and composition argument"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSeparated, CategoryTheory.Mono",
+   "results": "1 hits: AlgebraicGeometry.IsSeparated.isSeparated_of_mono",
+   "date": "2026-10-22",
+   "verdict": "no match for the combined absolute affine-square embedding and source-separatedness statement; the monomorphism and affine separatedness hits are components, requiring the comparison construction and composition argument"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If S is any scheme and U is affine, a scheme R with a monomorphism to U times S U is separated over Spec Z",
+   "results": "8 hits: AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine, AlgebraicGeometry.IsSeparated.isSeparated_of_mono, AlgebraicGeometry.IsSeparated.of_isAffineHom, AlgebraicGeometry.IsSeparated.hasAffineProperty, AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated, AlgebraicGeometry.IsSeparated.instMap, AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift, AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine",
+   "date": "2026-10-22",
+   "verdict": "no match for the combined absolute affine-square embedding and source-separatedness statement; the monomorphism and affine separatedness hits are components, requiring the comparison construction and composition argument"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If U is an affine scheme over an arbitrary scheme S and R maps monomorphically to U times S U then R is separated over the integers",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical comparison from the relative square of an affine S scheme to its absolute square is monic and the absolute square is affine, so every scheme mapping monomorphically to the relative square is absolutely separated",
+   "results": "8 hits: AlgebraicGeometry.IsSeparated.isSeparated_of_mono, AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine, AlgebraicGeometry.IsSeparated.hasAffineProperty, AlgebraicGeometry.IsSeparated.of_isAffineHom, AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine, AlgebraicGeometry.IsSeparated.instMap, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsAffineHomIsSeparated, AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated",
+   "date": "2026-10-22",
+   "verdict": "no match for the combined absolute affine-square embedding and source-separatedness statement; the monomorphism and affine separatedness hits are components, requiring the comparison construction and composition argument"
+  },
+  {
+   "tool": "grep",
+   "query": "mono.*[Ll]ift|mono.*[Pp]rod|mono.*[Pp]ullback|comparison.*[Mm]ono",
+   "results": "25 hits: Mathlib/CategoryTheory/Limits/Shapes/StrongEpi.lean, Mathlib/CategoryTheory/Limits/Shapes/StrongEpi.lean, Mathlib/CategoryTheory/Limits/Shapes/StrongEpi.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/Square.lean, Mathlib/CategoryTheory/Limits/Shapes/BinaryProducts.lean, Mathlib/CategoryTheory/Limits/Shapes/BinaryProducts.lean, Mathlib/CategoryTheory/Limits/Shapes/BinaryProducts.lean, Mathlib/CategoryTheory/Limits/Shapes/BinaryProducts.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the combined absolute affine-square embedding and source-separatedness statement; the monomorphism and affine separatedness hits are components, requiring the comparison construction and composition argument"
+  },
+  {
+   "tool": "grep",
+   "query": "locallyOfFiniteType_of_comp|isIso_diagonal_of_mono|isSeparated_of_mono|instIsSeparatedOfIsAffine",
+   "results": "2 hits: Mathlib/AlgebraicGeometry/Morphisms/Separated.lean, Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the combined absolute affine-square embedding and source-separatedness statement; the monomorphism and affine separatedness hits are components, requiring the comparison construction and composition argument"
+  },
+  {
+   "tool": "grep",
+   "query": "isSeparated_of_mono|instIsSeparatedOfIsAffine|pullbackSpecIso",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/Group/Affine.lean, Mathlib/AlgebraicGeometry/Group/Affine.lean, Mathlib/AlgebraicGeometry/Group/Affine.lean, Mathlib/AlgebraicGeometry/Group/Affine.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete combined statement: hits give its affine, monomorphism, or separatedness components; the comparison construction and assembly still require the proof steps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an affine scheme U over any scheme S, the comparison U times S U to U times Spec Z U is monic and any monomorphism R into it has separated source",
+   "results": "8 hits: AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine, AlgebraicGeometry.IsSeparated.instMap, AlgebraicGeometry.IsSeparated.of_isAffineHom, AlgebraicGeometry.IsSeparated.hasAffineProperty, AlgebraicGeometry.IsSeparated.isSeparated_of_mono, AlgebraicGeometry.Proj.isSeparated, AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine, AlgebraicGeometry.Scheme.IsSeparated",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete combined statement: hits give its affine, monomorphism, or separatedness components; the comparison construction and assembly still require the proof steps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine scheme U over an arbitrary scheme S has a monic map from U times S U to its absolute affine square and every scheme monic into this square is separated",
+   "results": "8 hits: AlgebraicGeometry.IsSeparated.isSeparated_of_mono, AlgebraicGeometry.instQuasiSeparatedOfMonoScheme, AlgebraicGeometry.IsSeparated.of_isAffineHom, AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated, AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine, AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine, AlgebraicGeometry.IsSeparated.hasAffineProperty, AlgebraicGeometry.instUniversallyInjectiveOfMonoScheme",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete combined statement: hits give its affine, monomorphism, or separatedness components; the comparison construction and assembly still require the proof steps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any schemes X Y S T the canonical map from a relative fibre product X times S Y into X times T Y is a monomorphism",
+   "results": "8 hits: AlgebraicGeometry.IsImmersion.instMapDescScheme, AlgebraicGeometry.instMonoObjWalkingSpanCompOverSchemeTopMorphismPropertySpanOverForgetForgetForgetNoneWalkingPairSomeMapInitOfIsOpenImmersionLeftDiscretePUnit, AlgebraicGeometry.Scheme.pullback_map_isOpenImmersion, AlgebraicGeometry.Scheme.Pullback.range_map, AlgebraicGeometry.instMonoObjWalkingSpanCompSchemeSpanForgetNoneWalkingPairSomeMapInitOfIsOpenImmersion, AlgebraicGeometry.instUniversallyInjectiveOfMonoScheme, AlgebraicGeometry.IsImmersion.instιScheme, AlgebraicGeometry.IsImmersion.instFstScheme",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete combined statement: hits give its affine, monomorphism, or separatedness components; the comparison construction and assembly still require the proof steps"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-affine-etale-relation-separated-lqf",
+  "date": "2026-10-22",
+  "group": "NP"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Geometric quotient-presentation branch of lem-trf-local-term-locality through lem-trf-etale-affine-quotient-representable: Stacks 0265 opening paragraph; extracted relative-to-absolute affine-square construction and absolute separatedness (returned steps 1, 2 for q, and first part of step 3).",
+   "via": [
+    "lem-trf-affine-etale-relation-separated-lqf",
+    "lem-trf-etale-affine-quotient-representable",
+    "lem-trf-etale-relation-quotient",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-affine-square-monomorphism-absolute-separated",
+  "worker": "stage1",
+  "summary": "Expanded the absolute affine-square comparison by universal properties, proved k and q monic by cancellation, applied one new exact Mathlib leaf for scheme monomorphisms, and reused the existing affine-product and separated-over-affine leaves. No statement change.",
+  "blueprint": "The geometric quotient-presentation branch of lem-trf-local-term-locality via lem-trf-etale-affine-quotient-representable, Stacks 0265 opening proof paragraph: absolute square, comparison monicity, and absolute separatedness of R."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q103-12ad3a2a4",
+  "group": "Q103",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q103-12ad3a2a4 (reviewer sub-agent of L); spot-checked: The item states the first proof paragraph of Stacks Tag 0265 faithfully (spaces.tex l.1476-1481). Step 1: lem-weil-pbc-fibre-product-affine-spectra with base Z and A=B=A, transported along U≅Spec A, gives P≅Spec(A⊗A), so P is affine. Step 2: k is monic by r_i∘k=p_i and the uniqueness in def-pc-fibre-product, and q=k∘j is monic as a composite of monomorphisms. Step 3: the new leaf gives that q is separated. Step 4: lem-sc-separated-over-affine-scheme-separated (01KN+01KU), applied to q with affine target P, gives R→Spec Z separated. Edge cases A=0, S non-separated and j=id hold. The new node lem-trf-scheme-monomorphism-separated is self-contained, sourced to Stacks 01L4 (schemes.tex l.4563, 'A monomorphism of schemes is separated'), and is an exact Mathlib match: AlgebraicGeometry.IsSeparated.isSeparated_of_mono, Morphisms/Separated.lean l.61, class at l.43-46. Duplicate search over the snapshot DAG: lem-trf-monomorphism-finite-type-composite-lqf needs a finite-type hypothesis, lem-sfb-space-lft-monomorphism-separated-lqf is about algebraic spaces, the separated-cancellation and closed-immersion nodes are different statements, and other hits only cite 01L4 in their sources, so there is no duplicate. No SGA is cited. No changes were made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineSquareMonomorphismAbsoluteSeparated",
+  "declaration": "AlgebraicGeometry.affine_square_monomorphism_absolute_separated",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.relativeToAbsoluteSquare",
+   "AlgebraicGeometry.affine_square_monomorphism_absolute_separated"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineSquareMonomorphismAbsoluteSeparated.lean",
+  "statement": "theorem affine_square_monomorphism_absolute_separated (S U R : Scheme.{u}) (f : U ⟶ S) (r : R ⟶ S) (A : Type u) [CommRing A] (e : U ≅ Spec (CommRingCat.of A)) (j : R ⟶ pullback f f) (hj : j ≫ pullback.fst f f ≫ f = r) [Mono j] : (∃ eP : pullback (terminal.from U) (terminal.from U) ≅ Spec (CommRingCat.of (A ⊗[ℤ] A)), eP.hom ≫ Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.includeLeftRingHom : A →+* A ⊗[ℤ] A)) = pullback.fst (terminal.from U) (terminal.from U) ≫ e.hom ∧ eP.hom ≫ Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.includeRight : A →ₐ[ℤ] A ⊗[ℤ] A).toRingHom) = pullback.snd (terminal.from U) (terminal.from U) ≫ e.hom) ∧ Mono (Scheme.relativeToAbsoluteSquare f) ∧ Mono (j ≫ Scheme.relativeToAbsoluteSquare f) ∧ IsSeparated (j ≫ Scheme.relativeToAbsoluteSquare f) ∧ IsSeparated (terminal.from R)",
+  "branch": "newtargets-dag",
+  "by": "Q56",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ccb50bed3",
+  "group": "Q56",
+  "result": "pass",
+  "note": "Lean matches the node clause by clause (S,U,R; f,r; A with e : U ≅ Spec A; V = pullback f f; P = pullback over terminal = Spec ULift ℤ; S-morphism via hj; [Mono j] = cancellation; the P ≅ Spec(A⊗ℤA) existential pinned by the includeLeft/includeRight projection equations; Mono k, Mono q, IsSeparated q, IsSeparated (terminal.from R)); no extra hypotheses or universe restriction; node faithful to Stacks 0265 first proof paragraph (spaces.tex l.1475-1481); helper relativeToAbsoluteSquare is a canonical pullback.lift with real data (mapDesc targets a syntactically different pullback); stmt_dep records (Scheme, Spec, pullback, IsSeparated) consistent; lean.statement verbatim; edge cases A=0, j=id, non-separated S fine; docstrings carry the source place, the blueprint tag and proof steps 1-4; sorry only; no new nodes or dependency repairs; no compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261023T105025-L-3482013",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.affine_square_monomorphism_absolute_separated"
+  ],
+  "sorry_after": []
+ }
+}

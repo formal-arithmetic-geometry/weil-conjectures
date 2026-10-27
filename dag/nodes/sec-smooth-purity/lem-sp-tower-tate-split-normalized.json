@@ -1,0 +1,172 @@
+{
+ "id": "lem-sp-tower-tate-split-normalized",
+ "kind": "statement",
+ "title": "Normalized shifted Tate splitting in the ordinary tower category",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, and the strict ordinary derived tower coordinates, operations and given purity data of [def-sp-tower-gamma-data]. Let $X\\xrightarrow fY\\xrightarrow gZ$ be smooth separated morphisms of pure relative dimensions $d,e$ over the algebraic closure of a finite field of characteristic different from $\\ell$ [def-weil-finite-field-fiber]. All three schemes are separated and of finite type. Fix open/proper factorizations of $f,g,h=gf$, their given adjunction pairs [def-sp-adjoint-compositor-data], and their given diagonal purity records. For the three possibly different presentations of the Tate lines, there exists an actual ordinary derived tower isomorphism $s:L_h\\simeq f^*L_g\\otimes^L L_f$ such that TowerSplitNormalized [def-sp-composition-orientation-arrow-data] holds: at each positive level its comparison through the prescribed root, coefficient, pullback and tensor words [def-sp-p1-level-words] is precisely finiteLineSplit. This asserts only the splitting, not equality of composite orientations, concentration, or evaluation of mu.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+  "place": "(1), tower paragraph; step 4, construction and finite normalization of the shifted Tate splitting"
+ },
+ "stmt_deps": [
+  "def-sp-tower-gamma-data",
+  "def-weil-finite-field-fiber",
+  "def-sp-adjoint-compositor-data",
+  "def-sp-composition-orientation-arrow-data",
+  "def-sp-p1-level-words"
+ ],
+ "proof": [
+  {
+   "text": "Construct pullback of each root line in the strict-system category by [lem-coef-semilinear-derived-sections], using the canonical Tate pullback and tensor comparisons of [lem-asd-etale-finite-twist-pullback]. These commute with coefficient quotient transitions.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the positive tensor-power construction [def-coefficient-twists-detailed]. Local rank-one freeness [lem-pur-twist-sheaf-locally-free] makes tensor with each line exact, so the derived tensor of these coefficient lines is the ordinary tensor. Concatenate the e pulled-back factors with the d source factors by the associator, using the root comparisons to identify the three presentations. At zero powers use coefficient-unit pullback and unitors.",
+   "uses": [
+    "def-coefficient-twists-detailed",
+    "lem-pur-twist-sheaf-locally-free"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the simultaneous ordinary tensor and shift models of [lem-pur-diagram-pullback-monoidal-shift-models] to include the shifts. Both shifts are even, hence the sign is (-1)^(4de)=1. Evaluate the resulting actual isomorphism through the specified normalized word comparisons. Their coherence gives exactly finiteLineSplit, including the zero powers and empty scheme.",
+   "uses": [
+    "lem-pur-diagram-pullback-monoidal-shift-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-semilinear-derived-sections",
+  "lem-asd-etale-finite-twist-pullback",
+  "def-coefficient-twists-detailed",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-pur-diagram-pullback-monoidal-shift-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+  "place": "step 4, construction and finite normalization of the shifted Tate splitting"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Shifted Tate coefficient towers tensor splitting and concentration in one cohomological degree",
+   "results": "8 hits on general cochain shifts and TStructure.isGE_shift_iff. No strict coefficient tower, Tate splitting, or exceptional compositor evaluation statement.",
+   "date": "2026-10-27",
+   "verdict": "no match; general shift facts alone do not identify these specified arrows"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of an iterated tensor product of locally free rank one sheaves shifted by even integers",
+   "results": "8 hits: Sheaf.H, cohomologyPresheaf, continuous homogeneous cochains, Scheme.Modules.instAbelian, CochainComplex.HomComplex.CohomologyClass.toSmallShiftedHom_mk, groupCohomologyIsoExt. None states the required coefficient tower assertions.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso.of_isIso_fac_left",
+   "results": "One hit, Mathlib.CategoryTheory.Iso: if f and h are isomorphisms and f ≫ g = h then g is an isomorphism. Used in the parent to prove rho invertible; does not supply the three new statements.",
+   "date": "2026-10-27",
+   "verdict": "parent invertibility step available; no new-statement match"
+  },
+  {
+   "tool": "grep",
+   "query": "msearch grep towerMu|TowerSplitNormalized|orderedLine; rg orderedLine, pulled_ordered_line_single, towerRho, towerMu, TowerSplitNormalized in Mathlib, lean/WeilConjectures, lean/Sheaf and dag/nodes; blueprint_refs.py search shifted Tate splitting",
+   "results": "msearch grep: no Mathlib hits. Library: original composition helper definitions, gamma data, pullback_ordered_tate_bounds, pulled_ordered_line_single. The bounds and shifted-single existence do not state local rank of the surviving homology, normalized Tate splitting, or mu evaluation. No duplicate statement found in the DAG or current blueprint.",
+   "date": "2026-10-27",
+   "verdict": "no exact match; reuse existing data without redeclaring it"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerOrientationEvaluation",
+  "date": "2026-10-27",
+  "group": "X8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-composition-factors",
+   "place": "step 4, construction and finite normalization of the shifted Tate splitting",
+   "via": [
+    "lem-sp-tower-orientation-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-composition",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerTateSplitNormalized",
+  "file": "lean/Sheaf/Paper/TowerTateSplitNormalized.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpCompositionFactors.tower_tate_split_normalized",
+  "statement": "theorem tower_tate_split_normalized\n    (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p)\n    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [Z.Over (Spec (.of D.k))]\n    [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))]\n    [QuasiCompact (X ↘ Spec (.of D.k))]\n    [IsSeparated (Y ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))]\n    [QuasiCompact (Y ↘ Spec (.of D.k))]\n    [IsSeparated (Z ↘ Spec (.of D.k))] [LocallyOfFiniteType (Z ↘ Spec (.of D.k))]\n    [QuasiCompact (Z ↘ Spec (.of D.k))]\n    [(jf ≫ pf).IsOver (Spec (.of D.k))] [(jg ≫ pg).IsOver (Spec (.of D.k))]\n    [IsSeparated (jf ≫ pf)] [IsSeparated (jg ≫ pg)]\n    [SmoothOfRelativeDimension d (jf ≫ pf)] [SmoothOfRelativeDimension e (jg ≫ pg)]\n    (hcomp : (jf ≫ pf) ≫ (jg ≫ pg) = jh ≫ ph)\n :\n    ∃ s : SpTowerGamma.orderedLine l E b X wh (d + e) ≅\n      (SpTowerShriek.tensor l E b X).obj\n        ((SpTowerShriek.pull l E b (o.geometry (jf ≫ pf))).obj\n          (SpTowerGamma.orderedLine l E b Y wg e),\n          SpTowerGamma.orderedLine l E b X wf d),\n      TowerSplitNormalized l E b o q jf pf jg pg jh ph d e wf wg wh Pf Pg Ph af ag ah s",
+  "branch": "sheaf-dag",
+  "by": "X8",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-sp-tower-orientation-evaluation",
+  "worker": "stage3",
+  "summary": "Strict substep of the unchanged composite orientation evaluation theorem, with its exact Lean statement and a complete proof in words.",
+  "blueprint": "(1), tower paragraph; step 4, construction and finite normalization of the shifted Tate splitting",
+  "tool_uses": [
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Use the stated generic coefficient-tower/pullback/Tate comparison tool in the proof step citing it; the composition unit route is unchanged."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Use the stated generic coefficient-tower/pullback/Tate comparison tool in the proof step citing it; the composition unit route is unchanged."
+   },
+   {
+    "node": "def-coefficient-twists-detailed",
+    "why": "Use the stated generic coefficient-tower/pullback/Tate comparison tool in the proof step citing it; the composition unit route is unchanged."
+   },
+   {
+    "node": "lem-pur-twist-sheaf-locally-free",
+    "why": "Use the stated generic coefficient-tower/pullback/Tate comparison tool in the proof step citing it; the composition unit route is unchanged."
+   },
+   {
+    "node": "lem-pur-diagram-pullback-monoidal-shift-models",
+    "why": "Use the stated generic coefficient-tower/pullback/Tate comparison tool in the proof step citing it; the composition unit route is unchanged."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261027T034810-L-3687775",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261027T034810-L-3687775",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

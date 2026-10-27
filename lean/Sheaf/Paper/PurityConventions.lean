@@ -5,8 +5,7 @@ Authors: SHEAF group Q28
 -/
 module
 
-public import Sheaf.Paper.ProEtaleTateTwists
-public import Sheaf.Paper.PurityFiniteKummerLevel
+public import Sheaf.Paper.TateTwistFiniteLocallyFree
 public import Sheaf.Paper.PurityAffineLineDatum
 public import Sheaf.Paper.PurityNormalBundle
 public import Sheaf.Paper.FiniteTorAmplitude
@@ -15,14 +14,15 @@ public import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
 public import Sheaf.Paper.SfIntegralConstructible
 public import Sheaf.AlgebraicGeometry.ProEtaleCohomologicalSupport
 public import Sheaf.Paper.SfDerivedComplete
-public import Sheaf.Paper.PbcCoefficientTwists
 public import Sheaf.AlgebraicGeometry.ProEtaleRootsOfUnityInverseImage
 public import Sheaf.AlgebraicGeometry.KummerModuleCoefficients
 public import Sheaf.AlgebraicGeometry.AbelianEtaleProEtaleCohomologyComparison
 public import Sheaf.Paper.ComparisonPullbackExact
-public import Sheaf.CategoryTheory.Sites.EtaleTorsorH1Functoriality
 public import WeilConjectures.CategoryTheory.Sites.ContractedProductPresentation
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+public import Sheaf.Paper.FixedFinitePositiveCoefficientTwist
+import WeilConjectures.CategoryTheory.Sites.EtaleTorsorH1Functoriality
+import WeilConjectures.EtaleCohomology.TateTwist.KummerClassTorsor
 
 /-!
 # Purity conventions and the concrete rank-one datum
@@ -90,7 +90,26 @@ theorem rootRestriction_existsUnique (T : Scheme.{u}) (m : ℕ) :
       f ≫ (ProEtale.comparisonLowerStar AddCommGrpCat.{u + 1} T).map
           (Scheme.proEtaleRootsOfUnityInclusion T m) =
         kernel.ι (m • 𝟙 T.gmSheaf) ≫ ⟨𝟙 _⟩ := by
-  sorry
+  let F := ProEtale.comparisonLowerStar AddCommGrpCat.{u + 1} T
+  have hp : F.map (Scheme.proEtaleUnitsPower T m) =
+      m • 𝟙 (F.obj (Scheme.proEtaleUnitsSheaf T)) := by
+    change F.map (m • 𝟙 _) = _
+    rw [F.map_nsmul]
+    exact congrArg (fun f ↦ m • f) (F.map_id _)
+  let e : T.gmSheaf ⟶ F.obj (Scheme.proEtaleUnitsSheaf T) := ⟨𝟙 _⟩
+  have hz : m • kernel.ι (m • 𝟙 T.gmSheaf) = 0 := by
+    simpa only [Preadditive.comp_nsmul, Category.comp_id] using
+      kernel.condition (m • 𝟙 T.gmSheaf)
+  have hw : (kernel.ι (m • 𝟙 T.gmSheaf) ≫ e) ≫
+      F.map (Scheme.proEtaleUnitsPower T m) = 0 := by
+    rw [hp, Preadditive.comp_nsmul, Category.comp_id,
+      ← Preadditive.nsmul_comp, hz, zero_comp]
+  let hk := isLimitOfHasKernelOfPreservesLimit F (Scheme.proEtaleUnitsPower T m)
+  obtain ⟨f, hf⟩ := KernelFork.IsLimit.lift' hk
+    (kernel.ι (m • 𝟙 T.gmSheaf) ≫ e) hw
+  refine ⟨f, hf, fun g hg ↦ ?_⟩
+  apply Fork.IsLimit.hom_ext hk
+  exact hg.trans hf.symm
 
 /-- The restriction map on roots, retained before taking its comparison-adjunction mate.
 Source: blueprint sk-def-purity-conv, restriction of roots
@@ -250,6 +269,32 @@ theorem kummer_baseChange {X Y : Scheme.{u}} (f : X ⟶ Y)
       kummer X l A r hA hX (Units.map f.appTop.hom v) := by
   sorry
 
+private theorem finiteLine_hom_ext (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
+    (A : Type (u + 1)) [CommRing A] (n : ℕ)
+    (hA : ((l ^ (n + 1) : ℕ) : A) = 0)
+    {F : Sheaf (Scheme.ProEt.topology T) AddCommGrpCat.{u + 1}}
+    (f g : finiteLine T l A n hA ⟶ F)
+    (h : ∀ (V : T.ProEt) (b : (Scheme.tateFiniteCoefficient T A).obj.obj (op V))
+      (z : (Scheme.proEtaleRootsOfUnitySheaf T (l ^ (n + 1))).obj.obj (op V)),
+      f.hom.app (op V)
+          (Scheme.tateFiniteTensor T l A n (Scheme.finiteEtaleTwistScalar _ A hA) V b z) =
+        g.hom.app (op V)
+          (Scheme.tateFiniteTensor T l A n (Scheme.finiteEtaleTwistScalar _ A hA) V b z)) :
+    f = g := by
+  let α := Scheme.tateFiniteScalar T l A n (Scheme.finiteEtaleTwistScalar _ A hA)
+  let M := Scheme.purTwistRootsModule T l n
+  let P := SheafOfModules.changeOfRingsPresheafOfUniverses.{u, u + 1, u + 1, u + 1} α M
+  apply ((sheafificationAdjunction (Scheme.ProEt.topology T)
+    AddCommGrpCat.{u + 1}).homEquiv P.presheaf F).injective
+  ext U x
+  change f.hom.app U ((toSheafify (Scheme.ProEt.topology T) P.presheaf).app U x) =
+    g.hom.app U ((toSheafify (Scheme.ProEt.topology T) P.presheaf).app U x)
+  let := (α.hom.app U).hom.toAlgebra
+  induction x using TensorProduct.induction_on with
+  | zero => simp only [map_zero]
+  | add x y hx hy => simp only [map_add, hx, hy]
+  | tmul b z => exact h U.unop b z
+
 /-- The canonical exponent comparison is the existing finite Kummer identification,
 expressed with the unique quotient scalar maps and fixed on every pure tensor.
 Source: blueprint sk-def-purity-conv, independence of N
@@ -271,7 +316,32 @@ theorem finiteLineTransition_existsUnique (T : Scheme.{u}) (l : ℕ) [Fact l.Pri
             ((Scheme.proEtaleRootsOfUnityTransition T (l ^ (r + 1)) (l ^ (n + 1))
               (pow_pos (Fact.out : l.Prime).pos _) (pow_pos (Fact.out : l.Prime).pos _)
               (pow_dvd_pow l (Nat.succ_le_succ hrn))).hom.app (op V) z) := by
-  sorry
+  have hl : IsUnit (l : Γ(T, ⊤)) :=
+    (isUnit_pow_iff (Nat.succ_ne_zero r)).mp (by
+      simpa only [Nat.cast_pow] using hT)
+  let : ∀ x : T, Invertible (l : T.residueField x) := fun x ↦
+    (show IsUnit (l : T.residueField x) from by
+      simpa only [map_natCast] using hl.map (T.Γevaluation x).hom).invertible
+  obtain ⟨I, U, f, ζ, e, hc, hζ, he, hf⟩ := Scheme.tateTwist_finite_locallyFree T l
+  obtain ⟨a, ha, _⟩ := hf A r (fun b ↦ by
+    rw [nsmul_eq_mul, hr, zero_mul])
+  have har : a = Scheme.finiteEtaleTwistScalar _ A hr := Subsingleton.elim _ _
+  subst a
+  have han : (Scheme.finiteEtaleTwistScalar _ A hr).comp
+      (ZMod.castHom (pow_dvd_pow l (Nat.succ_le_succ hrn))
+        (ZMod (l ^ (r + 1)))) = Scheme.finiteEtaleTwistScalar _ A hn :=
+    Subsingleton.elim _ _
+  have hmap := ha n hrn
+  rw [han] at hmap
+  obtain ⟨k, hk, hformula⟩ := hmap
+  let := hk
+  let e := (SheafOfModules.toSheaf _).mapIso (asIso k)
+  refine ⟨e, hformula, ?_⟩
+  intro d hd
+  apply Iso.ext
+  apply finiteLine_hom_ext T l A n hn
+  intro V b z
+  exact (hd V b z).trans (hformula V b z).symm
 
 /-- The unique canonical power-transition identification at admissible exponents.
 Source: blueprint sk-def-purity-conv, independence of N
@@ -317,6 +387,43 @@ Source: blueprint sk-def-purity-conv, relative spectrum T_t
 abbrev rootCover (T : Scheme.{u}) (l r : ℕ) (v : Γ(T, ⊤)ˣ) : Scheme.{u} :=
   T.kummerCover (l ^ (r + 1)) (v : Γ(T, ⊤))
 
+private theorem homSpecEquiv_precomp {V W : Scheme.{u}} (f : V ⟶ W)
+    (R : CommRingCat.{u}) (g : W ⟶ Spec R) :
+    Scheme.homSpecEquiv V R (f ≫ g) = Scheme.homSpecEquiv W R g ≫ f.appTop := by
+  change ((ΓSpec.adjunction.homEquiv V (op R)).symm (f ≫ g)).unop = _
+  rw [Adjunction.homEquiv_naturality_left_symm]
+  rfl
+
+private theorem kummerCoverHomEquiv_precomp {T V W : Scheme.{u}} (n : ℕ)
+    (v : Γ(T, ⊤)) (h : W ⟶ T) (f : V ⟶ W)
+    (hV : V ⟶ T) (hw : f ≫ h = hV)
+    (a : {a : W ⟶ T.kummerCover n v // a ≫ T.kummerCoverπ n v = h}) :
+    ((Scheme.kummerCoverHomEquiv n v hV)
+      ⟨f ≫ a.val, by rw [Category.assoc, a.property, hw]⟩).val =
+      f.appTop ((Scheme.kummerCoverHomEquiv n v h a).val) := by
+  change (Scheme.homSpecEquiv V _ ((f ≫ a.val) ≫ pullback.snd _ _))
+      (AdjoinRoot.root _) = _
+  rw [Category.assoc, homSpecEquiv_precomp]
+  rfl
+
+private def rootTorsorUnitsEquiv (T : Scheme.{u}) (l : ℕ) [Fact l.Prime] (r : ℕ)
+    (hT : IsUnit ((l ^ (r + 1) : ℕ) : Γ(T, ⊤))) (v : Γ(T, ⊤)ˣ) (W : T.Etale) :
+    (rootTorsor T l r hT v).sheaf.obj.obj (op W) ≃
+      {w : Γ(W.left, ⊤)ˣ // w ^ (l ^ (r + 1)) = Units.map W.hom.appTop.hom.toMonoidHom v} :=
+  Equiv.subtypeEquiv (Scheme.gmSheafSectionsEquiv W) fun x ↦ by
+    change (l ^ (r + 1)) • x =
+        T.gmSheaf.obj.map
+          ((MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale T).from W).op
+          (ULift.up (Additive.ofMul v)) ↔ _
+    have hw :
+        (MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale T).from W =
+          MorphismProperty.Over.homMk W.hom := by
+      apply Subsingleton.elim
+    rw [hw]
+    change (l ^ (r + 1)) • x =
+      ULift.up (Additive.ofMul (Units.map W.hom.appTop.hom.toMonoidHom v)) ↔ _
+    exact (Scheme.gmSheafSectionsEquiv W).injective.eq_iff.symm
+
 /-- The root torsor is represented by the specified root cover, naturally on etale objects.
 Source: blueprint sk-def-purity-conv, torsor equation
 (blueprint: sk-def-purity-conv).
@@ -335,7 +442,28 @@ theorem rootTorsor_represented (T : Scheme.{u}) (l : ℕ) [Fact l.Prime] (r : �
         (x : (rootTorsor T l r hT v).sheaf.obj.obj (op W)),
         (e V ((rootTorsor T l r hT v).sheaf.obj.map f.op x)).val =
           f.left ≫ (e W x).val := by
-  sorry
+  let : NeZero (l ^ (r + 1)) := ⟨ne_of_gt (pow_pos (Fact.out : l.Prime).pos _)⟩
+  let e (W : T.Etale) :=
+    (rootTorsorUnitsEquiv T l r hT v W).trans
+      ((Scheme.unitsPowEqEquiv (l ^ (r + 1)) (Units.map W.hom.appTop.hom.toMonoidHom v)).trans
+        (Scheme.kummerCoverHomEquiv (l ^ (r + 1)) (v : Γ(T, ⊤)) W.hom).symm)
+  refine ⟨e, ?_⟩
+  intro V W f x
+  suffices heq : e V ((rootTorsor T l r hT v).sheaf.obj.map f.op x) =
+      ⟨f.left ≫ (e W x).val, by rw [Category.assoc, (e W x).property,
+        MorphismProperty.Over.w f]⟩ from congrArg Subtype.val heq
+  apply (Scheme.kummerCoverHomEquiv (l ^ (r + 1)) (v : Γ(T, ⊤)) V.hom).injective
+  apply Subtype.ext
+  have hnat := kummerCoverHomEquiv_precomp (l ^ (r + 1)) (v : Γ(T, ⊤)) W.hom
+    f.left V.hom (MorphismProperty.Over.w f) (e W x)
+  have he (W : T.Etale) (x : (rootTorsor T l r hT v).sheaf.obj.obj (op W)) :
+      ((Scheme.kummerCoverHomEquiv (l ^ (r + 1)) (v : Γ(T, ⊤)) W.hom)
+        (e W x)).val = x.val.down.toMul.val := by
+    exact congrArg Subtype.val
+      ((Scheme.kummerCoverHomEquiv (l ^ (r + 1)) (v : Γ(T, ⊤)) W.hom).apply_symm_apply _)
+  rw [he] at hnat
+  rw [he]
+  exact hnat.symm
 
 /-- Extending the root torsor by the specified coefficient insertion gives the class kappa.
 Source: blueprint sk-def-purity-conv, equivalent torsor description
@@ -361,7 +489,17 @@ theorem kummer_torsor (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
         (ProEtale.comparisonCohomologyMap T _ 1
           (Sheaf.Torsor.classH1 _ terminalIsTerminal ⟦S⟧)) =
         kummer T l A r hA hT v := by
-  sorry
+  obtain ⟨S, hS, hclass⟩ := Sheaf.Torsor.etale_torsor_h1_functoriality.2 T _ _
+    (Scheme.kummerCoefficientInsertion T (l ^ (r + 1))
+      (coefficientModule A (l ^ (r + 1)) hA) (1 : A)) (rootTorsor T l r hT v)
+  refine ⟨S, hS, ?_⟩
+  have hroot : Sheaf.Torsor.classH1 _ terminalIsTerminal ⟦rootTorsor T l r hT v⟧ =
+      T.kummerδ₀ (l ^ (r + 1)) hT (Additive.ofMul v) := by
+    exact (Sheaf.Torsor.classH1_congr
+      (MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale T)
+      terminalIsTerminal _).trans (Sheaf.Torsor.classH1_lifts _ _ _)
+  rw [← hclass, hroot]
+  rfl
 
 /-- Every positive power of the coefficient prime is a unit on a k-scheme.
 Source: blueprint sk-def-purity-conv, invertibility convention
@@ -372,7 +510,11 @@ The argument includes the empty scheme. -/
 theorem coefficientPower_isUnit (P : PurityFiniteSetting.{u}) (T : Scheme.{u})
     (a : T ⟶ Spec (.of P.field.k)) (r : ℕ) :
     IsUnit ((P.coefficients.l ^ (r + 1) : ℕ) : Γ(T, ⊤)) := by
-  sorry
+  have hl : IsUnit ((P.coefficients.l : Γ(T, ⊤)) ^ P.level) := by
+    simpa only [PurityFiniteSetting.diagonalExponent, Nat.cast_pow] using
+      P.diagonalExponent_isUnit a
+  simpa only [Nat.cast_pow] using
+    ((isUnit_pow_iff (Nat.ne_of_gt P.level_pos)).mp hl).pow (r + 1)
 
 /-- N=n is always an admissible annihilator, even when e does not divide n.
 The predecessor index represents exactly n because level_pos gives n>=1.
@@ -383,7 +525,8 @@ Use (n-1)+1=n, following from level_pos. In the DVR the underlying containment
 is (ell^n) subset (varpi^n), since the ramification index is at least one. -/
 theorem defaultAnnihilator (P : PurityFiniteSetting.{u}) :
     ((P.coefficients.l ^ (P.level - 1 + 1) : ℕ) : P.Coefficient) = 0 := by
-  sorry
+  simpa only [Nat.sub_add_cancel P.level_pos, PurityFiniteSetting.diagonalExponent] using
+    P.diagonalExponent_annihilates
 
 /-- The rank-one datum kappa(t) of the actual affine coordinate, at N=n.
 No ramification-divisibility hypothesis is imposed. The affine line, its zero

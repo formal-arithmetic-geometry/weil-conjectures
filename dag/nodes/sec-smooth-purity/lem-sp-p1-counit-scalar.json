@@ -15,16 +15,37 @@
   "lem-asd-finite-etale-twist-line",
   "lem-asd-ordinary-finite-p1-adjunction",
   "lem-sp-et-proet-coefficient-compatibility",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-asd-ordinary-finite-p1-data",
+  "def-pur-finite-smooth-coefficient-arrows",
+  "def-pur-exceptional-coefficient-normalizations",
+  "lem-pur-etale-scalar-mate-projection"
  ],
  "proof": [
   {
-   "text": "Put $L_R=R_P(1)[2]$, $H_R=F_RL_R$, and write $t_R:H_R\\to R_S$ for the normalized trace. Let $\\lambda:T_PL_A\\xrightarrow{\\sim}L_B$ be the balanced twist comparison and $b=F_B(\\lambda)\\circ\\beta_q(L_A):T_SH_A\\to H_B$. Write $m_{U,V}:T_S(U\\otimes_A^LV)\\xrightarrow{\\sim}T_SU\\otimes_B^LT_SV$ and $e:T_SA_S\\xrightarrow{\\sim}B_S$ for the tensor and unit comparisons. The normalized adjunction gives $\\epsilon_{R,K}=u_{R,K}\\circ(1_K\\otimes t_R)\\circ\\pi_{R,K}^{-1}$, where $\\pi_{R,K}:K\\otimes_R^LH_R\\to F_R(q_R^*K\\otimes_R^LL_R)$ is the forward projection map and $u_{R,K}:K\\otimes_R^LR_S\\to K$ is the right unitor. This is a formula for the actual counit. The twist is locally free of rank one, so its derived coefficient extension is the balanced ordinary one, and the exact derived scalar functor commutes with the shift.",
+   "text": "The standing schemes $S$ and $P$ are Noetherian by finite type over the field. Choose a bounded flat constructible model $C$ of $K$ using the input-model theorem; it also gives $X=T_SK\\in D^b_{ctf}$. Apply the pullback-line model lemma with $f=q$, $E=A_P(1)$ and $r=2$; the twist is etale locally free of rank one. It gives a bounded K-flat constructible model $(q^{-1}C\\otimes A_P(1))[2]$ of $G_AK$ and its Tor interval. The same holds over $B$. Thus the proper coefficient theorem makes $\\beta_q(G_AK)$ invertible. The integer $N$ is a unit on these schemes because $\\ell\\ne p$.",
+   "uses": [
+    "lemma-nagata-projective-space-base-change-proper",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sp-finite-coefficient-input-models",
+    "lem-sp-etale-pullback-line-flat-model",
+    "lem-asd-finite-etale-twist-line",
+    "lem-sp-et-proet-coefficient-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts: compatibility of iterated projective-line integration, actual counit at a complex; retained Step 7"
+   }
+  },
+  {
+   "text": "Put $L_R=R_P(1)[2]$, $H_R=F_RL_R$, and use the balanced shifted twist comparison $\\lambda:T_PL_A\\simeq L_B$. Set $b=F_B(\\lambda)\\beta_q(L_A)$, let $m$ and $e:T_SA_S\\simeq B_S$ be the scalar tensor and unit comparisons, and write $u_R$ for the right unitor. The normalized adjunction states $\\epsilon_{R,K}=u_R(1\\otimes t_R)\\pi_{R,K}^{-1}$. The new ordered projection square gives $F_B(a_K)\\beta_q(G_AK)T_S(\\pi_{A,K})=\\pi_{B,X}(1_X\\otimes b)m_{K,H_A}$. The normalized splitting gives $t_Bb=eT_S(t_A)$, with this very balanced $\\lambda$.",
    "uses": [
     "lem-asd-ordinary-finite-p1-adjunction",
-    "lem-asd-finite-etale-twist-line",
-    "lem-pur-derived-change-of-rings",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    "lem-sp-p1-ordered-projection-scalar-square",
+    "lem-sp-p1-splitting-scalar",
+    "def-pur-exceptional-coefficient-normalizations"
    ],
    "elementary": false,
    "source": {
@@ -33,48 +54,13 @@
    }
   },
   {
-   "text": "Use the geometric adjunctions $q_A^*\\dashv F_A$ and $q_B^*\\dashv F_B$, distinct from the exceptional adjunctions in the assertion. The square is the canonical isomorphism $q_B^*T_S\\simeq T_Pq_A^*$. Its mate is precisely the specified $\\beta_q$, because both are defined as the transpose of the scalar extension of the geometric counit. Its tensor compatibility is supplied by the monoidal composition comparisons for ringed-topos derived pullback: the two composites of coefficient change and geometric inverse image are the same ringed-topos pullback. Thus their comparison respects tensor products, unitors and symmetry. This applies to the identity geometric morphisms with structural ring maps $A_T\\to B_T$, without assuming these maps flat. It also identifies the composite comparison on $q_A^*K\\otimes L_A$, followed by $1\\otimes\\lambda$, with the specified $a_K$.",
+   "text": "Since $q$ is proper of finite type between Noetherian schemes and the rings are finite, the ordered projection maps are isomorphisms. Cancel them in the preceding square and substitute the actual counit formulas:\n$$\\begin{aligned}\\epsilon_{B,X}F_B(a_K)\\beta_q(G_AK)&=u_B(1_X\\otimes t_Bb)m_{K,H_A}T_S(\\pi_{A,K}^{-1})\\\\&=u_B(1_X\\otimes e)(1_X\\otimes T_St_A)m_{K,H_A}T_S(\\pi_{A,K}^{-1})\\\\&=T_S\\bigl(u_A(1_K\\otimes t_A)\\pi_{A,K}^{-1}\\bigr)=T_S(\\epsilon_{A,K}).\\end{aligned}$$\nThe last equality uses tensorator naturality at $(1_K,t_A)$ and its right-unit equation $u_B(1_X\\otimes e)m_{K,A_S}=T_S(u_A)$. Here $m$ and $e$ of def-pur-exceptional-coefficient-normalizations are, by its uniqueness clause, the tensor and unit comparisons $t_h,e_h$ of the ringed-topos pullback along $(S,B_S)\\to(S,A_S)$ in the cited monoidal comparisons, since both are computed by ordinary balancing on K-flat representatives; so these two identities apply to them.",
    "uses": [
-    "def-kun-projection-formula-map",
-    "lem-sp-et-proet-coefficient-compatibility",
-    "lem-sfb-ringed-derived-monoidal-comparisons"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-    "place": "Charts: compatibility of iterated projective-line integration, actual counit at a complex; retained Step 7"
-   }
-  },
-  {
-   "text": "Apply the projection-mate square to the geometric adjunctions of step 2, with $N_D=T_S$, $N_C=T_P$, the tensor comparisons $m$ on both sites, $M=L_A$ and the base tensor factor $K$. Its hypothesis ComparisonCompatible is exactly the monoidal square verified in step 2. The result is the coefficient/projection square for the order $H_A\\otimes K$. By lem-amb-proper-coproducts-projection the forward projection map of step 1 is exactly $\\pi_{R,K}=F_R(\\sigma)\\circ\\mathrm{PF}_q(L_R,K)\\circ\\sigma$, with $\\mathrm{PF}_q$ the counit-transpose map of def-kun-projection-formula-map (the map $P$ of the square) and $\\sigma$ the derived tensor symmetries. Precompose and postcompose with these symmetries to use $K\\otimes H_A$ instead; compatibility with symmetry from step 2 and naturality of $\\beta_q$ give, after applying $F_B(1\\otimes\\lambda)$, the equality\n$$F_B(a_K)\\circ\\beta_q(G_AK)\\circ T_S(\\pi_{A,K})=\\pi_{B,T_SK}\\circ(1_{T_SK}\\otimes b)\\circ m_{K,H_A}.$$\nAll maps here are the normalized ones: the projection map is the geometric counit transpose, and the coefficient map is its stated mate. In particular this square is not inferred merely from invertibility of projection maps.",
-   "uses": [
-    "lem-sp-categorical-projection-mate-square",
-    "def-kun-projection-formula-map",
+    "lemma-nagata-projective-space-base-change-proper",
+    "def-weil-proper-morphism",
+    "lem-amb-proper-coproducts-projection",
     "lem-sfb-ringed-derived-monoidal-comparisons",
-    "lem-amb-proper-coproducts-projection"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-    "place": "Charts: compatibility of iterated projective-line integration, actual counit at a complex; retained Step 7"
-   }
-  },
-  {
-   "text": "The scalar compatibility of the normalized two-summand splitting gives the trace equation $t_B\\circ b=e\\circ T_S(t_A)$. Here the $b$ of step 1 includes the same balanced twist comparison as that splitting statement. Thus the trace is compatible with this particular coefficient map, including its normalization by the Kummer class; no assertion about an arbitrarily chosen right adjoint or trace is used.",
-   "uses": [
-    "lem-sp-p1-splitting-scalar"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-    "place": "Charts: compatibility of iterated projective-line integration, actual counit at a complex; retained Step 7"
-   }
-  },
-  {
-   "text": "The projection maps $\\pi_{A,K}$ and $\\pi_{B,T_SK}$ are isomorphisms by lem-amb-proper-coproducts-projection, since $q$ is proper of finite type between Noetherian schemes (step 6) and $A,B$ are finite rings. Cancel these projection maps in the square of step 3 and substitute the actual counit formula of step 1. For $X=T_SK$ this gives\n$$\\begin{aligned}\\epsilon_{B,X}F_B(a_K)\\beta_q(G_AK)&=u_{B,X}(1_X\\otimes t_Bb)m_{K,H_A}T_S(\\pi_{A,K}^{-1})\\\\&=u_{B,X}(1_X\\otimes e)(1_X\\otimes T_St_A)m_{K,H_A}T_S(\\pi_{A,K}^{-1})\\\\&=T_S\\bigl(u_{A,K}(1_K\\otimes t_A)\\pi_{A,K}^{-1}\\bigr)=T_S(\\epsilon_{A,K}).\\end{aligned}$$\nThe second line uses step 4. The third uses naturality of $m$ at $(1_K,t_A)$ and its right-unit equation $u_{B,X}(1_X\\otimes e)m_{K,A_S}=T_S(u_{A,K})$. These are precisely the unit and naturality identities of the cited strong monoidal comparison.",
-   "uses": [
-    "lem-sfb-ringed-derived-monoidal-comparisons",
-    "lem-amb-proper-coproducts-projection"
+    "def-pur-exceptional-coefficient-normalizations"
    ],
    "elementary": true,
    "source": {
@@ -83,17 +69,11 @@
    }
   },
   {
-   "text": "The standing base $S$ is Noetherian: a field is Noetherian and finite-type morphisms preserve this property by lem-weil-pbc-finite-type-over-noetherian. Apply lem-sp-finite-coefficient-input-models to represent $K$ by a bounded flat constructible complex $P$; it also gives $T_SK\\in D^b_{ctf}$. The exact inverse-image functor preserves the degree support, and ringed-topos pullback preserves its flat terms. Since $q^{-1}$ is exact, $H^i(q^{-1}P)=q^{-1}H^i(P)$. If $(\\iota_k:Z_k\\to S)$ is a stratification witnessing constructibility of $H^i(P)$ in the sense of def-weil-pbc-etale-constructible-sheaf, the base changes $\\iota'_k:Z_k\\times_SP\\to P$ are immersions whose images $q^{-1}(T_k)$ partition $P$ into locally closed subsets, constructible by lem-pur-scheme-constructible-preimage; and $\\iota_k'^{-1}q^{-1}H^i(P)\\cong q_k^{-1}\\iota_k^{-1}H^i(P)$ for $q_k:Z_k\\times_SP\\to Z_k$, which is finite locally constant on the base-changed trivializing etale covers. Tensoring $q^{-1}P$ with the twist, flat and locally isomorphic to $A_P$ by lem-asd-finite-etale-twist-line, gives a complex of flat terms with cohomology $q^{-1}H^i(P)\\otimes A_P(1)$, finite locally constant on the strata after refining by the trivializing covers of the twist; shifting by $[2]$ gives a bounded K-flat constructible model of $G_AK$. A bounded complex of flat terms in $[a,b]$ computes its derived tensor with any module $H[0]$ termwise, so it has Tor amplitude in $[a,b]$. This verifies that the coefficient isomorphism theorem applies at $G_AK$; the same argument works over $B$. All comparisons used above are natural. Precomposing step 5 with $\\beta_q(G_AK)^{-1}$ identifies $a_K$ as the unique transpose of $T_S(\\epsilon_{A,K})\\circ\\beta_q(G_AK)^{-1}$ under the exceptional adjunction over $B$. The defining mate bijection therefore identifies $a$ with the mate of $\\beta_q^{-1}$ for $F_A\\dashv G_A$ and $F_B\\dashv G_B$.",
+   "text": "All comparisons are natural. The functors $F_R$, $G_R$, $T_S$ and $T_P$ preserve the $D^b_{ctf}$ subcategories, so both adjunctions $F_R\\dashv G_R$ restrict to them and $\\beta_q$ is invertible on all of $D^b_{ctf}(P_{et},A)$ by the proper coefficient theorem of step 1, so $\\beta_q^{-1}$ is a natural transformation there. Compose the counit identity with $\\beta_q(G_AK)^{-1}$. Under the actual exceptional adjunction $F_B\\dashv G_B$, it says precisely that $a_K$ is the unique transpose of $T_S(\\epsilon_{A,K})\\circ\\beta_q(G_AK)^{-1}$. The defining mate bijection therefore gives the final assertion.",
    "uses": [
-    "lem-sp-et-proet-coefficient-compatibility",
-    "lem-asd-finite-etale-twist-line",
     "def-weil-pbc-adjunction-mate",
-    "lem-sp-finite-coefficient-input-models",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-pur-scheme-constructible-preimage",
-    "def-weil-pbc-etale-constructible-sheaf"
+    "lem-sp-etale-ctf-chart-domain",
+    "lem-sp-et-proet-coefficient-compatibility"
    ],
    "elementary": false,
    "source": {
@@ -103,22 +83,21 @@
   }
  ],
  "proof_deps": [
-  "lem-asd-ordinary-finite-p1-adjunction",
-  "lem-asd-finite-etale-twist-line",
-  "lem-pur-derived-change-of-rings",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "def-kun-projection-formula-map",
-  "lem-sp-et-proet-coefficient-compatibility",
-  "lem-sfb-ringed-derived-monoidal-comparisons",
-  "lem-sp-categorical-projection-mate-square",
-  "lem-amb-proper-coproducts-projection",
-  "lem-sp-p1-splitting-scalar",
-  "def-weil-pbc-adjunction-mate",
-  "lem-sp-finite-coefficient-input-models",
+  "lemma-nagata-projective-space-base-change-proper",
+  "def-weil-proper-morphism",
   "lem-weil-pbc-finite-type-over-noetherian",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-pur-scheme-constructible-preimage",
-  "def-weil-pbc-etale-constructible-sheaf"
+  "lem-sp-finite-coefficient-input-models",
+  "lem-sp-etale-pullback-line-flat-model",
+  "lem-asd-finite-etale-twist-line",
+  "lem-sp-et-proet-coefficient-compatibility",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-sp-p1-ordered-projection-scalar-square",
+  "lem-sp-p1-splitting-scalar",
+  "def-pur-exceptional-coefficient-normalizations",
+  "lem-amb-proper-coproducts-projection",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "def-weil-pbc-adjunction-mate",
+  "lem-sp-etale-ctf-chart-domain"
  ],
  "proof_origin": {
   "by": "agent",
@@ -217,10 +196,10 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-sp-p1-counit-scalar",
-  "worker": "stage1 Q35",
-  "summary": "Kept the statement unchanged. Expanded the actual exceptional counit as inverse normalized projection followed by tensor of the normalized trace, applied the existing general projection-mate square to coefficient extension, and used the existing splitting/trace scalar equation. Wrote the naturality and right-unitor calculation, then the mate characterization. No new nodes.",
+  "worker": "stage1 Q06",
+  "summary": "Repair of the 6034-character return: unchanged statement, two statement-only independently workable children for the ordered coefficient/projection normalization (old steps 2-3) and termwise flat constructible pullback-and-line model (old step 6). The actual counit and trace formulas remain existing citations and the parent carries their explicit unitor assembly. Original proof and report preserved in the repair report.",
   "blueprint": "Charts paragraph of det-sp-reduction-exceptional: the sentence asserting that the scalar-extended counit at K is the counit at K_B under the canonical twist/tensor comparison; retained Step 7.",
   "tool_uses": [
    {
@@ -242,6 +221,10 @@
    {
     "node": "lem-amb-proper-coproducts-projection",
     "why": "Its statement defines the ordered proper projection map pi (symmetry, counit-transpose PF, symmetry) used in the counit formula of lem-asd-ordinary-finite-p1-adjunction, and asserts its invertibility; no node of the unit states it. Added by the maintainer reader."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Generic properness of relative projective space, applied to the two homogeneous coordinates of P1; the proper-morphism definition includes finite type. This verifies applicability of Noetherianity and the ordered proper projection formula."
    }
   ]
  },
@@ -250,15 +233,62 @@
   "lem-sp-finite-coefficient-input-models",
   "lem-weil-pbc-finite-type-over-noetherian",
   "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-amb-proper-coproducts-projection"
+  "lem-amb-proper-coproducts-projection",
+  "lemma-nagata-projective-space-base-change-proper"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q35-31182de1b",
-  "group": "Q35",
+  "reviewer": "NT-cc-Q06-1a83d93a4",
+  "group": "Q06",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-31182de1b (reviewer sub-agent of L); spot-checked: I read the whole item: the statement is unchanged and true, with 6 steps and no new nodes. The mathematics checks out. Step 1's counit formula is quoted verbatim from lem-asd-ordinary-finite-p1-adjunction. Step 2: beta_q is the mate of the monoidal square q_B^*T_S≅T_Pq_A^* (lem-sfb composition comparisons, no flatness assumed). Step 3 matches the Lean square map_rightAdjointProjectionMap_comp_mateEquiv with F=q_A^*, N_D=T_S, N_C=T_P, M=L_A, L=K. Step 4 uses only the statement of lem-sp-p1-splitting-scalar. I recomputed the unitor and naturality calculation of step 5 and it is correct. The mate clause follows by uniqueness of transposes. Two faults, both repaired. (1) C4: steps 3 and 5 rely on the ordered projection map π=Rq_*(σ)∘PF∘σ and on its invertibility without citing lem-amb-proper-coproducts-projection, which states both; it is now cited and the identity is written. (2) C1: step 6 claimed that a constructible stratification pulls back without citing the constructibility of the pulled-back strata (condition (a) of def-weil-pbc-etale-constructible-sheaf). I added lem-pur-scheme-constructible-preimage and the definition, and wrote out the base-changed strata and covers, the twist refinement and the Tor amplitude of a bounded flat complex. I also updated proof_deps and added the tool_use for lem-amb-proper-coproducts-projection. review_split on the fixed node gives PASS. No SGA is used. The off-unit uses (p1 adjunction, tensor pullback, et/proet coefficient compatibility) are stmt_deps of the item's own statement and are accepted. No duplicate exists: lem-asd-proper-finite-coefficient-extension and def-asd-ordinary-finite-trace-counit state different facts. Edge cases checked: K=0, identity coefficient map, Z/ℓ^2→Z/ℓ, empty S, even shift.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-1a83d93a4 (reviewer sub-agent of L); spot-checked: I read the item and both new nodes in full, against the human re-split note. The note was released 2026-10-22 13:47 CST, after the Q21 S2 PASS landed at 13:17, so this delivery is not superseded. The landed lean and lean_audit fields are byte-identical to live. The old six steps map cleanly with nothing dropped: old steps 2-3 (about 2050 chars) become the new node lem-sp-p1-ordered-projection-scalar-square. The model part of old step 6 (about 1500 chars) becomes the new node lem-sp-etale-pullback-line-flat-model. Old steps 1 and 4 are existing nodes (lem-asd-ordinary-finite-p1-adjunction, lem-sp-p1-splitting-scalar). Old step 5's unitor calculation stays as the parent's assembly. The parent proof is 2020 chars (2545 after my fix). Ordered square: I checked the typing of both sides, T_S(K⊗H_A)→F_BG_BT_SK. It is the scalar-extension specialisation of lem-weil-pbc-ringed-exchange-tensor-coherence and of the categorical projection-mate square, conjugated by σ and λ. It needs no flatness of B (tested on Z/ℓ²→Z/ℓ and on the identity map). It names β_q, λ and a_K, so it is not a duplicate. Model node: bounded flat terms make the complex K-flat. f^{-1} is exact and E is étale-locally R, so H^j(Q) is f^{-1}H^{j+r}(C)⊗E and the Tor interval is [a−r,b−r]. Strata and covers pull back. Tested on empty strata, negative r, trivial E and R=0. It is stronger than lem-sp-etale-ctf-chart-domain, lem-sf-pullback-tor-amplitude, lem-sfb-pullback-constant-model-constructible and lem-sp-ringed-site-tor-flat-model, so it is not a duplicate. Sources: blueprint main-20261015 sk-lem-sp-reduction-exceptional.proof.md, Charts paragraph (lines 20-36), and Stacks Tag 0963 (etale-cohomology.tex line 13836). No SGA is used. Batch-5 flag: the item already cited lem-sp-et-proet-coefficient-compatibility on base, so the closure is unchanged, and lem-trf-site-functorial-flat-resolution only gives generic functorial flat resolutions on a site, which is not trace-formula content. Accepted. FIX in fixes/dag/nodes/sec-smooth-purity/lem-sp-p1-counit-scalar.json: (1) step 3: m and e now come from def-pur-exceptional-coefficient-normalizations, but the identities used are stated for the ringed t_h,e_h; I added that they coincide by the def-pur uniqueness clause. (2) step 4: restricting the mate to D^b_ctf needs F_R, G_R and T to preserve D^b_ctf and β_q to be invertible on all of D^b_ctf(P). I added lem-sp-etale-ctf-chart-domain (same unit, no cycle, no new batch-5 reach) and the coefficient-compatibility invertibility. (3) Removed the stale tool_use prop-weil-pbc-inverse-image-modules-exact. The statement and both new nodes are unchanged.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.P1CounitScalar",
+  "declaration": "AlgebraicGeometry.Etale.p1_counit_scalar",
+  "file": "lean/Sheaf/Paper/P1CounitScalar.lean",
+  "statement": "theorem p1_counit_scalar (ell p n : ℕ) [Fact ell.Prime] (_hp : 0 < p) (_hEll : p ≠ ell) (k : Type u) [Field k] [CharP k p] {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) (hA : ((ell ^ n : ℕ) : A) = 0) (hB : ((ell ^ n : ℕ) : B) = 0) (S : Scheme.{u}) [S.Over (Spec (.of k))] [LocallyOfFiniteType (S ↘ Spec (.of k))] [QuasiCompact (S ↘ Spec (.of k))] [IsSeparated (S ↘ Spec (.of k))] : ∃ hS : IsUnit ((ell ^ n : ℕ) : Γ(S, ⊤)), ∃ e : FiniteSmoothPurity.CoefficientLineComparison φ (ell ^ n) (ell ^ n) hA hB (ProjectiveLine S), ∀ (tA : OrdinaryFiniteTwistTransport A (ell ^ n) hA) (tB : OrdinaryFiniteTwistTransport B (ell ^ n) hB) (dA : OrdinaryFiniteP1Datum A (ell ^ n) hA tA S hS) (dB : OrdinaryFiniteP1Datum B (ell ^ n) hB tB S hS) (K : DerivedCategoryModule A S) (_hK : ProEtale.AdjunctionTransfer.etaleProperty A S K), ((scalarMate φ (ProjectiveLine S ↘ S)).app ((ordinaryFiniteP1Right A (ell ^ n) hA S).obj K) ≫ (ordinaryFinitePushforward B (ProjectiveLine S ↘ S)).map ((ExceptionalCoefficients.tensorIso φ (ProjectiveLine S)).app ((ordinaryFinitePullback A (ProjectiveLine S ↘ S)).obj K, (ordinaryFiniteLine A (ell ^ n) hA (ProjectiveLine S))⟦(2 : ℤ)⟧) ≪≫ (Functor.uncurry.obj (ordinaryFiniteTensor B (ProjectiveLine S))).mapIso (Iso.prod ((scalarPullbackIso φ (ProjectiveLine S ↘ S)).app K).symm ((FiniteSmoothPurity.scalarShiftIso φ (ProjectiveLine S) (2 : ℤ)).app _ ≪≫ (shiftFunctor _ (2 : ℤ)).mapIso e.derivedIso))).hom ≫ dB.adjunction.counit.app ((scalarExtension φ S).obj K) = (scalarExtension φ S).map (dA.adjunction.counit.app K)) ∧ ∃ hβ : IsIso ((scalarMate φ (ProjectiveLine S ↘ S)).app ((ordinaryFiniteP1Right A (ell ^ n) hA S).obj K)), ((ExceptionalCoefficients.tensorIso φ (ProjectiveLine S)).app ((ordinaryFinitePullback A (ProjectiveLine S ↘ S)).obj K, (ordinaryFiniteLine A (ell ^ n) hA (ProjectiveLine S))⟦(2 : ℤ)⟧) ≪≫ (Functor.uncurry.obj (ordinaryFiniteTensor B (ProjectiveLine S))).mapIso (Iso.prod ((scalarPullbackIso φ (ProjectiveLine S ↘ S)).app K).symm ((FiniteSmoothPurity.scalarShiftIso φ (ProjectiveLine S) (2 : ℤ)).app _ ≪≫ (shiftFunctor _ (2 : ℤ)).mapIso e.derivedIso))).hom = dB.adjunction.homEquiv _ _ (@inv _ _ _ _ ((scalarMate φ (ProjectiveLine S ↘ S)).app ((ordinaryFiniteP1Right A (ell ^ n) hA S).obj K)) hβ ≫ (scalarExtension φ S).map (dA.adjunction.counit.app K))",
+  "branch": "sheaf-dag",
+  "by": "Q21",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the existing normalized CoefficientLineComparison with N=M=ell^n; its existence and invertibility on the required input are conclusions, not additional assumptions. The explicit canonical tensor/pullback/shift composite is used in both the counit equation and its inverse-beta transpose characterization. Quantifies over the existing fully normalized OrdinaryFiniteP1Datum, so the actual counit and Kummer/projection normalization are retained. No downstream ReductionExceptional module is imported."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-06f64c911",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Lean matches the node clause by clause: setting, D^b_ctf via etaleProperty, G_R as ordinaryFiniteP1Right, actual normalized adjunctions via OrdinaryFiniteP1Datum, beta_q = scalarMate (proper part of etaleCoefficientMap), a_K = tensorIso/scalarPullbackIso/scalarShiftIso+e.derivedIso composite (same as downstream reductionEtaleP1ScalarIso), counit equation in correct order, mate clause as homEquiv transpose with IsIso beta concluded. The ∃ e CoefficientLineComparison(N=N) is unique (roots=1, generators, derived_normalization); twist transports and P1 data are uniquely normalized. Mechanical theorem stmt_dep lem-pur-etale-scalar-mate-projection: scalarPullbackIso is .choose of that node's ∃! theorem and scalarMate is built from it, so the statement depends on an object the theorem constructs: PASS on this point. Four added stmt_deps are acyclic and each owns a used declaration; statement verbatim; docstrings fine; sorry-only; universes per convention; edge cases fine. Advisory for stage 3: add import Sheaf.Paper.P1SplittingScalar (proof dep landed after base)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261025T162339-L-428611",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Etale.p1_counit_scalar"
+  ],
+  "sorry_after": [
+   "AlgebraicGeometry.Etale.p1_counit_scalar"
+  ]
+ }
 }

@@ -1,0 +1,236 @@
+{
+ "id": "lem-sfb-noetherian-local-nonzerodivisor-flat-lift",
+ "kind": "statement",
+ "title": "Flatness lifts through a target nonzerodivisor in a Noetherian local ring",
+ "statement": "Let $A$ be a commutative ring and $(C,\\mathfrak m)$ a nonzero commutative Noetherian local ring [def-weil-pbc-noetherian-ring], meaning that $\\mathfrak m$ is its unique maximal ideal. Let $A\\to C$ be a ring homomorphism and let $t\\in\\mathfrak m$ be a nonzerodivisor on $C$, meaning that $tc=0$ implies $c=0$ for all $c\\in C$. If $C/tC$ [def-weil-pbc-algebra-hom-quotient], regarded as an $A$-module through $A\\to C\\to C/tC$, is flat [def-weil-pbc-flat-ring-map], then $C$ is flat as an $A$-module. No Noetherian, local, finite-presentation or flatness hypothesis is imposed on $A$ or on $A\\to C$ beforehand.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 062U (lemma-flat-at-x), algebraic kernel-and-Nakayama argument in the proof; the same argument works for arbitrary commutative A, since only C is used as a Noetherian local ring. Used by Tag 063T (lemma-quasi-regular-immersion-flat-at-x)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Fix a finitely generated ideal $I=(a_1,\\ldots,a_r)\\subseteq A$. Put $P=I\\otimes_A C$, with its $C$-module structure on the second factor, and let $\\mu:P\\to C$ send $a\\otimes c$ to $\\varphi(a)c$, where $\\varphi:A\\to C$ is the given map. This is $C$-linear, so $K=\\ker\\mu$ is a $C$-submodule. The elements $a_i\\otimes1$ generate $P$: write $a=\\sum_i b_i a_i$ to obtain $a\\otimes c=\\sum_i a_i\\otimes\\varphi(b_i)c$. Thus $P$ is finite over $C$, and $K$ is finite by [lem-weil-pbc-noetherian-submodule-finite], using Noetherianity of $C$ only.",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 062U (lemma-flat-at-x), kernel-and-Nakayama argument; supporting Algebra Tags 00HD, 00DF, 00IK and 00DV."
+   }
+  },
+  {
+   "text": "Write $D=C/tC$ and $\\pi:C\\to D$ for the quotient. Tensor the exact sequence $C\\xrightarrow{t}C\\xrightarrow{\\pi}D\\to0$ of $A$-modules with $I$. By [lem-weil-pbc-tensor-right-exact], the induced map $q=1\\otimes\\pi:P\\to I\\otimes_A D$ has kernel $tP$ and is surjective. The multiplication map $\\bar\\mu:I\\otimes_A D\\to D$, $a\\otimes\\bar c\\mapsto\\overline{\\varphi(a)c}$, is injective: it is the tensor of the injection $I\\hookrightarrow A$ with the flat $A$-module $D$, under $A\\otimes_A D=D$, by [def-weil-pbc-flat-ring-map]. On pure tensors $\\bar\\mu q=\\pi\\mu$, hence the equality holds on all of $P$.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 062U (lemma-flat-at-x), kernel-and-Nakayama argument; supporting Algebra Tags 00HD, 00DF, 00IK and 00DV."
+   }
+  },
+  {
+   "text": "For $k\\in K$, the equality $\\bar\\mu(q(k))=\\pi(\\mu(k))=0$ and injectivity of $\\bar\\mu$ give $q(k)=0$. Hence $k=ty$ for some $y\\in P$. Then $0=\\mu(k)=t\\mu(y)$; since $t$ is a nonzerodivisor on $C$, $\\mu(y)=0$, so $y\\in K$. Consequently $K\\subseteq tK$; the reverse inclusion follows from $C$-linearity of $\\mu$. Thus $K=tK$. This diagram chase uses only exactness at the middle term from Step 2; injectivity of multiplication by $t$ on $P$ is unnecessary.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 062U (lemma-flat-at-x), kernel-and-Nakayama argument; supporting Algebra Tags 00HD, 00DF, 00IK and 00DV."
+   }
+  },
+  {
+   "text": "The ideal $(t)$ is contained in $\\mathfrak m$, and $\\mathfrak m$ is the Jacobson radical of $C$ because it is the unique maximal ideal. Step 1 gives finiteness of $K$ over $C$, while Step 3 gives $(t)K=K$. Apply [lem-weil-pbc-nakayama-jacobson] over $C$ to conclude $K=0$. Thus $I\\otimes_A C\\to C$ is injective for every finitely generated ideal $I\\subseteq A$. By [lem-weil-pbc-flat-fg-ideal-criterion], $C$ is flat over $A$. Neither this criterion nor Steps 1--3 require $A$ to be Noetherian or local, or the homomorphism to have any finiteness property.",
+   "uses": [
+    "lem-weil-pbc-nakayama-jacobson",
+    "lem-weil-pbc-flat-fg-ideal-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 062U (lemma-flat-at-x), kernel-and-Nakayama argument; supporting Algebra Tags 00HD, 00DF, 00IK and 00DV."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-tensor-right-exact",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-nakayama-jacobson",
+  "lem-weil-pbc-flat-fg-ideal-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 062U (lemma-flat-at-x), algebraic proof with arbitrary base ring A; only right exactness of the displayed tensor sequence is needed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "flat.*quotient|quotient.*flat|Flat.*[Nn]onzero|flat.*[Nn]onzero",
+   "results": "{\"t\": \"2026-10-23T23:08:03Z\", \"tool\": \"grep\", \"query\": \"flat.*quotient|quotient.*flat|Flat.*[Nn]onzero|flat.*[Nn]onzero\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/KrullDimension/Regular.lean\", \"Mathlib/RingTheory/Flat/TorsionFree.lean\"], \"digest\": \"bfb5df0855b67800\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: The hits give smooth flatness, faithfully flat descent, localization or completion flatness, or regularity deduced from flatness; none lifts flatness from a target nonzerodivisor quotient."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flatness of a Noetherian local algebra lifts from its quotient by a nonzerodivisor in the maximal ideal",
+   "results": "{\"t\": \"2026-10-23T23:08:03Z\", \"tool\": \"leansearch\", \"query\": \"Flatness of a Noetherian local algebra lifts from its quotient by a nonzerodivisor in the maximal ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.of_flat_tensorProduct\", \"RingHom.Flat\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"Module.flat_of_isLocalized_maximal\", \"RingHom.Flat.ofLocalizationSpanTarget\", \"Module.FaithfullyFlat.of_flat_of_isLocalHom\", \"Module.Flat.of_isLocalizedModule\", \"Algebra.FormallySmooth.exists_lift\"], \"digest\": \"581e14fee2c93890\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: The hits give smooth flatness, faithfully flat descent, localization or completion flatness, or regularity deduced from flatness; none lifts flatness from a target nonzerodivisor quotient."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, IsNoetherianRing",
+   "results": "{\"t\": \"2026-10-23T23:08:03Z\", \"tool\": \"loogle\", \"query\": \"Module.Flat, IsNoetherianRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AdicCompletion.flat_of_isNoetherian\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\"], \"digest\": \"d7e5d9b4105d3d42\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: The hits give smooth flatness, faithfully flat descent, localization or completion flatness, or regularity deduced from flatness; none lifts flatness from a target nonzerodivisor quotient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Noetherian local algebra B over a local ring A is flat over A if B modulo a nonzerodivisor in its maximal ideal is flat over A",
+   "results": "{\"t\": \"2026-10-23T23:08:04Z\", \"tool\": \"leanfinder\", \"query\": \"A Noetherian local algebra B over a local ring A is flat over A if B modulo a nonzerodivisor in its maximal ideal is flat over A\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.flat_of_isNoetherianRing\", \"Module.FaithfullyFlat.of_flat_of_isLocalHom\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"Module.flat_of_isLocalized_maximal\", \"AdicCompletion.flat_of_isNoetherian\", \"Module.free_of_flat_of_isLocalRing\", \"Algebra.Smooth.flat\", \"Module.flat_of_localized_maximal\"], \"digest\": \"1526205a5c928007\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: The hits give smooth flatness, faithfully flat descent, localization or completion flatness, or regularity deduced from flatness; none lifts flatness from a target nonzerodivisor quotient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift flatness across a regular element in the target: B is a Noetherian local ring, t in its maximal ideal is a nonzerodivisor, and B/tB is A flat, then B is A flat",
+   "results": "{\"t\": \"2026-10-23T23:09:49Z\", \"tool\": \"leanfinder\", \"query\": \"Lift flatness across a regular element in the target: B is a Noetherian local ring, t in its maximal ideal is a nonzerodivisor, and B/tB is A flat, then B is A flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Flat.ofLocalizationSpanTarget\", \"Module.flat_of_isLocalized_maximal\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"Module.flat_of_localized_maximal\", \"RingHom.Flat.ofLocalizationPrime\", \"Module.FaithfullyFlat.of_flat_of_isLocalHom\", \"Algebra.HasGoingDown.of_flat\"], \"digest\": \"be89d58f9acd21ce\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: The hits give smooth flatness, faithfully flat descent, localization or completion flatness, or regularity deduced from flatness; none lifts flatness from a target nonzerodivisor quotient."
+  },
+  {
+   "tool": "grep",
+   "query": "quotient|Quotient|nonZeroDivisor|IsRegular",
+   "results": "{\"t\": \"2026-10-23T23:10:33Z\", \"tool\": \"grep\", \"query\": \"quotient|Quotient|nonZeroDivisor|IsRegular\", \"sub\": \"RingTheory/Flat\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/Basic.lean\", \"Mathlib/RingTheory/Flat/Basic.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"Mathlib/RingTheory/Flat/TorsionFree.lean\"], \"digest\": \"51fdbd33658acec8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: The hits give smooth flatness, faithfully flat descent, localization or completion flatness, or regularity deduced from flatness; none lifts flatness from a target nonzerodivisor quotient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Noetherian local algebra C over an arbitrary commutative ring A is flat over A if C modulo a regular element in its maximal ideal is flat over A",
+   "results": "{\"t\": \"2026-10-23T23:44:01Z\", \"tool\": \"leanfinder\", \"query\": \"A Noetherian local algebra C over an arbitrary commutative ring A is flat over A if C modulo a regular element in its maximal ideal is flat over A\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.flat_of_isNoetherianRing\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"Algebra.Smooth.flat\", \"Module.flat_of_isLocalized_maximal\", \"AdicCompletion.flat_of_isNoetherian\", \"Module.FaithfullyFlat.of_flat_of_isLocalHom\", \"Module.free_of_flat_of_isLocalRing\", \"Module.flat_of_localized_maximal\"], \"digest\": \"be05d5d2589e70ac\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: quotient-lifting theorem absent from these hits; smoothness, completion flatness, localization, regularity preservation and the ideal criterion do not state the item."
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*quotient|quotient.*flat|Flat.*[Nn]onzero|flat.*[Nn]onzero",
+   "results": "{\"t\": \"2026-10-23T23:44:24Z\", \"tool\": \"grep\", \"query\": \"flat.*quotient|quotient.*flat|Flat.*[Nn]onzero|flat.*[Nn]onzero\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/KrullDimension/Regular.lean\", \"Mathlib/RingTheory/Flat/TorsionFree.lean\"], \"digest\": \"bfb5df0855b67800\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: quotient-lifting theorem absent from these hits; smoothness, completion flatness, localization, regularity preservation and the ideal criterion do not state the item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flatness lifts from a target quotient by a nonzerodivisor in a Noetherian local ring",
+   "results": "{\"t\": \"2026-10-23T23:44:24Z\", \"tool\": \"leansearch\", \"query\": \"Flatness lifts from a target quotient by a nonzerodivisor in a Noetherian local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Flat\", \"Module.Flat.isSMulRegular_of_nonZeroDivisors\", \"Module.free_of_flat_of_isLocalRing\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"Module.Flat.iff_lift_lsmul_comp_subtype_injective\", \"RingHom.Flat.holdsForLocalizationAway\", \"Module.flat_of_isLocalized_maximal\", \"Module.Flat.of_isLocalizedModule\"], \"digest\": \"49a4ecb055404d39\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: quotient-lifting theorem absent from these hits; smoothness, completion flatness, localization, regularity preservation and the ideal criterion do not state the item."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, IsNoetherianRing",
+   "results": "{\"t\": \"2026-10-23T23:44:24Z\", \"tool\": \"loogle\", \"query\": \"Module.Flat, IsNoetherianRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AdicCompletion.flat_of_isNoetherian\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\"], \"digest\": \"d7e5d9b4105d3d42\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: quotient-lifting theorem absent from these hits; smoothness, completion flatness, localization, regularity preservation and the ideal criterion do not state the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If C is Noetherian local and t in its maximal ideal is regular, flatness of C/tC over any ring A implies flatness of C over A",
+   "results": "{\"t\": \"2026-10-23T23:44:29Z\", \"tool\": \"leanfinder\", \"query\": \"If C is Noetherian local and t in its maximal ideal is regular, flatness of C/tC over any ring A implies flatness of C over A\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.flat_of_isNoetherianRing\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"Module.flat_of_isLocalized_maximal\", \"Module.flat_of_localized_maximal\", \"RingHom.Flat.propertyIsLocal\", \"Algebra.Smooth.flat\", \"AdicCompletion.flat_of_isNoetherian\", \"Module.FaithfullyFlat.of_flat_of_isLocalHom\"], \"digest\": \"be44bfedf15af4de\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: quotient-lifting theorem absent from these hits; smoothness, completion flatness, localization, regularity preservation and the ideal criterion do not state the item."
+  },
+  {
+   "tool": "grep",
+   "query": "quotient|Quotient|nonZeroDivisor|IsRegular",
+   "results": "{\"t\": \"2026-10-23T23:45:16Z\", \"tool\": \"grep\", \"query\": \"quotient|Quotient|nonZeroDivisor|IsRegular\", \"sub\": \"RingTheory/Flat\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/Basic.lean\", \"Mathlib/RingTheory/Flat/Basic.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean\"], \"digest\": \"a10f8edcb17b346c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: quotient-lifting theorem absent from these hits; smoothness, completion flatness, localization, regularity preservation and the ideal criterion do not state the item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-h1-flat-quotient-ambient-flat-neighbourhood",
+  "date": "2026-10-24",
+  "group": "O3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Power lifting implies universal submersiveness of an affine invariant quotient. Fppf presentation used after the affine invariant quotient construction. Supporting input: Apply the flat-groupoid algebraicity theorem to the action groupoid; unlike the smooth-groupoid theorem this does not require H smooth. Algebraicity step: criteria.tex Tag 06FI applies the general bootstrap theorem Tag 06DC to the flat locally finitely presented quotient presentation. Supporting input: Tag 06CL (lemma-lci-locus-stack-in-groupoids); examples-stacks.tex Tag 05WB (lemma-hilbert-d-stack). Proof input: 06CL application of spaces-more-morphisms lemma-where-lci to Z -> X_y over T. Supporting source-locus input: Tag 06CE proof, first two sentences, applying Tag 06CA to the relative morphism. Scheme input for the compatible-chart reduction in Tag 06CA: more-morphisms.tex Tag 06B8, pointwise base-change equivalence. Immersion input to the scheme chart argument: 063V(2), for passage from a Koszul chart with flat source to all parameter base changes, including the fibre. Supporting input: Tag 063V (lemma-flat-relative-H1-regular), conclusion (1), affine principal-neighbourhood form; its proof by absolute Noetherian approximation, followed by openness of flatness. Local Noetherian step: Tag 063T uses Tag 062U (lemma-flat-at-x) repeatedly to lift flatness through the regular equations.",
+   "via": [
+    "lem-sfb-h1-flat-quotient-ambient-flat-neighbourhood",
+    "lem-sfb-relative-h1-immersion-universal-koszul",
+    "lem-sfb-scheme-relative-lci-base-change-points",
+    "lem-sfb-space-relative-lci-source-locus",
+    "lem-sfb-space-relative-lci-parameter-open",
+    "lem-sfb-relative-finite-hilbert-lci-open",
+    "lem-sfb-fppf-stack-algebraicity-bootstrap",
+    "lem-sfb-flat-groupoid-algebraic-quotient",
+    "lem-sfb-flat-affine-action-stack-presentation",
+    "lem-sfb-power-lifting-quotient-submersive",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-noetherian-local-nonzerodivisor-flat-lift",
+  "worker": "stage1",
+  "summary": "Read Stacks 062U and its Algebra inputs. Kept the arbitrary-base statement unchanged and wrote the finite ideal-tensor kernel, quotient diagram chase, Nakayama, and ideal-criterion proof. Reused five existing Mathlib leaves (including the flatness definition); no new nodes. Exact project-declaration searches and two semantic Mathlib searches found no attachment or match.",
+  "blueprint": "Supports the inherited direct-image stability branch through the relative H1-regular immersion flat-neighbourhood input: Stacks 063T repeatedly applies 062U. Current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3) read. The inherited blueprint ancestor is null (confirmed by blueprint_refs.py ancestor), so its source-chain place and via list are retained. Whole-blueprint searches for 062U and nonzerodivisor flat found no equivalent blueprint statement."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-df291590a",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-df291590a (reviewer sub-agent of L); spot-checked: I read the whole item, all five cited node statements, the parent's step 6 and divisors.tex Tag 062U lemma-flat-at-x (line 4041) in full. The statement keeps the base text. Generalizing to an arbitrary base A is correct, because the 062U proof only uses that C is Noetherian local. The delivery uses only right exactness, which is all the chase needs, instead of the source's Tor short-exactness. Step 1: I⊗_A C is finite over C, generated by the a_i⊗1, so K is finite by the Noetherian-submodule leaf. Step 2: right exactness with N=I gives ker q = tP; flatness of D=C/tC makes μ̄ injective; μ̄q = πμ holds on pure tensors. Step 3: elementary and correctly marked; it gives K = tK using that t is a nonzerodivisor in C, never on P. Step 4: (t) lies in m, which is the Jacobson radical; Nakayama gives K = 0; the finitely-generated-ideal criterion, which holds over any commutative R, gives C flat over A. All five cited nodes are Mathlib leaves and each says what its step uses. Edge cases: I=0 and I=A are fine; t=0 is excluded; t in m is needed (A=Z, C=F_p, t=1 is a counterexample without it); the example k[[s]] → k[[s,t]] holds. Duplicate search covered 062U, 00MK, 00MF, 00ML and nonzerodivisor+flat. The 00ML nonzerodivisor-criterion nodes put the element in the base and assume flatness over A/x; 00MG, 00MP, 056Y, 06LI and the 062Y nodes are different statements. No new nodes, no SGA source, no tool_uses, no repair note. The parent step-6 use matches the hypotheses exactly. Minor: the report says citations.json and searches.jsonl were written, but they are not in the branch; this does not affect the mathematics."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.NoetherianLocalNonzerodivisorFlatLift",
+  "declaration": "Module.flat_of_noetherian_local_nonzerodivisor_quotient",
+  "file": "lean/Sheaf/RingTheory/NoetherianLocalNonzerodivisorFlatLift.lean",
+  "statement": "theorem flat_of_noetherian_local_nonzerodivisor_quotient (A : Type u) (C : Type v) [CommRing A] [CommRing C] [Algebra A C] [IsNoetherianRing C] [IsLocalRing C] (t : C) (ht_mem : t ∈ IsLocalRing.maximalIdeal C) (ht_reg : ∀ c : C, t * c = 0 → c = 0) (hquot : Module.Flat A (C ⧸ Ideal.span {t})) : Module.Flat A C",
+  "branch": "newtargets-dag",
+  "by": "Q67",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a43c251e8",
+  "group": "Q67",
+  "result": "fix",
+  "note": "Lean statement exact vs node/Stacks 062U: arbitrary CommRing A, [Algebra A C] [IsNoetherianRing C] [IsLocalRing C] (nontrivial built in), t ∈ maximalIdeal, ht_reg verbatim node nonzerodivisor def, Module.Flat A (C ⧸ span{t}) via the Ideal.Quotient.algebra composite, conclusion Module.Flat A C; universes u,v independent; statement field verbatim; node diff = lean record only; 3 stmt_dep records byte-identical to live; edge cases C=0, t=0, unit t, field C, A=0 covered; no Mathlib/project duplicate (IsSMulRegular.of_flat is the converse); no defs, sorry only, docstrings complete. Sole fault H11: the author's self-check second reading → fixes/<item>.report.md with the worker report verbatim plus an independent second reading."
+ }
+}

@@ -1,0 +1,134 @@
+{
+ "id": "lem-sfb-scalar-six-immersion-comparison",
+ "kind": "statement",
+ "title": "Closed witness and coefficient-tower coherence for the normalized immersion comparison",
+ "statement": "The normalized comparison for one coefficient arrow extends to ScalarSixExtensionData: the specified closed pushforward witness exists and the beta comparisons satisfy the canonical coefficient-tower equation. Uses [def-sfb-scalar-six-coefficient-interfaces].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+  "place": "(2)"
+ },
+ "stmt_deps": [
+  "def-sfb-scalar-six-coefficient-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "Use the normalized immersion comparison and conjugate it with the published closed comparison isomorphisms. Functoriality and cancellation give the required closed witness equation.",
+   "uses": [
+    "lem-sfb-scalar-six-normalized-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(2)"
+   }
+  },
+  {
+   "text": "The fixed module equivalence and its inverse are additive by internal-module operations transport. Their derived functors and the published extension are full, so their composite extension is full. A full extension with an invertible restriction is faithful under restriction on its essential image. Restrict the two sides of the beta tower equation. Normalization, naturality and the inverse of C.tower identify them; supported faithfulness proves their original equality.",
+   "uses": [
+    "lem-sfb-internal-module-operations-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-internal-module-operations-transport",
+  "lem-sfb-scalar-six-normalized-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+  "place": "Normalized coefficient and geometric comparisons; adjunction mate calculation and open/closed assembly"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "map_preimage|preimage_map|unit_mateEquiv",
+   "results": "25 hits: Mathlib/Logic/Function/FiberPartition.lean, Mathlib/Logic/Function/FiberPartition.lean, Mathlib/Logic/Function/FiberPartition.lean, Mathlib/Logic/Function/FiberPartition.lean, Mathlib/Logic/Function/FiberPartition.lean, Mathlib/Algebra/Category/Grp/Ulift.lean, Mathlib/Algebra/Category/Grp/Ulift.lean, Mathlib/Algebra/Category/Grp/Ulift.lean",
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib theorem for this normalized internal-module comparison. Reuse the project declarations named in proof_deps; use Mathlib adjunction, mate and full-functor APIs for the formal assembly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A full functor with a left inverse is faithful on its essential image. Restriction normalization determines comparison morphisms and implies their compatibility with a coefficient tower",
+   "results": "8 hits: CategoryTheory.Functor.essImage.liftFunctorCompIso, CategoryTheory.Functor.essImage.liftFunctor_map, CategoryTheory.Functor.Faithful.toEssImage, CategoryTheory.Functor.essImage.liftFunctorCompIso_hom_app, CategoryTheory.Functor.essImage.liftFunctor, CategoryTheory.Functor.Full.toEssImage, CategoryTheory.Functor.linear_comp_iff_of_full_of_essSurj, CategoryTheory.Functor.essImage.liftFunctorCompIso_inv_app",
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib theorem for this normalized internal-module comparison. Reuse the project declarations named in proof_deps; use Mathlib adjunction, mate and full-functor APIs for the formal assembly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normalized comparison of scalar extension with locally closed extension by zero is independent of factorization and compatible with immersion composition",
+   "results": "8 hits: IsLocalizedModule.mapExtendScalars.congr_simp, IsLocalizedModule.mapExtendScalars_apply_apply, AlgebraicGeometry.IsImmersion.comp, LinearEquiv.extendScalarsOfIsLocalizationEquiv, AlgebraicGeometry.IsClosedImmersion.comp, IntermediateField.extendScalars.orderIso, HomogeneousLocalization.instIsScalarTowerSubtypeMemOfNatLocalization, AlgebraicGeometry.isOpenImmersion_isMultiplicative",
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib theorem for this normalized internal-module comparison. Reuse the project declarations named in proof_deps; use Mathlib adjunction, mate and full-functor APIs for the formal assembly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ScalarSixPullback",
+  "date": "2026-10-24",
+  "group": "T7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-scalar-six-pullback",
+   "place": "(2)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ScalarSixImmersionComparison",
+  "file": "lean/Sheaf/SixFunctors/ScalarSixImmersionComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.scalarSixExtensionData_exists",
+  "statement": "theorem scalarSixExtensionData_exists\n    (E : LocallyClosedExtensionData.{u}) (hE : E.Coherent) (D : E.DerivedCoherence)\n    (G : ScalarSixGeometry.{u}) (C : ScalarSixPullbackData.{u})\n    (k : Type u) [Field k] (O : ScalarSixOpenComparison E G k) :\n    ScalarSixExtensionData E D G C k O",
+  "branch": "sheaf-dag",
+  "by": "T7",
+  "date": "2026-10-24"
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "Sheaf.SixFunctors.ScalarSixPullback",
+  "worker": "T7",
+  "summary": "Formalization of the corresponding normalized comparison step, with the published interfaces unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-scalar-six-normalized-immersion",
+    "why": "Published comparison or generic transport result used by this proof step; see proof."
+   },
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Additivity of the fixed module equivalence and its inverse, used to derive full faithfulness."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-a1985",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261024T191254-L-290782",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-a1985",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261024T191254-L-290782",
+  "kind": "interface",
+  "note": "independent cc review: Old ScalarSixPullback interfaces vs new ScalarSixDefinitions: changed transports rfl-equal to old bodies; old ∃-form ScalarSixExtensionData ⇔ new Nonempty structure proved both ways; 9 direct importers compiled against delivered modules (rc 0); scalarSixPullback signature byte-identical; single sorry scalarSixNormalizedImmersion_exists checked as true strict part of clause (2)"
+ }
+}

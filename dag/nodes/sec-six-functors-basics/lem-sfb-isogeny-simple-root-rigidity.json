@@ -1,0 +1,204 @@
+{
+ "id": "lem-sfb-isogeny-simple-root-rigidity",
+ "kind": "statement",
+ "title": "Rigidity of isogenies on a torus and simple root groups",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $G,H$ be reductive affine $F$-group schemes [def-sc-group-scheme], meaning smooth connected groups of finite type with no nontrivial smooth connected normal unipotent subgroup; unipotent means unipotent geometric matrices in a faithful representation. Fix split maximal tori $T\\subseteq G$, $S\\subseteq H$, and a simple-root base $\\Delta$ for the reduced root datum of $(G,T)$, as in [lem-sfb-reductive-borel-pair-structure]. Use the root subgroup schemes $U_\\alpha\\subseteq G$ of [lem-sfb-reductive-root-subgroup-parametrizations]. Suppose $f,g:G\\to H$ are surjective group-scheme homomorphisms with finite scheme-theoretic kernels, where finite means finite-dimensional coordinate algebra, and both map $T$ into $S$ as scheme morphisms. If $f|_T=g|_T$ and $f|_{U_\\alpha}=g|_{U_\\alpha}$ for every $\\alpha\\in\\Delta$, then $f=g$ as morphisms of group schemes. Every restriction equality is scheme-theoretic, equivalently on points over every commutative $F$-algebra. No separability or reducedness of the kernels is assumed, and $\\Delta=\\varnothing$ is allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 21.63, printed p.443; proof via Proposition 17.21, printed p.358, on each rank-one subgroup and Proposition 21.62, printed p.443."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-reductive-root-subgroup-parametrizations"
+ ],
+ "proof": [
+  {
+   "text": "Fix $\\alpha\\in\\Delta$. In the finite free character lattice $X=X^*(T)$, apply [lem-sfb-pid-submodule-smith-bases] over $\\mathbf Z$ to $\\mathbf Z\\alpha\\subseteq X$. After a sign change this gives a basis $\\epsilon_1,\\ldots,\\epsilon_r$ with $\\alpha=d\\epsilon_1$, $d>0$. By [lem-sfb-multiplicative-character-antiduality] these basis characters identify $T$ with $\\mathbf G_m^r$. The largest subtorus $T_\\alpha$ of $\\ker\\alpha$ is $\\{t_1=1\\}$: it is a subtorus in the kernel, and for any torus $L$ in that kernel, $d(\\epsilon_1|_L)=0$ forces $\\epsilon_1|_L=0$ because the character group of $L$ is free. Consequently a character of $T$ is trivial on $T_\\alpha$ exactly when it lies in $\\mathbf Q\\alpha\\cap X$. This retains the possibly nonreduced finite factor in $\\ker\\alpha$; it is not substituted for its largest subtorus.",
+   "uses": [
+    "lem-sfb-pid-submodule-smith-bases",
+    "lem-sfb-multiplicative-character-antiduality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition preceding Theorem 21.11, p.428; Theorem 12.9(a), pp.233--234. Character-coordinate expansion of the root-kernel torus."
+   }
+  },
+  {
+   "text": "By [lem-sfb-reductive-rank-one-reflections], $G_\\alpha=C_G(T_\\alpha)$ is a reductive connected smooth closed subgroup. It contains $T$, which is maximal there because it is maximal in $G$. The defining commutation equations over dual numbers give $\\operatorname{Lie}(G_\\alpha)=\\operatorname{Lie}(G)^{T_\\alpha}$: a tangent vector centralizes the torus precisely when its conjugation action is fixed after every scalar extension. In the weight decomposition supplied by the same node, step 1 retains exactly the zero weight and weights in $\\mathbf Q\\alpha$. Reducedness supplied there leaves only $\\alpha,-\\alpha$. Thus the roots of $(G_\\alpha,T)$ are exactly $\\{\\alpha,-\\alpha\\}$. The conjugation formula in [lem-sfb-reductive-root-subgroup-parametrizations] puts $U_\\alpha,U_{-\\alpha}$ inside $G_\\alpha$, since both characters are trivial on $T_\\alpha$. Their tangent spaces are the respective weight spaces, so uniqueness in that node, applied to $G_\\alpha$, identifies them with its own root subgroup schemes.",
+   "uses": [
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-reductive-root-subgroup-parametrizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 21.11(a),(b), pp.428--429, including its tangent-invariants calculation; formula (135), p.431."
+   }
+  },
+  {
+   "text": "Use the coroot $\\lambda=\\alpha^\\vee:\\mathbf G_m\\to T$. Its pairings with the two roots of $G_\\alpha$ are $2,-2$, so it is regular, including in characteristic two: these are integer character pairings. By [lem-sfb-regular-cocharacter-borel-description], $B_\\alpha=P_{G_\\alpha}(\\lambda)$ is a Borel containing $T$ with positive root set $\\{\\alpha\\}$. By [lem-sfb-borel-root-product-coordinates] applied to $G_\\alpha$ and this Borel, its unipotent radical is $U_\\alpha$. The Borel splitting of [lem-sfb-reductive-borel-pair-structure] therefore makes multiplication $U_\\alpha\\times_F T\\to B_\\alpha$ an isomorphism of schemes.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-regular-cocharacter-borel-description",
+    "lem-sfb-borel-root-product-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 21.29 and Theorem 21.32, pp.433--435; Theorem 21.68(a), p.445; Borel subgroup U_alpha T in the proof of Corollary 21.63, p.443."
+   }
+  },
+  {
+   "text": "For every commutative $F$-algebra $R$, write a point of $B_\\alpha(R)$ uniquely as $ut$ using step 3. Then $f(ut)=f(u)f(t)=g(u)g(t)=g(ut)$ by the two restriction hypotheses. Hence the two homomorphisms $f|_{G_\\alpha},g|_{G_\\alpha}:G_\\alpha\\to H$ agree on $B_\\alpha$ as scheme morphisms. Apply [lem-sfb-homomorphism-borel-rigidity]: $G_\\alpha$ is smooth connected affine of finite type by step 2, $H$ has those properties by hypothesis, and $B_\\alpha$ is a Borel by step 3. It follows that the restrictions agree on $G_\\alpha$, and therefore on $U_{-\\alpha}$. This holds for every $\\alpha\\in\\Delta$.",
+   "uses": [
+    "lem-sfb-homomorphism-borel-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.21, p.358, applied as in the proof of Corollary 21.63, p.443."
+   }
+  },
+  {
+   "text": "Let $E\\subseteq G$ be the closed subscheme defined in $F[G]$ by all $f^*(a)-g^*(a)$ for $a\\in F[H]$. For every $F$-algebra $R$ its points are exactly $\\{x:f(x)=g(x)\\}$. This set contains the identity and is closed under multiplication and inversion because $f,g$ are homomorphisms. Thus $E$ is a closed subgroup scheme by [def-sc-group-scheme-subgroup]. It contains $T$ and each $U_\\alpha,U_{-\\alpha}$ for $\\alpha\\in\\Delta$, by hypothesis and step 4. The generation assertion of [lem-sfb-simple-root-generation-mixed-commutation] gives $E=G$, so $f=g$. If $\\Delta$ is empty the same assertion gives $G=T$ and the torus equality already proves the result. The argument used all test algebras throughout and never imposed separability or reducedness on either kernel.",
+   "uses": [
+    "def-sc-group-scheme-subgroup",
+    "lem-sfb-simple-root-generation-mixed-commutation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 21.62 and Corollary 21.63, p.443; closed equalizer argument spells out scheme-theoretic generation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-pid-submodule-smith-bases",
+  "lem-sfb-multiplicative-character-antiduality",
+  "lem-sfb-reductive-rank-one-reflections",
+  "lem-sfb-reductive-root-subgroup-parametrizations",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-regular-cocharacter-borel-description",
+  "lem-sfb-borel-root-product-coordinates",
+  "lem-sfb-homomorphism-borel-rigidity",
+  "def-sc-group-scheme-subgroup",
+  "lem-sfb-simple-root-generation-mixed-commutation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 21.63, printed p.443: Proposition 17.21 on each rank-one centralizer, followed by Proposition 21.62. Rank-one Borel geometry expanded using Theorem 21.11 and existing Borel product/regular-cocharacter nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Borel|[Rr]eductive|[Pp]inning|[Rr]oot[Gg]roup",
+   "results": "{\"t\": \"2026-10-23T22:24:38Z\", \"tool\": \"grep\", \"query\": \"Borel|[Rr]eductive|[Pp]inning|[Rr]oot[Gg]roup\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: RootPairing.Hom and its extensionality concern abstract root-pairing maps (Mathlib/LinearAlgebra/RootSystem/Hom.lean:64-77), not isogenies of group schemes. CartanMatrix.Generators constructor injectivity and abstract MulHom.restrict do not give algebraic-group rigidity. The AlgebraicGeometry source grep has no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homomorphisms of reductive algebraic groups are determined by restrictions to a maximal torus and the simple root groups",
+   "results": "{\"t\": \"2026-10-23T22:24:38Z\", \"tool\": \"leansearch\", \"query\": \"Homomorphisms of reductive algebraic groups are determined by restrictions to a maximal torus and the simple root groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MulHom.restrict\", \"RootPairing.Hom\", \"MonoidHom.rangeRestrict\", \"RootPairing.Hom.mk.noConfusion\", \"Representation.asGroupHom\", \"AlgHom.restrictNormalAux\", \"RootPairing.Hom.casesOn\", \"RootPairing.Hom.mk\"], \"digest\": \"0338c735e780298d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: RootPairing.Hom and its extensionality concern abstract root-pairing maps (Mathlib/LinearAlgebra/RootSystem/Hom.lean:64-77), not isogenies of group schemes. CartanMatrix.Generators constructor injectivity and abstract MulHom.restrict do not give algebraic-group rigidity. The AlgebraicGeometry source grep has no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isogeny\"",
+   "results": "{\"t\": \"2026-10-23T22:24:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"isogeny\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: RootPairing.Hom and its extensionality concern abstract root-pairing maps (Mathlib/LinearAlgebra/RootSystem/Hom.lean:64-77), not isogenies of group schemes. CartanMatrix.Generators constructor injectivity and abstract MulHom.restrict do not give algebraic-group rigidity. The AlgebraicGeometry source grep has no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rigidity of isogenies of reductive groups from their maps on a Borel subgroup and simple root group parametrizations",
+   "results": "{\"t\": \"2026-10-23T22:24:40Z\", \"tool\": \"leanfinder\", \"query\": \"Rigidity of isogenies of reductive groups from their maps on a Borel subgroup and simple root group parametrizations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.Hom.mk.inj\", \"RootPairing.Hom.ext\", \"RootPairingCat.mk.inj\", \"RootPairing.Equiv.toHom\", \"RootPairing.Hom.ext_iff\", \"RootPairing.Equiv.mk.inj\", \"RootPairing.Equiv.ext\", \"RootPairing.Equiv.ext_iff\"], \"digest\": \"495f1eb758701751\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: RootPairing.Hom and its extensionality concern abstract root-pairing maps (Mathlib/LinearAlgebra/RootSystem/Hom.lean:64-77), not isogenies of group schemes. CartanMatrix.Generators constructor injectivity and abstract MulHom.restrict do not give algebraic-group rigidity. The AlgebraicGeometry source grep has no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two isogenies of split reductive algebraic groups agreeing on the maximal torus and simple positive root subgroups are equal",
+   "results": "{\"t\": \"2026-10-23T22:24:42Z\", \"tool\": \"leanfinder\", \"query\": \"Two isogenies of split reductive algebraic groups agreeing on the maximal torus and simple positive root subgroups are equal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CartanMatrix.Generators.H.inj\", \"CartanMatrix.Generators.F.inj\", \"CartanMatrix.Generators.E.inj\", \"RootPairingCat.mk.inj\", \"RootPairing.Hom.mk.inj\", \"RootPairing.Hom.ext\", \"RootSystem.ext\", \"RootPairing.ext\"], \"digest\": \"bdff622f4be9c900\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: RootPairing.Hom and its extensionality concern abstract root-pairing maps (Mathlib/LinearAlgebra/RootSystem/Hom.lean:64-77), not isogenies of group schemes. CartanMatrix.Generators constructor injectivity and abstract MulHom.restrict do not give algebraic-group rigidity. The AlgebraicGeometry source grep has no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two isogenies of reductive algebraic groups agreeing on a maximal torus and the simple root groups are equal",
+   "results": "{\"t\": \"2026-10-23T23:31:50Z\", \"tool\": \"leanfinder\", \"query\": \"Two isogenies of reductive algebraic groups agreeing on a maximal torus and the simple root groups are equal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.Hom.ext\", \"CartanMatrix.Generators.F.inj\", \"CartanMatrix.Generators.H.inj\", \"RootPairing.Hom.mk.inj\", \"RootPairing.Hom.ext_iff\", \"RootPairingCat.mk.inj\", \"RootPairing.Equiv.ext\", \"CartanMatrix.Generators.E.inj\"], \"digest\": \"7766e298e8a4be20\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: RootPairing.Hom.ext is extensionality for abstract root pairings (Mathlib/LinearAlgebra/RootSystem/Hom.lean:64-78); SerreConstruction constructor injectivity is about Lie-algebra generators, not maps of algebraic group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Surjective homomorphisms of split reductive group schemes with finite kernels are determined by the maximal torus and simple positive root subgroup restrictions",
+   "results": "{\"t\": \"2026-10-23T23:34:07Z\", \"tool\": \"leanfinder\", \"query\": \"Surjective homomorphisms of split reductive group schemes with finite kernels are determined by the maximal torus and simple positive root subgroup restrictions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GroupExtension.Splitting.mk.inj\", \"CategoryTheory.PreGaloisCategory.AutGalois.π_surjective\", \"CategoryTheory.PreGaloisCategory.autGaloisSystem_map_surjective\", \"CategoryTheory.PreGaloisCategory.autMap_surjective_of_isGalois\", \"CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois_finite_family\", \"CategoryTheory.PreGaloisCategory.evaluation_aut_surjective_of_isGalois\", \"CategoryTheory.PreGaloisCategory.surjective_of_nonempty_fiber_of_isConnected\", \"SimplicialObject.Split.Hom.mk.inj\"], \"digest\": \"1e4a845e0e19a80d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: RootPairing.Hom.ext is extensionality for abstract root pairings (Mathlib/LinearAlgebra/RootSystem/Hom.lean:64-78); SerreConstruction constructor injectivity is about Lie-algebra generators, not maps of algebraic group schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-isogeny-torus-conjugacy",
+  "date": "2026-10-24",
+  "group": "Q70"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Multiplication of simple-module dimensions along the p-adic weight expansion. Supporting input to the numerical multiplication: Steinberg tensor-product simplicity for a restricted simple module and a Frobenius pullback. Supporting input: Sections 2.25--2.29, printed pp.47--49 (relative Frobenius), and full isogeny theorem 23.25, printed pp.492--493 (existence and uniqueness up to an inner torus automorphism); isomorphism theorem 23.26. Scalar p isogeny specialization: compare f with relative Frobenius after the root-datum isomorphism between G^(p) and G, and absorb the inner torus automorphism into h. Supporting input here: Proposition 23.7, printed p.486, and full isogeny theorem 23.25, pp.492--493 (same character map determines the root-data isogeny and uniqueness up to inner torus automorphism). Algebraically closed base allows a representative in T_0(F) of a point of T_0/Z(G_0); the proof of 23.7 constructs its simple-root values. Supporting input for torus-conjugacy uniqueness: Corollary 21.63, printed p.443; proof via Proposition 17.21, printed p.358, on each rank-one subgroup and Proposition 21.62, printed p.443.",
+   "via": [
+    "lem-sfb-isogeny-torus-conjugacy",
+    "lem-sfb-scalar-p-isogeny-relative-frobenius",
+    "lem-sfb-restricted-frobenius-tensor-simplicity",
+    "lem-sfb-restricted-highest-weight-dimension-product",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-isogeny-simple-root-rigidity",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Followed Milne 21.63 via rank-one Borel restriction rigidity and existing simple-root generation. Expanded the root-kernel torus, tangent invariants, root-subgroup identifications and Borel product into steps using existing nodes. Added only the general Borel restriction theorem 17.21 as a statement-only node; checked empty roots and inseparable isogenies. No Lean attachment or Mathlib leaf.",
+  "blueprint": "The inherited blueprint.from.node is null, confirmed by blueprint_refs.py ancestor; retained its place and via chain. This is the rigidity prerequisite for torus-conjugacy uniqueness below det-thm-sf-ctf-stability-direct-images proof (3), the alteration input. Whole-blueprint searches for isogen, rank-one, Borel subgroup, homomorphism, centralizer, 17.21 and 21.23 found no equivalent statement."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-d47f2389c",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-d47f2389c (reviewer sub-agent of L); spot-checked: PASS, with no fixes. I read the item, the one new node and the statements of all ten cited nodes in full. I checked them against Milne Cor. 21.63 and Props. 17.21 and 21.62 (pp.358, 443). Milne proves 21.63 in one line: agreement on the Borel of each rank-one subgroup, then 17.21, then generation by 21.62. The five steps follow that proof. Step 1 uses the Smith-basis and character-antiduality nodes: with alpha=d*eps_1, the largest subtorus in ker alpha is {t1=1}. Step 2: the rank-one centralizer is reductive, its Lie algebra is the fixed part (proved directly with dual numbers), its roots are {+alpha,-alpha} because Q*alpha meets the roots only there, and U_{+-alpha} are its root subgroups by the uniqueness clause. Step 3: the coroot is regular since the pairings are +-2, which holds in every characteristic; P(lambda) is a Borel with positive roots {alpha}, and U_alpha x T -> B_alpha is an isomorphism. Step 4 applies the new 17.21 node to the restrictions of f and g to that rank-one subgroup. Step 5: the equalizer is a closed subgroup scheme, and the generation node gives E=G, including the case of an empty base. The new node lem-sfb-homomorphism-borel-rigidity is Milne 17.21 in the case R=k over an algebraically closed field. It has a statement only and is self-contained, with five recorded searches and the right blueprint fields. It does not duplicate an existing node: I searched with rg for 17.21 and read the Borel-related statements. It is not a clause of the item. Edge cases checked: empty base, Frobenius with a non-reduced kernel, and SL2 against PGL2 in characteristic 2. All cited statements are in the item's own unit, there is no cycle and no SGA source. Batch-5 check: the five flagged citations reach sec-trace-formula only through generic lemmas: exterior-power and dual base change, fpqc descent of smoothness, base change of fppf coverings, and freeness of finitely generated torsion-free abelian groups. None of these is part of the proof of the trace formula or of Poincare duality. Minor: the new node defines Borel inline instead of citing def-sfb-borel-subgroup-scheme; the definitions are equivalent, so I did not count this as a fault."
+ }
+}

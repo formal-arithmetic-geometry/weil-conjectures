@@ -1,0 +1,139 @@
+{
+ "id": "lem-sfb-cartier-closed-exchange-comparison",
+ "kind": "statement",
+ "title": "Comparison preserves the constant closed-exchange mate",
+ "statement": "For a commutative ring A and every commutative square D′ → D, D′ → Z′, D → Z, Z′ → Z of schemes, applying pro-etale inverse image to geoCartierSourceComparison and then geoCartierExchange equals the inverse-image site comparison followed by comparison inverse image of the ordinary supportedConstantExchange and the primed geoCartierSourceComparison [def-sfb-geo-cartier-interface]. This is an equality of sheaf maps, requiring no Cartier ideal, Kummer class, positive annihilator or finite coefficients.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+  "place": "Opening comparison paragraph and final naturality paragraph; equality of the specified closed-exchange mates"
+ },
+ "stmt_deps": [
+  "def-sfb-geo-cartier-interface"
+ ],
+ "proof": [
+  {
+   "text": "Apply mateEquiv_counit_symm and iterated_mateEquiv_conjugateEquiv_symm to the restriction/direct-image square. This identifies inverse image of lowerStarComparisonUpperStarBaseChange followed by the pro-etale counit with comparisonUpperStarCompUpperStarIso followed by comparison of the etale counit. Naturality of the counit adds the constant-sheaf comparison, giving the transpose of geoCartierSourceComparison.",
+   "uses": [
+    "def-sfb-geo-cartier-interface",
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the composition clause of comparison_pullback_coherent and cancel the invertible components to put it in the orientation of comparisonUpperStarCompUpperStarIso. Apply this to i prime followed by g and to gD followed by i. Transport along the supplied commutativity equality, and cancel the composition isomorphisms. The result is coherence of these comparisons with geoCartierPullbackSquare and Etale.squareUpperStarIso for the given arbitrary commutative square; no Cartesian hypothesis is used.",
+   "uses": [
+    "def-sfb-geo-cartier-interface",
+    "lem-weil-pbc-comparison-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Normalize both constant-sheaf comparisons by their defining adjunctions. The forward map of each uniqueness-of-left-adjoint isomorphism is the inverse-image adjunct of the constant-section map. Transpose the two composite maps through the composite inverse-image adjunctions and the canonical direct-image comparison. After applying the sheafification Hom equivalence, both sides send every constant presheaf section to the same section; the direct-image comparison is the identity at each etale object. Injectivity gives compatibility of the canonical constant maps with comparisonUpperStarCompUpperStarIso.",
+   "uses": [
+    "def-sfb-geo-cartier-interface",
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the desired equality under the pro-etale inverse-image/direct-image adjunction for i prime. Naturality of geoCartierPullbackSquare and the source-counit identity of step 1 rewrite the left transpose. Step 3 moves the constant map through comparison, and step 2 identifies its square path. On the right transpose, use the same source-counit identity for i prime, naturality of the inverse-image comparison, and Etale.upperStar_map_baseChangeMap_app_counit. Both composites coincide by functoriality and associativity. Injectivity of the Hom equivalence proves the stated equality, including empty schemes, identity morphisms and the zero ring.",
+   "uses": [
+    "def-sfb-geo-cartier-interface",
+    "lem-weil-pbc-comparison-pullback",
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-geo-cartier-interface",
+  "lem-weil-pbc-comparison-pullback",
+  "def-weil-pbc-site-comparison-morphism"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+  "place": "Opening comparison paragraph and final naturality paragraph; equality of the specified closed-exchange mates",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Etale to pro-etale sheaf comparison commutes with closed immersion base change as a counit mate",
+   "results": "Eight hits, including constantSheafAdj_counit_app, equivalence/sheafCongr counit formulas and module restriction counits. No comparison of these two exchange mates.",
+   "date": "2026-10-27",
+   "verdict": "Generic counit infrastructure only; no specialized statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Yoneda Ext exact functor natural isomorphism composition naturality pullback",
+   "results": "Ext.mapExactFunctor_hom and seven unrelated functor/Ext naturality results. They do not identify the closed exchange mates.",
+   "date": "2026-10-27",
+   "verdict": "No sheaf exchange coherence statement; reuse the existing exact-functor Ext API for the upper theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "Abelian.Ext.mapExactFunctor",
+   "results": "No hits: unqualified identifier unknown. Local source search found the Ext.Map and Ext.ExactSequences API.",
+   "date": "2026-10-27",
+   "verdict": "No specialized comparison-mate statement."
+  },
+  {
+   "tool": "grep",
+   "query": "geoCartierExchange|comparisonUpperStarCompUpperStarIso|supportedConstantExchange",
+   "results": "Mathlib search through msearch gave zero hits. Local project source has underived comparison counit and pullback-square coherence, but no equality for these constant-normalized exchange maps.",
+   "date": "2026-10-27",
+   "verdict": "The comparison-mate glue is a separate sheaf-level step; the Kummer part is already stated."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CartierReductionPullback",
+  "date": "2026-10-27",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-geo-cartier",
+   "place": "Opening comparison paragraph and final naturality paragraph; equality of the specified closed-exchange mates",
+   "via": [
+    "lem-sfb-cartier-reduction-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-geo-cartier",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CartierClosedExchangeComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/CartierClosedExchangeComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.geoCartier_closed_exchange_comparison",
+  "statement": "theorem geoCartier_closed_exchange_comparison (A : Type (u + 1)) [CommRing A]\n    {D D' Z Z' : Scheme.{u}} (i : D ⟶ Z) (i' : D' ⟶ Z')\n    (g : Z' ⟶ Z) (gD : D' ⟶ D) (sq : CommSq gD i' i g) :\n    (upperStar (ModuleCat.{u + 1} A) g).map (geoCartierSourceComparison A i) ≫\n        geoCartierExchange A i i' g gD sq =\n      (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} A) g).hom.app\n          ((Etale.lowerStar (ModuleCat.{u + 1} A) i).obj (Etale.ordinaryFiniteConstant A D)) ≫\n        (comparisonUpperStar (ModuleCat.{u + 1} A) Z').map\n          (Etale.supportedConstantExchange A i i' g gD sq) ≫\n        geoCartierSourceComparison A i'",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261027T094424-L-224191",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261027T131506-L-2946766",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

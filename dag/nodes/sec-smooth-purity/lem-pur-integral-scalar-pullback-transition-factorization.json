@@ -1,0 +1,130 @@
+{
+ "id": "lem-pur-integral-scalar-pullback-transition-factorization",
+ "kind": "statement",
+ "title": "Cofinal diagonal factorization of the finite scalar pullback square",
+ "statement": "Let $\\ell$ be prime, $E,L$ finite extensions of $\\mathbf Q_\\ell$, $\\iota:E\\to L$ a $\\mathbf Q_\\ell$-algebra embedding, and $f:X\\to Y$ a morphism of schemes. Let $P$ be any unbounded complex of completed $E$-coefficient module sheaves [lem-pur-integral-operations-well-defined]. Write $\\mathcal O_F$ for the valuation ring of $F$, $\\varpi_F$ for its chosen uniformizer and $A_{F,r}=\\mathcal O_F/(\\varpi_F^r)$ for $r\\ge1$, with the corresponding constant finite sheaves and completed inverse limit $\\widehat{\\mathcal O}_{F,-}$. Put $C_n=\\operatorname{Res}_n f^*(P\\otimes A_{E,n+1})\\otimes_{\\widehat{\\mathcal O}_{E,X}}\\widehat{\\mathcal O}_{L,X}$ and $D_n=\\operatorname{Res}_n f^*((P\\otimes_{\\widehat{\\mathcal O}_{E,Y}}\\widehat{\\mathcal O}_{L,Y})\\otimes A_{L,n+1})$, with the strict transitions of that node and ordinary scalar extension [def-weil-integral-scalar-extension, lem-weil-scalar-extension-composition]. Suppose $\\alpha:C_\\bullet\\to D_\\bullet$ is a strict tower map whose degree $i$ component, on every $V\\in Y_{\\mathrm{proet}}$ and section $x\\in P^i(V)$, sends $1\\otimes f^*(1\\otimes x)$ to $f^*(1\\otimes(1\\otimes x))$. Write C and D for the displayed strict source and target towers. For every n there are m≥n and a chain map b:D_m→C_n such that alpha_m followed by b is the source transition C_m→C_n, and b followed by alpha_n is the target transition D_m→D_n. This is a statement about ordinary quotient and pullback maps, before forming cones, homotopies, products or limits; flatness of P is not assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 (lemma-pullback-tensor-product) and 0941 (lemma-derived-limit-is-ok); derived.tex Tag 08TC defines the homotopy limit, and proetale.tex Tag 099N supplies the completion context.",
+  "note": "Finite-filtration and cone-nullhomotopy portion of the parent argument; no Roos construction or product commutation is asserted."
+ },
+ "stmt_deps": [
+  "def-weil-integral-scalar-extension",
+  "lem-weil-scalar-extension-composition",
+  "lem-pur-integral-operations-well-defined"
+ ],
+ "proof": [
+  {
+   "text": "Use the proved DVR ramification calculation in RamifiedPullbackTowerIdentification to obtain a positive exponent e, the cofinal index r(n)=e(n+1)-1, and the induced quotient maps. Apply the existing ramified coefficient comparison on X and Y, then the finite pullback comparison. Uniqueness of the completed scalar map identifies their completed maps with the canonical map. The prescribed object and morphism formulas identify their scalar functors with ordinary scalar extension. This gives an isomorphism d:C_n→D_r(n) carrying the nested unit generators to the corresponding target generators.",
+   "uses": [
+    "lem-weil-ramified-pullback-tower-identification",
+    "lem-weil-ramified-coefficient-quotient-comparison",
+    "lem-weil-ramified-finite-pullback-comparison",
+    "lem-weil-scalar-extension-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take m=r(n) and b=d.inv. Cancel d.hom in each desired triangle. The scalar-pullback generator extensionality argument from the level reduction lemma reduces equality of chain maps to equality on nested unit generators. On these generators, the first triangle follows from the formula for alpha_m, scalar functor naturality, the composite transition formula and the formula for d. The second follows from the formulas for alpha_n and d and the same transition formula. These are equalities of maps of arbitrary complexes, with no flatness condition. Positivity of e gives n≤m, including m=n when e=1.",
+   "uses": [
+    "lem-pur-integral-scalar-pullback-level-reduction",
+    "lem-weil-finite-pullback-transition-generators",
+    "lem-weil-scalar-extension-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-ramified-pullback-tower-identification",
+  "lem-weil-ramified-coefficient-quotient-comparison",
+  "lem-weil-ramified-finite-pullback-comparison",
+  "lem-weil-scalar-extension-composition",
+  "lem-pur-integral-scalar-pullback-level-reduction",
+  "lem-weil-finite-pullback-transition-generators"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J4",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 (lemma-pullback-tensor-product) and 0941 (lemma-derived-limit-is-ok); derived.tex Tag 08TC defines the homotopy limit, and proetale.tex Tag 099N supplies the completion context.",
+  "note": "Reuse the stated ramified coefficient and finite pullback comparisons; prove the diagonal identities by cancellation and generator extensionality. The arithmetic helper of the tower identification is used without its geometric invertibility hypotheses."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cofinal ramified coefficient reduction towers of sheaf pullbacks admit diagonal maps factoring both transition maps",
+   "results": "Scheme immersion and pullback diagonal results, and SheafOfModules.freeCofan. None concerns cofinal coefficient quotient towers or their scalar/pullback comparison.",
+   "date": "2026-10-27",
+   "verdict": "No matching quotient-factorization theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative square of chain maps with a diagonal factorization in both triangles induces a nullhomotopic map on mapping cones",
+   "results": "mappingCone.mapOfHomotopy, descHomotopy and liftHomotopy are generic APIs; no match for evaluated strict cone transitions or ramified scalar pullback.",
+   "date": "2026-10-27",
+   "verdict": "No complete match."
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCone.*Homotopy|proZero|cofinal.*quotient",
+   "results": "Generic mapping-cone and homotopy-equivalence results only. Local searches of both library roots found consumers of pro-zero cones, not the required diagonal for these finite pullback reductions. Blueprint searches for cone transition homotopy and scalar pullback factorization found no matching imported node.",
+   "date": "2026-10-27",
+   "verdict": "No existing specialization."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "Q3",
+  "item": "Sheaf.Paper.IntegralScalarPullbackConeProZero",
+  "date": "2026-10-27"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "Final paragraph, compatibility with extension of scalars; the finite-filtration part of the scalar pullback comparison.",
+   "via": [
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-pur-integral-scalar-pullback-roos-quasi-iso",
+    "lem-pur-integral-scalar-pullback-cone-pro-zero"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralScalarPullbackTransitionFactorization",
+  "file": "lean/Sheaf/Paper/IntegralScalarPullbackTransitionFactorization.lean",
+  "declaration": "WeilConjectures.integralScalarPullbackTransitionFactorization",
+  "statement": "theorem integralScalarPullbackTransitionFactorization {X Y : AlgebraicGeometry.Scheme.{u}}\n    (f : X ⟶ Y) (P : CochainComplex (integralTowerModules l E Y) ℤ)\n    (α : ((integralOperationsPullbackTowerFunctor l E f).obj P) ⋙\n        (integralOrdinaryScalar l E L ι X).mapHomologicalComplex (.up ℤ) ⟶\n      (integralOperationsPullbackTowerFunctor l L f).obj\n        (((integralOrdinaryScalar l E L ι Y).mapHomologicalComplex (.up ℤ)).obj P))\n    (hα :\n      ∀ (n : ℕ) (i : ℤ) (V : Y.ProEt)\n        (x : (P.X i).val.obj (op V)),\n        ((α.app (op n)).f i).val.app (op ((AlgebraicGeometry.Scheme.proEtaleBaseChange f).obj V))\n          (integralOrdinaryTensorSection l E L ι X\n            (((integralOperationsPullbackLevel.{u, u} l E f n).obj P).X i)\n            (op ((AlgebraicGeometry.Scheme.proEtaleBaseChange f).obj V)) 1\n            (integralOperationsPullbackGenerator.{u, u} l E f n\n              (((unrestrictedIntegralFiniteComplex.{u, u} l E Y n).obj P).X i) V\n              (unrestrictedIntegralTensorSection.{u, u} l E Y n (P.X i) (op V) 1 x))) =\n        integralOperationsPullbackGenerator.{u, u} l L f n\n          (((unrestrictedIntegralFiniteComplex.{u, u} l L Y n).obj\n            (((integralOrdinaryScalar l E L ι Y).mapHomologicalComplex\n              (ComplexShape.up ℤ)).obj P)).X i) V\n          (unrestrictedIntegralTensorSection.{u, u} l L Y n\n            ((integralOrdinaryScalar l E L ι Y).obj (P.X i)) (op V) 1\n            (integralOrdinaryTensorSection l E L ι Y (P.X i) (op V) 1 x))) :\n    let C := ((integralOperationsPullbackTowerFunctor l E f).obj P) ⋙\n      (integralOrdinaryScalar l E L ι X).mapHomologicalComplex (.up ℤ)\n    let D := (integralOperationsPullbackTowerFunctor l L f).obj\n      (((integralOrdinaryScalar l E L ι Y).mapHomologicalComplex (.up ℤ)).obj P)\n    ∀ n : ℕ, ∃ (m : ℕ) (h : n ≤ m) (b : D.obj (op m) ⟶ C.obj (op n)),\n      α.app (op m) ≫ b = C.map (homOfLE h).op ∧\n        b ≫ α.app (op n) = D.map (homOfLE h).op",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-27"
+ },
+ "mathlib_match": null,
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261027T064503-L-2188263",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261027T084420-L-3678293",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

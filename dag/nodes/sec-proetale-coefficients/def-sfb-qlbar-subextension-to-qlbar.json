@@ -177,7 +177,65 @@
  },
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-prop-sfb-qlbar-colimit-point",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "Profinite.padicSubfieldRingObjToPadicAlgCl",
+    "Profinite.padicSubfieldCondensedRingToPadicAlgCl",
+    "Profinite.padicSubfieldToPadicAlgClRingPresheaf",
+    "Profinite.padicSubfieldRingObjMap_comp_toPadicAlgCl"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "Profinite.padicSubfieldRingObjToPadicAlgCl",
+     "module": "WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension",
+     "lines": [
+      125,
+      131
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "Profinite.padicSubfieldCondensedRingToPadicAlgCl",
+     "module": "WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension",
+     "lines": [
+      120,
+      123
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "Profinite.padicSubfieldToPadicAlgClRingPresheaf",
+     "module": "WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension",
+     "lines": [
+      108,
+      118
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "Profinite.padicSubfieldRingObjMap_comp_toPadicAlgCl",
+     "module": "WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension",
+     "lines": [
+      138,
+      146
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "lean": {
   "module": "WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension",
   "declaration": "Profinite.padicSubfieldRingObjToPadicAlgCl",
@@ -201,5 +259,24 @@
   "group": "NA",
   "result": "pass",
   "note": "existing:true attachment to Profinite.padicSubfieldRingObjToPadicAlgCl (FiniteSubextension.lean 128-131); node unchanged except lean record. Source continuousMapRingSheaf E = padicSubfieldCondensedRing ℓ E by rfl; target padicAlgClRingObj (finite-subextension-valued Q̄_ℓ); sectionwise algebraMap∘a by rfl; IsMonHom instance; padicSubfieldRingObjMap_comp_toPadicAlgCl = j_F∘ι_{E,F}=j_E using the recorded dependency map. Statement verbatim; no extra hypotheses; universe u free; not dropped. Consumer probe via nt_compile --json clean in 29.3 s. No findings."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "For a finite subextension $E$ of $\\Qlb/\\mathbf Q_\\ell$, let\n$j_E\\colon\\underline E\\to\\underline{\\Qlb}$ be the morphism of condensed rings\n([def-sfb-padic-subfield-condensed-ring], [det-def-sfb-qlbar-condensed]) given by\n\n$$\nC(S,E)\\ni a\\longmapsto\\bigl(S\\xrightarrow{a}E\\subseteq\\Qlb\\bigr)\\in\\underline{\\Qlb}(S),\n$$\n\nviewed as a morphism of the underlying ring objects ([det-def-sfb-ring-object]). For\n$E\\subseteq F$, these maps satisfy $j_F\\circ\\iota_{E,F}=j_E$, with $\\iota_{E,F}$ as in\n[def-sfb-qlbar-subextension-map].",
+  "proof": [
+   {
+    "text": "The composite $S\\to E\\subseteq\\Qlb$ is continuous, because $E$ carries the subspace\ntopology. It takes values in the finite subextension $E$, so it is a section of\n$\\underline{\\Qlb}$. The assignment is a ring homomorphism, since the operations are\npointwise, and it commutes with precomposition. So it is a morphism of sheaves of rings,\nand by part 3 of [det-def-sfb-ring-object] a morphism of ring objects. Both\n$j_F\\circ\\iota_{E,F}$ and $j_E$ send $a$ to the same map $S\\to\\Qlb$, which gives the\ncompatibility.",
+    "uses": [
+     "det-def-sfb-ring-object"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

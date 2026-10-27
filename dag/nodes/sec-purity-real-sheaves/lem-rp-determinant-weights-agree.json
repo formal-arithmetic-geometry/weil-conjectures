@@ -168,7 +168,18 @@
   "thm-wf-rank-one-finite-geometric-image-curve"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-purity-real-sheaves",
  "unit": "sk-d-real-detweights",
  "split_report": {
@@ -197,5 +208,41 @@
    "AlgebraicGeometry.WeilGroup.hasFiniteGeometricDet_and_detWeight_eq"
   ],
   "note": "attached by the lead's tool step2_attach.py 2026-10-18 03:19 UTC (L, propagation 2026-10-18), live declaration stated, proof open in WeilConjectures.EtaleCohomology.Purity.RealSheaves.DetWeights: the blueprint item lem-rp-determinant-weights-agree's upstream Lean declarations as live states them; their proofs are still `sorry` in live (stage-3 route work)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $X_0$ be a normal geometrically connected curve over $k_0$, put\n$|k_0|=q$, fix a field embedding $\\iota:\\Qlb\\hookrightarrow\\mathbf C$, and let\n$\\lambda_\\iota(a)=2\\log|\\iota(a)|/\\log q$ be the real weight character\nof [d-weights]. Every nonzero lisse Weil sheaf $\\mathcal Q$ on $X_0$\nhas finite geometric determinant in the sense of [d-weights]. If\n$\\mathcal Q$ is irreducible, then\n\n$$\n\\dw_\\iota(\\mathcal Q)=\\dw_{\\lambda_\\iota}(\\mathcal Q),\n$$\n\nthe left side as in [def-wf-determinantal-weight] and the right side as\nin [d-weights].",
+  "proof": [
+   {
+    "text": "A continuous $\\Qlb$-representation of $W(X_0)$ is defined over a finite\nextension $E$ of $\\mathbf Q_\\ell$, and so are its irreducible\nsubquotients after enlarging $E$. Hence the determinant\n$\\det\\mathcal Q$ of [def-real-weil-representation-operations] is given,\nthrough the determinant line of [def-mg-determinant-line], by a continuous\ncharacter $\\chi_{\\det}=\\det\\circ\\rho_{\\mathcal Q}:W(X_0)\\to E^\\times$\nwith $E/\\mathbf Q_\\ell$ finite. The finite geometric image theorem\n[thm-wf-rank-one-finite-geometric-image-curve], applied to the normal\ngeometrically connected curve $X_0$ and to $\\chi_{\\det}$, says that\n$\\chi_{\\det}(\\pi_1(X))$ is finite; this is finite geometric determinant.",
+    "uses": [
+     "def-real-weil-representation-operations",
+     "def-mg-determinant-line",
+     "thm-wf-rank-one-finite-geometric-image-curve"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Let $r$ be the rank of $\\mathcal Q$ and $s$ a degree-one element. By\n[cor-wf-rank-one-punctual-purity-curve], $\\det\\mathcal Q$ is punctually\n$\\iota$-pure of weight\n\n$$\n2\\log_q|\\iota(\\chi_{\\det}(s))|=\\lambda_\\iota(\\det\\rho_{\\mathcal Q}(s)).\n$$",
+    "uses": [
+     "cor-wf-rank-one-punctual-purity-curve"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "If $\\mathcal Q$ is irreducible, the uniqueness in\n[lem-wf-determinantal-weight-exists] identifies this number with the\nweight $a$ used in [def-wf-determinantal-weight], so\n\n$$\n\\dw_\\iota(\\mathcal Q)=\\frac{a}{r}\n=\\frac{\\lambda_\\iota(\\det\\rho_{\\mathcal Q}(s))}{r}\n=\\dw_{\\lambda_\\iota}(\\mathcal Q).\n$$",
+    "uses": [
+     "lem-wf-determinantal-weight-exists",
+     "def-wf-determinantal-weight"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; the node is proved in Lean: recorded 2026-10-25, not reopened"
  }
 }

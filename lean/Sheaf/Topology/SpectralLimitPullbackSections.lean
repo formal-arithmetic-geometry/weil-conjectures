@@ -29,7 +29,7 @@ namespace TopCat.Sheaf
 
 open TopCat.Presheaf
 
-@[irreducible] private noncomputable def compUnit {A B C : TopCat.{u}} (f : A ⟶ B) (g : B ⟶ C)
+@[irreducible] noncomputable def compUnit {A B C : TopCat.{u}} (f : A ⟶ B) (g : B ⟶ C)
     (G : C.Sheaf (Type u)) :
     (pullback (Type u) g).obj G ⟶
       (pushforward (Type u) f).obj ((pullback (Type u) (f ≫ g)).obj G) :=
@@ -37,7 +37,7 @@ open TopCat.Presheaf
     (pushforward (Type u) f).map
       ((Classical.choose (exists_sets_inverseImage_comp f g)).hom.app G)
 
-private theorem compUnit_unit {A B C : TopCat.{u}} (f : A ⟶ B) (g : B ⟶ C)
+theorem compUnit_unit {A B C : TopCat.{u}} (f : A ⟶ B) (g : B ⟶ C)
     (G : C.Sheaf (Type u)) :
     (pullbackPushforwardAdjunction (Type u) g).unit.app G ≫
       (pushforward (Type u) g).map (compUnit f g G) =
@@ -61,7 +61,7 @@ private theorem compUnit_unique {A B C : TopCat.{u}} (f : A ⟶ B) (g : B ⟶ C)
   apply ((pullbackPushforwardAdjunction (Type u) g).homEquiv _ _).injective
   simpa only [Adjunction.homEquiv_unit] using hm.trans (compUnit_unit f g G).symm
 
-private theorem compUnit_comp {A B C D : TopCat.{u}}
+theorem compUnit_comp {A B C D : TopCat.{u}}
     (h : A ⟶ B) (f : B ⟶ C) (g : C ⟶ D) (G : D.Sheaf (Type u)) :
     compUnit f g G ≫ (pushforward (Type u) f).map (compUnit h (f ≫ g) G) =
       compUnit (h ≫ f) g G := by
@@ -254,7 +254,7 @@ private theorem eventually_unit_equal
   rw [← germ_unitStalk, ← germ_unitStalk]
   exact congrArg (unitStalk (f j k hjk) H x) (hVg (f j k hjk x) (hsub hx))
 
-@[irreducible] private noncomputable def compMap {A B C : TopCat.{u}}
+@[irreducible] noncomputable def compMap {A B C : TopCat.{u}}
     (f : A ⟶ B) (g : B ⟶ C) (k : A ⟶ C) (h : f ≫ g = k)
     (G : C.Sheaf (Type u)) :
     (pullback (Type u) g).obj G ⟶
@@ -262,7 +262,7 @@ private theorem eventually_unit_equal
   compUnit f g G ≫ (pushforward (Type u) f).map
     (eqToHom (congrArg (fun a ↦ (pullback (Type u) a).obj G) h))
 
-private theorem compMap_heq {A B C : TopCat.{u}}
+theorem compMap_heq {A B C : TopCat.{u}}
     (f : A ⟶ B) (g : B ⟶ C) (k : A ⟶ C) (h : f ≫ g = k)
     (G : C.Sheaf (Type u)) (W : Opens B) (t : ((pullback (Type u) g).obj G).obj.obj (op W)) :
     HEq ((compMap f g k h G).hom.app (op W) t)

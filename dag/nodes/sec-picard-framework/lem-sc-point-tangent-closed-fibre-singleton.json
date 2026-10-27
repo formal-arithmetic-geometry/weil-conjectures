@@ -26,35 +26,45 @@
  ],
  "proof": [
   {
-   "text": "Fix a closed point $p\\in Y$ and write $F=f^{-1}(\\{p\\})$. The singleton $\\{p\\}$ is closed, so $F$ is closed because morphisms of schemes are continuous. If $F$ is nonempty, choose $z\\in F$. If $z$ were not closed, then [lem-sc-finite-type-nonclosed-closure-closed-points] would give infinitely many closed points in $\\overline{\\{z\\}}$; since $F$ is closed and contains $z$, this closure lies in $F$, and all those closed points have image $p$, contradicting the assumed distinction of images of closed points. Thus every nonempty fibre contains a closed point.",
+   "text": "By [lem-sc-lft-over-field-jacobson-space], X is Jacobson. For a closed point p of Y, its fibre F is closed by continuity. If F is empty, take the first alternative. Otherwise the Jacobson property gives a point x in F which is closed in X (Mathlib nonempty_inter_closedPoints).",
    "uses": [
-    "lem-sc-finite-type-nonclosed-closure-closed-points"
+    "lem-sc-lft-over-field-jacobson-space"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0E8S, lemma-separate-points-tangent-vectors, proof after condition (1), using Tag 0478 for closed points in closures"
+    "place": "Tag 0E8S, lemma-separate-points-tangent-vectors, the small detail after injectivity on closed points, using Tag 0478(2)"
    }
   },
   {
-   "text": "Every point $y\\in F$ is closed by the same argument: if it were nonclosed, its closure would supply infinitely many closed points of $F$, all mapping to $p$. Since any two closed points of $F$ have the same image $p$, the hypothesis that distinct closed points have distinct images implies that there is at most one such point. Combined with step 1, $F$ is empty or $\\{x\\}$ for one closed point $x\\in X$.",
+   "text": "The intersection F with the closed points of X equals {x}: it contains x, and any other point y in the intersection has f(y)=p=f(x), so injectivity on closed points gives y=x.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0E8S, lemma-separate-points-tangent-vectors, the small detail after injectivity on closed points, using Tag 0478(2)"
+   }
+  },
+  {
+   "text": "By [lem-sc-lft-over-field-jacobson-space], F is the closure of its intersection with the closed points (the class field closure_inter_closedPoints). Step 2 identifies that intersection with {x}, whose closure is itself because x is closed. Thus F={x}, with x closed in X, proving the second alternative.",
    "uses": [
-    "lem-sc-finite-type-nonclosed-closure-closed-points"
+    "lem-sc-lft-over-field-jacobson-space"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0E8S, lemma-separate-points-tangent-vectors, proof after condition (1), using Tag 0478 for closed points in closures"
+    "place": "Tag 0E8S, lemma-separate-points-tangent-vectors, the small detail after injectivity on closed points, using Tag 0478(2)"
    }
   }
  ],
  "proof_deps": [
-  "lem-sc-finite-type-nonclosed-closure-closed-points"
+  "lem-sc-lft-over-field-jacobson-space"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 0E8S, lemma-separate-points-tangent-vectors, proof after condition (1), with Tag 0478"
+  "place": "Tag 0E8S, lemma-separate-points-tangent-vectors, the small detail after injectivity on closed points, using Tag 0478(2)",
+  "note": "R9 supplies the omitted topological detail directly by density of closed points, without infinite specializations or dimension theory."
  },
  "mathlib_searches": [
   {
@@ -122,5 +132,26 @@
   "result": "pass",
   "note": "k alg. closed = [Field k][IsAlgClosed k]; X loc. finite type over k = [X.Over (Spec (.of k))] + LocallyOfFiniteType (X ↘ Spec) as landed siblings (DimZeroFiniteOverField, InfiniteClosedPointsInterClosureSingleton); Y over k = [Y.Over]; f : X ⟶ Y with no IsOver (node asks none); distinct closed points distinct images = Set.InjOn f (closedPoints X) (#check: coe is f.base, closedPoints is Mathlib's {x | IsClosed {x}}); p closed in Y; fibre as set f ⁻¹' {p} (node says singleton set; landed precedent IntegralClosureDedekindSurjectiveFibres) = ∅ ∨ ∃ closed x, = {x}; edge cases empty X/Y, p off image"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261023T103303-L-3092484",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

@@ -1,0 +1,122 @@
+{
+ "id": "lem-sfb-internal-first-residue-ring-iso",
+ "kind": "statement",
+ "title": "Coefficient isomorphism for the first residue",
+ "statement": "theorem internal_first_residue_ring_iso\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] :\n    Nonempty (Mon.mk (DerivedNakayama.quotientRing l E 1) ≅\n      Mon.mk (IntegralModelsStacks.discreteObj\n        (Padic.coefficientExtensionRing l E 1)))",
+ "stmt_deps": [
+  "lem-sf-finite-discrete-normalized-encoding",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-sfb-integers-coset-basis",
+  "def-sfb-integral-models-stacks-data",
+  "def-sfb-integral-constant-model-realization"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models.proof.md",
+  "place": "first quotient identification"
+ },
+ "proof": [
+  {
+   "text": "Use finite_coefficientExtensionRing at level one. In the absolute-value normed-field presentation defining DerivedNakayama.quotientRing, use the already proved private quotientDiscrete lemma from DerivedNakayamaResolution: it transports the spectral coset neighbourhood basis along equality of the coefficient topologies and proves the actual quotient topology discrete.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "det-pe-derived-nakayama-resolution",
+    "lem-sfb-integers-coset-basis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the profinite point construct the ring-presheaf map sending a lifted scalar to its constant continuous function. It is locally surjective: index the finite closed fibres by Fin(card A), whose subtype inclusions are jointly surjective and hence form a coherent cover. Each restricted function is the constant function of its fibre value. It is locally injective: evaluate equality of constant functions at a point; if the constants differ the test object is empty, and use its empty coherent cover.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Mathlib GrothendieckTopology.W_of_isLocallyBijective and W_iff show that sheafification inverts this ring-presheaf map. Compose the resulting isomorphism with the sheafification counit and constantCommuteCompose for CommRingCat to RingCat. This identifies discreteSheaf A with the continuousCoefficientRingSheaf A. Map the isomorphism through sheafCompose for RingCat to Ab, which preserves the canonical ring structures, then apply Mon.mkIso' and invert. At A = coefficientExtensionRing l E 1 its endpoints are definitionally the two ring objects in the unchanged item statement.",
+   "uses": [
+    "def-sfb-integral-models-stacks-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The unchanged F3 proof above remains the proof of the public isomorphism theorem. Additional proved private helpers construct the inverse of the actual constant-function map, establish its quotient naturality, and reconcile the integral topologies using coefficientTopology. These helpers supply the normalization needed by InternalFirstResidueRingPushout; they do not replace the landed public proof.",
+   "uses": [
+    "lem-sf-finite-discrete-normalized-encoding",
+    "def-sfb-integral-constant-model-realization",
+    "lem-sfb-integral-models-flat-residue"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "det-pe-derived-nakayama-resolution",
+  "lem-sfb-integers-coset-basis",
+  "def-sfb-integral-models-stacks-data",
+  "lem-sf-finite-discrete-normalized-encoding",
+  "def-sfb-integral-constant-model-realization",
+  "lem-sfb-integral-models-flat-residue"
+ ],
+ "proof_origin": {
+  "by": "worker F3",
+  "group": "F3",
+  "date": "2026-10-26",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models.proof.md",
+  "place": "first quotient identification; direct ring-sheafification proof on the profinite point, reusing the quotient topology comparison in DerivedNakayamaResolution",
+  "normalization_helpers": {
+   "by": "worker G4",
+   "group": "G4",
+   "date": "2026-10-26",
+   "place": "private canonical constant-function inverse and quotient normalization; F3 public proof preserved"
+  }
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProEtale.InternalFirstResidueRingPushout",
+  "date": "2026-10-26",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-internal-first-residue-ring-pushout",
+   "place": "first quotient identification",
+   "via": [
+    "lem-sfb-internal-first-residue-ring-pushout"
+   ]
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-pf-adic",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProEtale.InternalFirstResidueRingIso",
+  "file": "lean/Sheaf/SixFunctors/ProEtale/InternalFirstResidueRingIso.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.internal_first_residue_ring_iso",
+  "statement": "theorem internal_first_residue_ring_iso\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] :\n    Nonempty (Mon.mk (DerivedNakayama.quotientRing l E 1) ≅\n      Mon.mk (IntegralModelsStacks.discreteObj\n        (Padic.coefficientExtensionRing l E 1)))",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261026T003112-L-146756",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-200cc",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261026T081922-L-2102151",
+  "kind": "interface",
+  "note": "independent cc review: sheaf-pushout new statement/proof vs node lem-sfb-internal-first-residue-sheaf-pushout and change record; RingPushout unchanged signature + node proof fields; RingIso additions vs live F3 file (public proof verbatim); importer OrdinaryComparison OK in §3b"
+ }
+}

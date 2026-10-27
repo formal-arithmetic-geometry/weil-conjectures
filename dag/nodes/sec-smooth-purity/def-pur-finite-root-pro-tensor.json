@@ -1,0 +1,107 @@
+{
+ "id": "def-pur-finite-root-pro-tensor",
+ "kind": "definition",
+ "title": "Fixed-scalar pro-etale root module and its scalar-extension tensors",
+ "status": "split",
+ "statement": "Let $T$ be a scheme, with small pro-etale site [def-weil-pbc-proetale-site], and let $m>0$. Use the actual root module $\\mu_{m,T}$ of [def-pur-roots-of-unity-sheaf]. Define $M_{m,T}$ as its fixed-$\\mathbf Z/m$ presentation: restrict scalars to constant sections by [def-sfb-constant-ring-module-restriction], then along the inverse of the canonical universe-lift ring isomorphism. Its underlying sections and restrictions are the same roots as before. Let $A$ be any commutative ring with $mA=0$, in universe $u+1$ when $T$ is in universe $u$. Use the canonical scalar homomorphism $\\mathbf Z/m\\to A$ of [def-asd-finite-etale-tate-twist]. Define $D_{m,A,T}$ by extending each module of sections of $M_{m,T}$ along this homomorphism, then sheafifying [def-weil-pbc-sheafification]; this is the balanced root tensor of [def-pur-sheaf-tensor-product]. For every pro-etale test $W$, $a\\in A$ and root $z\\in\\mu_{m,T}(W)$, define $g_W(a,z)$ to be the image of $a\\otimes z$ under that sheafification unit. These are the existing finiteRootProModule, finiteRootProTensor and finiteRootProGenerator, with the $A$ factor first. No finiteness, invertibility of $m$ on $T$, or flatness hypothesis is imposed.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-pur-roots-of-unity-sheaf",
+  "def-sfb-constant-ring-module-restriction",
+  "def-asd-finite-etale-tate-twist",
+  "def-weil-pbc-sheafification",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03PK, section-kummer; Tags 03EK and 03EL: fixed-scalar root module, balanced scalar extension and sheafified pure tensors. Existing definitions in Sheaf.AlgebraicGeometry.FiniteRootSiteComparison."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pro etale roots of unity module scalar extension tensor pure generator and signed Tate line coordinate normalization",
+   "results": "8 hits: Algebra.Generators.extendScalars_val, IsPrimitiveRoot.norm_eq_neg_one_pow, modularCyclotomicCharacter.toFun, Algebra.FormallyEtale.instTensorProduct, modularCyclotomicCharacter.toFun_unique', RootPairing.restrictScalars_coe_root, Algebra.Etale.baseChange, modularCyclotomicCharacter.toFun_spec'. These hits concern algebra generators, cyclotomic characters, algebraic etaleness or root systems, not these module-sheaf definitions.",
+   "date": "2026-10-24",
+   "verdict": "Reuse the existing project definitions; add only missing definition ownership records."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"finiteRootProTensor\"",
+   "results": "0 hits.",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteRootPro(Module|Tensor|Generator)|purPointConstant|IsPurPointSignedCoordinates",
+   "results": "0 hits:  Mathlib has no matching definition. Project rg finds the exact definitions only in Sheaf.AlgebraicGeometry.FiniteRootSiteComparison and Sheaf.Paper.PointTateRootCoordinates. DAG rg finds only theorem owners; no existing definition node owns them. Upstream WeilConjectures rg gives no matches. blueprint_refs.py searches root tensor and signed coordinates both return 0 blueprint nodes.",
+   "date": "2026-10-24",
+   "verdict": "Reuse the existing project definitions; add only missing definition ownership records."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-finite-twist-root-trivialization",
+  "date": "2026-10-24",
+  "group": "Q135"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-frame-independence",
+   "place": "Shear paragraph, ordinary affine-line input; sk-prop-a1-kummer Coefficients: the finite root-tensor presentation and its local pure generators",
+   "via": [
+    "lem-pur-finite-twist-root-trivialization",
+    "lem-pur-affine-line-ordinary-invariance",
+    "lem-pur-supported-affine-line-homotopy"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteRootSiteComparison",
+  "declaration": "AlgebraicGeometry.Scheme.finiteRootProTensor",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finiteRootProModule",
+   "AlgebraicGeometry.Scheme.finiteRootProTensor",
+   "AlgebraicGeometry.Scheme.finiteRootProGenerator"
+  ],
+  "statement": "def finiteRootProTensor (A : Type (u + 1)) [CommRing A] (m : ℕ) (hm : 0 < m)\n    (hA : (m : A) = 0) (T : Scheme.{u}) :\n    Sheaf (ProEt.topology T) (ModuleCat.{u + 1} A)",
+  "branch": "newtargets-dag",
+  "by": "Q135",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition ownership requested by L/H2 for immutable head a04626abeb58. Reuses the exact existing public definitions and their bodies, without declaring a new module or choosing any theorem conclusion."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4d9910b41",
+  "group": "Q135",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4d9910b41",
+  "group": "Q135",
+  "result": "pass",
+  "note": "Re-delivery after return L (H2) at a04626abeb58; the Lean module is byte-identical (sha256 6575c6f8), and the earlier full H3 reading found no substance fault, which I confirmed by rereading all 350 lines. The item changes only lean and stmt_deps: the three theorem nodes are replaced by def-amb-finite-tate-site-comparison-data, the two new existing:true definition nodes and the 7 advisory definition owners; the theorem nodes stay in proof_deps; dependency records are identical to live. def-pur-finite-root-pro-tensor (finiteRootProModule/Tensor/Generator) and def-pur-signed-root-coordinate-data (purPointConstant, IsPurPointSignedCoordinates): signatures verbatim with live l.49-51 and l.54-58; the TeX matches the bodies (restrict scalars, extend, sheafify; six signed clauses); H12 fields correct; no other live owner. All clauses are present: finiteness and ℓ-power order, the cokernel quotient, the tensor presentation, root bases on both sites, signed degrees, the ν* comparison, pullbacks, and arbitrary non-flat coefficient maps. Advisory: owners of integralCoefficientSheaf, rootsOfUnitySheaf, constantZMod and purTwistRing/purTwistFiniteRing are not cited in stmt_deps. No compile: no file changed."
+ }
+}

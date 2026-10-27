@@ -13,10 +13,33 @@
  ],
  "proof": [
   {
-   "text": "By the basis description in [def-weil-pbc-free-module], a prescribed finite integral combination for each $[v,I]$ extends uniquely to a homomorphism. Use this throughout. Put $\\partial_0=0$. For distinct $i,j\\in I$, removing $i$ then $j$ and removing $j$ then $i$ produce opposite signs: if $i<j$, their exponents are $q_i+q_j-1$ and $q_j+q_i$, where $q_k=\\#\\{l\\in I:l<k\\}$. Their four translated terms agree because translations in distinct coordinates commute. Pairing these terms gives $\\partial^2=0$; degrees with fewer than two coordinates give zero directly. Also $\\epsilon\\partial_1[v,\\{i\\}]=1-1=0$. Thus these maps form the chain complex of [def-weil-pbc-module-chain-complex-homology] with the stated augmentation.",
+   "text": "Use the explicit constructions [def-sfb-integral-lattice-cubical-chains]. Apply [lem-sfb-cubical-boundary-coordinate-projections] to the displayed groups and differential. It gives $\\partial^2=0$, $\\epsilon\\partial_1=0$, the commuting coordinate chain maps $p_i$, and the product $P_r=e$, with $P_0=1$. Its basis-preserving decomposition also gives every translation and finite free-orbit assertion in the statement.",
    "uses": [
-    "def-weil-pbc-free-module",
-    "def-weil-pbc-module-chain-complex-homology"
+    "def-sfb-integral-lattice-cubical-chains",
+    "lem-sfb-cubical-boundary-coordinate-projections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0623 (definition-koszul-complex), preceding displayed alternating differential, for comparison only; the following signed-coordinate construction and its verification are agent-written, not asserted by Tags 0623 or 062F."
+   }
+  },
+  {
+   "text": "Use [lem-sfb-cubical-signed-coordinate-homotopy] on exactly these basis groups and coordinate maps. Its finite signed-path formulas give homomorphisms $H_i$ in all degrees with $\\partial H_i+H_i\\partial=1-p_i$, including negative coordinate values and top degree. Set $h_a=\\sum_{i=1}^r P_{i-1,a+1}H_{i,a}$. The sum is finite and $h_{-1}=0$. In Lean encode the finite sum recursively on List.finRange r: H_(i::L)=H_i+p_i H_L and H_empty=0.",
+   "uses": [
+    "lem-sfb-cubical-signed-coordinate-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0623 (definition-koszul-complex), preceding displayed alternating differential, for comparison only; the following signed-coordinate construction and its verification are agent-written, not asserted by Tags 0623 or 062F."
+   }
+  },
+  {
+   "text": "Each $P_i$ commutes with $\\partial$ by [lem-sfb-cubical-boundary-coordinate-projections]. Using the identity supplied by [lem-sfb-cubical-signed-coordinate-homotopy] gives $$\\partial h+h\\partial=\\sum_{i=1}^rP_{i-1}(1-p_i)=\\sum_{i=1}^r(P_{i-1}-P_i)=1-P_r=1-e.$$ This is the required contraction in every nonnegative degree. Direct evaluation on $1$ gives $\\epsilon s=1$. Equivalently, induct on the list: (1-p_i)+p_i(1-P_L)=1-p_i P_L. Degree transports commute with endomorphisms by equality induction.",
+   "uses": [
+    "lem-sfb-cubical-boundary-coordinate-projections",
+    "lem-sfb-cubical-signed-coordinate-homotopy"
    ],
    "elementary": true,
    "source": {
@@ -25,7 +48,7 @@
    }
   },
   {
-   "text": "For $1\\leq i\\leq r$ let $\\rho_i(v)=v-v_i u_i$, and define a degree-preserving homomorphism $p_i$ by $p_i[v,I]=0$ if $i\\in I$, and $p_i[v,I]=[\\rho_i(v),I]$ otherwise. If $i\\notin I$, each face removes $j\\ne i$ and $\\rho_i(v+u_j)=\\rho_i(v)+u_j$, so $p_i\\partial=\\partial p_i$. If $i\\in I$, every face except the $i$-face is killed by $p_i$, while the two vertices of the $i$-face acquire the same $i$-coordinate zero and cancel. Hence $p_i$ is a chain map. The $p_i$ commute: each either kills a cell containing its coordinate, or resets that coordinate, independently of all others.",
+   "text": "If $a>0$ and $\\partial_a x=0$, this contraction gives $x=\\partial_{a+1}h_a x$. If $a=0$ and $\\epsilon x=0$, it gives $x=\\partial_1h_0x$. Conversely every such boundary is in the corresponding kernel since $\\partial^2=0$ and $\\epsilon\\partial_1=0$. Also $\\epsilon$ is surjective since $\\epsilon s=1$. Hence kernel equals image at every position of the augmented complex, precisely exactness in [def-weil-pbc-module-chain-complex-homology].",
    "uses": [],
    "elementary": true,
    "source": {
@@ -34,58 +57,9 @@
    }
   },
   {
-   "text": "For any integer-indexed family $b(k)$ in an abelian group write $\\Sigma_n b=\\sum_{k=0}^{n-1}b(k)$ for $n>0$, $\\Sigma_0 b=0$, and $\\Sigma_n b=-\\sum_{k=n}^{-1}b(k)$ for $n<0$. Cancelling consecutive terms gives, for every integer $n$, $\\Sigma_n(b(k+1)-b(k))=b(n)-b(0)$ and $\\Sigma_{n+1}b-\\Sigma_n b=b(n)$; these formulas include $n=-1,0$. For $i\\notin I$ define the degree-one homomorphism $$H_i[v,I]=(-1)^{q_i}\\Sigma_{v_i}\\bigl[\\rho_i(v)+ku_i,I\\cup\\{i\\}\\bigr],\\qquad q_i=\\#\\{j\\in I:j<i\\},$$ and set $H_i[v,I]=0$ for $i\\in I$. Every sum is finite, so this is a well-defined homomorphism by [def-weil-pbc-free-module]. It vanishes on $C_r$ and on degrees outside the stated range.",
+   "text": "When $r=0$, [lem-sfb-cubical-boundary-coordinate-projections] identifies the singleton vertex basis with $\\mathbf Z$, and both $s$ and $\\epsilon$ become identities. The defining empty sum makes $h=0$. No equivariance of $h$ or $s$ is required; already for $r=1$, translation by $u_1$ sends $s(1)=[0,\\varnothing]$ to $[u_1,\\varnothing]$.",
    "uses": [
-    "def-weil-pbc-free-module"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0623 (definition-koszul-complex), preceding displayed alternating differential, for comparison only; the following signed-coordinate construction and its verification are agent-written, not asserted by Tags 0623 or 062F."
-   }
-  },
-  {
-   "text": "Suppose $i\\notin I$. In $\\partial H_i[v,I]$, the $i$-face has sign $(-1)^{q_i}$ as well as the prefactor $(-1)^{q_i}$. Its signed sum therefore telescopes to $[v,I]-[\\rho_i(v),I]$. For $j\\in I$, the other face terms cancel those of $H_i\\partial[v,I]$, with identical bases and summation ranges. Indeed if $j<i$, their exponents are $q_i+q_j$ and $q_j+q_i-1$; if $j>i$, they are $q_i+q_j+1$ and $q_j+q_i$. Shifting in the $j$-direction leaves $v_i$ unchanged, so this compares the actual summands also for negative $v_i$. Thus $(\\partial H_i+H_i\\partial)[v,I]=(1-p_i)[v,I]$ when $i\\notin I$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0623 (definition-koszul-complex), preceding displayed alternating differential, for comparison only; the following signed-coordinate construction and its verification are agent-written, not asserted by Tags 0623 or 062F."
-   }
-  },
-  {
-   "text": "Suppose $i\\in I$. Here $H_i[v,I]=0$. In $H_i\\partial[v,I]$ all faces except the $i$-face still contain $i$ and give zero. For that face the boundary and insertion signs are both $(-1)^{q_i}$, so their product is $1$. The two path sums have the same base $\\rho_i(v)$ and upper endpoints $v_i+1$ and $v_i$. Their difference is exactly $[v,I]$ by $\\Sigma_{v_i+1}-\\Sigma_{v_i}$. Since $p_i[v,I]=0$, this proves $\\partial H_i+H_i\\partial=1-p_i$ on the remaining basis elements. Linearity gives this identity in every degree, including the top degree.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0623 (definition-koszul-complex), preceding displayed alternating differential, for comparison only; the following signed-coordinate construction and its verification are agent-written, not asserted by Tags 0623 or 062F."
-   }
-  },
-  {
-   "text": "Put $P_0=1$ and $P_i=p_1\\cdots p_i$, and in each degree set $h=\\sum_{i=1}^r P_{i-1}H_i$. Every $P_i$ is a chain map by step 2, so the identities of steps 4 and 5 yield $$\\partial h+h\\partial=\\sum_{i=1}^r P_{i-1}(1-p_i)=\\sum_{i=1}^r(P_{i-1}-P_i)=1-P_r.$$ For $I\\ne\\varnothing$ one factor $p_i$ kills $[v,I]$, hence $P_r=0$ in positive degree; in degree zero it resets all coordinates and sends $[v,\\varnothing]$ to $[0,\\varnothing]$. Thus $P_r=e$ and the required contraction identity holds, with the degree-minus-one term zero. Directly $\\epsilon s(1)=1$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0623 (definition-koszul-complex), preceding displayed alternating differential, for comparison only; the following signed-coordinate construction and its verification are agent-written, not asserted by Tags 0623 or 062F."
-   }
-  },
-  {
-   "text": "For $a>0$ and $x\\in C_a$ with $\\partial_a x=0$, the contraction gives $x=\\partial_{a+1}h_a x$, proving exactness in positive degree. If $x\\in C_0$ and $\\epsilon x=0$, it gives $x=\\partial_1 h_0x$; the opposite inclusion follows from $\\epsilon\\partial_1=0$. Surjectivity at $\\mathbf Z$ follows from $\\epsilon s=1$. These are precisely kernel equals image at every position of the augmented complex, or vanishing homology by [def-weil-pbc-module-chain-complex-homology]. For $r=0$ there is just the basis vector $[0,\\varnothing]$; identify its group with $\\mathbf Z$. The empty sum gives $h=0$ and the augmentation and section are identities.",
-   "uses": [
-    "def-weil-pbc-module-chain-complex-homology"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0623 (definition-koszul-complex), preceding displayed alternating differential, for comparison only; the following signed-coordinate construction and its verification are agent-written, not asserted by Tags 0623 or 062F."
-   }
-  },
-  {
-   "text": "For $w\\in D$, replacing $v$ by $v+w$ in each summand of $\\partial[v,I]$ gives exactly $w\\partial[v,I]$; also $\\epsilon[v+w,\\varnothing]=1=\\epsilon[v,\\varnothing]$. Fixing $I$ of size $a$, the subgroup with basis $[v,I]$ is the free abelian group on $D$ with its translation action, i.e. the free integral $D$-module on one orbit. The basis partitions by $I$, so $C_a$ is the direct sum of these subgroups by [def-weil-pbc-free-module]. There are finitely many such subsets of the finite set $\\{1,\\ldots,r\\}$. No equivariance of $h$ or $s$ was used or claimed: for $r=1$, $s(1)=[0,\\varnothing]$ already fails to be fixed by translation by $u_1$.",
-   "uses": [
-    "def-weil-pbc-free-module"
+    "lem-sfb-cubical-boundary-coordinate-projections"
    ],
    "elementary": true,
    "source": {
@@ -95,13 +69,14 @@
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-free-module",
-  "def-weil-pbc-module-chain-complex-homology"
+  "def-sfb-integral-lattice-cubical-chains",
+  "lem-sfb-cubical-boundary-coordinate-projections",
+  "lem-sfb-cubical-signed-coordinate-homotopy"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Explicit signed-coordinate proof of the integral cubical contraction. Compare Tag 0623, definition-koszul-complex and preceding differential; Tag 062F gives regular-sequence acyclicity only and is not invoked."
+  "place": "Explicit signed-coordinate proof of the integral cubical contraction. Compare Tag 0623, definition-koszul-complex and preceding differential; Tag 062F gives regular-sequence acyclicity only and is not invoked. Lean assembly uses recursive H_(i::L)=H_i+p_i H_L and P_(i::L)=p_i P_L; this is the same finite telescoping sum."
  },
  "mathlib_searches": [
   {
@@ -219,31 +194,21 @@
   "date": "2026-10-22",
   "item": "lem-sfb-integral-lattice-cubical-contraction",
   "worker": "stage1",
-  "summary": "Unchanged statement; explicit finite signed-coordinate homotopies, sign cancellation, telescoping, augmented exactness, and translation/free-orbit clauses. Every step is an elementary computation from the displayed formulas and the two cited definitions. No new nodes. Mathlib and project searches found no attachment or exact leaf.",
-  "blueprint": "Realizes the integral algebraic input below paragraph (3), open direct image, of sk-thm-sf-ctf-stability-direct-images.proof.md, through the inherited discrete-lattice Koszul chain. The ancestor utility returns None, matching the inherited null from.node. The unit route is unchanged."
+  "summary": "Q03 repair of the human re-split return: statement and historical metadata unchanged. Extracted two independent statement-only nodes of comparable workload: returned steps 1,2,8 and product identification into boundary/projections; steps 3,4,5 into signed-coordinate homotopy. Parent retains only finite telescoping assembly, kernel/image exactness and rank-zero conventions. All old arguments are preserved verbatim and mapped in report.md; new nodes have real logged searches.",
+  "blueprint": "Paragraph (3), open direct image, of main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md; same integral lattice input through the inherited Koszul chain. ancestor utility returns None; inherited null from.node and via route retained."
  },
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-NJ-afe3d1099",
-  "group": "NJ",
+  "reviewer": "NT-cc-Q03-2d3ce9855",
+  "group": "Q03",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-afe3d1099 (reviewer sub-agent of L); spot-checked: Read the whole item (8 steps) and both cited definitions (def-weil-pbc-free-module, def-weil-pbc-module-chain-complex-homology; both Mathlib leaves), and checked that the citer lem-sfb-discrete-lattice-koszul-resolution uses exactly what the statement gives. One commit, item plus report, statement unchanged from base, 0 new nodes, proof_deps = union of uses, no repair or re-split note, no SGA. Recomputed by hand: the ∂² sign cancellation (exponents q_i+q_j−1 vs q_i+q_j); the p_i chain map (on the i-face both vertices reset to the same point); the Σ_n telescoping for n>0, n=0, n=−1 and n<−1; step 4 face cancellation for j<i and j>i (exponents q_i+q_j+[i<j] vs q_i+q_j−[j<i]); step 5 (sign product 1, Σ_{v_i+1}−Σ_{v_i}=[v,I]); the sum of P_{i−1}(1−p_i) telescoping to 1−P_r=e; exactness; r=0; translation and free orbits; non-equivariance of s. My own script checked ∂²=0 and ∂h+h∂=1−e on 1111 cells (r≤3, coordinates in [−2,2]) with 0 failures. A DAG grep for cubical, contraction and Koszul-lattice found no duplicate. Elementary marks are justified: each step is a few-line check, the source tags are cited for comparison only, proof_origin is agent. No tool_uses and no fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-2d3ce9855 (reviewer sub-agent of L); spot-checked: This answers the human re-split note (coord/repair-notes, released 2026-10-22; old proof 8 steps, 4955 chars). The live item still carries the NJ 8-step proof, so the delivery is not superseded. Compared with live, the item changes only proof, proof_deps and split_report; statement, stmt_deps, blueprint and lean are unchanged, so citers are unaffected. Every old argument now sits in a new node. Old steps 1, 2 and 8 and the P_r=sε part of step 6 go to lem-sfb-cubical-boundary-coordinate-projections (∂²=0, ε∂=0, the p_i are chain maps and commute, P_r=sε, translation and the ⊕_I Z^{(D)} free-orbit decomposition). Old steps 3–5 go to lem-sfb-cubical-signed-coordinate-homotopy (Σ_n telescoping and ∂H_i+H_i∂=1−p_i in both cases i∈I and i∉I). The parent keeps only the assembly: h=ΣP_{i−1}H_i, telescoping to 1−e, kernel=image exactness, r=0 and the non-equivariance example, well under 3000 characters. The two nodes are 1931 and 1649 chars; neither restates the item or contains its homotopy or exactness. I checked by hand the face-sign exponents (i<j: q_i+q_j−1 vs q_i+q_j; j<i: q_i+q_j vs q_i+q_j−1; j>i: q_i+q_j+1 vs q_i+q_j), the i-face reset cancellation, Σ_n at n>0, 0, −1 and <−1, the sign product +1 when i∈I, top degree and r=0. My own Python script checked 1111 cells (r≤3, coordinates −2..2) for d²=0, p_i∂=∂p_i, p_i commuting, ∂H_i+H_i∂=1−p_i and P_r=sε, with 0 failures. Form: both nodes are statement-only and unsplit, self-contained, with 6 recorded searches across grep, LeanSearch, Loogle and LeanFinder, correct created fields, and via=[item]+item.via (from.node null, inherited from the item). A DAG search found no duplicate (cubical open-box is topological; the diagonal and Koszul nodes are downstream citers). Source is Stacks 0623 for comparison only, no SGA, no tool_uses, no fixes."
  },
  "lean": {
   "module": "Sheaf.AlgebraicTopology.IntegralLatticeCubicalContraction",
   "declaration": "IntegralLatticeCubical.contraction",
   "declarations": [
-   "IntegralLatticeCubical.Directions",
-   "IntegralLatticeCubical.Chains",
-   "IntegralLatticeCubical.cell",
-   "IntegralLatticeCubical.unitVector",
-   "IntegralLatticeCubical.boundary",
-   "IntegralLatticeCubical.incomingBoundary",
-   "IntegralLatticeCubical.augmentation",
-   "IntegralLatticeCubical.sectionMap",
-   "IntegralLatticeCubical.originProjection",
-   "IntegralLatticeCubical.translate",
    "IntegralLatticeCubical.contraction"
   ],
   "file": "lean/Sheaf/AlgebraicTopology/IntegralLatticeCubicalContraction.lean",
@@ -260,5 +225,27 @@
   "group": "NM",
   "result": "pass",
   "note": "Item adds only the lean field (diff vs side-live); the record is complete and its statement is verbatim in the file; no existing IntegralLatticeCubical declaration. Every node clause is rendered: free C_a with Subsingleton outside [0,r] and Module.Free; boundary with sign (-1)^#{j<i} and I.erase i faces; ε, s, e (originProjection 0 = sε, 0 elsewhere); ∂∂=0 for all a, ε∂1=0, εs=id; ∃h with ∂h+h∂=1-e for a≥0 via LinearEquiv.cast degree transports, h(-1)∂0=0, r=0→h=0; exactness as range=ker for a>0, range ∂1 = ker ε, ε surjective; translation commutes with ∂ and ε; C_a ≃ Directions →₀ ℤ[D] compatible with the basis and translation, Directions finite; no equivariance of h or s; r=0 iso C_0≃ℤ equal to ε with inverse s. Edge cases r=0, a<0, a>r, top degree checked. Defs carry real data, the only sorry is the theorem proof, docstrings carry source, blueprint and the 8 proof steps, lines ≤100, autoImplicit false. Advisory H9: the ShortComplex homology imports appear only in docstrings because exactness is stated as ker=range; not blocking. No compile: no file changed."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-3a351",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261025T071213-L-140746",
+  "kind": "interface",
+  "note": "independent cc review: contraction signature vs clone (identical); ten moved defs in IntegralLatticeCubicalDefs vs clone bodies (identical); adapted modules vs clone (one import line each); node proof/proof_deps/lean vs Lean proof; sandbox compile of 4 delivered modules + 4 item importers OK; axioms propext/choice/Quot.sound"
  }
 }

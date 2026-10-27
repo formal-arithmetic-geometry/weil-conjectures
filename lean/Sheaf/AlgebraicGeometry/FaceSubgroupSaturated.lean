@@ -47,6 +47,61 @@ theorem face_subgroup_saturated (Q : Type u) [AddCommMonoid Q]
     (AddSubgroup.closure (Algebra.GrothendieckAddGroup.of '' (F : Set Q))).NSMulSaturated ∧
       IsAddTorsionFree (Algebra.GrothendieckAddGroup Q ⧸
         AddSubgroup.closure (Algebra.GrothendieckAddGroup.of '' (F : Set Q))) := by
-  sorry
+  let f := Algebra.GrothendieckAddGroup.of (M := Q)
+  let H := AddSubgroup.closure (f '' (F : Set Q))
+  have difference {g : Algebra.GrothendieckAddGroup Q} (hg : g ∈ H) :
+      ∃ a ∈ F, ∃ b ∈ F, g = f a - f b := by
+    induction hg using AddSubgroup.closure_induction with
+    | mem x hx =>
+      obtain ⟨a, ha, rfl⟩ := hx
+      exact ⟨a, ha, 0, F.zero_mem, by simp⟩
+    | zero => exact ⟨0, F.zero_mem, 0, F.zero_mem, by simp⟩
+    | add x y hx hy ihx ihy =>
+      obtain ⟨a, ha, b, hb, rfl⟩ := ihx
+      obtain ⟨c, hc, d, hd, rfl⟩ := ihy
+      refine ⟨a + c, F.add_mem ha hc, b + d, F.add_mem hb hd, ?_⟩
+      simp only [map_add]
+      abel
+    | neg x hx ih =>
+      obtain ⟨a, ha, b, hb, rfl⟩ := ih
+      exact ⟨b, hb, a, ha, by abel⟩
+  have hs : H.NSMulSaturated := by
+    intro n g hg
+    cases n with
+    | zero => exact Or.inl rfl
+    | succ k =>
+      right
+      obtain ⟨a, ha, b, hb, hab⟩ := difference hg
+      have htranslate : (k + 1) • (g + f b) = f (a + k • b) := by
+        rw [nsmul_add, hab, map_add, map_nsmul, add_nsmul, one_nsmul]
+        abel
+      have hrange : (k + 1) • (g + f b) ∈ AddMonoidHom.mrange f :=
+        htranslate.symm ▸ ⟨a + k • b, rfl⟩
+      obtain ⟨c, hc⟩ := (h_saturated hrange).resolve_left (Nat.succ_ne_zero k)
+      have hmultiple : (k + 1) • c = a + k • b := by
+        apply h_integral
+        change f ((k + 1) • c) = f (a + k • b)
+        rw [map_nsmul, hc, htranslate]
+      have hcF : c ∈ F := by
+        apply (h_face (x := c) (y := k • c) ?_).1
+        rw [← succ_nsmul', hmultiple]
+        exact F.add_mem ha (F.nsmul_mem hb k)
+      have heq : g = f c - f b := by rw [hc]; abel
+      rw [heq]
+      exact H.sub_mem (AddSubgroup.subset_closure ⟨c, hcF, rfl⟩)
+        (AddSubgroup.subset_closure ⟨b, hb, rfl⟩)
+  refine ⟨hs, ⟨?_⟩⟩
+  intro n hn x y hxy
+  obtain ⟨a, rfl⟩ := QuotientAddGroup.mk'_surjective H x
+  obtain ⟨b, rfl⟩ := QuotientAddGroup.mk'_surjective H y
+  dsimp only at hxy
+  have hmem : n • (a - b) ∈ H := by
+    apply (QuotientAddGroup.eq_zero_iff _).mp
+    change (QuotientAddGroup.mk' H) (n • (a - b)) = 0
+    rw [map_nsmul, map_sub, nsmul_sub, hxy, sub_self]
+  have hab : a - b ∈ H := (hs hmem).resolve_left hn
+  apply sub_eq_zero.mp
+  rw [← map_sub]
+  exact (QuotientAddGroup.eq_zero_iff _).mpr hab
 
 end AddSubmonoid

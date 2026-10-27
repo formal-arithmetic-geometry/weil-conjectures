@@ -1,0 +1,269 @@
+{
+ "id": "lem-sfb-trait-space-closure-thickenings-scheme",
+ "kind": "statement",
+ "title": "Schematicity from the horizontal closure and infinitesimal special fibres",
+ "statement": "Let $R$ be a discrete valuation ring [def-sc-discrete-valuation-ring], let $\\pi$ generate its maximal ideal, and put $S=\\operatorname{Spec}R$ [def-weil-affine-spectrum]. Let $Y$ be a separated algebraic space over $S$ [def-trf-algebraic-space], locally of finite type on etale scheme charts [def-weil-finite-type-morphism]; separated means that its diagonal is representable by closed immersions [def-weil-closed-immersion]. Let $C\\hookrightarrow Y$ be the closed subspace [def-sfb-space-closed-subspace] given by the schematic closure of $Y\\times_S\\operatorname{Spec}(R[1/\\pi])$: on every etale affine chart $\\operatorname{Spec}B\\to Y$ its defining ideal is $\\ker(B\\to B[1/\\pi])$. For every integer $n\\geq1$, set $S_n=\\operatorname{Spec}(R/(\\pi^n))$ and $Y_n=Y\\times_SS_n$, using sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. If $C$ and all the algebraic spaces $Y_n$ are represented by schemes, then $Y$ is represented by an $S$-scheme. There is no group structure or flatness hypothesis on $Y$, and no single uniform exponent $n$ or global quasi-compactness is assumed.",
+ "source": {
+  "document": "literature/anantharaman-groupes-dimension-un.pdf",
+  "place": "Anantharaman, Schemas en groupes, espaces homogenes et espaces algebriques sur une base de dimension 1, Memoires SMF 33 (1973), Proposition 1.3.2 and its proof, printed pp.20-21 (OCR renders 1.3.2 as 1.5.2), using closed gluing of the flat closure with a sufficiently high infinitesimal fibre locally. Local archive WANTED; primary scan read at https://www.numdam.org/article/MSMF_1973__33__5_0.pdf"
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-trf-algebraic-space",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-space-closed-subspace"
+ ],
+ "proof": [
+  {
+   "text": "Choose a surjective etale scheme atlas of $Y$ and cover its source by affine open schemes $U_\\alpha$. By [lem-a1-space-etale-open-image], the image $V_\\alpha\\subseteq Y$ of each $U_\\alpha$ is an open subspace, is quasi-compact, and has a surjective etale scheme cover; these images cover $Y$. Fix one nonempty $V=V_\\alpha$. Its map to $S$ is quasi-compact in the sense used by [def-sfb-space-morphism-properties], namely after base change along every affine scheme $T\\to S$: by [lem-trf-space-fibre-products-etale-covers] the base change of the surjective etale $U_\\alpha\\to V$ along $V\\times_ST\\to V$ is a surjective etale map $U_\\alpha\\times_ST\\to V\\times_ST$, whose source is the affine scheme of a tensor product of rings over $R$; so $|V\\times_ST|$ is quasi-compact by the last assertion of [lem-a1-space-etale-open-image]. It has the locally finite type chart test of $Y$, so it is finite type [def-sfb-space-morphism-properties]. It is separated by restricting the given diagonal. In particular it is quasi-separated: on affine scheme tests its diagonal is a closed immersion, hence affine and quasi-compact by [def-weil-closed-immersion]; the affine base $S$ is separated. Every ideal of the DVR $R$ is principal, so $R$ is Noetherian [def-sc-discrete-valuation-ring], and $S$ is Noetherian. The finite-type quasi-separated inheritance assertion of [lem-sfb-space-noetherian-coherent-acc], applied with base $S$, therefore makes $V$ Noetherian. This reduction never asserts quasi-compactness of $Y$.",
+   "uses": [
+    "lem-a1-space-etale-open-image",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-sfb-space-morphism-properties",
+    "def-weil-closed-immersion",
+    "def-sc-discrete-valuation-ring",
+    "lem-sfb-space-noetherian-coherent-acc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04ZK, lemma-locally-finite-type-locally-noetherian; local reduction in Anantharaman Proposition 1.3.2."
+   }
+  },
+  {
+   "text": "On $V$ let $\\mathcal K_m=\\ker(\\pi^m:\\mathcal O_V\\to\\mathcal O_V)$ for $m\\geq1$. These are quasi-coherent ideals by [lem-sfb-space-qcoh-kernels-colimits], since the structure module is locally free of rank one. They form an ascending chain. By [lem-sfb-space-noetherian-coherent-acc], there is $N\\geq1$ with $\\mathcal K_m=\\mathcal K_N$ for all $m\\geq N$. The ideal $\\mathcal I$ of $C_V=C\\times_YV$ is quasi-coherent and restricts on every etale affine chart to $\\ker(B\\to B[1/\\pi])$ by the hypothesis and [lem-sfb-space-closed-ideal-correspondence]. Every element of this ring kernel is killed by some power of $\\pi$, and conversely every such torsion element is in the kernel. Thus, checking on these charts, $\\mathcal I=\\mathcal K_N$ and $\\pi^N\\mathcal I=0$. The integer $N$ depends on $V$.",
+   "uses": [
+    "lem-sfb-space-qcoh-kernels-colimits",
+    "lem-sfb-space-noetherian-coherent-acc",
+    "lem-sfb-space-closed-ideal-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UJ, lemma-acc-coherent; spaces-properties.tex Tag 03M1, lemma-properties-quasi-coherent; spaces-morphisms.tex Tag 03MB, lemma-closed-immersion-ideals."
+   }
+  },
+  {
+   "text": "Set $D=Y_N\\times_YV$, whose ideal on every etale affine chart $\\operatorname{Spec}B\\to V$ is $\\pi^NB$. The ideal correspondence [lem-sfb-space-closed-ideal-correspondence] identifies this with $\\mathcal J=\\pi^N\\mathcal O_V$. If $x\\in I_B\\cap\\pi^NB$, write $x=\\pi^Nb$. Since $x$ is torsion, some $\\pi^m x=0$, so $\\pi^{m+N}b=0$. Hence $b\\in I_B$ and step 2 gives $x=\\pi^Nb=0$. This proves $\\mathcal I\\cap\\mathcal J=0$. Both $C_V$ and $D$ are schemes: they are the open subspaces induced by $V\\hookrightarrow Y$ in the assumed schemes $C$ and $Y_N$. Their intersection $E=C_V\\times_VD$ is a scheme, since it is the base change of the representable closed immersion $D\\hookrightarrow V$ to the scheme $C_V$; both $E\\to C_V$ and $E\\to D$ are closed immersions, as can also be read from their quotient ideals on scheme tests.",
+   "uses": [
+    "lem-sfb-space-closed-ideal-correspondence",
+    "def-a1-space-open-subspace",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03MB, lemma-closed-immersion-ideals; the torsion-intersection calculation is the elementary calculation of Anantharaman section 1.0 and Proposition 1.2.2(c)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-ferrand-scheme-pushout] to the scheme diagram $C_V\\leftarrow E\\to D$. Its right map is integral: it is a closed immersion, so on affine tests the ring map is a quotient, and every element of the quotient satisfies the monic polynomial $T-a$ for a lift $a$. For each point of $D$ its fibre in $E$ is empty or one point. In the nonempty case its image in $C_V$ has an affine open neighbourhood; in the empty case take any affine open of $C_V$, allowing the empty affine if $C_V$ is empty. Thus the theorem's affine-neighbourhood hypothesis holds, and a scheme pushout $P=C_V\\amalg_ED$ exists. By [lem-sfb-ferrand-pushout-space-agreement] this is also a pushout in algebraic spaces over $S$.",
+   "uses": [
+    "lem-sfb-ferrand-scheme-pushout",
+    "lem-sfb-ferrand-pushout-space-agreement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 0EDP, lemma-pushout-along-closed-immersion-and-integral; more-morphisms.tex Tag 0E25, proposition-pushout-along-closed-immersion-and-integral."
+   }
+  },
+  {
+   "text": "The ideal equality in step 3 permits [lem-sfb-closed-space-union-pushout] to be applied to $C_V,D\\hookrightarrow V$. It makes $V$ a pushout of the same diagram in algebraic spaces. The two universal properties give maps $P\\to V$ and $V\\to P$ compatible with the inclusions of $C_V,D$. Each composite is the identity, since it and the identity agree on these two inclusions and the pushout extension is unique. Hence $V\\simeq P$ is represented by an $S$-scheme. This holds for every $V_\\alpha$. By [lem-sfb-space-largest-schematic-open], each $V_\\alpha$ lies in the largest scheme open $Y_{\\mathrm{sch}}$ of $Y$. Since their point images cover $Y$, this open has full point image and equals $Y$ by [lem-a1-space-point-open-calculus]. This proves the assertion, including the empty $Y$ case. Only local exponents $N$ have been used.",
+   "uses": [
+    "lem-sfb-closed-space-union-pushout",
+    "lem-sfb-space-largest-schematic-open",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03JH, lemma-subscheme; spaces-pushouts.tex Tag 0GFQ, lemma-pushout-fpqc-local, underlying the closed-union step."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-space-etale-open-image",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-space-morphism-properties",
+  "def-weil-closed-immersion",
+  "def-sc-discrete-valuation-ring",
+  "lem-sfb-space-noetherian-coherent-acc",
+  "lem-sfb-space-qcoh-kernels-colimits",
+  "lem-sfb-space-closed-ideal-correspondence",
+  "def-a1-space-open-subspace",
+  "lem-sfb-ferrand-scheme-pushout",
+  "lem-sfb-ferrand-pushout-space-agreement",
+  "lem-sfb-closed-space-union-pushout",
+  "lem-sfb-space-largest-schematic-open",
+  "lem-a1-space-point-open-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-pushouts.tex",
+  "place": "Closed-pushout reconstruction following the route of Anantharaman Proposition 1.3.2 (primary scan read online, archive WANTED), using Tags 0EDP and 0GFQ and the elementary bounded-torsion calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space over a DVR is a scheme if its flat generic closure and every infinitesimal special fibre are schemes",
+   "results": "{\"t\": \"2026-10-24T11:08:31Z\", \"tool\": \"leanfinder\", \"query\": \"An algebraic space over a DVR is a scheme if its flat generic closure and every infinitesimal special fibre are schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.ValuativeCriterion.eq\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"AlgebraicGeometry.ValuativeCriterion.existence\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap\", \"AlgebraicGeometry.ValuativeCriterion.iff\"], \"digest\": \"decf6d700eae8a4d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern schemes already given, flatness or normalization, module descent, or Zariski representability; none states this algebraic-space/group-sheaf result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representability of a locally finite type algebraic space over a discrete valuation ring from its horizontal closure and all special fibre thickenings",
+   "results": "{\"t\": \"2026-10-24T11:08:32Z\", \"tool\": \"leansearch\", \"query\": \"Representability of a locally finite type algebraic space over a discrete valuation ring from its horizontal closure and all special fibre thickenings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.LocallyRingedSpace\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.instLocallyOfFiniteTypeMorphismRestrict\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion\", \"IsDiscreteValuationRing.toIsLocalRing\"], \"digest\": \"8d81f46e968a33b1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern schemes already given, flatness or normalization, module descent, or Zariski representability; none states this algebraic-space/group-sheaf result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"Thickening\"",
+   "results": "{\"t\": \"2026-10-24T11:08:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicSpace\\\", \\\"Thickening\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern schemes already given, flatness or normalization, module descent, or Zariski representability; none states this algebraic-space/group-sheaf result"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|thicken.*scheme|scheme.*thicken",
+   "results": "{\"t\": \"2026-10-24T11:08:32Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|thicken.*scheme|scheme.*thicken\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern schemes already given, flatness or normalization, module descent, or Zariski representability; none states this algebraic-space/group-sheaf result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed gluing of a flat generic fibre closure and a finite order special fibre recovers a locally Noetherian algebraic space over a trait",
+   "results": "{\"t\": \"2026-10-24T11:08:38Z\", \"tool\": \"leanfinder\", \"query\": \"Closed gluing of a flat generic fibre closure and a finite order special fibre recovers a locally Noetherian algebraic space over a trait\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsLocallyNoetherian\", \"AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier\", \"AlgebraicGeometry.isLocallyNoetherian_Spec\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.Scheme.GlueData.gluedScheme\", \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.Flat\"], \"digest\": \"2760e5b67dab15ea\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern schemes already given, flatness or normalization, module descent, or Zariski representability; none states this algebraic-space/group-sheaf result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space over a discrete valuation ring is a scheme when its generic schematic closure and all infinitesimal special fibres are schemes",
+   "results": "{\"t\": \"2026-10-24T11:41:24Z\", \"tool\": \"leanfinder\", \"query\": \"An algebraic space over a discrete valuation ring is a scheme when its generic schematic closure and all infinitesimal special fibres are schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsLocallyArtinian\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.ValuativeCriterion.eq\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"AlgebraicGeometry.ValuativeCriterion.existence\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap\", \"AlgebraicGeometry.IsAffine\"], \"digest\": \"14556c24d7e1954a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern scheme pullbacks, ring pushouts, open gluing or unrelated scheme properties; none has the algebraic-space pushout universal property stated here"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|schematicClosure|schematic.closure",
+   "results": "{\"t\": \"2026-10-24T11:41:22Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|schematicClosure|schematic.closure\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern scheme pullbacks, ring pushouts, open gluing or unrelated scheme properties; none has the algebraic-space pushout universal property stated here"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsScheme\"",
+   "results": "{\"t\": \"2026-10-24T11:42:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicSpace\\\", \\\"IsScheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern scheme pullbacks, ring pushouts, open gluing or unrelated scheme properties; none has the algebraic-space pushout universal property stated here"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Schematicity of an algebraic space from closed horizontal closure and special fibre thickenings over a trait",
+   "results": "{\"t\": \"2026-10-24T11:42:22Z\", \"tool\": \"leansearch\", \"query\": \"Schematicity of an algebraic space from closed horizontal closure and special fibre thickenings over a trait\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyClosed\", \"AlgebraicGeometry.UniversallyClosed.mk\", \"AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant\", \"AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion\", \"AlgebraicGeometry.isClosedImmersion_iff\", \"AlgebraicGeometry.universallyClosed_eq\", \"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.hasAffineProperty\"], \"digest\": \"201f787079251b24\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern scheme pullbacks, ring pushouts, open gluing or unrelated scheme properties; none has the algebraic-space pushout universal property stated here"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-trait-group-space-schematicity",
+  "date": "2026-10-24",
+  "group": "N9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), inherited strict-local trait descent input, schematicity of the descended group space; Proposition 1.3.2 and its proof, printed pp.20-21 (OCR renders 1.3.2 as 1.5.2), using closed gluing of the flat closure with a sufficiently high infinitesimal fibre locally",
+   "via": [
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-trait-space-closure-thickenings-scheme",
+  "worker": "stage1",
+  "summary": "Retained the statement, reduced to quasi-compact Noetherian open images of affine atlas charts, bounded the torsion ideal by ACC, proved its zero intersection with a sufficiently high special-fibre ideal, and reconstructed each open by the existing Ferrand scheme pushout. Added only the two generic algebraic-space pushout statements needed to justify this reconstruction. No global exponent, group structure, flatness or global quasi-compactness is introduced.",
+  "blueprint": "Realizes the inherited trait-schematicity input below det-thm-sf-ctf-stability-direct-images proof (3), with the closed-gluing route of Anantharaman Proposition 1.3.2, rather than changing the direct-image unit route. The inherited blueprint ancestor is null, as confirmed by blueprint_refs.py ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "Generic atlas topology tool supplying quasi-compact open images and their etale covers, needed for the local Noetherian reduction."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic point-topology tool: an open with full point image equals the algebraic space."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-etale-open-image",
+  "lem-a1-space-point-open-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q50-a278fb956",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-a278fb956 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement, and Stacks 0EDP, the Situation in more-morphisms (lines 19708-16), 0GFQ and 0C4J. The Anantharaman source (Prop. 1.3.2) is not in the local literature, so I checked the statement as mathematics. The item statement and stmt_deps are unchanged, and the item had an empty proof on the base. One fault (C4/E1), fixed: step 1 proved V->S quasi-compact by looking at inverse images of the opens of Spec R. The cited definition (def-sfb-space-morphism-properties, through def-sfb-proper-curve-moduli) instead requires a quasi-compact point space after base change to every affine scheme T. I rewrote this part: base change the surjective etale map U_a->V along V x_S T -> V (lem-trf-space-fibre-products-etale-covers) to get the affine source Spec(A tensor_R C), then apply the last clause of lem-a1-space-etale-open-image. I added that node to step 1 uses and to proof_deps. Steps 2-5 are correct as written: ACC stabilisation of ker(pi^m) equals the torsion ideal on charts; the saturation argument gives I intersect pi^N O = 0; C_V and D are open subschemes and E is a closed subscheme of both; the Ferrand hypotheses hold because fibres have at most one point; and the uniqueness argument gives V = P, then V lies in Y_sch, which has full point image. New node lem-sfb-ferrand-pushout-space-agreement matches 0EDP and its Situation, hypothesis by hypothesis. New node lem-sfb-closed-space-union-pushout is true: on charts the ring is R/I x_{R/(I+J)} R/J, then 0C4J plus 0EDP on every scheme chart and overlap, then 0GFQ. I tested it on I=J=0, A empty and R[t]/(pi t). Neither new node duplicates an existing one (checked lem-trf-closed-union-pushout, lem-sfb-scheme-colimit-upgrade-space-targets (07SX), lem-sfb-ferrand-scheme-pushout and the lem-sfb-space-pushout-* family), and neither restates the item. Batch-5 flags: the closures reach only the algebraic-space foundation nodes of sec-trace-formula (definition, fibre products, fppf descent, qcoh). No trace-formula or Poincare-duality proof node, nt-assume leaf or batch-4 target is reached. All flagged citations are general foundations and are accepted. tool_uses for lem-a1-space-etale-open-image and lem-a1-space-point-open-calculus (generic topology from unit sk-p-real-rankin) are accepted, although the worker wrote them itself, which C8 leaves to the maintainer.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TraitSpaceClosureThickeningsScheme",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.isScheme_of_trait_closure_thickenings",
+  "file": "lean/Sheaf/AlgebraicGeometry/TraitSpaceClosureThickeningsScheme.lean",
+  "statement": "theorem isScheme_of_trait_closure_thickenings (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] (π : R) (hπ : IsLocalRing.maximalIdeal R = Ideal.span {π}) (Y : AlgebraicSpace (Spec (CommRingCat.of R))) (hsep : IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) (prod.lift (𝟙 Y.obj.obj) (𝟙 Y.obj.obj))) (hft : ∀ (U : Over (Spec (CommRingCat.of R))) (a : yoneda.obj U ⟶ Y.obj.obj), IsEtale a → LocallyOfFiniteType U.hom) (C : ClosedSubspace Y) (hclosure : ∀ (B : CommRingCat.{u}) (φ : CommRingCat.of R ⟶ B) (a : yoneda.obj (Over.mk (Spec.map φ)) ⟶ Y.obj.obj), IsEtale a → ∃ (U : Over (Spec (CommRingCat.of R))) (p : U ⟶ Over.mk (Spec.map φ)) (q : yoneda.obj U ⟶ (C.val : AlgebraicSpace (Spec (CommRingCat.of R))).obj.obj), IsPullback q (yoneda.map p) C.val.arrow.hom.hom a ∧ RingHom.ker (((Scheme.ΓSpecIso B).inv ≫ Scheme.Γ.map p.left.op).hom) = RingHom.ker (algebraMap B (Localization.Away (φ.hom π)))) (hC : ∃ U : Over (Spec (CommRingCat.of R)), Nonempty ((C.val : AlgebraicSpace (Spec (CommRingCat.of R))).obj.obj ≅ yoneda.obj U)) (hthick : ∀ n : ℕ, 1 ≤ n → ∃ U : Over (Spec (CommRingCat.of R)), Nonempty (Limits.pullback (terminal.from Y.obj.obj) (terminal.from (yoneda.obj (Over.mk (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.span {π ^ n}))))))) ≅ yoneda.obj U)) : ∃ U : Over (Spec (CommRingCat.of R)), Nonempty (Y.obj.obj ≅ yoneda.obj U)",
+  "branch": "sheaf-dag",
+  "by": "N9",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-186ba4dc2",
+  "group": "N9",
+  "result": "pass",
+  "note": "Only the item's lean record changed (diff vs side-live); lean.statement is word for word in the file. Every clause matches the node: DVR with generator π; hsep = diagonal representable by closed immersions; hft = locally finite type on all étale charts (equivalent to the atlas version, no qc added); C : ClosedSubspace with ideal ker(B→B[1/π]) on every affine étale chart Spec.map φ (kernel does not depend on the chosen pullback); hC and conclusion use the same 'is a scheme' form as stmt_dep etale_fibreProduct_isScheme; hthick = presheaf pullback over the terminal presheaf h_S, i.e. Y ×_S Spec R/(π^n) for every n ≥ 1, no uniform n. No group, flatness or qc assumption. Edge cases (empty Y or C, B=0, π invertible or nilpotent, n=0 not required) and universe u are fine. No schematic-closure definition exists elsewhere (no duplicate). No definitions, proof is sorry; docstrings have source, blueprint and the 5 proof steps; lines ≤100; imports follow module mode. No fixes, so no compile."
+ }
+}

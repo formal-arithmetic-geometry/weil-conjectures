@@ -1,0 +1,260 @@
+{
+ "id": "lem-a1-affine-groupoid-basechange-polynomial-norm",
+ "kind": "statement",
+ "title": "Polynomial specialization of groupoid norms after arbitrary invariant-base extension",
+ "statement": "Let $U=\\operatorname{Spec}A$ and $R=\\operatorname{Spec}B$ be affine schemes [def-pc-scheme, def-weil-affine-spectrum]. Let $s,t:R\\to U$, $e:U\\to R$, $i:R\\to R$, and $c:R\\times_{s,U,t}R\\to R$ [def-pc-fibre-product] define a groupoid: functorially in every test scheme $H$, they make $U(H)$ the objects and $R(H)$ the arrows with source $s$, target $t$, identity $e$, inverse $i$, and composition $c$. Assume $s,t$ are finite locally free [def-pc-finite-locally-free]. Write $\\sigma=s^\\sharp,\\tau=t^\\sharp:A\\to B$. Put $C=\\{a\\in A:\\sigma(a)=\\tau(a)\\}$ and let $d:C\\to D$ be any homomorphism of commutative rings. With the common $C$-algebra structure on $B$, set $A_D=A\\otimes_C D$, $B_D=B\\otimes_C D$ [def-weil-module-base-change], $\\sigma_D=\\sigma\\otimes1$, $\\tau_D=\\tau\\otimes1$, and $\\eta_D:D\\to A_D$, $x\\mapsto1\\otimes x$. The groupoid structure maps are morphisms over $\\operatorname{Spec}C$; their base changes along $\\operatorname{Spec}D\\to\\operatorname{Spec}C$ are morphisms over $\\operatorname{Spec}D$ that define a groupoid on $\\operatorname{Spec}B_D\\rightrightarrows\\operatorname{Spec}A_D$, functorially in every test scheme over $\\operatorname{Spec}D$, with source $\\operatorname{Spec}\\sigma_D$ and target $\\operatorname{Spec}\\tau_D$, and this source and target are finite locally free. Norms mean the locally glued multiplication determinants of [lem-pd-finite-locally-free-norm-charts, def-weil-endomorphism-determinant]. For every $f\\in A_D$ and every expression $f=\\sum_{j=1}^m a_j\\otimes d_j$ (including $m=0$), form $F=\\sum_j a_jT_j$ in $A[T_1,\\ldots,T_m]$ [def-weil-pbc-mv-polynomial-ring]. The norm for the coefficientwise polynomial extensions satisfies\n$$G=N_{\\sigma[T]}(\\tau[T](F))\\in C[T_1,\\ldots,T_m],\\qquad N_{\\sigma_D}(\\tau_D(f))=\\eta_D\\bigl(d[T](G)(d_1,\\ldots,d_m)\\bigr).$$\nHere $d[T]$ applies $d$ to the coefficients and evaluation sends $T_j$ to $d_j$. In particular, the latter norm belongs to the image of $\\eta_D$, even when $d$ is not flat. For every algebraically closed field $k$ [def-weil-algebraic-closure], every $d:C\\to k$ and any two $k$-algebra maps $\\alpha_0,\\alpha_1:A_k\\to k$, all these norms have equal values under $\\alpha_0$ and $\\alpha_1$. No constant-rank, reducedness or global freeness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex; literature/stacks-project/divisors.tex",
+  "place": "Tag 03BL (groupoids-lemma-points), scalar-extension norm in the geometric orbit argument; Tag 03BK (groupoids-lemma-invariants-base-change), proof (1) and polynomial lifting in (2)(a); Tag 03BH (groupoids-lemma-determinant-trick); Tag 0BD2 (divisors-lemma-finite-locally-free-has-norm)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-pc-finite-locally-free",
+  "def-weil-module-base-change",
+  "lem-pd-finite-locally-free-norm-charts",
+  "def-weil-endomorphism-determinant",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-algebraic-closure"
+ ],
+ "proof": [
+  {
+   "text": "Let $q_U:U\\to\\operatorname{Spec}C$ be induced by the inclusion, and set $q_R=q_U\\circ s=q_U\\circ t$; the equality is exactly $\\sigma|_C=\\tau|_C$. The groupoid identities give $q_R\\circ e=q_U$, $q_R\\circ i=q_R$, and $q_R\\circ c=q_R\\circ p_1$ on $P=R\\times_{s,U,t}R$. Moreover $q_R\\circ p_0=q_U\\circ s\\circ p_0=q_U\\circ t\\circ p_1=q_R\\circ p_1$. Thus every structure map is over $\\operatorname{Spec}C$, including composition with the indicated structure map on $P$. These are identities of morphisms, since the assumed functorial groupoid laws hold on every test scheme.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BK (groupoids-lemma-invariants-base-change)(1), explicit verification that the structure maps are over the invariant base"
+   }
+  },
+  {
+   "text": "Use the fibre-product universal property [def-pc-fibre-product] to base change these maps along $\\operatorname{Spec}D\\to\\operatorname{Spec}C$. For any $H\\to\\operatorname{Spec}D$, a map $H\\to U_D$ over $D$ is exactly a map $H\\to U$ over $C$, and likewise for $R$ and $P$. Under these identifications, $P_D$ represents pairs of arrows in $R_D(H)$ with matching source and target, hence $P_D=R_D\\times_{s_D,U_D,t_D}R_D$ canonically. The operations on these pairs are the original operations, and every identity, inverse and associativity law is therefore the original law on $H$. This proves the groupoid assertion on every test scheme over $D$. By [lem-weil-pbc-fibre-product-affine-spectra], $U_D=\\operatorname{Spec}A_D$ and $R_D=\\operatorname{Spec}B_D$; their source and target maps on rings send $a\\otimes z$ to $\\sigma(a)\\otimes z$ and $\\tau(a)\\otimes z$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BK(1), filling the omitted proof by the fibre-product universal property"
+   }
+  },
+  {
+   "text": "The squares for $s_D$ and $t_D$ over $s$ and $t$ are cartesian: a map to either corner is just the compatible pair of maps used in step 2. Consequently both maps are finite by [lem-weil-pbc-finite-morphism-permanence](a), flat by [lem-weil-pbc-flat-morphism-base-change], and locally of finite presentation by [lem-weil-pbc-qcqs-morphism-permanence](3). By [def-pc-finite-locally-free] they are finite locally free. This argument applies to every $C$-algebra, including $C[T_1,\\ldots,T_m]$; no flatness of the base algebra was used.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01WL (lemma-base-change-finite), 01U9 (lemma-base-change-flat), 01TS (lemma-base-change-finite-presentation); together give Tag 02KD (lemma-base-change-finite-locally-free)"
+   }
+  },
+  {
+   "text": "Write $\\mathbf T=(T_1,\\ldots,T_m)$ and use the polynomial definition [def-weil-pbc-mv-polynomial-ring]. The map $A\\otimes_C C[\\mathbf T]\\to A[\\mathbf T]$ sends $a\\otimes\\sum_\\nu c_\\nu\\mathbf T^\\nu$ to $\\sum_\\nu ac_\\nu\\mathbf T^\\nu$, with inverse $\\sum_\\nu a_\\nu\\mathbf T^\\nu\\mapsto\\sum_\\nu a_\\nu\\otimes\\mathbf T^\\nu$; the tensor relations prove both composites are identities. The same formulas with $B$ identify the polynomial groupoid with the base change in steps 2–3. Steps 2–3 give the groupoid laws on test schemes over $\\operatorname{Spec}C[\\mathbf T]$; they hold on every test scheme $H$, as [lem-a1-affine-groupoid-invariant-norm] requires: all structure maps are over $\\operatorname{Spec}C[\\mathbf T]$, so a point $H\\to\\operatorname{Spec}A[\\mathbf T]$ or $H\\to\\operatorname{Spec}B[\\mathbf T]$ determines a structure map $H\\to\\operatorname{Spec}C[\\mathbf T]$, source, target, identity and inverse preserve it, two composable arrows have the same one (as $q\\circ s=q\\circ t$), and the groupoid on $H$ is the disjoint union over these structure maps of the groupoids of step 2. Apply [lem-a1-affine-groupoid-invariant-norm] to that groupoid and $F=\\sum_j a_jT_j$. It gives $\\sigma[\\mathbf T](G)=\\tau[\\mathbf T](G)$ for $G=N_{\\sigma[\\mathbf T]}(\\tau[\\mathbf T](F))$. Equality of polynomial coefficients says that every coefficient $g_\\nu$ of $G$ satisfies $\\sigma(g_\\nu)=\\tau(g_\\nu)$, hence $g_\\nu\\in C$ and $G\\in C[\\mathbf T]$. This does not identify invariants after a nonflat extension; only coefficientwise polynomial equality is used.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-a1-affine-groupoid-invariant-norm"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BH (groupoids-lemma-determinant-trick) on the polynomial groupoid; polynomial lifting in Tag 03BK(2)(a)"
+   }
+  },
+  {
+   "text": "Define $\\phi_A:A[\\mathbf T]\\to A_D$ by $a\\mapsto a\\otimes1$, $T_j\\mapsto1\\otimes d_j$, and $\\phi_B:B[\\mathbf T]\\to B_D$ by the corresponding formulas. These are evaluation homomorphisms by [def-weil-pbc-mv-polynomial-ring], and they commute with $\\sigma,\\tau$. In particular $\\phi_A(F)=f$ and $\\phi_B(\\tau[\\mathbf T](F))=\\tau_D(f)$. The source square is a scalar-extension square: the explicit isomorphism\n$$B[\\mathbf T]\\otimes_{A[\\mathbf T]}A_D\\longrightarrow B_D$$\nsends $(b\\mathbf T^\\nu)\\otimes(a\\otimes z)$ to $b\\sigma(a)\\otimes d^\\nu z$, where $d^\\nu=\\prod_jd_j^{\\nu_j}$. Its inverse sends $b\\otimes z$ to $b\\otimes(1\\otimes z)$. The balancing relations over $C$ and $A[\\mathbf T]$ make these maps well defined and make both composites identities; moving $T_j$ to the second factor gives $1\\otimes d_j$ there. By [lem-weil-pbc-fibre-product-affine-spectra] this is also the cartesian square of affine schemes needed to pull back local norm charts.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-module-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/exercises.tex",
+    "place": "Tag 02DV (exercises-exercise-trace-det-rings)(3), specialization map and explicit scalar-extension identification"
+   }
+  },
+  {
+   "text": "Take an affine norm chart $V\\subset\\operatorname{Spec}(A[\\mathbf T])$ from [lem-pd-finite-locally-free-norm-charts], with coordinate ring $E$ and arrow algebra $L$ free on $e_1,\\ldots,e_r$. Put $b=\\tau[\\mathbf T](F)|_V$ and write $be_j=\\sum_i M_{ij}e_i$. Its norm is $G|_V=\\det M$ by [def-weil-endomorphism-determinant]. The inverse image $W$ of $V$ in $\\operatorname{Spec}A_D$ is affine and its arrow algebra is $L\\otimes_E E'$, $E'=\\Gamma(W,\\mathcal O)$, by the cartesian square of step 5 and [lem-weil-pbc-fibre-product-affine-spectra]. The basis after extension is $e_j\\otimes1$: the coordinates of $\\sum_j e_j\\otimes z_j$ are $(z_j)_j$, inverse to $(z_j)_j\\mapsto\\sum_j e_j\\otimes z_j$, by [def-weil-module-base-change]. Multiplication by the image of $b$, which is $\\tau_D(f)|_W$, has matrix $(h(M_{ij}))$, where $h:E\\to E'$ is the restriction of $\\phi_A$. The determinant formula [def-weil-pbc-matrix-determinant] gives $\\det(h(M_{ij}))=h(\\det M)$, since a ring map preserves every signed product and finite sum. Thus the local norm of $\\tau_D(f)$ equals $\\phi_A(G)$ on $W$. The arrow schemes over these affine charts are affine by [lem-weil-pbc-finite-morphism-permanence](b), so the section-algebra identifications apply.",
+   "uses": [
+    "lem-pd-finite-locally-free-norm-charts",
+    "def-weil-endomorphism-determinant",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-module-base-change",
+    "def-weil-pbc-matrix-determinant",
+    "lem-weil-pbc-finite-morphism-permanence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/exercises.tex; literature/stacks-project/divisors.tex",
+    "place": "Tag 02DV(1),(3); Tag 0BD2 (divisors-lemma-finite-locally-free-has-norm), local multiplication matrices"
+   }
+  },
+  {
+   "text": "The inverse images $W$ of the norm charts cover $\\operatorname{Spec}A_D$. On each of them the norm specified in the statement is the multiplication determinant, so step 6 and the sheaf equality axiom give $N_{\\sigma_D}(\\tau_D(f))=\\phi_A(G)$ globally. Since $G=\\sum_\\nu g_\\nu\\mathbf T^\\nu$ with $g_\\nu\\in C$, evaluation gives\n$$\\phi_A(G)=\\sum_\\nu g_\\nu\\otimes d^\\nu=1\\otimes\\sum_\\nu d(g_\\nu)d^\\nu=\\eta_D\\bigl(d[\\mathbf T](G)(d_1,\\ldots,d_m)\\bigr).$$\nThe middle equality is the defining $C$-tensor relation [def-weil-module-base-change]. This proves the formula and its scalar-image consequence for every chosen expression of $f$. For $m=0$ the polynomial ring has just its constant monomial, $F=0$, and all the displayed evaluation and tensor formulas have their usual empty-sum or empty-product meanings. The matrix proof also allows rank zero charts and different ranks on different charts, without dividing by anything.",
+   "uses": [
+    "def-weil-module-base-change",
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-pd-finite-locally-free-norm-charts"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex; literature/stacks-project/exercises.tex",
+    "place": "Polynomial specialization from Tag 03BK(2)(a), combined with Tag 02DV(3); coefficient calculation without a flatness hypothesis"
+   }
+  },
+  {
+   "text": "Finally put $D=k$. For any $f\\in A_k$ and its chosen tensor expression, let $z=d[\\mathbf T](G)(d_1,\\ldots,d_m)\\in k$. Step 7 gives $N_{\\sigma_k}(\\tau_k(f))=\\eta_k(z)$. As $\\alpha_0,\\alpha_1$ are $k$-algebra maps, $\\alpha_0(\\eta_k(z))=z=\\alpha_1(\\eta_k(z))$. Thus the two values agree for all these norms. This last argument works over any field; algebraic closedness is the hypothesis required in the geometric-point application, rather than an additional property used in the calculation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BL (groupoids-lemma-points), norm in the geometric orbit argument; the scalar-image formula proves the needed equality of values"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-pc-finite-locally-free",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-a1-affine-groupoid-invariant-norm",
+  "def-weil-module-base-change",
+  "lem-pd-finite-locally-free-norm-charts",
+  "def-weil-endomorphism-determinant",
+  "def-weil-pbc-matrix-determinant"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/groupoids.tex; literature/stacks-project/exercises.tex; literature/stacks-project/divisors.tex",
+  "place": "Explicit polynomial-lift refinement of Tags 03BH, 03BK(1),(2)(a), 03BL and 02DV(3); supplies the omitted groupoid base-change verification and the chartwise specialization calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite locally free affine groupoid over its invariant ring, after arbitrary scalar extension the source norm of any target pullback is a scalar from the new base ring",
+   "results": "8 hit(s); top recorded hits: AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange, RingHom.IsStableUnderBaseChange.pullback_fst_appTop, AlgebraicGeometry.affineAnd_isStableUnderBaseChange, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, RingHom.finite_isStableUnderBaseChange, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor, AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern field norms, localization, or affine pullbacks; none proves this scalar-image identity for arbitrary finite locally free groupoids"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Norm of target pullback after arbitrary scalar extension of a finite locally free affine groupoid is in the scalar image by lifting a tensor element to a polynomial with invariant norm coefficients",
+   "results": "8 hit(s); top recorded hits: Algebra.intNormAux, prod_galRestrict_eq_norm, Algebra.norm_localization, Algebra.map_intNormAux, Algebra.algebraMap_intNorm, Algebra.norm_eq_iff, Algebra.intNorm_intNorm, Ideal.relNorm_algebraMap'",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern field norms, localization, or affine pullbacks; none proves this scalar-image identity for arbitrary finite locally free groupoids"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Polynomial determinant norm of a finite locally free groupoid target pullback specializes to a scalar over any extension of its invariant ring",
+   "results": "8 hit(s); top recorded hits: Algebra.norm, LinearMap.det, LinearMap.det_restrictScalars, eval_det, LinearEquiv.det, Algebra.norm_eq_matrix_det, Algebra.norm_apply, Rep.norm",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern field norms, localization, or affine pullbacks; none proves this scalar-image identity for arbitrary finite locally free groupoids"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.norm, RingHom, TensorProduct",
+   "results": "0 hit(s); top recorded hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern field norms, localization, or affine pullbacks; none proves this scalar-image identity for arbitrary finite locally free groupoids"
+  },
+  {
+   "tool": "grep",
+   "query": "norm.*baseChange|baseChange.*norm|groupoid.*norm",
+   "results": "0 hit(s); top recorded hits: ; subdirectory Mathlib/RingTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern field norms, localization, or affine pullbacks; none proves this scalar-image identity for arbitrary finite locally free groupoids"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an affine finite locally free groupoid, the norm of a target pullback specializes from the polynomial ring over the invariant ring after any base extension",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, RingHom.IsStableUnderBaseChange.pullback_fst_appTop, AlgebraicGeometry.AffineSpace.map_Spec_map, AlgebraicGeometry.AffineSpace.map_SpecMap, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Hom.ι_toNormalization, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.normalizationDesc",
+   "date": "2026-10-23",
+   "verdict": "no match: no affine-groupoid invariant polynomial specialization theorem; localization, field norms and geometric base-change hits supply only ingredients."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.norm, TensorProduct",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: no affine-groupoid invariant polynomial specialization theorem; localization, field norms and geometric base-change hits supply only ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "norm.*baseChange|baseChange.*norm|groupoid.*norm",
+   "results": "0 hits; ; subdirectory Mathlib/RingTheory",
+   "date": "2026-10-23",
+   "verdict": "no match: no affine-groupoid invariant polynomial specialization theorem; localization, field norms and geometric base-change hits supply only ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finite locally free affine groupoid the target source norm is a scalar after arbitrary base change from the invariant ring",
+   "results": "8 hits; Algebra.norm_localization, Rep.norm, Representation.leftRegular_norm_apply, Representation.norm_comp_self, SpecialLinearGroup.baseChange_apply_coe, instNormedRingRestrictScalars, Representation.norm_self_apply, Rep.norm_hom",
+   "date": "2026-10-23",
+   "verdict": "no match: no affine-groupoid invariant polynomial specialization theorem; localization, field norms and geometric base-change hits supply only ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The multiplication determinant norm of an element pulled back along the target of a finite locally free affine groupoid is invariant, and its polynomial lift specializes to the same norm under a nonflat scalar extension",
+   "results": "8 hits; prod_galRestrict_eq_norm, Algebra.norm_localization, Algebra.norm_eq_iff, Algebra.map_intNormAux, Algebra.intNorm_intNorm, Algebra.norm_norm, Ideal.relNorm_algebraMap', Algebra.intNorm_eq_of_isLocalization",
+   "date": "2026-10-23",
+   "verdict": "no match: no affine-groupoid invariant polynomial specialization theorem; localization, field norms and geometric base-change hits supply only ingredients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-affine-groupoid-orbit-fibres",
+  "date": "2026-10-22",
+  "group": "NM"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Historical affine-quotient branch of lem-a1-affine-hc0, through Tag 03XX and Tag 03BL: Tag 03BL (groupoids-lemma-points), scalar-extension norm in the geometric orbit argument; Tag 03BK (groupoids-lemma-invariants-base-change), proof (1) and polynomial lifting in (2)(a); Tag 03BH (groupoids-lemma-determinant-trick); Tag 0BD2 (divisors-lemma-finite-locally-free-has-norm).",
+   "via": [
+    "lem-a1-affine-groupoid-orbit-fibres",
+    "lem-a1-finite-flat-affine-relation-quotient",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-a1-affine-groupoid-basechange-polynomial-norm",
+  "worker": "stage1",
+  "summary": "Verified the statement against Tags 03BH, 03BK, 03BL, 02DV and 0BD2. Reused the scalar invariant-norm theorem and affine tensor-product/base-change leaves, wrote out groupoid descent to the invariant base, coefficient comparison and the local multiplication-matrix specialization. No new node is needed: every remaining calculation is explicit from cited definitions and norm charts. Preserved the statement and existing metadata.",
+  "blueprint": "Historical affine-quotient branch attached to lem-a1-affine-hc0, via lem-a1-affine-groupoid-orbit-fibres and the existing quotient/representability chain: polynomial norm specialization in the Tag 03BL orbit argument. The current main-20261015 support proof of lem-a1-affine-hc0 no longer uses that branch. No unit or chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-pd-finite-locally-free-norm-charts",
+    "why": "Provides the locally free multiplication-determinant charts used in steps 6 and 7; this generic norm construction is not supplied by a statement of the Rankin–Selberg unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pd-finite-locally-free-norm-charts"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NX-5c9eb42bb",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-5c9eb42bb (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item with 8 steps and no new nodes, the statement of every cited node, and Stacks groupoids.tex lines 4250-4530 (03BH determinant trick, 03BK invariants-base-change, 03BL points). The statement is byte-identical to the one that landed through NM's orbit-fibres FIX (checked against runs/1/NM__...74e3/fixes), so nothing is weakened. No repair note exists for this item. stmt_deps equals the nodes cited in the statement, proof_deps equals the union of the step uses, and there is no cycle (the only citer is orbit-fibres step 2, which uses exactly the scalar-image conclusion). Step checks: (1) the maps over Spec C follow from sigma|_C=tau|_C and the groupoid identities; (2) the base-change groupoid over D-schemes is correct, and the affine fibre-product node also gives the projections; (3) finite, flat and lfp hold by the three permanence nodes and def-pc-finite-locally-free, with no restriction on D; (4) A⊗_C C[T]≅A[T], invariant-norm applies, and coefficientwise equality gives G in C[T] without claiming that invariants commute with base change; (5) I checked that B[T]⊗_{A[T]}A_D≅B_D is balanced over C and over A[T], and that both composites are the identity; (6) the inverse-image chart W=V×Spec A_D is affine, the arrow piece is affine by finite-permanence (b), the basis is e_j⊗1, the matrix is h(M), and det h(M)=h(det M) by the Leibniz formula; (7) gluing, then g_nu⊗d^nu=1⊗d(g_nu)d^nu; (8) alpha_j∘eta_k=id. Fault (E1, fixed): invariant-norm requires the groupoid laws on every test scheme H, but steps 2-3 only give them over Spec C[T]. I added one sentence to step 4 (every H-point carries its structure map to Spec C[T], composable pairs share it because q∘s=q∘t, so the groupoid on H is a disjoint union of the step-2 groupoids); the whole corrected item is in fixes/dag/nodes/sec-purity-real-sheaves/. Edge cases checked: the identity groupoid; the pair groupoid on Spec(Z×Z) over Z with D=F2 and D=F2[eps]/(eps^2) (nonflat and nonreduced: norm of (1,eps) is eps, G=T1T2); m=0; varying ranks (rank 0 cannot occur because e is a section of s); zero D. No duplicate: polynomial-norm-invariant is one-variable, and no node states a norm base-change formula. Accepted tool_use: lem-pd-finite-locally-free-norm-charts, which is already in the statements of the item and of the same-unit invariant-norm. No SGA source is used. I also ran one read-only git diff --no-index between the snapshot file and my fix file to confirm that only that line changed.; 1 file(s) fixed by the reviewer"
+ }
+}

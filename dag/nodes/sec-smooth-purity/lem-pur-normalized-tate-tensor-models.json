@@ -1,0 +1,144 @@
+{
+ "id": "lem-pur-normalized-tate-tensor-models",
+ "kind": "statement",
+ "title": "Common single-degree local models and constructibility of a normalized Tate tower",
+ "statement": "For every Noetherian T with prime ell invertible and d in N, let M,e,h be an AdicTower, level isomorphisms to the finite twists and equality with strictDerivedTower as in [def-pur-condensed-tate-integral-tower-data]. Assume ProjectionNormalized and the scalarComparison/proTwistMap square for every comparable pair and every normalized CoefficientLineComparison. Then there are a stratification S and UniformAdicTowerData W in the sense of [def-weil-pbc-bounded-constructible-tower] with lower=upper=-2d. For every finite level and every degree, the cohomology of M.level, restricted through pbcLevelConstantComparison, is intrinsically coefficient-sheaf constructible; the cohomology of finiteTwist is fixed-coefficient constructible. No new tower, reduction square, unit comparison or reconstruction is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+  "place": "Step 4 of lem-pur-normalized-tate-tensor-tower"
+ },
+ "stmt_deps": [
+  "def-pur-condensed-tate-integral-tower-data",
+  "def-weil-pbc-bounded-constructible-tower"
+ ],
+ "proof": [
+  {
+   "text": "The finite-etale Tate line is finite locally constant: use its primitive-root trivializing cover and the finite regular coefficient module. Exact etale-to-pro-etale comparison preserves its finite local models. The explicit single-complex isomorphism identifies finiteTwist with this line in degree -2d. The homology of a single complex is its term in that degree and zero elsewhere, so every fixed-coefficient cohomology sheaf is finite locally constant, including d=0 and empty T.",
+   "uses": [
+    "lem-asd-finite-etale-twist-line",
+    "def-pur-condensed-tate-integral-tower-data",
+    "lem-weil-pbc-finite-locally-constant-module-values"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the exact coefficient realization and the level isomorphisms e to identify the underlying additive cohomology sheaves with those of the finite twists. Scalar restriction does not change the underlying set sheaf. Transfer finite local constancy across the two finite coefficient presentations: on each finite constant set model refine the cover so that zero, addition and every scalar multiplication are constant; their sections form a finite module. The exact ringed-module pullback and restriction comparisons transport this finite-lisse statement to the identity stratum.",
+   "uses": [
+    "def-pur-condensed-tate-integral-tower-data",
+    "lem-weil-pbc-finite-coefficient-intrinsic-constructibility",
+    "lem-weil-constructible-coefficient-serre",
+    "def-weil-pbc-ring-restriction-pullback-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The level isomorphism e composed with finiteModelIso gives the common cohomological interval [-2d,-2d]. Apply lisseNormalizedTower_local_models on the identity stratum, using the finite-lisse statements of the previous step. Invert its local reduction isomorphisms; cancel their invertible components in its transition equation to obtain the AdicTowerLocalModel compatibility equation. Choose these models on the given covering sieve, with the one-stratum stratification, to construct UniformAdicTowerData with both endpoints -2d. The retained h, hp and hsquare are unnecessary for this route because the generic normalized-tower theorem already supplies compatible models.",
+   "uses": [
+    "lem-weil-pbc-lisse-normalized-tower-local-models",
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite local constancy of the intrinsic restricted cohomology sheaves gives intrinsic constructibility on the trivial stratification by the coefficient restriction equivalence. For fixed coefficients, transport the finite-lisse covers to the slice site using finiteModels_over and use finite_geometricStalk_of_finite_models for finite stalks. These directly verify both defining constructibility clauses on that same one-stratum partition, including the empty scheme.",
+   "uses": [
+    "lem-weil-constructible-coefficient-serre",
+    "lem-weil-pbc-proetale-finite-model-local-constancy",
+    "lem-weil-pbc-proetale-finite-model-stalks"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-finite-etale-twist-line",
+  "def-pur-condensed-tate-integral-tower-data",
+  "lem-weil-pbc-finite-locally-constant-module-values",
+  "lem-weil-pbc-finite-coefficient-intrinsic-constructibility",
+  "lem-weil-constructible-coefficient-serre",
+  "def-weil-pbc-ring-restriction-pullback-comparison",
+  "lem-weil-pbc-lisse-normalized-tower-local-models",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-weil-pbc-proetale-finite-model-local-constancy",
+  "lem-weil-pbc-proetale-finite-model-stalks"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+  "place": "Step 4 of the normalized Tate tensor tower; generic finite-lisse normalized tower local models replace the direct integral-root tensor construction (G4)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compatible primitive roots of unity give a normalized strict derived tensor power reduction tower with constructible rank one local models",
+   "results": "IsPrimitiveRoot.integralPowerBasis.congr_simp, primitiveRoots, rootsOfUnityEquivOfPrimitiveRoots; generic root facts, no sheaf tower or model theorem.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem in Mathlib."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inverse system of roots of unity sheaves tensor powers yields an adic tower with a common local model and constructible finite reductions",
+   "results": "BDeRhamPlus, BDeRham, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion; none has the required sheaf or normalization interface. Loogle Functor.map_comp supplies only composition glue.",
+   "date": "2026-10-27",
+   "verdict": "Generic completion tools do not state either component."
+  },
+  {
+   "tool": "grep",
+   "query": "adic.*[Tt]ower|root.*[Tt]ower|tensorPower.*zero",
+   "results": "Mathlib scalar towers and root polynomial facts; project search finds CondensedTateIntegralTowerData, the assigned theorem and its consumer, but no theorem constructing its normalized reductions or common models. Whole-blueprint keyword search gives no duplicate of either separate component.",
+   "date": "2026-10-27",
+   "verdict": "Use the project root-line, K-flat and tower declarations; the remaining component is new."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedTateTensorTower",
+  "date": "2026-10-27",
+  "group": "J1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-purity-transport",
+   "place": "Step 2: realize the normalized Tate-unit system with common bounds and stratification",
+   "via": [
+    "lem-pur-normalized-tate-tensor-tower",
+    "lem-pur-condensed-tate-integral-tower"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedTateTensorTowerProperties",
+  "file": "lean/Sheaf/Paper/NormalizedTateTensorTowerProperties.lean",
+  "declaration": "AlgebraicGeometry.Scheme.PurityIntegralTower.normalizedTateTensorTower_properties",
+  "statement": "theorem normalizedTateTensorTower_properties\n    (T : Scheme.{u}) [IsNoetherian T] (ell : ℕ) [Fact ell.Prime]\n    (hT : IsUnit (ell : Γ(T, ⊤))) (d : ℕ)\n    (M : AdicTower T (datum.{u} ell))\n    (e : ∀ n : ℕ, M.level n ≅\n      (derivedRealization T ell n).obj (finiteTwist T ell n d))\n    (h : M.tower = strictDerivedTower T ell d)\n    (hp : ProjectionNormalized T ell hT d M e h)\n    (hsquare : ∀ (b a : ℕ) (hab : a ≤ b)\n      (r : CoefficientLineComparison\n        (FiniteReduction.quotient.{u} ell (Nat.add_le_add_right hab 1))\n        (ell ^ (b + 1)) (ell ^ (a + 1))\n        (CharP.cast_eq_zero _ _) (CharP.cast_eq_zero _ _) T),\n      (pbcDerivedExtend (pbcAdicQuotient T (datum.{u} ell) b a hab)).map (e b).hom ≫\n          (scalarComparison T ell b a hab).hom.app (finiteTwist T ell b d) ≫\n          (derivedRealization T ell a).map (proTwistMap d r) =\n        (M.normalization b a hab).hom ≫ (e a).hom) :\n    ∃ (S : Stratification T) (W : UniformAdicTowerData (datum.{u} ell) M S),\n      W.lower = -(2 * (d : ℤ)) ∧ W.upper = -(2 * (d : ℤ)) ∧\n    (∀ (n : ℕ) (q : ℤ),\n      @IsConstructibleProEtaleCoefficientModuleSheaf T (Ring.{u} ell ⧸\n          (datum.{u} ell).ideal ^ (n + 1)) _ ((datum.{u} ell).quotientFinite n)\n        ((pbcRestrict (pbcLevelConstantComparison T (datum.{u} ell) n).hom).obj\n          ((_root_.DerivedCategory.homologyFunctor _ q).obj (M.level n)))) ∧\n    (∀ (n : ℕ) (q : ℤ),\n      IsConstructibleProEtaleFixedModuleSheaf T (coefficient ell (n + 1))\n        ((_root_.DerivedCategory.homologyFunctor _ q).obj (finiteTwist T ell n d)))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261027T094426-L-224478",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261027T112349-L-1575934",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

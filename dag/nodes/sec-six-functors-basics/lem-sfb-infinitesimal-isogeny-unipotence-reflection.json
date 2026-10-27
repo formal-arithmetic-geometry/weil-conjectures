@@ -1,0 +1,225 @@
+{
+ "id": "lem-sfb-infinitesimal-isogeny-unipotence-reflection",
+ "kind": "statement",
+ "title": "Unipotence is reflected by infinitesimal isogenies of smooth affine groups",
+ "statement": "Let $k$ be a field [def-weil-field], and fix an algebraic closure $\\bar k$ [def-weil-algebraic-closure]. All groups below are affine $k$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism]; subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness mean [def-sbc-smooth-morphisms, def-weil-connected-scheme]. A torus is a group which becomes $\\mathbf G_m^r$ over $\\bar k$, for some integer $r\\geq0$, where $\\mathbf G_m(A)=A^\\times$ [def-sc-gm-ga]. Unipotent means admitting, for some $n\\geq1$, a closed immersion [def-weil-closed-immersion] into the upper unitriangular group $\\mathcal U_{n,k}\\subseteq\\operatorname{GL}_{n,k}$ [def-sc-general-linear-group]: its $A$-points are upper triangular matrices with all diagonal entries $1$, for every commutative $k$-algebra $A$. Let $G,G'$ be smooth and connected, and let $f:G\\to G'$ be a finite faithfully flat radicial homomorphism. Here finite means finite on coordinate rings, faithfully flat means flat and surjective, and radicial means injective on geometric points after every field extension. If $G'$ is unipotent, then $G$ is unipotent. No perfectness or characteristic assumption on $k$ is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 17.81, proof of the isogeny case, printed p.379 (the isogeny constructed in Proposition 17.80 is infinitesimal). Supporting geometric criterion: Corollaries 14.9 and 14.12, pp.282–283; functorial Jordan decomposition, Theorem 9.18 and paragraph 9.19, pp.170–171; unitriangular form, Theorem 14.5, pp.281–282."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-algebraic-closure",
+  "def-sc-gm-ga",
+  "def-sc-general-linear-group",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Put $K=\\bar k$. Choose $m\\geq1$ and a closed faithful representation $\\rho:G\\to\\operatorname{GL}_{m,k}$ by [lem-sfb-affine-group-faithful-linear-representation]. By the assumed unipotence of $G'$, choose its defining closed immersion $j:G'\\hookrightarrow\\mathcal U_{n,k}\\subseteq\\operatorname{GL}_{n,k}$, with $n\\geq1$. Form $G_K$ and $G'_K$. The affine fibre-product formula [lem-weil-pbc-fibre-product-affine-spectra] identifies their coordinate rings with $K\\otimes_k k[G]$ and $K\\otimes_k k[G']$. They are finitely generated $K$-algebras: tensor a finite set of algebra generators with $1$. The tensor universal property [lem-weil-pbc-algebra-tensor-pushout-universal-property] identifies $G_K(R)$ with $G(R)$ for every commutative $K$-algebra $R$ viewed as a $k$-algebra, compatibly with the group operations. In particular $\\rho_K$ and $j_K$ remain injective on every such set of points. Write $F=f_K$. The radicial hypothesis gives injectivity of $F:G_K(K)\\to G'_K(K)$ directly, since $K$ is algebraically closed.",
+   "uses": [
+    "lem-sfb-affine-group-faithful-linear-representation",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 4.9 and Corollary 4.10, p.87; Proposition 17.81, p.379, infinitesimal isogeny case; scalar-extension conventions."
+   }
+  },
+  {
+   "text": "Fix an arbitrary $g\\in G_K(K)$. For every finite-dimensional rational representation $(V,r_V)$ of $G_K$, set $\\lambda_V=(r_V(g))_u$, the unipotent matrix factor supplied by [lem-sfb-multiplicative-jordan-linear-compatibility]. These factors are invertible. If $a:V\\to W$ is equivariant, then $a r_V(g)=r_W(g)a$, so the intertwiner clause gives $a\\lambda_V=\\lambda_W a$. The tensor clause gives $\\lambda_{V\\otimes W}=\\lambda_V\\otimes\\lambda_W$. On the unit representation $r_{\\mathbf1}(g)=I$; its decomposition $I=I\\cdot I$ and uniqueness give $\\lambda_{\\mathbf1}=I$. The zero representation is covered by the same cited matrix theorem. These are precisely the hypotheses of [lem-sfb-tannaka-rational-point-reconstruction], so it supplies $h\\in G_K(K)$ such that $r_V(h)=(r_V(g))_u$ for every finite-dimensional rational representation. This constructs the unipotent part inside the group; it does not assume that matrix decomposition stays in an arbitrary closed subgroup.",
+   "uses": [
+    "lem-sfb-multiplicative-jordan-linear-compatibility",
+    "lem-sfb-tannaka-rational-point-reconstruction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 9.18 proof, p.170, applying Theorem 9.2 to the family of unipotent parts; Propositions 9.13 and 9.15, p.169."
+   }
+  },
+  {
+   "text": "Apply the preceding identity to the representation $r=j_K\\circ F$ of $G_K$ on $K^n$. Since $j$ factors through $\\mathcal U_n$, the matrix $A=r(g)$ is upper unitriangular. Its difference $A-I_n$ is strictly upper triangular, and $(A-I_n)^n=0$: an entry of a product of $n$ such matrices is a sum indexed by strictly increasing chains of $n+1$ indices in $\\{1,\\ldots,n\\}$, of which there are none. Hence $A=I_n\\cdot A=A\\cdot I_n$ is a decomposition of the required kind. Uniqueness in [lem-sfb-multiplicative-jordan-linear-compatibility] gives $A_u=A$. Step 2 therefore says $j_K(F(h))=r(h)=A_u=A=j_K(F(g))$. Injectivity of $j_K$ on $K$-points gives $F(h)=F(g)$, and radicial injectivity from Step 1 gives $h=g$. No inference from geometric injectivity to a closed immersion is used.",
+   "uses": [
+    "lem-sfb-multiplicative-jordan-linear-compatibility"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 9.18 and paragraphs 9.19--9.21, pp.170--171; Proposition 17.81, p.379, infinitesimal isogeny case; unitriangular matrices as in Theorem 14.5."
+   }
+  },
+  {
+   "text": "Now take $r_V=\\rho_K$ in Step 2. Since $h=g$, it gives $\\rho_K(g)=(\\rho_K(g))_u$. By the unipotent-factor clause of [lem-sfb-multiplicative-jordan-linear-compatibility], $(\\rho_K(g)-I_m)^N=0$ for some $N\\geq1$. The point $g\\in G(K)$ was arbitrary. Thus the faithful representation $\\rho$ chosen over $k$ sends every geometric point of $G$ to a unipotent matrix. Apply [lem-sfb-geometric-unipotence-unitriangular-embedding] to $G$ and $\\rho$: $G$ is smooth, affine and of finite type by hypothesis, $m\\geq1$, and $\\rho$ is injective on every algebra-valued point by Step 1. The cited statement supplies a closed immersion over $k$ into $\\mathcal U_{d,k}$ for some $d\\geq1$, exactly the required unipotence. Its conclusion is over $k$ itself, so no descent of a chosen geometric flag is assumed.",
+   "uses": [
+    "lem-sfb-multiplicative-jordan-linear-compatibility",
+    "lem-sfb-geometric-unipotence-unitriangular-embedding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 14.12, p.283, with Theorem 14.5, pp.281--282; Theorem 9.18 and paragraph 9.19, pp.170--171."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-affine-group-faithful-linear-representation",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-sfb-multiplicative-jordan-linear-compatibility",
+  "lem-sfb-tannaka-rational-point-reconstruction",
+  "lem-sfb-geometric-unipotence-unitriangular-embedding"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 17.81, p.379, infinitesimal isogeny case, expanded using the reconstruction proof of Theorem 9.18, p.170, and Corollary 14.12 with Theorem 14.5, pp.281--283."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite faithfully flat radicial homomorphism between smooth affine algebraic groups reflects unipotence",
+   "results": "{\"t\": \"2026-10-24T04:58:49Z\", \"tool\": \"leanfinder\", \"query\": \"A finite faithfully flat radicial homomorphism between smooth affine algebraic groups reflects unipotence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.exists_finiteType\", \"Algebra.Smooth.flat\", \"RingHom.Smooth\", \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"Algebra.Smooth\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"Algebra.smoothLocus_eq_univ_iff\", \"RingHom.Smooth.toAlgebra\"], \"digest\": \"6d9428fe1e2e6882\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smoothness, flatness and formally unramified ring/scheme results do not assert unipotence of affine group schemes or its reflection by an infinitesimal isogeny."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An infinitesimal isogeny of smooth affine algebraic groups has unipotent source if its target is unipotent",
+   "results": "{\"t\": \"2026-10-24T04:58:50Z\", \"tool\": \"leanfinder\", \"query\": \"An infinitesimal isogeny of smooth affine algebraic groups has unipotent source if its target is unipotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.formallyUnramified_iff\", \"AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme\", \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.Scheme.Hom.formallyUnramified_appLE\", \"AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE\", \"AlgebraicGeometry.FormallyUnramified.formallyUnramified_of_affine_subset\"], \"digest\": \"dcbaaba056d7a990\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smoothness, flatness and formally unramified ring/scheme results do not assert unipotence of affine group schemes or its reflection by an infinitesimal isogeny."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsUnipotent\"",
+   "results": "{\"t\": \"2026-10-24T04:58:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsUnipotent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smoothness, flatness and formally unramified ring/scheme results do not assert unipotence of affine group schemes or its reflection by an infinitesimal isogeny."
+  },
+  {
+   "tool": "grep",
+   "query": "unipotent.*isogen|isogen.*unipotent|unipotent.*radicial",
+   "results": "{\"t\": \"2026-10-24T04:58:45Z\", \"tool\": \"grep\", \"query\": \"unipotent.*isogen|isogen.*unipotent|unipotent.*radicial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smoothness, flatness and formally unramified ring/scheme results do not assert unipotence of affine group schemes or its reflection by an infinitesimal isogeny."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite faithfully flat radicial homomorphism between smooth affine algebraic groups reflects unipotence",
+   "results": "{\"t\": \"2026-10-24T04:58:46Z\", \"tool\": \"leansearch\", \"query\": \"A finite faithfully flat radicial homomorphism between smooth affine algebraic groups reflects unipotence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.FaithfullyFlat\", \"RingHom.Smooth\", \"RingHom.Flat\", \"RingHom.FaithfullyFlat.injective\", \"Module.FaithfullyFlat.iff_flat_and_lTensor_reflects_triviality\", \"RingHom.FormallyUnramified\", \"ModuleCat.reflectsIsomorphisms_extendScalars_of_faithfullyFlat\", \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\"], \"digest\": \"cf7b8548fbced7b3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smoothness, flatness and formally unramified ring/scheme results do not assert unipotence of affine group schemes or its reflection by an infinitesimal isogeny."
+  },
+  {
+   "tool": "grep",
+   "query": "unipotent|Unipotent|isogeny|Isogeny",
+   "results": "{\"t\": \"2026-10-24T07:00:28Z\", \"tool\": \"grep\", \"query\": \"unipotent|Unipotent|isogeny|Isogeny\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Preadditive/Biproducts.lean\", \"Mathlib/CategoryTheory/Preadditive/Biproducts.lean\", \"Mathlib/CategoryTheory/Preadditive/Biproducts.lean\", \"Mathlib/CategoryTheory/Preadditive/Biproducts.lean\", \"Mathlib/CategoryTheory/Preadditive/Biproducts.lean\", \"Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean\", \"Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean\", \"Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean\"], \"digest\": \"a9a56d31ccc1dc98\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ring/scheme infinitesimal properties, abstract groups, biproduct matrices or a subgroup of SL on field points; none states unipotence reflection for affine group schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unipotent algebraic groups are reflected by infinitesimal isogenies over arbitrary fields",
+   "results": "{\"t\": \"2026-10-24T07:00:29Z\", \"tool\": \"leansearch\", \"query\": \"Unipotent algebraic groups are reflected by infinitesimal isogenies over arbitrary fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.instInjective\", \"ProfiniteGrp.instReflectsIsomorphismsForget\", \"Subgroup.unop_inj\", \"AlgebraicGeometry.FormallyUnramified.recOn\", \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"Algebra.FormallyUnramified.iff_of_equiv\", \"Algebra.Extension.homInfinitesimal\", \"Algebra.FormallyUnramified.lift_unique'\"], \"digest\": \"588032e8bb20d26a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ring/scheme infinitesimal properties, abstract groups, biproduct matrices or a subgroup of SL on field points; none states unipotence reflection for affine group schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"unipotent\"",
+   "results": "{\"t\": \"2026-10-24T07:00:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"unipotent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"CategoryTheory.Biprod.unipotentLower\", \"CategoryTheory.Biprod.unipotentUpper\", \"CategoryTheory.Biprod.unipotentLower_hom\", \"CategoryTheory.Biprod.unipotentUpper_hom\", \"CategoryTheory.Biprod.unipotentLower_inv\", \"CategoryTheory.Biprod.unipotentUpper_inv\"], \"digest\": \"0b525c109db5567d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ring/scheme infinitesimal properties, abstract groups, biproduct matrices or a subgroup of SL on field points; none states unipotence reflection for affine group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite radicial homomorphism of smooth affine algebraic groups reflects unipotence",
+   "results": "{\"t\": \"2026-10-24T07:00:29Z\", \"tool\": \"leanfinder\", \"query\": \"A finite radicial homomorphism of smooth affine algebraic groups reflects unipotence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"Algebra.FormallyUnramified.isReduced_of_field\", \"AlgebraicGeometry.formallyUnramified_iff\", \"RingHom.FormallyUnramified.propertyIsLocal\", \"RingHom.FormallyUnramified\"], \"digest\": \"85520e27deb8efaa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ring/scheme infinitesimal properties, abstract groups, biproduct matrices or a subgroup of SL on field points; none states unipotence reflection for affine group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An injective map on geometric points of affine group schemes implies unipotence of the source when the target is unipotent",
+   "results": "{\"t\": \"2026-10-24T07:01:15Z\", \"tool\": \"leanfinder\", \"query\": \"An injective map on geometric points of affine group schemes implies unipotence of the source when the target is unipotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.Point.map_injective\", \"AlgebraicGeometry.isDominant_of_of_appTop_injective\", \"AlgebraicGeometry.instIsMultiplicativeSchemeUniversallyInjective\", \"AlgebraicGeometry.stalkMap_injective_of_isAffine\", \"AlgebraicGeometry.Scheme.Hom.injective\", \"AlgebraicGeometry.IsClosedImmersion.isIso_of_injective_of_isAffine\", \"AlgebraicGeometry.instUniversallyInjectiveOfMonoScheme\", \"AlgebraicGeometry.universallyInjective_eq\"], \"digest\": \"af7211eaa478d3e8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ring/scheme infinitesimal properties, abstract groups, biproduct matrices or a subgroup of SL on field points; none states unipotence reflection for affine group schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-torus-free-implies-unipotent-arbitrary-field",
+  "date": "2026-10-24",
+  "group": "Q91"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118. Supporting prerequisite: Milne Theorem 17.82, printed p.379 (maximal torus if and only if its scalar extension is maximal); the theorem allows all group varieties, and is used here only for smooth connected affine groups. Supporting step in Milne Theorem 17.82: Proposition 17.81 and its proof, printed pp.378–379; Theorem 14.5, printed pp.281–282, for the unitriangular-immersion meaning of unipotence. The finite-field part of the proof invokes Proposition 17.99, printed pp.383–384. Supporting proof input for Proposition 17.81: Proposition 17.81, proof of the isogeny case, printed p.379 (the isogeny constructed in Proposition 17.80 is infinitesimal). Supporting geometric criterion: Corollaries 14.9 and 14.12, pp.282–283; functorial Jordan decomposition, Theorem 9.18 and paragraph 9.19, pp.170–171; unitriangular form, Theorem 14.5, pp.281–282.",
+   "via": [
+    "lem-sfb-torus-free-implies-unipotent-arbitrary-field",
+    "lem-sfb-maximal-torus-field-extension",
+    "lem-sfb-split-reductive-characteristic-sequence",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-infinitesimal-isogeny-unipotence-reflection",
+  "worker": "stage1",
+  "summary": "Expanded the infinitesimal-isogeny step using the existing matrix Jordan theorem and Tannakian point reconstruction. Radicial injectivity forces each geometric point to equal its reconstructed unipotent part; the existing geometric criterion gives a unitriangular immersion over the original field. Reused every supporting result; no new nodes or statement change.",
+  "blueprint": "Supporting input below det-thm-sf-ctf-stability-direct-images proof (3), via the recorded alteration/moduli/group-theory chain: Milne Proposition 17.81, isogeny case. Read the current latest blueprint; this split changes no unit or chapter route. The inherited nearest blueprint ancestor is null, as blueprint_refs.py ancestor reports.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q102-e0f1686b6",
+  "group": "Q102",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-e0f1686b6 (reviewer sub-agent of L); spot-checked: First split, not a 2026-10-21 re-split: the item was unsplit on live, and statement, stmt_deps and blueprint are unchanged against live. Zero new nodes. Sources read: Milne iAG 2017. Prop 17.81 (p.379, isogeny case: 'then G′ is not unipotent') is the contrapositive of the item. Thm 9.18 (p.170): the proof applies the reconstruction theorem 9.2 to the families r_V(g)_u. Cor 14.12 with 14.9/14.10 (pp.282-283): a smooth G is unipotent iff its geometric points are unipotent; μ_p shows smoothness is needed, and it is present. Step 1: the faithful-representation node gives ρ injective on all A-points; the tensor universal property gives G_K(R)=G(R); radicial gives injectivity of F on K-points. Step 2: every hypothesis of the tannaka reconstruction node is checked (naturality from the Jordan intertwiner clause, tensor clause, unit by uniqueness), so h in G_K(K) exists with r_V(h)=r_V(g)_u for all V. Step 3: j_K∘F(g) is unitriangular, (A−I)^n=0, uniqueness gives A_u=A, so h=g by the two injections. Step 4: ρ(g) is unipotent for every geometric point g, and every hypothesis of the geometric-unipotence-unitriangular-embedding node holds; it concludes a closed immersion into U_n over k. Edge cases checked: trivial G, n=1, Frobenius of G_a, imperfect k, μ_p→1. Duplicate scan: rational-representation-unipotent-point runs in the wrong direction, and no node states group-level 9.18. Off-unit citations are Mathlib leaves only; no cycle; no SGA. Batch-5 flag: the citation of the embedding node reaches lem-trf-flat-tensor-preserves-injection, a Mathlib leaf (Module.Flat.lTensor_preserves_injective_linearMap); also lem-trf-faithfully-flat-ltensor-injective-reflection (a Mathlib leaf). Both are generic flatness facts, not steps of the trace formula or Poincaré duality proofs, so the citation is acceptable."
+ }
+}

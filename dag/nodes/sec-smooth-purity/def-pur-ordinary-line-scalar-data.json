@@ -1,0 +1,116 @@
+{
+ "id": "def-pur-ordinary-line-scalar-data",
+ "kind": "definition",
+ "title": "Fixed ordinary and derived signed-line scalar comparison data",
+ "statement": "Let $X$ be a scheme with its small pro-etale site [def-weil-pbc-proetale-site], and use existing module sheaves and unbounded derived categories [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. For a ring sheaf $R$ and module sheaf $L$, write $M_m=L^{[m]}$ for the recorded signed powers [lem-pur-signed-line-scalar-tensor-tower]. Define $T_m=-\\otimes_R M_m$ and its fixed K-flat derived tensor $F_m$ using [def-pur-line-unbounded-tensor-data]. A flat model is a K-flat complex with flat terms [def-pc-kflat-complex, def-pc-flat-sheaf-modules]. For a universal scalar presentation $p$ [def-weil-pbc-successive-derived-quotient-data], its cochain computation is the composite of the quotient comparison, its universal counit, and the target quotient comparison; its pure scalar section is the recorded sheafified scalar tensor transported by the object equation. A line datum records rank one and exactness for every signed power, flatness and K-flatness of its degree-zero complex, its natural termwise/derived comparison and published normalization, actual opposite-power evaluation normalized to one on every local signed basis, the induced derived evaluation with its cochain equation, and preservation of flat models under line tensor. For source and target line data and prescribed signed-power scalar isomorphisms, a comparison records an ordinary natural isomorphism with forward and inverse balanced formulas, a derived natural isomorphism, preservation of flat models, its cochain representative square, and compatibility with the fixed derived evaluations. Identity scalar data records ordinary multiplication and its derived unitor with their scalar-section and cochain normalization equations. These are precisely the existing definitions extracted from the parent module without changing their bodies.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-pur-signed-line-scalar-tensor-tower",
+  "def-pur-line-unbounded-tensor-data",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-pbc-successive-derived-quotient-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product; the ordinary signed-line part of blueprint Tate-twist local freeness proof (3)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension of sheaves commutes with tensoring by a locally free rank one sheaf",
+   "results": "8 hits including SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-27",
+   "verdict": "No exact match: the hits concern free sheaves and ordinary pullback, without the representative-normalized unbounded comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedNatIso",
+   "results": "CategoryTheory.Functor.leftDerivedNatIso, leftDerivedNatIso_hom, leftDerivedNatIso_inv",
+   "date": "2026-10-27",
+   "verdict": "Useful universal uniqueness API; it does not provide the ordinary balanced formula or the normalized evaluation square."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarTensorBinaryIso|tensorComparison|scalarTensorComparison_natural",
+   "results": "0 hits in the Mathlib search service; local rg finds the project scalar tensor core and ordinary tensor comparison.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing project tensor comparison; no matching Mathlib statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.OrdinaryLineDerivedScalarComparison",
+  "date": "2026-10-27",
+  "group": "M1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-def-sp-tate-twist-locally-free",
+   "place": "Proof (3), exact signed-line twists and actual evaluation; ordinary coefficient comparison.",
+   "via": [
+    "lem-pur-ordinary-line-derived-scalar-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 06YY; explicit extraction of parent proof steps 5, 6 and 8 by M1."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.OrdinaryLineScalarData",
+  "file": "lean/Sheaf/Algebra/Homology/OrdinaryLineScalarData.lean",
+  "declaration": "SheafOfModules.OrdinaryLineScalar.LineData",
+  "statement": "structure LineData {R : Sheaf (Scheme.ProEt.topology X) CommRingCat.{max a (t + 1)}}\n    (L : Modules.{t, a} X R)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-27",
+  "declarations": [
+   "SheafOfModules.OrdinaryLineScalar.Modules",
+   "SheafOfModules.OrdinaryLineScalar.modulesCategory",
+   "SheafOfModules.OrdinaryLineScalar.modulesAbelian",
+   "SheafOfModules.OrdinaryLineScalar.modulesMonoidal",
+   "SheafOfModules.OrdinaryLineScalar.power",
+   "SheafOfModules.OrdinaryLineScalar.tensor",
+   "SheafOfModules.OrdinaryLineScalar.twist",
+   "SheafOfModules.OrdinaryLineScalar.FlatModel",
+   "SheafOfModules.OrdinaryLineScalar.compute",
+   "SheafOfModules.OrdinaryLineScalar.scalar",
+   "SheafOfModules.OrdinaryLineScalar.LineData",
+   "SheafOfModules.OrdinaryLineScalar.Comparison",
+   "SheafOfModules.OrdinaryLineScalar.UnitData"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-2e1d4",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261027T131500-L-2942396",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-2e1d4",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261027T131500-L-2942396",
+  "kind": "interface",
+  "note": "independent cc review: the deleted blocks of the original module against the new Data/Presentations/LineData modules (verbatim apart from blueprint tags), the item signature against the clone, the four direct importers and #print axioms compiled in sandbox /tmp/m1sb, the timing of the published original (106.6 s) against the delivered item (34 s), and the evaluation hole against its node and the Comparison.evaluation field"
+ }
+}

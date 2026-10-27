@@ -1,0 +1,316 @@
+{
+ "id": "lem-pur-sheaf-line-evaluation-inverse-pair",
+ "kind": "statement",
+ "title": "Specified evaluation and exact tensor inverse pair for a sheaf line",
+ "statement": "Let $(\\mathcal C,J)$ be a site small relative to the module universe [def-weil-size-convention], $R$ a sheaf of commutative rings, and $\\operatorname{Mod}(R)$ the abelian category of $R$-module sheaves [def-weil-sheaf-of-modules-category]. Use sheaf tensor [def-pur-sheaf-tensor-product] with its symmetric monoidal constraints [lem-pc-sheaf-modules-tensor-closed] and sheaf Hom [def-pur-sheaf-hom]. Let $P$ be locally free of rank one: every object has a covering on whose slices $P\\cong R$. Put $P^\\vee=\\mathcal Hom_R(P,R)$, $T(M)=M\\otimes_RP$, and $S(M)=M\\otimes_RP^\\vee$.\n\nThe sheaf $P^\\vee$ is locally free of rank one, and the specified evaluation $e:P\\otimes_RP^\\vee\\to R$, $x\\otimes\\phi\\mapsto\\phi(x)$, is an isomorphism. On every trivializing slice with basis $p$ and dual $p^\\vee$ it and its inverse satisfy\n$$e((ap)\\otimes(bp^\\vee))=ab,\\qquad e^{-1}(a)=(ap)\\otimes p^\\vee.$$\nThese formulas agree under every change of basis $p'=up$, $(p')^\\vee=u^{-1}p^\\vee$ with $u$ a unit.\n\nReassociation followed by $e$, and by evaluation after symmetry, defines natural isomorphisms $a:ST\\xrightarrow{\\sim}1$ and $b:TS\\xrightarrow{\\sim}1$. Their local formulas are\n$$a_M((x\\otimes cp)\\otimes dp^\\vee)=cdx,\\quad a_M^{-1}(x)=(x\\otimes p)\\otimes p^\\vee,$$\n$$b_M((x\\otimes dp^\\vee)\\otimes cp)=cdx,\\quad b_M^{-1}(x)=(x\\otimes p^\\vee)\\otimes p.$$\nFor every $M$ the identities $b_{TM}\\circ T(a_M^{-1})=1_{TM}$ and $S(b_M)\\circ a_{SM}^{-1}=1_{SM}$ hold. Thus $T,S$ are inverse additive exact equivalences: they preserve finite limits and finite colimits; in particular $P,P^\\vee$ are flat [def-pc-flat-sheaf-modules]. If $R$ is a sheaf of algebras over a commutative ring $B$, then $T,S$ are $B$-linear [def-weil-linear-functor] for the sectionwise scalar action on module morphisms, and the displayed evaluation, inverse, $a,b$ and their inverses have $B$-linear components.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 0B8Q (lemma-invertible-is-locally-free-rank-1), first proof paragraph, and 0B8N (lemma-invertible), evaluation and exact tensor equivalence; explicit inverse and triangle normalizations extracted from old proof steps 1--3."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-pur-sheaf-hom",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-linear-functor"
+ ],
+ "proof": [
+  {
+   "text": "On each trivializing slice choose p as the inverse image of 1 and phi as the trivialization map. Naturality of the inverse trivialization shows that every restricted section is a scalar multiple of the restriction of p. A morphism to the unit is determined by its value on these generators. Hence evaluation at p identifies the dual sections with the coefficient ring, compatibly with restriction, giving the dual trivialization.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 0B8Q (lemma-invertible-is-locally-free-rank-1), first proof paragraph, and 0B8N (lemma-invertible), evaluation and exact tensor equivalence; explicit inverse and triangle normalizations extracted from old proof steps 1--3."
+   }
+  },
+  {
+   "text": "Construct the evaluation bilinear map sectionwise and check naturality. The sheafification adjunction and tensorObjIsoSheafification induce the sheaf evaluation map. The sectionwise map is bijective wherever a trivialization exists, by TensorProduct.lift_bijective_of_forall_eq_smul and the preceding generator argument. Thus it is locally injective and locally surjective. Module sheafification inverts such maps, so the sheaf evaluation is an isomorphism. Its value on every pure tensor follows from the adjunction unit identity.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 0B8Q (lemma-invertible-is-locally-free-rank-1), first proof paragraph, and 0B8N (lemma-invertible), evaluation and exact tensor equivalence; explicit inverse and triangle normalizations extracted from old proof steps 1--3."
+   }
+  },
+  {
+   "text": "Use the canonical reassociation, tensor evaluation and right unitor composites defining cancellation. The existing pure-tensor map, associator and braiding formulas, together with the adjunction-induced lax monoidal right-unitor formula, compute cancellation on pure triples. Apply the inverse identity and injectivity of each isomorphism component to obtain the specified inverse formulas. Scalar bilinearity cancels a unit and its inverse, proving all basis-change formulas.",
+   "uses": [
+    "lem-pur-module-tensor-generator-calculus",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 0B8Q (lemma-invertible-is-locally-free-rank-1), first proof paragraph, and 0B8N (lemma-invertible), evaluation and exact tensor equivalence; explicit inverse and triangle normalizations extracted from old proof steps 1--3."
+   }
+  },
+  {
+   "text": "Maps out of a sheaf tensor are determined on sheafified presheaf pure tensors: precompose with tensorObjIsoSheafification inverse, apply the sheafification adjunction and presheaf tensor extensionality. Check the first triangle on pure tensors after restricting along a trivializing covering sieve. Write the P factor as cp and use the cancellation and inverse formulas. The composite becomes c times the original pure tensor. Separatedness of the underlying module sheaf proves equality globally. Build an equivalence with exactly these unit and counit isomorphisms; Mathlib Equivalence.unit_inverse_comp gives the second triangle from the first.",
+   "uses": [
+    "lem-pur-module-tensor-generator-calculus",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 0B8Q (lemma-invertible-is-locally-free-rank-1), first proof paragraph, and 0B8N (lemma-invertible), evaluation and exact tensor equivalence; explicit inverse and triangle normalizations extracted from old proof steps 1--3."
+   }
+  },
+  {
+   "text": "The two cancellation natural isomorphisms exhibit tensoring by P and its dual as inverse equivalences. Equivalences preserve finite limits and colimits, and tensor is additive by the existing monoidal preadditivity instance. Transport exactness to the explicit site tensor through siteSheafTensorRightIso, proving flatness for both factors.",
+   "uses": [
+    "lem-galois-equivalence-preserves-limits",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pc-flat-sheaf-modules",
+    "def-pur-site-sheaf-tensor-presentation-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 0B8Q (lemma-invertible-is-locally-free-rank-1), first proof paragraph, and 0B8N (lemma-invertible), evaluation and exact tensor equivalence; explicit inverse and triangle normalizations extracted from old proof steps 1--3."
+   }
+  },
+  {
+   "text": "On a pure tensor, tensoring the scalar multiple of a morphism multiplies its first factor by the scalar section. Bilinearity identifies this with the scalar multiple of the tensor map. Pure-tensor extensionality proves linearity over the global-section ring. All displayed components are bundled module-sheaf morphisms.",
+   "uses": [
+    "def-weil-linear-functor",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 0B8Q (lemma-invertible-is-locally-free-rank-1), first proof paragraph, and 0B8N (lemma-invertible), evaluation and exact tensor equivalence; explicit inverse and triangle normalizations extracted from old proof steps 1--3."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-sheaf-modules",
+  "def-pur-localized-ringed-site",
+  "def-pur-sheaf-hom",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-site-sheaf-tensor-presentation-data",
+  "def-weil-linear-functor",
+  "def-weil-sheaf-of-modules-category",
+  "lem-galois-equivalence-preserves-limits",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pur-module-tensor-generator-calculus"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 0B8Q (lemma-invertible-is-locally-free-rank-1), first proof paragraph, and 0B8N (lemma-invertible), evaluation and exact tensor equivalence; explicit inverse and triangle normalizations extracted from old proof steps 1--3. The Lean proof uses sectionwise local bijectivity and the sheafification adjunction instead of constructing a glued inverse separately."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A rank one locally free sheaf has a dual line with evaluation tensor isomorphism and exact tensor equivalences",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsInvertible",
+   "results": "loogle: unknown identifier 'SheafOfModules.IsInvertible'",
+   "date": "2026-10-22",
+   "verdict": "no match: sheaf evaluation with specified inverse-pair identities is not supplied by the free-sheaf or ordinary-module hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a ringed site tensoring with a locally free rank one sheaf and its internal Hom dual gives exact inverse equivalences with the evaluation unit and counit triangle identities",
+   "results": "SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition'; LightCondensed.freeForgetAdjunction; LightCondensed.instMonoidalClosedLightCondMod; SheafOfModules.ιFree_mapFree_inv; SheafOfModules.pushforwardSections_unitHomEquiv; LightCondensed.ihomPoints_symm_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: sheaf evaluation with specified inverse-pair identities is not supplied by the free-sheaf or ordinary-module hits"
+  },
+  {
+   "tool": "grep",
+   "query": "IsInvertible|IsFiniteLocallyFreeOfRank|ev.*[Ii]so|[Ii]so.*ev",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: sheaf evaluation with specified inverse-pair identities is not supplied by the free-sheaf or ordinary-module hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally trivial rank one module sheaf is invertible with inverse internal Hom to the unit and the canonical evaluation pairing induces an adjoint tensor equivalence",
+   "results": "SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply; SheafOfModules.unitHomEquiv; SheafOfModules.unitHomEquiv_apply_coe; SheafOfModules.unit_val; SheafOfModules.freeHomEquiv; SheafOfModules.ιFree_mapFree_inv; PresheafOfModules.unitHomEquiv; SheafOfModules.unitHomEquiv_symm_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: sheaf evaluation with specified inverse-pair identities is not supplied by the free-sheaf or ordinary-module hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally free rank one sheaf on a ringed site has canonical evaluation isomorphism with its sheaf Hom dual and tensor inverse exact equivalences",
+   "results": "8 hits; SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply, SheafOfModules.freeHomEquiv, SheafOfModules.ιFree_mapFree_inv, SheafOfModules.unitHomEquiv, SheafOfModules.freeHomEquiv_freeMap, SheafOfModules.freeHomEquiv_symm_comp, SheafOfModules.unitHomEquiv_apply_coe, SheafOfModules.unitHomEquiv_symm_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected free/unit Hom and ordinary-module invertibility APIs do not state the arbitrary-ring-sheaf evaluation inverse pair and its specified triangle identities."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, IsIso",
+   "results": "0 hits; . loogle: unknown identifier 'IsIso'",
+   "date": "2026-10-22",
+   "verdict": "no match: the pattern returned unknown identifier IsIso; followed up with valid SheafOfModules.unitHomEquiv query."
+  },
+  {
+   "tool": "grep",
+   "query": "IsInvertible|evaluation|ihom.ev",
+   "results": "6 hits; Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean (grep subdirectory Algebra/Category/ModuleCat/Sheaf)",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected free/unit Hom and ordinary-module invertibility APIs do not state the arbitrary-ring-sheaf evaluation inverse pair and its specified triangle identities."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensoring sheaves of modules with a locally free line and its dual gives inverse exact equivalences",
+   "results": "8 hits; lTensorHomEquivHomLTensor, dualTensorHomEquiv, Module.Invertible.rTensorEquiv, dualTensorHomEquivOfBasis, LinearEquiv.rTensor_symm_tmul, SheafOfModules.PullbackConstruction.adjunction, rTensorHomEquivHomRTensor, Module.Invertible.instTensorProduct",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected free/unit Hom and ordinary-module invertibility APIs do not state the arbitrary-ring-sheaf evaluation inverse pair and its specified triangle identities."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invertible module sheaf has its internal Hom to the unit as dual and tensor autoequivalence, locally given by multiplication in a basis",
+   "results": "8 hits; SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply, CommRing.Pic.mk_dual, Module.Invertible.linearEquiv, CommRing.Pic.inv_eq_dual, CommRing.Pic.mk, SheafOfModules.unitHomEquiv_apply_coe, SheafOfModules.unitHomEquiv, CommRing.Pic.mk_eq_one",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected free/unit Hom and ordinary-module invertibility APIs do not state the arbitrary-ring-sheaf evaluation inverse pair and its specified triangle identities."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.unitHomEquiv",
+   "results": "6 hits; SheafOfModules.unitHomEquiv, SheafOfModules.unitHomEquiv_comp_apply, SheafOfModules.unitHomEquiv_symm_comp, SheafOfModules.unitHomEquiv_apply_coe, SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply, SheafOfModules.pushforwardSections_unitHomEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected free/unit Hom and ordinary-module invertibility APIs do not state the arbitrary-ring-sheaf evaluation inverse pair and its specified triangle identities."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-line-unbounded-derived-tensor",
+  "date": "2026-10-22",
+  "group": "Q63"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "det-def-sp-tate-twist-locally-free",
+   "place": "Proof (3), last two sentences: specified sheaf evaluation, inverse tensor equivalences and flatness",
+   "via": [
+    "lem-pur-line-unbounded-derived-tensor"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-sheaf-line-evaluation-inverse-pair",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 0B8Q omitted local details into dual coordinates, canonical evaluation, basis-independent inverse gluing, the specified natural inverse pair and its two triangle calculations; deduced exactness and flatness through the existing equivalence-preservation leaf and checked B-linearity. Statement unchanged; no new nodes.",
+  "blueprint": "Realizes det-def-sp-tate-twist-locally-free proof (3), the evaluation isomorphism and flat invertible tensor factor in the last two sentences, below lem-pur-line-unbounded-derived-tensor. No change to the unit route.",
+  "tool_uses": [
+   {
+    "node": "def-pc-flat-sheaf-modules",
+    "why": "Generic definition used with its stated meaning; no node of this unit replaces this general tool."
+   },
+   {
+    "node": "def-pur-localized-ringed-site",
+    "why": "Generic definition used with its stated meaning; no node of this unit replaces this general tool."
+   },
+   {
+    "node": "def-pur-sheaf-hom",
+    "why": "Generic definition used with its stated meaning; no node of this unit replaces this general tool."
+   },
+   {
+    "node": "def-weil-linear-functor",
+    "why": "Generic definition used with its stated meaning; no node of this unit replaces this general tool."
+   },
+   {
+    "node": "def-weil-sheaf-of-modules-category",
+    "why": "Generic definition used with its stated meaning; no node of this unit replaces this general tool."
+   },
+   {
+    "node": "lem-galois-equivalence-preserves-limits",
+    "why": "Generic equivalence preservation gives finite limits and colimits after the explicit inverse pair has been proved."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic sheaf-module structural statement used with its stated meaning; no node of this unit replaces this general tool."
+   },
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Construct evaluation and test tensor-sheaf maps by compatible bilinear pairings."
+   },
+   {
+    "node": "lem-pur-sheaf-hom-is-sheaf",
+    "why": "Generic sheaf-module structural statement used with its stated meaning; no node of this unit replaces this general tool."
+   },
+   {
+    "node": "lem-sfb-localized-site-tensor-restriction",
+    "why": "Pure-tensor-normalized restriction to arbitrary slices is needed for the local coordinate computations."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pc-flat-sheaf-modules",
+  "def-pur-localized-ringed-site",
+  "def-pur-sheaf-hom",
+  "def-weil-linear-functor",
+  "def-weil-sheaf-of-modules-category",
+  "lem-galois-equivalence-preserves-limits",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NC-5f4c3c4d0",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-5f4c3c4d0 (reviewer sub-agent of L); spot-checked: The statement, stmt_deps and blueprint are identical to live. The node is a statement-only child of Q63's resolved re-split of lem-pur-line-unbounded-derived-tensor, not a re-split order itself. It is live unsplit, not on a dropped list, and has no new nodes. I read Stacks sites-modules 0B8Q (lemma-invertible-is-locally-free-rank-1), first proof paragraph, and 0B8N (lemma-invertible), first two paragraphs; the eight steps write out 0B8Q's 'details omitted' (D5). I read every cited statement in full: the localized-site relocalization, the sheaf-Hom-is-sheaf parts (2)/(3), the bilinear universal property, the slice tensor comparison normalized on pure tensors, the tensor-closed constraints with additivity, the equivalence-preserves-limits node, flatness and linear functor. I rechecked: the dual coordinates and that a change of basis is a unit (p=vup gives uv=1); e, its local formula and the inverse h_U by balancing; gluing h by a matching family on covering sieves, with no fibre products needed; the directions and naturality of a and b and their local formulas, including b through the symmetry; the inverses; both triangle identities by type and by value (x⊗cp ↦ ((x⊗p)⊗p^∨)⊗cp ↦ x⊗cp, and x⊗dp^∨ ↦ ((x⊗dp^∨)⊗p)⊗p^∨ ↦ x⊗dp^∨); exactness from preserving kernels and cokernels in the abelian Mod(R), hence flatness; and B-linearity, where the local test with x⊗p is enough because sections of P are locally ap. Edge cases checked: zero ring, M=0, empty coverings, sites without fibre products, nontrivial transition units. Duplicate search with rg -L (0B8Q/0B8N, locally free plus sheaf Hom, evaluation/rank one) found no same or generalizing node; the closest are signed-line-tensor-equivalence (Lean pro-étale twist), invertible-tensor-scalar-extension, finite-free-dual-pullback, finite-retract-dual-exact and sc-determinant-dual-evaluation. The tool_uses are accepted (10 generic sheaf-module interfaces, none replacing a step of the sk-prop-an route). No SGA source. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.LineEvaluationInversePair",
+  "declaration": "SheafOfModules.LineEvaluation.evaluation_inverse_pair",
+  "declarations": [
+   "SheafOfModules.LineEvaluation.Modules",
+   "SheafOfModules.LineEvaluation.dual",
+   "SheafOfModules.LineEvaluation.pureTensor",
+   "SheafOfModules.LineEvaluation.cancellation",
+   "SheafOfModules.LineEvaluation.scalars",
+   "SheafOfModules.LineEvaluation.coefficientLinear",
+   "SheafOfModules.LineEvaluation.evaluation_inverse_pair"
+  ],
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/LineEvaluationInversePair.lean",
+  "statement": "theorem evaluation_inverse_pair (P : Modules.{uC, vC, r} R) (hP : ∀ U : C, ∃ s : Sieve U, s ∈ J U ∧ ∀ (V : C) (f : V ⟶ U), s f → Nonempty (P.over V ≅ unit (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over V))) : (∀ U : C, ∃ s : Sieve U, s ∈ J U ∧ ∀ (V : C) (f : V ⟶ U), s f → Nonempty ((dual.{uC, vC, r} R P).over V ≅ unit (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over V))) ∧ (tensorRight P).Additive ∧ (tensorRight (dual.{uC, vC, r} R P)).Additive ∧ PreservesFiniteLimits (tensorRight P) ∧ PreservesFiniteColimits (tensorRight P) ∧ PreservesFiniteLimits (tensorRight (dual.{uC, vC, r} R P)) ∧ PreservesFiniteColimits (tensorRight (dual.{uC, vC, r} R P)) ∧ IsFlatOnSite (R := R) P ∧ IsFlatOnSite (R := R) (dual.{uC, vC, r} R P) ∧ (tensorRight P).Linear (scalars.{uC, vC, r} R) ∧ (tensorRight (dual.{uC, vC, r} R P)).Linear (scalars.{uC, vC, r} R) ∧ ∃ e : P ⊗ dual.{uC, vC, r} R P ≅ 𝟙_ (Modules.{uC, vC, r} R), (∀ (U : Cᵒᵖ) (x : P.val.obj U) (phi : (dual.{uC, vC, r} R P).val.obj U), e.hom.val.app U (pureTensor.{uC, vC, r} R P (dual.{uC, vC, r} R P) U x phi) = phi.app (op (Over.mk (𝟙 U.unop))) x) ∧ (∀ (U : Cᵒᵖ) (p : P.val.obj U) (phi : (dual.{uC, vC, r} R P).val.obj U), phi.app (op (Over.mk (𝟙 U.unop))) p = (1 : R.obj.obj U) → (∀ a b : R.obj.obj U, e.hom.val.app U (pureTensor.{uC, vC, r} R P (dual.{uC, vC, r} R P) U (a • p) (b • phi)) = a * b) ∧ (∀ a : R.obj.obj U, e.inv.val.app U a = pureTensor.{uC, vC, r} R P (dual.{uC, vC, r} R P) U (a • p) phi) ∧ (∀ (u : (R.obj.obj U)ˣ) (a : R.obj.obj U), pureTensor.{uC, vC, r} R P (dual.{uC, vC, r} R P) U (a • ((u : R.obj.obj U) • p)) ((↑(u⁻¹) : R.obj.obj U) • phi) = pureTensor.{uC, vC, r} R P (dual.{uC, vC, r} R P) U (a • p) phi)) ∧ ∃ a : tensorRight P ⋙ tensorRight (dual.{uC, vC, r} R P) ≅ 𝟭 _, ∃ b : tensorRight (dual.{uC, vC, r} R P) ⋙ tensorRight P ≅ 𝟭 _, a = cancellation.{uC, vC, r} R P (dual.{uC, vC, r} R P) e ∧ b = cancellation.{uC, vC, r} R (dual.{uC, vC, r} R P) P ((β_ (dual.{uC, vC, r} R P) P) ≪≫ e) ∧ (∀ M : Modules.{uC, vC, r} R, (tensorRight P).map (a.inv.app M) ≫ b.hom.app (M ⊗ P) = 𝟙 _) ∧ (∀ M : Modules.{uC, vC, r} R, a.inv.app (M ⊗ dual.{uC, vC, r} R P) ≫ (tensorRight (dual.{uC, vC, r} R P)).map (b.hom.app M) = 𝟙 _) ∧ (∀ (M : Modules.{uC, vC, r} R) (U : Cᵒᵖ) (p : P.val.obj U) (phi : (dual.{uC, vC, r} R P).val.obj U), phi.app (op (Over.mk (𝟙 U.unop))) p = (1 : R.obj.obj U) → (∀ (x : M.val.obj U) (c d : R.obj.obj U), (a.hom.app M).val.app U (pureTensor.{uC, vC, r} R (M ⊗ P) (dual.{uC, vC, r} R P) U (pureTensor.{uC, vC, r} R M P U x (c • p)) (d • phi)) = (c * d) • x) ∧ (∀ x : M.val.obj U, (a.inv.app M).val.app U x = pureTensor.{uC, vC, r} R (M ⊗ P) (dual.{uC, vC, r} R P) U (pureTensor.{uC, vC, r} R M P U x p) phi) ∧ (∀ (x : M.val.obj U) (c d : R.obj.obj U), (b.hom.app M).val.app U (pureTensor.{uC, vC, r} R (M ⊗ dual.{uC, vC, r} R P) P U (pureTensor.{uC, vC, r} R M (dual.{uC, vC, r} R P) U x (d • phi)) (c • p)) = (c * d) • x) ∧ (∀ x : M.val.obj U, (b.inv.app M).val.app U x = pureTensor.{uC, vC, r} R (M ⊗ dual.{uC, vC, r} R P) P U (pureTensor.{uC, vC, r} R M (dual.{uC, vC, r} R P) U x phi) p) ∧ (∀ (u : (R.obj.obj U)ˣ) (x : M.val.obj U), pureTensor.{uC, vC, r} R (M ⊗ P) (dual.{uC, vC, r} R P) U (pureTensor.{uC, vC, r} R M P U x ((u : R.obj.obj U) • p)) ((↑(u⁻¹) : R.obj.obj U) • phi) = pureTensor.{uC, vC, r} R (M ⊗ P) (dual.{uC, vC, r} R P) U (pureTensor.{uC, vC, r} R M P U x p) phi) ∧ (∀ (u : (R.obj.obj U)ˣ) (x : M.val.obj U), pureTensor.{uC, vC, r} R (M ⊗ dual.{uC, vC, r} R P) P U (pureTensor.{uC, vC, r} R M (dual.{uC, vC, r} R P) U x ((↑(u⁻¹) : R.obj.obj U) • phi)) ((u : R.obj.obj U) • p) = pureTensor.{uC, vC, r} R (M ⊗ dual.{uC, vC, r} R P) P U (pureTensor.{uC, vC, r} R M (dual.{uC, vC, r} R P) U x phi) p))",
+  "branch": "newtargets-dag",
+  "by": "Q50",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The exact general ringed-site statement: cover-by-slices rank-one hypothesis, the existing internal Hom dual, pure-tensor-characterized evaluation iso, prescribed cancellation natural isomorphisms, local direct/inverse formulas and basis independence, both triangles, exactness and flatness. Global-section Functor.Linear expresses universal B-linearity by restriction along B → Γ(R); all components are bundled R-module morphisms. Independent site object and morphism universes are retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-06ab410c0",
+  "group": "Q50",
+  "result": "pass",
+  "note": "Read node, 7 stmt_dep records and their sources (CochainTensorUniverses, Monoidal tensorObjIsoSheafification, InternalHom homObj, HomModule homLinear, FlatOnSite), Stacks 0B8Q/0B8N. Live node differs only in lean (null); not dropped; S1 landed by NC today. hP = covering-sieve slice trivialization; dual = recorded homObj; e pinned on all pure tensors as phi(x) (determines e); local e/e⁻¹ and a/a⁻¹/b/b⁻¹ formulas and unit-change equations stated for normalized pairs phi(p)=1, all true and covering every trivializing slice; a,b equated with cancellation (assoc⁻¹, ⊗e or ⊗(β≫e), right unitor); both triangles correct order; Additive, finite limits/colimits, IsFlatOnSite for P and dual; Γ(R)-Functor.Linear via existing homLinear = universal B-linearity (parent precedent). Universe max uC vC r forced by homObj, site universes independent. Edge cases zero ring, M=0, empty covers, no fibre products OK. lean.statement verbatim; single sorry; docstrings with source/blueprint and 8-step proof plan; no hollow defs or duplicates. No file changed, no compile run."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261024T021203-L-2721884",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

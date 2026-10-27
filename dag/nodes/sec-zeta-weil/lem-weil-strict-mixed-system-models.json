@@ -1,0 +1,237 @@
+{
+ "id": "lem-weil-strict-mixed-system-models",
+ "kind": "statement",
+ "title": "Normalized models for strict mixed reduction",
+ "statement": "Let $k$ be a field, $\\ell$ a prime invertible in $k$, $E,L/\\mathbf Q_\\ell$ finite extensions with embedding $\\iota:E\\to L$, and $f:X\\to Y$ a proper morphism of separated finite-type $k$-schemes. Let $I,J$ be normalized integral direct-image models over $E,L$ [lem-sf-strict-direct-image-scalar-comparison]. There exist reduction/limit calculi $E_X,E_Y,L_X,L_Y$ with their actual coherence, scalar systems $A_X,A_Y$ and reduction models $d_X,d_Y$, normalized limit comparisons $C_E,C_L$, and normalized restriction comparison $C$, as defined in [def-weil-strict-mixed-unit-data]. Their strict projections agree with the actual Roos limit projections; their restriction, reduction, and mixed-unit finite evaluation predicates hold; and the reduction mates at every integral constructible input are isomorphisms. This statement constructs the normalization data only; it asserts no scalar/direct-image mixed-unit square.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0B56, equation-projection-formula-map (counit-transpose construction); agent-extracted coherent mixed-quotient normalization of the reconstruction-transported comparison in lem-sf-strict-direct-image-scalar-comparison, using the specified system units and counits."
+ },
+ "stmt_deps": [
+  "def-weil-strict-mixed-unit-data"
+ ],
+ "proof": [
+  {
+   "text": "Work first on entire coefficient systems. Write $\\mathcal R_H^W\\dashv\\mathcal L_H^W$ for reduction and total limit, $G_H=Rf_{*,A_{H,\\bullet}}$ for system direct image, and $F_H$ for ordinary completed-ring direct image. Put $S_W=-\\otimes^L_{A_{E,\\bullet}}A_{L,\\bullet}$ and $U_W=\\operatorname{Res}_{\\phi_\\bullet}$, with unit $\\zeta^W:1\\to U_WS_W$. These functors and geometric adjunctions exist on the unbounded derived categories of the ringed sequence sites by [lem-coef-semilinear-derived-sections]; extension/restriction is the adjunction of [lem-pur-sheaf-ring-derived-coefficient-adjunction] on that site. The canonical comparison $d:G_EU_X\\xrightarrow{\\sim}U_YG_L$ compares two factorizations of the same ringed-topos map. Its evaluation is precisely $\\rho_{*,n}$: both are the inverse of the direct-image map from a restricted K-injective resolution to a resolution over the smaller ring, as specified in [lem-weil-proetale-direct-image-restriction-of-scalars, lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. Moreover $d$, built from the direct-image composition isomorphisms of these two factorizations, is the conjugate of the pullback/scalar comparison $S_XV\\cong VS_Y$ of the same factorizations [lem-sfb-ringed-comparison-tensor-adjunction]; since system transposes evaluate to the levelwise transposes [lem-coef-semilinear-derived-sections], $d_n$ is the level-$n$ conjugate, which by the same lemma is the K-injective comparison $\\rho_{*,n}$. The coefficient unit and these comparisons are constructed on systems; no equality-detection property of evaluation is used.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-weil-proetale-direct-image-restriction-of-scalars",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-sfb-ringed-comparison-tensor-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0D6E (lemma-derived-pushforward-composition); applied also to the ringed sequence sites of the cited system nodes."
+   }
+  },
+  {
+   "text": "Let $\\psi_H:F_HK\\xrightarrow{\\sim}I_HK$ be the normalized reconstruction comparison. Its entire tower construction is $F_HK\\xrightarrow{F_H(u_K)}F_H\\mathcal L_H^X\\mathcal R_H^XK\\xrightarrow{\\sim}\\mathcal L_H^YG_H\\mathcal R_H^XK$: the second arrow is the tower direct-image/limit comparison. This is the construction and projection normalization of [lem-pur-completed-coefficient-pushforward-comparison, lem-weil-ringed-tower-pushforward-limit-comparison]. The tower comparison compares the direct-image composites of the two factorizations of the sequence-site-to-$Y$ ringed-topos map, so it is the conjugate of the corresponding derived pullback comparison [lem-sfb-ringed-comparison-tensor-adjunction]. Transpose this composite through $\\mathcal R_H^Y\\dashv\\mathcal L_H^Y$. The result is the geometric reduction mate $\\alpha_H:\\mathcal R_H^YF_H\\to G_H\\mathcal R_H^X$, because insertion of $u_K$ and contraction with the reduction/limit counit is the square-mate formula. Consequently\n$$r_H\\,\\mathcal R_H^Y(\\psi_H)=\\alpha_H.$$\nHere $r_H$ is the entire system counit at $G_H\\mathcal R_H^XK$, not a chosen lift of its evaluations. [lem-coef-sequence-pushforward-limit-projections, lem-coef-derived-system-evaluation-calculus] identify its evaluations with the adjuncts of the actual total-limit projections, exactly the $r^H_{n,K}$ in the statement. Their invertibility on our inputs is [lem-sf-integral-direct-image-constructible].",
+   "uses": [
+    "lem-pur-completed-coefficient-pushforward-comparison",
+    "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "lem-coef-sequence-pushforward-limit-projections",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-sf-integral-direct-image-constructible",
+    "lem-weil-pbc-mate-pasting",
+    "lem-sfb-ringed-comparison-tensor-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6E (lemma-derived-pushforward-composition), 0A07 (lemma-Rf-commutes-with-Rlim), 07A6 (lemma-adjoint); reduction/limit units and counits are those of the cited system nodes."
+   }
+  },
+  {
+   "text": "Write $C_W=-\\otimes^L_{\\widehat R_{E,W}}\\widehat R_{L,W}$ and $\\chi_W:C_W\\xrightarrow{\\sim}T_W$ for the canonical completion map. Let\n$$s_W:\\mathcal R_L^WT_W\\xrightarrow{\\sim}S_W\\mathcal R_E^W,\\qquad e_W:\\mathcal R_L^WC_W\\xrightarrow{\\sim}S_W\\mathcal R_E^W.$$\nUse the comparison of [lem-pur-coefficient-extension-reduction-model] for $s_W$ and ordinary derived scalar association for $e_W$. Then\n$$s_W\\mathcal R_L^W(\\chi_W)=e_W,\\qquad U_W(s_W)\\eta_W=\\zeta^W\\mathcal R_E^W.$$\nTo check these normalizations, use one flat-term K-flat representative $P$. Association sends $(x\\otimes a)\\otimes b$ to $x\\otimes ab$; the composite units send $x$ to $(x\\otimes1)\\otimes1$, by [lem-sfb-successive-derived-quotient-normalization]. The map $\\chi_W$ is the quotient augmentation with zero shifted-product coordinate [lem-weil-finite-free-completed-scalar-comparison]. Under [lem-trf-completion-unit-strict-quotient-model] this is the actual reduction/limit unit for $C_WP$. The map defining $s_W$ is its counit followed by inverse association, so the first equation is the triangle identity in the system category [lem-coef-derived-system-evaluation-calculus]. The second follows by composing the defining ordinary mixed unit of [def-weil-mixed-reduction-unit] with this same augmentation and applying the first equation. These arguments retain both Roos coordinates and give system identities.",
+   "uses": [
+    "lem-pur-coefficient-extension-reduction-model",
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-trf-completion-unit-strict-quotient-model",
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-weil-mixed-reduction-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6D (lemma-derived-pullback-composition), 07A6 (lemma-adjoint); explicit scalar-association and zero-shifted-coordinate normalization supplied by the cited nodes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-weil-proetale-direct-image-restriction-of-scalars",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-sfb-ringed-comparison-tensor-adjunction",
+  "lem-pur-completed-coefficient-pushforward-comparison",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "lem-coef-sequence-pushforward-limit-projections",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-weil-pbc-mate-pasting",
+  "lem-pur-coefficient-extension-reduction-model",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-trf-completion-unit-strict-quotient-model",
+  "def-weil-mixed-reduction-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Expansion of Steps 1--6 of lem-weil-strict-direct-image-mixed-unit, using the cited Stacks adjunction and projection-formula constructions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of scalar extension pushforward counit mate with derived tensor adjunction units",
+   "results": "8 hits: ModuleCat.homEquiv_extendScalarsComp, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc, ModuleCat.extendScalars_comp_id_assoc, CategoryTheory.ExponentiableMorphism.pushforwardId_hom_counit_assoc, CategoryTheory.ExponentiableMorphism.coev_naturality. Read the returned signatures: categorical Hom equivalences provide the assembly, but do not construct the specified sequence-site comparisons or their normalization.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_unit",
+   "results": "1 hits: CategoryTheory.Adjunction.homEquiv_unit. Read the returned signatures: categorical Hom equivalences provide the assembly, but do not construct the specified sequence-site comparisons or their normalization.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_unit|homEquiv.*naturality",
+   "results": "25 hits: Mathlib/Condensed/Light/Epi.lean, Mathlib/Condensed/Light/InternallyProjective.lean, Mathlib/Topology/Algebra/Category/ProfiniteGrp/Completion.lean, Mathlib/Topology/Sheaves/Presheaf.lean, Mathlib/Topology/Category/UniformSpace.lean, Mathlib/Algebra/Category/Grp/Adjunctions.lean, Mathlib/Algebra/Category/Grp/Adjunctions.lean, Mathlib/Algebra/Category/Grp/Adjunctions.lean. Read the returned signatures: categorical Hom equivalences provide the assembly, but do not construct the specified sequence-site comparisons or their normalization.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension adjunction mixed tensor unit and direct image comparison",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, CategoryTheory.Adjunction.derivedη.congr_simp, ModuleCat.extendRestrictScalarsAdj, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, ModuleCat.restrictCoextendScalarsAdj, CategoryTheory.Adjunction.derivedη. Read the returned signatures: categorical Hom equivalences provide the assembly, but do not construct the specified sequence-site comparisons or their normalization.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictDirectImageMixedUnit",
+  "date": "2026-10-26",
+  "group": "H4"
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-input-weights",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-proper-compact-coincidence",
+   "place": "First paragraph: identification of the strict-tower direct image with ordinary direct image, including the coefficient-descent normalization hidden in this identification. Normalized models for strict mixed reduction",
+   "via": [
+    "lem-weil-proper-coefficient-descent",
+    "lem-weil-strict-direct-image-mixed-unit"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictMixedSystemModels",
+  "file": "lean/Sheaf/Paper/StrictMixedSystemModels.lean",
+  "declaration": "WeilConjectures.StrictDirectImageMixedUnit.strictMixedSystemModels",
+  "statement": "theorem strictMixedSystemModels\n    (k : Type u) [Field k] (hl : IsUnit (l : k))\n    {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))]\n    (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsProper f]\n    (I : IntegralModel l E f) (J : IntegralModel l L f) :\n  ∃ (EX : CoefficientDerivedSystemCalculus l E X),\n  ∃ (EY : CoefficientDerivedSystemCalculus l E Y),\n  ∃ (LX : CoefficientDerivedSystemCalculus l L X),\n  ∃ (LY : CoefficientDerivedSystemCalculus l L Y),\n  ∃ (AX : CoefficientExtensionSystems l E L ι X),\n  ∃ (AY : CoefficientExtensionSystems l E L ι Y),\n  ∃ (dX : CoefficientExtensionReductionData l E L ι X EX LX AX),\n  ∃ (dY : CoefficientExtensionReductionData l E L ι Y EY LY AY),\n  ∃ (CE : LimitComparison l E f),\n  ∃ (CL : LimitComparison l L f),\n  ∃ (restrictionComparison : RestrictionComparison l E L ι f),\n  Nonempty (CoefficientDerivedSystemCoherence l E X EX) ∧\n  Nonempty (CoefficientDerivedSystemCoherence l E Y EY) ∧\n  Nonempty (CoefficientDerivedSystemCoherence l L X LX) ∧\n  Nonempty (CoefficientDerivedSystemCoherence l L Y LY) ∧\n  (StrictProjections l E f I) ∧\n  (StrictProjections l L f J) ∧\n  (RestrictionEvaluation l E L ι f restrictionComparison) ∧\n  (ReductionEvaluation l E f EX EY CE I) ∧\n  (ReductionEvaluation l L f LX LY CL J) ∧\n  (MixedEvaluation l E L ι X EX LX AX dX) ∧\n  (MixedEvaluation l E L ι Y EY LY AY dY) ∧\n  (∀ K : sfIntegralConstructibleCategory l E X,\n    IsIso (reductionMap l E f EX EY CE I K)) ∧\n  (∀ K : sfIntegralConstructibleCategory l L X,\n    IsIso (reductionMap l L f LX LY CL J K))",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-26"
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "Sheaf.Paper.StrictDirectImageMixedUnit",
+  "worker": "H4",
+  "summary": "Formal proof-step obligation from the existing six-step strict mixed-unit calculation.",
+  "blueprint": "The original coefficient-descent subargument below prop-weil-proper-compact-coincidence; no chapter or unit route change.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Simultaneous unbounded operations and transposes on varying-ring sequence sites, without flatness or equality detection by evaluations. This is a generic coefficient/adjunction tool; the zeta unit does not supply such a construction."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Actual derived extension/restriction Hom bijection, units and their representative normalization for arbitrary ring maps. This is a generic coefficient/adjunction tool; the zeta unit does not supply such a construction."
+   },
+   {
+    "node": "lem-weil-proetale-direct-image-restriction-of-scalars",
+    "why": "K-injective normalization of the finite restriction/direct-image comparison rho. This is a generic coefficient/adjunction tool; the zeta unit does not supply such a construction."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Comparison of the factorizations of the same coefficient/geometry ringed-topos map. This is a generic coefficient/adjunction tool; the zeta unit does not supply such a construction."
+   },
+   {
+    "node": "lem-pur-completed-coefficient-pushforward-comparison",
+    "why": "Specified completed direct-image reconstruction and its entire-tower projection normalization. This is a generic coefficient/adjunction tool; the zeta unit does not supply such a construction."
+   },
+   {
+    "node": "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "why": "Direct-image/limit comparison on strict towers, including projections. This is a generic coefficient/adjunction tool; the zeta unit does not supply such a construction."
+   },
+   {
+    "node": "lem-coef-sequence-pushforward-limit-projections",
+    "why": "Reduction/limit adjunction interpreted as sequence-site pullback/direct image, with actual counits. This is a generic coefficient/adjunction tool; the zeta unit does not supply such a construction."
+   },
+   {
+    "node": "lem-coef-derived-system-evaluation-calculus",
+    "why": "Actual reduction/limit adjunction and triangle identities in derived system categories. This is a generic coefficient/adjunction tool; the zeta unit does not supply such a construction."
+   },
+   {
+    "node": "lem-sf-integral-direct-image-constructible",
+    "why": "Invertibility of actual finite-reduction comparisons on the specified integral constructible inputs. This is a generic coefficient/adjunction tool; the zeta unit does not supply such a construction."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Formal horizontal and vertical pasting of square mates, also for sequence sites. This is a generic coefficient/adjunction tool; the zeta unit does not supply such a construction."
+   },
+   {
+    "node": "lem-pur-coefficient-extension-reduction-model",
+    "why": "Coherent scalar reduction comparison s with its normalized counit and associations. This is a generic coefficient/adjunction tool; the zeta unit does not supply such a construction."
+   },
+   {
+    "node": "lem-sfb-successive-derived-quotient-normalization",
+    "why": "Derived tensor association and unit normalization natural in arbitrary composable ring maps. This is a generic coefficient/adjunction tool; the zeta unit does not supply such a construction."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Canonical ordinary-to-completed scalar isomorphism chi and its explicit quotient augmentation. This is a generic coefficient/adjunction tool; the zeta unit does not supply such a construction."
+   },
+   {
+    "node": "lem-trf-completion-unit-strict-quotient-model",
+    "why": "Identification of the zero-shifted-coordinate augmentation with the actual system adjunction unit. This is a generic coefficient/adjunction tool; the zeta unit does not supply such a construction."
+   },
+   {
+    "node": "lem-sfb-ringed-comparison-tensor-adjunction",
+    "why": "States that the direct-image comparison of two factorizations of one ringed-topos map, built from the K-injective composition isomorphisms, is the conjugate of the derived pullback comparison; used to identify d and the tower comparison with conjugates before taking iterated mates (reviewer FIX). Generic ringed-topos tool."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-017f5",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261025T202159-L-2688115",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-017f5",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261025T202159-L-2688115",
+  "kind": "interface",
+  "note": "independent cc review: old StrictDirectImageMixedUnit defs vs StrictDirectImageMixedUnitData (verbatim); item theorem signature vs base; three split statements vs their nodes and the old CoherentLaws/FiniteLaws; item node proof/proof_deps vs Lean assembly"
+ }
+}

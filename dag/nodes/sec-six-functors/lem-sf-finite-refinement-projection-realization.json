@@ -1,0 +1,126 @@
+{
+ "id": "lem-sf-finite-refinement-projection-realization",
+ "kind": "statement",
+ "title": "Coefficient realization of reverse refinement at the tensor endpoints",
+ "statement": "Let D be a finite-field datum, C its coefficient datum, E a finite extension of Q_l, n >= 1 and S a specified finite operation stage [def-sf-operation-stages]. Let f:X -> Y be separated, locally of finite type and quasi-compact, with X and Y finite type over D.k. Let c,d compactify f, r:c -> d be a proper refinement, K bounded constructible on X and L finite-Tor constructible on Y. Use the sourceComparison and targetComparison of [def-sf-constructible-projection-mates]. Put RX,RY for coefficient realization, TX,TY for fixed tensor, P for fixed derived pullback, rho = S.finite.comparison f c d, and kappa_H = RefinementProjection.finiteComparison D A r H of [lem-sf-refinement-projection-counit]. Then in the ambient intrinsic category (1) tensor(rho_K inverse,id_L);sourceComparison_c = sourceComparison_d;RY(TY(kappa_(RX inverse K),id_(RY inverse L))); and (2) rho_(K tensor f*L) inverse;targetComparison_c = targetComparison_d;RY(kappa_(RX inverse K tensor P(RY inverse L))). Here semicolon denotes diagrammatic composition, and the rho maps are sent through the full inclusion. These equations concern only the normalized support comparison and its tensor and coefficient transports; no projection morphism occurs. Structure morphisms need not be separated, K need not have finite Tor amplitude, and identity refinements, zero objects and empty schemes are included.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Refinement sentence, expanded in lem-sf-projection-refinement-descent steps 4 and 7: identify the proper/open comparison and cancel coefficient-realization units."
+ },
+ "stmt_deps": [
+  "def-sf-operation-stages",
+  "def-sf-constructible-projection-mates",
+  "lem-sf-refinement-projection-counit"
+ ],
+ "proof": [
+  {
+   "text": "Use finiteRing_constructibleDerived_origin to find a bounded constructible etale antecedent for an arbitrary constructible input K. Regard it as a D-plus object, take its actual finite coefficient comparison as the retained ringed object, and use refinementFixedWitnessIso and the intrinsic coefficient-equivalence counit to construct its identification with the inverse realization of K. Apply the same construction to the tensor input, which is already in the full constructible category by partialTensor and domains.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "def-sf-constructible-projection-mates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At an arbitrary retained origin use lem-sf-finite-refinement-ambient-normalization, which identifies the inverse recorded proper/open/composition word with finiteComparison. Invert the operation-datum normalization at the explicitly constructed witness, and transport it along its input isomorphism using naturality of the support coefficient comparison and of the ambient comparison. This gives support_refinement, with no tensor input yet.",
+   "uses": [
+    "def-sf-operation-stages",
+    "lem-sf-finite-refinement-ambient-normalization",
+    "def-sf-constructible-projection-mates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the source comparison apply the inverse coefficient equivalence to the preceding equality at K, use naturality of its unit, tensor with the fixed image of L, and apply the forward equivalence. This is the first displayed equation by the definition of sourceComparison. For the target use the same equality at K tensor f*L and naturality of the ambient reverse comparison along the isomorphism cancelling the coefficient unit and identifying the pulled-back second input. Expanding targetComparison gives the second displayed equation. No projection map occurs in either equation.",
+   "uses": [
+    "def-sf-constructible-projection-mates"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "def-sf-constructible-projection-mates",
+  "def-sf-operation-stages",
+  "lem-sf-finite-refinement-ambient-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Refinement sentence; step 2 of lem-sf-finite-refinement-projection-realization, identifying the inverse retained-witness comparison with the ambient mate."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "transport compactification refinement comparison through coefficient equivalence and tensor naturality",
+   "results": "8 hits: AbstractCompletion.compare_comp_eq_compare, TensorPower.cast_trans, Equiv.vanishesTrivially_comp, TensorPower.cast_cast, TensorAlgebra.mk_reindex_cast, exists_gt_t2space, TensorPower.cast_tprod, CategoryTheory.Meq.refine_apply",
+   "date": "2026-10-26",
+   "verdict": "No exact normalization of the prescribed compactification comparison; generic equivalence and tensor transport only."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence.unitIso",
+   "results": "12 hits: CategoryTheory.Equivalence.refl_unitIso, CategoryTheory.Equivalence.unitIso, CategoryTheory.Equivalence.symm_counitIso, CategoryTheory.Equivalence.symm_unitIso, CategoryTheory.ObjectProperty.fullSubcategoryCongr_unitIso, CategoryTheory.Functor.asEquivalence_unitIso_hom_app, CategoryTheory.Functor.asEquivalence_unitIso_inv_app, CategoryTheory.Equivalence.ext",
+   "date": "2026-10-26",
+   "verdict": "No exact normalization of the prescribed compactification comparison; generic equivalence and tensor transport only."
+  },
+  {
+   "tool": "grep",
+   "query": "refinement.*realization|realization.*refinement",
+   "results": "0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "No exact normalization of the prescribed compactification comparison; generic equivalence and tensor transport only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteProjectionCompactificationTransport",
+  "date": "2026-10-26",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Refinement sentence, expanded in lem-sf-projection-refinement-descent steps 4 and 7: identify the proper/open comparison and cancel coefficient-realization units.",
+   "via": [
+    "lem-sf-finite-projection-compactification-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteRefinementProjectionRealization",
+  "file": "lean/Sheaf/Paper/FiniteRefinementProjectionRealization.lean",
+  "declaration": "WeilConjectures.CompactSupportFiniteProjection.refinement_realization",
+  "statement": "theorem refinement_realization\n    {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}\n    {E : Type u} [Field E] [Algebra (Padic C.l) E]\n    [FiniteDimensional (Padic C.l) E] {n : ℕ} {hn : 1 ≤ n}\n    (S : SixFunctorFiniteOperations D C E n hn)\n    {X Y : SixFunctorSpace D} (f : X ⟶ Y)\n    [IsSeparated f.hom.left] [LocallyOfFiniteType f.hom.left] [QuasiCompact f.hom.left]\n    (c d : Compactification f.hom.left) (r : c.Refinement d)\n    (K : sixFunctorFiniteCategory D C E n hn X)\n    (L : finiteTorConstructibleCategory C.l E n hn Y.obj.left) :\n    letI := Padic.finite_coefficientExtensionRing C.l E n hn\n    let RX := realization (C := C) (E := E) (n := n) (hn := hn) X\n    let RY := realization (C := C) (E := E) (n := n) (hn := hn) Y\n    let TX := fixedTensor (C := C) (E := E) (n := n) X\n    let TY := fixedTensor (C := C) (E := E) (n := n) Y\n    let P := fixedDerivedPull (C := C) (E := E) (n := n) f\n    let A := ULift.{u + 1} (Padic.coefficientExtensionRing C.l E n)\n    let T := ((TX.obj (RX.inverse.obj K.obj)).obj (P.obj (RY.inverse.obj L.obj)))\n    let rho := S.finite.comparison f c d\n    ((intrinsicFiniteTorsionConstructible C.l E n hn Y.obj.left).ι.map\n        (((partialTensor S Y).map (rho.inv.app K)).app L) ≫\n      (sourceComparison S f c K L).hom =\n      (sourceComparison S f d K L).hom ≫ RY.functor.map\n        ((TY.map (RefinementProjection.finiteComparison D A r\n          (RX.inverse.obj K.obj))).app (RY.inverse.obj L.obj))) ∧\n    ((intrinsicFiniteTorsionConstructible C.l E n hn Y.obj.left).ι.map\n        (rho.inv.app (((partialTensor S X).obj K).obj ((torPull S f).obj L))) ≫\n      (targetComparison S f c K L).hom =\n      (targetComparison S f d K L).hom ≫ RY.functor.map\n        (RefinementProjection.finiteComparison D A r T))",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261026T183614-L-3755673",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261026T235836-L-1460119",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

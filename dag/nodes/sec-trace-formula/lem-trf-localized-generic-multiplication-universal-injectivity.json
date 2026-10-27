@@ -1,0 +1,266 @@
+{
+ "id": "lem-trf-localized-generic-multiplication-universal-injectivity",
+ "kind": "statement",
+ "title": "Localized generic multiplication is universally injective after flattening",
+ "statement": "Let $A$ be a commutative integral domain with fraction field $K$, the localization at all nonzero elements. Let $B$ be a commutative $A$-algebra, $m\\geq0$, and $g_1,\\ldots,g_m\\in B$. Define $\\mu:B\\to B^{\\oplus m}$ by $b\\mapsto(g_ib)_i$, and let $M=B^{\\oplus m}/\\operatorname{im}\\mu$ be its cokernel. Suppose $\\mu_K:B\\otimes_AK\\to(B\\otimes_AK)^{\\oplus m}$ is injective [def-weil-pbc-module-tensor-product]. Let $0\\ne a\\in A$, and suppose $B_a$ and $M_a$ are flat as $A$-modules [def-weil-pbc-flat-ring-map], with localization at the powers of the image of $a$ [def-weil-ring-localization-away, def-weil-pbc-module-localization-away]. Then the canonical map $B_a\\to B\\otimes_AK$ is injective and the canonical quotient map gives a short exact sequence $0\\to B_a\\xrightarrow{\\mu_a}B_a^{\\oplus m}\\to M_a\\to0$. For every $A$-module $N$, the map $\\mathrm{id}_N\\otimes\\mu_a:N\\otimes_AB_a\\to N\\otimes_AB_a^{\\oplus m}$ is injective. In particular, for every commutative $A$-algebra $C$ in which the image of $a$ is a unit, the map $\\mu_C:B\\otimes_AC\\to(B\\otimes_AC)^{\\oplus m}$, $b\\mapsto((g_i\\otimes1)b)_i$, is injective. No finite type, finite presentation or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0573, lemma-scheme-theoretically-dense-generic-fibre, proof third paragraph from torsion-freeness through tensoring the short exact sequence; Tag 00HL, algebra-lemma-flat-tor-zero."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-module-localization-away"
+ ],
+ "proof": [
+  {
+   "text": "Let $q:B^{\\oplus m}\\to M$ be the quotient by $\\operatorname{im}\\mu$. By its definition, $B\\xrightarrow{\\mu}B^{\\oplus m}\\xrightarrow{q}M\\to0$ is exact, without an assertion of injectivity at $B$. Localize this sequence as a sequence of $A$-modules at $T=\\{1,a,a^2,\\ldots\\}$. The cited exactness theorem gives exactness at the middle term and surjectivity onto $M_a$ (apply it also to $B^{\\oplus m}\\to M\\to0$). Identify $T^{-1}(B^{\\oplus m})$ with $B_a^{\\oplus m}$ by $(b_i)_i/a^n\\mapsto(b_i/a^n)_i$: a finite tuple of fractions has a common denominator, and the fraction equality criterion proves injectivity by taking the maximum of finitely many exponents. This includes $m=0$, where both modules are zero. The localized maps are $\\mu_a(b/a^n)=(g_ib/a^n)_i$ and $q_a((b_i)_i/a^n)=q((b_i)_i)/a^n$. Thus $B_a\\xrightarrow{\\mu_a}B_a^{\\oplus m}\\xrightarrow{q_a}M_a\\to0$ is exact.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CS (proposition-localization-exact), applied to the cokernel sequence in Tag 0573"
+   }
+  },
+  {
+   "text": "Put $D=B_a$ and $B_K=B\\otimes_AK$. Since $A$ is a domain, $A\\to K$ is injective. Flatness of $D$ and the cited tensor-injectivity lemma show that $D\\otimes_AA\\to D\\otimes_AK$ is injective. The mutually inverse maps $D\\otimes_AA\\to D$, $d\\otimes r\\mapsto rd$, and $d\\mapsto d\\otimes1$ identify this map with $d\\mapsto d\\otimes1$. There is an isomorphism $\\alpha:D\\otimes_AK\\to B_K$, $(b/a^n)\\otimes k\\mapsto b\\otimes a^{-n}k$, with inverse $b\\otimes k\\mapsto(b/1)\\otimes k$. These formulas respect the localization relation: $a^t(a^rb-a^nc)=0$ gives equal tensors after multiplication by the invertible scalar $a^{-(t+n+r)}$. They respect the tensor relations by bilinearity; the composites are the identity since $(b/a^n)\\otimes k=(b/1)\\otimes a^{-n}k$. Hence the canonical map $j:D\\to B_K$, $b/a^n\\mapsto b\\otimes a^{-n}$, is injective.",
+   "uses": [
+    "lem-trf-flat-tensor-preserves-injection",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0573, torsion-freeness and embedding into the generic fibre; tensor formulas as in Tags 00CX and 00DK"
+   }
+  },
+  {
+   "text": "For $d=b/a^n\\in B_a$ the equality $\\mu_K(j(d))=(j(g_id))_i$ holds coordinatewise, since both sides have $i$th entry $g_ib\\otimes a^{-n}$. If $\\mu_a(d)=0$, then $\\mu_K(j(d))=0$. The assumed injectivity of $\\mu_K$ gives $j(d)=0$, and step 2 gives $d=0$. Therefore $\\mu_a$ is injective. Together with step 1 this proves the asserted short exact sequence with its specified quotient map. This argument also applies to the empty tuple: its generic injectivity forces $j(d)=0$ for every $d$, so $B_a=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0573, the argument that the generic kernel vanishes in the torsion-free algebra"
+   }
+  },
+  {
+   "text": "Apply the flat-quotient tensor-injectivity theorem to the short exact sequence from step 3 over the ring $A$. Its quotient is exactly $M_a$, flat as an $A$-module by hypothesis. For every $A$-module $N$ it gives injectivity of $\\mathrm{id}_N\\otimes\\mu_a:N\\otimes_AB_a\\to N\\otimes_AB_a^{\\oplus m}$. The theorem does not require $N$ to be flat or finitely generated.",
+   "uses": [
+    "lem-weil-pbc-flat-quotient-tensor-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HL (lemma-flat-tor-zero)"
+   }
+  },
+  {
+   "text": "Let $C$ be an $A$-algebra and let $u$ be the image of $a$, a unit in $C$. Apply step 4 with $N=C$. The symmetry $c\\otimes d\\mapsto d\\otimes c$ (its own inverse, by the tensor relations), and the cited finite-product tensor isomorphism identify its target with $(B_a\\otimes_AC)^{\\oplus m}$. Define $\\beta:B_a\\otimes_AC\\to B\\otimes_AC$ by $(b/a^n)\\otimes c\\mapsto b\\otimes u^{-n}c$. Its inverse is $b\\otimes c\\mapsto(b/1)\\otimes c$. The localization relation is respected because a relation killed by $a^t$ becomes zero after multiplying by the unit $u^{-t}$; bilinearity gives maps on tensors. Their composites are the identity: $(b/a^n)\\otimes c=(b/1)\\otimes u^{-n}c$. Under $\\beta$ and its coordinatewise product, the tensor of $\\mu_a$ sends $b\\otimes c$ to $(g_ib\\otimes c)_i$, precisely multiplication by $(g_i\\otimes1)_i$. Thus the injectivity in step 4 is the required injectivity of $\\mu_C$. The construction allows the zero algebra $C$ and uses no finiteness or Noetherian assumptions.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-module-localization-away",
+    "lem-weil-pbc-tensor-finite-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CX (lemma-tensor-product), fraction formulas of Tag 00DK (lemma-tensor-localization); Tag 0573 final scalar-extension argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-module-exact",
+  "def-weil-pbc-module-localization-away",
+  "lem-trf-flat-tensor-preserves-injection",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-flat-quotient-tensor-injective",
+  "lem-weil-pbc-tensor-finite-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0573 (lemma-scheme-theoretically-dense-generic-fibre), third paragraph, from torsion-freeness through tensoring the short exact sequence; with Tag 00HL and explicit localization/tensor formulas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "injective.*(fraction|torsion)|torsion.*injective|lTensor_injective_of_exact_of_flat",
+   "results": "{\"t\": \"2026-10-22T06:46:56Z\", \"tool\": \"grep\", \"query\": \"injective.*(fraction|torsion)|torsion.*injective|lTensor_injective_of_exact_of_flat\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Trace/Quotient.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean\", \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict.lean\", \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict.lean\", \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict.lean\", \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict.lean\"], \"digest\": \"959d72bc946c1762\"} No exact match or one-line specialization. LinearMap.lTensor_injective_of_exact_of_flat (RingTheory/Flat/Equalizer.lean:192) requires injectivity and exactness before tensoring, whereas this node must first deduce them from generic injectivity and flatness and identify the localized cokernel. Flat/Domain.lean:33 assumes injective input maps and flat sources and is not this theorem. Faithfully-flat descent does not apply to the fraction-field map A to K.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"Injective\", \"IsFractionRing\"",
+   "results": "{\"t\": \"2026-10-22T06:46:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"Flat\\\", \\\"Injective\\\", \\\"IsFractionRing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} No exact match or one-line specialization. LinearMap.lTensor_injective_of_exact_of_flat (RingTheory/Flat/Equalizer.lean:192) requires injectivity and exactness before tensoring, whereas this node must first deduce them from generic injectivity and flatness and identify the localized cokernel. Flat/Domain.lean:33 assumes injective input maps and flat sources and is not this theorem. Faithfully-flat descent does not apply to the fraction-field map A to K.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A linear map from a flat module over a domain with flat cokernel is universally injective if it is injective over the fraction field.",
+   "results": "{\"t\": \"2026-10-22T06:46:57Z\", \"tool\": \"leansearch\", \"query\": \"A linear map from a flat module over a domain with flat cokernel is universally injective if it is injective over the fraction field.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsTensorProduct.map_id_injective_of_flat_right\", \"Module.FaithfullyFlat.lTensor_injective_iff_injective\", \"IsTensorProduct.map_injective_of_flat_right_left\", \"Module.Flat.lTensor_preserves_injective_linearMap\", \"Module.Flat.rTensor_preserves_injective_linearMap\", \"Module.FaithfullyFlat.tensorProduct_mk_injective\", \"injective_of_localized_span\", \"Module.Flat.toAlgebra_injective\"], \"digest\": \"9b6b1fb8caeb2171\"} No exact match or one-line specialization. LinearMap.lTensor_injective_of_exact_of_flat (RingTheory/Flat/Equalizer.lean:192) requires injectivity and exactness before tensoring, whereas this node must first deduce them from generic injectivity and flatness and identify the localized cokernel. Flat/Domain.lean:33 assumes injective input maps and flat sources and is not this theorem. Faithfully-flat descent does not apply to the fraction-field map A to K.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Let A be a domain with fraction field K, P a flat A-module, u : P to Q linear, and coker u flat. If u tensor K is injective then u tensor N is injective for every A-module N.",
+   "results": "{\"t\": \"2026-10-22T06:47:08Z\", \"tool\": \"leanfinder\", \"query\": \"Let A be a domain with fraction field K, P a flat A-module, u : P to Q linear, and coker u flat. If u tensor K is injective then u tensor N is injective for every A-module N.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.iff_rTensor_preserves_injective_linearMap'\", \"Module.Flat.iff_lTensor_preserves_injective_linearMap'\", \"Module.Flat.iff_rTensor_preserves_injective_linearMap\", \"Module.Flat.iff_rTensor_preserves_injective_linearMapₛ\", \"Module.Flat.iff_lTensor_preserves_injective_linearMap\", \"Module.Flat.iff_lTensor_preserves_injective_linearMapₛ\", \"TensorProduct.map_injective_of_flat_flat_of_isDomain\", \"Module.Flat.rTensor_preserves_injective_linearMap\"], \"digest\": \"868cfca5dae00001\"} No exact match or one-line specialization. LinearMap.lTensor_injective_of_exact_of_flat (RingTheory/Flat/Equalizer.lean:192) requires injectivity and exactness before tensoring, whereas this node must first deduce them from generic injectivity and flatness and identify the localized cokernel. Flat/Domain.lean:33 assumes injective input maps and flat sources and is not this theorem. Faithfully-flat descent does not apply to the fraction-field map A to K.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Injectivity over the fraction field descends for a torsion-free source module; if the cokernel is flat the resulting injection stays injective under every tensor product.",
+   "results": "{\"t\": \"2026-10-22T06:47:49Z\", \"tool\": \"leanfinder\", \"query\": \"Injectivity over the fraction field descends for a torsion-free source module; if the cokernel is flat the resulting injection stays injective under every tensor product.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.iff_lift_lsmul_comp_subtype_injective\", \"Module.FaithfullyFlat.lTensor_injective_iff_injective\", \"Module.Flat.toAlgebra_injective\", \"Module.FaithfullyFlat.tensorProduct_mk_injective\", \"Module.Flat.iff_lTensor_preserves_injective_linearMap'\", \"Module.Flat.iff_rTensor_preserves_injective_linearMap'\", \"TensorProduct.map_injective_of_flat_flat_of_isDomain\", \"Module.Flat.iff_lTensor_preserves_injective_linearMapₛ\"], \"digest\": \"f334ef0a7da2cc92\"} No exact match or one-line specialization. LinearMap.lTensor_injective_of_exact_of_flat (RingTheory/Flat/Equalizer.lean:192) requires injectivity and exactness before tensoring, whereas this node must first deduce them from generic injectivity and flatness and identify the localized cokernel. Flat/Domain.lean:33 assumes injective input maps and flat sources and is not this theorem. Faithfully-flat descent does not apply to the fraction-field map A to K.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "coker.*(localiz|tensor)|localiz.*(coker|injective)|injective.*generic",
+   "results": "{\"t\": \"2026-10-22T06:48:44Z\", \"tool\": \"grep\", \"query\": \"coker.*(localiz|tensor)|localiz.*(coker|injective)|injective.*generic\", \"sub\": \"RingTheory/Flat\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} No exact match or one-line specialization. LinearMap.lTensor_injective_of_exact_of_flat (RingTheory/Flat/Equalizer.lean:192) requires injectivity and exactness before tensoring, whereas this node must first deduce them from generic injectivity and flatness and identify the localized cokernel. Flat/Domain.lean:33 assumes injective input maps and flat sources and is not this theorem. Faithfully-flat descent does not apply to the fraction-field map A to K.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebra multiplication tuple injective generically stays injective after every scalar extension inverting a, provided the localized algebra and cokernel are flat.",
+   "results": "{\"t\": \"2026-10-22T06:48:44Z\", \"tool\": \"leansearch\", \"query\": \"An algebra multiplication tuple injective generically stays injective after every scalar extension inverting a, provided the localized algebra and cokernel are flat.\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"lTensor_injective_of_exact_of_flat\"",
+   "results": "{\"t\": \"2026-10-22T06:48:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"lTensor_injective_of_exact_of_flat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"LinearMap.lTensor_injective_of_exact_of_flat\"], \"digest\": \"5586a81778b0c6de\"} No exact match or one-line specialization. LinearMap.lTensor_injective_of_exact_of_flat (RingTheory/Flat/Equalizer.lean:192) requires injectivity and exactness before tensoring, whereas this node must first deduce them from generic injectivity and flatness and identify the localized cokernel. Flat/Domain.lean:33 assumes injective input maps and flat sources and is not this theorem. Faithfully-flat descent does not apply to the fraction-field map A to K.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type algebra B over a domain A with fraction field K, let mu : B to B^m be multiplication by a finite tuple. If mu_K is injective and B_a and (coker mu)_a are flat over A, then mu_a is injective with cokernel (coker mu)_a and for every A-algebra C in which a is a unit the tuple map on B tensor C is injective.",
+   "results": "{\"t\": \"2026-10-22T06:48:56Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite type algebra B over a domain A with fraction field K, let mu : B to B^m be multiplication by a finite tuple. If mu_K is injective and B_a and (coker mu)_a are flat over A, then mu_a is injective with cokernel (coker mu)_a and for every A-algebra C in which a is a unit the tuple map on B tensor C is injective.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.toIntegralClosure_injective_of_flat\", \"Module.Invertible.embAlgebra_injective\", \"Module.FaithfullyFlat.injective_of_tensorProduct\", \"Module.Flat.toAlgebra_injective\", \"Algebra.Generators.liftBaseChange_injective_of_isLocalizationAway\", \"IsLocalRing.split_injective_iff_lTensor_residueField_injective\", \"AdicCompletion.tensor_map_id_left_injective_of_injective\", \"Module.Flat.iff_lift_lsmul_comp_subtype_injective\"], \"digest\": \"e1d597835deee75c\"} No exact match or one-line specialization. LinearMap.lTensor_injective_of_exact_of_flat (RingTheory/Flat/Equalizer.lean:192) requires injectivity and exactness before tensoring, whereas this node must first deduce them from generic injectivity and flatness and identify the localized cokernel. Flat/Domain.lean:33 assumes injective input maps and flat sources and is not this theorem. Faithfully-flat descent does not apply to the fraction-field map A to K.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lTensor_injective_of_exact_of_flat|toAlgebra_injective",
+   "results": "Logged result: {\"t\": \"2026-10-23T23:42:58Z\", \"tool\": \"grep\", \"query\": \"lTensor_injective_of_exact_of_flat|toAlgebra_injective\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/PicardGroup.lean\", \"Mathlib/RingTheory/PicardGroup.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\"], \"digest\": \"bd10de8f84ebf126\"}. LinearMap.lTensor_injective_of_exact_of_flat (Mathlib/RingTheory/Flat/Equalizer.lean:192) gives only the flat-cokernel tensor clause after exactness and injectivity have been proved; it does not state this item.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A generically injective multiplication map over a domain is universally injective after localization if the localized source and cokernel are flat.",
+   "results": "Logged result: {\"t\": \"2026-10-23T23:42:59Z\", \"tool\": \"leansearch\", \"query\": \"A generically injective multiplication map over a domain is universally injective after localization if the localized source and cokernel are flat.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalizedModule.smul_inj\", \"IsLocalizedModule.smul_injective\", \"RingHom.Flat.holdsForLocalizationAway\", \"Module.Flat.of_isLocalizedModule\", \"injective_of_localized_span\", \"IsSMulRegular.of_isLocalization\", \"Module.Flat.localizedModule\", \"IsLocalizedModule.map_injective\"], \"digest\": \"23a7cf94072c939c\"}. No match: localization stability or injectivity after localization does not establish the whole combination of generic injectivity, localized exact cokernel and universal injectivity.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"lTensor_injective_of_exact_of_flat\"",
+   "results": "Logged result: {\"t\": \"2026-10-23T23:42:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"lTensor_injective_of_exact_of_flat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"LinearMap.lTensor_injective_of_exact_of_flat\"], \"digest\": \"5586a81778b0c6de\"}. LinearMap.lTensor_injective_of_exact_of_flat (Mathlib/RingTheory/Flat/Equalizer.lean:192) gives only the flat-cokernel tensor clause after exactness and injectivity have been proved; it does not state this item.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat algebra over a domain embeds into its generic fibre; a generically injective multiplication tuple with flat cokernel remains injective under all scalar extensions.",
+   "results": "Logged result: {\"t\": \"2026-10-23T23:43:00Z\", \"tool\": \"leanfinder\", \"query\": \"A flat algebra over a domain embeds into its generic fibre; a generically injective multiplication tuple with flat cokernel remains injective under all scalar extensions.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Invertible.embAlgebra_injective\", \"TensorProduct.toIntegralClosure_injective_of_flat\", \"IsSMulRegular.of_flat\", \"RingTheory.Sequence.IsWeaklyRegular.of_flat\", \"Module.Flat.toAlgebra_injective\", \"Subalgebra.LinearDisjoint.exists_field_of_isDomain_of_injective\", \"Module.FaithfullyFlat.injective_of_tensorProduct\", \"Algebra.TensorProduct.includeRight_injective\"], \"digest\": \"61f524a8b5a71a3f\"}. No match: includeRight_injective provides the generic-fibre embedding only; the PicardGroup toAlgebra maps require a chosen rank-one trivialization, absent here, and faithfully-flat descent does not apply to A to K.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem includeRight_injective|lemma includeRight_injective|theorem toAlgebra_injective",
+   "date": "2026-10-24",
+   "verdict": "no match",
+   "results": "{\"t\": \"2026-10-23T23:45:33Z\", \"tool\": \"grep\", \"query\": \"theorem includeRight_injective|lemma includeRight_injective|theorem toAlgebra_injective\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/PicardGroup.lean\", \"Mathlib/RingTheory/Flat/Basic.lean\"], \"digest\": \"15320e018e7eb01d\"} Read Mathlib/RingTheory/PicardGroup.lean:773-784 and Flat/Basic.lean:417: the former requires an additional rank-one trivialization, while includeRight_injective proves only the generic embedding after tensoring. Neither is a match for the whole item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-schematic-density-generic-fibre-open",
+  "date": "2026-10-22",
+  "group": "Q93"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The final sentence of the Tag 0578 generic-fibre alternative in the constructibility input: apply Tag 0573 to the smooth open of the generic fibre. Tag 0573 subargument: deduce localized exactness and universal tensor injectivity from generic injectivity and simultaneous flatness (returned steps 5-6).",
+   "via": [
+    "lem-trf-schematic-density-generic-fibre-open",
+    "lem-trf-generic-fibre-geometrically-reduced-open",
+    "lem-trf-generic-constancy-geometric-reducedness",
+    "lem-trf-geometrically-reduced-fibre-locus",
+    "lem-trf-local-noetherian-approximation",
+    "lem-trf-local-fibres-integral-projective",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-localized-generic-multiplication-universal-injectivity",
+  "worker": "stage1",
+  "summary": "Split the generic-injectivity, localized-cokernel, flat-quotient tensor, and unit scalar-extension arguments. All non-elementary ingredients already have Mathlib-leaf nodes; no new nodes. Kept every hypothesis and conclusion, including arbitrary modules and algebras and m=0. Checked project declarations, blueprint duplicates and four current Mathlib searches.",
+  "blueprint": "Implements the inherited Tag 0573 generic-fibre density subargument below lem-trf-local-term-locality: exact localization, injectivity into the generic fibre, vanishing of the kernel, and tensoring with flat cokernel. The latest blueprint ancestor now states the contracting-correspondence route and contains no direct Tag 0573 occurrence; this remains the algebraic subargument in the existing DAG ancestry, without altering the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-a0a68a767",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-a0a68a767 (reviewer sub-agent of L); spot-checked: I read the source: Stacks more-morphisms Tag 0573 (lemma-scheme-theoretically-dense-generic-fibre), third paragraph. The item is its algebraic core, with generic flatness of B_a and M_a taken as a hypothesis and finite type correctly dropped. The delivery adds no new nodes. Its five steps cite only Mathlib-leaf nodes, and I read each statement: localization-module-exact, flat-tensor-preserves-injection (applied to A↪K with B_a flat), flat-quotient-tensor-injective (N arbitrary, quotient M_a flat), tensor-finite-product, and the tensor and localization definitions. Steps 2 and 5: I checked that the maps B_a⊗K≅B⊗K and B_a⊗C≅B⊗C are well defined (a^t(a^r b−a^n c)=0 ⇒ the difference of tensors is 0) and that they are mutually inverse. Step 3: the square commutes coordinatewise with entries g_i b⊗a^{-n}, and the kernel argument is elementary. Small cases checked: m=0 (B_K=0 ⇒ B_a=0), A a field, C=0, and B=A[x] with g=x. Replacing the source's torsion-free step with flatness⊗(A↪K) is an equivalent route. The parent schematic-density step uses exactly the stated conclusion for C=κ(y), y∈D(a). No duplicate exists in the DAG, no SGA source is used, no cycle, and no tool_uses are needed. The algebra multiplication on B⊗C used in μ_C is the standard one; this is noted, not a fault."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LocalizedGenericMultiplication",
+  "declaration": "Algebra.localized_genericMultiplication_universally_injective",
+  "declarations": [
+   "Algebra.genericMultiplicationTuple",
+   "Algebra.genericMultiplicationCokernel",
+   "Algebra.genericMultiplicationLocalizedQuotient",
+   "Algebra.genericMultiplicationToFractionTensor",
+   "Algebra.localized_genericMultiplication_universally_injective"
+  ],
+  "file": "lean/Sheaf/RingTheory/LocalizedGenericMultiplication.lean",
+  "statement": "theorem localized_genericMultiplication_universally_injective (A : Type u) (B : Type v) (K : Type w) [CommRing A] [IsDomain A] [CommRing B] [Algebra A B] [Field K] [Algebra A K] [IsFractionRing A K] (m : ℕ) (g : Fin m → B) (hgeneric : Function.Injective (genericMultiplicationTuple A (fun i => g i ⊗ₜ[A] (1 : K)))) (a : A) (ha : a ≠ 0) [Module.Flat A (Localization.Away (algebraMap A B a))] [Module.Flat A (LocalizedModule.Away (algebraMap A B a) (genericMultiplicationCokernel g))] : Function.Injective (genericMultiplicationToFractionTensor A B K a ha) ∧ Function.Injective (genericMultiplicationTuple A (fun i => algebraMap B (Localization.Away (algebraMap A B a)) (g i))) ∧ Function.Exact (genericMultiplicationTuple A (fun i => algebraMap B (Localization.Away (algebraMap A B a)) (g i))) (genericMultiplicationLocalizedQuotient A g a) ∧ Function.Surjective (genericMultiplicationLocalizedQuotient A g a) ∧ (∀ (N : Type (max u v w x)) [AddCommGroup N] [Module A N], Function.Injective ((genericMultiplicationTuple A (fun i => algebraMap B (Localization.Away (algebraMap A B a)) (g i))).lTensor N)) ∧ (∀ (C : Type (max u v w y)) [CommRing C] [Algebra A C], IsUnit (algebraMap A C a) → Function.Injective (genericMultiplicationTuple A (fun i => g i ⊗ₜ[A] (1 : C))))",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-681efe813",
+  "group": "Q23",
+  "result": "pass",
+  "note": "lean.statement verbatim in file. Checked every clause: domain A with IsFractionRing K; arbitrary B and m (m=0 allowed); μ = pi of mulLeft; M = quotient by range(μ over B), the genuine cokernel; generic injectivity on B⊗K; a≠0; A-flatness of Localization.Away and LocalizedModule.Away (restricted A-action). Conclusions: canonical liftAlgHom(includeLeft) map B_a→B⊗K injective (b/a^n ↦ b⊗a^{-n}); μ_a injective; Exact(μ_a,q_a) with q_a the specified Σ IsLocalizedModule.map(mkQ∘single i)∘proj i; q_a surjective; lTensor N injective for all N; μ_C injective for all C with a a unit. Edge cases m=0, B=0, C=0, a=1, A a field, non-flat N covered. Four Mathlib stmt_dep def nodes match the notions used; helpers non-hollow; docstrings carry source and blueprint id; only sorry is the main theorem; no pro-étale material. Advisory only: N and C quantified at max u v w x/y universes (standard; smaller ones via ULift). No compile run (no changes)."
+ }
+}

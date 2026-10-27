@@ -1,0 +1,107 @@
+{
+ "id": "lem-zl-large-weil-iterate-addition",
+ "kind": "statement",
+ "title": "Addition law for the specified common-stage Weil iterates",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix a finite-field datum D with characteristic p, a prime l different from p, an algebraic closure Ω of Q_l, and a finite-type k_0-scheme Y_0. Set Y=Y_0 ×_{k_0} k and g=g_Y. Use the actual common-stage pullbacks P_f and their compositor c(f,h) of [def-weil-derived-pullback-tensor-hom, def-weil-algebraically-closed-coefficients, def-weil-local-frobenius-trace]. For any common-stage Weil complex K on Y and a,b≥0, write g^[r]=g^(r+1) and θ_r:P_(g^[r]) K→K for its prescribed positive Weil iterate. Then c(g^[a],g^[b])_K followed by P_(g^[a])(θ_b) and θ_a is θ_(a+b+1), after the equality g^[a] g^[b]=g^[a+b+1] of scheme maps. The formula uses the actual rational Weil maps, with no invariant integral lattice assumption.",
+ "stmt_deps": [
+  "def-weil-local-frobenius-trace",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15, p. 62; agent expansion of the constant-extension calculation in blueprint thm-zl-real-mixed-by-curves, proof paragraph 1, via lem-zl-classical-local-frobenius-iterate-comparison, proof step 8."
+ },
+ "proof": [
+  {
+   "text": "Use the three-pullback equation of [lem-zl-large-composition-map-assoc]. Prove localPositivePower(g,a)≫localPositivePower(g,b)=localPositivePower(g,a+b+1) by induction on b and associativity of scheme composition. Induct on b in the Weil addition formula. The base case is the successor definition of weilIterate. In the successor case expand θ_(b+1), distribute the outer pullback over composition, and apply composition_map_assoc to f=g^[a], g=g^[b], h=g and t=K.str.hom. Postcompose by P_(g^[a])(θ_b)≫θ_a. Transport the induction hypothesis along the power equality in the dependent family f,t ↦ c(f,g)_K≫P_f(K.str.hom)≫t. Its right side is exactly the successor formula for θ_(a+b+2). All transports and morphism compositions are proved in Lean.",
+   "uses": [
+    "lem-zl-large-composition-map-assoc",
+    "def-weil-local-frobenius-trace"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-large-composition-map-assoc",
+  "def-weil-local-frobenius-trace"
+ ],
+ "proof_origin": "Q1: Lean induction on the second positive index, scheme-power addition and explicit dependent HEq transport; the independent three-pullback naturality/reassociation step is isolated as one smaller sourced obligation.",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Coherent iterated pullback Weil structure on a composite positive power is the composition of the two iterated structures",
+   "date": "2026-10-25",
+   "results": "8 hits; top: CategoryTheory.Limits.pullback.map_comp, CategoryTheory.Limits.pullbackPullbackRightIsPullback, CategoryTheory.MorphismProperty.Over.pullbackComp_inv_app_left, CategoryTheory.MorphismProperty.Over.pullbackComp.congr_simp, CategoryTheory.ChosenPullbacksAlong.comp, CategoryTheory.MorphismProperty.Over.pullbackComp_left_fst_fst, CategoryTheory.MorphismProperty.Over.pullbackComp_hom_app_left, CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom; digest 492aab0e46860cd8",
+   "verdict": "No exact match for the specified common-stage construction; semantic results concern ordinary categorical pullbacks or algebraic Frobenius."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Iterate a Weil isomorphism with coherent pullback composition, block powers equal product exponents",
+   "date": "2026-10-25",
+   "results": "8 hits; top: iterateFrobeniusEquiv_eq_pow, coe_iterateFrobenius_mul, iterateFrobeniusEquiv_add, coe_iterateFrobeniusEquiv, iterateFrobeniusEquiv_add_apply, iterateFrobeniusEquiv_def, iterateFrobenius_mul_apply, iterateFrobeniusEquiv_symm_add; digest 976107170aa6d3c2",
+   "verdict": "No exact match for the specified common-stage construction; semantic results concern ordinary categorical pullbacks or algebraic Frobenius."
+  },
+  {
+   "tool": "grep",
+   "query": "transportIterate|sfWeil_blocks|classicalComposition_existsUnique",
+   "date": "2026-10-25",
+   "results": "0 hits; top: none; digest 4f53cda18c2baa0c",
+   "verdict": "No exact match for the specified common-stage construction; semantic results concern ordinary categorical pullbacks or algebraic Frobenius."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ClassicalLocalFrobeniusData",
+  "date": "2026-10-25",
+  "group": "F6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Proof paragraph 1, classical Weil filtration and its local Frobenius comparison: constant-extension calculation, step 8 of lem-zl-classical-local-frobenius-iterate-comparison. Concatenation step in the existing sfWeil_blocks proof.",
+   "via": [
+    "def-zl-classical-local-frobenius-data",
+    "lem-zl-classical-local-frobenius-iterate-comparison",
+    "lem-zl-classical-weil-filtration-heart-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LocalFrobeniusLargeWeilAddition",
+  "file": "lean/Sheaf/Paper/LocalFrobeniusLargeWeilAddition.lean",
+  "declaration": "WeilConjectures.LocalFrobeniusLarge.weilIterate_add",
+  "statement": "theorem weilIterate_add (K : sfCommonStageWeilComplex D l hl Y₀ Ω) (a b : ℕ) :\n    letI := sfWeilPrimeInvertible D l hl Y₀\n    HEq\n      ((composition l Ω\n          (localPositivePower (D.geometricFrobenius Y₀).hom a)\n          (localPositivePower (D.geometricFrobenius Y₀).hom b) K.carrier).hom ≫\n        (@commonStageDerivedPullback l _ Ω _ _ _ _ _\n          (localPositivePower (D.geometricFrobenius Y₀).hom a)\n          (sfWeilPrimeInvertible D l hl Y₀) (sfWeilPrimeInvertible D l hl Y₀)).map\n            (weilIterate D l hl Ω Y₀ K b).hom ≫\n        (weilIterate D l hl Ω Y₀ K a).hom)\n      (weilIterate D l hl Ω Y₀ K (a + b + 1)).hom",
+  "branch": "sheaf-dag",
+  "by": "F6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261025T143259-L-976994",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261025T180944-L-4055738",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

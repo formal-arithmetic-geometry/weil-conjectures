@@ -1,0 +1,342 @@
+{
+ "id": "lem-sfb-site-abelian-torsor-h1",
+ "kind": "statement",
+ "title": "Abelian torsors and derived first cohomology on any small site",
+ "statement": "Let $\\mathcal C$ be a site small relative to the sheaf universe [def-weil-size-convention, def-weil-pbc-sites-and-cohomology], and let $G$ be an abelian sheaf. Put $\\Gamma(\\mathcal C,F)=\\operatorname{Hom}(*,F)$ for the final sheaf $*$, and $H^q(\\mathcal C,G)=R^q\\Gamma(\\mathcal C,-)(G)$, computed using injective resolutions [def-sp-injective-resolutions]. A $G$-torsor is a sheaf of sets $T$ with a $G$-action, with $T\\to *$ locally surjective, such that $(g,t)\\mapsto(g+t,t)$ is an isomorphism $G\\times T\\to T\\times T$. Let $\\mathbf Z_{\\mathcal C}$ be the sheafification of the constant integer presheaf, and $\\mathbf Z[T]$ the sheafification of $U\\mapsto\\mathbf Z[T(U)]$, where the latter denotes the free abelian group. Define $E_T$ as the quotient abelian sheaf of $G\\oplus\\mathbf Z[T]$ by the subsheaf generated locally by $(g,[t]-[g+t])$. There is a short exact sequence $0\\to G\\to E_T\\xrightarrow{p_T}\\mathbf Z_{\\mathcal C}\\to0$, where $p_T([t])=1$, and $t\\mapsto[t]$ identifies $T$ equivariantly with the sheaf fibre $p_T^{-1}(1)$. The rule $\\kappa_G([T])=\\delta_{E_T}(1)$ is a canonical bijection from isomorphism classes of $G$-torsors to $H^1(\\mathcal C,G)$. More generally, for every short exact sequence $0\\to G\\to E\\xrightarrow p\\mathbf Z_{\\mathcal C}\\to0$, its fibre $p^{-1}(1)$ is a $G$-torsor and $\\kappa_G([p^{-1}(1)])=\\delta_E(1)$. Here $\\delta_E$ is the connecting homomorphism of the derived global-section long exact sequence. The bijection carries the trivial torsor $G$ to zero and the contracted product $(T\\times T')/G$ (the sheafification of the sectionwise quotient by $(t,t')\\mapsto(g+t,t'-g)$) to addition in $H^1$. No final object of $\\mathcal C$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03AJ (lemma-torsors-h1), its pushout extension and lifting-fibre inverse; torsors in Tag 03AH (definition-torsor); global sections without a final site object in Tag 01FT (section-cohomology-sheaves). The arbitrary-extension fibre formula and contracted-product addition are the direct extension formulation of this construction."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-sheafification",
+  "def-sc-gm-torsor"
+ ],
+ "proof": [
+  {
+   "text": "Global sections are compatible families of sections over all objects, so they form an abelian group. They preserve kernels: a compatible family killed by a morphism is uniquely a compatible family in its sectionwise kernel. They preserve finite biproducts by taking the two components. Thus $\\Gamma$ is additive and left exact, with no final site object needed. The category of abelian sheaves has enough injectives. Apply the right-derived universal delta-functor theorem and its degree-zero identification to $\\Gamma$: every short exact sequence has the natural, additive connecting maps in the statement. In particular, for $0\\to G\\xrightarrow{i}I\\xrightarrow{r}Q\\to0$ with $I$ injective, $H^1(I)=0$: the resolution $I\\xrightarrow{\\mathrm{id}}I\\to0\\to\\cdots$ computes it as zero. Hence $\\delta_I:\\Gamma(Q)\\to H^1(G)$ is surjective and has kernel $r\\Gamma(I)$.",
+   "uses": [
+    "lem-weil-pbc-sheafification-exact",
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "lem-weil-pbc-right-derived-universal-delta-functor",
+    "def-sp-injective-resolutions",
+    "lem-sp-derived-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 01FT (section-cohomology-sheaves); Tag 03AJ (lemma-torsors-h1), injective-quotient paragraph; derived.tex Tags 015B and 05TE"
+   }
+  },
+  {
+   "text": "Form the quotient $E_T$ specified in the statement; quotients are sheafifications of presheaf quotients because sheafification is a left adjoint. Its relations give $[g+t]=g+[t]$, so $j(g)$ is represented by $(g,0)$ and the augmentation $p_T$ is well defined. On any object with a chosen $t_0\\in T(U)$, write $t=d(t,t_0)+t_0$. Over every object mapping to $U$ the mutually inverse coordinate formulas are\n$$ (a,\\sum n_t[t])\\longmapsto(a+\\sum n_t d(t,t_0),\\sum n_t),\\qquad (a,n)\\longmapsto j(a)+n[t_0]. $$\nThe first kills each relation, and the second followed by the first is the identity; the other composite is the identity by $[t]=j(d(t,t_0))+[t_0]$. These natural formulas extend across sheafification. They identify $E_T$ locally with $G\\oplus\\mathbf Z_{\\mathcal C}$, $j$ with the first inclusion and $p_T$ with the second projection. Indeed every section of a sheafified quotient and every equality in it is represented after a cover, and exact sheafification preserves the kernels and quotients used here. The torsor supplies such local $t_0$ over every object. Thus $j$ is injective, its image is $\\ker p_T$, and $p_T$ is locally surjective, hence epic. In these coordinates $[t]$ is $(d(t,t_0),1)$, so $T\\to p_T^{-1}(1)$ is equivariant and locally bijective, hence an isomorphism. This proves the asserted short exact sequence and fibre formula.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-sheafification-exact",
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "lem-galois-set-sheaf-local-bijection-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AJ (lemma-torsors-h1), free-abelian-sheaf and pushout paragraphs; local coordinate verification of that presentation"
+   }
+  },
+  {
+   "text": "For any short exact sequence $0\\to G\\xrightarrow{j}E\\xrightarrow p\\mathbf Z_{\\mathcal C}\\to0$, let $P=p^{-1}(1)$. The epimorphism $p$ lifts $1$ locally, and sectionwise exactness at $E$ says that two lifts differ by a unique $j(g)$. Thus $P$ is a torsor. Define $v:E_P\\to E$ by $v(g)=j(g)$ and $v([e])=e$ for $e\\in P$. This respects $[g+e]=g+[e]$ and commutes with the inclusion of $G$ and projection to $\\mathbf Z_{\\mathcal C}$. Locally choose $e_0\\in P(U)$; then both extensions have coordinates $(g,n)\\mapsto j(g)+ne_0$ and $v$ is the identity in these coordinates. Consequently $v$ is an isomorphism. A torsor isomorphism $T\\to T'$ likewise induces an extension isomorphism by $g\\mapsto g$, $[t]\\mapsto[\\varphi(t)]$. Naturality of connecting homomorphisms now shows that $\\kappa_G([T])=\\delta_{E_T}(1)$ is well defined on torsor isomorphism classes, and that $\\kappa_G([P])=\\delta_E(1)$ for every extension in the statement.",
+   "uses": [
+    "lem-weil-pbc-sheafification-exact",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "def-weil-pbc-sheafification",
+    "lem-galois-set-sheaf-local-bijection-isomorphism",
+    "lem-weil-pbc-right-derived-universal-delta-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AJ (lemma-torsors-h1), extension construction; explicit arbitrary-extension comparison and naturality"
+   }
+  },
+  {
+   "text": "Fix one embedding $i:G\\hookrightarrow I$ with $I$ injective and put $Q=I/G$. For $q\\in\\Gamma(Q)$ let $L_q$ be the sheaf of lifts of $q$ to $I$, with translation through $i$. It is a torsor: local surjectivity of $I\\to Q$ gives local lifts and its sectionwise kernel is $G$. The rule $g\\mapsto i(g)$, $[x]\\mapsto x$ gives $E_{L_q}\\to I$. Together with the identity on $G$ and the map $\\mathbf Z_{\\mathcal C}\\to Q$ sending $1$ to the compatible family $q$, it is a morphism from the canonical extension of $L_q$ to $0\\to G\\to I\\to Q\\to0$. Naturality gives $\\kappa_G([L_q])=\\delta_I(q)$. Since $\\delta_I$ is surjective by step 1, every cohomology class is in the image of $\\kappa_G$.",
+   "uses": [
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "lem-weil-pbc-sheafification-exact",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-right-derived-universal-delta-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AJ (lemma-torsors-h1), lifting-fibre inverse and the first inverse identity"
+   }
+  },
+  {
+   "text": "For a torsor $T$, injectivity of $I$ extends $i:G\\to I$ across the monomorphism $j:G\\to E_T$ to a homomorphism $b:E_T\\to I$, with $bj=i$. The images $r(b([t]))$ do not depend on the local choice of $t$: replacing $t$ by $g+t$ adds $i(g)$, which $r$ kills. Choose local torsor sections on a covering of each object. Their images agree on overlaps because two torsor sections differ uniquely by $g$, so the sheaf axiom glues them to $q_U\\in Q(U)$. Uniqueness makes all $q_U$ compatible with every restriction, hence gives $q\\in\\Gamma(Q)$. The map $t\\mapsto b([t])$ identifies $T$ with $L_q$: it is equivariant and is a bijection wherever a section $t_0$ exists, because $g+t_0$ maps to $i(g)+b([t_0])$ and these are precisely the lifts of $q$. Thus it is an isomorphism of sheaves. This proves the other inverse assertion used in the source, rather than assuming it.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "lem-galois-set-sheaf-local-bijection-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AJ (lemma-torsors-h1), omitted mutual-inverse verification, supplied using its injective-quotient construction"
+   }
+  },
+  {
+   "text": "If $\\kappa_G([T])=\\kappa_G([T'])$, step 5 identifies $T$ and $T'$ with $L_q$ and $L_{q'}$ for the same chosen $I$. Step 4 and the exact sequence in step 1 imply $q'-q=r(a)$ for a global section $a\\in\\Gamma(I)$. Translation $x\\mapsto x+a$ is a restriction-compatible $G$-equivariant isomorphism $L_q\\to L_{q'}$, with inverse $x\\mapsto x-a$. Therefore $T\\cong T'$, proving injectivity. The construction of $E_T$ and its boundary involved no $I$, so this proves a canonical bijection; the auxiliary choice of $I$ was used only to prove its bijectivity.",
+   "uses": [
+    "lem-weil-pbc-right-derived-universal-delta-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AJ (lemma-torsors-h1), omitted mutual-inverse verification: equality of boundaries and translation of lifting fibres"
+   }
+  },
+  {
+   "text": "For the trivial torsor $G$, $[0]\\in\\Gamma(E_G)$ maps to $1$. Exactness of the global-section long exact sequence gives $\\delta_{E_G}(1)=0$.",
+   "uses": [
+    "lem-weil-pbc-right-derived-universal-delta-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AJ (lemma-torsors-h1), extension construction for the trivial torsor"
+   }
+  },
+  {
+   "text": "Let $S=(T\\times T')/G$ with the antidiagonal action in the statement. The residual action is $a\\cdot[t,t']=[a+t,t']=[t,a+t']$. Locally choose $t_0,t'_0$. If $t=g+t_0$ and $t'=h+t'_0$, the orbit has the unique representative $[ (g+h)+t_0,t'_0]$. Thus the sectionwise quotient is locally $G$, the residual action is translation, and sheafification gives a $G$-torsor $S$. Choose extensions $b:E_T\\to I$ and $b':E_{T'}\\to I$ of the same $i:G\\to I$ as in step 5, giving global sections $q,q'$ of $Q$. The map $(t,t')\\mapsto b([t])+b'([t'])$ is invariant under $(t,t')\\mapsto(g+t,t'-g)$, since the two changes are $i(g)$ and $-i(g)$. It therefore factors through the sectionwise quotient and uniquely through its sheafification $S$, by the sheafification universal property. Its image in $Q$ is $q+q'$, and it is $G$-equivariant. On the above local coordinates it bijects $S$ with $L_{q+q'}$, so it is a torsor isomorphism. By step 4 and additivity of the connecting map,\n$$\\kappa_G([S])=\\delta_I(q+q')=\\delta_I(q)+\\delta_I(q')=\\kappa_G([T])+\\kappa_G([T']).$$\nThis also checks the sign of the contracted-product action.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "lem-galois-set-sheaf-local-bijection-isomorphism",
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-right-derived-universal-delta-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AJ (lemma-torsors-h1), injective-quotient construction; direct addition calculation for contracted products"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "def-sp-injective-resolutions",
+  "lem-sp-derived-well-defined",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "lem-galois-set-sheaf-local-bijection-isomorphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 01FT, 03AH and 03AJ (lemma-torsors-h1): follows the given extension/injective-quotient proof, supplies its omitted inverse verification and the arbitrary-extension and addition calculations explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Tt]orsor|classH1",
+   "results": "0 hits; ; directory Mathlib/CategoryTheory/Sites",
+   "date": "2026-10-23",
+   "verdict": "no match: Sheaf.H defines cohomology and PresheafOfGroups.H1 is fixed-family nonabelian Cech H1; neither classifies torsors by derived H1. Mathlib Sites has no torsor theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An abelian sheaf torsor on an arbitrary site has canonical cohomology class boundary of one in the torsor extension",
+   "results": "8 hits; CategoryTheory.Sheaf.H, CategoryTheory.PresheafOfGroups.H1, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, CategoryTheory.sheafIsAbelian, CategoryTheory.Sheaf.instAddCommGroupH, CategoryTheory.PresheafOfGroups.OneCocycle.class, CategoryTheory.PresheafOfGroups.instOneH1, CategoryTheory.Sheaf.cohomologyPresheafFunctor",
+   "date": "2026-10-23",
+   "verdict": "no match: Sheaf.H defines cohomology and PresheafOfGroups.H1 is fixed-family nonabelian Cech H1; neither classifies torsors by derived H1. Mathlib Sites has no torsor theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Torsor\", \"H\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: Sheaf.H defines cohomology and PresheafOfGroups.H1 is fixed-family nonabelian Cech H1; neither classifies torsors by derived H1. Mathlib Sites has no torsor theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any small site without a terminal object, abelian sheaf torsors correspond bijectively to derived H1 and contracted product corresponds to addition",
+   "results": "8 hits; CategoryTheory.Sheaf.H, CategoryTheory.PresheafOfGroups.H1, CategoryTheory.PresheafOfGroups.instOneH1, CategoryTheory.PresheafOfGroups.OneCocycle.class, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁, CategoryTheory.PresheafOfGroups.OneCohomologyRelation, CategoryTheory.Sheaf.instAddCommGroupH, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃",
+   "date": "2026-10-23",
+   "verdict": "no match: Sheaf.H defines cohomology and PresheafOfGroups.H1 is fixed-family nonabelian Cech H1; neither classifies torsors by derived H1. Mathlib Sites has no torsor theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "First sheaf cohomology classifies principal homogeneous spaces for an abelian group sheaf on a Grothendieck topos",
+   "results": "8 hits; CategoryTheory.PresheafOfGroups.H1, CategoryTheory.Sheaf.H, CategoryTheory.PresheafOfGroups.OneCocycle.class, CategoryTheory.PresheafOfGroups.instOneH1, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.instAddCommGroupH, CategoryTheory.PresheafOfGroups.OneCohomologyRelation, CategoryTheory.PresheafOfGroups.OneCocycle.class_eq_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: Sheaf.H defines cohomology and PresheafOfGroups.H1 is fixed-family nonabelian Cech H1; neither classifies torsors by derived H1. Mathlib Sites has no torsor theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "[Tt]orsor|principal.homogeneous",
+   "results": "0 hits; ; directory Mathlib/CategoryTheory/Sites/SheafCohomology",
+   "date": "2026-10-23",
+   "verdict": "no match: Sheaf.H defines cohomology and PresheafOfGroups.H1 is fixed-family nonabelian Cech H1; neither classifies torsors by derived H1. Mathlib Sites has no torsor theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.PresheafOfGroups.H1",
+   "results": "5 hits; CategoryTheory.PresheafOfGroups.H1, CategoryTheory.PresheafOfGroups.instOneH1, CategoryTheory.PresheafOfGroups.OneCocycle.class, CategoryTheory.PresheafOfGroups.OneCocycle.IsCohomologous.class_eq, CategoryTheory.PresheafOfGroups.OneCocycle.class_eq_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: Sheaf.H defines cohomology and PresheafOfGroups.H1 is fixed-family nonabelian Cech H1; neither classifies torsors by derived H1. Mathlib Sites has no torsor theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Abelian sheaf torsors on an arbitrary small site without a terminal object correspond to derived first global section cohomology by the boundary of one",
+   "results": "8 hits; CategoryTheory.Sheaf.H, CategoryTheory.PresheafOfGroups.H1, CategoryTheory.PresheafOfGroups.instOneH1, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.PresheafOfGroups.OneCocycle.class, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.PresheafOfGroups.OneCohomologyRelation, CategoryTheory.Sheaf.instAddCommGroupH",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected SheafCohomology/Basic.lean and NonabelianCohomology/H1.lean. Sheaf.H is Ext cohomology; PresheafOfGroups.H1 is fixed-family Cech cohomology, not the torsor classification and extension-boundary/group-law package."
+  },
+  {
+   "tool": "grep",
+   "query": "[Tt]orsor|principal.homogeneous|classH1",
+   "results": "0 hits; ; directory Mathlib/CategoryTheory/Sites",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected SheafCohomology/Basic.lean and NonabelianCohomology/H1.lean. Sheaf.H is Ext cohomology; PresheafOfGroups.H1 is fixed-family Cech cohomology, not the torsor classification and extension-boundary/group-law package."
+  },
+  {
+   "tool": "leansearch",
+   "query": "First derived cohomology of global sections classifies abelian sheaf torsors on any small Grothendieck site",
+   "results": "8 hits; CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.Γ, CategoryTheory.PresheafOfGroups.H1, CategoryTheory.HasGlobalSectionsFunctor, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.instAddCommGroupH, groupCohomology.H1π_eq_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected SheafCohomology/Basic.lean and NonabelianCohomology/H1.lean. Sheaf.H is Ext cohomology; PresheafOfGroups.H1 is fixed-family Cech cohomology, not the torsor classification and extension-boundary/group-law package."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H, CategoryTheory.PresheafOfGroups.H1",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected SheafCohomology/Basic.lean and NonabelianCohomology/H1.lean. Sheaf.H is Ext cohomology; PresheafOfGroups.H1 is fixed-family Cech cohomology, not the torsor classification and extension-boundary/group-law package."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Principal homogeneous spaces under an abelian group object in a Grothendieck topos are classified by H1 and the Baer sum is the contracted product",
+   "results": "8 hits; CategoryTheory.PresheafOfGroups.H1, CategoryTheory.PresheafOfGroups.OneCocycle.class, CategoryTheory.PresheafOfGroups.instOneH1, CategoryTheory.PresheafOfGroups.OneCohomologyRelation, CategoryTheory.Sheaf.instAddCommGroupH, CategoryTheory.PresheafOfGroups.OneCohomologyRelation.trans, CategoryTheory.PresheafOfGroups.OneCocycle.IsCohomologous.class_eq, CategoryTheory.PresheafOfGroups.OneCocycle.class_eq_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected SheafCohomology/Basic.lean and NonabelianCohomology/H1.lean. Sheaf.H is Ext cohomology; PresheafOfGroups.H1 is fixed-family Cech cohomology, not the torsor classification and extension-boundary/group-law package."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ringed-site-picard-h1-natural",
+  "date": "2026-10-24",
+  "group": "Q15"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Infinitesimal lifting of algebraically trivial rigidified line modules. Supporting input: Functorial Picard obstruction for square-zero thickenings of algebraic spaces. Ringed-site input: identify line-module classes with first cohomology of units, compatibly with tensor pullback. General abelian-sheaf prerequisite for the ringed-site Picard input: the boundary-of-one torsor classification, including its group law.",
+   "via": [
+    "lem-sfb-ringed-site-picard-h1-natural",
+    "lem-sfb-space-picard-obstruction-natural",
+    "lem-sfb-abelian-picard-infinitesimal-lift",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-site-abelian-torsor-h1",
+  "worker": "stage1",
+  "summary": "Read Stacks 03AJ and 01FT, retained the arbitrary-site statement, proved exactness by local coordinates, supplied both inverse verifications and the arbitrary-extension boundary and contracted-product formulas. Reused general-site sheaf and derived-functor nodes; no new nodes. No exact project or Mathlib attachment.",
+  "blueprint": "The inherited from.place locates the auxiliary torsor input in the Picard obstruction prerequisite below det-thm-sf-ctf-stability-direct-images (3). The current latest blueprint places that detailed proof under sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md. This split supplies precisely the boundary-of-one and group-law prerequisite, without changing the unit route. The inherited from.node is null because the created.item chain is broken upstream; ancestor command also returns None.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Local representatives and equality detection for sheafification on any small site; used for the quotient presentation, with no terminal-object hypothesis. No node of this unit supplies this generic fact."
+   },
+   {
+    "node": "lem-galois-set-sheaf-local-bijection-isomorphism",
+    "why": "The general-site local-bijection criterion turns the explicit local coordinate maps into sheaf isomorphisms. No node of this unit supplies this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-universal-delta-functor",
+    "why": "Natural additive connecting maps and exactness for any left exact functor on an abelian category with enough injectives, applied to global compatible sections. No node of this unit supplies this generic fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-galois-set-sheaf-local-bijection-isomorphism",
+  "lem-weil-pbc-right-derived-universal-delta-functor"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NN-286a29771",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-286a29771 (reviewer sub-agent of L); spot-checked: I read the whole item and its 8 steps. The statement and stmt_deps are verbatim from live, where the item is still unsplit with no repair note, so it is not superseded. There are no new nodes and no fixes. Source check against Stacks sites-cohomology: 01FT (l.32-75) defines global sections as Mor(e,F) when there is no final object; 03AH gives the torsor; 03AJ (l.290-360) builds the pushout extension and the lifting-fibre inverse. The pushout relation (a(k),-k) with k=[g+t]-[t] is the item's (g,[t]-[g+t]), so the sign is correct. Stacks omits the proof that the two constructions are mutually inverse; steps 5-6 supply it. Step checks: (1) Gamma on compatible families is additive and left exact; the right-derived delta-functor node gives the long exact sequence, and H^1(I)=0 via the resolution I->I and derived-well-defined. (2) The local coordinates kill the relation and both composites are the identity; exactness and the fibre isomorphism follow from sections-local, sectionwise kernels, epi=locally surjective and local bijection. (3) v:E_P->E respects the relation and is an extension isomorphism, and naturality gives kappa(P)=delta_E(1). (4) E_{L_q}->I with 1->q is a morphism of short exact sequences, so kappa(L_q)=delta_I(q), and kappa is surjective. (5) b extends i by injectivity, b[g+t]=i(g)+b[t], so T is isomorphic to L_q. (6) q'-q=r(a), and translation gives injectivity. (7) [0] lifts 1. (8) The antidiagonal invariance i(g)-i(g)=0 holds, the residual action is consistent, and S is isomorphic to L_{q+q'}, so additivity holds. Edge cases tested: empty site, G=0, an empty covering, a site with no final object. Possible duplicates (lem-sc-torsor-h1, the Zariski boundary-representative and free-extension nodes, sbc-prop-torsors-h1, thm-galois-torsor-h1) are all for schemes or finite constant coefficients, so none is a duplicate. Accepted generic tool uses: site-sheafification-sections-local, galois local-bijection, right-derived universal delta-functor. Searches cover all three kinds. The citer picard-h1-natural uses only clauses that are in the statement. No SGA. The null blueprint.from.node is inherited from the citer chain."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.SiteAbelianTorsorH1",
+  "declaration": "CategoryTheory.Sheaf.Torsor.site_abelian_torsor_h1",
+  "declarations": [
+   "CategoryTheory.Sheaf.Torsor.siteAbelianSheafify",
+   "CategoryTheory.Sheaf.Torsor.siteTypeSheafify",
+   "CategoryTheory.Sheaf.Torsor.siteAbelianSheafGrothendieck",
+   "CategoryTheory.Sheaf.Torsor.siteFreeSheaf",
+   "CategoryTheory.Sheaf.Torsor.siteRelations",
+   "CategoryTheory.Sheaf.Torsor.siteDifference",
+   "CategoryTheory.Sheaf.Torsor.siteDisplacement",
+   "CategoryTheory.Sheaf.Torsor.siteExtension",
+   "CategoryTheory.Sheaf.Torsor.siteInclusion",
+   "CategoryTheory.Sheaf.Torsor.siteGenerators",
+   "CategoryTheory.Sheaf.Torsor.siteIntegerPresheaf",
+   "CategoryTheory.Sheaf.Torsor.siteIntegers",
+   "CategoryTheory.Sheaf.Torsor.siteGenerator",
+   "CategoryTheory.Sheaf.Torsor.siteOneSection",
+   "CategoryTheory.Sheaf.Torsor.siteOne",
+   "CategoryTheory.Sheaf.Torsor.siteBoundary",
+   "CategoryTheory.Sheaf.Torsor.site_abelian_torsor_h1"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Sites/SiteAbelianTorsorH1.lean",
+  "statement": "theorem site_abelian_torsor_h1 (G : Sheaf J AddCommGrpCat.{max u v w}) : ∃ κ : _root_.Quotient (Torsor.setoid (G := G)) → ((Γ J AddCommGrpCat.{max u v w}).rightDerived 1).obj G, Function.Bijective κ ∧ (∀ T : Torsor G, ∃ (p : siteExtension J T ⟶ siteIntegers.{u, v, w} J) (hp : siteInclusion J T ≫ p = 0) (hS : (ShortComplex.mk (siteInclusion J T) p hp).ShortExact), (∀ (U : Cᵒᵖ) (t : T.sheaf.obj.obj U), p.hom.app U (siteGenerator J T U t) = siteOneSection J U) ∧ (∀ U : Cᵒᵖ, ∃ e : T.sheaf.obj.obj U ≃ {x : (siteExtension J T).obj.obj U | p.hom.app U x = siteOneSection J U}, ∀ t : T.sheaf.obj.obj U, (e t).val = siteGenerator J T U t) ∧ (∀ (U : Cᵒᵖ) (g : G.obj.obj U) (t : T.sheaf.obj.obj U), siteGenerator J T U (T.vadd U g t) = (siteInclusion J T).hom.app U g + siteGenerator J T U t) ∧ κ ⟦T⟧ = siteBoundary J hS (siteOne J)) ∧ (∀ (E : Sheaf J AddCommGrpCat.{max u v w}) (i : G ⟶ E) (p : E ⟶ siteIntegers.{u, v, w} J) (hp : i ≫ p = 0) (hS : (ShortComplex.mk i p hp).ShortExact), ∃ (P : Torsor G) (e : ∀ U : Cᵒᵖ, P.sheaf.obj.obj U ≃ {x : E.obj.obj U | p.hom.app U x = siteOneSection J U}), (∀ (U V : Cᵒᵖ) (f : U ⟶ V) (t : P.sheaf.obj.obj U), (e V (P.sheaf.obj.map f t)).val = E.obj.map f (e U t).val) ∧ (∀ (U : Cᵒᵖ) (g : G.obj.obj U) (t : P.sheaf.obj.obj U), (e U (P.vadd U g t)).val = i.hom.app U g + (e U t).val) ∧ κ ⟦P⟧ = siteBoundary J hS (siteOne J)) ∧ κ ⟦trivial G⟧ = 0 ∧ (∀ T T' : Torsor G, ∃ (S : Torsor G) (q : ∀ U : Cᵒᵖ, T.sheaf.obj.obj U → T'.sheaf.obj.obj U → S.sheaf.obj.obj U), (∀ (U V : Cᵒᵖ) (f : U ⟶ V) (t : T.sheaf.obj.obj U) (t' : T'.sheaf.obj.obj U), S.sheaf.obj.map f (q U t t') = q V (T.sheaf.obj.map f t) (T'.sheaf.obj.map f t')) ∧ (∀ (U : Cᵒᵖ) (g : G.obj.obj U) (t : T.sheaf.obj.obj U) (t' : T'.sheaf.obj.obj U), q U (T.vadd U g t) (T'.vadd U (-g) t') = q U t t') ∧ (∀ (U : Cᵒᵖ) (g : G.obj.obj U) (t : T.sheaf.obj.obj U) (t' : T'.sheaf.obj.obj U), q U (T.vadd U g t) t' = S.vadd U g (q U t t')) ∧ (∀ (F : Sheaf J (Type (max u v w))) (a : ∀ U : Cᵒᵖ, T.sheaf.obj.obj U → T'.sheaf.obj.obj U → F.obj.obj U) (_hn : ∀ (U V : Cᵒᵖ) (f : U ⟶ V) (t : T.sheaf.obj.obj U) (t' : T'.sheaf.obj.obj U), F.obj.map f (a U t t') = a V (T.sheaf.obj.map f t) (T'.sheaf.obj.map f t')) (_hi : ∀ (U : Cᵒᵖ) (g : G.obj.obj U) (t : T.sheaf.obj.obj U) (t' : T'.sheaf.obj.obj U), a U (T.vadd U g t) (T'.vadd U (-g) t') = a U t t'), ∃! l : S.sheaf ⟶ F, ∀ (U : Cᵒᵖ) (t : T.sheaf.obj.obj U) (t' : T'.sheaf.obj.obj U), l.hom.app U (q U t t') = a U t t') ∧ κ ⟦S⟧ = κ ⟦T⟧ + κ ⟦T'⟧)",
+  "branch": "sheaf-dag",
+  "by": "Q118",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing general-site Torsor and actual rightDerived of Sheaf.Γ. The free-relation extension is constructed as a pushout; contracted products are specified by their full sheaf quotient universal property. Universes u, v, w remain independent."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-323698e10",
+  "group": "Q118",
+  "result": "pass",
+  "note": "Read node, stmt_deps (size convention, sites-and-cohomology, injective resolutions, sheafification, landed def-sc-gm-torsor Torsor.lean in full), Connecting.lean rightDerivedδ, Mathlib Γ. Only lean and stmt_deps differ from live; stmt_deps gains landed def-sc-gm-torsor (used, allowed). lean.statement matches the file signature verbatim; no name clashes. Arbitrary J, coefficients max u v w, no final object; H¹ = (Γ.rightDerived 1).obj G. E_T = pushout of pairsDiff^# and pairsSub^#, giving relation (g,[t]-[g+t]) with sign checked; p pinned by generators; κ pinned by κ⟦T⟧=δ_{E_T}(1). Arbitrary-extension fibre torsor, trivial↦0, and contracted product via full sheafified-quotient universal property and additivity all match the node. Edge cases (empty site, no terminal, sectionless torsors, empty sieve, G=0, universes) covered. Existing extension constructions are Zariski/étale-only and classH1 needs a terminal object and uses Ext, so no duplicate. Helpers are real data, instances Prop-valued, only the main theorem is sorry, docstrings have source, blueprint id and 8 proof steps. No compile (no file changed)."
+ }
+}

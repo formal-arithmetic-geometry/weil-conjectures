@@ -1,0 +1,419 @@
+{
+ "id": "lem-sfb-space-flat-pullback-schematic-density",
+ "kind": "statement",
+ "title": "Flat pullback preserves schematic density of quasi-compact open subspaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $X,Y$ be algebraic spaces over $S$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention]. Morphism properties use [def-sfb-space-morphism-properties]; locally finite type is the chart test with [def-weil-finite-type-morphism]. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Let $f:X\\to Y$ be flat. Let $j:V\\hookrightarrow Y$ be an open immersion, meaning a representable open subspace inclusion [def-a1-space-open-subspace] which is quasi-compact, meaning its inverse image on every affine etale scheme chart is quasi-compact. Suppose $\\mathcal O_Y\\to j_*\\mathcal O_V$ is injective as sheaves on the small etale site. Then $j_X:X\\times_YV\\hookrightarrow X$ is again a quasi-compact open immersion, and $\\mathcal O_X\\to (j_X)_*\\mathcal O_{X\\times_YV}$ is injective. Thus $X\\times_YV$ is schematically dense in $X$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 089D (lemma-flat-morphism-scheme-theoretically-dense-open); quasi-compactness and openness are preserved by base change on scheme tests."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-sfb-space-morphism-properties",
+  "def-weil-finite-type-morphism",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-space-open-subspace"
+ ],
+ "proof": [
+  {
+   "text": "Choose a scheme atlas $p:Y_0\\to Y$ as in [def-trf-algebraic-space], and put $V_0=V\\times_Y Y_0$. By [def-a1-space-open-subspace], $V_0$ is an open subscheme of $Y_0$. More generally $X\\times_YV\\to X$ is representable by open immersions: its test on a scheme $T\\to X$ is exactly the test $T\\times_YV\\to T$ of $j$. For every affine open $W\\subseteq Y_0$, its composite $W\\to Y$ is etale by [lem-a1-space-open-chart-tests] and [lem-trf-space-chartwise-etale-permanence]. The hypothesis therefore makes $V\\times_YW$ quasi-compact. By the definition of a quasi-compact scheme morphism [def-weil-finite-type-morphism], $j_0:V_0\\to Y_0$ is quasi-compact. Every open immersion is a monomorphism: two maps into the open with equal ambient maps have the same points and the same structure-sheaf maps. Its diagonal is consequently an isomorphism, hence a closed immersion by [def-weil-closed-immersion], and it is quasi-separated. This applies to $j_0$ and all its scheme base changes.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-a1-space-open-subspace",
+    "lem-a1-space-open-chart-tests",
+    "lem-trf-space-chartwise-etale-permanence",
+    "def-weil-finite-type-morphism",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 089D (lemma-flat-morphism-scheme-theoretically-dense-open), proof; Tags 0833 and 0836, etale-local interpretation of density."
+   }
+  },
+  {
+   "text": "For any etale scheme chart $a:T\\to X$, form $P=T\\times_Y Y_0$. By [lem-trf-space-fibre-products-etale-covers], $P$ is a scheme and $q:P\\to T$ is a surjective etale morphism. By [lem-trf-space-chartwise-etale-permanence], $a q:P\\to X$ is etale. The scheme map $g:P\\to Y_0$ is flat: the square with vertical etale maps $P\\to X$ and $Y_0\\to Y$ is one of the chart tests in the definition of flatness [def-sfb-space-morphism-properties]. This argument requires neither $f$ nor the atlases to be quasi-compact.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-chartwise-etale-permanence",
+    "def-sfb-space-morphism-properties"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 089D (lemma-flat-morphism-scheme-theoretically-dense-open), proof; Tags 0833 and 0836, etale-local interpretation of density."
+   }
+  },
+  {
+   "text": "Choose $T\\to X$ in step 2 to be a surjective scheme atlas. Then $P\\to X$ is a surjective etale scheme chart. Its pullback of $j_X$ is $V_0\\times_{Y_0}P\\to P$, which is quasi-compact by [lem-pc-quasi-compact-base-change] applied to $j_0$. It is an open immersion by the scheme-test description in step 1, and its diagonal is an isomorphism, hence a closed immersion, as proved there. Apply [lem-trf-space-qc-separated-etale-local] to $j_X$ and the singleton target cover $P\\to X$: every local map is both quasi-compact and separated, exactly the conjunction the cited statement requires. It follows that $j_X$ is quasi-compact (and separated). In particular its inverse image on every affine etale scheme chart of $X$ is quasi-compact, as required.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-pc-quasi-compact-base-change",
+    "lem-trf-space-qc-separated-etale-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 089D (lemma-flat-morphism-scheme-theoretically-dense-open), proof; Tags 0833 and 0836, etale-local interpretation of density."
+   }
+  },
+  {
+   "text": "Restrict the assumed injection $\\mathcal O_Y\\to j_*\\mathcal O_V$ to $Y_0$. The section formula and structure-sheaf restriction in [lem-trf-space-etale-module-pushforward-restriction] identify it with $\\mathcal O_{Y_0}\\to(j_0)_*\\mathcal O_{V_0}$ on the small etale site, hence also on all Zariski opens of $Y_0$. Its kernel is zero. Thus the largest quasi-coherent ideal contained in that kernel is zero, and [def-nagata-scheme-theoretic-image] gives $\\operatorname{SIm}(j_0)=Y_0$. For any chart $T\\to X$ and the flat scheme map $g:P\\to Y_0$ of step 2, apply [lemma-nagata-dense-flat-pullback] to $j_0$ and $g$. Its hypotheses hold: $j_0$ is quasi-compact and quasi-separated by step 1, and its scheme-theoretic image is $Y_0$. Therefore $k:V_0\\times_{Y_0}P\\to P$ has scheme-theoretic image $P$. The map $k$ is quasi-compact by [lem-pc-quasi-compact-base-change]. Applying [lemma-nagata-scheme-image-ideal-qc] with this image equal to $P$ shows that $\\Gamma(P,\\mathcal O_P)\\to\\Gamma(V_0\\times_{Y_0}P,\\mathcal O)$ is injective.",
+   "uses": [
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "def-nagata-scheme-theoretic-image",
+    "lemma-nagata-dense-flat-pullback",
+    "lem-pc-quasi-compact-base-change",
+    "lemma-nagata-scheme-image-ideal-qc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 089D (lemma-flat-morphism-scheme-theoretically-dense-open), proof; Tags 0833 and 0836, etale-local interpretation of density."
+   }
+  },
+  {
+   "text": "To prove the desired sheaf injection, let $T\\to X$ be any object of the small etale site and let $s\\in\\mathcal O_X(T)=\\Gamma(T,\\mathcal O_T)$ restrict to zero on $T\\times_X(X\\times_YV)$. Direct-image sections are the sections on this fibre product, by the same section description of [lem-trf-space-etale-module-pushforward-restriction]. Pull back $s$ to the surjective etale cover $P=T\\times_Y Y_0\\to T$ of step 2. Fibre-product associativity identifies its restriction to $V_0\\times_{Y_0}P$ with the pullback of the assumed zero restriction. Step 4 therefore gives $s|_P=0$. The uniqueness axiom for the structure sheaf on the etale cover $P\\to T$ implies $s=0$. This proves injectivity on every object $T$ and hence injectivity of $\\mathcal O_X\\to(j_X)_*\\mathcal O_{X\\times_YV}$. Together with steps 1 and 3 this proves all clauses.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-etale-module-pushforward-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 089D (lemma-flat-morphism-scheme-theoretically-dense-open), proof; Tags 0833 and 0836, etale-local interpretation of density."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-a1-space-open-subspace",
+  "lem-a1-space-open-chart-tests",
+  "lem-trf-space-chartwise-etale-permanence",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-space-morphism-properties",
+  "lem-pc-quasi-compact-base-change",
+  "lem-trf-space-qc-separated-etale-local",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "def-nagata-scheme-theoretic-image",
+  "lemma-nagata-dense-flat-pullback",
+  "lemma-nagata-scheme-image-ideal-qc"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 089D (lemma-flat-morphism-scheme-theoretically-dense-open), proof; Tags 0833 and 0836, etale-local interpretation of density."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Ss]chematically|[Ss]chemeTheoretically",
+   "results": {
+    "hits": [
+     "Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean",
+     "Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean",
+     "Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean",
+     "Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean"
+    ],
+    "n_hits": 9,
+    "note": "",
+    "subdirectory": "AlgebraicGeometry",
+    "digest": "c15db472931c4d15"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for algebraic spaces: IsSchemeTheoreticallyDominant.pullbackSnd/of_isPullback in Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean:95,115 give the analogous theorem for schemes; etale descent to algebraic spaces is a further theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Schematic density of a quasi compact open immersion is preserved by flat base change",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.quasiCompact_isStableUnderBaseChange",
+     "AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange",
+     "AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange",
+     "AlgebraicGeometry.instHasOfPostcompPropertySchemeIsOpenImmersionOfIsStableUnderBaseChange",
+     "AlgebraicGeometry.Flat.isStableUnderBaseChange",
+     "AlgebraicGeometry.Scheme.instIsJointlySurjectivePreservingIsOpenImmersion",
+     "AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme",
+     "AlgebraicGeometry.Flat.instMorphismRestrict"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "c4be4898e2b0706f"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for algebraic spaces: IsSchemeTheoreticallyDominant.pullbackSnd/of_isPullback in Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean:95,115 give the analogous theorem for schemes; etale descent to algebraic spaces is a further theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse image of a quasi compact schematically dense open under a flat morphism of algebraic spaces is schematically dense",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.Flat.generalizingMap",
+     "AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact",
+     "AlgebraicGeometry.Scheme.Hom.denseRange",
+     "AlgebraicGeometry.UniversallyOpen.of_flat",
+     "AlgebraicGeometry.IsDominant.denseRange",
+     "AlgebraicGeometry.Scheme.PartialMap.dense_domain",
+     "AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact",
+     "AlgebraicGeometry.Scheme.RationalMap.dense_domain"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "61e829ed6955d915"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for algebraic spaces: IsSchemeTheoreticallyDominant.pullbackSnd/of_isPullback in Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean:95,115 give the analogous theorem for schemes; etale descent to algebraic spaces is a further theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSchemeTheoreticallyDominant, AlgebraicGeometry.Flat",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.IsSchemeTheoreticallyDominant.pullbackFst",
+     "AlgebraicGeometry.IsSchemeTheoreticallyDominant.pullbackSnd",
+     "AlgebraicGeometry.IsSchemeTheoreticallyDominant.of_isPullback"
+    ],
+    "n_hits": 3,
+    "note": "",
+    "subdirectory": "",
+    "digest": "16894494d9b8c2a7"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for algebraic spaces: IsSchemeTheoreticallyDominant.pullbackSnd/of_isPullback in Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean:95,115 give the analogous theorem for schemes; etale descent to algebraic spaces is a further theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSchemeTheoreticallyDominant, AlgebraicGeometry.Flat",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.IsSchemeTheoreticallyDominant.pullbackFst",
+     "AlgebraicGeometry.IsSchemeTheoreticallyDominant.pullbackSnd",
+     "AlgebraicGeometry.IsSchemeTheoreticallyDominant.of_isPullback"
+    ],
+    "n_hits": 3,
+    "note": "",
+    "subdirectory": "",
+    "digest": "16894494d9b8c2a7"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for algebraic spaces; the scheme-only density base-change instances and scheme openness/quasi-compactness instances are already represented by existing cited DAG nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "IsSchemeTheoreticallyDominant|isOpenImmersion_stableUnderBaseChange|quasiCompact_isStableUnderBaseChange",
+   "results": {
+    "hits": [
+     "Mathlib/AlgebraicGeometry/OpenImmersion.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean",
+     "Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean"
+    ],
+    "n_hits": 10,
+    "note": "",
+    "subdirectory": "AlgebraicGeometry",
+    "digest": "dea114682abf7dbe"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for algebraic spaces; the scheme-only density base-change instances and scheme openness/quasi-compactness instances are already represented by existing cited DAG nodes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Injectivity of restriction of the structure sheaf to a quasi compact open is preserved by flat pullback",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.Flat.instMorphismRestrict",
+     "AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv",
+     "AlgebraicGeometry.LocallyRingedSpace.restrict",
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback",
+     "AlgebraicGeometry.Scheme.Modules.restrict_obj",
+     "CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat",
+     "AlgebraicGeometry.Scheme.Hom.toImage_app_injective",
+     "AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "63350f8d69d62e10"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for algebraic spaces; the scheme-only density base-change instances and scheme openness/quasi-compactness instances are already represented by existing cited DAG nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact schematically dense open subspace stays schematically dense after flat base change of algebraic spaces",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.Flat.isStableUnderBaseChange",
+     "AlgebraicGeometry.Flat.generalizingMap",
+     "AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact",
+     "AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact",
+     "AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange",
+     "AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'",
+     "AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact",
+     "AlgebraicGeometry.Scheme.Hom.denseRange"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "22cf5ab4d006d6a4"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for algebraic spaces; the scheme-only density base-change instances and scheme openness/quasi-compactness instances are already represented by existing cited DAG nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The structure sheaf restriction to a schematically dense open is injective on etale scheme charts of an algebraic space",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.Scheme.IsGermInjective",
+     "AlgebraicGeometry.Scheme.IsGermInjectiveAt",
+     "AlgebraicGeometry.instIsGermInjectiveOfIsIntegral",
+     "AlgebraicGeometry.germ_injective_of_isIntegral",
+     "AlgebraicGeometry.map_injective_of_isIntegral",
+     "AlgebraicGeometry.IsAffineOpen.stalkMap_injective",
+     "AlgebraicGeometry.Scheme.exists_germ_injective",
+     "AlgebraicGeometry.spread_out_of_isGermInjective'"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "6612a4970efc8e0a"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for algebraic spaces; the scheme-only density base-change instances and scheme openness/quasi-compactness instances are already represented by existing cited DAG nodes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-flat-isomorphism-dense-open",
+  "date": "2026-10-24",
+  "group": "Q126"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting subargument for proper-support Grothendieck existence in Stacks Tag 08BE, serving the inherited compactification/direct-image prerequisite chain of sk-thm-sf-ctf-stability; the Chow modification in the third paragraph. Construction input: Tag 088S proof, apply 088R to the chosen open immersion into projective space; affine-base projectivity is handled separately. Supporting Tag 088Q (lemma-find-common-blowups); U-admissible centres as defined in spaces-divisors.tex Tag 086B (definition-admissible-blowup).. Supporting Tag 088Q proof, choice of the two blowups whose strict transforms are open subspaces. Precise input to the Tag 087F proof: Tag 0879 (lemma-zariski), statement, hypotheses (1)--(3). Supporting input for Tag 0879: Tag 089D (lemma-flat-morphism-scheme-theoretically-dense-open); quasi-compactness and openness are preserved by base change on scheme tests.",
+   "via": [
+    "lem-sfb-space-flat-isomorphism-dense-open",
+    "lem-sfb-space-zariski-after-admissible-blowup",
+    "lem-sfb-space-common-admissible-blowups",
+    "lem-sfb-space-blowup-embedding-extension",
+    "lem-sfb-space-chow-dense-modification",
+    "lem-sfb-space-supported-adic-existence",
+    "lem-sfb-space-coherent-formal-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-flat-pullback-schematic-density",
+  "worker": "stage1",
+  "summary": "Followed Tag 089D by reduction to schemes. Reused existing scheme density and etale-cover lemmas; no new nodes. Wrote the flatness chart test, the separate quasi-compactness descent with both hypotheses, and objectwise sheaf-injectivity descent. Fixed doubled TeX escapes and the scheme-only open-immersion reference.",
+  "blueprint": "The inherited supporting input to Tag 0879, through Tag 089D, on the compactification/direct-image prerequisite branch of sk-thm-sf-ctf-stability. The item is not a key unit node; its inherited nearest imported ancestor is null. Whole-blueprint searches found no equivalent algebraic-space theorem.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-open-chart-tests",
+    "why": "Generic scheme/space chart or sheaf tool for the etale reduction in Tag 089D; this unit contains no replacement for this statement."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic scheme/space chart or sheaf tool for the etale reduction in Tag 089D; this unit contains no replacement for this statement."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic scheme/space chart or sheaf tool for the etale reduction in Tag 089D; this unit contains no replacement for this statement."
+   },
+   {
+    "node": "lem-trf-space-qc-separated-etale-local",
+    "why": "Generic scheme/space chart or sheaf tool for the etale reduction in Tag 089D; this unit contains no replacement for this statement."
+   },
+   {
+    "node": "lem-trf-space-etale-module-pushforward-restriction",
+    "why": "Generic scheme/space chart or sheaf tool for the etale reduction in Tag 089D; this unit contains no replacement for this statement."
+   },
+   {
+    "node": "def-nagata-scheme-theoretic-image",
+    "why": "Generic scheme/space chart or sheaf tool for the etale reduction in Tag 089D; this unit contains no replacement for this statement."
+   },
+   {
+    "node": "lemma-nagata-scheme-image-ideal-qc",
+    "why": "Generic scheme/space chart or sheaf tool for the etale reduction in Tag 089D; this unit contains no replacement for this statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-open-chart-tests",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-qc-separated-etale-local",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "def-nagata-scheme-theoretic-image",
+  "lemma-nagata-scheme-image-ideal-qc"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NV-57668e28f",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-57668e28f (reviewer sub-agent of L); spot-checked: I read Stacks 089D (with 0833, 0836 and flat-local) and every cited node's statement. The delivery is a one-level split with 0 new nodes, and the live node is still unsplit. Statement: def-weil-open-immersion (schemes only) is replaced by def-a1-space-open-subspace, which is Stacks' open immersion of spaces. Nothing is weakened or added, and the report names the change. Step 1: an affine open W of Y_0 is an étale chart via open-chart-tests and chartwise permanence. The hypothesis then makes j_0 quasi-compact, and its diagonal is an isomorphism, so j_0 is quasi-separated. Step 2: P=T×_Y Y_0 is a scheme and P→T is surjective étale. g:P→Y_0 is flat by the chart test of def-sfb-space-morphism-properties, since f(aq)=bg. Step 3: on the atlas P→X the pullback of j_X is quasi-compact by base change and separated, and qc-separated-etale-local needs exactly that conjunction. Step 4: the injection restricts to Y_0 by the pushforward-restriction node, so SIm(j_0)=Y_0. lemma-nagata-dense-flat-pullback (qcqs j_0, flat g) gives SIm(k)=P, and scheme-image-ideal-qc gives the injection on sections. Step 5: the sheaf axiom on the cover {P→T} gives injectivity on every étale T. Edge cases V=∅ and V=Y hold. I found no duplicate among the algebraic-space nodes on density and flatness. Batch-5: def-a1-space-open-subspace, lem-a1-space-open-chart-tests, lem-trf-space-chartwise-etale-permanence, lem-trf-space-qc-separated-etale-local and lem-trf-space-etale-module-pushforward-restriction are generic algebraic-space foundations. None is part of the trace formula or Poincaré duality, so they are kept. All seven declared tool_uses are accepted, and there is no SGA."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceFlatPullbackSchematicDensity",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.flat_pullback_schematicDensity",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceFlatPullbackSchematicDensity.lean",
+  "statement": "theorem flat_pullback_schematicDensity {S : Scheme.{u}} {X Y V XV : AlgebraicSpace S} (f : X ⟶ Y) (j : V ⟶ Y) (jX : XV ⟶ X) (g : XV ⟶ V) (hcart : IsPullback g.hom jX.hom j.hom f.hom) (hf : MapIsFlat f) (hj : IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) j.hom.hom) (hqc : ∀ T : Y.EtaleSite, IsAffine T.obj.left.left → ∃ (U : Over S) (p : U ⟶ T.obj.left) (r : yoneda.obj U ⟶ V.obj.obj), IsPullback r (yoneda.map p) j.hom.hom T.obj.hom ∧ CompactSpace U.left) (hdense : ∀ (T : Y.EtaleSite) (a b : Y.structureSheaf.obj.obj (op T)), (∀ (U : V.EtaleSite) (p : U.obj.left ⟶ T.obj.left), U.obj.hom ≫ j.hom.hom = yoneda.map p ≫ T.obj.hom → (Scheme.Γ.map p.left.op).hom a = (Scheme.Γ.map p.left.op).hom b) → a = b) : IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) jX.hom.hom ∧ (∀ T : X.EtaleSite, IsAffine T.obj.left.left → ∃ (U : Over S) (p : U ⟶ T.obj.left) (r : yoneda.obj U ⟶ XV.obj.obj), IsPullback r (yoneda.map p) jX.hom.hom T.obj.hom ∧ CompactSpace U.left) ∧ (∀ (T : X.EtaleSite) (a b : X.structureSheaf.obj.obj (op T)), (∀ (U : XV.EtaleSite) (p : U.obj.left ⟶ T.obj.left), U.obj.hom ≫ jX.hom.hom = yoneda.map p ≫ T.obj.hom → (Scheme.Γ.map p.left.op).hom a = (Scheme.Γ.map p.left.op).hom b) → a = b)",
+  "branch": "sheaf-dag",
+  "by": "Q28",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The cartesian sheaf square specifies the fibre product up to its unique isomorphism. Quasi-compactness uses exactly affine small-etale scheme tests; schematic density is sectionwise joint detection by the charts of the inverse image, as in exists_qcOpen_schematicClosure."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-168e279a2",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Read Stacks 089D (spaces-morphisms.tex 6045-6062), the item node (snapshot vs live: only the lean record was added, no statement change, no new nodes), the delivered module, report.md, and the dependency declarations IsRepresentableWith/EtaleSite/structureSheaf (def-trf-algebraic-space), MapIsLocally/MapIsFlat, and OpenSubspace. Hypotheses: flat = MapIsFlat; open immersion = representable by IsOpenImmersion (the OpenSubspace predicate); qc = compact inverse image on every affine étale chart, matching the node's own definition; density = étale-chartwise injectivity of O_Y -> j_*O_V via joint detection on V-charts over T (equivalent because T x_Y V is itself such a chart; same formula as exists_qcOpen_schematicClosure); fibre product = IsPullback of sheaves, no arbitrary map. The conclusion has all three clauses for jX, neither weaker nor stronger; no extra assumptions; single universe u. Edge cases V empty (forces Y empty), identity, nilpotents: OK. lean.statement is verbatim in the file; the stmt_dep records exist and their modules are imported. No algebraic-space schematic-density duplicate in Sheaf, WeilConjectures or Mathlib. Docstrings carry the source place, blueprint id and the 5 proof steps; proof is sorry; no new definitions. Minor: the fibre-products stmt_dep module is imported without public (statement does not use it). No file changed, so no compile."
+ }
+}

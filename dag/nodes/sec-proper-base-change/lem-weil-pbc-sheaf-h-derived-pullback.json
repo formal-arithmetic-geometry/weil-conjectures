@@ -1,0 +1,161 @@
+{
+ "id": "lem-weil-pbc-sheaf-h-derived-pullback",
+ "kind": "statement",
+ "title": "Fixed inverse Ext evaluation transports normalized chart restriction",
+ "statement": "Let f:X→S be a scheme morphism, F an abelian etale sheaf on X, q a natural number and h:V'→V an etale chart map over S. Let b be the induced chart map and j,j' its projections. The inverse fixed evaluation [def-weil-pbc-etale-cohomology-presentation] of normalizationCohomologyRestriction(f,q,F,h)(x) equals H.map of the inverse upperStarComp(b,j,j') coefficient map applied to cohomologyMap(b) of inverse fixed evaluation of x. Here x is any element of rawAffineRestrictedCohomology(f,q,F,V) [def-sbc-raw-affine-restricted-cohomology], and restriction is the specified unit-Leray construction [def-weil-pbc-raw-restricted-normalization-data]. There is no coherent coefficient, raw higher-image class, theta map, or affine hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 01FT and 03FD, section-cohomology-sheaves and lemma-cohomology-modules-abelian-agree; derived adjunction-unit pullback as in Tag 07A6. Agent expansion of step 2 of lem-weil-pbc-affine-raw-evaluation-pullback."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-cohomology-presentation",
+  "def-sbc-raw-affine-restricted-cohomology",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-raw-restricted-normalization-data"
+ ],
+ "proof": [
+  {
+   "text": "Represent the Ext class as its shifted morphism. Use the proved transport_homology and pullback_commShift helpers to move derived section pullback through the represented morphism and the evaluation shift comparison. Inserting and cancelling the two exact single comparison isomorphisms gives evaluation_transport.",
+   "uses": [
+    "def-weil-pbc-derived-ext-evaluation",
+    "lem-sbc-restricted-derived-sections-shift-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply derivedSectionPullback_single_unit and rightDerivedSingleUnit_zero to the constant integer sheaf. The proved map_zero_comparison helper identifies the resulting zeroth-homology map with ordinary section pullback. Naturality of the canonical zeroth comparison inserts the constant-sheaf isomorphism. Its definition by leftAdjointUniq, together with unit_rightAdjointUniq_hom_app for the global-sections/terminal-sections comparison, shows that this map sends the source integer generator to the target generator.",
+   "uses": [
+    "lem-sbc-derived-section-single-unit",
+    "lem-sbc-derived-section-pullback-zero",
+    "def-weil-pbc-etale-cohomology-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the transport equation at the source generator. Mathlib Ext.mapExactFunctor_hom and Ext.comp_hom identify the transported represented morphism with cohomologyMap. The proved single_factor equation identifies pullback on the target single with rawAffineComplexPullback followed by its cochain single comparison. This proves the forward fixed-evaluation pullback formula.",
+   "uses": [
+    "def-weil-pbc-derived-ext-evaluation",
+    "def-sbc-raw-affine-restricted-cohomology",
+    "lem-sbc-derived-section-single-unit",
+    "def-weil-pbc-cohomology-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set r to the inverse evaluation of x. Apply injectivity of the target sheafHDerivedEquiv. Coefficient naturality sheafHToDerived_map and the forward pullback formula evaluate H.map of inverse upperStarComp after cohomologyMap. Cancel the forward/inverse evaluation at r, expand normalizationCohomologyRestriction, and use functoriality to identify both composites.",
+   "uses": [
+    "def-weil-pbc-etale-cohomology-presentation",
+    "new-sheaf-h-derived-naturality",
+    "def-weil-pbc-raw-restricted-normalization-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-derived-ext-evaluation",
+  "lem-sbc-restricted-derived-sections-shift-transport",
+  "lem-sbc-derived-section-single-unit",
+  "lem-sbc-derived-section-pullback-zero",
+  "def-weil-pbc-etale-cohomology-presentation",
+  "def-sbc-raw-affine-restricted-cohomology",
+  "def-weil-pbc-cohomology-pullback",
+  "new-sheaf-h-derived-naturality",
+  "def-weil-pbc-raw-restricted-normalization-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 01FT and 03FD, section-cohomology-sheaves and lemma-cohomology-modules-abelian-agree; derived adjunction-unit pullback as in Tag 07A6. Agent expansion of step 2 of lem-weil-pbc-affine-raw-evaluation-pullback. Formal proof by E3 using the existing unit, shift-transport and coefficient-naturality proofs; no new obligations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of Ext cohomology via right derived global sections commutes with inverse image of sheaves and pullback of the constant integer generator",
+   "results": "8 hits: Sheaf.H, cohomologyPresheafFunctor, projective/injective-resolution Ext comparisons. None compares the fixed derivedExtEvaluation with the derived adjunction-unit pullback.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections Ext evaluation is natural under inverse image pullback of sheaves",
+   "results": "8 hits, primarily Sheaf.ΓHomEquiv_naturality and pullback of free module sheaves. These are underived statements and do not assert the fixed evaluation square.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H.map",
+   "results": "12 hits: standard H.map functoriality and degree-zero formulas. No fixed total-derived evaluation pullback square.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafHToDerived|coherentEtaleRestrictionIso|leftAdjointCompIso_assoc",
+   "results": "Mathlib returns leftAdjointCompIso_assoc and its module-pullback specializations, not either project comparison. Local source search finds proved coefficient naturality SheafHDerivedNaturality and DerivedSectionSingleUnit, but no pullback theorem for sheafHToDerived.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineRawEvaluationPullback",
+  "date": "2026-10-26",
+  "group": "A8"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Tags 01FT and 03FD, section-cohomology-sheaves and lemma-cohomology-modules-abelian-agree; derived adjunction-unit pullback as in Tag 07A6. Agent expansion of step 2 of lem-weil-pbc-affine-raw-evaluation-pullback.",
+   "via": [
+    "lem-weil-pbc-affine-raw-evaluation-pullback",
+    "lem-weil-pbc-affine-cohomology-raw-restriction",
+    "lem-weil-pbc-affine-cohomology-etale-module-realization",
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SheafHDerivedPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/SheafHDerivedPullback.lean",
+  "declaration": "AlgebraicGeometry.Etale.sheafHDerivedEquiv_symm_restriction",
+  "statement": "theorem sheafHDerivedEquiv_symm_restriction {X S : Scheme.{u}} (f : X ⟶ S)\n    (q : ℕ) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (V V' : S.Etale) (h : V' ⟶ V) (x : rawAffineRestrictedCohomology f q F V) :\n    (sheafHDerivedEquiv\n      ((upperStar AddCommGrpCat.{u + 1} (pullback.snd V'.hom f)).obj F) q).symm\n        (normalizationCohomologyRestriction f q F h x) =\n      Sheaf.H.map\n        ((upperStarComp AddCommGrpCat.{u + 1} (normalizationChartMap f h)\n          (pullback.snd V.hom f) (pullback.snd V'.hom f)\n          ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f).map h).w.symm).inv.app\n            F) q\n        (cohomologyMap (normalizationChartMap f h)\n          ((upperStar AddCommGrpCat.{u + 1} (pullback.snd V.hom f)).obj F) q\n          ((sheafHDerivedEquiv\n            ((upperStar AddCommGrpCat.{u + 1} (pullback.snd V.hom f)).obj F) q).symm x))",
+  "branch": "sheaf-dag",
+  "by": "A8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261026T022800-L-440889",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261026T091422-L-3341047",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

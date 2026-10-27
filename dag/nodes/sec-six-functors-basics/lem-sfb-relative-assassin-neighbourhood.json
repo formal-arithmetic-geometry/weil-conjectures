@@ -1,0 +1,324 @@
+{
+ "id": "lem-sfb-relative-assassin-neighbourhood",
+ "kind": "statement",
+ "title": "Relative assassin points persist as generic points on nearby fibres",
+ "statement": "Let $f:X\\to S$ be a locally finite type morphism of schemes [def-pc-scheme, def-weil-finite-type-morphism], and let $F$ be a quasi-coherent $\\mathcal O_X$-module of finite type [pqf-def-coherent]. Let $\\xi\\in\\operatorname{Ass}_{X/S}(F)$ [def-trf-relative-assassin]. Give $Z=\\overline{\\{\\xi\\}}\\subseteq X$ its reduced induced closed subscheme structure [lem-weil-pbc-reduced-induced-closed-subscheme]. There exists a nonempty open subscheme $W\\subseteq Z$ [def-weil-open-immersion] such that, for every $s\\in f(W)$, the image in $X_s$ of every generic point of every irreducible component of $W_s$ belongs to $\\operatorname{Ass}_{X_s}(F_s)$ [def-sc-generic-point, def-weil-irreducible-components]. Here $W_s$ and $X_s$ are scheme-theoretic fibres [def-pc-scheme-fibre], $F_s$ is tensor pullback [def-pc-module-pullback], and $W_s\\to X_s$ is induced by $W\\to Z\\to X$. No flatness or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 05F1 (lemma-relative-assassin-in-neighbourhood), statement."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "pqf-def-coherent",
+  "def-trf-relative-assassin",
+  "def-sc-generic-point",
+  "def-weil-irreducible-components",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-weil-open-immersion",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine neighbourhood of $f(\\xi)$ and an affine neighbourhood $U$ of $\\xi$ over it on which $F$ is represented by $\\widetilde M$. We may work on these neighbourhoods: $Z\\cap U$ is open in $Z$, and associatedness is defined on stalks, which are unchanged on an open. Write the charts as $\\operatorname{Spec}A$, $U=\\operatorname{Spec}B$. The affine-pair criterion gives $B$ finite type over $A$, and the finite-type affine module criterion gives $M$ finite over $B$. Write $\\mathfrak q$ for $\\xi$ and $\\mathfrak p=\\mathfrak q\\cap A$. The affine fibre comparison identifies $U_s$ with $\\operatorname{Spec}(B\\otimes_A\\kappa(s))$, and tensor pullback identifies $F_s|_{U_s}$ with the module sheaf of $M\\otimes_A\\kappa(s)$. These fibre rings are finite type over fields (the images of a finite set of algebra generators still generate), hence Noetherian. By the relative-assassin definition and the affine associated-point comparison, the fibre prime of $\\xi$ is associated to $M\\otimes_A\\kappa(\\mathfrak p)$.",
+   "uses": [
+    "pqf-def-coherent",
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-affine-chart-base-change-iso",
+    "lem-weil-pbc-tilde-pullback-base-change",
+    "lem-wf-affine-noetherian-components",
+    "def-trf-relative-assassin",
+    "lem-sfb-affine-associated-points-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05F1 (lemma-relative-assassin-in-neighbourhood), first paragraph, affine charts and the associated generic-fibre prime"
+   }
+  },
+  {
+   "text": "Replace the rings and module by $A_0=A/\\mathfrak p$, $B_0=B/\\mathfrak pB$, $M_0=M/\\mathfrak pM$, and $\\mathfrak q_0=\\mathfrak q/\\mathfrak pB$. The domain $A_0$ injects into $B_0/\\mathfrak q_0=B/\\mathfrak q$; its fraction field is $K=\\kappa(\\mathfrak p)$. The fibre module at the generic point of $\\operatorname{Spec}A_0$ is the original $M\\otimes_A\\kappa(\\mathfrak p)$. Associated-prime transport from the fibre ring says precisely that $\\mathfrak q_0$ is the annihilator of an element of $M_0\\otimes_{A_0}K$ considered as a $B_0$-module. These replacements do not alter $Z\\cap U=\\operatorname{Spec}(B/\\mathfrak q)$. For a prime $\\mathfrak r\\supseteq\\mathfrak p$, the residue fields of $A$ at $\\mathfrak r$ and of $A_0$ at $\\mathfrak r/\\mathfrak p$ agree, and $(M/\\mathfrak pM)\\otimes_{A/\\mathfrak p}\\kappa(\\mathfrak r)=M\\otimes_A\\kappa(\\mathfrak r)$, since every element of $\\mathfrak p$ acts as zero on that field. The identical ring formula gives the same ambient fibres. Thus it suffices to prove the conclusion for $(A_0,B_0,M_0,\\mathfrak q_0)$; rename them $(A,B,M,\\mathfrak q)$, with $A$ a domain and $\\mathfrak q\\cap A=0$.",
+   "uses": [
+    "lem-trf-fibre-associated-primes-module-ring",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05F1 (lemma-relative-assassin-in-neighbourhood), first paragraph, quotient by the image prime and preservation of fibres"
+   }
+  },
+  {
+   "text": "Apply simultaneous generic flatness to the domain $A$, the finite-type $A$-algebra $B$, and the finite $B$-module $M$. Choose $0\\ne a\\in A$ so that $M_a$ is flat as an $A$-module. Set $B'=B[1/a]$, $M'=M[1/a]$, and $\\mathfrak q'=\\mathfrak qB'$. Here $B'$ remains finite type over $A$ (adjoin $a^{-1}$), $M'$ remains finite over $B'$, and $\\mathfrak q'$ is prime with contraction zero to $A$. Since $a$ is already invertible in $K$, the generic-fibre module and its associated point have not changed.",
+   "uses": [
+    "lem-trf-algebra-module-simultaneous-generic-flatness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05F1 (lemma-relative-assassin-in-neighbourhood), second paragraph, first generic-flatness application"
+   }
+  },
+  {
+   "text": "Choose $z\\in M'\\otimes_AK$ whose annihilator as a $B'$-module is $\\mathfrak q'$; the same fibre-associated-prime transport applies after localization. Write $z=m/c$ with $m\\in M'$ and $0\\ne c\\in A$. Multiplication by $c$ is invertible on this localization, so $m/1$ has the same annihilator as $z$. Flatness over the domain makes $M'$ torsion-free. The localization map $M'\\to M'\\otimes_AK$ is injective: an element in its kernel is killed by some nonzero element of $A$, hence is zero. Consequently $bm=0$ if and only if $b(m/1)=0$, and $\\operatorname{Ann}_{B'}(m)=\\mathfrak q'$. The explicit map $B'/\\mathfrak q'\\to M'$, $\\bar b\\mapsto bm$, is therefore well-defined and injective. Let $Q$ be its cokernel. The images of any finite generating set of $M'$ generate $Q$, so $Q$ is finite over $B'$.",
+   "uses": [
+    "lem-trf-fibre-associated-primes-module-ring",
+    "lem-trf-flat-module-torsionfree-domain",
+    "def-weil-pbc-annihilator-associated-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05F1 (lemma-relative-assassin-in-neighbourhood), third paragraph, the annihilator proof of the associated-prime lift and the cyclic injection"
+   }
+  },
+  {
+   "text": "Apply simultaneous generic flatness again, now to $A\\to B'$ and its finite module $Q$. Obtain $0\\ne b\\in A$ with $Q_b$ flat as an $A$-module. Set $B''=B'[1/b]$, $M''=M'[1/b]$, and $C=(B'/\\mathfrak q')[1/b]=(B/\\mathfrak q)[1/(ab)]$. Localizing the preceding short exact sequence gives $0\\to C\\to M''\\to Q_b\\to0$. Explicitly, a fraction in the kernel is killed by a power of $b$ in the original cokernel, so that multiplying its numerator by that power puts it in the original image; injectivity follows by the same fraction-zero criterion. Thus no finite-presentation hypothesis on $Q$ is needed.",
+   "uses": [
+    "lem-trf-algebra-module-simultaneous-generic-flatness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05F1 (lemma-relative-assassin-in-neighbourhood), third paragraph, second generic-flatness application and localization of the sequence"
+   }
+  },
+  {
+   "text": "For every prime $\\mathfrak r$ of $A$, flatness of the cokernel $Q_b$ and the flat-quotient tensor-injectivity theorem give an injection $C\\otimes_A\\kappa(\\mathfrak r)\\hookrightarrow M''\\otimes_A\\kappa(\\mathfrak r)$. Put $W=\\operatorname{Spec}C$, viewed as the principal open $D(ab)$ in $\\operatorname{Spec}(B/\\mathfrak q)=Z\\cap U$. The affine fibre and pullback comparisons identify $W_s$ with $\\operatorname{Spec}D_s$, where $D_s=C\\otimes_A\\kappa(s)$, and the ambient open fibre with $\\operatorname{Spec}R_s$, where $R_s=B''\\otimes_A\\kappa(s)$. The displayed injection is $R_s$-linear. Moreover $D_s=R_s/(\\mathfrak q B''\\cdot R_s)$: tensoring the quotient is the quotient by the images of its relations, as is checked by $\\bar x\\otimes\\lambda\\leftrightarrow(x\\otimes\\lambda)\\bmod\\mathfrak q$.",
+   "uses": [
+    "lem-weil-pbc-flat-quotient-tensor-injective",
+    "lem-weil-pbc-affine-chart-base-change-iso",
+    "lem-weil-pbc-tilde-pullback-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05F1 (lemma-relative-assassin-in-neighbourhood), third paragraph, universal injectivity and its fibre interpretation"
+   }
+  },
+  {
+   "text": "Fix $s\\in f(W)$ and any generic point $y$ of an irreducible component of $W_s=\\operatorname{Spec}D_s$. Its prime $P\\subset D_s$ is minimal. Both $R_s$ and its quotient $D_s$ are finite type over the field $\\kappa(s)$, hence Noetherian. The minimal-prime-associated theorem supplies $d\\in D_s$ with $\\operatorname{Ann}_{D_s}(d)=P$. Let $j:D_s\\hookrightarrow M''\\otimes_A\\kappa(s)$ be the injection above. For $r\\in R_s$, $rj(d)=0$ if and only if $\\bar r d=0$, since $j$ is injective. Hence the annihilator of $j(d)$ over $R_s$ is the inverse image of $P$, exactly the prime of the image of $y$ in the ambient fibre. The affine associated-point comparison implies that this image belongs to $\\operatorname{Ass}_{X_s}(F_s)$; associatedness on the ambient affine open is the same stalk condition as in $X_s$.",
+   "uses": [
+    "lem-wf-affine-noetherian-components",
+    "lem-weil-pbc-noetherian-minimal-prime-associated",
+    "lem-sfb-affine-associated-points-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05F1 (lemma-relative-assassin-in-neighbourhood), final sentences, minimal fibre primes are associated and injection preserves their annihilators"
+   }
+  },
+  {
+   "text": "Finally, the elements $a,b\\in A\\setminus\\{0\\}$ have nonzero images in the domain $B/\\mathfrak q$, because $\\mathfrak q\\cap A=0$. Thus $W=D(ab)\\subseteq Z\\cap U$ contains its generic point $\\xi$ and is nonempty. It is open in the original $Z$. The quotient-base identifications in Step 2 and the unchanged stalks on the chosen opens carry Step 7 back to the original $X,S,F$. This proves every asserted fibre-generic-point clause, without assuming the original base or source Noetherian or $F$ flat.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05F1 (lemma-relative-assassin-in-neighbourhood), completion of the affine reduction and nonemptiness of the chosen open"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-coherent",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-affine-chart-base-change-iso",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "lem-wf-affine-noetherian-components",
+  "def-trf-relative-assassin",
+  "lem-sfb-affine-associated-points-primes",
+  "lem-trf-fibre-associated-primes-module-ring",
+  "def-pc-scheme-fibre",
+  "lem-trf-algebra-module-simultaneous-generic-flatness",
+  "lem-trf-flat-module-torsionfree-domain",
+  "def-weil-pbc-annihilator-associated-primes",
+  "lem-weil-pbc-flat-quotient-tensor-injective",
+  "lem-weil-pbc-noetherian-minimal-prime-associated"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 05F1 (lemma-relative-assassin-in-neighbourhood), complete proof; associated-prime lift expanded by the torsion-free annihilator calculation, and final minimal-support argument applied on Noetherian finite-type fibres."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A relative associated point of a finite type quasi coherent module has an open neighbourhood whose fibre generic points remain associated",
+   "results": "{\"t\": \"2026-10-23T23:14:39Z\", \"tool\": \"leanfinder\", \"query\": \"A relative associated point of a finite type quasi coherent module has an open neighbourhood whose fibre generic points remain associated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"ModuleCat.Tilde.isLocallyFraction_pred\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"ModuleCat.Tilde.exists_const\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.isLocalization_basicOpen_of_qcqs\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"Algebra.QuasiFiniteAt.exists_basicOpen_eq_singleton\"], \"digest\": \"8a27cd4827d3f5d1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned statements concern stalk/localization, generic-point topology, or algebraic associated primes; none states relative associated-point neighbourhood persistence or specializes to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a locally finite type scheme morphism the closure of a fibre associated point contains a dense open whose fibre component generic points are associated to the original finite module",
+   "results": "{\"t\": \"2026-10-23T23:14:42Z\", \"tool\": \"leanfinder\", \"query\": \"For a locally finite type scheme morphism the closure of a fibre associated point contains a dense open whose fibre component generic points are associated to the original finite module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.Hom.denseRange\", \"AlgebraicGeometry.Scheme.PartialMap.dense_domain\", \"AlgebraicGeometry.Scheme.PartialMap.mem_domain_ofFromSpecStalk\", \"AlgebraicGeometry.IsFinite.finite_preimage_singleton\"], \"digest\": \"6b44563f2d92d95b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned statements concern stalk/localization, generic-point topology, or algebraic associated primes; none states relative associated-point neighbourhood persistence or specializes to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"associatedPrimes\"",
+   "results": "{\"t\": \"2026-10-23T23:14:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"associatedPrimes\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"associatedPrimes\", \"Submodule.associatedPrimes\", \"associatedPrimes.nonempty\", \"associatedPrimes.eq_empty_of_subsingleton\", \"AssociatedPrimes.mem_iff\", \"instIsPrimeValIdealMemSetAssociatedPrimes\", \"Submodule.instIsPrimeValIdealMemSetAssociatedPrimes\", \"associatedPrimes.prod\"], \"digest\": \"24a8bd47759a02f0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned statements concern stalk/localization, generic-point topology, or algebraic associated primes; none states relative associated-point neighbourhood persistence or specializes to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "associatedPrimes|relative.assassin",
+   "results": "{\"t\": \"2026-10-23T23:14:42Z\", \"tool\": \"grep\", \"query\": \"associatedPrimes|relative.assassin\", \"sub\": \"AlgebraicGeometry/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned statements concern stalk/localization, generic-point topology, or algebraic associated primes; none states relative associated-point neighbourhood persistence or specializes to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "relative assassin neighbourhood generic points of fibres",
+   "results": "{\"t\": \"2026-10-23T23:14:43Z\", \"tool\": \"leansearch\", \"query\": \"relative assassin neighbourhood generic points of fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsGenericPoint\", \"genericPoints\", \"isGenericPoint_iff_forall_closed\", \"genericPoint\", \"genericPoints.isGenericPoint\", \"isGenericPoint_iff_specializes\", \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"IsGenericPoint.mem\"], \"digest\": \"61d8d59481633eac\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned statements concern stalk/localization, generic-point topology, or algebraic associated primes; none states relative associated-point neighbourhood persistence or specializes to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "relative associated point closure has dense open with associated generic points in every fibre",
+   "results": "{\"t\": \"2026-10-23T23:46:39Z\", \"tool\": \"leanfinder\", \"query\": \"relative associated point closure has dense open with associated generic points in every fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsDominant.denseRange\", \"AlgebraicGeometry.Scheme.Hom.denseRange\", \"genericPoints.closure\", \"AlgebraicGeometry.isDominant_iff\", \"genericPoint_closure\", \"AlgebraicGeometry.dominant_eq_topologically\", \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"IsIrreducible.isGenericPoint_genericPoint_closure\"], \"digest\": \"e3b904631a8b32a1\"} Read hits: topology/dominance, flat going-down, or algebraic associated-prime results only; no relative-assassin persistence theorem. Mathlib associatedPrimes uses radicals outside Noetherian rings (AssociatedPrime/Basic.lean, lines 18–38), unlike the exact annihilator notion here.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "relative.assassin|associatedPrimes",
+   "results": "{\"t\": \"2026-10-23T23:47:00Z\", \"tool\": \"grep\", \"query\": \"relative.assassin|associatedPrimes\", \"sub\": \"AlgebraicGeometry/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read hits: topology/dominance, flat going-down, or algebraic associated-prime results only; no relative-assassin persistence theorem. Mathlib associatedPrimes uses radicals outside Noetherian rings (AssociatedPrime/Basic.lean, lines 18–38), unlike the exact annihilator notion here.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "relative associated point closure dense open fibre generic points associated finite type sheaf",
+   "results": "{\"t\": \"2026-10-23T23:47:01Z\", \"tool\": \"leansearch\", \"query\": \"relative associated point closure dense open fibre generic points associated finite type sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"genericPoints\", \"IsGenericPoint\", \"IsGenericPoint.def\", \"isGenericPoint_closure\", \"isGenericPoint_iff_forall_closed\", \"AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion\", \"IsGenericPoint.mem_closed_set_iff\", \"isGenericPoint_iff_specializes\"], \"digest\": \"2730344eaee92b25\"} Read hits: topology/dominance, flat going-down, or algebraic associated-prime results only; no relative-assassin persistence theorem. Mathlib associatedPrimes uses radicals outside Noetherian rings (AssociatedPrime/Basic.lean, lines 18–38), unlike the exact annihilator notion here.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"associatedPrimes\"",
+   "results": "{\"t\": \"2026-10-23T23:47:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"associatedPrimes\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"associatedPrimes\", \"Submodule.associatedPrimes\", \"associatedPrimes.nonempty\", \"associatedPrimes.eq_empty_of_subsingleton\", \"AssociatedPrimes.mem_iff\", \"instIsPrimeValIdealMemSetAssociatedPrimes\", \"Submodule.instIsPrimeValIdealMemSetAssociatedPrimes\", \"associatedPrimes.prod\"], \"digest\": \"24a8bd47759a02f0\"} Read hits: topology/dominance, flat going-down, or algebraic associated-prime results only; no relative-assassin persistence theorem. Mathlib associatedPrimes uses radicals outside Noetherian rings (AssociatedPrime/Basic.lean, lines 18–38), unlike the exact annihilator notion here.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "generic flatness implies associated points of fibres persist on open part of closure",
+   "results": "{\"t\": \"2026-10-23T23:47:02Z\", \"tool\": \"leanfinder\", \"query\": \"generic flatness implies associated points of fibres persist on open part of closure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.generalizingMap\", \"RingHom.Flat.generalizingMap_comap\", \"Algebra.HasGoingDown.of_flat\", \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.Flat.instResLE\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget\"], \"digest\": \"a1ccb9e5eb3e4e33\"} Read hits: topology/dominance, flat going-down, or algebraic associated-prime results only; no relative-assassin persistence theorem. Mathlib associatedPrimes uses radicals outside Noetherian rings (AssociatedPrime/Basic.lean, lines 18–38), unlike the exact annihilator notion here.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-generic-fibre-assassin-noncontainment-spreads",
+  "date": "2026-10-24",
+  "group": "N0"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tags 0CX4 (situation-existence), 0CXB (theorem-existence). Supporting input in 0CXB: Tags 0CVI (lemma-proper-pure), 0CX2 (lemma-when-universal-flattening), part (1), and 0CWX (situation-flat), defining the flat base-change functor; scheme representability: spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme), as invoked in 0CXB (theorem-existence). Subinput: Tag 0CX1 (theorem-flat-dimension-n-representable), specialized to a scheme base and universal purity (which implies the pure hypothesis); chart formulation of flatness in dimensions at least n: Tags 0CWS (lemma-pre-flat-dimension-n) and 0CWT (definition-flat-dimension-n). Subinput of the dimension induction: Tag 0CVV (spaces-divisors-lemma-relative-assassin-constructible) and Tag 05LW (morphisms-lemma-constructible-containing-open). Subinput of 0CVV: its final sentence reducing to the scheme theorem 05KR. Subinput of 05KR: final paragraph, application of lemma-bad-case on the irreducible closed subscheme when its generic point fails containment. Repair of the erroneous proof of 05KN: use the preceding Tag 05F1 (lemma-relative-assassin-in-neighbourhood) for the closure of one associated point outside U.",
+   "via": [
+    "lem-sfb-generic-fibre-assassin-noncontainment-spreads",
+    "lem-sfb-scheme-assassin-open-constructible",
+    "lem-sfb-space-assassin-containment-constructible",
+    "lem-sfb-space-pure-dimension-flatness-representability",
+    "lem-sfb-space-proper-support-universal-flattening",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-assassin-neighbourhood",
+  "worker": "stage1",
+  "summary": "Checked Tag 05F1 and wrote its affine/quotient reduction, two generic-flatness applications, explicit torsion-free annihilator lift, fibrewise injection and minimal-prime conclusion. Reused existing DAG statements throughout; created no nodes and made no statement change. Noetherianity is established only for finite-type fibre rings. Project-source and logged Mathlib searches found no attachment or leaf.",
+  "blueprint": "Supplies the Tag 05F1 subinput of the immediate parent lem-sfb-generic-fibre-assassin-noncontainment-spreads, itself supporting the inherited constructible direct-image/alteration chain below sk-thm-sf-ctf-stability. Current latest blueprint proof: paragraph beginning “Proper direct image preserves”, compactification f=pj. Item blueprint.from has null node as inherited from the live DAG; preserved it and its explicit provenance/via chain. Whole-blueprint searches for relative assassin, associated point, generic flatness and 05F1 found no duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Affine module finiteness is a generic dictionary lemma needed for both generic-flatness applications; the unit does not state it."
+   },
+   {
+    "node": "lem-weil-pbc-affine-chart-base-change-iso",
+    "why": "Generic affine fibre identification by tensor rings, used as a scheme-theoretic tool, not a replacement for the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-tilde-pullback-base-change",
+    "why": "Generic affine tensor-pullback comparison identifies the fibre module with the tensor module; the unit has no such dictionary statement."
+   },
+   {
+    "node": "lem-trf-fibre-associated-primes-module-ring",
+    "why": "Restriction from the fibre ring transports exact annihilator primes, with no Noetherian assumption on the base; used only as generic commutative algebra."
+   },
+   {
+    "node": "lem-trf-algebra-module-simultaneous-generic-flatness",
+    "why": "Generic flatness for a finite module over a finite-type algebra over a domain; invoked twice exactly as in the source, not an alternative unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-affine-chart-base-change-iso",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "lem-trf-fibre-associated-primes-module-ring",
+  "lem-trf-algebra-module-simultaneous-generic-flatness"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q82-5ef3a9290",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-5ef3a9290 (reviewer sub-agent of L); spot-checked: I read Stacks 05F1 (more-morphisms.tex 6841-6905): the statement and the whole proof. The item's hypotheses (f locally of finite type, F quasi-coherent of finite type) and its conclusion match the source; by def-trf-relative-assassin, Ass_{X_s}(F_s) is the same condition as Ass_{X/S}(F). The delivery has no new nodes and is the item's first split, so the re-split rule does not apply; it uses no SGA source. I checked the 8 steps against the cited statements. Step 1 reduces to affine charts, with Noetherian fibre rings so that the converse of 02OK applies. Step 2 uses 05E0 transport and the quotient by p, whose fibres are identified explicitly. Steps 3 and 5 use generic flatness twice; its hypotheses hold and it gives A-flatness. Step 4 replaces 05C1 by a torsion-free annihilator lift: the map M' -> M' tensor K is injective, so Ann(m) = q'. Step 6 uses 00HL with N = kappa(r). Step 7 takes a minimal prime of the Noetherian ring D_s, which is associated by the 05BV leaf; injectivity pulls its annihilator back to the ambient prime, and the forward direction of 02OK finishes. Step 8 is elementary: ab is nonzero in the domain B/q. Small cases checked: a nonreduced fibre, a vertical xi, q not finitely generated, a field base. No duplicate of the item: 05F1 is also cited by the parent and by the 05KR node, and the flat-specialization trf node needs flatness. The three batch-5 flags (trf fibre-associated-primes 05E0, simultaneous generic flatness 051T, flat-implies-torsion-free Mathlib leaf) are pure commutative algebra; their closures (6, 11 and 0 nodes) reach no trace-formula, Poincare or target node. They are accepted as genuinely outside both assumptions. The 5 tool_uses are accepted as generic dictionary and algebra lemmas. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeAssassinNeighbourhood",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.relativeAssassin_neighbourhood",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeAssassinNeighbourhood.lean",
+  "statement": "theorem relativeAssassin_neighbourhood {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] (F : X.Modules) (hF : F.IsQuasiCoherentFiniteType) (ξ : X) (hξ : ξ ∈ relativeAssassin f F) : ∃ W : (Scheme.IdealSheafData.vanishingIdeal ⟨closure ({ξ} : Set X), isClosed_closure⟩).subscheme.Opens, W.carrier.Nonempty ∧ ∀ s : S, s ∈ Set.range (W.ι ≫ (Scheme.IdealSheafData.vanishingIdeal ⟨closure ({ξ} : Set X), isClosed_closure⟩).subschemeι ≫ f) → ∀ C : Set ((W.ι ≫ (Scheme.IdealSheafData.vanishingIdeal ⟨closure ({ξ} : Set X), isClosed_closure⟩).subschemeι ≫ f).fiber s), C ∈ irreducibleComponents ((W.ι ≫ (Scheme.IdealSheafData.vanishingIdeal ⟨closure ({ξ} : Set X), isClosed_closure⟩).subschemeι ≫ f).fiber s) → ∀ y : (W.ι ≫ (Scheme.IdealSheafData.vanishingIdeal ⟨closure ({ξ} : Set X), isClosed_closure⟩).subschemeι ≫ f).fiber s, IsGenericPoint y C → (pullback.map _ _ f (S.fromSpecResidueField s) (W.ι ≫ (Scheme.IdealSheafData.vanishingIdeal ⟨closure ({ξ} : Set X), isClosed_closure⟩).subschemeι) (𝟙 _) (𝟙 S) (by simp only [Category.comp_id, Category.assoc]) (by simp only [Category.comp_id, Category.id_comp])) y ∈ associatedPoints ((tensorPullback (f.fiberι s)).obj F)",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b273eaca5",
+  "group": "Q25",
+  "result": "fix",
+  "note": "Lean matches node and Stacks 05F1 (more-morphisms.tex 6841-6850) clause by clause: LocallyOfFiniteType only, IsQuasiCoherentFiniteType, hξ ∈ relativeAssassin, Z = vanishingIdeal(closure{ξ}).subscheme (real reduced induced), ∃ W : Opens nonempty, s ∈ range(W.ι≫subschemeι≫f), ∀ irreducible components and ∀ generic points of W_s, canonical pullback.map into f.fiber s, ∈ associatedPoints(tensorPullback (f.fiberι s) F) (same defs as relativeAssassin, so equivalent to the source's Ass_{X/S}). lean.statement verbatim, stmt_deps unchanged, no new nodes, one sorry, docstrings with source/blueprint/8-step proof, universe u arbitrary. Sole fault H11: Second reading is a worker self-check → FIX fixes/lem-sfb-relative-assassin-neighbourhood.report.md (Worker report verbatim + real clause-by-clause second reading). Advisory: theorem stmt_dep reduced-induced-closed-subscheme was already in the base node."
+ }
+}

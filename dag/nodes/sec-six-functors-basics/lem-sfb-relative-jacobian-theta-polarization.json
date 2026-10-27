@@ -1,0 +1,275 @@
+{
+ "id": "lem-sfb-relative-jacobian-theta-polarization",
+ "kind": "statement",
+ "title": "Relative theta autoduality of smooth curve Picard spaces",
+ "statement": "Let $S$ be a locally Noetherian scheme [def-pc-scheme, pqf-def-locnoeth], let $g\\geq2$, and let $C\\to S$ be a smooth stable unpointed genus-$g$ family [def-sfb-stable-pointed-moduli-groupoids]. Suppose the degree-zero part $J$ of the relative Picard fppf sheaf [sk-def-picard-pic] is represented by an algebraic space [def-trf-algebraic-space]. Then $J\\to S$ is a proper smooth commutative group algebraic space of finite presentation with geometrically connected fibres; its geometric fibres are abelian varieties (smooth proper geometrically connected group schemes). Here proper means separated, of finite type and universally closed, and smoothness and finite presentation of spaces are tested on etale scheme charts. The Picard description gives canonical identifications $J\\times_SS'\\simeq\\operatorname{Pic}^0_{C_{S'}/S'}$ for every locally Noetherian $S'\\to S$, satisfying identity and composition.\n\nLet $J^\\vee$ be the dual abelian algebraic space, representing identity-rigidified line modules on $J$ algebraically trivial on geometric fibres, as in [lem-sfb-abelian-space-poincare-calculus]. There is a canonical isomorphism of group algebraic spaces $\\lambda_C:J\\xrightarrow{\\sim}J^\\vee$. On a geometric fibre over an algebraically closed field $K$, choose any $p\\in C(K)$ and identify $\\operatorname{Pic}^{g-1}(C)$ with $J_K$ by $D\\mapsto[\\mathcal O_C(D-(g-1)p)]$. The effective-divisor theta locus gives an ample invertible module $L$ on $J_K$ [def-sc-invertible-module, def-weil-pbc-ample-invertible-module], and $(\\lambda_C)_K=\\phi_L$, where $\\phi_L(x)=[t_x^*L\\otimes L^{-1}]$ and $t_x$ is translation by $x$. This morphism is independent of $p$ and of translation of the theta divisor. Formation of $\\lambda_C$ commutes with every base change between locally Noetherian schemes under the Picard and dual identifications. If $u:C\\xrightarrow{\\sim}D$ is an $S$-isomorphism of such families and $a=(u^{-1})^*:J_C\\xrightarrow{\\sim}J_D$, then $a^\\vee\\lambda_Da=\\lambda_C$, where $a^\\vee$ is pullback of rigidified line modules. These identifications respect identity and composition. No line module on $J$ realizing the theta class over $S$ is asserted.",
+ "source": {
+  "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+  "place": "Section 4.1, printed pp.141--142, relative Jacobian autoduality input. Geometric theta statement: Milne, Abelian Varieties, III §6, Theorem 6.6 and Summary 6.11, printed pp.105--108. Local Deligne PDF WANTED; read the primary Numdam PDF online.",
+  "url": "https://www.numdam.org/item/AST_1985__127__131_0.pdf"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "sk-def-picard-pic",
+  "def-trf-algebraic-space",
+  "lem-sfb-abelian-space-poincare-calculus",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "def-sfb-relative-jacobian-theta-data"
+ ],
+ "proof": [
+  {
+   "text": "The stable-family hypotheses give a flat finitely presented projective-bundle curve with nonempty connected reduced nodal geometric fibres; smooth fibres are included. On a smooth connected geometric curve there is just one irreducible component, so multidegree zero is degree zero. Thus the represented subfunctor in the nodal Picard theorem is exactly $J$. That theorem gives the separated smooth commutative group structure, finite presentation, geometrically integral fibres, etale-local schematicness and the asserted Picard base-change and curve-isomorphism identifications. On a geometric fibre the curve is smooth projective and geometrically connected. The general-field Jacobian theorem identifies its degree-zero Picard functor with an abelian variety. Uniqueness of a representing object identifies this variety with $J_{\\bar s}$. Apply the connected-proper-fibres criterion to $J\\to S$: it is separated, flat (being smooth), finitely presented, and every geometric fibre is nonempty connected and proper. This proves properness and all first-paragraph geometric assertions. The Picard comparisons are canonical on test schemes, so their identity and composition follow from those of pullback.",
+   "uses": [
+    "lem-sfb-nodal-picard-etale-schematic",
+    "thm-pd-jacobian-general-field",
+    "lem-sfb-connected-proper-fibres-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III Section 8, Theorem 8.1 and smooth-family discussion; Deligne Sections 1.1 and 4.6."
+   }
+  },
+  {
+   "text": "Apply the degree-$g-1$ theta-torsor theorem. Write $\\mathcal T$ for its canonical line module and choose an etale cover with sections $p_i$ of $C$. On $J_i=J\\times_SS_i$ put $L_i=\\beta_{p_i}^*\\mathcal T$. The Poincare calculus gives homomorphisms $\\phi_{L_i}:J_i\\to J_i^\\vee$. On an overlap put $a=[\\mathcal O_C((g-1)(p_j-p_i))]\\in J(S_{ij})$. Directly on line-module classes, $\\beta_{p_j}=\\beta_{p_i}\\circ t_a$, so $L_j\\simeq t_a^*L_i$. This identity is over the whole overlap, including its nilpotents.",
+   "uses": [
+    "lem-sfb-relative-degree-gminusone-theta",
+    "lem-sfb-abelian-space-poincare-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III Sections 6 and 8; relative determinant theta construction described in the new input."
+   }
+  },
+  {
+   "text": "Here is the translation calculation needed to glue. For a line module $L$ on an abelian space $A$, let $N_L$ be the normalized difference module of the Poincare node. On $A\\times A$, with variables $x,y$, direct cancellation in its defining tensor formula gives\n$$N_{t_a^*L}(x,y)\\simeq N_L(x+a,y)\\otimes N_L(a,y)^{-1}.$$\nThe factors from the identity restrictions are precisely those required to normalize both axes. Biadditivity of $N_L=(1\\times\\phi_L)^*\\mathcal P_A$ identifies the right hand side with $N_L(x,y)$. Representability of the rigidified Picard functor gives $\\phi_{t_a^*L}=\\phi_L$. Consequently the homomorphisms in Step 2 agree on every overlap, for arbitrary test schemes. Since algebraic spaces are fppf sheaves and maps are natural transformations, glue these equal maps to a unique homomorphism $\\lambda_C:J\\to J^\\vee$. Replacing the cover or its sections gives the same map by the identical calculation on a common refinement.",
+   "uses": [
+    "lem-sfb-abelian-space-poincare-calculus",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Section 8, normalized difference families; elementary tensor cancellation and sheaf gluing."
+   }
+  },
+  {
+   "text": "Fix a geometric fibre over an algebraically closed field $K$ and a point $p\\in C(K)$. Put $A=J_K$, $f=f_p$ and $\\Theta=W_{g-1}$. The theta-torsor theorem identifies $L_p$ with $\\mathcal O_A(\\Theta)$, so $(\\lambda_C)_K=\\phi_{L_p}$. The Abel-image theorem supplies $f$ and the normalized universal degree-zero module $\\mathcal M_p$ on $C\\times A$. Restrict $(f\\times1)^*\\mathcal P_A$ on $C\\times A^\\vee$. Its degrees form a locally constant function on connected $A^\\vee$, equal to zero at its identity. The universal property of $\\mathcal M_p$ therefore defines a morphism $r:A^\\vee\\to A$ classifying this family, normalized at $p$. It is a homomorphism: pulling back the second biadditivity isomorphism $(1,m_{A^\\vee})^*\\mathcal P_A\\simeq p_{12}^*\\mathcal P_A\\otimes p_{13}^*\\mathcal P_A$ of the Poincare node along $f\\times1\\times1$ shows that $r\\circ m_{A^\\vee}$ classifies the tensor product of the families classified by $r\\circ p_1$ and $r\\circ p_2$, and tensor product is the group law of $A$. Put $L^-=\\mathcal O_A([-1]^*\\Theta)$. The theta--Poincare pullback identity says\n$$(f\\times[-1])^*N_{L^-}\\simeq\\mathcal M_p.$$\nUsing $N_{L^-}=(1\\times\\phi_{L^-})^*\\mathcal P_A$ and the classifying property of $r$, this equality gives $r\\circ\\phi_{L^-}\\circ[-1]=\\mathrm{id}_A$ as morphisms, on all test schemes. The dual-variety calculus states $\\dim A^\\vee=\\dim A$. Apply the equal-dimension abelian-retract theorem with $s=\\phi_{L^-}\\circ[-1]$ and retraction $r$. It follows that $s$, and hence $\\phi_{L^-}$, is an isomorphism. This treats the scheme-theoretic map, including infinitesimal kernels, rather than only its geometric points.",
+   "uses": [
+    "lem-sfb-relative-degree-gminusone-theta",
+    "lem-sfb-symmetric-abel-image-geometry",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-pd-degree-locally-constant",
+    "lem-sfb-theta-poincare-pullback",
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sfb-equal-dimension-abelian-retract"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III Lemmas 6.8(b), 6.9 and Theorem 6.6, printed pp.106--107; I Section 8."
+   }
+  },
+  {
+   "text": "The same biadditivity also treats inversion: $N_{[-1]^*L}=([-1]\\times[-1])^*N_L\\simeq N_L$, since negating each variable in a biadditive family cancels the two inverses. Thus $\\phi_{L^-}=\\phi_{L_p}$. Step 4 proves $(\\lambda_C)_K$ is an isomorphism; the effective-divisor ampleness criterion in the dual-variety calculus gives ampleness of $L_p$, since an isomorphism is an isogeny (surjective with finite trivial kernel). Changing $p$ changes the identification with $\\operatorname{Pic}^{g-1}$ by translation, so Step 3 proves the stated independence; an arbitrary translated theta divisor is covered by the same formula. This calculation applies also in characteristic two and uses neither division by two nor a theta characteristic.",
+   "uses": [
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-abelian-polarization-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Section 8 and III Theorem 6.6 and Summary 6.11, printed pp.105--108."
+   }
+  },
+  {
+   "text": "Apply the algebraic-space universal isomorphism-open theorem to $A=J$, $C=J^\\vee$, $B=S$ and $f=\\lambda_C$. The source is flat and locally finitely presented by Step 1, and universally closed by its properness. The dual is proper and of finite presentation by the Poincare node, so its structure morphism is locally of finite type, closed and separated. The theorem yields an open $U\\subseteq S$ with its universal property. Every geometric point factors through $U$ by Steps 4--5. Its complement has no points, hence $U=S$. Therefore $\\lambda_C$ is an isomorphism. This argument requires flatness of the source, rather than trying to deduce a morphism equality from geometric fibres. For empty $S$, the open is automatically all of $S$.",
+   "uses": [
+    "lem-sfb-space-universal-isomorphism-open",
+    "lem-sfb-abelian-space-poincare-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05XD, spaces-more-morphisms-lemma-where-isomorphism; six hypotheses verified above."
+   }
+  },
+  {
+   "text": "The theta pair and the torsor identifications commute with arbitrary locally Noetherian base change by the theta-torsor theorem; normalized difference modules and duality commute with it by the Poincare node. Pulling back Step 2 therefore gives exactly the same local homomorphisms for $C_{S'}$, and their glued map is $(\\lambda_C)_{S'}$. For $u:C\\xrightarrow{\\sim}D$, let $a=(u^{-1})^*$ on $J$ and $b=(u^{-1})^*$ on the degree-$g-1$ torsors. With section $p$ on $C$ and $u(p)$ on $D$, one has $b\\beta_p=\\beta_{u(p)}a$ and $b^*\\mathcal T_D\\simeq\\mathcal T_C$. Hence $a^*L_{u(p)}\\simeq L_p$. On a test point $x$, $a\\circ t_x=t_{a(x)}\\circ a$ gives\n$$a^\\vee\\phi_{L_{u(p)}}a(x)=[t_x^*a^*L_{u(p)}\\otimes(a^*L_{u(p)})^{-1}]=\\phi_{L_p}(x).$$\nThus $a^\\vee\\lambda_Da=\\lambda_C$ on the cover and globally. Identity and composition hold because the torsor and dual comparisons obey them and the glued map is unique. The construction used line modules only on the degree-$g-1$ torsor and its local trivializations; it does not require a global theta line module on $J$.",
+   "uses": [
+    "lem-sfb-relative-degree-gminusone-theta",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III Sections 6 and 8; Deligne Section 4.1, printed pp.141--142, arbitrary base change."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-nodal-picard-etale-schematic",
+  "thm-pd-jacobian-general-field",
+  "lem-sfb-connected-proper-fibres-proper",
+  "lem-sfb-relative-degree-gminusone-theta",
+  "lem-sfb-abelian-space-poincare-calculus",
+  "def-trf-algebraic-space",
+  "lem-sfb-symmetric-abel-image-geometry",
+  "lem-pd-degree-locally-constant",
+  "lem-sfb-theta-poincare-pullback",
+  "lem-sfb-abelian-polarization-calculus",
+  "lem-sfb-equal-dimension-abelian-retract",
+  "lem-sfb-space-universal-isomorphism-open"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "III Sections 6 and 8 and Deligne Section 4.1; relative assembly through the degree-g-minus-one determinant torsor."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Relative Jacobian of a smooth proper curve has a canonical principal theta polarization compatible with arbitrary base change",
+   "results": "8 hits; actual logged top results: WeierstrassCurve.toJacobian, WeierstrassCurve.Jacobian, WeierstrassCurve.Jacobian.Equation.baseChange, WeierstrassCurve.Jacobian.baseChange_equation, WeierstrassCurve.Jacobian.baseChange_add, WeierstrassCurve.Jacobian.baseChange_nonsingular, WeierstrassCurve.Jacobian.baseChange_polynomial, WeierstrassCurve.baseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: the inspected results concern Weierstrass Jacobian coordinates, affine ring Picard groups, ordinary module duality, scheme pullbacks or root-system polarization; none states duality or theta polarization for relative Picard algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The degree zero Picard space of a smooth proper family of curves has a theta divisor locally whose line bundle defines an isomorphism to its dual",
+   "results": "8 hits; actual logged top results: CommRing.Pic.inv_eq_dual, CommRing.Pic.mk_dual, CommRing.Pic.AsModule, CommRing.relPic, CommRing.Pic.mk_eq_mk_iff, CommRing.Pic.ext_iff, CommRing.Pic.mk_eq_iff, Submodule.unitsQuotEquivRelPic_apply_coe",
+   "date": "2026-10-23",
+   "verdict": "no match: the inspected results concern Weierstrass Jacobian coordinates, affine ring Picard groups, ordinary module duality, scheme pullbacks or root-system polarization; none states duality or theta polarization for relative Picard algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Picard\", \"polarization\"",
+   "results": "0 hits; actual logged top results: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the inspected results concern Weierstrass Jacobian coordinates, affine ring Picard groups, ordinary module duality, scheme pullbacks or root-system polarization; none states duality or theta polarization for relative Picard algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "Picard|[Jj]acobian|[Tt]heta",
+   "results": "21 hits; actual logged top results: Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Point.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Point.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Point.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Point.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Point.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the inspected results concern Weierstrass Jacobian coordinates, affine ring Picard groups, ordinary module duality, scheme pullbacks or root-system polarization; none states duality or theta polarization for relative Picard algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Jacobian of a smooth projective curve has a principal theta polarization invariant under translations and functorial under isomorphisms",
+   "results": "Actual search: 8 hits; WeierstrassCurve.toJacobian, WeierstrassCurve.Jacobian.PointClass, WeierstrassCurve.Jacobian.comp_equiv_comp, WeierstrassCurve.Jacobian.Point.point, WeierstrassCurve.Jacobian.Point.toAffineAddEquiv_apply, WeierstrassCurve.Jacobian.map_equation, WeierstrassCurve.Jacobian.Equation.map, WeierstrassCurve.ofJ_j; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern Weierstrass coordinates, ring Picard groups, linear duals, convex ample sets or ordinary scheme isomorphisms; none states this relative Picard or abelian-divisor theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A torsor under an abelian scheme with a line bundle defines a homomorphism to the dual independent of translation and compatible with base change",
+   "results": "Actual search: 8 hits; IsBaseChange.dual, Module.Dual.baseChange, IsBaseChange.toDualBaseChange_tmul, AddTorsor.noConfusionType, AddTorsor.noConfusion, IsBaseChange.transvection, IsBaseChange.toDual_apply, AddTorsor; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern Weierstrass coordinates, ring Picard groups, linear duals, convex ample sets or ordinary scheme isomorphisms; none states this relative Picard or abelian-divisor theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Picard\", \"polarization\"",
+   "results": "Actual search: 0 hits; ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern Weierstrass coordinates, ring Picard groups, linear duals, convex ample sets or ordinary scheme isomorphisms; none states this relative Picard or abelian-divisor theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "Poincare|polarization|autodual|[Tt]heta",
+   "results": "Actual search: 0 hits; ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern Weierstrass coordinates, ring Picard groups, linear duals, convex ample sets or ordinary scheme isomorphisms; none states this relative Picard or abelian-divisor theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-jacobian-canonical-line",
+  "date": "2026-10-23",
+  "group": "Q131"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative theta autoduality of smooth curve Picard spaces.",
+   "via": [
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-relative-jacobian-theta-polarization",
+  "worker": "stage1",
+  "summary": "Reused nodal Picard geometry and properness, the Abel theta geometry and normalized theta--Poincare identity, equal-dimension abelian retracts, field polarization calculus and the space isomorphism-open theorem. Added only the relative degree-g-minus-one theta torsor construction. Constructed and glued local homomorphisms by an explicit translation identity, proved geometric invertibility by an abelian retract, then relative invertibility and all functorialities. No statement change.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative theta autoduality of smooth curve Picard spaces.",
+  "tool_uses": [
+   {
+    "node": "thm-pd-jacobian-general-field",
+    "why": "Generic field representability identifies the geometric Picard fibres as abelian varieties; no relative-theta argument is replaced."
+   },
+   {
+    "node": "lem-pd-degree-locally-constant",
+    "why": "Generic degree local constancy for a line-module family on a fixed smooth projective curve, used only to classify the pullback Poincare family; no unit node supplies this general fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-pd-jacobian-general-field",
+  "lem-pd-degree-locally-constant"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NS-61d607be1",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-61d607be1 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 7 steps, the new node lem-sfb-relative-degree-gminusone-theta, and the statement of every cited node. Checked against Milne AV III §6 pp.105-108: the paragraph before Thm 6.6 (ampleness iff φ is an isogeny; Θ changes by a translate), Thm 6.6, Lemmas 6.7-6.9 and Summary 6.11. Step 4 is Milne 6.8(b)/6.9: (f×[-1])^*N_{L^-}=(1×r∘s)^*M_p≅M_p gives r∘s=id. There is no repair note, so this is a normal split. Over the snapshot DAG the item's closure has 14664 nodes and does not contain the item, so there is no cycle. No cited node is missing or merged. Step checks: (1) the stable-curve definition gives every nodal-Picard hypothesis; D=J because a smooth fibre has one component; the general-field Jacobian theorem makes the fibres abelian varieties; the connected-proper-fibres criterion gives properness. (2) β_{p_j}=β_{p_i}∘t_a, with a=[O((g-1)(p_j-p_i))], recomputed. (3) N_{t_a^*L}(x,y)≅N_L(x+a,y)⊗N_L(a,y)^{-1}, recomputed by hand; biadditivity gives φ_{t_a^*L}=φ_L; maps glue because J^∨ is a sheaf. (5) φ_{[-1]^*L}=φ_L, and the polarization calculus's effective-divisor criterion gives ampleness. (6) All six hypotheses of the space isomorphism-open theorem hold; U contains every geometric point, so U=S. (7) b∘β_p=β_{u(p)}∘a, a^*L_{u(p)}≅L_p, and a^∨φa=φ by a∘t_x=t_{a(x)}∘a. New node: true (χ=0, equal ranks; twisting by a line cancels in det; the determinantal divisor is reduced and equals W_{g-1}; the fibrewise non-zero-divisor criterion makes it flat and Cartier). Small cases: empty S, g=2, dual numbers, no global section, characteristic 2. A rg -L search over the DAG for theta, Pic^{g-1}, Pic^d, determinant, torsor and autodual found no duplicate. The node is strictly smaller than the item, so it restates no clause of it. Accepted tool_uses: thm-pd-jacobian-general-field and lem-pd-degree-locally-constant, both generic black boxes. Batch-5: every flagged citation is a definition or a generic geometry or Picard fact, none part of the proof of the trace formula or of Poincaré duality, so accepted (table in review.md). FIXES: (E1) Step 4 applies the equal-dimension retract lemma, which needs r to be a homomorphism, and never shows it. I added one sentence: second-variable Poincaré biadditivity pulled back along f×1×1. (B3) The new node used Cartier divisor and flatness, which are scheme notions, on the algebraic space P. I made both chartwise, cited def-sfb-space-morphism-properties, cited thm-pc-hilb-curves for the domain of the Abel map, and added both ids to stmt_deps. The statement's mathematics is unchanged.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeJacobianThetaPolarization",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.relativeJacobian_theta_polarization",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeJacobianThetaPolarization.lean",
+  "statement": "theorem relativeJacobian_theta_polarization {R : Scheme.{u}} {genus : ℕ} (X : StablePointedModuli R genus 0) [IsLocallyNoetherian X.base.left] [Smooth X.projection] (J : AlgebraicSpace X.base.left) (e : Presentation (B := Over.mk (𝟙 X.base.left)) X.projection J (groupSpaceProjection J)) : ∃ gJ : CommutativeSpaceGroup J, TensorCompatible X.projection J e gJ ∧ IsAbelianFamily (groupSpaceProjection J) ∧ ∀ (D : AlgebraicSpace X.base.left) (gD : CommutativeSpaceGroup D) (P : (product (groupSpaceProjection J) (groupSpaceProjection D)).SmallModules) (r : Axes (pointedGroup J gJ) (pointedGroup D gD) P), IsAbelianFamily (groupSpaceProjection D) → Represents (pointedGroup J gJ) (pointedGroup D gD) P r → ∃! lam : J ⟶ D, IsHom gJ gD lam ∧ IsIso lam ∧ GeometricTheta (B := Over.mk (𝟙 X.base.left)) X.projection genus (pointedGroup J gJ) (pointedGroup D gD) e P lam ∧ UniversalThetaBaseChange X.projection genus (pointedGroup J gJ) (pointedGroup D gD) e P r lam ∧ CurveIsomorphismNaturality X.projection genus J D gJ gD e P lam",
+  "branch": "sheaf-dag",
+  "by": "Q135",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2c545fa69",
+  "group": "Q135",
+  "result": "fix",
+  "note": "Lean matches the node clause by clause: the Equiv presentation of the degree-zero Picard subsheaf; ∃ gJ with TensorCompatible and IsAbelianFamily; for every representing dual, ∃! lam with IsHom, IsIso, GeometricTheta (all K, t, p; N ≅ ideal of p; Hilb^{g-1} Abel map = O(E-(g-1)p); theta = image ideal ker, invertible; L_Θ = dual, ample; FibreDifference = normalized difference; all translates), UniversalThetaBaseChange (locally Noetherian T, pinned eT, rT and lamT) and CurveIsomorphismNaturality (a ≫ lam' ≫ aDual = lam). Rigidity pins lam, lam' and gD. Edge cases (empty S, g=2, char 2, non-reduced or disconnected base, universes) are fine. Item fields, the verbatim statement and the dependency nodes are unchanged; no hollow defs, sorry only, docstrings complete, no duplicate or clash. FIX H12: fixes/def-sfb-relative-jacobian-theta-data.json adds the owner cites def-sc-picard-functor, def-pc-hilb-functor (replacing thm-pc-hilb-curves), def-nagata-invertible-ideal, def-pc-divisor-line-bundle and def-sfb-abelian-dual-poincare-datum, and splits [a, b] cites so check_new_node passes (it returns []). No Lean change, no compile. Advisory: Picard.DegreeDecomposition import looks unused."
+ }
+}

@@ -1,0 +1,138 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2(2) and Proposition 6.8.4(6), pp. 59–60; scalar tensor: Stacks Project Tag 03EK"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2(2), expanded into fraction telescope and local denominator calculations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of modules inverting a prime is the sequential colimit under multiplication and locally every section is a fraction",
+   "results": "8 hits: ModuleCat.Tilde.isLocallyFraction, ModuleCat.tildeInType, ModuleCat.Tilde.isFraction, ModuleCat.Tilde.isLocallyFraction_pred, ModuleCat.Tilde.Localizations, ModuleCat.Tilde.const, ModuleCat.Tilde.const_apply, ModuleCat.Tilde.isFractionPrelocal. These results concern affine Zariski tilde sheaves or ordinary algebraic localizations, not the pro-etale coefficient scalar-extension telescope.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"localization\"",
+   "results": "1 hits: PresheafOfModules.instIsLocalizationSheafOfModulesSheafificationInverseImageFunctorOppositeAbWToPresheaf. These results concern affine Zariski tilde sheaves or ordinary algebraic localizations, not the pro-etale coefficient scalar-extension telescope.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocalizedModule|localization_away_colimit",
+   "results": "25 hits: Mathlib/Algebra/Category/ModuleCat/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Localization.lean, Mathlib/NumberTheory/NumberField/FractionalIdeal.lean, Mathlib/NumberTheory/NumberField/FractionalIdeal.lean, Mathlib/NumberTheory/NumberField/FractionalIdeal.lean. These results concern affine Zariski tilde sheaves or ordinary algebraic localizations, not the pro-etale coefficient scalar-extension telescope.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf scalar extension by inverting a prime is the sequential colimit with local fraction representatives",
+   "results": "8 hits: AlgebraicGeometry.structureSheafInType, IsLocalization.instIsScalarTowerAtPrimeFractionRing, ModuleCat.tilde, SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat, SheafOfModules.Presentation.isColimit, instIsScalarTowerAtPrimeFractionRing, instIsScalarTowerAtPrimeFractionRing_1, ModuleCat.tildeInType. These results concern affine Zariski tilde sheaves or ordinary algebraic localizations, not the pro-etale coefficient scalar-extension telescope.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A full integral lattice inside a sheaf of rational modules becomes isomorphic after scalar extension by inverting the prime",
+   "results": "8 hits: Module.FinitePresentation.isLocalizedModule_mapExtendScalars, ModuleCat.Tilde.stalkIso_inv, ModuleCat.Tilde.stalkIso, LinearMap.extendScalarsOfIsLocalizationEquiv, IsLocalization.instIsScalarTowerAtPrimeFractionRing, LinearEquiv.extendScalarsOfIsLocalizationEquiv, instIsScalarTowerAtPrimeFractionRing, Module.FinitePresentation.linearEquivMapExtendScalars. Algebraic linear equivalences require modules already over a localization; stalk and affine tilde results do not identify full subsheaves on this site.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EmbeddedLatticeCoefficientComparison",
+  "date": "2026-10-23",
+  "group": "V9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-stratified-lattice",
+ "id": "lem-sfb-full-embedded-lattice-rationalization",
+ "title": "Canonical rationalization of a full embedded lattice",
+ "statement": "Fix a prime ell, a finite normed extension E of Q_ell with norm-integral ring A, a scheme X, a sheaf L of modules over the continuous E-valued coefficient sheaf, and a pro-etale object U. Let N be an embedded ell-lattice [def-sfb-embedded-ell-lattice] in L|U restricted to A: N is a submodule sheaf, is locally finite free, and locally every section of L|U has an ell-power multiple in N. Regard the explicitly constructed submodule sheaf N as an A-module M. There is an isomorphism alpha:E_X|U tensor_(A_X|U) M -> L|U [def-pur-sheaf-tensor-product] such that alpha(eta(1 tensor m)) is exactly the underlying ambient section of m, on every object of the slice.",
+ "proof": [
+  {
+   "text": "The inclusion j:N->L is A-linear and natural. The extension-restriction tensor adjunction gives the sectionwise map s tensor m |-> s j(m). Naturality follows on pure tensors and sheafification extends it uniquely to b:E tensor N->L. Its value on eta(1 tensor m) is j(m).",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For an element z in the kernel of b, the local numerator assertion of [lem-sfb-lattice-scalar-extension-fractions] gives locally ell^n z=eta(1 tensor m). Applying b shows j(m)=0. Since N is a submodule, m=0. Multiplication by ell^n is injective on any E-module, so z is locally zero, hence zero by separatedness.",
+   "uses": [
+    "lem-sfb-lattice-scalar-extension-fractions"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Fullness supplies locally a section m of N with j(m)=ell^n x. Then ell^(-n) eta(1 tensor m) maps to x. Thus b is locally surjective and injective, hence an isomorphism of sheaves and of module sheaves. Its already established unit formula supplies the normalization.",
+   "uses": [
+    "def-sfb-embedded-ell-lattice"
+   ],
+   "elementary": true
+  }
+ ],
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-sfb-continuous-lattice-coefficients",
+  "def-pur-sheaf-tensor-product",
+  "def-sfb-embedded-ell-lattice"
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "lem-sfb-lattice-scalar-extension-fractions",
+  "def-sfb-embedded-ell-lattice"
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-stratified-lattice-scheme",
+   "place": "proof (1), coefficient localization and embedded interpretation; inverse from full embedded lattices",
+   "via": [
+    "lem-sfb-embedded-lattice-coefficient-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FullEmbeddedLatticeRationalization",
+  "file": "lean/Sheaf/Paper/FullEmbeddedLatticeRationalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.full_embedded_lattice_rationalization",
+  "statement": "theorem full_embedded_lattice_rationalization (X : Scheme.{u})\n    (L : SheafOfModules.{u + 1} (latticeModuleRing X E)) (U : X.ProEt)\n    (N : SheafOfModules.EmbeddedEllLattice.{u + 1, u, u + 1} ell\n      ((SheafOfModules.restrictScalars.{u + 1}\n        ((sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map\n          (latticeScalarMap (latticeCoefficientSheafMap X\n            (Padic.coefficientExtensionIntegers ell E).subtype continuous_subtype_val) U))).obj\n              (L.over U))) :\n    let a := latticeCoefficientSheafMap X\n      (Padic.coefficientExtensionIntegers ell E).subtype continuous_subtype_val\n    let M : SheafOfModules.{u + 1}\n        ((latticeModuleRing X (Padic.coefficientExtensionIntegers ell E)).over U) :=\n      ⟨N.submodule.toPresheafOfModules, N.isSheaf⟩\n    ∃ α : SheafOfModules.changeOfRings.{u, u + 1, u + 1} (latticeScalarMap a U) M ≅ L.over U,\n      ∀ (T : (Over U)ᵒᵖ) (m : N.submodule.obj T),\n        α.hom.val.app T ((latticeTensorUnit a U M).app T\n          ((1 : (latticeCoefficientSheaf X E).obj.obj (op T.unop.left)) ⊗ₜ[\n            (latticeCoefficientSheaf X\n              (Padic.coefficientExtensionIntegers ell E)).obj.obj (op T.unop.left),\n            ((a.hom.app (op T.unop.left)).hom)] m)) = Subtype.val m",
+  "branch": "sheaf-dag",
+  "by": "V9",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-68cc6",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261024T021124-L-2713417",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-68cc6",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261024T021124-L-2713417",
+  "kind": "interface",
+  "note": "independent cc review: item statement vs live clone (identical up to one space before :=); removed PadicIntegersInvertEll node vs dag/units/sk-lem-stratified-lattice.json realized (absent; its own unit stays on route via StratifiedLatticeScheme); item proof_deps vs declarations used; new sorry lattice_scalar_extension_fractions checked for truth and duplicates"
+ }
+}

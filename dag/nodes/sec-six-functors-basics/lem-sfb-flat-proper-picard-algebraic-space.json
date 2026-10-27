@@ -1,0 +1,283 @@
+{
+ "id": "lem-sfb-flat-proper-picard-algebraic-space",
+ "kind": "statement",
+ "title": "Relative Picard algebraic space for a cohomologically trivial proper family",
+ "statement": "Let $f:X\\to S$ be a flat proper morphism of schemes of finite presentation [def-pc-scheme, def-weil-flat-morphism, def-weil-proper-morphism, def-sbc-locally-finite-presentation]. Write $X_T=X\\times_ST$ and $f_T:X_T\\to T$ for every $S$-scheme $T$ [def-pc-base-change]. Assume that the canonical map $\\mathcal O_T\\to(f_T)_*\\mathcal O_{X_T}$ is an isomorphism for every $T$. The fppf relative Picard sheaf $\\operatorname{Pic}_{X/S}$ [def-pc-picard-functor] is represented by an algebraic space [def-trf-algebraic-space] locally of finite presentation over $S$. Its diagonal is representable by immersions. Tensor product, the trivial module and dualization of invertible modules [def-sc-invertible-module] give it a commutative group structure. Local finite presentation and immersions of algebraic spaces are tested on etale scheme charts, with local finite presentation as in [def-sbc-locally-finite-presentation]; finite presentation for $f$ includes quasi-compactness and quasi-separatedness.",
+ "source": {
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tags 0D2C (proposition-pic-functor), 0D2D (lemma-diagonal-pic); local finite presentation from 08KD (lemma-coherent-limits), 0D03 (lemma-picard-stack-open-in-coh), and 04AK (spaces-limits.tex, proposition-characterize-locally-finite-presentation). No relative-dimension bound is assumed."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-base-change",
+  "def-pc-picard-functor",
+  "def-trf-algebraic-space",
+  "def-sc-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "Let $\\mathcal B_f(T)$ be the groupoid of invertible modules on $X_T$, with arrows the pullback isomorphisms. By [lem-sfb-coherent-stack-algebraic-lfp], the stack $\\mathcal C_f$ of finitely presented quasi-coherent modules flat over the test scheme with proper support is algebraic and locally of finite presentation over $S$: properness of $f$ includes separatedness, and its other hypotheses are precisely ours. By [lem-sfb-invertible-open-in-coherent-stack], the inclusion $\\mathcal B_f\\to\\mathcal C_f$ is representable by open immersions. Applying [lem-sfb-open-stack-algebraic-lfp] makes $\\mathcal B_f$ an algebraic stack locally of finite presentation over $S$. This argument uses no relative-dimension bound.",
+   "uses": [
+    "lem-sfb-coherent-stack-algebraic-lfp",
+    "lem-sfb-invertible-open-in-coherent-stack",
+    "lem-sfb-open-stack-algebraic-lfp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tags 0D03, lemma-picard-stack-open-in-coh, and 0D04, proposition-pic; moduli.tex Tag 0DMB, lemma-pic-qs-lfp"
+   }
+  },
+  {
+   "text": "For an invertible module $L$ on $X_T$, multiplication identifies its automorphisms with $\\Gamma(X_T,\\mathcal O_{X_T})^\\times$: on a trivializing open an endomorphism is a scalar, and these scalars agree on overlaps. The assumed canonical isomorphism $\\mathcal O_T\\simeq(f_T)_*\\mathcal O_{X_T}$ identifies this group naturally with $\\Gamma(T,\\mathcal O_T)^\\times$, compatibly with every further base change. Thus the inertia projection of $\\mathcal B_f$ pulls back at $L$ to $\\mathbf G_{m,T}\\to T$. On $T=\\operatorname{Spec}A$ this is $\\operatorname{Spec}(A[z,w]/(zw-1))\\to\\operatorname{Spec}A$, which has finite presentation. For a square-zero surjection $R'\\to R$, lift a unit and its inverse to $a,b\\in R'$. Write $ab=1+i$ with $i^2=0$; then $b(1-i)$ is an inverse for $a$. Hence all affine first-order lifting problems have solutions, so this scheme is smooth by [def-sbc-smooth-morphisms]. Smoothness implies flatness and local finite presentation by [lem-sfb-stack-chartwise-smooth-etale-calculus]. These are local on the open affine cover of $T$ by the same cited calculus. Consequently the inertia is representable, flat and locally of finite presentation.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-weil-affine-spectrum",
+    "def-sbc-smooth-morphisms",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/moduli.tex",
+    "place": "Tag 0DNH, lemma-pic-inertia; examples-stacks.tex Tag 0375, example-inertia-stack-of-picard; explicit square-zero unit lift"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-flat-inertia-algebraic-space-quotient] to $\\mathcal B_f$. Its isomorphism-class presheaf is exactly $T\\mapsto\\operatorname{Pic}(X_T)$, so its fppf sheafification is $P=\\operatorname{Pic}_{X/S}$ by [def-pc-picard-functor]. Therefore $P$ is an algebraic space. Work on the big fppf site in a containing universe as in [def-pc-fppf-site]. By [lem-weil-pbc-site-sheafification-sections-local], every section of $P$ locally has a bundle representative and equality of two bundle classes in $P$ is locally an isomorphism of the bundles. These two assertions say exactly that $\\pi:\\mathcal B_f\\to P$ is a gerbe: each fibre has objects locally, and any two fibre objects are locally isomorphic. Choose a smooth surjective atlas $U\\to\\mathcal B_f$ whose composite $U\\to S$ is locally of finite presentation, available from step 1. By [lem-sfb-gerbe-smooth-universal-homeomorphism], its composite $U\\to P$ is surjective, flat and locally of finite presentation. Apply the source-locality clause of [lem-sfb-representable-fppf-etale-open-descent] to the map of algebraic spaces $P\\to S$, using the identity cover of $S$ and the cover $U\\to P$. Since $U\\to S$ is locally of finite presentation, so is $P\\to S$.",
+   "uses": [
+    "lem-sfb-flat-inertia-algebraic-space-quotient",
+    "def-pc-picard-functor",
+    "def-pc-fppf-site",
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "lem-sfb-gerbe-smooth-universal-homeomorphism",
+    "lem-sfb-representable-fppf-etale-open-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Paragraph after Tag 0D2C, proposition-pic-functor, describing the gerbe proof; stacks-morphisms.tex Tags 06QJ, 06QD and 0DN8; spaces-descent.tex Tag 06EV"
+   }
+  },
+  {
+   "text": "Tensor product, the trivial bundle and dualization induce multiplication, identity and inversion on $T\\mapsto\\operatorname{Pic}(X_T)$. For sheaf sections, use the local representatives from step 3, pass to a common fppf refinement, and apply these operations there. Changing representatives gives locally isomorphic bundles, hence equal sheaf classes. Thus the results agree on overlaps and glue uniquely. Associativity, commutativity, identity and inverse equations hold on the same covering by the corresponding bundle isomorphisms, hence hold in the sheaf. All operations commute with pullback. Since morphisms of algebraic spaces are natural transformations of their sheaves by [def-trf-algebraic-space], these operations give actual maps $P\\times_SP\\to P$, $S\\to P$ and $P\\to P$ satisfying the commutative group equations.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "section-picard-functor, the Picard functor as a sheaf of abelian groups"
+   }
+  },
+  {
+   "text": "Test the diagonal on a scheme $T\\to P\\times_SP$, given by $s,t\\in P(T)$. By the local representative property proved in step 3, choose an fppf covering $T_i\\to T$ on which they are represented by bundles $V_i,W_i$ on $X_{T_i}$, and set $L_i=V_i\\otimes W_i^\\vee$. By [lem-sfb-space-flat-proper-fp-locality], $X_{T_i}\\to T_i$ remains proper, flat and of finite presentation; the structure-sheaf hypothesis persists since every $T_i$-scheme is an $S$-scheme. Apply [lem-sc-picard-diagonal-locally-closed] to this morphism and the rank-one bundle $L_i$. It gives an immersion $Z_i\\to T_i$ of finite presentation, universal for the pullback of $L_i$ to come from a finite locally free module $N$ on the test base. Such $N$ necessarily has rank one. Indeed, over any residue field $k$ the structure-sheaf hypothesis gives $H^0(X_k,\\mathcal O)=k\\ne0$, so $X_k$ is nonempty. At a point above that residue field, $f^*N\\simeq L_i$ forces the rank of $N$ to be one. By [lem-pc-pic-exact], coming from such an invertible $N$ is equivalent to $[L_i]=0$ in the relative Picard sheaf. Thus $Z_i$ represents the equality functor of $s|_{T_i}$ and $t|_{T_i}$ on all test schemes, including nonreduced ones.",
+   "uses": [
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sc-picard-diagonal-locally-closed",
+    "lem-pc-pic-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D2D, lemma-diagonal-pic, last paragraph; more-morphisms.tex Tag 0BDP, lemma-diagonal-picard-flat-proper; pic.tex Tag 0B9M"
+   }
+  },
+  {
+   "text": "The equality functor $E=T\\times_{P\\times_SP}P$ is already an algebraic space because $P$ is one. Its pullback to $T_i$ is represented by $Z_i$. Each $Z_i\\to T_i$ is a quasi-compact immersion, since it is an immersion of finite presentation. Apply [lem-sfb-space-quasi-compact-immersion-locality] to $E\\to T$ and the fppf covering $\\{T_i\\to T\\}$. It follows that $E\\to T$ is an immersion, including representability by a scheme. Every scheme test of the diagonal has this form. Hence the diagonal of $P\\to S$ is representable by immersions, as asserted.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-sbc-locally-finite-presentation",
+    "lem-sfb-space-quasi-compact-immersion-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D2D, lemma-diagonal-pic, descent paragraph; spaces-descent.tex Tag 0424, lemma-descending-property-quasi-compact-immersion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-coherent-stack-algebraic-lfp",
+  "lem-sfb-invertible-open-in-coherent-stack",
+  "lem-sfb-open-stack-algebraic-lfp",
+  "def-sc-invertible-module",
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-flat-inertia-algebraic-space-quotient",
+  "def-pc-picard-functor",
+  "def-pc-fppf-site",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-sfb-gerbe-smooth-universal-homeomorphism",
+  "lem-sfb-representable-fppf-etale-open-descent",
+  "def-trf-algebraic-space",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sc-picard-diagonal-locally-closed",
+  "lem-pc-pic-exact",
+  "def-sbc-locally-finite-presentation",
+  "lem-sfb-space-quasi-compact-immersion-locality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tags 0D2C and 0D2D; the gerbe alternative explicitly indicated after proposition-pic-functor, with moduli.tex Tags 0DMB and 0DNH and stacks-morphisms.tex Tags 06QJ, 06QD, 0DN8"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A flat proper finitely presented morphism with universally trivial structure sheaf pushforward has a relative Picard algebraic space locally of finite presentation with immersion diagonal",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyOfFinitePresentation\", \"doc\": \"The property of a morphism of schemes being locally of finite presentation is stable under base change. That is, if $ f: X \\to Y $ is a morphism of schemes that is locally of finite presentation, then \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.FormallyUnramified f]\\n  [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"If a morphism of schemes is formally unramified and locally of finite type, then its diagonal morphism in the pullback is an open immersion.\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every open immersion of schemes is locally of finite presentation.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic scheme representability and finite-presentation infrastructure do not establish the relative Picard algebraic space theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representability of the fppf sheaf of line bundles for a cohomologically flat proper family by a locally finitely presented algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"{F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} →\\n  {ι : Type u} →\\n    {X : ι → AlgebraicGeometry.Scheme} →\\n      {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val} →\\n        (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n          [CategoryThe\", \"doc\": \"The functor $ F $ is representable by the scheme constructed from Zariski gluing data $ \\\\text{glueData} $ and condition $ hf $, establishing a natural isomorphism between $ F $ and the Yoneda embeddin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val},\\n  (∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n    ∀\\n      [CategoryTheory.Presheaf.IsLocallySu\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ that satisfies the finite presentation condition (locally isomorphic to the cokernel of a morphism b\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of modules over $R$ is of finite presentation. Specifical\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic scheme representability and finite-presentation infrastructure do not establish the relative Picard algebraic space theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat proper cohomologically flat morphism relative Picard functor algebraic space representability",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $V \\\\subseteq f^{-1}(U)$, the ring homomorphism $\\\\Gamma(U, \\\\mathc\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsMultiplicative @Flat\", \"doc\": \"The property of being a flat morphism of schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to Z $ is als\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.relative.rep\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Representable\", \"type\": \"{f : X ⟶ Y} (hf : P.relative F f) : F.relativelyRepresentable f\", \"doc\": \"If a morphism $ f : X \\\\to Y $ in category $ \\\\mathcal{D} $ satisfies the relative morphism property with respect to a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, then $ f $ is relatively representable\"}\n  {\"name\": \"AlgebraicGeometry.Flat.of_stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"(H : ∀ x, (f.stalkMap x).hom.Flat) : Flat f\", \"doc\": \"If for every point $ x \\\\in X $, the induced map on stalks $ \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x} $ is flat, then the morphism $ f : X \\\\to Y $ of schemes is flat.\"}\n  {\"name\": \"CategoryTheory.RepresentablyFlat.of_iso\", \"module\": \"Mathlib.CategoryTheory.Functor.Flat\", \"type\": \"[RepresentablyFlat F] {G : C ⥤ D} (α : F ≅ G) : RepresentablyFlat G\", \"doc\": \"If a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is representably flat and there exists an isomorphism $ \\\\alpha : F \\\\cong G $ between $ F $ and another functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, the\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic scheme representability and finite-presentation infrastructure do not establish the relative Picard algebraic space theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"picardFunctor\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: generic scheme representability and finite-presentation infrastructure do not establish the relative Picard algebraic space theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "picardFunctor|Picard.*space|picard.*represent|cohomologicallyFlat",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: generic scheme representability and finite-presentation infrastructure do not establish the relative Picard algebraic space theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat proper finitely presented morphism with universally trivial structure sheaf pushforward has an algebraic space representing its relative Picard sheaf",
+   "results": "Logged search: ok=True; n_hits=8; hits=[\"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\"]; note=",
+   "date": "2026-10-23",
+   "verdict": "no match: read hits give generic scheme or category-theory facts, not the relative Picard algebraic space, its diagonal and finite-presentation clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative Picard functor of a proper cohomologically flat family is represented by an algebraic space with immersion diagonal",
+   "results": "Logged search: ok=True; n_hits=8; hits=[\"AlgebraicGeometry.IsImmersion.instDiagonalScheme\", \"AlgebraicGeometry.IsImmersion.instLiftSchemeId\", \"CategoryTheory.Functor.relativelyRepresentable.diag_iff\", \"CommRing.relPic\", \"AlgebraicGeometry.IsSeparated.instIsClosedImmersionLiftSchemeId\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\", \"CategoryTheory.Functor.relativelyRepresentable.of_diag\"]; note=",
+   "date": "2026-10-23",
+   "verdict": "no match: read hits give generic scheme or category-theory facts, not the relative Picard algebraic space, its diagonal and finite-presentation clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\"",
+   "results": "Logged search: ok=True; n_hits=0; hits=[]; note=",
+   "date": "2026-10-23",
+   "verdict": "no match: read hits give generic scheme or category-theory facts, not the relative Picard algebraic space, its diagonal and finite-presentation clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "Picard[Ss]tack|AlgebraicStack|picard.*stack|stack.*picard",
+   "results": "Logged search: ok=True; n_hits=1; hits=[\"Mathlib/RingTheory/PicardGroup.lean\"]; note=",
+   "date": "2026-10-23",
+   "verdict": "no match: read hits give generic scheme or category-theory facts, not the relative Picard algebraic space, its diagonal and finite-presentation clauses"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-picard-identity-representability",
+  "date": "2026-10-23",
+  "group": "O3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Dual abelian varieties and the line-bundle homomorphism. Auxiliary for this split: The rigidified Picard scheme of a smooth projective variety. Supporting lemma: Relative Picard algebraic space for a cohomologically trivial proper family.",
+   "via": [
+    "lem-sfb-projective-picard-identity-representability",
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-flat-proper-picard-algebraic-space",
+  "worker": "stage1",
+  "summary": "Read the Stacks Picard-space proof and its gerbe alternative. Reuse the coherent/open-stack, flat-inertia quotient, gerbe-atlas, fppf source-locality, universal descent-locus, Picard exactness and immersion-descent nodes. The universal O-pushforward is used for inertia and rank-one descent. No dimension restriction, rational section or Noetherian hypothesis is added. Six explicit steps, zero new nodes; all citations read and checked.",
+  "blueprint": "The item is a created prerequisite of the projective Picard construction in the alteration/level-structure support for det-thm-sf-ctf-stability-direct-images, proof (3). The latest blueprint is literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md. Its general direct-image route is retained; these steps supply the general relative Picard prerequisite named in blueprint.from.place. No blueprint node states this arbitrary-dimensional proper-family theorem.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-picard-diagonal-locally-closed",
+    "why": "Universal finite-locally-free descent locus, used for a rank-one difference bundle; the unit supplies no such locus."
+   },
+   {
+    "node": "lem-pc-pic-exact",
+    "why": "Exact kernel description of the relative Picard sheaf, used to identify the descent locus with equality; no section is assumed."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Generic local representatives and local equality of sheafification, needed to identify the gerbe and test the diagonal."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-picard-diagonal-locally-closed",
+  "lem-pc-pic-exact",
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-7bf0fe174",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-7bf0fe174 (reviewer sub-agent of L); spot-checked: I read the item and all 19 cited statements in full; the item is a first split with 6 steps and no new nodes, and it needs no changes. The statement is unchanged and agrees with Stacks quot.tex 0D2C and 0D2D specialized to a scheme base; I also read moduli.tex 0DMB and 0DNH. The proof follows the gerbe alternative that the source names right after 0D2C. Step 1: the coherent stack is algebraic and lfp (properness gives separatedness), invertibility is an open condition, and the open-substack lemma gives the Picard stack algebraic and lfp. Step 2: the inertia at L is G_m,T because Aut L = Γ(X_T,O)^× = Γ(T,O)^× under the universal hypothesis; I checked the unit lift (1+i)(1-i)=1, which gives smoothness and hence flat and lfp. Step 3: the flat-inertia quotient gives P = Pic_{X/S}, and local representatives and local equality of sheafification are exactly the gerbe condition. The gerbe lemma makes U→P flat and lfp, and the source-locality clause (V=S, W=U) gives P→S lfp; it is applied to a morphism of spaces, not to the non-representable gerbe map. Step 4: the group law on the sheaf is elementary. Step 5: 0BDP gives an fp immersion Z_i parametrizing descent of L_i to a finite locally free N; N has rank one because fibres are nonempty (H^0 = κ ≠ 0); Pic-exactness then identifies Z_i with the equality functor on all test schemes. Step 6: 0424 descends the quasi-compact immersions, including representability by a scheme. Edge cases checked: f = id, P^1_S (P = ℤ_S), S empty, X empty excluded. No duplicate exists: lem-sfb-picard-space-curves-smooth is the special case with relative dimension ≤ 1. I accept the tool_uses (0BDP diagonal node, pic-exact, sheafification local sections). Batch-5 flags: all six citations reach sec-trace-formula only through the general definitions def-trf-algebraic-space or def-trf-schematically-dense-open, so none is a trace-formula or Poincaré proof step and none forces a RETURN. Advisory only: step 5 applies the space-level base-change node to scheme morphisms, the same citation the reviewed sibling node uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatProperPicardAlgebraicSpace",
+  "declaration": "AlgebraicGeometry.flat_proper_picard_algebraic_space",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatProperPicardAlgebraicSpace.lean",
+  "statement": "theorem flat_proper_picard_algebraic_space {X S : Scheme.{u}} (f : X ⟶ S) [Flat f] [IsProper f] [LocallyOfFinitePresentation f] (hO : ∀ (T : Scheme.{u}) (g : T ⟶ S), IsIso ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.snd f g))).unit.app (SheafOfModules.unit T.ringCatSheaf))) : ∃ (P : AlgebraicSpace S) (G : (Over S)ᵒᵖ ⥤ CommGrpCat.{u}), G ⋙ forget CommGrpCat = P.obj.obj ∧ Nonempty (G ⋙ forget₂ CommGrpCat GrpCat ⋙ GrpCat.uliftFunctor.{u + 1, u} ≅ picardFunctorGrp f) ∧ (∀ (U : Over S) (a : yoneda.obj U ⟶ P.obj.obj), AlgebraicSpace.IsEtale a → LocallyOfFinitePresentation U.hom) ∧ AlgebraicSpace.IsRepresentableWith (fun _ _ p ↦ IsImmersion p.left) (prod.lift (𝟙 P.obj.obj) (𝟙 P.obj.obj))",
+  "branch": "sheaf-dag",
+  "by": "Q25",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The existing Type (u+1)-valued relative Picard group functor is identified with the universe lift of a commutative-group-valued functor whose underlying sheaf is the algebraic space P. Properness supplies quasi-compactness and separatedness, hence quasi-separatedness, so local finite presentation of f is its full finite-presentation hypothesis. Local finite presentation of P/S is tested on all representable etale scheme charts."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f9d21493d",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Statement verbatim = file signature. Flat/IsProper/LocallyOfFinitePresentation = flat proper fp (proper gives qc+qs); no extra hypotheses. hO: pinned exists_tensorPullbackAdjunction unit at O_T for all T : Scheme.{u}, g : T ⟶ S (TENSOR-PULLBACK UNIT convention), equivalent to O_T→(f_T)_*O_{X_T} iso. ∃ P : AlgebraicSpace S with CommGrpCat-valued G, G⋙forget = P.obj.obj, and a GrpCat iso of the ulift.{u+1} of G with picardFunctorGrp f (underlying presheaf rfl = picardFunctor f, the fppf sheafification), which gives representability and the ⊗/unit/dual law. Local finite presentation tested on every etale chart (04AK form, nonvacuous). Diagonal IsRepresentableWith IsImmersion (0D2D); nothing more claimed. Universe lift forced by the Type (u+1)-valued Pic; no universe equalities imposed. No defs or helpers, sorry only, docstrings and blueprint tags present, proof-dep imports exist in side-live, stmt_deps unchanged, no duplicate (curves-smooth node has a dim ≤ 1 hypothesis). Edge cases: S empty, X empty (excluded by hO), f = id, P^1 (not qc), nonreduced tests. Advisory: hO's adjunction comes from a theorem node outside stmt_deps per the brief convention; the second reading was by the same worker."
+ }
+}

@@ -24,41 +24,43 @@
  ],
  "proof": [
   {
-   "text": "Construct the ordinary strict quotient tensor system by the ringed sequence projection adjunction. Apply it degreewise on flat-term K-flat complexes; its prescribed tensor-generator transitions give the actual quotient transition equation.",
+   "text": "Apply the ordinary strict tensor existence theorem to obtain direct, its finite evaluation isomorphisms, and the specified actual quotient transitions. The ordinary construction is isolated from all derived comparisons.",
    "uses": [
-    "lem-coef-sequence-projection-derived-adjunction",
-    "lem-pur-kflat-change-of-rings-independent",
-    "lem-pc-kflat-resolution",
-    "lem-coef-derived-system-evaluation-calculus",
-    "lem-coef-semilinear-derived-sections"
+    "stage3-pur-extension-ordinary-strict-tensor"
    ],
    "elementary": false
   },
   {
-   "text": "Transpose the ordinary tensor units through the reduction/limit and scalar adjunctions. Their normalization and scalar evaluation identify the evaluated comparison with the composite of the finite K-flat comparison maps and the supplied balanced association. These maps are invertible, so joint conservativity gives the natural representative isomorphism.",
-   "uses": [],
+   "text": "Apply the strict derived comparison to this ordinary model, the given scalar-system data, reduction calculus, and balanced association. It supplies the natural model isomorphism with its exact finite evaluation equation.",
+   "uses": [
+    "stage3-pur-extension-strict-derived-comparison"
+   ],
    "elementary": false
   },
   {
-   "text": "For every pair of quotient levels, balanced tensor association identifies further derived scalar extension of the higher quotient model with the lower quotient model. Its adjoint is the actual quotient transition, so the Hom criterion gives normalization. Resolve arbitrary derived objects by flat-term K-flat complexes to obtain the assertion for all objects.",
-   "uses": [],
+   "text": "For each good representative, the strict tensor normalization theorem supplies normalization of Q(direct P). To reach an arbitrary derived K, take a flat-term K-flat resolution of a representative of K. Transport its exact tensor-right flatness through siteSheafTensorRightIso to obtain a good P and an isomorphism Q(P) to K. Transport normalization first along model(P) inverse and then along coefficientExtensionSystem applied to that resolution isomorphism. Normalization is invariant under system isomorphism: naturality of the actual derived transitions conjugates its Hom map by the two finite evaluation isomorphisms, preserving injectivity and surjectivity.",
+   "uses": [
+    "stage3-pur-extension-strict-tensor-normalized",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-coef-sequence-projection-derived-adjunction",
-  "lem-pur-kflat-change-of-rings-independent",
+  "stage3-pur-extension-ordinary-strict-tensor",
+  "stage3-pur-extension-strict-derived-comparison",
+  "stage3-pur-extension-strict-tensor-normalized",
   "lem-pc-kflat-resolution",
-  "lem-coef-derived-system-evaluation-calculus",
-  "lem-coef-semilinear-derived-sections"
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
  ],
  "proof_origin": {
   "kind": "from-document",
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
-  "place": "Integral operations clause",
-  "group": "E6",
-  "date": "2026-10-21"
+  "place": "Proof steps 1--3 decomposed; K-flat representative and normalization-isomorphism transport proved in Lean",
+  "group": "R2",
+  "date": "2026-10-26"
  },
  "mathlib_searches": [
   {
@@ -131,13 +133,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-26",
   "by": "L",
-  "reviewer": "C-dfb7c",
-  "group": "E6",
+  "reviewer": "COMPILER",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261021T233647-L-845381",
+  "landing": "20261026T023904-L-612625",
   "kind": "interface",
-  "note": "independent cc review: the 28 moved interface declarations, block by block, with the clone's item module (identical); the item and new nodes' proof/proof_deps with the Lean citations; the new sorry statement with the original skeleton fields (strictly smaller: completion and projection now proved); the 7 delivered modules and 4 direct importers compiled in a sandbox; #print axioms"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

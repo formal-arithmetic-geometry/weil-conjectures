@@ -1,0 +1,123 @@
+{
+ "id": "lem-sf-finite-scalar-tensor-realization",
+ "kind": "statement",
+ "title": "Constructed and uniquely representative-normalized scalar tensor realization",
+ "statement": "For a finite commutative ring R, scheme T, and any intrinsic tensor model a [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], the specified scalar realization E [def-weil-proetale-inverse-image] has a unique natural isomorphism t:E(M tensor_fixed^L N)≅a(E M,E N) normalized on flat-term K-flat cochain representatives. The normalization uses the actual ordinary sheafification tensor isomorphism, its signed-total comparison, the exact-functor localization factor and the given a.representative. These constructions, the flat-term K-flat class and the inverse fixed localization tensorator are explicitly defined; there is no arbitrary choice of tensor data.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YN, 06YS, 07A4; sites-modules.tex Tag 0GMW; categories.tex Tags 04VI–04VK"
+ },
+ "stmt_deps": [
+  "lem-sf-finite-scalar-tensor-complex",
+  "lem-sf-finite-scalar-tensor-resolution",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Build the signed-total natural comparison from an ordinary additive tensor equivalence while coefficient category and intrinsic ring sheaf are abstract. Apply normalized representative descent. Then specialize to the specified associated-module-sheaf realization, its exact derived functor and the supplied intrinsic tensor model, using preservation of flat K-flat representatives and fully faithful resolving restriction. The intrinsic derived category is its published standard localization.",
+   "uses": [
+    "lem-sf-finite-scalar-tensor-descent",
+    "lem-sf-finite-scalar-tensor-complex",
+    "lem-sf-finite-scalar-tensor-resolution"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-finite-scalar-tensor-descent",
+  "lem-sf-finite-scalar-tensor-complex",
+  "lem-sf-finite-scalar-tensor-resolution"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "W7",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YN, 06YS, 07A4; sites-modules.tex Tag 0GMW; categories.tex Tags 04VI–04VK"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence of module sheaves over a constant ring identifies derived tensor products compatibly with inverse image",
+   "results": "Eight ordinary sheaf monoidal and free condensed module results; no specified unbounded realization square.",
+   "date": "2026-10-27",
+   "verdict": "Use the concrete realization and project representative descent APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact equivalence of module sheaves identifies unbounded derived tensor functors uniquely on flat K flat representatives",
+   "results": "Eight hits about flat module kernels, sheaf pushforward congruence, sheaf equality and ordinary module pullback adjunctions; no exact normalized derived tensor statement.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.LaxMonoidal.μ",
+   "results": "The tensorator and its monoidal isomorphism API were found; no scalar realization compatibility theorem.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing localization tensorator."
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctorComparisonNatTrans|resolvingRepresentativesFullyFaithfulWhiskering",
+   "results": "Mathlib service found no hits. Repository search located the proved total comparison and resolving restriction APIs.",
+   "date": "2026-10-27",
+   "verdict": "Use the project general constructions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteScalarTensorPullbackComparison",
+  "date": "2026-10-27",
+  "group": "W7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-finite-scalar-tensor-pullback-comparison",
+   "place": "Constructed and uniquely representative-normalized scalar tensor realization",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteScalarTensorRealization",
+  "file": "lean/Sheaf/Paper/FiniteScalarTensorRealization.lean",
+  "declaration": "WeilConjectures.finiteScalarTensorRealization",
+  "statement": "def finiteScalarTensorRealization\n    (T : Scheme.{u}) (R : Type u) [CommRing R] [Finite R]\n    (a : ProEtaleTensorModel T (proEtaleConstantRing T R)) :\n    (postcompose₂.obj (sfIntrinsicDerivedEquivalence T R).functor).obj\n        (ProEtale.derivedTensor (ModuleCat.{u + 1} (ULift.{u + 1} R)) T) ≅\n      (((whiskeringLeft₂ _).obj (sfIntrinsicDerivedEquivalence T R).functor).obj\n        (sfIntrinsicDerivedEquivalence T R).functor).obj (curry.obj a.tensor)",
+  "branch": "sheaf-dag",
+  "by": "W7",
+  "date": "2026-10-27",
+  "declarations": [
+   "WeilConjectures.finiteScalarTensorRealizationForModels",
+   "WeilConjectures.finiteScalarTensorRealizationForOrdinaryModels",
+   "WeilConjectures.finiteScalarTensorRealization"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-93767",
+  "group": "W7",
+  "result": "fix",
+  "landing": "20261027T103523-L-1098311",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-93767",
+  "group": "W7",
+  "result": "fix",
+  "landing": "20261027T103523-L-1098311",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone (unchanged); moved defs vs clone bodies (verbatim); 7 delivered modules + direct importer FiniteScalarProperProjectionPresentation compiled in sandbox; hole statement vs its node and the pinned definitions it uses"
+ }
+}

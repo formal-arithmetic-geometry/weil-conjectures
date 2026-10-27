@@ -1,0 +1,154 @@
+{
+ "id": "def-sfb-stack-big-etale-module-functors",
+ "kind": "definition",
+ "title": "Big etale module sheaves and their canonical direct-image functors",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Work in [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and $\\mathcal C\\to\\mathit{Sch}/S$ a category fibred in groupoids [def-sfb-stable-pointed-moduli-groupoids]. Its big etale site has the total objects and arrows of [def-sfb-stack-quasi-coherent-algebra], with covering families lying over jointly surjective etale scheme families [def-weil-pbc-etale-site]. The regular-function presheaf $\\mathcal O_{\\mathcal C}(x)=\\Gamma(T,\\mathcal O_T)$ for $x$ over $T$ is an etale sheaf. Use its category of all module sheaves [def-weil-sheaf-of-modules-category], with no cartesian or quasi-coherent condition. Lift the section rings canonically by ULift to the common universe containing schemes, site objects and arrows, as in [def-pur-cochain-coefficient-universe-transport]. Sheafification exists there, its equivalences are exactly the locally bijective maps, and this module category is abelian and admits injective resolutions [def-sp-injective-resolutions]. For a functor $a:\\mathcal D\\to\\mathcal C$ over schemes between such fibred categories, precomposition preserves sheaves, with the canonical identification $\\mathcal O_{\\mathcal D}=a^{-1}\\mathcal O_{\\mathcal C}$. Define $a^*$ by this literal precomposition. It has a right adjoint $a_*$, characterized uniquely up to natural isomorphism by $\\operatorname{Hom}(a^*M,N)\\simeq\\operatorname{Hom}(M,a_*N)$; on a test $x$ over $T$, this is compatible sections $\\Gamma(\\mathcal D\\times_{\\mathcal C}T,N|)$, with base-change restrictions and the usual regular-function action. The right adjoint is additive. Define $R^ia_*$ for $i\\in\\mathbf N$ by applying it to an injective resolution and taking degree-$i$ cohomology.",
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-weil-pbc-etale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-cochain-coefficient-universe-transport",
+  "def-sp-injective-resolutions"
+ ],
+ "source": {
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tags 06TP, 06TV, 06WE and 075H; big etale topology and module functoriality."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Big etale site of a category fibred in groupoids with module sheaves and right adjoint to precomposition",
+   "results": "{\"t\": \"2026-10-24T10:07:34Z\", \"tool\": \"leanfinder\", \"query\": \"Big etale site of a category fibred in groupoids with module sheaves and right adjoint to precomposition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"CategoryTheory.sheafToPresheaf_isRightAdjoint\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor\"], \"digest\": \"339b817424a6eafb\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact match; the results concern schemes or generic module/sheaf functors, not this total fibred-category interface."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Big etale module sheaves on categories fibred in groupoids precomposition right adjoint direct image injective resolutions",
+   "results": "{\"t\": \"2026-10-24T10:15:27Z\", \"tool\": \"leansearch\", \"query\": \"Big etale module sheaves on categories fibred in groupoids precomposition right adjoint direct image injective resolutions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.instIsRightAdjointPushforward\", \"SheafOfModules.PullbackConstruction.adjunction\", \"PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"PresheafOfModules.instIsRightAdjointPushforwardIdFunctorOppositeRingCat\", \"PresheafOfModules.instIsRightAdjointPushforward\", \"SheafOfModules.instIsRightAdjointPushforwardIdSheafRingCat\"], \"digest\": \"958e49d35b7b2826\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact match; the results concern schemes or generic module/sheaf functors, not this total fibred-category interface."
+  },
+  {
+   "tool": "grep",
+   "query": "moduliBigEtale|IsSmoothAlgebraicModuliMap|IsSmoothModuliMap",
+   "results": "{\"t\": \"2026-10-24T10:15:27Z\", \"tool\": \"grep\", \"query\": \"moduliBigEtale|IsSmoothAlgebraicModuliMap|IsSmoothModuliMap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact match; the results concern schemes or generic module/sheaf functors, not this total fibred-category interface."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n moduliBigEtale|IsSmoothAlgebraicModuliMap lean/Sheaf lean/WeilConjectures; rg --files dag/nodes; blueprint_refs.py search",
+   "results": "No matching declaration. The fppf interface StackQuasiCoherentAlgebra and the representable-only ModuliSpaceTest exist and are reused. Existing big-etale restriction/base-change theorem nodes do not define this foundational interface. No definition node for general nonrepresentable smooth maps. blueprint_refs.py search big etale found 0 blueprint nodes; ancestor is None.",
+   "date": "2026-10-24",
+   "verdict": "No duplicate definition node or declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-smooth-descent-higher-image-criterion",
+  "date": "2026-10-24",
+  "group": "Q22"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Flat scalar-section comparison needed in the descent of a power lying in the image of a global algebra map; this does not assert adequate-moduli locality. General cohomological input: preservation of locally quasi-coherent modules and flat comparison maps under qcqs stack direct images. Supporting input: Smooth descent criterion for preservation by higher direct images. Missing statement-level foundational interface for Tag 076Z.",
+   "via": [
+    "lem-sfb-stack-smooth-descent-higher-image-criterion",
+    "lem-sfb-stack-higher-images-flat-comparison",
+    "lem-sfb-stack-flat-scalar-sections",
+    "lem-sfb-adequate-moduli-etale-locality",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackBigEtaleModuleFunctors",
+  "declaration": "CategoryTheory.ModuliBigEtaleModules",
+  "declarations": [
+   "CategoryTheory.moduliBigEtaleTopology",
+   "CategoryTheory.moduliBigEtaleStructure_isSheaf",
+   "CategoryTheory.moduliBigEtaleRings",
+   "CategoryTheory.ModuliBigEtaleModules",
+   "CategoryTheory.moduliBigEtale_hasSheafify",
+   "CategoryTheory.moduliBigEtale_wEqualsLocallyBijective",
+   "CategoryTheory.moduliBigEtale_abelian",
+   "CategoryTheory.moduliBigEtale_hasInjectiveResolutions",
+   "CategoryTheory.moduliBigEtale_continuous",
+   "CategoryTheory.moduliBigEtalePrecompositionRings",
+   "CategoryTheory.moduliBigEtaleRingIso",
+   "CategoryTheory.moduliBigEtalePrecomposition",
+   "CategoryTheory.moduliBigEtalePrecomposition_isLeftAdjoint",
+   "CategoryTheory.moduliBigEtaleDirectImage",
+   "CategoryTheory.moduliBigEtaleDirectImage_additive",
+   "CategoryTheory.moduliBigEtaleHigherImage",
+   "CategoryTheory.moduliBigEtaleWide_continuous",
+   "CategoryTheory.moduliBigEtaleWidePrecompositionRings",
+   "CategoryTheory.moduliBigEtaleWideRingIso",
+   "CategoryTheory.moduliBigEtaleWidePrecomposition",
+   "CategoryTheory.moduliBigEtaleWidePrecomposition_isLeftAdjoint",
+   "CategoryTheory.moduliBigEtaleWideDirectImage",
+   "CategoryTheory.moduliBigEtaleWideDirectImage_additive",
+   "CategoryTheory.moduliBigEtaleWideHigherImage"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StackBigEtaleModuleFunctors.lean",
+  "statement": "abbrev ModuliBigEtaleModules {S : Scheme.{u}} (F : BasedCategory.{v, w} (Over S)) (hF : IsFibredInGroupoids F)",
+  "branch": "sheaf-dag",
+  "by": "Q09",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Dependency-only interface repair under brief-stage2 §1(B), rebased on the landed Q57/Q22 node. All sixteen landed declarations, signatures and data are retained byte-for-byte. The existing same-object-universe precomposition cannot accept the recorded comma two-fibre product of stacks in BasedCategory.{v,w}, whose object universe is max v w. The eight appended Wide declarations extend the same canonical interface to a source at max v w and target at w; both section coefficient universes are definitionally max (u+1) v w. The node statement, provenance and review metadata are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2122ba9ad",
+  "group": "Q57",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7cba7231b",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Re-delivery of 55c2118c3 (passed 10-24, sent back at landing only because def-sfb-stack-big-etale-module-functors had landed via Q57). All 3 Lean modules are byte-identical to 55c2; only the functors node record and the report changed. The functors record differs from live only in lean (16 live declarations kept, 8 Wide added); in the module file live lines 1-184 are identical with the 8 Wide declarations appended. The parent d87e7a20 is the side-live head and contains the Q22 node; the module path is unchanged since the base. Maths reread against Stacks 075H: arbitrary BasedFunctors f,b on IsAlgebraicModuliStack X,Y,Y' with no extra hypotheses; X' = moduliTwoFiberProduct b f, a = Comma.snd, f' = moduliTwoFiberFst; every M and every i : ℕ. The square is pinned by ∃! with component M.map(α.op) : M(f x) → M(b y'); its symm is the θ that exchangeRight needs, giving b^*f_* → f'_*a^*; rightDerivedBaseChange (G=f_*, γ=b^*, β=a^*, G'=f'_*) uses exactness, enough-injectives and additivity instances supplied by the delivery. Per-degree companion of the derived proof_dep. Item text unchanged; only stmt_deps and lean added; lean.statement verbatim; calculus node has real data and sorry-only proofs; report has real worker and second-reading sections. Nothing compiled (no change). ADVISORY: NY e45f (derived base change, passed, unlanded) declares the same names moduliBigEtalePrecomposition_additive/_limits/_colimits, has moduliBigEtaleProjection* with the same bodies as moduliBigEtaleWide*, and duplicates the pinned square and product fibredness. Whichever of NY e45f and Q09 lands second must be returned (H4) to rebind onto the first; Q01 b36e's OfSize append has disjoint names."
+ }
+}

@@ -1,0 +1,282 @@
+{
+ "id": "lem-sfb-galois-hopf-algebra-descent",
+ "kind": "statement",
+ "title": "Finite Galois descent for commutative Hopf algebras",
+ "statement": "Let $L/k$ be a finite Galois extension of fields [def-weil-field, def-pc-field-extension]: $\\dim_kL<\\infty$, $L/k$ is separable algebraic [def-weil-pbc-separable-algebraic-extension], and $L/k$ is normal (for every $\\alpha\\in L$ the minimal polynomial of $\\alpha$ over $k$ is a product of polynomials of degree one in $L[T]$). Let $\\Pi=\\operatorname{Gal}(L/k)$ be the group of field automorphisms of $L$ fixing $k$ pointwise. A commutative Hopf $L$-algebra is a commutative $L$-algebra $B$ with algebra maps $\\Delta:B\\to B\\otimes B$, $\\epsilon:B\\to L$ and an antipode $S:B\\to B$ satisfying the coassociativity, counit and inverse identities displayed in [lem-sfb-affine-group-coordinate-hopf]. A semilinear $\\Pi$-action on $B$ consists of additive multiplicative bijections $\\sigma_B$ satisfying the group-action identities and $\\sigma_B(\\lambda b)=\\sigma(\\lambda)\\sigma_B(b)$, satisfying $\\sigma_B S=S\\sigma_B$, $\\epsilon(\\sigma_B b)=\\sigma(\\epsilon(b))$, and $\\Delta\\sigma_B=(\\sigma_B\\otimes\\sigma_B)\\Delta$ under the diagonal semilinear action on $B\\otimes_L B$. Scalar extension $A\\mapsto L\\otimes_k A$, with action $\\sigma(\\lambda\\otimes a)=\\sigma(\\lambda)\\otimes a$, is an equivalence from commutative Hopf $k$-algebras to commutative Hopf $L$-algebras with semilinear $\\Pi$-action; morphisms in the latter category are $L$-linear Hopf maps commuting with the action. Its quasi-inverse is the invariant algebra $B^\\Pi$, with descended Hopf operations. The counit is the natural Hopf isomorphism $L\\otimes_k B^\\Pi\\to B$, $\\lambda\\otimes b\\mapsto\\lambda b$, and the unit is $A\\to(L\\otimes_k A)^\\Pi$, $a\\mapsto1\\otimes a$. This equivalence restricts to finitely generated algebras [def-weil-pbc-finite-type-algebra]. Tensor products have the meaning in [lem-weil-pbc-algebra-tensor-pushout-universal-property].",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Appendix A.64, printed pp.580–581, including its Hopf-algebra consequence; A.66, p.581, for descent of morphisms. Finite-generation restriction by descent of a finite set of algebra generators."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "lem-sfb-affine-group-coordinate-hopf",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-pbc-finite-type-algebra",
+  "def-sfb-semilinear-hopf-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=B^\\Pi$. Additivity and multiplicativity of the action make $A$ a commutative $k$-subalgebra. Vector-space descent gives an equivariant linear isomorphism $\\theta:L\\otimes_k A\\to B$. It is an algebra map: on pure tensors $\\theta((\\lambda\\otimes a)(\\mu\\otimes a'))=\\lambda\\mu aa'=\\theta(\\lambda\\otimes a)\\theta(\\mu\\otimes a')$, and it sends $1\\otimes1$ to $1$. Thus it is an algebra isomorphism. The unit of vector-space descent for $U=k$, followed by $L\\otimes_k k\\simeq L$, identifies $L^\\Pi$ with $k$.",
+   "uses": [
+    "lem-sfb-finite-galois-vector-space-descent",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix A.64, printed pp.580–581, vector-space descent and its Hopf-algebra consequence; details of the consequence supplied here."
+   }
+  },
+  {
+   "text": "For $n=2,3$, iteration of tensor base change gives an isomorphism\n$$\\rho_n:L\\otimes_k A^{\\otimes_k n}\\longrightarrow B^{\\otimes_L n},\\quad \\lambda\\otimes(a_1\\otimes\\cdots\\otimes a_n)\\longmapsto\\lambda a_1\\otimes a_2\\otimes\\cdots\\otimes a_n.$$\nHere first switch the scalar factor using $x\\otimes\\lambda\\leftrightarrow\\lambda\\otimes x$ and then apply the cited base-change isomorphism and $\\theta$ to each factor. The displayed formula makes $\\rho_n$ equivariant; multiplication of pure tensors makes it an algebra isomorphism. Apply $\\eta$ of vector-space descent to $U=A^{\\otimes_k n}$, then take invariants of $\\rho_n$. This gives an algebra isomorphism\n$$\\chi_n:A^{\\otimes_k n}\\xrightarrow{\\sim}(B^{\\otimes_L n})^\\Pi,\\quad a_1\\otimes\\cdots\\otimes a_n\\mapsto a_1\\otimes\\cdots\\otimes a_n.$$\nNo assertion that invariants commute with arbitrary tensor products is assumed; these particular comparisons follow from $\\rho_n$ and the stated unit isomorphism.",
+   "uses": [
+    "lem-sfb-finite-galois-vector-space-descent",
+    "lem-weil-pbc-base-change-tensor-distrib",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix A.64, printed pp.580–581, vector-space descent and its Hopf-algebra consequence; details of the consequence supplied here."
+   }
+  },
+  {
+   "text": "For $a\\in A$, equivariance gives $\\Delta_B(a)\\in(B\\otimes_L B)^\\Pi$, $\\epsilon_B(a)\\in L^\\Pi=k$, and $S_B(a)\\in A$. Define $\\Delta_A(a)=\\chi_2^{-1}(\\Delta_B(a))$, $\\epsilon_A(a)=\\epsilon_B(a)$ in $k$, and $S_A(a)=S_B(a)$. Restrictions and the algebra isomorphism $\\chi_2$ show that all three are $k$-algebra maps. Under $\\theta$ and $\\rho_2$, their scalar extensions are exactly $\\Delta_B,\\epsilon_B,S_B$: on $\\lambda\\otimes a$ their values become $\\lambda\\Delta_B(a),\\lambda\\epsilon_B(a),\\lambda S_B(a)$.",
+   "uses": [
+    "lem-sfb-finite-galois-vector-space-descent",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix A.64, printed pp.580–581, vector-space descent and its Hopf-algebra consequence; details of the consequence supplied here."
+   }
+  },
+  {
+   "text": "The coassociativity equation for $\\Delta_A$ is an equality of maps $A\\to A^{\\otimes_k3}$. After extension to $L$ and $\\rho_3$ it is exactly $(\\Delta_B\\otimes1)\\Delta_B=(1\\otimes\\Delta_B)\\Delta_B$. The two counit equations similarly become $(\\epsilon_B\\otimes1)\\Delta_B=1_B=(1\\otimes\\epsilon_B)\\Delta_B$ under the tensor unit identifications. Finally the two antipode equations become $\\mu_B(S_B\\otimes1)\\Delta_B=u_B\\epsilon_B=\\mu_B(1\\otimes S_B)\\Delta_B$. These identifications follow by the formulas for $\\rho_2,\\rho_3$ and their naturality in each factor; multiplication maps $a\\otimes a'$ to $aa'$ on both sides. Scalar extension is faithful by the Hom bijection in vector-space descent, so each equality holds over $k$. These are precisely the Hopf identities specified in the statement, hence $A$ is a Hopf algebra and $\\theta$ a Hopf isomorphism.",
+   "uses": [
+    "lem-sfb-finite-galois-vector-space-descent",
+    "lem-weil-pbc-base-change-tensor-distrib",
+    "lem-sfb-affine-group-coordinate-hopf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix A.64, printed pp.580–581, vector-space descent and its Hopf-algebra consequence; details of the consequence supplied here."
+   }
+  },
+  {
+   "text": "Conversely, for a commutative Hopf $k$-algebra $C$, give $L\\otimes_k C$ its tensor algebra structure. If $\\Delta_C(c)=\\sum_i c_i\\otimes d_i$, set $\\Delta_L(\\lambda\\otimes c)=\\sum_i(\\lambda\\otimes c_i)\\otimes_L(1\\otimes d_i)$, $\\epsilon_L(\\lambda\\otimes c)=\\lambda\\epsilon_C(c)$, and $S_L(\\lambda\\otimes c)=\\lambda\\otimes S_C(c)$. Tensor base change makes these well-defined algebra maps. On pure tensors the three Hopf identities are exactly those for $C$, multiplied by $\\lambda$, so they hold. The action $\\sigma(\\lambda\\otimes c)=\\sigma(\\lambda)\\otimes c$ is additive, multiplicative, semilinear, and satisfies the group law. The same formulas give its compatibility with all three operations, including $\\epsilon_L\\sigma=\\sigma\\epsilon_L$. The vector-space unit $\\eta_C:c\\mapsto1\\otimes c$ is an algebra isomorphism onto invariants and respects each displayed operation, hence is a Hopf isomorphism.",
+   "uses": [
+    "lem-sfb-finite-galois-vector-space-descent",
+    "lem-weil-pbc-base-change-tensor-distrib",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-sfb-affine-group-coordinate-hopf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix A.64, printed pp.580–581, vector-space descent and its Hopf-algebra consequence; details of the consequence supplied here."
+   }
+  },
+  {
+   "text": "If $F:B\\to B'$ is an equivariant $L$-linear Hopf map, its restriction $F_0:A\\to A'$ is a $k$-algebra map. It preserves $\\epsilon$ and $S$ by restriction. For comultiplication, apply the injective comparison $\\chi'_2$ to the desired equation: both sides become $\\Delta_{B'}F(a)=(F\\otimes_L F)\\Delta_B(a)$. Naturality of the tensor comparison identifies the second side with the image of $(F_0\\otimes_k F_0)\\Delta_A(a)$. Thus $F_0$ is a Hopf map. Conversely the scalar extension of any Hopf map is a Hopf map by the formulas in the previous step. The identity $F(\\lambda a)=\\lambda F_0(a)$ shows $F\\theta_B=\\theta_{B'}(1\\otimes F_0)$, so the vector-space Hom bijection restricts to exactly the required bijection on Hopf maps.",
+   "uses": [
+    "lem-sfb-finite-galois-vector-space-descent",
+    "lem-weil-pbc-base-change-tensor-distrib"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix A.64, printed pp.580–581, vector-space descent and its Hopf-algebra consequence; details of the consequence supplied here."
+   }
+  },
+  {
+   "text": "Restriction to invariants respects identities and compositions, as does scalar extension. The previous formulas prove naturality of $\\theta$ and $\\eta$ for Hopf maps. The two triangle composites are identities: $L\\otimes C\\xrightarrow{1\\otimes\\eta_C}L\\otimes(L\\otimes C)^\\Pi\\xrightarrow{\\theta_{L\\otimes C}}L\\otimes C$ sends $\\lambda\\otimes c$ to $\\lambda\\otimes c$, and $B^\\Pi\\xrightarrow{\\eta_{B^\\Pi}}(L\\otimes B^\\Pi)^\\Pi\\xrightarrow{(\\theta_B)^\\Pi}B^\\Pi$ sends $b$ to $b$. These natural Hopf isomorphisms exhibit the two functors as inverse equivalences.",
+   "uses": [
+    "lem-sfb-finite-galois-vector-space-descent",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix A.64, printed pp.580–581, vector-space descent and its Hopf-algebra consequence; details of the consequence supplied here."
+   }
+  },
+  {
+   "text": "If $C$ is generated over $k$ by $c_1,\\ldots,c_r$, then $L\\otimes C$ is generated over $L$ by $1\\otimes c_i$: every pure tensor is an $L$-multiple of a polynomial in these elements. Conversely suppose $B$ is generated over $L$ by $b_1,\\ldots,b_r$. Use $\\theta^{-1}$ to write each $b_i$ as a finite sum $\\sum_j\\lambda_{ij}a_{ij}$ with $a_{ij}\\in A$. Let $A_0\\subset A$ be the $k$-subalgebra generated by this finite set. Every $L$-polynomial in the $b_i$ belongs to the $L$-linear span of $A_0$, so that span is all of $B$. Let $q:A\\to A/A_0$ be the quotient map of $k$-vector spaces (the quotient by the underlying linear subspace, not an algebra quotient). The map $(1\\otimes q)\\theta^{-1}$ kills $A_0$ and therefore all its $L$-span $B$. Faithfulness of scalar extension gives $q=0$. Hence every $a\\in A$ lies in $A_0$, so $A=A_0$ is finitely generated. Together these implications prove the restriction to finitely generated algebras.",
+   "uses": [
+    "lem-sfb-finite-galois-vector-space-descent",
+    "def-weil-module-base-change",
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix A.64, printed pp.580–581, Hopf consequence; finite-generation restriction expanded by finite coefficients of generators and the faithful scalar-extension functor."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-galois-vector-space-descent",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-base-change-tensor-distrib",
+  "lem-sfb-affine-group-coordinate-hopf",
+  "def-weil-module-base-change",
+  "def-weil-pbc-finite-type-algebra"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Appendix A.64, printed pp.580–581. The source states the Hopf consequence; the explicit tensor, operation, morphism and finite-generation arguments here expand that consequence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Galois descent equivalence for commutative Hopf algebras with semilinear action by taking invariants",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsGaloisGroup.isInvariant\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ {G : Type u_1} {A : Type u_2} {B : Type u_3} {inst : Group G} {inst_1 : CommSemiring A} {inst_2 : Semiring B}\\n  {inst_3 : Algebra A B} {inst_4 : MulSemiringAction G B} [self : IsGaloisGroup G A B], Algebra.IsInvariant A B G\", \"doc\": \"If $ G $ is the Galois group of $ B $ over $ A $, then the algebra structure of $ A $ over $ B $ is invariant under the action of $ G $. Specifically, for all $ a \\\\in A $, $ g \\\\in G $, and $ b \\\\in B $\"}\n  {\"name\": \"Algebra.isInvariant_of_isGalois'\", \"module\": \"Mathlib/RingTheory/Invariant/Basic\", \"type\": \"∀ (A : Type u_1) (K : Type u_2) (L : Type u_3) (B : Type u_4) [inst : CommRing A] [inst_1 : CommRing B]\\n  [inst_2 : Field K] [inst_3 : Field L] [inst_4 : Algebra A K] [inst_5 : Algebra B L] [IsFractionRing A K]\\n  [IsFractionRing B L] [inst_8 : Algebra A B] [inst_9 : Algebra K L] [inst_10 : Algebra A\", \"doc\": \"If $ L/K $ is a finite Galois field extension and $ A \\\\to B $ is an $ A $-algebra structure on $ B $, then $ B $ is invariant under the action of its $ A $-algebra automorphism group $ \\\\text{Aut}_{A\\\\t\"}\n  {\"name\": \"Algebra.isInvariant_of_isGalois\", \"module\": \"Mathlib/RingTheory/Invariant/Basic\", \"type\": \"∀ (A : Type u_1) (K : Type u_2) (L : Type u_3) (B : Type u_4) [inst : CommRing A] [inst_1 : CommRing B]\\n  [inst_2 : Field K] [inst_3 : Field L] [inst_4 : Algebra A K] [inst_5 : Algebra B L] [inst_6 : IsFractionRing A K]\\n  [IsFractionRing B L] [inst_8 : Algebra A B] [inst_9 : Algebra K L] [inst_10 : \", \"doc\": \"If $ L/K $ is a finite Galois extension and $ B $ is the integral closure of $ A $ in $ L $, then $ B $ is invariant under the action of the Galois group $ \\\\text{Gal}(L/K) $. This means that for all $\"}\n  {\"name\": \"IsGaloisGroup\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"(G : Type u_1) →\\n  (A : Type u_2) →\\n    (B : Type u_3) →\\n      [inst : Group G] →\\n        [inst_1 : CommSemiring A] → [inst_2 : Semiring B] → [Algebra A B] → [MulSemiringAction G B] → Prop\", \"doc\": \"G is the Galois group of B over A, given that B is an algebra over A and G acts on B as a multiplicative semiring action\"}\n  {\"name\": \"IsGaloisGroup.iff_isFractionRing\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ (G : Type u_1) (A : Type u_2) (B : Type u_3) (K : Type u_4) (L : Type u_5) [inst : Group G] [inst_1 : CommRing A]\\n  [inst_2 : CommRing B] [inst_3 : MulSemiringAction G B] [inst_4 : Algebra A B] [inst_5 : Field K] [inst_6 : Field L]\\n  [inst_7 : Algebra K L] [inst_8 : Algebra A K] [inst_9 : Algebra \", \"doc\": \"Let $G$ be a finite group, $A$ an integrally closed commutative ring, and $B$ an $A$-algebra with a multiplicative $G$-action. Then $G$ is the Galois group of $B$ over $A$ if and only if $B$ is integr\"}\n  {\"name\": \"IsGaloisGroup.commutes\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ {G : Type u_1} {A : Type u_2} {B : Type u_3} {inst : Group G} {inst_1 : CommSemiring A} {inst_2 : Semiring B}\\n  {inst_3 : Algebra A B} {inst_4 : MulSemiringAction G B} [self : IsGaloisGroup G A B], SMulCommClass G A B\", \"doc\": \"If $ G $ is the Galois group of $ B $ over $ A $, then the scalar multiplications of $ G $ and $ A $ on $ B $ commute, i.e., for all $ g \\\\in G $, $ a \\\\in A $, and $ b \\\\in B $, we have $ g \\\\cdot (a \\\\cd\"}\n  {\"name\": \"IsGaloisGroup.of_isFractionRing\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ (G : Type u_1) (A : Type u_2) (B : Type u_3) (K : Type u_4) (L : Type u_5) [inst : Group G] [inst_1 : CommRing A]\\n  [inst_2 : CommRing B] [inst_3 : MulSemiringAction G B] [inst_4 : Algebra A B] [inst_5 : Field K] [inst_6 : Field L]\\n  [inst_7 : Algebra K L] [inst_8 : Algebra A K] [inst_9 : Algebra \", \"doc\": \"If $ G $ is the Galois group of $ L $ over $ K $, $ A $ is integrally closed, and $ B $ is integral over $ A $, then $ G $ is also the Galois group of $ B $ over $ A $.\"}\n  {\"name\": \"FixedPoints.toAlgHomEquiv\", \"module\": \"Mathlib/FieldTheory/Fixed\", \"type\": \"(G : Type u_1) →\\n  (F : Type u_2) →\\n    [inst : Group G] →\\n      [inst_1 : Field F] →\\n        [inst_2 : MulSemiringAction G F] → [Finite G] → [FaithfulSMul G F] → G ≃ (F →ₐ[↥(FixedPoints.subfield G F)] F)\", \"doc\": \"Under the assumptions that $ G $ is a finite monoid and its action on the field $ F $ is faithful, there exists a bijective equivalence between $ G $ and the set of algebra automorphisms of $ F $ that\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: field fixed-point invariance is not semilinear descent of arbitrary Hopf algebras, its morphisms or its scalar-recovery isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite Galois field extension semilinear vector spaces and algebras descend to their invariant subspace and tensor recovers the original object",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.isInvariant_of_isGalois\", \"module\": \"Mathlib/RingTheory/Invariant/Basic\", \"type\": \"∀ (A : Type u_1) (K : Type u_2) (L : Type u_3) (B : Type u_4) [inst : CommRing A] [inst_1 : CommRing B]\\n  [inst_2 : Field K] [inst_3 : Field L] [inst_4 : Algebra A K] [inst_5 : Algebra B L] [inst_6 : IsFractionRing A K]\\n  [IsFractionRing B L] [inst_8 : Algebra A B] [inst_9 : Algebra K L] [inst_10 : \", \"doc\": \"If $ L/K $ is a finite Galois extension and $ B $ is the integral closure of $ A $ in $ L $, then $ B $ is invariant under the action of the Galois group $ \\\\text{Gal}(L/K) $. This means that for all $\"}\n  {\"name\": \"Algebra.isInvariant_of_isGalois'\", \"module\": \"Mathlib/RingTheory/Invariant/Basic\", \"type\": \"∀ (A : Type u_1) (K : Type u_2) (L : Type u_3) (B : Type u_4) [inst : CommRing A] [inst_1 : CommRing B]\\n  [inst_2 : Field K] [inst_3 : Field L] [inst_4 : Algebra A K] [inst_5 : Algebra B L] [IsFractionRing A K]\\n  [IsFractionRing B L] [inst_8 : Algebra A B] [inst_9 : Algebra K L] [inst_10 : Algebra A\", \"doc\": \"If $ L/K $ is a finite Galois field extension and $ A \\\\to B $ is an $ A $-algebra structure on $ B $, then $ B $ is invariant under the action of its $ A $-algebra automorphism group $ \\\\text{Aut}_{A\\\\t\"}\n  {\"name\": \"IsGaloisGroup.to_isFractionRing\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ (G : Type u_1) (A : Type u_2) (B : Type u_3) (K : Type u_4) (L : Type u_5) [inst : Group G] [inst_1 : CommRing A]\\n  [inst_2 : CommRing B] [inst_3 : MulSemiringAction G B] [inst_4 : Algebra A B] [inst_5 : Field K] [inst_6 : Field L]\\n  [inst_7 : Algebra K L] [inst_8 : Algebra A K] [inst_9 : Algebra \", \"doc\": \"If $ G $ is a finite Galois group of $ B $ over $ A $, then $ G $ is also the Galois group of the fraction field $ L $ of $ B $ over the fraction field $ K $ of $ A $.\"}\n  {\"name\": \"IsGaloisGroup.isInvariant\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ {G : Type u_1} {A : Type u_2} {B : Type u_3} {inst : Group G} {inst_1 : CommSemiring A} {inst_2 : Semiring B}\\n  {inst_3 : Algebra A B} {inst_4 : MulSemiringAction G B} [self : IsGaloisGroup G A B], Algebra.IsInvariant A B G\", \"doc\": \"If $ G $ is the Galois group of $ B $ over $ A $, then the algebra structure of $ A $ over $ B $ is invariant under the action of $ G $. Specifically, for all $ a \\\\in A $, $ g \\\\in G $, and $ b \\\\in B $\"}\n  {\"name\": \"IsGaloisGroup.iff_isFractionRing\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ (G : Type u_1) (A : Type u_2) (B : Type u_3) (K : Type u_4) (L : Type u_5) [inst : Group G] [inst_1 : CommRing A]\\n  [inst_2 : CommRing B] [inst_3 : MulSemiringAction G B] [inst_4 : Algebra A B] [inst_5 : Field K] [inst_6 : Field L]\\n  [inst_7 : Algebra K L] [inst_8 : Algebra A K] [inst_9 : Algebra \", \"doc\": \"Let $G$ be a finite group, $A$ an integrally closed commutative ring, and $B$ an $A$-algebra with a multiplicative $G$-action. Then $G$ is the Galois group of $B$ over $A$ if and only if $B$ is integr\"}\n  {\"name\": \"IsGaloisGroup.of_isFractionRing\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ (G : Type u_1) (A : Type u_2) (B : Type u_3) (K : Type u_4) (L : Type u_5) [inst : Group G] [inst_1 : CommRing A]\\n  [inst_2 : CommRing B] [inst_3 : MulSemiringAction G B] [inst_4 : Algebra A B] [inst_5 : Field K] [inst_6 : Field L]\\n  [inst_7 : Algebra K L] [inst_8 : Algebra A K] [inst_9 : Algebra \", \"doc\": \"If $ G $ is the Galois group of $ L $ over $ K $, $ A $ is integrally closed, and $ B $ is integral over $ A $, then $ G $ is also the Galois group of $ B $ over $ A $.\"}\n  {\"name\": \"finGaloisGroupFunctor\", \"module\": \"Mathlib/FieldTheory/Galois/Profinite\", \"type\": \"(k : Type u_1) →\\n  (K : Type u_2) →\\n    [inst : Field k] →\\n      [inst_1 : Field K] →\\n        [inst_2 : Algebra k K] → CategoryTheory.Functor (FiniteGaloisIntermediateField k K)ᵒᵖ FiniteGrp.{u_2}\", \"doc\": \"The functor assigns to each finite Galois intermediate field $L$ in a Galois extension $K/k$ its Galois group $\\\\text{Gal}(L/k)$ as an object in the category of finite groups. For each field inclusion \"}\n  {\"name\": \"IsGalois.of_fixed_field\", \"module\": \"Mathlib/FieldTheory/Galois/Basic\", \"type\": \"∀ (E : Type u_2) [inst : Field E] (G : Type u_3) [inst_1 : Group G] [Finite G] [inst_3 : MulSemiringAction G E],\\n  IsGalois (↥(FixedPoints.subfield G E)) E\", \"doc\": \"If a finite group $ G $ acts on a field $ E $, then the extension $ E $ over the subfield of elements fixed by all elements of $ G $ is a Galois extension (i.e., it is algebraic, normal, and separable\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: field fixed-point invariance is not semilinear descent of arbitrary Hopf algebras, its morphisms or its scalar-recovery isomorphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HopfAlgebra\", \"IsGalois\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: field fixed-point invariance is not semilinear descent of arbitrary Hopf algebras, its morphisms or its scalar-recovery isomorphism"
+  },
+  {
+   "tool": "grep",
+   "query": "(Galois.*descent|descent.*Galois|semilinear.*invariant|invariant.*semilinear)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: field fixed-point invariance is not semilinear descent of arbitrary Hopf algebras, its morphisms or its scalar-recovery isomorphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Galois descent for Hopf algebras with semilinear Galois action and invariant algebra quasi inverse",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.isInvariant_of_isGalois'\", \"module\": \"Mathlib.RingTheory.Invariant.Basic\", \"type\": \"[FiniteDimensional K L] [IsGalois K L] : Algebra.IsInvariant A B (B ≃ₐ[A] B)\", \"doc\": \"If $ L/K $ is a finite Galois field extension and $ A \\\\to B $ is an $ A $-algebra structure on $ B $, then $ B $ is invariant under the action of its $ A $-algebra automorphism group $ \\\\text{Aut}_{A\\\\t\"}\n  {\"name\": \"IsGaloisGroup.isInvariant\", \"module\": \"Mathlib.FieldTheory.Galois.IsGaloisGroup\", \"type\": \"∀ {G : Type u_1} {A : Type u_2} {B : Type u_3} {inst : Group G} {inst_1 : CommSemiring A} {inst_2 : Semiring B}\\n  {inst_3 : Algebra A B} {inst_4 : MulSemiringAction G B} [self : IsGaloisGroup G A B], Algebra.IsInvariant A B G\", \"doc\": \"If $ G $ is the Galois group of $ B $ over $ A $, then the algebra structure of $ A $ over $ B $ is invariant under the action of $ G $. Specifically, for all $ a \\\\in A $, $ g \\\\in G $, and $ b \\\\in B $\"}\n  {\"name\": \"IsGaloisGroup.mk\", \"module\": \"Mathlib.FieldTheory.Galois.IsGaloisGroup\", \"type\": \"∀ {G : Type u_1} {A : Type u_2} {B : Type u_3} [inst : Group G] [inst_1 : CommSemiring A] [inst_2 : Semiring B]\\n  [inst_3 : Algebra A B] [inst_4 : MulSemiringAction G B],\\n  FaithfulSMul G B → SMulCommClass G A B → Algebra.IsInvariant A B G → IsGaloisGroup G A B\", \"doc\": \"If the action of G on B is faithful, the scalar multiplications of G and A on B commute, and the algebra structure of B over A is invariant under G's action, then G is the Galois group of B over A.\"}\n  {\"name\": \"IsGaloisGroup.recOn\", \"module\": \"Mathlib.FieldTheory.Galois.IsGaloisGroup\", \"type\": \"{G : Type u_1} →\\n  {A : Type u_2} →\\n    {B : Type u_3} →\\n      [inst : Group G] →\\n        [inst_1 : CommSemiring A] →\\n          [inst_2 : Semiring B] →\\n            [inst_3 : Algebra A B] →\\n              [inst_4 : MulSemiringAction G B] →\\n                {motive : IsGaloisGroup G A B → Sort u} →\\n    \", \"doc\": \"The structure asserting that a group $G$ is the Galois group of an algebra $B$ over a commutative semiring $A$, given that $B$ is an $A$-algebra equipped with a multiplicative semiring action of $G$. \"}\n  {\"name\": \"IsGaloisGroup\", \"module\": \"Mathlib.FieldTheory.Galois.IsGaloisGroup\", \"type\": \"(G : Type u_1) →\\n  (A : Type u_2) →\\n    (B : Type u_3) →\\n      [inst : Group G] →\\n        [inst_1 : CommSemiring A] → [inst_2 : Semiring B] → [Algebra A B] → [MulSemiringAction G B] → Prop\", \"doc\": \"G is the Galois group of B over A, given that B is an algebra over A and G acts on B as a multiplicative semiring action\"}\n  {\"name\": \"IsGaloisGroup.of_isGalois\", \"module\": \"Mathlib.FieldTheory.Galois.IsGaloisGroup\", \"type\": \"[IsGalois K L] : IsGaloisGroup Gal(L/K) K L\", \"doc\": \"If $ K/L $ is a Galois extension (i.e., algebraic, normal, and separable), then the Galois group $ \\\\text{Gal}(K/L) $ satisfies the Galois group condition over $ L $ and $ K $, meaning it acts as a mul\"}\n  {\"name\": \"IsGroupLikeElem.antipode_antipode\", \"module\": \"Mathlib.RingTheory.HopfAlgebra.GroupLike\", \"type\": \"(ha : IsGroupLikeElem R a) : antipode R (antipode R a) = a\", \"doc\": \"For any group-like element $ a $ in a Hopf algebra over a commutative semiring $ R $, applying the antipode map twice to $ a $ yields $ a $ itself, i.e., $ S(S(a)) = a $.\"}\n  {\"name\": \"GroupLike.val_inv\", \"module\": \"Mathlib.RingTheory.HopfAlgebra.GroupLike\", \"type\": \"(a : GroupLike R A) : ↑(a⁻¹) = (antipode R a : A)\", \"doc\": \"For any group-like element $ a $ in a Hopf algebra over a commutative semiring $ R $, the inverse of $ a $ is equal to the antipode of $ a $, i.e., $ a^{-1} = S(a) $.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: field fixed-point invariance is not semilinear descent of arbitrary Hopf algebras, its morphisms or its scalar-recovery isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Galois descent equivalence for commutative Hopf algebras with semilinear action by taking invariants",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsGaloisGroup.isInvariant\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ {G : Type u_1} {A : Type u_2} {B : Type u_3} {inst : Group G} {inst_1 : CommSemiring A} {inst_2 : Semiring B}\\n  {inst_3 : Algebra A B} {inst_4 : MulSemiringAction G B} [self : IsGaloisGroup G A B], Algebra.IsInvariant A B G\", \"doc\": \"If $ G $ is the Galois group of $ B $ over $ A $, then the algebra structure of $ A $ over $ B $ is invariant under the action of $ G $. Specifically, for all $ a \\\\in A $, $ g \\\\in G $, and $ b \\\\in B $\"}\n  {\"name\": \"Algebra.isInvariant_of_isGalois'\", \"module\": \"Mathlib/RingTheory/Invariant/Basic\", \"type\": \"∀ (A : Type u_1) (K : Type u_2) (L : Type u_3) (B : Type u_4) [inst : CommRing A] [inst_1 : CommRing B]\\n  [inst_2 : Field K] [inst_3 : Field L] [inst_4 : Algebra A K] [inst_5 : Algebra B L] [IsFractionRing A K]\\n  [IsFractionRing B L] [inst_8 : Algebra A B] [inst_9 : Algebra K L] [inst_10 : Algebra A\", \"doc\": \"If $ L/K $ is a finite Galois field extension and $ A \\\\to B $ is an $ A $-algebra structure on $ B $, then $ B $ is invariant under the action of its $ A $-algebra automorphism group $ \\\\text{Aut}_{A\\\\t\"}\n  {\"name\": \"Algebra.isInvariant_of_isGalois\", \"module\": \"Mathlib/RingTheory/Invariant/Basic\", \"type\": \"∀ (A : Type u_1) (K : Type u_2) (L : Type u_3) (B : Type u_4) [inst : CommRing A] [inst_1 : CommRing B]\\n  [inst_2 : Field K] [inst_3 : Field L] [inst_4 : Algebra A K] [inst_5 : Algebra B L] [inst_6 : IsFractionRing A K]\\n  [IsFractionRing B L] [inst_8 : Algebra A B] [inst_9 : Algebra K L] [inst_10 : \", \"doc\": \"If $ L/K $ is a finite Galois extension and $ B $ is the integral closure of $ A $ in $ L $, then $ B $ is invariant under the action of the Galois group $ \\\\text{Gal}(L/K) $. This means that for all $\"}\n  {\"name\": \"IsGaloisGroup\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"(G : Type u_1) →\\n  (A : Type u_2) →\\n    (B : Type u_3) →\\n      [inst : Group G] →\\n        [inst_1 : CommSemiring A] → [inst_2 : Semiring B] → [Algebra A B] → [MulSemiringAction G B] → Prop\", \"doc\": \"G is the Galois group of B over A, given that B is an algebra over A and G acts on B as a multiplicative semiring action\"}\n  {\"name\": \"IsGaloisGroup.iff_isFractionRing\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ (G : Type u_1) (A : Type u_2) (B : Type u_3) (K : Type u_4) (L : Type u_5) [inst : Group G] [inst_1 : CommRing A]\\n  [inst_2 : CommRing B] [inst_3 : MulSemiringAction G B] [inst_4 : Algebra A B] [inst_5 : Field K] [inst_6 : Field L]\\n  [inst_7 : Algebra K L] [inst_8 : Algebra A K] [inst_9 : Algebra \", \"doc\": \"Let $G$ be a finite group, $A$ an integrally closed commutative ring, and $B$ an $A$-algebra with a multiplicative $G$-action. Then $G$ is the Galois group of $B$ over $A$ if and only if $B$ is integr\"}\n  {\"name\": \"IsGaloisGroup.commutes\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ {G : Type u_1} {A : Type u_2} {B : Type u_3} {inst : Group G} {inst_1 : CommSemiring A} {inst_2 : Semiring B}\\n  {inst_3 : Algebra A B} {inst_4 : MulSemiringAction G B} [self : IsGaloisGroup G A B], SMulCommClass G A B\", \"doc\": \"If $ G $ is the Galois group of $ B $ over $ A $, then the scalar multiplications of $ G $ and $ A $ on $ B $ commute, i.e., for all $ g \\\\in G $, $ a \\\\in A $, and $ b \\\\in B $, we have $ g \\\\cdot (a \\\\cd\"}\n  {\"name\": \"IsGaloisGroup.of_isFractionRing\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ (G : Type u_1) (A : Type u_2) (B : Type u_3) (K : Type u_4) (L : Type u_5) [inst : Group G] [inst_1 : CommRing A]\\n  [inst_2 : CommRing B] [inst_3 : MulSemiringAction G B] [inst_4 : Algebra A B] [inst_5 : Field K] [inst_6 : Field L]\\n  [inst_7 : Algebra K L] [inst_8 : Algebra A K] [inst_9 : Algebra \", \"doc\": \"If $ G $ is the Galois group of $ L $ over $ K $, $ A $ is integrally closed, and $ B $ is integral over $ A $, then $ G $ is also the Galois group of $ B $ over $ A $.\"}\n  {\"name\": \"FixedPoints.toAlgHomEquiv\", \"module\": \"Mathlib/FieldTheory/Fixed\", \"type\": \"(G : Type u_1) →\\n  (F : Type u_2) →\\n    [inst : Group G] →\\n      [inst_1 : Field F] →\\n        [inst_2 : MulSemiringAction G F] → [Finite G] → [FaithfulSMul G F] → G ≃ (F →ₐ[↥(FixedPoints.subfield G F)] F)\", \"doc\": \"Under the assumptions that $ G $ is a finite monoid and its action on the field $ F $ is faithful, there exists a bijective equivalence between $ G $ and the set of algebra automorphisms of $ F $ that\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: fixed-field invariance and ordinary linear representations do not give arbitrary semilinear vector-space descent or Hopf descent; HopfAlgebra.ofAlgHom constructs an antipode on an already given bialgebra and supplies no descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Commutative Hopf algebras over a finite Galois extension descend through fixed points with comultiplication counit antipode and equivariant morphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsGalois.of_fixed_field\", \"module\": \"Mathlib/FieldTheory/Galois/Basic\", \"type\": \"∀ (E : Type u_2) [inst : Field E] (G : Type u_3) [inst_1 : Group G] [Finite G] [inst_3 : MulSemiringAction G E],\\n  IsGalois (↥(FixedPoints.subfield G E)) E\", \"doc\": \"If a finite group $ G $ acts on a field $ E $, then the extension $ E $ over the subfield of elements fixed by all elements of $ G $ is a Galois extension (i.e., it is algebraic, normal, and separable\"}\n  {\"name\": \"IsGaloisGroup.fixedPoints\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ (G : Type u_1) (L : Type u_4) [inst : Group G] [inst_1 : Field L] [inst_2 : MulSemiringAction G L] [Finite G]\\n  [FaithfulSMul G L], IsGaloisGroup G (↥(FixedPoints.subfield G L)) L\", \"doc\": \"If $ G $ is a finite group acting faithfully on a field $ L $, then $ G $ is the Galois group of the field extension $ L $ over the subfield of elements fixed by the action of $ G $.\"}\n  {\"name\": \"HopfAlgebra.ofAlgHom\", \"module\": \"Mathlib/RingTheory/HopfAlgebra/TensorProduct\", \"type\": \"{R : Type u_1} →\\n  {A : Type u_2} →\\n    [inst : CommSemiring R] →\\n      [inst_1 : CommSemiring A] →\\n        [inst_2 : Bialgebra R A] →\\n          (antipode : A →ₐ[R] A) →\\n            (Algebra.TensorProduct.lift antipode (AlgHom.id R A) ⋯).comp (Bialgebra.comulAlgHom R A) =\\n                (Algebra.of\", \"doc\": \"Given a commutative semiring $ R $, a commutative semiring $ A $, and a bialgebra structure on $ A $ over $ R $, this constructor defines a Hopf algebra structure on $ A $ using an algebra homomorphis\"}\n  {\"name\": \"finGaloisGroupFunctor\", \"module\": \"Mathlib/FieldTheory/Galois/Profinite\", \"type\": \"(k : Type u_1) →\\n  (K : Type u_2) →\\n    [inst : Field k] →\\n      [inst_1 : Field K] →\\n        [inst_2 : Algebra k K] → CategoryTheory.Functor (FiniteGaloisIntermediateField k K)ᵒᵖ FiniteGrp.{u_2}\", \"doc\": \"The functor assigns to each finite Galois intermediate field $L$ in a Galois extension $K/k$ its Galois group $\\\\text{Gal}(L/k)$ as an object in the category of finite groups. For each field inclusion \"}\n  {\"name\": \"IsGaloisGroup.isInvariant\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ {G : Type u_1} {A : Type u_2} {B : Type u_3} {inst : Group G} {inst_1 : CommSemiring A} {inst_2 : Semiring B}\\n  {inst_3 : Algebra A B} {inst_4 : MulSemiringAction G B} [self : IsGaloisGroup G A B], Algebra.IsInvariant A B G\", \"doc\": \"If $ G $ is the Galois group of $ B $ over $ A $, then the algebra structure of $ A $ over $ B $ is invariant under the action of $ G $. Specifically, for all $ a \\\\in A $, $ g \\\\in G $, and $ b \\\\in B $\"}\n  {\"name\": \"IsGaloisGroup.intermediateField\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ (G : Type u_1) (K : Type u_3) (L : Type u_4) [inst : Group G] [inst_1 : Field K] [inst_2 : Field L]\\n  [inst_3 : Algebra K L] [inst_4 : MulSemiringAction G L] (F : IntermediateField K L) [Finite G]\\n  [hGKL : IsGaloisGroup G K L], IsGaloisGroup (↥(fixingSubgroup G ↑F)) (↥F) L\", \"doc\": \"For a finite Galois extension $ L/K $ with Galois group $ G $, and an intermediate field $ F $ (i.e., $ K \\\\subseteq F \\\\subseteq L $), the subgroup of $ G $ consisting of all automorphisms that fix eve\"}\n  {\"name\": \"IsGaloisGroup.subgroup\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ (G : Type u_1) (K : Type u_3) (L : Type u_4) [inst : Group G] [inst_1 : Field K] [inst_2 : Field L]\\n  [inst_3 : Algebra K L] [inst_4 : MulSemiringAction G L] (H : Subgroup G) [hGKL : IsGaloisGroup G K L],\\n  IsGaloisGroup (↥H) (↥(FixedPoints.intermediateField ↥H)) L\", \"doc\": \"If $ G $ is the Galois group of the field extension $ L $ over $ K $, then any subgroup $ H $ of $ G $ is the Galois group of the fixed field of $ H $ in $ L $ over $ K $. The fixed field consists of \"}\n  {\"name\": \"fixedByFinite\", \"module\": \"Mathlib/FieldTheory/KrullTopology\", \"type\": \"(K : Type u_1) →\\n  (L : Type u_2) → [inst : Field K] → [inst_1 : Field L] → [inst_2 : Algebra K L] → Set (Subgroup Gal(L/K))\", \"doc\": \"The set of subgroups of the Galois group $\\\\text{Gal}(L/K)$ obtained by taking the fixing subgroup for each finite intermediate field $E$ between $K$ and $L$, where each subgroup consists of automorphi\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: fixed-field invariance and ordinary linear representations do not give arbitrary semilinear vector-space descent or Hopf descent; HopfAlgebra.ofAlgHom constructs an antipode on an already given bialgebra and supplies no descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HopfAlgebra\", \"IsGalois\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: fixed-field invariance and ordinary linear representations do not give arbitrary semilinear vector-space descent or Hopf descent; HopfAlgebra.ofAlgHom constructs an antipode on an already given bialgebra and supplies no descent."
+  },
+  {
+   "tool": "grep",
+   "query": "(Galois.*descent|descent.*Galois|semilinear.*invariant|invariant.*semilinear)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: fixed-field invariance and ordinary linear representations do not give arbitrary semilinear vector-space descent or Hopf descent; HopfAlgebra.ofAlgHom constructs an antipode on an already given bialgebra and supplies no descent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Galois descent equivalence for Hopf algebras with semilinear action and invariant algebra",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsGaloisGroup.mk\", \"module\": \"Mathlib.FieldTheory.Galois.IsGaloisGroup\", \"type\": \"∀ {G : Type u_1} {A : Type u_2} {B : Type u_3} [inst : Group G] [inst_1 : CommSemiring A] [inst_2 : Semiring B]\\n  [inst_3 : Algebra A B] [inst_4 : MulSemiringAction G B],\\n  FaithfulSMul G B → SMulCommClass G A B → Algebra.IsInvariant A B G → IsGaloisGroup G A B\", \"doc\": \"If the action of G on B is faithful, the scalar multiplications of G and A on B commute, and the algebra structure of B over A is invariant under G's action, then G is the Galois group of B over A.\"}\n  {\"name\": \"Algebra.isInvariant_of_isGalois'\", \"module\": \"Mathlib.RingTheory.Invariant.Basic\", \"type\": \"[FiniteDimensional K L] [IsGalois K L] : Algebra.IsInvariant A B (B ≃ₐ[A] B)\", \"doc\": \"If $ L/K $ is a finite Galois field extension and $ A \\\\to B $ is an $ A $-algebra structure on $ B $, then $ B $ is invariant under the action of its $ A $-algebra automorphism group $ \\\\text{Aut}_{A\\\\t\"}\n  {\"name\": \"IsGaloisGroup.isInvariant\", \"module\": \"Mathlib.FieldTheory.Galois.IsGaloisGroup\", \"type\": \"∀ {G : Type u_1} {A : Type u_2} {B : Type u_3} {inst : Group G} {inst_1 : CommSemiring A} {inst_2 : Semiring B}\\n  {inst_3 : Algebra A B} {inst_4 : MulSemiringAction G B} [self : IsGaloisGroup G A B], Algebra.IsInvariant A B G\", \"doc\": \"If $ G $ is the Galois group of $ B $ over $ A $, then the algebra structure of $ A $ over $ B $ is invariant under the action of $ G $. Specifically, for all $ a \\\\in A $, $ g \\\\in G $, and $ b \\\\in B $\"}\n  {\"name\": \"IsGaloisGroup\", \"module\": \"Mathlib.FieldTheory.Galois.IsGaloisGroup\", \"type\": \"(G : Type u_1) →\\n  (A : Type u_2) →\\n    (B : Type u_3) →\\n      [inst : Group G] →\\n        [inst_1 : CommSemiring A] → [inst_2 : Semiring B] → [Algebra A B] → [MulSemiringAction G B] → Prop\", \"doc\": \"G is the Galois group of B over A, given that B is an algebra over A and G acts on B as a multiplicative semiring action\"}\n  {\"name\": \"IsGaloisGroup.recOn\", \"module\": \"Mathlib.FieldTheory.Galois.IsGaloisGroup\", \"type\": \"{G : Type u_1} →\\n  {A : Type u_2} →\\n    {B : Type u_3} →\\n      [inst : Group G] →\\n        [inst_1 : CommSemiring A] →\\n          [inst_2 : Semiring B] →\\n            [inst_3 : Algebra A B] →\\n              [inst_4 : MulSemiringAction G B] →\\n                {motive : IsGaloisGroup G A B → Sort u} →\\n    \", \"doc\": \"The structure asserting that a group $G$ is the Galois group of an algebra $B$ over a commutative semiring $A$, given that $B$ is an $A$-algebra equipped with a multiplicative semiring action of $G$. \"}\n  {\"name\": \"IsGaloisGroup.casesOn\", \"module\": \"Mathlib.FieldTheory.Galois.IsGaloisGroup\", \"type\": \"{G : Type u_1} →\\n  {A : Type u_2} →\\n    {B : Type u_3} →\\n      [inst : Group G] →\\n        [inst_1 : CommSemiring A] →\\n          [inst_2 : Semiring B] →\\n            [inst_3 : Algebra A B] →\\n              [inst_4 : MulSemiringAction G B] →\\n                {motive : IsGaloisGroup G A B → Sort u} →\\n    \", \"doc\": \"The condition that G is the Galois group of B over A, meaning that the action of G on B is faithful, the scalar multiplications of G and A on B commute, and the algebra structure of B over A is invari\"}\n  {\"name\": \"BialgEquiv.toHopfAlgIso_hom\", \"module\": \"Mathlib.Algebra.Category.HopfAlgCat.Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {X Y : Type v} [inst_1 : Ring X] [inst_2 : Ring Y] [inst_3 : HopfAlgebra R X]\\n  [inst_4 : HopfAlgebra R Y] (e : X ≃ₐc[R] Y), e.toHopfAlgIso.hom = HopfAlgCat.ofHom ↑e\", \"doc\": \"For any commutative ring $ R $ and Hopf algebras $ X $ and $ Y $ over $ R $, the underlying morphism of the Hopf algebra isomorphism induced by a bialgebra equivalence $ e : X \\to Y $ coincides with th\"}\n  {\"name\": \"MulSemiringAction.toAlgEquiv\", \"module\": \"Mathlib.Algebra.Algebra.Equiv\", \"type\": \"(g : G) : A ≃ₐ[R] A\", \"doc\": \"Given a group element $ g $ acting on a semiring $ A $ via a multiplicative semiring action over a commutative semiring $ R $, this function constructs the algebra equivalence from $ A $ to $ A $ indu\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: fixed-field invariance and ordinary linear representations do not give arbitrary semilinear vector-space descent or Hopf descent; HopfAlgebra.ofAlgHom constructs an antipode on an already given bialgebra and supplies no descent."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-multiplicative-character-antiduality",
+  "date": "2026-10-23",
+  "group": "Q108"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Largest subtorus and smooth connected subgroups of groups of multiplicative type. Supporting input: Milne Theorem 12.23: character description needed before forming the torsion quotient in Notation 12.29. Supporting input for the character construction: finite Galois descent of the semilinear group algebra and its Hopf morphisms.",
+   "via": [
+    "lem-sfb-multiplicative-character-antiduality",
+    "lem-sfb-multiplicative-type-largest-subtorus",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-galois-hopf-algebra-descent",
+  "worker": "stage1",
+  "summary": "Descended the Hopf operations explicitly from arbitrary semilinear vector-space descent, using existing tensor base-change and algebra pushout leaves. Checked morphisms, natural unit/counit and finite generation. Clarified the counit target action; one statement-only input, searched in Mathlib and against the DAG/blueprint.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Largest subtorus and smooth connected subgroups of groups of multiplicative type. Supporting input: Milne Theorem 12.23: character description needed before forming the torsion quotient in Notation 12.29. Supporting input for the character construction: finite Galois descent of the semilinear group algebra and its Hopf morphisms.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q138-ad377bf51",
+  "group": "Q138",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q138-ad377bf51 (reviewer sub-agent of L); spot-checked: I read the full item, the new node, every cited statement, Milne iAG2017 A.63–A.66 (pp.580–581) and 3.36 (p.77), and Stacks 0CDR (descent.tex lemma-galois-descent). This is the item's first split: live has it unsplit and there is no repair note, so it is not a 2026-10-21 re-split. Statement changes: B is now a Hopf L-algebra, and ε(σb)=σ(ε(b)) is written out. The literal εσ=ε reading is false already for B=L (L=C, k=R, σ=conjugation, ε=id). The only citer, multiplicative-character-antiduality steps 4–5, uses L[M] with ε(a e_m)=a, which satisfies the clarified form. A finite-type stmt_dep is added. No hypothesis is added and no conclusion is weakened. Steps checked: (1) B^Π is a k-subalgebra, θ is an algebra iso by the pushout leaf, and L^Π=k comes from η at U=k. (2) ρ_n is built from tensor-distrib and θ⊗θ; it is equivariant because the a_i are fixed, and χ_n=ρ_n^Π∘η. (3) Δ, ε and S restrict to the invariants, and their scalar extensions match on λ⊗a. (4) The Hopf identities follow from faithfulness of f↦1⊗f. (5) The Hopf structure on L⊗C and the action compatibilities hold (ε_C(c)∈k), and η_C is a Hopf map. (6) Morphisms descend via injectivity of χ'_2 and Fθ=θ'(1⊗F_0). (7) The triangle identities are genuinely elementary. (8) Finite generation is proved through the vector-space quotient A/A_0 and faithfulness, with no averaging and no dimension bound. proof_deps equals the union of uses. Every cited node apart from the new one is a Mathlib leaf, so there is no route or tool_uses issue. No SGA source is used. New node lem-sfb-finite-galois-vector-space-descent: it is Milne 3.36/A.64 for arbitrary vector spaces and is true. I tested L=k, V=0, V=L and infinite-dimensional V. It is self-contained, statement-only, has three search kinds recorded with results, and is strictly smaller than the item. Not duplicates: galois-stable-subspace-descent, tensor-field-extension-galois-invariants (that gives only the η half), the sc matrix-cocycle nodes, exc sections-descent and the sbc/sfb semilinear nodes. My own Mathlib grep finds only Hilbert90.lean. The null blueprint from.node is inherited from the base item. The item's source still names A.66, which no step uses; this is harmless. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.GaloisHopfAlgebraDescent",
+  "declaration": "CommHopfAlgCat.finite_galois_hopf_algebra_descent",
+  "declarations": [
+   "CommHopfAlgCat.finite_galois_hopf_algebra_descent"
+  ],
+  "file": "lean/Sheaf/FieldTheory/GaloisHopfAlgebraDescent.lean",
+  "statement": "theorem finite_galois_hopf_algebra_descent (k : Type u) (L : Type v) [Field k] [Field L] [Algebra k L] [FiniteDimensional k L] [IsGalois k L] : ∃ E : CommHopfAlgCat.{max u v w} k ≌ GaloisObject.{u, v, max u v w} k L, ∃ t : ∀ A : CommHopfAlgCat.{max u v w} k, (E.functor.obj A).obj ≃ₐc[L] L ⊗[k] A, ∃ i : ∀ B : GaloisObject.{u, v, max u v w} k L, E.inverse.obj B ≃ₐ[k] B.invariants, (∀ (A : CommHopfAlgCat.{max u v w} k) (σ : L ≃ₐ[k] L) (x : (E.functor.obj A).obj), t A ((E.functor.obj A).action.ρ σ x) = TensorProduct.map σ.toLinearEquiv.toLinearMap (LinearMap.id : A →ₗ[k] A) (t A x)) ∧ (∀ (A C : CommHopfAlgCat.{max u v w} k) (f : A ⟶ C) (x : (E.functor.obj A).obj), t C ((E.functor.map f).hom.hom x) = TensorProduct.map (LinearMap.id : L →ₗ[k] L) f.hom.toLinearMap (t A x)) ∧ (∀ (B C : GaloisObject.{u, v, max u v w} k L) (f : B ⟶ C) (a : E.inverse.obj B), (i C ((E.inverse.map f).hom a)).val = f.hom.hom (i B a).val) ∧ (∀ (A : CommHopfAlgCat.{max u v w} k) (a : A), t A (i (E.functor.obj A) ((E.unitIso.app A).hom.hom a)).val = 1 ⊗ₜ[k] a) ∧ (∀ (B : GaloisObject.{u, v, max u v w} k L) (r : L) (a : E.inverse.obj B), (E.counitIso.app B).hom.hom.hom ((t (E.inverse.obj B)).symm (r ⊗ₜ[k] a)) = r • (i B a).val) ∧ (∀ A : CommHopfAlgCat.{max u v w} k, (algebraMap k A).FiniteType ↔ (algebraMap L (E.functor.obj A).obj).FiniteType) ∧ (∀ B : GaloisObject.{u, v, max u v w} k L, (algebraMap L B.obj).FiniteType ↔ (algebraMap k (E.inverse.obj B)).FiniteType)",
+  "branch": "sheaf-dag",
+  "by": "Q119",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d92d28b0f",
+  "group": "Q119",
+  "result": "pass",
+  "note": "Read the item, all 7 statement dependencies, the new node def-sfb-semilinear-hopf-algebra, both modules and the report; no file changed, so no recompile, and compile evidence is the worker's clean per-file compiles of both modules. Hypotheses are FiniteDimensional + IsGalois, nothing stronger. SemilinearAction is real data: a group hom into ring automorphisms with the scalar rule, antipode compatibility, the sigma-twisted counit and comultiplication via semilinear TensorProduct.map; invariants are FixedPoints.subalgebra. The equivalence is pinned: t is a Hopf iso to Mathlib's L⊗A with action σ⊗id; functor and inverse on morphisms are fixed; i is an algebra iso to the invariants; unit a↦1⊗a and counit λ⊗a↦λa determine the descended Hopf operations uniquely; finite type is an iff both ways. Pins are consistent and satisfiable. Universes max u v w follow the Mathlib extendScalars convention. lean.statement is verbatim; the only item record change vs live is the new stmt_dep. No clash in live Lean or the DAG, no hollow definitions, theorem is sorry, docstrings carry the source, blueprint id and proof plan. Edge cases L=k, B=L, char p and infinite-dimensional are fine. Minor: the source still cites A.66, which no step uses (harmless)."
+ }
+}

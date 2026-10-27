@@ -1,0 +1,126 @@
+{
+ "id": "def-sfb-finite-model-quotient-coordinates",
+ "kind": "definition",
+ "title": "Coordinates for the specified finite-model quotient calculation",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, its recorded integral ring $A$ and the positive quotient $R_n=A/(\\pi^{n+1})$ of [def-weil-l-adic-coefficient-extension]. Use the module categories, derived reduction and finite constant scalar models of [sk-def-sfb-module-derived-pushpull, sk-def-pe-derived-completion, def-sfb-finite-constant-model-data], and the normalized encoding of [lem-sf-finite-discrete-normalized-encoding]. Define the finite-model quotient coordinates as follows. An integral scalar matrix $v:A^a\\to A^b$ is reduced entrywise by the actual quotient homomorphism, giving $\\bar v:R_n^a\\to R_n^b$. Its scalar complex is the literal two-term complex in degrees $-1,0$, its ordinary complex is its termwise constant sheaf realization, and its internal complex is the inverse image under the specified derived encoding. For a module sheaf $M$ on $V$, its reduction is the derived extension of $M[0]$ along the recorded quotient. LocalCalculation says that, for every finite stratification, each pro-etale covering chart and every specified exact scalar presentation of a model for the restricted $M$, the restriction of this reduction is isomorphic to the internal two-term complex; its two encoded cohomology sheaves are the constant kernel and cokernel of $\\bar v$, which are finite and finitely presented. OrdinaryConclusion says that the encoded reduction is bounded and all its cohomology sheaves are intrinsically constructible as in [def-weil-proetale-constructible-sheaf]. The encodings and all matrices retain their coefficient action; ranks zero are permitted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/lem-integral-ctf-equals-bc.proof.md",
+  "place": "Local models: unchanged coordinate definitions extracted to a common module."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-pe-derived-completion",
+  "def-sfb-finite-constant-model-data",
+  "lem-sf-finite-discrete-normalized-encoding",
+  "def-weil-proetale-constructible-sheaf"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor of a finite free resolution with a quotient ring is the reduced two term complex",
+   "results": "OK 8 hits: TensorProduct.tensorQuotEquivQuotSMul; ProjectiveResolution.quasiIso; TensorProduct.tensorQuotientEquiv; TensorProduct.quotientTensorEquiv; QuotSMulTop.tensorQuotSMulTopEquivQuotSMulTop; ProjectiveResolution.exact_succ; HasDerivedCategory; TensorProduct.quotientTensorQuotientEquiv.",
+   "date": "2026-10-25",
+   "verdict": "No exact match for the specified finite-model quotient comparison or descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homology\", \"double\"",
+   "results": "OK 0 hits.",
+   "date": "2026-10-25",
+   "verdict": "No exact match for the specified finite-model quotient comparison or descent."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientExtensionRing|IsConstructibleProEtaleFixedModuleSheaf|ordinaryComplex",
+   "results": "OK 0 hits.",
+   "date": "2026-10-25",
+   "verdict": "No exact match for the specified finite-model quotient comparison or descent."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteModelSheafQuotientConstructible",
+  "date": "2026-10-25",
+  "group": "G4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms, (2): the closed-complement proper-base-change calculation on bounded constructible finite-Tor generators; Adic completeness and classical reductions of qcqs finite-model integral inputs. Subargument: Local models and Locality paragraphs of the finite-model proof; returned proof steps 8--9. Agent finite-quotient matrix calculation and finite-stratification descent; compare Bhatt--Scholze Section 6.3 for classical finite coefficients. Local models: unchanged coordinate definitions extracted to a common module.",
+   "via": [
+    "lem-sfb-finite-model-sheaf-quotient-constructible",
+    "lem-sfb-qcqs-integral-finite-model-completeness",
+    "lem-sfb-qcqs-proper-constructible-closed-base-change",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteModelSheafQuotientData",
+  "file": "lean/Sheaf/Paper/FiniteModelSheafQuotientData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteModelQuotient.LocalCalculation",
+  "statement": "abbrev LocalCalculation (V : Scheme.{u}) (M : AdicCompletion.Modules l E V) (n : ℕ)\n    (enc : ∀ T : Scheme.{u}, Encoding l E n T) : Prop :=\n  LocalCalculationAt l E V M n enc (reduction l E V M n)",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-26",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FiniteModelQuotient.A",
+   "AlgebraicGeometry.ProEtale.FiniteModelQuotient.R",
+   "AlgebraicGeometry.ProEtale.FiniteModelQuotient.quotientModules",
+   "AlgebraicGeometry.ProEtale.FiniteModelQuotient.quotientModuleCategory",
+   "AlgebraicGeometry.ProEtale.FiniteModelQuotient.quotientModuleAbelian",
+   "AlgebraicGeometry.ProEtale.FiniteModelQuotient.quotientModuleDerived",
+   "AlgebraicGeometry.ProEtale.FiniteModelQuotient.quotientHomology",
+   "AlgebraicGeometry.ProEtale.FiniteModelQuotient.ordinaryHomology",
+   "AlgebraicGeometry.ProEtale.FiniteModelQuotient.quotientUpperStar",
+   "AlgebraicGeometry.ProEtale.FiniteModelQuotient.quotientPullback",
+   "AlgebraicGeometry.ProEtale.FiniteModelQuotient.Encoding",
+   "AlgebraicGeometry.ProEtale.FiniteModelQuotient.fixedEncoding",
+   "AlgebraicGeometry.ProEtale.FiniteModelQuotient.derivedEncoding",
+   "AlgebraicGeometry.ProEtale.FiniteModelQuotient.model",
+   "AlgebraicGeometry.ProEtale.FiniteModelQuotient.reduction",
+   "AlgebraicGeometry.ProEtale.FiniteModelQuotient.matrix",
+   "AlgebraicGeometry.ProEtale.FiniteModelQuotient.differential",
+   "AlgebraicGeometry.ProEtale.FiniteModelQuotient.scalarComplex",
+   "AlgebraicGeometry.ProEtale.FiniteModelQuotient.ordinaryComplex",
+   "AlgebraicGeometry.ProEtale.FiniteModelQuotient.integralDifferential",
+   "AlgebraicGeometry.ProEtale.FiniteModelQuotient.internalComplex",
+   "AlgebraicGeometry.ProEtale.FiniteModelQuotient.ChartCalculation",
+   "AlgebraicGeometry.ProEtale.FiniteModelQuotient.LocalCalculationAt",
+   "AlgebraicGeometry.ProEtale.FiniteModelQuotient.LocalCalculation",
+   "AlgebraicGeometry.ProEtale.FiniteModelQuotient.OrdinaryConclusion"
+  ],
+  "note": "The original seven chart conjuncts are the fields of ChartCalculation; the universal chart property is the sole field of LocalCalculationAt, explicitly indexed by its complex. LocalCalculation specializes this to the actual reduction. Named quotient category instances, encoding and homology functors use the existing structures. The quotient pullbacks use the definitionally equal native finite-discrete coefficient presentation. The mathematical coordinate definitions and all seven local conditions are unchanged. See coord/changes/P3-finite-model-quotient-coordinate-representation.md."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-9ff81",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261025T101103-L-3656596",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-20d45",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261026T023654-L-590958",
+  "kind": "interface",
+  "note": "independent cc review: delivered Data/Constructible/item/IntegralScalarModelCoordinates vs clone base and nodes; ChartCalculation fields vs old 7 conjuncts; 12-module importer chain compiled (exit 0); axioms clean"
+ }
+}

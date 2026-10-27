@@ -1,0 +1,234 @@
+{
+ "id": "lem-sfb-space-proper-composition",
+ "kind": "statement",
+ "title": "Composition of proper morphisms of algebraic spaces",
+ "statement": "Work over $\\operatorname{Spec}\\mathbf Z$ with schemes [def-pc-scheme, def-weil-affine-spectrum] and algebraic spaces [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Give spaces the atlas topology [def-a1-space-point-topology]. For morphisms of spaces, separated means that the representable diagonal is a closed immersion on every scheme test [def-weil-closed-immersion]; quasi-compact means that inverse images of quasi-compact opens are quasi-compact; quasi-separated means that the diagonal is quasi-compact. Locally of finite type and locally of finite presentation are tested on etale scheme charts [def-weil-finite-type-morphism, def-sbc-locally-finite-presentation]. Finite type means quasi-compact and locally of finite type; finite presentation means quasi-compact, quasi-separated, and locally of finite presentation. Proper means separated, of finite type, and universally closed, where universally closed means closed on underlying spaces after every algebraic-space base change (agreeing with the scheme convention [def-weil-proper-morphism]). Let $X\\xrightarrow{u}Y\\xrightarrow{v}Z$ be composable morphisms of algebraic spaces. If $u$ and $v$ are proper, then $v\\circ u$ is proper. No local Noetherian, local quasi-finiteness, representability, or finite-presentation assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 04XY (lemma-composition-proper)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-space-point-topology",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-proper-morphism",
+  "def-sfb-space-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Properness gives separatedness of $u$ and $v$. Apply the separated-composition clause of [lem-sfb-space-separated-fp-composition] to $X\\xrightarrow{u}Y\\xrightarrow{v}Z$, over $\\operatorname{Spec}\\mathbf Z$. It gives that $v\\circ u$ is separated. Only that clause is used: neither finite presentation nor representability is assumed.",
+   "uses": [
+    "lem-sfb-space-separated-fp-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04XY (lemma-composition-proper), using Tag 03KQ (lemma-composition-separated)."
+   }
+  },
+  {
+   "text": "Properness also gives local finite type and quasi-compactness for $u,v$. The local-finite-type composition clause of [lem-sfb-stack-finite-type-calculus], including its explicit agreement with the ordinary algebraic-space chart notion, gives local finite type for $v\\circ u$. For quasi-compactness in the convention stated in this item, let $W\\subseteq |Z|$ be a quasi-compact open. Then $|v|^{-1}(W)$ is a quasi-compact open, and $|u|^{-1}(|v|^{-1}(W))$ is quasi-compact, by the two hypotheses; it equals $|v\\circ u|^{-1}(W)$. Thus the composite is of finite type.",
+   "uses": [
+    "lem-sfb-stack-finite-type-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04XY, using Tag 03XG (lemma-composition-finite-type); the chart-composition input is also stated in stacks-morphisms.tex Tag 06FT (lemma-composition-finite-type)."
+   }
+  },
+  {
+   "text": "Fix any algebraic-space base change $T\\to Z$. By [lem-trf-space-fibre-products-etale-covers], $Y_T=Y\\times_ZT$ and $X_T=X\\times_ZT$ are algebraic spaces. The universal property identifies $X\\times_YY_T$ with $X_T$: both represent pairs of maps into $X$ and $T$ whose composites to $Z$ agree. Hence $X_T\\to Y_T$ is a base change of $u$, and $Y_T\\to T$ is a base change of $v$. Both induce closed maps on point spaces by universal closedness of $u,v$. If $C\\subseteq |X_T|$ is closed, its image in $|Y_T|$ is closed, and the image of that closed set in $|T|$ is closed. This last image is the image of $C$ under $|(v\\circ u)_T|$, since maps on field-valued point classes compose. Thus every base change of $v\\circ u$ is closed, which is precisely universal closedness. This writes out the omitted proof of Tag 03IU.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04XY, using Tag 03IU (lemma-composition-universally-closed), whose omitted proof is expanded directly from the definition."
+   }
+  },
+  {
+   "text": "The composite is separated by step 1, of finite type by step 2, and universally closed by step 3. These are the three defining conditions for properness stated in the item, so $v\\circ u$ is proper.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04XY (lemma-composition-proper); definition-proper."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-separated-fp-composition",
+  "lem-sfb-stack-finite-type-calculus",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 04XY (lemma-composition-proper), its three cited stability lemmas; Tag 03IU expanded from definitions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The composition of two proper morphisms of algebraic spaces is proper",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.instCompScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [AlgebraicGeometry.IsProper f]\\n  [AlgebraicGeometry.IsProper g], AlgebraicGeometry.IsProper (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two proper morphisms of schemes is again a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.stableUnderComposition\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsProper\", \"doc\": \"The property of being a proper morphism of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are proper morphisms of schemes, then their composition $ g \\\\circ f: X \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.comp_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} {f : X ⟶ Y} {g : Y ⟶ Z} [AlgebraicGeometry.IsProper g],\\n  AlgebraicGeometry.IsProper (CategoryTheory.CategoryStruct.comp f g) ↔ AlgebraicGeometry.IsProper f\", \"doc\": \"If $ g: Y \\\\to Z $ is a proper morphism of schemes, then the composition $ f \\\\circ g: X \\\\to Z $ is proper if and only if $ f: X \\\\to Y $ is proper.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsProper\", \"doc\": \"The property of being a proper morphism of schemes is multiplicative, meaning that the composition of two proper morphisms is again a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsProper (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.IsSeparated g],\\n  AlgebraicGeometry.IsProper f\", \"doc\": \"If the composition of a morphism $ f: X \\\\to Y $ with a separated morphism $ g: Y \\\\to Z $ is proper, then $ f $ is a proper morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.of_comp_of_isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsProper (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.IsSeparated g],\\n  AlgebraicGeometry.IsProper f\", \"doc\": \"Let $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ be morphisms of schemes. If the composition $ g \\\\circ f: X \\\\to Z $ is a proper morphism and $ g $ is a separated morphism, then $ f $ is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsProper @AlgebraicGeometry.IsSeparated\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes and $ g: Y \\\\to Z $ is a separated morphism of schemes, then the composition $ f \\\\circ g: X \\\\to Z $ is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_isStableUnderComposition\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.QuasiCompact\", \"doc\": \"The property of being a quasi-compact morphism of schemes is stable under composition; that is, the composition of two quasi-compact morphisms is again quasi-compact.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes or topological maps, not this assertion for algebraic spaces; the scheme-only IsProper class was read in Mathlib/AlgebraicGeometry/Morphisms/Proper.lean:37-42"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper algebraic space morphisms are stable under composition",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.instCompScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [AlgebraicGeometry.IsProper f]\\n  [AlgebraicGeometry.IsProper g], AlgebraicGeometry.IsProper (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two proper morphisms of schemes is again a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.stableUnderComposition\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsProper\", \"doc\": \"The property of being a proper morphism of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are proper morphisms of schemes, then their composition $ g \\\\circ f: X \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.comp_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} {f : X ⟶ Y} {g : Y ⟶ Z} [AlgebraicGeometry.IsProper g],\\n  AlgebraicGeometry.IsProper (CategoryTheory.CategoryStruct.comp f g) ↔ AlgebraicGeometry.IsProper f\", \"doc\": \"If $ g: Y \\\\to Z $ is a proper morphism of schemes, then the composition $ f \\\\circ g: X \\\\to Z $ is proper if and only if $ f: X \\\\to Y $ is proper.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsProper\", \"doc\": \"The property of being a proper morphism of schemes is multiplicative, meaning that the composition of two proper morphisms is again a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsProper (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.IsSeparated g],\\n  AlgebraicGeometry.IsProper f\", \"doc\": \"If the composition of a morphism $ f: X \\\\to Y $ with a separated morphism $ g: Y \\\\to Z $ is proper, then $ f $ is a proper morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsProper @AlgebraicGeometry.IsSeparated\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes and $ g: Y \\\\to Z $ is a separated morphism of schemes, then the composition $ f \\\\circ g: X \\\\to Z $ is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.of_comp_of_isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsProper (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.IsSeparated g],\\n  AlgebraicGeometry.IsProper f\", \"doc\": \"Let $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ be morphisms of schemes. If the composition $ g \\\\circ f: X \\\\to Z $ is a proper morphism and $ g $ is a separated morphism, then $ f $ is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_isStableUnderComposition\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.QuasiCompact\", \"doc\": \"The property of being a quasi-compact morphism of schemes is stable under composition; that is, the composition of two quasi-compact morphisms is again quasi-compact.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes or topological maps, not this assertion for algebraic spaces; the scheme-only IsProper class was read in Mathlib/AlgebraicGeometry/Morphisms/Proper.lean:37-42"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"comp\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"isProperMap_fst_of_compactSpace\", \"module\": \"Mathlib.Topology.Maps.Proper.Basic\", \"type\": \" {X : Type u_1} {Y : Type u_2} [TopologicalSpace X] [TopologicalSpace Y] [CompactSpace Y] : IsProperMap Prod.fst\", \"doc\": \"If `Y` is a compact topological space, then `Prod.fst : X × Y → X` is a proper map.\"}\n  {\"name\": \"isProperMap_snd_of_compactSpace\", \"module\": \"Mathlib.Topology.Maps.Proper.Basic\", \"type\": \" {X : Type u_1} {Y : Type u_2} [TopologicalSpace X] [TopologicalSpace Y] [CompactSpace X] : IsProperMap Prod.snd\", \"doc\": \"If `X` is a compact topological space, then `Prod.snd : X × Y → Y` is a proper map.\"}\n  {\"name\": \"IsProperMap.isCompact_preimage\", \"module\": \"Mathlib.Topology.Maps.Proper.Basic\", \"type\": \" {X : Type u_1} {Y : Type u_2} [TopologicalSpace X] [TopologicalSpace Y] {f : X → Y} (h : IsProperMap f) {K : Set Y} (hK : IsCompact K) : IsCompact (f ⁻¹' K)\", \"doc\": \"The preimage of a compact set by a proper map is again compact. See also\\n`isProperMap_iff_isCompact_preimage` which proves that this property completely characterizes\\nproper map when the codomain is c\"}\n  {\"name\": \"IsProperMap.comp\", \"module\": \"Mathlib.Topology.Maps.Proper.Basic\", \"type\": \" {X : Type u_1} {Y : Type u_2} {Z : Type u_3} [TopologicalSpace X] [TopologicalSpace Y] [TopologicalSpace Z] {f : X → Y} {g : Y → Z} (hg : IsProperMap g) (hf : IsProperMap f) : IsProperMap (g ∘ f)\", \"doc\": \"The composition of two proper maps is proper.\"}\n  {\"name\": \"isProperMap_iff_isClosedMap_and_compact_fibers\", \"module\": \"Mathlib.Topology.Maps.Proper.Basic\", \"type\": \" {X : Type u_1} {Y : Type u_2} [TopologicalSpace X] [TopologicalSpace Y] {f : X → Y} : IsProperMap f ↔ Continuous f ∧ IsClosedMap f ∧ ∀ (y : Y), IsCompact (f ⁻¹' {y})\", \"doc\": \"A map is proper if and only if it is closed and its fibers are compact.\"}\n  {\"name\": \"isProperMap_of_comp_of_t2\", \"module\": \"Mathlib.Topology.Maps.Proper.Basic\", \"type\": \" {X : Type u_1} {Y : Type u_2} {Z : Type u_3} [TopologicalSpace X] [TopologicalSpace Y] [TopologicalSpace Z] {f : X → Y} {g : Y → Z} [T2Space Y] (hf : Continuous f) (hg : Continuous g) (hgf : IsProperMap (g ∘ f)) : IsProperMap f\", \"doc\": \"If the composition of two continuous functions `f : X → Y` and `g : Y → Z` is proper\\nand `Y` is T2, then `f` is proper.\"}\n  {\"name\": \"isProperMap_of_comp_of_inj\", \"module\": \"Mathlib.Topology.Maps.Proper.Basic\", \"type\": \" {X : Type u_1} {Y : Type u_2} {Z : Type u_3} [TopologicalSpace X] [TopologicalSpace Y] [TopologicalSpace Z] {f : X → Y} {g : Y → Z} (hf : Continuous f) (hg : Continuous g) (hgf : IsProperMap (g ∘ f)) (g_inj : Function.Injective g) : IsProperMap f\", \"doc\": \"If the composition of two continuous functions `g ∘ f` is proper and `g` is injective,\\nthen `f` is proper.\"}\n  {\"name\": \"isProperMap_of_comp_of_surj\", \"module\": \"Mathlib.Topology.Maps.Proper.Basic\", \"type\": \" {X : Type u_1} {Y : Type u_2} {Z : Type u_3} [TopologicalSpace X] [TopologicalSpace Y] [TopologicalSpace Z] {f : X → Y} {g : Y → Z} (hf : Continuous f) (hg : Continuous g) (hgf : IsProperMap (g ∘ f)) (f_surj : Function.Surjective f) : IsProperMap g\", \"doc\": \"If the composition of two continuous functions `g ∘ f` is proper and `f` is surjective,\\nthen `g` is proper.\"}\n  {\"name\": \"Order.Ideal.IsProper.notMem_of_compl_mem\", \"module\": \"Mathlib.Order.Ideal\", \"type\": \" {P : Type u_1} [BooleanAlgebra P] {x : P} {I : Order.Ideal P} (hI : I.IsProper) (hxc : xᶜ ∈ I) : x ∉ I\", \"doc\": \"\"}\n  {\"name\": \"Order.Ideal.IsProper.notMem_or_compl_notMem\", \"module\": \"Mathlib.Order.Ideal\", \"type\": \" {P : Type u_1} [BooleanAlgebra P] {x : P} {I : Order.Ideal P} (hI : I.IsProper) : x ∉ I ∨ xᶜ ∉ I\", \"doc\": \"\"}\n  {\"name\": \"isProperMap_iff_tendsto_cocompact\", \"module\": \"Mathlib.Topology.Maps.Proper.CompactlyGenerated\", \"type\": \" {X : Type u_1} {Y : Type u_2} [TopologicalSpace X] [TopologicalSpace Y] [T2Space Y] [CompactlyCoherentSpace Y] {f : X → Y} : IsProperMap f ↔ Continuous f ∧ Filter.Tendsto f (Filter.cocompact X) (Filter.cocompact Y)\", \"doc\": \"Version of `isProperMap_iff_isCompact_preimage` in terms of `cocompact`.\"}\n  {\"name\": \"isProperMap_iff_isCompact_preimage\", \"module\": \"Mathlib.Topology.Maps.Proper.CompactlyGenerated\", \"type\": \" {X : Type u_1} {Y : Type u_2} [TopologicalSpace X] [TopologicalSpace Y] [T2Space Y] [CompactlyCoherentSpace Y] {f : X → Y} : IsProperMap f ↔ Continuous f ∧ ∀ ⦃K : Set Y⦄, IsCompact K → IsCompact (f ⁻¹' K)\", \"doc\": \"If `Y` is Hausdorff and compactly coherent, then proper maps `X → Y` are exactly\\ncontinuous maps such that the preimage of any compact set is compact. This is in particular true\\nif `Y` is Hausdorff an\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes or topological maps, not this assertion for algebraic spaces; the scheme-only IsProper class was read in Mathlib/AlgebraicGeometry/Morphisms/Proper.lean:37-42"
+  },
+  {
+   "tool": "grep",
+   "query": "IsProper.comp|composition.proper|algebraic.space",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper.lean\", \"line\": \"127\", \"text\": \"lemma IsProper.comp_iff {f : X ⟶ Y} {g : Y ⟶ Z} [IsProper g] :\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes or topological maps, not this assertion for algebraic spaces; the scheme-only IsProper class was read in Mathlib/AlgebraicGeometry/Morphisms/Proper.lean:37-42"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition preserves proper morphisms of algebraic spaces",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of proper morphisms of algebraic spaces is proper",
+   "results": "Actual msearch result: 8 hits; top results AlgebraicGeometry.IsProper.stableUnderComposition, AlgebraicGeometry.IsProper.instIsMultiplicativeScheme, AlgebraicGeometry.IsProper.instCompScheme, AlgebraicGeometry.IsProper.comp_iff, AlgebraicGeometry.IsProper.of_comp, AlgebraicGeometry.universallyClosed_isStableUnderComposition, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated, AlgebraicGeometry.quasiCompact_isStableUnderComposition. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected candidates apply to schemes or topological proper maps, not arbitrary algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "IsProper|AlgebraicSpace",
+   "results": "Actual msearch result: 5 hits; top results 42, 44, 47, 50, 53. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected candidates apply to schemes or topological proper maps, not arbitrary algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper algebraic space morphisms are stable under composition",
+   "results": "Actual msearch result: 8 hits; top results AlgebraicGeometry.IsProper.instCompScheme, AlgebraicGeometry.IsProper.stableUnderComposition, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated, AlgebraicGeometry.IsProper.comp_iff, AlgebraicGeometry.IsSeparated.stableUnderComposition, AlgebraicGeometry.IsProper.instIsMultiplicativeScheme, AlgebraicGeometry.quasiSeparated_isStableUnderComposition, CategoryTheory.MorphismProperty.IsStableUnderComposition. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected candidates apply to schemes or topological proper maps, not arbitrary algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"comp\"",
+   "results": "Actual msearch result: 12 hits; top results isProperMap_fst_of_compactSpace, isProperMap_snd_of_compactSpace, IsProperMap.isCompact_preimage, IsProperMap.comp, isProperMap_iff_isClosedMap_and_compact_fibers, isProperMap_of_comp_of_t2, isProperMap_of_comp_of_inj, isProperMap_of_comp_of_surj. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected candidates apply to schemes or topological proper maps, not arbitrary algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universally closed separated finite type algebraic space maps compose",
+   "results": "Actual msearch result: 8 hits; top results AlgebraicGeometry.universallyClosed_isStableUnderComposition, AlgebraicGeometry.instHasOfPostcompPropertySchemeUniversallyClosedIsSeparated, AlgebraicGeometry.universallyClosedTypeComp, AlgebraicGeometry.UniversallyClosed.of_comp_of_isSeparated, AlgebraicGeometry.instIsMultiplicativeSchemeUniversallyClosed, AlgebraicGeometry.IsSeparated.stableUnderComposition, AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected candidates apply to schemes or topological proper maps, not arbitrary algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "stableUnderComposition|AlgebraicSpace|instComp",
+   "results": "Actual msearch result: 25 hits; top results Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalClosure.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalClosure.lean, Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean, Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected candidates apply to schemes or topological proper maps, not arbitrary algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-eventually-proper",
+  "date": "2026-10-22",
+  "group": "Q32"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D55 (lemma-curves-limits). Input to Tag 0D55: Tag 08K1 (lemma-eventually-proper), in Situation 084W (situation-descent-property), specialized to a finitely presented space over an affine base; persistence at later stages: spaces-morphisms.tex, Tag 04WP (lemma-base-change-proper). Supporting input to Tag 08K1: Tag 04XY (lemma-composition-proper).",
+   "via": [
+    "lem-sfb-space-eventually-proper",
+    "lem-sfb-curve-limit-preservation",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-proper-composition",
+  "worker": "stage1",
+  "summary": "Read Stacks 04XY and each of its three cited composition lemmas. Reused existing algebraic-space separated and stack/local-finite-type composition statements. Expanded quasi-compactness and universal closedness directly. No new nodes and no statement change; scheme-only Lean/Mathlib proper-composition results do not attach.",
+  "blueprint": "The inherited ancestry traces the alteration prerequisite of det-thm-sf-ctf-stability-direct-images, proof (3), through the eventual-properness input. The current latest blueprint proof (3) now presents compactification assembly; this split supplies the inherited generic geometric tool without modifying the unit or its route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Existence and universal property of algebraic-space fibre products for arbitrary base change; the unit has no alternative definition of those fibre products."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q126-fb0c3e99b",
+  "group": "Q126",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q126-fb0c3e99b (reviewer sub-agent of L); spot-checked: Read Stacks spaces-morphisms 04XY (l.7928: proof cites the separated, finite-type and universally-closed composition lemmas), definition-proper (l.7884) and 03IU (l.1363, proof omitted). The item statement is unchanged from the base and live, where it is still unsplit; there is no repair note and there are no new nodes. Step 1: the separated-composition clause of lem-sfb-space-separated-fp-composition uses the same closed-immersion diagonal convention over any S and needs no representability. Step 2: the lft composition clause of lem-sfb-stack-finite-type-calculus applies, and that node states that its notion agrees with the etale-chart lft notion on algebraic spaces. Quasi-compactness in the item's topological convention is proved directly from preimage functoriality. Step 3 (elementary, writing out 03IU): base changes exist by lem-trf-space-fibre-products-etale-covers; the pasting X×_Y Y_T ≅ X_T makes X_T→Y_T a base change of u; a composite of closed maps is closed. Step 4 assembles the three defining conditions. Edge cases checked: identity maps, empty source, schemes, non-Noetherian bases and non-representable maps. Duplicate search: lem-weil-pbc-proper-composition covers schemes only, and lem-sfb-stack-proper-locally-quasifinite-composition needs local quasi-finiteness, so neither states the item. Tool use of lem-trf-space-fibre-products-etale-covers (generic fibre products, already a base stmt_dep) accepted. Batch-5 flag: lem-sfb-stack-finite-type-calculus reaches only def-trf-algebraic-space, the general definition of an algebraic space; it is not part of the trace formula or Poincaré duality or their proofs, so it is generic. No SGA source used."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceProperComposition",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.mapIsProper_comp",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceProperComposition.lean",
+  "statement": "theorem mapIsProper_comp {X Y Z : AlgebraicSpace (Spec (CommRingCat.of (ULift.{u} ℤ)))} (f : X ⟶ Y) (g : Y ⟶ Z) (hf : MapIsProper f) (hg : MapIsProper g) : MapIsProper (f ≫ g)",
+  "branch": "sheaf-dag",
+  "by": "Q78",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the landed def-sfb-space-morphism-properties predicates, with spaces over Spec of ULift ℤ to retain arbitrary scheme universe u. No extra finiteness, representability or Noetherian assumptions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-517ee7f07",
+  "group": "Q78",
+  "result": "pass",
+  "note": "mapIsProper_comp {X Y Z : AlgebraicSpace (Spec (ULift.{u} ℤ))} (f g) (hf hg : MapIsProper) : MapIsProper (f ≫ g) matches node and Stacks 04XY (l.7928) clause by clause. It reuses the landed def-sfb-space-morphism-properties MapIsProper = separated (diagonal closed-immersion representable) ∧ finite type (MapIsQuasiCompact ∧ étale-chart LocallyOfFiniteType) ∧ universally closed (IsClosedMap on points for all algebraic-space base changes). No extra hypotheses or universe restriction. Node diff vs live: only lean plus stmt_deps gaining that landed def node (allowed, brief-stage2 l.177). No duplicate theorem in lean/Sheaf or Mathlib (scheme-only). Proof is sorry only; source and blueprint docstrings present with proof steps; lean.statement verbatim; report has Worker report and Second reading by Q78 sections. No files changed; no compile (worker compiled clean)."
+ }
+}

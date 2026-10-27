@@ -1,0 +1,251 @@
+{
+ "id": "lem-sfb-space-fpqc-descend-universally-closed",
+ "kind": "statement",
+ "title": "Universal closedness descends under fpqc scheme coverings for algebraic spaces",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], let $X$ be an algebraic space [def-trf-algebraic-space], and let $f:X\\to T$ be a morphism. Let $\\{g_i:T_i\\to T\\}_{i\\in I}$ be an fpqc covering by schemes [def-weil-pbc-fpqc-covering], and write $f_i:X\\times_TT_i\\to T_i$ for the projections [lem-trf-space-fibre-products-etale-covers]. Universal closedness has the meaning of [def-sfb-space-morphism-properties]: after every algebraic-space base change, the induced map on field-valued point spaces with their atlas topology is closed. If every $f_i$ is universally closed, then $f$ is universally closed. No quasi-compactness, separatedness, finite-type, finite-presentation, flatness or Noetherian assumption on $f$ is made.",
+ "source": {
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 041O, lemma-descending-property-universally-closed, descent implication for a scheme target and a covering by schemes."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-pbc-fpqc-covering",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-space-morphism-properties",
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-space-sheaf-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "All point maps of algebraic-space morphisms are continuous: for a morphism $v:A\\to B$ and each representable etale scheme map $a:V\\to A$, the composite $va:V\\to B$ is continuous by [lem-a1-space-affine-etale-cover]. The final-topology criterion of [def-a1-space-point-topology] therefore makes $|v|$ continuous. In particular, inverse images of closed subsets along all projections used below are closed.",
+   "uses": [
+    "lem-a1-space-affine-etale-cover",
+    "def-a1-space-point-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03BX, lemma-topology-points (2), using the final topology of etale scheme maps."
+   }
+  },
+  {
+   "text": "We will use the following elementary image calculation. For $p:E\\to Z$ between algebraic spaces, a scheme map $a:U\\to Z$, and any subset $C\\subseteq|E|$, put $E_U=E\\times_ZU$, with projections $r:E_U\\to E$ and $p_U:E_U\\to U$. The fibre product exists by [lem-trf-space-fibre-products-etale-covers]. Then $a^{-1}(p(C))=p_U(r^{-1}(C))$. One inclusion follows from commutativity. For the reverse inclusion, take $u\\in|U|$ and $e\\in C$ with $a(u)=p(e)$. Choose a field-valued representative $\\operatorname{Spec}K\\to E$ of $e$. Apply [lem-a1-space-fibre-product-point] with target $Z$ and scheme sources $\\operatorname{Spec}K$ and $U$: it gives a point of $\\operatorname{Spec}K\\times_ZU$ over $u$. Its image in $E_U$ projects to $e$ and $u$, proving the assertion. This uses that lemma only with two scheme sources, exactly as stated.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-a1-space-fibre-product-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03H4, lemma-points-cartesian; scheme-source specialization followed by the fibre-product universal property."
+   }
+  },
+  {
+   "text": "Let $Z\\to T$ be any algebraic-space morphism and $p:E=X\\times_TZ\\to Z$. Fix a closed subset $C\\subseteq|E|$. For each representable etale scheme map $a:U\\to Z$, set $U_i=U\\times_TT_i$ and $q_i:U_i\\to U$. By [lem-weil-pbc-fpqc-covering-axioms](3), these scheme maps form an fpqc covering. Set $E_U=X\\times_TU$ and $E_i=X\\times_TU_i$, and let $C_U$ and $C_i$ be the inverse images of $C$ under the projections to $E$. They are closed by step 1. The fibre-product universal property in [lem-trf-space-fibre-products-etale-covers] identifies $E_i\\to U_i$ with the base change of $f_i$ along $U_i\\to T_i$. Thus it is closed by the assumed universal closedness of $f_i$ and [def-sfb-space-morphism-properties]. Write $A_U=p_U(C_U)$. Step 2 gives $q_i^{-1}(A_U)=p_i(C_i)$, so all these inverse images are closed.",
+   "uses": [
+    "lem-weil-pbc-fpqc-covering-axioms",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-sfb-space-morphism-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 041O, lemma-descending-property-universally-closed, base-change cube; topologies.tex Tag 022D (lemma-fpqc), (3)."
+   }
+  },
+  {
+   "text": "The closedness of these inverse images implies that $A_U$ is closed, as follows. Give $D=\\{0,1\\}$ the topology $\\{\\varnothing,\\{0\\},D\\}$ and let $\\chi:|U|\\to D$ be $1$ on $A_U$ and $0$ elsewhere. Each $\\chi\\circ q_i$ is continuous, since the inverse image of the sole nontrivial open $\\{0\\}$ is the complement of the closed set $q_i^{-1}(A_U)$. These functions agree on $U_i\\times_UU_j$, because both are the same set function $\\chi$ composed with its map to $U$. Apply [lem-sfb-set-continuous-functions-fpqc-sheaf] with this $D$ to glue them to a continuous $h:|U|\\to D$. The maps $q_i$ are jointly surjective by [def-weil-pbc-fpqc-covering], so $h=\\chi$ pointwise. Hence $|U|\\setminus A_U=\\chi^{-1}(\\{0\\})$ is open and $A_U$ is closed. This requires no separation property of $D$ and no quasi-compactness of the individual $q_i$.",
+   "uses": [
+    "lem-sfb-set-continuous-functions-fpqc-sheaf",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 041O, quotient-topology inference, implemented for a covering family by the elementary Sierpinski-space specialization of the cited continuous-map sheaf theorem."
+   }
+  },
+  {
+   "text": "Step 2 also gives $a^{-1}(p(C))=A_U$ for every representable etale scheme map $a:U\\to Z$. By step 4 these subsets are closed. Taking complements in the final-topology criterion [def-a1-space-point-topology] shows that $p(C)$ is closed in $|Z|$. Thus $p$ is a closed map. Since $Z\\to T$ was an arbitrary algebraic-space base change and $C$ was an arbitrary closed subset, [def-sfb-space-morphism-properties] gives universal closedness of $f$.",
+   "uses": [
+    "def-a1-space-point-topology",
+    "def-sfb-space-morphism-properties"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03IT, lemma-universally-closed-local, atlas-topology argument; universal closedness is used in its full algebraic-space-base-change definition."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-a1-space-point-topology",
+  "def-sfb-space-morphism-properties",
+  "def-weil-pbc-fpqc-covering",
+  "lem-a1-space-affine-etale-cover",
+  "lem-a1-space-fibre-product-point",
+  "lem-sfb-set-continuous-functions-fpqc-sheaf",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-fpqc-covering-axioms"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 041O (lemma-descending-property-universally-closed), point-lifting and quotient-topology argument. Family version written out directly on arbitrary algebraic-space base changes; quotient topology is obtained by the Sierpinski-space specialization of the existing Mathlib leaf lem-sfb-set-continuous-functions-fpqc-sheaf."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A universally closed morphism of algebraic spaces descends along fpqc coverings of a scheme target",
+   "results": "8 hits: AlgebraicGeometry.UniversallyClosed.mk, AlgebraicGeometry.UniversallyClosed, AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant, AlgebraicGeometry.universallyClosed_eq, AlgebraicGeometry.UniversallyClosed.out, AlgebraicGeometry.universallyClosed_isStableUnderBaseChange, AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.IsProper.toUniversallyClosed",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates concern Scheme morphisms, not maps from algebraic spaces; read Proper.lean:37-41, UniversallyClosed.lean:35-41 and FlatDescent.lean:48-62. No algebraic-space framework in Mathlib."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.UniversallyClosed, AlgebraicGeometry.Flat",
+   "results": "1 hits: AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates concern Scheme morphisms, not maps from algebraic spaces; read Proper.lean:37-41, UniversallyClosed.lean:35-41 and FlatDescent.lean:48-62. No algebraic-space framework in Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Uu]niversally[Cc]losed.*[Dd]escend|[Dd]escend.*[Uu]niversally[Cc]losed",
+   "results": "3 hits: Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates concern Scheme morphisms, not maps from algebraic spaces; read Proper.lean:37-41, UniversallyClosed.lean:35-41 and FlatDescent.lean:48-62. No algebraic-space framework in Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|IsProper.*[Dd]escend|[Dd]escend.*IsProper",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates concern Scheme morphisms, not maps from algebraic spaces; read Proper.lean:37-41, UniversallyClosed.lean:35-41 and FlatDescent.lean:48-62. No algebraic-space framework in Mathlib."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If the base changes of a map from an algebraic space to a scheme along an fpqc cover are universally closed then the original map is universally closed",
+   "results": "8 hits: AlgebraicGeometry.universallyClosed_isStableUnderBaseChange, AlgebraicGeometry.universallyClosed_isZariskiLocalAtTarget, AlgebraicGeometry.UniversallyClosed.out, AlgebraicGeometry.universallyClosed_iff, AlgebraicGeometry.IsProper.toUniversallyClosed, AlgebraicGeometry.UniversallyClosed.universally_isClosedMap, AlgebraicGeometry.universallyClosed_eq, AlgebraicGeometry.UniversallyClosed",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates concern Scheme morphisms, not maps from algebraic spaces; read Proper.lean:37-41, UniversallyClosed.lean:35-41 and FlatDescent.lean:48-62. No algebraic-space framework in Mathlib."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal closedness descends from an fpqc covering of a scheme target for morphisms from algebraic spaces",
+   "results": "8 logged hits: AlgebraicGeometry.universallyClosed_isZariskiLocalAtTarget, AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.instIsMultiplicativeSchemeUniversallyClosed, AlgebraicGeometry.UniversallyClosed.out, AlgebraicGeometry.universallyClosed_iff, AlgebraicGeometry.universallyClosed_isStableUnderBaseChange, AlgebraicGeometry.UniversallyClosed, AlgebraicGeometry.UniversallyClosed.universally_isClosedMap",
+   "date": "2026-10-23",
+   "verdict": "no match: UniversallyClosed.lean:35-41 and FlatDescent.lean:48-62 concern scheme morphisms. The item allows an algebraic-space source and arbitrary algebraic-space base changes."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic.space|universallyClosed_iff",
+   "results": "1 logged hits: Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: UniversallyClosed.lean:35-41 and FlatDescent.lean:48-62 concern scheme morphisms. The item allows an algebraic-space source and arbitrary algebraic-space base changes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-proper-fpqc-descent",
+  "date": "2026-10-23",
+  "group": "Q81"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: Properness of flat separated families with connected proper fibres. Present split: Fpqc descent of properness for algebraic spaces over schemes. Constituent universal-closedness descent in Stacks 0422 via 041O.",
+   "via": [
+    "lem-sfb-space-proper-fpqc-descent",
+    "lem-sfb-connected-proper-fibres-proper",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-fpqc-descend-universally-closed",
+  "worker": "stage1",
+  "summary": "Proved the fpqc-family descent statement without new nodes. Derived the image/base-change identity from the existing two-scheme-source point-lifting lemma by choosing a field representative of the algebraic-space point. Tested closed images on all etale scheme charts of an arbitrary algebraic-space base change. Obtained the fpqc closed-subset criterion from the existing arbitrary-target continuous-function sheaf Mathlib leaf using the explicitly defined non-Hausdorff two-point topology. No hypotheses or statement clauses changed.",
+  "blueprint": "Historical supporting input for the algebraic-space properness descent branch below det-thm-sf-ctf-stability-direct-images (3), through the entire existing blueprint.from.via chain. Retained that provenance and route. Steps 1-2 supply the topology and point-lifting calculation in Stacks 041O; steps 3-5 prove the covering-family implication and all algebraic-space base changes. The latest blueprint direct-image proof was read; this is a supporting descent tool, not a replacement of its compactification argument.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-affine-etale-cover",
+    "why": "Generic continuity of scheme-to-algebraic-space point maps used with the final topology; no statement in this unit supplies that foundational topology fact."
+   },
+   {
+    "node": "def-a1-space-point-topology",
+    "why": "Shared definition of the atlas final topology used for continuity and closed-subset detection."
+   },
+   {
+    "node": "lem-a1-space-fibre-product-point",
+    "why": "Generic point lifting with two scheme sources, applied to a field representative and a scheme chart; this is the points-cartesian input of the source proof."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence and universal property of algebraic-space fibre products for all base changes and their reassociation."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-covering-axioms",
+    "why": "Generic base-change stability of fpqc coverings of schemes, part (3), used on the scheme chart U."
+   },
+   {
+    "node": "def-weil-pbc-fpqc-covering",
+    "why": "Shared covering definition supplies joint surjectivity when identifying the glued Sierpinski-valued function."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-affine-etale-cover",
+  "def-a1-space-point-topology",
+  "lem-a1-space-fibre-product-point",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-fpqc-covering-axioms",
+  "def-weil-pbc-fpqc-covering"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NH-f1a437bb2",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-f1a437bb2 (reviewer sub-agent of L); spot-checked: I read the delivered statement and all 5 steps against Stacks 041O (spaces-descent), 03H4 and 03BX, Mathlib ConstantSheaf.lean:44-85 and Fpqc.lean:60-63, and every cited node statement. The statement is unchanged and is a special case of 041O (scheme base, family of schemes); universal closedness keeps its full meaning over all algebraic-space base changes. Step 1: the affine-étale-cover lemma gives continuity for every scheme-to-space map, and the final topology then gives continuity of |v|. Step 2: the point lemma, which allows only scheme sources, is applied with the scheme sources Spec K→E→Z and U→Z; the reverse inclusion of a^{-1}(p(C))=p_U(r^{-1}(C)) is checked. Step 3: {U×_T T_i→U} is fpqc by 022D(3); E_i→U_i is the base change of f_i along U_i→T_i, so it is closed; q_i^{-1}(A_U)=p_i(C_i). Step 4: the Mathlib leaf allows any topological target (no T2), so the Sierpiński gluing works; the family is compatible and joint surjectivity gives h=χ, so A_U is closed. Step 5: the final topology gives p(C) closed. Edge cases checked: empty index set (T empty), empty X and C, covering maps that are not quasi-compact. No new nodes. No duplicate: lem-weil-pbc-fpqc-descend-universally-closed is for scheme X only. Batch-5 flags on def-a1-space-point-topology, lem-a1-space-affine-etale-cover and lem-a1-space-fibre-product-point are generic: their closures reach sec-trace-formula only at the definitions def-trf-algebraic-space and def-trf-algebraic-space-jointly-surjective-family (already a stmt_dep of the item); they are foundational facts about algebraic spaces, not steps of the trace formula or Poincaré duality. Accepted tool uses: the a1 topology and point lemmas, the trf fibre products, and the fpqc Mathlib leaves. No SGA citation, not a re-split, live node still unsplit. Advisory: the identification |h_U|=|U| for schemes (identity atlas, Stacks 03BT) is implicit and standard. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceUniversallyClosedFpqcDescent",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.universallyClosed_of_fpqc_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceUniversallyClosedFpqcDescent.lean",
+  "statement": "theorem universallyClosed_of_fpqc_cover {S : Scheme.{u}} {I : Type w} (T : Over S) (X : AlgebraicSpace S) (f : X ⟶ schemeSpace T) (Tᵢ : I → Over S) (g : ∀ i : I, Tᵢ i ⟶ T) (hcover : Presieve.ofArrows (fun i : I ↦ (Tᵢ i).left) (fun i : I ↦ (g i).left) ∈ Scheme.fpqcPrecoverage T.left) (hclosed : ∀ i : I, MapIsUniversallyClosed (enlargedFibreProductFst (ObjectProperty.homMk ⟨yoneda.map (g i)⟩ : schemeSpace (Tᵢ i) ⟶ schemeSpace T) f)) : MapIsUniversallyClosed f",
+  "branch": "sheaf-dag",
+  "by": "Q46",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-082eea233",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 041O clause by clause: T as a scheme over base S (S:=T recovers bare scheme), X : AlgebraicSpace S, f : X ⟶ schemeSpace T (actual Yoneda sheaf); fpqc family via the recorded Scheme.fpqcPrecoverage on underlying schemes with free index universe w, no Nonempty/finiteness; f_i = enlargedFibreProductFst of the canonical Yoneda map (⟨yoneda.map (g i)⟩ is GrothendieckTopology.yoneda.map) and f, the real sheaf-pullback projection; hypotheses and conclusion use MapIsUniversallyClosed (all algebraic-space base changes, closed mapPoint for the atlas point topology); no extra assumptions on f. Edge cases ok: empty I, empty X/S, non-quasi-compact cover members. The 2 added stmt_deps (def-trf-scheme-algebraic-space, def-sfb-space-sheaf-fibre-product) are on base, own the used declarations and are required. lean.statement verbatim; node diff vs live only stmt_deps+lean; no defs, proof sorry, docstrings with 041O, blueprint id and 5 steps; the scheme-only AlgebraicGeometry.universallyClosed_of_fpqc_cover is in a different namespace (no clash, not a duplicate). Report has Worker report + Second reading. Not recompiled (no file changed)."
+ }
+}

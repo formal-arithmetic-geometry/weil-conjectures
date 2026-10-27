@@ -1,0 +1,276 @@
+{
+ "id": "lem-sfb-isolated-affine-completion-deformation",
+ "kind": "statement",
+ "title": "Deformations of an affine isolated singularity and its completions",
+ "statement": "Let $k$ be a field [def-weil-field], let $P$ be a finitely generated commutative $k$-algebra, and let $\\mathfrak m_1,\\ldots,\\mathfrak m_r$ be distinct maximal ideals. Assume $V=\\operatorname{Spec}P$ is smooth over $k$ outside these points [def-weil-affine-spectrum, def-sbc-smooth-morphisms]. Put $\\widehat P_i=\\varprojlim_n P_{\\mathfrak m_i}/\\mathfrak m_i^nP_{\\mathfrak m_i}$ [def-weil-pbc-localization-at-prime, def-weil-pbc-adic-completion]. Work over Artinian local $k$-algebras with residue field $k$, meaning local rings with the descending chain condition on ideals and with a specified residue-field identification; maps are local $k$-homomorphisms respecting it. A marked deformation of a ring $B$ over $R$ is a flat $R$-algebra $Q$ with an identified quotient $Q/\\mathfrak m_RQ\\cong B$, and arrows are isomorphisms respecting this quotient [def-weil-pbc-flat-ring-map]. For $B=P$ the algebras are of finite type over $R$; for $B=\\widehat P_i$ they are complete Noetherian local algebras and arrows are continuous. Taking the completed local rings defines a functor from deformations of $P$ to the product of deformations of the $\\widehat P_i$. This functor is smooth: for every surjection $R'\\twoheadrightarrow R$, every deformation $Q/R$, and every collection of deformations $D_i/R'$ with specified isomorphisms $D_i\\otimes_{R'}R\\cong\\widehat{Q_{\\mathfrak m_i}}$, there is a deformation $Q'/R'$ together with isomorphisms $Q'\\otimes_{R'}R\\cong Q$ and $\\widehat{Q'_{\\mathfrak m_i}}\\cong D_i$ inducing all the specified isomorphisms. On tangent spaces, namely the isomorphism classes over $k[\\epsilon]/(\\epsilon^2)$ with their deformation vector-space operations, it induces an isomorphism. The empty set of maximal ideals is permitted.",
+ "source": {
+  "document": "literature/stacks-project/examples-defos.tex",
+  "place": "Tag 0DZF (lemma-isolated), composite to the completed local rings, including tangent-space isomorphism. Complete local deformations and continuous arrows are obtained by completion in Tag 0DYV (lemma-completion); Tag 0DZ5 (lemma-smooth-completion) supplies the smooth comparison."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-flat-ring-map",
+  "def-sfb-marked-flat-algebra-deformations",
+  "def-sfb-artin-deformation-test-category",
+  "def-sfb-flat-algebra-deformation-tangent-module"
+ ],
+ "proof": [
+  {
+   "text": "Put $J=\\bigcap_i\\mathfrak m_i$ (put $J=P$ if $r=0$), and write $\\widehat P_J$ for its completion. The field $k$ is Noetherian because its only ideals are zero and $k$; [lem-weil-pbc-finite-type-algebra-noetherian] therefore makes $P$ Noetherian. Every Artinian coefficient ring is Noetherian with nilpotent maximal ideal by [lem-weil-pbc-artinian-local-noetherian-nilpotent]. Thus the inverse image $\\mathfrak q_i$ of $\\mathfrak m_i$ in any deformation $Q$ is a maximal ideal, and reduction gives a bijection on prime ideals: every prime contains the nilpotent ideal $\\mathfrak m_AQ$. The notation $Q_{\\mathfrak m_i}$ in the item means $Q_{\\mathfrak q_i}$. Apply [lem-sfb-adic-completion-flat-deformation-functor] to $P,J$. We obtain the base-change-compatible functor $F:\\mathrm{Def}_P\\to\\mathrm{Def}_{\\widehat P_J}$, $Q\\mapsto\\widehat Q_{J_Q}$. The source $\\mathrm{Def}_P$ may be taken to contain all flat marked deformations: [lem-weil-pbc-finite-type-lift-nilpotent] makes every one finite type from its special fibre $P$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+    "lem-sfb-adic-completion-flat-deformation-functor",
+    "lem-weil-pbc-finite-type-lift-nilpotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DYV (lemma-completion); Tag 0DZF (lemma-isolated), second paragraph."
+   }
+  },
+  {
+   "text": "Distinct maximal ideals are comaximal. Their powers are comaximal too: if $a+b=1$, the expansion of $(a+b)^{2n-1}$ lies in $(a^n,b^n)$. For a finite pairwise comaximal family, intersection equals product (for two ideals use $x=x(a+b)$); hence $J^n=\\bigcap_i\\mathfrak m_i^n$. Apply [lem-pc-crt-ideal-quotient-product] at each $n\\geq1$. The quotient $P/\\mathfrak m_i^n$ is already local at $\\mathfrak m_i$: every element outside that maximal ideal has an inverse modulo $\\mathfrak m_i$, and the remaining nilpotent error is inverted by a finite geometric series. Thus $P/\\mathfrak m_i^n\\cong P_{\\mathfrak m_i}/\\mathfrak m_i^nP_{\\mathfrak m_i}$. Taking compatible sequences, the coordinate maps and their inverse CRT maps give\n$$\\widehat P_J\\cong\\prod_i\\widehat P_i.$$\nThe same calculation for the inverse-image maximal ideals $\\mathfrak q_i\\subset Q$ identifies $\\widehat Q_{J_Q}$ with $\\prod_i\\widehat{Q_{\\mathfrak q_i}}$, naturally in marked isomorphisms and base change.",
+   "uses": [
+    "lem-pc-crt-ideal-quotient-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZF (lemma-isolated), identity P-completion = product of completed local rings."
+   }
+  },
+  {
+   "text": "For any deformation $D$ of $\\prod_i\\widehat P_i$, its reduction kernel $\\mathfrak m_AD$ is nilpotent. By [lem-weil-pbc-lift-idempotents-locally-nilpotent], its coordinate idempotents lift uniquely to $e_i\\in D$. They are orthogonal because $e_ie_j$ is an idempotent lifting zero, and their sum is one because their orthogonal sum is an idempotent lifting one. Consequently $d\\mapsto(e_id)_i$ is an isomorphism $D\\cong\\prod_i e_iD$, inverse $(d_i)\\mapsto\\sum_i d_i$. The factors $\\widehat P_i$ of $\\widehat P_J$ are Noetherian and complete for their maximal ideals: the complete ideal $J\\widehat P_J$ projects to $\\mathfrak m_i\\widehat P_i$, and compatible sequences in a product are coordinatewise. Each factor $e_iD$ is flat since tensor with a direct summand preserves injections, and its special fibre is $\\widehat P_i$. By the automatic-completeness assertion of [lem-sfb-adic-completion-flat-deformation-functor], these factors are complete Noetherian local rings. Conversely a finite product of such factors is flat (tensor distributes over finite direct sums). Uniqueness of the lifted idempotents forces arrows and base changes to preserve the factors. This gives an equivalence $\\mathrm{Def}_{\\widehat P_J}\\simeq\\prod_i\\mathrm{Def}_{\\widehat P_i}$, identifying the composite with the completed-local-ring functor in the item. Local ring isomorphisms preserve all powers of maximal ideals, so its arrows are continuous.",
+   "uses": [
+    "lem-weil-pbc-lift-idempotents-locally-nilpotent",
+    "lem-sfb-adic-completion-flat-deformation-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZF (lemma-isolated), product deformation identification; Tag 0DYV (lemma-completion)."
+   }
+  },
+  {
+   "text": "The nonsmooth locus is contained in $V(J)=\\{\\mathfrak m_i\\}$. In [lem-sfb-exal-completion-smooth-complement] take $B=P$ and $N=P$, which is finite over itself, to obtain the $k$-linear isomorphism\n$$\\operatorname{Exal}_k(P,P)\\cong\\operatorname{Exal}_k(\\widehat P_J,\\widehat P_J).$$\nBy [lem-sfb-ring-deformation-smoothness-test] these are precisely the deformation tangent spaces. Its identification sends a dual-number deformation to $0\\to P\\xrightarrow{\\epsilon}Q\\to P\\to0$; completing that extension is exactly $F(Q)$. Thus this is the tangent map of $F$, not just an abstract vector-space isomorphism. The factor equivalence of step 3 identifies the target tangent space with the product of the local tangent spaces, with coordinatewise operations.",
+   "uses": [
+    "lem-sfb-exal-completion-smooth-complement",
+    "lem-sfb-ring-deformation-smoothness-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZ4 (lemma-first-order-completion), N=B; Tag 0DY3 (lemma-rings-TI)."
+   }
+  },
+  {
+   "text": "Fix a small extension $A'\\twoheadrightarrow A$ and $Q\\in\\mathrm{Def}_P(A)$. The algebra $Q$ is finite type by the definition of the source deformation groupoid. If $F(Q)$ has a marked flat lift, [lem-sfb-completion-reflects-flat-liftability], applied to $P,J,Q,A',A$, gives a marked flat lift of $Q$. Its hypotheses are exactly finite type of $P$, smoothness off $V(J)$, flatness of $Q$, and the Artinian augmented bases. Step 4 gives tangent surjectivity. Therefore [lem-sfb-ring-deformation-smoothness-test] makes $F$ smooth for every surjection, with the specified reduction isomorphisms. Given the $D_i$ of the item, take $D=\\prod_iD_i$ and the product of the specified reduction isomorphisms, using steps 2–3. The criterion gives $Q'$, its reduction marking to $Q$, and a marked isomorphism $F(Q')\\cong D$. Coordinate projection gives exactly $\\widehat{Q'_{\\mathfrak q_i}}\\cong D_i$ with the required reduction equations. Although the criterion permits arbitrary flat lifts, [lem-weil-pbc-finite-type-lift-nilpotent] makes $Q'$ finite type over $A'$ since its quotient $Q$ is finite type and the base kernel is nilpotent.",
+   "uses": [
+    "lem-sfb-completion-reflects-flat-liftability",
+    "lem-sfb-ring-deformation-smoothness-test",
+    "lem-weil-pbc-finite-type-lift-nilpotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZ5 (lemma-smooth-completion), proof using Tag 0DZ3 (lemma-lift-equivalence) and formal-defos.tex Tag 0DYP (lemma-easy-check-smooth)."
+   }
+  },
+  {
+   "text": "If $r=0$, then $J=P$, the $J$-adic completion is the zero ring, and the product groupoid is terminal. A deformation of the zero algebra satisfies $D=\\mathfrak m_AD$; iteration and nilpotence give $D=0$. The preceding argument applies unchanged: its smooth-complement hypothesis says precisely that $P/k$ is smooth everywhere, and the Exal comparison says its tangent space is zero. Thus arbitrary source deformations lift and the map to the zero tangent space is an isomorphism. For $P=0$ all deformation groupoids are terminal by the same iteration. No hypothesis that a listed point is actually singular or that its residue field equals $k$ was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZF (lemma-isolated), empty list and zero-algebra edge cases of the preceding completion argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+  "lem-sfb-adic-completion-flat-deformation-functor",
+  "lem-weil-pbc-finite-type-lift-nilpotent",
+  "lem-pc-crt-ideal-quotient-product",
+  "lem-weil-pbc-lift-idempotents-locally-nilpotent",
+  "lem-sfb-exal-completion-smooth-complement",
+  "lem-sfb-ring-deformation-smoothness-test",
+  "lem-sfb-completion-reflects-flat-liftability"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/examples-defos.tex",
+  "place": "Tag 0DZF (lemma-isolated), second paragraph, expanding the product step; Tag 0DZ5 (lemma-smooth-completion) through Tags 0DZ3 and 0DZ4 and formal-defos.tex Tag 0DYP."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an affine scheme smooth outside finitely many points restriction of deformation categories to completed local rings is smooth and tangent bijective",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.IsSmooth fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth\", \"doc\": \"A morphism of schemes is smooth if and only if it is locally standard smooth, meaning that for every point in the domain, there exists an open neighborhood where the morphism is isomorphic to a standa\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"Algebra.smoothLocus_eq_univ_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], Algebra.smoothLocus R A = Set.univ ↔ Algebra.FormallySmooth R A\", \"doc\": \"For a finitely presented algebra $A$ over a commutative ring $R$, the smooth locus of $A$ over $R$ (the set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where $A_\\\\mathfrak{p}$ is formally\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary smooth algebra maps and adic lifts of a fixed homomorphism do not lift deformed algebras with prescribed completed local rings"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"completion\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary smooth algebra maps and adic lifts of a fixed homomorphism do not lift deformed algebras with prescribed completed local rings"
+  },
+  {
+   "tool": "grep",
+   "query": "isolated.*deform|deform.*isolated|smoothCompletion|deformation.*tangent",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Perfectoid/FontaineTheta.lean\", \"line\": \"30\", \"text\": \"deformation-theoretic approach via the cotangent complex, as in\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary smooth algebra maps and adic lifts of a fixed homomorphism do not lift deformed algebras with prescribed completed local rings"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat lifts of an affine finite type algebra with isolated singularities can realize prescribed deformations of the completed local rings",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsAdicComplete.liftAlgHom\", \"module\": \"Mathlib.RingTheory.AdicCompletion.RingHom\", \"type\": \"(f : (n : ℕ) → A →ₐ[R] S ⧸ I ^ n)\\n  (hf : ∀ {m n : ℕ} (hle : m ≤ n), (Ideal.Quotient.factorₐ R (Ideal.pow_le_pow_right hle)).comp (f n) = f m) : A →ₐ[R] S\", \"doc\": \"Given a compatible family of $ R $-algebra homomorphisms $ f_n : A → S/I^n $ satisfying $ f_m = \\text{factor}_I^{m,n} ∘ f_n $ for all $ m ≤ n $, this constructs an $ R $-algebra homomorphism $ A → S $ \"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib.RingTheory.Smooth.Flat\", \"type\": \"[Smooth R A] : Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_lift\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[FormallySmooth R A] (I : Ideal B) (hI : IsNilpotent I) (g : A →ₐ[R] B ⧸ I) :\\n  ∃ f : A →ₐ[R] B, (Ideal.Quotient.mkₐ R I).comp f = g\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ a formally smooth $ R $-algebra, $ B $ a ring with a nilpotent ideal $ I $, and $ g: A \\\\to B/I $ an $ R $-algebra homomorphism. Then there exists an $ R $-algebr\"}\n  {\"name\": \"RingHom.Flat\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \"{R : Type u} {S : Type v} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, the property that $ S $ is a flat $ R $-module under the induced algebra structure defined by $ f $. This means that\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_comp_surjective\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \":\\n  FormallySmooth R A ↔\\n    ∀ ⦃B : Type max u v⦄ [CommRing B] [Algebra R B] (I : Ideal B),\\n      I ^ 2 = ⊥ → Function.Surjective ((Ideal.Quotient.mkₐ R I).comp : (A →ₐ[R] B) → A →ₐ[R] B ⧸ I)\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is formally smooth if and only if for every commutative ring $ B $ equipped with an $ R $-algebra structure and every ideal $ I $ of $ B $ with $ I^2 = 0\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"module\": \"Mathlib.RingTheory.Smooth.AdicCompletion\", \"type\": \"{I : Ideal S} (f : A →ₐ[R] S ⧸ I) :\\n  ∃ (g : A →ₐ[R] AdicCompletion I S), ((AdicCompletion.evalOneₐ I).restrictScalars R).comp g = f\", \"doc\": \"For any commutative rings $R$ and $S$, an ideal $I$ of $S$, and a formally smooth $R$-algebra $A$, given an $R$-algebra homomorphism $f : A \\\\to S/I$, there exists an $R$-algebra homomorphism $g : A \\\\t\"}\n  {\"name\": \"Algebra.FormallySmooth.lift\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[FormallySmooth R A] (I : Ideal B) (hI : IsNilpotent I) (g : A →ₐ[R] B ⧸ I) : A →ₐ[R] B\", \"doc\": \"Given a commutative ring $ R $, a formally smooth $ R $-algebra $ A $, a ring $ B $ with a nilpotent ideal $ I $, and an $ R $-algebra homomorphism $ g: A \\to B/I $, there exists an $ R $-algebra homom\"}\n  {\"name\": \"Algebra.FormallySmooth.mk_lift\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[FormallySmooth R A] (I : Ideal B) (hI : IsNilpotent I) (g : A →ₐ[R] B ⧸ I) (x : A) :\\n  Ideal.Quotient.mk I (FormallySmooth.lift I hI g x) = g x\", \"doc\": \"For a formally smooth algebra $ A $ over a commutative ring $ R $, given a nilpotent ideal $ I $ of a commutative ring $ B $ and an algebra homomorphism $ g : A \\\\to B/I $, the image of the lift of any\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary smooth algebra maps and adic lifts of a fixed homomorphism do not lift deformed algebras with prescribed completed local rings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Deformations of isolated singularities are unchanged on tangent spaces after completion and lift smoothly",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Extension.homInfinitesimal\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          (P₁ : Algebra.Extension R A) →\\n            (P₂ : Algebra.Extension R A) → [Algebra.FormallySmooth R P₁.Ring] → P₁.infinitesimal.Hom P₂.infinitesimal\", \"doc\": \"Given commutative rings $ R $ and $ A $ with an $ R $-algebra structure on $ A $, and formally smooth algebra extensions $ P_1 $ and $ P_2 $ of $ R $ over $ A $, this constructs a homomorphism between\"}\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n  {\"name\": \"SmoothBumpCovering.embeddingPiTangent_ker_mfderiv\", \"module\": \"Mathlib/Geometry/Manifold/WhitneyEmbedding\", \"type\": \"∀ {ι : Type uι} {E : Type uE} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] [inst_2 : FiniteDimensional ℝ E]\\n  {H : Type uH} [inst_3 : TopologicalSpace H] {I : ModelWithCorners ℝ E H} {M : Type uM} [inst_4 : TopologicalSpace M]\\n  [inst_5 : ChartedSpace H M] [inst_6 : IsManifold I (↑⊤) M] \", \"doc\": \"For any point $x$ in the manifold $M$ and $x \\\\in s$, the kernel of the Fréchet derivative of the smooth embedding $f.\\\\text{embeddingPiTangent}: M \\\\to \\\\prod_{\\\\iota} (E \\\\times \\\\mathbb{R})$ at $x$ is the\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} [IsAdicComplete I S]\\n  (f : A →ₐ[R] S ⧸ I), ∃ g, (Ideal.Quotient.mkₐ R I).comp g = f\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ an $ R $-algebra, and $ S $ a commutative ring with an ideal $ I $. If $ S $ is adic complete with respect to $ I $, then for any $ R $-algebra homomorphism $ f \"}\n  {\"name\": \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (I : Ideal S),\\n  I ^ 2 = ⊥ → ∀ (x : S), P.HasMap ((Ideal.Quotient.mk I) x) → ∃! ε, ε ∈ I ∧ P.HasMap (x + ε)\", \"doc\": \"Let $S$ be a commutative algebra over a commutative ring $R$, and let $I$ be an ideal of $S$ such that $I^2 = \\\\{0\\\\}$. Let $P$ be a standard étale pair over $R$. If the image of an element $x \\\\in S$ in\"}\n  {\"name\": \"StandardEtalePair.instFormallyEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.FormallyEtale R P.Ring\", \"doc\": \"For any commutative ring $ R $ and standard étale pair $ P $ over $ R $, the ring $ P.\\\\text{Ring} $ is a formally étale $ R $-algebra. This instance asserts that the standard étale ring extension, con\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} (f : A →ₐ[R] S ⧸ I),\\n  ∃ g, (AlgHom.restrictScalars R (AdicCompletion.evalOneₐ I)).comp g = f\", \"doc\": \"For any commutative rings $R$ and $S$, an ideal $I$ of $S$, and a formally smooth $R$-algebra $A$, given an $R$-algebra homomorphism $f : A \\\\to S/I$, there exists an $R$-algebra homomorphism $g : A \\\\t\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) [inst_4 : CommRing P] [inst_5 : Algebra R P] [inst_6 : Algebra P S]\\n  [IsScalarTower R P S] [Algebra.FormallySmooth R P] [Module.Free P Ω[P⁄R]] [Module.Finite P \", \"doc\": \"Let $ R $, $ P $, and $ S $ be commutative rings with $ P $ an $ R $-algebra and $ S $ a $ P $-algebra satisfying the scalar tower condition $ R \\to P \\to S $. Suppose $ P $ is formally smooth over $ R \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary smooth algebra maps and adic lifts of a fixed homomorphism do not lift deformed algebras with prescribed completed local rings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Any nilpotent thickening of an affine scheme is affine so scheme deformations of an affine scheme are deformations of its coordinate algebra",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isAffine_affineScheme\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ (X : AlgebraicGeometry.AffineScheme), AlgebraicGeometry.IsAffine X.obj\", \"doc\": \"The category of affine schemes is the full subcategory of the category of schemes consisting of schemes isomorphic to the prime spectrum of a commutative ring. This subcategory is the essential image \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsAffineHom fun X x x_1 x_2 => AlgebraicGeometry.IsAffine X\", \"doc\": \"If a morphism from a scheme $ X $ to an affine scheme $ Y $ is affine, then $ X $ itself is an affine scheme. This instance establishes that the property of being an affine morphism, when applied to a\"}\n  {\"name\": \"AlgebraicGeometry.isAffine_Spec\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ (R : CommRingCat), AlgebraicGeometry.IsAffine (AlgebraicGeometry.Spec R)\", \"doc\": \"For any commutative ring $R$, the scheme $\\\\operatorname{Spec}(R)$ constructed from the prime spectrum of $R$ equipped with the Zariski topology and structure sheaf is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.affineAnd\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"({R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) →\\n  AlgebraicGeometry.AffineTargetMorphismProperty\", \"doc\": \"A morphism of schemes $ f : X \\to Y $ with affine target $ Y $ satisfies this property if the scheme $ X $ is affine and the condition $ Q $ holds for the ring homomorphism induced by $ f $ on the glob\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine S],\\n  AlgebraicGeometry.IsAffine (AlgebraicGeometry.AffineSpace n S)\", \"doc\": \"If $ S $ is an affine scheme, then the affine space $ \\\\mathbb{A}^n_S $ over $ S $ is also affine. This instance asserts that when the base scheme $ S $ satisfies the affineness condition, the construc\"}\n  {\"name\": \"AlgebraicGeometry.affineAnd_apply\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"∀ (Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) {X Y : AlgebraicGeometry.Scheme}\\n  (f : X ⟶ Y) [inst : AlgebraicGeometry.IsAffine Y],\\n  AlgebraicGeometry.affineAnd (fun {R S} [CommRing R] [CommRing S] => Q) f ↔\\n    AlgebraicGeometry.IsAffine X ∧ Q (CommRingCat\", \"doc\": \"A morphism of schemes $ f: X \\to Y $ with affine target $ Y $ satisfies the affineAnd $ Q $ property if and only if the scheme $ X $ is affine and the condition $ Q $ holds for the ring homomorphism in\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme), AlgebraicGeometry.IsAffineHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any scheme $ S $ and type $ n $, the canonical morphism from the affine space $ \\\\mathbb{A}^n_S $ to the base scheme $ S $ is an affine morphism of schemes. This follows from the construction of $ \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary smooth algebra maps and adic lifts of a fixed homomorphism do not lift deformed algebras with prescribed completed local rings"
+  },
+  {
+   "tool": "grep",
+   "query": "[Tt]hickening.*[Aa]ffine|[Aa]ffine.*[Tt]hickening",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary smooth algebra maps and adic lifts of a fixed homomorphism do not lift deformed algebras with prescribed completed local rings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affineness of schemes is invariant under nilpotent closed immersions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsClosedImmersion fun X x f [AlgebraicGeometry.IsAffine x] =>\\n  AlgebraicGeometry.IsAffine X ∧\\n    Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.appTop f))\", \"doc\": \"Every closed immersion of schemes has the affine property, meaning that the domain scheme is affine and the induced morphism on global sections is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instIsAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsClosedImmersion f], AlgebraicGeometry.IsAffineHom f\", \"doc\": \"Every closed immersion of schemes is an affine morphism. Specifically, if $ f: X \\to Y $ is a closed immersion (i.e., induces a homeomorphism of $ X $ onto a closed subset of $ Y $ with surjective stru\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsAffineHom fun X x x_1 x_2 => AlgebraicGeometry.IsAffine X\", \"doc\": \"If a morphism from a scheme $ X $ to an affine scheme $ Y $ is affine, then $ X $ itself is an affine scheme. This instance establishes that the property of being an affine morphism, when applied to a\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.isAffine_surjective_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine Y] (f : X ⟶ Y) [AlgebraicGeometry.IsClosedImmersion f],\\n  AlgebraicGeometry.IsAffine X ∧\\n    Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.appTop f))\", \"doc\": \"If $ f: X \\\\to Y $ is a closed immersion of schemes, then $ X $ is an affine scheme and the induced morphism on global sections $ \\\\mathcal{O}_Y(Y) \\\\to \\\\mathcal{O}_X(X) $ is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.isAffine_of_isAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffineHom f] [AlgebraicGeometry.IsAffine Y],\\n  AlgebraicGeometry.IsAffine X\", \"doc\": \"If $ f: X \\\\to Y $ is an affine morphism of schemes and $ Y $ is an affine scheme, then $ X $ is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.affineAnd\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"({R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) →\\n  AlgebraicGeometry.AffineTargetMorphismProperty\", \"doc\": \"A morphism of schemes $ f : X \\to Y $ with affine target $ Y $ satisfies this property if the scheme $ X $ is affine and the condition $ Q $ holds for the ring homomorphism induced by $ f $ on the glob\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.of\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme → AlgebraicGeometry.AffineTargetMorphismProperty\", \"doc\": \"Given a morphism property $ P $ for schemes, this constructs a property that assigns to each morphism $ X \\\\to Y $ with affine target $ Y $ the proposition $ P(f) $.\"}\n  {\"name\": \"AlgebraicGeometry.affineAnd_apply\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"∀ (Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) {X Y : AlgebraicGeometry.Scheme}\\n  (f : X ⟶ Y) [inst : AlgebraicGeometry.IsAffine Y],\\n  AlgebraicGeometry.affineAnd (fun {R S} [CommRing R] [CommRing S] => Q) f ↔\\n    AlgebraicGeometry.IsAffine X ∧ Q (CommRingCat\", \"doc\": \"A morphism of schemes $ f: X \\to Y $ with affine target $ Y $ satisfies the affineAnd $ Q $ property if and only if the scheme $ X $ is affine and the condition $ Q $ holds for the ring homomorphism in\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary smooth algebra maps and adic lifts of a fixed homomorphism do not lift deformed algebras with prescribed completed local rings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Deformations of a finite type algebra smooth outside finitely many closed points map smoothly to deformations of its completed local rings with isomorphic tangent spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.IsSmooth fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth\", \"doc\": \"A morphism of schemes is smooth if and only if it is locally standard smooth, meaning that for every point in the domain, there exists an open neighborhood where the morphism is isomorphic to a standa\"}\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] (p : Ideal S) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.IsStandardSmooth R (Localization.Away f)\", \"doc\": \"Given a finitely presented $ R $-algebra $ S $ and a prime ideal $ \\\\mathfrak{p} $ of $ S $ where $ S $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in S $ not belonging to $ \\\\m\"}\n  {\"name\": \"Algebra.instSmoothOfIsStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Algebra.Smooth R S\", \"doc\": \"Every standard smooth algebra over a commutative ring $ R $ is smooth over $ R $. A standard smooth algebra is one isomorphic to a localized polynomial ring $ R[x_1,\\\\ldots,x_n]_f $ with maximal rank J\"}\n  {\"name\": \"Algebra.Smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"(R : Type u_4) → [inst : CommRing R] → (A : Type u) → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The property that the commutative ring $ A $, equipped with an $ R $-algebra structure, is smooth over the commutative ring $ R $.\"}\n  {\"name\": \"Algebra.smoothLocus_eq_univ_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], Algebra.smoothLocus R A = Set.univ ↔ Algebra.FormallySmooth R A\", \"doc\": \"For a finitely presented algebra $A$ over a commutative ring $R$, the smooth locus of $A$ over $R$ (the set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where $A_\\\\mathfrak{p}$ is formally\"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ (R : Type u_1) {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (p : Ideal A) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.Smooth R (Localization.Away f)\", \"doc\": \"For a finitely presented $ R $-algebra $ A $ and a prime ideal $ \\\\mathfrak{p} \\\\subseteq A $ where $ A $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in A \\\\setminus \\\\mathfrak{p}\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ),\\n  AlgebraicGeometry.HasRingHomProperty (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\\n    fun {R S} [CommRing R] [CommRing S] =>\\n    RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmoothOfRelativeDimension n\", \"doc\": \"For any natural number $ n $ and a morphism $ f: X \\to Y $ of schemes, the morphism $ f $ is smooth of relative dimension $ n $ if and only if it is locally standard smooth of relative dimension $ n $.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary smooth algebra maps and lifts of homomorphisms into an adic completion do not realize prescribed deformations of completed local algebras."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Deformation\", \"AdicCompletion\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary smooth algebra maps and lifts of homomorphisms into an adic completion do not realize prescribed deformations of completed local algebras."
+  },
+  {
+   "tool": "grep",
+   "query": "isolated.*deform|deform.*isolated|deformation.*completion",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary smooth algebra maps and lifts of homomorphisms into an adic completion do not realize prescribed deformations of completed local algebras."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Marked flat lifts of an affine algebra realize prescribed completed local deformations of isolated singularities",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"module\": \"Mathlib.RingTheory.Smooth.AdicCompletion\", \"type\": \"{I : Ideal S} (f : A →ₐ[R] S ⧸ I) :\\n  ∃ (g : A →ₐ[R] AdicCompletion I S), ((AdicCompletion.evalOneₐ I).restrictScalars R).comp g = f\", \"doc\": \"For any commutative rings $R$ and $S$, an ideal $I$ of $S$, and a formally smooth $R$-algebra $A$, given an $R$-algebra homomorphism $f : A \\\\to S/I$, there exists an $R$-algebra homomorphism $g : A \\\\t\"}\n  {\"name\": \"AdicCompletion.liftAlgHom\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{S : Type u_5} →\\n  [inst : CommRing S] →\\n    (I : Ideal S) →\\n      {R : Type u_6} →\\n        {A : Type u_7} →\\n          [inst_1 : CommRing R] →\\n            [inst_2 : CommRing A] →\\n              [inst_3 : Algebra R A] →\\n                [inst_4 : Algebra R S] →\\n                  (f : (n : ℕ) → A →ₐ[R] \", \"doc\": \"Given commutative rings $ R $ and $ S $, an ideal $ I $ of $ S $, and an $ R $-algebra $ A $, this constructs an $ R $-algebra homomorphism from $ A $ to the $ I $-adic completion of $ S $, given a co\"}\n  {\"name\": \"IsAdicComplete.liftAlgHom\", \"module\": \"Mathlib.RingTheory.AdicCompletion.RingHom\", \"type\": \"(f : (n : ℕ) → A →ₐ[R] S ⧸ I ^ n)\\n  (hf : ∀ {m n : ℕ} (hle : m ≤ n), (Ideal.Quotient.factorₐ R (Ideal.pow_le_pow_right hle)).comp (f n) = f m) : A →ₐ[R] S\", \"doc\": \"Given a compatible family of $ R $-algebra homomorphisms $ f_n : A → S/I^n $ satisfying $ f_m = \\text{factor}_I^{m,n} ∘ f_n $ for all $ m ≤ n $, this constructs an $ R $-algebra homomorphism $ A → S $ \"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib.RingTheory.Smooth.Flat\", \"type\": \"[Smooth R A] : Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_comp_surjective\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \":\\n  FormallySmooth R A ↔\\n    ∀ ⦃B : Type max u v⦄ [CommRing B] [Algebra R B] (I : Ideal B),\\n      I ^ 2 = ⊥ → Function.Surjective ((Ideal.Quotient.mkₐ R I).comp : (A →ₐ[R] B) → A →ₐ[R] B ⧸ I)\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is formally smooth if and only if for every commutative ring $ B $ equipped with an $ R $-algebra structure and every ideal $ I $ of $ B $ with $ I^2 = 0\"}\n  {\"name\": \"IsAdicComplete.mkₐ_comp_liftAlgHom\", \"module\": \"Mathlib.RingTheory.AdicCompletion.RingHom\", \"type\": \"(n : ℕ) : (Ideal.Quotient.mkₐ R (I ^ n)).comp (liftAlgHom I f hf) = f n\", \"doc\": \"Given a compatible family of $ R $-algebra homomorphisms $ f_n : A → S/I^n $ satisfying $ f_m = \\\\text{factor}_I^{m,n} ∘ f_n $ for all $ m ≤ n $, there exists an $ R $-algebra homomorphism $ A → S $ ob\"}\n  {\"name\": \"Algebra.FormallyUnramified.lift_unique\", \"module\": \"Mathlib.RingTheory.Unramified.Basic\", \"type\": \"[FormallyUnramified R A] (I : Ideal B) (hI : IsNilpotent I) (g₁ g₂ : A →ₐ[R] B)\\n  (h : (Ideal.Quotient.mkₐ R I).comp g₁ = (Ideal.Quotient.mkₐ R I).comp g₂) : g₁ = g₂\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ a formally unramified $ R $-algebra, and $ B $ an $ R $-algebra with a nilpotent ideal $ I $. If $ g_1, g_2 : A \\\\to B $ are $ R $-algebra homomorphisms such that\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_lift\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[FormallySmooth R A] (I : Ideal B) (hI : IsNilpotent I) (g : A →ₐ[R] B ⧸ I) :\\n  ∃ f : A →ₐ[R] B, (Ideal.Quotient.mkₐ R I).comp f = g\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ a formally smooth $ R $-algebra, $ B $ a ring with a nilpotent ideal $ I $, and $ g: A \\\\to B/I $ an $ R $-algebra homomorphism. Then there exists an $ R $-algebr\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary smooth algebra maps and lifts of homomorphisms into an adic completion do not realize prescribed deformations of completed local algebras."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-deformation-smoothing-parameters",
+  "date": "2026-10-22",
+  "group": "ND"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Local-to-global deformation theorem underlying the node parameters in Pikaart--de Jong 2.3.6; no automorphism action or normalized level cover. Supporting calculation: Deformations of an affine isolated singularity and its completions.",
+   "via": [
+    "lem-sfb-nodal-deformation-smoothing-parameters",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-isolated-affine-completion-deformation",
+  "worker": "stage1",
+  "summary": "Followed the J-adic completion route of 0DZF and 0DZ5. Separated existence of flat lifts, Exal tangent comparison, the completion functor and the general marked smoothness criterion into four strictly smaller statement-only inputs. Wrote CRT, lifted-idempotent product equivalence, marked compatibility and empty-list arguments in the item. No statement correction or Lean attachment.",
+  "blueprint": "Current latest blueprint, sk-thm-sf-ctf-stability-direct-images proof (3): supporting isolated-singularity deformation input in the inherited alteration/moduli route. This node has blueprint.from.node=null as the ancestor tool reports; its existing precise route description is retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N6-aec625d7b",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-aec625d7b (reviewer sub-agent of L); spot-checked: I read the item, all 4 new nodes and every cited node in full. Sources read in examples-defos.tex: 0DZF (l.2657), 0DZ5 (l.2275), 0DZ3 (l.2076, full proof), the Exal notation and 0DZ4 (l.2166, full proof), 0DYV (l.1092), 0DY2/0DY3 (l.834/855); in formal-defos.tex: 0DYP. The split follows the second paragraph of 0DZF exactly: 0DZ5 is cut into 0DZ3, 0DZ4 and RS+0DY3+0DYP, with 0DYV(+0DYC) as the completion functor. The product P^_J=∏P^_i (CRT, step 2) and the idempotent-lift equivalence of deformation groupoids (step 3) are written out in the item. Hypotheses checked: the liftability node satisfies 0DZ3 (Artinian local gives Noetherian with nilpotent kernel; flat Q with fibre smooth off V(J) is smooth, hence syntomic); 0DYP applies because Def_B is RS for every B; step 1's finite-type-lift node makes the item's finite-type source equal the criterion's Def_P; step 3 gets factor Noetherianity from the completion node and completeness from the node's 0DYC clause; step 5 combines existence of lifts (0DZ3) with the marked conclusion of the criterion, using D=∏D_i and idempotent uniqueness for each per-i compatibility. Small cases tested: J=P (r=0, smooth P: target terminal, unobstructed, T=0); P=0; B=k[x]/(x^2); Exal_k(k[[x]],k[[x]])=0 for imperfect k; criterion with F=id and with C=0. No duplicates found by tag and keyword search: no other 0DYV/0DZ3/0DZ4/0DYP node exists; flat-algebra-small-extension-control and affine-isolated-deformation-lift concern localization, not completion. No new node restates the item. Route: sk-thm-p1 and sk-thm-picard-rr are reachable from the unit; tool_uses are empty and none are needed. No cycle, no SGA citation, no repair note. New nodes lack lean_audit, as is usual for nodes created since 2026-10-22."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.IsolatedAffineCompletionDeformation",
+  "declaration": "Algebra.FlatDeformation.isolatedAffine_completion_deformation",
+  "declarations": [
+   "Algebra.FlatDeformation.LocalizedCompletion",
+   "Algebra.FlatDeformation.IsLocalizedCompletionMap",
+   "Algebra.FlatDeformation.pointDenominators",
+   "Algebra.FlatDeformation.pointCompletion",
+   "Algebra.FlatDeformation.IsCompleteLocalDeformation",
+   "Algebra.FlatDeformation.completedFibre",
+   "Algebra.FlatDeformation.IsPointCompletionFunctor",
+   "Algebra.FlatDeformation.IsPointCompletionSmooth",
+   "Algebra.FlatDeformation.HasPointCompletionTangentEquiv",
+   "Algebra.FlatDeformation.isolatedAffine_completion_deformation"
+  ],
+  "file": "lean/Sheaf/RingTheory/IsolatedAffineCompletionDeformation.lean",
+  "statement": "theorem isolatedAffine_completion_deformation [Algebra.FiniteType k P] (hdistinct : Function.Injective m) (hsmooth : ∀ p : Spec (CommRingCat.of P), (∀ i : Fin r, p.asIdeal ≠ m i) → ∃ U : (Spec (CommRingCat.of P)).Opens, p ∈ U ∧ AlgebraicGeometry.Smooth (U.ι ≫ Spec.map (CommRingCat.ofHom (algebraMap k P)))) : ∃ (F : ∀ (A : TestCategory k k) (i : Fin r), Groupoid P A ⥤ Groupoid (completedFibre m i) A) (e : ∀ (A : TestCategory k k) (i : Fin r) (Q : Groupoid P A), algebra ((F A i).obj Q) ≃ₐ[k] pointCompletion (m i) Q), IsPointCompletionFunctor m F e ∧ IsPointCompletionSmooth m F e ∧ HasPointCompletionTangentEquiv m F",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8f67fd744",
+  "group": "NR",
+  "result": "fix",
+  "note": "Item statement matches the node and Stacks 0DZF clause by clause: field, FiniteType P, injective Fin r maximal ideals (r=0 allowed), smoothness off the points via a smooth open neighbourhood, completion of the actual localization at q_i=marking^-1(m_i), F pinned by e through IsLocalizedCompletionMap on scalars, marking, arrows and base change (exists-unique j), Stacks 06HG smoothness over every surjection keeping the specified j_i, tangent operations pinned by IsCanonicalTangentModule (scalar push plus an iff for addition over k[k x k]) and dF fixed on classes. Edge cases: r=0, P=0, smooth listed points, arbitrary residue fields. Common universe u is forced by the landed Groupoid and Scheme.{u}. lean.statement verbatim for both nodes; dep records unchanged vs live. Finding fixed: the new def node def-sfb-flat-algebra-deformation-tangent-module used ArtinDeformation.squareZeroMap (plain def owned by theorem lem-sfb-artin-rs-tangent-tensor) with no stmt_dep. fixes/FlatAlgebraDeformationTangentModule.lean now imports MarkedStackDeformations and uses StackDeformation.squareZeroTransport (same construction, Q34 precedent); fixes/def-sfb-flat-algebra-deformation-tangent-module.json adds stmt_dep def-sfb-marked-stack-deformations with a bracket citation and lean.note. nt_compile --json of the fixed module plus the delivered item: clean, exit 0, 8.8 s / 9.3 s."
+ }
+}

@@ -1,0 +1,216 @@
+{
+ "id": "lem-sfb-space-module-flat-arbitrary-charts",
+ "kind": "statement",
+ "title": "Relative module flatness is independent of arbitrary source and target etale charts",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $X,Y$ be algebraic spaces over $S$ [def-trf-algebraic-space], and let $f:X\\to Y$ be a morphism. Let $M$ be a quasi-coherent $\\mathcal O_X$-module on the small etale site [def-trf-space-quasi-coherent-module], and fix $x\\in|X|$ [def-a1-space-point-topology]. Consider all diagrams of $S$-schemes $U\\xrightarrow{h}V$ with representable etale maps $a:U\\to X$, $b:V\\to Y$ satisfying $fa=bh$, together with $u\\in U$ mapping to $x$. Let $F$ be the quasi-coherent Zariski module on $U$ corresponding to $a^*M$ under [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence], where pullback is [def-trf-space-etale-module-functors]. Then $(F)_u$ is flat over $\\mathcal O_{V,h(u)}$ for some such diagram and point if and only if it is flat over that local ring for every such diagram and point. Stalks are ordinary Zariski stalks [def-weil-pbc-module-stalk], with scalar action induced by $h$; module flatness means exactness of tensoring [def-weil-pbc-flat-ring-map]. No finiteness, separation or Noetherian hypothesis is imposed, and the source chart need not be surjective.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 05VU (lemma-flat-at-point), condition (1) and its proof for an arbitrary chart diagram: equivalence with the same geometric-stalk condition (2)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-space-quasi-coherent-module",
+  "def-a1-space-point-topology",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "def-trf-space-etale-module-functors",
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-flat-ring-map",
+  "def-trf-space-module-scheme-restriction"
+ ],
+ "proof": [
+  {
+   "text": "There is a compatible chart point over $x$. Indeed [def-trf-algebraic-space] provides a surjective etale scheme atlas $b_0:V_0\\to Y$. The existence clause of [lem-sfb-unramified-etale-compatible-charts] gives $a_0:U_0\\to X$ surjective etale and $h_0:U_0\\to V_0$ with $fa_0=b_0h_0$. Take a field-valued representative of $x$ from [def-a1-space-point-topology]. By the scheme-test meaning of surjectivity in [def-trf-algebraic-space], its base change to $U_0$ is a nonempty scheme. Any point of that base change gives $u_0\\in U_0$ over $x$. Choose an algebraic closure $\\Omega$ of $\\kappa(u_0)$ by [def-weil-algebraic-closure]; by [def-weil-geometric-point] it defines $\\bar u_0:\\operatorname{Spec}\\Omega\\to U_0$ centered at $u_0$. Fix $\\bar x=a_0\\bar u_0$ and $\\bar y=f\\bar x$ for the remaining steps.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-unramified-etale-compatible-charts",
+    "def-a1-space-point-topology",
+    "def-weil-algebraic-closure",
+    "def-weil-geometric-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 05VU, choice of geometric point and compatible diagrams; compatible atlas existence is spaces.tex Tag 02X1 (lemma-lift-morphism-presentations)."
+   }
+  },
+  {
+   "text": "Let $(U,V,a,b,h,u)$ be any diagram and point in the statement. By [lem-sfb-etale-geometric-point-specified-lift] the fixed $\\bar x$ lifts to $\\bar u:\\operatorname{Spec}\\Omega\\to U$ centered at this specified $u$. Put $\\bar v=h\\bar u$, $v=h(u)$, $B=\\mathcal O_{U,u}$, $R=\\mathcal O_{V,v}$, and $N=F_u$. Then $b\\bar v=\\bar y$. The ring identifications in [lem-sfb-space-strict-local-flatness], applied to $a$ and $b$, identify $\\mathcal O_{X,\\bar x}=B^{\\mathrm{sh}}$ and $\\mathcal O_{Y,\\bar y}=R^{\\mathrm{sh}}$. By [lem-sfb-space-quasicoherent-geometric-stalk-tensor] there is a canonical $B^{\\mathrm{sh}}$-linear isomorphism $N\\otimes_B B^{\\mathrm{sh}}\\simeq M_{\\bar x}$. Its $R$-action is the restriction of the action through $R\\to R^{\\mathrm{sh}}\\to B^{\\mathrm{sh}}$: the equality $fa=bh$ says a germ on $V$ pulls back to the same germ on a common pointed neighbourhood on either path. The tensor comparison sends $n\\otimes c$ to the product of the two germs, so multiplication by this pulled-back germ agrees on both sides.",
+   "uses": [
+    "lem-sfb-etale-geometric-point-specified-lift",
+    "lem-sfb-space-strict-local-flatness",
+    "lem-sfb-space-quasicoherent-geometric-stalk-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 05VU (lemma-flat-at-point), proof for an arbitrary compatible chart diagram."
+   }
+  },
+  {
+   "text": "The local ring map $B\\to B^{\\mathrm{sh}}$ is faithfully flat by [lem-sc-strict-henselization-faithfully-flat]. Apply [lem-trf-flatness-faithfully-flat-extension] with $A=R$, $B=B$, $C=B^{\\mathrm{sh}}$ and module $N$: it gives $N$ flat over $R$ if and only if $B^{\\mathrm{sh}}\\otimes_B N$ is flat over $R$. The tensor symmetry $c\\otimes n\\mapsto n\\otimes c$ and step 2 identify this last module with $M_{\\bar x}$ as an $R$-module. Now apply [lem-sfb-strict-henselization-module-flatness] to the $R^{\\mathrm{sh}}$-module $M_{\\bar x}$. We obtain $F_u$ flat over $\\mathcal O_{V,h(u)}$ if and only if $M_{\\bar x}$ is flat over $R^{\\mathrm{sh}}=\\mathcal O_{Y,\\bar y}$. This criterion uses only the fixed $\\bar x$ and its image $\\bar y$. In particular it is independent of the diagram and $u$. Neither $R\\to B$ nor $f$ is assumed flat.",
+   "uses": [
+    "lem-sc-strict-henselization-faithfully-flat",
+    "lem-trf-flatness-faithfully-flat-extension",
+    "lem-sfb-strict-henselization-module-flatness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 05VU, final paragraph; algebra.tex Tag 0584 (lemma-flatness-descends-more-general), (2); more-algebra.tex Tag 07QM (lemma-dumb-properties-henselization), (1); flat.tex Tag 05VL (lemma-flat-up-down-henselization), (1) iff (3)."
+   }
+  },
+  {
+   "text": "If flatness holds for some diagram and point, step 3 gives flatness of the fixed $M_{\\bar x}$ over $\\mathcal O_{Y,\\bar y}$, and step 3 in reverse then gives flatness for every diagram and point. Conversely, if flatness holds for every diagram and point, apply it to the witness of step 1 to obtain the existential condition. A source chart missing $x$ contributes no points to the universal condition. If $X$ is empty there is no $x$ under consideration.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 05VU (lemma-flat-at-point), proof for an arbitrary compatible chart diagram."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-sfb-unramified-etale-compatible-charts",
+  "def-a1-space-point-topology",
+  "def-weil-algebraic-closure",
+  "def-weil-geometric-point",
+  "lem-sfb-etale-geometric-point-specified-lift",
+  "lem-sfb-space-strict-local-flatness",
+  "lem-sfb-space-quasicoherent-geometric-stalk-tensor",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-trf-flatness-faithfully-flat-extension",
+  "lem-sfb-strict-henselization-module-flatness"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 05VU (lemma-flat-at-point), proof for an arbitrary compatible chart diagram."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "flat.*(chart|etale|étale)|((chart|etale|étale).*flat)",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean; Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean; Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean; Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean; Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean; Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean; Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean; Mathlib/AlgebraicGeometry/Morphisms/Etale.lean; grep directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scheme morphism flatness and ring/module flatness facts do not state relative module flatness independence on arbitrary algebraic-space charts"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flatness of a quasi-coherent module over an algebraic space is equivalent on every etale scheme chart at a specified point",
+   "results": "AlgebraicGeometry.Flat.flat_appLE; AlgebraicGeometry.Flat.casesOn; Module.flat_of_isLocalized_span; RingHom.Flat; AlgebraicGeometry.Flat.iff_flat_stalkMap; AlgebraicGeometry.flat_iff; AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.Scheme.Hom.flat_appLE",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scheme morphism flatness and ring/module flatness facts do not state relative module flatness independence on arbitrary algebraic-space charts"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, AlgebraicGeometry.Etale",
+   "results": "No hits",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scheme morphism flatness and ring/module flatness facts do not state relative module flatness independence on arbitrary algebraic-space charts"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi-coherent module on an algebraic space relative flatness at a point is independent of the compatible etale scheme charts used to test it",
+   "results": "AlgebraicGeometry.Flat.instHasRingHomPropertyFlat; AlgebraicGeometry.flat_iff; AlgebraicGeometry.Flat.stalkMap; AlgebraicGeometry.Flat.iff_flat_stalkMap; AlgebraicGeometry.Flat.of_stalkMap; AlgebraicGeometry.Flat; AlgebraicGeometry.Flat.flat_appLE; AlgebraicGeometry.Scheme.Hom.flat_appLE",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scheme morphism flatness and ring/module flatness facts do not state relative module flatness independence on arbitrary algebraic-space charts"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasicoherent sheaf stalk on an algebraic space is flat over the target strict henselian etale local ring if and only if its stalk on any source etale chart is flat over the target scheme chart local ring",
+   "results": "AlgebraicGeometry.Flat.iff_flat_stalkMap; AlgebraicGeometry.Flat.stalkMap; AlgebraicGeometry.Flat.of_stalkMap; AlgebraicGeometry.Flat.instHasRingHomPropertyFlat; AlgebraicGeometry.flat_iff; AlgebraicGeometry.Flat; AlgebraicGeometry.Flat.instOfIsOpenImmersion; RingHom.Flat.propertyIsLocal",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scheme morphism flatness and ring/module flatness facts do not state relative module flatness independence on arbitrary algebraic-space charts"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-pointwise-module-flat-base-change",
+  "date": "2026-10-24",
+  "group": "Q13"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Quasi-coherent cohomological dimension of algebraic-space curve families. Supporting cohomology input: local scheme representability of the curve family, before using scheme cohomology. Supporting input in Tag 0E6F proof, first paragraph: the smooth covering with a relatively ample invertible module obtained from Tag 0DQ0. Picard-stack input in the smoothness paragraph of Tag 0DQ0 (lemma-polarized-curves-over-curves): moduli.tex Tag 0DPJ, for an algebraic-space total space. Supporting Invertible modules form an open substack for proper flat algebraic spaces. Specific input: quot.tex lemma-picard-stack-open-in-coh, the sentence invoking spaces-more-morphisms lemma-finite-free-open to obtain W and its arbitrary-base-change property. Supporting input in the proof of Tag 0CZT: relative flatness of the pulled-back module, needed before applying the fibre criterion to X prime. Chart-independence input of Tag 05VU (lemma-flat-at-point), used to pass between the chosen compatible scheme charts and all charts.",
+   "via": [
+    "lem-sfb-space-pointwise-module-flat-base-change",
+    "lem-sfb-space-relative-finite-free-locus-base-change",
+    "lem-sfb-space-invertible-open-coherent",
+    "lem-sfb-space-picard-stack-smooth",
+    "lem-sfb-curve-smooth-polarization-cover",
+    "lem-sfb-curve-etale-scheme-cover",
+    "lem-sfb-proper-space-curve-qcoh-bound",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-module-flat-arbitrary-charts",
+  "worker": "stage1",
+  "summary": "Proved independence of arbitrary source and target etale charts through the fixed geometric-stalk criterion of Stacks 05VU. Reused all supporting nodes; explicitly supplied a compatible chart point, checked the scalar actions in the tensor comparison, and used strict-henselization module flatness rather than assuming faithful flatness alone changes the base ring. Statement unchanged; no new nodes.",
+  "blueprint": "The inherited provenance ends at blueprint.from.node = null (confirmed by blueprint_refs.py ancestor). This split realizes the final inherited from.place sentence: chart-independence input of Tag 05VU, used in pointwise relative module-flat base change within the direct-image alteration prerequisites. The current latest sk-thm-sf-ctf-stability unit was read; its route is unchanged. Whole-blueprint searches for 05VU, chart flat and flatness found no identical statement.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-strict-henselization-faithfully-flat",
+    "why": "Generic local-ring input: B to its strict henselization is faithfully flat. No same-unit node replaces this ring fact; this is exactly the 07QM input to 05VU."
+   },
+   {
+    "node": "lem-trf-flatness-faithfully-flat-extension",
+    "why": "Generic algebra input 0584(2): flatness over R is reflected after the faithfully flat B-extension. The same-unit geometric criteria use this ring fact and do not replace it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-trf-flatness-faithfully-flat-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q124-d69a82cc8",
+  "group": "Q124",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-d69a82cc8 (reviewer sub-agent of L); spot-checked: I read the item and all 11 cited statements in full, and Stacks 05VU (spaces-morphisms.tex lemma-flat-at-point) statement and proof. There are no new nodes. The item's some⇔every form is the content of the 05VU proof applied to an arbitrary diagram, and nothing is weakened. Step 1: the 02X1 existence clause of lem-sfb-unramified-etale-compatible-charts gives a compatible atlas, scheme-test surjectivity gives u_0 over x, and an algebraic closure gives a fixed x̄. Step 2: 05VN lifts x̄ at the specified u, 04KF identifies the stalks as B^sh and R^sh for a and b, and 05VP gives N⊗_B B^sh≅M_x̄; the R-action matches via fa=bh, which is the source's commutative square. Step 3: 07QM faithful flatness, 0584(2) with A=R, B, C=B^sh, then 05VL (1)⇔(3) over R^sh, exactly the source's chain. Step 4 is quantifier logic and correctly marked elementary. Edge cases checked: zero M, empty X, charts missing x, non-surjective charts, non-Noetherian rings, and the non-flat closed point of 𝔸¹. proof_deps equal the union of step uses, there is no cycle, and there is no SGA. lem-sfb-space-module-flat-point-chart-independence and lem-sfb-space-module-flat-chart-test assume a scheme target, so the item generalizes them and is not a duplicate. I accept the split_report tool_uses (07QM, 0584) as generic ring facts. Batch-5 check: def-trf-algebraic-space is a general definition, and lem-trf-flatness-faithfully-flat-extension and lem-trf-etale-local-ring-flatness are generic commutative algebra. None is a trace-formula or Poincaré-duality result or a step of their proofs, so all are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceModuleFlatArbitraryCharts",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.module_flat_some_iff_every_chart",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceModuleFlatArbitraryCharts.lean",
+  "statement": "theorem module_flat_some_iff_every_chart {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) (M : X.QCoh) (x : Point X.obj.obj) : (∃ (U : X.EtaleSite) (V : Y.EtaleSite) (h : U.obj.left ⟶ V.obj.left) (u : X.etaleForget.obj U), U.obj.hom ≫ f.hom.hom = yoneda.map h ≫ V.obj.hom ∧ schemePointMap U.obj.hom u = x ∧ Module.Flat (V.obj.left.left.presheaf.stalk (h.left u)) ((ModuleCat.restrictScalars (h.left.stalkMap u).hom).obj ((RingedSpace.moduleStalkFunctor (X.etaleForget.obj U).toRingedSpace u).obj ((X.schemeRestriction U).obj M.obj)))) ↔ (∀ (U : X.EtaleSite) (V : Y.EtaleSite) (h : U.obj.left ⟶ V.obj.left) (u : X.etaleForget.obj U), U.obj.hom ≫ f.hom.hom = yoneda.map h ≫ V.obj.hom → schemePointMap U.obj.hom u = x → Module.Flat (V.obj.left.left.presheaf.stalk (h.left u)) ((ModuleCat.restrictScalars (h.left.stalkMap u).hom).obj ((RingedSpace.moduleStalkFunctor (X.etaleForget.obj U).toRingedSpace u).obj ((X.schemeRestriction U).obj M.obj))))",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-846ab7e2a",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Read the item, all 9 statement dependencies and Stacks 05VU (spaces-morphisms.tex l.6114). The Lean matches the node's 'some diagram+point iff every diagram+point' form clause by clause: S, X, Y, f; M : X.QCoh; x : Point; U, V : EtaleSite with no surjectivity; h an S-morphism; the square is U.obj.hom ≫ f.hom.hom = yoneda.map h ≫ V.obj.hom; schemePointMap u = x; F = schemeRestriction U applied to M (the canonical restriction to opens; stalk flatness is invariant under isomorphism); the ordinary module stalk restricted along h.stalkMap; Module.Flat. There are no extra hypotheses and only one universe u. Checked edge cases: empty X, charts missing x, non-surjective charts, M=0, the non-flat closed point of 𝔸¹, and non-Noetherian rings. The added stmt_dep def-trf-space-module-scheme-restriction is landed, so adding it is allowed. The node changed only in lean and stmt_deps, the record statement is verbatim, imports and docstrings follow H8/H9, the proof is only sorry, and there are no definitions. Advisories only: RingedSpace.moduleStalkFunctor (owned by def-pc-module-stalk-functor) is used while the stmt_dep is def-weil-pbc-module-stalk; it is the same stalk object (precedent Q29 808bd9e8, Q153 e18cc49f). Point and schemePointMap come from def-a1-algebraic-space-point-classes through the point-topology import. No compile was run because no file was changed."
+ }
+}

@@ -1,0 +1,162 @@
+{
+ "id": "lem-sfb-global-internal-hom-detection",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), derived global Hom calculation in step 2 of the supported scalar-unit defect argument; native module-object and underlying-abelian-section specialization of Tag 08JA.",
+   "via": [
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Derived global internal Hom detects shifted maps from a fixed native module object",
+ "statement": "Let X be a scheme and Λ a commutative condensed coefficient ring. Use native internal modules over its pulled-back coefficient ring and their unbounded derived category [sk-def-sfb-module-objects, sk-def-sfb-derived-categories]. Let K,N,N′ be objects and f:N→N′. Write RHom for the existing native derived internal Hom [sk-def-sfb-derived-tensor-hom] and RΓ_ab for the functor obtained by forgetting the coefficient action termwise and then deriving abelian-sheaf global sections [def-sfb-finite-model-topology-comparison-maps]. If RΓ_ab(RHom(K,f)) is an isomorphism, then for every integer n the function Hom(K,N[n])→Hom(K,N′[n]), g↦g followed by f[n], is bijective. No boundedness, constructibility, flatness or nonzero-ring hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JA, lemma-section-RHom-over-U, global statement; Tags 0A95 and 0A96; the natural global Hom complex calculation, including all integer shifts."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-derived-tensor-hom",
+  "def-sfb-finite-model-topology-comparison-maps"
+ ],
+ "proof": [
+  {
+   "text": "The ordinary free-module functor R tensor - preserves quasi-isomorphisms between K-flat complexes. An acyclic K-flat complex remains acyclic under tensoring with R (CochainComplex.acyclic_tensorRight_of_kFlat); braid the tensor factors and use the faithful exact module forgetful functor to reflect acyclicity. Package this in the source PreservesKFlatQuasiIso criterion. Derive free/forgetful and constant-sheaf/global-sections adjunctions using Adjunction.derivedAdjunction, and use the exact-functor comparison on forgetting and constant sheaves. Their composite right adjoint is exactly the specified sections functor.",
+   "uses": [
+    "sk-def-sfb-module-objects",
+    "sk-def-sfb-derived-categories",
+    "sk-def-sfb-derived-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JA, lemma-section-RHom-over-U, global statement; Tags 0A95 and 0A96; the natural global Hom complex calculation, including all integer shifts."
+   }
+  },
+  {
+   "text": "The derived composite left adjoint sends the integer group in degree zero to the native derived monoidal unit. Constant sheaf is strong monoidal. The single complex on its unit is K-flat; the derived free counit is therefore invertible there. Compose its K-flat counit with the single/derived-quotient and single/map-complex comparisons, the explicit free-unit isomorphism (the ordinary right unitor), and DerivedCategory.singleFunctorObjUnitIso. All objects and isomorphisms are actual constructions.",
+   "uses": [
+    "sk-def-sfb-module-objects",
+    "sk-def-sfb-derived-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JA, lemma-section-RHom-over-U, global statement; Tags 0A95 and 0A96; the natural global Hom complex calculation, including all integer shifts."
+   }
+  },
+  {
+   "text": "For an arbitrary integer n, shift the integer test object by -n. The composite left adjoint commutes with shifts, by the mate of the right adjoint shift structure. Tensoring K with its image gives K[-n], using the source derived tensor shift structure and the right unitor. Compose the shift adjunction, this tensor-unit isomorphism, and the composite adjunction with K tensor - left adjoint to native RHom(K,-). This yields natural bijections Hom(K,Y[n]) with Hom(Z[-n], sections(RHom(K,Y))).",
+   "uses": [
+    "sk-def-sfb-derived-categories",
+    "sk-def-sfb-derived-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JA, lemma-section-RHom-over-U, global statement; Tags 0A95 and 0A96; the natural global Hom complex calculation, including all integer shifts."
+   }
+  },
+  {
+   "text": "Adjunction naturality identifies postcomposition by f[n] with postcomposition by sections(RHom(K,f)). The latter is bijective since the assumed arrow is an isomorphism. Transport its injectivity and surjectivity through the preceding equivalences. This covers negative shifts, zero rings and the empty scheme without extra hypotheses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JA, lemma-section-RHom-over-U, global statement; Tags 0A95 and 0A96; the natural global Hom complex calculation, including all integer shifts."
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-derived-tensor-hom"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JA global statement, proved natively by derived free/forgetful and constant-sheaf/global-sections adjunctions; no ringed-site or hom-complex model comparison is needed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If derived global internal Hom from K sends a map f to an isomorphism then composition with f on all shifted Hom groups from K is bijective",
+   "results": "CochainComplex.IsKProjective.Qh_map_bijective; CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective; CochainComplex.IsKInjective.Qh_map_bijective. These cover localization on representatives, not native global derived internal Hom.",
+   "date": "2026-10-25",
+   "verdict": "no match: no natural native-module-object derived-global-Hom detection statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived global sections of internal Hom detects isomorphisms on morphisms from a fixed source in every degree",
+   "results": "Scheme.Modules.Hom.isIso_iff_isIso_app; sheafHomSectionsEquiv; Sheaf.ΓObjEquivHom_naturality_symm; Sheaf.ΓHomEquiv; LightCondensed.ihomPoints. Ordinary-section results only.",
+   "date": "2026-10-25",
+   "verdict": "no match: no natural native-module-object derived-global-Hom detection statement"
+  },
+  {
+   "tool": "grep",
+   "query": "global.*[Hh]om.*[Bb]ijective|[Bb]ijective.*global.*[Hh]om",
+   "results": "No matches in Mathlib. Searched using the launcher Mathlib grep interface.",
+   "date": "2026-10-25",
+   "verdict": "no match: no natural native-module-object derived-global-Hom detection statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SupportedFiniteStageTopologyDefect",
+  "date": "2026-10-25",
+  "group": "E4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.GlobalInternalHomDetection",
+  "file": "lean/Sheaf/Paper/GlobalInternalHomDetection.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteModelTopologyHom.shiftedHom_bijective_of_globalInternalHom_isIso",
+  "statement": "theorem shiftedHom_bijective_of_globalInternalHom_isIso\n    (X : Scheme.{u})\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ]\n    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj Λ X)))\n    {N N' : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj Λ X))} (f : N ⟶ N')\n    (h : IsIso ((sections X (condensedRingObj Λ X)).map\n      (((CondensedRing.derivedHom Λ X).obj (op K)).map f))) (n : ℤ) :\n    Function.Bijective (fun g : K ⟶ N⟦n⟧ ↦ g ≫ f⟦n⟧')",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261025T060759-L-2372193",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261025T060759-L-2372193",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

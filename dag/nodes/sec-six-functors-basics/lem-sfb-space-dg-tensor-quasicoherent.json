@@ -1,0 +1,299 @@
+{
+ "id": "lem-sfb-space-dg-tensor-quasicoherent",
+ "kind": "statement",
+ "title": "Dg tensor with a quasi-coherent complex has quasi-coherent image",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$ [def-trf-algebraic-space], with its small etale structure sheaf $\\mathcal O_X$. Use module sheaves [def-weil-sheaf-of-modules-category] and the unbounded derived category [def-weil-abstract-derived-category]. Let $K$ be any cochain complex of $\\mathcal O_X$-modules whose cohomology sheaves are quasi-coherent [def-trf-space-quasi-coherent-module]. Form its dg endomorphism algebra $(A,d)$ and the exact functor $T_K=-\\otimes_A^{\\mathbf L}K:D(A,d)\\to D(\\mathcal O_X)$ of [lem-sfb-ringed-site-dg-tensor-hom]. For every right dg $A$-module $M$, the object $T_K(M)$ has quasi-coherent cohomology. Equivalently, $T_K$ factors through the full subcategory $D_{\\mathrm{QCoh}}(\\mathcal O_X)$. No quasi-compactness or quasi-separatedness assumption on $X$, and no perfection or generation assumption on $K$, is required.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 09MA, lemma-tensor-with-QCoh-complex."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "lem-sfb-ringed-site-dg-tensor-hom"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\mathcal B=\\operatorname{Mod}(\\mathcal O_X)$ and $\\mathcal Q=D_{\\mathrm{QCoh}}(\\mathcal O_X)$. Use the equivalent small ringed model of [def-sfb-space-small-ringed-model]; its module equivalence is the specified restriction, so the quasi-coherent predicate is the original one. By [lem-pur-ringed-site-grothendieck-abelian], $\\mathcal B$ is Grothendieck abelian. Its small direct sums are exact: a direct sum of short exact sequences is the filtered colimit, over finite subsets of the index set, of their finite direct sums, and filtered colimits are exact. By [lem-sfb-grothendieck-k-injective] it has K-injective resolutions. Apply [lem-kun-grothendieck-derived-coproducts] and [src-weil-derived-homology-preserves-coproducts]: ambient derived coproducts exist, are represented by termwise sums, and satisfy $H^q(\\bigoplus_i L_i)\\cong\\bigoplus_iH^q(L_i)$ for every integer $q$ and every small family, including the empty family.",
+   "uses": [
+    "def-sfb-space-small-ringed-model",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-sfb-grothendieck-k-injective",
+    "lem-kun-grothendieck-derived-coproducts",
+    "src-weil-derived-homology-preserves-coproducts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08F3, lemma-quasi-coherence-direct-sums, proof; injectives.tex Tag 07D9, lemma-derived-products, and Tag 079P, theorem-K-injective-embedding-grothendieck."
+   }
+  },
+  {
+   "text": "By [lem-sfb-space-qcoh-kernels-colimits], small direct sums of quasi-coherent module sheaves are quasi-coherent. Applying this to the cohomology formula in Step 1 shows that $\\mathcal Q$ is closed under all small coproducts computed in $D(\\mathcal O_X)$. By [def-sfb-space-qcoh-derived-triangulation], it contains zero and is closed under isomorphisms, integer shifts and distinguished triangles with two vertices in $\\mathcal Q$. Thus it is also closed under any telescope formed as the cone of $1-s$ on a countable coproduct of its objects.",
+   "uses": [
+    "lem-sfb-space-qcoh-kernels-colimits",
+    "def-sfb-space-qcoh-derived-triangulation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08F3, lemma-quasi-coherence-direct-sums, and the paragraph after definition-derived-quasi-coherent; spaces-properties.tex Tag 03M1, lemma-properties-quasi-coherent."
+   }
+  },
+  {
+   "text": "The ring $(A,d)$ is a differential graded algebra and $M$ a right differential graded $A$-module in the sense of [lem-sfb-dg-property-p-resolution], with the cochain and shift conventions of the item. Apply [lem-sfb-dg-property-p-resolution] to $M$. It gives a quasi-isomorphism $P\\to M$ and an exhaustive filtration $0=F_0P\\subset F_1P\\subset\\cdots\\subset P$ by differential graded submodules, with graded-split inclusions and $G_n=F_{n+1}P/F_nP\\cong\\bigoplus_{j\\in J_n}A[k_{nj}]$ as differential graded modules. All $J_n$ are small in the fixed module universe. No countability of $A$, $M$, or $J_n$ has been imposed. The coproduct clause of [lem-sfb-dg-sequential-colimit-triangle] identifies each displayed direct sum with the corresponding coproduct in $D(A,d)$.",
+   "uses": [
+    "lem-sfb-dg-property-p-resolution",
+    "lem-sfb-dg-sequential-colimit-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KP, lemma-resolve, using property (P) of Tag 09KK, section-P-resolutions; Tag 09QI, lemma-derived-products, coproduct clauses."
+   }
+  },
+  {
+   "text": "For each graded-split inclusion $i_n:F_nP\\to F_{n+1}P$ of Step 3, the projection $\\operatorname{Cone}(i_n)\\to G_n$ is a quasi-isomorphism: its kernel is $\\operatorname{Cone}(\\mathrm{id}_{F_nP})$, with differential $(x,y)\\mapsto(d x+y,-d y)$ and contracting homotopy $(x,y)\\mapsto(0,x)$. The graded splitting ensures this is a degreewise surjective projection of dg modules; the kernel calculation proves the asserted cohomology isomorphism. The mapping-cone triangles in $D(A,d)$ therefore give distinguished triangles $F_nP\\to F_{n+1}P\\to G_n\\to F_nP[1]$. This is the explicit cone calculation for the graded-split filtration furnished by [lem-sfb-dg-property-p-resolution], using the mapping-cone convention for $D(A,d)$ in [lem-sfb-ringed-site-dg-tensor-hom].",
+   "uses": [
+    "lem-sfb-dg-property-p-resolution",
+    "lem-sfb-ringed-site-dg-tensor-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09K8, definition-distinguished-triangle, and Tag 09KX, definition-unbounded-derived-category; elementary cone computation for the inclusions in section-P-resolutions."
+   }
+  },
+  {
+   "text": "Write $T=T_K$. By [lem-sfb-ringed-site-dg-tensor-hom], $T$ is exact, preserves all small coproducts, and $T(A)\\simeq K$. Hence $T(G_n)\\simeq\\bigoplus_{j\\in J_n}K[k_{nj}]$. Since $K$ has quasi-coherent cohomology, Step 2 places every $T(G_n)$ in $\\mathcal Q$. Induct on $n$ to prove $T(F_nP)\\in\\mathcal Q$: for $n=0$ it is zero, and applying the exact functor $T$ to the triangle of Step 4, the two known vertices $T(F_nP)$ and $T(G_n)$ put its middle vertex $T(F_{n+1}P)$ in $\\mathcal Q$, using [def-sfb-space-qcoh-derived-triangulation]. This proves the claim for all finite filtration stages.",
+   "uses": [
+    "lem-sfb-ringed-site-dg-tensor-hom",
+    "def-sfb-space-qcoh-derived-triangulation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09MA, lemma-tensor-with-QCoh-complex, proof: the finite filtrations of F_iP and their graded pieces; dga.tex Tags 09LX and 09LY, derived tensor and its adjunction."
+   }
+  },
+  {
+   "text": "The exhaustive union in Step 3 is the degreewise colimit $P=\\operatorname{colim}_nF_nP$. Apply [lem-sfb-dg-sequential-colimit-triangle] to these actual inclusions. It gives a distinguished triangle $\\bigoplus_nF_nP\\xrightarrow{1-s}\\bigoplus_nF_nP\\to P\\to(\\bigoplus_nF_nP)[1]$, where $s\\iota_n=\\iota_{n+1}i_n$. Apply $T$ and its coproduct comparison from [lem-sfb-ringed-site-dg-tensor-hom]. Exactness gives a triangle with first two vertices $\\bigoplus_nT(F_nP)$ and third vertex $T(P)$. The first two belong to $\\mathcal Q$ by Steps 2 and 5, so the triangulated closure of [def-sfb-space-qcoh-derived-triangulation] gives $T(P)\\in\\mathcal Q$. Finally $P\\to M$ is inverted in $D(A,d)$, so $T(P)\\simeq T(M)$ and $T(M)$ has quasi-coherent cohomology.",
+   "uses": [
+    "lem-sfb-dg-sequential-colimit-triangle",
+    "lem-sfb-ringed-site-dg-tensor-hom",
+    "def-sfb-space-qcoh-derived-triangulation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09MA, lemma-tensor-with-QCoh-complex, proof, displayed hocolim; dga.tex Tag 0CRL, lemma-homotopy-colimit, with canonical telescope maps."
+   }
+  },
+  {
+   "text": "For every object $M$ choose $T(M)$ with its just-proved membership in the full subcategory $\\mathcal Q$. On morphisms use $T$ itself; fullness makes these the required morphisms in $\\mathcal Q$, and identities and composition follow from those of $T$. This is the claimed factorization. Conversely, any such factorization places every image in $\\mathcal Q$ by its definition.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09MA, lemma-tensor-with-QCoh-complex, conclusion that the image is contained in the full subcategory."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-space-small-ringed-model",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-kun-grothendieck-derived-coproducts",
+  "src-weil-derived-homology-preserves-coproducts",
+  "lem-sfb-space-qcoh-kernels-colimits",
+  "def-sfb-space-qcoh-derived-triangulation",
+  "lem-sfb-dg-property-p-resolution",
+  "lem-sfb-dg-sequential-colimit-triangle",
+  "lem-sfb-ringed-site-dg-tensor-hom"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 09MA, lemma-tensor-with-QCoh-complex, proof; expanded by the cited property-(P), derived coproduct and quasi-coherent closure statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor of a differential graded module with a complex of quasi coherent sheaves on an algebraic space has quasi coherent cohomology",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.Scheme.Modules.instAbelian (Mathlib/AlgebraicGeometry/Modules/Sheaf); SheafOfModules.isQuasicoherent (Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent); SheafOfModules.QuasicoherentData.X (Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent); SheafOfModules.IsQuasicoherent (Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent); SheafOfModules.instIsQuasicoherentOfIsFinitePresentation (Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent); DerivedCategory.instLinearCochainComplexIntQ (Mathlib/Algebra/Homology/DerivedCategory/Linear); SheafOfModules.QuasicoherentData (Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent); CategoryTheory.Tor_obj (Mathlib/CategoryTheory/Monoidal/Tor)",
+   "date": "2026-10-24",
+   "verdict": "no match: hits define quasicoherent sheaves or ordinary exact derived functors; they do not prove the dg tensor image theorem on algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex with quasi coherent cohomology yields a functor from modules over its endomorphism dg algebra into the quasi coherent derived category",
+   "results": "[leanfinder] OK 8 hit(s); DerivedCategory.instLinearCochainComplexIntQ (Mathlib/Algebra/Homology/DerivedCategory/Linear); DerivedCategory.instLinearHomotopyCategoryIntUpQh (Mathlib/Algebra/Homology/DerivedCategory/Linear); DerivedCategory.Q (Mathlib/Algebra/Homology/DerivedCategory/Basic); SheafOfModules.QuasicoherentData.X (Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent); CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory (Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor); SheafOfModules.QuasicoherentData.I (Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent); CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory (Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor); CategoryTheory.Sheaf.cohomologyPresheafFunctor (Mathlib/CategoryTheory/Sites/SheafCohomology/Basic)",
+   "date": "2026-10-24",
+   "verdict": "no match: hits define quasicoherent sheaves or ordinary exact derived functors; they do not prove the dg tensor image theorem on algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.IsQuasicoherent\"",
+   "results": "[loogle] OK 8 hit(s); SheafOfModules.IsQuasicoherent (Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent); SheafOfModules.isQuasicoherent (Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent); SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData (Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent); SheafOfModules.IsQuasicoherent.mk (Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent); SheafOfModules.isQuasicoherent_over (Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent); SheafOfModules.IsQuasicoherent.of_coversTop (Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent); SheafOfModules.isQuasicoherent_pushforward_of_isLeftAdjoint (Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent); SheafOfModules.isQuasicoherent_pushforward (Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent)",
+   "date": "2026-10-24",
+   "verdict": "no match: hits define quasicoherent sheaves or ordinary exact derived functors; they do not prove the dg tensor image theorem on algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "(dg|differential.graded).*(quasi.coherent|quasicoherent)|(quasi.coherent|quasicoherent).*(dg|differential.graded)",
+   "results": "[grep] OK 0 hit(s); none",
+   "date": "2026-10-24",
+   "verdict": "no match: hits define quasicoherent sheaves or ordinary exact derived functors; they do not prove the dg tensor image theorem on algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived tensor functor from a dg endomorphism algebra of a quasi coherent complex has quasi coherent essential image",
+   "results": "[leansearch] OK 8 hit(s); CategoryTheory.Functor.mapDerivedCategory (Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor); HasDerivedCategory.standard (Mathlib.Algebra.Homology.DerivedCategory.Basic); CategoryTheory.Functor.rightDerivedToHomotopyCategory (Mathlib.CategoryTheory.Abelian.RightDerived); DerivedCategory.instEssSurjHomotopyCategoryIntUpQh (Mathlib.Algebra.Homology.DerivedCategory.Basic); CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory (Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor); CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso (Mathlib.Algebra.Homology.Localization); HasDerivedCategory (Mathlib.Algebra.Homology.DerivedCategory.Basic); DerivedCategory.instEssSurjCochainComplexIntQ (Mathlib.Algebra.Homology.DerivedCategory.Basic)",
+   "date": "2026-10-24",
+   "verdict": "no match: hits define quasicoherent sheaves or ordinary exact derived functors; they do not prove the dg tensor image theorem on algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every differential graded module admits a semi free resolution with an exhaustive countable filtration by sums of shifts of the algebra and a telescope triangle",
+   "results": "8 hits: ModuleCat.projectiveResolution, CategoryTheory.ProjectiveResolution.ofComplex, CategoryTheory.HasProjectiveResolution, CochainComplex.IsKProjective, CategoryTheory.ProjectiveResolution, CochainComplex.isKProjective_of_projective, CategoryTheory.Abelian.LeftResolution.chainComplexXIso, CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex",
+   "date": "2026-10-24",
+   "verdict": "no match: general derived-category, ordinary projective-resolution, graded-module or sheaf constructions do not state this dg tensor image result; the broader existing DAG semi-free replacement is reused."
+  },
+  {
+   "tool": "grep",
+   "query": "semi.free|property.?\\(P\\)|[Pp]ropertyP|[Pp]roperty_P",
+   "results": "5 hits: Mathlib/CategoryTheory/Sites/MorphismProperty.lean, Mathlib/CategoryTheory/Sites/MorphismProperty.lean, Mathlib/CategoryTheory/Sites/MorphismProperty.lean, Mathlib/CategoryTheory/Sites/MorphismProperty.lean, Mathlib/CategoryTheory/Sites/MorphismProperty.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: general derived-category, ordinary projective-resolution, graded-module or sheaf constructions do not state this dg tensor image result; the broader existing DAG semi-free replacement is reused."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived tensor functor from a dg endomorphism algebra has quasi coherent image",
+   "results": "8 hits: CategoryTheory.Functor.rightDerivedToHomotopyCategory, HasDerivedCategory.standard, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh, DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso, Rep.Tor",
+   "date": "2026-10-24",
+   "verdict": "no match: general derived-category, ordinary projective-resolution, graded-module or sheaf constructions do not state this dg tensor image result; the broader existing DAG semi-free replacement is reused."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every differential graded module has a semi free resolution by direct sums of shifts of its algebra",
+   "results": "8 hits: ModuleCat.projectiveResolution, SetLike.gmodule.congr_simp, Module.Free.directSum, DirectSum.Gmodule, DirectSum.Gmodule.module, DirectSum.Gmodule.noConfusion, DirectSum.Gmodule.mk, Module.Finite.exists_free_surjective",
+   "date": "2026-10-24",
+   "verdict": "no match: general derived-category, ordinary projective-resolution, graded-module or sheaf constructions do not state this dg tensor image result; the broader existing DAG semi-free replacement is reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DGModule\"",
+   "results": "0 hits: none",
+   "date": "2026-10-24",
+   "verdict": "no match: general derived-category, ordinary projective-resolution, graded-module or sheaf constructions do not state this dg tensor image result; the broader existing DAG semi-free replacement is reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex of quasi coherent cohomology defines a derived tensor functor into the quasi coherent derived category",
+   "results": "8 hits: CategoryTheory.Tor', CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor, CategoryTheory.Tor_obj, CategoryTheory.Tor'_map_app, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.H, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-24",
+   "verdict": "no match: general derived-category, ordinary projective-resolution, graded-module or sheaf constructions do not state this dg tensor image result; the broader existing DAG semi-free replacement is reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent cohomology is preserved by tensoring a dg module over the endomorphism algebra of a complex of sheaves",
+   "results": "8 hits: CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, CategoryTheory.Sheaf.monoidalCategory, CategoryTheory.Sheaf.instAddCommGroupH",
+   "date": "2026-10-24",
+   "verdict": "no match: general derived-category, ordinary projective-resolution, graded-module or sheaf constructions do not state this dg tensor image result; the broader existing DAG semi-free replacement is reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The regular dg module generates its derived category under sums shifts cones and sequential homotopy colimits",
+   "results": "8 hits: HasDerivedCategory.standard, DerivedCategory.Q, HasDerivedCategory, DerivedCategory, CochainComplex.IsKProjective, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp, DerivedCategory.exists_iso_Q_obj_of_isLE",
+   "date": "2026-10-24",
+   "verdict": "no match: general derived-category, ordinary projective-resolution, graded-module or sheaf constructions do not state this dg tensor image result; the broader existing DAG semi-free replacement is reused."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-generator-dg-equivalence",
+  "date": "2026-10-24",
+  "group": "Q37"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 09MC, theorem-DQCoh-is-Ddga and its proof, with an arbitrary chosen perfect generator and its K-injective representative; the displayed derived tensor/Hom adjunction and equation-E-is-OK. Supporting subargument: Tag 09MC proof: restrict derived tensor to D_QCoh using lemma-tensor-with-QCoh-complex (09MA).",
+   "via": [
+    "lem-sfb-space-generator-dg-equivalence",
+    "lem-sfb-space-countable-telescope",
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-dg-tensor-quasicoherent",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 09MA into ambient coproduct/cohomology closure, the property-(P) resolution of Stacks 09KP (new statement-only node lem-sfb-dg-property-p-resolution, added at review in place of a route-pivot dropped dg-category citation), an explicit cone calculation, finite-stage induction and the actual sequential dg telescope. Preserved the statement and its unrestricted hypotheses. Reused all necessary nodes; one new node added at review, no Mathlib leaves.",
+  "blueprint": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 09MC, theorem-DQCoh-is-Ddga and its proof, with an arbitrary chosen perfect generator and its K-injective representative; the displayed derived tensor/Hom adjunction and equation-E-is-OK. Supporting subargument: Tag 09MC proof: restrict derived tensor to D_QCoh using lemma-tensor-with-QCoh-complex (09MA). This split realizes the final 09MA subargument by its property-(P) proof, within the inherited proof-(3) prerequisite; the current blueprint has no equivalent standalone node.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "The ambient module category on the small ringed model is Grothendieck abelian. No node of the item unit supplies this general statement."
+   },
+   {
+    "node": "lem-sfb-grothendieck-k-injective",
+    "why": "K-injective resolutions give the hypotheses for computing ambient coproducts and their cohomology. No node of the item unit supplies this general statement."
+   },
+   {
+    "node": "lem-kun-grothendieck-derived-coproducts",
+    "why": "Termwise coproducts represent the ambient derived coproducts for the same Grothendieck module category. No node of the item unit supplies this general statement."
+   },
+   {
+    "node": "src-weil-derived-homology-preserves-coproducts",
+    "why": "Cohomology preserves exact small coproducts in this ambient module category. No node of the item unit supplies this general statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-kun-grothendieck-derived-coproducts",
+  "src-weil-derived-homology-preserves-coproducts"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-5915649e8",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-5915649e8 (reviewer sub-agent of L); spot-checked: Read Stacks 09MA (full proof) and dga 09KK/09KL/09KM/09KN/09KP. The item statement is unchanged and matches 09MA hypothesis by hypothesis. ROUTE PIVOT: the delivery cites lem-coef-dg-module-semi-free-replacement, which is on side-live route-pivot-dropped.txt (line 403). Here the use is genuinely dg (A=End^•(K) has a nonzero differential and is uncountable), so it is not the B[0] exception. No live node gives an uncountable property-(P) resolution: lem-sfb-dg-countable-semi-free-resolution and lem-sfb-dg-countable-free-cover need countability, and lem-pc-large-filtered-free-resolution covers commutative rings only. FIX: a new statement-only node lem-sfb-dg-property-p-resolution (Stacks 09KP: every right DG A-module has a quasi-isomorphism from a P with exhaustive graded-split filtration 0=F_0P⊂F_1P⊂… whose quotients are ⊕A[k]; universe u, no countability). Steps 3 and 4 now cite it. Step 3 is rewritten without the 'one-object dg category' wording, so the 'dg categor' vocabulary is gone. proof_deps is recomputed and the lem-coef tool_use is removed. Maintainer note: the base node lem-sfb-dg-sequential-colimit-triangle still cites the dropped lem-coef pair in its own proof. BATCH 5: def-sfb-space-small-ringed-model, lem-sfb-space-qcoh-kernels-colimits and def-sfb-space-qcoh-derived-triangulation reach sec-trace-formula only through the general definition def-trf-algebraic-space, which is already a stmt_dep of the item. None of them is a trace-formula or Poincaré step, so all three are accepted. STEPS: (1) small-site Grothendieck abelian, exact sums (elementary), K-injective resolutions, termwise derived coproducts and H^q⊕=⊕H^q, with the hypotheses checked. (2) QCoh is closed under sums, giving D_QCoh closed under coproducts; the triangulation node gives 0, shifts and 2-of-3. (3) property-(P) resolution; the coproduct clause of the sequential-colimit node. (4) cone calculation checked: dh+hd=id for (x,y)↦(dx+y,−dy), h(x,y)=(0,x); the projection is surjective with contractible kernel. (5) T is exact, preserves coproducts and has T(A)≅K; the induction has base F_0=0. (6) telescope triangle on the actual inclusions, T applied, 2-of-3, T(M)≅T(P). (7) the factorization is elementary. Edge cases: K=0, M=0, X empty, J_n empty, a degree-0 ring, uncountable A and M; no qcqs or perfection hypothesis is used. Generic tool_uses accepted: pur grothendieck-abelian, sfb k-injective, kun derived coproducts, src homology-preserves-coproducts. Files: fixes/dag/nodes/sec-six-functors-basics/{lem-sfb-dg-property-p-resolution,lem-sfb-space-dg-tensor-quasicoherent}.json.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
+}

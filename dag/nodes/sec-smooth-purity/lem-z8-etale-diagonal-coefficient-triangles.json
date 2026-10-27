@@ -1,0 +1,120 @@
+{
+ "id": "lem-z8-etale-diagonal-coefficient-triangles",
+ "kind": "statement",
+ "title": "Two supported-diagonal triangles after coefficient transport",
+ "statement": "Canonical section variables and instances are those of the attached Lean module.\n\ntheorem evenLineDiagonalUnit_triangles\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]\n    [IsLocallyNoetherian X] [CompactSpace X] [IsLocallyNoetherian Y] [CompactSpace Y]\n    (J : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A))\n    (hJ : Scheme.IsLisseRankOneSheaf J) (d : ℤ)\n    (L' : DerivedCategoryModule A X)\n    (w : (ordinaryFinitePullback A f).obj (CoordinateTrace.shiftedLine A J d) ≅ L')\n    (τ : (ordinaryFinitePushforward A f).obj L' ⟶ ordinaryFiniteUnit A Y)\n    (t₀ : (ordinaryFinitePushforward A f).obj\n      ((ordinaryFinitePullback A f).obj (CoordinateTrace.shiftedLine A J d)) ⟶\n        constantComplex A Y)\n    (ht₀ : t₀ = (ordinaryFinitePushforward A f).map w.hom ≫ τ ≫\n      (ordinaryFiniteSingleUnitIso A Y).hom)\n    (δ : (ordinaryFinitePushforward A (pullback.diagonal f)).obj (ordinaryFiniteUnit A X) ⟶\n      (ordinaryFinitePullback A (pullback.snd f f)).obj\n        ((ordinaryFinitePullback A f).obj (CoordinateTrace.shiftedLine A J d)))\n    (t₁ : (ordinaryFinitePushforward A (pullback.fst f f)).obj\n      ((ordinaryFinitePullback A (pullback.snd f f)).obj\n        ((ordinaryFinitePullback A f).obj (CoordinateTrace.shiftedLine A J d))) ⟶\n          constantComplex A X)\n    (t₂ : (ordinaryFinitePushforward A (pullback.snd f f)).obj\n      ((ordinaryFinitePullback A (pullback.snd f f)).obj\n        ((ordinaryFinitePullback A f).obj (CoordinateTrace.shiftedLine A J d))) ⟶\n          constantComplex A X)\n    (ht₁ : (CoordinateTrace.exchange1 A f\n      ((ordinaryFinitePullback A f).obj (CoordinateTrace.shiftedLine A J d))).hom ≫ t₁ =\n        (ordinaryFinitePullback A f).map t₀ ≫\n          (leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} A) f).hom)\n    (ht₂ : (CoordinateTrace.exchange2 A f\n      ((ordinaryFinitePullback A f).obj (CoordinateTrace.shiftedLine A J d))).hom ≫\n        (ordinaryFinitePushforward A (pullback.snd f f)).map\n          (CoordinateTrace.coordinate A f (CoordinateTrace.shiftedLine A J d)).hom ≫ t₂ =\n        (ordinaryFinitePullback A f).map t₀ ≫\n          (leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} A) f).hom)\n    (hi₁ : (diagonalFirstPushSection A f).hom.app (ordinaryFiniteUnit A X) ≫\n      (ordinaryFinitePushforward A (pullback.fst f f)).map δ ≫ t₁ ≫\n        (ordinaryFiniteSingleUnitIso A X).inv = 𝟙 _)\n    (hi₂ : (diagonalPushSection A f).hom.app (ordinaryFiniteUnit A X) ≫\n      (ordinaryFinitePushforward A (pullback.snd f f)).map δ ≫ t₂ ≫\n        (ordinaryFiniteSingleUnitIso A X).inv = 𝟙 _) :\n    ∃ η : 𝟭 (DerivedCategoryModule A X) ⟶\n        ordinaryFinitePushforward A f ⋙ ordinaryFiniteTwistedPullback A f L',\n      (∀ M : DerivedCategoryModule A X,\n        (ordinaryFinitePushforward A f).map (η.app M) ≫\n          (ordinaryFiniteTraceCounit A f L' τ).app\n            ((ordinaryFinitePushforward A f).obj M) = 𝟙 _) ∧\n      (∀ K : DerivedCategoryModule A Y,\n        η.app ((ordinaryFiniteTwistedPullback A f L').obj K) ≫\n          (ordinaryFiniteTwistedPullback A f L').map\n            ((ordinaryFiniteTraceCounit A f L' τ).app K) = 𝟙 _)",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Supported diagonal kernel, section projection contractions, and counit base change"
+ },
+ "stmt_deps": [
+  "lem-z8-etale-supported-diagonal-unit",
+  "def-asd-ordinary-finite-trace-counit",
+  "lem-z8-ordinary-finite-single-unit-normalization",
+  "def-sfb-etale-coordinate-trace-data",
+  "lem-sfb-etale-coordinate-trace-contractions"
+ ],
+ "proof": [
+  {
+   "text": "Apply the even shifted-line coordinate contractions to the supplied trace exchange identities. Tensor the first scalar integral using the section projection contraction, and use the second scalar integral directly. The supported-diagonal calculations give both triangles for coordinate evaluation. Naturality in the coefficient and the trace/evaluation normalization identify its counit with the specified trace after the supplied coefficient isomorphism. Transport the unit and triangles along that isomorphism. The proof treats the scalar traces as parameters and uses no additional geometric hypothesis.",
+   "uses": [
+    "lem-z8-etale-diagonal-triangles",
+    "lem-sfb-etale-coordinate-trace-contractions",
+    "lem-z8-etale-supported-diagonal-unit",
+    "lem-z8-ordinary-finite-counit-coefficient",
+    "lem-z8-ordinary-finite-trace-evaluation-normalization",
+    "lem-z8-adjunction-unit-transport",
+    "lem-z8-etale-diagonal-section-integral"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-z8-etale-diagonal-triangles",
+  "lem-sfb-etale-coordinate-trace-contractions",
+  "lem-z8-etale-supported-diagonal-unit",
+  "lem-z8-ordinary-finite-counit-coefficient",
+  "lem-z8-ordinary-finite-trace-evaluation-normalization",
+  "lem-z8-adjunction-unit-transport",
+  "lem-z8-etale-diagonal-section-integral"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Explicit canonical-map calculation in the accompanying Lean module"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "projective line etale cohomology trace adjunction diagonal unit triangle identities",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.mkOfUnitCounit",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*triangle|projective.*adjunction",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryFiniteP1DiagonalUnit",
+  "date": "2026-10-26",
+  "group": "Z8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-ordinary-finite-p1-diagonal-unit",
+   "place": "Explicit proof of the supported diagonal unit and its specified counit",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleDiagonalCoefficientTriangles",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleDiagonalCoefficientTriangles.lean",
+  "declaration": "AlgebraicGeometry.Etale.evenLineDiagonalUnit_triangles",
+  "declarations": [
+   "AlgebraicGeometry.Etale.evenLineDiagonalUnit_triangles"
+  ],
+  "statement": "theorem evenLineDiagonalUnit_triangles\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]\n    [IsLocallyNoetherian X] [CompactSpace X] [IsLocallyNoetherian Y] [CompactSpace Y]\n    (J : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A))\n    (hJ : Scheme.IsLisseRankOneSheaf J) (d : ℤ)\n    (L' : DerivedCategoryModule A X)\n    (w : (ordinaryFinitePullback A f).obj (CoordinateTrace.shiftedLine A J d) ≅ L')\n    (τ : (ordinaryFinitePushforward A f).obj L' ⟶ ordinaryFiniteUnit A Y)\n    (t₀ : (ordinaryFinitePushforward A f).obj\n      ((ordinaryFinitePullback A f).obj (CoordinateTrace.shiftedLine A J d)) ⟶\n        constantComplex A Y)\n    (ht₀ : t₀ = (ordinaryFinitePushforward A f).map w.hom ≫ τ ≫\n      (ordinaryFiniteSingleUnitIso A Y).hom)\n    (δ : (ordinaryFinitePushforward A (pullback.diagonal f)).obj (ordinaryFiniteUnit A X) ⟶\n      (ordinaryFinitePullback A (pullback.snd f f)).obj\n        ((ordinaryFinitePullback A f).obj (CoordinateTrace.shiftedLine A J d)))\n    (t₁ : (ordinaryFinitePushforward A (pullback.fst f f)).obj\n      ((ordinaryFinitePullback A (pullback.snd f f)).obj\n        ((ordinaryFinitePullback A f).obj (CoordinateTrace.shiftedLine A J d))) ⟶\n          constantComplex A X)\n    (t₂ : (ordinaryFinitePushforward A (pullback.snd f f)).obj\n      ((ordinaryFinitePullback A (pullback.snd f f)).obj\n        ((ordinaryFinitePullback A f).obj (CoordinateTrace.shiftedLine A J d))) ⟶\n          constantComplex A X)\n    (ht₁ : (CoordinateTrace.exchange1 A f\n      ((ordinaryFinitePullback A f).obj (CoordinateTrace.shiftedLine A J d))).hom ≫ t₁ =\n        (ordinaryFinitePullback A f).map t₀ ≫\n          (leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} A) f).hom)\n    (ht₂ : (CoordinateTrace.exchange2 A f\n      ((ordinaryFinitePullback A f).obj (CoordinateTrace.shiftedLine A J d))).hom ≫\n        (ordinaryFinitePushforward A (pullback.snd f f)).map\n          (CoordinateTrace.coordinate A f (CoordinateTrace.shiftedLine A J d)).hom ≫ t₂ =\n        (ordinaryFinitePullback A f).map t₀ ≫\n          (leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} A) f).hom)\n    (hi₁ : (diagonalFirstPushSection A f).hom.app (ordinaryFiniteUnit A X) ≫\n      (ordinaryFinitePushforward A (pullback.fst f f)).map δ ≫ t₁ ≫\n        (ordinaryFiniteSingleUnitIso A X).inv = 𝟙 _)\n    (hi₂ : (diagonalPushSection A f).hom.app (ordinaryFiniteUnit A X) ≫\n      (ordinaryFinitePushforward A (pullback.snd f f)).map δ ≫ t₂ ≫\n        (ordinaryFiniteSingleUnitIso A X).inv = 𝟙 _) :\n    ∃ η : 𝟭 (DerivedCategoryModule A X) ⟶\n        ordinaryFinitePushforward A f ⋙ ordinaryFiniteTwistedPullback A f L',\n      (∀ M : DerivedCategoryModule A X,\n        (ordinaryFinitePushforward A f).map (η.app M) ≫\n          (ordinaryFiniteTraceCounit A f L' τ).app\n            ((ordinaryFinitePushforward A f).obj M) = 𝟙 _) ∧\n      (∀ K : DerivedCategoryModule A Y,\n        η.app ((ordinaryFiniteTwistedPullback A f L').obj K) ≫\n          (ordinaryFiniteTwistedPullback A f L').map\n            ((ordinaryFiniteTraceCounit A f L' τ).app K) = 𝟙 _)",
+  "branch": "sheaf-dag",
+  "by": "Z8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "independent cc review: 1065e8 vs fd5306 delivery (diff: duplicate square removed, TraceCoordinates reuses FiniteShiftedLineSquare) and adapted modules vs live clone; original FiniteP1TwistedUnitBaseChange compiled against delivered Arrows"
+ }
+}

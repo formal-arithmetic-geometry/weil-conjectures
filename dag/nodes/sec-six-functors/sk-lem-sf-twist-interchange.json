@@ -15,20 +15,38 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Write $\\otimes$ for $\\otimes^L_{\\Lambda_X}$. The canonical map\n$c_{M,N}:\\RHom_X(K,M)\\otimes N\\to\\RHom_X(K,M\\otimes N)$ is the adjoint of\n$\\mathrm{ev}\\otimes1_N:\\RHom_X(K,M)\\otimes N\\otimes K\\to M\\otimes N$ (up to the\nsymmetry); the map of the statement is its inverse, once $c_{M,T}$ is shown\nto be invertible. Let $T^{-1}$ be an inverse of $T$, with\n$T\\otimes T^{-1}\\cong\\Lambda_X$, so that $-\\otimes T$ is an autoequivalence\nwith quasi-inverse $-\\otimes T^{-1}$, in particular left and right adjoint to\nit. For every $N$ the adjunctions give natural bijections\n\n$$\n\\operatorname{Hom}\\bigl(N,\\RHom_X(K,M)\\otimes T\\bigr)\n\\cong\\operatorname{Hom}\\bigl(N\\otimes T^{-1}\\otimes K,M\\bigr)\n\\cong\\operatorname{Hom}\\bigl(N\\otimes K,M\\otimes T\\bigr)\n\\cong\\operatorname{Hom}\\bigl(N,\\RHom_X(K,M\\otimes T)\\bigr),\n$$\n\nand following $1_{\\RHom_X(K,M)\\otimes T}$ through them (Yoneda) shows that the\nresulting isomorphism $\\RHom_X(K,M)\\otimes T\\cong\\RHom_X(K,M\\otimes T)$ is\nthe adjoint of $\\mathrm{ev}\\otimes1_T$, i.e. $c_{M,T}$. This argument uses\nneither a generator ($\\Lambda_X$ does not generate $\\Dctf$, and\n[sk-lem-sf-determination] propagates invertibility only) nor any property of\n$K$. For $K$ dualizable it is also the composite\n$\\RHom_X(K,M\\otimes T)\\cong K^\\vee\\otimes M\\otimes T\\cong\\RHom_X(K,M)\\otimes T$\nof two instances of the identification of [sk-prop-sf-dualizable-biduality].\nFor the last assertion,\nby def:coefficient-twists each $\\Lambda(m)_X$ is invertible, locally\nconstant of rank one, with $\\Lambda(m)\\otimes\\Lambda(-m)\\cong\\Lambda_X$, so\n$T=\\Lambda(m)_X[n]$ is invertible; take $M=\\Lambda_X$.",
-   "uses": [
-    "sk-lem-sf-determination"
-   ],
-   "elementary": false
+   "text": "Equip the coefficient category with the recorded monoidal and symmetric structures. For every Q, transport S.adjunction Q along the inverse of tensorLeftIsoTensorRight Q. This gives a MonoidalClosed structure whose chosen internal Hom functor is exactly Prod.sectR (op Q) B followed by H, with no change of objects or arbitrary comparison isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "lean/.lake/packages/mathlib/Mathlib/CategoryTheory/Adjunction/Basic.lean",
+    "place": "Adjunction.ofNatIsoLeft and homEquiv_ofNatIsoLeft_apply; Mathlib.CategoryTheory.Monoidal.Closed.Basic, Closed and MonoidalClosed"
+   }
+  },
+  {
+   "text": "Under the transported adjunction, identify sfTwistTensorHomMap with MonoidalClosed.ihomTensorToIhom. Expand their transposes and apply homEquiv_ofNatIsoLeft_apply. The transported evaluation is the recorded right evaluation precomposed with the braiding. Convert inverse braiding to the opposite braiding by symmetry, expand braiding_tensor_left_hom, cancel the adjacent associator and inverse, and cancel the opposite braidings. The two morphisms before transposition are equal, so the canonical maps are equal.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-twist-interchange/_section.md",
+    "place": "node sk-lem-sf-twist-interchange, order 2505"
+   }
+  },
+  {
+   "text": "Apply the already proved categorical core MonoidalClosed.isIso_ihomTensorToIhom with hT. Its proof tensors by the inverse twist, uses full faithfulness of tensorRightEquivalenceOfTensorIso and the tensor-Hom bijections, and concludes by isIso_of_yoneda_map_bijective. This is exactly the invertible-twist route of the blueprint and needs no dualizability of P or constructible-generation argument. Rewriting by Step 2 proves sfTwistTensorHomMap_isIso. The existing inverse comparison and unit specialization definitions give the stated inverse and the final unit case unchanged.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean",
+    "place": "MonoidalClosed.ihomTensorToIhom and isIso_ihomTensorToIhom, lines 288 and 359--389; the same core is used by the already attached ordinary-etale specialization"
+   }
   }
  ],
- "proof_deps": [
-  "sk-lem-sf-determination"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-twist-interchange/_section.md",
-  "place": "## Proof"
+  "place": "Proof paragraph 1: invertible tensor autoequivalence and Yoneda, using the proved source-library categorical core; F1 transports the coefficient adjunction and checks the canonical evaluation normalization explicitly."
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -57,30 +75,114 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors",
  "unit": "sk-lem-sf-twist-interchange",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.DerivedCategory.nonempty_iso_derivedHom_tensor",
+    "AlgebraicGeometry.Etale.DerivedCategory.derivedHomTensorMap",
+    "AlgebraicGeometry.Etale.DerivedCategory.isIso_derivedHomTensorMap",
+    "AlgebraicGeometry.Etale.DerivedCategory.derivedHomTensorIso",
+    "AlgebraicGeometry.Etale.DerivedCategory.derivedHomIsoCoefficientDualTensor"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.DerivedCategory.nonempty_iso_derivedHom_tensor",
+     "module": "WeilConjectures.SixFunctors.Etale.Derived.Perfect.Dual",
+     "lines": [
+      150,
+      161
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.DerivedCategory.derivedHomTensorMap",
+     "module": "WeilConjectures.SixFunctors.Etale.Derived.Perfect.Dual",
+     "lines": [
+      163,
+      174
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.DerivedCategory.isIso_derivedHomTensorMap",
+     "module": "WeilConjectures.SixFunctors.Etale.Derived.Perfect.Dual",
+     "lines": [
+      176,
+      188
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.DerivedCategory.derivedHomTensorIso",
+     "module": "WeilConjectures.SixFunctors.Etale.Derived.Perfect.Dual",
+     "lines": [
+      190,
+      202
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.DerivedCategory.derivedHomIsoCoefficientDualTensor",
+     "module": "WeilConjectures.SixFunctors.Etale.Derived.Perfect.Dual",
+     "lines": [
+      204,
+      215
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "reviewed_lean": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-stage2-cc-ca2934520",
-  "group": "ND",
+  "reviewer": "NT-stage2-cc-dc745ba27",
+  "group": "Q70",
   "result": "pass",
-  "note": "Existing-only delivery: lean.statement of nonempty_iso_derivedHom_tensor matches Perfect/Dual.lean lines 154-157 verbatim, with exact hypotheses (IsDualizable K, IsInvertible T, arbitrary M) and the node's direction. Canonical map recorded: derivedHomTensorMap = ihomTensorToIhom (evaluation transpose), isIso_derivedHomTensorMap has a real proof, derivedHomTensorIso is its inverse (rfl-checked). Final clause = derivedHomIsoCoefficientDualTensor applied with isInvertible_shift plus commShiftIso; the TateTwist specialization's HasInvertibleExponent assumption is confined to that concrete theorem. Node and source text identical, stmt_deps empty, report has both sections. nt_compile probes clean, ModuleCat specializations clean, axioms standard. Restating the primary's type by hand at ModuleCat times out (known instance issue documented in the module); not a delivery fault. No findings."
+  "note": "Re-delivery of d51f2efaf68a; H2 fix verified: theorem stmt_dep lem-sfb-ringed-site-duality-maps replaced by new existing:true def node def-sf-coefficient-evaluation-transpose owning ringedSiteDualEvaluation/ringedSiteDualEvaluationLeft (statement matches live RingedSiteDualityMaps.lean:66,:170 term for term; verbatim signature = lines 170-171; no other owner, id not live). sk-lem-sf-twist-interchange record now a superset of the live ND record (5+4 decls), live unchanged since base. Rational line now named sfRationalTwistingCoefficient m ⟦t⟧. CoefficientTwistInterchange.lean byte-identical to previously reviewed; all clauses/edge cases re-confirmed. No compile (no file changed). Advisory: θ⁻¹ = sfPerfectThetaInverse linked only in report; plain Monoidal.Closed.Basic import likely redundant."
  },
  "lean": {
-  "module": "WeilConjectures.SixFunctors.Etale.Derived.Perfect.Dual",
-  "declaration": "AlgebraicGeometry.Etale.DerivedCategory.nonempty_iso_derivedHom_tensor",
+  "module": "Sheaf.Paper.CoefficientTwistInterchange",
+  "declaration": "WeilConjectures.sfTwistTensorHomMap_isIso",
   "declarations": [
    "AlgebraicGeometry.Etale.DerivedCategory.nonempty_iso_derivedHom_tensor",
    "AlgebraicGeometry.Etale.DerivedCategory.derivedHomTensorMap",
    "AlgebraicGeometry.Etale.DerivedCategory.isIso_derivedHomTensorMap",
    "AlgebraicGeometry.Etale.DerivedCategory.derivedHomTensorIso",
-   "AlgebraicGeometry.Etale.DerivedCategory.derivedHomIsoCoefficientDualTensor"
+   "AlgebraicGeometry.Etale.DerivedCategory.derivedHomIsoCoefficientDualTensor",
+   "WeilConjectures.sfTwistTensorHomMap",
+   "WeilConjectures.sfTwistTensorHomMap_isIso",
+   "WeilConjectures.sfTwistTensorHomIso",
+   "WeilConjectures.sfCoefficientTwistIso"
   ],
-  "statement": "theorem nonempty_iso_derivedHom_tensor\n    {K T : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hK : IsDualizable K)\n    (_hT : IsInvertible T) (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :\n    Nonempty ((RHom(X)[A].obj (op K)).obj (M ⊗ T) ≅ (RHom(X)[A].obj (op K)).obj M ⊗ T)",
-  "branch": "slopmaster2",
-  "by": "ND",
-  "date": "2026-10-16",
-  "existing": true,
-  "note": "The primary existing theorem has exactly dualizable K, invertible T and arbitrary M. Canonicality is supplied by derivedHomTensorMap, isIso_derivedHomTensorMap and derivedHomTensorIso: the stated map is the inverse of the evaluation transpose. The final clause is derivedHomIsoCoefficientDualTensor applied to the invertible shifted Tate object, followed by the tensor shift isomorphism. Perfect.TateTwist.nonempty_iso_derivedHom_tateObject_shift separately spells out the concrete torsion-coefficient specialization; see the report for its full signature and coefficient assumptions."
+  "file": "lean/Sheaf/Paper/CoefficientTwistInterchange.lean",
+  "statement": "theorem sfTwistTensorHomMap_isIso {B : Type a} [Category.{b} B] {H : Bᵒᵖ × B ⥤ B} (S : CoefficientClosedStructure H) (s : @SymmetricCategory B _ S.monoidal) (P M T : B) (hP : @IsDualizable B _ S.monoidal P) (hT : @IsInvertible B _ S.monoidal T) : IsIso (sfTwistTensorHomMap S s P M T)",
+  "branch": "newtargets-dag",
+  "by": "Q70",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Section 1(B): the old module is specialized to ordinary etale sheaf derived categories, so cannot be applied to the completed integral, raw rationalized or common-stage coefficient categories in this consumer. Publicly reexport that existing full specialization and add the same canonical evaluation-transpose tensor-Hom comparison for CoefficientClosedStructure, with its inverse for dualizable P and invertible T and its unit normalization. No arbitrary isomorphism or replacement coefficient category is used. The consumer separately instantiates the signed Tate lines and every integer shift at the four actual coefficient stages. All five declarations of the previous ND record are retained in declarations and remain publicly imported from WeilConjectures.SixFunctors.Etale.Derived.Perfect.Dual."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261023T042107-L-1776704",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

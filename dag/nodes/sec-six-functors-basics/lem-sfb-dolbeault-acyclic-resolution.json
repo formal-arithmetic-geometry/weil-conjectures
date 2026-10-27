@@ -1,0 +1,259 @@
+{
+ "id": "lem-sfb-dolbeault-acyclic-resolution",
+ "kind": "statement",
+ "title": "Dolbeault complexes are acyclic resolutions",
+ "statement": "Let $M$ be a Hausdorff second-countable complex manifold of finite dimension on each component. Let $\\mathcal O_M$ be its sheaf of holomorphic functions, $\\Omega_M^p$ its sheaf of holomorphic $p$-forms, and $\\mathcal A_M^{p,q}$ its sheaf of smooth complex differential forms of type $(p,q)$, with negative-degree sheaves zero. In holomorphic coordinates write $d=\\partial+\\bar\\partial$ for the type decomposition of exterior differentiation; these operators commute with restriction and satisfy $\\bar\\partial^2=\\partial^2=\\partial\\bar\\partial+\\bar\\partial\\partial=0$. For every $p\\geq0$, the inclusion $\\Omega_M^p\\hookrightarrow\\mathcal A_M^{p,0}$ gives an exact augmented cochain complex [def-weil-abstract-derived-category] of sheaves of $\\mathbf C$-vector spaces\n$$0\\longrightarrow\\Omega_M^p\\longrightarrow\\mathcal A_M^{p,0}\\xrightarrow{\\bar\\partial}\\mathcal A_M^{p,1}\\xrightarrow{\\bar\\partial}\\cdots.$$\nEvery $\\mathcal A_M^{p,q}$ is acyclic for global sections: $R^r\\Gamma(M,\\mathcal A_M^{p,q})=0$ for $r>0$, computed in sheaves of $\\mathbf C$-vector spaces. The same assertion holds for a finite disjoint union of such manifolds of different dimensions, and for the empty manifold. On holomorphic functions $\\partial=d_{\\mathrm{hol}}$ is the holomorphic exterior derivative.",
+ "source": {
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "WANTED locally: Demailly, Complex Analytic and Differential Geometry, I §3.E Lemma (3.29), printed pp.28--29; IV §6 Example (6.13) and formulas (6.14)--(6.16), printed p.216; type decomposition in I §2. Read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf. These are resolution and acyclicity inputs, not a cohomological comparison with algebraic forms."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sfb-dolbeault-sheaf-data"
+ ],
+ "proof": [
+  {
+   "text": "In a holomorphic chart use the basis $dz_I\\wedge d\\bar z_J$. For a coefficient $f$, $df=\\sum_j f_{z_j}dz_j+\\sum_j f_{\\bar z_j}d\\bar z_j$, so exterior differentiation has just the two type components stated. A holomorphic change of coordinates replaces the $dz_j$ by holomorphic linear combinations of the new $dz_j$ and the $d\\bar z_j$ by their conjugates; the chain rule therefore preserves type and these two components glue. The coordinate formulas are local, hence commute with restriction and are complex-linear. By [lem-sfb-chart-exterior-derivative-square-zero], applied at each point to the real chart with complex-valued forms, $d^2=0$ (a form on a chart can be extended arbitrarily away from a neighborhood of the point). Its separate type components on a $(p,q)$-form are $\\partial^2$, $\\partial\\bar\\partial+\\bar\\partial\\partial$, and $\\bar\\partial^2$; each is zero. For a holomorphic function $f$ the antiholomorphic derivatives vanish, and $\\partial f=\\sum_j f_{z_j}dz_j=d_{\\mathrm{hol}}f$.",
+   "uses": [
+    "lem-sfb-chart-exterior-derivative-square-zero"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "I §3.C, formulas (3.13)--(3.16), printed pp.23--24; I §1.A, exterior differentiation"
+   }
+  },
+  {
+   "text": "In degree zero write a smooth $(p,0)$-form as $\\sum_{|I|=p}dz_I\\, f_I$. Its $\\bar\\partial$ is $(-1)^p\\sum_I dz_I\\wedge\\bar\\partial f_I$. The independence of the coordinate wedge basis shows that this vanishes exactly when every $\\bar\\partial f_I$ vanishes. The degree-zero assertion of [lem-sfb-local-scalar-dolbeault] says precisely that these coefficients are holomorphic. Thus the kernel sheaf at degree zero is $\\Omega_M^p$; its inclusion into smooth forms is injective since it is the inclusion of the same coefficient functions. This also shows that the augmentation is killed by the differential.",
+   "uses": [
+    "lem-sfb-local-scalar-dolbeault"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "I §3.C Cauchy--Riemann criterion; I §3.E, Lemma (3.29)(a), printed pp.28--29"
+   }
+  },
+  {
+   "text": "For $q>0$, near any point write a $\\bar\\partial$-closed $(p,q)$-form uniquely as $\\alpha=\\sum_{|I|=p}dz_I\\wedge\\alpha_I$ with scalar $(0,q)$-forms $\\alpha_I$. The coordinate formula gives $\\bar\\partial\\alpha=(-1)^p\\sum_I dz_I\\wedge\\bar\\partial\\alpha_I$, hence every $\\alpha_I$ is closed. Apply [lem-sfb-local-scalar-dolbeault] to these finitely many coefficients and intersect their primitive neighborhoods. Choose $\\beta_I$ there with $\\bar\\partial\\beta_I=\\alpha_I$. Then $\\beta=(-1)^p\\sum_I dz_I\\wedge\\beta_I$ satisfies $\\bar\\partial\\beta=\\alpha$. Consequently every kernel section is locally an image. By [def-weil-sheaf-of-modules-category], cokernels are sheafifications of sectionwise cokernels, so this local surjectivity says exactly that the kernel modulo the image sheaf is zero. Together with steps 1--2 this proves exactness of the augmented cochain complex in [def-weil-abstract-derived-category].",
+   "uses": [
+    "lem-sfb-local-scalar-dolbeault",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "I §3.E, Lemma (3.29)(b), printed pp.28--29; IV §6, Example (6.13), printed p.216"
+   }
+  },
+  {
+   "text": "Multiplication of each coefficient of a smooth $(p,q)$-form by a smooth complex-valued function gives $\\mathcal A_M^{p,q}$ a unital $\\mathcal E_M$-module structure commuting with restrictions. The underlying real manifold satisfies the Hausdorff, second-countability, and local finite-dimension hypotheses of [lem-sfb-smooth-function-modules-acyclic]. That theorem gives $H^r(M,(\\mathcal A_M^{p,q})_{\\mathrm{ab}})=0$ for $r>0$. Apply [lem-pe-ringed-site-derived-evaluation-slice] to the small site of opens of $M$, its terminal object $M$, and the constant sheaf of rings $\\mathbf C_M$. Its modules are exactly sheaves of complex vector spaces: locally constant scalars act by constant multiplication locally and these actions glue. Enough injectives for this ringed space is [lem-sc-ringed-space-module-sheaves-enough-injectives]. The comparison theorem identifies the underlying additive group of $R^r\\Gamma$ in those complex sheaves with the abelian-sheaf cohomology just shown to vanish. A complex vector space whose additive group is zero is zero, proving the requested acyclicity in the stated category.",
+   "uses": [
+    "lem-sfb-smooth-function-modules-acyclic",
+    "lem-pe-ringed-site-derived-evaluation-slice",
+    "lem-sc-ringed-space-module-sheaves-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "IV §4, Corollary (4.19), printed p.205; IV §6, Example (6.13), printed p.216; coefficient comparison: Stacks Tags 03FD, 03F3, 01DI"
+   }
+  },
+  {
+   "text": "All local arguments use only the dimension of the chart in question. If $p$ or $q$ exceeds that dimension, the relevant wedge space is zero, and the same arguments apply with empty coefficient families. For dimension zero the augmentation identifies functions with holomorphic functions and every positive-degree form is zero. A finite disjoint union of the stated manifolds is again Hausdorff and second-countable and has exactly those local charts, so the preceding argument applies without a common dimension. For the empty manifold every sheaf of complex vector spaces has zero sections on its only open set; all terms, cohomology groups, and asserted identities are zero. No passage from exactness of sheaves to exactness of the complex of global forms has been asserted.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "Agent verification of the zero, excessive-degree, varying-dimension, finite-disjoint-union, and empty cases"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pe-ringed-site-derived-evaluation-slice",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "lem-sfb-chart-exterior-derivative-square-zero",
+  "lem-sfb-local-scalar-dolbeault",
+  "lem-sfb-smooth-function-modules-acyclic"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "Demailly I §3.C and §3.E Lemma (3.29); IV §4 Corollary (4.19) and §6 Example (6.13). Read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf; WANTED locally. Assembly and coefficient-category checks written by NY."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Dolbeault|barPartial|dbar|fine.*sheaf|sheaf.*fine",
+   "results": "OK 25 hits: Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean. ",
+   "date": "2026-10-24",
+   "verdict": "no match: exactness of an existing complex, d squared zero, and abstract injective resolutions do not give local d-bar solvability or fine-sheaf acyclicity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dolbeault complex of smooth forms is a fine acyclic resolution of holomorphic differential forms",
+   "results": "OK 8 hits: HomologicalComplex.Acyclic, HomologicalComplex.acyclic_iff, extDeriv_extDeriv_apply, HomologicalComplex.acyclic_of_isZero, Algebra.FormallySmooth.projective_kaehlerDifferential, HomologicalComplex.acyclic_op_iff, HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_exactAt, extDeriv_extDeriv. ",
+   "date": "2026-10-24",
+   "verdict": "no match: exactness of an existing complex, d squared zero, and abstract injective resolutions do not give local d-bar solvability or fine-sheaf acyclicity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Dolbeault\"",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: exactness of an existing complex, d squared zero, and abstract injective resolutions do not give local d-bar solvability or fine-sheaf acyclicity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Dolbeault Grothendieck lemma and partitions of unity give a fine resolution of holomorphic differential forms",
+   "results": "OK 8 hits: Algebra.Extension.exact_cotangentComplex_toKaehler, PresheafOfModules.DifferentialsConstruction.instHasDifferentials, Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType, Algebra.FormallySmooth.projective_kaehlerDifferential, CategoryTheory.InjectiveResolution.ofCocomplex_d_0_1, PresheafOfModules.HasDifferentials, PresheafOfModules.DifferentialsConstruction.isUniversal', PresheafOfModules.HasDifferentials.exists_universal_derivation. ",
+   "date": "2026-10-24",
+   "verdict": "no match: exactness of an existing complex, d squared zero, and abstract injective resolutions do not give local d-bar solvability or fine-sheaf acyclicity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth forms of type p q with the d bar differential form an acyclic resolution of the sheaf of holomorphic p forms",
+   "results": "OK 8 hits: Algebra.Extension.exact_cotangentComplex_toKaehler, CategoryTheory.InjectiveResolution.complex_d_comp, CategoryTheory.InjectiveResolution.exact₀, CategoryTheory.InjectiveResolution.exact_succ, Algebra.FormallySmooth.projective_kaehlerDifferential, CategoryTheory.InjectiveResolution.cocomplex_exactAt_succ, CategoryTheory.InjectiveResolution.ι_f_zero_comp_complex_d, CochainComplex.cm5b.I_d. ",
+   "date": "2026-10-24",
+   "verdict": "no match: exactness of an existing complex, d squared zero, and abstract injective resolutions do not give local d-bar solvability or fine-sheaf acyclicity"
+  },
+  {
+   "tool": "grep",
+   "query": "Dolbeault|barPartial|\\bdbar\\b|\\bfine\\b.*sheaf|sheaf.*\\bfine\\b",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: exactness of an existing complex, d squared zero, and abstract injective resolutions do not give local d-bar solvability or fine-sheaf acyclicity"
+  },
+  {
+   "tool": "grep",
+   "query": "Dolbeault|barPartial|\\bdbar\\b|\\bfine\\b.*sheaf|sheaf.*\\bfine\\b|\\bsoft\\b.*sheaf",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: local Dolbeault exactness and global smooth-module acyclicity are not supplied by d squared zero or holomorphic primitives"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth d bar closed scalar differential form of type zero q on an open set in complex Euclidean space has a local d bar primitive for positive q",
+   "results": "OK 8 hits: Complex.IsExactOn, DifferentiableOn.isExactOn_ball, Complex.IsExactOn.differentiableOn, Complex.IsConservativeOn.isExactOn_ball, Complex.IsConservativeOn, DifferentiableOn.isConservativeOn, Complex.isConservativeOn_and_continuousOn_iff_isDifferentiableOn, extDeriv_extDeriv. ",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: local Dolbeault exactness and global smooth-module acyclicity are not supplied by d squared zero or holomorphic primitives"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Dolbeault\"",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: local Dolbeault exactness and global smooth-module acyclicity are not supplied by d squared zero or holomorphic primitives"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth d bar closed zero q form on complex Euclidean space is locally d bar exact in positive degree and a smooth d bar closed function is holomorphic",
+   "results": "OK 8 hits: extDeriv_extDeriv_apply, Complex.analyticOn_univ_iff_differentiable, extDeriv_extDeriv, DifferentiableOn.isExactOn_ball, harmonic_is_realOfHolomorphic, extDerivWithin_extDerivWithin_apply, DifferentiableOn.analyticAt, DifferentiableOn.analyticOn. ",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: local Dolbeault exactness and global smooth-module acyclicity are not supplied by d squared zero or holomorphic primitives"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dolbeault Grothendieck Poincare lemma gives local exactness for the antiholomorphic differential on smooth forms",
+   "results": "OK 8 hits: extDeriv_extDeriv, extDeriv_extDeriv_apply, Complex.IsExactOn.differentiableOn, extDerivWithin_extDerivWithin_eqOn, extDerivWithin_extDerivWithin_apply, extDerivWithin_apply_vectorField, extDerivWithin_univ, ContinuousCohomology.MultiInd.d_comp_d. ",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: local Dolbeault exactness and global smooth-module acyclicity are not supplied by d squared zero or holomorphic primitives"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-algebraic-dolbeault-derivative-comparison",
+  "date": "2026-10-24",
+  "group": "Q20"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Algebraic cohomology and the Dolbeault derivative. Supporting input: Dolbeault complexes are acyclic resolutions.",
+   "via": [
+    "lem-sfb-algebraic-dolbeault-derivative-comparison",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dolbeault-acyclic-resolution",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Established coordinate differential identities using a pointwise Mathlib leaf, reduced local exactness for arbitrary p to the scalar local Dolbeault lemma with its necessary sign, and applied arbitrary smooth-module acyclicity with explicit abelian/complex-sheaf cohomology comparison. Two new unsplit inputs and one Mathlib leaf; all small and varying-dimension cases checked.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Algebraic cohomology and the Dolbeault derivative. Supporting input: Dolbeault complexes are acyclic resolutions. Realizes its inherited Dolbeault supporting input; current latest blueprint unit route and chapter unchanged. The inherited null blueprint ancestor is exactly the result of blueprint_refs.py ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-pe-ringed-site-derived-evaluation-slice",
+    "why": "Generic ringed-site evaluation comparison from module to underlying abelian cohomology, used with the constant complex ring; the unit has no analytic replacement."
+   },
+   {
+    "node": "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "why": "Generic enough-injectives theorem applied to (M, C_M) so the stated module-cohomology comparison applies."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pe-ringed-site-derived-evaluation-slice",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NY-54d8918b5",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-54d8918b5 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes, every cited statement and the parent's uses in full. Statement byte-identical to live; item still unsplit on live and side-live and no repair note exists, so not superseded; one commit; no SGA; no cycle (BFS over 296 nodes). Demailly is not available locally, so proof_origin=agent with a WANTED line; I checked the mathematics against the standard results (Dolbeault–Grothendieck lemma, Dolbeault resolution, modules over the smooth ring are fine and hence acyclic). Step 1: in a chart, type decomposition plus Mathlib extDeriv_extDeriv_apply (Basic.lean:229, 𝕜=ℝ, r=∞, F=ℂ as a real space; extending the form outside the chart keeps germs, so ContDiffAt holds); the three bidegrees of d² vanish separately. Steps 2-3: ∂̄(dz_I∧β_I)=(-1)^p dz_I∧∂̄β_I, so the primitive (-1)^pΣdz_I∧β_I is correct; the q=0 clause gives kernel Ω^p; local surjectivity gives sheaf exactness via the sheafified-cokernel clause of def-weil-sheaf-of-modules-category. Step 4: E_M-module structure on A^{p,q}, then smooth-function-modules-acyclic, then lem-pe-ringed-site-derived-evaluation-slice with W=M terminal and O=C_M, enough injectives from lem-sc-ringed-space-module-sheaves-enough-injectives; Mod(C_M) is equivalent to sheaves of C-vector spaces. Step 5: edge cases checked. New nodes: local-scalar-dolbeault (p=0, local only; true; checked n=0, q=n+1, q>n+1); smooth-function-modules-acyclic (general fine-sheaf theorem; paracompactness holds for second-countable Hausdorff; checked empty N, zero module, discrete N); chart-exterior-derivative leaf, one-line specialization. Neither unsplit node restates a clause of the item. Duplicate scan over all node titles and statements finds only Hodge-metric and analytification siblings. Accepted tool_uses: the two generic ringed-site nodes. Minor, no change: the item's source.place still says I §2 (inherited field; the steps use §3.C); def-weil-field is cited for R and C."
+ },
+ "lean": {
+  "module": "Sheaf.Geometry.Complex.DolbeaultAcyclicResolution",
+  "declaration": "AlgebraicGeometry.SmoothAnalytic.dolbeault_acyclic_resolution",
+  "file": "lean/Sheaf/Geometry/Complex/DolbeaultAcyclicResolution.lean",
+  "statement": "theorem dolbeault_acyclic_resolution (M : Type u) [TopologicalSpace M] [T2Space M] [SecondCountableTopology M] (A : Atlas M) : ∃ (D : DolbeaultSheafData A) (sq : ∀ p q : ℤ, D.dbar p q ≫ D.dbar p (q + 1) = 0), (∀ p q : ℤ, D.del p q ≫ D.del (p + 1) q = 0) ∧ (∀ p q : ℤ, D.dbar p q ≫ D.del p (q + 1) + D.del p q ≫ D.dbar (p + 1) q = 0) ∧ (∀ p : ℕ, ∃ i : (HomologicalComplex.single (ComplexSheaves M) (ComplexShape.up ℤ) 0).obj (D.omega p) ⟶ CochainComplex.of (D.smooth p) (D.dbar p) (sq p), (HomologicalComplex.singleObjXSelf (V := ComplexSheaves M) (ComplexShape.up ℤ) 0 (D.omega p)).inv ≫ i.f 0 = D.inclusion p ∧ QuasiIso i) ∧ (∀ (p q : ℤ) (r : ℕ), 0 < r → IsZero (((complexGlobalSections (M := M)).rightDerived r).obj (D.smooth p q))) ∧ (∀ p q : ℤ, p < 0 ∨ q < 0 → IsZero (D.smooth p q)) ∧ D.inclusion 0 ≫ D.del 0 0 = D.holomorphicDerivative ≫ D.inclusion 1",
+  "branch": "sheaf-dag",
+  "by": "Q143",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3e53f1453",
+  "group": "Q143",
+  "result": "pass",
+  "note": "Read item, new node def-sfb-dolbeault-sheaf-data, both modules, Atlas (SmoothAnalyticData), sites/modules dep records, Q72 HermitianDolbeaultData. Hypotheses T2/second-countable/varying-dim Atlas match node, no extras; empty, n=0, excessive/negative degrees and disjoint unions covered. DolbeaultSheafData fully pinned: exact ranges (type eigenvalue i(p-q) checked), linearity, restriction, dbar+del = extDeriv (unique by type), inclusion and d_hol by coordinate formulas; exists D equivalent to forall D since unique up to compatible iso. Conclusions: dbar^2, del^2, anticommutation, QuasiIso from single complex with degree-0 = inclusion (sheaf exactness), rightDerived of global sections zero for r>0 in complex sheaves, negative degrees zero, del = d_hol on functions. Item changed only lean+stmt_deps (new def node added); both statements verbatim; new-node fields per H12; no hollow defs; theorem is the only sorry; docstrings and proof plan present. Notes: coexists with Q72 fixed-dim typeForms (different setting); second reading written by the worker themself, stated openly. No compile (no change)."
+ }
+}

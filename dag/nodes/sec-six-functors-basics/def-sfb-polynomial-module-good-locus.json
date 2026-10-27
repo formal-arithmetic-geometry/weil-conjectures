@@ -1,0 +1,133 @@
+{
+ "id": "def-sfb-polynomial-module-good-locus",
+ "kind": "definition",
+ "title": "Canonical polynomial-module localization and its good locus",
+ "statement": "Let $R$ be a commutative ring, $n\\geq0$, and $P=R[x_1,\\ldots,x_n]$ [def-weil-pbc-mv-polynomial-ring]. Let $M$ be a $P$-module. For $f\\in R$, put $R_f=R[1/f]$ [def-weil-ring-localization-away] and $T_f=\\{C(f)^a:a\\geq0\\}\\subset P$, where $C:R\\to P$ is the constant-polynomial map. Use the fraction module $T_f^{-1}M$ [def-weil-pbc-module-localization-away], canonically identified with the localization of the underlying $R$-module at $f$ by $m/C(f)^a\\leftrightarrow m/f^a$. The canonical identification $T_f^{-1}P=R_f[x_1,\\ldots,x_n]$ gives it the module action $(p/C(f)^a)\\cdot(m/C(f)^b)=(pm)/C(f)^{a+b}$; in particular $x_i(m/f^a)=(x_im)/f^a$. Its $R_f$-action is restriction along constant polynomials. Define the polynomial-module good locus $G_R(M)\\subset\\operatorname{Spec}R$ [def-weil-affine-spectrum] to be the union of $D(f)=\\{\\mathfrak p:f\\notin\\mathfrak p\\}$ over all $f\\in R$ for which this localized module is free over $R_f$ [def-weil-pbc-free-module] and finitely presented over $R_f[x_1,\\ldots,x_n]$ [def-sc-finitely-presented-module]. Freeness permits arbitrary, including infinite and empty, bases. No reducedness, finiteness, or nonzero-ring hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Equation equation-good-locus and Tag 051Z (lemma-generic-flatness-reduced), polynomial-algebra case; canonical module localization and polynomial scalar localization."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-free-module",
+  "def-sc-finitely-presented-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The union of principal opens where a localized polynomial module is free over the localized base and finitely presented over the polynomial ring",
+   "results": "[leansearch] OK 8 hit(s): Module.FinitePresentation.exists_free_localizedModule_powers; Module.free_of_isLocalizedModule; Module.FinitePresentation.exists_basis_localizedModule_powers; Module.isOpen_freeLocus; Module.freeLocus; Module.free_of_flat_of_isLocalRing; Module.basicOpen_subset_freeLocus_iff; instFinitePresentationLocalizationLocalizedModule.",
+   "date": "2026-10-23",
+   "verdict": "No combined polynomial-module good locus. Module.freeLocus is pointwise base freeness alone, not this union with polynomial finite presentation."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial, Module.Free, Module.FinitePresentation",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "No combined good-locus declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite module over a polynomial ring over a reduced ring is free over the base and finitely presented over the polynomial ring on a dense union of principal opens",
+   "results": "[leanfinder] OK 8 hit(s): Module.Finite.exists_free_surjective; Algebra.IsStandardSmooth.finitePresentation; Module.FinitePresentation.exists_free_localizedModule_powers; Algebra.SubmersivePresentation; Algebra.IsStandardSmooth.out; Module.FinitePresentation.of_finite_of_finitePresentation; Algebra.FinitePresentation.of_span_eq_top_target; Algebra.FinitePresentation.of_finitePresentation.",
+   "date": "2026-10-23",
+   "verdict": "No combined good locus or reduced-base density statement. Use the existing separate definitions of localization, freeness and finite presentation."
+  },
+  {
+   "tool": "grep",
+   "query": "goodLocus|good_locus|polynomialModuleGoodLocus",
+   "results": "msearch.py grep: [grep] OK 0 hit(s). rg in lean/Sheaf, lean/WeilConjectures and dag/lean_names_upstream.json for localizedPolynomialModule|localizedPolynomialBaseModule|polynomialModuleGoodLocus|isOpen_dense_polynomialModuleGoodLocus: no hits. rg in dag/nodes for good locus finds the item and the two new stage-1 localization/extension lemmas but no definition node. tools/blueprint_refs.py search \"polynomial good locus\": 0 blueprint nodes match.",
+   "date": "2026-10-23",
+   "verdict": "No existing definition node or project declaration of this combined notion. The two stage-1 lemmas independently introduce G in their prose and have no Lean record yet."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reduced-polynomial-module-generic-freeness",
+  "date": "2026-10-23",
+  "group": "Q113"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Inherited supporting chain below latest det-thm-sf-ctf-stability-direct-images, proof (3), via the spectral-point-space prerequisite: Tag 06RC proof, application of Tag 06QS to the stabilizer over a reduced atlas. Affine scheme input in Tag 06QS, final paragraph: apply Tag 052B to the affine scheme atlas over the reduced affine base. Algebraic input for Tag 052B: Tag 051Z, proof from the paragraph \"Proof of the case S = R[x_1, ..., x_n]\" through the end of its two inductions, before the general finite-type-algebra reduction. The good locus and canonical localized polynomial action used to state the polynomial-module algebra input.",
+   "via": [
+    "lem-sfb-reduced-polynomial-module-generic-freeness",
+    "lem-sfb-reduced-affine-generic-flat-finite-presentation",
+    "lem-sfb-space-reduced-generic-flat-finite-presentation",
+    "lem-sfb-reduced-qc-inertia-dense-open-gerbe",
+    "lem-sfb-qc-stack-spectral-point-space",
+    "lem-sfb-finite-type-stack-closed-specialization",
+    "lem-sfb-adequate-integral-comparison-finite",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.RingTheory.PolynomialModuleGoodLocus",
+  "declaration": "MvPolynomial.polynomialModuleGoodLocus",
+  "file": "lean/Sheaf/RingTheory/PolynomialModuleGoodLocus.lean",
+  "statement": "def polynomialModuleGoodLocus (R : Type u) [CommRing R] (n : ℕ) (M : Type v) [AddCommGroup M] [Module (MvPolynomial (Fin n) R) M] : Set (PrimeSpectrum R)",
+  "branch": "newtargets-dag",
+  "by": "Q113",
+  "date": "2026-10-23",
+  "existing": false,
+  "declarations": [
+   "MvPolynomial.localizedPolynomialModule",
+   "MvPolynomial.localizedPolynomialBaseModule",
+   "MvPolynomial.polynomialModuleGoodLocus"
+  ]
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8c30fb97d",
+  "group": "Q113",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8c30fb97d",
+  "group": "Q113",
+  "result": "pass",
+  "note": "Clause-by-clause match: [IsReduced R], MvPolynomial (Fin n) R, [Module.Finite P M], Localization.Away f, LocalizedModule at (powers f).map C (bijective with the R-module localization; stated in the new def node), canonical moduleOfIsLocalization via MvPolynomial.isLocalization plus Module.compHom base action (not hollow), G = {p | ∃ f ∉ p, Free ∧ FinitePresentation} = ⋃ D(f), IsOpen ∧ Dense on PrimeSpectrum R. No extra hypotheses; universes u,v bound. Edge cases R=0, f=0, M=0, n=0, infinite rank OK; reducedness needed. Verbatim statements OK (def without noncomputable); all 3 declarations listed with docstrings; 9-step proof docstring; single sorry. No existing good-locus def node or decl in side-live; sibling good-locus lemmas have no Lean record. Item is unchanged vs live except lean and the added def stmt_dep; plain imports = proof_dep modules. Advisory: Spec carrier PrimeSpectrum. No fixes, no compile."
+ }
+}

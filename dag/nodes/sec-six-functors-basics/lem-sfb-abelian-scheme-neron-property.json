@@ -1,0 +1,249 @@
+{
+ "id": "lem-sfb-abelian-scheme-neron-property",
+ "kind": "statement",
+ "title": "An abelian scheme over a Dedekind base has the Néron mapping property",
+ "statement": "Let $D$ be a Dedekind domain with fraction field $E$ and let $T$ be a nonempty open subscheme of $\\operatorname{Spec}D$ [def-weil-affine-spectrum]. Let $B\\to T$ be a smooth proper commutative group scheme with connected fibres [def-pc-scheme, def-sbc-smooth-morphisms, def-weil-proper-morphism]. For every smooth $T$-scheme $X$, restriction to the generic fibre is a bijection $$\\operatorname{Hom}_T(X,B)\\longrightarrow\\operatorname{Hom}_E(X_E,B_E),$$ where $X_E=X\\times_T\\operatorname{Spec}E$ and $B_E=B\\times_T\\operatorname{Spec}E$ [def-pc-base-change]. There is no quasi-compactness assumption on $X$. Here a Dedekind domain means a Noetherian integrally closed domain of Krull dimension one. A group scheme over a scheme $T$ consists of multiplication, inverse and identity $T$-morphisms satisfying the group diagrams; it is commutative if multiplication is invariant under interchange of the two factors. Separated means that the diagonal is a closed immersion [def-weil-closed-immersion].",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 1.2 Proposition 8 and its proof (printed p.15, PDF p.21); the abelian scheme on the dense open in 1.4 Theorem 3 is already a Néron model there; primary-source scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; project literature copy WANTED"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-base-change",
+  "def-sbc-smooth-morphisms",
+  "def-weil-closed-immersion",
+  "def-weil-proper-morphism"
+ ],
+ "proof": [
+  {
+   "text": "First prove uniqueness on any smooth $T$-scheme $Z$. In [lem-sbc-finite-etale-generic-fibre-cover-density], take $S=T$, $C=Z$ and the identity etale map $Z\\to Z$. It gives that $Z$ is reduced and $Z_E\\to Z$ has dense image. Properness of $B\\to T$ includes separatedness [def-weil-proper-morphism]. Thus [lem-sfb-relative-separated-dominant-ext], with $h:Z_E\\to Z$ and $s:B\\to T$, shows that two $T$-morphisms $Z\\to B$ agreeing on the generic fibre are equal. This applies to open overlaps as well as to $X$ itself.",
+   "uses": [
+    "lem-sbc-finite-etale-generic-fibre-cover-density",
+    "def-weil-proper-morphism",
+    "lem-sfb-relative-separated-dominant-ext"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "1.2 Proposition 8, final sentence; uniqueness written in relative dominant-map form"
+   }
+  },
+  {
+   "text": "Fix $f_E:X_E\\to B_E$. Cover $X$ by affine open subschemes $U_i$ [def-pc-scheme]. Each $U_i\\to T$ is smooth: the local finite-presentation charts and the local infinitesimal lifting property defining smoothness restrict to open subschemes [def-sbc-smooth-morphisms]. Apply [lem-sfb-proper-generic-map-big-open] to $U_i$, the proper target $B$, and $f_E|_{(U_i)_E}$. Obtain $V_i\\subseteq U_i$ and $v_i:V_i\\to B$, with $(V_i)_E=(U_i)_E$, $(v_i)_E=f_E|_{(U_i)_E}$, $V_i$ dense in each fibre, and $V_i$ containing every point with local-ring dimension at most one. These are precisely the domain hypotheses needed below.",
+   "uses": [
+    "def-pc-scheme",
+    "def-sbc-smooth-morphisms",
+    "lem-sfb-proper-generic-map-big-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "1.2 Proposition 8, first claim and its valuative/spreading argument"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-relative-weil-codimension-extension] with source $U_i$, group scheme $G=B$, domain $V_i$ and morphism $v_i$. The base $T$ is exactly the specified open of the Dedekind spectrum; $B$ is smooth and separated, and the preceding step supplies fibrewise density and definition at every point of codimension at most one. We obtain $F_i:U_i\\to B$ extending $v_i$. Since $(V_i)_E=(U_i)_E$, the equality $(F_i)_E=f_E|_{(U_i)_E}$ holds on the whole generic fibre, not just on a dense subopen.",
+   "uses": [
+    "lem-sfb-relative-weil-codimension-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "1.2 Proposition 8, invocation of 4.4 Theorem 1"
+   }
+  },
+  {
+   "text": "On $U_i\\cap U_j$, the restrictions of $F_i$ and $F_j$ have the same generic restriction, namely that of $f_E$. This overlap is an open subscheme of the smooth $X$ and hence smooth by the same local-definition argument as above. Step 1 therefore gives equality on the entire overlap. The morphisms glue by [lem-weil-pbc-scheme-morphism-gluing] to $F:X\\to B$. Their composites with $B\\to T$ equal the structure map on each $U_i$, so the glued morphism is over $T$. Its generic restriction is $f_E$ because this equality holds on every $(U_i)_E$. Step 1 gives uniqueness of $F$. The open cover may be infinite; no intersection was assumed affine. If $X$ is empty, the same gluing statement gives the unique empty-source map. Restriction is therefore both surjective and injective.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "lem-sbc-finite-etale-generic-fibre-cover-density",
+    "lem-sfb-relative-separated-dominant-ext",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "1.2 Proposition 8, local-to-global assembly and uniqueness for arbitrary smooth sources"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-finite-etale-generic-fibre-cover-density",
+  "def-weil-proper-morphism",
+  "lem-sfb-relative-separated-dominant-ext",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "lem-sfb-proper-generic-map-big-open",
+  "lem-sfb-relative-weil-codimension-extension",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "Explicit assembly following 1.2 Proposition 8 and 4.4 Theorem 1 read in the primary-source online scan; local project copy absent and WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An abelian scheme over a Dedekind domain satisfies the Neron mapping property for all smooth schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative (@AlgebraicGeometry.IsSmoothOfRelativeDimension 0)\", \"doc\": \"The property of being a smooth morphism of relative dimension zero is multiplicative. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are smooth morphisms of relative dimension zero, then their composit\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsSmoothOfRelativeDimension n f],\\n  AlgebraicGeometry.IsSmooth f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is smooth of relative dimension $ n $, then $ f $ is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsSmoothOfRelativeDimension 0 f] [AlgebraicGeometry.IsSmoothOfRelativeDimension 0 g],\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension 0 (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two morphisms of schemes that are smooth of relative dimension 0 is also smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern Weierstrass integral/minimal models, Dedekind rings, smoothness, normalization, valuation topology or equality of existing morphisms; none supplies existence of a Neron model or extension of an arbitrary generic morphism to a proper smooth group scheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every generic morphism from a smooth scheme to an abelian scheme over a Dedekind scheme extends uniquely",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.ext_of_isDominant_of_isSeparated'\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[X.Over S] [Y.Over S] [IsReduced X] [IsSeparated (Y ↘ S)] {f g : X ⟶ Y} [f.IsOver S] [g.IsOver S] {W} (ι : W ⟶ X)\\n  [IsDominant ι] (hU : ι ≫ f = ι ≫ g) : f = g\", \"doc\": \"Let $S$ be a base scheme. If $X$ is a reduced scheme over $S$, $Y$ is a separated scheme over $S$, and $f,g : X \\\\to Y$ are morphisms over $S$, then $f = g$ provided there exists a dense open subscheme\"}\n  {\"name\": \"AlgebraicGeometry.ext_of_isDominant\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[IsReduced X] {f g : X ⟶ Y} [Y.IsSeparated] (ι : W ⟶ X) [IsDominant ι] (hU : ι ≫ f = ι ≫ g) : f = g\", \"doc\": \"Let $X$ be a reduced scheme, $Y$ a separated scheme, and $\\\\iota: W \\\\to X$ a dominant morphism. If two morphisms $f,g: X \\\\to Y$ satisfy $f \\\\circ \\\\iota = g \\\\circ \\\\iota$, then $f = g$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(f₁ f₂ : f.normalization ⟶ T) (g : T ⟶ Y) [IsAffineHom g] (H₁ : f.toNormalization ≫ f₁ = f.toNormalization ≫ f₂)\\n  (hf₁ : f₁ ≫ g = f.fromNormalization) (hf₂ : f₂ ≫ g = f.fromNormalization) : f₁ = f₂\", \"doc\": \"Given two morphisms from the normalization of a scheme morphism $ f: X \\to Y $ to a scheme $ T $, if there exists an affine morphism $ g: T \\to Y $ such that both morphisms compose with $ g $ to yield t\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"(f : X ⟶ Y) [IsIntegralHom f] : UniversallyClosed f\", \"doc\": \"Every integral morphism $ f: X \\to Y $ of schemes is universally closed. This instance asserts that if a morphism of schemes is integral, then it satisfies the condition that all base changes of the mo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.hom_unique_of_empty_source\", \"module\": \"Mathlib.AlgebraicGeometry.Limits\", \"type\": \"(X : AlgebraicGeometry.Scheme) → Unique (∅ ⟶ X)\", \"doc\": \"For any scheme $X$, every morphism from the empty scheme $\\\\emptyset$ to $X$ is equal to the unique canonical morphism, establishing $\\\\emptyset$ as the initial object in the category of schemes.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern Weierstrass integral/minimal models, Dedekind rings, smoothness, normalization, valuation topology or equality of existing morphisms; none supplies existence of a Neron model or extension of an arbitrary generic morphism to a proper smooth group scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"IsProper\", \"Smooth\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: no declarations returned."
+  },
+  {
+   "tool": "grep",
+   "query": "Neron|Néron|[Aa]belian[Ss]cheme|[Ww]eil.*[Ee]xtension",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: no declarations returned."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weil extension theorem gives the universal extension property for morphisms into smooth proper group schemes over regular one dimensional bases",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme}\\n  (f₁ f₂ : AlgebraicGeometry.Scheme.Hom.normalization f ⟶ T) (g : T ⟶ Y) [AlgebraicGeometry.IsAffineHom g],\\n  CategoryTheory.Categor\", \"doc\": \"Given two morphisms from the normalization of a scheme morphism $ f: X \\to Y $ to a scheme $ T $, if there exists an affine morphism $ g: T \\to Y $ such that both morphisms compose with $ g $ to yield t\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative (@AlgebraicGeometry.IsSmoothOfRelativeDimension 0)\", \"doc\": \"The property of being a smooth morphism of relative dimension zero is multiplicative. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are smooth morphisms of relative dimension zero, then their composit\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.hom_ext\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} {S X : AlgebraicGeometry.Scheme} {f g : X ⟶ AlgebraicGeometry.AffineSpace n S},\\n  CategoryTheory.CategoryStruct.comp f (AlgebraicGeometry.AffineSpace n S ↘ S) =\\n      CategoryTheory.CategoryStruct.comp g (AlgebraicGeometry.AffineSpace n S ↘ S) →\\n    (∀ (i : n),\\n        (CategoryTheory\", \"doc\": \"If two morphisms from a scheme $X$ to the affine space $\\\\mathbb{A}^n_S$ over $S$ agree on their composition with the structure morphism $\\\\mathbb{A}^n_S \\\\to S$ and induce identical maps on all coordina\"}\n  {\"name\": \"AlgebraicGeometry.ext_of_isDominant_of_isSeparated'\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (S : AlgebraicGeometry.Scheme) [inst : X.Over S] [inst_1 : Y.Over S]\\n  [AlgebraicGeometry.IsReduced X] [AlgebraicGeometry.IsSeparated (Y ↘ S)] {f g : X ⟶ Y}\\n  [AlgebraicGeometry.Scheme.Hom.IsOver f S] [AlgebraicGeometry.Scheme.Hom.IsOver g S] {W : AlgebraicGeometry\", \"doc\": \"Let $S$ be a base scheme. If $X$ is a reduced scheme over $S$, $Y$ is a separated scheme over $S$, and $f,g : X \\\\to Y$ are morphisms over $S$, then $f = g$ provided there exists a dense open subscheme\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern Weierstrass integral/minimal models, Dedekind rings, smoothness, normalization, valuation topology or equality of existing morphisms; none supplies existence of a Neron model or extension of an arbitrary generic morphism to a proper smooth group scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An abelian scheme over a Dedekind domain satisfies the Neron mapping property for arbitrary smooth source schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative (@AlgebraicGeometry.IsSmoothOfRelativeDimension 0)\", \"doc\": \"The property of being a smooth morphism of relative dimension zero is multiplicative. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are smooth morphisms of relative dimension zero, then their composit\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.map_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} {S : Type s} {F : Type u} {K : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Field F]\\n  [inst_3 : Field K] {W' : WeierstrassCurve.Affine R} [inst_4 : DecidableEq F] [inst_5 : DecidableEq K]\\n  [inst_6 : Algebra R S] [inst_7 : Algebra R F] [inst_8 : Algebra S F] [inst_9 : \", \"doc\": \"Given an algebra homomorphism $ f : F → K $ between fields extending a commutative ring $ R $, and an affine Weierstrass curve $ W' $ over $ R $, the map function sends a nonsingular point $ (x, y) $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (f : X ⟶ Y) → Y.presheaf ⟶ AlgebraicGeometry.Scheme.Hom.normalizationDiagram f\", \"doc\": \"A morphism from the presheaf of a scheme $ Y $ to the normalization diagram associated with a morphism $ f $, which encodes the integral closure data of $ Y $ in the context of the morphism $ f $.\"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsSmoothOfRelativeDimension 0 f] [AlgebraicGeometry.IsSmoothOfRelativeDimension 0 g],\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension 0 (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two morphisms of schemes that are smooth of relative dimension 0 is also smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: signatures provide rational-map representatives, spreading from a stalk or function field, smoothness, dominance, or the properness criterion; none states the required extension on a codimension-one neighbourhood or the relative group extension theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every morphism on the generic fibre of a smooth scheme into a proper smooth commutative group scheme extends uniquely over a Dedekind base",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fiber\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) : Scheme\", \"doc\": \"Given a morphism of schemes $f: X \\\\to Y$ and a point $y \\\\in Y$, the fiber of $f$ over $y$ is the scheme obtained by taking the fiber product (pullback) of $f$ with the canonical morphism $\\\\operatornam\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"(f : X ⟶ Y) [IsIntegralHom f] : UniversallyClosed f\", \"doc\": \"Every integral morphism $ f: X \\to Y $ of schemes is universally closed. This instance asserts that if a morphism of schemes is integral, then it satisfies the condition that all base changes of the mo\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: signatures provide rational-map representatives, spreading from a stalk or function field, smoothness, dominance, or the properness criterion; none states the required extension on a codimension-one neighbourhood or the relative group extension theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"IsProper\", \"IsSmooth\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: no declarations returned."
+  },
+  {
+   "tool": "grep",
+   "query": "Neron|Néron|AbelianScheme|weil.*extension",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: no declarations returned."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal extension property of an abelian scheme over a regular one dimensional base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"AlgebraicGeometry.ValuativeCriterion.Existence = (AlgebraicGeometry.topologically @SpecializingMap).universally\", \"doc\": \"The valuative criterion for existence of a scheme morphism is equivalent to the universal property that its underlying continuous map is a specializing map, meaning this property is preserved under al\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCriterion.existence\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  AlgebraicGeometry.ValuativeCriterion f → AlgebraicGeometry.ValuativeCriterion.Existence f\", \"doc\": \"If a morphism $ f : X \\\\to Y $ of schemes satisfies the valuative criterion, then it satisfies the valuative criterion for existence, meaning that for every valuative commutative square involving $ f $\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.FormallyUnramified fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.FormallyUnramified\", \"doc\": \"The property of a morphism of schemes being formally unramified corresponds to the associated ring homomorphism being formally unramified, meaning there are no nontrivial derivations from the target r\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y)\\n  [AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)],\\n  AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If the diagonal morphism of a morphism $ f $ of schemes is an open immersion, then $ f $ is formally unramified. This instance asserts that the condition of the diagonal being an open immersion suffic\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: signatures provide rational-map representatives, spreading from a stalk or function field, smoothness, dominance, or the properness criterion; none states the required extension on a codimension-one neighbourhood or the relative group extension theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-neron-model",
+  "date": "2026-10-24",
+  "group": "NK"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "BLR 1.2 Proposition 8 and its proof (printed p.15, PDF p.21); the abelian scheme on the dense open in 1.4 Theorem 3 is already a Néron model there",
+   "via": [
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-abelian-scheme-neron-property",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Isolated the proper-target codimension-one open extension and relative Weil extension as two statement-only nodes; reused dominant separated-target uniqueness and arbitrary open-cover gluing. Proved the assembly for non-quasi-compact, non-separated smooth sources. Searched the project, DAG, latest blueprint and Mathlib; no attachment or full Mathlib match.",
+  "blueprint": "Auxiliary Neron-model branch of det-thm-sf-ctf-stability-direct-images proof (3), through the unchanged created.item chain; current blueprint sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3). The inherited ancestor computation returns null, retained faithfully. Realizes BLR 1.2 Proposition 8 with its actual relative 4.4 extension theorem.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-finite-etale-generic-fibre-cover-density",
+    "why": "Generic smooth-scheme geometry over an integral base, used with the identity etale map to establish reducedness and density of the generic fibre for uniqueness; no statement of this unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-morphism-gluing",
+    "why": "Generic gluing of scheme morphisms along arbitrary open covers; used to remove all quasi-compactness assumptions on the smooth test scheme."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-finite-etale-generic-fibre-cover-density",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q68-2ec627161",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-2ec627161 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and the BLR route (1.2 Prop 8, 4.4 Thm 1, S-rational meaning dense in each fibre); BLR is not in the local literature and is WANTED. Item steps: (1) T is integral, so the generic-fibre-density lemma with the identity étale map gives a reduced source with dense generic fibre, and the separated-dominant leaf gives uniqueness. (2) Affine cover, then the proper-target big-open node on each U_i. (3) The relative Weil node, whose hypotheses are exactly fibrewise density and every point with dim O<=1, which step 2 supplies; (V_i)_E=(U_i)_E gives the generic equality. (4) Smooth overlaps plus step 1, then gluing over an arbitrary cover, with no affine intersections assumed. New node lem-sfb-proper-generic-map-big-open is true; I proved it independently (spread f_E over an open T', finitely many generic points of the closed fibres, DVR stalks by normality and the flat dimension formula, valuative criterion and gluing), and the example x/π on A^1 over a DVR is consistent with it. New node lem-sfb-relative-weil-codimension-extension is exactly BLR 4.4/1 over a Dedekind open; ū|_V=u holds by reducedness and separatedness; units on A^2 minus a point extend, and the group hypothesis is necessary. Neither node restates a clause of the item, and their composition is BLR's proof. Duplicate checks: the field-base Weil extension and divisorial-indeterminacy nodes, valuation-stalk, rational-map-extension-valuation-point, Nagata–Conrad blow-up, the semiabelian homomorphism-extension nodes and the Néron DVR criterion; none is a duplicate. No cycle. Accepted tool_uses: lem-sbc-finite-etale-generic-fibre-cover-density and the gluing leaf. Notes: the null blueprint ancestor is inherited (base fault); citations.json and research/ named in the report are not on the branch."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianSchemeNeronProperty",
+  "declaration": "AlgebraicGeometry.abelianScheme_neron_mapping_property",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianSchemeNeronProperty.lean",
+  "statement": "theorem abelianScheme_neron_mapping_property (D E : Type u) [CommRing D] [IsDedekindDomain D] (hD : ringKrullDim D = 1) [Field E] [Algebra D E] [IsFractionRing D E] (T : (Spec (CommRingCat.of D)).Opens) [Nonempty T] (B : Over T.toScheme) [GrpObj B] [IsCommMonObj B] [Smooth B.hom] [IsProper B.hom] (hB : ∀ t : T.toScheme, ConnectedSpace (B.hom.fiber t)) (X : Over T.toScheme) [Smooth X.hom] : Function.Bijective (fun f : X ⟶ B ↦ (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D E)))).map ((Over.map T.ι).map f))",
+  "branch": "newtargets-dag",
+  "by": "Q103",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5521fa569",
+  "group": "Q103",
+  "result": "pass",
+  "note": "Read node (non-lean fields identical to side-live), all 6 stmt_dep records, module, report. Lean matches every clause: IsDedekindDomain + hD ringKrullDim=1 (node's dim-1 convention), IsFractionRing D E, T nonempty open of Spec D, B : Over T with GrpObj+IsCommMonObj via Mathlib's fibre-product CartesianMonoidalCategory (Over S) instance (Pullbacks.lean), Smooth, IsProper (includes separated), ConnectedSpace of scheme-theoretic fibres; X any smooth T-scheme, no qc/separated assumption; conclusion Bijective of the canonical Over.pullback map along Spec E→Spec D after Over.map T.ι, canonically equivalent to the node's X×_T Spec E form since Spec E→Spec D factors uniquely through the mono T.ι. Plain T-morphisms, no hom constraint. Edge cases (empty X, trivial B, T=Spec D, field D excluded, single universe) fine. lean.statement verbatim; docstrings with source, blueprint tag and 4-step plan; sorry only; no new defs/deps/statement change; Worker report + Second reading present (same worker, disclosed). No file changed, not recompiled; worker compiles clean. Maintainer note: Q30 e3a4 is an unlanded parallel PASS delivery of the same item, so only one should land."
+ }
+}

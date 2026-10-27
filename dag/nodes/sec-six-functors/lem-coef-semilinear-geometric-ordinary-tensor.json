@@ -1,0 +1,139 @@
+{
+ "id": "lem-coef-semilinear-geometric-ordinary-tensor",
+ "kind": "statement",
+ "title": "Ordinary tensor comparison and resolving-class preservation for geometric systems",
+ "statement": "variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)\n  [EssentiallySmall.{max c v r} C]\n  (B : ℕ → Sheaf J CommRingCat.{max c v r})\n  (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)\n  {C' : Type c} [Category.{v} C'] [EssentiallySmall.{max c v r} C']\n  (J' : GrothendieckTopology C')\n  (uInv : Sheaf J (Type (max c v r)) ⥤ Sheaf J' (Type (max c v r)))\n  (uPush : Sheaf J' (Type (max c v r)) ⥤ Sheaf J (Type (max c v r)))\n  (adjSet : uInv ⊣ uPush)\n  (O : GeometryOrdinary.{c, v, r} J B τ J' uInv uPush adjSet)\n\nstructure GeometryOrdinaryTensor where\n  /-- The level comparison on ordinary module sheaves. -/\n  level : ∀ (n : ℕ) (M N : Mod.{c, v, max c v r} J (B n)),\n    (O.inverseImage n).modules.obj (ordinaryTensor.{c, v, r} J (B n) M N) ≅\n      ordinaryTensor.{c, v, r} J' (O.coefficients n)\n        ((O.inverseImage n).modules.obj M) ((O.inverseImage n).modules.obj N)\n  /-- Naturality before taking complexes. -/\n  level_natural : ∀ (n : ℕ) {M M' N N' : Mod.{c, v, max c v r} J (B n)}\n    (f : M ⟶ M') (g : N ⟶ N'),\n    (O.inverseImage n).modules.map (ordinaryTensorHom.{c, v, r} J (B n) f g) ≫\n        (level n M' N').hom =\n      (level n M N).hom ≫ ordinaryTensorHom.{c, v, r} J' (O.coefficients n)\n        ((O.inverseImage n).modules.map f) ((O.inverseImage n).modules.map g)\n  /-- The inverse image of a pure tensor is the tensor of the inverse images. -/\n  level_pure : ∀ n : ℕ,\n    InverseTensorPure.{c, v, r} J J' uInv (B n) (O.coefficients n) (O.inverseImage n) (level n)\n  /-- The comparison on ordinary systems with their actual horizontal transitions. -/\n  system : ∀ M N : Systems.{c, v, max c v r} J B τ,\n    O.pull.obj (ordinaryTensor.{c, v, r} (coefficientSequenceTopology J)\n      (systemRing.{c, v, max c v r} J B τ) M N) ≅\n      ordinaryTensor.{c, v, r} (coefficientSequenceTopology J')\n        (systemRing.{c, v, max c v r} J' O.coefficients O.coefficientTransition)\n        (O.pull.obj M) (O.pull.obj N)\n  /-- Naturality on ordinary systems. -/\n  system_natural : ∀ {M M' N N' : Systems.{c, v, max c v r} J B τ}\n    (f : M ⟶ M') (g : N ⟶ N'),\n    O.pull.map (ordinaryTensorHom.{c, v, r} (coefficientSequenceTopology J)\n        (systemRing.{c, v, max c v r} J B τ) f g) ≫ (system M' N').hom =\n      (system M N).hom ≫ ordinaryTensorHom.{c, v, r} (coefficientSequenceTopology J')\n        (systemRing.{c, v, max c v r} J' O.coefficients O.coefficientTransition)\n        (O.pull.map f) (O.pull.map g)\n  /-- The ordinary evaluation square. -/\n  evaluation : ∀ (n : ℕ) (M N : Systems.{c, v, max c v r} J B τ),\n    (SemilinearSections.evaluation.{c, v, max c v r}\n        J' O.coefficients O.coefficientTransition n).map (system M N).hom ≫\n      (ordinaryEvaluationTensor.{c, v, r} J' O.coefficients O.coefficientTransition n\n        (O.pull.obj M) (O.pull.obj N)).hom ≫\n      ordinaryTensorHom.{c, v, r} J' (O.coefficients n)\n        ((O.ordinaryPullEvaluation n).hom.app M) ((O.ordinaryPullEvaluation n).hom.app N) =\n      (O.ordinaryPullEvaluation n).hom.app\n        (ordinaryTensor.{c, v, r} (coefficientSequenceTopology J)\n          (systemRing.{c, v, max c v r} J B τ) M N) ≫\n        (O.inverseImage n).modules.map (ordinaryEvaluationTensor.{c, v, r} J B τ n M N).hom ≫\n        (level n ((SemilinearSections.evaluation.{c, v, max c v r} J B τ n).obj M)\n          ((SemilinearSections.evaluation.{c, v, max c v r} J B τ n).obj N)).hom\n  /-- Inverse image at a level preserves flat-term K-flat representatives. -/\n  level_kflat : ∀ (n : ℕ) (P : CochainComplex (Mod.{c, v, max c v r} J (B n)) ℤ),\n    CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := B n) P →\n    flatTerms.{c, v, r} J (B n) P →\n    CochainComplex.IsKFlatIndependentCoefficients (J := J') (R := O.coefficients n)\n      (((O.inverseImage n).modules.mapHomologicalComplex (.up ℤ)).obj P)\n  /-- Inverse image on the sequence site preserves the same resolving class. -/\n  system_kflat : ∀ (P : CochainComplex (Systems.{c, v, max c v r} J B τ) ℤ),\n    CochainComplex.IsKFlatIndependentCoefficients (J := coefficientSequenceTopology J)\n      (R := systemRing.{c, v, max c v r} J B τ) P →\n    flatTerms.{c, v, r} (coefficientSequenceTopology J)\n      (systemRing.{c, v, max c v r} J B τ) P →\n    CochainComplex.IsKFlatIndependentCoefficients (J := coefficientSequenceTopology J')\n      (R := systemRing.{c, v, max c v r} J' O.coefficients O.coefficientTransition)\n      ((O.pull.mapHomologicalComplex (.up ℤ)).obj P)\n\n\ntheorem geometricOrdinaryTensor_exists [PreservesFiniteLimits uInv] :\n    Nonempty (GeometryOrdinaryTensor.{c, v, r} J B τ J' uInv uPush adjSet O)",
+ "stmt_deps": [
+  "lem-coef-semilinear-ordinary-geometric-realization",
+  "def-coef-semilinear-system-models"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, lemma-tensor-product-pullback, its bilinear-adjunction proof; sites-cohomology.tex Tag 0G7E, lemma-pullback-K-flat. Strict-system realization as in Zheng Construction 4.1 and the fixed GeometryOrdinary horizontal normalization."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, lemma-tensor-product-pullback, its bilinear-adjunction proof; sites-cohomology.tex Tag 0G7E, lemma-pullback-K-flat. Strict-system realization as in Zheng Construction 4.1 and the fixed GeometryOrdinary horizontal normalization.",
+  "note": "G3: reuse proved independent-universe comparison and K-flat pullback; reduce only the horizontal component equation. K-flatness of systems is detected levelwise rather than constructing a new inverse-image lift on the sequence topos."
+ },
+ "proof": [
+  {
+   "text": "Use the existing independent-universe inverse-image tensor comparison at every level. Its naturality and generalized pure-tensor equation give the first three fields without a new pairing construction.",
+   "uses": [
+    "lem-pur-independent-inverse-image-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form geometricTensorComponent by composing pull evaluation, tensor evaluation, the level comparison, inverse pull evaluation on each factor, and inverse target tensor evaluation. Horizontal compatibility is the separate component equation. Reassemble the component morphisms on the product category: undo the identity scalar restrictions, use vertical naturality and the horizontal equation, and reflect invertibility through jointly faithful evaluations. Functorial composition gives naturality and cancellation gives the evaluation square.",
+   "uses": [
+    "lem-coef-geometric-tensor-component-horizontal",
+    "lem-coef-semilinear-ordinary-geometric-realization",
+    "def-coef-semilinear-system-models",
+    "lem-coef-semilinear-tensor-evaluation",
+    "lem-coef-system-iso-assembly"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use geometricOrdinary_kflat for both resolving-class fields. Its complete proof applies level pullback with the identity scalar unit, and detects system K-flatness through exact tensor-preserving evaluations.",
+   "uses": [
+    "lem-coef-geometric-ordinary-kflat"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-independent-inverse-image-tensor-comparison",
+  "lem-coef-geometric-tensor-component-horizontal",
+  "lem-coef-semilinear-ordinary-geometric-realization",
+  "def-coef-semilinear-system-models",
+  "lem-coef-semilinear-tensor-evaluation",
+  "lem-coef-system-iso-assembly",
+  "lem-coef-geometric-ordinary-kflat"
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GeometricTensorLocalization",
+  "date": "2026-10-26",
+  "group": "A6"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: the finite coefficient-level derived adjunctions before R lim; geometric inverse image and direct image on the normalized ordinary semilinear system calculus. Normalized tensor localization for fixed ordinary geometric operations. Substep: Ordinary tensor comparison and resolving-class preservation for geometric systems.",
+   "via": [
+    "lem-coef-semilinear-geometric-tensor-localization",
+    "lem-coef-semilinear-geometric-operations-base-existence",
+    "lem-coef-semilinear-geometric-operations",
+    "lem-coef-semilinear-operations-existence",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The inverse image functor of sheaves of modules preserves tensor products and K flat complexes with flat terms",
+   "results": "SheafOfModules.pullback, pullbackPushforwardAdjunction, instIsLeftAdjointPullback; Module.Flat.iff_rTensor_preserves_shortComplex_exact. No tensor comparison for a specified algebraic lift or strict system.",
+   "date": "2026-10-26",
+   "verdict": "No exact match: the site-continuous pullback API does not construct comparisons for the specified algebraic inverse image and horizontal system transitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image of sheaves of modules preserves the balanced tensor product and pure tensors",
+   "results": "SheafOfModules.pullbackObjFreeIso and its naturality/pure-generator equations; PresheafOfModules.Monoidal.tensorObj_map_tmul; LightCondensed sheafification monoidal structure.",
+   "date": "2026-10-26",
+   "verdict": "No exact match for arbitrary specified topos inverse image or its strict-system tensor maps."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*tensor|tensor.*pullback|KFlat|[Bb]ilinear in Mathlib/Algebra/Category/ModuleCat/Sheaf and Mathlib/CategoryTheory/Sites",
+   "results": "No matching declarations in those directories. Local project search finds RingedTopoiInverseImageTensorComparison (homogeneous universes only) and KFlatRingedToposPullback (independent universes).",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib match. The local ordinary pairing construction needs the independent site universes and strict-system assembly specified here."
+  }
+ ],
+ "mathlib_match": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.GeometricOrdinaryTensor",
+  "file": "lean/Sheaf/Paper/GeometricOrdinaryTensor.lean",
+  "declaration": "WeilConjectures.SemilinearSections.geometricOrdinaryTensor_exists",
+  "statement": "theorem geometricOrdinaryTensor_exists [PreservesFiniteLimits uInv] :\n    Nonempty (GeometryOrdinaryTensor.{c, v, r} J B τ J' uInv uPush adjSet O)",
+  "branch": "sheaf-dag",
+  "by": "A6",
+  "date": "2026-10-26",
+  "declarations": [
+   "WeilConjectures.SemilinearSections.GeometryOrdinaryTensor",
+   "WeilConjectures.SemilinearSections.geometricOrdinaryTensor_exists"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261026T091103-L-3304892",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261026T114145-L-2269142",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

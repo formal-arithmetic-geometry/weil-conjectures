@@ -74,7 +74,32 @@
   "def-pc-morphism-conventions"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.Modules.eulerChar_eq_add_of_shortExact"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.eulerChar_eq_add_of_shortExact",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.LongExact",
+     "lines": [
+      151,
+      229
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-rr",
  "lean": {
@@ -87,5 +112,24 @@
   ],
   "sorry_free": true,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $k$ be a field, $X$ a proper scheme over $k$, and let\n\n$$\n0\\to\\mathcal{F}_1\\to\\mathcal{F}_2\\to\\mathcal{F}_3\\to0\n$$\n\nbe a short exact sequence of coherent $\\mathcal{O}_X$-modules. Then\n\n$$\n\\chi(X,\\mathcal{F}_2)=\\chi(X,\\mathcal{F}_1)+\\chi(X,\\mathcal{F}_3).\n$$",
+  "proof": [
+   {
+    "text": "The long exact cohomology sequence of the short exact sequence is\n\n$$\n0\\to H^0(\\mathcal{F}_1)\\to H^0(\\mathcal{F}_2)\\to H^0(\\mathcal{F}_3)\\to H^1(\\mathcal{F}_1)\\to H^1(\\mathcal{F}_2)\n\\to H^1(\\mathcal{F}_3)\\to\\cdots,\n$$\n\nexact, terminates at both ends (finite support and finite\ndimensionality of the terms, [lem-pc-coherent-hi] applied to the proper\nstructure morphism $X\\to\\operatorname{Spec}(k)$), and the\nalternating sum of the dimensions in an exact sequence of finite\ndimensional vector spaces vanishes (rank–nullity, applied inductively\nto the decompositions $0\\to\\operatorname{im}\\to V\\to\\operatorname{im}'\\to0$). Summing the\nalternative signs over the long exact sequence gives\n\n$$\n0=\\sum_i(-1)^i\\bigl(\\dim H^i(\\mathcal{F}_1)-\\dim H^i(\\mathcal{F}_2)+\\dim H^i(\\mathcal{F}_3)\\bigr),\n$$\n\nwhich is exactly $\\chi(\\mathcal{F}_1)-\\chi(\\mathcal{F}_2)+\\chi(\\mathcal{F}_3)=0$, as claimed\n(Varieties, Lemma 33.33.2, Tag\n[08AA](https://stacks.math.columbia.edu/tag/08AA)).",
+    "uses": [
+     "lem-pc-coherent-hi"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

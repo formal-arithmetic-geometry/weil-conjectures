@@ -1,0 +1,383 @@
+{
+ "id": "lem-sfb-relation-restriction-quotient",
+ "kind": "statement",
+ "title": "Fppf quotient comparison for restriction of an equivalence relation",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention], and let $V,R$ be $S$-schemes. An equivalence relation $(s,t):R\\to V\\times_SV$ [def-pc-fibre-product] means that for every $S$-scheme $T$ the map on sections is injective and identifies $R(T)$ with an equivalence relation on $V(T)$. Let $g:A\\to V$ be any morphism of $S$-schemes and let $R_A=A\\times_{g,V,t}R\\times_{s,V,g}A$ be the restricted equivalence relation, with projections $(a,r,b)\\mapsto b,a$. Write $V/R$ and $A/R_A$ for the sheafifications [def-weil-pbc-sheafification] of their sectionwise quotient presheaves on the big fppf site [def-pc-fppf-site] of $S$. The canonical morphism $A/R_A\\to V/R$ is a monomorphism of sheaves. If $h_A=s\\circ\\operatorname{pr}_R:A\\times_{g,V,t}R\\to V$ is surjective, flat [def-weil-flat-morphism] and locally of finite presentation [def-sbc-locally-finite-presentation], that canonical morphism is an isomorphism. All schemes and fibre products are taken in the chosen site bound.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 02VH (lemma-quotient-groupoid-restrict), tau=fppf, specialized to equivalence relations; the final covering criterion is used, with no flatness assumption on g."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-pc-fibre-product",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-sheafification",
+  "def-pc-fppf-site"
+ ],
+ "proof": [
+  {
+   "text": "Write $P(T)=V(T)/R(T)$ and $P_A(T)=A(T)/R_A(T)$. By the universal property [def-pc-fibre-product], $R_A(T)$ consists exactly of triples $(a,r,b)$ with $g a=t r$ and $s r=g b$. Thus $a$ and $b$ are related exactly when $g a$ and $g b$ are related in $V(T)$; symmetry allows either order. Reflexivity, symmetry and transitivity follow from those of $R(T)$, and uniqueness of $r$ for its endpoints gives injectivity into $A(T)^2$. The function $v_T:P_A(T)\\to P(T)$ sending $[a]$ to $[g a]$ is well-defined and injective: equality of its values is precisely the relation just described. Restrictions preserve these triples, so the quotients and $v$ are presheaves and a natural transformation.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tags 02V8 (lemma-restrict-relation), 045Z (lemma-quotient-pre-equivalence-relation-restrict), sectionwise quotient calculation"
+   }
+  },
+  {
+   "text": "Put $F=P^\\#$ and $F_A=P_A^\\#$ with units $\\eta$ and $\\eta_A$. The sheafification universal property [def-weil-pbc-sheafification] applied to $\\eta v:P_A\\to F$ gives a unique sheaf morphism $\\alpha:F_A\\to F$ with $\\alpha\\eta_A=\\eta v$. In particular $\\alpha(\\eta_A[a])=\\eta[g a]$. This is the canonical morphism in the statement.",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WH (proposition-sheafification-adjoint)"
+   }
+  },
+  {
+   "text": "For $x,y\\in F_A(T)$ with $\\alpha(x)=\\alpha(y)$, the local-representative clause of [lem-weil-pbc-site-sheafification-sections-local] and [lem-weil-pbc-site-coverings-common-refinement] give one fppf covering $\\{T_i\\to T\\}$ and $p_i,q_i\\in P_A(T_i)$ representing $x|_{T_i},y|_{T_i}$. Step 2 gives $\\eta(v(p_i))=\\eta(v(q_i))$. The local-equality clause of the same local-sections node, now applied to $P$, gives coverings of each $T_i$ on which these two presheaf sections agree. Step 1's injection and naturality of $v$ make $p_i$ and $q_i$ equal on those refinements. The composition axiom and the uniqueness part of the sheaf condition [def-weil-pbc-sites-and-cohomology] imply $x=y$. Thus every $\\alpha_T$ is injective. If two sheaf morphisms into $F_A$ have equal composites with $\\alpha$, evaluating at every $T$ and cancelling $\\alpha_T$ makes their components equal. Therefore $\\alpha$ is a monomorphism.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "lem-weil-pbc-site-coverings-common-refinement",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 045Z (lemma-quotient-pre-equivalence-relation-restrict), injectivity proof; Sites Tags 00WK (lemma-sections-sheafification), 00W6 (lemma-common-refinement), 00VH (definition-site), 00VM (definition-sheaf)"
+   }
+  },
+  {
+   "text": "Assume $h:E=A\\times_{g,V,t}R\\to V$, $h=s\\operatorname{pr}_R$, is surjective, flat and locally of finite presentation. Then $\\{h\\}$ is an fppf covering by [def-pc-fppf-site]. For $z\\in F(T)$, [lem-weil-pbc-site-sheafification-sections-local] gives an fppf covering $\\{T_i\\to T\\}$ and classes $c_i\\in P(T_i)$ representing $z|_{T_i}$. Choose representatives $f_i:T_i\\to V$ of $c_i$. Pull back the covering $\\{h\\}$ along $f_i$: the site pullback axiom [def-weil-pbc-sites-and-cohomology] gives singleton coverings $p_i:W_i=T_i\\times_{f_i,V,h}E\\to T_i$, whose composites cover $T$. The other projection supplies $a_i:W_i\\to A$ and $r_i:W_i\\to R$, satisfying $g a_i=t r_i$ and $s r_i=f_i p_i$ by [def-pc-fibre-product]. Hence $[g a_i]=[f_i p_i]$ in $P(W_i)$, and Step 2 yields $\\alpha(\\eta_A[a_i])=z|_{W_i}$. All these pullbacks are in the chosen site bound. No property of $g$ beyond being an $S$-morphism has been used.",
+   "uses": [
+    "def-pc-fppf-site",
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 02VH (lemma-quotient-groupoid-restrict), surjectivity proof; Topologies Tags 021M (definition-fppf-covering), 021O (lemma-fppf); Sites Tag 00WK (lemma-sections-sheafification)"
+   }
+  },
+  {
+   "text": "The sections $w_i=\\eta_A[a_i]\\in F_A(W_i)$ of Step 4 agree on every $W_i\\times_TW_j$: their $\\alpha$-images are both the restriction of $z$, so Step 3 gives equality. The sheaf equalizer condition [def-weil-pbc-sites-and-cohomology] glues them uniquely to $w\\in F_A(T)$. Since $\\alpha(w)$ and $z$ agree on the covering, the same uniqueness condition gives $\\alpha(w)=z$. Together with Step 3 this proves $\\alpha_T$ bijective for every $T$. Define $\\beta_T(z)$ to be its unique inverse image. For $u:T'\\to T$, naturality gives $\\alpha_{T'}(\\beta_T(z)|_{T'})=z|_{T'}=\\alpha_{T'}(\\beta_{T'}(z|_{T'}))$; Step 3 cancels $\\alpha_{T'}$, proving naturality of $\\beta$. The two inverse equations hold componentwise by uniqueness. Thus $\\beta$ is a sheaf inverse of $\\alpha$, proving the isomorphism clause.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 02VH (lemma-quotient-groupoid-restrict), local surjectivity and final bijectivity, with the sheaf gluing and natural inverse written out"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-weil-pbc-site-coverings-common-refinement",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-pc-fppf-site"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 02VH (lemma-quotient-groupoid-restrict), specialized to equivalence relations, with the proof of Tag 045Z and the explicit presheaf calculation and gluing details; Sites Tags 00WK, 00W6 and Topologies Tag 021O."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of a scheme equivalence relation along a morphism preserves the fppf quotient when its saturation covers the original scheme",
+   "results": {
+    "t": "2026-10-23T11:52:30Z",
+    "tool": "leansearch",
+    "query": "Restriction of a scheme equivalence relation along a morphism preserves the fppf quotient when its saturation covers the original scheme",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsSeparated.instResLE",
+     "AlgebraicGeometry.IsSeparated.instMorphismRestrict",
+     "AlgebraicGeometry.Flat.instMorphismRestrict",
+     "AlgebraicGeometry.IsIntegralHom.instMorphismRestrict",
+     "AlgebraicGeometry.instLocallyOfFinitePresentationMorphismRestrict",
+     "AlgebraicGeometry.morphismRestrict",
+     "AlgebraicGeometry.IsProper.instMorphismRestrict",
+     "AlgebraicGeometry.instQuasiSeparatedMorphismRestrict"
+    ],
+    "digest": "4c6286b5f531051e"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual scheme morphisms, smooth charts, topological quotients, or categorical slice equivalences; none states this equivalence-relation assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of an equivalence relation along any scheme morphism induces an isomorphism on fppf quotient sheaves if the saturation map is an fppf cover",
+   "results": {
+    "t": "2026-10-23T11:56:23Z",
+    "tool": "leanfinder",
+    "query": "Restriction of an equivalence relation along any scheme morphism induces an isomorphism on fppf quotient sheaves if the saturation map is an fppf cover",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.LocalRepresentability.instIsIsoSheafZariskiTopologyTypeYonedaGluedToSheaf",
+     "AlgebraicGeometry.Scheme.Cover.pushforwardIso_f",
+     "CategoryTheory.Functor.IsCoverDense.sheafIso",
+     "CategoryTheory.Functor.IsCoverDense.iso_of_restrict_iso",
+     "AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp",
+     "CategoryTheory.Functor.IsCoverDense.sheafIso_hom_val",
+     "CategoryTheory.GrothendieckTopology.W_eq_inverseImage_isomorphisms",
+     "CategoryTheory.Functor.IsCoverDense.presheafIso"
+    ],
+    "digest": "fedab5f4f92d3d3a"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual scheme morphisms, smooth charts, topological quotients, or categorical slice equivalences; none states this equivalence-relation assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"Groupoid\"",
+   "results": {
+    "t": "2026-10-23T11:56:13Z",
+    "tool": "loogle",
+    "query": "\"Scheme\", \"Groupoid\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual scheme morphisms, smooth charts, topological quotients, or categorical slice equivalences; none states this equivalence-relation assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*relation|relation.*quotient",
+   "results": {
+    "t": "2026-10-23T11:56:13Z",
+    "tool": "grep",
+    "query": "quotient.*relation|relation.*quotient",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual scheme morphisms, smooth charts, topological quotients, or categorical slice equivalences; none states this equivalence-relation assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*relation|relation.*quotient|quotient.*groupoid",
+   "results": {
+    "t": "2026-10-23T13:12:44Z",
+    "tool": "grep",
+    "query": "quotient.*relation|relation.*quotient|quotient.*groupoid",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme image maps, ideal quotient lifts, restrictions, or generic local-injectivity facts; none states restriction of a scheme equivalence relation and the saturation-cover quotient criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An arbitrary morphism of schemes restricting an equivalence relation induces an injective map of fppf quotient sheaves and an isomorphism if the saturation is an fppf cover",
+   "results": {
+    "t": "2026-10-23T13:12:45Z",
+    "tool": "leansearch",
+    "query": "An arbitrary morphism of schemes restricting an equivalence relation induces an injective map of fppf quotient sheaves and an isomorphism if the saturation is an fppf cover",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Hom.toImage_app_injective",
+     "AlgebraicGeometry.instUniversallyInjectiveOfMonoScheme",
+     "CategoryTheory.Sheaf.isLocallyInjective_sheafToPresheaf_map_iff",
+     "AlgebraicGeometry.UniversallyInjective.mk",
+     "AlgebraicGeometry.Scheme.Hom.stalkFunctor_toImage_injective",
+     "CategoryTheory.Sheaf.isLocallyInjective_of_iso",
+     "CategoryTheory.Sheaf.IsLocallyInjective",
+     "AlgebraicGeometry.Scheme.RationalMap"
+    ],
+    "digest": "ae46952c0bed670d"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme image maps, ideal quotient lifts, restrictions, or generic local-injectivity facts; none states restriction of a scheme equivalence relation and the saturation-cover quotient criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"quotient\"",
+   "results": {
+    "t": "2026-10-23T13:12:45Z",
+    "tool": "loogle",
+    "query": "\"Scheme\", \"quotient\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Hom.liftQuotient",
+     "AlgebraicGeometry.Scheme.Hom.liftQuotient_comp",
+     "AlgebraicGeometry.Scheme.Hom.liftQuotient_comp_assoc"
+    ],
+    "digest": "6d7c2c7ac7bded1f"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme image maps, ideal quotient lifts, restrictions, or generic local-injectivity facts; none states restriction of a scheme equivalence relation and the saturation-cover quotient criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a scheme equivalence relation along any map gives the same sheaf quotient when every orbit is locally met",
+   "results": {
+    "t": "2026-10-23T13:12:51Z",
+    "tool": "leanfinder",
+    "query": "Restriction of a scheme equivalence relation along any map gives the same sheaf quotient when every orbit is locally met",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.app_eq",
+     "AlgebraicGeometry.morphismRestrictEq",
+     "AlgebraicGeometry.Scheme.Hom.app_eq",
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctorCongr",
+     "AlgebraicGeometry.Scheme.Hom.resLE_congr",
+     "AlgebraicGeometry.Scheme.Hom.appLE_congr",
+     "AlgebraicGeometry.Scheme.Hom.map_appLE'",
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctorCongr_hom_app_app"
+    ],
+    "digest": "760771561caa7df3"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme image maps, ideal quotient lifts, restrictions, or generic local-injectivity facts; none states restriction of a scheme equivalence relation and the saturation-cover quotient criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence relation of schemes restricted to another scheme has a monomorphic map of quotient sheaves which is an isomorphism if the saturation map is a covering",
+   "results": {
+    "t": "2026-10-23T13:14:49Z",
+    "tool": "leanfinder",
+    "query": "An equivalence relation of schemes restricted to another scheme has a monomorphic map of quotient sheaves which is an isomorphism if the saturation map is a covering",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instIsZariskiLocalAtTargetMonomorphismsScheme",
+     "AlgebraicGeometry.Scheme.Cover.instIsIsoFromGlued",
+     "AlgebraicGeometry.instQuasiSeparatedOfMonoScheme",
+     "AlgebraicGeometry.SheafedSpace.mono_of_base_injective_of_stalk_epi",
+     "AlgebraicGeometry.Scheme.subcanonical_zariskiTopology",
+     "AlgebraicGeometry.IsOpenImmersion.le_monomorphisms",
+     "AlgebraicGeometry.instMonoObjWalkingSpanCompOverSchemeTopMorphismPropertySpanOverForgetForgetForgetNoneWalkingPairSomeMapInitOfIsOpenImmersionLeftDiscretePUnit",
+     "AlgebraicGeometry.Scheme.LocalRepresentability.instIsIsoSheafZariskiTopologyTypeYonedaGluedToSheaf"
+    ],
+    "digest": "4ce2505ad0aecf36"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme image maps, ideal quotient lifts, restrictions, or generic local-injectivity facts; none states restriction of a scheme equivalence relation and the saturation-cover quotient criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fppf-space-relation-slicing",
+  "date": "2026-10-23",
+  "group": "Q142"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: Effectivity step in quot-lemma-curves-stack via quot-lemma-spaces-stack; finite-type part (2) of bootstrap-lemma-descend-algebraic-space. Supporting input: theorem-final-bootstrap (3), applied after constructing a representable fppf cover of the descended sheaf. Subdivision of the final bootstrap: slicing the schematic kernel equivalence relation (Tag 0489). Supporting input in Tag 0489: Tag 02VH (lemma-quotient-groupoid-restrict), tau=fppf, specialized to equivalence relations; the final covering criterion is used, with no flatness assumption on g.",
+   "via": [
+    "lem-sfb-fppf-space-relation-slicing",
+    "lem-sfb-fppf-space-atlas-bootstrap",
+    "lem-sfb-space-finite-type-fppf-effectivity",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-relation-restriction-quotient",
+  "worker": "stage1",
+  "summary": "Checked Stacks 02VH and 045Z and current blueprint. Kept the statement and gave the sectionwise quotient injection, canonical sheafification comparison, local-representative injectivity proof, saturation-cover lifts, and glued natural inverse. Reused the existing local-sections and common-refinement nodes; no new nodes and no Lean changes. No flatness assumption on g is introduced.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: Effectivity step in quot-lemma-curves-stack via quot-lemma-spaces-stack; finite-type part (2) of bootstrap-lemma-descend-algebraic-space. Supporting input: theorem-final-bootstrap (3), applied after constructing a representable fppf cover of the descended sheaf. Subdivision of the final bootstrap: slicing the schematic kernel equivalence relation (Tag 0489). Supporting input in Tag 0489: Tag 02VH (lemma-quotient-groupoid-restrict), tau=fppf, specialized to equivalence relations; the final covering criterion is used, with no flatness assumption on g.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Generic set-presheaf sheafification: local representatives and local equality for the two quotient presheaves; no node of this unit supplies these general site facts."
+   },
+   {
+    "node": "lem-weil-pbc-site-coverings-common-refinement",
+    "why": "Generic site tool for a common covering on which two sheafification sections have representatives; no replacement of the alteration route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-weil-pbc-site-coverings-common-refinement"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-e067c5f70",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-e067c5f70 (reviewer sub-agent of L); spot-checked: Proof-only split, no new nodes. The statement is byte-identical to live, where the item is unsplit and unreviewed; there is no repair note and no SGA citation. I read the source in Stacks groupoids.tex (02VH, 045Z) and checked every step tag in tags/tags (021M, 021O, 00WK, 00W6, 00VH, 00VM, 00WH, 02V8). The item is 02VH specialized to an equivalence relation, tau=fppf and the covering criterion {h}, with Stacks' orientation and no hypothesis on g. Step 1 (elementary): the restricted relation is the inverse image of R; uniqueness of r makes it injective into A(T)^2, and v_T[a]=[ga] is injective and natural. Step 2: alpha comes from the sheafification universal property only, which respects C4. Step 3: local representatives from the sections-local node on a common refinement, then its local-equality clause on P, Step 1 injectivity, and the composition axiom with sheaf uniqueness, give x=y; componentwise injective implies mono. Step 4: {h} is an fppf cover; pulling back along a representative f_i and using the fibre-product equations gives t r_i=g a_i and s r_i=f_i p_i, so [g a_i]=[f_i p_i] and alpha(eta_A[a_i])=z|W_i. Step 5: overlap agreement via Step 3, gluing, and a natural inverse. The cited statements say what each step takes from them. Edge cases (g=id, V empty, A empty, diagonal R, full relation with non-flat g) are consistent. Not a duplicate: lem-sfb-fppf-groupoid-restriction-quotient needs q to be an fppf cover; lem-trf-etale-relation-restriction-quotient and lem-trf-fppf-generator-sheafification-comparison need g étale; the parent lem-sfb-fppf-space-relation-slicing (steps 0 and 6) applies the item with matching orientation and hypotheses. I accept the declared tool uses of the generic sk-thm-p1 nodes sections-local and coverings-common-refinement. proof_deps equals the union of the uses, and the three search kinds are recorded. Advisory only: 'surjective' in the inherited statement does not cite def-weil-surjective-morphism."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelationRestrictionQuotient",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.relation_restriction_quotient",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelationRestrictionQuotient.lean",
+  "statement": "theorem relation_restriction_quotient {S : Scheme.{u}} {R V A : Over S} (s t : R ⟶ V) [Mono (prod.lift s t)] (hrel : ∀ T : Over S, Equivalence (fun a b : T ⟶ V ↦ ∃ r : T ⟶ R, r ≫ s = a ∧ r ≫ t = b)) (g : A ⟶ V) (F : Sheaf (Scheme.fppfTopology.over S) (Type u)) (η : coequalizer (yoneda.map s) (yoneda.map t) ⟶ F.obj) (hη : ∀ G : Sheaf (Scheme.fppfTopology.over S) (Type u), Function.Bijective (fun k : F.obj ⟶ G.obj ↦ η ≫ k)) (F' : Sheaf (Scheme.fppfTopology.over S) (Type u)) (η' : coequalizer (yoneda.map (pullback.snd (pullback.snd g t ≫ s) g)) (yoneda.map (pullback.fst (pullback.snd g t ≫ s) g ≫ pullback.fst g t)) ⟶ F'.obj) (hη' : ∀ G : Sheaf (Scheme.fppfTopology.over S) (Type u), Function.Bijective (fun k : F'.obj ⟶ G.obj ↦ η' ≫ k)) : ∃ α : F' ⟶ F, (coequalizer.π (yoneda.map (pullback.snd (pullback.snd g t ≫ s) g)) (yoneda.map (pullback.fst (pullback.snd g t ≫ s) g ≫ pullback.fst g t)) ≫ η') ≫ α.hom = yoneda.map g ≫ (coequalizer.π (yoneda.map s) (yoneda.map t) ≫ η) ∧ Mono α ∧ (Surjective (pullback.snd g t ≫ s).left → Flat (pullback.snd g t ≫ s).left → LocallyOfFinitePresentation (pullback.snd g t ≫ s).left → IsIso α)",
+  "branch": "sheaf-dag",
+  "by": "Q144",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The restricted relation and its two projections are inlined using Mathlib pullback.snd and pullback.fst, in the order (b,a). No theorem dependency is used to supply these definitions. The chosen sheafifications are specified by reflection universal properties; the projection equation uniquely characterizes the canonical morphism. No hypothesis on g is imposed. Repairs H2 at returned head 3fa9c62f140b."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-089c9d83a",
+  "group": "Q144",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of 3fa9c62f140b: trf theorem stmt_dep dropped; stmt_deps now equal live node's 7 deps (JSON diff vs side-live differs only in lean, live lean null). Inlining checked term-for-term against restrictedEtaleRelation/Source/Target with (t,s): pullback (pullback.snd g t ≫ s) g, projections snd (=b) and fst≫fst g t (=a), so the statement is definitionally the previously verified one. lean.statement verbatim in file; no name clash; new Mathlib imports used, plain imports = proof_deps modules (present in side-live). Maths re-checked: Mono(prod.lift s t)+hrel = equivalence relation; reflection-property sheafifications; α unique by π epi + hη' injective; Mono unconditional; IsIso under Surjective/Flat/LFP of h_A; no hypothesis on g; edge cases g=id, empty A/V, diagonal, full relation with non-flat g covered; docstrings with source, blueprint id, 5 steps; sorry only. No file changed, no compile run (worker: 11.0 s / 9.3 s clean). Advisory: node 'surjective' lacks def-weil-surjective-morphism cite (inherited)."
+ }
+}

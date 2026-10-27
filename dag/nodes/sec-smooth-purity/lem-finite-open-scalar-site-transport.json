@@ -1,0 +1,140 @@
+{
+ "id": "lem-finite-open-scalar-site-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-finite-open-scalar-transport",
+   "place": "Step 2, site face of the scalar-mate cube",
+   "via": [
+    "lem-finite-compact-support-scalar-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Change of site preserves the fixed-coefficient open scalar mate",
+ "statement": "For finite commutative rings A and B, a homomorphism phi:A -> B, an open immersion j:X -> Z, and an unbounded etale A-complex G, the fixed pro-etale open scalar transpose at comparisonUpperStar_X(G), followed by extension by zero of pbcComparisonReduction_X, equals fixed scalar extension of the inverse open/site comparison at G, followed by pbcComparisonReduction_Z, etale-pro-etale comparison of openScalarIso, and the open/site comparison for B. No intrinsic coefficient realization occurs.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-finite-compact-support-constructibility.proof.md",
+  "place": "Step 5 (exactness and reduction); Stacks 03DI, 09AF and 00YV"
+ },
+ "stmt_deps": [
+  "def-finite-compact-scalar-transport-data",
+  "lem-sf-compact-support-restriction-of-scalars"
+ ],
+ "proof": [
+  {
+   "text": "The ordinary fixed open restriction comparison preserves the open adjunction unit. Conjugate this equation by the canonical open pullback/restriction isomorphisms, and use exact localization to preserve it. The unit formula for leftAdjointUniq identifies its scalar transpose with OpenScalarSite.scalarOpen.",
+   "uses": [
+    "lem-sf-open-extension-scalar-restriction-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The inverse of the etale open restriction scalar square equals upperStarRestrictScalarsIsoSheaf. Therefore the published open scalar isomorphism in EtaleOpenTensorDefs is definitionally the same adjoint uniqueness isomorphism as FiniteCompactScalar.openScalarIso.",
+   "uses": [
+    "def-sf-etale-open-scalar-data",
+    "def-finite-compact-scalar-transport-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the already proved private scalar_site_square_aux as the formal mate-cube assembly of its actual lower inputs: the coefficient/site restriction comparison normalized by the comparison-adjunction units, the open/site unit normalization and its exact derived descent, and the exact square composition law. These are the inputs of restriction_coefficient_cube, derived_coefficient_cube, scalar_pullback_cube and comparison_derived_extension_mate in its proof. Precompose the resulting unbounded square by fixed scalar extension of the inverse open/site comparison and cancel hom with inverse. The full public lem-sp-open-scalar-site-coherence aggregate (which also asserts flatness and composition laws) is not used as a theorem.",
+   "uses": [
+    "def-weil-pbc-witness-compatibility",
+    "lem-sf-open-comparison-unit-normalization",
+    "lem-coef-etale-open-comparison-data",
+    "lem-pod-derived-exact-square-composition",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-open-extension-scalar-restriction-coherence",
+  "def-sf-etale-open-scalar-data",
+  "def-finite-compact-scalar-transport-data",
+  "def-weil-pbc-witness-compatibility",
+  "lem-sf-open-comparison-unit-normalization",
+  "lem-coef-etale-open-comparison-data",
+  "lem-pod-derived-exact-square-composition",
+  "lem-amb-unbounded-compact-support-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent Y3",
+  "document": "lean/Sheaf/Paper/OpenScalarSiteCoherence.lean",
+  "place": "private scalar_site_square_aux and its lower unit-normalization/derived-cube helpers, followed by normalization of the prescribed fixed scalar mate; blueprint Step 5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "coherence of mates of adjunctions under equivalences extension by zero extension of scalars",
+   "results": "Generic mate and adjunction results only; no exact normalized realization compatibility.",
+   "date": "2026-10-27",
+   "verdict": "generic assembly only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "Uniqueness and unit identities for left adjoints; useful for normalizing chosen scalar comparisons.",
+   "date": "2026-10-27",
+   "verdict": "generic assembly only"
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointUniq|iterated_mateEquiv_conjugateEquiv",
+   "results": "Generic mates infrastructure; project search additionally found OpenScalarSiteCoherence.scalar_site_square_aux for the fixed site face.",
+   "date": "2026-10-27",
+   "verdict": "existing proof of site face; realization face still needed"
+  },
+  {
+   "tool": "leansearch",
+   "query": "compatibility of extension by zero and change of coefficients under an equivalence of module sheaf categories",
+   "results": "Eight hits, including Mathlib.CategoryTheory.Sites.Coherent.Equivalence (Equivalence.sheafCongrPrecoherent) and generic sheafification Hom-equivalence formulas. No normalized open/scalar/site or intrinsic-realization compatibility.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteOpenScalarTransport",
+  "date": "2026-10-27",
+  "group": "Y3"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteOpenScalarSiteTransport",
+  "file": "lean/Sheaf/Paper/FiniteOpenScalarSiteTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.FiniteCompactScalar.fixedOpenScalar_site_transport",
+  "statement": "theorem fixedOpenScalar_site_transport\n    {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]\n    (φ : A →+* B) {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]\n    (G : Etale.DerivedCategoryModule (ULift.{u + 1, u} A) X) :\n    (((Adjunction.ofIsRightAdjoint\n      (Sheaf.derivedRestrictScalars (ProEt.topology Z)\n        (RingHom.ulift.{u + 1, u + 1, u, u} φ)))).homEquiv _ _).symm\n        ((ProEtale.openImmersionLowerShriek\n          (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) j).mapDerivedCategory.map\n            (((Adjunction.ofIsRightAdjoint\n      (Sheaf.derivedRestrictScalars (ProEt.topology X)\n        (RingHom.ulift.{u + 1, u + 1, u, u} φ)))).unit.app\n              ((ProEtale.comparisonUpperStar\n            (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X).mapDerivedCategory.obj G)) ≫\n          (Functor.mapDerivedCategorySquareIso (sfFixedOpenRestriction j φ)).hom.app\n            ((ProEtale.pbcFixedScalarExtension (ProEt.topology X)\n              (RingHom.ulift.{u + 1, u + 1, u, u} φ)).obj\n              ((ProEtale.comparisonUpperStar\n            (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X).mapDerivedCategory.obj G))) ≫\n      (ProEtale.openImmersionLowerShriek\n          (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) j).mapDerivedCategory.map\n        ((ProEtale.pbcComparisonReduction X (RingHom.ulift.{u + 1, u + 1, u, u} φ)).hom.app G) =\n    (ProEtale.pbcFixedScalarExtension (ProEt.topology Z) (RingHom.ulift.{u + 1, u + 1, u, u} φ)).map\n        ((Functor.mapDerivedCategorySquareIso\n          (ProEtale.openImmersionLowerShriekComparisonUpperStarIso\n            (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) j)).inv.app G) ≫\n      (ProEtale.pbcComparisonReduction Z (RingHom.ulift.{u + 1, u + 1, u, u} φ)).hom.app\n        ((Etale.openImmersionLowerShriek\n          (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) j).mapDerivedCategory.obj G) ≫\n      (ProEtale.comparisonUpperStar\n        (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) Z).mapDerivedCategory.map\n        ((Etale.FiniteCompactScalar.openScalarIso\n          (RingHom.ulift.{u + 1, u + 1, u, u} φ) j).hom.app G) ≫\n      (Functor.mapDerivedCategorySquareIso\n        (ProEtale.openImmersionLowerShriekComparisonUpperStarIso\n          (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) j)).hom.app\n        ((Etale.scalarExtension (RingHom.ulift.{u + 1, u + 1, u, u} φ) X).obj G)",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261027T034812-L-3688125",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261027T034812-L-3688125",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

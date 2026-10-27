@@ -173,7 +173,18 @@
   "result": "pass",
   "note": "Clause 1 is For(Ex^Λ_K)≫TargetIso = SourceIso≫Ex^ℤ_{For K}, built from the canonical comparisons moduleAbelianUpperStarComparison and moduleAbelianDerivedLowerStarComparison (the latter is the one in module_cohomology_conventions); it matches the proved moduleAbelianDerivedExchange_compatibility. Clause 2 is (∀ n:ℤ, H^n(For K).IsTorsion) → IsIso(Ex^Λ_K); Sheaf.IsTorsion is equivalent to the stalkwise IsTorsionSheaf used by isIso_baseChange_of_isProper (isTorsionSheaf_iff_isTorsion). The second reader's fix of the quantifier scope is correct. Hypotheses match the node: Λ:Type(u+1) as in all dependencies, ChosenCartesianSquare is the recorded square, [IsProper f], nothing on g, no extra instances or universe equations. Edge cases checked: Λ=0, ℤ, ℤ/n, ℚ, ℤ_ℓ; K=0; identity square; empty scheme; all degrees. No new definitions, sorry-only proof, docstrings with source and blueprint tag, lean.statement verbatim (checked by script), node diff adds only the lean record, report has Worker report and Second reading by Q45. nt_compile.py --json: module exit 0 in 9.4 s, no errors or warnings (lakefile sets warn.sorry=false); a plain importer with #check also compiled (exit 0, 11.4 s). No findings, no fixes."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed_proof": {
   "date": "2026-10-19",
   "by": "L",
@@ -183,5 +194,33 @@
   "landing": "20261019T034345-L-424955",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $f:X\\to Y$ and $g:Y'\\to Y$ be morphisms of schemes, and let $f',g'$ be\nthe base changes as in [def-weil-pbc-derived-exchange].\n\n1. Let $\\varphi:\\Lambda\\to\\Lambda'$ be a morphism of commutative rings and\n   write $\\mathrm{res}:D^+(T_{\\Et},\\Lambda')\\to D^+(T_{\\Et},\\Lambda)$ for\n   restriction of scalars along $\\varphi$. For every\n   $K\\in D^+(X_{\\Et},\\Lambda')$, the exchange map\n   $\\Ex^{\\Lambda}_{\\square,\\mathrm{res}K}$ is an isomorphism in\n   $D^+(Y'_{\\Et},\\Lambda)$ if and only if\n   $\\Ex^{\\Lambda'}_{\\square,K}$ is an isomorphism in\n   $D^+(Y'_{\\Et},\\Lambda')$.\n2. Let $\\Lambda$ be a commutative ring and let $f$ be proper. If\n   $K\\in D^+(X_{\\Et},\\Lambda)$ has cohomology sheaves which are torsion as\n   abelian sheaves, then\n   $\\Ex^{\\Lambda}_{\\square,K}:g^{-1}Rf_*K\\to Rf'_*g'^{-1}K$ is an isomorphism\n   in $D^+(Y'_{\\Et},\\Lambda)$.",
+  "proof": [
+   {
+    "text": "*Part 1.* Restriction of scalars $\\mathrm{res}$ is exact and conservative on\nsheaves, so it reflects quasi-isomorphisms of complexes and isomorphisms in\n$D^+$. It commutes with $u^{-1}$ and $u_*$ for every morphism $u$, because\ninverse and direct image of module sheaves are computed on underlying\nsheaves. Choose a bounded below complex $I^\\bullet$ of injective\n$\\Lambda'$-module sheaves with $K\\simeq I^\\bullet$, and a quasi-isomorphism\n$g'^{-1}I^\\bullet\\to J^\\bullet$ into a bounded below complex of injective\n$\\Lambda'$-module sheaves on $X'$. By the resolution formula\n[lemma-weil-pbc-derived-exchange-replacement], $\\Ex^{\\Lambda'}_{\\square,K}$ is\nrepresented by\n\n$$\ng^{-1}f_*I^\\bullet\\xrightarrow{\\ \\Ex^0_{\\square,I^\\bullet}\\ }\nf'_*g'^{-1}I^\\bullet\\longrightarrow f'_*J^\\bullet .\n$$\n\nThe underived exchange map is built from the unit, the square isomorphism and\nthe counit of the adjunctions $u^{-1}\\dashv u_*$, and these are the same maps\nof underlying sheaves for $\\Lambda'$- and for $\\Lambda$-module sheaves, so\n$\\mathrm{res}(\\Ex^0_{\\square,I^m})=\\Ex^0_{\\square,\\mathrm{res}I^m}$ in every\ndegree. An injective $\\Lambda'$-module sheaf has vanishing higher cohomology on\nevery étale $U$ when viewed as a $\\Lambda$-module sheaf: both cohomologies are\ncomputed on the underlying abelian sheaf, by parts (1) and (2) of\n[det-pbc-conventions-module-cohomology] (for $\\Lambda'$ and for $\\Lambda$).\nBy part (3) there and the complex form of [lemma-weil-pbc-leray-acyclicity],\nthe terms of $\\mathrm{res}I^\\bullet$ and $\\mathrm{res}J^\\bullet$ are\n$f_*$-acyclic resp. $f'_*$-acyclic, so $f_*\\mathrm{res}I^\\bullet$ and\n$f'_*\\mathrm{res}J^\\bullet$ compute $Rf_*\\mathrm{res}K$ and\n$Rf'_*g'^{-1}\\mathrm{res}K$. Comparing with injective resolutions\n$\\mathrm{res}I^\\bullet\\to I'^\\bullet$ and $g'^{-1}I'^\\bullet\\to J'^\\bullet$ of\n$\\Lambda$-module sheaves, with a compatible map\n$\\mathrm{res}J^\\bullet\\to J'^\\bullet$ (it exists and is unique up to homotopy\nbecause $J'^\\bullet$ is a bounded below complex of injectives), naturality of\n$\\Ex^0$ gives a commutative diagram\n\n$$\n\\begin{array}{ccccc}\ng^{-1}f_*\\mathrm{res}I^\\bullet & \\to & f'_*g'^{-1}\\mathrm{res}I^\\bullet & \\to & f'_*\\mathrm{res}J^\\bullet\\\\\n\\downarrow & & \\downarrow & & \\downarrow\\\\\ng^{-1}f_*I'^\\bullet & \\to & f'_*g'^{-1}I'^\\bullet & \\to & f'_*J'^\\bullet\n\\end{array}\n$$\n\nwhose outer vertical arrows are quasi-isomorphisms, by the acyclicity just\nproved. The bottom row represents $\\Ex^{\\Lambda}_{\\square,\\mathrm{res}K}$ by\n[lemma-weil-pbc-derived-exchange-replacement], and the top row is\n$\\mathrm{res}$ of the representative of $\\Ex^{\\Lambda'}_{\\square,K}$. Hence\n$\\Ex^{\\Lambda}_{\\square,\\mathrm{res}K}$ is an isomorphism if and only if\n$\\mathrm{res}(\\Ex^{\\Lambda'}_{\\square,K})$ is, and since $\\mathrm{res}$\nreflects isomorphisms, if and only if $\\Ex^{\\Lambda'}_{\\square,K}$ is.",
+    "uses": [
+     "lemma-weil-pbc-derived-exchange-replacement",
+     "det-pbc-conventions-module-cohomology",
+     "lemma-weil-pbc-leray-acyclicity"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Part 2.* Apply part 1 to the unique ring map $\\mathbf Z\\to\\Lambda$, for which\n$\\mathrm{res}$ is the forgetful functor to abelian sheaves. The cohomology\nsheaves of $\\mathrm{res}K$ are torsion, so\n$\\Ex^{\\mathbf Z}_{\\square,\\mathrm{res}K}$ is an isomorphism by\n[thm-weil-pbc-bounded-below]. By part 1, $\\Ex^{\\Lambda}_{\\square,K}$ is an\nisomorphism in $D^+(Y'_{\\Et},\\Lambda)$.",
+    "uses": [
+     "thm-weil-pbc-bounded-below"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

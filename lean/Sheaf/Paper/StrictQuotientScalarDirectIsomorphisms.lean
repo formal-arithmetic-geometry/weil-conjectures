@@ -8,6 +8,7 @@ module
 public import Sheaf.Paper.StrictQuotientScalarBalancing
 public import Mathlib.CategoryTheory.Adjunction.Mates
 import all Sheaf.Paper.ConstantCompletionEquivalence
+import all Sheaf.Paper.ConstantCompletionInverseImage
 import all Sheaf.Paper.CompletedPullbackAdjunction
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 import Sheaf.CategoryTheory.SmallModuleDiagramsGrothendieck

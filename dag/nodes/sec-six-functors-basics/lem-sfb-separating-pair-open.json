@@ -1,0 +1,321 @@
+{
+ "id": "lem-sfb-separating-pair-open",
+ "kind": "statement",
+ "title": "Nonempty separating open for pairs of norm sections",
+ "statement": "Let $F$ be a field [def-weil-field]. Let $C$ be a smooth projective geometrically integral finite-type $F$-scheme of dimension one [def-sbc-smooth-morphisms, def-kun-projective, def-pc-geometrically-irreducible, def-pc-integral-scheme, def-weil-finite-type-morphism, def-kun-topological-krull-dimension]. Let $G$ be a finite group acting faithfully by $F$-automorphisms on $C$, meaning that $G\\to\\operatorname{Aut}_F(C)$ is injective. Let $L$ be an ample invertible $\\mathcal O_C$-module [def-sc-invertible-module, def-weil-pbc-ample-invertible-module]. Put $B=\\bigotimes_{g\\in G}g^*L$, and for a section $a$ of $L^{\\otimes n}$ put $\\mathcal N_G(a)=\\bigotimes_{g\\in G}g^*a$, a section of $B^{\\otimes n}$ [def-pc-module-pullback, def-pur-sheaf-tensor-product]. There is an integer $n_0\\geq1$ such that for every $n\\geq n_0$, writing $V_n=\\Gamma(C,L^{\\otimes n})$, there is a nonempty Zariski open $W_n\\subseteq V_n\\times V_n$. The finite-dimensional vector space $V_n\\times V_n$ is regarded as an affine space over $F$ after any choice of basis. For every extension field $E/F$ and every $(a,b)\\in W_n(E)$, the sections $\\mathcal N_G(a),\\mathcal N_G(b)$ generate $B_E^{\\otimes n}$, and the induced morphism $[\\mathcal N_G(a):\\mathcal N_G(b)]:C_E\\to\\mathbf P^1_E$ is finite, surjective, $G$-invariant and etale on a nonempty open of $C_E$ [def-weil-pbc-generating-sections, def-weil-pbc-morphism-to-projective-space-by-sections, def-weil-finite-integral-morphism, def-weil-surjective-morphism, def-weil-etale-morphism]. The symbols $C_E,L_E,B_E$ and $g_E$ denote scheme and module pullbacks along $\\operatorname{Spec}E\\to\\operatorname{Spec}F$ [def-pc-base-change, def-pc-module-pullback], and $\\mathcal N_G$ on these sections uses the base-changed action. Nonemptiness is asserted as an $F$-scheme; $W_n(F)$ need not be nonempty if $F$ is finite. No condition on $\\operatorname{char}F$ relative to $|G|$ is imposed.",
+ "source": {
+  "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+  "place": "§3.4(c) and its following nonempty-open argument, printed p.606, replaced by the norm-section parameter space on the original smooth curve. Supporting local sources: Stacks coherent.tex Tag 02O1, lemma-kill-by-twisting, for first-order interpolation at a free geometric orbit, and curves.tex Tag 0C1C, lemma-generically-etale, for the nonzero-differential criterion. Agent formulation replacing the quotient-dependent input of de Jong §3.4. Local PDF WANTED; publisher PDF read at https://www.numdam.org/item/10.5802/aif.1575.pdf."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-kun-projective",
+  "def-weil-finite-type-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-module-pullback",
+  "def-weil-pbc-generating-sections",
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "def-weil-finite-integral-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-pc-geometrically-irreducible",
+  "def-pc-integral-scheme",
+  "def-weil-surjective-morphism",
+  "def-weil-etale-morphism",
+  "def-pc-base-change",
+  "def-sfb-pencil-orbit-bundle-norm"
+ ],
+ "proof": [
+  {
+   "text": "Choose an algebraic closure $\\Omega/F$. The free-geometric-orbit lemma gives $D=C_\\Omega$, $A=L_\\Omega$ smooth proper integral with $A$ ample, and a rational point $x$ whose orbit $T=Gx$ has $|G|$ distinct points.",
+   "uses": [
+    "lem-sfb-faithful-curve-free-geometric-orbit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Assembly of the six statement-only arguments; original norm-pencil construction, returned steps 1–17. For invariance: constructions.tex Tag 01NE, lemma-projective-space."
+   }
+  },
+  {
+   "text": "Apply first-jet interpolation to this fixed $T$ and $x$. It gives one $n_0\\geq1$ for all $n\\geq n_0$, global generation of $A^{\\otimes n}$, and a section $a$ with one simple zero at $x$ and coefficient $1$ at the other orbit points. Fix such an $n$.",
+   "uses": [
+    "lem-sfb-ample-curve-first-jet-interpolation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Assembly of the six statement-only arguments; original norm-pencil construction, returned steps 1–17. For invariance: constructions.tex Tag 01NE, lemma-projective-space."
+   }
+  },
+  {
+   "text": "The geometric-witness lemma supplies $b$ whose norms $s,t$ generate $B_\\Omega^{\\otimes n}$ and satisfy $d(s/t)(x)\\ne0$ in the chart $t\\ne0$. This uses exactly one simple-zero factor, with no characteristic restriction.",
+   "uses": [
+    "lem-sfb-norm-pair-geometric-witness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Assembly of the six statement-only arguments; original norm-pencil construction, returned steps 1–17. For invariance: constructions.tex Tag 01NE, lemma-projective-space."
+   }
+  },
+  {
+   "text": "The universal-generation lemma gives finite-dimensional $V=\\Gamma(C,L^{\\otimes n})$, its scalar-extension identifications, polynomial universal norms on $P=V\\times V$, and an open $U\\subset P$ detecting generation over every extension field.",
+   "uses": [
+    "lem-sfb-universal-norm-generation-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Assembly of the six statement-only arguments; original norm-pencil construction, returned steps 1–17. For invariance: constructions.tex Tag 01NE, lemma-projective-space."
+   }
+  },
+  {
+   "text": "Apply the differential-polynomial lemma with $M=B^{\\otimes n}$ to those universal norms. It gives $\\Delta:P\\to\\mathbf A(Q)$ and the open $D_\\Delta$ detecting nonzero alternating differential after every extension. Set $W_n=U\\cap D_\\Delta$. The geometric pair above belongs to $U(\\Omega)$ and its differential is nonzero at $x$, so belongs to $D_\\Delta(\\Omega)$. Thus $W_n$ is nonempty as an $F$-scheme.",
+   "uses": [
+    "lem-sfb-norm-pencil-differential-polynomial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Assembly of the six statement-only arguments; original norm-pencil construction, returned steps 1–17. For invariance: constructions.tex Tag 01NE, lemma-projective-space."
+   }
+  },
+  {
+   "text": "For any $E/F$ and $(a,b)\\in W_n(E)$, its norms generate $M_E$ and have nonzero alternating differential. Apply the nonzero-pencil-differential lemma over $E$, since $C_E$ is smooth projective geometrically integral of dimension one, to obtain a finite surjective $h=[\\mathcal N_G(a):\\mathcal N_G(b)]$ etale on a nonempty open.",
+   "uses": [
+    "lem-sfb-faithful-curve-free-geometric-orbit",
+    "lem-sfb-nonzero-pencil-differential-finite-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Assembly of the six statement-only arguments; original norm-pencil construction, returned steps 1–17. For invariance: constructions.tex Tag 01NE, lemma-projective-space."
+   }
+  },
+  {
+   "text": "The universal-norm lemma also identifies both pulled-back norm sections with their original sections under the single tensor-factor permutation $g\\mapsto gk$, for each $k\\in G$. Compatibility with pullback and equality for equivalent generating pairs give $h\\circ k=h$. This holds over every $E$ and for every $n\\geq n_0$, with no assertion that $W_n(F)$ is nonempty.",
+   "uses": [
+    "lem-sfb-universal-norm-generation-open",
+    "lem-weil-pbc-projective-space-functor-of-points",
+    "def-weil-pbc-morphism-to-projective-space-by-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Assembly of the six statement-only arguments; original norm-pencil construction, returned steps 1–17. For invariance: constructions.tex Tag 01NE, lemma-projective-space."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-faithful-curve-free-geometric-orbit",
+  "lem-sfb-ample-curve-first-jet-interpolation",
+  "lem-sfb-norm-pair-geometric-witness",
+  "lem-sfb-universal-norm-generation-open",
+  "lem-sfb-norm-pencil-differential-polynomial",
+  "lem-sfb-nonzero-pencil-differential-finite-etale",
+  "lem-weil-pbc-projective-space-functor-of-points",
+  "def-weil-pbc-morphism-to-projective-space-by-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Agent norm-pencil proof from fixed-orbit first-jet interpolation (Tag 02O1), finite-dimensional cohomology (Tag 0B5T), and flat base change (Tag 02KH), with the smooth-curve differential criterion (curves.tex Tag 0C1C). This proves the quotient-free parameter-space lemma requested by the item."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Generic pairs of sections of a very ample line bundle on a projective integral curve define base point free pencils whose pullback by a finite separable cover is generically etale",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"WeierstrassCurve.Projective.baseChange_nonsingular\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"∀ {R : Type r} {S : Type s} {A : Type u} {B : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing A]\\n  [inst_3 : CommRing B] {W' : WeierstrassCurve.Projective R} [inst_4 : Algebra R S] [inst_5 : Algebra R A]\\n  [inst_6 : Algebra S A] [IsScalarTower R S A] [inst_8 : Algebra R B] [inst\", \"doc\": \"Let $ f : A \\\\to B $ be an injective ring homomorphism. For a projective Weierstrass curve $ W' $ over $ A $, a point $ P $ on $ W' $ is nonsingular if and only if the base-changed point $ f \\\\circ P $ \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.map_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} {S : Type s} {F : Type u} {K : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Field F]\\n  [inst_3 : Field K] {W' : WeierstrassCurve.Affine R} [inst_4 : DecidableEq F] [inst_5 : DecidableEq K]\\n  [inst_6 : Algebra R S] [inst_7 : Algebra R F] [inst_8 : Algebra S F] [inst_9 : \", \"doc\": \"Given an algebra homomorphism $ f : F → K $ between fields extending a commutative ring $ R $, and an affine Weierstrass curve $ W' $ over $ R $, the map function sends a nonsingular point $ (x, y) $ \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not assert this pencil existence or this nonempty open parameter space; the Proj constructions, generating-section definitions, etale stability and projective Kaehler modules do not specialize to it"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsVeryAmple\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not assert this pencil existence or this nonempty open parameter space; the Proj constructions, generating-section definitions, etale stability and projective Kaehler modules do not specialize to it"
+  },
+  {
+   "tool": "grep",
+   "query": "generically.*[Ee]tale|separating.*section|pencil|base[Pp]oint",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Topology/Algebra/Group/OpenMapping.lean\", \"line\": \"98\", \"text\": \"  /- We have already proved the theorem around the basepoint of the orbit, in\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Group/OpenMapping.lean\", \"line\": \"100\", \"text\": \"  point by changing basepoints. -/\"}\n  {\"file\": \"Mathlib/Topology/Homotopy/Lifting.lean\", \"line\": \"616\", \"text\": \"/-- Choosing an arbitrary basepoint `e ∈ f ⁻¹' {x}` induces a bijection `f ⁻¹' {x} ≃ G`, and the\"}\n  {\"file\": \"Mathlib/Topology/Homotopy/Lifting.lean\", \"line\": \"726\", \"text\": \"/-- Choosing an arbitrary basepoint `e ∈ f ⁻¹' {x}` induces a bijection `f ⁻¹' {x} ≃ G`, and the\"}\n  {\"file\": \"Mathlib/Topology/FiberBundle/Basic.lean\", \"line\": \"141\", \"text\": \"this situation: even if Lean cannot check that two basepoints are defeq, it will accept the fact\"}\n  {\"file\": \"Mathlib/Topology/Continuous.lean\", \"line\": \"397\", \"text\": \"Note that *all* arguments of `strans` are indexed over `X`, even the basepoint `x`, and the last\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Kuratowski.lean\", \"line\": \"90\", \"text\": \"    rcases h with ⟨basepoint⟩\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Kuratowski.lean\", \"line\": \"91\", \"text\": \"    have : Inhabited α := ⟨basepoint⟩\"}\n  {\"file\": \"Mathlib/Topology/VectorBundle/Riemannian.lean\", \"line\": \"61\", \"text\": \"  /-- There exists a bilinear form, depending continuously on the basepoint and defining the\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Gluing.lean\", \"line\": \"35\", \"text\": \"this gives a natural metric space structure on `X ⊕ Y`, where the basepoints\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Gluing.lean\", \"line\": \"37\", \"text\": \"basepoints.\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Gluing.lean\", \"line\": \"204\", \"text\": \"A particular case of the previous construction is when one uses basepoints in `X` and `Y` and one\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Gluing.lean\", \"line\": \"205\", \"text\": \"glues only along the basepoints, putting them at distance 1. We give a direct definition of\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Gluing.lean\", \"line\": \"216\", \"text\": \"Instead, we choose a construction that works for unbounded spaces, but requires basepoints,\"}\n  {\"file\": \"Mathlib/Topology/Order/T5.lean\", \"line\": \"48\", \"text\": \"      disjoint_left_ordSeparatingSet.mono_right ordConnectedSection_subset\"}\n  {\"file\": \"Mathlib/Topology/Order/T5.lean\", \"line\": \"70\", \"text\": \"  simpa only [dual_ordSeparatingSet, dual_ordConnectedSection] using!\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/VectorField/LieBracket.lean\", \"line\": \"42\", \"text\": \"the basepoint.\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/VectorField/Pullback.lean\", \"line\": \"55\", \"text\": \"the basepoint.\"}\n  {\"file\": \"Mathlib/Order/Interval/Set/OrdConnectedComponent.lean\", \"line\": \"187\", \"text\": \"  have hsub : [[a, b]] ⊆ (ordSeparatingSet s t).ordConnectedSectionᶜ := by\"}\n  {\"file\": \"Mathlib/Order/Interval/Set/OrdConnectedComponent.lean\", \"line\": \"191\", \"text\": \"      _ ⊆ (ordSeparatingSet s t).ordConnectedSectionᶜ := union_subset ha' hb'\"}\n  {\"file\": \"Mathlib/Geometry/Convex/ConvexSpace/AffineSpace.lean\", \"line\": \"103\", \"text\": \"arbitrary basepoint, which makes it very diamond-prone. -/\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/FundamentalGroupoid/FundamentalGroup.lean\", \"line\": \"18\", \"text\": \"Given a topological space `X` and a basepoint `x`, the fundamental group is the automorphism group\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/FundamentalGroupoid/FundamentalGroup.lean\", \"line\": \"33\", \"text\": \"/-- The fundamental group is the automorphism group (vertex group) of the basepoint\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/FundamentalGroupoid/FundamentalGroup.lean\", \"line\": \"55\", \"text\": \"/-- The fundamental group of a path connected space is independent of the choice of basepoint. -/\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/FundamentalGroupoid/SimplyConnected.lean\", \"line\": \"108\", \"text\": \"    at any basepoint is null-homotopic (i.e., homotopic to the constant loop). -/\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not assert this pencil existence or this nonempty open parameter space; the Proj constructions, generating-section definitions, etale stability and projective Kaehler modules do not specialize to it"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The open parameter space of linear projections from a smooth projective curve to the projective line that are finite and separable is nonempty",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ProjectiveSpectrum.isOpen_iff\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Topology\", \"type\": \"(U : Set (ProjectiveSpectrum 𝒜)) : IsOpen U ↔ ∃ s, Uᶜ = zeroLocus 𝒜 s\", \"doc\": \"A subset $ U $ of the projective spectrum $ \\\\text{Proj}(\\\\mathcal{A}) $ is open if and only if there exists a subset $ s $ of the graded ring $ \\\\mathcal{A} $ such that the complement of $ U $ coincides\"}\n  {\"name\": \"AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \": X.OpenCover\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a scheme $X$ equipped with a ring homomorphism $f: \\\\mathcal{A}_0 \\\\to \\\\mathcal{O}_X(\\\\top)$ from the degree-zero component of $\\\\mathcal{A}$ to the structure sheaf o\"}\n  {\"name\": \"AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a scheme $X$ equipped with a ring homomorphism $f: \\\\mathcal{A}_0 \\\\to \\\\mathcal{O}_X(\\\\top)$ from the degree-zero component of $\\\\mathcal{A}$ to the structure sheaf o\"}\n  {\"name\": \"ProjectiveSpectrum.basicOpen\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Topology\", \"type\": \"(r : A) : TopologicalSpace.Opens (ProjectiveSpectrum 𝒜)\", \"doc\": \"For a homogeneous element $ r $ in a graded ring $ A $, this defines the basic open set in the projective spectrum $ \\\\text{Proj}(A) $ consisting of all homogeneous prime ideals that do not contain $ r\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.openCoverDomain\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"(f : X ⤏ Y) : f.domain.toScheme.OpenCover\", \"doc\": \"For a rational map $f$ between schemes $X$ and $Y$, this constructs an open cover of the domain of $f$ using the domains of all partial maps equivalent to $f$. The cover consists of open immersions wh\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isOpenMap_over\", \"module\": \"Mathlib.AlgebraicGeometry.AffineSpace\", \"type\": \": IsOpenMap (𝔸(n; S) ↘ S)\", \"doc\": \"For any scheme $ S $ and natural number $ n $, the canonical morphism $ \\\\mathbb{A}^n_S \\\\to S $ from the affine $ n $-space over $ S $ to $ S $ is an open map, meaning the image of every open subset of\"}\n  {\"name\": \"ContinuousLinearMap.isOpen_injective\", \"module\": \"Mathlib.Analysis.Normed.Module.FiniteDimension\", \"type\": \"[FiniteDimensional 𝕜 E] : IsOpen {L : E →L[𝕜] F | Injective L}\", \"doc\": \"If $ E $ and $ F $ are normed vector spaces over a field $ \\\\mathbb{K} $, and $ E $ is finite-dimensional, then the set of injective continuous linear maps from $ E $ to $ F $ is an open subset of the \"}\n  {\"name\": \"AlgebraicGeometry.Proj.basicOpen\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \": (Proj 𝒜).Opens\", \"doc\": \"For a homogeneous element $ f $ in a graded ring $ \\\\mathcal{A} $, this defines the basic open set $ D_+(f) $ in the projective spectrum $ \\\\operatorname{Proj}(\\\\mathcal{A}) $, consisting of all homogene\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not assert this pencil existence or this nonempty open parameter space; the Proj constructions, generating-section definitions, etale stability and projective Kaehler modules do not specialize to it"
+  },
+  {
+   "tool": "grep",
+   "query": "differential.*[Pp]rojective|[Pp]rojective.*differential|[Ss]eparable.*[Cc]urve",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Smooth/Basic.lean\", \"line\": \"71\", \"text\": \"  projective_kaehlerDifferential : Module.Projective A Ω[A⁄R]\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Basic.lean\", \"line\": \"74\", \"text\": \"attribute [instance] FormallySmooth.projective_kaehlerDifferential\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Basic.lean\", \"line\": \"295\", \"text\": \"    Module.Projective.iff_split_of_projective (KaehlerDifferential.mapBaseChange R P A)\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not assert this pencil existence or this nonempty open parameter space; the Proj constructions, generating-section definitions, etale stability and projective Kaehler modules do not specialize to it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a faithful finite group action on a smooth projective geometrically integral curve, generic pairs of sections of sufficiently high powers of an ample line bundle give finite generically etale pencils after taking products of translates",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"Algebra.Etale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib/RingTheory/Etale/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A],\\n  Algebra.Etale K A ↔\\n    ∃ I, ∃ (_ : Finite I), ∃ Ai x x_1 x_2, ∀ (i : I), Module.Finite K (Ai i) ∧ Algebra.IsSeparable K (Ai i)\", \"doc\": \"An algebra $ A $ over a field $ K $ is étale if and only if there exists a finite index set $ I $ and a family of fields $ \\\\{A_i\\\\}_{i \\\\in I} $, each equipped with a $ K $-algebra structure, such that \"}\n  {\"name\": \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib/RingTheory/Etale/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A] [Algebra.EssFiniteType K A],\\n  Algebra.FormallyEtale K A ↔ ∃ I, ∃ (_ : Finite I), ∃ Ai x x_1 x_2, ∀ (i : I), Algebra.IsSeparable K (Ai i)\", \"doc\": \"A finitely generated algebra $ A $ over a field $ K $ is formally étale if and only if there exists a finite index set $ I $ and a family of field extensions $ \\\\{A_i\\\\}_{i \\\\in I} $, each separable over\"}\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Etale A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Etale (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"ax_grothendieck_of_locally_finite\", \"module\": \"Mathlib/FieldTheory/AxGrothendieck\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {R : Type u_3} [inst : Field K] [Finite K] [inst_2 : CommRing R] [Finite ι]\\n  [inst_4 : Algebra K R] [alg : Algebra.IsAlgebraic K R] (ps : ι → MvPolynomial ι R) (S : Set (ι → R)),\\n  Set.MapsTo (fun v i => (MvPolynomial.eval v) (ps i)) S S →\\n    Set.InjOn (fun v i => (\", \"doc\": \"Let $ K $ be a finite field, $ R $ a commutative ring algebraic over $ K $, and $ \\\\iota $ a finite type. For any family of multivariate polynomials $ p_i \\\\in R[\\\\iota] $ and a subset $ S \\\\subseteq \\\\iot\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.map_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} {S : Type s} {F : Type u} {K : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Field F]\\n  [inst_3 : Field K] {W' : WeierstrassCurve.Affine R} [inst_4 : DecidableEq F] [inst_5 : DecidableEq K]\\n  [inst_6 : Algebra R S] [inst_7 : Algebra R F] [inst_8 : Algebra S F] [inst_9 : \", \"doc\": \"Given an algebra homomorphism $ f : F → K $ between fields extending a commutative ring $ R $, and an affine Weierstrass curve $ W' $ over $ R $, the map function sends a nonsingular point $ (x, y) $ \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (P : Ideal R) [inst_1 : P.IsPrime] (p : Polynomial R)\\n  (f g : Polynomial P.ResidueField),\\n  p.Monic →\\n    f.Monic →\\n      g.Monic →\\n        Polynomial.map (algebraMap R P.ResidueField) p = f * g →\\n          IsCoprime f g →\\n            ∃ R' x x_1,\\n              ∃ (\", \"doc\": \"Given a ring homomorphism $ f : A → B $ between commutative rings and prime ideals $ I ⊆ A $, $ J ⊆ B $ such that $ I $ is the preimage of $ J $ under $ f $, there exists a unique $ R $-algebra homomo\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: read hits; zero-locus identities, Proj fractions, etale algebra structure and elliptic-curve formulas do not construct norm-section pencils or their nonempty separating open"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsEtale\", \"MulAction\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: read hits; zero-locus identities, Proj fractions, etale algebra structure and elliptic-curve formulas do not construct norm-section pencils or their nonempty separating open"
+  },
+  {
+   "tool": "grep",
+   "query": "separating.*norm|norm.*pencil|generically.*etale.*section",
+   "results": "[grep] OK 7 hit(s)\n  {\"file\": \"Mathlib/Analysis/LocallyConvex/WithSeminorms.lean\", \"line\": \"355\", \"text\": \"/-- A separating family of seminorms induces a T₁ topology. -/\"}\n  {\"file\": \"Mathlib/Analysis/LocallyConvex/WithSeminorms.lean\", \"line\": \"356\", \"text\": \"theorem WithSeminorms.T1_of_separating (hp : WithSeminorms p)\"}\n  {\"file\": \"Mathlib/Analysis/LocallyConvex/WithSeminorms.lean\", \"line\": \"367\", \"text\": \"theorem WithSeminorms.separating_of_T1 [T1Space E] (hp : WithSeminorms p) (x : E) (hx : x ≠ 0) :\"}\n  {\"file\": \"Mathlib/Analysis/LocallyConvex/WithSeminorms.lean\", \"line\": \"377\", \"text\": \"theorem WithSeminorms.separating_iff_T1 (hp : WithSeminorms p) :\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Module/PiTensorProduct/ProjectiveSeminorm.lean\", \"line\": \"50\", \"text\": \"* If all `Eᵢ` are separated and satisfy `SeparatingDual`, then the seminorm on\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Operator/CompleteCodomain.lean\", \"line\": \"17\", \"text\": \"separating dual, then for any normed space `F`, the completeness of the space of continuous\"}\n  {\"file\": \"Mathlib/Topology/Separation/GDelta.lean\", \"line\": \"73\", \"text\": \"theorem Disjoint.hasSeparatingCover_closed_gdelta_right {s t : Set X} [NormalSpace X]\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: read hits; zero-locus identities, Proj fractions, etale algebra structure and elliptic-curve formulas do not construct norm-section pencils or their nonempty separating open"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The nonempty open set of section pairs whose finite group norms define a base point free separable map from a smooth projective curve to the projective line",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsSeparatedMap\", \"module\": \"Mathlib.Topology.SeparatedMap\", \"type\": \"(f : X → Y) : Prop\", \"doc\": \"A function $ f: X \\\\to Y $ is a separated map if for any two distinct points $ x_1, x_2 \\\\in X $ with $ f(x_1) = f(x_2) $, there exist open sets $ s_1 $ and $ s_2 $ containing $ x_1 $ and $ x_2 $ respec\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.basicOpen_eq_bot_of_isNilpotent\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"(X : LocallyRingedSpace.{u}) (U : Opens X.carrier) (f : (X.presheaf.obj <| op U)) (hf : IsNilpotent f) :\\n  X.toRingedSpace.basicOpen f = ⊥\", \"doc\": \"If $ f $ is a nilpotent section of the structure sheaf over an open set $ U $ in a locally ringed space $ X $, then the basic open set $ X.\\text{basicOpen}(f) $, consisting of points where the germ of \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.basicOpen_zero\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"(U : X.Opens) : X.basicOpen (0 : Γ(X, U)) = ⊥\", \"doc\": \"For any open subset $U$ of a scheme $X$, the basic open set associated with the zero section of the structure sheaf $\\\\mathcal{O}_X$ over $U$ is the empty set, i.e., $X.\\\\text{basicOpen}(0) = \\\\emptyset$\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.basicOpen_eq_bot_iff_forall_evaluation_eq_zero\", \"module\": \"Mathlib.AlgebraicGeometry.ResidueField\", \"type\": \"(f : X.presheaf.obj (op U)) : X.basicOpen f = ⊥ ↔ ∀ (x : U), X.evaluation U x x.property f = 0\", \"doc\": \"For a scheme $X$, an open subset $U \\\\subseteq X$, and a section $f$ of the structure sheaf $\\\\mathcal{O}_X$ over $U$, the basic open set $\\\\text{basicOpen}(U, f)$ is empty if and only if the evaluation \"}\n  {\"name\": \"AlgebraicGeometry.basicOpen_eq_bot_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"{X : Scheme} [IsReduced X] {U : X.Opens} (s : Γ(X, U)) : X.basicOpen s = ⊥ ↔ s = 0\", \"doc\": \"For a reduced scheme $X$, an open subset $U$ of $X$, and a section $s$ of the structure sheaf $\\\\mathcal{O}_X$ over $U$, the basic open set $X.\\\\text{basicOpen}(s)$ is empty if and only if $s$ is the ze\"}\n  {\"name\": \"AlgebraicGeometry.sectionInBasicOpen\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf\", \"type\": \"(x : ProjectiveSpectrum.top 𝒜) :\\n  ∀ f : HomogeneousLocalization.NumDenSameDeg 𝒜 x.asHomogeneousIdeal.toIdeal.primeCompl,\\n    (Proj.structureSheaf 𝒜).1.obj (op (ProjectiveSpectrum.basicOpen 𝒜 f.den))\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and a point $x$ in its projective spectrum $\\\\text{Proj}(\\\\mathcal{A})$, this defines a section over the basic open set $D_+(f.\\\\text{den})$ (where $f$ is a homogeneous lo\"}\n  {\"name\": \"AlgebraicGeometry.Proj.basicOpen\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \": (Proj 𝒜).Opens\", \"doc\": \"For a homogeneous element $ f $ in a graded ring $ \\\\mathcal{A} $, this defines the basic open set $ D_+(f) $ in the projective spectrum $ \\\\operatorname{Proj}(\\\\mathcal{A}) $, consisting of all homogene\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isNilpotent_iff_basicOpen_eq_bot\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"{X : Scheme.{u}} [CompactSpace X] (f : Γ(X, ⊤)) : IsNilpotent f ↔ X.basicOpen f = ⊥\", \"doc\": \"For a compact scheme $X$ and a global section $f$ of its structure sheaf, $f$ is nilpotent if and only if the basic open set $X.\\text{basicOpen}(f)$ defined by $f$ is empty.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: read hits; zero-locus identities, Proj fractions, etale algebra structure and elliptic-curve formulas do not construct norm-section pencils or their nonempty separating open"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Products of translates of sections of a high degree line bundle give invariant rational functions with nonzero differential on a curve in arbitrary characteristic",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.preΨ'_ne_zero\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (W : WeierstrassCurve R) [Nontrivial R] {n : ℕ}, ↑n ≠ 0 → W.preΨ' n ≠ 0\", \"doc\": \"For a non-trivial ring $ R $ and a natural number $ n $ such that the canonical image of $ n $ in $ R $ is non-zero, the $ n $-th pre-normalized division polynomial $ \\\\Psi'_n $ associated with a Weier\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.YClass_ne_zero\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [Nontrivial R] (y : Polynomial R),\\n  WeierstrassCurve.Affine.CoordinateRing.YClass W' y ≠ 0\", \"doc\": \"For a non-trivial base ring $ R $, the element $ Y - y $ in the coordinate ring of an affine Weierstrass curve (defined as the quotient ring $ R[X,Y] $ modulo the Weierstrass polynomial ideal) is not \"}\n  {\"name\": \"WeierstrassCurve.Affine.FunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} → [CommRing R] → WeierstrassCurve.Affine R → Type r\", \"doc\": \"The function field of an affine Weierstrass curve over a base ring $ R $ is the fraction ring of its coordinate ring. The coordinate ring is defined as the quotient ring $ R[X, Y] $ modulo the ideal g\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x₁ x₂ y₁ y₂ : F}\\n  (h₁ : W.Nonsingular x₁ y₁) (h₂ : W.Nonsingular x₂ y₂) (hxy : ¬(x₁ = x₂ ∧ y₁ = W.negY x₂ y₂)),\\n  ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h₁) *\\n      ClassGroup.mk (Weier\", \"doc\": \"For an affine Weierstrass curve $ W $ over a field $ F $, if $ (x_1, y_1) $ and $ (x_2, y_2) $ are nonsingular points on $ W $ that are not inverses (i.e., $ x_1 \\neq x_2 $ or $ y_1 \\neq -y_2 - a_1 x_2 \"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.XClass_ne_zero\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [Nontrivial R] (x : R),\\n  WeierstrassCurve.Affine.CoordinateRing.XClass W' x ≠ 0\", \"doc\": \"For any element $x$ in a non-trivial ring $R$, the equivalence class of $X - x$ in the coordinate ring of an affine Weierstrass curve $W'$ over $R$ is non-zero. This follows from the construction of t\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{F : Type u} →\\n  [inst : Field F] →\\n    {W : WeierstrassCurve.Affine F} →\\n      {x y : F} → W.Nonsingular x y → (FractionalIdeal (nonZeroDivisors W.CoordinateRing) W.FunctionField)ˣ\", \"doc\": \"For a nonsingular point $(x, y)$ on an affine Weierstrass curve $W$ over a field $F$, this constructs the unit in the group of invertible fractional ideals of the coordinate ring $W.\\text{CoordinateRin\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.C_addPolynomial_slope\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x₁ x₂ y₁ y₂ : F},\\n  W.Equation x₁ y₁ →\\n    W.Equation x₂ y₂ →\\n      ¬(x₁ = x₂ ∧ y₁ = W.negY x₂ y₂) →\\n        (WeierstrassCurve.Affine.CoordinateRing.mk W) (Polynomial.C (W.addPolynomial x₁ y₁ (W.slope x₁ x₂ y₁ \", \"doc\": \"Let $ W $ be an affine Weierstrass curve over a field $ F $, and let $ (x_1, y_1), (x_2, y_2) $ be two points on $ W $ satisfying the curve equation. If these points are not inverses (i.e., $ x_1 = x_\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} {x y : F} (h : W.Nonsingular x y),\\n  ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' ⋯) *\\n      ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h) =\\n    1\", \"doc\": \"For a nonsingular point $(x, y)$ on an affine Weierstrass curve $W$ over a field $F$, the product of the class group elements corresponding to the invertible fractional ideals $XYIdeal'$ at $(x, y)$ a\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: read hits; zero-locus identities, Proj fractions, etale algebra structure and elliptic-curve formulas do not construct norm-section pencils or their nonempty separating open"
+  },
+  {
+   "tool": "grep",
+   "query": "norm.*section|separating.*pencil|generically.*[Ee]tale",
+   "results": "Actual msearch output: 1 hits; Mathlib/AlgebraicGeometry/EllipticCurve/NormalForms.lean. ",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits are general Proj/separatedness, etale-locus or unrelated elliptic-curve declarations; none constructs the nonempty norm-pair locus. The grep has only an elliptic normal-forms comment."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A generic pair of products of translates of sections on a smooth projective curve defines a separable morphism to projective space",
+   "results": "Actual msearch output: 8 hits; AlgebraicGeometry.Proj.isSeparated, AlgebraicGeometry.IsProper.toIsSeparated, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsSeparatedTopMorphismProperty, AlgebraicGeometry.IsSeparated.mk, AlgebraicGeometry.IsSeparated.of_isAffineHom, AlgebraicGeometry.IsSeparated, AlgebraicGeometry.IsSeparated.isSeparated_of_mono, AlgebraicGeometry.IsSeparated.instSndScheme. ",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits are general Proj/separatedness, etale-locus or unrelated elliptic-curve declarations; none constructs the nonempty norm-pair locus. The grep has only an elliptic normal-forms comment."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsAmple\"",
+   "results": "Actual msearch output: 0 hits; . ",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits are general Proj/separatedness, etale-locus or unrelated elliptic-curve declarations; none constructs the nonempty norm-pair locus. The grep has only an elliptic normal-forms comment."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth projective geometrically integral curve with a faithful finite group action, pairs of norm sections in sufficiently high powers of an ample line bundle have a nonempty open locus defining finite generically etale maps to the projective line",
+   "results": "Actual msearch output: 8 hits; Algebra.isOpen_etaleLocus, WeierstrassCurve.Affine.Point.map_some, WeierstrassCurve.exists_isIntegral, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, AlgebraicGeometry.AffineSpace.not_isIntegralHom, AlgebraicGeometry.IsEtale.of_comp, Algebra.isOpen_unramifiedLocus, Algebra.Etale.iff_exists_algEquiv_prod. ",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits are general Proj/separatedness, etale-locus or unrelated elliptic-curve declarations; none constructs the nonempty norm-pair locus. The grep has only an elliptic normal-forms comment."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-invariant-local-curve-pencils",
+  "date": "2026-10-22",
+  "group": "NK"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "§3.4(c) and its following nonempty-open argument, printed p.606, replaced by the norm-section parameter space on the original smooth curve. Supporting local sources: Stacks coherent.tex Tag 02O1, lemma-kill-by-twisting, for first-order interpolation at a free geometric orbit, and curves.tex Tag 0C1C, lemma-generically-etale, for the nonzero-differential criterion. This is the norm-section replacement inside the same local-pencil construction; no quotient existence is assumed.",
+   "via": [
+    "lem-sfb-invariant-local-curve-pencils",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-separating-pair-open",
+  "worker": "stage1",
+  "summary": "Repair of the 2026-10-22 re-split return: six statement-only arguments replace the long proof. Parent statement and Lean records are unchanged. All seventeen original steps are retained verbatim in the report and assigned to the six new nodes or to the parent assembly. No subnode restates the full existence theorem.",
+  "blueprint": "The ancestor command returns None for this created branch. This realizes the from.place norm-section replacement of de Jong §3.4(c) inside lem-sfb-invariant-local-curve-pencils: specifically the original-curve nonempty-open argument; no quotient existence or change of the unit route is used. New nodes partition the norm-section replacement into returned steps 1–3, 4–5, 6–8, 9–10 and 17, 11–12 (and polynomial zero-locus clause of 13), 14–16. The parent keeps the intersection/nonemptiness assembly of 13 and applies the norm permutation statement for 17."
+ },
+ "tool_uses": [
+  "lem-a1-nonzero-differential-generically-etale",
+  "lem-a1-uniformizer-differential-basis",
+  "lem-asd-projective-line-genus-zero",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sc-module-section-boundary-exact",
+  "lem-sc-smooth-connected-curve-local-rings",
+  "lem-trf-scheme-relative-ample-base-change",
+  "lem-weil-pbc-coherent-serre-vanishing",
+  "lem-weil-pbc-invertible-generating-sections-fibre"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-1091d7c2e",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-1091d7c2e (reviewer sub-agent of L); spot-checked: Re-split note (human decision of 2026-10-21, released 2026-10-22) is satisfied. The item statement and stmt_deps are byte-identical to base. The proof is now a 7-step assembly of 2016 characters, and each step applies one cited node. The six new unsplit, statement-only nodes are 1505–2291 characters each and take over all 17 old steps: faithful-curve-free-geometric-orbit (old steps 1–3: base change, faithfulness after ⊗Ω, free rational orbit via 0BY1 and the Nullstellensatz), ample-curve-first-jet-interpolation (4–5: one n0 from 02O1 for the fixed I_Z, surjection onto the jets), norm-pair-geometric-witness (6–8: finite S, avoidance b, Z(s)=S, generation, a single simple-zero factor giving d(α/β)(x)≠0 via 0C1E with no division by |G|), universal-norm-generation-open (9–10 and 17: 02KH, degree-|G| universal norms, open U from the closed proper image with the all-field and nonclosed-point criterion, and the g↦gk permutation giving G-invariance), norm-pencil-differential-polynomial (11–12 and the zero locus of 13: frame-independent δ, 00RV/02KH over any F-algebra, polynomial Δ and open D_Δ), and nonzero-pencil-differential-finite-etale (14–16: P^1 a smooth curve, dh≠0⇔δ≠0, r∉K, π_r=h_K, finiteness descended along 02LA, surjectivity by lifting). Nothing was summarized away, and none of the new nodes restates the item. I tested the statements on edge cases: G={1}; char dividing |G|; constant and Frobenius pencils (δ=0, excluded); and constant h, where κ(p)⊂Γ(C,O)=F forces dh=0. I also checked the frame change of δ. Hypotheses chain correctly through the item steps, and projectivity of C_E is an elementary base change. Every cited Stacks tag exists at the cited label. The stmt_deps match the bracket citations, every node has leanfinder/leansearch/loogle/grep searches, and nothing cites SGA or a dropped node. The duplicate regex scan found only near neighbours (ample-curve-two-section-pencil, a1-nonzero-differential-generically-etale, sc-rational-function-morphism), none a duplicate. Batch-5 flags on witness and universal-norm via def-sfb-pencil-orbit-bundle-norm → def-sc-tensor-pullback-power-comparison: accepted. That node is a general definition (the canonical left-adjoint comparison θ_j), not a step of the trace formula or Poincaré duality, and it is already a stmt_dep of the item on base, so the batch-5 closure does not change."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SeparatingPairOpen",
+  "declaration": "AlgebraicGeometry.exists_nonempty_separating_pair_open",
+  "declarations": [
+   "AlgebraicGeometry.normPencilTranslateBaseChangeIso",
+   "AlgebraicGeometry.normPencilCoordinateSection",
+   "AlgebraicGeometry.normPencilSections",
+   "AlgebraicGeometry.exists_nonempty_separating_pair_open"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SeparatingPairOpen.lean",
+  "statement": "theorem exists_nonempty_separating_pair_open {F : Type u} [Field F] (C : Scheme.{u}) [C.Over (Spec (.of F))] [Smooth (C ↘ Spec (.of F))] [IsHProjective (C ↘ Spec (.of F))] [LocallyOfFiniteType (C ↘ Spec (.of F))] [QuasiCompact (C ↘ Spec (.of F))] [GeometricallyIntegral (C ↘ Spec (.of F))] [IsIntegral C] (hdim : topologicalKrullDim C = 1) (G : Type v) [Group G] [Fintype G] (ρ : G →* Aut (Over.mk (C ↘ Spec (.of F)))) (hρ : Function.Injective ρ) (L : C.Modules) [L.IsInvertible] (hL : IsAmple C L) : ∃ n₀ : ℕ, 1 ≤ n₀ ∧ ∀ n : ℕ, n₀ ≤ n → FiniteDimensional F ((L.tensorPow n).H 0) ∧ ∀ (I : Type u) [Fintype I] (b : Module.Basis I F ((L.tensorPow n).H 0)), ∃ W : (𝔸(I × ULift.{u} (Fin 2); Spec (.of F))).Opens, (W : Set (𝔸(I × ULift.{u} (Fin 2); Spec (.of F)))).Nonempty ∧ ∀ (E : Type u) [Field E] [Algebra F E] (z : Spec (.of E) ⟶ 𝔸(I × ULift.{u} (Fin 2); Spec (.of F))), z ≫ 𝔸(I × ULift.{u} (Fin 2); Spec (.of F)) ↘ Spec (.of F) = Spec.map (CommRingCat.ofHom (algebraMap F E)) → Set.range z ⊆ W → ∃ hB : (((Scheme.Modules.tensorPullback (pullback.fst (C ↘ Spec (.of F)) (Spec.map (CommRingCat.ofHom (algebraMap F E))))).obj (pencilOrbitBundle (fun g ↦ (Over.forget _).mapIso (ρ g)) L)).tensorPow n).IsInvertible, ∃ hs : Epi ((SheafOfModules.freeHomEquiv _).symm (normPencilSections (C ↘ Spec (.of F)) ρ L n (fun i ↦ H.zeroLinearEquiv (L.tensorPow n) (b i)) z)), IsFinite (ProjectiveSpace.homOfGeneratingSections (ULift.{u} (Fin 2)) (pullback.snd (C ↘ Spec (.of F)) (Spec.map (CommRingCat.ofHom (algebraMap F E)))) _ (normPencilSections (C ↘ Spec (.of F)) ρ L n (fun i ↦ H.zeroLinearEquiv (L.tensorPow n) (b i)) z) hs) ∧ Surjective (ProjectiveSpace.homOfGeneratingSections (ULift.{u} (Fin 2)) (pullback.snd (C ↘ Spec (.of F)) (Spec.map (CommRingCat.ofHom (algebraMap F E)))) _ (normPencilSections (C ↘ Spec (.of F)) ρ L n (fun i ↦ H.zeroLinearEquiv (L.tensorPow n) (b i)) z) hs) ∧ (∀ g : G, ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap F E)))).map (ρ g).hom).left ≫ ProjectiveSpace.homOfGeneratingSections (ULift.{u} (Fin 2)) (pullback.snd (C ↘ Spec (.of F)) (Spec.map (CommRingCat.ofHom (algebraMap F E)))) _ (normPencilSections (C ↘ Spec (.of F)) ρ L n (fun i ↦ H.zeroLinearEquiv (L.tensorPow n) (b i)) z) hs = ProjectiveSpace.homOfGeneratingSections (ULift.{u} (Fin 2)) (pullback.snd (C ↘ Spec (.of F)) (Spec.map (CommRingCat.ofHom (algebraMap F E)))) _ (normPencilSections (C ↘ Spec (.of F)) ρ L n (fun i ↦ H.zeroLinearEquiv (L.tensorPow n) (b i)) z) hs) ∧ ∃ U : (pullback (C ↘ Spec (.of F)) (Spec.map (CommRingCat.ofHom (algebraMap F E)))).Opens, Nonempty U ∧ Etale (U.ι ≫ ProjectiveSpace.homOfGeneratingSections (ULift.{u} (Fin 2)) (pullback.snd (C ↘ Spec (.of F)) (Spec.map (CommRingCat.ofHom (algebraMap F E)))) _ (normPencilSections (C ↘ Spec (.of F)) ρ L n (fun i ↦ H.zeroLinearEquiv (L.tensorPow n) (b i)) z) hs)",
+  "branch": "sheaf-dag",
+  "by": "NF",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Definition ownership repair of returned head 073392621d9f: the orbit bundle and norm are cited through def-sfb-pencil-orbit-bundle-norm, which binds the already published plain definitions with existing:true. The theorem node lem-sfb-ample-curve-two-section-pencil is no longer a statement dependency. The reviewed Lean signature and all real-data base-change and coordinate helpers are unchanged; the parameter open and every extension-field conclusion are retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a86d8d99b",
+  "group": "NF",
+  "result": "pass",
+  "note": "Re-delivery of 073392621d9f (H2 RETURN). Lean byte-identical (sha 7a5fe505); delta = stmt_deps swap lem-sfb-ample-curve-two-section-pencil → new def-sfb-pencil-orbit-bundle-norm (existing:true on unchanged AmpleCurveTwoSectionPencil, 7 pencil* defs, theorem excluded) + lean.note. check_existing/check_new_node clean; statement verbatim without noncomputable; TeX matches bodies (enumeration, unit tail, unitor/pullback-power/tensorPowTensorObjIso comparison, 1⊗s sections, norm); body owners cited (module pullback, power comparison, sheaf tensor). Clause-by-clause reading of the item unchanged and correct; edge cases fine. No compile (no file changed). Advisory: double listing of the 7 defs with the theorem node; WeilConjectures base helpers have no DAG owner."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

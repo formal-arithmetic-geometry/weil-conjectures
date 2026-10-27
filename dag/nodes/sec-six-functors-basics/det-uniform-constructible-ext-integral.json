@@ -31,50 +31,35 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-sfb-lattice-supported-hom-reduction-tower] to the given $a,L_0,b,M_0$. Use its notation $R_Y,A_{n,Y},Q,N,\\overline N_n,N_n,F_n,B_n$ and the quotient transitions. It gives $B_n\\in D(\\operatorname{Ab})$, $H^q(B_n)\\cong\\operatorname{Hom}_{D(R_X)}(Q,N_n[q])$ and $\\Ext^q_{R_X}(Q,N)\\cong H^q(R\\varprojlim_nB_n)$ for every $q$.",
+   "text": "Put Q=i_*u_!L₀, N=kb_*vb_!M₀ and K_n=Res_n(kb_*vb_!(M₀/π^(n+1))). Apply the supported lattice reduction-tower theorem. Its first Roos triangle gives N → P → P → N[1], where P is the product of the K_n and the middle map is 1 minus the quotient transition shift. Use only this triangle and the canonical levelRestrictionIso; the sections tower is not needed.",
    "uses": [
     "lem-sfb-lattice-supported-hom-reduction-tower"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext.proof.md",
-    "place": "Integral targets, support-Hom formula and commuting derived global sections with the derived limit; Stacks Tag 0D6K, label lemma-RGamma-commutes-with-Rlim"
-   }
+   "elementary": false
   },
   {
-   "text": "For each $n\\ge1$, apply [lem-sfb-lattice-supported-hom-finite-comparison] with $\\overline K=\\overline N_n=b_!(M_0/\\pi_E^n)$. Step 1 and its three comparison isomorphisms identify $H^q(B_n)$ with $H^qR\\Gamma(S,(L_0^\\vee/\\pi_E^n)\\otimes_{A_{n,S}}u^*R\\underline\\Gamma_{Z,A_n}b_!(M_0/\\pi_E^n))$. Clause (2) of [det-uniform-constructible-ext-torsion] therefore gives $H^q(B_n)=0$ for $q>c$, uniformly in $n$, where $c=\\operatorname{cd}_\\ell(j)+\\operatorname{cd}_\\ell(S)+1$. The support functor in this application is in the finite coefficient category.",
+   "text": "For each n and integer r, apply the finite-comparison theorem at exponent n+1 to the finite supported quotient. Compose its three natural abelian-group isomorphisms and use the scalar-restriction shift comparison and levelRestrictionIso. This identifies Hom(Q,K_n[r]) with H^r of the torsion stratum complex. Clause (2) of the torsion bound makes this group zero whenever cd_ℓ(j)+cd_ℓ(S)+1 < r.toNat.",
    "uses": [
     "lem-sfb-lattice-supported-hom-finite-comparison",
     "det-uniform-constructible-ext-torsion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext.proof.md",
-    "place": "Integral targets, the assertion that the reductions have the torsion stratum bound; Torsion targets, last display"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-pc-derived-limit-milnor-sequence] to the tower $B_n$ in $D(\\operatorname{Ab})$ from Step 1. It gives\n$$0\\longrightarrow R^1\\varprojlim_nH^{q-1}(B_n)\\longrightarrow H^q(R\\varprojlim_nB_n)\\longrightarrow\\varprojlim_nH^q(B_n)\\longrightarrow0.$$\nFor $q>c+1$, both $q>c$ and $q-1>c$, so Step 2 makes each of the two towers in the end terms the zero tower. Their limit and first derived limit are zero (the zero object has the zero injective resolution), hence the middle group is zero by exactness. Step 1 identifies that group with $\\Ext^q_{\\mathcal O_E}(a_!L_0,b_!M_0)$. Since $c+1=\\operatorname{cd}_\\ell(j)+\\operatorname{cd}_\\ell(S)+2$, this is precisely the claimed bound. No surjectivity or Mittag-Leffler assumption on the cohomology towers is used. If a cohomological dimension is infinite the claimed range is empty, so only the finite-bound case needs this computation.",
-   "uses": [
-    "lem-pc-derived-limit-milnor-sequence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext.proof.md",
-    "place": "Integral targets, final Milnor argument; Stacks Tag 07KY, label lemma-break-long-exact-sequence"
-   }
+   "text": "Write d=cd_ℓ(j)+cd_ℓ(S). If d is infinite the given inequality is impossible. Otherwise regard d as a natural number; d+2<q.toNat implies d+1<(q-1).toNat and d+1<q.toNat. The preceding step kills Hom(Q,K_n[q-1]) and Hom(Q,K_n[q]) for every n. Shifts are equivalences and preserve products, so product extensionality kills Hom(Q,P[q-1]) and Hom(Q,P[q]). Shift the Roos triangle by q-1. Exactness of Hom(Q,-) says every map Q → N[q] annihilated in P[q] factors through P[q-1]. The latter Hom group is zero, so every map Q → N[q] is zero. This is the fiber-of-1-minus-shift argument for the one-degree derived-limit bound, without constructing the Milnor short exact sequence.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-sfb-lattice-supported-hom-reduction-tower",
   "lem-sfb-lattice-supported-hom-finite-comparison",
-  "det-uniform-constructible-ext-torsion",
-  "lem-pc-derived-limit-milnor-sequence"
+  "det-uniform-constructible-ext-torsion"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext.proof.md",
-  "place": "Lattices and Integral targets; the finite-coefficient comparison is expanded using the existing coefficient-change adjunction, and the final derived-sections and Milnor steps use Stacks 0D6K and 07KY."
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext.proof.md",
+  "place": "Lattices, Torsion targets and Integral targets. Apply Hom directly to the reduction Roos triangle already supplied by the supported-lattice tower lemma; the last paragraph of Integral targets identifies this fiber-of-1-minus-shift proof of the one-degree loss."
  },
  "mathlib_searches": [
   {
@@ -159,12 +144,7 @@
    }
   ]
  },
- "tool_uses": [
-  "sk-lem-integral-models",
-  "sk-lem-formal-closed-support-ii",
-  "lem-kun-site-rgamma-derived-limit",
-  "lem-pc-derived-limit-milnor-sequence"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -173,7 +153,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-ece7bba8b (reviewer sub-agent of L); spot-checked: Re-split checked step by step against the live 6-step base proof (the report's handoff text is byte-identical to it). No argument is dropped. The tower node carries old steps 1–3: target reduction, derived completeness (integral-models (2)–(4)), F≃Rlim F_n via formal-closed-support-ii, the support-Hom formula (2) with O_E, and RΓ commuting with Rlim (0D6K, sites-cohomology.tex:5126). The finite-comparison node carries old steps 4–5: scalar adjunction (coefficient-change), source reduction, the formal-closed-support (2) formula over the admissible A_n, and (L_0/π^n)^∨=L_0^∨/π^n. The parent is a 1763-character assembly: the torsion bound in its own A_n category (det-uniform-constructible-ext-torsion (2); ⊗ equals ⊗^L because the reduced dual is flat), then the D(Ab) Milnor sequence (07KY), giving q>c+1 = cd(j)+cd(S)+2, exactly the unchanged statement. The two nodes have comparable size (about 2.9k characters each), neither contains a bound or restates the item, and they are independent of each other. Both are true; tested on the point, on A^1 with Z={0}, on rank 0 / empty strata and on n=1. Quotient-transition compatibility holds because N is a torsion-free sheaf and b_! is exact. B1–B9 are fine. No duplicates: checked det-lem-int-ext-formula, det-formal-closed-support-ii-limits, lem-coef-integral-hom-reduction and det-proper-heart-bound-*. No cycle, no SGA, and the Milnor tool_use is accepted. Batch 5: both new citations of sk-lem-formal-closed-support are accepted. The path reaches only lem-trf-geometric-inverse-image-exact (generic exactness of geometric inverse image, not a step of the trace formula or of Poincaré duality), and the item's base proof already cited that node, so the batch-5 closure is unchanged. Notes: the item's stale top-level tool_uses field lists the old tools; the snapshot's dagsnap symlinks are dangling, so I read the other chapters from clones/live."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.UniformConstructibleExtIntegral",
   "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.uniformConstructibleExtIntegral",
@@ -191,5 +182,15 @@
   "group": "NX",
   "result": "pass",
   "note": "Snapshot vs live: only the new module and the item's added lean record; lean.statement verbatim. All hypotheses copy the landed torsion node's standing setting (same ℓ/E/k/schemes/immersions/hij/IsLisseCoefficientModule lattices, recorded lowerStar∘openImmersionLowerShriek for a_!, b_!), with no n and no extra assumptions; E,k universe u is inherited from torsion. Ext^q rendered as Subsingleton(single₀ Q ⟶ (single₀ N)⟦q⟧) in DerivedCategory(FormalSupportModules (integerRing ℓ E) X.left) = D(X_proet,O_E); hq with cutoff cd(j)+cd(S)+2 < q.toNat is exact (cutoff ≥2, ⊤ vacuous). Edge cases Z=X, Z=∅, empty schemes, rank 0, q at cutoff, infinite cd checked. No definitions, sorry only, docstrings with source/blueprint and all six proof steps, proof-dep imports match recorded modules, lines ≤100. nt_compile --json: exit 0, clean, 10.9 s. Minor non-blocking: derived Hom rather than Abelian.Ext (equivalent by Mathlib's definition); Second reading is the standard direct-delivery stub."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-47ea7",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261026T202836-L-3487526",
+  "kind": "proof",
+  "note": "independent cc review: delivered UniformConstructibleExtIntegral.lean (Roos-triangle Hom exactness proof) and node det-uniform-constructible-ext-integral against live library, cited dep statements (reduction tower, finite comparison, torsion bound), unit sk-lem-uniform-constructible-ext (realized empty), importer UniformConstructibleExtRational compiled with delivered item"
  }
 }

@@ -16,9 +16,78 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.md",
   "place": "Operation, root-line, twist and shift comparisons; finite-reduction proof"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For the pullback presentation use the specified native isomorphism; heterogeneous equality fixes it uniquely. The coefficient square is the existing naturality identity of constant inverse image, specialized to the lifted quotient ring map.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The coefficient-ring map gives a sectionwise additive, restriction-linear natural module map. Equality on every section proves uniqueness of the ordinary unit map.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply finiteCompactSupportScalarComparison to the actual quotient, chosen compactification and original input. The finite-Tor predicate supplies bounded constructibility, and finiteReduction_preserves_ctf supplies bounded constructibility of its actual reduction. The defining scalar-adjunction formula is the comparison in this node.",
+   "uses": [
+    "lem-finite-compact-support-scalar-comparison",
+    "def-pur-finite-reduction-root-charts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the published bounded-etale-origin counit Hom bijection through the intrinsic realization equivalences and the canonical support realization comparison. compositionInput_bounded supplies its boundedness hypotheses. Smooth exceptional preservation and finite reduction preservation put the required source and target in that domain. Apply surjectivity to inverse of the support comparison followed by the reduced counit. Injectivity and cancellation of that support isomorphism prove uniqueness.",
+   "uses": [
+    "def-weil-exceptional-inverse-image",
+    "thm-pur-composition-coherence",
+    "def-pur-finite-reduction-root-charts",
+    "def-pur-smooth-trace"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The coefficient prime is nonzero in the algebraically closed base, so choose a primitive ell^n-th root using HasEnoughRootsOfUnity.exists_primitiveRoot. IsPrimitiveRoot.pow gives the compatible primitive ell^m-th root, using n=(n-m)+m. Compose scalar extension of the original root chart, the canonical shift and pullback comparisons, and the inverse reduced root chart. Root-chart independence gives the normalization for every compatible pair; cancellation of any one reduced chart proves uniqueness.",
+   "uses": [
+    "lem-pur-finite-reduction-source-chart-independence",
+    "def-pur-finite-reduction-root-charts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The degree-zero free rank-one ring module is K-flat: tensoring any acyclic complex with it is the complex itself by the right unitor. The normalized universal derived scalar counit therefore computes its scalar extension. The ordinary scalar unit is multiplication, by scalarExtensionUnitIso and its pure-section formula. The normalized ordinary adjunction sends this isomorphism to the prescribed ring-section map. On complexes concentrated in degree zero, the defining derived-unit equation and the exact restriction single-object comparison identify its derived adjunct with the universal counit followed by localization of the ordinary multiplication isomorphism. This is invertible, and the coefficient realization models transport it to finiteReductionUnitComparison.",
+   "uses": [
+    "lem-sp-scalar-extension-binary-coherence",
+    "def-weil-pbc-bounded-constructible-tower",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write the two positive exponents as n+1 and m+1. Use the full inclusion of the specified invertible finite exceptional mate to form finiteReductionExceptionalFiniteModel. Its purity counit identity is lem-pur-finite-reduction-exceptional-model-counit. Uniqueness in existsUnique_finiteReductionExceptionalComparison identifies this isomorphism hom with the chosen exceptional comparison; rewrite by that equality and use the isomorphism instance.",
+   "uses": [
+    "lem-pur-finite-reduction-exceptional-model-counit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-finite-compact-support-scalar-comparison",
+  "def-weil-exceptional-inverse-image",
+  "thm-pur-composition-coherence",
+  "def-pur-finite-reduction-root-charts",
+  "def-pur-smooth-trace",
+  "lem-pur-finite-reduction-source-chart-independence",
+  "lem-sp-scalar-extension-binary-coherence",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-pc-kflat-complex",
+  "lem-pur-finite-reduction-exceptional-model-counit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M4",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+  "place": "Earlier six proved obligations retained; the exceptional comparison is reduced to normalization of the existing finite exceptional isomorphism by its counit and uniqueness."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -65,7 +134,18 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-thm-purity-transport",
  "lean": {
@@ -113,5 +193,15 @@
   "group": "ND",
   "result": "pass",
   "note": "Read item, source (master + main-20261015), all 6 delivered modules, the cited declarations (SmoothPurityMap, PurityCompositionCoherence, SmoothTrace, FixedFinitePositiveCoefficientTwist, ordinary_supported_kummer, affineLine_orientation) and both replaced upstream records (map_smoothPurityIso_hom_comp takes the constituent compatibilities as hypotheses; Etale.smoothPullbackExchange takes arbitrary supplied θ/φ on the étale site; neither states its node). Lean matches every clause: main square with node directions; affine orientation; trace for general K and the unit; composition = exact RHS of smoothPurityCompositionCoherence; base change (b_□ and exchange; v arbitrary). No added hypotheses, no e|n or flatness, universes as the deps, autoImplicit off. Every ∃! spec checked true: root-chart source/base-change comparisons (roots exist since k alg closed and ℓ≠p; independent of the root choice), counit-normalised exceptional maps via a genuine adjunction, unique Kummer class. Chart HEq factor types confirmed by test compiles; tests for the two pieces resting on upstream smoothPurityTensorPresentation timed out at 60 s (project's propositional-equality pattern). No hollow defs; theorems sorry. Records verbatim; stmt_deps additions allowed; report sections present; docstrings present. nt_compile of all 6 modules clean (6.5–24.3 s). Notes: finiteReductionPurityIsIso duplicates landed isIso_smoothPurityMap (not citable: dependency stmt_deps fixed in S2); new nodes use plain defs from PurityCompositionCoherence without citing thm-pur-composition-coherence (item already cites it); new orientation should be identified with affineLine_orientation (e|n only) in stage 3; proof-only imports; global Sheaf.monoidalCategory has precedent."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261025T180905-L-4048848",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

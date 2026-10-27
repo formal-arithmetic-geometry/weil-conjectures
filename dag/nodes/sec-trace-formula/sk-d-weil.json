@@ -141,7 +141,22 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-trace-formula",
  "unit": "sk-d-weil",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.WeilComplex"
+   ]
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.WeilComplex"
+   ]
+  }
+ },
  "split_report": {
   "date": "2026-10-17",
   "item": "sk-d-weil",
@@ -156,5 +171,15 @@
   "group": "Q50",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-759d77dca (reviewer sub-agent of L); spot-checked: Read the full current blueprint sk-d-weil (main-20261015, order 2638), the unit, the base and delivered item, and all 12 statement dependencies. Sources checked: Stacks 03SM at varieties.tex:7014 and 0D6D at sites-cohomology.tex:3658. Shape: one commit; the item and the unit's realized and realized_by fields are the only node and unit changes; no new nodes; proof=[], as a definition requires. Clause checks: (1) the Weil-complex data are kept, and the coefficient map need not be invertible. (2) The Weil datum matches the blueprint exactly. (3) The phi_m recursion type-checks. It uses c_{Phi_1,Phi_m} from lem-weil-pbc-proetale-derived-pullback-composition with Phi_{m+1}=Phi_m∘Phi_1. It is the same recursion as the same-unit node def-trf-frobenius-coefficient-morphism. (4) The graph has exceptional leg id and ordinary leg Phi_m, and u_m: Phi_m^*K -> id^!K points the right way for sk-d-corr. It is restricted to geometric X and ctf K, the domain where sk-d-six states the identity comparison. (5) The global operator is defined only when Phi_m is proper, as sk-d-operator requires. The source-error claim holds: the constant map A^1 -> A^1 is not universally closed, because the hyperbola ut=1 projects onto D(t). (6) The stalk composite type-checks. (7) The rational-point fixed s-point is correct for m>=1, by naturality of absolute Frobenius and a^{q^m}=a on F_{q^m}. Small cases tested: m=0, m=1, K=0, phi=0, X empty, X=s with X_0=Spec F_q. Duplicate candidates read: def-trf-frobenius-coefficient-morphism, def-trf-iterated-weil-map, def-trf-strict-weil-complex, def-trf-scheme-frobenius. None states the general item. No tool_uses, no SGA. One repairable fault, now fixed in fixes/dag/nodes/sec-trace-formula/sk-d-weil.json (statement only): the model identification X ≃ X_0×_{F_q}k was not required to be over s. Counterexample: X=s, X_0=Spec F_q, with identification Spec(sigma). Then the 'associated fixed s-point' would be Spec(sigma^{-1}), which is not an s-point. The fix now requires an isomorphism of s-schemes, which is what the blueprint and nt-assume-trace-formula mean. No target is weakened.; 1 file(s) fixed by the reviewer"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Throughout, $k_0=\\mathbf F_q$, $k=\\overline{\\mathbf F}_q$ and $s=\\operatorname{Spec}k$, and $A$\nis a finite commutative $\\ell$-primary ring with $\\ell\\ne\\operatorname{char}k$.\n\nLet $X_0/k_0$ be separated and of finite type, and put\n$X=X_0\\times_{k_0}k$. Denote by $\\Phi_X:X\\to X$ the base change\nof the $q$-power scheme Frobenius of $X_0$; it is a finite\n$k$-morphism and a universal homeomorphism. A *Frobenius\ncorrespondence* on $K$ is a morphism in $\\Dctf(X,A)$, not necessarily\ninvertible,\n\n$$\n \\psi:\\Phi_X^*K\\longrightarrow K,\n \\qquad K\\in\\Dctf(X,A).\n$$\n\nIts iterates are the morphisms in\n$\\Dctf(X,A)$\n\n$$\n \\psi_m=\\psi\\circ\\Phi_X^*\\psi\\circ\\cdots\\circ\n (\\Phi_X^{m-1})^*\\psi:(\\Phi_X^m)^*K\\longrightarrow K.\n$$\n\nLet $c_m=(\\operatorname{id}_X,\\Phi_X^m):X\\to X\\times_sX$ be the graph\nof $\\Phi_X^m$. Its first leg is the identity, so $\\psi_m$ is a\ncohomological correspondence on $(X,K)$ for $c_m$. Its operator on\ncompactly supported cohomology, defined after\n[sk-d-trace-class], is the endomorphism in $D^b(A)$\n\n$$\n T_{c_m}(\\psi_m)\n =R\\Gamma_c(X,\\psi_m)\\circ(\\Phi_X^m)^\\sharp,\n$$\n\nwhere $(\\Phi_X^m)^\\sharp$ is the compact-support pullback induced\nby the unit of $(\\Phi_X^m)^*\\dashv R(\\Phi_X^m)_*$.\nFor $x\\in X_0(\\mathbf F_{q^m})$ let $\\bar x:s\\to X$ be the\nassociated fixed point. Its local operator is the endomorphism\n$\\psi_{m,\\bar x}:K_{\\bar x}\\to K_{\\bar x}$ in $D^b(A)$.\n\n*Complement.* More generally, let $X$ be a scheme over $s$. A *Weil complex* on $X$\nconsists of an endomorphism $\\Phi_1:X\\to X$ over $s$ (so it fixes the scalar field $k$), a\ncomplex $K\\in D(X,A)$, and a *Frobenius coefficient morphism*\n$\\varphi:\\Phi_1^*K\\to K$, an arbitrary map without an invertibility\nrequirement. Its Frobenius is *the model Frobenius* if\n$X=X_0\\times_{\\mathbf F_q}k$ is the base change of a scheme $X_0$ over\n$\\mathbf F_q$ and $\\Phi_1$ is the base change of the $q$-power scheme Frobenius\nof $X_0$, that is, $\\Phi_1=\\Phi_X$. A *Weil datum* is a Weil complex with $X_0/\\mathbf F_q$\nseparated of finite type, the model Frobenius, $K\\in\\Dctf(X,A)$ and $\\varphi$ an\nisomorphism $\\Phi_1^*K\\simeq K$.\nPut $\\Phi_m=\\Phi_1^m$, and define the iterate $\\varphi_m:\\Phi_m^*K\\to K$\nby composing the pulled-back copies of $\\varphi$ using\npullback composition ($\\varphi_0$ is the identification $\\mathrm{id}^*K\\simeq K$); for the\nmodel Frobenius and $K\\in\\Dctf(X,A)$, $\\varphi$ is a Frobenius correspondence and $\\varphi_m$ is its $m$-th\niterate as above. The graph correspondence is\n$c_m=(\\operatorname{id}_X,\\Phi_m)$, with coefficient map $\\varphi_m$.\nWrite $F_{c,m}=T_{c_m}(\\varphi_m)$ for the\nglobal operator. For a point $\\bar x:s\\to X$ over $s$ fixed by $\\Phi_m$ (for the model\nFrobenius, the geometric point attached to some $x\\in X_0(\\mathbf F_{q^m})$), the stalk\nendomorphism is $F_{x,m}=(\\varphi_m)_{\\bar x}:\\bar x^*K\\simeq\\bar x^*\\Phi_m^*K\\to\\bar x^*K$.",
+  "proof": [],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; a worker who touches the node follows it"
  }
 }

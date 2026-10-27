@@ -5,387 +5,248 @@ Authors: SHEAF group Q145
 -/
 module
 
-public import Sheaf.SixFunctors.IntegralDualizing
-public import Sheaf.Paper.IntegralHomReduction
-public import Sheaf.Paper.SfIntegralConstructibleTriangulated
-public import Mathlib.CategoryTheory.Triangulated.Opposite.Pretriangulated
-public import Sheaf.Paper.DualityPairing
-public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed
-public import WeilConjectures.Compactification.NagataCompactification
-public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
-public import Sheaf.Paper.DeltaRestriction
-public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-public import Sheaf.AlgebraicGeometry.CompactifiableOverField
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
-public import Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocality
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
-public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
-public import Sheaf.CategoryTheory.RingedDerivedRestriction
-public import WeilConjectures.Algebra.Homology.HomotopyCategory.DerivabilityStructure
-public import WeilConjectures.Algebra.Homology.HomotopyCategory.OplaxMonoidal
-public import WeilConjectures.CategoryTheory.Abelian.Flat.PreservesFlat
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
-public import WeilConjectures.CategoryTheory.Sites.PullbackFlat
-public import WeilConjectures.FromJoel.CategoryTheory.Localization.DerivabilityStructure.DerivesTwo
-public import WeilConjectures.Mathlib.CategoryTheory.EssentialImage
-public import WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty
-public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-public import WeilConjectures.Mathlib.CategoryTheory.Whiskering
-public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
-public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
-public import Sheaf.Paper.DerivedCompleteOnSlices
-public import Sheaf.AlgebraicGeometry.FixedFiniteExceptionalAt
-import Sheaf.Paper.ProEtaleConstructibleOrigin
-import Sheaf.Paper.ComparisonTorAmplitude
-import Sheaf.AlgebraicGeometry.CoefficientProEtaleTorAmplitude
-import Sheaf.Paper.IntegralReductionTowerCanonical
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-
+public import Sheaf.SixFunctors.IntegralVerdierModels
+import Sheaf.Paper.IntegralHomComparisonIsIso
+import Sheaf.Paper.IntegralHomRoosTransport
 import Sheaf.Paper.IntegralResidueTor
-
-import Sheaf.AlgebraicGeometry.ProEtaleCohomologicalSupport
-import Sheaf.AlgebraicGeometry.ProEtaleTorAmplitude
-import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
-import Sheaf.Paper.FiniteFieldFiber
-import Sheaf.Paper.FiniteTorAmplitude
-import Sheaf.Paper.SfIntegralConstructible
-import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
-import Sheaf.Paper.SfDerivedComplete
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-
-import Sheaf.Paper.WeilVerdierPreservationStrata
-
-import Sheaf.Paper.FiniteStageVerdierBiduality
-
-import Sheaf.Algebra.Homology.RingedInternalHomSignedCalculus
-
-import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
-import Sheaf.Paper.CoefficientRingedTensorHomModel
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Paper.CoefficientHomRepresentativeEvaluation
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
-import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
-import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
-import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
-import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
-import Sheaf.Paper.FiniteTorAmplitudeSites
-import Sheaf.SixFunctors.FiniteDualitySiteComparison
-import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
+import Sheaf.Paper.DirectImagesConstructible
+import all Sheaf.Paper.SfDerivedCompleteLegacyComparison
+import Sheaf.SixFunctors.FiniteIntrinsicVerdierBounds
+import Sheaf.SixFunctors.FiniteIntrinsicVerdierBiduality
+import Sheaf.SixFunctors.IntegralVerdierSignedCalculus
+import Sheaf.SixFunctors.IntegralVerdierReductionPairing
+import Sheaf.Algebra.Homology.RingedInternalHomExactUniverses
+import Sheaf.Paper.ProEtaleBoundedConstructibleTriangulated
+import all Sheaf.Paper.SfIntegralConstructibleTriangulated
 
 /-! # Integral Verdier biduality
 
-Source: Weil blueprint, sec-six-functors/sk-prop-sf-biduality-general, order 2146
-(blueprint: thm-coef-integral-verdier).
-
-The dual is the ambient K-injective internal Hom over the completed ring sheaf.
-Positive level n+1 is indexed by n : ℕ. The dualizing input is the object with
-its specified reductions from prop-coef-integral-dualizing.
-
-## Main definitions and statement
-
-* `IntegralVerdier.dual`: ambient internal Hom into the integral dualizing object.
-* `IntegralVerdier.comparison`: the evaluation-defined reduction map.
-* `IntegralVerdier.delta`: specialization of the recorded evaluation transpose.
-* `integral_verdier_biduality`: all integral duality and compatibility clauses.
+Source: blueprint thm-coef-integral-verdier.
 -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
-set_option backward.isDefEq.respectTransparency true
-universe u
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+universe u v
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry AlgebraicGeometry.Scheme
-
 open CategoryTheory.Pretriangulated CategoryTheory.Pretriangulated.Opposite
 
-namespace WeilConjectures.IntegralVerdier
-
-/-- The signed symmetry on a normalized tensor presentation, fixed on all homogeneous
-local tensor generators. Its data are determined by this representative formula.
-Source: blueprint order 2146, proof step 5; Stacks 06YL and 08J9
-(blueprint: thm-coef-integral-verdier). -/
-structure SignedSymmetry (X : Scheme.{u})
-    (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
-    (a : IntegralHom.TensorPresentation.{u, u} X R) where
-  swap : ∀ K L : IntegralHom.Derived.{u, u} X R,
-    a.tensor.obj (K, L) ≅ a.tensor.obj (L, K)
-  representative : ∀ (P Q : CochainComplex (IntegralHom.Modules.{u, u} X R) ℤ)
-    (hP : IntegralHom.flat.{u, u} X R P) (hQ : IntegralHom.flat.{u, u} X R Q),
-    ∃ s : ((IntegralHom.totalTensor.{u, u} X R).obj P).obj Q ⟶
-        ((IntegralHom.totalTensor.{u, u} X R).obj Q).obj P,
-      (∀ (i j : ℤ) (U : X.ProEtᵒᵖ)
-        (x : (P.X i).val.obj U) (y : (Q.X j).val.obj U),
-        (s.f (i + j)).val.app U (IntegralHom.totalPair.{u, u} X R P Q i j U x y) =
-          (i * j).negOnePow •
-            (eqToHom (congrArg
-              (fun k : ℤ ↦ (((IntegralHom.totalTensor.{u, u} X R).obj Q).obj P).X k)
-                (add_comm j i))).val.app U
-                  (IntegralHom.totalPair.{u, u} X R Q P j i U y x)) ∧
-      a.representative.inv.app (⟨P, hP⟩, ⟨Q, hQ⟩) ≫ DerivedCategory.Q.map s ≫
-        a.representative.hom.app (⟨Q, hQ⟩, ⟨P, hP⟩) =
-          (swap (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q)).hom
-
-variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
-  [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})
-
-/-- The unchanged completed-coefficient derived category.
-Source: blueprint order 2146 (blueprint: thm-coef-integral-verdier). -/
-abbrev Ambient := DerivedCategory (scalarReductionSource.{u, u} l E X)
-
-/-- Ambient Verdier duality is RHom into the supplied integral dualizing object.
-Source: blueprint order 2146, first display (blueprint: thm-coef-integral-verdier). -/
-def dual (ω : Ambient l E X) : (Ambient l E X)ᵒᵖ ⥤ Ambient l E X :=
-  (Functor.curry.obj (IntegralHom.hom.{u, u} X
-    (completedIntegralCommRingSheafUnrestricted l E X))).flip.obj ω
-
-/-- The actual finite dual with the specified finite dualizing object.
-Source: blueprint order 2146, finite dual (blueprint: thm-coef-integral-verdier). -/
-def finiteDual (n : ℕ) (ω : DerivedCategory (scalarReductionTarget l E X n)) :
-    (DerivedCategory (scalarReductionTarget l E X n))ᵒᵖ ⥤
-      DerivedCategory (scalarReductionTarget l E X n) :=
-  (Functor.curry.obj (IntegralHom.hom.{u, u} X
-    (integralCoefficientCommRingSheaf l E X n))).flip.obj ω
-
-/-- The double-dual map is the transpose of evaluation with its factors interchanged.
-The symmetry is the signed representative symmetry above.
-Source: blueprint order 2146, proof step 5; Stacks 08J9
-(blueprint: thm-coef-integral-verdier). -/
-def delta {R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
-    (a : IntegralHom.TensorPresentation.{u, u} X R) (s : SignedSymmetry X R a)
-    (ω K : IntegralHom.Derived.{u, u} X R) :
-    K ⟶ (IntegralHom.hom.{u, u} X R).obj
-      (op ((IntegralHom.hom.{u, u} X R).obj (op K, ω)), ω) :=
-  restrictionDualDelta (Functor.curry.obj a.tensor)
-    (Functor.curry.obj (IntegralHom.hom.{u, u} X R)) a.adjunction s.swap ω K
-
-/-- Restriction of the actual dual functor, using the preservation clause as a proof.
-Source: blueprint order 2146, anti-equivalence (blueprint: thm-coef-integral-verdier). -/
-def restrictedDual (ω : Ambient l E X)
-    (h : ∀ K : sfIntegralConstructibleCategory l E X,
-      sfIntegralConstructible l E X ((dual l E X ω).obj (op K.obj))) :
-    (sfIntegralConstructibleCategory l E X)ᵒᵖ ⥤ sfIntegralConstructibleCategory l E X :=
-  ObjectProperty.lift (sfIntegralConstructible l E X)
-    ((sfIntegralConstructible l E X).ι.op ⋙ dual l E X ω) (fun K ↦ h K.unop)
-
-variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
-  [X.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))]
-  [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))]
-
-/-- The evaluation-defined comparison, followed by the specified dualizing reduction.
-Source: blueprint order 2146, first comparison; lem-coef-integral-hom-reduction
-(blueprint: thm-coef-integral-verdier). -/
-def comparison
-    {a : IntegralHom.TensorPresentation.{u, u} X
-      (completedIntegralCommRingSheaf l E X D hl)}
-    {n : ℕ} (m : IntegralHom.ReductionPresentation l E X D hl a n)
-    (ω : sfIntegralConstructibleCategory l E X)
-    (r : ∀ n : ℕ, (scalarReductionDerivedExtension l E X n).obj ω.obj ≅
-      integralDualizingFiniteTerm l E D X n) (K : Ambient l E X) :
-    (scalarReductionDerivedExtension l E X n).obj ((dual l E X ω.obj).obj (op K)) ⟶
-      (finiteDual l E X n (integralDualizingFiniteTerm l E D X n)).obj
-        (op ((scalarReductionDerivedExtension l E X n).obj K)) :=
-  IntegralHom.comparison.{u, u, u} l E X D hl m K ω.obj ≫
-    (IntegralHom.hom.{u, u} X (integralCoefficientCommRingSheaf l E X n)).map
-      (Prod.mkHom (𝟙 (op ((scalarReductionDerivedExtension l E X n).obj K)))
-        (r n).hom)
-
-/-- The finite dual terms in one ambient category, using actual restriction of scalars.
-Source: blueprint order 2146, second display (blueprint: thm-coef-integral-verdier). -/
-def finiteTerms (K : Ambient l E X) (n : ℕ) : Ambient l E X :=
-  (scalarReductionDerivedRestriction l E X n).obj
-    ((finiteDual l E X n (integralDualizingFiniteTerm l E D X n)).obj
-      (op ((scalarReductionDerivedExtension l E X n).obj K)))
-
-/-- Restrict the evaluation-defined comparison, using its asserted invertibility.
-Source: blueprint order 2146, reconstruction (blueprint: thm-coef-integral-verdier). -/
-def restrictedComparison
-    {a : IntegralHom.TensorPresentation.{u, u} X
-      (completedIntegralCommRingSheaf l E X D hl)}
-    (m : ∀ n : ℕ, IntegralHom.ReductionPresentation l E X D hl a n)
-    (ω : sfIntegralConstructibleCategory l E X)
-    (r : ∀ n : ℕ, (scalarReductionDerivedExtension l E X n).obj ω.obj ≅
-      integralDualizingFiniteTerm l E D X n)
-    (K : Ambient l E X)
-    (h : ∀ n : ℕ, IsIso (comparison l E X D hl (m n) ω r K)) (n : ℕ) :
-    (sfDerivedReductionRestricted l E X n).obj ((dual l E X ω.obj).obj (op K)) ≅
-      finiteTerms l E X D K n :=
-  (scalarReductionDerivedRestriction l E X n).mapIso
-    (@asIso _ _ _ _ (comparison l E X D hl (m n) ω r K) (h n))
-
-/-- The finite-dual transition in the completed-coefficient category. This is the
-comparison transport of the actual quotient transition, not a chosen tower on the
-same objects. The evaluation and transpose equations of the theorem identify it
-with the transition induced by finite evaluation and dualizing reduction.
-Source: blueprint order 2146, proof step 4 (blueprint: thm-coef-integral-verdier). -/
-def finiteTransition
-    {a : IntegralHom.TensorPresentation.{u, u} X
-      (completedIntegralCommRingSheaf l E X D hl)}
-    (m : ∀ n : ℕ, IntegralHom.ReductionPresentation l E X D hl a n)
-    (ω : sfIntegralConstructibleCategory l E X)
-    (r : ∀ n : ℕ, (scalarReductionDerivedExtension l E X n).obj ω.obj ≅
-      integralDualizingFiniteTerm l E D X n)
-    (K : Ambient l E X)
-    (h : ∀ n : ℕ, IsIso (comparison l E X D hl (m n) ω r K)) (n : ℕ) :
-    finiteTerms l E X D K (n + 1) ⟶ finiteTerms l E X D K n :=
-  (restrictedComparison l E X D hl m ω r K h (n + 1)).inv ≫
-    (sfDerivedReductionTransition l E X n).app ((dual l E X ω.obj).obj (op K)) ≫
-      (restrictedComparison l E X D hl m ω r K h n).hom
-
-/-- The specified reduction leg to the finite dual.
-Source: blueprint order 2146, proof step 4 (blueprint: thm-coef-integral-verdier). -/
-def finiteLeg
-    {a : IntegralHom.TensorPresentation.{u, u} X
-      (completedIntegralCommRingSheaf l E X D hl)}
-    (m : ∀ n : ℕ, IntegralHom.ReductionPresentation l E X D hl a n)
-    (ω : sfIntegralConstructibleCategory l E X)
-    (r : ∀ n : ℕ, (scalarReductionDerivedExtension l E X n).obj ω.obj ≅
-      integralDualizingFiniteTerm l E D X n)
-    (K : Ambient l E X)
-    (h : ∀ n : ℕ, IsIso (comparison l E X D hl (m n) ω r K)) (n : ℕ) :
-    (dual l E X ω.obj).obj (op K) ⟶ finiteTerms l E X D K n :=
-  (sfDerivedReductionUnit l E X n).app ((dual l E X ω.obj).obj (op K)) ≫
-    (restrictedComparison l E X D hl m ω r K h n).hom
-
-/-- Finite evaluation, adjointed back to completed coefficients. This explicitly
-uses reduction of K and the reduction/restriction counit, so it is finite evaluation
-with its input reduced, rather than an evaluation on an unrelated ambient object.
-Source: blueprint order 2146, proof step 4 (blueprint: thm-coef-integral-verdier). -/
-def finiteEvaluation
-    {a : IntegralHom.TensorPresentation.{u, u} X
-      (completedIntegralCommRingSheaf l E X D hl)}
-    (m : ∀ n : ℕ, IntegralHom.ReductionPresentation l E X D hl a n)
-    (K : Ambient l E X) (n : ℕ) :
-    a.tensor.obj (K, finiteTerms l E X D K n) ⟶
-      (scalarReductionDerivedRestriction l E X n).obj
-        (integralDualizingFiniteTerm l E D X n) :=
-  (derivedScalarExtensionRestrictionAdjunction.{u, u} l E X n).choose.homEquiv _ _
-    ((m n).mu.hom.app (K, finiteTerms l E X D K n) ≫
-      (m n).target.tensor.map
-        (Prod.mkHom (𝟙 ((scalarReductionDerivedExtension l E X n).obj K))
-          ((derivedScalarExtensionRestrictionAdjunction.{u, u} l E X n).choose.counit.app
-            ((finiteDual l E X n (integralDualizingFiniteTerm l E D X n)).obj
-              (op ((scalarReductionDerivedExtension l E X n).obj K))))) ≫
-      ((m n).target.adjunction ((scalarReductionDerivedExtension l E X n).obj K)).counit.app
-        (integralDualizingFiniteTerm l E D X n))
-
-/-- The specified finite dualizing transition transported through its reductions.
-Source: blueprint order 2146, proof step 4 (blueprint: thm-coef-integral-verdier). -/
-def dualizingTransition (ω : sfIntegralConstructibleCategory l E X)
-    (r : ∀ n : ℕ, (scalarReductionDerivedExtension l E X n).obj ω.obj ≅
-      integralDualizingFiniteTerm l E D X n) (n : ℕ) :
-    (scalarReductionDerivedRestriction l E X (n + 1)).obj
-        (integralDualizingFiniteTerm l E D X (n + 1)) ⟶
-      (scalarReductionDerivedRestriction l E X n).obj (integralDualizingFiniteTerm l E D X n) :=
-  ((scalarReductionDerivedRestriction l E X (n + 1)).mapIso (r (n + 1))).inv ≫
-    (sfDerivedReductionTransition l E X n).app ω.obj ≫
-      ((scalarReductionDerivedRestriction l E X n).mapIso (r n)).hom
-
-/-- Every clause of integral Verdier duality for the ambient internal Hom.
-Tensor presentations and signed symmetries are supplied as part of the conclusion;
-their representative normalizations fix evaluation and its transposes.
-Source: blueprint order 2146 (blueprint: thm-coef-integral-verdier). -/
-def Conclusion (ω : sfIntegralConstructibleCategory l E X)
-    (r : ∀ n : ℕ, (scalarReductionDerivedExtension l E X n).obj ω.obj ≅
-      integralDualizingFiniteTerm l E D X n) : Prop :=
-  ∃ (tensor : IntegralHom.TensorPresentation.{u, u} X
-    (completedIntegralCommRingSheaf l E X D hl)),
-  ∃ (symmetry : SignedSymmetry X (completedIntegralCommRingSheaf l E X D hl) tensor),
-  ∃ (reduction : ∀ n : ℕ, IntegralHom.ReductionPresentation l E X D hl tensor n),
-  ∃ (finiteSymmetry : ∀ n : ℕ,
-    SignedSymmetry X (integralCoefficientCommRingSheaf l E X n) (reduction n).target),
-  ∃ (_categories_equal : sfIntegralConstructible l E X = finiteTorConstructibleIntegral l E X),
-  ∃ (preservation : ∀ K : sfIntegralConstructibleCategory l E X,
-    sfIntegralConstructible l E X ((dual l E X ω.obj).obj (op K.obj))),
-  ∃ (_anti_equivalence : (restrictedDual l E X ω.obj preservation).IsEquivalence),
-  ∃ (_exact : ∃ s : (dual l E X ω.obj).CommShift ℤ,
-    ∀ T : CategoryTheory.Pretriangulated.Triangle (Ambient l E X)ᵒᵖ,
-      sfIntegralConstructible l E X T.obj₁.unop →
-      sfIntegralConstructible l E X T.obj₂.unop →
-      sfIntegralConstructible l E X T.obj₃.unop →
-      T ∈ distTriang (Ambient l E X)ᵒᵖ →
-      CategoryTheory.Pretriangulated.Triangle.mk
-        ((dual l E X ω.obj).map T.mor₁) ((dual l E X ω.obj).map T.mor₂)
-        ((dual l E X ω.obj).map T.mor₃ ≫
-          (s.commShiftIso (1 : ℤ)).hom.app T.obj₁) ∈
-        distTriang (Ambient l E X)),
-  ∃ (comparisons : ∀ (K : sfIntegralConstructibleCategory l E X) (n : ℕ),
-    IsIso (comparison l E X D hl (reduction n) ω r K.obj)),
-  ∃ (_evaluation : ∀ (K : sfIntegralConstructibleCategory l E X) (n : ℕ),
-    (reduction n).target.tensor.map
-        (Prod.mkHom (𝟙 ((scalarReductionDerivedExtension l E X n).obj K.obj))
-          (comparison l E X D hl (reduction n) ω r K.obj)) ≫
-      ((reduction n).target.adjunction
-        ((scalarReductionDerivedExtension l E X n).obj K.obj)).counit.app
-          (integralDualizingFiniteTerm l E D X n) =
-    (reduction n).mu.inv.app (K.obj, (dual l E X ω.obj).obj (op K.obj)) ≫
-      (scalarReductionDerivedExtension l E X n).map
-        ((tensor.adjunction K.obj).counit.app ω.obj) ≫
-          (r n).hom),
-  ∃ (_transposes : ∀ (K : sfIntegralConstructibleCategory l E X) (n : ℕ)
-    (V : Ambient l E X) (f : V ⟶ (dual l E X ω.obj).obj (op K.obj)),
-    ((reduction n).target.adjunction
-      ((scalarReductionDerivedExtension l E X n).obj K.obj)).homEquiv
-        ((scalarReductionDerivedExtension l E X n).obj V)
-        (integralDualizingFiniteTerm l E D X n)
-        ((reduction n).mu.inv.app (K.obj, V) ≫
-          (scalarReductionDerivedExtension l E X n).map
-            (((tensor.adjunction K.obj).homEquiv V ω.obj).symm f) ≫
-              (r n).hom) =
-      (scalarReductionDerivedExtension l E X n).map f ≫
-        comparison l E X D hl (reduction n) ω r K.obj),
-  ∃ (_transition_evaluation : ∀ (K : sfIntegralConstructibleCategory l E X) (n : ℕ),
-    tensor.tensor.map (Prod.mkHom (𝟙 K.obj)
-        (finiteTransition l E X D hl reduction ω r K.obj (comparisons K) n)) ≫
-      finiteEvaluation l E X D hl reduction K.obj n =
-    finiteEvaluation l E X D hl reduction K.obj (n + 1) ≫
-      dualizingTransition l E X D ω r n),
-  ∃ (_reconstruction : ∀ K : sfIntegralConstructibleCategory l E X,
-    ∃ hprod : HasProduct (fun n : ℕ ↦ finiteTerms l E X D K.obj n),
-      (fun [_productInst : HasProduct (fun n : ℕ ↦ finiteTerms l E X D K.obj n)] ↦
-        ∃ δ : (∏ᶜ fun n : ℕ ↦ finiteTerms l E X D K.obj n) ⟶
-            ((dual l E X ω.obj).obj (op K.obj))⟦(1 : ℤ)⟧,
-          IsDerivedLimitTriangle
-            (finiteTransition l E X D hl reduction ω r K.obj (comparisons K))
-            ((dual l E X ω.obj).obj (op K.obj))
-            (Pi.lift (finiteLeg l E X D hl reduction ω r K.obj (comparisons K))) δ)
-        (_productInst := hprod)),
-  ∃ (_tor_bound : ∀ (K : sfIntegralConstructibleCategory l E X) (d : ℕ),
-    topologicalKrullDim X ≤ (d : WithBot ℕ∞) → ∀ a b : ℤ, a ≤ b →
-    (∀ n : ℕ, HasProEtaleTorAmplitude X (Padic.coefficientExtensionRing l E (n + 1))
-      ((scalarReductionDerivedExtension l E X n).obj K.obj) a b) →
-    ∀ n : ℕ, HasProEtaleTorAmplitude X (Padic.coefficientExtensionRing l E (n + 1))
-      ((scalarReductionDerivedExtension l E X n).obj ((dual l E X ω.obj).obj (op K.obj)))
-        (-b - 2 * (d : ℤ)) (-a)),
-  ∃ (_reduction_delta : ∀ (K : sfIntegralConstructibleCategory l E X) (n : ℕ),
-    (scalarReductionDerivedExtension l E X n).map
-        (delta X tensor symmetry ω.obj K.obj) ≫
-      comparison l E X D hl (reduction n) ω r
-        ((dual l E X ω.obj).obj (op K.obj)) ≫
-      (IntegralHom.hom.{u, u} X (integralCoefficientCommRingSheaf l E X n)).map
-        (Prod.mkHom
-          ((@asIso _ _ _ _
-            (comparison l E X D hl (reduction n) ω r K.obj) (comparisons K n)).inv.op)
-          (𝟙 (integralDualizingFiniteTerm l E D X n))) =
-      delta X (reduction n).target (finiteSymmetry n) (integralDualizingFiniteTerm l E D X n)
-        ((scalarReductionDerivedExtension l E X n).obj K.obj)),
-  ∃ (_biduality : ∀ K : sfIntegralConstructibleCategory l E X,
-    IsIso (delta X tensor symmetry ω.obj K.obj)),
-  ∀ (K L : sfIntegralConstructibleCategory l E X) (f : K ⟶ L),
-    f.hom ≫ delta X tensor symmetry ω.obj L.obj =
-      delta X tensor symmetry ω.obj K.obj ≫
-        (dual l E X ω.obj).map ((dual l E X ω.obj).map f.hom.op).op
-
-end WeilConjectures.IntegralVerdier
+attribute [local irreducible] derivedInternalHomOfUniverses homComplexFunctor
+  WeilConjectures.IntegralHom.totalTensor WeilConjectures.IntegralHom.homModelMap
+  WeilConjectures.IntegralHom.projection WeilConjectures.IntegralHom.evaluate
 
 namespace WeilConjectures
+
+
+private theorem comparison_eq (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})
+    (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
+    [X.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))]
+    [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))]
+    {a : IntegralHom.TensorPresentation.{u, u} X
+      (completedIntegralCommRingSheaf l E X D hl)} {n : ℕ}
+    (m : IntegralHom.ReductionPresentation l E X D hl a n)
+    (ω : sfIntegralConstructibleCategory l E X)
+    (r : ∀ n : ℕ, (scalarReductionDerivedExtension l E X n).obj ω.obj ≅
+      integralDualizingFiniteTerm l E D X n) (K : IntegralVerdier.Ambient l E X) :
+    IntegralVerdier.comparison l E X D hl m ω r K =
+      IntegralHom.comparison l E X D hl m K ω.obj ≫
+        (IntegralHom.hom.{u, u} X (integralCoefficientCommRingSheaf l E X n)).map
+          (Prod.mkHom (𝟙 (op ((scalarReductionDerivedExtension l E X n).obj K)))
+            (r n).hom) := by
+  rfl
+
+private theorem dual_equivalence {C : Type u} [Category.{v} C]
+    (D : Cᵒᵖ ⥤ C) (e : 𝟭 C ≅ D.rightOp ⋙ D) : D.IsEquivalence := by
+  let : (D.rightOp ⋙ D).IsEquivalence := Functor.isEquivalence_of_iso e
+  let : D.rightOp.Faithful := Functor.Faithful.of_comp D.rightOp D
+  have : D.Faithful := by
+    constructor
+    intro X Y f g h
+    apply Quiver.Hom.unop_inj
+    apply D.rightOp.map_injective
+    exact congrArg Quiver.Hom.op h
+  have : D.rightOp.Full := Functor.Full.of_comp_faithful D.rightOp D
+  have : D.Full := by
+    constructor
+    intro X Y f
+    refine ⟨(D.rightOp.preimage f.op).op, ?_⟩
+    exact Quiver.Hom.op_inj (D.rightOp.map_preimage f.op)
+  have : D.EssSurj := by
+    constructor
+    intro X
+    exact ⟨D.rightOp.obj X, ⟨(e.app X).symm⟩⟩
+  exact { faithful := inferInstance, full := inferInstance, essSurj := inferInstance }
+
+private theorem adjunction_transpose_post
+    {C : Type u} {D : Type v} [Category C] [Category D]
+    {L : C ⥤ D} {R : D ⥤ C} (a : L ⊣ R)
+    {A : C} {B B' : D} (q : L.obj A ⟶ B) (r : B ⟶ B') :
+    L.map (a.homEquiv A B q ≫ R.map r) ≫ a.counit.app B' = q ≫ r := by
+  rw [← Adjunction.homEquiv_naturality_right]
+  exact (a.homEquiv A B').symm_apply_apply (q ≫ r)
+
+private theorem adjunction_baseChange_transpose
+    {C : Type u} {D : Type v} [Category C] [Category D]
+    {L R : C ⥤ C} {L' R' : D ⥤ D} (a : L ⊣ R) (b : L' ⊣ R')
+    (F : C ⥤ D) (mu : L ⋙ F ≅ F ⋙ L')
+    {V M : C} (f : L.obj V ⟶ M) :
+    F.map (a.homEquiv V M f) ≫
+        b.homEquiv (F.obj (R.obj M)) (F.obj M)
+          (mu.inv.app (R.obj M) ≫ F.map (a.counit.app M)) =
+      b.homEquiv (F.obj V) (F.obj M) (mu.inv.app V ≫ F.map f) := by
+  rw [← Adjunction.homEquiv_naturality_left]
+  congr 1
+  have hn := mu.inv.naturality (a.homEquiv V M f)
+  dsimp only [Functor.comp_map] at hn
+  rw [← Category.assoc, hn, Category.assoc, ← F.map_comp]
+  congr 2
+  exact (a.homEquiv V M).symm_apply_apply f
+
+private theorem adjunction_baseChange_transpose_post
+    {C : Type u} {D : Type v} [Category C] [Category D]
+    {L R : C ⥤ C} {L' R' : D ⥤ D} (a : L ⊣ R) (b : L' ⊣ R')
+    (F : C ⥤ D) (mu : L ⋙ F ≅ F ⋙ L')
+    {V M : C} {N : D} (f : V ⟶ R.obj M) (r : F.obj M ⟶ N) :
+    b.homEquiv (F.obj V) N
+        (mu.inv.app V ≫ F.map ((a.homEquiv V M).symm f) ≫ r) =
+      F.map f ≫ b.homEquiv (F.obj (R.obj M)) (F.obj M)
+        (mu.inv.app (R.obj M) ≫ F.map (a.counit.app M)) ≫ R'.map r := by
+  have h := adjunction_baseChange_transpose a b F mu ((a.homEquiv V M).symm f)
+  simp only [Equiv.apply_symm_apply] at h
+  calc
+    _ = b.homEquiv (F.obj V) (F.obj M)
+        (mu.inv.app V ≫ F.map ((a.homEquiv V M).symm f)) ≫ R'.map r := by
+      rw [← Category.assoc, Adjunction.homEquiv_naturality_right]
+    _ = _ := by rw [← h, Category.assoc]
+
+private theorem adjunction_tensor_baseChange_transpose_post
+    {C : Type u} {D : Type v} [Category C] [Category D]
+    (T : C × C ⥤ C) (T' : D × D ⥤ D) (F : C ⥤ D)
+    (mu : T ⋙ F ≅ F.prod F ⋙ T') (K : C)
+    {R : C ⥤ C} {R' : D ⥤ D}
+    (a : (Functor.curry.obj T).obj K ⊣ R)
+    (b : (Functor.curry.obj T').obj (F.obj K) ⊣ R')
+    {V M : C} {N : D} (f : V ⟶ R.obj M) (r : F.obj M ⟶ N) :
+    b.homEquiv (F.obj V) N
+        (mu.inv.app (K, V) ≫ F.map ((a.homEquiv V M).symm f) ≫ r) =
+      F.map f ≫ b.homEquiv (F.obj (R.obj M)) (F.obj M)
+        (mu.inv.app (K, R.obj M) ≫ F.map (a.counit.app M)) ≫ R'.map r := by
+  let μ : (Functor.curry.obj T).obj K ⋙ F ≅
+      F ⋙ (Functor.curry.obj T').obj (F.obj K) :=
+    NatIso.ofComponents (fun V ↦ mu.app (K, V)) (by
+      intro V W f
+      simpa using mu.hom.naturality (Prod.mkHom (𝟙 K) f))
+  simpa only [μ, NatIso.ofComponents_inv_app, Iso.app_inv] using
+    adjunction_baseChange_transpose_post a b F μ f r
+
+private theorem sfComplete_zero (l : ℕ) [Fact l.Prime]
+    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+    (X : Scheme.{u}) (K : IntegralVerdier.Ambient l E X)
+    (hK : IsSfDerivedComplete l E X K)
+    (hz : ∀ n : ℕ, IsZero ((scalarReductionDerivedExtension l E X n).obj K)) :
+    IsZero K := by
+  obtain ⟨hp, δ, hδ⟩ := hK
+  let := hp
+  have hzero (n : ℕ) : IsZero ((sfDerivedReductionRestricted l E X n).obj K) := by
+    let : PreservesFiniteLimits (scalarReductionRestriction l E X n) :=
+      (scalarReductionRestriction_exact l E X n).1
+    let : PreservesFiniteColimits (scalarReductionRestriction l E X n) :=
+      (scalarReductionRestriction_exact l E X n).2
+    let : (scalarReductionDerivedRestriction l E X n).Additive :=
+      inferInstanceAs (scalarReductionRestriction l E X n).mapDerivedCategory.Additive
+    exact (scalarReductionDerivedRestriction l E X n).map_isZero (hz n)
+  have hprod : IsZero (∏ᶜ fun n ↦ (sfDerivedReductionRestricted l E X n).obj K) := by
+    apply (IsZero.iff_id_eq_zero _).mpr
+    apply Pi.hom_ext
+    intro n
+    exact (hzero n).eq_of_tgt _ _
+  exact Triangle.isZero₁_of_isIso₂ _ hδ (hprod.isIso hprod _)
+
+set_option linter.style.haveILetI false in
+private theorem sfComplete_iso (l : ℕ) [Fact l.Prime]
+    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+    (X : Scheme.{u}) {K L : IntegralVerdier.Ambient l E X} (f : K ⟶ L)
+    (hK : IsSfDerivedComplete l E X K) (hL : IsSfDerivedComplete l E X L)
+    (hf : ∀ n : ℕ, IsIso ((scalarReductionDerivedExtension l E X n).map f)) :
+    IsIso f := by
+  let P : ObjectProperty (IntegralVerdier.Ambient l E X) := IsSfDerivedComplete l E X
+  have : P.IsTriangulated := sf_complete_tri l E X
+  have : P.IsClosedUnderIsomorphisms := sf_complete_iso l E X
+  obtain ⟨C, g, δ, hT⟩ := distinguished_cocone_triangle f
+  have hC : IsSfDerivedComplete l E X C :=
+    P.ext_of_isTriangulatedClosed₃ _ hT hK hL
+  apply (Triangle.isZero₃_iff_isIso₁ _ hT).mp
+  apply sfComplete_zero l E X C hC
+  intro n
+  obtain ⟨hshift, htri⟩ :=
+    (scalarReductionDerivedExistence.{u, u} l E X n).choose_spec.choose_spec.2.1
+  let F := scalarReductionDerivedExtension l E X n
+  letI : F.CommShift ℤ := hshift
+  have : F.IsTriangulated := htri
+  exact Triangle.isZero₃_of_isIso₁ _ (F.map_distinguished _ hT) (hf n)
+
+private theorem tensorTranspose_source (X : Scheme.{u})
+    {R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
+    (a : IntegralHom.TensorPresentation.{u, u} X R)
+    (he : ∀ (K K' W : IntegralHom.Derived.{u, u} X R) (f : K' ⟶ K),
+      a.tensor.map (Prod.mkHom (𝟙 K')
+        ((IntegralHom.hom.{u, u} X R).map (Prod.mkHom f.op (𝟙 W)))) ≫
+          (a.adjunction K').counit.app W =
+        a.tensor.map (Prod.mkHom f (𝟙 _)) ≫ (a.adjunction K).counit.app W)
+    (T P P' Q : IntegralHom.Derived.{u, u} X R) (f : P' ⟶ P)
+    (g : a.tensor.obj (P, T) ⟶ Q) :
+    (a.adjunction P').homEquiv T Q (a.tensor.map (Prod.mkHom f (𝟙 T)) ≫ g) =
+      (a.adjunction P).homEquiv T Q g ≫
+        (IntegralHom.hom.{u, u} X R).map (Prod.mkHom f.op (𝟙 Q)) := by
+  apply (a.adjunction P').homEquiv T Q |>.symm.injective
+  rw [Equiv.symm_apply_apply]
+  simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
+  change _ = a.tensor.map (Prod.mkHom (𝟙 P') ((a.adjunction P).homEquiv T Q g)) ≫
+    a.tensor.map (Prod.mkHom (𝟙 P')
+      ((IntegralHom.hom.{u, u} X R).map (Prod.mkHom f.op (𝟙 Q)))) ≫
+    (a.adjunction P').counit.app Q
+  rw [he, ← Category.assoc]
+  have hc : a.tensor.map (Prod.mkHom (𝟙 P') ((a.adjunction P).homEquiv T Q g)) ≫
+      a.tensor.map (Prod.mkHom f (𝟙 _)) =
+      a.tensor.map (Prod.mkHom f (𝟙 T)) ≫
+        a.tensor.map (Prod.mkHom (𝟙 P) ((a.adjunction P).homEquiv T Q g)) := by
+    simp only [← Functor.map_comp, prod_comp, Category.id_comp, Category.comp_id]
+  rw [hc, Category.assoc]
+  congr 1
+  exact ((a.adjunction P).homEquiv T Q |>.symm_apply_apply g).symm
+
+private theorem signed_delta_natural (X : Scheme.{u})
+    {R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
+    (a : IntegralHom.TensorPresentation.{u, u} X R)
+    (s : IntegralVerdier.SignedSymmetry X R a)
+    (hnat : ∀ (K L K' L' : IntegralHom.Derived.{u, u} X R)
+      (f : K ⟶ K') (g : L ⟶ L'),
+      a.tensor.map (Prod.mkHom f g) ≫ (s.swap K' L').hom =
+        (s.swap K L).hom ≫ a.tensor.map (Prod.mkHom g f))
+    (he : ∀ (K K' W : IntegralHom.Derived.{u, u} X R) (f : K' ⟶ K),
+      a.tensor.map (Prod.mkHom (𝟙 K')
+        ((IntegralHom.hom.{u, u} X R).map (Prod.mkHom f.op (𝟙 W)))) ≫
+          (a.adjunction K').counit.app W =
+        a.tensor.map (Prod.mkHom f (𝟙 _)) ≫ (a.adjunction K).counit.app W)
+    (ω K L : IntegralHom.Derived.{u, u} X R) (f : K ⟶ L) :
+    f ≫ IntegralVerdier.delta X a s ω L = IntegralVerdier.delta X a s ω K ≫
+      (IntegralHom.hom.{u, u} X R).map (Prod.mkHom
+        ((IntegralHom.hom.{u, u} X R).map (Prod.mkHom f.op (𝟙 ω))).op (𝟙 ω)) := by
+  unfold IntegralVerdier.delta restrictionDualDelta restrictionDualEvaluation
+  rw [← Adjunction.homEquiv_naturality_left, ← tensorTranspose_source X a he]
+  congr 1
+  change a.tensor.map (Prod.mkHom (𝟙 _) f) ≫
+      (s.swap _ _).hom ≫ (a.adjunction L).counit.app ω =
+    a.tensor.map (Prod.mkHom
+      ((IntegralHom.hom.{u, u} X R).map (Prod.mkHom f.op (𝟙 ω))) (𝟙 K)) ≫
+      (s.swap _ _).hom ≫ (a.adjunction K).counit.app ω
+  rw [← Category.assoc, hnat, Category.assoc, ← he L K ω f]
+  symm
+  rw [← Category.assoc, hnat, Category.assoc]
+  rfl
 
 /-- Integral Verdier biduality for the dualizing object with its reductions
 supplied by prop-coef-integral-dualizing. The finite terms and their
@@ -449,6 +310,175 @@ theorem integral_verdier_biduality
     (r : ∀ n : ℕ, (scalarReductionDerivedExtension l E X n).obj ω.obj ≅
       integralDualizingFiniteTerm l E D X n) :
     IntegralVerdier.Conclusion l E X D hl ω r := by
-  sorry
+  classical
+  let (x : X) : Invertible (l : X.residueField x) :=
+    (show IsUnit (l : X.residueField x) by
+      simpa using (finiteFieldDatumPrimeUnit D l hl).map
+        ((X ↘ Spec (.of D.k)).residueFieldAlgebraMap x)).invertible
+  have categories := (integral_residue_tor D l hl E X).2
+  obtain ⟨tensor, signed, reduction, finiteSigned, signed_swap_natural,
+    evaluation_natural, finiteSigned_swap_natural, finite_evaluation_natural⟩ :=
+    IntegralVerdier.signedCalculus D l hl E X
+  have complete := IntegralHom.hom_roosTransport l E X D hl tensor
+  have reduction_iso (n : ℕ) (K L : IntegralVerdier.Ambient l E X) :=
+    IntegralHom.comparison_isIso l E X D hl tensor n (reduction n) K L
+  unfold IntegralVerdier.Conclusion
+  have dual_complete (K : IntegralVerdier.Ambient l E X) :
+      IsSfDerivedComplete l E X ((IntegralVerdier.dual l E X ω.obj).obj (op K)) :=
+    (sfDerivedComplete_iff_legacy l E X D hl _).mpr
+      (complete K ω.obj ((sfDerivedComplete_iff_legacy l E X D hl _).mp ω.property.1))
+  have comparison_iso (K : IntegralVerdier.Ambient l E X) (n : ℕ) :
+      IsIso (IntegralVerdier.comparison l E X D hl (reduction n) ω r K) := by
+    have : IsIso (IntegralHom.comparison l E X D hl (reduction n) K ω.obj) :=
+      reduction_iso n K ω.obj
+    rw [comparison_eq]
+    have : IsIso (Prod.mkHom
+        (𝟙 (op ((scalarReductionDerivedExtension l E X n).obj K))) (r n).hom) :=
+      (isIso_prod_iff _ _).mpr ⟨inferInstance, inferInstance⟩
+    infer_instance
+  have preserves (K : sfIntegralConstructibleCategory l E X) :
+      sfIntegralConstructible l E X ((IntegralVerdier.dual l E X ω.obj).obj (op K.obj)) := by
+    have torK : finiteTorConstructibleIntegral l E X K.obj := categories ▸ K.property
+    obtain ⟨a, b, hab, htor⟩ := torK.2
+    obtain ⟨d, hd⟩ := exists_topologicalKrullDim_le (X ↘ Spec (.of D.k))
+    refine ⟨dual_complete K.obj, -b - 2 * (d : ℤ), -a, by omega, fun n ↦ ?_⟩
+    have hf := IntegralVerdier.finiteIntrinsicVerdier_bounds D l hl E X n _
+      (K.property.2.choose_spec.choose_spec.2 n).1 d hd a b (htor n)
+    let e := @asIso _ _ _ _
+      (IntegralVerdier.comparison l E X D hl (reduction n) ω r K.obj)
+      (comparison_iso K.obj n)
+    let : Finite (Padic.coefficientExtensionRing l E (n + 1)) :=
+      Padic.finite_coefficientExtensionRing l E (n + 1) (by omega)
+    have : ObjectProperty.IsClosedUnderIsomorphisms
+        (intrinsicFiniteTorsionConstructible l E (n + 1) (by omega) X) :=
+      (proEtale_bounded_constructible_isTriangulated X
+        (Padic.coefficientExtensionRing l E (n + 1))).1
+    refine ⟨ObjectProperty.prop_of_iso _ e.symm hf.1, ?_⟩
+    intro i hi
+    apply hf.2.2
+    intro hz
+    exact hi (((DerivedCategory.homologyFunctor _ i).mapIso e).isZero_iff.mpr hz)
+  have signed_natural := signed_delta_natural X tensor signed
+    signed_swap_natural evaluation_natural
+  have pairing := IntegralVerdier.reductionPairing D l hl E X tensor signed
+    signed_swap_natural reduction finiteSigned finiteSigned_swap_natural evaluation_natural
+    finite_evaluation_natural ω r comparison_iso
+  have delta_iso (K : sfIntegralConstructibleCategory l E X) :
+      IsIso (IntegralVerdier.delta X tensor signed ω.obj K.obj) := by
+    apply sfComplete_iso l E X _ K.property.1
+      (dual_complete ((IntegralVerdier.dual l E X ω.obj).obj (op K.obj)))
+    intro n
+    have torK : finiteTorConstructibleIntegral l E X K.obj := categories ▸ K.property
+    obtain ⟨a, b, hab, htor⟩ := torK.2
+    have := IntegralVerdier.finiteIntrinsicVerdier_biduality D l hl E X n
+      (reduction n).target (finiteSigned n) (finiteSigned_swap_natural n)
+      (finite_evaluation_natural n) _
+      (K.property.2.choose_spec.choose_spec.2 n).1 a b (htor n)
+    have hc : IsIso (IntegralVerdier.comparison l E X D hl (reduction n) ω r
+        ((IntegralVerdier.dual l E X ω.obj).obj (op K.obj))) := comparison_iso _ n
+    have hcK := comparison_iso K.obj n
+    have hi : IsIso (Prod.mkHom
+        (@asIso _ _ _ _
+          (IntegralVerdier.comparison l E X D hl (reduction n) ω r K.obj) hcK).inv.op
+        (𝟙 (integralDualizingFiniteTerm l E D X n))) :=
+      (isIso_prod_iff _ _).mpr ⟨inferInstance, inferInstance⟩
+    have hm := (IntegralHom.hom.{u, u} X
+      (integralCoefficientCommRingSheaf l E X n)).map_isIso
+        (Prod.mkHom (@asIso _ _ _ _
+          (IntegralVerdier.comparison l E X D hl (reduction n) ω r K.obj) hcK).inv.op
+          (𝟙 (integralDualizingFiniteTerm l E D X n)))
+    have hcomp : IsIso ((scalarReductionDerivedExtension l E X n).map
+        (IntegralVerdier.delta X tensor signed ω.obj K.obj) ≫
+        IntegralVerdier.comparison l E X D hl (reduction n) ω r
+          ((IntegralVerdier.dual l E X ω.obj).obj (op K.obj)) ≫
+        (IntegralHom.hom.{u, u} X (integralCoefficientCommRingSheaf l E X n)).map
+          (Prod.mkHom (@asIso _ _ _ _
+            (IntegralVerdier.comparison l E X D hl (reduction n) ω r K.obj) hcK).inv.op
+            (𝟙 (integralDualizingFiniteTerm l E D X n)))) := (pairing.2 K.obj n) ▸ this
+    exact IsIso.of_isIso_comp_right _
+      (IntegralVerdier.comparison l E X D hl (reduction n) ω r
+        ((IntegralVerdier.dual l E X ω.obj).obj (op K.obj)) ≫
+        (IntegralHom.hom.{u, u} X (integralCoefficientCommRingSheaf l E X n)).map
+          (Prod.mkHom (@asIso _ _ _ _
+            (IntegralVerdier.comparison l E X D hl (reduction n) ω r K.obj) hcK).inv.op
+            (𝟙 (integralDualizingFiniteTerm l E D X n))))
+  refine ⟨tensor, signed, reduction, finiteSigned, categories, preserves, ?_, ?_,
+    (fun K n ↦ comparison_iso K.obj n), ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  · let Dv := IntegralVerdier.restrictedDual l E X ω.obj preserves
+    have hδ (K : sfIntegralConstructibleCategory l E X) :
+        IsIso (ObjectProperty.homMk
+          (IntegralVerdier.delta X tensor signed ω.obj K.obj) :
+          K ⟶ (Dv.rightOp ⋙ Dv).obj K) := by
+      apply (ObjectProperty.isIso_hom_iff _).mp
+      exact delta_iso K
+    let e : 𝟭 (sfIntegralConstructibleCategory l E X) ≅ Dv.rightOp ⋙ Dv :=
+      NatIso.ofComponents (fun K ↦ @asIso _ _ _ _ (ObjectProperty.homMk
+        (IntegralVerdier.delta X tensor signed ω.obj K.obj)) (hδ K)) (by
+          intro K L f
+          apply ObjectProperty.hom_ext
+          exact signed_natural ω.obj K.obj L.obj f.hom)
+    exact dual_equivalence Dv e
+  · obtain ⟨s, hs⟩ :=
+      (@CategoryTheory.RingedHomUniverses.ringedInternalHom_exact.{u + 1, u, u, u + 2}
+        X.ProEt inferInstance (ProEt.topology X) inferInstance inferInstance
+        (completedIntegralCommRingSheaf l E X D hl) (HasDerivedCategory.standard _)).1 ω.obj
+    let : (IntegralVerdier.dual l E X ω.obj).CommShift ℤ := s
+    have : (IntegralVerdier.dual l E X ω.obj).IsTriangulated := hs
+    refine ⟨s, ?_⟩
+    intro T _ _ _ hT
+    exact (IntegralVerdier.dual l E X ω.obj).map_distinguished T hT
+  · intro K n
+    simpa only [IntegralVerdier.comparison, IntegralVerdier.dual,
+      Functor.flip_obj_obj, Functor.curry_obj_obj_obj, Functor.curry_obj_obj_map,
+      Functor.id_obj, Category.assoc] using
+      adjunction_transpose_post
+        (A := (scalarReductionDerivedExtension l E X n).obj
+          ((IntegralVerdier.dual l E X ω.obj).obj (op K.obj)))
+        ((reduction n).target.adjunction
+          ((scalarReductionDerivedExtension l E X n).obj K.obj))
+        ((reduction n).mu.inv.app (K.obj, (IntegralVerdier.dual l E X ω.obj).obj (op K.obj)) ≫
+          (scalarReductionDerivedExtension l E X n).map
+            ((tensor.adjunction K.obj).counit.app ω.obj))
+        (r n).hom
+  · intro K n V f
+    with_unfolding_all
+      simpa only [completedIntegralCommRingSheaf,
+        IntegralVerdier.comparison, IntegralVerdier.dual,
+        Functor.flip_obj_obj, Functor.curry_obj_obj_obj, Functor.curry_obj_obj_map,
+        Functor.id_obj] using
+        adjunction_tensor_baseChange_transpose_post tensor.tensor (reduction n).target.tensor
+          (scalarReductionDerivedExtension l E X n) (reduction n).mu K.obj
+          (tensor.adjunction K.obj)
+          ((reduction n).target.adjunction
+            ((scalarReductionDerivedExtension l E X n).obj K.obj)) f (r n).hom
+  · exact fun K n ↦ pairing.1 K.obj n
+  · intro K
+    let W := (IntegralVerdier.dual l E X ω.obj).obj (op K.obj)
+    let e := IntegralVerdier.restrictedComparison l E X D hl reduction ω r K.obj
+      (comparison_iso K.obj)
+    apply roos_transport
+      (fun n ↦ (sfDerivedReductionTransition l E X n).app W)
+      (IntegralVerdier.finiteTransition l E X D hl reduction ω r K.obj
+        (comparison_iso K.obj))
+      (Iso.refl W) e
+      (fun n ↦ (sfDerivedReductionUnit l E X n).app W)
+      (IntegralVerdier.finiteLeg l E X D hl reduction ω r K.obj (comparison_iso K.obj))
+    · intro n
+      simp [IntegralVerdier.finiteTransition, e, W]
+    · intro n
+      simp [IntegralVerdier.finiteLeg, e, W]
+    · exact dual_complete K.obj
+  · intro K d hd a b hab htor n
+    have hf := IntegralVerdier.finiteIntrinsicVerdier_bounds D l hl E X n _
+      (K.property.2.choose_spec.choose_spec.2 n).1 d hd a b (htor n)
+    let e := @asIso _ _ _ _
+      (IntegralVerdier.comparison l E X D hl (reduction n) ω r K.obj)
+      (comparison_iso K.obj n)
+    refine ⟨hf.2.1.1, ?_⟩
+    intro L P hL f hf' hP M i hi
+    exact hf.2.1.2 L P (hL.map (fun eL ↦ eL ≪≫ e)) f hf' hP M i hi
+  · exact fun K n ↦ pairing.2 K.obj n
+  · exact delta_iso
+  · exact fun K L f ↦ signed_natural ω.obj K.obj L.obj f.hom
 
 end WeilConjectures

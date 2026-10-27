@@ -1,0 +1,289 @@
+{
+ "id": "lem-trf-supported-kernel-blowup-charts",
+ "kind": "statement",
+ "title": "Supported-section kernels on affine blowup base-change charts",
+ "statement": "Let $A$ be a commutative ring, let $I=(f_0,\\ldots,f_r)\\subseteq A$ be a finitely generated ideal, and let $x\\in A$. Put $S=\\operatorname{Spec}A$ [def-weil-affine-spectrum], $Z=V(I)$, $D=V(x)$ [def-weil-closed-immersion], and let $b:S'=\\operatorname{Bl}_I(S)\\to S$ [def-nagata-global-blowup]. Let $f:X\\to S$ be any scheme morphism [def-pc-scheme] and $\\mathcal F$ a quasi-coherent $\\mathcal O_X$-module [pqf-def-coherent]. Put $T=X\\times_SS'$ with projections $p,q$ [def-pc-fibre-product], and let $\\mathcal K,\\mathcal L\\subseteq p^*\\mathcal F$ [def-pc-module-pullback] be the subsheaves of sections vanishing off $q^{-1}b^{-1}(Z)$ and $q^{-1}b^{-1}(Z\\cup D)$, respectively. For every $a=f_i$ and affine open $U=\\operatorname{Spec}R\\subseteq X$ with $\\mathcal F|_U=\\widetilde M$ [lem-weil-pbc-spec-module-tilde-sections], put $B=A[I/a]$ [def-nagata-blowup-chart-ring], $C=C_a(A,R,I)=R\\otimes_AB$ [def-nagata-strict-transform-basechange-chart-ring], and $N=M\\otimes_R C\\cong M\\otimes_A B$. The fibre products $W=U\\times_S\\operatorname{Spec}B\\cong\\operatorname{Spec}C$ form an affine open cover of $T$. On each $W$, the pullback module is $\\widetilde N$, the two closed subsets are $V(a)$ and $V(xa)$, and the two subsheaves identify, including their inclusions into $\\widetilde N$, as\n$$\\mathcal K|_W=\\widetilde{\\Gamma_{(a)}(N)},\\qquad \\mathcal L|_W=\\widetilde{\\Gamma_{(xa)}(N)}.$$\nHere $\\Gamma_{(t)}(N)=\\{n:\\exists k\\ge0,\\ t^kn=0\\}$ [def-nagata-power-torsion], with $a,x$ acting through $A\\to C$. Neither $x$-torsion-freeness of $M$ nor regularity of $x$ is required.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 080H, divisors-lemma-strict-transform-different-centers, proof of clause (2), sentence reducing to the algebra problem; Tag 0804, divisors-lemma-blowing-up-affine, for the affine cover; Properties Tag 07ZP, properties-lemma-sections-supported-on-closed-subset, for the supported-section sheaves."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-nagata-global-blowup",
+  "pqf-def-coherent",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-nagata-blowup-chart-ring",
+  "def-nagata-strict-transform-basechange-chart-ring",
+  "def-nagata-power-torsion"
+ ],
+ "proof": [
+  {
+   "text": "By [prop-nagata-affine-blowup-chart-cover], the charts $\\operatorname{Spec}B$ for the chosen generators cover $S\\prime$. Choose affine opens $U=\\operatorname{Spec}R$ trivializing $\\mathcal F$ as an associated module; these cover $X$ by [pqf-def-coherent]. By [lem-weil-pbc-open-immersion-base-change], their inverse images under $p$ and the blowup charts\\' inverse images under $q$ are open in $T$. Their intersections are $W=U\\times_S\\operatorname{Spec}B$ by the fibre-product universal property. They cover $T$, since each point lies over a member of each cover. By [lem-weil-pbc-fibre-product-affine-spectra], $W=\\operatorname{Spec}(R\\otimes_A B)=\\operatorname{Spec}C$, with the stated structural maps.",
+   "uses": [
+    "prop-nagata-affine-blowup-chart-cover",
+    "pqf-def-coherent",
+    "lem-weil-pbc-open-immersion-base-change",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0804, lemma-blowing-up-affine; schemes.tex Tags 01I4/01JQ, lemma-fibre-product-affine-schemes/lemma-fibre-product-affines, and 01JY, lemma-base-change-immersion"
+   }
+  },
+  {
+   "text": "Put $H=p^*\\mathcal F$. It is quasi-coherent by [lem-weil-pbc-module-pullback-quasi-coherent]. Apply [lem-weil-pbc-module-pullback-affine-sections] to the affine pair $W\\subseteq p^{-1}U$: its natural map identifies $H(W)$ with $M\\otimes_R C=N$. The counit isomorphism of [lem-weil-pbc-affine-tilde-gamma-adjunction] therefore identifies $H|_W$ with $\\widetilde N$. The alternative module presentation is explicit: $m\\otimes(r\\otimes b)\\mapsto rm\\otimes b$ has inverse $m\\otimes b\\mapsto m\\otimes(1\\otimes b)$; balancing gives well-defined inverse maps $M\\otimes_R(R\\otimes_A B)\\cong M\\otimes_A B$.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I9, lemma-widetilde-pullback (1), and 01IA/01IB, lemma-quasi-coherent-affine/lemma-equivalence-quasi-coherent; modules.tex Tag 01BG, lemma-pullback-quasi-coherent"
+   }
+  },
+  {
+   "text": "In the subalgebra $B=A[I/a]\\subseteq A_a$ of [def-nagata-blowup-chart-ring], each $f_j/a$ belongs to $B$ and $a(f_j/a)=f_j$. Thus $IB\\subseteq aB$, and $a\\in I$ gives the reverse inclusion. Extension to $C$ gives $IC=aC$. A prime of $C$ lies over $V(I)$ exactly when it contains every image of $I$, hence exactly when it contains $a$. Also it lies over $V(x)$ exactly when it contains $x$. Primality gives $V(a)\\cup V(x)=V(xa)$. These are precisely the two closed subsets in the assertion, independently of any zero divisors in $C$.",
+   "uses": [
+    "def-nagata-blowup-chart-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0804, lemma-blowing-up-affine; Tag 080H, lemma-strict-transform-different-centers, affine reduction of (2)"
+   }
+  },
+  {
+   "text": "For $t=a$ and for $t=xa$ on $W=\\operatorname{Spec}C$, the open $D(t)$ is retrocompact. Indeed on any affine open $V\\subseteq W$ its intersection is the principal open of $t|_V$; [lem-weil-pbc-spec-localization-away-basic-open] identifies its topology with a spectrum, which is quasi-compact by [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact]. Restricting the definition of $\\mathcal K$ or $\\mathcal L$ to opens of $W$ gives exactly the supported-section subsheaf $H_t$ for $V(t)$. Apply [lem-trf-supported-sections-quasi-coherent] on $W$: $H_t$ is quasi-coherent and $H_t(W)=\\{n\\in N:(t)^k n=0\\text{ for some }k\\geq0\\}$. Since $(t)^k=(t^k)$, this is precisely $\\Gamma_{(t)}(N)$ as a submodule of $N$ [def-nagata-power-torsion].",
+   "uses": [
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "lem-trf-supported-sections-quasi-coherent",
+    "def-nagata-power-torsion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 07ZP, lemma-sections-supported-on-closed-subset (2)-(3); algebra.tex Tag 00E8, lemma-quasi-compact, and principal-localization spectrum identification as cited in lem-weil-pbc-spec-localization-away-basic-open"
+   }
+  },
+  {
+   "text": "Apply the counit of [lem-weil-pbc-affine-tilde-gamma-adjunction] to the quasi-coherent sheaves $H_t$ and $H|_W$. Its naturality identifies $H_t\\hookrightarrow H|_W$ with the associated sheaf of the actual inclusion $\\Gamma_{(t)}(N)\\hookrightarrow N$: both maps correspond under the stated Hom bijection to that inclusion on global sections. Taking $t=a$ and $t=xa$ gives the two asserted subsheaf identifications, including their inclusions. No step required $x$ to be regular or $M$ to have zero $x$-torsion.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I7, lemma-compare-constructions, and 01IA/01IB, affine quasi-coherent equivalence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-nagata-affine-blowup-chart-cover",
+  "pqf-def-coherent",
+  "lem-weil-pbc-open-immersion-base-change",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "def-nagata-blowup-chart-ring",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-trf-supported-sections-quasi-coherent",
+  "def-nagata-power-torsion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 07ZP, lemma-sections-supported-on-closed-subset (2)-(3), applied on the affine cover of divisors.tex Tag 0804, lemma-blowing-up-affine; the affine reduction in Tag 080H, lemma-strict-transform-different-centers (2)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "powerTorsion|power_torsion|supported.*[Ss]ection|[Ss]ection.*supported",
+   "results": "Mathlib/RingTheory/FreeCommRing.lean; Mathlib/Topology/ContinuousMap/BoundedCompactlySupported.lean; Mathlib/Algebra/Module/DedekindDomain.lean; Mathlib/Algebra/Module/DedekindDomain.lean; Mathlib/Algebra/Module/DedekindDomain.lean; Mathlib/Algebra/Module/DedekindDomain.lean; Mathlib/Algebra/Module/DedekindDomain.lean; Mathlib/Algebra/Module/PID.lean. Read the returned signatures; none gives the stated blowup/module-kernel assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "On affine blowup charts the subsheaves of supported sections in a pulled back module are the sheaves of a power torsion and xa power torsion",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules, IsLocalization",
+   "results": "No hits. Read the returned signatures; none gives the stated blowup/module-kernel assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi-coherent module on X times the blowup of Spec A at I compute supported-section kernels on Spec R tensor A[I/a] as power torsion",
+   "results": "AlgebraicGeometry.Scheme.IdealSheafData.ideal_le_ker_glueDataObjι; AlgebraicGeometry.Scheme.IdealSheafData.ker_glueDataObjι_appTop; LinearMap.ker_tensorProductMk; AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal; Module.support_quotSMulTop; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen; Module.support_quotient; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top. Read the returned signatures; none gives the stated blowup/module-kernel assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "localization.*[Kk]er|[Kk]er.*localization|IsLocalizedModule",
+   "results": "Mathlib/AlgebraicGeometry/SpreadingOut.lean; Mathlib/AlgebraicGeometry/SpreadingOut.lean; Mathlib/AlgebraicGeometry/SpreadingOut.lean; Mathlib/AlgebraicGeometry/Spec.lean; Mathlib/AlgebraicGeometry/Spec.lean; Mathlib/AlgebraicGeometry/Spec.lean; Mathlib/AlgebraicGeometry/Spec.lean; Mathlib/AlgebraicGeometry/Spec.lean. Read the returned signatures; none gives the stated blowup/module-kernel assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The restriction kernel of a quasi coherent module to a principal open in an affine blowup base change chart is associated to the power torsion submodule",
+   "results": "AlgebraicGeometry.Scheme.ker_morphismRestrict_ideal; AlgebraicGeometry.Scheme.IdealSheafData.ker_glueDataObjι_appTop; AlgebraicGeometry.Scheme.IdealSheafData.ideal_le_ker_glueDataObjι; AlgebraicGeometry.Scheme.ideal_ker_le_ker_ΓSpecIso_inv_comp; AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away; AlgebraicGeometry.Scheme.IdealSheafData.ker_subschemeι_app; AlgebraicGeometry.Scheme.Hom.ideal_ker_le; AlgebraicGeometry.Scheme.Hom.ker_apply. Read the returned signatures; none gives the stated blowup/module-kernel assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "powerTorsion|power_torsion|supported.*[Ss]ection|[Ss]ection.*supported",
+   "results": "No hits.  Read returned signatures: structure-sheaf vanishing, tilde construction or localization kernels do not state the combined blowup supported-subsheaf assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules, IsLocalizedModule",
+   "results": "No hits.  Read returned signatures: structure-sheaf vanishing, tilde construction or localization kernels do not state the combined blowup supported-subsheaf assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "On affine blowup charts supported sections of a pullback quasi coherent sheaf are power torsion submodules",
+   "results": "AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen; AlgebraicGeometry.Scheme.Modules.instAdditivePullback; AlgebraicGeometry.IsAffineOpen.appLE_eq_away_map; AlgebraicGeometry.exists_of_res_eq_of_qcqs; AlgebraicGeometry.IsAffineOpen.app_basicOpen_eq_away_map; AlgebraicGeometry.exists_of_res_zero_of_qcqs; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen; AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated.  Read returned signatures: structure-sheaf vanishing, tilde construction or localization kernels do not state the combined blowup supported-subsheaf assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi coherent module on a base change of a blowup the subsheaves supported on exceptional and product divisors equal associated power torsion submodules",
+   "results": "AlgebraicGeometry.exists_of_res_zero_of_qcqs; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal; ModuleCat.Tilde.sectionsSubmodule; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen; AlgebraicGeometry.Scheme.IdealSheafData.coe_support_mkOfMemSupportIff; Module.support_quotSMulTop; Module.support_quotient.  Read returned signatures: structure-sheaf vanishing, tilde construction or localization kernels do not state the combined blowup supported-subsheaf assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The restriction kernel of an associated module sheaf to a principal open is the associated sheaf of elements annihilated by a power of the function",
+   "results": "ModuleCat.Tilde.const; ModuleCat.Tilde.sectionsSubmodule; ModuleCat.Tilde.const_apply; ModuleCat.Tilde.res_const; ModuleCat.Tilde.toOpen; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen; ModuleCat.Tilde.openToLocalization; ModuleCat.tildeInType.  Read returned signatures: structure-sheaf vanishing, tilde construction or localization kernels do not state the combined blowup supported-subsheaf assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Tilde.*(ker|kernel)|localization.*ker|ker.*localization|exists_pow_smul_eq_zero",
+   "results": "Mathlib/CategoryTheory/Localization/Construction.lean; Mathlib/CategoryTheory/Localization/Construction.lean; Mathlib/CategoryTheory/Localization/FiniteProducts.lean; Mathlib/CategoryTheory/Localization/Adjunction.lean; Mathlib/CategoryTheory/Localization/Adjunction.lean; Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean; Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean; Mathlib/CategoryTheory/Localization/Predicate.lean.  Read returned signatures: structure-sheaf vanishing, tilde construction or localization kernels do not state the combined blowup supported-subsheaf assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionsSubmodule|openToLocalization|res_const",
+   "results": "No hits.  Read returned signatures: structure-sheaf vanishing, tilde construction or localization kernels do not state the combined blowup supported-subsheaf assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-strict-transform-different-centers",
+  "date": "2026-10-22",
+  "group": "Q15"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Supporting argument for the Orgogozo modification input: Tag 080H (2), the strict-transform comparison after multiplying the centre by the effective Cartier divisor $D$; its affine proof is the a-power versus xa-power torsion calculation. Returned proof step 2: cover the common ambient fibre product by affine blowup charts and identify its two supported-section kernels with a-power and xa-power torsion sheaves.",
+   "via": [
+    "lem-trf-strict-transform-different-centers",
+    "lem-trf-strict-transform-composition",
+    "lem-trf-finite-after-blowup",
+    "lem-trf-alteration-finite-refinement",
+    "lem-trf-orgogozo-good-modification",
+    "lem-trf-trait-nearby-base-change",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-supported-kernel-blowup-charts",
+  "worker": "stage1",
+  "summary": "Reused the existing finite blowup-chart cover, affine fibre-product and pullback formulas, principal-support sections theorem, and affine tilde-Gamma equivalence. Wrote the ideal calculation IC=(a), the tensor associator, the retrocompactness hypothesis, and the inclusion compatibility explicitly. No new nodes or extra hypotheses.",
+  "blueprint": "The nearest ancestor is lem-trf-local-term-locality; this realizes the existing supporting chain through Orgogozo modification and Tag 080H (2), namely the affine-chart identification of the two supported-section kernels, without changing the unit route. Current latest blueprint checked at main-20261023-1620.",
+  "tool_uses": [
+   {
+    "node": "prop-nagata-affine-blowup-chart-cover",
+    "why": "Finite standard affine cover of a blowup, a generic geometry tool not supplied by the trace unit."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-quasi-coherent",
+    "why": "Ordinary quasi-coherent module pullback stays quasi-coherent, needed for applying the supported-section theorem."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "Generic affine tensor formula for module pullback; the trace unit has no replacement for it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-nagata-affine-blowup-chart-cover",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-module-pullback-affine-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q98-bb2325ca0",
+  "group": "Q98",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q98-bb2325ca0 (reviewer sub-agent of L); spot-checked: Read in full: 080H (2) proof, 0804 chart cover via prop-nagata-affine-blowup-chart-cover, 07ZP (1)-(3) via lem-trf-supported-sections-quasi-coherent. This is an ordinary first split: live and side-live are unsplit with the same statement and stmt_deps, and there is no repair note. No new nodes. All five steps are correct. Step 1: affine chart cover W=Spec(R⊗_A A[I/a]) from open-immersion base change and the affine fibre product. Step 2: H(W)≅M⊗_R C from pullback-affine-sections with f=p; the counit gives H|_W≅Ñ; the associator inverse is written out. Step 3: a(f_j/a)=f_j in A_a, so IC=aC and the two closed subsets are V(a) and V(a)∪V(x)=V(xa); correctly elementary. Step 4: D(t) is retrocompact by basic-open homeomorphism and Spec quasi-compactness; 07ZP node with J=(t) gives Γ_(t)(N). Step 5: counit naturality identifies the inclusions, which the parent lem-trf-strict-transform-different-centers step 2 uses. Small cases checked: I=0, a nilpotent, x=0, x a unit, k[s] with I=(s) and x=s. No duplicate among the nagata/trf power-torsion and strict-transform nodes. Tool uses prop-nagata-affine-blowup-chart-cover, lem-weil-pbc-module-pullback-quasi-coherent and lem-weil-pbc-module-pullback-affine-sections are generic and accepted. FIX (B3): the statement uses \\widetilde M, \\widetilde N and \\widetilde Γ with no definition node. I added [lem-weil-pbc-spec-module-tilde-sections] to the statement and to stmt_deps; nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SupportedKernelBlowupCharts",
+  "declaration": "AlgebraicGeometry.SupportedKernelBlowupCharts.supported_kernel_blowup_charts",
+  "declarations": [
+   "AlgebraicGeometry.SupportedKernelBlowupCharts.center",
+   "AlgebraicGeometry.SupportedKernelBlowupCharts.chart",
+   "AlgebraicGeometry.SupportedKernelBlowupCharts.inclusion",
+   "AlgebraicGeometry.SupportedKernelBlowupCharts.PresentsSupportedKernel",
+   "AlgebraicGeometry.SupportedKernelBlowupCharts.supported_kernel_blowup_charts"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedKernelBlowupCharts.lean",
+  "statement": "theorem supported_kernel_blowup_charts {A : Type u} [CommRing A] (I : Ideal A) (r : ℕ) (g : Fin (r + 1) → A) (hg : Ideal.span (Set.range g) = I) (x : A) (X : Scheme.{u}) (f : X ⟶ Spec (.of A)) (F : X.Modules) [F.IsQuasicoherent] : ∃ e : (center I).blowup ≅ AffineBlowup I, e.hom ≫ AffineBlowup.toSpec I = (center I).blowupMap ∧ ∃ hgI : ∀ i, g i ∈ I, (∀ z : pullback (C := Scheme.{u}) f (center I).blowupMap, ∃ (i : Fin (r + 1)) (U : X.affineOpens), pullback.fst f (center I).blowupMap z ∈ U.1 ∧ pullback.snd f (center I).blowupMap z ∈ Set.range (chart I e (g i) (hgI i))) ∧ ∀ (i : Fin (r + 1)) (R : Type u) [CommRing R] [Algebra A R] (v : Spec (.of R) ⟶ X) [IsOpenImmersion v] (_hv : v ≫ f = Spec.map (CommRingCat.ofHom (algebraMap A R))) (M : ModuleCat.{u} R) (_eM : (Scheme.Modules.tensorPullback v).obj F ≅ tilde M), ∃ j : Spec (.of (AffineBlowup.BaseChangeChart R I (g i))) ⟶ pullback (C := Scheme.{u}) f (center I).blowupMap, IsOpenImmersion j ∧ j ≫ pullback.fst f (center I).blowupMap = Spec.map (CommRingCat.ofHom (algebraMap R (AffineBlowup.BaseChangeChart R I (g i)))) ≫ v ∧ j ≫ pullback.snd f (center I).blowupMap = Spec.map (CommRingCat.ofHom Algebra.TensorProduct.includeRight.toRingHom) ≫ chart I e (g i) (hgI i) ∧ Set.range j = (pullback.fst f (center I).blowupMap) ⁻¹' Set.range v ∩ (pullback.snd f (center I).blowupMap) ⁻¹' Set.range (chart I e (g i) (hgI i)) ∧ (j ≫ pullback.snd f (center I).blowupMap ≫ (center I).blowupMap) ⁻¹' PrimeSpectrum.zeroLocus (I : Set A) = PrimeSpectrum.zeroLocus ({algebraMap A (AffineBlowup.BaseChangeChart R I (g i)) (g i)} : Set _) ∧ (j ≫ pullback.snd f (center I).blowupMap ≫ (center I).blowupMap) ⁻¹' (PrimeSpectrum.zeroLocus (I : Set A) ∪ PrimeSpectrum.zeroLocus ({x} : Set A)) = PrimeSpectrum.zeroLocus ({algebraMap A (AffineBlowup.BaseChangeChart R I (g i)) (x * g i)} : Set _) ∧ ∃ E : tilde (ModuleCat.of (AffineBlowup.BaseChangeChart R I (g i)) (AffineBlowup.BaseChangeChart R I (g i) ⊗[R] M)) ≅ (Scheme.Modules.tensorPullback j).obj ((Scheme.Modules.tensorPullback (pullback.fst f (center I).blowupMap)).obj F), PresentsSupportedKernel _ _ E (algebraMap A (AffineBlowup.BaseChangeChart R I (g i)) (g i)) ∧ PresentsSupportedKernel _ _ E (algebraMap A (AffineBlowup.BaseChangeChart R I (g i)) (x * g i)) ∧ ∃ α : (AffineBlowup.BaseChangeChart R I (g i) ⊗[R] M) ≃ₗ[A] (AffineBlowup.chartRing I (g i) ⊗[A] (ModuleCat.restrictScalars (algebraMap A R)).obj M), ∀ (s : R) (b : AffineBlowup.chartRing I (g i)) (m : M), α ((s ⊗ₜ[A] b) ⊗ₜ[R] m) = b ⊗ₜ[A] (@id ((ModuleCat.restrictScalars (algebraMap A R)).obj M) (s • m))",
+  "branch": "newtargets-dag",
+  "by": "Q63",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-11576d33e",
+  "group": "Q63",
+  "result": "fix",
+  "note": "Lean exact against the node and Stacks 0804/080H(2)/07ZP. Blowup of Spec A via ofIdealTop of I; its iso e to AffineBlowup over S is unique, so the chart is canonical. j fixed by both projection equations, image = p⁻¹U∩q⁻¹chart, plus pointwise cover. Preimages of V(I), V(I)∪V(x) = V(a), V(xa). The identification with tilde(C⊗_R M) is harmless (automorphisms of Ñ preserve Γ_t). The map to B⊗_A M is fixed on generators, well defined and bijective. PresentsSupportedKernel = per-open supported sections with the actual powTorsion inclusion, t=a and t=xa. No extra hypotheses; single universe u. Statement field verbatim; only sorry is the proof; helpers real, with docstrings. Dependency records byte-identical to side-live. Only fault: H11, the second reading is the author's own pass; fixed by fixes/lem-trf-supported-kernel-blowup-charts.report.md (worker report verbatim + independent second reading). Notes, no change needed: upstream IdealSheafData.blowupChart is the chart over Γ(X,V), not a duplicate; Q74 sister encodes supported kernels differently in its theorem module."
+ }
+}

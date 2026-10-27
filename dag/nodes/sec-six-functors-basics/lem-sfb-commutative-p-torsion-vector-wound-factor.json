@@ -1,0 +1,257 @@
+{
+ "id": "lem-sfb-commutative-p-torsion-vector-wound-factor",
+ "kind": "statement",
+ "title": "Canonical vector factor of a smooth commutative p-torsion group",
+ "statement": "Let $k$ be a field of characteristic $p>0$, with $p$ prime [def-weil-field]. Groups are affine $k$-group schemes of finite type [def-sc-group-scheme, def-weil-finite-type-morphism], subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup], and smooth and connected mean [def-sbc-smooth-morphisms, def-weil-connected-scheme]. Write $\\mathbf G_a(R)=(R,+)$ [def-sc-gm-ga] and $\\mathbb A^1_k=\\operatorname{Spec}k[x]$ [def-weil-affine-spectrum, def-weil-polynomial-ring]. A smooth connected unipotent $k$-group is called $k$-wound if every $k$-scheme morphism $\\mathbb A^1_k\\to H$ is constant with value in $H(k)$. Here unipotent means having a faithful finite-dimensional matrix representation with unipotent geometric points. The condition $[p]_H=0$ for a commutative group means that on every commutative $k$-algebra the sum of $p$ copies of each section is zero. Let $H$ be smooth, connected and commutative with $[p]_H=0$, and fix a separable closure $k_s/k$. There exist smooth connected closed subgroups $V,W\\subseteq H$ and an integer $d\\geq0$ such that multiplication $V\\times_k W\\to H$ is an isomorphism of $k$-group schemes, $V\\simeq\\mathbf G_a^d$, and $W_{k_s}$ is $k_s$-wound. The subgroup $V$ is unique among such decompositions. More precisely, $V_{k_s}$ is the smallest closed subgroup of $H_{k_s}$ through which every $k_s$-scheme morphism $\\mathbb A^1_{k_s}\\to H_{k_s}$ taking $0$ to the identity factors. One has $V=1$ if and only if $H$ is $k$-wound. The complement $W$ need not be unique. The trivial group and $d=0$ are allowed, and $k$ need not be perfect.",
+ "source": {
+  "document": "literature/conrad-structure-solvable-groups-general-fields.pdf",
+  "place": "Brian Conrad, The structure of solvable groups over general fields (2014), Definition 2.1, printed p.10; Theorem 2.6 and its proof, printed pp.12--13; Corollary 2.7, printed p.13. Read online at https://math.stanford.edu/~conrad/papers/appbnew.pdf. WANTED locally: this document. No Stacks tag is claimed for this Tits structure theorem."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-gm-ga",
+  "def-weil-affine-spectrum",
+  "def-weil-polynomial-ring",
+  "def-sfb-wound-unipotent-group",
+  "def-sfb-solvable-group-structure",
+  "def-sfb-tori-multiplicative-type",
+  "def-pd-separable-closure"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-smooth-p-torsion-additive-embedding] to $H$: it is a smooth commutative affine $k$-group scheme of finite type with $[p]_H=0$, exactly the hypotheses of that lemma (connectedness and perfectness of $k$ are not needed there). It gives $N\\geq0$ and a homomorphism $H\\hookrightarrow\\mathbf G_a^N$ identifying $H$ with a closed subgroup scheme; identify $H$ with this closed subgroup of $E=\\mathbf G_a^N$.",
+   "uses": [
+    "lem-sfb-smooth-p-torsion-additive-embedding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-structure-solvable-groups-general-fields.pdf",
+    "place": "Theorem 2.6, printed p.12, invocation of Lemma 1.14."
+   }
+  },
+  {
+   "text": "Take $K=k_s$ and the family of all pointed $K$-scheme morphisms $\\mathbb A^1_K\\to H_K$. Conjugating coefficients by any element of $\\operatorname{Gal}(K/k)$ gives another member of the same family. Thus [lem-sfb-galois-stable-affine-line-generated-subgroup] gives a smooth connected closed $k$-subgroup $V\\subseteq H$ whose extension $V_K$ is their smallest containing closed subgroup. This is the required generation property, not just a statement about $K$-points.",
+   "uses": [
+    "lem-sfb-galois-stable-affine-line-generated-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-structure-solvable-groups-general-fields.pdf",
+    "place": "Theorem 2.6, first sentence of proof, printed p.12."
+   }
+  },
+  {
+   "text": "Inside $E_K$, the same family generates $V_K$: a closed subgroup of $E_K$ containing it intersects $H_K$ in a closed subgroup of $H_K$ containing it, hence contains $V_K$. Apply [lem-sfb-affine-line-generated-vector-subgroup-straightening] to $V\\subseteq E$. It yields $V\\simeq\\mathbf G_a^d$ and a homomorphic retraction $r:E\\to V$. Restrict it to $H$. Put $W=\\ker(r|_H)$; in straightened coordinates it is the closed intersection $H\\cap(\\{0\\}^d\\times\\mathbf G_a^{N-d})$. The mutually inverse morphisms are $(v,w)\\mapsto v+w$ and $x\\mapsto(r(x),x-r(x))$. The latter lands in $V\\times W$ since $r(x-r(x))=r(x)-r(x)=0$. These identities hold on every $k$-algebra, giving the group-scheme product decomposition over $k$.",
+   "uses": [
+    "lem-sfb-affine-line-generated-vector-subgroup-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-structure-solvable-groups-general-fields.pdf",
+    "place": "Theorem 2.6, printed p.12, Proposition 1.15 and Corollary 1.16; explicit retraction-kernel argument for the latter."
+   }
+  },
+  {
+   "text": "The projection $q:H\\to W$, $x\\mapsto x-r(x)$, has the inclusion $i:W\\to H$ as a section. Thus $W$ is connected: $q$ is a continuous surjection from connected $H$. It is affine finite type since it is the closed coordinate intersection above. The scheme $\\operatorname{Spec}k$ is locally Noetherian (a field has only the two ideals), so [pqf-lem-lft-fp-locnoeth] gives local finite presentation of $W\\to\\operatorname{Spec}k$. For any first order affine thickening $T\\subset T'$ and $a:T\\to W$, smoothness of $H$, in [def-sbc-smooth-morphisms], lifts $ia$ to $b:T'\\to H$; then $qb$ lifts $a$ because $qi=1_W$. The same definition therefore gives smoothness of $W$.",
+   "uses": [
+    "pqf-lem-lft-fp-locnoeth",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-structure-solvable-groups-general-fields.pdf",
+    "place": "Theorem 2.6, printed p.12, direct-factor smoothness and connectedness; smoothness expanded using the existing infinitesimal definition and finite-presentation leaf."
+   }
+  },
+  {
+   "text": "Both $H$ and $W$ are unipotent in the stated sense: restrict the faithful representation of $E$ which sends $(a_1,\\ldots,a_N)$ to the $(N+1)$ by $(N+1)$ identity matrix with those entries in the rest of its first row. Its difference from the identity has square zero, and its entries recover every $a_i$ on every algebra. To check woundness, translate any $f:\\mathbb A^1_K\\to W_K$ by $-f(0)$ to make it pointed. Its composite with $W_K\\hookrightarrow H_K$ factors through $V_K$ by step 2, so factors through $V_K\\cap W_K=1$ by step 3. Thus the translated map is zero and $f$ is constant with value $f(0)\\in W(K)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/conrad-structure-solvable-groups-general-fields.pdf",
+    "place": "Theorem 2.6, last sentence on printed p.12; Definition 2.1, translation criterion, printed p.10."
+   }
+  },
+  {
+   "text": "Given another such decomposition $H=V'\\times W'$, every pointed affine-line map into $H_K$ projects to zero in the wound group $W'_K$. Minimality from step 2 gives $V_K\\subseteq V'_K$. Conversely, each coordinate axis $\\mathbf G_{a,K}\\to V'_K\\simeq\\mathbf G_{a,K}^{d'}\\hookrightarrow H_K$ is a pointed affine-line map, hence factors through $V_K$; adding the axes shows $V'_K\\subseteq V_K$. These subgroup inclusions descend to $k$: for their defining ideals, an inclusion can be tested after tensoring with the field extension $K/k$, since a $k$-vector space injects into its scalar extension. Consequently $V'=V$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/conrad-structure-solvable-groups-general-fields.pdf",
+    "place": "Theorem 2.6, uniqueness argument, printed p.13, using coordinate axes for its reverse inclusion."
+   }
+  },
+  {
+   "text": "If $V=1$, the product identifies $H_K$ with the wound group $W_K$. Any pointed $k$-affine-line map to $H$ becomes zero over $K$, hence is already zero: equality of coordinate-algebra maps is detected by the injective scalar extension $k[x]\\to K[x]$. Translation gives that every map is constant. Conversely, if $d>0$, a coordinate axis in $V\\simeq\\mathbf G_a^d$ followed by its inclusion in $H$ is nonconstant, so a wound $H$ forces $d=0$. The zero-dimensional vector group and trivial $H$ cause no exception. Uniqueness concerns $V$: for any homomorphism $a:W\\to V$, the graph $w\\mapsto(a(w),w)$ is another complement, with product inverse $(v,w)\\mapsto(v-a(w),w)$. Thus the decomposition makes no assertion of uniqueness for $W$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/conrad-structure-solvable-groups-general-fields.pdf",
+    "place": "Corollary 2.7 and the remark following Theorem 2.6, printed p.13."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-smooth-p-torsion-additive-embedding",
+  "lem-sfb-galois-stable-affine-line-generated-subgroup",
+  "lem-sfb-affine-line-generated-vector-subgroup-straightening",
+  "pqf-lem-lft-fp-locnoeth",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/conrad-structure-solvable-groups-general-fields.pdf",
+  "place": "Online Conrad Theorem 2.6 proof, printed pp.12--13, Corollary 2.7 and Definition 2.1; the PDF is WANTED locally. Assembly and explicit coordinate/retraction details written by Q80 after reading the online source."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected commutative algebraic group killed by p decomposes as a vector group and a wound group with a canonical vector factor",
+   "results": "{\"t\": \"2026-10-24T09:12:33Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth connected commutative algebraic group killed by p decomposes as a vector group and a wound group with a canonical vector factor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommGroup.primaryComponent\", \"CommGroup.primaryComponent.isPGroup\", \"AddCommGroup.primaryComponent\", \"CommGroup.coe_primaryComponent\", \"UnitAddTorus\", \"Module.torsion_by_prime_power_decomposition\", \"AddCommGroup.coe_primaryComponent\", \"WittVector.instAddCommGroupStandardOneDimIsocrystal\"], \"digest\": \"cde0be06d5d60c90\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern abstract-group centres, torsion or central series, division rings, affine linear algebra or modular-form subgroups; none states the smooth algebraic-group construction or its wound criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DirectProduct\", \"Unipotent\"",
+   "results": "{\"t\": \"2026-10-24T09:12:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"DirectProduct\\\", \\\"Unipotent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no declaration returned for these identifiers; this name search alone is not used as proof of absence."
+  },
+  {
+   "tool": "grep",
+   "query": "wound|vector.*group|p.torsion",
+   "results": "{\"t\": \"2026-10-24T09:12:33Z\", \"tool\": \"grep\", \"query\": \"wound|vector.*group|p.torsion\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern abstract-group centres, torsion or central series, division rings, affine linear algebra or modular-form subgroups; none states the smooth algebraic-group construction or its wound criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical vector subgroup generated by affine line images in a smooth commutative group of exponent p with wound complement",
+   "results": "{\"t\": \"2026-10-24T09:12:34Z\", \"tool\": \"leansearch\", \"query\": \"Canonical vector subgroup generated by affine line images in a smooth commutative group of exponent p with wound complement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Sylow.toSubgroup\", \"AddCommGroup.primaryComponent\", \"AddCon.addSubgroup\", \"AffineSubspace.map_mk'\", \"vectorSpan\", \"AddGroupWithOne.toSub\", \"vectorSpan_eq_span_vsub_set_right_ne\", \"AffineSubspace.mk.noConfusion\"], \"digest\": \"729d0ea3c7612074\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern abstract-group centres, torsion or central series, division rings, affine linear algebra or modular-form subgroups; none states the smooth algebraic-group construction or its wound criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tits decomposition of a commutative p torsion algebraic group into an additive group power and a wound factor",
+   "results": "{\"t\": \"2026-10-24T09:12:36Z\", \"tool\": \"leanfinder\", \"query\": \"Tits decomposition of a commutative p torsion algebraic group into an additive group power and a wound factor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommGroup.primaryComponent\", \"AddCommGroup.primaryComponent\", \"CommGroup.primaryComponent.isPGroup\", \"CommGroup.coe_primaryComponent\", \"Module.torsion_by_prime_power_decomposition\", \"AddCommGroup.coe_primaryComponent\", \"PreTilt.untiltAux\", \"PreTilt\"], \"digest\": \"15a6b694ee5e7156\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern abstract-group centres, torsion or central series, division rings, affine linear algebra or modular-form subgroups; none states the smooth algebraic-group construction or its wound criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tits theorem decomposes a commutative smooth algebraic group killed by p into its canonical vector subgroup and a wound complement",
+   "results": "{\"t\": \"2026-10-24T09:47:05Z\", \"tool\": \"leanfinder\", \"query\": \"Tits theorem decomposes a commutative smooth algebraic group killed by p into its canonical vector subgroup and a wound complement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommGroup.primaryComponent\", \"AddCommGroup.primaryComponent\", \"CommGroup.primaryComponent.isPGroup\", \"CommGroup.coe_primaryComponent\", \"AddCommGroup.coe_primaryComponent\", \"IsCyclic.isComplement'\", \"Algebra.Generators.cotangentRestrict_bijective_of_isCompl\", \"LieModule.isCompl_genWeightSpaceOf_zero_posFittingCompOf\"], \"digest\": \"15bfb6e0a9e079d8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract torsion groups and affine linear spans do not state the group-scheme decomposition, the affine-line generation property, or separably wound complement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The unique vector factor in a p torsion commutative algebraic group is generated by affine line images and has wound quotient",
+   "results": "{\"t\": \"2026-10-24T09:47:02Z\", \"tool\": \"leansearch\", \"query\": \"The unique vector factor in a p torsion commutative algebraic group is generated by affine line images and has wound quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddCircle\", \"AffineMap.lineMap_injective\", \"AddCircle.finite_torsion\", \"vectorSpan_singleton\", \"Submodule.torsionBy\", \"AddCommGroup.torsion\", \"Ideal.quotTorsionOfEquivSpanSingleton\", \"AffineSubspace.affineSpan_eq_top_iff_vectorSpan_eq_top_of_nontrivial\"], \"digest\": \"e8d096f0c6ce1f30\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract torsion groups and affine linear spans do not state the group-scheme decomposition, the affine-line generation property, or separably wound complement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-unipotent-central-vector-subgroup",
+  "date": "2026-10-24",
+  "group": "Q82"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Remark 3.5, forward implication, printed p.5: integral conjugation into a fixed maximal split torus. Only the complete-DVR case is needed here; the statement is the conjugacy input, not a Cartan factorization. Supporting input: Residue-field base case: rational conjugacy of split tori, before lifting a fixed conjugator. This is over a field and contains no complete-DVR lifting assertion. Supporting field argument, conjugacy step: Milne Theorem 25.10, rational conjugacy of the maximal containing split torus with the prescribed one. Supporting rational-conjugacy argument: Milne 25.10, compare centralizers after putting both maximal split tori in a minimal parabolic; corrected 25.6(b),(c). Supporting input in this split: Proposition 16.54 and its proof, printed p.344: maximal split tori of a split solvable group are images of sections of its split-torus quotient and are conjugate under the unipotent kernel. An arbitrary split torus lies in a maximal one by bounded dimension. Applied to H=U semidirect D; the torus D is a maximal split torus because the kernel is unipotent. This is the split-solvable assertion, not reductive-group rational conjugacy. Supporting structural input: replace the given split series by a torus-stable series with linear one-dimensional quotients before successively removing the crossed homomorphism. Supporting prerequisite in the induction: Nonzero torus-stable central vector subgroup of a split unipotent group. Positive-characteristic construction: canonical vector factor of the central p-torsion kernel, before proving nonvanishing and torus stability.",
+   "via": [
+    "lem-sfb-split-unipotent-central-vector-subgroup",
+    "lem-sfb-split-unipotent-torus-stable-series",
+    "lem-sfb-split-unipotent-torus-absorption",
+    "lem-sfb-minimal-parabolic-split-centralizers",
+    "lem-sfb-field-maximal-split-tori-conjugacy",
+    "lem-sfb-field-split-torus-rational-containment",
+    "lem-sfb-complete-dvr-torus-cocharacter-conjugacy",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-commutative-p-torsion-vector-wound-factor",
+  "worker": "stage1",
+  "summary": "Read Conrad online, found no project attachment, and split into the existing vector embedding lem-sfb-smooth-p-torsion-additive-embedding (reviewer FIX: replaces a duplicate new node), Galois-stable affine-line generation, and coordinate straightening. Constructed the complement as a retraction kernel and proved its smoothness by lifting, woundness by the scheme-theoretic intersection, uniqueness by coordinate axes, and the wound criterion by scalar-extension detection. Statement unchanged; no perfectness hypothesis added. Two new statement-only nodes, no new Mathlib leaves.",
+  "blueprint": "The inherited alteration/moduli/solvable-group prerequisite chain in blueprint.from.place; canonical vector factor needed in the central p-torsion construction. Latest blueprint direct-images proof (3) and unit read; no change to chapter or unit route. Nearest blueprint ancestor is null as printed by blueprint_refs.py ancestor."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q80-9eca5f0c6",
+  "group": "Q80",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-9eca5f0c6 (reviewer sub-agent of L); spot-checked: FIX for one C4 duplicate; the mathematics is correct. Source check: I read Conrad appbnew (online PDF, run through pdftotext): Lemma 1.14 p.8, Prop 1.15 and Cor 1.16 p.9, Def 2.1 p.10, Thm 2.6 with its proof pp.12-13, Cor 2.7 p.13. The item statement matches Thm 2.6 plus Cor 2.7 and is unchanged; perfectness is not assumed and W is not claimed unique. The defect: the new node lem-sfb-p-torsion-affine-vector-embedding has the same statement as the existing split node lem-sfb-smooth-p-torsion-additive-embedding (Q109; smooth commutative affine finite-type, [p]=0, no connectedness or perfectness, closed embedding into G_a^n). I drop the new node; step 1 and proof_deps now cite the existing node, and no other file cited the dropped id. The two other new nodes check out against the source. lem-sfb-galois-stable-affine-line-generated-subgroup is the 'by Galois descent' sentence of Thm 2.6; it is true, the empty family gives 1, and no duplicate exists (the tangent-generation node assumes an algebraically closed field). lem-sfb-affine-line-generated-vector-subgroup-straightening is exactly Prop 1.15, and allowing a nonlinear h is correct. Steps of the item: step 3 gives the retraction kernel W; it expands Cor 1.16. Step 4 proves W smooth from def-sbc-smooth-morphisms (lfp plus formally smooth, lifting through H and composing with q) and pqf-lem-lft-fp-locnoeth; W is connected as the image of H. Step 5 proves W_K wound through the scheme-theoretic intersection V_K∩W_K=1. Step 6 proves V unique through the axes and descent of ideal inclusions. Step 7 proves the wound criterion through the injection k[x]→K[x], with the graph-complement example. Edge cases checked: trivial H, d=0, the empty family, and Conrad's wound example y^p=x-ax^p. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.CommutativePTorsionVectorWoundFactor",
+  "declaration": "AlgebraicGeometry.VectorWoundFactor.commutative_p_torsion_vector_wound_factor",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/CommutativePTorsionVectorWoundFactor.lean",
+  "statement": "theorem commutative_p_torsion_vector_wound_factor {k : Type u} [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (H : Grp (Over (Spec (.of k)))) [IsAffine H.X.left] [LocallyOfFiniteType H.X.hom] [QuasiCompact H.X.hom] [Smooth H.X.hom] [ConnectedSpace H.X.left] [IsCommMonObj H.X] (hp : ∀ (R : Type u) [CommRing R] [Algebra k R] (x : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k R))) ⟶ H.X), x ^ p = 1) (K : Type u) [Field K] [Algebra k K] [IsSepClosure k K] : ∃ (V W : Grp (Over (Spec (.of k)))) (i : V ⟶ H) (j : W ⟶ H), IsDecomposition K i j ∧ IsGeneratedByPointedLines ((MultiplicativeType.baseChange (K := K)).map i) ∧ (Nonempty (V ≅ Grp.trivial (Over (Spec (.of k)))) ↔ IsWoundGroup H) ∧ ∀ (V' W' : Grp (Over (Spec (.of k)))) (i' : V' ⟶ H) (j' : W' ⟶ H), IsDecomposition K i' j' → ∃ e : V ≅ V', e.hom ≫ i' = i",
+  "branch": "newtargets-dag",
+  "by": "Q73",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.VectorWoundFactor.IsDecomposition",
+   "AlgebraicGeometry.VectorWoundFactor.ContainsPointedLines",
+   "AlgebraicGeometry.VectorWoundFactor.IsGeneratedByPointedLines",
+   "AlgebraicGeometry.VectorWoundFactor.commutative_p_torsion_vector_wound_factor"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d2356c06e",
+  "group": "Q73",
+  "result": "pass",
+  "note": "Clause-by-clause match of node vs Lean: no perfectness; hp is [p]=0 on all Type-u k-algebra points; IsSepClosure K; IsDecomposition = closed subgroups V,W, IsAlgebraic/Smooth/Connected, IsIso of multiplication (fst≫i)*(snd≫j), ∃d V≅∏ᶜ Fin d G_a, W_K wound via MultiplicativeType.baseChange; IsGeneratedByPointedLines on baseChange.map i = contains all pointed arbitrary scheme maps A¹_K→H_K + minimal among closed J; uniqueness e : V≅V' with e.hom≫i'=i; V≅1 ↔ IsWoundGroup H; W not claimed unique. New def-sfb-wound-unipotent-group IsWoundGroup = IsAlgebraic ∧ IsUnipotent(smooth) ∧ Connected ∧ every A¹ map = toUnit≫c, matches Conrad Def 2.1/item inline def; no duplicate in live Lean/DAG (cckp-wound deliveries Q15/Q64 RETURNed). Item statement unchanged; 4 added stmt_deps all used; lean.statement verbatim; one sorry (theorem), 7-step proof docstring, source/blueprint docstrings; edge cases trivial H, d=0, V=1, W=1, imperfect k, universes OK. No fix, no compile; worker dry run OK at 11:14 after ENOSPC infra failures."
+ }
+}

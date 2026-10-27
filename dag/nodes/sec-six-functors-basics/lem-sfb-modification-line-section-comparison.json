@@ -1,0 +1,290 @@
+{
+ "id": "lem-sfb-modification-line-section-comparison",
+ "kind": "statement",
+ "title": "Section rings across a line comparison with depth-two exceptional image",
+ "statement": "Let $R$ be a discrete valuation ring with fraction field $K$ and residue field $k$ [def-sc-discrete-valuation-ring, def-pc-field-extension] and $S=\\operatorname{Spec}R$ [def-weil-affine-spectrum]. Let $X\\to S$ and $Y\\to S$ be flat finite-type morphisms [def-weil-flat-morphism, def-weil-finite-type-morphism], and let $p:Y\\to X$ be an $S$-morphism [def-pc-scheme]. Write $X_k=X\\times_S\\operatorname{Spec}k$ and $X_K=X\\times_S\\operatorname{Spec}K$ for the special and generic fibres, and similarly $Y_K$, with $p_K:Y_K\\to X_K$ the induced morphism and $M_K$, $N_K$, $\\alpha_K$ the restrictions to the generic fibres [def-pc-fibre-product]. Let $Z$ be a finite set of closed points of $X_k$; put $U=X\\setminus Z$ and suppose $p^{-1}U\\to U$ is an isomorphism. Let $M$ on $X$ and $N$ on $Y$ be invertible modules [def-sc-invertible-module], and let $\\alpha:p^*M\\to N$ be a module morphism [def-pc-module-pullback, def-weil-sheaf-of-modules-category] whose restriction to $p^{-1}U$ is an isomorphism. Suppose $\\operatorname{depth}\\mathcal O_{X,z}\\ge2$ for all $z\\in Z$ [def-weil-pbc-depth]. For each $m\\in\\mathbf N$, put $$F_m:H^0(X,M^{\\otimes m})\\longrightarrow H^0(Y,N^{\\otimes m}),\\qquad s\\longmapsto\\alpha^{\\otimes m}(p^*s),$$ with $F_0$ the ordinary pullback of functions. Every $F_m$ is bijective. If $A_{X,m}\\subseteq H^0(X_K,M_K^{\\otimes m})$ and $A_{Y,m}\\subseteq H^0(Y_K,N_K^{\\otimes m})$ denote the images of the restriction maps from $H^0(X,M^{\\otimes m})$ and $H^0(Y,N^{\\otimes m})$ and $\\beta_m$ is the generic-fibre isomorphism induced by $p_K$ and $\\alpha_K^{\\otimes m}$, then $$\\beta_m(A_{X,m})=A_{Y,m}.$$ The maps $F_m$, $\\beta_m$ and the two generic restriction maps are additive and $R$-linear, commute with homogeneous tensor multiplication, and send the degree-zero unit to the unit. Thus $\\bigoplus_m F_m$ is a graded $R$-algebra isomorphism for the section-ring operations of [def-sc-invertible-section-ring], and the displayed image equalities identify graded $R$-subalgebras. No reducedness, normality, nodality or canonical-bundle hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Agent extraction of original lattice proof steps 4--5 and 7: Tag 0E9I (lemma-depth-2-hartog), applied to each tensor power, together with properties.tex Tag 01PZ (lemma-map-into-proj) for section-ring notation. The modification-and-line comparison formulation is an agent consequence, not the verbatim Stacks statement."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-pc-field-extension",
+  "def-weil-affine-spectrum",
+  "def-weil-flat-morphism",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-depth",
+  "def-sc-invertible-section-ring"
+ ],
+ "proof": [
+  {
+   "text": "Fix a uniformizer $\\pi$ of $R$. The DVR definition makes $R$ Noetherian. Apply [lem-weil-pbc-finite-type-over-noetherian] to $X\\to\\operatorname{Spec}R$ and $Y\\to\\operatorname{Spec}R$; both total schemes are Noetherian. By [lem-weil-pbc-dvr-unit-times-uniformizer-power], every nonzero element of $R$ is a unit times a power of $\\pi$, so $K=R[1/\\pi]$. Consequently the generic fibres are precisely the open loci where $\\pi$ is invertible. Since $Z$ lies in the special fibre, $X_K\\subset U$ and $Y_K\\subset p^{-1}U$. Thus $p_K$ and $\\alpha_K$ are isomorphisms.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD (lemma-characterize-dvr); morphisms.tex Tag 01T6 (lemma-finite-type-noetherian). Generic open is the localization at the uniformizer."
+   }
+  },
+  {
+   "text": "For every $m\\ge0$, set $P_m=M^{\\otimes m}$ and $Q_m=N^{\\otimes m}$, with $P_0=\\mathcal O_X$, $Q_0=\\mathcal O_Y$. Iterating [lem-weil-pbc-invertible-pullback-tensor](1) shows that these are invertible. On a trivializing neighbourhood their stalks are free of rank one, so $(P_m)_z\\cong\\mathcal O_{X,z}$ has depth at least two at each $z\\in Z$. Their quasi-coherence and local rank-one presentations give finite type; [lem-weil-pbc-quasi-coherent-finite-type-affine](a) gives finite sections on every affine open. All finiteness and boundary-depth hypotheses of Hartogs are now checked for $P_m$.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "def-sc-invertible-module",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0E9I (lemma-depth-2-hartog), verification of its coherent-module hypothesis for tensor powers of an invertible module."
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-depth-two-hartogs-restriction] with $L=X$, $j:U\\hookrightarrow X$ and $N=P_m$. Steps 1--2 verify that $X$ is locally Noetherian, that $P_m$ is quasi-coherent with finite affine sections and finite boundary stalks, and that those stalks have depth at least two. The canonical unit $P_m\\to j_*(P_m|_U)$ is an isomorphism. Evaluating it on $X$ says exactly that restriction $r_{X,U,m}:\\Gamma(X,P_m)\\to\\Gamma(U,P_m|_U)$ is bijective, including for $m=0$.",
+   "uses": [
+    "lem-sbc-depth-two-hartogs-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0E9I (lemma-depth-2-hartog), displayed unit and its global-sections consequence."
+   }
+  },
+  {
+   "text": "Multiplication by $\\pi$ is injective on every structure stalk of $Y$: at a generic-fibre point it is a unit, and at a special-fibre point the stalk is flat over $R$ by [def-weil-flat-morphism]. Tensor the injection $R\\xrightarrow{\\pi}R$ with that stalk using [lem-trf-flat-tensor-preserves-injection]. As $Q_m$ is locally free of rank one, multiplication by $\\pi$ is injective on its stalks, hence on sections of every open: a section killed by $\\pi$ has all germs zero. The same holds for every power $\\pi^e$ by induction.",
+   "uses": [
+    "def-weil-flat-morphism",
+    "lem-trf-flat-tensor-preserves-injection",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Flatness preserves the injection defined by a nonzero element of the domain R; local rank-one trivializations transfer the assertion to the line module."
+   }
+  },
+  {
+   "text": "The restriction $r_{Y,K,m}:\\Gamma(Y,Q_m)\\to\\Gamma(Y_K,(Q_m)_K)$ is injective. Indeed cover $Y$ by affine opens $V=\\operatorname{Spec}A$ trivializing $Q_m$. A section restricting to zero has coefficient $b\\in A$ whose restriction on $D(\\pi)\\subset V$ is zero. The principal-open section formula of [lem-weil-pbc-spec-module-tilde-sections], applied to the free module $A$, identifies this restriction with $b/1\\in A[1/\\pi]$. By [def-weil-pbc-module-localization], $\\pi^e b=0$ for some $e$. Step 4 forces $b=0$. These local zero sections cover $Y$, proving the claim; the argument includes $m=0$ and the empty scheme.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I6, quasi-coherent modules on affines: principal-open sections are localizations; localization equality criterion and the preceding torsion-freeness."
+   }
+  },
+  {
+   "text": "Let $\\alpha_m:p^*P_m\\to Q_m$ be the $m$th tensor power of $\\alpha$, using [lem-weil-pbc-invertible-pullback-tensor](2); for $m=0$ use the canonical identity on $\\mathcal O_Y$. The map $F_m$ is its map on pulled-back sections. On $p^{-1}U\\cong U$, $\\alpha_m$ is an isomorphism, so it gives a bijection $c_m:\\Gamma(U,P_m|_U)\\to\\Gamma(p^{-1}U,Q_m|_{p^{-1}U})$. Restriction of the definition of $F_m$ gives $F_m(s)|_{p^{-1}U}=c_m(s|_U)$. Restricting again to $Y_K$ gives the commuting square $r_{Y,K,m}F_m=\\beta_m r_{X,K,m}$, where $\\beta_m$ is a bijection because both generic maps in step 1 are isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "lemma-tensor-product-pullback; functoriality of pullback and restriction applied to the specified tensor-power map."
+   }
+  },
+  {
+   "text": "If $F_m(s)=0$, then step 6 and the injectivity of $c_m$ give $s|_U=0$. The injectivity in step 3 gives $s=0$. For surjectivity take $t\\in\\Gamma(Y,Q_m)$. Form $v=c_m^{-1}(t|_{p^{-1}U})$ and extend it uniquely by step 3 to $s\\in\\Gamma(X,P_m)$. Then $F_m(s)-t$ restricts to zero on $p^{-1}U$, hence on $Y_K\\subset p^{-1}U$. Step 5 gives $F_m(s)=t$. Thus every $F_m$ is bijective. In the square of step 6, surjectivity of $F_m$ now gives $\\beta_m(\\operatorname{im}r_{X,K,m})=\\operatorname{im}r_{Y,K,m}$, the asserted equality of $A_{X,m}$ and $A_{Y,m}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Agent assembly of Hartogs extension, restriction on the common open, and generic-restriction uniqueness; Tag 0E9I is used through step 3."
+   }
+  },
+  {
+   "text": "Pullback of a section is locally $s\\mapsto1\\otimes s$, followed by the module-linear map $\\alpha_m$, so $F_m$ is additive and $R$-linear; the same calculation applies to $\\beta_m$ and to restrictions, since $p$ is over $S$. For sections $s,t$ of degrees $i,j$, [lem-weil-pbc-invertible-pullback-tensor](2) sends $p^*(s\\otimes t)$ to $p^*s\\otimes p^*t$. Applying $\\alpha^{\\otimes(i+j)}$ applies $\\alpha$ to each of the $i+j$ factors, giving exactly $F_i(s)\\otimes F_j(t)$. Locally, if $\\alpha$ has coefficient $a$, this is the identity $a^{i+j}=a^i a^j$; it holds even where $a$ is not a unit. Restrictions obey the same tensor identity by [def-pur-sheaf-tensor-product]. Degree zero uses pullback of functions and sends $1$ to $1$. These identities also hold on the generic fibres. By [def-sc-invertible-section-ring], taking the direct sum therefore gives a graded $R$-algebra homomorphism, with inverse given degreewise by the bijections from step 7. Its image equalities respect exactly these products and units and thus identify the stated graded subalgebras.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "def-pur-sheaf-tensor-product",
+    "def-sc-invertible-section-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "lemma-tensor-product-pullback and the presheaf tensor/sheafification construction; properties.tex Tag 01PZ (lemma-map-into-proj) supplies section-ring notation, not an extra Proj assertion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-sc-discrete-valuation-ring",
+  "def-sc-invertible-module",
+  "def-sc-invertible-section-ring",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-module-localization",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sbc-depth-two-hartogs-restriction",
+  "lem-trf-flat-tensor-preserves-injection",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-spec-module-tilde-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0E9I (lemma-depth-2-hartog), with elementary modification comparison, flat generic uniqueness and tensor-power algebra assembly; not a verbatim Stacks theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Hh]artog|[Ss]ection.*[Rr]ing|[Ii]nvertible",
+   "results": "{\"t\": \"2026-10-22T07:26:27Z\", \"tool\": \"grep\", \"query\": \"[Hh]artog|[Ss]ection.*[Rr]ing|[Ii]nvertible\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\"], \"digest\": \"af87cb8076195bff\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: Proj basic-open and localization comparisons, abstract global-section functors and pullback of free modules do not compare line-bundle section rings across a modification with a depth-two boundary."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections of tensor powers of line bundles are preserved by a modification with nonnegative discrepancy and depth two exceptional image",
+   "results": "{\"t\": \"2026-10-22T07:26:28Z\", \"tool\": \"leansearch\", \"query\": \"Global sections of tensor powers of line bundles are preserved by a modification with nonnegative discrepancy and depth two exceptional image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.termΓ(_,_)\", \"AlgebraicGeometry.LocallyRingedSpace.Γ_obj\", \"CategoryTheory.HasGlobalSectionsFunctor\", \"AlgebraicGeometry.preservesLimit_rightOp_Γ\", \"AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj\", \"MDifferentiableWithinAt.change_section_trivialization\", \"AlgebraicGeometry.Proj.pow_apply\", \"SheafOfModules.sections\"], \"digest\": \"11a56a18be2192ba\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: Proj basic-open and localization comparisons, abstract global-section functors and pullback of free modules do not compare line-bundle section rings across a modification with a depth-two boundary."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Hartogs\"",
+   "results": "{\"t\": \"2026-10-22T07:26:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"Hartogs\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: Proj basic-open and localization comparisons, abstract global-section functors and pullback of free modules do not compare line-bundle section rings across a modification with a depth-two boundary."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of line bundles on a modification that is an isomorphism outside depth two points identifies the graded rings of global sections by Hartogs extension",
+   "results": "{\"t\": \"2026-10-22T07:26:38Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism of line bundles on a modification that is an isomorphism outside depth two points identifies the graded rings of global sections by Hartogs extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.basicOpenIsoAway_hom\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"AlgebraicGeometry.Proj.basicOpenToSpec_app_top\", \"AlgebraicGeometry.Proj.basicOpenIsoAway\", \"AlgebraicGeometry.Proj.ext_iff\", \"AlgebraicGeometry.Proj.ext\", \"AlgebraicGeometry.Proj.awayMap_awayToSection\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app\"], \"digest\": \"5ace54874ea3d1f1\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: Proj basic-open and localization comparisons, abstract global-section functors and pullback of free modules do not compare line-bundle section rings across a modification with a depth-two boundary."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of an invertible module along a generic isomorphism, together with depth two Hartogs extension, gives an isomorphism of section rings",
+   "results": "{\"t\": \"2026-10-22T07:26:38Z\", \"tool\": \"leanfinder\", \"query\": \"Pullback of an invertible module along a generic isomorphism, together with depth two Hartogs extension, gives an isomorphism of section rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.isIso_toBasicOpen\", \"AlgebraicGeometry.pullbackSpecIso_inv_fst'\", \"SheafOfModules.pullbackObjFreeIso\", \"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"AlgebraicGeometry.pullbackSpecIso_inv_fst\", \"AlgebraicGeometry.pullbackSpecIso_inv_snd\", \"AlgebraicGeometry.pullbackSpecIso_hom_base\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst\"], \"digest\": \"537756d7c182a8c5\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: Proj basic-open and localization comparisons, abstract global-section functors and pullback of free modules do not compare line-bundle section rings across a modification with a depth-two boundary."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism between line bundles that is an isomorphism off a depth two closed subset identifies global sections along a flat modification over a DVR",
+   "results": "{\"t\": \"2026-10-23T04:21:05Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism between line bundles that is an isomorphism off a depth two closed subset identifies global sections along a flat modification over a DVR\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_iff\", \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"ModuleCat.Tilde.res_const\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\"], \"digest\": \"1a2f6edc43c330f3\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: hits concern Proj charts, ordinary global sections, flat morphisms or integral-scheme germ injectivity; none states depth-two modification comparison for arbitrary line bundles on flat DVR schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "Hartog|section.*ring|depth.*restrict",
+   "results": "{\"t\": \"2026-10-23T04:30:57Z\", \"tool\": \"grep\", \"query\": \"Hartog|section.*ring|depth.*restrict\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\"], \"digest\": \"e46eb6948040ebf2\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: hits concern Proj charts, ordinary global sections, flat morphisms or integral-scheme germ injectivity; none states depth-two modification comparison for arbitrary line bundles on flat DVR schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Hartogs\"",
+   "results": "{\"t\": \"2026-10-23T04:30:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"Hartogs\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: hits concern Proj charts, ordinary global sections, flat morphisms or integral-scheme germ injectivity; none states depth-two modification comparison for arbitrary line bundles on flat DVR schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections of invertible sheaves are unchanged under a modification with depth two exceptional image",
+   "results": "{\"t\": \"2026-10-23T04:30:57Z\", \"tool\": \"leansearch\", \"query\": \"Global sections of invertible sheaves are unchanged under a modification with depth two exceptional image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.Γ_obj\", \"CategoryTheory.HasGlobalSectionsFunctor\", \"AlgebraicGeometry.Scheme.Opens.toScheme_presheaf_obj\", \"AlgebraicGeometry.Scheme.ΓSpecIso_inv\", \"AlgebraicGeometry.Scheme.inv_appTop\", \"AlgebraicGeometry.StructureSheaf.globalSectionsIso_hom\", \"AlgebraicGeometry.IsOpenImmersion.ΓIsoTop\", \"CategoryTheory.Sheaf.ΓObjEquivSections_naturality_symm\"], \"digest\": \"f6cbd88ed19dd2f9\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: hits concern Proj charts, ordinary global sections, flat morphisms or integral-scheme germ injectivity; none states depth-two modification comparison for arbitrary line bundles on flat DVR schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hartogs extension of line bundle sections across a depth two closed subset and injectivity of generic restriction over a discrete valuation ring",
+   "results": "{\"t\": \"2026-10-23T04:31:00Z\", \"tool\": \"leanfinder\", \"query\": \"Hartogs extension of line bundle sections across a depth two closed subset and injectivity of generic restriction over a discrete valuation ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"AlgebraicGeometry.Scheme.germToFunctionField_injective\", \"AlgebraicGeometry.exists_lift_of_germInjective\", \"AlgebraicGeometry.StructureSheaf.toBasicOpen_injective\", \"AlgebraicGeometry.germ_injective_of_isIntegral\", \"AlgebraicGeometry.spread_out_unique_of_isGermInjective'\", \"AlgebraicGeometry.Scheme.IsGermInjectiveAt.cond\"], \"digest\": \"a593ffae9432a01b\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: hits concern Proj charts, ordinary global sections, flat morphisms or integral-scheme germ injectivity; none states depth-two modification comparison for arbitrary line bundles on flat DVR schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semistable-log-pluricanonical-lattices",
+  "date": "2026-10-22",
+  "group": "Q108"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; original lattice proof steps 4--5 and 7: tensor-power pullback, reverse Hartogs extension and graded algebra compatibility",
+   "via": [
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-modification-line-section-comparison",
+  "worker": "stage1",
+  "summary": "Kept the complete statement. Proved the comparison using existing Hartogs, flat-tensor, affine-section and invertible-tensor nodes, writing uniqueness and all graded compatibilities explicitly. No new nodes and no Mathlib leaves; no matching finished project declaration.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; original lattice proof steps 4--5 and 7: tensor-power pullback, reverse Hartogs extension and graded algebra compatibility; ancestor command returns None for the inherited creation chain. Steps 1--8 realize the original lattice proof steps 4--5 and 7 without changing the alteration/moduli unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-depth-two-hartogs-restriction",
+    "why": "Generic depth-two extension unit on a locally Noetherian scheme; supplies the reverse section extension, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Affine finiteness criterion verifies the exact Hartogs hypothesis from local rank-one presentations."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Generic invertible-module tensor and pullback identities, including the section formulas, verify all tensor-power comparisons."
+   },
+   {
+    "node": "lem-weil-pbc-spec-module-tilde-sections",
+    "why": "Generic principal-open section-localization formula used in the explicit uniqueness calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-depth-two-hartogs-restriction",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-spec-module-tilde-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q55-c2260ca28",
+  "group": "Q55",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-c2260ca28 (reviewer sub-agent of L); spot-checked: Read the item in full, every cited statement (16 proof_deps and 12 stmt_deps), the parent's step 3 and Stacks 0E9I (divisors.tex l.774). The only changes are proof, proof_deps, proof_origin, searches, status and split_report. There are no new nodes, no SGA, and proof_deps equals the union of uses. The statement is true as stated: p is an isomorphism over U = X minus Z, alpha is an isomorphism on p^-1 U, and Hartogs on X (Z closed points of X_k with depth at least 2) gives injectivity. Flatness of Y (no pi-torsion) gives injectivity of restriction to Y_K, which is contained in p^-1 U, and that gives surjectivity. Properness and reducedness are not needed. Step checks: (1) Noetherian via finite-type-over-Noetherian; K=R[1/pi] via the u*pi^n factorization, so generic fibres are the pi-invertible opens and X_K lies in U. (2) Tensor powers are invertible, with finite affine sections via quasi-coherent-finite-type-affine (a) and depth-2 stalks. (3) The Hartogs node's hypotheses match exactly and its conclusion is the real restriction unit. (4) The flat stalk over R plus flat-tensor-preserves-injection gives no pi-torsion on Q_m. (5) The tilde D(pi) formula b/1 plus localization give pi^e b = 0, so b = 0. (6)-(8) The commuting square, bijectivity, image equality, and multiplicativity via the pullback-tensor formula and a^(i+j)=a^i a^j are correct. Edge cases: Z empty, m=0, empty schemes, nonreduced flat models; dropping flatness of Y gives a counterexample with an extra vertical component. Duplicates: trait-line-section-generic-germs-extension and flat-curve-line-depth need a reduced pure 1-dimensional special fibre, so they do not apply. The declared tool_uses (Hartogs, qc-finite-type-affine, invertible-pullback-tensor, tilde sections) are generic and accepted. Batch-5: lem-trf-flat-tensor-preserves-injection is the Mathlib leaf Module.Flat.lTensor_preserves_injective_linearMap with empty closure, plain flatness algebra outside both assumed statements and their proofs, so the citation stands."
+ }
+}

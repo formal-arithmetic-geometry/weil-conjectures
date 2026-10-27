@@ -1,0 +1,334 @@
+{
+ "id": "lem-sf-lisse-flat-hom-site-comparison",
+ "kind": "statement",
+ "title": "Local finite-flat lisse calculation for the evaluation Hom comparison",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$, uniformizer $\\varpi_E$, and $n\\ge1$. Put $A=\\mathcal O_E/\\varpi_E^n$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Let $S$ be a separated finite-type $k$-scheme [def-weil-scheme-morphism-properties], and write $F_S=\\nu_S^*$ for comparison inverse image on ordinary constant-$A$ module derived categories on the small etale and pro-etale sites [def-weil-pbc-derived-categories, def-weil-pbc-proetale-modules, def-weil-pbc-site-comparison-morphism]. Write $H_\\tau=R\\mathcal Hom_A$ on site $\\tau$ [def-pur-derived-internal-hom]. Let $L$ be an etale locally constant sheaf with finite $A$-module stalks, all flat over $A$ (tensor with each stalk preserves exact sequences), regarded in degree zero. Let $N\\in D^b_c(S_{\\mathrm{et}},A)$ [def-weil-pbc-constructible-complexes].\n\nThe evaluation-defined comparison of [def-sf-evaluation-hom-site-comparison]\n$$\\beta_{L,N}:F_SH_e(L,N)\\longrightarrow H_p(F_SL,F_SN)$$\nis an isomorphism, natural in $L,N$. There exists an etale cover $\\{U_i\\to S\\}$ trivializing $L$ by finite free modules. On any such cover, with chosen value $A^{r_i}$, restriction of this very map is the finite-free comparison $F_{U_i}(N|_{U_i})^{\\oplus r_i}\\to(F_{U_i}N|_{U_i})^{\\oplus r_i}$ induced by evaluation. These restricted maps are identified through the localized-site internal-Hom isomorphisms, so the assertion includes compatibility on iterated restrictions and changes of trivialization. If $N$ has cohomology in $[u,v]$, then $H_e(L,N)$ has constructible cohomology in $[u,v]$, in particular it is bounded below. No finite-Tor condition on $N$ is imposed.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-weil-finite-duality-site-comparison.md",
+  "place": "Proof, second paragraph: site-perfect first argument; third paragraph: local bounded finite-free internal-Hom calculation"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-constructible-complexes",
+  "def-sf-evaluation-hom-site-comparison",
+  "def-sf-site-hom-restriction-comparison"
+ ],
+ "proof": [
+  {
+   "text": "The coefficient quotient is local: its defining positive power is contained in the maximal ideal of the valuation ring, so it is nontrivial and inherits locality by the surjective quotient map. Trivialize the lisse sheaf. On a nonempty cover member, its constant value is dualizable by the existing LisseDual theorem, hence finite and flat; the finite-flat local-ring theorem supplies a finite basis. On an empty member both sheaves are zero, and rank zero suffices.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "def-weil-pbc-constructible-complexes",
+    "lem-weil-pbc-finite-flat-local-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-weil-finite-duality-site-comparison.proof.md",
+    "place": "Second and third paragraphs: finite-flat lisse first argument and evaluation comparison"
+   }
+  },
+  {
+   "text": "Construct a dual of L[0] by dualizing its single complex termwise. The existing bounded-complex duality gives the exact pairing after localization. Every dual term is lisse and dualizable, hence flat and constructible; GenericPerfect.constructibleFiniteTor_Q_obj_of_flat puts the dual in the bounded constructible finite-Tor subcategory. This is the private lisse_pairing proof, derived from the source-library APIs, without selecting an arbitrary object from an unproved existence theorem.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "def-weil-pbc-constructible-complexes"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-weil-finite-duality-site-comparison.proof.md",
+    "place": "Second and third paragraphs: finite-flat lisse first argument and evaluation comparison"
+   }
+  },
+  {
+   "text": "For the canonical strong monoidal comparison inverse image, the evaluation-defined arrow is exactly ihomComparison. The exact pairing from the preceding step and isIso_ihomComparison_app_of_exactPairing make it invertible. Two-variable naturality follows from ihomComparison naturality and pre_naturality.",
+   "uses": [
+    "def-sf-evaluation-hom-site-comparison",
+    "lem-fix-monoidal-dual-hom-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-weil-finite-duality-site-comparison.proof.md",
+    "place": "Second and third paragraphs: finite-flat lisse first argument and evaluation comparison"
+   }
+  },
+  {
+   "text": "Prove the finite-free coordinate assertion in closed monoidal categories whose right-tensor functors preserve finite coproducts. Under the tensor-Hom adjunction, maps to internal Hom correspond to maps out of K tensor T. Tensoring a colimiting finite cofan with T remains colimiting, so evaluation at its basis vectors induces a bijection on every Yoneda Hom set and hence an isomorphism to the finite product. A strong monoidal functor preserving finite coproducts carries the cofan to the unit-normalized mapped basis. Its evaluation comparison commutes with each coordinate by the tensorator naturality and unit law, yielding the exact stated piComparison equality. This includes rank zero and every choice of basis.",
+   "uses": [
+    "def-sf-evaluation-hom-site-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-weil-finite-duality-site-comparison.proof.md",
+    "place": "Second and third paragraphs: finite-flat lisse first argument and evaluation comparison"
+   }
+  },
+  {
+   "text": "Apply siteHomComparison_restriction on every etale object and again on every further etale object. Its conclusion is precisely the canonical evaluation-normalized restriction assertion required here; no alternative restriction maps are chosen.",
+   "uses": [
+    "lem-sf-site-hom-comparison-thick"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-weil-finite-duality-site-comparison.proof.md",
+    "place": "Second and third paragraphs: finite-flat lisse first argument and evaluation comparison"
+   }
+  },
+  {
+   "text": "Identify RHom(L[0],N) with the derived tensor of the dual and N using the exact pairing. The source-library boundedConstructible_tensor theorem applies since the dual is bounded constructible with finite Tor amplitude and N is merely bounded constructible. Transport along the tensor flip and Hom-tensor isomorphism, then use the constructible-sheaf comparison to obtain the statement's constructibility predicate and boundedness below. No finite-Tor assumption on N is introduced.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "def-weil-pbc-constructible-complexes",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-weil-finite-duality-site-comparison.proof.md",
+    "place": "Second and third paragraphs: finite-flat lisse first argument and evaluation comparison"
+   }
+  },
+  {
+   "text": "Flatness gives Tor amplitude [0,0] for L[0]. The exact dual also has amplitude [0,0] by DerivedCategory.torAmplitudeIn_of_exactPairing. The degreewise homology-tensor vanishing theorem therefore preserves each vanishing degree of N. Transfer this through ihomObjIsoTensor to obtain exactly the original interval, including the empty interval case.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-sf-source-dual-tor-interval"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-weil-finite-duality-site-comparison.proof.md",
+    "place": "Second and third paragraphs: finite-flat lisse first argument and evaluation comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-constructible-complexes",
+  "lem-weil-pbc-finite-flat-local-free",
+  "def-pur-derived-internal-hom",
+  "def-sf-evaluation-hom-site-comparison",
+  "lem-fix-monoidal-dual-hom-comparison",
+  "lem-sf-site-hom-comparison-thick",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "lem-sf-source-dual-tor-interval"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-weil-finite-duality-site-comparison.proof.md",
+  "place": "Second and third paragraphs: finite-flat lisse first argument and evaluation comparison; shortened via existing lisse and bounded-complex duality, categorical basis coordinates, and derived tensor stability (S1)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Etale proetale derived internal Hom comparison for a finite flat locally constant first argument and a bounded constructible second argument",
+   "results": "8 hits; LightCondensed.ihomPoints_symm_comp; Condensed.profiniteSolidCounit; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition; LightCondensed.ihomPoints; LightCondensed.free_internallyProjective_iff_tensor_condition'; LightCondensed.free_internallyProjective_iff_tensor_condition; Condensed.profiniteSolidification. The hits are ordinary sheaf pullback, locally bijective presheaves, condensed modules or locally constant functions, not the finite-flat lisse derived Hom site comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localize derived internal Hom comparison to an etale cover where a finite flat lisse sheaf is finite free and detect isomorphisms",
+   "results": "8 hits; PresheafOfModules.homEquivOfIsLocallyBijective; PresheafOfModules.homEquivOfIsLocallyBijective_apply; PresheafOfModules.homEquivOfIsLocallyBijective_symm_apply; PresheafOfModules.restrictHomEquivOfIsLocallySurjective; PresheafOfModules.sheafifyHomEquiv'; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; SheafOfModules.unitHomEquiv_comp_apply; PresheafOfModules.sheafificationAdjunction_homEquiv_apply. The hits are ordinary sheaf pullback, locally bijective presheaves, condensed modules or locally constant functions, not the finite-flat lisse derived Hom site comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback, \"Hom\"",
+   "results": "7 hits; SheafOfModules.conjugateEquiv_pullbackId_hom; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit. The hits are ordinary sheaf pullback, locally bijective presheaves, condensed modules or locally constant functions, not the finite-flat lisse derived Hom site comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ll]ocally[Cc]onstant.*[Hh]om|[Hh]om.*[Ll]ocally[Cc]onstant|[Pp]roetale.*[Hh]om",
+   "results": "25 hits; Mathlib/Condensed/Discrete/Colimit.lean; Mathlib/Condensed/Discrete/Colimit.lean; Mathlib/Topology/Category/Profinite/CofilteredLimit.lean; Mathlib/Topology/Category/Profinite/CofilteredLimit.lean; Mathlib/Topology/Category/Profinite/CofilteredLimit.lean; Mathlib/Topology/Category/Profinite/CofilteredLimit.lean; Mathlib/Topology/Category/Profinite/CofilteredLimit.lean; Mathlib/Topology/Category/Profinite/Extend.lean. The hits are ordinary sheaf pullback, locally bijective presheaves, condensed modules or locally constant functions, not the finite-flat lisse derived Hom site comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image from etale to proetale commutes with derived Hom from a finite flat lisse sheaf",
+   "results": "8 hits; CategoryTheory.Equivalence.sheafCongrPrecoherent_inverse_map_val_app; CategoryTheory.Functor.sheafPushforwardContinuousComp_inv_app_val_app; CategoryTheory.Equivalence.sheafCongrPrecoherent_inverse_obj_val_map; CategoryTheory.Functor.sheafPushforwardContinuousIso_inv; CategoryTheory.Equivalence.sheafCongr.inverse_map_val_app; RingHom.Etale.stableUnderComposition; RingHom.Etale; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.inv_naturality. The hits are ordinary sheaf pullback, locally bijective presheaves, condensed modules or locally constant functions, not the finite-flat lisse derived Hom site comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|[Cc]onstructible.*[Hh]om|[Ll]isse",
+   "results": "10 hits; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean. The hits are ordinary sheaf pullback, locally bijective presheaves, condensed modules or locally constant functions, not the finite-flat lisse derived Hom site comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale proetale derived internal Hom comparison for finite flat locally constant sheaf with bounded constructible second argument",
+   "results": "8 hits: CompHausLike.LocallyConstant.counit_app_val, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.ihomPoints_symm_comp, CompHausLike.LocallyConstant.adjunction, LightCondSet.LocallyConstant.adjunction, LightCondensed.ihomPoints, Condensed.profiniteSolidCounit, CompHausLike.LocallyConstant.counit.  Read search hits; they concern ordinary pullback/free sheaves or light condensed modules, not this derived site-comparison theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale.*Hom|Hom.*proetale|lisse.*Hom|Hom.*lisse",
+   "results": "0 hits: .  Read search hits; they concern ordinary pullback/free sheaves or light condensed modules, not this derived site-comparison theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback from etale to proetale commutes with derived internal Hom from locally finite free sheaves",
+   "results": "8 hits: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjFreeIso.congr_simp, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullback, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pullback.  Read search hits; they concern ordinary pullback/free sheaves or light condensed modules, not this derived site-comparison theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact monoidal inverse image preserves internal Hom with finite locally free module as first argument",
+   "results": "8 hits: LightCondensed.ihomPoints, LightCondensed.ihomPoints_symm_comp, LightCondensed.instMonoidalClosedLightCondMod, LightCondensed.instMonoidalClosedFunctorOppositeLightProfiniteModuleCat, LightCondensed.ihomPoints_symm_apply, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition.  Read search hits; they concern ordinary pullback/free sheaves or light condensed modules, not this derived site-comparison theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-finite-duality-site-comparison",
+  "date": "2026-10-22",
+  "group": "Q02"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": "lem-weil-finite-duality-site-comparison",
+   "place": "Proof, second paragraph: site-perfect first argument; third paragraph: local bounded finite-free internal-Hom calculation",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-lisse-flat-hom-site-comparison",
+  "worker": "stage1",
+  "summary": "Q33: retained the full statement, supplied eight proof steps using existing nodes only, checked the evaluation arrow and slice coherence, and proved the sharp cohomology interval via exact sheaf Hom without a Tor assumption on N. No Lean writes or compilation.",
+  "blueprint": "lem-weil-finite-duality-site-comparison proof, second paragraph (site-perfect local reduction) and third paragraph (local bounded finite-free Hom calculation). Steps 1--6 realize the comparison and its specified coherence; Steps 7--8 prove the added degree-zero lisse bound.",
+  "tool_uses": [
+   {
+    "node": "def-weil-l-adic-coefficient-extension",
+    "why": "Generic ringed-site/module or constructibility tool for the local finite-free calculation; its statement supplies exactly the input cited in the proof, without replacing the unit route."
+   },
+   {
+    "node": "def-weil-pbc-constructible-complexes",
+    "why": "Generic ringed-site/module or constructibility tool for the local finite-free calculation; its statement supplies exactly the input cited in the proof, without replacing the unit route."
+   },
+   {
+    "node": "lem-pe-comparison-etale-slice-abelian-pullback",
+    "why": "Generic ringed-site/module or constructibility tool for the local finite-free calculation; its statement supplies exactly the input cited in the proof, without replacing the unit route."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Generic ringed-site/module or constructibility tool for the local finite-free calculation; its statement supplies exactly the input cited in the proof, without replacing the unit route."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic ringed-site/module or constructibility tool for the local finite-free calculation; its statement supplies exactly the input cited in the proof, without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic ringed-site/module or constructibility tool for the local finite-free calculation; its statement supplies exactly the input cited in the proof, without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-evaluation-transpose",
+    "why": "Generic ringed-site/module or constructibility tool for the local finite-free calculation; its statement supplies exactly the input cited in the proof, without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic ringed-site/module or constructibility tool for the local finite-free calculation; its statement supplies exactly the input cited in the proof, without replacing the unit route."
+   },
+   {
+    "node": "prop-constructible-pullback",
+    "why": "Generic ringed-site/module or constructibility tool for the local finite-free calculation; its statement supplies exactly the input cited in the proof, without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+    "why": "Generic ringed-site/module or constructibility tool for the local finite-free calculation; its statement supplies exactly the input cited in the proof, without replacing the unit route."
+   },
+   {
+    "node": "lem-sc-finite-free-internal-hom-exact",
+    "why": "Generic ringed-site/module or constructibility tool for the local finite-free calculation; its statement supplies exactly the input cited in the proof, without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Generic ringed-site/module or constructibility tool for the local finite-free calculation; its statement supplies exactly the input cited in the proof, without replacing the unit route."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic ringed-site/module or constructibility tool for the local finite-free calculation; its statement supplies exactly the input cited in the proof, without replacing the unit route."
+   },
+   {
+    "node": "def-pur-derived-internal-hom",
+    "why": "Generic ringed-site/module or constructibility tool for the local finite-free calculation; its statement supplies exactly the input cited in the proof, without replacing the unit route."
+   },
+   {
+    "node": "lem-fd-constructible-tensor-refinement-witness",
+    "why": "Generic ringed-site/module or constructibility tool for the local finite-free calculation; its statement supplies exactly the input cited in the proof, without replacing the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-constructible-complexes",
+  "def-pur-derived-internal-hom"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-ee8b8a7b4",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-ee8b8a7b4 (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full. There are no new nodes. The statement and stmt_deps are unchanged from Q02's creation of the item, and it carries every argument of the parent's old step 7. The source is the master blueprint lem-weil-finite-duality-site-comparison, paragraphs 2-3. β is the evaluation transpose of def-sf-evaluation-hom-site-comparison on ordinary constant-A modules on both sites, so the coefficient category is not substituted. Step checks: S1: A is finite local and L is lisse, and lem-weil-pbc-finite-flat-local-free (00NZ) makes each local value free; empty members and S empty are handled. S2: the slice square is upgraded to modules through the scalar endomorphisms; the RHom restriction η and the stated ev/tr equations of lem-weil-pbc-ringed-slice-evaluation-transpose identify the restricted β. S3: the good truncation is written out; lem-sf-hom-comparison-finite-free applies with P'=A^r[0], needs no Tor condition, and ℓ is invertible on U_i. S4: the bounded-free model and the coordinate identification show the transpose is the tuple identity, with no sign. S5 (elementary): naturality, iterated restriction and local GL_r basis changes. S6: base-changed etale covers are pro-etale covers; the sheaf axiom kills H^t of the cone, and lem-kun-distinguished-cone-zero concludes. S7: Hom(L,-) is exact, and D⊗G≅Hom(L,G) for every G. S8: H^t H_e ≅ D⊗H^t N, constructible by the tensor-refinement witness, which needs no flatness, giving the sharp [u,v]. Edge cases checked: L=0, N=0, S empty, and A=Z/4 with N=Z/2[0] (infinite Tor dimension). No cycle, no SGA, and all source tags exist with the stated labels. Tool uses are generic and accepted. The closure adds only Stacks 0951 (lem-trf-weakly-etale-between-objects), which the parent's old step 7 already reached. review_split's 'no such node' messages are a symlink artifact. Advisory: lem-sc-finite-free-internal-hom-exact cites Tag 0GM8, which states a different lemma (another node's metadata)."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.LisseFlatHomSiteComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.lisseFlatHomSiteComparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.lisseFlatHomCoordinates",
+   "AlgebraicGeometry.ProEtale.lisseFlatHomFiniteFreeAssertion",
+   "AlgebraicGeometry.ProEtale.lisseFlatHomLocalAssertion",
+   "AlgebraicGeometry.ProEtale.lisseFlatHomNaturality",
+   "AlgebraicGeometry.ProEtale.lisseFlatHomSiteAssertion",
+   "AlgebraicGeometry.ProEtale.lisseFlatHomSiteComparison"
+  ],
+  "file": "lean/Sheaf/Paper/LisseFlatHomSiteComparison.lean",
+  "statement": "theorem lisseFlatHomSiteComparison (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type (u + 1)) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ+) (S : Scheme.{u}) [S.Over (Spec (CommRingCat.of D.k))] [IsSeparated (S ↘ Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (S ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (S ↘ Spec (CommRingCat.of D.k))] (L : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n))) [Scheme.IsFiniteLocallyConstantSheaf L] (_hflat : ObjectProperty.flat L) (N : Etale.DerivedCategoryModule (Padic.coefficientExtensionRing l E n) S) (_hN : @Etale.DerivedCategory.isBoundedConstructible (Padic.coefficientExtensionRing l E n) _ (Padic.finite_coefficientExtensionRing l E n n.property) S N) : @lisseFlatHomSiteAssertion (Padic.coefficientExtensionRing l E n) _ (Padic.finite_coefficientExtensionRing l E n n.property) S L N",
+  "branch": "newtargets-dag",
+  "by": "Q90",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The transparent assertion retains all clauses, including evaluation-normalized finite-free coordinates, naturality, localized-site equations on all and iterated slices, and the unchanged constructible cohomology interval. The added definition dependency def-sf-site-hom-restriction-comparison owns exactly the existing canonical restriction constructions used here; neither theorem in SiteHomComparisonThick is a statement dependency."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9fd215e7b",
+  "group": "Q90",
+  "result": "pass",
+  "note": "Re-delivery of 965188079cdb (returned for H2: theorem node lem-sf-site-hom-comparison-thick cited only for plain definitions). The item .lean is byte-identical; the item node changes only in replacing that stmt_dep with new def-sf-site-hom-restriction-comparison, plus lean.note. The new node is kind definition, existing:true over unchanged Sheaf.AlgebraicGeometry.SiteHomComparisonThick: all 14 declarations exist as def/abbrev/@[irreducible] def; no sorry theorem is listed or used via .choose; lean.statement is verbatim lines 271-280; the TeX matches the bodies (m_G residue transport, theta from the derived canonical square, ihomComparison transposes, IsIso∧IsIso∧equation read left to right, universes u+2/u+1); stmt_deps are definitions only, no cycle. All item hypotheses and conclusion clauses re-checked (canonical beta IsIso, two-variable naturality, trivializing cover, restriction assertion on U and on V over U, basis-evaluation coordinate conjugacy to piComparison for every r and e, constructible H^i, exact [a,b] interval, plus). Edge cases: empty S, r=0, L=0, N=0, a>b, n=1, off-cover U. Gates OK: sorry only, docstrings with all 8 steps, ordinary coefficients on both sites. No compile (no file changed). Advisories: the new def node does not cite new-integral-residue-derived-monoidal or the upperStar owners (inherited use in an unchanged module); the 14 declarations' docstrings name the theorem node; lisseFlatHomLocalAssertion restates the siteComparisonEvaluationHom body."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261024T190955-L-198560",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

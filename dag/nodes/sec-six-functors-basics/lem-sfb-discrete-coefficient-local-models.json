@@ -1,0 +1,130 @@
+{
+ "id": "lem-sfb-discrete-coefficient-local-models",
+ "kind": "statement",
+ "title": "Finite constant local models under discrete section reconstruction",
+ "statement": "Let X and Y be schemes in universe u, f:Y→X a scheme morphism, A a commutative ring in universe u, k a Noetherian commutative ring in universe u+1 and e:ULift A≃+*k. Let R_X be the pullback to X of the discrete condensed ring A and let c:underline k≅smallRing(X,R_X) be any ring-sheaf isomorphism, in the constructions of [def-sfb-integral-models-stacks-data]. For an internal R_X-module N, put T_c(N)=smallModules(N) followed by scalar restriction along c. Then the restriction f*N has a finite constant local model [det-def-sfb-constructible-local-model] if and only if the fixed-k-module sheaf underlying T_c(N), pulled back along f, is locally constant of finite type on the coefficient-sized small pro-etale site of Y [def-sfb-affine-locally-constructible-proetale-modules]. Explicitly the latter means that over every site object there is a covering sieve on whose members it is isomorphic to the constant sheaf of a finitely presented k-module. No Noetherian condition on X or Y, no stratification and no tensor-functor assertion is part of this statement. No normalization of c is required: finite matrices can be made constant after refining the cover.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CY, lemma-sheafification-presheaf-modules; Sites Tag 00YV, proposition-functoriality-algebraic-structures-topoi; Pro-etale Tag 09AJ, definition-constructible. The finite-matrix local step of lem-sfb-discrete-coefficient-model, proof step 3."
+ },
+ "stmt_deps": [
+  "def-sfb-integral-models-stacks-data",
+  "det-def-sfb-constructible-local-model",
+  "def-sfb-affine-locally-constructible-proetale-modules"
+ ],
+ "proof": [
+  {
+   "text": "Define the sieve of objects whose scheme restriction admits a finitely presented point model. Pullback composition and the point-model pullback compositor make this downward closed. Scheme covers generate covering sieves at the terminal pro-etale object; conversely extract a generating family from a covering sieve and shrink it to the scheme universe. Transport this sieve along AsSmall.up/down. This proves the covering-sieve criterion for the internal local-model predicate.",
+   "uses": [
+    "det-def-sfb-constructible-local-model",
+    "def-sfb-integral-models-stacks-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Forward: pull the internal point-model sieve from the terminal object to every site object. Unpack each internal finite presentation into its actual finite free matrix and map its cokernel isomorphism along point inverse image. Apply [lem-sfb-discrete-point-presentation-refinement]. The ordinary cokernel is finitely generated because its projection from k^n is surjective (Module.Finite.of_surjective). The sieve of constant finite models is downward closed by the slice-map/constant-sheaf isomorphisms; transitivity of covering sieves glues the refined covers.",
+   "uses": [
+    "lem-sfb-discrete-point-presentation-refinement",
+    "def-sfb-affine-locally-constructible-proetale-modules"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reverse: apply the coefficient local-system hypothesis to the terminal object. On each member, Noetherianity gives finite presentation of its finite module. Use Module.FinitePresentation.exists_fin' to choose a finite free presentation and ModuleCat.isColimitCokernelCofork to identify the module with that matrix cokernel. Compose the constant-sheaf isomorphism and apply [lem-sfb-discrete-constant-presentation-lifting]. Its literal point cokernels are finitely presented by definition. Covering-sieve transitivity then gives a covering internal point-model sieve; the criterion from step 1 recovers the required scheme cover.",
+   "uses": [
+    "lem-sfb-discrete-constant-presentation-lifting",
+    "def-sfb-affine-locally-constructible-proetale-modules",
+    "det-def-sfb-constructible-local-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-def-sfb-constructible-local-model",
+  "def-sfb-integral-models-stacks-data",
+  "lem-sfb-discrete-point-presentation-refinement",
+  "def-sfb-affine-locally-constructible-proetale-modules",
+  "lem-sfb-discrete-constant-presentation-lifting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/_section.md",
+  "place": "Proof (1)--(2): the discrete residue local-model comparison. Actual Lean reduction by finite matrix cokernels, the two single-matrix refinement lemmas and fully proved covering-sieve gluing. The generic scheme-cover calculation follows the proved private coverPredicate_on_sieve in IntegralSectionLocalModels, reproduced privately to avoid unrelated integral-model imports."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Discrete constant coefficient module sheaves and internal modules have equivalent finite constant local models",
+   "date": "2026-10-26",
+   "results": "8 hits, including CondensedMod.isDiscrete_tfae and CondensedMod.LocallyConstant.functorIsoDiscrete.",
+   "verdict": "Discreteness comparisons do not identify the internal finite-presentation predicate with the project small-site local model."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence between internal modules over a discrete constant ring and sheaves of modules on the proetale site preserves finite constant local models",
+   "date": "2026-10-26",
+   "results": "8 hits, including CondensedMod.isDiscrete_tfae, CondensedMod.ofSheafProfinite and Condensed.finFree.",
+   "verdict": "No exact comparison of the two finite local-model predicates."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteConstantLocalModel|scalarNormalized|IsLocallyConstantFinite",
+   "date": "2026-10-26",
+   "results": "0 Mathlib hits. Local project search finds FiniteConstantLocalModel and ScalarNormalizedConstantModels.",
+   "verdict": "Use the existing finite-matrix characterization. The scalar-normalized abstract theorem does not supply the required small-site and scheme-pullback identifications."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DiscreteCoefficientModel",
+  "date": "2026-10-26",
+  "group": "Q5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Integral-models proof (1)--(2): preservation of finite constant local models by the coefficient presentation.",
+   "via": [
+    "lem-sfb-discrete-coefficient-model",
+    "lem-sfb-integral-residue-coefficient-transport",
+    "lem-sfb-integral-models-residue-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DiscreteCoefficientLocalModels",
+  "file": "lean/Sheaf/AlgebraicGeometry/DiscreteCoefficientLocalModels.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralModelsStacks.discrete_coefficient_local_models",
+  "statement": "theorem discrete_coefficient_local_models\n    {X Y : Scheme.{u}} (f : Y ⟶ X)\n    (A : Type u) [CommRing A] (k : Type (u + 1)) [CommRing k] [IsNoetherianRing k]\n    (e : ULift.{u + 1} A ≃+* k)\n    (c : ConstantCompletion.constant (Scheme.coefficientProEtaleModelTopology.{u, u} X) k ≅\n      smallRing X (condensedRingObj (discreteObj A) X))\n    (N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (discreteObj A) X)) :\n    HasFiniteConstantLocalModel (discreteObj A) Y\n        ((CondensedRing.upperStar (discreteObj A) f).obj N) ↔\n      IsCoefficientModelLocallyConstantFinite\n        (Scheme.coefficientProEtaleModelTopology.{u, u} Y) k\n        ((Scheme.coefficientProEtaleFixedModulePullback.{u, u} f k).obj\n          ((coefficientModelFixedScalars _ k).obj\n            ((smallModules X (condensedRingObj (discreteObj A) X) ⋙\n              ConstantCompletion.res c.hom).obj N)))",
+  "branch": "sheaf-dag",
+  "by": "Q5",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261026T002258-L-72466",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261026T071302-L-3909786",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

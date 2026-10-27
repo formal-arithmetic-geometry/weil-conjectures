@@ -1,0 +1,340 @@
+{
+ "id": "lem-sfb-exact-postcomposition-kinjective-descent",
+ "kind": "statement",
+ "title": "K-injective descent of comparisons after arbitrary exact functors",
+ "statement": "Let $\\mathcal A_0,\\mathcal A_1,\\mathcal B$ be abelian categories [def-sp-abelian] with ordinary unbounded derived categories and localization functors $Q$ [def-weil-abstract-derived-category]. Assume every complex in $\\mathcal A_0$ and $\\mathcal A_1$ admits a K-injective resolution, meaning a quasi-isomorphism to a complex $I$ for which every map from an acyclic complex to $I$ is null-homotopic. Let $H:\\mathcal A_1\\to\\mathcal A_0$ be additive with an exact additive left adjoint, and let $E_i:\\mathcal A_i\\to\\mathcal B$ ($i=0,1$) be exact additive functors [def-galois-exact-functor, def-weil-pbc-additive-functor]. Suppose $c:E_0H\\xrightarrow{\\sim}E_1$ is a specified natural isomorphism. Use the total right derived functor $RH$ with its canonical comparison unit $\\gamma_I:Q(HI)\\to RH(QI)$ [def-sfb-right-derived-functor], and termwise exact derived functors $D(E_i)$ [lem-weil-pbc-exact-functor-derived-factorization].\nThere is a unique natural isomorphism $r_c:D(E_0)RH\\xrightarrow{\\sim}D(E_1)$ satisfying\n$$r_{c,QI}\\circ D(E_0)(\\gamma_I)=Q(c_I)$$\nfor every K-injective $I$, with the canonical exact-functor localization comparisons understood. For every K-injective resolution $a:N\\to I$, its component at $QN$ is $Q(c_I)$ under the resolution identifications of its source with $Q(E_0HI)$ and its target with $Q(E_1I)$. It is independent of the resolution and natural for all derived morphisms, represented by their unique homotopy classes between K-injectives.\nLet also $\\mathcal A_2$ be an abelian category with such resolutions, $E_2:\\mathcal A_2\\to\\mathcal B$ exact additive, and $J:\\mathcal A_2\\to\\mathcal A_1$, $P:\\mathcal A_2\\to\\mathcal A_0$ additive with exact additive left adjoints. Specify $d:P\\xrightarrow{\\sim}HJ$, $c':E_1J\\xrightarrow{\\sim}E_2$ and $b:E_0P\\xrightarrow{\\sim}E_2$ such that $b=c'\\circ(cJ)\\circ(E_0d)$. The functors $H,J,P$ preserve K-injectives, and the comparison $\\kappa:RP\\xrightarrow{\\sim}(RH)(RJ)$ normalized on a K-injective $I$ by $Q(d_I)$ is well-defined using $JI$ as the intermediate K-injective. The derived comparisons satisfy\n$$r_b=r_{c'}\\circ(r_cRJ)\\circ(D(E_0)\\kappa).$$\nIf $H=1_{\\mathcal A_0}$, $E_1=E_0$ and $c=1$, then $r_c$ is the identity after the canonical comparison $R1\\cong1$. All formulas insert canonical functor associators. An additive exact equivalence of abelian categories preserves and reflects K-injectivity and transports K-injective resolutions; the normalized comparisons above agree under such equivalences. The exact functors $E_i$ are not required to preserve K-injectives.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 070I, lemma-K-injective, and Tag 08BJ, lemma-adjoint-preserve-K-injectives; K-injective derivation of restriction as in sites-cohomology Tag 0D6G; returned item steps 3-4, exact-equivalence sentence of step 1 and localization parts of steps 5-6"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "def-galois-exact-functor",
+  "def-weil-pbc-additive-functor",
+  "def-sfb-right-derived-functor",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof": [
+  {
+   "text": "Put $F=D(E_0)RH$ and $G=D(E_1)$. The exact-functor factorization identifies $D(E_i)(QM)$ naturally with $Q(E_iM)$ for every complex $M$. The right-derived comparison $\\gamma_I$ is invertible when $I$ is K-injective. Thus there are natural identifications $f_I:F(QI)\\xrightarrow{\\sim}Q(E_0HI)$, obtained by inverting $D(E_0)(\\gamma_I)$ and then using the exact-functor comparison, and $g_I:G(QI)\\xrightarrow{\\sim}Q(E_1I)$. Set $t_I=g_I^{-1}Q(c_I)f_I$. These are isomorphisms with the required normalization on K-injectives.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I (lemma-K-injective), 070Y (lemma-K-injective-defined), 070K (lemma-enough-K-injectives-implies), and 08BJ (lemma-adjoint-preserve-K-injectives); explicit normalized descent calculation by Q100"
+   }
+  },
+  {
+   "text": "For K-injectives $I,I'$ and a homotopy class $h:I\\to I'$, naturality of $\\gamma$, of the exact-factorization comparisons and of $c$ gives $G(Qh)t_I=t_{I'}F(Qh)$. This calculation applies to homotopy classes: if $u-v=d s+s d$, applying an additive functor $T$ gives $T(u)-T(v)=T(d)T(s)+T(s)T(d)$, so all termwise functors used respect homotopies. Every derived morphism $QI\\to QI'$ has a unique such homotopy class by the cited Hom bijection. Consequently this square holds for every derived morphism between K-injective representatives.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I (lemma-K-injective), 070Y (lemma-K-injective-defined), 070K (lemma-enough-K-injectives-implies), and 08BJ (lemma-adjoint-preserve-K-injectives); explicit normalized descent calculation by Q100"
+   }
+  },
+  {
+   "text": "For each $X\\in D(\\mathcal A_1)$ choose a complex representing it and a K-injective resolution, giving $e_X:X\\xrightarrow{\\sim}QI_X$. Define $r_X=G(e_X)^{-1}t_{I_X}F(e_X)$. For $a:X\\to Y$, the derived morphism $e_Yae_X^{-1}:QI_X\\to QI_Y$ is $Q(h)$ for a unique homotopy class $h$, by the Hom bijection. Substituting it into the preceding square and cancelling $F(e_X)$ and $G(e_Y)$ proves $G(a)r_X=r_YF(a)$. Thus the components define a natural isomorphism $r:F\\xrightarrow{\\sim}G$. Representatives exist because the derived category is a localization and the assumed resolutions exist.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I (lemma-K-injective), 070Y (lemma-K-injective-defined), 070K (lemma-enough-K-injectives-implies), and 08BJ (lemma-adjoint-preserve-K-injectives); explicit normalized descent calculation by Q100"
+   }
+  },
+  {
+   "text": "The same square with $e_X:X\\to QI$ shows that every natural transformation restricting to $t_I$ must have component $G(e_X)^{-1}t_IF(e_X)$ at $X$. In particular our construction restricts to $t_I$ even if the initial choice at $QI$ was a different resolution: apply the square to the derived isomorphism between the two K-injective representatives. This proves uniqueness and independence of all choices. If $a:N\\to I$ is any K-injective resolution, take $X=QN$ and $e_X=Q(a)$. Naturality of $\\gamma$ identifies $F(Qa)$ with the source resolution identification, and the exact-functor comparison identifies $G(Qa)$ with the target one. The displayed component formula is then exactly $Q(c_I)$ under those identifications.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I (lemma-K-injective), 070Y (lemma-K-injective-defined), 070K (lemma-enough-K-injectives-implies), and 08BJ (lemma-adjoint-preserve-K-injectives); explicit normalized descent calculation by Q100"
+   }
+  },
+  {
+   "text": "Apply the right-adjoint preservation theorem separately to $H,J,P$, using their specified exact additive left adjoints. They all preserve K-injectives. In particular, if $I\\in\\operatorname{Ch}(\\mathcal A_2)$ is K-injective, then $JI$ is K-injective in $\\mathcal A_1$. The right-derived comparisons therefore identify $RP(QI)$ with $Q(PI)$ and $RH(RJ(QI))$ with $Q(HJI)$: for the latter, first use $\\gamma^J_I:Q(JI)\\xrightarrow{\\sim}RJ(QI)$ and then $\\gamma^H_{JI}$. These identifications are natural on the homotopy classes between K-injectives.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I (lemma-K-injective), 070Y (lemma-K-injective-defined), 070K (lemma-enough-K-injectives-implies), and 08BJ (lemma-adjoint-preserve-K-injectives); explicit normalized descent calculation by Q100"
+   }
+  },
+  {
+   "text": "Under these identifications define $k_I:RP(QI)\\to RH(RJ(QI))$ by $Q(d_I):Q(PI)\\xrightarrow{\\sim}Q(HJI)$. For a homotopy class $h:I\\to I'$, naturality of $d$ says $HJ(h)d_I=d_{I'}P(h)$. Hence $k_I$ is natural on K-injectives. For each $X\\in D(\\mathcal A_2)$ use $e_X:X\\xrightarrow{\\sim}QI_X$ and define $\\kappa_X=(RH\\,RJ)(e_X)^{-1}k_{I_X}RP(e_X)$. The Hom bijection represents $e_Yae_X^{-1}$ by a homotopy class, so the preceding square gives naturality by cancellation. It also proves independence of $e_X$ and uniqueness with this normalization, exactly as in steps 3-4. Each factor is invertible, giving the asserted natural isomorphism $\\kappa$.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I (lemma-K-injective), 070Y (lemma-K-injective-defined), 070K (lemma-enough-K-injectives-implies), and 08BJ (lemma-adjoint-preserve-K-injectives); explicit normalized descent calculation by Q100"
+   }
+  },
+  {
+   "text": "Evaluate the claimed composition identity at $QI$ for a K-injective $I\\in\\operatorname{Ch}(\\mathcal A_2)$. Step 5 permits $JI$ as the intermediate K-injective. After its comparison identifications, $D(E_0)(\\kappa_{QI})$ is $Q(E_0d_I)$, $r_c$ evaluated at $RJ(QI)\\cong Q(JI)$ is $Q(c_{JI})$, and $r_{c',QI}$ is $Q(c'_I)$. The latter use of $r_c$ is justified by its naturality at $\\gamma^J_I$. The composite is therefore $Q(c'_I)Q(c_{JI})Q(E_0d_I)=Q(b_I)$, by the assumed identity $b=c'\\circ(cJ)\\circ(E_0d)$. This is the normalization of $r_b$. Every object is isomorphic to such a $QI$, so naturality and cancellation extend equality to every object. The canonical associators merely reparenthesize these same composites.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I (lemma-K-injective), 070Y (lemma-K-injective-defined), 070K (lemma-enough-K-injectives-implies), and 08BJ (lemma-adjoint-preserve-K-injectives); explicit normalized descent calculation by Q100"
+   }
+  },
+  {
+   "text": "For H=1, consider the canonical natural isomorphism from the identity's termwise complex functor followed by Q to Q. On K-injective complexes, both this comparison and the recorded right-derived unit are invertible. Apply the extension construction of steps 2-4 to obtain e:R1≅1 satisfying the unit equation on K-injectives. For an arbitrary complex N, choose a resolution N→I. Naturality of e, of the unit, and of the identity-complex comparison, followed by cancellation of the invertible Q(N→I), proves the same equation at N. This equation determines e uniquely on K-injectives, hence everywhere by step 4. For exact E and c the left unitor of E, whiskering e by D(E) satisfies the descent normalization: substitute the equation for e and naturality of the exact-factorization comparison, then evaluate the identity-complex comparison degreewise. Uniqueness of normalized descent gives the stated identity formula.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I (lemma-K-injective), 070Y (lemma-K-injective-defined), 070K (lemma-enough-K-injectives-implies), and 08BJ (lemma-adjoint-preserve-K-injectives); explicit normalized descent calculation by Q100"
+   }
+  },
+  {
+   "text": "Let $U:\\mathcal A\\to\\mathcal A'$ be an additive exact equivalence with inverse $V$. The inverse is additive because its Hom maps invert additive bijections. It preserves finite limits and colimits: applying the equivalence identifies the cone Hom universal-property bijections with those of the original cone. Hence $V$ is exact. For an acyclic $M'$ and K-injective $I$, the homotopy adjunction for $V\\dashv U$ gives $\\operatorname{Hom}_{K(\\mathcal A')}(M',UI)\\cong\\operatorname{Hom}_{K(\\mathcal A)}(VM',I)=0$, since exactness makes $VM'$ acyclic. Thus $U$ preserves K-injectivity; interchanging $U,V$ (using $U\\dashv V$) proves reflection, since $VUI\\cong I$ as complexes and K-injectivity is invariant under isomorphism of complexes. Exactness carries a resolution quasi-isomorphism $a:N\\to I$ to a quasi-isomorphism $Ua:UN\\to UI$ with $UI$ K-injective, so $U$ transports K-injective resolutions. No preservation of K-injectives by $E_i$ is used anywhere.",
+   "uses": [
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I (lemma-K-injective), 070Y (lemma-K-injective-defined), 070K (lemma-enough-K-injectives-implies), and 08BJ (lemma-adjoint-preserve-K-injectives); explicit normalized descent calculation by Q100"
+   }
+  },
+  {
+   "text": "Agreement under equivalences. Let $U_0,U_1,W$ be additive exact equivalences $\\mathcal A_i\\to\\mathcal A_i'$, $\\mathcal B\\to\\mathcal B'$, and let data $H',E_0',E_1',c'$ as in the statement be given on $\\mathcal A_0',\\mathcal A_1',\\mathcal B'$ with natural isomorphisms $\\alpha:H'U_1\\cong U_0H$ and $\\epsilon_i:E_i'U_i\\cong WE_i$ such that $\\epsilon_1\\circ c'U_1=Wc\\circ\\epsilon_0H\\circ E_0'\\alpha$. Define $\\bar\\alpha:RH'\\,D(U_1)\\cong D(U_0)RH$ by $Q(\\alpha_I)$ on K-injective $I$, using $\\gamma'_{U_1I}$ (valid: $U_1I$ is K-injective by step 9), $\\gamma_I$ and the exact-factorization comparisons, and extend it exactly as in steps 2-4 by the Hom bijection; likewise $\\bar\\epsilon_i:D(E_i')D(U_i)\\cong D(W)D(E_i)$ is induced by $Q(\\epsilon_{i})$ through the exact-factorization comparisons and the localization property of $Q$ for natural transformations. The two natural isomorphisms $\\bar\\epsilon_1\\circ r_{c'}D(U_1)$ and $D(W)r_c\\circ\\bar\\epsilon_0RH\\circ D(E_0')\\bar\\alpha$ from $D(E_0')RH'D(U_1)$ to $D(W)D(E_1)$ are, at $QI$ for K-injective $I$ and after these identifications, $Q$ of the two sides of the assumed underived equation, hence equal there. Every object of $D(\\mathcal A_1)$ is isomorphic to such a $QI$, so naturality and cancellation as in step 4 make them equal everywhere: the normalized comparisons correspond. The compositor $\\kappa$ is treated identically with $Q(d_I)$. In the compositor transport assertion J need not preserve K-injectives. Extend the normalization equation for the H-transport square from K-injectives to every complex before applying it to JI: both sides are natural transformations into a functor factoring through Q, so naturality along a K-injective resolution and cancellation of its invertible derived image prove the equation on the original complex. Then substitute the two compositor normalizations and the J, H, and P transport-square equations; naturality and the given underived compatibility reduce the result degreewise to hd. Extend from QI to all derived objects by step 4.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-sfb-right-derived-functor",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I (lemma-K-injective), 070Y (lemma-K-injective-defined), 070K (lemma-enough-K-injectives-implies), and 08BJ (lemma-adjoint-preserve-K-injectives); explicit normalized descent calculation by Q100"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-right-derived-functor",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-termwise-adjunction-homotopy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 070I, 070Y, 070K and 08BJ; existing normalized descent calculation formalized by C2, 2026-10-23. Identity comparison constructed by extension from representatives; transport-square normalization extended along resolutions before applying it to JI."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived, CategoryTheory.NatTrans",
+   "results": "0 hits; scope Mathlib/(all). . ",
+   "date": "2026-10-22",
+   "verdict": "no match: rightDerivedNatIso and rightDerivedNatTrans_comp assume already supplied universal derived pairs; they do not prove that exact postcomposition admits the stated K-injective model, or its compatibility with successive right adjoints. Bounded-below R^n functors do not supply this unbounded statement"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Nn]at|[Nn]at.*rightDerived|rightDerived.*[Cc]omp|rightDerived.*[Ii]so",
+   "results": "22 hits; scope Mathlib/CategoryTheory. Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean. ",
+   "date": "2026-10-22",
+   "verdict": "no match: rightDerivedNatIso and rightDerivedNatTrans_comp assume already supplied universal derived pairs; they do not prove that exact postcomposition admits the stated K-injective model, or its compatibility with successive right adjoints. Bounded-below R^n functors do not supply this unbounded statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor applied after a right derived functor descends a natural isomorphism on K injective complexes independently of resolutions and preserves composition identities",
+   "results": "8 hits; scope Mathlib/(all). CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app_assoc, CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_app, CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_assoc, CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_app_assoc, CategoryTheory.NatTrans.rightDerived_comp_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq. ",
+   "date": "2026-10-22",
+   "verdict": "no match: rightDerivedNatIso and rightDerivedNatTrans_comp assume already supplied universal derived pairs; they do not prove that exact postcomposition admits the stated K-injective model, or its compatibility with successive right adjoints. Bounded-below R^n functors do not supply this unbounded statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural isomorphisms from exact functors after right derived functors constructed on K injective resolutions preserve composition",
+   "results": "8 hits; scope Mathlib/(all). CategoryTheory.Functor.rightDerivedNatTrans_comp, CategoryTheory.NatTrans.rightDerived_comp, CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.InjectiveResolution.iso_hom_naturality, CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality. ",
+   "date": "2026-10-22",
+   "verdict": "no match: rightDerivedNatIso and rightDerivedNatTrans_comp assume already supplied universal derived pairs; they do not prove that exact postcomposition admits the stated K-injective model, or its compatibility with successive right adjoints. Bounded-below R^n functors do not supply this unbounded statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of an underived restriction isomorphism on K injectives gives a unique natural isomorphism commuting with the normalized derived compositor and identity",
+   "results": "8 hits; scope Mathlib/(all). CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app_assoc, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc, CategoryTheory.instIsIsoFunctorToRightDerivedZero, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc, CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_app_assoc, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app. ",
+   "date": "2026-10-22",
+   "verdict": "no match: rightDerivedNatIso and rightDerivedNatTrans_comp assume already supplied universal derived pairs; they do not prove that exact postcomposition admits the stated K-injective model, or its compatibility with successive right adjoints. Bounded-below R^n functors do not supply this unbounded statement"
+  },
+  {
+   "tool": "grep",
+   "query": "IsKInjective|rightDerivedNatIso|rightDerivedNatTrans_comp",
+   "results": "5 hits; scope Mathlib/CategoryTheory. Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean. ",
+   "date": "2026-10-22",
+   "verdict": "no match: rightDerivedNatIso and rightDerivedNatTrans_comp assume already supplied universal derived pairs; they do not prove that exact postcomposition admits the stated K-injective model, or its compatibility with successive right adjoints. Bounded-below R^n functors do not supply this unbounded statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerivedNatIso",
+   "results": "3 hits; scope Mathlib/(all). CategoryTheory.Functor.rightDerivedNatIso, CategoryTheory.Functor.rightDerivedNatIso_hom, CategoryTheory.Functor.rightDerivedNatIso_inv. ",
+   "date": "2026-10-22",
+   "verdict": "no match: rightDerivedNatIso and rightDerivedNatTrans_comp assume already supplied universal derived pairs; they do not prove that exact postcomposition admits the stated K-injective model, or its compatibility with successive right adjoints. Bounded-below R^n functors do not supply this unbounded statement"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedNatIso|rightDerivedNatTrans_comp|PreservesKInjectiveComplexes",
+   "results": "3 hits; scope Mathlib/CategoryTheory. Read results: Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean. ",
+   "date": "2026-10-22",
+   "verdict": "no match: the read generic rightDerivedNatIso requires already universal derived pairs, and rightDerivedFunctorComparison supplies a comparison rather than this K-injective exact-postcomposition theorem with normalization and coherence; other hits concern bounded-below/objectwise derived functors or the already cited exact-factorization/Hom-bijection leaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural comparison of unbounded right derived functors after an exact functor using K injective resolutions",
+   "results": "8 hits; scope Mathlib/(all). Read results: CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc, CategoryTheory.NatTrans.rightDerived, CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ. ",
+   "date": "2026-10-22",
+   "verdict": "no match: the read generic rightDerivedNatIso requires already universal derived pairs, and rightDerivedFunctorComparison supplies a comparison rather than this K-injective exact-postcomposition theorem with normalization and coherence; other hits concern bounded-below/objectwise derived functors or the already cited exact-factorization/Hom-bijection leaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerivedNatIso",
+   "results": "3 hits; scope Mathlib/(all). Read results: CategoryTheory.Functor.rightDerivedNatIso, CategoryTheory.Functor.rightDerivedNatIso_hom, CategoryTheory.Functor.rightDerivedNatIso_inv. ",
+   "date": "2026-10-22",
+   "verdict": "no match: the read generic rightDerivedNatIso requires already universal derived pairs, and rightDerivedFunctorComparison supplies a comparison rather than this K-injective exact-postcomposition theorem with normalization and coherence; other hits concern bounded-below/objectwise derived functors or the already cited exact-factorization/Hom-bijection leaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor after a total right derived functor admits natural comparisons computed on K injective resolutions compatible with composition",
+   "results": "8 hits; scope Mathlib/(all). Read results: CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison, CategoryTheory.NatTrans.rightDerived_comp, CategoryTheory.NatTrans.rightDerived_comp_assoc, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac, CategoryTheory.NatTrans.rightDerived, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app. ",
+   "date": "2026-10-22",
+   "verdict": "no match: the read generic rightDerivedNatIso requires already universal derived pairs, and rightDerivedFunctorComparison supplies a comparison rather than this K-injective exact-postcomposition theorem with normalization and coherence; other hits concern bounded-below/objectwise derived functors or the already cited exact-factorization/Hom-bijection leaves"
+  },
+  {
+   "tool": "grep",
+   "query": "KInjective|PreservesKInjective|rightDerived",
+   "results": "5 hits; scope Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean. Read results: 9, 39, 43, 46, 50. ",
+   "date": "2026-10-22",
+   "verdict": "no match: the read generic rightDerivedNatIso requires already universal derived pairs, and rightDerivedFunctorComparison supplies a comparison rather than this K-injective exact-postcomposition theorem with normalization and coherence; other hits concern bounded-below/objectwise derived functors or the already cited exact-factorization/Hom-bijection leaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend natural transformations from the full subcategory of K injective complexes to the derived category and compose exact postcomposition comparisons",
+   "results": "8 hits; scope Mathlib/(all). Read results: CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.NatTrans.rightDerived, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.Abelian.Ext.mapExactFunctor. ",
+   "date": "2026-10-22",
+   "verdict": "no match: the read generic rightDerivedNatIso requires already universal derived pairs, and rightDerivedFunctorComparison supplies a comparison rather than this K-injective exact-postcomposition theorem with normalization and coherence; other hits concern bounded-below/objectwise derived functors or the already cited exact-factorization/Hom-bijection leaves"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-identity-open-derived-restriction",
+  "date": "2026-10-22",
+  "group": "Q137"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Tag 070I, lemma-K-injective, and Tag 08BJ, lemma-adjoint-preserve-K-injectives; K-injective derivation of restriction as in sites-cohomology Tag 0D6G; returned item steps 3-4, exact-equivalence sentence of step 1 and localization parts of steps 5-6; Refinement isomorphisms and Independence: identity and transitivity on the common open",
+   "via": [
+    "lem-sfb-identity-open-derived-restriction"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-exact-postcomposition-kinjective-descent",
+  "worker": "stage1",
+  "summary": "Proved normalized exact postcomposition by explicit transport along K-injective representatives; proved the successive-right-adjoint compositor, composition, identity and exact-equivalence clauses. Reused existing Hom-bijection, exact-factorization, derived-pair and adjoint nodes; no new nodes and no statement change.",
+  "blueprint": "det-sf-comp-coherence-cocycle: refinement comparisons through a common refinement, independence and the identity/transitivity formulas; this is the generic K-injective localization calculation used by lem-sfb-identity-open-derived-restriction.",
+  "tool_uses": [
+   {
+    "node": "def-sfb-right-derived-functor",
+    "why": "Generic universal right-derived pair and its K-injective comparison; the compactification unit has no separate version of this general homological construction."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic additive termwise adjunction on homotopy categories used to transport K-injectivity through exact equivalences; no compactification-specific substitute."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sfb-right-derived-functor",
+  "lem-weil-pbc-termwise-adjunction-homotopy"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q100-611927021",
+  "group": "Q100",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-611927021 (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement: def-sfb-right-derived-functor, exact-functor-derived-factorization, kinjective-hom-derived, right-adjoint-preserves-kinjective (08BJ), termwise-adjunction-homotopy and abstract-derived-category. I checked Stacks 070I l.9632 and 08BJ l.9857 against tags/tags. On live the item is still unsplit and has no repair note. The statement is unchanged and correct. I tested it on the zero category, on H=1 with c an automorphism (r_c=D(c)), on E_i=0, and on identity H, J, P, d. Steps 1-8 are correct. The normalization directions match. Step 2 makes homotopy invariance explicit. Steps 3-4 give uniqueness and independence by cancellation. Step 5 applies 08BJ to H, J and P with the right adjunction direction, so JI is K-injective. I recomputed step 7: the components are Q(E_0 d_I), Q(c_JI) and Q(c'_I), and their product is Q(b_I). In step 8, (Id,id) is a right derived pair by the localization universal property. There are no new nodes. The item is not a duplicate of lem-weil-pbc-kinjective-exact-square-comparison, which needs strict sH'=Hr, or of lem-sp-kinjective-comparison-principle, lem-pbc-normalized-derived-adjunction-transport or lem-sfb-module-derived-compositor-coherence. There is no cycle. I accept the tool_uses def-sfb-right-derived-functor and lem-weil-pbc-termwise-adjunction-homotopy as generic. One fault, E5: step 9 proved the statement's clause 'normalized comparisons agree under equivalences' only by the phrase 'transported representatives … uniqueness'. FIX in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-exact-postcomposition-kinjective-descent.json: step 9 now keeps the K-injectivity preservation, reflection and resolution transport with the adjunction directions made explicit. A new step 10 states the transported data (U_0, U_1, W, α, ε_i, and the compatibility of c' with c), builds ᾱ from Q(α_I) using that U_1 I is K-injective, and proves agreement at QI and then everywhere by step 4's uniqueness. Step 10 is 1395 characters and its uses are already in proof_deps. No other field changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ExactPostcompositionKInjectiveDescent",
+  "declaration": "CategoryTheory.Functor.exists_unique_normalizedKInjectiveDescent",
+  "declarations": [
+   "CategoryTheory.Functor.kInjectiveDescentUnit",
+   "CategoryTheory.Functor.IsNormalizedKInjectiveDescent",
+   "CategoryTheory.Functor.exists_unique_normalizedKInjectiveDescent",
+   "CategoryTheory.Functor.normalizedKInjectiveDescent_ext",
+   "CategoryTheory.Functor.IsNormalizedKInjectiveCompositor",
+   "CategoryTheory.Functor.normalizedKInjectiveDescent_comp",
+   "CategoryTheory.Functor.normalizedKInjectiveCompositor_ext",
+   "CategoryTheory.Functor.normalizedKInjectiveDescent_id",
+   "CategoryTheory.Functor.kInjectiveDescent_equivalence_resolutions",
+   "CategoryTheory.Functor.IsNormalizedKInjectiveSquare",
+   "CategoryTheory.Functor.exists_unique_normalizedKInjectiveSquare",
+   "CategoryTheory.Functor.normalizedKInjectiveDescent_equivalence",
+   "CategoryTheory.Functor.normalizedKInjectiveCompositor_equivalence"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ExactPostcompositionKInjectiveDescent.lean",
+  "statement": "theorem exists_unique_normalizedKInjectiveDescent (h0 : ∀ N : CochainComplex A0 ℤ, ∃ (I : CochainComplex A0 ℤ) (a : N ⟶ I), I.IsKInjective ∧ QuasiIso a) (L : A0 ⥤ A1) [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L] (adj : L ⊣ H) : ∃! r : H.rightDerivedFunctorOfQuasiIsoResolutions h1 ⋙ E0.mapDerivedCategory ≅ E1.mapDerivedCategory, IsNormalizedKInjectiveDescent h1 H E0 E1 c r ∧ (∀ (N I : CochainComplex A1 ℤ) [I.IsKInjective] (a : N ⟶ I) [QuasiIso a], r.hom.app (DerivedCategory.Q.obj N) ≫ E1.mapDerivedCategory.map (DerivedCategory.Q.map a) ≫ E1.mapDerivedCategoryFactors.hom.app I = E0.mapDerivedCategory.map (H.rightDerivedFunctorOfQuasiIsoResolutionsObjIso h1 a).hom ≫ E0.mapDerivedCategoryFactors.hom.app ((H.mapHomologicalComplex (.up ℤ)).obj I) ≫ DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex c.hom (.up ℤ)).app I)) ∧ (∀ (X Y : DerivedCategory A1) (f : X ⟶ Y), E0.mapDerivedCategory.map ((H.rightDerivedFunctorOfQuasiIsoResolutions h1).map f) ≫ r.hom.app Y = r.hom.app X ≫ E1.mapDerivedCategory.map f)",
+  "branch": "newtargets-dag",
+  "by": "Q101",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The declarations collectively state all clauses: normalized descent, resolution formula, uniqueness, compositor and composition, identity, preservation/reflection and transport under exact equivalences. The four helper definitions package canonical units and normalization equations for this same node; all have real bodies. No E_i K-injective preservation assumption."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e02668898",
+  "group": "Q101",
+  "result": "pass",
+  "note": "Read item, 6 stmt_deps, delivered module, report (Worker report + Second reading present), and the RightDerivedFunctorOfQuasiIsoResolutions, MapDerivedCategoryMate and RightDerivedFunctor.Comp sources. Hypotheses exact: arbitrary QuasiIso K-injective resolutions, exact additive left adjoints L⊣H (LH,LJ,LP), E_i exact additive with no K-injective preservation, independent universes. kInjectiveDescentUnit is the canonical unit Q(HI)→RH(QI). Normalization D(E0)γ≫r≫φ1 = φ0≫Q(c_I) typed arrow by arrow; ∃! plus every-resolution formula via ObjIso, naturality, normalization-only ext. Composition: hb = c'∘cJ∘E0d with associator; preservation of K-injectives for H,J,P; κ normalized by Q(d_I) through JI; rb = D(E0)κ≫assoc≫rcRJ≫rc'. Identity: unique canonical R1≅1, r = D(E)e≫leftUnitor for c = leftUnitor. Equivalences: K-injectivity iff, resolution transport, transport square ∃!, descent/compositor transport with the step-10 equations through canonical mapDerivedCategorySquareIso; checked these hold without J preserving K-injectives. lean.statement verbatim, only the lean field changed, all sorry, real helper bodies, docstrings carry source and blueprint. Advisory: unit helper duplicates theorem-module cochainUnit/barUnitAt (not citable); upstream PreservesKInjectiveComplexes has no owning node; second reading is a self-check. No FIX, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261023T102512-L-2911624",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

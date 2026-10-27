@@ -1,0 +1,264 @@
+{
+ "id": "lem-sfb-decent-closed-point-field-immersion",
+ "kind": "statement",
+ "title": "Closed points of decent spaces are closed field subspaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$ [def-trf-algebraic-space], with field-valued point classes and atlas topology [def-a1-space-point-topology] and sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. A field is as in [def-weil-field] and its spectrum as in [def-weil-affine-spectrum]. A field-valued morphism $u:\\operatorname{Spec}F\\to X$ is quasi-compact if for every affine scheme $U\\to X$ the scheme $U\\times_X\\operatorname{Spec}F$ is quasi-compact [def-weil-pbc-quasi-compact-scheme]. Assume every field-valued morphism to $X$ is quasi-compact, and let $x\\in|X|$ be a closed point, meaning that $\\{x\\}$ is closed. There exist a field $K$ and an $S$-morphism $i:\\operatorname{Spec}K\\to X$ with image $\\{x\\}$ such that $i$ is a representable closed immersion: for every scheme $T\\to X$, the fibre product $T\\times_X\\operatorname{Spec}K$ is a scheme and its projection to $T$ is a closed immersion [def-weil-closed-immersion].",
+ "source": {
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 0AHB (lemma-decent-space-closed-point); decency is Tag 03I8 (definition-very-reasonable), equivalently Tag 03JV (lemma-UR-finite-above-x), condition (6)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-a1-space-point-topology",
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-decent-quasicompact-monomorphic-points] to choose a quasi-compact monomorphism $i:\\operatorname{Spec}K\\to X$ representing $x$. Apply the same assertion at every point of $X$; its conclusion supplies the hypothesis of [lem-sfb-decent-etale-fibres-no-specializations]. Let $p:U\\to X$ be an affine etale chart. Such charts jointly cover $X$: an atlas exists by [def-trf-algebraic-space], and its scheme source has an affine open cover by [lem-weil-pbc-affine-opens-basis].",
+   "uses": [
+    "lem-sfb-decent-quasicompact-monomorphic-points",
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0AHB, first two sentences; Tag 03JV (6) implies (4)."
+   }
+  },
+  {
+   "text": "The set $F=p^{-1}(\\{x\\})$ is closed by the atlas topology [def-a1-space-point-topology]. For $u\\in F$, every specialization $u\\leadsto v$ lies in $F$; [lem-sfb-decent-etale-fibres-no-specializations] gives $v=u$. Thus $\\overline{\\{u\\}}=\\{u\\}$: each point of $F$ is closed in $U$. Form $W=U\\times_X\\operatorname{Spec}K$. By [lem-trf-space-fibre-products-etale-covers] it is a scheme etale over $K$. It is quasi-compact by our choice of $i$ and affineness of $U$. Applying [lem-weil-pbc-etale-fibre-discrete-separable-points] to $W\\to\\operatorname{Spec}K$ identifies $W$ with a disjoint union of spectra of fields; its singleton opens cover it, so quasi-compactness makes the union finite. Write $W=\\coprod_{a=1}^r\\operatorname{Spec}L_a$.",
+   "uses": [
+    "def-a1-space-point-topology",
+    "lem-sfb-decent-etale-fibres-no-specializations",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0AHB, closedness of chart fibre points and finite field decomposition; Tag 02GL."
+   }
+  },
+  {
+   "text": "The projection $q:W\\to U$ is monomorphic: equal $U$ components give equal composites to $X$, hence equal $\\operatorname{Spec}K$ components by monomorphy of $i$, and equal maps to the pullback. Fix a component image $u\\in F$. It is closed by step 2, so its canonical map $j_u:\\operatorname{Spec}\\kappa(u)\\to U$ is a closed immersion by [lem-trf-closed-point-residue-immersion]. By [lem-weil-pbc-morphism-from-spec-field], every component mapping to $u$ factors through $j_u$; uniqueness in [lem-weil-pbc-field-point-factors-through-immersion] shows its pullback along $j_u$ is that same component. Components mapping elsewhere have empty pullback, since $j_u$ has image $\\{u\\}$. Thus $W_u$ is exactly the coproduct of the components mapping to $u$. Its map to $\\operatorname{Spec}\\kappa(u)$ is monomorphic by the pullback argument above. Apply [lem-sfb-monomorphism-into-field-coproduct] with the one field $\\kappa(u)$: the nonempty $W_u$ is isomorphic to $\\operatorname{Spec}\\kappa(u)$ over that spectrum. Consequently exactly one component maps to $u$ and its map $\\kappa(u)\\to L_a$ is an isomorphism. Therefore the component maps are closed immersions with pairwise distinct images.",
+   "uses": [
+    "lem-sfb-monomorphism-into-field-coproduct",
+    "lem-weil-pbc-morphism-from-spec-field",
+    "lem-trf-closed-point-residue-immersion",
+    "lem-weil-pbc-field-point-factors-through-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0AHB, monomorphism, distinct component images and residue fields; schemes.tex Tags 03DP and 01J9."
+   }
+  },
+  {
+   "text": "The finitely many images $u_a$ are pairwise distinct closed points. Their union is closed, and its induced topology is discrete since the complement of the other finitely many points isolates each $u_a$. Hence $q$ is a homeomorphism onto a closed subset. Its structure-sheaf map is surjective locally: away from the finite union its target sheaf is zero; near $u_a$ remove all other $u_b$, so the map is exactly the restriction of the closed immersion from the $a$th component proved in step 3. Surjectivity of a sheaf map is local by its definition (sections lift on a covering). Therefore $q$ is a closed immersion by [def-weil-closed-immersion]. This includes $r=0$, when the source is empty.",
+   "uses": [
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0AHB, sentence about pairwise distinct closed points; closed-immersion definition."
+   }
+  },
+  {
+   "text": "Step 4 applies to each affine chart in the jointly surjective etale family of step 1. Apply [lem-sfb-space-closed-immersion-atlas-locality] to $i$ and that family. It gives that $i$ is representable and every scheme base change is a closed immersion. The chosen representative has image $\\{x\\}$, as required.",
+   "uses": [
+    "lem-sfb-space-closed-immersion-atlas-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0AHB, final descent; spaces-morphisms.tex Tag 03M4 (4) implies (1)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-decent-quasicompact-monomorphic-points",
+  "def-trf-algebraic-space",
+  "lem-weil-pbc-affine-opens-basis",
+  "def-a1-space-point-topology",
+  "lem-sfb-decent-etale-fibres-no-specializations",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-sfb-monomorphism-into-field-coproduct",
+  "lem-weil-pbc-morphism-from-spec-field",
+  "lem-trf-closed-point-residue-immersion",
+  "lem-weil-pbc-field-point-factors-through-immersion",
+  "def-weil-closed-immersion",
+  "lem-sfb-space-closed-immersion-atlas-locality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 0AHB (lemma-decent-space-closed-point); its scheme-monomorphism argument expanded using Tags 03DP and 01J9."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|residual[Gg]erbe|[Dd]ecent",
+   "results": "{\"t\": \"2026-10-23T14:11:45Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|residual[Gg]erbe|[Dd]ecent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Data/Ordmap/Ordset.lean\"], \"digest\": \"035261f8bac28890\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: closed-residue-point immersion hits are for schemes only; no theorem for decent algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed point of a decent algebraic space has a residue field defining a closed immersion",
+   "results": "{\"t\": \"2026-10-23T14:11:45Z\", \"tool\": \"leansearch\", \"query\": \"Closed point of a decent algebraic space has a residue field defining a closed immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.Spec_map_residue\", \"AlgebraicGeometry.isClosed_singleton_iff_isClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.SpecMap_residue\", \"AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue\", \"AlgebraicGeometry.Scheme.SpecMap_residue_apply\", \"AlgebraicGeometry.Scheme.residueField\", \"AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField\", \"AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField\"], \"digest\": \"6536dbfe35646f46\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: closed-residue-point immersion hits are for schemes only; no theorem for decent algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsClosedImmersion\"",
+   "results": "{\"t\": \"2026-10-23T14:11:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicSpace\\\", \\\"IsClosedImmersion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: closed-residue-point immersion hits are for schemes only; no theorem for decent algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed point of a decent algebraic space is the image of a representable closed immersion from the spectrum of a field",
+   "results": "{\"t\": \"2026-10-23T14:11:46Z\", \"tool\": \"leanfinder\", \"query\": \"A closed point of a decent algebraic space is the image of a representable closed immersion from the spectrum of a field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isClosed_singleton_iff_isClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.SpecMap_residue\", \"AlgebraicGeometry.IsClosedImmersion.Spec_map_residue\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.range_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.fromSpecStalk_closedPoint\", \"AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField\", \"AlgebraicGeometry.Spec_closedPoint\"], \"digest\": \"72216e67518e5f3a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: closed-residue-point immersion hits are for schemes only; no theorem for decent algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monomorphism from the spectrum of a field to a scheme with closed image is a closed immersion",
+   "results": "{\"t\": \"2026-10-23T14:31:30Z\", \"tool\": \"leanfinder\", \"query\": \"A monomorphism from the spectrum of a field to a scheme with closed image is a closed immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isClosed_singleton_iff_isClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.Spec_map_residue\", \"AlgebraicGeometry.IsClosedImmersion.SpecMap_residue\", \"AlgebraicGeometry.IsClosedImmersion.Spec_iff\", \"AlgebraicGeometry.IsClosedImmersion.spec_of_surjective\", \"AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk\", \"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\", \"AlgebraicGeometry.IsClosedImmersion\"], \"digest\": \"420419a986534133\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: closed-residue-point immersion hits are for schemes only; no theorem for decent algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed point of a decent algebraic space has a residue field defining a closed immersion",
+   "results": "{\"t\": \"2026-10-23T14:41:16Z\", \"tool\": \"leansearch\", \"query\": \"Closed point of a decent algebraic space has a residue field defining a closed immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.Spec_map_residue\", \"AlgebraicGeometry.isClosed_singleton_iff_isClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.SpecMap_residue\", \"AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue\", \"AlgebraicGeometry.Scheme.SpecMap_residue_apply\", \"AlgebraicGeometry.Scheme.residueField\", \"AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField\", \"AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField\"], \"digest\": \"6536dbfe35646f46\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: closed-residue-point immersion hits are for schemes only; no theorem for decent algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-decent-space-finite-field-map",
+  "date": "2026-10-23",
+  "group": "Q75"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Adequate moduli spaces are universal for separated targets. Alper Theorem 7.2.1, locally separated case through Proposition 7.1.1: Proposition 7.1.1, proof, printed p.36: surjectivity of the diagonal pullback W from condition (a), expanded as its closure-equivalence input. Rational points of a locally separated space over an algebraically closed field have closed images; continuity gives the assertion. This is the geometric-points sublemma, not the universality conclusion. Supporting geometric input: rational sections after field base change are closed immersions. Supporting input: Finiteness for field-valued maps over closed base points, before using the rational section identity. Supporting lemma for Tag 08AL: Tag 0AHB (lemma-decent-space-closed-point); decency is Tag 03I8 (definition-very-reasonable), equivalently Tag 03JV (lemma-UR-finite-above-x), condition (6).",
+   "via": [
+    "lem-sfb-decent-space-finite-field-map",
+    "lem-sfb-locally-separated-rational-point-closed-immersion",
+    "lem-sfb-locally-separated-closure-equivalent-images",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-decent-closed-point-field-immersion",
+  "worker": "stage1",
+  "summary": "Followed Tag 0AHB using existing monomorphic point representatives, etale field fibres, monomorphisms into field coproducts, canonical residue-point immersions and atlas descent; isolated only the decent-space no-specializations lemma. No statement change.",
+  "blueprint": "Realizes the field-immersion input in the existing ancestry from det-thm-sf-ctf-stability-direct-images proof (3), before Tag 08AL; the latest direct-image blueprint retains compactification and proper-image route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Generic scheme/space tool used in the Tag 0AHB chart argument; the constructibility unit does not replace it."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic scheme/space tool used in the Tag 0AHB chart argument; the constructibility unit does not replace it."
+   },
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "Generic scheme/space tool used in the Tag 0AHB chart argument; the constructibility unit does not replace it."
+   },
+   {
+    "node": "lem-sfb-monomorphism-into-field-coproduct",
+    "why": "Generic scheme/space tool used in the Tag 0AHB chart argument; the constructibility unit does not replace it."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-from-spec-field",
+    "why": "Generic scheme/space tool used in the Tag 0AHB chart argument; the constructibility unit does not replace it."
+   },
+   {
+    "node": "lem-trf-closed-point-residue-immersion",
+    "why": "Generic scheme/space tool used in the Tag 0AHB chart argument; the constructibility unit does not replace it."
+   },
+   {
+    "node": "lem-sfb-space-closed-immersion-atlas-locality",
+    "why": "Generic scheme/space tool used in the Tag 0AHB chart argument; the constructibility unit does not replace it."
+   },
+   {
+    "node": "lem-weil-pbc-field-point-factors-through-immersion",
+    "why": "Generic scheme immersion tool to identify the component pullbacks along a closed residue point."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-sfb-monomorphism-into-field-coproduct",
+  "lem-weil-pbc-morphism-from-spec-field",
+  "lem-trf-closed-point-residue-immersion",
+  "lem-sfb-space-closed-immersion-atlas-locality",
+  "lem-weil-pbc-field-point-factors-through-immersion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q110-0694574c4",
+  "group": "Q110",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q110-0694574c4 (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited statement, and Stacks decent-spaces.tex at 0AHB (l.3418), 03K5 (l.2647), 03JV and 03I8. The item statement is byte-identical to the live copy, where the item is still unsplit; the 'all field maps quasi-compact' hypothesis is 03JV (6) at every point, i.e. decency. The new node lem-sfb-decent-etale-fibres-no-specializations is exactly 03K5, with decency written as 03JV (4) at every point. It is statement-only, self-contained and strictly smaller than the item. It is not a duplicate: the only other node with tag 03K5, lem-sfb-quasiseparated-space-etale-specializations, assumes a quasi-compact diagonal, which is stronger than decency; the 03IL lifting node is a different statement; nothing new appears in live or side-live. Steps follow 0AHB. Step 1 takes quasi-compact monomorphic representatives and affine etale charts. Step 2: the chart fibre is closed by the final topology, its points are closed by the new node, W is a scheme etale and quasi-compact over K, and 02GL gives finitely many field spectra. Step 3: q is a monomorphism, 01J9 factors each component through the closed immersion j_u, and 03DP with one field shows exactly one component lies over each point with kappa(u) isomorphic to L_a. The use of j_u being a monomorphism for non-field tests is elementary (a closed immersion is a monomorphism). Step 4 is correctly marked elementary: a finite disjoint union of closed immersions with distinct closed images, including r=0. Step 5 applies 03M4 locality to the jointly surjective affine family, with no representability assumed in advance. Batch 5: the atlas-locality node, def-trf-algebraic-space and def-a1-space-point-topology reach sec-trace-formula only through the general definition of algebraic spaces and their point topology. None of them is a step of the trace formula or of Poincare duality, so all three citations are accepted. The tool_uses (generic scheme and space lemmas) are accepted. No SGA appears. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DecentClosedPointFieldImmersion",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_closedImmersion_field_of_decent",
+  "file": "lean/Sheaf/AlgebraicGeometry/DecentClosedPointFieldImmersion.lean",
+  "statement": "theorem exists_closedImmersion_field_of_decent {S : Scheme.{u}} (X : AlgebraicSpace S) (hdecent : ∀ (K : Type u) [Field K] (b : Spec (CommRingCat.of K) ⟶ S) (c : yoneda.obj (Over.mk b) ⟶ X.obj.obj) (U : Over S), IsAffine U.left → ∀ t : yoneda.obj U ⟶ X.obj.obj, ∃ (V : Over S) (p : V ⟶ U) (q : yoneda.obj V ⟶ yoneda.obj (Over.mk b)), IsPullback q (yoneda.map p) c t ∧ CompactSpace V.left) (x : Point X.obj.obj) (hx : IsClosed ({x} : Set (Point X.obj.obj))) : ∃ (K : Type u) (_ : Field K) (b : Spec (CommRingCat.of K) ⟶ S) (i : yoneda.obj (Over.mk b) ⟶ X.obj.obj), pointImage i = {x} ∧ IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) i",
+  "branch": "newtargets-dag",
+  "by": "Q135",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c0bc1c480",
+  "group": "Q135",
+  "result": "pass",
+  "note": "Read node, Stacks 0AHB/03JV/03I8, module, report and every stmt_dep record (AlgebraicSpace.IsRepresentableWith, Point/pointImage/pointTopologicalSpace, CompactSpace, IsClosedImmersion, Spec, Scheme). lean.statement equals the file signature verbatim; the node record differs from live only in lean. Decency hypothesis = 03JV(6) at every point, tested on all affine U with an oriented IsPullback and a CompactSpace scheme pullback; identical to the landed consumer finite_of_decent_of_finite_residueField. Conclusion: field K, S-morphism i, pointImage i = {x}, IsRepresentableWith IsClosedImmersion over all T : Over S, matching the node. No extra assumptions, no new universe restriction, edge cases (empty X/T, r=0) covered. No defs, sorry only, source and blueprint docstrings present, 5-step proof docstring. No duplicate in Sheaf/WeilConjectures. Report has both sections. No changes, no compile (worker's scompile clean)."
+ }
+}

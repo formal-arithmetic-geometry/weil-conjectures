@@ -1,0 +1,281 @@
+{
+ "id": "lem-trf-monomorphism-finite-type-composite-lqf",
+ "kind": "statement",
+ "title": "A monomorphism with a locally finite type composite is unramified and locally quasi-finite",
+ "statement": "Let $X,Y,Z$ be schemes [def-pc-scheme] and let $f:X\\to Y$ and $g:Y\\to Z$ be morphisms. Suppose $f$ is a monomorphism, meaning that $f\\circ a=f\\circ b$ implies $a=b$ for every scheme $T$ and morphisms $a,b:T\\to X$, and suppose $g\\circ f$ is locally of finite type [def-weil-finite-type-morphism]. Then $f$ is locally of finite type and its diagonal $\\Delta_f:X\\to X\\times_YX$ [def-pc-fibre-product] is an isomorphism, hence both an open immersion [def-weil-open-immersion] and a closed immersion [def-weil-closed-immersion]. In particular $f$ is separated [def-weil-proper-morphism] and unramified [def-weil-unramified-morphism]. Moreover $f$ is quasi-finite at every point in the affine-neighbourhood sense of [pqf-def-quasifinite] (1), and therefore locally quasi-finite in the sense of [pqf-def-quasifinite] (2). No quasi-compactness hypothesis on $X$ or separatedness hypothesis on $g$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 01T8 (lemma-permanence-finite-type), 02GE (lemma-diagonal-unramified-morphism), and 02V5 (lemma-unramified-quasi-finite); diagonal argument: Schemes Tag 01L3 (lemma-monomorphism), with separatedness in 01L4 (lemma-monomorphism-separated). These give the general monomorphism argument used in Spaces Tag 0265, second proof paragraph."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-weil-proper-morphism",
+  "def-weil-unramified-morphism",
+  "pqf-def-quasifinite"
+ ],
+ "proof": [
+  {
+   "text": "Apply clause (a) of [lemma-nagata-finite-type-to-separated-target] to the triangle $X\\xrightarrow{f}Y\\xrightarrow{g}Z$. Its sole hypothesis is that $g\\circ f$ is locally of finite type, which is assumed. Thus $f$ is locally of finite type; no separatedness of $g$ or quasi-compactness is needed.",
+   "uses": [
+    "lemma-nagata-finite-type-to-separated-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T8, lemma-permanence-finite-type; the cancellation used in Spaces Tag 0265, second proof paragraph"
+   }
+  },
+  {
+   "text": "Put $P=X\\times_YX$, with projections $p_1,p_2$, using [def-pc-fibre-product]. Their compatibility says $f\\circ p_1=f\\circ p_2$, so the monomorphism hypothesis gives $p_1=p_2$. The diagonal $\\delta=(\\mathrm{id}_X,\\mathrm{id}_X)$ satisfies $p_1\\circ\\delta=\\mathrm{id}_X$. Both projections of $\\delta\\circ p_1:P\\to P$ agree with those of $\\mathrm{id}_P$: they are $p_1$ and $p_1=p_2$. Uniqueness in the fibre-product universal property gives $\\delta\\circ p_1=\\mathrm{id}_P$. Hence $\\Delta_f=\\delta$ is an isomorphism with inverse $p_1$.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01L3, lemma-monomorphism: categorical fibre-product argument written out"
+   }
+  },
+  {
+   "text": "An isomorphism is a homeomorphism onto the whole target, which is open and closed, and its structure-sheaf map is an isomorphism, hence surjective. Applying [def-weil-open-immersion] and [def-weil-closed-immersion] to $\\Delta_f$ therefore makes it both an open and a closed immersion. Its being a closed immersion is precisely separatedness of $f$ by [def-weil-proper-morphism]. Together with step 1, its being an open immersion is precisely unramifiedness by [def-weil-unramified-morphism].",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-closed-immersion",
+    "def-weil-proper-morphism",
+    "def-weil-unramified-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01L4, lemma-monomorphism-separated; unramifiedness: morphisms.tex Tag 02GE, lemma-diagonal-unramified-morphism (2)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-unramified-quasi-finite-at-points] to the unramified morphism $f$ from step 3. Its statement gives, for every $x\\in X$, affine neighbourhoods in $X$ and $Y$ on which the ring map is finite type and quasi-finite at the corresponding prime, exactly [pqf-def-quasifinite] (1). The same cited statement concludes local quasi-finiteness in sense (2). Thus all the asserted pointwise and local conclusions hold.",
+   "uses": [
+    "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "pqf-def-quasifinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02V5, lemma-unramified-quasi-finite; its pointwise affine-neighbourhood conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lemma-nagata-finite-type-to-separated-target",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-weil-proper-morphism",
+  "def-weil-unramified-morphism",
+  "lem-weil-pbc-unramified-quasi-finite-at-points",
+  "pqf-def-quasifinite"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 01T8 (lemma-permanence-finite-type), 02GE (lemma-diagonal-unramified-morphism), 02V5 (lemma-unramified-quasi-finite), with schemes.tex Tags 01L3 and 01L4 for the diagonal and separatedness"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.FormallyUnramified, CategoryTheory.Mono",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete statement including pointwise affine-neighbourhood local quasi-finiteness; finite-type cancellation, isomorphic/open diagonal and formally unramified hits are components, not this pointwise conclusion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monomorphism of schemes whose composition with another scheme morphism is locally of finite type is unramified and locally quasi-finite",
+   "results": "8 hits: AlgebraicGeometry.FormallyUnramified.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.FormallyUnramified.instIsStableUnderCompositionScheme, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.formallyUnramified_iff, AlgebraicGeometry.IsEtale.instFormallyUnramified",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete statement including pointwise affine-neighbourhood local quasi-finiteness; finite-type cancellation, isomorphic/open diagonal and formally unramified hits are components, not this pointwise conclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "LocallyQuasiFinite|[Mm]ono|[Uu]nramified",
+   "results": "5 hits: 27, 32, 34, 36, 63",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete statement including pointwise affine-neighbourhood local quasi-finiteness; finite-type cancellation, isomorphic/open diagonal and formally unramified hits are components, not this pointwise conclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "mono|diagonal|of_comp",
+   "results": "5 hits: 34, 77, 79, 83, 84",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete statement including pointwise affine-neighbourhood local quasi-finiteness; finite-type cancellation, isomorphic/open diagonal and formally unramified hits are components, not this pointwise conclusion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If f X to Y is a monomorphism of schemes and g Y to Z has g composed f locally of finite type, f has an open diagonal and is unramified",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme monomorphism with locally finite type composite has isomorphic diagonal, is locally of finite type and is unramified",
+   "results": "8 hits: AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme, AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.FormallyUnramified.of_comp, AlgebraicGeometry.formallyUnramified_iff, AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme, AlgebraicGeometry.IsEtale.instFormallyUnramified",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete statement including pointwise affine-neighbourhood local quasi-finiteness; finite-type cancellation, isomorphic/open diagonal and formally unramified hits are components, not this pointwise conclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "of_mono|of_comp|unramified|FormallyUnramified|locallyQuasiFinite_iff",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean, Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean, Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean, Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete statement including pointwise affine-neighbourhood local quasi-finiteness; finite-type cancellation, isomorphic/open diagonal and formally unramified hits are components, not this pointwise conclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "locallyOfFiniteType_of_comp|isIso_diagonal_of_mono|isSeparated_of_mono|instIsSeparatedOfIsAffine",
+   "results": "2 hits: Mathlib/AlgebraicGeometry/Morphisms/Separated.lean, Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete statement including pointwise affine-neighbourhood local quasi-finiteness; finite-type cancellation, isomorphic/open diagonal and formally unramified hits are components, not this pointwise conclusion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyQuasiFinite, CategoryTheory.Mono",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete statement including pointwise affine-neighbourhood local quasi-finiteness; finite-type cancellation, isomorphic/open diagonal and formally unramified hits are components, not this pointwise conclusion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme monomorphism f X to Y with locally finite type composite g f, f is quasi-finite at every point in the affine neighbourhood isolated fibre point sense and has isomorphic diagonal",
+   "results": "8 hits: AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.locallyQuasiFinite_iff, AlgebraicGeometry.instQuasiSeparatedOfMonoScheme, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion, AlgebraicGeometry.IsFinite, AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete statement including pointwise affine-neighbourhood local quasi-finiteness; finite-type cancellation, isomorphic/open diagonal and formally unramified hits are components, not this pointwise conclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "locallyOfFiniteType_of_comp|isIso_diagonal|of_mono|FormallyUnramified|quasiFiniteAt",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean, Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean, Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole statement: relevant component declarations exist, but Mathlib LocallyQuasiFinite and QuasiFiniteAt are different definitions from the required affine-neighbourhood isolated-fibre-point notion; use the existing DAG comparison theorem rather than silently identifying them"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A monomorphism of schemes with locally finite type composite has isomorphic diagonal and is unramified and quasi-finite at every point",
+   "results": "8 hits: AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.FormallyUnramified.instIsStableUnderCompositionScheme, AlgebraicGeometry.FormallyUnramified.of_comp, CategoryTheory.Limits.pullback.isIso_diagonal_iff, AlgebraicGeometry.locallyOfFiniteType_comp, AlgebraicGeometry.FormallyUnramified",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole statement: relevant component declarations exist, but Mathlib LocallyQuasiFinite and QuasiFiniteAt are different definitions from the required affine-neighbourhood isolated-fibre-point notion; use the existing DAG comparison theorem rather than silently identifying them"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyQuasiFinite, CategoryTheory.Mono",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole statement: relevant component declarations exist, but Mathlib LocallyQuasiFinite and QuasiFiniteAt are different definitions from the required affine-neighbourhood isolated-fibre-point notion; use the existing DAG comparison theorem rather than silently identifying them"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monomorphism of schemes with locally finite type composite is locally of finite type, has isomorphic diagonal, is separated and unramified, and is quasi-finite at every point in the affine neighbourhood sense",
+   "results": "8 hits: AlgebraicGeometry.IsPreimmersion, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsPreimmersion.instMonoScheme, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.instIsZariskiLocalAtTargetMonomorphismsScheme, AlgebraicGeometry.AffineTargetMorphismProperty.diagonal, AlgebraicGeometry.instUniversallyInjectiveOfMonoScheme",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole statement: relevant component declarations exist, but Mathlib LocallyQuasiFinite and QuasiFiniteAt are different definitions from the required affine-neighbourhood isolated-fibre-point notion; use the existing DAG comparison theorem rather than silently identifying them"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme morphism that is a monomorphism is quasi-finite at every point whenever a composite through it is locally of finite type; quasi-finite at a point means an isolated point in an affine finite type fibre",
+   "results": "8 hits: AlgebraicGeometry.LocallyQuasiFinite.of_comp, AlgebraicGeometry.instQuasiSeparatedOfMonoScheme, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite, AlgebraicGeometry.instLocallyQuasiFiniteCompScheme, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole statement: relevant component declarations exist, but Mathlib LocallyQuasiFinite and QuasiFiniteAt are different definitions from the required affine-neighbourhood isolated-fibre-point notion; use the existing DAG comparison theorem rather than silently identifying them"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-affine-etale-relation-separated-lqf",
+  "date": "2026-10-22",
+  "group": "NP"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Geometric quotient-presentation branch of lem-trf-local-term-locality through lem-trf-etale-affine-quotient-representable: Stacks 0265 second paragraph and first representability step; extracted diagonal, finite-type cancellation and unramified-to-pointwise-quasi-finite argument (returned step 2 for j and step 5).",
+   "via": [
+    "lem-trf-affine-etale-relation-separated-lqf",
+    "lem-trf-etale-affine-quotient-representable",
+    "lem-trf-etale-relation-quotient",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-monomorphism-finite-type-composite-lqf",
+  "worker": "stage1",
+  "summary": "Q145: kept the statement and all statement dependencies; split into finite-type cancellation, explicit inverse to the diagonal, immersion/separated/unramified definitions, and the existing exact affine-neighbourhood quasi-finiteness theorem. No new nodes. Read source tags and every cited statement; reran Mathlib searches without identifying its stalkwise quasi-finiteness notion with the required affine-neighbourhood notion.",
+  "blueprint": "Ancillary quotient-presentation branch under lem-trf-local-term-locality, through lem-trf-etale-affine-quotient-representable and lem-trf-affine-etale-relation-separated-lqf: realizes the finite-type cancellation and monomorphism argument of Stacks 0265 second paragraph, with the open-diagonal/unramified route expressly specified by this item. The main-20261015 local-term proof itself contains no standalone assertion of this general scheme lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "why": "Generic scheme-morphism tool: exactly the affine-neighbourhood pointwise quasi-finiteness consequence of unramifiedness. The trace-formula unit supplies no separate theorem about this scheme-morphism property."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-unramified-quasi-finite-at-points"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q145-d4989b670",
+  "group": "Q145",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q145-d4989b670 (reviewer sub-agent of L); spot-checked: Stage-1 split with 0 new nodes; the statement, stmt_deps and source are unchanged. The item is not on the 2026-10-19 drop list, and the live item is still unsplit with no proof, so it is not superseded. Step 1: clause (a) of lemma-nagata-finite-type-to-separated-target (Stacks 01T8, morphisms.tex:2794) gives f locally of finite type from g∘f; the separated clause (b) is unused. Step 2: the monomorphism gives p1=p2, and the universal property of def-pc-fibre-product makes the diagonal an iso with inverse p1; this is the proof of Stacks 01L3 (schemes.tex:4548), and both inverse identities check out. Step 3: an iso meets the definitions of open immersion and closed immersion; separated and unramified are then the def-weil definitions (closed or open diagonal, plus locally finite type from step 1), as in Stacks 02GE(2). Step 4: lem-weil-pbc-unramified-quasi-finite-at-points (Stacks 02V5) gives exactly pqf-def-quasifinite (1) and (2); this cross-unit tool use is declared and accepted. Edge cases hold: empty X, f=id, Spec k into Spec k[ε]/ε², and a non-quasi-compact open immersion; A^1 over Spec k, which is not a monomorphism, shows the hypothesis is needed. Duplicate search over 'monomorphism' and 01L3/01L4: only lem-sfb-space-lft-monomorphism-separated-lqf (algebraic spaces, unsplit), which is not a duplicate. The parent's use (j with s étale) fits. No SGA source is used, and no changes were made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.MonomorphismFiniteTypeComposite",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.monomorphism_properties_of_locallyOfFiniteType_comp",
+  "file": "lean/Sheaf/AlgebraicGeometry/MonomorphismFiniteTypeComposite.lean",
+  "statement": "theorem monomorphism_properties_of_locallyOfFiniteType_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) [Mono f] [LocallyOfFiniteType (f ≫ g)] : LocallyOfFiniteType f ∧ IsIso (pullback.diagonal f) ∧ IsOpenImmersion (pullback.diagonal f) ∧ IsClosedImmersion (pullback.diagonal f) ∧ IsSeparated f ∧ IsUnramified f ∧ (∀ x : X, IsQuasiFiniteAtPoint f x) ∧ IsLocallyQuasiFinite f",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3c36c3acf",
+  "group": "N5",
+  "result": "pass",
+  "note": "Snapshot node differs from side-live only in lean. Lean binders {X Y Z : Scheme.{u}} f g, [Mono f], [LocallyOfFiniteType (f ≫ g)] match the node exactly; no extra hypotheses. The 8 conjuncts (LocallyOfFiniteType f, IsIso/IsOpenImmersion/IsClosedImmersion of pullback.diagonal f, IsSeparated, IsUnramified (project def = LFT ∧ open diagonal), ∀x IsQuasiFiniteAtPoint (affine-neighbourhood 01TD(1), not Mathlib stalkwise), IsLocallyQuasiFinite) match the node clauses in order. Sources 01T8/01L3/01L4/02GE/02V5 agree. Edge cases (empty X, id, Spec k→Spec k[ε], non-qc open immersion, A^1 non-mono) ok. Only sorry; source and blueprint docstrings and the 4-step proof present; statement field verbatim; correct public/private imports; Mathlib has only components so existing:false is right; report sections present. No findings; no compile needed (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261023T103205-L-3070787",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Scheme.Hom.monomorphism_properties_of_locallyOfFiniteType_comp"
+  ],
+  "sorry_after": []
+ }
+}

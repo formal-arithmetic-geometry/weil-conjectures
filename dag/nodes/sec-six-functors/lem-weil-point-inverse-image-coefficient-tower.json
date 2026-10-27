@@ -1,0 +1,307 @@
+{
+ "id": "lem-weil-point-inverse-image-coefficient-tower",
+ "kind": "statement",
+ "title": "Ordinary and completed inverse-image coefficient comparison towers",
+ "statement": "Fix the finite-field datum $p,a,q,k_0,k$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, and an algebraic closure $\\overline{\\mathbf Q}_\\ell$ of $\\mathbf Q_\\ell$. Let $s=\\operatorname{Spec}k$ and let $g:s\\to s$ be any scheme automorphism [def-weil-scheme-morphism-properties]. Work on its small pro-etale site [def-weil-pbc-proetale-site]. For each finite coefficient field $F\\subset\\overline{\\mathbf Q}_\\ell$, let $\\mathcal O_F$ be its valuation ring with a chosen uniformizer [def-weil-l-adic-coefficient-extension], put $R_F=\\widehat{\\mathcal O}_{F,s}$ [def-weil-completed-integral-coefficients], and write $G_F=g^{-1}$ with the $R_F$-action transported through $c_F^{-1}$ [def-weil-inverse-image-pullback-comparison]. Sections $\\Gamma(s,-)$ are termwise sections passed to derived categories [lem-weil-point-proetale-sections-exact].\n\nFor finite $E\\subset L\\subset M$, put $C_{L/E}H=H\\otimes^L_{R_E}R_L$ on the unbounded derived categories [def-weil-abstract-derived-category], and use the canonical natural inverse-image tensor comparison $b_{L/E,H}:C_{L/E}G_EH\\xrightarrow{\\sim}G_LC_{L/E}H$ of [lem-weil-isomorphism-scalar-tensor-kflat-model]. Let $a^C_H:C_{M/L}C_{L/E}H\\xrightarrow{\\sim}C_{M/E}H$ be the ordinary tensor associator of [lem-weil-point-derived-tensor-tower-coherence]. For every $H\\in D(R_E)$,\n$$b_{M/E,H}a^C_{G_EH}=G_M(a^C_H)b_{M/L,C_{L/E}H}C_{M/L}(b_{L/E,H}).$$\nOn a flat-term K-flat representative $P$ [def-pc-kflat-complex, def-pc-flat-sheaf-modules], both sides have local value $g^{-1}(x\\otimes a_0b_0)$ on $((y\\otimes a)\\otimes b)$, where $y=g^{-1}x$, $a=c_L(g^{-1}a_0)$ and $b=c_M(g^{-1}b_0)$. The unit comparison $b_{E/E,H}$ is the identity under the ordinary multiplication identifications.\n\nFor $H\\in D^b_c(s,\\mathcal O_E)$ [def-weil-derived-complete-integral-detailed], write $T_{L/E}H=H\\widehat\\otimes_{\\mathcal O_E}\\mathcal O_L$ [def-weil-integral-scalar-extension]. Use exactly $\\chi_{L/E,H}:C_{L/E}H\\xrightarrow{\\sim}T_{L/E}H$ of [lem-weil-finite-free-completed-scalar-comparison] and\n$$\\beta_{L/E,H}=G_L(\\chi_{L/E,H})b_{L/E,H}\\chi_{L/E,G_EH}^{-1}$$\nof [lem-weil-isomorphism-comparison-scalar-extension]. The objects $G_EH$ are constructible and derived complete [lem-weil-isomorphism-derived-pullback]. Let $A_H:T_{M/L}T_{L/E}H\\xrightarrow{\\sim}T_{M/E}H$ be exactly the $\\chi$-conjugated ordinary associator specified in [lem-weil-point-sections-scalar-extension]. Then\n$$\\beta_{M/E,H}A_{G_EH}=G_M(A_H)\\beta_{M/L,T_{L/E}H}T_{M/L}(\\beta_{L/E,H}).$$\nFor the sections comparisons $\\varphi_{L/E,H}=(\\Gamma(s,\\chi_{L/E,H})\\theta_{L/E,H})^{-1}$ of that same node, put $\\psi_{L/E,H}=\\varphi_{L/E,G_EH}\\Gamma(s,\\beta_{L/E,H})^{-1}$. In $D(\\mathcal O_M)$,\n$$\\psi_{M/E,H}\\Gamma(s,G_MA_H)=a^{\\mathrm{mod}}(\\psi_{L/E,H}\\otimes1)\\psi_{M/L,T_{L/E}H},$$\nwhere $a^{\\mathrm{mod}}$ is the module associator $((n\\otimes a)\\otimes b)\\mapsto n\\otimes ab$. For $L=E$, both $\\beta$ and $\\psi$ are the identity under the canonical multiplication and derived-completeness identifications. All maps in these equalities are the specified maps, not newly chosen comparison isomorphisms.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/def-weil-global-geometric-frobenius.md",
+  "place": "Returned proof step 5 and step 6 through the psi tower equation: ordinary b associator, chi conjugation and sections comparison coherence. Agent-written extraction of the existing explicit completed-coefficient proof; Deligne Weil II (1.1.3) and (1.1.7), pp. 150-151, supply context only."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-inverse-image-pullback-comparison",
+  "lem-weil-point-proetale-sections-exact",
+  "def-weil-abstract-derived-category",
+  "lem-weil-isomorphism-scalar-tensor-kflat-model",
+  "lem-weil-point-derived-tensor-tower-coherence",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-integral-scalar-extension",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-isomorphism-comparison-scalar-extension",
+  "lem-weil-isomorphism-derived-pullback",
+  "lem-weil-point-sections-scalar-extension"
+ ],
+ "proof": [
+  {
+   "text": "Choose a flat-term K-flat resolution $P\\to H$ by [lem-pc-kflat-resolution]. By [lem-weil-isomorphism-scalar-tensor-kflat-model], $G_EP$, $P\\otimes_{R_E}R_L$ and $G_EP\\otimes_{R_E}R_L$ are flat-term K-flat; applying it again at $L\\subset M$ computes all the successive $b$ maps on these same models. The associators on these models are exactly the multiplication maps of [lem-weil-point-derived-tensor-tower-coherence]. For a local generator $((y\\otimes a)\\otimes b)$ as in the statement, the left route first multiplies $a,b$ and then gives $g^{-1}(x\\otimes a_0b_0)$. The right route gives $g^{-1}(x\\otimes a_0)\\otimes b$, then $g^{-1}((x\\otimes a_0)\\otimes b_0)$, then $g^{-1}(x\\otimes a_0b_0)$. To justify the coefficient multiplication here, the structure maps commute with coefficient inclusions: reduce at every level, use clause (3) of [lem-weil-proetale-isomorphism-inverse-image], and then use the defining projections of $c_F$ in [def-weil-inverse-image-pullback-comparison]. Equality of the projections gives equality into their inverse limit. Thus $c_M^{-1}(ab)$ is the image of $g^{-1}(a_0b_0)$. Sheaf tensor is sheafified presheaf tensor [def-pur-sheaf-tensor-product], so agreement on these local generators implies equality of sheaf maps in every degree. These are chain maps by the cited K-flat model and associator statements. Passing this equality to the derived category proves the ordinary tower equation for every $H$; their stated resolution independence and naturality give the specified maps, without any completeness hypothesis.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-isomorphism-scalar-tensor-kflat-model",
+    "lem-weil-point-derived-tensor-tower-coherence",
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-weil-inverse-image-pullback-comparison",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/def-weil-global-geometric-frobenius.md",
+    "place": "First transport arrows of the ordinary and compact-support Frobenius composites; agent-written coefficient-tower verification extracted from the returned proof of lem-weil-point-automorphism-transport-scalar-extension, steps 5–6."
+   }
+  },
+  {
+   "text": "For $L=E$, the local formula in [lem-weil-isomorphism-scalar-tensor-kflat-model] sends $y\\otimes r$ to $g^{-1}(x\\otimes r_0)$. Source multiplication gives $ry$; target multiplication gives $g^{-1}(r_0x)=ry$ for the transported action. Hence $b_{E/E}$ is the identity under multiplication. This degreewise equality passes to the derived unit identifications of [lem-weil-point-derived-tensor-tower-coherence].",
+   "uses": [
+    "lem-weil-isomorphism-scalar-tensor-kflat-model",
+    "lem-weil-point-derived-tensor-tower-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/def-weil-global-geometric-frobenius.md",
+    "place": "First transport arrows of the ordinary and compact-support Frobenius composites; agent-written coefficient-tower verification extracted from the returned proof of lem-weil-point-automorphism-transport-scalar-extension, steps 5–6."
+   }
+  },
+  {
+   "text": "Now take $H\\in D^b_c(s,\\mathcal O_E)$. The objects $G_FK$ stay constructible and complete by [lem-weil-isomorphism-derived-pullback], and scalar extensions stay constructible by [lem-weil-integral-scalar-extension-constructible]. Thus every $\\chi$, $\\beta$ and iterated $\\varphi$ below is defined and invertible by [lem-weil-finite-free-completed-scalar-comparison, lem-weil-isomorphism-comparison-scalar-extension, lem-weil-point-sections-scalar-extension]. Abbreviate $C_1=C_{L/E}$, $C_2=C_{M/L}$, $C_3=C_{M/E}$ and similarly $T_i,b_i,\\chi_i,\\beta_i$. Put $U_K=\\chi_{2,T_1K}C_2(\\chi_{1,K})$. The specified integral associator is\n$$A_K=\\chi_{3,K}a^C_K U_K^{-1}.$$\nPrecompose each side of the claimed $\\beta$ tower equation with $U_{G_EH}$. The left side becomes $G_M(\\chi_{3,H})b_{3,H}a^C_{G_EH}$. For the right side, substitute $\\beta_i=G(\\chi_i)b_i\\chi_i^{-1}$, and use the two naturality equations\n$$T_2(\\beta_{1,H})\\chi_{2,T_1G_EH}=\\chi_{2,G_LT_1H}C_2(\\beta_{1,H}),$$\n$$b_{2,T_1H}C_2(G_L\\chi_{1,H})=G_M(C_2\\chi_{1,H})b_{2,C_1H}.$$\nCancelling adjacent inverse comparisons gives\n$$G_M(A_H U_H)b_{2,C_1H}C_2(b_{1,H})=G_M(\\chi_{3,H})G_M(a^C_H)b_{2,C_1H}C_2(b_{1,H}).$$\nThe ordinary tower equation in Step 1 equates these expressions. Cancel the isomorphism $U_{G_EH}$ to obtain the completed tower equation for exactly the stated $\\beta$ and $A$.",
+   "uses": [
+    "lem-weil-isomorphism-derived-pullback",
+    "lem-weil-integral-scalar-extension-constructible",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-isomorphism-comparison-scalar-extension",
+    "lem-weil-point-sections-scalar-extension",
+    "lem-weil-isomorphism-scalar-tensor-kflat-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/def-weil-global-geometric-frobenius.md",
+    "place": "First transport arrows of the ordinary and compact-support Frobenius composites; agent-written coefficient-tower verification extracted from the returned proof of lem-weil-point-automorphism-transport-scalar-extension, steps 5–6."
+   }
+  },
+  {
+   "text": "Write $\\Gamma=\\Gamma(s,-)$ and keep the indices $1,2,3$ of Step 3. Sections induce a functor on these derived categories by [lem-weil-point-proetale-sections-exact]. Rearranging Step 3 gives\n$$\\beta_{3,H}^{-1}G_M(A_H)=A_{G_EH}T_2(\\beta_{1,H}^{-1})\\beta_{2,T_1H}^{-1}.$$\nApply $\\Gamma$ and multiply by $\\varphi_{3,G_EH}$. The tower equation of [lem-weil-point-sections-scalar-extension] rewrites the result as\n$$\\psi_{3,H}\\Gamma(G_MA_H)=a^{\\mathrm{mod}}(\\varphi_{1,G_EH}\\otimes1)\\varphi_{2,T_1G_EH}\\Gamma(T_2\\beta_{1,H}^{-1})\\Gamma(\\beta_{2,T_1H}^{-1}).$$\nThe same node states naturality on derived morphisms. At $\\beta_{1,H}^{-1}:G_LT_1H\\to T_1G_EH$ it gives\n$$\\varphi_{2,T_1G_EH}\\Gamma(T_2\\beta_{1,H}^{-1})=(\\Gamma(\\beta_{1,H}^{-1})\\otimes1)\\varphi_{2,G_LT_1H}.$$\nSubstitution leaves $a^{\\mathrm{mod}}(\\psi_{1,H}\\otimes1)\\psi_{2,T_1H}$, which is the claimed sections equation. Every factor has the displayed source and target; no choice of a new sections comparison enters.",
+   "uses": [
+    "lem-weil-point-proetale-sections-exact",
+    "lem-weil-point-sections-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/def-weil-global-geometric-frobenius.md",
+    "place": "First transport arrows of the ordinary and compact-support Frobenius composites; agent-written coefficient-tower verification extracted from the returned proof of lem-weil-point-automorphism-transport-scalar-extension, steps 5–6."
+   }
+  },
+  {
+   "text": "For $L=E$, let $\\mu_K:C_{E/E}K\\to K$ be multiplication and $u_K:T_{E/E}K\\to K$ the derived-completeness identification. By [lem-weil-finite-free-completed-scalar-comparison], $u_K\\chi_{E/E,K}=\\mu_K$. Substitution in the specified $\\beta$ formula of [lem-weil-isomorphism-comparison-scalar-extension], followed by the multiplication identity of Step 2, gives $G_E(u_H)\\beta_{E/E,H}=u_{G_EH}$. Thus $\\beta$ is the identity under these identifications. The unit assertion of [lem-weil-point-sections-scalar-extension] makes $\\varphi_{E/E,G_EH}$ the identity under the same identifications; the definition $\\psi=\\varphi_G\\Gamma(\\beta)^{-1}$ then makes $\\psi$ the identity as well.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-isomorphism-comparison-scalar-extension",
+    "lem-weil-point-sections-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/def-weil-global-geometric-frobenius.md",
+    "place": "First transport arrows of the ordinary and compact-support Frobenius composites; agent-written coefficient-tower verification extracted from the returned proof of lem-weil-point-automorphism-transport-scalar-extension, steps 5–6."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-weil-isomorphism-scalar-tensor-kflat-model",
+  "lem-weil-point-derived-tensor-tower-coherence",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-weil-inverse-image-pullback-comparison",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-isomorphism-derived-pullback",
+  "lem-weil-integral-scalar-extension-constructible",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-isomorphism-comparison-scalar-extension",
+  "lem-weil-point-sections-scalar-extension",
+  "lem-weil-point-proetale-sections-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/def-weil-global-geometric-frobenius.md",
+  "place": "First transport arrows of the ordinary and compact-support Frobenius composites; agent-written coefficient-tower verification extracted from the returned proof of lem-weil-point-automorphism-transport-scalar-extension, steps 5–6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(pullback|inverseImage).*(tensor|[Aa]ssoc)|[Aa]ssoc.*(pullback|inverseImage)",
+   "results": "Mathlib/MeasureTheory/Measure/Haar/Extension.lean; Mathlib/MeasureTheory/Measure/Haar/Extension.lean; Mathlib/CategoryTheory/ExtremalEpi.lean; Mathlib/CategoryTheory/Subobject/Lattice.lean; Mathlib/CategoryTheory/Subobject/Lattice.lean; Mathlib/CategoryTheory/Subobject/Lattice.lean; Mathlib/CategoryTheory/Subobject/Lattice.lean; Mathlib/CategoryTheory/Subobject/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: module scalar associators and sheaf pullback-composition comparisons do not give the ordinary b tower together with its specified chi-conjugated beta and point-sections psi towers."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Conjugating scalar extension comparison natural isomorphisms by completion isomorphisms preserves unit and composition coherence and the sections tensor associator",
+   "results": "CategoryTheory.Functor.pointwiseLeftKanExtensionCompIsoOfPreserves_hom_fac; ModuleCat.extendScalars_assoc; CategoryTheory.LaxBraidedFunctor.isoOfComponents; ModuleCat.extendScalars_assoc'; ModuleCat.homEquiv_extendScalarsComp; CommRingCat.moduleCatExtendScalarsPseudofunctor_mapComp; ModuleCat.extendScalars_id_comp; ModuleCat.extendScalars_id_comp_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: module scalar associators and sheaf pullback-composition comparisons do not give the ordinary b tower together with its specified chi-conjugated beta and point-sections psi towers."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullback\", \"tensor\"",
+   "results": "AlgebraicGeometry.Scheme.Pullback.Triplet.tensor; AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInl; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInr; AlgebraicGeometry.Scheme.Pullback.Triplet.SpecTensorTo; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr; AlgebraicGeometry.Scheme.Pullback.ofPointTensor; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm",
+   "date": "2026-10-22",
+   "verdict": "no match: module scalar associators and sheaf pullback-composition comparisons do not give the ordinary b tower together with its specified chi-conjugated beta and point-sections psi towers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse image tensor comparison for an isomorphism of ringed sites satisfies unit and associator coherence, and conjugating by completion comparisons gives coherent completed sections comparisons",
+   "results": "CategoryTheory.Functor.IsCoverDense.presheafIso_inv; CategoryTheory.Functor.IsCoverDense.sheafIso_inv_val; CategoryTheory.Functor.IsCoverDense.Types.presheafIso_inv_app; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; CategoryTheory.Functor.IsCoverDense.Types.sheafIso_inv_val; CategoryTheory.Functor.IsCoverDense.Types.appIso_inv; SheafOfModules.freeFunctorCompPullbackIso; SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: module scalar associators and sheaf pullback-composition comparisons do not give the ordinary b tower together with its specified chi-conjugated beta and point-sections psi towers."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars_assoc|conjugateEquiv_pullbackComp|tensorObjMap",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean (searched Mathlib/Algebra/Category/ModuleCat/)",
+   "date": "2026-10-22",
+   "verdict": "no match: module scalar associators and sheaf pullback-composition comparisons do not give the ordinary b tower together with its specified chi-conjugated beta and point-sections psi towers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of inverse image with extension of scalars under three successive ring homomorphisms, and natural isomorphism conjugation of associators",
+   "results": "ModuleCat.extendScalarsComp; ModuleCat.extendScalars_assoc; ModuleCat.extendScalars_assoc_assoc; ModuleCat.extendScalars_assoc'; ModuleCat.homEquiv_extendScalarsComp; ModuleCat.extendScalarsComp_hom_app_one_tmul; CommRingCat.moduleCatExtendScalarsPseudofunctor_mapComp; ModuleCat.ExtendScalars.map'_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: module scalar associators and sheaf pullback-composition comparisons do not give the ordinary b tower together with its specified chi-conjugated beta and point-sections psi towers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image tensor comparison respects extension of scalars associators and completed coefficient sections towers",
+   "results": "Algebra.Presentation.tensorModelOfHasCoeffsEquiv_symm_tmul; Algebra.Presentation.tensorModelOfHasCoeffsEquiv_tmul; Algebra.TensorProduct.cancelBaseChange_symm_tmul; Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val; TensorProduct.AlgebraTensorModule.cancelBaseChange_symm_tmul; TensorProduct.AlgebraTensorModule.lTensor_comp_cancelBaseChange; Algebra.IsPushout.cancelBaseChangeAux_symm_tmul; Algebra.Presentation.tensorModelOfHasCoeffsHom_tmul",
+   "date": "2026-10-22",
+   "verdict": "no match: module extension associators and underived sheaf pullback coherence do not state the specified derived b, chi-conjugated beta and point-sections psi towers."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars_assoc|conjugateEquiv_pullbackComp|pullback.*[Aa]ssoc",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: module extension associators and underived sheaf pullback coherence do not state the specified derived b, chi-conjugated beta and point-sections psi towers."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extendScalars\", \"assoc\"",
+   "results": "ModuleCat.extendScalars_comp_id_assoc; ModuleCat.extendScalars_id_comp_assoc; ModuleCat.extendScalars_assoc; ModuleCat.extendScalars_assoc_assoc; ModuleCat.extendScalars_assoc'",
+   "date": "2026-10-22",
+   "verdict": "no match: module extension associators and underived sheaf pullback coherence do not state the specified derived b, chi-conjugated beta and point-sections psi towers."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of sheaf modules commutes coherently with scalar extension and tensor associators",
+   "results": "ModuleCat.extendScalars_assoc'; PresheafOfModules.pullback; PresheafOfModules.Sheafify.mul_smul; PresheafOfModules.Sheafify.SMulCandidate.h; SheafOfModules.pullbackObjFreeIso; PresheafOfModules.Sheafify.map_smul; SheafOfModules.pushforwardNatIso_inv; SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: module extension associators and underived sheaf pullback coherence do not state the specified derived b, chi-conjugated beta and point-sections psi towers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural inverse image tensor comparison commutes with scalar extension composition; conjugating natural isomorphisms transports the associativity diagram",
+   "results": "ModuleCat.extendScalarsComp_hom_app_one_tmul; ModuleCat.extendScalars_assoc; ModuleCat.extendScalars_assoc'; ModuleCat.extendScalars_assoc_assoc; TensorProduct.AlgebraTensorModule.lTensor_comp_cancelBaseChange; ModuleCat.extendScalarsComp; TensorProduct.AlgebraTensorModule.cancelBaseChange_symm_tmul; TensorProduct.AlgebraTensorModule.cancelBaseChange",
+   "date": "2026-10-22",
+   "verdict": "no match: module extension associators and underived sheaf pullback coherence do not state the specified derived b, chi-conjugated beta and point-sections psi towers."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-point-automorphism-transport-scalar-extension",
+  "date": "2026-10-22",
+  "group": "Q154"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-global-geometric-frobenius",
+   "place": "First transport arrow of each ordinary/compact-support composite in def-weil-global-geometric-frobenius: its finite coefficient-extension compatibility. Returned proof step 5 and step 6 through the psi tower equation: ordinary b associator, chi conjugation and sections comparison coherence.",
+   "via": [
+    "lem-weil-point-automorphism-transport-scalar-extension",
+    "lem-weil-frobenius-point-transport-natural",
+    "def-weil-frobenius-point-transport",
+    "def-weil-frobenius-cohomology-transport"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-point-inverse-image-coefficient-tower",
+  "worker": "stage1",
+  "summary": "Q65 proves the ordinary tower on one K-flat representative, writes the chi-conjugation cancellations explicitly, derives the psi tower by naturality of phi, and checks all unit identifications. Existing statements suffice; no new nodes or Mathlib leaves. Statement unchanged.",
+  "blueprint": "The first transport arrows of the two Frobenius composites in def-weil-global-geometric-frobenius; realizes the coefficient tower subargument extracted in returned steps 5–6 of lem-weil-point-automorphism-transport-scalar-extension.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Provides a flat-term K-flat representative of an arbitrary unbounded complex; a generic resolution tool not supplied by the unit."
+   },
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Clause (3) supplies naturality of constant coefficient structure maps, used componentwise for completed coefficients."
+   },
+   {
+    "node": "lem-weil-isomorphism-derived-pullback",
+    "why": "Ensures inverse image preserves the constructible and derived-complete subcategories needed by the comparisons."
+   },
+   {
+    "node": "lem-weil-integral-scalar-extension-constructible",
+    "why": "Ensures the iterated integral scalar extensions lie in the domain of the next specified comparison."
+   },
+   {
+    "node": "lem-weil-point-sections-scalar-extension",
+    "why": "Supplies the specified chi-conjugated integral associator and natural sections comparison with its tower and unit equations."
+   },
+   {
+    "node": "lem-weil-point-derived-tensor-tower-coherence",
+    "why": "Generic coefficient comparison tool: used exactly as stated to assemble the specified tower; it does not replace a step of the unit proof."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Generic coefficient comparison tool: used exactly as stated to assemble the specified tower; it does not replace a step of the unit proof."
+   },
+   {
+    "node": "lem-weil-point-proetale-sections-exact",
+    "why": "Generic coefficient comparison tool: used exactly as stated to assemble the specified tower; it does not replace a step of the unit proof."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-isomorphism-derived-pullback",
+  "lem-weil-integral-scalar-extension-constructible",
+  "lem-weil-point-sections-scalar-extension",
+  "lem-weil-point-derived-tensor-tower-coherence",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-point-proetale-sections-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q65-49a47d14b",
+  "group": "Q65",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-49a47d14b (reviewer sub-agent of L); spot-checked: I read the item, all five steps and every cited statement in full. Step 1 (ordinary tower): I recomputed both routes on ((y⊗a)⊗b) on the flat-term K-flat models of the kflat-model node; both give g^{-1}(x⊗a0b0). The coefficient compatibility c_M∘g^{-1}(ι)=ι∘c_L follows from clause (3) of lem-weil-proetale-isomorphism-inverse-image and the projections π_m c=c^g g^{-1}π_m of def-weil-inverse-image-pullback-comparison. Agreement on local generators gives equality of the sheaf maps via sheafified presheaf tensor. Step 2 (unit of b) is elementary and correct. Step 3: I redid the χ/b cancellation after precomposing with U=χ_{2,T1}C_2χ_1, using naturality of χ_2 at β_1 and of b_2 at χ_1 in ordinary D(R_L). Both sides reduce to G(χ_3)b_3a^C, which Step 1 gives. A=χ_3a^CU^{-1} is the χ-conjugated associator of lem-weil-point-sections-scalar-extension, and the other order agrees because C_1K is complete. Step 4: the inverse rearrangement, the sections tower at G_EH and naturality of φ_2 at β_1^{-1} give a^mod(ψ_1⊗1)ψ_{2,T_1H}; sources and targets check. Step 5 (L=E): uχ=μ gives G(u)β=u, and φ=id gives ψ=id. Hypotheses hold: ℓ≠p, g is an isomorphism, and the domains are D^b_c via the derived-pullback and constructibility nodes. Small cases checked: H=0, H=R_E, E=L, L=M. There are no new nodes, no SGA citation and no cycle (the parent is not cited). The DAG search found no duplicate; lem-pod-isomorphism-pullback-texact-coefficients is about Lg^*/α, not this statement. I accept the split_report.tool_uses (generic K-flat, inverse-image, constructibility and sections tools). Minor maintainer note: the item cites b from the kflat-model node and β's b from the comparison node; both state the same local formula, so this is consistent."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointInverseImageCoefficientTower",
+  "declaration": "WeilConjectures.point_inverse_image_coefficient_tower",
+  "declarations": [
+   "WeilConjectures.PointInverseImageCoefficientTower.ordinaryComparison",
+   "WeilConjectures.PointInverseImageCoefficientTower.sectionsComparison",
+   "WeilConjectures.PointInverseImageCoefficientTower.Laws",
+   "WeilConjectures.point_inverse_image_coefficient_tower"
+  ],
+  "file": "lean/Sheaf/Paper/PointInverseImageCoefficientTower.lean",
+  "statement": "theorem point_inverse_image_coefficient_tower (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (g : Spec (.of D.k) ⟶ Spec (.of D.k)) [IsIso g] (Q : Type u) [Field Q] [Algebra ℚ_[l] Q] [IsAlgClosure ℚ_[l] Q] : ∃ hunit : ∀ x : Spec (.of D.k), IsUnit (l : (Spec (.of D.k)).presheaf.stalk x), ∀ (E L M : Padic.FiniteCoefficientFields l Q) (hEL : E ≤ L) (hLM : L ≤ M), PointInverseImageCoefficientTower.Laws D l hl g hunit E.val L.val (IntermediateField.inclusion hEL) M.val (IntermediateField.inclusion hLM)",
+  "branch": "newtargets-dag",
+  "by": "Q37",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Seven clauses retain the ordinary unbounded tower, both local representative formulas, ordinary unit, completed tower/unit, and sections tower/unit. ordinaryComparison transports the already specified exact-model comparison through isomorphismScalarModel_existsUnique, uniquely normalized by its derived counit and completion map. sectionsComparison is exactly Gamma(beta inverse) followed by phi at inverse image. No replacement comparisons, extra assumptions, new DAG nodes, or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ab58cae27",
+  "group": "Q37",
+  "result": "pass",
+  "note": "Lean-only stage-2 record; the node is otherwise identical to live, the statement is verbatim and the declarations match, with one sorry. All 7 clauses checked against the node. b_{L/E} = ordinaryComparison, built from the uniquely determined identification e and the canonical isomorphismScalarTensorDerived; a^C = pointDerivedTensorAssoc. The ordinary tower order matches. local_formula gives (b0*j a0)⊗x at gU and was recomputed as true. completed_tower uses isomorphismComparisonScalarBeta unchanged with A = pointIntegralScalarAssoc; scalarCompletion = e ≫ completedScalarComparison, so step 3 applies. psi = Gamma(beta)^-1 ≫ phi_G as the node defines, and the sections tower lives in D(O_M). Unit clauses match step 5. No extra hypotheses: hunit is an existential Prop witness, the universe convention is the same as pointSectionsScalarExtension, any automorphism g, real pro-etale site. Edge cases covered: E=L, L=M, K=0, unbounded K, empty U, every degree. Not recompiled per instructions; the worker reports a clean scompile. Advisory only: integralOrdinaryScalarComp is a declaration of a node outside stmt_deps but uniquely determined; b and a^C are taken from canonical declarations instead of the existential ones of the kflat-model and tower-coherence nodes; sfIntegralScalarExtension_constructible is used only as a typing witness, and its private import is redundant because the module is already publicly visible."
+ }
+}

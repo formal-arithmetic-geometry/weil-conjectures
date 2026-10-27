@@ -2,7 +2,7 @@
  "id": "lem-pur-twist-coefficient-comparison",
  "kind": "statement",
  "title": "The canonical coefficient pushout comparison is invertible",
- "statement": "For the actual four coefficient sheaves and specified scalar maps [def-pur-twist-coefficient-rings], the canonical morphism purTwistCoefficientComparison from their pushout to the completed coefficient sheaf is an isomorphism. No hypothesis on invertibility of l on the scheme is needed.\n\ntheorem purTwistCoefficientComparison_isIso (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :\n    IsIso (purTwistCoefficientComparison S l E)",
+ "statement": "For the actual four coefficient sheaves and specified scalar maps [def-pur-twist-coefficient-rings], the canonical morphism purTwistCoefficientComparison from their pushout to the completed coefficient sheaf is an isomorphism. No hypothesis on invertibility of l on the scheme is needed.\n\ntheorem purTwistCoefficientComparison_isIso (S : Scheme.{t}) (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :\n    IsIso (purTwistCoefficientComparison S l E)",
  "source": {
   "document": "literature/stacks-project/sites-modules.tex",
   "place": "Coefficient-twist blueprint proof step 6; Stacks Tag 03EK."
@@ -88,10 +88,11 @@
   "module": "Sheaf.Paper.PurTwistCoefficientComparison",
   "file": "lean/Sheaf/Paper/PurTwistCoefficientComparison.lean",
   "declaration": "AlgebraicGeometry.Scheme.purTwistCoefficientComparison_isIso",
-  "statement": "theorem purTwistCoefficientComparison_isIso (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :\n    IsIso (purTwistCoefficientComparison S l E)",
+  "statement": "theorem purTwistCoefficientComparison_isIso (S : Scheme.{t}) (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :\n    IsIso (purTwistCoefficientComparison S l E)",
   "branch": "sheaf-dag",
   "by": "B7",
-  "date": "2026-10-21"
+  "date": "2026-10-21",
+  "note": "Independent site t and coefficient u universes, with values in CommRingCat.{max u (t + 1)}; specializes to the original definitions at t = u."
  },
  "reviewed": {
   "date": "2026-10-21",
@@ -104,14 +105,42 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "C-da373",
-  "group": "B7",
-  "result": "pass",
-  "landing": "20261021T020059-L-2582936",
+  "reviewer": "C-8258b",
+  "group": "P7",
+  "result": "fix",
+  "landing": "20261023T124022-L-1311472",
   "kind": "interface",
-  "note": "independent cc review: item statement byte-identical to live; moved defs in PurTwistSheaves identical to live up to blueprint markers; two sorry statements (root/integral local models) checked true against nodes; all 12 modules plus importer CoefficientTwistsDetailed and 2 transitive users compiled; #print axioms sorryAx only via the new sorry lemmas and existing sorry library statements"
+  "note": "independent cc review: item theorem text vs live (identical); 4 delivered modules + the 4 live downstream modules (PurTwistIntegralBasis, PurTwistSheaves, PurTwistIntegralLocalModels, PurTwistRootLocalModels) compiled as one sandbox set; #print axioms of item and changed public theorems; node proof fields vs Lean"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "statement_change": {
+  "date": "2026-10-21",
+  "by": "P7 stage 2",
+  "old_statement": "For the actual four coefficient sheaves and specified scalar maps [def-pur-twist-coefficient-rings], the canonical morphism purTwistCoefficientComparison from their pushout to the completed coefficient sheaf is an isomorphism. No hypothesis on invertibility of l on the scheme is needed.\n\ntheorem purTwistCoefficientComparison_isIso (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :\n    IsIso (purTwistCoefficientComparison S l E)",
+  "what": "Generalize the site universe independently of the coefficient universe. The old tied-universe statement is the specialization t = u. No mathematical hypothesis or conclusion changes.",
+  "source": {
+   "document": "literature/stacks-project/sites-modules.tex",
+   "place": "Coefficient-twist blueprint proof step 6; Stacks Tag 03EK."
+  },
+  "citers": [
+   {
+    "id": "lem-pur-twist-sheaf-locally-free",
+    "holds": true,
+    "note": "The existing use remains valid by specializing t = u; no additional hypothesis is needed."
+   }
+  ]
+ }
 }

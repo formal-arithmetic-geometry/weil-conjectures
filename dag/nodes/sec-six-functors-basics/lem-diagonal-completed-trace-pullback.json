@@ -1,0 +1,132 @@
+{
+ "id": "lem-diagonal-completed-trace-pullback",
+ "kind": "statement",
+ "title": "Pullback of one realized completed projective-line trace",
+ "statement": "Fix a prime l and a Cartesian square with hX:Xprime→X, fprime:Xprime→Sprime, f:X→S, and hS:Sprime→S. All four schemes are Noetherian with DiagonalTraceLocalizations, and l is a unit on S and Sprime. Fix Result records t and tprime of [def-sfb-diagonal-trace-presentation], so f and fprime have their recorded projective-line models and whole-system traces. Fix CompletedRealization data on all four schemes, two universally normalized condensed right-derived direct-image models D and Dprime (including their canonical functor equalities and universal-unit equations), and CompletedPushSquare data of [def-sfb-diagonal-coefficient-reference]. Fix the ordinary positive-line PullEndpoint along hX normalized by spIntegralComparison at the bottom field, and the UnitPullEndpoint along hS. Solve the two CompletedTraceCompatibility equations for the condensed traces: the formula is inverse of R.map(shiftedLine), followed by the inverse derived push square, followed by the realization of the completed trace, followed by singleUnit. These two explicit trace arrows satisfy TracePullback of [def-sfb-diagonal-coefficient-pullback-endpoints], including invertibility of modelExchange on the shifted positive line. No diagonal arrow or coefficient Family is assumed. The same node also records the proved fact that shiftedLine is invertible, being a composite of single, shift and line isomorphisms.",
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-reference",
+  "def-sfb-diagonal-coefficient-pullback-endpoints",
+  "def-sfb-diagonal-coefficient-category",
+  "def-sfb-diagonal-trace-presentation",
+  "def-sfb-diagonal-trace-models"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (3), geometric pullback and completed class/trace comparisons before scalar extension"
+ },
+ "proof": [
+  {
+   "text": "The canonical single, shift and line comparisons are isomorphisms, so shiftedLine is invertible. This justifies the two explicit inverse factors without choosing arbitrary witnesses.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Pull the whole unit/Chern splitting through the Cartesian square, with its normalized Tate-line and unit maps. Finite geometric P1 cohomology identifies the splitting. A change of projective-line model changes the hyperplane class by a base class, which lies in the first summand and is killed by the trace projection.",
+   "uses": [
+    "sk-lem-geo-p1-cohomology",
+    "det-prop-diagonal-tower-trace"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the normalized inverse-image/derived-limit comparison to the whole splitting. Cartesian coefficient limits identify its endpoint comparisons; invertibility of the splittings and these comparisons makes the base-change mate invertible. Invert the commuting splitting square and project to the constant summand. The Result construction equations identify the completed traces. The normalized realization/direct-image squares and full universal-unit equations identify the transported mate with modelExchange. Solving the two trace equations gives the formulas in the statement.",
+   "uses": [
+    "det-prop-diagonal-tower-limit",
+    "det-prop-diagonal-tower-trace",
+    "sk-prop-sfb-cartesian-coefficients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-prop-diagonal-tower-limit",
+  "det-prop-diagonal-tower-trace",
+  "sk-lem-geo-p1-cohomology",
+  "sk-prop-sfb-cartesian-coefficients"
+ ],
+ "proof_origin": {
+  "by": "A9",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (3), geometric pullback and completed class/trace comparisons before scalar extension",
+  "note": "Agent expansion of the corresponding part of the source paragraph, retaining whole-system comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Functoriality of projective line trace under base change in a derived category",
+   "results": "Eight hits: linear algebra trace_baseChange, exact derived functors and generic base-change lemmas. No completed cycle class or geometric trace compatibility theorem.",
+   "date": "2026-10-27",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change compatibility of completed diagonal cycle class and projective line trace",
+   "results": "Eight results about linear traces or Weierstrass base change; none supplies a completed diagonal square or a normalized projective-line trace square.",
+   "date": "2026-10-27",
+   "verdict": "No match. Loogle CategoryTheory.NatTrans.naturality provides only the general naturality equation."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*[Bb]ase[Cc]hange|PullbackCompatibility",
+   "results": "Three Mathlib hits about stability of diagonal morphism properties under base change. Searches in both project roots found the canonical pullback structures and finite Cartier/P1 comparisons, but no whole-system completed compatibility theorem.",
+   "date": "2026-10-27",
+   "verdict": "Use finite Cartier/P1 results as dependencies; whole-system comparison remains to be proved."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalCompletedPullbackCompatibility",
+  "date": "2026-10-27",
+  "group": "A9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "paragraph (3), geometric pullback and completed class/trace comparisons before scalar extension",
+   "via": [
+    "lem-diagonal-completed-pullback-compatibility",
+    "lem-diagonal-nontorsion-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalCompletedTracePullback",
+  "file": "lean/Sheaf/Paper/DiagonalCompletedTracePullback.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonalCompletedTrace_pullback",
+  "statement": "theorem diagonalCompletedTrace_pullback (l : ℕ) [Fact l.Prime]\n    {X S X' S' : Scheme.{u}}\n    [IsNoetherian X] [IsNoetherian S] [IsNoetherian X'] [IsNoetherian S']\n    [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]\n    [DiagonalTraceLocalizations l X'] [DiagonalTraceLocalizations l S']\n    (f : X ⟶ S) (f' : X' ⟶ S') (hX : X' ⟶ X) (hS : S' ⟶ S)\n    (square : IsPullback hX f' f hS)\n    (hunit : IsUnit (l : Γ(S, ⊤))) (hunit' : IsUnit (l : Γ(S', ⊤)))\n    (eX : CompletedRealization l X) (eS : CompletedRealization l S)\n    (eX' : CompletedRealization l X') (eS' : CompletedRealization l S')\n    (t : DiagonalTrace.Result l (ULift.{u} (Padic l)) f)\n    (t' : DiagonalTrace.Result l (ULift.{u} (Padic l)) f')\n    (D : DiagonalRightDerived\n      (CondensedRing.lowerStar (Profinite.continuousMapRingObj.{u} ℤ_[l]) f))\n    (D' : DiagonalRightDerived\n      (CondensedRing.lowerStar (Profinite.continuousMapRingObj.{u} ℤ_[l]) f'))\n    (canonical : D.R = derivedLower (Profinite.continuousMapRingObj.{u} ℤ_[l]) f)\n    (canonical' : D'.R = derivedLower (Profinite.continuousMapRingObj.{u} ℤ_[l]) f')\n    (hcanonical : IsCanonicalRightDerived\n      (CondensedRing.lowerStar (Profinite.continuousMapRingObj.{u} ℤ_[l]) f) D canonical)\n    (hcanonical' : IsCanonicalRightDerived\n      (CondensedRing.lowerStar (Profinite.continuousMapRingObj.{u} ℤ_[l]) f') D' canonical')\n    (push : CompletedPushSquare l f eX eS t.Rc D)\n    (push' : CompletedPushSquare l f' eX' eS' t'.Rc D')\n    (line : PullEndpoint (Profinite.continuousMapRingObj.{u} ℤ_[l]) hX\n      (zlLine l X) (zlLine l X') (spIntegralComparison hX l (bottomField l)))\n    (c : UnitPullEndpoint (Profinite.continuousMapRingObj.{u} ℤ_[l]) hS) :\n    let trace := inv (D.R.map (eX.shiftedLine l X)) ≫\n      push.derived.iso.inv.app _ ≫ eS.F.mapDerivedCategory.map t.trace ≫ eS.singleUnit l S\n    let trace' := inv (D'.R.map (eX'.shiftedLine l X')) ≫\n      push'.derived.iso.inv.app _ ≫ eS'.F.mapDerivedCategory.map t'.trace ≫ eS'.singleUnit l S'\n    TracePullback (Profinite.continuousMapRingObj.{u} ℤ_[l]) f f' hX hS square.w.symm\n      D D' canonical canonical' line c trace trace'",
+  "branch": "sheaf-dag",
+  "by": "A9",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.completedRealization_shiftedLine_isIso",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonalCompletedTrace_pullback"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261027T094335-L-216101",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261027T094335-L-216101",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

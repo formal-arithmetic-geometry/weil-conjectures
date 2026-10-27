@@ -1,0 +1,130 @@
+{
+ "id": "lem-sp-varying-ring-ordinary-comparison-normalization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-gluing",
+   "place": "Construction-normalization step of lem-sp-varying-ring-ordinary-clopen-evaluation.",
+   "via": [
+    "lem-sp-varying-ring-ordinary-clopen-evaluation",
+    "lem-sp-varying-ring-proper-open-pasting",
+    "lem-sp-coefficient-tower-shriek-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Pullback compositor and open-mate normalization of ordinary realization",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "statement": "For the original specified ordinaryPullComparison and ordinaryOpenComparison isomorphisms, the normalized pullback-composition and open-extension-composition equations OrdinaryPullComposition and OrdinaryOpenComposition both hold. This statement contains no cartesian beta or clopen section projection.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and Lemma 4.10; Stacks 03DI and 09AE for open adjunctions, 0F7B for the intrinsic clopen construction. This normalization is an agent-formulated consequence."
+ },
+ "stmt_deps": [
+  "lem-sp-varying-ring-ordinary-evaluation-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Replace realization using ordinaryRealization_eq and apply constant/degree-zero embedding to ordinaryModuleEvalG_comp. Naturality and the exact-single natural-isomorphism/compositor coherence identify the result with StrictTower.gComp. For open composition, the defining inverse mate of evalG that constructs evalJInv preserves its unit equation through exact localization, recovery by the fully faithful degree-zero embedding and constant embedding. Hence the inverse ordinary open comparison has the specified pullback comparison as mate. Apply mateEquiv to the two inverse open-composition maps: mate pasting and conjugation of the normalized leftAdjointCompIso compositors turn their equality into the established pullback equation. Injectivity and inversion give the forward open-composition equation. No cartesian beta or clopen projection occurs.",
+   "uses": [
+    "lem-sp-varying-ring-ordinary-evaluation-comparisons",
+    "lem-sp-varying-ring-ordinary-module-composition",
+    "lem-coef-semilinear-derived-sections",
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-varying-ring-ordinary-evaluation-comparisons",
+  "lem-sp-varying-ring-ordinary-module-composition",
+  "lem-coef-semilinear-derived-sections",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and Lemma 4.10; Stacks 03DI and 09AE for open adjunctions, 0F7B for the intrinsic clopen construction. This normalization is an agent-formulated consequence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Component evaluation constant tower degree zero embedding preserves normalized adjunction mates and open base change clopen projection",
+   "results": "msearch.py returned generic constantPresheafAdj, constantSheafAdj and evaluation preserves zero morphisms; none concerns the normalized varying-ring ordinary realization.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv_hcomp\"; \"mapDerivedCategorySingleFunctor\"",
+   "results": "Generic mateEquiv_hcomp and exact-single functor coherence. Inspected Mathlib CategoryTheory/Adjunction/Mates and the adopted source LeftDerivedFunctor/SingleFunctor. None states the scheme/coefficient realization normalization.",
+   "date": "2026-10-27",
+   "verdict": "generic tools, not this statement"
+  },
+  {
+   "tool": "grep",
+   "query": "constantSingle.*comp|ordinary.*[Cc]artesian|ordinary.*[Ss]ectionEvaluation|single.*mate",
+   "results": "msearch.py found no Mathlib matches. Local rg found VaryingRingOpenBaseChangeEvaluation and VaryingRingClopenSectionEvaluation, whose conclusions concern derived coefficient evaluation to a single module category. They do not state the present ordinary-system to derived-constant-tower comparisons. The former imports the original item only for its already proved ordinaryModuleEvalG_comp.",
+   "date": "2026-10-27",
+   "verdict": "no duplicate ordinary realization normalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.VaryingRingOrdinaryClopenEvaluation",
+  "date": "2026-10-27",
+  "group": "E9"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.VaryingRingOrdinaryComparisonNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/VaryingRingOrdinaryComparisonNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.VaryingRing.ordinaryComparisonNormalization",
+  "statement": "theorem ordinaryComparisonNormalization (n : ℕ) :\n    OrdinaryPullComposition R φ n (ordinaryPullComparison R φ n) ∧\n      OrdinaryOpenComposition R φ n (ordinaryOpenComparison R φ n)",
+  "branch": "sheaf-dag",
+  "by": "E9",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.VaryingRing.ordinaryComparisonNormalization"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-77a07",
+  "group": "E9",
+  "result": "fix",
+  "landing": "20261027T054600-L-966087",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-77a07",
+  "group": "E9",
+  "result": "fix",
+  "landing": "20261027T054600-L-966087",
+  "kind": "interface",
+  "note": "independent cc review: item module + 6 new modules vs clone item (verbatim extraction diff), node JSONs vs Lean, 2 direct importers compiled against delivered modules"
+ }
+}

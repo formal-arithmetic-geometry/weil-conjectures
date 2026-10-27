@@ -1,0 +1,124 @@
+{
+ "id": "lem-pur-integral-geometric-input-normalization",
+ "kind": "statement",
+ "title": "Quotient units and ordinary open-unit normalization",
+ "statement": "Fix a finite purity setting P of def-pur-conventions, integral datum d = pbcIntegralDatum P.coefficients.l P.extension, separated finite-type schemes X,Y over Spec P.field.k, and a separated finite-type map f:X→Y over that base. Given underlying-scheme isomorphisms g:Y′→Y and g′:X′→X, compactifications c of f and c′ of f′, an isomorphism gb:c′.Z→c.Z, and chosen Cartesian proper and open squares sp,sj, choose any finite tuple a generating d.ideal and any K in the intrinsic complete full subcategory. Then the three actual ordinaryToCompleted units at (g,Rc.g_* c.i_! K), (gb,c.i_! K) and (g′,K) are invertible. Moreover cbcDatumOrdinaryExchange d sj at K is the forward cbcBeta, whose inverse is the transpose of the pulled open unit. All objects and maps are those of [def-pur-strict-integral-exchange-data]; neither g nor g′ need be base linear. These conclusions only supply the input units and ordinary open identification: they do not assert strict proper normalization, the completed two-factor equation or any strict coherence.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
+  "place": "Original normalization steps 1, 5--8: invertibility of the specified reconstruction units and ordinary open identification."
+ },
+ "stmt_deps": [
+  "def-pur-strict-integral-exchange-data"
+ ],
+ "proof": [
+  {
+   "text": "the completed coefficient identifications along an isomorphism identify\nordinary pullback with exact site reindexing. It commutes with the entire quotient\ndiagram and its augmentation, since on flat-term representatives both routes send\na tensor to its relabeling with the same quotient scalar. Thus it preserves the\nquotient-complete objects and ordinaryToCompleted is invertible on them. Open\nextension preserves completeness by completedOpenExchangeComparison; proper direct\nimage preserves it by directImageRlimIso and the projection-unit equation. Apply\nthese facts to K, j!K and Rp*j!K. For the last equality transpose the inverse\nordinary open exchange under j'! ⊣ j' inverse image. The transported open adjunction\nand pullback compositor preserve the open unit. Its transpose is exactly the\npulled open unit followed by cbcSquarePull inverse, the definition of cbcBetaInv.\nInjectivity of transposition and uniqueness of inverses identify the forward map\nwith cbcBeta. This uses no derived evaluation faithfulness or finite-origin inputs.\nThe argument also applies to zero objects, empty schemes and an empty ideal tuple.",
+   "uses": [
+    "lem-pur-isomorphism-completed-reduction-reindexing",
+    "lem-cbc-completed-extension-zero-comparison",
+    "prop-weil-pbc-direct-image-limits",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
+    "place": "Original normalization steps 1, 5--8: invertibility of the specified reconstruction units and ordinary open identification."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-isomorphism-completed-reduction-reindexing",
+  "lem-cbc-completed-extension-zero-comparison",
+  "prop-weil-pbc-direct-image-limits",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-sf-open-tensor-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "reason": "The blueprint constituent paragraph assembles compatibilities. These explicit strict-tower arguments expand its integral normalization steps.",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural adjunction mates commute with inverse limits and tensor coefficient reduction",
+   "results": "CategoryTheory.Limits.constLimAdj, CategoryTheory.mateEquiv_apply, CategoryTheory.mateEquiv, CategoryTheory.preservesLimitNatIso_inv_app; generic infrastructure only.",
+   "date": "2026-10-25",
+   "verdict": "no match for these specified completed coefficient and strict quotient comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "CategoryTheory.mateEquiv, mateEquiv_counit, mateEquiv_vcomp, mateEquiv_hcomp and conjugateEquiv variants, Mathlib.CategoryTheory.Adjunction.Mates.",
+   "date": "2026-10-25",
+   "verdict": "no match; none specializes in one line to the specified reduction, completed pullback and proper/open maps"
+  },
+  {
+   "tool": "grep",
+   "query": "rg mate|whisker Mathlib/CategoryTheory/Adjunction/Mates.lean; rg PurIntegralProperNormalization|PurIntegralStrictHorizontal|purStrictIntegral lean/Sheaf lean/WeilConjectures",
+   "results": "Mates supplies the generic bijection and pasting. PurStrictIntegralExchangeNormalization has the parent statement only; SemilinearExchangeReindexing repeats it in a parent conjunction and imports the item, so cannot supply a proof.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurStrictIntegralExchangeNormalization",
+  "date": "2026-10-25",
+  "group": "T1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-weil-equivariance-compatibilities",
+   "place": "Original normalization steps 1, 5--8: invertibility of the specified reconstruction units and ordinary open identification.",
+   "via": [
+    "lem-pur-isomorphism-strict-integral-exchange-normalization",
+    "lem-pur-weil-semilinear-exchange-reindexing"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurIntegralGeometricInputNormalization",
+  "file": "lean/Sheaf/Paper/PurIntegralGeometricInputNormalization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.purIntegralGeometricInputNormalization",
+  "statement": "theorem purIntegralGeometricInputNormalization\n    (P : WeilConjectures.PurityFiniteSetting.{t}) :\n  ∀ {X' X Y' Y : Scheme.{t}} [X.Over\n      (Spec (.of P.field.k))]\n      [Y.Over\n      (Spec (.of P.field.k))]\n      [IsSeparated (X ↘ Spec (.of P.field.k))]\n      [IsSeparated (Y ↘ Spec (.of P.field.k))]\n      [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))]\n      [QuasiCompact (X ↘ Spec (.of P.field.k))]\n      [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))]\n      [QuasiCompact (Y ↘ Spec (.of P.field.k))]\n      {f : X ⟶ Y} [f.IsOver\n      (Spec (.of P.field.k))]\n      [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n      {f' : X' ⟶ Y'} {g : Y' ⟶ Y} {g' : X' ⟶ X} [IsIso g] [IsIso g']\n      (c : Compactification f) (c' : Compactification f') (gb : c'.Z ⟶ c.Z) [IsIso gb]\n      (sp : ChosenCartesianSquare gb c'.g c.g g)\n      (sj : OpenImmersionSquare g' c'.i c.i gb)\n      (r : ℕ) (a : Fin r → PbcIntegralRing P.coefficients.l P.extension)\n      (ha : Ideal.span (Set.range a) = (pbcIntegralDatum P.coefficients.l P.extension).ideal)\n      (K : (cbcCompleteProperty (pbcIntegralDatum P.coefficients.l P.extension)\n        X r a ha).FullSubcategory),\n    IsIso ((pbcIntegralDatum P.coefficients.l P.extension).ordinaryToCompleted g\n      ((cbcSupport (pbcIntegralDatum P.coefficients.l P.extension) c).obj K.obj)) ∧\n    IsIso ((pbcIntegralDatum P.coefficients.l P.extension).ordinaryToCompleted gb\n      ((cbcJ (pbcIntegralDatum P.coefficients.l P.extension) c.i).obj K.obj)) ∧\n    IsIso ((pbcIntegralDatum P.coefficients.l P.extension).ordinaryToCompleted g' K.obj) ∧\n    (cbcDatumOrdinaryExchange (pbcIntegralDatum P.coefficients.l P.extension) sj).app K.obj =\n      (cbcBeta (pbcIntegralDatum P.coefficients.l P.extension) g' c'.i c.i gb sj.w\n        (IsPullback.of_iso_pullback sj.toCommSq sj.isoPullback sj.hom_fst\n          sj.hom_snd)).hom.app K.obj",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-25"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "worker": "stage3",
+  "item": "Sheaf.Paper.PurStrictIntegralExchangeNormalization",
+  "summary": "Extract the indicated strict part of the integral normalization argument as one independently provable statement; keep the specified constructions and all domains.",
+  "blueprint": "Original normalization steps 1, 5--8: invertibility of the specified reconstruction units and ordinary open identification."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-477d0",
+  "group": "T1",
+  "result": "fix",
+  "landing": "20261025T205604-L-3299132",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-477d0",
+  "group": "T1",
+  "result": "fix",
+  "landing": "20261025T205604-L-3299132",
+  "kind": "interface",
+  "note": "independent cc review: old item module vs new PurStrictIntegralExchangeData + item (defs verbatim, statement byte-identical); delivered item node vs base node under stage3_delivery/check_statement_change; importer SemilinearExchangeReindexingData compiled with delivered modules"
+ }
+}

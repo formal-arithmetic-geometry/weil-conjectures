@@ -216,5 +216,54 @@
   "existing": true,
   "note": "Exact existing instance in the published pro-etale module-object framework. For arbitrary schemes X Y : Scheme.{u} and f : X ⟶ Y, it states that the canonical comparison upperStarFromPointComp f : upperStarFromPoint Y ⋙ (f)^*[Ab.{u + 1}] ≅ upperStarFromPoint X is monoidal. Its underlying natural isomorphism is exactly the node comparison f^* ∘ p_Y^* ≅ p_X^*, and NatTrans.IsMonoidal expresses compatibility with unit and tensor comparison isomorphisms for the strong monoidal functors."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.isMonoidal_upperStarFromPointComp"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.isMonoidal_upperStarFromPointComp",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+     "lines": [
+      513,
+      538
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "The natural isomorphism $f^*\\circ p_Y^*\\cong p_X^*$ of\n[def-sfb-pullback-from-point-comp-iso] is monoidal. That is, it is compatible\nwith the unit and tensor comparison isomorphisms of the strong monoidal\nfunctors $f^*\\circ p_Y^*$ and $p_X^*$ (with the strong monoidal structure of\n[def-sfb-finite-upper-star-monoidal] on $f^*$), for the tensor products of\n[lem-weil-pbc-sheaf-tensor-closed].",
+  "proof": [
+   {
+    "text": "By construction, the isomorphism is $p^*$ whiskered with the inverse of the\ncomposition isomorphism $(\\pi_Y\\circ f)^*\\cong f^*\\circ\\pi_Y^*$, followed by\nan equality. It therefore suffices that this composition isomorphism is\nmonoidal.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "That isomorphism is the mate, under the adjunctions $g^*\\dashv g_*$, of the\ncomposition isomorphism $\\pi_{Y*}\\circ f_*\\cong(\\pi_Y\\circ f)_*$ of\npushforwards. The latter is monoidal for the lax monoidal structures of the\npushforwards, because on sections both sides are restriction along canonical\nisomorphisms of iterated fibre products, and these commute with the\nobjectwise tensor product. The adjunctions are monoidal\n([lem-sfb-finite-monoidal-adjunction]). The mate of a monoidal natural\ntransformation between lax monoidal right adjoints is monoidal for the\ninduced oplax structures on the left adjoints, and these are the strong\nmonoidal structures.",
+    "uses": [
+     "lem-sfb-finite-monoidal-adjunction"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

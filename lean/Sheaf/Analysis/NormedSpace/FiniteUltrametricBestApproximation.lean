@@ -64,6 +64,36 @@ theorem exists_finite_ultrametric_best_approximation
     (W : Submodule E V) [FiniteDimensional E W] (x : V) :
     (∃ w₀ : W, ‖x - (w₀ : V)‖ = ⨅ w : W, ‖x - (w : V)‖) ∧
       (x ∉ W → 0 < ⨅ w : W, ‖x - (w : V)‖) := by
-  sorry
+  let : NontriviallyNormedField E := spectralNorm.nontriviallyNormedField (Padic l) E
+  let : NormedSpace (Padic l) E := spectralNorm.normedSpace (Padic l) E
+  have : ProperSpace E := FiniteDimensional.proper (Padic l) E
+  let : NormedSpace E V :=
+    { norm_smul_le := fun a v ↦ le_of_eq (h_hom a v) }
+  have : ProperSpace W := FiniteDimensional.proper E W
+  have hzero : (0 : W) ∈ Metric.closedBall (0 : W) ‖x‖ := by
+    simp [norm_nonneg]
+  have hcont : Continuous (fun w : W ↦ ‖x - (w : V)‖) :=
+    (continuous_const.sub continuous_subtype_val).norm
+  obtain ⟨w₀, hw₀, hmin⟩ := (isCompact_closedBall (0 : W) ‖x‖).exists_isMinOn
+    ⟨0, hzero⟩ hcont.continuousOn
+  have hbound : ‖x - (w₀ : V)‖ ≤ ‖x‖ := by
+    simpa using hmin hzero
+  have hglobal (w : W) : ‖x - (w₀ : V)‖ ≤ ‖x - (w : V)‖ := by
+    by_cases hw : w ∈ Metric.closedBall (0 : W) ‖x‖
+    · exact hmin hw
+    · have hlarge : ‖x‖ < ‖(w : V)‖ := by
+        simpa [Metric.mem_closedBall, dist_eq_norm, not_le] using hw
+      have htri := h_ultra x (-(x - (w : V)))
+      rw [show x + -(x - (w : V)) = (w : V) by abel, norm_neg] at htri
+      have hwle : ‖(w : V)‖ ≤ ‖x - (w : V)‖ :=
+        (le_max_iff.mp htri).resolve_left (not_le.mpr hlarge)
+      exact hbound.trans (hlarge.le.trans hwle)
+  have heq : ‖x - (w₀ : V)‖ = ⨅ w : W, ‖x - (w : V)‖ := by
+    apply le_antisymm
+    · exact le_ciInf hglobal
+    · exact ciInf_le ⟨0, by rintro _ ⟨w, rfl⟩; exact norm_nonneg _⟩ w₀
+  refine ⟨⟨w₀, heq⟩, fun hx ↦ ?_⟩
+  rw [← heq]
+  exact norm_pos_iff.mpr (sub_ne_zero.mpr (fun h ↦ hx (h ▸ w₀.property)))
 
 end Padic

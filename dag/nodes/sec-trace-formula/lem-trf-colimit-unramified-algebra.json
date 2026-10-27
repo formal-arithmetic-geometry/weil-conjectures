@@ -13,38 +13,21 @@
  ],
  "proof": [
   {
-   "text": "Choose algebra generators $x_1,\\ldots,x_m$ of $C_0$ over $B_0$, allowing $m=0$, and write $x_{r,i}=1\\otimes x_r\\in C_i$. For $i\\ge i_0$, every element of $C_i$ is a finite sum of tensors $a\\otimes c$. Write $c$ as a polynomial in the $x_r$ with coefficients in $B_0$. Then $a\\otimes c$ is the same polynomial in the $x_{r,i}$, with each coefficient $b$ replaced by $a\\otimes b\\in B_i$ (distribute the scalar $a$ across the coefficients). Thus the $x_{r,i}$ generate $C_i$ over $B_i$. The identical computation with $A$ gives generators of $C$ over $B$.",
-   "uses": [],
-   "elementary": true,
+   "text": "Choose generators $x_1,\\ldots,x_m$ of $C_0$ over $B_0$, with $m=0$ permitted, using [def-weil-pbc-finite-type-algebra]. Put $M_0=\\Omega_{C_0/B_0}$ and $v_r=\\mathrm d x_r$. Apply [lem-trf-base-changed-algebra-differential-generators] with $T=A_i$ for every $i\\ge i_0$, and with $T=A$. Thus the $x_{r,i}=1\\otimes x_r$ generate $C_i$ over $B_i$, their differentials generate $\\Omega_{C_i/B_i}$, and the $v_r$ generate $M_0$. These applications use exactly the scalar-extended map $\\mathrm{id}\\otimes\\varphi_0$.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "lem-trf-base-changed-algebra-differential-generators"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
     "place": "Tag 0C4F (lemma-colimit-unramified), proof: choose algebra generators; tensor expansion"
    }
   },
   {
-   "text": "Set $M_0=\\Omega_{C_0/B_0}$ and $v_r=\\mathrm d x_r$. The presentation in [def-weil-pbc-kahler-differentials] says that differentials $\\mathrm d c$ generate $M_0$. For a monomial $b x_1^{e_1}\\cdots x_m^{e_m}$, repeated Leibniz gives $\\mathrm d(b x_1^{e_1}\\cdots x_m^{e_m})=\\sum_{r:e_r>0} e_r b x_1^{e_1}\\cdots x_r^{e_r-1}\\cdots x_m^{e_m}\\mathrm d x_r$, since $\\mathrm d b=0$. Additivity extends this to every polynomial expression for $c$. Hence the $v_r$ generate $M_0$. Applied to the generators from step 1, the same calculation shows that $\\mathrm d x_{r,i}$ generate $\\Omega_{C_i/B_i}$ for every $i\\ge i_0$. If $m=0$, all these modules are zero.",
+   "text": "Apply [lem-trf-outer-base-change-differential-comparison] over $A_{i_0}$, first with $T=A$ and then with each $T=A_i$. It gives isomorphisms $F_T:T\\otimes_{A_{i_0}}M_0\\simeq\\Omega_{C_T/B_T}$ satisfying $F_T(1\\otimes v_r)=\\mathrm d(1\\otimes x_r)$. The unramified hypothesis gives $\\Omega_{C/B}=0$, so injectivity of $F_A$ yields $1\\otimes v_r=0$ in $A\\otimes_{A_{i_0}}M_0$ for every $r$.",
    "uses": [
-    "def-weil-pbc-kahler-differentials"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0C4F (lemma-colimit-unramified), first generator sentence; the Leibniz calculation in Tag 00RX (lemma-differentials-polynomial-ring), first proof paragraph"
-   }
-  },
-  {
-   "text": "For any $A_{i_0}$-algebra $T$ put $B_T=T\\otimes_{A_{i_0}}B_0$ and $C_T=T\\otimes_{A_{i_0}}C_0$. The ring map $B_T\\otimes_{B_0}C_0\\to C_T$, $(t\\otimes b)\\otimes c\\mapsto t\\otimes\\varphi_0(b)c$, has inverse $t\\otimes c\\mapsto(t\\otimes1)\\otimes c$. The balancing relations verify both composites on pure tensors. Also $C_T\\otimes_{C_0}M_0\\cong T\\otimes_{A_{i_0}}M_0$: send $(t\\otimes c)\\otimes\\omega$ to $t\\otimes c\\omega$, with inverse $t\\otimes\\omega\\mapsto(t\\otimes1)\\otimes\\omega$. Again balancing verifies the formulas and their inverse identities. These identifications apply to $T=A_i$ and to $T=A$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0C4F (lemma-colimit-unramified), base-changed rings in the proof; explicit tensor identifications for applying Tag 00RV"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-kahler-differentials-base-change] to $B_0\\to B_T$ and $B_0\\to C_0$, using the ring identification of step 3. Its $C_T$-module form gives $\\Omega_{C_T/B_T}\\cong C_T\\otimes_{C_0}M_0$. Combining with step 3 gives an isomorphism $F_T:T\\otimes_{A_{i_0}}M_0\\longrightarrow\\Omega_{C_T/B_T}$ that sends $1\\otimes v_r$ to $\\mathrm d(1\\otimes x_r)$. This generator formula follows from the stated formula for the canonical base-change map. In particular $F_A(1\\otimes v_r)=0$, because the hypothesis that $B\\to C$ is unramified includes $\\Omega_{C/B}=0$. Injectivity of $F_A$ implies $1\\otimes v_r=0$ in $A\\otimes_{A_{i_0}}M_0$ for every $r$.",
-   "uses": [
-    "lem-weil-pbc-kahler-differentials-base-change"
+    "lem-trf-outer-base-change-differential-comparison"
    ],
    "elementary": false,
    "source": {
@@ -53,7 +36,7 @@
    }
   },
   {
-   "text": "Apply clause (2) of [lem-weil-pbc-directed-colimit-base-change-elementwise] with initial index $i_0$ and the arbitrary $A_{i_0}$-module $M_0$. For each $r$ apply it to $1\\otimes v_r\\in A_{i_0}\\otimes_{A_{i_0}}M_0$: step 4 says its image in $A\\otimes_{A_{i_0}}M_0$ is zero. Obtain $j_r\\ge i_0$ with $1\\otimes v_r=0$ in $A_{j_r}\\otimes_{A_{i_0}}M_0$. Choose $i\\ge i_0,j_1,\\ldots,j_m$ by finitely many applications of directedness (take $i=i_0$ if $m=0$). The transition map sends $a\\otimes\\omega$ to $\\alpha_{i j_r}(a)\\otimes\\omega$, so it sends these zero elements to $1\\otimes v_r=0$ in $A_i\\otimes_{A_{i_0}}M_0$. Applying $F_{A_i}$ from step 4 yields $\\mathrm d x_{r,i}=0$ for every $r$.",
+   "text": "Apply clause (2) of [lem-weil-pbc-directed-colimit-base-change-elementwise] with initial index $i_0$ and the arbitrary $A_{i_0}$-module $M_0$. For each $r$ apply it to $1\\otimes v_r\\in A_{i_0}\\otimes_{A_{i_0}}M_0$: step 2 says its image in $A\\otimes_{A_{i_0}}M_0$ is zero. Obtain $j_r\\ge i_0$ with $1\\otimes v_r=0$ in $A_{j_r}\\otimes_{A_{i_0}}M_0$. Choose $i\\ge i_0,j_1,\\ldots,j_m$ by finitely many applications of directedness (take $i=i_0$ if $m=0$). The transition map sends $a\\otimes\\omega$ to $\\alpha_{i j_r}(a)\\otimes\\omega$, so it sends these zero elements to $1\\otimes v_r=0$ in $A_i\\otimes_{A_{i_0}}M_0$. Applying $F_{A_i}$ from step 2 yields $\\mathrm d x_{r,i}=0$ for every $r$.",
    "uses": [
     "lem-weil-pbc-directed-colimit-base-change-elementwise"
    ],
@@ -64,7 +47,7 @@
    }
   },
   {
-   "text": "At the index $i$ of step 5, every generator $\\mathrm d x_{r,i}$ of $\\Omega_{C_i/B_i}$ from step 2 is zero; a linear combination of zero generators is zero, so $\\Omega_{C_i/B_i}=0$. Step 1 already proves that $C_i$ is a finitely generated $B_i$-algebra. These are exactly the two conditions defining unramified in the statement, and $i\\ge i_0$.",
+   "text": "At the index $i$ of step 3, every $\\mathrm d x_{r,i}$ is zero. Since step 1 says these elements generate $\\Omega_{C_i/B_i}$, every element of that module is a linear combination of zero elements; hence it is zero. Step 1 also supplies algebra generators for $C_i$ over $B_i$. These are exactly the two unramified conditions in the unchanged statement, and $i\\ge i_0$. If $m=0$, step 3 takes $i=i_0$.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -74,8 +57,9 @@
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-kahler-differentials",
-  "lem-weil-pbc-kahler-differentials-base-change",
+  "def-weil-pbc-finite-type-algebra",
+  "lem-trf-base-changed-algebra-differential-generators",
+  "lem-trf-outer-base-change-differential-comparison",
   "lem-weil-pbc-directed-colimit-base-change-elementwise"
  ],
  "proof_origin": {
@@ -179,21 +163,21 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-colimit-unramified-algebra",
   "worker": "stage1",
-  "group": "Q08",
-  "summary": "Read Stacks 0C4F and its differential/colimit inputs. Six steps give algebra generators at every stage, compute their differentials by Leibniz, write inverse tensor identifications, use the existing differential base-change leaf, kill the finitely many differentials using the existing Lean-closed elementwise tensor-colimit theorem, and conclude. No new nodes. Clarified that B_i and C_i are defined only for i >= i_0, as in the source; no mathematical hypothesis or conclusion changed.",
-  "blueprint": "Historical ancestry retained: the unramified affine-algebra input to the nodal-family approximation under lem-trf-local-term-locality, via lem-trf-unramified-limit-descent. This realizes the complete proof of Stacks 0C4F; it does not restore the obsolete nearby-duality route to the revised blueprint local-term theorem.",
+  "group": "Q136",
+  "summary": "Repair of the 2026-10-22 spreading-work return: preserve the statement verbatim and extract two comparable statement-only tasks. Old steps 1--2 become the chosen-family algebra/differential generation lemma; old steps 3--4 become the explicit outer scalar-extension differential comparison. The parent retains the elementwise finite-stage argument and concludes from these two inputs. Every old argument is assigned to a new task or retained, with the complete original proof and an argument-by-argument map in report.md. Both new nodes are searched and unsplit, with no proof steps. Live-DAG promotion return repaired on 2026-10-22: compared the retained original with the current item (identical), rechecked every current citation statement and its verbatim quote, and reviewed three newly present 00RV nodes with explicit nonduplicate distinctions in report.md. Mathematical statement, assembly and both task statements are retained; delivery tooling rebases onto current server main. Latest current-main retry: additionally read lem-trf-cotangent-differential-presheaf-ses in full and distinguished its restricted polynomial pair-site sequence from each general algebra task under Not duplicates; reverified all four verbatim citations and the unchanged 1980-character assembly. Rebased repair on 2026-10-23: initial dry run identified two newer same-tag nodes; read completed-conormal-resolutions and fibrewise-zero-kahler-differentials in full and added precise pairwise nonduplicate explanations. Rechecked unchanged current item, all four citation quotes, source hypotheses and 1980-character assembly. Search records and both auxiliary statements are retained.",
+  "blueprint": "Historical ancestry retained: the unramified affine-algebra input to the nodal-family approximation under lem-trf-local-term-locality, via lem-trf-unramified-limit-descent. This realizes the complete proof of Stacks 0C4F; it does not restore the obsolete nearby-duality route to the revised blueprint local-term theorem. The two new tasks retain this historical ancestry; no change of chapter/unit route is made.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-Q08-1d9e16391",
-  "group": "Q08",
+  "reviewer": "NT-cc-Q136-ab9eeee55",
+  "group": "Q136",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-1d9e16391 (reviewer sub-agent of L); spot-checked: I read the item, the parent lem-trf-unramified-limit-descent, the unit sk-i-curve-zero, all four cited nodes, and Stacks algebra.tex Tags 0C4F (lemma-colimit-unramified) and 031G (lemma-colimit-differentials). The statement matches 0C4F hypothesis by hypothesis, with unramified meaning finite type plus Omega=0 (00UT); the only change is that B_i and C_i are defined for i>=i_0, which weakens nothing. The parent applies the item with i_0=0 and a finite-type phi, matching the statement. Step 1: tensor expansion gives generators of C_i over B_i, correct. Step 2: Leibniz with dphi_0(b)=0 from the def node's presentation, correct; m=0 works. Step 3: explicit tensor isomorphisms, and the ring isomorphism is compatible with B_T->C_T. Step 4: the base-change Mathlib leaf (tensorKaehlerEquiv) with R=B_0, R'=B_T, S=C_0; the generator formula follows from the stated r' tensor ds formula, and Omega_{C/B}=0 gives 1 tensor v_r=0. Step 5: clause (2) of the slopmaster2-closed elementwise tensor-colimit node for an arbitrary module, then directedness, correct. Step 6 concludes both clauses. proof_deps equals the union of uses. All non-definition citations are Mathlib leaves or Lean-closed, so no tool_uses are needed and none are accepted. There are no new nodes. rg for 0C4F, 0C4W, 031G and unramified with colimit found no duplicate. Edge cases checked: m=0, C_0=0, A=0, one-element I, and the case A_i=Z[1/n!] with C_0=Z[x]/(2x). No SGA is used. No fixes were made."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q136-ab9eeee55 (reviewer sub-agent of L); spot-checked: This is the fourth push of the 2026-10-22 re-split. Against the PASSed head 5de4a3e42f98, both new nodes are byte-identical and the item differs only in split_report (date plus an appended summary sentence). Live and side-live still carry the old 6-step split, so the delivery is not superseded. I reread everything in full. The item matches Stacks 0C4F (algebra.tex 47571-47596) hypothesis by hypothesis. I also read 00RV (34213) and 00RX (34310, the spanning half only). Old steps 1-2 are now lem-trf-base-changed-algebra-differential-generators: the tensor expansion t⊗Σφ0(b_e)x^e = Σ(t⊗b_e)x_T^e, the Leibniz formula with d(b)=0, spanning only, and m=0. Old steps 3-4 are now lem-trf-outer-base-change-differential-comparison: q_T and h_T are standard cancellations, balanced because φ0 is an A0-algebra map, and h_T is C_T-linear. F_T comes from 00RV with R=B0, R'=B_T, S=C0, and tracing the generator gives (t⊗1)d_T(1⊗c), as stated. Old steps 5-6 are item steps 3-4. Item step 3 applies clause (2) of the elementwise colimit node with 0:=i0 and an arbitrary M0, then takes a finite common bound (i=i0 if m=0). The new statements are 1447 and 1386 characters and the assembly is 1980. Neither new node mentions a colimit or unramifiedness. proof_deps is exactly the union of the step uses, and stmt_deps is unchanged. Small cases checked: T=0, C0=0, m=0, characteristic p, and the non-flat case T=Z/2 with C0=Z[x]/(2x). The newly present same-tag nodes are not duplicates: lem-trf-completed-conormal-resolutions needs a perfect field, a reduced lci and completions, and lem-trf-fibrewise-zero-kahler-differentials deduces Ω=0 from the fibres. No SGA is used, tool_uses is empty, and there are no fixes. Maintainer: landing needs L to promote the side completion, not another re-delivery."
  },
  "lean": {
   "module": "Sheaf.RingTheory.ColimitUnramifiedAlgebra",
@@ -214,5 +198,16 @@
   "result": "fix",
   "note": "Statement matches Stacks 0C4F clause by clause: chosen colimit with index universe = ring universe; tensor map id⊗φ₀ (rfl probe a⊗b ↦ a⊗φ₀ b); unramified = FiniteType ∧ Subsingleton Ω with the map's own algebra; hfg is FiniteType over B₀ via φ₀ (Iff.rfl); ∃ i ≥ i₀ with both clauses. Edge cases m=0, i=i₀, zero rings, one-element I covered. No duplicate in Mathlib or side lean. Docstrings, imports and sorry-only gates OK. Single fault (H3/H9, DIRECTED SETS line): [PartialOrder I] is stronger than a Stacks directed set (00D3 preorder), and the cited elementwise dependency uses Preorder. Fixed to [Preorder I] in fixes/ColimitUnramifiedAlgebra.lean, the lean-record.json statement (verbatim match checked) and report.md. nt_compile --json: delivered 2.3 s clean, fixed 1.8 s clean, probe clean, broken control errors."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

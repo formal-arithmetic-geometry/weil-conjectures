@@ -1,0 +1,137 @@
+{
+ "id": "lem-trf-roos-adjunction-transpose",
+ "kind": "statement",
+ "title": "The adjunct of a strict compatible family is its normalized Roos lift",
+ "statement": "For a prime l, finite extension E of Q_l and scheme X, let rho be a normalized Roos comparison [def-trf-integral-comparison-realization-models]. For any completed-coefficient complex P, strict tower complex C and chain map b from the constant tower on P to C, the derived constant/limit adjunct of Q(b), preceded by the exact constant-functor comparison, followed by rho at C equals Q of the ordinary constant/limit adjunct of b followed by the specified limit-to-Roos inclusion. No K-flatness or boundedness assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, sites-cohomology.tex, lemma-derived-limit-is-ok and the preceding constant/limit adjunction discussion in section-derived-limits; agent expansion of scalar-model-unit proof step 3."
+ },
+ "stmt_deps": [
+  "def-trf-integral-comparison-realization-models"
+ ],
+ "proof": [
+  {
+   "text": "Transpose b through the ordinary constant/limit adjunction. The proved derived_transpose_ordinary formula identifies the derived adjunct with the localization of this ordinary adjunct followed by the universal right-derived limit unit.",
+   "uses": [
+    "lem-trf-coherent-primitive-reduction-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The defining coordinates of integralComparisonLimitToRoos and the two coordinate formulas for the Roos map prove naturality of the ordinary inclusion, by product and biproduct extensionality.",
+   "uses": [
+    "def-trf-integral-comparison-realization-models",
+    "lem-pur-integral-ambient-operation-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On K-injective towers rho.computes and rightDerivedFunctorUnitQ_eq cancel the inverse comparison with its hom. Choose a simultaneous K-injective resolution of C. Naturality transports this equality to C after cancellation of the Roos map, which is invertible after localization by naturality of rho. Compose with the localized ordinary adjunct.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "def-trf-integral-comparison-realization-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-coherent-primitive-reduction-presentation",
+  "def-trf-integral-comparison-realization-models",
+  "lem-pur-integral-ambient-operation-models",
+  "def-coef-ringed-sequence-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941; formal naturality expansion of lem-trf-scalar-model-unit step 3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The adjoint of a strict map from a constant tower to a tower of complexes is the map into the Roos cone with zero shifted coordinate",
+   "results": "The returned mapping-cone comparison lemmas do not compute the normalized derived-limit adjunct.",
+   "date": "2026-10-27",
+   "verdict": "No complete match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.constLimAdj",
+   "results": "Found CategoryTheory.Limits.constLimAdj in Mathlib.CategoryTheory.Limits.HasLimits; it supplies the ordinary adjunction but no Roos comparison.",
+   "date": "2026-10-27",
+   "verdict": "No complete match."
+  },
+  {
+   "tool": "grep",
+   "query": "Roos.*(adjunction|transpose)|scalarIdentityRoosAugmentation",
+   "results": "No matching theorem.",
+   "date": "2026-10-27",
+   "verdict": "No complete match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.ScalarModelUnit",
+  "date": "2026-10-27",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-karoubi-independence",
+   "place": "Final common-stage transport sentence: normalized identity scalar unit in counit-realization-substitution step 11, scalar-model-unit steps 2--3.",
+   "via": [
+    "lem-trf-scalar-model-unit",
+    "lem-trf-counit-realization-substitution",
+    "lem-trf-integral-pullback-comparison-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.RoosAdjunctionTranspose",
+  "file": "lean/Sheaf/TraceFormula/RoosAdjunctionTranspose.lean",
+  "declaration": "WeilConjectures.integralComparisonRoosTranspose",
+  "statement": "theorem integralComparisonRoosTranspose\n    (ρ : IntegralComparisonRoosModel l E X)\n    (P : CochainComplex (scalarReductionSource l E X) ℤ)\n    (C : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E X) ℤ)\n    (b : ((Functor.const ℕᵒᵖ : scalarReductionSource l E X ⥤\n      ℕᵒᵖ ⥤ scalarReductionSource l E X).mapHomologicalComplex (.up ℤ)).obj P ⟶ C) :\n    (integralComparisonConstantAdjunction l E X).homEquiv _ _\n        ((Functor.const ℕᵒᵖ : scalarReductionSource l E X ⥤\n          ℕᵒᵖ ⥤ scalarReductionSource l E X).mapDerivedCategoryFactors.hom.app P ≫\n          DerivedCategory.Q.map b) ≫ ρ.comparison.hom.app C =\n      DerivedCategory.Q.map\n        (((constLimAdj (J := ℕᵒᵖ) (C := scalarReductionSource l E X)).mapHomologicalComplex\n          (.up ℤ)).homEquiv P C b ≫ integralComparisonLimitToRoos l E X C)",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261027T123426-L-2295815",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261027T123426-L-2295815",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

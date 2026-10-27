@@ -1,0 +1,204 @@
+{
+ "id": "lem-sfb-multiplicative-jordan-linear-compatibility",
+ "kind": "statement",
+ "title": "Multiplicative Jordan decomposition and its linear and tensor compatibility",
+ "statement": "Let $K$ be an algebraically closed field [def-weil-field], meaning every nonconstant polynomial in $K[T]$ has a root in $K$. For every finite-dimensional $K$-vector space $V$ and invertible $K$-linear map $A:V\\to V$, there are unique invertible $K$-linear maps $A_s,A_u:V\\to V$ such that $A=A_sA_u=A_uA_s$, $A_s$ is diagonalizable (there is a basis of eigenvectors over $K$), and $(A_u-\\mathrm{id}_V)^N=0$ for some integer $N\\geq1$. These maps are called its semisimple and unipotent parts. If $W$ is another finite-dimensional $K$-vector space, $B:W\\to W$ is invertible, and $f:V\\to W$ is $K$-linear with $fA=Bf$, then $fA_s=B_sf$ and $fA_u=B_uf$. For the automorphism $A\\otimes B$ on $V\\otimes_K W$, one has $(A\\otimes B)_s=A_s\\otimes B_s$ and $(A\\otimes B)_u=A_u\\otimes B_u$. Here the tensor product is the vector space universal for $K$-bilinear maps out of $V\\times W$, and $(A\\otimes B)(v\\otimes w)=Av\\otimes Bw$. Composition is the product of linear maps. The zero vector space is allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 9.11, printed pp.168--169; Propositions 9.13 and 9.15, printed p.169; algebraically closed specialization (semisimple means diagonalizable)."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-generalized-eigenspace-direct-sum] to $A$. Write $V_a=E_a(A)$ and $d=\\max(1,\\dim_K V)$. Thus $V=\\bigoplus_a V_a$ and $(A-a)^d$ vanishes on $V_a$. Each $V_a$ is $A$-stable, since $A$ commutes with $(A-a)^d$. If $v\\in V_0$, then $A^d v=0$ and invertibility gives $v=0$. Consequently all nonzero primary spaces have $a\\ne0$. When $V=0$, take both factors to be its identity; their uniqueness, the intertwiner assertions involving zero, and the tensor assertions involving zero follow from the fact that every linear map from or to the zero space is zero. In the remaining steps we can therefore take the spaces under consideration to be nonzero.",
+   "uses": [
+    "lem-sfb-generalized-eigenspace-direct-sum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 9.9, p.167; Theorem 9.11, p.168, first paragraph (algebraically closed case)."
+   }
+  },
+  {
+   "text": "Define $S$ and $S^{-1}$ on $V_a$ by multiplication by $a$ and $a^{-1}$, respectively. Unique finite primary expansions [lem-sfb-generalized-eigenspace-direct-sum] make these linear maps well defined and mutually inverse. Choose a basis in each nonzero $V_a$; their union is a basis of $V$ by the direct-sum property, and consists of $S$-eigenvectors. On $V_a$, the maps $A$ and $S$ commute. Set $U=S^{-1}A=AS^{-1}$; it is invertible, $SU=US=A$, and on $V_a$ one has $U-1=a^{-1}(A-a)$. Hence $(U-1)^d=0$ on every primary space and therefore on $V$. This constructs the required factors, with $A_s=S$ and $A_u=U$.",
+   "uses": [
+    "lem-sfb-generalized-eigenspace-direct-sum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 9.11, p.168, construction on the primary spaces; nilpotence written explicitly."
+   }
+  },
+  {
+   "text": "For uniqueness suppose $A=S'U'=U'S'$ is another such pair, with $(U'-1)^r=0$, $r\\geq1$. Take any vector $v$ of an eigenbasis for $S'$, with $S'v=av$. Since $S'$ commutes with $U'$, the whole $S'$-eigenspace of eigenvalue $a$ is $U'$-stable. On it $A-a=a(U'-1)$, so $(A-a)^r v=a^r(U'-1)^r v=0$. Thus $v\\in E_a(A)$ as defined in [lem-sfb-generalized-eigenspace-direct-sum], and the constructed $S$ acts on $v$ as $a$. Therefore $Sv=S'v$ on an entire basis, whence $S=S'$ and $U=S^{-1}A=U'$. This is the uniqueness argument of 9.11 in primary-space coordinates; it avoids assuming without proof that two decompositions are simultaneously diagonalizable.",
+   "uses": [
+    "lem-sfb-generalized-eigenspace-direct-sum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 9.11, p.168, uniqueness, specialized to the primary-space construction."
+   }
+  },
+  {
+   "text": "Suppose $fA=Bf$. Induction on $n$ gives $(B-a)^n f=f(A-a)^n$ for every $a\\in K$ and $n\\geq0$: the initial identity is $(B-a)f=f(A-a)$ and the successor step multiplies it once more. Consequently $f(E_a(A))\\subseteq E_a(B)$ by the defining formula in [lem-sfb-generalized-eigenspace-direct-sum]. On this image both $fA_s$ and $B_sf$ equal $af$, so they agree on all of $V$. Multiplying $fA_s=B_sf$ on the left by $B_s^{-1}$ and on the right by $A_s^{-1}$ gives $fA_s^{-1}=B_s^{-1}f$. It follows that $fA_u=fA_s^{-1}A=B_s^{-1}Bf=B_uf$.",
+   "uses": [
+    "lem-sfb-generalized-eigenspace-direct-sum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 9.13, p.169; power intertwining and the inverse calculation expanded."
+   }
+  },
+  {
+   "text": "Put $C=A\\otimes B$. The tensor space is finite dimensional: if $(v_i)$ and $(w_j)$ are finite bases, then the finitely many $v_i\\otimes w_j$ span, by bilinearity and the universal property. Also $C$ is invertible with inverse $A^{-1}\\otimes B^{-1}$, as checked on pure tensors. For $v\\in E_a(A)$ and $w\\in E_b(B)$ put $d=\\max(1,\\dim V)$, $e=\\max(1,\\dim W)$, and let $H_{a,b}$ be the span of these pure tensors. On this subspace set $X=(A-a)\\otimes B$ and $Y=a\\,\\mathrm{id}_V\\otimes(B-b)$. Both preserve $H_{a,b}$; they commute, $C-ab=X+Y$, and $X^d=Y^e=0$ there by the dimension bounds of [lem-sfb-generalized-eigenspace-direct-sum]. Expanding $(X+Y)^{d+e}$ by distributivity, each word can be reordered to $X^iY^{d+e-i}$ and vanishes, since either $i\\geq d$ or $d+e-i\\geq e$. Thus $H_{a,b}\\subseteq E_{ab}(C)$. This calculation uses no division by integers and works in every characteristic.",
+   "uses": [
+    "lem-sfb-generalized-eigenspace-direct-sum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 9.15, p.169, inclusion of the tensor of primary spaces in the primary space of product eigenvalue, expanded."
+   }
+  },
+  {
+   "text": "On $H_{a,b}$ the constructed $C_s$ acts as multiplication by $ab$, because $H_{a,b}\\subseteq E_{ab}(C)$. The map $A_s\\otimes B_s$ also acts as multiplication by $ab$ there. These subspaces span $V\\otimes W$: expand each factor of a pure tensor into its finite primary sum by [lem-sfb-generalized-eigenspace-direct-sum] applied to $A$ and to $B$ and use bilinearity; pure tensors span by the universal property. Hence $C_s=A_s\\otimes B_s$. Its inverse is $A_s^{-1}\\otimes B_s^{-1}$ by evaluation on pure tensors, and therefore $C_u=C_s^{-1}C=(A_s^{-1}A)\\otimes(B_s^{-1}B)=A_u\\otimes B_u$. Equality on pure tensors proves the middle tensor identity. This proves both tensor assertions for the unique parts from the preceding steps.",
+   "uses": [
+    "lem-sfb-generalized-eigenspace-direct-sum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 9.15, p.169, equality of semisimple parts and recovery of unipotent parts."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-generalized-eigenspace-direct-sum"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 9.9 and Theorem 9.11 (algebraically closed case), printed pp.167-168; Propositions 9.13 and 9.15, printed p.169. The routine uniqueness and tensor-primary calculations are expanded in coordinates."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Multiplicative Jordan decomposition of invertible linear maps over an algebraically closed field commutes with intertwiners and tensor products",
+   "results": "8 hits: LinearMap.sumOfConjugatesEquivariant, LinearMap.conjugate, Rep.diagonalSuccIsoTensorTrivial_hom_hom_single, LinearMap.sumOfConjugates, Representation.repOfTprodIso_apply, IsAzumaya.mulLeftRight_comp_congr, LinearMap.conjugate_i, Representation.ofCoinvariantsTprodLeftRegular_mk_tmul_single",
+   "date": "2026-10-23",
+   "verdict": "no match: the candidate Module.End.exists_isNilpotent_isSemisimple (Mathlib/LinearAlgebra/JordanChevalley.lean:76) and uniqueness at line 85 concern additive decomposition, not the stated multiplicative factors with intertwiner and tensor laws; other hits are unrelated"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Multiplicative Jordan Chevalley decomposition of a linear automorphism into commuting diagonalizable and unipotent factors natural under linear intertwiners and tensor products",
+   "results": "8 hits: Module.End.exists_isNilpotent_isSemisimple, Module.End.exists_isNilpotent_isSemisimple_of_separable_of_dvd_pow, MeasureTheory.JordanDecomposition.ext_iff, MulAut, MeasureTheory.JordanDecomposition.mk.congr_simp, IsTensorProduct.map_mul, PiTensorProduct.mapMonoidHom, MeasureTheory.JordanDecomposition.mk.injEq",
+   "date": "2026-10-23",
+   "verdict": "no match: the candidate Module.End.exists_isNilpotent_isSemisimple (Mathlib/LinearAlgebra/JordanChevalley.lean:76) and uniqueness at line 85 concern additive decomposition, not the stated multiplicative factors with intertwiner and tensor laws; other hits are unrelated"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Jordan\", \"IsNilpotent\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the candidate Module.End.exists_isNilpotent_isSemisimple (Mathlib/LinearAlgebra/JordanChevalley.lean:76) and uniqueness at line 85 concern additive decomposition, not the stated multiplicative factors with intertwiner and tensor laws; other hits are unrelated"
+  },
+  {
+   "tool": "grep",
+   "query": "JordanChevalley|exists_isNilpotent_isSemisimple|IsUnipotent|unipotent",
+   "results": "8 hits: Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean, Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean, Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean, Mathlib/LinearAlgebra/JordanChevalley.lean, Mathlib/LinearAlgebra/JordanChevalley.lean, Mathlib/LinearAlgebra/JordanChevalley.lean, Mathlib/LinearAlgebra/JordanChevalley.lean, Mathlib/LinearAlgebra/JordanChevalley.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the candidate Module.End.exists_isNilpotent_isSemisimple (Mathlib/LinearAlgebra/JordanChevalley.lean:76) and uniqueness at line 85 concern additive decomposition, not the stated multiplicative factors with intertwiner and tensor laws; other hits are unrelated"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Jordan Chevalley multiplicative semisimple unipotent decomposition of a linear equivalence and tensor product compatibility",
+   "results": "{\"t\": \"2026-10-23T14:58:52Z\", \"tool\": \"leanfinder\", \"query\": \"Jordan Chevalley multiplicative semisimple unipotent decomposition of a linear equivalence and tensor product compatibility\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearEquiv.isSemisimple_iff\", \"Module.End.exists_isNilpotent_isSemisimple\", \"IsSemisimpleModule.exists_end_algEquiv_pi_matrix_divisionRing\", \"IsSemisimpleModule.exists_end_algEquiv_pi_matrix_end\", \"IsSemisimpleModule.endAlgEquiv\", \"Module.End.exists_isNilpotent_isSemisimple_of_separable_of_dvd_pow\", \"Module.End.IsSemisimple.mul_of_commute\", \"IsSemisimpleModule.exists_end_algEquiv\"], \"digest\": \"8af92760011cca65\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: additive Jordan-Chevalley existence, semisimple conjugacy, and commuting products do not state multiplicative decomposition together with intertwiner and tensor compatibility; candidate source JordanChevalley.lean:76-89 was read."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rational-representation-unipotent-point",
+  "date": "2026-10-23",
+  "group": "NN"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Example 19.19, printed p.401, with Corollary 19.18 and Lemma 19.16; Section 2.42, printed p.53 (connectedness). Fixed-vector input in Milne 19.16: a nonzero rational representation of a unipotent group has nonzero invariants; made precise using 14.3 and 14.12. Pointwise prerequisite for the fixed-vector input: Milne 9.19 identifies unipotence in a faithful representation with unipotence in every rational representation. Supporting input: Theorem 9.11, printed pp.168--169; Propositions 9.13 and 9.15, printed p.169; algebraically closed specialization (semisimple means diagonalizable).",
+   "via": [
+    "lem-sfb-rational-representation-unipotent-point",
+    "lem-sfb-unipotent-rational-representation-fixed-vector",
+    "lem-sfb-general-linear-reductive",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-multiplicative-jordan-linear-compatibility",
+  "worker": "stage1",
+  "summary": "Read Milne 9.9, 9.11, 9.13 and 9.15. Constructed multiplicative factors on generalized eigenspaces; proved uniqueness on an eigenbasis of a competing semisimple factor; expanded intertwiner powers and the tensor-primary nilpotence calculation. One new Mathlib leaf supplies primary direct-sum decomposition and its dimension bound. No statement change and no Lean writing or compilation.",
+  "blueprint": "Supporting linear-algebra input on the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration/moduli route, through Milne 19.16 and 9.19. The current latest blueprint direct-images proof (3) was read; its imported ancestor is absent, so blueprint_refs ancestor correctly returns None. The inherited from.place/via chain is retained. No same-statement blueprint node was found."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-d788d93f4",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-d788d93f4 (reviewer sub-agent of L); spot-checked: Read Milne iAG2017 Thm 9.11, Props 9.13-9.15 (printed pp.168-169, PDF 180-182). The item statement and stmt_deps are unchanged against live, and live is still unsplit, so no other group has superseded this delivery. The only new node, lem-sfb-generalized-eigenspace-direct-sum, is a valid Mathlib leaf with one declaration per clause, all at the cited lines: iSup_maxGenEigenspace_eq_top (Triangularizable.lean:75-76), independent_maxGenEigenspace (Basic.lean:714-716), maxGenEigenspace_eq_genEigenspace_finrank (Basic.lean:602-607), and mem_maxGenEigenspace at 551-552 matching E_a. It holds at V=0. A whole-DAG grep found no duplicate, and the leaf does not restate any clause of the item. All six steps are correct. Step 3 proves uniqueness on an eigenbasis of S': on each S'-eigenspace A-a = a(U'-1), which forces S = S' without simultaneous diagonalization; I checked it on a Jordan block in characteristic p. Step 4 proves the intertwiner law through f(E_a(A)) ⊆ E_a(B). Step 5 uses X = (A-a)⊗B and Y = a⊗(B-b): they commute, X^d = Y^e = 0, and the argument needs no binomial division, so it holds in every characteristic. Step 6 checks equality on the spanning H_{a,b}, so colliding values ab = a'b' are harmless. FIX: steps 2 and 6 use the leaf's direct-sum and spanning clauses (step 6 applies them to both A and B) but had empty uses. I added [lem-sfb-generalized-eigenspace-direct-sum] to their text and uses; proof_deps is unchanged. No SGA source and no tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.MultiplicativeJordanLinearCompatibility",
+  "declaration": "LinearEquiv.existsUnique_multiplicativeJordanDecomposition",
+  "declarations": [
+   "LinearEquiv.IsMultiplicativeJordanDecomposition",
+   "LinearEquiv.existsUnique_multiplicativeJordanDecomposition",
+   "LinearEquiv.multiplicativeJordanDecomposition_intertwines",
+   "LinearEquiv.multiplicativeJordanDecomposition_tensor"
+  ],
+  "file": "lean/Sheaf/LinearAlgebra/MultiplicativeJordanLinearCompatibility.lean",
+  "statement": "theorem existsUnique_multiplicativeJordanDecomposition {K : Type u} [Field K] [IsAlgClosed K] {V : Type v} [AddCommGroup V] [Module K V] [FiniteDimensional K V] (A : V ≃ₗ[K] V) : ∃! p : (V ≃ₗ[K] V) × (V ≃ₗ[K] V), IsMultiplicativeJordanDecomposition A p.1 p.2",
+  "branch": "newtargets-dag",
+  "by": "Q130",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The three theorems together state every clause of the node. The helper predicate only packages the commuting factorization, explicit finite eigenbasis and positive nilpotence power of this same notion. Compatibility is quantified over arbitrary decompositions, which the first theorem identifies uniquely; no arbitrary choice of factors is made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3b75751f4",
+  "group": "Q130",
+  "result": "pass",
+  "note": "Fresh delivery (live node has no lean record; the node apart from its lean field equals live; the def-weil-field stmt_dep record is identical to live). Every clause is matched: IsAlgClosed field; finite-dimensional V and W, zero space allowed; LinearEquiv factors; A=S*U ∧ A=U*S (automorphismGroup mul = g.trans f, so S*U is S after U); a genuine Fin n eigenbasis; ∃N≥1 with (U-id)^N=0 in End; ∃! of the pair; intertwiner and tensor laws (TensorProduct.congr) quantified over any decomposition, equivalent by uniqueness, no choice. Universes u/v/w independent, autoImplicit false. Mathlib has only the additive Jordan-Chevalley and the project has only the group-scheme IsUnipotent, so no duplicate; the nodes mentioning this item are split with no lean record. Docstrings carry the Milne 9.11/9.13/9.15 place and blueprint tag; proofs are sorry; lean.statement is verbatim; the report has both sections. No changes, no compile."
+ }
+}

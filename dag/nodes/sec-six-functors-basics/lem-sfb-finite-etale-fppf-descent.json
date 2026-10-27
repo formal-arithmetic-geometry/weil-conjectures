@@ -1,0 +1,304 @@
+{
+ "id": "lem-sfb-finite-etale-fppf-descent",
+ "kind": "statement",
+ "title": "Finite etale schemes have effective fppf descent",
+ "statement": "Let $T$ be a scheme [def-pc-scheme] and let $\\{T_i\\to T\\}_{i\\in I}$ be an fppf covering [def-pc-fppf-site], with all schemes and indexing sets in the universes of [def-weil-size-convention]. Write $\\mathsf{FEt}(U)$ for the category of finite etale $U$-schemes and all $U$-morphisms [def-weil-finite-integral-morphism, def-weil-etale-morphism]. A descent datum consists of $X_i\\in\\mathsf{FEt}(T_i)$ and isomorphisms $\\phi_{ij}:X_i\\times_TT_j\\xrightarrow{\\sim}T_i\\times_TX_j$ over $T_i\\times_TT_j$ satisfying $\\phi_{ik}=\\phi_{jk}\\circ\\phi_{ij}$ after pullback to triple overlaps [def-pc-fibre-product, def-trf-scheme-cover-descent-datum]. Its morphisms are families of $T_i$-morphisms commuting with the overlap isomorphisms. Pullback is an equivalence from $\\mathsf{FEt}(T)$ to this category of descent data. In particular every such datum is induced by a finite etale $T$-scheme $X$, with compatible isomorphisms $X\\times_TT_i\\simeq X_i$, and every compatible family of morphisms between two pulled-back objects descends to a unique $T$-morphism. No quasi-compactness or noetherian hypothesis on $T$, and no nonemptiness or constant-rank hypothesis on the $X_i$, is imposed.",
+ "source": {
+  "document": "literature/stacks-project/examples-stacks.tex",
+  "place": "Tag 0BLZ (lemma-finite-etale-stack): the category of finite etale schemes is a stack over the big fppf site; covering-family formulation including all scheme morphisms."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fppf-site",
+  "def-weil-size-convention",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-pc-fibre-product",
+  "def-trf-scheme-cover-descent-datum",
+  "def-sfb-finite-etale-cover-descent",
+  "def-weil-pbc-finite-etale-category"
+ ],
+ "proof": [
+  {
+   "text": "For a finite etale $T$-scheme $X$, each $X\\times_TT_i\\to T_i$ is finite etale by [def-weil-pbc-finite-etale-category]. Identify both iterated pullbacks on an overlap with $X\\times_T(T_i\\times_TT_j)$ using [def-pc-fibre-product]. Their comparison defines the canonical overlap isomorphism. On triple overlaps both composites retain the same $X$ coordinate and ordered base coordinates, so are equal by the uniqueness in the fibre-product universal property. The same uniqueness shows that base change of any $T$-morphism commutes with the comparisons and preserves identities and composition. Thus pullback defines the stated functor.",
+   "uses": [
+    "def-weil-pbc-finite-etale-category",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 0BLZ (examples-stacks.tex, lemma-finite-etale-stack); pullback comparisons in Tag 023V (definition-descent-datum)"
+   }
+  },
+  {
+   "text": "The covering is fpqc by [lem-trf-fppf-covering-is-fpqc]. For two finite etale $T$-schemes $X,Y$ and compatible maps $b_i:X\\times_TT_i\\to Y\\times_TT_i$, compose $b_i$ with projection to $Y$. By the stated compatibility these maps agree on $(X\\times_TT_i)\\times_X(X\\times_TT_j)\\simeq X\\times_TT_i\\times_TT_j$; this identification uses [def-pc-fibre-product]. The family $X\\times_TT_i\\to X$ is fpqc by [lem-galois-fpqc-covering-base-change]. Hence [lem-weil-pbc-fpqc-representable-descent], with target scheme $Y$, gives a unique map $b:X\\to Y$. Its composite to $T$ equals the structure map of $X$: the two agree after this covering, so uniqueness in the same descent lemma, now with target $T$, makes them equal. The pullback of $b$ to $T_i$ equals $b_i$ because their projections to both $Y$ and $T_i$ agree. This proves full faithfulness for all morphisms, without an invertibility condition.",
+   "uses": [
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-galois-fpqc-covering-base-change",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 023Q (lemma-fpqc-universal-effective-epimorphisms), 02W0 (lemma-refine-coverings-fully-faithful); Topologies Tags 022C, 022D"
+   }
+  },
+  {
+   "text": "Now fix a datum $(X_i,\\phi_{ij})$. Apply [lem-trf-fppf-family-coproduct-descent-encoding] to form $A=\\coprod_iT_i$, $Z=\\coprod_iX_i$, and its singleton datum $D$ over $A/T$. That statement supplies both the fpqc covering $A\\to T$ and the equivalence of effectivity with the original family datum. The map $Z\\to A$ is affine: each $X_i\\to T_i$ is affine by [def-weil-finite-integral-morphism]; choose affine open covers of the $T_i$. Their images form an affine open cover of $A$ by [lem-weil-pbc-scheme-coproduct-family], and their inverse images in $Z$ are the corresponding affine opens of $X_i$. Thus [pqf-lem-affine-local-target] applies. This uses no finiteness of $I$ and makes no assertion that $A\\to T$ is quasi-compact.",
+   "uses": [
+    "lem-trf-fppf-family-coproduct-descent-encoding",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "pqf-lem-affine-local-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023X (lemma-family-is-one); Tag 0245 (lemma-affine); Morphisms Tag 01S8 (lemma-characterize-affine)"
+   }
+  },
+  {
+   "text": "Apply [lem-galois-fpqc-affine-descent-effective] to the singleton fpqc covering $A\\to T$ and the affine $Z\\to A$ with datum $D$. Its conclusion gives a scheme $X\\to T$ and an isomorphism $X\\times_TA\\simeq Z$ respecting the canonical datum. The last assertion of [lem-trf-fppf-family-coproduct-descent-encoding] restricts this to isomorphisms $X\\times_TT_i\\simeq X_i$ respecting every $\\phi_{ij}$. Thus the given family datum is effective as a scheme datum.",
+   "uses": [
+    "lem-galois-fpqc-affine-descent-effective",
+    "lem-trf-fppf-family-coproduct-descent-encoding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 0245 (lemma-affine), 023X (lemma-family-is-one)"
+   }
+  },
+  {
+   "text": "The original family is fpqc by [lem-trf-fppf-covering-is-fpqc]. Under the isomorphisms just obtained, every base change $X\\times_TT_i\\to T_i$ is finite and etale. Apply [lem-weil-pbc-fpqc-descend-finite] to $X\\to T$ and this family to deduce finiteness; apply [lem-galois-fpqc-descend-etale] to the same morphism and family to deduce etaleness. Hence $X$ lies in $\\mathsf{FEt}(T)$ and the functor is essentially surjective.",
+   "uses": [
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-fpqc-descend-finite",
+    "lem-galois-fpqc-descend-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 02LA (lemma-descending-property-finite), 02VN (lemma-descending-property-etale); Topologies Tag 022C"
+   }
+  },
+  {
+   "text": "For completeness, choose a preimage $X_D$ and an isomorphism $a_D:F(X_D)\\simeq D$ for each datum $D$ in the fixed universe. Send $u:D\\to E$ to the unique map whose image is $a_E^{-1}ua_D$, using full faithfulness from Step 2. Uniqueness proves the identity and composition laws; the $a_D$ are natural by this formula. Full faithfulness also lifts $a_{F(X)}:F(X_{F(X)})\\simeq F(X)$ and its inverse, giving a natural isomorphism from this inverse functor composed with $F$ to the identity. This proves equivalence. Empty covers force $T$ empty and give the unique empty scheme; empty $X_i$ and ranks varying on components require no change to Steps 1--5. No quasi-compactness or noetherian condition on $T$ was used.",
+   "uses": [
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 0BLZ (examples-stacks.tex, lemma-finite-etale-stack), assembly of the categorical conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-etale-category",
+  "def-pc-fibre-product",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-trf-fppf-family-coproduct-descent-encoding",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "pqf-lem-affine-local-target",
+  "lem-galois-fpqc-affine-descent-effective",
+  "lem-weil-pbc-fpqc-descend-finite",
+  "lem-galois-fpqc-descend-etale",
+  "def-weil-size-convention"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/examples-stacks.tex",
+  "place": "Tag 0BLZ (lemma-finite-etale-stack), expanding its omitted details with descent.tex Tags 023Q, 023X, 0245, 02LA, 02VN and topologies.tex Tags 022C, 022D."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite etale schemes satisfy effective descent for arbitrary fppf covering families, including descent of all morphisms",
+   "results": "Hits: AlgebraicGeometry.IsFinite.instDescScheme, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.Scheme.instCategoryEtale.",
+   "date": "2026-10-23",
+   "verdict": "no match: generic stack descent assumes IsStack and does not prove finite etale schemes form an fppf stack; morphism-property descent does not construct descended schemes",
+   "digest": "e399f88b1199defc"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteEtale.*(descent|stack)|descent.*finiteEtale|[Ff]inite.{0,10}[Ee]tale.{0,30}[Dd]escent",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: generic stack descent assumes IsStack and does not prove finite etale schemes form an fppf stack; morphism-property descent does not construct descended schemes",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The category of finite etale schemes is a stack for the fppf topology; descent data are effective and morphisms descend uniquely",
+   "results": "Hits: CategoryTheory.Pseudofunctor.IsStack.of_isStackFor, CategoryTheory.Pseudofunctor.isEquivalence_toDescentData, CategoryTheory.Pseudofunctor.IsStackFor.mk, CategoryTheory.Pseudofunctor.isStackFor_iff, CategoryTheory.Pseudofunctor.IsStackFor.isEquivalence, CategoryTheory.Pseudofunctor.IsStack.mk, CategoryTheory.Pseudofunctor.isStackFor_ofArrows_iff, AlgebraicGeometry.Scheme.Etale.",
+   "date": "2026-10-23",
+   "verdict": "no match: generic stack descent assumes IsStack and does not prove finite etale schemes form an fppf stack; morphism-property descent does not construct descended schemes",
+   "digest": "182103ea9f8cfc1e"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"Descent\"",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: generic stack descent assumes IsStack and does not prove finite etale schemes form an fppf stack; morphism-property descent does not construct descended schemes",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent datum of finite etale schemes over a faithfully flat locally finitely presented covering is effective",
+   "results": "Hits: AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀, CategoryTheory.Pseudofunctor.isEquivalence_toDescentData, CategoryTheory.Precoherent.pullback, CategoryTheory.Pseudofunctor.IsStackFor.isEquivalence, CategoryTheory.Pseudofunctor.IsStack.essSurj_of_sieve, CategoryTheory.EffectiveEpiFamily.transitive_of_finite.",
+   "date": "2026-10-23",
+   "verdict": "no match: generic stack descent assumes IsStack and does not prove finite etale schemes form an fppf stack; morphism-property descent does not construct descended schemes",
+   "digest": "c974463eb229ac8a"
+  },
+  {
+   "tool": "grep",
+   "query": "isEquivalence_toDescentData",
+   "results": "Hits: Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentDataAsCoalgebra.lean, Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean, Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean, Mathlib/CategoryTheory/Sites/Descent/IsStack.lean, Mathlib/CategoryTheory/Sites/Descent/IsStack.lean.",
+   "date": "2026-10-23",
+   "verdict": "no match: generic stack descent assumes IsStack and does not prove finite etale schemes form an fppf stack; morphism-property descent does not construct descended schemes",
+   "digest": "d9e71f50f8340304"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteEtale.*(descent|stack)|descent.*finiteEtale|IsFinite.*IsStack|IsStack.*IsFinite",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: stack equivalence results assume IsStack; morphism-property descent does not construct a descended scheme, and small etale sites do not supply arbitrary fppf effectivity.",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite etale schemes form a stack in categories over the fppf site",
+   "results": "Hits: CategoryTheory.Pseudofunctor.IsStack.mk, CategoryTheory.Pseudofunctor.isStackFor, CategoryTheory.Pseudofunctor.IsStack.of_isStackFor, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.IsFinite.recOn, CategoryTheory.Pseudofunctor.IsStack.toIsPrestack, CategoryTheory.Pseudofunctor.IsStackFor.mk, AlgebraicGeometry.Scheme.etalePretopology",
+   "date": "2026-10-23",
+   "verdict": "no match: stack equivalence results assume IsStack; morphism-property descent does not construct a descended scheme, and small etale sites do not supply arbitrary fppf effectivity.",
+   "digest": "1abdd2a080dab750"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"Descent\"",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: stack equivalence results assume IsStack; morphism-property descent does not construct a descended scheme, and small etale sites do not supply arbitrary fppf effectivity.",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite etale schemes and all their morphisms satisfy effective descent for arbitrary fppf covering families",
+   "results": "Hits: AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.Etale",
+   "date": "2026-10-23",
+   "verdict": "no match: stack equivalence results assume IsStack; morphism-property descent does not construct a descended scheme, and small etale sites do not supply arbitrary fppf effectivity.",
+   "digest": "8f49c845c2f1453e"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFinite.instDesc|DescendsAlong|isEquivalence_toDescentData",
+   "results": "Hits: Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Group/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean, Mathlib/AlgebraicGeometry/Morphisms/Descent.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: stack equivalence results assume IsStack; morphism-property descent does not construct a descended scheme, and small etale sites do not supply arbitrary fppf effectivity.",
+   "digest": "d902ce35d1f32b75"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent datum of finite etale schemes over a faithfully flat locally finitely presented covering is effective",
+   "results": "Hits: AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀, CategoryTheory.Pseudofunctor.isEquivalence_toDescentData, CategoryTheory.Precoherent.pullback, CategoryTheory.Pseudofunctor.IsStackFor.isEquivalence, CategoryTheory.Pseudofunctor.IsStack.essSurj_of_sieve, CategoryTheory.EffectiveEpiFamily.transitive_of_finite",
+   "date": "2026-10-23",
+   "verdict": "no match: stack equivalence results assume IsStack; morphism-property descent does not construct a descended scheme, and small etale sites do not supply arbitrary fppf effectivity.",
+   "digest": "c974463eb229ac8a"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-group-quotient-atlas-torsor",
+  "date": "2026-10-23",
+  "group": "NX"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: finite normalization and its etale/formal charts. Prerequisite: An effective formal quotient atlas is a completed etale scheme chart. Comparison of the effective formal chart with a completed etale chart: the quotient atlas over each finite thickening is the finite constant-group torsor of its test object. Supporting fact: effective fppf descent for finite etale schemes, applied to the trivializations of the torsor.",
+   "via": [
+    "lem-sfb-finite-group-quotient-atlas-torsor",
+    "lem-sfb-effective-formal-chart-completed-atlas",
+    "lem-sfb-dm-finite-normalization-charts",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-etale-fppf-descent",
+  "worker": "stage1",
+  "summary": "Expanded the omitted details of Stacks 0BLZ using existing family-to-singleton encoding, affine effectivity, representable morphism descent, and fpqc descent of finite and etale. No new nodes, no statement change; arbitrary families and all morphisms are retained.",
+  "blueprint": "Supporting finite etale descent input to the quotient-atlas-torsor comparison, in the inherited det-thm-sf-ctf-stability-direct-images proof (3) ancestry. Steps 1--2 construct pullback and prove full faithfulness; 3--5 construct the descended scheme and descend its properties; 6 assembles the equivalence. Whole-blueprint searches for 0BLZ and finite etale found only the narrower etale-surjection lemma lem-galois-descent, not this fppf assertion. The inherited computed from.node is null because the created.item chain ends at a module name; no ancestry metadata is invented.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-fppf-family-coproduct-descent-encoding",
+    "why": "Generic conversion of a covering-family scheme datum to a singleton fpqc datum and back, including infinite families; the current unit has no such encoding statement."
+   },
+   {
+    "node": "lem-galois-fpqc-affine-descent-effective",
+    "why": "Generic affine scheme effectivity for a singleton fpqc covering; applies after encoding and uses exactly the affine descent input named by 0BLZ."
+   },
+   {
+    "node": "lem-galois-fpqc-descend-etale",
+    "why": "Generic descent of etaleness for an already constructed scheme over an arbitrary fpqc family; this is the 02VN input of 0BLZ."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-fppf-family-coproduct-descent-encoding",
+  "lem-galois-fpqc-affine-descent-effective",
+  "lem-galois-fpqc-descend-etale"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-e9723d8df",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-e9723d8df (reviewer sub-agent of L); spot-checked: I read the item and all 13 cited statements in full, and Stacks 0BLZ (examples-stacks l.349-365) plus descent.tex 023Q, 023X, 0245, 02LA and 02VN at their places. The statement and stmt_deps are byte-identical to the base (live clone is still unsplit), there are no new nodes, and proof_deps equals the union of the step uses. Step 1: base change is a functor by the stated base-change functor of def-weil-pbc-finite-etale-category plus fibre-product uniqueness; elementary is correct. Step 2: full faithfulness holds. The pulled-back family {X×T_i→X} is fpqc (fppf≤fpqc leaf, then 022D base change). The 023Q representable descent with target Y gives a unique b. Uniqueness again with target T shows b lies over T. Projections give b×T_i=b_i. No invertibility is assumed. Step 3: the 023X encoding node gives A, Z, D, the fpqc singleton {A→T} even for infinite I, and an effectivity equivalence through the same W. Z→A is affine from affine open covers of the components plus 01S8; there is no false claim that an infinite coproduct is affine or that A→T is quasi-compact. Step 4: the hypotheses of the singleton 0245 node hold, and the encoding transfers ψ to compatible isomorphisms X×T_i≅X_i. Step 5: 02LA and 02VN descend finite and etale along the original fpqc family. Step 6: fully faithful plus essentially surjective gives the equivalence. Edge cases checked: empty I (forces T empty), empty X_i, varying rank, a Galois cover Spec k'/k, and an infinite Zariski cover. Duplicates: lem-galois-descent (single surjective etale map) is narrower, and the torsor-stack node lem-sfb-finite-constant-torsor-map-etale-stack is a different statement; the only Lean finiteEtaleDescent is the singleton etale case. I accept the split_report tool_uses (encoding, affine effectivity, etale descent) and the finite-descent node as generic black-box descent tools, which are exactly the inputs 0BLZ names. Batch-5: lem-trf-fppf-covering-is-fpqc is a Mathlib leaf (fppf≤fpqc) and lem-trf-fppf-family-coproduct-descent-encoding is a generic 023X encoding. The item's closure reaches no trace-formula, Poincaré or batch-4 node, so the check does not force a RETURN. No SGA is cited. Cosmetic: step 6 does not cite def-weil-size-convention in brackets. Maintainer note: blueprint.from.node is null because the inherited created.item chain ends at a module name; this is base metadata the delivery did not change."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleFppfDescent",
+  "declaration": "AlgebraicGeometry.finiteEtale_fppf_descent",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleFppfDescent.lean",
+  "statement": "theorem finiteEtale_fppf_descent {I : Type (u + 1)} (T : Scheme.{u}) (U : I → Scheme.{u}) (f : ∀ i, U i ⟶ T) (hcov : Presieve.ofArrows U f ∈ Scheme.fppfPrecoverage T) : ∃ (F : (MorphismProperty.Over (@IsFinite ⊓ @Etale) ⊤ T) ⥤ FiniteEtaleCoverDescent f) (q : ∀ P i, ((F.obj P).obj.localScheme i).left ⟶ P.left), FiniteEtaleCoverDescentCompatible F q ∧ Nonempty F.IsEquivalence",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-21de813c2",
+  "group": "NF",
+  "result": "pass",
+  "note": "Read item, new node def-sfb-finite-etale-cover-descent, all 9 stmt_deps, both modules, live SchemeCoverDescentDatum and Mathlib fppfPrecoverage/pseudofunctorOver. Statement ∃ F q, FiniteEtaleCoverDescentCompatible F q ∧ Nonempty F.IsEquivalence: Cartesian squares + test-point transport (verbatim landed IsEffective clause) + morphism clause pin F to canonical pullback up to unique iso, so no arbitrary map; equivalence concluded; FEt(T)=MorphismProperty.Over (IsFinite ⊓ Etale) ⊤ T recorded leaf; full subcategory keeps all compatible morphisms; no qc/noetherian/rank hypotheses. I : Type (u+1) forced by landed interface, more general than Type u, statement true (small refinement noted in docstring); test schemes in base universe. Empty family/empty X_i/infinite I fine. No duplicate (upstream finiteEtaleDescent singleton surjective étale only). lean.statement verbatim for item and new node; docstrings with source/blueprint and 6 proof steps; only sorry; report sections present. No file changed, no compile run. Non-blocking: new stmt_deps not bracket-cited in item text."
+ }
+}

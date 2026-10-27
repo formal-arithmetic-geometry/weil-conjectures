@@ -1,0 +1,288 @@
+{
+ "id": "lem-sfb-proper-dimension-one-noncontraction-finite",
+ "kind": "statement",
+ "title": "Proper schemes of dimension at most one map finitely when no curve component is contracted",
+ "statement": "Let $k$ be a field [def-weil-field], let $X,Y$ be schemes over $k$ [def-weil-scheme-over-base], and let $f:X\\to Y$ be a $k$-morphism. Suppose that $Y$ is separated over $k$ and $X$ is proper over $k$ [def-weil-proper-morphism], that $\\dim X\\leq1$ for the topological Krull dimension [def-kun-topological-krull-dimension], and that for every irreducible component $Z\\subseteq X$ [def-weil-irreducible-components] of dimension one the set $f(Z)$ contains at least two points. Then $f$ is finite [def-weil-finite-integral-morphism].",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0CCL, lemma-finite, all three hypotheses and the conclusion"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-scheme-over-base",
+  "def-weil-proper-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-weil-irreducible-components",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-proper-over-separated] over $S=\\operatorname{Spec}k$. The equality of composites required there is exactly the hypothesis that $f$ is a $k$-morphism. Thus $f$ is proper. By [def-weil-proper-morphism], its underlying map is closed, so $f(X)$ is closed and $f(x)$ is closed in $Y$ whenever $x$ is closed in $X$.",
+   "uses": [
+    "lem-weil-pbc-proper-over-separated",
+    "def-weil-proper-morphism",
+    "def-weil-scheme-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CCL (lemma-finite), first two sentences; Morphisms Tag 01W6 (lemma-image-proper-scheme-closed)"
+   }
+  },
+  {
+   "text": "Properness of $X$ implies finite type over $k$ [def-weil-proper-morphism]. By [def-weil-finite-type-morphism], $X$ has a finite affine open cover $X=\\bigcup_i\\operatorname{Spec}A_i$ with each $A_i$ a finitely generated $k$-algebra. By [lem-wf-affine-noetherian-components] each $A_i$ is Noetherian and each chart has Noetherian topology. Therefore $X$ is a Noetherian scheme: it is quasi-compact with a finite cover by Noetherian affine schemes. Its topology is Noetherian too: a descending chain of closed subsets stabilizes on each chart, hence globally after the maximum of the finitely many stabilization indices.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-wf-affine-noetherian-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CCL, implicit Noetherian input in the finite-fibre argument; Morphisms Tag 01T6 (lemma-finite-type-noetherian), Properties Tag 01OZ (lemma-Noetherian-topology)"
+   }
+  },
+  {
+   "text": "Fix a closed point $x\\in X$ and put $y=f(x)$. By step 1 the fibre subset $F_y=f^{-1}(\\{y\\})$ is closed in $X$. We show $\\dim F_y\\leq0$ directly from [def-kun-topological-krull-dimension]. If $A\\subsetneq B$ were nonempty irreducible closed subsets of $F_y$, they would also be closed in $X$. No irreducible closed subset of $X$ could strictly contain $B$, since that would give a length-two chain in $X$. Hence $B$ is an irreducible component [def-weil-irreducible-components]; the chain $A\\subsetneq B$ and $\\dim X\\leq1$ give $\\dim B=1$. But $B\\subseteq F_y$ implies $f(B)=\\{y\\}$, contrary to the noncontraction hypothesis. There is thus no length-one chain in $F_y$, as required.",
+   "uses": [
+    "def-kun-topological-krull-dimension",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CCL (lemma-finite), closed fibre avoids the dimension-one components; the dimension argument spelled out"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-noetherian-closed-subset-finite-components] to the closed subset $F_y$ of the Noetherian scheme $X$. It is a finite union of irreducible closed subsets $C_j$. By [lem-weil-pbc-scheme-sober] each $C_j$ has a generic point $\\xi_j$. If it contained $z\\ne\\xi_j$, the nonempty irreducible closed subset $\\overline{\\{z\\}}\\subseteq C_j$ would have to equal $C_j$, since step 3 rules out a strict inclusion. Then $z$ too would be a generic point of $C_j$, contradicting uniqueness. Thus $C_j=\\{\\xi_j\\}$ and $F_y$ is finite.",
+   "uses": [
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "lem-weil-pbc-scheme-sober",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CCL (lemma-finite), sentence concluding the fibre is finite; Properties Tag 0BA8 (lemma-Noetherian-irreducible-components), Schemes Tag 01IS (lemma-scheme-sober)"
+   }
+  },
+  {
+   "text": "For every image $y=f(x)$ of a closed point $x\\in X$, steps 1 and 4 verify the hypotheses of [lem-trf-proper-finite-fibre-finite-near]. Obtain an open neighbourhood $U_y$ of $y$ such that $f^{-1}(U_y)\\to U_y$ is finite. This use imposes no Noetherian or finite-type assumption on $Y$.",
+   "uses": [
+    "lem-trf-proper-finite-fibre-finite-near"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CCL (lemma-finite), finite-neighbourhood conclusion using More on Morphisms Tag 02UP (lemma-proper-finite-fibre-finite-in-neighbourhood)"
+   }
+  },
+  {
+   "text": "Put $U=\\bigcup_yU_y$, indexed by the images of closed points just considered. If $E=f^{-1}(Y\\setminus U)$ were nonempty, it would be a nonempty closed subset of $X$. Since $X$ is locally of finite type over $k$, [lem-sc-lft-over-field-jacobson-space] says the closed points of $X$ lying in $E$ are dense in $E$, hence at least one such point $x$ exists. But then $f(x)\\in U_{f(x)}\\subseteq U$, contradicting $x\\in E$. Thus $f(X)\\subseteq U$; together with step 1 this gives the open cover $Y=U\\cup(Y\\setminus f(X))$.",
+   "uses": [
+    "lem-sc-lft-over-field-jacobson-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CCL (lemma-finite), final sentence about enough images of closed points; Varieties Tag 0478 (lemma-locally-finite-type-Jacobson)"
+   }
+  },
+  {
+   "text": "Refine the open cover in step 6 by affine opens contained in some $U_y$ or in $Y\\setminus f(X)$. For an affine open $V\\subseteq U_y$, its inverse image is affine because $f^{-1}(U_y)\\to U_y$ is finite [def-weil-finite-integral-morphism]. For $V\\subseteq Y\\setminus f(X)$ the inverse image is empty, hence affine ($\\operatorname{Spec}$ of the zero ring). By [pqf-lem-affine-local-target] the morphism $f$ is affine. It is proper by step 1, so [lem-sfb-affine-proper-finite] implies that $f$ is finite.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "pqf-lem-affine-local-target",
+    "lem-sfb-affine-proper-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CCL (lemma-finite), locality implicit in the last sentence; Morphisms Tags 01S8 (lemma-characterize-affine) and 01WN (lemma-finite-proper)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proper-over-separated",
+  "def-weil-proper-morphism",
+  "def-weil-scheme-over-base",
+  "def-weil-finite-type-morphism",
+  "lem-wf-affine-noetherian-components",
+  "def-kun-topological-krull-dimension",
+  "def-weil-irreducible-components",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-weil-pbc-scheme-sober",
+  "lem-trf-proper-finite-fibre-finite-near",
+  "lem-sc-lft-over-field-jacobson-space",
+  "def-weil-finite-integral-morphism",
+  "pqf-lem-affine-local-target",
+  "lem-sfb-affine-proper-finite"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0CCL (lemma-finite), complete proof; finite-fibre and covering details expanded with Tags 0BA8, 01IS, 0478, 01S8 and 01WN."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from a proper scheme of dimension at most one to a separated scheme over a field is finite if no one-dimensional component is contracted to a point",
+   "results": "{\"t\": \"2026-10-23T04:11:17Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism from a proper scheme of dimension at most one to a separated scheme over a field is finite if no one-dimensional component is contracted to a point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.IsFinite.of_comp\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.isFinite_iff\"], \"digest\": \"503268bb894a4867\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give definitions, finite implies proper, or proper plus affine/locally quasi-finite implies finite; none supplies the dimension/noncontraction criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a proper scheme over a field has dimension at most one and each curve component maps nonconstantly to a separated scheme then the morphism is finite",
+   "results": "{\"t\": \"2026-10-23T04:12:02Z\", \"tool\": \"leanfinder\", \"query\": \"If a proper scheme over a field has dimension at most one and each curve component maps nonconstantly to a separated scheme then the morphism is finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.IsFinite.of_comp\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\", \"AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme\"], \"digest\": \"75a5c640bd079ef8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give definitions, finite implies proper, or proper plus affine/locally quasi-finite implies finite; none supplies the dimension/noncontraction criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, krullDim",
+   "results": "{\"t\": \"2026-10-23T04:11:13Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsFinite, krullDim\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'krullDim'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: pattern rejected for unknown identifier; followed by the valid IsFinite/IsProper pattern"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsProper",
+   "results": "{\"t\": \"2026-10-23T04:14:43Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsProper\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\", \"AlgebraicGeometry.IsFinite.eq_isProper_inf_isAffineHom\", \"AlgebraicGeometry.IsFinite.of_isProper_of_locallyQuasiFinite\", \"AlgebraicGeometry.IsFinite.iff_isProper_and_locallyQuasiFinite\", \"AlgebraicGeometry.IsFinite.eq_proper_inf_locallyQuasiFinite\", \"AlgebraicGeometry.exists_isFinite_morphismRestrict_of_finite_preimage_singleton\"], \"digest\": \"05fe518aea5dd700\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give definitions, finite implies proper, or proper plus affine/locally quasi-finite implies finite; none supplies the dimension/noncontraction criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "nonconstant|non_constant|contract.*component",
+   "results": "{\"t\": \"2026-10-23T04:11:14Z\", \"tool\": \"grep\", \"query\": \"nonconstant|non_constant|contract.*component\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give definitions, finite implies proper, or proper plus affine/locally quasi-finite implies finite; none supplies the dimension/noncontraction criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A map from a proper scheme of dimension at most one to a separated scheme over a field with no contracted irreducible curve components is finite",
+   "results": "{\"t\": \"2026-10-23T04:11:57Z\", \"tool\": \"leansearch\", \"query\": \"A map from a proper scheme of dimension at most one to a separated scheme over a field with no contracted irreducible curve components is finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.isFinite_iff\"], \"digest\": \"5dd89b06e72a2c29\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give definitions, finite implies proper, or proper plus affine/locally quasi-finite implies finite; none supplies the dimension/noncontraction criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "nonconstant|non_constant|contract.*component",
+   "results": "{\"t\": \"2026-10-23T09:28:59Z\", \"tool\": \"grep\", \"query\": \"nonconstant|non_constant|contract.*component\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: returned declarations concern finite/proper morphisms and finite neighbourhoods, without the dimension-one noncontraction argument"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper curve morphism that contracts no irreducible component is finite",
+   "results": "{\"t\": \"2026-10-23T09:28:59Z\", \"tool\": \"leansearch\", \"query\": \"A proper curve morphism that contracts no irreducible component is finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\", \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.IsFinite.mk\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\"], \"digest\": \"fa4b62979ac15e68\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: returned declarations concern finite/proper morphisms and finite neighbourhoods, without the dimension-one noncontraction argument"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from a proper scheme of dimension at most one to a separated scheme over a field is finite if no irreducible curve component is contracted",
+   "results": "{\"t\": \"2026-10-23T09:29:09Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism from a proper scheme of dimension at most one to a separated scheme over a field is finite if no irreducible curve component is contracted\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.of_comp\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.isProper_iff\", \"AlgebraicGeometry.isProper_eq\"], \"digest\": \"b5682eca0a577d4d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: returned declarations concern finite/proper morphisms and finite neighbourhoods, without the dimension-one noncontraction argument"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsProper",
+   "results": "{\"t\": \"2026-10-23T09:29:10Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsProper\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\", \"AlgebraicGeometry.IsFinite.eq_isProper_inf_isAffineHom\", \"AlgebraicGeometry.IsFinite.of_isProper_of_locallyQuasiFinite\", \"AlgebraicGeometry.IsFinite.iff_isProper_and_locallyQuasiFinite\", \"AlgebraicGeometry.IsFinite.eq_proper_inf_locallyQuasiFinite\", \"AlgebraicGeometry.exists_isFinite_morphismRestrict_of_finite_preimage_singleton\"], \"digest\": \"05fe518aea5dd700\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: returned declarations concern finite/proper morphisms and finite neighbourhoods, without the dimension-one noncontraction argument"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFinite.*isZariskiLocal|IsFinite.*of.*[Cc]over|IsFinite.*iff.*[Cc]over|IsFinite.*iff.*[Oo]pen|IsFinite.*of.*[Oo]pen|IsZariskiLocalAtTarget.*IsFinite",
+   "results": "{\"t\": \"2026-10-23T09:35:14Z\", \"tool\": \"grep\", \"query\": \"IsFinite.*isZariskiLocal|IsFinite.*of.*[Cc]over|IsFinite.*iff.*[Cc]over|IsFinite.*iff.*[Oo]pen|IsFinite.*of.*[Oo]pen|IsZariskiLocalAtTarget.*IsFinite\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\"], \"digest\": \"44bc984e7403c553\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: returned declarations concern finite/proper morphisms and finite neighbourhoods, without the dimension-one noncontraction argument"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonconstant morphism from a proper one dimensional scheme to a separated scheme is finite provided every curve component has nonconstant image",
+   "results": "{\"t\": \"2026-10-23T09:40:18Z\", \"tool\": \"leanfinder\", \"query\": \"A nonconstant morphism from a proper one dimensional scheme to a separated scheme is finite provided every curve component has nonconstant image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.IsFinite.of_comp\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\", \"AlgebraicGeometry.LocallyQuasiFinite\"], \"digest\": \"1a903d9df14d0557\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: returned declarations concern finite/proper morphisms and finite neighbourhoods, without the dimension-one noncontraction argument"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nonzero-pencil-differential-finite-etale",
+  "date": "2026-10-23",
+  "group": "N9"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Seed-chain refinement of lem-sfb-separating-pair-open, returned steps 14–16: finiteness of the nonconstant geometric pencil, using Stacks curves Tag 0CCL. No imported blueprint ancestor exists for this seed chain.",
+   "via": [
+    "lem-sfb-nonzero-pencil-differential-finite-etale",
+    "lem-sfb-separating-pair-open",
+    "lem-sfb-invariant-local-curve-pencils",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-proper-dimension-one-noncontraction-finite",
+  "worker": "stage1",
+  "summary": "Verified the unchanged statement against Stacks 0CCL and split its proof into properness, a finite Noetherian affine cover, a written dimension-chain argument for closed fibres, finite component/generic-point finiteness, finite neighbourhoods, the Jacobson cover argument, and affineness followed by proper-affine finiteness. Reused existing nodes throughout; no new nodes and no Lean changes.",
+  "blueprint": "No imported blueprint ancestor exists for this seed chain (blueprint_refs.py ancestor returns None). Realizes the seed-chain pencil finiteness argument identified in blueprint.from.place, following Stacks 0CCL; searched the latest whole blueprint and imported DAG without finding an equivalent imported node. Current latest sk-thm-sf-ctf-stability is read as the enclosing direct-image stability route, not changed.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-proper-finite-fibre-finite-near",
+    "why": "Generic proper-morphism finite-neighbourhood theorem, with arbitrary target; used as the Stacks 02UP black box explicitly invoked in 0CCL. The enclosing unit has no replacement statement for it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-proper-finite-fibre-finite-near"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NW-e4035ba38",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-e4035ba38 (reviewer sub-agent of L); spot-checked: Read the whole delivery: the item only, with no new nodes. The statement matches Stacks curves.tex 0CCL (lemma-finite) hypothesis by hypothesis and is unchanged. The 7 steps follow the 0CCL proof and are all correct. (1) 01W6 over Spec k gives f proper, so images are closed. (2) A finite cover by finitely generated k-algebra charts makes X Noetherian (lem-wf-affine-noetherian-components). (3) Over the image of a closed point the fibre has dim ≤ 0: a chain A⊊B would make B a 1-dimensional component contracted to a point. (4) 0BA8 plus uniqueness of generic points (01IS) makes the fibre finite. (5) 02UP gives a finite neighbourhood with no Noetherian hypothesis on Y. (6) 0478 (closed points dense in every closed subset) shows these neighbourhoods cover f(X). (7) 01S8 gives f affine and 01WN gives finite. proof_deps equals the union of the step uses. All step-source tags were checked against tags/tags, and there is no SGA. Edge cases checked: empty X, dim X = 0, contracted P^1, non-Noetherian Y. No duplicate of 0CCL exists in the DAG. The live and side-live item is still unsplit, and there is no repair note. Batch-5 check: lem-trf-proper-finite-fibre-finite-near is generic Stacks 02UP and not part of the trace-formula or Poincaré-duality proofs. Its 142-node closure contains no trace or Poincaré proof node, only the generic leaf lem-pod-separated-finite-type-base-change. It is already a tool in other chapters, and 02OH (thm-sc-…) needs a Noetherian base, so it cannot replace it. The declared tool use is accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperDimensionOneNoncontractionFinite",
+  "declaration": "AlgebraicGeometry.isFinite_of_proper_dim_le_one_noncontraction",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperDimensionOneNoncontractionFinite.lean",
+  "statement": "theorem isFinite_of_proper_dim_le_one_noncontraction {k : Type u} [Field k] {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))] (h_dim : topologicalKrullDim X ≤ 1) (h_noncontraction : ∀ Z : Set X, Z ∈ irreducibleComponents X → topologicalKrullDim Z = 1 → (f '' Z).Nontrivial) : IsFinite f",
+  "branch": "newtargets-dag",
+  "by": "Q156",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b2d6a3a5d",
+  "group": "Q156",
+  "result": "pass",
+  "note": "Statement matches node and Stacks Curves 0CCL clause by clause: Field k, X/Y Scheme.Over Spec k, f.IsOver, IsSeparated(Y↘), IsProper(X↘), topologicalKrullDim X ≤ 1, ∀ Z ∈ irreducibleComponents X, topologicalKrullDim Z = 1 → (f '' Z).Nontrivial, conclusion IsFinite f. No extra hypotheses (Y arbitrary, any characteristic, no reducedness); same-universe k is the standard Spec convention. Edge cases (empty X, dim 0, contracted curve, mixed components, non-Noetherian Y) correct. Six stmt_deps are existing Mathlib records, unchanged; new module, statement verbatim, source/blueprint docstrings and 7-step proof docstring present, sorry only, no definitions. Report has Worker report and Second reading sections. Not recompiled (no change); worker compile clean."
+ }
+}

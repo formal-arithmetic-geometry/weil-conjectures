@@ -1,0 +1,457 @@
+{
+ "id": "lem-sfb-scheme-proj-veronese-quotient-functor",
+ "kind": "statement",
+ "title": "Scheme relative Proj represents Veronese invertible-quotient data",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $Z$ be an $S$-scheme, in the universes of [def-weil-size-convention]. Let $\\mathcal B=\\bigoplus_{n\\geq0}\\mathcal B_n$ be a commutative unital graded $\\mathcal O_Z$-algebra [def-weil-pbc-graded-sheaf-structures], with every degree quasi-coherent [pqf-def-coherent]; no equality $\\mathcal B_0=\\mathcal O_Z$ or finite generation assumption is required. Pullbacks are tensor pullbacks [def-pc-module-pullback]. For $d\\geq1$ write $\\mathcal B^{(d)}_n=\\mathcal B_{dn}$ with the inherited multiplication. For a quasi-compact $S$-scheme $T$, let $Q_{Z,\\mathcal B}(T)$ be the set of equivalence classes of data $(d,f,\\mathcal L,\\psi)$, where $d\\geq1$, $f:T\\to Z$ is an $S$-morphism, $\\mathcal L$ is an invertible $\\mathcal O_T$-module [def-sc-invertible-module], and $\\psi:f^*\\mathcal B^{(d)}\\to\\bigoplus_{n\\geq0}\\mathcal L^{\\otimes n}$ is a graded unital algebra map whose degree-one component $f^*\\mathcal B_d\\to\\mathcal L$ is surjective as a map of sheaves. Two data $(d,f,\\mathcal L,\\psi)$ and $(d',f',\\mathcal L',\\psi')$ are equivalent if $f=f'$ and there are positive integers $a,a'$ with $m=ad=a'd'$ and an isomorphism $\\beta:\\mathcal L^{\\otimes a}\\simeq(\\mathcal L')^{\\otimes a'}$ such that, for every $n\\geq0$, $\\beta^{\\otimes n}\\circ\\psi_{an}=\\psi'_{a'n}$ on $f^*\\mathcal B_{mn}$, using the canonical tensor-power identifications. For arbitrary $T$ set $Q_{Z,\\mathcal B}(T)=\\varprojlim_{V\\subseteq T\\ \\mathrm{quasi\\text{-}compact\\ open}}Q_{Z,\\mathcal B}(V)$. The transition maps are restriction; pullback along $u:T'\\to T$ is induced locally by $(d,f,\\mathcal L,\\psi)\\mapsto(d,f\\circ u,u^*\\mathcal L,u^*\\psi)$. These prescriptions give a set-valued contravariant functor on $S$-schemes. There is a canonical natural bijection\n$$\\operatorname{Mor}_S(T,\\operatorname{Proj}_Z(\\mathcal B))\\simeq Q_{Z,\\mathcal B}(T),$$\nwhere the scheme on the left is the glued relative Proj [def-nagata-relative-proj]; composing a morphism on the left with its structural map to $Z$ corresponds on the right to remembering $f$. The bijection is the one induced by the canonical graded map to the twisting sheaves on relative Proj: over each affine open $V\\subseteq Z$, on the chart $\\pi^{-1}(V)\\simeq\\operatorname{Proj}(\\Gamma(V,\\mathcal B))$ of [def-nagata-relative-proj] with twisting sheaves $\\mathcal O(d)$ [def-weil-pbc-proj-twisting-sheaf], locally where $\\mathcal O(d)$ is invertible and the degree-$d$ quotient is surjective it uses $\\mathcal L=\\mathcal O(d)$ and the maps to $\\mathcal O(dn)=\\mathcal L^{\\otimes n}$. For a graded $\\mathcal O_Z$-algebra isomorphism $e:\\mathcal B\\simeq\\mathcal C$, the ordinary induced isomorphism $\\operatorname{Proj}_Z(\\mathcal C)\\simeq\\operatorname{Proj}_Z(\\mathcal B)$ [def-sfb-relative-proj-iso-of-graded-iso] corresponds to $[d,f,\\mathcal L,\\psi]\\mapsto[d,f,\\mathcal L,\\psi\\circ f^*e^{(d)}]$.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01NW (lemma-equivalent-relative), 01NY (lemma-relative-proj), 01NZ (lemma-glueing-gives-functor-proj), including the definition of equation-proj immediately before 01NY and the canonical twisting-sheaf normalization in the second proof of 01NZ."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-weil-pbc-graded-sheaf-structures",
+  "pqf-def-coherent",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "def-nagata-relative-proj",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-sfb-relative-proj-iso-of-graded-iso",
+  "def-sfb-scheme-veronese-quotient-data"
+ ],
+ "proof": [
+  {
+   "text": "Put $Y=\\operatorname{Proj}_Z(\\mathcal B)$. Use the twisting modules $E_j$, canonical map $\\eta$ and opens $Y_d$ supplied by [lem-sfb-relative-proj-twists-degree-opens]. Thus on $Y_d$ there is normalized quotient data $(d,\\pi,E_d,\\eta^{(d)})$ and these data become their tensor powers when $d$ is replaced by a multiple. The opens $Y_d$ cover $Y$ and are directed by divisibility. In particular this construction fixes the twisting-sheaf normalization required in the statement before any representing bijection is chosen.",
+   "uses": [
+    "lem-sfb-relative-proj-twists-degree-opens"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "01NR (lemma-glue-relative-proj-twists), 01NY (lemma-relative-proj), 01NZ (lemma-glueing-gives-functor-proj), second proof."
+   }
+  },
+  {
+   "text": "Fix $d$ and data $(d,f,L,\\psi)$ on any $T$. For an affine $V\\subseteq Z$ put $W=f^{-1}V$ and $A=\\Gamma(V,\\mathcal B)$. Tensor-pullback adjunction followed degreewise by the affine tilde--sections adjunction identifies $\\psi|_W$ with an $\\mathcal O_Z(V)$-linear graded ring map $A^{(d)}\\to\\Gamma_*(W,L|_W)$. Naturality of the adjunction makes its unit and multiplication equations exactly those for $\\psi$. Since $\\mathcal B_d|_V$ is the tilde of $A_d$, its pullback is locally generated by $1\\otimes a$, $a\\in A_d$; hence these sections generate $L|_W$. Apply [lem-sfb-proj-fixed-degree-line-quotient] to obtain a unique morphism $g_V:W\\to Y_d\\cap\\pi^{-1}V$ and a normalized isomorphism $g_V^*E_d\\simeq L|_W$. The degree-zero equation, restricted to $\\mathcal O_Z(V)\\to A_0$, says $\\pi g_V=f|_W$. For two affine base opens, refine their intersection by affine opens. The relative twisting identifications commute with restriction, so both local pairs pull the same universal data back to $\\psi$; uniqueness in the fixed-degree lemma on each refinement makes the pairs equal there. Glue the maps by scheme-morphism gluing. The isomorphisms glue sectionwise as maps of sheaves, since they agree on overlaps. Conversely pulling back the universal data on $Y_d$ recovers this pair on every affine base open. Thus maps $T\\to Y_d$ over $Z$ classify fixed-degree data up to strict isomorphism, without any quasi-compactness assumption on $T$.",
+   "uses": [
+    "lem-sfb-proj-fixed-degree-line-quotient",
+    "lem-sfb-relative-proj-twists-degree-opens",
+    "lem-pc-module-pullback-adjunction",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "01NU (lemma-relative-proj-affine), 01NV (lemma-relative-proj-d), with affine refinements for all overlaps."
+   }
+  },
+  {
+   "text": "Passing from $(d,f,L,\\psi)$ to $(ad,f,L^{\\otimes a},\\psi_{a\\bullet})$ gives valid data: locally lift a free generator $e$ of $L$ through the surjection $f^*\\mathcal B_d\\to L$; its $a$th power maps to $e^{\\otimes a}$, proving degree-one surjectivity for the new data. The universal multiplication identifications on $Y_d$ show that this operation keeps the associated map $g:T\\to Y$ unchanged. Now two data equivalent at some common multiple $m$ give strictly isomorphic degree-$m$ data, hence the same $g$ by step 2. Conversely if they give the same $g$, take $m=\\operatorname{lcm}(d,d')$. The image lies in $Y_d\\cap Y_{d'}\\subseteq Y_m$, and the two powered line modules identify with $g^*E_m$. Composing these identifications gives $\\beta:L^{\\otimes(m/d)}\\simeq(L')^{\\otimes(m/d')}$ respecting every homogeneous component, including degree zero. Therefore the proposed equivalence is exactly equality of associated morphisms (and includes equality of $f=\\pi g$). It is an equivalence relation. In particular all fixed-degree transition maps on strict classes are injective.",
+   "uses": [
+    "lem-sfb-relative-proj-twists-degree-opens"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "01NW (lemma-equivalent-relative), using the fixed-degree classification proved in step 2; the local generator argument supplies surjectivity."
+   }
+  },
+  {
+   "text": "Suppose $T$ is quasi-compact. Given $g:T\\to Y$, the inverse images of the $Y_d$ form an open cover of $T$. Choose a finite subcover indexed by $d_1,\\ldots,d_r$ and a positive common multiple $m$; then $g(T)\\subseteq Y_m$. Pullback of the universal data on $Y_m$ gives a quadruple. Step 2 recovers $g$, and step 3 identifies exactly all quadruples producing it, independently of $m$. For $T=\\varnothing$ take $m=1$. Restricting to maps over $S$ is equivalent to requiring that the remembered map $f=\\pi g$ be over $S$, since $Y\\to S$ factors through $Z$. This proves the required bijection for quasi-compact $S$-schemes and the structural-map assertion.",
+   "uses": [
+    "lem-sfb-relative-proj-twists-degree-opens",
+    "def-weil-pbc-quasi-compact-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "01NY (lemma-relative-proj), final union argument; equation-proj."
+   }
+  },
+  {
+   "text": "For arbitrary $T$, a compatible family in the stated inverse limit gives morphisms $g_V:V\\to Y$ for every quasi-compact open $V\\subseteq T$ by step 4. Affine opens form a basis, are quasi-compact, and cover every overlap $V\\cap V'$; compatibility on these affine subopens makes $g_V$ and $g_{V'}$ agree on the whole overlap. Scheme-morphism gluing gives a unique $g:T\\to Y$. Conversely restrictions of $g$ give that family. If $T$ itself is quasi-compact its component determines the family, so this also agrees with step 4. No intersection is assumed quasi-compact.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-pc-scheme",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "equation-proj before 01NY (lemma-relative-proj), with the gluing argument made explicit."
+   }
+  },
+  {
+   "text": "For a morphism $u:T'\\to T$ and a quasi-compact open $W\\subseteq T'$, the image $u(W)$ is quasi-compact: pull an open cover back to $W$ and take a finite subcover. It is contained in a finite union $V$ of affine opens of $T$, hence in a quasi-compact open $V$ (an open cover of a finite union has a finite subcover on each member). Pull a representative of the $V$-component back along $W\\to V$. Locally a surjection to a free rank-one module has a right inverse (lift its generator); tensor pullback preserves that right inverse, so the pulled-back datum is valid. Equivalence is preserved by pulling back $\\beta$ and its component equations. The fixed-degree classification identifies this datum with $g_V\\circ u|_W$. Thus its class is independent of the choice of $V$ or representative, and these classes are compatible in $W$. The identities and composition laws follow from those for composing scheme maps and the inverse-limit bijection in step 5. This constructs the prescribed functor and proves naturality on all $S$-schemes, including morphisms between non-quasi-compact tests.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "def-pc-module-pullback",
+    "def-sc-tensor-pullback-power-comparison",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-weil-pbc-quasi-compact-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "equation-proj, omitted pullback construction, and 01NT (lemma-proj-base-change)."
+   }
+  },
+  {
+   "text": "Finally let $e:\\mathcal B\\simeq\\mathcal C$ be a graded algebra isomorphism. On an affine base and a degree-$d$ element $a$ of $\\mathcal B$, the ordinary induced Proj isomorphism sends the chart fraction $b/a^k$ to $e(b)/e(a)^k$. For a quotient $\\psi$ of $\\mathcal C^{(d)}$, step 2 therefore sends the composite morphism to the quotient with degree-$k$ value $\\psi_k(e(b))$: its fraction formula is $\\psi_k(e(b))/\\psi_1(e(a))^{\\otimes k}$. Uniqueness of the normalized fixed-degree pair identifies its line module with $L$. These identifications agree on affine base overlaps, so the operation is exactly $[d,f,L,\\psi]\\mapsto[d,f,L,\\psi\\circ f^*e^{(d)}]$. Step 5 extends the equality to arbitrary tests componentwise. This also verifies that the already normalized bijection is the canonical one specified in the item.",
+   "uses": [
+    "def-sfb-relative-proj-iso-of-graded-iso",
+    "lem-sfb-proj-fixed-degree-line-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "01NZ (lemma-glueing-gives-functor-proj); 01MY (lemma-morphism-proj), homogeneous-localization formula."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-relative-proj-twists-degree-opens",
+  "lem-sfb-proj-fixed-degree-line-quotient",
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-pc-scheme",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-pc-module-pullback",
+  "def-sc-tensor-pullback-power-comparison",
+  "def-sfb-relative-proj-iso-of-graded-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01NU, 01NV, 01NW, 01NY, 01NZ, including equation-proj; expanded affine restriction, finite common-degree and arbitrary-test pullback arguments."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Veronese|[Vv]eronese|[Qq]uadruple|[Ff]unctorOfPoints|[Ii]nvertible",
+   "results": {
+    "hits": [
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean"
+    ],
+    "n_hits": 1,
+    "note": "",
+    "subdirectory": "AlgebraicGeometry/ProjectiveSpectrum",
+    "digest": "23499a83b828f6d2"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern absolute Proj of graded rings, homogeneous localization, or maps from global sections; none represents the Veronese invertible-quotient functor of an arbitrary graded sheaf algebra on a scheme or relative Proj over an algebraic space."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative projective spectrum represents invertible quotient data of Veronese graded sheaf algebras over a scheme",
+   "results": {
+    "hits": [
+     "ProjectiveSpectrum",
+     "ProjectiveSpectrum.mk",
+     "AlgebraicGeometry.Proj",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf",
+     "ProjectiveSpectrum.rec",
+     "ProjectiveSpectrum.noConfusionType",
+     "AlgebraicGeometry.termProj|_",
+     "AlgebraicGeometry.Proj.ext"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "4979e83dbc4b37a1"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern absolute Proj of graded rings, homogeneous localization, or maps from global sections; none represents the Veronese invertible-quotient functor of an arbitrary graded sheaf algebra on a scheme or relative Proj over an algebraic space."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj, Surjective",
+   "results": {
+    "hits": [],
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'Surjective'",
+    "subdirectory": "",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "unavailable: loogle: unknown identifier 'Surjective'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an arbitrary quasi coherent graded algebra on a scheme, relative Proj represents equivalence classes of surjections from a positive Veronese subalgebra to tensor powers of an invertible sheaf",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.Proj",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections",
+     "AlgebraicGeometry.Proj.toSheafedSpace",
+     "AlgebraicGeometry.Proj.toSpecZero",
+     "AlgebraicGeometry.projIsoSpec",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec",
+     "AlgebraicGeometry.projIsoSpecTopComponent"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "228ec0ae7d3b9f5e"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern absolute Proj of graded rings, homogeneous localization, or maps from global sections; none represents the Veronese invertible-quotient functor of an arbitrary graded sheaf algebra on a scheme or relative Proj over an algebraic space."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj, Function.Surjective",
+   "results": {
+    "hits": [],
+    "n_hits": 0,
+    "note": "",
+    "subdirectory": "",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern absolute Proj of graded rings, homogeneous localization, or maps from global sections; none represents the Veronese invertible-quotient functor of an arbitrary graded sheaf algebra on a scheme or relative Proj over an algebraic space."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The functor of points of Proj for a graded sheaf algebra is a union over positive degrees of invertible quotients, identified after taking common tensor powers",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.Proj.toSheafedSpace",
+     "AlgebraicGeometry.Proj",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ",
+     "AlgebraicGeometry.Proj.ext_iff",
+     "AlgebraicGeometry.openToLocalization",
+     "AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "5c6162a17143c95b"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern absolute Proj of graded rings, homogeneous localization, or maps from global sections; none represents the Veronese invertible-quotient functor of an arbitrary graded sheaf algebra on a scheme or relative Proj over an algebraic space."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The functor of equivalence classes of Veronese graded invertible quotients on test schemes is represented by relative Proj",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.Proj.toSpecZero",
+     "AlgebraicGeometry.Proj.basicOpenIsoSpec",
+     "AlgebraicGeometry.Proj.stalkIso'_symm_mk",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections.congr_simp",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections",
+     "AlgebraicGeometry.Proj",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "9f4107f039338e3f"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: basic Proj schemes, standard-open covers, structure sheaves and maps from ring-valued global sections do not classify arbitrary line-valued Veronese quotients or glue relative twisting modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms into relative Proj of an arbitrary quasi coherent graded algebra classify generated line quotients after passing to a positive Veronese and identifying common tensor powers",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.Proj.fromOfGlobalSections",
+     "AlgebraicGeometry.Proj",
+     "AlgebraicGeometry.Proj.toSpecZero",
+     "AlgebraicGeometry.Proj.awayι",
+     "AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_fromSpec",
+     "AlgebraicGeometry.ProjIsoSpecTopComponent.fromSpec_toSpec",
+     "AlgebraicGeometry.Proj.awayMap_awayToSection",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "536eddd5f0520e1d"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: basic Proj schemes, standard-open covers, structure sheaves and maps from ring-valued global sections do not classify arbitrary line-valued Veronese quotients or glue relative twisting modules."
+  },
+  {
+   "tool": "grep",
+   "query": "Veronese|GammaStar|invertible|quotient",
+   "results": {
+    "hits": [
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "AlgebraicGeometry/ProjectiveSpectrum",
+    "digest": "569693be72306bfa"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: basic Proj schemes, standard-open covers, structure sheaves and maps from ring-valued global sections do not classify arbitrary line-valued Veronese quotients or glue relative twisting modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj, AlgebraicGeometry.Scheme.Modules",
+   "results": {
+    "hits": [],
+    "n_hits": 0,
+    "note": "",
+    "subdirectory": "",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: basic Proj schemes, standard-open covers, structure sheaves and maps from ring-valued global sections do not classify arbitrary line-valued Veronese quotients or glue relative twisting modules."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.?proj|twist|veronese",
+   "results": {
+    "hits": [],
+    "n_hits": 0,
+    "note": "",
+    "subdirectory": "AlgebraicGeometry/ProjectiveSpectrum",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: basic Proj schemes, standard-open covers, structure sheaves and maps from ring-valued global sections do not classify arbitrary line-valued Veronese quotients or glue relative twisting modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj, \"twist\"",
+   "results": {
+    "hits": [],
+    "n_hits": 0,
+    "note": "",
+    "subdirectory": "",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: basic Proj schemes, standard-open covers, structure sheaves and maps from ring-valued global sections do not classify arbitrary line-valued Veronese quotients or glue relative twisting modules."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-relative-proj-scheme-tests",
+  "date": "2026-10-24",
+  "group": "Q73"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting subargument for proper-support Grothendieck existence in Stacks Tag 08BE, serving the inherited compactification/direct-image prerequisite chain of sk-thm-sf-ctf-stability; the Chow modification in the third paragraph. Construction input: Tag 088S proof, apply 088R to the chosen open immersion into projective space; affine-base projectivity is handled separately. Supporting Tags 084B (lemma-relative-proj), 085Q (definition-blow-up), 085R (lemma-blowing-up-affine), 085S (lemma-flat-base-change-blowing-up), 085T (lemma-blowing-up-gives-effective-Cartier-divisor), 085Z (lemma-blowing-up-projective), and 083S (lemma-complement-effective-Cartier-divisor). Scheme coefficient comparison: descent.tex Tags 03DX (proposition-equivalence-quasi-coherent) and 05VG (lemma-equivalence-quasi-coherent-properties).. General graded-algebra construction underlying the blowup: representability and arbitrary-base-change comparison of relative Proj (084B and 085C). Scheme prerequisite for the compactification/direct-image paragraph of sk-thm-sf-ctf-stability.proof.md: constructions.tex 01NW, 01NY and 01NZ, the scheme functor used in the proof of spaces-divisors.tex 084B.",
+   "via": [
+    "lem-sfb-space-relative-proj-scheme-tests",
+    "lem-sfb-space-blowup-chart-properties",
+    "lem-sfb-space-blowup-embedding-extension",
+    "lem-sfb-space-chow-dense-modification",
+    "lem-sfb-space-supported-adic-existence",
+    "lem-sfb-space-coherent-formal-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-scheme-proj-veronese-quotient-functor",
+  "worker": "stage1",
+  "summary": "Kept the statement, constructed two strictly smaller technical inputs (absolute fixed-degree line quotients; relative twisting modules and degree opens), and wrote the relative fixed-degree classification, common-power equivalence, finite-degree quasi-compact argument, inverse-limit extension and naturality explicitly. Checked arbitrary degree zero and non-quasi-separated overlaps. No Lean attachment or Mathlib match.",
+  "blueprint": "Inherited supporting construction for the compactification/direct-image prerequisite chain of sk-thm-sf-ctf-stability; current latest proof third paragraph uses a compactification. This is a technical Proj subargument, not a replacement of the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-module-pullback-adjunction",
+    "why": "Generic tensor pullback adjunction used inside the relative Proj construction; the unit has no substitute for this local scheme/module tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "why": "Generic affine quasi-coherent module adjunction used inside the relative Proj construction; the unit has no substitute for this local scheme/module tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Generic affine refinement used inside the relative Proj construction; the unit has no substitute for this local scheme/module tool."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-morphism-gluing",
+    "why": "Generic scheme morphism gluing used inside the relative Proj construction; the unit has no substitute for this local scheme/module tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic quasi-compactness of affine schemes used inside the relative Proj construction; the unit has no substitute for this local scheme/module tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-affine-scheme-qcqs"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q125-74c7c26ac",
+  "group": "Q125",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-74c7c26ac (reviewer sub-agent of L); spot-checked: I read all seven item steps and both new nodes in full, plus every cited statement, and checked them against Stacks constructions.tex 01MS/equation-Ud/01N8/01N9/01NR/01NU/01NV/01NW/equation-proj/01NY/01NZ. Live check: the item is still unsplit live and on side-live, its statement is byte-identical, and the new ids are not live. New node fixed-degree-line-quotient is 01N8/01N9 with 01MS (U_d represents strict triples). α is unique because it is determined at k=1 by the generating sections. Tested on A=k[x,y] with d=1, on A=R[x] with deg x=2 and d=1 (U_1 empty, only T=∅ has data), and on A_+ nilpotent. New node relative-proj-twists-degree-opens is 01NR with 01MS and the 01NY open-immersion part. Y_d is well defined via (A_d)_h on principal opens, Y=∪Y_d, and Y_d⊆Y_ad because D_+(b)=D_+(b^a). Steps: step 2 uses the pullback and tilde-Γ adjunctions on affine V with quasi-coherent B_dn, then the fixed-degree node, and recovers πg=f from unitality. Step 3 gives degree-one surjectivity of the powered datum by lifting a generator, and β at the lcm via g^*E_m; it covers 01NW (1)⇔(3) for arbitrary m. Step 4 uses a finite subcover and a common multiple. Step 5 extends to arbitrary T by affine refinement of V∩V′ (no quasi-separatedness). Step 6 builds pullback using a quasi-compact image and locally split surjections. Step 7's fraction formula gives ψ∘f^*e^(d) in the correct contravariant direction. No duplicates: I read the rg hits for the tags (graded-proj-quotient-twist-comparison, standard-proj-twist-tensor, sc-ample-proj-canonical-map, pbc sections-morphism-to-proj-polynomial-ring, trf proj-common-degree/canonical-map, proj-section nodes). Neither new node restates an item clause. Batch-5 flag: def-sc-tensor-pullback-power-comparison is a generic definition with no proof and generic stmt_deps (canonical pullback/tensor-power isomorphisms), outside both assumptions, so OK. tool_uses (pc pullback adjunction, pbc tilde-Γ, affine basis, morphism gluing, affine qcqs) accepted. Advisory: in step 6 the identification u^*f^*≅(fu)^* is treated as elementary from the cited adjunction. No SGA citations; no changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeProjVeroneseQuotientFunctor",
+  "declaration": "AlgebraicGeometry.Scheme.VeroneseQuotient.scheme_proj_veronese_quotient_functor",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.VeroneseQuotient.scheme_proj_veronese_quotient_functor"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeProjVeroneseQuotientFunctor.lean",
+  "statement": "theorem scheme_proj_veronese_quotient_functor {S : Scheme.{u}} (Z : Over S) : ∃ R : ∀ A : Z.left.GradedAlgebraData, Representation Z A, ∀ (A B : Z.left.GradedAlgebraData) (e : A ≅ B) (T : Over S) (g : T ⟶ projTest Z B) (V : CompactOpens T), IsoActs e (((R B).sections T ((R B).represent.hom.app (op T) ⟨g⟩)).val V) (((R A).sections T ((R A).represent.hom.app (op T) ⟨g ≫ projIsoHom e⟩)).val V)",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-abf2bcdd0",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Clause-by-clause match with the node via GradedAlgebraData (the def-nagata-relative-proj input; quasi-coherent, no finite generation or B0=O_Z), Datum (adjoint affine-basis ψ with semilinearity, naturality, unit and mul; degree-one local generation = sheaf surjectivity), Equivalent (f equal, k,l>0, dk=d'l, β with tensorPowMulIso/boundaryTensorPowIso, all n incl. 0), Quot classes, compact-open compatible families, top-component bijection, pullback graph (tensorPullbackSection + boundaryPullbackPowIso) with uniqueness and per-factorization functoriality, natural iso with uliftYoneda of the recorded relProj, Remembers, and the Normalized O(dn)/unitToTwist b/1 clause (holds for and determines the canonical bijection). IsoActs direction matches relProjIsoOfIso (ψ∘e). Edge cases (empty test, degree-0 algebra, deg x=2, n=0, d=1, non-qc, non-qs) fine. No hollow defs, sorry only, docstrings and blueprint ids ok, statement verbatim, 18 recorded decls present, dependency nodes unchanged vs side-live, no duplicate notion (RelativeProj/Universal is chart uniqueness only), item not superseded live. Advisories only: generic tensor-power isos unlisted; graded-sheaf/coherent stmt_deps used through the GradedAlgebraData presentation. No compile (no changes)."
+ }
+}

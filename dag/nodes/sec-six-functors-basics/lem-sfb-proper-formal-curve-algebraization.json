@@ -1,0 +1,339 @@
+{
+ "id": "lem-sfb-proper-formal-curve-algebraization",
+ "kind": "statement",
+ "title": "Algebraization of proper flat formal curves over a power-series ring",
+ "statement": "Let $k$ be a field [def-weil-field], put $R=k[[t]]$ [def-weil-pbc-multivariate-power-series] and $R_n=R/(t^n)=k[t]/(t^n)$ for $n\\geq1$. Suppose $X_n\\to\\operatorname{Spec}R_n$ are proper [def-weil-proper-morphism] flat [def-weil-flat-morphism] finitely presented schemes [def-sbc-locally-finite-presentation], equipped with compatible identifications $X_{n+1}\\times_{\\operatorname{Spec}R_{n+1}}\\operatorname{Spec}R_n\\cong X_n$ [def-pc-fibre-product], and $\\dim X_1\\leq1$ [def-kun-topological-krull-dimension]. Then there is a flat finitely presented morphism $Y\\to\\operatorname{Spec}R$, projective in the finite-projective-space convention [def-kun-projective], with compatible $R_n$-isomorphisms $Y\\times_{\\operatorname{Spec}R}\\operatorname{Spec}R_n\\cong X_n$ for all $n\\geq1$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0E7R, lemma-formal-algebraic-space-proper-reldim-1, with the properness hypothesis used in its proof made explicit; flatness follows from more-morphisms.tex, Tag 0D4G, lemma-check-flatness-on-infinitesimal-nbhds, on the special fibre and from flatness over the field k((t)) on the generic fibre; finite presentation follows over the Noetherian base."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-proper-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-fibre-product",
+  "def-kun-projective",
+  "def-weil-pbc-multivariate-power-series",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-power-series-field-cohen-regular-complete] with coefficient field $k$ and one variable. Thus $R=k[[t]]$ is a Noetherian complete local domain with maximal ideal $(t)$ and residue field $k$. Each $R_n$ is Noetherian: an ascending chain of ideals in $R_n$ lifts to a chain of ideals of $R$ containing $(t^n)$, so it stabilizes. Thus $\\operatorname{Spec}R$ and $\\operatorname{Spec}R_n$ are Noetherian schemes (the one affine chart has Noetherian coordinate ring). Every $X_n$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since its proper structure morphism is of finite type.",
+   "uses": [
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 032C, remark-Noetherian-complete-local-ring-universally-catenary; morphisms.tex Tag 01T6"
+   }
+  },
+  {
+   "text": "The specified cartesian identifications define $i_n:X_n\\to X_{n+1}$. By [lem-weil-pbc-quotient-base-change-closed-immersion-ideal], this is the closed immersion cut out by $t^n\\mathcal O_{X_{n+1}}$. This ideal is nilpotent, since $t^{n+1}=0$ on $X_{n+1}$. On each affine chart all prime ideals contain a nilpotent ideal; the prime-ideal correspondence for a quotient therefore identifies all closed sets on the two spectra. Hence $i_n$ is a homeomorphism, and all $X_n$ have the same topological dimension as $X_1$, at most one. Their underlying topological spaces are Noetherian by [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal].",
+   "uses": [
+    "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0E7R, lemma-formal-algebraic-space-proper-reldim-1, second paragraph; quotient geometry as in morphisms.tex Tag 01R5"
+   }
+  },
+  {
+   "text": "The proper $k$-scheme $X_1$ is separated and finite type, so [lem-sc-dim-one-ample-invertible] supplies an ample invertible module $L_1$; its statement includes the empty and zero-dimensional cases. Inductively suppose $L_n$ has been chosen. Apply [lem-sc-pic-lift-closed-immersion-dim-le-one] to $i_n:X_n\\hookrightarrow X_{n+1}$. Its ambient scheme has Noetherian underlying space and dimension at most one by step 2. We obtain an invertible $L_{n+1}$ and an isomorphism $\\varphi_n:i_n^*L_{n+1}\\cong L_n$. Starting at $n=1$, recursive choice gives the whole sequence. For $m<n$ define the comparison by composing the adjacent $\\varphi_j$ using the pullback composition isomorphisms of [def-pc-module-pullback]; these composites satisfy the cocycle law by associativity. No assertion that each lift is canonically determined is needed.",
+   "uses": [
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-pic-lift-closed-immersion-dim-le-one",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0E7R, first two paragraphs; varieties.tex Tags 0A25/09NZ and 09NY"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-polarized-formal-algebraization] to $A=R$, $I=(t)$ and the system $(X_n,L_n,\\varphi_n)$. Completeness and Noetherianity hold by step 1, the cartesian condition is the given one, $X_1$ is proper by hypothesis, and $L_1$ is ample by step 3. It gives a proper $Y\\to\\operatorname{Spec}R$, a closed immersion into some finite $\\mathbf P^N_R$, and all the required compatible isomorphisms $Y\\times_RR_n\\cong X_n$, which the cited statement gives over $S_n=\\operatorname{Spec}R_n$, i.e. as $R_n$-isomorphisms; step 6 uses this to transport the flatness of $X_n\\to\\operatorname{Spec}R_n$. This supplies the projectivity convention in the statement, including compatibility at every stage.",
+   "uses": [
+    "lem-sfb-polarized-formal-algebraization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 089A, theorem-algebraization, including the finite projective-space construction in the proof"
+   }
+  },
+  {
+   "text": "The proper morphism $Y\\to\\operatorname{Spec}R$ is of finite type, hence quasi-compact, and separated by [def-weil-proper-morphism]; it is quasi-separated because its diagonal is a closed immersion, and a closed immersion is affine, hence quasi-compact. Its target is locally Noetherian by step 1, so [pqf-lem-lft-fp-locnoeth] makes it locally of finite presentation. Together with quasi-compactness and quasi-separatedness this is finite presentation, as defined in [def-sbc-locally-finite-presentation]. Also $Y$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian].",
+   "uses": [
+    "def-weil-proper-morphism",
+    "pqf-lem-lft-fp-locnoeth",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian; finite-presentation convention and Noetherian finite-type criterion"
+   }
+  },
+  {
+   "text": "Let $U=\\operatorname{Spec}B$ be any affine open of $Y$. The ring $B$ is Noetherian by [pqf-lem-affine-open-locnoeth]. For every $n$, [lem-weil-pbc-quotient-base-change-closed-immersion-ideal] identifies $U\\times_RR_n$ with $\\operatorname{Spec}(B/t^nB)$. Under the isomorphism of step 4 this is an open subscheme of $X_n$. Its morphism to $\\operatorname{Spec}R_n$ is flat: restriction to an open does not change the local rings in [def-weil-flat-morphism]. By [lem-weil-pbc-flat-ring-map-iff-flat-affine], $B/t^nB$ is a flat $R_n$-module for every $n\\geq1$.",
+   "uses": [
+    "pqf-lem-affine-open-locnoeth",
+    "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0D4G, lemma-check-flatness-on-infinitesimal-nbhds, affine translation; algebra.tex Tag 0523"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-flat-module-powers] to the ring map $R\\to B$, ideal $(t)$, and $B$-module $M=B$. Both rings are Noetherian and $M$ is generated by $1$; the required flatness of every quotient is step 6. For every prime $\\mathfrak q\\subset B$ containing $t$, the conclusion is that $B_{\\mathfrak q}$ is flat over $R$. By [lem-weil-pbc-affine-open-stalk-localization] this is the local ring $\\mathcal O_{Y,y}$ at the corresponding point of $U$. Its image in $\\operatorname{Spec}R$ is $(t)$, where the base local ring is $R$ itself because $R$ is local. Thus $Y\\to\\operatorname{Spec}R$ is flat at every point of its closed fibre, by [def-weil-flat-morphism].",
+   "uses": [
+    "lem-weil-pbc-flat-module-powers",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-flat-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0523, lemma-flat-module-powers; more-morphisms.tex Tag 0D4G"
+   }
+  },
+  {
+   "text": "For completeness there are no other base points except the generic point: a nonzero power series is $t^r u$ for its least nonzero exponent $r$, where $u$ has nonzero constant coefficient and is a unit by [lem-weil-power-series-unit-constant-coefficient]. A nonzero proper prime ideal therefore contains $t$ and equals $(t)$. At the remaining prime $(0)$, the base local ring is the fraction field of the domain $R$, by the localization description in [lem-weil-pbc-affine-open-stalk-localization]. For a point $y$ above it, $\\mathcal O_{Y,y}$ is a module over that field, hence flat by the field-module assertion in [lem-pc-flat-field]. Step 7 treats every point above $(t)$, and these two cases exhaust $Y$. The local-ring definition [def-weil-flat-morphism] proves global flatness. Together with steps 4 and 5 this proves all clauses.",
+   "uses": [
+    "lem-weil-power-series-unit-constant-coefficient",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-pc-flat-field",
+    "def-weil-flat-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0D4G for the closed fibre; the generic fibre uses flatness of modules over a field"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-sc-dim-one-ample-invertible",
+  "lem-sc-pic-lift-closed-immersion-dim-le-one",
+  "def-pc-module-pullback",
+  "lem-sfb-polarized-formal-algebraization",
+  "pqf-lem-lft-fp-locnoeth",
+  "def-sbc-locally-finite-presentation",
+  "pqf-lem-affine-open-locnoeth",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-flat-module-powers",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-power-series-unit-constant-coefficient",
+  "lem-pc-flat-field"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0E7R, lemma-formal-algebraic-space-proper-reldim-1; flatness addition via algebra.tex Tag 0523 (the affine form of more-morphisms.tex Tag 0D4G) and the generic-field case"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A compatible system of proper flat curves over a complete local Noetherian ring algebraizes to a flat projective scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.UniversallyClosed (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finite type algebra over a base ring $A$, the canonical morphism $\\\\operatorname{Proj}(\\\\mathcal{A}) \\\\to \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.IsProper (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If the zero-graded component $ \\\\mathcal{A}_0 $ of a graded ring $ \\\\mathcal{A} $ is a finitely generated $ A $-algebra, then the canonical morphism from the projective spectrum $ \\\\operatorname{Proj}(\\\\m\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] (f : S →ₐ[R] A),\\n  Function.Surjective ⇑f → ∀ [Module.Flat R S] [IsNoetherianRing S] [Algebra.FormallySmooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a commutative ring, $ S $ a Noetherian $ R $-algebra that is flat over $ R $, and $ A $ a formally smooth $ R $-algebra. If there exists a surjective $ R $-algebra homomorphism $ f: S \\to \"}\n  {\"name\": \"AlgebraicGeometry.flat_and_surjective_SpecMap_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {R S : CommRingCat} (f : R ⟶ S),\\n  AlgebraicGeometry.Flat (AlgebraicGeometry.Spec.map f) ∧ AlgebraicGeometry.Surjective (AlgebraicGeometry.Spec.map f) ↔\\n    (CommRingCat.Hom.hom f).FaithfullyFlat\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R → S $ induces a morphism of schemes $ \\\\operatorname{Spec}(S) → \\\\operatorname{Spec}(R) $ via $ \\\\operatorname{Spec}.\\\\text{map} $. This \"}\n  {\"name\": \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.ValuativeCriterion.Existence (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$ satisfies the valuative criterion for existence, provided t\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj properness and the flatness class do not algebraize a compatible family of schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraization of a proper formal scheme with special fibre dimension at most one",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isField_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f], IsField ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"If $X$ is an integral scheme and the morphism $f: X \\\\to \\\\operatorname{Spec}(K)$ is universally closed, then the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a field.\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f]\\n  [AlgebraicGeometry.LocallyOfFiniteType f], AlgebraicGeometry.ValuativeCriterion f → AlgebraicGeometry.IsProper f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is quasi-compact, quasi-separated, locally of finite type, and satisfies the valuative criterion, then $ f $ is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.compactSpace_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {K : Type u} [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.UniversallyClosed f], CompactSpace ↥X\", \"doc\": \"If $ f: X \\\\to \\\\operatorname{Spec}(K) $ is a universally closed morphism of schemes, where $ K $ is a field, then the underlying topological space of $ X $ is compact.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"The predicate for a scheme to be integral\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.IsProper (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If the zero-graded component $ \\\\mathcal{A}_0 $ of a graded ring $ \\\\mathcal{A} $ is a finitely generated $ A $-algebra, then the canonical morphism from the projective spectrum $ \\\\operatorname{Proj}(\\\\m\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  AlgebraicGeometry.IsFinite f ↔ AlgebraicGeometry.IsProper f ∧ AlgebraicGeometry.IsAffineHom f\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is finite if and only if it is proper and affine, i.e., $ \\\\text{IsFinite}(f) \\\\leftrightarrow \\\\text{IsProper}(f) \\\\land \\\\text{IsAffineHom}(f) $.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.UniversallyClosed (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finite type algebra over a base ring $A$, the canonical morphism $\\\\operatorname{Proj}(\\\\mathcal{A}) \\\\to \\\\operatorname{Sp\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj properness and the flatness class do not algebraize a compatible family of schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Algebraization\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj properness and the flatness class do not algebraize a compatible family of schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "algebraiz|Algebraiz|formalScheme|FormalScheme",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Tactic/Algebraize.lean\", \"line\": \"14\", \"text\": \"## Algebraize tactic\"}\n  {\"file\": \"Mathlib/Tactic/Algebraize.lean\", \"line\": \"16\", \"text\": \"This file defines the `algebraize` tactic. The basic functionality of this tactic is to\"}\n  {\"file\": \"Mathlib/Tactic/Algebraize.lean\", \"line\": \"17\", \"text\": \"automatically add `Algebra` instances given `RingHom`s. For example, `algebraize [f, g]` where\"}\n  {\"file\": \"Mathlib/Tactic/Algebraize.lean\", \"line\": \"23\", \"text\": \"When given a composition of `RingHom`s, e.g. `algebraize [g.comp f]`, the tactic will also try to\"}\n  {\"file\": \"Mathlib/Tactic/Algebraize.lean\", \"line\": \"28\", \"text\": \"`Algebra`. For example, given `f : A →+* B` and `hf : f.FiniteType`, then `algebraize [f]` will add\"}\n  {\"file\": \"Mathlib/Algebra/Category/CommAlgCat/FiniteType.lean\", \"line\": \"53\", \"text\": \"  algebraize [f]\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Descent.lean\", \"line\": \"38\", \"text\": \"  algebraize [f]\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Descent.lean\", \"line\": \"52\", \"text\": \"  algebraize [f]\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Basic.lean\", \"line\": \"154\", \"text\": \"  algebraize [f.hom, f'.hom, g.hom, g'.hom, f'.hom.comp g.hom]\"}\n  {\"file\": \"Mathlib/Algebra/Category/Ring/LinearAlgebra.lean\", \"line\": \"35\", \"text\": \"  algebraize [f.hom, g.hom]\"}\n  {\"file\": \"Mathlib/Algebra/Category/Ring/Constructions.lean\", \"line\": \"168\", \"text\": \"  algebraize [f, fₘ, fₘ.comp (algebraMap R Rₘ)]\"}\n  {\"file\": \"Mathlib/Algebra/Category/Ring/Constructions.lean\", \"line\": \"177\", \"text\": \"  algebraize [f.hom, g.hom]\"}\n  {\"file\": \"Mathlib/Algebra/Category/Ring/Under/Property.lean\", \"line\": \"186\", \"text\": \"  algebraize [f.hom]\"}\n  {\"file\": \"Mathlib/Algebra/Category/Ring/EqualizerPushout.lean\", \"line\": \"45\", \"text\": \"  algebraize [f.hom]\"}\n  {\"file\": \"Mathlib/Algebra/Category/Ring/Epi.lean\", \"line\": \"48\", \"text\": \"  algebraize [f.hom]\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Field/Krasner.lean\", \"line\": \"124\", \"text\": \"    algebraize [iL.toRingHom]\"}\n  {\"file\": \"Mathlib/RingTheory/NoetherNormalization.lean\", \"line\": \"293\", \"text\": \"    algebraize [g.toRingHom]\"}\n  {\"file\": \"Mathlib/RingTheory/IntegralClosure/IsIntegral/Defs.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.Tactic.Algebraize\"}\n  {\"file\": \"Mathlib/RingTheory/IntegralClosure/IsIntegral/Defs.lean\", \"line\": \"44\", \"text\": \"@[algebraize Algebra.IsIntegral.mk, stacks 00GI \\\"(2)\\\"]\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/Norm/RelNorm.lean\", \"line\": \"121\", \"text\": \"  algebraize [f, g, (algebraMap K L).comp f]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Basic.lean\", \"line\": \"135\", \"text\": \"  algebraize [φ.hom]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Basic.lean\", \"line\": \"145\", \"text\": \"  algebraize [φ.hom]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"line\": \"563\", \"text\": \"  algebraize [φ.hom]\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"line\": \"1160\", \"text\": \"  algebraize [f]\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"line\": \"1185\", \"text\": \"  algebraize [f]\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj properness and the flatness class do not algebraize a compatible family of schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A compatible system of proper flat curves over a complete local Noetherian ring algebraizes to a flat projective scheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"Algebra.Smooth.flat_of_isNoetherianRing\", \"module\": \"Mathlib.RingTheory.Smooth.Flat\", \"type\": \"[IsNoetherianRing R] [Smooth R A] : Module.Flat R A\", \"doc\": \"Let $ R $ be a Noetherian ring and $ A $ a smooth $ R $-algebra. Then $ A $ is flat as an $ R $-module.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $V \\\\subseteq f^{-1}(U)$, the ring homomorphism $\\\\Gamma(U, \\\\mathc\"}\n  {\"name\": \"AlgebraicGeometry.Flat.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.Flat f → Sort u_1} →\\n      (t : AlgebraicGeometry.Flat f) →\\n        ((flat_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                  ∀ {V : X.Opens},\\n                 \", \"doc\": \"A function that allows defining or proving properties of a flat morphism $ f : X → Y $ of schemes by verifying the flatness condition on affine open subsets $ U ⊆ Y $ and $ V ⊆ X $, where $ V $ maps i\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatMono\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [Flat f] [QuasiCompact f] [Surjective f] [Mono f] : IsIso f\", \"doc\": \"If $ f : X \\to Y $ is a morphism of schemes that is flat, quasi-compact, surjective, and a monomorphism, then $ f $ is an isomorphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y Z : Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [hf : Flat f] [hg : Flat g] : Flat (f ≫ g)\", \"doc\": \"Flat morphisms of schemes form a category, where the objects are schemes and the morphisms are flat morphisms between them. Composition and identity morphisms are inherited from the category of scheme\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj properness and the flatness class do not algebraize a compatible family of schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "formalScheme|FormalScheme|algebraization|algebraisation",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: focused search in AlgebraicGeometry finds no formal-scheme algebraization theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compatible system of proper flat curves over k[[t]] algebraizes to a flat projective scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then the underlying continuous map $ f $ satisfies the generalizing property: for any $ x \\\\in X $ and $ y \\\\in Y $ such that $ y $ specializes to $ f(x\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to Z $ is als\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.ValuativeCriterion.Existence (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$ satisfies the valuative criterion for existence, provided t\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instDescScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {ι : Type v} [inst : Small.{u, v} ι] {Y : ι → AlgebraicGeometry.Scheme}\\n  {f : (i : ι) → Y i ⟶ X} [∀ (i : ι), AlgebraicGeometry.Flat (f i)],\\n  AlgebraicGeometry.Flat (CategoryTheory.Limits.Sigma.desc f)\", \"doc\": \"Given a scheme $X$ and a small family of schemes $\\\\{Y_i\\\\}$ indexed by $i : Ι$, if each morphism $f_i : Y_i \\to X$ is flat, then the coproduct morphism $\\\\coprod f_i : \\\\coprod Y_i \\to X$ is also flat. Thi\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.Flat\", \"doc\": \"The composition of two flat morphisms of schemes is also a flat morphism. Specifically, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: flatness criteria, the power-series DVR instance and Proj properness do not construct an algebraization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence of a projective scheme realizing all infinitesimal thickenings of a proper curve",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, where $\\\\mathcal{A}_0$ i\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.UniversallyClosed (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finite type algebra over a base ring $A$, the canonical morphism $\\\\operatorname{Proj}(\\\\mathcal{A}) \\\\to \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.IsProper (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If the zero-graded component $ \\\\mathcal{A}_0 $ of a graded ring $ \\\\mathcal{A} $ is a finitely generated $ A $-algebra, then the canonical morphism from the projective spectrum $ \\\\operatorname{Proj}(\\\\m\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], (AlgebraicGeometry.Proj 𝒜).IsSeparated\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is a separated scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.ValuativeCriterion.Existence (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$ satisfies the valuative criterion for existence, provided t\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionGlueDataObjι\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) (U : ↑X.affineOpens),\\n  AlgebraicGeometry.IsPreimmersion (I.glueDataObjι U)\", \"doc\": \"For a scheme $X$ with ideal sheaf data $\\\\mathcal{I}$ and an affine open subset $U \\\\subseteq X$, the morphism associated to the gluing data of the closed subscheme defined by $\\\\mathcal{I}$ is a preimme\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: flatness criteria, the power-series DVR instance and Proj properness do not construct an algebraization"
+  },
+  {
+   "tool": "grep",
+   "query": "formal.*curve|curve.*formal|algebraiz.*scheme|scheme.*algebraiz",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean\", \"line\": \"68\", \"text\": \"/-- The L-function of a Weierstrass curve `W` over a number field `K` as a formal Dirichlet series.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: flatness criteria, the power-series DVR instance and Proj properness do not construct an algebraization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraization of proper flat formal curves over a power series ring",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $V \\\\subseteq f^{-1}(U)$, the ring homomorphism $\\\\Gamma(U, \\\\mathc\"}\n  {\"name\": \"RingHom.Flat\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \"{R : Type u} {S : Type v} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, the property that $ S $ is a flat $ R $-module under the induced algebra structure defined by $ f $. This means that\"}\n  {\"name\": \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"module\": \"Mathlib.RingTheory.Smooth.Flat\", \"type\": \"(f : S →ₐ[R] A) (hf : Function.Surjective f) [Module.Flat R S] [IsNoetherianRing S] [FormallySmooth R A] :\\n  Module.Flat R A\", \"doc\": \"Let $ R $ be a commutative ring, $ S $ a Noetherian $ R $-algebra that is flat over $ R $, and $ A $ a formally smooth $ R $-algebra. If there exists a surjective $ R $-algebra homomorphism $ f: S \\to \"}\n  {\"name\": \"AlgebraicGeometry.Flat.comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y Z : Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [hf : Flat f] [hg : Flat g] : Flat (f ≫ g)\", \"doc\": \"Flat morphisms of schemes form a category, where the objects are schemes and the morphisms are flat morphisms between them. Composition and identity morphisms are inherited from the category of scheme\"}\n  {\"name\": \"PowerSeries.instIsDiscreteValuationRing\", \"module\": \"Mathlib.RingTheory.PowerSeries.Inverse\", \"type\": \": IsDiscreteValuationRing k⟦X⟧\", \"doc\": \"For any field $ k $, the ring of formal power series $ k⟦X⟧ $ is a discrete valuation ring. This means $ k⟦X⟧ $ is a principal ideal domain with a unique non-zero prime ideal (generated by $ X $), and\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsMultiplicative @Flat\", \"doc\": \"The property of being a flat morphism of schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to Z $ is als\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"[Flat f] (x : X) : (f.stalkMap x).hom.Flat\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. Then for any point $x \\\\in X$, the induced ring homomorphism on stalks, $f_x^\\\\sharp: \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$, is a flat ring homomo\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: flatness criteria, the power-series DVR instance and Proj properness do not construct an algebraization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"formal\", \"scheme\"",
+   "results": "[loogle] OK 7 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \" : CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.FormallyUnramified\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.FormallyUnramified\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderCompositionScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.FormallyUnramified\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)] : AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"`f : X ⟶ S` is formally unramified if `X ⟶ X ×ₛ X` is an open immersion.\\nIn particular, monomorphisms (e.g. immersions) are formally unramified.\\nThe converse is true if `f` is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.formallyUnramified_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.FormallyUnramified f] {U : Y.Opens} : AlgebraicGeometry.IsAffineOpen U → ∀ {V : X.Opens}, AlgebraicGeometry.IsAffineOpen V → ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.H\", \"doc\": \"**Alias** of `AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE`.\"}\n  {\"name\": \"AlgebraicGeometry.Etale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \" : CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.Etale) (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeFormallyUnramifiedMinMorphismPropertySurjectiveFlatQuasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalFlatDescent\", \"type\": \" : CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.FormallyUnramified) (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: flatness criteria, the power-series DVR instance and Proj properness do not construct an algebraization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-isolated-lci-curve-smoothing",
+  "date": "2026-10-22",
+  "group": "Q21"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Smoothing a proper curve with isolated complete-intersection singularities. Supporting input: Algebraization of proper flat formal curves over a power-series ring.",
+   "via": [
+    "lem-sfb-isolated-lci-curve-smoothing",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-proper-formal-curve-algebraization",
+  "worker": "stage1",
+  "summary": "Lift an ample line bundle through the given thickenings by existing 09NY; apply a new polarized Grothendieck algebraization node (089A), stated without dimension or flatness hypotheses. Prove flatness on the closed fibre directly from existing flat-module-powers (0523), then over the generic field; check finite presentation over the Noetherian base. Only one new statement-only node. The already corrected properness hypothesis is retained.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Smoothing a proper curve with isolated complete-intersection singularities. Supporting input: Algebraization of proper flat formal curves over a power-series ring. Steps 1-4 realize this algebraization input by the ample-line-bundle lifting and polarized effectivity argument of 0E7R; steps 5-8 supply finite presentation and flatness required by the smoothing parent.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "why": "Generic tool for this algebraization argument: Power series over a field or a Cohen ring: complete regular local domain. It supplies exactly the statement used in the numbered proof; this unit has no replacement for that general scheme/ring fact."
+   },
+   {
+    "node": "lem-sc-dim-one-ample-invertible",
+    "why": "Generic tool for this algebraization argument: A separated finite-type scheme of dimension at most one has an ample invertible sheaf. It supplies exactly the statement used in the numbered proof; this unit has no replacement for that general scheme/ring fact."
+   },
+   {
+    "node": "lem-sc-pic-lift-closed-immersion-dim-le-one",
+    "why": "Generic tool for this algebraization argument: Invertible modules lift along a closed immersion into a Noetherian space of dimension at most one. It supplies exactly the statement used in the numbered proof; this unit has no replacement for that general scheme/ring fact."
+   },
+   {
+    "node": "lem-weil-pbc-flat-module-powers",
+    "why": "Generic tool for this algebraization argument: Flatness modulo all powers of an ideal implies flatness (Noetherian case). It supplies exactly the statement used in the numbered proof; this unit has no replacement for that general scheme/ring fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-sc-dim-one-ample-invertible",
+  "lem-sc-pic-lift-closed-immersion-dim-le-one",
+  "lem-weil-pbc-flat-module-powers"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q78-075b80480",
+  "group": "Q78",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q78-075b80480 (reviewer sub-agent of L); spot-checked: I read the item, the one new node, every cited statement, and the Stacks sources: coherent.tex 089A (statement and full proof) and 0899; spaces-more-morphisms 0E7R (statement and proof); 0523, 09NY, 09NZ and 032C via their nodes. The item and its parent are not on the 2026-10-19 dropped list. This is the item's first split; the re-split note belongs to the parent lci-curve-smoothing. All sources are Stacks, no SGA. The statement is unchanged apart from two added definition citations. All split dependencies (sk-thm-p1, sk-thm-curveestimate) are on the unit route; the off-route ones are Mathlib leaves. Steps: 1 (R Noetherian, complete, local; X_n Noetherian) is OK. 2 (i_n is a closed immersion cut out by the nilpotent ideal t^n, so a homeomorphism, dimension preserved, Noetherian space) is OK. 3 (ample L_1 from 09NZ; inductive Pic lift via 09NY on X_{n+1}, which is Noetherian of dimension at most 1) is OK and is equivalent to 0E7R's H^2 vanishing. 5 (finite type over a locally Noetherian base gives finite presentation) is OK; I added a correct reason for quasi-separatedness. 6-7 (B/t^nB flat over R_n, then 0523 with M=B finite over B gives B_q flat over R for q containing t) are OK. 8 (Spec k[[t]] = {(0),(t)}; over (0) the base local ring is a field) is OK. New node lem-sfb-polarized-formal-algebraization matches 089A hypothesis by hypothesis, and its P^N clause comes from 089A's proof together with 0899. It is statement-only with five searches and is not a duplicate: the existing nodes 0885, 0884, 088C and 09MS only supply its future split. It is strictly more general than the item and not one of its clauses. Edge cases: I=A forces A=0; I=0 gives a constant system; X_1 empty gives Y empty. Fault (E1/C4): the new node gave isomorphisms a_n: X_n -> Y x_S S_n without saying they are over S_n. Compatibility with i_n does not force this (k[t]/t^n has automorphisms t -> ut), but the item's R_n-isomorphisms and the flatness transport in step 6 need it. I fixed the node to say 'over S_n' and to spell out what compatibility of a_n means, and step 4 of the item now states this. The corrected whole files are under fixes/dag/nodes/sec-six-functors-basics/. I accept the worker's on-route tool_uses as recorded.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperFormalCurveAlgebraization",
+  "declaration": "AlgebraicGeometry.proper_formal_curve_algebraization",
+  "declarations": [
+   "AlgebraicGeometry.formalCurveBase",
+   "AlgebraicGeometry.formalCurveBaseι",
+   "AlgebraicGeometry.formalCurveBaseStep",
+   "AlgebraicGeometry.proper_formal_curve_algebraization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperFormalCurveAlgebraization.lean",
+  "statement": "theorem proper_formal_curve_algebraization (k : Type u) [Field k] (X : ℕ → Scheme.{u}) (f : ∀ n : ℕ, X n ⟶ formalCurveBase k n) [∀ n : ℕ, IsProper (f n)] [∀ n : ℕ, Flat (f n)] [∀ n : ℕ, LocallyOfFinitePresentation (f n)] [∀ n : ℕ, QuasiCompact (f n)] [∀ n : ℕ, QuasiSeparated (f n)] (i : ∀ n : ℕ, X n ⟶ X (n + 1)) (hcart : ∀ n : ℕ, IsPullback (i n) (f n) (f (n + 1)) (formalCurveBaseStep k n)) (hdim : topologicalKrullDim (X 0) ≤ (1 : WithBot ℕ∞)) : ∃ (Y : Scheme.{u}) (g : Y ⟶ Spec (.of (PowerSeries k))), Flat g ∧ LocallyOfFinitePresentation g ∧ QuasiCompact g ∧ QuasiSeparated g ∧ IsHProjective g ∧ ∃ e : ∀ n : ℕ, pullback g (formalCurveBaseι k n) ≅ X n, (∀ n : ℕ, (e n).hom ≫ f n = pullback.snd g (formalCurveBaseι k n)) ∧ (∀ n : ℕ, (e n).inv ≫ pullback.fst g (formalCurveBaseι k n) = i n ≫ (e (n + 1)).inv ≫ pullback.fst g (formalCurveBaseι k (n + 1)))",
+  "branch": "newtargets-dag",
+  "by": "Q130",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The natural index n denotes the positive stage n+1. The three helper definitions are the explicit quotient base and canonical quotient-base maps of this node; no new abstract formal-scheme notion is introduced. Cartesian transition squares encode the supplied identifications, and the conclusion requires isomorphisms over every quotient base together with transition compatibility."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9d64154ac",
+  "group": "Q130",
+  "result": "pass",
+  "note": "Every clause matches the node: k[[t]] as PowerSeries k; R_n = k[[t]]/(t)^(n+1) with the index shift covering all n>=1; proper, flat and LOFP∧QC∧QS (QC/QS implied by IsProper, so no stronger assumption); adjacent IsPullback squares oriented correctly; topologicalKrullDim (X 0) ≤ 1. Conclusion: Flat, finite presentation, IsHProjective (matches the def-kun-projective record and live source), isomorphisms over each quotient base with transition compatibility. Helpers are real Spec.map of quotient/factor maps, step direction checked. Edge cases (empty, dim 0, any characteristic, universe u) covered. lean.statement verbatim; only the lean field differs from the live node; not dropped, no competing record; the 7 proof-module imports exist; whole sorry; 8-step docstring. No compile needed (no changes)."
+ }
+}

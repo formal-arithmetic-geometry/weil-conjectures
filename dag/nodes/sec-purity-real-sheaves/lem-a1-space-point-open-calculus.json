@@ -1,0 +1,274 @@
+{
+ "id": "lem-a1-space-point-open-calculus",
+ "kind": "statement",
+ "title": "Point images, continuity, and open embeddings for algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Use algebraic spaces over $S$ [def-trf-algebraic-space], their field-valued point classes and atlas topology [def-a1-space-point-topology], and open subspaces [def-a1-space-open-subspace]. For arbitrary morphisms $a:A\\to B$ and $c:C\\to B$, the map $|A\\times_BC|\\to |A|\\times_{|B|}|C|$ is surjective, and $\\operatorname{im}(|A\\times_BC|\\to|C|)=|c|^{-1}(\\operatorname{im}|a|)$; fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. A representable map $a:A\\to B$ is surjective on every scheme base change if and only if $|a|$ is surjective. Every morphism of algebraic spaces induces a continuous point map. If it is representable etale, its point map is open. For an open subspace $j:J\\hookrightarrow B$, $|j|$ is injective and identifies $|J|$ homeomorphically with an open subset of $|B|$. For any scheme atlas $p:U\\to B$, the inverse image of that subset is the underlying open of $U\\times_BJ$. If $J_1,J_2\\subseteq B$ are open subspaces, then $|J_1|\\subseteq|J_2|$ if and only if $J_1\\subseteq J_2$ as subfunctors. In particular an open subspace with full point image equals $B$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tags 03H4 (lemma-points-cartesian), 03H5 (lemma-characterize-surjective), 03BX (lemma-topology-points), 03BZ (lemma-open-subspaces, inclusion and topology), 03IR (lemma-etale-open)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-a1-space-point-topology",
+  "def-a1-space-open-subspace",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "Prove the common-field relation of [def-a1-algebraic-space-point-classes] is an equivalence. For transitivity of p~q and q~r, form the scheme pullback of the two common-field spectra over the spectrum of q's field. Their unique points have the same image; [lem-weil-pbc-scheme-pullback-compatible-point] gives a point of the pullback. Its residue-field spectrum maps to both common fields compatibly over the middle field and the base, so restricting both equalities gives p~r. Thus equality in Quot is actual common-field agreement. Identify ordinary scheme points with Yoneda point classes: a representative maps to the image of its unique point, and [lem-weil-pbc-morphism-from-spec-field] factors it through that image's residue field. Common-field agreement preserves the ordinary image, proving injectivity and surjectivity, naturally in scheme morphisms.",
+   "uses": [
+    "def-a1-algebraic-space-point-classes",
+    "lem-weil-pbc-scheme-pullback-compatible-point",
+    "lem-weil-pbc-morphism-from-spec-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03BV (lemma-scheme-points), using schemes.tex Tag 01J9 (lemma-characterize-points)."
+   }
+  },
+  {
+   "text": "For any presheaf pullback square, choose field representatives of two compatible point classes. Step 1 gives a common field on which their images agree. Yoneda turns the restricted sections into compatible maps from that field spectrum; the categorical pullback lift defines a representative projecting to both classes. The sheaf-to-presheaf functor preserves pullbacks, so this applies to the displayed sheaf pullback of algebraic spaces. Commutativity gives one inclusion in the projection-image formula, and the compatible-pair lift gives the other.",
+   "uses": [
+    "def-a1-algebraic-space-point-classes",
+    "def-sfb-proper-curve-moduli"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03H4 (lemma-points-cartesian), common-field proof and its image consequence."
+   }
+  },
+  {
+   "text": "For any representable map, its representing scheme-test square has projection image equal to the inverse image of its point image: apply step 2 and the scheme-point bijections and naturality of step 1. If the map is point-surjective, this makes every test projection surjective. Conversely test a field representative using scheme-test surjectivity from [def-trf-algebraic-space]. Choose a point over the unique point of the field spectrum; its residue-field representative maps to the original class. Hence scheme-test surjectivity and point-surjectivity agree.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-a1-algebraic-space-point-classes",
+    "lem-weil-pbc-morphism-from-spec-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03H5 (lemma-characterize-surjective), same argument with arbitrary representable source."
+   }
+  },
+  {
+   "text": "Compare the topology in [lem-a1-space-affine-etale-cover] with the final topology of [def-a1-space-point-topology]. All etale tests are continuous for the former; its atlas is itself one of the latter's tests. The two topology inequalities give equality. The scheme-source continuity clause then proves continuity for every map from an arbitrary presheaf to an algebraic space: on every etale scheme test of the source, the composite point map is the continuous scheme point map to the target. Use the final-topology criterion.",
+   "uses": [
+    "lem-a1-space-affine-etale-cover",
+    "def-a1-space-point-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03BX (lemma-topology-points), quotient topology and continuity."
+   }
+  },
+  {
+   "text": "For a representable etale map to B choose a surjective etale scheme atlas W→B. Its pullback is represented by V with an etale scheme projection i:V→W. The other map q:h_V→A is representable etale and surjective: test the corresponding properties of W→B on a composite scheme test, and use pullback cancellation. Its point map is continuous by the final-topology definition and surjective by the residue-field construction of step 3. The composite |f|∘|q|=|w|∘|i| is open, since i is etale and the atlas point map is open by [lem-a1-space-affine-etale-cover]. An open composite descends along the continuous surjection |q|, proving openness of |f|. This also applies when A is an arbitrary presheaf.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-a1-space-point-topology",
+    "lem-a1-space-affine-etale-cover",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03IR (lemma-etale-open), scheme-atlas reduction; morphisms.tex Tags 02GN (lemma-composition-etale) and 02GP (lemma-open-immersion-etale)."
+   }
+  },
+  {
+   "text": "An open-subfunctor inclusion is representable etale: its scheme tests are open immersions by [def-a1-space-open-subspace], hence etale by [lem-weil-pbc-etale-composition-cancellation](1). It is injective on point classes because common-field equality in the ambient functor already holds in the subfunctor. Steps 4 and 5 therefore make it a continuous open injection, hence an open embedding. On any scheme atlas its representing square is an open immersion by definition, and step 3 identifies its ordinary image with the inverse image of the point image.",
+   "uses": [
+    "def-a1-space-open-subspace",
+    "def-a1-algebraic-space-point-classes",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 03BZ (lemma-open-subspaces, topology of the inclusion), 03H4 (lemma-points-cartesian), and 03IR (lemma-etale-open)."
+   }
+  },
+  {
+   "text": "Subfunctor inclusion implies point-image inclusion by composing representatives. Conversely take any section of J1 over T and pull the open subfunctor J2 back to T. By step 3 every ordinary point of T is in the image of the representing open immersion, because its residue-field class lies in J1 and hence in J2. The open immersion is therefore surjective and is an isomorphism by [def-weil-open-immersion]. Its inverse lifts the original section into J2. This proves subfunctor inclusion objectwise without requiring J1 to be open. Apply this argument with J1 the full subfunctor to prove that full point image forces J2 to be the full subfunctor.",
+   "uses": [
+    "def-a1-space-open-subspace",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03BZ (lemma-open-subspaces), inclusion; Tag 03IE (lemma-factor-through-open-subspace), scheme-test argument for full point image."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-a1-algebraic-space-point-classes",
+  "def-a1-space-open-subspace",
+  "def-a1-space-point-topology",
+  "def-sfb-proper-curve-moduli",
+  "def-trf-algebraic-space",
+  "def-weil-open-immersion",
+  "lem-a1-space-affine-etale-cover",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-morphism-from-spec-field",
+  "lem-weil-pbc-scheme-pullback-compatible-point"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tags 03BU (common-field equivalence), 03BV/01J9 (scheme points), 03H4 (compatible pairs), 03H5 (surjectivity), 03BX (continuity), 03IR (etale openness), 03BZ and 03IE (open subfunctors). X3 implements the relation equivalence via a scheme pullback, proves the presheaf point calculus directly, and descends openness from a target atlas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Algebraic space field valued point images commute with fiber products, open subspaces embed topologically and detect inclusion",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.map_mem_image_iff\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f] {U : X.Opens} {x : ↥X},\\n  (CategoryTheory.ConcreteCategory.hom f.base) x ∈ (AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj U ↔ x ∈ U\", \"doc\": \"For an open immersion $ f: X \\\\to Y $ of schemes, an open subset $ U \\\\subseteq X $, and a point $ x \\\\in X $, the image of $ x $ under the continuous map $ f_{\\\\text{base}} $ lies in the open subset $ f(\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.apply_mem_image_iff\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsOpenImmersion f] {U : X.Opens} {x : X} : f x ∈ f ''ᵁ U ↔ x ∈ U\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes. For any point $x$ in $X$ and any open subset $U$ of $X$, the image point $f(x)$ is in the image set $f(U)$ if and only if $x$ is in $U$.\"}\n  {\"name\": \"AlgebraicGeometry.isOpenImmersion_eq_inf\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion\", \"type\": \": @IsOpenImmersion = (topologically IsOpenEmbedding) ⊓ stalkwise (Function.Bijective ·)\", \"doc\": \"A morphism of schemes is an open immersion if and only if it is a topological open embedding and induces bijective maps on all stalks.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.instIsOverι\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"(U : X.Opens) : U.ι.IsOver X\", \"doc\": \"For a scheme $X$ and an open subset $U$ of its underlying topological space, the canonical inclusion morphism from the restricted scheme $U$ to $X$ is over $X$, meaning the triangle formed by the incl\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.mem_ι_image_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"{x : U} {V : Opens U} : (x : X) ∈ U.ι ''ᵁ V ↔ x ∈ V\", \"doc\": \"For a point $x$ in an open subset $U$ of a scheme $X$ and an open subset $V$ of $U$, the point $x$ (viewed as an element of $X$) lies in the image of the canonical inclusion morphism $\\\\iota: X|_U \\\\to \"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.instOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"[IsOpenImmersion f] : UniversallyOpen f\", \"doc\": \"Every open immersion of schemes is a universally open morphism. That is, if $ f: X \\to Y $ is an open immersion (a morphism that is a topological open embedding with isomorphic stalks on the image), th\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.comp\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"{X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) [IsOpenImmersion f] [IsOpenImmersion g] : IsOpenImmersion (f ≫ g)\", \"doc\": \"The composition of two open immersions $ f: X \\to Y $ and $ g: Y \\to Z $ between schemes is itself an open immersion. This follows because the composition preserves the topological open embedding proper\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": MorphismProperty.HasOfPostcompProperty @IsOpenImmersion @IsOpenImmersion\", \"doc\": \"The composition of two open immersions between schemes is again an open immersion. This means that if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are open immersions of schemes, then their composition $ g \\\\circ\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern schemes, ring maps, or generic topology; none supplies this statement for field-valued point classes of algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Points of a fiber product of algebraic spaces surject onto pairs of points with equal image; all morphisms are continuous and representable etale morphisms are open",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving.exists_preimage_snd_triplet_of_prop\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme}\\n  [AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P] {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S}\\n  [inst : CategoryTheory.Limits.HasPullback f g],\\n  P f →\\n    ∀ (x : ↥X) (y : ↥Y),\\n      (CategoryTheory.ConcreteCa\", \"doc\": \"Given a jointly surjective preserving morphism property $P$, schemes $X,Y,S$ with morphisms $f:X\\\\to S$ and $g:Y\\\\to S$ satisfying $P(f)$, and points $x\\\\in X$, $y\\\\in Y$ such that $f(x)=g(y)$, there exis\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving.exists_preimage_fst_triplet_of_prop\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme}\\n  [self : AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P] {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S}\\n  {g : Y ⟶ S} [inst : CategoryTheory.Limits.HasPullback f g],\\n  P g →\\n    ∀ (x : ↥X) (y : ↥Y),\\n      (CategoryTheory.Con\", \"doc\": \"Given a morphism property $ P $ preserved under jointly surjective families in the category of schemes, if $ P $ holds for a morphism $ g : Y \\\\to S $, then for any points $ x \\\\in X $ and $ y \\\\in Y $ w\"}\n  {\"name\": \"AlgebraicGeometry.Surjective.instFstScheme\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.Surjective g],\\n  AlgebraicGeometry.Surjective (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"In the category of schemes, for morphisms $ f : X \\\\to Z $ and $ g : Y \\\\to Z $, if $ g $ is surjective, then the first projection morphism from the pullback of $ f $ and $ g $ to $ X $ is also surjecti\"}\n  {\"name\": \"AlgebraicGeometry.Surjective.instSndScheme\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.Surjective f],\\n  AlgebraicGeometry.Surjective (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"In the category of schemes, if $ f: X \\to Z $ is a surjective morphism and $ g: Y \\to Z $ is any morphism, then the second projection morphism from the fiber product $ X \\times_Z Y $ to $ Y $ is also sur\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsJointlySurjectivePreservingIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty\", \"type\": \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving AlgebraicGeometry.IsOpenImmersion\", \"doc\": \"In the category of schemes, the property of being an open immersion is preserved under jointly surjective families of morphisms.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), CategoryTheory.Limits.HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.forget_comparison_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S),\\n  Function.Surjective (CategoryTheory.Limits.pullbackComparison AlgebraicGeometry.Scheme.forget f g)\", \"doc\": \"For any morphisms $f : X \\\\to S$ and $g : Y \\\\to S$ in the category of schemes, the comparison morphism induced by the forgetful functor from schemes to types is surjective. This means that every compat\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.pullbackComparison_forget_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S),\\n  Function.Surjective (CategoryTheory.Limits.pullbackComparison AlgebraicGeometry.Scheme.forget f g)\", \"doc\": \"The function obtained by applying the forgetful functor from the category of schemes to the category of sets to the pullback comparison morphism is surjective.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern schemes, ring maps, or generic topology; none supplies this statement for field-valued point classes of algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"Point\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern schemes, ring maps, or generic topology; none supplies this statement for field-valued point classes of algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|OpenSubspace|points_cartesian",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern schemes, ring maps, or generic topology; none supplies this statement for field-valued point classes of algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open immersion of algebraic spaces is an open embedding on point classes and containment of point images implies containment of open subfunctors",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.image_le_image_iff\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f] (U U' : X.Opens),\\n  (AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj U ≤ (AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj U' ↔ U ≤ U'\", \"doc\": \"For an open immersion $ f: X \\\\to Y $ of schemes and open subsets $ U, U' \\\\subseteq X $, the image of $ U $ under $ f $ is contained in the image of $ U' $ if and only if $ U $ is contained in $ U' $. \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.image_le_image_of_le\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [H : AlgebraicGeometry.IsOpenImmersion f] {U V : X.Opens},\\n  U ≤ V → (AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj U ≤ (AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj V\", \"doc\": \"For an open immersion $ f: X \\\\to Y $ of schemes, if $ U \\\\subseteq V $ are open subsets of $ X $, then the image of $ U $ under the functor induced by $ f $ satisfies $ f(U) \\\\subseteq f(V) $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.apply_mem_image_iff\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f] {U : X.Opens} {x : ↥X},\\n  (CategoryTheory.ConcreteCategory.hom f.base) x ∈ (AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj U ↔ x ∈ U\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes. For any point $x$ in $X$ and any open subset $U$ of $X$, the image point $f(x)$ is in the image set $f(U)$ if and only if $x$ is in $U$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.image_le_opensRange\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [H : AlgebraicGeometry.IsOpenImmersion f] (U : X.Opens),\\n  (AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj U ≤ AlgebraicGeometry.Scheme.Hom.opensRange f\", \"doc\": \"For any open subset $U$ of a scheme $X$ and an open immersion $f: X \\\\to Y$ of schemes, the image of $U$ under $f$ is contained within the open subset $f(X) \\\\subseteq Y$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.map_mem_image_iff\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f] {U : X.Opens} {x : ↥X},\\n  (CategoryTheory.ConcreteCategory.hom f.base) x ∈ (AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj U ↔ x ∈ U\", \"doc\": \"For an open immersion $ f: X \\\\to Y $ of schemes, an open subset $ U \\\\subseteq X $, and a point $ x \\\\in X $, the image of $ x $ under the continuous map $ f_{\\\\text{base}} $ lies in the open subset $ f(\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.image_mono\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [H : AlgebraicGeometry.IsOpenImmersion f] {U V : X.Opens},\\n  U ≤ V → (AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj U ≤ (AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj V\", \"doc\": \"For an open immersion $ f: X \\\\to Y $ of schemes, the induced functor on open subsets preserves inclusion, i.e., if $ U \\\\subseteq V $ are open subsets of $ X $, then $ f(U) \\\\subseteq f(V) $ as open sub\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.opensFunctor_map_homOfLE\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [H : AlgebraicGeometry.IsOpenImmersion f] {U V : X.Opens} (e : U ≤ V),\\n  (AlgebraicGeometry.Scheme.Hom.opensFunctor f).map (CategoryTheory.homOfLE e) = CategoryTheory.homOfLE ⋯\", \"doc\": \"For an open immersion $ f: X \\to Y $ of schemes, the induced functor on open subsets maps the inclusion morphism from $ U $ to $ V $ in $ X $ to the inclusion morphism from $ f(U) $ to $ f(V) $ in $ Y \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.ι_image_homOfLE_le_ι_image\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U V : X.Opens} (e : U ≤ V) (W : (↑V).Opens),\\n  (AlgebraicGeometry.Scheme.Hom.opensFunctor U.ι).obj ((TopologicalSpace.Opens.map (X.homOfLE e).base).obj W) ≤\\n    (AlgebraicGeometry.Scheme.Hom.opensFunctor V.ι).obj W\", \"doc\": \"For any open subsets $ U \\\\subseteq V $ of a scheme $ X $ and any open subset $ W $ of $ V $, the image of the preimage of $ W $ under the morphism $ X|_U \\\\to X|_V $ via the inclusion $ U \\\\to X $ is co\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern schemes, ring maps, or generic topology; none supplies this statement for field-valued point classes of algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Points of fiber products of algebraic spaces surject onto compatible pairs of point classes; every algebraic space morphism is continuous and representable etale maps are open",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.forget_comparison_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S),\\n  Function.Surjective (CategoryTheory.Limits.pullbackComparison AlgebraicGeometry.Scheme.forget f g)\", \"doc\": \"For any morphisms $f : X \\\\to S$ and $g : Y \\\\to S$ in the category of schemes, the comparison morphism induced by the forgetful functor from schemes to types is surjective. This means that every compat\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.pullbackComparison_forget_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S),\\n  Function.Surjective (CategoryTheory.Limits.pullbackComparison AlgebraicGeometry.Scheme.forget f g)\", \"doc\": \"The function obtained by applying the forgetful functor from the category of schemes to the category of sets to the pullback comparison morphism is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsJointlySurjectivePreservingIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty\", \"type\": \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving AlgebraicGeometry.IsOpenImmersion\", \"doc\": \"In the category of schemes, the property of being an open immersion is preserved under jointly surjective families of morphisms.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate on morphism properties in the category of schemes, asserting that the property is preserved under jointly surjective families of morphisms.\"}\n  {\"name\": \"AlgebraicGeometry.Surjective.instFstScheme\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.Surjective g],\\n  AlgebraicGeometry.Surjective (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"In the category of schemes, for morphisms $ f : X \\\\to Z $ and $ g : Y \\\\to Z $, if $ g $ is surjective, then the first projection morphism from the pullback of $ f $ and $ g $ to $ X $ is also surjecti\"}\n  {\"name\": \"AlgebraicGeometry.Surjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is surjective if the underlying continuous map on topological spaces is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isJointlySurjectivePreserving\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme),\\n  AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P\", \"doc\": \"In the category of schemes, a morphism property is preserved under jointly surjective families of morphisms. This means that if a property holds for each morphism in a jointly surjective family, then \"}\n  {\"name\": \"AlgebraicGeometry.Surjective.instSndScheme\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.Surjective f],\\n  AlgebraicGeometry.Surjective (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"In the category of schemes, if $ f: X \\to Z $ is a surjective morphism and $ g: Y \\to Z $ is any morphism, then the second projection morphism from the fiber product $ X \\times_Z Y $ to $ Y $ is also sur\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are for schemes or general topology, not field-valued point classes and open subfunctors of algebraic spaces; no AlgebraicSpace declaration was found by the logged source grep."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"Point\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are for schemes or general topology, not field-valued point classes and open subfunctors of algebraic spaces; no AlgebraicSpace declaration was found by the logged source grep."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|points_cartesian|OpenSubspace",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are for schemes or general topology, not field-valued point classes and open subfunctors of algebraic spaces; no AlgebraicSpace declaration was found by the logged source grep."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic space point classes fiber products continuous maps open embeddings of open subspaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Topology.IsOpenEmbedding.prodMap\", \"module\": \"Mathlib.Topology.Constructions.SumProd\", \"type\": \"{f : X → Y} {g : Z → W} (hf : IsOpenEmbedding f) (hg : IsOpenEmbedding g) : IsOpenEmbedding (Prod.map f g)\", \"doc\": \"If $ f : X \\\\to Y $ and $ g : Z \\\\to W $ are open embeddings, then their product map $ f \\\\times g : X \\\\times Z \\\\to Y \\\\times W $ is also an open embedding in the product topology.\"}\n  {\"name\": \"AlgebraicGeometry.isOpenImmersion_iff_stalk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  AlgebraicGeometry.IsOpenImmersion f ↔\\n    Topology.IsOpenEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f.base) ∧\\n      ∀ (x : ↥X), CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.stalkMap f x)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is an open immersion if and only if the underlying continuous map is an open embedding and, for every point $ x \\\\in X $, the induced map on stalks at $ x $ is an i\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.base_open\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} {X Y : AlgebraicGeometry.PresheafedSpace C} {f : X ⟶ Y}\\n  [self : AlgebraicGeometry.PresheafedSpace.IsOpenImmersion f],\\n  Topology.IsOpenEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"For any open immersion $ f : X \\to Y $ between presheafed spaces over a category $\\\\mathcal{C}$, the underlying continuous map $ f_{\\\\text{base}} : X \\to Y $ between their topological spaces is an open em\"}\n  {\"name\": \"AlgebraicGeometry.IsPreimmersion.instOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Preimmersion\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsOpenImmersion f] : IsPreimmersion f\", \"doc\": \"Every open immersion between schemes is a preimmersion. Specifically, if $ f: X \\to Y $ is an open immersion of schemes (i.e., a morphism whose underlying continuous map is a topological open embedding\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.GlueData.ι_isOpenEmbedding\", \"module\": \"Mathlib.Geometry.RingedSpace.PresheafedSpace.Gluing\", \"type\": \"[HasLimits C] (i : D.J) : IsOpenEmbedding (𝖣.ι i).base\", \"doc\": \"For each object $i$ in the indexing category $J$, the underlying continuous map of the inclusion morphism $\\\\iota_i: U(i) \\\\to D.\\\\text{glued}$ into the glued object is an open embedding, meaning it is a\"}\n  {\"name\": \"RestrictedProduct.isOpenEmbedding_structureMap\", \"module\": \"Mathlib.Topology.Algebra.RestrictedProduct.TopologicalSpace\", \"type\": \": IsOpenEmbedding (structureMap R A cofinite)\", \"doc\": \"The canonical embedding from the product of subsets $A_i$ into the restricted product $\\\\prod^\\\\circ_{i \\\\in \\\\iota} [R_i, A_i]_{\\\\mathcal{F}}$ with respect to the cofinite filter is an open embedding, mea\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.instOfRestrict\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \"(X : LocallyRingedSpace) {U : TopCat} (f : U ⟶ X.toTopCat) (hf : IsOpenEmbedding f) :\\n  LocallyRingedSpace.IsOpenImmersion (X.ofRestrict hf)\", \"doc\": \"Given a locally ringed space $ X $, an open subset $ U $, and an open embedding $ f: U \\to X $, the morphism from the restricted locally ringed space $ X|_U $ to $ X $ is an open immersion. This means \"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.instπWalkingCospanSchemeCospanOne\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"[IsOpenImmersion g] : IsOpenImmersion (limit.π (cospan f g) WalkingCospan.one)\", \"doc\": \"The projection from the fiber product of a morphism $ f $ and an open immersion $ g $ to the target scheme $ Y $ is an open immersion. Specifically, given an open immersion $ g: Z \\to Y $ and any morph\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are for schemes or general topology, not field-valued point classes and open subfunctors of algebraic spaces; no AlgebraicSpace declaration was found by the logged source grep."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open subfunctor of an algebraic space gives a topological open embedding, and containment of its field-valued point image detects containment of subfunctors",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.mem_ι_image_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (U : X.Opens) {x : ↥U} {V : (↑U).Opens},\\n  ↑x ∈ (AlgebraicGeometry.Scheme.Hom.opensFunctor U.ι).obj V ↔ x ∈ V\", \"doc\": \"For a point $x$ in an open subset $U$ of a scheme $X$ and an open subset $V$ of $U$, the point $x$ (viewed as an element of $X$) lies in the image of the canonical inclusion morphism $\\\\iota: X|_U \\\\to \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.ι_image_le\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (U : X.Opens) (W : (↑U).Opens),\\n  (AlgebraicGeometry.Scheme.Hom.opensFunctor U.ι).obj W ≤ U\", \"doc\": \"For any open subset $W$ of $U$, the image of $W$ under the canonical inclusion morphism $\\\\iota: U \\\\to X$ is contained in $U$, i.e., $\\\\iota(W) \\\\subseteq U$. This follows from the fact that $W$ is an op\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.image_le_image_iff\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f] (U U' : X.Opens),\\n  (AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj U ≤ (AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj U' ↔ U ≤ U'\", \"doc\": \"For an open immersion $ f: X \\\\to Y $ of schemes and open subsets $ U, U' \\\\subseteq X $, the image of $ U $ under $ f $ is contained in the image of $ U' $ if and only if $ U $ is contained in $ U' $. \"}\n  {\"name\": \"AlgebraicGeometry.instIsOpenImmersionHomOfLE\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U V : X.Opens} (e : U ≤ V), AlgebraicGeometry.IsOpenImmersion (X.homOfLE e)\", \"doc\": \"Given a scheme $X$ and open subsets $U \\\\subseteq V$ of its underlying topological space, this function constructs the morphism from the restricted scheme $X|_U$ to $X|_V$ by lifting through the canoni\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.image_mono\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [H : AlgebraicGeometry.IsOpenImmersion f] {U V : X.Opens},\\n  U ≤ V → (AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj U ≤ (AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj V\", \"doc\": \"For an open immersion $ f: X \\\\to Y $ of schemes, the induced functor on open subsets preserves inclusion, i.e., if $ U \\\\subseteq V $ are open subsets of $ X $, then $ f(U) \\\\subseteq f(V) $ as open sub\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.ι_image_homOfLE_le_ι_image\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U V : X.Opens} (e : U ≤ V) (W : (↑V).Opens),\\n  (AlgebraicGeometry.Scheme.Hom.opensFunctor U.ι).obj ((TopologicalSpace.Opens.map (X.homOfLE e).base).obj W) ≤\\n    (AlgebraicGeometry.Scheme.Hom.opensFunctor V.ι).obj W\", \"doc\": \"For any open subsets $ U \\\\subseteq V $ of a scheme $ X $ and any open subset $ W $ of $ V $, the image of the preimage of $ W $ under the morphism $ X|_U \\\\to X|_V $ via the inclusion $ U \\\\to X $ is co\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.image_le_image_of_le\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [H : AlgebraicGeometry.IsOpenImmersion f] {U V : X.Opens},\\n  U ≤ V → (AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj U ≤ (AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj V\", \"doc\": \"For an open immersion $ f: X \\\\to Y $ of schemes, if $ U \\\\subseteq V $ are open subsets of $ X $, then the image of $ U $ under the functor induced by $ f $ satisfies $ f(U) \\\\subseteq f(V) $.\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.ofRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {U : TopCat} (X : AlgebraicGeometry.Scheme) {f : U ⟶ { carrier := ↥X, str := X.instTopologicalSpaceCarrierCarrier }}\\n  (h : Topology.IsOpenEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f)),\\n  AlgebraicGeometry.IsOpenImmersion (X.ofRestrict h)\", \"doc\": \"The morphism from the restricted scheme $ X|_U $ to $ X $, constructed via an open immersion $ h: U \\\\to X $, is an open immersion. This means the underlying continuous map is the open embedding $ h $,\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are for schemes or general topology, not field-valued point classes and open subfunctors of algebraic spaces; no AlgebraicSpace declaration was found by the logged source grep."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-space-etale-open-image",
+  "date": "2026-10-22",
+  "group": "N7"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "The geometric representability branch beneath lem-a1-affine-hc0, via 03XX and its lemma-neighbourhood-scheme (03XW): first paragraph, open image and its quasi-compactness; fourth paragraph, inverse image of that open. Refines the returned open-image proof: steps 1, 2, 5 and the atlas-composition argument of step 6.",
+   "via": [
+    "lem-a1-space-etale-open-image",
+    "lem-a1-etale-quasi-affine-image-scheme",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-a1-space-point-open-calculus",
+  "worker": "stage1",
+  "summary": "Seven-step split using only existing nodes. Compare scheme points with field-valued classes, construct compatible fibre-product points over a common field, derive representable surjectivity on all scheme tests, use the existing scheme-atlas theorem to obtain final-topology continuity, prove etale openness by an explicit composite scheme test, and prove open embeddings and inclusion by subfunctor injectivity and full-image open scheme tests. Statement and its dependencies are unchanged; no new nodes and no attachment. All cited statements and sources were read; searches run and logged, with scheme-only hits rejected.",
+  "blueprint": "Keeps the existing geometric representability branch below lem-a1-affine-hc0, through lem-a1-space-etale-open-image and its 03XX/03XW support-geometry inputs: supplies precisely the point-image, atlas-topology and open-subspace inclusion calculus used by the first and fourth paragraphs of 03XW. No change to chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Only its first clause is used: sheaf fibre products of algebraic spaces exist and retain their sheaf compatible-pair universal property. This is a generic algebraic-space construction; it invokes no trace-formula or duality statement and does not replace a unit step."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-210f53607",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-210f53607 (reviewer sub-agent of L); spot-checked: PASS: I read the item and all of its mathematics; I made no repairs. The delivery adds no new nodes and changes only the item's proof (seven steps); the statement and stmt_deps match the base. I read the Stacks sources in spaces-properties.tex: 03H4 points-cartesian, 03H5 characterize-surjective, 03BX topology-points, 03BZ open-subspaces and 03IR etale-open, with tags/tags confirming the labels. Every cited statement says what its step takes from it. Step 1 identifies scheme points with field classes using the morphism-from-Spec-field leaf (factorisation through the residue field). Step 2 is the 03H4 argument over a common field M, using sectionwise sheaf fibre products. Step 3 is the 03H5 argument for a representable source, where A×_B T is a scheme. Step 4 shows the quotient topology equals the final topology (each test is continuous, and the atlas is itself a test); continuity follows from |a∘t|. Step 5 shows a∘w is representable étale through W×_A A_T, using the étale-composition leaf (2), and gets openness from surjectivity of |w|. Step 6 gets injectivity from the subfunctor property, and the atlas inverse image from step 2 plus the open-immersion definition. Step 7 shows an open immersion with full image is an isomorphism, so b lies in J2(T). I tested edge cases (empty spaces, a scheme with the identity atlas, non-representable a, closed versus open immersions). I found no cycle: the citers invariant-open-quotient, open-factor-scheme-tests and etale-open-image are not cited back. lem-a1-space-fibre-product-point is only the scheme special case. I accept the declared tool use of lem-trf-space-fibre-products-etale-covers (clause 1 only, already a stmt_dep). No SGA is used. Batch-5 check: def-a1-algebraic-space-point-classes and lem-a1-space-affine-etale-cover reach sec-trace-formula only through the general definitions def-trf-algebraic-space and def-trf-algebraic-space-jointly-surjective-family. Neither is part of the trace formula or Poincaré duality or their proofs, so both citations are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpacePointOpenCalculus",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.point_open_calculus",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpacePointOpenCalculus.lean",
+  "statement": "theorem point_open_calculus {S : Scheme.{u}} : (∀ (A B C : AlgebraicSpace S) (a : A ⟶ B) (c : C ⟶ B), (∀ (x : Point A.obj.obj) (z : Point C.obj.obj), mapPoint a.hom.hom x = mapPoint c.hom.hom z → ∃ t : Point (Limits.pullback a.hom c.hom).obj, mapPoint (Limits.pullback.fst a.hom c.hom).hom t = x ∧ mapPoint (Limits.pullback.snd a.hom c.hom).hom t = z) ∧ pointImage (Limits.pullback.snd a.hom c.hom).hom = mapPoint c.hom.hom ⁻¹' pointImage a.hom.hom) ∧ (∀ (A B : AlgebraicSpace S) (a : A ⟶ B), IsRepresentable a.hom.hom → (IsSurjective a.hom.hom ↔ Function.Surjective (mapPoint a.hom.hom))) ∧ (∀ (A B : AlgebraicSpace S) (a : A ⟶ B), Continuous (mapPoint a.hom.hom)) ∧ (∀ (A B : AlgebraicSpace S) (a : A ⟶ B), IsEtale a.hom.hom → IsOpenMap (mapPoint a.hom.hom)) ∧ (∀ (B : AlgebraicSpace S) (J : OpenSubspace B), Topology.IsOpenEmbedding (mapPoint J.val.ι) ∧ ∀ (U : Over S) (p : yoneda.obj U ⟶ B.obj.obj), IsEtale p → IsSurjective p → ∃ (V : Over S) (i : V ⟶ U) (q : yoneda.obj V ⟶ J.val.toFunctor), IsPullback q (yoneda.map i) J.val.ι p ∧ IsOpenImmersion i.left ∧ schemePointMap p ⁻¹' pointImage J.val.ι = Set.range i.left) ∧ (∀ (B : AlgebraicSpace S) (J₁ J₂ : OpenSubspace B), pointImage J₁.val.ι ⊆ pointImage J₂.val.ι ↔ J₁.val ≤ J₂.val) ∧ (∀ (B : AlgebraicSpace S) (J : OpenSubspace B), pointImage J.val.ι = Set.univ → J.val = ⊤)",
+  "branch": "newtargets-dag",
+  "by": "Q71",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "All clauses are stated together. The compatible-pair lifting formulation is surjectivity onto the set-theoretic point fibre product; the atlas clause identifies the image of an actual open-immersion representing square. Added the landed def-sfb-proper-curve-moduli statement dependency solely for its existing canonical mapPoint helper, avoiding a second construction of the point map."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-636312f27",
+  "group": "Q71",
+  "result": "pass",
+  "note": "Only the new module plus the item's lean record and one added stmt_dep (def-sfb-proper-curve-moduli, landed 2026-10-22 before the 2026-10-24 base). Its NL statement defines the point-class map mapPoint, so reusing it avoids a duplicate notion; its stmt/proof-dep closure (139 nodes) does not reach the item, so no cycle. All 7 conjuncts match the node and Stacks 03H4/03H5/03BX/03BZ/03IR: compatible-pair lifting through the actual sheaf pullback projections and the projection-image formula, with no representability; IsRepresentable → (IsSurjective ↔ Surjective mapPoint); continuity for the final topology; IsEtale → IsOpenMap; IsOpenEmbedding of the open-subspace inclusion plus an actual IsPullback square with an open immersion and the atlas preimage equal to Set.range; subfunctor-order iff on point images; full image → ⊤. No extra hypotheses, one universe u, autoImplicit off. Statement field verbatim, docstrings carry source, blueprint id and all 7 steps, only sorry, report sections present. Edge cases checked: empty spaces, identity atlas, J = ⊤, non-representable maps. No compile needed (no FIX). Advisory: redundant ResidueField import."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261026T083501-L-2368030",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

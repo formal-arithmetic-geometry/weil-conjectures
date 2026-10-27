@@ -5,6 +5,7 @@ Released under Apache 2.0 license under the Apache 2.0 license.
 module
 
 public import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import Sheaf.CategoryTheory.SignedDerivedInternalHomExact
 
 /-! Independent-universe exactness interface for derived internal Hom.
 
@@ -54,6 +55,12 @@ theorem ringedInternalHom_exact
         (derivedInternalHomOfUniverses.{c, v, r, w} J R)).obj (op K)).CommShift ℤ,
         ((Functor.curry.obj
           (derivedInternalHomOfUniverses.{c, v, r, w} J R)).obj (op K)).IsTriangulated) := by
-  sorry
+  constructor
+  · intro M
+    obtain ⟨S, hS, _⟩ := signedDerivedInternalHom_exact.{c, v, r, w} J R M
+    exact ⟨S, hS⟩
+  · intro K
+    exact ⟨homCommShift.{c, v, r, w} J R K,
+      hom_isTriangulated.{c, v, r, w} J R K⟩
 
 end CategoryTheory.RingedHomUniverses

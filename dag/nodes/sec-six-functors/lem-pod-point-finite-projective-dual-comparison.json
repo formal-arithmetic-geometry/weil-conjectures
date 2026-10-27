@@ -1,0 +1,118 @@
+{
+ "id": "lem-pod-point-finite-projective-dual-comparison",
+ "kind": "statement",
+ "title": "Normalized ordinary dual comparison for point extension",
+ "statement": "Let k,R,B,alpha,L,adj be the actual point extension data [def-pod-point-derived-hom-models], with L exact, the recorded action on morphisms, and explicit adjunction formulas. For any bounded cochain complex P with finite projective terms [def-pc-perfect-ring-complex], there exists an isomorphism L(Hom_R(P,R[0])) to the ordinary sheaf Hom complex Hom_B(L(P),B[0]) [def-sc-module-total-hom-complex, def-pur-hom-complex]. Evaluated in degrees p+j=0, the map sends b tensor f, applied to c tensor x, to bc alpha(f(x)), with the actual single-complex coordinate isomorphisms in source and target.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+  "place": "Point dualizing-complex proof, second sentence, and comparison identification proof, third paragraph: Normalized ordinary dual comparison for point extension"
+ },
+ "stmt_deps": [
+  "def-pod-point-derived-hom-models",
+  "def-pc-perfect-ring-complex",
+  "def-sc-module-total-hom-complex",
+  "def-pur-hom-complex"
+ ],
+ "proof": [
+  {
+   "text": "for a finite-projective module choose a finite dual basis m_i, lambda_i.\nThe evaluation map sends b tensor f to the local map c tensor x to bc f(x).\nIts inverse sends a local morphism g to the sum of g(1 tensor m_i) tensor lambda_i.\nThe two dual-basis identities prove the composites on constant generators;\nthe associated-sheaf universal property and the finite-power retractions extend\nthese identities from generators to all sections on every slice. Both maps\ncommute with restriction. Projecting\nthe scalar Hom cochain of degree j onto (-j,0) and the sheaf Hom complex onto\nthe same component assembles these evaluation maps into an isomorphism. Both\ndifferentials are -(-1)^j times precomposition with d_P, so the degree maps\ncommute with the signed differentials. Transporting the degree-zero single\ncoordinates gives the formula for every p+j=0, without identifying arbitrary\nsingle-complex degrees by definitional equality. The zero module, empty basis, and\nreversed support interval are covered by zero maps and empty sums.",
+   "uses": [
+    "def-pod-point-derived-hom-models",
+    "def-pc-perfect-ring-complex",
+    "def-sc-module-total-hom-complex",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Point dualizing-complex proof, second sentence, and comparison identification proof, third paragraph: Normalized ordinary dual comparison for point extension"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-ring-complex",
+  "def-pod-point-derived-hom-models",
+  "def-pur-hom-complex",
+  "def-sc-module-total-hom-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+  "place": "T1: explicit reduction of the indicated part of the point finite-projective argument, using the Stacks references in the Lean docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars commutes with the Hom dual of a bounded finite projective complex",
+   "results": "8 hits; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.coextendScalars, AlgHom.extendScalars, ModuleCat.CoextendScalars.obj', ModuleCat.ExtendScalars.obj', ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, ModuleCat.extendScalars_id_comp; no theorem gives the complete normalized comparison.",
+   "date": "2026-10-24",
+   "verdict": "Use the finite-projective algebra and adjunction APIs where applicable; retain the precise point presentation in the statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded finite projective complex dual tensor scalar extension sheaves canonical adjunction unit isomorphism",
+   "results": "8 hits; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj; no theorem gives the complete normalized comparison.",
+   "date": "2026-10-24",
+   "verdict": "Use the finite-projective algebra and adjunction APIs where applicable; retain the precise point presentation in the statement."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars.*[Tt]ensor|[Dd]ual.*[Pp]rojective|[Dd]erived[Cc]omplete",
+   "results": "17 hits; Mathlib/LinearAlgebra/Contraction.lean, Mathlib/LinearAlgebra/Contraction.lean, Mathlib/LinearAlgebra/Contraction.lean, Mathlib/LinearAlgebra/Contraction.lean, Mathlib/LinearAlgebra/Contraction.lean, Mathlib/LinearAlgebra/Dual/Lemmas.lean, Mathlib/LinearAlgebra/Dual/Lemmas.lean, Mathlib/LinearAlgebra/Dual/Lemmas.lean; no theorem gives the complete normalized comparison.",
+   "date": "2026-10-24",
+   "verdict": "Use the finite-projective algebra and adjunction APIs where applicable; retain the precise point presentation in the statement."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointProjectiveDualTensorModels",
+  "date": "2026-10-24",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pod-identification-of-the-comparison",
+   "place": "Third paragraph of thm-pod-identification-of-the-comparison.proof.md, actual adjunction/evaluation comparison: Normalized ordinary dual comparison for point extension",
+   "via": [
+    "lem-pod-point-projective-dual-tensor-models",
+    "lem-pod-point-completed-evaluation",
+    "lem-pod-global-duality-map-identification"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointFiniteProjectiveDualComparison",
+  "file": "lean/Sheaf/Paper/PointFiniteProjectiveDualComparison.lean",
+  "declaration": "WeilConjectures.PointDerivedHom.point_finiteProjective_dual_comparison",
+  "statement": "theorem point_finiteProjective_dual_comparison\n    (hmap : ∀ {M N : ModuleCat.{u + 1} R} (f : M ⟶ N),\n      L.map f = eqToHom (hobj M) ≫ extensionMorphism.{u, u} k B α f ≫\n        eqToHom (hobj N).symm)\n    (hex : ExplicitAdjunction.{u, u} k B α L hobj adj)\n    [PreservesFiniteLimits L] [PreservesFiniteColimits L]\n    (P : CochainComplex (ModuleCat.{u + 1} R) ℤ) (a b : ℤ)\n    (ha : P.IsStrictlyGE a) (hb : P.IsStrictlyLE b)\n    (hP : ∀ i, Module.Projective R (P.X i) ∧ Module.Finite R (P.X i)) :\n    let C := (extensionComplex.{u, u} k B α L adj).obj P\n    let D := CochainComplex.moduleHomComplex P\n      ((CochainComplex.singleFunctor (ModuleCat.{u + 1} R) 0).obj\n      (ModuleCat.of R R))\n    ∃ h : (extensionComplex.{u, u} k B α L adj).obj D ≅ sheafHom.{u, u} k B C\n      ((CochainComplex.singleFunctor (Modules.{u, u} k B) 0).obj\n      (SheafOfModules.unit (ring.{u, u} k B))),\n      (∀ (p j : ℤ) (hpj : p + j = 0) (U : (Scheme.ProEt (Spec (.of k)))ᵒᵖ)\n        (b c : B.obj.obj U) (f : D.X j) (x : P.X p),\n        (HomologicalComplex.singleObjXIsoOfEq (.up ℤ) 0\n          (SheafOfModules.unit (ring.{u, u} k B)) (p + j) hpj).hom.val.app U\n          (homValue.{u, u} k B C ((CochainComplex.singleFunctor (Modules.{u, u} k B) 0).obj\n      (SheafOfModules.unit (ring.{u, u} k B))) j p U\n            ((h.hom.f j).val.app U (generator.{u, u} k B α L hobj (D.X j) U b f))\n            (generator.{u, u} k B α L hobj (P.X p) U c x)) =\n          b * c * scalar.{u, u} k B α U\n            ((HomologicalComplex.singleObjXIsoOfEq (.up ℤ) 0\n              (ModuleCat.of R R) (p + j) hpj).hom.hom ((f.v p (p + j) rfl).hom x)))",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-574f5",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261024T191147-L-262480",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-574f5",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261024T191147-L-262480",
+  "kind": "interface",
+  "note": "independent cc review: removed IntrinsicFiniteTorsionConstructibility import vs public closure (SfIntegralConstructible, FiniteTorAmplitude re-export it) and the item statement's finiteTorConstructibleIntegral→sfIntegralConstructible→intrinsicFiniteTorsionConstructible; 3 sorried statements vs node statements and HomComplex sign conventions; item node diff vs clone (proof/proof_deps/proof_origin/tool_uses only); item has 0 importers"
+ }
+}

@@ -53,14 +53,14 @@
    }
   },
   {
-   "text": "Use the constructible functor $G$ of [def-weil-exceptional-inverse-image]. The adjunction $F\\dashv G$ on bounded constructible inputs is the restriction in [thm-sf-ambient-adjoint-class]. Its finite-dimensional compactification exists by [thm-nagata-compactification] and [lem-kun-dimension-finite-type]: the proper part is finite type over $W$, hence over $k$. By [prop-finite-compact-support-constructibility], $F$ restricts to an exact triangulated functor between the bounded constructible categories. Its hypotheses hold with $f=i$ and $A=A_{E,n}$: the schemes are finite type over $k$, $i$ is separated of finite type, and $\\ell$ is invertible in $k$; moreover $E/\\mathbf Q_\\ell$ is finite and $n\\geq1$ by the purity conventions. For $A\\in D^b_c(Z,\\Lambda)$ and $K\\in D^b_c(W,\\Lambda)$, [fix-prop-projection-formula] applies to $(A,M)$, since $M$ has finite Tor amplitude. Combining its natural isomorphism with the tensor adjunctions of step 2 and the two exceptional adjunctions gives\n$$\n\\begin{aligned}\n\\operatorname{Hom}_Z(A,G(K\\otimes L))\n&\\cong\\operatorname{Hom}_W(FA,K\\otimes L)\\\\\n&\\cong\\operatorname{Hom}_W(FA\\otimes M,K)\\\\\n&\\cong\\operatorname{Hom}_W(F(A\\otimes PM),K)\\\\\n&\\cong\\operatorname{Hom}_Z(A\\otimes PM,GK)\\\\\n&\\cong\\operatorname{Hom}_Z(A,GK\\otimes PL).\n\\end{aligned}\n$$\nEvery bijection is natural in $A$ and $K$. All objects lie in the bounded constructible categories by step 1 and the cited preservation theorem; the exceptional adjunction is used only on its stated comparison class.",
+   "text": "Use the constructible functor $G$ of [def-weil-exceptional-inverse-image]. The adjunction $F\\dashv G$ on bounded constructible inputs is the restriction in [thm-sf-ambient-adjoint-class]. Its finite-dimensional compactification exists by [thm-nagata-compactification] and [lem-kun-dimension-finite-type]: the proper part is finite type over $W$, hence over $k$. By [prop-finite-compact-support-constructibility], $F$ restricts to an exact triangulated functor between the bounded constructible categories. Its hypotheses hold with $f=i$ and $A=A_{E,n}$: the schemes are finite type over $k$, $i$ is separated of finite type, and $\\ell$ is invertible in $k$; moreover $E/\\mathbf Q_\\ell$ is finite and $n\\geq1$ by the purity conventions. For $A\\in D^b_c(Z,\\Lambda)$ and $K\\in D^b_c(W,\\Lambda)$, [lem-weil-finite-compact-projection-formula] applies to $(A,M)$, since $M$ has finite Tor amplitude. Combining its natural isomorphism with the tensor adjunctions of step 2 and the two exceptional adjunctions gives\n$$\n\\begin{aligned}\n\\operatorname{Hom}_Z(A,G(K\\otimes L))\n&\\cong\\operatorname{Hom}_W(FA,K\\otimes L)\\\\\n&\\cong\\operatorname{Hom}_W(FA\\otimes M,K)\\\\\n&\\cong\\operatorname{Hom}_W(F(A\\otimes PM),K)\\\\\n&\\cong\\operatorname{Hom}_Z(A\\otimes PM,GK)\\\\\n&\\cong\\operatorname{Hom}_Z(A,GK\\otimes PL).\n\\end{aligned}\n$$\nEvery bijection is natural in $A$ and $K$. All objects lie in the bounded constructible categories by step 1 and the cited preservation theorem; the exceptional adjunction is used only on its stated comparison class.",
    "uses": [
     "def-weil-exceptional-inverse-image",
     "thm-sf-ambient-adjoint-class",
     "thm-nagata-compactification",
     "lem-kun-dimension-finite-type",
     "prop-finite-compact-support-constructibility",
-    "fix-prop-projection-formula"
+    "lem-weil-finite-compact-projection-formula"
    ],
    "elementary": false,
    "source": {
@@ -103,7 +103,7 @@
   "thm-nagata-compactification",
   "lem-kun-dimension-finite-type",
   "prop-finite-compact-support-constructibility",
-  "fix-prop-projection-formula",
+  "lem-weil-finite-compact-projection-formula",
   "lem-galois-yoneda-fully-faithful",
   "def-exchange-projection",
   "det-sp-unique-right-adjoint",
@@ -182,7 +182,18 @@
   "def-weil-scheme-morphism-properties"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-lem-coprojection",
  "split_report": {
@@ -282,5 +293,6 @@
   "result": "pass",
   "note": "Wrote review.md. Independently checked the snapshot, all statement dependencies, source proof, exact operations, canonical counit equation, universes, edge cases, docstrings, and report sections. Snapshot per-file compilation reproduced successfully; no delivery errors found. Branch head unchanged."
  },
- "lead_note": "2026-10-18 L (route pivot, the human): step 1 cited the flat model lem-coef-sheaf-flat-model only for associativity of the derived tensor; swapped for the K-flat computation (Stacks 06YS)"
+ "lead_note": "2026-10-18 L (route pivot, the human): step 1 cited the flat model lem-coef-sheaf-flat-model only for associativity of the derived tensor; swapped for the K-flat computation (Stacks 06YS)",
+ "lean_notes": "2026-10-26 (maintainer M, DAG direction fix for prop-sf-pf-coherence): the citation of fix-prop-projection-formula was replaced by lem-weil-finite-compact-projection-formula: the blueprint node does not use fix-prop-projection-formula, the Lean declaration uses none of its declarations (constant walk), and the edge closed the cycle fix-prop-projection-formula -> prop-sf-pf-coherence -> ... -> here."
 }

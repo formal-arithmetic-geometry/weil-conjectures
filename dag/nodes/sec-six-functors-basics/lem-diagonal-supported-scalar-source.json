@@ -1,0 +1,122 @@
+{
+ "id": "lem-diagonal-supported-scalar-source",
+ "kind": "statement",
+ "title": "Closed diagonal support and scalar-unit normalized source maps",
+ "statement": "Let a:Lambda -> Lambda-prime be any map of commutative condensed ring objects. Let Y be a scheme for which P=ProjectiveLine Y and W=diagonalSurface Y are Noetherian, and let Delta:P -> W be its diagonal. Fix an adjoint-normalized regular scalar endpoint c on P [def-sfb-diagonal-coefficient-endpoints]. Let f:W -> P, R a full universal integral right-derived direct image, s its full-unit-normalized restriction square with the canonical Lambda-prime model [def-sfb-diagonal-coefficient-scalars, lem-diagonal-canonical-right-derived], and r a NormalizedSource for the supported regular module with Delta f=id and the actual ordinary composition normalization [def-sfb-diagonal-coefficient-category]. There exist an adjoint-normalized scalar Endpoint e from Delta_* Lambda to Delta_* Lambda-prime with specified underlying map supportMap a Y c.semilinear.hom, and a similarly composition-normalized quotient NormalizedSource t for f. They satisfy (derivedScalars a P).map r.hom followed by the scalar mate and the quotient direct image of e.iso.hom = c.iso.hom followed by t.hom. No arithmetic, Tate line, class or trace is assumed.",
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-category",
+  "def-sfb-diagonal-coefficient-endpoints",
+  "def-sfb-diagonal-coefficient-scalars",
+  "lem-diagonal-canonical-right-derived"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "Paragraph (1), closed diagonal supported coefficient source and its composition normalization"
+ },
+ "proof": [
+  {
+   "text": "Use the actual internal supported-module flatness theorem and the ordinary invertibility of the specified supportMap transpose. The existing flat scalar endpoint theorem computes derived extension on its flat single complex. Compose its normalized comparison with the single of the ordinary transpose isomorphism. Naturality of the restriction/single comparison and the scalar adjunction unit give exactly the required endpoint normalization.",
+   "uses": [
+    "lem-sfb-diagonal-supported-flat",
+    "lem-sfb-diagonal-supported-ordinary-scalars",
+    "lem-diagonal-flat-scalar-endpoint"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift the inverse of the ordinary sheaf direct-image composition, Delta f=id, and identity comparison to a module isomorphism. The module coherence maps prove linearity of its specified carrier. Package this explicit isomorphism with its carrier normalization. Eliminate the equality for a free endomorphism before specializing it to the composite, so the kernel does not repeatedly reduce concrete equality-transport maps. The proved acyclicity theorem for a retraction supplies the final field of the new NormalizedSource.",
+   "uses": [
+    "lem-sfb-diagonal-supported-acyclic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove the generic full-unit restriction square on single complexes using its normalization and the cochain single comparisons. Invert this equation, then transpose the desired scalar mate equation under the derived scalar adjunction. Substitute both endpoint normalizations and naturality of the derived augmentation. The remaining ordinary equation follows by passing to underlying sheaves and naturality of direct-image composition with the coefficient map.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-diagonal-supported-flat",
+  "lem-sfb-diagonal-supported-ordinary-scalars",
+  "lem-diagonal-flat-scalar-endpoint",
+  "lem-sfb-diagonal-supported-acyclic"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "Paragraph (1), closed diagonal supported coefficient source; supported-source normalization in the diagonal tower trace",
+  "by": "R2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a closed immersion with a retraction, direct image of a regular module is flat and its normalized derived source commutes with arbitrary coefficient extension",
+   "results": "Eight hits: flatness of algebraic modules under retracts and restriction of scalars, and flat scheme morphisms. None gives a normalized derived supported-source scalar equation. Local rg found ProEtaleRingSheafClosedLocalization and CompletedSupportedCoefficientTransport; the latter handles exact coefficient equivalences rather than nonflat reduction.",
+   "date": "2026-10-27",
+   "verdict": "No full match; use closed/open localization and prove the scalar-unit normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.pushHomOfComapIso",
+   "results": "Zero hits, unknown identifier in Mathlib search. Local library defines the named mate and its normalization in DiagonalCoefficientScalars.",
+   "date": "2026-10-27",
+   "verdict": "The project supplies the mate definition; Mathlib does not supply this source compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "lowerStar.*[Ff]lat|scalar.*[Ss]upport|uniformizer.*[Dd]erived",
+   "results": "Six unrelated Mathlib hits in complex polynomials, group homology, Haar measure, and multivariate polynomial support. Local rg in lean/Sheaf and lean/WeilConjectures located the closed-localization, regular scalar multiplication, internal/section flatness, and integral finite scalar perfect-model modules.",
+   "date": "2026-10-27",
+   "verdict": "Reuse those interfaces; the normalized comparison for the concrete coefficients still needs a bridge."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalUniformizerScalarFrame",
+  "date": "2026-10-27",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-diagonal-uniformizer-scalar-frame",
+   "place": "Paragraph (1), closed diagonal supported coefficient source and its composition normalization",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalSupportedScalarSource",
+  "file": "lean/Sheaf/Paper/DiagonalSupportedScalarSource.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonal_supported_scalar_source",
+  "statement": "theorem diagonal_supported_scalar_source\n    {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}\n    [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']\n    (a : Λ ⟶ Λ') [IsMonHom a] (Y : Scheme.{u})\n    [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)]\n    (c : Endpoint a (Mod.regular (condensedRingObj Λ (ProjectiveLine Y)))\n      (Mod.regular (condensedRingObj Λ' (ProjectiveLine Y)))\n      (coefficientMap a (ProjectiveLine Y)))\n    (f : diagonalSurface Y ⟶ ProjectiveLine Y)\n    (R : DiagonalRightDerived (CondensedRing.lowerStar Λ f))\n    (s : RestrictionSquare a f R (canonicalDiagonalRightDerived (CondensedRing.lowerStar Λ' f)))\n    (r : DiagonalTrace.NormalizedSource (CondensedRing.lowerStar Λ f) R\n      (source Λ Y) (Mod.regular (condensedRingObj Λ (ProjectiveLine Y)))\n      (diagonalImmersion Y ≫ f = 𝟙 _) (SupportNormalization Λ Y f)) :\n    ∃ e : Endpoint a (source Λ Y) (source Λ' Y)\n        (supportMap a Y c.semilinear.hom).hom,\n      ∃ t : DiagonalTrace.NormalizedSource (CondensedRing.lowerStar Λ' f)\n          (canonicalDiagonalRightDerived (CondensedRing.lowerStar Λ' f))\n          (source Λ' Y) (Mod.regular (condensedRingObj Λ' (ProjectiveLine Y)))\n          (diagonalImmersion Y ≫ f = 𝟙 _) (SupportNormalization Λ' Y f),\n        (derivedScalars a (ProjectiveLine Y)).map r.hom ≫ (s.mate a).app _ ≫\n          (canonicalDiagonalRightDerived (CondensedRing.lowerStar Λ' f)).R.map e.iso.hom =\n        c.iso.hom ≫ t.hom",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261026T222730-L-687372",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261027T012926-L-2348817",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

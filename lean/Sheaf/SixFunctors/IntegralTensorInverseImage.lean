@@ -1,7 +1,7 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group Q31
+Authors: SHEAF groups Q31 and S7
 -/
 module
 
@@ -9,10 +9,11 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
-public import Mathlib.CategoryTheory.Limits.Shapes.Products
-import Sheaf.Paper.IntegralTensorProduct
-import Sheaf.Paper.IntegralTensorPullback
-import Sheaf.Paper.IntegralTensorShriek
+public import Sheaf.Paper.IntegralModels
+import Sheaf.Paper.AdicConstructibilityPredicateComparison
+import Sheaf.AlgebraicGeometry.BoundedConstructibleTensorPreservation
+import Sheaf.Paper.CondensedOpenClosedRecollement
+import Sheaf.Paper.CondensedConstructibleOpenClosedImages
 
 /-!
 # Integral inverse image and uncompleted tensor
@@ -20,17 +21,20 @@ import Sheaf.Paper.IntegralTensorShriek
 Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-int-tensor/_section.md;
 Stacks Project, Tags 09BP, 09BM and 09AA (blueprint: sk-lem-int-tensor).
 
-The completed inverse-image comparison is expressed by its canonical derived-limit
-triangle. We use powers of ell, cofinal with powers of a uniformizer of the finite
-extension E. Finite reductions are mapping cones of multiplication by ell^(n+1)
-on a complex representing K. The flat two-term resolution of O_E/ell^(n+1)
-identifies these with ordinary derived reductions. The product leg is specified
-by the cone inclusions. Thus no arbitrary comparison isomorphism is chosen.
+The completed inverse-image comparison uses the existing intrinsic completeness
+predicate from IntegralModelsEmbedded, applied to the ordinary inverse image.
+The principal Koszul completion criterion identifies this with invertibility of
+the canonical quotient completion unit. Uniformizer powers and ell powers are
+cofinal. The explicit ell-power cone reductions below remain available as models
+of these reductions, with their canonical inclusions and transition squares.
+No arbitrary comparison morphism or completion object is selected.
 -/
 
 @[expose] public noncomputable section
 
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 
 -- As in the upstream bounded-constructible module, keep internal Hom constructions opaque.
 attribute [local irreducible] DerivedCategory.monoidalClosed
@@ -79,34 +83,27 @@ def integralFiniteComplexTransition (X : Scheme.{u})
       right := 𝟙 P
       w := by simp [pow_succ, mul_smul] }
 
-/-- The canonical completion comparison is invertible precisely when its prescribed
-product leg participates in the derived-limit triangle. A representing complex P
-and its identification with K specify the canonical quotient maps; no arbitrary
-comparison map is supplied. Finite terms are inverse images of the cone reductions,
-which compute K tensor^L O_E/ell^(n+1). Exact restriction of scalars preserves
-products and triangles and detects isomorphisms, so this is precisely the Stacks
-completed inverse image after restriction to constant O_E.
-Source: Stacks 099M and 099N(5) (blueprint: sk-lem-int-tensor). -/
+/-- The canonical completed inverse-image comparison is invertible when the ordinary
+inverse image is derived complete. We use the existing intrinsic completeness predicate
+on the equivalent small ringed site, with the actual first residue map. The witness
+is a generator of the maximal ideal, not a comparison morphism or a completion object.
+
+This is the same condition as the canonical ell-power cone triangle: exact inverse
+image carries the two-term scalar resolutions, their quotient units and transitions
+to those on the target. Uniformizer powers and ell powers are cofinal. The principal
+Koszul completion criterion identifies intrinsic completeness with invertibility of
+that quotient unit; its Roos triangle has the prescribed cone-inclusion product leg.
+Exact restriction of scalars preserves products and triangles and detects isomorphisms,
+so this is also the completed inverse image after restriction to constant O_E.
+Source: Stacks 099M, 099N(5), 0999 and 0A0E; integral models, clause (2)
+(blueprint: sk-lem-int-tensor). -/
 def IntegralPullbackIsCompleted {X Y : Scheme.{u}} (g : X ⟶ Y)
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) Y))) : Prop :=
-  ∃ (P : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) Y)) ℤ)
-    (e : DerivedCategory.Q.obj P ≅ K)
-    (c : Fan (fun n : ℕ ↦
-      ((upperStar (Profinite.padicIntegersRingObj ℓ E.val) g).leftDerivedFunctor).obj
-        (DerivedCategory.Q.obj (integralFiniteComplex ℓ E Y P n)))) (hc : IsLimit c),
-    ∃ δ : c.pt ⟶
+  ∃ π : PadicAlgCl.integers ℓ E.val,
+    Ideal.span {π} = IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E.val) ∧
+      IntegralModelsEmbedded.completedComplete ℓ E π X
         (((upperStar (Profinite.padicIntegersRingObj ℓ E.val) g).leftDerivedFunctor).obj K)
-          ⟦(1 : ℤ)⟧,
-      Triangle.mk
-        (hc.lift (Fan.mk _ (fun n ↦
-          ((upperStar (Profinite.padicIntegersRingObj ℓ E.val) g).leftDerivedFunctor).map
-            (e.inv ≫ DerivedCategory.Q.map (integralFiniteComplexQuotient ℓ E Y P n)))))
-        (𝟙 c.pt - @id (c.pt ⟶ c.pt) (hc.lift (Fan.mk c.pt (fun n ↦ c.π.app ⟨n + 1⟩ ≫
-          ((upperStar (Profinite.padicIntegersRingObj ℓ E.val) g).leftDerivedFunctor).map
-            (DerivedCategory.Q.map (integralFiniteComplexTransition ℓ E Y P n))))))
-        δ ∈ distTriang _
 
 /-- Integral inverse image, its completed comparison, uncompleted tensor, extension by
 zero for a quasi-compact open immersion, and closed direct image preserve Dbc.
@@ -115,20 +112,18 @@ Source: blueprint main-20261015, sk-lem-int-tensor; Stacks 09BP, 09BM and 09AA
 (blueprint: sk-lem-int-tensor).
 
 Proof:
-1. Apply det-lem-int-tensor-shriek, part (1), to the open and closed immersions.
-Its proof checks derived completeness as well as constructibility on each stratum.
-Its part (2) gives finite open-closed devissage into locally perfect constant models.
-2. Apply det-lem-int-tensor-pullback, parts (1)--(2). The first part preserves Dbc.
-The second identifies the canonical comparison after restriction to constant O_E
-with the derived limit of the inverse images of the finite reductions. Replace
-uniformizer powers by the cofinal ell-power sequence. The defining quotient maps
-are represented by integralFiniteComplexQuotient; the derived-limit triangle is the
-one recorded by IntegralPullbackIsCompleted.
-3. Apply the first paragraph of det-lem-int-tensor-product to K and L. This is the
-ambient, uncompleted tensor defined by sk-def-sfb-derived-tensor-hom. The moreover
-clause gives dualizability of the local models, so tensoring with them preserves
-products, derived inverse limits and completeness. Finite devissage from step 1
-therefore proves the tensor assertion without replacing it by completed tensor.
+1. The existing exact derived inverse-image preservation theorem gives bounded
+constructibility. The coefficient-predicate comparison identifies this with finite
+constant-model constructibility. Clause (2) of integral_models then gives intrinsic
+derived completeness of the image, for a generator of the maximal ideal. The
+canonical completion criterion in IntegralPullbackIsCompleted identifies this with
+the completed inverse image, retaining the canonical quotient unit.
+2. Apply the existing integral instance of boundedConstructible_tensor_closure,
+which proves closure for the ambient uncompleted derived tensor by finite devissage.
+3. Apply the exact open-extension preservation theorem.
+4. For a closed immersion, condensed open-closed recollement supplies exactness.
+The exact derived homology comparisons and constructible closed-image theorem give
+bounded constructibility. Identify the exact and right-derived presentations.
 -/
 theorem integralTensorInverseImage (k : Type u) [Field k]
     [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
@@ -162,6 +157,74 @@ theorem integralTensorInverseImage (k : Type u) [Field k]
       boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) X) K →
       boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) Y)
         (((lowerStar (Profinite.padicIntegersRingObj ℓ E.val) i).rightDerivedFunctor).obj K)) := by
-  sorry
+  let Λ := Profinite.padicIntegersRingObj.{u} ℓ E.val
+  have : IsLocallyNoetherian X :=
+    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace
+    (X ↘ Spec (.of k))
+  have : IsNoetherian X := ⟨⟩
+  have : LocallyOfFiniteType (Over.mk (X ↘ Spec (.of k))).hom := by
+    change LocallyOfFiniteType (X ↘ Spec (.of k))
+    infer_instance
+  have : QuasiCompact (Over.mk (X ↘ Spec (.of k))).hom := by
+    change QuasiCompact (X ↘ Spec (.of k))
+    infer_instance
+  have : IsSeparated (Over.mk (X ↘ Spec (.of k))).hom := by
+    change IsSeparated (X ↘ Spec (.of k))
+    infer_instance
+  have : LocallyOfFiniteType (Over.mk (Y ↘ Spec (.of k))).hom := by
+    change LocallyOfFiniteType (Y ↘ Spec (.of k))
+    infer_instance
+  have : QuasiCompact (Over.mk (Y ↘ Spec (.of k))).hom := by
+    change QuasiCompact (Y ↘ Spec (.of k))
+    infer_instance
+  have : IsSeparated (Over.mk (Y ↘ Spec (.of k))).hom := by
+    change IsSeparated (Y ↘ Spec (.of k))
+    infer_instance
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · intro K hK
+    have hpull := boundedConstructible_leftDerivedUpperStar_obj Λ ℓ
+      (X := Over.mk (X ↘ Spec (.of k))) (Y := Over.mk (Y ↘ Spec (.of k)))
+      (Over.homMk g (CategoryTheory.comp_over g (Spec (.of k)))) K hK
+    refine ⟨hpull, ?_⟩
+    obtain ⟨π, hπ⟩ := PadicAlgCl.isPrincipal_maximalIdeal_integers ℓ E.val
+    have hπ' : Ideal.span {π} =
+        IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E.val) := hπ.symm
+    refine ⟨π, hπ', ?_⟩
+    have heq := (adicConstructibilityPredicateComparison ℓ X Λ
+      (IsEllAdicCoefficient.integral E.val)).2
+    have hconstant : constantModelBoundedConstructible Λ X
+        (((upperStar Λ g).leftDerivedFunctor).obj K) := by
+      rw [← heq]
+      exact hpull
+    exact (((integral_models k (ringChar k) ℓ (Ne.symm (Fact.out : ringChar k ≠ ℓ))
+      X E π hπ').2.2.1 _).2.mp hconstant).1
+  · intro K L hK hL
+    exact boundedConstructible_tensor_closure Λ (Over.mk (X ↘ Spec (.of k))) K L hK hL
+  · intro j _ _ _ K hK
+    have : IsOpenImmersion (Over.homMk j (CategoryTheory.comp_over j
+        (Spec (.of k))) : Over.mk (X ↘ Spec (.of k)) ⟶
+          Over.mk (Y ↘ Spec (.of k))).left := by
+      change IsOpenImmersion j
+      infer_instance
+    exact boundedConstructible_openImmersionLowerShriek_obj Λ ℓ
+      (U := Over.mk (X ↘ Spec (.of k))) (X := Over.mk (Y ↘ Spec (.of k)))
+      (Over.homMk j (CategoryTheory.comp_over j (Spec (.of k)))) K hK
+  · intro i _ _ K hK
+    have : IsLocallyNoetherian Y :=
+      LocallyOfFiniteType.isLocallyNoetherian (Y ↘ Spec (.of k))
+    have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace
+      (Y ↘ Spec (.of k))
+    have : IsNoetherian Y := ⟨⟩
+    let U : Y.Opens := ⟨(Set.range i)ᶜ, i.isClosedEmbedding.isClosed_range.isOpen_compl⟩
+    obtain ⟨hex, _⟩ := condensed_open_closed_recollement Λ i U.ι U.range_ι
+    let := hex
+    let e := (lowerStar Λ i).rightDerivedFunctorIsoMapDerivedCategory.app K
+    refine ⟨(DerivedCategory.TStructure.t.bounded).prop_of_iso e.symm
+      ((lowerStar Λ i).bounded_mapDerivedCategory_obj hK.1), fun n ↦ ?_⟩
+    exact _root_.constructible_of_iso ((DerivedCategory.homologyFunctor _ n).mapIso e.symm)
+      (_root_.constructible_of_iso
+        (((lowerStar Λ i).mapDerivedCategoryHomologyFunctorIso n).app K)
+        ((constructible_open_closed_images Λ U.ι i U.range_ι).2 _ (hK.2 n)))
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -1,0 +1,206 @@
+{
+ "id": "lem-sf-finite-free-scalar-tensor-calculus",
+ "kind": "statement",
+ "title": "Exact finite-free descent and ordinary normalized balancing",
+ "statement": "Let C be a category in Type (u+1) with hom universe u, essentially small in u+1, let J be any Grothendieck topology on C, and let A and B be commutative rings in Type (u+1) with an A-algebra structure. Let r be a natural number and basis a basis of B over A indexed by Fin r. There exists a FiniteFreeScalarTensorCalculus J r basis [def-sf-finite-free-scalar-calculus-data]: exact scalar extension and restriction, universal exact derived descent, the normalized derived scalar adjunction, conservative derived restriction, the normalized finite-basis decomposition, preservation of K-flatness, and the two normalized ordinary sheaf balancing maps. No finiteness of the rings, scheme hypotheses, derived tensor comparison, constructibility or Tor interval is assumed or concluded.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+  "place": "Parent scalar-calculus steps 1-5 and ordinary balancing of step 7; Stacks 03CZ, 05V4, 06YY, 05RT."
+ },
+ "stmt_deps": [
+  "def-sf-finite-free-scalar-calculus-data"
+ ],
+ "proof": [
+  {
+   "text": "Write $E(M)=M\\otimes_{A_W}B_W$ for ordinary extension. The basis identifies $B_W$ with $A_W^{\\oplus r}$: the basis and its coordinate maps on constant presheaves sheafify to mutually inverse module maps. The sheaf-tensor definition then gives inverse natural maps\n$$M^{\\oplus r}\\longrightarrow UE(M),\\quad(m_j)\\longmapsto\\sum_jm_j\\otimes b_j,\\qquad m\\otimes\\sum_ja_jb_j\\longmapsto(a_jm)_j.$$\nThese formulas are checked on local pure tensors and therefore after sheafification. Restriction leaves underlying abelian sheaves unchanged. By the cited kernel/cokernel descriptions it is exact and reflects exact sequences; a module map with invertible underlying additive map has a linear inverse. Finite sums of exact sequences are exact, component by component, so the displayed basis identification makes $E$ exact as well. This includes $r=0$; no faithfulness of $E$ is claimed.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pc-sheaf-restrict-scalars",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CZ (lemma-adjointness-tensor-restrict), preceding change-of-rings construction; elementary basis calculation"
+   }
+  },
+  {
+   "text": "Exact-functor descent supplies $D(E)$ and $D(U)$, represented termwise on every complex. Exact-functor homology gives $H^q(EC)=E H^q(C)$ and $H^q(UC)=U H^q(C)$. For a flat-term K-flat resolution $P\\to C$, exactness makes $EP\\to EC$ a quasi-isomorphism. The K-flat computation of derived change of rings identifies $TP$ and $TC$ with $EP$; hence $D(E)\\cong T$ canonically, using these resolution maps. This comparison is natural and independent of resolution by the canonical-comparison clause of derived change of rings. Localizing the basis maps of step 1 gives $UTK\\cong K^{\\oplus r}$; its $j$th inclusion is the localized map $p\\mapsto p\\otimes b_j$.",
+   "uses": [
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-sp-exact-functor-preserves-homology",
+    "lem-pc-kflat-resolution",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 06YU (definition-derived-tor); exact-functor descent and finite-free basis"
+   }
+  },
+  {
+   "text": "On sheaves the mutually inverse adjunction formulas are $f\\mapsto(m\\mapsto f(m\\otimes1))$ and $g\\mapsto(m\\otimes b\\mapsto b\\,g(m))$. Balancedness makes the latter well defined, and both formulas commute with restriction and sheafification. Thus the unit is $m\\mapsto m\\otimes1$ and the counit is $n\\otimes b\\mapsto bn$. The same degreewise formulas commute with differentials and satisfy the triangle identities, since both triangle composites send each local generator to itself. Apply the adjunction-localization theorem to these functors on cochain complexes and the two quasi-isomorphism localizations; the exact functors of step 2 provide its required factorization isomorphisms. Its unit/counit formulas give $D(E)\\dashv D(U)$ with the localized scalar unit and counit. Transport through the canonical $D(E)\\cong T$ gives precisely $T\\dashv U$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-sfb-adjunction-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CZ (lemma-adjointness-tensor-restrict); localization via lem-sfb-adjunction-localization, including its unit and counit formulas"
+   }
+  },
+  {
+   "text": "For a derived morphism $v$, the cohomology comparison of step 2 identifies $H^q(Uv)$ with $U H^q(v)$. If $Uv$ is invertible, restriction reflects invertibility on sheaves by step 1, so every $H^q(v)$ is invertible. The cohomology criterion for unbounded derived isomorphisms implies that $v$ is invertible. Applying this to $0\\to N$ also shows that $UN=0$ implies $N=0$. In particular $U$ reflects each individual cohomology vanishing, since its value on a sheaf has the same underlying abelian sheaf.",
+   "uses": [
+    "lem-sp-exact-functor-preserves-homology",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RT (lemma-acyclic), together with exact restriction and the cohomology criterion"
+   }
+  },
+  {
+   "text": "The cited K-flat change-of-rings theorem applies to the identity underlying topos with ring map $A_W\\to B_W$, on either of the chosen small sites. It says that $EP$ is K-flat over $B_W$ for every K-flat $A_W$-complex $P$, without any assumption on its individual terms. For the flat-term resolutions used below, the ringed-pullback theorem additionally says that $EP$ has flat terms.",
+   "uses": [
+    "lem-pur-kflat-change-of-rings-all-independent",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7E (lemma-pullback-K-flat); the existing all-independent change-of-rings lemma removes the termwise-flatness requirement for K-flatness itself"
+   }
+  },
+  {
+   "text": "For the ordinary tensor comparison, sheafify the balanced maps (b tensor m) tensor n ↦ m tensor bn and m tensor n ↦ (1 tensor m) tensor n. The balancing relations make the composites identities. Their images under the two sheafification units are precisely the local pure-tensor formulas; this supplies sheaf_balance, balance_forward and balance_inverse. No derived tensor or constructibility conclusion is asserted.",
+   "uses": [
+    "lem-pur-change-of-rings-tensor-cancellation-independent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-sfb-adjunction-localization",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-pur-kflat-change-of-rings-all-independent",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-pur-change-of-rings-tensor-cancellation-independent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Parent scalar-calculus steps 1-5 and ordinary balancing of step 7; Stacks 03CZ, 05V4, 06YY, 05RT."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite free extension of scalar module sheaves exact functor derived adjunction and normalized tensor cancellation",
+   "results": "8 hits: PresheafOfModules.free, PresheafOfModules.freeAdjunction, SheafOfModules.freeFunctor, ModuleCat.extendRestrictScalarsAdj, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, SheafOfModules.PullbackConstruction.adjunction, ModuleCat.restrictCoextendScalarsAdj, Algebra.TensorProduct.instFree",
+   "date": "2026-10-25",
+   "verdict": "No exact match: scalar adjunction or tensor infrastructure only; not this normalized sheaf conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact finite free extension of scalars sheaves derived tensor projection formula preserves Tor amplitude",
+   "results": "8 hits: LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', Module.Flat.rTensor_shortComplex_exact, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.internallyProjective_iff_tensor_condition, Module.Flat.iff_rTensor_preserves_shortComplex_exact",
+   "date": "2026-10-25",
+   "verdict": "No exact match: scalar adjunction or tensor infrastructure only; not this normalized sheaf conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitudeIn|isZero.*mapDerivedCategory|restrictScalars.*Reflects",
+   "results": "2 hits: Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "date": "2026-10-25",
+   "verdict": "No exact match: scalar adjunction or tensor infrastructure only; not this normalized sheaf conclusion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteFreeDerivedScalarCalculus",
+  "date": "2026-10-25",
+  "group": "Y5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-finite-free-extension",
+   "place": "Parent scalar-calculus steps 1-5 and ordinary balancing of step 7; Stacks 03CZ, 05V4, 06YY, 05RT.",
+   "via": [
+    "lem-sf-finite-free-derived-scalar-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteFreeScalarTensorCalculus",
+  "file": "lean/Sheaf/Paper/FiniteFreeScalarTensorCalculus.lean",
+  "declaration": "AlgebraicGeometry.finiteFreeScalarTensorCalculus",
+  "statement": "theorem finiteFreeScalarTensorCalculus : Nonempty (FiniteFreeScalarTensorCalculus J r basis)",
+  "branch": "sheaf-dag",
+  "by": "Y5",
+  "date": "2026-10-25"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "Sheaf.Paper.FiniteFreeDerivedScalarCalculus",
+  "worker": "Y5",
+  "summary": "Strict intermediate of the parent: Exact finite-free descent and ordinary normalized balancing. Complete proof retained from the parent steps, with explicit fixed-presentation normalization.",
+  "blueprint": "Parent scalar-calculus steps 1-5 and ordinary balancing of step 7; Stacks 03CZ, 05V4, 06YY, 05RT.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic ringed-site or localization infrastructure used exactly as stated; it supplies no replacement for a step of the six-functor compatibility unit."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic ringed-site or localization infrastructure used exactly as stated; it supplies no replacement for a step of the six-functor compatibility unit."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "Generic ringed-site or localization infrastructure used exactly as stated; it supplies no replacement for a step of the six-functor compatibility unit."
+   },
+   {
+    "node": "lem-pur-change-of-rings-tensor-cancellation-independent",
+    "why": "Generic ringed-site or localization infrastructure used exactly as stated; it supplies no replacement for a step of the six-functor compatibility unit."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-61eb7",
+  "group": "Y5",
+  "result": "pass",
+  "landing": "20261025T164826-L-1096829",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-61eb7",
+  "group": "Y5",
+  "result": "pass",
+  "landing": "20261025T164826-L-1096829",
+  "kind": "interface",
+  "note": "independent cc review: delivered FiniteFreeScalarCalculusData vs clone item module (verbatim extraction, public re-export); item theorem signature vs clone (identical); two new sorried statements vs the item's FiniteFreeScalarCalculus fields; direct importers NormalizedStageCoefficientCalculus and RamifiedScalarSystemTranspose compiled against the delivered modules (exit 0); #print axioms = propext, sorryAx, Classical.choice, Quot.sound"
+ }
+}

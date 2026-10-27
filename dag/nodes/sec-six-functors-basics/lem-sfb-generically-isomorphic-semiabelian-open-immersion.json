@@ -1,0 +1,367 @@
+{
+ "id": "lem-sfb-generically-isomorphic-semiabelian-open-immersion",
+ "kind": "statement",
+ "title": "A given generic isomorphism from a semiabelian model is an open immersion",
+ "statement": "Let $R$ be a discrete valuation ring [def-sc-discrete-valuation-ring], $F=\\operatorname{Frac}(R)$ and $T=\\operatorname{Spec}R$ [def-weil-affine-spectrum]. Let $A\\to T$ be a smooth separated commutative group scheme of finite presentation [def-pc-scheme, def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation] with semiabelian geometric fibres [def-sfb-semiabelian-geometric-fibres]. Let $B\\to T$ be any smooth separated commutative group scheme, without a quasi-compactness or finite-type assumption on $B$. A commutative group scheme has multiplication, inverse and identity morphisms satisfying the commutative group identities; separated means that its diagonal is a closed immersion [def-weil-closed-immersion]. Suppose a $T$-group homomorphism $a:A\\to B$ is given and that its generic base change $a_F:A\\times_T\\operatorname{Spec}F\\to B\\times_T\\operatorname{Spec}F$ [def-pc-base-change] is an isomorphism. Then $a$ is an open immersion [def-weil-open-immersion]. No completeness, excellence or residue-field perfection hypothesis is imposed on $R$.",
+ "source": {
+  "document": "literature/conrad-semistable-reduction-abelian-varieties.pdf",
+  "place": "Agent generalization of Brian Conrad, Semistable reduction for abelian varieties, proof of Theorem 4.4, printed pp.12–16, especially Corollary 3.3, Lemma 4.9 and the quasi-finite birational argument. Local copy WANTED; primary lecture notes read online at https://math.stanford.edu/~conrad/DarmonCM/2011Notes/SemistableReduction.pdf . The theorem as printed has abelian generic fibre and Néron target; this statement extracts the proof for a GIVEN generically isomorphic homomorphism, where only smoothness and separatedness of the target are used. It is an agent-extracted lemma, not a verbatim assertion of Theorem 4.4."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-closed-immersion",
+  "def-pc-base-change",
+  "def-sfb-semiabelian-geometric-fibres",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Fix a uniformizer $\\pi$ and put $k=R/(\\pi)$. Finite presentation of $A/T$ implies finite type directly from the finite polynomial presentations and quasi-compactness. The graph $\\gamma=(1_A,a):A\\to A\\times_T B$ is the pullback of the closed diagonal of $B/T$ along $(a\\operatorname{pr}_A,\\operatorname{pr}_B):A\\times_TB\\to B\\times_TB$. Thus $\\gamma$ is a closed immersion by [lem-weil-pbc-closed-immersion-base-change], hence proper by [lem-weil-pbc-proper-fp-permanence](c), hence of finite type by [def-weil-proper-morphism]. The projection $A\\times_TB\\to B$ is of finite type by [lem-sfb-finite-type-composition-base-change](2); its composite with $\\gamma$ is $a$, so (1) of that node makes $a$ of finite type. Likewise $\\Delta_a$ is the pullback of $\\Delta_{A/T}$ along $A\\times_BA\\to A\\times_TA$. It is closed, so $a$ is separated. None of these assertions requires $B/T$ quasi-compact.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-proper-morphism",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01KS (schemes-lemma-semi-diagonal), 01W1 (definition-proper), and 01T3 (lemma-composition-finite-type); graph and relative diagonal pullback squares written out."
+   }
+  },
+  {
+   "text": "The generic group $A_F$ is integral. Indeed over an algebraic closure $\\overline F$, its prescribed semiabelian exact sequence [def-sfb-semiabelian-geometric-fibres] satisfies [lem-sfb-semiabelian-geometric-power-integrality] with $n=1$, so $(A_F)_{\\overline F}$ is integral. For every nonempty affine open $\\operatorname{Spec}C\\subseteq A_F$, the tensor map $C\\to C\\otimes_F\\overline F$ is injective: choose an $F$-basis of $\\overline F$ containing $1$ and project to that coordinate. The same coordinate decomposition shows $C\\otimes_F\\overline F\\ne0$. This is the coordinate ring of a nonempty affine open in the integral base change, hence is a domain; its subring $C$ is a domain. The identity supplies nonemptiness, so [def-pc-integral-scheme] proves the claim. The given isomorphism $a_F$ therefore makes $B_F$ integral too.",
+   "uses": [
+    "def-sfb-semiabelian-geometric-fibres",
+    "lem-sfb-semiabelian-geometric-power-integrality",
+    "def-pc-integral-scheme",
+    "def-pc-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-semistable-reduction-abelian-varieties.pdf",
+    "place": "Generic-fibre integrality in Conrad Theorem 4.4 proof, printed p.12; elementary faithful field-extension descent spelt out."
+   }
+  },
+  {
+   "text": "By [lem-pc-smooth-flat], $A/T$ and $B/T$ are flat. Multiplication by $\\pi$ is injective on $R$. At a point over the closed point, tensor this injection with the flat local ring using [def-weil-pbc-flat-ring-map]; at a point over the generic point, $\\pi$ is a unit. Thus multiplication by $\\pi$ is injective on every stalk of either structure sheaf [def-weil-flat-morphism], hence on sections of every open. For any nonempty affine $U=\\operatorname{Spec}C$ of either scheme, the generic restriction is $U_F=D(\\pi)=\\operatorname{Spec}C[1/\\pi]$. The localization map $C\\to C[1/\\pi]$ is injective since $C$ has no $\\pi$-power torsion. In particular $U_F$ is nonempty and its coordinate ring is a domain by step 2. Hence $C$ is a domain. The identity sections and [def-pc-integral-scheme] now show that both $A$ and $B$ are integral, and every nonempty affine open meets the generic fibre. In particular the generic fibres are dense.",
+   "uses": [
+    "lem-pc-smooth-flat",
+    "def-weil-pbc-flat-ring-map",
+    "def-weil-flat-morphism",
+    "def-pc-integral-scheme",
+    "def-weil-affine-spectrum",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-semistable-reduction-abelian-varieties.pdf",
+    "place": "Conrad proof of Theorem 4.4, printed p.12; DVR-flatness argument made explicit on stalks and affine localizations."
+   }
+  },
+  {
+   "text": "The ring $R$ is a principal ideal domain by [def-sc-discrete-valuation-ring], so [lem-weil-pbc-pid-noetherian-normal] makes it normal. Each $R_{\\mathfrak p}$ is normal by [lem-weil-pbc-localization-normal-domain]; these are the local rings of $T$ by [lem-weil-pbc-affine-open-stalk-localization]. Apply [lem-sfb-smooth-normal-ascent] to the smooth map $B\\to T$. Thus every local ring of the integral scheme $B$ is integrally closed. This uses neither excellence nor completion.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-pid-noetherian-normal",
+    "lem-weil-pbc-localization-normal-domain",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-sfb-smooth-normal-ascent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 00PD (algebra-lemma-characterize-dvr), 00GY (algebra-lemma-localize-normal-domain), and 034F (descent-lemma-normal-local-smooth)."
+   }
+  },
+  {
+   "text": "Choose a prime $\\ell\\ne\\operatorname{char}k$; its image in the local ring $R$ is a unit. Set $E=A[\\ell]$, $D=B[\\ell]$, the kernels of multiplication by $\\ell$. By [lem-sfb-smooth-group-invertible-multiplication] both are etale over $T$, and their formation commutes with base change. These are schemes because they are the scheme fibre products defining the kernels. The group homomorphism $a$ induces $u:E\\to D$. Since $E$ and $D$ are etale over $T$, [lem-trf-space-chartwise-etale-permanence] implies $u$ is etale (take schemes as their represented algebraic spaces). Its kernel $L=E\\times_{D,u,e_D}T$ is etale over $T$ by [lem-weil-pbc-etale-scheme-base-change]. The scheme $L$ is separated over $T$: $E$ is closed in $A$, since it is the pullback of the closed identity section of $A$ under $[\\ell]_A$, and $L$ is closed in $E$ in the same way using $D\\subset B$. Identity sections of separated groups are closed because a section is the pullback of the diagonal. The closed-immersion base-change assertion applies to all these squares. Closed immersions are proper, hence separated, and separated morphisms compose by [lem-weil-pbc-proper-fp-permanence](c),(e).",
+   "uses": [
+    "lem-sfb-smooth-group-invertible-multiplication",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-pc-fibre-product",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Conrad proof of Theorem 4.4, printed pp.13–14 (invertible torsion); Stacks Tags 02GW (lemma-etale-permanence), 02GO (lemma-base-change-etale)."
+   }
+  },
+  {
+   "text": "The identity section $e_L:T\\to L$ is also open. Indeed $L/T$ is unramified by [lem-sfb-space-unramified-permanence], so its diagonal is open by [lem-sfb-space-unramified-diagonal-open]; pulling it back along $(1_L,e_Lp):L\\to L\\times_TL$ gives $e_L$. Thus $L=e_L(T)\\amalg C$ for an open and closed complement $C$. On generic fibres $u_F$ is an isomorphism since $a_F$ is; hence $L_F=e_L(T)_F$ as schemes and $C_F=\\varnothing$. Every stalk of $C$ is flat over the corresponding local ring of $T$, since $C$ is open in the etale $L$ [def-weil-etale-morphism]. If $x\\in C$, its image must be the closed point and $\\pi$ is a nonzerodivisor in the nonzero local ring $\\mathcal O_{C,x}$: tensor the injection $R\\xrightarrow{\\pi}R$ using [def-weil-pbc-flat-ring-map]. But $C_F=\\varnothing$ says that in an affine neighbourhood of $x$, inverting $\\pi$ gives the zero ring, so some power of $\\pi$ is zero there, a contradiction. Therefore $C=\\varnothing$ and $e_L:T\\xrightarrow{\\sim}L$. This replaces the strict-henselian lifting diagram without assuming finiteness of $B[\\ell]$.",
+   "uses": [
+    "lem-sfb-space-unramified-permanence",
+    "lem-sfb-space-unramified-diagonal-open",
+    "def-pc-fibre-product",
+    "def-weil-etale-morphism",
+    "def-weil-pbc-flat-ring-map",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-semistable-reduction-abelian-varieties.pdf",
+    "place": "Conrad Theorem 4.4, pp.13–14, torsion injectivity; agent expansion via the open diagonal (Stacks 02GE) and DVR torsion-freeness, avoiding a global quasi-finiteness hypothesis on B."
+   }
+  },
+  {
+   "text": "Let $\\Omega$ be any algebraically closed extension of $k$. Put $K_\\Omega=\\ker(a_\\Omega:A_\\Omega\\to B_\\Omega)$. This is a closed subgroup of $A_\\Omega$: the kernel is the pullback of the closed identity section of the separated group $B_\\Omega$. The group laws restrict because $a$ preserves them. The kernel of multiplication by $\\ell$ in $K_\\Omega$ is exactly $L_\\Omega$: on every test scheme both classify points of $A_\\Omega$ killed by $\\ell$ and by $a_\\Omega$, and the inverse fibre-product maps are induced by those same projections. By step 6 it is the trivial group scheme. The source $A_\\Omega$ is smooth, separated and of finite type by base change, and is semiabelian by the hypothesis on geometric fibres. Apply [lem-sfb-semiabelian-closed-subgroup-trivial-torsion-finite]. It gives that $K_\\Omega$ is finite over $\\Omega$. This assertion allows a nonreduced kernel.",
+   "uses": [
+    "lem-sfb-semiabelian-closed-subgroup-trivial-torsion-finite",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-pc-proper-base-change",
+    "lem-sfb-finite-type-composition-base-change",
+    "def-sfb-semiabelian-geometric-fibres",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-semistable-reduction-abelian-varieties.pdf",
+    "place": "Conrad Corollary 3.3, printed p.8, applied as in the proof of Theorem 4.4, p.13."
+   }
+  },
+  {
+   "text": "All fibres of $a$ have finite underlying sets. Generic-fibre points have singleton fibres because $a_F$ is an isomorphism. For a point $y$ in the special fibre of $B$, put $Q=A\\times_B\\operatorname{Spec}\\kappa(y)$. If $Q$ is nonempty, choose a point $x\\in Q$ and an algebraic closure $M$ of $\\kappa(x)$. This makes $M$ an algebraically closed extension of $k$ and supplies $z\\in Q(M)$. Translation gives mutually inverse scheme maps $Q_M\\to K_M$, $w\\mapsto w-z$, and $K_M\\to Q_M$, $h\\mapsto h+z$: the equations $a(w-z)=a(w)-a(z)=0$ and $a(h+z)=y$ hold on every test scheme, and the group identities give the two inverse composites. By step 7, $K_M$ is finite; [lem-weil-pbc-finite-closed-map-finite-fibres](2) therefore makes its underlying set finite. The map $\\operatorname{Spec}M\\to\\operatorname{Spec}\\kappa(y)$ is surjective, so [lem-weil-pbc-surjective-base-change] makes $Q_M\\to Q$ surjective. Hence $|Q|$ is finite. Empty fibres cause no exception. Since $a$ is of finite type by step 1, [pqf-lem-locqf-fibre-discrete] makes it quasi-finite at every point, hence quasi-finite by [pqf-def-quasifinite].",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-weil-pbc-surjective-base-change",
+    "pqf-lem-locqf-fibre-discrete",
+    "pqf-def-quasifinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-semistable-reduction-abelian-varieties.pdf",
+    "place": "Conrad Theorem 4.4 proof, pp.12–13, finite kernel implies finite fibres. The translation argument is written out for arbitrary locally finite type targets, avoiding the finite-type-target hypothesis of lem-sfb-finite-kernel-group-fibres."
+   }
+  },
+  {
+   "text": "It remains to apply Zariski Main Theorem locally on $B$. Fix a nonempty affine open $V\\subseteq B$ and put $X=a^{-1}(V)$. Restricting a finite-type separated map to a target open preserves these properties by the affine definition and the diagonal pullback square; the fibres remain finite. Thus $f:X\\to V$ satisfies [pqf-lem-normalization-open] (the target $V$ is affine, hence quasi-compact and quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]). Write its relative normalization factorization as $X\\xrightarrow{j}N\\xrightarrow{p}V$. That node gives that $j$ is an open immersion and $p$ is integral. The scheme $X$ is nonempty and integral: $V_F$ is nonempty by step 3, $X_F\\simeq V_F$, and $X$ is an open of the integral $A$. Clause (iv) of [lem-weil-pbc-relative-normalization] therefore makes $N$ integral. The open $j(X)$ is nonempty, hence dense in integral $N$.",
+   "uses": [
+    "pqf-lem-normalization-open",
+    "lem-weil-pbc-relative-normalization",
+    "def-pc-integral-scheme",
+    "def-weil-finite-type-morphism",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Stacks Tag 02LR (more-morphisms-lemma-quasi-finite-separated-quasi-affine) and 035H/035I (relative normalization); apply over each affine target open."
+   }
+  },
+  {
+   "text": "The common nonempty opens $X_F\\subseteq X$ and $V_F\\subseteq V$ are isomorphic via $f_F$. Consequently $f$ maps the generic point of $X$ to that of $V$ and induces an isomorphism on their local rings. Since $j$ is an open immersion of nonempty integral schemes, it maps the generic point of $X$ to that of $N$ and induces an isomorphism on those same generic local rings. The identity $p\\circ j=f$ therefore shows that $p$ maps the generic point of $N$ to that of $V$ and induces an isomorphism of function fields (generic local rings) [lem-sc-integral-function-field-affine-fraction]. Normality of $B$ from step 4 gives normal local rings on $V$. Apply [lem-trf-integral-birational-normal-isomorphism] to $p:N\\to V$: it is an isomorphism. Thus $f=p\\circ j$ identifies $X$ with an open subscheme of $V$. These identifications over affine opens of $B$ agree on intersections, because they are restrictions of the single map $a$; their inverses agree by uniqueness of inverses. They glue to an identification of $A$ with the open union of their images in $B$. By [def-weil-open-immersion], $a$ is an open immersion.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-trf-integral-birational-normal-isomorphism",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Stacks Tag 0AB1 (morphisms-lemma-finite-birational-over-normal), integral variant. Conrad Theorem 4.4, printed p.13, conclusion of Zariski Main Theorem argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-proper-fp-permanence",
+  "def-weil-proper-morphism",
+  "lem-sfb-finite-type-composition-base-change",
+  "def-sfb-semiabelian-geometric-fibres",
+  "lem-sfb-semiabelian-geometric-power-integrality",
+  "def-pc-integral-scheme",
+  "def-pc-base-change",
+  "lem-pc-smooth-flat",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-flat-morphism",
+  "def-weil-affine-spectrum",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-sfb-smooth-normal-ascent",
+  "lem-sfb-smooth-group-invertible-multiplication",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "def-pc-fibre-product",
+  "lem-sfb-space-unramified-permanence",
+  "lem-sfb-space-unramified-diagonal-open",
+  "def-weil-etale-morphism",
+  "lem-sfb-semiabelian-closed-subgroup-trivial-torsion-finite",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-surjective-base-change",
+  "pqf-lem-locqf-fibre-discrete",
+  "pqf-def-quasifinite",
+  "pqf-lem-normalization-open",
+  "lem-weil-pbc-relative-normalization",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-trf-integral-birational-normal-isomorphism",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/conrad-semistable-reduction-abelian-varieties.pdf",
+  "place": "Proof of Theorem 4.4, printed pp.12–14, with the arbitrary smooth separated target handled by etale-kernel complement, geometric-fibre translation and affine-local relative normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "semi.?abelian|generically.*isomorph|isomorph.*generic.*fibre|isOpenImmersion.*birational",
+   "results": "{\"t\": \"2026-10-24T03:39:07Z\", \"tool\": \"grep\", \"query\": \"semi.?abelian|generically.*isomorph|isomorph.*generic.*fibre|isOpenImmersion.*birational\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Birational/Birational.lean\"], \"digest\": \"e9980aca27445a24\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: open-immersion definitions, smoothness of an already open immersion, and the flat-monomorphism criterion do not prove that a generic isomorphism of these group schemes is open; flatness/monomorphism of the given map are conclusions to establish."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A generic isomorphism between smooth group schemes over a discrete valuation ring is an open immersion if its source has semiabelian special fibre",
+   "results": "{\"t\": \"2026-10-24T03:39:07Z\", \"tool\": \"leansearch\", \"query\": \"A generic isomorphism between smooth group schemes over a discrete valuation ring is an open immersion if its source has semiabelian special fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsOpenImmersion.of_isIso\", \"AlgebraicGeometry.IsOpenImmersion\", \"AlgebraicGeometry.IsOpenImmersion.iff_isIso_stalkMap\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.stalk_iso\", \"AlgebraicGeometry.isOpenImmersion_iff_stalk\", \"AlgebraicGeometry.IsOpenImmersion.of_stalk_iso\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.of_isIso\", \"AlgebraicGeometry.isOpenImmersion_respectsIso\"], \"digest\": \"c6a63ce1e4006903\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: open-immersion definitions, smoothness of an already open immersion, and the flat-monomorphism criterion do not prove that a generic isomorphism of these group schemes is open; flatness/monomorphism of the given map are conclusions to establish."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.IsSmooth",
+   "results": "{\"t\": \"2026-10-24T03:39:08Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.IsSmooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsSmooth'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "query diagnostic: loogle: unknown identifier 'AlgebraicGeometry.IsSmooth'; no matching result; the other Loogle query and both semantic searches supply the comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism from a smooth separated semiabelian group scheme to a smooth separated group scheme over a discrete valuation ring which is an isomorphism on the generic fibre is an open immersion",
+   "results": "{\"t\": \"2026-10-24T03:39:09Z\", \"tool\": \"leanfinder\", \"query\": \"A homomorphism from a smooth separated semiabelian group scheme to a smooth separated group scheme over a discrete valuation ring which is an isomorphism on the generic fibre is an open immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsOpenImmersion\", \"AlgebraicGeometry.IsOpenImmersion.of_isIso\", \"AlgebraicGeometry.instIsSmoothOfIsOpenImmersion\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"AlgebraicGeometry.instIsOpenImmersionMapOfHomForallEvalRingHom\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.IsOpenImmersion.of_stalk_iso\", \"Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul\"], \"digest\": \"656380ae7a1043a6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: open-immersion definitions, smoothness of an already open immersion, and the flat-monomorphism criterion do not prove that a generic isomorphism of these group schemes is open; flatness/monomorphism of the given map are conclusions to establish."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsOpenImmersion\", \"Birational\"",
+   "results": "{\"t\": \"2026-10-24T03:40:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsOpenImmersion\\\", \\\"Birational\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: open-immersion definitions, smoothness of an already open immersion, and the flat-monomorphism criterion do not prove that a generic isomorphism of these group schemes is open; flatness/monomorphism of the given map are conclusions to establish."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A given homomorphism of smooth groups over a trait with semiabelian source and isomorphic generic fibres identifies its source with an open subgroup of the target",
+   "results": "{\"t\": \"2026-10-24T03:40:48Z\", \"tool\": \"leanfinder\", \"query\": \"A given homomorphism of smooth groups over a trait with semiabelian source and isomorphic generic fibres identifies its source with an open subgroup of the target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isOpen_smoothLocus\", \"AlgebraicGeometry.instIsSmoothOfIsOpenImmersion\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.isSmooth_iff\"], \"digest\": \"e228090e312aefd5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: open-immersion definitions, smoothness of an already open immersion, and the flat-monomorphism criterion do not prove that a generic isomorphism of these group schemes is open; flatness/monomorphism of the given map are conclusions to establish."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-trait-semiabelian-hom-extension",
+  "date": "2026-10-24",
+  "group": "Q142"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "The same trait-extension local input: prove that the already constructed comparison from the supplied semiabelian model into the ambient smooth model is an open immersion.",
+   "via": [
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-generically-isomorphic-semiabelian-open-immersion",
+  "worker": "stage1",
+  "summary": "Q62 checked the given-map generalization of Conrad Theorem 4.4, retained the full statement without extra hypotheses, and wrote the torsion-kernel, finite-fibre and normal-target normalization argument. One new statement-only node isolates Corollary 3.3. The target need only be smooth separated, not quasi-compact.",
+  "blueprint": "The inherited created.item chain has no blueprint ancestor (blueprint_refs ancestor returns None). This is the trait-extension local input below the admissible-direct-image route, specifically the given generic comparison being an open immersion. No unit/chapter record is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Step 5 uses the fact that every map between etale objects over one base is etale, specialized to schemes; the trait-extension unit does not supply this general permanence statement."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Step 7 uses clause (2), smoothness under arbitrary base change, for the geometric special fibre; this is a general scheme tool, not a replacement for the unit route."
+   },
+   {
+    "node": "pqf-lem-locqf-fibre-discrete",
+    "why": "Step 8 uses finite underlying fibres plus local finite type to obtain local quasi-finiteness; the trait-extension unit does not state that general fibre criterion."
+   },
+   {
+    "node": "lem-trf-integral-birational-normal-isomorphism",
+    "why": "Step 10 uses integral birational maps to an integral normal scheme being isomorphisms, without a finiteness assumption; no node of this unit supplies the integral variant."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-pc-proper-base-change",
+  "pqf-lem-locqf-fibre-discrete",
+  "lem-trf-integral-birational-normal-isomorphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q62-0d8fd9a59",
+  "group": "Q62",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-0d8fd9a59 (reviewer sub-agent of L); spot-checked: I read the item, the new node and the statements of all 39 cited nodes. All ten steps hold against the cited statements. Step 1: the graph is the pullback of the diagonal of B, which makes a of finite type and separated with no qc assumption on B. Steps 2-3: A_Fbar is integral by power-integrality with n=1, and flatness plus localization at pi makes A and B integral. Step 4: smooth-normal-ascent makes B normal. Steps 5-6: A[l] and B[l] are etale, so the kernel L is etale; its identity section is open (unramified diagonal) and closed, the generic fibre of the complement is empty, and pi-flatness forces the complement to be empty. Step 7: the special kernel is a closed subgroup whose l-torsion is L_Omega, which is trivial, and the new node then makes it finite. Step 8: explicit translations show the fibres are finite, without the finite-type-target lemma, so a is quasi-finite. Steps 9-10: ZMT over affine V with qcqs V, relative-normalization (iv) makes N integral, and integral-birational-normal makes p an isomorphism, which glues to an open immersion. The new node lem-sfb-semiabelian-closed-subgroup-trivial-torsion-finite (Conrad Cor. 3.3) is true: if dim H > 0 then (H_red)^0 is a nonzero semiabelian variety with nonzero l-torsion inside H[l]. It allows nonreduced H, is statement-only with all four search kinds recorded, and is not a duplicate of the invertible-multiplication, torsion-kernel-divisibility, prime-to-torsion-density or finite-kernel-group-fibres nodes, nor a restatement of a clause of the item. The parent's use of the item matches its statement and there is no cycle. The four tool_uses (chartwise-etale permanence, smooth base change, locqf fibre criterion, integral-birational-normal) are generic and accepted. Batch-5: I recomputed the closures. None reaches an nt-assume leaf, a trace-formula or PD theorem, or a batch-4 target; the trf and pod nodes in the closure are algebraic-space, fppf, etale and module foundations and definitions, so all six flags are accepted. Minor note: in step 2, commutativity of the abelian quotient is left implicit; it follows because the quotient is an fppf image of a commutative group. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GenericallyIsomorphicSemiabelianOpenImmersion",
+  "declaration": "AlgebraicGeometry.isOpenImmersion_of_generically_isomorphic_semiabelian",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericallyIsomorphicSemiabelianOpenImmersion.lean",
+  "statement": "theorem isOpenImmersion_of_generically_isomorphic_semiabelian (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] (F : Type u) [Field F] [Algebra R F] [IsFractionRing R F] (A B : Grp (Over (Spec (.of R)))) [IsCommMonObj A.X] [IsCommMonObj B.X] [Smooth A.X.hom] [IsSeparated A.X.hom] [LocallyOfFinitePresentation A.X.hom] [QuasiCompact A.X.hom] [Smooth B.X.hom] [IsSeparated B.X.hom] (hA : HasSemiabelianGeometricFibres A) (a : A ⟶ B) (hgeneric : IsIso (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R F)))).map a.hom.hom).left)) : IsOpenImmersion a.hom.hom.left",
+  "branch": "sheaf-dag",
+  "by": "Q22",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c5d0cfa68",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Item JSON = live except lean; lean.statement verbatim; stmt_deps unchanged. Clause check: DVR R (IsDomain+IsDiscreteValuationRing), F any fraction field in Type u, A,B : Grp (Over Spec R) + IsCommMonObj; A Smooth/IsSeparated/LFP+QuasiCompact (finite presentation with QS from separated); HasSemiabelianGeometricFibres A (recorded def); B only Smooth+IsSeparated (no qc/ft); a : A ⟶ B group hom; generic iso = IsIso of (Over.pullback (Spec.map algebraMap R F)).map a.hom.hom .left (actual pullback, BaseChangeConventions); conclusion IsOpenImmersion a.hom.hom.left. No extra hypotheses, universes bound, edge cases (rank 0, trivial group, mixed char, imperfect residue field, non-qc B) covered. No duplicate in side-live Sheaf/WeilConjectures or Mathlib (siblings trait-hom-extension, birational-generic-iso-open, dvr-flat-closure differ). Docstrings carry source + blueprint + all 10 steps; proof only sorry; no defs; all imports exist; report has Worker report and Second reading by Q22. Advisory: LFP on A redundant given Smooth. Nothing compiled (no changes)."
+ }
+}

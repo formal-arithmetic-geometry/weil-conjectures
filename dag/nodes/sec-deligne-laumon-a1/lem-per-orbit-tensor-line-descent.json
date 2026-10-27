@@ -1,0 +1,219 @@
+{
+ "id": "lem-per-orbit-tensor-line-descent",
+ "kind": "statement",
+ "title": "The orbit tensor line bundle descends through a finite invariant-ring quotient",
+ "statement": "Let $X$ and $Y$ be schemes [def-pc-scheme], let $H$ be a finite group acting by scheme automorphisms $a_h:X\\to X$ with $a_h\\circ a_g=a_{hg}$, and let $q:X\\to Y$ be a finite surjective morphism [def-weil-finite-integral-morphism] with $q\\circ a_h=q$. Assume that the canonical map of sheaves of rings $\\mathcal O_Y\\to(q_*\\mathcal O_X)^H$ is an isomorphism: for every open $T\\subseteq Y$, $\\mathcal O_Y(T)$ identifies with the $H$-fixed elements of $\\mathcal O_X(q^{-1}T)$, compatibly with restriction. Let $L$ be an invertible $\\mathcal O_X$-module [def-sc-invertible-module]. Form $N=\\bigotimes_{h\\in H}a_h^*L$ using module pullback [def-pc-module-pullback] and the sheaf tensor product [def-pur-sheaf-tensor-product]. Give $N$ its canonical $H$-linearization by permuting the factors: $a_g^*a_h^*L=(a_h\\circ a_g)^*L=a_{hg}^*L$, so right multiplication by $g$ reindexes the tensor product, with the canonical pullback, symmetry and associativity isomorphisms. For an open $T\\subseteq Y$ let $M(T)=N(q^{-1}T)^H$ with this action; this defines a sheaf of $\\mathcal O_Y$-modules [def-weil-sheaf-of-modules-category]. Then $M$ is invertible and the canonical evaluation map $q^*M\\to N$ is an $H$-equivariant isomorphism, where $q^*M$ has the linearization induced by $q\\circ a_h=q$. Moreover, for every integer $d\\geq0$ the natural map $M^{\\otimes d}\\to(q_*(N^{\\otimes d}))^H$ is an isomorphism of $\\mathcal O_Y$-modules, with tensor power zero meaning the structure sheaf. No freeness of the action, normality or invertibility of $|H|$ is assumed.",
+ "source": {
+  "document": "literature/rydh-existence-properties-geometric-quotients-0708.3333.pdf",
+  "place": "WANTED locally. Rydh, arXiv:0708.3333v2, proof of Proposition 4.7, norm of a line bundle. Precise finite-group descent assertion supplied independently by Q83; finite trivialization upstairs is Stacks Divisors Lemma 0BUT. This statement concerns an already given finite quotient, not the quotient-existence theorem."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-sheaf-of-modules-category",
+  "def-sfb-pencil-orbit-bundle-norm"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-per-orbit-tensor-permutation-linearizations] to a, its unit and multiplication equations, q, aq and L. Obtain lin and linPow and retain their four coherence and two orbit-section normalization clauses.",
+   "uses": [
+    "lem-per-orbit-tensor-permutation-linearizations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each y apply [lem-per-orbit-tensor-local-frames]. Its section s yields the explicit orbit frame n and free generators of all powers on q inverse T. Apply the two normalization clauses from the first step to this very s to obtain the fixed-frame hypotheses for lin and linPow.",
+   "uses": [
+    "lem-per-orbit-tensor-local-frames",
+    "lem-per-orbit-tensor-permutation-linearizations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-per-invariant-frame-line-descent] to F=pencilOrbitBundle a L, lin, linPow, the two ring hypotheses and the local frame witnesses just constructed. Combine its M, j, e and c clauses with the six retained linearization clauses. This is the original conclusion with no change to any hypothesis, transport, tensor power or normalization.",
+   "uses": [
+    "lem-per-invariant-frame-line-descent"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-per-orbit-tensor-permutation-linearizations",
+  "lem-per-orbit-tensor-local-frames",
+  "lem-per-invariant-frame-line-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tags 0BUT and 0BCY; same local orbit-frame and invariant-coefficient route as before. A4 proves the explicit frame step and the assembly; the permutation linearization and general invariant-frame descent are the two remaining named steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "orbit.*tensor|tensor.*orbit|lineariz|linearisation|norm.*[Ll]ine|[Ll]ine.*norm",
+   "results": "{\"t\": \"2026-10-24T10:41:06Z\", \"tool\": \"grep\", \"query\": \"orbit.*tensor|tensor.*orbit|lineariz|linearisation|norm.*[Ll]ine|[Ll]ine.*norm\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Formula.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Formula.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Formula.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Formula.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Formula.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic.lean\"], \"digest\": \"4ced877242fc33e4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: representation coinvariants, finite-set orbit quotients and elliptic-curve linear_combination tactics do not state descent of an orbit tensor invertible sheaf through a finite scheme quotient"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finite group acting on a scheme with a geometric quotient, the tensor product of all translates of a line bundle descends to a line bundle on the quotient",
+   "results": "{\"t\": \"2026-10-24T10:41:06Z\", \"tool\": \"leansearch\", \"query\": \"For a finite group acting on a scheme with a geometric quotient, the tensor product of all translates of a line bundle descends to a line bundle on the quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Representation.Coinvariants.mk_inv_tmul\", \"Rep.quotientToInvariantsFunctor_obj_V\", \"t2Space_quotient_mulAction_of_properSMul\", \"MulAction.finite_quotient_of_finite_quotient_of_finite_quotient\", \"MulAction.selfEquivSigmaOrbits'\", \"MulAction.ofQuotientStabilizer\", \"MulAction.finite_quotient_of_pretransitive_of_finite_quotient\", \"Projectivization.instMulAction.congr_simp\"], \"digest\": \"557c1932d4c00b7f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: representation coinvariants, finite-set orbit quotients and elliptic-curve linear_combination tactics do not state descent of an orbit tensor invertible sheaf through a finite scheme quotient"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"descend\"",
+   "results": "{\"t\": \"2026-10-24T10:41:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"descend\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: representation coinvariants, finite-set orbit quotients and elliptic-curve linear_combination tactics do not state descent of an orbit tensor invertible sheaf through a finite scheme quotient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The orbit tensor norm of an invertible sheaf for a finite group action descends through the invariant ring quotient via invariant local frames",
+   "results": "{\"t\": \"2026-10-24T10:41:07Z\", \"tool\": \"leanfinder\", \"query\": \"The orbit tensor norm of an invertible sheaf for a finite group action descends through the invariant ring quotient via invariant local frames\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Representation.Coinvariants.mk_inv_tmul\", \"Rep.FiniteCyclicGroup.coinvariantsTensorResolutionIso_hom_f_hom_apply\", \"Representation.Coinvariants.mk_tmul_inv\", \"Rep.coinvariantsTensorFreeLEquiv_apply\", \"Rep.normNatTrans_app\", \"Rep.coinvariantsTensorFreeToFinsupp_mk_tmul_single\", \"Rep.finsuppToCoinvariantsTensorFree_single\", \"Representation.ofCoinvariantsTprodLeftRegular_mk_tmul_single\"], \"digest\": \"d08a7f94e502a5f2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: representation coinvariants, finite-set orbit quotients and elliptic-curve linear_combination tactics do not state descent of an orbit tensor invertible sheaf through a finite scheme quotient"
+  },
+  {
+   "tool": "grep",
+   "query": "orbit.*tensor|tensor.*orbit|norm.*[Ll]ine|[Ll]ine.*norm|linearisation|linearization",
+   "results": "{\"t\": \"2026-10-24T11:10:33Z\", \"tool\": \"grep\", \"query\": \"orbit.*tensor|tensor.*orbit|norm.*[Ll]ine|[Ll]ine.*norm|linearisation|linearization\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Formula.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Formula.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Formula.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Formula.lean\"], \"digest\": \"31c5f1209bef3834\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned representation coinvariants, free-sheaf pullback, ring-module invertibility, group orbits or unrelated linearization results do not state invariant-frame descent of an orbit tensor sheaf under a finite scheme quotient"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The orbit tensor product of an invertible sheaf descends through a finite group invariant ring quotient without assuming the group order is invertible",
+   "results": "{\"t\": \"2026-10-24T11:10:34Z\", \"tool\": \"leansearch\", \"query\": \"The orbit tensor product of an invertible sheaf descends through a finite group invariant ring quotient without assuming the group order is invertible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Representation.Coinvariants.mk_inv_tmul\", \"Rep.quotientToInvariantsFunctor_obj_V\", \"Module.Invertible.instTensorProduct_2\", \"AddAction.orbitRel.Quotient.orbit_mk\", \"Rep.quotientToInvariantsFunctor\", \"instMulSemiringActionQuotientSubgroupSubtypeMemSubringSubring\", \"Module.Invertible.instTensorProduct\", \"MulAction.orbitEquivQuotientStabilizer\"], \"digest\": \"4ca14852eec3c3bd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned representation coinvariants, free-sheaf pullback, ring-module invertibility, group orbits or unrelated linearization results do not state invariant-frame descent of an orbit tensor sheaf under a finite scheme quotient"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"invariants\"",
+   "results": "{\"t\": \"2026-10-24T11:10:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"invariants\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned representation coinvariants, free-sheaf pullback, ring-module invertibility, group orbits or unrelated linearization results do not state invariant-frame descent of an orbit tensor sheaf under a finite scheme quotient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite group acting on a scheme and a finite invariant ring quotient, the tensor product of all translates of a line bundle descends by invariant local frames",
+   "results": "{\"t\": \"2026-10-24T11:10:42Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite group acting on a scheme and a finite invariant ring quotient, the tensor product of all translates of a line bundle descends by invariant local frames\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.FiniteCyclicGroup.coinvariantsTensorResolutionIso_hom_f_hom_apply\", \"Representation.Coinvariants.mk_inv_tmul\", \"Representation.Coinvariants.mk_tmul_inv\", \"Representation.ofCoinvariantsTprodLeftRegular_mk_tmul_single\", \"Rep.finsuppToCoinvariantsTensorFree_single\", \"Rep.coinvariantsTensorFreeLEquiv_apply\", \"Representation.ofCoinvariantsTprodLeftRegular\", \"Rep.coinvariantsTensorFreeToFinsupp_mk_tmul_single\"], \"digest\": \"b7130f7f088a5b8c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned representation coinvariants, free-sheaf pullback, ring-module invertibility, group orbits or unrelated linearization results do not state invariant-frame descent of an orbit tensor sheaf under a finite scheme quotient"
+  },
+  {
+   "tool": "grep",
+   "query": "invariant.*(sheaf|invertible)|descen.*(invertible|lineBundle)|lineariz",
+   "results": "{\"t\": \"2026-10-24T11:11:35Z\", \"tool\": \"grep\", \"query\": \"invariant.*(sheaf|invertible)|descen.*(invertible|lineBundle)|lineariz\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/ConstantSheaf.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Rep/Iso.lean\", \"Mathlib/RepresentationTheory/Rep/Iso.lean\"], \"digest\": \"da4808e8f581a8a7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned representation coinvariants, free-sheaf pullback, ring-module invertibility, group orbits or unrelated linearization results do not state invariant-frame descent of an orbit tensor sheaf under a finite scheme quotient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivariant invertible sheaf with an invariant local basis is recovered from the invariant pushforward over the fixed ring; this applies to the tensor product indexed by a finite group",
+   "results": "{\"t\": \"2026-10-24T11:11:37Z\", \"tool\": \"leanfinder\", \"query\": \"An equivariant invertible sheaf with an invariant local basis is recovered from the invariant pushforward over the fixed ring; this applies to the tensor product indexed by a finite group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.coinvariantsTensorFreeLEquiv_apply\", \"Rep.FiniteCyclicGroup.coinvariantsTensorResolutionIso_inv_f_hom_apply\", \"SheafOfModules.pullbackObjFreeIso\", \"Representation.ofCoinvariantsTprodLeftRegular_mk_tmul_single\", \"Rep.finsuppToCoinvariantsTensorFree_single\", \"Rep.FiniteCyclicGroup.coinvariantsTensorResolutionIso_hom_f_hom_apply\", \"Representation.coinvariantsTprodLeftRegularLEquiv_symm_apply\", \"Rep.finsuppToCoinvariantsTensorFree\"], \"digest\": \"ab66bdbb2b0b256b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned representation coinvariants, free-sheaf pullback, ring-module invertibility, group orbits or unrelated linearization results do not state invariant-frame descent of an orbit tensor sheaf under a finite scheme quotient"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-projective-finite-group-quotient",
+  "date": "2026-10-24",
+  "group": "Q83"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Expose XVI, section 3.7, printed pp.254--255: the scheme quotient X double-prime/H is projective over X. This lemma supplies descent of the orbit tensor of a line bundle through an already constructed finite quotient; it asserts neither existence of that quotient nor ampleness.",
+   "via": [
+    "lem-per-projective-finite-group-quotient",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-orbit-tensor-line-descent",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reused the existing Stacks 0BUT finite-upstairs trivialization and invertible pullback/tensor and coherent permutation tools. Wrote the invariant frame, fixed-coefficient calculation, evaluation inverse and every tensor-power map explicitly. No new nodes: remaining arguments are elementary local frame and sheaf-gluing calculations. Checked the current blueprint and all cited statements and tested wild characteristic, trivial and nonfaithful actions, nilpotents, the empty scheme and tensor power zero.",
+  "blueprint": "Supplies the inherited finite-group quotient auxiliary input of lem-per-artin-gabber-affine-curve recorded in blueprint.from.place, via lem-per-projective-finite-group-quotient. The current latest blueprint ancestor has no orbit-tensor descent statement; the item is a created auxiliary lemma, not the unit key statement. The local-frame argument retains the norm route of the recorded source and does not replace any unit step. Whole-blueprint searches for orbit tensor, trivialize invertible, norm invertible and line bundle descends found no duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-finite-trivialize-invertible-upstairs",
+    "why": "Generic Stacks 0BUT tool for a finite morphism and an invertible module: supplies a frame on each whole inverse image of a target neighborhood. The item unit has no replacement for this local trivialization."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Generic invertible-module calculus: pullback and tensor products, with their formulas on sections, produce the translated frames and pullback composition comparisons. No unit step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-module-tensor-symmetric-monoidal",
+    "why": "Generic coherent symmetry and associativity for ordinary module tensors supplies finite factor-permutation isomorphisms. Used only for the canonical linearization and its explicit index calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-finite-trivialize-invertible-upstairs",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-module-tensor-symmetric-monoidal"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-3614b88e2",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-3614b88e2 (reviewer sub-agent of L); spot-checked: Read the item in full (statement unchanged, 6 steps, no new nodes, one commit with item and report) and every cited statement: 0BUT trivialization (checked against divisors.tex 3617–3652), the invertible pullback/tensor lemma clauses (1)–(2), the symmetric-monoidal permutation node, and the definition nodes for module sheaf, invertible module (including blueprint_update), module pullback and sheaf tensor. Linearization check: a_g^*a_h^*L≅a_{hg}^*L, so λ_g sends index h to hg. The cocycle λ_{hg}=λ_g∘a_g^*λ_h is consistent, and the resulting right action has the same invariants. The frame n_i=⊗a_h^*s_i is invariant (step 2). The invariant sections form a sheaf, and the O_Y-action works because a_g^♯q^♯=q^♯ (step 3). The invariant-coefficient computation f n_i gives O_Y|_{T_i}≅M|_{T_i}, so M is invertible (step 4). The evaluation map ε(q^*m_i)=n_i is a local isomorphism and is equivariant (step 5). For tensor powers, m_i^{⊗d}↦n_i^{⊗d}, and d=0 is the hypothesis (step 6). Steps 3–6 really are elementary. Edge cases checked: H=1, wild characteristic, non-faithful action, nilpotents, empty scheme, d=0 and d=1. The parent's step 8 uses exactly these clauses. Duplicate search over the DAG (norm/orbit tensor, 0BCY, linearization, equivariant descent, H-fixed pushforward) found nothing equivalent: finite-normal-ample-descent, normal-line-bundle-power-linearization and the sbc torsor descent nodes all state different things. The tool_uses of other units are generic and accepted. Rydh source remains WANTED (inherited); no statement depends on it. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OrbitTensorLineDescent",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.orbit_tensor_line_descent",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.orbit_tensor_line_descent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/OrbitTensorLineDescent.lean",
+  "statement": "theorem orbit_tensor_line_descent {H : Type v} [Group H] [Finite H] {X Y : Scheme.{u}} (a : H → (X ≅ X)) (a_one : (a 1).hom = 𝟙 X) (a_mul : ∀ g h : H, (a (g * h)).hom = (a h).hom ≫ (a g).hom) (q : X ⟶ Y) [IsFinite q] [Surjective q] (aq : ∀ h : H, (a h).hom ≫ q = q) (ring_injective : ∀ T : Y.Opens, Function.Injective (q.app T)) (ring_image : ∀ (T : Y.Opens) (f : Γ(X, q ⁻¹ᵁ T)), (∃ b : Γ(Y, T), q.app T b = f) ↔ ∀ g : H, X.presheaf.map (eqToHom (congrArg (fun k : X ⟶ Y ↦ k ⁻¹ᵁ T) (aq g)).symm).op ((a g).hom.app (q ⁻¹ᵁ T) f) = f) (L : X.Modules) [L.IsInvertible] : ∃ (lin : ∀ g : H, (tensorPullback (a g).hom).obj (pencilOrbitBundle a L) ≅ pencilOrbitBundle a L) (linPow : ∀ (d : ℕ) (g : H), (tensorPullback (a g).hom).obj ((pencilOrbitBundle a L).tensorPow d) ≅ (pencilOrbitBundle a L).tensorPow d), (lin 1).hom = (orbitLinearizationUnit a a_one (pencilOrbitBundle a L)).hom ∧ (∀ g h : H, (lin (g * h)).hom = (orbitLinearizationComp a a_mul (pencilOrbitBundle a L) g h).hom ≫ (tensorPullback (a h).hom).map (lin g).hom ≫ (lin h).hom) ∧ (∀ d : ℕ, (linPow d 1).hom = (orbitLinearizationUnit a a_one ((pencilOrbitBundle a L).tensorPow d)).hom) ∧ (∀ (d : ℕ) (g h : H), (linPow d (g * h)).hom = (orbitLinearizationComp a a_mul ((pencilOrbitBundle a L).tensorPow d) g h).hom ≫ (tensorPullback (a h).hom).map (linPow d g).hom ≫ (linPow d h).hom) ∧ (∀ (T : Y.Opens) (s : Γ(L, q ⁻¹ᵁ T)) (g : H), (lin g).hom.app (q ⁻¹ᵁ T) (orbitInvariantPullback (a g).hom (pencilOrbitBundle a L) (q ⁻¹ᵁ T) (congrArg (fun k : X ⟶ Y ↦ k ⁻¹ᵁ T) (aq g)) (orbitTensorFrame a L (q ⁻¹ᵁ T) (fun h ↦ congrArg (fun k : X ⟶ Y ↦ k ⁻¹ᵁ T) (aq h)) s)) = orbitTensorFrame a L (q ⁻¹ᵁ T) (fun h ↦ congrArg (fun k : X ⟶ Y ↦ k ⁻¹ᵁ T) (aq h)) s) ∧ (∀ (d : ℕ) (T : Y.Opens) (s : Γ(L, q ⁻¹ᵁ T)) (g : H), (linPow d g).hom.app (q ⁻¹ᵁ T) (orbitInvariantPullback (a g).hom ((pencilOrbitBundle a L).tensorPow d) (q ⁻¹ᵁ T) (congrArg (fun k : X ⟶ Y ↦ k ⁻¹ᵁ T) (aq g)) (orbitPowerSection (pencilOrbitBundle a L) (q ⁻¹ᵁ T) d (fun _ ↦ orbitTensorFrame a L (q ⁻¹ᵁ T) (fun h ↦ congrArg (fun k : X ⟶ Y ↦ k ⁻¹ᵁ T) (aq h)) s))) = orbitPowerSection (pencilOrbitBundle a L) (q ⁻¹ᵁ T) d (fun _ ↦ orbitTensorFrame a L (q ⁻¹ᵁ T) (fun h ↦ congrArg (fun k : X ⟶ Y ↦ k ⁻¹ᵁ T) (aq h)) s)) ∧ ∃ (M : Y.Modules) (j : M ⟶ (pushforward q).obj (pencilOrbitBundle a L)) (e : (tensorPullback q).obj M ≅ pencilOrbitBundle a L) (c : ∀ d : ℕ, M.tensorPow d ⟶ (pushforward q).obj ((pencilOrbitBundle a L).tensorPow d)), M.IsInvertible ∧ (∀ T : Y.Opens, Function.Injective (j.app T)) ∧ (∀ (T : Y.Opens) (s : Γ(pencilOrbitBundle a L, q ⁻¹ᵁ T)), (∃ m : Γ(M, T), j.app T m = s) ↔ ∀ g : H, (lin g).hom.app (q ⁻¹ᵁ T) (orbitInvariantPullback (a g).hom (pencilOrbitBundle a L) (q ⁻¹ᵁ T) (congrArg (fun k : X ⟶ Y ↦ k ⁻¹ᵁ T) (aq g)) s) = s) ∧ e.hom = ((tensorPullbackSectionAdjunction q).homEquiv M (pencilOrbitBundle a L)).symm j ∧ (∀ g : H, (tensorPullback (a g).hom).map e.hom ≫ (lin g).hom = (orbitQuotientPullbackIso q (a g).hom (aq g) M).hom ≫ e.hom) ∧ (∀ (d : ℕ) (T : Y.Opens) (s : Fin d → Γ(M, T)), (c d).app T (orbitPowerSection M T d s) = orbitPowerSection (pencilOrbitBundle a L) (q ⁻¹ᵁ T) d (fun i ↦ j.app T (s i))) ∧ (∀ (T : Y.Opens) (b : Γ(Y, T)), (c 0).app T (unitSectionsEquiv T b) = unitSectionsEquiv (q ⁻¹ᵁ T) (q.app T b)) ∧ (∀ (d : ℕ) (T : Y.Opens), Function.Injective ((c d).app T)) ∧ (∀ (d : ℕ) (T : Y.Opens) (s : Γ((pencilOrbitBundle a L).tensorPow d, q ⁻¹ᵁ T)), (∃ m : Γ(M.tensorPow d, T), (c d).app T m = s) ↔ ∀ g : H, (linPow d g).hom.app (q ⁻¹ᵁ T) (orbitInvariantPullback (a g).hom ((pencilOrbitBundle a L).tensorPow d) (q ⁻¹ᵁ T) (congrArg (fun k : X ⟶ Y ↦ k ⁻¹ᵁ T) (aq g)) s) = s)",
+  "branch": "newtargets-dag",
+  "by": "Q119",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The theorem signature is unchanged. The seven real-data helper definitions are extracted unchanged into OrbitTensorLineSections and reexported publicly. The theorem is reduced to two proper proof steps, with the intermediate local-frame theorem proved."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b11fd77db",
+  "group": "Q119",
+  "result": "pass",
+  "note": "Clause-by-clause match: H finite group Type v, left action a(gh)=a_h≫a_g matches node a_h∘a_g=a_{hg}; IsFinite+Surjective q; O_Y≅(q_*O_X)^H as injectivity+exact fixed image of actual q.app; N = landed pencilOrbitBundle (owner def-sfb-pencil-orbit-bundle-norm added to stmt_deps, permitted). Linearization lin/linPow fixed by unit/cocycle laws (orbitLinearizationComp order correct) and by the frame clause, which the canonical permutation satisfies for every s and which determines it uniquely via 0BUT local frames. M via sectionwise-injective j with image = fixed sections; M.IsInvertible; e.hom = adjoint of j under tensorPullbackSectionAdjunction; equivariance square via orbitQuotientPullbackIso (comp⁻¹ then eqToIso aq), correct; c_d on all pure tensors, explicit d=0 = q^sharp, injective with image = linPow-fixed sections. No extra hypotheses; edge cases (trivial/nonfaithful H, wild char, empty X, d=0) covered; lean.statement byte-identical to file; helpers real data with source/blueprint docstrings; only sorry; node diff vs live = lean + landed stmt_dep only; no duplicate found. Advisory: tmulSection/unitSectionsEquiv have no DAG owner (as for the pencil node); cocycle clauses redundant but true. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-23da1",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261026T091041-L-3301973",
+  "kind": "interface",
+  "note": "independent cc review: orbit_tensor_line_descent signature vs clone (identical); 7 moved defs vs clone bodies (verbatim); new sorry statements vs their nodes and the item's needs; #print axioms of the item and local-frames theorem in a /tmp sandbox"
+ }
+}

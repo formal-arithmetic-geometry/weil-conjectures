@@ -1,0 +1,199 @@
+{
+ "id": "lem-sfb-supported-rational-lattice-generation",
+ "kind": "statement",
+ "title": "Rational supported finite models are finite extensions of localized integral models",
+ "statement": "Fix a prime ell and commutative condensed rings R,K identified by ring-object isomorphisms with either (Z_ell,Q_ell) or (O_E,E) for one finite intermediate extension E/Q_ell, all with the full continuous-map condensed rings [sk-def-localizing-closure]. On a qcqs scheme T use ordinary uncompleted module-derived categories [sk-def-sfb-module-derived-pushpull, def-weil-size-convention]. There exists a ring-object map a:R -> K satisfying IsEllLocalizationCoefficient [lem-sfb-supported-coefficient-localization]. Define IsLocalizedSupportedModel(a,T) to consist of all derived objects isomorphic to (K_T tensor_R_T J_R H)[0], where J_R is extension along any path in any finite qcqs open-closed tree rooted at T [def-sfb-qcqs-open-closed-tree] and H is a finite scalar local model on that path source [sk-def-sfb-constructible]. Then for every such path with source S and every finite scalar K_S-local model L, there is n in N such that (J_K L)[0] belongs to extensionProductIter n of IsLocalizedSupportedModel(a,T): n=0 is the generators, and a successor permits a distinguished triangle whose first object is a generator and whose third is in the preceding class. All maps are actual K-linear maps. There is no closed pair or comparison hypothesis, and no assumption of a global lattice for L.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "Refinement isomorphisms paragraph of det-sf-comp-coherence-cocycle, via det-sf-comp-coherence-refinement (2), first paragraph: closed-fibre heart comparison. Agent-formulated Conditional transfer of supported finite-model comparison from integral to rational coefficients. Exact full-generality reference WANTED. Split of steps 1--3 and 7."
+ },
+ "stmt_deps": [
+  "sk-def-localizing-closure",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-weil-size-convention",
+  "lem-sfb-supported-coefficient-localization",
+  "def-sfb-qcqs-open-closed-tree",
+  "sk-def-sfb-constructible",
+  "def-weil-triangulated-subcategory"
+ ],
+ "proof": [
+  {
+   "text": "Transport the standard inclusion Z_ell -> Q_ell or O_E -> E through the specified two ring-object isomorphisms; for Q_ell use the bottom finite intermediate field. The coefficient-localization theorem gives exact scalar extension and the regular ell-telescope at every scheme, including its specified zeroth leg.",
+   "uses": [
+    "det-prop-sfb-qlbar-colimit-x-invert-ell",
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every source of a path is qcqs. A finite scalar local model over the field has finite-dimensional local presentations; choose finite bases and use the constant finite-free comparison to make it lisse, hence constructible on the single stratum. Varying ranks and rank zero are permitted.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-vector-space-free",
+    "lem-sfb-constant-finite-free-presentation-extension",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the qcqs stratified integral-lattice theorem and refine the root tree by the resulting finite constructible lattice partition. Its nonempty leaves have lisse integral lattices spanning the rational restrictions. Empty leaves carry zero. Append each branch to the original path, adjoining complementary siblings. The resulting paths are still admissible.",
+   "uses": [
+    "lem-sfb-qcqs-lisse-stratified-integral-lattices",
+    "lem-sfb-qcqs-constructible-integral-lattice-tree",
+    "def-sfb-qcqs-open-closed-tree"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The lattice-tree scalar comparison identifies each supported leaf with scalar extension of its integral supported branch. Along the original path apply the open slice projection and closed underived projection formulas. Internal-sectionwise transport and Cartesian coefficient compatibility ensure these are comparisons for the actual internal functors.",
+   "uses": [
+    "lem-sfb-qcqs-lattice-tree-reconstruction",
+    "lem-weil-pbc-ringed-slice-extension-tensor",
+    "lem-weil-pbc-proetale-closed-underived-projection",
+    "lem-sfb-internal-module-operations-transport",
+    "sk-prop-sfb-cartesian-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "All edge functors are exact. Each open-closed short exact sequence gives a distinguished triangle after passage to degree-zero complexes and extension along the original path. The finite-tree reconstruction theorem, or induction with extensionProductIter_add, expresses the root object as a finite iterated extension of the supported rational leaves. Repleteness of IsLocalizedSupportedModel replaces these leaves by their scalar-extension presentations. Arbitrary actual connecting maps are retained; the root path and zero leaves require no special assumptions.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-sfb-qcqs-lattice-tree-reconstruction",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-prop-sfb-qlbar-colimit-x-invert-ell",
+  "sk-def-sfb-change-of-scalars",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-vector-space-free",
+  "lem-sfb-constant-finite-free-presentation-extension",
+  "sk-def-sfb-constructible",
+  "lem-sfb-qcqs-lisse-stratified-integral-lattices",
+  "lem-sfb-qcqs-constructible-integral-lattice-tree",
+  "def-sfb-qcqs-open-closed-tree",
+  "lem-sfb-qcqs-lattice-tree-reconstruction",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "lem-weil-pbc-proetale-closed-underived-projection",
+  "lem-sfb-internal-module-operations-transport",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-complex-ses-triangle"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "Original supported rational transfer proof, steps 1--3 and 7: stratified lattices, support projection and finite-tree reconstruction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction isomorphism on derived sections is closed under short exact sequences of module sheaves",
+   "results": "Search returned eight general sheaf/category results; no actual module-derived restriction comparison closure theorem.",
+   "date": "2026-10-25",
+   "verdict": "Use the project closed-restriction derived-operations theorem and the Mathlib triangle isomorphism theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extensionProductIter\"",
+   "results": "Mathlib provides extensionProductIter and its successor/addition rules in Triangulated.Subcategory; no geometric scalar-localization comparison.",
+   "date": "2026-10-25",
+   "verdict": "Use extensionProductIter to state finite generation and its elementary induction to combine comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension inverting a prime preserves cohomology restriction isomorphism by filtered colimit continuity",
+   "results": "Results concern ModuleCat localization and flat scalar extension, not the actual pro-etale module-derived restriction.",
+   "date": "2026-10-25",
+   "verdict": "No direct match; retain the telescope and coefficient-forgetting argument from original proof steps 4--5."
+  },
+  {
+   "tool": "grep",
+   "query": "IsIso.*rightDerivedPullback|extensionProductIter.*IsIso",
+   "results": "No matches through msearch. Direct library searches found QcqsLatticeTreeReconstruction and ClosedRestrictionDerivedOperations.",
+   "date": "2026-10-25",
+   "verdict": "Reuse those declarations; the geometric generation and coefficient-localization glue have distinct interfaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite dimensional pro-etale local systems on qcqs schemes have integral lattices on finite constructible strata, giving finite triangle extension generation by supported integral models",
+   "results": "Eight hits: Scheme.etaleTopology, SheafOfModules.IsFiniteType.exists_localGeneratorsData, Scheme.smallEtaleTopology, LocallyOfFiniteType and affine-transition-limit lemmas.",
+   "date": "2026-10-25",
+   "verdict": "No match for stratified lattices or finite triangulated generation; reuse the project lattice nodes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor.ofSequence\", \"IsColimit\"",
+   "results": "No hits.",
+   "date": "2026-10-25",
+   "verdict": "No direct existing generic telescope comparison supplied by this query."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SupportedRationalModelRigidityTransfer",
+  "date": "2026-10-25",
+  "group": "M5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms paragraph of det-sf-comp-coherence-cocycle, via det-sf-comp-coherence-refinement (2), first paragraph: closed-fibre heart comparison. Conditional transfer of supported finite-model comparison from integral to rational coefficients.",
+   "via": [
+    "lem-sfb-supported-rational-model-rigidity-transfer",
+    "lem-sfb-supported-three-term-scalar-rigidity",
+    "lem-sfb-closed-torsion-rigidity-serre-transfer",
+    "lem-sfb-proper-wcontractible-closed-fibre-rigidity",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SupportedRationalLatticeGeneration",
+  "file": "lean/Sheaf/Paper/SupportedRationalLatticeGeneration.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.supported_rational_lattice_generation",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.IsLocalizedSupportedModel",
+   "AlgebraicGeometry.ProEtale.CondensedRing.supported_rational_lattice_generation"
+  ],
+  "statement": "theorem supported_rational_lattice_generation (ℓ : ℕ) [Fact ℓ.Prime] (R K : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj R] [IsCommMonObj R] [MonObj K] [IsCommMonObj K] (hRK : (Nonempty (Mon.mk R ≅ Mon.mk (Profinite.continuousMapRingObj ℤ_[ℓ])) ∧ Nonempty (Mon.mk K ≅ Mon.mk (Profinite.continuousMapRingObj ℚ_[ℓ]))) ∨ (∃ E : PadicAlgCl.FiniteIntermediateField ℓ, Nonempty (Mon.mk R ≅ Mon.mk (Profinite.padicIntegersRingObj ℓ E)) ∧ Nonempty (Mon.mk K ≅ Mon.mk (Profinite.continuousMapRingObj E)))) (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T] : ∃ a : Mon.mk R ⟶ Mon.mk K, IsEllLocalizationCoefficient ℓ a ∧ ∀ (S : Scheme.{u}) (tree : QcqsOpenClosedTree T) (p : tree.Path S) (L : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj K S)), HasFiniteConstantLocalModel K S L → ∃ n : ℕ, (IsLocalizedSupportedModel a T).extensionProductIter n ((DerivedCategory.singleFunctor _ 0).obj ((p.extension K).obj L))",
+  "branch": "sheaf-dag",
+  "by": "M5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-c38ae",
+  "group": "M5",
+  "result": "fix",
+  "landing": "20261025T101246-L-3676260",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-c38ae",
+  "group": "M5",
+  "result": "fix",
+  "landing": "20261025T101246-L-3676260",
+  "kind": "interface",
+  "note": "independent cc review: item proof vs node plan (generation + coefficient localization + closed-restriction triangle API); two new sorry statements vs their nodes and original steps 1-5,7; unit sk-prop-sf-comp-coherence realized nodes vs removed imports; axioms via scratch compile"
+ }
+}

@@ -1,0 +1,151 @@
+{
+ "id": "def-sfb-nodal-torus-chart",
+ "kind": "definition",
+ "title": "Nodal torus chart with canonical punctured action",
+ "status": "split",
+ "import_flags": [],
+ "statement": "For a commutative ring $A$ and $\\pi\\in A$, use the actual nodal algebra and standard affine model of [def-trf-strict-semistable-curve], $X=\\operatorname{Spec}(A[s,t]/(st-\\pi))$ over $\\operatorname{Spec}A$. Use its canonical coordinate sections $s,t$ from [lem-trf-ordered-nodal-branch-overlap]. Schemes and affine spectra have the meanings of [def-pc-scheme, def-weil-affine-spectrum]; group objects have the diagrams of [def-sc-group-scheme], over this arbitrary base. Let $G=\\mathbf G_{m,A}=\\operatorname{Spec}A[z,z^{-1}]$ be the multiplicative group of [def-sfb-split-torus-over-ring], with its Laurent Hopf group law $z\\mapsto z\\otimes z$, identity $z\\mapsto1$ and inverse $z\\mapsto z^{-1}$. An action of $G$ on $X$ is standard if, on every test $A$-scheme $T$, every $z_0:T\\to G$ and $x:T\\to X$, its two pulled-back coordinate functions are $z_0s(x)$ and $z_0^{-1}t(x)$, respectively. There is a unique such action; use it as the standard action. Put $U=D(s)\\cup D(t)$ and let $j:U\\hookrightarrow X$ be the actual open inclusion, with its inherited map to $\\operatorname{Spec}A$. There is a unique action on $U$ for which $j(z_0x)=z_0j(x)$ on every test scheme; use this as the restricted action. All choices are determined uniquely by the displayed coordinate and inclusion equations.",
+ "stmt_deps": [
+  "def-trf-strict-semistable-curve",
+  "lem-trf-ordered-nodal-branch-overlap",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-sc-group-scheme",
+  "def-sfb-split-torus-over-ring"
+ ],
+ "source": {
+  "document": "literature/alper-halpern-leistner-heinloth-cartan-iwahori-matsumoto.pdf",
+  "place": "Author-hosted https://sites.math.washington.edu/~jarod/papers/iwahori.pdf; Section 2, Claims 1--2, printed p.2; Section 3, Theorem 1.3 (1) implies (2), printed p.6."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "nodal surface Spec A s t modulo st minus uniformizer with multiplicative group weights one minus one",
+   "results": "[leansearch] OK 8 hit(s): Valuation.Uniformizer.mk', Valuation.Uniformizer, ValuationSubring.principalUnitGroup, Lagrange.nodalWeight.congr_simp, IsDedekindDomain.HeightOneSpectrum.valuationOfNeZero, Set.unit, MvPolynomial.isWeightedHomogeneous_one, Lagrange.nodalWeight_eq_eval_nodal_erase_inv.",
+   "date": "2026-10-24",
+   "verdict": "No chart with its specified torus action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The multiplicative group acts on Spec A s t modulo st minus pi by weights one and minus one preserving the punctured chart",
+   "results": "[leanfinder] OK 8 hit(s): NumberField.mixedEmbedding.instMulActionUnitsRingOfIntegersMixedSpace, WeierstrassCurve.instMulActionVariableChange, AlgebraicGeometry.projIsoSpec, NumberField.Units.fundamentalCone.integerSet action, OnePoint.instGLAction, AlgebraicGeometry.AffineSpace.SpecIso_inv_appTop_coord, AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_apply, WeierstrassCurve.Jacobian.instMulActionForallFinOfNatNat.",
+   "date": "2026-10-24",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ModObj, CategoryTheory.IsModHom",
+   "results": "[loogle] OK 12 hit(s): CategoryTheory.IsModHom, CategoryTheory.IsModHom.smul_hom, CategoryTheory.IsModHom.mulActionHom, CategoryTheory.IsModHom.map_smul, and identity/composition/scalar-restriction results. ModObj and IsModHom provide actions and equivariant maps; no commuting equivariant represented right torsor or nodal torus chart.",
+   "date": "2026-10-24",
+   "verdict": "Reuse ModObj for the left action; the required specialized notion has no match."
+  },
+  {
+   "tool": "grep",
+   "query": "Equivariant.*Torsor|Nodal.*Torus|IsStandardAction",
+   "results": "[grep] OK 0 hit(s). Local rg in lean/Sheaf and lean/WeilConjectures found no declarations with these names or meanings. Further concept search found strictNodalRing, StrictSemistableModel.scheme/baseMap and strictNodalCoordinate, reused instead of copying them. SchemeAction.TorsorObject has a left torsor action and equivariant map, not two commuting actions on a represented right torsor.",
+   "date": "2026-10-24",
+   "verdict": "No match for the new combined notions; existing ring, coordinate, group and action notions are reused."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+  "date": "2026-10-24",
+  "group": "NZ"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Nodal torus chart with canonical punctured action in the equivariant nodal extension input (AHLH Section 2, Claims 1--2).",
+   "via": [
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalTorusChart",
+  "declaration": "AlgebraicGeometry.NodalTorusChart.chart",
+  "declarations": [
+   "AlgebraicGeometry.NodalTorusChart.chart",
+   "AlgebraicGeometry.NodalTorusChart.torus",
+   "AlgebraicGeometry.NodalTorusChart.value",
+   "AlgebraicGeometry.NodalTorusChart.torusValue",
+   "AlgebraicGeometry.NodalTorusChart.IsStandardAction",
+   "AlgebraicGeometry.NodalTorusChart.puncture",
+   "AlgebraicGeometry.NodalTorusChart.openChart",
+   "AlgebraicGeometry.NodalTorusChart.inclusion",
+   "AlgebraicGeometry.NodalTorusChart.standardAction_existsUnique",
+   "AlgebraicGeometry.NodalTorusChart.standardAction",
+   "AlgebraicGeometry.NodalTorusChart.openAction_existsUnique",
+   "AlgebraicGeometry.NodalTorusChart.openAction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalTorusChart.lean",
+  "statement": "def chart : Over (Spec (.of A))",
+  "branch": "sheaf-dag",
+  "by": "NZ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-77c135018",
+  "group": "NZ",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-77c135018",
+  "group": "NZ",
+  "result": "fix",
+  "note": "Clause check passes: arbitrary DVR + irreducible π; H : Grp (Over Spec A) smooth/affine/LocallyOfFiniteType/QuasiCompact; hred = IsReductive after every field base change (equivalent to geometric-fibre reductivity); chart = landed StrictSemistableModel.nodal; action + restricted action unique-existence pinned; U = D(s)⊔D(t); EquivariantRepresentedRightTorsor with covers/commutes; conclusion ∃Q, cartesian equivariant RestrictionIso = P̃|_U≅P; statement verbatim, sorry only, docstrings ok, no extra universe/assumptions. H4: NodalTorusChart.torus duplicated landed RingGroupSchemes.multiplicative (def-sfb-split-torus-over-ring, landed 04:04 UTC, before base). FIX: fixes/NodalTorusChart.lean (import SplitTorusOverRing, abbrev torus := RingGroupSchemes.multiplicative A) + fixes/def-sfb-nodal-torus-chart.json (statement cites and stmt_deps adds def-sfb-split-torus-over-ring). nt_compile --json of fixed chart + both delivered modules: exit 0, clean."
+ }
+}

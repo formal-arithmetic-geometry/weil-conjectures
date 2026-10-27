@@ -1,0 +1,265 @@
+{
+ "id": "lem-sfb-representable-stack-diagonal-criterion",
+ "kind": "statement",
+ "title": "Diagonal criterion for representable stack morphisms",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Stacks, Deligne--Mumford stacks, algebraic spaces and 2-fibre products have the conventions of [def-sfb-stable-pointed-moduli-groupoids, def-trf-algebraic-space]. Representable by algebraic spaces means that every scheme base change is equivalent to an algebraic space. Properties of such maps are tested on these algebraic-space base changes. Let $f:\\mathcal X\\to\\mathcal Y$ be a morphism of Deligne--Mumford stacks over $S$ which is representable by algebraic spaces. Then $\\Delta_f:\\mathcal X\\to\\mathcal X\\times_{\\mathcal Y}\\mathcal X$ is representable by schemes, is a monomorphism, and is locally quasi-finite [pqf-def-quasifinite] after every scheme base change. The following are equivalent: the algebraic-space maps $T\\times_{\\mathcal Y}\\mathcal X\\to T$ are separated for all schemes $T\\to\\mathcal Y$; $\\Delta_f$ is a closed immersion after every scheme base change [def-weil-closed-immersion]; $\\Delta_f$ is proper after every scheme base change [def-weil-proper-morphism]. Separated for algebraic spaces means that their relative diagonal is a closed immersion, tested after every scheme base change. A representable diagonal is a monomorphism here when each of its scheme base changes is a monomorphism, equivalently injective on all functors of points.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 04YQ (lemma-properties-diagonal-representable), parts (1), (3), (5), and Tag 04YS (lemma-representable-separated-diagonal-closed), conditions (1)--(3)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-pc-fibre-product",
+  "pqf-def-quasifinite",
+  "def-weil-closed-immersion",
+  "def-weil-proper-morphism",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "A Deligne--Mumford stack is an algebraic stack for the Isom-space theorem: its representable surjective etale scheme atlas is smooth on scheme tests by the etale-implies-smooth lemma and the definitions of the two atlas properties. Thus that theorem applies to both $\\mathcal X$ and $\\mathcal Y$, without a finite-type hypothesis. Fix a scheme $U$ and a map $U\\to\\mathcal X\\times_{\\mathcal Y}\\mathcal X$, given by $x_1,x_2\\in\\mathcal X(U)$ and $\\alpha:f(x_1)\\xrightarrow{\\sim}f(x_2)$. Put $I=\\operatorname{Isom}_{\\mathcal X,U}(x_1,x_2)$ and $J=\\operatorname{Isom}_{\\mathcal Y,U}(f(x_1),f(x_2))$. These are algebraic spaces by the Isom-space theorem. On a $U$-scheme $V$, the pullback $D=U\\times_{\\mathcal X\\times_{\\mathcal Y}\\mathcal X}\\mathcal X$ has objects $(z,u,v)$ with $u:z\\xrightarrow{\\sim}x_1|_V$, $v:z\\xrightarrow{\\sim}x_2|_V$ and $\\alpha|_V f(u)=f(v)$. Set $\\beta=vu^{-1}$; then $f(\\beta)=\\alpha|_V$. An arrow to $(z\\prime,u\\prime,v\\prime)$ satisfies $u\\prime r=u$ and $v\\prime r=v$, so is uniquely $r=(u\\prime)^{-1}u$ and exists exactly when the two values of $\\beta$ agree. Every $\\beta$ has representative $(x_1|_V,1,\\beta)$. Thus this groupoid is equivalent to the discrete sheaf of these $\\beta$. Pulling back the isomorphisms pulls back this description, so the identification is natural on $U$-schemes. Thus $D=U\\times_{\\alpha,J}I$ as a sheaf, so it is an algebraic space by existence of space fibre products.",
+   "uses": [
+    "lem-sfb-stack-isom-space-locally-finite-type",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 04XS (lemma-properties-diagonal), equation-diagonal, expanded using the definition of the 2-fibre product."
+   }
+  },
+  {
+   "text": "The map $I\\to U$ is locally of finite type by the Isom-space theorem. The composite $I\\xrightarrow{q}J\\to U$ is this structure map. Apply cancellation of local finite type for algebraic spaces to conclude that $q$ is locally of finite type. The algebraic-space base-change clause of the finite-type calculus then shows that $D=U\\times_J I\\to U$ is locally of finite type. The base-change theorem explicitly agrees with the ordinary algebraic-space notion, so it applies to $q:I\\to J$ without any extra hypothesis on $f$.",
+   "uses": [
+    "lem-sfb-stack-isom-space-locally-finite-type",
+    "lem-sfb-space-lft-cancellation",
+    "lem-sfb-stack-finite-type-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 04XS (lemma-properties-diagonal), last paragraph; spaces-morphisms.tex Tags 0462 (lemma-permanence-finite-type) and 03XH (lemma-base-change-finite-type)."
+   }
+  },
+  {
+   "text": "Representability of $f$ makes it faithful on every fibre groupoid. Indeed, for $z\\in\\mathcal X(V)$, an automorphism $\\gamma$ with $f(\\gamma)=1$ determines the arrow $(\\gamma,1)$ of $(z,1)$ in $\\mathcal X\\times_{\\mathcal Y,f(z)}V$: the 2-fibre-product compatibility is exactly $1= f(\\gamma)$. The equivalence with the discrete algebraic space supplied by representability is fully faithful, so it identifies the automorphism group of $(z,1)$ with the singleton identity group. Hence $(\\gamma,1)=(1,1)$ and $\\gamma=1$. If $f(\\beta)=f(\\beta\\prime)$, apply this observation to $(\\beta\\prime)^{-1}\\beta$. Consequently for each $V\\to U$ there is at most one $\\beta$ above $\\alpha|_V$. The map $D\\to U$ is therefore a monomorphism of sheaves. The local-finite-type monomorphism theorem now gives separatedness and chartwise local quasi-finiteness of $D\\to U$. The separated locally quasi-finite schemehood theorem applies because the target $U$ is a scheme, and represents $D$ by a scheme. Taking the identity chart of this scheme gives ordinary local quasi-finiteness of $D\\to U$. Since $U$ was arbitrary, this proves all three assertions about $\\Delta_f$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-space-lft-monomorphism-separated-lqf",
+    "lem-a1-separated-locally-qf-space-representable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 04YQ (lemma-properties-diagonal-representable), proof; spaces-morphisms.tex Tags 0463 (lemma-monomorphism-loc-finite-type-loc-quasi-finite) and 03XX (proposition-locally-quasi-finite-separated-over-scheme)."
+   }
+  },
+  {
+   "text": "Assume $\\Delta_f$ is a closed immersion after all scheme base changes. For any scheme $T\\to\\mathcal Y$, write $A=\\mathcal X\\times_{\\mathcal Y}T$, an algebraic space by representability. A scheme $V\\to A\\times_T A$ gives two pairs $(z_1,\\theta_1)$ and $(z_2,\\theta_2)$ with $\\theta_i:f(z_i)\\xrightarrow{\\sim}y|_V$. Its pullback of $\\Delta_{A/T}$ has sections exactly the isomorphisms $\\beta:z_1\\to z_2$ with $\\theta_2 f(\\beta)=\\theta_1$. These are the sections of the pullback of $\\Delta_f$ along $(z_1,z_2,\\theta_2^{-1}\\theta_1)$. The section identification commutes with every restriction $V\\prime\\to V$, so it identifies the sheaf pullbacks as maps over $V$. That scheme map is a closed immersion by assumption. Every scheme test of $\\Delta_{A/T}$ is thus a closed immersion, so $A\\to T$ is separated by the definition in the statement.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 04YS (lemma-representable-separated-diagonal-closed), last paragraph; explicit calculation of the base-change diagonal."
+   }
+  },
+  {
+   "text": "Conversely, assume $\\mathcal X\\times_{\\mathcal Y}T\\to T$ is separated for every scheme $T\\to\\mathcal Y$. For the arbitrary triple $(x_1,x_2,\\alpha)$ over $U$ from step 1 take $y=f(x_2)$ and $A=\\mathcal X\\times_{\\mathcal Y,y}U$. It has two sections $s_1=(x_1,\\alpha)$ and $s_2=(x_2,1)$. The sheaf pullback of $\\Delta_{A/U}$ by $(s_1,s_2):U\\to A\\times_U A$ consists exactly of isomorphisms $\\beta:x_1\\to x_2$ with $f(\\beta)=\\alpha$. This identification commutes with restriction, and by step 1 it identifies the pullback map with $D\\to U$. Separatedness of $A\\to U$ says precisely that this scheme test of its diagonal is a closed immersion. Therefore every scheme test of $\\Delta_f$ is a closed immersion, proving the equivalence of the first two conditions.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 04YS (lemma-representable-separated-diagonal-closed), scheme base-change test with the explicit two sections; same diagonal identity as equation-diagonal."
+   }
+  },
+  {
+   "text": "By step 3, every scheme base change $D\\to U$ of $\\Delta_f$ is a monomorphism between schemes. Apply the proper-monomorphism criterion to that very scheme map: $D\\to U$ is a closed immersion if and only if it is proper and a monomorphism. The monomorphism is already known, so this is equivalent to properness alone. Quantifying over all scheme maps $U\\to\\mathcal X\\times_{\\mathcal Y}\\mathcal X$ proves equivalence of the second and third conditions. Together with steps 4 and 5 this proves all the stated equivalences.",
+   "uses": [
+    "lem-pc-proper-monomorphism-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 04YS (lemma-representable-separated-diagonal-closed), equivalence (2)--(3), using etale.tex Tag 04XV (lemma-characterize-closed-immersion) on the scheme tests."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-a1-separated-locally-qf-space-representable",
+  "lem-pc-proper-monomorphism-closed",
+  "lem-sfb-space-lft-cancellation",
+  "lem-sfb-space-lft-monomorphism-separated-lqf",
+  "lem-sfb-stack-finite-type-calculus",
+  "lem-sfb-stack-isom-space-locally-finite-type",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tags 04XS, 04YQ, 04YS; scheme base-change calculations expanded explicitly, with the proper-monomorphism criterion on the resulting schemes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a representable morphism of algebraic stacks the diagonal is a monomorphism and proper diagonal is equivalent to closed immersion",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"@AlgebraicGeometry.IsSeparated = CategoryTheory.MorphismProperty.diagonal @AlgebraicGeometry.IsClosedImmersion\", \"doc\": \"A morphism of schemes is separated if and only if its diagonal morphism is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.isSeparated_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSeparated f ↔\\n    autoParam (AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal._autoParam\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, $ f $ is separated if and only if the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ X \\\\to X \\\\times_Y X $ (constructed as the pullback of $ f $ against itself) is a closed immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instDiagonalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any morphism $ f $ of schemes, the diagonal morphism from $ X $ to the pullback of $ f $ against itself is an immersion. This asserts that the canonical diagonal map associated to a morphism of sc\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ constructed as the pullback of $ f $ against itself is a closed immersion. This characteriz\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"AlgebraicGeometry.AffineTargetMorphismProperty → AlgebraicGeometry.AffineTargetMorphismProperty\", \"doc\": \"For any scheme $X$ and affine scheme $x$, given a morphism $f: X \\\\to x$, and for any affine schemes $U_1, U_2$ with open immersions $f_1: U_1 \\\\to X$ and $f_2: U_2 \\\\to X$, the property $P$ holds for th\"}\n  {\"name\": \"AlgebraicGeometry.universallyInjective_eq_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective\", \"type\": \"@AlgebraicGeometry.UniversallyInjective = CategoryTheory.MorphismProperty.diagonal @AlgebraicGeometry.Surjective\", \"doc\": \"A morphism of schemes is universally injective if and only if its diagonal morphism (obtained from the pullback of the morphism with itself) is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.isClosedImmersion_diagonal_restrict_diagonalCoverDiagonalRange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (𝒰 : Y.OpenCover)\\n  (𝒱 : (i : 𝒰.I₀) → (CategoryTheory.Limits.pullback f (𝒰.f i)).OpenCover)\\n  [∀ (i : 𝒰.I₀), AlgebraicGeometry.IsAffine (𝒰.X i)]\\n  [∀ (i : 𝒰.I₀) (j : (𝒱 i).I₀), AlgebraicGeometry.IsAffine ((𝒱 i).X j)],\\n  AlgebraicGeometry.IsClosedImmersi\", \"doc\": \"Given a morphism $ f $ of schemes and affine open covers $ \\\\mathcal{U} $ and $ \\\\mathcal{V} $, the diagonal morphism $ \\\\Delta_f $ restricted to the diagonal cover's diagonal range (constructed from the\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, rings, or generic morphism properties; none supplies these Deligne--Mumford stack assertions in one specialization. In particular an ordinary category diagonal theorem does not provide the 2-fibre-product stack geometry."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"diagonal\", \"IsProper\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, rings, or generic morphism properties; none supplies these Deligne--Mumford stack assertions in one specialization. In particular an ordinary category diagonal theorem does not provide the 2-fibre-product stack geometry."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|DeligneMumford|diagonal.*[Pp]roper|[Pp]roper.*diagonal",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/Transvection.lean\", \"line\": \"41\", \"text\": \"* `diagonal_transvection_induction` shows that a property which is true for diagonal matrices and\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/Transvection.lean\", \"line\": \"694\", \"text\": \"/-- Induction principle for matrices based on transvections: if a property is true for all diagonal\"}\n  {\"file\": \"Mathlib/CategoryTheory/MorphismProperty/Limits.lean\", \"line\": \"809\", \"text\": \"/-- For `P : MorphismProperty C`, `P.diagonal` is a morphism property that holds for `f : X ⟶ Y`\"}\n  {\"file\": \"Mathlib/CategoryTheory/MorphismProperty/Limits.lean\", \"line\": \"811\", \"text\": \"def diagonal (P : MorphismProperty C) : MorphismProperty C := fun _ _ f => P (pullback.diagonal f)\"}\n  {\"file\": \"Mathlib/CategoryTheory/MorphismProperty/Limits.lean\", \"line\": \"855\", \"text\": \"lemma hasOfPostcompProperty_iff_le_diagonal [P.IsStableUnderBaseChange]\"}\n  {\"file\": \"Mathlib/CategoryTheory/MorphismProperty/Limits.lean\", \"line\": \"857\", \"text\": \"    P.HasOfPostcompProperty Q ↔ Q ≤ P.diagonal := by\"}\n  {\"file\": \"Mathlib/Algebra/Order/Antidiag/Tendsto.lean\", \"line\": \"16\", \"text\": \"  antidiagonal propertry,  tends to to a filter `F` under the cofinite filter then so does the\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"line\": \"83\", \"text\": \"  MorphismProperty.hasOfPostcompProperty_iff_le_diagonal.mpr\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean\", \"line\": \"212\", \"text\": \"  MorphismProperty.of_isPullback (pullback_map_diagonal_isPullback f g i) inferInstance\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean\", \"line\": \"215\", \"text\": \"  MorphismProperty.hasOfPostcompProperty_iff_le_diagonal.mpr\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"line\": \"56\", \"text\": \"    @IsSeparated = MorphismProperty.diagonal @IsClosedImmersion := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"line\": \"113\", \"text\": \"  rw [diagonal_SpecMap, MorphismProperty.cancel_right_of_respectsIso @IsClosedImmersion]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"line\": \"132\", \"text\": \"  MorphismProperty.of_isPullback (pullback_map_diagonal_isPullback f g i)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"line\": \"223\", \"text\": \"    MorphismProperty.arrow_mk_iso_iff (P := @IsClosedImmersion) (diagonalRestrictIsoDiagonal ..)]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"line\": \"239\", \"text\": \"  MorphismProperty.hasOfPostcompProperty_iff_le_diagonal.mpr\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean\", \"line\": \"53\", \"text\": \"    @WeaklyEtale = (@Flat ⊓ MorphismProperty.diagonal @Flat : MorphismProperty Scheme.{u}) := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean\", \"line\": \"113\", \"text\": \"  rw [MorphismProperty.hasOfPostcompProperty_iff_le_diagonal]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"125\", \"text\": \"  rw [MorphismProperty.hasOfPostcompProperty_iff_le_diagonal]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"line\": \"84\", \"text\": \"      MorphismProperty.pullback_snd (P := .diagonal @IsOpenImmersion) _ _ ‹_›\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"line\": \"91\", \"text\": \"      MorphismProperty.comp_mem (.diagonal @IsOpenImmersion) _ _\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine.lean\", \"line\": \"299\", \"text\": \"    AffineTargetMorphismProperty.diagonal (fun X _ _ _ ↦ IsAffine X) f ↔\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine.lean\", \"line\": \"301\", \"text\": \"  delta AffineTargetMorphismProperty.diagonal\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"line\": \"148\", \"text\": \"  MorphismProperty.hasOfPostcompProperty_iff_le_diagonal.mpr\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors.lean\", \"line\": \"18\", \"text\": \"- `AffineTargetMorphismProperty.diagonal` : Given an affine target morphism property `P`,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors.lean\", \"line\": \"47\", \"text\": \"/-- The `AffineTargetMorphismProperty` associated to `(targetAffineLocally P).diagonal`.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, rings, or generic morphism properties; none supplies these Deligne--Mumford stack assertions in one specialization. In particular an ordinary category diagonal theorem does not provide the 2-fibre-product stack geometry."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A representable algebraic stack morphism is separated iff its diagonal is proper or a closed immersion",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": @IsSeparated = MorphismProperty.diagonal @IsClosedImmersion\", \"doc\": \"A morphism of schemes is separated if and only if its diagonal morphism is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{X : Scheme.{u}} : X.IsSeparated ↔ IsClosedImmersion (prod.lift (𝟙 X) (𝟙 X))\", \"doc\": \"For any scheme $X$, $X$ is separated if and only if the diagonal morphism $\\\\Delta: X \\\\to X \\\\times X$ defined by $\\\\Delta = \\\\text{prod.lift}(\\\\text{id}_X, \\\\text{id}_X)$ is a closed immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.isSeparated_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSeparated f ↔\\n    autoParam (AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal._autoParam\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, $ f $ is separated if and only if the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ X \\\\to X \\\\times_Y X $ (constructed as the pullback of $ f $ against itself) is a closed immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ constructed as the pullback of $ f $ against itself is a closed immersion. This characteriz\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  autoParam (AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal._autoParam →\\n    AlgebraicGeometry.IsSeparated f\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is separated if the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.QuasiSeparated f ↔\\n    autoParam (AlgebraicGeometry.QuasiCompact (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal._autoParam\", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is quasi-separated if and only if the diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"(f : X ⟶ Y) [QuasiSeparatedSpace Y] : QuasiSeparated f ↔ QuasiSeparatedSpace X\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is quasi-separated if the diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, rings, or generic morphism properties; none supplies these Deligne--Mumford stack assertions in one specialization. In particular an ordinary category diagonal theorem does not provide the 2-fibre-product stack geometry."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Diagonal of an algebraic space representable stack morphism is locally quasi finite and representable by schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"AlgebraicGeometry.AffineTargetMorphismProperty → AlgebraicGeometry.AffineTargetMorphismProperty\", \"doc\": \"For any scheme $X$ and affine scheme $x$, given a morphism $f: X \\\\to x$, and for any affine schemes $U_1, U_2$ with open immersions $f_1: U_1 \\\\to X$ and $f_2: U_2 \\\\to X$, the property $P$ holds for th\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instDiagonalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any morphism $ f $ of schemes, the diagonal morphism from $ X $ to the pullback of $ f $ against itself is an immersion. This asserts that the canonical diagonal map associated to a morphism of sc\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"@AlgebraicGeometry.QuasiSeparated = CategoryTheory.MorphismProperty.diagonal @AlgebraicGeometry.QuasiCompact\", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is quasi-separated if and only if its diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact. This establishes the equivalence between the quasi-separatedness p\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ {Q : AlgebraicGeometry.AffineTargetMorphismProperty} [Q.IsLocal], Q.diagonal.IsLocal\", \"doc\": \"If a property $ Q $ of morphisms with affine targets is local on the target scheme, then the diagonal property $ Q $ (preserved under pullbacks along open immersions from affine schemes) is also local\"}\n  {\"name\": \"AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  AlgebraicGeometry.IsZariskiLocalAtTarget P.diagonal\", \"doc\": \"If a morphism property $P$ on schemes is Zariski local at the target, then the diagonal morphism property $P.diagonal$ (defined via pullbacks) is also Zariski local at the target. This asserts that th\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) {Q : AlgebraicGeometry.AffineTargetMorphismProperty}\\n  [AlgebraicGeometry.HasAffineProperty P Q], AlgebraicGeometry.HasAffineProperty P.diagonal Q.diagonal\", \"doc\": \"If a morphism property $P$ has the affine property with respect to another property $Q$ in the category of schemes, then the diagonal morphism property of $P$ also has the affine property with respect\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.FormallyUnramified f]\\n  [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"If a morphism of schemes is formally unramified and locally of finite type, then its diagonal morphism in the pullback is an open immersion.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteFstScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.LocallyQuasiFinite g],\\n  AlgebraicGeometry.LocallyQuasiFinite (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"Given schemes $X, Y, S$ and morphisms $f : X \\\\to S$ and $g : Y \\\\to S$, if $g$ is locally quasi-finite, then the first projection morphism $\\\\mathrm{pullback.fst}(f, g) : X \\\\times_S Y \\\\to X$ from the pu\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, rings, or generic morphism properties; none supplies these Deligne--Mumford stack assertions in one specialization. In particular an ordinary category diagonal theorem does not provide the 2-fibre-product stack geometry."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a representable morphism of algebraic stacks the diagonal is a monomorphism and proper diagonal is equivalent to closed immersion",
+   "results": "Read 8 returned hits; leading declarations/files: AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion, AlgebraicGeometry.isSeparated_iff, AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal, AlgebraicGeometry.IsImmersion.instDiagonalScheme, AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion, AlgebraicGeometry.AffineTargetMorphismProperty.diagonal, AlgebraicGeometry.universallyInjective_eq_diagonal, AlgebraicGeometry.isClosedImmersion_diagonal_restrict_diagonalCoverDiagonalRange. ",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme-only finite-type and diagonal declarations do not state the algebraic-space cancellation or stack diagonal assertion; extending from schemes to algebraic spaces is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|DeligneMumford|diagonal.*[Pp]roper|[Pp]roper.*diagonal",
+   "results": "Read 25 returned hits; leading declarations/files: Mathlib/LinearAlgebra/Matrix/Transvection.lean, Mathlib/LinearAlgebra/Matrix/Transvection.lean, Mathlib/Algebra/Order/Antidiag/Tendsto.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean, Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean. ",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme-only finite-type and diagonal declarations do not state the algebraic-space cancellation or stack diagonal assertion; extending from schemes to algebraic spaces is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A representable algebraic stack morphism is separated iff its diagonal is proper or a closed immersion",
+   "results": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"diagonal\", \"IsProper\"",
+   "results": "Read 0 returned hits; leading declarations/files: . ",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme-only finite-type and diagonal declarations do not state the algebraic-space cancellation or stack diagonal assertion; extending from schemes to algebraic spaces is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Diagonal of an algebraic space representable stack morphism is locally quasi finite and representable by schemes",
+   "results": "Read 8 returned hits; leading declarations/files: AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact, AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact, AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme, AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal, AlgebraicGeometry.HasAffineProperty.diagonal_of_diagonal_of_isPullback, AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal, AlgebraicGeometry.quasiSeparated_iff. ",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme-only finite-type and diagonal declarations do not state the algebraic-space cancellation or stack diagonal assertion; extending from schemes to algebraic spaces is not a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-proper-locally-quasifinite-composition",
+  "date": "2026-10-22",
+  "group": "Q100"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Composition of the coarse morphism with the finite cover, followed by interpretation on the inertia-free source as an algebraic space. The creation chain has no machine-resolvable blueprint ancestor, as blueprint_refs.py ancestor reports. The main-20261015 blueprint node explicitly named by this inherited place, paragraph (3), Rj_* preservation, records the intended alteration-moduli route. Supporting input: Diagonal criterion for representable stack morphisms.",
+   "via": [
+    "lem-sfb-stack-proper-locally-quasifinite-composition",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-representable-stack-diagonal-criterion",
+  "worker": "stage1",
+  "summary": "Expanded every diagonal pullback as the fibre of the map of Isom algebraic spaces. Proved the monomorphism from discrete representable fibres, obtained local finite type by cancellation and base change, and reused the existing local-finite-type monomorphism and separated-locally-quasi-finite schemehood theorems. Proved the separatedness equivalence by explicit pairs of sections and properness equivalence on scheme tests. Added one statement-only algebraic-space cancellation lemma; normalized imported doubled TeX escapes and clarified the monomorphism test without changing the proposition. Repair of the returned head c147ab23c3d: re-read every current cited statement and rebase through deliver.py onto current origin/sheaf-dag, retaining the six-step argument and cancellation prerequisite. Moved the Deligne--Mumford-to-algebraic-stack hypothesis check before its first use in step 1, with its etale-implies-smooth citation, and made the algebraic-space compatibility used for base change explicit in step 2. Refreshed again against the current live unsplit item after the promotion return; made the restriction compatibility of the diagonal and separatedness pullback identifications explicit, and rechecked all thirteen literal citation quotes against the current statements. Corrected the inherited source-tag mismatch: lemma-properties-diagonal is Tag 04XS, not 04YP (the latter labels lemma-isom-pseudo-torsor-aut), checked against the local Stacks tag table. Repair of returned head f6aee098a90: compared the retained delivery with the current live unsplit item, re-read every cited statement, and expanded the diagonal fibre equivalence into its explicit objects, arrows, unique arrow formula and representative before rebuilding on current origin/sheaf-dag. Current repair: rebased the retained split on the live unsplit DAG through deliver.py, re-read all cited statements and verified every literal quotation. Expanded the kernel-automorphism argument in step 3 to give its 2-fibre-product arrow equation and the fully faithful equivalence which forces the automorphism to be the identity.",
+  "blueprint": "Realizes the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration/moduli route: diagonal input used by lem-sfb-stack-proper-locally-quasifinite-composition. blueprint_refs.py ancestor returns None, as the inherited creation chain states; retained its null ancestor and detailed place, and searched same_as across the full blueprint.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence of fibre products of algebraic spaces to form the fibre of the Isom-map; no trace-formula argument is used."
+   },
+   {
+    "node": "lem-a1-separated-locally-qf-space-representable",
+    "why": "Generic schemehood criterion over a scheme target; the statement has no rank or real-sheaf input and is the exact Tag 03XX input of the source proof."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-a1-separated-locally-qf-space-representable"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-94f58bb58",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-94f58bb58 (reviewer sub-agent of L); spot-checked: This is the fifth delivery of the same split. Readers PASSed c147, 497d, f6ae and e630, and landing refused each one only because the side completion was not promoted. On live and side-live the item is still unsplit, with no proof, no cancellation node and no repair note. The only change since e63096f0 is step 3, plus the split_report text. Step 3 now spells out that (γ,1) is an arrow of (z,1) in X×_{Y,f(z)}V exactly when 1=f(γ), and full faithfulness of the equivalence with a discrete space forces γ=1. I re-derived this. The statement is Stacks 04YQ (1),(3),(5) and 04YS (1)-(3) restricted to DM stacks; I read both, and also 04XS and 0462, with their proofs. Under the convention G(w)φ=φ'F(v), I checked the following. Step 1: f(v)=αf(u), β=vu⁻¹, the arrow r=u'⁻¹u is unique, so D=U×_J I as in equation-diagonal; the DM atlas is smooth via the étale-smooth node, so the Isom node applies. Step 2: 04XR, then the new node (0462), then base change from the calculus node, which agrees with the algebraic-space notion. Step 3: 0463 gives exactly the hypotheses of 03XX over the scheme U, so D is a scheme. Step 4: θ₁=θ₂f(β). Step 5: f(β)=α. Step 6: the 04XV leaf on the scheme monomorphism D→U. The new node lem-sfb-space-lft-cancellation is exactly 0462, statement-only and not a clause of the item. I tested it on identity, empty and affine cases. The rg -L scan finds only scheme-level nodes (trf monomorphism-composite, nagata) or unrelated ones, so there is no duplicate. Item edge cases: id, Spec k→BG, and the doubled-origin line. Batch-5 check: def-trf-algebraic-space is a general definition; lem-trf-space-fibre-products-etale-covers (02X2) and lem-a1-separated-locally-qf-space-representable (03XX, whose closure reaches only that definition) are generic algebraic-space foundations, used for a stack diagonal criterion. Neither is a step of the trace formula or Poincaré duality, and neither assumption gives them, so all three are accepted (the last two are declared in tool_uses). No SGA, no cycle, all tags checked against tags/tags. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RepresentableStackDiagonalCriterion",
+  "declaration": "CategoryTheory.representableStack_diagonal_criterion",
+  "file": "lean/Sheaf/AlgebraicGeometry/RepresentableStackDiagonalCriterion.lean",
+  "statement": "theorem representableStack_diagonal_criterion {S : Scheme.{u}} {X : BasedCategory.{v₁, w₁} (Over S)} {Y : BasedCategory.{v₂, w₂} (Over S)} (f : BasedFunctor X Y) (hX : IsDeligneMumfordModuliStack X) (hY : IsDeligneMumfordModuliStack Y) (hf : IsRepresentableByAlgebraicSpaces f) : ModuliSchemeTest (fun _ _ p ↦ Mono p ∧ Scheme.Hom.IsLocallyQuasiFinite p) (moduliRelativeDiagonal f) ∧ ((∀ (T : Over S) (t : BasedFunctor (discreteModuli (yoneda.obj T)) Y), ∃ (Z : AlgebraicSpace S) (p : Z.obj.obj ⟶ yoneda.obj T), HasSpaceBaseChange f T t Z p ∧ AlgebraicSpace.MapToSchemeIsSeparated Z T p) ↔ ModuliSchemeTest @IsClosedImmersion (moduliRelativeDiagonal f)) ∧ (ModuliSchemeTest @IsClosedImmersion (moduliRelativeDiagonal f) ↔ ModuliSchemeTest @IsProper (moduliRelativeDiagonal f))",
+  "branch": "sheaf-dag",
+  "by": "Q138",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1b6433a9d",
+  "group": "Q138",
+  "result": "pass",
+  "note": "Matched against Stacks 04YQ (1),(3),(5) and 04YS (1)-(3). The first conjunct is ModuliSchemeTest (Mono ∧ Scheme.Hom.IsLocallyQuasiFinite) on the canonical moduliRelativeDiagonal. The iffs are separatedness via HasSpaceBaseChange+MapToSchemeIsSeparated (∃ presentation is harmless: one exists, presentations are unique up to iso over T, separatedness is iso-invariant) ⇔ ModuliSchemeTest IsClosedImmersion ⇔ ModuliSchemeTest IsProper. Hypotheses are exact (DM ×2, representable by algebraic spaces, independent universes). lean.statement is verbatim. Node diff vs live is only lean+stmt_deps; the added deps def-sfb-dm-stack-morphism-properties and def-sfb-proper-curve-moduli are landed defs owning the declarations used, with no cycle. No existing duplicate. No new defs, sorry only, source/blueprint docstrings, Worker report + Second reading present, imports exist. Edge cases (empty, identity with automorphisms, BG, doubled-origin line) are fine. No compile needed (no change)."
+ }
+}

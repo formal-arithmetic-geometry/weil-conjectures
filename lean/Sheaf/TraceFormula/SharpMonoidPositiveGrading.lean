@@ -8,6 +8,10 @@ module
 public import Mathlib.LinearAlgebra.FreeModule.Basic
 public import Mathlib.GroupTheory.Finiteness
 import Sheaf.TraceFormula.RationalConeDualFinite
+import Mathlib.Algebra.Group.Submonoid.Finsupp
+import Mathlib.LinearAlgebra.Pi
+import Mathlib.Tactic.Positivity
+import Mathlib.Tactic.Ring
 
 /-!
 # Strictly positive integral grading of a sharp lattice monoid
@@ -24,6 +28,30 @@ set_option autoImplicit false
 @[expose] public section
 
 universe u
+
+private theorem common_denominators {ι : Type*} [Finite ι] (q : ι → ℚ) :
+    ∃ d : ℕ, 0 < d ∧ ∃ z : ι → ℤ, ∀ i, (z i : ℚ) = d * q i := by
+  classical
+  let := Fintype.ofFinite ι
+  have aux (s : Finset ι) :
+      ∃ d : ℕ, 0 < d ∧ ∀ i ∈ s, ∃ z : ℤ, (z : ℚ) = d * q i := by
+    induction s using Finset.induction_on with
+    | empty => exact ⟨1, Nat.zero_lt_one, by simp⟩
+    | @insert i s hi ih =>
+      obtain ⟨d, hd, hz⟩ := ih
+      refine ⟨(q i).den * d, Nat.mul_pos (q i).den_pos hd, ?_⟩
+      intro j hj
+      rcases Finset.mem_insert.mp hj with rfl | hj
+      · refine ⟨(q j).num * (d : ℤ), ?_⟩
+        push_cast
+        rw [mul_assoc, mul_comm (d : ℚ), ← mul_assoc, Rat.den_mul_eq_num]
+      · obtain ⟨z, hz⟩ := hz j hj
+        refine ⟨((q i).den : ℤ) * z, ?_⟩
+        push_cast
+        rw [hz, mul_assoc]
+  obtain ⟨d, hd, hz⟩ := aux Finset.univ
+  choose z hz using fun i ↦ hz i (Finset.mem_univ i)
+  exact ⟨d, hd, z, hz⟩
 
 /-- A finitely generated sharp submonoid of a finite-rank free abelian group admits a
 strictly positive integral grading, whose restriction takes values in the natural numbers.
@@ -61,6 +89,123 @@ theorem exists_strictlyPositiveIntegralGrading
     ∃ (w : G →+ ℤ) (wP : P →+ ℕ),
       (∀ p : G, p ∈ P → p ≠ 0 → 0 < w p) ∧
       (∀ p : P, (wP p : ℤ) = w p) := by
-  sorry
+  classical
+  let f : G →+ (Fin r → ℚ) :=
+    { toFun := fun g i ↦ (e.repr g i : ℚ)
+      map_zero' := by ext i; simp
+      map_add' := by intros; ext i; simp }
+  have hf : Function.Injective f := by
+    intro x y h
+    apply e.repr.injective
+    ext i
+    have hi : (e.repr x i : ℚ) = (e.repr y i : ℚ) := congrFun h i
+    exact_mod_cast hi
+  obtain ⟨s, hs⟩ := hP
+  let t : Fin s.card ≃ s := s.equivFin.symm
+  let v : Fin s.card → G := fun j ↦ (t j).val
+  have hv : Set.range v = (s : Set G) := by
+    ext x
+    constructor
+    · rintro ⟨j, rfl⟩
+      exact (t j).property
+    · intro hx
+      obtain ⟨j, hj⟩ := t.surjective ⟨x, hx⟩
+      exact ⟨j, congrArg Subtype.val hj⟩
+  have hvmem (j) : v j ∈ P := by
+    rw [← hs]
+    exact AddSubmonoid.subset_closure (hv ▸ Set.mem_range_self j)
+  have hgen (p : G) (hp : p ∈ P) :
+      ∃ a : Fin s.card → ℕ, p = ∑ j, a j • v j := by
+    apply AddSubmonoid.exists_of_mem_closure_range
+    rwa [hv, hs]
+  obtain ⟨n, forms, hforms⟩ :=
+    Weil.rationalConeDualFinite s.card (fun j ↦ f (v j))
+  let L : (Fin r → ℚ) →ₗ[ℚ] ℚ := ∑ i, forms i
+  have hcone (p : G) (hp : p ∈ P) : ∀ i, 0 ≤ forms i (f p) := by
+    apply (hforms (f p)).mp
+    obtain ⟨a, rfl⟩ := hgen p hp
+    refine ⟨fun j ↦ (a j : ℚ), fun j ↦ Nat.cast_nonneg _, ?_⟩
+    simp only [map_sum, map_nsmul, Nat.cast_smul_eq_nsmul]
+  have hclear (x : Fin r → ℚ)
+      (hx : ∃ q : Fin s.card → ℚ, (∀ j, 0 ≤ q j) ∧ ∑ j, q j • f (v j) = x) :
+      ∃ d : ℕ, 0 < d ∧ ∃ a : G, a ∈ P ∧ f a = (d : ℚ) • x := by
+    obtain ⟨q, hq, rfl⟩ := hx
+    obtain ⟨d, hd, z, hz⟩ := common_denominators q
+    have hzpos (j) : 0 ≤ z j := by
+      have : (0 : ℚ) ≤ (z j : ℚ) := by
+        rw [hz]
+        exact mul_nonneg (Nat.cast_nonneg d) (hq j)
+      exact_mod_cast this
+    refine ⟨d, hd, ∑ j, (z j).toNat • v j,
+      P.sum_mem (fun j _ ↦ P.nsmul_mem (hvmem j) _), ?_⟩
+    simp only [map_sum, map_nsmul, Finset.smul_sum, smul_smul]
+    apply Finset.sum_congr rfl
+    intro j _
+    rw [← Nat.cast_smul_eq_nsmul ℚ]
+    have hcast : ((z j).toNat : ℚ) = (z j : ℚ) := by
+      exact_mod_cast Int.toNat_of_nonneg (hzpos j)
+    rw [hcast, hz]
+  have hpos (p : G) (hp : p ∈ P) (hp0 : p ≠ 0) : 0 < L (f p) := by
+    have hn : ∀ i, 0 ≤ forms i (f p) := hcone p hp
+    have hnonneg : 0 ≤ L (f p) := by
+      simpa [L] using Finset.sum_nonneg (fun i (_ : i ∈ Finset.univ) ↦ hn i)
+    apply lt_of_le_of_ne hnonneg
+    intro heq
+    have heach : ∀ i, forms i (f p) = 0 := by
+      have hsum : ∑ i, forms i (f p) = 0 := by simpa [L] using heq.symm
+      exact fun i ↦ (Finset.sum_eq_zero_iff_of_nonneg
+        (fun i (_ : i ∈ Finset.univ) ↦ hn i)).mp hsum i (Finset.mem_univ i)
+    have hneg : ∃ q : Fin s.card → ℚ,
+        (∀ j, 0 ≤ q j) ∧ ∑ j, q j • f (v j) = -f p := by
+      apply (hforms (-f p)).mpr
+      intro i
+      simp [heach i]
+    obtain ⟨d, hd, a, ha, hfa⟩ := hclear (-f p) hneg
+    have haeq : a = -(d • p) := by
+      apply hf
+      rw [map_neg, map_nsmul, ← Nat.cast_smul_eq_nsmul ℚ]
+      simpa only [smul_neg] using hfa
+    have hzero : d • p = 0 :=
+      hsharp (d • p) (P.nsmul_mem hp d) (haeq ▸ ha)
+    have hfp : f p = 0 := by
+      have hh := congrArg f hzero
+      have hdq : (d : ℚ) ≠ 0 := by exact_mod_cast hd.ne'
+      simpa only [map_nsmul, map_zero, ← Nat.cast_smul_eq_nsmul ℚ,
+        smul_eq_zero, hdq, false_or] using hh
+    exact hp0 (hf (by simpa using hfp))
+  obtain ⟨d, hd, z, hz⟩ := common_denominators (fun i ↦ L (Pi.single i 1))
+  let w : G →+ ℤ :=
+    { toFun := fun g ↦ ∑ i, e.repr g i * z i
+      map_zero' := by simp
+      map_add' := by intros; simp [add_mul, Finset.sum_add_distrib] }
+  have hw (g : G) : (w g : ℚ) = d * L (f g) := by
+    have hcoord : f g = ∑ i, (e.repr g i : ℚ) • Pi.single i 1 := by
+      ext i
+      simp [Finset.sum_apply, Pi.single_apply, f]
+    change ((∑ i, e.repr g i * z i : ℤ) : ℚ) = d * L (f g)
+    simp only [Int.cast_sum, Int.cast_mul, hz, hcoord, map_sum, map_smul,
+      smul_eq_mul, Finset.mul_sum]
+    apply Finset.sum_congr rfl
+    intro i _
+    ring
+  have hwpos (p : G) (hp : p ∈ P) (hp0 : p ≠ 0) : 0 < w p := by
+    have : (0 : ℚ) < (w p : ℚ) := by rw [hw]; exact mul_pos (by positivity) (hpos p hp hp0)
+    exact_mod_cast this
+  have hwnonneg (p : P) : 0 ≤ w p := by
+    by_cases h : (p : G) = 0
+    · simp [h]
+    · exact (hwpos p p.property h).le
+  refine ⟨w, { toFun := fun p ↦ (w p).toNat
+               map_zero' := by simp
+               map_add' := ?_ }, hwpos, ?_⟩
+  · intro p q
+    apply Int.ofNat_injective
+    change ((w ((p + q : P) : G)).toNat : ℤ) =
+      ((w (p : G)).toNat : ℤ) + ((w (q : G)).toNat : ℤ)
+    rw [Int.toNat_of_nonneg (hwnonneg (p + q)),
+      Int.toNat_of_nonneg (hwnonneg p), Int.toNat_of_nonneg (hwnonneg q)]
+    exact w.map_add p q
+  · intro p
+    exact Int.toNat_of_nonneg (hwnonneg p)
 
 end

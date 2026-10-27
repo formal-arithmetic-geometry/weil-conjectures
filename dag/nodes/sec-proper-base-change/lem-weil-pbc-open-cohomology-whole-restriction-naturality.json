@@ -92,7 +92,32 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.openCohomologyPullback_restrict"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.openCohomologyPullback_restrict",
+     "module": "WeilConjectures.AlgebraicGeometry.EtaleOpenCohomologyMaps",
+     "lines": [
+      60,
+      94
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "lean": {
   "existing": false,
   "module": "WeilConjectures.AlgebraicGeometry.EtaleOpenCohomologyMaps",
@@ -122,5 +147,25 @@
   "landing": "20261012T053924-L-2632008",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $g:Y\\to X$ be a morphism of schemes [def-pc-scheme], $W\\subseteq X$ an open subscheme with inclusion $j_W:W\\to X$, $j'_W:g^{-1}W\\to Y$ the inclusion of its preimage and $g_W:g^{-1}W\\to W$ the restriction of $g$, so that $j_W\\circ g_W=g\\circ j'_W$. Let $G$ be an abelian sheaf on the small etale site of $X$ and $q\\ge0$. Write $u^*:H^q(X,G)\\to H^q(X',u^{-1}G)$ for the cohomology pullback along a morphism $u:X'\\to X$ [def-weil-pbc-cohomology-pullback], and let\n$$P_W:H^q(W,j_W^{-1}G)\\to H^q(g^{-1}W,j'^{-1}_Wg^{-1}G)$$\nbe the pullback $g_W^*$ followed by the map induced by the coefficient isomorphism $g_W^{-1}j_W^{-1}G\\cong(j_W\\circ g_W)^{-1}G=(g\\circ j'_W)^{-1}G\\cong j'^{-1}_Wg^{-1}G$ given by the composition isomorphisms of inverse images [lem-weil-pbc-inverse-image-composition]. Then for every $x\\in H^q(X,G)$\n$$j'^*_W\\bigl(g^*x\\bigr)=P_W\\bigl(j_W^*x\\bigr)\\quad\\text{in }H^q(g^{-1}W,j'^{-1}_Wg^{-1}G).$$",
+  "proof": [
+   {
+    "text": "By the functoriality of cohomology pullback under composition [lem-weil-pbc-cohomology-pullback-functorial], for composable $a,b$ and $c=b\\circ a$ one has $a^*(b^*x)=\\theta_{a,b}(c^*x)$, where $\\theta_{a,b}$ is induced by the composition isomorphism $c^{-1}\\cong a^{-1}b^{-1}$ of [lem-weil-pbc-inverse-image-composition]. Apply this to $(a,b)=(g_W,j_W)$ and to $(a,b)=(j'_W,g)$; both composites are the same morphism $c=j_W\\circ g_W=g\\circ j'_W:g^{-1}W\\to X$. Thus\n$$g_W^*(j_W^*x)=\\theta_{g_W,j_W}(c^*x),\\qquad j'^*_W(g^*x)=\\theta_{j'_W,g}(c^*x).$$\nSince $\\theta_{g_W,j_W}$ is induced by an isomorphism, applying the map induced by its inverse to the first identity gives $c^*x$, and then applying $\\theta_{j'_W,g}$ gives $j'^*_W(g^*x)$. By definition of $P_W$ (and since cohomology of a composite of coefficient maps is the composite of the induced maps) this composite is $P_W(j_W^*x)$.",
+    "uses": [
+     "lem-weil-pbc-cohomology-pullback-functorial",
+     "lem-weil-pbc-inverse-image-composition"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

@@ -1,0 +1,253 @@
+{
+ "id": "lem-sfb-normal-base-torsion-frame-extension",
+ "kind": "statement",
+ "title": "Extension of torsion frames over a normal base",
+ "statement": "Let $S$ be a normal locally Noetherian scheme, meaning that $S$ has an affine open cover by spectra of Noetherian rings [pqf-def-locnoeth] and each local ring is an integrally closed domain, and let $j:V\\hookrightarrow S$ be a dense open immersion. Let $N\\to S$ be a separated smooth commutative group algebraic space of finite presentation, with geometrically connected fibres that are extensions of abelian varieties by tori, and assume $N_V$ is an abelian scheme. Here separated means that the diagonal $N\\to N\\times_S N$ is representable by closed immersions [def-weil-closed-immersion]. A torus becomes a product of multiplicative groups over a separable closure; an abelian variety is a smooth proper geometrically connected group variety. Let $n\\geq1$ be invertible on $S$, let $r\\geq0$, and write $N[n]=\\ker([n]:N\\to N)$ as an etale sheaf: on an etale $T\\to S$ its sections are those $x\\in N(T)$ with $nx=0$. The restriction map\n$$N[n]\\longrightarrow j_*j^{-1}N[n]$$\nis injective. For any isomorphism $\\alpha:N_V[n]\\xrightarrow{\\sim}\\underline{(\\mathbf Z/n\\mathbf Z)^r}_V$ there is a unique monomorphism of etale sheaves of $\\mathbf Z/n\\mathbf Z$-modules\n$$\\bar\\alpha:N[n]\\hookrightarrow\\underline{(\\mathbf Z/n\\mathbf Z)^r}_S$$\nrestricting to $\\alpha$. It is natural under base isomorphisms and isomorphisms of $N$ carrying the specified open frame to the specified open frame; the target carries the identity action on its constant labels. Algebraic spaces, etale sites, inverse and direct image, and constant sheaves are [def-trf-algebraic-space], [def-weil-pbc-etale-site], [def-weil-pbc-inverse-image], [def-weil-pbc-direct-image] and [def-weil-pbc-constant-sheaf]; module sheaves are [def-weil-sheaf-of-modules-category].",
+ "source": {
+  "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+  "place": "Lemma 3.5.2, printed p.140 (both assertions); separated semiabelian spaces as defined in Section 1.1. Local PDF WANTED; primary PDF read online.",
+  "url": "https://numdam.org/item/AST_1985__127__131_0.pdf"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-constant-sheaf",
+  "pqf-def-locnoeth",
+  "def-weil-closed-immersion",
+  "def-weil-sheaf-of-modules-category",
+  "def-sfb-space-group-torsion"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-a1-normal-etale-components-clopen] to the identity of $S$. Its hypotheses hold by the explicitly stated locally Noetherian and normal assumptions. Thus the irreducible components $S_a$ of $S$ are open and closed. Every local ring of $S$ is a domain, hence reduced; reducedness is detected on stalks, so $S$ and each open $S_a$ are reduced. Each nonempty $S_a$ is therefore integral, with the same integrally closed local rings as $S$. Density of $V$ implies that $V_a=V\\cap S_a$ is nonempty for each $a$. These components are pairwise disjoint: if $S_a$ meets $S_b$, their intersection is a nonempty subset both open and closed in the irreducible space $S_a$, so it equals $S_a$. Thus $S_a\\subseteq S_b$, and maximality makes the components equal. Thus they form a disjoint open cover of $S$. If $S$ is empty, its etale site has only the empty scheme as an object, all module sheaves have the unique zero section, and both assertions and uniqueness hold.",
+   "uses": [
+    "lem-a1-normal-etale-components-clopen"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0357, lemma-normal-locally-finite-nr-irreducibles; normality and reducedness from local rings (Tag 033K)."
+   }
+  },
+  {
+   "text": "For every etale test scheme $q:T\\to S$, $T$ is normal and in particular reduced. Indeed choose affine opens $\\operatorname{Spec}B\\subseteq T$ over $\\operatorname{Spec}A\\subseteq S$. By [lem-weil-pbc-affine-open-stalk-localization], the localizations $A_{\\mathfrak p}$ are the integrally closed local domains of $S$, so $A$ is a normal ring (normality of a ring means normality of all these localizations). The restricted affine morphism is etale, so [lem-weil-pbc-etale-over-normal-ring-normal] says $B$ is normal. The same stalk-localization identification gives normal local domains at every point of $T$. Domains have no nonzero nilpotents, hence the structure sheaf of $T$ is reduced.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-etale-over-normal-ring-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 033C, lemma-normal-goes-up, specialized to etale maps; Schemes Tag 01HV, lemma-spec-sheaves."
+   }
+  },
+  {
+   "text": "Put $T_V=T\\times_S V$. It is dense in every etale $T\\to S$: any nonempty open $W\\subseteq T$ has nonempty open image $q(W)$ by [lem-weil-pbc-etale-morphism-open-map], so this image meets $V$, and $W$ meets $T_V$. If $x,y\\in N[n](T)$ have equal restrictions to $T_V$, their equalizer is the pullback of the closed diagonal of $N/S$ along $(x,y):T\\to N\\times_S N$. By the meaning of a representable closed diagonal this is a closed subscheme $E\\hookrightarrow T$. The closed subset $|E|$ contains the dense open $T_V$, hence equals $|T|$. On each affine open $A=\\operatorname{Spec}R$ of $T$, write $E\\times_T A=\\operatorname{Spec}(R/I)$ using [def-weil-closed-immersion]. Its underlying closed set is all of $\\operatorname{Spec}R$, so every prime ideal contains $I$. Thus every element of $I$ is nilpotent; $R$ is reduced by step 2, hence $I=0$. These affine identifications show $E=T$, so $x=y$. The open immersion $j$ is etale, so [lem-weil-pbc-etale-inverse-image-restriction] identifies $j^{-1}N[n]$ with the restriction $N[n]|_V$ and, by its part 2, $\\eta_T:N[n](T)\\to(j_*j^{-1}N[n])(T)=N[n](T_V)$ (section formula [def-weil-pbc-direct-image]) with restriction along $T_V\\to T$. Hence this proves injectivity of the unit $\\eta:N[n]\\to j_*j^{-1}N[n]$.",
+   "uses": [
+    "lem-weil-pbc-etale-morphism-open-map",
+    "def-weil-closed-immersion",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-etale-inverse-image-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+    "place": "Lemma 3.5.2(i), printed p.140; expanded closed-diagonal argument; Stacks Tag 03WT, lemma-etale-open."
+   }
+  },
+  {
+   "text": "Let $M=(\\mathbf Z/n\\mathbf Z)^r$, and let $c:\\underline M_S\\to j_*\\underline M_V$ be $j_*(\\gamma_j)\\circ\\eta_{\\underline M_S}$, where $\\gamma_j:j^{-1}\\underline M_S\\cong\\underline M_V$ is the comparison of [def-weil-pbc-etale-set-constant-pullback-comparison] (natural in the coefficient, hence $\\mathbf Z/n\\mathbf Z$-linear). By [lem-weil-pbc-etale-inverse-image-restriction] part 2, $c_T:\\underline M_S(T)\\to\\underline M_V(T_V)$ is restriction along $T_V\\to T$ followed by $\\gamma_j$, and the same lemma applied to the open immersion $S_a\\to S$ identifies the restriction of $\\underline M_S$, $j_*\\underline M_V$ and $c$ to $S_a$ with the corresponding objects for $V_a\\subseteq S_a$. On each open integral normal component $S_a$ of step 1, apply [lem-weil-pbc-normal-constant-generic-open-unit] with $\\Lambda=\\mathbf Z/n\\mathbf Z$, module $M$, and nonempty open $V_a$. It gives invertibility of $c|_{S_a}$; the section formula [def-weil-pbc-direct-image] identifies this restriction with the stated componentwise unit. For each etale $T\\to S$, the opens $T_a=T\\times_S S_a$ form a disjoint cover of $T$. On each $T_a$ the componentwise inverse uniquely lifts a section on $T_a\\times_S V$ to a section of $\\underline M_S(T_a)$. These lifts glue uniquely on $T$, commute with restrictions by their uniqueness, and are inverse to $c_T$. This proves invertibility as a morphism of module sheaves, also for infinitely many components.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "def-weil-pbc-etale-set-constant-pullback-comparison",
+    "lem-weil-pbc-normal-constant-generic-open-unit",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09Z5, lemma-push-constant-sheaf-from-open (2); Deligne Lemma 3.5.2(ii), printed p.140."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-etale-inverse-image-restriction] part 1, $j^{-1}N[n]\\cong N[n]|_V$, and the equality of the kernel-section formulas gives $N[n]|_V=N_V[n]$. Define $\\bar\\alpha=c^{-1}\\circ j_*(\\alpha)\\circ\\eta$. Direct image acts on sections by the given map $\\alpha$ [def-weil-pbc-direct-image], so $j_*(\\alpha)$ is an isomorphism with inverse $j_*(\\alpha^{-1})$. Hence step 3 and the invertibility of $c$ imply that $\\bar\\alpha$ is injective on sections and is a monomorphism. All three factors are $\\mathbf Z/n\\mathbf Z$-linear. On an etale test scheme over $V$, restriction $T\\times_S V=T$ makes $\\eta$ and $c$ identities, so the displayed composite restricts to $\\alpha$.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+    "place": "Lemma 3.5.2(ii), printed p.140, displayed composite."
+   }
+  },
+  {
+   "text": "For any other module-sheaf morphism $\\beta:N[n]\\to\\underline M_S$ restricting to $\\alpha$, any etale $T\\to S$, and any section $x$, restricting $\\beta_T(x)$ to $T_V$ gives $\\alpha_{T_V}(x|_{T_V})$. Since $c_T$ is bijective by step 4, this forces $\\beta_T(x)=c_T^{-1}(\\alpha_{T_V}(x|_{T_V}))=\\bar\\alpha_T(x)$. Thus uniqueness holds among all module-sheaf morphisms, not just monomorphisms. If $h:S\\xrightarrow{\\sim}S\\prime$ carries $V$ to $V\\prime$ and $u:N\\xrightarrow{\\sim}h^*N\\prime$ carries the open frames to one another, both $\\bar\\alpha$ and $h^*(\\bar\\alpha\\prime)\\circ u[n]$ restrict to $\\alpha$. Uniqueness makes them equal. This is precisely the asserted naturality, with identity on the labels $M$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+    "place": "Lemma 3.5.2(ii), printed p.140, uniqueness and naturality of the displayed extension made explicit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-normal-etale-components-clopen",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-etale-over-normal-ring-normal",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-normal-constant-generic-open-unit",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "def-weil-pbc-etale-set-constant-pullback-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+  "place": "Lemma 3.5.2, printed p.140, read in the primary online PDF; local copy WANTED. Expanded proof using Stacks Tags 0357, 033C, 03WT and 09Z5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Over a normal scheme a trivialization of the n torsion of an abelian scheme on a dense open extends uniquely to an injection of the n torsion of its separated semiabelian extension into the constant etale sheaf",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Opensᵒᵖ CommRingCat\", \"doc\": \"The functor assigns to each open subset $ U $ of $ Y $ the integral closure of the ring of sections $ \\\\Gamma(Y, U) $ in $ \\\\Gamma(X, f^{-1}(U)) $, and to each inclusion $ V \\\\subseteq U $ the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme}\\n  (f₁ f₂ : AlgebraicGeometry.Scheme.Hom.normalization f ⟶ T) (g : T ⟶ Y) [AlgebraicGeometry.IsAffineHom g],\\n  CategoryTheory.Categor\", \"doc\": \"Given two morphisms from the normalization of a scheme morphism $ f: X \\to Y $ to a scheme $ T $, if there exists an affine morphism $ g: T \\to Y $ such that both morphisms compose with $ g $ to yield t\"}\n  {\"name\": \"IsDedekindDomain.selmerGroup.fromUnitLift_injective\", \"module\": \"Mathlib/RingTheory/DedekindDomain/SelmerGroup\", \"type\": \"∀ {R : Type u} [inst : CommRing R] [inst_1 : IsDedekindDomain R] {K : Type v} [inst_2 : Field K] [inst_3 : Algebra R K]\\n  [inst_4 : IsFractionRing R K] {n : ℕ} [inst_5 : Fact (0 < n)],\\n  Function.Injective ⇑IsDedekindDomain.selmerGroup.fromUnitLift\", \"doc\": \"The group homomorphism from the quotient group $ R^\\times/(R^\\times)^n $ to the Selmer group $ K^\\times/(K^\\times)^n $, defined by lifting units modulo $ n $-th powers in a Dedekind domain $ R $ with frac\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (f : X ⟶ Y) → Y.presheaf ⟶ AlgebraicGeometry.Scheme.Hom.normalizationDiagram f\", \"doc\": \"A morphism from the presheaf of a scheme $ Y $ to the normalization diagram associated with a morphism $ f $, which encodes the integral closure data of $ Y $ in the context of the morphism $ f $.\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.ext_elem\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens} (f g : ↑(X.presheaf.obj (Opposite.op U))) (𝒰 : X.OpenCover),\\n  (∀ (i : 𝒰.I₀),\\n      (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.app (𝒰.f i) U)) f =\\n        (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.app (𝒰.\", \"doc\": \"Let $X$ be a scheme, $U$ an open subset of $X$, and $\\\\mathcal{U}$ an open cover of $X$. For any two sections $f, g$ of the structure sheaf over $U$, if the induced morphisms $\\\\mathcal{U}.f(i)$ agree o\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: normalizationDiagram constructs relative normalization, and normalization.hom_ext (Mathlib/AlgebraicGeometry/Normalization.lean:441) assumes a relative-normalization source and affine target over the base; the remaining hits concern Selmer groups or affine limits, not semiabelian torsion sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"torsion\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the query returned zero declarations"
+  },
+  {
+   "tool": "grep",
+   "query": "semiabelian|semiAbelian|torsionFrame|torsion.*dense|dense.*torsion",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/Analysis/Convex/Extreme.lean\", \"line\": \"253\", \"text\": \"variable [DenselyOrdered 𝕜] [IsTorsionFree 𝕜 E] {A : Set E} {x : E}\"}\n  {\"file\": \"Mathlib/Analysis/Convex/Segment.lean\", \"line\": \"365\", \"text\": \"theorem left_mem_openSegment_iff [DenselyOrdered 𝕜] [IsTorsionFree 𝕜 E] :\"}\n  {\"file\": \"Mathlib/Analysis/Convex/Segment.lean\", \"line\": \"376\", \"text\": \"theorem right_mem_openSegment_iff [DenselyOrdered 𝕜] [IsTorsionFree 𝕜 E] :\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the three hits concern densely ordered convex spaces with torsion-free scalar actions, not etale sheaves or semiabelian torsion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Deligne extension lemma: semiabelian torsion injects into the direct image of its restriction to a dense open normal base and a constant torsion frame extends as a monomorphism",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsDenseEmbedding.injective\", \"module\": \"Mathlib.Topology.DenseEmbedding\", \"type\": \"∀ {α : Type u_1} {β : Type u_2} [inst : TopologicalSpace α] [inst_1 : TopologicalSpace β] {e : α → β},\\n  IsDenseEmbedding e → Function.Injective e\", \"doc\": \"Every dense embedding between topological spaces is an injective function.\"}\n  {\"name\": \"AddIsTorsion.extension_closed\", \"module\": \"Mathlib.GroupTheory.Torsion\", \"type\": \"∀ {G : Type u_1} {H : Type u_2} [inst : AddGroup G] {N : AddSubgroup G} [inst_1 : AddGroup H] {f : G →+ H},\\n  N = f.ker → AddMonoid.IsTorsion H → AddMonoid.IsTorsion ↥N → AddMonoid.IsTorsion G\", \"doc\": \"If $ G $ is an additive group with a normal subgroup $ N $ that is the kernel of a homomorphism $ f : G → H $, and both $ H $ and $ N $ are torsion additive monoids (i.e., every element has finite add\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.ofRestrict_mono\", \"module\": \"Mathlib.Geometry.RingedSpace.PresheafedSpace\", \"type\": \"{U : TopCat} (X : PresheafedSpace C) (f : U ⟶ X.1) (hf : IsOpenEmbedding f) : Mono (X.ofRestrict hf)\", \"doc\": \"Given a presheafed space $X$ over a category $\\\\mathcal{C}$, an open subset $U \\\\subseteq X$, and an open embedding $f: U \\\\to X$, the morphism from the restricted presheafed space $X|_U$ to $X$ construc\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"{U : X.Opens} (hU : Dense (X := X) U) : IsDominant U.ι\", \"doc\": \"For a scheme $X$ and an open subset $U$ of its underlying topological space, if $U$ is dense in $X$, then the canonical inclusion morphism $\\\\iota: U \\\\to X$ is dominant, meaning its image is dense in $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_homOfLE\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"{U V : X.Opens} (hU : Dense (X := X) U) (hU' : U ≤ V) : IsDominant (X.homOfLE hU')\", \"doc\": \"Given a scheme $X$ and open subsets $U \\\\subseteq V$ of its underlying topological space, if $U$ is dense in $X$, then the inclusion-induced morphism $X|_U \\\\to X|_V$ is dominant. This means the image o\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.restrict_hom\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X.PartialMap Y) (U : X.Opens) (hU : Dense ↑U) (hU' : U ≤ f.domain),\\n  (f.restrict U hU hU').hom = CategoryTheory.CategoryStruct.comp (X.homOfLE hU') f.hom\", \"doc\": \"For schemes $X$ and $Y$, if $f$ is a partial map from $X$ to $Y$ with domain containing a dense open subset $U \\\\subseteq X$, then the morphism associated to the restriction of $f$ to $U$ is the compos\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.instIsOverRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"[X.Over S] [Y.Over S] (f : X.PartialMap Y) [f.IsOver S] (U : X.Opens) (hU : Dense (U : Set X)) (hU' : U ≤ f.domain) :\\n  (f.restrict U hU hU').IsOver S\", \"doc\": \"If a partial map between schemes over a base scheme $ S $ is restricted to a dense open subset of its domain, then the restricted map also satisfies the condition of being over $ S $. This means the s\"}\n  {\"name\": \"IsTorsion.extension_closed\", \"module\": \"Mathlib.GroupTheory.Torsion\", \"type\": \"{f : G →* H} (hN : N = f.ker) (tH : IsTorsion H) (tN : IsTorsion N) : IsTorsion G\", \"doc\": \"If $ N $ is the kernel of a group homomorphism $ f : G \\to H $, and both $ N $ and $ H $ are torsion groups (i.e., every element has finite order), then $ G $ is also a torsion group.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: dense embeddings, abstract torsion-group extensions, presheafed-space restriction and dominant partial maps do not state the separated semiabelian torsion extension assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A generic finite level structure extends to an embedding of semiabelian n torsion into a constant sheaf over a normal base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.H\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      CategoryTheory.Sheaf J AddCommGrpCat →\\n        [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] → ℕ → T\", \"doc\": \"For a sheaf $ F $ on a site with Grothendieck topology $ J $, the $ n $-th sheaf cohomology group is defined as the Ext group $ \\\\mathrm{Ext}^n $ between the constant sheaf associated to the integers $\"}\n  {\"name\": \"LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"∀ (R : Type u) [inst : Ring R],\\n  (CategoryTheory.constantSheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R)).Faithful\", \"doc\": \"For the coherent Grothendieck topology on the category of totally disconnected, second-countable compact Hausdorff spaces (light profinite spaces), there exists a sheafification functor from the categ\"}\n  {\"name\": \"Condensed.finFree\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor FintypeCat (CondensedMod R)\", \"doc\": \"The functor from the category of finite types to the category of condensed $ R $-modules, constructed by composing the embedding of finite types into profinite spaces (via indiscrete topology), the in\"}\n  {\"name\": \"CondensedAb\", \"module\": \"Mathlib/Condensed/Module\", \"type\": \"Type (u + 2)\", \"doc\": \"The category $\\\\mathrm{CondensedAb}$ is defined as the category of condensed modules over the integers $\\\\mathbb{Z}$, which corresponds to the category of sheaves on the site of compact Hausdorff spaces\"}\n  {\"name\": \"LightCondAb.ofSheafLightProfinite\", \"module\": \"Mathlib/Condensed/Light/Explicit\", \"type\": \"(F : CategoryTheory.Functor LightProfiniteᵒᵖ (ModuleCat ℤ)) →\\n  [CategoryTheory.Limits.PreservesFiniteProducts F] → CategoryTheory.regularTopology.EqualizerCondition F → LightCondAb\", \"doc\": \"Given a functor $ F: \\\\mathbf{LightProfinite}^{\\\\text{op}} \\\\to \\\\text{ModuleCat}\\\\, \\\\mathbb{Z} $ that preserves finite products and satisfies the Equalizer Condition for the regular topology, this constru\"}\n  {\"name\": \"LightCondMod.LocallyConstant.instFaithfulSheafLightProfiniteCoherentTopologyTypeConstantSheaf\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(CategoryTheory.constantSheaf (CategoryTheory.coherentTopology LightProfinite) (Type u)).Faithful\", \"doc\": \"The constant sheaf functor from the category of light profinite spaces equipped with the coherent Grothendieck topology to the category of types is faithful. This means that for any two morphisms in t\"}\n  {\"name\": \"CondensedMod.LocallyConstant.instFaithfulModuleCatSheafCompHausCoherentTopologyConstantSheaf\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R],\\n  (CategoryTheory.constantSheaf (CategoryTheory.coherentTopology CompHaus) (ModuleCat R)).Faithful\", \"doc\": \"The constant sheaf functor, constructed using the coherent Grothendieck topology on the category of compact Hausdorff spaces and taking values in the category of left $ R $-modules, is faithful. This \"}\n  {\"name\": \"CompHausLike.LocallyConstantModule.functor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"{P : TopCat → Prop} →\\n  (R : Type (max u w)) →\\n    [inst : Ring R] →\\n      [inst_1 : CompHausLike.HasExplicitFiniteCoproducts P] →\\n        [inst_2 : CompHausLike.HasExplicitPullbacks P] →\\n          (hs :\\n              ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y),\\n                CategoryTheory.EffectiveEpi \", \"doc\": \"A functor from the category of $ R $-modules to the category of sheaves on compact Hausdorff-like spaces equipped with the coherent Grothendieck topology. For each $ R $-module $ X $, it assigns the s\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits define sheaf cohomology or constant sheaves on condensed sites; none gives normal-base extension of a semiabelian torsion frame"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stable-level-versal-branch-freeness",
+  "date": "2026-10-22",
+  "group": "Q67"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Deligne Lemma 3.5.2 used before the stabilizer argument: generic torsion frames extend as injections, not as full frames of the smaller boundary torsion.",
+   "via": [
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-normal-base-torsion-frame-extension",
+  "worker": "stage1",
+  "summary": "Expanded Deligne 3.5.2 using existing normal-component, normal-ring, open-map and constant-unit nodes. Proved closed-diagonal injectivity, built the extension, and checked uniqueness and naturality. Corrected the inaccurate local-ring gloss on locally Noetherian. No new nodes. Repair of returned head 504aaee2e81: rechecked against the current unsplit live item and all current cited statements; retained the approved route, made disjointness and arbitrary-component sheaf gluing explicit, and corrected generic search verdict prose to describe the recorded hits. The delivery tool rebases the retained split onto the current server DAG. Current repair retry: revalidated all nine citation quotations against current node statements, preserved current source/creation/blueprint metadata, and replaced the component-neighbourhood shorthand by the explicit clopen-intersection argument. Rebase repair on 2026-10-23: reread all current cited statements, verified every quotation, and clarified the affine equalizer calculation in step 3: its full underlying closed set forces its defining ideal into every prime, and reducedness kills that ideal. Maintainer reader (re-applied a fourth time): steps 3-5 cite lem-weil-pbc-etale-inverse-image-restriction for inverse image = restriction and unit = restriction; c = j_*(gamma_j) composed with eta, using def-weil-pbc-etale-set-constant-pullback-comparison.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Deligne Lemma 3.5.2 used before the stabilizer argument: generic torsion frames extend as injections, not as full frames of the smaller boundary torsion. Steps 1-4 justify Deligne 3.5.2; steps 5-6 construct its injection with the fixed labels. The recorded ancestor lookup returns null, preserved rather than invented.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-normal-etale-components-clopen",
+    "why": "Generic normal-base component theorem, applied to identity; this unit has no such component statement."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Generic affine stalk localization identification needed for etale test-scheme normality."
+   },
+   {
+    "node": "lem-weil-pbc-etale-over-normal-ring-normal",
+    "why": "Generic etale normality ascent, not a replacement of any unit step."
+   },
+   {
+    "node": "lem-weil-pbc-etale-morphism-open-map",
+    "why": "Generic etale open-map theorem gives density on every test scheme."
+   },
+   {
+    "node": "lem-weil-pbc-normal-constant-generic-open-unit",
+    "why": "Generic constant-sheaf unit theorem on integral normal components; this unit has no such statement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Generic etale inverse image = restriction and unit = restriction (applied to the open immersions j and S_a -> S); this unit has no such statement. Added by the maintainer reader."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-normal-etale-components-clopen",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-etale-over-normal-ring-normal",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-weil-pbc-normal-constant-generic-open-unit",
+  "lem-weil-pbc-etale-inverse-image-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-dbdb4d229",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-dbdb4d229 (reviewer sub-agent of L); spot-checked: This is the fourth push of this item. Heads 504aaee2, b7a8442d and 707d2d93 each got FIX for the same fault, and each fix was lost when landing was refused over the side-project promotion. The item is still unsplit on the base. Compared with 707d, the statement, stmt_deps, proof_deps, source, blueprint and steps 1, 2, 4, 5 and 6 are identical. Only the step 3 wording and the split_report summary and date changed. The new step 3 equalizer argument is correct: |E| contains the dense T_V, so |E|=|T|; on each affine Spec R the ideal I lies in every prime, so it is nilpotent; R is reduced by step 2, so I=0. This also works when N is an algebraic space, through the representable closed diagonal. Source: Deligne, Le lemme de Gabber, Lemma 3.5.2, p.140. There is no local PDF, and the WANTED entry is correct. Part (i) is injectivity from separatedness; part (ii) is j_*(Z/n)=Z/n on a normal S, with the extension given by the composite. The item matches the source, and the corrected locally-Noetherian gloss is right: in prod_N F_2 every local ring is a field, but the ring is not Noetherian. No target is weakened. The only citer, stable-level-versal-branch-freeness, uses only the injection, its uniqueness and its naturality. No SGA, no new nodes. Steps 1, 2, 4 and 6 check against the current cited statements: lem-a1 clopen components, stalk localization, etale normality ascent, the Mathlib-leaf etale open map, and the 09Z5 normal constant unit glued over the T_a. Small cases checked: S empty, infinitely many components, V=S, n=1, r=0, nodal boundary torsion of rank <2g. One C1/C4 fault, unchanged: steps 3-5 use j^{-1}=restriction, unit=restriction, j^{-1}M_S=M_V and the restriction of c to S_a with no citation, while def-weil-pbc-inverse-image only defines j^{-1} as an adjoint. I re-applied the 707d fix onto this head's text. Step 3 keeps its new text and appends lem-weil-pbc-etale-inverse-image-restriction parts 1-2. Steps 4 and 5 use the 707d fix text: c=j_*(gamma_j)∘eta with gamma_j from def-weil-pbc-etale-set-constant-pullback-comparison, and step 5 is now non-elementary. proof_deps gain both nodes and tool_uses gains the restriction lemma. I read both statements in the current snapshot. Corrected file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-normal-base-torsion-frame-extension.json. Maintainer: this fix has now been lost three times to promotion refusals; land it together with the promotion, or carry it over.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalBaseTorsionFrameExtension",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.normal_base_torsion_frame_extension",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.normal_base_torsion_frame_extension"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalBaseTorsionFrameExtension.lean",
+  "statement": "theorem normal_base_torsion_frame_extension {S V : Scheme.{u}} [IsLocallyNoetherian S] (hnormal : ∀ s : S, IsDomain (S.presheaf.stalk s) ∧ IsIntegrallyClosed (S.presheaf.stalk s)) (j : V ⟶ S) [IsOpenImmersion j] (hdense : DenseRange j.base) (N : AlgebraicSpace S) (H : CommutativeSpaceGroup N) (hsmooth : MapIsLocally (@Smooth) (groupSpaceProjection N)) (hseparated : MapIsSeparated (groupSpaceProjection N)) (hfp : MapIsLocallyOfFinitePresentation (groupSpaceProjection N) ∧ MapIsQuasiCompact (groupSpaceProjection N).hom.hom ∧ MapIsQuasiCompact (pullback.diagonal (groupSpaceProjection N).hom.hom)) (hsemiabelian : HasSemiabelianSpaceFibres H) (habelian : IsAbelianOn H j) (n : ℕ) (hn : 1 ≤ n) (hinvertible : ∀ s : S, IsUnit (n : S.presheaf.stalk s)) (r : ℕ) : Mono ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod n))) j).unit.app (spaceTorsionSheaf H n)) ∧ ∀ α : (Etale.localizationRestriction (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod n))) j inferInstance).obj (spaceTorsionSheaf H n) ≅ torsionLabels V n r, ∃ β : spaceTorsionSheaf H n ⟶ torsionLabels S n r, Mono β ∧ (Etale.localizationRestriction (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod n))) j inferInstance).map β ≫ (torsionLabelsRestriction j n r).hom = α.hom ∧ (∀ γ : spaceTorsionSheaf H n ⟶ torsionLabels S n r, (Etale.localizationRestriction (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod n))) j inferInstance).map γ ≫ (torsionLabelsRestriction j n r).hom = α.hom → γ = β) ∧ (∀ (S' : Scheme.{u}) (h : S ≅ S') (N' : AlgebraicSpace S') (H' : CommutativeSpaceGroup N') (e : H.points ≅ (Over.map h.hom).op ⋙ H'.points) (β' : spaceTorsionSheaf H' n ⟶ torsionLabels S' n r), (Etale.localizationRestriction (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod n))) j inferInstance).map (spaceTorsionTransport h H H' e n ≫ (Etale.localizationRestriction (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod n))) h.hom inferInstance).map β' ≫ (torsionLabelsRestriction h.hom n r).hom) ≫ (torsionLabelsRestriction j n r).hom = α.hom → β = spaceTorsionTransport h H H' e n ≫ (Etale.localizationRestriction (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod n))) h.hom inferInstance).map β' ≫ (torsionLabelsRestriction h.hom n r).hom)",
+  "branch": "sheaf-dag",
+  "by": "Q82",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3502eea87",
+  "group": "Q82",
+  "result": "fix",
+  "note": "Lean statement and records correct. The hypotheses match the node with none stronger: IsLocallyNoetherian + domain/integrally-closed stalks; IsOpenImmersion + DenseRange; smooth, separated and finite presentation exactly the IsSmoothIntegralGroupSpace conditions minus integral fibres; HasSemiabelianSpaceFibres via group-preserving scheme models; IsAbelianOn = proper smooth group scheme with connected geometric fibres; n>=1 invertible in stalks; r : ℕ. Conclusions: Mono of the upperStarLowerStarAdjunction unit; α on localizationRestriction (canonically j^{-1} via upperStarIsoLocalizationRestriction); ∃β Mono restricting to α through the canonical torsionLabelsRestriction (constantSheafCompUpperStarIso is leftAdjointUniq); uniqueness among all maps, as node step 6 proves, implying the node's clause; naturality conjunct through the actual spaceTorsionTransport with identity labels. Edge cases S empty, infinitely many components, V=S, n=1, r=0 and universes all covered. New node def-sfb-space-group-torsion has real data; its only sorry is the named, true sheaf-condition theorem; no duplicate (IsAbelianFamily is a space-family predicate without scheme model; torsion-etale-sheaf takes the kernel on a given sheaf). Item changed only in lean and stmt_deps (+ new node); statements verbatim; lines <=100; docstrings with all 6 proof steps; proof imports plain. Only fault H11: the 'Second reading by Q82' was the author's own pass. FIX: fixes/lem-sfb-normal-base-torsion-frame-extension.report.md keeps the worker report and New nodes verbatim and adds an independent clause-by-clause second reading. No Lean changed, nothing compiled."
+ }
+}

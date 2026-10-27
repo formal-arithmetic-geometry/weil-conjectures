@@ -1,0 +1,242 @@
+{
+ "id": "lem-route-sp-integral-twist-map-exists-unique",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-sfb-cartesian-coefficients-twists",
+   "via": [],
+   "place": "Proof, integral-twist paragraph: the specified inverse limit and its coefficient module structure; field-extension compatibility of its finite coefficient/root tensor coordinates (the spIntegralTwistMap_existsUnique implementation obligation)."
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The integral transition is uniquely specified on every positive quotient twist.",
+ "statement": "Let $X$ be any scheme, $\\ell$ a prime, and $E\\subseteq F\\subseteq\\overline{\\mathbf Q}_\\ell$ finite intermediate extensions of $\\mathbf Q_\\ell$, with valuation rings $\\mathcal O_E,\\mathcal O_F$ [def-weil-l-adic-coefficient-extension]. Use the small pro-etale site and coefficient universe of [def-weil-pbc-proetale-site, def-weil-size-convention]. The coefficients $R_G=\\mathcal O_{G,X}$, for $G=E,F$, are the pulled-back continuous-function condensed ring objects [sk-def-sfb-condensed-ring, sk-def-sfb-pulled-back-coefficients]. For $n\\geq0$, write $B_{G,n}=\\mathcal O_G/\\ell^{n+1}\\mathcal O_G$ with its discrete topology, and $B_{G,n,X}=p_X^*\\underline{B_{G,n}}$. Let $q_{G,n}:R_G\\to B_{G,n,X}$ and $r_{G,n}:B_{G,n+1,X}\\to B_{G,n,X}$ be the pulled-back quotient reductions, continuous before pullback by [lem-sp-ell-quotient-finite-discrete]. Let $i:R_E\\to R_F$ be the unique integral coefficient map over $E_X\\to F_X$ of [lem-route-sp-integers-map-exists-unique], and let $j_n:B_{E,n,X}\\to B_{F,n,X}$ be the unique map satisfying $j_nq_{E,n}=q_{F,n}i$ of [lem-route-sp-ell-map-exists-unique]. Composition here is in the usual functional order.\n\nPut $U_n=\\mu_{\\ell^{n+1},X}$, with $v_n:U_{n+1}\\to U_n$, $u\\mapsto u^\\ell$, as in [def-pur-roots-of-unity-sheaf]. In the category of internal $R_G$-modules [sk-def-sfb-module-objects], let $T_{G,n}$ have underlying abelian sheaf $B_{G,n,X}\\otimes_{\\mathbf Z}U_n$ [sk-def-sfb-sheaf-tensor], with $R_G$ acting on the first factor through $q_{G,n}$. Use the unique module transition with underlying arrow $r_{G,n}\\otimes v_n$ of [lem-sp-integral-level-transition-unique]. Let $L_G=\\varprojlim_{n\\in\\mathbf N^{\\mathrm{op}}}T_{G,n}$ in internal $R_G$-modules, and write $p_{G,n}:|L_G|\\to B_{G,n,X}\\otimes_{\\mathbf Z}U_n$ for its underlying projections, where vertical bars forget the module action [def-pur-sheaf-inverse-limit, def-weil-pbc-internal-abelian-sheaf-module-equivalence]. Then there exists exactly one morphism of abelian sheaves $f:|L_E|\\to|L_F|$ such that\n$$\n p_{F,n}\\circ f=(j_n\\otimes\\mathrm{id}_{U_n})\\circ p_{E,n}\\qquad(n\\geq0).\n$$\nThis is the assertion for the specified systems spIntegralTwistSystem and their limits spIntegralTwist. No invertibility of $\\ell$ on $X$ is assumed, and the conclusion specifies an underlying abelian-sheaf morphism, with no additional linearity assertion.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.md",
+  "place": "det-prop-sfb-cartesian-coefficients-twists: the Lean of this node (its module Sheaf.Paper.CartesianCoefficientTwists uses) reaches AlgebraicGeometry.ProEtale.spIntegralTwistMap_existsUnique, a sorry on the sorry route of batch3, batch4 with no node; Lean: SHEAF file lean/Sheaf/Paper/ProEtaleTateTwists.lean, declaration AlgebraicGeometry.ProEtale.spIntegralTwistMap_existsUnique (module Sheaf.Paper.ProEtaleTateTwists, lines 315-327, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "lem-route-sp-integers-map-exists-unique",
+  "lem-route-sp-ell-map-exists-unique",
+  "def-pur-roots-of-unity-sheaf",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-sheaf-tensor",
+  "lem-sp-integral-level-transition-unique",
+  "def-pur-sheaf-inverse-limit",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-sp-ell-quotient-finite-discrete"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing normalized finite quotient maps j_n of [lem-route-sp-ell-map-exists-unique]. Their square with each coefficient reduction commutes by that theorem. Successive quotient reductions compose to the lower reduction by the quotient factor formula [def-sfb-continuous-map-condensed-ring-map, sk-def-sfb-pulled-back-coefficients]. Each coefficient reduction is epimorphic: on profinite tests, choose representatives of each discrete quotient value; the resulting map from the discrete quotient to the valuation ring is continuous, and composition lifts every continuous quotient-valued section. The left adjoint p_X^* preserves this epimorphism [sk-def-sfb-pullback-from-point]. Cancel the source reduction to obtain commutation of j_n with successive coefficient reductions.",
+   "uses": [
+    "lem-route-sp-ell-map-exists-unique",
+    "def-sfb-continuous-map-condensed-ring-map",
+    "sk-def-sfb-pulled-back-coefficients",
+    "sk-def-sfb-pullback-from-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+    "place": "Integral twist paragraph, normalized field-extension maps on inverse limits."
+   }
+  },
+  {
+   "text": "Tensor j_n with the identity of the nth roots-of-unity sheaf [sk-def-sfb-sheaf-tensor, def-pur-roots-of-unity-sheaf]. Tensor interchange and the preceding square show that these arrows commute with the actual adjacent integral module transitions [lem-sp-integral-level-transition-unique]. NatTrans.ofOpSequence extends this check to a natural transformation of the underlying abelian-sheaf diagrams.",
+   "uses": [
+    "sk-def-sfb-sheaf-tensor",
+    "def-pur-roots-of-unity-sheaf",
+    "lem-sp-integral-level-transition-unique"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+    "place": "Integral twist paragraph, normalized field-extension maps on inverse limits."
+   }
+  },
+  {
+   "text": "The forgetful functor from internal modules creates and preserves limits. Postcompose the source limiting cone by the preceding natural transformation. Lift this cone uniquely through the underlying target limit. Its factorization equations are exactly the required finite projection formulas. If another map has those formulas, limit hom_ext identifies it with this lift. This is the categorical universal property of the specified inverse limit [def-pur-sheaf-inverse-limit], without passage through sectionwise module equivalences.",
+   "uses": [
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+    "place": "Integral twist paragraph, normalized field-extension maps on inverse limits."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-route-sp-ell-map-exists-unique",
+  "def-sfb-continuous-map-condensed-ring-map",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-pullback-from-point",
+  "sk-def-sfb-sheaf-tensor",
+  "def-pur-roots-of-unity-sheaf",
+  "lem-sp-integral-level-transition-unique",
+  "def-pur-sheaf-inverse-limit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Integral twist paragraph, normalized field-extension maps on inverse limits.",
+  "note": "M6: implemented using the existing normalized quotient maps and the Mathlib internal-module forgetful limit theorem; no reconstruction of the integer inclusion or section-module equivalence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A compatible family of morphisms between inverse systems of Tate twists induces a unique map between their limits",
+   "results": "InverseSystem.pEquivOnLim, InverseSystem.globalEquiv_compatibility, InverseSystem.globalEquiv_naturality, InverseSystem.globalEquiv, InverseSystem.invLimEquiv_apply_coe, InverseSystem.invLimEquiv, InverseSystem.isNatEquiv_piEquivLim, LightProfinite.transitionMapLE",
+   "date": "2026-10-25",
+   "verdict": "no exact match: general limit functoriality is a component; quotient coefficient and internal-module system identifications still require the proof below"
+  },
+  {
+   "tool": "grep",
+   "query": "preservesLimits.*forget|forget.*[Cc]reatesLimits|instance.*[Cc]reatesLimits|def lift|theorem hom_ext",
+   "results": "none (directory: CategoryTheory/Monoidal/Mod_)",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural transformation between inverse systems induces a unique map on inverse limits",
+   "results": "CategoryTheory.Limits.limMap, CategoryTheory.Limits.limMap_π_assoc, DirectLimit.map_def, DirectLimit.map, CategoryTheory.Limits.lim_map, CategoryTheory.Limits.IsLimit.map, CategoryTheory.Limits.Types.Limit.map_π_apply, CategoryTheory.Limits.limit.pre",
+   "date": "2026-10-25",
+   "verdict": "no exact match: general limit functoriality is a component; quotient coefficient and internal-module system identifications still require the proof below"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.limit.lift, CategoryTheory.Limits.limit.hom_ext",
+   "results": "none",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "CreatesLimits|PreservesLimits|createsLimits|preservesLimits",
+   "results": "none (directory: CategoryTheory/Monoidal/Mod)",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The forgetful functor from module objects over a monoid object in a monoidal category creates all limits",
+   "results": "MonCat.forget_createsLimits, ModuleCat.forget_preservesLimits, CommMonCat.forget_createsLimits, MonCat.forget_createsLimitsOfShape, CommMonCat.forget_createsLimitsOfShape, CommMonCat.forget_createsLimitsOfSize, ModuleCat.forget_reflectsLimits, CategoryTheory.Mon.forget_preservesLimitsOfShape",
+   "date": "2026-10-25",
+   "verdict": "no exact match: general limit functoriality is a component; quotient coefficient and internal-module system identifications still require the proof below"
+  },
+  {
+   "tool": "grep",
+   "query": "CreatesLimits|PreservesLimits|createsLimits|preservesLimits",
+   "results": "Mathlib/CategoryTheory/Monoidal/Internal/Limits.lean, Mathlib/CategoryTheory/Monoidal/Internal/Limits.lean, Mathlib/CategoryTheory/Monoidal/Internal/Limits.lean, Mathlib/CategoryTheory/Monoidal/Internal/Limits.lean, Mathlib/CategoryTheory/Monoidal/Internal/Limits.lean, Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean, Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean, Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean (directory: CategoryTheory/Monoidal)",
+   "date": "2026-10-25",
+   "verdict": "no exact match: general limit functoriality is a component; quotient coefficient and internal-module system identifications still require the proof below"
+  },
+  {
+   "tool": "grep",
+   "query": "preservesLimits|createsLimits|[Cc]reatesLimit",
+   "results": "none (directory: CategoryTheory/Monoidal/Mod_.lean)",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tate twist integral coefficient field extension quotient ring maps commute with ell power reduction",
+   "results": "galRestrict'_galLift, RingOfIntegers.ZModXQuotSpanEquivQuotSpan_mk_apply, cyclotomicCharacter.toZModPow, cyclotomicCharacter.toZModPow_toFun, WittVector.factorPowSucc_comp_fontaineThetaModPPow, PreTilt.mk_comp_untilt_eq_coeff_zero, WittVector.mk_pow_fontaineTheta, KummerDedekind.quotMapEquivQuotQuotMap",
+   "date": "2026-10-25",
+   "verdict": "no exact match: general limit functoriality is a component; quotient coefficient and internal-module system identifications still require the proof below"
+  },
+  {
+   "tool": "grep",
+   "query": "spIntegralTwist|TateModule|tateModule|TateTwist",
+   "results": "none",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def limMap|theorem limMap_π|theorem hom_ext|def lift",
+   "results": "249, 253 (directory: CategoryTheory/Limits/HasLimits.lean)",
+   "date": "2026-10-25",
+   "verdict": "no exact match: general limit functoriality is a component; quotient coefficient and internal-module system identifications still require the proof below"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.limMap",
+   "results": "CategoryTheory.Limits.limMap, CategoryTheory.Limits.isIso_limMap, CategoryTheory.Limits.limMap_mono, CategoryTheory.Limits.limMap_mono', CategoryTheory.Limits.limMap_eq, CategoryTheory.Limits.lim_map, CategoryTheory.Limits.limMap_π, CategoryTheory.Limits.limit.lift_map",
+   "date": "2026-10-25",
+   "verdict": "no exact match: general limit functoriality is a component; quotient coefficient and internal-module system identifications still require the proof below"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "det-prop-sfb-cartesian-coefficients-twists",
+  "date": "2026-10-25",
+  "tool": "tools/route_nodes.py",
+  "why": "PROVISIONAL: sorried declaration on the sorry route (local/sorry-route.json) with no DAG node, recorded automatically after the route recompute (the human, 2026-10-23: every proof-related upstream sorry gets a node, and a node without a written proof goes to stage 1). The statement is only the Lean signature and docstring: the stage-1 worker writes it in words with [node] citations and stmt_deps, does the Mathlib searches (LeanSearch, Loogle or LeanFinder, local grep), fills blueprint.same_as, and splits it"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.Paper.ProEtaleTateTwistConstructions",
+  "file": "lean/Sheaf/Paper/ProEtaleTateTwistConstructions.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.spIntegralTwistMap_existsUnique",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.spIntegralTwistMap_existsUnique"
+  ],
+  "statement": "theorem spIntegralTwistMap_existsUnique {E F : PadicAlgCl.FiniteIntermediateField ℓ}\n    (h : E ≤ F) :\n    ∃! f : (spIntegralTwist X ℓ E).X ⟶ (spIntegralTwist X ℓ F).X,\n      ∀ n : ℕ, f ≫ (limit.π (spIntegralTwistSystem X ℓ F) (op n)).hom =\n        (limit.π (spIntegralTwistSystem X ℓ E) (op n)).hom ≫\n          (spEllMap X ℓ h n ⊗ₘ\n            𝟙 (Scheme.proEtaleRootsOfUnitySheaf X (ℓ ^ (n + 1)))) := by\n  sorry",
+  "by": "maintainer",
+  "date": "2026-10-25",
+  "note": "SHEAF declaration attached as it stands, proof still `sorry`; recorded by tools/route_nodes.py"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-route-sp-integral-twist-map-exists-unique",
+  "worker": "stage1",
+  "summary": "NO replaced the provisional Lean dump by the exact arbitrary-scheme underlying-map statement. Identified the two chosen coefficient maps by their existing uniqueness statements, wrote out quotient reduction commutativity and tensor interchange, and applied existing internal/sectionwise module equivalence and sectionwise limits. No new nodes, no Lean writes or compilation.",
+  "blueprint": "Realizes coefficient-field transition normalization for the integral inverse limit in the integral-twist paragraph of det-prop-sfb-cartesian-coefficients-twists, with finite root tensors as in sk-def-sp-tate-twist; no chapter or unit route changes.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-absolute-value",
+    "why": "Uniqueness identifies the restricted F norm with the E norm; the unit has no norm-extension lemma."
+   },
+   {
+    "node": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "why": "The generic equivalence transports internal module limits to ordinary module-sheaf limits while keeping the exact underlying cones; no purity route is replaced."
+   },
+   {
+    "node": "lem-sp-ell-quotient-finite-discrete",
+    "why": "Continuity of the actual ell-power quotient reductions is needed to condense their commuting squares; generic coefficient topology, not an alternate purity route."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-cc-NO-e99dbdcf2",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-e99dbdcf2 (reviewer sub-agent of L); spot-checked: I read the item, the Lean (ProEtaleTateTwists.lean:49-327) and the blueprint integral-twist paragraph (sk-prop-sfb-cartesian-coefficients-twists.proof.md:13; sk-def-sp-tate-twist:16-21). The statement matches spIntegralTwistMap_existsUnique exactly: unique underlying abelian map between the integral twists with p_{F,n} f = (j_n ⊗ id) p_{E,n}, levels ℓ^(n+1), any X, ℓ not assumed invertible, no linearity claim. No hypothesis is added or dropped, and the five citers use exactly this normalization. Step 1: the restricted-topology inclusion, functoriality of postcomposition and pullback, and lem-route-sp-integers-map-exists-unique uniqueness give a_X = i. Step 2: the quotient map is well defined and continuous from a discrete source; lem-route-sp-ell-map-exists-unique uniqueness among all abelian maps identifies it with j_n; the topology of lem-sp-ell-quotient-finite-discrete agrees with the restricted one by norm uniqueness. Step 3 (elementary): checked on representatives, then bifunctoriality of the tensor; lem-sp-integral-level-transition-unique gives the actual transitions after the index shift m=n+1. Step 4: the hypotheses of def-weil-pbc-internal-abelian-sheaf-module-equivalence hold (essentially small site, commutative R, monoidal local equivalences from strong monoidal sheafification in sk-def-sfb-sheaf-tensor); with def-pur-sheaf-inverse-limit this shows the underlying cone of the module limit is a limit of abelian sheaves. It does not wrongly use the finite-limit lemma lem-sfb-modobj-forget-left-exact, and no countable-limit creation node exists in the DAG. Step 5 (elementary): universal property and joint injectivity of the projections. No new nodes. Duplicate search (spIntegralTwist, integral twist, module-object limits) finds only distinct statements. Edge cases checked: E=F, n=0, ramified E, empty X, ℓ not invertible. The three declared generic tool uses are accepted. No changes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a7a45",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261026T200332-L-3306344",
+  "kind": "interface",
+  "note": "independent cc review: delivered Levels+Constructions+item concatenation vs published ProEtaleTateTwists.lean (verbatim, only headers + commonCover proof); new sorry lemmas vs node statements and tateTwist_finite_locallyFree clauses; 14 moved node lean.module/file vs physical location; 7 direct importers compiled OK against delivered set"
+ }
+}

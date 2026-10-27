@@ -1,0 +1,120 @@
+{
+ "id": "def-sfb-local-complete-intersection-over-field",
+ "kind": "definition",
+ "title": "Local complete intersection scheme over its given field",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $k$ be a field [def-weil-field], let $Z$ be a scheme [def-pc-scheme], and let $s:Z\\to\\operatorname{Spec}k$ be its structure morphism [def-weil-affine-spectrum]. The scheme $Z$ is a local complete intersection over $k$ if there exist a family of finite type commutative $k$-algebras $A_i$, each a local complete intersection over $k$ [def-weil-pbc-complete-intersection-over-field], and jointly surjective open immersions $\\varphi_i:\\operatorname{Spec}A_i\\to Z$ [def-weil-open-immersion] such that $s\\circ\\varphi_i$ is induced by the structural map $k\\to A_i$. The empty scheme and an empty chart family are allowed.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-complete-intersection-over-field",
+  "def-weil-open-immersion"
+ ],
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01UG (lemma-local-complete-intersection); algebra.tex Tag 00S9 (definition-lci-field)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsLocalCompleteIntersectionOver|IsSyntomicOfRelativeDimension|syntomicFixedDimensionOpen",
+   "results": "{\"t\": \"2026-10-24T12:03:57Z\", \"tool\": \"grep\", \"query\": \"IsLocalCompleteIntersectionOver|IsSyntomicOfRelativeDimension|syntomicFixedDimensionOpen\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match. Reuse the existing project lci predicate with a new definition-node owner; the fixed-dimension helpers exist only in the returned sandbox and are moved verbatim to their definition module."
+  },
+  {
+   "tool": "leansearch",
+   "query": "scheme locally complete intersection over a field affine open cover and largest syntomic fixed relative dimension open",
+   "results": "{\"t\": \"2026-10-24T12:03:57Z\", \"tool\": \"leansearch\", \"query\": \"scheme locally complete intersection over a field affine open cover and largest syntomic fixed relative dimension open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.Scheme.affineBasisCoverOfAffine\", \"AlgebraicGeometry.Scheme.affineBasisCover\", \"AlgebraicGeometry.isLocallyNoetherian_of_affine_cover\", \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop\", \"AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover\", \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeCover\", \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_X_carrier\"], \"digest\": \"03b8ae56bb4dcdfd\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match. Reuse the existing project lci predicate with a new definition-node owner; the fixed-dimension helpers exist only in the returned sandbox and are moved verbatim to their definition module."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "local complete intersection scheme over a field; syntomic morphism of fixed relative dimension locus",
+   "results": "{\"t\": \"2026-10-24T12:03:58Z\", \"tool\": \"leanfinder\", \"query\": \"local complete intersection scheme over a field; syntomic morphism of fixed relative dimension locus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"Algebra.smoothLocus\"], \"digest\": \"cc84dd471c63b3af\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match. Reuse the existing project lci predicate with a new definition-node owner; the fixed-dimension helpers exist only in the returned sandbox and are moved verbatim to their definition module."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n IsLocalCompleteIntersectionOver|IsSyntomicOfRelativeDimension|syntomicFixedDimensionOpen lean/WeilConjectures lean/Sheaf; rg of dag/nodes; blueprint_refs.py search local complete intersection",
+   "results": "The existing plain lci predicate is defined only in Sheaf.TraceFormula.SyntomicGeometricFibresAffineCriterion:51. No definition node records it: def-trf-local-complete-intersection-scheme-over-field records only the larger-universe OverExtension helper. Blueprint search: 0 blueprint nodes match. No fixed-dimension helpers exist in the live Lean sources. Return H2 explicitly requests a definition owner for the existing plain predicate.",
+   "date": "2026-10-24",
+   "verdict": "Use an existing:true record for the exact plain predicate, without a duplicate declaration. The two returned helper definitions get their own new definition module."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-syntomic-fixed-dimension-locus",
+  "date": "2026-10-24",
+  "group": "Q65"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DSH (lemma-locus-where-nodal), with lemma-nodal-local and definition-nodal-family; fibrewise meaning from curves.tex lemma-locus-where-nodal. Scheme-chart reduction before the nodal-open construction: restrict to the syntomic piece of relative dimension one, as in curves.tex Tag 0DSC proof, first paragraph. Definition-only interface for the syntomic fixed-dimension locus.",
+   "via": [
+    "lem-sfb-syntomic-fixed-dimension-locus",
+    "lem-sfb-space-nodal-locus-base-change",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.TraceFormula.SyntomicGeometricFibresAffineCriterion",
+  "declaration": "AlgebraicGeometry.IsLocalCompleteIntersectionOver",
+  "statement": "def IsLocalCompleteIntersectionOver (k : Type u) (Z : Scheme.{u})\n    [Field k] (s : Z ⟶ Spec (.of k)) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q65",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition-node owner supplied in response to return H2 of 112331191ff2. This records the exact existing plain scheme lci predicate at line 51, not the affine-criterion theorem or the OverExtension helper. No duplicate declaration is introduced; module path identifies the existing source container only."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-74d6ed359",
+  "group": "Q65",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-74d6ed359",
+  "group": "Q65",
+  "result": "pass",
+  "note": "Re-delivery fixes the 1123 H2 return. Item stmt_deps now cite def-sfb-local-complete-intersection-over-field (new, existing:true owner of IsLocalCompleteIntersectionOver; statement matches the def clause by clause, 01UG/00S9; no other owner, since the trf extension node owns only OverExtension; no cycle, as the theorem module imports and deps are low-level) and def-sfb-syntomic-fixed-dimension-open (new module; IsSyntomicOfRelativeDimension and the sSup syntomicFixedDimensionOpen moved verbatim; real data, docstrings with source and blueprint, no theorem). Theorem signature and sorry byte-identical to the returned head, so the earlier clause and edge-case check stands. lean.statement fields verbatim; no clash with live names or ids. Nothing compiled: no file changed."
+ }
+}

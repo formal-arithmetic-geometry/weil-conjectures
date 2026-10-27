@@ -1,0 +1,246 @@
+{
+ "id": "lem-trf-tor-resolution-coefficient-actions",
+ "kind": "statement",
+ "title": "Coefficient actions under free-resolution computation of Tor",
+ "statement": "Let $R\\to A\\xrightarrow{g}B$ be homomorphisms of commutative rings, with $R\\to B$ their composite, and let $M$ be an $R$-module. Let $P_\\bullet\\to M$ be a free resolution: its terms $P_j$ are free $R$-modules [def-weil-pbc-free-module], $j\\geq0$, and its augmented sequence $\\cdots\\to P_1\\to P_0\\to M\\to0$ is exact. Put $P_j=0$ for $j<0$. For $S=A,B$ put $C(S)_\\bullet=P_\\bullet\\otimes_R S$, without its augmentation, using [def-weil-pbc-module-tensor-product, def-weil-pbc-module-chain-complex-homology]. For every $n\\geq0$, the canonical resolution-computation isomorphism of [def-weil-pbc-tor-modules]\n$$\\iota_{S,n}:\\operatorname{Tor}^R_n(M,S)\\longrightarrow H_n(C(S)_\\bullet)$$\nis $S$-linear for the coefficient action of [def-trf-tor-coefficient-module] (applied with coefficient ring $S$) and the action on homology induced by multiplication in $S$: explicitly, if $\\iota_{S,n}(t)=[\\sum_i p_i\\otimes s_i]$, then\n$$\\iota_{S,n}(s\\cdot t)=[\\sum_i p_i\\otimes ss_i]\\quad(s\\in S).$$\nMoreover the $A$-action on $\\operatorname{Tor}^R_n(M,B)$ specified by [def-trf-tor-coefficient-module] is the restriction of this $B$-action along $g$. In particular $(g(a)b)\\cdot t=a\\cdot(b\\cdot t)$ for $a\\in A$, $b\\in B$ and $t\\in\\operatorname{Tor}^R_n(M,B)$. No flatness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00M7, algebra-section-functoriality-tor, item (1): coefficient ring actions; realization on a free resolution by multiplication on the coefficient factor."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-module-chain-complex-homology",
+  "def-weil-pbc-tor-modules",
+  "def-trf-tor-coefficient-module"
+ ],
+ "proof": [
+  {
+   "text": "The given free resolution is a projective resolution: for each term $P_j$, choose a basis $(e_i)$ as in [def-weil-pbc-free-module]. Given a surjective $R$-linear map $q:U\\to V$ and an $R$-linear map $h:P_j\\to V$, choose $u_i\\in U$ with $q(u_i)=h(e_i)$. The formula $\\widetilde h(\\sum_i r_i e_i)=\\sum_i r_i u_i$ is well defined by uniqueness of the finite basis expansion, is $R$-linear, and satisfies $q\\widetilde h=h$. This is precisely the projective lifting property; no finiteness of the basis or flatness of a coefficient ring is used.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LY (algebra-section-tor), free-resolution construction; elementary basis lifting to verify the projective-resolution hypothesis."
+   }
+  },
+  {
+   "text": "Fix $S=A$ or $B$. For $s\\in S$, multiplication $\\mu_s:S\\to S$, $u\\mapsto su$, is $R$-linear, since $S$ is commutative. By [def-weil-pbc-module-tensor-product], it induces $m_{s,j}=1_{P_j}\\otimes\\mu_s$ with $m_{s,j}(p\\otimes u)=p\\otimes su$. The tensor relations give $m_{s+s',j}=m_{s,j}+m_{s',j}$, $m_{ss',j}=m_{s,j}m_{s',j}$ and $m_{1,j}=1$, where $s'$ denotes a second scalar. On every generator $p\\otimes u$, both $d_j m_{s,j}$ and $m_{s,j-1}d_j$ give $d^P_j(p)\\otimes su$; hence these maps commute on the whole tensor product. Thus $m_s$ is a chain endomorphism, and its degree-$n$ map on homology is $[z]\\mapsto[m_{s,n}z]$ by [def-weil-pbc-module-chain-complex-homology]. It is well defined because cycles map to cycles and $m_{s,n}(d_{n+1}w)=d_{n+1}m_{s,n+1}w$. The displayed ring identities descend to homology and give exactly its coefficient $S$-module structure.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-module-chain-complex-homology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00M7 (algebra-section-functoriality-tor), item (1), multiplication on the coefficient factor; the tensor relations and homology quotient give the displayed checks."
+   }
+  },
+  {
+   "text": "Apply clause (2) of [lem-weil-pbc-tor-map-via-resolution-lift] with $i=n$, $N=N'=S$ and $\\psi=\\mu_s$, using the projectivity checked in step 1. It gives $\\iota_{S,n}\\circ\\operatorname{Tor}^R_n(M,\\mu_s)=H_n(m_s)\\circ\\iota_{S,n}$. By [def-trf-tor-coefficient-module], applied to $R\\to S\\xrightarrow{1}S$, the Tor endomorphism on the left is precisely $t\\mapsto s\\cdot t$. Step 2 identifies the right-hand endomorphism on a cycle $z=\\sum_i p_i\\otimes u_i$ with $[z]\\mapsto[\\sum_i p_i\\otimes su_i]$. This proves the claimed formula. The canonical comparison is already an $R$-module isomorphism by [def-weil-pbc-tor-modules]; in particular it is additive. Together with the formula, this makes it $S$-linear. It holds separately for both $S=A$ and $S=B$ and for every $n\\geq0$.",
+   "uses": [
+    "lem-weil-pbc-tor-map-via-resolution-lift",
+    "def-trf-tor-coefficient-module",
+    "def-weil-pbc-tor-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LZ (algebra-lemma-tor-welldefined) and the coefficient functoriality paragraph immediately following it in Tag 00LY; apply to multiplication, as in Tag 00M7 item (1)."
+   }
+  },
+  {
+   "text": "For $a\\in A$, [def-trf-tor-coefficient-module] defines the $A$-action on $\\operatorname{Tor}^R_n(M,B)$ using the $R$-linear endomorphism $B\\to B$, $u\\mapsto g(a)u$. The same definition applied to $R\\to B\\xrightarrow{1}B$ defines the $B$-action of the element $g(a)$ using that identical endomorphism. Applying the same Tor functor to equal maps gives $a\\cdot t=g(a)\\cdot t$ for every $t$. This is equality with the restriction of the $B$-action, not a newly chosen action. Therefore, by the $B$-module associativity already computed in steps 2 and 3, $a\\cdot(b\\cdot t)=g(a)\\cdot(b\\cdot t)=(g(a)b)\\cdot t$. All constructions use the original free $R$-resolution without requiring $P_\\bullet\\otimes_R S$ to remain exact, so no flatness hypothesis has entered.",
+   "uses": [
+    "def-trf-tor-coefficient-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00M7 (algebra-section-functoriality-tor), item (1), applied to the scalar tower $R\\to A\\to B$; equality of the multiplication endomorphisms."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-module-chain-complex-homology",
+  "lem-weil-pbc-tor-map-via-resolution-lift",
+  "def-trf-tor-coefficient-module",
+  "def-weil-pbc-tor-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00LY/00LZ and 00M7 item (1); explicit elaboration of the coefficient-action instruction, using the existing resolution-naturality Mathlib leaf."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical coefficient action and coefficient extension map on Tor are computed on any free resolution by multiplication and tensoring the coefficient homomorphism",
+   "results": "8 hits: Algebra.Presentation.tensorModelOfHasCoeffsHom_tmul, Algebra.Presentation.tensorModelOfHasCoeffsEquiv_tmul, Module.Relations.Solution.isPresentationCoreTensor, Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, Algebra.Extension.tensorCotangentInvFun_smul_mk, ModuleCat.extendScalarsComp_hom_app_one_tmul, ModuleCat.ExtendScalars.map_tmul. These supply tensor/derived-functor infrastructure, not the stated coefficient-action or canonical Tor-comparison compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical free resolution isomorphisms for Tor intertwine the coefficient ring multiplication actions and the scalar tower R to A to B",
+   "results": "8 hits: Algebra.Presentation.tensorModelOfHasCoeffsEquiv_tmul, TensorProduct.Eqv.of_smul, QuotSMulTop.algebraMapTensorEquivTensorQuotSMulTop, TensorProduct.AlgebraTensorModule.cancelBaseChange, ModuleCat.extendScalarsComp_hom_app_one_tmul, ModuleCat.free_δ_freeMk, Algebra.Extension.tensorCotangentInvFun_smul_mk, Algebra.IsPushout.cancelBaseChange. These supply tensor/derived-functor infrastructure, not the stated coefficient-action or canonical Tor-comparison compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ProjectiveResolution.isoLeftDerivedObj",
+   "results": "8 hits: CategoryTheory.ProjectiveResolution.isoLeftDerivedObj, CategoryTheory.ProjectiveResolution.leftDerived_app_eq, CategoryTheory.Functor.leftDerived_map_eq, CategoryTheory.ProjectiveResolution.fromLeftDerivedZero_eq, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality_assoc, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality_assoc. These supply tensor/derived-functor infrastructure, not the stated coefficient-action or canonical Tor-comparison compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isoLeftDerivedObj.*(naturality|map)|isoLeftDerivedObj",
+   "results": "6 hits: Mathlib/CategoryTheory/Abelian/Ext.lean, Mathlib/CategoryTheory/Abelian/LeftDerived.lean, Mathlib/CategoryTheory/Abelian/LeftDerived.lean, Mathlib/CategoryTheory/Abelian/LeftDerived.lean, Mathlib/CategoryTheory/Abelian/LeftDerived.lean, Mathlib/CategoryTheory/Abelian/LeftDerived.lean. These supply tensor/derived-functor infrastructure, not the stated coefficient-action or canonical Tor-comparison compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A free resolution computes the coefficient scalar actions on Tor and identifies the scalar extension of Tor(M,g) with the cycle formula sum p tensor a maps to sum p tensor g(a) times b",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "isoLeftDerivedObj|leftDerived.*[Nn]aturality|[Tt]or.*[Ss]mul",
+   "results": "Mathlib/CategoryTheory/Abelian/Ext.lean; Mathlib/CategoryTheory/Abelian/LeftDerived.lean; Mathlib/CategoryTheory/Abelian/LeftDerived.lean; Mathlib/CategoryTheory/Abelian/LeftDerived.lean; Mathlib/CategoryTheory/Abelian/LeftDerived.lean; Mathlib/CategoryTheory/Abelian/LeftDerived.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item; tensor or Tor naturality infrastructure only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor computed by a projective resolution intertwines multiplication on the coefficient module with scalar multiplication on homology",
+   "results": "CategoryTheory.Tor; TensorProduct.liftAux.smul; Rep.Tor; Rep.torIso; Rep.Tor_obj; groupHomologyIso; TensorProduct.SMul.aux; CategoryTheory.ShortComplex.HomologyMapData.smul",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item; tensor or Tor naturality infrastructure only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ProjectiveResolution.isoLeftDerivedObj, CategoryTheory.NatTrans.leftDerived",
+   "results": "CategoryTheory.ProjectiveResolution.leftDerived_app_eq",
+   "date": "2026-10-22",
+   "verdict": "partial match: general derived-natural-transformation computation; used through existing lem-weil-pbc-tor-map-via-resolution-lift, not an exact match for the coefficient action and scalar tower clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The free resolution computation of Tor is linear for the coefficient ring action induced by multiplication on the coefficient module",
+   "results": "lTensor.toFun; Module.Relations.Solution.isPresentationCoreTensor; PiTensorProduct.lifts_smul; Algebra.Extension.tensorCotangentInvFun_smul_mk; TensorProduct.Eqv.of_smul; TensorProduct.tensorQuotEquivQuotSMul_comp_mkQ_lTensor; QuotSMulTop.tensorQuotSMulTopEquivQuotSMulTop; TensorProduct.tensorQuotEquivQuotSMul_comp_mk",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item; tensor or Tor naturality infrastructure only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Tor\\x27, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj",
+   "results": "No hits. loogle: Unknown identifier `x27`",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the canonical projective resolution isomorphism for Tor in the second module gives compatibility with endomorphisms and restriction of scalars",
+   "results": "CategoryTheory.Tor'_obj_map; CategoryTheory.Tor'_map_app; CategoryTheory.ProjectiveResolution.iso_hom_naturality; ModuleCat.restrictScalarsComp'App_hom_naturality; CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality; ModuleCat.restrictScalarsComp'App_inv_naturality; Rep.torIso; CategoryTheory.Tor_map",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item; tensor or Tor naturality infrastructure only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Tor', CategoryTheory.ProjectiveResolution.isoLeftDerivedObj",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item; tensor or Tor naturality infrastructure only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-tor-flat-base-change",
+  "date": "2026-10-22",
+  "group": "Q28"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), local coefficient base-change in the monomial Tor-independence reduction of Expose VIII 3.4.3.; repair step 1: coefficient actions on Tor in the fixed-base coefficient reduction.",
+   "via": [
+    "lem-trf-tor-flat-base-change",
+    "lem-trf-log-regular-monomial-tor",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-tor-resolution-coefficient-actions",
+  "worker": "stage1",
+  "summary": "Proved coefficient-action compatibility by applying the existing general Tor resolution-naturality node to multiplication endomorphisms. Wrote out the basis lifting, chain multiplication and scalar-restriction checks. Statement and its dependencies are unchanged; no new nodes are needed.",
+  "blueprint": "Nearest ancestor lem-trf-local-term-locality, proof (1)--(2), the coefficient base-change subargument on the monomial Tor-independence branch; realizes the coefficient-action prerequisite of lem-trf-tor-flat-base-change without changing the contracting-correspondence route."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-d60a5fa81",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-d60a5fa81 (reviewer sub-agent of L); spot-checked: I read the whole delivery: no new nodes, item statement and stmt_deps unchanged. Sources match the cited places: Stacks algebra.tex 00M7 (section-functoriality-tor, line 18714, item (1)) and 00LZ (lemma-tor-welldefined, line 18239) with the paragraph after it on functoriality in the second variable. Step 1 (free implies projective by lifting along a basis) is elementary and correct for any basis, including infinite or empty ones. Step 2 (1⊗μ_s is a chain endomorphism and gives the S-module structure on H_n) is elementary and correct. Step 3 applies clause (2) of the Mathlib leaf lem-weil-pbc-tor-map-via-resolution-lift with N=N'=S and ψ=μ_s; its hypotheses hold (projective by step 1, exact augmentation, n≥0), and def-trf-tor-coefficient-module with S→S identity makes Tor(M,μ_s) the s-action, which gives the displayed formula. Step 4: the a-action and the g(a)-action come from the same endomorphism u↦g(a)u, so they are equal; associativity comes from transport through ι. proof_deps is exactly the union of the step uses, and there is no cycle (the sibling lem-trf-tor-coefficient-resolution-map cites the item, not the reverse). The lift lemma is a Mathlib leaf, so its use is a tool use with no route departure. Edge cases checked: n=0, S=0, R=Z with M=Z/2 and S=Z/2 in degree 1 (nonflat), and non-injective g. A scan of DAG statements for Tor + resolution + action found no duplicate. No SGA anywhere. One fault repaired (B4): step 4's source.place contained the JSON escape \\t (a TAB character) where \\to was meant. The corrected whole item file is fixes/dag/nodes/sec-trace-formula/lem-trf-tor-resolution-coefficient-actions.json, differing only in that field.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TorResolutionCoefficientActions",
+  "declaration": "ModuleCat.tor_resolution_coefficient_smul",
+  "declarations": [
+   "ModuleCat.tor_resolution_coefficient_smul",
+   "ModuleCat.tor_resolution_coefficient_actions"
+  ],
+  "file": "lean/Sheaf/RingTheory/TorResolutionCoefficientActions.lean",
+  "statement": "theorem tor_resolution_coefficient_smul (R S : Type u) [CommRing R] [CommRing S] [Algebra R S] (M : ModuleCat.{u} R) (P : ProjectiveResolution M) [∀ j : ℕ, Module.Free R (P.complex.X j)] (n : ℕ) (s : S) (t : torCoefficientModule R S M S n) : (P.isoLeftDerivedObj (tensorRight (ModuleCat.of R S)) n).hom.hom (s • t) = (HomologicalComplex.homologyMap ((NatTrans.mapHomologicalComplex ((tensoringRight (ModuleCat.{u} R)).map (ofHom (LinearMap.mulLeft R s))) (ComplexShape.down ℕ)).app P.complex) n).hom ((P.isoLeftDerivedObj (tensorRight (ModuleCat.of R S)) n).hom.hom t)",
+  "branch": "newtargets-dag",
+  "by": "Q155",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3e4cd7e51",
+  "group": "Q155",
+  "result": "pass",
+  "note": "Read item node, all 5 stmt_dep records (identical to live), the TorCoefficientModule source, Stacks 00M7 item (1) and the module. lean.statement matches the file signature verbatim; only the lean field was added. Clauses: ProjectiveResolution + termwise Module.Free = free resolution (no stronger assumption); canonical isoLeftDerivedObj.hom; existing torCoefficientModule action; homologyMap of (tensoringRight).map (mulLeft R s) gives the sum p_i⊗s s_i formula and S-linearity, true by leftDerived_app_eq; A-action = restriction along algebraMap and (g(a)b)•t = a•(b•t) as conjuncts; no flatness. Edge cases n=0, zero ring, infinite bases and non-flat S are covered; single universe u as in the dependency. Sorry-only proofs, docstrings carry source, blueprint tag and proof steps; report has both sections. Advisory: overlap with the downstream helper torFlatBaseChange_scalarTower; plain LeftDerived import probably redundant. No compile run (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261023T104929-L-3462369",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "ModuleCat.tor_resolution_coefficient_actions",
+   "ModuleCat.tor_resolution_coefficient_smul"
+  ],
+  "sorry_after": []
+ }
+}

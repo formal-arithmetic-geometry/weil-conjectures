@@ -1,0 +1,184 @@
+{
+ "id": "lem-sfb-locally-separated-closure-equivalent-images",
+ "kind": "statement",
+ "title": "Locally separated targets identify closure-equivalent geometric points",
+ "statement": "Let $k$ be a field [def-weil-field], $\\mathcal U$ an algebraic stack over $k$ as defined in [def-sfb-algebraic-moduli-stack], $Z/k$ an algebraic space [def-trf-algebraic-space] whose diagonal is an immersion (locally a closed immersion into an open subspace), and $h:\\mathcal U\\to Z$ a $k$-morphism. Let $\\Omega/k$ be an algebraically closed extension and $x_1,x_2\\in\\mathcal U(\\Omega)$. If the closures of their underlying points in $|\\mathcal U_\\Omega|$ intersect, then $h(x_1)=h(x_2)$ in $Z(\\Omega)$. The underlying topology of a stack is the quotient topology from a smooth atlas. No moduli-space morphism is assumed, and neither $\\mathcal U$ nor $Z$ is required to be of finite type. Points, the atlas topology and induced continuous maps have the conventions of [lem-sfb-smooth-presentation-closed-subsets]; base changes are fibre products [def-pc-fibre-product].",
+ "source": {
+  "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+  "place": "Proposition 7.1.1, proof, printed p.36: surjectivity of the diagonal pullback W from condition (a), expanded as its closure-equivalence input. Rational points of a locally separated space over an algebraically closed field have closed images; continuity gives the assertion. This is the geometric-points sublemma, not the universality conclusion. Read arXiv:1005.2398v3 online; local PDF WANTED.",
+  "url": "https://arxiv.org/pdf/1005.2398v3"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-algebraic-moduli-stack",
+  "def-trf-algebraic-space",
+  "lem-sfb-smooth-presentation-closed-subsets",
+  "def-pc-fibre-product",
+  "def-sfb-moduli-scheme-base-change",
+  "def-sfb-moduli-scalar-point"
+ ],
+ "proof": [
+  {
+   "text": "Put $H=h_\\Omega:\\mathcal U_\\Omega\\to Z_\\Omega$ and $a_i=H(x_i):\\operatorname{Spec}\\Omega\\to Z_\\Omega$. Apply [lem-sfb-locally-separated-rational-point-closed-immersion] with $K=\\Omega$ to the given locally separated $k$-space $Z$. Each $a_i$ is a closed immersion and its singleton image $\\{z_i\\}$ in $|Z_\\Omega|$ is closed. This applies without finite type or quasi-separatedness.",
+   "uses": [
+    "lem-sfb-locally-separated-rational-point-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tags 088J (lemma-locally-separated-decent), 08AL (lemma-finite-residue-field-extension-finite), and 07U5 (lemma-algebraic-residue-field-extension-closed-point)."
+   }
+  },
+  {
+   "text": "Work throughout with algebraic stacks over $\\Omega$. Write $u_i=|x_i|$ and choose $w\\in\\overline{\\{u_1\\}}\\cap\\overline{\\{u_2\\}}$ using the hypothesis. The current continuity clause of [lem-sfb-smooth-presentation-closed-subsets], applied with its ground field $k=\\Omega$ and morphism $H$, makes $|H|$ continuous. For each $i$, the inverse image $|H|^{-1}\\{z_i\\}$ is therefore closed and contains $u_i$, so it contains $\\overline{\\{u_i\\}}$. Evaluating at $w$ gives $z_1=|H|(w)=z_2$. Only continuity and the definition of closure are used here; no transitivity of closure-intersection is needed.",
+   "uses": [
+    "lem-sfb-smooth-presentation-closed-subsets"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tags 04XL (lemma-topology-points) and 04XH (lemma-points-cartesian), applied to Alper Proposition 7.1.1, proof of diagonal-pullback surjectivity."
+   }
+  },
+  {
+   "text": "Form the 2-fibre product $P=\\operatorname{Spec}\\Omega\\times_{Z_\\Omega}\\operatorname{Spec}\\Omega$ using $a_1,a_2$, all over $\\Omega$. Each spectrum has its unique point, and step 2 says these points have the same image in $|Z_\\Omega|$. Thus they give an element of $|\\operatorname{Spec}\\Omega|\\times_{|Z_\\Omega|}|\\operatorname{Spec}\\Omega|$. The current point-surjectivity clause of [lem-sfb-smooth-presentation-closed-subsets] gives a preimage in $|P|$, so $P$ is nonempty. By the scheme-pullback clause of [lem-sfb-locally-separated-rational-point-closed-immersion], $P$ is a scheme and its second projection is a closed immersion. By [def-weil-closed-immersion] and [def-weil-affine-spectrum], this is $\\operatorname{Spec}(\\Omega/I)\\to\\operatorname{Spec}\\Omega$. Nonemptiness makes $I$ proper, so $I=0$ by [def-weil-field]. The second projection is therefore an isomorphism; let $s$ be its inverse. Both $p_i s$ are $\\Omega$-morphisms from $\\operatorname{Spec}\\Omega$ to itself, hence identities. The fibre-product equality $a_1p_1=a_2p_2$ then gives $a_1=a_2$, which is $h(x_1)=h(x_2)$ in $Z(\\Omega)$. This uses surjectivity, without identifying the two point sets bijectively.",
+   "uses": [
+    "lem-sfb-smooth-presentation-closed-subsets",
+    "lem-sfb-locally-separated-rational-point-closed-immersion",
+    "def-weil-closed-immersion",
+    "def-weil-affine-spectrum",
+    "def-weil-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tags 04XL (lemma-topology-points) and 04XH (lemma-points-cartesian), applied to Alper Proposition 7.1.1, proof of diagonal-pullback surjectivity."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-locally-separated-rational-point-closed-immersion",
+  "lem-sfb-smooth-presentation-closed-subsets",
+  "def-weil-closed-immersion",
+  "def-weil-affine-spectrum",
+  "def-weil-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Expansion of the geometric-points input in Alper Proposition 7.1.1, printed p.36, using Stacks Tags 088J, 08AL, 07U5, 04XL and 04XH."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms from algebraic stacks to locally separated algebraic spaces identify geometric points with intersecting closures",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.fromSpecStalkOfMem_ofFromSpecStalk\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : IrreducibleSpace ↥X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] {x : ↥X} [inst_2 : X.IsGermInjectiveAt x]\\n  (φ : AlgebraicGeometry.Spec (X.presheaf.stalk x) ⟶ Y)\\n  (h : CategoryTheory.CategoryStruct.comp φ sY = Categor\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $s_X:X\\\\to S$ and $s_Y:Y\\\\to S$ locally of finite type, a point $x\\\\in X$ with injective germ map, and a morphism $\\\\phi:\\\\operatorname{Spec}(\\\\mathcal{O}_{X,x})\\\\to Y$ s\"}\n  {\"name\": \"AlgebraicGeometry.spread_out_unique_of_isGermInjective\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {x : ↥X} [X.IsGermInjectiveAt x] (f g : X ⟶ Y)\\n  (e : (CategoryTheory.ConcreteCategory.hom f.base) x = (CategoryTheory.ConcreteCategory.hom g.base) x),\\n  AlgebraicGeometry.Scheme.Hom.stalkMap f x =\\n      CategoryTheory.CategoryStruct.comp (Y.presheaf.stalkSpecializ\", \"doc\": \"Given a scheme $X$ with an injective germ at a point $x$, and two morphisms $f, g: X \\to Y$ that agree at $x$ and satisfy a compatibility condition on their induced stalk maps under specialization, the\"}\n  {\"name\": \"AlgebraicGeometry.spread_out_unique_of_isGermInjective'\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {x : ↥X} [X.IsGermInjectiveAt x] (f g : X ⟶ Y),\\n  CategoryTheory.CategoryStruct.comp (X.fromSpecStalk x) f = CategoryTheory.CategoryStruct.comp (X.fromSpecStalk x) g →\\n    ∃ U, x ∈ U ∧ CategoryTheory.CategoryStruct.comp U.ι f = CategoryTheory.CategoryStruct.comp U.\", \"doc\": \"Given a scheme $X$ with injective germ at a point $x$, if two morphisms $f,g : X \\\\to Y$ satisfy $\\\\operatorname{Spec}(\\\\mathcal{O}_{X,x}) \\\\to X \\\\xrightarrow{f} Y = \\\\operatorname{Spec}(\\\\mathcal{O}_{X,x})\"}\n  {\"name\": \"AlgebraicGeometry.ext_of_isDominant_of_isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {W X Y Z : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsReduced X] {f g : X ⟶ Y} (s : Y ⟶ Z)\\n  [AlgebraicGeometry.IsSeparated s],\\n  CategoryTheory.CategoryStruct.comp f s = CategoryTheory.CategoryStruct.comp g s →\\n    ∀ (ι : W ⟶ X) [AlgebraicGeometry.IsDominant ι],\\n      CategoryTheory.CategoryS\", \"doc\": \"Let $ X $ be a reduced scheme, and let $ f, g : X \\\\to Y $ be morphisms of schemes. Suppose $ s : Y \\\\to Z $ is a separated morphism with $ f \\\\circ s = g \\\\circ s $. If there exists a dominant morphism $\"}\n  {\"name\": \"AlgebraicGeometry.ext_of_isDominant_of_isSeparated'\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (S : AlgebraicGeometry.Scheme) [inst : X.Over S] [inst_1 : Y.Over S]\\n  [AlgebraicGeometry.IsReduced X] [AlgebraicGeometry.IsSeparated (Y ↘ S)] {f g : X ⟶ Y}\\n  [AlgebraicGeometry.Scheme.Hom.IsOver f S] [AlgebraicGeometry.Scheme.Hom.IsOver g S] {W : AlgebraicGeometry\", \"doc\": \"Let $S$ be a base scheme. If $X$ is a reduced scheme over $S$, $Y$ is a separated scheme over $S$, and $f,g : X \\\\to Y$ are morphisms over $S$, then $f = g$ provided there exists a dense open subscheme\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Spec_stalkClosedPointTo_fromSpecStalk\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {R : CommRingCat} [inst : IsLocalRing ↑R] (f : AlgebraicGeometry.Spec R ⟶ X),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.stalkClosedPointTo f))\\n      (X.fromSpecStalk ((CategoryTheory.ConcreteCategory.hom f.base) (IsLoc\", \"doc\": \"For any morphism $ f $ in the category of schemes, the composition of the morphism induced by the stalk at the closed point $ \\\\operatorname{Spec}(\\\\mathcal{O}_{X,x}) \\\\to \\\\operatorname{Spec}(R) $ and th\"}\n  {\"name\": \"AlgebraicGeometry.spread_out_of_isGermInjective\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [AlgebraicGeometry.LocallyOfFiniteType sY] {x : ↥X}\\n  [X.IsGermInjectiveAt x] {y : ↥Y}\\n  (e : (CategoryTheory.ConcreteCategory.hom sX.base) x = (CategoryTheory.ConcreteCategory.hom sY.base) y)\\n  (φ : Y.presheaf.stalk y ⟶ X.presheaf.stalk\", \"doc\": \"Let $s_X: X \\\\to S$ and $s_Y: Y \\\\to S$ be morphisms of schemes. Let $x \\\\in X$ and $y \\\\in Y$ be points such that $s_X(x) = s_Y(y)$. Let $\\\\phi: \\\\mathcal{O}_{Y,y} \\\\to \\\\mathcal{O}_{X,x}$ be a homomorphism \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.stalkClosedPointTo_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {R : CommRingCat} [inst : IsLocalRing ↑R] (f : AlgebraicGeometry.Spec R ⟶ X)\\n  (g : X ⟶ Y),\\n  AlgebraicGeometry.Scheme.stalkClosedPointTo (CategoryTheory.CategoryStruct.comp f g) =\\n    CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Scheme.Hom.stalkMap \", \"doc\": \"For scheme morphisms $f: X \\to Y$ and $g: Y \\to Z$, the induced map on stalks at closed points satisfies $\\\\text{stalkClosedPointTo}(f \\\\circ g) = g_\\\\ast \\\\circ \\\\text{stalkClosedPointTo}(f)$, where $g_\\\\ast\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme separatedness, normalization, topological closure and abstract categorical descent hits do not state this stack/algebraic-space lemma"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rational points of locally separated algebraic space over algebraically closed field are closed and closure equivalent points have equal images",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"closedPoints\", \"module\": \"Mathlib.Topology.JacobsonSpace\", \"type\": \": Set X\", \"doc\": \"The set of all points $ x $ in a topological space $ X $ for which the singleton set $ \\\\{x\\\\} $ is closed.\"}\n  {\"name\": \"inseparable_iff_closure_eq\", \"module\": \"Mathlib.Topology.Inseparable\", \"type\": \": (x ~ᵢ y) ↔ closure ({ x } : Set X) = closure { y }\", \"doc\": \"Two points $x$ and $y$ in a topological space are topologically indistinguishable if and only if the closure of the singleton set $\\\\{x\\\\}$ is equal to the closure of the singleton set $\\\\{y\\\\}$.\"}\n  {\"name\": \"SeparationQuotient.mk_eq_mk\", \"module\": \"Mathlib.Topology.Inseparable\", \"type\": \": mk x = mk y ↔ (x ~ᵢ y)\", \"doc\": \"The images of points $x$ and $y$ under the canonical quotient map to the separation quotient are equal if and only if $x$ and $y$ are inseparable, meaning their neighborhood filters $\\\\mathsf{nhds}(x)$\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [JacobsonSpace Y] [LocallyOfFiniteType f] : closedPoints X ⊆ f ⁻¹' closedPoints Y\", \"doc\": \"For schemes $X$ and $Y$, if $Y$ is a Jacobson space and the morphism $f: X \\to Y$ is locally of finite type, then the set of closed points of $X$ is contained in the preimage under $f$ of the set of cl\"}\n  {\"name\": \"AlgebraicGeometry.Spec_closedPoint\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{R S : CommRingCat} [IsLocalRing R] [IsLocalRing S] {f : R ⟶ S} [IsLocalHom f.hom] :\\n  Spec.map f (closedPoint S) = closedPoint R\", \"doc\": \"For local rings $R$ and $S$ with a local ring homomorphism $f : R \\to S$, the induced morphism $\\\\operatorname{Spec}(f) : \\\\operatorname{Spec}(S) \\to \\\\operatorname{Spec}(R)$ maps the unique closed point o\"}\n  {\"name\": \"mem_closedPoints_iff\", \"module\": \"Mathlib.Topology.JacobsonSpace\", \"type\": \"{x} : x ∈ closedPoints X ↔ IsClosed { x }\", \"doc\": \"A point $ x $ belongs to the set of closed points of a topological space $ X $ if and only if the singleton set $ \\\\{x\\\\} $ is closed, i.e., $ x \\\\in \\\\text{closedPoints}(X) \\\\leftrightarrow \\\\text{IsClosed\"}\n  {\"name\": \"closure_closedPoints\", \"module\": \"Mathlib.Topology.JacobsonSpace\", \"type\": \"[JacobsonSpace X] : closure (closedPoints X) = Set.univ\", \"doc\": \"In a Jacobson space $ X $, the closure of the set of closed points of $ X $ is equal to the universal set $ X $.\"}\n  {\"name\": \"Topology.IsClosedEmbedding.preimage_closedPoints\", \"module\": \"Mathlib.Topology.JacobsonSpace\", \"type\": \"(hf : IsClosedEmbedding f) : f ⁻¹' closedPoints Y = closedPoints X\", \"doc\": \"For a closed embedding $ f : X \\\\to Y $, the preimage of the closed points of $ Y $ under $ f $ is equal to the closed points of $ X $. Formally, $ f^{-1}(\\\\text{closedPoints}(Y)) = \\\\text{closedPoints}(\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme separatedness, normalization, topological closure and abstract categorical descent hits do not state this stack/algebraic-space lemma"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"closure\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.isField_stalk_of_closure_mem_irreducibleComponents\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \" (X : AlgebraicGeometry.Scheme) (x : ↥X) (hx : closure {x} ∈ irreducibleComponents ↥X) [AlgebraicGeometry.IsReduced X] : IsField ↑(X.presheaf.stalk x)\", \"doc\": \"If `X` is reduced and has finitely many irreducible components, then the stalks at the generic\\npoints of the irreducible components are fields.\"}\n  {\"name\": \"AlgebraicGeometry.sourceLocalClosure\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalClosure\", \"type\": \" (W P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme\", \"doc\": \"The source (Zariski-)local closure of `P` is satisfied if there exists\\nan open cover of the source on which `P` is satisfied.\"}\n  {\"name\": \"AlgebraicGeometry.sourceLocalClosure.instIsZariskiLocalAtSourceIsOpenImmersionOfRespectsIsoOfRespectsLeftScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalClosure\", \"type\": \" {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} [P.RespectsIso] [P.RespectsLeft AlgebraicGeometry.IsOpenImmersion] : AlgebraicGeometry.IsZariskiLocalAtSource (AlgebraicGeometry.sourceLocalClosure AlgebraicGeometry.IsOpenImmersion P)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalClosure\", \"type\": \" {W P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} [W.IsStableUnderBaseChange] [AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving W] [P.IsStableUnderBaseChange] : (AlgebraicGeometry.sourceLocalClosure W P).IsStableUnderBaseChange\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.sourceLocalClosure.instRespectsIsoScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalClosure\", \"type\": \" {W P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} [W.IsStableUnderBaseChange] [AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving W] [P.RespectsIso] : (AlgebraicGeometry.sourceLocalClosure W P).RespectsIso\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.sourceLocalClosure.instContainsIdentitiesScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalClosure\", \"type\": \" {W P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} [W.IsStableUnderBaseChange] [W.ContainsIdentities] [P.ContainsIdentities] : (AlgebraicGeometry.sourceLocalClosure W P).ContainsIdentities\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.sourceLocalClosure.cover\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalClosure\", \"type\": \" {W P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} (hf : AlgebraicGeometry.sourceLocalClosure W P f) : AlgebraicGeometry.Scheme.Cover (AlgebraicGeometry.Scheme.precoverage W) X\", \"doc\": \"A choice of open cover on which `P` is satisfied if `f` satisfies the source local closure\\nof `P`.\"}\n  {\"name\": \"AlgebraicGeometry.sourceLocalClosure.instRespectsRightScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalClosure\", \"type\": \" {W P Q : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} [P.RespectsRight Q] : (AlgebraicGeometry.sourceLocalClosure W P).RespectsRight Q\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.sourceLocalClosure.instIsMultiplicativeSchemeOfIsStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalClosure\", \"type\": \" {W P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} [W.IsStableUnderBaseChange] [AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving W] [W.IsMultiplicative] [P.IsStableUnderBaseChange] [P.IsMultiplicative] : (AlgebraicGeometry.sourceLocalClosure W P).IsMultiplicative\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.sourceLocalClosure.instIsStableUnderCompositionSchemeOfIsStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalClosure\", \"type\": \" {W P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} [W.IsStableUnderBaseChange] [AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving W] [W.IsStableUnderComposition] [P.IsStableUnderBaseChange] [P.IsStableUnderComposition] : (AlgebraicGeometry.sourceLocalClosure W P).IsStableUnderCom\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.sourceLocalClosure.instRespectsLeftSchemeOfIsStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalClosure\", \"type\": \" {W P Q : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} [W.IsStableUnderBaseChange] [AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving W] [P.RespectsLeft Q] [Q.IsStableUnderBaseChange] : (AlgebraicGeometry.sourceLocalClosure W P).RespectsLeft Q\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.sourceLocalClosure.le\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalClosure\", \"type\": \" {W P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} [W.ContainsIdentities] [W.RespectsIso] : P ≤ AlgebraicGeometry.sourceLocalClosure W P\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme separatedness, normalization, topological closure and abstract categorical descent hits do not state this stack/algebraic-space lemma"
+  },
+  {
+   "tool": "grep",
+   "query": "closureEquivalent|closure_equivalent|locallySeparated|locally_separated",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme separatedness, normalization, topological closure and abstract categorical descent hits do not state this stack/algebraic-space lemma"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closure equivalent geometric points of an algebraic stack have equal images in a locally separated algebraic space",
+   "results": "Hits: AlgebraicGeometry.isProper_eq, AlgebraicGeometry.UniversallyClosed.of_comp_of_isSeparated, AlgebraicGeometry.IsSeparated.isStableUnderBaseChange, AlgebraicGeometry.isSeparated_iff, AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage, AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion, AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift, AlgebraicGeometry.Scheme.stalkClosedPointTo_fromSpecStalk",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes or ordinary topology, not locally separated algebraic spaces or algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from an algebraic stack to a locally separated algebraic space sends two geometric points with intersecting closures to the same point",
+   "results": "Hits: AlgebraicGeometry.IsSeparated, AlgebraicGeometry.spread_out_of_isGermInjective, AlgebraicGeometry.Scheme.IsGermInjective, AlgebraicGeometry.spread_out_of_isGermInjective', AlgebraicGeometry.Scheme.IsSeparated, AlgebraicGeometry.ext_of_isDominant_of_isSeparated, AlgebraicGeometry.Scheme.IsGermInjectiveAt, AlgebraicGeometry.spread_out_unique_of_isGermInjective'",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes or ordinary topology, not locally separated algebraic spaces or algebraic stacks"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-adequate-locally-separated-universality",
+  "date": "2026-10-22",
+  "group": "Q70"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Adequate moduli spaces are universal for separated targets. Alper Theorem 7.2.1, locally separated case through Proposition 7.1.1: Proposition 7.1.1, proof, printed p.36: surjectivity of the diagonal pullback W from condition (a), expanded as its closure-equivalence input. Rational points of a locally separated space over an algebraically closed field have closed images; continuity gives the assertion. This is the geometric-points sublemma, not the universality conclusion.",
+   "via": [
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-locally-separated-closure-equivalent-images",
+  "worker": "stage1",
+  "summary": "NX read Alper Proposition 7.1.1 online and Stacks Tags 088J, 08AL, 07U5, 04XL, 04XH. One new statement-only rational-point closed-immersion input replaces the unsupported closed-image assertion; continuity and the nonempty closed subscheme of Spec Omega argument prove the item. Corrected only the definition citation for algebraic stack, which the adequate-moduli definition delegates to def-sfb-algebraic-moduli-stack; no mathematical hypothesis changed. Repair of the refused landing: re-read the current smooth-presentation statement, including its added image/base-change clause. Revalidated continuity and 2-fibre-product point-surjectivity over Omega, rewrote steps 2 and 3 to specify their current clauses and their hypotheses, and refreshed verbatim citation excerpts. The extra clause is not needed.",
+  "blueprint": "Supports the recorded Alper Proposition 7.1.1 diagonal-pullback argument on the alteration/PGL-quotient ancestry of det-thm-sf-ctf-stability-direct-images proof (3). The current latest blueprint direct-image proof was read. Upstream created.item ancestry is broken, as already reported by the parent: blueprint_refs ancestor returns None. Preserve from.node=null and the inherited via chain."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NX-fe38274ef",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-fe38274ef (reviewer sub-agent of L); spot-checked: Re-delivery after a refused landing. The earlier head d3b9475a was reviewed PASS. Diff: the new node is byte-identical, the item statement and step 1 are unchanged, and only the text of steps 2 and 3 was rewritten. The cited node lem-sfb-smooth-presentation-closed-subsets has since been split by Q27; its snapshot statement equals side-live and still states continuity and 2-fibre-product point surjectivity. It adds an image/base-change clause that the item does not use. Live and side-live still have the item unsplit, and there is no repair note. New node (rational K-points of a locally separated space are closed immersions with closed image): I read Stacks decent-spaces 088J (l.3501), 07U5 (l.3356) and 08AL (l.3386). With S=Spec K the point is closed and κ(s)=K, and Z_K is locally separated by 03KL, so the node is true with no finite-type or quasi-separatedness hypothesis. It is self-contained, is not a clause of the item, and an rg search over the snapshot nodes (locally separated, decent, rational-point closed immersion) found no duplicate. Steps: step 1 applies the node with K=Ω. Step 2 uses continuity of |H| plus minimality of closure, not transitivity; the stack topology on the algebraic space Z_Ω agrees with the étale-atlas topology of def-a1. Step 3: surjectivity gives P≠∅; the closed immersion into Spec Ω is Spec(Ω/I) with I=0, so it is an isomorphism, the Ω-endomorphisms are identities, and a1=a2. proof_deps = union of uses. Batch-5: def-sfb-algebraic-moduli-stack, def-trf-algebraic-space and def-a1-space-point-topology are general definitions, and lem-sfb-smooth-presentation-closed-subsets is general stack-point topology. None is a trace-formula or Poincaré-duality statement or proof step; accepted. No SGA source. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocallySeparatedClosureEquivalentImages",
+  "declaration": "CategoryTheory.locallySeparated_closureEquivalent_images",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocallySeparatedClosureEquivalentImages.lean",
+  "statement": "theorem locallySeparated_closureEquivalent_images (k : Type u) [Field k] (F : BasedCategory.{v, w} (Over (Spec (.of k)))) (hF : IsAlgebraicModuliStack F) (Z : AlgebraicSpace (Spec (.of k))) (hZ : AlgebraicSpace.IsRepresentableWith (fun _ _ p ↦ IsImmersion p.left) (prod.lift (𝟙 Z.obj.obj) (𝟙 Z.obj.obj))) (h : BasedFunctor F (discreteModuli Z.obj.obj)) (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ Spec (.of k)) (x₁ x₂ : Functor.Fiber F.p (Over.mk g)) (hx : ((@closure _ (moduliSmoothPointTopology (moduliSchemeBaseChange F g)) {moduliScalarPoint F Ω g x₁}) ∩ (@closure _ (moduliSmoothPointTopology (moduliSchemeBaseChange F g)) {moduliScalarPoint F Ω g x₂})).Nonempty) : Nonempty ((moduliFiberMap h (Over.mk g)).obj x₁ ≅ (moduliFiberMap h (Over.mk g)).obj x₂)",
+  "branch": "sheaf-dag",
+  "by": "Q21",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing moduliSchemeBaseChange and moduliScalarPoint, with explicitly specified moduliSmoothPointTopology. The scalar-point construction is cited through def-sfb-moduli-scalar-point (existing: true), not its containing theorem node. No adequacy hypothesis is used. Equality of rational target points is expressed as an isomorphism in the discrete target fibre."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-36b8e03d7",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Re-delivery after RETURN cbf9 (H2: lem-sfb-adequate-geometric-fibres-submersion added to stmt_deps only for moduliScalarPoint). Repair: that theorem node is replaced by the new def node def-sfb-moduli-scalar-point, existing:true, module AdequateGeometricFibresSubmersion, declarations [CategoryTheory.moduliScalarPoint]. The record matches the explicit Quot.mk def at line 42; its stmt_deps are all def nodes present on side-live; its source is Stacks 003R/04XG; it has 4 mathlib_searches; side-live has no duplicate owner. The Lean file is byte-identical to cbf9, and the statement, proof and lean.statement are unchanged. Re-verified clause by clause: hZ is IsRepresentableWith IsImmersion on the presheaf diagonal; the closures use moduliSmoothPointTopology on moduliSchemeBaseChange; the conclusion is a fibre iso in discreteModuli, i.e. equality in Z(Omega). No extra hypotheses; edge cases ok. lem-sfb-smooth-presentation-closed-subsets is a stage-1 stmt_dep, not added, so not flagged. Nothing compiled because nothing changed."
+ }
+}

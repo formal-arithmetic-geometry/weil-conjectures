@@ -1,0 +1,127 @@
+{
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M, strict augmentation argument"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedKoszulTensorQuotientAugmentation",
+  "date": "2026-10-27",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-completed-koszul-tensor-quotient-augmentation",
+   "place": "strict augmentation construction and normalization",
+   "via": []
+  },
+  "same_as": []
+ },
+ "id": "new-y2-completed-koszul-tensor-quotient-augmentation-unique",
+ "kind": "statement",
+ "title": "Uniqueness of the finite strict completed Koszul tensor augmentation",
+ "statement": "theorem completedKoszulTensorQuotientAugmentation_unique\n    (r : ℕ) (a : Fin r → A)\n    (β γ : completedKoszulTensorTower T d r a ⟶\n      (completedAdicOrdinaryTower T d).mapHomologicalComplex (.up ℤ))\n    (hβ :\n      (∀ (P : CochainComplex (CompletedAdicModules T d) ℤ) (n : ℕ),\n        completedAdicKoszulTensorUnit T d r a P n ≫\n          (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map (β.app P)).app (op n) =\n            completedQuotientTensorUnit T d P n) ∧\n      (∀ (P : CochainComplex (CompletedAdicModules T d) ℤ) (n : ℕ) (p q : ℤ) (hq : q ≠ 0),\n        completedKoszulTensorSummand T d r a P n p q ≫\n            ((HomologicalComplex.complexOfFunctorsToFunctorToComplex.map\n              (β.app P)).app (op n)).f (p + q) = 0))\n    (hγ :\n      (∀ (P : CochainComplex (CompletedAdicModules T d) ℤ) (n : ℕ),\n        completedAdicKoszulTensorUnit T d r a P n ≫\n          (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map (γ.app P)).app (op n) =\n            completedQuotientTensorUnit T d P n) ∧\n      (∀ (P : CochainComplex (CompletedAdicModules T d) ℤ) (n : ℕ) (p q : ℤ) (hq : q ≠ 0),\n        completedKoszulTensorSummand T d r a P n p q ≫\n            ((HomologicalComplex.complexOfFunctorsToFunctorToComplex.map\n              (γ.app P)).app (op n)).f (p + q) = 0)) :\n    β = γ",
+ "stmt_deps": [
+  "new-y2-completed-koszul-tensor-quotient-augmentation-data",
+  "def-weil-pbc-koszul-reconstruction-models",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-intrinsic-completion"
+ ],
+ "proof": [
+  {
+   "text": "Prove that koszulConstantOne is invertible by constructing its inverse from the module sheafification Hom equivalence, sending the sheafification image of 1 to 1. The two inverse identities are tested on 1 using the unit-module Hom equivalence and the sheafification Hom equivalence. Composing its isomorphism with exteriorPower.zeroEquiv and the extension-by-zero degree-zero isomorphism makes koszulSheafUnitZero invertible.",
+   "uses": [
+    "def-weil-pbc-intrinsic-koszul-completion",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the scalar-extension unit isomorphism, whose inverse inserts 1, and then the normalized scalar-extension functor applied to koszulSheafUnitZero. Naturality of sheafification on pure tensors identifies the resulting map with completedAdicKoszulUnitZero by its specified value on 1. Thus this completed degree-zero unit is invertible. The scalar-extension coherence theorem is used only as a generic tool for its unit isomorphism and inverse section formula.",
+   "uses": [
+    "new-y2-completed-koszul-tensor-quotient-augmentation-data",
+    "lem-pd-sheaf-scalar-extension-constraint-coherence",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply natural-transformation extensionality at each input complex, complex degree, and tower index. Mathlib HomologicalComplex.mapBifunctor.hom_ext reduces equality of the component maps to equality after every total tensor summand inclusion. On the q=0 summand, take the degree-p component of the two unit normalization equations, and cancel the invertible right unitor and tensor of the degree-zero Koszul unit. For q nonzero, both composites vanish by the two vanishing hypotheses. These equalities prove equality of the original natural transformations.",
+   "uses": [
+    "new-y2-completed-koszul-tensor-quotient-augmentation-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-intrinsic-koszul-completion",
+  "def-weil-presheaf-modules-sheafification",
+  "new-y2-completed-koszul-tensor-quotient-augmentation-data",
+  "lem-pd-sheaf-scalar-extension-constraint-coherence"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M, strict augmentation argument; degree-zero scalar extension uses the unit constraint from Modules on Sites, Tag 03EK; Lean proof by P7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "completed Koszul tensor quotient augmentation strict natural transformation",
+   "results": "No direct declaration found.",
+   "date": "2026-10-27",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "NatTrans homological complex tensor augmentation",
+   "results": "Only generic natural transformation APIs.",
+   "date": "2026-10-27",
+   "verdict": "generic APIs only"
+  },
+  {
+   "tool": "grep",
+   "query": "completedKoszulTensorQuotientAugmentation",
+   "results": "Only the assigned construction and its dependent cone theorem.",
+   "date": "2026-10-27",
+   "verdict": "no duplicate"
+  }
+ ],
+ "status": "split",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedKoszulTensorQuotientAugmentationUnique",
+  "file": "lean/Sheaf/Paper/CompletedKoszulTensorQuotientAugmentationUnique.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completedKoszulTensorQuotientAugmentation_unique",
+  "statement": "theorem completedKoszulTensorQuotientAugmentation_unique\n    (r : ℕ) (a : Fin r → A)\n    (β γ : completedKoszulTensorTower T d r a ⟶\n      (completedAdicOrdinaryTower T d).mapHomologicalComplex (.up ℤ))\n    (hβ :\n      (∀ (P : CochainComplex (CompletedAdicModules T d) ℤ) (n : ℕ),\n        completedAdicKoszulTensorUnit T d r a P n ≫\n          (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map (β.app P)).app (op n) =\n            completedQuotientTensorUnit T d P n) ∧\n      (∀ (P : CochainComplex (CompletedAdicModules T d) ℤ) (n : ℕ) (p q : ℤ) (hq : q ≠ 0),\n        completedKoszulTensorSummand T d r a P n p q ≫\n            ((HomologicalComplex.complexOfFunctorsToFunctorToComplex.map\n              (β.app P)).app (op n)).f (p + q) = 0))\n    (hγ :\n      (∀ (P : CochainComplex (CompletedAdicModules T d) ℤ) (n : ℕ),\n        completedAdicKoszulTensorUnit T d r a P n ≫\n          (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map (γ.app P)).app (op n) =\n            completedQuotientTensorUnit T d P n) ∧\n      (∀ (P : CochainComplex (CompletedAdicModules T d) ℤ) (n : ℕ) (p q : ℤ) (hq : q ≠ 0),\n        completedKoszulTensorSummand T d r a P n p q ≫\n            ((HomologicalComplex.complexOfFunctorsToFunctorToComplex.map\n              (γ.app P)).app (op n)).f (p + q) = 0)) :\n    β = γ",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.completedKoszulTensorQuotientAugmentation_unique"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-cba2b",
+  "group": "Y2",
+  "result": "fix",
+  "landing": "20261027T021420-L-2772620",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P7",
+  "result": "pass",
+  "landing": "20261027T034722-L-3678837",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,265 @@
+{
+ "id": "lem-trf-etale-graph-taylor-comparison",
+ "kind": "statement",
+ "title": "Infinitesimal comparison with the graph of an etale closed subscheme",
+ "statement": "Let $k$ be a field, $A$ a commutative $k$-algebra, and $w_1,\\ldots,w_m,y_1,\\ldots,y_r\\in A$, with $\\operatorname{Spec}A\\to\\mathbf A_k^{m+r}$ etale [def-weil-field, def-weil-etale-morphism, def-sbc-affine-space]. Let $h_1,\\ldots,h_s\\in A$, $D=A/(h_1,\\ldots,h_s)$, and $q:A\\to D$ the quotient map [def-weil-pbc-algebra-hom-quotient]. Suppose that $\\operatorname{Spec}D\\to\\mathbf A_k^m$ given by the images of $w$ is etale. Let $L/k$ be a field extension and $\\epsilon:D\\to L$ a $k$-algebra homomorphism. Suppose given $k$-algebra homomorphisms\n$$\\tau:A\\to L[[W_1,\\ldots,W_m,Y_1,\\ldots,Y_r]],\\qquad\\sigma:D\\to L[[W_1,\\ldots,W_m]]$$\nwhose constant terms are $\\epsilon q$ and $\\epsilon$, and with $\\tau(w_i)=\\epsilon q(w_i)+W_i$, $\\tau(y_j)=\\epsilon q(y_j)+Y_j$, and $\\sigma(q(w_i))=\\epsilon q(w_i)+W_i$ [def-weil-pbc-multivariate-power-series]. Define $\\phi_j=\\sigma(q(y_j))-\\epsilon q(y_j)\\in(W)L[[W]]$. Then\n$$\\tau(c)(W,\\phi(W))=\\sigma(q(c))\\quad(c\\in A),$$\nand $\\phi$ is the unique vector $\\psi\\in(W)L[[W]]^r$ for which $\\tau(h_i)(W,\\psi(W))=0$ for every $i$. The comparison also holds after localizing $A$ and $D$ at the primes defined by the evaluations, since the denominators have nonzero constant coefficient. For every extension $L\\hookrightarrow K$, applying it coefficientwise to $\\tau,\\sigma,\\phi$ gives the same comparison and the unique solution over $K$. The integers $m,r,s$ may be zero; there is no closed-point hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 04FF (lemma-unramified-flat-formally-etale), with Definition 02HG (definition-formally-etale). Agent consequence of repeated unique lifting through the square-zero kernels (W)^q/(W)^(q+1), parent steps 4 and 5 and the graph-solution portion of step 11."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-etale-morphism",
+  "def-sbc-affine-space",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "For a zero-constant vector $\\psi$, Mathlib MvPowerSeries.hasSubst_of_constantCoeff_zero makes substitution by $(W,\\psi)$ an algebra homomorphism. Subtract the constant power series from an arbitrary series and apply constantCoeff_subst_eq_zero to see that this substitution preserves its constant coefficient. These constructions work for every finite number of variables, including zero.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the ring-level formally unramified predicate [lem-weil-pbc-formally-unramified-ring-iff-kahler-zero]. If $e:P\\to B$ is formally unramified and $f,g:B\\to F[[W]]$ agree on $P$ and on constant coefficients, regard both as $P$-algebra homomorphisms, with the target algebra structure induced by $f e$. The power-series ring is Noetherian and local (Mathlib MvPowerSeries.isNoetherianRing and its local-ring instance). The constant-coefficient kernel is a proper prime ideal, hence is contained in the maximal ideal. Krull intersection [lem-weil-pbc-krull-intersection-jacobson], specialized by Ideal.iInf_pow_eq_bot_of_isLocalRing, says its powers have zero intersection. Algebra.FormallyUnramified.ext_of_iInf therefore gives $f=g$. This Mathlib theorem performs the nilpotent-lifting induction and separation of the original plan. For an etale coordinate map $k[Z]\\to B$, RingHom.Etale.formallyUnramified supplies the formal unramifiedness, and MvPolynomial.algHom_ext checks agreement over $k[Z]$ from agreement on the coordinates.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series",
+    "def-weil-etale-morphism",
+    "def-weil-field",
+    "lem-weil-pbc-formally-unramified-ring-iff-kahler-zero",
+    "lem-weil-pbc-krull-intersection-jacobson"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Put $q:A\\to D$ and $\\phi_j=\\sigma(q(y_j))-C(\\epsilon(q(y_j)))$. Its constant coefficients vanish by the hypothesis on $\\sigma$. Apply step 2 to the coordinate map $k[W,Y]\\to A$ and the maps $S_\\phi\\tau$ and $\\sigma q$. Step 1 and the hypotheses give the same constant coefficients, while substitution on $C(a)$ and $X_i$ and the coordinate formulas show equality on $w$ and $y$. Thus $S_\\phi\\tau=\\sigma q$, and evaluating at each $h_i$ gives zero. For uniqueness, $S_\\psi\\tau$ annihilates the span of the $h_i$ by Ideal.span_le and hence descends through Ideal.Quotient.liftₐ to $\\rho:D\\to L[[W]]$. Use step 2 for the etale coordinate map $k[W]\\to D$: the maps $\\rho$ and $\\sigma$ agree on the $w$ coordinates, and quotient surjectivity and step 1 give equality of their constant coefficients. Therefore $\\rho=\\sigma$. Evaluate at $q(y_j)$ and subtract the constant series to obtain $\\psi_j=\\phi_j$.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series",
+    "def-weil-etale-morphism",
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-field",
+    "lem-weil-pbc-formally-unramified-ring-iff-kahler-zero",
+    "lem-weil-pbc-krull-intersection-jacobson"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "MvPowerSeries.isUnit_iff_constantCoeff shows that every denominator outside the evaluation kernel is sent to a unit. Extend $\\tau$ and $\\sigma$ with IsLocalization.lift, and extend $q$ using Localization.localRingHom; all three maps have the asserted restrictions to the original rings. IsLocalization.ringHom_ext reduces equality of the two homomorphisms on the localized ambient ring to the comparison in step 3. The equations and uniqueness for localized equations follow by their restrictions to the original generators.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series",
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-field",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a coefficient-field homomorphism $\\iota:L\\to K$, MvPowerSeries.map_subst says coefficientwise mapping commutes with substitution. Check separately the $W$ and $Y$ blocks, using map_X on the first block. Applying this identity to the localized comparison proves its coefficient compatibility. For the full comparison and uniqueness over $K$, apply step 3 to $\\epsilon_K=\\iota\\epsilon$, $\\tau_K=\\iota_*\\tau$ and $\\sigma_K=\\iota_*\\sigma$. The mapAlgHom API, constantCoeff_map, map_add, map_C and map_X prove all required hypotheses, and mapping the explicit difference defining $\\phi$ identifies the resulting graph vector with $\\iota_*\\phi$. This proves uniqueness for every zero-constant candidate over $K$, including candidates not defined over $L$.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series",
+    "def-weil-etale-morphism",
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-field",
+    "lem-weil-pbc-formally-unramified-ring-iff-kahler-zero",
+    "lem-weil-pbc-krull-intersection-jacobson"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The power-series Noetherian and local instances, the proper-kernel argument and all homomorphism APIs above admit zero variables. The quotient factorization uses the span of the image of Fin s and so also admits no generators. Consequently the same Lean proof handles $m=0$, $r=0$ and $s=0$. It uses neither maximality nor surjectivity of the field-valued evaluations and places no algebraicity condition on either coefficient field.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series",
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-field"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-etale-morphism",
+  "def-weil-field",
+  "lem-weil-pbc-formally-unramified-ring-iff-kahler-zero",
+  "lem-weil-pbc-krull-intersection-jacobson",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex; literature/stacks-project/algebra.tex",
+  "place": "Tags 04FF and 02HG, ring-level unique infinitesimal lifting; Tag 00IQ for separation. Lean realization uses Mathlib Algebra.FormallyUnramified.ext_of_iInf with Krull intersection, quotient factorization, localization and coefficient mapping."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-etale-graph-taylor-comparison: Taylor expansion in compatible ambient and closed subscheme etale coordinates restricts by a unique formal graph and commutes with coordinate differentiation",
+   "results": "{\"t\": \"2026-10-22T07:04:19Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-etale-graph-taylor-comparison: Taylor expansion in compatible ambient and closed subscheme etale coordinates restricts by a unique formal graph and commutes with coordinate differentiation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"hasFTaylorSeriesUpToOn_top_iff_right\", \"hasFTaylorSeriesUpToOn_univ_iff\", \"HasFTaylorSeriesUpToOn.fderivWithin\", \"hasFTaylorSeriesUpTo_top_iff'\", \"HasFTaylorSeriesUpToOn.comp\", \"HasFTaylorSeriesUpToOn.congr_series\", \"ContDiffOn.ftaylorSeriesWithin\", \"Polynomial.map_taylorEquiv_degreeLT\"], \"digest\": \"005d0a2c49775a41\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: standard-etale lift uniqueness and the differential base-change equivalence are inputs, not the comparison of two etale coordinate maps through a quotient and the unique formal graph."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-etale-graph-taylor-comparison: derivations on an etale algebra commute with expansion into formal power series and restriction to an etale coordinate zero locus",
+   "results": "{\"t\": \"2026-10-22T07:04:30Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-etale-graph-taylor-comparison: derivations on an etale algebra commute with expansion into formal power series and restriction to an etale coordinate zero locus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.instFormallyEtaleRing\", \"StandardEtalePresentation.toSubmersivePresentation_jacobian\", \"StandardEtalePresentation.toPresentation_σ'\", \"StandardEtalePair.HasMap.isUnit_derivative_f\", \"StandardEtalePair.instEtaleRing\", \"Algebra.Etale.formallyEtale\", \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"StandardEtalePresentation.hasMap\"], \"digest\": \"7503e2aa9ac6f675\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: standard-etale lift uniqueness and the differential base-change equivalence are inputs, not the comparison of two etale coordinate maps through a quotient and the unique formal graph."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-etale-graph-taylor-comparison: uniqueness of formally etale lifts identifies restriction to a closed subscheme with substitution into its formal graph",
+   "results": "{\"t\": \"2026-10-22T07:04:31Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-etale-graph-taylor-comparison: uniqueness of formally etale lifts identifies restriction to a closed subscheme with substitution into its formal graph\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.homEquiv\", \"StandardEtalePair.instFormallyEtaleRing\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"StandardEtalePair.homEquiv_apply_coe\", \"StandardEtalePair.hom_ext_iff\", \"StandardEtalePair.homEquiv_symm_apply\", \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\"], \"digest\": \"1666db3f7cfb6a63\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: standard-etale lift uniqueness and the differential base-change equivalence are inputs, not the comparison of two etale coordinate maps through a quotient and the unique formal graph."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorKaehlerEquivOfFormallyEtale|existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot",
+   "results": "{\"t\": \"2026-10-22T07:07:07Z\", \"tool\": \"grep\", \"query\": \"tensorKaehlerEquivOfFormallyEtale|existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"sub\": \"RingTheory/Etale\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Etale/Kaehler.lean\", \"Mathlib/RingTheory/Etale/Kaehler.lean\", \"Mathlib/RingTheory/Etale/Kaehler.lean\", \"Mathlib/RingTheory/Etale/Kaehler.lean\", \"Mathlib/RingTheory/Etale/Kaehler.lean\", \"Mathlib/RingTheory/Etale/StandardEtale.lean\", \"Mathlib/RingTheory/Etale/StandardEtale.lean\"], \"digest\": \"a53362f7a91f744d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: standard-etale lift uniqueness and the differential base-change equivalence are inputs, not the comparison of two etale coordinate maps through a quotient and the unique formal graph."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallyEtale, Derivation",
+   "results": "{\"t\": \"2026-10-22T07:04:19Z\", \"tool\": \"loogle\", \"query\": \"Algebra.FormallyEtale, Derivation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\"], \"digest\": \"9b31a16631d3c0da\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: standard-etale lift uniqueness and the differential base-change equivalence are inputs, not the comparison of two etale coordinate maps through a quotient and the unique formal graph."
+  },
+  {
+   "tool": "grep",
+   "query": "[Tt]aylor.*[Ee]tale|[Ee]tale.*[Tt]aylor|[Ff]ormallyEtale.*[Dd]eriv",
+   "results": "{\"t\": \"2026-10-22T07:04:19Z\", \"tool\": \"grep\", \"query\": \"[Tt]aylor.*[Ee]tale|[Ee]tale.*[Tt]aylor|[Ff]ormallyEtale.*[Dd]eriv\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: standard-etale lift uniqueness and the differential base-change equivalence are inputs, not the comparison of two etale coordinate maps through a quotient and the unique formal graph."
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*(subst|[Tt]aylor)|[Tt]aylor.*[Ee]tale|hom_ext|homEquiv",
+   "results": "{\"t\": \"2026-10-23T12:23:33Z\", \"tool\": \"grep\", \"query\": \"etale.*(subst|[Tt]aylor)|[Tt]aylor.*[Ee]tale|hom_ext|homEquiv\", \"sub\": \"RingTheory/Etale\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Etale/Field.lean\", \"Mathlib/RingTheory/Etale/StandardEtale.lean\", \"Mathlib/RingTheory/Etale/StandardEtale.lean\", \"Mathlib/RingTheory/Etale/StandardEtale.lean\", \"Mathlib/RingTheory/Etale/StandardEtale.lean\", \"Mathlib/RingTheory/Etale/StandardEtale.lean\", \"Mathlib/RingTheory/Etale/QuasiFinite.lean\", \"Mathlib/RingTheory/Etale/QuasiFinite.lean\"], \"digest\": \"1f9ac0b7315fbb18\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give square-zero lifting or standard-etale presentations, or polynomial/power-series evaluation extensionality; none states this ambient/quotient comparison and unique formal graph with localization and arbitrary coefficient extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallyEtale",
+   "results": "{\"t\": \"2026-10-23T12:23:34Z\", \"tool\": \"loogle\", \"query\": \"Algebra.FormallyEtale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.inst\", \"Algebra.FormallyEtale\", \"Algebra.Etale.formallyEtale\", \"Algebra.FormallyEtale.instFormallySmooth\", \"Algebra.FormallyEtale.instFormallyUnramified\", \"Algebra.FormallyEtale.subsingleton_h1Cotangent\", \"Algebra.FormallyEtale.subsingleton_kaehlerDifferential\", \"Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth\"], \"digest\": \"4273f1bb104667cf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give square-zero lifting or standard-etale presentations, or polynomial/power-series evaluation extensionality; none states this ambient/quotient comparison and unique formal graph with localization and arbitrary coefficient extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-etale-graph-taylor-comparison: unique lifting for etale coordinate algebras identifies restriction to a closed etale subscheme with substitution into its formal power series graph",
+   "results": "{\"t\": \"2026-10-23T12:23:39Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-etale-graph-taylor-comparison: unique lifting for etale coordinate algebras identifies restriction to a closed etale subscheme with substitution into its formal power series graph\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.homEquiv_symm_apply\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"StandardEtalePresentation.lift_bijective\", \"StandardEtalePair.lift\", \"StandardEtalePair.homEquiv\", \"StandardEtalePair.lift_X\", \"StandardEtalePresentation.toPresentation_σ'\", \"StandardEtalePair.homEquiv_apply_coe\"], \"digest\": \"f6c8e23a56f60926\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give square-zero lifting or standard-etale presentations, or polynomial/power-series evaluation extensionality; none states this ambient/quotient comparison and unique formal graph with localization and arbitrary coefficient extension."
+  },
+  {
+   "tool": "grep",
+   "query": "iff_comp_bijective|comp_injective|ext.*nilpotent|hom_ext",
+   "results": "{\"t\": \"2026-10-23T12:23:55Z\", \"tool\": \"grep\", \"query\": \"iff_comp_bijective|comp_injective|ext.*nilpotent|hom_ext\", \"sub\": \"RingTheory/Unramified\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Unramified/Field.lean\", \"Mathlib/RingTheory/Unramified/Basic.lean\", \"Mathlib/RingTheory/Unramified/Basic.lean\", \"Mathlib/RingTheory/Unramified/Basic.lean\", \"Mathlib/RingTheory/Unramified/Basic.lean\", \"Mathlib/RingTheory/Unramified/Basic.lean\", \"Mathlib/RingTheory/Unramified/Pi.lean\", \"Mathlib/RingTheory/Unramified/Pi.lean\"], \"digest\": \"44f58bb1dad97fee\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give square-zero lifting or standard-etale presentations, or polynomial/power-series evaluation extensionality; none states this ambient/quotient comparison and unique formal graph with localization and arbitrary coefficient extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Formal etale uniqueness for homomorphisms into an adically separated power series ring with fixed polynomial coordinates and a fixed residue homomorphism",
+   "results": "{\"t\": \"2026-10-23T12:23:57Z\", \"tool\": \"leanfinder\", \"query\": \"Formal etale uniqueness for homomorphisms into an adically separated power series ring with fixed polynomial coordinates and a fixed residue homomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.hom_ext\", \"StandardEtalePair.hom_ext_iff\", \"StandardEtalePair.instFormallyEtaleRing\", \"StandardEtalePair.homEquiv\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"StandardEtalePair.lift\", \"StandardEtalePresentation.mk.inj\", \"Algebra.FormallyUnramified.lift_unique\"], \"digest\": \"5638b03fb22d3d2d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give square-zero lifting or standard-etale presentations, or polynomial/power-series evaluation extensionality; none states this ambient/quotient comparison and unique formal graph with localization and arbitrary coefficient extension."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two homomorphisms from an etale algebra into formal power series with the same constant term and coordinate values are equal",
+   "results": "{\"t\": \"2026-10-23T12:23:57Z\", \"tool\": \"leansearch\", \"query\": \"Two homomorphisms from an etale algebra into formal power series with the same constant term and coordinate values are equal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.algHom_ext'\", \"Polynomial.algHom_ext_iff\", \"MvPowerSeries.eval₂Hom.congr_simp\", \"Algebra.Generators.Hom.mk.congr_simp\", \"MvPolynomial.algHom_ext'_iff\", \"Algebra.Generators.Hom.ext\", \"Polynomial.algHom_ext'_iff\", \"DualNumber.algHom_ext_iff\"], \"digest\": \"0dad282bd4d5e924\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give square-zero lifting or standard-etale presentations, or polynomial/power-series evaluation extensionality; none states this ambient/quotient comparison and unique formal graph with localization and arbitrary coefficient extension."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-implicit-taylor-coordinate-calculus",
+  "date": "2026-10-22",
+  "group": "Q62"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Local Hilbert--Samuel presentations and their admissible transforms. Lower input in this split: Regular coefficient data with division and Jacobian conditions; Bierstone--Milman, Invent. Math. 128 (1997), 207--302, conditions (7.1)--(7.2), Theorem 9.6 and its block induction (9.7)--(9.14); Bierstone--Milman--Temkin, arXiv:0905.3580, section 6.2. No Stacks tag states this algebraization theorem. Further local input: Lemma 3.5 and Remarks 3.7, 9.9 and 9.11 (pp.231--232,279--280); faithful-flat Taylor realization at nonclosed points is the algebraic extension using the completed diagonal after residue-field extension; re-split local coordinate-calculus input: Tag 04FF (lemma-unramified-flat-formally-etale), with Definition 02HG (definition-formally-etale). Agent consequence of repeated unique lifting through the square-zero kernels (W)^q/(W)^(q+1), parent steps 4 and 5 and the graph-solution portion of step 11.",
+   "via": [
+    "lem-trf-implicit-taylor-coordinate-calculus",
+    "lem-trf-regular-hilbert-coefficient-data",
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-etale-graph-taylor-comparison",
+  "worker": "stage1",
+  "summary": "Kept the statement and supplied a six-step proof using the existing flat-unramified unique-lifting node twice: for the ambient comparison and for uniqueness on the quotient. Substitution, square-zero truncations, separation, localization and coefficient extension are written explicitly. No new nodes are necessary. Added the existing localization definition to statement dependencies. No finished project declaration states the item.",
+  "blueprint": "Retains the historical local-term-locality auxiliary branch recorded in blueprint.from; realizes parent lem-trf-implicit-taylor-coordinate-calculus steps 4, 5 and the graph-solution part of step 11. The current latest blueprint local-term-locality proof instead discusses contracting correspondences; this algebraic auxiliary item is not presented as a clause of its new proof."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-57ac818e4",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-57ac818e4 (reviewer sub-agent of L); spot-checked: I read the item in full: 6 steps, no new nodes, statement unchanged; the only change is the stmt_dep def-weil-pbc-localization-at-prime, which the localization clause needs. No re-split note applies: the item was new on 2026-10-22 with no prior proof. Sources: Stacks more-morphisms.tex l.1509 (02HG, exactly one lift) and l.1626 (04FF), including the proof; tags verified. Cited lem-weil-pbc-flat-unramified-formally-etale states unique lifts over S for affine first-order thickenings and is Lean-closed on slopmaster2. Step 2: f=S_phi tau and g=sigma q agree on w and y, so they are two lifts over A^{m+r}_k; base case n=1 is the equal constant terms; induction over the square-zero kernels R_{n+1}->R_n; coefficientwise separation finishes. Step 3 factors S_psi tau through D=A/(h) and runs the same induction over the separately assumed etale map Spec D->A^m, giving psi=phi. Steps 1, 4 and 6 (substitution degree by degree, geometric inverse, fraction extension, m=0 and s=0) are genuinely elementary. Step 5's uniqueness over K reruns step 3 with K, and injectivity of iota keeps the kernels. Tested: graph chart y=g(w), where phi=g(a+W)-g(a) and uniqueness holds; nonclosed evaluation; disconnected etale A. It supplies exactly parent lem-trf-implicit-taylor-coordinate-calculus step 3. No duplicate (lem-trf-etale-chart-rational-point-taylor-iso is the completed-local-ring isomorphism), no cycle, no SGA."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleGraphTaylorComparison",
+  "declaration": "MvPowerSeries.etale_graph_taylor_comparison",
+  "declarations": [
+   "MvPowerSeries.etaleGraphVector",
+   "MvPowerSeries.evaluationLocalization",
+   "MvPowerSeries.etale_graph_taylor_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGraphTaylorComparison.lean",
+  "statement": "theorem etale_graph_taylor_comparison {k : Type u} {A : Type v} {L : Type w} [Field k] [CommRing A] [Field L] [Algebra k A] [Algebra k L] {m r s : ℕ} (w : Fin m → A) (y : Fin r → A) (h : Fin s → A) (hA : (MvPolynomial.aeval (Fin.addCases w y) : MvPolynomial (Fin (m + r)) k →ₐ[k] A).toRingHom.Etale) (hD : (MvPolynomial.aeval (fun i ↦ (Ideal.Quotient.mkₐ k (Ideal.span (Set.range h))) (w i)) : MvPolynomial (Fin m) k →ₐ[k] (A ⧸ Ideal.span (Set.range h))).toRingHom.Etale) (ε : (A ⧸ Ideal.span (Set.range h)) →ₐ[k] L) (τ : A →ₐ[k] MvPowerSeries (Fin (m + r)) L) (σ : (A ⧸ Ideal.span (Set.range h)) →ₐ[k] MvPowerSeries (Fin m) L) (hτ₀ : ∀ a, constantCoeff (τ a) = ε ((Ideal.Quotient.mkₐ k (Ideal.span (Set.range h))) a)) (hσ₀ : ∀ d, constantCoeff (σ d) = ε d) (hτw : ∀ i, τ (w i) = C (ε ((Ideal.Quotient.mkₐ k (Ideal.span (Set.range h))) (w i))) + X (Fin.castAdd r i)) (hτy : ∀ j, τ (y j) = C (ε ((Ideal.Quotient.mkₐ k (Ideal.span (Set.range h))) (y j))) + X (Fin.natAdd m j)) (hσw : ∀ i, σ ((Ideal.Quotient.mkₐ k (Ideal.span (Set.range h))) (w i)) = C (ε ((Ideal.Quotient.mkₐ k (Ideal.span (Set.range h))) (w i))) + X i) : (∀ j, constantCoeff ((etaleGraphVector ε σ (fun j ↦ (Ideal.Quotient.mkₐ k (Ideal.span (Set.range h))) (y j))) j) = 0) ∧ (∀ a, subst (Fin.addCases X (etaleGraphVector ε σ (fun j ↦ (Ideal.Quotient.mkₐ k (Ideal.span (Set.range h))) (y j)))) (τ a) = σ ((Ideal.Quotient.mkₐ k (Ideal.span (Set.range h))) a)) ∧ (∀ i, subst (Fin.addCases X (etaleGraphVector ε σ (fun j ↦ (Ideal.Quotient.mkₐ k (Ideal.span (Set.range h))) (y j)))) (τ (h i)) = 0) ∧ (∀ ψ : Fin r → MvPowerSeries (Fin m) L, (∀ j, constantCoeff (ψ j) = 0) → (∀ i, subst (Fin.addCases X ψ) (τ (h i)) = 0) → ψ = (etaleGraphVector ε σ (fun j ↦ (Ideal.Quotient.mkₐ k (Ideal.span (Set.range h))) (y j)))) ∧ (∃ (τₚ : evaluationLocalization (ε.comp (Ideal.Quotient.mkₐ k (Ideal.span (Set.range h)))).toRingHom →+* MvPowerSeries (Fin (m + r)) L) (σₚ : evaluationLocalization ε.toRingHom →+* MvPowerSeries (Fin m) L) (qₚ : evaluationLocalization (ε.comp (Ideal.Quotient.mkₐ k (Ideal.span (Set.range h)))).toRingHom →+* evaluationLocalization ε.toRingHom), (∀ a, τₚ (algebraMap A _ a) = τ a) ∧ (∀ d, σₚ (algebraMap (A ⧸ Ideal.span (Set.range h)) _ d) = σ d) ∧ (∀ a, qₚ (algebraMap A _ a) = algebraMap (A ⧸ Ideal.span (Set.range h)) _ ((Ideal.Quotient.mkₐ k (Ideal.span (Set.range h))) a)) ∧ (∀ z, subst (Fin.addCases X (etaleGraphVector ε σ (fun j ↦ (Ideal.Quotient.mkₐ k (Ideal.span (Set.range h))) (y j)))) (τₚ z) = σₚ (qₚ z)) ∧ (∀ i, subst (Fin.addCases X (etaleGraphVector ε σ (fun j ↦ (Ideal.Quotient.mkₐ k (Ideal.span (Set.range h))) (y j)))) (τₚ (algebraMap A _ (h i))) = 0) ∧ (∀ ψ : Fin r → MvPowerSeries (Fin m) L, (∀ j, constantCoeff (ψ j) = 0) → (∀ i, subst (Fin.addCases X ψ) (τₚ (algebraMap A _ (h i))) = 0) → ψ = (etaleGraphVector ε σ (fun j ↦ (Ideal.Quotient.mkₐ k (Ideal.span (Set.range h))) (y j)))) ∧ (∀ (K : Type x) [Field K] [Algebra k K] (ι : L →ₐ[k] K) z, subst (Fin.addCases X (fun j ↦ map ι.toRingHom ((etaleGraphVector ε σ (fun j ↦ (Ideal.Quotient.mkₐ k (Ideal.span (Set.range h))) (y j))) j))) (map ι.toRingHom (τₚ z)) = map ι.toRingHom (σₚ (qₚ z)))) ∧ (∀ (K : Type x) [Field K] [Algebra k K] (ι : L →ₐ[k] K), (∀ j, constantCoeff (map ι.toRingHom ((etaleGraphVector ε σ (fun j ↦ (Ideal.Quotient.mkₐ k (Ideal.span (Set.range h))) (y j))) j)) = 0) ∧ (∀ a, subst (Fin.addCases X (fun j ↦ map ι.toRingHom ((etaleGraphVector ε σ (fun j ↦ (Ideal.Quotient.mkₐ k (Ideal.span (Set.range h))) (y j))) j))) (map ι.toRingHom (τ a)) = map ι.toRingHom (σ ((Ideal.Quotient.mkₐ k (Ideal.span (Set.range h))) a))) ∧ (∀ i, subst (Fin.addCases X (fun j ↦ map ι.toRingHom ((etaleGraphVector ε σ (fun j ↦ (Ideal.Quotient.mkₐ k (Ideal.span (Set.range h))) (y j))) j))) (map ι.toRingHom (τ (h i))) = 0) ∧ (∀ ψ : Fin r → MvPowerSeries (Fin m) K, (∀ j, constantCoeff (ψ j) = 0) → (∀ i, subst (Fin.addCases X ψ) (map ι.toRingHom (τ (h i))) = 0) → ψ = fun j ↦ map ι.toRingHom ((etaleGraphVector ε σ (fun j ↦ (Ideal.Quotient.mkₐ k (Ideal.span (Set.range h))) (y j))) j)))",
+  "branch": "sheaf-dag",
+  "by": "Q105",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the equivalent affine ring-map étaleness predicate to retain independent universes for k and A. The graph vector is explicit; evaluationLocalization is exactly Localization.AtPrime with the canonical kernel-prime proof. No change to the accepted stage-1 split."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-358d63284",
+  "group": "Q105",
+  "result": "pass",
+  "note": "Item lem-trf-etale-graph-taylor-comparison: every node hypothesis matches the Lean, none stronger. Étaleness is stated as RingHom.Etale of MvPolynomial.aeval for A and D, which brief-stage2 §3 allows. D and q are literally A⧸span(range h) and Ideal.Quotient.mkₐ. Constant-term and coordinate hypotheses hτ₀, hσ₀, hτw, hτy, hσw match, with castAdd as the W block and natAdd as the Y block. All conclusion clauses are present: zero constants of the graph vector, the comparison by genuine subst (HasSubst holds since all substituted series have zero constant term), the equations, uniqueness over all zero-constant ψ, the localized comparison through ring homs τₚ, σₚ, qₚ fixed by their restrictions, and the coefficient extension over every field K with uniqueness for every ψ over K. Edge cases m, r, s = 0, D = 0 and non-maximal evaluation kernels are covered. Universes u, v, w, x are independent. etaleGraphVector is an explicit formula and evaluationLocalization is Mathlib's Localization.AtPrime, so no hollow definitions. Docstrings carry the source place, the blueprint node and the six proof steps. The proof is sorry only. lean.statement matches the file verbatim. Only the lean field differs from side-live and the item is not landed. Advisory: the public AffineSpace import is unused by the statement. No compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261026T091501-L-3346163",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

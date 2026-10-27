@@ -1,0 +1,272 @@
+{
+ "id": "lem-sfb-simple-chamber-fold-affine-step",
+ "kind": "statement",
+ "title": "Simple chamber folding rewrites an affine lowering edge in at most two edges",
+ "statement": "Let $X$ be a free abelian group of finite rank (a $\\mathbf Z$-module with a finite basis) [def-weil-pbc-free-module]. Let $\\Phi\\subset X\\setminus\\{0\\}$ be finite with $\\Phi\\cap\\mathbf Q\\beta=\\{\\beta,-\\beta\\}$ for $\\beta\\in\\Phi$. For every $\\beta\\in\\Phi$ let $c_\\beta:X\\to\\mathbf Z$ be a homomorphism, with $c_\\beta(\\beta)=2$ and $c_{-\\beta}=-c_\\beta$. Set $s_\\beta(v)=v-c_\\beta(v)\\beta$. Assume $s_\\beta(\\Phi)=\\Phi$ and $c_{s_\\beta\\gamma}=c_\\gamma\\circ s_\\beta$ for all roots $\\beta,\\gamma$. Let $\\Delta\\subset\\Phi$ be linearly independent in $X\\otimes_{\\mathbf Z}\\mathbf Q$, with every root an integral combination of $\\Delta$ whose coefficients are all nonnegative or all nonpositive. Let $\\Phi^+$ be the roots of the first kind. Fix any $\\rho\\in X$ and integer $p\\ge1$. Put $s_\\beta\\mathbin\\cdot v=s_\\beta(v+\\rho)-\\rho$, and write $u\\le v$ when $v-u$ is an integral nonnegative sum of $\\Delta$. An affine lowering edge from $v$ to $u$ means\n$$u=s_\\beta\\mathbin\\cdot v+np\\beta\\le v\\quad(\\beta\\in\\Phi^+,\\ n\\in\\mathbf Z_{\\ge0}).$$\nFor $\\alpha\\in\\Delta$ define\n$f_\\alpha(v)=v$ if $c_\\alpha(v+\\rho)\\ge0$, and $f_\\alpha(v)=s_\\alpha\\mathbin\\cdot v$ otherwise.\nFor every affine lowering edge from $v$ to $u$ there is a sequence $f_\\alpha(v)=t_0,t_1,\\ldots,t_m=f_\\alpha(u)$ with $0\\le m\\le2$, each $t_{j-1}\\to t_j$ an affine lowering edge. Equality of the folded endpoints permits $m=0$. No irreducibility assumption or primality assumption on $p$ is imposed.",
+ "source": {
+  "document": "literature/andersen-strong-linkage-principle-1980.pdf",
+  "place": "Definition 1 and the chamber-reduction Lemma 1, printed p.54; agent-formulated local edge-rewriting prerequisite, replacing the appeal to Jantzen 1977 Satz 9 by the explicit rank-one calculation recorded in report.md. Online GDZ scan PPN243919689_0315, image 00000058."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Work with shifted coordinates $x=v+\\rho$, $y=u+\\rho$; translation back by $-\\rho$ preserves every difference. In these coordinates put $R_{\\delta,j}(z)=s_\\delta z+jp\\delta=z-(c_\\delta(z)-jp)\\delta$ and $F(z)=z$ for $c_\\alpha(z)\\ge0$, $F(z)=s_\\alpha z$ otherwise. The given edge is $y=R_{\\beta,n}(x)=x-k\\beta$, where $k=c_\\beta(x)-np$. We have $k\\ge0$: write $\\beta=\\sum d_\\delta\\delta$ with $d_\\delta\\ge0$ and some $d_\\delta>0$; the hypothesis $y\\le x$ and independence of $\\Delta$ force the coefficients $kd_\\delta$ of $x-y$ to be nonnegative. These coefficient comparisons may be made in $X\\otimes\\mathbf Q$: a basis as defined in [def-weil-pbc-free-module] identifies $X$ with a finite direct sum of copies of $\\mathbf Z$, so its map to that rational vector space is injective. Any displayed $R_{\\delta,j}$ step below is therefore a lowering edge once $\\delta\\in\\Phi^+$, $j\\ge0$ and its subtraction coefficient is nonnegative.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/andersen-strong-linkage-principle-1980.pdf",
+    "place": "Definition 1 and Lemma 1, printed pp.54–55, local chamber-reduction prerequisite; explicit agent-written calculation (the PDF is absent locally; see report.md)."
+   }
+  },
+  {
+   "text": "The identities $c_\\alpha(s_\\alpha z)=-c_\\alpha(z)$ and $s_\\alpha^2z=z$ follow by substituting $c_\\alpha(\\alpha)=2$. If $\\beta\\ne\\alpha$, put $\\gamma=s_\\alpha\\beta$. Then $\\gamma\\in\\Phi^+$: some coefficient of $\\beta$ away from $\\alpha$ is positive (otherwise reducedness would give $\\beta=\\alpha$), and that coefficient is unchanged by $s_\\alpha\\beta=\\beta-c_\\alpha(\\beta)\\alpha$. Since $\\gamma$ is a root and every root has coefficients of one sign, all its coefficients are nonnegative.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/andersen-strong-linkage-principle-1980.pdf",
+    "place": "Definition 1 and Lemma 1, printed pp.54–55, local chamber-reduction prerequisite; explicit agent-written calculation (the PDF is absent locally; see report.md)."
+   }
+  },
+  {
+   "text": "Still suppose $\\beta\\ne\\alpha$. The assumed covariance gives $c_\\gamma(s_\\alpha x)=c_\\beta(x)$, and direct substitution gives\n$$s_\\alpha y=s_\\alpha x-k\\gamma=R_{\\gamma,n}(s_\\alpha x).$$\nIndeed $R_{\\gamma,n}(s_\\alpha x)=s_\\alpha x-(c_\\beta(x)-np)\\gamma$, by $s_\\alpha^2=1$. Thus $s_\\alpha x\\longrightarrow s_\\alpha y$ is a lowering edge at the same level $n$, with subtraction coefficient $k\\ge0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/andersen-strong-linkage-principle-1980.pdf",
+    "place": "Definition 1 and Lemma 1, printed pp.54–55, local chamber-reduction prerequisite; explicit agent-written calculation (the PDF is absent locally; see report.md)."
+   }
+  },
+  {
+   "text": "Write $a=c_\\alpha(x)$ and $b=c_\\alpha(y)$, and assume $\\beta\\ne\\alpha$. If $a,b\\ge0$, use the original edge $F(x)=x\\to y=F(y)$. If $a,b<0$, use the conjugated edge $F(x)=s_\\alpha x\\to s_\\alpha y=F(y)$ from step 3. If $a<0\\le b$, use $s_\\alpha x\\to x\\to y$: the first edge is $R_{\\alpha,0}(s_\\alpha x)=x$ with subtraction coefficient $-a>0$, and the second is the original edge. These paths have at most two edges.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/andersen-strong-linkage-principle-1980.pdf",
+    "place": "Definition 1 and Lemma 1, printed pp.54–55, local chamber-reduction prerequisite; explicit agent-written calculation (the PDF is absent locally; see report.md)."
+   }
+  },
+  {
+   "text": "In the remaining sign case for $\\beta\\ne\\alpha$, namely $b<0\\le a$, use $x\\to s_\\alpha x\\to s_\\alpha y$. The first edge is $R_{\\alpha,0}(x)=s_\\alpha x$ with coefficient $a\\ge0$, and the second is precisely the conjugated edge of step 3 with root $\\gamma\\in\\Phi^+$ and level $n\\ge0$. Its endpoints are $F(x)$ and $F(y)$. This exhausts the cases with $\\beta\\ne\\alpha$, including points on the wall.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/andersen-strong-linkage-principle-1980.pdf",
+    "place": "Definition 1 and Lemma 1, printed pp.54–55, local chamber-reduction prerequisite; explicit agent-written calculation (the PDF is absent locally; see report.md)."
+   }
+  },
+  {
+   "text": "It remains to treat $\\beta=\\alpha$. Here $k=a-np\\ge0$, so $a\\ge np\\ge0$, and $b=c_\\alpha(y)=-a+2np$. If $b\\ge0$ the original edge already joins the folded endpoints. Suppose $b<0$, equivalently $a>2np$. Then\n$$F(x)=x,\\qquad F(y)=s_\\alpha y=x-np\\alpha.$$\nFor $n=0$ these are equal, so take the empty path. For $n\\ge1$, divide $a$ by $p>0$: write $a=hp+r$ with integers $0\\le r<p$. The inequality $a>2np$ forces $h\\ge2n$ (if $h\\le2n-1$ then $a<(h+1)p\\le2np$). In particular $h\\ge0$ and $h-n\\ge0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/andersen-strong-linkage-principle-1980.pdf",
+    "place": "Definition 1 and Lemma 1, printed pp.54–55, local chamber-reduction prerequisite; explicit agent-written calculation (the PDF is absent locally; see report.md)."
+   }
+  },
+  {
+   "text": "For this last case let $z=x-r\\alpha$. Substitution yields\n$$z=R_{\\alpha,h}(x),\\qquad c_\\alpha(z)=a-2r=hp-r,$$\nso $x\\to z$ is a lowering edge with coefficient $r\\ge0$. A second substitution yields\n$$R_{\\alpha,h-n}(z)=z-\\bigl((hp-r)-(h-n)p\\bigr)\\alpha=x-np\\alpha=F(y).$$\nIts coefficient is $np-r>0$, since $n\\ge1$ and $r<p$, and its level is $h-n\\ge0$. Thus $F(x)=x\\to z\\to F(y)$ is the required two-edge path. No divisibility of $a$ by $p$ was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/andersen-strong-linkage-principle-1980.pdf",
+    "place": "Definition 1 and Lemma 1, printed pp.54–55, local chamber-reduction prerequisite; explicit agent-written calculation (the PDF is absent locally; see report.md)."
+   }
+  },
+  {
+   "text": "Translate each vertex back by $-\\rho$. Since $F(v+\\rho)-\\rho=f_\\alpha(v)$ and similarly for $u$, the paths above have exactly the required endpoints and edge formulas in the original coordinates. Remove any stationary edge (or take $m=0$ whenever the endpoints coincide); this leaves at most two edges. The construction uses only $p>0$ and the stated base and reflection hypotheses, not primality or irreducibility. If $\\Phi$ or $\\Delta$ is empty, there is no choice of $\\alpha\\in\\Delta$ and the assertion is vacuous.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/andersen-strong-linkage-principle-1980.pdf",
+    "place": "Definition 1 and Lemma 1, printed pp.54–55, local chamber-reduction prerequisite; explicit agent-written calculation (the PDF is absent locally; see report.md)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/andersen-strong-linkage-principle-1980.pdf",
+  "place": "Definition 1 and Lemma 1, printed pp.54–55, local chamber-reduction prerequisite; explicit agent-written calculation (the PDF is absent locally; see report.md)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "fold.*(root|reflect|chamber)|strong.?link|affine.*reflect|reflect.*affine",
+   "results": "Read 25 hits: Mathlib/LinearAlgebra/Reflection.lean, Mathlib/LinearAlgebra/Matrix/SpecialLinearGroup.lean, Mathlib/LinearAlgebra/AffineSpace/AffineEquiv.lean, Mathlib/LinearAlgebra/AffineSpace/AffineEquiv.lean, Mathlib/LinearAlgebra/AffineSpace/Midpoint.lean, Mathlib/LinearAlgebra/AffineSpace/Midpoint.lean, Mathlib/LinearAlgebra/AffineSpace/Midpoint.lean, Mathlib/LinearAlgebra/AffineSpace/Midpoint.lean; digest e17c61d0853b525d. ",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary root strings, reflection automorphisms and point-reflection geometry do not state monotonicity of simple chamber folding for affine lowering edges."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a simple root the map sending a weight to the larger of itself and its simple dot reflection preserves strong linkage chains",
+   "results": "Read 8 hits: LieAlgebra.IsKilling.chainLength_neg, LieAlgebra.IsKilling.reflectRoot, RootPairing.reflection, RootPairing.chainBotCoeff_reflectionPerm_left, RootPairing.bijOn_reflection_root, RootPairing.Equiv.reflection, RootPairing.Hom.weightMap_mul, RootPairing.chainTopCoeff_reflectionPerm_left; digest 994fd25353456d5e. ",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary root strings, reflection automorphisms and point-reflection geometry do not state monotonicity of simple chamber folding for affine lowering edges."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"reflection\", \"monotone\"",
+   "results": "Read 0 hits: ; digest 4f53cda18c2baa0c. ",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary root strings, reflection automorphisms and point-reflection geometry do not state monotonicity of simple chamber folding for affine lowering edges."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simple Weyl chamber folding preserves a single downward affine root reflection step up to a chain of at most two downward affine reflections",
+   "results": "Read 8 hits: RootPairing.chainTopCoeff_reflectionPerm_left, RootPairing.chainTopCoeff_reflectionPerm_right, RootPairing.chainBotCoeff_reflectionPerm_left, RootPairing.chainBotCoeff_reflectionPerm_right, RootPairing.Base.induction_reflect, RootPairing.Base.IsPos.induction_on_reflect, RootPairing.EmbeddedG2.threeShortAddTwoLong, RootPairing.weylGroup.ofIdx_smul; digest bd7ae8c7baec1fe8. ",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary root strings, reflection automorphisms and point-reflection geometry do not state monotonicity of simple chamber folding for affine lowering edges."
+  },
+  {
+   "tool": "grep",
+   "query": "strongLinkage|dotAction|chamberFold|affineWeyl|affine_reflection|affineReflection",
+   "results": "Read 0 hits: ; digest 4f53cda18c2baa0c. ",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary root strings, reflection automorphisms and point-reflection geometry do not state monotonicity of simple chamber folding for affine lowering edges."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Folding weights toward a dominant half space using a simple reflection is monotone for the affine Weyl strong order",
+   "results": "Read 8 hits: RootPairing.chainBotCoeff_reflectionPerm_right, RootPairing.chainTopCoeff_reflectionPerm_right, RootPairing.Base.IsPos.reflectionPerm, RootPairing.coxeterWeightIn_le_four, RootPairing.coxeterWeight_nonneg, RootPairing.chainBotCoeff_reflectionPerm_left, RootPairing.chainTopCoeff_reflectionPerm_left, RootPairing.Base.IsPos.induction_on_reflect; digest a29f22b021acf5ef. ",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary root strings, reflection automorphisms and point-reflection geometry do not state monotonicity of simple chamber folding for affine lowering edges."
+  },
+  {
+   "tool": "grep",
+   "query": "strongLinkage|dotAction|chamberFold|affineWeyl|affineReflection|affine_reflection",
+   "results": "Read 0 hits: ; digest 4f53cda18c2baa0c. ",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary root-chain identities and base induction, linear or point reflections, and monotone interval projections do not state the affine-dot edge-folding assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Folding a weight across a simple root wall preserves affine strong linkage order",
+   "results": "Read 8 hits: RootPairing.coxeterWeight_flip, RootPairing.Hom.weightMap_mul, RootPairing.Equiv.comp_weightMap_apply, LieAlgebra.IsKilling.reflectRoot_isNonZero, RootPairing.Hom.weightHom, RootPairing.Equiv.weightEquiv_comp_toLin, RootPairing.Hom.root_weightMap, RootPairing.Equiv.weightHom_apply; digest 432167b4d074a449. ",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary root-chain identities and base induction, linear or point reflections, and monotone interval projections do not state the affine-dot edge-folding assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"reflection\", \"monotone\"",
+   "results": "Read 0 hits: ; digest 4f53cda18c2baa0c. ",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary root-chain identities and base induction, linear or point reflections, and monotone interval projections do not state the affine-dot edge-folding assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simple chamber folding preserves a downward affine root reflection edge by at most two downward edges",
+   "results": "Read 8 hits: RootPairing.chainTopCoeff_reflectionPerm_left, RootPairing.chainBotCoeff_reflectionPerm_left, RootPairing.chainBotCoeff_reflectionPerm_right, RootPairing.chainTopCoeff_reflectionPerm_right, RootPairing.EmbeddedG2.threeShortAddTwoLong, RootPairing.Base.induction_reflect, RootPairing.EmbeddedG2.twoShortAddLong, RootPairing.Base.IsPos.induction_on_reflect; digest f18060d3c13be9e8. ",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary root-chain identities and base induction, linear or point reflections, and monotone interval projections do not state the affine-dot edge-folding assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "fold.*(root|reflect|chamber)|strong.?link|affine.*reflect|reflect.*affine",
+   "results": "Read 25 hits: Mathlib/Analysis/InnerProductSpace/OfNorm.lean, Mathlib/Analysis/Normed/Affine/Isometry.lean, Mathlib/Analysis/Normed/Affine/Isometry.lean, Mathlib/Analysis/Normed/Affine/Isometry.lean, Mathlib/Analysis/Normed/Affine/Isometry.lean, Mathlib/Analysis/Normed/Affine/Isometry.lean, Mathlib/Analysis/Calculus/Deriv/Basic.lean, Mathlib/LinearAlgebra/Reflection.lean; digest e234bbe36cef9a4f. ",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary root-chain identities and base induction, linear or point reflections, and monotone interval projections do not state the affine-dot edge-folding assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection of weights into a simple dominant half space is monotone for the affine strong order",
+   "results": "Read 8 hits: Behrend.map_monotone, SimplexCategoryGenRel.simplicialEvalσ_monotone, Set.monotone_projIci, Set.monotone_projIic, Tuple.monotone_proj, LieModule.genWeightSpace_le_genWeightSpaceChain, BoxIntegral.Box.monotone_face, AffineMap.lineMap_mono; digest 6a1964826ca2e8e8. ",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary root-chain identities and base induction, linear or point reflections, and monotone interval projections do not state the affine-dot edge-folding assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem.*(chainTopCoeff_reflectionPerm_left|chainBotCoeff_reflectionPerm_left|induction_reflect|induction_on_reflect)|lemma.*(chainTopCoeff_reflectionPerm_left|chainBotCoeff_reflectionPerm_left|induction_reflect|induction_on_reflect)",
+   "results": "Read 4 hits: Mathlib/LinearAlgebra/RootSystem/Base.lean, Mathlib/LinearAlgebra/RootSystem/Base.lean, Mathlib/LinearAlgebra/RootSystem/Chain.lean, Mathlib/LinearAlgebra/RootSystem/Chain.lean; digest 3831033f18fd2dba. ",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary root-chain identities and base induction, linear or point reflections, and monotone interval projections do not state the affine-dot edge-folding assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-reflection-dominant-descent",
+  "date": "2026-10-24",
+  "group": "Q34"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Dimension of the simple module at the first restricted rho weight. Supporting general input: dominant induced-module composition factors, multiplicity one at the highest weight and affine linkage; used to exclude all lower factors at (p-1)rho. Repair of the strong-linkage input: Dominant representatives of affine-reflection error weights descend. Local prerequisite for the chamber-reduction argument: folding one affine lowering edge across one simple wall.",
+   "via": [
+    "lem-sfb-affine-reflection-dominant-descent",
+    "lem-sfb-induced-composition-linkage",
+    "lem-sfb-restricted-rho-simple-dimension",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-simple-chamber-fold-affine-step",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Gave the complete shifted-coordinate sign-case proof, including the two-level Euclidean-division construction when the edge root equals the folding root. Each step is an explicit substitution, coefficient sign comparison or integer inequality; no new nodes are needed. Searched project Lean, the full DAG, blueprint and Mathlib; no attachment or exact Mathlib match. Andersen PDF absent, so the proof is explicitly agent-written and the report requests the document.",
+  "blueprint": "Retained inherited blueprint.from.node=null and the full via/place chain: blueprint_refs.py ancestor reports no imported ancestor. Read latest blueprint det-thm-sf-ctf-stability-direct-images proof (3) and chapter/unit records. This discharges the inherited local chamber-reduction prerequisite below lem-sfb-affine-reflection-dominant-descent; no chapter or unit route change. Whole-blueprint searches chamber, affine reflection and strong linkage found zero matches; same_as remains []."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q125-424374e26",
+  "group": "Q125",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-424374e26 (reviewer sub-agent of L); spot-checked: Read in full: the item (statement plus 8 steps), the report, the cited def-weil-pbc-free-module (Mathlib leaf Module.Free) and the parent lem-sfb-affine-reflection-dominant-descent, whose step 6 is the only citer. The Andersen PDF is not in literature/, so proof_origin=agent with a WANTED line is correct. No SGA is cited and there is no repair note, so this is not a re-split; there are no new nodes. The statement is unchanged. The covariance hypothesis c_{s_beta gamma}=c_gamma∘s_beta is the correct root-datum identity. The edge definition (n>=0, u<=v) and the fold f_alpha match the parent's up-arrow chain steps, and the parent's root-datum setting meets every hypothesis. I recomputed every step. Step 1: k>=0 from unique Delta-coefficients, and an R_{delta,j} with nonnegative coefficient is a lowering edge. Step 2: c_alpha∘s_alpha=-c_alpha, s_alpha^2=1, and s_alpha beta is positive for beta≠alpha, via reducedness. Step 3: s_alpha y=R_{gamma,n}(s_alpha x). Steps 4-5: all four sign cases, with wall points in the >=0 branch. Steps 6-7, beta=alpha: b=-a+2np, F(y)=x-np alpha; with a=hp+r, h>=2n, and edges x->z=x-r alpha at level h (coefficient r) and z->x-np alpha at level h-n (coefficient np-r>0); n=0 gives the empty path. Step 8: translation back and removal of stationary edges. All steps are genuinely elementary; the only standard lemma, that s_alpha permutes the positive roots other than alpha, is proved inline. proof_deps equals the union of the uses. I ran my own brute-force check, an exhaustive search for any path of at most 2 edges, independent of the delivered construction: B2 with p=1..4 and 4 values of rho over [-5,5]^2 (28,654 edges), and A1xA1 with roots 2e_i, p in {1,3,4} (5,106 edges); 0 failures. A run with levels capped at 4 showed apparent failures that vanish without the cap, which confirms that the level-h construction is needed. A search of the DAG finds no duplicate and there is no cycle. The only proof use is a definition, so there are no tool_uses. The null blueprint ancestor and same_as [] are inherited and correct. Mathlib searches cover all three kinds, and I agree with the no-match verdict. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.SimpleChamberFoldAffineStep",
+  "declaration": "AffineChamberFold.simple_chamber_fold_affine_step",
+  "declarations": [
+   "AffineChamberFold.Dominance",
+   "AffineChamberFold.reflectionDot",
+   "AffineChamberFold.Edge",
+   "AffineChamberFold.fold",
+   "AffineChamberFold.simple_chamber_fold_affine_step"
+  ],
+  "file": "lean/Sheaf/LinearAlgebra/SimpleChamberFoldAffineStep.lean",
+  "statement": "theorem simple_chamber_fold_affine_step {X : Type u} [AddCommGroup X] [Module.Free ℤ X] [Module.Finite ℤ X] (Φ : Set X) (hfinite : Φ.Finite) (hzero : (0 : X) ∉ Φ) (hreduced : ∀ β ∈ Φ, {γ ∈ Φ | ∃ q : ℚ, (1 : ℚ) ⊗ₜ[ℤ] γ = q • ((1 : ℚ) ⊗ₜ[ℤ] β)} = {β, -β}) (c : X → X →ₗ[ℤ] ℤ) (hself : ∀ β ∈ Φ, c β β = 2) (hneg : ∀ β ∈ Φ, c (-β) = -c β) (hreflect : ∀ β ∈ Φ, (Module.preReflection β (c β)) '' Φ = Φ) (hcov : ∀ β ∈ Φ, ∀ γ ∈ Φ, c (Module.preReflection β (c β) γ) = (c γ).comp (Module.preReflection β (c β))) (Δ : Set X) (hsubset : Δ ⊆ Φ) (hindependent : LinearIndependent ℚ (fun δ : Δ ↦ (1 : ℚ) ⊗ₜ[ℤ] (δ : X))) (hbase : ∀ β ∈ Φ, β ∈ AddSubmonoid.closure Δ ∨ -β ∈ AddSubmonoid.closure Δ) (ρ : X) (p : ℤ) (hp : 1 ≤ p) (α : X) (hα : α ∈ Δ) (v u : X) (hedge : Edge Φ Δ c ρ p v u) : ∃ (m : ℕ) (t : Fin (m + 1) → X), m ≤ 2 ∧ t 0 = fold c ρ α v ∧ t (Fin.last m) = fold c ρ α u ∧ ∀ j : Fin m, Edge Φ Δ c ρ p (t j.castSucc) (t j.succ)",
+  "branch": "newtargets-dag",
+  "by": "Q144",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Unbundled lattice and coroot data retain precisely the weaker hypotheses of this local node, rather than requiring a full RootDatum. Same-notion helpers define dominance, the dot reflection, affine lowering edges and chamber folding. Linear reflections reuse Mathlib Module.preReflection. The total coroot family is unrestricted away from the roots and is an equivalent extension-by-zero presentation of a root-indexed family."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-665a94cc0",
+  "group": "Q144",
+  "result": "pass",
+  "note": "Read item node (only lean changed vs side-live), module, report (Worker report + Second reading by Q144), stmt_dep Module.Free, Mathlib preReflection, parent AffineReflectionDominantDescent. Clause-by-clause match: free f.g. X, finite Φ with 0∉Φ, hreduced via ℚ⊗X collinearity = {β,-β}, c total linear family with c β β=2, c(-β)=-cβ, image equality, covariance in correct order, Δ⊆Φ ℚ-independent with one-sign integral closure, Φ+ inside Edge, ρ, p:ℤ≥1, dot reflection, Dominance, Edge(n≥0, u≤v), fold with wall fixed, ∃ m≤2 path with Fin endpoints. No extra assumptions; universe u bound. Edge cases: empty Δ/Φ vacuous, rank 0, m=0 equal folded endpoints. Statement verbatim; helpers real data with source/blueprint docstrings; 8-step proof docstring; sorry only. H4: parent's AffineWeight.Edge/reflectionDot need RootDatum and parent cites this item (cycle), so the unbundled helpers are justified. No compile needed (no FIX)."
+ }
+}

@@ -1,0 +1,205 @@
+{
+ "id": "lem-sfb-noetherian-generically-constant-finite-image",
+ "kind": "statement",
+ "title": "Finite image from generic constancy on every prime closed subset",
+ "statement": "Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], let $T$ be any set, and let $f:\\operatorname{Spec}A\\to T$ be any function, with no continuity assumption [def-weil-affine-spectrum]. For an ideal $J\\subseteq A$ write $V(J)=\\{\\mathfrak p:J\\subseteq\\mathfrak p\\}$ and, for $b\\in A$, write $D(b)=\\{\\mathfrak p:b\\notin\\mathfrak p\\}$. Assume that for every prime ideal $I\\subset A$ there are $b\\in A\\setminus I$ and $t\\in T$ such that $f(\\mathfrak p)=t$ for every $\\mathfrak p\\in V(I)\\cap D(b)$. Then for every ideal $J\\subseteq A$ the set $\\{f(\\mathfrak p):\\mathfrak p\\in V(J)\\}$ is finite. In particular $f$ has finite image. The zero ring and the empty target set are allowed whenever such a function exists.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0ASY, lemma-generic-flatness-stratification, Noetherian-induction pattern; algebra.tex Tags 00IK, lemma-Noetherian-basic, and 00FR, lemma-Noetherian-irreducible-components; abstract finite-image adaptation of the item proof steps 3 and 6."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "For an ideal $J$, put $F(J)=\\{f(\\mathfrak p):\\mathfrak p\\in V(J)\\}$. Suppose some $F(J)$ is infinite and let $\\Psi$ be the nonempty set of all such ideals. Regard ideals as $A$-submodules of the finite module $A$: the single element $1$ generates $A$, since $a=a\\cdot1$ for every $a\\in A$. Clause (2) of [lem-weil-pbc-noetherian-finite-module-acc] gives $I\\in\\Psi$ maximal for inclusion. Thus $F(K)$ is finite for every ideal $K\\supsetneq I$. Also $I\\ne A$, since no proper prime ideal contains $1$, so $F(A)=\\varnothing$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-finite-module-acc",
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IK, lemma-Noetherian-basic, ascending-chain/maximal-element condition; agent-written finite-image argument."
+   }
+  },
+  {
+   "text": "The ideal $I$ is prime. Indeed, otherwise its properness gives $a,c\\notin I$ with $ac\\in I$. Both $I+(a)$ and $I+(c)$ strictly contain $I$, so their $F$-sets are finite by maximality. A point $\\mathfrak p\\in V(I)$ is a prime ideal [def-weil-affine-spectrum]; hence $ac\\in\\mathfrak p$ forces $a\\in\\mathfrak p$ or $c\\in\\mathfrak p$. Conversely any prime containing either $I+(a)$ or $I+(c)$ contains $I$. Therefore $V(I)=V(I+(a))\\cup V(I+(c))$ and $F(I)=F(I+(a))\\cup F(I+(c))$, a finite union of two finite sets, a contradiction. Here prime means proper and satisfying $xy\\in\\mathfrak p\\Rightarrow x\\in\\mathfrak p\\text{ or }y\\in\\mathfrak p$.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IK, lemma-Noetherian-basic, ascending-chain/maximal-element condition; agent-written finite-image argument."
+   }
+  },
+  {
+   "text": "Apply the hypothesis to the prime ideal $I$ just obtained. Choose $b\\notin I$ and $t\\in T$ with $f=t$ on $V(I)\\cap D(b)$. The ideal $K=I+(b)$ strictly contains $I$, so $F(K)$ is finite. Every $\\mathfrak p\\in V(I)$ either omits $b$ and then has $f(\\mathfrak p)=t$, or contains $b$ and then contains $K$. Consequently $F(I)\\subseteq\\{t\\}\\cup F(K)$ is finite, contradicting $I\\in\\Psi$. This uses only membership in $V$ and $D$, not continuity of $f$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IK, lemma-Noetherian-basic, ascending-chain/maximal-element condition; agent-written finite-image argument."
+   }
+  },
+  {
+   "text": "There is thus no ideal $J$ with $F(J)$ infinite. This proves the stated assertion for every $J$. Every prime contains the zero ideal, so $V((0))=\\operatorname{Spec}A$ and $F((0))$ is the image of $f$, proving the final assertion. If $A$ is the zero ring, no proper prime exists and all these images are empty. If $T=\\varnothing$ and a function $f$ exists, its domain is empty and the same conclusions hold.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IK, lemma-Noetherian-basic, ascending-chain/maximal-element condition; agent-written finite-image argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-finite-module-acc",
+  "def-weil-finitely-generated-module",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0ASY, lemma-generic-flatness-stratification, terminating Noetherian-induction pattern; explicit maximal-bad-ideal variant using algebra.tex Tag 00IK, lemma-Noetherian-basic. The finite-image adaptation is written by Q05, not asserted to be the statement of 0ASY."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A function from the prime spectrum of a Noetherian ring to any set has finite image if on every irreducible closed subset it is constant on a nonempty principal open subset",
+   "results": "{\"t\": \"2026-10-22T07:12:51Z\", \"tool\": \"leanfinder\", \"query\": \"A function from the prime spectrum of a Noetherian ring to any set has finite image if on every irreducible closed subset it is constant on a nonempty principal open subset\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"PrimeSpectrum.instNoetherianSpace\", \"TopologicalSpace.NoetherianSpace.finite_irreducibleComponents\", \"AlgebraicGeometry.instNoetherianSpaceCarrierCarrierCommRingCatSpecOfIsNoetherianRingCarrier\", \"PrimeSpectrum.finite_setOf_isMin\", \"PrimeSpectrum.isRetrocompact_zeroLocus_compl_of_fg\", \"Algebra.QuasiFiniteAt.exists_basicOpen_eq_singleton\", \"minimalPrimes.finite_of_isNoetherianRing\"], \"digest\": \"08cd7e2977727d26\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite minimal primes and locally constant range finiteness do not apply to an arbitrary function only generically constant on each prime closed subset."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian induction on ideals shows a set valued map on Spec A has finite range when every prime quotient has a principal open on which the map is constant",
+   "results": "{\"t\": \"2026-10-22T07:13:47Z\", \"tool\": \"leanfinder\", \"query\": \"Noetherian induction on ideals shows a set valued map on Spec A has finite range when every prime quotient has a principal open on which the map is constant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.exists_image_comap_of_finite_of_free\", \"Algebra.QuasiFiniteAt.exists_basicOpen_eq_singleton\", \"PrimeSpectrum.finite_setOf_isMin\", \"Algebra.QuasiFinite.finite_primeSpectrum\", \"Algebra.QuasiFinite.iff_finite_comap_preimage_singleton\", \"PrimeSpectrum.isRetrocompact_zeroLocus_compl_of_fg\", \"Algebra.QuasiFiniteAt\", \"AlgebraicGeometry.instNoetherianSpaceCarrierCarrierCommRingCatSpecOfIsNoetherianRingCarrier\"], \"digest\": \"1685f357cc51bd38\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite minimal primes and locally constant range finiteness do not apply to an arbitrary function only generically constant on each prime closed subset."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A generically constant function on every irreducible closed subset of a Noetherian spectrum has finite image",
+   "results": "{\"t\": \"2026-10-22T07:13:37Z\", \"tool\": \"leansearch\", \"query\": \"A generically constant function on every irreducible closed subset of a Noetherian spectrum has finite image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocallyConstant.range_finite\", \"LocallyConstant.range_finite\", \"TopologicalSpace.IrreducibleCloseds.map\", \"TopologicalSpace.NoetherianSpace.range\", \"TopologicalSpace.NoetherianSpace.exists_finite_set_closeds_irreducible\", \"TopologicalSpace.NoetherianSpace.finite_irreducibleComponents\", \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"Finsupp.finite_range\"], \"digest\": \"495769fbf54be03a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite minimal primes and locally constant range finiteness do not apply to an arbitrary function only generically constant on each prime closed subset."
+  },
+  {
+   "tool": "loogle",
+   "query": "PrimeSpectrum, Set.Finite",
+   "results": "{\"t\": \"2026-10-22T07:13:02Z\", \"tool\": \"loogle\", \"query\": \"PrimeSpectrum, Set.Finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"PrimeSpectrum.isRetrocompact_zeroLocus_compl\", \"PrimeSpectrum.finite_setOfPred_isMin\", \"PrimeSpectrum.finite_setOf_isMin\", \"Algebra.QuasiFinite.finite_comap_preimage\", \"Algebra.QuasiFinite.finite_comap_preimage_singleton\", \"Algebra.QuasiFinite.iff_finite_comap_preimage_singleton\"], \"digest\": \"8aa5177cd92fbe43\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite minimal primes and locally constant range finiteness do not apply to an arbitrary function only generically constant on each prime closed subset."
+  },
+  {
+   "tool": "grep",
+   "query": "(finite.*range|range.*finite|finite.*image|image.*finite).*(Noetherian|irreducible)|(Noetherian|irreducible).*(finite.*range|finite.*image)",
+   "results": "{\"t\": \"2026-10-22T07:13:01Z\", \"tool\": \"grep\", \"query\": \"(finite.*range|range.*finite|finite.*image|image.*finite).*(Noetherian|irreducible)|(Noetherian|irreducible).*(finite.*range|finite.*image)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Module/LinearMap/FiniteRange.lean\", \"Mathlib/Algebra/Module/LinearMap/FiniteRange.lean\", \"Mathlib/Algebra/Module/LinearMap/FiniteRange.lean\", \"Mathlib/Algebra/Module/LinearMap/FiniteRange.lean\", \"Mathlib/Algebra/Module/LinearMap/FiniteRange.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean\", \"Mathlib/Topology/JacobsonSpace.lean\"], \"digest\": \"17ba8a0bd1de106f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite minimal primes and locally constant range finiteness do not apply to an arbitrary function only generically constant on each prime closed subset."
+  },
+  {
+   "tool": "grep",
+   "query": "(finite.*range|range.*finite|finite.*image|image.*finite).*(Noetherian|irreducible)|(Noetherian|irreducible).*(finite.*range|finite.*image)",
+   "results": "{\"t\": \"2026-10-23T09:28:46Z\", \"tool\": \"grep\", \"query\": \"(finite.*range|range.*finite|finite.*image|image.*finite).*(Noetherian|irreducible)|(Noetherian|irreducible).*(finite.*range|finite.*image)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/Topology/JacobsonSpace.lean\", \"Mathlib/Algebra/Module/LinearMap/FiniteRange.lean\", \"Mathlib/Algebra/Module/LinearMap/FiniteRange.lean\", \"Mathlib/Algebra/Module/LinearMap/FiniteRange.lean\", \"Mathlib/Algebra/Module/LinearMap/FiniteRange.lean\", \"Mathlib/Algebra/Module/LinearMap/FiniteRange.lean\", \"Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean\"], \"digest\": \"c26c458570e1a5de\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned Noetherian induction, finite minimal primes, locally constant range finiteness or unrelated linear-map finiteness. None states the conclusion for an arbitrary map generically constant on each prime closed subset. Noetherian maximality is reused through the existing Mathlib leaf lem-weil-pbc-noetherian-finite-module-acc."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Noetherian induction proves finite range for a map on a spectrum generically constant on every irreducible closed set",
+   "results": "{\"t\": \"2026-10-23T09:28:46Z\", \"tool\": \"leansearch\", \"query\": \"Noetherian induction proves finite range for a map on a spectrum generically constant on every irreducible closed set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsNoetherian.induction\", \"LocallyConstant.range_finite\", \"TopologicalSpace.NoetherianSpace.range\", \"eventuallyConst_of_isNoetherian\", \"Topology.IsInducing.noetherianSpace\", \"PrimeSpectrum.instNoetherianSpace\", \"TopologicalSpace.NoetherianSpace.exists_finite_set_isClosed_irreducible\", \"TopologicalSpace.NoetherianSpace.exists_finite_set_closeds_irreducible\"], \"digest\": \"e551ccec14a9f7a1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned Noetherian induction, finite minimal primes, locally constant range finiteness or unrelated linear-map finiteness. None states the conclusion for an arbitrary map generically constant on each prime closed subset. Noetherian maximality is reused through the existing Mathlib leaf lem-weil-pbc-noetherian-finite-module-acc."
+  },
+  {
+   "tool": "loogle",
+   "query": "PrimeSpectrum, Set.Finite",
+   "results": "{\"t\": \"2026-10-23T09:28:46Z\", \"tool\": \"loogle\", \"query\": \"PrimeSpectrum, Set.Finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"PrimeSpectrum.isRetrocompact_zeroLocus_compl\", \"PrimeSpectrum.finite_setOfPred_isMin\", \"PrimeSpectrum.finite_setOf_isMin\", \"Algebra.QuasiFinite.finite_comap_preimage\", \"Algebra.QuasiFinite.finite_comap_preimage_singleton\", \"Algebra.QuasiFinite.iff_finite_comap_preimage_singleton\"], \"digest\": \"8aa5177cd92fbe43\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned Noetherian induction, finite minimal primes, locally constant range finiteness or unrelated linear-map finiteness. None states the conclusion for an arbitrary map generically constant on each prime closed subset. Noetherian maximality is reused through the existing Mathlib leaf lem-weil-pbc-noetherian-finite-module-acc."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A function on the prime spectrum of a noetherian ring which is constant on a principal dense open of every prime closed subset has finite image",
+   "results": "{\"t\": \"2026-10-23T09:28:52Z\", \"tool\": \"leanfinder\", \"query\": \"A function on the prime spectrum of a noetherian ring which is constant on a principal dense open of every prime closed subset has finite image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.finite_setOf_isMin\", \"PrimeSpectrum.instNoetherianSpace\", \"minimalPrimes.finite_of_isNoetherianRing\", \"AlgebraicGeometry.instIsNoetherianSpecOfOfIsNoetherianRing\", \"AlgebraicGeometry.instNoetherianSpaceCarrierCarrierCommRingCatSpecOfIsNoetherianRingCarrier\", \"AlgebraicGeometry.instIsNoetherianSpecOfIsNoetherianRingCarrier\", \"AlgebraicGeometry.isNoetherian_Spec\", \"associatedPrimes.finite\"], \"digest\": \"fef32476073f9696\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned Noetherian induction, finite minimal primes, locally constant range finiteness or unrelated linear-map finiteness. None states the conclusion for an arbitrary map generically constant on each prime closed subset. Noetherian maximality is reused through the existing Mathlib leaf lem-weil-pbc-noetherian-finite-module-acc."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An arbitrary map from a noetherian spectrum to a set has finite range if its restriction to a nonempty basic open in each prime closed set is constant; use a maximal bad ideal",
+   "results": "{\"t\": \"2026-10-23T09:34:37Z\", \"tool\": \"leanfinder\", \"query\": \"An arbitrary map from a noetherian spectrum to a set has finite range if its restriction to a nonempty basic open in each prime closed set is constant; use a maximal bad ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.instNoetherianSpace\", \"AlgebraicGeometry.instIsNoetherianSpecOfOfIsNoetherianRing\", \"AlgebraicGeometry.isNoetherian_Spec\", \"AlgebraicGeometry.isLocallyNoetherian_Spec\", \"AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier\", \"AlgebraicGeometry.instNoetherianSpaceCarrierCarrierCommRingCatSpecOfIsNoetherianRingCarrier\", \"AlgebraicGeometry.instIsNoetherianSpecOfIsNoetherianRingCarrier\", \"PrimeSpectrum.finite_setOf_isMin\"], \"digest\": \"dfcec48ee2fdcb43\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned Noetherian induction, finite minimal primes, locally constant range finiteness or unrelated linear-map finiteness. None states the conclusion for an arbitrary map generically constant on each prime closed subset. Noetherian maximality is reused through the existing Mathlib leaf lem-weil-pbc-noetherian-finite-module-acc."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-graded-fibre-hilbert-functions-finite",
+  "date": "2026-10-22",
+  "group": "Q54"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, projective Hilbert schemes underlying the relative morphism scheme; Hilbert construction prerequisite: A simultaneous graded tail rank condition defines an immersion; Bourbaki 221 Lemma 3.5: finite flat stratification used before proving stationarity of the open upper-rank loci; item proof steps 3 and 6: maximal bad ideal, minimal primes and principal-open complement",
+   "via": [
+    "lem-sfb-graded-fibre-hilbert-functions-finite",
+    "lem-sfb-graded-tail-rank-stratum",
+    "lem-sfb-projective-hilbert-polynomial-representability",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-noetherian-generically-constant-finite-image",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Give a four-step maximal-bad-ideal proof: use the existing maximal-submodule Mathlib leaf for A generated by 1, prove a maximal bad ideal is prime via a two-principal-ideal cover, and contradict maximality using the supplied principal-open constancy. No new nodes; no continuity assumption or unproved finite-minimal-prime decomposition used. Searches and exact statement-citation checks recorded in report.md and citations.json.",
+  "blueprint": "No imported ancestor (blueprint_refs.py ancestor returns None). The existing from.place chain is retained. These steps supply the maximal-bad-ideal and principal-open-complement prerequisite of the graded Hilbert-function finite-image argument, recorded as old item proof steps 3 and 6; this serves Bourbaki 221 Lemma 3.5 in the relative Hilbert construction along the recorded direct-image alteration branch. Latest blueprint det-thm-sf-ctf-stability-direct-images proof (3) was read. No chapter or unit route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-21afddd5a",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-21afddd5a (reviewer sub-agent of L); spot-checked: Read the item and its four steps in full, plus the statements of all cited nodes and the sources. There are no new nodes and nothing was changed. Not superseded: the item is unsplit with no proof on the base, in clones/live and in side-live. It has no repair note, so the re-split rule does not apply. The statement is true as written. Small cases checked: for a field the claim is trivial; for Spec k[x] with the identity map the hypothesis fails at (0), so it is not vacuous; the zero ring and T=∅ give empty images. Step 1 uses clause (2) of lem-weil-pbc-noetherian-finite-module-acc on the regular module A, which is generated by 1, to get a maximal bad ideal I, and I≠A. Step 2 shows I is prime: if ac∈I with a,c∉I, then V(I)=V(I+(a))∪V(I+(c)) (both inclusions checked), which contradicts maximality. Step 3 gives F(I)⊆{t}∪F(I+(b)). Step 4 concludes and covers V(0)=Spec A and the edge cases. Steps 2–4 really are elementary, and proof_deps is the union of all uses. Sources: Stacks 00IK (algebra.tex:12154, ACC) and 0ASY (more-morphisms.tex:15566, the induction pattern; proof_origin is marked agent). 00FR is unused inherited provenance, which is fine because a maximal bad ideal is already prime. No SGA citations. A whole-DAG duplicate search found nothing equivalent; lem-trf-projectivity-maximal-bad-reduced-quotient is a different statement. The Mathlib searches cover all three kinds. No Lean attachment exists. Its only citer, lem-sfb-graded-fibre-hilbert-functions-finite, uses the item consistently with the unchanged statement."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.NoetherianGenericallyConstantFiniteImage",
+  "declaration": "WeilConjectures.finite_image_of_generically_constant",
+  "statement": "theorem finite_image_of_generically_constant (A : Type u) [CommRing A] [IsNoetherianRing A] (T : Type v) (f : PrimeSpectrum A → T) : (∀ (I : Ideal A), I.IsPrime → ∃ b : A, b ∉ I ∧ ∃ t : T, ∀ p : PrimeSpectrum A, I ≤ p.asIdeal → b ∉ p.asIdeal → f p = t) → (∀ (J : Ideal A), (f '' {p : PrimeSpectrum A | J ≤ p.asIdeal}).Finite) ∧ (Set.range f).Finite",
+  "file": "lean/Sheaf/RingTheory/NoetherianGenericallyConstantFiniteImage.lean",
+  "branch": "newtargets-dag",
+  "by": "Q62",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-db874322c",
+  "group": "Q62",
+  "result": "pass",
+  "note": "Lean signature matches node clause-by-clause: CommRing+IsNoetherianRing A, arbitrary T : Type v, arbitrary f : PrimeSpectrum A → T; hypothesis ∀ prime I ∃ b∉I ∃ t, f=t on V(I)∩D(b); conclusion ∀ J finite f''V(J) ∧ finite range. No extra instances/universe ties; zero ring, empty T, J=⊤/⊥ covered. Node differs from side-live only by the new lean field; lean.statement verbatim in the module; no live duplicate; source/blueprint docstrings and 4 proof steps present; sorry only; no defs; report has Worker report and Second reading by Q62. No findings."
+ }
+}

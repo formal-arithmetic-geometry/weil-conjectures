@@ -1,0 +1,137 @@
+{
+ "id": "def-sfb-affine-pgl-action",
+ "kind": "definition",
+ "title": "Affine PGL actions and the canonical invariant spectrum",
+ "statement": "Let $k$ be a field [def-weil-field], $E$ a commutative $k$-algebra, $r\\geq1$, and $U=\\operatorname{Spec}E$ over $k$ [def-weil-affine-spectrum]. Use the test schemes, matrix groups and field tests of [def-sfb-pgl-linearized-polarization]. An affine $\\operatorname{PGL}_{r,k}$-action on $U$ consists of left actions $a_T:\\operatorname{GL}_r(\\Gamma(T,\\mathcal O_T))\\times\\operatorname{Mor}_k(T,U)\\to\\operatorname{Mor}_k(T,U)$, natural under every morphism of test schemes $T/k$, satisfying the unit and multiplication laws, with scalar matrices acting identically. No line module or linearization is part of these data. Equivalently these are actions of the fppf quotient group sheaf $\\operatorname{GL}_{r,k}/\\mathbf G_{m,k}$. For $x:T\\to U$, evaluation $\\mathrm{ev}_x:E\\to\\Gamma(T,\\mathcal O_T)$ is pullback of functions using the canonical $E\\simeq\\Gamma(U,\\mathcal O_U)$. Define the invariant subring $I=\\bigcap_{T,g,x}\\operatorname{Eq}(\\mathrm{ev}_{a_T(g,x)},\\mathrm{ev}_x)\\subseteq E$; this is the scheme coaction equalizer $E^G=\\{e:\\rho(e)=e\\otimes1\\}$. The specified coefficient map $k\\to E$ has image in $I$, so restrict it to $k\\to I$. Put $Y=\\operatorname{Spec}I$ over $k$ using this restriction. The canonical quotient arrow $p:U\\to Y$ is $\\operatorname{Spec}(I\\hookrightarrow E)$; its composite with $Y\\to\\operatorname{Spec}k$ is the given structure map of $U$. For an algebraic space $B/k$ [def-trf-algebraic-space], a map $f:h_U\\to B$ is invariant when $f_T(a_T(g,x))=f_T(x)$ for every test scheme $T$, matrix $g$ and point $x$. All coefficient rings and test schemes use a common universe $u$, with categories in $u+1$.",
+ "source": {
+  "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+  "place": "Alper arXiv:1005.2398v3, Theorem 9.1.4 and Remark 9.1.5, invariant affine quotient; GL/scalar descent as in MFK GIT Chapter 1, §1 and def-sfb-pgl-linearized-polarization."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "def-sfb-pgl-linearized-polarization",
+  "def-trf-algebraic-space"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ProjGenLinGroup|eqLocus",
+   "results": "msearch.py: 5 hits; Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Projective.lean, Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Projective.lean, Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Projective.lean, Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Projective.lean, Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Projective.lean. Digest de3fd9690f42934e.",
+   "date": "2026-10-22",
+   "verdict": "no match: general affine spectra, abstract representation invariants and matrix/projective point actions do not supply the natural affine scheme action and its invariant spectrum."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural PGL action on affine scheme invariant functions and categorical quotient spectrum of invariants",
+   "results": "msearch.py: 8 hits; AlgebraicGeometry.AffineScheme, Representation.quotientToInvariants, Algebra.IsInvariant.mk, AlgebraicGeometry.isAffine_Spec, AlgebraicGeometry.instIsAffineObjOppositeCommRingCatSchemeSpec, Rep.quotientToInvariants, Rep.quotientToInvariantsFunctor_map_hom, AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom. Digest 1affb7ebed5fc696.",
+   "date": "2026-10-22",
+   "verdict": "no match: general affine spectra, abstract representation invariants and matrix/projective point actions do not supply the natural affine scheme action and its invariant spectrum."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unlinearized PGL action on affine scheme natural general linear matrices scalar matrices act trivially invariant subring",
+   "results": "msearch.py: 8 hits; Matrix.GeneralLinearGroup.fixpointPolynomial_eq_zero_iff, OnePoint.instGLAction, Projectivization.generalLinearGroup_smul_def, FixedDetMatrices.smul_def, OnePoint.map_smul, FixedDetMatrices.smul_coe, FixedDetMatrices.instMulActionSpecialLinearGroupFixedDetMatrix, Matrix.GeneralLinearGroup.fixpointPolynomial_aeval_eq_zero_iff. Digest 41921812d1190f87.",
+   "date": "2026-10-22",
+   "verdict": "no match: general affine spectra, abstract representation invariants and matrix/projective point actions do not supply the natural affine scheme action and its invariant spectrum."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+  "date": "2026-10-22",
+  "group": "Q117"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Unlinearized affine action, invariant functions and canonical affine quotient arrow used in the statement.",
+   "via": [
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffinePGLAction",
+  "declaration": "AlgebraicGeometry.AffinePGL.Action",
+  "declarations": [
+   "AlgebraicGeometry.AffinePGL.affineOver",
+   "AlgebraicGeometry.AffinePGL.Action",
+   "AlgebraicGeometry.AffinePGL.evaluation",
+   "AlgebraicGeometry.AffinePGL.Action.invariants",
+   "AlgebraicGeometry.AffinePGL.Action.constants_mem",
+   "AlgebraicGeometry.AffinePGL.Action.constants",
+   "AlgebraicGeometry.AffinePGL.Action.quotientOver",
+   "AlgebraicGeometry.AffinePGL.Action.quotientMap_over",
+   "AlgebraicGeometry.AffinePGL.Action.quotientMap",
+   "AlgebraicGeometry.AffinePGL.Action.IsInvariantMap"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePGLAction.lean",
+  "statement": "structure Action (r : ℕ)",
+  "branch": "newtargets-dag",
+  "by": "Q117",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d722887dd",
+  "group": "Q117",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d722887dd",
+  "group": "Q117",
+  "result": "pass",
+  "note": "Lean modules and both node JSONs are byte-identical to the earlier head 11ff3c9e83e8; only report.md changed. That head was returned at landing only for reachability. A read-only check_dag-style traversal on live and side-live, with the snapshot nodes overlaid, now reaches the item (distance 24) and def-sfb-affine-pgl-action (distance 25), so the unflagged new node is correct. Independent clause check: the natural GL T-point action with trivial scalars is exactly a PGL action (fppf descent); invariants as the intersection of eqLocus over all T-points equal the coaction equalizer, nilpotents included; the hclosed closed-C encoding is equivalent to closed orbits (Jacobson); hstabilizer (finitely many PGL(Ω) classes) is equivalent to dimension 0 and allows nonreduced stabilizers; surjectivity, invariance, the ∃! factorization for every algebraic space B/k and the Ω-point orbit bijection all match the node. The new def node has real data (Spec of actual maps, codRestrict constants), no duplicate, and true postponed constants_mem/quotientMap_over. Item JSON changed only in lean and the added new-def stmt_dep; statements are verbatim; docstrings carry source, blueprint and the proof steps. Edge cases r=1, E=0, μ_p, non-separated B are covered. No compile (no file changed). Advisory: PGLLinearization decls reached only through the new def node; Action does not require r>=1."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261023T102748-L-2968117",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.AffinePGL.Action.constants_mem",
+   "AlgebraicGeometry.AffinePGL.Action.quotientMap_over"
+  ],
+  "sorry_after": []
+ }
+}

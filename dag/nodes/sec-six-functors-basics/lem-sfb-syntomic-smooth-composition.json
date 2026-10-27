@@ -1,0 +1,320 @@
+{
+ "id": "lem-sfb-syntomic-smooth-composition",
+ "kind": "statement",
+ "title": "Syntomic composition and smooth inputs",
+ "statement": "Call a map $T\\to E$ syntomic if it is flat [def-weil-pbc-flat-ring-map], finitely presented [def-weil-pbc-finitely-presented-algebra], and every fibre $E\\otimes_T\\kappa(\\mathfrak p)$ is a local complete intersection over $\\kappa(\\mathfrak p)$ [def-weil-pbc-complete-intersection-over-field]; residue fields are as in [def-weil-residue-field]. For commutative ring maps $R\\to S\\to T$, if both maps are syntomic, so is their composite $R\\to T$. Every smooth ring map [def-weil-pbc-smooth-ring-map] is syntomic. Every ring map $R\\to S$ for which $\\operatorname{Spec}S\\to\\operatorname{Spec}R$ is etale [def-weil-etale-morphism] is syntomic.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00SZ (lemma-composition-syntomic), assertion (1); 00TA (lemma-smooth-syntomic); and 00U9 (lemma-etale-standard-smooth)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-complete-intersection-over-field",
+  "def-weil-residue-field",
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "First prove the relative-chart calculation used below. Suppose $A=R[x_1,\\ldots,x_n]/(f_1,\\ldots,f_c)$ and $B=A[y_1,\\ldots,y_m]/(h_1,\\ldots,h_d)$ are relative global complete intersections. Lift each $h_j$ to $h'_j\\in R[x,y]$. Successive quotient universal properties give $B\\cong R[x,y]/(f,h')$. Fix $\\mathfrak p\\subset R$ with $V=B\\otimes_R k\\ne0$, where $k=\\kappa(\\mathfrak p)$, and put $U=A\\otimes_R k$. Base change preserves the two relative presentations, so $\\dim U=n-c$ and every nonempty fibre of $\\operatorname{Spec}V\\to\\operatorname{Spec}U$ has dimension $m-d$. Here the fibre of $\\operatorname{Spec}V\\to\\operatorname{Spec}U$ over $\\mathfrak u$, as a subspace, is homeomorphic to $\\operatorname{Spec}(V\\otimes_U\\kappa(\\mathfrak u))$ by the fibre/spectrum homeomorphism, so these topological fibres are the spectra of the tensor-product fibre rings. The nonzero ring $V$ has a prime; its image in $\\operatorname{Spec}U$ has nonempty fibre. Thus $n\\ge c$ and $m\\ge d$. The field $k$ is Noetherian (its only ideals are $0,k$), and $U$ is a finite type $k$-algebra, hence Noetherian. The morphism $\\operatorname{Spec}V\\to\\operatorname{Spec}U$ is finite type by the displayed presentation. Apply the source-dimension/fibre bound to obtain $\\dim V\\le(n-c)+(m-d)$. The polynomial-quotient lower bound applied to $V=k[x,y]/(\\bar f,\\bar h')$ gives $\\dim V\\ge n+m-c-d$. Equality proves that the combined presentation is relative global complete intersection. Zero fibres impose no condition; if $B=0$ all fibres are zero.",
+   "uses": [
+    "def-weil-pbc-relative-global-complete-intersection",
+    "lem-weil-pbc-relative-global-complete-intersection-base-change",
+    "lem-weil-pbc-fibre-spec-homeomorphism",
+    "lem-weil-pbc-proper-ideal-contained-in-maximal",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-zl-source-dimension-fibre-bound",
+    "lem-weil-pbc-polynomial-quotient-dimension-lower-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00SZ (lemma-composition-syntomic), proof of (2); Tag 00OM (lemma-dimension-base-fibre-total), in its scheme form cited by the dimension-bound node; Tag 00S9, paragraph after definition-lci-field, for the opposite dimension bound."
+   }
+  },
+  {
+   "text": "Now let $R\\to S\\xrightarrow{\\psi}T$ be syntomic and fix a prime $\\mathfrak q\\subset T$, with $\\mathfrak s=\\psi^{-1}(\\mathfrak q)$. Apply the syntomic-at-prime relative-presentation lemma to $R\\to S$ at $\\mathfrak s$ and to $S\\to T$ at $\\mathfrak q$. Its finite-presentation hypothesis holds with the element $1$. Its local flatness hypothesis follows from the flat-map local criterion. For its fibre hypothesis, the definition of a local complete intersection supplies a principal global-complete-intersection neighbourhood of the fibre prime $\\ker(S\\otimes_R\\kappa(\\mathfrak s\\cap R)\\to\\kappa(\\mathfrak s))$, respectively $\\ker(T\\otimes_S\\kappa(\\mathfrak s)\\to\\kappa(\\mathfrak q))$. Consequently choose $g\\in S\\setminus\\mathfrak s$ and $h\\in T\\setminus\\mathfrak q$ such that $R\\to S_g$ and $S\\to T_h$ are relative global complete intersections.",
+   "uses": [
+    "lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection",
+    "lem-weil-pbc-flat-map-local-criterion",
+    "def-weil-pbc-complete-intersection-over-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00SZ (lemma-composition-syntomic), proof of (1), applying Tag 00SY (lemma-syntomic); definition of syntomic in Tag 00SL and of lci fibres in Tag 00S9."
+   }
+  },
+  {
+   "text": "Write $a=\\psi(g)h\\in T$. Since neither factor belongs to $\\mathfrak q$, $a\\notin\\mathfrak q$. Base change of the relative presentation for $S\\to T_h$ along $S\\to S_g$ gives a relative global complete intersection $S_g\\to S_g\\otimes_ST_h$. Localization base change and transitivity identify its target with $T_a$: to invert $\\psi(g)$ and $h$ is exactly to invert their product, with the canonical maps agreeing on $T$. Apply the complete presentation-and-dimension calculation of step 1 to $R\\to S_g\\to T_a$. It follows that $R\\to T_a$ is a relative global complete intersection.",
+   "uses": [
+    "lem-weil-pbc-relative-global-complete-intersection-base-change",
+    "lem-weil-pbc-localization-base-change",
+    "lem-weil-pbc-localization-of-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00SZ (lemma-composition-syntomic), proof of (1); Tag 00SS (lemma-base-change-relative-global-complete-intersection); Tag 00DK (lemma-tensor-localization)."
+   }
+  },
+  {
+   "text": "For every $\\mathfrak q\\in\\operatorname{Spec}T$, step 3 supplies $a\\notin\\mathfrak q$ and a relative-global-complete-intersection chart $R\\to T_a$. Thus these $D(a)$ cover $\\operatorname{Spec}T$. The spectrum's quasi-compactness gives a finite subcover $D(a_1),\\ldots,D(a_r)$, and the basic-open/unit-ideal criterion gives coefficients $b_i\\in T$ with $\\sum b_i a_i=1$. Apply relative-CI principal-cover syntomic gluing: $R\\to T$ is flat, finitely presented, and has lci residue-field fibres, exactly the three required properties. If $T=0$, use the empty cover and $0=1$, which the same gluing statement explicitly allows.",
+   "uses": [
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "lem-trf-relative-ci-principal-cover-syntomic-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00SZ (lemma-composition-syntomic), final paragraph; Tag 00SO (lemma-local-syntomic); Tag 00E0 (lemma-Zariski-topology), quasi-compactness and standard-open covers."
+   }
+  },
+  {
+   "text": "For the smooth clause, first take a standard smooth presentation $A\\cong R[x_1,\\ldots,x_n]/(f_1,\\ldots,f_c)$, $n\\ge c$, as in the standard-smooth definition. For every prime $\\mathfrak p\\subset R$, standard-smooth base change gives a standard smooth presentation of $A\\otimes_R\\kappa(\\mathfrak p)$ with the same numbers of variables and relations. At each point of this fibre spectrum the standard-smooth-over-a-field dimension theorem gives dimension $n-c$. If the fibre ring is nonzero its spectrum is nonempty, by existence of a maximal ideal. The dimension-supremum theorem therefore gives global dimension $n-c$. This is precisely the condition for the original displayed presentation to be a relative global complete intersection; zero fibres require nothing.",
+   "uses": [
+    "def-weil-pbc-standard-smooth-algebra",
+    "lem-weil-pbc-standard-smooth-base-change",
+    "lem-weil-pbc-standard-smooth-over-field-dimension-at-points",
+    "lem-weil-pbc-dimension-supremum-local-dimensions",
+    "lem-weil-pbc-proper-ideal-contained-in-maximal",
+    "def-weil-pbc-relative-global-complete-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00T7 (lemma-standard-smooth), assertion (7), and its proof by fibre base change and dimension; Tag 0B7I (lemma-dimension-supremum-local-dimensions)."
+   }
+  },
+  {
+   "text": "Let $R\\to S$ be smooth. At every prime $\\mathfrak q\\subset S$ the locally-standard-smooth lemma supplies $g\\notin\\mathfrak q$ such that $S_g$ is standard smooth over $R$. By step 5, each such $R\\to S_g$ is a relative global complete intersection. As in step 4, select a finite standard-open subcover, obtain a unit-ideal relation, and apply relative-CI principal-cover syntomic gluing. This proves all three syntomic conditions for $R\\to S$, including finite presentation globally. The empty spectrum is covered by the same empty-cover case.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-locally-standard-smooth",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "lem-trf-relative-ci-principal-cover-syntomic-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00TA (lemma-smooth-syntomic), local standard-smooth cover and final paragraph; Tag 00SO (lemma-local-syntomic)."
+   }
+  },
+  {
+   "text": "Finally, suppose $\\operatorname{Spec}S\\to\\operatorname{Spec}R$ is etale. The affine etale/ring-map criterion states that $S$ is finitely presented over $R$, $H_1(L_{S/R})=0$ and $\\Omega_{S/R}=0$. The zero module is finite projective, being the free module on the empty basis. These are exactly the three clauses in the definition of a smooth ring map. Thus $R\\to S$ is smooth, and step 6 makes it syntomic.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "def-weil-pbc-smooth-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00U1 (definition-etale), with Tag 02GJ (lemma-etale-characterize); Tag 00T2 (definition-smooth). This uses the defining etale conditions directly rather than the stronger standard-smooth conclusion of Tag 00U9."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-relative-global-complete-intersection",
+  "lem-weil-pbc-relative-global-complete-intersection-base-change",
+  "lem-weil-pbc-fibre-spec-homeomorphism",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-zl-source-dimension-fibre-bound",
+  "lem-weil-pbc-polynomial-quotient-dimension-lower-bound",
+  "lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection",
+  "lem-weil-pbc-flat-map-local-criterion",
+  "def-weil-pbc-complete-intersection-over-field",
+  "lem-weil-pbc-localization-base-change",
+  "lem-weil-pbc-localization-of-localization",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-trf-relative-ci-principal-cover-syntomic-gluing",
+  "def-weil-pbc-standard-smooth-algebra",
+  "lem-weil-pbc-standard-smooth-base-change",
+  "lem-weil-pbc-standard-smooth-over-field-dimension-at-points",
+  "lem-weil-pbc-dimension-supremum-local-dimensions",
+  "lem-weil-pbc-smooth-ring-map-locally-standard-smooth",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "def-weil-pbc-smooth-ring-map"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00SZ (lemma-composition-syntomic), proof of (2) followed by proof of (1); Tags 00T7 and 00TA for smooth inputs; Tag 00U1 with affine etale characterization Tag 02GJ for etale inputs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Syntomic ring maps are closed under composition and smooth ring maps and etale ring maps are syntomic",
+   "results": "{\"t\": \"2026-10-23T12:42:55Z\", \"tool\": \"leanfinder\", \"query\": \"Syntomic ring maps are closed under composition and smooth ring maps and etale ring maps are syntomic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale.stableUnderComposition\", \"RingHom.Smooth.stableUnderComposition\", \"RingHom.isStandardSmooth_stableUnderComposition\", \"RingHom.IsStandardSmooth.comp\", \"Algebra.Etale.comp\", \"RingHom.Smooth.comp\", \"Algebra.IsStandardSmooth.trans\", \"Algebra.Smooth.comp\"], \"digest\": \"e42510d87d6bf8bb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smoothness, formally smooth map lifting, finite conormal modules, or general localization; none proves this syntomic statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Smooth, Algebra.Etale",
+   "results": "{\"t\": \"2026-10-23T12:42:56Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Smooth, Algebra.Etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Algebra.Etale.instSmooth\", \"Algebra.Etale.iff_formallyUnramified_and_smooth\"], \"digest\": \"d501d0ca81e236ff\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smoothness, formally smooth map lifting, finite conormal modules, or general localization; none proves this syntomic statement"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]yntomic|[Ss]mooth.*[Ee]tale|[Ee]tale.*[Ss]mooth",
+   "results": "{\"t\": \"2026-10-23T12:42:56Z\", \"tool\": \"grep\", \"query\": \"[Ss]yntomic|[Ss]mooth.*[Ee]tale|[Ee]tale.*[Ss]mooth\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"Mathlib/RingTheory/Unramified/Basic.lean\", \"Mathlib/RingTheory/Smooth/NoetherianDescent.lean\", \"Mathlib/RingTheory/RingHom/Etale.lean\"], \"digest\": \"30bb71ae6da66a75\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smoothness, formally smooth map lifting, finite conormal modules, or general localization; none proves this syntomic statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of flat finitely presented ring maps with local complete intersection fibres is syntomic and smooth maps are syntomic",
+   "results": "{\"t\": \"2026-10-23T12:42:56Z\", \"tool\": \"leansearch\", \"query\": \"Composition of flat finitely presented ring maps with local complete intersection fibres is syntomic and smooth maps are syntomic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"RingHom.Smooth\", \"RingHom.isStandardSmooth_stableUnderComposition\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"RingHom.FormallySmooth.stableUnderComposition\", \"RingHom.Smooth.comp\", \"RingHom.finitePresentation_stableUnderComposition\", \"RingHom.Flat.stableUnderComposition\"], \"digest\": \"69f691238b826c36\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smoothness, formally smooth map lifting, finite conormal modules, or general localization; none proves this syntomic statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat finitely presented complete intersection morphisms compose; every smooth or etale algebra is a flat finitely presented algebra with local complete intersection fibres",
+   "results": "{\"t\": \"2026-10-23T12:47:56Z\", \"tool\": \"leanfinder\", \"query\": \"Flat finitely presented complete intersection morphisms compose; every smooth or etale algebra is a flat finitely presented algebra with local complete intersection fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.flat\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"Algebra.Smooth.comp\", \"RingHom.Smooth.stableUnderComposition\", \"Algebra.IsStandardSmooth.trans\", \"RingHom.IsStandardSmooth.comp\", \"RingHom.isStandardSmooth_stableUnderComposition\", \"RingHom.Etale.stableUnderComposition\"], \"digest\": \"b193e9712c118972\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smoothness, formally smooth map lifting, finite conormal modules, or general localization; none proves this syntomic statement"
+  },
+  {
+   "tool": "grep",
+   "query": "syntomic|relativeGlobalCompleteIntersection|isRelativeGlobalCompleteIntersection",
+   "results": "{\"t\": \"2026-10-23T14:14:36Z\", \"tool\": \"grep\", \"query\": \"syntomic|relativeGlobalCompleteIntersection|isRelativeGlobalCompleteIntersection\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits supply composition of smooth or flat maps, finite presentation, or etale implies smooth; none supplies composition with local-complete-intersection fibres or the full item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat finitely presented ring maps with local complete intersection fibres compose",
+   "results": "{\"t\": \"2026-10-23T14:14:36Z\", \"tool\": \"leansearch\", \"query\": \"Flat finitely presented ring maps with local complete intersection fibres compose\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Flat.stableUnderComposition\", \"RingHom.FinitePresentation.comp_surjective\", \"RingHom.finitePresentation_stableUnderComposition\", \"RingHom.Flat.comp\", \"AlgHom.FinitePresentation.comp\", \"RingHom.FinitePresentation.comp\", \"AlgebraicGeometry.Flat.comp\", \"RingHom.Flat\"], \"digest\": \"3661e1d81ab40ce0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits supply composition of smooth or flat maps, finite presentation, or etale implies smooth; none supplies composition with local-complete-intersection fibres or the full item."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Smooth, Algebra.Etale",
+   "results": "{\"t\": \"2026-10-23T14:14:37Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Smooth, Algebra.Etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Algebra.Etale.instSmooth\", \"Algebra.Etale.iff_formallyUnramified_and_smooth\"], \"digest\": \"d501d0ca81e236ff\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits supply composition of smooth or flat maps, finite presentation, or etale implies smooth; none supplies composition with local-complete-intersection fibres or the full item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Syntomic ring homomorphisms compose and every smooth or etale ring map is syntomic",
+   "results": "{\"t\": \"2026-10-23T14:14:37Z\", \"tool\": \"leanfinder\", \"query\": \"Syntomic ring homomorphisms compose and every smooth or etale ring map is syntomic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.IsStandardSmooth.comp\", \"RingHom.Smooth.stableUnderComposition\", \"RingHom.isStandardSmooth_stableUnderComposition\", \"RingHom.Etale.stableUnderComposition\", \"RingHom.Smooth.comp\", \"Algebra.IsStandardSmooth.trans\", \"Algebra.Smooth.comp\", \"RingHom.Smooth\"], \"digest\": \"6d6866aae747e2a7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits supply composition of smooth or flat maps, finite presentation, or etale implies smooth; none supplies composition with local-complete-intersection fibres or the full item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of flat algebras of finite presentation with complete intersection fibres; locally standard smooth algebras have complete intersection fibres",
+   "results": "{\"t\": \"2026-10-23T14:18:23Z\", \"tool\": \"leanfinder\", \"query\": \"Composition of flat algebras of finite presentation with complete intersection fibres; locally standard smooth algebras have complete intersection fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.isStandardSmooth_stableUnderComposition\", \"Algebra.IsStandardSmooth.trans\", \"RingHom.IsStandardSmooth.comp\", \"Algebra.Smooth.flat\", \"Algebra.IsStandardSmoothOfRelativeDimension.trans\", \"RingHom.IsStandardSmoothOfRelativeDimension\", \"RingHom.IsStandardSmoothOfRelativeDimension.comp\", \"RingHom.IsStandardSmoothOfRelativeDimension.isStandardSmooth\"], \"digest\": \"fa140aa86c47774a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits supply composition of smooth or flat maps, finite presentation, or etale implies smooth; none supplies composition with local-complete-intersection fibres or the full item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-syntomic-algebra-surjection-lift",
+  "date": "2026-10-23",
+  "group": "O4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Unobstructed deformations of a separated curve with isolated lci singularities. Tag 0DZQ, proof: Tag 0DZH (lemma-lci-unobstructed), scheme formulation via Tag 0DYX (lemma-affine), with example-schemes and section-general; formal-defos.tex, definition-CLambda specifies the coefficient identifications. Ring-theoretic input: Tag 0DZH proof invokes Smoothing Ring Maps Tag 07M8 (1) after recognizing the given deformation algebra as syntomic. Supporting input: 07M8(1), proof of claim: the composite R -> C -> C′ -> Sym(Q) is syntomic.",
+   "via": [
+    "lem-sfb-syntomic-algebra-surjection-lift",
+    "lem-sfb-affine-lci-artinian-lift",
+    "lem-sfb-isolated-lci-curve-unobstructed",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-syntomic-smooth-composition",
+  "worker": "stage1",
+  "summary": "Proved composition using the two relative global CI presentations and upper/lower fibre dimension bounds, then pointwise charts and finite-cover syntomic gluing. Proved smooth inputs by local standard-smooth charts and fibre dimensions; etale inputs follow from their defining cotangent conditions. Reused existing DAG statements throughout, creating no nodes. No statement or hypotheses changed.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration prerequisite via 07M8, as recorded in blueprint.from.place. Read the current latest sk-thm-sf-ctf-stability unit and direct-images proof. This ring-theoretic item is below that unit; its proof route remains Stacks 00SZ/00TA. blueprint_refs ancestor returns None for the inherited broken created.item ancestry, so its existing null ancestor is retained. Whole-blueprint searches found no same statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-relative-global-complete-intersection-base-change",
+    "why": "Generic base change of a specified polynomial presentation and its relative CI property; used to refine the two charts and compute their fibres."
+   },
+   {
+    "node": "lem-weil-pbc-polynomial-quotient-dimension-lower-bound",
+    "why": "Generic lower dimension bound for a polynomial quotient by a specified number of equations; paired with the upper bound in step 1."
+   },
+   {
+    "node": "lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection",
+    "why": "Generic ring-local presentation criterion applied to each input at a prime; it is the explicit chart input of Stacks 00SZ."
+   },
+   {
+    "node": "def-weil-pbc-complete-intersection-over-field",
+    "why": "Generic algebraic or dimension tool used exactly as stated in the cited proof step, supporting the Stacks local-presentation argument; the six-functors unit supplies no replacement for this algebraic input."
+   },
+   {
+    "node": "lem-trf-relative-ci-principal-cover-syntomic-gluing",
+    "why": "Generic finite principal-cover gluing of relative CI charts, supplying precisely flatness, finite presentation and lci fibres."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-relative-global-complete-intersection-base-change",
+  "lem-weil-pbc-polynomial-quotient-dimension-lower-bound",
+  "lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection",
+  "def-weil-pbc-complete-intersection-over-field",
+  "lem-trf-relative-ci-principal-cover-syntomic-gluing"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q124-f91bb06d1",
+  "group": "Q124",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-f91bb06d1 (reviewer sub-agent of L); spot-checked: First split of an unsplit item. Statement and stmt_deps are unchanged; live and side-live are still unsplit. There are no new nodes and no re-split note. Source checked: Stacks algebra.tex 00SZ, both parts read in full. Step 1 is part (2): the combined presentation, the 00OM upper bound via lem-zl-source-dimension-fibre-bound, plus the polynomial lower bound for equality after checking n>=c and m>=d. Steps 2-4 are part (1): syntomic-at-prime charts, whose hypotheses I checked (g=1, flat local criterion, and a fibre lci cover element containing the fibre prime); then 00SS base change plus localization identities giving T_a with a=psi(g)h; then finite-cover gluing. Steps 5-6 are 00T7/00TA: standard-smooth base change, dim at points, and dimension supremum, applied with the ring-level locally-standard-smooth node. Step 7 is 02GJ: Omega=0 is finite projective, so the map is smooth. I tested T=0, c>n charts, the identity, k[x]/(x^2) with y^2, R[x], R_f and a non-Noetherian R. No duplicate of ring-level syntomic composition exists in the DAG. Batch-5 check: lem-trf-relative-ci-principal-cover-syntomic-gluing is generic 00SO/00SW commutative algebra. Its full closure (178 nodes) contains only itself and two Mathlib locality leaves from sec-trace-formula and reaches no trace-formula or Poincare theorem, so I accepted it. FIX (C4): step 1 cited lem-weil-pbc-fibre-product-affine-spectra to identify the topological fibres needed by the 00OM node with spectra of the fibre rings, but that node gives only a scheme isomorphism. I replaced it in step 1 uses and proof_deps with lem-weil-pbc-fibre-spec-homeomorphism (00E6) and reworded the sentence. No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SyntomicSmoothComposition",
+  "declaration": "Algebra.syntomic_comp",
+  "declarations": [
+   "Algebra.syntomic_comp",
+   "Algebra.syntomic_of_smooth",
+   "Algebra.syntomic_of_etale_spec"
+  ],
+  "file": "lean/Sheaf/RingTheory/SyntomicSmoothComposition.lean",
+  "statement": "theorem syntomic_comp {R : Type u} {S : Type v} {T : Type w} [CommRing R] [CommRing S] [CommRing T] [Algebra R S] [Algebra S T] [Algebra R T] [IsScalarTower R S T] [Module.Flat R S] [FinitePresentation R S] [Module.Flat S T] [FinitePresentation S T] (hRS : ∀ p : PrimeSpectrum R, IsLocalCompleteIntersection p.asIdeal.ResidueField (p.asIdeal.Fiber S)) (hST : ∀ p : PrimeSpectrum S, IsLocalCompleteIntersection p.asIdeal.ResidueField (p.asIdeal.Fiber T)) : ∃ (_ : FinitePresentation R T), Module.Flat R T ∧ ∀ p : PrimeSpectrum R, IsLocalCompleteIntersection p.asIdeal.ResidueField (p.asIdeal.Fiber T)",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a535c926e",
+  "group": "NW",
+  "result": "pass",
+  "note": "First S2 delivery (live node has no lean record). Three sorried theorems match node clauses and Stacks 00SZ(1)/00TA/00U9 with syntomic=flat+fp+lci fibres (00SL), all via recorded deps: Module.Flat, Algebra.FinitePresentation, upstream Algebra.IsLocalCompleteIntersection on Ideal.Fiber=κ(p)⊗S, Algebra.Smooth, AlgebraicGeometry.Etale. Composite encoded by IsScalarTower; FiniteType instance supplied by an existential FinitePresentation in the conclusion, not assumed. Étale clause uses canonical RingHom.ulift to a common universe (no u=v); Spec map direction correct. Edge cases kept: zero rings/fibres, non-Noetherian bases, independent universes. lean.statement verbatim; declarations list complete; docstrings carry source+blueprint+proof steps; all imports exist; no syntomic def node or Mathlib match. Proof-only dep lem-trf-relative-ci-principal-cover-syntomic-gluing lacks Lean (not blocking)."
+ }
+}

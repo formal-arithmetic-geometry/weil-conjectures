@@ -1,0 +1,63 @@
+# global build 2026-10-26T10:20:12Z of d774e89368: Sheaf.Paper.AdicPerfectReductionModelsCompatibility failed
+error: Sheaf/Paper/AdicPerfectReductionModelsCompatibility.lean:87:6: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  (NatIso.mapHomologicalComplex (adicFiniteChangeComp f g) (ComplexShape.up ℤ)).hom.app K ≫ (eqToIso ⋯).hom.app K
+in the target expression
+  (extend g).map ((extendComparison f).app K) ≫
+      (extendComparison g).app (((change f).mapHomologicalComplex (ComplexShape.up ℤ)).obj K) ≫
+        (Q V).map
+          ((Functor.mapHomologicalComplexCompIso (adicFiniteChangeComp f g) (ComplexShape.up ℤ)).hom.app K ≫
+            (eqToIso ⋯).hom.app K) =
+    (extend g).map ((extendComparison f).app K) ≫
+      (extendComparison g).app (((change f).mapHomologicalComplex (ComplexShape.up ℤ)).obj K) ≫
+        (Q V).map ((NatIso.mapHomologicalComplex (adicFiniteChangeComp f g ≪≫ eqToIso ⋯) (ComplexShape.up ℤ)).hom.app K)
+
+C : Type u_1
+inst✝ : SmallCategory C
+T : GrothendieckTopology C
+R S V : Sheaf T CommRingCat
+f : R ⟶ S
+g : S ⟶ V
+h : R ⟶ V
+e : h = f ≫ g
+K : Cx R
+hk : CochainComplex.IsKFlatIndependentCoefficients K
+this✝¹ : HasDerivedCategory (ConstantCompletion.Mod R) := HasDerivedCategory.standard (ConstantCompletion.Mod R)
+this✝ : HasDerivedCategory (ConstantCompletion.Mod S) := HasDerivedCategory.standard (ConstantCompletion.Mod S)
+this : HasDerivedCategory (ConstantCompletion.Mod V) := HasDerivedCategory.standard (ConstantCompletion.Mod V)
+ht :
+  (eqToIso ⋯).hom.app ((Q R).obj K) ≫ (extendComparison h).app K =
+    (extendComparison (f ≫ g)).app K ≫ (Q V).map ((eqToIso ⋯).hom.app K)
+hn :
+  ⋯.choose.hom.app ((Q R).obj K) ≫ (extendComparison (f ≫ g)).app K =
+    (extend g).map ((extendComparison f).app K) ≫
+      (extendComparison g).app (((change f).mapHomologicalComplex (ComplexShape.up ℤ)).obj K) ≫
+        (Q V).map ((Functor.mapHomologicalComplexCompIso (adicFiniteChangeComp f g) (ComplexShape.up ℤ)).hom.app K)
+⊢ (extend g).map ((extendComparison f).app K) ≫
+      (extendComparison g).app (((change f).mapHomologicalComplex (ComplexShape.up ℤ)).obj K) ≫
+        (Q V).map
+          ((Functor.mapHomologicalComplexCompIso (adicFiniteChangeComp f g) (ComplexShape.up ℤ)).hom.app K ≫
+            (eqToIso ⋯).hom.app K) =
+    (extend g).map ((extendComparison f).app K) ≫
+      (extendComparison g).app (((change f).mapHomologicalComplex (ComplexShape.up ℤ)).obj K) ≫
+        (Q V).map ((NatIso.mapHomologicalComplex (adicFiniteChangeComp f g ≪≫ eqToIso ⋯) (ComplexShape.up ℤ)).hom.app K)
+
+Note: The target expression is not type-correct under the `implicit` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.
+Full error:
+  Application type mismatch: The argument
+    NatIso.mapHomologicalComplex (adicFiniteChangeComp f g ≪≫ eqToIso ⋯) (ComplexShape.up ℤ)
+  has type
+    @Iso
+      (HomologicalComplex (ConstantCompletion.Mod R) (ComplexShape.up ℤ) ⥤
+        HomologicalComplex (ConstantCompletion.Mod V) (ComplexShape.up ℤ))
+      Functor.category ((change f ⋙ change g).mapHomologicalComplex (ComplexShape.up ℤ))
+      ((change h).mapHomologicalComplex (ComplexShape.up ℤ))
+  but is expected to have type
+    @Iso
+      (HomologicalComplex (ConstantCompletion.Mod R) (ComplexShape.up ℤ) ⥤
+        HomologicalComplex (ConstantCompletion.Mod V) (ComplexShape.up ℤ))
+      Functor.category
+      ((change f).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ (change g).mapHomologicalComplex (ComplexShape.up ℤ))
+      ((change h).mapHomologicalComplex (ComplexShape.up ℤ))
+  in the application
+    (NatIso.mapHomologicalComplex (adicFiniteChangeComp f g ≪≫ eqToIso ⋯) (ComplexShape.up ℤ)).hom
+error: Lean exited with code 1

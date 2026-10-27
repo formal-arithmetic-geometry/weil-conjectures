@@ -1,0 +1,299 @@
+{
+ "id": "lem-per-integral-pullback-bounds",
+ "kind": "statement",
+ "title": "Integral completed pullback preserves ambient cohomological bounds",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$, and a finite intermediate field $E$, with $A_E=\\mathcal O_E$ and uniformizer $\\varpi_E$ [def-weil-l-adic-coefficient-extension]. Let $X,Y$ be noetherian finite-dimensional schemes with $\\ell$ invertible, and $g:Y\\to X$ any scheme morphism [def-weil-scheme-morphism-properties]. Here noetherian means a finite affine cover by spectra of noetherian rings, and finite-dimensional means a finite bound on lengths of strict chains of nonempty irreducible closed subsets. On the small pro-etale site [def-weil-pbc-proetale-site] put $B_{E,W}=\\varprojlim_{n\\ge1}(A_E/\\varpi_E^n)_W$ for $W=X,Y$ [def-weil-pbc-adic-coefficient-datum]. Write $\\mathcal C_{W,E}=D^b_c(W,A_E)$ for the integral derived-complete constructible category including compatible etale-origin witnesses [def-weil-pbc-bounded-constructible-complete]. Let $\\widehat P_{g,E}$ be the specified quotient-tower completed pullback, with its completion unit $\\gamma_{g,K}:B_{E,Y}\\otimes^L_{g^{-1}B_{E,X}}g^{-1}K\\to\\widehat P_{g,E}K$ [def-weil-pbc-completed-pullback].\n\nThe functor $\\widehat P_{g,E}$ restricts to an $A_E$-linear exact triangulated functor $\\mathcal C_{X,E}\\to\\mathcal C_{Y,E}$, with the specified ambient shift comparison and finite reduction witnesses, and $\\gamma_{g,K}$ is invertible for $K\\in\\mathcal C_{X,E}$. For integers $a\\le b$, if the ambient cohomology sheaves $\\mathcal H^j(K)$ vanish for $j\\notin[a,b]$, the same is true of $\\widehat P_{g,E}K$ [def-weil-derived-cohomology-sheaves]. In particular it preserves both halves of the bounded integral standard t-structure [prop-weil-pbc-integral-tstructure]. The assertion includes the zero complex and empty schemes and requires no flatness of $g^{-1}B_{E,X}\\to B_{E,Y}$.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(4)-(5), Proposition 6.6.11; old proof steps 2-4: exact completed pullback and local-to-global integral cohomological bounds"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-derived-cohomology-sheaves",
+  "prop-weil-pbc-integral-tstructure"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=A_E$, $B_W=B_{E,W}$ and let $P_gK=B_Y\\otimes^L_{g^{-1}B_X}g^{-1}K$ be ordinary derived module pullback. The stratified-perfect characterization gives a finite stratification of $X$ and pro-etale covering charts on its strata on which $K$ is the realization of a bounded finite-projective $A$-complex. Apply the ordinary stratified-model pullback lemma: the fibre-product strata and covering charts on $Y$ give exactly the realizations of those same scalar complexes for $P_gK$. Both schemes are noetherian as required by that lemma; no noetherian hypothesis is required on the charts. The reverse implication of the characterization on $Y$ now gives $P_gK\\in\\mathcal C_{Y,E}$, including intrinsic completeness, uniform reduction models and compatible etale origins.",
+   "uses": [
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-tw-ordinary-pullback-stratified-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.6.11; base change of finite stratified perfect models (agent assembly)."
+   }
+  },
+  {
+   "text": "By the definition of completed pullback, the specified $\\gamma_{g,K}$ is the quotient-tower completion unit of $P_gK$. The constant/completed comparison identifies this very unit with the Koszul completion unit. The completion-reflector lemma says that this unit is invertible for an intrinsically complete object; Step 1 supplies that hypothesis. Thus $\\gamma_{g,K}$ itself is invertible, and its target belongs to $\\mathcal C_{Y,E}$ by closure under isomorphisms. This uses the map induced by the finite quotient projections, not an arbitrary isomorphism with the same endpoints.",
+   "uses": [
+    "def-weil-pbc-completed-pullback",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-uniform-complete-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.9(4)-(5), Proposition 6.6.11; identification of the actual completion unit (agent assembly)."
+   }
+  },
+  {
+   "text": "The completed-pullback triangle lemma gives the specified coherent ambient shift comparison and sends every distinguished triangle of complete objects to a distinguished triangle. The uniform complete categories have precisely the inherited shifts and triangles, so Step 2 restricts this exact functor to the stated categories. It is $A$-linear: on a K-flat tower representative scalar multiplication by $a\\in A$ acts termwise, pullback sends $a f$ to $a$ times the pulled-back map, and the $A$-linear derived inverse limit preserves that equality; the projections defining the comparison are also $A$-linear. The completed-pullback reduction lemma supplies the canonical finite reductions with quotient transitions, normalization, unit identities and cocycles. Output compatible etale-origin witnesses were already supplied by Step 1, so they are not inferred from mere constructibility of separate reductions.",
+   "uses": [
+    "lem-cbc-completed-pullback-triangles",
+    "lem-weil-pbc-uniform-complete-triangulated",
+    "def-weil-pbc-completed-pullback",
+    "lemma-weil-pbc-completed-pullback-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.9(4)-(5); exact tower construction and finite reductions (agent assembly)."
+   }
+  },
+  {
+   "text": "By the last clause of the stratified-perfect characterization (applied on $X$, which is noetherian and finite-dimensional with $\\ell$ invertible), $K\\in\\mathcal C_{X,E}$ lies in the integral category $D^b_c(X,A_E)$ (derived complete with uniformly bounded constructible reductions) over the same completed ring sheaf, so it is derived complete in the reduction-tower sense used there; these are the hypotheses of the integral stratum-chart restriction lemma and of the integral/completed comparison. For the interval assertion choose the stratification, charts and finite-projective scalar complexes $P_{\\alpha t}$ of the integral stratum-chart restriction lemma for $g:Y\\to X$. On the original charts the realized scalar complex has ambient cohomology in $[a,b]$, because the cited restriction lemma gives exact restriction and its cohomology comparison. On each fibre-product chart on $Y$, its comparison identifies the specified integral pullback with the completed pullback of that original scalar model; the integral/completed comparison identifies that functor with $\\widehat P_{g,E}$. The completed-perfect-scalar lemma identifies the result with $B_{V^{\\prime}_{\\alpha t}}\\otimes_A P_{\\alpha t}$ and explicitly preserves the original ambient interval. This assertion uses vanishing of the realized source complex, not a claim that its chosen finite-projective representative has terms only in $[a,b]$. Exact inverse-image and slice restriction commute with ambient cohomology by the local derived restriction comparison. Consequently, for every $j\\notin[a,b]$, all these restrictions of $\\mathcal H^j(\\widehat P_{g,E}K)$ vanish. The noetherian stratum-detection lemma on $Y$ gives its global vanishing.",
+   "uses": [
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-a1-integral-stratum-chart-restrictions",
+    "lem-a1-integral-pullback-completed-comparison",
+    "lem-a1-completed-perfect-scalar-pullback",
+    "lem-weil-pbc-local-derived-restriction-comparisons",
+    "lem-weil-pbc-noetherian-stratum-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.6.11 and Lemma 6.5.9(4)-(5); chartwise perfect calculation and stratum detection (agent assembly)."
+   }
+  },
+  {
+   "text": "The integral standard halves are defined by ambient cohomology vanishing. Every object is bounded by the stratified-perfect characterization. For an object in the upper half choose a lower bound $a$ and use Step 4 with $[\\min(a,0),0]$; for one in the lower half choose an upper bound $b$ and use $[0,\\max(b,0)]$. This gives preservation of both halves. Zero is preserved by the additive exact construction. Empty strata are discarded in the stratified-model lemma; on an empty scheme the stratum-detection assertion applied to the empty family forces every cohomology sheaf to be zero. Thus empty schemes and zero scalar models are included. At no point was flatness of the completed coefficient structure map assumed.",
+   "uses": [
+    "prop-weil-pbc-integral-tstructure",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-tw-ordinary-pullback-stratified-models",
+    "lem-weil-pbc-noetherian-stratum-detection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.6.11; bounded standard halves and degenerate cases."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-tw-ordinary-pullback-stratified-models",
+  "def-weil-pbc-completed-pullback",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-pbc-uniform-complete-triangulated",
+  "lem-cbc-completed-pullback-triangles",
+  "lemma-weil-pbc-completed-pullback-reduction",
+  "lem-a1-integral-stratum-chart-restrictions",
+  "lem-a1-integral-pullback-completed-comparison",
+  "lem-a1-completed-perfect-scalar-pullback",
+  "lem-weil-pbc-local-derived-restriction-comparisons",
+  "lem-weil-pbc-noetherian-stratum-detection",
+  "prop-weil-pbc-integral-tstructure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Assembly of Lemma 6.5.9(4)-(5) and Proposition 6.6.11 through existing DAG model, unit and cohomology interfaces; neither reference alone states the full assertion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Completed pullback of constructible integral adic complexes preserves cohomological intervals using stratified perfect local models",
+   "results": "Read hits: AdicCompletion.map_exact, AlgebraicGeometry.ExistsHomHomCompEqCompAux.c', DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, IsAdicComplete.StrictMono.of_lift, IsAdicComplete.StrictMono.of_comp_lift, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, AlgebraicGeometry.Scheme.IsLocallyDirected.exists_of_pullback_V_V, CochainComplex.cm5b. AdicCompletion.map_exact concerns ordinary modules; derived-category bounds concern no completed sheaf pullback. Proetale and ell-adic files supply sites and coefficient sheaves only.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded constructible complex pulled back along an arbitrary scheme morphism has no new cohomology degrees by finite projective scalar complexes on strata",
+   "results": "Read hits: DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.isGE_iff, DerivedCategory.isZero_of_isGE, DerivedCategory.isLE_iff, CochainComplex.isKProjective_of_projective. AdicCompletion.map_exact concerns ordinary modules; derived-category bounds concern no completed sheaf pullback. Proetale and ell-adic files supply sites and coefficient sheaves only.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Triangulated.TStructure, CategoryTheory.Functor",
+   "results": "Read hits: CategoryTheory.Triangulated.TStructure.truncGE, CategoryTheory.Triangulated.TStructure.truncLT, CategoryTheory.Triangulated.TStructure.truncGELT, CategoryTheory.Triangulated.TStructure.truncLTGE, CategoryTheory.Triangulated.TStructure.triangleLTGE, CategoryTheory.Triangulated.TStructure.triangleLTLTGELT, CategoryTheory.Triangulated.TStructure.truncGEπ, CategoryTheory.Triangulated.TStructure.truncLTι. AdicCompletion.map_exact concerns ordinary modules; derived-category bounds concern no completed sheaf pullback. Proetale and ell-adic files supply sites and coefficient sheaves only.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|pro.etale|stratified.*perfect|completed.*pullback",
+   "results": "Read hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean. AdicCompletion.map_exact concerns ordinary modules; derived-category bounds concern no completed sheaf pullback. Proetale and ell-adic files supply sites and coefficient sheaves only.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed constructible integral pullback preserves cohomological intervals on pro etale schemes",
+   "results": "Read hits: AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.IsProper.instFstScheme, AlgebraicGeometry.IsProper.instSndScheme, AlgebraicGeometry.IsIntegralHom.instFstScheme, AlgebraicGeometry.Scheme.instOverPullbackCoverOver, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, AlgebraicGeometry.QuasiCompactCover.instPullback₂Scheme. AdicCompletion.map_exact concerns ordinary modules; derived-category bounds concern no completed sheaf pullback. Proetale and ell-adic files supply sites and coefficient sheaves only.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "completed.*pullback|pullback.*complet|stratif.*perfect",
+   "results": "Read returned hits: Mathlib/Topology/Algebra/UniformField.lean, Mathlib/Order/CompleteLattice/Basic.lean, Mathlib/Order/CompleteBooleanAlgebra.lean, Mathlib/Order/CompleteBooleanAlgebra.lean, Mathlib/Order/CompleteBooleanAlgebra.lean, Mathlib/Order/CompleteBooleanAlgebra.lean, Mathlib/Order/CompleteBooleanAlgebra.lean, Mathlib/Geometry/Manifold/VectorField/LieBracket.lean. No completed integral constructible pullback assertion. AdicCompletion.map_exact is ordinary module completion; free-sheaf pullback computes units only; t-structure results are generic truncations; etale/proetale scheme results concern sites and morphisms.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed integral constructible pullback preserves every cohomological interval on pro etale schemes",
+   "results": "Read returned hits: AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.IsProper.instSndScheme, AlgebraicGeometry.IsProper.instFstScheme, AlgebraicGeometry.Scheme.Pullback.instHasPullbacks, AlgebraicGeometry.IsIntegralHom.instFstScheme, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.instOverPullbackCoverOver. No completed integral constructible pullback assertion. AdicCompletion.map_exact is ordinary module completion; free-sheaf pullback computes units only; t-structure results are generic truncations; etale/proetale scheme results concern sites and morphisms.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of stratified perfect complexes over completed coefficient sheaves is t exact without coefficient flatness",
+   "results": "Read returned hits: Profinite.NobelingProof.succ_exact, AdicCompletion.map_exact, CategoryTheory.IsPullback.exact_shortComplex', SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, CategoryTheory.Abelian.LeftResolution.exactAt_map_chainComplex_succ, HomologicalComplex.exact_of_degreewise_exact, HomologicalComplex.exact_iff_degreewise_exact, HomologicalComplex.IsSupportedOutside.exactAt. No completed integral constructible pullback assertion. AdicCompletion.map_exact is ordinary module completion; free-sheaf pullback computes units only; t-structure results are generic truncations; etale/proetale scheme results concern sites and morphisms.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Triangulated.TStructure, CategoryTheory.Functor",
+   "results": "Read returned hits: CategoryTheory.Triangulated.TStructure.truncGE, CategoryTheory.Triangulated.TStructure.truncLT, CategoryTheory.Triangulated.TStructure.truncGELT, CategoryTheory.Triangulated.TStructure.truncLTGE, CategoryTheory.Triangulated.TStructure.triangleLTGE, CategoryTheory.Triangulated.TStructure.triangleLTLTGELT, CategoryTheory.Triangulated.TStructure.truncGEπ, CategoryTheory.Triangulated.TStructure.truncLTι. No completed integral constructible pullback assertion. AdicCompletion.map_exact is ordinary module completion; free-sheaf pullback computes units only; t-structure results are generic truncations; etale/proetale scheme results concern sites and morphisms.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed pullback of integral constructible adic sheaves preserves standard cohomological bounds and its completion unit is invertible",
+   "results": "Read returned hits: BDeRhamPlus, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, AdicCompletion.map_exact, IsAdicComplete.StrictMono.of_lift, IsAdicComplete.StrictMono.of_comp_lift, IsAdicComplete.of_lift, IsAdicComplete.toIsPrecomplete, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom. No completed integral constructible pullback assertion. AdicCompletion.map_exact is ordinary module completion; free-sheaf pullback computes units only; t-structure results are generic truncations; etale/proetale scheme results concern sites and morphisms.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem map_exact|lemma map_exact|proetale|ellAdicSheaf",
+   "results": "Read returned hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean. No completed integral constructible pullback assertion. AdicCompletion.map_exact is ordinary module completion; free-sheaf pullback computes units only; t-structure results are generic truncations; etale/proetale scheme results concern sites and morphisms.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-adic-stratified-pullback-texact",
+  "date": "2026-10-22",
+  "group": "O1"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "First proof paragraph, exactness of Lf* and its cohomology pullback assertion; Lemma 6.5.9(4)-(5), Proposition 6.6.11; old proof steps 2-4: exact completed pullback and local-to-global integral cohomological bounds",
+   "via": [
+    "lem-per-adic-stratified-pullback-texact",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-per-smooth-pullback-support-dimension"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-per-integral-pullback-bounds",
+  "worker": "stage1",
+  "summary": "Assembled existing stratified ordinary pullback, completion reflector, exact tower and scalar cohomological-bound tools. Proved invertibility of the specified completion unit only after establishing completeness of ordinary pullback, and distinguished ambient bounds from reduction bounds. No statement correction and no new nodes.",
+  "blueprint": "lem-per-smooth-pullback-t-exact, first proof paragraph: exactness of Lf* and its cohomology pullback assertion; supplies the integral bound input in the ancestor chain.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Identifies the three-clause integral category with stratified perfect scalar models, including the witness clauses; no such coefficient characterization is supplied in this perverse unit."
+   },
+   {
+    "node": "lem-tw-ordinary-pullback-stratified-models",
+    "why": "Generic ordinary ringed pullback of stratified perfect models, before completion; used to prove completeness of the ordinary output."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Identifies the specified quotient completion unit with the Koszul unit in the actual completed coefficient category."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "why": "Generic completion-unit criterion for intrinsic completeness."
+   },
+   {
+    "node": "lem-weil-pbc-uniform-complete-triangulated",
+    "why": "Supplies the inherited triangulated structures and closure under isomorphisms."
+   },
+   {
+    "node": "lem-cbc-completed-pullback-triangles",
+    "why": "Generic exactness and normalized shift comparison for the specified strict tower functor."
+   },
+   {
+    "node": "lemma-weil-pbc-completed-pullback-reduction",
+    "why": "Generic normalized finite-reduction comparisons with transitions and cocycles."
+   },
+   {
+    "node": "lem-a1-integral-stratum-chart-restrictions",
+    "why": "Provides exact stratum/chart restriction and the pulled-back model comparison used to check ambient bounds locally."
+   },
+   {
+    "node": "lem-a1-integral-pullback-completed-comparison",
+    "why": "Identifies the integral tower functor used by chart lemmas with the specified completed pullback, including reductions and shifts."
+   },
+   {
+    "node": "lem-a1-completed-perfect-scalar-pullback",
+    "why": "Computes completed pullback of one scalar perfect model and preserves its ambient interval, without coefficient-map flatness."
+   },
+   {
+    "node": "lem-weil-pbc-local-derived-restriction-comparisons",
+    "why": "Generic exact inverse-image/slice cohomology comparison, with the actual inverse-image ring."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-stratum-detection",
+    "why": "Generic detection of sheaf vanishing on a finite stratification and covering charts."
+   },
+   {
+    "node": "prop-weil-pbc-integral-tstructure",
+    "why": "Identifies integral standard halves by ambient vanishing."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-tw-ordinary-pullback-stratified-models",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-pbc-uniform-complete-triangulated",
+  "lem-cbc-completed-pullback-triangles",
+  "lemma-weil-pbc-completed-pullback-reduction",
+  "lem-a1-integral-stratum-chart-restrictions",
+  "lem-a1-integral-pullback-completed-comparison",
+  "lem-a1-completed-perfect-scalar-pullback",
+  "lem-weil-pbc-local-derived-restriction-comparisons",
+  "lem-weil-pbc-noetherian-stratum-detection",
+  "prop-weil-pbc-integral-tstructure"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q83-f1c5c88bc",
+  "group": "Q83",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-f1c5c88bc (reviewer sub-agent of L); spot-checked: I read the item, its 5 steps and the statements of all 15 cited nodes in full, plus BS 1309.1198 Lemma 6.5.9(1)-(5) with its proof and Prop. 6.6.11 / Ex. 6.6.12. The proof is an agent assembly because BS gives neither invertibility of the ordinary-pullback unit nor the ambient interval. The statement is unchanged and is not weakened; the only citer (lem-per-adic-stratified-pullback-texact) uses exactly these clauses. There are no new nodes and no re-split note. The 11834-node closure has no cycle, and all 13 off-unit tools are declared. Step 1: the characterization (ii) on X feeds lem-tw-ordinary-pullback-stratified-models; I checked that roles and coefficient map c_g match, the noetherian hypotheses hold, and nothing about flatness or completeness is assumed. (i) on Y then gives P_gK in C_Y. Step 2: the last paragraph of the completed-pullback definition, the constant-completion equivalence (units and finite reductions) and the Koszul reflector (iff locally complete) show that the specified γ is invertible. Step 3: the cbc triangles lemma, the uniform-complete triangulated lemma and the completed-pullback-reduction lemma (α_n, cocycle, normalization) are correct. Step 4: the chain a1 stratum-chart → a1 integral/completed comparison → completed-perfect-scalar interval clause (no noetherian charts needed) → local restriction → noetherian detection on Y is correct, except for one fault (C4/E1). The stratum-chart lemma requires K in def-weil-derived-complete-integral-detailed, and the a1 comparison requires completeness in the sense of def-weil-derived-complete. The item's K lies in the pbc category, and the bridge (the characterization's 'also describe exactly … detailed category' clause) was neither cited nor stated. FIX: added the bridge sentence and the characterization to Step 4 uses; proof_deps is unchanged. Step 5: the halves, [min(a,0),0] and [0,max(b,0)], zero and the empty scheme are fine. Small cases checked: the identity morphism; the residue field via [A→A] (the bound is preserved through H^j(C(P)) = B⊗H^j(P), not through the terms or reductions); a non-flat point.; 1 file(s) fixed by the reviewer"
+ }
+}

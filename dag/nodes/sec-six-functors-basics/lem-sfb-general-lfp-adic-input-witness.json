@@ -1,0 +1,277 @@
+{
+ "id": "lem-sfb-general-lfp-adic-input-witness",
+ "kind": "statement",
+ "title": "General-lfp integral inputs have complete constructible residue witnesses",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "statement": "Fix a prime $\\ell$, a field $k$ of characteristic $p>0$ with $p\\ne\\ell$, and a separated finite-type $k$-scheme $X$ [sk-def-sfb-dc-setting]. Fix a finite subextension $E/\\mathbf Q_\\ell$ in $\\overline{\\mathbf Q}_\\ell$, its valuation ring $R=\\mathcal O_E$ and a uniformizer $t$, and put $A=R/(t)$ [def-weil-l-adic-coefficient-extension]. On the small pro-étale site put $B=p_X^*\\underline R$ and $A_X=p_X^*\\underline A$ [sk-def-sfb-condensed-ring, sk-def-sfb-pulled-back-coefficients]. Use the ordinary unbounded derived category of module objects and relative derived tensor [sk-def-sfb-derived-tensor-hom]. Let $M\\in D(\\operatorname{Mod}_B)$ be bounded constructible in the general ring-object sense [sk-def-sfb-bounded-constructible]: its bounded cohomology sheaves have finite constructible locally closed stratifications with locally finite presentations over $B$, allowing arbitrary local matrix entries.\n\nThen $X$ is Noetherian, meaning quasi-compact [def-weil-pbc-quasi-compact-scheme] and locally Noetherian [pqf-def-locnoeth], and is quasi-separated [def-weil-quasi-separated-morphism]. The ring $R$ is a discrete valuation ring and $A$ is a finite field of characteristic $\\ell$. There is a canonical isomorphism of ring sheaves $B\\cong\\varprojlim_{n\\ge1}(R/t^n)_X$, where the right-hand terms are constant sheaves [def-weil-pbc-constant-sheaf]. The ring object $A_X$ is canonically the constant residue-field sheaf, with its ordinary relative derived tensor and finite constant local models.\n\nEvery cohomology sheaf of $M$ is constructible in the finite scalar local-model sense [sk-def-sfb-constructible], allowing finitely presented torsion $R$-modules. The object $M$ is locally derived $(t)$-complete [def-weil-pbc-locally-derived-ringed-ideal-complete]. There is a bounded étale $A$-complex $C_M$ with constructible finite-dimensional cohomology [def-pe-etale-constructible-module], of finite Tor amplitude, and an isomorphism\n$$\\nu_X^*C_M\\simeq M\\otimes_B^L A_X,$$\nwhere $\\nu_X:X_{\\mathrm{proét}}\\to X_{\\mathrm{ét}}$ is the comparison morphism [def-weil-pbc-site-comparison-morphism]. Finite Tor amplitude means that there are integers $a\\le b$ such that $H^q(C_M\\otimes_A^L N)=0$ for every degree-zero étale $A$-module sheaf $N$ and $q\\notin[a,b]$. No completeness or scalar-model assumption is imposed on $M$.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.5.1, Definition 6.8.10 and Proposition 6.8.11(3); agent extraction for a general ring-object input via lem-sfb-integral-lfp-constant-model-comparison. Coefficient preparation uses the existing DVR, coefficient-limit and finite-discrete comparison nodes.",
+  "external": [
+   {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian"
+   },
+   {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01OY, lemma-locally-Noetherian-quasi-separated"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-derived-tensor-hom",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-bounded-constructible",
+  "def-weil-pbc-quasi-compact-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-pbc-constant-sheaf",
+  "sk-def-sfb-constructible",
+  "def-weil-pbc-locally-derived-ringed-ideal-complete",
+  "def-pe-etale-constructible-module"
+ ],
+ "proof": [
+  {
+   "text": "The only ideals of the field $k$ are $0$ and $k$, so $k$ is Noetherian. The single affine chart of $\\operatorname{Spec}k$ therefore makes it locally Noetherian, and the affine quasi-compactness theorem makes it quasi-compact. Apply the finite-type-over-Noetherian theorem to $X\\to\\operatorname{Spec}k$: $X$ is quasi-compact and locally Noetherian. The locally-Noetherian quasi-separatedness theorem now gives quasi-separatedness of $X$. In particular $X$ is qcqs. A locally Noetherian affine covering of $X$ has a finite subcover by quasi-compactness, so $X$ also satisfies the finite-affine-cover formulation of Noetherian used by the adic criterion.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian; properties.tex Tag 01OY, lemma-locally-Noetherian-quasi-separated."
+   }
+  },
+  {
+   "text": "Apply the integers-of-a-finite-extension theorem to $E/\\mathbf Q_\\ell$. It gives that $R$ is a DVR with maximal ideal $\\mathfrak m_E$, and $R/\\mathfrak m_E$ is a finite field. By the definition of uniformizer, $(t)=\\mathfrak m_E$, so this residue field is precisely $A=R/(t)$. The extended absolute value restricts to the $\\ell$-adic one, hence $|\\ell|_E=\\ell^{-1}<1$. Thus $\\ell\\in\\mathfrak m_E$ and $\\ell=0$ in $A$. Since $A$ is a nonzero field and $\\ell$ is prime, its characteristic is $\\ell$. This argument allows arbitrary ramification and $\\ell=2$.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 6.8, finite-extension coefficient convention; arithmetic supplied by the existing finite-extension integers theorem and the definition of uniformizer."
+   }
+  },
+  {
+   "text": "Use clause (3) of the integral coefficient-limit theorem, with $t$ as uniformizer, to identify $B=p_X^*\\underline R$ canonically with $\\varprojlim_{n\\ge1}(R/t^n)_X$ as a ring sheaf, with the indicated quotient transition maps. Apply the finite-discrete coefficient equivalence to the finite commutative field $A$ from step 2: $p_X^*\\underline A$ is the constant ring sheaf $A_X$. Its exact derived equivalence preserves the relative derived tensor, every Tor interval and the finite constant local models. These are the coefficient identifications required in the statement.",
+   "uses": [
+    "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "lem-sf-module-object-ordinary-coefficient-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 6.5, coefficient convention preceding Definition 6.5.1; Lemma 4.2.12 for continuous coefficient sheaves, and the finite-discrete coefficient comparison."
+   }
+  },
+  {
+   "text": "Choose a bounded cohomological interval for $M$. For each of its cohomology sheaves $H^q(M)$, the hypothesis is condition (i) of the integral lfp/constant-model comparison: finite constructible locally closed strata and local finite presentations with arbitrary sections as matrix entries. Step 1 verifies its Noetherian hypothesis. Apply implication (i)$\\Rightarrow$(ii), with its scalar ring denoted $R$ here. It gives finite constant scalar local models $B_V\\otimes_R P$ for finitely presented $R$-modules $P$. The theorem explicitly allows torsion $P$ and does not assume completeness. Consequently every $H^q(M)$ is constructible in the scalar-model sense, and $M$ is still bounded in its original interval; no change to the complex is made.",
+   "uses": [
+    "sk-def-sfb-bounded-constructible",
+    "lem-sfb-integral-lfp-constant-model-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "The existing coefficient-specific lfp/constant-model comparison, with its continuous-matrix descent argument; compare Theorem 6.2(2),(3) and Theorem 6.12(2). Bhatt–Scholze Definition 6.8.10 fixes the resulting scalar-model notion."
+   }
+  },
+  {
+   "text": "Apply the integral cohomological adic criterion, implication (1)$\\Rightarrow$(2), with its $(R,\\pi,k,K)$ equal to our $(R,t,A,M)$. Step 1 supplies its Noetherian scheme, step 3 its completed coefficient sheaf and residue quotient, and step 4 its bounded scalar-model constructible cohomology. If module objects are used, take their section-ring presentation through the module-object/ringed-site comparison: its equivalence leaves underlying abelian sheaves unchanged and identifies the ordinary unbounded derived relative tensors, also on slices. Thus the criterion applies to exactly the given object and tensor. It yields local derived $(t)$-completeness in the stated sense, and a bounded étale complex $C_M$ with constructible finite-dimensional $A$-cohomology and an isomorphism $\\nu_X^*C_M\\simeq M\\otimes_B^L A_X$. Its Tor conclusion is explicitly quantified over all degree-zero étale $A$-module sheaves $N$, with one ordered interval $[a,b]$. The finite-discrete equivalence of step 3 and the section-ring comparison identify these conclusions with the module-object formulations in the item; they introduce no completion assumption on $M$.",
+   "uses": [
+    "lem-sfb-integral-cohomological-adic-criterion",
+    "lem-sfb-module-object-ringed-site-derived-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.5.1 and Proposition 6.8.11(3), using the existing integral cohomological adic criterion (1)⇒(2); Definition 6.8.10 and the section-ring derived comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "def-weil-l-adic-coefficient-extension",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "lem-sf-module-object-ordinary-coefficient-equivalence",
+  "sk-def-sfb-bounded-constructible",
+  "lem-sfb-integral-lfp-constant-model-comparison",
+  "lem-sfb-integral-cohomological-adic-criterion",
+  "lem-sfb-module-object-ringed-site-derived-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Assembly of the existing general-lfp/scalar-model comparison and the integral cohomological adic criterion (1)⇒(2), realizing the input characterization in the first sentence of lem-sfb-dc-hom-preserves.proof.md; scheme preparation by Stacks 01T6 and 01OY."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A bounded constructible complex of locally finitely presented integral ell-adic module sheaves is locally derived complete and has an etale constructible residue model of finite Tor amplitude",
+   "results": "BDeRhamPlus; BDeRham; AlgebraicGeometry.IsEtale.of_comp; CondensedMod.IsSolid; SheafOfModules.isFinitePresentation; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; SheafOfModules.IsFinitePresentation; AlgebraicGeometry.LocallyOfFinitePresentation",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern ordinary ring completion, underived finite presentations, or etale algebras; none gives derived completeness and the constructible etale residue witness for general ring-object inputs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Convert general ring object finite presentations over a pulled back ell-adic valuation ring into complete complexes and finite field etale residue witnesses",
+   "results": "Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime; BDeRhamPlus; instCommRingBDeRhamPlus; BDeRham; PreTilt; Algebra.Etale.finitePresentation; StandardEtalePair.instEtaleRing; StandardEtalePair.instFormallyEtaleRing",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern ordinary ring completion, underived finite presentations, or etale algebras; none gives derived completeness and the constructible etale residue witness for general ring-object inputs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"IsAdicComplete\"",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern ordinary ring completion, underived finite presentations, or etale algebras; none gives derived completeness and the constructible etale residue witness for general ring-object inputs."
+  },
+  {
+   "tool": "grep",
+   "query": "(constructible|proetale|adic).*(residue|complete)|(residue|complete).*(constructible|proetale)",
+   "results": "Mathlib/NumberTheory/LocalField/Basic.lean:176: instance : IsAdicComplete 𝓂[K] 𝒪[K] where; Mathlib/NumberTheory/Padics/RingHoms.lean:29: * `PadicInt.residueField` shows that the residue field of `ℤ_[p]` is isomorphic to `ℤ/pℤ`.; Mathlib/RingTheory/Teichmuller.lean:15: Let `R` be an `I`-adically complete ring, and `p` be a prime number with `p ∈ I`.; Mathlib/RingTheory/Teichmuller.lean:56: /-- Given an `I`-adically **pre**complete ring `R`, where `p ∈ I`, this is the underlying function; Mathlib/RingTheory/Teichmuller.lean:60: The simp NF is `teichmuller₀` when `R` is `I`-adically complete. -/; Mathlib/RingTheory/Teichmuller.lean:74: variable [IsAdicComplete I R]; Mathlib/RingTheory/Teichmuller.lean:95: /-- Given an `I`-adically complete ring `R`, and a prime number `p` with `p ∈ I`, this is the; Mathlib/NumberTheory/Padics/PadicIntegers.lean:536: instance : IsAdicComplete (maximalIdeal ℤ_[p]) ℤ_[p] where; Mathlib/NumberTheory/Padics/PadicNumbers.lean:1000:     -- Porting note: Padic.complete' works with `f i - q`, but the goal needs `q - f i`,; Mathlib/NumberTheory/Padics/PadicNumbers.lean:1002:     obtain ⟨q, hq⟩ := Padic.complete'' ⟨f, cau_seq_norm_e⟩; Mathlib/RingTheory/Perfectoid/Untilt.lean:14: `p`-adically complete ring to the ring itself. Note that this; Mathlib/RingTheory/Perfectoid/Untilt.lean:18: * `PreTilt.untilt` : Given a `p`-adically complete ring `O`, this is the; Mathlib/RingTheory/Perfectoid/Untilt.lean:41: variable [IsAdicComplete (span {(p : O)}) O]; Mathlib/RingTheory/Perfectoid/Untilt.lean:44: Given a `p`-adically complete ring `O`, this is the; Mathlib/RingTheory/Perfectoid/BDeRham.lean:54:     [Fact ¬IsUnit (p : R)] [IsAdicComplete (span {(p : R)}) R]; Mathlib/RingTheory/Perfectoid/FontaineTheta.lean:19: We only need `R` to be `p`-adically complete.; Mathlib/RingTheory/Perfectoid/FontaineTheta.lean:118: variable [Fact ¬IsUnit (p : R)] [IsAdicComplete (span {(p : R)}) R]; Mathlib/RingTheory/Perfectoid/FontaineTheta.lean:119: -- local notation 𝔭 does not work in [IsAdicComplete (span {(p : R)}) R]; Mathlib/RingTheory/Perfectoid/FontaineTheta.lean:158: open IsAdicComplete; Mathlib/RingTheory/Perfectoid/FontaineTheta.lean:192: variable [Fact ¬IsUnit (p : R)] [IsAdicComplete (span {(p : R)}) R]; Mathlib/RingTheory/Ideal/Quotient/PowTransition.lean:20: related to `IsAdicComplete` to find a lift element from compatible sequences in the quotients.; Mathlib/RingTheory/MvPowerSeries/Inverse.lean:160: -- TODO(jmc): once adic topology lands, show that this is complete; Mathlib/RingTheory/Henselian.lean:37: * `IsAdicComplete.henselianRing`:; Mathlib/RingTheory/Henselian.lean:38:   a ring `R` with ideal `I` that is `I`-adically complete is Henselian at `I`; Mathlib/RingTheory/Henselian.lean:169: /-- A ring `R` that is `I`-adically complete is Henselian at `I`. -/",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern ordinary ring completion, underived finite presentations, or etale algebras; none gives derived completeness and the constructible etale residue witness for general ring-object inputs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded constructible integral ell-adic complexes with arbitrary locally finite presentation matrices have complete etale residue models",
+   "results": "Algebra.Etale.finitePresentation; Algebra.Etale.recOn; Algebra.Etale.casesOn; IsAdicComplete; Algebra.FormallyEtale.instTensorProduct; Algebra.etaleLocus_eq_univ_iff_etale; CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat; AlgebraicGeometry.Scheme.etalePretopology",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern ordinary ring completion, underived finite presentations, or etale algebras; none gives derived completeness and the constructible etale residue witness for general ring-object inputs."
+  },
+  {
+   "tool": "grep",
+   "query": "(constructible|proetale).*(complete|residue)|(complete|residue).*(constructible|proetale)",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "No match: results do not state the constructibility comparison, local derived completeness and étale finite-Tor residue witness for arbitrary general-lfp inputs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded constructible integral adic sheaves are derived complete and have bounded etale residue models",
+   "results": "IsAdicComplete.bot; IsAdicComplete.of_subsingleton; IsAdicComplete.toIsPrecomplete; IsAdic.isAdicComplete_iff; IsAdicComplete; IsAdicComplete.toIsHausdorff; AdicCompletion; isAdicComplete_iff",
+   "date": "2026-10-22",
+   "verdict": "No match: results do not state the constructibility comparison, local derived completeness and étale finite-Tor residue witness for arbitrary general-lfp inputs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"IsAdicComplete\"",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "No match: results do not state the constructibility comparison, local derived completeness and étale finite-Tor residue witness for arbitrary general-lfp inputs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded constructible complex of integral ell-adic module sheaves with arbitrary finite presentation matrices is derived complete and has an etale constructible residue complex of finite Tor amplitude",
+   "results": "localCohomology.diagram; CondensedMod.IsSolid; BDeRhamPlus; BDeRham; localCohomology; LightCondensed.instIsGrothendieckAbelianLightCondMod; CondensedMod.ofSheafProfinite; instCommRingBDeRhamPlus",
+   "date": "2026-10-22",
+   "verdict": "No match: results do not state the constructibility comparison, local derived completeness and étale finite-Tor residue witness for arbitrary general-lfp inputs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally finitely presented modules over continuous valuation ring coefficients have scalar local models and derived complete constructible reductions",
+   "results": "IsLocalizedModule.exists_isLocalizedModule_powers_of_finitePresentation; Module.isLocallyConstant_rankAtStalk_freeLocus; Module.isLocallyConstant_rankAtStalk; Module.FinitePresentation.exists_basis_localizedModule_powers; Module.FinitePresentation.exists_free_localizedModule_powers; instFinitePresentationLocalizationLocalizedModule; RingHom.finitePresentation_isLocal; SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation",
+   "date": "2026-10-22",
+   "verdict": "No match: results do not state the constructibility comparison, local derived completeness and étale finite-Tor residue witness for arbitrary general-lfp inputs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-general-lfp-hom-finiteness",
+  "date": "2026-10-22",
+  "group": "NY"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "lem-sfb-dc-hom-preserves.proof.md, integral paragraph, first sentence: use the characterization of bounded constructible complexes; steps 1–3 prepare its scheme and coefficients, step 4 verifies its scalar-model hypothesis for general-lfp inputs, and step 5 extracts local completeness and the finite-Tor étale residue witness.",
+   "via": [
+    "lem-sfb-integral-general-lfp-hom-finiteness",
+    "lem-sfb-dc-hom-small-coefficients"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-general-lfp-adic-input-witness",
+  "worker": "stage1",
+  "summary": "Five-step assembly using only existing nodes: Noetherian qcqs preparation, DVR and residue characteristic, canonical coefficient identifications, conversion of each general-lfp cohomology sheaf to scalar models, then the existing adic criterion with its exact local-completeness and finite-Tor residue-witness conclusions. Statement unchanged; no new nodes.",
+  "blueprint": "lem-sfb-dc-hom-preserves.proof.md, integral paragraph, first sentence: use the characterization of bounded constructible complexes; steps 1–3 prepare its scheme and coefficients, step 4 verifies its scalar-model hypothesis for general-lfp inputs, and step 5 extracts local completeness and the finite-Tor étale residue witness.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic scheme preparation from locally Noetherian to quasi-separated, needed to apply the integral input characterization; no replacement of the internal-Hom route."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Arithmetic of the actual finite local-field extension supplies the DVR and finite residue field; the unit has no independent arithmetic proof."
+   },
+   {
+    "node": "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "why": "Canonical continuous integral coefficient-limit identification needed by the adic criterion."
+   },
+   {
+    "node": "lem-sfb-integral-cohomological-adic-criterion",
+    "why": "The integral input characterization explicitly invoked by the blueprint first sentence; its (1)⇒(2) implication gives local completeness and the residue witness after the same-unit lfp comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "lem-sfb-integral-cohomological-adic-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q84-8fcdedeb2",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-8fcdedeb2 (reviewer sub-agent of L); spot-checked: Five-step assembly with no new nodes; the item's statement and stmt_deps are unchanged. The item is not dropped, not superseded (still unsplit with an empty proof in live and side-live), has no re-split note and cites no SGA. S1: Noetherian and qcqs via lem-weil-pbc-affine-scheme-qcqs, pqf-def-locnoeth, Stacks 01T6 (morphisms.tex l.2765) and 01OY (properties.tex l.481), with a finite affine Noetherian cover from quasi-compactness. S2: the DVR node gives the DVR, the finite residue field and (t)=m_E; |ℓ|_E=1/ℓ gives characteristic ℓ, covering ramified E and ℓ=2. S3: det-prop-sfb-qlbar-colimit-x-integral-limit (3) gives B≅lim(R/t^n)_X; the finite-coefficient module-object equivalence gives A_X, derived tensors and Tor intervals. S4: lem-sfb-integral-lfp-constant-model-comparison (i)⇒(ii), whose (i) is the same def-sfb-constructible-module notion as the hypothesis; Noetherian X comes from S1; this gives scalar-model constructibility of each H^q with torsion allowed. S5: lem-sfb-integral-cohomological-adic-criterion (1)⇒(2) with (R,π,k,K)=(R,t,A,M). Its completeness notion and Tor quantifier ('every étale k_X-module N', one interval) match the item; its global-stratification constructibility implies def-pe-etale-constructible-module; module objects are identified with section-ring modules by the ringed-site comparison. This matches BS Def 6.8.10 / Prop 6.8.11(3) (read) and the first sentence of lem-sfb-dc-hom-preserves.proof.md. Batch-5 finding: the criterion reaches lem-pod-adic-limit-finite-modules and lem-pod-adic-tower-reconstruction, which are pure commutative algebra (Stacks 09B8/031D/00MA), neither assumed statement nor a proof step of TF/PD → accepted. All 4 tool_uses accepted. Edge cases checked: empty X, M=0, R/(t) on a point. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.GeneralLfpAdicInputWitness",
+  "declaration": "AlgebraicGeometry.ProEtale.generalLfpAdicInputWitness",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.GeneralLfpAdicInput.IsNormalized",
+   "AlgebraicGeometry.ProEtale.GeneralLfpAdicInput.transport",
+   "AlgebraicGeometry.ProEtale.GeneralLfpAdicInput.IsAdicRepresentative",
+   "AlgebraicGeometry.ProEtale.GeneralLfpAdicInput.HasResidueComparison",
+   "AlgebraicGeometry.ProEtale.generalLfpAdicInputWitness"
+  ],
+  "file": "lean/Sheaf/Paper/GeneralLfpAdicInputWitness.lean",
+  "statement": "theorem generalLfpAdicInputWitness (l p : ℕ) [Fact l.Prime] [Fact p.Prime] (k : Type u) [Field k] [CharP k p] (_hpl : p ≠ l) (X : Over (Spec (CommRingCat.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (M : DerivedCategory.{u + 1, u + 1, u + 2} (ModuleObjectRingedComparison.Internal.{u} (integralCondensedRing.{u} l E) X.left)) (_hM : boundedConstructible (condensedRingObj (integralCondensedRing.{u} l E) X.left) M) : (CompactSpace X.left ∧ IsLocallyNoetherian X.left ∧ QuasiSeparatedSpace X.left) ∧ IsDiscreteValuationRing (Padic.coefficientExtensionIntegers l E) ∧ IsField (Padic.coefficientExtensionRing l E 1) ∧ Finite (Padic.coefficientExtensionRing l E 1) ∧ CharP (Padic.coefficientExtensionRing l E 1) l ∧ GeneralLfpAdicInput.HasResidueComparison l E X.left ∧ (∀ q : ℤ, IsConstantModelConstructible (integralCondensedRing.{u} l E) X.left ((DerivedCategory.homologyFunctor _ q).obj M)) ∧ ∃ c : Scheme.adicLisseCompletedRing X.left (IntegralConstantCompletion.ideal l E) ≅ ModuleObjectRingedComparison.ring.{u} (integralCondensedRing.{u} l E) X.left, GeneralLfpAdicInput.IsNormalized l E X.left c ∧ (∀ d, GeneralLfpAdicInput.IsNormalized l E X.left d → d = c) ∧ ∃ P : CochainComplex (ModuleObjectRingedComparison.Internal.{u} (integralCondensedRing.{u} l E) X.left) ℤ, Nonempty ((DerivedCategory.Q.{u + 1, u + 1, u + 2} (C := ModuleObjectRingedComparison.Internal.{u} (integralCondensedRing.{u} l E) X.left)).obj P ≅ M) ∧ GeneralLfpAdicInput.IsAdicRepresentative.{u} l E X.left ((GeneralLfpAdicInput.transport.{u} l E X.left c).obj P)",
+  "branch": "newtargets-dag",
+  "by": "Q83",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ab7b6adb8",
+  "group": "Q83",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion matches the node. Hypotheses: k of characteristic p≠ℓ, X over Spec k with the dc-setting binders, the general boundedConstructible on module objects over integralCondensedRing. Conclusions: CompactSpace ∧ IsLocallyNoetherian ∧ QuasiSeparatedSpace; DVR and finite residue field of characteristic ℓ; B≅lim stated as ∃c normalized on constant scalars with ∀d normalized → d=c (true, not tautological); HasResidueComparison over the pinned FiniteDiscreteOrdinary.Encoding; scalar-model constructibility of every H^q; and ∃P with Q P≅M and IsSfbAdicConstructible of the transport (complexForward ⋙ restrictScalars c), exactly the predicate of the landed criterion (completeness = IsLocallyDerivedRingedIdealComplete via ConstantCompletion.IsComplete, bounded constructible étale C, derived residue iso, one Tor interval for all N). Statement verbatim, docstrings carry all five proof steps, only the main sorry, stmt_deps unchanged. Advisories: owner nodes outside stmt_deps (adic-stratified-perfect-data, internal-section-total-comparison, encoding, integralCondensedRing from a theorem module); unused def-pe-etale-constructible-module declaration (global and affine-local agree for qcqs X); QuasiSeparatedSpace vs the QuasiSeparated record; Nonempty Monoidal not pinned. No compile run (no change)."
+ }
+}

@@ -11,10 +11,10 @@ public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.Algebra.Module.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 
+import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackStalk
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import WeilConjectures.Mathlib.RingTheory.Finiteness.Descent
-import Sheaf.AlgebraicGeometry.FinitePresentationOfFiniteLocallyOfFinitePresentation
 import Sheaf.AlgebraicGeometry.FinitePushforwardModuleFinitePresentation
-import Sheaf.RingTheory.FiniteExtensionModuleFinitePresentation
 import Sheaf.TraceFormula.EtaleModuleFinitePresentationLocal
 
 /-! # Finite presentation across elementary module dévissage
@@ -32,6 +32,39 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme.Modules
 
+/-- Stalk finite presentation ascends and descends along a flat scheme morphism.
+Source: Stacks Project, Tag 057T, stalkwise proof, and Tag 0098.
+Identify the pullback stalk with extension of scalars. A flat local ring map is
+faithfully flat; tensor base change preserves finite presentation and faithfully
+flat descent reflects it. -/
+private theorem finitePresentation_stalk_iff_flat_pullback
+    {T U : Scheme.{u}} (p : T ⟶ U) [Flat p] (t : T) (M : U.Modules) :
+    Module.FinitePresentation (U.presheaf.stalk (p t))
+        ((RingedSpace.moduleStalkFunctor U.toRingedSpace (p t)).obj M) ↔
+      Module.FinitePresentation (T.presheaf.stalk t)
+        ((RingedSpace.moduleStalkFunctor T.toRingedSpace t).obj
+          ((tensorPullback p).obj M)) := by
+  algebraize [(p.stalkMap t).hom]
+  have : Module.FaithfullyFlat (U.presheaf.stalk (p t)) (T.presheaf.stalk t) :=
+    @Module.FaithfullyFlat.of_flat_of_isLocalHom _ _ _ _ _ _ _
+      (Flat.stalkMap p t) (p.toLRSHom.prop t)
+  obtain ⟨e, _⟩ := exists_tensorPullback_stalk_iso p t
+  have he := (e.app M).toLinearEquiv.finitePresentation_iff
+  constructor
+  · intro hM
+    have := hM
+    apply he.mpr
+    change Module.FinitePresentation (T.presheaf.stalk t)
+      (TensorProduct (U.presheaf.stalk (p t)) (T.presheaf.stalk t)
+        ((RingedSpace.moduleStalkFunctor U.toRingedSpace (p t)).obj M))
+    infer_instance
+  · intro hM
+    have : Module.FinitePresentation (T.presheaf.stalk t)
+        (TensorProduct (U.presheaf.stalk (p t)) (T.presheaf.stalk t)
+          ((RingedSpace.moduleStalkFunctor U.toRingedSpace (p t)).obj M)) := he.mp hM
+    exact Module.FinitePresentation.of_finitePresentation_tensorProduct_of_faithfullyFlat
+      (B := T.presheaf.stalk t)
+
 /-- In elementary étale module dévissage, finite presentation of the structural morphism
 makes the finite map finitely presented. Finite presentation near the three marked points
 is equivalent, as is finite presentation of the three stalks (a separate equivalence).
@@ -40,26 +73,27 @@ Source: Stacks Project, flat.tex, Tag 057T, lemma-devissage-finite-presentation
 (blueprint: lem-trf-elementary-devissage-finite-presentation).
 
 Proof:
-1. The composites Z' → S and Y' → S are locally of finite presentation, by composition
-   of the closed immersion, étale maps, and smooth map with f. Finite-presentation
-   permanence makes π locally of finite presentation; finiteness makes it quasi-compact
-   and separated, hence of finite presentation
-   (lem-trf-finite-morphism-finite-presentation).
-2. Introduce finite presentation of g^*F near x'. Pullback preserves finite presentation;
-   conversely g is open and its restriction to any neighbourhood of x' covers its image.
-   Faithfully flat descent gives equivalence with finite presentation of F near x
-   (lem-trf-etale-module-finite-presentation-local).
-3. The given isomorphism i_*G ≅ g^*F and finite-pushforward finite-presentation comparison
-   for i give the equivalence with G near z'. Apply that comparison to π, using its
-   finite presentation and singleton fibre, to compare with π_*G near π z'
+1. Use g ≫ f = f' ≫ e and finite-presentation cancellation to obtain local finite
+   presentation of f'. Use i ≫ f' = π ≫ h and cancellation along the smooth map h
+   to obtain local finite presentation of π. Finiteness gives quasi-compactness
+   and quasi-separatedness.
+2. The closed immersion i has singleton fibres by injectivity. Apply the existing
+   finite-pushforward comparison to i and to π, obtaining both neighbourhood and
+   stalk comparisons in each case
    (lem-trf-finite-pushforward-module-finite-presentation).
-4. On stalks, the étale local ring map is faithfully flat, so finite presentation descends
-   and ascends (lem-trf-finite-presentation-module-descent-flat-local). The closed immersion
-   gives a surjective finitely presented local ring map; the finite finitely presented map
-   π with singleton fibre gives a finite finitely presented map of local rings.
-   Finite-extension module comparison and i_*G ≅ g^*F identify the three conditions
-   (lem-trf-finite-extension-module-finite-presentation and
-   lem-trf-finite-pushforward-module-finite-presentation). -/
+3. Apply the étale-local neighbourhood comparison to g and F. Restrict the given
+   isomorphism i_*G ≅ g^*F to every open neighbourhood of x', and transport finite
+   presentation across these isomorphisms. Compose with the i-comparison from
+   step 2 to compare F near x with G near z'. The π-comparison gives the next
+   neighbourhood equivalence (lem-trf-etale-module-finite-presentation-local).
+4. The proved private flat-pullback helper identifies the pullback stalk with
+   extension of scalars along the faithfully flat local ring map. Tensor base
+   change preserves finite presentation, and faithfully flat descent reflects it
+   (lem-weil-pbc-module-stalk-pullback and
+   lem-trf-finite-presentation-module-descent-flat-local).
+5. Apply this helper to g, transport stalk finite presentation through the given
+   sheaf isomorphism, and compose with the i-stalk comparison from step 2.
+   The π-stalk comparison supplies the last equivalence. -/
 theorem elementary_devissage_finite_presentation
     {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f]
     (F : X.Modules) (_hF : F.IsQuasiCoherentFiniteType) (x : X)
@@ -103,6 +137,46 @@ theorem elementary_devissage_finite_presentation
       Module.FinitePresentation (Y'.presheaf.stalk (π z'))
         ((RingedSpace.moduleStalkFunctor Y'.toRingedSpace (π z')).obj
           ((pushforward π).obj G))) := by
-  sorry
+  have : F.IsQuasicoherent := _hF.1
+  have : G.IsQuasicoherent := _hG.1
+  have := SmoothOfRelativeDimension.smooth n h
+  have : LocallyOfFinitePresentation (f' ≫ e) := by
+    rw [← _hfg]
+    infer_instance
+  have : LocallyOfFinitePresentation f' := locallyOfFinitePresentation_of_comp f' e
+  have : LocallyOfFinitePresentation (π ≫ h) := by
+    rw [← _hπ]
+    infer_instance
+  have : LocallyOfFinitePresentation π := locallyOfFinitePresentation_of_comp π h
+  have hifibre : i ⁻¹' ({i z'} : Set X') = ({z'} : Set Z') := by
+    ext z
+    simp only [Set.mem_preimage, Set.mem_singleton_iff]
+    exact i.isEmbedding.injective.eq_iff
+  have hiFP := finitePresentation_near_and_stalk_iff_pushforward_of_singleton_fibre
+    i z' hifibre G
+  have hpFP := finitePresentation_near_and_stalk_iff_pushforward_of_singleton_fibre
+    π z' _hfibre G
+  obtain ⟨a⟩ := _hiso
+  have hnear :
+      (∃ U : X'.Opens, x' ∈ U ∧
+        (((pushforward i).obj G).over U).IsFinitePresentation) ↔
+      (∃ U : X'.Opens, x' ∈ U ∧
+        (((tensorPullback g).obj F).over U).IsFinitePresentation) := by
+    constructor
+    · rintro ⟨U, hxU, hU⟩
+      exact ⟨U, hxU, (SheafOfModules.isFinitePresentation (X'.ringCatSheaf.over U)).prop_of_iso
+        ((SheafOfModules.overFunctor X'.ringCatSheaf U).mapIso a) hU⟩
+    · rintro ⟨U, hxU, hU⟩
+      exact ⟨U, hxU, (SheafOfModules.isFinitePresentation (X'.ringCatSheaf.over U)).prop_of_iso
+        ((SheafOfModules.overFunctor X'.ringCatSheaf U).mapIso a.symm) hU⟩
+  have hstalk := ((RingedSpace.moduleStalkFunctor X'.toRingedSpace x').mapIso a).toLinearEquiv
+      |>.finitePresentation_iff
+  have hetale := finitePresentation_stalk_iff_flat_pullback g x' F
+  rw [_hg] at hetale
+  rw [_hi] at hiFP
+  exact ⟨⟨inferInstance, inferInstance, inferInstance⟩,
+    (etale_module_finite_presentation_local g x x' _hg F).trans
+      (hnear.symm.trans hiFP.1.symm), hpFP.1,
+    hetale.trans (hstalk.symm.trans hiFP.2.symm), hpFP.2⟩
 
 end AlgebraicGeometry.Scheme.Modules

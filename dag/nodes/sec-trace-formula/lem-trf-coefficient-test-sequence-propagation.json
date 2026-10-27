@@ -1,0 +1,455 @@
+{
+ "id": "lem-trf-coefficient-test-sequence-propagation",
+ "kind": "statement",
+ "title": "Propagation of coefficient data through finite tests and smooth pullback",
+ "statement": "Let $X\\hookrightarrow Z$ be a reduced closed finite-type $\\mathbf Q$-scheme in a smooth scheme [def-pc-reduced-scheme] [def-weil-closed-immersion] [def-weil-finite-type-morphism] [def-sbc-smooth-morphisms]. Fix $a\\in X$, $H_0=H_X(a)$ [def-trf-hilbert-samuel-invariant], a neighbourhood on which $H_X\\le_{\\rm lex}H_0$, and supplied regular Hilbert coefficient data on a smooth closed $N\\hookrightarrow Z$ [def-trf-regular-hilbert-coefficient-datum], with jet bound $Q\\ge\\max_i d_i-1$ (vacuous for an empty vertex list). For the positive weights $m_{i\\gamma}=d_i-|\\gamma|$, let $b$ be a positive common multiple and $I=\\sum(c_{i\\gamma}^{b/m_{i\\gamma}})$, or $(I,b)=(0,1)$ for an empty vertex list [pqf-def-coherent] [def-trf-marked-ideal-order]. Write $e:U\\to Z$ for the supplied datum\\textquotesingle s etale chart, $a_U\\in U$ for its distinguished point, and $j:N\\hookrightarrow U$ for its coefficient support. There exists one open $V\\subseteq U$ containing $a_U$ such that all assertions below hold for the initial ambient $V$, embedded scheme $X_V=X\\times_ZV$, coefficient support $N_V=j^{-1}(V)$, and the restrictions of $I$ and every coefficient to $N_V$. All finite test sequences and their clauses start on this same restricted chart. Start with empty ordered test boundary. A finite test sequence allows (i) a blowup of a smooth center in the retaining-level locus, having normal crossings with the boundary, with strict transform of $X,N$ and ideal transform $e^{-b}\\sigma^*I$; (ii) product with $\\mathbf A^1$, using ordinary pullbacks and appending the zero section; (iii) blowup of the intersection of two distinct boundary components, using ordinary pullbacks of $X,N,I$. Each blowup retains the ordered strict transforms and appends the new exceptional divisor [def-nagata-global-blowup] [def-nagata-strict-transform] [def-trf-hilbert-samuel-presentation].\nFor every such finite sequence of length $s$, all these transforms are defined. If $\\ell_j$ is the number of line products in its prefix of length $j\\le s$, then\n$$\\operatorname{cosupp}(I_j,b)=\\{x\\in X_j:H_{X_j}(x)=\\Lambda^{\\ell_j}H_0\\}$$\nas subsets of the current ambient scheme. Every boundary component is transverse to the current $N_j$, its equation being a coordinate on $N_j$ in coordinates $(W,Z)$ adapted to the coefficient datum. At the retaining-level points the transformed coefficient data satisfy the same five division and Jacobian conditions; for (iii) the coefficient functions are ordinary pullbacks, and the Hilbert--Samuel level is unchanged, while (ii) replaces it by $\\Lambda H$. At every prefix the two loci permit exactly the same next smooth centers, with the same labelled boundary; hence the marked datum is a presentation in the finite-test sense. Empty cosupport and centers which remove a component are allowed.\nFor a smooth map $f:Z_1\\to V$ of constant relative dimension $r\\ge0$ and $X_1=X_V\\times_VZ_1$, one has $H_{X_1}(y)=\\Lambda^rH_{X_V}(g(y))$, where $g:X_1\\to X_V$ is the cartesian projection. The pulled-back coefficient data and ideal are a presentation of $\\Lambda^rH_0$, with the same finite-test assertions. Moreover $\\Lambda^r$ preserves and reflects lexicographic equality and inequalities of sequences. These assertions commute with open restriction and hold separately on each relative-dimension piece; they do not identify unsummed numerical levels for $r>0$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VIII 2.3.11--2.3.13, pp.93--94; BM 1997 Definition 6.2, formulas (6.1), Theorems 7.20--7.21; BMT 5.2, 6.2--6.3. Boundary/test induction and smooth base change from old proof steps 5,7. No Stacks tag states this finite-test propagation theorem."
+ },
+ "stmt_deps": [
+  "def-nagata-global-blowup",
+  "def-nagata-strict-transform",
+  "def-pc-reduced-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-trf-hilbert-samuel-invariant",
+  "def-trf-hilbert-samuel-presentation",
+  "def-trf-marked-ideal-order",
+  "def-trf-regular-hilbert-coefficient-datum",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "pqf-def-coherent",
+  "def-trf-etale-coordinate-flag"
+ ],
+ "proof": [
+  {
+   "text": "Put $L_j=\\Lambda^{\\ell_j}H_0$ and let $S_j$ be the coefficient order locus. Induct on prefixes with: $H_{X_j}\\le_{\\rm lex}L_j$ everywhere, $S_j=\\{H_{X_j}=L_j\\}$, the five conditions on $S_j$, the coefficient-power identity for $I_j$, and the labelled coordinate boundary. Retain also the following boundary history, including points below $L_j$. A boundary germ is either a free-coordinate germ, obtained from line zero sections by boundary charts over an earlier $X$, or lies over a center of an earlier type-(i) blowup. In the latter case retain its transformed generators, their supported multiplication identities, the identities (4),(5), and their pure-transverse degree-$d_i$ values from that earlier $S$-point, as constructed in steps 2--5. The history is empty initially. The supplied datum gives the upper bound and conditions, and [lem-trf-common-power-hilbert-marking] gives the initial cosupport identity and coherence, including the empty vertex convention. The supplied jet bound is $Q\\ge\\max_i d_i-1$, as required by the marking theorem and by the degree-$m$ use of (5) in step 10.",
+   "uses": [
+    "lem-trf-common-power-hilbert-marking",
+    "def-trf-regular-hilbert-coefficient-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.8--2.3.17, printed pp.93--95: referral to BM/BMT, not a proof of coefficient transforms; agent-written boundary-history and supported-division argument"
+   }
+  },
+  {
+   "text": "Here is the information stored at a source point $a\\in S_j$. Write $A_i=\\operatorname{in}_{d_i}f_i$. The quotient supports $\\Delta_i$ impose conditions only on transverse exponents, since all vertices have zero $W$ components. For each degree prefix, arrange its homogeneous division matrix by increasing complementary-variable degree. It is block triangular, with diagonal blocks the division matrices for the restrictions of $A_i$ to the prefix essential transverse variables (all other variables set to zero). Thus these pure-transverse forms have homogeneous division for every prefix. By (3), each $Z^\\beta f_i$ has a supported expansion $\\sum q_h f_h$. Store these identities for all $i,\\beta$ (not just ideal generation). Conditions (4),(5) are identities of series at $a$, not just vanishing of their values at $a$; they are stored too. All source series will be substituted through parameters vanishing at this same source point. No translation of an arbitrary infinite series to a different point is being used. The homogeneous division and filtration estimates used here are those of [lem-trf-homogeneous-continuous-formal-division].",
+   "uses": [
+    "def-trf-regular-hilbert-coefficient-datum",
+    "lem-trf-homogeneous-continuous-formal-division"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.8--2.3.17, printed pp.93--95: referral to BM/BMT, not a proof of coefficient transforms; agent-written boundary-history and supported-division argument"
+   }
+  },
+  {
+   "text": "For a type-(i) blowup the current center lies in $S_j$, so [lem-trf-marked-controlled-blowup-charts] supplies the smooth ambient and coefficient transforms, regular controlled ideal, and labelled transverse boundary. [lem-trf-common-power-hilbert-marking] gives $H_{X_{j+1}}\\le_{\\rm lex}L_j$ over the center, equality exactly on the controlled cosupport, the five conditions there, and exclusion of equality from charts missing $N_{j+1}$. Outside the center nothing changes. Its regular coefficients are $c'_{i\\gamma}=e^{|\\gamma|-d_i}\\sigma^*c_{i\\gamma}$ and their powers generate $e^{-b}\\sigma^*I_j$. This proves the ordinary part of the invariant with $L_{j+1}=L_j$. To retain the additional history over the entire exceptional fibre, including lower-level points, use the constructions in the next two steps. Removed components and empty charts are exactly those permitted in the chart theorem.",
+   "uses": [
+    "lem-trf-marked-controlled-blowup-charts",
+    "lem-trf-common-power-hilbert-marking"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.8--2.3.17, printed pp.93--95: referral to BM/BMT, not a proof of coefficient transforms; agent-written boundary-history and supported-division argument"
+   }
+  },
+  {
+   "text": "Fix $a$ in this center, write $P=(Y,Z)$, and work on a chart meeting $N'$: $Y_h=e$, $Y_k=e(\\eta_k+U_k)$, $Z=eZ'$, with unchanged center parameters. [lem-trf-coordinate-blowup-division-generators] says that the actual saturated ideal is generated by $f_i'=e^{-d_i}\\sigma^*f_i$, at all points of the chart over $a$. For the stored expansion $Z^\\beta f_i=\\sum q_h f_h$, its $P$-order is $v=d_i+|\\beta|$. The same node gives $\\operatorname{ord}_Pq_h\\ge v-d_h$. Hence\n$$(Z')^\\beta f_i'=\\sum_h(e^{d_h-v}\\sigma^*q_h)f_h'$$\nhas regular coefficients. They retain support $\\Delta_h$, since only coefficient variables were mixed and the transverse variables were scaled without translation. These are supported multiplication identities on the whole fibre over $a$, whether or not its points retain order. Subsequent ordinary substitutions of coefficient variables preserve them. Source parameters still vanish at $a$, so all substituted series converge in the current Taylor ring. These identities are stronger than the equality-locus conditions used in the returned proof. On charts missing $N\\prime$, the same node still gives generation of the saturated ideal; the supported identities are needed only on charts meeting $N\\prime$.",
+   "uses": [
+    "lem-trf-coordinate-blowup-division-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.8--2.3.17, printed pp.93--95: referral to BM/BMT, not a proof of coefficient transforms; agent-written boundary-history and supported-division argument"
+   }
+  },
+  {
+   "text": "On the same charts, differentiation gives $g_j'=e^{-1}\\sigma^*g_j$ and $\\partial_{Z'_k}g_j'=\\sigma^*(\\partial_{Z_k}g_j)$. Thus (4) holds as an ideal-membership identity near $N'$ with the source invertible Jacobian on the exceptional fibre, without assuming equality of orders. Likewise $\\partial_{Z'^\\ell}^{\\delta}f_i'=e^{|\\delta|-d_i}\\sigma^*(\\partial_{Z^\\ell}^{\\delta}f_i)$ lies in $(Z'^\\ell)$ after inverting $e$. It is regular and $(Z'^\\ell)$ is $e$-saturated, so the membership holds before inversion. This retains (5). On $e=0$ the degree-$d_i$ pure-$Z'$ part is precisely $A_i(0,Z')$: in $c'_{i\\gamma}=e^{|\\gamma|-d_i}\\sigma^*c_{i\\gamma}$, the terms with $|\\gamma|=d_i$ evaluate at $a$, and higher transverse degrees vanish. Low coefficients may survive and lower the order. In charts missing $N'$, the same derivative identities evaluated on the projective transverse direction give the corresponding nonzero constant rows; the first nonzero transverse block forces an order drop. This records the source of those rows for step 10. Taylor compatibility and contraction to regular models use [lem-trf-implicit-taylor-coordinate-calculus].",
+   "uses": [
+    "lem-trf-implicit-taylor-coordinate-calculus",
+    "def-trf-regular-hilbert-coefficient-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.8--2.3.17, printed pp.93--95: referral to BM/BMT, not a proof of coefficient transforms; agent-written boundary-history and supported-division argument"
+   }
+  },
+  {
+   "text": "For type (ii), keep $Z$ transverse and append a free coordinate $t$ to $W$. The line-product assertion of [lem-trf-formal-coefficient-transform-criterion] takes ordinary pullbacks of the coefficients and retains their division and Jacobian conditions. Its formula for the Hilbert function is one summation. The Taylor-jet comparison of [lem-trf-jet-diagram-hilbert-control] interprets this formula as the extended function at every scheme point, including a generic point of a fibre: one retains the relative Taylor variable even there. Thus the new level is $\\Lambda L_j$ and the coefficient order locus equals its equality locus. The common-power assertion identifies this order locus with the cosupport of the ordinarily pulled-back ideal. Old boundary equations remain $W$ coordinates and the appended zero section has equation $t$; these are distinct coordinates on $N_j\\times\\mathbf A^1$. This gives all induction assertions with $\\ell_{j+1}=\\ell_j+1$. Ordinary pullback also retains every stored identity. The new zero section is a free-coordinate boundary until a later nontrivial type-(i) center is encountered. The upper bound follows from smooth pullback and order reflection of summation (step 13).",
+   "uses": [
+    "lem-trf-formal-coefficient-transform-criterion",
+    "lem-trf-jet-diagram-hilbert-control",
+    "lem-trf-common-power-hilbert-marking"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VIII 2.3.11--2.3.13, pp.93--94; agent assembly of the cited local coefficient-transform statements"
+   }
+  },
+  {
+   "text": "For a type-(iii) test, trace the germ of its two boundary components back through the prefix. Initially there is no boundary. A line introduces an independent zero-section coordinate; a boundary blowup replaces two such coordinates by $e,eu$ and introduces another coordinate component. As long as no type-(i) exceptional locus is encountered, all these charts are products over the preceding $X$: their coordinate rings are $A[e,u,\\ldots]$ over its affine ring $A$. Thus this case is smooth over that earlier $X$, with the same accumulated relative dimension, and cannot create a new retaining-level point over a lower-level point. If a type-(i) exceptional locus is encountered, its center was in the earlier $S$. Choose the last such type-(i) operation affecting the germ. Every intervening type-(i) map is an isomorphism at the germ, and the remaining operations are line products and substitutions in boundary coordinates. The certificates of steps 4--5 therefore apply over that earlier $S$-point, even if the current image is below $L_j$. This dichotomy is preserved when the new exceptional component is appended. It does not assert that the present boundary intersection lies in $S_j$.",
+   "uses": [
+    "def-trf-hilbert-samuel-presentation",
+    "lem-trf-jet-diagram-hilbert-control",
+    "lem-trf-logarithmic-differential-transform"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.8--2.3.17, printed pp.93--95: referral to BM/BMT, not a proof of coefficient transforms; agent-written boundary-history and supported-division argument"
+   }
+  },
+  {
+   "text": "Write the current two boundary equations as $W_1,W_2$. [lem-trf-permissible-coordinate-chart] gives the two charts $W_1=e,W_2=eu$ and $W_2=e,W_1=ev$, with unchanged transverse variables. Thus $N'=Z=0$ is the smooth cartesian pullback and the surviving boundary equations and $e$ are distinct coordinates on it. Use total pullback of the ideal of $X$ and ordinary pullback of all $c_{i\\gamma}$, with no exceptional division. For a history germ of the second kind in step 7, the ideal is generated by the pulled-back $f_i$: this was true on the entire earlier type-(i) fibre by step 4 and ideal generation survives ordinary pullback. Identities (4),(5) survive these coefficient-variable substitutions identically. At a new coefficient-order point all low-order terms vanish. The pure-transverse degree-$d_i$ forms are still the earlier $A_i(0,Z)$, including when orders at the intermediate image had dropped. The block-triangular matrix argument of step 2 now gives (1),(2) for every prefix at this new point. No assertion of the formal criterion over a non-equality source point is used.",
+   "uses": [
+    "lem-trf-permissible-coordinate-chart",
+    "lem-trf-homogeneous-continuous-formal-division"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.8--2.3.17, printed pp.93--95: referral to BM/BMT, not a proof of coefficient transforms; agent-written boundary-history and supported-division argument"
+   }
+  },
+  {
+   "text": "It remains to prove (3) at such a new point; ideal generation alone would not suffice. The pulled-back identities of step 4 express every $Z^\\beta f_i$ as a supported sum. Multiplication by any coefficient-variable monomial preserves support because $\\Delta_h$ has no restriction in those variables. Thus polynomial multiples of the $f_i$ are supported sums. At the new order point step 8 supplies the homogeneous basis hypothesis of [lem-trf-homogeneous-continuous-formal-division]. Its supported-sum space is closed in the maximal-ideal topology. Approximate any formal multiplier by polynomials; continuity of multiplication and that closedness show that every element of the generated ideal is a supported sum. Since this generated ideal is the actual total-pullback Taylor ideal, (3) holds. Together with step 8 and the identities of step 5, this proves all five conditions at every new coefficient-order point, including points above a current image outside $S_j$. The same division theorem now gives its Hilbert function $H_D=L_j$. For a free-coordinate germ, the conclusion instead follows directly from the smooth product description in step 7.",
+   "uses": [
+    "lem-trf-homogeneous-continuous-formal-division",
+    "lem-trf-jet-diagram-hilbert-control"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.8--2.3.17, printed pp.93--95: referral to BM/BMT, not a proof of coefficient transforms; agent-written boundary-history and supported-division argument"
+   }
+  },
+  {
+   "text": "We also need the bound on the whole neighbourhood. At a history point of $N'$ outside the new order locus, take the first degree block with a dropping generator, and let $m<d_0$ be a least degree of a drop in that block. Earlier blocks retain their orders; their pure-transverse forms and the triangular matrix argument give prefix division. Up through degree $m$, their supported columns number exactly the monomials of $D$ in those degrees, since later vertices have degree at least $d_0$. They give $H(t)\\le H_D(t)$ for $t\\le m$. Identity (5) makes the degree-$m$ form of a dropping generator have zero coefficients on the prefix diagram. It is a nonzero remainder, hence independent of those columns by homogeneous uniqueness. Thus $H(m)<H_D(m)$, so $H<_{\\rm lex}L_j$. Away from $N'$, use the first nonzero transverse block in step 5: a derivative of order $d_i-1$ is a unit, forcing a drop in that block. If an earlier block already drops use it instead. Earlier retained transverse blocks have zero projective direction, so the identical prefix-column count applies. In a chart whose pivot is transverse, that pivot belongs to a dropping block; all earlier retained transverse variables remain available. This excludes equality off $N'$ and gives the same strict bound there. These are counts in the actual generated Taylor ideal, using [lem-trf-homogeneous-continuous-formal-division], not a claim that the Hilbert function at a lower-level image was unchanged.",
+   "uses": [
+    "lem-trf-homogeneous-continuous-formal-division",
+    "lem-trf-jet-diagram-hilbert-control"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.8--2.3.17, printed pp.93--95: referral to BM/BMT, not a proof of coefficient transforms; agent-written boundary-history and supported-division argument"
+   }
+  },
+  {
+   "text": "Steps 7--10 show $H\\le_{\\rm lex}L_j$ globally after type (iii), and equality exactly at the new coefficient-order locus on $N'$. The product- and sum-order formulas in [lem-trf-logarithmic-differential-transform] identify that locus with cosupport: $\\operatorname{ord}(c^{b/m})=(b/m)\\operatorname{ord}c$ and the order of a finitely generated sum is the minimum. Their powers are exactly the ordinary pullback of $I_j$. The boundary and all historical identities have been retained, so the strengthened induction closes, with $L_{j+1}=L_j$. In particular, before applying common-power marking to a later type-(i) center, the five conditions are available at every point of that center. If its full datum requires a pointwise, rather than lexicographic, upper neighbourhood, [lem-trf-extended-hilbert-local-upper-bound] gives one at each such equality point; its finite-value and finite-module hypotheses are supplied for these Taylor ideals in that node and [lem-trf-jet-diagram-hilbert-control]. This is a local application around the center, not deletion of lower-level boundary points from the invariant.",
+   "uses": [
+    "lem-trf-logarithmic-differential-transform",
+    "lem-trf-extended-hilbert-local-upper-bound",
+    "lem-trf-jet-diagram-hilbert-control"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.8--2.3.17, printed pp.93--95: referral to BM/BMT, not a proof of coefficient transforms; agent-written boundary-history and supported-division argument"
+   }
+  },
+  {
+   "text": "The three cases complete induction for every finite prefix, and include the empty schemes arising from component removal. At any prefix, containment of a proposed next smooth center in one of the two equal subsets is equivalent to containment in the other. The ambient scheme and ordered boundary are the same, so its normal-crossings condition is literally the same condition. The transform constructions have just been supplied for every allowed next test. These are exactly the recursive finite-depth predicates in [def-trf-hilbert-samuel-presentation]; quantifying over all depths proves the presentation assertion, including prefixes with empty cosupport.",
+   "uses": [
+    "def-trf-hilbert-samuel-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VIII 2.3.11--2.3.13, pp.93--94; agent assembly of the cited local coefficient-transform statements"
+   }
+  },
+  {
+   "text": "For any two sequences $F,G$, if $n$ is their first differing index, their partial sums agree below $n$ and their difference at $n$ is $F(n)-G(n)$. Consequently $\\Lambda$ preserves the first differing index and the direction of its inequality. It is injective: recover $F(0)$ from its zeroth partial sum and $F(n+1)$ by subtracting consecutive partial sums. Iterating gives preservation and reflection of equality, strict lexicographic inequality and non-strict lexicographic inequality for $\\Lambda^r$, including $r=0$. These are the summation and lexicographic conventions of [def-trf-hilbert-samuel-invariant].",
+   "uses": [
+    "def-trf-hilbert-samuel-invariant"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VIII 2.3.11--2.3.13, pp.93--94; agent assembly of the cited local coefficient-transform statements"
+   }
+  },
+  {
+   "text": "Let $f:Z_1\\to Z$ be smooth of constant relative dimension $r$. By [sbc-thm-etale-local-normal-form], locally $f$ factors through an etale map to $\\mathbf A_Z^r$; the number of free coordinates equals $r$ on this piece. Apply the free-variable and etale Taylor comparisons of [lem-trf-jet-diagram-hilbert-control]: the Taylor ideal of $X_1$ is obtained by coefficient-field extension and adjoining $r$ free variables, so $H_{X_1}(y)=\\Lambda^r H_X(f(y))$. Step 13 reflects equality, hence the inverse image of the original level is exactly the level $\\Lambda^rH_0$. The coefficient and residue-extension clauses of [lem-trf-formal-coefficient-transform-criterion] give the pulled-back coefficients, homogeneous division bases and unchanged transverse Jacobians. This yields supplied coefficient data with the same weights on the smooth pullback, and the common-power ideal is its actual pullback because finite sums and powers commute with ring homomorphisms. Repeat the strengthened induction of steps 1--12 for these data on $Z_1$: the induction treats arbitrary next centers upstairs, and does not require such centers to descend to $Z$. Therefore the pulled-back datum has all finite-test assertions. Start its test boundary empty. Free-coordinate histories remain products after this base change; every later type-(i) source is an upstairs equality point, so steps 4--5 construct the same certificates there. Thus restarting the induction does carry the strengthened invariant.",
+   "uses": [
+    "sbc-thm-etale-local-normal-form",
+    "lem-trf-jet-diagram-hilbert-control",
+    "lem-trf-formal-coefficient-transform-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VIII 2.3.11--2.3.13, pp.93--94; agent assembly of the cited local coefficient-transform statements"
+   }
+  },
+  {
+   "text": "Every construction and every displayed identity is local in the ambient scheme. The etale-localization clauses of the coefficient criterion and jet comparison therefore give agreement on overlaps and under open restriction. If the relative dimension is not constant, apply the preceding argument on each relative-dimension piece. At dimension $r>0$ the asserted level is $\\Lambda^rH_0$; the injectivity argument compares these summed levels and does not replace them by $H_0$.",
+   "uses": [
+    "lem-trf-formal-coefficient-transform-criterion",
+    "lem-trf-jet-diagram-hilbert-control"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VIII 2.3.11--2.3.13, pp.93--94; agent assembly of the cited local coefficient-transform statements"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-hilbert-samuel-invariant",
+  "def-trf-hilbert-samuel-presentation",
+  "def-trf-regular-hilbert-coefficient-datum",
+  "lem-trf-common-power-hilbert-marking",
+  "lem-trf-coordinate-blowup-division-generators",
+  "lem-trf-extended-hilbert-local-upper-bound",
+  "lem-trf-formal-coefficient-transform-criterion",
+  "lem-trf-homogeneous-continuous-formal-division",
+  "lem-trf-implicit-taylor-coordinate-calculus",
+  "lem-trf-jet-diagram-hilbert-control",
+  "lem-trf-logarithmic-differential-transform",
+  "lem-trf-marked-controlled-blowup-charts",
+  "lem-trf-permissible-coordinate-chart",
+  "sbc-thm-etale-local-normal-form"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 2.3.8--2.3.17, printed pp.93--95: referral to BM/BMT, not a proof of coefficient transforms; agent-written boundary-history and supported-division argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coefficient ideals preserve Hilbert Samuel equality loci through finite test sequences of blowups line products and exceptional divisor intersection blowups",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Ideal.mul_add_mem_pow_succ_unique\", \"module\": \"Mathlib/RingTheory/Ideal/Norm/AbsNorm\", \"type\": \"∀ {S : Type u_1} [inst : CommRing S] {P : Ideal S} [P_prime : P.IsPrime] [IsDedekindDomain S],\\n  P ≠ ⊥ →\\n    ∀ {i : ℕ} (a d d' e e' : S),\\n      a ∉ P ^ (i + 1) → e ∈ P ^ (i + 1) → e' ∈ P ^ (i + 1) → a * d + e - (a * d' + e') ∈ P ^ (i + 1) → d - d' ∈ P\", \"doc\": \"In a Dedekind domain $ S $, for a nonzero prime ideal $ P $ and any integer $ i \\\\geq 0 $, if $ a \\\\notin P^{i+1} $, $ e, e' \\\\in P^{i+1} $, and $ a d + e - (a d' + e') \\\\in P^{i+1} $, then $ d - d' \\\\in P\"}\n  {\"name\": \"PrimeSpectrum.exist_ltSeries_mem_one_of_mem_last\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/LTSeries\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] (p : LTSeries (PrimeSpectrum R)) {x : R},\\n  x ∈ (RelSeries.last p).asIdeal →\\n    ∃ q,\\n      x ∈ (q.toFun 1).asIdeal ∧\\n        p.length = q.length ∧ RelSeries.head p = RelSeries.head q ∧ RelSeries.last p = RelSeries.last q\", \"doc\": \"For any strict order relation series $ p $ in the prime spectrum of a commutative semiring $ R $, if an element $ x \\\\in R $ belongs to the last ideal of $ p $, then there exists another strict order r\"}\n  {\"name\": \"Ideal.exists_mul_add_mem_pow_succ\", \"module\": \"Mathlib/RingTheory/Ideal/Norm/AbsNorm\", \"type\": \"∀ {S : Type u_1} [inst : CommRing S] {P : Ideal S} [P_prime : P.IsPrime] [IsDedekindDomain S],\\n  P ≠ ⊥ → ∀ {i : ℕ} (a c : S), a ∈ P ^ i → a ∉ P ^ (i + 1) → c ∈ P ^ i → ∃ d, ∃ e ∈ P ^ (i + 1), a * d + e = c\", \"doc\": \"In a Dedekind domain $ S $, for a nonzero prime ideal $ P $, any natural number $ i $, and elements $ a, c \\\\in S $ such that $ a \\\\in P^i $, $ a \\\\notin P^{i+1} $, and $ c \\\\in P^i $, there exist element\"}\n  {\"name\": \"Ideal.exists_pow_inf_eq_pow_smul\", \"module\": \"Mathlib/RingTheory/Filtration\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] (I : Ideal R)\\n  [IsNoetherianRing R] [Module.Finite R M] (N : Submodule R M),\\n  ∃ k, ∀ n ≥ k, I ^ n • ⊤ ⊓ N = I ^ (n - k) • (I ^ k • ⊤ ⊓ N)\", \"doc\": \"Let $R$ be a Noetherian commutative ring, $M$ be a finitely generated $R$-module, $I$ be an ideal of $R$, and $N$ be a submodule of $M$. Then there exists a natural number $k$ such that for all $n \\\\ge\"}\n  {\"name\": \"localCohomology.ideal_powers_initial\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {J : Ideal R} [hR : IsNoetherian R R],\\n  (localCohomology.idealPowersToSelfLERadical J).Initial\", \"doc\": \"Given a Noetherian commutative ring $ R $ and an ideal $ J $, the functor from the opposite category of natural numbers $ \\\\mathbb{N}^{\\\\text{op}} $ to the category of ideals $ J' $ satisfying $ J \\\\subs\"}\n  {\"name\": \"IsDedekindDomain.exists_forall_sub_mem_ideal\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Ideal/Lemmas\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsDedekindDomain R] {ι : Type u_4} {s : Finset ι} (P : ι → Ideal R) (e : ι → ℕ),\\n  (∀ i ∈ s, Prime (P i)) →\\n    (∀ i ∈ s, ∀ j ∈ s, i ≠ j → P i ≠ P j) → ∀ (x : ↥s → R), ∃ y, ∀ (i : ι) (hi : i ∈ s), y - x ⟨i, hi⟩ ∈ P i ^ e i\", \"doc\": \"In a Dedekind domain $ R $, given a finite set of pairwise distinct prime ideals $ P_i $ and corresponding elements $ x_i \\\\in R $, there exists an element $ y \\\\in R $ such that $ y \\\\equiv x_i \\\\pmod{P_\"}\n  {\"name\": \"Ideal.map_mk_comap_factorPow\", \"module\": \"Mathlib/RingTheory/Ideal/Quotient/PowTransition\", \"type\": \"∀ {R : Type u_3} [inst : CommRing R] (I : Ideal R) {a b : ℕ},\\n  0 < a →\\n    ∀ (le : a ≤ b),\\n      Ideal.comap (Ideal.Quotient.factorPow I le) (Ideal.map (Ideal.Quotient.mk (I ^ a)) I) =\\n        Ideal.map (Ideal.Quotient.mk (I ^ b)) I\", \"doc\": \"For natural numbers $a$ and $b$ with $0 < a \\\\leq b$, the preimage of the ideal $I/I^a$ under the canonical quotient map $R/I^b \\\\to R/I^a$ equals the image of $I$ in $R/I^b$, i.e., $(I/I^a)^{-1}(I/I^b)\"}\n  {\"name\": \"PrimeSpectrum.exists_image_comap_of_finite_of_free\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Polynomial\", \"type\": \"∀ {R : Type u_2} {A : Type u_1} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] (f : A) (s : Set A)\\n  [Module.Finite R (A ⧸ Ideal.span s)] [Module.Free R (A ⧸ Ideal.span s)],\\n  ∃ t,\\n    PrimeSpectrum.comap (algebraMap R A) '' (PrimeSpectrum.zeroLocus s \\\\ PrimeSpectrum.zeroLocus {f})\", \"doc\": \"Let $ A $ be a commutative ring over $ R $, $ s \\\\subseteq A $, and $ f \\\\in A $. If the quotient ring $ A / \\\\langle s \\\\rangle $ is a finite and free $ R $-module, then there exists a finite subset $ t \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern general smooth/etale algebra, power-series orders, filtrations, analytic Taylor series or general semicontinuity; none states this coefficient-presentation/jet-history assertion or a one-line generalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transverse boundary induction for marked coefficient ideals commutes with smooth pullback and summation of Hilbert Samuel levels",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PowerSeries.exist_eq_span_eq_ncard_of_X_notMem\", \"module\": \"Mathlib/RingTheory/PowerSeries/Ideal\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal (PowerSeries R)} [I.IsPrime],\\n  PowerSeries.X ∉ I →\\n    ∀ {S : Set R},\\n      Ideal.span S = Ideal.map PowerSeries.constantCoeff I →\\n        S.Finite → ∃ T, I = Ideal.span T ∧ T.Finite ∧ T.ncard = S.ncard\", \"doc\": \"If the formal variable $ X $ is not in the ideal $ I $ of univariate power series over a ring $ R $, and the image of $ I $ under the constant coefficient homomorphism is finitely generated by a set $\"}\n  {\"name\": \"Ideal.quotientToQuotientRangePowQuotSuccAux_mk\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {S : Type v} [inst_1 : CommRing S] (p : Ideal R) (P : Ideal S) [inst_2 : Algebra R S]\\n  {i : ℕ} {a : S} (a_mem : a ∈ P ^ i) (x : S),\\n  p.quotientToQuotientRangePowQuotSuccAux P a_mem (Submodule.Quotient.mk x) =\\n    Submodule.Quotient.mk ⟨(Ideal.Quotient.mk (P ^ Ide\", \"doc\": \"A linear map from the quotient ring $ S/P $ to the quotient module $ (P^i/P^e)/\\\\text{range}(P^{i+1} \\\\to P^i) $, induced by the inclusion of $ P^{i+1} $ in $ P^i $. This map sends elements of $ S $ to \"}\n  {\"name\": \"PrimeSpectrum.exist_ltSeries_mem_one_of_mem_last\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/LTSeries\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] (p : LTSeries (PrimeSpectrum R)) {x : R},\\n  x ∈ (RelSeries.last p).asIdeal →\\n    ∃ q,\\n      x ∈ (q.toFun 1).asIdeal ∧\\n        p.length = q.length ∧ RelSeries.head p = RelSeries.head q ∧ RelSeries.last p = RelSeries.last q\", \"doc\": \"For any strict order relation series $ p $ in the prime spectrum of a commutative semiring $ R $, if an element $ x \\\\in R $ belongs to the last ideal of $ p $, then there exists another strict order r\"}\n  {\"name\": \"Ideal.ramificationIdx_eq_find\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {S : Type v} [inst_1 : CommRing S] {f : R →+* S} {p : Ideal R} {P : Ideal S}\\n  [inst_2 : DecidablePred fun n => ∀ (k : ℕ), Ideal.map f p ≤ P ^ k → k ≤ n]\\n  (h : ∃ n, ∀ (k : ℕ), Ideal.map f p ≤ P ^ k → k ≤ n), Ideal.ramificationIdx f p P = Nat.find h\", \"doc\": \"The ramification index of a prime ideal $\\\\mathfrak{p}$ in a ring homomorphism $f$ with respect to another prime ideal $\\\\mathfrak{P}$ is equal to the smallest natural number $n$ such that the image of \"}\n  {\"name\": \"Ideal.quotientToQuotientRangePowQuotSucc_mk\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {S : Type v} [inst_1 : CommRing S] (p : Ideal R) (P : Ideal S) [inst_2 : Algebra R S]\\n  [hfp : NeZero (Ideal.ramificationIdx (algebraMap R S) p P)] {i : ℕ} {a : S} (a_mem : a ∈ P ^ i) (x : S),\\n  (p.quotientToQuotientRangePowQuotSucc P a_mem) (Submodule.Quotient.mk \", \"doc\": \"For a natural number $ i $, an element $ a $ in $ \\\\mathfrak{P}^i $, and $ x \\\\in S $, the quotient map from $ S/\\\\mathfrak{P} $ to the quotient module $ (\\\\mathfrak{P}^i/\\\\mathfrak{P}^e)/\\\\text{range}(\\\\mat\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.trans\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ (n m : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (T : Type u_1)\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [IsScalarTower R S T]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S] [Algebra.IsStandardSmoothOfRelativeD\", \"doc\": \"If $ S $ is a standard smooth $ R $-algebra of relative dimension $ n $ and $ T $ is a standard smooth $ S $-algebra of relative dimension $ m $, then $ T $ is a standard smooth $ R $-algebra of relat\"}\n  {\"name\": \"PowerSeries.spanFinrank_le_spanFinrank_map_constantCoeff_add_one_of_isPrime\", \"module\": \"Mathlib/RingTheory/PowerSeries/Ideal\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {P : Ideal (PowerSeries R)} [P.IsPrime],\\n  Submodule.spanFinrank P ≤ Submodule.spanFinrank (Ideal.map PowerSeries.constantCoeff P) + 1\", \"doc\": \"For a prime ideal $ P $ in the univariate power series ring over a commutative ring, the finite rank of $ P $ is at most the finite rank of the image of $ P $ under the constant coefficient homomorphi\"}\n  {\"name\": \"Ideal.powQuotSuccInclusion\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    {S : Type v} →\\n      [inst_1 : CommRing S] →\\n        (p : Ideal R) →\\n          (P : Ideal S) →\\n            [inst_2 : Algebra R S] →\\n              (i : ℕ) →\\n                ↥(Ideal.map (Ideal.Quotient.mk (P ^ Ideal.ramificationIdx (algebraMap R S) p P))\\n    \", \"doc\": \"For a natural number $ i $, this is the linear map from the image of $ \\\\mathfrak{P}^{i+1} $ to the image of $ \\\\mathfrak{P}^i $ in the quotient ring $ S/\\\\mathfrak{P}^e $, constructed by restricting the\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern general smooth/etale algebra, power-series orders, filtrations, analytic Taylor series or general semicontinuity; none states this coefficient-presentation/jet-history assertion or a one-line generalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\", \"smooth\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern general smooth/etale algebra, power-series orders, filtrations, analytic Taylor series or general semicontinuity; none states this coefficient-presentation/jet-history assertion or a one-line generalization"
+  },
+  {
+   "tool": "grep",
+   "query": "testSequence|Hilbert.?Samuel|markedIdeal|cosupport",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern general smooth/etale algebra, power-series orders, filtrations, analytic Taylor series or general semicontinuity; none states this coefficient-presentation/jet-history assertion or a one-line generalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Induction on admissible test sequences identifies coefficient ideal cosupport and retained Hilbert Samuel strata under smooth pullback",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SimplexCategoryGenRel.IsAdmissible.below.rec\", \"module\": \"Mathlib.AlgebraicTopology.SimplexCategory.GeneratorsRelations.NormalForms\", \"type\": \"∀ {motive : (m : ℕ) → (L : List ℕ) → SimplexCategoryGenRel.IsAdmissible m L → Prop}\\n  {motive_1 :\\n    {m : ℕ} →\\n      {L : List ℕ} → (t : SimplexCategoryGenRel.IsAdmissible m L) → SimplexCategoryGenRel.IsAdmissible.below t → Prop},\\n  (∀ (m : ℕ), motive_1 ⋯ ⋯) →\\n    (∀ {m a : ℕ} (ha : a ≤ m), motive_\", \"doc\": \"A recursion principle for the admissibility predicate on natural numbers and lists of natural numbers, allowing induction over proofs of admissibility by handling base cases (empty list, singleton lis\"}\n  {\"name\": \"SimplexCategoryGenRel.IsAdmissible.rec\", \"module\": \"Mathlib.AlgebraicTopology.SimplexCategory.GeneratorsRelations.NormalForms\", \"type\": \"∀ {motive : (m : ℕ) → (L : List ℕ) → SimplexCategoryGenRel.IsAdmissible m L → Prop},\\n  (∀ (m : ℕ), motive m [] ⋯) →\\n    (∀ {m a : ℕ} (ha : a ≤ m), motive m [a] ⋯) →\\n      (∀ {m a b : ℕ} {L' : List ℕ} (hab : a < b) (hbL : SimplexCategoryGenRel.IsAdmissible (m + 1) (b :: L'))\\n          (ha : a ≤ m), m\", \"doc\": \"Given a property $ P(m, L, t) $ for natural numbers $ m $, lists $ L $, and admissibility proofs $ t $, if $ P $ holds for the empty list, singleton lists $ [a] $ with $ a \\\\leq m $, and lists $ [a, b]\"}\n  {\"name\": \"SimplexCategoryGenRel.IsAdmissible.brecOn\", \"module\": \"Mathlib.AlgebraicTopology.SimplexCategory.GeneratorsRelations.NormalForms\", \"type\": \"∀ {motive : (m : ℕ) → (L : List ℕ) → SimplexCategoryGenRel.IsAdmissible m L → Prop} {m : ℕ} {L : List ℕ}\\n  (t : SimplexCategoryGenRel.IsAdmissible m L),\\n  (∀ (m : ℕ) (L : List ℕ) (t : SimplexCategoryGenRel.IsAdmissible m L),\\n      SimplexCategoryGenRel.IsAdmissible.below t → motive m L t) →\\n    moti\", \"doc\": \"For any property $ P(m, L, t) $ depending on a natural number $ m $, a list $ L $, and a proof $ t $ of admissibility of $ L $ for $ m $, if $ P $ can be established for all $ m, L, t $ assuming it ho\"}\n  {\"name\": \"SimplexCategoryGenRel.IsAdmissible.below\", \"module\": \"Mathlib.AlgebraicTopology.SimplexCategory.GeneratorsRelations.NormalForms\", \"type\": \"{motive : (m : ℕ) → (L : List ℕ) → SimplexCategoryGenRel.IsAdmissible m L → Prop} →\\n  {m : ℕ} → {L : List ℕ} → SimplexCategoryGenRel.IsAdmissible m L → Prop\", \"doc\": \"A recursor for the admissibility predicate on natural numbers and lists of natural numbers, allowing induction over proofs of admissibility in the context of simplex category generators and relations.\"}\n  {\"name\": \"AdicCompletion.induction_on\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"{p : AdicCompletion I M → Prop} (x : AdicCompletion I M) (h : ∀ (f : AdicCauchySequence I M), p (mk I M f)) : p x\", \"doc\": \"For any property $ p $ on the $ I $-adic completion of an $ R $-module $ M $, if $ p $ holds for all elements obtained by applying the canonical map from $ I $-adic Cauchy sequences to the completion,\"}\n  {\"name\": \"RingTheory.Sequence.IsRegular.rec\", \"module\": \"Mathlib.RingTheory.Regular.RegularSequence\", \"type\": \"{R : Type u_1} →\\n  {M : Type u_3} →\\n    [inst : CommRing R] →\\n      [inst_1 : AddCommGroup M] →\\n        [inst_2 : Module R M] →\\n          {rs : List R} →\\n            {motive : RingTheory.Sequence.IsRegular M rs → Sort u} →\\n              ((toIsWeaklyRegular : RingTheory.Sequence.IsWeaklyRegular M rs)\", \"doc\": \"Given a property $ P $ of regular sequences on an $ R $-module $ M $, if $ P $ holds for a sequence constructed from weak regularity and the condition that the ideal generated by the sequence does not\"}\n  {\"name\": \"RingTheory.Sequence.IsRegular.recOn\", \"module\": \"Mathlib.RingTheory.Regular.RegularSequence\", \"type\": \"{R : Type u_1} →\\n  {M : Type u_3} →\\n    [inst : CommRing R] →\\n      [inst_1 : AddCommGroup M] →\\n        [inst_2 : Module R M] →\\n          {rs : List R} →\\n            {motive : RingTheory.Sequence.IsRegular M rs → Sort u} →\\n              (t : RingTheory.Sequence.IsRegular M rs) →\\n                ((to\", \"doc\": \"Given a property $ P $ of regular sequences on an $ R $-module $ M $, if $ P $ holds for sequences constructed from weak regularity and the condition that the ideal generated by the sequence does not \"}\n  {\"name\": \"SimplexCategoryGenRel.IsAdmissible.recOn\", \"module\": \"Mathlib.AlgebraicTopology.SimplexCategory.GeneratorsRelations.NormalForms\", \"type\": \"∀ {motive : (m : ℕ) → (L : List ℕ) → SimplexCategoryGenRel.IsAdmissible m L → Prop} {m : ℕ} {L : List ℕ}\\n  (t : SimplexCategoryGenRel.IsAdmissible m L),\\n  (∀ (m : ℕ), motive m [] ⋯) →\\n    (∀ {m a : ℕ} (ha : a ≤ m), motive m [a] ⋯) →\\n      (∀ {m a b : ℕ} {L' : List ℕ} (hab : a < b) (hbL : SimplexCate\", \"doc\": \"A recursive destructor for the admissibility predicate on lists of natural numbers in the context of simplex category generators and relations. It allows defining properties or functions on admissible\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern general smooth/etale algebra, power-series orders, filtrations, analytic Taylor series or general semicontinuity; none states this coefficient-presentation/jet-history assertion or a one-line generalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HilbertSamuel\", \"blowup\"",
+   "results": "{\"t\": \"2026-10-23T11:19:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"HilbertSamuel\\\", \\\"blowup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned Weierstrass preparation, smooth algebra, or ideal-sheaf definitions do not state finite-test coefficient presentations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hilbert Samuel coefficient presentations are preserved under finite sequences of controlled blowups and smooth pullbacks",
+   "results": "{\"t\": \"2026-10-23T11:19:38Z\", \"tool\": \"leanfinder\", \"query\": \"Hilbert Samuel coefficient presentations are preserved under finite sequences of controlled blowups and smooth pullbacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivisorAt.coeff_seq_succ_sub_seq_mem\", \"PowerSeries.IsWeierstrassDivisorAt.divCoeff\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_seq_mem\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_div_sub_seq_mem\", \"PowerSeries.IsWeierstrassDivisorAt.seq\", \"RingHom.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\"], \"digest\": \"834900e529d070a2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned Weierstrass preparation, smooth algebra, or ideal-sheaf definitions do not state finite-test coefficient presentations"
+  },
+  {
+   "tool": "grep",
+   "query": "Hilbert.?Samuel|testSequence|markedIdeal|cosupport",
+   "results": "{\"t\": \"2026-10-23T11:20:12Z\", \"tool\": \"grep\", \"query\": \"Hilbert.?Samuel|testSequence|markedIdeal|cosupport\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned Weierstrass preparation, smooth algebra, or ideal-sheaf definitions do not state finite-test coefficient presentations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hilbert Samuel level loci admit coefficient ideal presentations compatible with blowup tests",
+   "results": "{\"t\": \"2026-10-23T11:20:13Z\", \"tool\": \"leansearch\", \"query\": \"Hilbert Samuel level loci admit coefficient ideal presentations compatible with blowup tests\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.leadingCoeff\", \"AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff\", \"AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support\", \"ProjectiveSpectrum.homogeneousIdeal_le_vanishingIdeal_zeroLocus\", \"ProjectiveSpectrum.zeroLocus\", \"AlgebraicGeometry.Scheme.IdealSheafData.coe_support_ofIdealTop\", \"Algebra.smoothLocus\", \"ProjectiveSpectrum.zeroLocus_sup_homogeneousIdeal\"], \"digest\": \"4d0061be6c248dc2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned Weierstrass preparation, smooth algebra, or ideal-sheaf definitions do not state finite-test coefficient presentations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invariance of division adapted coefficient ideals under exceptional divisor intersection blowups and adjoining formal variables",
+   "results": "{\"t\": \"2026-10-23T11:20:14Z\", \"tool\": \"leanfinder\", \"query\": \"Invariance of division adapted coefficient ideals under exceptional divisor intersection blowups and adjoining formal variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivisorAt.coeff_div\", \"PowerSeries.IsWeierstrassDivisorAt.divCoeff\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_div_sub_seq_mem\", \"PowerSeries.IsWeierstrassDivisorAt.isWeierstrassDivisionAt_div_mod\", \"PowerSeries.IsWeierstrassDivisorAt.mod'_mk_eq_mod\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_seq_succ_sub_seq_mem\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_seq_mem\", \"PowerSeries.IsWeierstrassDivisionAt.coeff_f_sub_r_mem\"], \"digest\": \"e43b714460b6f600\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned Weierstrass preparation, smooth algebra, or ideal-sheaf definitions do not state finite-test coefficient presentations"
+  },
+  {
+   "tool": "grep",
+   "query": "Hilbert.?Samuel|testSequence|markedIdeal|cosupport",
+   "results": "{\"t\": \"2026-10-23T12:32:22Z\", \"tool\": \"grep\", \"query\": \"Hilbert.?Samuel|testSequence|markedIdeal|cosupport\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned single-variable Weierstrass division, ideal filtrations, spectrum chains, or division-monoid identities do not state coefficient presentations or their finite-test propagation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Supported formal division identities persist under controlled transforms and boundary coordinate substitutions",
+   "results": "{\"t\": \"2026-10-23T12:32:22Z\", \"tool\": \"leansearch\", \"query\": \"Supported formal division identities persist under controlled transforms and boundary coordinate substitutions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"div_div_div_eq\", \"div_mul_eq_div_div_swap\", \"RatFunc.laurent_div\", \"mul_one_div\", \"Equiv.div_def\", \"ofDual_div\", \"toColex_div\", \"Commute.div_sub_div\"], \"digest\": \"f1ac94cf4e193f5d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned single-variable Weierstrass division, ideal filtrations, spectrum chains, or division-monoid identities do not state coefficient presentations or their finite-test propagation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HilbertSamuel\", \"blowup\"",
+   "results": "{\"t\": \"2026-10-23T12:32:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"HilbertSamuel\\\", \\\"blowup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned single-variable Weierstrass division, ideal filtrations, spectrum chains, or division-monoid identities do not state coefficient presentations or their finite-test propagation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hilbert Samuel coefficient presentations with division and derivative identities through the largest vertex degree are invariant under test sequences",
+   "results": "{\"t\": \"2026-10-23T12:32:23Z\", \"tool\": \"leanfinder\", \"query\": \"Hilbert Samuel coefficient presentations with division and derivative identities through the largest vertex degree are invariant under test sequences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivisorAt.divCoeff\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_div_sub_seq_mem\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_seq_mem\", \"PowerSeries.IsWeierstrassDivisorAt.seq_one\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_seq_succ_sub_seq_mem\", \"PowerSeries.IsWeierstrassDivisorAt.mod'_mk_eq_mod\", \"PowerSeries.IsWeierstrassDivisorAt.seq\", \"PowerSeries.IsWeierstrassDivisorAt.mod_coe_eq_self\"], \"digest\": \"7173306678fe4632\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned single-variable Weierstrass division, ideal filtrations, spectrum chains, or division-monoid identities do not state coefficient presentations or their finite-test propagation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Hilbert Samuel stratum has a marked coefficient ideal presentation stable under admissible blowups, products with a line, and exceptional boundary intersections",
+   "results": "{\"t\": \"2026-10-23T12:33:17Z\", \"tool\": \"leanfinder\", \"query\": \"A Hilbert Samuel stratum has a marked coefficient ideal presentation stable under admissible blowups, products with a line, and exceptional boundary intersections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.Filtration.Stable\", \"Ideal.adic_basis\", \"Ideal.stableFiltration_stable\", \"PrimeSpectrum.exist_ltSeries_mem_one_of_mem_last\", \"localCohomology.ideal_powers_initial\", \"Ideal.Filtration\", \"Ideal.Filtration.Stable.exists_pow_smul_eq\", \"Ideal.Filtration.Stable.exists_pow_smul_eq_of_ge\"], \"digest\": \"66d4e0e52d8b5544\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned single-variable Weierstrass division, ideal filtrations, spectrum chains, or division-monoid identities do not state coefficient presentations or their finite-test propagation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-hilbert-samuel-local-presentations",
+  "date": "2026-10-22",
+  "group": "Q158"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Local Hilbert--Samuel presentations and their admissible transforms. This split supplies the finite-jet/diagram, regular-coefficient, and transform calculation behind that local presentation input; the active contracting-correspondence proof of the blueprint ancestor is unchanged. Re-split: ILO VIII 2.3.11--2.3.13, pp.93--94; BM 1997 Definition 6.2, formulas (6.1), Theorems 7.20--7.21; BMT 5.2, 6.2--6.3. Boundary/test induction and smooth base change from old proof steps 5,7. No Stacks tag states this finite-test propagation theorem.",
+   "via": [
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-coefficient-test-sequence-propagation",
+  "worker": "stage1",
+  "summary": "NY repair: retain statement and prior searches; replace equality-locus-only induction by boundary-history induction, with regular supported multiplication identities at all historical exceptional points. Prove the five conditions at new cosupport points after total boundary pullback, a global lexicographic upper bound, and availability of the datum before every later permissible blowup. No new nodes, no Lean, no SGA. STATEMENT-DISPUTED: the imported statement omitted the necessary jet bound Q >= max d_i - 1; added it with an explicit reduced complete-intersection counterexample for Q=0 in report.md.",
+  "blueprint": "Historical resolution branch of lem-trf-local-term-locality (1)--(2), through Hilbert--Samuel local presentations: finite test propagation and smooth pullback; current blueprint contracting-correspondence proof unchanged.",
+  "tool_uses": [
+   {
+    "node": "sbc-thm-etale-local-normal-form",
+    "why": "Generic local factorization of a smooth map through an etale map to affine space; this unit has no substitute for that local structure theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-thm-etale-local-normal-form"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NY-61e3c0d1e",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-61e3c0d1e (reviewer sub-agent of L); spot-checked: I read the item in full, all 15 steps, the statement of every cited node, both citers and the 3f58 return. The returned faults (E5/C4 at old step 4, D4 at old step 1) are fixed by a real argument, not by a new citation. Step 1 states the induction invariant explicitly, now including the boundary history. Step 4: by coordinate-blowup-division-generators, ord_P(Z^beta f_i)=d_i+|beta| and ord_P q_h>=v-d_h, so the supported identities are regular and keep their support on the whole fibre over the source point. Step 5 keeps (4) and (5) as identities, using e-saturation of (Z'^l). Step 7 is a complete history dichotomy: either a smooth product over an earlier X, or the point lies over a center of an earlier type-(i) blowup. Steps 8-9 give (1),(2) at new order points: the pure-Z initial forms are the stored A_i(0,Z) and the division matrix is block-triangular by W-degree. Supported generation (3) follows from the stored polynomial identities and the closedness of ker r in homogeneous-continuous-formal-division. Step 10 gives the global lex bound: (5) puts the degree-m form of the first dropping generator outside the prefix diagram, and this needs |delta|<=m<=Q. Step 11 matches cosupport and order locus. Statement change (E7): the delivery adds the hypothesis Q>=max d_i-1. I checked its counterexample by hand: f1=z1^2+u^3, f2=z2^3+v^4+t f1 with Q=0 meets all five conditions at the origin, yet the equality locus is the whole t-line while the cosupport is the origin, because c_{2,(2,0)}=t. The bound is already assumed by common-power-hilbert-marking and supplied by regular-hilbert-coefficient-data (5). There is no SGA citation; the only tool use is 054L (sbc-thm-etale-local-normal-form), which the previous review accepted. Maintainer note: the citer lem-trf-minimal-envelope-coefficient-comparison step 5 applies the item's r=0 pullback clause to supplied data whose statement lacks Q>=max d_i-1. That node's statement must add the bound; its parent local-presentations supplies it. The report does not mention this citer, and I cannot repair it through split-owned fields."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoefficientTestSequencePropagation",
+  "declaration": "AlgebraicGeometry.HilbertCoefficient.coefficient_test_sequence_propagation",
+  "declarations": [
+   "AlgebraicGeometry.HilbertCoefficient.InitialCoefficientTestModel",
+   "AlgebraicGeometry.HilbertCoefficient.InitialCoefficientTestModel.coefficients",
+   "AlgebraicGeometry.HilbertCoefficient.HasRetainedCoefficientCharts",
+   "AlgebraicGeometry.HilbertCoefficient.CoefficientsTransform",
+   "AlgebraicGeometry.HilbertCoefficient.CoefficientTestsThrough",
+   "AlgebraicGeometry.HilbertCoefficient.coefficient_test_sequence_propagation"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CoefficientTestSequencePropagation.lean",
+  "statement": "theorem coefficient_test_sequence_propagation {X Z : Scheme.{u}} (p : Z ⟶ Spec (.of (ULift.{u} ℚ))) (i : X ⟶ Z) [Smooth p] [IsClosedImmersion i] [IsReduced X] [LocallyOfFiniteType (i ≫ p)] [QuasiCompact (i ≫ p)] (a : X) {m n s Q : ℕ} (α : Fin s → Fin n →₀ ℕ) (hα : orderedVertices α) (hQ : ∀ l : Fin s, (α l).degree - 1 ≤ Q) (hbound : ∀ x : X, HilbertSamuel.le (HilbertSamuel.function (i ≫ p) x) (HilbertSamuel.function (i ≫ p) a)) (D : RegularHilbertCoefficientDatum p i a m n s α Q) (b : ℕ) (hb : 0 < b) (hempty : s = 0 → b = 1) (hcommon : ∀ (l : Fin s) (γ : Fin n →₀ ℕ), γ.degree < (α l).degree → (α l).degree - γ.degree ∣ b) : (∃ V : D.U.Opens, D.center ∈ V ∧ Nonempty (InitialCoefficientTestModel D V b) ∧ (∀ A : InitialCoefficientTestModel D V b, (∀ d : ℕ, CoefficientTestsThrough α Q d A.ambient A.marked A.coefficients) ∧ HilbertSamuel.Presents A.marked ∧ ∀ (T : HilbertSamuel.Embedded (ULift.{u} ℚ)) (f : T.Z ⟶ A.ambient.Z) (r : ℕ), HilbertSamuel.Pullback f r → (∀ (g : T.X ⟶ A.ambient.X), IsPullback g T.i A.ambient.i f → ∀ y : T.X, HilbertSamuel.function (T.i ≫ T.p) y = (HilbertSamuel.summation^[r]) (HilbertSamuel.function (A.ambient.i ≫ A.ambient.p) (g y))) ∧ (∃ (P : HilbertSamuel.Marked T) (q : P.N ⟶ A.marked.N), HilbertSamuel.MarkedPullback f A.marked P ∧ IsPullback q P.j A.marked.j f) ∧ ∀ (P : HilbertSamuel.Marked T) (q : P.N ⟶ A.marked.N), HilbertSamuel.MarkedPullback f A.marked P → IsPullback q P.j A.marked.j f → HilbertSamuel.Presents P ∧ ∀ d : ℕ, CoefficientTestsThrough α Q d T P (fun l γ ↦ (A.coefficients l γ).comap q))) ∧ (∀ (r : ℕ) (F G : ℕ → ℕ), ((HilbertSamuel.summation^[r]) F = (HilbertSamuel.summation^[r]) G ↔ F = G) ∧ (HilbertSamuel.lt ((HilbertSamuel.summation^[r]) F) ((HilbertSamuel.summation^[r]) G) ↔ HilbertSamuel.lt F G) ∧ (HilbertSamuel.le ((HilbertSamuel.summation^[r]) F) ((HilbertSamuel.summation^[r]) G) ↔ HilbertSamuel.le F G))",
+  "branch": "sheaf-dag",
+  "by": "NU",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Repair of RETURN 898bf2a82bd2 H3: one open V containing D.center restricts the initial ambient, source, support and all coefficient ideals before every finite-test, presentation and smooth-pullback assertion. The ideal uses the landed commonPowerIdeal. Other helper clauses are unchanged. The local-scope clarification is recorded in statement_change with both citers audited."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-53223485f",
+  "group": "NU",
+  "result": "pass",
+  "note": "Re-delivery repairs 898bf H3 F1: one ∃ V : D.U.Opens with D.center ∈ V encloses the initial model (ambient≅V, source≅pullback i (V.ι≫D.e), support≅D.j⁻¹ᵁV, square D.j∣_V), the ideals (landed commonPowerIdeal and principal coefficients comapped along supportIso≫ι), the finite tests, Presents and smooth pullback; the depth-0 equality on V = landed commonPowerHilbertMarking germ conjunct, so the counterexample is excluded. §1(C): old_statement/old_stmt_deps = live; adds only the V restriction and f:Z1→V, as in the source germ form; both citers (local-presentations s3, minimal-envelope s4-5) hold. lean.statement verbatim; only item node + module differ from live; Nonempty satisfiable; other clauses, edge cases (s=0, depth 0, empty schemes, r=0), universes, docstrings and report sections OK. Advisory: commonPowerIdeal is a plain def owned by the theorem node lem-trf-common-power-hilbert-marking (proof_dep, not stmt_dep; no cycle); \\textquotesingle cosmetic. No compile (no file changed).",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-23",
+  "by": "NU stage 2",
+  "old_statement": "Let $X\\hookrightarrow Z$ be a reduced closed finite-type $\\mathbf Q$-scheme in a smooth scheme [def-pc-reduced-scheme] [def-weil-closed-immersion] [def-weil-finite-type-morphism] [def-sbc-smooth-morphisms]. Fix $a\\in X$, $H_0=H_X(a)$ [def-trf-hilbert-samuel-invariant], a neighbourhood on which $H_X\\le_{\\rm lex}H_0$, and supplied regular Hilbert coefficient data on a smooth closed $N\\hookrightarrow Z$ [def-trf-regular-hilbert-coefficient-datum], with jet bound $Q\\ge\\max_i d_i-1$ (vacuous for an empty vertex list). For the positive weights $m_{i\\gamma}=d_i-|\\gamma|$, let $b$ be a positive common multiple and $I=\\sum(c_{i\\gamma}^{b/m_{i\\gamma}})$, or $(I,b)=(0,1)$ for an empty vertex list [pqf-def-coherent] [def-trf-marked-ideal-order]. Start with empty ordered test boundary. A finite test sequence allows (i) a blowup of a smooth center in the retaining-level locus, having normal crossings with the boundary, with strict transform of $X,N$ and ideal transform $e^{-b}\\sigma^*I$; (ii) product with $\\mathbf A^1$, using ordinary pullbacks and appending the zero section; (iii) blowup of the intersection of two distinct boundary components, using ordinary pullbacks of $X,N,I$. Each blowup retains the ordered strict transforms and appends the new exceptional divisor [def-nagata-global-blowup] [def-nagata-strict-transform] [def-trf-hilbert-samuel-presentation].\nFor every such finite sequence of length $s$, all these transforms are defined. If $\\ell_j$ is the number of line products in its prefix of length $j\\le s$, then\n$$\\operatorname{cosupp}(I_j,b)=\\{x\\in X_j:H_{X_j}(x)=\\Lambda^{\\ell_j}H_0\\}$$\nas subsets of the current ambient scheme. Every boundary component is transverse to the current $N_j$, its equation being a coordinate on $N_j$ in coordinates $(W,Z)$ adapted to the coefficient datum. At the retaining-level points the transformed coefficient data satisfy the same five division and Jacobian conditions; for (iii) the coefficient functions are ordinary pullbacks, and the Hilbert--Samuel level is unchanged, while (ii) replaces it by $\\Lambda H$. At every prefix the two loci permit exactly the same next smooth centers, with the same labelled boundary; hence the marked datum is a presentation in the finite-test sense. Empty cosupport and centers which remove a component are allowed.\nFor a smooth map $f:Z_1\\to Z$ of constant relative dimension $r\\ge0$ and $X_1=X\\times_ZZ_1$, one has $H_{X_1}(y)=\\Lambda^rH_X(f(y))$. The pulled-back coefficient data and ideal are a presentation of $\\Lambda^rH_0$, with the same finite-test assertions. Moreover $\\Lambda^r$ preserves and reflects lexicographic equality and inequalities of sequences. These assertions commute with open restriction and hold separately on each relative-dimension piece; they do not identify unsummed numerical levels for $r>0$.",
+  "what": "The initial equality is a germ assertion and need not hold throughout the supplied etale chart U. The returned counterexample has Z=U=A^2, X=V(xy(x+y-6)), a=(0,0), N={z=0}, c0=-w^2, c1=0, c2=1, alpha=(2), Q=1, b=2: coefficient cosupport contains only the origin, whereas the retaining Hilbert level contains all three nodes. Choose one open V containing the distinguished point and restrict X, N, coefficients and every finite-test/presentation/smooth-pullback clause to V, exactly as the initial common-power lemma permits.",
+  "source": {
+   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+   "place": "ILO VIII 2.3.11--2.3.13, printed pp.93--94 (local embedded-resolution input and smooth synchronization); BM 1997 Definition 6.2, (6.1), Theorems 7.20--7.21, and BMT 5.2, 6.2--6.3, as extracted in lem-trf-common-power-hilbert-marking: work locally about a allowing a further open restriction. Its landed commonPowerHilbertMarking explicitly gives an open V containing D.center."
+  },
+  "citers": [
+   {
+    "id": "lem-trf-minimal-envelope-coefficient-comparison",
+    "holds": true,
+    "note": "Both the empty-list regular germ and the common pointed etale comparison are local constructions: restrict the former chart and the latter common neighbourhood into V (or the common inverse image of the two chosen opens); relative dimension zero and all earlier-center ideal pullbacks persist."
+   },
+   {
+    "id": "lem-trf-hilbert-samuel-local-presentations",
+    "holds": true,
+    "note": "The conclusion already permits restriction and a pointed etale neighbourhood at each a; take the additional V before starting its finite tests. Smooth pullbacks are then into this presentation chart, as needed."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-nagata-global-blowup",
+   "def-nagata-strict-transform",
+   "def-pc-reduced-scheme",
+   "def-sbc-smooth-morphisms",
+   "def-trf-hilbert-samuel-invariant",
+   "def-trf-hilbert-samuel-presentation",
+   "def-trf-marked-ideal-order",
+   "def-trf-regular-hilbert-coefficient-datum",
+   "def-weil-closed-immersion",
+   "def-weil-finite-type-morphism",
+   "pqf-def-coherent"
+  ]
+ }
+}

@@ -1,0 +1,72 @@
+## Worker report
+
+Q62 splits lem-sfb-root-datum-isogeny-realization by Milne's rank-one generated-graph proof. The item statement and its statement dependencies are unchanged. All writes are confined to this sandbox; no Lean was written and no compiler, Lake or library build was run.
+
+Files written:
+
+- dag/nodes/sec-six-functors-basics/lem-sfb-root-datum-isogeny-realization.json: item, eight proof steps, split; no Mathlib match.
+- dag/nodes/sec-six-functors-basics/lem-sfb-rank-one-frobenius-extension.json: new statement, unsplit; no Mathlib match.
+- dag/nodes/sec-six-functors-basics/lem-sfb-compatible-rank-one-graph-geometry.json: new statement, unsplit; no Mathlib match.
+- dag/nodes/sec-six-functors-basics/lem-sfb-root-monomial-kernel-coordinates.json: new statement, unsplit; no Mathlib match.
+- citations.json: one verbatim statement quote for each step/node citation.
+- searches.jsonl: actual msearch output records, retained without editing.
+- report.md: this report. The sandbox-only write_split.py and review_finalize.py are reproducible drafting helpers, not delivery files.
+
+Attachments: none. Searching WeilConjectures for the exact blueprint tag, root data, reductive groups and isogenies found no declaration stating this item. Abelian-variety isogenies and characteristic-zero Lie algebra results are different statements. The Sheaf search found no such realization either.
+
+WANTED: none. Milne, Algebraic Groups (2017), is already available as literature/milne-algebraic-groups_iAG2017.pdf. No SGA source is used; mentions of other historical proofs in Milne's notes are not dependencies.
+
+What was wrong or missing: the item was a statement-only input, not a proof. Its statement agrees with Milne; there is no statement dispute. A tempting inference, that an isomorphism on maximal tori alone implies an isomorphism of reductive groups, is false in small characteristic (Milne 23.30). The split deliberately needs both torus invertibility and root exponents one. The generated-graph input records full root data, including coroots, rather than only Lie algebra weights.
+
+Nothing remains unfinished within this one-level split. The three new inputs remain statement-only for subsequent stage-1 work. There are three new nodes and zero Mathlib leaves.
+
+## Source and searches
+
+Read AGENTS.md, the worker role, stage-1 brief and stage document, GOAL.md, the three blueprint levels in SETUP.md, the open-stage information, tools/README.md, and both copies of delivery-errors B--E. No item-specific repair note or previous sandbox node/report/search log existed. The current item was copied before editing.
+
+Read the item's chapter and unit. The nearest-blueprint-ancestor command reports null for this long inherited new-target chain, so its null ancestor and exact inherited det-thm-sf-ctf-stability-direct-images proof-(3) provenance are retained, and new nodes prepend the item to the via chain. Read the current literature/blueprint/latest proof of thm-sf-ctf-stability and searched all imported blueprint nodes with blueprint_refs.py. Queries isogeny, root datum, rank-one extension, generated graphs and root exponents found no matching root-isogeny assertion. The broader graph/rank-one queries yielded unrelated blueprint nodes. No chapter, unit, target or route was changed.
+
+Read Milne printed pp.483--493 (PDF pages 495--505), especially Definitions 23.1--23.2, Proposition 23.4, the actual proof of Proposition 23.5, Lemma 23.10, the rank-one reduction 23.11--23.16, and graph construction 23.17--23.24. Read Theorem 21.84 and Summary 21.86 on printed p.451. The new rank-one input isolates the local Frobenius extension, the graph input isolates the algebraic geometry before inversion of the first projection, and the coordinate input isolates recognition of an ALREADY GIVEN homomorphism and its fibre over the identity. The coordinate formula elaborates Milne's big-cell argument rather than citing a centrality criterion as a new black box. The graph input records the based root data of the rank-one graphs, the content of the maximal-torus and final Weyl-conjugacy argument, and does not assert an extension G1 to G0 or invertibility of the first projection.
+
+Before creating nodes, searched the entire DAG by root datum, isogeny, rank-one, graph-generation, root-monomial, big-cell and Milne 23.10--23.24 references; also searched existing statements and source places separately so long inherited blueprint provenance could not create a false duplicate. The primary sources here are Milne's numbered results, not Stacks results, so there is no invented Stacks tag.
+
+Every Mathlib query in the new nodes was actually run using the prescribed msearch command and copied from its log with the exact tool and query. Each new node has LeanSearch, Loogle, grep, and two different LeanFinder phrasings. Read all returned summaries and relevant declarations. In Mathlib/LinearAlgebra/RootSystem/Defs.lean:81--109 and Hom.lean:45--78 the objects are abstract root pairings; Hom explicitly lists isogenies as TODO. SpecialLinearGroup.lean:208,255 constructs abstract group maps, not algebraic group morphisms. Algebra/Group/Graph.lean:158 and the graph existence hits address abstract groups, not reduced generated subgroups and their maximal tori. Scheme.Hom.ker concerns kernel ideal sheaves, not the kernel of a group homomorphism. AlgebraicGeometry searches returned no reductive-group API. Thus none is an exact match or one-line specialization. The valid MonoidHom.graph search supplements the exploratory unknown-identifier Loogle query. All services answered; none has been falsely recorded as unavailable or no-hit when it returned hits.
+
+## Not duplicates
+
+lem-sfb-rank-one-frobenius-extension vs lem-sfb-split-rank-one-classification: the existing node classifies rank-one groups and their derived subgroups; it does not extend a prescribed torus homomorphism or give Frobenius root formulas.
+lem-sfb-rank-one-frobenius-extension vs lem-sfb-reductive-rank-one-reflections: the existing node constructs the rank-one centralizers and their coroots; it does not construct homomorphisms between them.
+lem-sfb-compatible-rank-one-graph-geometry vs lem-sfb-reductive-borel-pair-structure: reductive-group structure does not prove that a specific subgroup generated by graphs is reductive or that its graph torus is maximal.
+lem-sfb-compatible-rank-one-graph-geometry vs lem-sfb-root-datum-realization: realization constructs a group for an abstract root datum, whereas this node identifies the root datum of a specified reduced subgroup of a product.
+lem-sfb-root-monomial-kernel-coordinates vs lem-sfb-reductive-root-subgroup-parametrizations: parametrizations describe conjugation within one group; they do not describe images and scheme kernels of a given homomorphism between groups.
+lem-sfb-root-monomial-kernel-coordinates vs lem-sfb-bruhat-longest-cell-charts: the existing node gives Bruhat charts for one group, not the monomial coordinate map or the full identity fibre, including all nilpotents.
+lem-sfb-root-monomial-kernel-coordinates vs lem-sfb-multiplicative-isogeny-borel-comparison: that input assumes a diagonalizable kernel, whereas the new node permits noncentral infinitesimal root kernels and proves recognition from root data.
+lem-sfb-root-monomial-kernel-coordinates vs lem-sfb-semisimple-central-isogeny-multiplicative: that input assumes semisimplicity and centrality and concludes multiplicative type, not the new coordinate statement for arbitrary reductive groups.
+
+The new nodes do not partition the item's conclusions into three renamed clauses: the rank-one input has a strict local rank hypothesis and supplies explicit local maps, the graph input concerns a specified subgroup L of a product, and the coordinate input assumes a homomorphism already exists. The item carries the torus construction, compatibility of positive bases, construction of the global homomorphism by projection inversion, and both directions of each criterion.
+
+## Review by Q62
+
+I checked the proof against Milne's actual argument, not just his full-isogeny-theorem summary. For the item and rank-one input I read pp.483--490, and for the graph input I read pp.490--492 with its maximal-torus and Weyl-conjugacy conclusions. For the coordinate input I read the scheme-valued formula (146), its monomial deduction on pp.485--486, Lemma 23.10, and the big-cell multiplication on p.451. No p-th-power map on field points is being used as a replacement for a morphism of schemes.
+
+Step 1 uses the statement of multiplicative-character-antiduality for the torus map and the perfect pairing of the Borel-pair statement for cocharacters. I wrote out the finite free coset basis and kernel group algebra instead of introducing an elementary auxiliary node. I added faithfully-flat-surjective-spectrum after checking that its statement applies to the actual group-algebra map; it is an existing Mathlib leaf, so no off-route lemma is introduced.
+
+Step 2 uses regular-cocharacter-borel-description for BOTH the existence of a regular defining cocharacter and the converse Borel construction from h lambda1. The positivity formula checks the target cocharacter is regular. The Borel-pair statement supplies bases, the one-sign expansions and reducedness. The comparison of positive cones and extremal rays explicitly proves that the bases correspond; I did not silently use Milne 23.4 without an argument. The negative-root pairing and exponent equality are checked, and the empty-root case is handled using the cited empty-root clause.
+
+Step 3 uses rank-one-reflections for the actual centralizers, their rank-one structure and coroot uniqueness. Character antiduality shows which torus characters vanish on the codimension-one subtorus; differentiating the defining centralizer equations therefore selects the rational root line, and reducedness gives exactly the two required roots. This repairs a possible implicit identification of rank-one and ambient root data. The new Frobenius-extension statement applies to these groups, the SAME torus map h and both equations already in the hypotheses. It gives both opposite root images, which the graph step genuinely needs.
+
+Step 4 uses exactly the graph-geometry statement: reductivity, maximality, and the full based-root-datum identification by the first torus projection. I checked each hypothesis against steps 1--3. It then uses the coordinate-recognition statement with exponents one and an invertible torus map. This proves that the first projection has TRIVIAL SCHEME kernel; bijectivity on F-points would be insufficient. No conclusion about an inverse is borrowed from inside a cited proof.
+
+Step 5 uses the quotient-universal-property statement only after faithful flatness and the scheme-kernel condition have been supplied. Factoring the identity and applying uniqueness really gives both inverse equations. The second projection composed with that inverse is a genuine group-scheme morphism; only then is the coordinate-recognition input applied with u,b,q to prove it is an isogeny. Thus neither a set-theoretic map nor a promised global extension was smuggled in as a definition.
+
+Step 6 again uses the coordinate statement for any given realization of u. The self-centralizer statement says scheme-theoretically, on all algebras, that a central kernel lies in S1. The coordinate node supplies the trivial intersection with a root subgroup and the entire infinitesimal root kernel. Its algebra dimension q forces q=1. This checks the quantifier FOR EVERY realization, not merely the constructed one.
+
+Step 7 uses the coordinate statement to put K in the torus when all exponents are one. The root-parametrization statement gives conjugation on every algebra; the root equation forces alpha(k)=1. I wrote out why commutation on the big cell extends to all of K times G: bruhat-longest-cell-charts states geometric integrality, and tensoring the resulting injective restriction map with an F-vector space preserves injectivity. This avoids the false reduction from nonreduced K to its F-points. The big cell is affine by its explicit product coordinates.
+
+Step 8 uses character antiduality and the full kernel-coordinate statement, then the same quotient-universal-property argument as step 5. For necessity I used the coset-basis computation to derive u surjective, rather than assuming that the inverse sends a maximal torus to precisely the chosen one. All cited nodes were opened and their STATEMENTS read. citations.json contains verbatim text, and proof_deps is exactly the union of uses.
+
+I checked delivery-errors B--E against the files. New statements introduce their own field, groups, tori, root data, maps and hypotheses; no proof has been put into an unsplit node's statement, and proof/proof_deps/proof_origin remain empty/empty/null there. Their source places are exact Milne results. All new nodes were searched before writing, no finished Lean theorem was split, and the elementary torus and positive-cone arguments remain steps. The three new inputs are smaller intermediate facts rather than the three conclusions of the item. I checked that no cited node depends back on the item; the server DAG check is the further mechanical test. No proof step exceeds 2000 characters, and none hides a new comparison or unnamed standard theorem.
+
+Small cases: trivial groups and zero-rank tori give empty products and the identity; maps t to t^n of tori have finite central mu_n kernels, including nonreduced mu_p, and are invertible exactly when the lattice map is; characteristic zero forces every q=1 but still permits a nontrivial finite central torus kernel; Frobenius on SL2 has root kernels Spec F[z]/(z^p) and a noncentral kernel, even though those additive kernels have only one F-point; SL2 to PGL2 in characteristic two has a central mu_2 kernel and root exponents one, so it is not incorrectly rejected by a reducedness assumption; the exceptional B/C small-characteristic examples with an invertible torus map still require the q=1 condition. These cases also test the three new statements.
+
+Validation: the first dry run rejected the meta-reference “the item's conclusion” in step 5 under B2. I removed that sentence and replaced the abbreviated equation reference in step 3 with the actual equations; no mathematical content or hypotheses changed. The repaired dry run is recorded below.

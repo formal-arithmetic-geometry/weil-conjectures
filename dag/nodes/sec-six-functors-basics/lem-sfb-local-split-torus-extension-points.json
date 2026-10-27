@@ -1,0 +1,240 @@
+{
+ "id": "lem-sfb-local-split-torus-extension-points",
+ "kind": "statement",
+ "title": "Sections of split-torus extensions over local rings",
+ "statement": "Let $C$ be a nonzero commutative local ring, meaning a ring with a unique maximal ideal, and put $U=\\operatorname{Spec}C$ [def-weil-affine-spectrum]. Let $E$ and $J$ be commutative group schemes over $U$ [def-pc-scheme]: their multiplication, identity and inverse morphisms satisfy the commutative group diagrams. Let $r\\geq0$ and put $T=\\mathbf G_{m,U}^{r}$, where $\\mathbf G_{m,U}=\\operatorname{Spec}C[t,t^{-1}]$ with multiplication of units. Suppose $1\\to T\\xrightarrow{i}E\\xrightarrow{q}J\\to1$ is exact as a sequence of fppf sheaves [def-pc-fppf-site]: $i$ identifies $T$ with the scheme-theoretic kernel and sections of $J$ lift fppf locally to $E$. For a $U$-scheme $Y$, write $Y(C)=\\operatorname{Hom}_U(U,Y)$. Then $q:E(C)\\to J(C)$ is surjective. This includes the case where $C$ is a field.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03P8 (theorem-picard-group), including fppf cohomology; groupoids.tex Tags 0499 (lemma-characterize-trivial-pseudo-torsors) and 049A (definition-principal-homogeneous-space). Agent-extracted local-ring, finite-product consequence; each line module on the spectrum of a local ring is trivial."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-pc-fppf-site",
+  "def-sfb-relative-split-torus"
+ ],
+ "proof": [
+  {
+   "text": "Fix $j\\in J(C)$ and form $P=E\\times_{J,j}U$. By the fibre-product universal property, its sections over $V\\to U$ are precisely $e\\in E(V)$ with $q(e)=j|_V$. Translation by $i(t)$ defines a $T$-action on $P$. If $p,p'\\in P(V)$, then $q(p'p^{-1})=1$, so the given identification $T=\\ker q$ gives a unique $t\\in T(V)$ with $p'=i(t)p$. The local-lifting hypothesis gives an fppf covering $\\{V_a\\to U\\}$ and $p_a\\in P(V_a)$. Thus the fibre has a simply transitive action wherever it has sections; no surjectivity on $C$-points has been assumed.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pc-fppf-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03P8, theorem-picard-group, expanded by coordinate descent; groupoids.tex, lemma-characterize-trivial-pseudo-torsors and definition-principal-homogeneous-space"
+   }
+  },
+  {
+   "text": "On $V_{ab}=V_a\\times_UV_b$, write $p_b=i(g_{ab})p_a$ for the unique $g_{ab}\\in T(V_{ab})$. The group law gives $g_{ac}=g_{bc}g_{ab}$ on triple overlaps. Each coordinate $g_{ab,h}$ is a unit of $\\Gamma(V_{ab},\\mathcal O)$, for $1\\leq h\\leq r$. The fppf covering is fpqc by [lem-trf-fppf-covering-is-fpqc]. For each $h$, multiplication by $g_{ab,h}$ specifies descent data on the modules $\\mathcal O_{V_a}$: equivalently, their local frames are to satisfy $e_{b,h}=g_{ab,h}e_{a,h}$. The displayed cocycle is exactly the descent condition. Part 3 of [lem-pc-fpqc-descent] therefore gives an invertible $\\mathcal O_U$-module $L_h$ and compatible frames $e_{a,h}$ of its pullbacks. This is coordinatewise effective descent, not an invocation of a torus-torsor classification theorem.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03P8, theorem-picard-group, expanded by coordinate descent; groupoids.tex, lemma-characterize-trivial-pseudo-torsors and definition-principal-homogeneous-space"
+   }
+  },
+  {
+   "text": "Every $L_h$ is trivial on $U$. Indeed, by the definition of an invertible module it is trivial on an open neighbourhood $W$ of the unique maximal ideal $\\mathfrak m$ of $C$. Choose a basic open $D(f)$ with $\\mathfrak m\\in D(f)\\subseteq W$. Then $f\\notin\\mathfrak m$, hence $f$ is a unit: a nonunit generates a proper ideal contained in a maximal ideal, which must be $\\mathfrak m$. Thus $D(f)=U$ and $W=U$. Choose a global frame $v_h$ of $L_h$. On $V_a$ write $v_h=u_{a,h}e_{a,h}$ with $u_{a,h}\\in\\Gamma(V_a,\\mathcal O)^{\\times}$. On overlaps the frame relation gives $u_{a,h}=g_{ab,h}u_{b,h}$. Let $u_a=(u_{a,h})_h\\in T(V_a)$.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03P8, theorem-picard-group, expanded by coordinate descent; groupoids.tex, lemma-characterize-trivial-pseudo-torsors and definition-principal-homogeneous-space"
+   }
+  },
+  {
+   "text": "Put $z_a=i(u_a)p_a\\in E(V_a)$. On $V_{ab}$ one has $z_b=i(u_b)i(g_{ab})p_a=i(u_a)p_a=z_a$, since $u_a=g_{ab}u_b$. Apply [lem-weil-pbc-fpqc-representable-descent] to the fpqc cover from step 2 and the compatible morphisms $z_a:V_a\\to E$ to obtain $z:U\\to E$. Uniqueness in that same descent statement, applied to the targets $U$ and $J$, shows that $z$ is over $U$ and $qz=j$, since both equalities hold on the cover. Thus $z\\in E(C)$ lifts $j$. For $r=0$ the tuple of modules and units is empty, $T$ is the trivial group, and the same calculation says that the original local lifts agree and descend. Fields are nonzero local rings, so the stated field case follows.",
+   "uses": [
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03P8, theorem-picard-group, expanded by coordinate descent; groupoids.tex, lemma-characterize-trivial-pseudo-torsors and definition-principal-homogeneous-space"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-fppf-site",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-pc-fpqc-descent",
+  "def-sc-invertible-module",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-fpqc-representable-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03P8 (theorem-picard-group), coordinate-cocycle proof expanded from descent.tex Tag 023T and groupoids.tex Tags 0499 and 049A; local-spectrum triviality written out"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An fppf torsor under a finite product of multiplicative groups over a local ring has a section",
+   "results": "{\"t\": \"2026-10-24T07:54:07Z\", \"tool\": \"leansearch\", \"query\": \"An fppf torsor under a finite product of multiplicative groups over a local ring has a section\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddTorsor.noConfusionType\", \"Prod.mk_vadd_mk\", \"Prod.fst_vadd\", \"Prod.instAddTorsor\", \"AffineMap.fst_lineMap\", \"Pi.instAddTorsor\", \"CommRing.Pic.instSubsingletonOfIsLocalRing\", \"IsLocalRing.subsingleton_tensorProduct\"], \"digest\": \"1b5093daf125dbeb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: CommRing.Pic.instSubsingletonOfIsLocalRing (Mathlib/RingTheory/PicardGroup.lean:538, source read) trivializes algebraic invertible modules; it does not classify fppf torsors or identify fibres of q with torus torsors. Scheme-point and abstract AddTorsor hits do not supply that bridge. Field Galois Hilbert 90 also does not state the local-ring assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "torsor|PrincipalHomogeneous|Picard",
+   "results": "{\"t\": \"2026-10-24T07:54:59Z\", \"tool\": \"grep\", \"query\": \"torsor|PrincipalHomogeneous|Picard\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\"], \"digest\": \"6bb700cdd5010361\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: CommRing.Pic.instSubsingletonOfIsLocalRing (Mathlib/RingTheory/PicardGroup.lean:538, source read) trivializes algebraic invertible modules; it does not classify fppf torsors or identify fibres of q with torus torsors. Scheme-point and abstract AddTorsor hits do not supply that bridge. Field Galois Hilbert 90 also does not state the local-ring assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pic\", \"IsLocalRing\"",
+   "results": "{\"t\": \"2026-10-24T07:54:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"Pic\\\", \\\"IsLocalRing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CommRing.Pic.instSubsingletonOfIsLocalRing\"], \"digest\": \"a3114e3b23ae8951\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: CommRing.Pic.instSubsingletonOfIsLocalRing (Mathlib/RingTheory/PicardGroup.lean:538, source read) trivializes algebraic invertible modules; it does not classify fppf torsors or identify fibres of q with torus torsors. Scheme-point and abstract AddTorsor hits do not supply that bridge. Field Galois Hilbert 90 also does not state the local-ring assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An fppf torsor under a split torus over the spectrum of a local ring is trivial and admits a rational section",
+   "results": "{\"t\": \"2026-10-24T07:55:00Z\", \"tool\": \"leanfinder\", \"query\": \"An fppf torsor under a split torus over the spectrum of a local ring is trivial and admits a rational section\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.SpecToEquivOfLocalRing\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField\", \"AlgebraicGeometry.AffineSpace.homOverEquiv\", \"AlgebraicGeometry.AffineSpace.instIsAffine\", \"AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty\", \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv\"], \"digest\": \"0f16ae5ca95c94dd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: CommRing.Pic.instSubsingletonOfIsLocalRing (Mathlib/RingTheory/PicardGroup.lean:538, source read) trivializes algebraic invertible modules; it does not classify fppf torsors or identify fibres of q with torus torsors. Scheme-point and abstract AddTorsor hits do not supply that bridge. Field Galois Hilbert 90 also does not state the local-ring assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hilbert theorem 90 over a local ring says a torsor for a split multiplicative torus has an integral section",
+   "results": "{\"t\": \"2026-10-24T08:01:02Z\", \"tool\": \"leanfinder\", \"query\": \"Hilbert theorem 90 over a local ring says a torsor for a split multiplicative torus has an integral section\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.Hilbert90.aux\", \"groupCohomology.exists_mul_galRestrict_of_norm_eq_one\", \"groupCohomology.Hilbert90.aux_ne_zero\", \"exists_integral_multiples\", \"NumberField.mixedEmbedding.fundamentalCone.exists_unitSMul_mem_integerSet\", \"FiniteDimensional.exists_is_basis_integral\", \"groupCohomology.exists_div_of_norm_eq_one\", \"galLift\"], \"digest\": \"e77782e91ad6eaed\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: CommRing.Pic.instSubsingletonOfIsLocalRing (Mathlib/RingTheory/PicardGroup.lean:538, source read) trivializes algebraic invertible modules; it does not classify fppf torsors or identify fibres of q with torus torsors. Scheme-point and abstract AddTorsor hits do not supply that bridge. Field Galois Hilbert 90 also does not state the local-ring assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "torsor|PrincipalHomogeneous|Picard",
+   "results": "{\"t\": \"2026-10-24T08:36:24Z\", \"tool\": \"grep\", \"query\": \"torsor|PrincipalHomogeneous|Picard\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\"], \"digest\": \"6bb700cdd5010361\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the local Picard-group subsingleton instance (Mathlib/RingTheory/PicardGroup.lean:538, read) covers algebraic invertible modules only; pointsPi concerns products of base rings, and field Galois Hilbert 90 does not prove the scheme-theoretic local-ring lifting statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An fppf torsor under a finite product of multiplicative groups over a local ring has a section",
+   "results": "{\"t\": \"2026-10-24T08:36:24Z\", \"tool\": \"leansearch\", \"query\": \"An fppf torsor under a finite product of multiplicative groups over a local ring has a section\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddTorsor.noConfusionType\", \"Prod.mk_vadd_mk\", \"Prod.fst_vadd\", \"Prod.instAddTorsor\", \"AffineMap.fst_lineMap\", \"Pi.instAddTorsor\", \"CommRing.Pic.instSubsingletonOfIsLocalRing\", \"IsLocalRing.subsingleton_tensorProduct\"], \"digest\": \"1b5093daf125dbeb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the local Picard-group subsingleton instance (Mathlib/RingTheory/PicardGroup.lean:538, read) covers algebraic invertible modules only; pointsPi concerns products of base rings, and field Galois Hilbert 90 does not prove the scheme-theoretic local-ring lifting statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pic\", \"IsLocalRing\"",
+   "results": "{\"t\": \"2026-10-24T08:36:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"Pic\\\", \\\"IsLocalRing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CommRing.Pic.instSubsingletonOfIsLocalRing\"], \"digest\": \"a3114e3b23ae8951\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the local Picard-group subsingleton instance (Mathlib/RingTheory/PicardGroup.lean:538, read) covers algebraic invertible modules only; pointsPi concerns products of base rings, and field Galois Hilbert 90 does not prove the scheme-theoretic local-ring lifting statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An fppf exact extension with split torus kernel is surjective on points over a local ring",
+   "results": "{\"t\": \"2026-10-24T08:36:25Z\", \"tool\": \"leanfinder\", \"query\": \"An fppf exact extension with split torus kernel is surjective on points over a local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.pointsPi_surjective\", \"AlgebraicGeometry.Scheme.residue_surjective\", \"Algebra.Extension.toKaehler_surjective\", \"Algebra.SubmersivePresentation.cotangentComplexAux_surjective\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"Algebra.FormallySmooth.iff_split_surjection\", \"AlgebraicGeometry.pointsPi_surjective_of_isAffine\", \"AlgebraicGeometry.specTargetImageRingHom_surjective\"], \"digest\": \"ef79e9fee16143a8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the local Picard-group subsingleton instance (Mathlib/RingTheory/PicardGroup.lean:538, read) covers algebraic invertible modules only; pointsPi concerns products of base rings, and field Galois Hilbert 90 does not prove the scheme-theoretic local-ring lifting statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hilbert theorem 90 for a local base ring gives a lift of every rational point through an extension by a split torus",
+   "results": "{\"t\": \"2026-10-24T08:36:26Z\", \"tool\": \"leanfinder\", \"query\": \"Hilbert theorem 90 for a local base ring gives a lift of every rational point through an extension by a split torus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"galLift\", \"groupCohomology.Hilbert90.aux\", \"galLiftEquiv_apply\", \"galRestrict'_galLift\", \"galLiftEquiv_symm_apply\", \"galLiftEquiv\", \"galLift_comp\", \"galLift_galRestrict'\"], \"digest\": \"585edb065f914860\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the local Picard-group subsingleton instance (Mathlib/RingTheory/PicardGroup.lean:538, read) covers algebraic invertible modules only; pointsPi concerns products of base rings, and field Galois Hilbert 90 does not prove the scheme-theoretic local-ring lifting statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-torus-integral-coset-specialization",
+  "date": "2026-10-24",
+  "group": "Q36"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), existing alteration-route trait-extension prerequisite; BLR 10.1 Proposition 7 proof, printed pp.292–293 (PDF pp.298–299), strict-local coset quotient and compatibility with ramification-one extensions; 3.6 Definition 1, printed p.78, includes separable residue extension; supporting input: Sections of split-torus extensions over local rings",
+   "via": [
+    "lem-sfb-torus-integral-coset-specialization",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-local-split-torus-extension-points",
+  "worker": "stage1",
+  "summary": "Proved the unchanged arbitrary-local-ring statement using the fibre torsor, explicit coordinate cocycles, existing fpqc descent of invertible modules, the elementary triviality of line modules on a local spectrum, and descent of compatible lifts. No new nodes. Checked field, rank zero, mixed-characteristic and nonreduced cases; no smoothness, Noetherianity or representability of a quotient is introduced.",
+  "blueprint": "Current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), supporting existing alteration-route trait-extension prerequisite recorded in blueprint.from.place; no change to the unit route. Blueprint searches for torsor, frame, 03P8, split torus, line bundle and multiplicative found no equivalent arbitrary-local-ring statement.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-fpqc-descent",
+    "why": "Use part 3 to descend the rank-one coordinate modules for an fpqc covering of Spec C. This is a generic descent tool; the unit supplies no such module-descent statement, and the field-base torus-frame lemma does not cover arbitrary local rings."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-fpqc-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q101-1fa33812d",
+  "group": "Q101",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-1fa33812d (reviewer sub-agent of L); spot-checked: I read the item, the base copy, all 7 cited statements and the Stacks sources at the cited places. The statement and stmt_deps are unchanged from the base, which was unsplit with no proof. There are no new nodes. Step 1: the fibre P=E×_{J,j}U is a T-pseudo-torsor with fppf-local sections, by the kernel identification and the lifting hypothesis. Step 2: g_ac=g_bc g_ab is checked. Coordinatewise unit cocycles become effective descent data by lem-pc-fpqc-descent part 3 (Stacks 023T, descent.tex l.1584), applied to the cover, which is fpqc by 022C (topologies.tex l.3044). Step 3: on Spec of a local ring an invertible module is trivial by the D(f) argument; the orientation u_a=g_ab u_b is checked. Step 4: z_a=i(u_a)p_a are compatible. lem-weil-pbc-fpqc-representable-descent glues them to z, and its uniqueness for targets U and J gives that z is a U-point with qz=j. I checked r=0, fields, and nonreduced and non-noetherian C. Route: the only off-unit citation that is not a Mathlib leaf is lem-pc-fpqc-descent, a generic black-box descent tool. It is declared in tool_uses and I accept it. Batch-5 flag on lem-trf-fppf-covering-is-fpqc: it is a Mathlib leaf saying fppf coverings are fpqc (Stacks 022C, unit sk-i-curve-zero, no proof_deps). This is general topology, not given by either assumption and not part of the proof of the trace formula or of Poincaré duality, so I accept it. No duplicates: lem-sfb-split-torus-torsor-frame-geometry needs a field base, and thm-sc-hilbert-90 and lem-sc-line-bundle-torsor cover only the Zariski and étale sites. No SGA is used. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocalSplitTorusExtensionPoints",
+  "declaration": "AlgebraicGeometry.localSplitTorusExtensionPoints_surjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalSplitTorusExtensionPoints.lean",
+  "statement": "theorem localSplitTorusExtensionPoints_surjective (C : Type u) [CommRing C] [IsLocalRing C] (r : ℕ) (E J : Grp (Over (Spec (.of C)))) [IsCommMonObj E.X] [IsCommMonObj J.X] (i : relativeSplitTorus (Spec (.of C)) r ⟶ E) (q : E ⟶ J) (_hkernel : IsPullback i.hom.hom (toUnit (relativeSplitTorus (Spec (.of C)) r).X) q.hom.hom η[J.X]) (_hlocallySurjective : Presheaf.IsLocallySurjective (Scheme.fppfTopology.over (Spec (.of C))) (yoneda.map q.hom.hom)) : Function.Surjective (fun e : Over.mk (𝟙 (Spec (.of C))) ⟶ E.X ↦ e ≫ q.hom.hom)",
+  "branch": "sheaf-dag",
+  "by": "NP",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-63b733548",
+  "group": "NP",
+  "result": "pass",
+  "note": "Item diff vs side-live: only lean (complete, statement verbatim) and stmt_deps + landed def node def-sfb-relative-split-torus (Q110, reviewed_lean pass; allowed by brief-stage2 §6). Clause check: IsLocalRing (⊇Nontrivial) C; E,J : Grp (Over (Spec C)) with IsCommMonObj; T = relativeSplitTorus (Spec C) r = Spec C[Z^r] with Hopf group law; kernel = IsPullback i (toUnit T) q η[J] in Over U (exact scheme-theoretic kernel); fppf-local lifting = Presheaf.IsLocallySurjective (fppfTopology.over U) (yoneda.map q); C-points = Over.mk (𝟙 U) ⟶ Y.X; conclusion Function.Surjective of postcomposition by q. Edge cases r=0, fields, non-noetherian/nonreduced C, all characteristics covered; single universe u, no vacuity. No duplicate in Mathlib/side-live (field-base torus torsor statements differ). Docstrings carry 03P8/0499/049A, blueprint id, 4 proof steps; sorry only; no stronger hypotheses; no pro-etale. Report has Worker report and Second reading by NP (self-reading, advisory). No files changed, no compile run."
+ }
+}

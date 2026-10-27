@@ -1,0 +1,248 @@
+{
+ "id": "lem-sfb-normal-subgroup-character-inversion",
+ "kind": "statement",
+ "title": "Inverse powers of occurring normal-subgroup characters",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], $G$ an affine group scheme [def-sc-group-scheme, def-pc-scheme] of finite type over $k$ [def-weil-finite-type-morphism], and $N\\subseteq G$ a closed normal subgroup scheme [def-sc-group-scheme-subgroup]. A finite-dimensional rational representation of $G$ means a homomorphism $G\\to\\mathrm{GL}(V)$ for a finite-dimensional $k$-vector space $V$ [def-weil-finite-dimensional-subspace], with $\\mathrm{GL}(V)$ identified, after a basis choice, with [def-sc-general-linear-group]. A character $\\chi:N\\to\\mathbf G_m$ [def-sc-gm-ga] occurs in such a representation if there is a nonzero subspace $U\\subseteq V$ such that, for every commutative $k$-algebra $A$, every $n\\in N(A)$ acts on $U\\otimes_k A$ by scalar multiplication by $\\chi_A(n)$. For every occurring character $\\chi$, there exist an integer $m>0$, a finite-dimensional rational representation $W$ of $G$, and a nonzero subspace $T\\subseteq W$ such that $n$ acts on $T\\otimes_k A$ by $\\chi_A(n)^{-m}$ for every $A$ and $n\\in N(A)$. This includes nonreduced $G$ and $N$ in positive characteristic. Here $\\mathrm{GL}(V)(A)$ means the $A$-linear automorphisms of $V\\otimes_k A$; if $V=0$, this is the trivial group scheme $\\operatorname{Spec}k$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 5.16, printed pp.102--103: the negative multiple of an occurring character, including the Frobenius reduction for nonreduced groups. Multiplicative notation chi^(-m) replaces additive -m chi."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sc-general-linear-group",
+  "def-weil-finite-dimensional-subspace",
+  "def-sc-gm-ga",
+  "def-weil-algebraic-closure"
+ ],
+ "proof": [
+  {
+   "text": "First establish the assertion for smooth $G$, with exponent $m=1$. Choose a line $L\\subseteq U$, so that $N$ acts on $L$ through $\\chi$. Let $S\\subseteq V$ be the sum of all $N$-stable lines. For $g\\in G(k)$ and an $N$-stable line $D$, normality implies that $gD$ is again an $N$-stable line: over every $k$-algebra $A$, $n(gd)=g((g^{-1}ng)d)$ and $g^{-1}ng\\in N(A)$. Thus $gS=S$, using also $g^{-1}$. The rational-point subspace test, with its smoothness and algebraically closed field hypotheses now satisfied, shows that $S$ is stable under $G$ on every test algebra; hence the restriction is a rational $G$-representation. Notice that $N$ need not be smooth.",
+   "uses": [
+    "lem-sfb-smooth-group-rational-point-subspace-test",
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 5.16, printed p.102, dense rational-points case; Corollary 4.5."
+   }
+  },
+  {
+   "text": "Apply character-eigenspace independence to the restriction to $N$. Each $N$-stable line has a scalar action, hence a character: its action is the restriction morphism into $\\operatorname{GL}_1$. Therefore $S$ is the direct sum of its finitely many nonzero character eigenspaces. Choose a vector-space complement to $L$ inside the $\\chi$-eigenspace and add all the other character eigenspaces, obtaining $S=L\\oplus C$ with $C$ $N$-stable on every algebra. This complement is $N$-stable because the action on the entire $\\chi$-eigenspace is scalar. In the dual rational $G$-representation $S^*$, the line $\\operatorname{Ann}(C)$ is nonzero and has character $\\chi^{-1}$ on $N$: for $f$ vanishing on $C$, $(n f)(v)=f(n^{-1}v)$, and on $L$ this is $\\chi_A(n)^{-1}f(v)$. The dual action is rational since its matrices are inverse transposes, regular functions on the general linear group. This proves the smooth case, including disconnected $G$ and nonreduced $N$.",
+   "uses": [
+    "lem-sfb-character-eigenspaces-independent",
+    "def-sc-general-linear-group"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 5.16, printed p.102, direct-summand and dual argument; Theorem 4.25 in place of Proposition 4.17 for sums of character lines."
+   }
+  },
+  {
+   "text": "If $\\operatorname{char}k=0$, the affine-group smoothness input makes $G$ smooth, so the preceding two steps finish. Otherwise write $\\operatorname{char}k=p>0$ and choose $r\\geq1$ and $G\\xrightarrow{u}I\\hookrightarrow G^{(q)}$, $q=p^r$, from the smooth-Frobenius-image input. Thus $I$ is smooth, affine and of finite type over the same algebraically closed field. It remains to construct an occurring character for a normal subgroup of $I$ whose pullback along $N\\to I$ is $\\chi^q$.",
+   "uses": [
+    "lem-sfb-affine-group-frobenius-smooth-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 5.16, printed pp.102--103, Frobenius reduction; Theorem 3.23 and Remark 3.30."
+   }
+  },
+  {
+   "text": "Base change $N\\hookrightarrow G$, $\\rho:G\\to\\operatorname{GL}(V)$, the line $L$, and $\\chi$ along $a\\mapsto a^q$. Write their twists as $N^{(q)}\\hookrightarrow G^{(q)}$, $\\rho^{(q)}$ on $V^{(q)}$, $L^{(q)}$, and $\\chi^{(q)}$. Set $H=I\\times_{G^{(q)}}N^{(q)}$. It is a closed normal subgroup of $I$: its algebra points are exactly the inverse image of the normal subgroup $N^{(q)}(A)$ under $I(A)\\to G^{(q)}(A)$. The normality equations for $N$ remain true after base change. Restrict $\\rho^{(q)}$ to $I$ and $\\chi^{(q)}$ to $H$, denoting the latter character by $\\psi$. The nonzero line $L^{(q)}$ is $H$-scalar of character $\\psi$. Indeed, in a basis starting with $L$, the first column of the representation on $N$ is $(\\chi,0,\\ldots,0)$, and tensoring its coordinate identities with $k$ gives exactly the same column with $\\chi^{(q)}$. Relative Frobenius is natural, so $u|_N$ factors through $H$ and $\\psi\\circ u|_N=\\chi^q$. Concretely the coordinate map $b\\otimes c\\mapsto cb^q$ sends the character coordinate $\\chi^*(t)\\otimes1$ to $(\\chi^*(t))^q$. These are coordinate-ring identities, hence hold for all test algebras, including nonreduced ones.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-sc-group-scheme-subgroup",
+    "lem-sfb-affine-group-frobenius-smooth-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 5.16, printed pp.102--103, Frobenius naturality; explicit twist formulation of the reduction, using the coordinate formula of Remark 3.30."
+   }
+  },
+  {
+   "text": "Apply the smooth case already proved in steps 1--2 to the pair $(I,H)$ and its occurring character $\\psi$. It gives a finite-dimensional rational representation $B$ of $I$ and a nonzero line $T\\subseteq B$ with $H$-character $\\psi^{-1}$. Pull this representation back along $u:G\\to I$. For every $k$-algebra $A$ and $n\\in N(A)$, its action on $T\\otimes_k A$ is the scalar $\\psi_A(u_A(n))^{-1}=\\chi_A(n)^{-q}$. Take $W$ to be this pulled-back representation and $m=q>0$. Pullback changes only the action, so $T$ remains nonzero. This gives precisely the required occurrence.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 5.16, printed p.103, inflation from the smooth Frobenius image and dual line."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-smooth-group-rational-point-subspace-test",
+  "def-sc-group-scheme-subgroup",
+  "lem-sfb-character-eigenspaces-independent",
+  "def-sc-general-linear-group",
+  "lem-sfb-affine-group-frobenius-smooth-image",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 5.16, printed pp.102--103; smooth-case argument follows Milne; Frobenius reduction expressed through the base-changed representation and H=I intersect N^(q), avoiding the tensor-power kernel-invariance claim."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a normal subgroup scheme of an affine algebraic group over an algebraically closed field every occurring character has a negative positive multiple occurring in another representation",
+   "results": "{\"t\": \"2026-10-23T13:22:56Z\", \"tool\": \"leanfinder\", \"query\": \"For a normal subgroup scheme of an affine algebraic group over an algebraically closed field every occurring character has a negative positive multiple occurring in another representation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FDRep.simple_iff_char_is_norm_one\", \"FDRep.char_orthonormal\", \"FDRep.simple_iff_end_is_rank_one\", \"FDRep.average_char_eq_finrank_invariants\", \"FDRep.finrank_hom_simple_simple\", \"FDRep.scalar_product_char_eq_finrank_equivariant\", \"FDRep.char_one\", \"FDRep.char_mul_comm\"], \"digest\": \"105ea5dc9076c667\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib representation characters are traces of abstract-group representations; finite-field Frobenius and multiplicative characters do not assert occurrence of inverse powers for normal subgroup schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normal algebraic subgroup rational representation character inverse power occurs Frobenius",
+   "results": "{\"t\": \"2026-10-23T13:22:56Z\", \"tool\": \"leansearch\", \"query\": \"Normal algebraic subgroup rational representation character inverse power occurs Frobenius\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"iterateFrobeniusEquiv_symm\", \"FiniteField.frobeniusAlgEquiv_symm_apply\", \"MulChar.inv_apply'\", \"FiniteField.frobeniusAlgHom\", \"MulChar.inv_apply_eq_inv'\", \"FiniteField.frobeniusAlgEquivOfAlgebraic_symm_apply\", \"FiniteField.Extension.frob\", \"FiniteField.frobeniusAlgEquiv\"], \"digest\": \"6cd3e98854354d6d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib representation characters are traces of abstract-group representations; finite-field Frobenius and multiplicative characters do not assert occurrence of inverse powers for normal subgroup schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Representation\", \"character\"",
+   "results": "{\"t\": \"2026-10-23T13:22:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"Representation\\\", \\\"character\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Representation.character\", \"Representation.isIntegral_character\"], \"digest\": \"4d6fab8ecd3aae45\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib representation characters are traces of abstract-group representations; finite-field Frobenius and multiplicative characters do not assert occurrence of inverse powers for normal subgroup schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "character|Frobenius",
+   "results": "{\"t\": \"2026-10-23T13:22:57Z\", \"tool\": \"grep\", \"query\": \"character|Frobenius\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Character.lean\", \"Mathlib/RepresentationTheory/Character.lean\", \"Mathlib/RepresentationTheory/Character.lean\", \"Mathlib/RepresentationTheory/Character.lean\", \"Mathlib/RepresentationTheory/Character.lean\", \"Mathlib/RepresentationTheory/FinGroupCharZero.lean\", \"Mathlib/RepresentationTheory/FinGroupCharZero.lean\", \"Mathlib/RepresentationTheory/FinGroupCharZero.lean\"], \"digest\": \"1bd1a57baf988f39\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib representation characters are traces of abstract-group representations; finite-field Frobenius and multiplicative characters do not assert occurrence of inverse powers for normal subgroup schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse powers of a character of a normal algebraic subgroup occur in a finite dimensional rational representation in positive characteristic using Frobenius",
+   "results": "{\"t\": \"2026-10-23T13:25:22Z\", \"tool\": \"leanfinder\", \"query\": \"Inverse powers of a character of a normal algebraic subgroup occur in a finite dimensional rational representation in positive characteristic using Frobenius\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FDRep.simple_iff_char_is_norm_one\", \"IsArithFrobAt.exists_of_isInvariant\", \"FDRep.char_orthonormal\", \"FDRep.scalar_product_char_eq_finrank_equivariant\", \"MulChar.exists_apply_eq_pow\", \"arithFrobAt\", \"FDRep.average_char_eq_finrank_invariants\", \"FDRep.char_one\"], \"digest\": \"0685b785a2830939\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib representation characters are traces of abstract-group representations; finite-field Frobenius and multiplicative characters do not assert occurrence of inverse powers for normal subgroup schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "character|Frobenius",
+   "results": "{\"t\": \"2026-10-23T14:31:18Z\", \"tool\": \"grep\", \"query\": \"character|Frobenius\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Character.lean\", \"Mathlib/RepresentationTheory/Character.lean\", \"Mathlib/RepresentationTheory/Character.lean\", \"Mathlib/RepresentationTheory/Character.lean\", \"Mathlib/RepresentationTheory/Character.lean\", \"Mathlib/RepresentationTheory/FinGroupCharZero.lean\", \"Mathlib/RepresentationTheory/FinGroupCharZero.lean\", \"Mathlib/RepresentationTheory/FinGroupCharZero.lean\"], \"digest\": \"2a4ee7a841852587\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: trace characters and abstract-group representations do not assert inverse-power occurrence for rational representations of normal subgroup schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Negative multiple of an occurring character of a normal affine algebraic subgroup occurs in another representation",
+   "results": "{\"t\": \"2026-10-23T14:31:18Z\", \"tool\": \"leansearch\", \"query\": \"Negative multiple of an occurring character of a normal affine algebraic subgroup occurs in another representation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.toInvariants\", \"Representation.toInvariants\", \"SubMulAction.neg_mem\", \"Subrepresentation.mem_ofSubmodule'_iff\", \"Subgroup.le_adjoinNegOne\", \"LieModule.Weight.coe_neg\", \"Subrepresentation.mem_ofSubmodule_iff\", \"Subrepresentation.toSubmodule\"], \"digest\": \"33164ea905a39c03\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: trace characters and abstract-group representations do not assert inverse-power occurrence for rational representations of normal subgroup schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Representation\", \"character\"",
+   "results": "{\"t\": \"2026-10-23T14:31:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"Representation\\\", \\\"character\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Representation.character\", \"Representation.isIntegral_character\"], \"digest\": \"4d6fab8ecd3aae45\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: trace characters and abstract-group representations do not assert inverse-power occurrence for rational representations of normal subgroup schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An occurring character of a closed normal subgroup scheme has an inverse positive power occurring in a rational representation of the ambient algebraic group",
+   "results": "{\"t\": \"2026-10-23T14:31:21Z\", \"tool\": \"leanfinder\", \"query\": \"An occurring character of a closed normal subgroup scheme has an inverse positive power occurring in a rational representation of the ambient algebraic group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FDRep.simple_iff_char_is_norm_one\", \"FDRep.char_orthonormal\", \"CommGroup.exists_apply_ne_one_of_hasEnoughRootsOfUnity\", \"FDRep.char_dual\", \"LieModule.exists_forall_mem_corootSpace_smul_add_eq_zero\", \"MulChar.apply_mem_algebraAdjoin_of_pow_eq_one\", \"IsSl2Triple.HasPrimitiveVectorWith.exists_nat\", \"MulChar.exists_apply_ne_one_of_hasEnoughRootsOfUnity\"], \"digest\": \"cd836bceadb11acf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: trace characters and abstract-group representations do not assert inverse-power occurrence for rational representations of normal subgroup schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-subgroup-representation-kernel",
+  "date": "2026-10-23",
+  "group": "Q49"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Affine normal quotients and the geometry of their exact sequences. Supporting argument: A closed normal subgroup is a representation kernel. Milne Lemma 5.17: Lemma 5.16, printed pp.102--103: the negative multiple of an occurring character, including the Frobenius reduction for nonreduced groups. Multiplicative notation chi^(-m) replaces additive -m chi.",
+   "via": [
+    "lem-sfb-normal-subgroup-representation-kernel",
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-normal-subgroup-character-inversion",
+  "worker": "stage1",
+  "summary": "Proved the smooth case by the sum of character lines, rational-point stability, eigenspace independence and an explicit dual complement. Reduced arbitrary characteristic-p group schemes using a smooth Frobenius image and the base-changed representation. Added two statement-only structural inputs, reused character-eigenspace independence, and checked all-algebra scalar identities. The item statement is unchanged.",
+  "blueprint": "Supporting normal-subgroup character inversion on the recorded direct-image/alteration route. The imported ancestry tool returns no blueprint ancestor; preserved from.node=null and its detailed from.place. The source proof is Milne Lemma 5.16, pp.102--103; no current blueprint node states this auxiliary lemma.",
+  "tool_uses": [
+   {
+    "node": "def-pc-fibre-product",
+    "why": "Universal property and functoriality of scheme fibre products, used to form Frobenius twists and H; no replacement of the unit route."
+   },
+   {
+    "node": "def-sc-group-scheme-subgroup",
+    "why": "Pointwise definition of normal subgroup schemes, used for conjugate lines and the inverse-image subgroup."
+   },
+   {
+    "node": "def-sc-general-linear-group",
+    "why": "General linear group coordinate inverse formula makes the dual rational action explicit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pc-fibre-product",
+  "def-sc-group-scheme-subgroup",
+  "def-sc-general-linear-group"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q156-993f8c839",
+  "group": "Q156",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q156-993f8c839 (reviewer sub-agent of L); spot-checked: PASS, no fixes. I read the item and both new nodes in full, plus every cited statement: character-eigenspaces-independent, group-scheme-subgroup (normality on all R-points), general-linear-group (inverse formula) and fibre-product. Source: Milne iAG2017 Lemma 5.16 (pp.102-103), Thm 3.23, Prop 3.29/Rem 3.30 and Prop 4.3/Cor 4.4-4.5. Steps 1-2 (smooth case): the sum S of N-stable lines is G(k)-stable by normality, so G-stable by the new rational-point test; S splits as a direct sum of character eigenspaces; the complement C is N-stable; Ann(C) in S* carries chi^-1. Steps 3-5: the new Frobenius-image node gives a smooth I with u, j and j∘u=F^r. H=I×_{G^(q)}N^(q) is closed and normal through its points. On V^(q), L^(q) has character psi, and psi∘u|_N=chi^q follows from b⊗c↦cb^q. The smooth case applied to (I,H) and pulled back along u gives chi^-q with m=q>0; this is not circular. The source error the worker reports is real: in char 2, for G_a acting unipotently, L⊗L is not ker F-invariant. The delivery's route through the twist V^(q) avoids that claim, and the item statement is unchanged. Both new nodes are true, statement-only, self-contained, and smaller than the item without restating any of its clauses. rg -L found no duplicates: affine-homomorphism-flat-image lacks smoothness, ag-cartier-reduced is only for matrix groups over Q̄_ℓ, rational-fixed-space-base-change concerns fixed spaces. Small cases checked: mu_p, alpha_p, infinitesimal G, W=0, W=V, V=0. No SGA source; tool_uses lists definitions only. Advisory: the Frobenius-image node writes char k without citing def-pc-field-characteristic."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalSubgroupCharacterInversion",
+  "declaration": "AlgebraicGeometry.normalSubgroup_character_inverse_power_occurs",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalSubgroupCharacterInversion.lean",
+  "statement": "theorem normalSubgroup_character_inverse_power_occurs {k : Type u} [Field k] [IsAlgClosed k] (G N : Over (Spec (.of k))) [GrpObj G] [GrpObj N] [IsAffine G.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] (i : N ⟶ G) [IsClosedSubgroupScheme i] [IsNormalSubgroupScheme i] (χ : N ⟶ StandardGroupSchemes.multiplicative k) [IsMonHom χ] (hχ : ∃ (n : ℕ) (ρ : GeneralLinearGroup.RationalHom G (ULift.{u} (Fin n))) (_ : IsMonHom ρ) (U : Submodule k (ULift.{u} (Fin n) → k)), U ≠ ⊥ ∧ ∀ (A : Type u) [CommRing A] [Algebra k A] (h : points N A) (v : ULift.{u} (Fin n) → A), v ∈ Submodule.span A ((fun w : ULift.{u} (Fin n) → k ↦ fun j ↦ algebraMap k A (w j)) '' (U : Set (ULift.{u} (Fin n) → k))) → Matrix.toLin' (GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin n)) k A (h ≫ i ≫ ρ)) v = ((Spec.preimage (h ≫ χ).left).hom (LaurentPolynomial.T 1)) • v) : ∃ (m : ℕ), 0 < m ∧ ∃ (n : ℕ) (ρ : GeneralLinearGroup.RationalHom G (ULift.{u} (Fin n))) (_ : IsMonHom ρ) (T : Submodule k (ULift.{u} (Fin n) → k)), T ≠ ⊥ ∧ ∀ (A : Type u) [CommRing A] [Algebra k A] (h : points N A) (v : ULift.{u} (Fin n) → A), v ∈ Submodule.span A ((fun w : ULift.{u} (Fin n) → k ↦ fun j ↦ algebraMap k A (w j)) '' (T : Set (ULift.{u} (Fin n) → k))) → Matrix.toLin' (GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin n)) k A (h ≫ i ≫ ρ)) v = ((Spec.preimage (h ≫ χ).left).hom (LaurentPolynomial.T (-(m : ℤ)))) • v",
+  "branch": "sheaf-dag",
+  "by": "NX",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5a64555f7",
+  "group": "NX",
+  "result": "fix",
+  "note": "Lean statement exact vs node and Milne 5.16: alg-closed k, affine finite-type G (IsAffine+LOFT+QC), IsClosedSubgroupScheme+IsNormalSubgroupScheme (all-algebra normality), χ IsMonHom into Spec k[t,t⁻¹], occurrence/conclusion formulas byte-identical to landed chevalley_character_cancellation hc (H↦N), ∃ m>0 with T(-m); no extra assumptions; edge cases n=0, zero algebra, nonreduced, char p ok; node differs from live only in lean, statement verbatim in file; no defs, sorry only, docstrings with source/blueprint/5 steps. Sole fault H11: 'Second reading by NX' is the author's self-check → FIX fixes/lem-sfb-normal-subgroup-character-inversion.report.md (worker report verbatim + independent clause-by-clause second reading). No Lean change, no compile."
+ }
+}

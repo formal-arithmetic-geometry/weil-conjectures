@@ -1,0 +1,131 @@
+{
+ "id": "lem-trf-point-quotient-tower-strict-comparison",
+ "kind": "statement",
+ "title": "Normalized comparison of strict quotient towers before localization",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, and a scheme $T$. Use the completed coefficient sheaf $R$ and its finite quotient sheaves $S_n$ [def-weil-completed-integral-coefficients], and the Cont-presentation completion $B$ with finite coefficient sheaves $L_n$ [def-weil-pbc-adic-coefficient-datum], where index $n$ denotes exponent $n+1$. Let $q_n$ be quotient ring isomorphisms normalized on quotient representatives as in [lem-weil-pbc-integral-coefficient-presentation-comparison]; let $e:B\\simeq R$ obey $e\\pi_n=\\pi_n^B e_n$, where $e_n:L_n\\simeq S_n$ is the published level comparison determined by $q_n$. For every cochain complex $P$ of $R$-module sheaves, with no K-flatness or boundedness hypothesis, the strict complex of towers formed by restricting $P$ along $e$, applying the ordinary Cont quotient-tower functor and restricting back along $e^{-1}$ is isomorphic to the unrestricted ordinary quotient tower of $P$ [def-weil-integral-reduction-tower]. There is such an isomorphism $r$ whose degree-$i$, level-$n$ map sends the sheafified local pure tensor $b\\otimes x$ to $e_n(b)\\otimes x$, for every site object and local sections $b,x$ [def-pur-sheaf-tensor-product]. This is a statement in complexes of strict diagrams before sections and before derived localization.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK, section-tensor-product, change of rings and sheafification; recorded step 7 of lem-trf-point-quotient-tower-homotopy, normalized balanced-map comparison before localization"
+ },
+ "stmt_deps": [
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-weil-pbc-integral-coefficient-presentation-comparison",
+  "def-weil-integral-reduction-tower",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-inverse-system"
+ ],
+ "proof": [
+  {
+   "text": "Define the degreewise and levelwise forward map by b tensor x maps to e_n(b) tensor x. The displayed completed-projection equation identifies the two balancing relations, so the presheaf maps descend and sheafify. Define the reverse map using e_n inverse. Both composites fix every pure tensor, so tensor generation and sheafification uniqueness make them identity maps.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-integral-reduction-tower"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Naturality in the original module makes the maps commute with every differential. The normalized presentation comparison gives quotient-transition compatibility for the e_n. On each pure tensor this is exactly compatibility of the forward and inverse maps with the adjacent strict quotient transitions. Every arrow in the inverse sequence is a composite of these, so the maps assemble to inverse maps of complexes of strict towers. Their construction gives the required section formula, also for zero and unbounded complexes.",
+   "uses": [
+    "lem-weil-pbc-integral-coefficient-presentation-comparison",
+    "def-weil-inverse-system",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-integral-reduction-tower",
+  "lem-weil-pbc-integral-coefficient-presentation-comparison",
+  "def-weil-inverse-system"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK, section-tensor-product, change of rings and sheafification; recorded step 7 of lem-trf-point-quotient-tower-homotopy, normalized balanced-map comparison before localization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Change of coefficient ring along an isomorphism preserves K flat complexes and identifies tensor quotient towers",
+   "results": "OK 8 hits, including RingHom.Flat.respectsIso, RingHom.FaithfullyFlat.respectsIso, Module.Flat.baseChange and Module.Flat.of_linearEquiv. These concern ordinary flat modules, not K-flat sheaf complexes or normalized strict quotient diagrams.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapHomologicalComplex",
+   "results": "OK 0 hits; unknown identifier 'Functor.mapHomologicalComplex'. Local Mathlib search supplies NatIso.mapHomologicalComplex in Algebra/Homology/Additive.lean, but no coefficient-transport statement.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*[kK][fF]lat|[kK][fF]lat.*restrictScalars",
+   "results": "OK 0 hits. Local source search found the scalar-extension ring-isomorphism theorem and K-flat preservation under scalar extension; these give the proof route for restriction along an isomorphism.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Change of coefficient ring along an isomorphism preserves K flat complexes and identifies tensor quotient towers",
+   "results": "OK 8 hits: RingHom.Flat.respectsIso, RingHom.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat.isStableUnderBaseChange, RingHom.FaithfullyFlat.respectsIso, Module.FaithfullyFlat.instTensorProduct, CochainComplex.isKProjective_of_iso, CochainComplex.isKProjective_iff_of_iso, KaehlerDifferential.mapBaseChange.congr_simp. These supply generic flatness, localization or inverse sequence infrastructure, not the completed coefficient sheaf tower construction and its normalized whole-diagram comparison.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointQuotientTowerHomotopy",
+  "date": "2026-10-27",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-rational-frobenius-integral-model",
+   "place": "Clause (3), coherent-source identification: Normalized comparison of strict quotient towers before localization",
+   "via": [
+    "lem-trf-point-quotient-tower-homotopy"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-d-weil",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointQuotientTowerStrictComparison",
+  "file": "lean/Sheaf/Paper/PointQuotientTowerStrictComparison.lean",
+  "declaration": "WeilConjectures.PointQuotientTower.strictPresentationComparison",
+  "statement": "theorem strictPresentationComparison (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (T : Scheme.{u})\n    (q : ∀ n : ℕ, PbcIntegralRing l E ⧸ (pbcIntegralDatum l E).ideal ^ (n + 1) ≃+*\n      ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))\n    (hq : ∀ (n : ℕ) (x : PbcIntegralRing l E), q n (Ideal.Quotient.mk _ x) =\n      ULift.up (Ideal.Quotient.mk _ x.down))\n    (e : pbcAdicCompletion T (pbcIntegralDatum l E) ≅\n      completedIntegralCommRingSheafUnrestricted l E T)\n    (he : ∀ n : ℕ, e.hom ≫ completedIntegralCommRingProjectionUnrestricted l E T n =\n      pbcAdicProjection T (pbcIntegralDatum l E) n ≫\n        (IntegralCoefficientPresentation.level l E T q n).hom)\n    (P : CochainComplex (integralTowerModules l E T) ℤ) :\n    ∃ r :\n      (((pbcRestrict e.hom).mapHomologicalComplex (.up ℤ) ⋙\n        completedReductionComplexTowerFunctor T (pbcIntegralDatum l E) ⋙\n          ((Functor.whiskeringRight ℕᵒᵖ _ _).obj (pbcRestrict e.inv)).mapHomologicalComplex\n            (.up ℤ)).obj P) ≅\n      (((Functor.ofOpSequence\n        (X := fun n ↦ unrestrictedIntegralComplexFunctor l E T n)\n        (unrestrictedIntegralTransition l E T)).flip ⋙\n          (HomologicalComplex.functorEquivalence\n            (integralTowerModules l E T) (.up ℤ) ℕᵒᵖ).inverse).obj P),\n      ∀ (n : ℕ) (i : ℤ) (U : T.ProEtᵒᵖ)\n        (b : ((pbcAdicRings T (pbcIntegralDatum l E)).obj (op n)).obj.obj U)\n        (x : (P.X i).val.obj U),\n        (((r.hom.f i).app (op n)).val.app U)\n            (reductionTensorSection T\n              (completedReductionProjection T (pbcIntegralDatum l E) n)\n              ((pbcRestrict e.hom).obj (P.X i)) U b x) =\n          unrestrictedIntegralTensorSection l E T n (P.X i) U\n            ((IntegralCoefficientPresentation.level l E T q n).hom.hom.app U b) x",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-f1485",
+  "group": "E4",
+  "result": "fix",
+  "landing": "20261026T222629-L-675688",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-f1485",
+  "group": "E4",
+  "result": "fix",
+  "landing": "20261026T222629-L-675688",
+  "kind": "interface",
+  "note": "independent cc review: E4 PointQuotientTowerHomotopy f148: verbatim extraction of 17 defs to PointQuotientTowerData + proved coherentSource (via proved pbcIsoRestriction_isKFlat, published towerCounit_isIso, new true hole strictPresentationComparison) against lem-trf-point-quotient-tower-homotopy and the 4 new nodes; sandbox compile of all 5 modules OK, axioms clean apart from sorryAx from the new hole; item 0 importers"
+ }
+}

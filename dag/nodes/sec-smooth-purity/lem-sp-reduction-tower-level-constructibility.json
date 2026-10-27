@@ -1,0 +1,139 @@
+{
+ "id": "lem-sp-reduction-tower-level-constructibility",
+ "kind": "statement",
+ "title": "Constructible cohomology of all evaluated integral reductions",
+ "statement": "Fix ell,E,T,D and the projection-normalized coefficient-ring isomorphism e of [def-sp-reduction-tower-data]. Let red have evaluation isomorphisms to the specified D.scalar derived extensions. If T is qcqs and the internalization of M is bounded constructible, every homology sheaf of every evaluated reduction red(M) is IsConstructibleProEtaleModuleSheaf over the corresponding finite ell-power quotient. There is no assertion of normalized tower transitions, finite Tor amplitude, or uniform Tor bounds.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sp-normalized-towers/sk-def-sp-normalized-towers-reduction.md",
+  "place": "Construction, normalization, and constructibility assertions; final Tor-amplitude sentence"
+ },
+ "stmt_deps": [
+  "def-sp-reduction-tower-data"
+ ],
+ "proof": [
+  {
+   "text": "Boundedness leaves finitely many nonzero cohomology sheaves. Refine their global finite constructible stratifications by actual fiber-product strata. Pull back each finite constant local model to the refined stratum. Zero cohomology has the zero model.",
+   "uses": [
+    "sk-def-sfb-constructible",
+    "lem-weil-pbc-constructible-stratification-intersection",
+    "new-unbounded-pullback-finite-constant-local-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sp-normalized-towers/sk-def-sp-normalized-towers-reduction.md",
+    "place": "Construction, normalization, and constructibility assertions; final Tor-amplitude sentence"
+   }
+  },
+  {
+   "text": "Use the projection-normalized coefficient isomorphism and section/internal equivalence to identify the finite scalar models. If necessary transport to a small skeleton. The matrix theorem supplies two-term finite free scalar resolutions whose reduced kernels and cokernels are finite over every finite quotient.",
+   "uses": [
+    "lem-sp-integral-local-model-finite-matrix-reduction",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sp-normalized-towers/sk-def-sp-normalized-towers-reduction.md",
+    "place": "Construction, normalization, and constructibility assertions; final Tor-amplitude sentence"
+   }
+  },
+  {
+   "text": "Apply the coefficient-preserving Postnikov comparison on the common partition. Images of the finite truncation triangles have finite locally constant cohomology on every stratum, for all degrees and levels, with finite geometric stalks. Uniqueness of derived scalar extension identifies its reduction with the supplied evaluation, and homology isomorphisms preserve constructibility. The zero complex and empty scheme are included.",
+   "uses": [
+    "lem-sp-stratified-reduction-postnikov-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sp-normalized-towers/sk-def-sp-normalized-towers-reduction.md",
+    "place": "Construction, normalization, and constructibility assertions; final Tor-amplitude sentence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-sp-integral-local-model-finite-matrix-reduction",
+  "lem-sp-stratified-reduction-postnikov-comparison",
+  "lem-weil-pbc-constructible-stratification-intersection",
+  "new-unbounded-pullback-finite-constant-local-model",
+  "sk-def-sfb-constructible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sp-normalized-towers/sk-def-sp-normalized-towers-reduction.md",
+  "place": "Construction, normalization, and constructibility assertions; final Tor-amplitude sentence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived reduction tower with constructible cohomology and uniform Tor amplitude",
+   "results": "HasDerivedCategory.standard; DerivedCategory.exists_iso_Q_obj_of_isGE; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; generic triangulated and t-structure declarations.",
+   "date": "2026-10-25",
+   "verdict": "No theorem about the chosen coefficient-tower presentation or its constructibility and Tor comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars forms a normalized strict inverse system with uniform Tor amplitude",
+   "results": "localCohomology.diagram; Ext; CategoryTheory.Tor and Tor'; adic completion maps. Loogle Functor.IsLeftDerivedFunctor: unknown identifier, zero hits.",
+   "date": "2026-10-25",
+   "verdict": "No match. These generic homology constructions do not compare the fixed scalar and tower presentations."
+  },
+  {
+   "tool": "grep",
+   "query": "normalized.?tower|reduction.?tower; SpReductionTower; spIntegralAbComparison; presentation descent and adjunct normalization",
+   "results": "msearch Mathlib grep: zero hits. Local Sheaf and WeilConjectures search finds the parent and consumers, generic strict tensor descent, successive quotient normalization, and stratified Postnikov comparison. Blueprint and DAG search finds no existing fixed-presentation comparison.",
+   "date": "2026-10-25",
+   "verdict": "Use the existing generic results; new statements isolate the remaining changes of presentation and strictly separate assertions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothPurityReductionTowerNormalized",
+  "date": "2026-10-25",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-reduction-tower-normalized",
+   "place": "Construction, normalization, and constructibility assertions; final Tor-amplitude sentence",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sp-normalized-towers",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SmoothPurityReductionLevelConstructible",
+  "file": "lean/Sheaf/Paper/SmoothPurityReductionLevelConstructible.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.sp_reduction_tower_level_constructibility",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.sp_reduction_tower_level_constructibility"
+  ],
+  "statement": "theorem sp_reduction_tower_level_constructibility\n    (D : SpCoefficientTowersAbelian l E T)\n    (coefficient : spIntegralSectionRing l E T ≅\n      WeilConjectures.completedIntegralCommRingSheafUnrestricted l E T)\n    (coefficient_normalized : ∀ (U : T.ProEtᵒᵖ)\n      (x : (condensedRingObj (spIntegralCondensed l E) T).obj.obj U),\n      coefficient.hom.hom.app U x = (spIntegralAbComparison l E T).hom.hom.app U x)\n    (red : DerivedCategory (spIntegralSectionModules l E T) ⥤\n      spDerivedCoefficientTowers l E T D)\n    (evaluation : spReductionDerivedEvaluations l E T D coefficient red)\n    [CompactSpace T] [QuasiSeparatedSpace T]\n    (M : DerivedCategory (spIntegralSectionModules l E T))\n    (hM : constantModelBoundedConstructible (spIntegralCondensed l E) T\n      ((spIntegralInternalization l E T).obj M)) :\n    ∀ (n : ℕ) (i : ℤ), Scheme.IsConstructibleProEtaleModuleSheaf T\n      (Padic.coefficientExtensionIntegers l E ⧸ spEllIdeal l E ^ (n + 1))\n      ((@DerivedCategory.homologyFunctor\n        (Scheme.proEtaleRingModules T (Scheme.proEtaleConstantRing T\n          (Padic.coefficientExtensionIntegers l E ⧸ spEllIdeal l E ^ (n + 1))))\n        _ _ (HasDerivedCategory.standard _) i).obj\n        ((spDerivedCoefficientEvaluation l E T D n).obj (red.obj M)))",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-9af5e",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261025T162438-L-451995",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-9af5e",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261025T162438-L-451995",
+  "kind": "interface",
+  "note": "independent cc review: delivered SmoothPurityReductionTowerData vs clone's old item (byte-identical 18-decl block); item proof vs det-sp-reduction-tower-normalized; 4 new sorry statements vs their nodes and the blueprint clauses; sandbox --all compile of the 6 delivered modules + 7 direct importers (all clean); #print axioms (sorryAx only via the 4 new lemmas)"
+ }
+}

@@ -1,0 +1,249 @@
+{
+ "id": "lem-sfb-integral-coordinate-avoidance",
+ "kind": "statement",
+ "title": "Integral determinant-one coordinate avoidance for curve pencils",
+ "statement": "Let $A$ be an infinite integral domain with fraction field $K$, put $U=\\operatorname{Spec}A$, and let $\\psi:Y\\to\\mathbf P^1_U$ be a finite surjective $U$-morphism. Assume $C=Y_K$ is a smooth projective geometrically integral finite-type $K$-curve of dimension one and $\\psi_K$ is etale on a nonempty open of $C$. Let $M\\subset C$ be a reduced finite etale closed subscheme. There exists a matrix $g\\in\\mathrm{SL}_2(A)$ such that, for $\\varphi=g\\circ\\psi$, each of the three fibres of $\\varphi_K$ above $0=[0:1]$, $1=[1:1]$, and $\\infty=[1:0]$ is finite etale over $K$, and their union is reduced and disjoint from $M$. More precisely, if $V\\subset C$ is any nonempty open on which $\\psi_K$ is etale and $R=C\\setminus V$, $g$ can be chosen with $g_K(\\psi_K(R\\cup|M|))\\cap\\{0,1,\\infty\\}=\\varnothing$. Here $\\mathrm{SL}_2(A)$ is the group of two-by-two matrices with entries in $A$ and determinant one, acting by homogeneous coordinates on $\\mathbf P^1_U$. The morphism $\\varphi$ remains finite and surjective, and preserves invariance under any group of $U$-automorphisms of $Y$ for which $\\psi$ was invariant.\n\nThe notions used are [def-weil-field], [def-pc-field-extension], [def-pc-base-change], [def-kun-projective], [def-kun-topological-krull-dimension], [def-sbc-smooth-morphisms], [def-pc-geometrically-irreducible], [def-weil-finite-type-morphism], [def-weil-finite-integral-morphism], [def-weil-surjective-morphism], [def-weil-etale-morphism], [def-nagata-projective-space-base-change]. An integral domain has $1\\ne0$ and no zero divisors; $|M|$ is the underlying closed subset.",
+ "source": {
+  "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+  "place": "de Jong §3.4, printed p.606; agent-written quotient-free norm-section replacement, extracted from returned proof steps 11--13. The last extraction supplies the finite-separable parameter descent needed in §3.3. Local PDF WANTED; publisher PDF read at https://www.numdam.org/item/10.5802/aif.1575.pdf."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-pc-base-change",
+  "def-kun-projective",
+  "def-kun-topological-krull-dimension",
+  "def-sbc-smooth-morphisms",
+  "def-pc-geometrically-irreducible",
+  "def-weil-finite-type-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism",
+  "def-weil-etale-morphism",
+  "def-nagata-projective-space-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Fix the nonempty open $V$ in the more precise assertion and put $R=C\\setminus V$. The scheme $C$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since a field is Noetherian. It is irreducible and has dimension one. Any chain $Z_0\\subsetneq Z_1$ of nonempty irreducible closed subsets of $R$ would extend to $Z_0\\subsetneq Z_1\\subsetneq C$, contrary to this dimension. Thus $\\dim R\\le0$ (including $R=\\varnothing$). Schemes are $T_0$, so [lem-sc-zero-dim-noetherian-closed-finite] shows that $R$ is finite. Since $M$ is finite over the affine scheme $\\operatorname{Spec}K$, it is affine by the definition of a finite morphism [def-weil-finite-integral-morphism]. Its finite etale coordinate algebra is a finite product of finite separable fields by [lem-sc-finite-etale-algebra-criterion]; in particular $|M|$ is finite. Consequently $B=\\psi_K(R\\cup|M|)$ is a finite set of scheme points of $\\mathbf P^1_K$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sc-zero-dim-noetherian-closed-finite",
+    "def-weil-finite-integral-morphism",
+    "lem-sc-finite-etale-algebra-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "§3.4, printed p.606, final paragraph: changing coordinates to avoid 0,1,infinity; explicit two-transvection argument by Q31 (local PDF WANTED; publisher PDF read online)."
+   }
+  },
+  {
+   "text": "For each $p\\in B$, take its residue-field-valued point and write its homogeneous coordinates as $[x_p:y_p]$ over $\\kappa(p)$, with $(x_p,y_p)\\ne(0,0)$. The field map $K\\to\\kappa(p)$ is injective by [def-weil-residue-field, def-pc-field-extension], so distinct elements of $A\\subset K$ remain distinct in $\\kappa(p)$. If $y_p=0$, then $x_p+a y_p\\ne0$ for every $a\\in A$. Otherwise $x_p+a y_p=0$ excludes at most one $a\\in A$: subtracting two such equations gives $(a-a\\prime)y_p=0$. Finitely many points therefore exclude finitely many elements. Choose $a\\in A$ outside them, using the infinitude of $A$, and put $X_p=x_p+a y_p\\ne0$. This is just multiplication by the upper elementary matrix $u(a)$ with diagonal entries $1$, upper-right entry $a$ and lower-left entry $0$.",
+   "uses": [
+    "def-weil-residue-field",
+    "def-pc-field-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "§3.4, printed p.606, final paragraph: changing coordinates to avoid 0,1,infinity; explicit two-transvection argument by Q31 (local PDF WANTED; publisher PDF read online)."
+   }
+  },
+  {
+   "text": "With $a$ fixed, each equation $y_p+bX_p=0$ and each equation $y_p+bX_p=X_p$ excludes at most one $b\\in A$, since $X_p\\ne0$ and $A\\to\\kappa(p)$ is injective. Choose $b\\in A$ avoiding these finitely many values. Set $g=l(b)u(a)$, where $l(b)$ has diagonal entries $1$, upper-right entry $0$ and lower-left entry $b$. Thus $g_{00}=1$, $g_{01}=a$, $g_{10}=b$ and $g_{11}=1+ab$. Its determinant is $1+ab-ab=1$, and it sends $[x_p:y_p]$ to $[X_p:y_p+bX_p]$. Both coordinates are nonzero and unequal. Hence this point is neither $0=[0:1]$, nor $\\infty=[1:0]$, nor $1=[1:1]$. This proves the more precise avoidance assertion directly, including for nonrational or inseparable closed points; no choice of geometric lifts or separability of the bad points is required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "§3.4, printed p.606, final paragraph: changing coordinates to avoid 0,1,infinity; explicit two-transvection argument by Q31 (local PDF WANTED; publisher PDF read online)."
+   }
+  },
+  {
+   "text": "The homogeneous-coordinate action in the statement gives a $U$-automorphism $g$ with inverse matrix whose entries in row order are $1+ab,-a,-b,1$: the two products are the identity. Put $\\varphi=g\\circ\\psi$. This morphism is finite directly from [def-weil-finite-integral-morphism]: for every affine open $W$ in the target, $g^{-1}W$ is affine and isomorphic to $W$, and the finite coordinate algebra of $\\psi^{-1}(g^{-1}W)$ over $\\mathcal O(g^{-1}W)$ stays finite after this ring isomorphism. Surjectivity follows because $g$ is bijective and $\\psi$ is surjective. For any automorphism $h$ of $Y$ with $\\psi h=\\psi$, associativity gives $\\varphi h=g\\psi h=g\\psi=\\varphi$, establishing the entire invariance clause over $U$, not just over $K$.",
+   "uses": [
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "§3.4, printed p.606, final paragraph: changing coordinates to avoid 0,1,infinity; explicit two-transvection argument by Q31 (local PDF WANTED; publisher PDF read online)."
+   }
+  },
+  {
+   "text": "For $t\\in\\{0,1,\\infty\\}$ let $q_t=g_K^{-1}(t)$, a $K$-rational point. The scheme fibre $F_t$ of $\\varphi_K$ over $t$ is canonically the scheme fibre of $\\psi_K$ over $q_t$ (compose the defining pullback square with the isomorphism $g_K$). It is finite over $K$ by [lem-weil-pbc-finite-morphism-permanence], applied first to $\\psi$ along $\\operatorname{Spec}K\\to U$ and then to its fibre. Step 3 implies that no point of $F_t$ lies in $R$ or $|M|$. Thus the inverse image of the open $V$ in $F_t$ is the whole scheme; by the open-subscheme meaning of [def-weil-open-immersion] its map to $C$ factors through $V$. Consequently $F_t=V\\times_{\\mathbf P^1_K,q_t}\\operatorname{Spec}K$ as schemes. The morphism $V\\to\\mathbf P^1_K$ is etale by the chosen hypothesis on $V$, so clause (1) of [lem-weil-pbc-etale-base-change-finite-limits] proves that $F_t\\to\\operatorname{Spec}K$ is etale.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-etale-base-change-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "§3.4, printed p.606, final paragraph: changing coordinates to avoid 0,1,infinity; explicit two-transvection argument by Q31 (local PDF WANTED; publisher PDF read online)."
+   }
+  },
+  {
+   "text": "Each $F_t$ is affine and finite etale over $K$, so [lem-sc-finite-etale-algebra-criterion] identifies its coordinate ring with a finite product of finite separable fields. Such a product has no nonzero nilpotent, hence each $F_t$ is reduced. The three fibres are pairwise disjoint closed subschemes, since their images are three distinct closed points of $\\mathbf P^1_K$. Their scheme-theoretic union is locally one of the $F_t$: near a point of one fibre remove the other two closed fibres. It is therefore reduced, and its underlying set is disjoint from $|M|$ by Step 5, which also makes its intersection with $M$ the empty scheme. Choosing any one nonempty etale open supplies the initial existence assertion; the construction already worked for every specified such $V$.",
+   "uses": [
+    "lem-sc-finite-etale-algebra-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "§3.4, printed p.606, final paragraph: changing coordinates to avoid 0,1,infinity; explicit two-transvection argument by Q31 (local PDF WANTED; publisher PDF read online)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-zero-dim-noetherian-closed-finite",
+  "def-weil-finite-integral-morphism",
+  "lem-sc-finite-etale-algebra-criterion",
+  "def-weil-residue-field",
+  "def-pc-field-extension",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-etale-base-change-finite-limits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+  "place": "§3.4, printed p.606, final paragraph: changing coordinates to avoid 0,1,infinity; explicit two-transvection argument by Q31 (local PDF WANTED; publisher PDF read online)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite generically etale morphism of a smooth projective curve to the projective line over the fraction field of an infinite domain, a determinant one matrix over that domain moves the branch and marked images away from zero one infinity.",
+   "results": "; WeierstrassCurve.Affine.Point.map_some, WeierstrassCurve.Projective.comp_equiv_comp, WeierstrassCurve.Projective.map_nonsingular, WeierstrassCurve.Affine.CoordinateRing.YClass_ne_zero, WeierstrassCurve.Affine.CoordinateRing.XClass_ne_zero, WeierstrassCurve.Affine.nonsingular_iff_variableChange, WeierstrassCurve.Jacobian.comp_equiv_comp, WeierstrassCurve.Projective.nonsingular_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the effective-action/norm, interpolation, relative section-pencil, integral coordinate-avoidance, or finite-separable specialization assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.SpecialLinearGroup",
+   "results": "; Matrix.SpecialLinearGroup, Matrix.SpecialLinearGroup.hasInv, Matrix.SpecialLinearGroup.hasMul, Matrix.SpecialLinearGroup.hasOne, Matrix.SpecialLinearGroup.instGroup, Matrix.SpecialLinearGroup.instInhabited, Matrix.SpecialLinearGroup.monoid, Matrix.SpecialLinearGroup.instPowNat",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the effective-action/norm, interpolation, relative section-pencil, integral coordinate-avoidance, or finite-separable specialization assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "SpecialLinearGroup|genericallyEtale|generically_etale",
+   "results": "; Mathlib/NumberTheory/Modular.lean, Mathlib/NumberTheory/Modular.lean, Mathlib/NumberTheory/Modular.lean, Mathlib/NumberTheory/Modular.lean, Mathlib/NumberTheory/Modular.lean, Mathlib/NumberTheory/ModularForms/LevelOne/Basic.lean, Mathlib/NumberTheory/ModularForms/BoundedAtCusp.lean, Mathlib/NumberTheory/ModularForms/SlashActions.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the effective-action/norm, interpolation, relative section-pencil, integral coordinate-avoidance, or finite-separable specialization assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The subgroup SL2(A) is Zariski dense in SL2(Frac A) for an infinite integral domain A and moves any finite subset of the projective line away from three rational points.",
+   "results": "; OnePoint.exists_mem_SL2, Subgroup.instIsArithmeticRangeSpecialLinearGroupFinOfNatNatIntGeneralLinearGroupRealMapGL, ModularGroup.tendsto_lcRow0, ModularGroup.exists_smul_mem_fd, Subgroup.IsRegularAtInfty, Subgroup.strictWidthInfty_SL2Z, Subgroup.widthInfty, Subgroup.strictPeriods_SL2Z",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the effective-action/norm, interpolation, relative section-pencil, integral coordinate-avoidance, or finite-separable specialization assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A projective coordinate change over an infinite integral domain moves a finite branch and marking set away from zero one infinity.",
+   "results": "; WeierstrassCurve.Projective.Point.fromAffine_some_ne_zero, WeierstrassCurve.Projective.baseChange_add, WeierstrassCurve.Projective.baseChange_polynomial, WeierstrassCurve.instSMulVariableChange, WeierstrassCurve.VariableChange.map, WeierstrassCurve.Projective.baseChange_dblX, WeierstrassCurve.Projective.baseChange_nonsingular, WeierstrassCurve.Projective.Point.toAffine",
+   "date": "2026-10-22",
+   "verdict": "no match: different objects or only component facts"
+  },
+  {
+   "tool": "grep",
+   "query": "SpecialLinearGroup|genericallyEtale|generically_etale",
+   "results": "Mathlib/NumberTheory/Modular.lean; Mathlib/NumberTheory/Modular.lean; Mathlib/NumberTheory/Modular.lean; Mathlib/NumberTheory/Modular.lean; Mathlib/NumberTheory/Modular.lean; Mathlib/NumberTheory/ModularForms/LevelOne/Basic.lean; Mathlib/NumberTheory/ModularForms/BoundedAtCusp.lean; Mathlib/NumberTheory/ModularForms/SlashActions.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: component projective-action, matrix-group, or configuration declarations do not assert simultaneous integral avoidance and the etale-fibre conclusion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A projective linear transformation over an infinite domain avoids finitely many forbidden points.",
+   "results": "OnePoint.smul_some_eq_ite; Projectivization.map_comp; OnePoint.smul_infty_eq_ite; Projectivization.generalLinearGroup_smul_def; Projectivization.map_id; Projectivization.card''; OnePoint.smul_infty_def; Projectivization.independent_iff_not_dependent",
+   "date": "2026-10-23",
+   "verdict": "no match: component projective-action, matrix-group, or configuration declarations do not assert simultaneous integral avoidance and the etale-fibre conclusion"
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.SpecialLinearGroup",
+   "results": "Matrix.SpecialLinearGroup; Matrix.SpecialLinearGroup.hasInv; Matrix.SpecialLinearGroup.hasMul; Matrix.SpecialLinearGroup.hasOne; Matrix.SpecialLinearGroup.instGroup; Matrix.SpecialLinearGroup.instInhabited; Matrix.SpecialLinearGroup.monoid; Matrix.SpecialLinearGroup.instPowNat",
+   "date": "2026-10-23",
+   "verdict": "no match: component projective-action, matrix-group, or configuration declarations do not assert simultaneous integral avoidance and the etale-fibre conclusion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two elementary matrices over an infinite integral domain move finitely many points of the projective line over its fraction field away from zero one and infinity.",
+   "results": "OnePoint.exists_mem_SL2; Matrix.GeneralLinearGroup.parabolicFixedPoint; OnePoint.smul_infty_def; OnePoint.smul_infty_eq_ite; OnePoint.smul_infty_eq_self_iff; OnePoint.smul_some_eq_ite; Matrix.GeneralLinearGroup.IsElliptic.smul_ne_self; Matrix.SpecialLinearGroup.fin_two_exists_eq_mk_of_apply_zero_one_eq_zero",
+   "date": "2026-10-23",
+   "verdict": "no match: component projective-action, matrix-group, or configuration declarations do not assert simultaneous integral avoidance and the etale-fibre conclusion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over an infinite domain one can choose parameters in two transvections to move a finite subset of the scheme projective line away from three rational points.",
+   "results": "Configuration.ofField.instNondegenerateProjectivizationForallFinOfNatNat; Configuration.ofField.instProjectivePlaneProjectivizationForallFinOfNatNatOfDecidableEq; Configuration.ofField.instMembershipProjectivizationForallFinOfNatNat; Configuration.ProjectivePlane.exists_config; Projectivization.exists_not_self_orthogonal; Projectivization.exists_not_orthogonal_self; WeierstrassCurve.Projective.not_equiv_of_Z_eq_zero_right; Configuration.ProjectivePlane.two_lt_pointCount",
+   "date": "2026-10-23",
+   "verdict": "no match: component projective-action, matrix-group, or configuration declarations do not assert simultaneous integral avoidance and the etale-fibre conclusion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-invariant-local-curve-pencils",
+  "date": "2026-10-22",
+  "group": "O2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §§3.3--3.4, pp.605--606: local quotient pencils and avoidance of 0,1,infinity. The zero-dimensional clause spells out the suitable-cover/pencil choice left implicit in §3.3; after a finite separable constant extension one chooses the finite separating pencil on the quotient curve. Local PDF WANTED; online publisher PDF read.; extraction of returned local-pencil proof, steps 11--13",
+   "via": [
+    "lem-sfb-invariant-local-curve-pencils",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-integral-coordinate-avoidance",
+  "worker": "stage1",
+  "summary": "Q31 repairs the return of branch head 614e9338f39 by rebasing the retained split through deliver.py onto current origin/sheaf-dag and re-reading all current statement and proof dependencies. The current repository item is still unsplit; its statement, statement dependencies, source and blueprint ancestry agree with the retained item. All eleven citation quotes still occur verbatim in the nine current proof-input statements, so the explicit two-transvection argument and its dependencies remain valid. The repair report records the current-hypothesis audit; no new nodes or searches are needed.",
+  "blueprint": "Realizes the coordinate-change input in de Jong §3.4 p.606 serving det-thm-sf-ctf-stability-direct-images proof (3), through the existing alteration/local-pencil ancestry. The inherited ancestor is null as confirmed by blueprint_refs.py ancestor; no blueprint node found stating this integral avoidance assertion.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic scheme or finite-etale algebra fact used as stated in the coordinate-avoidance proof; this constructibility unit has no replacement and its alteration route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-finite-morphism-permanence",
+    "why": "Generic scheme or finite-etale algebra fact used as stated in the coordinate-avoidance proof; this constructibility unit has no replacement and its alteration route is unchanged."
+   },
+   {
+    "node": "lem-sc-finite-etale-algebra-criterion",
+    "why": "Generic scheme or finite-etale algebra fact used as stated in the coordinate-avoidance proof; this constructibility unit has no replacement and its alteration route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-sc-finite-etale-algebra-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q31-91d6f32d6",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-91d6f32d6 (reviewer sub-agent of L); spot-checked: PASS. This is a re-delivery after an L return: landing refused the side completion of the earlier head 614e9338f398, which had already PASSed review, because it had not been promoted into the live DAG. Apart from split_report, the item JSON is identical to that head: statement, stmt_deps, the six steps, uses, proof_deps, source and proof_origin=agent all match. It has no new nodes, no repair note, and it is not a 2026-10-21 re-split. I re-read the whole item and every cited statement on base 3553e17. All of them are unchanged and none is merged: finite-type-over-noetherian, zero-dim-noetherian-closed-finite, the finite-morphism definition, finite-etale-algebra-criterion, residue-field and field-extension, finite-morphism-permanence (a), open-immersion, and etale-base-change (1). The citer lem-sfb-invariant-local-curve-pencils step 4 uses exactly what the statement gives. I recomputed the math: g=[[1,a],[b,1+ab]] has det 1 and inverse [[1+ab,-a],[-b,1]], and it maps [x:y] to [X:y+bX] with X≠0. Because A injects into κ(p), each bad point excludes at most one a and at most two b. Steps 5 and 6 give the fibre over the K-point q_t, which factors through the open V and so is étale and finite; the fibres are reduced and disjoint, and their union misses M. Edge cases checked: M and R empty, nonrational and inseparable points, characteristic 2, non-Noetherian A; over F2 the statement fails, so infinitude is needed. The duplicate search (SL2, 0,1,∞, avoidance) finds only different pencil and norm statements. de Jong §3.4 p.606 is not available locally (WANTED); the proof is honestly marked agent-written; no SGA is used. Tool uses accepted. Advisory route note: lem-sc-zero-dim-noetherian-closed-finite (unit sk-thm-curveestimate) is cited without a declaration."
+ }
+}

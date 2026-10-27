@@ -1,0 +1,465 @@
+{
+ "id": "lem-sfb-graded-module-localization-scalar-extension",
+ "kind": "statement",
+ "title": "Coefficient tensor product commutes with homogeneous localized module pieces",
+ "statement": "Let $R\\to S$ be a homomorphism of commutative rings, $A=\\bigoplus_{n\\geq0}A_n$ a commutative unital graded ring with a unital map $R\\to A_0$, and $M=\\bigoplus_{i\\in\\mathbf Z}M_i$ a graded $A$-module, meaning $A_nM_i\\subseteq M_{n+i}$. Put $C=S\\otimes_RA$, graded by $C_n=S\\otimes_RA_n$, and $N=S\\otimes_RM$, graded by $N_i=S\\otimes_RM_i$, with $C$-action $(s\\otimes a)(t\\otimes x)=st\\otimes ax$. Fix $f\\in A_d$, $d>0$, and put $f_S=1\\otimes f$. Write $M_f$ and $N_{f_S}$ for module localization at the powers of $f$ and $f_S$ [def-weil-pbc-module-localization]. For every integer $j$, let $(M_f)_j$ be the $R$-submodule of $M_f$ consisting of fractions $x/f^m$ with $m\\geq0$ and $x\\in M_{md+j}$, and define $(N_{f_S})_j$ similarly. Equality is the ordinary module-localization relation, so $x/f^m=y/f^n$ if and only if $f^k(f^nx-f^my)=0$ for some $k\\geq0$. The displayed subsets are $R$- and $S$-modules respectively, with addition by a common denominator. The rule\n$$\\lambda_{M,f,j}:S\\otimes_R(M_f)_j\\xrightarrow{\\sim}(N_{f_S})_j,\\qquad s\\otimes(x/f^m)\\longmapsto(s\\otimes x)/f_S^m$$\ndefines an isomorphism of $S$-modules. No flatness, finite generation, boundedness of the grading of $M$, or non-zero-divisor hypothesis on $f$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01N2 (lemma-base-change-map-proj), proof: algebra of the standard-open calculation, generalized from the graded ring A to a graded module M. Agent-supplied homogeneous-module refinement; the source states the resulting Proj comparison, not this module formulation."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-localization",
+  "def-sc-localized-homogeneous-piece"
+ ],
+ "proof": [
+  {
+   "text": "Fix $j\\in\\mathbf Z$ and put $D_m=M_{md+j}$ for $m\\in\\mathbf N$, with transition $t_{nm}:D_m\\to D_n$, $x\\mapsto f^{n-m}x$ for $m\\le n$. These are $R$-linear and satisfy $t_{pm}=t_{pn}t_{nm}$ because powers add. The maps $u_m:D_m\\to H=(M_f)_j$, $x\\mapsto x/f^m$, form a cocone: $f^{n-m}x/f^n=x/f^m$ by the localization relation. Addition of fractions with denominators $m,n$ takes place at the common stage $m+n$, and scalar multiplication changes only the numerator; thus $H$ is the stated $R$-submodule.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01N2 (lemma-base-change-map-proj), standard-open calculation, agent-supplied graded-module refinement; fraction relation from algebra.tex Tag 07JZ (definition-localization-module)."
+   }
+  },
+  {
+   "text": "This cocone is a colimit. Given compatible $R$-linear maps $v_m:D_m\\to P$, define $v(x/f^m)=v_m(x)$. If $x/f^m=y/f^n$, choose $k\\ge0$ with $f^{k+n}x=f^{k+m}y$; both sides lie in $D_{k+m+n}$. Compatibility gives $v_m(x)=v_{k+m+n}(f^{k+n}x)=v_{k+m+n}(f^{k+m}y)=v_n(y)$. Hence $v$ is well-defined. Passing to a common denominator proves additivity; $v_m(rx)=rv_m(x)$ proves $R$-linearity. Every fraction comes from some $u_m$, proving uniqueness. Apply the identical construction to $N$ and $f_S$: with $E_m=N_{md+j}$, transitions $y\\mapsto f_S^{n-m}y$, and $w_m(y)=y/f_S^m$, $H^\\prime=(N_{f_S})_j$ is a colimit of $E_m$ as $R$-modules and also as $S$-modules. Here the test cocones may be $R$-linear or $S$-linear respectively, so no claim that restriction of scalars preserves colimits is needed.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01N2 (lemma-base-change-map-proj), standard-open calculation, agent-supplied graded-module refinement; fraction relation from algebra.tex Tag 07JZ (definition-localization-module)."
+   }
+  },
+  {
+   "text": "By the tensor-colimit theorem with fixed module $S$, and the balanced interchange $x\\otimes s\\leftrightarrow s\\otimes x$, $S\\otimes_R H$ with legs $q_m=1_S\\otimes u_m$ is a colimit of $S\\otimes_R D_m$ in $R$-modules. The specified tensor grading identifies $S\\otimes_R D_m$ with $E_m$ by $\\beta_m(s\\otimes x)=s\\otimes x$. These identifications intertwine transitions: $\\beta_n(s\\otimes f^{n-m}x)=f_S^{n-m}\\beta_m(s\\otimes x)$, first on pure tensors by the stated $C$-action and then on sums. There is no injectivity assumption on tensoring arbitrary inclusions here: each $M_i\\hookrightarrow M$ is split by its grading projection, and tensoring this retraction identity still gives a retraction. Thus the displayed $N_i=S\\otimes_RM_i$ really are the indicated submodules. The two colimit properties now supply inverse $R$-linear maps between $S\\otimes_RH$ and $H^\\prime$: the forward map has legs $w_m\\beta_m$, and its inverse has legs $q_m\\beta_m^{-1}$. Their composites fix all colimit legs and are identities by uniqueness.",
+   "uses": [
+    "lem-weil-pbc-tensor-commutes-with-colimits",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DD (lemma-tensor-products-commute-with-limits); the transition and split-inclusion calculations are the agent-supplied module refinement of constructions.tex Tag 01N2."
+   }
+  },
+  {
+   "text": "Call the forward equivalence $\\lambda$. Its defining equation $\\lambda q_m=w_m\\beta_m$ gives $\\lambda(s\\otimes(x/f^m))=(s\\otimes x)/f_S^m$. For $t\\in S$, this formula gives $\\lambda(ts\\otimes(x/f^m))=t\\lambda(s\\otimes(x/f^m))$. Such pure tensors generate $S\\otimes_RH$, so additivity proves $S$-linearity, and the bijection is an $S$-module isomorphism. All steps use fraction equality by multiplication with a power, never cancellation or exactness of tensoring; they apply equally when $f$ or $f_S$ is nilpotent, and for every integer $j$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01N2 (lemma-base-change-map-proj), standard-open calculation, agent-supplied graded-module refinement; fraction relation from algebra.tex Tag 07JZ (definition-localization-module)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-tensor-commutes-with-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01N2 (lemma-base-change-map-proj), proof on standard opens, expanded to graded modules using algebra.tex Tags 07JZ (definition-localization-module) and 00DD (lemma-tensor-products-commute-with-limits). The source does not itself state the arbitrary graded-module refinement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tensor|baseChange|base_change",
+   "results": {
+    "hits": [
+     "Mathlib/RingTheory/GradedAlgebra/TensorProduct.lean",
+     "Mathlib/RingTheory/GradedAlgebra/TensorProduct.lean",
+     "Mathlib/RingTheory/GradedAlgebra/TensorProduct.lean",
+     "Mathlib/RingTheory/GradedAlgebra/TensorProduct.lean",
+     "Mathlib/RingTheory/GradedAlgebra/TensorProduct.lean"
+    ],
+    "n_hits": 5,
+    "note": "",
+    "subdirectory": "RingTheory/GradedAlgebra",
+    "digest": "a497ca8b269645a4"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: IsLocalizedModule.rTensor (Mathlib/RingTheory/Localization/BaseChange.lean:244) gives the ungraded localization; GradedAlgebra.baseChange gives the tensor grading. Neither states the homogeneous localized-piece comparison, and identifying the graded pieces is an additional argument, not a one-line specialization. Other hits concern graded tensor products or scalar actions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensoring with an arbitrary coefficient algebra commutes with homogeneous localized graded module pieces",
+   "results": {
+    "hits": [
+     "TensorProduct.gradedComm_algebraMap_tmul",
+     "IsLocalization.moduleLid",
+     "IsLocalization.tensorProduct_isLocalizedModule",
+     "GradedTensorProduct.tmul_coe_mul_algebraMap_tmul",
+     "IsLocalizedModule.rTensor",
+     "IsLocalization.instIsLocalizedModuleTensorProductMap",
+     "IsLocalization.tensor",
+     "GradedTensorProduct.tmul_algebraMap_mul_coe_tmul"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "97d871fe6ace8a61"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: IsLocalizedModule.rTensor (Mathlib/RingTheory/Localization/BaseChange.lean:244) gives the ungraded localization; GradedAlgebra.baseChange gives the tensor grading. Neither states the homogeneous localized-piece comparison, and identifying the graded pieces is an additional argument, not a one-line specialization. Other hits concern graded tensor products or scalar actions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomogeneousLocalization\", \"tensor\"",
+   "results": {
+    "hits": [],
+    "n_hits": 0,
+    "note": "",
+    "subdirectory": "",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: IsLocalizedModule.rTensor (Mathlib/RingTheory/Localization/BaseChange.lean:244) gives the ungraded localization; GradedAlgebra.baseChange gives the tensor grading. Neither states the homogeneous localized-piece comparison, and identifying the graded pieces is an additional argument, not a one-line specialization. Other hits concern graded tensor products or scalar actions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a graded module over a graded algebra, scalar extension commutes with every homogeneous degree of localization at a homogeneous element without flatness",
+   "results": {
+    "hits": [
+     "HomogeneousLocalization.instIsScalarTowerSubtypeMemOfNatLocalization",
+     "HomogeneousLocalization.mk_smul",
+     "HomogeneousLocalization.awayMap_mk",
+     "IsLocalization.mapExtendScalars_eq_toLinearMap_mapₐ",
+     "HomogeneousLocalization.NumDenSameDeg.instSMul",
+     "HomogeneousLocalization.awayMapₐ",
+     "HomogeneousLocalization.instSMul",
+     "HomogeneousLocalization.instSMulNat"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "ad72abcbc677f346"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: IsLocalizedModule.rTensor (Mathlib/RingTheory/Localization/BaseChange.lean:244) gives the ungraded localization; GradedAlgebra.baseChange gives the tensor grading. Neither states the homogeneous localized-piece comparison, and identifying the graded pieces is an additional argument, not a one-line specialization. Other hits concern graded tensor products or scalar actions."
+  },
+  {
+   "tool": "grep",
+   "query": "graded|homogeneous|degree",
+   "results": {
+    "hits": [],
+    "n_hits": 0,
+    "note": "",
+    "subdirectory": "RingTheory/Localization/BaseChange.lean",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: IsLocalizedModule.rTensor (Mathlib/RingTheory/Localization/BaseChange.lean:244) gives the ungraded localization; GradedAlgebra.baseChange gives the tensor grading. Neither states the homogeneous localized-piece comparison, and identifying the graded pieces is an additional argument, not a one-line specialization. Other hits concern graded tensor products or scalar actions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The degree j part of localizing a graded module after coefficient tensor product is isomorphic to the coefficient tensor product of the degree j localized part",
+   "results": {
+    "hits": [
+     "GradedTensorProduct.auxEquiv",
+     "GradedTensorProduct.liftEquiv",
+     "TensorProduct.tmul_of_gradedMul_of_tmul",
+     "GradedTensorProduct.auxEquiv_tmul",
+     "GradedTensorProduct.of",
+     "TensorProduct.gradedMul",
+     "GradedTensorProduct.auxEquiv_mul",
+     "GradedTensorProduct.tmul"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "a914c50771d306d2"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: IsLocalizedModule.rTensor (Mathlib/RingTheory/Localization/BaseChange.lean:244) gives the ungraded localization; GradedAlgebra.baseChange gives the tensor grading. Neither states the homogeneous localized-piece comparison, and identifying the graded pieces is an additional argument, not a one-line specialization. Other hits concern graded tensor products or scalar actions."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor|baseChange|base_change",
+   "results": {
+    "hits": [],
+    "n_hits": 0,
+    "note": "",
+    "subdirectory": "RingTheory/GradedAlgebra/HomogeneousLocalization.lean",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: IsLocalizedModule.rTensor (Mathlib/RingTheory/Localization/BaseChange.lean:244) gives the ungraded localization; GradedAlgebra.baseChange gives the tensor grading. Neither states the homogeneous localized-piece comparison, and identifying the graded pieces is an additional argument, not a one-line specialization. Other hits concern graded tensor products or scalar actions."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor|baseChange|base_change",
+   "results": {
+    "hits": [
+     "Mathlib/RingTheory/GradedAlgebra/TensorProduct.lean",
+     "Mathlib/RingTheory/GradedAlgebra/TensorProduct.lean",
+     "Mathlib/RingTheory/GradedAlgebra/TensorProduct.lean",
+     "Mathlib/RingTheory/GradedAlgebra/TensorProduct.lean",
+     "Mathlib/RingTheory/GradedAlgebra/TensorProduct.lean"
+    ],
+    "n_hits": 5,
+    "note": "",
+    "subdirectory": "RingTheory/GradedAlgebra",
+    "digest": "a497ca8b269645a4"
+   },
+   "date": "2026-10-24",
+   "verdict": "no exact match: hits are graded ring tensor products, homogeneous ring fractions, or ungraded localization base change; none states the arbitrary graded module degree-j localization comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensoring with an arbitrary coefficient algebra commutes with homogeneous localized graded module pieces",
+   "results": {
+    "hits": [
+     "TensorProduct.gradedComm_algebraMap_tmul",
+     "IsLocalization.moduleLid",
+     "IsLocalization.tensorProduct_isLocalizedModule",
+     "GradedTensorProduct.tmul_coe_mul_algebraMap_tmul",
+     "IsLocalizedModule.rTensor",
+     "IsLocalization.instIsLocalizedModuleTensorProductMap",
+     "IsLocalization.tensor",
+     "GradedTensorProduct.tmul_algebraMap_mul_coe_tmul"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "97d871fe6ace8a61"
+   },
+   "date": "2026-10-24",
+   "verdict": "no exact match: hits are graded ring tensor products, homogeneous ring fractions, or ungraded localization base change; none states the arbitrary graded module degree-j localization comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomogeneousLocalization\", \"tensor\"",
+   "results": {
+    "hits": [],
+    "n_hits": 0,
+    "note": "",
+    "subdirectory": "",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no exact match: hits are graded ring tensor products, homogeneous ring fractions, or ungraded localization base change; none states the arbitrary graded module degree-j localization comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a graded module over a graded algebra scalar extension commutes with every homogeneous degree of localization at a homogeneous element without flatness",
+   "results": {
+    "hits": [
+     "HomogeneousLocalization.instIsScalarTowerSubtypeMemOfNatLocalization",
+     "HomogeneousLocalization.mk_smul",
+     "HomogeneousLocalization.instSMul",
+     "HomogeneousLocalization.instSMulNat",
+     "HomogeneousLocalization.val_smul",
+     "HomogeneousLocalization.NumDenSameDeg.instSMul",
+     "HomogeneousLocalization.Away.isLocalization_mul",
+     "IsLocalization.mapExtendScalars_eq_toLinearMap_mapₐ"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "0edaea8c6751dfea"
+   },
+   "date": "2026-10-24",
+   "verdict": "no exact match: hits are graded ring tensor products, homogeneous ring fractions, or ungraded localization base change; none states the arbitrary graded module degree-j localization comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "preservesColimits|isLeftAdjoint|tensorLeft",
+   "results": {
+    "hits": [
+     "Mathlib/Algebra/Category/ModuleCat/Monoidal/Closed.lean"
+    ],
+    "n_hits": 1,
+    "note": "",
+    "subdirectory": "Algebra/Category/ModuleCat/Monoidal",
+    "digest": "165cd73c8ee58e8d"
+   },
+   "date": "2026-10-24",
+   "verdict": "supporting match only: general tensor-colimit preservation, already carried by lem-weil-pbc-tensor-commutes-with-colimits; not the homogeneous localized-piece assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor product of modules over a commutative ring preserves all colimits",
+   "results": {
+    "hits": [
+     "ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat",
+     "CategoryTheory.MonoidalCategory.Limits.preservesCoLimit_curriedTensor",
+     "CategoryTheory.instPreservesColimitsTensorLeft",
+     "Module.Flat.iff_preservesFiniteLimits_tensorLeft",
+     "PiTensorProduct.instModule",
+     "Submodule.FG.rTensor.directLimit",
+     "CommRingCat.pushoutCoconeIsColimit",
+     "ModuleCat.hasColimitsOfSize"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "7e7179aae74ba452"
+   },
+   "date": "2026-10-24",
+   "verdict": "supporting match only: general tensor-colimit preservation, already carried by lem-weil-pbc-tensor-commutes-with-colimits; not the homogeneous localized-piece assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensorLeft\", \"PreservesColimits\"",
+   "results": {
+    "hits": [
+     "CategoryTheory.instPreservesColimitsTensorLeft",
+     "CategoryTheory.Functor.Monoidal.instPreservesColimitsOfShapeTensorLeftOfHasColimitsOfShape",
+     "PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft"
+    ],
+    "n_hits": 3,
+    "note": "",
+    "subdirectory": "",
+    "digest": "8b14984945953183"
+   },
+   "date": "2026-10-24",
+   "verdict": "supporting match only: general tensor-colimit preservation, already carried by lem-weil-pbc-tensor-commutes-with-colimits; not the homogeneous localized-piece assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The degree j part of localizing a graded module after coefficient tensor product is isomorphic to the coefficient tensor product of the degree j localized part",
+   "results": {
+    "hits": [
+     "GradedTensorProduct.auxEquiv",
+     "GradedTensorProduct.liftEquiv",
+     "TensorProduct.tmul_of_gradedMul_of_tmul",
+     "GradedTensorProduct.auxEquiv_tmul",
+     "GradedTensorProduct.of",
+     "TensorProduct.gradedMul",
+     "GradedTensorProduct.auxEquiv_mul",
+     "GradedTensorProduct.tmul"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "a914c50771d306d2"
+   },
+   "date": "2026-10-24",
+   "verdict": "no exact match: hits are graded ring tensor products, homogeneous ring fractions, or ungraded localization base change; none states the arbitrary graded module degree-j localization comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a commutative ring R and R module P the functor P tensor R - preserves all colimits of modules",
+   "results": {
+    "hits": [
+     "Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier",
+     "Module.Flat.iff_preservesFiniteLimits_tensorLeft",
+     "ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat",
+     "ModuleCat.monoidalCategory",
+     "ModuleCat.instMonoidalLinear",
+     "FGModuleCat.instIsMonoidalModuleCatIsFG",
+     "ModuleCat.MonoidalCategory.instMonoidalCategoryStruct",
+     "FGModuleCat.tensorObj_obj"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "9cdb03ad97245791"
+   },
+   "date": "2026-10-24",
+   "verdict": "supporting match only: general tensor-colimit preservation, already carried by lem-weil-pbc-tensor-commutes-with-colimits; not the homogeneous localized-piece assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "graded|homogeneous|degree",
+   "results": {
+    "hits": [],
+    "n_hits": 0,
+    "note": "",
+    "subdirectory": "RingTheory/Localization/BaseChange.lean",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no exact match: hits are graded ring tensor products, homogeneous ring fractions, or ungraded localization base change; none states the arbitrary graded module degree-j localization comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proj-scalar-extension-twist-comparison",
+  "date": "2026-10-24",
+  "group": "Q19"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting subargument for proper-support Grothendieck existence in Stacks Tag 08BE, serving the inherited compactification/direct-image prerequisite chain of sk-thm-sf-ctf-stability; the Chow modification in the third paragraph. Construction input: Tag 088S proof, apply 088R to the chosen open immersion into projective space; affine-base projectivity is handled separately. Supporting Tags 084B (lemma-relative-proj), 085Q (definition-blow-up), 085R (lemma-blowing-up-affine), 085S (lemma-flat-base-change-blowing-up), 085T (lemma-blowing-up-gives-effective-Cartier-divisor), 085Z (lemma-blowing-up-projective), and 083S (lemma-complement-effective-Cartier-divisor). Scheme coefficient comparison: descent.tex Tags 03DX (proposition-equivalence-quasi-coherent) and 05VG (lemma-equivalence-quasi-coherent-properties).. General graded-algebra construction underlying the blowup: representability and arbitrary-base-change comparison of relative Proj (084B and 085C). Scheme prerequisite for the compactification/direct-image paragraph of sk-thm-sf-ctf-stability.proof.md: constructions.tex 01NW, 01NY and 01NZ, the scheme functor used in the proof of spaces-divisors.tex 084B. Technical input: Tag 01NR (lemma-glue-relative-proj-twists), Tag 01MS (lemma-when-invertible), equation-Ud before Tag 01N8, and the open-immersion comparison in Tag 01NY (lemma-relative-proj). Input for the affine twist transition maps in Tag 01NR: scalar-extension twist comparison (01N2), normalization (01MY), and composition (01MZ). Algebra input in Tag 01N2: base change of homogeneous localized pieces, extended to an arbitrary graded module; no Proj or sheaf comparison is asserted here.",
+   "via": [
+    "lem-sfb-proj-scalar-extension-twist-comparison",
+    "lem-sfb-relative-proj-twists-degree-opens",
+    "lem-sfb-scheme-proj-veronese-quotient-functor",
+    "lem-sfb-space-relative-proj-scheme-tests",
+    "lem-sfb-space-blowup-chart-properties",
+    "lem-sfb-space-blowup-embedding-extension",
+    "lem-sfb-space-chow-dense-modification",
+    "lem-sfb-space-supported-adic-existence",
+    "lem-sfb-space-coherent-formal-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-graded-module-localization-scalar-extension",
+  "worker": "stage1",
+  "summary": "Proved homogeneous localized pieces are sequential colimits directly from the fraction relation, reused the existing Mathlib tensor-colimit leaf, and assembled the specified S-linear equivalence. No new nodes, statement correction, flatness or cancellation. Checked tensor grading via split component inclusions.",
+  "blueprint": "The inherited compactification/direct-image prerequisite chain of sk-thm-sf-ctf-stability, through scalar-extension twist comparison: the homogeneous-module algebra behind the standard-open calculation in Tag 01N2. The item has no imported blueprint ancestor (blueprint_refs.py ancestor returns None); preserve that recorded origin."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-04a16e39f",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-04a16e39f (reviewer sub-agent of L); spot-checked: I read the item in full, the three cited nodes and the Stacks sources: Tag 01N2 (constructions.tex:2245; the proof only says 'standard opens', so proof_origin=agent is correct), Tag 00DD (algebra.tex:1934) and Tag 07JZ. The delivery is one commit with the item and its report, and creates no new nodes. Statement and stmt_deps are unchanged. There is no re-split note: the item was created unsplit by Q19 on 2026-10-24. The statement is true. I tested it with f nilpotent, with A=Z[t], f=2t, S=F_2 (where F_2⊗Z[1/2]=0 and f_S=0), with negative j or M unbounded below, and with S=0. Step 1 (cocone) and step 2 (colimit from the fraction relation at stage k+m+n; R-colimit and S-colimit for N with test cocones of matching linearity) are elementary and correct. Step 3 cites the Mathlib leaf lem-weil-pbc-tensor-commutes-with-colimits (index category N, fixed module S, flipped) and uses only its statement. Injectivity of β_m comes from the split grading projection, and both cocones are compatible. Step 4 is the formula plus S-linearity. No cancellation and no flatness are used. Not a duplicate: lem-nagata-homogeneous-localization-scalar-extension covers only degree zero, and lem-weil-pbc-formal-glueing-canonical-maps(3) is the ungraded comparison. The parent lem-sfb-proj-scalar-extension-twist-comparison uses the item with M=A, which matches the statement. The cited nodes are only definitions and a Mathlib leaf, so there is no route issue and no tool_uses entry is needed. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Module.GradedLocalizationScalarExtension",
+  "declaration": "LocalizedModule.exists_gradedLocalization_scalarExtension_equiv",
+  "file": "lean/Sheaf/Algebra/Module/GradedLocalizationScalarExtension.lean",
+  "statement": "theorem exists_gradedLocalization_scalarExtension_equiv {R : Type u} {S : Type v} {A : Type w} {M : Type t} [CommRing R] [CommRing S] [CommRing A] [AddCommGroup M] [Algebra R S] [Algebra R A] [Module R M] [Module A M] [IsScalarTower R A M] (𝒜 : ℕ → Submodule R A) [GradedAlgebra 𝒜] (𝓜 : ℤ → Submodule R M) (h𝓜 : DirectSum.IsInternal 𝓜) (hsmul : ∀ (n : ℕ) (i : ℤ) (a : A) (x : M), a ∈ 𝒜 n → x ∈ 𝓜 i → a • x ∈ 𝓜 ((n : ℤ) + i)) {d : ℕ} (hd : 0 < d) {f : A} (hf : f ∈ 𝒜 d) (j : ℤ) : let ρ : (S ⊗[R] A) →ₐ[S] Module.End S (S ⊗[R] M) := AlgHom.liftEquiv R S A _ ((Module.End.baseChangeHom R S M).comp (Algebra.lsmul R R M)) letI : Module (S ⊗[R] A) (S ⊗[R] M) := Module.compHom _ ρ.toRingHom letI : IsScalarTower S (S ⊗[R] A) (S ⊗[R] M) := IsScalarTower.of_algebraMap_smul (fun s x ↦ congrArg (fun g : Module.End S (S ⊗[R] M) ↦ g x) (ρ.commutes s)) ∃ (H : Submodule R (LocalizedModule.Away f M)) (K : Submodule S (LocalizedModule.Away (1 ⊗ₜ[R] f : S ⊗[R] A) (S ⊗[R] M))), (H : Set (LocalizedModule.Away f M)) = homogeneousPieceAway (fun i ↦ (𝓜 i).toAddSubgroup) f (d : ℤ) j ∧ (K : Set (LocalizedModule.Away (1 ⊗ₜ[R] f : S ⊗[R] A) (S ⊗[R] M))) = homogeneousPieceAway (fun i ↦ ((𝓜 i).baseChange S).toAddSubgroup) (1 ⊗ₜ[R] f : S ⊗[R] A) (d : ℤ) j ∧ ∃ e : (S ⊗[R] H) ≃ₗ[S] K, ∀ (s : S) (m : ℕ) (x : M), x ∈ 𝓜 (j + (m : ℤ) * (d : ℤ)) → ∀ z : H, (z : LocalizedModule.Away f M) = mk x (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) → (e (s ⊗ₜ[R] z) : LocalizedModule.Away (1 ⊗ₜ[R] f : S ⊗[R] A) (S ⊗[R] M)) = mk (s ⊗ₜ[R] x) (⟨(1 ⊗ₜ[R] f : S ⊗[R] A) ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers (1 ⊗ₜ[R] f : S ⊗[R] A))",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The homogeneous localized-piece carrier is reused from def-sc-localized-homogeneous-piece. The conclusion supplies submodules with exactly these carriers and the S-linear equivalence with its fraction formula. The canonical C-action is assembled inside the signature from Mathlib scalar-extension and algebra-lifting constructions, with no chosen map or extra hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-99e3c2369",
+  "group": "NL",
+  "result": "pass",
+  "note": "Read the node, both stmt_deps (LocalizedModule; homogeneousPieceAway {mk m s^k, m ∈ 𝓜(n+k d)}), the source (constructions.tex:2245, Tag 01N2), the module and the report. Every clause matches: GradedAlgebra 𝒜 over ℕ with R-submodules (equivalent to R→A_0); 𝓜:ℤ→Submodule R M with IsInternal and hsmul A_n M_i ⊆ M_{n+i}; the C-action is the canonical liftEquiv(baseChangeHom∘lsmul), equal to st⊗ax on pure tensors, and no Mathlib or project instance duplicates it; N_i = Submodule.baseChange; hd, hf, f_S = 1⊗f; H and K have exactly the piece sets as carriers; e : S⊗H ≃ₗ[S] K is pinned by the fraction formula. No extra hypotheses; four independent universes. Edge cases nilpotent f, f=0, ℤ→F₂ with f=2t, S=0, M=0, j<0, m=0 are covered; the parent uses it with M=A. Compared with live, only the lean record and the landed def-sc-localized-homogeneous-piece stmt_dep are added; the statement matches the signature verbatim; the only proof is sorry; docstrings carry source and blueprint; the report has both sections. No fixes and no compile needed."
+ }
+}

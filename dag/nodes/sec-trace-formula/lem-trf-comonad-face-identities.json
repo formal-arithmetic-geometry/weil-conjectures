@@ -1,0 +1,202 @@
+{
+ "id": "lem-trf-comonad-face-identities",
+ "kind": "statement",
+ "title": "Whiskered counit face identities on endofunctor powers",
+ "statement": "Let $\\mathcal C$ be an ordinary category and $T:\\mathcal C\\to\\mathcal C$ an endofunctor, with powers $T^0=\\mathrm{id}_{\\mathcal C}$ and $T^{n+1}=T\\circ T^n$ [def-trf-endofunctor-powers]. Write $1_a$ for the identity transformation of $T^a$, including $1_0$ on the identity functor, and $\\star$ for horizontal composition: for $\\alpha:F\\to F\\prime$ and $\\beta:G\\to G\\prime$, $(\\alpha\\star\\beta)_x=\\alpha_{G\\prime x}\\circ F(\\beta_x)$. Given a natural transformation $e:T\\to\\mathrm{id}_{\\mathcal C}$, set $B_n=T^{n+1}$ for $n\\geq0$ and $d_i^n=1_i\\star e\\star1_{n-i}:B_n\\to B_{n-1}$ for $n\\geq1$ and $0\\leq i\\leq n$. These operators are natural transformations and for every $n\\geq1$ and $0\\leq i<j\\leq n+1$ one has $d_i^n\\circ d_j^{n+1}=d_{j-1}^n\\circ d_i^{n+1}=1_i\\star e\\star1_{j-i-1}\\star e\\star1_{n+1-j}$. No comultiplication or counit equation is assumed.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 0G5N, lemma-godement, proof opening and verification of (1)(a); Example 0G5M, example-godement; horizontal calculus in Tag 003F, categories-lemma-properties-2-cat-cats."
+ },
+ "stmt_deps": [
+  "def-trf-endofunctor-powers"
+ ],
+ "proof": [
+  {
+   "text": "By [def-trf-endofunctor-powers], induction on $r$ gives $T^{r+s}(x)=T^r(T^s(x))$ and $T^{r+s}(f)=T^r(T^s(f))$: the base is the identity functor, and the successor follows by applying $T$ to the induction equality. Expanding the stated horizontal-composition formula and using preservation of identities gives $(d_i^n)_x=T^i(e_{T^{n-i}x})$. For $f:x\\to y$, naturality of $e$ at $T^{n-i}(f)$, followed by $T^i$, gives $T^n(f)\\circ(d_i^n)_x=(d_i^n)_y\\circ T^{n+1}(f)$. Hence each displayed operator is a natural transformation $T^{n+1}\\to T^n$.",
+   "uses": [
+    "def-trf-endofunctor-powers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0G5N, lemma-godement, proof opening and verification of (1)(a); Example 0G5M, example-godement; horizontal calculus in Tag 003F, categories-lemma-properties-2-cat-cats."
+   }
+  },
+  {
+   "text": "Fix $n\\geq1$ and $0\\leq i<j\\leq n+1$. Put $a=i$, $b=j-i-1$, $c=n+1-j$, so $a,b,c\\geq0$ and $a+b+c=n$. For an object $x$ put $y=T^c(x)$ and $f=T^b(e_y):T^{b+1}y\\to T^by$. The powers of [def-trf-endofunctor-powers] and the component formula of step 1 give\n$$\\begin{aligned}(d_i^n\\circ d_j^{n+1})_x&=T^a\\bigl(e_{T^by}\\circ T^{b+1}(e_y)\\bigr),\\\\(d_{j-1}^n\\circ d_i^{n+1})_x&=T^a\\bigl(T^b(e_y)\\circ e_{T^{b+1}y}\\bigr).\\end{aligned}$$\nNaturality of $e$ at $f$ is precisely $e_{T^by}\\circ T(f)=f\\circ e_{T^{b+1}y}$, and $T(f)=T^{b+1}(e_y)$. Applying $T^a$ proves equality of these two components, and equality at every object proves equality of the natural transformations.",
+   "uses": [
+    "def-trf-endofunctor-powers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0G5N, lemma-godement, proof opening and verification of (1)(a); Example 0G5M, example-godement; horizontal calculus in Tag 003F, categories-lemma-properties-2-cat-cats."
+   }
+  },
+  {
+   "text": "Use the same $a,b,c,y$ and the powers of [def-trf-endofunctor-powers]. Expanding the horizontal formula in the statement, with left-associated products, gives\n$$(1_a\\star e\\star1_b\\star e\\star1_c)_x=T^a\\bigl(e_{T^by}\\circ T^{b+1}(e_y)\\bigr).$$\nIndeed $e\\star1_b$ has component $e_{T^bz}$ at $z$; its horizontal composite with $e$ has component $e_{T^by}\\circ T(T^b(e_y))$ at $y$, and the outside identity transformations apply $T^a$ and substitute $y=T^cx$. This is the first component in step 2, proving the second claimed equality. Zero values of $a,b,c$ use the identity functor, so the argument includes $i=0$, $j=i+1$, and $j=n+1$. Only naturality, identity preservation, and composition preservation were used.",
+   "uses": [
+    "def-trf-endofunctor-powers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0G5N, lemma-godement, proof opening and verification of (1)(a); Example 0G5M, example-godement; horizontal calculus in Tag 003F, categories-lemma-properties-2-cat-cats."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-endofunctor-powers"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 0G5N, lemma-godement, proof of condition (1)(a), with its horizontal interchange expanded componentwise as naturality, following categories.tex, Tag 003F."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural counit on an endofunctor gives face face identities for deleting factors in iterated powers",
+   "results": "{\"t\": \"2026-10-22T06:43:25Z\", \"tool\": \"leanfinder\", \"query\": \"Natural counit on an endofunctor gives face face identities for deleting factors in iterated powers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplexCategory.factor_δ\", \"SimplexCategory.δ_one_mkOfSucc\", \"CategoryTheory.SimplicialObject.δ_comp_δ\", \"SimplexCategory.δ_zero_mkOfSucc\", \"CategoryTheory.SimplicialObject.σ_comp_σ\", \"SimplexCategory.δ_comp_δ_self\", \"SimplexCategory.δ_comp_σ_succ\", \"SimplexCategory.δ_comp_σ_self\"], \"digest\": \"796af164c9a22b96\"}",
+   "date": "2026-10-22",
+   "verdict": "No match for lem-trf-comonad-face-identities: NatTrans.hcomp/exchange in CategoryTheory/Functor/Category.lean:116-147 supply horizontal composition and interchange, not the indexed iterated-power face identity. SimplexCategory and SimplicialObject face relations presume ordinal maps or an existing simplicial object, which is not available here. Two natural-language phrasings checked."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CategoryTheory.NatTrans.hcomp\"",
+   "results": "{\"t\": \"2026-10-22T06:43:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"CategoryTheory.NatTrans.hcomp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.NatTrans.hcomp\", \"CategoryTheory.NatTrans.hcomp_id_app\", \"CategoryTheory.NatTrans.hcomp_app\"], \"digest\": \"2abf28df0a915241\"}",
+   "date": "2026-10-22",
+   "verdict": "No match for lem-trf-comonad-face-identities: NatTrans.hcomp/exchange in CategoryTheory/Functor/Category.lean:116-147 supply horizontal composition and interchange, not the indexed iterated-power face identity. SimplexCategory and SimplicialObject face relations presume ordinal maps or an existing simplicial object, which is not available here. Two natural-language phrasings checked."
+  },
+  {
+   "tool": "grep",
+   "query": "comonad|counit.*face|face.*counit",
+   "results": "{\"t\": \"2026-10-22T06:43:14Z\", \"tool\": \"grep\", \"query\": \"comonad|counit.*face|face.*counit\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No match for lem-trf-comonad-face-identities: NatTrans.hcomp/exchange in CategoryTheory/Functor/Category.lean:116-147 supply horizontal composition and interchange, not the indexed iterated-power face identity. SimplexCategory and SimplicialObject face relations presume ordinal maps or an existing simplicial object, which is not available here. Two natural-language phrasings checked."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Iterated endofunctor powers with a counit satisfy the face face relations",
+   "results": "{\"t\": \"2026-10-22T06:43:15Z\", \"tool\": \"leansearch\", \"query\": \"Iterated endofunctor powers with a counit satisfy the face face relations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplexCategoryGenRel.faces.δ\", \"SimplexCategoryGenRel.faces\", \"CategoryTheory.CosimplicialObject.δ\", \"SimplexCategoryGenRel.σ\", \"SimplexCategoryGenRel.toSimplexCategory_map_δ\", \"FreeSimplexQuiver.homRel.δ_comp_δ\", \"CategoryTheory.CosimplicialObject.δ_comp_δ_self\", \"SimplexCategoryGenRel.faces.rec\"], \"digest\": \"3eb63347540c152e\"}",
+   "date": "2026-10-22",
+   "verdict": "No match for lem-trf-comonad-face-identities: NatTrans.hcomp/exchange in CategoryTheory/Functor/Category.lean:116-147 supply horizontal composition and interchange, not the indexed iterated-power face identity. SimplexCategory and SimplicialObject face relations presume ordinal maps or an existing simplicial object, which is not available here. Two natural-language phrasings checked."
+  },
+  {
+   "tool": "grep",
+   "query": "hcomp|exchange|interchange",
+   "results": "{\"t\": \"2026-10-22T06:43:44Z\", \"tool\": \"grep\", \"query\": \"hcomp|exchange|interchange\", \"sub\": \"CategoryTheory/Functor/Category.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"116\", \"118\", \"124\", \"125\", \"128\"], \"digest\": \"71e82c0a88a5ca2d\"}",
+   "date": "2026-10-22",
+   "verdict": "No match for lem-trf-comonad-face-identities: NatTrans.hcomp/exchange in CategoryTheory/Functor/Category.lean:116-147 supply horizontal composition and interchange, not the indexed iterated-power face identity. SimplexCategory and SimplicialObject face relations presume ordinal maps or an existing simplicial object, which is not available here. Two natural-language phrasings checked."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an endofunctor T and natural transformation e from T to identity the transformations T power i e T power n minus i satisfy the face face identity",
+   "results": "{\"t\": \"2026-10-22T06:43:45Z\", \"tool\": \"leansearch\", \"query\": \"For an endofunctor T and natural transformation e from T to identity the transformations T power i e T power n minus i satisfy the face face identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.NatTrans.id\", \"CategoryTheory.Equivalence.powNat\", \"CategoryTheory.Endofunctor.Algebra.functorOfNatTransEq_hom_app_f\", \"CategoryTheory.Endofunctor.Algebra.functorOfNatTransId_hom_app_f\", \"CategoryTheory.Endofunctor.Coalgebra.functorOfNatTransComp\", \"CategoryTheory.MonadHom.id_toNatTrans\", \"CategoryTheory.Endofunctor.Coalgebra.functorOfNatTrans\", \"AlgebraicTopology.DoldKan.natTransPInfty\"], \"digest\": \"30425400a9ca5c65\"}",
+   "date": "2026-10-22",
+   "verdict": "No match for lem-trf-comonad-face-identities: NatTrans.hcomp/exchange in CategoryTheory/Functor/Category.lean:116-147 supply horizontal composition and interchange, not the indexed iterated-power face identity. SimplexCategory and SimplicialObject face relations presume ordinal maps or an existing simplicial object, which is not available here. Two natural-language phrasings checked."
+  },
+  {
+   "tool": "grep",
+   "query": "hcomp|exchange|interchange",
+   "results": "{\"t\": \"2026-10-23T14:42:40Z\", \"tool\": \"grep\", \"query\": \"hcomp|exchange|interchange\", \"sub\": \"CategoryTheory/Functor/Category.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"116\", \"118\", \"124\", \"125\", \"128\"], \"digest\": \"71e82c0a88a5ca2d\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: simplicial-object face relations assume a simplicial object, while Comonad.counit_naturality assumes a comonad. NatTrans.hcomp and exchange supply the horizontal calculus, not the indexed powers formula. Read Mathlib/CategoryTheory/Functor/Category.lean:116-147; the proof here instead expands naturality directly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Iterated whiskerings of a natural transformation from an endofunctor to identity satisfy simplicial face identities",
+   "results": "{\"t\": \"2026-10-23T14:42:40Z\", \"tool\": \"leansearch\", \"query\": \"Iterated whiskerings of a natural transformation from an endofunctor to identity satisfy simplicial face identities\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.whiskerRight\", \"CategoryTheory.SimplicialObject.whiskering\", \"FreeSimplexQuiver.homRel.σ_comp_σ\", \"FreeSimplexQuiver.homRel.δ_comp_σ_succ\", \"CategoryTheory.SimplicialObject.Augmented.whiskering\", \"CategoryTheory.CosimplicialObject.Augmented.whiskering\", \"CategoryTheory.TwoSquare.whiskerLeft\", \"SSet.δ_comp_δ_self_apply\"], \"digest\": \"3887d5b9ec2ca719\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: simplicial-object face relations assume a simplicial object, while Comonad.counit_naturality assumes a comonad. NatTrans.hcomp and exchange supply the horizontal calculus, not the indexed powers formula. Read Mathlib/CategoryTheory/Functor/Category.lean:116-147; the proof here instead expands naturality directly."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CategoryTheory.NatTrans.hcomp\"",
+   "results": "{\"t\": \"2026-10-23T14:42:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"CategoryTheory.NatTrans.hcomp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.NatTrans.hcomp\", \"CategoryTheory.NatTrans.hcomp_id_app\", \"CategoryTheory.NatTrans.hcomp_app\"], \"digest\": \"2abf28df0a915241\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: simplicial-object face relations assume a simplicial object, while Comonad.counit_naturality assumes a comonad. NatTrans.hcomp and exchange supply the horizontal calculus, not the indexed powers formula. Read Mathlib/CategoryTheory/Functor/Category.lean:116-147; the proof here instead expands naturality directly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An endofunctor T with a natural transformation e from T to the identity has commuting deletion maps on powers T n satisfying the face face identities",
+   "results": "{\"t\": \"2026-10-23T14:42:47Z\", \"tool\": \"leanfinder\", \"query\": \"An endofunctor T with a natural transformation e from T to the identity has commuting deletion maps on powers T n satisfying the face face identities\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.δ_comp_δ''\", \"CategoryTheory.SimplicialObject.δ_comp_δ_self\", \"CategoryTheory.SimplicialObject.δ_comp_δ\", \"CategoryTheory.SimplicialObject.δ_comp_δ'\", \"SimplexCategoryGenRel.P_δ.δ\", \"CategoryTheory.SimplicialObject.δ_comp_δ_assoc\", \"CategoryTheory.SimplicialObject.σ_comp_σ\", \"CategoryTheory.SimplicialObject.σ_comp_σ_assoc\"], \"digest\": \"f5b1d6e6ce225aa8\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: simplicial-object face relations assume a simplicial object, while Comonad.counit_naturality assumes a comonad. NatTrans.hcomp and exchange supply the horizontal calculus, not the indexed powers formula. Read Mathlib/CategoryTheory/Functor/Category.lean:116-147; the proof here instead expands naturality directly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a natural counit e of an endofunctor T two successive deletions of different T factors commute by naturality without any comultiplication",
+   "results": "{\"t\": \"2026-10-23T14:44:35Z\", \"tool\": \"leanfinder\", \"query\": \"For a natural counit e of an endofunctor T two successive deletions of different T factors commute by naturality without any comultiplication\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Comonad.counit_naturality\", \"CategoryTheory.Comonad.delta_naturality_assoc\", \"CategoryTheory.Deterministic.discard_natural\", \"CategoryTheory.Comonad.delta_naturality\", \"CategoryTheory.Comonad.map_counit_app\", \"CategoryTheory.MarkovCategory.discard_natural_assoc\", \"CategoryTheory.Comonad.counit_naturality_assoc\", \"CategoryTheory.Comonad.right_counit_assoc\"], \"digest\": \"cfa892124d6ad3e1\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: simplicial-object face relations assume a simplicial object, while Comonad.counit_naturality assumes a comonad. NatTrans.hcomp and exchange supply the horizontal calculus, not the indexed powers formula. Read Mathlib/CategoryTheory/Functor/Category.lean:116-147; the proof here instead expands naturality directly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-comonad-simplicial-object",
+  "date": "2026-10-22",
+  "group": "N5"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Functorial standard resolutions and comparison with arbitrary polynomial resolutions. Generic input to lem-trf-cotangent-resolution-coherence: Standard simplicial object of an adjunction and its homotopy equivalences. Foundational construction: powers of a counital coassociative endofunctor, used in Stacks 08NC via Godement Lemma 0G5N. Re-split of foundational comonad argument: Tag 0G5N, lemma-godement, proof opening and verification of (1)(a); Example 0G5M, example-godement; horizontal calculus in Tag 003F, categories-lemma-properties-2-cat-cats.",
+   "via": [
+    "lem-trf-comonad-simplicial-object",
+    "lem-trf-adjunction-standard-simplicial-homotopy",
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-comonad-face-identities",
+  "worker": "stage1",
+  "summary": "Checked Stacks 0G5N (1)(a) and 003F. Expanded the two deletions and their common horizontal expression componentwise using naturality, with every exponent and zero-power case explicit. No new nodes: the calculations are elementary from the existing power definition and the hypotheses. No exact project or Mathlib declaration found. Statement unchanged.",
+  "blueprint": "Supports lem-trf-local-term-locality proof (1)--(2) through the existing semistable/cotangent-resolution/standard-resolution dependency chain recorded in blueprint.from: supplies the face-face part of Godement 0G5N used by lem-trf-comonad-simplicial-object; preserves the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q112-4136615b3",
+  "group": "Q112",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-4136615b3 (reviewer sub-agent of L); spot-checked: I read the whole item. The statement is byte-identical to live, which is still unsplit with an empty proof, and there is no repair note for this item. The delivery has no new nodes and adds 3 elementary steps that cite only def-trf-endofunctor-powers (T^0=id, T^{n+1}=T∘T^n), so proof_deps equals the union of the uses. Source check: the statement agrees with Stacks simplicial.tex Example 0G5M (l.6193) and Lemma 0G5N (l.6226), proof paragraph (1)(a): X_n=T^{n+1}, d^n_j=1_j⋆d⋆1_{n-j}, the identity holds for 0≤i<j≤n+1, both sides equal 1_i⋆d⋆1_{j-i-1}⋆d⋆1_{n+1-j}, and no condition on s is needed. The proof replaces the 003F interchange law with componentwise naturality. I recomputed every step with a=i, b=j-i-1, c=n+1-j and y=T^c x: (d_i^n∘d_j^{n+1})_x=T^a(e_{T^b y}∘T^{b+1}e_y) and (d_{j-1}^n∘d_i^{n+1})_x=T^a(T^b e_y∘e_{T^{b+1}y}), which are equal by e's naturality at T^b(e_y). The left-associated 5-fold ⋆ gives the first expression. Edge cases checked: b=0, a=0, c=0, all pairs at n=1, T=id and the empty category. The parent lem-trf-comonad-simplicial-object step 1 uses the item consistently. The rg -L duplicate search finds only Čech/nerve nodes in other settings, and the Mathlib no-match verdicts (hcomp/exchange, SimplicialObject.δ_comp_δ, Comonad.*) are sound. No SGA source, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ComonadFaceIdentities",
+  "declaration": "CategoryTheory.comonad_face_identities",
+  "file": "lean/Sheaf/CategoryTheory/ComonadFaceIdentities.lean",
+  "statement": "theorem comonad_face_identities {C : Type u} [Category.{v} C] (T : C ⥤ C) (e : T ⟶ 𝟭 C) : ∃ d : ∀ n : ℕ, Fin (n + 2) → (NaturalTransport.power T (n + 2) ⟶ NaturalTransport.power T (n + 1)), (∀ (n : ℕ) (i : Fin (n + 2)), HEq (d n i) ((𝟙 (NaturalTransport.power T (n + 1 - i.val))) ◫ e ◫ (𝟙 (NaturalTransport.power T i.val)))) ∧ ∀ (n : ℕ) (i j : Fin (n + 2)), i ≤ j → (d (n + 1) j.succ ≫ d n i = d (n + 1) i.castSucc ≫ d n j) ∧ HEq (d (n + 1) j.succ ≫ d n i) ((𝟙 (NaturalTransport.power T (n + 1 - j.val))) ◫ e ◫ (𝟙 (NaturalTransport.power T (j.val - i.val))) ◫ e ◫ (𝟙 (NaturalTransport.power T i.val)))",
+  "branch": "newtargets-dag",
+  "by": "Q63",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-15836a126",
+  "group": "Q63",
+  "result": "pass",
+  "note": "Only change vs live: lean record added; statement verbatim in file. Clauses checked against Stacks 0G5N (1)(a) and NaturalTransport.power (0=𝟭, n+1=power n ⋙ T): d n i : power(n+2)⟶power(n+1) pinned by HEq to (𝟙 P_{n+1-i} ◫ e) ◫ 𝟙 P_i = 1_i⋆e⋆1_{N-i} (functors propositionally equal, so unique, no arbitrary map); face identity d(n+1) j.succ ≫ d n i = d(n+1) i.castSucc ≫ d n j for i≤j in Fin(n+2) covers exactly 0≤i<J≤N+1; double word exponents c=n+1-j, b=j-i, a=i correct, nat subtractions guarded; ◫ order reversal only differs by naturality. Edge cases N=1, i=0, b=0, c=0, T=id, empty C, free universes. No defs, sorry-only, source/blueprint docstrings and proof plan present, no extra hypotheses; no duplicate (comonad_simplicial_object needs comonad hyps; Mathlib simplicial lemmas presuppose a simplicial object). No files changed, so no compile."
+ }
+}

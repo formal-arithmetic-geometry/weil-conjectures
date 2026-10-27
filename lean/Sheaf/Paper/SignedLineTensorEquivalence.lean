@@ -381,7 +381,6 @@ private theorem lineSignedRank (S : Scheme.{u})
   let e := (hU i).some ≪≫ SheafOfModules.freeUniqueIso.{u + 1, u, u + 1} _
   exact ⟨lineSignedOverUnit S R L (U i) e m⟩
 
-attribute [-instance] WeilConjectures.scalarReductionSiteSmall in
 /-- Signed tensor powers remain lines, and opposite powers give inverse sheaf tensor functors.
 Source: blueprint prop-weil-twist-preserves, proof steps 1--2
 (blueprint: lem-weil-signed-line-tensor-equivalence).

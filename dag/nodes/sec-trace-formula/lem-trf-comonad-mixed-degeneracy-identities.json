@@ -1,0 +1,325 @@
+{
+ "id": "lem-trf-comonad-mixed-degeneracy-identities",
+ "kind": "statement",
+ "title": "Mixed and degeneracy identities on comonad powers",
+ "statement": "Let $\\mathcal C$ be an ordinary category and $T:\\mathcal C\\to\\mathcal C$ an endofunctor, with powers $T^0=\\mathrm{id}_{\\mathcal C}$ and $T^{n+1}=T\\circ T^n$ [def-trf-endofunctor-powers]. Write $1_a$ for the identity transformation of $T^a$, including $1_0$ on the identity functor, and $\\star$ for horizontal composition: for $\\alpha:F\\to F\\prime$ and $\\beta:G\\to G\\prime$, $(\\alpha\\star\\beta)_x=\\alpha_{G\\prime x}\\circ F(\\beta_x)$. Given a natural transformation $e:T\\to\\mathrm{id}_{\\mathcal C}$, set $B_n=T^{n+1}$ for $n\\geq0$ and $d_i^n=1_i\\star e\\star1_{n-i}:B_n\\to B_{n-1}$ for $n\\geq1$ and $0\\leq i\\leq n$. Let $c:T\\to T^2$ be a natural transformation with $(e\\star1_1)\\circ c=1_1=(1_1\\star e)\\circ c$ and $(c\\star1_1)\\circ c=(1_1\\star c)\\circ c$. Set $s_i^n=1_i\\star c\\star1_{n-i}:B_n\\to B_{n+1}$ for $n\\geq0$ and $0\\leq i\\leq n$. These are natural transformations. For $n\\geq2$ and $0\\leq i<j\\leq n-1$, $d_i^n\\circ s_j^{n-1}=s_{j-1}^{n-2}\\circ d_i^{n-1}$; for $n\\geq2$ and $0\\leq j< i-1\\leq n-1$, $d_i^n\\circ s_j^{n-1}=s_j^{n-2}\\circ d_{i-1}^{n-1}$. For $n\\geq1$ and $0\\leq j\\leq n-1$, $d_j^n\\circ s_j^{n-1}=1_{B_{n-1}}=d_{j+1}^n\\circ s_j^{n-1}$. For $n\\geq1$ and $0\\leq i\\leq j\\leq n-1$, $s_i^n\\circ s_j^{n-1}=s_{j+1}^n\\circ s_i^{n-1}$. These assertions concern the displayed transformations themselves; no simplicial object is assumed.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 0G5N, lemma-godement, proof of conditions (1)(b)--(e), with Example 0G5M, example-godement."
+ },
+ "stmt_deps": [
+  "def-trf-endofunctor-powers"
+ ],
+ "proof": [
+  {
+   "text": "Use the powers of [def-trf-endofunctor-powers]. Their recursion gives $T^aT^b=T^{a+b}$: the case $a=0$ is the identity functor, and $T^{a+1}T^b=T(T^aT^b)=TT^{a+b}=T^{a+b+1}$ is the induction step. Use these identifications throughout. The displayed operators have components $(d_i^n)_x=T^i(e_{T^{n-i}x})$ and $(s_i^n)_x=T^i(c_{T^{n-i}x})$. For $f:x\\to y$, naturality of $e$ at $T^{n-i}(f)$, followed by $T^i$, gives $T^n(f)(d_i^n)_x=(d_i^n)_yT^{n+1}(f)$; the same calculation with $c$ gives $T^{n+2}(f)(s_i^n)_x=(s_i^n)_yT^{n+1}(f)$. Thus both families are natural transformations with the stated sources and targets.",
+   "uses": [
+    "def-trf-endofunctor-powers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0G5N, lemma-godement, proof of (1)(b)--(e); Example 0G5M, example-godement. Calculation 1."
+   }
+  },
+  {
+   "text": "Suppose $n\\ge2$ and $i<j\\le n-1$. Put $k=j-i-1$ and $r=n-j-1$, both nonnegative. Remove the common outer whiskering $T^i$ and evaluate at $T^r x$. The two composites in the first mixed identity become $(e\\star1_{k+2})\\circ(1_{k+1}\\star c)$ and $(1_k\\star c)\\circ(e\\star1_{k+1})$. Apply [lem-amb-natural-transformation-whisker-exchange] with $\\eta=1_k\\star c:T^{k+1}\\to T^{k+2}$ and $\\theta=e:T\\to\\mathrm{id}$. Its two sides are exactly these composites. By the component definition of $\\star$, both equal $e\\star1_k\\star c$. Restoring the outer and inner powers gives $d_i^n\\circ s_j^{n-1}=1_i\\star e\\star1_k\\star c\\star1_r=s_{j-1}^{n-2}\\circ d_i^{n-1}$.",
+   "uses": [
+    "lem-amb-natural-transformation-whisker-exchange"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0G5N, lemma-godement, proof of (1)(b)--(e); Example 0G5M, example-godement. Calculation 2."
+   }
+  },
+  {
+   "text": "Suppose $n\\ge2$ and $0\\le j<i-1\\le n-1$. Put $k=i-j-2$ and $r=n-i$. Removing the outer $T^j$ and evaluating at $T^r x$, the composites become $(1_{k+2}\\star e)\\circ(c\\star1_{k+1})$ and $(c\\star1_k)\\circ(1_{k+1}\\star e)$. Apply [lem-amb-natural-transformation-whisker-exchange] with $\\eta=1_k\\star e:T^{k+1}\\to T^k$ and $\\theta=c:T\\to T^2$. It equates precisely these two expressions, whose horizontal composite is $c\\star1_k\\star e$. Restoring the two powers gives $d_i^n\\circ s_j^{n-1}=1_j\\star c\\star1_k\\star e\\star1_r=s_j^{n-2}\\circ d_{i-1}^{n-1}$.",
+   "uses": [
+    "lem-amb-natural-transformation-whisker-exchange"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0G5N, lemma-godement, proof of (1)(b)--(e); Example 0G5M, example-godement. Calculation 3."
+   }
+  },
+  {
+   "text": "For $n\\ge1$ and $0\\le j\\le n-1$, set $r=n-1-j$. Expanding components and using preservation of composition by $T^j$ gives $d_j^n\\circ s_j^{n-1}=1_j\\star((e\\star1_1)\\circ c)\\star1_r$ and $d_{j+1}^n\\circ s_j^{n-1}=1_j\\star((1_1\\star e)\\circ c)\\star1_r$. The two counit equations assumed in the statement replace each middle expression by $1_1$. Preservation of identities makes both results $1_{j+1+r}=1_n=1_{B_{n-1}}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0G5N, lemma-godement, proof of (1)(b)--(e); Example 0G5M, example-godement. Calculation 4."
+   }
+  },
+  {
+   "text": "For the degeneracy identity with $i<j\\le n-1$, set $k=j-i-1$ and $r=n-j-1$. After removing $T^i$ and evaluating at $T^r x$, its left and right sides are $(c\\star1_{k+2})\\circ(1_{k+1}\\star c)$ and $(1_{k+2}\\star c)\\circ(c\\star1_{k+1})$. Apply [lem-amb-natural-transformation-whisker-exchange] with $\\eta=1_k\\star c:T^{k+1}\\to T^{k+2}$ and $\\theta=c:T\\to T^2$. The equality it gives has these two sides, both equal to $c\\star1_k\\star c$ by the definition of horizontal composition. Restoring powers yields $s_i^n\\circ s_j^{n-1}=1_i\\star c\\star1_k\\star c\\star1_r=s_{j+1}^n\\circ s_i^{n-1}$.",
+   "uses": [
+    "lem-amb-natural-transformation-whisker-exchange"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0G5N, lemma-godement, proof of (1)(b)--(e); Example 0G5M, example-godement. Calculation 5."
+   }
+  },
+  {
+   "text": "For the remaining degeneracy case $i=j$, set $r=n-1-i$. Component expansion gives $s_i^n\\circ s_i^{n-1}=1_i\\star((c\\star1_1)\\circ c)\\star1_r$ and $s_{i+1}^n\\circ s_i^{n-1}=1_i\\star((1_1\\star c)\\circ c)\\star1_r$. These are equal by the assumed coassociativity equation, evaluated at $T^r x$ and then mapped by $T^i$. Together with the preceding case this proves the identity for every $0\\le i\\le j\\le n-1$, including $n=1,i=j=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0G5N, lemma-godement, proof of (1)(b)--(e); Example 0G5M, example-godement. Calculation 6."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-endofunctor-powers",
+  "lem-amb-natural-transformation-whisker-exchange"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 0G5N, lemma-godement, proof of (1)(b)--(e); Example 0G5M, example-godement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Comonad counit and coassociativity imply the mixed and degeneracy simplicial identities on iterated powers",
+   "results": "{\"t\": \"2026-10-22T06:43:26Z\", \"tool\": \"leanfinder\", \"query\": \"Comonad counit and coassociativity imply the mixed and degeneracy simplicial identities on iterated powers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CosimplicialObject.δ_comp_σ_self_assoc\", \"CategoryTheory.CosimplicialObject.δ_comp_σ_self\", \"CategoryTheory.CosimplicialObject.δ_comp_σ_succ\", \"CategoryTheory.CosimplicialObject.δ_comp_σ_succ_assoc\", \"CategoryTheory.CosimplicialObject.δ_comp_σ_self'_assoc\", \"CategoryTheory.CosimplicialObject.δ_comp_σ_succ'\", \"CategoryTheory.CosimplicialObject.δ_comp_σ_self'\", \"CategoryTheory.CosimplicialObject.δ_comp_σ_succ'_assoc\"], \"digest\": \"94390fe82fcdfa64\"}",
+   "date": "2026-10-22",
+   "verdict": "No match for lem-trf-comonad-mixed-degeneracy-identities: Comonad in CategoryTheory/Monad/Basic.lean:60-83 supplies only the degree-one counit/coassociativity axioms and naturality. SimplicialObject relations in AlgebraicTopology/SimplicialObject/Basic.lean apply to an existing functor, not to independently specified transformations on powers. General indexed mixed and degeneracy equations still require the separate non-overlap/overlap argument. Two natural-language phrasings checked."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CategoryTheory.Comonad\"",
+   "results": "{\"t\": \"2026-10-22T06:43:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"CategoryTheory.Comonad\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Comonad\", \"CategoryTheory.Comonad.id\", \"CategoryTheory.Comonad.instInhabited\", \"CategoryTheory.ComonadHom\", \"CategoryTheory.Comonad.toFunctor\", \"CategoryTheory.Comonad.id_obj\", \"CategoryTheory.comonadToFunctor\", \"CategoryTheory.ComonadHom.toNatTrans\"], \"digest\": \"400a9b8ddf1d1f1e\"}",
+   "date": "2026-10-22",
+   "verdict": "No match for lem-trf-comonad-mixed-degeneracy-identities: Comonad in CategoryTheory/Monad/Basic.lean:60-83 supplies only the degree-one counit/coassociativity axioms and naturality. SimplicialObject relations in AlgebraicTopology/SimplicialObject/Basic.lean apply to an existing functor, not to independently specified transformations on powers. General indexed mixed and degeneracy equations still require the separate non-overlap/overlap argument. Two natural-language phrasings checked."
+  },
+  {
+   "tool": "grep",
+   "query": "comonad|counit|comul",
+   "results": "{\"t\": \"2026-10-22T06:43:14Z\", \"tool\": \"grep\", \"query\": \"comonad|counit|comul\", \"sub\": \"CategoryTheory/Monad\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monad/EquivMon.lean\", \"Mathlib/CategoryTheory/Monad/Kleisli.lean\", \"Mathlib/CategoryTheory/Monad/Kleisli.lean\", \"Mathlib/CategoryTheory/Monad/Kleisli.lean\", \"Mathlib/CategoryTheory/Monad/Kleisli.lean\", \"Mathlib/CategoryTheory/Monad/Kleisli.lean\", \"Mathlib/CategoryTheory/Monad/Monadicity.lean\", \"Mathlib/CategoryTheory/Monad/Monadicity.lean\"], \"digest\": \"79692c728bde19d5\"}",
+   "date": "2026-10-22",
+   "verdict": "No match for lem-trf-comonad-mixed-degeneracy-identities: Comonad in CategoryTheory/Monad/Basic.lean:60-83 supplies only the degree-one counit/coassociativity axioms and naturality. SimplicialObject relations in AlgebraicTopology/SimplicialObject/Basic.lean apply to an existing functor, not to independently specified transformations on powers. General indexed mixed and degeneracy equations still require the separate non-overlap/overlap argument. Two natural-language phrasings checked."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Whiskered counit and comultiplication satisfy simplicial mixed and degeneracy relations",
+   "results": "{\"t\": \"2026-10-22T06:43:15Z\", \"tool\": \"leansearch\", \"query\": \"Whiskered counit and comultiplication satisfy simplicial mixed and degeneracy relations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Bicategory.Comonad.comul_counit_assoc\", \"CategoryTheory.ComonObj.counit_comul_assoc\", \"CategoryTheory.SimplicialObject.whiskering\", \"CategoryTheory.Bicategory.Comonad.counit_comul\", \"CategoryTheory.ComonObj.comul_counit_assoc\", \"CategoryTheory.ComonObj.mk\", \"CategoryTheory.Bicategory.Comonad.comul_assoc_flip\", \"CategoryTheory.ComonObj.counit_comul\"], \"digest\": \"b88c9be4ce03d895\"}",
+   "date": "2026-10-22",
+   "verdict": "No match for lem-trf-comonad-mixed-degeneracy-identities: Comonad in CategoryTheory/Monad/Basic.lean:60-83 supplies only the degree-one counit/coassociativity axioms and naturality. SimplicialObject relations in AlgebraicTopology/SimplicialObject/Basic.lean apply to an existing functor, not to independently specified transformations on powers. General indexed mixed and degeneracy equations still require the separate non-overlap/overlap argument. Two natural-language phrasings checked."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The bar construction of a comonad satisfies all face degeneracy and degeneracy degeneracy relations before constructing a simplicial functor",
+   "results": "{\"t\": \"2026-10-22T06:43:44Z\", \"tool\": \"leansearch\", \"query\": \"The bar construction of a comonad satisfies all face degeneracy and degeneracy degeneracy relations before constructing a simplicial functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.δ_comp_σ_of_le_assoc\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.map\", \"SSet.Augmented.StandardSimplex.extraDegeneracy\", \"SimplexCategoryGenRel.toSimplexCategory_map_σ\", \"SimplexCategoryGenRel.degeneracies\", \"CategoryTheory.Bicategory.Comonad.toOplax\", \"SimplexCategoryGenRel.instHasFactorizationP_σP_δ\", \"FreeSimplexQuiver.homRel.δ_comp_σ_self\"], \"digest\": \"dca353a9e1b09fd4\"}",
+   "date": "2026-10-22",
+   "verdict": "No match for lem-trf-comonad-mixed-degeneracy-identities: Comonad in CategoryTheory/Monad/Basic.lean:60-83 supplies only the degree-one counit/coassociativity axioms and naturality. SimplicialObject relations in AlgebraicTopology/SimplicialObject/Basic.lean apply to an existing functor, not to independently specified transformations on powers. General indexed mixed and degeneracy equations still require the separate non-overlap/overlap argument. Two natural-language phrasings checked."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an endofunctor with counit and coassociative comultiplication the whiskered maps on its powers satisfy the mixed face degeneracy and double degeneracy identities",
+   "results": {
+    "t": "2026-10-23T14:40:14Z",
+    "tool": "leanfinder",
+    "query": "For an endofunctor with counit and coassociative comultiplication the whiskered maps on its powers satisfy the mixed face degeneracy and double degeneracy identities",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.CosimplicialObject.δ_comp_σ_succ",
+     "CategoryTheory.CosimplicialObject.δ_comp_σ_succ'",
+     "CategoryTheory.CosimplicialObject.δ_comp_σ_self_assoc",
+     "CategoryTheory.CosimplicialObject.δ_comp_σ_succ_assoc",
+     "CategoryTheory.CosimplicialObject.δ_comp_σ_self'",
+     "CategoryTheory.CosimplicialObject.δ_comp_σ_self",
+     "CategoryTheory.CosimplicialObject.δ_comp_σ_of_le_assoc",
+     "CategoryTheory.CosimplicialObject.δ_comp_σ_of_le"
+    ],
+    "digest": "877b73a499f87d7b"
+   },
+   "date": "2026-10-23",
+   "verdict": "No match: inspected CategoryTheory.Comonad in Mathlib/CategoryTheory/Monad/Basic.lean:60-83 (only axioms and naturality), and SimplicialObject relations in Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean:148-199 (require an existing simplicial object). Neither states the indexed formulas for the specified raw transformations. The two LeanFinder phrasings give only simplicial/cosimplicial relations or extra-degeneracy tools."
+  },
+  {
+   "tool": "grep",
+   "query": "comonad|counit|comul",
+   "results": {
+    "t": "2026-10-23T14:42:22Z",
+    "tool": "grep",
+    "query": "comonad|counit|comul",
+    "sub": "CategoryTheory/Monad",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Monad/EquivMon.lean",
+     "Mathlib/CategoryTheory/Monad/Kleisli.lean",
+     "Mathlib/CategoryTheory/Monad/Kleisli.lean",
+     "Mathlib/CategoryTheory/Monad/Kleisli.lean",
+     "Mathlib/CategoryTheory/Monad/Kleisli.lean",
+     "Mathlib/CategoryTheory/Monad/Kleisli.lean",
+     "Mathlib/CategoryTheory/Monad/Monadicity.lean",
+     "Mathlib/CategoryTheory/Monad/Monadicity.lean"
+    ],
+    "digest": "79692c728bde19d5"
+   },
+   "date": "2026-10-23",
+   "verdict": "No match: inspected CategoryTheory.Comonad in Mathlib/CategoryTheory/Monad/Basic.lean:60-83 (only axioms and naturality), and SimplicialObject relations in Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean:148-199 (require an existing simplicial object). Neither states the indexed formulas for the specified raw transformations. The two LeanFinder phrasings give only simplicial/cosimplicial relations or extra-degeneracy tools."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The simplicial bar construction of a comonad satisfies mixed and degeneracy identities on functor powers",
+   "results": {
+    "t": "2026-10-23T14:42:22Z",
+    "tool": "leansearch",
+    "query": "The simplicial bar construction of a comonad satisfies mixed and degeneracy identities on functor powers",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.CosimplicialObject.δ_comp_σ_self_assoc",
+     "CategoryTheory.SimplicialObject.δ_comp_σ_self",
+     "CategoryTheory.SimplicialObject.δ_comp_σ_self'_assoc",
+     "CategoryTheory.SimplicialObject.δ_comp_σ_succ'_assoc",
+     "CategoryTheory.SimplicialObject.δ_comp_σ_of_le_assoc",
+     "CategoryTheory.SimplicialObject.δ_comp_σ_succ",
+     "CategoryTheory.SimplicialObject.σ_comp_σ_assoc",
+     "CategoryTheory.SimplicialObject.σ_comp_σ"
+    ],
+    "digest": "f8847152ea824284"
+   },
+   "date": "2026-10-23",
+   "verdict": "No match: inspected CategoryTheory.Comonad in Mathlib/CategoryTheory/Monad/Basic.lean:60-83 (only axioms and naturality), and SimplicialObject relations in Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean:148-199 (require an existing simplicial object). Neither states the indexed formulas for the specified raw transformations. The two LeanFinder phrasings give only simplicial/cosimplicial relations or extra-degeneracy tools."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CategoryTheory.Comonad\"",
+   "results": {
+    "t": "2026-10-23T14:42:23Z",
+    "tool": "loogle",
+    "query": "\"CategoryTheory.Comonad\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CategoryTheory.Comonad",
+     "CategoryTheory.Comonad.id",
+     "CategoryTheory.Comonad.instInhabited",
+     "CategoryTheory.ComonadHom",
+     "CategoryTheory.Comonad.toFunctor",
+     "CategoryTheory.Comonad.id_obj",
+     "CategoryTheory.comonadToFunctor",
+     "CategoryTheory.ComonadHom.toNatTrans"
+    ],
+    "digest": "400a9b8ddf1d1f1e"
+   },
+   "date": "2026-10-23",
+   "verdict": "No match: inspected CategoryTheory.Comonad in Mathlib/CategoryTheory/Monad/Basic.lean:60-83 (only axioms and naturality), and SimplicialObject relations in Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean:148-199 (require an existing simplicial object). Neither states the indexed formulas for the specified raw transformations. The two LeanFinder phrasings give only simplicial/cosimplicial relations or extra-degeneracy tools."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Whiskering a counital comultiplication of an endofunctor gives the simplicial identities by naturality without assuming a simplicial object",
+   "results": {
+    "t": "2026-10-23T14:43:29Z",
+    "tool": "leanfinder",
+    "query": "Whiskering a counital comultiplication of an endofunctor gives the simplicial identities by naturality without assuming a simplicial object",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.SimplicialObject.σ_naturality",
+     "CategoryTheory.SimplicialObject.σ_naturality_assoc",
+     "CategoryTheory.CosimplicialObject.σ_naturality_assoc",
+     "CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.map",
+     "CategoryTheory.CosimplicialObject.σ_naturality",
+     "CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.s'_comp_ε_assoc",
+     "CategoryTheory.SimplicialObject.δ_naturality_assoc",
+     "CategoryTheory.SimplicialObject.δ_naturality"
+    ],
+    "digest": "429a5371fdf760ca"
+   },
+   "date": "2026-10-23",
+   "verdict": "No match: inspected CategoryTheory.Comonad in Mathlib/CategoryTheory/Monad/Basic.lean:60-83 (only axioms and naturality), and SimplicialObject relations in Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean:148-199 (require an existing simplicial object). Neither states the indexed formulas for the specified raw transformations. The two LeanFinder phrasings give only simplicial/cosimplicial relations or extra-degeneracy tools."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-comonad-simplicial-object",
+  "date": "2026-10-22",
+  "group": "N5"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Functorial standard resolutions and comparison with arbitrary polynomial resolutions. Generic input to lem-trf-cotangent-resolution-coherence: Standard simplicial object of an adjunction and its homotopy equivalences. Foundational construction: powers of a counital coassociative endofunctor, used in Stacks 08NC via Godement Lemma 0G5N. Re-split of foundational comonad argument: Tag 0G5N, lemma-godement, proof of conditions (1)(b)--(e), with Example 0G5M, example-godement.",
+   "via": [
+    "lem-trf-comonad-simplicial-object",
+    "lem-trf-adjunction-standard-simplicial-homotopy",
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-comonad-mixed-degeneracy-identities",
+  "worker": "stage1",
+  "summary": "Q126 checked Stacks 0G5M/0G5N and 003F, retained the statement, and wrote the component naturality, both disjoint mixed calculations, the two counit reductions and the distinct/equal degeneracy calculations. Reuses the existing exchange Mathlib leaf; no new nodes. Searched project Lean and Mathlib, including two semantic phrasings; no exact item attachment.",
+  "blueprint": "Serves the existing ancestor chain from lem-trf-local-term-locality, proof (1)--(2), via its standard-resolution/comonad input. Realizes Stacks 0G5N proof (1)(b)--(e), without changing the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q126-805d9d048",
+  "group": "Q126",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q126-805d9d048 (reviewer sub-agent of L); spot-checked: Read the item's statement and all 6 steps against Stacks simplicial.tex 0G5M/0G5N, proof of (1)(b)-(e). Faces, degeneracies, hypotheses and index ranges match the source; the item's (d) range j<i-1<=n-1 is the source's 0<j+1<i<=n. Recomputed every composite by components with y=T^r x. Step 2: k=j-i-1, r=n-j-1, exchange eta=1_k*c, theta=e, H=T, K=id. Step 3: k=i-j-2, r=n-i, exchange eta=1_k*e, theta=c, K=T^2. Step 5: exchange eta=1_k*c, theta=c. All match the cited lem-amb-natural-transformation-whisker-exchange, the Mathlib leaf Functor.whiskerLeft_comp_whiskerRight at Whiskering.lean:203-207. Step 4 uses only the two counit equations and step 6 only coassociativity, both hypotheses of the item. Step 1 naturality and T^aT^b=T^{a+b} are elementary from def-trf-endofunctor-powers. Edge cases checked: n=1 for (c) and (e), the n=2 boundary cases with k=r=0, T=id, the empty category. There are no new nodes and the delivery introduces no route or cycle issue. Grepped the DAG for 0G5N, comonad and simplicial identities: no duplicate; the face-identities sibling is complementary. Mathlib has no comonad bar construction. No SGA. Advisory: the report names citations.json and searches.jsonl, which are not in the commit."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ComonadMixedDegeneracyIdentities",
+  "declaration": "CategoryTheory.NaturalTransport.comonad_mixed_degeneracy_identities",
+  "declarations": [
+   "CategoryTheory.NaturalTransport.comonadFace",
+   "CategoryTheory.NaturalTransport.comonadDegeneracy",
+   "CategoryTheory.NaturalTransport.comonad_mixed_degeneracy_identities"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ComonadMixedDegeneracyIdentities.lean",
+  "statement": "theorem comonad_mixed_degeneracy_identities {C : Type u} [Category.{v} C] (T : C ⥤ C) (e : T ⟶ 𝟭 C) (c : T ⟶ T ⋙ T) (h₁ : c ≫ Functor.whiskerRight e T ≫ (Functor.leftUnitor T).hom = 𝟙 T) (h₂ : c ≫ Functor.whiskerLeft T e ≫ (Functor.rightUnitor T).hom = 𝟙 T) (h₃ : c ≫ Functor.whiskerRight c T ≫ (Functor.associator T T T).hom = c ≫ Functor.whiskerLeft T c) : (∀ (n : ℕ) (i : Fin (n + 2)) (j : Fin (n + 1)), i ≤ j.castSucc → comonadDegeneracy T c (n + 1) j.succ ≫ comonadFace T e (n + 2) i.castSucc = comonadFace T e (n + 1) i ≫ comonadDegeneracy T c n j) ∧ (∀ (n : ℕ) (i : Fin (n + 2)) (j : Fin (n + 1)), j.castSucc < i → comonadDegeneracy T c (n + 1) j.castSucc ≫ comonadFace T e (n + 2) i.succ = comonadFace T e (n + 1) i ≫ comonadDegeneracy T c n j) ∧ (∀ (n : ℕ) (j : Fin (n + 1)), comonadDegeneracy T c n j ≫ comonadFace T e (n + 1) j.castSucc = 𝟙 (power T (n + 1)) ∧ comonadDegeneracy T c n j ≫ comonadFace T e (n + 1) j.succ = 𝟙 (power T (n + 1))) ∧ (∀ (n : ℕ) (i j : Fin (n + 1)), i ≤ j → comonadDegeneracy T c n j ≫ comonadDegeneracy T c (n + 1) i.castSucc = comonadDegeneracy T c n i ≫ comonadDegeneracy T c (n + 1) j.succ)",
+  "branch": "newtargets-dag",
+  "by": "O1",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cd7a7a406",
+  "group": "O1",
+  "result": "fix",
+  "note": "Lean exact against node and Stacks 0G5N (1)(b)-(e) (0G5M): comonadFace/comonadDegeneracy are real recursive whiskerings with components T^i(e_{T^{n-i}x}) / T^i(c_{T^{n-i}x}), outer index 0, same convention as lem-trf-comonad-simplicial-object; h1/h2/h3 = node counit and coassociativity equations, nothing stronger; all four conclusion families reindexed one-to-one onto the node's index ranges (j_old=j+1, i_old=i+1, both cancellations, s_i<=s_j), composition order right; edge cases N=1,2, zero power, empty C covered; powers reuse NaturalTransport.power; no duplicate maps in project or Mathlib; lean.statement equals file signature up to whitespace, declarations complete, docstrings carry source place, blueprint id and six proof steps, only sorry in theorem; no Lean file changed, so no compile. Sole fault H11: the second-reading section is an author self-check ('no second worker started'); FIX = fixes/lem-trf-comonad-mixed-degeneracy-identities.report.md (worker report verbatim + independent clause-by-clause second reading). Advisory: the face-identities node should reuse comonadFace."
+ }
+}

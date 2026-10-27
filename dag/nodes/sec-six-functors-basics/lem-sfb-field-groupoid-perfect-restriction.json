@@ -1,0 +1,231 @@
+{
+ "id": "lem-sfb-field-groupoid-perfect-restriction",
+ "kind": "statement",
+ "title": "Perfect-field restriction of a field groupoid morphism",
+ "statement": "Let $k$ be a field [def-weil-field], let $V=\\operatorname{Spec}k$ [def-weil-affine-spectrum], and let $(V,R_1,s_1,t_1,e_1,i_1,c_1)$ and $(V,R_2,s_2,t_2,e_2,i_2,c_2)$ be absolute groupoid schemes [def-a1-groupoid-scheme]. Let $a:R_1\\to R_2$ be a morphism which, together with $\\mathrm{id}_V$, commutes with all groupoid operations. There exist a field extension $k\\subseteq k^{\\prime}$ [def-pc-field-extension] and $V^{\\prime}=\\operatorname{Spec}k^{\\prime}$ such that $k^{\\prime}$ is perfect (in positive characteristic $p$ its Frobenius $x\\mapsto x^p$ is surjective; in characteristic zero this condition is automatic) with the following properties. Put $R_j^{\\prime}=V^{\\prime}\\times_{V,t_j}R_j\\times_{s_j,V}V^{\\prime}$ [def-pc-fibre-product]. The operations induced on test-scheme points by the operations of $R_j$ make $(V^{\\prime},R_j^{\\prime})$ a groupoid scheme. The induced morphism $a^{\\prime}:R_1^{\\prime}\\to R_2^{\\prime}$, equal to the identity on the two $V^{\\prime}$ coordinates and to $a$ on the arrow coordinate, commutes with these operations. For $j=1,2$ the arrow-coordinate projection $q_j:R_j^{\\prime}\\to R_j$ is a homeomorphism on underlying topological spaces, and $q_2\\circ a^{\\prime}=a\\circ q_1$. No finiteness hypothesis on $R_j$ or $a$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 04Q9 (lemma-locally-closed-image-is-closed), first proof paragraph; restriction diagram of Tag 04LQ (lemma-restrict-groupoid-on-field)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "def-a1-groupoid-scheme",
+  "def-pc-field-extension",
+  "def-pc-fibre-product",
+  "def-sfb-groupoid-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-perfect-purely-inseparable-overfield] to $k$. Choose its perfect extension $k^{\\prime}/k$, which is purely inseparable: each element has a $p^n$-power in $k$ in characteristic $p>0$, and the extension is the identity in characteristic zero. Set $g:V^{\\prime}=\\operatorname{Spec}k^{\\prime}\\to V$. This choice is independent of $R_1,R_2,a$.",
+   "uses": [
+    "lem-weil-pbc-perfect-purely-inseparable-overfield"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 046W (lemma-perfection), existence; Tag 04Q9 (more-groupoids, lemma-locally-closed-image-is-closed), first proof paragraph."
+   }
+  },
+  {
+   "text": "Fix $j$ and suppress the subscript. By [def-pc-fibre-product], an $H$-point of $R^{\\prime}$ is a triple $(x,r,y)$ with $gx=t(r)$ and $s(r)=gy$. Define $t^{\\prime}(x,r,y)=x$, $s^{\\prime}(x,r,y)=y$, $e^{\\prime}(x)=(x,e(gx),x)$, $i^{\\prime}(x,r,y)=(y,i(r),x)$, and $c^{\\prime}((x,r,y),(y,u,z))=(x,c(r,u),z)$. The identities $se=te=\\mathrm{id}$, $si=t$, $ti=s$, $sc(r,u)=s(u)$ and $tc(r,u)=t(r)$ from [def-a1-groupoid-scheme] show that these tuples satisfy the fibre-product equations. Each component is a morphism (for composition use the unique map to $R\\times_{s,V,t}R$ with components $r,u$), so the fibre-product universal property constructs the indicated scheme morphisms.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-a1-groupoid-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 02VB (lemma-restrict-groupoid), construction; details of the omitted proof."
+   }
+  },
+  {
+   "text": "These operations satisfy [def-a1-groupoid-scheme]. On test-scheme points, composing with either displayed identity leaves $(x,r,y)$ unchanged because it leaves $r$ unchanged. Composing a triple and its inverse gives $(y,e(gy),y)$ or $(x,e(gx),x)$, respectively. For three composable triples, both associative composites retain the same outer endpoints and have middle coordinates $c(c(r,u),v)$ and $c(r,c(u,v))$, equal by the original groupoid law. The source and target laws follow directly from the formulas in step 2. Fibre-product uniqueness identifies morphisms with these equal coordinates. All formulas commute with precomposition in $H$ because their components are morphisms. This supplies the required groupoid schemes for both values of $j$.",
+   "uses": [
+    "def-a1-groupoid-scheme",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 02VB (lemma-restrict-groupoid), groupoid axioms and test-scheme interpretation; details of the omitted proof."
+   }
+  },
+  {
+   "text": "The commutation of $a$ with $s,t$ gives $a^{\\prime}(x,r,y)=(x,a(r),y)$ by [def-pc-fibre-product]. It preserves the two endpoint projections. For identities and inverses, its middle coordinates are $a(e_1(gx))=e_2(gx)$ and $a(i_1(r))=i_2(a(r))$; for a composable pair its middle coordinate is $a(c_1(r,u))=c_2(a(r),a(u))$. Endpoints agree in each equation, so fibre-product uniqueness proves commutation with all the restricted operations. Finally both $q_2\\circ a^{\\prime}$ and $a\\circ q_1$ send $(x,r,y)$ to $a(r)$, giving the asserted equality of morphisms.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04Q9 (lemma-locally-closed-image-is-closed), induced restricted morphism in the first paragraph; Tag 04LQ (lemma-restrict-groupoid-on-field), restriction diagram."
+   }
+  },
+  {
+   "text": "For either $j$, put $B_j=R_j\\times_{s_j,V}V^{\\prime}$, with projection $b_j:B_j\\to R_j$. By [lem-pc-homeo-pure-insep] applied to the $k$-scheme $(R_j,s_j)$, $b_j$ is a homeomorphism. Regard $B_j$ also as a $k$-scheme via $t_j\\circ b_j$. Its base change along the same purely inseparable extension has projection $d_j:V^{\\prime}\\times_{V,t_j\\circ b_j}B_j\\to B_j$, again a homeomorphism by that lemma. By [def-pc-fibre-product], the domain of $d_j$ is canonically $R_j^{\\prime}$ and $q_j=b_j\\circ d_j$: both universal properties specify the same three projections and equations. Hence $q_j$ is a homeomorphism, with continuous inverse $d_j^{-1}\\circ b_j^{-1}$. No finite-type, quasi-compactness or finiteness condition was used.",
+   "uses": [
+    "lem-pc-homeo-pure-insep",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04Q9 (lemma-locally-closed-image-is-closed), first proof paragraph; Tag 04LQ (lemma-restrict-groupoid-on-field), two successive base-change squares."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-perfect-purely-inseparable-overfield",
+  "def-pc-fibre-product",
+  "def-a1-groupoid-scheme",
+  "lem-pc-homeo-pure-insep"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 04Q9 (lemma-locally-closed-image-is-closed), first proof paragraph; Tag 04LQ restriction diagram; the omitted construction in groupoids.tex Tag 02VB is expanded explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every field has a perfect purely inseparable extension and restriction of groupoid schemes along it is a homeomorphism on arrows",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Homeomorph\", \"type\": \"∀ (k : Type u_1) (K : Type u_2) (R : Type u_3) [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K]\\n  [inst_3 : CommRing R] [inst_4 : Algebra k R] [IsPurelyInseparable k K],\\n  IsHomeomorph (PrimeSpectrum.comap (algebraMap R (TensorProduct k R K)))\", \"doc\": \"Let $ k \\\\to K $ be a purely inseparable field extension and $ R $ a commutative semiring equipped with a $ k $-algebra structure. The induced map on prime spectra given by preimage under the canonical\"}\n  {\"name\": \"IsPurelyInseparable.bijective_restrictDomain\", \"module\": \"Mathlib/FieldTheory/PurelyInseparable/Basic\", \"type\": \"∀ (F : Type u) (E : Type v) [inst : Field F] [inst_1 : Field E] [inst_2 : Algebra F E] [IsPurelyInseparable F E]\\n  (R : Type u_1) (L : Type u_2) [inst_4 : CommSemiring R] [inst_5 : Algebra R F] [inst_6 : Algebra R E]\\n  [inst_7 : Field L] [PerfectField L] [inst_9 : Algebra R L] [inst_10 : IsScalarTow\", \"doc\": \"Given a scalar tower $ R \\to F \\to E $, where $ L $ is a perfect field equipped with an $ R $-algebra structure, the restriction map from $ R $-algebra homomorphisms $ E \\to L $ to $ R $-algebra homomorp\"}\n  {\"name\": \"PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Homeomorph\", \"type\": \"∀ (K : Type u_2) (R : Type u_3) (S : Type u_4) [inst : Field K] [inst_1 : CommRing R] [inst_2 : CommRing S]\\n  [inst_3 : Algebra R K] [inst_4 : Algebra R S] (L : Type u_5) [inst_5 : Field L] [inst_6 : Algebra R L]\\n  [inst_7 : Algebra K L] [inst_8 : IsScalarTower R K L] [IsPurelyInseparable K L],\\n  Is\", \"doc\": \"Let $ R $ be a commutative semiring, $ K $ and $ S $ be $ R $-algebras, and $ L $ be a field extending $ K $ as a purely inseparable field extension. The map induced by the tensor product $ K \\\\otimes_\"}\n  {\"name\": \"IsPurelyInseparable.bijective_comp_algebraMap\", \"module\": \"Mathlib/FieldTheory/PurelyInseparable/Basic\", \"type\": \"∀ (F : Type u) (E : Type v) [inst : Field F] [inst_1 : Field E] [inst_2 : Algebra F E] [IsPurelyInseparable F E]\\n  (L : Type u_2) [inst_4 : Field L] [PerfectField L], Function.Bijective fun f => f.comp (algebraMap F E)\", \"doc\": \"Given a purely inseparable field extension $ E/F $ and a perfect field $ L $, the function mapping each ring homomorphism $ f : E \\to L $ to its composition with the canonical algebra homomorphism $ F \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {K : Type u_1} [inst : Field K] {X : AlgebraicGeometry.Scheme}\\n  {f₁ f₂ : (x : ↥X) × (X.residueField x ⟶ { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })},\\n  f₁ = f₂ ↔\\n    ∃ (e : f₁.fst = f₂.fst),\\n      f₁.snd = CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.residueF\", \"doc\": \"For a scheme $X$ and points $x, y \\\\in X$, if $x = y$, then the residue fields $\\\\kappa(x)$ and $\\\\kappa(y)$ are isomorphic via the identity isomorphism on $\\\\kappa(x)$.\"}\n  {\"name\": \"IntermediateField.restrictRestrictAlgEquivMapHom\", \"module\": \"Mathlib/FieldTheory/Galois/Basic\", \"type\": \"(F : Type u_1) →\\n  (K : Type u_2) →\\n    (L : Type u_3) →\\n      (E : Type u_4) →\\n        [inst : Field F] →\\n          [inst_1 : Field K] →\\n            [inst_2 : Field L] →\\n              [inst_3 : Field E] →\\n                [inst_4 : Algebra F K] →\\n                  [inst_5 : Algebra F L] →\\n          \", \"doc\": \"The group homomorphism from the Galois group $\\\\mathrm{Gal}(E/L)$ to $\\\\mathrm{Gal}(K/F)$, defined by first lifting each automorphism to an $F$-algebra automorphism of $E$ via the scalar tower action an\"}\n  {\"name\": \"InfiniteGalois.limitToAlgEquiv_apply\", \"module\": \"Mathlib/FieldTheory/Galois/Profinite\", \"type\": \"∀ {k : Type u_3} {K : Type u_4} [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K] [inst_3 : IsGalois k K]\\n  (g : ↑(ProfiniteGrp.limit (InfiniteGalois.asProfiniteGaloisGroupFunctor k K)).toProfinite.toTop) (a : K),\\n  (InfiniteGalois.limitToAlgEquiv g) a = InfiniteGalois.toAlgEquivAux✝ g a\", \"doc\": \"The function constructs an algebra equivalence (field automorphism) of $ K $ induced by an element $ g $ of the profinite Galois group $ \\\\text{Gal}(K/k) $, which fixes the base field $ k $ and preserv\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.homeomorph_apply\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : CategoryTheory.IsIso f] (x : ↥X),\\n  (AlgebraicGeometry.Scheme.Hom.homeomorph f) x = (CategoryTheory.ConcreteCategory.hom f.base) x\", \"doc\": \"Given an isomorphism $ f $ between schemes $ X $ and $ Y $, the underlying continuous map of $ f $ induces a homeomorphism between the topological spaces of $ X $ and $ Y $.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme immersion criteria, affine purely inseparable spectrum results, ordinary subgroupoids, or manifold structure groupoids do not state this internal scheme-groupoid assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of internal scheme groupoids by a universal homeomorphism on objects preserves the topology of arrows",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"closedUnderRestriction_idRestrGroupoid\", \"module\": \"Mathlib/Geometry/Manifold/StructureGroupoid\", \"type\": \"∀ {H : Type u_1} [inst : TopologicalSpace H], ClosedUnderRestriction idRestrGroupoid\", \"doc\": \"The identity restriction groupoid on a topological space $ H $, consisting of open partial homeomorphisms equivalent to identity maps, is closed under restriction: for any homeomorphism in the groupoi\"}\n  {\"name\": \"idRestrGroupoid_mem\", \"module\": \"Mathlib/Geometry/Manifold/StructureGroupoid\", \"type\": \"∀ {H : Type u_1} [inst : TopologicalSpace H] {s : Set H} (hs : IsOpen s),\\n  OpenPartialHomeomorph.ofSet s hs ∈ idRestrGroupoid\", \"doc\": \"For any open set $ s $ in a topological space $ H $, the identity partial homeomorphism on $ s $ is a member of the identity restriction structure groupoid on $ H $.\"}\n  {\"name\": \"instClosedUnderRestrictionContinuousGroupoid\", \"module\": \"Mathlib/Geometry/Manifold/StructureGroupoid\", \"type\": \"∀ {H : Type u_1} [inst : TopologicalSpace H], ClosedUnderRestriction (continuousGroupoid H)\", \"doc\": \"The continuous groupoid on a topological space $ H $, consisting of all open partial homeomorphisms between open subsets of $ H $, is closed under restriction. This means that for any homeomorphism in\"}\n  {\"name\": \"idRestrGroupoid\", \"module\": \"Mathlib/Geometry/Manifold/StructureGroupoid\", \"type\": \"{H : Type u_1} → [inst : TopologicalSpace H] → StructureGroupoid H\", \"doc\": \"The structure groupoid on a topological space $ H $ consisting of open partial homeomorphisms that are equivalent to identity maps on open subsets of $ H $. It is closed under composition, inverses, c\"}\n  {\"name\": \"Topology.IsOpenEmbedding.singleton_hasGroupoid\", \"module\": \"Mathlib/Geometry/Manifold/HasGroupoid\", \"type\": \"∀ {H : Type u} [inst : TopologicalSpace H] {α : Type u_5} [inst_1 : TopologicalSpace α] [inst_2 : Nonempty α]\\n  {f : α → H} (h : Topology.IsOpenEmbedding f) (G : StructureGroupoid H) [ClosedUnderRestriction G], HasGroupoid α G\", \"doc\": \"Given a topological space $\\\\alpha$ and a model space $H$, if $f : \\\\alpha \\\\to H$ is an open embedding and $G$ is a structure groupoid on $H$ closed under restriction, then the charted space structure o\"}\n  {\"name\": \"OpenPartialHomeomorph.singleton_hasGroupoid\", \"module\": \"Mathlib/Geometry/Manifold/HasGroupoid\", \"type\": \"∀ {H : Type u} [inst : TopologicalSpace H] {α : Type u_5} [inst_1 : TopologicalSpace α] (e : OpenPartialHomeomorph α H)\\n  (h : e.source = Set.univ) (G : StructureGroupoid H) [ClosedUnderRestriction G], HasGroupoid α G\", \"doc\": \"If the domain of an open partial homeomorphism $ e $ is the entire space $ \\\\alpha $, then the singleton charted space defined by $ e $ admits a structure groupoid $ G $, provided $ G $ is closed under\"}\n  {\"name\": \"ClosedUnderRestriction\", \"module\": \"Mathlib/Geometry/Manifold/StructureGroupoid\", \"type\": \"{H : Type u_1} → [inst : TopologicalSpace H] → StructureGroupoid H → Prop\", \"doc\": \"For a topological space $ H $, a structure groupoid on $ H $ is closed under restriction if, for every homeomorphism between open subsets of $ H $ in the groupoid and every open subset of the domain, \"}\n  {\"name\": \"StructureGroupoid.mem_of_eqOnSource\", \"module\": \"Mathlib/Geometry/Manifold/StructureGroupoid\", \"type\": \"∀ {H : Type u_1} [inst : TopologicalSpace H] (G : StructureGroupoid H) {e e' : OpenPartialHomeomorph H H},\\n  e ∈ G → e' ≈ e → e' ∈ G\", \"doc\": \"If a partial homeomorphism $ e $ belongs to a structure groupoid $ G $ on a topological space $ H $, and another partial homeomorphism $ e' $ is equivalent to $ e $ in the sense that they have the sam\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme immersion criteria, affine purely inseparable spectrum results, ordinary subgroupoids, or manifold structure groupoids do not state this internal scheme-groupoid assertion or specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"Scheme\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme immersion criteria, affine purely inseparable spectrum results, ordinary subgroupoids, or manifold structure groupoids do not state this internal scheme-groupoid assertion or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid|perfectClosure|PerfectClosure|UniversalHomeomorph",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme immersion criteria, affine purely inseparable spectrum results, ordinary subgroupoids, or manifold structure groupoids do not state this internal scheme-groupoid assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect closure restriction of a groupoid scheme induces a universal homeomorphism",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"PerfectClosure.mk\", \"module\": \"Mathlib.FieldTheory.PerfectClosure\", \"type\": \"(x : ℕ × K) : PerfectClosure K p\", \"doc\": \"The perfect closure of a field $ K $ of characteristic $ p $, constructed as the quotient of $ \\\\mathbb{N} \\\\times K $ by the equivalence relation $ R $ encoding $ p $-th power relationships between ele\"}\n  {\"name\": \"PerfectClosure\", \"module\": \"Mathlib.FieldTheory.PerfectClosure\", \"type\": \": Type u\", \"doc\": \"The perfect closure of a field $ K $ of characteristic $ p $, constructed as the quotient of $ \\\\mathbb{N} \\\\times K $ by the equivalence relation $ R $ encoding $ p $-th power relationships between ele\"}\n  {\"name\": \"IsPerfectClosure\", \"module\": \"Mathlib.FieldTheory.IsPerfectClosure\", \"type\": \"[ExpChar L p] [PerfectRing L p]\", \"doc\": \"Given a ring homomorphism $ i : K \\\\to L $ between commutative semirings with exponential characteristic $ p $, the proposition that $ L $ is a perfect closure of $ K $, meaning $ i $ satisfies the $ p\"}\n  {\"name\": \"perfectClosure.perfectRing\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.PerfectClosure\", \"type\": \"(p : ℕ) [ExpChar E p] [PerfectRing E p] : PerfectRing (perfectClosure F E) p\", \"doc\": \"If $ E $ is a perfect ring with exponential characteristic $ p $, then the perfect closure of $ F $ in $ E $, which is the intermediate field generated by taking all $ p $-th roots of elements in $ F \"}\n  {\"name\": \"PerfectClosure.of\", \"module\": \"Mathlib.FieldTheory.PerfectClosure\", \"type\": \": K →+* PerfectClosure K p\", \"doc\": \"The canonical ring homomorphism from a field $ K $ of characteristic $ p $ to its perfect closure, sending each element $ x \\\\in K $ to the equivalence class $ [(0, x)] $ in the perfect closure constru\"}\n  {\"name\": \"perfectClosure.map_le_of_algHom\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.PerfectClosure\", \"type\": \"(i : E →ₐ[F] K) : (perfectClosure F E).map i ≤ perfectClosure F K\", \"doc\": \"For any algebra homomorphism $ i : E \\\\to K $ over $ F $, the image of the perfect closure of $ F $ in $ E $ under $ i $ is contained within the perfect closure of $ F $ in $ K $.\"}\n  {\"name\": \"closedUnderRestriction'\", \"module\": \"Mathlib.Geometry.Manifold.StructureGroupoid\", \"type\": \"{G : StructureGroupoid H} [ClosedUnderRestriction G] {e : OpenPartialHomeomorph H H} (he : e ∈ G) {s : Set H}\\n  (hs : IsOpen s) : e.restr s ∈ G\", \"doc\": \"If $ G $ is a structure groupoid on a topological space $ H $ that is closed under restriction, and $ e $ is a partial homeomorphism in $ G $, then for any open subset $ s $ of the domain of $ e $, th\"}\n  {\"name\": \"PerfectClosure.lift\", \"module\": \"Mathlib.FieldTheory.PerfectClosure\", \"type\": \"(L : Type v) [CommSemiring L] [CharP L p] [PerfectRing L p] : (K →+* L) ≃ (PerfectClosure K p →+* L)\", \"doc\": \"For a field $ K $ of characteristic $ p $ and a perfect ring $ L $ of characteristic $ p $, the function establishes a bijection between ring homomorphisms $ K \\to L $ and ring homomorphisms from the p\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme immersion criteria, affine purely inseparable spectrum results, ordinary subgroupoids, or manifold structure groupoids do not state this internal scheme-groupoid assertion or specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"Scheme\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: open restriction, base change of a group object, and manifold structure groupoids do not state the internal scheme-groupoid construction with both endpoint pullbacks"
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid|GroupoidScheme",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: open restriction, base change of a group object, and manifold structure groupoids do not state the internal scheme-groupoid construction with both endpoint pullbacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of a scheme groupoid to a perfect purely inseparable extension preserves the topology of its arrow scheme",
+   "results": "8 hits: AlgebraicGeometry.morphismRestrictRestrict, AlgebraicGeometry.IsProper.instMorphismRestrict, AlgebraicGeometry.IsSeparated.instMorphismRestrict, AlgebraicGeometry.IsSeparated.instResLE, AlgebraicGeometry.IsIntegralHom.instMorphismRestrict, AlgebraicGeometry.Scheme.restrict_presheaf_map, AlgebraicGeometry.morphismRestrictRestrictBasicOpen, ClosedUnderRestriction.mk",
+   "date": "2026-10-23",
+   "verdict": "no match: open restriction, base change of a group object, and manifold structure groupoids do not state the internal scheme-groupoid construction with both endpoint pullbacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An internal groupoid of schemes restricts along any object map by pulling back its arrow scheme at both endpoints",
+   "results": "8 hits: AlgebraicGeometry.Scheme.GrpObjAsOverPullback, AlgebraicGeometry.Scheme.restrictFunctor, AlgebraicGeometry.opensDiagram, AlgebraicGeometry.opensDiagram_map, AlgebraicGeometry.morphismRestrictOpensRange, AlgebraicGeometry.isPullback_morphismRestrict, AlgebraicGeometry.Scheme.restrictFunctor_map_left, AlgebraicGeometry.morphismRestrictRestrict",
+   "date": "2026-10-23",
+   "verdict": "no match: open restriction, base change of a group object, and manifold structure groupoids do not state the internal scheme-groupoid construction with both endpoint pullbacks"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-field-kernel-relation-immersion-closed",
+  "date": "2026-10-23",
+  "group": "Q74"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Adequate moduli spaces are universal for separated targets. Alper Theorem 7.2.1, locally separated case through Proposition 7.1.1: Proposition 7.1.1, proof, printed p.36: surjectivity of the diagonal pullback W from condition (a), expanded as its closure-equivalence input. Rational points of a locally separated space over an algebraically closed field have closed images; continuity gives the assertion. This is the geometric-points sublemma, not the universality conclusion. Supporting geometric input: rational sections after field base change are closed immersions. Supporting input: The absolute locally separated space has quasi-compact field-valued representatives. First paragraph of Tag 088J: apply 04Q9 to the kernel relation on the field spectrum and its pair groupoid. Supporting First proof paragraph of 04Q9: choose a perfect closure and restrict both groupoids; the two arrow projections are homeomorphisms.",
+   "via": [
+    "lem-sfb-field-kernel-relation-immersion-closed",
+    "lem-sfb-locally-separated-space-decent",
+    "lem-sfb-locally-separated-rational-point-closed-immersion",
+    "lem-sfb-locally-separated-closure-equivalent-images",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-field-groupoid-perfect-restriction",
+  "worker": "stage1",
+  "summary": "Q51: preserved the statement and original search evidence. Expanded the omitted restriction construction into explicit endpoint, identity, inverse and composition morphisms, checked every groupoid law on test schemes, and verified functoriality of the restricted arrow map. Reused the existing perfect purely inseparable overfield Mathlib leaf and the closed purely inseparable base-change homeomorphism node, applied successively with the two distinct k-structures. No new nodes are necessary.",
+  "blueprint": "Supporting lemma in the inherited ancestry of det-thm-sf-ctf-stability-direct-images, proof (3): the perfect-closure reduction in Tag 04Q9, through the two base-change squares of Tag 04LQ. The current latest blueprint retains the direct-image preservation route; this split supplies only the inherited groupoid prerequisite and changes no unit step. The inherited null from.node and via ancestry are preserved."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q51-579fa40c8",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-579fa40c8 (reviewer sub-agent of L); spot-checked: Read the item's 5 steps in full, plus the cited statements (perfect-purely-inseparable-overfield mathlib leaf; lem-pc-homeo-pure-insep, which is Lean-closed and covers any k-scheme with no finiteness hypothesis; def-a1-groupoid-scheme; def-pc-fibre-product; def-pc-field-tower for 'purely inseparable'). Read Stacks 04Q9 first proof paragraph, 04LQ diagram and 02VB. Statement and stmt_deps match live exactly; live is still unsplit, so nothing supersedes this; there is no re-split note and no SGA source. Step 1: the leaf's power condition with q=1 or q=p is exactly purely inseparable as def-pc-field-tower defines it. Steps 2-4: I checked the fibre-product equations for e', i' and c', all the groupoid laws (unit c(e(tr),r)=r with gx=tr; inverse gives (y,e(gy),y); associativity), that a' is well defined, that it commutes with the operations, and that q2a'=aq1. Step 5 applies the homeomorphism lemma twice with different k-structures: s_j first, then t_j∘b_j. Both satisfy its hypotheses, and V'×_{t b}(R×_{s}V') is R' by the universal property. The citer lem-sfb-field-kernel-relation-immersion-closed step 1 gets everything it uses. Edge cases checked: characteristic 0, k already perfect, F_p(t) with its perfection (infinite extension), R=V (giving V'×_V V'). Duplicate search: def-sfb-restricted-groupoid-relation has only the relation, with the opposite convention; the fppf restriction-quotient lemma has other hypotheses and conclusion; no duplicate. No new nodes, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FieldGroupoidPerfectRestriction",
+  "declaration": "AlgebraicGeometry.exists_perfect_field_groupoid_restriction",
+  "declarations": [
+   "AlgebraicGeometry.groupoidRestrictionProjection",
+   "AlgebraicGeometry.exists_perfect_field_groupoid_restriction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FieldGroupoidPerfectRestriction.lean",
+  "statement": "theorem exists_perfect_field_groupoid_restriction (k : Type u) [Field k] (R : Fin 2 → Scheme.{u}) (s t : ∀ j : Fin 2, R j ⟶ Spec (CommRingCat.of k)) (e : ∀ j : Fin 2, Spec (CommRingCat.of k) ⟶ R j) (i : ∀ j : Fin 2, R j ⟶ R j) (c : ∀ j : Fin 2, pullback (s j) (t j) ⟶ R j) (hG : ∀ j : Fin 2, IsGroupoidScheme (s j) (t j) (e j) (i j) (c j)) (a : R 0 ⟶ R 1) (hs : a ≫ s 1 = s 0) (ht : a ≫ t 1 = t 0) (he : e 0 ≫ a = e 1) (hi : i 0 ≫ a = a ≫ i 1) (hc : c 0 ≫ a = pullback.map (s 0) (t 0) (s 1) (t 1) a a (𝟙 (Spec (CommRingCat.of k))) ((Category.comp_id (s 0)).trans hs.symm) ((Category.comp_id (t 0)).trans ht.symm) ≫ c 1) : ∃ (K : Type u) (_ : Field K) (_ : Algebra k K), PerfectField K ∧ ∃ (g : Spec (CommRingCat.of K) ⟶ Spec (CommRingCat.of k)), g = Spec.map (CommRingCat.ofHom (algebraMap k K)) ∧ ∃ (e' : ∀ j : Fin 2, Spec (CommRingCat.of K) ⟶ pullback (groupoidSaturationMap (s j) (t j) g) g) (i' : ∀ j : Fin 2, pullback (groupoidSaturationMap (s j) (t j) g) g ⟶ pullback (groupoidSaturationMap (s j) (t j) g) g) (c' : ∀ j : Fin 2, pullback (groupoidRestrictionSource (s j) (t j) g) (groupoidRestrictionTarget (s j) (t j) g) ⟶ pullback (groupoidSaturationMap (s j) (t j) g) g) (a' : pullback (groupoidSaturationMap (s 0) (t 0) g) g ⟶ pullback (groupoidSaturationMap (s 1) (t 1) g) g), (∀ j : Fin 2, IsGroupoidScheme (groupoidRestrictionSource (s j) (t j) g) (groupoidRestrictionTarget (s j) (t j) g) (e' j) (i' j) (c' j) ∧ e' j ≫ groupoidRestrictionProjection (s j) (t j) g = g ≫ e j ∧ i' j ≫ groupoidRestrictionProjection (s j) (t j) g = groupoidRestrictionProjection (s j) (t j) g ≫ i j ∧ (∀ (H : Scheme.{u}) (r v : H ⟶ pullback (groupoidSaturationMap (s j) (t j) g) g) (h : r ≫ groupoidRestrictionSource (s j) (t j) g = v ≫ groupoidRestrictionTarget (s j) (t j) g) (h₀ : (r ≫ groupoidRestrictionProjection (s j) (t j) g) ≫ s j = (v ≫ groupoidRestrictionProjection (s j) (t j) g) ≫ t j), pullback.lift r v h ≫ c' j ≫ groupoidRestrictionProjection (s j) (t j) g = pullback.lift (r ≫ groupoidRestrictionProjection (s j) (t j) g) (v ≫ groupoidRestrictionProjection (s j) (t j) g) h₀ ≫ c j) ∧ IsHomeomorph (groupoidRestrictionProjection (s j) (t j) g).base) ∧ ∃ (hs' : a' ≫ groupoidRestrictionSource (s 1) (t 1) g = groupoidRestrictionSource (s 0) (t 0) g) (ht' : a' ≫ groupoidRestrictionTarget (s 1) (t 1) g = groupoidRestrictionTarget (s 0) (t 0) g), e' 0 ≫ a' = e' 1 ∧ i' 0 ≫ a' = a' ≫ i' 1 ∧ c' 0 ≫ a' = pullback.map (groupoidRestrictionSource (s 0) (t 0) g) (groupoidRestrictionTarget (s 0) (t 0) g) (groupoidRestrictionSource (s 1) (t 1) g) (groupoidRestrictionTarget (s 1) (t 1) g) a' a' (𝟙 (Spec (CommRingCat.of K))) ((Category.comp_id _).trans hs'.symm) ((Category.comp_id _).trans ht'.symm) ≫ c' 1 ∧ a' ≫ groupoidRestrictionProjection (s 1) (t 1) g = groupoidRestrictionProjection (s 0) (t 0) g ≫ a",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reuses the canonical groupoidSaturationMap and groupoidRestrictionSource/Target through def-sfb-groupoid-restriction, an existing:true ownership record on Sheaf.AlgebraicGeometry.CohenMacaulayGroupoidDoubleRestriction. The theorem in that module is not a statement dependency. Fin 2 indexes precisely the two given absolute groupoids. The helper is the explicit arrow-coordinate projection; every coordinate of the operations and induced arrow map is specified. H2 repair of returned head 4d98c1e881c3; Lean source unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-15afdccfd",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Re-delivery of 4d98 (returned for H2 only). The theorem stmt_dep is replaced by a new existing:true node def-sfb-groupoid-restriction owning groupoidSaturationMap and groupoidRestrictionSource/Target (real pullback projections; its formulas match the Lean and Stacks 02VB; deps def-pc-scheme and def-pc-fibre-product exist; no clash in live dag). Item node vs live differs only in lean and the added stmt_dep. The Lean is unchanged and the lean.statement is verbatim. Statement re-checked: hypotheses (IsGroupoidScheme ×2, five compatibilities of a), PerfectField K with g pinned to Spec.map algebraMap, restricted e'/i'/c' pinned on all coordinates (the composition clause is not vacuous), a' pinned by hs'/ht' and the final square, IsHomeomorph of both projections. No finiteness assumption, single universe u. Edge cases covered: char 0 or perfect k, empty test scheme, s≠t. Helper groupoidRestrictionProjection is real data; proof is sorry only; the docstring carries the proof steps. No compile run (not required, no file changed)."
+ }
+}

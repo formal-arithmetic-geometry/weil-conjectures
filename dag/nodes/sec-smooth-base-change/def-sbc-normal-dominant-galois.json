@@ -61,7 +61,18 @@
  "uses_not_cited": [
   "def-weil-pbc-scheme-conventions"
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-base-change",
  "unit": "sk-def-smooth",
  "split_report": {
@@ -110,9 +121,13 @@
   "note": "normal = IsIntegral and every stalk IsDomain+IsIntegrallyClosed (matches node and K1 lem-fin-dense-normal-open stalk clause); integral/dominant/geom. connected/reduced fibres are the Mathlib IsIntegral/IsDominant/GeometricallyConnected/GeometricallyReduced, recorded in declarations; GaloisCoverAction: finite etale surjective, action over C with one/mul laws, simple transitivity on Omega-points of geometric fibres, categorical quotient; slopmaster2 Scheme.GaloisCover not exact (Finite G, G : Type (u+1)); FIX: deckGroup def->abbrev so it is a group"
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "A scheme $S$ is *integral* if it is nonempty, reduced, and\nirreducible; it is *normal* if it is integral and the local ring at\nevery point is a normal domain (a domain integrally closed in its\nfraction field). A morphism $f:X\\to Y$ is *dominant* if $f(X)$\nis dense in $Y$. A finite etale morphism $\\pi:Z\\to C$ is a\n*Galois cover with group $G$* if $G$ acts on $Z$ over $C$\nby finite etale\nautomorphisms, the quotient is $Z/G\\cong C$, and $Z\\to C$ is a\n$G$-torsor (the action is simply transitive on every geometric fibre);\nthe *deck group* of a Galois cover is the group of its\nautomorphisms over $C$. A morphism $f:X\\to S$ has\n*geometrically connected fibres* if for every point $s\\in S$ the\nfibre $X_s$ is geometrically connected over $\\kappa(s)$ (its base\nchange to every separably closed extension of $\\kappa(s)$ is connected).\nA morphism $f:X\\to S$ has *geometrically reduced fibres* if for\nevery point $s\\in S$ the fibre $X_s$ is reduced after every field\nextension of $\\kappa(s)$ (equivalently, after base change to an algebraic\nclosure of $\\kappa(s)$); it has *geometrically connected,\nresp. reduced, fibres* if the corresponding property holds for every\ngeometric point.\n\nFor a Galois cover with group $G$ and connected total space, the deck\ngroup is $G$.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "A scheme $S$ is *integral* if it is nonempty and $\\mathcal O_S(U)$ is an integral domain for every nonempty open\n$U\\subseteq S$; it is *normal* if it is integral and the local ring at every point is a normal domain (a domain\nintegrally closed in its fraction field). A morphism $f:X\\to Y$ is *dominant* if $f(X)$ is dense in $Y$.\n\nLet $G$ be a group. A *Galois cover with group $G$* of a scheme $C$ is a finite étale surjective morphism\n$\\pi:Z\\to C$ together with a left action of $G$ on $Z$ by morphisms over $C$ such that\n- **(a)** the action is simply transitive on every geometric fibre: for every algebraically closed field $\\Omega$ and\n  all $x,y:\\operatorname{Spec}\\Omega\\to Z$ with $\\pi x=\\pi y$ there is a unique $g\\in G$ with $g\\circ x=y$;\n- **(b)** $\\pi$ is the quotient of $Z$ by $G$: every morphism $Z\\to W$ invariant under $G$ factors uniquely through\n  $\\pi$.\n\nFor a finite group $G$ one also uses the variant in which (a) and (b) are replaced by the condition that $Z$ is a\n$G$-torsor over $C$: the morphism $\\coprod_{g\\in G}Z\\to Z\\times_CZ$ with $g$-th component $(g,\\mathrm{id})$ is an isomorphism.\nThe total space is not required to be connected. The *deck group* of a morphism $\\pi:Z\\to C$ is the group of its\nautomorphisms over $C$.\n\nA morphism $f:X\\to S$ is *geometrically connected* (resp. *geometrically reduced*) if for every field $K$ and every\nmorphism $\\operatorname{Spec}K\\to S$ the scheme $X\\times_S\\operatorname{Spec}K$ is connected (resp. reduced).\nEquivalently, every fibre $X_s$ is geometrically connected (resp. geometrically reduced) over $\\kappa(s)$.",
   "proof": [],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

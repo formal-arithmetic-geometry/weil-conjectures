@@ -139,7 +139,62 @@
   "def-sc-group-scheme"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.etale_torsionSubgroupScheme"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.etale_torsionSubgroupScheme",
+     "module": "WeilConjectures.AlgebraicGeometry.AbelianVariety.Torsion",
+     "lines": [
+      61,
+      79
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.isFinite_torsionSubgroupScheme",
+     "module": "WeilConjectures.AlgebraicGeometry.AbelianVariety.Isogeny",
+     "lines": [
+      175,
+      183
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.bijective_toUnit_comp_torsionSubgroupScheme",
+     "module": "WeilConjectures.AlgebraicGeometry.AbelianVariety.Torsion",
+     "lines": [
+      110,
+      126
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.nonempty_addEquiv_torsionBy",
+     "module": "WeilConjectures.AlgebraicGeometry.AbelianVariety.Torsion",
+     "lines": [
+      128,
+      155
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-abelian-varieties",
  "unit": "sk-prop-av-ntorsion-etale",
  "split_report": {
@@ -159,14 +214,17 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-nte1752 (reviewer sub-agent of L); spot-checked: Read packet whole; Step 1 cites finite-flat, etale-kernel (char k prime to n), finite-etale-points with their hypotheses; Step 3 leaf lem-sc-coprime-torsion-decomposition read at Mathlib/Algebra/Module/Torsion/Basic.lean:534, exact match of Submodule.torsionBy_isInternal (Finset S, pairwise IsCoprime, IsTorsionBy prod); def-weil-pbc-direct-sum-modules exists; CRT elementary. FIX more, RETURN less: C4/C1 in Step 2 - lem-sc-finite-etale-points needs A[ell^e] finite etale but etaleness of A[ell^e] was not cited; added [lem-sc-mult-n-etale-kernel] with the hypothesis ell^e prime to char k (ell | n) to the text and uses of step 2 (missed by the second reading).; 1 file(s) fixed by the reviewer"
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "proof"
+  ],
   "statement": "Let $A$ be an abelian variety\nof dimension $g$ over a field $k$ and let\n$n\\geq1$ be prime to $\\operatorname{char}k$. Then\n$A[n]=\\ker([n])$ ([def-sc-mult-n]) is a finite etale\ngroup scheme over $k$. If moreover $k$ is algebraically closed, the\ncanonical base change map\n\n$$\nA[n](k)\\xrightarrow{\\ \\sim\\ }A[n](k')\n$$\n\nis a bijection for every extension $k\\subseteq k'$ of\nalgebraically closed fields, and the $n$-torsion subgroup of $A(k)$\nsatisfies\n\n$$\nA[n](k)=A(k)[n]\\cong(\\mathbf Z/n\\mathbf Z)^{2g}.\n$$",
   "proof": [
    {
-    "text": "By [lem-sc-isogeny-facts](b), $A[n]$ is a finite flat group\nscheme of order $n^{2g}$ over the field $k$, and $n^{2g}$ is prime to\n$\\operatorname{char}k$ ([lem-sc-mult-n-finite-flat]); by\n[lem-sc-fg-order-prime-etale], which holds over any field, it is\netale (equivalently, $[n]$ is etale, by [lem-sc-mult-n-etale-kernel]).",
+    "text": "By [lem-sc-isogeny-facts](b), $A[n]$ is a finite flat group\nscheme of order $n^{2g}$ over the field $k$, and $n^{2g}$ is prime to\n$\\operatorname{char}k$ ([lem-sc-isogeny-facts]); by\n[lem-sc-fg-order-prime-etale], which holds over any field, it is\netale (equivalently, $[n]$ is etale, by [lem-sc-mult-n-etale-kernel]).",
     "uses": [
      "lem-sc-isogeny-facts",
-     "lem-sc-mult-n-finite-flat",
      "lem-sc-fg-order-prime-etale",
      "lem-sc-mult-n-etale-kernel"
     ],
@@ -189,6 +247,6 @@
     "elementary": null
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

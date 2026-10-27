@@ -1,0 +1,318 @@
+{
+ "id": "lem-sfb-diagonalizable-nilpotent-triviality",
+ "kind": "statement",
+ "title": "Nilpotent rigidity of trivial homomorphisms from split diagonalizable groups",
+ "statement": "Let $A$ be a commutative ring, let $J\\subseteq A$ be an ideal with $J^N=0$ for some integer $N\\geq1$, and put $S=\\operatorname{Spec}A$ and $S_0=\\operatorname{Spec}(A/J)$ [def-weil-affine-spectrum]. Let $M$ be a finitely generated additive abelian group. Let $A[M]$ be the free $A$-module with basis $(e_m)_{m\\in M}$, with multiplication $e_me_n=e_{m+n}$, unit $e_0$, comultiplication $e_m\\mapsto e_m\\otimes e_m$, counit $e_m\\mapsto1$, and antipode $e_m\\mapsto e_{-m}$, and set $H=D_A(M)=\\operatorname{Spec}A[M]$ with the resulting group operations. An $S$-group scheme is an $S$-scheme [def-pc-scheme] with multiplication, identity section and inverse satisfying the associativity, unit and inverse diagrams. Let $G$ be any $S$-group scheme and let $f:H\\to G$ be an $S$-group homomorphism. Write $e_G:S\\to G$ for its identity section and $p:H\\to S$ for the structure map. If the base change $f_0:H\\times_SS_0\\to G\\times_SS_0$ [def-pc-base-change] equals the identity-valued homomorphism $e_{G_0}\\circ p_0$, then $f=e_G\\circ p$. No smoothness, flatness, separatedness or finite-presentation assumption on $G$ is imposed.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Reductive group schemes, Corollary B.2.7, printed p.287 (PDF page index 286), split diagonalizable special case. Read online 2026-10-24; local archive WANTED as literature/conrad-reductive-group-schemes.pdf. No Stacks tag states this rigidity assertion."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-sfb-ring-diagonalizable-group"
+ ],
+ "proof": [
+  {
+   "text": "We first prove the assertion when $J^2=0$, writing $I=J$, $A_0=A/I$, $B=A[M]$ and $B_0=A_0[M]$. Reduction of a finite sum is coefficientwise, so $\\ker(B\\to B_0)=I[M]=\\bigoplus_{m\\in M}I e_m$, an ideal of square zero. This is a first order thickening $H_0\\hookrightarrow H$. The same holds for $C=A[M\\times M]$ and $C_0=A_0[M\\times M]$. The tensor-product universal property identifies $B\\otimes_A B$ with $C$: the two inverse maps send $e_u\\otimes e_v$ to $e_{(u,v)}$ and back. Consequently multiplication $H\\times_SH\\to H$ corresponds to $\\Delta(e_m)=e_{(m,m)}$, and the two projections to $L(e_m)=e_{(m,0)}$, $R(e_m)=e_{(0,m)}$.",
+   "uses": [
+    "def-sbc-first-order-thickening",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 04FG (lemma-difference-derivation), 02H5 (lemma-action-by-derivations); agent square-zero group-algebra argument. The item is Conrad Corollary B.2.7, split case; its archive is WANTED."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-square-zero-lift-linearization] with $X=G$, regarded as an algebraic space over $S$, the affine first order thickening $H_0\\hookrightarrow H$ over $S$ of step 1 with ideal $\\widetilde{I[M]}$, and $a=e_Gp$. Since $f_0=e_Gp|_{H_0}$, $f$ lies in $L_G(e_0)$ with $e_0=e_Gp|_{H_0}$, which is exactly the kernel $K_B$ of $G(B)\\to G(B_0)$. The lemma gives a bijection $\\theta:K_B\\to\\operatorname{Hom}(e_0^*\\Omega^1_{G/S},\\widetilde{I[M]})$, $\\theta(b)=b^\\sharp-(e_Gp)^\\sharp$, with $\\theta(e_Gp)=0$; this $\\theta$ is the map $\\delta$ of [lem-sfb-group-space-square-zero-difference-additive] for $T=H$, so it sends products in $K_B$ to sums. Put $\\theta_f=\\theta(f)$. Here $e_0=e_{S_0}\\circ p_0$, where $e_{S_0}$ is the composite $S_0\\to S\\xrightarrow{e_G}G$ and $p_0:H_0\\to S_0$; so $e_0^*\\Omega^1_{G/S}=p_0^*E$ with $E=e_{S_0}^*\\Omega^1_{G/S}$ on $S_0$, the cotangent module relative to $S$, not a substituted smooth model. By [lem-sfb-scheme-etale-relative-differentials-comparison] with $U=G$, $V=S$, the etale differential module of $G$, which represents $S$-derivations, is the associated etale module of the Zariski sheaf $\\Omega^1_{G/S}$, and the latter is affine locally an associated module by [def-sc-relative-differential-sheaf], hence quasi-coherent. Its Zariski pullback $E$ is quasi-coherent by [lem-weil-pbc-module-pullback-quasi-coherent]. The equivalence [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence], including its comparison with pullback, identifies these modules, $\\widetilde{I[M]}$ and their homomorphisms on the Zariski and small etale sites. Thus we may use their ordinary quasi-coherent module descriptions in the next step. No finiteness of $E$ is required.",
+   "uses": [
+    "lem-sfb-space-square-zero-lift-linearization",
+    "lem-sfb-group-space-square-zero-difference-additive",
+    "lem-sfb-scheme-etale-relative-differentials-comparison",
+    "def-sc-relative-differential-sheaf",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 04FG (lemma-difference-derivation), 02H5 (lemma-action-by-derivations); agent square-zero group-algebra argument. The item is Conrad Corollary B.2.7, split case; its archive is WANTED."
+   }
+  },
+  {
+   "text": "Put $P=\\Gamma(S_0,E)$. By [lem-weil-pbc-affine-tilde-gamma-adjunction], $E=\\widetilde P$ and homomorphisms from associated modules are determined by their maps on global sections. Apply [lem-pc-flat-affine-base-change-sections] with $X=W=S_0$, coefficient ring $A_0$, extension $A_0\\to B_0$, and module $E$. It identifies $\\Gamma(H_0,p_0^*E)$ with $B_0\\otimes_{A_0}P$, sending $b\\otimes q$ to $b$ times the pullback of $q$. Since the pullback is quasi-coherent, the same adjunction identifies $\\theta_f$ with a $B_0$-linear map $B_0\\otimes_{A_0}P\\to I[M]$. Equivalently it is an $A_0$-linear map $d:P\\to I[M]$: the two inverse constructions are $q\\mapsto\\theta_f(1\\otimes q)$ and $b\\otimes q\\mapsto b\\,d(q)$. This uses only the tensor-product universal property, not an identification $\\operatorname{Hom}(P,I)\\otimes B_0=\\operatorname{Hom}(P,I[M])$, which could fail for infinitely presented $P$. The identical construction on $H_0\\times_{S_0}H_0$ has coefficient module $I[M\\times M]$.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-pc-flat-affine-base-change-sections",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 04FG (lemma-difference-derivation), 02H5 (lemma-action-by-derivations); agent square-zero group-algebra argument. The item is Conrad Corollary B.2.7, split case; its archive is WANTED."
+   }
+  },
+  {
+   "text": "The identity $f\\circ m_H=(f\\circ\\operatorname{pr}_1)(f\\circ\\operatorname{pr}_2)$ is an equality of points of $G(C)$, each reducing to the identity in $G(C_0)$, so all three lie in the kernel $K_C$ of $G(C)\\to G(C_0)$. Apply [lem-sfb-space-square-zero-lift-linearization] to the affine first order thickening $\\operatorname{Spec}C_0\\hookrightarrow\\operatorname{Spec}C$ with $a=e_Gp\\circ\\operatorname{pr}_1$; its coordinate on $K_C$ is the ring-sheaf difference $b^\\sharp-a^\\sharp$, a bijection onto its Hom module sending $a$ to $0$, and by [lem-sfb-group-space-square-zero-difference-additive] for $T=\\operatorname{Spec}C$ it sends the product in $K_C$ to the sum. Under precomposition by any of $m_H,\\operatorname{pr}_1,\\operatorname{pr}_2$, the difference $f^\\sharp-(e_Gp)^\\sharp$ is postcomposed with the corresponding ring map: $h^\\sharp\\circ(f^\\sharp-(e_Gp)^\\sharp)$, since $(f\\circ h)^\\sharp=h^\\sharp\\circ f^\\sharp$ and $e_Gp\\circ h=e_Gp\\circ\\operatorname{pr}_1$. On the coefficient ideals these ring maps are exactly $\\Delta_I,L_I,R_I:I[M]\\to I[M\\times M]$ from step 1. The tensor/sections identifications in step 3 send $1\\otimes q$ to the pullback of the same section $q$ of $E$, so they commute with these maps, directly on pure tensors. Thus for every $q\\in P$ the group identity gives\\n$$\\Delta_I(d(q))=L_I(d(q))+R_I(d(q)).$$\\nThis proves the needed naturality explicitly, and uses the difference coordinate and its additivity for $C\\to C_0$ as well as for $B\\to B_0$.",
+   "uses": [
+    "lem-sfb-space-square-zero-lift-linearization",
+    "lem-sfb-group-space-square-zero-difference-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 04FG (lemma-difference-derivation), 02H5 (lemma-action-by-derivations); agent square-zero group-algebra argument. The item is Conrad Corollary B.2.7, split case; its archive is WANTED."
+   }
+  },
+  {
+   "text": "For fixed $q$, write $d(q)=\\sum_m i_m e_m$ with finite support and $i_m\\in I$. Step 4 is an equality in the direct sum $\\bigoplus_{(u,v)\\in M\\times M}I e_{(u,v)}$. At $(m,m)$ for $m\\ne0$ the left coefficient is $i_m$ and the right coefficient is zero, so $i_m=0$. At $(0,0)$ the equality is $i_0=i_0+i_0$, so additive cancellation gives $i_0=0$. Hence $d(q)=0$ for every $q$, whence $d=0$, $\\theta_f=0$, and $f=e_Gp$ by steps 2 and 3. This is valid with torsion in $I$ or $M$, in characteristic $2$, and for the zero ring; it makes no inference from geometric points.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 04FG (lemma-difference-derivation), 02H5 (lemma-action-by-derivations); agent square-zero group-algebra argument. The item is Conrad Corollary B.2.7, split case; its archive is WANTED."
+   }
+  },
+  {
+   "text": "For the original nilpotent $J$, let $A_r=A/J^r$ and let $f_r$ denote the base change of $f$ to $\\operatorname{Spec}A_r$, for $1\\le r\\le N$. Coefficientwise reduction identifies the source with $D_{A_r}(M)$ and preserves the displayed group operations. We induct on $r$. The assertion for $r=1$ is the hypothesis. If $1\\le r<N$ and $f_r$ is trivial, the ideal $I_r=J^r/J^{r+1}$ in $A_{r+1}$ has square zero, since $2r\\ge r+1$. Its quotient is $A_r$, and reduction of $f_{r+1}$ is $f_r$. Apply the square-zero assertion proved in steps 1--5 to $A_{r+1}$, $I_r$, and the base-changed group scheme $G_{A_{r+1}}$. It proves $f_{r+1}$ trivial. At $r=N$ the equality $J^N=0$ identifies $A_N=A$ and $f_N=f$, proving the result. If $N=1$, the hypothesis itself is the result. Neither this induction nor the square-zero argument assumes smoothness, flatness, separatedness or finite presentation of $G$.",
+   "uses": [
+    "def-pc-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 04FG (lemma-difference-derivation), 02H5 (lemma-action-by-derivations); agent square-zero group-algebra argument. The item is Conrad Corollary B.2.7, split case; its archive is WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-first-order-thickening",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-sfb-space-square-zero-lift-linearization",
+  "lem-sfb-group-space-square-zero-difference-additive",
+  "lem-sfb-scheme-etale-relative-differentials-comparison",
+  "def-sc-relative-differential-sheaf",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-pc-flat-affine-base-change-sections",
+  "def-weil-pbc-module-tensor-product",
+  "def-pc-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tags 04FG and 02H5; square-zero linearization followed by coefficient cancellation and induction. Conrad Corollary B.2.7 checked online as the statement reference, not its smooth-target proof route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "diagonali[sz]able|multiplicative.type|nilpotent.*hom",
+   "results": "0 hits; ; returned names/files: ; Mathlib/AlgebraicGeometry searched",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group kernels and nilpotence, trivial square-zero algebra maps and formally unramified morphisms do not state this group-scheme rigidity. In particular Algebra.FormallyUnramified.lift_unique (RingTheory/Unramified/Basic.lean:123) assumes an unramified target algebra; the arbitrary G here need not have this property. Both semantic phrasings and the grep were inspected."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A group scheme homomorphism from a group of multiplicative type that is trivial on a nilpotent thickening is trivial",
+   "results": "8 hits; ; returned names/files: MonoidHom.ker_eq_top_iff, nilpotencyClass_zero_iff_subsingleton, Group.isNilpotent_of_subsingleton, TrivSqZeroExt.map, AlgebraicGeometry.Scheme.nilradical, CommGrpCat.mono_iff_ker_eq_bot, Subgroup.map_bot, groupHomology.map₁_one",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group kernels and nilpotence, trivial square-zero algebra maps and formally unramified morphisms do not state this group-scheme rigidity. In particular Algebra.FormallyUnramified.lift_unique (RingTheory/Unramified/Basic.lean:123) assumes an unramified target algebra; the arbitrary G here need not have this property. Both semantic phrasings and the grep were inspected."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"GroupScheme\"",
+   "results": "0 hits; ; returned names/files: ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group kernels and nilpotence, trivial square-zero algebra maps and formally unramified morphisms do not state this group-scheme rigidity. In particular Algebra.FormallyUnramified.lift_unique (RingTheory/Unramified/Basic.lean:123) assumes an unramified target algebra; the arbitrary G here need not have this property. Both semantic phrasings and the grep were inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Infinitesimal rigidity of homomorphisms from split multiplicative type group schemes into arbitrary target group schemes",
+   "results": "8 hits; ; returned names/files: AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme, AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified, AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme, AlgebraicGeometry.formallyUnramified_iff, AlgebraicGeometry.Scheme.Hom.formallyUnramified_appLE, Algebra.Extension.H1Cotangent.map_toInfinitesimal_bijective, AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group kernels and nilpotence, trivial square-zero algebra maps and formally unramified morphisms do not state this group-scheme rigidity. In particular Algebra.FormallyUnramified.lift_unique (RingTheory/Unramified/Basic.lean:123) assumes an unramified target algebra; the arbitrary G here need not have this property. Both semantic phrasings and the grep were inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism from a diagonalizable group scheme over a ring to any group scheme is trivial if it is trivial modulo a nilpotent ideal",
+   "results": "8 hits; ; returned names/files: AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal, Algebra.FormallyUnramified.lift_unique, Algebra.FormallyUnramified.ext, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.diagonal_Spec_map, AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme, AlgebraicGeometry.diagonal_SpecMap, Algebra.FormallyUnramified.lift_unique_of_ringHom",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group kernels and nilpotence, trivial square-zero algebra maps and formally unramified morphisms do not state this group-scheme rigidity. In particular Algebra.FormallyUnramified.lift_unique (RingTheory/Unramified/Basic.lean:123) assumes an unramified target algebra; the arbitrary G here need not have this property. Both semantic phrasings and the grep were inspected."
+  },
+  {
+   "tool": "grep",
+   "query": "difference.*derivation|derivation.*difference|squareZero.*[Mm]orphism|[Mm]orphism.*squareZero",
+   "results": "{\"t\": \"2026-10-24T03:39:26Z\", \"tool\": \"grep\", \"query\": \"difference.*derivation|derivation.*difference|squareZero.*[Mm]orphism|[Mm]orphism.*squareZero\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract groups, ring-level square-zero derivations or formally unramified targets, not arbitrary-target diagonalizable group-scheme rigidity. Existing DAG nodes supply the general infinitesimal input."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Group scheme points reducing to the identity across a square zero ideal form an additive group of derivations",
+   "results": "{\"t\": \"2026-10-24T03:39:26Z\", \"tool\": \"leansearch\", \"query\": \"Group scheme points reducing to the identity across a square zero ideal form an additive group of derivations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"liftOfDerivationToSquareZero\", \"derivationToSquareZeroOfLift\", \"liftOfDerivationToSquareZero_apply\", \"Derivation.instAddCommGroup\", \"Derivation.instAddMonoidHomClass\", \"derivationOfSectionOfKerSqZero\", \"Derivation.instAdd\", \"Derivation.coe_add_linearMap\"], \"digest\": \"70b5d0c2d6997bb6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract groups, ring-level square-zero derivations or formally unramified targets, not arbitrary-target diagonalizable group-scheme rigidity. Existing DAG nodes supply the general infinitesimal input."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"derivation\"",
+   "results": "{\"t\": \"2026-10-24T03:39:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"Scheme\\\", \\\"derivation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract groups, ring-level square-zero derivations or formally unramified targets, not arbitrary-target diagonalizable group-scheme rigidity. Existing DAG nodes supply the general infinitesimal input."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Infinitesimal kernel of an arbitrary group scheme on a square zero extension is the additive group Hom of cotangent space into the ideal",
+   "results": "{\"t\": \"2026-10-24T03:39:28Z\", \"tool\": \"leanfinder\", \"query\": \"Infinitesimal kernel of an arbitrary group scheme on a square zero extension is the additive group Hom of cotangent space into the ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.ker_infinitesimal\", \"Algebra.Extension.H1Cotangent\", \"AlgHom.ker_kerSquareLift\", \"Algebra.Extension.Cotangent.val\", \"Algebra.Extension.Cotangent\", \"Algebra.Extension.Cotangent.ker_mk\", \"Algebra.Extension.Cotangent.of\", \"Algebra.Extension.h1Cotangentι_apply\"], \"digest\": \"acdf5055384980cf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract groups, ring-level square-zero derivations or formally unramified targets, not arbitrary-target diagonalizable group-scheme rigidity. Existing DAG nodes supply the general infinitesimal input."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The difference of two morphisms of schemes which agree on a square zero thickening is a derivation natural under composition",
+   "results": "{\"t\": \"2026-10-24T03:39:29Z\", \"tool\": \"leanfinder\", \"query\": \"The difference of two morphisms of schemes which agree on a square zero thickening is a derivation natural under composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.DifferentialsConstruction.derivation'\", \"derivationOfSectionOfKerSqZero_apply_coe\", \"derivationToSquareZeroOfLift_apply\", \"derivationOfSectionOfKerSqZero\", \"PresheafOfModules.DifferentialsConstruction.isUniversal'\", \"PresheafOfModules.DifferentialsConstruction.instHasDifferentials\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map\", \"PresheafOfModules.Derivation.Universal.fac\"], \"digest\": \"87494147b206c76b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract groups, ring-level square-zero derivations or formally unramified targets, not arbitrary-target diagonalizable group-scheme rigidity. Existing DAG nodes supply the general infinitesimal input."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonali[sz]able|multiplicative.type|nilpotent.*hom",
+   "results": "{\"t\": \"2026-10-24T03:40:31Z\", \"tool\": \"grep\", \"query\": \"diagonali[sz]able|multiplicative.type|nilpotent.*hom\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract groups, ring-level square-zero derivations or formally unramified targets, not arbitrary-target diagonalizable group-scheme rigidity. Existing DAG nodes supply the general infinitesimal input."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homomorphisms from groups of multiplicative type which vanish on a nilpotent thickening are trivial",
+   "results": "{\"t\": \"2026-10-24T03:40:31Z\", \"tool\": \"leansearch\", \"query\": \"Homomorphisms from groups of multiplicative type which vanish on a nilpotent thickening are trivial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MonoidHom.ker_eq_top_iff\", \"MulHom\", \"injective_iff_map_eq_zero'\", \"map_eq_zero\", \"nilpotent_of_surjective\", \"SeparationQuotient.liftNormedAddGroupHomEquiv\", \"IsNilpotent.map\", \"AddMonoidHom.ker_eq_top_iff\"], \"digest\": \"eebac3ec42cff549\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract groups, ring-level square-zero derivations or formally unramified targets, not arbitrary-target diagonalizable group-scheme rigidity. Existing DAG nodes supply the general infinitesimal input."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\"",
+   "results": "{\"t\": \"2026-10-24T03:40:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract groups, ring-level square-zero derivations or formally unramified targets, not arbitrary-target diagonalizable group-scheme rigidity. Existing DAG nodes supply the general infinitesimal input."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism from a split diagonalizable group scheme to any group scheme is trivial if its reduction modulo a nilpotent ideal is trivial",
+   "results": "{\"t\": \"2026-10-24T03:40:32Z\", \"tool\": \"leanfinder\", \"query\": \"A homomorphism from a split diagonalizable group scheme to any group scheme is trivial if its reduction modulo a nilpotent ideal is trivial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyUnramified.lift_unique\", \"Algebra.FormallySmooth.of_split\", \"Algebra.FormallyUnramified.ext\", \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"Algebra.FormallySmooth.iff_split_surjection\", \"Algebra.Extension.formallySmooth_iff_split_injection\", \"Algebra.FormallySmooth.iff_split_injection\", \"Algebra.FormallyUnramified.lift_unique_of_ringHom\"], \"digest\": \"6396f15b9eabbf5c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract groups, ring-level square-zero derivations or formally unramified targets, not arbitrary-target diagonalizable group-scheme rigidity. Existing DAG nodes supply the general infinitesimal input."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-local-special-kernel-lifting",
+  "date": "2026-10-24",
+  "group": "Q20"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Generic torus quotient input, closedness of the extended generic torus inclusion: Lifting a split torus special kernel over a Noetherian local ring. No imported blueprint ancestor was found (blueprint_refs.py ancestor returns None). Supporting infinitesimal input: the restriction of the lifted diagonalizable special kernel is killed modulo every power of the maximal ideal, by Conrad Corollary B.2.7.",
+   "via": [
+    "lem-sfb-split-local-special-kernel-lifting",
+    "lem-sfb-torus-hom-generic-closed-rigidity",
+    "lem-sfb-normal-semiabelian-generic-torus-quotient",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-diagonalizable-nilpotent-triviality",
+  "worker": "stage1",
+  "summary": "Proved nilpotent rigidity by square-zero difference coordinates, the homomorphism primitive equation and coefficient comparison, then explicit induction on J powers. Reused existing arbitrary-group square-zero linearization nodes; created no nodes. Preserved the statement, including unrestricted G. Checked all cited statements and Mathlib candidates.",
+  "blueprint": "Generic torus quotient input, closedness of the extended generic torus inclusion: Lifting a split torus special kernel over a Noetherian local ring. No imported blueprint ancestor was found (blueprint_refs.py ancestor returns None). Supporting infinitesimal input: the restriction of the lifted diagonalizable special kernel is killed modulo every power of the maximal ideal, by Conrad Corollary B.2.7.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "why": "Foundational affine tensor/module or topology comparison used as a generic tool in the infinitesimal kernel calculation; the unit supplies no replacement for this interface."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-quasi-coherent",
+    "why": "Foundational affine tensor/module or topology comparison used as a generic tool in the infinitesimal kernel calculation; the unit supplies no replacement for this interface."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Foundational affine tensor/module or topology comparison used as a generic tool in the infinitesimal kernel calculation; the unit supplies no replacement for this interface."
+   },
+   {
+    "node": "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "why": "Foundational affine tensor/module or topology comparison used as a generic tool in the infinitesimal kernel calculation; the unit supplies no replacement for this interface."
+   },
+   {
+    "node": "lem-pc-flat-affine-base-change-sections",
+    "why": "Foundational affine tensor/module or topology comparison used as a generic tool in the infinitesimal kernel calculation; the unit supplies no replacement for this interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-pc-flat-affine-base-change-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q65-552d65389",
+  "group": "Q65",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-552d65389 (reviewer sub-agent of L); spot-checked: Read the whole item, the statements of every cited node, the kernel-module node's proof and its L review, and Stacks groupoids 0BF5 (l.687-710). Conrad B.2.7 is not in literature/ (listed as WANTED), so the agent-written proof was judged on its own. Statement and stmt_deps are byte-identical to the base (live: unsplit, no repair note, not superseded); the target is not weakened. The math is correct. Step 1: I(M) is the square-zero kernel and A[M]⊗A[M]=A[M×M]. Step 3: tilde/Γ adjunction plus pc-affine-base-change-sections with R=A_0, S=B_0, X=W=Spec A_0, so W'=H_0. Step 5 recomputed: (m,m) coefficient with m≠0 gives i_m=0, and i_0=2i_0 gives i_0=0; valid with torsion and in characteristic 2. Step 6 induction checked: 2r≥r+1, base change A_r[M], case N=1. Tested on M=0, μ_p in characteristic p, I=0 and A=0. Two C3/C4 faults, both fixed in fixes/dag/nodes/sec-six-functors-basics/. (1) Step 2 used quasi-coherence of the Zariski Ω^1_{G/S}, but the kernel and linearization nodes work with the étale Ω, and the trf equivalence does not say the étale Ω is the étale module of the Zariski one. Added a citation of the existing node lem-sfb-scheme-etale-relative-differentials-comparison (Stacks 04CS, same unit) with U=G, V=S. (2) Step 4 needed the kernel node's iso to be the difference map b♯−e♯, natural in T, but that node's statement only asserts some canonical additive iso; only its proof builds it as δ. Created the statement-only unsplit node lem-sfb-group-space-square-zero-difference-additive (δ(e_T)=0, δ(xy)=δ(x)+δ(y) for the actual difference derivation; Stacks 0BF5 with 0618/04D0; self-contained; tested on G_a, G_m over k[ε] and G=S; Mathlib grep recorded, LeanSearch/Loogle not run). Steps 2 and 4 now cite the linearization node plus the new node, and the kernel node is no longer used. proof_deps recomputed; no cycle. Maintainer option: sharpen the kernel node's statement to name b↦b♯−e♯, which would make the new node redundant. Batch-5: kernel-module and linearization reach sec-trace-formula only via def-trf-algebraic-space (a general definition) and generic 08TP/08TQ nodes; lem-trf-scheme-zariski-etale-quasi-coherent-equivalence is generic Stacks 03DX/03LC. I checked the closures of all three and of the added comparison node: no sk- unit, Lefschetz, trace-formula, Poincaré or nt-assume nodes, so all are outside the assumptions. Accepted the generic cross-unit tool_uses (pbc tensor/pullback/tilde, pc affine base-change sections, trf Zariski/étale equivalence); the worker writing them into split_report is advisory under C8. No SGA source is cited.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DiagonalizableNilpotentTriviality",
+  "declaration": "AlgebraicGeometry.diagonalizable_nilpotent_triviality",
+  "file": "lean/Sheaf/AlgebraicGeometry/DiagonalizableNilpotentTriviality.lean",
+  "statement": "theorem diagonalizable_nilpotent_triviality (A : Type u) [CommRing A] (J : Ideal A) (N : ℕ) (hN : 1 ≤ N) (hJ : J ^ N = ⊥) (M : Type u) [AddCommGroup M] [AddGroup.FG M] (G : Over (Spec (.of A))) [GrpObj G] (f : (ringDiagonalizableGroup A M).X ⟶ G) [IsMonHom f] (hf : (Over.pullback (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk J)))).map f = (Over.pullback (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk J)))).map (toUnit (ringDiagonalizableGroup A M).X ≫ η[G])) : f = toUnit (ringDiagonalizableGroup A M).X ≫ η[G]",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the landed arbitrary-ring ringDiagonalizableGroup, added to stmt_deps under brief-stage2 §5. Reduction of the identity-valued morphism is written as Over.pullback.map of that morphism, hence equals e_(G_0) composed with p_0 canonically."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dfc795346",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Delivery adds only the lean record and the landed stmt_dep def-sfb-ring-diagonalizable-group; node statement/proof byte-identical to live. Clause check: CommRing A; J^N=⊥ with 1≤N; M Type u AddCommGroup+AddGroup.FG (dep's universe convention, no loss up to iso); H=(ringDiagonalizableGroup A M).X (hopfSpec of AddMonoidAlgebra, Hopf ops as in node); G : Over (Spec A) with only GrpObj; f with IsMonHom; hf = Over.pullback along Spec(A/J)→Spec A of f and of toUnit≫η[G] (base change of e_G p is e_{G0}p0); conclusion equality of morphisms. Edge cases N=1, J=0, A=0, M=0, torsion, char 2, non-affine G covered. lean.statement verbatim; docstrings with Conrad B.2.7 source, blueprint id and 6 proof steps; plain imports = recorded proof-dep modules; lines ≤100; sorry only; no defs. Mathlib names checked in source. No compile (no file changed); worker reports clean compiles. Not checked: Conrad PDF not in local archive (WANTED); statement taken from stage-1 review."
+ }
+}

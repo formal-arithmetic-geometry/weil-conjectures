@@ -24,45 +24,46 @@
  ],
  "proof": [
   {
-   "text": "Use the normalized integral associator and right unitor of the actual completed tensor. Apply the faithful coherent reduction functor to their naturality squares; its natural tensor comparison reduces the squares to ordinary associator and unitor naturality. The regular sheaf in degree zero is derived complete and has exactly the coefficient-unit quotient system, so completeness identifies the reconstructed tensor unit with this specified object.",
+   "text": "For each L,M assemble the prescribed common-stage associators into a natural isomorphism with NatIso.ofComponents. The three-arrow associator naturality equation specialized to f,id_L,id_M is exactly the required functor naturality equation.",
    "uses": [
-    "lem-pur-derived-pullback-tensor-iso",
+    "lem-pur-common-stage-tensor-associator-natural",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The degree-zero integral twist is definitionally the regular completed coefficient. Its reduction is isomorphic to the coherent unit by regularCoefficient_coherentReduction, and the reconstructed integral unit has that same reduction by its counit. Full faithfulness of coherent reduction lifts their composite isomorphism. Apply rational localization and then the inclusion at the least finite coefficient field to identify the specified zero common-stage twist with the reconstructed common-stage unit.",
+   "uses": [
+    "lem-pur-regular-coefficient-coherent-reduction",
     "lem-pod-integral-system-reduction-fully-faithful",
-    "lem-pur-completed-line-complete"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Localize these integral squares. Every rational morphism is a finite sum of pure coefficient tensors; bilinearity proves naturality on a pure tensor from the integral square and then on every morphism. The inverse identities localize as well.",
-   "uses": [
-    "def-weil-linear-scalar-localization",
-    "lem-coef-completed-tensor-scalar-linearity"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Represent every object and map in each common-stage square over a single finite coefficient field. The normalized common-stage scalar tensor comparisons conjugate the associator and unitor components to their rational counterparts. Their tower and unit equations cancel the conjugations, so the squares commute by rational naturality. Eventual equality gives naturality in the pair quotient. Descend the inverse identities too and assemble with NatIso.ofComponents. The least-stage regular object is sfQbarTwistingCoefficient at zero by its defining intrinsic coefficient construction.",
-   "uses": [
     "lem-pur-derived-pullback-tensor-iso",
     "def-coefficient-twists-detailed",
     "def-weil-algebraically-closed-coefficients"
    ],
    "elementary": false
+  },
+  {
+   "text": "Tensoring the preceding unit isomorphism in the second input gives a natural isomorphism between the two right-tensor functors; bifunctoriality proves its naturality. Assemble the prescribed common-stage right unitors by their naturality equation, then compose to obtain the required natural isomorphism with the identity.",
+   "uses": [
+    "lem-pur-common-stage-tensor-right-unitor-natural",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-pur-common-stage-tensor-associator-natural",
   "lem-pur-derived-pullback-tensor-iso",
+  "lem-pur-regular-coefficient-coherent-reduction",
   "lem-pod-integral-system-reduction-fully-faithful",
-  "lem-pur-completed-line-complete",
-  "def-weil-linear-scalar-localization",
-  "lem-coef-completed-tensor-scalar-linearity",
   "def-coefficient-twists-detailed",
-  "def-weil-algebraically-closed-coefficients"
+  "def-weil-algebraically-closed-coefficients",
+  "lem-pur-common-stage-tensor-right-unitor-natural"
  ],
  "proof_origin": {
-  "by": "worker",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
-  "place": "Proof (3), final sentence: inverse tensor functors at the algebraically closed coefficient stage; independent tensor coherence result"
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+  "place": "Proof (3), final sentence: inverse tensor functors at the algebraically closed coefficient stage. Assembly of canonical naturality squares and the regular-unit identification."
  },
  "mathlib_searches": [
   {
@@ -134,13 +135,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-22",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "C-7f26c",
-  "group": "V7",
+  "reviewer": "COMPILER",
+  "group": "V5",
   "result": "pass",
-  "landing": "20261022T002501-L-1933458",
+  "landing": "20261025T203509-L-2823223",
   "kind": "interface",
-  "note": "independent cc review: delivered TateTwistLocallyFree + 2 new sorry modules/nodes vs clones/live item and node, unit sk-prop-an realized (empty), DerivedPullbackTensorIso objectwise associator/unitors; sandbox compile of item, new modules and all 7 direct importers against the delivered olean, axioms probe"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

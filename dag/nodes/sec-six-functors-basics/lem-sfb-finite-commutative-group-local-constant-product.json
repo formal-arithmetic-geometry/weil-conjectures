@@ -1,0 +1,279 @@
+{
+ "id": "lem-sfb-finite-commutative-group-local-constant-product",
+ "kind": "statement",
+ "title": "Local and constant factors of a finite commutative group scheme over an algebraically closed field",
+ "statement": "Let $K$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $G$ be a finite commutative $K$-group scheme [def-sc-group-scheme]. Let $C$ be the connected component containing the identity, with its open-and-closed subscheme structure (connected means not a disjoint union of two nonempty open subsets). Then $C$ is a finite connected commutative subgroup scheme. The group $H=G(K)$ is finite. Write $H_K=\\coprod_{h\\in H}\\operatorname{Spec}K$ for the constant group scheme, with addition induced by that of $H$. The morphism $C\\times_K H_K\\to G$ whose restriction to the component indexed by $h$ is translation by $h$ is an isomorphism of group schemes. The coordinate algebra $B=\\Gamma(C,\\mathcal O_C)$ is a nonzero finite-dimensional commutative local $K$-algebra: it has exactly one maximal ideal $I$, and $I=\\ker(\\epsilon:B\\to K)$ for evaluation $\\epsilon$ at the identity, so its residue field is $K$. In particular, putting $d=\\dim_K B$ and $q=|H|$, one has $d,q\\geq1$ and $\\dim_K\\Gamma(G,\\mathcal O_G)=dq$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 11.3, printed p.210 (split connected-etale sequence over a perfect field), Proposition 2.37, printed pp.51-52, and Propositions 11.1-11.2, printed pp.209-210 (local Artinian components); commutative case over an algebraically closed field."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-pbc-constant-group-scheme",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=\\Gamma(G,\\mathcal O_G)$. By [lem-weil-pbc-finite-over-field-affine-finite-dim], $G=\\operatorname{Spec}A$ over $K$ and $A$ is finite-dimensional. Apply [lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum] with $R=K$ and maximal ideal $(0)$: $|G|$ is finite discrete. For each point $x$, let $U_x$ be its one-point open subscheme; these are disjoint, clopen and cover $G$. By [lem-weil-pbc-finite-discrete-scheme-affine], $U_x=\\operatorname{Spec}B_x$, where $B_x=\\Gamma(U_x,\\mathcal O_G)$. The sheaf gluing axiom on this disjoint finite cover gives $A\\simeq\\prod_x B_x$ as $K$-algebras. Thus every $B_x$ is finite-dimensional (projection is surjective), nonzero, and local: its spectrum has exactly one prime, hence exactly one maximal ideal. It is Artinian by [lem-weil-pbc-finite-dim-algebra-artinian]. In particular $U_x\\to\\operatorname{Spec}K$ is finite, by the affine definition of finiteness.",
+   "uses": [
+    "lem-weil-pbc-finite-over-field-affine-finite-dim",
+    "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+    "lem-weil-pbc-finite-discrete-scheme-affine",
+    "lem-weil-pbc-finite-dim-algebra-artinian",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 11.1–11.3, printed pp.209–210; direct componentwise expansion over an algebraically closed field"
+   }
+  },
+  {
+   "text": "For every $x$, [lem-sc-finite-nonempty-point] applies to the nonempty finite $K$-scheme $U_x$ and supplies a $K$-point, equivalently a $K$-algebra homomorphism $\\epsilon_x:B_x\\to K$ by [def-weil-affine-spectrum]. This homomorphism is surjective since it fixes $K$, and its kernel is the unique maximal ideal $\\mathfrak m_x$. Hence $B_x/\\mathfrak m_x\\simeq K$ as $K$-algebras. By [lem-weil-pbc-artinian-local-noetherian-nilpotent], $\\mathfrak m_x$ is nilpotent. Every $K$-algebra homomorphism $B_x\\to K$ kills this ideal, since a field has no nonzero nilpotents; on the quotient $K$ it must be the identity. Thus $U_x$ has exactly one $K$-point. A $K$-point of $G$ factors uniquely through the open containing its image, so $H=G(K)$ is in bijection with the finite set $|G|$. It is a commutative group under the group-scheme operations, with identity $0$. The component $C=U_0$ has coordinate algebra $B=B_0$, unique maximal ideal $I=\\ker\\epsilon_0$, and residue field $K$.",
+   "uses": [
+    "lem-sc-finite-nonempty-point",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+    "def-sc-group-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 11.1–11.3, printed pp.209–210; direct componentwise expansion over an algebraically closed field"
+   }
+  },
+  {
+   "text": "To restrict multiplication to $C$, first check that $C\\times_K C$ has one point. By Steps 1 and 2, $I=\\ker\\epsilon$ is the only prime ideal of $B$, and $B=K\\cdot1+I$ since $b=\\epsilon(b)\\cdot1+(b-\\epsilon(b)\\cdot1)$. Put $D=B\\otimes_KB$ and let $J\\subseteq D$ be the ideal generated by $I\\otimes1$ and $1\\otimes I$. Writing $b=\\epsilon(b)+i$, $b'=\\epsilon(b')+i'$ gives $b\\otimes b'\\equiv\\epsilon(b)\\epsilon(b')(1\\otimes1)$ modulo $J$, so $D=K(1\\otimes1)+J$. Let $P$ be a prime of $D$. Its inverse images under the ring maps $b\\mapsto b\\otimes1$ and $b\\mapsto1\\otimes b$ are primes of $B$, hence equal $I$; so $J\\subseteq P$. If $\\lambda(1\\otimes1)+j\\in P$ with $\\lambda\\in K$, $j\\in J$, then $\\lambda(1\\otimes1)\\in P$, so $\\lambda=0$ because nonzero scalars are units and $P$ is proper. Hence $P=J$: $\\operatorname{Spec}D$ has at most one point. By [lem-weil-pbc-fibre-product-affine-spectra] this spectrum is $C\\times_K C$, and its point is the image of $(0,0)$. Multiplication sends it to $0$, so factors through the open $C$. Inversion likewise sends the sole point of $C$ to $0$ and factors through $C$; the identity does too. Factorization through an open is restriction of the structure-sheaf maps. The group identities restrict, since open inclusions are monomorphisms. Consequently $C$ is a finite connected commutative subgroup scheme.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-open-immersion",
+    "def-sc-group-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 11.1–11.3, printed pp.209–210; direct componentwise expansion over an algebraically closed field"
+   }
+  },
+  {
+   "text": "For $h\\in H$, translation $t_h(g)=g+h$ is a scheme automorphism, inverse $t_{-h}$, by the group identities [def-sc-group-scheme]. It sends $0$ to $h$, hence restricts to an isomorphism $C\\simeq U_h$ of open subschemes. Define $H_K$ as in [def-weil-pbc-constant-group-scheme]. Its componentwise addition, inverse $h\\mapsto-h$, and identity satisfy the group diagrams: on each component they are the corresponding identities in $H$. By [lem-weil-pbc-scheme-coproduct-family], component morphisms glue uniquely. The open subsets of $C\\times_K H_K$ pulled back from the components of $H_K$ are disjoint and cover, and each is canonically $C\\times_K\\operatorname{Spec}K=C$ by the fibre-product universal property [def-pc-fibre-product]. Using [lem-weil-pbc-scheme-morphism-gluing], glue $t_h|_C$ to a map $\\phi:C\\times_K H_K\\to G$. Glue the maps $U_h\\to C\\times_K H_K$ given by $t_{-h}|_{U_h}$ in the first factor and the constant index $h$ in the second to a map $\\psi$. On every open component the two composites are the identity. Thus $\\phi$ is a scheme isomorphism with inverse $\\psi$.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-weil-pbc-constant-group-scheme",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 11.1–11.3, printed pp.209–210; direct componentwise expansion over an algebraically closed field"
+   }
+  },
+  {
+   "text": "Check the homomorphism equation on the disjoint open cover indexed by $(h,h')\\in H^2$ of $(C\\times_K H_K)\\times_K(C\\times_K H_K)$. On this open, for points over every test scheme, the two composites are respectively $(c+c')+(h+h')$ and $(c+h)+(c'+h')$. Associativity and commutativity of $G$ identify them; the first expression uses precisely the restricted law on $C$ from Step 3 and the component law on $H_K$. These are identities of morphisms, since they hold functorially on every test scheme, as in [def-sc-group-scheme]. The identity goes to $0+0=0$ and inversion agrees as well. By [lem-weil-pbc-scheme-morphism-gluing], equality can be checked on the open cover, so $\\phi$ is a group-scheme homomorphism. Its inverse is a homomorphism by composing this equation with $\\phi^{-1}$ on all factors. This proves the asserted group-scheme isomorphism.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-weil-pbc-constant-group-scheme",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 11.1–11.3, printed pp.209–210; direct componentwise expansion over an algebraically closed field"
+   }
+  },
+  {
+   "text": "The identity point shows $H$ is nonempty, hence $q=|H|\\ge1$. The $K$-algebra $B$ is nonzero and contains $K$ injectively (the identity evaluation retracts its scalar map), so $d=\\dim_K B\\ge1$. Step 4 identifies every $B_h$ with $B$. In the finite product $A\\simeq\\prod_{h\\in H}B_h$ from Step 1, place a basis of each $B_h$ in its coordinate and zero in the other coordinates. These $dq$ vectors span and are independent, coordinate by coordinate. Therefore $\\dim_K\\Gamma(G,\\mathcal O_G)=dq$, completing all clauses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 11.1–11.3, printed pp.209–210; direct componentwise expansion over an algebraically closed field"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-over-field-affine-finite-dim",
+  "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+  "lem-weil-pbc-finite-discrete-scheme-affine",
+  "lem-weil-pbc-finite-dim-algebra-artinian",
+  "def-weil-finite-integral-morphism",
+  "lem-sc-finite-nonempty-point",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+  "def-sc-group-scheme",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-open-immersion",
+  "def-weil-pbc-constant-group-scheme",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Propositions 11.1–11.3, printed pp.209–210; direct componentwise expansion over an algebraically closed field"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Over an algebraically closed field a finite group scheme is the product of its connected identity component and its constant group of points",
+   "results": "8 hits; ; declarations: CategoryTheory.PreGaloisCategory.has_decomp_connected_components, CategoryTheory.PreGaloisCategory.has_decomp_connected_components', CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected, CategoryTheory.PreGaloisCategory.instFiniteAutOfIsConnected, CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected, CategoryTheory.PreGaloisCategory.instFiniteHomOfIsConnected, CategoryTheory.PreGaloisCategory.instTotallyDisconnectedSpaceAutFunctorFintypeCat, CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois_finite_family",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Galois-category decomposition or affine coproducts; none gives the local-constant group-scheme product or its local augmented coordinate algebra"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative finite group scheme over an algebraically closed field is the direct product of its local part and reduced constant part",
+   "results": "8 hits; ; declarations: AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat, Algebra.Etale.iff_exists_algEquiv_prod, CategoryTheory.PreGaloisCategory.has_decomp_connected_components, CategoryTheory.PreGaloisCategory.has_decomp_connected_components', CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected, Field.absoluteGaloisGroupAbelianization, CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois_finite_family, AlgebraicGeometry.instIsIsoSchemeSigmaSpecOfFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Galois-category decomposition or affine coproducts; none gives the local-constant group-scheme product or its local augmented coordinate algebra"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A commutative finite group scheme over an algebraically closed field is the product of its connected identity component and constant finite group of points",
+   "results": "8 hits; ; declarations: AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat, AddCommGrpCat.isFinite, FiniteGrp.isFinite, instFiniteAbelianization, AlgebraicGeometry.instHasFiniteCoproductsScheme, AddCommGrpCat.prop_isFinite_iff, AlgebraicGeometry.IsArtinianScheme.finite, CommGroup.toGroup",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Galois-category decomposition or affine coproducts; none gives the local-constant group-scheme product or its local augmented coordinate algebra"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"connectedComponent\"",
+   "results": "2 hits; ; declarations: AlgebraicGeometry.Scheme.Hom.connectedComponentsHomeomorph, AlgebraicGeometry.Scheme.Hom.connectedComponentsHomeomorph_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Galois-category decomposition or affine coproducts; none gives the local-constant group-scheme product or its local augmented coordinate algebra"
+  },
+  {
+   "tool": "grep",
+   "query": "connected.*[Ee]tale|[Ff]inite.*[Gg]roup.*[Ss]plit",
+   "results": "0 hits; ; declarations: ; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Galois-category decomposition or affine coproducts; none gives the local-constant group-scheme product or its local augmented coordinate algebra"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite commutative group scheme over an algebraically closed field is the product of its connected identity component and constant group of rational points",
+   "results": "8 hits; CategoryTheory.PreGaloisCategory.has_decomp_connected_components', CategoryTheory.PreGaloisCategory.has_decomp_connected_components, CategoryTheory.PreGaloisCategory.has_decomp_quotients, CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected, CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected, CategoryTheory.PreGaloisCategory.instFiniteAutOfIsConnected, CategoryTheory.PreGaloisCategory.instTotallyDisconnectedSpaceAutFunctorFintypeCat, CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen",
+   "date": "2026-10-23",
+   "verdict": "no match: Galois-category and coproduct results do not state the local–constant group-scheme product with its augmented local algebra"
+  },
+  {
+   "tool": "grep",
+   "query": "connected.*[Ee]tale|[Ff]inite.*[Gg]roup.*[Ss]plit",
+   "results": "0 hits;  in Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: Galois-category and coproduct results do not state the local–constant group-scheme product with its augmented local algebra"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite commutative group scheme over an algebraically closed field is a product of a connected scheme and a constant group scheme",
+   "results": "8 hits; AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat, AddCommGrpCat.isFinite, AlgebraicGeometry.instFinitaryExtensiveScheme, AlgebraicGeometry.IsArtinianScheme.finite, AlgebraicGeometry.instHasFiniteCoproductsScheme, AddCommGrpCat.instIsSerreClassIsFinite, AlgebraicGeometry.instIsIsoSchemeSigmaSpecOfFinite, AddCommGrpCat.prop_isFinite_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: Galois-category and coproduct results do not state the local–constant group-scheme product with its augmented local algebra"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"identityComponent\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: Galois-category and coproduct results do not state the local–constant group-scheme product with its augmented local algebra"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite group scheme decomposes as its connected component times the reduced subgroup over an algebraically closed field",
+   "results": "8 hits; CategoryTheory.PreGaloisCategory.has_decomp_connected_components', CategoryTheory.PreGaloisCategory.has_decomp_connected_components, CategoryTheory.PreGaloisCategory.has_decomp_quotients, CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected, CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected, CategoryTheory.PreGaloisCategory.instFiniteAutOfIsConnected, CategoryTheory.PreGaloisCategory.instTotallyDisconnectedSpaceAutFunctorFintypeCat, CategoryTheory.PreGaloisCategory.instFiniteHomOfIsConnected",
+   "date": "2026-10-23",
+   "verdict": "no match: Galois-category and coproduct results do not state the local–constant group-scheme product with its augmented local algebra"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-group-scheme-order-annihilator",
+  "date": "2026-10-23",
+  "group": "Q09"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Theorem 10.15, printed p.49 (finite free Hom conclusion); §10 endomorphism-ring convention, printed pp.42–43. Supporting argument: Chapter I, Proposition 10.1 and the simple-factor discussion following Remark 10.2, printed pp.42–43; Remark 8.6, printed p.36 (quasi-inverse isogenies). Auxiliary for this split: The order annihilates a finite commutative group scheme. Supporting input: Local and constant factors of a finite commutative group scheme over an algebraically closed field.",
+   "via": [
+    "lem-sfb-finite-group-scheme-order-annihilator",
+    "lem-sfb-simple-isogeny-decomposition",
+    "lem-sfb-abelian-hom-finite-free",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-commutative-group-local-constant-product",
+  "worker": "stage1",
+  "summary": "Expanded the finite-local-component proof of the commutative local–constant product. Reused all algebra, affine-fibre-product and rational-point inputs; no new nodes. Checked the scheme-level subgroup, translation inverse and homomorphism equations, and the augmented local coordinate algebra. Statement unchanged.",
+  "blueprint": "Supporting finite-group-scheme input to the current det-thm-sf-ctf-stability-direct-images proof (3), through the existing marked plurinodal/level-rigidity chain; componentwise proof of the Milne 11.3 input, without changing the unit route. blueprint_refs ancestor returns None, as inherited by this created-node chain.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-scheme-morphism-gluing",
+    "why": "Generic scheme gluing and equality on an open cover, for translations and the homomorphism equation; no unit-specific gluing lemma replaces it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NA-dc993aa23",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-dc993aa23 (reviewer sub-agent of L); spot-checked: I read the item, all six steps and every cited statement in full. Source checked: Milne, Algebraic Groups (2017) Props 11.1-11.3 (printed pp.209-210) and 2.37 (pp.51-52). Over a perfect field 11.3 gives G = G°⋊π0(G); with K algebraically closed and G commutative this is the direct product C×H_K. The item statement is true and unchanged; small cases tested: trivial group, constant groups, α_p, μ_p in both characteristics, α_p×(Z/n)_K. Steps 1, 2, 4, 5 and 6 are correct: 06RS applied with R=K, the 03J6 affine components with A≅∏B_x by the sheaf axiom, the unique K-point via 00KH nilpotence, translations t_h glued into φ with inverse ψ, the homomorphism checked on T-points of the (h,h') cover using commutativity, and dim A = dq. No duplicate in the DAG: I read lem-sfb-locally-algebraic-group-identity-component, primary-order, group-local-minimal-prime and lem-wf-algebraic-component-cosets, and none states the item. There are no new nodes. Batch-5: the flagged lem-trf-integral-local-tensor-purely-inseparable (Stacks 092Y) is generic algebra, but it was created inside the trace-formula proof chain (from lem-trf-local-term-locality) and is still unsplit. FIX: I rewrote Step 3 to prove directly that B⊗_K B has a single prime: B = K·1+I, J = (I⊗1, 1⊗I), every prime contains J, and D = K+J, so the only prime is J. Step 3 now cites only fibre-product-affine-spectra, open-immersion and group-scheme. proof_deps drops the trf node and lem-weil-pbc-artinian-local-unique-prime, and the trf tool_uses entry is removed. The scheme-morphism-gluing tool_use is accepted as generic.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteCommutativeGroupLocalConstantProduct",
+  "declaration": "AlgebraicGeometry.finiteCommutativeGroup_localConstantProduct",
+  "declarations": [
+   "AlgebraicGeometry.finiteGroupConstantPoints",
+   "AlgebraicGeometry.finiteGroupConstantPointsIncl",
+   "AlgebraicGeometry.finiteGroupIdentityEvaluation",
+   "AlgebraicGeometry.finiteCommutativeGroup_localConstantProduct"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteCommutativeGroupLocalConstantProduct.lean",
+  "statement": "theorem finiteCommutativeGroup_localConstantProduct (K : Type u) [Field K] [IsAlgClosed K] (G : Over (Spec (.of K))) [GrpObj G] [IsCommMonObj G] [IsFinite G.hom] : IsClopen (connectedComponent (GrpObj.onePoint G)) ∧ IsFinite (GrpObj.identityComponent G).hom ∧ ConnectedSpace (GrpObj.identityComponent G).left ∧ IsCommMonObj (GrpObj.identityComponent G) ∧ IsSubgroupScheme (GrpObj.identityComponentι G) ∧ Finite (𝟙_ (Over (Spec (.of K))) ⟶ G) ∧ (∃ gH : GrpObj (finiteGroupConstantPoints G), IsCommMonObj (finiteGroupConstantPoints G) ∧ (μ[finiteGroupConstantPoints G]).left = constantGroupSchemeMultiplication (Spec (.of K)) (Additive (𝟙_ (Over (Spec (.of K))) ⟶ G)) ∧ ∃ φ : GrpObj.identityComponent G ⊗ finiteGroupConstantPoints G ≅ G, IsMonHom φ.hom ∧ ∀ h : Additive (𝟙_ (Over (Spec (.of K))) ⟶ G), lift (𝟙 (GrpObj.identityComponent G)) (toUnit (GrpObj.identityComponent G) ≫ finiteGroupConstantPointsIncl G h) ≫ φ.hom = GrpObj.identityComponentι G ≫ GrpObj.mulLeft G h.toMul) ∧ Nontrivial Γ((GrpObj.identityComponent G).left, ⊤) ∧ @FiniteDimensional K Γ((GrpObj.identityComponent G).left, ⊤) _ _ (@Algebra.toModule _ _ _ _ (GrpObj.identityComponent G).hom.ΓAlgebra) ∧ IsLocalRing Γ((GrpObj.identityComponent G).left, ⊤) ∧ (∀ I : Ideal Γ((GrpObj.identityComponent G).left, ⊤), I.IsMaximal ↔ I = RingHom.ker (finiteGroupIdentityEvaluation G)) ∧ (∃ e : Γ((GrpObj.identityComponent G).left, ⊤) ⧸ RingHom.ker (finiteGroupIdentityEvaluation G) ≃+* K, ∀ b, e (Ideal.Quotient.mk _ b) = finiteGroupIdentityEvaluation G b) ∧ 1 ≤ (GrpObj.identityComponent G).hom.finrankΓ ∧ 1 ≤ Nat.card (𝟙_ (Over (Spec (.of K))) ⟶ G) ∧ G.hom.finrankΓ = (GrpObj.identityComponent G).hom.finrankΓ * Nat.card (𝟙_ (Over (Spec (.of K))) ⟶ G)",
+  "branch": "newtargets-dag",
+  "by": "Q141",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-768cea5e0",
+  "group": "Q141",
+  "result": "fix",
+  "note": "Lean statement and record correct; checked clause by clause against node, the seven stmt_dep records and the upstream GroupScheme/Basic, GroupScheme/Defs, ConstantGroupScheme and FiberDegree declarations. C = upstream GrpObj.identityComponent (open subscheme on connectedComponent onePoint, IsClopen stated), finite/connected/IsCommMonObj/IsSubgroupScheme; H = K-points, Finite; H_K = recorded constant scheme with law pinned by mu.left = constantGroupSchemeMultiplication (choose pinned componentwise, canonical); phi an IsMonHom iso pinned on every component by mulLeft h; B Nontrivial, FiniteDimensional via the structural GammaAlgebra, IsLocalRing, maximal iff ker of identity evaluation, residue equiv pinned by eps; 1<=d, 1<=q, finrankGamma G = d*q. Edge cases (trivial, constant, alpha_p, mu_p, all characteristics, universe u) fine; helpers are transparent packagings with docstrings; only sorry. Sole fault H11: second reading was a same-session re-reading -> fixes/lem-sfb-finite-commutative-group-local-constant-product.report.md = worker report verbatim + independent clause-by-clause second reading. No Lean change, no compile needed."
+ }
+}

@@ -1,0 +1,328 @@
+{
+ "id": "lem-sf-integral-refinement-diagram-admissibility",
+ "kind": "statement",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "title": "Admissibility of integral compactification refinement diagrams",
+ "statement": "Fix a prime $\\ell$, a finite-field datum $k=\\overline{\\mathbf F}_q$ of characteristic $p\\ne\\ell$, finite-type $k$-schemes $X,Y$ and a separated finite-type $k$-morphism $f:X\\to Y$ [def-weil-finite-field-fiber, def-weil-scheme-morphism-properties]. No absolute separatedness of the schemes is imposed. Use the small pro-etale coefficient categories $C_s(T)=D^b_{ctf}(T,s)$ [def-sf-categories], completed at integral stages and with positive finite levels $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ ($E/\\mathbf Q_\\ell$ finite, $n\\ge1$) [def-weil-l-adic-coefficient-extension].\nFix $E/\\mathbf Q_\\ell$, put $R=\\mathcal O_E$, $t=\\varpi_E$ and $A_n=R/t^n$. For a finite-type $k$-scheme $W$ put $\\widehat R_W=\\lim_n(A_n)_W$. Let $\\mathscr S_W$ be strict semilinear systems of $(A_n)_W$-module sheaves, with transitions $M_{n+1}\\to\\operatorname{Res}_{A_{n+1}\\to A_n}M_n$. Use their derived categories, the canonical reduction system $\\mathcal R_W K$, exact termwise open extension $J_j$, and total derived system proper direct image $S_p$ [lem-sf-integral-compactification-system-realization]. A system is normalized if every transition-adjoint $M_m\\otimes^L_{A_m}A_n\\to M_n$ is invertible.\n\nLet $K\\in C_{R}(X)$ and suppose all its reductions have Tor amplitude in one interval $[a,b]$. Choose an identity or binary compactification-refinement diagram for $f$, with quasi-compact open factors $j_c$, proper factors $p_c$ and proper refinements $u,v$ [def-weil-compactifications-refinements]. Consider every intermediate system obtained from $\\mathcal R_XK$ along any of the finitely many words in $J_j,S_p$ in that diagram, including hidden open intermediates in $S_{p_c}J_{j_c}$ and the refinement proper images.\n\nEvery such intermediate system is normalized, has constructible levels with a common finite cohomological interval and a common finite Tor interval independent of $n$, and has bounded etale-origin witnesses compatible with its actual coefficient transitions. More precisely an open extension preserves a chosen Tor interval; a proper factor with source dimension bounded by $d\\ge0$ sends $[a',b']$ into $[a',b'+2d]$. All sources have finite dimension, and $d=0$ is admissible for an empty source. A single common upper bound can be chosen for the finite collection of words. Each intermediate system is canonically identified, with its quotient transitions, with the reduction system of the corresponding derived-complete constructible integral intermediate object. These are the intermediate-domain conditions of [def-sf-integral-system-expression-domain], so the realization isomorphisms $c_V$ of [lem-sf-integral-compactification-system-realization] apply to this whole identity or binary refinement diagram.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+  "place": "Derived inverse limits, rationalization, common-stage construction and refinement-compatible adjunction; extracted normalized coefficient argument, old steps 9"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "def-sf-categories",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-sf-integral-compactification-system-realization",
+  "def-weil-compactifications-refinements",
+  "def-sf-integral-system-expression-domain"
+ ],
+ "proof": [
+  {
+   "text": "Consider all prefixes of the finitely many operation words, retaining the prefix $J_{j_c}$ inside each $S_{p_c}J_{j_c}$. Proper factors, including $u,v$, are separated and finite type by definition. Finite-type composition makes their ambient schemes finite type over $k$; the open intermediates in the supplied diagram are finite type as well. Apply the geometry lemma to their structural maps to $\\operatorname{Spec}k$ (a one-point Noetherian scheme of dimension zero). Thus each source has finite dimension; choose a nonnegative bound $d_p$ for every proper factor. The geometry lemma allows empty sources, for which choose $d_p=0$. No absolute separatedness enters. We will induct on prefix length with invariant: normalization, levelwise constructibility, a level-independent Tor interval $[a,B]$, and compatible bounded etale origins. Testing Tor amplitude on the coefficient sheaf itself also gives the cohomological interval $[a,B]$.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-cbc-compactification-geometry-fibre-bound",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T3, lemma-composition-finite-type; 0A3V, lemma-morphism-finite-type-bounded-dimension; finite-dimensional source refinement in lem-cbc-compactification-geometry-fibre-bound."
+   }
+  },
+  {
+   "text": "Here is the origin procedure used at every prefix. For a normalized system $M$ with constructible levels and common cohomological interval, the finite-ring origin equivalence gives bounded constructible witnesses $\\alpha_n:\\nu^*L_n\\cong M_n$, in that same interval. Apply the normalized-origin-witness theorem to its actual transition adjoints $\\rho_{m,n}$. It supplies unique $\\beta_{m,n}:L_m\\otimes^L_{A_m}A_n\\cong L_n$ satisfying $\\alpha_n\\nu^*\\beta_{m,n}=\\rho_{m,n}(\\alpha_m\\otimes^LA_n)$, and the quotient cocycle. Consequently the witnesses respect the actual transitions, rather than a separately chosen tower. In particular each $L_m\\otimes^LA_n$ is bounded below. At the empty prefix, $M=\\mathcal R_XK$ is normalized by actual reconstruction; constructibility follows from the integral category hypothesis, and the assumed Tor interval $[a,b]$ gives common cohomological interval $[a,b]$. The procedure therefore establishes the full induction invariant initially.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "lem-weil-pbc-normalized-etale-origin-witnesses",
+    "lem-pur-normalized-actual-reconstruction-maps",
+    "def-weil-derived-complete-integral-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09B1, lemma-compare-derived (2); the finite-ring origin and normalized-witness DAG statements specify the constructible, coefficient-compatible refinements. Initial normalization uses the actual-reconstruction statement."
+   }
+  },
+  {
+   "text": "Suppose the invariant holds for $M$ on the source of an open factor $j$, with Tor interval $[a,B]$. Exact termwise extension evaluates to $(J_jM)_n=j_!M_n$. The open-ctf lemma gives constructibility and the same Tor and cohomological intervals at every level. The canonical open tensor/coefficient isomorphism identifies the transition-adjoint for the actual extended transition with\n$$(j_!M_m)\\otimes^L_{A_m}A_n\\xrightarrow{\\sim}j_!(M_m\\otimes^L_{A_m}A_n)\\xrightarrow{j_!\\rho_{m,n}}j_!M_n.$$\nBoth arrows are invertible. This is the coefficient-ring specialization of the open base-change/tensor comparison, which is natural also on strict ringed diagram sites. Thus $J_jM$ is normalized for its given transitions. The origin procedure of step 2 now supplies compatible bounded witnesses for $J_jM$. This also verifies every hidden open prefix of a compact-support constructor.",
+   "uses": [
+    "lem-trf-open-ctf",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; open comparison on coefficient diagram sites from lem-sf-open-tensor-normalization. Constructibility and range: blueprint lem-trf-open-ctf, proof."
+   }
+  },
+  {
+   "text": "For a proper factor $p:V\\to W$, derived system evaluation identifies $(S_pM)_n$ with $Rp_{*,n}M_n$, including the actual coefficient-restriction transitions. Applying the direct-image-ctf theorem to each $M_n$ gives constructibility and Tor interval $[a,B+2d_p]$, hence cohomology in that interval. For $m\\ge n$, put $A=A_m$, $B'=A_n$. The origins supplied in step 2 satisfy $L_m\\in D^+$ and $L_m\\otimes_A^LB'\\cong L_n\\in D^+$; these are precisely the bounded-origin hypotheses of proper scalar comparison. Its canonical $B'$-linear counit mate $\\chi$ is therefore invertible, without any flatness assumption on $A\\to B'$.",
+   "uses": [
+    "lem-pur-coefficient-system-derived-comparison",
+    "cor-sf-direct-image-ctf-proetale",
+    "lem-fix-proper-etale-origin-scalar-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0G, lemma-projection-formula-proper-mod-n; its normalized pro-etale scalar comparison is lem-fix-proper-etale-origin-scalar-isomorphism. Finite Tor bound: blueprint cor-sf-direct-image-ctf-proetale."
+   }
+  },
+  {
+   "text": "The adjoint of the actual transition of $S_pM$ is\n$$(Rp_{*,m}M_m)\\otimes^L_{A_m}A_n\\xrightarrow{\\chi}Rp_{*,n}(M_m\\otimes^L_{A_m}A_n)\\xrightarrow{Rp_{*,n}(\\rho_{m,n})}Rp_{*,n}M_n.$$\nIndeed the scalar adjoint of this composite is $Rp_{*,m}$ of $M_m\\to\\operatorname{Res}_{m,n}M_n$, followed by the restriction-of-scalars comparison: substitute the defining counit equation for $\\chi$, then the tensor/restriction adjunction equation for $\\rho_{m,n}$. These are the evaluated transitions specified by the derived system comparison. Both displayed arrows are isomorphisms by step 4 and normalization of $M$. Hence $S_pM$ is normalized with its actual quotient maps. The cocycle is already the cocycle of those transitions; no new transitions are chosen. Apply the origin procedure of step 2 to obtain compatible bounded origins for this output. This proves the proper induction step, including refinement images under $u,v$.",
+   "uses": [
+    "lem-fix-proetale-scalar-mate-normalization",
+    "lem-pur-coefficient-system-derived-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56, equation-projection-formula-map; defining counit equation in lem-fix-proetale-scalar-mate-normalization and evaluated transitions in lem-pur-coefficient-system-derived-comparison."
+   }
+  },
+  {
+   "text": "Induction on the nonnegative prefix length now applies steps 3 and 4–5 to every constructor. More explicitly assign $B_{\\varnothing}=b$, $B_{J_jV}=B_V$, and $B_{S_pV}=B_V+2d_p$. Every prefix has the asserted properties with interval $[a,B_V]$, independently of $n$. The set of prefixes is finite and nonempty (it contains the empty word), so $B_{\\max}=\\max_V B_V$ exists; $[a,B_{\\max}]$ simultaneously bounds Tor and cohomology for the entire diagram. Identity refinements add no cost beyond the permissible proper estimate, and zero objects on empty sources satisfy all these containments. This is an induction over finite syntax, with its base proved in step 2 and both successor cases proved above.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+    "place": "Extracted normalized coefficient argument, old step 9; finite-word bookkeeping."
+   }
+  },
+  {
+   "text": "All intermediate-system conditions in the expression-domain definition now hold for every word, including its hidden open prefixes. The inputs are derived-complete constructible integral objects by hypothesis. Thus the conditional realization theorem applies and gives its specified $c_V:\\mathcal L M_V\\cong V_{\\rm int}(K)$, with $M_V=V(\\mathcal R_XK)$. Independently, actual reconstruction gives a complete $\\mathcal L M_V$ and the isomorphism of strict derived systems $e_{M_V}:\\mathcal R\\mathcal L M_V\\cong M_V$. The required identification is the actual composite\n$$\\mathcal R(V_{\\rm int}(K))\\xrightarrow{\\mathcal R(c_V^{-1})}\\mathcal R\\mathcal L M_V\\xrightarrow{e_{M_V}}M_V.$$\nIt respects all quotient transitions because both factors are whole-system morphisms. The realized object is complete, and its reductions have the constructibility and common bounds just proved, so the integral constructibility definition puts it in $C_R$. This proves the claimed identification with the corresponding integral intermediate and the applicability of all $c_V$ throughout the refinement diagram.",
+   "uses": [
+    "def-sf-integral-system-expression-domain",
+    "lem-sf-integral-compactification-system-realization",
+    "lem-pur-normalized-actual-reconstruction-maps",
+    "def-weil-derived-complete-integral-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+    "place": "Extracted normalized coefficient argument, old step 9; realization only after checking its intermediate-domain proviso."
+   }
+  }
+ ],
+ "proof_deps": [
+  "cor-sf-direct-image-ctf-proetale",
+  "def-sf-integral-system-expression-domain",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-proper-morphism",
+  "lem-cbc-compactification-geometry-fibre-bound",
+  "lem-fix-proetale-scalar-mate-normalization",
+  "lem-fix-proper-etale-origin-scalar-isomorphism",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-pur-normalized-actual-reconstruction-maps",
+  "lem-sf-integral-compactification-system-realization",
+  "lem-sf-open-tensor-normalization",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-trf-open-ctf",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-weil-pbc-normalized-etale-origin-witnesses"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+  "place": "Agent-written finite-prefix induction for the extracted old step 9; reuses existing DAG scalar-change, boundedness, origin and actual-reconstruction statements. Stacks inputs are identified at the steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Normalized reduction systems of complete integral constructible finite Tor complexes stay uniformly bounded and etale origin through finite proper open refinement diagrams",
+   "results": "[leanfinder] OK 8 hit(s) Hits read: AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, Algebra.isOpen_etaleLocus, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap, Algebra.Etale.exists_subalgebra_fg, AlgebraicGeometry.Scheme.Hom.instIsLocallyDirectedAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpecForget, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified. General mate/localization/limit or unrelated geometry results do not state the specified normalized constructible comparison assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper direct images enlarge a common Tor interval independently of the finite coefficient level and preserve normalized reduction transitions in a compactification diagram",
+   "results": "[leanfinder] OK 8 hit(s) Hits read: AlgebraicGeometry.exists_map_preimage_le_map_preimage, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap, AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index, LightProfinite.transitionMapLE, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, Profinite.NobelingProof.Products.isGood_mono. General mate/localization/limit or unrelated geometry results do not state the specified normalized constructible comparison assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.limit",
+   "results": "[loogle] OK 12 hit(s) Hits read: CategoryTheory.Limits.limit, CategoryTheory.Limits.limit.cone_x, CategoryTheory.Limits.limit.π, CategoryTheory.Limits.limit.lift, CategoryTheory.Limits.limit.isoLimitCone, CategoryTheory.Limits.lim_obj, CategoryTheory.Limits.limit.homIso, CategoryTheory.Limits.HasLimit.isoOfNatIso, CategoryTheory.Limits.limit.pre, CategoryTheory.Limits.limit.lift_cone, CategoryTheory.Limits.limMap, CategoryTheory.Limits.limit.post. General mate/localization/limit or unrelated geometry results do not state the specified normalized constructible comparison assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "refinement.*[Tt]or|[Cc]onstructible.*[Nn]ormalized.*[Ss]ystem|[Ee]tale.*[Uu]niform.*[Bb]ound",
+   "results": "[grep] OK 3 hit(s) Hits read: Mathlib/Topology/Connected/TotallyDisconnected.lean:338, Mathlib/CategoryTheory/Sites/Hypercover/One.lean:800, Mathlib/Analysis/Convex/Caratheodory.lean:15. General mate/localization/limit or unrelated geometry results do not state the specified normalized constructible comparison assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform constructibility and Tor bounds for intermediate integral compactification reduction systems",
+   "results": "[leansearch] OK 8 hit(s) Hits read: Topology.IsConstructible, compactSpace_uniformity, IsRetrocompact.isLocallyConstructible, topologicalAddGroup_is_uniform_of_compactSpace, Filter.HasBasis.uniformity_compacts, IsRetrocompact.isConstructible, IsCompact.isConstructible, EquicontinuousOn.isUniformInducing_uniformOnFun_iff_pi'. General mate/localization/limit or unrelated geometry results do not state the specified normalized constructible comparison assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized integral coefficient systems remain constructible with uniform Tor amplitude under proper direct image and open extension in finite compactification refinement diagrams",
+   "results": "Read 8 hits: AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.exists_map_preimage_le_map_preimage. Scheme normalization/affine limits, ordinary sheaf limits, elementary derived-category bounds or algebraic completion; none asserts simultaneous proper/open coefficient-system admissibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalized.*[Ss]ystem|[Pp]roper.*[Tt]or|refinement.*[Cc]onstructible",
+   "results": "Read 6 hits: Mathlib/AlgebraicGeometry/Group/Abelian.lean, Mathlib/AlgebraicGeometry/Cover/Over.lean, Mathlib/AlgebraicGeometry/Cover/Over.lean, Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean. Scheme normalization/affine limits, ordinary sheaf limits, elementary derived-category bounds or algebraic completion; none asserts simultaneous proper/open coefficient-system admissibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper direct image and extension by zero preserve normalized adic systems with uniform cohomology and Tor bounds",
+   "results": "Read 8 hits: CategoryTheory.Functor.instPreservesMonomorphisms, CategoryTheory.Functor.PreservesHomology.preservesRightHomologyOf, CategoryTheory.ShortComplex.hasRightHomology_of_preserves, CategoryTheory.Functor.preservesHomologyOfExact, CategoryTheory.Functor.instPreservesEpimorphisms, AdicCompletion.of_injective_iff, IsAdicComplete.StrictMono.of_lift, CategoryTheory.ShortComplex.hasHomology_of_preserves'. Scheme normalization/affine limits, ordinary sheaf limits, elementary derived-category bounds or algebraic completion; none asserts simultaneous proper/open coefficient-system admissibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Limits.limit",
+   "results": "Read 2 hits: CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map, CategoryTheory.coherentTopology.epi_π_app_zero_of_epi. Scheme normalization/affine limits, ordinary sheaf limits, elementary derived-category bounds or algebraic completion; none asserts simultaneous proper/open coefficient-system admissibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived coefficient reduction commutes with proper pushforward on bounded etale origin complexes and extension by zero preserves Tor intervals",
+   "results": "Read 8 hits: DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective. Scheme normalization/affine limits, ordinary sheaf limits, elementary derived-category bounds or algebraic completion; none asserts simultaneous proper/open coefficient-system admissibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-constructible-exceptional-coefficient-coherence",
+  "date": "2026-10-22",
+  "group": "Q148"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Existing explicit route: sk-thm-sf-tensor-hom. Proof, third Hom bijection Rf_! dashv Rf^!, and the final assertion of compatibility with finite reduction, scalar extension and shifts; constructible adjunction only, not the optional ambient datum. Extracted old coefficient-coherence proof steps 9.",
+   "via": [
+    "lem-sf-constructible-exceptional-coefficient-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-integral-refinement-diagram-admissibility",
+  "worker": "stage1",
+  "group": "Q144",
+  "summary": "Proved admissibility by finite-prefix induction using existing nodes only. Separately checked actual quotient-transition normalization, compatible bounded origins, uniform source-dimension Tor estimates and the reconstruction counit. The statement and original provenance are unchanged.",
+  "blueprint": "Preserves the inherited explicit sk-thm-sf-tensor-hom/coefficient-coherence route, old step 9: establish the normalized intermediate domain before invoking the conditional compactification-expression realization. Whole-blueprint searches found no separate equivalent node.",
+  "tool_uses": [
+   {
+    "node": "cor-sf-direct-image-ctf-proetale",
+    "why": "Generic The pro-étale direct image for all finite-Tor objects used for the finite-prefix admissibility induction; the compatibility unit assembles coherence and supplies no replacement for this coefficient/geometry interface."
+   },
+   {
+    "node": "def-weil-derived-complete-integral-detailed",
+    "why": "Generic Bounded constructible derived-complete integral coefficients used for the finite-prefix admissibility induction; the compatibility unit assembles coherence and supplies no replacement for this coefficient/geometry interface."
+   },
+   {
+    "node": "def-weil-finite-tor-amplitude",
+    "why": "Generic Finite Tor amplitude used for the finite-prefix admissibility induction; the compatibility unit assembles coherence and supplies no replacement for this coefficient/geometry interface."
+   },
+   {
+    "node": "lem-cbc-compactification-geometry-fibre-bound",
+    "why": "Generic Finite-type ambient geometry and a common geometric-fibre dimension bound used for the finite-prefix admissibility induction; the compatibility unit assembles coherence and supplies no replacement for this coefficient/geometry interface."
+   },
+   {
+    "node": "lem-fix-proetale-scalar-mate-normalization",
+    "why": "Generic Pro-etale scalar mate restricts to the specified projection arrow used for the finite-prefix admissibility induction; the compatibility unit assembles coherence and supplies no replacement for this coefficient/geometry interface."
+   },
+   {
+    "node": "lem-fix-proper-etale-origin-scalar-isomorphism",
+    "why": "Generic Proper scalar comparison is invertible on bounded etale-origin inputs used for the finite-prefix admissibility induction; the compatibility unit assembles coherence and supplies no replacement for this coefficient/geometry interface."
+   },
+   {
+    "node": "lem-pur-coefficient-system-derived-comparison",
+    "why": "Generic Derived direct image and evaluation of coefficient systems used for the finite-prefix admissibility induction; the compatibility unit assembles coherence and supplies no replacement for this coefficient/geometry interface."
+   },
+   {
+    "node": "lem-pur-normalized-actual-reconstruction-maps",
+    "why": "Generic Actual reconstruction maps for normalized strict systems used for the finite-prefix admissibility induction; the compatibility unit assembles coherence and supplies no replacement for this coefficient/geometry interface."
+   },
+   {
+    "node": "lem-trf-open-ctf",
+    "why": "Generic Extension by zero preserves constructibility and Tor amplitude used for the finite-prefix admissibility induction; the compatibility unit assembles coherence and supplies no replacement for this coefficient/geometry interface."
+   },
+   {
+    "node": "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "why": "Generic Constructible derived comparison for arbitrary finite rings used for the finite-prefix admissibility induction; the compatibility unit assembles coherence and supplies no replacement for this coefficient/geometry interface."
+   },
+   {
+    "node": "lem-weil-pbc-normalized-etale-origin-witnesses",
+    "why": "Generic Compatible etale-origin witnesses for normalized finite-coefficient towers used for the finite-prefix admissibility induction; the compatibility unit assembles coherence and supplies no replacement for this coefficient/geometry interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "cor-sf-direct-image-ctf-proetale",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-tor-amplitude",
+  "lem-cbc-compactification-geometry-fibre-bound",
+  "lem-fix-proetale-scalar-mate-normalization",
+  "lem-fix-proper-etale-origin-scalar-isomorphism",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-pur-normalized-actual-reconstruction-maps",
+  "lem-trf-open-ctf",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-weil-pbc-normalized-etale-origin-witnesses"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q144-4b89ba616",
+  "group": "Q144",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q144-4b89ba616 (reviewer sub-agent of L); spot-checked: First split of the Q148 extract, with no new nodes and the statement, stmt_deps and provenance unchanged; I read all 7 steps against every cited statement. S1: proper factors are separated of finite type; finite-type composition and the compactification geometry fibre bound over Spec k give each source finite dimension (d=0 for an empty source); taking M=A in the Tor definition gives the cohomological interval. S2: the finite-ring origin equivalence plus the normalized origin witnesses (with (R,(t)) as adic datum) give beta compatible with the actual rho, and L_m⊗A_n in D^+. The base case uses actual reconstruction, which says R(P) is normalized. S3: lem-trf-open-ctf is in the same F̄_q pro-étale finite-A setting as the item; open-tensor-normalization beta with g=id and ring map A_m→A_n is exactly coefficient change, so composing with j_!rho gives the transition-adjoint. S4: system evaluation, direct-image ctf with Tor [a,B+2d], and proper scalar invertibility with E_e=L_m, H_e≅L_n in D^+ (no flatness needed). S5: I checked the mate calculation: U(Rp_*rho∘chi)∘eta = Rp_*(tau). S6 is a genuine finite induction. S7 checks the domain definition and does not assume it; V_int(K)≅L M_V is complete with uniformly bounded reductions, so it lies in C_R. Source def-weil-exceptional-inverse-image.md lines 45-80 (stage-independent constants); Stacks 0F0G, 0GL1 and 09B1 labels confirmed; no SGA. No duplicate (lem-sf-point-identity-admissibility covers only the point/identity case) and no cycle. Batch-5 flag: the citation of lem-fix-proper-etale-origin-scalar-isomorphism is the generic 0F0G proper projection formula for finite rings, not part of the trace formula or Poincaré duality. The flagged pod lisse-module node is already reached through the unchanged stmt_deps def-sf-categories and the realization theorem, so I accept it. I accept the 11 generic cross-unit tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.IntegralRefinementDiagramAdmissibility",
+  "declaration": "WeilConjectures.IntegralSystemRealization.integralRefinementDiagramAdmissibility",
+  "declarations": [
+   "WeilConjectures.IntegralSystemRealization.refinementTorInterval",
+   "WeilConjectures.IntegralSystemRealization.refinementOpenEstimate",
+   "WeilConjectures.IntegralSystemRealization.refinementProperEstimate",
+   "WeilConjectures.IntegralSystemRealization.refinementOver",
+   "WeilConjectures.IntegralSystemRealization.refinementDiagramWords",
+   "WeilConjectures.IntegralSystemRealization.Expression.refinementStepBounds",
+   "WeilConjectures.IntegralSystemRealization.integralRefinementDiagramAdmissibility"
+  ],
+  "file": "lean/Sheaf/SixFunctors/IntegralRefinementDiagramAdmissibility.lean",
+  "statement": "theorem integralRefinementDiagramAdmissibility (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p) (o : Operations l E) (R : Realizations l E D o) {X Y : Over (Spec (CommRingCat.of D.k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] (f : X ⟶ Y) [IsSeparated f.left] [LocallyOfFiniteType f.left] [QuasiCompact f.left] (c : Fin 3 → Compactification f.left) (r : (c 0).Refinement (c 1)) (s : (c 1).Refinement (c 2)) (hq : ∀ i, QuasiCompact (c i).i) (K : Integral l E X.left) (hK : sfIntegralConstructible l E X.left K) (a b : ℤ) (hab : a ≤ b) (hTor : ∀ n : ℕ, HasProEtaleTorAmplitude X.left (Padic.coefficientExtensionRing l E (n + 1)) ((scalarReductionDerivedExtension l E X.left n).obj K) a b) : (∃ d : ℕ, ∀ q : Fin 18, topologicalKrullDim (refinementDiagramWords f c r s hq q).1.left ≤ (d : WithBot ℕ∞)) ∧ (∃ B : ℤ, a ≤ B ∧ ∀ q : Fin 18, ∀ n : ℕ, proEtaleCohomologicalSupport ((coefficientSequenceDerivedEvaluation l E (refinementDiagramWords f c r s hq q).1.left n).obj ((refinementDiagramWords f c r s hq q).2.systemObj l E o ((inputReduction l E (fun _ : ULift.{u} Unit ↦ X)).obj (fun _ ↦ K)))) ⊆ Set.Icc a B ∧ refinementTorInterval l E (refinementDiagramWords f c r s hq q).1.left ((refinementDiagramWords f c r s hq q).2.systemObj l E o ((inputReduction l E (fun _ : ULift.{u} Unit ↦ X)).obj (fun _ ↦ K))) a B) ∧ (∀ q : Fin 18, (refinementDiagramWords f c r s hq q).2.refinementStepBounds l E o ((inputReduction l E (fun _ : ULift.{u} Unit ↦ X)).obj (fun _ ↦ K))) ∧ (∀ q : Fin 18, ∃ (g : (refinementDiagramWords f c r s hq q).2.geometric) (h : (refinementDiagramWords f c r s hq q).2.domain l E o (fun _ ↦ K)), sfIntegralConstructible l E (refinementDiagramWords f c r s hq q).1.left (((refinementDiagramWords f c r s hq q).2.evaluate (integralInterpretation l E)).obj (fun _ ↦ K)) ∧ (R.reduction _ g).inv.app ⟨(fun _ ↦ K), h⟩ = (calculus l E (refinementDiagramWords f c r s hq q).1.left).reduction.map ((R.comparison _ g).inv.app ⟨(fun _ ↦ K), h⟩) ≫ (calculus l E (refinementDiagramWords f c r s hq q).1.left).adjunction.counit.app ((refinementDiagramWords f c r s hq q).2.systemObj l E o ((inputReduction l E (fun _ : ULift.{u} Unit ↦ X)).obj (fun _ ↦ K))))",
+  "branch": "sheaf-dag",
+  "by": "NL",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The finite typed list covers composable binary refinement diagrams and identity specializations, including all open and proper prefixes and the composite refinement. Uses the recorded Expression.domain and Realizations comparisons; the final equality fixes the inverse reduction identification by the actual reconstruction counit. Helpers are explicit notation and finite bookkeeping belonging to this statement, with no replacement of coefficient systems or operations."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e6fb173d2",
+  "group": "NL",
+  "result": "pass",
+  "note": "Only the item node differs from side-live (lean field added); lean.statement verbatim; all imports exist. Clause table checked against IntegralSystemExpressionDomain (domain/admissible/Good/Origins/LevelBounds) and Realizations (normalization ⇒ the final equation pins reduction.inv). The 18-word Fin list covers the composable binary diagram r, s, r.comp s (as used by consumer lem-sf-constructible-exceptional-coefficient-coherence step 5), all prefixes, hidden opens of the compact-support words and final proper images; the identity case is constant c with identity refinements. Conjuncts give a common dimension bound, a common [a,B] cohomology/Tor interval at every level, sharp open/proper step estimates (d≥0, so empty sources are allowed), domain membership and integral constructibility. o and R are arbitrary, which is more general and fine because operations are adjunction-pinned. Edge cases (zero K, empty schemes, a=b, universes) OK. Single sorry, non-hollow helpers, docstrings with source/blueprint/7 steps, pro-etale throughout, no duplicate found. Advisories: hab and hq redundant; base-era theorem stmt_dep lem-sf-integral-compactification-system-realization supplies plain defs; Operations/HasProEtaleTorAmplitude/sfIntegralConstructible owners are outside the direct stmt_deps but reached through the closure; second reading is a self-check. No compile (no change)."
+ }
+}

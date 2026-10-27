@@ -7,7 +7,6 @@ module
 
 public import Sheaf.Paper.LocalizingAdmissibleCoefficients
 public import Sheaf.SixFunctors.ProperImageLocalizingProper
-import Sheaf.Paper.ProperLocalizingContinuousAlgCl
 import Mathlib.Topology.Instances.ZMod
 import Sheaf.Paper.LocalizingClosureExistence
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
@@ -21,12 +20,11 @@ import Sheaf.Paper.ConstantModelTorAmplitude
 Source: blueprint main-20261015, det-sf-comp-coherence-single, proper-image paragraph.
 (blueprint: det-sf-comp-proper-admissible-hypotheses).
 
-Proof plan: split the admissible coefficient predicate into its seven cases. In each
+Proof plan: split the admissible coefficient predicate into its six cases. In each
 case transport the proper-image hypotheses across the displayed coefficient-ring
 isomorphism; the finite, integral, rational, and finite-extension cases invoke
 `proper_image_localizing_proper_coefficients`, as does the finite-subextension
-algebraic-closure case. The all-continuous algebraic-closure case is supplied by
-`properLocalizingHypotheses_continuousAlgCl`. The transport argument uses the induced
+algebraic-closure case. The transport argument uses the induced
 equivalences of module and derived categories, which preserve
 finite Tor amplitude, constant constructibility, localizing closure, and colimits.
 -/
@@ -178,8 +176,7 @@ Proof: restriction along a coefficient isomorphism is an exact monoidal equivale
 It preserves finite presentations, finite constant local models, Tor intervals and
 localizing closures. The derived restriction/direct-image comparison conjugates the
 pushforwards, so their preservation properties transfer. Split admissibility into its
-seven representatives. Apply the existing coefficient theorem to the six literal
-representatives, and the continuous-map theorem to the all-continuous representative. -/
+six representatives and apply the existing coefficient theorem to each. -/
 theorem properLocalizingHypotheses_admissible
     (ℓ : ℕ) [Fact ℓ.Prime]
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -194,7 +191,7 @@ theorem properLocalizingHypotheses_admissible
     ProperLocalizingHypotheses Λ p := by
   let E₀ : PadicAlgCl.FiniteIntermediateField ℓ := ⟨⊥, inferInstance⟩
   have hzero : ∃ n : ℕ, (ℓ ^ n : ZMod 1) = 0 := ⟨0, Subsingleton.elim _ _⟩
-  rcases hΛ with h | h | h | h | h | h | h
+  rcases hΛ with h | h | h | h | h | h
   · obtain ⟨A, _, _, _, _, hfin, ⟨n, hn⟩, ⟨e⟩⟩ := h
     have : Finite A := hfin
     have hA : ∃ n : ℕ, (ℓ ^ n : A) = 0 := by
@@ -219,9 +216,6 @@ theorem properLocalizingHypotheses_admissible
     apply properHypotheses_comap e.hom.hom p
     exact proper_image_localizing_proper_coefficients ℓ E (ZMod 1) hzero
       (Mon.mk (Profinite.padicIntegersRingObj ℓ E)) (by simp) k p
-  · obtain ⟨e⟩ := h
-    apply properHypotheses_comap e.hom.hom p
-    exact properLocalizingHypotheses_continuousAlgCl ℓ k p
   · obtain ⟨e⟩ := h
     apply properHypotheses_comap e.hom.hom p
     exact proper_image_localizing_proper_coefficients ℓ E₀ (ZMod 1) hzero

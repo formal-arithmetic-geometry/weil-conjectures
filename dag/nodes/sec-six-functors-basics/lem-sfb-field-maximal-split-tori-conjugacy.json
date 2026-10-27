@@ -1,0 +1,244 @@
+{
+ "id": "lem-sfb-field-maximal-split-tori-conjugacy",
+ "kind": "statement",
+ "title": "Rational conjugacy of maximal split tori over any field",
+ "statement": "Let $k$ be any field [def-weil-field]. Let $G$ be a smooth [def-sbc-smooth-morphisms] affine $k$-group scheme [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], geometrically connected (connected [def-weil-connected-scheme] after every field extension), and reductive: over an algebraic closure it has no nontrivial smooth connected normal unipotent subgroup. Here unipotent means that all geometric points are unipotent matrices in a faithful finite-dimensional representation. Write $\\mathbf G_{m,k}=\\operatorname{Spec}k[z,z^{-1}]$ with multiplication of units. A split torus is a group scheme isomorphic over $k$ to $\\mathbf G_{m,k}^r$ for some integer $r\\geq0$. A maximal split torus of $G$ is a closed split torus subgroup [def-weil-closed-immersion] maximal under inclusion among closed split torus subgroups defined over $k$. If $S_1,S_2\\hookrightarrow G$ are maximal split tori, then there exists $g\\in G(k)$ such that conjugation $c_g:G\\to G$ restricts to an isomorphism $S_1\\xrightarrow{\\sim}S_2$ over $k$. Here $G(B)=\\operatorname{Hom}_k(\\operatorname{Spec}B,G)$ and $(c_g)_B(x)=g_Bxg_B^{-1}$ for every commutative $k$-algebra $B$. No perfectness, infinitude or algebraic closedness hypothesis is made on $k$; rank-zero tori are allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 25.10, printed p.546, in Section 25(a) (G reductive over the arbitrary base field k). The conclusion is conjugacy by G(k), not just geometric conjugacy."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sbc-smooth-morphisms",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-connected-scheme",
+  "def-weil-closed-immersion",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-sfb-tori-multiplicative-type"
+ ],
+ "proof": [
+  {
+   "text": "First record the commuting case. If closed split tori $A,B\\subseteq G$ commute after every algebra extension, multiplication $m:A\\times_kB\\to G$ is a homomorphism: $aba^{\\prime}b^{\\prime}=aa^{\\prime}bb^{\\prime}$. The product is again a coordinate split torus, hence affine of finite type by [lem-trf-lattice-torus-coordinates-action]. Apply [lem-sfb-affine-homomorphism-flat-image] to $m$, obtaining $A\\times_kB\\twoheadrightarrow I\\hookrightarrow G$ with faithfully flat first map. By [lem-sfb-field-split-torus-flat-quotient], $I$ is a split torus over the same $k$. Both $A$ and $B$ factor through $I$ by restricting $m$ to $(a,1)$ and $(1,b)$. Thus if $A,B$ are maximal split tori of $G$, maximality gives $A=I=B$. These are subgroup-scheme factorizations; surjectivity on $k$-points is not asserted.",
+   "uses": [
+    "lem-trf-lattice-torus-coordinates-action",
+    "lem-sfb-affine-homomorphism-flat-image",
+    "lem-sfb-field-split-torus-flat-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorems 3.34 and 12.9, pp.75,233--234; Definition 12.14, p.236. Commuting-case assembly used at the end of 25.10."
+   }
+  },
+  {
+   "text": "If every closed split torus of $G$ is central, then $S_1,S_2$ commute, so step 1 gives $S_1=S_2$; take $g=1$. Otherwise [lem-sfb-field-parabolic-isotropy-criterion] gives a proper minimal parabolic $P$ over $k$. Its quotient $X=G/P$ is proper of finite type by that node, and has the rational point $q(1)$. By [lem-sfb-field-parabolic-quotient-rational-lift], $X$ carries the left multiplication action of $G$, the quotient map $q$ is equivariant, and its identity fibre is $P$ on every algebra.",
+   "uses": [
+    "lem-sfb-field-parabolic-isotropy-criterion",
+    "lem-sfb-field-parabolic-quotient-rational-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 25.2, p.545; Theorem 25.9(b), p.546. Repairs the central split-torus case in the first two sentences of 25.10."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-split-torus-rational-fixed-point] separately to the restricted actions of $S_i$ on $X$, for $i=1,2$. The hypotheses hold because $X$ is proper finite type and $q(1)\\in X(k)$. Obtain rational fixed points $x_i$. By [lem-sfb-field-parabolic-quotient-rational-lift], choose $h_i\\in G(k)$ with $q(h_i)=x_i$. For every commutative $k$-algebra $A$ and $s\\in S_i(A)$, equivariance and fixedness give $q(sh_i)=q(h_i)$, hence $q(h_i^{-1}sh_i)=q(1)$ after applying the left action of $h_i^{-1}$. The identity-fibre assertion gives $h_i^{-1}sh_i\\in P(A)$. Taking the universal point of the affine $S_i$ shows that $R_i=h_i^{-1}S_ih_i$ factors as a subgroup scheme through $P$. Each $R_i$ remains maximal among split tori of $G$, since conjugation by $h_i$ is an inverse-preserving isomorphism carrying any larger split torus back to one containing $S_i$. It is therefore maximal in $P$ as well.",
+   "uses": [
+    "lem-sfb-split-torus-rational-fixed-point",
+    "lem-sfb-field-parabolic-quotient-rational-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 25.10, middle sentences, p.546; Theorem 16.51, p.343; Theorem 25.9(b), p.546. The inverse in the conjugation is fixed by the displayed coset calculation."
+   }
+  },
+  {
+   "text": "Use [lem-sfb-minimal-parabolic-split-centralizers] for the minimal $P$ and its maximal split tori $R_1,R_2$. Write $L_i=C_G(R_i)$ and choose $u\\in(R_uP)(k)$ with $uL_1u^{-1}=L_2$. Since every torus is commutative, $R_1\\subseteq L_1$, so $uR_1u^{-1}\\subseteq L_2=C_G(R_2)$. The latter inclusion says exactly that $uR_1u^{-1}$ commutes with $R_2$ over every algebra. Both are maximal split tori of $G$, and step 1 yields $uR_1u^{-1}=R_2$. Put $g=h_2uh_1^{-1}\\in G(k)$. Substituting $R_i=h_i^{-1}S_ih_i$ gives $gS_1g^{-1}=S_2$. The conjugation morphism constructed from multiplication, inverse and $g$ has inverse conjugation by $g^{-1}$, so its restriction is the asserted isomorphism over $k$ [def-sc-group-scheme]. The same identities hold on all algebra points. The argument used no extra field hypothesis and also covers rank zero.",
+   "uses": [
+    "lem-sfb-minimal-parabolic-split-centralizers",
+    "def-sc-group-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 25.6(b),(c), pp.545--546, with minimality correction (author errata); final sentences of 25.10, p.546, completed by the commuting-torus argument of step 1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-lattice-torus-coordinates-action",
+  "lem-sfb-affine-homomorphism-flat-image",
+  "lem-sfb-field-split-torus-flat-quotient",
+  "lem-sfb-field-parabolic-isotropy-criterion",
+  "lem-sfb-field-parabolic-quotient-rational-lift",
+  "lem-sfb-split-torus-rational-fixed-point",
+  "lem-sfb-minimal-parabolic-split-centralizers",
+  "def-sc-group-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 25.10, p.546; assembly from 16.51,25.2,25.6,25.9, correcting two omissions: central split tori do not force a proper parabolic, and the centralizer statement needs a minimal parabolic. Commuting tori close the proof without dimension induction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "maximal.?split.?tor|split.?tor.*conjug",
+   "results": "{\"t\": \"2026-10-24T04:14:01Z\", \"tool\": \"grep\", \"query\": \"maximal.?split.?tor|split.?tor.*conjug\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GroupExtension.IsConj concerns splittings of abstract groups, Sylow statements concern finite p-subgroups, and the Lie/Geck Cartan results concern Lie subalgebras; none states rational conjugacy of maximal split algebraic tori."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torus\", \"conj\"",
+   "results": "{\"t\": \"2026-10-24T04:14:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"torus\\\", \\\"conj\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GroupExtension.IsConj concerns splittings of abstract groups, Sylow statements concern finite p-subgroups, and the Lie/Geck Cartan results concern Lie subalgebras; none states rational conjugacy of maximal split algebraic tori."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maximal k split tori of a connected reductive algebraic group are rationally conjugate, including finite and imperfect base fields",
+   "results": "{\"t\": \"2026-10-24T04:14:37Z\", \"tool\": \"leanfinder\", \"query\": \"Maximal k split tori of a connected reductive algebraic group are rationally conjugate, including finite and imperfect base fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieAlgebra.cartan_sup_iSup_rootSpace_eq_top\", \"LieAlgebra.IsKilling.biSup_corootSpace_eq_top\", \"GroupExtension.IsConj.trans\", \"NumberField.IsCMField.isConj_eq_isConj\", \"RootPairing.GeckConstruction.instHasTrivialRadical\"], \"digest\": \"f4d10445f180f625\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GroupExtension.IsConj concerns splittings of abstract groups, Sylow statements concern finite p-subgroups, and the Lie/Geck Cartan results concern Lie subalgebras; none states rational conjugacy of maximal split algebraic tori."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Any two maximal split torus subgroup schemes of a connected reductive group over a field are conjugate under its rational points",
+   "results": "{\"t\": \"2026-10-24T04:15:55Z\", \"tool\": \"leansearch\", \"query\": \"Any two maximal split torus subgroup schemes of a connected reductive group over a field are conjugate under its rational points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GroupExtension.IsConj\", \"GroupExtension.IsConj.setoid\", \"GroupExtension.IsConj.symm\", \"Sylow.mk.injEq\", \"AddGroupExtension.IsConj.refl\", \"GroupExtension.IsConj.refl\", \"AddGroupExtension.IsConj.trans\", \"AddGroupExtension.IsConj.symm\"], \"digest\": \"67f32830b277003a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GroupExtension.IsConj concerns splittings of abstract groups, Sylow statements concern finite p-subgroups, and the Lie/Geck Cartan results concern Lie subalgebras; none states rational conjugacy of maximal split algebraic tori."
+  },
+  {
+   "tool": "grep",
+   "query": "maximal.?split.?tor|split.?tor.*conjug",
+   "results": "{\"t\": \"2026-10-24T04:43:07Z\", \"tool\": \"grep\", \"query\": \"maximal.?split.?tor|split.?tor.*conjug\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic subgroup-scheme rational conjugacy is not stated by the returned abstract group extension, root-conjugacy, Lie Cartan or root-pairing declarations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rational conjugacy of maximal k split tori in connected reductive algebraic groups",
+   "results": "{\"t\": \"2026-10-24T04:43:07Z\", \"tool\": \"leansearch\", \"query\": \"Rational conjugacy of maximal k split tori in connected reductive algebraic groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CongruenceSubgroup.IsArithmetic.conj\", \"GroupExtension.IsConj.setoid\", \"IsConjRoot.instIsEquiv\", \"Subgroup.IsArithmetic.conj\", \"ConjRootClass.mk_eq_mk\", \"GroupExtension.IsConj\", \"isConjRoot_iff_eq_algebraMap'\", \"IsConjRoot.setoid\"], \"digest\": \"8f49970c957dfa26\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic subgroup-scheme rational conjugacy is not stated by the returned abstract group extension, root-conjugacy, Lie Cartan or root-pairing declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torus\", \"conj\"",
+   "results": "{\"t\": \"2026-10-24T04:43:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"torus\\\", \\\"conj\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic subgroup-scheme rational conjugacy is not stated by the returned abstract group extension, root-conjugacy, Lie Cartan or root-pairing declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Any two maximal split tori of a reductive algebraic group over any field are conjugate by a rational point",
+   "results": "{\"t\": \"2026-10-24T04:43:09Z\", \"tool\": \"leanfinder\", \"query\": \"Any two maximal split tori of a reductive algebraic group over any field are conjugate by a rational point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.exists_isCartanSubalgebra_engel\", \"RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff\", \"RootPairing.GeckConstruction.ωConj_mem_of_mem\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"LieAlgebra.IsKilling.biSup_corootSpace_eq_top\", \"RootPairing.GeckConstruction.cartanSubalgebra'\", \"RootPairing.GeckConstruction.mem_ωConjLieSubmodule_iff\", \"LieAlgebra.cartan_sup_iSup_rootSpace_eq_top\"], \"digest\": \"21b5f972e9247c0d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic subgroup-scheme rational conjugacy is not stated by the returned abstract group extension, root-conjugacy, Lie Cartan or root-pairing declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maximal split algebraic tori are conjugate over their ground field, including imperfect and finite fields",
+   "results": "{\"t\": \"2026-10-24T04:43:10Z\", \"tool\": \"leanfinder\", \"query\": \"Maximal split algebraic tori are conjugate over their ground field, including imperfect and finite fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsConjRoot.instIsEquiv\", \"NumberField.IsCMField.isConj_eq_isConj\", \"IsConjRoot.exists_algEquiv\", \"isConjRoot_iff_exists_algEquiv\", \"isConjRoot_iff_orbitRel\", \"RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff\", \"NumberField.ComplexEmbedding.IsConj.ext\", \"NumberField.ComplexEmbedding.IsConj.ext_iff\"], \"digest\": \"40686db84a696908\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic subgroup-scheme rational conjugacy is not stated by the returned abstract group extension, root-conjugacy, Lie Cartan or root-pairing declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-field-split-torus-rational-containment",
+  "date": "2026-10-24",
+  "group": "Q41"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Remark 3.5, forward implication, printed p.5: integral conjugation into a fixed maximal split torus. Only the complete-DVR case is needed here; the statement is the conjugacy input, not a Cartan factorization. Supporting input: Residue-field base case: rational conjugacy of split tori, before lifting a fixed conjugator. This is over a field and contains no complete-DVR lifting assertion. Supporting field argument, conjugacy step: Milne Theorem 25.10, rational conjugacy of the maximal containing split torus with the prescribed one.",
+   "via": [
+    "lem-sfb-field-split-torus-rational-containment",
+    "lem-sfb-complete-dvr-torus-cocharacter-conjugacy",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-field-maximal-split-tori-conjugacy",
+  "worker": "stage1",
+  "summary": "Kept the arbitrary-field statement. Reduced rational conjugacy to a proper minimal parabolic, rational fixed points and rational quotient lifting; compared centralizers there and used commuting-torus image/maximality. Corrected the source proof central-versus-nontrivial split-torus omission and the author-confirmed minimality omission. Four new statement-only prerequisites, no Mathlib leaves.",
+  "blueprint": "Current latest blueprint, det-thm-sf-ctf-stability-direct-images proof (3), supporting rational-conjugacy input in inherited ancestry. All four steps elaborate Milne 25.10 under this input; no unit route replaced. blueprint_refs ancestor returns None in the inherited metadata, which is preserved; via is extended for each new child. Whole-DAG and whole-blueprint searches find no equal statement.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-lattice-torus-coordinates-action",
+    "why": "Only its field-independent coordinate torus finite-type assertion is used for a product of split tori; this unit has no competing coordinate presentation node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-lattice-torus-coordinates-action"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-3af33a32b",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-3af33a32b (reviewer sub-agent of L); spot-checked: Read Milne iAG2017 printed pp.544-546 (Thm 25.1, Prop 25.2, Thm 25.6, 25.8, 25.9, 25.10) and Thm 16.51 (p.343); the item statement agrees with 25.10 and is not weakened. The worker repaired two source faults correctly. First, 25.2 needs a noncentral split torus, and step 2 handles the all-central case via the commuting-torus image argument of step 1. Second, 25.6(b),(c) need P minimal (counterexample GL_2 with P=G), and the new centralizer node assumes minimality. Steps checked: in step 1, the flat image of A×B is a closed split torus containing both A and B, so maximality gives A=I=B. In step 3, q(h^{-1}sh)=q(1) puts h^{-1}sh in P(A) through the identity fibre, and R_i is maximal in P. In step 4, uR_1u^{-1} lies in C_G(R_2), step 1 gives uR_1u^{-1}=R_2, and g=h_2uh_1^{-1} works. All four new nodes are true, statement-only and not restatements. The fixed point holds for non-reduced proper X via the A^1-limit, rational lifting is 25.9(b)/Borel-Tits, and the minimal-parabolic Levi conjugacy does not depend on the item. Duplicate search: lem-sfb-reductive-cocharacter-parabolic-geometry (only P_lambda, no rational lift) and the algebraically-closed fixed-point/Borel nodes are not duplicates. Batch-5: lem-trf-lattice-torus-coordinates-action is used only for the generic finite type of a coordinate torus, as already in the landed parent; the closure of lem-sfb-affine-homomorphism-flat-image reaches only the Mathlib leaf on flat modules preserving injections. Both are genuinely outside the assumed statements, and the tool_use is accepted. FIX (B2): lem-sfb-field-parabolic-isotropy-criterion used T without introducing it; the corrected statement introduces T as the noncentral closed split torus.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.FieldMaximalSplitToriConjugacy",
+  "declaration": "AlgebraicGeometry.field_maximal_split_tori_conjugacy",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/FieldMaximalSplitToriConjugacy.lean",
+  "statement": "theorem field_maximal_split_tori_conjugacy {k : Type u} [Field k] (G S₁ S₂ : Grp (Over (Spec (.of k)))) (_hG : ReductiveTorusCentralizer.IsReductive G) (i₁ : S₁ ⟶ G) (i₂ : S₂ ⟶ G) [IsClosedImmersion i₁.hom.hom.left] [IsClosedImmersion i₂.hom.hom.left] (_hS₁ : ∃ r : ℕ, Nonempty (S₁ ≅ MultiplicativeType.splitTorus k r)) (_hS₂ : ∃ r : ℕ, Nonempty (S₂ ≅ MultiplicativeType.splitTorus k r)) (_hmax₁ : ∀ (T : Grp (Over (Spec (.of k)))) (j : T ⟶ G), IsClosedImmersion j.hom.hom.left → (∃ r : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus k r)) → ∀ a : S₁ ⟶ T, a ≫ j = i₁ → IsIso a) (_hmax₂ : ∀ (T : Grp (Over (Spec (.of k)))) (j : T ⟶ G), IsClosedImmersion j.hom.hom.left → (∃ r : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus k r)) → ∀ a : S₂ ⟶ T, a ≫ j = i₂ → IsIso a) : ∃ (g : 𝟙_ (Over (Spec (.of k))) ⟶ G.X) (e : S₁ ≅ S₂), (toUnit S₁.X ≫ g) * i₁.hom.hom * (toUnit S₁.X ≫ g)⁻¹ = e.hom.hom.hom ≫ i₂.hom.hom",
+  "branch": "newtargets-dag",
+  "by": "Q154",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c26bf1890",
+  "group": "Q154",
+  "result": "pass",
+  "note": "Statement matches node and Milne Thm 25.10 clause by clause: IsReductive (affine, LFT+QC, smooth, connected over k̄, no nontrivial smooth connected normal unipotent subgroup over k̄), split tori ∃ r, ≅ splitTorus k r (rank 0 incl.), closed immersions, maximality over closed k-split tori via IsIso of factorizations, conclusion ∃ g : 𝟙_ ⟶ G.X, ∃ e : S₁ ≅ S₂ with (const g)*i₁*(const g)⁻¹ = e.hom ≫ i₂ (scheme-morphism equality, all algebras). No extra field instances or universe restriction. lean.statement verbatim. Node diff: lean + two existing def stmt_deps (§5). Imports per rule 7. Interface identical to the parent citer field_split_torus_rational_containment. No defs, sorry only, docstrings and four-step plan present, report sections present. No findings; no recompile (no file changed)."
+ }
+}

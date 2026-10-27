@@ -35,141 +35,40 @@
  ],
  "proof": [
   {
-   "text": "Put $R=\\mathbf Z/\\ell^n$. The unital structure map $R\\to A$ exists because $\\ell^nA=0$. Use the fixed coefficient-independent compactification supplied by [sk-def-sfb-dc-setting] for $f$ at both coefficient rings. The unit $R_Y$ is in the bounded constructible finite-Tor category (it is free of rank one in degree zero). Thus [det-sp-reduction-exceptional] gives $c_f:(\\omega_{f,R})_A\\xrightarrow{\\sim}\\omega_{f,A}$. Apply [thm-pur-diagonal-dualizing-object] at $E=\\mathbf Q_\\ell$, whose level-$n$ quotient is exactly $R$, to obtain $\\theta_{f,R}:\\omega_{f,R}\\xrightarrow{\\sim}R_X(d)[2d]$. All its scheme hypotheses hold in our explicit separated finite-type setting. Since $\\ell$ is invertible on every $k$-scheme here, the Tate clause applies. By the free-line and exact-functor clauses of [det-sp-scalar-extension-functor], scalar extension carries this isomorphism to $(\\omega_{f,R})_A\\xrightarrow{\\sim}A_X(d)[2d]$. Set $\\theta_{f,A}^{(n)}=(\\theta_{f,R})_A c_f^{-1}$. This proves clause (1), with exactly its displayed map and arrow directions.",
+   "text": "Derive compactness and Noetherianity of X and Y from finite type over D.k, then quasi-compactness and compactifiability of f. Apply lem-sp-general-ring-orientation at that fixed compactification. Define theta as the inverse canonical dualizing-unit comparison followed by comparison of alpha. Its scalar equation is the supplied orientation equation; its unit equation is the inverse identity.",
    "uses": [
-    "det-sp-reduction-exceptional",
-    "thm-pur-diagonal-dualizing-object",
-    "det-sp-scalar-extension-functor",
-    "sk-def-sfb-dc-setting"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
-    "place": "Proof (1)"
-   }
-  },
-  {
-   "text": "We compare the three arrows in the diagonal/DNC construction, rather than infer canonicity from the existence of an isomorphism. Put $W=X\\times_YX$, with $p_1,p_2$ and $\\Delta$. The prime-power diagonal arrow $a_R:C_R(p_1,\\Delta)\\to\\omega_{f,R}$ is the base-change identification of [lem-pur-diagonal-base-change]. Its construction uses the smooth base-change exchange and $p_2\\Delta=1_X$. The base-change and pullback coherence in [lem-pur-dnc-coefficient-transport], applied with $g_0=f$, $h=f$, and $g'_0=p_1$ to this square (the base-change clause requires no section of $f$), gives\n$$a_A q_{p_1,\\Delta}=c_f(a_R)_A.$$\nHere $a_A$ is the same specified base-change composite over $A$, not an arbitrary identification. For the actual normal bundle $\\pi_N:N_\\Delta\\to X$, the normalized deformation map $\\delta_R:C_R(p_1,\\Delta)\\to C_R(\\pi_N,0_N)$ is [thm-pur-dnc-invariance]. The final equation of [lem-pur-dnc-coefficient-transport] gives\n$$\\delta_A q_{p_1,\\Delta}=q_{\\pi_N,0_N}(\\delta_R)_A.$$\nThat lemma identifies $\\delta_A$ with the direct normalized construction over $A$, and supplies its uniqueness at $t=1$. The pair is eligible: the diagonal of the smooth separated map $f$ is a closed section of $p_1$ and its actual normal bundle is the rank-$d$ tangent bundle, as stated in [lem-pur-diagonal-regular-immersion]. The geometry, including this bundle, is the same at both coefficient rings. The helper uses [def-pur-dnc-section-family] for that geometric space and its structural maps; its two displayed formulas define the family objects separately at $R$ and $A$, so the fixed-coefficient convention of that definition is respected.",
-   "uses": [
-    "lem-pur-diagonal-base-change",
-    "lem-pur-dnc-coefficient-transport",
-    "thm-pur-dnc-invariance",
-    "lem-pur-diagonal-regular-immersion",
-    "def-pur-dnc-section-family"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
-    "place": "Proof (2), diagonal and normalized deformation comparisons"
-   }
-  },
-  {
-   "text": "The last arrow $\\beta_R:C_R(\\pi_N,0_N)\\to R_X(d)[2d]$ is the zero-section pullback of the canonical vector-bundle orientation [cor-pur-vector-bundle-purity]. More precisely, at $R$ the theorem [thm-amb-vector-bundle-purity] explicitly specifies its inverse as the transpose of the inverse projection formula followed by integration $t_{\\pi_N}$; this is the integration normalization specified in our statement. Over a trivializing open, vector integration is the affine-space counit, and [def-amb-vector-integration] specifies it for every finite ring, including $A$, by these local restrictions and unique gluing. Let $T_D=D_N(d)[2d]$ and let $j_D:T_D\\to\\omega_{\\pi_N,D}$ be the adjoint transpose of $t_{\\pi_N,D}$ for $D=R,A$. The specified affine trace of [lem-amb-affine-space-top-trace] is the counit of the ordered affine-space adjunction, so on a trivializing open $j_D$ is the identity in that adjunction's identification $\\omega_{p_d,D}=D(d)[2d]$. The chart clause of [det-sp-reduction-exceptional] uses the counit-preserving chart identification, with counit the fibre sum followed by the specified affine-space counit. On a vector-bundle trivializing open the etale coordinate map is the identity, so this fibre sum is the identity and it identifies $c_{\\pi_N}$ with the coefficient identification between precisely these affine right adjoints; thus on that open $c_{\\pi_N}(j_R)_A=j_A$. To pass from charts to global maps, $c_{\\pi_N}(j_R)_A:T_A\\to\\omega_{\\pi_N,A}$ is an isomorphism, since $j_R$ and $c_{\\pi_N}$ are isomorphisms. Its target is therefore a locally free rank-one sheaf shifted by $[2d]$, as is its source. By [lem-weil-pbc-derived-single-fully-faithful], after removing that common shift both $c_{\\pi_N}(j_R)_A$ and $j_A$ are ordinary sheaf morphisms. Their equality on each trivializing open gives equality globally by [lem-pur-sheaf-hom-cover-gluing]. Thus $c_{\\pi_N}(j_R)_A=j_A$. The left-hand map is invertible, so $j_A$ is invertible and $j_A^{-1}c_{\\pi_N}=(j_R^{-1})_A$. Restrict along the zero section and use the pullback/tensor identification [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and the free-line identification [det-sp-scalar-extension-functor]. This gives the pullback of the equality between the specified inverse-integration maps just proved. In the pro-etale realization the same equality holds: by [lem-pur-finite-ring-site-tensor-transpose](3), applied to $\\pi_N$ with $M=D_N(d)[2d]$, $K=D_X$ and $e=t_{\\pi_N,D}$ for $D=R,A$, the pro-etale transpose of the transported integration is $\\nu^*$ of the etale $j_D$ under the counit-preserving identification $\\rho$ of its clause (1); the chart counits of [det-sp-reduction-exceptional] are transported from the etale site through the same comparison, and the tensor comparison is [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Consequently the last arrow of the direct $A$-construction satisfies\n$$\\beta_A q_{\\pi_N,0_N}=(\\beta_R)_A.$$\nThe coefficient notation at the zero section is canonical by [lem-asd-etale-finite-twist-pullback]. This argument concerns specified integration and its transpose; it never asserts that all isomorphisms of Tate lines coincide.",
-   "uses": [
-    "cor-pur-vector-bundle-purity",
-    "def-amb-vector-integration",
-    "det-sp-reduction-exceptional",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "det-sp-scalar-extension-functor",
-    "lem-asd-etale-finite-twist-pullback",
-    "thm-amb-vector-bundle-purity",
-    "lem-amb-affine-space-top-trace",
-    "lem-weil-pbc-derived-single-fully-faithful",
-    "lem-pur-sheaf-hom-cover-gluing",
-    "lem-pur-finite-ring-site-tensor-transpose"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
-    "place": "Proof (2), vector-bundle comparison and coefficient extension"
-   }
-  },
-  {
-   "text": "The direct diagonal construction is $\\theta_{f,A}^{\\mathrm{dir}}=\\beta_A\\delta_Aa_A^{-1}$; the prime-power orientation is $\\theta_{f,R}=\\beta_R\\delta_Ra_R^{-1}$. Here $\\theta_{f,R}$ is the orientation of [thm-pur-diagonal-dualizing-object], i.e. the diagonal construction, which that theorem forms over the preimages $X_i=f^{-1}(V_i)$ of an affine open cover $\\{V_i\\}$ of $Y$ and glues. In our separated setting the global composite $\\beta_R\\delta_Ra_R^{-1}$ is defined on all of $X$, and it restricts on each $X_i$ to the local composite for $f_i:X_i\\to V_i$: the pair $(W,\\Delta)$ and the normal bundle $N_\\Delta$ restrict to $(X_i\\times_{V_i}X_i,\\Delta_i)$ and $N_{\\Delta_i}$; $a_R$ restricts to the diagonal arrow of $f_i$ because the canonical comparison of the base-change clause of [thm-pur-cohomological-smoothness] is compatible with base change, here along the open immersion $X_i\\hookrightarrow X$; $\\delta_R$ restricts to the comparison for $(p_{1,i},\\Delta_i)$ by the localization and base-change clause of [thm-pur-dnc-invariance]; and $\\beta_R$ restricts to the zero-section arrow of $N_{\\Delta_i}$ by the base-change compatibility of [cor-pur-vector-bundle-purity]. Both $\\theta_{f,R}$ and $\\beta_R\\delta_Ra_R^{-1}$ are isomorphisms $\\omega_{f,R}\\to R_X(d)[2d]$; after removing the common shift $[2d]$ both source and target are sheaves in degree zero, so the two maps are sheaf maps by [lem-weil-pbc-derived-single-fully-faithful], and they agree on the cover $\\{X_i\\to X\\}$, hence globally by [lem-pur-sheaf-hom-cover-gluing]. Thus $\\theta_{f,R}=\\beta_R\\delta_Ra_R^{-1}$, independently of the cover. Substitute the three equations proved in Steps 2–3. They give\n$$\\theta_{f,A}^{\\mathrm{dir}}c_f\n=\\beta_A\\delta_Aq_{p_1,\\Delta}(a_R)_A^{-1}\n=(\\beta_R)_A(\\delta_R)_A(a_R)_A^{-1}\n=(\\theta_{f,R})_A.$$\nSince $c_f$ is invertible, $\\theta_{f,A}^{\\mathrm{dir}}=(\\theta_{f,R})_Ac_f^{-1}=\\theta_{f,A}^{(n)}$. This proves clause (2).",
-   "uses": [
-    "thm-pur-diagonal-dualizing-object",
-    "thm-pur-cohomological-smoothness",
-    "thm-pur-dnc-invariance",
-    "cor-pur-vector-bundle-purity",
-    "lem-weil-pbc-derived-single-fully-faithful",
-    "lem-pur-sheaf-hom-cover-gluing"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
-    "place": "Proof (2), combining the diagonal/deformation/vector-bundle comparisons; local-to-global identification of the glued prime-power orientation (cf. thm-pur-diagonal-dualizing-object proof, overlap and gluing steps)"
-   }
-  },
-  {
-   "text": "For the tensor formula at arbitrary finite $A$ we use the actual arbitrary-ring theorem, without applying a DVR-quotient theorem outside its domain. Write $v_T=\\nu_T^*$. The hypotheses of [det-ctf-finite-comparison-whole] hold: the field is $k=\\overline{\\mathbf F}_q$, $A$ is finite and $\\ell$-primary, $\\ell$ differs from the characteristic, and both schemes are finite type. By that theorem and [det-ctf-finite-comparison-localizing], $v_T$ is an equivalence from the ordinary etale derived category to the localizing closure in which the adjoint [sk-prop-sf-existence] is defined, compatible with pullback and compact support. The comparison node explicitly identifies finite-discrete constant rings with the pulled-back condensed rings used in the localizing-closure framework; the module categories here are interpreted through that ring-sheaf isomorphism, and $v_T$ is monoidal by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Apply [thm-asd-smooth-tensor] with $N=\\ell^n$. Its Noetherian and compactifiability hypotheses hold: finite-type schemes over $k$ are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], and the standing scheme setting [sk-def-sfb-dc-setting] supplies a compactification of $f$. This gives the isomorphism $f_{\\mathrm{et}}^*L\\otimes_A^Lf_{\\mathrm{et}}^{\\times}A_Y\\to f_{\\mathrm{et}}^{\\times}L$ for every etale $L$, defined as the transpose of the inverse projection map followed by $1\\otimes\\varepsilon^{\\mathrm{et}}_{A_Y}$. By [lem-pur-finite-ring-site-tensor-transpose](1), $\\nu_X^*$ is an equivalence onto $\\Loc(\\Dctf(X,A))$ and $\\rho_L:\\nu_X^*f^\\times_{\\mathrm{et}}L\\simeq f_A^!\\nu_Y^*L$ is the counit-preserving identification; at $L=A_Y$ it identifies $\\nu_X^*\\omega^{\\mathrm{et}}_f$ with $\\omega_{f,A}$ and $\\nu_Y^*(\\varepsilon^{\\mathrm{et}}_{A_Y})\\circ\\beta_f^{-1}$ with $\\varepsilon_{A_Y}$. Apply [lem-pur-finite-ring-site-tensor-transpose](3), with $\\beta_f$ its compact-support comparison, to $M=\\omega^{\\mathrm{et}}_f$, $K=L$, $e=\\varepsilon^{\\mathrm{et}}_{A_Y}$ and the tensor factors in the order $f^*K\\otimes\\omega$: it says that $\\nu_X^*$ of the etale tensor map, composed with $\\rho_L$, is the transpose of $Rf_!(f^*\\nu_Y^*L\\otimes\\omega_{f,A})\\to\\nu_Y^*L\\otimes Rf_!\\omega_{f,A}\\xrightarrow{1\\otimes\\varepsilon}\\nu_Y^*L$, i.e. the specified pro-etale tensor map of clause (3). Thus $f_A^*K\\otimes_A^L\\omega_{f,A}\\to f_A^!K$ is a natural isomorphism. This applies to our $K$, and [sk-prop-sf-rf-shriek-preservation] gives its stated constructible finite-Tor target.",
-   "uses": [
-    "det-ctf-finite-comparison-whole",
-    "det-ctf-finite-comparison-localizing",
-    "sk-prop-sf-existence",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "thm-asd-smooth-tensor",
     "lem-weil-pbc-finite-type-over-noetherian",
-    "sk-def-sfb-dc-setting",
-    "sk-prop-sf-rf-shriek-preservation",
-    "lem-pur-finite-ring-site-tensor-transpose"
+    "def-asd-compactifiable",
+    "lem-sp-general-ring-orientation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
-    "place": "Proof (3), tensor formula; arbitrary finite-ring version of the cited orientation-free tensor argument"
-   }
+   "elementary": false
   },
   {
-   "text": "The first arrow in $\\gamma_{f,A}(K)$ is tensor reassociation with the Tate line, the second is tensoring the inverse of the isomorphism of Step 1, and the third is the natural tensor isomorphism of Step 5. They are invertible and natural in $K$, so their composite is invertible and natural. To check the choice of exponent, apply Steps 1–4 with any other $n'\\geq1$ such that $\\ell^{n'}A=0$. Both give exactly $\\theta_{f,A}^{\\mathrm{dir}}$, the direct diagonal construction at the fixed ring $A$. The Tate identifications for $\\ell^n$ and $\\ell^{n'}$ are the canonical ones of [lem-asd-etale-finite-twist-pullback], passing through $\\ell^{\\max(n,n')}$ if needed. The integration normalization also agrees for these two presentations; this requires more than identifying the Tate lines. Put $m=\\ell^n$, $M=\\ell^{\\max(n,n')}$ and $v=M/m$. The exact Kummer sequences of [lem-amb-kummer-any-base] for $M$ and $m$ form a commutative diagram with vertical maps $z\\mapsto z^v$ on $\\mu_M\\to\\mu_m$, $z\\mapsto z^v$ on the middle $\\mathbf G_m$, and the identity on the right $\\mathbf G_m$: indeed $(z^v)^m=z^M$. The connecting Chern classes are therefore identified. Concretely, take etale-local $M$-th roots of the transition functions of $\\mathcal O(1)$; their $v$-th powers are $m$-th roots of the same functions, and the corresponding boundary cocycles are related by exactly $\\mu_M\\to\\mu_m$. After extension to A this is the canonical Tate identification already cited. In [def-amb-p1-trace], the decomposition has components the unit and that Chern class, so its inverse and the projection defining $t_q$ are identical under this identification. The ordered affine counits in [lem-amb-affine-space-top-trace] are consequently identical, including the identity for dimension zero. The unique-gluing clause of [def-amb-vector-integration] identifies vector integration at the two exponents. Apply the same argument with $m=\\ell^{n'}$. Thus the vector arrow over A is fixed as well. The affine adjunction normalization in [det-sp-reduction-exceptional] and uniqueness of the normalized family map in [lem-pur-dnc-coefficient-transport] now identify all three direct-construction arrows in both presentations. Therefore $\\theta_{f,A}^{(n)}=\\theta_{f,A}^{(n')}$ and the entire composite $\\gamma_{f,A}(K)$ is independent of $n$. This supplies the missing orientation comparison; a coefficient-comparison cocycle by itself would not compare the prime-power orientations.",
+   "text": "Apply lem-pur-finite-general-ring-tensor-formula at N=ell^n and the supplied ordinary orientation. The exponent is a unit at every stalk because its global-section value is a unit over the finite field. This proves the tensor clause.",
    "uses": [
-    "lem-asd-etale-finite-twist-pullback",
-    "det-sp-reduction-exceptional",
-    "lem-pur-dnc-coefficient-transport",
-    "lem-amb-kummer-any-base",
-    "def-amb-p1-trace",
-    "lem-amb-affine-space-top-trace",
-    "def-amb-vector-integration"
+    "lem-pur-finite-general-ring-tensor-formula"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
-    "place": "Proof (3), naturality and exponent independence"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Apply lem-sp-general-ring-exponent to alpha. Equality alpha followed by b inverse = alpha prime followed by b prime inverse implies equality of the inverse isomorphisms b followed by alpha inverse. Regard sourceToOrigin as the component of a natural transformation in the ordinary line, built from the actual inverse origin counit, sitePullbackIso and the derived tensor comparison. Its naturality moves each common-level line map through sourceToOrigin. Expanding proGamma then leaves comparison of tensoring b followed by alpha inverse and the same smooth tensor mate. The inverse-orientation equality therefore proves equality of the full purity maps, even before restricting to Dctf. Package the witnesses with the two Kummer normalizations and direct orientation normalization.",
+   "uses": [
+    "lem-sp-general-ring-exponent"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "cor-pur-vector-bundle-purity",
-  "def-amb-p1-trace",
-  "def-amb-vector-integration",
-  "def-pur-dnc-section-family",
-  "det-ctf-finite-comparison-localizing",
-  "det-ctf-finite-comparison-whole",
-  "det-sp-reduction-exceptional",
-  "det-sp-scalar-extension-functor",
-  "lem-amb-affine-space-top-trace",
-  "lem-amb-kummer-any-base",
-  "lem-asd-etale-finite-twist-pullback",
-  "lem-pur-diagonal-base-change",
-  "lem-pur-diagonal-regular-immersion",
-  "lem-pur-dnc-coefficient-transport",
-  "lem-pur-finite-ring-site-tensor-transpose",
-  "lem-pur-sheaf-hom-cover-gluing",
-  "lem-weil-pbc-derived-single-fully-faithful",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "sk-def-sfb-dc-setting",
-  "sk-prop-sf-existence",
-  "sk-prop-sf-rf-shriek-preservation",
-  "thm-amb-vector-bundle-purity",
-  "thm-asd-smooth-tensor",
-  "thm-pur-cohomological-smoothness",
-  "thm-pur-diagonal-dualizing-object",
-  "thm-pur-dnc-invariance"
+  "def-asd-compactifiable",
+  "lem-pur-finite-general-ring-tensor-formula",
+  "lem-sp-general-ring-exponent",
+  "lem-sp-general-ring-orientation",
+  "lem-weil-pbc-finite-type-over-noetherian"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
-  "place": "Proof (1)–(3), with missing coefficient/DNC coherence exposed as an unsplit lemma and arbitrary finite-ring tensor-domain check made explicit"
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
+  "place": "Proof (1)-(3), orientation/tensor/exponent decomposition and explicit natural tensor assembly"
  },
  "mathlib_searches": [
   {
@@ -234,28 +133,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-1157f142e (reviewer sub-agent of L); spot-checked: Read in full: the item, all 6 steps, the statements of all 27 cited nodes, the full proof of thm-pur-diagonal-dualizing-object, blueprint main-20261015 sk-thm-smooth-purity-general-ring statement and proof (1)-(3), and the unit sk-thm-smooth-purity. The delivery itself only changes status unsplit->split. The rest of the item matches the base and the Q63-reviewed split. The live and side ledgers show a sync loop ('live completion superseded side split' every ~5 min); the maintainer should settle it. Statement: faithful. It makes the domain explicit (k=F̄_q, separated finite type, f separated, where f^! exists) and fixes the bracketing of clause (1); no clause is weakened. Source error confirmed: proof (3) applies thm-pur-cohomological-smoothness, which covers A_{E,n} only, to arbitrary A (counterexample F_l[e,h]/(e,h)^2). thm-asd-smooth-tensor (any finite A) correctly replaces it. Step 1: hypotheses of det-sp-reduction-exceptional checked, A_{Q_l,n}=Z/l^n, scalar-extension clauses 1 and 3. Step 2: a_A q = c_f (a_R)_A re-derived from the transport lemma's base-change clause (g0=h=f) pulled back along Delta; delta_R equals the thm-pur-dnc-invariance map by uniqueness. Step 3: chart counit (e=id), local identity, then shift removal and gluing; j_A is not assumed invertible. Step 4: matches the affine-cover/gluing construction in the proof of thm-pur-diagonal-dualizing-object. Step 6: Kummer diagram checked (z^v on mu_M->mu_m and on the middle G_m, identity on the right) and matches lem-asd-etale-finite-twist-pullback; one normalization argument, kept. Long steps: step 6 stays. Step 5 (and the one-sentence transport in step 3) hid a comparison lemma: for arbitrary finite A, nu^* carries the etale f^x adjunction, the compact-support projection map and their transposes to the pro-etale ones. The DAG has this only for A_{E,n} (lem-pur-vector-integration-site-comparison); det-sp-et-proet-adjunction-transfer covers Dctf only and has no projection maps. FIX: added the statement-only node lem-pur-finite-ring-site-tensor-transpose (created.item=det-sp-finite-general-ring, blueprint.from = proof (3), same_as=[]), checked on X empty, the zero ring and f=id, and confirmed to create no cycle. Steps 3 and 5 now cite it; lem-weil-pbc-ringed-exchange-tensor-coherence is dropped from step 5; def-pur-dnc-section-family added to step 2 uses; proof_deps recomputed. Accepted tool uses: det-sp-reduction-exceptional, det-sp-scalar-extension-functor, det-ctf-finite-comparison-whole and -localizing, sk-prop-sf-existence, sk-prop-sf-rf-shriek-preservation, thm-asd-smooth-tensor, and the lem-weil-pbc utilities. No SGA.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.SecSmoothPurity.FiniteGeneralRing",
   "declaration": "AlgebraicGeometry.ProEtale.finiteGeneralRingSmoothPurity",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.finiteGeneralRingPrimeSetting",
-   "AlgebraicGeometry.ProEtale.finiteGeneralRingRingFinite",
-   "AlgebraicGeometry.ProEtale.finiteGeneralRingScalarUnitIso",
-   "AlgebraicGeometry.ProEtale.finiteGeneralRingScalar",
-   "AlgebraicGeometry.ProEtale.finiteGeneralRingScalarIso",
-   "AlgebraicGeometry.ProEtale.finiteGeneralRingUnit",
-   "AlgebraicGeometry.ProEtale.finiteGeneralRingDualizingUnitMap",
-   "AlgebraicGeometry.ProEtale.finiteGeneralRingReduction",
-   "AlgebraicGeometry.ProEtale.finiteGeneralRingLevelPower",
-   "AlgebraicGeometry.ProEtale.FiniteGeneralRingKummerComparison",
-   "AlgebraicGeometry.ProEtale.finiteGeneralRingCoefficientMap",
-   "AlgebraicGeometry.ProEtale.finiteGeneralRingOrientationExtension",
-   "AlgebraicGeometry.ProEtale.FiniteGeneralRingAt",
-   "AlgebraicGeometry.ProEtale.finiteGeneralRingSmoothPurity",
-   "AlgebraicGeometry.ProEtale.finiteGeneralRingLevelGamma",
-   "AlgebraicGeometry.ProEtale.FiniteGeneralRingTensorFormula",
-   "AlgebraicGeometry.ProEtale.FiniteGeneralRingLevelIndependence"
+   "AlgebraicGeometry.ProEtale.finiteGeneralRingSmoothPurity"
   ],
   "file": "lean/Sheaf/SecSmoothPurity/FiniteGeneralRing.lean",
   "statement": "theorem finiteGeneralRingSmoothPurity (D : WeilConjectures.FiniteFieldDatum.{u}) (ell : ℕ) [Fact ell.Prime] (hEll : ell ≠ D.p) {X Y : Scheme.{u}} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] [IsSeparated (Y ↘ Spec (.of D.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))] [IsSeparated f] (d : ℕ) [SmoothOfRelativeDimension d f] (n : ℕ) (hn : 1 ≤ n) (A : Type u) [CommRing A] [Finite A] (hA : ((ell ^ n : ℕ) : A) = 0) : ∃ (hX : IsNoetherian X) (hY : IsNoetherian Y) (hqc : QuasiCompact f), ∃ hc : HasCompactification f, FiniteGeneralRingAt (finiteGeneralRingPrimeSetting D ell hEll n hn) A hA d f (Y ↘ Spec (.of D.k)) hX hY hqc hc",
@@ -272,5 +166,15 @@
   "group": "NG",
   "result": "pass",
   "note": "Re-delivery of the H2 RETURN on 504629d2a2c8. Lean module byte-identical (sha256 fb4591d5); item stmt_deps now replace theorem node lem-trf-finite-ring-section-deformation with existing:true definition node def-pur-finite-ring-section-data, which owns Geometry (the only declaration used from that module, no .choose); lean.declarations completed with LevelGamma/TensorFormula/LevelIndependence, all declared in the file. Other snapshot dependency records equal live side records, none overwritten. Independent reread: hypotheses match the node with nothing stronger; omega = exceptional of the actual unit; c is the actual reduction comparison and is asserted iso; theta pinned by c≫theta = scalar-extended diagonalDualizingObject; alpha pinned by OrientationNormalized and linked to theta; proGamma iso, natural, Dctf target; n-independence via max with Kummer-pinned q/b. Edge cases d=0, n=1, A=0, empty schemes OK; statement verbatim; docstrings and report sections present. nt_compile --json rc=0, clean, item 19.3 s at load 77. Advisory: owners of pbcComparisonReduction, unitIso, Tate line/generator, rootsOfUnitySheaf, gmSheaf, HasCompactification, ordinaryFiniteUnit, finite_coefficientExtensionRing still not in stmt_deps; proof-only edge to lem-trf-finite-ring-section-deformation left to the maintainer."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-93ff3",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261025T124336-L-1979690",
+  "kind": "interface",
+  "note": "independent cc review: FiniteGeneralRingData vs the clone's FiniteGeneralRing block (verbatim, string-equal); item theorem signature vs the clone (identical); 2 direct importers compiled against the delivered modules (exit 0); #print axioms (sorryAx only from the split statements and upstream smooth_tensor_duality); unit realized lists vs the removed imports"
  }
 }

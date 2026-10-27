@@ -1,0 +1,282 @@
+{
+ "id": "lem-sf-pod-smooth-dual-reduction-data",
+ "kind": "statement",
+ "title": "Perfect local models, smooth duals and trace contractions under finite reduction",
+ "statement": "Fix distinct primes $p,\\ell$, $q=p^a$ with $a\\geq1$, $k_0=\\mathbf F_q$, $k=\\overline{k_0}$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and $n\\geq m\\geq1$. Put $A_i=\\mathcal O_E/(\\varpi_E^i)$ for $i=n,m$. Let $X_0/k_0$ be smooth, separated of finite type and geometrically connected of pure dimension $d\\geq0$, set $X=X_0\\times_{k_0}k$ and $s=\\operatorname{Spec}k$, and assume $a_X:X\\to s$ is exceptional-adjoint admissible at both stages. Use the small pro-etale coefficient categories, normalized smooth orientation, Tate twists, duals and cohomology of [def-pod-conventions]. Write $F_T=-\\otimes^L_{A_n}A_m$ for derived change of coefficient rings on $T=X,s$, with target the $A_m$-category [lem-pur-derived-change-of-rings].\n\nLet $K_n\\in D^b_{ctf}(X,A_n)$ be site-perfect [def-weil-site-perfect-complex] and put $K_m=F_XK_n$. On every cover with a bounded finite-projective model $P^\\bullet$ for $K_n$, the termwise model $P^\\bullet\\otimes_{A_n}A_m$ represents $K_m$ and is bounded finite-projective. More explicitly, finite-free splittings $P^j\\xrightarrow{i_j}A_{n,U}^{N_j}\\xrightarrow{p_j}P^j$, $p_ji_j=1$, induce splittings of the reduced terms through $A_{m,U}^{N_j}$ with the same ranks and degree bounds. Both models are K-flat. The object $K_m$ lies in $D^b_{ctf}(X,A_m)$ and is site-perfect, and both $K_i$ are perfect over $A_{i,X}$ in [def-pod-perfect-complex-on-x].\n\nPut $K_i^\\vee=R\\mathcal Hom_{A_i}(K_i,A_{i,X})$, $L_i=K_i^\\vee(d)[2d]$, and let $e_i:K_i\\otimes^L_{A_i}L_i\\to A_{i,X}(d)[2d]$ be the shifted twisted evaluation [def-pod-coefficient-dual-on-x]. The complexes $L_i$ are site-perfect objects of $D^b_{ctf}(X,A_i)$. The canonical internal-Hom and twist comparisons give isomorphisms\n$$v:F_X(K_n^\\vee)\\xrightarrow{\\sim}K_m^\\vee,\\qquad \\lambda:F_XL_n\\xrightarrow{\\sim}L_m,$$\ncarrying $F_X(e_n)$ to $e_m$ under the tensor and orientation-unit comparisons. The orientation-induced identifications $\\mathbb D_XK_i\\cong L_i$ commute with these comparisons and with evaluation.\n\nWrite $c_M:F_sR\\Gamma_c(X,M)\\xrightarrow{\\sim}R\\Gamma_c(X,F_XM)$ for the canonical compact-support comparison, natural in $M$. Let $t_i:R\\Gamma_c(X,A_{i,X}(d)[2d])\\to A_i$ be the normalized smooth trace [def-pur-smooth-trace], and define $\\tau_i=t_i\\circ R\\Gamma_c(X,e_i)$. Under $\\lambda$, the tensor comparisons and $F_sA_n\\cong A_m$, one has\n$$F_s(t_n)=t_m\\circ c_{A_{n,X}(d)[2d]},\\qquad F_s(\\tau_n)=\\tau_m\\circ c_{K_n\\otimes^L L_n}.$$\nAll displayed equalities and isomorphisms are in the derived categories; no flatness of $A_m$ over $A_n$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-finite-reduction.proof.md",
+  "place": "First paragraph: site-perfect internal-Hom and evaluation comparisons, normalized trace and smooth orientation; returned proof steps 1-2 and the evaluation/trace part of step 4."
+ },
+ "stmt_deps": [
+  "def-pod-conventions",
+  "def-weil-site-perfect-complex",
+  "def-pod-perfect-complex-on-x",
+  "def-pod-coefficient-dual-on-x",
+  "def-pur-smooth-trace",
+  "lem-pur-derived-change-of-rings",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "Work on any covering member $U$ carrying the stated model $P^\\bullet$. Each term is a retract of $A_{n,U}^{N_j}$. Tensoring a short exact sequence with that term gives a retract of the $N_j$-fold direct sum of the sequence, hence remains exact; thus the terms are flat. The bounded-above flat-complex theorem makes $P^\\bullet$ K-flat. Tensor the splitting maps with $A_{m,U}$: $(p_j\\otimes1)(i_j\\otimes1)=(p_ji_j)\\otimes1=1$, and $A_{n,U}^{N_j}\\otimes_{A_n}A_m=A_{m,U}^{N_j}$. The reduced terms are therefore finite projective with the same finite-free ambient ranks, and zero degrees stay zero. The same retract argument makes them flat, and the same K-flat theorem applies to their bounded complex. K-flat computation of derived change of rings now gives $F_U(K_n|_U)\\cong P^\\bullet\\otimes_{A_n}A_m$. The canonical pullback-composition comparison for the identity-topos coefficient map and restriction to $U$ identifies this with $(F_XK_n)|_U$. Consequently these are local finite-projective models for $K_m$; no projectivity in the global abelian category of sheaves is claimed.",
+   "uses": [
+    "def-weil-site-perfect-complex",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-pur-derived-change-of-rings",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS, lemma-bounded-flat-K-flat; Tag 06YY, lemma-derived-base-change; local retract calculation in the blueprint first paragraph"
+   }
+  },
+  {
+   "text": "The finite-reduction functor in [thm-pur-finite-reduction-of-purity] is explicitly typed $D^b_{ctf}(T,A_n)\\to D^b_{ctf}(T,A_m)$ for separated finite-type $k$-schemes $T$. Apply its domain assertion at $T=X$ to $K_n$ to obtain $K_m\\in D^b_{ctf}(X,A_m)$. Together with the local models of step 1 this proves site-perfectness at both stages. The finite-level definitions of site-perfectness and perfectness over $A_{i,X}$ agree, so both $K_i$ satisfy the latter condition. Here $X$ and $s$ satisfy the scheme hypotheses, $1\\le m\\le n$, and $\\ell$ is invertible because $\\ell\\ne p$.",
+   "uses": [
+    "thm-pur-finite-reduction-of-purity",
+    "def-weil-site-perfect-complex",
+    "def-pod-perfect-complex-on-x"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-finite-reduction.proof.md",
+    "place": "First paragraph: coefficient dual, evaluation and normalized smooth trace"
+   }
+  },
+  {
+   "text": "For $i=n,m$, apply [lem-pod-coefficient-dual-perfect] to $K_i$: the coefficient dual $K_i^\\vee$ is perfect and belongs to $D^b_{ctf}(X,A_i)$. The finite-level twist theorem says $A_{i,X}(d)$ is a locally constant invertible rank-one module and twisting preserves $D^b_{ctf}$. On a common refinement trivializing this line and a finite-projective model for $K_i^\\vee$, tensoring with the line leaves a bounded finite-projective model; shifting by $[2d]$ just reindexes it. Shifts preserve bounded constructibility and finite Tor amplitude by translating the vanishing interval in their definition. Hence $L_i=K_i^\\vee(d)[2d]$ is site-perfect and lies in $D^b_{ctf}(X,A_i)$.",
+   "uses": [
+    "lem-pod-coefficient-dual-perfect",
+    "prop-weil-twist-preserves",
+    "def-weil-site-perfect-complex",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-finite-reduction.proof.md",
+    "place": "First paragraph: coefficient dual, evaluation and normalized smooth trace"
+   }
+  },
+  {
+   "text": "Apply [lem-fix-site-perfect-scalar-hom] with $R=A_{n,X}$, $S=A_{m,X}$, $P=K_n$ and $Q=A_{n,X}$. Its natural isomorphism, followed by the coefficient-unit identification, is exactly $v:F_X(K_n^\\vee)\\xrightarrow{\\sim}K_m^\\vee$. Its statement defines this arrow as the transpose of reduced evaluation, so the evaluation square commutes for this specified arrow. Compose $v(d)[2d]$ with the canonical twist-and-shift reduction isomorphism of [lem-pur-finite-tensor-presentation-reduction]; this is $\\lambda:F_XL_n\\xrightarrow{\\sim}L_m$. That theorem identifies the twist reassociators and shift comparisons, and [lem-fix-operation-reduction] preserves tensor associators and evaluations. Tensoring the evaluation square with the line and applying its shift therefore gives, with $U_i=A_{i,X}(d)[2d]$, the equation $h\\circ F_X(e_n)=e_m\\circ b$, where $h:F_XU_n\\xrightarrow{\\sim}(F_XA_{n,X})(d)[2d]\\xrightarrow{\\sim}U_m$ is the twist-and-shift reduction isomorphism of [lem-pur-finite-tensor-presentation-reduction] at $L=A_{n,X}$ followed by the coefficient-unit identification $F_XA_{n,X}\\cong A_{m,X}$ (the same comparisons [def-pur-finite-reduction-comparisons] used by the vertical maps of [thm-pur-finite-reduction-of-purity]), and $b:F_X(K_n\\otimes^LL_n)\\xrightarrow{\\sim}K_m\\otimes^LL_m$ uses $\\lambda$ and the canonical tensor map.",
+   "uses": [
+    "lem-fix-site-perfect-scalar-hom",
+    "lem-pur-finite-tensor-presentation-reduction",
+    "lem-fix-operation-reduction",
+    "def-pod-coefficient-dual-on-x",
+    "def-pur-finite-reduction-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-finite-reduction.proof.md",
+    "place": "First paragraph: coefficient dual, evaluation and normalized smooth trace"
+   }
+  },
+  {
+   "text": "Apply [thm-sf-dual-perfect] at each finite coefficient stage to the perfect $K_i$. It supplies the orientation-induced isomorphism $\\mathbb D_XK_i\\cong K_i^\\vee(d)[2d]=L_i$, and its stated compatibility with finite reduction and the canonical evaluation gives precisely the square with $v$ and $\\lambda$ of step 4. The normalized orientation is the one fixed in the hypotheses; the finite-reduction purity theorem identifies its reductions with that same normalized orientation at level $m$. Thus no choice of an unrelated duality isomorphism is being substituted.",
+   "uses": [
+    "thm-sf-dual-perfect",
+    "thm-pur-finite-reduction-of-purity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-finite-reduction.proof.md",
+    "place": "First paragraph: coefficient dual, evaluation and normalized smooth trace"
+   }
+  },
+  {
+   "text": "Specialize the compact-support comparison of [lem-fix-operation-reduction] to $a_X:X\\to s$. It gives the canonical natural isomorphism $c_M:F_sR\\Gamma_c(X,M)\\xrightarrow{\\sim}R\\Gamma_c(X,F_XM)$ on the finite-Tor domain. The trace is the exceptional counit after the smooth orientation, as specified by [def-pur-smooth-trace]. Apply the smooth-trace compatibility clause of [thm-pur-finite-reduction-of-purity] to $f=a_X$ and the point coefficient unit. Its vertical twist-and-unit identification on $F_XU_n$ is the $h$ of step 4, since both are built from the finite-reduction comparisons of [def-pur-finite-reduction-comparisons] in the chart normalization fixed by [lem-pur-finite-tensor-presentation-reduction]. Hence its equation is $F_s(t_n)=t_m\\circ R\\Gamma_c(X,h)\\circ c_{U_n}$, which is the first displayed identity of the item under the orientation-unit identification. The admissibility required for the coefficient comparisons of exceptional adjoints is assumed at both stages, and $a_X$ is smooth separated of pure relative dimension $d$.",
+   "uses": [
+    "lem-fix-operation-reduction",
+    "def-pur-smooth-trace",
+    "thm-pur-finite-reduction-of-purity",
+    "def-pur-finite-reduction-comparisons",
+    "lem-pur-finite-tensor-presentation-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-finite-reduction.proof.md",
+    "place": "First paragraph: coefficient dual, evaluation and normalized smooth trace"
+   }
+  },
+  {
+   "text": "Put $B_i=K_i\\otimes^LL_i$. These objects are in $D^b_{ctf}$ by the tensor-preservation theorem, so the comparison may be applied to $e_n:B_n\\to U_n$. Naturality gives\n$$c_{U_n}\\circ F_sR\\Gamma_c(e_n)=R\\Gamma_c(F_Xe_n)\\circ c_{B_n}.$$\nUse functoriality, the trace equation of step 6, and the evaluation equation $h\\circ F_X(e_n)=e_m\\circ b$ of step 4 to compute\n$$\\begin{aligned}\nF_s(\\tau_n)&=F_s(t_n)\\circ F_sR\\Gamma_c(e_n)\\\\\n&=t_m\\circ R\\Gamma_c(h)\\circ R\\Gamma_c(F_Xe_n)\\circ c_{B_n}\\\\\n&=t_m\\circ R\\Gamma_c(e_m)\\circ R\\Gamma_c(b)\\circ c_{B_n}\\\\\n&=\\tau_m\\circ R\\Gamma_c(b)\\circ c_{B_n}.\n\\end{aligned}$$\nUnder $b$ and $F_sA_n\\cong A_m$ this is exactly the second displayed identity. Every functor and comparison used here is derived; the retract and K-flat arguments in step 1 never use flatness of $A_m$ as an $A_n$-module.",
+   "uses": [
+    "lem-sf-tensor-ctf",
+    "lem-fix-operation-reduction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-finite-reduction.proof.md",
+    "place": "First paragraph: coefficient dual, evaluation and normalized smooth trace"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pod-coefficient-dual-on-x",
+  "def-pod-perfect-complex-on-x",
+  "def-pur-finite-reduction-comparisons",
+  "def-pur-smooth-trace",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-site-perfect-complex",
+  "lem-fix-operation-reduction",
+  "lem-fix-site-perfect-scalar-hom",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pod-coefficient-dual-perfect",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-finite-tensor-presentation-reduction",
+  "lem-sf-tensor-ctf",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "prop-weil-twist-preserves",
+  "thm-pur-finite-reduction-of-purity",
+  "thm-sf-dual-perfect"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-finite-reduction.proof.md",
+  "place": "First paragraph, expanded with existing ringed-site K-flat, scalar-Hom, twist and smooth-purity nodes"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite reduction of site perfect constructible complexes preserves coefficient dual evaluation smooth orientation and normalized trace",
+   "results": "8 hits; Algebra.IsStandardSmooth.of_basis_kaehlerDifferential, Algebra.smoothLocus_eq_compl_support_inter, Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential, ClassGroup.fintypeOfAdmissibleOfFinite, Algebra.IsStandardSmoothOfRelativeDimension.out, Algebra.IsStandardSmoothOfRelativeDimension, Algebra.SubmersivePresentation.isStandardSmooth, Algebra.IsStandardSmooth.out",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth ring-map criteria and K-projective complexes do not state finite-coefficient sheaf dual/evaluation/trace comparison; site-free module terms need not be globally projective sheaf objects"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Perfect\", \"baseChange\"",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth ring-map criteria and K-projective complexes do not state finite-coefficient sheaf dual/evaluation/trace comparison; site-free module terms need not be globally projective sheaf objects"
+  },
+  {
+   "tool": "grep",
+   "query": "sitePerfect|site_perfect|smoothTrace|smooth_trace|coefficientDual",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth ring-map criteria and K-projective complexes do not state finite-coefficient sheaf dual/evaluation/trace comparison; site-free module terms need not be globally projective sheaf objects"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived change of coefficients of a perfect sheaf complex preserves its dual evaluation and smooth trace",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reduction modulo a quotient ring of a strictly perfect sheaf complex and its dual is computed by reducing a bounded finite projective model",
+   "results": "8 hits; CochainComplex.isKProjective_of_projective, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CochainComplex.IsKProjective, CategoryTheory.ProjectiveResolution.instIsStrictlyLECochainComplexOfNatInt, CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex, CategoryTheory.ProjectiveResolution.ofComplex, CochainComplex.isKProjective_iff_leftOrthogonal, CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth ring-map criteria and K-projective complexes do not state finite-coefficient sheaf dual/evaluation/trace comparison; site-free module terms need not be globally projective sheaf objects"
+  },
+  {
+   "tool": "grep",
+   "query": "sitePerfect|site_perfect|smoothTrace|smooth_trace|coefficientDual",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary module dual/linear trace, sheaf pullback or abstract derived categories; none states the finite-coefficient site-perfect smooth orientation and normalized compact-support trace comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coefficientDual\", \"tensor\"",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary module dual/linear trace, sheaf pullback or abstract derived categories; none states the finite-coefficient site-perfect smooth orientation and normalized compact-support trace comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived finite coefficient reduction of a site perfect sheaf complex preserves duals evaluation and smooth trace",
+   "results": "8 hits; CategoryTheory.Sheaf.H, localCohomology.diagram, DerivedCategory.Q, Ext, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Sheaf.cohomologyPresheafFunctor",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary module dual/linear trace, sheaf pullback or abstract derived categories; none states the finite-coefficient site-perfect smooth orientation and normalized compact-support trace comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Change of coefficient rings for a perfect sheaf complex commutes with dual evaluation and trace",
+   "results": "8 hits; map_equiv_traceDual, IsBaseChange.toDual_apply, IsBaseChange.toDualBaseChange_tmul, IsBaseChange.toDual, Perfection.coeff_map, LinearMap.trace_baseChange, IsBaseChange.dual, Algebra.trace_eq_of_equiv_equiv",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary module dual/linear trace, sheaf pullback or abstract derived categories; none states the finite-coefficient site-perfect smooth orientation and normalized compact-support trace comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change of bounded finite projective complexes commutes with internal Hom and evaluation on a ringed site",
+   "results": "8 hits; LightCondensed.ihom_map_val_app, LightCondensed.ihomPoints_symm_comp, LightCondensed.ihomPoints_apply, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.ihomPoints",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary module dual/linear trace, sheaf pullback or abstract derived categories; none states the finite-coefficient site-perfect smooth orientation and normalized compact-support trace comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "toDualBaseChange|trace_baseChange",
+   "results": "7 hits; Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Charpoly/BaseChange.lean, Mathlib/LinearAlgebra/Dual/BaseChange.lean, Mathlib/LinearAlgebra/Dual/BaseChange.lean, Mathlib/LinearAlgebra/Dual/BaseChange.lean, Mathlib/LinearAlgebra/Dual/BaseChange.lean, Mathlib/LinearAlgebra/Dual/BaseChange.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary module dual/linear trace, sheaf pullback or abstract derived categories; none states the finite-coefficient site-perfect smooth orientation and normalized compact-support trace comparisons"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "thm-pod-finite-reduction",
+  "date": "2026-10-22",
+  "group": "Q149"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": "thm-pod-finite-reduction",
+   "place": "First paragraph: site-perfect internal-Hom and evaluation comparisons, normalized trace and smooth orientation; returned proof steps 1-2 and the evaluation/trace part of step 4.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-pod-smooth-dual-reduction-data",
+  "worker": "stage1",
+  "summary": "Expanded local reduced retract models, K-flat computation, coefficient-dual and shifted evaluation comparison, normalized orientation/trace, and explicit compact-support naturality composition. Reused existing nodes throughout, with no new nodes and no statement change.",
+  "blueprint": "Realizes the first paragraph of thm-pod-finite-reduction.proof.md: site-perfect internal Hom/evaluation via lem-fix-operation-reduction, normalized trace and orientation via thm-pur-finite-reduction-of-purity, and the thm-sf-dual-perfect identification.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Ringed-site K-flat criterion for the two explicit bounded local retract models; it supplies no geometric duality or purity route."
+   },
+   {
+    "node": "lem-pod-coefficient-dual-perfect",
+    "why": "Generic perfect coefficient-dual preservation including the constructible finite-Tor domain; used at each stage before twisting."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic pullback-composition comparison identifies coefficient change of the restricted local model with restriction of the global coefficient change."
+   },
+   {
+    "node": "lem-sf-tensor-ctf",
+    "why": "Generic tensor closure types the input of the compact-support comparison in the final naturality square."
+   },
+   {
+    "node": "prop-weil-twist-preserves",
+    "why": "Generic rank-one twist and finite-Tor constructibility preservation; it supplies the local line trivialization used to preserve site-perfectness."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pod-coefficient-dual-perfect",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sf-tensor-ctf",
+  "prop-weil-twist-preserves"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-6b92a06b2",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-6b92a06b2 (reviewer sub-agent of L); spot-checked: Read the item's 7 steps and every cited statement, plus the blueprint source main-20261015 thm-pod-finite-reduction.proof.md (first paragraph). The steps follow its route: lem-fix-operation-reduction, thm-pur-finite-reduction-of-purity, thm-sf-dual-perfect. The delivery adds no new nodes and changes no statement. The item was created by Q149 on 2026-10-22 with an empty proof, so the 10-21 re-split rule does not apply. I found no cycle. Hypotheses checked: in step 1, the retract argument gives flat terms, lem-pc-bounded-above-flat-kflat-site gives K-flatness and the composition comparison handles restriction. In step 4, lem-fix-site-perfect-scalar-hom applies with P=K_n, Q=R; its site-perfectness agrees with def-weil-site-perfect-complex because the site has a final object, and its map is the transpose of evaluation. In step 6 I checked smoothness and separatedness of a_X and admissibility at both stages. I recomputed the step 7 chain of equalities and it is correct. Batch 5: the item's proof adds 0 nodes to the batch-5 closure. The three flagged paths end at generic nodes: lem-pod-closed-uncurry-laws (closed-monoidal uncurry laws) and lem-trf-site-functorial-flat-resolution (functorial flat resolutions on a site). The content itself (finite-coefficient reduction of duality and trace) is not given by either assumption; the scope of nt-assume-poincare-duality explicitly excludes perfect pairings and compatibilities. All three are accepted. The worker's tool_uses are generic and acceptable. FIX: step 4 used the comparison h without defining it, and step 6 depends on it. Step 4 now defines h as the twist/shift reduction of lem-pur-finite-tensor-presentation-reduction followed by the unit comparison. Step 6 now justifies that the purity square's vertical map is this h via def-pur-finite-reduction-comparisons, which is added to proof_deps; it is already a stmt_dep of the purity theorem, so the closure is unchanged. Advisory: step 2 could also cite det-sp-scalar-extension-functor(2).; 1 file(s) fixed by the reviewer"
+ }
+}

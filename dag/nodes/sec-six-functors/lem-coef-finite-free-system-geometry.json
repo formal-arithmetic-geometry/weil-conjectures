@@ -1,0 +1,138 @@
+{
+ "id": "lem-coef-finite-free-system-geometry",
+ "kind": "lemma",
+ "title": "Restriction preserves normalized geometric generators",
+ "statement": "Fix a prime l, finite extensions E,L of Q_l, an embedding i:E→L, and finite-field datum D. Use the towers and normalized comparison types of [def-coef-finite-free-system-data]. Assume ScalarAssertions for every separated finite-type D-scheme. Then there exists Geometry G with Compatibility G: the sectionwise ordinary direct-image comparison, its inverse pullback mate, invertible derived direct-image and open mates, and constant coefficient pullback comparison preserve the specified identity maps, compositors, clopen projectors, beta, alpha and gamma on whole derived systems. No reduced-basis or ramified-ideal assertion, and no compactification-word equation, is included.",
+ "stmt_deps": [
+  "def-coef-finite-free-system-data",
+  "def-weil-finite-field-fiber",
+  "def-coef-semilinear-derived-calculus"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/sk-prop-scalar-six.proof.md",
+  "place": "Compact support comparison formed from the same pullback identifications and adjunction maps (lines 47--53), and ambient comparison maps constructed as conjugates and mates (lines 106--112); specialization of the original restriction proof Steps 6--12."
+ },
+ "proof": [
+  {
+   "text": "for each scheme map, ordinary direct image and coefficient restriction\nhave identical underlying section groups and transition maps. Their identity\ncomparison is linear and natural. Its inverse adjunct is the inverse-image\ncomparison, invertible because inverse image commutes with restriction of the\nidentified constant scalar actions. This constructs OrdinarySquare with its mate\nand section equations. ScalarAssertions gives preservation of K-injectives, so\nboth sides of the derived direct-image comparison are computed on the same\nK-injective systems. The derived adjoint-square comparison identifies this\nisomorphism with the specified right mate. For an open immersion, extension by\nzero is unchanged on the open and zero on its complement. The same identity\ncomparison is compatible with the open Hom bijection, and exact localization\nmakes the specified open mate invertible. The coefficient push map is obtained\nby restricting the upper constant-section structural map; its pullback adjunct\nis invertible since inverse image preserves the constant coefficient sections.\nSection identities preserve ordinary direct-image identities and compositors.\nAdjunction conjugation and mate pasting preserve the pullback, derived direct-image\nand open identities and compositors. The clopen projector is identity on the open\nsummand and zero on the complementary summand, and restriction preserves both.\nThe Cartesian open comparison beta is the transpose of its normalized unit and\npullback comparison, so it is preserved. The word defining alpha consists of beta,\nthis clopen projector and the compositors. Each factor is preserved. Its proper\nright mate gamma is the unit--alpha--counit word, hence is preserved by the same\nmate-pasting identities. These are equations before evaluation or inverse limit;\nno faithfulness of derived evaluation is used.",
+   "uses": [
+    "lem-kun-derived-adjoint-square-comparison",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sf-kinjective-derived-map-computation",
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sf-open-tensor-normalization",
+    "def-weil-exact-derived-adjunction",
+    "lem-weil-pbc-mate-pasting",
+    "def-sf-semilinear-proper-open-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-derived-adjoint-square-comparison",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sf-kinjective-derived-map-computation",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-open-tensor-normalization",
+  "def-weil-exact-derived-adjunction",
+  "lem-weil-pbc-mate-pasting",
+  "def-sf-semilinear-proper-open-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/sk-prop-scalar-six.proof.md",
+  "place": "Compact support comparison formed from the same pullback identifications and adjunction maps (lines 47--53), and ambient comparison maps constructed as conjugates and mates (lines 106--112); specialization of the original restriction proof Steps 6--12."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars for sheaves of modules commutes with derived pushforward and extension by zero",
+   "results": "SheafOfModules.pushforwardSections, PresheafOfModules.restrictScalars and ModuleCat.restrictScalars; no whole-system normalization and coherence assertion.",
+   "date": "2026-10-26",
+   "verdict": "Generic constructions only, not these specialized statements."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "restrictScalars, instAdditiveRestrictScalars, restrictScalars_obj_val, restrictScalars_map_val.",
+   "date": "2026-10-26",
+   "verdict": "Restriction is present, but neither scalar normalization nor geometric-generator coherence is stated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars preserves pullback pushforward extension by zero adjunction mates and compositors for sheaf systems",
+   "results": "SheafOfModules.pullbackComp, pullbackPushforwardAdjunction and unit-section helpers; no simultaneous semilinear system result.",
+   "date": "2026-10-26",
+   "verdict": "Useful general tools, no exact specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "rg scalarAssertions|geometryCompatibility|Compatibility.*Geometry lean/Sheaf lean/WeilConjectures; rg restrictScalars.*(exact|IsKInjective)|Normalized|torAmplitudeIn Mathlib/Algebra/Category/ModuleCat/Sheaf Mathlib/Algebra/Homology/DerivedCategory",
+   "results": "Only the assigned module defines the specialized ScalarAssertions and Compatibility. No matching Mathlib scalar-normalization theorem.",
+   "date": "2026-10-26",
+   "verdict": "New genuine intermediate steps required."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "finite free system; restriction scalar",
+   "results": "No blueprint nodes match either query. Current scalar-six proof describes finite sums and compatible adjunction maps.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate specialized node found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteFreeSystemRestriction",
+  "date": "2026-10-26",
+  "group": "H3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-rational-operations",
+   "place": "Finite-free system restriction proof Steps 2--5 (scalar part) and Steps 6--12 (geometric part); agent expansion of the coefficient comparison.",
+   "via": [
+    "lem-coef-finite-free-system-restriction",
+    "lem-coef-finite-free-compact-composition",
+    "lem-coef-dual-formula-scalar-transpose"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteFreeSystemGeometry",
+  "file": "lean/Sheaf/Paper/FiniteFreeSystemGeometry.lean",
+  "declaration": "WeilConjectures.FiniteFreeSystemRestriction.geometryCompatibility_of_scalars",
+  "statement": "theorem geometryCompatibility_of_scalars (D : FiniteFieldDatum.{u})\n    (s : ∀ X : Spaces D, ScalarAssertions l E L i X.val.left) :\n    Nonempty {G : Geometry l E L i D // Compatibility l E L i G}",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-4aa84",
+  "group": "H3",
+  "result": "fix",
+  "landing": "20261026T023301-L-540319",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-4aa84",
+  "group": "H3",
+  "result": "fix",
+  "landing": "20261026T023301-L-540319",
+  "kind": "interface",
+  "note": "independent cc review: delivered FiniteFreeSystemRestriction{,Data,Scalars,Geometry} vs live module (verbatim move except U/compactIso/compactCompositionWord, declared in change record); item proof vs Assertions; sorried lemmas vs original fields; nodes vs live"
+ }
+}

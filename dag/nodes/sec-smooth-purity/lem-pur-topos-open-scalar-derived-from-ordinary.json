@@ -1,0 +1,136 @@
+{
+ "id": "lem-pur-topos-open-scalar-derived-from-ordinary",
+ "kind": "statement",
+ "title": "Deriving open scalar balancing from ordinary unit generators",
+ "statement": "Let (C,J), A,R,S,a and ET,EV be as in [def-pur-topos-open-scalar-section-data]. Suppose ordinary natural isomorphisms rho:E_T L_S ≅ L_R E_V and tau:I_R E_T ≅ E_V I_S are supplied with their pure-tensor and extension-unit-generator formulas. Then there are isomorphisms lambda:T_T D(L_S) ≅ D(L_R) T_V and beta:D(I_R) T_T ≅ T_V D(I_S). They satisfy the precise cochain representative equations in the Lean declaration for every K-flat complex. For every M, T_V(eta_R,M) followed by lambda inverse at I_R M and L_S(beta_M) equals eta_S,T_V M. The units are those of the actual normalized extension/restriction adjunctions. No subterminality, flatness of a, boundedness or points assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 04IE, 0E8I; sites-cohomology.tex Tag 0GL1, coefficient-linear unit refinement."
+ },
+ "stmt_deps": [
+  "def-pur-topos-open-scalar-section-data",
+  "def-weil-pbc-topos",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-exact-derived-adjunction",
+  "def-weil-pbc-ringed-presentation-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Construct the normalized derived scalar adjunctions from their prescribed universal cochain pairs. Restriction of scalars and site restriction commute on sections; localize their exact square. Its scalar-adjunction mate gives lambda. On flat-term K-flat resolutions, the algebraic inverse-image K-flat theorem and the scalar counits make this mate invertible, hence it is invertible everywhere by naturality and resolution. The normalized derived-mate comparison gives the representative formula on all complexes, in particular all the requested K-flat complexes.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-hom-comparison",
+    "lem-pur-derived-mate-comparison",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The supplied ordinary extension comparison tau satisfies its scalar Hom transpose identity by its formula on unit tensor generators. Compose the normalized open exact and scalar adjunctions in both orders. Adjoint uniqueness along the localized right square gives beta, and normalized-adjunction uniqueness gives its cochain representative identity.",
+   "uses": [
+    "lem-pur-normalized-adjunction-composition",
+    "def-weil-exact-derived-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The twofold mates identity identifies the open mate of beta inverse with the inverse restriction tensor mate. The adjunction unit-mate formula, followed by restriction of beta and cancellation of its inverse, gives the displayed unit coherence.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-sheaf-ring-derived-hom-comparison",
+  "lem-pur-derived-mate-comparison",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-normalized-adjunction-composition",
+  "def-weil-exact-derived-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 04IE and 0E8I; derived lift Tag 0GL1 and normalized adjunction mate argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor product commutes with restriction to an open subtopos and preserves the extension by zero adjunction unit",
+   "results": "Scheme.Modules.restrictAdjunction, restrictAdjunction_unit_app_app; ordinary scheme restrictions only.",
+   "date": "2026-10-24",
+   "verdict": "no match: does not give arbitrary-topos derived extension or specified unit normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "mateEquiv, unit_mateEquiv_symm, iterated_mateEquiv_conjugateEquiv_symm in Mathlib.CategoryTheory.Adjunction.Mates.",
+   "date": "2026-10-24",
+   "verdict": "generic categorical ingredients only; no sheaf coefficient comparison or derived representative equations."
+  },
+  {
+   "tool": "grep",
+   "query": "unit_mateEquiv|iterated_mateEquiv|derivedMate_comparison in Mathlib",
+   "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean: unit_mateEquiv (136), unit_mateEquiv_symm (151), iterated_mateEquiv_conjugateEquiv (464); no derived sheaf counterpart.",
+   "date": "2026-10-24",
+   "verdict": "no match for derived lift; basic section data are constructions using existing module sheafification."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ToposOpenScalarUnit",
+  "date": "2026-10-24",
+  "group": "R7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Purity transport Step 1 and Step 3, coefficient compatibility of the open constituent: normalization of scalar balancing by the actual open-adjunction unit, before taking an inverse-exchange adjunct.",
+   "via": [
+    "lem-pur-topos-open-scalar-unit",
+    "lem-pur-topos-scalar-inverse-exchange-mate",
+    "lem-pur-finite-free-compact-composition",
+    "lem-pur-finite-universal-smooth-trace",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ToposOpenScalarDerivedFromOrdinary",
+  "file": "lean/Sheaf/CategoryTheory/ToposOpenScalarDerivedFromOrdinary.lean",
+  "declaration": "SheafOfModules.ToposOpenScalar.exists_toposOpenScalarDerivedFromOrdinary",
+  "statement": "theorem exists_toposOpenScalarDerivedFromOrdinary\n    (ET : DerivedChangeOfRingsCochainModel.{u, u, u, w, w} a)\n    (EV : DerivedChangeOfRingsCochainModel.{u, u, u, w, w} (sliceMap A a))\n    (rho : ET.E ⋙ restriction S A ≅ restriction R A ⋙ EV.E)\n    (hrho : (∀ (M : ringedSiteModules.{u} (derivedChangeRingIndependentCoefficients J R))\n        (U : Cᵒᵖ) (f : A.obj.obj U) (m : M.val.obj U) (s : S.obj.obj U),\n        (rho.hom.app M).val.app (elementObj A U f) (tensorSection a ET M U m s) =\n          tensorSection (sliceMap A a) EV\n            ((restriction R A).obj M)\n            (elementObj A U f) m s))\n    (tau : extension R A ⋙ ET.E ≅ EV.E ⋙ extension S A)\n    (htau : (∀ (M : ringedSiteModules.{u}\n          (derivedChangeRingIndependentCoefficients (elementTopology A) (presentationElementRing\n            R A)))\n        (U : Cᵒᵖ) (f : A.obj.obj U) (m : M.val.obj (elementObj A U f)) (s : S.obj.obj U),\n        (tau.hom.app M).val.app U\n            (tensorSection a ET _ U\n              (extensionSection R A M U f m) s) =\n          extensionSection S A (EV.E.obj M) U f\n            (tensorSection (sliceMap A a) EV M (elementObj A U f) m s))) :\n    ∃ (lambda : ET.T ⋙ (restriction S A).mapDerivedCategory.{w, w} ≅\n        (restriction R A).mapDerivedCategory.{w, w}\n          ⋙ EV.T)\n      (beta : (extension R A).mapDerivedCategory.{w, w} ⋙ ET.T ≅\n        EV.T ⋙ (extension S A).mapDerivedCategory.{w, w}),\n      (∀ (P : CochainComplex\n          (ringedSiteModules.{u} (derivedChangeRingIndependentCoefficients J R)) ℤ),\n        CochainComplex.IsKFlatIndependentCoefficients (R := R) P →\n        (restriction S A).mapDerivedCategory.{w, w}.map\n            (ET.ε.app P) ≫\n          (restriction S A).mapDerivedCategoryFactors.{w, w}.hom.app ((ET.E.mapHomologicalComplex\n            (.up ℤ)).obj P) ≫\n          DerivedCategory.Q.{w}.map ((NatIso.mapHomologicalComplex rho (.up ℤ)).hom.app P) =\n        lambda.hom.app (DerivedCategory.Q.{w}.obj P) ≫\n          EV.T.map ((restriction R A).mapDerivedCategoryFactors.{w, w}.hom.app P) ≫\n          EV.ε.app (((restriction R A).mapHomologicalComplex (.up ℤ)).obj P)) ∧\n      (∀ (P : CochainComplex (ringedSiteModules.{u}\n          (derivedChangeRingIndependentCoefficients (elementTopology A) (presentationElementRing\n            R A))) ℤ),\n        CochainComplex.IsKFlatIndependentCoefficients (R := presentationElementRing R A) P →\n        ET.T.map ((extension R A).mapDerivedCategoryFactors.{w, w}.hom.app P) ≫\n          ET.ε.app (((extension R A).mapHomologicalComplex (.up ℤ)).obj P) ≫\n          DerivedCategory.Q.{w}.map ((NatIso.mapHomologicalComplex tau (.up ℤ)).hom.app P) =\n        beta.hom.app (DerivedCategory.Q.{w}.obj P) ≫\n          (extension S A).mapDerivedCategory.{w, w}.map (EV.ε.app P) ≫\n          (extension S A).mapDerivedCategoryFactors.{w, w}.hom.app ((EV.E.mapHomologicalComplex\n            (.up ℤ)).obj P)) ∧\n      (∀ M : DerivedCategory (ringedSiteModules.{u}\n          (derivedChangeRingIndependentCoefficients (elementTopology A) (presentationElementRing\n            R A))),\n        EV.T.map ((OpenTensorNormalization.exactDerivedAdjunction.{u + 1, u, w}\n          (normalizedAdjunction R A)).unit.app M) ≫\n          lambda.inv.app ((extension R A).mapDerivedCategory.{w, w}.obj M) ≫\n          (restriction S A).mapDerivedCategory.{w, w}.map (beta.hom.app M) =\n        (OpenTensorNormalization.exactDerivedAdjunction.{u + 1, u, w}\n        (normalizedAdjunction S A)).unit.app\n          (EV.T.obj M))",
+  "branch": "sheaf-dag",
+  "by": "R7",
+  "date": "2026-10-24"
+ },
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-7b71a",
+  "group": "R7",
+  "result": "pass",
+  "landing": "20261024T234251-L-2548466",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-7b71a",
+  "group": "R7",
+  "result": "pass",
+  "landing": "20261024T234251-L-2548466",
+  "kind": "interface",
+  "note": "independent cc review: the residual derived-from-ordinary statement against its node and the DerivedChangeOfRingsCochainModel structure, judged true; the moved section defs against the clone HEAD of ToposOpenScalarUnit, verbatim; the item node proof/proof_deps against the Lean assembly; importers of the item, none"
+ }
+}

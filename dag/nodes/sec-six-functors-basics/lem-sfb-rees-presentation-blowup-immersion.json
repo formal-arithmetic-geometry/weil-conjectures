@@ -1,0 +1,336 @@
+{
+ "id": "lem-sfb-rees-presentation-blowup-immersion",
+ "kind": "statement",
+ "title": "Chart-compatible blowup immersion from a graded Rees presentation",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $\\mathcal I\\subseteq\\mathcal O_X$ a finite-type quasi-coherent ideal [pqf-def-coherent], and $b:B=\\operatorname{Bl}_{\\mathcal I}X\\to X$ the ordinary glued blowup [def-nagata-global-blowup]. Let $\\mathcal C$ be a quasi-coherent graded $\\mathcal O_X$-algebra with $\\mathcal C_0=\\mathcal O_X$ [def-weil-pbc-graded-sheaf-structures] [def-weil-pbc-quasi-coherent-algebra]. Suppose that, for every affine open $V=\\operatorname{Spec}R\\subseteq X$, with $I_V=\\Gamma(V,\\mathcal I)$, a graded $R$-algebra isomorphism\n$$\\theta_V:\\Gamma(V,\\mathcal C)\\xrightarrow{\\sim}\\mathcal R_R(I_V)$$\nis given [def-nagata-rees-algebra], is the identity in degree zero, and commutes with affine restrictions via coefficientwise restriction of Rees algebras; on $D(s)\\subseteq V$ this restriction sends $xt^n$ to $(x/1)t^n$. Suppose also that $\\varphi:\\operatorname{Sym}(\\mathcal I)\\to\\mathcal C$ is a degree-preserving morphism surjective in every degree on affine opens, where the source has the canonical symmetric grading [def-trf-canonical-symmetric-graded-algebra].\n\nThere is a unique isomorphism $e:B\\xrightarrow{\\sim}\\operatorname{Proj}_X(\\mathcal C)$ over $X$ [def-nagata-relative-proj] whose restriction over each affine $V$ is the contravariant Proj isomorphism induced by $\\theta_V$, with the canonical local identification $b^{-1}(V)=\\operatorname{Proj}(\\mathcal R_R(I_V))$ [def-nagata-affine-blowup]. In particular, these local isomorphisms agree on arbitrary overlaps, interpreted through affine refinements. Applying relative Proj to $\\varphi$ and composing with $e$ defines a closed immersion over $X$\n$$j:B\\hookrightarrow\\operatorname{Proj}_X(\\operatorname{Sym}(\\mathcal I))=\\mathbf P_X(\\mathcal I).$$\nHere $\\mathbf P_X(\\mathcal I)$ is the projective bundle of [def-trf-projective-bundle-morphism]. The restriction of $j$ over each affine $V$ is the Proj morphism of $\\operatorname{Sym}_R(I_V)\\xrightarrow{\\varphi_V}\\Gamma(V,\\mathcal C)\\xrightarrow{\\theta_V}\\mathcal R_R(I_V)$, and the projective-bundle projection composed with $j$ is $b$. No integrality, Noetherian or nonzero-ideal hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 02NS (lemma-blowing-up-projective), proof: identification with relative Proj and embedding in the projective bundle; constructions.tex Tags 01NQ (lemma-glue-relative-proj) and 07ZK (lemma-surjective-generated-degree-1-map-relative-proj)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-nagata-global-blowup",
+  "def-weil-pbc-graded-sheaf-structures",
+  "def-weil-pbc-quasi-coherent-algebra",
+  "def-nagata-rees-algebra",
+  "def-trf-canonical-symmetric-graded-algebra",
+  "def-nagata-relative-proj",
+  "def-nagata-affine-blowup",
+  "def-trf-projective-bundle-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\mathcal R=\\bigoplus_{n\\geq0}\\mathcal I^n$. Apply [lem-sfb-sheaf-rees-symmetric-presentation] to obtain the graded coefficient isomorphisms $\\alpha_V:\\Gamma(V,\\mathcal R)\\simeq\\mathcal R_R(I_V)$, identity in degree zero and compatible with all affine restrictions. Apply [lem-sfb-blowup-rees-symmetric-presentation] to obtain $e_0:B\\simeq\\operatorname{Proj}_X(\\mathcal R)$ over $X$. Its affine restriction is the coefficient identification, so the comorphism of $(e_0)_V$ on homogeneous localizations is induced by $\\alpha_V$. These results assume only that $\\mathcal I$ is quasi-coherent; in particular the given finite-type ideal satisfies their hypotheses.",
+   "uses": [
+    "lem-sfb-sheaf-rees-symmetric-presentation",
+    "lem-sfb-blowup-rees-symmetric-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02NS (lemma-blowing-up-projective), displayed Rees algebra and identification of the blowup with its relative Proj"
+   }
+  },
+  {
+   "text": "For every affine $V$, set $\\gamma_V=\\alpha_V^{-1}\\theta_V:\\Gamma(V,\\mathcal C)\\simeq\\Gamma(V,\\mathcal R)$. For an affine inclusion $W\\subseteq V$, both $\\alpha$ and $\\theta$ intertwine restriction with the same coefficientwise Rees restriction; cancelling $\\alpha_W$ gives $\\gamma_W\\operatorname{res}_{\\mathcal C}=\\operatorname{res}_{\\mathcal R}\\gamma_V$. The inverse maps satisfy the inverse equality. Thus these maps give a base-linear graded isomorphism $\\gamma:\\mathcal C\\simeq\\mathcal R$ in the affine-basis presentation. Use [def-sfb-relative-proj-iso-of-graded-iso] to form $F:\\operatorname{Proj}_X(\\mathcal R)\\simeq\\operatorname{Proj}_X(\\mathcal C)$ and set $e=F\\circ e_0$. For homogeneous $f\\in\\Gamma(V,\\mathcal C)_d$, $d>0$, its chart comorphism is\n$$a/f^m\\longmapsto\\gamma_V(a)/\\gamma_V(f)^m\\longmapsto\\alpha_V\\gamma_V(a)/(\\alpha_V\\gamma_V(f))^m=\\theta_V(a)/\\theta_V(f)^m.$$\nHence $e_V$ is precisely the contravariant Proj isomorphism of $\\theta_V$, not just an unspecified isomorphism of the local schemes. It lies over $X$, since its maps on degree-zero scalars are the identity and the structural maps of [def-nagata-relative-proj] are induced by these scalars.",
+   "uses": [
+    "def-sfb-relative-proj-iso-of-graded-iso",
+    "def-nagata-relative-proj"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01MY (lemma-morphism-proj), 01MZ (lemma-morphism-proj-transitive), 01NQ (lemma-glue-relative-proj); specialization to the composite graded isomorphism"
+   }
+  },
+  {
+   "text": "For affine $V,W\\subseteq X$, cover $V\\cap W$ by affine opens $T\\subseteq V\\cap W$, using [lem-weil-pbc-affine-opens-basis]. The restriction compatibility in [def-sfb-relative-proj-iso-of-graded-iso], the compatibility of $e_0$ from Step 1, and the identity $\\alpha_T\\gamma_T=\\theta_T$ show that both local restrictions of $e$ on $b^{-1}(T)$ are the map of $\\theta_T$. Therefore they agree on $b^{-1}(V\\cap W)$ by [lem-weil-pbc-scheme-morphism-gluing]. If $e'$ has the required affine restrictions, its underlying morphism equals $e$ on every $b^{-1}(V)$; these opens cover $B$, so the same gluing uniqueness gives $e'=e$. The inverse of an isomorphism is determined by its forward map, which proves uniqueness as an isomorphism. No intersection of affine opens is assumed affine.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "def-sfb-relative-proj-iso-of-graded-iso",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NQ (lemma-glue-relative-proj), affine restrictions; uniqueness from gluing morphisms on the inverse-image open cover"
+   }
+  },
+  {
+   "text": "On each affine $V$, every element of $\\Gamma(V,\\mathcal C)$ is a finite sum of homogeneous elements. Lift each summand in its degree under $\\varphi_V$ and sum the lifts. Thus the assumed degreewise surjectivity implies surjectivity of the whole graded algebra map on every affine open. Apply clause (3) of [prop-nagata-relative-proj-functoriality] to obtain the induced closed immersion\n$$q:\\operatorname{Proj}_X(\\mathcal C)\\hookrightarrow\\operatorname{Proj}_X(\\operatorname{Sym}(\\mathcal I)).$$\nDefine $j=q\\circ e$.",
+   "uses": [
+    "prop-nagata-relative-proj-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02NS (lemma-blowing-up-projective), application of the surjective relative-Proj theorem; Constructions Tag 07ZK (lemma-surjective-generated-degree-1-map-relative-proj)"
+   }
+  },
+  {
+   "text": "Let $A=\\operatorname{Sym}_R(I_V)$. The canonical symmetric grading [def-trf-canonical-symmetric-graded-algebra] has $A_n=(\\operatorname{im}\\iota)^n$, so $A$ is generated by $A_1$ over $R$. Apply the chart assertion of [lem-sfb-graded-proj-quotient-twist-comparison] to the surjective map $\\varphi_V:A\\to\\Gamma(V,\\mathcal C)$. For $f\\in A_d$, $d>0$, its chart comorphism is $a/f^m\\mapsto\\varphi_V(a)/\\varphi_V(f)^m$. Composing with the Step 2 chart map for $e$ gives\n$$a/f^m\\longmapsto (\\theta_V\\varphi_V)(a)/(\\theta_V\\varphi_V)(f)^m.$$\nThe inverse-image chart is $D_+((\\theta_V\\varphi_V)(f))$, so this identifies $j_V$ with the Proj morphism of the asserted composite, including its domain charts. These formulas fix every base scalar $r\\in R$ because $\\varphi_V$ and $\\theta_V$ are $R$-linear. By the structural-map description in [def-nagata-relative-proj], the projection composed with $j$ equals $b$ over every affine $V$; gluing uniqueness [lem-weil-pbc-scheme-morphism-gluing] gives the equality globally. Finally [def-trf-projective-bundle-morphism] identifies the target with $\\mathbf P_X(\\mathcal I)$; its finite-type quasi-coherent module hypothesis is exactly the hypothesis on $\\mathcal I$.",
+   "uses": [
+    "def-trf-canonical-symmetric-graded-algebra",
+    "lem-sfb-graded-proj-quotient-twist-comparison",
+    "def-nagata-relative-proj",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-trf-projective-bundle-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01MY (lemma-morphism-proj) and 07ZK (lemma-surjective-generated-degree-1-map-relative-proj), affine chart formulas; divisors.tex Tag 02NS (lemma-blowing-up-projective), target projective bundle"
+   }
+  },
+  {
+   "text": "The composite $j=q\\circ e$ is a closed immersion directly from [def-weil-closed-immersion]: its underlying map is the homeomorphism $e$ followed by the homeomorphism of $q$ onto its closed image. For its structure sheaf map, the map for $q$ is surjective and the subsequent map induced by the scheme isomorphism $e$ is an isomorphism. Their composite is surjective. Thus $j$ has both defining properties of a closed immersion. This uses no condition on the ideal beyond those already stated.",
+   "uses": [
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Definition Tag 01IO (definition-immersion), closed immersion; invariance under a source isomorphism by the defining two properties"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-relative-proj",
+  "def-sfb-relative-proj-iso-of-graded-iso",
+  "def-trf-canonical-symmetric-graded-algebra",
+  "def-trf-projective-bundle-morphism",
+  "def-weil-closed-immersion",
+  "lem-sfb-blowup-rees-symmetric-presentation",
+  "lem-sfb-graded-proj-quotient-twist-comparison",
+  "lem-sfb-sheaf-rees-symmetric-presentation",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "prop-nagata-relative-proj-functoriality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 02NS (lemma-blowing-up-projective), proof; constructions.tex Tags 01MY, 01NQ and 07ZK, with the affine graded-isomorphism formulas written out"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A graded surjection from the symmetric algebra of a quasi coherent ideal to a graded sheaf algebra with compatible affine Rees presentations gives a canonical closed immersion of the glued blowup into the projective bundle of that ideal",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.Spec_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {R : CommRingCat} {f : X ⟶ AlgebraicGeometry.Spec R},\\n  AlgebraicGeometry.IsClosedImmersion f ↔\\n    ∃ I e,\\n      f =\\n        CategoryTheory.CategoryStruct.comp e.hom (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))\", \"doc\": \"A morphism $ f: X \\\\to \\\\operatorname{Spec}(R) $ is a closed immersion if and only if there exists an ideal $ I \\\\subseteq R $ and an isomorphism $ X \\\\cong \\\\operatorname{Spec}(R/I) $ such that $ f $ equa\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionGlueDataObjι\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) (U : ↑X.affineOpens),\\n  AlgebraicGeometry.IsPreimmersion (I.glueDataObjι U)\", \"doc\": \"For a scheme $X$ with ideal sheaf data $\\\\mathcal{I}$ and an affine open subset $U \\\\subseteq X$, the morphism associated to the gluing data of the closed subscheme defined by $\\\\mathcal{I}$ is a preimme\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsOpenImmersionAwayι\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] (f : A) {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m),\\n  AlgebraicGeometry.IsOpenImmersion (AlgebraicGeometry.Proj.awayι 𝒜 f f_deg hm)\", \"doc\": \"The canonical morphism from the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_{(f)})$ to the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$, constructed by composing the inverse of the isomor\"}\n  {\"name\": \"AlgebraicGeometry.Proj.isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, where $\\\\mathcal{A}_0$ i\"}\n  {\"name\": \"AlgebraicGeometry.Proj.toSpecZero\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              AlgebraicGeometry.Proj 𝒜 ⟶\\n                AlgebraicGeometry.Spec { carrier := ↥(𝒜 0), comm\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, constructed by composing the inverse of the top isomor\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.UniversallyClosed (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finite type algebra over a base ring $A$, the canonical morphism $\\\\operatorname{Proj}(\\\\mathcal{A}) \\\\to \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: absolute Proj and Spec closed immersion declarations do not identify the glued blowup and its chart-compatible immersion into the projective bundle."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Identify the global blowup with relative Proj of a locally Rees graded algebra compatibly with affine charts and embed it into Proj of the symmetric algebra",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Scheme\", \"type\": \": Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"AlgebraicGeometry.Proj.SpecMap_awayMap_awayι_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m') {x : A}\\n  (hx : x = f * g) {Z : AlgebraicGeometry.Scheme} (h : AlgebraicGe\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with $0 < m$, the composition of the morphism $\\\\operatorname{Spec}(\\\\mathcal{A}_{(f)}) \\\\to \\\\oper\"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Scheme\", \"type\": \"(f) : (Proj| pbo f) ⟶ Spec (A⁰_ f)\", \"doc\": \"The morphism of locally ringed spaces from the restriction of the projective spectrum $ \\\\text{Proj}(A) $ to the basic open set $ D_+(f) $ (defined by exclusion of the homogeneous element $ f $) to the\"}\n  {\"name\": \"AlgebraicGeometry.Proj.toSpecZero\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \": Proj 𝒜 ⟶ Spec (.of <| 𝒜 0)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, constructed by composing the inverse of the top isomor\"}\n  {\"name\": \"AlgebraicGeometry.Proj.affineOpenCover\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \": (Proj 𝒜).AffineOpenCover\", \"doc\": \"Given a graded commutative ring $\\\\mathcal{A}$, if the irrelevant ideal (elements with zero degree component) is contained in the ideal generated by homogeneous elements $\\\\{f_i\\\\}$ of positive degree, t\"}\n  {\"name\": \"AlgebraicGeometry.Proj.awayι\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \": Spec (.of <| Away 𝒜 f) ⟶ Proj 𝒜\", \"doc\": \"The canonical morphism from the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_{(f)})$ to the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$, constructed by composing the inverse of the isomor\"}\n  {\"name\": \"AlgebraicGeometry.Proj.toLocallyRingedSpace\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf\", \"type\": \": LocallyRingedSpace\", \"doc\": \"The locally ringed space constructed on the projective spectrum $\\\\text{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$, obtained by equipping the sheafed space with the property that every stalk of\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \"(f : A →+* Γ(X, ⊤)) (hf : (HomogeneousIdeal.irrelevant 𝒜).toIdeal.map f = ⊤) :\\n  fromOfGlobalSections 𝒜 f hf ≫ toSpecZero 𝒜 = X.toSpecΓ ≫ Spec.map (CommRingCat.ofHom (f.comp (algebraMap _ _)))\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ over a commutative ring $A$, a scheme $X$, and a ring homomorphism $f : A \\\\to \\\\Gamma(X, \\\\mathcal{O}_X)$ such that the image of the irrelevant ideal $\\\\mathcal{I} \\\\subs\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: absolute Proj and Spec closed immersion declarations do not identify the glued blowup and its chart-compatible immersion into the projective bundle."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsClosedImmersion\", \"Proj\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: absolute Proj and Spec closed immersion declarations do not identify the glued blowup and its chart-compatible immersion into the projective bundle."
+  },
+  {
+   "tool": "grep",
+   "query": "relProjReesIso|blowup|[Bb]low[Uu]p|[Rr]elativeProj",
+   "results": "[grep] OK 6 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Comma/Presheaf/Basic.lean\", \"line\": \"51\", \"text\": \"are very tedious to manipulate. We avoid this blowup by carefully controlling which definitions\"}\n  {\"file\": \"Mathlib/Algebra/HierarchyDesign.lean\", \"line\": \"46\", \"text\": \"https://www.ralfj.de/blog/2019/05/15/typeclasses-exponential-blowup.html\"}\n  {\"file\": \"Mathlib/Tactic/ITauto.lean\", \"line\": \"77\", \"text\": \"cause a blowup issue for `Xor`, but it isn't used very often anyway. We could add it to the `IProp`\"}\n  {\"file\": \"Mathlib/Tactic/Linarith/Frontend.lean\", \"line\": \"59\", \"text\": \"overall if it succeeds in all cases. This leads to exponential blowup in the number of `linarith`\"}\n  {\"file\": \"Mathlib/Tactic/GRewrite/Core.lean\", \"line\": \"127\", \"text\": \"  This lets us avoid an exponential blowup when there are multiple `gcongr` lemmas for rewriting\"}\n  {\"file\": \"Mathlib/RingTheory/ReesAlgebra.lean\", \"line\": \"17\", \"text\": \"blowup in the future.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: absolute Proj and Spec closed immersion declarations do not identify the glued blowup and its chart-compatible immersion into the projective bundle."
+  },
+  {
+   "tool": "grep",
+   "query": "isClosedImmersion.*Proj|[Pp]roj.*[Ss]urjective|[Ss]urjective.*[Pp]roj",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: absolute Proj and Spec closed immersion declarations do not identify the glued blowup and its chart-compatible immersion into the projective bundle."
+  },
+  {
+   "tool": "grep",
+   "query": "relProjReesIso|relProjMap|[Bb]lowup|[Bb]lowUp",
+   "results": {
+    "count": 0,
+    "hits": [],
+    "digest": "4f53cda18c2baa0c",
+    "directory": "AlgebraicGeometry"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern absolute Proj charts, its composition formula, the Rees subalgebra, or closed immersions of affine schemes; none states the full chart-compatible relative Rees presentation and blowup immersion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The blowup of a quasi coherent ideal is the relative Proj of its Rees algebra and admits a closed immersion into Proj of the symmetric algebra",
+   "results": {
+    "count": 8,
+    "hits": [
+     "reesAlgebra",
+     "adjoin_monomial_eq_reesAlgebra",
+     "AlgebraicGeometry.Scheme.IdealSheafData.subscheme",
+     "AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop",
+     "instIsNoetherianRingSubtypePolynomialMemSubalgebraReesAlgebra",
+     "AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType",
+     "AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk",
+     "AlgebraicGeometry.IsClosedImmersion.Spec_iff"
+    ],
+    "digest": "7f8a3087ad657d55",
+    "directory": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern absolute Proj charts, its composition formula, the Rees subalgebra, or closed immersions of affine schemes; none states the full chart-compatible relative Rees presentation and blowup immersion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Proj\", \"IsClosedImmersion\"",
+   "results": {
+    "count": 0,
+    "hits": [],
+    "digest": "4f53cda18c2baa0c",
+    "directory": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern absolute Proj charts, its composition formula, the Rees subalgebra, or closed immersions of affine schemes; none states the full chart-compatible relative Rees presentation and blowup immersion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compatible affine Rees presentation of a quasi coherent graded algebra identifies its relative Proj with the ordinary blowup, and a graded symmetric algebra surjection induces a closed immersion into the projective bundle",
+   "results": {
+    "count": 8,
+    "hits": [
+     "AlgebraicGeometry.Proj.fromOfGlobalSections",
+     "AlgebraicGeometry.Proj.pullbackAwayιIso",
+     "AlgebraicGeometry.Proj.awayι",
+     "AlgebraicGeometry.projIsoSpec",
+     "AlgebraicGeometry.Proj",
+     "AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_fromSpec",
+     "AlgebraicGeometry.projIsoSpecTopComponent",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_apply_eq"
+    ],
+    "digest": "967c93d4f31abbf0",
+    "directory": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern absolute Proj charts, its composition formula, the Rees subalgebra, or closed immersions of affine schemes; none states the full chart-compatible relative Rees presentation and blowup immersion."
+  },
+  {
+   "tool": "grep",
+   "query": "surjective|closedImmersion|ClosedImmersion|map_comp|map.*[Ii]so",
+   "results": {
+    "count": 21,
+    "hits": [
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean"
+    ],
+    "digest": "8887819f8107b655",
+    "directory": "AlgebraicGeometry/ProjectiveSpectrum"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern absolute Proj charts, its composition formula, the Rees subalgebra, or closed immersions of affine schemes; none states the full chart-compatible relative Rees presentation and blowup immersion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gluing compatible isomorphisms between projective spectra of graded section algebras, identifying the blowup with Proj of the Rees algebra over an arbitrary scheme",
+   "results": {
+    "count": 8,
+    "hits": [
+     "AlgebraicGeometry.projIsoSpecTopComponent",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections",
+     "AlgebraicGeometry.projIsoSpec",
+     "AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_fromSpec",
+     "AlgebraicGeometry.Proj.pullbackAwayιIso",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero_assoc",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero"
+    ],
+    "digest": "39f1b82cb53895fe",
+    "directory": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern absolute Proj charts, its composition formula, the Rees subalgebra, or closed immersions of affine schemes; none states the full chart-compatible relative Rees presentation and blowup immersion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-affine-base-blowup",
+  "date": "2026-10-22",
+  "group": "Q56"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong Lemma 3.13, rational exceptional-curve geometry before contraction; H-projectivity bookkeeping for the point-blowup tower in the rational-exceptional-curve argument; returned proof Steps 4--5: chart-compatible gluing comparison and induced projective-bundle closed immersion",
+   "via": [
+    "lem-sfb-projective-affine-base-blowup",
+    "lem-sfb-nodal-trait-rational-domination",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-rees-presentation-blowup-immersion",
+  "worker": "stage1",
+  "summary": "Reused the existing canonical sheaf-Rees and blowup comparison nodes. Constructed gamma_V=alpha_V^{-1} theta_V, applied the existing canonical relative-Proj isomorphism, and computed its exact affine chart formula. Proved overlap agreement and uniqueness on affine refinements; used relative-Proj functoriality and the existing standard-graded quotient chart theorem to construct and identify j. Checked closed immersion directly under the source isomorphism. No new nodes or changed statement.",
+  "blueprint": "The inherited det-thm-sf-ctf-stability-direct-images proof (3), alteration reduction: projectivity bookkeeping for the ordinary point-blowup tower, specifically returned Steps 4--5 of lem-sfb-projective-affine-base-blowup. Retains the inherited blueprint.from (null ancestor, as printed by blueprint_refs.py ancestor).",
+  "tool_uses": [
+   {
+    "node": "prop-nagata-relative-proj-functoriality",
+    "why": "Generic relative-Proj surjection theorem; the current unit does not replace this algebraic-geometric tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-nagata-relative-proj-functoriality"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q84-e36a89b80",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-e36a89b80 (reviewer sub-agent of L); spot-checked: I read the whole item and every cited node's statement and checked them against the sources. Statement: verbatim from live (unsplit), stmt_deps unchanged, no repair note, 0 new nodes, proof_deps equal the union of uses, no cycle in the snapshot closure. Sources: Stacks 02NS (divisors.tex l.8623: proof by the Sym(I)->⊕I^d surjection and 07ZK) and 07ZK (constructions.tex l.4435); tags 01MY, 01MZ, 01NQ exist. Step 1: alpha_V from lem-sfb-sheaf-rees-symmetric-presentation and e0 from lem-sfb-blowup-rees-symmetric-presentation; both need only quasi-coherent I. Step 2: gamma_V=alpha_V^-1 theta_V is restriction-compatible and R-linear. def-sfb-relative-proj-iso-of-graded-iso gives F; I checked the chart formula a/f^m -> theta(a)/theta(f)^m. F lies over X because gamma_0=id and the structure maps come from the unit. Step 3: no affine overlap is assumed (affine basis); uniqueness holds on the cover b^-1(V) by morphism gluing (a Mathlib leaf). Step 4: degreewise to total surjectivity is written out; clause (3) of prop-nagata-relative-proj-functoriality gives the closed immersion. I accept this declared tool use as a generic relative-Proj tool from the nagata unit. Step 5: Sym_R(I_V) is generated by A_1, so the chart assertion of lem-sfb-graded-proj-quotient-twist-comparison applies to phi_V; the composite chart is theta∘phi, projection∘j=b, and P_X(I) via def-trf-projective-bundle-morphism needs finite type, which the item assumes. Step 6 is genuinely elementary: q∘iso is a closed immersion by def-weil-closed-immersion. Edge cases checked: I=0 (all empty), I=O_X (j an isomorphism), and nilpotent (eps) (empty Proj). No duplicate: blowup-rees-symmetric-presentation is the special case C=R without the bundle immersion; the trf excellent-blowup and sfb projective-affine-base-blowup nodes cite the item; lem-per-integral-blowup assumes integral T and a nonzero ideal. No SGA cited. Batch 5: the flagged node def-trf-canonical-symmetric-graded-algebra is a general definition, not part of the trace-formula or Poincaré-duality proofs, and is already in the item's base stmt_deps. The closure difference beyond the statement closure contains no sec-trace-formula or sec-poincare-duality nodes, so I accept it. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ReesPresentationBlowupImmersion",
+  "declaration": "AlgebraicGeometry.Scheme.IdealSheafData.rees_presentation_blowup_immersion",
+  "file": "lean/Sheaf/AlgebraicGeometry/ReesPresentationBlowupImmersion.lean",
+  "statement": "theorem rees_presentation_blowup_immersion {X : Scheme.{u}} (I : X.IdealSheafData) (hI : I.toModules.IsQuasiCoherentFiniteType) (C : X.GradedAlgebraData) (θ : C ≅ I.reesData) (φ : @SymmetricAlgebraSheaf.gradedAlgebraData X I.toModules hI.1 ⟶ C) (hφ : ∀ (U : X.affineOpens) (n : ℕ), Function.Surjective ((φ.app U).gradedAddHom n)) : ∃ (hθirr : IrrelevantLE θ.hom) (hφirr : IrrelevantLE φ), ∃ e : I.blowup ≅ C.relProj, e.hom ≫ C.relProjHom = I.blowupMap ∧ (∀ U : X.affineOpens, I.blowupι U ≫ e.hom = Proj.map (θ.hom.app U) (hθirr U) ≫ C.relProjι U) ∧ (∀ e' : I.blowup ≅ C.relProj, e'.hom ≫ C.relProjHom = I.blowupMap → (∀ U : X.affineOpens, I.blowupι U ≫ e'.hom = Proj.map (θ.hom.app U) (hθirr U) ≫ C.relProjι U) → e' = e) ∧ (∀ U V : X.affineOpens, pullback.fst (I.blowupι U) (I.blowupι V) ≫ Proj.map (θ.hom.app U) (hθirr U) ≫ C.relProjι U = pullback.snd (I.blowupι U) (I.blowupι V) ≫ Proj.map (θ.hom.app V) (hθirr V) ≫ C.relProjι V) ∧ (∀ (U V : X.affineOpens) (h : U ≤ V), I.blowupFunctor.map (homOfLE h) ≫ I.blowupι V ≫ e.hom = Proj.map (θ.hom.app U) (hθirr U) ≫ C.relProjι U) ∧ IsClosedImmersion (e.hom ≫ relProjMap φ hφirr) ∧ (∀ U : X.affineOpens, I.blowupι U ≫ e.hom ≫ relProjMap φ hφirr = Proj.map ((θ.hom.app U).comp (φ.app U)) (HomogeneousIdeal.irrelevant_le_map_comp (hφirr U) (hθirr U)) ≫ (@SymmetricAlgebraSheaf.gradedAlgebraData X I.toModules hI.1).relProjι U) ∧ (e.hom ≫ relProjMap φ hφirr) ≫ (@SymmetricAlgebraSheaf.gradedAlgebraData X I.toModules hI.1).relProjHom = I.blowupMap",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the recorded equivalent affine-basis interface for quasi-coherent graded algebra sheaves. The isomorphism theta is exactly the family of base-linear graded affine Rees isomorphisms with coefficient-restriction compatibility; its degree-zero maps identify C_0 with O_X. Uniqueness is asserted among all isomorphisms over X satisfying the prescribed affine chart equations. Arbitrary overlap agreement is stated on pullbacks of the ordinary blowup chart embeddings. The immersion is the actual composite with relProjMap, with its affine Proj formula and projection equality."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-344a60ba8",
+  "group": "NE",
+  "result": "pass",
+  "note": "Clause-by-clause match against node and upstream decls (GradedAlgebraData/Hom base-linear+natural, reesData coefficientwise restriction with degree-0 = base via unit so θ₀=id and C₀=O_X follow, IrrelevantLE/relProjMap/isClosedImmersion_relProjMap, relProjReesIso charts, IsProjectiveBundle target = gradedAlgebraData relProj). Iso over X, θ chart formula, uniqueness over all e' over X, overlap via pullbacks, refinement, closed immersion of the actual composite j, j chart = Proj.map(θ∘φ), projection∘j=b all present; irrelevant witnesses are conclusions; each clause follows from upstream lemmas. Edge cases I=0, I=O_X, nilpotent, empty X, non-affine overlaps OK; single universe u. Fresh delivery (live has no lean record); node differs only in lean; statement verbatim; docstrings and 6 proof steps; sorry only; lines ≤91. Advisory: Second reading section is a no-reading note under the direct-delivery policy, but the Worker report matches clauses; reesData/relProjMap come from non-stmt_dep canonical nodes; unused stmt_dep imports harmless. No compile (no file changed)."
+ }
+}

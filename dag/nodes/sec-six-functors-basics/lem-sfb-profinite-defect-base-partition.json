@@ -1,0 +1,388 @@
+{
+ "id": "lem-sfb-profinite-defect-base-partition",
+ "kind": "statement",
+ "title": "A finite clopen partition of the base forces vanishing of a discrete defect",
+ "statement": "Use the universes of [def-weil-size-convention]. Let $T,S$ be compact Hausdorff totally disconnected topological spaces, let $q:T\\to S$ be continuous, let $r\\geq1$ be an integer, and let $M$ be a finite abelian group with the discrete topology. Give $T^r$ the product topology and write $P_r=\\{(t_0,\\ldots,t_{r-1})\\in T^r:q(t_i)=q(t_j)\\text{ for all }i,j\\}$. Suppose $e:T^r\\to M$ is continuous and $e|_{P_r}=0$. A finite clopen partition is a finite collection of pairwise disjoint nonempty open and closed subsets with union the whole space; the partition of the empty space is empty. There exists a finite clopen partition $\\gamma$ of $S$ such that, for every $B\\in\\gamma$ and every $(t_0,\\ldots,t_{r-1})\\in T^r$ with $q(t_i)\\in B$ for all $i$, one has $e(t_0,\\ldots,t_{r-1})=0$. No surjectivity of $q$ is assumed. Empty spaces and the zero group are allowed.",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Tags 08ZY (lemma-profinite) and 08ZZ (lemma-profinite-refine-open-covering), finite clopen partitions. Agent-formulated auxiliary assertion, not a standalone assertion of these tags; the compact nonzero-locus and base-clopen separation argument of the returned proof of lem-sfb-finite-valued-cech-cocycle-descent, end of step 4 and step 5."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "Put $K=e^{-1}(M\\setminus\\{0\\})\\subseteq T^r$. Since $M$ is discrete, $M\\setminus\\{0\\}$ is closed, and continuity makes $K$ closed. By [lem-weil-pbc-tychonoff-product-quasi-compact], $T^r$ is compact. By [lem-weil-pbc-closed-in-quasi-compact], $K$, with its subspace topology, is compact. The hypothesis $e|_{P_r}=0$ says $K\\cap P_r=\\varnothing$.",
+   "uses": [
+    "lem-weil-pbc-tychonoff-product-quasi-compact",
+    "lem-weil-pbc-closed-in-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tags 08ZU (theorem-tychonov) and 005C (lemma-closed-in-quasi-compact); agent application to the nonzero locus."
+   }
+  },
+  {
+   "text": "For each $x\\in K$ there are $i_x,j_x<r$ with $q(x_{i_x})\\ne q(x_{j_x})$. By Hausdorffness choose disjoint open neighbourhoods $U,V$ of these two points. Apply [lem-weil-pbc-profinite-clopen-basis] to obtain clopen $C_x\\subseteq U$ containing $q(x_{i_x})$; then $q(x_{j_x})\\notin C_x$. The set $W_x=\\{t\\in T^r:q(t_{i_x})\\in C_x,\\ q(t_{j_x})\\notin C_x\\}$ is open: it is the intersection of the inverse images of the open sets $C_x$ and $S\\setminus C_x$ under the continuous coordinate maps $q\\circ\\mathrm{pr}_{i_x}$ and $q\\circ\\mathrm{pr}_{j_x}$. It contains $x$. The sets $W_x\\cap K$ therefore cover the compact subspace $K$. Its defining open-cover property gives a finite set $A\\subseteq K$ with $K\\subseteq\\bigcup_{a\\in A}W_a$; retain their data $i_a,j_a,C_a$. Each $W_a$ is disjoint from $P_r$: its two displayed coordinate images lie on opposite sides of $C_a$ and hence are unequal. If $K$ is empty take $A=\\varnothing$.",
+   "uses": [
+    "lem-weil-pbc-profinite-clopen-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 08ZZ (lemma-profinite-refine-open-covering), clopen basis consequence; agent compact-cover construction."
+   }
+  },
+  {
+   "text": "For each function $\\epsilon:A\\to\\{0,1\\}$ form $B_\\epsilon=\\bigcap_{\\epsilon(a)=1}C_a\\cap\\bigcap_{\\epsilon(a)=0}(S\\setminus C_a)$, taking an empty intersection to be $S$. Let $\\gamma$ be the collection of nonempty $B_\\epsilon$. It is finite, and every block is clopen by finite intersections and complements. A point $s\\in S$ belongs precisely to the block whose membership pattern is $\\epsilon(a)=1\\iff s\\in C_a$. Distinct patterns give disjoint blocks. Hence $\\gamma$ is a finite clopen partition, empty when $S$ is empty.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Agent finite Boolean refinement of the clopens, as in the partition construction in Tag 08ZY (lemma-profinite)."
+   }
+  },
+  {
+   "text": "Let $B\\in\\gamma$ and suppose all $q(t_i)$ belong to $B$. If $e(t)\\ne0$, then $t\\in K$, so some selected $W_a$ contains $t$. This gives $q(t_{i_a})\\in C_a$ and $q(t_{j_a})\\notin C_a$. But the block $B$ lies either in $C_a$ or in its complement, a contradiction. Thus $e(t)=0$. No point of $S$ was lifted along $q$. For $r=1$ every tuple belongs to $P_r$, so $K=\\varnothing$; likewise $M=0$ or $T=\\varnothing$ gives $K=\\varnothing$. When $A=\\varnothing$ the construction yields $\\{S\\}$ if $S\\ne\\varnothing$ and the empty partition otherwise.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Agent contradiction using the finite cover and Boolean blocks of the preceding steps."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-tychonoff-product-quasi-compact",
+  "lem-weil-pbc-closed-in-quasi-compact",
+  "lem-weil-pbc-profinite-clopen-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Agent argument using Tags 08ZU (theorem-tychonov), 005C (lemma-closed-in-quasi-compact), and 08ZZ (lemma-profinite-refine-open-covering); finite clopen separation of the compact nonzero locus."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "exists.*(clopen|discreteQuotient)|[Ff]iber.*[Pp]artition|[Vv]anish.*[Cc]lopen",
+   "results": {
+    "t": "2026-10-22T06:08:37Z",
+    "tool": "grep",
+    "query": "exists.*(clopen|discreteQuotient)|[Ff]iber.*[Pp]artition|[Vv]anish.*[Cc]lopen",
+    "sub": "Topology",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/ClopenBox.lean",
+     "Mathlib/Topology/ClopenBox.lean",
+     "Mathlib/Topology/DiscreteQuotient.lean",
+     "Mathlib/Topology/Connected/Clopen.lean",
+     "Mathlib/Topology/Connected/TotallyDisconnected.lean",
+     "Mathlib/Topology/Connected/TotallyDisconnected.lean",
+     "Mathlib/Topology/Connected/TotallyDisconnected.lean",
+     "Mathlib/Topology/Spectral/Prespectral.lean"
+    ],
+    "digest": "d3efe8fa41639b46"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide clopen covers controlling a given map on its own domain, compatible quotient points, or discrete quotient constructors; none gives a partition of the base forcing vanishing on all approximate equal-image tuples. The compact defect separation is an additional argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DiscreteQuotient\", \"exists\"",
+   "results": {
+    "t": "2026-10-22T06:08:37Z",
+    "tool": "loogle",
+    "query": "\"DiscreteQuotient\", \"exists\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "DiscreteQuotient.exists_of_compat"
+    ],
+    "digest": "4e7ec2602edfbf4d"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide clopen covers controlling a given map on its own domain, compatible quotient points, or discrete quotient constructors; none gives a partition of the base forcing vanishing on all approximate equal-image tuples. The compact defect separation is an additional argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a continuous map q between profinite spaces and a continuous discrete valued function e on a finite power of its source vanishing on tuples with equal q images, there is a finite clopen partition of the target such that e vanishes whenever all q images lie in the same partition block",
+   "results": {
+    "t": "2026-10-22T06:08:48Z",
+    "tool": "leanfinder",
+    "query": "For a continuous map q between profinite spaces and a continuous discrete valued function e on a finite power of its source vanishing on tuples with equal q images, there is a finite clopen partition of the target such that e vanishes whenever all q images lie in the same partition block",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousMap.exists_disjoint_nonempty_clopen_cover_of_mem_nhds_diagonal",
+     "Profinite.NobelingProof.fin_comap_jointlySurjective",
+     "exists_clopen_partition_of_clopen_cover",
+     "ContinuousMap.exists_finite_sum_const_mulIndicator_approximation_of_mem_nhds_diagonal",
+     "ContinuousMap.exists_finite_sum_const_indicator_approximation_of_mem_nhds_diagonal",
+     "Profinite.NobelingProof.e",
+     "Profinite.NobelingProof.spanFinBasis",
+     "Profinite.exists_locallyConstant_finite_aux"
+    ],
+    "digest": "27b24606cc62acd0"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide clopen covers controlling a given map on its own domain, compatible quotient points, or discrete quotient constructors; none gives a partition of the base forcing vanishing on all approximate equal-image tuples. The compact defect separation is an additional argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A compact subset of T power r disjoint from the equal image fiber power of a continuous map T to a profinite space is excluded by a finite clopen quotient of the base",
+   "results": {
+    "t": "2026-10-22T06:09:33Z",
+    "tool": "leansearch",
+    "query": "A compact subset of T power r disjoint from the equal image fiber power of a continuous map T to a profinite space is excluded by a finite clopen quotient of the base",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DiscreteQuotient.ofIsClopen",
+     "DiscreteQuotient.instFiniteQuotientOfCompactSpace",
+     "DiscreteQuotient.comap",
+     "ContinuousMap.isClopen_setOf_mapsTo",
+     "Topology.IsQuotientMap.isClopen_preimage",
+     "DiscreteQuotient.finsetClopens_inj",
+     "Profinite.toCompHausEquivalence",
+     "TopologicalSpace.Fiber.instCompactSpaceElemValSetMemRangeCoeLocallyConstantPreimageSingleton"
+    ],
+    "digest": "7bd64102f37bb50d"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide clopen covers controlling a given map on its own domain, compatible quotient points, or discrete quotient constructors; none gives a partition of the base forcing vanishing on all approximate equal-image tuples. The compact defect separation is an additional argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCompact\", \"IsClopen\"",
+   "results": {
+    "t": "2026-10-22T06:09:33Z",
+    "tool": "loogle",
+    "query": "\"IsCompact\", \"IsClopen\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "IsCompact.isClopen_constructibleTopology_of_isOpen",
+     "IsCompact.isClopen_constructibleTopology_of_isClosed"
+    ],
+    "digest": "b8660c1dcbc158e9"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide clopen covers controlling a given map on its own domain, compatible quotient points, or discrete quotient constructors; none gives a partition of the base forcing vanishing on all approximate equal-image tuples. The compact defect separation is an additional argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous discrete valued function on a finite power of a compact space vanishing on equal fibers of a map to a profinite space vanishes on tuples over one block of a finite clopen partition of the base",
+   "results": {
+    "t": "2026-10-22T11:01:03Z",
+    "tool": "leanfinder",
+    "query": "A continuous discrete valued function on a finite power of a compact space vanishing on equal fibers of a map to a profinite space vanishes on tuples over one block of a finite clopen partition of the base",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.NobelingProof.factors_prod_eq_basis_of_ne",
+     "Profinite.NobelingProof.factors_prod_eq_basis_of_eq",
+     "Profinite.NobelingProof.factors",
+     "Profinite.NobelingProof.CC_comp_zero",
+     "Profinite.NobelingProof.spanFinBasis",
+     "Profinite.NobelingProof.eval_eq_πJ",
+     "Profinite.NobelingProof.e",
+     "Profinite.NobelingProof.one_sub_e_mem_of_false"
+    ],
+    "digest": "76d97308924f3780"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide separation or clopen approximation on a space itself, reconstruction of compatible quotient points, or finite-coordinate factorization; they do not give this base partition for an arbitrary r-ary defect over q."
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*(clopen|partition)|exists_of_compat|clopen.*separat",
+   "results": {
+    "t": "2026-10-22T11:01:39Z",
+    "tool": "grep",
+    "query": "exists.*(clopen|partition)|exists_of_compat|clopen.*separat",
+    "sub": "Topology",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/PartitionOfUnity.lean",
+     "Mathlib/Topology/PartitionOfUnity.lean",
+     "Mathlib/Topology/PartitionOfUnity.lean",
+     "Mathlib/Topology/PartitionOfUnity.lean",
+     "Mathlib/Topology/PartitionOfUnity.lean",
+     "Mathlib/Topology/ClopenBox.lean",
+     "Mathlib/Topology/ClopenBox.lean",
+     "Mathlib/Topology/Connected/Clopen.lean"
+    ],
+    "digest": "01aff1fa9c15b2ba"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide separation or clopen approximation on a space itself, reconstruction of compatible quotient points, or finite-coordinate factorization; they do not give this base partition for an arbitrary r-ary defect over q."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A compact set of tuples whose images are not all equal is separated from the equal-image tuples by a finite clopen partition of a profinite target",
+   "results": {
+    "t": "2026-10-22T11:01:39Z",
+    "tool": "leansearch",
+    "query": "A compact set of tuples whose images are not all equal is separated from the equal-image tuples by a finite clopen partition of a profinite target",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "exists_isClopen_of_totally_separated",
+     "exists_clopen_partition_of_clopen_cover",
+     "totallySeparatedSpace_iff_exists_isClopen",
+     "TopologicalSpace.Clopens.surjective_finset_sup_prod",
+     "Profinite",
+     "IsTotallySeparated",
+     "DiscreteQuotient.finsetClopens_inj",
+     "DiscreteQuotient.comp_finsetClopens"
+    ],
+    "digest": "99a218699d6744ea"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide separation or clopen approximation on a space itself, reconstruction of compatible quotient points, or finite-coordinate factorization; they do not give this base partition for an arbitrary r-ary defect over q."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DiscreteQuotient\", \"IsCompact\"",
+   "results": {
+    "t": "2026-10-22T11:01:39Z",
+    "tool": "loogle",
+    "query": "\"DiscreteQuotient\", \"IsCompact\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide separation or clopen approximation on a space itself, reconstruction of compatible quotient points, or finite-coordinate factorization; they do not give this base partition for an arbitrary r-ary defect over q."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DiscreteQuotient\", \"exists\"",
+   "results": {
+    "t": "2026-10-22T11:02:32Z",
+    "tool": "loogle",
+    "query": "\"DiscreteQuotient\", \"exists\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "DiscreteQuotient.exists_of_compat"
+    ],
+    "digest": "4e7ec2602edfbf4d"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide separation or clopen approximation on a space itself, reconstruction of compatible quotient points, or finite-coordinate factorization; they do not give this base partition for an arbitrary r-ary defect over q."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a compact subset of a finite product of a profinite space disjoint from the diagonal there is a finite discrete quotient whose diagonal preimage avoids the compact subset",
+   "results": {
+    "t": "2026-10-22T11:02:36Z",
+    "tool": "leanfinder",
+    "query": "For a compact subset of a finite product of a profinite space disjoint from the diagonal there is a finite discrete quotient whose diagonal preimage avoids the compact subset",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.indexFunctor",
+     "Profinite.indexCone",
+     "ContinuousMap.exists_finite_approximation_of_mem_nhds_diagonal",
+     "Profinite.NobelingProof.fin_comap_jointlySurjective",
+     "Profinite.isIso_indexCone_lift",
+     "ContinuousMap.exists_disjoint_nonempty_clopen_cover_of_mem_nhds_diagonal",
+     "ContinuousMap.exists_finite_sum_const_mulIndicator_approximation_of_mem_nhds_diagonal",
+     "Profinite.exists_locallyConstant_finite_aux"
+    ],
+    "digest": "cda2686a3c10de86"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide separation or clopen approximation on a space itself, reconstruction of compatible quotient points, or finite-coordinate factorization; they do not give this base partition for an arbitrary r-ary defect over q."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-valued-cech-cocycle-descent",
+  "date": "2026-10-22",
+  "group": "Q124"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), finite E open-direct-image branch: positive continuous-function Cech exactness underlying the profinite-parameter column; the paragraph itself delegates the open-coefficient theorem and does not state this agent-formulated analytic input; finite discrete coefficient reduction: descend a cocycle and its equation before contracting a finite surjection; finite base partition eliminating the compact defect locus (old steps 4–5)",
+   "via": [
+    "lem-sfb-finite-valued-cech-cocycle-descent",
+    "lem-sfb-normed-scalar-profinite-cech-exact",
+    "lem-sfb-normed-scalar-profinite-hom-acyclic",
+    "lem-sfb-prime-to-ell-condensed-acyclicity",
+    "lem-sfb-prime-to-ell-derived-invariants-reduction",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-profinite-defect-base-partition",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved the compact nonzero-locus separation argument using three existing Mathlib leaves (products, closed subsets, and profinite clopen basis); the finite subcover and Boolean atom construction are explicit. No new nodes. Checked r=1, zero coefficients, empty spaces, non-surjective q, and duplicate/attachment candidates. Landing-refusal repair: rebuilt the split on the current repository item; its saved baseline is identical to the current unsplit node. Re-read the universe convention and all three current cited statements, verified every citation verbatim, and made the separating open neighbourhoods and coordinate-preimage argument explicit in step 2. The delivery tool regenerates the branch on the current server base for maintainer promotion. Renewed landing-refusal repair on 2026-10-23: the initial dry run passed at bcef23f7592; compared the retained delivery with current main and the original baseline (baseline unchanged), rebuilt from the current node preserving all non-split fields, re-read every current cited statement and the parent application, and stated both the finite-cover inclusion and its disjointness from the equal-image locus explicitly. No new search question or node.",
+  "blueprint": "Inherited Paragraph (3) of main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md, finite E open-direct-image branch: finite discrete cocycle descent, specifically the end of old step 4 and step 5 of lem-sfb-finite-valued-cech-cocycle-descent. The blueprint delegates the coefficient theorem and does not assert this topological auxiliary; the original blueprint.from.node=null and via chain are retained as reported by blueprint_refs.py ancestor."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-d2048190d",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-d2048190d (reviewer sub-agent of L); spot-checked: Third delivery after landing refusal L; diff vs ed7fdf69/ddb0bfa0 only proof step-2 wording (explicit finite cover K⊆∪W_a, W_a∩P_r=∅) and split_report; statement/stmt_deps/source/blueprint unchanged; no new nodes. Read item in full: step 1 K=e^{-1}(M∖0) closed, compact via lem-weil-pbc-tychonoff-product-quasi-compact (08ZU) + lem-weil-pbc-closed-in-quasi-compact (005C, relative-open subcover form); step 2 Hausdorff separation + lem-weil-pbc-profinite-clopen-basis (08ZZ; S compact Hausdorff totally disconnected) gives open W_x missing P_r, finite subcover, A=∅ if K=∅; steps 3-4 Boolean atoms and contradiction are genuinely elementary. proof_deps = union of uses (three Mathlib leaves). Stacks labels checked in topology.tex (l.1662, 2446, 4134, 4207); no SGA. Parent lem-sfb-finite-valued-cech-cocycle-descent step 3 applies it at r=k+1 with matching hypotheses. Small cases: T=S={0,1}, q=id, r=2 off-diagonal defect → γ={{0},{1}}; r=1, M=0, T=∅, constant q, non-surjective q all fine. No duplicates found. Maintainer note: repeated L refusals are a promotion issue, not content."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.ProfiniteDefectBasePartition",
+  "declaration": "ContinuousMap.exists_finite_clopen_base_partition_of_eq_zero_on_equal_images",
+  "file": "lean/Sheaf/Topology/ProfiniteDefectBasePartition.lean",
+  "statement": "theorem exists_finite_clopen_base_partition_of_eq_zero_on_equal_images (T : Type u) [TopologicalSpace T] [CompactSpace T] [T2Space T] [TotallyDisconnectedSpace T] (S : Type v) [TopologicalSpace S] [CompactSpace S] [T2Space S] [TotallyDisconnectedSpace S] (q : T → S) (hq : Continuous q) (r : ℕ) (hr : 1 ≤ r) (M : Type w) [AddCommGroup M] [Finite M] [TopologicalSpace M] [DiscreteTopology M] (e : (Fin r → T) → M) (he : Continuous e) (hzero : ∀ t : Fin r → T, (∀ i j : Fin r, q (t i) = q (t j)) → e t = 0) : ∃ γ : Set (Set S), γ.Finite ∧ Setoid.IsPartition γ ∧ (∀ B ∈ γ, IsClopen B) ∧ ∀ B ∈ γ, ∀ t : Fin r → T, (∀ i : Fin r, q (t i) ∈ B) → e t = 0",
+  "branch": "newtargets-dag",
+  "by": "Q62",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-899491b78",
+  "group": "Q62",
+  "result": "pass",
+  "note": "Single sorry theorem ContinuousMap.exists_finite_clopen_base_partition_of_eq_zero_on_equal_images; lean.statement matches the file signature verbatim; node unchanged apart from the lean record (checked against side-live). All hypotheses match the node (compact T2 totally disconnected T,S; continuous q, no surjectivity; r:ℕ with 1≤r; finite discrete AddCommGroup M; Pi topology; hzero exactly P_r vanishing). Conclusion γ.Finite ∧ Setoid.IsPartition (∅∉γ, ∃! block through each point) ∧ IsClopen blocks ∧ vanishing over each block matches the node, including the empty partition for empty S. Edge cases S=∅, T=∅, r=1, M=0, non-surjective q are fine. Separate universes u v w under the convention node. No name clash in the project or Mathlib; docstrings carry source and blueprint tag; proof steps are in the docstring; no definitions. Report has Worker report and Second reading by Q62. Nothing compiled since no file changed. Cosmetic: ContinuousMap namespace for a plain function q."
+ }
+}

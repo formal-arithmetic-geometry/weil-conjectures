@@ -1,0 +1,333 @@
+{
+ "id": "lem-sfb-ringed-derived-naive-cup-comparison",
+ "kind": "statement",
+ "title": "Derived and naive cup products for a morphism of ringed topoi",
+ "statement": "Work on sites small in a common coefficient universe [def-weil-size-convention, def-weil-pbc-sites-and-cohomology]. Let $f:(\\operatorname{Sh}(\\mathcal C),R)\\to(\\operatorname{Sh}(\\mathcal D),S)$ be a morphism of ringed topoi [def-weil-pbc-ringed-topos-morphism], with commutative ring sheaves. Use module sheaves [def-weil-sheaf-of-modules-category], unbounded derived categories [def-weil-abstract-derived-category], K-flat derived tensor [lem-weil-pbc-site-derived-tensor-descent], and the canonical cup morphism $c_{E,F}:Rf_*E\\otimes_S^{\\mathbf L}Rf_*F\\to Rf_*(E\\otimes_R^{\\mathbf L}F)$ of [def-sfb-ringed-site-module-cup-product]. Write $[M]$ for localization of a complex, $\\operatorname{Tot}(M\\otimes N)$ for the signed direct-sum tensor complex [def-pc-tensor-complex-sheaves], $\\rho_{M,N}:[M]\\otimes^{\\mathbf L}[N]\\to[\\operatorname{Tot}(M\\otimes N)]$ for the canonical derived-to-ordinary tensor comparison induced by K-flat resolution augmentations, and $\\beta_M:[f_*M]\\to Rf_*[M]$ for the canonical comparison obtained by a K-injective resolution [def-pur-kinjective-complex, prop-pur-kinjective-resolutions-exist]. For arbitrary unbounded complexes $M,N$ of $R$-modules, let $\\nu_{M,N}:\\operatorname{Tot}(f_*M\\otimes_S f_*N)\\to f_*\\operatorname{Tot}(M\\otimes_R N)$ be the naive cochain map: on each $(i,j)$ summand it is the ordinary section tensor map followed by $f_*$ of the tensor summand inclusion. Then the following equality holds in $D(S)$, as maps from $[f_*M]\\otimes_S^{\\mathbf L}[f_*N]$ to $Rf_*[\\operatorname{Tot}(M\\otimes_R N)]$:\n$$Rf_*(\\rho_{M,N})\\circ c_{[M],[N]}\\circ(\\beta_M\\otimes^{\\mathbf L}\\beta_N)=\\beta_{\\operatorname{Tot}(M\\otimes N)}\\circ[\\nu_{M,N}]\\circ\\rho_{f_*M,f_*N}.$$\nIn particular, this applies to $f_* = \\Gamma(\\mathcal C,-)$ with $S=\\Gamma(\\mathcal C,R)$ on the point topos, without a final object of $\\mathcal C$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0FPK, label lemma-cup-compatible-with-naive, entire diagram; global specialization in Tag 0FPJ, label section-cup-product. Canonical derived-to-ordinary arrows are those in the diagram."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-sfb-ringed-site-module-cup-product",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-kinjective-complex",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sfb-ringed-derived-tensor-augmentation-naturality",
+  "def-sfb-ringed-path-right-derived-data",
+  "def-weil-pbc-ringed-tensor-square-presentation",
+  "def-sfb-ringed-site-global-derived-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=f_*M$, $B=f_*N$, $V=\\operatorname{Tot}(A\\otimes_S B)$ and $T=\\operatorname{Tot}(M\\otimes_RN)$. Write $L=Lf^*$, $\\alpha_X:L[X]\\to[f^*X]$, and $e_X:f^*f_*X\\to X$ for the ordinary counit. Use the canonical adjunction $L\\dashv Rf_*$. It suffices to compare the adjuncts with target $[T]$. The naive map $\\nu:V\\to f_*T$ is a chain map: on the $(i,j)$ summand naturality of the section tensor map commutes separately with $d_M\\otimes1$ and $1\\otimes d_N$, and both totals use the same sign $(-1)^i$. Its construction uses only maps into $f_*T$ from individual summands, never commutation of $f_*$ with infinite sums.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPK, label lemma-cup-compatible-with-naive, proof"
+   }
+  },
+  {
+   "text": "For every source complex $X$, the canonical derived adjunction satisfies $\\varepsilon_{[X]}\\circ L(\\beta_X)=[e_X]\\circ\\alpha_{f_*X}$. Indeed apply the representative Hom formula of [lem-pc-pre-derived-adjoint-functors-general] to the ordinary module adjunction, taking $K=X$, $M=f_*X$ and both quasi-isomorphisms $s,t$ and the map $f$ to be identities. The representing cocone component $p_{1_X}$ is $\\beta_X$, the cone component $u_{1_{f_*X}}$ is $\\alpha_{f_*X}$, and the ordinary adjunct of the identity is $e_X$. Thus the formula gives exactly the asserted equality. These are the resolving cones of the canonical K-flat/K-injective adjunction, rather than an independently chosen adjunction.",
+   "uses": [
+    "lem-pc-pre-derived-adjoint-functors-general",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-weil-pbc-ringed-topoi-derived-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPI, label lemma-adjoints-push-pull-compatibility; equivalently the identity representative in derived.tex Tag 0DVC, label lemma-pre-derived-adjoint-functors."
+   }
+  },
+  {
+   "text": "By the defining adjunct of the cup product and naturality of $\\mu$, the adjunct $a$ of the left side of the required equality is\n$$a=\\rho_{M,N}\\circ\\bigl((\\varepsilon_{[M]}\\circ L\\beta_M)\\otimes^{\\mathbf L}(\\varepsilon_{[N]}\\circ L\\beta_N)\\bigr)\\circ\\mu_{[A],[B]}.$$\nInsert Step 2. Naturality of $\\rho$ for the chain maps $e_M,e_N$ then gives\n$$a=[\\operatorname{Tot}(e_M\\otimes e_N)]\\circ\\rho_{f^*A,f^*B}\\circ(\\alpha_A\\otimes^{\\mathbf L}\\alpha_B)\\circ\\mu_{[A],[B]}.$$\nHere naturality of $\\rho$ is the augmentation naturality of the K-flat tensor construction: resolve the maps, tensor their commuting augmentation squares, and localize; the resolution identifications are those of the tensor descent node.",
+   "uses": [
+    "def-sfb-ringed-site-module-cup-product",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPK, label lemma-cup-compatible-with-naive, proof"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-ringed-pullback-derived-ordinary-tensor] to $A,B$. Step 3 becomes\n$$a=[\\operatorname{Tot}(e_M\\otimes e_N)\\circ\\delta_{A,B}]\\circ\\alpha_V\\circ L(\\rho_{A,B}).$$\nNo ordinary tensor is substituted for a derived tensor by an asserted isomorphism: the possibly noninvertible $\\rho$ and $\\alpha$ are retained throughout.",
+   "uses": [
+    "lem-sfb-ringed-pullback-derived-ordinary-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPK, label lemma-cup-compatible-with-naive, proof"
+   }
+  },
+  {
+   "text": "The equality of chain maps\n$$\\operatorname{Tot}(e_M\\otimes e_N)\\circ\\delta_{A,B}=e_T\\circ f^*(\\nu)$$\nfollows summand by summand from the ordinary module adjunction. In bidegree $(i,j)$, after inverse image and scalar extension, the two maps send $r\\otimes(x\\otimes y)$ to $r(e_M(1\\otimes x)\\otimes e_N(1\\otimes y))$ in the $(i,j)$ summand of $T$. This is exactly the section tensor pairing defining $\\nu$, transposed by the ordinary Hom bijection. The normalized ordinary tensor constraint sends $r\\otimes(x\\otimes y)$ to $(r\\otimes x)\\otimes(1\\otimes y)$. The equality holds on generalized pure tensors and hence after sheafification, and on the direct sum since it holds on every summand. All maps have degree zero, so no factors are interchanged and no additional Koszul sign occurs.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "def-weil-pbc-canonical-ringed-tensor-comparison",
+    "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPK, label lemma-cup-compatible-with-naive, proof"
+   }
+  },
+  {
+   "text": "By naturality of $\\alpha$ for $\\nu:V\\to f_*T$ and then Step 2 at $T$,\n$$a=[e_T]\\circ[f^*\\nu]\\circ\\alpha_V\\circ L\\rho_{A,B}=[e_T]\\circ\\alpha_{f_*T}\\circ L[\\nu]\\circ L\\rho_{A,B}=\\varepsilon_{[T]}\\circ L\\bigl(\\beta_T\\circ[\\nu]\\circ\\rho_{A,B}\\bigr).$$\nThe last expression is the adjunct of the right side. Injectivity of the adjunction Hom bijection proves the required equality. Finally the definition of global cup product is precisely the ringed-topos morphism to $(\\mathrm{pt},\\Gamma(\\mathcal C,R))$, so the same calculation gives the stated specialization. Its compatible-family definition of global sections does not require a final object in $\\mathcal C$.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "def-sfb-ringed-site-module-cup-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPK, label lemma-cup-compatible-with-naive, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "def-sfb-ringed-site-module-cup-product",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-sfb-ringed-pullback-derived-ordinary-tensor",
+  "def-weil-pbc-canonical-ringed-tensor-comparison",
+  "lem-weil-pbc-canonical-ringed-tensor-comparison-construction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0FPK, label lemma-cup-compatible-with-naive, proof, using Tags 0FPI and 0FPH."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cupProduct|cup_product|naive.*tensor|tensor.*naive",
+   "results": "{\"t\": \"2026-10-23T21:50:15Z\", \"tool\": \"grep\", \"query\": \"cupProduct|cup_product|naive.*tensor|tensor.*naive\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: source read; the hits give ordinary tensor, adjunction lax structure, or generic derived comparison separately, not their ringed-topos derived/naive cup compatibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image cup product commutes with the naive tensor product map on complexes of sheaves",
+   "results": "{\"t\": \"2026-10-23T21:50:16Z\", \"tool\": \"leansearch\", \"query\": \"Derived direct image cup product commutes with the naive tensor product map on complexes of sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.tensorObj\", \"HomologicalComplex.tensorHom\", \"PresheafOfModules.Monoidal.tensorObjMap\", \"CategoryTheory.Sheaf.tensorProd_isSheaf\", \"PresheafOfModules.Monoidal.tensorObj_map_tmul\", \"PresheafOfModules.Monoidal.tensorObj\", \"Algebra.TensorProduct.lTensor\", \"IsTensorProduct.map\"], \"digest\": \"fb4006d47b76129f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: source read; the hits give ordinary tensor, adjunction lax structure, or generic derived comparison separately, not their ringed-topos derived/naive cup compatibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, Functor.LaxMonoidal",
+   "results": "{\"t\": \"2026-10-23T21:50:16Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Sheaf, Functor.LaxMonoidal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Functor.LaxMonoidal'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "unavailable: loogle: unknown identifier 'Functor.LaxMonoidal'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of ringed topoi the derived cup product is compatible with the naive tensor product of complexes under derived functor comparison maps",
+   "results": "{\"t\": \"2026-10-23T21:50:19Z\", \"tool\": \"leanfinder\", \"query\": \"For a morphism of ringed topoi the derived cup product is compatible with the naive tensor product of complexes under derived functor comparison maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackComp\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pushforwardNatTrans_comp\", \"SheafOfModules.pushforwardComp_hom_app_val_app\", \"SheafOfModules.pushforward_assoc\", \"SheafOfModules.pushforwardComp_inv_app_val_app\", \"SheafOfModules.pullback_assoc\"], \"digest\": \"ea4e5fb884c3415e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: source read; the hits give ordinary tensor, adjunction lax structure, or generic derived comparison separately, not their ringed-topos derived/naive cup compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "cupProduct|cup_product|naive.*cup|cup.*naive",
+   "results": "{\"t\": \"2026-10-23T21:50:38Z\", \"tool\": \"grep\", \"query\": \"cupProduct|cup_product|naive.*cup|cup.*naive\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: source read; the hits give ordinary tensor, adjunction lax structure, or generic derived comparison separately, not their ringed-topos derived/naive cup compatibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.LaxMonoidal, CategoryTheory.DerivedCategory",
+   "results": "{\"t\": \"2026-10-23T21:50:38Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.LaxMonoidal, CategoryTheory.DerivedCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.DerivedCategory'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "unavailable: loogle: unknown identifier 'CategoryTheory.DerivedCategory'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of a lax monoidal right derived functor with the underived lax tensor comparison via the derived to ordinary tensor map",
+   "results": "{\"t\": \"2026-10-23T21:50:40Z\", \"tool\": \"leanfinder\", \"query\": \"Compatibility of a lax monoidal right derived functor with the underived lax tensor comparison via the derived to ordinary tensor map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_assoc\", \"CategoryTheory.Localization.Monoidal.functorMonoidalOfComp_ε\", \"CategoryTheory.Tor'_map_app\", \"CategoryTheory.Localization.Monoidal.functorCoreMonoidalOfComp\"], \"digest\": \"f3081844cda411cf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: source read; the hits give ordinary tensor, adjunction lax structure, or generic derived comparison separately, not their ringed-topos derived/naive cup compatibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, CategoryTheory.Functor.LaxMonoidal",
+   "results": "{\"t\": \"2026-10-23T21:51:08Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory, CategoryTheory.Functor.LaxMonoidal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: source read; the hits give ordinary tensor, adjunction lax structure, or generic derived comparison separately, not their ringed-topos derived/naive cup compatibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A right derived functor of sheaf direct image is lax monoidal and its unit is compatible with tensor products of cochain complexes",
+   "results": "{\"t\": \"2026-10-23T21:51:08Z\", \"tool\": \"leansearch\", \"query\": \"A right derived functor of sheaf direct image is lax monoidal and its unit is compatible with tensor products of cochain complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.rightAdjointLaxMonoidal\", \"CategoryTheory.Functor.LaxRightLinear.noConfusionType\", \"CategoryTheory.Functor.LaxMonoidal.tensorHom_ε_comp_μ\", \"CategoryTheory.Adjunction.rightAdjointLaxMonoidal_ε\", \"CategoryTheory.Functor.LaxMonoidal.right_unitality\", \"CategoryTheory.Functor.LaxMonoidal.ofTensorHom\", \"CategoryTheory.Functor.RightLinear.toLaxRightLinear\", \"CategoryTheory.Functor.LaxMonoidal.whiskerRight_tensorUnit_comp_rightUnitor_hom\"], \"digest\": \"e6a3e99d1938a0d5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: source read; the hits give ordinary tensor, adjunction lax structure, or generic derived comparison separately, not their ringed-topos derived/naive cup compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived cup product of a morphism of ringed topoi is compatible with the naive cup product of arbitrary complexes",
+   "results": "{\"t\": \"2026-10-23T22:31:45Z\", \"tool\": \"leanfinder\", \"query\": \"The derived cup product of a morphism of ringed topoi is compatible with the naive cup product of arbitrary complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f\", \"SheafOfModules.pullback_assoc\", \"CategoryTheory.Sheaf.H\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X\\u2082\", \"CategoryTheory.Tor'_map_app\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\"], \"digest\": \"9c5b0e5bd781c37d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary tensor, generic derived counit or unrelated cohomology; no arbitrary ringed-topos cup comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derivedε_fac_app\"",
+   "results": "{\"t\": \"2026-10-23T22:31:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"derived\\u03b5_fac_app\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived\\u03b5_fac_app\", \"CategoryTheory.Adjunction.derived\\u03b5_fac_app_assoc\"], \"digest\": \"1aae5cb97e9d6924\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary tensor, generic derived counit or unrelated cohomology; no arbitrary ringed-topos cup comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "cupProduct|cup_product|naive.*cup|cup.*naive",
+   "results": "{\"t\": \"2026-10-23T22:32:48Z\", \"tool\": \"grep\", \"query\": \"cupProduct|cup_product|naive.*cup|cup.*naive\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary tensor, generic derived counit or unrelated cohomology; no arbitrary ringed-topos cup comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived cup product agrees with the ordinary tensor cup map on complexes of sheaves",
+   "results": "{\"t\": \"2026-10-23T22:32:49Z\", \"tool\": \"leansearch\", \"query\": \"The derived cup product agrees with the ordinary tensor cup map on complexes of sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.tensorObj\", \"HomologicalComplex.tensorHom\", \"PresheafOfModules.Monoidal.tensorObjMap\", \"CategoryTheory.Sheaf.tensorProd_isSheaf\", \"HomologicalComplex.HasTensor\", \"HomologicalComplex.\\u03b9TensorObj\", \"PresheafOfModules.Monoidal.tensorObj_map_tmul\", \"KaehlerDifferential.derivationTensorProduct_algebraMap\"], \"digest\": \"b61b5fef88984d62\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary tensor, generic derived counit or unrelated cohomology; no arbitrary ringed-topos cup comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ringed-hypercohomology-edge-tensor",
+  "date": "2026-10-24",
+  "group": "Q113"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Infinitesimal lifting of algebraically trivial rigidified line modules. Supporting input: Injectivity of the reduced coproduct in degree-two coherent cohomology. Supporting input: the relative exterior coherent-cohomology theorem, before the reduced-coproduct calculation; not a Picard infinitesimal-lifting assertion. Reviewer-added input for lem-sfb-abelian-coherent-exterior-base-change steps 6-8: identification of the relative cup product on higher direct images with the global cup product over affine opens, and its compatibility with base change. Supporting input for this split: Tensor compatibility of the hypercohomology-to-sheaf-cohomology edge. Prerequisite for tensor compatibility: the derived-to-naive cup comparison of Stacks 0FPK.",
+   "via": [
+    "lem-sfb-ringed-hypercohomology-edge-tensor",
+    "lem-sfb-space-affine-relative-cup-sections",
+    "lem-sfb-abelian-coherent-exterior-base-change",
+    "lem-sfb-abelian-h2-reduced-coproduct-injective",
+    "lem-sfb-abelian-picard-infinitesimal-lift",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-ringed-derived-naive-cup-comparison",
+  "worker": "stage1",
+  "summary": "Read the complete 0FPK diagram proof. Extract its 0FPH pullback/tensor input as one statement-only node; reuse the general representative derived-adjunction theorem for 0FPI, and spell out the ordinary section-tensor/counit square and the final naturality calculation. No statement change.",
+  "blueprint": "The inherited ancestor is null (blueprint_refs.py ancestor reports None). The recorded direct-images proof (3), via the inherited Picard/coherent-cup chain, needs the hypercohomology edge tensor comparison. This split supplies its 0FPK prerequisite by the two adjuncts, the top polygon, the ordinary counit square and final outer boundary.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Canonical ringed module/derived adjunction and its representative formula, or ordinary tensor normalization, used as generic tools in Stacks 0FPK; these are independent of the geometric constructibility induction."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "why": "Canonical ringed module/derived adjunction and its representative formula, or ordinary tensor normalization, used as generic tools in Stacks 0FPK; these are independent of the geometric constructibility induction."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Canonical ringed module/derived adjunction and its representative formula, or ordinary tensor normalization, used as generic tools in Stacks 0FPK; these are independent of the geometric constructibility induction."
+   },
+   {
+    "node": "lem-pc-pre-derived-adjoint-functors-general",
+    "why": "Canonical ringed module/derived adjunction and its representative formula, or ordinary tensor normalization, used as generic tools in Stacks 0FPK; these are independent of the geometric constructibility induction."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Canonical ringed module/derived adjunction and its representative formula, or ordinary tensor normalization, used as generic tools in Stacks 0FPK; these are independent of the geometric constructibility induction."
+   },
+   {
+    "node": "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
+    "why": "Canonical ringed module/derived adjunction and its representative formula, or ordinary tensor normalization, used as generic tools in Stacks 0FPK; these are independent of the geometric constructibility induction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-canonical-ringed-tensor-comparison-construction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-e925fb1b1",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-e925fb1b1 (reviewer sub-agent of L); spot-checked: Read in full: Stacks sites-cohomology section-cup-product (0FPJ), 0FPK lemma-cup-compatible-with-naive (diagram and full proof), 0FPI lemma-adjoints-push-pull-compatibility and 0FPH lemma-tensor-pull-compatibility. Statement: the item's statement and stmt_deps match live and side-live, where the item is unsplit with no repair note, so this is a first split and not superseded. The statement matches the 0FPK square: clockwise beta⊗beta, then c, then Rf_*rho; anticlockwise rho, then nu, then beta_T. D(S) and D(R) are on the correct sides, and no source subscript typo is copied. No SGA source is used. Step 1: nu is a chain map, built summand by summand without f_* commuting with sums. Step 2: lem-pc-pre-derived-adjoint-functors-general applied with s=t=f=identities gives p_1=beta_X (cocone along 1_X->s), u_1=alpha_{f_*X} and a_h(1)=e_X, which is exactly the 0FPI square; the essential-constancy hypotheses hold by K-injective and flat-term K-flat resolutions. Step 3: the adjunct via the cup definition (mu, then eps⊗eps), naturality of eps and mu, Step 2, and naturality of rho from the descent node; I recomputed it. Step 4: the new 0FPH node at A=f_*M, B=f_*N. Step 5: checked on generalized elements; e_T(1⊗nu(x⊗y)) = e_M(1⊗x)⊗e_N(1⊗y), and delta's pure-tensor normalization comes from def-weil-pbc-canonical-ringed-tensor-comparison; no sign appears. Step 6: naturality of alpha, Step 2 at T and injectivity of the adjunction bijection; the point-topos case needs no final object. New node: the statement is exactly the 0FPH square for arbitrary complexes. It meets B1-B9 and records four kinds of search. It is not a duplicate: the 0FPI/0FPH hits are pro-étale internal comparisons or derived-only monoidal coherence, and the sec-abelian-varieties lem-sc-module-cup-* nodes are special Γ(X,-) scheme cases with assumed data. It does not restate the item. Edge cases: f=id, a zero factor, and Z->Z/2 with Z/2[0] (both sides are determined on H^0, and rho and alpha stay noninvertible). FIX (C4): the new node took mu from lem-weil-pbc-ringed-topoi-derived-tensor-pullback, but the cup product and Step 3 use the mu of lem-weil-pbc-ringed-projection-mate-exact. The corrected node binds mu as that projection-mate isomorphism (the canonical flat-term K-flat comparison) and adds lem-weil-pbc-ringed-projection-mate-exact to stmt_deps; this creates no cycle. The item is unchanged. All six declared tool_uses are accepted as generic derived-adjunction and tensor machinery.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedDerivedNaiveCupComparison",
+  "declaration": "SheafOfModules.RingedSiteCup.derived_naive_cup_comparison",
+  "declarations": [
+   "SheafOfModules.RingedSiteCup.complexDirectImage",
+   "SheafOfModules.RingedSiteCup.naive",
+   "SheafOfModules.RingedSiteCup.derived_naive_cup_comparison",
+   "SheafOfModules.RingedSiteCup.globalNaive",
+   "SheafOfModules.RingedSiteCup.global_derived_naive_cup_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RingedDerivedNaiveCupComparison.lean",
+  "statement": "theorem derived_naive_cup_comparison {Y X : RingedTensorCorner.{u, w}} (e : RingedTensorEdge Y X) [d : RingedPathRightDerived e] (a : RingedTensorModel Y) (b : RingedTensorModel X) (M N : CochainComplex X.mateModules ℤ) : Y.tensor.map (Prod.mkHom (d.eta.app M) (d.eta.app N)) ≫ relative e a b (DerivedCategory.Q.obj M) (DerivedCategory.Q.obj N) ≫ e.right.map ((modelTensorAugmentation X b).app (M, N)) = (modelTensorAugmentation Y a).app ((complexDirectImage e).obj M, (complexDirectImage e).obj N) ≫ DerivedCategory.Q.map (naive e M N) ≫ d.eta.app (((KFlatFixedTensor.totalTensor X.ring).obj M).obj N)",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c9070b444",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Re-delivery after RETURN c4151ad8 (F1–F3); all three repairs applied, nothing else changed. Item Lean byte-identical apart from importing RingedDerivedTensorAugmentationNaturality instead of the removed companion; statement, proof and proof_deps unchanged. F1: new existing:true def node def-sfb-ringed-path-right-derived-data owns CategoryTheory.RingedPathRightDerived and the ringedPath* defs in Sheaf.Paper.RingedComparisonTensorAdjunction; statement field matches l.47–48; stmt_deps size/tensor-square-presentation/abstract-derived-category; cited instead of lem-sfb-ringed-comparison-tensor-adjunction. F2: NI's live module kept, only public import ProjectionMateExact and the four modelTensorAugmentation* declarations (byte-identical to the reviewed companion) appended; NI record keeps module and primary, declarations a strict superset. F3: def-sfb-ringed-site-global-derived-adjunction (unchanged) added to stmt_deps. Mechanical finding: the theorem stmt_dep lem-sfb-ringed-derived-tensor-augmentation-naturality is genuine, since modelTensorAugmentation = Classical.choose of that node's ∃! theorem (ρ pinned by representative isos and naturality). β = d.eta, uniquely the canonical mate via canonicalAdjunction at M=f_*I, a=counit, so no extra hypothesis. 0FPK square, naive ν, global clause without a final object, and edge cases (f=id, zero, unbounded, ℤ→ℤ/2, empty site) re-confirmed. No file changed, so no compile; the worker's per-file compiles and dry run are reported clean."
+ }
+}

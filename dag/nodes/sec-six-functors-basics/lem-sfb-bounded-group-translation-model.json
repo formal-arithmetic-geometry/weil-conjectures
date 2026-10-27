@@ -1,0 +1,238 @@
+{
+ "id": "lem-sfb-bounded-group-translation-model",
+ "kind": "statement",
+ "title": "A translation-compatible smooth model of a bounded algebraic group",
+ "statement": "Let $R$ be a discrete valuation ring [def-sc-discrete-valuation-ring], $E=\\operatorname{Frac}(R)$, $k=R/\\mathfrak m_R$, and $T=\\operatorname{Spec}R$ [def-weil-affine-spectrum]. Fibres and products mean scheme-theoretic base changes [def-pc-base-change]. A group scheme over a base has multiplication, inverse and identity morphisms over that base satisfying the group identities (the diagrams of [def-sc-group-scheme], with the indicated base in place of a field). Separated means that its diagonal is a closed immersion [def-weil-closed-immersion]. Let $G/E$ be a smooth separated finite-type group scheme [def-sbc-smooth-morphisms, def-weil-finite-type-morphism]. Choose a geometric point $\\bar t$ over the closed point of $T$, put $R^{\\mathrm{sh}}=\\mathcal O^{\\mathrm{sh}}_{T,\\bar t}$ and $E^{\\mathrm{sh}}=\\operatorname{Frac}(R^{\\mathrm{sh}})$ [def-weil-geometric-point, def-weil-pbc-strict-henselization-limit]. Suppose $G(E^{\\mathrm{sh}})$ is bounded: there is a finite affine open cover $U_i=\\operatorname{Spec}B_i$ of $G$, finite $E$-algebra generating lists $(b_{ij})_j$ of $B_i$, sets $C_i\\subseteq U_i(E^{\\mathrm{sh}})$ with union $G(E^{\\mathrm{sh}})$, and integers $c_i$ such that $v(b_{ij}(x))\\geq c_i$ for $x\\in C_i$ and all $j$. Here $v$ is the valuation of $R^{\\mathrm{sh}}$, extended by $v(0)=+\\infty$. An open $U\\subseteq Y$ of a $T$-scheme is $T$-dense if $U_s$ is dense in $Y_s$ for both $s\\in T$. A $T$-rational map is an equivalence class of morphisms on $T$-dense opens, where representatives agree on a $T$-dense open of their common domain. A $T$-birational map is represented by an isomorphism between $T$-dense open subschemes. There is a smooth separated finite-type $T$-scheme $Y$, with nonempty special fibre and an isomorphism $Y_E\\simeq G$, with the following property. For every smooth finite-type $T$-scheme $Z$, every generic point $\\xi$ of $Z_k$, and $A=\\mathcal O_{Z,\\xi}$ with fraction field $L$, the ring $A$ is a discrete valuation ring; each left or right translation of $G_L$ by any $g\\in G(L)$ extends to an $\\operatorname{Spec}A$-birational self-map of $Y_A$, represented by an open immersion on its domain of definition. No group law on $Y$ or mapping property for $Y$ is asserted.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 4.3 Proposition 4(iii), printed pp.106-107 (PDF pp.112-113), using 3.5 Theorem 2 and 4.3 Propositions 2 and 4; boundedness is BLR 1.1 Definition 2. The local rings and translations here are exactly those in 4.3/4(iii). Primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local literature copy WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-pc-base-change",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-sc-group-scheme",
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-sfb-bounded-valued-points",
+  "def-sfb-fiberwise-birational-extension"
+ ],
+ "proof": [
+  {
+   "text": "Choose a nowhere vanishing left-invariant top form $\\omega$ on $G$, and the character $\\chi$ describing right translations, by the invariant-volume lemma. Choose a finite weak Néron family with nonempty irreducible special fibres. Let $n_i$ be its differential orders and $n_0=\\min_i n_i$. For any other such smooth model $M$, the weak rational property extends the generic identity to $M\\dashrightarrow M_i$ for some $i$. Its multiplier is $1$, so order comparison gives $n(M)\\geq n_i\\geq n_0$. Thus the minimum is attained. The minimal-class lemma supplies finitely many representatives $M_1,\\ldots,M_r$. For distinct representatives a rational identity map would, by equal-order comparison, be an open immersion with fibrewise dense image; it would be a birational equivalence, contrary to their choice. The gluing lemma therefore gives opens $V_i$ and a smooth separated finite-type scheme $Y$ by gluing them along $G$. Its special fibre is a nonempty disjoint union of the $(V_i)_k$. All these opens still have order $n_0$.",
+   "uses": [
+    "lem-sfb-invariant-volume-translation-character",
+    "lem-sfb-weak-neron-family-rational-property",
+    "lem-sfb-smooth-model-volume-order-comparison",
+    "lem-sfb-minimal-volume-model-smooth-base-change",
+    "lem-sfb-rationally-disjoint-model-separated-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "4.3 Proposition 2 and Proposition 4, first two proof paragraphs; 3.5 Theorem 2 and Proposition 3; 4.2 Corollary 3."
+   }
+  },
+  {
+   "text": "Fix $Z,\\xi,A,L$ as in the statement. The weak-family lemma gives that $A$ is a DVR with uniformizer $\\pi$ and base-changes the weak family to $A$. Its converse gives boundedness of $G_L(L^{\\mathrm{sh}})$ over $A$. The minimal-class base-change lemma gives that the opens of the $V_i\\times_R A$ obtained by retaining one special-fibre component have order $n_0$ and represent all minimal classes over $A$. Smoothness, separatedness and finite type of $Y_A$ follow by the cited base-change statements. Hence each special component of $Y_A$ has order $n_0$.",
+   "uses": [
+    "lem-sfb-weak-neron-family-rational-property",
+    "lem-sfb-minimal-volume-model-smooth-base-change",
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-separated-base-change",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "3.5 Corollary 4; 4.3 Lemma 3 and Proposition 4, final sentence."
+   }
+  },
+  {
+   "text": "Let $\\tau$ be either translation by $g\\in G(L)$. By the invariant-volume lemma over $A$, its multiplier on $\\omega_L$ is $1$ for a left translation and $\\chi_L(g)\\in A^\\times$ for a right translation. For an open $U\\subseteq Y_A$ consisting of the entire generic fibre and a single special component, apply the weak rational property to $\\tau:U_L\\to G_L$, refining the base-changed weak family into irreducible-special-fibre opens. This gives an $A$-rational map $U\\dashrightarrow N$ to a member of that family. Order comparison gives $n_0=n(U)\\geq n(N)$; minimality gives the reverse inequality. Thus $N$ is minimal, and its generic identity extends birationally to one of the component opens $P$ of $Y_A$. Compose on the inverse image of the base-dense domain of this identification. The first map is an open immersion by equal-order comparison; its image is fibrewise dense in $N$, so this inverse image is base-dense. We obtain an $A$-rational map $U\\dashrightarrow P\\subseteq Y_A$ extending $\\tau$.",
+   "uses": [
+    "lem-sfb-invariant-volume-translation-character",
+    "lem-sfb-weak-neron-family-rational-property",
+    "lem-sfb-smooth-model-volume-order-comparison",
+    "lem-sfb-minimal-volume-model-smooth-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "4.3 Proposition 4, verification of (iii), together with Lemma 1 and 4.2 Proposition 5."
+   }
+  },
+  {
+   "text": "As the special component varies, these maps agree on overlapping domains because their generic restrictions are $\\tau$ and the target is separated; use the uniqueness clause of the cited rational-spreading statement, now over the DVR $A$. Their union is therefore an $A$-rational self-map $t$ of $Y_A$ extending $\\tau$. Repeat for $\\tau^{-1}$. Equal-order comparison on the finite-component models shows that $t$ is an open immersion on its entire domain of definition; the same holds for its inverse-translation extension. Each image contains the entire generic fibre and is dense in every special component. Indeed, step 3 sends each special component $C$ of $Y_A$ to a component $P_C$, and $\\tau^{-1}$ sends $P_C$ to some $Q$; composing on the dense inverse image gives an $A$-rational map $C\\dashrightarrow Q$ extending the identity of $G_L$. On its domain $W$ this map and the inclusion $W\\subseteq Y_A$ agree on the generic fibre, so they are equal by the uniqueness clause of the rational-spreading statement; hence $Q=C$. Thus $C\\mapsto P_C$ and the corresponding map for $\\tau^{-1}$ are mutually inverse on the finite set of special components, so they are permutations. Intersect the two domains with the inverse images of one another. The resulting opens remain base-dense by this permutation of special components, and the composites are identities by generic uniqueness. Hence $t$ is represented by an isomorphism between $\\operatorname{Spec}A$-dense opens. This proves precisely the required birational translation property for both left and right translations.",
+   "uses": [
+    "lem-sfb-smooth-model-volume-order-comparison",
+    "lem-sfb-minimal-volume-model-smooth-base-change",
+    "lem-sfb-smooth-trait-local-rational-spreading"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "4.3 Proposition 4(iii), printed p.107 (PDF p.113)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-invariant-volume-translation-character",
+  "lem-sfb-weak-neron-family-rational-property",
+  "lem-sfb-smooth-model-volume-order-comparison",
+  "lem-sfb-minimal-volume-model-smooth-base-change",
+  "lem-sfb-rationally-disjoint-model-separated-gluing",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-separated-base-change",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sfb-smooth-trait-local-rational-spreading"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 4.3 Proposition 4 proof, read in the primary scan; local copy WANTED. Assembly and explicit generic-uniqueness details by Q54."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A bounded smooth algebraic group over a discrete valuation field admits a smooth model on which translations extend birationally",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.IsGoodReduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [inst_2 : IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] →\\n            [inst_4 : Algebra R K] →\\n              [inst_5 : IsFractionRing R K] → (W : WeierstrassCurve K) → [WeierstrassCurve.Is\", \"doc\": \"A property of a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, asserting that $ W $ has good reduction. This means $ W $ satisfies minimality conditions with\"}\n  {\"name\": \"WeierstrassCurve.exists_isMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K),\\n  ∃ C, WeierstrassCurve.IsMinimal R (C • W)\", \"doc\": \"For any Weierstrass curve $ W $ defined over the fraction field $ K $ of a discrete valuation ring $ R $, there exists a variable change $ C $ such that the transformed curve $ C \\\\cdot W $ is a minima\"}\n  {\"name\": \"WeierstrassCurve.minimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → WeierstrassCurve K\", \"doc\": \"Given a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, this function returns the minimal Weierstrass curve equivalent to $ W $ under a variable change. The r\"}\n  {\"name\": \"WeierstrassCurve.instIsMinimalMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] {W : WeierstrassCurve K},\\n  WeierstrassCurve.IsMinimal R (WeierstrassCurve.minimal R W)\", \"doc\": \"For any Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, the minimal Weierstrass curve obtained by applying the minimal transformation to $ W $ satisfies the m\"}\n  {\"name\": \"WeierstrassCurve.IsMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} → [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → Prop\", \"doc\": \"A property of a Weierstrass curve over the fraction field $ K $ of a discrete valuation ring $ R $, indicating that the curve satisfies minimality conditions with respect to the valuation induced by $\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"ℕ → (R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"Given a natural number $ n $, a commutative ring $ R $, and a commutative ring $ S $ equipped with an $ R $-algebra structure, the proposition that $ S $ is a standard smooth algebra of relative dimen\"}\n  {\"name\": \"Algebra.instSmoothOfIsStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Algebra.Smooth R S\", \"doc\": \"Every standard smooth algebra over a commutative ring $ R $ is smooth over $ R $. A standard smooth algebra is one isomorphic to a localized polynomial ring $ R[x_1,\\\\ldots,x_n]_f $ with maximal rank J\"}\n  {\"name\": \"WeierstrassCurve.reduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [inst_2 : IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] →\\n            [inst_4 : Algebra R K] →\\n              [inst_5 : IsFractionRing R K] →\\n                (W : WeierstrassCurve K) →\\n    \", \"doc\": \"Given a minimal Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, its reduction is the Weierstrass curve obtained by first constructing the integral model of $ \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Weierstrass minimality and local standard-smooth presentations provide neither a group model nor birational extensions of translations; ordinary BirationalOver definitions have no fibrewise-density or model-existence assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Minimal smooth integral models of algebraic groups stable under generic point translations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"Algebra.smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ is formally smooth over the base commutative ring $R$. This means the localization $A_{\\\\mathfrak{p}}$ satisfies \"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.IsSmooth fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth\", \"doc\": \"A morphism of schemes is smooth if and only if it is locally standard smooth, meaning that for every point in the domain, there exists an open neighborhood where the morphism is isomorphic to a standa\"}\n  {\"name\": \"WeierstrassCurve.instIsIntegralOfIsMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] {W : WeierstrassCurve K}\\n  [WeierstrassCurve.IsMinimal R W], WeierstrassCurve.IsIntegral R W\", \"doc\": \"Every minimal Weierstrass curve over the fraction field of a discrete valuation ring is integral, meaning its coordinate ring forms an integral domain.\"}\n  {\"name\": \"Algebra.smoothLocus_eq_univ\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.Smooth R A],\\n  Algebra.smoothLocus R A = Set.univ\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ coincides with the entire prime spectrum $ \\\\operatorname{Spec}(A) $, i.e., $ \\\\operatorname{smoothL\"}\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"The predicate for a scheme to be integral\"}\n  {\"name\": \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsIntegral X], X.IsGermInjective\", \"doc\": \"Every integral scheme is germ-injective. That is, for every point $ x $ in an integral scheme $ X $, the natural map from the local ring $ \\\\mathcal{O}_{X,x} $ to the stalk of the structure sheaf at $ \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Weierstrass minimality and local standard-smooth presentations provide neither a group model nor birational extensions of translations; ordinary BirationalOver definitions have no fibrewise-density or model-existence assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"birational\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Birational\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" (X Y : AlgebraicGeometry.Scheme) : Prop\", \"doc\": \"`X` and `Y` are birational if there exists a partial isomorphism between them.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Birational.refl\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" (X : AlgebraicGeometry.Scheme) : X.Birational X\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Birational.partialIso\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (h : X.Birational Y) : X.PartialIso Y\", \"doc\": \"Choose a partial isomorphism witnessing that `X` and `Y` are birational.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Birational.symm\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (h : X.Birational Y) : Y.Birational X\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Birational.trans\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" {X Y Z : AlgebraicGeometry.Scheme} (h₁ : X.Birational Y) (h₂ : Y.Birational Z) : X.Birational Z\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.BirationalOver.refl\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" {S X : AlgebraicGeometry.Scheme} (sX : X ⟶ S) : AlgebraicGeometry.Scheme.BirationalOver sX sX\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.BirationalOver\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" {S X Y : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) : Prop\", \"doc\": \"`X` and `Y` are birational over `S` if there exists a partial isomorphism between them\\nthat is compatible with the structure maps to `S`.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.birational\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" {X U : AlgebraicGeometry.Scheme} (f : U ⟶ X) [AlgebraicGeometry.IsOpenImmersion f] [AlgebraicGeometry.IsDominant f] : U.Birational X\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.BirationalOver.partialIso\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" {S X Y : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) (h : AlgebraicGeometry.Scheme.BirationalOver sX sY) : X.PartialIso Y\", \"doc\": \"Choose a partial isomorphism witnessing that `X` and `Y` are birational over `S`.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.BirationalOver.symm\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" {S X Y : AlgebraicGeometry.Scheme} {sX : X ⟶ S} {sY : Y ⟶ S} (h : AlgebraicGeometry.Scheme.BirationalOver sX sY) : AlgebraicGeometry.Scheme.BirationalOver sY sX\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.BirationalOver.isRationalOver\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" {S X Y : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [AlgebraicGeometry.Scheme.IsRationalOver sY] (h : AlgebraicGeometry.Scheme.BirationalOver sX sY) : AlgebraicGeometry.Scheme.IsRationalOver sX\", \"doc\": \"If a scheme `X` is `S`-birational to an `S`-rational scheme `Y`, then `X` is `S`-rational.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.BirationalOver.partialIso_isOver\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" {S X Y : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) (h : AlgebraicGeometry.Scheme.BirationalOver sX sY) : AlgebraicGeometry.Scheme.PartialIso.IsOver sX sY (AlgebraicGeometry.Scheme.BirationalOver.partialIso sX sY h)\", \"doc\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Weierstrass minimality and local standard-smooth presentations provide neither a group model nor birational extensions of translations; ordinary BirationalOver definitions have no fibrewise-density or model-existence assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "minimal.*model|translation.*birational|birational.*translation|smoothening",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: Weierstrass minimality and local standard-smooth presentations provide neither a group model nor birational extensions of translations; ordinary BirationalOver definitions have no fibrewise-density or model-existence assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth model of bounded algebraic group with birational translations over discrete valuation rings",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib.RingTheory.Smooth.Flat\", \"type\": \"[Smooth R A] : Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"Algebra.instSmoothOfIsStandardSmooth\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothCotangent\", \"type\": \"[IsStandardSmooth R S] : Smooth R S\", \"doc\": \"Every standard smooth algebra over a commutative ring $ R $ is smooth over $ R $. A standard smooth algebra is one isomorphic to a localized polynomial ring $ R[x_1,\\\\ldots,x_n]_f $ with maximal rank J\"}\n  {\"name\": \"Algebra.Smooth\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(R : Type u_4) → [inst : CommRing R] → (A : Type u) → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The property that the commutative ring $ A $, equipped with an $ R $-algebra structure, is smooth over the commutative ring $ R $.\"}\n  {\"name\": \"Algebra.Smooth.finitePresentation\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FinitePresentation R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ is finitely presented over $ R $.\"}\n  {\"name\": \"Algebra.Smooth.of_isLocalization_Away\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(r : R) [IsLocalization.Away r A] : Smooth R A\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at the submonoid generated by all powers of an element $ r $, then $ A $ is a smooth $ R $-algebra.\"}\n  {\"name\": \"RingHom.Smooth\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is smooth if the induced $ R $-algebra structure on $ S $ is smooth, meaning $ S $ is flat over $ R $ and the sheaf of differentials $ \\\\Omega_{S/R} $ is locally fre\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Weierstrass minimality and local standard-smooth presentations provide neither a group model nor birational extensions of translations; ordinary BirationalOver definitions have no fibrewise-density or model-existence assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-bounded-group-local-neron-criterion",
+  "date": "2026-10-24",
+  "group": "Q59"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "BLR 1.1 Definition 2 (printed pp.8-9) and 1.3 Theorem 1, if direction (printed p.16, PDF p.22); local-existence input of 1.4 Theorem 3; supporting construction: BLR 4.3 Proposition 4(iii), printed pp.106-107 (PDF pp.112-113), using 3.5 Theorem 2 and 4.3 Propositions 2 and 4; boundedness is BLR 1.1 Definition 2. The local rings and translations here are exactly those in 4.3/4(iii).",
+   "via": [
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-bounded-group-translation-model",
+  "worker": "stage1",
+  "summary": "Q54 preserves the statement and constructs Y from finitely many minimal-volume classes, shrunk to glue separatedly. Weak Néron rational extension, differential order comparison, and smooth trait transport are explicit searched statement-only inputs. Both translation orientations, base change, inverse maps and the whole domain of definition are checked.",
+  "blueprint": "No imported blueprint ancestor (blueprint_refs.py ancestor returns None); retained inherited from.node=null, exact BLR place and entire provenance chain. Latest blueprint unit read; this is a supporting BLR construction in the inherited admissible-direct-image route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Only clause (2), smoothness under base change, for Y_A."
+   },
+   {
+    "node": "lem-weil-pbc-separated-base-change",
+    "why": "Generic separatedness base-change tool for Y_A."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Only clause (2), finite type under arbitrary base change, for Y_A."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-separated-base-change",
+  "lem-sfb-finite-type-composition-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q54-e3e877b81",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-e3e877b81 (reviewer sub-agent of L); spot-checked: Read in full: the item, all five new nodes, the cited base-change and spreading statements, the definition nodes and the parent. BLR is not in literature/, so I read the rendered scan pages myself: printed pp.73-74 (3.5 Def 1, Thm 2, Prop 3), p.103 (4.2/4-5) and pp.104-107 (4.3 order construction, Lemma 1, Prop 2, Lemma 3, Prop 4 with its whole proof). I did not read 3.5/4 itself; 4.3/3 cites it. The item statement and stmt_deps are unchanged (diffed against the Q59 snapshot) and match 4.3/4(iii). This is not a re-split. I checked each new node by re-proving it. Weak family: the family form matches BLR 3.5/1; refining to components works because a smooth special fibre has disjoint components; the converse is 1.1/7. Invariant volume: true for non-connected G; the unit property is 4.2/5. Order comparison: the divisor of a is m[M_k] and the R^sh-point gives m=0; equal orders give an étale birational map, hence an open immersion by ZMT, and the finite-component clause holds componentwise. Gluing: matches condition (*) of 4.3/4; a point of the cross-diagonal closure over ζ_i would give a rational identity map. Minimal classes: matches 4.3/2 and 4.3/3; orders and density survive base change to A. No duplicates in the DAG and no clause restated from the parent. Steps 1-3 follow BLR 4.3/4, with the R'=R reduction done directly over A. FIX in step 4: density of the image in every special component needs distinct components of Y_A to be inequivalent. I added that argument (separatedness of Y_A plus the already-cited uniqueness clause of lem-sfb-smooth-trait-local-rational-spreading: C⇢Q extending the identity forces C=Q, so C↦P_C is a permutation). Whole corrected file in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-bounded-group-translation-model.json; uses unchanged. Accepted tool_uses: lem-pc-proper-base-change (2), lem-weil-pbc-separated-base-change, lem-sfb-finite-type-composition-base-change (2), all generic base-change tools.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BoundedGroupTranslationModel",
+  "declaration": "AlgebraicGeometry.exists_bounded_group_translation_model",
+  "declarations": [
+   "AlgebraicGeometry.IsGenericGroupTranslation",
+   "AlgebraicGeometry.translationModelGenericComparison",
+   "AlgebraicGeometry.exists_bounded_group_translation_model"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/BoundedGroupTranslationModel.lean",
+  "statement": "theorem exists_bounded_group_translation_model (R E : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [Field E] [Algebra R E] [IsFractionRing R E] (G : Over (Spec (.of E))) [GrpObj G] [Smooth G.hom] [IsSeparated G.hom] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ Spec (.of R)) (ht : ∀ x, t x = IsLocalRing.closedPoint R) (hb : HasBoundedStrictHenselianPoints R E t G) : ∃ (Y : Over (Spec (.of R))) (e : (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R E)))).obj Y ≅ G), Smooth Y.hom ∧ IsSeparated Y.hom ∧ LocallyOfFiniteType Y.hom ∧ QuasiCompact Y.hom ∧ Nonempty (Y.hom.fiber (IsLocalRing.closedPoint R)) ∧ ∀ (Z : Over (Spec (.of R))), Smooth Z.hom → LocallyOfFiniteType Z.hom → QuasiCompact Z.hom → ∀ ξ : Z.hom.fiber (IsLocalRing.closedPoint R), (∃ C ∈ irreducibleComponents (Z.hom.fiber (IsLocalRing.closedPoint R)), IsGenericPoint ξ C) → ∃ (hA : IsDomain (Z.left.presheaf.stalk (Z.hom.fiberι _ ξ))) (_ : IsDiscreteValuationRing (Z.left.presheaf.stalk (Z.hom.fiberι _ ξ))), ∃ (j : Spec (.of (FractionRing (Z.left.presheaf.stalk (Z.hom.fiberι _ ξ)))) ⟶ Spec (.of E)) (hj : Spec.map (CommRingCat.ofHom (algebraMap (Z.left.presheaf.stalk (Z.hom.fiberι _ ξ)) (FractionRing (Z.left.presheaf.stalk (Z.hom.fiberι _ ξ))))) ≫ Z.left.fromSpecStalk (Z.hom.fiberι _ ξ) ≫ Z.hom = j ≫ Spec.map (CommRingCat.ofHom (algebraMap R E))), ∀ (g : Over.mk j ⟶ G) (right : Bool), ∃ τ : (Over.pullback j).obj G ⟶ (Over.pullback j).obj G, IsGenericGroupTranslation G j g right τ ∧ HasFiberwiseBirationalExtension (Spec.map (CommRingCat.ofHom (algebraMap (Z.left.presheaf.stalk (Z.hom.fiberι _ ξ)) (FractionRing (Z.left.presheaf.stalk (Z.hom.fiberι _ ξ)))))) ((Over.pullback (Z.left.fromSpecStalk (Z.hom.fiberι _ ξ) ≫ Z.hom)).obj Y) ((translationModelGenericComparison (Spec.map (CommRingCat.ofHom (algebraMap R E))) (Z.left.fromSpecStalk (Z.hom.fiberι _ ξ) ≫ Z.hom) (Spec.map (CommRingCat.ofHom (algebraMap (Z.left.presheaf.stalk (Z.hom.fiberι _ ξ)) (FractionRing (Z.left.presheaf.stalk (Z.hom.fiberι _ ξ)))))) j hj Y G e).hom ≫ τ ≫ (translationModelGenericComparison (Spec.map (CommRingCat.ofHom (algebraMap R E))) (Z.left.fromSpecStalk (Z.hom.fiberι _ ξ) ≫ Z.hom) (Spec.map (CommRingCat.ofHom (algebraMap (Z.left.presheaf.stalk (Z.hom.fiberι _ ξ)) (FractionRing (Z.left.presheaf.stalk (Z.hom.fiberι _ ξ)))))) j hj Y G e).inv)",
+  "branch": "newtargets-dag",
+  "by": "Q89",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4137d7126",
+  "group": "Q89",
+  "result": "fix",
+  "note": "Lean statement and records correct against BLR 4.3/4(iii) and 1.1/2: hypotheses exact; boundedness via one nonzero denominator in R^sh is equivalent to integer valuation bounds (R^sh a DVR, F its fraction field, E->F unique); output Y, the iso over E, smooth/separated/finite type and nonempty special fibre exact; Z smooth finite type with xi the generic point of a special-fibre component, A a DVR as a conclusion; j/hj exists and is unique (A flat over R, Spec E -> Spec R mono), so not vacuous and no choice; translations fixed exactly on points; HasFiberwiseBirationalExtension gives an open immersion with domain and image dense in every fibre, and its maximal-domain clause equals the domain of definition (Y_A flat and separated over A). The two new definition nodes are justified (Mathlib Birational only needs total-space density) and their fields follow the format; item changed only in lean plus stmt_deps additions; lean.statement matches the files; no hollow defs; docstrings OK. Advisory: unneeded private Proper import. Only fault H11: the second reading is the author's self-check. FIX: fixes/lem-sfb-bounded-group-translation-model.report.md = Worker report verbatim plus the reviewer's clause-by-clause second reading. No Lean changed, so no compile."
+ }
+}

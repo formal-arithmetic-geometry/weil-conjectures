@@ -1,0 +1,154 @@
+{
+ "id": "lem-sfb-internal-quotient-roos-limit",
+ "kind": "statement",
+ "title": "Normalized transported actual Roos complex computes the strict derived quotient limit",
+ "statement": "Let l be prime, E a finite extension of Q_l and X any scheme. Use the exact transport F to O-modules [def-sfb-internal-completion-section-transport] and complexIso(P), quotientComplex(P), quotientLimitUnit(P) [def-sfb-internal-quotient-tower-model]. For every actual integral complex P [sk-def-pe-derived-completion] and every total right derived inverse-limit functor RF on O-module towers with comparison c invertible on K-injective towers [lem-weil-pbc-ringed-strict-tower-homotopy-limit], there is an isomorphism e: F(Q(actualRoos(P))) ≅ RF(Q(quotientComplex(P))). Its composite with F(Q(actualAugmentation(P))) is complexIso(P).hom followed by Q(quotientLimitUnit(P)) followed by c at quotientComplex(P). No generator, regularity, K-flatness, Koszul complex or completion presentation occurs.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Section derived-completion-noetherian and Lemma naive-completion (099L, 099M); sites-cohomology.tex Lemma derived-limit-is-ok (0941); algebraization.tex Lemma derived-completion-koszul (0A0E)."
+ },
+ "stmt_deps": [
+  "def-sfb-internal-quotient-tower-model",
+  "def-sfb-internal-completion-section-transport",
+  "sk-def-pe-derived-completion",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "proof": [
+  {
+   "text": "Transpose the actual quotient tower using the existing complex/functor equivalence. Functor.ofOpSequence_map_homOfLE_succ identifies its successor maps with levelStep, so its Roos endomorphism is exactly oneSubShift. The already proved genericCoconeIso identifies the explicit differential (dx,(1-s)x-dy) with the shifted cone. Compute the two coordinates of the image of augmentation: the ordinary product unit and zero. Thus its composite with the source isomorphism is exactly roosAugment of the actual level units.",
+   "uses": [
+    "sk-def-pe-derived-completion",
+    "def-weil-strict-roos-model"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The ordinary functor modules is additive and preserves countable products: scalar restriction commutes with the underlying-object forgetful functors which compute and reflect limits, and smallModules is the existing section equivalence. Apply the proved canonical roosAdditiveComparison and roosAdditiveComparison_isIso. Prove the mapped-tower/transpose interchange generically before specializing the coefficient functor; its target is definitionally quotientComplex. The proved augmentation coordinate identity, followed by extensionality in roosχ, identifies the transported actual augmentation with roosAugment of the mapped level units.",
+   "uses": [
+    "def-sfb-internal-completion-section-transport",
+    "def-sfb-internal-quotient-tower-model",
+    "lem-pur-roos-comparison-horizontal-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Obtain exact countable products for internal modules from the proved pro-etale repleteness/epimorphic-tower theorem, Mod.epiπAppZeroOfEpi and CountableAB4Star.of_epi_π_app_zero, and transport exactness along the existing smallModules equivalence. The module-sheaf Grothendieck theorem and the proved roos_tower_grothendieck argument give K-injective tower resolutions. Use the already proved generic normalizedRoosIso helper of CoefficientConstantTowerRoosComparison with the supplied c, transported across strictTowerLimitIso. Its hypothesis holds because c is invertible on K-injectives. Its normalization states Q(roosι) followed by the comparison is Q(strictTowerLimitIso.hom) followed by c.",
+   "uses": [
+    "def-sfb-internal-completion-section-transport",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-weil-strict-roos-derivation",
+    "stage3-pur-canonical-tower-roos-comparison",
+    "lem-sf-strict-roos-derived-limit-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The limit universal property proves that roosAugmentLimit of the transported units followed by strictTowerLimitIso.hom is quotientLimitUnit: after each degreewise limit projection both maps equal the specified quotient unit. Factor roosAugment through roosAugmentLimit and roosι and apply the normalized comparison equation. Finally naturality of the exact-functor localization factors defining complexIso transports the source augmentation equation. Compose complexIso at the actual Roos complex, the localized transported Roos isomorphism, and the normalized derived-limit isomorphism. This is e and yields exactly the displayed equation. All constructions and identities are functorial and also apply to zero complexes and the empty scheme.",
+   "uses": [
+    "def-sfb-internal-quotient-tower-model",
+    "def-sfb-internal-completion-section-transport",
+    "def-weil-strict-roos-model"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "sk-def-pe-derived-completion",
+  "def-weil-strict-roos-model",
+  "def-sfb-internal-completion-section-transport",
+  "def-sfb-internal-quotient-tower-model",
+  "lem-pur-roos-comparison-horizontal-coherence",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-strict-roos-derivation",
+  "stage3-pur-canonical-tower-roos-comparison",
+  "lem-sf-strict-roos-derived-limit-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, lemma-derived-limit-is-ok; existing signed-coordinate and normalized-comparison Lean proofs, assembled by H6 on 2026-10-26."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "Functor.IsRightDerivedFunctor",
+   "results": "loogle: unknown identifier 'Functor.IsRightDerivedFunctor'",
+   "date": "2026-10-25",
+   "verdict": "No augmented sheaf quotient-tower comparison; use exact-functor localization and existing strict tower APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived inverse limit of quotients by powers of a regular element is computed by the dual Koszul tower, compatibly with the augmentation",
+   "results": "AdicCompletion, Hausdorffification, AdicCompletion.of_apply, AdicCompletion.eval_of, AdicCompletion.mk_smul_top_ofAlgEquiv_symm, AdicCompletion.eval, AdicCompletion.factor_eval_eq_evalₐ, AdicCompletion.val_smul_eq_evalₐ_smul",
+   "date": "2026-10-25",
+   "verdict": "No augmented sheaf quotient-tower comparison; use exact-functor localization and existing strict tower APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "quotient_koszul|roos_isDerivedLimit|RingedKoszulLimitPresentation",
+   "results": "No hits",
+   "date": "2026-10-25",
+   "verdict": "No augmented sheaf quotient-tower comparison; use exact-functor localization and existing strict tower APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact functor preserving countable products carries the augmented Roos complex to the total right derived inverse limit of the transported strict tower",
+   "results": "CategoryTheory.exactFunctor, CategoryTheory.ExactFunctor.of, CategoryTheory.leftExactFunctor, CategoryTheory.rightExactFunctor, CategoryTheory.instPreservesFiniteColimitsObjFunctorExactFunctor, CategoryTheory.ExactFunctor, CategoryTheory.Functor.exact_tfae, CategoryTheory.instPreservesFiniteLimitsObjFunctorLeftExactFunctor",
+   "date": "2026-10-25",
+   "verdict": "No augmented sheaf quotient-tower comparison; use exact-functor localization and existing strict tower APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProEtale.InternalQuotientKoszulUnitComparison",
+  "date": "2026-10-25",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sf-pf-adic-open",
+   "place": "Integral-models proof (1): quotient tower and normalized completion comparison",
+   "via": [
+    "lem-sfb-internal-quotient-koszul-unit-comparison",
+    "lem-sfb-internal-completion-stacks-comparison",
+    "lem-sfb-internal-integral-residue-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-pf-adic",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProEtale.InternalQuotientRoosLimit",
+  "file": "lean/Sheaf/SixFunctors/ProEtale/InternalQuotientRoosLimit.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.InternalCompletionTransport.quotient_roos_limit",
+  "statement": "theorem quotient_roos_limit\n    (P : CochainComplex (AdicCompletion.Modules l E X) ℤ)\n    (RF : DerivedCategory (ℕᵒᵖ ⥤ ConstantCompletion.Mod (ring l E X)) ⥤\n      ConstantCompletion.D (ring l E X))\n    (c : (lim : (ℕᵒᵖ ⥤ ConstantCompletion.Mod (ring l E X)) ⥤ _).mapHomologicalComplex\n      (.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RF)\n    (hc : RF.IsRightDerivedFunctor c\n      (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ ConstantCompletion.Mod (ring l E X)) (.up ℤ)))\n    (hI : ∀ I, CochainComplex.IsKInjective I → IsIso (c.app I)) :\n    ∃ e : (functor l E X).obj (DerivedCategory.Q.obj (AdicCompletion.roos l E X P)) ≅\n        RF.obj (DerivedCategory.Q.obj (quotientComplex l E X P)),\n      (functor l E X).map (DerivedCategory.Q.map (AdicCompletion.augmentation l E X P)) ≫\n        e.hom = (complexIso l E X P).hom ≫\n          DerivedCategory.Q.map (quotientLimitUnit l E X P) ≫\n            c.app (quotientComplex l E X P)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261025T202030-L-2665193",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261026T001758-L-29943",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

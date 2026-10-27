@@ -1,0 +1,467 @@
+{
+ "id": "lem-sfb-point-blowup-exceptional-conormal",
+ "kind": "statement",
+ "title": "Exceptional fibres and conormal bundles of regular surface point blowups",
+ "statement": "Let $X$ be an integral regular Noetherian scheme of dimension $2$ [def-pc-integral-scheme, def-weil-regular-scheme, pqf-def-locnoeth, def-kun-topological-krull-dimension], where Noetherian means locally Noetherian and quasi-compact. Let $p\\in X$ be closed, put $d=\\dim\\mathcal O_{X,p}$ [def-weil-pbc-krull-dimension-ring], and let $b:X'=\\operatorname{Bl}_pX\\to X$ be the blowup of the reduced closed point [def-nagata-global-blowup]. Put $E=b^{-1}(p)$, with its scheme-theoretic fibre structure and closed immersion $i:E\\hookrightarrow X'$ [def-pc-scheme-fibre, def-weil-closed-immersion], and $k=\\kappa(p)$ [def-weil-residue-field]. Then $d\\in\\{1,2\\}$. If $d=1$, then $b$ is an isomorphism and $E\\cong\\operatorname{Spec}k$ [def-weil-affine-spectrum]. If $d=2$, then $E$ is an integral regular Noetherian scheme of dimension $1$, proper over $k$ [def-weil-proper-morphism], and an effective Cartier divisor in $X'$ [def-nagata-effective-cartier-ideal]. There is a $k$-isomorphism $r:E\\xrightarrow{\\sim}\\mathbf P^1_k$ such that $\\mathcal C_{E/X'}\\cong r^*\\mathcal O_{\\mathbf P^1_k}(1)$ as invertible $\\mathcal O_E$-modules [def-sc-p1-standard, def-sc-invertible-module, def-pc-module-pullback]. Here, for the ideal sheaf $\\mathcal I$ of $i$ [def-sbc-closed-immersion-ideal-sheaf], $\\mathcal C_{E/X'}=i^*\\mathcal I$ is the conormal sheaf [lem-weil-pbc-closed-immersion-conormal-functorial].",
+ "source": {
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tag 0AGQ (resolve-lemma-blowup), especially (1) and (3), globalized at the closed centre by localization. The dimension-one case is the invertible-centre case of the blowup universal property (cor-nagata-blowup-cartier-iso); the projective-line regularity, dimension and properness are the standard two polynomial charts and projective-space structure."
+ },
+ "stmt_deps": [
+  "def-pc-integral-scheme",
+  "def-weil-regular-scheme",
+  "pqf-def-locnoeth",
+  "def-kun-topological-krull-dimension",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-nagata-global-blowup",
+  "def-pc-scheme-fibre",
+  "def-weil-closed-immersion",
+  "def-weil-residue-field",
+  "def-weil-affine-spectrum",
+  "def-weil-proper-morphism",
+  "def-nagata-effective-cartier-ideal",
+  "def-sc-p1-standard",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-weil-pbc-closed-immersion-conormal-functorial",
+  "def-pc-projective-space-twist"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine neighbourhood $V=\\operatorname{Spec}R$ of $p$, with corresponding maximal ideal $\\mathfrak n$. By [lem-weil-pbc-affine-open-stalk-localization], $A=\\mathcal O_{X,p}=R_{\\mathfrak n}$. Integrality makes $R$ a domain. Prime chains in $R_{\\mathfrak n}$ give chains of irreducible closed subsets of $X$ by taking their closures, so $d\\le\\dim X=2$. If $d=0$, the prime $(0)$ in the domain $R$ equals $\\mathfrak n$, hence $p$ is the generic point of $V$ and of $X$. Its being closed would force the integral scheme $X$ to have just one point, contradicting dimension $2$. Thus $d\\in\\{1,2\\}$. Write $\\mathcal J$ for the ideal of the reduced closed point; its stalk at $p$ is the maximal ideal of $A$, and its stalk at every other point is the whole local ring.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-pc-integral-scheme",
+    "def-kun-topological-krull-dimension",
+    "def-weil-pbc-krull-dimension-ring",
+    "def-sbc-closed-immersion-ideal-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0AGQ (lemma-blowup), localization setup; elementary dimension-chain reduction for the global statement."
+   }
+  },
+  {
+   "text": "On each member of an affine covering with Noetherian coordinate rings, the ideal defining $\\mathcal J$ is finitely generated, by [def-weil-pbc-noetherian-ring]. Its associated ideal sheaf is quasi-coherent by [def-sbc-closed-immersion-ideal-sheaf], and consequently coherent by [pqf-lem-coherent-ft-locnoeth]. In particular $\\mathcal J$ is a finite-type quasi-coherent ideal, as required by the blowup principalization theorem below.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01XZ (lemma-coherent-Noetherian), applied to the closed-point ideal on a locally Noetherian scheme."
+   }
+  },
+  {
+   "text": "If $d=1$, regularity means that $\\mathfrak m_A=(x)$ for one element $x$. The domain $A$ has dimension one, so $x\\ne0$, and multiplication by $x$ identifies $A$ with $\\mathcal J_p$. At every other point $\\mathcal J$ has stalk equal to the local ring. Hence every stalk of this coherent ideal is free of rank one. Apply [lem-sc-coherent-free-stalks-locally-free]; its local free ranks are one, as seen on these stalks. Thus $\\mathcal J$ is invertible, and [cor-nagata-blowup-cartier-iso] makes $b$ an isomorphism. Its scheme-theoretic fibre over $p$ is therefore $\\operatorname{Spec}k$, by the fibre-product definition of a fibre.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "def-pc-integral-scheme",
+    "lem-sc-coherent-free-stalks-locally-free",
+    "cor-nagata-blowup-cartier-iso",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0807 (lemma-blow-up-effective-Cartier-divisor); coherent local freeness as in algebra.tex Tag 0GWM."
+   }
+  },
+  {
+   "text": "Assume now $d=2$. Use the affine neighbourhood $V=\\operatorname{Spec}R$ above and $T=R\\setminus\\mathfrak n$. The map $g:\\operatorname{Spec}A\\to V\\to X$ is flat. Indeed, a prime of $A=R_{\\mathfrak n}$ corresponds to a prime $\\mathfrak q\\subseteq\\mathfrak n$ of $R$; its stalk map is $R_{\\mathfrak q}\\to (R_{\\mathfrak n})_{\\mathfrak qR_{\\mathfrak n}}$, an isomorphism by the fraction descriptions in [lem-weil-pbc-affine-open-stalk-localization]: its inverse sends $(a/s)/(b/u)$ to $au/(sb)$, where $s,u\\notin\\mathfrak n$ and $b\\notin\\mathfrak q$, so $sb\\notin\\mathfrak q$. Thus these stalk maps are flat by [lem-weil-pbc-localization-flat], as required by [def-weil-flat-morphism]. The ideal $\\mathcal J$ extends to $\\mathfrak m_A$. Apply the comparison constructed in [def-nagata-blowup-flat-base-change-map] and its isomorphism assertion [thm-nagata-blowup-flat-base-change]. This identifies $Y=\\operatorname{Bl}_{\\mathfrak m_A}\\operatorname{Spec}A$ with $\\operatorname{Spec}A\\times_X X'$. Denote its projection by $h:Y\\to X'$. Taking the further fibre over $\\operatorname{Spec}k$ identifies $F=Y\\times_{\\operatorname{Spec}A}\\operatorname{Spec}k$ canonically with $E$, with the same $k$-structure. On every affine open $\\operatorname{Spec}C$ of $b^{-1}(V)$, the corresponding open of $Y$ is $\\operatorname{Spec}(T^{-1}C)$.",
+   "uses": [
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-flat-morphism",
+    "def-nagata-blowup-flat-base-change-map",
+    "thm-nagata-blowup-flat-base-change",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0805 (lemma-flat-base-change-blowing-up), followed by associativity of fibre products."
+   }
+  },
+  {
+   "text": "Choose generators $x,y$ of $\\mathfrak m_A$, using regularity and $d=2$. Both $(x,y)$ and $(y,x)$ are regular sequences by [lem-weil-pbc-regular-local-generators-regular-sequence]. First identify $Y$ with the affine blowup $\\operatorname{Bl}_{\\mathfrak m_A}(\\operatorname{Spec}A)=\\operatorname{Proj}\\mathcal R_A(\\mathfrak m_A)$: for the one-member affine cover $\\{\\operatorname{Spec}A\\}$ the glue datum of [def-nagata-global-blowup-glue-data] consists of the single local model $\\mathsf B_{\\operatorname{Spec}A}=\\operatorname{Bl}_{\\mathfrak m_A}(\\operatorname{Spec}A)$ of [def-nagata-global-blowup-local-model], and [prop-nagata-global-blowup-cover-independent] identifies the global blowup over $\\operatorname{Spec}A$ with it. By [prop-nagata-affine-blowup-chart-cover] the $x$- and $y$-charts then cover $Y$; [prop-nagata-affine-blowup-chart] identifies their maps [def-nagata-affine-blowup-chart-map] with the standard opens $D_+(xu)$ and $D_+(yu)$ of the Rees Proj, where $u$ is its degree-one bookkeeping variable. Their rings, by [lem-trf-blowup-chart-regular-sequence-presentation], are\n$$C_x=A[t]/(xt-y),\\qquad C_y=A[s]/(ys-x),$$\nwhere $t=y/x$ and $s=x/y$. By [lemma-nagata-chart-extended-ideal-principal], the ideal $\\mathfrak m_A\\mathcal O_Y$ is $(x)$ and $(y)$ on these charts. Consequently the fibre charts are $C_x/(x)=k[t]$ and $C_y/(y)=k[s]$. On the intersection, $t$ is invertible and $s=t^{-1}$: the intersection is the standard open where the other degree-one generator of the Rees algebra is invertible relative to the chosen generator, equivalently $D(t)$ on the $x$-chart. Thus these fibre charts glue precisely to the two charts of [def-sc-p1-standard]. They give a $k$-isomorphism $r:E=F\\xrightarrow{\\sim}\\mathbf P^1_k$.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "def-nagata-global-blowup-glue-data",
+    "def-nagata-global-blowup-local-model",
+    "prop-nagata-global-blowup-cover-independent",
+    "prop-nagata-affine-blowup-chart-cover",
+    "prop-nagata-affine-blowup-chart",
+    "lem-trf-blowup-chart-regular-sequence-presentation",
+    "lemma-nagata-chart-extended-ideal-principal",
+    "def-nagata-blowup-chart-ring",
+    "def-nagata-affine-blowup-chart-map",
+    "def-sc-p1-standard"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0AGQ (lemma-blowup), proof of (1), using the explicit charts of more-algebra.tex Tag 0BIQ (lemma-blowup-regular-sequence)."
+   }
+  },
+  {
+   "text": "By [thm-nagata-blowup-principalizes-center], $\\mathcal I=\\mathcal J\\mathcal O_{X'}$ is an invertible ideal defining an effective Cartier divisor. This divisor is exactly the scheme-theoretic fibre $E$, since the reduced closed point has ideal $\\mathcal J$: on an affine open $\\operatorname{Spec}C$ of $b^{-1}(V)$ the fibre is $\\operatorname{Spec}(C\\otimes_R R/\\mathfrak n)=\\operatorname{Spec}(C/\\mathfrak nC)$, with $\\mathfrak nC=\\Gamma(\\operatorname{Spec}C,\\mathcal J\\mathcal O_{X'})$ and $R/\\mathfrak n=R_{\\mathfrak n}/\\mathfrak nR_{\\mathfrak n}=k$ as $\\mathfrak n$ is maximal, while over $X\\setminus\\{p\\}$ the fibre is empty and $\\mathcal J\\mathcal O_{X'}$ is the unit ideal. We also need its conormal on the localized model $Y$. The conormal map of [lem-weil-pbc-closed-immersion-conormal-functorial] for $h$ identifies the original conormal on $E$ with that on $F$. Indeed, on an affine open with ideal $I\\subset C$, [lem-weil-pbc-affine-conormal-sections] writes this map as\n$$I/I^2\\longrightarrow (T^{-1}I)/(T^{-1}I)^2,\\qquad a\\bmod I^2\\longmapsto a/1\\bmod (T^{-1}I)^2.$$\nHere $(T^{-1}I)^2=T^{-1}(I^2)$: a product $(a/t)(b/u)$ has numerator $ab\\in I^2$, and a fraction $ab/t$ equals $(a/t)(b/1)$, with finite sums giving both inclusions. After restriction to $E$, every element of $T$ is already a unit (its nonzero residue in $k$ is invertible). Thus its inverse sends $a/t$ to $t^{-1}a$ in $I/I^2$. This is well-defined: equality of localized representatives means that an element of $T$ kills their cross-multiplied difference modulo $I^2$, and multiplication by that element is invertible on the $C/I$-module $I/I^2$. The two composites are identities. The formulas commute with restriction of fractions, so agree on overlaps and identify the conormal sheaves on all of $E$.",
+   "uses": [
+    "thm-nagata-blowup-principalizes-center",
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-closed-immersion-conormal-functorial",
+    "lem-weil-pbc-affine-conormal-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02OS (lemma-blowing-up-gives-effective-Cartier-divisor); morphisms.tex Tags 01R3 (lemma-affine-conormal) and 01R4 (lemma-conormal-functorial), with the displayed elementary localization calculation."
+   }
+  },
+  {
+   "text": "On $\\operatorname{Spec}C_x$ the element $x$ is a nonzerodivisor: $C_x=A[\\mathfrak m_A/x]\\subset A_x$ by [def-nagata-blowup-chart-ring], and $A$ is a domain. Likewise $y$ is a nonzerodivisor on the other chart. Hence the conormal modules given by [lem-weil-pbc-affine-conormal-sections] are $(x)/(x^2)\\cong k[t]$ with basis $[x]$, and $(y)/(y^2)\\cong k[s]$ with basis $[y]$. Explicitly $\\bar a\\mapsto ax\\bmod x^2$ is bijective because $x$ is a nonzerodivisor, and similarly for $y$. On the overlap $[y]=t[x]$, since $y=tx$ already in the ambient chart. In [def-sc-p1-standard], the frames $g_0,g_1$ of $\\mathcal O(1)$ satisfy $g_1=tg_0$. Sending $r^*g_0$ to $[x]$ and $r^*g_1$ to $[y]$ therefore glues to an isomorphism $r^*\\mathcal O(1)\\cong\\mathcal C_{E/X'}$. The two displayed free rank-one modules also verify invertibility directly.",
+   "uses": [
+    "def-nagata-blowup-chart-ring",
+    "lem-weil-pbc-affine-conormal-sections",
+    "def-sc-p1-standard",
+    "def-sc-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0AGQ (lemma-blowup), (3), and divisors.tex Tag 0B3P (lemma-conormal-effective-Cartier-divisor); explicit transition calculation."
+   }
+  },
+  {
+   "text": "Finally [lem-sc-p1-regular-dimension-one] gives Noetherianity, regularity and dimension one for $\\mathbf P^1_k$, and [lemma-nagata-projective-space-base-change-proper] gives its properness over $k$, taking the two-element index set and base $\\operatorname{Spec}k$. It is integral: its two standard affine charts have domain rings $k[t]$ and $k[s]$, are reduced, and have common nonempty dense open $\\operatorname{Spec}k[t,t^{-1}]$. Each chart is irreducible, and the density of their common open makes their union irreducible; the union is also reduced and nonempty. The equivalence in [def-pc-integral-scheme] proves integrality. All these properties pass along the $k$-isomorphism $r$ to $E$, completing the $d=2$ case.",
+   "uses": [
+    "lem-sc-p1-regular-dimension-one",
+    "lemma-nagata-projective-space-base-change-proper",
+    "def-sc-p1-standard",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JE (example-projective-line), two polynomial charts; projective-space properness as in the cited existing node."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-pc-integral-scheme",
+  "def-kun-topological-krull-dimension",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-weil-pbc-noetherian-ring",
+  "pqf-lem-coherent-ft-locnoeth",
+  "def-weil-regular-scheme",
+  "lem-sc-coherent-free-stalks-locally-free",
+  "cor-nagata-blowup-cartier-iso",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-localization-flat",
+  "def-weil-flat-morphism",
+  "def-nagata-blowup-flat-base-change-map",
+  "thm-nagata-blowup-flat-base-change",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "def-nagata-global-blowup-glue-data",
+  "def-nagata-global-blowup-local-model",
+  "prop-nagata-global-blowup-cover-independent",
+  "prop-nagata-affine-blowup-chart-cover",
+  "prop-nagata-affine-blowup-chart",
+  "lem-trf-blowup-chart-regular-sequence-presentation",
+  "lemma-nagata-chart-extended-ideal-principal",
+  "def-nagata-blowup-chart-ring",
+  "def-nagata-affine-blowup-chart-map",
+  "def-sc-p1-standard",
+  "thm-nagata-blowup-principalizes-center",
+  "lem-weil-pbc-closed-immersion-conormal-functorial",
+  "lem-weil-pbc-affine-conormal-sections",
+  "def-sc-invertible-module",
+  "lem-sc-p1-regular-dimension-one",
+  "lemma-nagata-projective-space-base-change-proper"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tag 0AGQ (lemma-blowup), (1) and (3), with explicit chart computation, flat localization, and the invertible-centre case."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The exceptional divisor of the blowup of a two dimensional regular closed point is a projective line and its conormal bundle is O(1)",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {f : A} →\\n                {m : ℕ} →\\n                  (f_deg : f ∈ 𝒜 m) →\\n                 \", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees, the pullback of the inclusion morphisms $\\\\operatorname{Spec}(\\\\mathcal{A}\"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_fromSpec\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m)\\n  (x :\\n    ↑↑(AlgebraicGeometry.Spec.locallyRingedSpaceObj\\n            { carrier := HomogeneousLocalization.\", \"doc\": \"For a homogeneous element $ f $ of positive degree in a graded ring $ \\\\mathcal{A} $, the composition of the continuous map from the projective spectrum $ \\\\operatorname{Proj}(\\\\mathcal{A}) $ to the prim\"}\n  {\"name\": \"AlgebraicGeometry.projIsoSpecTopComponent\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          {𝒜 : ℕ → σ} →\\n            [inst_3 : GradedRing 𝒜] →\\n              {f : A} →\\n                {m : ℕ} →\\n                  f ∈ 𝒜 m →\\n                    0 < m\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and a homogeneous element $f$ of positive degree $m$, there is a homeomorphism between the basic open set $D_+(f) \\\\subseteq \\\\operatorname{Proj}(\\\\mathcal{A})$ and the pr\"}\n  {\"name\": \"AlgebraicGeometry.Proj.awayι\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              (f : A) →\\n                {m : ℕ} →\\n                  f ∈ 𝒜 m →\\n                    0 < m →\", \"doc\": \"The canonical morphism from the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_{(f)})$ to the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$, constructed by composing the inverse of the isomor\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {X : AlgebraicGeometry.Scheme} (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤)))\\n  (hf : Ideal.map f (HomogeneousIdeal.irrelevant 𝒜).toIdeal = ⊤),\\n  CategoryTheo\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ over a commutative ring $A$, a scheme $X$, and a ring homomorphism $f : A \\\\to \\\\Gamma(X, \\\\mathcal{O}_X)$ such that the image of the irrelevant ideal $\\\\mathcal{I} \\\\subs\"}\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m')\\n  (hm' : 0 < m') {x : A} (hx : x = f * g) {Z : AlgebraicGeometry.Scheme}\\n \", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees, the pullback of the inclusion morphisms $\\\\operatorname{Spec}(\\\\mathcal{A}\"}\n  {\"name\": \"AlgebraicGeometry.projIsoSpec\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              (f : A) →\\n                {m : ℕ} →\\n                  f ∈ 𝒜 m →\\n                    0 < m\", \"doc\": \"For a graded ring $ \\\\mathcal{A} $ and a homogeneous element $ f $ of positive degree $ m $, the morphism of locally ringed spaces from the basic open set $ D_+(f) \\\\subseteq \\\\text{Proj}(\\\\mathcal{A}) $ \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: basic Proj chart isomorphisms, cotangent-space definitions and tangent bundles do not identify the exceptional conormal of a regular point blowup."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Blowing up a regular point on a nonsingular surface has exceptional P1 with conormal the tautological positive line bundle",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TangentSpace.vectorBundle\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.Tangent\", \"type\": \": VectorBundle 𝕜 E (TangentSpace I : M → Type _)\", \"doc\": \"The tangent space at each point of a manifold $ M $ modeled on a normed vector space $ E $ forms a vector bundle over $ M $, where each fiber is canonically isomorphic to $ E $. This structure is indu\"}\n  {\"name\": \"TangentSpace.fiberBundle\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.Tangent\", \"type\": \": FiberBundle E (TangentSpace I : M → Type _)\", \"doc\": \"The tangent space at each point of a manifold $ M $ modeled on a normed vector space $ E $ forms a fiber bundle over $ M $, where each fiber is canonically isomorphic to $ E $. This structure is induc\"}\n  {\"name\": \"WeierstrassCurve.Projective.Point.toAffineLift_some\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Projective.Point\", \"type\": \"{X Y : F} (h : W.NonsingularLift ⟦![X, Y, 1]⟧) : toAffineLift ⟨h⟩ = .some ((nonsingular_some ..).mp h)\", \"doc\": \"For a projective Weierstrass curve over a field $ F $, if the point $[X:Y:1]$ is nonsingular, then its affine lift $(X, Y)$ corresponds to a nonsingular point on the affine Weierstrass curve. This est\"}\n  {\"name\": \"WeierstrassCurve.Projective.nonsingularLift_zero\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Projective.Basic\", \"type\": \"[Nontrivial R] : W'.NonsingularLift ⟦![0, 1, 0]⟧\", \"doc\": \"For any non-trivial commutative ring $ R $, the projective point $[0:1:0]$ on the Weierstrass curve defined by $ Y^2Z = X^3 + aXZ^2 + bZ^3 $ satisfies the nonsingularity condition. This means the poin\"}\n  {\"name\": \"WeierstrassCurve.Projective.Point.mk_point\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Projective.Point\", \"type\": \"{P : PointClass R} (h : W'.NonsingularLift P) : (mk h).point = P\", \"doc\": \"For a projective point class $ P $ over a commutative ring $ R $ and a proof that $ P $ satisfies the nonsingularity condition on a projective Weierstrass curve $ W' $, the projective point class of t\"}\n  {\"name\": \"IsLocalRing.CotangentSpace\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \": Type _\", \"doc\": \"The cotangent space of a local ring $ R $ is the quotient of its maximal ideal $ \\\\mathfrak{m} $ by the square $ \\\\mathfrak{m}^2 $, where $ \\\\mathfrak{m} $ consists of all non-units of $ R $. This constr\"}\n  {\"name\": \"WeierstrassCurve.Projective.Point.nonsingular\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Projective.Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Projective R} (self : W'.Point), W'.NonsingularLift self.point\", \"doc\": \"Every point on a projective Weierstrass curve over a commutative ring $ R $ is nonsingular, meaning it satisfies the curve's homogeneous cubic equation $ Y^2Z = X^3 + aXZ^2 + bZ^3 $ and at least one p\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.some.elim\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Affine.Point\", \"type\": \"{R : Type r} →\\n  [inst : CommRing R] →\\n    {W' : WeierstrassCurve.Affine R} →\\n      {motive : W'.Point → Sort u} →\\n        (t : W'.Point) →\\n          t.ctorIdx = 1 →\\n            ({x y : R} → (h : W'.Nonsingular x y) → motive (WeierstrassCurve.Affine.Point.some h)) → motive t\", \"doc\": \"Given a commutative ring $ R $, an affine Weierstrass curve $ W $ over $ R $, a type family $ P $ over $ W $-points, a point $ t $ on $ W $, and a proof that $ t $ is a nonsingular point (i.e., its co\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: basic Proj chart isomorphisms, cotangent-space definitions and tangent bundles do not identify the exceptional conormal of a regular point blowup."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"conormal\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: basic Proj chart isomorphisms, cotangent-space definitions and tangent bundles do not identify the exceptional conormal of a regular point blowup."
+  },
+  {
+   "tool": "grep",
+   "query": "conormal|blowup|blow.up",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: basic Proj chart isomorphisms, cotangent-space definitions and tangent bundles do not identify the exceptional conormal of a regular point blowup."
+  },
+  {
+   "tool": "grep",
+   "query": "conormal|blowup|blow.up",
+   "results": {
+    "t": "2026-10-22T06:43:25Z",
+    "tool": "grep",
+    "query": "conormal|blowup|blow.up",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: no algebraic-geometric blowup or conormal declaration found"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The exceptional divisor of blowing up a two dimensional regular local ring is a projective line with normal bundle O(-1)",
+   "results": {
+    "t": "2026-10-22T06:43:26Z",
+    "tool": "leansearch",
+    "query": "The exceptional divisor of blowing up a two dimensional regular local ring is a projective line with normal bundle O(-1)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ringKrullDim_quotSMulTop_succ_eq_ringKrullDim",
+     "AlgebraicGeometry.Proj.stalkIso'_symm_mk",
+     "ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim",
+     "AlgebraicGeometry.stalkClosedPointIso",
+     "ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors",
+     "AlgebraicGeometry.projIsoSpec",
+     "IsLocalRing.CotangentSpace.span_image_eq_top_iff",
+     "AlgebraicGeometry.StructureSheaf.localRingLocalizations"
+    ],
+    "digest": "e7f58893135567c7"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern stalks, generic Proj charts, cotangent generators, dimension drop, or elliptic curves; none identifies this exceptional conormal"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"blowup\"",
+   "results": {
+    "t": "2026-10-22T06:43:26Z",
+    "tool": "loogle",
+    "query": "\"AlgebraicGeometry\", \"blowup\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: no algebraic-geometric blowup or conormal declaration found"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional fibre of the blowup of a regular surface closed point and its conormal line bundle O(1)",
+   "results": {
+    "t": "2026-10-22T06:43:36Z",
+    "tool": "leanfinder",
+    "query": "Exceptional fibre of the blowup of a regular surface closed point and its conormal line bundle O(1)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.SpecToEquivOfLocalRing_apply_fst",
+     "AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply",
+     "WeierstrassCurve.Affine.CoordinateRing.XYIdeal'",
+     "AlgebraicGeometry.specTargetImage",
+     "WeierstrassCurve.Affine.CoordinateRing.XYIdeal'_eq",
+     "AlgebraicGeometry.SpecToEquivOfLocalRing_apply_snd_coe",
+     "AlgebraicGeometry.Scheme.range_fromSpecResidueField",
+     "AlgebraicGeometry.Scheme.Spec_map_residue_apply"
+    ],
+    "digest": "6216515ad323de17"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern stalks, generic Proj charts, cotangent generators, dimension drop, or elliptic curves; none identifies this exceptional conormal"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-point-exceptional-isomorphism-neighbourhood",
+  "date": "2026-10-22",
+  "group": "Q84"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Inherited Tag 0C5R exceptional-fibre argument: source and target conormal modules are invertible of degree 1. The point-blowup side is realized by the two regular-parameter charts and their positive conormal transition.",
+   "via": [
+    "lem-sfb-point-exceptional-isomorphism-neighbourhood",
+    "lem-sfb-proper-birational-surface-factorization",
+    "lem-sfb-common-regular-surface-resolution",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-point-blowup-exceptional-conormal",
+  "worker": "stage1",
+  "summary": "Eight steps prove the dimension dichotomy, the invertible closed-point ideal in dimension one, flat localization, the two regular-sequence charts and fibre gluing, and the positive conormal transition. Existing DAG tools suffice; no new nodes and no changed mathematical statement. All cited statements were read and quoted in citations.json. Repair of the live-DAG promotion return: compared the retained split and full-statement citations with the current DAG, verified all 40 citations unchanged, and made the iterated-localization inverse and localized conormal inverse well-definedness explicit before rebasing through the delivery tool. Current repair: reread all 29 distinct current cited statements and checked the 40 verbatim citation entries after the diagnostic rebase; no cited statement changed. Step 6 now explicitly proves that localization commutes with the square of the ideal, justifying the quotient in the localized conormal inverse.",
+  "blueprint": "The inherited Tag 0C5R conormal-degree-one sentence in the point-exceptional-isomorphism-neighbourhood branch; the local point blowup side is computed explicitly, retaining both possible closed-point local dimensions.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Affine germs identify the local centre and localization used in the surface blowup calculation. No node of this unit supplies this generic tool."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Generic coherence criterion for the closed-point ideal; not a replacement of a unit step. No node of this unit supplies this generic tool."
+   },
+   {
+    "node": "lem-sc-coherent-free-stalks-locally-free",
+    "why": "Generic coherent local freeness criterion for the dimension-one centre. No node of this unit supplies this generic tool."
+   },
+   {
+    "node": "cor-nagata-blowup-cartier-iso",
+    "why": "The invertible-centre case of the ordinary blowup universal property. No node of this unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-localization-flat",
+    "why": "Generic algebraic flatness of localization, needed to pass to the local scheme. No node of this unit supplies this generic tool."
+   },
+   {
+    "node": "thm-nagata-blowup-flat-base-change",
+    "why": "Generic flat base change of the ordinary blowup, used only at the closed centre. No node of this unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "why": "Generic regular-parameter theorem verifying both chart-presentation hypotheses. No node of this unit supplies this generic tool."
+   },
+   {
+    "node": "prop-nagata-affine-blowup-chart-cover",
+    "why": "Standard affine charts cover an ordinary affine blowup. No node of this unit supplies this generic tool."
+   },
+   {
+    "node": "prop-nagata-affine-blowup-chart",
+    "why": "The chart morphism is an isomorphism with the specified standard homogeneous open, to check the intersection. No node of this unit supplies this generic tool."
+   },
+   {
+    "node": "lem-trf-blowup-chart-regular-sequence-presentation",
+    "why": "Generic regular-sequence blowup chart algebra, used with two parameters. No node of this unit supplies this generic tool."
+   },
+   {
+    "node": "lemma-nagata-chart-extended-ideal-principal",
+    "why": "Generic chart principalization formula, used to compute the actual fibre and conormal. No node of this unit supplies this generic tool."
+   },
+   {
+    "node": "thm-nagata-blowup-principalizes-center",
+    "why": "Generic ordinary blowup principalization gives the global Cartier assertion. No node of this unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-conormal-functorial",
+    "why": "Generic functorial conormal map, whose inverse is written explicitly after localization. No node of this unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-conormal-sections",
+    "why": "Generic affine conormal quotient, used for the localization and frame computations. No node of this unit supplies this generic tool."
+   },
+   {
+    "node": "lem-sc-p1-regular-dimension-one",
+    "why": "Standard projective-line regularity and dimension, independent of the six-functor route. No node of this unit supplies this generic tool."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Standard properness of projective space, used for the exceptional projective line. No node of this unit supplies this generic tool."
+   },
+   {
+    "node": "prop-nagata-global-blowup-cover-independent",
+    "why": "Generic independence of the global blowup from the chosen affine cover, used to identify the global blowup of Spec A with the affine Proj of its Rees algebra before applying the affine chart interfaces. No node of this unit supplies this generic tool. (Added by reviewer.)"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-sc-coherent-free-stalks-locally-free",
+  "cor-nagata-blowup-cartier-iso",
+  "lem-weil-pbc-localization-flat",
+  "thm-nagata-blowup-flat-base-change",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "prop-nagata-affine-blowup-chart-cover",
+  "prop-nagata-affine-blowup-chart",
+  "lem-trf-blowup-chart-regular-sequence-presentation",
+  "lemma-nagata-chart-extended-ideal-principal",
+  "thm-nagata-blowup-principalizes-center",
+  "lem-weil-pbc-closed-immersion-conormal-functorial",
+  "lem-weil-pbc-affine-conormal-sections",
+  "lem-sc-p1-regular-dimension-one",
+  "lemma-nagata-projective-space-base-change-proper",
+  "prop-nagata-global-blowup-cover-independent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-0b0489e37",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-0b0489e37 (reviewer sub-agent of L); spot-checked: I read all 8 steps, every cited statement and Stacks 0AGQ (resolve.tex lines 449-507, lemma-blowup). The mathematics is correct. Step 1: d in {1,2}, because d=0 would make p a closed generic point. Step 2: the point ideal is finite type and quasi-coherent, hence coherent (01XZ). Step 3: for d=1 the stalks are free of rank one, the ideal is invertible, b is an isomorphism and the fibre is Spec k. Step 4: Spec A -> X is flat (stalk maps are isomorphisms, inverse checked), flat blowup base change gives Y, and F = E. Step 5: with (x,y) and (y,x) regular, 0BIQ gives A[t]/(xt-y) and A[s]/(ys-x), the fibre charts are k[t] and k[s] with overlap D(t). Step 6: conormal comparison I/I^2 -> T^-1 I/(T^-1 I)^2; T acts invertibly mod n. Step 7: [y]=t[x] matches g1=t g0 for O(1), a positive sign as in 0AGQ(3). Step 8: P^1_k is regular of dimension 1, proper and integral. Small cases: a height-one point, k[x,y]_(x,y), Z_(p)[x]_(p,x). No new nodes. Duplicate search (rg -L for conormal with blow, 0AGQ): lem-per-local-surface-maximal-blowup-geometry, lem-per-surface-point-blowup-geometry and lem-sfb-regular-point-blowup-geometry have no conormal and no r, so none is a duplicate. Batch-5 flag: lem-trf-blowup-chart-regular-sequence-presentation is the commutative-algebra chart presentation of Stacks 0BIQ. Its 18-node closure contains no trace-formula or Poincare-duality node, and it is neither an assumed statement nor a step of their proofs, so I accept it. FIX: this is the 4th delivery of the same split, and it again drops the reviewer FIX of runs 2c57, 2b33 and 7c0c. I re-applied it on this head. Step 5: identify the global blowup of Spec A with the affine Rees Proj via def-nagata-global-blowup-glue-data, def-nagata-global-blowup-local-model and prop-nagata-global-blowup-cover-independent, which the affine chart-cover and chart nodes need. Step 6: the fibre-ideal argument (C tensor_R R/n = C/nC; unit ideal off p), spliced in before the head's new correct sentence (T^-1 I)^2 = T^-1(I^2). proof_deps recomputed as the union of uses; tool_use prop-nagata-global-blowup-cover-independent re-added. Statement and stmt_deps unchanged; longest step 1785 characters. Maintainer note: carry the merged fix forward; do not ask for another push.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PointBlowupExceptionalConormal",
+  "declaration": "AlgebraicGeometry.Scheme.point_blowup_exceptional_conormal",
+  "file": "lean/Sheaf/AlgebraicGeometry/PointBlowupExceptionalConormal.lean",
+  "statement": "theorem point_blowup_exceptional_conormal (X : Scheme.{u}) [IsIntegral X] [IsNoetherian X] (hX : IsRegularScheme X) (hdim : topologicalKrullDim X = 2) (p : X) (hp : IsClosed ({p} : Set X)) : (ringKrullDim (X.presheaf.stalk p) = 1 ∨ ringKrullDim (X.presheaf.stalk p) = 2) ∧ IsClosedImmersion ((X.fromSpecResidueField p).ker.blowupMap.fiberι p) ∧ (ringKrullDim (X.presheaf.stalk p) = 1 → IsIso (X.fromSpecResidueField p).ker.blowupMap ∧ Nonempty ((X.fromSpecResidueField p).ker.blowupMap.fiber p ≅ Spec (X.residueField p))) ∧ (ringKrullDim (X.presheaf.stalk p) = 2 → IsIntegral ((X.fromSpecResidueField p).ker.blowupMap.fiber p) ∧ IsRegularScheme ((X.fromSpecResidueField p).ker.blowupMap.fiber p) ∧ IsNoetherian ((X.fromSpecResidueField p).ker.blowupMap.fiber p) ∧ topologicalKrullDim ((X.fromSpecResidueField p).ker.blowupMap.fiber p) = 1 ∧ IsProper ((X.fromSpecResidueField p).ker.blowupMap.fiberToSpecResidueField p) ∧ ((X.fromSpecResidueField p).ker.blowupMap.fiberι p).ker.IsInvertible ∧ Modules.IsInvertible ((Modules.tensorPullback ((X.fromSpecResidueField p).ker.blowupMap.fiberι p)).obj ((X.fromSpecResidueField p).ker.blowupMap.fiberι p).ker.toModules) ∧ ∃ r : (X.fromSpecResidueField p).ker.blowupMap.fiber p ≅ ProjectiveLine (Spec (X.residueField p)), r.hom ≫ (ProjectiveLine (Spec (X.residueField p)) ↘ Spec (X.residueField p)) = (X.fromSpecResidueField p).ker.blowupMap.fiberToSpecResidueField p ∧ Nonempty ((Modules.tensorPullback ((X.fromSpecResidueField p).ker.blowupMap.fiberι p)).obj ((X.fromSpecResidueField p).ker.blowupMap.fiberι p).ker.toModules ≅ (Modules.tensorPullback r.hom).obj (ProjectiveSpace.twist (ULift.{u} (Fin 2)) (Spec (X.residueField p)) 1)))",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-002203acf",
+  "group": "NQ",
+  "result": "fix",
+  "note": "Lean exact against node and Stacks 0AGQ(1),(3)/0807: hypotheses (IsIntegral, IsNoetherian, IsRegularScheme, topologicalKrullDim=2, closed p) verbatim; centre = (fromSpecResidueField p).ker, the reduced point ideal for closed p; E = Mathlib fibre with fiberι closed immersion and fiberToSpecResidueField k-structure; d∈{1,2}; d=1 IsIso b ∧ E≅Spec k; d=2 integral/regular/Noetherian/dim 1/proper over k/ker IsInvertible (effective Cartier); conormal (tensorPullback i).obj i.ker.toModules (same object as landed conormal-functoriality lemma) is invertible; ∃ k-iso r with C ≅ r^*ProjectiveSpace.twist 1. Sign checked: twistData g₀=(x₀/x₁)g₁ = def-sc-p1-standard O(1), matching step 7 [y]=t[x]. Added stmt_dep def-pc-projective-space-twist (landed owner) correct; lean.statement verbatim; docstrings and 8 proof steps present; sorry only; single universe u. Compile not rerun (worker's evidence; no Lean changed). Sole fault H11: Second reading section is a worker self-check → FIX fixes/lem-sfb-point-blowup-exceptional-conormal.report.md (worker report unchanged + independent clause-by-clause second reading)."
+ }
+}

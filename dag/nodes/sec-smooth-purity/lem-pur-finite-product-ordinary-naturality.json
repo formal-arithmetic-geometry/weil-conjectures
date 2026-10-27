@@ -1,0 +1,112 @@
+{
+ "id": "lem-pur-finite-product-ordinary-naturality",
+ "kind": "statement",
+ "title": "Naturality of the ordinary binary product",
+ "statement": "Let A be a finite commutative ring and let r:T→U,t:T→V,a:U→B,b:V→B form a Cartesian square. For arbitrary unbounded module-sheaf derived objects H,H′ on U and J,J′ on V and maps m:H→H′, n:J→J′, the ordinary word Ω of [def-pur-finite-ordinary-product] satisfies (Ra_*(m) tensor Rb_*(n));Ω(H′,J′)=Ω(H,J);R(t;b)_*(Lr^*(m) tensor Lt^*(n)). Tensor action is the left-variable action followed by right-variable action, and all compositors are the specified ordinary ones. The binary tensor maps and externalMap are exactly those of [def-pur-finite-product-compactification-data, def-pur-finite-triple-product-coordinate-data].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Clause (ii), the compactification reduction; the binary pasting and naturality calculations in Steps 2--4 of lem-pur-finite-triple-product-normal-forms."
+ },
+ "stmt_deps": [
+  "def-pur-finite-triple-product-coordinate-data",
+  "def-pur-finite-product-compactification-data",
+  "def-pur-finite-ordinary-product"
+ ],
+ "proof": [
+  {
+   "text": "apply naturality of signed symmetry to the first swap, naturality of\nordinary projection to its two inputs, and naturality of ordinary exchange to\nits input. Repeat for the second swap and projection. Naturality of the inverse\ndirect-image compositor identifies the last square. Compose these six squares,\nusing functoriality of tensor, pullback and direct image. No map is inverted\nexcept the already specified compositor. Identity input maps specialize to the\none-variable squares; zero objects and identity scheme maps require no exception.",
+   "uses": [
+    "def-exchange-projection",
+    "lem-weil-derived-direct-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Clause (ii), the compactification reduction; the binary pasting and naturality calculations in Steps 2--4 of lem-pur-finite-triple-product-normal-forms."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "lem-weil-derived-direct-image-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Clause (ii), the compactification reduction; the binary pasting and naturality calculations in Steps 2--4 of lem-pur-finite-triple-product-normal-forms."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Iterated external tensor products of compactly supported derived sheaves agree with proper product compactifications",
+   "results": "Eight hits on light condensed monoidal categories and sheaf tensor; none gives either the specified binary open-unit equation or the ordinary product word naturality.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The naturality of the ordinary derived sheaf product and the unit normalization of a binary extension by zero tensor comparison",
+   "results": "Eight hits: CartesianMonoidalCategory product comparisons, toSheafify naturality, mapDerivedCategorySingleFunctor and toRightDerivedZero; none states the specified binary equation.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteProductOrdinary.*natural|finiteProductOpenTensor|restrictionL",
+   "results": "Mathlib search finds only transfinite restriction names. Local source search finds the binary constructions in FiniteProductCompactification and the recursive restriction in FiniteTripleProductNormalForms, without either claimed compatibility theorem.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteTripleProductNormalForms",
+  "date": "2026-10-26",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Steps 3--4, reduction of triple product through binary compactifications; lem-sf-kunneth-coherence (ii).",
+   "via": [
+    "lem-pur-finite-triple-product-normal-forms"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteProductOrdinaryNaturality",
+  "file": "lean/Sheaf/Paper/FiniteProductOrdinaryNaturality.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteProductOrdinary_naturality",
+  "statement": "theorem finiteProductOrdinary_naturality (A : Type (u + 1)) [CommRing A] [Finite A]\n    {B U V T : Scheme.{u}} (a : U ⟶ B) (b : V ⟶ B)\n    {r : T ⟶ U} {t : T ⟶ V} (sq : IsPullback r t a b)\n    {H H' : FiniteTripleProduct.D A U} {J J' : FiniteTripleProduct.D A V}\n    (m : H ⟶ H') (n : J ⟶ J') :\n    finiteProductTensorMapLeft (ModuleCat.{u + 1} A) B\n        (R(lowerStar (ModuleCat.{u + 1} A) a).map m)\n        (R(lowerStar (ModuleCat.{u + 1} A) b).obj J) ≫\n      finiteProductTensorMapRight (ModuleCat.{u + 1} A) B\n        (R(lowerStar (ModuleCat.{u + 1} A) a).obj H')\n        (R(lowerStar (ModuleCat.{u + 1} A) b).map n) ≫\n      finiteProductOrdinary A a b sq H' J' =\n    finiteProductOrdinary A a b sq H J ≫\n      R(lowerStar (ModuleCat.{u + 1} A) (t ≫ b)).map\n        (FiniteTripleProduct.externalMap A r t m n)",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-61a6d",
+  "group": "D4",
+  "result": "fix",
+  "landing": "20261025T205910-L-3396657",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-61a6d",
+  "group": "D4",
+  "result": "fix",
+  "landing": "20261025T205910-L-3396657",
+  "kind": "interface",
+  "note": "independent cc review: item finiteTripleProduct_normalForms statement byte-identical to published; moved FiniteTripleProduct.* defs diffed verbatim against the clone; restrictPair_pasting read against finiteProductOpenTensor's definition and lem-sf-open-tensor-normalization; nodes checked against Lean signatures; unit sk-prop-an realized empty and CompactificationCoherence still in the public closure"
+ }
+}

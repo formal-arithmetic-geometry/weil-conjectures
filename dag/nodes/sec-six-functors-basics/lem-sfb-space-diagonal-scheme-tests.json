@@ -1,0 +1,270 @@
+{
+ "id": "lem-sfb-space-diagonal-scheme-tests",
+ "kind": "statement",
+ "title": "Scheme tests of the relative diagonal of an algebraic-space morphism",
+ "statement": "Let $B$ be a scheme [def-pc-scheme], and let $g:U\\to V$ be a morphism of algebraic spaces over $B$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Form $W=U\\times_VU$ and its diagonal $\\Delta_g:U\\to W$, using sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. For every $B$-scheme $T$ and morphism $T\\to W$, the sheaf fibre product $D_T=U\\times_WT$ is represented by a scheme, and its projection $d_T:D_T\\to T$ is locally of finite type [def-weil-finite-type-morphism] and a monomorphism. Here a monomorphism means that for every scheme $Z$ and maps $a,b:Z\\to D_T$, $d_Ta=d_Tb$ implies $a=b$. No finiteness assumption on $g$, $U$, $V$ or $B$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03HK (lemma-properties-diagonal), (1)--(3); scheme tests are spaces.tex Tag 025V (definition-relative-representable-property)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Write $t=(t_1,t_2):T\\to U\\times_VU$, so $gt_1=gt_2$. By [def-trf-algebraic-space], the diagonal of $U$ over $B$ is representable. Its pullback along $(t_1,t_2):T\\to U\\times_BU$ is therefore a scheme $E$. For every $B$-scheme $Z$, both $E(Z)$ and $D_T(Z)$ consist of maps $z:Z\\to T$ with $t_1z=t_2z$: in the latter fibre product the other coordinate is forced to equal $t_1z$. These identifications commute with restriction, so they identify the two sheaves and represent $D_T$ by $E$. Here the sheaf products and their universal properties are [lem-trf-space-fibre-products-etale-covers].",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03HK (lemma-properties-diagonal), first proof paragraph: representability; equality-locus argument expanded using spaces.tex Tag 025Y"
+   }
+  },
+  {
+   "text": "The same description proves monomorphy. A map $Z\\to D_T$ is uniquely determined by its projection $z:Z\\to T$, because its $U$-coordinate must be $t_1z$. Hence two maps with equal projections coincide. For a scheme $Z$ without a specified $B$-structure, the common projection supplies the structure $Z\\to T\\to B$, making both maps $B$-morphisms. Thus the assertion holds for every scheme $Z$, as required by the statement. This uses only the representability and natural-transformation conventions of [def-trf-algebraic-space].",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03HK (lemma-properties-diagonal), assertion (3): pointwise proof of the diagonal and its base changes being monomorphisms"
+   }
+  },
+  {
+   "text": "Choose a representable surjective etale atlas $a:A\\to U$ from a scheme using [def-trf-algebraic-space]. Put $R=A\\times_UA$ and $P=A\\times_VA$. Both are schemes: they are the pullbacks of the representable diagonals of $U$ and $V$ along $A\\times_BA$; scheme products exist by [def-pc-fibre-product]. The first projection $s:R\\to A$ is etale, being a scheme test of $a$. The map $q:P\\to W$ factors as $A\\times_VA\\to A\\times_VU\\to U\\times_VU$, each arrow a base change of $a$, on the second and first coordinate respectively. Thus $q$ is representable surjective etale by [lem-trf-space-chartwise-etale-permanence] and [lem-trf-space-fibre-products-etale-covers]. There is a map $r:R\\to P$ induced by $g$. The square with top $r$, bottom $\\Delta_g$, and vertical arrows $R\\to U$, $q:P\\to W$ is cartesian: a pair $(a_1,a_2)$ in $P$ lies over $(u,u)$ exactly when $a(a_1)=a(a_2)=u$, which is precisely an element of $R$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-pc-fibre-product",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03HK (lemma-properties-diagonal), presentation diagram and its cartesian left square; spaces.tex Tag 025Y; spaces-topologies.tex Tag 041F"
+   }
+  },
+  {
+   "text": "Since $s:R\\to A$ is etale, it is unramified by [def-weil-etale-morphism], hence locally of finite type by [def-weil-unramified-morphism]. Let $p_1:P\\to A$ be the first projection. The composite $p_1r=s$ is locally of finite type, so clause (a) of [lemma-nagata-finite-type-to-separated-target] gives that $r:R\\to P$ is locally of finite type. Only that clause is used: it imposes no hypothesis on $p_1$, in particular no separatedness or quasi-compactness.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-weil-unramified-morphism",
+    "lemma-nagata-finite-type-to-separated-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03HK (lemma-properties-diagonal), local-finite-type argument; morphisms.tex Tag 01T8 (lemma-permanence-finite-type)"
+   }
+  },
+  {
+   "text": "For the original test $T\\to W$, put $Q=T\\times_WP$. Since $q$ is representable surjective etale, $Q$ is a scheme and $Q\\to T$ is surjective etale by [lem-trf-space-chartwise-etale-permanence] and [lem-trf-space-fibre-products-etale-covers]. Put $D_Q=D_T\\times_TQ$. This is a scheme by [def-pc-fibre-product], and $D_Q\\to D_T$ is surjective etale by the same base-change result. The cartesian square in step 3 gives $D_Q\\cong R\\times_PQ$ over $Q$: on every test scheme either side is a triple $(u,(a_1,a_2),t)$ with $a(a_1)=a(a_2)=u$ and $q(a_1,a_2)=t|_W$. Forgetting or restoring the forced coordinate $u$ gives the inverse natural maps. Apply [lem-weil-pbc-lft-base-change] to $r:R\\to P$ and the scheme morphism $Q\\to P$. Thus $D_Q\\to Q$ is locally of finite type.",
+   "uses": [
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-lft-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WZ (lemma-representable-morphisms-spaces-property), direct proof with the atlas and arbitrary scheme test; morphisms.tex Tag 01T4 (lemma-base-change-finite-type)"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-scheme-etale-source-target-properties] with the property locally of finite type to the commutative square $D_Q\\to Q$ over $D_T\\to T$. Both vertical arrows are etale and $D_Q\\to D_T$ is surjective, as established in step 5. The top arrow is locally of finite type, so the cited source-and-target criterion gives the same property for $d_T:D_T\\to T$. Together with steps 1 and 2 this proves every clause for every test $T\\to W$. No step assumed finite type or separation of $g$, $U$, $V$, or $B$.",
+   "uses": [
+    "lem-sfb-scheme-etale-source-target-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WZ (lemma-representable-morphisms-spaces-property); descent.tex Tags 04R1 (lemma-local-source-target-characterize), 04R3 (remark-list-local-source-target), locally finite type entry"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-pc-fibre-product",
+  "lem-trf-space-chartwise-etale-permanence",
+  "def-weil-etale-morphism",
+  "def-weil-unramified-morphism",
+  "lemma-nagata-finite-type-to-separated-target",
+  "lem-weil-pbc-lft-base-change",
+  "lem-sfb-scheme-etale-source-target-properties"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03HK (lemma-properties-diagonal), presentation proof of (1)--(3); scheme-test descent expanded from spaces.tex Tag 02WZ (lemma-representable-morphisms-spaces-property)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|locallyOfFiniteType.*diagonal|diagonal.*locallyOfFiniteType",
+   "results": "{\"t\": \"2026-10-23T10:00:26Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|locallyOfFiniteType.*diagonal|diagonal.*locallyOfFiniteType\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\"], \"digest\": \"41434a04f3ad4661\"}; Read returned hits: scheme-only diagonal/immersion and base-change lemmas, not the algebraic-space assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every scheme base change of the diagonal of a morphism of algebraic spaces is a locally finite type monomorphism",
+   "results": "{\"t\": \"2026-10-23T10:00:26Z\", \"tool\": \"leansearch\", \"query\": \"Every scheme base change of the diagonal of a morphism of algebraic spaces is a locally finite type monomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\", \"AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion\", \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.IsImmersion.instDiagonalScheme\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.IsImmersion.instLiftSchemeId\", \"AlgebraicGeometry.isSeparated_iff\"], \"digest\": \"3ef2f9c0df3289c6\"}; Read returned hits: scheme-only diagonal/immersion and base-change lemmas, not the algebraic-space assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"diagonal\", \"LocallyOfFiniteType\"",
+   "results": "{\"t\": \"2026-10-23T10:00:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"diagonal\\\", \\\"LocallyOfFiniteType\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned hits: scheme-only diagonal/immersion and base-change lemmas, not the algebraic-space assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The relative diagonal of any morphism of algebraic spaces is representable by schemes and locally of finite type and a monomorphism",
+   "results": "{\"t\": \"2026-10-23T10:00:37Z\", \"tool\": \"leanfinder\", \"query\": \"The relative diagonal of any morphism of algebraic spaces is representable by schemes and locally of finite type and a monomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsImmersion.instDiagonalScheme\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_diagonal_of_isPullback\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.isClosedImmersion_diagonal_restrict_diagonalCoverDiagonalRange\", \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\", \"AlgebraicGeometry.UniversallyInjective.iff_diagonal\", \"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\", \"AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme\"], \"digest\": \"21a039e92e74d050\"}; Read returned hits: scheme-only diagonal/immersion and base-change lemmas, not the algebraic-space assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change to a scheme of an algebraic space relative diagonal is represented by a scheme locally of finite type over the test scheme",
+   "results": "{\"t\": \"2026-10-23T10:00:37Z\", \"tool\": \"leanfinder\", \"query\": \"Base change to a scheme of an algebraic space relative diagonal is represented by a scheme locally of finite type over the test scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.HasAffineProperty.diagonal_of_diagonal_of_isPullback\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.IsImmersion.instDiagonalScheme\", \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\", \"AlgebraicGeometry.isClosedImmersion_diagonal_restrict_diagonalCoverDiagonalRange\", \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"AlgebraicGeometry.HasAffineProperty.diagonal_iff\", \"AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme\"], \"digest\": \"2691afa3a92725c6\"}; Read returned hits: scheme-only diagonal/immersion and base-change lemmas, not the algebraic-space assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every scheme base change of the relative diagonal of an algebraic space morphism is a locally finite type monomorphism",
+   "results": "{\"t\": \"2026-10-23T11:59:17Z\", \"tool\": \"leanfinder\", \"query\": \"Every scheme base change of the relative diagonal of an algebraic space morphism is a locally finite type monomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsImmersion.instDiagonalScheme\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme\", \"AlgebraicGeometry.instLocallyOfFiniteTypeFstScheme\", \"AlgebraicGeometry.instLocallyOfFiniteTypeSndScheme\", \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\", \"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\"], \"digest\": \"d6ad7eb8bb54e74c\"}; Read the returned scheme-only types. FormallyUnramified.lean:126, Separated.lean:40-46, FiniteType.lean:80 give scheme components, not the algebraic-space scheme-test assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"diagonal\", \"LocallyOfFiniteType\"",
+   "results": "{\"t\": \"2026-10-23T11:59:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"diagonal\\\", \\\"LocallyOfFiniteType\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned scheme-only types. FormallyUnramified.lean:126, Separated.lean:40-46, FiniteType.lean:80 give scheme components, not the algebraic-space scheme-test assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|locallyOfFiniteType.*diagonal|diagonal.*locallyOfFiniteType",
+   "results": "{\"t\": \"2026-10-23T11:59:18Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|locallyOfFiniteType.*diagonal|diagonal.*locallyOfFiniteType\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\"], \"digest\": \"41434a04f3ad4661\"}; Read the returned scheme-only types. FormallyUnramified.lean:126, Separated.lean:40-46, FiniteType.lean:80 give scheme components, not the algebraic-space scheme-test assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scheme base changes of the diagonal of a morphism of algebraic spaces are represented by locally finite type monomorphisms",
+   "results": "{\"t\": \"2026-10-23T11:59:19Z\", \"tool\": \"leansearch\", \"query\": \"Scheme base changes of the diagonal of a morphism of algebraic spaces are represented by locally finite type monomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\", \"AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion\", \"AlgebraicGeometry.isSeparated_iff\", \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange.diagonal\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"CategoryTheory.Limits.pullback.isIso_diagonal_iff\", \"AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange\"], \"digest\": \"4e871fb596d61d7b\"}; Read the returned scheme-only types. FormallyUnramified.lean:126, Separated.lean:40-46, FiniteType.lean:80 give scheme components, not the algebraic-space scheme-test assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The diagonal of a map between sheaves with representable diagonals has scheme fibres and locally finite type equalizer schemes",
+   "results": "{\"t\": \"2026-10-23T12:06:15Z\", \"tool\": \"leanfinder\", \"query\": \"The diagonal of a map between sheaves with representable diagonals has scheme fibres and locally finite type equalizer schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsImmersion.instDiagonalScheme\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.instLocallyOfFiniteTypeFstScheme\", \"AlgebraicGeometry.instLocallyOfFiniteTypeSndScheme\", \"AlgebraicGeometry.isClosedImmersion_diagonal_restrict_diagonalCoverDiagonalRange\", \"AlgebraicGeometry.instHasFiniteLimitsScheme\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_diagonal_of_isPullback\", \"AlgebraicGeometry.IsSeparated.instFstScheme\"], \"digest\": \"3a0e491ea8ffac83\"}; Read the returned scheme-only types. FormallyUnramified.lean:126, Separated.lean:40-46, FiniteType.lean:80 give scheme components, not the algebraic-space scheme-test assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-separated-diagonal-closed",
+  "date": "2026-10-23",
+  "group": "Q153"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D56 (lemma-curves-RS-star). Properness recovery inside the Tag 0D1J input to Tag 0D56: use Tag 09ZY with local finite presentation already known, without a finite-order assumption. Supporting input to Tag 09ZY: the separatedness criterion for the diagonal, Tag 04Y0. Supporting input: Tag 03HK (1)--(3), representability and local finite type of the relative diagonal, stated on every scheme test.",
+   "via": [
+    "lem-sfb-space-separated-diagonal-closed",
+    "lem-sfb-space-thickening-topological-properties",
+    "lem-sfb-curve-infinitesimal-pushout",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-diagonal-scheme-tests",
+  "worker": "stage1",
+  "summary": "Proved scheme representability and monomorphy by the equality-locus functor; used the source presentation R=A×_U A to prove local finite type by scheme cancellation and etale descent. All inputs already have DAG nodes; no new nodes or statement changes.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images, proof (3), alteration route recorded in blueprint.from.place: Tag 03HK scheme tests needed for Tag 04Y0 in the Tag 09ZY infinitesimal-invariance branch.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-finite-type-to-separated-target",
+    "why": "Only clause (a), the generic scheme local-finite-type cancellation of Tag 01T8, is used for R→P→A; the unit supplies no replacement cancellation statement."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Steps 1, 3, 5 take only existence/universal property of sheaf fibre products of algebraic spaces and etale-covering base change (Stacks 02X2/04T9), generic space foundations; no node of sk-thm-sf-ctf-stability's route states them."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Steps 3 and 5 take only composite and base-change stability of (representable) etale coverings of algebraic spaces (Stacks 041F), a generic foundation; no node of the unit's route states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-finite-type-to-separated-target",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-40c504a47",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-40c504a47 (reviewer sub-agent of L); spot-checked: Read the item in full and the 03HK statement and proof (spaces-morphisms.tex l.165-234). The delivery has no new nodes and no repair note; the statement is unchanged and matches 03HK (1)-(3) as scheme tests over any base B, adding no hypothesis and weakening nothing. Step 1: D_T and the pullback E of Δ_{U/B} along (t1,t2) have the same functor of points, so E represents D_T. Step 2: monomorphy holds because the U-coordinate is forced; for a bare scheme Z the shared B-structure comes through T. Step 3: R=A×_U A and P=A×_V A are diagonal pullbacks, so both are schemes; q:P→W is a composite of two base changes of the atlas, which I checked; the square P×_W U=R is cartesian. Step 4: s étale ⇒ unramified ⇒ locally of finite type, and the 01T8 cancellation (nagata clause (a), declared tool use) gives r locally of finite type. Step 5: D_Q ≅ R×_P Q by pasting, then locally of finite type by base change (Mathlib leaf). Step 6: the source-target node with a surjective gives d_T locally of finite type. Edge cases checked: empty, identity, U and V schemes. All Stacks tags match tags/tags. No SGA, no cycle. lem-sfb-space-diagonal-locally-finite-type is a weaker citer, not a duplicate. Batch-5: chartwise-etale-permanence (041F) and the smooth-composition closure are generic foundations, not trace-formula or Poincaré steps; accepted. FIX: lem-trf-space-fibre-products-etale-covers and lem-trf-space-chartwise-etale-permanence (unit sk-i-curve-zero, outside the route) were undeclared; I added both to split_report.tool_uses as generic space foundations, as for the sibling lem-sfb-space-separated-diagonal-closed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceDiagonalSchemeTests",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.diagonal_scheme_tests",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceDiagonalSchemeTests.lean",
+  "statement": "theorem diagonal_scheme_tests {B : Scheme.{u}} (U V : AlgebraicSpace B) (g : U ⟶ V) : IsRepresentableWith (fun _ _ p ↦ LocallyOfFiniteType p.left ∧ Mono p.left) (pullback.diagonal g.hom).hom",
+  "branch": "newtargets-dag",
+  "by": "Q91",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9ae6e5d67",
+  "group": "Q91",
+  "result": "pass",
+  "note": "Read node, 5 stmt_dep records, AlgebraicSpace.lean (IsRepresentableWith/IsAlgebraicSpace/full subcategory of fppf sheaves), Stacks spaces-morphisms 03HK l.165-177. Lean diagonal_scheme_tests: {B : Scheme.{u}} (U V : AlgebraicSpace B) (g) ⊢ IsRepresentableWith (LocallyOfFiniteType p.left ∧ Mono p.left) (pullback.diagonal g.hom).hom renders every B-scheme test T→U×_VU as a representing pullback square with lft + mono (Mono in Scheme = all-scheme cancellation) on the same projection; canonical diagonal, single universe u, no extra hypotheses; edge cases empty/identity OK. Statement verbatim in file; live node has no lean record, other fields identical; no duplicate (SpaceMonicDiagonalTests, AlgebraicSpaceLftDiagonalLfp differ); no defs, sorry only; source/blueprint docstrings with 6 proof steps; imports exist; Worker report + Second reading present. No compile (no FIX)."
+ }
+}

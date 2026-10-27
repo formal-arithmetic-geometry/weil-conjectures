@@ -150,7 +150,18 @@
   "latex:corollary"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-a1-kummer",
  "split_report": {
@@ -220,11 +231,16 @@
   "note": "Retired the Sheaf copy under the human 2026-10-20 hand-off. The upstream galois_openSubgroups gives realization, conjugacy classification and fibre-cardinality index; exists_iso_fiber_map_eq_iff gives the pointed criterion. IsConnected and scheme connectedness agree by FundamentalGroup.Connected. The upstream group is any small fundamental-group model; exists_isFundamentalGroup and toAutContinuousMulEquiv identify it canonically with Aut(fiber s), with the same evaluation action and topology. The finite locally free degree comparison is preserved, without sorry and for separably closed Ω, as AlgebraicGeometry.Scheme.FiniteEtale.isFiniteLocallyFreeOfDegree_index_stabilizer in Sheaf.AlgebraicGeometry.FundamentalGroup.FiberCardDegree (node lem-fet-geometric-fiber-degree). It directly states degree equal to stabilizer index, so the original rank meaning is retained. No caller of the retired connected_cover_open_subgroups declaration exists. The archived DenseOpenPiOneSurjective parent uses only the node in its proof plan and has no Lean call to that retired name; its rework must switch its archived proof import to this twin."
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $Y$ be connected with geometric point $\\bar y$. Assigning to a\nconnected finite etale cover $P$ the stabilizer in $\\pi_1(Y,\\bar y)$ of a\npoint of $P_{\\bar y}$ is a bijection between the isomorphism classes of\nconnected finite etale covers of $Y$ and the open subgroups of\n$\\pi_1(Y,\\bar y)$, and the degree of $P$ over $Y$ is the index of the\nsubgroup.",
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $Y$ be connected with geometric point $\\bar y$. For a connected\nfinite etale cover $P$ of $Y$ and a point $x\\in P_{\\bar y}$, the\nstabilizer of $x$ in $\\pi_1(Y,\\bar y)$ is an open subgroup, and every\nopen subgroup arises in this way. Assigning to $(P,x)$ this stabilizer\nis a bijection between the isomorphism classes of pointed connected\nfinite etale covers $(P,x)$ of $Y$ (isomorphisms over $Y$ carrying the\npoint to the point) and the open subgroups of $\\pi_1(Y,\\bar y)$.\nForgetting the point, the stabilizers of the points of $P_{\\bar y}$ form\none conjugacy class, and $P\\mapsto$ this class is a bijection between\nthe isomorphism classes of connected finite etale covers of $Y$ and the\nconjugacy classes of open subgroups of $\\pi_1(Y,\\bar y)$. The degree of\n$P$ over $Y$ is the index of the stabilizer of any point of $P_{\\bar y}$.",
   "proof": [
    {
-    "text": "Here $\\pi_1=\\pi_1(Y,\\bar y)=\\operatorname{Aut}(F_{\\bar y})$ is the group\nof [def-galois-fibre-functor] and the covers are the finite etale\ncovers of [def-galois-object]. Under [thm-galois-fundamental] connected finite etale covers of $Y$\ncorrespond to transitive finite continuous $\\pi_1$-sets — the\ntransitivity being that of [lem-galois-transitive] — i.e. to\n$\\pi_1/H$ with $H$ open: the stabilizer of a point of $P_{\\bar y}$ is\nthat subgroup, and $\\#F_{\\bar y}(P)=\\#\\pi_1/H=[\\pi_1:H]$ is the degree. A\nmorphism of connected covers corresponds to an equivariant map\n$\\pi_1/H\\to\\pi_1/H'$, which exists exactly when $H'$ is contained in\n$H$ up to conjugacy, so the assignment is bijective on isomorphism\nclasses.",
+    "text": "Here $\\pi_1=\\pi_1(Y,\\bar y)=\\operatorname{Aut}(F_{\\bar y})$ is the group\nof [def-galois-fibre-functor] and the covers are the finite etale\ncovers of [def-galois-object]. Under [thm-galois-fundamental] connected finite etale covers of $Y$\ncorrespond to transitive finite continuous $\\pi_1$-sets — the\ntransitivity being that of [lem-galois-transitive] — i.e. to\n$\\pi_1/H$ with $H$ open. Stabilizers are open because the action on the\nfinite set $P_{\\bar y}$ is continuous. If $x\\in P_{\\bar y}$ has\nstabilizer $H$, the orbit map $gH\\mapsto gx$ is an equivariant\nbijection $\\pi_1/H\\to P_{\\bar y}$ carrying the coset $H$ to $x$, so\n$\\#F_{\\bar y}(P)=\\#\\pi_1/H=[\\pi_1:H]$ is the degree. Conversely, for\n$H$ open the finite continuous transitive $\\pi_1$-set $\\pi_1/H$ comes\nfrom a connected cover, and the stabilizer of the coset $H$ is $H$; so\nevery open subgroup occurs. An equivariant bijection\n$\\pi_1/H\\to\\pi_1/H'$ sending $H$ to $H'$ exists exactly when $H=H'$;\nsince the fibre functor is fully faithful, pointed connected covers are\nisomorphic exactly when their stabilizers agree. The stabilizer of\n$gx$ is $gHg^{-1}$, and by transitivity these are all the stabilizers\nof points of $P_{\\bar y}$, so forgetting the point gives a conjugacy\nclass. An equivariant bijection $\\pi_1/H\\to\\pi_1/H'$ exists exactly when\n$H$ and $H'$ are conjugate (it sends $H$ to some $gH'$, whose\nstabilizer $gH'g^{-1}$ must equal $H$), so unpointed connected covers\nare isomorphic exactly when their stabilizers are conjugate. Together\nwith the existence statement, both assignments are bijective.",
     "uses": [
      "def-galois-fibre-functor",
      "def-galois-object",
@@ -234,7 +250,7 @@
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; the node is proved in Lean: recorded 2026-10-25, not reopened"
  },
  "reviewed_proof": {
   "date": "2026-10-20",

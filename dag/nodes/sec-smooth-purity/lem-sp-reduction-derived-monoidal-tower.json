@@ -1,0 +1,262 @@
+{
+ "id": "lem-sp-reduction-derived-monoidal-tower",
+ "kind": "statement",
+ "title": "Coherent derived monoidal and pullback comparisons for integral reduction",
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $O$ [def-weil-l-adic-coefficient-extension]. On each small pro-etale site put $A_{n,T}=(O/\\ell^n)_T$ and $R_T=\\varprojlim_n A_{n,T}$, identified with the pulled-back integral coefficient sheaf [sk-def-sp-coefficient-towers, sk-prop-sfb-qlbar-colimit-x]. Write $r_TN=(N\\otimes^L_{R_T}A_{n,T})_n$ for derived reduction [det-sp-reduction-tower-normalized], and $L_T=R\\varprojlim_n\\operatorname{Res}_n$ for total derived inverse limit of strict towers after restriction of scalars to $R_T$ [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. All derived categories are ordinary unbounded module derived categories; tower operations are the simultaneous section-model operations of [lem-coef-semilinear-derived-sections], with exact evaluations [det-sp-coefficient-towers-abelian].\n\nLet $T$ be any scheme on which $\\ell$ is invertible. For $U,V\\in D(R_T)$ there is a canonical natural isomorphism in $D(\\operatorname{Tow}(T,O))$\n$$\\mu_{U,V}:r_T(U\\otimes^L_{R_T}V)\\xrightarrow{\\sim}r_TU\\otimes^L_{A_{\\bullet,T}}r_TV.$$\nOn flat-term K-flat representatives $Q,Q'$ [def-pc-kflat-complex, lem-pc-kflat-resolution], its inverse at level $n$ is represented on every total-tensor summand by\n$$(q\\otimes a)\\otimes(q'\\otimes b)\\longmapsto(q\\otimes q')\\otimes ab,$$\nand its forward map is $(q\\otimes q')\\otimes a\\mapsto(q\\otimes1)\\otimes(q'\\otimes a)$. The total tensor $Q\\otimes Q'$ is K-flat with flat terms, and each $Q\\otimes_{R_T}A_{n,T}$ is K-flat over $A_{n,T}$. These chain maps commute with all quotient transitions and descend independently of the chosen representatives to the displayed derived-system isomorphism. Thus this assertion includes a derived, representative-independent system comparison, not only an ordinary cochain identity.\n\nIf $g:T'\\to T$ is a scheme map with the canonical coefficient identifications $g^{-1}R_T=R_{T'}$ and $g^{-1}A_{n,T}=A_{n,T'}$, then the canonical pullback/scalar comparison gives a natural isomorphism of derived systems\n$$\\nu_{g,U}:r_{T'}(Lg_R^*U)\\xrightarrow{\\sim}Lg_\\bullet^*r_TU,$$\nwhose evaluations are $(Lg_R^*U)\\otimes^L_{R_{T'}}A_{n,T'}\\cong Lg_{A_n}^*(U\\otimes^L_{R_T}A_{n,T})$. The comparisons $\\mu,\\nu$ agree with tensoring and pulling back the actual quotient augmentations and are compatible with their tensor associators, tensor units, and consecutive quotient maps. No derived completeness, constructibility, boundedness or flatness of quotient ring maps is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+  "place": "Paragraph (3), pullback and tensor reductions; old steps 6 and 7 including K-flat model formulas"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sp-coefficient-towers",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "det-sp-reduction-tower-normalized",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-coef-semilinear-derived-sections",
+  "det-sp-coefficient-towers-abelian",
+  "def-pc-kflat-complex",
+  "lem-pc-kflat-resolution",
+  "lem-pur-system-ringed-sequence-site",
+  "def-weil-proetale-inverse-image",
+  "def-zl-ringed-derived-closed-symmetric-monoidal-data",
+  "def-coef-semilinear-system-models",
+  "def-coef-semilinear-derived-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing normalized closed symmetric monoidal existence theorem on the integral site and on the sequence site. Keep these actual closed tensors, models, symmetries and coherence data.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the strict ordinary and total balancing data by lem-sp-reduction-strict-tensor-balancing, then apply lem-sp-reduction-tensor-comparison-descent with those specified tensors and strict maps. This supplies mu, the monoidal structure, simultaneous K-flat preservation and its actual derived representative square.",
+   "uses": [
+    "lem-sp-reduction-strict-tensor-balancing",
+    "lem-sp-reduction-tensor-comparison-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The private total_kflat proof applies kFlat_total_tensor_model and projects its K-flat and flat-term conclusions. The private level_kflat proof applies changeOfRings_isKFlat_independentCoefficients to the prescribed level scalar model with its object/map equations. These give the two missing fields directly, without additional holes. Fill forward, inverse and summand from the strict comparison and all remaining fields from descent. This proves Nonempty SpReductionMonoidalTower for each scheme and reduction.",
+   "uses": [
+    "lem-pur-kflat-total-tensor-model",
+    "lem-pur-kflat-change-of-rings-all-independent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Inside the theorem proof only, choose this nonempty monoidal tower simultaneously for all schemes and reductions. Apply lem-sp-reduction-geometric-tensor-square to the two chosen endpoint towers. Its arbitrary-endpoint normalization gives the required pullback witness and coherence, proving the family existential. No public data definition chooses a witness of an unfinished existence theorem.",
+   "uses": [
+    "lem-sp-reduction-geometric-tensor-square"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sp-reduction-strict-tensor-balancing",
+  "lem-sp-reduction-tensor-comparison-descent",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-pur-kflat-change-of-rings-all-independent",
+  "lem-sp-reduction-geometric-tensor-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+  "place": "Paragraph (3); Lean construction from strict balancing, normalized derived descent, two proved representative-class facts, and the geometric square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived reduction of the tensor product of two sheaf complexes over completed integral coefficients is the tensor product of their coherent finite quotient towers",
+   "subdirectory": "",
+   "results": "; 8 hits: LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, CategoryTheory.Tor'_obj_obj, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalLightCondSetLightCondModFree, CategoryTheory.Tor_obj, CategoryTheory.Sheaf.tensorProd_isSheaf, CategoryTheory.Tor, AdicCompletion.tensor_map_id_left_eq_map",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived sheaves, ordinary modules or unrelated limits; none states this coherent derived coefficient-system comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionOfScalars.*[Mm]onoidal|[Mm]onoidal.*extensionOfScalars|KFlat",
+   "subdirectory": "",
+   "results": "; 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived sheaves, ordinary modules or unrelated limits; none states this coherent derived coefficient-system comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Monoidal\", \"extensionOfScalars\"",
+   "subdirectory": "",
+   "results": "; 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived sheaves, ordinary modules or unrelated limits; none states this coherent derived coefficient-system comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived reduction of the tensor product of two sheaf complexes over completed integral coefficients is the tensor product of their coherent finite quotient towers",
+   "subdirectory": "",
+   "results": "; 8 hits: HomologicalComplex.tensorObj, CategoryTheory.Sheaf.tensorProd_isSheaf, IsReduced.tensorProduct_of_flat_of_forall_fg, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, TensorProduct.quotientTensorQuotientEquiv, TensorProduct.finsuppLeft, QuotSMulTop.tensorQuotSMulTopEquivQuotSMulTop, HomologicalComplex.tensorHom",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived sheaves, ordinary modules or unrelated limits; none states this coherent derived coefficient-system comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars on ringed topoi is strong monoidal and its tensor comparisons commute with all quotient tower transitions on K flat representatives",
+   "subdirectory": "",
+   "results": "; 8 hits: LightCondensed.instMonoidalLightCondSetLightCondModFree, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, LightCondensed.instMonoidalCategoryLightCondMod, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, comonadicExtendScalars, Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier, CategoryTheory.Tor'_obj_obj, Module.Flat.rTensor_shortComplex_exact",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived sheaves, ordinary modules or unrelated limits; none states this coherent derived coefficient-system comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionOfScalars.*[Mm]onoidal|[Mm]onoidal.*extensionOfScalars|KFlat",
+   "subdirectory": "",
+   "results": "; 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf pullback, ordinary flat-module tensor and exact-functor localization hits do not state the unbounded coherent derived reduction-system comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived reduction of two complexes of sheaves to an inverse tower of quotient rings preserves tensor products and commutes with pullback",
+   "subdirectory": "",
+   "results": "; 8 hits: CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier, SheafOfModules.pullback, CommRingCat.Under.instPreservesLimitUnderWalkingParallelPairParallelPairTensorProdOfFlatCarrier, SheafOfModules.instIsLeftAdjointPullback, CommRingCat.tensorProdIsoPushout, CommRingCat.Under.tensorProdMapEqualizerForkIsLimit, SheafOfModules.pullbackPushforwardAdjunction, HomologicalComplex.instHasTensorOfHasTensorX",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf pullback, ordinary flat-module tensor and exact-functor localization hits do not state the unbounded coherent derived reduction-system comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Monoidal\", \"extensionOfScalars\"",
+   "subdirectory": "",
+   "results": "; 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf pullback, ordinary flat-module tensor and exact-functor localization hits do not state the unbounded coherent derived reduction-system comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars on unbounded sheaf derived categories is strong monoidal and coherent on strict inverse coefficient towers",
+   "subdirectory": "",
+   "results": "; 8 hits: CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, LightCondensed.instMonoidalCategoryLightCondMod, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalLightCondSetLightCondModFree, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedLightCondMod, DerivedCategory.instLinearCochainComplexIntQ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf pullback, ordinary flat-module tensor and exact-functor localization hits do not state the unbounded coherent derived reduction-system comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K flat complexes of sheaf modules give representative independent tensor comparison compatible with pullback and quotient transitions",
+   "subdirectory": "",
+   "results": "; 8 hits: CategoryTheory.compatiblePreservingOfFlat, Module.Flat.tfae_equational_criterion, IsTensorProduct.map_injective_of_flat_right_left, IsTensorProduct.map_injective_of_flat_left_right, Module.Flat.iff_rTensor_exact', Module.Flat.iff_lTensor_exact', Module.Flat.lTensor_shortComplex_exact, Module.Flat.iff_rTensor_exact",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf pullback, ordinary flat-module tensor and exact-functor localization hits do not state the unbounded coherent derived reduction-system comparisons"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-integral-direct-image-tower",
+  "date": "2026-10-22",
+  "group": "Q73"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-integral-direct-image-tower",
+   "place": "Paragraph (3), pullback and tensor reductions; old steps 6 and 7 including K-flat model formulas",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-reduction-derived-monoidal-tower",
+  "worker": "stage1",
+  "summary": "Identified reduction with the existing sequence-site ringed-topos pullback and reused the existing generic derived monoidal/composition comparisons. Checked simultaneous K-flat models, all chain formulas, localization independence, actual quotient transitions, geometric pullback and augmentation/unit/associator coherence. No new nodes and no statement changes. Continued the interrupted sandbox without discarding its searches or formulas. Replaced the inline flatness/reassociation argument by the existing total-tensor model lemma and corrected the imported escaped nu typesetting and two source-tag labels.",
+  "blueprint": "Paragraph (3) of det-sp-integral-direct-image-tower: steps 1-5 implement tensor reduction, steps 6-7 implement pullback reduction, step 8 checks their quotient and monoidal normalizations.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-sequence-site-completion-projection",
+    "why": "Generic sequence-site projection identifies reduction as a derived ringed-topos pullback; the source unit has no separate general sequence-site construction."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic existence of flat-term K-flat resolutions for unbounded ringed-site complexes."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "why": "Generic K-flat/flat-term preservation by arbitrary ringed-topos pullback, applied also on the sequence site."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic localization equivalence and natural-transformation descent on flat-term K-flat representatives."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "Generic preservation of flat-term K-flat complexes under coefficient extension without flatness of the ring map."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic coherent ringed-topos derived monoidal and composition comparisons; applied to the actual sequence-site projection and its geometric pullback square."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Generic simultaneous ordinary-derived strict-system operations and their normalized evaluations; these are the operations stipulated in the item itself."
+   },
+   {
+    "node": "lem-pur-kflat-total-tensor-model",
+    "why": "Generic unbounded flat-term K-flat total-tensor and reassociation theorem; the unit does not supply its own general homological-algebra version."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-sequence-site-completion-projection",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pur-kflat-change-of-rings",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-kflat-total-tensor-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q73-645a7380f",
+  "group": "Q73",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-645a7380f (reviewer sub-agent of L); spot-checked: First split of the 2026-10-22 unsplit node. There are no new nodes and no repair note. The only statement change is the broken \\n+u escape becoming \\nu; I verified programmatically that nothing else in the statement changed. stmt_deps and blueprint are unchanged, the 5 inherited searches are kept and 5 new ones added, and proof_deps equals the union of the uses. The source is the main-20261015 direct-image proof, paragraph (3) (pullback commutes with scalar extension, and tensor reductions are tensors of reductions); the 8 steps implement it. Step 1: lem-pur-sequence-site-completion-projection (Stacks 0940, read) applies with B_n=A_{n,T}, B=R_T on the small pro-etale skeleton, so Lpi^* represents r_T. Step 2: lem-pc-kflat-resolution and lem-pur-kflat-total-tensor-model cover unbounded inputs. Step 3: kflat-pullback on the sequence site, tensor descent on the small C x N, and kflat-change-of-rings with no flatness of R_T->A_n. Step 4: I rechecked the inverse identity of phi and psi by A_n-balancing, the (-1)^i sign with degree-0 coefficients, and the transitions. Step 5: lem-sfb t_pi is the ordinary chain comparison psi (checked in the proof of lem-weil-pbc-ringed-topoi-derived-tensor-pullback), with naturality from descent and no inference from evaluations. Step 6: g-tilde is a geometric morphism, the composites differ by the identity 2-iso, ring maps agree under the canonical identifications, and lem-sfb gives c_{f,g} and the 2-iso. Step 7: the evaluations follow from c computed on K-flat reps and e_nV=g^{-1}e_n. Step 8: normalizations via the monoidal clauses. Small cases checked: 0, R_T itself, g=id, identity quotient, non-flat Z_l->Z/l. Stacks labels checked against tags (0940, 07A2, 0G7E, 0D6D, 07A4, 03EL, 0G6Q). No duplicate among lem-pe-kflat-scalar-tower-realization, lem-sbc-strict-reduction-pullback-square, lem-trf-integral-pullback-comparison-realization and lem-pe-integral-reduction-transition-comparison. No SGA. The 8 declared tool_uses are generic ringed-topos homological algebra and are accepted. Maintainer note: the statement defines L_T and has stmt_dep lem-weil-pbc-ringed-strict-tower-homotopy-limit without using it. This was inherited at creation, is harmless and was not changed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SmoothPurityReductionDerivedMonoidalTower",
+  "declaration": "AlgebraicGeometry.ProEtale.sp_reduction_derived_monoidal_tower",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.sp_reduction_derived_monoidal_tower"
+  ],
+  "file": "lean/Sheaf/Paper/SmoothPurityReductionDerivedMonoidalTower.lean",
+  "statement": "theorem sp_reduction_derived_monoidal_tower : ∃ M : ∀ (T : Scheme.{u}) (_hl : ∀ x : T, IsUnit (l : T.residueField x)) (D : SpCoefficientTowersAbelian l E T) (r : SpReductionTower l E T D), SpReductionMonoidalTower l E T D r, ∀ (T T' : Scheme.{u}) (hl : ∀ x : T, IsUnit (l : T.residueField x)) (hl' : ∀ x : T', IsUnit (l : T'.residueField x)) (g : T' ⟶ T) (D : SpCoefficientTowersAbelian l E T) (r : SpReductionTower l E T D) (D' : SpCoefficientTowersAbelian l E T') (r' : SpReductionTower l E T' D'), ∃ p : SpReductionPullbackTower l E T D r g D' r', Nonempty (SpReductionPullbackCoherence l E T D r (M T hl D r) g D' r' (M T' hl' D' r') p)",
+  "branch": "newtargets-dag",
+  "by": "Q92",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-07c4e331f",
+  "group": "Q92",
+  "result": "pass",
+  "note": "Re-delivery of 6703f46b (RETURN H2). Snapshot hash diff: the Lean is byte-identical (sha e0338402...). The only node change swaps stmt_dep lem-sf-ringed-derived-closed-symmetric-monoidal for def-zl-ringed-derived-closed-symmetric-monoidal-data, the existing:true owner of CategoryTheory.RingedDerivedTensorCoherence (landed NP 2026-10-18, before the base), used only for the sourceCoherence/targetCoherence fields. Flagged theorem dep lem-pur-system-ringed-sequence-site is OK: its declaration is the constructed strictSystemSequenceEquivalence, which the statement uses (Q113 9d9c precedent). Statement field verbatim; single sorry; 49 blueprint docstrings; both report sections present. Maths re-read: mu natural on unbounded D, CoreMonoidal muIso.hom = mu.inv, forward (x⊗1)⊗(y⊗a) and inverse ab on generators, summand/Kflat clauses, derived square pins mu on K-flat pairs; nu unchanged from the prior review; only hypothesis is ell invertible. Not compiled (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0d5a4",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261025T164359-L-1006995",
+  "kind": "interface",
+  "note": "independent cc review: item theorem's assembly proof and the 47 relocated interface declarations (byte-identical to the clone apart from blueprint tags) against node lem-sp-reduction-derived-monoidal-tower, the new def node and the three new sorry nodes (strict balancing, descent, geometric square)"
+ }
+}

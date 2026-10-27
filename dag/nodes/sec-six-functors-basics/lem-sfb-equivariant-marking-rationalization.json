@@ -1,0 +1,333 @@
+{
+ "id": "lem-sfb-equivariant-marking-rationalization",
+ "kind": "statement",
+ "title": "Equivariant rationalization of the generic curve marking",
+ "statement": "Let $k$ be a field, $S$ a normal integral projective finite-type $k$-scheme, $K=k(S)$, and $f:X\\to S$ an H-projective morphism with $X$ integral of finite type over $k$. Assume all geometric fibres of $f$ are pure of dimension one and $C=X_K$ is smooth and geometrically integral. Put $F=k(X)$. Assume $X$ is normal. Let $M\\subset C$ be a reduced finite etale closed subscheme, and let a finite group $G$ act compatibly on $k,X,S,f$, preserving $M$; nonfaithful semilinear actions are allowed. There is a finite extension $K'/K$, Galois over $B=K^G$, containing $K$ and images of all the finitely many residue fields of $M$. Set\n$$G'=\\{(g,\\sigma)\\in G\\times\\operatorname{Aut}_B(K'):\\sigma|_K=g|_K\\},\\qquad N=\\ker(G'\\to G).$$\nThe projection $G'\\to G$ is surjective, $N=\\operatorname{Aut}_K(K')$, and $(K')^N=K$. The tensor product $F'=F\\otimes_KK'$ is a field finite separable over $F$. Put $S'=\\operatorname{Nor}_{K'}(S)$ and $X'=\\operatorname{Nor}_{F'}(X)$. Then $S'$ is normal integral projective of finite type over $k$, $X'$ is normal integral of finite type over $k$, and $S'\\to S$ and $X'\\to X\\times_SS'$ are finite surjective. The morphism $X'\\to S'$ is H-projective with pure one-dimensional geometric fibres and generic fibre $C\\times_KK'$, smooth and geometrically integral. The action\n$$(g,\\sigma)(z\\otimes c)=g(z)\\otimes\\sigma(c)$$\nextends compatibly to these models, and $(F')^N=F$. The reduced inverse image of $M$ on the generic fibre is a finite set of distinct $K'$-rational points stable under $G'$. The construction allows $M=\\varnothing$. For every integer $b\\geq0$, if the normalizations of all reduced irreducible components of all geometric fibres of $X/S$ have genus at least $b$, then the same holds for $X'/S'$. More precisely, for a geometric point $s':\\operatorname{Spec}\\Omega\\to S'$ and its image $s$ in $S$, every reduced irreducible component $Z'$ of $X'_{s'}$ maps finitely and nonconstantly onto a reduced irreducible component $Z$ of $X_s$, and the induced map of smooth proper normalizations is nonconstant with $g((Z')^\\nu)\\geq g(Z^\\nu)$. Here both fibres are taken over the same algebraically closed field $\\Omega$.\n\nNormal means that every local ring is an integrally closed domain. H-projective means admitting a closed immersion into a finite-dimensional projective space over the target. A finite separable field extension is finite-dimensional with separable minimal polynomials. A finite Galois extension is a finite normal separable extension; normal for fields means that every irreducible polynomial over the smaller field with a root in the larger field splits there. For a group $G$ acting on a field $V$, $V^G$ is the subfield of elements fixed by every member of $G$. All fixed-field equalities below use the field embeddings induced by the displayed scheme maps. The notions used are [def-weil-field], [def-pc-integral-scheme], [def-weil-finite-type-morphism], [def-kun-projective], [def-sc-function-field], [def-pc-field-extension], [def-weil-pure-dimension], [def-weil-geometric-fibre], [def-sbc-smooth-morphisms], [def-pc-geometrically-irreducible], [def-fin-normalization-extension], [def-weil-finite-integral-morphism], [def-weil-surjective-morphism], [def-pc-fibre-product], [def-weil-etale-morphism], [def-pc-genus].",
+ "source": {
+  "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+  "place": "de Jong §§3.2 and 3.6, pp.605,608: Galois constant extension splitting the generic marking and preservation of the fibre genus bound; original steps 9--10. Publisher PDF read online; local PDF WANTED.",
+  "url": "https://aif.centre-mersenne.org/item/10.5802/aif.1575.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-kun-projective",
+  "def-sc-function-field",
+  "def-pc-field-extension",
+  "def-weil-pure-dimension",
+  "def-weil-geometric-fibre",
+  "def-sbc-smooth-morphisms",
+  "def-pc-geometrically-irreducible",
+  "def-fin-normalization-extension",
+  "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism",
+  "def-pc-fibre-product",
+  "def-weil-etale-morphism",
+  "def-pc-genus",
+  "def-weil-pbc-reduced-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Apply the etale-fibre description to $M\\to\\operatorname{Spec}K$, taking the fibre at the unique point. Since $M$ is finite, the resulting discrete decomposition is finite: $M=\\coprod_{j=1}^r\\operatorname{Spec}L_j$, where each $L_j/K$ is finite separable. Choose a primitive element $a_j$ of each $L_j/K$, with monic separable minimal polynomial $p_j$. Thus $K[T]/(p_j)\\simeq L_j$. If $M$ is empty take $r=0$, with no polynomials.",
+   "uses": [
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "lem-weil-pbc-finite-separable-extension-primitive-element"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GL (lemma-etale-over-field); algebra.tex Tag 00U3 (lemma-etale-over-field); de Jong §§3.2,3.6, printed pp.605,608 (local PDF WANTED)."
+   }
+  },
+  {
+   "text": "Apply the equivariant polynomial-envelope theorem with $H=G$, its given (possibly nonfaithful) action on $K$, $I=\\{1,\\ldots,r\\}$, $f_j=p_j$, and one field factor $L_j$ for each $j$. Its hypotheses are exactly the presentations from Step 1, and its fixed field is $B=K^G$. It gives $K\\subseteq K\\prime$ finite Galois over both $K$ and $B$, embeddings of all $L_j$, complete linear factorizations of the $p_j$, and exactly the displayed finite group $G\\prime$. Its surjectivity and kernel assertions give $G\\prime\\twoheadrightarrow G$, $N=\\operatorname{Aut}_K(K\\prime)$ and $(K\\prime)^N=K$. Its empty-index case applies when $r=0$.",
+   "uses": [
+    "lem-sfb-equivariant-galois-polynomial-envelope"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tags 09I3 (lemma-galois-over-fixed-field), 0BME (lemma-lift-maps); finite equivariant splitting through the cited polynomial-envelope statement."
+   }
+  },
+  {
+   "text": "Apply the constant-extension case of the finite normal relative curve-model theorem, with $E=K\\prime$ and $L=F\\otimes_KK\\prime$. Its hypotheses on $S,X,f$ and the smooth geometrically integral generic curve are precisely those in the statement here. It says this tensor product is a field finite separable over $F$, and its constant-extension clause identifies the normalized generic curve with $C\\times_KK\\prime$. It supplies all stated normality, integrality, finite-type, projectivity, finite-surjectivity and pure-geometric-fibre assertions for $S\\prime=\\operatorname{Nor}_{K\\prime}(S)$ and $X\\prime=\\operatorname{Nor}_{F\\prime}(X)$. In particular the generic curve is smooth and geometrically integral.",
+   "uses": [
+    "lem-sfb-finite-normal-relative-curve-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 0307 (lemma-integral-closure-localize), 034L (lemma-integral-closure-in-normal); the cited relative normal-model theorem includes the constant-extension field and pure-fibre assertions."
+   }
+  },
+  {
+   "text": "The displayed action is well defined on the tensor product: $g(za)\\otimes\\sigma(c)=g(z)g(a)\\otimes\\sigma(c)=g(z)\\otimes\\sigma(ac)$ for $a\\in K$, since $\\sigma|_K=g|_K$. Multiplication, identity and composition are checked on pure tensors, and inverse pairs give inverses. It agrees with the given actions on $F$ and $K\\prime$; hence the semilinear functoriality clause of the relative normal-model theorem extends it compatibly to $X\\prime,S\\prime$. For $(1,\\sigma)\\in N$ it is $\\mathrm{id}_F\\otimes\\sigma$. The tensor-invariants theorem applied to the $K$-vector space $F$ and the fixed-field equality from Step 2 gives $(F\\prime)^N=F\\otimes1$, identified with $F$.",
+   "uses": [
+    "lem-sfb-finite-normal-relative-curve-model",
+    "lem-weil-pbc-tensor-field-extension-galois-invariants"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 038B (lemma-closed-fixed-by-Galois), tensor invariants; normalization functoriality in the cited normal-model theorem."
+   }
+  },
+  {
+   "text": "For each $j$, the $K\\prime$-algebra $L_j\\otimes_KK\\prime$ has the presentation $K\\prime[T]/(p_j)$: both algebras represent an element satisfying $p_j=0$, so the maps sending the generator to $a_j\\otimes1$ and back are inverse. The split roots from Step 2 are distinct, since $p_j$ is separable (its Bezout identity with its derivative stays valid over $K\\prime$). Apply the distinct-linear-factor quotient theorem to obtain $L_j\\otimes_KK\\prime\\simeq\\prod_{\\deg p_j}K\\prime$. Taking spectra of these presentations gives the inverse image of $M$ as a disjoint union of distinct $K\\prime$-points, already reduced. It is $G\\prime$-stable: the generic-fibre map is equivariant and $M$ is $G$-stable, so every action sends its inverse image to itself. The empty coproduct remains empty.",
+   "uses": [
+    "lem-pc-polynomial-quotient-distinct-linear-crt"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GL (lemma-etale-over-field); algebra.tex Tag 00U3 (lemma-etale-over-field); de Jong §§3.2,3.6, printed pp.605,608 (local PDF WANTED)."
+   }
+  },
+  {
+   "text": "Fix $s\\prime:\\operatorname{Spec}\\Omega\\to S\\prime$ and let $s$ be its composite to $S$. Base change the finite map $X\\prime\\to X\\times_SS\\prime$ to get a finite $\\Omega$-map $h:X\\prime_{s\\prime}\\to X_s$. For a reduced irreducible component $Z\\prime$ of its source, the restricted map to $X_s$ is finite: on affine charts quotienting a finite algebra by the component prime is still finite. The image is closed, since finite maps are proper and proper maps have closed image; write its reduced integral image as $Z$. On an affine meeting the image this gives an injective finite map of domains $A/\\ker(A\\to D)\\hookrightarrow D$. The nonempty-open dimension theorem identifies affine-chart dimensions with the dimensions of these integral finite-type curves; equality of dimension for injective integral extensions therefore gives $\\dim Z=\\dim Z\\prime=1$. Since $X_s$ is pure one-dimensional, an irreducible closed subset of dimension one is a component. Thus $Z\\prime\\to Z$ is finite surjective and nonconstant. These are fibres over the same $\\Omega$, by the fibre-product identification.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-proper-closed-image",
+    "lem-weil-pbc-integral-injective-dimension-equal",
+    "lem-sc-integral-locally-algebraic-opens-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00OK (lemma-integral-sub-dim-equal); morphisms.tex Tags 01WL (lemma-base-change-finite), 01WN (lemma-finite-proper)."
+   }
+  },
+  {
+   "text": "The curves $Z\\prime,Z$ are projective: they are reduced closed subschemes of the projective fibres of $f\\prime,f$, respectively, so compose their closed immersions with the chosen projective embeddings. Projectivity of those fibres follows from projective base change; projective implies proper. The normalization-properties theorem makes $(Z\\prime)^\\nu,Z^\\nu$ proper smooth integral curves, because $\\Omega$ is algebraically closed and hence perfect; their dimensions are one. Both normalizations are integral and of finite type over $\\Omega$, since $\\nu$ is finite. The source $(Z\\prime)^\\nu$ has integrally closed local rings: over an affine open $\\operatorname{Spec}D$ of $Z\\prime$ it is $\\operatorname{Spec}\\overline D$, with $\\overline D$ the integral closure of $D$ in $\\operatorname{Frac}D=\\operatorname{Frac}\\overline D$, and a localization of an integrally closed domain is integrally closed. Apply dominant lifting through normalization to the dominant composite $(Z\\prime)^\\nu\\to Z\\prime\\to Z$ of two surjections to obtain the unique induced dominant, hence nonconstant map $(Z\\prime)^\\nu\\to Z^\\nu$. For each normalization, $\\Omega$ is algebraically closed in its function field (an algebraic element over an algebraically closed field already lies in that field). The field geometric-irreducibility theorem and its generic-point criterion therefore give geometric irreducibility. The perfect-field reducedness theorem gives geometric reducedness. Hence both are geometrically integral, as required by genus monotonicity. The genus-monotonicity theorem gives $g((Z\\prime)^\\nu)\\ge g(Z^\\nu)$, including inseparable maps. Consequently every lower bound $b\\ge0$ on the latter genera is inherited by $X\\prime/S\\prime$.",
+   "uses": [
+    "lem-pc-projective-base-change",
+    "lem-pc-projective-proper",
+    "lem-sc-normalization-properties",
+    "lem-sbc-normalization-dominant-lift",
+    "lem-sfb-finite-curve-genus-monotonicity",
+    "lem-zl-field-extension-algebraically-closed-geometric",
+    "lem-zl-generic-point-geometric-irreducibility",
+    "lem-kun-geometric-reduced-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0C1B (section-riemann-hurewitz), 0CD2 (proposition-unwind-morphism-smooth), 0CD0 (lemma-purely-inseparable-smooth-genus); de Jong §3.6, p.608 (local PDF WANTED)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-finite-separable-extension-primitive-element",
+  "lem-sfb-equivariant-galois-polynomial-envelope",
+  "lem-sfb-finite-normal-relative-curve-model",
+  "lem-weil-pbc-tensor-field-extension-galois-invariants",
+  "lem-pc-polynomial-quotient-distinct-linear-crt",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-proper-closed-image",
+  "lem-weil-pbc-integral-injective-dimension-equal",
+  "lem-sc-integral-locally-algebraic-opens-dimension",
+  "lem-pc-projective-base-change",
+  "lem-pc-projective-proper",
+  "lem-sc-normalization-properties",
+  "lem-sbc-normalization-dominant-lift",
+  "lem-sfb-finite-curve-genus-monotonicity",
+  "lem-zl-field-extension-algebraically-closed-geometric",
+  "lem-zl-generic-point-geometric-irreducibility",
+  "lem-kun-geometric-reduced-perfect"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Assembly of existing DAG statements following de Jong §§3.2,3.6 (publisher PDF read online; local PDF WANTED), with explicit tensor and fibre-component arguments."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Rationalize a finite etale generic marking of a projective curve family by a finite Galois constant extension with lifted semilinear group action and kernel fixed fields",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Etale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib/RingTheory/Etale/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A],\\n  Algebra.Etale K A ↔\\n    ∃ I, ∃ (_ : Finite I), ∃ Ai x x_1 x_2, ∀ (i : I), Module.Finite K (Ai i) ∧ Algebra.IsSeparable K (Ai i)\", \"doc\": \"An algebra $ A $ over a field $ K $ is étale if and only if there exists a finite index set $ I $ and a family of fields $ \\\\{A_i\\\\}_{i \\\\in I} $, each equipped with a $ K $-algebra structure, such that \"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.map_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} {S : Type s} {F : Type u} {K : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Field F]\\n  [inst_3 : Field K] {W' : WeierstrassCurve.Affine R} [inst_4 : DecidableEq F] [inst_5 : DecidableEq K]\\n  [inst_6 : Algebra R S] [inst_7 : Algebra R F] [inst_8 : Algebra S F] [inst_9 : \", \"doc\": \"Given an algebra homomorphism $ f : F → K $ between fields extending a commutative ring $ R $, and an affine Weierstrass curve $ W' $ over $ R $, the map function sends a nonsingular point $ (x, y) $ \"}\n  {\"name\": \"IsGaloisGroup.to_isFractionRing\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ (G : Type u_1) (A : Type u_2) (B : Type u_3) (K : Type u_4) (L : Type u_5) [inst : Group G] [inst_1 : CommRing A]\\n  [inst_2 : CommRing B] [inst_3 : MulSemiringAction G B] [inst_4 : Algebra A B] [inst_5 : Field K] [inst_6 : Field L]\\n  [inst_7 : Algebra K L] [inst_8 : Algebra A K] [inst_9 : Algebra \", \"doc\": \"If $ G $ is a finite Galois group of $ B $ over $ A $, then $ G $ is also the Galois group of the fraction field $ L $ of $ B $ over the fraction field $ K $ of $ A $.\"}\n  {\"name\": \"WeierstrassCurve.IsIntegral.integral\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {K : Type u_2} {inst_1 : Field K} {inst_2 : Algebra R K} {W : WeierstrassCurve K}\\n  [self : WeierstrassCurve.IsIntegral R W], ∃ W_int, W = W_int.baseChange K\", \"doc\": \"For any commutative ring $ R $, field $ K $ equipped with an $ R $-algebra structure, and integral Weierstrass curve $ W $ over $ K $, there exists a Weierstrass curve $ W_{\\\\text{int}} $ over $ R $ su\"}\n  {\"name\": \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib/RingTheory/Etale/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A] [Algebra.EssFiniteType K A],\\n  Algebra.FormallyEtale K A ↔ ∃ I, ∃ (_ : Finite I), ∃ Ai x x_1 x_2, ∀ (i : I), Algebra.IsSeparable K (Ai i)\", \"doc\": \"A finitely generated algebra $ A $ over a field $ K $ is formally étale if and only if there exists a finite index set $ I $ and a family of field extensions $ \\\\{A_i\\\\}_{i \\\\in I} $, each separable over\"}\n  {\"name\": \"IsGaloisGroup.iff_isFractionRing\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ (G : Type u_1) (A : Type u_2) (B : Type u_3) (K : Type u_4) (L : Type u_5) [inst : Group G] [inst_1 : CommRing A]\\n  [inst_2 : CommRing B] [inst_3 : MulSemiringAction G B] [inst_4 : Algebra A B] [inst_5 : Field K] [inst_6 : Field L]\\n  [inst_7 : Algebra K L] [inst_8 : Algebra A K] [inst_9 : Algebra \", \"doc\": \"Let $G$ be a finite group, $A$ an integrally closed commutative ring, and $B$ an $A$-algebra with a multiplicative $G$-action. Then $G$ is the Galois group of $B$ over $A$ if and only if $B$ is integr\"}\n  {\"name\": \"IsGaloisGroup.of_isFractionRing\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ (G : Type u_1) (A : Type u_2) (B : Type u_3) (K : Type u_4) (L : Type u_5) [inst : Group G] [inst_1 : CommRing A]\\n  [inst_2 : CommRing B] [inst_3 : MulSemiringAction G B] [inst_4 : Algebra A B] [inst_5 : Field K] [inst_6 : Field L]\\n  [inst_7 : Algebra K L] [inst_8 : Algebra A K] [inst_9 : Algebra \", \"doc\": \"If $ G $ is the Galois group of $ L $ over $ K $, $ A $ is integrally closed, and $ B $ is integral over $ A $, then $ G $ is also the Galois group of $ B $ over $ A $.\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.map\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} →\\n  {S : Type s} →\\n    {F : Type u} →\\n      {K : Type v} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Field F] →\\n              [inst_3 : Field K] →\\n                {W' : WeierstrassCurve.Affine R} →\\n                  [inst_4 : DecidableEq F] →\\n\", \"doc\": \"Given an algebra homomorphism $ f : F → K $ between fields extending a commutative ring $ R $, and an affine Weierstrass curve $ W' $ over $ R $, this function defines a group homomorphism from the se\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the actual hits concern field automorphism groups, ordinary normalization, finite maps, rational maps or Weierstrass curves; none supplies this relative equivariant construction with its stated field and fibre conclusions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"rational\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.RationalMap\", \"type\": \" (X Y : AlgebraicGeometry.Scheme) : Type u\", \"doc\": \"A rational map from `X` to `Y` (`X ⤏ Y`) is an equivalence class of partial maps,\\nwhere two partial maps are equivalent if they are equal on a dense open subscheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.id\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.RationalMap\", \"type\": \" (X : AlgebraicGeometry.Scheme) : X.RationalMap X\", \"doc\": \"The identity rational map.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.domain\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.RationalMap\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X.RationalMap Y) : X.Opens\", \"doc\": \"The domain of definition of a rational map.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toRationalMap\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.RationalMap\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X.Hom Y) : X.RationalMap Y\", \"doc\": \"A scheme morphism as a rational map.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.RationalMap\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X.PartialMap Y) : X.RationalMap Y\", \"doc\": \"A partial map as a rational map.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.representative\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.RationalMap\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X.RationalMap Y) : X.PartialMap Y\", \"doc\": \"An arbitrarily chosen partial map representing `f`. Use `RationalMap.toPartialMap` instead\\nif `X` is reduced and `Y` is separated.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap_surjective\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.RationalMap\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} : Function.Surjective AlgebraicGeometry.Scheme.PartialMap.toRationalMap\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.openCoverDomain\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.RationalMap\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X.RationalMap Y) : (↑f.domain).OpenCover\", \"doc\": \"The open cover of the domain of `f : X ⤏ Y`,\\nconsisting of all the domains of the partial maps in the equivalence class.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.toPartialMap\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.RationalMap\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsReduced X] [Y.IsSeparated] (f : X.RationalMap Y) : X.PartialMap Y\", \"doc\": \"If `f : X ⤏ Y` is a rational map from a reduced scheme to a separated scheme,\\nthen `f` can be represented as a partial map on its domain of definition.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.IsOver\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.RationalMap\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (S : AlgebraicGeometry.Scheme) [X.Over S] [Y.Over S] (f : X.RationalMap Y) : Prop\", \"doc\": \"A rational map is an `S`-map if some partial map in the equivalence class is an `S`-map.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.representative_toRationalMap_equiv\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.RationalMap\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X.PartialMap Y) : f.toRationalMap.representative.equiv f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.toRationalMap_representative\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.RationalMap\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X.RationalMap Y) : f.representative.toRationalMap = f\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the actual hits concern field automorphism groups, ordinary normalization, finite maps, rational maps or Weierstrass curves; none supplies this relative equivariant construction with its stated field and fibre conclusions"
+  },
+  {
+   "tool": "grep",
+   "query": "rationaliz.*mark|mark.*rationaliz|split.*etale.*point|etale.*split.*point",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the actual hits concern field automorphism groups, ordinary normalization, finite maps, rational maps or Weierstrass curves; none supplies this relative equivariant construction with its stated field and fibre conclusions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite constant extension splits marked curve points into distinct rational points and preserves high genus of all normalized geometric fibre components",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) [IsFinite f] : Finite (f.fiber y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"Polynomial.splits_of_map_eq_C\", \"module\": \"Mathlib.Algebra.Polynomial.Splits\", \"type\": \"{f : K[X]} {a : L} (h : f.map i = C a) : Splits (f.map i)\", \"doc\": \"If the image of a polynomial under a ring homomorphism is a constant polynomial, then this constant polynomial splits.\"}\n  {\"name\": \"FiniteField.instFieldExtension\", \"module\": \"Mathlib.FieldTheory.Finite.Extension\", \"type\": \"(k : Type u_1) →\\n  [inst : Field k] →\\n    (p : ℕ) → [inst_1 : Fact (Nat.Prime p)] → (n : ℕ) → [inst_2 : CharP k p] → Field (FiniteField.Extension k p n)\", \"doc\": \"Given a finite field $ k $ of characteristic $ p $, this constructs the finite field extension of degree $ n $ over $ k $. The resulting field has $ p^{m \\\\cdot n} $ elements, where $ m $ is the dimens\"}\n  {\"name\": \"FiniteField.Extension\", \"module\": \"Mathlib.FieldTheory.Finite.Extension\", \"type\": \"[CharP k p] : Type\", \"doc\": \"Given a finite field $ k $ of characteristic $ p $, this definition constructs the finite field extension of degree $ n $ over $ k $. The resulting field has $ p^{m \\\\cdot n} $ elements, where $ m $ is\"}\n  {\"name\": \"FiniteField.instFiniteExtension_1\", \"module\": \"Mathlib.FieldTheory.Finite.Extension\", \"type\": \": Module.Finite k (Extension k p n)\", \"doc\": \"The finite field extension of degree $ n $ over $ k $ is finitely generated as a module over $ k $.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \": MorphismProperty.HasOfPostcompProperty @IsFinite @IsSeparated\", \"doc\": \"The composition of a finite morphism with a separated morphism is finite.\"}\n  {\"name\": \"IsGalois.is_separable_splitting_field\", \"module\": \"Mathlib.FieldTheory.Galois.Basic\", \"type\": \"[FiniteDimensional F E] [IsGalois F E] : ∃ p : F[X], p.Separable ∧ p.IsSplittingField F E\", \"doc\": \"Every finite-dimensional Galois field extension $ E/F $ is the splitting field of some separable polynomial $ p \\\\in F[X] $.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [IsFinite f] : IsFinite (f ∣_ V)\", \"doc\": \"For any finite morphism $ f : X \\to Y $ of schemes and any open subset $ V $ of $ Y $, the restriction of $ f $ to $ V $ is also a finite morphism.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the actual hits concern field automorphism groups, ordinary normalization, finite maps, rational maps or Weierstrass curves; none supplies this relative equivariant construction with its stated field and fibre conclusions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivariant normal base change of a relative curve splitting finitely many separable residue fields and preserving component genus bounds",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Affine.Point.map_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} {S : Type s} {F : Type u} {K : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Field F]\\n  [inst_3 : Field K] {W' : WeierstrassCurve.Affine R} [inst_4 : DecidableEq F] [inst_5 : DecidableEq K]\\n  [inst_6 : Algebra R S] [inst_7 : Algebra R F] [inst_8 : Algebra S F] [inst_9 : \", \"doc\": \"Given an algebra homomorphism $ f : F → K $ between fields extending a commutative ring $ R $, and an affine Weierstrass curve $ W' $ over $ R $, the map function sends a nonsingular point $ (x, y) $ \"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.baseChange\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} →\\n  (F : Type u) →\\n    (K : Type v) →\\n      [inst : CommRing R] →\\n        [inst_1 : Field F] →\\n          [inst_2 : Field K] →\\n            {W' : WeierstrassCurve.Affine R} →\\n              [inst_3 : DecidableEq F] →\\n                [inst_4 : DecidableEq K] →\\n                  [inst_5 : Al\", \"doc\": \"Given fields $F$ and $K$ equipped with an $R$-algebra structure and satisfying the scalar tower compatibility condition $R \\to F \\to K$, this function defines a group homomorphism from the set of points\"}\n  {\"name\": \"WeierstrassCurve.baseChange_integralModel_eq\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] {K : Type u_2} [inst_1 : Field K] [inst_2 : Algebra R K] (W : WeierstrassCurve K)\\n  [hW : WeierstrassCurve.IsIntegral R W], (WeierstrassCurve.integralModel R W).baseChange K = W\", \"doc\": \"For an integral Weierstrass curve $ W $ over a field $ K $ equipped with an $ R $-algebra structure, the base change of its integral model over $ R $ to $ K $ recovers the original curve $ W $, i.e., \"}\n  {\"name\": \"WeierstrassCurve.Affine.baseChange_nonsingular\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Basic\", \"type\": \"∀ {R : Type r} {S : Type s} {A : Type u} {B : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing A]\\n  [inst_3 : CommRing B] {W : WeierstrassCurve.Affine R} [inst_4 : Algebra R S] [inst_5 : Algebra R A]\\n  [inst_6 : Algebra S A] [IsScalarTower R S A] [inst_8 : Algebra R B] [inst_9 : \", \"doc\": \"Given an injective ring homomorphism $ f : A \\to B $, a point $ (f(x), f(y)) $ on the base change of an affine Weierstrass curve $ W $ to $ B $ is nonsingular if and only if the corresponding point $ (\"}\n  {\"name\": \"WeierstrassCurve.Projective.baseChange_nonsingular\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"∀ {R : Type r} {S : Type s} {A : Type u} {B : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing A]\\n  [inst_3 : CommRing B] {W' : WeierstrassCurve.Projective R} [inst_4 : Algebra R S] [inst_5 : Algebra R A]\\n  [inst_6 : Algebra S A] [IsScalarTower R S A] [inst_8 : Algebra R B] [inst\", \"doc\": \"Let $ f : A \\\\to B $ be an injective ring homomorphism. For a projective Weierstrass curve $ W' $ over $ A $, a point $ P $ on $ W' $ is nonsingular if and only if the base-changed point $ f \\\\circ P $ \"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.map_baseChange\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} {F : Type u} {K : Type v} {L : Type w} [inst : CommRing R] [inst_1 : Field F] [inst_2 : Field K]\\n  [inst_3 : Field L] {W' : WeierstrassCurve.Affine R} [inst_4 : DecidableEq F] [inst_5 : DecidableEq K]\\n  [inst_6 : DecidableEq L] [inst_7 : Algebra R F] [inst_8 : Algebra R K] [inst_9 : A\", \"doc\": \"Given fields $F$, $K$, and $L$ with $R$-algebra structures and scalar tower compatibility $R → F → K$ and $R → F → L$, for any algebra homomorphism $f : K → L$ over $F$ and point $P$ on an affine Weie\"}\n  {\"name\": \"WeierstrassCurve.Affine.Equation.baseChange\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Basic\", \"type\": \"∀ {R : Type r} {S : Type s} {A : Type u} {B : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing A]\\n  [inst_3 : CommRing B] {W : WeierstrassCurve.Affine R} [inst_4 : Algebra R S] [inst_5 : Algebra R A]\\n  [inst_6 : Algebra S A] [IsScalarTower R S A] [inst_8 : Algebra R B] [inst_9 : \", \"doc\": \"Given a Weierstrass curve $ W $ over a base ring $ R $, and algebra homomorphisms $ R \\\\to A \\\\to B $, if $ (x,y) $ satisfies the affine equation of $ W_{A} $ (the base change to $ A $), then $ (f(x),f(\"}\n  {\"name\": \"WeierstrassCurve.Affine.baseChange_equation\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Basic\", \"type\": \"∀ {R : Type r} {S : Type s} {A : Type u} {B : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing A]\\n  [inst_3 : CommRing B] {W : WeierstrassCurve.Affine R} [inst_4 : Algebra R S] [inst_5 : Algebra R A]\\n  [inst_6 : Algebra S A] [IsScalarTower R S A] [inst_8 : Algebra R B] [inst_9 : \", \"doc\": \"Let $ R $ be a commutative ring and $ A $ an $ R $-algebra. For an injective algebra homomorphism $ f : R \\\\to A $ and an affine Weierstrass curve $ W $ over $ R $, the base change $ W_{A} $ satisfies \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the actual hits concern field automorphism groups, ordinary normalization, finite maps, rational maps or Weierstrass curves; none supplies this relative equivariant construction with its stated field and fibre conclusions"
+  },
+  {
+   "tool": "grep",
+   "query": "rationaliz.*mark|mark.*rationaliz|normalization.*genus",
+   "results": "0 actual hits: none",
+   "date": "2026-10-23",
+   "verdict": "no match: normalization infrastructure, etale algebra decompositions, ordinary Galois theory or Weierstrass base change do not state this relative equivariant marking and fibre-genus theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite Galois extension splitting closed points of a curve with compatible semilinear group actions",
+   "results": "8 actual hits: IsGaloisGroup.of_isGalois, IsGalois.is_separable_splitting_field, IsGalois.tfae, IsGaloisGroup.isGalois, IsGalois.of_fixed_field, GaloisField.instIsGaloisOfFinite, IsGaloisGroup.finite, IsGaloisGroup",
+   "date": "2026-10-23",
+   "verdict": "no match: normalization infrastructure, etale algebra decompositions, ordinary Galois theory or Weierstrass base change do not state this relative equivariant marking and fibre-genus theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"normalization\"",
+   "results": "12 actual hits: AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.Scheme.Hom.fromNormalization, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization",
+   "date": "2026-10-23",
+   "verdict": "no match: normalization infrastructure, etale algebra decompositions, ordinary Galois theory or Weierstrass base change do not state this relative equivariant marking and fibre-genus theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivariant finite extension of constants splits a finite etale marking on a curve and normalization preserves geometric fibre genus bounds",
+   "results": "8 actual hits: Algebra.Etale.iff_exists_algEquiv_prod, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, Algebra.Etale.exists_subalgebra_fg, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, Algebra.IsEtaleAt.comp, WeierstrassCurve.IsGoodReduction, RingHom.IsStandardSmooth.exists_etale_mvPolynomial",
+   "date": "2026-10-23",
+   "verdict": "no match: normalization infrastructure, etale algebra decompositions, ordinary Galois theory or Weierstrass base change do not state this relative equivariant marking and fibre-genus theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalize a projective family of curves after finite separable base extension making marked generic points rational",
+   "results": "8 actual hits: WeierstrassCurve.Projective.NonsingularLift, WeierstrassCurve.Projective.baseChange_nonsingular, AlgebraicGeometry.Scheme.Hom.normalization, WeierstrassCurve.IsIntegral.integral, WeierstrassCurve.Affine.Point.map_some, AlgebraicGeometry.Scheme.Hom.normalizationDesc, WeierstrassCurve.exists_isMinimal, WeierstrassCurve.Projective.comp_equiv_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: normalization infrastructure, etale algebra decompositions, ordinary Galois theory or Weierstrass base change do not state this relative equivariant marking and fibre-genus theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "genus|marked.*point|rational.*point.*normalization",
+   "results": "0 actual hits: none",
+   "date": "2026-10-23",
+   "verdict": "no match: normalization infrastructure, etale algebra decompositions, ordinary Galois theory or Weierstrass base change do not state this relative equivariant marking and fibre-genus theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-high-genus-equivariant-cover",
+  "date": "2026-10-22",
+  "group": "Q127"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; extracted argument: de Jong §§3.2 and 3.6, pp.605,608: Galois constant extension splitting the generic marking and preservation of the fibre genus bound; original steps 9--10.",
+   "via": [
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-equivariant-marking-rationalization",
+  "worker": "stage1",
+  "summary": "Q05: assembled the finite etale decomposition, existing equivariant polynomial envelope and normal relative curve model; checked semilinear tensor balancing, invariants, distinct-root splitting and each fibre-component genus comparison. No new nodes and no statement changes. Restored the documented blueprint ancestor through the inherited chain; ancestor command currently reports None because that created.item chain is broken upstream.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images clause (3), alteration reduction: de Jong §3.2 constant extension and §3.6 rationalization of the marking preserving the fibre genus bound.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-polynomial-quotient-distinct-linear-crt",
+    "why": "General quotient by distinct linear factors is a product of the coefficient field, used as stated to check a field, polynomial, dimension, projectivity or normalization hypothesis. It supplies a generic tool absent from this unit, while retaining the de Jong constant-extension route."
+   },
+   {
+    "node": "lem-sc-integral-locally-algebraic-opens-dimension",
+    "why": "General nonempty opens of an integral locally algebraic scheme have its dimension, used as stated to check a field, polynomial, dimension, projectivity or normalization hypothesis. It supplies a generic tool absent from this unit, while retaining the de Jong constant-extension route."
+   },
+   {
+    "node": "lem-pc-projective-base-change",
+    "why": "General projective morphisms are stable under base change, used as stated to check a field, polynomial, dimension, projectivity or normalization hypothesis. It supplies a generic tool absent from this unit, while retaining the de Jong constant-extension route."
+   },
+   {
+    "node": "lem-sbc-normalization-dominant-lift",
+    "why": "General dominant lifting through absolute normalization, used as stated to check a field, polynomial, dimension, projectivity or normalization hypothesis. It supplies a generic tool absent from this unit, while retaining the de Jong constant-extension route."
+   },
+   {
+    "node": "lem-zl-field-extension-algebraically-closed-geometric",
+    "why": "General algebraic closure in a field extension implies geometric irreducibility, used as stated to check a field, polynomial, dimension, projectivity or normalization hypothesis. It supplies a generic tool absent from this unit, while retaining the de Jong constant-extension route."
+   },
+   {
+    "node": "lem-zl-generic-point-geometric-irreducibility",
+    "why": "General geometric irreducibility detected by the generic residue field, used as stated to check a field, polynomial, dimension, projectivity or normalization hypothesis. It supplies a generic tool absent from this unit, while retaining the de Jong constant-extension route."
+   },
+   {
+    "node": "lem-kun-geometric-reduced-perfect",
+    "why": "General geometric reducedness over a perfect field, used as stated to check a field, polynomial, dimension, projectivity or normalization hypothesis. It supplies a generic tool absent from this unit, while retaining the de Jong constant-extension route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-polynomial-quotient-distinct-linear-crt",
+  "lem-sc-integral-locally-algebraic-opens-dimension",
+  "lem-pc-projective-base-change",
+  "lem-sbc-normalization-dominant-lift",
+  "lem-zl-field-extension-algebraically-closed-geometric",
+  "lem-zl-generic-point-geometric-irreducibility",
+  "lem-kun-geometric-reduced-perfect"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-9064bc92f",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-9064bc92f (reviewer sub-agent of L); spot-checked: First split of an unsplit item. The statement is byte-identical to the base and no new nodes were added; there is no cycle, no SGA citation and no re-split note. blueprint.from.node was null and is filled with det-thm-sf-ctf-stability-direct-images, the imported ancestor that the created.item chain reaches through lem-sfb-admissible-direct-image. I re-read every cited statement against its step. Step 1: 02GL(2) etale fibre plus 030N primitive element give separable p_j, with r=0 for an empty M. Step 2: the envelope's hypotheses hold (singleton B_i; empty I allowed; F=K^G=B), and it gives K', G', surjectivity, N=Aut_K(K') and (K')^N=K. Step 3: the constant-extension clause of finite-normal-relative-curve-model gives every model clause, including C x_K K' smooth and geometrically integral. Step 4: I checked the balancing identity; functoriality allows nonfaithful semilinear actions, and tensor invariants with A=F give (F')^N=F. Step 5: K'[T]/(p_j) is a product of copies of K' by the distinct-linear CRT node, with distinct roots from separability, and the points are G'-stable. Step 6: permanence (a)(b)(c), closed image, 00OK and 0A21 give dim Z = dim Z' = 1, so Z is a component of the pure fibre. Step 7: projective base change, normalization properties (a)(c), 035Q dominant lift, 037P, 054Q and perfect reducedness give geometric integrality, then genus monotonicity applies. FIX (E1/C2, minor): Step 7 applied the dominant lift without checking that the normalization has integrally closed local rings, that the composite map is dominant, and that the normalizations are of finite type. Those checks are now written into the step from def-sc-normalization and normalization-properties (a); the step is 1725 chars, and uses, deps and statement are unchanged. Small cases tested: empty M, trivial or nonfaithful G, dim S=0, inseparable maps, b=0,1. I found no duplicate: smooth-cover-constant-field-marking is a different statement. Accepted tool_uses: the off-route sbc-normalization-dominant-lift, zl 037P, zl 054Q and kun-geometric-reduced-perfect are generic black boxes. Batch 5: lem-trf-divisor-of-split-polynomial (09HN polynomial divisor splitting) and lem-trf-birational-curve-quasifinite (0AB6), plus the four trf 0AYV curve Euler/degree nodes in the genus-monotonicity closure, are generic coherent and algebraic tools, not part of the trace formula or Poincare duality, so they are accepted. de Jong is not in literature/ (marked WANTED); the proof is marked as an agent assembly.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EquivariantMarkingRationalization",
+  "declaration": "AlgebraicGeometry.exists_equivariant_marking_rationalization",
+  "declarations": [
+   "AlgebraicGeometry.EquivariantMarkingRationalization.fibreComponentι",
+   "AlgebraicGeometry.EquivariantMarkingRationalization.normalizedFibreComponentToSpec",
+   "AlgebraicGeometry.exists_equivariant_marking_rationalization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EquivariantMarkingRationalization.lean",
+  "statement": "theorem exists_equivariant_marking_rationalization (k : Type u) [Field k] (S X : Scheme.{u}) [IsIntegral S] [IsIntegral X] (p : S ⟶ Spec (.of k)) [IsHProjective p] [LocallyOfFiniteType p] [QuasiCompact p] (hSnormal : ∀ s : S, IsDomain (S.presheaf.stalk s) ∧ IsIntegrallyClosed (S.presheaf.stalk s)) (f : X ⟶ S) [IsHProjective f] [LocallyOfFiniteType (f ≫ p)] [QuasiCompact (f ≫ p)] (hXnormal : ∀ x : X, IsDomain (X.presheaf.stalk x) ∧ IsIntegrallyClosed (X.presheaf.stalk x)) (hpure : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S), (pullback (C := Scheme.{u}) f s).IsPureDimension 1) [Smooth (pullback.snd f S.fromSpecFunctionField)] [GeometricallyIntegral (pullback.snd f S.fromSpecFunctionField)] [Algebra S.functionField X.functionField] (hKF : Spec.map (CommRingCat.ofHom (algebraMap S.functionField X.functionField)) ≫ S.fromSpecFunctionField = X.fromSpecFunctionField ≫ f) (M : Scheme.{u}) (i : M ⟶ pullback (C := Scheme.{u}) f S.fromSpecFunctionField) [IsClosedImmersion i] [IsReduced M] [IsFinite (i ≫ pullback.snd f S.fromSpecFunctionField)] [Etale (i ≫ pullback.snd f S.fromSpecFunctionField)] (G : Type v) [Group G] [Finite G] (σk : G →* (k ≃+* k)) (σX : G →* Aut X) (σS : G →* Aut S) (hk : ∀ g : G, (σS g).hom ≫ p = p ≫ Spec.map (CommRingCat.ofHom (σk g⁻¹).toRingHom)) (hequiv : ∀ g : G, (σX g).hom ≫ f = f ≫ (σS g).hom) (hMstable : ∀ g : G, (σX g).hom '' Set.range (i ≫ pullback.fst f S.fromSpecFunctionField) = Set.range (i ≫ pullback.fst f S.fromSpecFunctionField)) : ∃ B : Subfield S.functionField, (∀ a : S.functionField, a ∈ B ↔ ∀ g : G, (Scheme.functionFieldAut (σS g)).hom a = a) ∧ ∃ (E : Type u) (_ : Field E) (_ : Algebra S.functionField E) (_ : Algebra B E) (_ : IsScalarTower B S.functionField E), FiniteDimensional S.functionField E ∧ FiniteDimensional B E ∧ IsGalois B E ∧ (∀ m : M, ∃ j : M.residueField m →+* E, j.comp (Spec.homEquiv (M.fromSpecResidueField m ≫ i ≫ pullback.snd f S.fromSpecFunctionField)).hom = algebraMap S.functionField E) ∧ ∃ (G' : Type (max u v)) (_ : Group G') (_ : Finite G') (β : G' →* G) (σE : G' →* (E ≃+* E)), Function.Surjective β ∧ Function.Injective (fun h : G' ↦ (β h, σE h)) ∧ (∀ (g : G) (τ : E ≃+* E), ((∀ b : B, τ (algebraMap B E b) = algebraMap B E b) ∧ ∀ a : S.functionField, τ (algebraMap S.functionField E a) = algebraMap S.functionField E ((Scheme.functionFieldAut (σS g⁻¹)).hom a)) ↔ ∃ h : G', β h = g ∧ σE h = τ) ∧ (∀ τ : E ≃+* E, (∀ a : S.functionField, τ (algebraMap S.functionField E a) = algebraMap S.functionField E a) ↔ ∃ h : β.ker, σE h.val = τ) ∧ (∀ z : E, z ∈ Set.range (algebraMap S.functionField E) ↔ ∀ h : β.ker, σE h.val z = z) ∧ IsField (TensorProduct S.functionField X.functionField E) ∧ ∃ (L : Type u) (_ : Field L) (_ : Algebra X.functionField L) (_ : Algebra S.functionField L) (_ : Algebra E L) (_ : IsScalarTower S.functionField X.functionField L) (_ : IsScalarTower S.functionField E L) (eL : TensorProduct S.functionField X.functionField E ≃+* L), (∀ (a : X.functionField) (c : E), eL (TensorProduct.tmul S.functionField a c) = algebraMap X.functionField L a * algebraMap E L c) ∧ FiniteDimensional X.functionField L ∧ Algebra.IsSeparable X.functionField L ∧ (∀ s : S.normalizationIn E, IsDomain ((S.normalizationIn E).presheaf.stalk s) ∧ IsIntegrallyClosed ((S.normalizationIn E).presheaf.stalk s)) ∧ IsIntegral (S.normalizationIn E) ∧ IsHProjective (S.fromNormalizationIn E ≫ p) ∧ LocallyOfFiniteType (S.fromNormalizationIn E ≫ p) ∧ QuasiCompact (S.fromNormalizationIn E ≫ p) ∧ (∀ x : X.normalizationIn L, IsDomain ((X.normalizationIn L).presheaf.stalk x) ∧ IsIntegrallyClosed ((X.normalizationIn L).presheaf.stalk x)) ∧ IsIntegral (X.normalizationIn L) ∧ LocallyOfFiniteType (X.fromNormalizationIn L ≫ f ≫ p) ∧ QuasiCompact (X.fromNormalizationIn L ≫ f ≫ p) ∧ IsFinite (S.fromNormalizationIn E) ∧ Surjective (S.fromNormalizationIn E) ∧ ∃ (q : X.normalizationIn L ⟶ S.normalizationIn E) (r : X.normalizationIn L ⟶ pullback (C := Scheme.{u}) f (S.fromNormalizationIn E)), q ≫ S.fromNormalizationIn E = X.fromNormalizationIn L ≫ f ∧ (X.fromSpecOfAlgebraFunctionField L).toNormalization ≫ q = Spec.map (CommRingCat.ofHom (algebraMap E L)) ≫ (S.fromSpecOfAlgebraFunctionField E).toNormalization ∧ r ≫ pullback.fst f (S.fromNormalizationIn E) = X.fromNormalizationIn L ∧ r ≫ pullback.snd f (S.fromNormalizationIn E) = q ∧ IsFinite r ∧ Surjective r ∧ IsHProjective q ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S.normalizationIn E), (pullback (C := Scheme.{u}) q s).IsPureDimension 1) ∧ Smooth (pullback.snd q (S.fromSpecOfAlgebraFunctionField E).toNormalization) ∧ GeometricallyIntegral (pullback.snd q (S.fromSpecOfAlgebraFunctionField E).toNormalization) ∧ ∃ eC : pullback (C := Scheme.{u}) q (S.fromSpecOfAlgebraFunctionField E).toNormalization ≅ pullback (C := Scheme.{u}) (pullback.snd f S.fromSpecFunctionField) (Spec.map (CommRingCat.ofHom (algebraMap S.functionField E))), eC.hom ≫ pullback.snd (pullback.snd f S.fromSpecFunctionField) (Spec.map (CommRingCat.ofHom (algebraMap S.functionField E))) = pullback.snd q (S.fromSpecOfAlgebraFunctionField E).toNormalization ∧ eC.hom ≫ pullback.fst (pullback.snd f S.fromSpecFunctionField) (Spec.map (CommRingCat.ofHom (algebraMap S.functionField E))) ≫ pullback.fst f S.fromSpecFunctionField = pullback.fst q (S.fromSpecOfAlgebraFunctionField E).toNormalization ≫ X.fromNormalizationIn L ∧ ∃ (σL : G' →* (L ≃+* L)) (τS : G' →* Aut (S.normalizationIn E)) (τX : G' →* Aut (X.normalizationIn L)), (∀ (h : G') (z : X.functionField) (c : E), σL h (eL (TensorProduct.tmul S.functionField z c)) = eL (TensorProduct.tmul S.functionField ((Scheme.functionFieldAut (σX (β h)⁻¹)).hom z) (σE h c))) ∧ (∀ h : G', (τS h).hom ≫ S.fromNormalizationIn E = S.fromNormalizationIn E ≫ (σS (β h)).hom) ∧ (∀ h : G', (τX h).hom ≫ X.fromNormalizationIn L = X.fromNormalizationIn L ≫ (σX (β h)).hom) ∧ (∀ h : G', (τX h).hom ≫ q = q ≫ (τS h).hom) ∧ (∀ h : G', Spec.map (CommRingCat.ofHom (σE h⁻¹).toRingHom) ≫ (S.fromSpecOfAlgebraFunctionField E).toNormalization = (S.fromSpecOfAlgebraFunctionField E).toNormalization ≫ (τS h).hom) ∧ (∀ h : G', Spec.map (CommRingCat.ofHom (σL h⁻¹).toRingHom) ≫ (X.fromSpecOfAlgebraFunctionField L).toNormalization = (X.fromSpecOfAlgebraFunctionField L).toNormalization ≫ (τX h).hom) ∧ (∀ z : L, z ∈ Set.range (algebraMap X.functionField L) ↔ ∀ h : β.ker, σL h.val z = z) ∧ (∃ (n : ℕ) (a : Fin n → (Spec (.of E) ⟶ pullback (C := Scheme.{u}) q (S.fromSpecOfAlgebraFunctionField E).toNormalization)), (∀ j : Fin n, a j ≫ pullback.snd q (S.fromSpecOfAlgebraFunctionField E).toNormalization = 𝟙 _) ∧ (Pairwise fun j l : Fin n ↦ Disjoint (Set.range (a j)) (Set.range (a l))) ∧ (∀ z : pullback (C := Scheme.{u}) q (S.fromSpecOfAlgebraFunctionField E).toNormalization, eC.hom z ∈ Set.range (pullback.snd i (pullback.fst (pullback.snd f S.fromSpecFunctionField) (Spec.map (CommRingCat.ofHom (algebraMap S.functionField E))))) ↔ ∃ j : Fin n, z ∈ Set.range (a j)) ∧ (∀ h : G', (τX h).hom '' (⋃ j : Fin n, Set.range (a j ≫ pullback.fst q (S.fromSpecOfAlgebraFunctionField E).toNormalization)) = ⋃ j : Fin n, Set.range (a j ≫ pullback.fst q (S.fromSpecOfAlgebraFunctionField E).toNormalization))) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S.normalizationIn E), ∃ hF : pullback (C := Scheme.{u}) q s ⟶ pullback (C := Scheme.{u}) f (s ≫ S.fromNormalizationIn E), hF ≫ pullback.fst f (s ≫ S.fromNormalizationIn E) = pullback.fst q s ≫ X.fromNormalizationIn L ∧ hF ≫ pullback.snd f (s ≫ S.fromNormalizationIn E) = pullback.snd q s ∧ ∀ Z' : irreducibleComponents (pullback (C := Scheme.{u}) q s), ∃ (Z : irreducibleComponents (pullback (C := Scheme.{u}) f (s ≫ S.fromNormalizationIn E))) (h : (pullback (C := Scheme.{u}) q s).reducedNormalizationComponent Z' ⟶ (pullback (C := Scheme.{u}) f (s ≫ S.fromNormalizationIn E)).reducedNormalizationComponent Z) (hν : ((pullback (C := Scheme.{u}) q s).reducedNormalizationComponent Z').normalization ⟶ ((pullback (C := Scheme.{u}) f (s ≫ S.fromNormalizationIn E)).reducedNormalizationComponent Z).normalization), IsFinite h ∧ Surjective h ∧ Smooth (normalizedFibreComponentToSpec q s Z') ∧ IsProper (normalizedFibreComponentToSpec q s Z') ∧ Smooth (normalizedFibreComponentToSpec f (s ≫ S.fromNormalizationIn E) Z) ∧ IsProper (normalizedFibreComponentToSpec f (s ≫ S.fromNormalizationIn E) Z) ∧ hν ≫ normalizedFibreComponentToSpec f (s ≫ S.fromNormalizationIn E) Z = normalizedFibreComponentToSpec q s Z' ∧ h ≫ fibreComponentι f (s ≫ S.fromNormalizationIn E) Z = fibreComponentι q s Z' ≫ hF ∧ hν ≫ ((pullback (C := Scheme.{u}) f (s ≫ S.fromNormalizationIn E)).reducedNormalizationComponent Z).fromNormalization = ((pullback (C := Scheme.{u}) q s).reducedNormalizationComponent Z').fromNormalization ≫ h ∧ (¬ ∃ z : Spec (.of Ω) ⟶ ((pullback (C := Scheme.{u}) f (s ≫ S.fromNormalizationIn E)).reducedNormalizationComponent Z).normalization, z ≫ normalizedFibreComponentToSpec f (s ≫ S.fromNormalizationIn E) Z = 𝟙 _ ∧ normalizedFibreComponentToSpec q s Z' ≫ z = hν) ∧ @Scheme.arithmeticGenus Ω _ ((pullback (C := Scheme.{u}) f (s ≫ S.fromNormalizationIn E)).reducedNormalizationComponent Z).normalization ⟨normalizedFibreComponentToSpec f (s ≫ S.fromNormalizationIn E) Z⟩ ≤ @Scheme.arithmeticGenus Ω _ ((pullback (C := Scheme.{u}) q s).reducedNormalizationComponent Z').normalization ⟨normalizedFibreComponentToSpec q s Z'⟩) ∧ ∀ b : ℕ, (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (Z : irreducibleComponents (pullback (C := Scheme.{u}) f s)), b ≤ @Scheme.arithmeticGenus Ω _ ((pullback (C := Scheme.{u}) f s).reducedNormalizationComponent Z).normalization ⟨normalizedFibreComponentToSpec f s Z⟩) → ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S.normalizationIn E) (Z : irreducibleComponents (pullback (C := Scheme.{u}) q s)), b ≤ @Scheme.arithmeticGenus Ω _ ((pullback (C := Scheme.{u}) q s).reducedNormalizationComponent Z).normalization ⟨normalizedFibreComponentToSpec q s Z⟩",
+  "branch": "sheaf-dag",
+  "by": "Q78",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Exact fibre-product group is presented by an injective pair (β, σE) with precisely characterized image; the kernel image is all K-automorphisms. The tensor field L is identified by a pure-tensor ring equivalence. Both helpers are the actual component inclusion and its normalized structure map, using the existing reducedNormalizationComponent definition. The additional landed statement dependency supplies that definition. All normalization and generic-fibre identifications are constrained by their canonical maps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d797143ab",
+  "group": "Q78",
+  "result": "fix",
+  "note": "Lean statement correct clause by clause against the node (de Jong 3.2/3.6). Hypotheses all present, none stronger; [Algebra K F] fixed by hKF since f is dominant and fromSpecFunctionField is a monomorphism; hMstable on M's image in X is equivalent to M being stable in C. functionFieldAut is pullback, so g ↦ functionFieldAut(σ g⁻¹) is a left action, consistent with hk, the σE/σL/τS/τX equations and HighGenusEquivariantCover; the injective pair (β,σE) has image exactly G', β surjective, σE(ker β)=Aut_K(E), E^N=K. F⊗_K E field ≅ L fixed on pure tensors, finite separable; S', X' literal normalizationIn with all model clauses; q, r and the generic-fibre iso tied to canonical maps; tensor action, L^N=F; marking = n disjoint E-sections covering exactly the inverse image of M, G'-stable; component maps finite surjective, hν nonconstant Ω-map, normalizations smooth proper, arithmeticGenus inequality over the same Ω; b-clause for all b:ℕ. Edge cases M=∅, nonfaithful G, dim S=0, non-closed geometric points, b=0 covered; universes u/v/max u v. Only the item node changed; added landed def stmt_dep def-weil-pbc-reduced-normalization allowed; statement verbatim; theorem proof is the only sorry; helper defs are canonical maps with docstrings. Advisory: same-body componentι only in theorem-node module NodalIdealScalarGluing; Scheme.normalization/functionFieldAut reached through dependencies or upstream. Sole fault H11 (second reading by the same worker) → fixes/lem-sfb-equivariant-marking-rationalization.report.md = worker report verbatim + independent second reading. No Lean changed, nothing compiled."
+ }
+}

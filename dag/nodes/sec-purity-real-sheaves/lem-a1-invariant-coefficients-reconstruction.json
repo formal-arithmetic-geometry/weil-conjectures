@@ -1,0 +1,193 @@
+{
+ "id": "lem-a1-invariant-coefficients-reconstruction",
+ "kind": "statement",
+ "title": "Reconstruction from invariant coefficients and a common retraction",
+ "statement": "Let $A,B$ be commutative rings and let $\\sigma,\\tau:A\\to B$ and $\\varepsilon:B\\to A$ be unital ring homomorphisms satisfying $\\varepsilon\\sigma=\\varepsilon\\tau=\\mathrm{id}_A$. Put $C=\\{a\\in A:\\sigma(a)=\\tau(a)\\}$, with its subring structure and inclusion into $A$. Let $r\\geq1$ and $x_1,\\ldots,x_r\\in A$ such that every $b\\in B$ has a unique expansion $b=\\sum_j\\sigma(a_j)\\tau(x_j)$ with $a_j\\in A$ [def-weil-pbc-free-module]. Assume additionally that for every $a\\in A$ the coefficients in this expansion of $\\tau(a)$ all belong to $C$. Then $(x_j)_{j=1}^r$ is a $C$-basis of $A$. The ring homomorphism $\\phi:A\\otimes_C A\\to B$ specified by $\\phi(a\\otimes a_2)=\\sigma(a)\\tau(a_2)$ is an isomorphism [def-weil-pbc-module-tensor-product, lem-weil-pbc-algebra-tensor-pushout-universal-property]. With the $A$-module structure on the first tensor factor, $(1\\otimes x_j)_{j=1}^r$ is an $A$-basis of $A\\otimes_C A$, and $\\phi(1\\otimes x_j)=\\tau(x_j)$ for every $j$.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 03C8 (groupoids-lemma-basis), right vertical isomorphism and conclusion; old proof steps 5-6, abstracted with the invariant-coefficient property as an explicit hypothesis."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+ ],
+ "proof": [
+  {
+   "text": "For $a\\in A$, write $\\tau(a)=\\sum_j\\sigma(c_j)\\tau(x_j)$ with $c_j\\in C$ by hypothesis. Applying $\\varepsilon$ gives $a=\\sum_jc_jx_j$. If $\\sum_jd_jx_j=0$ with $d_j\\in C$, applying $\\tau$ and using $\\tau(d_j)=\\sigma(d_j)$ gives $\\sum_j\\sigma(d_j)\\tau(x_j)=0$. Uniqueness of the assumed expansion in $B$, compared with the zero coefficient tuple, gives $d_j=0$ in $A$, hence in its subring $C$. Subtracting any two expansions proves uniqueness. Thus the $x_j$ form a $C$-basis by [def-weil-pbc-free-module].",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03C8 (groupoids-lemma-basis), final diagram and right vertical isomorphism; invariant-coefficient conclusion expanded using the common retraction assumed in this item."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-free-module-base-change-free] to the inclusion $C\\to A$ and the $C$-module $A$ with the basis just proved. It gives the $A$-basis $e_j=1\\otimes x_j$ of $T=A\\otimes_C A$, with $A$ acting on the first factor. There is no nontriviality, flatness, or field hypothesis in this base-change result.",
+   "uses": [
+    "lem-weil-pbc-free-module-base-change-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03C8 (groupoids-lemma-basis), final diagram and right vertical isomorphism; invariant-coefficient conclusion expanded using the common retraction assumed in this item."
+   }
+  },
+  {
+   "text": "The equalizer $C$ is closed under addition, negatives, multiplication and the unit since $\\sigma,\\tau$ preserve these operations. Give $B$ its $C$-algebra structure by their common restriction. Both maps are then $C$-algebra homomorphisms. The tensor pushout property [lem-weil-pbc-algebra-tensor-pushout-universal-property] gives the unital ring map $\\phi:T\\to B$ with $\\phi(a\\otimes a_2)=\\sigma(a)\\tau(a_2)$. In particular $\\phi(e_j)=\\tau(x_j)$; also $\\phi(a\\otimes1)=\\sigma(a)$, so multiplicativity makes $\\phi$ $A$-linear for the specified actions.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03C8 (groupoids-lemma-basis), final diagram and right vertical isomorphism; invariant-coefficient conclusion expanded using the common retraction assumed in this item."
+   }
+  },
+  {
+   "text": "For any $b\\in B$, its given expansion $b=\\sum_j\\sigma(a_j)\\tau(x_j)$ equals $\\phi(\\sum_j a_je_j)$, proving surjectivity. If $\\phi(z)=0$, expand $z=\\sum_j a_je_j$ in the basis from step 2. Then $0=\\sum_j\\sigma(a_j)\\tau(x_j)$, so uniqueness of the expansion of zero in $B$ forces every $a_j=0$, and $z=0$. Additivity now gives injectivity by applying this to a difference. The inverse of this bijective unital ring homomorphism preserves addition, multiplication and the unit by applying $\\phi$ and cancelling it. Thus $\\phi$ is a ring isomorphism with all the specified basis images.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03C8 (groupoids-lemma-basis), final diagram and right vertical isomorphism; invariant-coefficient conclusion expanded using the common retraction assumed in this item."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module",
+  "lem-weil-pbc-free-module-base-change-free",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 03C8 (groupoids-lemma-basis), right vertical isomorphism and tensor conclusion; explicit elementary reconstruction from the already-assumed invariant coefficients and common retraction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "eqLocus|basis.*[Ii]sBaseChange|[Ii]sBaseChange.*basis",
+   "results": "Recorded output: 8 hits; Mathlib/RingTheory/TensorProduct/IsBaseChangeFree.lean, Mathlib/RingTheory/TensorProduct/IsBaseChangeFree.lean, Mathlib/RingTheory/TensorProduct/IsBaseChangeFree.lean, Mathlib/RingTheory/TensorProduct/IncludeLeftSubRight.lean, Mathlib/RingTheory/TensorProduct/IncludeLeftSubRight.lean, Mathlib/RingTheory/TensorProduct/IncludeLeftSubRight.lean, Mathlib/RingTheory/TensorProduct/IncludeLeftSubRight.lean, Mathlib/RingTheory/TensorProduct/IncludeLeftSubRight.lean (subdirectory RingTheory/TensorProduct)",
+   "date": "2026-10-22",
+   "verdict": "no match: base change and equalizer hits require extra constructions or already given bases; none gives this reconstruction from a retraction and invariant coefficients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of a basis over the equalizer of two ring homomorphisms using a common retraction and invariant expansion coefficients",
+   "results": "Recorded output: 8 hits; Module.Basis.ofSplitExact, AlgHom.coe_equalizer, Module.Basis.coe_mapCoeffs, CategoryTheory.RegularEpi.desc', AlgHom.tensorEqualizer, retractionOfSectionOfKerSqZero, Module.Basis.ext', Module.Basis.mapCoeffs_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: base change and equalizer hits require extra constructions or already given bases; none gives this reconstruction from a retraction and invariant coefficients"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.eqLocus, TensorProduct",
+   "results": "Recorded output: 1 hits; Algebra.IsEffective.eqLocus_includeLeft_includeRight",
+   "date": "2026-10-22",
+   "verdict": "no match: base change and equalizer hits require extra constructions or already given bases; none gives this reconstruction from a retraction and invariant coefficients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If sigma and tau A to B have a common ring retraction and tau(x) is an A basis of B via sigma with invariant coefficients for tau(a), then x is a basis over the equalizer and A tensor over the equalizer A is B",
+   "results": "Recorded output: 8 hits; Algebra.Generators.baseChange_val, Algebra.PreSubmersivePresentation.baseChange, Algebra.Presentation.baseChange, Subalgebra.LinearDisjoint.basisOfBasisRight, Algebra.Generators.baseChange, Subalgebra.LinearDisjoint.basisOfBasisLeft, IsBaseChange.basis, AlgHom.tensorEqualizerEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: base change and equalizer hits require extra constructions or already given bases; none gives this reconstruction from a retraction and invariant coefficients"
+  },
+  {
+   "tool": "grep",
+   "query": "eqLocus|basis.*[Ii]sBaseChange|[Ii]sBaseChange.*basis",
+   "results": "8 hits: Mathlib/RingTheory/TensorProduct/IncludeLeftSubRight.lean, Mathlib/RingTheory/TensorProduct/IncludeLeftSubRight.lean, Mathlib/RingTheory/TensorProduct/IncludeLeftSubRight.lean, Mathlib/RingTheory/TensorProduct/IncludeLeftSubRight.lean, Mathlib/RingTheory/TensorProduct/IncludeLeftSubRight.lean, Mathlib/RingTheory/TensorProduct/IsBaseChangeFree.lean, Mathlib/RingTheory/TensorProduct/IsBaseChangeFree.lean, Mathlib/RingTheory/TensorProduct/IsBaseChangeFree.lean; recorded digest d20fc0b2558e96d1 (subdirectory RingTheory/TensorProduct)",
+   "date": "2026-10-24",
+   "verdict": "no match: equalizer base change needs a flat module and a different target; presentation descent constructs a quotient model, not this equalizer reconstruction; basis base change assumes the basis that this item must first recover."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reconstruct a ring from a basis with invariant coefficients and a common ring retraction over an equalizer subring",
+   "results": "8 hits: invariantBasisNumber_of_nontrivial_of_commRing, Module.Basis.ofEquivFun_equivFun, SubmodulesRingBasis.recOn, Module.Basis.coe_mapCoeffs, Module.Basis.mapCoeffs_apply, SubmodulesRingBasis, SubmodulesRingBasis.mk, Module.Basis.algebraMapCoeffs; recorded digest 08f0b17051d04e91",
+   "date": "2026-10-24",
+   "verdict": "no match: equalizer base change needs a flat module and a different target; presentation descent constructs a quotient model, not this equalizer reconstruction; basis base change assumes the basis that this item must first recover."
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.eqLocus, TensorProduct",
+   "results": "1 hits: Algebra.IsEffective.eqLocus_includeLeft_includeRight; recorded digest dd5975832d6faec7",
+   "date": "2026-10-24",
+   "verdict": "no match: equalizer base change needs a flat module and a different target; presentation descent constructs a quotient model, not this equalizer reconstruction; basis base change assumes the basis that this item must first recover."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two ring maps sigma and tau from A to B with a common retraction: if tau(x_j) is a basis over sigma(A) and the coefficients of tau(a) lie in the equalizer, then x_j is a basis over the equalizer and A tensor A is B",
+   "results": "8 hits: AlgHom.tensorEqualizerEquiv, AlgHom.tensorEqualizerEquiv_apply, Algebra.Generators.baseChange, Algebra.Presentation.tensorModelOfHasCoeffsEquiv_tmul, Algebra.FormallyUnramified.finite_of_free_aux, Module.exists_basis_of_basis_baseChange, Algebra.Presentation.baseChange, Algebra.PreSubmersivePresentation.baseChange; recorded digest a5e70b3dceebb083",
+   "date": "2026-10-24",
+   "verdict": "no match: equalizer base change needs a flat module and a different target; presentation descent constructs a quotient model, not this equalizer reconstruction; basis base change assumes the basis that this item must first recover."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of a free basis along an equalizer subring using a split injection: ring tensor product reconstruction from fixed coefficients",
+   "results": "8 hits: Algebra.Presentation.tensorModelOfHasCoeffsInv, Algebra.FormallyUnramified.finite_of_free_aux, Algebra.Presentation.tensorModelOfHasCoeffsEquiv, Algebra.Presentation.tensorModelOfHasCoeffsHom, Algebra.Presentation.tensorModelOfHasCoeffsEquiv_tmul, Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val, Algebra.Generators.baseChange, Algebra.Presentation.tensorModelOfHasCoeffsEquiv_symm_tmul; recorded digest 138fd9ced51f7a73",
+   "date": "2026-10-24",
+   "verdict": "no match: equalizer base change needs a flat module and a different target; presentation descent constructs a quotient model, not this equalizer reconstruction; basis base change assumes the basis that this item must first recover."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-affine-groupoid-basis-descent",
+  "date": "2026-10-22",
+  "group": "NK"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Historical supporting affine-quotient argument inherited through the via-chain: Tag 03C8 (groupoids-lemma-basis), final diagram, right vertical isomorphism and tensor reconstruction. The current latest lem-a1-affine-hc0 proof contains no affine-quotient paragraph; this is indirect DAG ancestry, not a quotation from that proof.",
+   "via": [
+    "lem-a1-affine-groupoid-basis-descent",
+    "lem-a1-finite-flat-affine-relation-quotient",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-a1-invariant-coefficients-reconstruction",
+  "worker": "stage1",
+  "summary": "Kept the statement and its three statement dependencies. Recovered the C-basis by applying the common retraction and using uniqueness of B-coordinates; cited the existing Mathlib base-change-basis leaf, constructed the specified tensor ring map by the existing pushout leaf, and proved its bijectivity explicitly on coordinates. No new nodes or Lean files. Read all cited statements and tested zero-ring, rank-one and pair-groupoid cases. Refreshed genuine Mathlib searches and corrected the description of historical blueprint ancestry.",
+  "blueprint": "Realizes the right-vertical-isomorphism and tensor conclusion of the supporting Stacks Tag 03C8 argument. Current latest lem-a1-affine-hc0 has only the compact-support vanishing argument; no claim that it literally contains 03C8. The inherited via-chain records how this algebraic subproblem entered the DAG."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q76-287ed719e",
+  "group": "Q76",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-287ed719e (reviewer sub-agent of L); spot-checked: PASS, no fixes. I read the item in full; the delivery has no new nodes. I read Stacks 03C8 (groupoids-lemma-basis, groupoids.tex lines 4744-4813) in full. The statement is unchanged and true. It is the 03C8 tensor and basis comparison with invariant coefficients and the common retraction epsilon as explicit hypotheses, and it covers both conclusions that parent step 3 cites. It does not restate the parent: the groupoid and twisted-tensor arguments stay in the sibling nodes. The map a⊗a2 ↦ σ(a)τ(a2) has the same orientation as Stacks (s(a)t(x_i)). Step 1 (elementary, def-weil-pbc-free-module): spanning comes from applying ε to τ(a)=Σσ(c_j)τ(x_j). Independence comes from applying τ, using τ=σ on C and uniqueness in B; it correctly does not rely on ε. Step 2: lem-weil-pbc-free-module-base-change-free (Mathlib leaf Basis.baseChange) with R=C and F=A gives the A-basis 1⊗x_j; all hypotheses hold. Step 3: lem-weil-pbc-algebra-tensor-pushout-universal-property clause (2) (Mathlib leaf productMap) builds φ over the C-algebra structure σ|C=τ|C, with φ(1⊗x_j)=τ(x_j). Step 4 (elementary): φ is bijective on basis coordinates, so it is a ring isomorphism. proof_deps equals the union of uses. Every cited node is a Mathlib leaf, so there are no route or tool_uses issues and no SGA. Edge cases checked: zero ring; σ=τ=ε=id with a unit x_1; the pair groupoid on k×k (B=k^4, C=k). rg -L for 03C8, retraction, invariant coefficients and equalizer found only the parent, its siblings and the finite-locally-free integral-invariants and norm nodes, which have different hypotheses and conclusions; no duplicate and no cycle. No repair note applies: this is the first split of an unsplit node that NK created on 2026-10-22. The blueprint provenance clarification is accurate."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.InvariantCoefficientsReconstruction",
+  "declaration": "RingHom.invariantCoefficients_reconstruction",
+  "file": "lean/Sheaf/RingTheory/InvariantCoefficientsReconstruction.lean",
+  "statement": "theorem invariantCoefficients_reconstruction {A : Type u} {B : Type v} [CommRing A] [CommRing B] (σ τ : A →+* B) (ε : B →+* A) (hεσ : ε.comp σ = RingHom.id A) (hετ : ε.comp τ = RingHom.id A) (r : ℕ) (hr : 1 ≤ r) (x : Fin r → A) (hexp : ∀ b : B, ∃! c : Fin r → A, ∑ j, σ (c j) * τ (x j) = b) (hinv : ∀ (a : A) (c : Fin r → A), (∑ j, σ (c j) * τ (x j)) = τ a → ∀ j, c j ∈ σ.eqLocus τ) : ∃ b : Module.Basis (Fin r) (σ.eqLocus τ) A, (∀ j, b j = x j) ∧ ∃ φ : (A ⊗[σ.eqLocus τ] A) ≃+* B, (∀ a a₂ : A, φ (a ⊗ₜ[σ.eqLocus τ] a₂) = σ a * τ a₂) ∧ ∃ e : Module.Basis (Fin r) A (A ⊗[σ.eqLocus τ] A), (∀ j, e j = (1 : A) ⊗ₜ[σ.eqLocus τ] x j) ∧ ∀ j, φ ((1 : A) ⊗ₜ[σ.eqLocus τ] x j) = τ (x j)",
+  "branch": "newtargets-dag",
+  "by": "Q63",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f25886aba",
+  "group": "Q63",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: σ τ ε with both retraction identities; C = σ.eqLocus τ; r≥1, x : Fin r → A; hexp ∃! expansion over all of B; hinv over all tuples, equivalent under hexp; conclusions: Basis over C with b j = x j, ≃+* pinned by pure-tensor formula σ a * τ a₂, first-factor A-basis 1⊗x j, φ(1⊗x j)=τ(x j). No extra instances; independent universes u v. Zero-ring, rank-one and pair-groupoid edge cases covered. Fits parent affine-groupoid-basis-descent step 3 (same eqLocus/≃+* shape). Statement field verbatim; only sorry; source and blueprint docstrings with 4 proof steps; stmt_deps are Mathlib leaves; node diff vs live is lean only (first delivery). Advisory: second reading written by the same worker, section present."
+ }
+}

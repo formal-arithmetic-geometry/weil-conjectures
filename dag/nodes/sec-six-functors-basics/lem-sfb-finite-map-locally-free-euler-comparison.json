@@ -1,0 +1,316 @@
+{
+ "id": "lem-sfb-finite-map-locally-free-euler-comparison",
+ "kind": "statement",
+ "title": "Finite-map locally free projection and coherent Euler comparison",
+ "statement": "Let $k$ be a field [def-weil-field] and let $f:X\\to Y$ be a finite $k$-morphism [def-weil-finite-integral-morphism] between schemes [def-pc-scheme] proper over $k$ [def-weil-proper-morphism] and locally Noetherian [pqf-def-locnoeth]. Let $\\mathcal E$ be a finite locally free $\\mathcal O_Y$-module, meaning Zariski-locally a finite direct sum of copies of $\\mathcal O_Y$, with ranks allowed to vary [def-sc-finite-locally-free-sheaf]. Let $\\mathcal N$ be any coherent $\\mathcal O_X$-module [pqf-def-coherent]. Use ordinary module pullback and direct image [def-pc-module-pullback] and sheaf tensor product [def-pur-sheaf-tensor-product]. Then $f^*\\mathcal E$ is finite locally free; if $\\mathcal E$ is invertible [def-sc-invertible-module], so is $f^*\\mathcal E$. The modules $\\mathcal E$, $f^*\\mathcal E$, $f_*\\mathcal N$, $f^*\\mathcal E\\otimes\\mathcal N$, $f_*(f^*\\mathcal E\\otimes\\mathcal N)$ and $\\mathcal E\\otimes f_*\\mathcal N$ are coherent. The canonical projection map\n$$\\alpha:\\mathcal E\\otimes_{\\mathcal O_Y}f_*\\mathcal N\\longrightarrow f_*(f^*\\mathcal E\\otimes_{\\mathcal O_X}\\mathcal N),\\qquad e\\otimes n\\longmapsto f^*e\\otimes n,$$\nis an isomorphism. Here $f^*e$ is the image under the pullback unit. For every $q\\ge0$ and $\\mathcal G=\\mathcal N$ or $f^*\\mathcal E\\otimes\\mathcal N$, the module-cohomology edge map [def-weil-pbc-module-cohomology-fmap]\n$$e_{f,\\mathcal G}:H^q(Y,f_*\\mathcal G)\\longrightarrow H^q(X,\\mathcal G)$$\n[pqf-def-cohomology] is an isomorphism of $k$-vector spaces, where the $k$-actions are through the given structure morphisms. All these cohomology groups are finite-dimensional and vanish for sufficiently large $q$. Thus, for coherent Euler characteristics [def-pc-euler-characteristic],\n$$\\chi(X,\\mathcal N)=\\chi(Y,f_*\\mathcal N),\\qquad \\chi(X,f^*\\mathcal E\\otimes\\mathcal N)=\\chi(Y,\\mathcal E\\otimes f_*\\mathcal N).$$\nNo flatness, dominance, dimension or integrality hypothesis is imposed on $f,X,Y$.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01E8, lemma-projection-formula, q=0, and its last proof paragraph; affine cohomology comparison is coherent.tex Tag 089W, lemma-relative-affine-cohomology. Coherence and Euler-characteristic consequences for the finite morphism."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-finite-integral-morphism",
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "pqf-def-locnoeth",
+  "def-sc-finite-locally-free-sheaf",
+  "pqf-def-coherent",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-sc-invertible-module",
+  "def-weil-pbc-module-cohomology-fmap",
+  "pqf-def-cohomology",
+  "def-pc-euler-characteristic"
+ ],
+ "proof": [
+  {
+   "text": "Choose a trivializing open cover $Y=\\bigcup U_i$ and bases $e_{i1},\\ldots,e_{ir_i}$ of $\\mathcal E|_{U_i}$ [def-sc-finite-locally-free-sheaf]. Put $V_i=f^{-1}U_i$. From the formula $f^*\\mathcal E=\\mathcal O_X\\otimes_{f^{-1}\\mathcal O_Y}f^{-1}\\mathcal E$ [def-pc-module-pullback], the sections $\\eta(e_{ij})=1\\otimes e_{ij}$ give a basis on $V_i$: the map $(a_j)\\mapsto\\sum_j a_j\\eta(e_{ij})$ has inverse induced by $a\\otimes\\sum_j b_je_{ij}\\mapsto(a f^\\sharp(b_j))_j$. These formulas first apply to inverse-image representatives; changing a representative by restriction does not change them, and the balancing relation identifies $(a f^\\sharp(b))\\otimes s$ with $a\\otimes bs$. They therefore induce mutually inverse maps on the sheaf tensor product [def-pur-sheaf-tensor-product]. The $V_i$ cover $X$, so $f^*\\mathcal E$ is finite locally free with the same local ranks. When $\\mathcal E$ is invertible, take $r_i=1$; the same calculation gives rank-one trivializations of $f^*\\mathcal E$, hence it is invertible [def-sc-invertible-module].",
+   "uses": [
+    "def-sc-finite-locally-free-sheaf",
+    "def-pc-module-pullback",
+    "def-pur-sheaf-tensor-product",
+    "def-sc-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tags 01C6 (definition-locally-free), 01C8 (lemma-pullback-locally-free): explicit finite-basis calculation"
+   }
+  },
+  {
+   "text": "A finite locally free module is quasi-coherent and of finite type directly from the affine-local definitions [pqf-def-coherent]: refine each trivializing neighbourhood by affine opens $\\operatorname{Spec}A$; the restriction is $\\widetilde{A^{r_i}}$, with its $r_i$ standard generators. Apply [pqf-lem-coherent-ft-locnoeth] on the locally Noetherian schemes $Y$ and $X$ to conclude that $\\mathcal E$ and $f^*\\mathcal E$ are coherent. Since $f$ is finite and $Y$ locally Noetherian, [lem-weil-pbc-finite-pushforward-coherent] applied to $\\mathcal N$ gives coherence of $f_*\\mathcal N$.",
+   "uses": [
+    "pqf-def-coherent",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-finite-pushforward-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tags 01XZ (lemma-coherent-Noetherian) and 01Y6 (lemma-finite-pushforward-coherent)"
+   }
+  },
+  {
+   "text": "For a module $\\mathcal M$ on a trivializing open with basis $e_1,\\ldots,e_r$, the maps $(m_j)\\mapsto\\sum_j e_j\\otimes m_j$ and $(\\sum_j a_je_j)\\otimes m\\mapsto(a_jm)_j$ are inverse, by additivity and balancing. They commute with restriction and hence identify the sheaf tensor product [def-pur-sheaf-tensor-product] with $\\mathcal M^{\\oplus r}$. Apply this on $V_i$ to $f^*\\mathcal E\\otimes\\mathcal N$, and on $U_i$ to $\\mathcal E\\otimes f_*\\mathcal N$. Restrictions of the coherent factors are coherent by [lem-weil-pbc-coherent-module-local-on-open-cover](1); their finite sums are coherent by [lem-weil-pbc-coherent-modules-kernel-cokernel-sum](3). Part (2) of the locality node gives coherence of both tensor products. Finally [lem-weil-pbc-finite-pushforward-coherent] applied to the first tensor product gives coherence of $f_*(f^*\\mathcal E\\otimes\\mathcal N)$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-coherent-module-local-on-open-cover",
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+    "lem-weil-pbc-finite-pushforward-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tags 01XZ and 01Y6; modules.tex Tag 01BY (lemma-coherent-abelian); explicit local tensor calculation"
+   }
+  },
+  {
+   "text": "Define $\\alpha$ first on the presheaf tensor product by $e\\otimes n\\mapsto\\eta(e)\\otimes n$. The unit is $\\mathcal O_Y$-linear, with the action on $f_*f^*\\mathcal E$ restricted along $f^\\sharp$ [def-pc-module-pullback]; thus $\\eta(ae)\\otimes n=f^\\sharp(a)\\eta(e)\\otimes n=\\eta(e)\\otimes f^\\sharp(a)n$. This is balanced, additive in each variable, and compatible with restrictions. The sheafification defining the tensor product [def-pur-sheaf-tensor-product] gives the displayed global module morphism. For every open $W\\subseteq U_i$, the tensor coordinates of Step 3 identify its source sections with $\\mathcal N(f^{-1}W)^{r_i}$ and, using the pulled-back basis of Step 1, its target sections with the same module. Its formula sends $e_{ij}\\otimes n$ to $\\eta(e_{ij})\\otimes n$, so it is the identity on these tuples. In particular it is bijective for every such $W$. No assertion that arbitrary tensor-product sections are pure tensors is needed: these identifications are sheaf isomorphisms with finite direct sums, whose sections are finite tuples.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01E8 (lemma-projection-formula), final proof paragraph, degree zero: explicit canonical-map and basis calculation"
+   }
+  },
+  {
+   "text": "For each $y\\in Y$ choose $U_i\\ni y$. Step 4 gives bijectivity of $\\alpha(W)$ on every open $W\\subseteq U_i$; [lem-sc-module-hom-local-bijective-iso] therefore makes $\\alpha$ an isomorphism. The construction of Step 4 was global, so the local inverses agree on overlaps: if $\\beta_i$ and $\\beta_j$ are inverse restrictions there, then $\\beta_i=\\beta_i\\alpha\\beta_j=\\beta_j$. Equivalently a change-of-basis matrix acts on both tuple presentations through the same $f^\\sharp$ coefficients. Thus this is the canonical projection map of the statement.",
+   "uses": [
+    "lem-sc-module-hom-local-bijective-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01E8 (lemma-projection-formula), final proof paragraph: passage from the free case to a cover"
+   }
+  },
+  {
+   "text": "For $\\mathcal G=\\mathcal N$ and for $\\mathcal G=f^*\\mathcal E\\otimes\\mathcal N$, coherence has been established; since $X$ is locally Noetherian, [pqf-lem-coherent-ft-locnoeth] makes both quasi-coherent. A finite morphism is affine by [def-weil-finite-integral-morphism]. Apply [lem-weil-pbc-affine-morphism-cohomology-edge] to $f$ and each $\\mathcal G$: the specified edge maps are isomorphisms of $\\mathcal O_Y(Y)$-modules, not merely abstract isomorphisms of groups. Restrict scalars along $k\\to\\mathcal O_Y(Y)$. Because $f$ is a $k$-morphism, the composite $k\\to\\mathcal O_Y(Y)\\to\\mathcal O_X(X)$ equals the given structure map of $X$; the resulting maps are therefore isomorphisms for exactly the $k$-vector-space structures in the statement.",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-morphism-cohomology-edge"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 089W (lemma-relative-affine-cohomology), through 01XC and Cohomology 01F4; scalar restriction along the structure map"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-euler-characteristic-well-defined] on the proper $k$-schemes $X$ and $Y$ to the coherent modules $\\mathcal N$, $f^*\\mathcal E\\otimes\\mathcal N$, $f_*\\mathcal N$, $f_*(f^*\\mathcal E\\otimes\\mathcal N)$, and $\\mathcal E\\otimes f_*\\mathcal N$. All their cohomology groups are finite-dimensional and zero in sufficiently high degrees. The $\\mathcal O_Y$-linear isomorphism $\\alpha$ induces $k$-linear isomorphisms on cohomology: apply the cohomology functors [pqf-def-cohomology] to $\\alpha$ and its inverse (the derived global-sections functors act on modules over global functions). Step 6 gives equal dimensions for $H^q(X,\\mathcal N)$ and $H^q(Y,f_*\\mathcal N)$ and, using $H^q(\\alpha)$, for $H^q(X,f^*\\mathcal E\\otimes\\mathcal N)$ and $H^q(Y,\\mathcal E\\otimes f_*\\mathcal N)$. Choose a common upper bound for the finitely many nonzero degrees. Sum these termwise equalities with signs $(-1)^q$ using [def-pc-euler-characteristic], obtaining both claimed Euler equalities.",
+   "uses": [
+    "lem-pc-euler-characteristic-well-defined",
+    "pqf-def-cohomology",
+    "def-pc-euler-characteristic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEJ (definition-euler-characteristic) and the following justification paragraph; coherent.tex Tag 089W"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-finite-locally-free-sheaf",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-sc-invertible-module",
+  "pqf-def-coherent",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-finite-pushforward-coherent",
+  "lem-weil-pbc-coherent-module-local-on-open-cover",
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+  "lem-sc-module-hom-local-bijective-iso",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-affine-morphism-cohomology-edge",
+  "lem-pc-euler-characteristic-well-defined",
+  "pqf-def-cohomology",
+  "def-pc-euler-characteristic"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/coherent.tex; literature/stacks-project/varieties.tex",
+  "place": "01E8 degree-zero final proof paragraph, expanded in local bases; 01XZ, 01Y6, 089W; 0BEJ"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite morphism of proper schemes over a field and an invertible sheaf have a projection isomorphism and k-linear cohomology comparisons preserving coherent Euler characteristics",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n  {\"name\": \"AlgebraicGeometry.isIso_of_comp_eq_sigmaSpec\", \"module\": \"Mathlib/AlgebraicGeometry/PointsPi\", \"type\": \"∀ {ι : Type u} (R : ι → CommRingCat) {V : AlgebraicGeometry.Scheme} (f : (∐ fun i => AlgebraicGeometry.Spec (R i)) ⟶ V)\\n  (g : V ⟶ AlgebraicGeometry.Spec { carrier := (i : ι) → ↑(R i), commRing := Pi.commRing })\\n  [AlgebraicGeometry.IsImmersion g] [CompactSpace ↥V],\\n  CategoryTheory.CategoryStruct.c\", \"doc\": \"Let $ V $ be a scheme, and let $ f: \\\\coprod_{i} \\\\operatorname{Spec}(R_i) \\\\to V $ and $ g: V \\\\to \\\\operatorname{Spec}\\\\left( \\\\prod_{i} R_i \\\\right) $ be morphisms of schemes. If $ g $ is an immersion, $ V\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram $ D : I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes with affine transition maps, a compact open subset $ U \\\\subseteq D(i) $, and sections $ s,t \\\\in \\\\Gamma(D(i), U) $ whose image\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.exists_map_preimage_eq_map_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"In a cofiltered diagram of schemes where all transition morphisms are affine, if two compact open subsets $U$ and $V$ of an object $D(i)$ have equal preimages under the cone projection map $c.\\\\pi.app_\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations provide function-field, finite-morphism, pullback or sheaf-category infrastructure, not this coherent rank/cohomology/Euler comparison for the stated schemes and modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionFormula\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations provide function-field, finite-morphism, pullback or sheaf-category infrastructure, not this coherent rank/cohomology/Euler comparison for the stated schemes and modules"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|euler.*pushforward|pushforward.*euler",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations provide function-field, finite-morphism, pullback or sheaf-category infrastructure, not this coherent rank/cohomology/Euler comparison for the stated schemes and modules"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finite map f and line bundle L the Euler characteristic of f pullback L equals the Euler characteristic of L tensor f pushforward O",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TopCat.Sheaf.pullback\", \"module\": \"Mathlib.Topology.Sheaves.Functors\", \"type\": \"(f : X ⟶ Y) : Y.Sheaf A ⥤ X.Sheaf A\", \"doc\": \"For a continuous map $ f: X \\to Y $ between topological spaces, the sheaf pullback functor $ f^* $ maps sheaves on $ Y $ to sheaves on $ X $ and is defined as the right adjoint to the sheaf pushforward\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": pullback f ⊣ pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"Filter.push_pull'\", \"module\": \"Mathlib.Order.Filter.Map\", \"type\": \"(f : α → β) (F : Filter α) (G : Filter β) : map f (comap f G ⊓ F) = G ⊓ map f F\", \"doc\": \"For any function $ f : \\\\alpha \\\\to \\\\beta $, and filters $ \\\\mathcal{F} $ on $ \\\\alpha $ and $ \\\\mathcal{G} $ on $ \\\\beta $, the image filter $ f_*(\\\\mathcal{F} \\\\cap f^{-1}(\\\\mathcal{G})) $ is equal to the in\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(M : X.Modules) (U : Y.Opens) : Γ((pushforward f).obj M, U) = Γ(M, f ⁻¹ᵁ U)\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, any sheaf of modules $ M $ over the structure sheaf of $ X $, and any open subset $ U $ of $ Y $, the sections of the pushforward sheaf $ f_*M $ over $ U $ \"}\n  {\"name\": \"TopCat.Sheaf.pushforward_obj_val\", \"module\": \"Mathlib.Topology.Sheaves.Functors\", \"type\": \"(f : X ⟶ Y) (F : X.Sheaf C) : ((pushforward C f).obj F).1 = f _* F.1\", \"doc\": \"For a continuous map $ f: X \\to Y $ and a sheaf $ F $ on $ X $, the underlying presheaf of the pushforward sheaf $ f_*F $ is equal to the pushforward of the underlying presheaf of $ F $.\"}\n  {\"name\": \"Bundle.Pullback\", \"module\": \"Mathlib.Data.Bundle\", \"type\": \"(f : B' → B) (E : B → Type*) : B' → Type _\", \"doc\": \"Given a function $f : B' \\\\to B$ and a bundle $E$ over $B$, the pullback bundle over $B'$ assigns to each $x \\\\in B'$ the fiber $E(f(x))$.\"}\n  {\"name\": \"MeasureTheory.FiniteMeasure.comap\", \"module\": \"Mathlib.MeasureTheory.Measure.FiniteMeasure\", \"type\": \"(f : Ω → Ω') (μ : FiniteMeasure Ω') : FiniteMeasure Ω\", \"doc\": \"Given a measurable function $ f : \\\\Omega \\\\to \\\\Omega' $ and a finite measure $ \\\\mu $ on $ \\\\Omega' $, this constructs the pullback finite measure $ f^*\\\\mu $ on $ \\\\Omega $. The total measure of $ \\\\Omega \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward_map_app\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(φ : M ⟶ N) (U : Y.Opens) : ((pushforward f).map φ).app U = φ.app (f ⁻¹ᵁ U)\", \"doc\": \"For any morphism $\\\\phi: M \\\\to N$ of sheaves of modules over a scheme $X$ and any open subset $U \\\\subseteq Y$, the component of the pushforward $f_*\\\\phi$ at $U$ equals the component of $\\\\phi$ at the pr\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations provide function-field, finite-morphism, pullback or sheaf-category infrastructure, not this coherent rank/cohomology/Euler comparison for the stated schemes and modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite morphism coherent cohomology is linear over the base field and the ordinary projection map for a line bundle is an isomorphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {M N : X.Modules} {φ : M ⟶ N} {U : X.Opens} [CategoryTheory.IsIso φ],\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Modules.Hom.app φ U)\", \"doc\": \"For any isomorphism $\\\\phi$ between sheaves of modules over a scheme $X$ and any open subset $U \\\\subseteq X$, the induced map $\\\\phi_U$ on sections over $U$ is an isomorphism of abelian groups.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Abelian X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ is an abelian category. This follows from the preadditive structure, existence of finite products, kernels, a\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.Hom.isIso_iff_isIso_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {M N : X.Modules} {φ : M ⟶ N},\\n  CategoryTheory.IsIso φ ↔ ∀ (U : X.Opens), CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Modules.Hom.app φ U)\", \"doc\": \"For any sheaves of modules $M$ and $N$ over a scheme $X$, a homomorphism $\\\\phi : M \\\\to N$ is an isomorphism in the category of sheaves if and only if for every open subset $U \\\\subseteq X$, the induced\"}\n  {\"name\": \"LightCondMod.LocallyConstant.functorIsoDiscreteAux₁\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type u) →\\n  [inst : Ring R] → (M : ModuleCat R) → M ≅ ModuleCat.of R (LocallyConstant ↑(LightProfinite.of PUnit.{u + 1}).toTop ↑M)\", \"doc\": \"For any ring $ R $ and $ R $-module $ M $, there is a canonical isomorphism between $ M $ and the module of locally constant functions from the singleton topological space (equipped with the trivial t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.inv_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {M N : X.Modules} {φ : M ⟶ N} {U : X.Opens} [inst : CategoryTheory.IsIso φ],\\n  AlgebraicGeometry.Scheme.Modules.Hom.app (CategoryTheory.inv φ) U =\\n    CategoryTheory.inv (AlgebraicGeometry.Scheme.Modules.Hom.app φ U)\", \"doc\": \"For any isomorphism $\\\\phi$ between sheaves of modules over a scheme $X$ and any open subset $U \\\\subseteq X$, the inverse of $\\\\phi$ evaluated at $U$ coincides with the inverse of the section map $\\\\phi_\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations provide function-field, finite-morphism, pullback or sheaf-category infrastructure, not this coherent rank/cohomology/Euler comparison for the stated schemes and modules"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|eulerChar",
+   "results": "10 hits; Mathlib/Combinatorics/Enumerative/IncidenceAlgebra.lean, Mathlib/Combinatorics/Enumerative/IncidenceAlgebra.lean, Mathlib/Combinatorics/Enumerative/IncidenceAlgebra.lean, Mathlib/Combinatorics/Enumerative/IncidenceAlgebra.lean, Mathlib/Combinatorics/Enumerative/IncidenceAlgebra.lean, Mathlib/Algebra/Homology/EulerCharacteristic.lean, Mathlib/Algebra/Homology/EulerCharacteristic.lean, Mathlib/Algebra/Homology/EulerCharacteristic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-morphism infrastructure, free-module pullback, and abstract complex Euler characteristics do not state the coherent finite-map comparison for proper schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine morphism canonical cohomology edge isomorphism for quasi coherent sheaves and linearity over global sections",
+   "results": "8 hits; AlgebraicGeometry.isAffineHom_of_isAffine, AlgebraicGeometry.IsAffineHom.mk, AlgebraicGeometry.IsAffine.casesOn, AlgebraicGeometry.IsAffine.recOn, AlgebraicGeometry.IsAffineOpen.ΓSpecIso_hom_fromSpec_app, AlgebraicGeometry.Scheme.isoSpec, AlgebraicGeometry.targetAffineLocally_affineAnd_iff', AlgebraicGeometry.instIsMultiplicativeSchemeIsAffineHom",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-morphism infrastructure, free-module pullback, and abstract complex Euler characteristics do not state the coherent finite-map comparison for proper schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionFormula\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-morphism infrastructure, free-module pullback, and abstract complex Euler characteristics do not state the coherent finite-map comparison for proper schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally free sheaf tensor finite pushforward coherent cohomology Euler characteristic",
+   "results": "8 hits; SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality, LightCondensed.free_internallyProjective_iff_tensor_condition, SheafOfModules.pushforwardSections_unitHomEquiv",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-morphism infrastructure, free-module pullback, and abstract complex Euler characteristics do not state the coherent finite-map comparison for proper schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite morphism of proper schemes projection formula for finite locally free modules and equality of coherent Euler characteristics",
+   "results": "8 hits; AlgebraicGeometry.IsFinite.instSndScheme, AlgebraicGeometry.IsFinite.instFstScheme, AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.IsFinite.comp_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-morphism infrastructure, free-module pullback, and abstract complex Euler characteristics do not state the coherent finite-map comparison for proper schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-curve-bundle-pullback-degree",
+  "date": "2026-10-23",
+  "group": "Q10"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), auxiliary high-genus-cover argument in the alteration reduction: the finite-curve genus comparison used to exclude rational curves. Riemann--Hurwitz for the separable factor, retaining the full effective different in wild characteristic (Stacks 0C1B). Supporting lemma: Degree of an invertible sheaf pulled back along a proper curve map. Returned seven-step split, step 2 invertible/coherent sheaves and steps 4--5: ordinary projection map, overlap compatibility, coherent direct images and k-linear cohomology/Euler comparison.",
+   "via": [
+    "lem-sfb-proper-curve-bundle-pullback-degree",
+    "lem-sfb-curve-riemann-hurwitz-numerical",
+    "lem-sfb-finite-curve-genus-monotonicity",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-map-locally-free-euler-comparison",
+  "worker": "stage1",
+  "summary": "Seven steps proving every clause; explicit local basis pullback, tensor and canonical projection maps, coherence via existing nodes, specified affine module edge maps and scalar restriction, Euler comparison via the existing proper finiteness theorem. No new nodes. Statement unchanged.",
+  "blueprint": "Inherited auxiliary finite-curve genus route recorded in blueprint.from.place. Current latest det-thm-sf-ctf-stability-direct-images proof (3) states direct-image stability, but does not include the inherited auxiliary high-genus-cover argument. This split supplies only the existing descendant finite-map tool and does not change the unit. blueprint_refs ancestor returns None (inherited broken created.item chain); preserve its null anchor and via list.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "General local Noetherian coherent/quasi-coherent criterion used for the coherent finite-map auxiliary argument; no same-unit node supplies the criterion."
+   },
+   {
+    "node": "lem-weil-pbc-finite-pushforward-coherent",
+    "why": "Generic finite-morphism coherence theorem for the auxiliary curve calculation; no change to the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-module-local-on-open-cover",
+    "why": "Restriction and open-cover locality of ordinary coherent modules in the finite-basis computation."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+    "why": "Finite sums of coherent modules in the trivializing charts, including rank zero."
+   },
+   {
+    "node": "lem-sc-module-hom-local-bijective-iso",
+    "why": "Local sections criterion for invertibility of the explicitly constructed ordinary projection morphism; no same-unit node states it."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "why": "Generic canonical affine cohomology edge isomorphism, with global-function linearity, restricted to finite morphisms."
+   },
+   {
+    "node": "lem-pc-euler-characteristic-well-defined",
+    "why": "Generic proper coherent Euler finiteness and boundedness on X and Y; no same-unit replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-finite-pushforward-coherent",
+  "lem-weil-pbc-coherent-module-local-on-open-cover",
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+  "lem-sc-module-hom-local-bijective-iso",
+  "lem-weil-pbc-affine-morphism-cohomology-edge",
+  "lem-pc-euler-characteristic-well-defined"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-ff7957ec5",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-ff7957ec5 (reviewer sub-agent of L); spot-checked: Read the item in full: 7 steps, no new nodes, statement and stmt_deps unchanged, no repair note. Read all 18 cited node statements and the sources: Stacks 01E8 lemma-projection-formula (whose degree-0 'details omitted' Steps 1/3/4/5 write out with explicit basis maps) and 089W lemma-relative-affine-cohomology (realized by lem-weil-pbc-affine-morphism-cohomology-edge for the specified edge map, O_Y(Y)-linear; Step 6 gets k-linearity because f is a k-morphism). Each cited node states what its step uses: 01XZ coherence on locally Noetherian X and Y; finite pushforward coherence with no flatness; restriction, gluing and finite sums for coherence; and the local bijective-on-every-subopen criterion, which matches Step 4. Step 7 gets termwise dimension equalities from lem-pc-euler-characteristic-well-defined and H^q(alpha). The coefficient category is ordinary Zariski O-modules throughout. Edge cases (r_i=0, N=0, empty X or Y, varying ranks, non-flat nilpotent closed immersion) all hold. No duplicate in the DAG: lem-pc-projection-formula is the derived QCoh version, and lem-sc-deg-pullback-finite is a different statement. The 7 split_report tool_uses are generic coherent tools and are accepted. Batch-5: lem-pc-euler-characteristic-well-defined is coherent cohomology finiteness on proper schemes. Its 1256-node closure reaches only def-trf-schematically-dense-open (a general definition) and two Mathlib leaves (lem-pod-separated-finite-type-base-change, lem-trf-affine-open-limit-descent). None of these is a step of the trace formula or Poincare duality, so the citation is genuinely outside the assumed statements. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteMapLocallyFreeEulerComparison",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.finite_map_locally_free_euler_comparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteMapLocallyFreeEulerComparison.lean",
+  "statement": "theorem finite_map_locally_free_euler_comparison (k : Type u) [Field k] {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [IsProper (X ↘ Spec (.of k))] [IsProper (Y ↘ Spec (.of k))] [IsLocallyNoetherian X] [IsLocallyNoetherian Y] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsFinite f] (E : Y.Modules) [SheafOfModules.IsFiniteLocallyFree.{u, u, u} E] (N : X.Modules) (hN : RingedSpace.IsCoherent X.toRingedSpace N) : SheafOfModules.IsFiniteLocallyFree.{u, u, u} ((tensorPullback f).obj E) ∧ (E.IsInvertible → ((tensorPullback f).obj E).IsInvertible) ∧ RingedSpace.IsCoherent Y.toRingedSpace E ∧ RingedSpace.IsCoherent X.toRingedSpace ((tensorPullback f).obj E) ∧ RingedSpace.IsCoherent Y.toRingedSpace ((pushforward f).obj N) ∧ RingedSpace.IsCoherent X.toRingedSpace ((tensorPullback f).obj E ⊗ N) ∧ RingedSpace.IsCoherent Y.toRingedSpace ((pushforward f).obj ((tensorPullback f).obj E ⊗ N)) ∧ RingedSpace.IsCoherent Y.toRingedSpace (E ⊗ (pushforward f).obj N) ∧ (∃ α : E ⊗ (pushforward f).obj N ≅ (pushforward f).obj ((tensorPullback f).obj E ⊗ N), ∀ (U : Y.Opens) (e : Γ(E, U)) (n : Γ(N, f ⁻¹ᵁ U)), α.hom.app U (tmulSection (M := E) (N := (pushforward f).obj N) e n) = tmulSection (M := (tensorPullback f).obj E) (N := N) (((tensorPullbackSectionAdjunction f).unit.app E).app U e) n) ∧ (∀ (G : X.Modules), G = N ∨ G = (tensorPullback f).obj E ⊗ N → ∀ (q : ℕ), IsIso (moduleCohomologyEdgeMap f G q) ∧ ∀ (a : k) (x : (RingedSpace.moduleCohomology Y.toRingedSpace q).obj ((pushforward f).obj G)), moduleCohomologyEdgeMap f G q (Scheme.globalSectionsRingHom k (X := Y) a • x) = Scheme.globalSectionsRingHom k (X := X) a • @id ((RingedSpace.moduleCohomology X.toRingedSpace q).obj G) (moduleCohomologyEdgeMap f G q x)) ∧ (∀ (G : X.Modules), G = N ∨ G = (tensorPullback f).obj E ⊗ N → (∀ q : ℕ, FiniteDimensional k ((ModuleCat.restrictScalars (Scheme.globalSectionsRingHom k (X := X))).obj ((RingedSpace.moduleCohomology X.toRingedSpace q).obj G))) ∧ ∃ b : ℕ, ∀ q : ℕ, b < q → Subsingleton ((RingedSpace.moduleCohomology X.toRingedSpace q).obj G)) ∧ (∀ (G : Y.Modules), G = (pushforward f).obj N ∨ G = (pushforward f).obj ((tensorPullback f).obj E ⊗ N) ∨ G = E ⊗ (pushforward f).obj N → (∀ q : ℕ, FiniteDimensional k ((ModuleCat.restrictScalars (Scheme.globalSectionsRingHom k (X := Y))).obj ((RingedSpace.moduleCohomology Y.toRingedSpace q).obj G))) ∧ ∃ b : ℕ, ∀ q : ℕ, b < q → Subsingleton ((RingedSpace.moduleCohomology Y.toRingedSpace q).obj G)) ∧ N.eulerChar k = ((pushforward f).obj N).eulerChar k ∧ ((tensorPullback f).obj E ⊗ N).eulerChar k = (E ⊗ (pushforward f).obj N).eulerChar k",
+  "branch": "newtargets-dag",
+  "by": "Q99",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1d0024ed0",
+  "group": "Q99",
+  "result": "pass",
+  "note": "Read the item, the 13 stmt_dep records (identical to live), Stacks 01E8/089W and the exact declarations: IsFiniteLocallyFree (variable rank), IsInvertible, tmulSection, tensorPullbackSectionAdjunction unit, moduleCohomologyEdgeMap, globalSectionsRingHom, eulerChar, affine_morphism_cohomology_edge. Every hypothesis matches with none stronger; the canonical projection α is pinned by its action on tensor sections over every open (not an arbitrary iso); edge maps are the recorded identity h-map, IsIso plus k-linear via the structure maps; finiteness/vanishing and both Euler equalities use the recorded notions. Edge cases (empty schemes, rank 0, N=0, q=0, non-flat finite maps) are covered, with no universe restriction. lean.statement is verbatim; docstrings carry the source, blueprint and 7 proof steps; sorry only; no new defs or duplicates. Note: the Y-side finiteness also covers E⊗f_*N, which is implied by the node. No compile run since no file changed."
+ }
+}

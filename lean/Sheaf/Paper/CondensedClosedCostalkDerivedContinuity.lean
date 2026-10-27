@@ -9,6 +9,8 @@ public import Sheaf.Paper.CondensedQcqsPushforwardContinuity
 import Sheaf.Paper.CondensedOpenClosedRecollement
 import WeilConjectures.CategoryTheory.DerivedCategory.DegreewiseLimits
 import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Exact
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriek
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
 
 /-! # Continuity of derived closed costalks -/
 

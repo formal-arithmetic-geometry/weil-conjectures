@@ -1,0 +1,323 @@
+{
+ "id": "lem-sfb-space-normalization-quasifinite-locus",
+ "kind": "statement",
+ "title": "Relative normalization identifies the quasi-finite locus with an open",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and work with algebraic spaces over $S$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention]. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers], and point sets have the atlas topology [def-a1-space-point-topology]. A morphism is representable when all its pullbacks by schemes are schemes. Separated means that its relative diagonal is representable by closed immersions [def-weil-closed-immersion]. Integral means representable by integral scheme morphisms [def-weil-finite-integral-morphism]. Quasi-compact means that every pullback by an affine scheme has quasi-compact underlying space. Let $f:V\\to Y$ be representable, separated and of finite type: on scheme tests it is locally of finite type [def-weil-finite-type-morphism], and it is quasi-compact. A factorization $f=\\nu\\circ g$ with $\\nu:N\\to Y$ integral is called the relative normalization factorization here if, for every factorization $f=\\pi\\circ h$ through an integral morphism $\\pi:Z\\to Y$, there is exactly one $Y$-morphism $c:N\\to Z$ with $c\\circ g=h$. Fix a relative normalization factorization $V\\xrightarrow{g}N\\xrightarrow{\\nu}Y$ of $f$. Say that $f$ is quasi-finite at $v\\in|V|$ if, after an etale scheme chart $T\\to Y$ and a lift of $v$ to the scheme $V\\times_YT$, the projection $V\\times_YT\\to T$ is quasi-finite at that lift in the sense of [pqf-def-quasifinite]; equivalently this holds at every such lift. There is an open subspace $W\\subseteq N$ [def-a1-space-open-subspace] such that $g^{-1}(W)$ is exactly the locus where $f$ is quasi-finite, and the induced morphism $g^{-1}(W)\\to W$ is an isomorphism. The inverse image is the open sheaf fibre product $V\\times_NW$ with its induced open-subspace structure.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 0ABR (lemma-finite-type-separated), with the normalization identified by Tag 0823 (lemma-characterize-normalization)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-space-point-topology",
+  "def-weil-closed-immersion",
+  "def-weil-finite-integral-morphism",
+  "def-weil-finite-type-morphism",
+  "pqf-def-quasifinite",
+  "def-a1-space-open-subspace",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "Choose a representable surjective etale scheme atlas $p:T\\to Y$. Put $V_T=V\\times_YT$ and $N_T=N\\times_YT$. These are schemes, since $f$ and $\\nu$ are representable; the projections $V_T\\to V$ and $N_T\\to N$ are surjective etale. The scheme map $f_T:V_T\\to T$ is separated and of finite type by the scheme-test hypotheses on $f$: its diagonal is the corresponding test of the closed relative diagonal. The cited etale-base-change theorem gives the integral-factorization universal property for $V_T\\to N_T\\to T$. Let $V_T\\to C_T\\to T$ be the concrete scheme normalization. Its integral projection and its universal property give comparison maps $a:N_T\\to C_T$ and $b:C_T\\to N_T$ commuting with both structure arrows. Uniqueness in each universal property gives $ba=1_{N_T}$ and $ab=1_{C_T}$. Thus this is an isomorphism of factorizations, not merely an isomorphism of the middle schemes.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-integral-factorization-etale-base-change",
+    "lem-weil-pbc-relative-normalization",
+    "lem-sbc-relative-normalization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0ABR, first paragraph; Tag 0ABP, and comparison via the characterization Tag 0823"
+   }
+  },
+  {
+   "text": "Apply the scheme-normalization leaf to $f_T$ and transfer its open along $N_T\\simeq C_T$, obtaining $O_T\\subseteq N_T$. Write $Q_T$ for the scheme quasi-finite locus of $f_T$. A point of $Q_T$ is isolated in its scheme fibre by the cited quasi-finite-at-point theorem. Conversely, if the fibre point is isolated, choose affine neighbourhoods of it and its image with the source neighbourhood mapping into the target neighbourhood; the cited isolated-fibre affine-pair theorem gives the finite-type quasi-finite ring map required by the definition. Hence the isolated-fibre predicate in the leaf is exactly $Q_T$. We obtain $g_T^{-1}(O_T)=Q_T$ and an isomorphism $g_T^{-1}(O_T)\\to O_T$.",
+   "uses": [
+    "lem-sfb-scheme-normalization-isolated-fibre-open",
+    "lem-weil-pbc-quasi-finite-at-point-isolated",
+    "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
+    "pqf-def-quasifinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0ABR, application of Tag 03GW; the point predicate is compared using morphisms.tex Tag 01TH"
+   }
+  },
+  {
+   "text": "Let $Q\\subseteq|V|$ be the quasi-finite locus in the statement. Independence of the target chart follows from common refinement: for charts $T,T^{\\prime}\\to Y$, the scheme $R=T\\times_YT^{\\prime}$ exists by the representable diagonal of $Y$. Lifts of the same $v$ have a common lift to $V\\times_YR$ by the point fibre-product calculus. Apply the scheme quasi-finiteness base-change equivalence to both projections $R\\to T,T^{\\prime}$; quasi-finiteness at either lift is therefore equivalent to quasi-finiteness at the common lift. Thus the inverse image of $Q$ under $V_T\\to V$ is exactly $Q_T$. It is open by step 2. Since the atlas point map is open and surjective, $Q$ is the image of this open inverse image, hence open. The invariant-open-quotient theorem gives an open subspace $U\\subseteq V$ with point set $Q$. Its pullback $U_T$ and $g_T^{-1}(O_T)$ have equal point sets and hence are equal open subspaces. Consequently $U\\times_NN_T=U\\times_YT=U_T\\simeq O_T$, over $N_T$.",
+   "uses": [
+    "lem-a1-space-invariant-open-quotient",
+    "lem-a1-space-point-open-calculus",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-trf-algebraic-space",
+    "lem-sfb-scheme-quasifinite-at-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0ABR, the open quasi-finite part and its base change, expanded using the atlas definition"
+   }
+  },
+  {
+   "text": "The base change of $g|_U:U\\to N$ along the surjective etale scheme atlas $N_T\\to N$ is the isomorphism $U_T\\to O_T$ followed by the open inclusion $O_T\\hookrightarrow N_T$. The etale-local open-immersion theorem therefore says that $g|_U$ is an open immersion. Let $W\\subseteq N$ be its image subfunctor: on any scheme test its pullback is the open subscheme identified by that open immersion. Thus $W$ is an open subspace and $U\\to W$ is an isomorphism. Pulling back this identification along $N_T\\to N$ gives $W\\times_NN_T=O_T$, since the local map just described has image $O_T$.",
+   "uses": [
+    "lem-trf-space-open-immersion-etale-local",
+    "def-a1-space-open-subspace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0ABR, descent of the open immersion and definition of the image open"
+   }
+  },
+  {
+   "text": "It remains to check the full inverse image, including points outside $U$. Pulling back $g^{-1}(W)\\subseteq V$ along $V_T\\to V$ gives $g_T^{-1}(O_T)=U_T$, so its point set and $Q$ have equal inverse images under a surjective point map. Their point sets are equal. Both are open subspaces, hence the point-open calculus gives $g^{-1}(W)=U$ as open subfunctors, with their induced structures. The isomorphism $U\\to W$ from the preceding step is therefore exactly the required map $V\\times_NW\\to W$.",
+   "uses": [
+    "lem-a1-space-point-open-calculus",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0ABR, final omitted verification, written out by the atlas pullback"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-integral-factorization-etale-base-change",
+  "lem-weil-pbc-relative-normalization",
+  "lem-sbc-relative-normalization-universal-property",
+  "lem-sfb-scheme-normalization-isolated-fibre-open",
+  "lem-weil-pbc-quasi-finite-at-point-isolated",
+  "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
+  "pqf-def-quasifinite",
+  "lem-a1-space-invariant-open-quotient",
+  "lem-a1-space-point-open-calculus",
+  "lem-sfb-scheme-quasifinite-at-base-change",
+  "lem-trf-space-open-immersion-etale-local",
+  "def-a1-space-open-subspace"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 0ABR (lemma-finite-type-separated); final inverse-image verification expanded, using Tag 0ABP and the normalization characterization Tag 0823."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact separated morphism of algebraic spaces has an integral relative normalization factorization",
+   "results": "{\"t\": \"2026-10-23T12:20:36Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi compact separated morphism of algebraic spaces has an integral relative normalization factorization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instQuasiSeparatedToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\"], \"digest\": \"80092763fdbc745d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: all returned declarations concern schemes; no theorem for algebraic spaces, so no one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalization of an algebraic space in another space and the quasi finite locus of a separated finite type map",
+   "results": "{\"t\": \"2026-10-23T12:20:37Z\", \"tool\": \"leanfinder\", \"query\": \"The normalization of an algebraic space in another space and the quasi finite locus of a separated finite type map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instQuasiSeparatedToNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\"], \"digest\": \"228a2ba789d02b86\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: all returned declarations concern schemes; no theorem for algebraic spaces, so no one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicSpace, IsIntegralHom",
+   "results": "{\"t\": \"2026-10-23T12:20:38Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicSpace, IsIntegralHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicSpace'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: all returned declarations concern schemes; no theorem for algebraic spaces, so no one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|normalization|toNormalization",
+   "results": "{\"t\": \"2026-10-23T12:20:38Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|normalization|toNormalization\", \"sub\": \"AlgebraicGeometry/ZariskisMainTheorem.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"12\", \"21\", \"26\", \"29\", \"119\"], \"digest\": \"6ee8abf6eb62f7f1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: all returned declarations concern schemes; no theorem for algebraic spaces, so no one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A separated etale algebraic space chart factors through a quasi compact open immersion into an integral algebraic space",
+   "results": "{\"t\": \"2026-10-23T12:20:38Z\", \"tool\": \"leansearch\", \"query\": \"A separated etale algebraic space chart factors through a quasi compact open immersion into an integral algebraic space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isSeparated_iff\", \"AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact\", \"AlgebraicGeometry.instQuasiCompactLiftSchemeIdOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace\", \"AlgebraicGeometry.IsSeparated.instQuasiSeparated\", \"AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated\", \"AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift\"], \"digest\": \"889aa0ca37524b6b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: all returned declarations concern schemes; no theorem for algebraic spaces, so no one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a representable separated finite type morphism of algebraic spaces the map to relative normalization is an isomorphism over an open whose inverse image is the quasi finite locus",
+   "results": "{\"t\": \"2026-10-23T12:22:38Z\", \"tool\": \"leanfinder\", \"query\": \"For a representable separated finite type morphism of algebraic spaces the map to relative normalization is an isomorphism over an open whose inverse image is the quasi finite locus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instQuasiSeparatedToNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization_preimage\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\"], \"digest\": \"923ae7b184490623\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: all returned declarations concern schemes; no theorem for algebraic spaces, so no one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative normalization factorization for a quasi compact separated morphism of algebraic spaces with quasi compact first arrow and integral second arrow",
+   "results": "{\"t\": \"2026-10-23T12:22:39Z\", \"tool\": \"leansearch\", \"query\": \"Relative normalization factorization for a quasi compact separated morphism of algebraic spaces with quasi compact first arrow and integral second arrow\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc.congr_simp\"], \"digest\": \"4df55980e0d4baec\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: all returned declarations concern schemes; no theorem for algebraic spaces, so no one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The quasi finite locus of a representable separated finite type morphism of algebraic spaces is isomorphic to an open in its relative normalization",
+   "results": "{\"t\": \"2026-10-23T12:22:39Z\", \"tool\": \"leansearch\", \"query\": \"The quasi finite locus of a representable separated finite type morphism of algebraic spaces is isomorphic to an open in its relative normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.LocallyQuasiFinite.recOn\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\"], \"digest\": \"a4ba97b71d263c1f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: all returned declarations concern schemes; no theorem for algebraic spaces, so no one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|exists_mem_and_isIso_morphismRestrict_toNormalization|instQuasiCompactToNormalization",
+   "results": "{\"t\": \"2026-10-23T12:22:39Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|exists_mem_and_isIso_morphismRestrict_toNormalization|instQuasiCompactToNormalization\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\"], \"digest\": \"8cbefaa1d3ea1838\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: all returned declarations concern schemes; no theorem for algebraic spaces, so no one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.toNormalization",
+   "results": "{\"t\": \"2026-10-23T12:22:40Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instQuasiSeparatedToNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.ker_toNormalization\"], \"digest\": \"5866a807d71555f0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: all returned declarations concern schemes; no theorem for algebraic spaces, so no one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|AlgebraicSpaces",
+   "results": "{\"t\": \"2026-10-23T13:56:09Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|AlgebraicSpaces\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme declarations were returned; algebraic-space theorem is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic spaces Zariski main theorem representable separated finite type morphism relative normalization quasi finite locus open immersion",
+   "results": "{\"t\": \"2026-10-23T13:56:10Z\", \"tool\": \"leansearch\", \"query\": \"Algebraic spaces Zariski main theorem representable separated finite type morphism relative normalization quasi finite locus open immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.zariskisMainProperty_iff'\", \"Algebra.zariskisMainProperty_iff\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion\", \"Algebra.ZariskisMainProperty.of_isIntegral\", \"Algebra.ZariskisMainProperty\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\"], \"digest\": \"1e41bd958ee19c93\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme declarations were returned; algebraic-space theorem is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a representable separated finite type morphism of algebraic spaces the quasi finite locus is isomorphic to an open of its relative normalization",
+   "results": "{\"t\": \"2026-10-23T13:56:14Z\", \"tool\": \"leanfinder\", \"query\": \"For a representable separated finite type morphism of algebraic spaces the quasi finite locus is isomorphic to an open of its relative normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instQuasiSeparatedToNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization_preimage\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\"], \"digest\": \"9745bc572b56e20b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme declarations were returned; algebraic-space theorem is not a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-quasifinite-integral-compactification",
+  "date": "2026-10-23",
+  "group": "Q49"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: finite surjective scheme cover in the first paragraph of the proof of Tag 0ADD. Supporting input to Tag 09YC(1): Tag 09YB (lemma-there-is-a-scheme-integral-over), clause (1). Supporting input to Tag 09YB: factorization U into an integral algebraic space B over X. Supporting input to 0ABS: 0ABR, the isomorphism over the quasi-finite locus for a representable separated finite-type map, which need not be quasi-finite everywhere.",
+   "via": [
+    "lem-sfb-space-quasifinite-integral-compactification",
+    "lem-sfb-qcqs-space-integral-scheme-cover",
+    "lem-sfb-noetherian-space-finite-scheme-cover",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-normalization-quasifinite-locus",
+  "worker": "stage1",
+  "summary": "Proved by descent from the scheme normalization theorem, recorded as one Mathlib leaf with an isolated-fibre conclusion. Reused the existing etale base-change universal property, scheme normalization universal property, both isolated-fibre comparison directions, point-open calculus, invariant-open construction and etale-local open-immersion theorem. Explicitly checked saturation of the final open. Corrected doubled TeX escapes only; no mathematical change.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: finite surjective scheme cover in the first paragraph of the proof of Tag 0ADD. Supporting input to Tag 09YC(1): Tag 09YB (lemma-there-is-a-scheme-integral-over), clause (1). Supporting input to Tag 09YB: factorization U into an integral algebraic space B over X. Supporting input to 0ABS: 0ABR, the isomorphism over the quasi-finite locus for a representable separated finite-type map, which need not be quasi-finite everywhere. The steps realize the 0ABR input by its scheme chart, descent and final inverse-image check. The ancestor command reports null on this inherited chain; preserved that metadata.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-relative-normalization",
+    "why": "Concrete scheme normalization supplies the integral comparison factorization on the scheme chart."
+   },
+   {
+    "node": "lem-sbc-relative-normalization-universal-property",
+    "why": "The scheme universal property identifies the pulled-back universal factorization with the concrete normalization."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-finite-at-point-isolated",
+    "why": "Generic scheme tool: the Stacks quasi-finite predicate implies the isolated-fibre predicate on the chart."
+   },
+   {
+    "node": "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
+    "why": "Generic scheme tool: isolated fibre points give the affine-pair predicate required by pqf-def-quasifinite."
+   },
+   {
+    "node": "lem-a1-space-invariant-open-quotient",
+    "why": "Generic algebraic-space tool constructing the open subspace from its open point subset."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic algebraic-space point and open-subfunctor calculus for chart pullbacks and equality."
+   },
+   {
+    "node": "lem-trf-space-open-immersion-etale-local",
+    "why": "Generic descent tool for the restricted normalization map; it does not replace the unit route."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space foundation (Stacks 02X2/041F): existence of sheaf fibre products and stability of jointly surjective etale families under base change, used in steps 1, 3, 5 to form the scheme charts V_T, N_T, V x_Y R and their surjective etale atlases; no node of the unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-relative-normalization",
+  "lem-sbc-relative-normalization-universal-property",
+  "lem-weil-pbc-quasi-finite-at-point-isolated",
+  "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
+  "lem-a1-space-invariant-open-quotient",
+  "lem-a1-space-point-open-calculus",
+  "lem-trf-space-open-immersion-etale-local",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-6001aa9b8",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-6001aa9b8 (reviewer sub-agent of L); spot-checked: FIX: the mathematics is sound and I read all of it; one undeclared off-unit tool use is added. Read Stacks spaces-morphisms 0ABP/0823/0ABR, more-morphisms 03GW, the item, the new node and every cited statement. The item matches 0ABR hypothesis by hypothesis (representable, finite type, separated, normalization fixed by the 0823 universal property) and writes out the check the source omits, (f')^{-1}(U')=U, as step 5. Step 1: the etale base-change node gives a:N_T->C_T, lem-sbc existence gives b, and uniqueness gives ba=1 (base-change node) and ab=1 (lem-sbc, n integral hence affine). Step 2: 01TH in both directions makes the leaf's isolated-fibre predicate equal pqf-def-quasifinite. Step 3: common lift over T x_Y T', 01TM for an arbitrary base, open surjective atlas, invariant open quotient. Step 4: 03M4 descent along N_T->N. Step 5 is elementary from the point calculus. New leaf lem-sfb-scheme-normalization-isolated-fibre-open: checked Mathlib exists_isIso_morphismRestrict_toNormalization (ZariskisMainTheorem.lean:206-210) plus quasiFiniteAt_iff_isOpen_singleton_asFiber (QuasiFinite.lean:395); a one-line specialization, no duplicate (03GW nodes and pqf-lem-normalization-open need quasi-finite everywhere and a qcqs base). Small cases: A^1->Spec k, Spec k + A^1 -> Spec k, finite and nonreduced maps. Batch-5: lem-a1-space-invariant-open-quotient, lem-a1-space-point-open-calculus and lem-trf-space-open-immersion-etale-local are generic algebraic-space foundations or descent results (03BZ/03H4/03M4); their sec-trace-formula closure is only def-trf-algebraic-space and fppf/etale-relation foundations, not trace-formula or Poincare steps, so all are accepted. FIX (C8): lem-trf-space-fibre-products-etale-covers (sk-i-curve-zero, not Lean-closed) is used in steps 1, 3 and 5 but was undeclared; added to split_report.tool_uses, no other change. Note for the maintainer: blueprint.from.node is null on the inherited chain.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceNormalizationQuasiFiniteLocus",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_openSubspace_normalization_quasiFinite_locus",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceNormalizationQuasiFiniteLocus.lean",
+  "statement": "theorem exists_openSubspace_normalization_quasiFinite_locus {S : Scheme.{u}} {V Y N : AlgebraicSpace S} (f : V ⟶ Y) (hf : IsRepresentableWith (fun _ _ p ↦ LocallyOfFiniteType p.left) f.hom.hom) (hsep : MapIsSeparated f) (hqc : MapIsQuasiCompact f.hom.hom) (g : V ⟶ N) (ν : N ⟶ Y) (hfactor : g ≫ ν = f) (hν : IsRepresentableWith (fun _ _ p ↦ IsIntegralHom p.left) ν.hom.hom) (huniv : ∀ (Z : AlgebraicSpace S) (h : V ⟶ Z) (π : Z ⟶ Y), IsRepresentableWith (fun _ _ p ↦ IsIntegralHom p.left) π.hom.hom → h ≫ π = f → ∃! c : N ⟶ Z, g ≫ c = h ∧ c ≫ π = ν) : ∃ W : OpenSubspace N, IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) (W.val.preimage g.hom.hom).ι ∧ IsIso (W.val.fromPreimage g.hom.hom) ∧ pointImage (W.val.preimage g.hom.hom).ι = {v : Point V.obj.obj | ∃ (T : Over S) (a : yoneda.obj T ⟶ Y.obj.obj), IsEtale a ∧ ∃ (U : Over S) (q : yoneda.obj U ⟶ V.obj.obj) (p : U ⟶ T), IsPullback q (yoneda.map p) f.hom.hom a ∧ ∃ x : U.left, schemePointMap q x = v ∧ p.left.IsQuasiFiniteAtPoint x}",
+  "branch": "newtargets-dag",
+  "by": "Q44",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The fixed normalization is specified by its integral-factorization universal property. The quasi-finite point predicate is expanded using the recorded Stacks scheme predicate on an actual representing pullback over an etale target chart. The canonical Subfunctor.fromPreimage is required to be an isomorphism; the full preimage inclusion is open and its point image is exactly that locus. Added two landed definition nodes for the existing separatedness and quasi-compactness predicates."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c0f8364e1",
+  "group": "Q44",
+  "result": "pass",
+  "note": "Checked against Stacks 0ABR/0823: hf (representable+LFT on scheme tests), MapIsSeparated (diagonal by closed immersions), MapIsQuasiCompact (affine tests), integral ν, huniv ∃! c with g≫c=h ∧ c≫π=ν (Y-morphism uniqueness, no nested-∃! weakening); conclusion uses literal Subfunctor.preimage with open-immersion inclusion, canonical fromPreimage IsIso, pointImage = existential étale-chart lift with IsQuasiFiniteAtPoint (pqf-def-quasifinite, 01TD). No extra hypotheses; edge cases empty V, A¹→Spec k, Spec k⊔A¹, integral f covered. lean.statement verbatim; node diff only lean + two landed stmt_deps (def-sfb-space-morphism-properties, def-sfb-proper-curve-moduli) owning MapIsSeparated/MapIsQuasiCompact, permitted by brief l.177. No duplicate in side-live/Mathlib; imports per brief §114; docstrings with source, blueprint and 5 steps; sorry-only; report sections present. Not recompiled (no change)."
+ }
+}

@@ -1,0 +1,147 @@
+{
+ "id": "lem-sf-finite-refinement-ambient-normalization",
+ "kind": "statement",
+ "title": "Inverse retained-witness refinement comparison is the ambient mate",
+ "statement": "Let D be a finite-field datum and A a finite commutative ring in the site coefficient universe, with a discrete topology. Let X and Y be finite-type D.k-schemes [def-sf-operation-stages], let f:X -> Y be quasi-compact, let c,d be compactifications of f and r:c -> d a refinement. For every retained etale-origin object O [def-sf-refinement-comparison-isomorphism], the inverse of refinementComparisonAtWitness A r O equals RefinementProjection.finiteComparison D A r (refinementFixedObject X A O) [lem-sf-refinement-projection-counit]. No tensor, operation datum, separatedness of the structure maps or invertibility of a projection morphism is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Refinement sentence; step 2 of lem-sf-finite-refinement-projection-realization, identifying the inverse retained-witness comparison with the ambient mate."
+ },
+ "stmt_deps": [
+  "def-sf-operation-stages",
+  "def-sf-refinement-comparison-isomorphism",
+  "lem-sf-refinement-projection-counit"
+ ],
+ "proof": [
+  {
+   "text": "Use the bounded-below compatibility of the identity-normalized proper/open mate. The finite clopen site-transport equation identifies its bounded-below value on a comparison input with the etale gamma word. The direct-image comparison for the identity cancels the inserted identity. The refinement clause of proper/open interchange identifies the etale gamma word with the specified properOpenProEtaleIso. Include in the unbounded category through the canonical comparison isomorphisms.",
+   "uses": [
+    "lem-pur-refinement-mate-plus-compatibility",
+    "lem-cbc-finite-clopen-mate-site-transport",
+    "lem-cbc-proper-open-interchange-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand refinementProperOpenIso as transport along refinementFixedWitnessIso. Naturality of the normalized mate cancels the two witness isomorphisms, identifying this proper/open factor on the retained fixed-scalar object.",
+   "uses": [
+    "def-sf-refinement-comparison-isomorphism"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The ordinary inverse-image adjunction is exact, so its right adjoint preserves K-injective complexes. Apply Adjunction.rightDerivedFunctorCompIso'_hom_eq_conjugateEquiv to upperStarComp and lowerStarComp. Compare the map-derived adjunction to the K-flat-derived adjunction through Adjunction.derived_eq_ofNatIsoLeft and the localization factorization of leftDerivedFunctorIsoMapDerivedCategory. Expanding the two left-derived compositor constructions identifies finiteDirectImageComposition inverse with the conjugate of leftDerivedUpperStarComp. This is the same internal calculation used for ordinary-derived-composite-transpose, reproved here for general finite coefficients and schemes.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "def-weil-pbc-proetale-operations",
+    "def-weil-pbc-adjunction-conjugate",
+    "lem-sfb-derived-composition-adjunction-normalization",
+    "lem-weil-derived-direct-image-composition",
+    "lem-sc-derived-adjunction-from-underived",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Invert the three factors of refinementComparisonAtWitness, substitute the preceding proper/open and compositor equations, and identify inverse equality transport with indexIso for r.hom_g. The resulting three-factor word is exactly finiteComparison.",
+   "uses": [
+    "def-sf-refinement-comparison-isomorphism",
+    "lem-sf-refinement-projection-counit"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-refinement-mate-plus-compatibility",
+  "lem-cbc-finite-clopen-mate-site-transport",
+  "lem-cbc-proper-open-interchange-coherence",
+  "def-sf-refinement-comparison-isomorphism",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-adjunction-conjugate",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-weil-derived-direct-image-composition",
+  "lem-sc-derived-adjunction-from-underived",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-sf-refinement-projection-counit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Refinement sentence; step 2 of lem-sf-finite-refinement-projection-realization, identifying the inverse retained-witness comparison with the ambient mate."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "right derived direct image composition conjugate inverse image adjunction",
+   "results": "8 hits, all generic derived adjunction unit/counit factorization lemmas, including CategoryTheory.Adjunction.derivedε_fac_app and derivedη_fac_app; no retained refinement comparison.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; use the source-library derived composition conjugacy theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateIsoEquiv",
+   "results": "5 hits: conjugateIsoEquiv and its apply_hom, apply_inv, symm_apply_hom and symm_apply_inv lemmas.",
+   "date": "2026-10-27",
+   "verdict": "Generic conjugacy API; the prescribed proper/open comparison requires the existing project normalization lemmas."
+  },
+  {
+   "tool": "grep",
+   "query": "refinementComparisonAtWitness",
+   "results": "0 hits in Mathlib. Local library search found RefinementComparisonIsomorphism and the related, structure-separated PurityWitnessedMateNormalization; its internal argument generalizes to the present hypotheses.",
+   "date": "2026-10-27",
+   "verdict": "No exact existing declaration. Reuse the existing proof arguments, without importing the restricted purity theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteRefinementProjectionRealization",
+  "date": "2026-10-27",
+  "group": "B8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Refinement sentence; step 2 of lem-sf-finite-refinement-projection-realization, identifying the inverse retained-witness comparison with the ambient mate.",
+   "via": [
+    "lem-sf-finite-refinement-projection-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteRefinementAmbientNormalization",
+  "file": "lean/Sheaf/Paper/FiniteRefinementAmbientNormalization.lean",
+  "declaration": "WeilConjectures.CompactSupportFiniteProjection.refinementComparisonAtWitness_inv_eq",
+  "statement": "theorem refinementComparisonAtWitness_inv_eq\n    (D : FiniteFieldDatum.{u}) (A : Type (u + 1)) [CommRing A] [Finite A]\n    [TopologicalSpace A] [DiscreteTopology A]\n    {X Y : Spaces D} {f : X ⟶ Y} [QuasiCompact f.hom.left]\n    {c d : Compactification f.hom.left} (r : c.Refinement d)\n    (O : EtaleOriginDerivedCategory X.obj.left A) :\n    (refinementComparisonAtWitness A r O).inv =\n      RefinementProjection.finiteComparison D A r\n        (refinementFixedObject X.obj.left A O)",
+  "branch": "sheaf-dag",
+  "by": "B8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261026T235836-L-1460119",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261026T235836-L-1460119",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

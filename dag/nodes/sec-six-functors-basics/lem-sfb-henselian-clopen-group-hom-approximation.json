@@ -1,0 +1,435 @@
+{
+ "id": "lem-sfb-henselian-clopen-group-hom-approximation",
+ "kind": "statement",
+ "title": "Henselian approximation of a given clopen affine group homomorphism",
+ "statement": "Let $(A,\\mathfrak m)$ be a commutative henselian local G-ring [def-weil-pbc-henselian-terminology, def-weil-pbc-g-ring], let $k=A/\\mathfrak m$ [def-weil-residue-field], and let $\\widehat A=\\varprojlim_{r\\geq1}A/\\mathfrak m^r$ with its canonical $A$-algebra structure [def-weil-pbc-adic-completion]. Let $X=\\operatorname{Spec}P$ and $Y=\\operatorname{Spec}Q$ be affine $A$-group schemes, where $P,Q$ are finitely presented commutative $A$-algebras [def-weil-affine-spectrum, def-weil-pbc-finitely-presented-algebra]. Group structures consist of multiplication, identity and inverse satisfying the group diagrams, and homomorphisms preserve these operations. Write $X_R=X\\times_A\\operatorname{Spec}R$ and $Y_R=Y\\times_A\\operatorname{Spec}R$ for an $A$-algebra $R$ [def-pc-fibre-product]. If a given $\\widehat A$-group homomorphism $v:X_{\\widehat A}\\to Y_{\\widehat A}$ is both an open immersion and a closed immersion [def-weil-open-immersion, def-weil-closed-immersion], then there exists an $A$-group homomorphism $w:X\\to Y$, also both an open and a closed immersion, whose scalar extension to $k$ equals $v_k$ under the canonical residue identification $\\widehat A/\\mathfrak m\\widehat A=k$. Flatness, smoothness, commutativity of the group laws and diagonalizability are not assumed. No equality $w_{\\widehat A}=v$ is asserted.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Agent finite-polynomial-certificate consequence of Tag 0AH5 (lemma-henselian-pair), with the maximal ideal and approximation order one: encode a Hopf map and a clopen factor isomorphism by finitely many polynomial equations and relation-membership witnesses. The encoding argument is recorded in report.md; this unsplit node contains only its statement."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-g-ring",
+  "def-weil-residue-field",
+  "def-weil-pbc-adic-completion",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Choose finite presentations $P=A[x_1,\\ldots,x_n]/(r_1,\\ldots,r_a)$ and $Q=A[y_1,\\ldots,y_m]/(s_1,\\ldots,s_b)$. For any $A$-algebra $R$, put $P_R=R\\otimes_AP$ and $Q_R=R\\otimes_AQ$. The affine fibre-product theorem identifies their spectra with $X_R,Y_R$. The universal property of tensor product and polynomial evaluation identifies $P_R$ with $R[x]/(r)$: maps from either algebra to an $R$-algebra are precisely tuples satisfying the $r_i$; the mutually inverse maps send each variable to its namesake. Likewise $Q_R=R[y]/(s)$ and $P_R\\otimes_RP_R=R[x,x']/(r(x),r(x'))$. These presentations hold for every $R$; no flatness is used.",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I4 (lemma-fibre-product-affine-schemes), 01JQ; elementary universal-property calculation from Tag 00F3 presentations"
+   }
+  },
+  {
+   "text": "Write $f^{\\wedge}:Q_{\\widehat A}\\to P_{\\widehat A}$ for the algebra map of $v$. Its image $U\\subseteq\\operatorname{Spec}Q_{\\widehat A}$ is clopen, and $v$ identifies its source with the open subscheme $U$. Choose the idempotent $e^{\\wedge}$ with $U=D(e^{\\wedge})$. The affine-basic-open theorem identifies restriction to $U$ with localization at $e^{\\wedge}$. For any idempotent $e$ in a ring $B$, the map $B\\to B_e$ is surjective and has kernel $(1-e)B$: in $B_e$ one has $e=1$, and $b/e^d=b/1$, while $e^db=0$ implies $b=(1-e)b$ (the case $d=0$ gives $b=0$). Thus $f^{\\wedge}$ induces $Q_{\\widehat A}/(1-e^{\\wedge})\\simeq P_{\\widehat A}$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-spec-clopen-idempotent",
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "def-weil-open-immersion",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00EE (lemma-disjoint-decomposition); schemes.tex Tags 01I3 (lemma-standard-open-affine), 01HV (lemma-spec-sheaves); displayed elementary idempotent localization calculation"
+   }
+  },
+  {
+   "text": "Multiplication by $e^{\\wedge}$ identifies $Q_{\\widehat A}/(1-e^{\\wedge})$ with the corner $e^{\\wedge}Q_{\\widehat A}$, whose identity is $e^{\\wedge}$: the inverse sends $e^{\\wedge}q$ to the class of $q$. Composing the inverse of the preceding isomorphism with this corner inclusion gives an additive multiplicative $\\widehat A$-linear map $g^{\\wedge}:P_{\\widehat A}\\to Q_{\\widehat A}$ with $g^{\\wedge}(1)=e^{\\wedge}$, $f^{\\wedge}g^{\\wedge}=1$, and $g^{\\wedge}f^{\\wedge}(q)=e^{\\wedge}q$. Here $g^{\\wedge}$ is allowed to be nonunital. Choose polynomial representatives $F_j(x)$ of $f^{\\wedge}(y_j)$, $G_i(y)$ of $g^{\\wedge}(x_i)$, and $E(y)$ of $e^{\\wedge}$, all with coefficients in $\\widehat A$. Fix their finite monomial supports; their coefficients will be unknowns.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary quotient and idempotent-corner calculation; Tag 00F3 finite presentations"
+   }
+  },
+  {
+   "text": "For coefficients in any $A$-algebra $R$, use the same supports for $F_j,G_i,E$. Impose $s_l(F)\\in(r)$, $E^2-E\\in(s)$, and $EG_i-G_i\\in(s)$. For $p(x)=\\sum_\\alpha c_\\alpha x^\\alpha$, write $T(p)=c_0E+\\sum_{\\alpha\\ne0}c_\\alpha G^\\alpha$ and impose $T(r_l)\\in(s)$ for every relation of $P$. Then $f:Q_R\\to P_R$, $y_j\\mapsto F_j$, is a unital algebra map. Modulo $(s)$ the relations $E^2=E$ and $EG_i=G_i$ make $T$ additive, $R$-linear and multiplicative, with $T(1)=E$: multiply two monomials, treating a constant as a multiple of $E$. Since $T(r_lh)=T(r_l)T(h)$, it annihilates $(r)$ and induces $g:P_R\\to Q_R$ with $g(1)=E$.",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary polynomial evaluation and quotient factorization; Tag 00F3"
+   }
+  },
+  {
+   "text": "Also impose $E(F)-1\\in(r)$, $G_i(F)-x_i\\in(r)$ and $T(F_j)-Ey_j\\in(s)$. The first two sets say $fg=1_{P_R}$, since both sides are unital $R$-algebra maps agreeing on $x_i$. The third set says $gf(q)=Eq$ for all $q\\in Q_R$: both maps are additive multiplicative $R$-linear maps with value $E$ at $1$, and they agree on $y_j$, hence on all polynomial expressions. These are finite lists even if some presentation has no generators or no relations. The chosen completion coefficients satisfy every imposed condition by their construction.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary verification on generators, retaining the idempotent as the identity of the corner"
+   }
+  },
+  {
+   "text": "Represent the fixed multiplication, identity and inverse maps of $X$ by polynomials $D_i^P(x,x')$, elements $c_i^P\\in A$, and polynomials $I_i^P(x)$, respectively. Represent those of $Y$ by $D_j^Q(y,y')$, $c_j^Q$, $I_j^Q(y)$. This is possible by the presentations in Step 1 and the affine-spectrum correspondence. Impose, for each $j$, the three further identities\n$$F_j(D^P(x,x'))-D_j^Q(F(x),F(x'))\\in(r(x),r(x')),$$\n$$F_j(c^P)-c_j^Q=0,\\qquad F_j(I^P(x))-I_j^Q(F(x))\\in(r).$$\nThey say exactly $\\Delta_Pf=(f\\otimes f)\\Delta_Q$, $\\epsilon_Pf=\\epsilon_Q$, and $S_Pf=fS_Q$, checked on the generators $y_j$. Dualizing by the affine-spectrum correspondence gives compatibility with multiplication, identity and inverse. The given $v$ satisfies these equations. Neither cocommutativity of $\\Delta$ nor any flatness is needed.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I4, 01JQ, affine products; elementary dualization of the three group diagrams specified in the item"
+   }
+  },
+  {
+   "text": "Each requirement above, other than a scalar equality, has the form $H\\in(t_1,\\ldots,t_d)$ in a polynomial ring over $R$, where the fixed list $t$ is $(r(x))$, $(s(y))$ or $(r(x),r(x'))$. At the given completion solution choose actual polynomial witnesses $B_1,\\ldots,B_d$ with $H=\\sum_l B_lt_l$. This is exactly membership in the ideal generated by $t$. Choose such witnesses for every requirement, a finite list, and fix each witness's finite monomial support. For the empty list of relations, membership means the polynomial $H$ itself is zero and no witnesses are required. Introduce one more unknown for each witness coefficient.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary finite ideal-membership witnesses in polynomial quotients, as in the generators-and-relations arguments of Tags 00QO and 05N8"
+   }
+  },
+  {
+   "text": "Replace every membership requirement by the polynomial identity $H-\\sum_lB_lt_l=0$, and compare coefficients of all monomials occurring in that expression. Each coefficient is a polynomial over $A$ in the finitely many unknown coefficients of $F,G,E$ and the witnesses: substitution, multiplication and addition of finite polynomials use finitely many sums and products. Include the scalar equations from Step 6. Thus there is one finite system $h_1(z)=\\cdots=h_c(z)=0$ over $A$ with a specified solution $\\widehat z$ in $\\widehat A$. Every solution over any $A$-algebra supplies all identities of Steps 4--6. This uses equality of polynomials, not coefficientwise equality of classes in a quotient. The supports bound the selected solution and witnesses, and need not parametrize every possible map.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary coefficient comparison using the definition of a multivariable polynomial as a finite coefficient family"
+   }
+  },
+  {
+   "text": "Apply henselian-pair approximation with $I=\\mathfrak m$, $N=1$ to the finite system of Step 8. The henselian local hypothesis says that $(A,\\mathfrak m)$ is henselian; the G-ring hypothesis includes that $A$ is Noetherian. The completion is precisely the completion in the cited approximation theorem. It therefore supplies $z\\in A^d$ satisfying every $h_l(z)=0$ with $\\widehat z_l-\\iota(z_l)\\in\\mathfrak m\\widehat A$ for every coordinate. In particular this approximates the coefficients of $F$ together with the idempotent, inverse and relation-membership witnesses, so all their identities remain exact over $A$.",
+   "uses": [
+    "def-weil-pbc-henselian-terminology",
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-henselian-pair-approximation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Tag 0AH5 (lemma-henselian-pair), condition (2), approximation order one"
+   }
+  },
+  {
+   "text": "Decode the solution $z$ by Steps 4--5, now with $R=A$. We obtain an algebra map $f:Q\\to P$, an idempotent $e\\in Q$, and an additive multiplicative $A$-linear map $g:P\\to Q$ with $g(1)=e$, $fg=1$ and $gf(q)=eq$. Thus $f$ is surjective. Also $f(e)=1$, so $(1-e)Q\\subseteq\\ker f$; if $f(q)=0$ then $eq=gf(q)=0$ and $q=(1-e)q$, proving $\\ker f=(1-e)Q$. Consequently $f$ induces an isomorphism $Q/(1-e)\\simeq P$. This deduction does not require $g$ to be a unital map to $Q$.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary inverse and kernel computation from the explicit identities"
+   }
+  },
+  {
+   "text": "Let $w=\\operatorname{Spec}f:X\\to Y$. The three sets of equations of Step 6, which hold over $A$, say that $w$ preserves all the specified group operations: equality on the algebra generators implies equality of the corresponding scheme maps. For multiplication the common source has algebra $P\\otimes_AP$, as supplied by the affine-fibre-product theorem; for identity it is $A$; for inverse it is $P$. Hence $w$ is an $A$-group homomorphism.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I4, 01JQ; affine-spectrum faithfulness applied separately to the three group diagrams"
+   }
+  },
+  {
+   "text": "The kernel description identifies $w$ with $\\operatorname{Spec}(Q/(1-e))\\to\\operatorname{Spec}Q$, which is a closed immersion by the affine characterization. The elementary idempotent calculation of Step 2 identifies its quotient algebra, compatibly with the map from $Q$, with $Q_e$. The affine-basic-open theorem identifies $\\operatorname{Spec}Q_e$ with the open subscheme $D(e)$, and the clopen-idempotent theorem says $D(e)$ is also closed. Thus $w$ is an open immersion as well as a closed immersion.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "lem-weil-pbc-spec-clopen-idempotent",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01QO (affine closed immersions), 01I3 and 01HV (basic-open affine structure); algebra.tex Tag 00EE"
+   }
+  },
+  {
+   "text": "Since $A$ is Noetherian, its maximal ideal is finitely generated. Completion modulo this ideal is canonically $A/\\mathfrak m=k$ by the completion-mod-power theorem with $N=1$. Every coefficient of $F_j$ from $z$ therefore has the same image in $k$ as the corresponding coefficient in the chosen representative of $f^{\\wedge}(y_j)$. Evaluation gives identical images of every $y_j$ in $P\\otimes_Ak$, so the two $k$-algebra maps $Q\\otimes_Ak\\to P\\otimes_Ak$ are equal. The affine-spectrum correspondence gives $w_k=v_k$. Only this residue equality follows from approximation; none of the argument requires equality of the maps over $\\widehat A$.",
+   "uses": [
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-adic-completion-mod-power",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05GG (lemma-hathat-finitely-generated), N=1; elementary generator comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-spec-clopen-idempotent",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "def-weil-open-immersion",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-g-ring",
+  "lem-weil-pbc-henselian-pair-approximation",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-adic-completion-mod-power"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Finite polynomial certificate argument written by Q28, using Tag 0AH5 and the cited affine/idempotent results; the encoding is explicit in Steps 3--8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Algebraize an open and closed diagonalizable subgroup lifting the residue fibre of a flat finitely presented affine group by henselian approximation",
+   "results": "{\"t\": \"2026-10-24T12:12:21Z\", \"tool\": \"leanfinder\", \"query\": \"Algebraize an open and closed diagonalizable subgroup lifting the residue fibre of a flat finitely presented affine group by henselian approximation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.lift\", \"Ideal.ResidueField.liftₐ\", \"Algebra.FormallySmooth.exists_lift\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"Ideal.ResidueField.liftₐ_comp_toAlgHom\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\"], \"digest\": \"718d33c7ce8bf5a2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern general field theory, affine morphisms, Henselian rings, smooth lifting or Hopf spectrum construction; no declaration states this group-scheme assertion or a one-line generalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A clopen group scheme homomorphism over a local completion algebraizes over a henselian G-ring with the same special fibre",
+   "results": "{\"t\": \"2026-10-24T12:15:07Z\", \"tool\": \"leansearch\", \"query\": \"A clopen group scheme homomorphism over a local completion algebraizes over a henselian G-ring with the same special fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.isClopen_iff\", \"OpenSubgroup.isClopen\", \"OpenAddSubgroup.isClopen\", \"Algebra.QuasiFiniteAt.isClopen_singleton\", \"AlgebraicGeometry.Spec_closedPoint\", \"AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_assoc\", \"PrimeSpectrum.mulZeroAddOneEquivClopens\", \"AlgebraicGeometry.IsSeparated.instMap\"], \"digest\": \"1433e8a61615a2c8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern general field theory, affine morphisms, Henselian rings, smooth lifting or Hopf spectrum construction; no declaration states this group-scheme assertion or a one-line generalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HenselianLocalRing\", \"AlgHom\"",
+   "results": "{\"t\": \"2026-10-24T12:15:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"HenselianLocalRing\\\", \\\"AlgHom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern general field theory, affine morphisms, Henselian rings, smooth lifting or Hopf spectrum construction; no declaration states this group-scheme assertion or a one-line generalization."
+  },
+  {
+   "tool": "grep",
+   "query": "approximation|algebraiz|HopfAlgebra",
+   "results": "{\"t\": \"2026-10-24T12:15:08Z\", \"tool\": \"grep\", \"query\": \"approximation|algebraiz|HopfAlgebra\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\"], \"digest\": \"776676081ffd6e9d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern general field theory, affine morphisms, Henselian rings, smooth lifting or Hopf spectrum construction; no declaration states this group-scheme assertion or a one-line generalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Artin approximation preserves finite polynomial certificates for an open and closed immersion between finitely presented affine group schemes",
+   "results": "{\"t\": \"2026-10-24T12:19:50Z\", \"tool\": \"leanfinder\", \"query\": \"Artin approximation preserves finite polynomial certificates for an open and closed immersion between finitely presented affine group schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"RingHom.FinitePresentation.polynomial_induction\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"Algebra.IsStandardSmooth.out\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset\", \"AlgebraicGeometry.LocallyOfFinitePresentation\"], \"digest\": \"7dc59a7527ccf248\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern general field theory, affine morphisms, Henselian rings, smooth lifting or Hopf spectrum construction; no declaration states this group-scheme assertion or a one-line generalization."
+  },
+  {
+   "tool": "grep",
+   "query": "approximation|algebraiz|HopfAlgebra",
+   "results": "{\"t\": \"2026-10-24T13:22:39Z\", \"tool\": \"grep\", \"query\": \"approximation|algebraiz|HopfAlgebra\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\"], \"digest\": \"776676081ffd6e9d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give presentations, smooth lifting, basic opens or tensor maps, not approximation of a clopen affine group homomorphism; inspected relevant source definitions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Artin approximation for affine group scheme homomorphisms preserving open and closed immersions",
+   "results": "{\"t\": \"2026-10-24T13:22:39Z\", \"tool\": \"leansearch\", \"query\": \"Artin approximation for affine group scheme homomorphisms preserving open and closed immersions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.isAffineOpen_iff_of_isOpenImmersion\", \"AlgebraicGeometry.IsLocallyArtinian.of_isImmersion\", \"AlgebraicGeometry.IsClosedImmersion.instIsAffineHom\", \"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.isAffineHom_of_isInducing\", \"AlgebraicGeometry.isLocallyArtinian_iff_of_isOpenCover\", \"AlgebraicGeometry.IsOpenImmersion.affineOpensEquiv\", \"AlgebraicGeometry.isAffineOpen_opensRange\"], \"digest\": \"4c4f900dfa539a1b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give presentations, smooth lifting, basic opens or tensor maps, not approximation of a clopen affine group homomorphism; inspected relevant source definitions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HenselianLocalRing\", \"AlgHom\"",
+   "results": "{\"t\": \"2026-10-24T13:22:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"HenselianLocalRing\\\", \\\"AlgHom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give presentations, smooth lifting, basic opens or tensor maps, not approximation of a clopen affine group homomorphism; inspected relevant source definitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism of finitely presented affine group schemes over a henselian local G-ring completion which is an open and closed immersion can be approximated over the ring with the same residue map",
+   "results": "{\"t\": \"2026-10-24T13:22:40Z\", \"tool\": \"leanfinder\", \"query\": \"A homomorphism of finitely presented affine group schemes over a henselian local G-ring completion which is an open and closed immersion can be approximated over the ring with the same residue map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing\", \"AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue\", \"IsAdicComplete.henselianRing\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"HenselianLocalRing.TFAE\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul\", \"AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField\"], \"digest\": \"e88bc3d7af0364d4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give presentations, smooth lifting, basic opens or tensor maps, not approximation of a clopen affine group homomorphism; inspected relevant source definitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Artin approximation preserves finite polynomial certificates for Hopf algebra maps and clopen factor isomorphisms between finitely presented algebras",
+   "results": "{\"t\": \"2026-10-24T13:24:49Z\", \"tool\": \"leanfinder\", \"query\": \"Artin approximation preserves finite polynomial certificates for Hopf algebra maps and clopen factor isomorphisms between finitely presented algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.ofHasCoeffs\", \"Algebra.Smooth.exists_finiteType\", \"Algebra.SubmersivePresentation\", \"Algebra.Smooth.exists_subalgebra_finiteType\", \"Algebra.IsStandardSmooth.out\", \"AlgHom.FinitePresentation\", \"RingHom.FinitePresentation.polynomial_induction\", \"Algebra.Smooth.exists_subalgebra_fg\"], \"digest\": \"7fa4299beba97186\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give presentations, smooth lifting, basic opens or tensor maps, not approximation of a clopen affine group homomorphism; inspected relevant source definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "certificate|polynomial.*equation|finite.*diagram",
+   "results": "{\"t\": \"2026-10-24T13:30:49Z\", \"tool\": \"grep\", \"query\": \"certificate|polynomial.*equation|finite.*diagram\", \"sub\": \"RingTheory/FinitePresentation.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give presentations, smooth lifting, basic opens or tensor maps, not approximation of a clopen affine group homomorphism; inspected relevant source definitions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Encode finitely many algebra homomorphisms and identities of tensor product maps by polynomial equations in coefficients and ideal membership witnesses",
+   "results": "{\"t\": \"2026-10-24T13:30:50Z\", \"tool\": \"leansearch\", \"query\": \"Encode finitely many algebra homomorphisms and identities of tensor product maps by polynomial equations in coefficients and ideal membership witnesses\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.TensorProduct.algHomOfLinearMapTensorProduct\", \"MvPolynomial.rTensorAlgHom\", \"PolyEquivTensor.toFunAlgHom_apply_tmul_eq_smul\", \"Algebra.TensorProduct.ext'\", \"PiTensorProduct.singleAlgHom\", \"Algebra.Presentation.tensorModelOfHasCoeffsInv\", \"Algebra.TensorProduct.piRightHom\", \"Algebra.TensorProduct.map\"], \"digest\": \"30239e395306290b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give presentations, smooth lifting, basic opens or tensor maps, not approximation of a clopen affine group homomorphism; inspected relevant source definitions."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FinitePresentation, AlgHom",
+   "results": "{\"t\": \"2026-10-24T13:30:50Z\", \"tool\": \"loogle\", \"query\": \"Algebra.FinitePresentation, AlgHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FinitePresentation.ker_fG_of_surjective\", \"Algebra.FinitePresentation.of_surjective\", \"Algebra.FinitePresentation.mk\", \"Algebra.FinitePresentation.out\", \"Algebra.FinitePresentation.ker_fg_of_mvPolynomial\", \"Algebra.FinitePresentation.iff_quotient_mvPolynomial'\", \"Algebra.FinitePresentation.of_span_eq_top_target_aux\", \"Module.Finite.exists_free_surjective\"], \"digest\": \"7480bc12ee68d87d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give presentations, smooth lifting, basic opens or tensor maps, not approximation of a clopen affine group homomorphism; inspected relevant source definitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite diagrams of algebra maps and tensor products between finitely presented algebras admit finite polynomial certificates of their equations around a given solution",
+   "results": "{\"t\": \"2026-10-24T13:30:51Z\", \"tool\": \"leanfinder\", \"query\": \"Finite diagrams of algebra maps and tensor products between finitely presented algebras admit finite polynomial certificates of their equations around a given solution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation\", \"AlgHom.FinitePresentation\", \"Algebra.FinitePresentation.baseChange\", \"Algebra.Presentation.exists_presentation_fin\", \"Algebra.Presentation.instFinitePresentationModelOfHasCoeffsOfFinite\", \"Algebra.SubmersivePresentation.finite_coeffs\", \"Algebra.FinitePresentation\", \"Algebra.Smooth.exists_finiteType\"], \"digest\": \"445e722f9d6e986c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give presentations, smooth lifting, basic opens or tensor maps, not approximation of a clopen affine group homomorphism; inspected relevant source definitions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-strict-local-diagonalizable-clopen-lift",
+  "date": "2026-10-24",
+  "group": "Q46"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting input to the strict-local clopen lifting prerequisite of Conrad Theorem B.4.1, printed pp.298-299; downstream of latest blueprint det-thm-sf-ctf-stability-direct-images, proof (3). No imported blueprint ancestor exists, as confirmed by blueprint_refs.py ancestor. Specific input: Henselian approximation of a given clopen affine group homomorphism.",
+   "via": [
+    "lem-sfb-strict-local-diagonalizable-clopen-lift",
+    "lem-sfb-multiplicative-type-fibral-criterion",
+    "lem-sfb-multiplicative-type-fpqc-descent",
+    "lem-sfb-relative-commutative-multiplicative-extension",
+    "lem-sfb-relative-central-multiplicative-preimage",
+    "lem-sfb-relative-central-multiplicative-quotient",
+    "lem-sfb-relative-rank-one-central-quotient",
+    "lem-sfb-relative-rank-one-local-matrix-model",
+    "lem-sfb-relative-opposite-root-reflection-map",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-henselian-clopen-group-hom-approximation",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Gave explicit finite polynomial equations for the algebra map, its inverse into an idempotent corner, and each group diagram; included actual ideal-membership witnesses, applied existing henselian-pair approximation at order one, and recovered a clopen immersion and the specified residue map. Reused all required DAG inputs; no new nodes and no Mathlib leaves.",
+  "blueprint": "No imported ancestor exists (blueprint_refs.py ancestor returns None). Supporting input to the strict-local clopen lifting prerequisite below latest det-thm-sf-ctf-stability-direct-images proof (3), as recorded in blueprint.from; no unit/chapter route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Affine product and scalar-extension coordinate calculation, a generic tool independent of the six-functor route."
+   },
+   {
+    "node": "lem-weil-pbc-spec-clopen-idempotent",
+    "why": "Existing general clopen-idempotent correspondence for spectra; needed to encode the immersion."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "why": "Existing affine basic-open localization theorem, used only for an idempotent open."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-pair-approximation",
+    "why": "Existing Stacks 0AH5 theorem, exactly the approximation input prescribed by this item; no group approximation theorem is assumed."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-mod-power",
+    "why": "Existing completion projection theorem to identify the two residue maps."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-spec-clopen-idempotent",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-weil-pbc-henselian-pair-approximation",
+  "lem-weil-pbc-adic-completion-mod-power"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-73f6367e8",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-73f6367e8 (reviewer sub-agent of L); spot-checked: I read the whole item. The 13 steps prove the unchanged statement by encoding v as a finite polynomial system with relation-membership witnesses and applying Stacks 0AH5(2) through lem-weil-pbc-henselian-pair-approximation with I=m, N=1; the source (smoothing.tex l.3389) needs a henselian pair and a Noetherian G-ring, which the hypotheses give. Checks: the nonunital corner inverse g with g(1)=E is kept nonunital (no E4); T is multiplicative modulo E^2=E and EG_i=G_i in all four cases; fg=1 and gf=E·; the Hopf identities are checked on generators; ker f=(1-e)Q; Spec Q/(1-e)=D(e) gives both immersions; w_k=v_k follows from adic-completion-mod-power with N=1 (05GG) and finitely generated m. Edge cases m=0, e=1, trivial group and complete A are consistent. The delivery has no new nodes and I found no duplicates. Accepted tool use: lem-weil-pbc-henselian-pair-approximation; the other off-unit citations are Mathlib leaves. FIX: step 2 uses that the image of v is closed but did not cite def-weil-closed-immersion (C1); I added it to the step's uses (already in proof_deps). For the maintainer: source.place still calls the node unsplit, contrary to the report; source is a maintainer field.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.HenselianClopenGroupHomApproximation",
+  "declaration": "AlgebraicGeometry.exists_clopen_groupHom_of_completion",
+  "file": "lean/Sheaf/AlgebraicGeometry/HenselianClopenGroupHomApproximation.lean",
+  "statement": "theorem exists_clopen_groupHom_of_completion (A : Type u) [CommRing A] [HenselianLocalRing A] (hA : IsGRing A) (P Q : Type u) [CommRing P] [CommRing Q] [Algebra A P] [Algebra A Q] [Algebra.FinitePresentation A P] [Algebra.FinitePresentation A Q] [GrpObj ((Spec (.of P)).asOver (Spec (.of A)))] [GrpObj ((Spec (.of Q)).asOver (Spec (.of A)))] (v : (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap A (AdicCompletion (IsLocalRing.maximalIdeal A) A))))).mapGrp.obj (Grp.mk ((Spec (.of P)).asOver (Spec (.of A)))) ⟶ (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap A (AdicCompletion (IsLocalRing.maximalIdeal A) A))))).mapGrp.obj (Grp.mk ((Spec (.of Q)).asOver (Spec (.of A))))) (hvOpen : IsOpenImmersion v.hom.hom.left) (hvClosed : IsClosedImmersion v.hom.hom.left) : ∃ w : Grp.mk ((Spec (.of P)).asOver (Spec (.of A))) ⟶ Grp.mk ((Spec (.of Q)).asOver (Spec (.of A))), IsOpenImmersion w.hom.hom.left ∧ IsClosedImmersion w.hom.hom.left ∧ (Over.pullback (Spec.map (CommRingCat.ofHom (AdicCompletion.evalOneₐ (IsLocalRing.maximalIdeal A)).toRingHom))).mapGrp.map ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap A (AdicCompletion (IsLocalRing.maximalIdeal A) A))))).mapGrp.map w) = (Over.pullback (Spec.map (CommRingCat.ofHom (AdicCompletion.evalOneₐ (IsLocalRing.maximalIdeal A)).toRingHom))).mapGrp.map v",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d69f48dd9",
+  "group": "NA",
+  "result": "pass",
+  "note": "Read node, 9 stmt_dep records, module, report. Clause-by-clause: HenselianLocalRing+IsGRing (recorded decls); FinitePresentation P,Q; arbitrary GrpObj on (Spec P).asOver (Spec A) using the global pullback CartesianMonoidalCategory (Over S) (Pullbacks.lean:712); base change via Over.pullback.mapGrp; v,w Grp homs with IsOpenImmersion/IsClosedImmersion on .hom.hom.left; the residue clause pulls w to Â then to k and compares with v pulled to k, exactly w_k=v_k since A→Â→A/m is the quotient map (evalOneₐ_comp_algebraMap_eq_mk). Proof step 9 matches henselian_pair_approximation (HenselianRing at m from HenselianLocalRing, IsGRing, N=1). GrpObj is the same Mathlib notion recorded by def-sc-group-scheme; no ring-base duplicate node. Edge cases (field base, trivial group, empty presentations, single universe u, non-flat/non-commutative) fine. No defs, sorry only, docstrings with source/blueprint/13 steps, lean.statement verbatim, report sections present. No file changed, so no compile. Maintainer note: source.place still says unsplit."
+ }
+}

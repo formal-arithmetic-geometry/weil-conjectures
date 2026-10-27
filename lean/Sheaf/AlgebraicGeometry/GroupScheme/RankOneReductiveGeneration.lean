@@ -1,0 +1,169 @@
+module
+
+public import Sheaf.AlgebraicGeometry.GroupScheme.ReductiveBorelPairStructure
+public import Sheaf.AlgebraicGeometry.GroupScheme.ReductiveRootSubgroupParametrizations
+public import Sheaf.AlgebraicGeometry.GroupScheme.GeometricCoroot
+import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+import Mathlib.AlgebraicGeometry.Geometrically.Connected
+import Mathlib.AlgebraicGeometry.Group.Smooth
+import Sheaf.AlgebraicGeometry.GroupScheme.AffinePointedMapGeneratedSubgroup
+import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
+import Sheaf.AlgebraicGeometry.GroupScheme.ReductiveRankOneReflections
+import Sheaf.AlgebraicGeometry.PerfectSolvableUnipotentTorus
+import Sheaf.AlgebraicGeometry.GroupScheme.GeneralBorelFlagVariety
+import Sheaf.AlgebraicGeometry.CocharacterLimitSmoothStructure
+
+/-! # Reductive generation by compatible rank-one subgroups
+
+Source: Milne, Algebraic Groups (2017), Theorem 23.31 and Remark 23.33, p.494;
+Theorem 21.11(d),(e), pp.428--430
+(blueprint: lem-sfb-rank-one-reductive-generation).
+
+All containments and generation are scheme-theoretic factorizations. The two Bool
+signs index the positive (true) and negative (false) root subgroups. Coroots are
+pinned to their local normalizer reflection, including along central torus directions.
+-/
+
+@[expose] public noncomputable section
+
+set_option autoImplicit false
+
+universe u
+
+open CategoryTheory MonoidalCategory CartesianMonoidalCategory
+open scoped MonObj
+
+namespace AlgebraicGeometry
+
+/-- Compatible rank-one subgroups generate a split reductive group with the prescribed
+simple roots and coroots. Every embedded rank-one reductive subgroup with the same
+torus has the ambient coroot. The empty family generates the torus.
+
+Source: Milne, Theorem 23.31 and Remark 23.33, p.494; Theorem 21.11, pp.428--430
+(blueprint: lem-sfb-rank-one-reductive-generation).
+
+Proof plan, following the seven steps of the node:
+1. For D empty take G=T. A smooth unipotent subgroup of a torus is trivial:
+   its geometric matrices are both semisimple and unipotent. For nonempty D,
+   multiply the J factors and use (a,b) ↦ w(a)w(b)⁻¹. Its image is inverse stable.
+   Products are geometrically reduced by smoothness, and geometrically connected
+   by lem-sfb-solvable-normal-subgroup-products and
+   lem-weil-pbc-geometrically-connected-product-components. Apply
+   lem-sfb-affine-pointed-map-generated-subgroup and
+   lem-sfb-geometrically-reduced-group-smooth. Maximality of T descends from H.
+2. Perfect character duality and independence give a cocharacter positive with
+   equal pairings on D, and face cocharacters zero on one simple root. Apply
+   lem-sfb-contracting-rank-one-cell to obtain U,V, the dense open cell VTU,
+   the solvable groups TU,TV, their intersection T, and the contraction descriptions.
+3. Apply lem-sfb-simple-root-limit-retractions for the face kernels and splittings.
+   Apply lem-sfb-reductive-rank-one-reflections in each J to obtain normalizer
+   representatives with the prescribed coroot formula. Root-subgroup uniqueness
+   interchanges the two root groups. The retractions make the representatives
+   normalize the face kernels. Then lem-sfb-triangular-reflection-orbits constructs
+   W, R=WD, signed integral simple coefficients and the longest-cell representative.
+4. Apply lem-sfb-triangular-root-subgroup-detection. A larger smooth connected
+   solvable subgroup containing TV would have a nontrivial reduced intersection
+   with U, hence contain a root subgroup and its opposite, and therefore a conjugate
+   of some J. By lem-sfb-simple-root-generation-mixed-commutation and
+   lem-sfb-perfect-solvable-unipotent-torus this contradicts solvability. Thus TV is
+   a Borel; conjugation by the longest representative makes TU a Borel as well.
+5. Any smooth connected normal unipotent N is solvable by
+   lem-sfb-smooth-unipotent-solvable. Apply lem-sfb-solvable-proper-fixed-point to
+   its action on the projective Borel variety from lem-sfb-general-borel-flag-variety.
+   Normality and transitivity put N in every Borel, hence in TU ∩ TV=T. Step 1
+   makes N trivial. Therefore G is reductive, with split maximal torus T.
+6. Every constructed root group supplies its tangent character, so R lies in the
+   actual root set. Conversely a root has nonzero pairing with the contracting
+   cocharacter since its centralizer is T. Its canonical root group lies in U or V
+   by lem-sfb-cocharacter-limit-smooth-structure. Detection and dimension one
+   identify it with a constructed root group; use the longest representative for
+   the negative case. Thus the actual root system is R and its simple base is D.
+7. For any embedded reductive rank-one K at gamma, tangent injectivity, dimension
+   one and lem-sfb-reductive-root-subgroup-parametrizations identify its signed
+   root groups with the ambient ones. The centralizer of the largest subtorus of
+   ker(gamma) has exactly these roots. Simple-root generation identifies both K
+   and that centralizer with the group generated by T and these two root groups.
+   The unique nonidentity local Weyl element is therefore the same. Its reflection
+   identity and perfect duality identify their coroots. In particular this applies
+   to every original J_alpha and its supplied c_alpha. -/
+theorem rankOne_reductive_generation
+    {F : Type u} [Field F] [IsAlgClosed F]
+    (H T : Grp (Over (Spec (.of F))))
+    (hH : SolvableGroupStructure.IsAlgebraic H)
+    (hsm : Smooth H.X.hom) (hconn : ConnectedSpace H.X.left)
+    (iT : T ⟶ H) (hT : ReductiveTorusCentralizer.IsMaximalTorus iT)
+    (hsplit : ∃ r : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus F r))
+    [IsCommMonObj T.X] [IsCommMonObj (StandardGroupSchemes.multiplicative F)]
+    (D : Finset (Additive (RankOneRoots.Character T)))
+    (hDzero : ∀ α ∈ D, α ≠ 0)
+    (hDind : LinearIndependent ℤ (fun α : D ↦ α.val))
+    (J : D → Grp (Over (Spec (.of F))))
+    (jH : ∀ α, J α ⟶ H) (tJ : ∀ α, T ⟶ J α)
+    (hJclosed : ∀ α, IsClosedSubgroupScheme (jH α).hom.hom)
+    (hJred : ∀ α, ReductiveTorusCentralizer.IsReductive (J α))
+    (hJtorus : ∀ α, ReductiveTorusCentralizer.IsMaximalTorus (tJ α))
+    (hJinc : ∀ α, tJ α ≫ jH α = iT)
+    (aJ : ∀ α, ModObj T.X (J α).X)
+    (haJ : ∀ α, (aJ α).smul = RankOneRoots.adjointMap (tJ α))
+    (hJroots : ∀ (α : D) (χ : RankOneRoots.Character T),
+      χ ∈ RankOneRoots.roots T (J α) (aJ α) ↔
+        Additive.ofMul χ = α.val ∨ Additive.ofMul χ = -α.val)
+    (c : D → RankOneRoots.Cocharacter T)
+    (hc : ∀ α, RankOneRoots.IsGeometricCoroot (tJ α) α.val.toMul (c α))
+    (U : D → Bool → Grp (Over (Spec (.of F))))
+    (uJ : ∀ α ε, U α ε ⟶ J α)
+    (hU : ∀ α ε,
+      IsClosedSubgroupScheme (uJ α ε).hom.hom ∧ Smooth (U α ε).X.hom ∧
+      ConnectedSpace (U α ε).X.left ∧
+      @TorusCharacterTangent.IsStable F _ T (J α) (aJ α) _ (uJ α ε) ∧
+      (GrpObj.differential (uJ α ε).hom.hom).toLinearMap.range =
+        RankOneRoots.weight T (J α) (aJ α)
+          (if ε then α.val.toMul else (-α.val).toMul))
+    (hcomm : ∀ α β : D, α ≠ β →
+      Commute (fst (U α false).X (U β true).X ≫ (uJ α false ≫ jH α).hom.hom)
+        (snd (U α false).X (U β true).X ≫ (uJ β true ≫ jH β).hom.hom)) :
+    ∃ (G : Grp (Over (Spec (.of F)))) (gH : G ⟶ H) (tG : T ⟶ G)
+      (jG : ∀ α, J α ⟶ G),
+      IsClosedSubgroupScheme gH.hom.hom ∧ tG ≫ gH = iT ∧
+      (∀ α, jG α ≫ gH = jH α) ∧
+      (∀ (K : Grp (Over (Spec (.of F)))) (kH : K ⟶ H),
+        IsClosedSubgroupScheme kH.hom.hom →
+        (∃ tK : T ⟶ K, tK ≫ kH = iT) →
+        (∀ α, ∃ jK : J α ⟶ K, jK ≫ kH = jH α) →
+          ∃ f : G ⟶ K, f ≫ kH = gH) ∧
+      Smooth G.X.hom ∧ ConnectedSpace G.X.left ∧
+      ReductiveTorusCentralizer.IsReductive G ∧
+      ReductiveTorusCentralizer.IsMaximalTorus tG ∧
+      (D = ∅ → IsIso tG) ∧
+      ∃ (aG : ModObj T.X G.X)
+        (Φ : Finset (Additive (RankOneRoots.Character T)))
+        (P : RootDatum Φ (Additive (RankOneRoots.Character T))
+          (Additive (RankOneRoots.Cocharacter T))) (b : P.Base),
+        Module.Finite ℤ (Additive (RankOneRoots.Character T)) ∧
+        Module.Finite ℤ (Additive (RankOneRoots.Cocharacter T)) ∧
+        aG.smul = RankOneRoots.adjointMap tG ∧ P.IsReduced ∧
+        (∀ ρ : Φ, P.root ρ = ρ.val) ∧
+        (∀ (χ : Additive (RankOneRoots.Character T))
+          (ν : Additive (RankOneRoots.Cocharacter T)),
+          ν.toMul.hom.hom ≫ χ.toMul.hom.hom =
+            (𝟙 (StandardGroupSchemes.multiplicative F)) ^ (P.toLinearMap χ ν)) ∧
+        (∀ χ : RankOneRoots.Character T,
+          Additive.ofMul χ ∈ Φ ↔ χ ∈ RankOneRoots.roots T G aG) ∧
+        (∀ χ : Additive (RankOneRoots.Character T),
+          χ ∈ D ↔ ∃ ρ : Φ, ρ ∈ b.support ∧ ρ.val = χ) ∧
+        (∀ ρ : Φ, RankOneRoots.IsGeometricCoroot tG ρ.val.toMul (P.coroot ρ).toMul) ∧
+        (∀ (α : D) (ρ : Φ), ρ.val = α.val → (P.coroot ρ).toMul = c α) ∧
+        ∀ (K : Grp (Over (Spec (.of F)))) (kG : K ⟶ G) (tK : T ⟶ K),
+          IsClosedSubgroupScheme kG.hom.hom →
+          ReductiveTorusCentralizer.IsReductive K →
+          ReductiveTorusCentralizer.IsMaximalTorus tK → tK ≫ kG = tG →
+          ∀ aK : ModObj T.X K.X, aK.smul = RankOneRoots.adjointMap tK →
+            ∀ ρ : Φ,
+              (∀ χ : RankOneRoots.Character T,
+                χ ∈ RankOneRoots.roots T K aK ↔
+                  Additive.ofMul χ = ρ.val ∨ Additive.ofMul χ = -ρ.val) →
+              ∀ d : RankOneRoots.Cocharacter T,
+                RankOneRoots.IsGeometricCoroot tK ρ.val.toMul d → d = (P.coroot ρ).toMul := by
+  sorry
+
+end AlgebraicGeometry

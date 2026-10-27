@@ -1,0 +1,294 @@
+{
+ "id": "lem-sfb-torus-etale-trivialization",
+ "kind": "statement",
+ "title": "An fppf torus splits on an etale cover",
+ "statement": "Let $S$ be any scheme [def-pc-scheme] and $T\\to S$ an $S$-group scheme, meaning an object of schemes over $S$ with multiplication, identity and inverse satisfying the group diagrams. Suppose $T$ is a relative torus [def-sfb-relative-torus]: there is an fppf covering family $S_i\\to S$ [def-pc-fppf-site] on which $T\\times_S S_i\\simeq\\mathbf G_{m,S_i}^{r_i}$ as group schemes for finite integers $r_i\\geq0$. Here $\\mathbf G_{m,W}(V)=\\Gamma(V,\\mathcal O_V)^\\times$ on $W$-schemes $V$, and rank zero denotes the trivial group. Then there exist a set-indexed family of schemes $U_j$, etale morphisms $U_j\\to S$ [def-weil-etale-morphism] with jointly covering images, finite-rank free abelian groups $M_j$, and isomorphisms of $U_j$-group schemes $T\\times_S U_j\\simeq D_{U_j}(M_j)$. Products are [def-pc-fibre-product]; $D_W(M)$ is obtained by gluing the affine diagonalizable groups $D_C(M)=\\operatorname{Spec}C[M]$ of [def-sfb-ring-diagonalizable-group] over affine opens $\\operatorname{Spec}C\\subset W$. No finite, connected, normal, Noetherian or henselian hypothesis on $S$ is required. The empty base and rank-zero tori are allowed.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Proposition B.3.4, printed pp.291-292, etale-local diagonalizability applied to fppf-local forms of a split torus; also the second sentence of the proof of Lemma 5.1.3, printed p.137. Read online; WANTED locally as literature/conrad-reductive-group-schemes.pdf. No Stacks tag states this relative reductive-group structural theorem."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fppf-site",
+  "def-weil-etale-morphism",
+  "def-pc-fibre-product",
+  "def-sfb-ring-diagonalizable-group",
+  "def-sfb-relative-torus"
+ ],
+ "proof": [
+  {
+   "text": "Put $P_r=D_S(\\mathbf Z^r)$ for $r\\geq0$. On $\\operatorname{Spec}A\\subset S$, a map $A[\\mathbf Z^r]\\to B$ of $A$-algebras is uniquely determined by the units that are the images of the $r$ basis monomials: the image of $e_{(a_1,\\ldots,a_r)}$ is $u_1^{a_1}\\cdots u_r^{a_r}$. The affine adjunction therefore identifies $P_r$ with the group functor of $r$ units. The displayed Hopf operations identify its multiplication, unit and inverse with the pointwise ones. These formulas commute with changing $A$ and with restrictions; the scheme-morphism gluing lemma glues the identifications and their inverses over affine opens. Thus the torus hypothesis supplies an fppf cover $\\{V_i\\to S\\}$ and group-scheme isomorphisms $P_{r_i}\\times_SV_i\\simeq T\\times_SV_i$, where each $r_i$ is finite. This also verifies directly that the construction $P_r$ commutes with base change.",
+   "uses": [
+    "def-sfb-ring-diagonalizable-group",
+    "lem-a1-locally-ringed-space-affine-adjunction",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-sfb-relative-torus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I1, lemma-morphism-into-affine; explicit group-algebra computation and the fppf-local torus definition."
+   }
+  },
+  {
+   "text": "For each fixed $r\\geq0$ define $F_r(W)=\\operatorname{Isom}_{W\\text{-gp}}(P_r\\times_SW,T\\times_SW)$ on $S$-schemes. This is an fppf sheaf, as follows. Given compatible isomorphisms on an fppf cover $W_a\\to W$, base-change that cover to $P_r\\times_SW$ and to $T\\times_SW$. The two resulting covers are fppf and hence fpqc. Representable fpqc descent glues the maps and their inverses uniquely. Equality of the composites with the identities, and equality of the two maps expressing preservation of multiplication, unit and inverse, can be tested on these covers and their base changes to the relevant products. Uniqueness in the same descent statement gives all those equalities over $W$. Hence the glued map is a group-scheme isomorphism. No affine or quasi-compact hypothesis on $W$ is used.",
+   "uses": [
+    "lem-trf-fppf-covering-base-change",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03O3, lemma-representable-sheaf-fpqc; topologies.tex Tags 021O and 022C."
+   }
+  },
+  {
+   "text": "Let $E_{ri}=\\operatorname{Isom}_{\\mathbf Z}(\\mathbf Z^{r_i},\\mathbf Z^r)$, a set, and put $L_{ri}=\\coprod_{e\\in E_{ri}}V_i$. The chosen splitting on $V_i$ identifies $F_r|_{V_i}$ with $h_{L_{ri}}$ on ALL $V_i$-schemes. Indeed, on each nonempty affine open of a test scheme, character duality says a homomorphism between the split diagonalizable groups is uniquely locally $D(u)$ for a lattice map $u$. Applying it also to the inverse, their two composites being identities says exactly that $u$ is invertible. Thus an isomorphism gives a locally constant function to $E_{ri}$. Conversely such a function gives the maps $D(u)$ on its open-and-closed fibres; these glue uniquely, with their inverses. Maps to $\\coprod_eV_i$ are precisely these labelled open-and-closed decompositions, by the coproduct's disjoint open images and universal property. This proves the asserted natural identification. Empty affine opens impose no condition; if $E_{ri}$ is empty, the represented functor has a section only on the empty test scheme.",
+   "uses": [
+    "lem-sfb-relative-diagonalizable-character-duality",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Appendix B.1, pp.280-281, character description; agent deduction of the split-isomorphism functor using the cited character-duality statement."
+   }
+  },
+  {
+   "text": "Form the scheme $U_r=\\coprod_iL_{ri}$ and the natural map $q_r:h_{U_r}\\to F_r$ from the local identifications. For any test scheme $Z$ and $a\\in F_r(Z)$, its sheaf pullback along $q_r$ is represented by $\\coprod_i(Z\\times_SV_i)$: a point of the pullback is exactly a choice of covering member together with the restriction of $a$, whose image in $L_{ri}$ is unique by step 3. This formula is compatible with restrictions and with coproduct components. The projection to $Z$ is surjective, flat and locally of finite presentation, since $\\{Z\\times_SV_i\\to Z\\}$ is the base-changed fppf cover; flatness and local finite presentation are local on the disjoint open source components. Thus $q_r$ satisfies every scheme-test hypothesis of the fppf atlas bootstrap. Since $F_r$ is a sheaf by step 2, that theorem makes $F_r$ an algebraic space. All these coproducts are set-indexed in the project's size convention.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-trf-fppf-covering-base-change",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-sfb-scheme-etale-source-target-properties",
+    "lem-sfb-fppf-space-atlas-bootstrap",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 04S6, theorem-final-bootstrap, condition (3); topologies.tex Tag 021O; descent.tex Tags 04R1,04R3 for source locality."
+   }
+  },
+  {
+   "text": "Choose a representable surjective etale scheme atlas $W_r\\to F_r$. Each $L_{ri}\\to V_i$ is etale: on each open component it is the identity, so the source-locality theorem applies (the empty source is allowed). Base change of the atlas identifies $W_r\\times_SV_i\\to L_{ri}$ with a representable etale scheme morphism. Its composite $W_r\\times_SV_i\\to V_i$ is therefore etale. The original fppf cover $\\{V_i\\to S\\}$ is an fpqc cover, so fpqc descent of etaleness for SCHEME morphisms shows that $W_r\\to S$ is etale. In this application the source is $W_r$, not the possibly nonschematic space $F_r$; hence no representability of $F_r\\to S$ is being presumed.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-scheme-etale-source-target-properties",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-galois-fpqc-descend-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02VN, lemma-descending-property-etale; morphisms.tex Tag 02GN; spaces.tex Tag 025Y for the atlas."
+   }
+  },
+  {
+   "text": "The set-indexed family $\\{W_r\\to S\\}_{r\\geq0}$ is jointly surjective. For $s\\in S$, choose $i$ and a point $v\\in V_i$ above $s$. The chosen splitting gives a section of $F_{r_i}$ over $V_i$, so its value at $v$ gives a point of $F_{r_i}$ above $s$. Surjectivity of $W_{r_i}\\to F_{r_i}$ lifts this point after a field extension, giving a point of $W_{r_i}$ above $s$. The atlas map $h_{W_r}\\to F_r$, evaluated at the identity of $W_r$, is by the definition of $F_r$ a group-scheme isomorphism $P_r\\times_SW_r\\simeq T\\times_SW_r$. Invert it and set $M_r=\\mathbf Z^r$ to obtain exactly the asserted trivializations. If $S$ is empty, take the empty family. Rank zero is included: $\\mathbf Z^0=0$ and its diagonalizable group is the trivial group.",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 025Y, definition-algebraic-space, surjectivity of the atlas; elementary evaluation of the isomorphism functor and covering argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-ring-diagonalizable-group",
+  "lem-a1-locally-ringed-space-affine-adjunction",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "def-sfb-relative-torus",
+  "lem-trf-fppf-covering-base-change",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-sfb-relative-diagonalizable-character-duality",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-sfb-scheme-etale-source-target-properties",
+  "lem-sfb-fppf-space-atlas-bootstrap",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "lem-galois-fpqc-descend-etale"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/bootstrap.tex",
+  "place": "Agent proof using character rigidity and the splitting-isomorphism fppf sheaves, with Tag 04S6 (theorem-final-bootstrap, condition (3)) and fpqc descent of etaleness. Conrad Proposition B.3.4, read online, supplies the statement, not this proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A torus that is an fppf local form of a finite product of multiplicative groups is split etale locally on any scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"Algebra.FormallyEtale.instForallOfFinite\", \"module\": \"Mathlib/RingTheory/Etale/Pi\", \"type\": \"∀ {R : Type u_1} {I : Type u_2} (A : I → Type u_3) [inst : CommRing R] [inst_1 : (i : I) → CommRing (A i)]\\n  [inst_2 : (i : I) → Algebra R (A i)] [Finite I] [∀ (i : I), Algebra.FormallyEtale R (A i)],\\n  Algebra.FormallyEtale R ((i : I) → A i)\", \"doc\": \"If $ I $ is a finite set and each algebra $ A_i $ over a commutative ring $ R $ is formally étale, then the product algebra $ \\\\prod_{i \\\\in I} A_i $ is also formally étale over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"Algebra.FormallyEtale.pi_iff\", \"module\": \"Mathlib/RingTheory/Etale/Pi\", \"type\": \"∀ {R : Type u_1} {I : Type u_2} (A : I → Type u_3) [inst : CommRing R] [inst_1 : (i : I) → CommRing (A i)]\\n  [inst_2 : (i : I) → Algebra R (A i)] [Finite I],\\n  Algebra.FormallyEtale R ((i : I) → A i) ↔ ∀ (i : I), Algebra.FormallyEtale R (A i)\", \"doc\": \"Given a finite index set $ I $ and a commutative ring $ R $, the product algebra $ \\\\prod_{i \\\\in I} A_i $ over $ R $ is formally étale if and only if each component algebra $ A_i $ is formally étale ov\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"Algebra.Etale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib/RingTheory/Etale/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A],\\n  Algebra.Etale K A ↔\\n    ∃ I, ∃ (_ : Finite I), ∃ Ai x x_1 x_2, ∀ (i : I), Module.Finite K (Ai i) ∧ Algebra.IsSeparable K (Ai i)\", \"doc\": \"An algebra $ A $ over a field $ K $ is étale if and only if there exists a finite index set $ I $ and a family of fields $ \\\\{A_i\\\\}_{i \\\\in I} $, each equipped with a $ K $-algebra structure, such that \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern etale morphisms, abstract root pairings or Lie algebras, not relative reductive groups, their maximal tori or root-line/coroot structure"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite presentation multiplicative type group scheme is diagonalizable after an etale cover",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ {Q : AlgebraicGeometry.AffineTargetMorphismProperty} [Q.IsLocal], Q.diagonal.IsLocal\", \"doc\": \"If a property $ Q $ of morphisms with affine targets is local on the target scheme, then the diagonal property $ Q $ (preserved under pullbacks along open immersions from affine schemes) is also local\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) {Q : AlgebraicGeometry.AffineTargetMorphismProperty}\\n  [AlgebraicGeometry.HasAffineProperty P Q], AlgebraicGeometry.HasAffineProperty P.diagonal Q.diagonal\", \"doc\": \"If a morphism property $P$ has the affine property with respect to another property $Q$ in the category of schemes, then the diagonal morphism property of $P$ also has the affine property with respect\"}\n  {\"name\": \"AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  AlgebraicGeometry.IsZariskiLocalAtTarget P.diagonal\", \"doc\": \"If a morphism property $P$ on schemes is Zariski local at the target, then the diagonal morphism property $P.diagonal$ (defined via pullbacks) is also Zariski local at the target. This asserts that th\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) {Q : AlgebraicGeometry.AffineTargetMorphismProperty}\\n  [AlgebraicGeometry.HasAffineProperty P Q] {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (𝒰 : Y.OpenCover)\\n  [inst : ∀ (i : 𝒰.I₀), AlgebraicGeometry.IsAffine (𝒰.X i)]\\n  (𝒰' : (i : 𝒰.\", \"doc\": \"Let $ f: X \\to Y $ be a morphism of schemes where $ Y $ is affine. Suppose $ \\\\mathcal{U} $ is an open cover of $ Y $ such that each $ \\\\mathcal{U}.X_i $ is affine, and for each $ i $, the pullback of $ \"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"AlgebraicGeometry.AffineTargetMorphismProperty → AlgebraicGeometry.AffineTargetMorphismProperty\", \"doc\": \"For any scheme $X$ and affine scheme $x$, given a morphism $f: X \\\\to x$, and for any affine schemes $U_1, U_2$ with open immersions $f_1: U_1 \\\\to X$ and $f_2: U_2 \\\\to X$, the property $P$ holds for th\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) {Q : AlgebraicGeometry.AffineTargetMorphismProperty}\\n  [AlgebraicGeometry.HasAffineProperty P Q] {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (𝒰 : Y.OpenCover)\\n  [inst : ∀ (i : 𝒰.I₀), AlgebraicGeometry.IsAffine (𝒰.X i)],\\n  (∀ (i : 𝒰.to\", \"doc\": \"Let $ f : X \\to Y $ be a morphism of schemes, and let $ \\\\mathcal{U} $ be an open cover of $ Y $ by affine schemes. If for each $ i $, the pullback of $ f $ to $ \\\\mathcal{U}_i $ satisfies the diagonal p\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.FormallyUnramified f]\\n  [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"If a morphism of schemes is formally unramified and locally of finite type, then its diagonal morphism in the pullback is an open immersion.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern etale morphisms, abstract root pairings or Lie algebras, not relative reductive groups, their maximal tori or root-line/coroot structure"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"IsEtale\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern etale morphisms, abstract root pairings or Lie algebras, not relative reductive groups, their maximal tori or root-line/coroot structure"
+  },
+  {
+   "tool": "grep",
+   "query": "[Tt]orus|[Tt]ori|[Mm]ultiplicative[Tt]ype",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"line\": \"12\", \"text\": \"/-! # Functoriality of Proj -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"line\": \"137\", \"text\": \"  simp only [GradedRingHom.toRingHom_eq_toRingHom, Localization.localRingHom_mk,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"line\": \"138\", \"text\": \"    GradedRingHom.coe_toRingHom]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"line\": \"147\", \"text\": \"/-- Functoriality of `Proj`. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"line\": \"802\", \"text\": \"    (Q := AtPrime 𝒜 x.1.asHomogeneousIdeal.toIdeal)).toRingEquiv.toCommRingCatIso\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/Sigma.lean\", \"line\": \"71\", \"text\": \"/-- Collapsing a cover to a single object cover is functorial. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Scheme.lean\", \"line\": \"639\", \"text\": \"  X.toLocallyRingedSpace.toRingedSpace.basicOpen f\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Scheme.lean\", \"line\": \"740\", \"text\": \"def zeroLocus {U : X.Opens} (s : Set Γ(X, U)) : Set X := X.toRingedSpace.zeroLocus s\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Scheme.lean\", \"line\": \"748\", \"text\": \"  X.toRingedSpace.zeroLocus_isClosed s\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Scheme.lean\", \"line\": \"752\", \"text\": \"  X.toRingedSpace.zeroLocus_singleton f\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Scheme.lean\", \"line\": \"757\", \"text\": \"  X.toRingedSpace.zeroLocus_empty_eq_univ\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"line\": \"102\", \"text\": \"      (fun _ _ ↦ .all _ _)).toRingHom\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"line\": \"343\", \"text\": \"    (AlgEquiv.ofInjective (Algebra.ofId O K) (IsFractionRing.injective _ _)).toRingEquiv\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"line\": \"344\", \"text\": \"  let φ'' := e.symm.toRingHom.comp ((Subring.inclusion hφ').comp (RingHom.rangeRestrict _))\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean\", \"line\": \"83\", \"text\": \"    X.toΓSpecFun ⁻¹' basicOpen r = SetLike.coe (X.toRingedSpace.basicOpen r) := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean\", \"line\": \"87\", \"text\": \"      rw [X.toRingedSpace.mem_top_basicOpen]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean\", \"line\": \"95\", \"text\": \"  exact (X.toRingedSpace.basicOpen r).2\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean\", \"line\": \"111\", \"text\": \"theorem toΓSpecMapBasicOpen_eq : X.toΓSpecMapBasicOpen r = X.toRingedSpace.basicOpen r :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean\", \"line\": \"124\", \"text\": \"      (X.toRingedSpace.isUnit_res_basicOpen r)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"line\": \"177\", \"text\": \"    (RingEquiv.ofBijective _ hbij).symm.toRingHom.comp β.hom.rangeRestrict\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Spec.lean\", \"line\": \"190\", \"text\": \"  isLocalRing x := (stalkIso R x).toRingEquiv.isLocalRing\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Spec.lean\", \"line\": \"228\", \"text\": \"    CommRingCat.ofHom (stalkIso R (PrimeSpectrum.comap f.hom p)).symm.toRingHom ≫\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Spec.lean\", \"line\": \"231\", \"text\": \"        CommRingCat.ofHom (stalkIso S p).toRingHom =\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Spec.lean\", \"line\": \"324\", \"text\": \"        x.asIdeal).toRingEquiv.toCommRingCatIso.hom by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ResidueField.lean\", \"line\": \"179\", \"text\": \"    (asIso (f.stalkMap x)).commRingCatIsoToRingEquiv).toCommRingCatIso.isIso_hom\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern etale morphisms, abstract root pairings or Lie algebras, not relative reductive groups, their maximal tori or root-line/coroot structure; grep restricted to AlgebraicGeometry; substring tori also hits functoriality and toRingHom"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic tori split etale locally over arbitrary base schemes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib.RingTheory.Etale.Field\", \"type\": \"[EssFiniteType K A] :\\n  FormallyEtale K A ↔\\n    ∃ (I : Type u) (_ : Finite I) (Ai : I → Type u) (_ : ∀ i, Field (Ai i)) (_ : ∀ i, Algebra K (Ai i)) (_ :\\n      A ≃ₐ[K] Π i, Ai i), ∀ i, Algebra.IsSeparable K (Ai i)\", \"doc\": \"A finitely generated algebra $ A $ over a field $ K $ is formally étale if and only if there exists a finite index set $ I $ and a family of field extensions $ \\\\{A_i\\\\}_{i \\\\in I} $, each separable over\"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": PropertyIsLocal Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \"(X : Scheme.{u}) : GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"Algebra.FormallyEtale.of_isSeparable\", \"module\": \"Mathlib.RingTheory.Etale.Field\", \"type\": \"[Algebra.IsSeparable K L] : FormallyEtale K L\", \"doc\": \"If an algebra $ L $ over a commutative ring $ K $ is separable, then it satisfies the infinitesimal lifting property characterizing formally étale morphisms in algebraic geometry.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": GrothendieckTopology Scheme.{u}\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"Algebra.Etale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The property of an algebra $ A $ over a commutative ring $ R $ being étale.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern etale morphisms, abstract root pairings or Lie algebras, not relative reductive groups, their maximal tori or root-line/coroot structure"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A torus over any scheme that splits fppf locally is split after an etale covering",
+   "results": "{\"t\": \"2026-10-24T10:21:07Z\", \"tool\": \"leanfinder\", \"query\": \"A torus over any scheme that splits fppf locally is split after an etale covering\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.IsEtale.of_comp\"], \"digest\": \"b9fc085279612d9f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits describe etale morphisms, etale algebras, abstract root pairings or arithmetic integer matrices, not fppf forms of relative scheme tori"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"IsEtale\"",
+   "results": "{\"t\": \"2026-10-24T10:21:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"IsEtale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: zero hits"
+  },
+  {
+   "tool": "grep",
+   "query": "IsTorus|splitTorus|diagonali[sz]able",
+   "results": "{\"t\": \"2026-10-24T10:21:38Z\", \"tool\": \"grep\", \"query\": \"IsTorus|splitTorus|diagonali[sz]able\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: zero hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An fppf local form of a split multiplicative torus has an etale splitting cover",
+   "results": "{\"t\": \"2026-10-24T10:22:42Z\", \"tool\": \"leansearch\", \"query\": \"An fppf local form of a split multiplicative torus has an etale splitting cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale.propertyIsLocal\", \"Algebra.FormallyEtale.of_isSeparable\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"RingHom.FormallyEtale\", \"Algebra.Etale.casesOn\", \"Algebra.FormallyEtale.instTensorProduct\", \"RingHom.Etale.ofLocalizationSpan\", \"Algebra.FormallyEtale.localization_base\"], \"digest\": \"b0b8efbb89383aec\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits describe etale morphisms, etale algebras, abstract root pairings or arithmetic integer matrices, not fppf forms of relative scheme tori"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Isomorphisms between finite rank split tori are locally constant invertible integer matrices",
+   "results": "{\"t\": \"2026-10-24T10:22:44Z\", \"tool\": \"leanfinder\", \"query\": \"Isomorphisms between finite rank split tori are locally constant invertible integer matrices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.SpecialLinearGroup.discreteSpecialLinearGroupIntRange\", \"RootPairing.Equiv.toEndUnit\", \"SpecialLinearGroup.centerEquivRootsOfUnity_invFun\", \"Matrix.SpecialLinearGroup.isEmbedding_mapGL\", \"SpecialLinearGroup.centerEquivRootsOfUnity_symm_apply\", \"SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq\", \"SpecialLinearGroup.centerEquivRootsOfUnity\", \"NumberField.mixedEmbedding.fundamentalCone.realSpaceToLogSpace_completeFamily_of_ne\"], \"digest\": \"540e2fc3028b9c3b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits describe etale morphisms, etale algebras, abstract root pairings or arithmetic integer matrices, not fppf forms of relative scheme tori"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-etale-pinned-splitting",
+  "date": "2026-10-24",
+  "group": "N9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Lemma 5.1.3 and Proposition 5.1.6, printed pp.136-138; Definition 6.1.1 and its following paragraph, p.186; affine localization of the etale neighborhoods; Proposition B.3.4, printed pp.291-292, etale-local diagonalizability applied to fppf-local forms of a split torus; also the second sentence of the proof of Lemma 5.1.3, printed p.137. No imported blueprint ancestor exists (blueprint_refs.py ancestor returns None).",
+   "via": [
+    "lem-sfb-reductive-etale-pinned-splitting",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-torus-etale-trivialization",
+  "worker": "stage1",
+  "summary": "Splits arbitrary-base torus trivialization through splitting-isomorphism fppf sheaves, the existing ring character-duality theorem, the existing fppf atlas bootstrap and scheme fpqc descent of etaleness. All substantial lemmas already exist: no new nodes. Statement and its arbitrary/empty-base and variable-rank clauses preserved. No Lean declaration attaches. No SGA source used.",
+  "blueprint": "Supporting torus input below det-thm-sf-ctf-stability-direct-images (3), through the existing pinned-splitting dependency chain in blueprint.from: upgrade fppf torus forms to etale splitting. Current latest blueprint unit/direct-image proof read; no imported blueprint ancestor or equivalent torus node was found.",
+  "tool_uses": [
+   {
+    "node": "lem-galois-fpqc-descend-etale",
+    "why": "Generic scheme/space descent or affine adjunction input used exactly as stated; the constructible-stability unit has no substitute for this general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-galois-fpqc-descend-etale"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-22d563aa5",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-22d563aa5 (reviewer sub-agent of L); spot-checked: I read the item and every cited statement. The statement and its stmt_deps are unchanged, and the delivery adds no new nodes. The six steps are a correct proof that works over any base. Step 1: the affine adjunction, the Laurent/Hopf formulas and gluing turn the def-sfb-relative-torus functor isomorphisms into group-scheme splittings P_{r_i}xV_i = TxV_i. Step 2: F_r = Isom_gp(P_r, T) is an fppf sheaf by fppf base change, fppf being fpqc, and representable fpqc descent (existence and uniqueness). Step 3: character duality (A nonzero, finite free lattices) gives F_r|V_i = h_{L_ri}, with L_ri the coproduct of copies of V_i indexed by Isom(Z^{r_i},Z^r); this set is empty when the ranks differ, which is handled. Step 4: I recomputed h_Z x_F U_r as the coproduct of the Z x_S V_i. This is the base-changed fppf cover, so the fppf atlas bootstrap applies, and it matches Stacks 04S6 condition (4) in bootstrap.tex. Step 5: W_r x_S V_i equals the pullback of h_{W_r} and h_{L_ri} over F_r, which is étale over L_ri, which is étale over V_i; fpqc descent of étaleness for scheme maps then makes W_r -> S étale. Step 6: joint surjectivity comes from the splitting section and atlas surjectivity, and the tautological section gives the trivialization; the empty base and rank 0 are covered. No Noetherian or normality hypothesis is used. There is no cycle, and no duplicate: lem-sfb-normal-torus-finite-etale-splitting is only a special case. Batch-5 flags: lem-trf-fppf-covering-base-change and lem-trf-fppf-covering-is-fpqc are generic Mathlib-leaf site facts, and def-trf-algebraic-space is a general definition. The closures of character-duality, étale-source-target and the bootstrap reach only these generic foundations, none of which is part of the trace formula or Poincaré duality, so all flags are accepted. I accept the declared tool_use for lem-galois-fpqc-descend-etale (unit sk-prop-h2), used as stated. Conrad B.3.4 is not available locally; the agent-written proof was checked on its own. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TorusEtaleTrivialization",
+  "declaration": "AlgebraicGeometry.torus_etale_trivialization",
+  "file": "lean/Sheaf/AlgebraicGeometry/TorusEtaleTrivialization.lean",
+  "statement": "theorem torus_etale_trivialization (S : Scheme.{u}) (T : Over S) [GrpObj T] (hT : IsRelativeTorus T) : ∃ (J : Type u) (U : J → Over S) (M : J → AddCommGrpCat.{u}), (∀ j : J, Etale (U j).hom) ∧ (∀ s : S, ∃ (j : J) (x : (U j).left), (U j).hom x = s) ∧ (∀ j : J, Module.Free ℤ (M j) ∧ Module.Finite ℤ (M j)) ∧ ∀ j : J, Nonempty ((Over.pullback (U j).hom).mapGrp.obj (Grp.mk T) ≅ (Over.pullback (U j).left.toSpecΓ).mapGrp.obj (ringDiagonalizableGroup Γ((U j).left, ⊤) (M j)))",
+  "branch": "newtargets-dag",
+  "by": "Q155",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-892aaf902",
+  "group": "Q155",
+  "result": "pass",
+  "note": "torus_etale_trivialization matches the node clause by clause: arbitrary S : Scheme.{u}; T : Over S with GrpObj; the recorded IsRelativeTorus unchanged (Type u fppf cover, varying ranks); conclusion has J : Type u, Etale maps (current Mathlib class), every point of S covered, M_j free and finite over Z, and Nonempty isos in Grp (Over U_j) of T pulled back vs the pullback along Scheme.toSpecΓ of ringDiagonalizableGroup Γ(U,⊤) M = U ×_Z Spec Z[M], i.e. the node's gluing of Spec C[M] (canonical, not hollow). No extra hypotheses; empty base, rank 0, infinite/varying covers and non-affine U_j allowed; universes consistent and not vacuous. Node copy = side-live plus the lean record only; both dep def nodes byte-identical; lean.statement verbatim; docstrings carry source place, blueprint tag and the six proof steps; proof is sorry; imports exist. normal_torus_finite_etale_splitting is a special case, not a duplicate. No file changed, no compile run."
+ }
+}

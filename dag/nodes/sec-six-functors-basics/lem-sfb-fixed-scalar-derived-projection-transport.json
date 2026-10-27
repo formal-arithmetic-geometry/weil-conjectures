@@ -1,0 +1,121 @@
+{
+ "id": "lem-sfb-fixed-scalar-derived-projection-transport",
+ "kind": "statement",
+ "title": "The site comparison transports projection invertibility on its bounded-below domain",
+ "statement": "Let B be a Grothendieck abelian symmetric monoidal closed coefficient category with functorial flat resolutions. Assume etale, pro-etale and comparison inverse images preserve flat objects. For p:X -> Y qcqs, etale complexes C,D such that C and C tensor^L Lp*D are bounded below, invertibility of the etale right-adjoint projection arrow at (C,D) implies invertibility of the ordinary pro-etale projection at (Lnu_X*C,Lnu_Y*D). The maps are the specified right-adjoint projection maps of the canonical derived pullback tensor comparisons.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-finite.proof.md",
+  "place": "Coefficient transport and clauses (2)--(3), canonical-map identifications."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-derived-tensor-hom",
+  "def-weil-pbc-site-comparison-morphism"
+ ],
+ "proof": [
+  {
+   "text": "The exact monoidal comparison-pullback square induces the canonical derived monoidal square. The mate of this square is invertible on each of C and C tensor^L Lp*D by the qcqs bounded-below direct-image comparison. Apply the general transport theorem for right-adjoint projection maps along a compatible tensor square. Its counit calculation gives the asserted isomorphism without assuming either direct image is bounded.",
+   "uses": [
+    "sk-thm-pe-direct-image-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-thm-pe-direct-image-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-finite.proof.md",
+  "place": "Expanded normalized coefficient transport; existing source-library proofs are used where available."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact equivalence of abelian categories transports proper base change on a bounded below etale origin and the canonical derived projection formula through a monoidal adjunction square",
+   "results": "Functor.mapDerivedCategory, mapDerivedCategoryFactors, mapDerivedCategoryFactorsh; Ext.mapExactFunctor, Ext.mapExactFunctor_hom; Functor.exact_tfae; TwoSquare.instIsIsoFunctorLanBaseChangeOfGuitartExact; IsEtale.instIsStableUnderBaseChangeScheme.",
+   "date": "2026-10-23",
+   "verdict": "No geometric torsion-derived proper-exchange or projection-transport theorem in Mathlib. Reuse the existing project source theorem named in the Lean attachment."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIso\", \"mateEquiv\"",
+   "results": "0 hits",
+   "date": "2026-10-23",
+   "verdict": "No match; existing project source proof is used."
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_derivedBaseChangeMap|isIso_rightDerivedLowerStarProjectionMap|projection.*mate",
+   "results": "0 hits",
+   "date": "2026-10-23",
+   "verdict": "No Mathlib match; existing project source proof is used."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The mate of a pullback composition isomorphism under derived pullback pushforward adjunctions is the proper base change natural transformation on sheaves, and derived projection formula transports across exact equivalences",
+   "results": "SheafOfModules.conjugateEquiv_pullbackComp_inv; PresheafOfModules.pullback_comp_id; SheafOfModules.PullbackConstruction.adjunction; CategoryTheory.toOverPullbackIsoToOver; SheafOfModules.pullbackComp; PresheafOfModules.pullbackComp; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.pullbackIso",
+   "date": "2026-10-24",
+   "verdict": "General adjunction, equivalence and underived module-sheaf pullback comparisons; no match for the specified geometric derived operation statement. Reuse the recorded source-library proof or construct the operation from the existing geometric adjunction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteProperBaseChange",
+  "date": "2026-10-23",
+  "group": "E8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-finite",
+   "place": "Proof, coefficient transport and canonical exchange/projection comparisons.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarProjComparison",
+  "file": null,
+  "declaration": "AlgebraicGeometry.ProEtale.isIso_rightDerivedLowerStarProjectionMap_app_app_leftDerived",
+  "statement": "theorem isIso_rightDerivedLowerStarProjectionMap_app_app_leftDerived\n    [QuasiCompact g] [QuasiSeparated g]\n    (M : DerivedCategory (Sheaf Z.smallEtaleTopology A))\n    (L : DerivedCategory (Sheaf Y.smallEtaleTopology A))\n    (hM : DerivedCategory.TStructure.t.plus M)\n    (hML : DerivedCategory.TStructure.t.plus\n      (((Etale.derivedTensor A Z).obj M).obj ((L(Etale.upperStar A g)).obj L)))\n    [IsIso (((Etale.rightDerivedLowerStarProjectionMap A g).app M).app L)] :\n    IsIso (((ProEtale.rightDerivedLowerStarProjectionMap A g).app\n      ((L(ν^*(Z)[A])).obj M)).app ((L(ν^*(Y)[A])).obj L))",
+  "branch": "sheaf-dag",
+  "by": "E8",
+  "date": "2026-10-23",
+  "note": "Existing proved source-library declaration, reused without changing its signature, attributes, imports or body. The declaration proof has no sorry, but this does not claim its transitive dependencies have no sorry. The node records the fixed-scalar presentation needed by the item; no new Lean declaration is introduced."
+ },
+ "lean_audit": {
+  "slopmaster2": {
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.isIso_rightDerivedLowerStarProjectionMap_app_app_leftDerived",
+     "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarProjComparison"
+    }
+   ]
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-ac14d",
+  "group": "E8",
+  "result": "fix",
+  "landing": "20261024T185110-L-3396084",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-ac14d",
+  "group": "E8",
+  "result": "fix",
+  "landing": "20261024T185110-L-3396084",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 4 new modules and 7 node files vs clones/live (signature, lean records, change record users, owners of reused source decls, unit realized=[]), the two sorried encoding statements vs the pinned Encoding structure and the existing qcqs-only exchange identification"
+ }
+}

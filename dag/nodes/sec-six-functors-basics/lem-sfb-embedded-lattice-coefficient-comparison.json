@@ -1,0 +1,256 @@
+{
+ "id": "lem-sfb-embedded-lattice-coefficient-comparison",
+ "kind": "statement",
+ "title": "Condensed and continuous coefficient presentations of embedded lattices",
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$ with topological valuation ring $A=\\mathcal O_E$ [def-weil-l-adic-coefficient-extension]. Let $X$ be any scheme and work in the universes of [def-weil-size-convention] on $X_{\\mathrm{proét}}$ [def-weil-pbc-proetale-site]. Write $A_X,E_X$ for the pulled-back condensed ring objects [sk-def-sfb-pulled-back-coefficients], with the inclusion induced by $A\\hookrightarrow E$, and use module objects [sk-def-sfb-module-objects]. Write $A_X^c(U)=C(|U|,A)$ and $E_X^c(U)=C(|U|,E)$ for the continuous-function coefficient sheaves. Let $L$ be an $E_X$-module pro-étale locally free of finite rank, and let $L^c$ denote its transport to $E_X^c$-module sheaves [def-weil-sheaf-of-modules-category].\n\nThe canonical coefficient comparisons $A_X\\simeq A_X^c$ and $E_X\\simeq E_X^c$ intertwine the integral inclusion and identify $A_X[1/\\ell]$ with $E_X$. For every site object $U$, they induce a bijection, compatible with all restrictions, between embedded locally finite free $A_U$-submodules $N\\subseteq L|_U$ with $N[1/\\ell]=L|_U$ and isomorphism classes of pairs $(M,\\alpha)$ with $M$ a locally finite free $A_U^c$-module and $\\alpha:E_U^c\\otimes_{A_U^c}M\\xrightarrow{\\sim}L^c|_U$ [def-pur-sheaf-tensor-product]. Equivalence of pairs means an integral isomorphism intertwining $\\alpha$. The inverse bijection takes the embedded image of $m\\mapsto\\alpha(1\\otimes m)$ and transports it back. The localization/scalar-extension identification is $m/\\ell^n\\mapsto\\ell^{-n}\\otimes m$, with inverse $(a/\\ell^n)\\otimes m\\mapsto am/\\ell^n$, locally on the site. On any trivialization $L|_U\\simeq E_U^r$ the class of $(g(A_U^c)^r,\\alpha_g)$, where $\\alpha_g:E_U^c\\otimes_{A_U^c}g(A_U^c)^r\\xrightarrow{\\sim}(E_U^c)^r\\simeq L^c|_U$ is the scalar-extension isomorphism induced by the inclusion $g(A_U^c)^r\\subseteq(E_U^c)^r$ and the transported trivialization, corresponds to $gA_U^r$ for every $g\\in\\operatorname{GL}_r(E)$, including $r=0$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-scheme.proof.md",
+  "place": "(1), coefficient comparison and image of a rationalized lattice pair; old proof steps 1–2"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-size-convention",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-sfb-embedded-ell-lattice",
+  "def-sfb-integral-lattice-pairs",
+  "def-sfb-continuous-lattice-coefficients",
+  "def-sfb-continuous-coefficient-module-equivalence-universe",
+  "def-weil-pbc-integral-localization-telescope",
+  "lem-sfb-continuous-ring-universe-realization",
+  "lem-weil-pbc-lattice-pair-restriction",
+  "def-sfb-continuous-ring-canonical-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Apply the continuous-ring universe comparison to A and E. The transpose under the inverse-image adjunction computes by precomposition of continuous functions. Naturality in the coefficient inclusion gives the commuting square.",
+   "uses": [
+    "lem-sfb-continuous-ring-universe-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct a regular additive telescope on compact profinite tests with leg a |-> a/ell^n. The norm-unit-ball description of the integral coefficient ring and compact boundedness produce a denominator for every continuous E-valued function. Injectivity of the subtype inclusion proves the filtered-colimit equality relation. Sheafification and inverse image preserve this colimit; transport through the coefficient comparisons gives the scheme cocone. Its zeroth-leg formula and the cocone recurrence, cancelling ell in E pointwise, give every nth-leg formula.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-pbc-integral-regular-telescope"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the slice scalar-extension fraction theorem to each integral module M. Its forward and balanced inverse formulas are precisely the two displayed normalization equations.",
+   "uses": [
+    "lem-sfb-lattice-scalar-extension-fractions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a pair P, construct its image as the sectionwise linear-map range of pairEmbedding. The coefficient inclusion is pointwise injective, so the already proved lattice-image locality theorem identifies the pair module with this range presheaf. Transport its sheaf and finite local freeness properties along that explicit isomorphism. Local numerator representatives of the inverse rationalization show that this image is full.",
+   "uses": [
+    "lem-weil-pbc-lattice-image-locality",
+    "lem-sfb-lattice-scalar-extension-fractions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Given an embedded lattice N, its explicit submodule sheaf and the canonical full-lattice rationalization give an integral pair. The unit normalization identifies its image sectionwise with N, proving surjectivity. Equality of embedded lattices is equality of submodule families by proof irrelevance. The pair image classification theorem therefore identifies the kernel of the constructed surjection with equivalence of pairs.",
+   "uses": [
+    "lem-sfb-full-embedded-lattice-rationalization",
+    "lem-weil-pbc-lattice-pair-image-classification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The constructed submodule is the sectionwise range, so its image formula holds directly. Use the existing restriction-image theorem for slice compatibility. The existing matrix integral-pair existence theorem supplies a pair for every frame and matrix, and its image equation yields the exact matrix label, including rank zero.",
+   "uses": [
+    "lem-weil-pbc-lattice-pair-restriction",
+    "lem-weil-pbc-constant-matrix-lattice-pair"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-continuous-ring-universe-realization",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-pbc-integral-regular-telescope",
+  "lem-sfb-lattice-scalar-extension-fractions",
+  "lem-weil-pbc-lattice-image-locality",
+  "lem-sfb-full-embedded-lattice-rationalization",
+  "lem-weil-pbc-lattice-pair-image-classification",
+  "lem-weil-pbc-lattice-pair-restriction",
+  "lem-weil-pbc-constant-matrix-lattice-pair"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-scheme.proof.md",
+  "place": "proof (1); explicit compact-test coefficient colimit and sectionwise image classifier, with local-fraction and full-lattice rationalization lemmas"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Embedded lattices over pulled back condensed integral coefficients are naturally classified by isomorphism classes of finite locally free continuous coefficient modules whose scalar extension is a fixed lisse rational module",
+   "results": "8 hits: Condensed.finFree, Condensed.profiniteFree, Condensed.free, LightCondensed.free, Condensed.profiniteSolid, CondensedMod, CondensedMod.LocallyConstant.functor, LightCondMod. Inspected the returned signatures: condensed free modules, discrete condensed modules, ideal-sheaf order lattices and localization of a sheafification functor do not compare integral lattice embeddings with rationalized pairs.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"localization\"",
+   "results": "1 hits: PresheafOfModules.instIsLocalizationSheafOfModulesSheafificationInverseImageFunctorOppositeAbWToPresheaf. Inspected the returned signatures: condensed free modules, discrete condensed modules, ideal-sheaf order lattices and localization of a sheafification functor do not compare integral lattice embeddings with rationalized pairs.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ll]attice.*[Ss]heaf|[Ss]heaf.*[Ll]attice|[Cc]ondensed.*[Ll]attice|[Ll]ocalization.*[Ss]heafOfModules",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean. Inspected the returned signatures: condensed free modules, discrete condensed modules, ideal-sheaf order lattices and localization of a sheafification functor do not compare integral lattice embeddings with rationalized pairs.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compare embedded integral lattices with rationalized module pairs after identifying condensed p adic coefficients with continuous function sheaves",
+   "results": "8 hits: PadicInt.instCoePadic, IsIntegral.ratCast_iff, CondensedMod.isDiscrete_tfae, NumberField.canonicalEmbedding.latticeBasis, PadicInt.coe_intCast, IsZLattice.congr_simp, PadicInt.isOpenEmbedding_coe, PadicInt.withValIntegersRingEquiv. Inspected the returned signatures: condensed free modules, discrete condensed modules, ideal-sheaf order lattices and localization of a sheafification functor do not compare integral lattice embeddings with rationalized pairs.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lattice.*sheaf|sheaf.*lattice|condensed.*localization",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean. All five hits are order-lattice instances for ideal sheaves in AlgebraicGeometry/IdealSheaf/Basic.lean, not integral embedded lattice modules.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"tensor\"",
+   "results": "0 hits: . No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Embedded finite locally free integral lattice submodules correspond to integral module pairs with a fixed rationalization over continuous p adic coefficient sheaves",
+   "results": "8 hits: ZLattice.module_finite, NumberField.mixedEmbedding.idealLattice, Rat.HeightOneSpectrum.adicCompletion.padicEquiv_bijOn, Profinite.NobelingProof.Nobeling_aux, Rat.HeightOneSpectrum.adicCompletionIntegers.coe_padicIntEquiv_apply, Rat.HeightOneSpectrum.adicCompletionIntegers.padicIntEquiv, instModuleFinite_of_discrete_submodule, Padic.adicCompletionEquiv. First query returned real Z-lattices, number-field embeddings and padic completion equivalences. Second query returned local generators and affine tilde sections. Read Sheaf/Generators.lean: generating data does not classify rationalized embedded lattice pairs.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral lattice embeddings and finite locally free sheaves with chosen rational scalar extension are equivalent",
+   "results": "8 hits: IsIntegral.ratCast_iff, LinearMap.extendScalarsOfIsLocalizationEquiv, LinearEquiv.extendScalarsOfIsLocalizationEquiv, NumberField.canonicalEmbedding.latticeBasis, NumberField.canonicalEmbedding_eq_basisMatrix_mulVec, NumberField.integralBasis_repr_apply, Module.FinitePresentation.linearEquivMapExtendScalars, ZLattice.comap_equiv. Read Localization/Module.lean lines 231 and 249: these compare linear maps between modules already over a localization. FinitePresentation.lean line 656 localizes a Hom module, not sheaves or embedded lattices. Other hits concern number fields and real Z-lattices.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a sheaf of rings R and localization S finite locally free R modules with isomorphism S tensor M to L determine embedded R submodules of L",
+   "results": "8 hits: SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.LocalGeneratorsData.I, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.LocalGeneratorsData, ModuleCat.Tilde.Localizations, ModuleCat.Tilde.sectionsSubmodule. First query returned real Z-lattices, number-field embeddings and padic completion equivalences. Second query returned local generators and affine tilde sections. Read Sheaf/Generators.lean: generating data does not classify rationalized embedded lattice pairs.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-lem-stratified-lattice-scheme",
+  "date": "2026-10-22",
+  "group": "Q42"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-stratified-lattice",
+ "blueprint": {
+  "from": {
+   "node": "det-lem-stratified-lattice-scheme",
+   "place": "(1), coefficient comparison and image of a rationalized lattice pair; old proof steps 1–2",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-embedded-lattice-coefficient-comparison",
+  "worker": "stage1",
+  "summary": "Expanded coefficient naturality, internal/sectionwise module transport, local localization formulas, injection and range sheaf construction, inverse pairs, restriction compatibility, and every constant matrix label including rank zero. Reused existing DAG results; no new nodes. Statement unchanged. Repair of the returned head e3445cacccc: rebased through the delivery overlay onto the current live unsplit item, re-read every cited statement, and made the fraction-relation and slice-restriction checks explicit. No cited statement or statement dependency changed.",
+  "blueprint": "Realizes coefficient and embedded-image interpretation underlying (1) of det-lem-stratified-lattice-scheme.proof.md; no representability or lattice-coset local-constancy assertion is used.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-continuous-ring-universe-realization",
+    "why": "Generic comparison for arbitrary totally disconnected topological rings and universes, used for both A and E; the lattice unit does not construct this coefficient realization."
+   },
+   {
+    "node": "det-prop-sfb-qlbar-colimit-x-invert-ell",
+    "why": "The coefficient chapter supplies the ring localization A_X[1/ell]=E_X, needed before interpreting rationalized lattice pairs."
+   },
+   {
+    "node": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "why": "Generic equivalence of internal and sectionwise module categories, preserving the underlying sheaf; used only as a presentation tool."
+   },
+   {
+    "node": "lem-weil-pbc-lattice-pair-image-classification",
+    "why": "Generic uniqueness criterion for integral pairs with a prescribed rationalization; used after explicitly constructing both directions, not for existence or local constancy."
+   },
+   {
+    "node": "lem-weil-pbc-lattice-pair-restriction",
+    "why": "Generic restriction of integral lattice pairs and of their embedded images along slice arrows (added by review); used only for the restriction compatibility of step 7."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-continuous-ring-universe-realization",
+  "lem-weil-pbc-lattice-pair-image-classification",
+  "lem-weil-pbc-lattice-pair-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-e6bd7c47f",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-e6bd7c47f (reviewer sub-agent of L); spot-checked: Read the item and all 8 steps in full, against every cited statement. This head re-delivers e3445cac, which I reviewed as FIX, rebased onto the live unsplit item. The statement, stmt_deps, source (main-20261015 lattice-scheme proof (1)), unit and created fields are unchanged. There are no new nodes and no repair note, and no SGA is cited. Steps 1-3, 5, 6 and 8 are verbatim from the reviewed head and were re-checked. Step 1: the universe-general continuous realization applies to totally disconnected A and E, with naturality from the test projection. Step 2: det-prop-sfb-qlbar-colimit-x-invert-ell gives the sheaf localization, matching Bhatt–Scholze Lemma 6.8.2(2), with no common-denominator claim. Step 3: the internal/sectionwise equivalence holds with strong monoidal sheafification from sk-def-sfb-sheaf-tensor, and the tensor matches Stacks 03EK. Step 5: j_M is injective because C(|T|,A)↪C(|T|,E), and the range is a sheaf. Step 6: the image-classification hypotheses are checked in step 5. Step 8: g ↦ (gR^r, α_g) matches Bhatt–Scholze Prop 6.8.4(6), including r=0. New step 4 writes out the fraction relation: ℓ^{k+n+q}(ℓ^{-n}⊗m−ℓ^{-q}⊗m′)=1⊗ℓ^k(ℓ^q m−ℓ^n m′)=0. This is correct. FIX: new step 7 drops the e3445cac review citation and is marked elementary. It still restricts the sheafified scalar extension, α|_T on (S⊗_R M)|_T≅S|_T⊗M|_T, and needs M|_V finite locally free, which is exactly lem-weil-pbc-lattice-pair-restriction. I re-cited that node in step 7, keeping the new text, set elementary=false, and added it to proof_deps and tool_uses. Edge cases checked: r=0, varying ranks, empty U, non-quasi-compact U, ramified E. Maintainer note: the e3445cac FIX was lost on re-delivery; land this fix with the item.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EmbeddedLatticeCoefficientComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.EmbeddedLatticeComparison.embedded_lattice_coefficient_comparison",
+  "file": "lean/Sheaf/Paper/EmbeddedLatticeCoefficientComparison.lean",
+  "statement": "theorem embedded_lattice_coefficient_comparison (X : Scheme.{u}) (L : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (Profinite.continuousCoefficientRingObj E) X)) (_hL : (continuousModule ell E X L).IsFiniteLocallyFree) : IsIso (ContinuousRingUniverse.comparison X (Padic.coefficientExtensionIntegers ell E)) ∧ IsIso (ContinuousRingUniverse.comparison X E) ∧ internalInclusion ell E X ≫ ContinuousRingUniverse.comparison X E = ContinuousRingUniverse.comparison X (Padic.coefficientExtensionIntegers ell E) ≫ continuousInclusion ell E X ∧ (∃ c : Cocone (CondensedRing.integralLocalizationSequence ell (condensedRingObj (Profinite.continuousCoefficientRingObj (Padic.coefficientExtensionIntegers ell E)) X)), Nonempty (IsColimit c) ∧ ∃ e : c.pt ≅ condensedRingObj (Profinite.continuousCoefficientRingObj E) X, ∀ (n : ℕ) (T : X.ProEtᵒᵖ) (a : (condensedRingObj (Profinite.continuousCoefficientRingObj (Padic.coefficientExtensionIntegers ell E)) X).obj.obj T), (ContinuousRingUniverse.comparison X E).hom.app T (e.hom.hom.app T ((c.ι.app n).hom.app T a)) = latticeConstantCoefficient X E T.unop ((ell : E) ^ n)⁻¹ * (show (latticeCoefficientSheaf X E).obj.obj T from (continuousInclusion ell E X).hom.app T ((ContinuousRingUniverse.comparison X (Padic.coefficientExtensionIntegers ell E)).hom.app T a))) ∧ (∀ (U : X.ProEt) (M : SheafOfModules.{u + 1} ((latticeModuleRing X (Padic.coefficientExtensionIntegers ell E)).over U)), ∃ c : Cocone (CondensedRing.integralLocalizationSequence ell M), Nonempty (IsColimit c) ∧ ∃ e : c.pt ≅ localizedTensor ell E X U M, (∀ (n : ℕ) (T : (Over U)ᵒᵖ) (m : M.val.obj T), e.hom.val.app T ((c.ι.app n).val.app T m) = tensorSection ell E X U M T (latticeConstantCoefficient X E T.unop.left ((ell : E) ^ n)⁻¹) m) ∧ (∀ (n : ℕ) (T : (Over U)ᵒᵖ) (a : (latticeCoefficientSheaf X (Padic.coefficientExtensionIntegers ell E)).obj.obj (op T.unop.left)) (m : M.val.obj T), e.inv.val.app T (tensorSection ell E X U M T ((inclusion ell E X).hom.app (op T.unop.left) a * latticeConstantCoefficient X E T.unop.left ((ell : E) ^ n)⁻¹) m) = (c.ι.app n).val.app T (a • m))) ∧ ∃ F : ∀ U : X.ProEt, IntegralLatticePair (inclusion ell E X) (continuousModule ell E X L) U → Lattices ell E (continuousModule ell E X L) U, (∀ U, Function.Surjective (F U)) ∧ (∀ (U : X.ProEt) (P Q : IntegralLatticePair (inclusion ell E X) (continuousModule ell E X L) U), F U P = F U Q ↔ P.Equivalent Q) ∧ (∀ (U : X.ProEt) (P : IntegralLatticePair (inclusion ell E X) (continuousModule ell E X L) U) (T : (Over U)ᵒᵖ), Set.range (fun m : (F U P).submodule.obj T ↦ m.val) = P.image T) ∧ (∀ (U V : X.ProEt) (f : V ⟶ U) (P : IntegralLatticePair (inclusion ell E X) (continuousModule ell E X L) U) (T : (Over V)ᵒᵖ), Set.range (fun m : (F V (P.restrict (inclusion ell E X) f)).submodule.obj T ↦ m.val) = Set.range (fun m : (F U P).submodule.obj ((Over.map f).op.obj T) ↦ m.val)) ∧ (∀ (U : X.ProEt) (r : ℕ) (t : (continuousModule ell E X L).over U ≅ latticeFreeSheaf X E U r) (g : Matrix.GeneralLinearGroup (Fin r) E), ∃ P : IntegralLatticePair (inclusion ell E X) (continuousModule ell E X L) U, ∀ T : (Over U)ᵒᵖ, Set.range (fun m : (F U P).submodule.obj T ↦ t.hom.val.app T m.val) = matrixLatticeImage X E (Padic.coefficientExtensionIntegers ell E) U r g T)",
+  "branch": "newtargets-dag",
+  "by": "Q145",
+  "date": "2026-10-23",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.EmbeddedLatticeComparison.continuousModule",
+   "AlgebraicGeometry.ProEtale.EmbeddedLatticeComparison.inclusion",
+   "AlgebraicGeometry.ProEtale.EmbeddedLatticeComparison.ambient",
+   "AlgebraicGeometry.ProEtale.EmbeddedLatticeComparison.Lattices",
+   "AlgebraicGeometry.ProEtale.EmbeddedLatticeComparison.localizedTensor",
+   "AlgebraicGeometry.ProEtale.EmbeddedLatticeComparison.tensorSection",
+   "AlgebraicGeometry.ProEtale.EmbeddedLatticeComparison.continuousInclusion",
+   "AlgebraicGeometry.ProEtale.EmbeddedLatticeComparison.internalInclusion",
+   "AlgebraicGeometry.ProEtale.EmbeddedLatticeComparison.embedded_lattice_coefficient_comparison"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0a269abb8",
+  "group": "Q145",
+  "result": "pass",
+  "note": "Re-delivery of 870b0d2e (RETURN H2). Lean files byte-identical (sha256), so the prior full clause audit stands. H2 repaired: theorem stmt_dep lem-weil-pbc-integral-scalar-constructible-image replaced by existing:true def-sfb-continuous-coefficient-module-equivalence-universe owning the 4 real-data defs in IntegralScalarConstructibleImage (header verbatim, NL matches code, refs = stmt_deps, all deps live, no other owner). def-sfb-continuous-ring-canonical-comparison now cited. Mechanical finding: lattice-pair-restriction (restrictedTensorComparison_isIso / finiteLocallyFree_overMap build P.restrict) and continuous-ring-universe-realization (comparison_isIso builds continuousModule) are genuine, PASS. Advisories: H11 'no second reading' under dispatcher policy; base-era LatticeSheafBasic helpers owned only by theorem nodes. No compile needed (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-68cc6",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261024T021124-L-2713417",
+  "kind": "interface",
+  "note": "independent cc review: item statement vs live clone (identical up to one space before :=); removed PadicIntegersInvertEll node vs dag/units/sk-lem-stratified-lattice.json realized (absent; its own unit stays on route via StratifiedLatticeScheme); item proof_deps vs declarations used; new sorry lattice_scalar_extension_fractions checked for truth and duplicates"
+ }
+}

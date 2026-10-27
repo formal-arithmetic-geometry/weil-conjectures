@@ -1,0 +1,140 @@
+{
+ "id": "lem-coef-integral-system-duality-compatibility",
+ "kind": "statement",
+ "title": "Integral duality at the actual normalized dualizing limit",
+ "statement": "Fix a prime ell, a finite extension E/Q_ell, and a finite-field datum D with ell different from its characteristic [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Let W be separated finite type over Spec D.k. Let S be a derived-system calculus and a a DualizingOperation for W and S, with base calculus SS [lem-coef-derived-system-evaluation-calculus, lem-coef-finite-adjunction-diagram-realization]. Write omega=L_W(a.omega), and D(P)=RHom(P,omega), using the recorded integral internal Hom [def-pur-derived-internal-hom]. Then D preserves integral bounded constructible complexes [def-weil-derived-complete-integral-detailed]. For every such P, the actual system morphism I(1,e_(a.omega)) composed with beta_(P,omega) is an isomorphism. For integers a<=b and d>=0 with dim W<=d, if every finite reduction of P has Tor amplitude [a,b], every finite reduction of D(P) has Tor amplitude [-b-2d,-a] [def-weil-finite-tor-amplitude, def-kun-topological-krull-dimension].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-integral-verdier.proof.md",
+  "place": "First paragraph: dualizing reductions, ambient internal-Hom comparison, preservation, and uniform Tor interval; also parent DAG proof steps 1, 5, 8."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-complete",
+  "def-weil-integral-derived-reduction",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-weil-scheme-morphism-properties",
+  "def-nagata-compactification",
+  "lem-coef-finite-adjunction-diagram-realization",
+  "prop-coef-integral-dualizing",
+  "def-pur-derived-internal-hom",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pur-integral-derived-operations",
+  "def-weil-finite-tor-amplitude",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Use the DualizingSpec of a to identify the actual total limit omega with the integral dualizing construction of prop-coef-integral-dualizing, preserving its finite projection adjuncts. Its prescribed normalized system makes the actual counit e_(a.omega) invertible by normalized reconstruction. The projections followed by a.finiteOmega supply precisely the finite dualizing reductions required by integral Verdier duality.",
+   "uses": [
+    "prop-coef-integral-dualizing",
+    "lem-coef-finite-adjunction-diagram-realization",
+    "lem-pur-normalized-actual-reconstruction-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply integral Verdier duality to this integral dualizing object. This proves preservation of integral constructibility and its finite Tor bound. For an integer dimension bound d>=0, apply its natural-number version at d.toNat and use (d.toNat : Z)=d.",
+   "uses": [
+    "thm-coef-integral-verdier"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Both derived internal-Hom presentations are computed by the same K-flat/K-injective tensor-Hom adjunction. Their representative comparison respects evaluation. Therefore its transpose identifies the evaluated beta followed by the actual dualizing counit with the finite integral Verdier comparison, including the dualizing coefficient map. Integral Verdier makes each finite comparison invertible. Joint conservativity of the specified derived-system evaluations makes the actual system map invertible.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "thm-coef-integral-verdier"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-finite-adjunction-diagram-realization",
+  "lem-pur-normalized-actual-reconstruction-maps",
+  "prop-coef-integral-dualizing",
+  "thm-coef-integral-verdier"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-integral-verdier.proof.md",
+  "place": "First paragraph: dualizing reductions, ambient internal-Hom comparison, preservation, and uniform Tor interval; also parent DAG proof steps 1, 5, 8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Verdier duality of an integral constructible complex into a normalized dualizing limit commutes with reduction and has Tor amplitude bounds",
+   "results": "8 hits, including HomologicalComplex.instHasLimit and DerivedCategory.TStructure.t. These concern complex limits and the derived t-structure, not the specified sheaf dualizing system or its evaluation-defined comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism from integral Verdier dual pullback dual to exceptional pullback on coherent coefficient systems",
+   "results": "8 hits, including TopCat.Sheaf.pullbackIso, SheafOfModules.pullbackIso, and SheafOfModules.freeFunctorCompPullbackIso. These are underived pullback presentation comparisons and do not state the integral duality assertion.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier|[Cc]ompleted[Pp]ullback|[Tt]or[Aa]mplitude in Mathlib/CategoryTheory and Mathlib/Algebra/Homology",
+   "results": "Hits concern Verdier localization and triangulated homotopy categories; no integral constructible coefficient-system duality or Tor-preserving completed pullback. Existing project modules IntegralVerdier and IntegralPullbackSystemComparison were read: the former requires an integral constructible dualizing input with finite reductions, and the latter uses its fixed finiteSystem presentation, not the arbitrary specified calculus reduction used here.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralDualExceptionalSystem",
+  "date": "2026-10-25",
+  "group": "R7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "First paragraph: dualizing reductions, ambient internal-Hom comparison, preservation, and uniform Tor interval; also parent DAG proof steps 1, 5, 8.",
+   "via": [
+    "lem-coef-integral-dual-exceptional-system"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralSystemDualityCompatibility",
+  "file": "lean/Sheaf/SixFunctors/IntegralSystemDualityCompatibility.lean",
+  "declaration": "WeilConjectures.integralSystemDualityCompatibility",
+  "statement": "theorem integralSystemDualityCompatibility\n    (W : Scheme.{u}) [W.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (W ↘ Spec (.of D.k))] [QuasiCompact (W ↘ Spec (.of D.k))]\n    [IsSeparated (W ↘ Spec (.of D.k))]\n    (S : CoefficientDerivedSystemCalculus l E W)\n    (SS : CoefficientDerivedSystemCalculus l E (Spec (.of D.k)))\n    (a : DualizingOperation (D := D) (hl := hl) W S SS) :\n    let ω := (coefficientSequenceLimit l E W).obj a.omega.obj\n    let dual := (Functor.curry.obj (coefficientIntegralInternalHom l E W)).flip.obj ω\n    (∀ P : sfIntegralConstructibleCategory l E W,\n      sfIntegralConstructible l E W (dual.obj (op P.obj))) ∧\n    (∀ P : sfIntegralConstructibleCategory l E W,\n      IsIso (coefficientBaseChangeHom S.integralClosed S.systemClosed\n          S.reduction S.reductionTensor P.obj ω ≫\n        (coefficientSequenceInternalHom l E W).map\n          (Prod.mkHom (𝟙 _) (S.adjunction.counit.app a.omega.obj)))) ∧\n    (∀ (P : sfIntegralConstructibleCategory l E W) (a b d : ℤ),\n      a ≤ b → 0 ≤ d → topologicalKrullDim W ≤ (d.toNat : WithBot ℕ∞) →\n      (∀ n : ℕ, HasProEtaleTorAmplitude W (Padic.coefficientExtensionRing l E (n + 1))\n        ((scalarReductionDerivedExtension l E W n).obj P.obj) a b) →\n      ∀ n : ℕ, HasProEtaleTorAmplitude W (Padic.coefficientExtensionRing l E (n + 1))\n        ((scalarReductionDerivedExtension l E W n).obj (dual.obj (op P.obj)))\n        (-b - 2 * d) (-a))",
+  "branch": "sheaf-dag",
+  "by": "R7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R7",
+  "result": "pass",
+  "landing": "20261025T095812-L-3483727",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R7",
+  "result": "pass",
+  "landing": "20261025T095812-L-3483727",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

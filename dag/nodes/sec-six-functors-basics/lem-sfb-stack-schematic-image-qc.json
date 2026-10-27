@@ -1,0 +1,272 @@
+{
+ "id": "lem-sfb-stack-schematic-image-qc",
+ "kind": "statement",
+ "title": "Schematic images of quasi-compact stack morphisms",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $\\mathcal X$ an algebraic stack over $S$ [def-sfb-algebraic-moduli-stack], and $Y$ an algebraic space over $S$ [def-trf-algebraic-space]. Let $f:\\mathcal X\\to Y$ be quasi-compact [def-sfb-stack-qcqs-morphism]. Use structure sheaves and direct images evaluated by $(f_*\\mathcal O_{\\mathcal X})(T)=\\Gamma(\\mathcal X\\times_YT,\\mathcal O)$ on etale scheme charts $T\\to Y$ [def-sfb-stack-quasi-coherent-algebra]. There exists a smallest closed subspace $W\\hookrightarrow Y$ through which $f$ factors, called its scheme-theoretic image; a closed subspace is given on etale scheme charts by a quasi-coherent ideal and its quotient ring sheaf. Its ideal is $\\ker(\\mathcal O_Y\\to f_*\\mathcal O_{\\mathcal X})$, and $|W|$ is the closure of the image of $|\\mathcal X|\\to|Y|$. The factorization $q:\\mathcal X\\to W$ is schematically dominant: $\\mathcal O_W\\to q_*\\mathcal O_{\\mathcal X}$ is injective. Formation of $W$ commutes with flat base change of algebraic spaces; here flatness is tested on etale scheme charts using [def-weil-flat-morphism]. In particular the base-changed $q$ is schematically dominant after any etale base change of $W$.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tags 0CPU (lemma-scheme-theoretic-image-existence), 0CMK (lemma-existence-plus-flat-base-change), 0CML (lemma-topology-scheme-theoretic-image); kernel and schematic-dominance description by the smooth affine atlas in those proofs, with spaces-morphisms.tex section-scheme-theoretic-image. Spaces-morphisms.tex Tags 082X (lemma-scheme-theoretic-image), 082Z (lemma-quasi-compact-scheme-theoretic-image)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-algebraic-moduli-stack",
+  "def-trf-algebraic-space",
+  "def-sfb-stack-qcqs-morphism",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-weil-flat-morphism",
+  "def-sfb-space-closed-subspace",
+  "def-sfb-space-quasi-coherent-ideal",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-stack-point-topological-space"
+ ],
+ "proof": [
+  {
+   "text": "Fix an affine etale chart $V\\to Y$. The stack $\\mathcal X_V$ is algebraic and quasi-compact, so choose an affine smooth surjective atlas $a:U\\to\\mathcal X_V$. Sections of $\\mathcal O_{\\mathcal X_V}$ inject into $\\Gamma(U,\\mathcal O_U)$: if a compatible family is zero on $U$, pull back along any object $T\\to\\mathcal X_V$. The algebraic space $U\\times_{\\mathcal X_V}T\\to T$ is smooth surjective and has sections after an etale covering $\\{T_i\\to T\\}$. On each $T_i$ the given family is the pullback of its zero component on $U$; the sheaf condition on $T$ makes its component zero. This also works after any base change of the atlas. Consequently $\\ker(\\Gamma(V,\\mathcal O_V)\\to\\Gamma(\\mathcal X_V,\\mathcal O))=\\ker(\\Gamma(V,\\mathcal O_V)\\to\\Gamma(U,\\mathcal O_U))$. No quasi-compactness of $a$ is asserted or needed.",
+   "uses": [
+    "lem-sfb-algebraic-stack-fibre-products",
+    "def-sfb-stack-qcqs-morphism",
+    "lem-sfb-algebraic-stack-quasicompact-surjection",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-smooth-space-cover-etale-sections",
+    "def-sfb-stack-quasi-coherent-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0CMK (lemma-existence-plus-flat-base-change), affine W_i construction; Tag 0CMJ (lemma-cover-upstairs), scheme-test descent argument"
+   }
+  },
+  {
+   "text": "Write $J=\\ker(\\Gamma(V,\\mathcal O_V)\\to\\Gamma(U,\\mathcal O_U))$ and $Z=\\operatorname{Spec}(\\Gamma(V,\\mathcal O_V)/J)$. The scheme-image kernel theorem identifies $Z$ with the scheme-theoretic image of $U\\to V$; $U\\to Z$ is schematically dominant by the scheme-image theorem. If $V'\\to V$ is any flat morphism of affine schemes, the map $U\\to Z$ is a morphism between affine schemes, hence quasi-compact and quasi-separated, and $Z'=Z\\times_VV'\\to Z$ is flat. Flat pullback of schematic density makes $U'=U\\times_VV'\\to Z'$ schematically dense. Thus $Z'$ is the scheme-theoretic image of $U'\\to V'$: it is a closed factorization, and any competing ideal in $\\mathcal O_{V'}$ that vanishes on $U'$ vanishes on $Z'$ by the displayed injectivity. Its ideal is $J\\mathcal O_{V'}$. All uses of quasi-separatedness here concern affine scheme maps, not $f$.",
+   "uses": [
+    "lem-weil-pbc-scheme-image-qc-kernel",
+    "lemma-nagata-scheme-image-ideal-qc",
+    "lemma-nagata-dense-flat-pullback",
+    "lem-sfb-space-ideal-closed-subspace-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0CMK, proof of (c), reduction to schemes; Morphisms Tag 081I (lemma-flat-base-change-scheme-theoretic-image) and Tag 01R8"
+   }
+  },
+  {
+   "text": "Let $\\mathcal I=\\ker(\\mathcal O_Y\\to f_*\\mathcal O_{\\mathcal X})$ on $Y_{\\rm et}$. For every affine etale $V'\\to V$ the base change $U'\\to\\mathcal X_{V'}$ is a smooth surjective atlas. Step 1 identifies $\\mathcal I(V')$ with the kernel for $U'\\to V'$, and step 2 identifies this with $J\\mathcal O_{V'}$. Thus $\\mathcal I|_V=\\widetilde J$ as ideal sheaves on $V_{\\rm et}$. Affine etale scheme charts form a basis, so these descriptions show that $\\mathcal I$ is quasi-coherent. Use the closed-subspace/ideal correspondence to construct $W=V(\\mathcal I)\\hookrightarrow Y$ with $\\mathcal O_Y/\\mathcal I\\simeq i_*\\mathcal O_W$. In particular $W\\times_YV=Z$. The kernels agree intrinsically, so no choice of atlas enters $W$.",
+   "uses": [
+    "def-sfb-stack-quasi-coherent-algebra",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-space-ideal-closed-subspace-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0CMK, proof of (a); spaces-morphisms.tex Tags 082Z (lemma-quasi-compact-scheme-theoretic-image) and 03MB (lemma-closed-immersion-ideals)"
+   }
+  },
+  {
+   "text": "The map $U\\to V$ factors through $Z=W\\times_YV$. For an object $T\\to\\mathcal X_V$, the smooth surjection $U\\times_{\\mathcal X_V}T\\to T$ has sections on an etale covering $T_i\\to T$. Therefore $T_i\\to Y$ factors through $W$. Equivalently the ideal pulled back from $\\mathcal I$ is zero there; it is zero on $T$ by the sheaf condition, so the closed-subspace factorization criterion gives $T\\to W$. An arbitrary object of $\\mathcal X$ is etale-locally over a scheme chart $V$ of $Y$, so the same argument gives its factorization. Uniqueness holds because a closed subspace is a subfunctor. These factorizations respect arrows and give $q:\\mathcal X\\to W$. If $f$ factors through another closed subspace $D$ with ideal $\\mathcal K$, then every section of $\\mathcal K$ pulls back to zero on $\\mathcal X$, hence $\\mathcal K\\subseteq\\mathcal I$. The inclusion-reversing ideal correspondence gives $W\\subseteq D$. This proves minimality without inferring a scheme factorization from point-set containment.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-smooth-space-cover-etale-sections",
+    "lem-sfb-space-ideal-closed-subspace-correspondence",
+    "def-sfb-stack-quasi-coherent-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0CMJ (lemma-cover-upstairs), scheme tests; Tag 0CPU (lemma-scheme-theoretic-image-existence), factorization descent; spaces-morphisms.tex Tag 03MB"
+   }
+  },
+  {
+   "text": "The map $|U|\\to|\\mathcal X_V|$ is surjective, so the image of $U$ in $V$ is the image of $\\mathcal X_V$ there. The scheme-image theorem gives $|Z|=\\overline{\\operatorname{im}(|U|\\to|V|)}$. Since $f$ factors through the closed subspace $W$, its image closure is contained in $|W|$. Conversely, let $w\\in|W|$ and choose a point $v\\in Z=W\\times_YV$ above $w$ in an affine etale chart. For any open neighbourhood $N$ of $w$ in $Y$, its inverse image in $V$ is an open neighbourhood of $v$, hence meets the image of $U$ by the displayed density. Its image in $Y$ is a point of $N$ in the image of $\\mathcal X$. Thus $w$ belongs to that closure. The atlas topology and point-surjectivity used here are precisely those of the stack-point topology lemma (which also applies to spaces).",
+   "uses": [
+    "lem-sfb-stack-point-topology",
+    "lemma-nagata-scheme-image-ideal-qc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0CML (lemma-topology-scheme-theoretic-image), affine chart and density argument"
+   }
+  },
+  {
+   "text": "For a flat map $Y'\\to Y$, compare closed subspaces on affine etale charts $V'\\to Y'$ that map to affine etale charts $V\\to Y$. Such charts cover after pulling back a chart cover of $Y$ and refining by affine etale schemes. The composite $V'\\to V$ is flat. Keep the atlas $U\\to\\mathcal X_V$ from step 1; its pullback $U\\times_VV'\\to\\mathcal X\\times_YV'$ is smooth surjective. The section-detection argument of step 1 and affine flat-base-change calculation of step 2 identify the kernel defining the image on $V'$ with $J\\mathcal O_{V'}$. The ideal of $W\\times_YV'$ is the same extended ideal by the closed-subspace correspondence. Hence the image constructed for $\\mathcal X\\times_YY'\\to Y'$ is $W\\times_YY'$ on this covering, and thus globally, since the correspondence is bijective. Quasi-compactness needed to construct that image follows directly from the base-change definition of $f$ being quasi-compact. No flat base-change theorem for the entire sheaf $f_*\\mathcal O_{\\mathcal X}$ is being assumed.",
+   "uses": [
+    "def-sfb-stack-qcqs-morphism",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-space-ideal-closed-subspace-correspondence",
+    "lem-sfb-smooth-space-cover-etale-sections",
+    "def-sfb-stack-quasi-coherent-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0CMK (lemma-existence-plus-flat-base-change), proof of (b),(c), specialized to a space target"
+   }
+  },
+  {
+   "text": "The map $q$ is quasi-compact: for any quasi-compact stack $T\\to W$, its base change is $\\mathcal X\\times_WT=\\mathcal X\\times_YT$, since $W\\to Y$ is a monomorphism, and this is quasi-compact by the hypothesis on $f$. Apply the kernel construction and factorization already proved in steps 1--4 to $q$. Its kernel $\\mathcal K\\subseteq\\mathcal O_W$ is quasi-coherent and cuts out a closed subspace $W_0\\hookrightarrow W$ through which $q$ factors. The composite $W_0\\hookrightarrow Y$ is a closed subspace (on affine charts it is the quotient by the inverse-image ideal). Minimality of $W$ forces $W_0=W$, so the ideal correspondence gives $\\mathcal K=0$. This is the asserted injectivity $\\mathcal O_W\\to q_*\\mathcal O_{\\mathcal X}$. Finally step 6, applied to $q$, shows its scheme-theoretic image remains the whole target after any flat base change, in particular after any etale base change of $W$. Applying this same zero-kernel argument to that base-changed map proves its schematic dominance.",
+   "uses": [
+    "def-sfb-stack-qcqs-morphism",
+    "lem-sfb-space-ideal-closed-subspace-correspondence",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tags 0CPU and 0CMK; kernel description from spaces-morphisms.tex Tags 082Z and 03MB"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-algebraic-stack-fibre-products",
+  "def-sfb-stack-qcqs-morphism",
+  "lem-sfb-algebraic-stack-quasicompact-surjection",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-smooth-space-cover-etale-sections",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "lem-weil-pbc-scheme-image-qc-kernel",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "lemma-nagata-dense-flat-pullback",
+  "lem-sfb-space-ideal-closed-subspace-correspondence",
+  "lem-sfb-stack-point-topology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tags 0CMJ, 0CMK, 0CML; scheme/space kernel descriptions in Tags 01R8, 082Z, 03MB; expanded affine-atlas argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Quasi compact morphism from algebraic stack to algebraic space has schematic image with kernel ideal and dense image",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instQuasiCompactToImage\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f],\\n  AlgebraicGeometry.QuasiCompact (AlgebraicGeometry.Scheme.Hom.toImage f)\", \"doc\": \"If a morphism $ f $ of schemes is quasi-compact, then the induced morphism from $ X $ to the image subscheme of $ f $ is also quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f],\\n  AlgebraicGeometry.IsDominant (AlgebraicGeometry.Scheme.Hom.toImage f)\", \"doc\": \"For any quasi-compact morphism $ f: X \\to Y $ of schemes, the induced morphism from $ X $ to the image subscheme $ f.\\text{image} $ is dominant. This means the set-theoretic image of $ f $ is dense in t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.support_ker\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f],\\n  ↑(AlgebraicGeometry.Scheme.Hom.ker f).support = closure (Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base))\", \"doc\": \"For any quasi-compact morphism $ f: X \\\\to Y $ of schemes, the support of the kernel sheaf of $ f $ is equal to the closure of the image of $ f $.\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsImmersion f] [AlgebraicGeometry.QuasiCompact f],\\n  AlgebraicGeometry.IsOpenImmersion (AlgebraicGeometry.Scheme.Hom.toImage f)\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is an immersion and quasi-compact, then the induced morphism from $ X $ to the image subscheme $ f.\\text{image} $ is an open immersion. This means the morphism $ \"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ker_apply\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X.Hom Y) [AlgebraicGeometry.QuasiCompact f] (U : ↑Y.affineOpens),\\n  f.ker.ideal U = RingHom.ker (CommRingCat.Hom.hom (f.app ↑U))\", \"doc\": \"For a quasi-compact morphism $ f : X \\\\to Y $ of schemes and an affine open subset $ U \\\\subseteq Y $, the ideal of the kernel sheaf of $ f $ at $ U $ coincides with the kernel of the ring homomorphism \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.instQuasiCompactSubschemeι\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData), AlgebraicGeometry.QuasiCompact I.subschemeι\", \"doc\": \"The canonical morphism from the closed subscheme defined by an ideal sheaf to the original scheme is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_of_compactSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [CompactSpace ↥X] [QuasiSeparatedSpace ↥Y],\\n  AlgebraicGeometry.QuasiCompact f\", \"doc\": \"Any morphism $ f: X \\to Y $ of schemes is quasi-compact if $ X $ is a compact topological space and $ Y $ is a quasi-separated scheme. This follows from the property that compactness of $ X $ ensures f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, differential submersions or fpqc descent; no theorem for the stated algebraic stacks/spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scheme theoretic image of quasi compact stack morphism commutes with flat base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instQuasiCompactToImage\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \"[QuasiCompact f] : QuasiCompact f.toImage\", \"doc\": \"If a morphism $ f $ of schemes is quasi-compact, then the induced morphism from $ X $ to the image subscheme of $ f $ is also quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @QuasiCompact\", \"doc\": \"If a morphism of schemes is quasi-compact, then any base change (pullback) of the morphism is also quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \"[QuasiCompact f] : IsDominant f.toImage\", \"doc\": \"For any quasi-compact morphism $ f: X \\to Y $ of schemes, the induced morphism from $ X $ to the image subscheme $ f.\\text{image} $ is dominant. This means the set-theoretic image of $ f $ is dense in t\"}\n  {\"name\": \"AlgebraicGeometry.universallyClosed_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \": IsStableUnderBaseChange @UniversallyClosed\", \"doc\": \"The property of being a universally closed morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a universally closed morphism and $ Y' \\to Y $ is any morphism of schemes, then \"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.PullbackCarrier\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Surjective\", \"doc\": \"The property of being a surjective morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a surjective morphism of schemes and $ g: Z \\to Y $ is any morphism of schemes, then the\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSeparated\", \"doc\": \"The property of being a separated morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a separated morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ \"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @QuasiSeparated\", \"doc\": \"The property of being quasi-separated for morphisms of schemes is stable under base change. That is, if a morphism $ f: X \\to Y $ of schemes is quasi-separated, then any base change (pullback) of $ f $\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, differential submersions or fpqc descent; no theorem for the stated algebraic stacks/spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.Scheme.Hom.image\"",
+   "results": "[loogle] OK 11 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.image_injective\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [H : AlgebraicGeometry.IsOpenImmersion f] : Function.Injective fun x => (AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj x\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.image_le_opensRange\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [H : AlgebraicGeometry.IsOpenImmersion f] (U : X.Opens) : (AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj U ≤ AlgebraicGeometry.Scheme.Hom.opensRange f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.image_top_eq_opensRange\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [H : AlgebraicGeometry.IsOpenImmersion f] : (AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj ⊤ = AlgebraicGeometry.Scheme.Hom.opensRange f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.image_mono\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [H : AlgebraicGeometry.IsOpenImmersion f] {U V : X.Opens} (e : U ≤ V) : (AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj U ≤ (AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj V\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.image_le_image_iff\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] (U U' : X.Opens) : (AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj U ≤ (AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj U' ↔ U ≤ U'\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.image_preimage_le\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [H : AlgebraicGeometry.IsOpenImmersion f] (U : Y.Opens) : (AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj ((TopologicalSpace.Opens.map f.base).obj U) ≤ U\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.image_iSup\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [H : AlgebraicGeometry.IsOpenImmersion f] {ι : Sort u_1} (s : ι → X.Opens) : (AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj (⨆ i, s i) = ⨆ i, (AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj (s i)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.image_preimage_eq_opensRange_inf\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [H : AlgebraicGeometry.IsOpenImmersion f] (U : Y.Opens) : (AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj ((TopologicalSpace.Opens.map f.base).obj U) = AlgebraicGeometry.Scheme.Hom.opensRange f ⊓ U\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.image_iSup₂\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [H : AlgebraicGeometry.IsOpenImmersion f] {ι : Sort u_1} {κ : ι → Sort u_2} (s : (i : ι) → κ i → X.Opens) : (AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj (⨆ i, ⨆ j, s i j) = ⨆ i, ⨆ j, (AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj (s i j)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.image\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : AlgebraicGeometry.Scheme\", \"doc\": \"The scheme-theoretic image of a morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.imageι\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : AlgebraicGeometry.Scheme.Hom.image f ⟶ Y\", \"doc\": \"The embedding from the scheme-theoretic image to the codomain.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, differential submersions or fpqc descent; no theorem for the stated algebraic stacks/spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|AlgebraicSpace|schematicImage|schemeTheoreticImage",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, differential submersions or fpqc descent; no theorem for the stated algebraic stacks/spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scheme theoretic image of quasi compact morphism of algebraic stacks kernel ideal flat base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ker\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \"(f : X.Hom Y) : IdealSheafData Y\", \"doc\": \"For a morphism of schemes $f : X \\\\to Y$, the kernel of $f$ is the ideal sheaf data on $Y$ constructed from the kernels of the ring homomorphisms on sections over affine open sets. Specifically, for ea\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instQuasiCompactToImage\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \"[QuasiCompact f] : QuasiCompact f.toImage\", \"doc\": \"If a morphism $ f $ of schemes is quasi-compact, then the induced morphism from $ X $ to the image subscheme of $ f $ is also quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.image\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \": Scheme.{u}\", \"doc\": \"For a morphism $ f $ of schemes, the image is defined as the closed subscheme associated to the kernel ideal sheaf of $ f $. This subscheme is constructed by gluing local affine models $ \\\\operatorname\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ker_apply\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \"(f : X.Hom Y) [QuasiCompact f] (U : Y.affineOpens) : f.ker.ideal U = RingHom.ker (f.app U).hom\", \"doc\": \"For a quasi-compact morphism $ f : X \\\\to Y $ of schemes and an affine open subset $ U \\\\subseteq Y $, the ideal of the kernel sheaf of $ f $ at $ U $ coincides with the kernel of the ring homomorphism \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.ker_morphismRestrict_ideal\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \"(f : X.Hom Y) [QuasiCompact f] (U : Y.Opens) (V : U.toScheme.affineOpens) :\\n  (f ∣_ U).ker.ideal V = f.ker.ideal ⟨U.ι ''ᵁ V, V.2.image_of_isOpenImmersion _⟩\", \"doc\": \"Let $f: X \\\\to Y$ be a quasi-compact morphism of schemes, and let $U$ be an open subset of $Y$. For any affine open subset $V$ of the open subscheme $Y|_U$, the ideal associated to the kernel of the re\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.ker_toSpecΓ\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \"[CompactSpace X] : X.toSpecΓ.ker = ⊥\", \"doc\": \"Let $X$ be a scheme whose underlying topological space is quasi-compact. Let $\\\\Gamma(X, \\\\mathcal{O}_X)$ be the ring of global sections of its structure sheaf. There is a canonical morphism of schemes \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.imageι\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \": f.image ⟶ Y\", \"doc\": \"The canonical morphism from the closed subscheme defined by the kernel ideal sheaf of a morphism $ f $ to the target scheme $ Y $, constructed via gluing local affine models $ \\\\operatorname{Spec}(\\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \"[QuasiCompact f] : IsDominant f.toImage\", \"doc\": \"For any quasi-compact morphism $ f: X \\to Y $ of schemes, the induced morphism from $ X $ to the image subscheme $ f.\\text{image} $ is dominant. This means the set-theoretic image of $ f $ is dense in t\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: all returned image/kernel declarations concern schemes, not algebraic stacks or algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact morphism from an algebraic stack to an algebraic space has a scheme theoretic image defined by its kernel ideal commuting with flat base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instQuasiCompactToImage\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f],\\n  AlgebraicGeometry.QuasiCompact (AlgebraicGeometry.Scheme.Hom.toImage f)\", \"doc\": \"If a morphism $ f $ of schemes is quasi-compact, then the induced morphism from $ X $ to the image subscheme of $ f $ is also quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.ker_ideal_of_isPullback_of_isOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X Y U V : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (f' : U ⟶ V) (iU : U ⟶ X) (iV : V ⟶ Y)\\n  [inst : AlgebraicGeometry.IsOpenImmersion iV] [AlgebraicGeometry.QuasiCompact f],\\n  CategoryTheory.IsPullback f' iU iV f →\\n    ∀ (W : ↑V.affineOpens),\\n      (AlgebraicGeometry.Scheme.Hom.ker f').ideal W =\\n   \", \"doc\": \"Given schemes $X,Y,U,V$ with morphisms $f:X\\\\to Y$, $f':U\\\\to V$, open immersions $i_U:U\\\\to X$ and $i_V:V\\\\to Y$, and assuming $f$ is quasi-compact with the square formed by $f',i_U,i_V,f$ being a pullba\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsImmersion f] [AlgebraicGeometry.QuasiCompact f],\\n  AlgebraicGeometry.IsOpenImmersion (AlgebraicGeometry.Scheme.Hom.toImage f)\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is an immersion and quasi-compact, then the induced morphism from $ X $ to the image subscheme $ f.\\text{image} $ is an open immersion. This means the morphism $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ker_apply\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X.Hom Y) [AlgebraicGeometry.QuasiCompact f] (U : ↑Y.affineOpens),\\n  f.ker.ideal U = RingHom.ker (CommRingCat.Hom.hom (f.app ↑U))\", \"doc\": \"For a quasi-compact morphism $ f : X \\\\to Y $ of schemes and an affine open subset $ U \\\\subseteq Y $, the ideal of the kernel sheaf of $ f $ at $ U $ coincides with the kernel of the ring homomorphism \"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.support_ker\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f],\\n  ↑(AlgebraicGeometry.Scheme.Hom.ker f).support = closure (Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base))\", \"doc\": \"For any quasi-compact morphism $ f: X \\\\to Y $ of schemes, the support of the kernel sheaf of $ f $ is equal to the closure of the image of $ f $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.instQuasiCompactSubschemeι\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData), AlgebraicGeometry.QuasiCompact I.subschemeι\", \"doc\": \"The canonical morphism from the closed subscheme defined by an ideal sheaf to the original scheme is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.image\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → AlgebraicGeometry.Scheme\", \"doc\": \"For a morphism $ f $ of schemes, the image is defined as the closed subscheme associated to the kernel ideal sheaf of $ f $. This subscheme is constructed by gluing local affine models $ \\\\operatorname\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: all returned image/kernel declarations concern schemes, not algebraic stacks or algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stein-submersive-reduced-descent",
+  "date": "2026-10-23",
+  "group": "Q49"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Alper Proposition 7.1.1 proof, Hom exactness; expanded Rydh Theorem (7.4) graph construction, printed p.29, as a prerequisite of the inherited det-thm-sf-ctf-stability-direct-images alteration/moduli route. Supporting input: Schematic images of quasi-compact stack morphisms.",
+   "via": [
+    "lem-sfb-stein-submersive-reduced-descent",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stack-schematic-image-qc",
+  "worker": "stage1",
+  "summary": "Checked the space-target stack-image statement against Stacks 0CMJ/0CPU/0CMK/0CML and 03MB/082Z. Expanded smooth-atlas section detection, affine flat image pullback, the intrinsic quasi-coherent kernel, factorization/minimality, topology, and schematic dominance. Reused existing nodes throughout; no new nodes or hypothesis changes. Applied the quasi-separated dense-pullback lemma only to affine scheme maps.",
+  "blueprint": "Inherited support of the det-thm-sf-ctf-stability-direct-images alteration/moduli route, via lem-sfb-stein-submersive-reduced-descent. The latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md is read; this auxiliary lemma is not separately stated there. from.node remains the inherited null and the precise existing from.place is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-scheme-image-qc-kernel",
+    "why": "Affine scheme image has precisely the ring-map kernel; the unit has no replacement scheme-image theorem."
+   },
+   {
+    "node": "lemma-nagata-scheme-image-ideal-qc",
+    "why": "Scheme image gives schematic dominance and topological closure for the affine atlas; used as a generic scheme tool."
+   },
+   {
+    "node": "lemma-nagata-dense-flat-pullback",
+    "why": "Flat pullback of schematic density for affine schemes; the unit route needs this scheme tool for its atlas calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-scheme-image-qc-kernel",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "lemma-nagata-dense-flat-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-8b5922d74",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-8b5922d74 (reviewer sub-agent of L); spot-checked: I read the item and all 11 cited statements in full, and the Stacks source stacks-morphisms.tex lines 8516-8830 (0CMJ, 0CPU, factor-factor, 0CMK, 0CML). Statement and stmt_deps match clones/live and side-live exactly. The live item is still unsplit, with no re-split note, and the base proof was empty, so there is no supersession and nothing was shortened. No new nodes. All 7 steps are correct. Step 1 is the global-sections form of 0CMJ (étale-local sections via lem-sfb-smooth-space-cover-etale-sections), with the affine atlas from lem-sfb-algebraic-stack-quasicompact-surjection. Step 2: the kernel theorem plus lemma-nagata-dense-flat-pullback, whose qcqs hypothesis is used only for U->Z between affines, giving the image ideal J O(V'). Step 3 shows I|_V = J~ on the basis of affine étale V' over V, so I is quasi-coherent, and W is built through the 03MB correspondence. Step 4 gives factorization and minimality through the vanishing criterion and the inclusion-reversing bijection, not through containment of points. Step 5 (0CML) uses point-surjectivity of the atlas, continuity and closure of the range; it does not need openness. Step 6 (0CMK(c)): V'->V is flat (étale then flat base change), and the pulled-back ideal equals J O(V') via the correspondence's base-change clause. Step 7: q is quasi-compact because W->Y is a monomorphism, and minimality gives a zero kernel; the étale clause follows from step 6. Edge cases pass: empty X, identity f, nilpotent immersion, X not quasi-separated, non-faithfully-flat Y'. No cycle, and the only citer is lem-sfb-stein-submersive-reduced-descent. No SGA. No duplicate stack/space schematic-image node: I checked lem-sfb-space-qc-open-schematic-closure, adequate-closed-substack-affinization and space-closed-ideal-correspondence. I accept the 3 tool_uses: the two pbc/nagata image nodes are mathlib leaves and dense-flat-pullback is the generic tool 081I. Batch-5: the 5 flagged sfb citations reach sec-trace-formula only through the general definitions def-trf-algebraic-space and def-trf-scheme-algebraic-space. They are stack foundations, not part of the proof of the trace formula or Poincaré duality, so they stay. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackSchematicImageQc",
+  "declaration": "CategoryTheory.exists_stack_schematicImage_of_quasiCompact",
+  "file": "lean/Sheaf/AlgebraicGeometry/StackSchematicImageQc.lean",
+  "statement": "theorem exists_stack_schematicImage_of_quasiCompact {S : Scheme.{u}} (X : BasedCategory.{v, w} (Over S)) (hX : IsAlgebraicModuliStack X) (Y : AlgebraicSpace S) (f : BasedFunctor X (discreteModuli Y.obj.obj)) (hf : IsQuasiCompactAlgebraicModuliMap.{u, v, w, u, u + 1, 0, 0} f) : ∃ (W : ClosedSubspace Y) (q : BasedFunctor X (discreteModuli (W.val : AlgebraicSpace S).obj.obj)) (I : QuasiCoherentIdeal Y), Nonempty (f ≅ q.comp (discreteModuliMap W.val.arrow.hom.hom)) ∧ (∀ (D : ClosedSubspace Y) (a : BasedFunctor X (discreteModuli (D.val : AlgebraicSpace S).obj.obj)), Nonempty (f ≅ a.comp (discreteModuliMap D.val.arrow.hom.hom)) → W.val ≤ D.val) ∧ I.val = kernelSubobject (moduleStructureMap W.val.arrow) ∧ Epi (moduleStructureMap W.val.arrow) ∧ (∀ (T : Y.EtaleSite) (r : Y.structureSheaf.obj.obj (op T)), (∃ s : (I.val : Y.Modules).val.obj (op T), I.val.arrow.val.app (op T) s = r) ↔ moduliStructureMapApp hX.1.1 Y f T r = 0) ∧ Set.range (moduliPointMap (discreteModuliMap W.val.arrow.hom.hom)) = closure (Set.range (moduliPointMap f)) ∧ (∀ T : (W.val : AlgebraicSpace S).EtaleSite, Function.Injective (moduliStructureMapApp hX.1.1 (W.val : AlgebraicSpace S) q T)) ∧ (∀ (Y' : AlgebraicSpace S) (g : Y' ⟶ Y), MapIsFlat g → ∃ (W' : ClosedSubspace Y') (a : (W'.val : AlgebraicSpace S) ⟶ (W.val : AlgebraicSpace S)) (q' : BasedFunctor (moduliTwoFiberProduct f (discreteModuliMap g.hom.hom)) (discreteModuli (W'.val : AlgebraicSpace S).obj.obj)), IsPullback a W'.val.arrow W.val.arrow g ∧ Nonempty (moduliTwoFiberSnd f (discreteModuliMap g.hom.hom) ≅ q'.comp (discreteModuliMap W'.val.arrow.hom.hom)) ∧ ∀ (D : ClosedSubspace Y') (b : BasedFunctor (moduliTwoFiberProduct f (discreteModuliMap g.hom.hom)) (discreteModuli (D.val : AlgebraicSpace S).obj.obj)), Nonempty (moduliTwoFiberSnd f (discreteModuliMap g.hom.hom) ≅ b.comp (discreteModuliMap D.val.arrow.hom.hom)) → W'.val ≤ D.val) ∧ (∀ (W' : AlgebraicSpace S) (g : W' ⟶ (W.val : AlgebraicSpace S)), IsEtale g.hom.hom → ∀ (T : W'.EtaleSite) (r : W'.structureSheaf.obj.obj (op T)), (∀ i : ModuliPushforwardIndex W' (moduliTwoFiberSnd q (discreteModuliMap g.hom.hom)) T, (Scheme.Γ.map (moduliChartSchemeMap W' (moduliTwoFiberSnd q (discreteModuliMap g.hom.hom)) T i).op) r = 0) → r = 0)",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses existing closed subspaces, quasi-coherent ideals, canonical stack direct image, chartwise flatness, and stack-point topology. Added their already landed definition nodes to stmt_deps. The quotient sheaf is specified by the kernel subobject and epimorphic canonical module structure map; schematic dominance is sectionwise injectivity. Flat base change retains the full closed-subspace structure and its minimality."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cd6a1d174",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Read item, all 10 stmt_deps, the dependency declarations in side-live (IsQuasiCompactAlgebraicModuliMap, ClosedSubspace, QuasiCoherentIdeal/moduleStructureMap, moduliStructureMapApp/ModuliPushforwardIndex/moduliChartSchemeMap, MapIsFlat, moduliPointTopologicalSpace, moduliTwoFiberProduct/Fst/Snd) and the module. Every clause matches the node: smallest closed subspace with subobject minimality, quasi-coherent ideal = kernelSubobject + Epi + sectionwise ker(O_Y→f_*O_X) on every étale chart, |W| = closure of image, sectionwise-injective dominance, flat base change by cartesian W' with factorization and minimality, étale-base-change dominance in zero-kernel form. qc test universe .{u,v,w,u,u+1,0,0} is the minimal one and equivalent. No extra hypotheses; edge cases empty/identity/nilpotent/non-qs/non-surjective flat covered. Statement verbatim, 4 added stmt_deps are landed definition nodes on base, other owners reached through their closure, sorry only, docstrings with source/blueprint/7 steps, lines ≤100. Note: moduliTwoFiberSnd's owner def-sfb-open-moduli-substack is outside the stmt_dep closure; it is just the projection of the cited 2-fibre product (precedents dm-isom-space-unramified, adequate-moduli-universal-closed-topology); maintainer may add it. No compile (no file changed)."
+ }
+}

@@ -1,0 +1,243 @@
+{
+ "id": "lem-sfb-pseudocoherent-perfect-approximation",
+ "kind": "statement",
+ "title": "Perfect approximations to pseudo-coherent complexes on qcqs schemes",
+ "statement": "Let $X$ be a quasi-compact and quasi-separated scheme [def-pc-scheme, def-pc-morphism-conventions], let $E\\in D(\\mathcal O_X)$ be pseudo-coherent [def-pc-derived-category, def-pur-pseudo-coherent-complex], and let $a\\in\\mathbf Z$. There exist a perfect object $P\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ [def-pc-perfect-complex] and a morphism $u:P\\to E$ in $D(\\mathcal O_X)$ such that $H^i(u)$ is an isomorphism for every $i>a$ and $H^a(u)$ is surjective. No Noetherian, separated, ample-line-bundle or base-ring hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08ES, theorem-approximation, with T=X in Tags 08EN (definition-approximation) and 08EM (definition-approximation-holds)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-pc-derived-category",
+  "def-pur-pseudo-coherent-complex",
+  "def-pc-perfect-complex"
+ ],
+ "proof": [
+  {
+   "text": "For each quasi-compact open $W\\subseteq X$, let the property under induction be $\\mathsf A(W)$. The affine lemma supplies $\\mathsf A(W)$ for every affine open, including the empty scheme.",
+   "uses": [
+    "def-sfb-supported-perfect-approximation-property",
+    "lem-sfb-affine-supported-perfect-approximation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08ES, theorem-approximation, affine base case via Tag 08EQ, lemma-approximation-affine."
+   }
+  },
+  {
+   "text": "Consider quasi-compact opens $U,V\\subseteq X$ with $V$ affine and suppose the induction hypotheses hold for $U,V,U\\cap V$. Quasi-separatedness of $X$ implies that $U\\cap V$ is quasi-compact. Apply the open-step lemma to the scheme $U\\cup V$ with its two indicated opens and the hypothesis $\\mathsf A(U)$ to obtain $\\mathsf A(U\\cup V)$. Thus the existing quasi-compact-open induction theorem applies and gives $\\mathsf A(X)$.",
+   "uses": [
+    "pqf-lem-qs-intersection-qc",
+    "lem-sfb-supported-perfect-approximation-open-step",
+    "lem-sc-invert-s-cohomology-induction",
+    "def-sfb-supported-perfect-approximation-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08ES, theorem-approximation: Tag 08ER, lemma-induction-step, and coherent.tex Tag 08DR, lemma-induction-principle."
+   }
+  },
+  {
+   "text": "By quasi-coherence of pseudo-coherent objects, $E\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$. In $\\mathsf A(X)$ choose $T=X$, whose complement is empty and hence retrocompact. Obtain its integer $r$, and put $m=a$. The definition of pseudo-coherence says that $E$ is $(a-r)$-pseudo-coherent, and every support hypothesis outside $T=X$ is vacuous. The defining conclusion of $\\mathsf A(X)$ therefore gives a perfect $P$ and $u:P\\to E$ with the asserted cohomology isomorphisms and surjection, including the endpoint $a$.",
+   "uses": [
+    "def-sfb-supported-perfect-approximation-property",
+    "lem-sc-pseudo-coherent-qcoh",
+    "def-pur-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tags 08EM and 08EN with T=X, after Tag 08ES; quasi-coherence via Tag 08E5, lemma-pseudo-coherent."
+   }
+  },
+  {
+   "text": "The perfect object $P$ has quasi-coherent cohomology, so the same $P$ belongs to $D_{\\mathrm{QCoh}}(\\mathcal O_X)$. None of the preceding statements imposed a Noetherian, separated, ample-line-bundle, or base-ring hypothesis.",
+   "uses": [
+    "lem-sc-perfect-qcoherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Perfect complexes lie in D_QCoh: Tag 08E5, lemma-pseudo-coherent, with cohomology.tex Tag 08CM, definition-perfect."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-supported-perfect-approximation-property",
+  "lem-sfb-affine-supported-perfect-approximation",
+  "pqf-lem-qs-intersection-qc",
+  "lem-sfb-supported-perfect-approximation-open-step",
+  "lem-sc-invert-s-cohomology-induction",
+  "lem-sc-pseudo-coherent-qcoh",
+  "def-pur-pseudo-coherent-complex",
+  "lem-sc-perfect-qcoherent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08ES, theorem-approximation, specialized using Tags 08EN and 08EM to T=X."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "perfect.*approximat|approximat.*perfect|PseudoCoherent|pseudo_coherent",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-presentation and bounded-representative results do not supply a globally perfect approximation to a pseudo-coherent scheme complex."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Perfect\", \"Complex\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-presentation and bounded-representative results do not supply a globally perfect approximation to a pseudo-coherent scheme complex."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A pseudo coherent complex on a quasi compact quasi separated scheme has arbitrarily accurate perfect approximations",
+   "results": "OK: 8 hits; SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, AlgebraicGeometry.IsSeparated.instQuasiSeparated, SheafOfModules.QuasicoherentData.presentation, CategoryTheory.Abelian.Pseudoelement.exact_of_pseudo_exact, SheafOfModules.quasicoherentDataOfIsFinitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-presentation and bounded-representative results do not supply a globally perfect approximation to a pseudo-coherent scheme complex."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a quasi compact quasi separated scheme every pseudo coherent complex admits a map from a perfect complex inducing cohomology isomorphisms above any chosen degree and a surjection at that degree",
+   "results": "OK: 8 hits; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE, CochainComplex.cm5b, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-presentation and bounded-representative results do not supply a globally perfect approximation to a pseudo-coherent scheme complex."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Approximate a pseudo coherent derived object on a qcqs scheme by perfect complexes with cone cohomology bounded above",
+   "results": "OK: 8 hits; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.IsGE, DerivedCategory.IsLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-presentation and bounded-representative results do not supply a globally perfect approximation to a pseudo-coherent scheme complex."
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*approximat|approximat.*perfect|PseudoCoherent|pseudo_coherent",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: bounded derived representatives and finite-presentation sheaves do not give globally perfect approximations on qcqs schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A pseudo coherent complex on a quasi compact quasi separated scheme has arbitrarily accurate perfect approximations",
+   "results": "OK: 8 hits; SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, AlgebraicGeometry.IsSeparated.instQuasiSeparated, SheafOfModules.QuasicoherentData.presentation, CategoryTheory.Abelian.Pseudoelement.exact_of_pseudo_exact, SheafOfModules.quasicoherentDataOfIsFinitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: bounded derived representatives and finite-presentation sheaves do not give globally perfect approximations on qcqs schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Perfect\", \"Complex\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: bounded derived representatives and finite-presentation sheaves do not give globally perfect approximations on qcqs schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a quasi compact quasi separated scheme a pseudo coherent derived object admits perfect approximations inducing isomorphisms above any degree and a surjection in that degree",
+   "results": "OK: 8 hits; DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isLE, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE",
+   "date": "2026-10-23",
+   "verdict": "no match: bounded derived representatives and finite-presentation sheaves do not give globally perfect approximations on qcqs schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-perfect-to-pseudocoherent-tensor-tests",
+  "date": "2026-10-23",
+  "group": "Q58"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 2, Lemma 2.5 (printed pp.178--179), using Section 1, Corollary 1.5 and Lemma 1.6: multiplication and the pushforward exact sequences, retaining the twist by minus the old-marking divisor. Lemma 2.5, first paragraph and final evaluation: Corollary 1.5 supplies vanishing, base-flat direct images, arbitrary base change and generation for the five divisor modules. Corollary 1.5, printed p.167: the general cohomology-and-base-change tool whose conditions (1) and (2) the exceptional-fibre calculation must verify. General tool for Corollary 1.5: finite presentation of the acyclic image: detect pseudo-coherence by perfect tensor tests on V, using proper-support perfect direct image for U -> S. Supporting tool: 0CSH (lemma-perfect-enough). In Stacks 0CSH proof, choose a perfect approximation P to E at degree m-N-1-b; this is the 08ES approximation theorem with support T=X.",
+   "via": [
+    "lem-sfb-perfect-to-pseudocoherent-tensor-tests",
+    "lem-sfb-perfect-tests-detect-pseudocoherence",
+    "lem-sfb-relative-acyclic-direct-image",
+    "lem-sfb-rational-contraction-line-cohomology",
+    "lem-sfb-elementary-contraction-evaluation",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-pseudocoherent-perfect-approximation",
+  "worker": "stage1",
+  "summary": "Followed the Stacks affine/open-union induction proof, reusing the existing qc-open induction, qc-intersection, pseudo-coherent-quasi-coherent and perfect-quasi-coherent nodes. Created the supported approximation property and two strictly smaller induction inputs, each statement-only. Expanded the T=X specialization and the endpoint surjection; statement unchanged.",
+  "blueprint": "Supports the existing recorded prerequisite of det-thm-sf-ctf-stability-direct-images proof (3): 0CSH chooses a perfect approximation. Steps 1-2 realize 08ES affine/open-union induction; steps 3-4 specialize 08EN/08EM to support X. The blueprint ancestor command returns None, retained as the existing ancestry.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-qs-intersection-qc",
+    "why": "Generic qc-intersection tool checks the overlap hypothesis; the unit contains no replacement."
+   },
+   {
+    "node": "lem-sc-invert-s-cohomology-induction",
+    "why": "Generic scheme induction theorem from 08DR used by 08ES; no six-functor route is replaced."
+   },
+   {
+    "node": "lem-sc-pseudo-coherent-qcoh",
+    "why": "Generic 08E5 input places E in D_QCoh before applying the approximation property."
+   },
+   {
+    "node": "lem-sc-perfect-qcoherent",
+    "why": "Generic quasi-coherence of perfect objects gives the requested category for P."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-qs-intersection-qc",
+  "lem-sc-invert-s-cohomology-induction",
+  "lem-sc-pseudo-coherent-qcoh",
+  "lem-sc-perfect-qcoherent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q141-f847fa992",
+  "group": "Q141",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q141-f847fa992 (reviewer sub-agent of L); spot-checked: I read perfect.tex 08EM/08EN/08EQ/08ER/08ES and lemma-represent-cohomology-class-on-closed. def-sfb-supported-perfect-approximation-property matches 08EM+08EN exactly: the support condition is for i>=m-r as in 08EN(2), the quantifier order is forall T, exists r, forall (m,F), and retrocompactness is written out by testing against affine opens, which is equivalent to testing against qc opens. lem-sfb-affine-supported-perfect-approximation equals 08EQ, with s affines and support for i>=m-s+1. Its statement is true even though the Stacks proof writes T=V(f_1..f_r) with the same r: the degree bound uses only the count of affines in the cover. It needs no Noetherian hypothesis, s=0 is the case T=Y, and its 'in particular A(Y)' clause follows by taking r=s. lem-sfb-supported-perfect-approximation-open-step equals 08ER with no separatedness hypothesis added; the U=empty and V=empty cases reduce correctly. The report's Source error is correct: in the 08ER proof, V\\T' is (V\\T) union (U intersect V). It affects only the future proof of that node. Steps: step 1 is the affine base, including the empty scheme. Step 2 gets U intersect V qc from pqf-lem-qs-intersection-qc, applies the open step, and concludes A(X) by instantiating lem-sc-invert-s-cohomology-induction (08DR). Step 3 puts E in D_QCoh via lem-sc-pseudo-coherent-qcoh, takes T=X and m=a, and uses def-pur-pseudo-coherent-complex for (a-r)-pseudo-coherence; the support hypotheses are vacuous and the surjection is at a. Step 4 gives P in D_QCoh via lem-sc-perfect-qcoherent. An rg -L search of the DAG for these tags, their labels and approximation wording found no duplicates; no new node restates the item, the two lemmas are of comparable size, and the item proof is a short assembly. I accept the four generic tool_uses (qs-intersection, 08DR induction, pseudo-coherent qcoh, perfect qcoh). No SGA citation. Advisory only: step 3 could also cite def-sfb-m-pseudo-coherent-complex. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PseudoCoherentPerfectApproximation",
+  "declaration": "AlgebraicGeometry.Scheme.exists_perfect_approximation",
+  "file": "lean/Sheaf/AlgebraicGeometry/PseudoCoherentPerfectApproximation.lean",
+  "statement": "theorem exists_perfect_approximation (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] (E : schemeDerivedCategory X) (hE : IsPseudoCoherent X E) (a : ℤ) : ∃ (P : schemeDerivedQCohCategory X) (u : P.obj ⟶ E), IsPerfect X P.obj ∧ (∀ i : ℤ, a < i → IsIso ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).map u)) ∧ Epi ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) a).map u)",
+  "branch": "sheaf-dag",
+  "by": "NB",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2c86cf297",
+  "group": "NB",
+  "result": "pass",
+  "note": "Read Stacks 08EM/08EN/08ES: the node is the T=X case. Lean matches every clause: X qcqs (CompactSpace + QuasiSeparatedSpace); E in schemeDerivedCategory X with recorded IsPseudoCoherent and no QCoh assumption added; a : ℤ; ∃ P : schemeDerivedQCohCategory X with IsPerfect X P.obj and u : P.obj ⟶ E; IsIso of homologyFunctor i for a < i and Epi at a (up ℤ, cohomological). Only extra binders are the HasDerivedCategory.{w} instances required by the recorded IsPseudoCoherent/IsPerfect; universes u, w independent and bound. lean.statement verbatim; node differs from live only in lean; stmt_deps exact; imported proof-dep modules exist in live. No defs, sorry proof, docstrings carry source place, blueprint tag and 4 proof steps. Only related declaration is the algebraic-space version, a different statement. Report has both sections. No findings; no recompile since nothing changed."
+ }
+}

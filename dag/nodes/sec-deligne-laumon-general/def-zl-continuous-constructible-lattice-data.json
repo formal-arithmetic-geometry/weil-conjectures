@@ -1,0 +1,133 @@
+{
+ "id": "def-zl-continuous-constructible-lattice-data",
+ "kind": "definition",
+ "title": "Interfaces for normalized continuous coefficients and stratified embedded lattices",
+ "statement": "The normalized coefficient, section-action encoding, scalar comparison, restriction, coefficient extension, lattice and stratification structures used in [lem-zl-continuous-constructible-stratified-lattices], with the exact unchanged fields and definitions formerly declared in its Lean module. Coefficients pins integral quotient projections and rational values; Encoding pins identity maps and inverse-image units; ScalarComparison pins tensor units; Lattice retains an actual monic internal inclusion whose adjoint is an isomorphism; Stratified retains a finite refinement, reductions and all further lattice restrictions. Family packages the independent ordinary, coefficient, geometric and stratified components. These interfaces use [def-weil-finite-field-fiber], [def-weil-l-adic-coefficient-extension], [def-weil-scheme-morphism-properties], [def-weil-pbc-proetale-site], [def-weil-completed-integral-coefficients], [sk-def-sfb-pulled-back-coefficients], [sk-def-sfb-module-objects], [def-weil-sheaf-of-modules-category], [lem-weil-pbc-continuous-coefficient-realizations], [lem-per-continuous-rational-derived-realization], [def-weil-pbc-continuous-coefficient-module-encoding], [def-weil-pbc-internal-abelian-sheaf-module-equivalence], [def-constructible-stratification], [def-sf-proetale-locally-finite-free-module], [def-sfb-continuous-coefficient-module-equivalence-universe], [def-per-adic-base-stages], [def-weil-pbc-continuous-constructible-module], [def-weil-pbc-continuous-scalar-map-universes], [def-weil-pbc-completed-continuous-module-encoding-universes].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.13 first paragraph, Proposition 6.8.4 and Remark 6.8.15; agent transport between condensed internal and continuous sectionwise modules, expanded from old item steps 4-6 and blueprint paragraph 6."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "lem-per-continuous-rational-derived-realization",
+  "def-weil-pbc-continuous-coefficient-module-encoding",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-constructible-stratification",
+  "def-sf-proetale-locally-finite-free-module",
+  "def-sfb-continuous-coefficient-module-equivalence-universe",
+  "def-per-adic-base-stages",
+  "def-weil-pbc-continuous-constructible-module",
+  "def-weil-pbc-continuous-scalar-map-universes",
+  "def-weil-pbc-completed-continuous-module-encoding-universes"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars under equivalence of internal modules and sheaves of modules preserves tensor generators",
+   "results": "ModuleCat.extendScalars and ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, Mathlib.Algebra.Category.ModuleCat.ChangeOfRings; ordinary module results only.",
+   "date": "2026-10-25",
+   "verdict": "No match for the internal sheaf encoding, normalized coefficient family, geometric coherence or reduced embedded lattice refinement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally free rational pro etale sheaves admit integral lattices on reduced finite locally closed refinement of a constructible partition",
+   "results": "AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation; AlgebraicGeometry.IsIntegral.component_integral; algebraic localizations and etale loci only.",
+   "date": "2026-10-25",
+   "verdict": "No match; these concern structure sheaves rather than the continuous coefficient rings and encoded internal modules."
+  },
+  {
+   "tool": "grep",
+   "query": "rg integralCoefficient|finiteContinuousCoefficient|stratified.*lattice Mathlib/AlgebraicGeometry Mathlib/Condensed; rg sectionModuleEquivalence|sectionModuleComapIso Mathlib/CategoryTheory Mathlib/Algebra/Category/ModuleCat",
+   "results": "No matching declarations in Mathlib. Repository search finds the existing generic coefficient, encoding and internal stratified-lattice dependencies, but no theorem with the combined normalized interfaces.",
+   "date": "2026-10-25",
+   "verdict": "No exact match; use existing DAG dependencies to prove the separate assembly steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.DeligneLaumon.ContinuousConstructibleStratifiedLattices",
+  "date": "2026-10-25",
+  "group": "A3"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Paragraph 6, normalized continuous coefficient and embedded lattice interpretation; unchanged Lean interfaces extracted to avoid proof import cycles.",
+   "via": [
+    "lem-zl-continuous-constructible-stratified-lattices",
+    "lem-zl-raw-heart-adic-lisse-stratification"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.DeligneLaumon.ContinuousConstructibleLatticeData",
+  "file": "lean/Sheaf/DeligneLaumon/ContinuousConstructibleLatticeData.lean",
+  "declaration": "WeilConjectures.StratifiedContinuousLattices.Family",
+  "declarations": [
+   "WeilConjectures.StratifiedContinuousLattices.Coefficients",
+   "WeilConjectures.StratifiedContinuousLattices.inclusion",
+   "WeilConjectures.StratifiedContinuousLattices.Coefficients.scalar",
+   "WeilConjectures.StratifiedContinuousLattices.Coefficients.rationalEncoding",
+   "WeilConjectures.StratifiedContinuousLattices.Coefficients.integralEncoding",
+   "WeilConjectures.StratifiedContinuousLattices.abCoefficients",
+   "WeilConjectures.StratifiedContinuousLattices.chart",
+   "WeilConjectures.StratifiedContinuousLattices.internalInclusion",
+   "WeilConjectures.StratifiedContinuousLattices.continuousPull",
+   "WeilConjectures.StratifiedContinuousLattices.internalPullUnit",
+   "WeilConjectures.StratifiedContinuousLattices.LisseCriterion",
+   "WeilConjectures.StratifiedContinuousLattices.Encoding",
+   "WeilConjectures.StratifiedContinuousLattices.internalExtend",
+   "WeilConjectures.StratifiedContinuousLattices.ScalarComparison",
+   "WeilConjectures.StratifiedContinuousLattices.CoefficientFamily",
+   "WeilConjectures.StratifiedContinuousLattices.Lattice",
+   "WeilConjectures.StratifiedContinuousLattices.LatticeRestriction",
+   "WeilConjectures.StratifiedContinuousLattices.Restriction",
+   "WeilConjectures.StratifiedContinuousLattices.FieldChange",
+   "WeilConjectures.StratifiedContinuousLattices.Stratified",
+   "WeilConjectures.StratifiedContinuousLattices.OrdinaryScalars",
+   "WeilConjectures.StratifiedContinuousLattices.Family"
+  ],
+  "statement": "structure Family (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime]",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-302ea",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261025T122437-L-1771548",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-302ea",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261025T122437-L-1771548",
+  "kind": "interface",
+  "note": "independent cc review: 22 interface decls in new ContinuousConstructibleLatticeData vs live item module (verbatim, re-exported publicly); item proof = Family constructor from 4 sorry components vs Family fields; item proof_deps vs the 4 new nodes; importer RawHeartAdicStrataBridge compiled rc 0 against the delivered modules"
+ }
+}

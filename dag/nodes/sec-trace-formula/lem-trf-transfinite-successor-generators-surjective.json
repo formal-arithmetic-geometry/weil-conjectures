@@ -1,0 +1,213 @@
+{
+ "id": "lem-trf-transfinite-successor-generators-surjective",
+ "kind": "statement",
+ "title": "Successor generators generate every stage of a continuous transfinite filtration",
+ "statement": "Let $R$ be a commutative ring, $X$ an $R$-module, $\\kappa$ a set ordinal, and $(X_\\beta)_{\\beta\\leq\\kappa}$ an increasing family of $R$-submodules of $X$. For each $\\alpha<\\kappa$ let $A_\\alpha$ be an $R$-module and $t_\\alpha:A_\\alpha\\to X_{\\alpha+1}$ an $R$-linear map. Put $D=\\bigoplus_{\\alpha<\\kappa}A_\\alpha$ using [def-weil-pbc-direct-sum-modules], and let $f:D\\to X$ be the $R$-linear map $f((a_\\alpha))=\\sum_{\\alpha\\in\\operatorname{supp}(a)}t_\\alpha(a_\\alpha)$, with each value included in $X$. Assume $X_0=0$, $X_\\lambda=\\bigcup_{\\beta<\\lambda}X_\\beta$ for every nonzero limit $\\lambda\\leq\\kappa$, and that every $x\\in X_{\\alpha+1}$ can be written $x=y+t_\\alpha(a)$ with $y\\in X_\\alpha$ and $a\\in A_\\alpha$. For $\\beta\\leq\\kappa$, let $D_\\beta\\subseteq D$ consist of the families with $a_\\alpha=0$ for every $\\alpha\\geq\\beta$. Then $f(D_\\beta)=X_\\beta$ for every $\\beta\\leq\\kappa$. In particular $f:D\\to X$ is surjective if $X_\\kappa=X$. No injectivity of the maps $t_\\alpha$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 058V, lemma-direct-sum-devissage, proof lines 20417–20433: definition of f_beta and transfinite induction identifying its image. Generalized to arbitrary successor-generating maps, without requiring them injective."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-direct-sum-modules"
+ ],
+ "proof": [
+  {
+   "text": "For every $\\beta\\leq\\kappa$, first prove $f(D_\\beta)\\subseteq X_\\beta$. By [def-weil-pbc-direct-sum-modules], an element $a\\in D_\\beta$ has finite support contained in $\\{\\alpha:\\alpha<\\beta\\}$. For every supported $\\alpha$, we have $\\alpha+1\\leq\\beta$, so $t_\\alpha(a_\\alpha)\\in X_{\\alpha+1}\\subseteq X_\\beta$. The finite sum defining $f(a)$ belongs to the submodule $X_\\beta$; an empty sum is zero. This uses neither continuity nor injectivity.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058V, lemma-direct-sum-devissage, proof: transfinite induction on the images of f_beta (lines 20417–20433), with arbitrary successor-generating maps."
+   }
+  },
+  {
+   "text": "For the reverse inclusions, use transfinite induction on $\\beta\\leq\\kappa$, with induction assertion $X_\\beta\\subseteq f(D_\\beta)$. At $\\beta=0$, every coordinate of a family in $D_0$ is zero, hence $D_0=\\{0\\}$ and $f(D_0)=\\{0\\}=X_0$. In the remaining cases assume the assertion holds at every earlier stage.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058V, lemma-direct-sum-devissage, proof: transfinite induction on the images of f_beta (lines 20417–20433), with arbitrary successor-generating maps."
+   }
+  },
+  {
+   "text": "Let $\\beta=\\gamma+1\\leq\\kappa$ and $x\\in X_{\\gamma+1}$. The stated successor hypothesis gives $x=y+t_\\gamma(b)$ with $y\\in X_\\gamma$ and $b\\in A_\\gamma$; here $\\gamma<\\kappa$, so this summand exists. By induction choose $a\\in D_\\gamma$ with $f(a)=y$. Using the canonical inclusion $\\iota_\\gamma$ of [def-weil-pbc-direct-sum-modules], put $c=a+\\iota_\\gamma(b)$. Its support is finite and contained in $\\{\\alpha:\\alpha<\\gamma\\}\\cup\\{\\gamma\\}$, hence $c\\in D_{\\gamma+1}$, and the defining finite-sum formula gives $f(c)=f(a)+t_\\gamma(b)=x$. No uniqueness of $b$ is needed.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058V, lemma-direct-sum-devissage, proof: transfinite induction on the images of f_beta (lines 20417–20433), with arbitrary successor-generating maps."
+   }
+  },
+  {
+   "text": "Let $\\beta=\\lambda\\leq\\kappa$ be a nonzero limit and $x\\in X_\\lambda$. Continuity supplies $\\gamma<\\lambda$ with $x\\in X_\\gamma$. By induction choose $a\\in D_\\gamma$ with $f(a)=x$. The coordinate vanishing condition implies $D_\\gamma\\subseteq D_\\lambda$, so this same $a$ is a preimage in $D_\\lambda$. This proves the reverse inclusion at the limit without forming any infinite sum.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058V, lemma-direct-sum-devissage, proof: transfinite induction on the images of f_beta (lines 20417–20433), with arbitrary successor-generating maps."
+   }
+  },
+  {
+   "text": "The zero, successor and nonzero limit cases exhaust the ordinals $\\beta\\leq\\kappa$: if an induction assertion failed, the least failing ordinal would contradict the relevant case above. Thus the reverse inclusion holds at every stage. Together with step 1 it gives $f(D_\\beta)=X_\\beta$. Every index of $D$ is strictly below $\\kappa$, so the condition defining $D_\\kappa$ imposes no further restriction and $D_\\kappa=D$. If $X_\\kappa=X$, the equality at $\\kappa$ is exactly surjectivity of $f$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058V, lemma-direct-sum-devissage, proof: transfinite induction on the images of f_beta (lines 20417–20433), with arbitrary successor-generating maps."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-direct-sum-modules"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 058V, lemma-direct-sum-devissage, proof: transfinite induction on the images of f_beta (lines 20417–20433), with arbitrary successor-generating maps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "transfinite|ordinal|iSup.*range|range.*iSup",
+   "results": "{\"t\": \"2026-10-22T06:45:16Z\", \"tool\": \"grep\", \"query\": \"transfinite|ordinal|iSup.*range|range.*iSup\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/CliffordAlgebra/Fold.lean\", \"Mathlib/LinearAlgebra/CliffordAlgebra/Grading.lean\", \"Mathlib/LinearAlgebra/CliffordAlgebra/Grading.lean\", \"Mathlib/LinearAlgebra/CliffordAlgebra/Conjugation.lean\", \"Mathlib/LinearAlgebra/CliffordAlgebra/Conjugation.lean\", \"Mathlib/LinearAlgebra/Pi.lean\", \"Mathlib/LinearAlgebra/Pi.lean\", \"Mathlib/LinearAlgebra/Pi.lean\"], \"digest\": \"6f6f5ef00da09115\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: DirectSum.range_coeLinearMap and Submodule.iSup_eq_range_dfinsupp_lsum describe a range by a supremum but do not identify it with the given transfinite stages. DirectSum.lmap_surjective concerns componentwise maps between two direct sums. DirectLimit.exists_of concerns representatives in a colimit. Basis.flag_succ assumes a finite basis. None proves generation by transfinite successor induction. Read Mathlib/LinearAlgebra/DFinsupp.lean:365–390 and Mathlib/Algebra/DirectSum/Module.lean:505–527; second semantic phrasing also gave only special Nobeling/finite-generation results."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A continuous ordinal filtration is generated by the images of maps which generate each successor modulo its predecessor",
+   "results": "{\"t\": \"2026-10-22T06:45:17Z\", \"tool\": \"leansearch\", \"query\": \"A continuous ordinal filtration is generated by the images of maps which generate each successor modulo its predecessor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MeasureTheory.filtrationOfSet\", \"MeasureTheory.Filtration\", \"Field.Emb.Cardinal.filtration\", \"MeasureTheory.Filtration.natural\", \"MeasureTheory.Filtration.IsRightContinuous\", \"ProbabilityTheory.partitionFiltration\", \"MeasureTheory.Filtration.rightCont_eq_of_exists_gt\", \"IsFiltration.mk\"], \"digest\": \"bc8eeda57889ca3a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: DirectSum.range_coeLinearMap and Submodule.iSup_eq_range_dfinsupp_lsum describe a range by a supremum but do not identify it with the given transfinite stages. DirectSum.lmap_surjective concerns componentwise maps between two direct sums. DirectLimit.exists_of concerns representatives in a colimit. Basis.flag_succ assumes a finite basis. None proves generation by transfinite successor induction. Read Mathlib/LinearAlgebra/DFinsupp.lean:365–390 and Mathlib/Algebra/DirectSum/Module.lean:505–527; second semantic phrasing also gave only special Nobeling/finite-generation results."
+  },
+  {
+   "tool": "loogle",
+   "query": "DirectSum, LinearMap.range",
+   "results": "{\"t\": \"2026-10-22T06:45:17Z\", \"tool\": \"loogle\", \"query\": \"DirectSum, LinearMap.range\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"DirectSum.range_lmap\", \"DirectSum.range_coeLinearMap\", \"TensorAlgebra.GradedAlgebra.ι\", \"TensorAlgebra.GradedAlgebra.ι_apply\"], \"digest\": \"06898e46875e37e4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: DirectSum.range_coeLinearMap and Submodule.iSup_eq_range_dfinsupp_lsum describe a range by a supremum but do not identify it with the given transfinite stages. DirectSum.lmap_surjective concerns componentwise maps between two direct sums. DirectLimit.exists_of concerns representatives in a colimit. Basis.flag_succ assumes a finite basis. None proves generation by transfinite successor induction. Read Mathlib/LinearAlgebra/DFinsupp.lean:365–390 and Mathlib/Algebra/DirectSum/Module.lean:505–527; second semantic phrasing also gave only special Nobeling/finite-generation results."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a continuous ordinal indexed increasing filtration starting at zero, maps from modules A_alpha into the successor stages whose images generate each stage modulo its predecessor induce a surjective map from their direct sum",
+   "results": "{\"t\": \"2026-10-22T06:45:31Z\", \"tool\": \"leanfinder\", \"query\": \"For a continuous ordinal indexed increasing filtration starting at zero, maps from modules A_alpha into the successor stages whose images generate each stage modulo its predecessor induce a surjective map from their direct sum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.eval_surjective\", \"Module.DirectLimit.exists_of₂\", \"Module.DirectLimit.exists_of\", \"AdicCompletion.mk_surjective\", \"DirectSum.lmap_surjective\", \"AdicCompletion.map_surjective_of_mkQ_comp_surjective\", \"AdicCompletion.range_eval\", \"ModuleCat.FilteredColimits.M.mk_surjective\"], \"digest\": \"1fdce5b55e2f0ba9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: DirectSum.range_coeLinearMap and Submodule.iSup_eq_range_dfinsupp_lsum describe a range by a supremum but do not identify it with the given transfinite stages. DirectSum.lmap_surjective concerns componentwise maps between two direct sums. DirectLimit.exists_of concerns representatives in a colimit. Basis.flag_succ assumes a finite basis. None proves generation by transfinite successor induction. Read Mathlib/LinearAlgebra/DFinsupp.lean:365–390 and Mathlib/Algebra/DirectSum/Module.lean:505–527; second semantic phrasing also gave only special Nobeling/finite-generation results."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transfinite induction on a continuous chain of submodules shows the finite sums of chosen successor generators equal every stage",
+   "results": "{\"t\": \"2026-10-22T06:45:32Z\", \"tool\": \"leanfinder\", \"query\": \"Transfinite induction on a continuous chain of submodules shows the finite sums of chosen successor generators equal every stage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.FG.stabilizes_of_iSup_eq\", \"Profinite.NobelingProof.GoodProducts.span\", \"Profinite.NobelingProof.GoodProducts.spanFin\", \"Profinite.NobelingProof.GoodProducts.maxTail_isGood\", \"Profinite.NobelingProof.GoodProducts.MaxToGood\", \"Module.Basis.flag_succ\", \"Submodule.mem_iSup_of_chain\", \"SubmodulesBasis\"], \"digest\": \"2c30c05e7d4a2a4a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: DirectSum.range_coeLinearMap and Submodule.iSup_eq_range_dfinsupp_lsum describe a range by a supremum but do not identify it with the given transfinite stages. DirectSum.lmap_surjective concerns componentwise maps between two direct sums. DirectLimit.exists_of concerns representatives in a colimit. Basis.flag_succ assumes a finite basis. None proves generation by transfinite successor induction. Read Mathlib/LinearAlgebra/DFinsupp.lean:365–390 and Mathlib/Algebra/DirectSum/Module.lean:505–527; second semantic phrasing also gave only special Nobeling/finite-generation results."
+  },
+  {
+   "tool": "grep",
+   "query": "transfinite|iSup_eq_range_dfinsupp_lsum|range_coeLinearMap",
+   "results": "{\"t\": \"2026-10-23T10:58:10Z\", \"tool\": \"grep\", \"query\": \"transfinite|iSup_eq_range_dfinsupp_lsum|range_coeLinearMap\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/DFinsupp.lean\", \"Mathlib/LinearAlgebra/DFinsupp.lean\", \"Mathlib/LinearAlgebra/DFinsupp.lean\", \"Mathlib/LinearAlgebra/DFinsupp.lean\", \"Mathlib/LinearAlgebra/DFinsupp.lean\"], \"digest\": \"1dcc8a3bd52a75f9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Submodule.iSup_eq_range_dfinsupp_lsum (Mathlib/LinearAlgebra/DFinsupp.lean:370) expresses the supremum as a finite-sum range; it does not identify the prescribed ordinal filtration stages."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A continuous chain of submodules indexed by ordinals is generated by images generating each successive quotient",
+   "results": "{\"t\": \"2026-10-23T10:58:11Z\", \"tool\": \"leansearch\", \"query\": \"A continuous chain of submodules indexed by ordinals is generated by images generating each successive quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.instIsWellOrderContinuousFunctor\", \"monotone_stabilizes_iff_noetherian\", \"eventuallyConst_of_isNoetherian\", \"CategoryTheory.SmallObject.SuccStruct.instIsWellOrderContinuousIterationFunctor\", \"Module.Basis.flag\", \"Module.Basis.isMaxChain_range_flag\", \"Submodule.FG.directLimit\", \"IsArtinian.eventuallyConst_of_isArtinian\"], \"digest\": \"bf0ba8e052c44d74\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned well-order continuity for categorical constructions, natural-number Noetherian stabilization, finite basis flags, and finitely generated direct limits; none states this successor-generation theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "DirectSum, LinearMap.range",
+   "results": "{\"t\": \"2026-10-23T10:58:11Z\", \"tool\": \"loogle\", \"query\": \"DirectSum, LinearMap.range\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"DirectSum.range_lmap\", \"DirectSum.range_coeLinearMap\", \"TensorAlgebra.GradedAlgebra.ι\", \"TensorAlgebra.GradedAlgebra.ι_apply\"], \"digest\": \"06898e46875e37e4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: DirectSum.range_coeLinearMap (Mathlib/Algebra/DirectSum/Module.lean:424) concerns inclusions of submodules and their supremum, not arbitrary successor-generating maps and the given transfinite stages; range_lmap is a componentwise direct-sum map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a continuous ordinal indexed increasing filtration of modules starting at zero, maps generating each successor modulo its predecessor generate every stage by finite sums",
+   "results": "{\"t\": \"2026-10-23T10:58:12Z\", \"tool\": \"leanfinder\", \"query\": \"For a continuous ordinal indexed increasing filtration of modules starting at zero, maps generating each successor modulo its predecessor generate every stage by finite sums\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Field.Emb.Cardinal.iSup_filtration\", \"Field.Emb.Cardinal.directed_filtration\", \"Ideal.Filtration.Stable\", \"IsModuleFiltration.mk_int\", \"Field.Emb.Cardinal.filtration_apply\", \"Submodule.FG.stabilizes_of_iSup_eq\", \"Ideal.Filtration.submodule_closure_single\", \"Ideal.Filtration.submodule_span_single\"], \"digest\": \"7dc78f3a687ef83a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned special field/ideal filtrations or adic completion and filtered-colimit surjectivity, which do not identify the arbitrary ordinal filtration under these hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transfinite induction proves surjectivity from the direct sum of chosen lifts of generators of successive quotients of a continuous module filtration",
+   "results": "{\"t\": \"2026-10-23T10:58:37Z\", \"tool\": \"leanfinder\", \"query\": \"Transfinite induction proves surjectivity from the direct sum of chosen lifts of generators of successive quotients of a continuous module filtration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SeparationQuotient.postcomp_mkCLM_surjective\", \"AdicCompletion.mk_surjective\", \"AdicCompletion.eval_surjective\", \"TopModuleCat.cokerπ_surjective\", \"AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq\", \"AdicCompletion.of_surjective\", \"surjective_of_mkQ_comp_surjective\", \"ModuleCat.FilteredColimits.M.mk_surjective\"], \"digest\": \"cc23a28d9b7ba172\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned special field/ideal filtrations or adic completion and filtered-colimit surjectivity, which do not identify the arbitrary ordinal filtration under these hypotheses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-split-transfinite-module-filtration",
+  "date": "2026-10-22",
+  "group": "Q80"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Within the imported ancestor proof clause “In the proof of Tag 0593, Lemma 0590 reduces to countable generation by Theorem 058Y (theorem-projective-direct-sum)”: the proof of Tag 058Y invokes Theorem 058X (theorem-kaplansky-direct-sum). Tag 058V, lemma-direct-sum-devissage, lines 20409–20453, with the dévissage of Definition 058U (definition-devissage) indexed by the successor ordinal kappa+1 to include the endpoint. Re-split of lem-trf-split-transfinite-module-filtration: Tag 058V, lemma-direct-sum-devissage, proof lines 20417–20433: definition of f_beta and transfinite induction identifying its image. Generalized to arbitrary successor-generating maps, without requiring them injective.",
+   "via": [
+    "lem-trf-split-transfinite-module-filtration",
+    "lem-trf-projective-kaplansky-direct-summand",
+    "lem-trf-projective-countable-decomposition",
+    "lem-trf-projective-over-local-free",
+    "lem-trf-local-universal-injective-residue",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-transfinite-successor-generators-surjective",
+  "worker": "stage1",
+  "summary": "Expanded the image induction in Stacks Tag 058V: finite-sum containment, zero stage, explicit successor preimage, continuity at limits, and the endpoint. The existing finite-support direct-sum definition suffices; no additional lemma nodes, injectivity, splitting, or countability hypotheses are needed. Statement unchanged. No matching project declaration or exact Mathlib theorem found.",
+  "blueprint": "The inherited lem-trf-local-term-locality ancestry reaches the Kaplansky devissage argument through lem-trf-split-transfinite-module-filtration. This split realizes precisely the image/surjectivity induction of Tag 058V recorded in blueprint.from.place; no change of unit or chapter route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q114-9000c8455",
+  "group": "Q114",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q114-9000c8455 (reviewer sub-agent of L); spot-checked: Read the whole item, the cited def-weil-pbc-direct-sum-modules statement, and Stacks algebra.tex Tag 058V lemma-direct-sum-devissage (label line 20410, image induction lines 20417-20436) with Definition 058U. The statement is unchanged from live, where the item is unsplit with no proof. Generalising to arbitrary t_alpha without injectivity is valid because the image half of 058V uses only (0), successor generation and (2). Checked the 5 steps: (1) f(D_beta) is in X_beta by finite support, alpha+1<=beta, monotonicity and closure of a submodule under finite sums. (2) The induction claim is stated explicitly; D_0=0 and X_0=0. (3) At a successor gamma+1<=kappa, gamma<kappa so t_gamma exists; c=a+iota_gamma(b) lies in D_{gamma+1} and f(c)=x by the linearity the item's statement asserts. (4) At a limit, continuity gives a stage gamma<lambda and D_gamma is in D_lambda. (5) The least-counterexample argument covers every case; D_kappa=D, so X_kappa=X gives surjectivity. Edge cases tested: kappa=0, 1, omega, omega+1, all t_alpha=0, non-injective t_alpha. No new nodes and no tool_uses. A grep of 058V across the DAG finds only the parent (whose step 3 applies this item correctly), the injectivity sibling and the projective/Kaplansky nodes, none of them a duplicate. TeX has no control characters or doubled backslashes; the Mathlib searches are concrete non-matches; no SGA is cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.TransfiniteSuccessorGeneratorsSurjective",
+  "declaration": "Module.directSum_toModule_image_of_filtration_successor_generators",
+  "file": "lean/Sheaf/LinearAlgebra/TransfiniteSuccessorGeneratorsSurjective.lean",
+  "statement": "theorem directSum_toModule_image_of_filtration_successor_generators (R : Type u) [CommRing R] (X : Type v) [AddCommGroup X] [Module R X] (κ : Ordinal.{w}) (F : Set.Iic κ → Submodule R X) (hmono : Monotone F) (A : Set.Iio κ → Type z) [∀ α, AddCommGroup (A α)] [∀ α, Module R (A α)] (t : ∀ α : Set.Iio κ, A α →ₗ[R] F ⟨Order.succ α.val, Order.succ_le_of_lt (a := α.val) (b := κ) α.property⟩) (hzero : F ⟨0, (bot_le : (0 : Ordinal.{w}) ≤ κ)⟩ = ⊥) (hcont : ∀ μ : Set.Iic κ, Order.IsSuccLimit μ.val → (F μ : Set X) = ⋃ (β : Set.Iic κ) (_ : β < μ), (F β : Set X)) (hgen : ∀ (α : Set.Iio κ) (x : F ⟨Order.succ α.val, Order.succ_le_of_lt (a := α.val) (b := κ) α.property⟩), ∃ (y : F ⟨α.val, le_of_lt (a := α.val) (b := κ) α.property⟩) (a : A α), (x : X) = (y : X) + (t α a : X)) : (∀ β : Set.Iic κ, (DirectSum.toModule R (Set.Iio κ) X (fun α ↦ (F ⟨Order.succ α.val, Order.succ_le_of_lt (a := α.val) (b := κ) α.property⟩).subtype.comp (t α))) '' {a : DirectSum (Set.Iio κ) A | ∀ α : Set.Iio κ, β.val ≤ α.val → a α = 0} = (F β : Set X)) ∧ (F ⟨κ, le_refl κ⟩ = ⊤ → Function.Surjective (DirectSum.toModule R (Set.Iio κ) X (fun α ↦ (F ⟨Order.succ α.val, Order.succ_le_of_lt (a := α.val) (b := κ) α.property⟩).subtype.comp (t α))))",
+  "branch": "newtargets-dag",
+  "by": "Q80",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-36c74f1fa",
+  "group": "Q80",
+  "result": "pass",
+  "note": "Read node, def-weil-pbc-direct-sum-modules (Mathlib DirectSum leaf), Stacks 058V lines 20408-20436, module and report. Every clause matches: F : Set.Iic κ → Submodule monotone, t α into F(succ α), DirectSum.toModule of subtype∘t as f, hzero, hcont via Order.IsSuccLimit (excludes 0), hgen in X, D_β as vanishing set; conclusion set-image equality ∀β≤κ plus F κ = ⊤ → surjective. No injectivity/extra instances; universes independent. Edge cases κ=0, β=0, β=κ, zero/non-injective t, zero ring covered. lean.statement verbatim in file; conventions match parent SplitTransfiniteModuleFiltration and sibling FiltrationSuccessorMapsIndependent; no definitions introduced; Mathlib searches are genuine non-matches; docstrings carry source, blueprint and 5 proof steps; sorry-only. No findings; no compile needed."
+ }
+}

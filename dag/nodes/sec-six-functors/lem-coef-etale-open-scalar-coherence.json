@@ -13,50 +13,54 @@
  ],
  "proof": [
   {
-   "text": "Identify the canonical ordinary comparisons with their balanced tensor maps by the scalar and open adjunctions. On flat K-flat cochain models, transpose the scalar units; degreewise exact open descent gives precisely the q and r representative equations.",
+   "text": "Use the separately stated extension normalization for q. Transport the reverse scalar mate normalization along the exact inverse-image comparison to obtain r normalization.",
    "uses": [
+    "lem-coef-etale-open-extension-normalization",
     "lem-coef-etale-open-comparison-data",
-    "lem-pur-derived-change-of-rings",
-    "lem-weil-pbc-termwise-adjunction-homotopy",
-    "lem-coef-etale-open-kflat"
+    "lem-sfb-etale-proetale-scalar-mate"
    ],
    "elementary": false
   },
   {
-   "text": "Every derived object has a flat K-flat resolution in the constant-ring module coordinates, transported by the constant-module equivalence. Scalar representative maps on these models are invertible. Naturality and cancellation determine every component from the normalization equation, giving both uniqueness assertions.",
+   "text": "Choose flat-term K-flat representatives. Transport native K-flatness through the constant-module equivalence. Cancel the invertible scalar representatives and exact factors in the normalization equations; naturality along the representative quasi-isomorphism proves both uniqueness assertions.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pur-derived-change-of-rings",
-    "lem-pur-etale-constant-module-flat",
-    "lem-coef-etale-open-kflat"
+    "lem-pur-etale-scalar-pullback-uniqueness",
+    "lem-pur-etale-scalar-flat-kflat-comparison",
+    "lem-coef-etale-open-extension-normalization"
    ],
    "elementary": false
   },
   {
-   "text": "On model generators successive extension sends ((p tensor b) tensor c) to p tensor bc, and the mixed scalar tensor comparison sends (p tensor b1) tensor (t tensor b2) to (p tensor t) tensor (b1*b2). Both open paths have these same formulas. Balanced tensor universality, sheafification, naturality and signed direct-sum totalization preserve these equalities; descend through the K-flat localization.",
+   "text": "Derive the coefficient restriction cocycle, identify the conjugate of q inverse with the derived right-adjoint square, and apply normalizedCocycle.",
    "uses": [
-    "lem-coef-etale-hom-thick-locus",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-pur-derived-change-of-rings",
-    "lem-coef-etale-open-kflat"
+    "lem-sp-proetale-open-scalar-cocycle",
+    "lem-coef-etale-open-comparison-data",
+    "lem-sbc-restrict-scalars-derived-adjunction-identities"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the mixed scalar/tensor projection equation.",
+   "uses": [
+    "lem-coef-etale-open-mixed-tensor-scalar"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-coef-etale-open-extension-normalization",
   "lem-coef-etale-open-comparison-data",
-  "lem-pur-derived-change-of-rings",
-  "lem-weil-pbc-termwise-adjunction-homotopy",
-  "lem-coef-etale-open-kflat",
-  "lem-pc-kflat-resolution",
-  "lem-pur-etale-constant-module-flat",
-  "lem-coef-etale-hom-thick-locus",
-  "lem-weil-pbc-site-derived-tensor-descent"
+  "lem-sfb-etale-proetale-scalar-mate",
+  "lem-pur-etale-scalar-pullback-uniqueness",
+  "lem-pur-etale-scalar-flat-kflat-comparison",
+  "lem-sp-proetale-open-scalar-cocycle",
+  "lem-sbc-restrict-scalars-derived-adjunction-identities",
+  "lem-coef-etale-open-mixed-tensor-scalar"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
-  "place": "Parent proof steps 8–12: scalar model normalization, uniqueness, successive coefficient change and mixed scalar/tensor compatibility"
+  "place": "T9: restriction normalization, uniqueness and coefficient cocycle; extension normalization and mixed tensor square are source subresults"
  },
  "mathlib_searches": [
   {
@@ -131,14 +135,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "C-5c5b0",
-  "group": "K3",
+  "reviewer": "COMPILER",
+  "group": "T9",
   "result": "pass",
-  "landing": "20261020T233153-L-902140",
+  "landing": "20261025T164420-L-1010894",
   "kind": "interface",
-  "note": "independent cc review: 5 delivered modules compiled with lcompile (no error or warning; totalization 50.8 s vs published 51.8 s back to back), the 3 direct importers compiled against the delivery's build, moved declarations diffed against the published item module (identical), #print axioms run on the proved theorems, node records checked against their Lean signatures"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

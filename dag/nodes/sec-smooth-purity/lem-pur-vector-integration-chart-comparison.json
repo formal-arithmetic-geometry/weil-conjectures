@@ -1,0 +1,206 @@
+{
+ "id": "lem-pur-vector-integration-chart-comparison",
+ "kind": "statement",
+ "title": "Integration-normalized vector-bundle comparison in coordinates",
+ "statement": "Fix the finite purity datum of [def-pur-conventions]: $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}(k)$, a finite extension $F/\\mathbf Q_\\ell$ with uniformizer $\\varpi_F$, $n\\geq1$, and $A=\\mathcal O_F/\\varpi_F^n$. Let $Z$ be a separated finite-type $k$-scheme [def-weil-scheme-morphism-properties], and let $\\pi:V\\to Z$ be a vector bundle of constant rank $d\\geq0$ [def-asd-vector-bundle-zero-section]. Use small pro-etale derived pullback and tensor [def-weil-derived-pullback-tensor-hom], the constructible exceptional inverse image [def-weil-exceptional-inverse-image], and the specified coefficient twists [def-coefficient-twists-detailed]. Let\n$$c_\\pi:A_V(d)[2d]\\xrightarrow{\\sim}R\\pi^!A_Z$$\nbe the inverse of the integration-normalized unit-object comparison of [cor-pur-vector-bundle-purity], transported from its ordinary etale realization by [lem-pur-vector-integration-site-comparison].\nLet $u:U\\hookrightarrow Z$ be a Zariski open subscheme, $V_U=V\\times_ZU$, and let $\\phi:V_U\\xrightarrow{\\sim}\\mathbf A^d_U$ be a linear trivialization over $U$. Write $p_d:\\mathbf A^d_U\\to U$ [def-sbc-affine-space]. Identify restrictions of $R\\pi^!A_Z$ with $Rp_d^!A_U$ through the canonical exceptional exchange for $u$ and the change of coordinates $\\phi$, and identify the twists by canonical Tate pullback. Then\n$$c_\\pi|_{V_U}=\\Gamma_{p_d,A_U}:A_{\\mathbf A^d_U}(d)[2d]\\longrightarrow Rp_d^!A_U.$$\nHere $\\Gamma_{p_d,A_U}$ is the ordered affine-line comparison, with each rank-one map the transpose of the restricted projective-line trace and with the exceptional-composition and twist associators of [def-pur-affine-space-comparison]; its construction for every $n\\geq1$ is the one explicitly specified in [lem-pur-projection-purity-agreement]. The assertion includes $d=0$, where this is the identity, and is independent of the choice of $r\\geq1$ with $\\ell^rA=0$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
+  "place": "Second paragraph: restriction to a trivializing open is the adjoint of the affine-space counit; combined with the ordered-counit normalization in lem-amb-affine-space-top-trace. Retained item Step 5."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-scheme-morphism-properties",
+  "def-asd-vector-bundle-zero-section",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-exceptional-inverse-image",
+  "def-coefficient-twists-detailed",
+  "lem-pur-projection-purity-agreement",
+  "cor-pur-vector-bundle-purity",
+  "lem-pur-vector-integration-site-comparison",
+  "def-sbc-affine-space",
+  "def-pur-affine-space-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Use the canonical coordinate interface [def-pur-vector-chart-comparison-coordinates]; its already proved open_geometry and unit_properties supply the domains. The HEq specification of restrictedMap and [lem-pur-vector-chart-restricted-affine-transpose] identify restrictedMap at every exponent with affineTranspose on U.",
+   "uses": [
+    "def-pur-vector-chart-comparison-coordinates",
+    "lem-pur-vector-chart-restricted-affine-transpose"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At the fixed exponent apply [lem-pur-affine-unit-transpose-coordinates]. The first clause of [lem-pur-affine-ordered-integration-transposes] identifies the middle integrationTranspose with affineSpacePurityComparison. The resulting composite is definitionally orderedMap.",
+   "uses": [
+    "lem-pur-affine-unit-transpose-coordinates",
+    "lem-pur-affine-ordered-integration-transposes",
+    "def-pur-vector-chart-comparison-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Rewrite both restricted maps using the first step and apply [lem-pur-affine-transpose-exponent-transition]. This gives the second conjunct of ChartComparison, including rank zero and empty schemes.",
+   "uses": [
+    "lem-pur-affine-transpose-exponent-transition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-vector-chart-comparison-coordinates",
+  "lem-pur-vector-chart-restricted-affine-transpose",
+  "lem-pur-affine-unit-transpose-coordinates",
+  "lem-pur-affine-ordered-integration-transposes",
+  "lem-pur-affine-transpose-exponent-transition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
+  "place": "Second paragraph: restriction to a trivializing open is the adjunct of the affine-space counit. Expanded using the canonical definitions and stated adjunction comparison lemmas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "vectorBundle.*(purity|integration)|affineSpace.*(trace|purity)|TateTwist",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The vector bundle integration purity map agrees with the ordered composite of normalized affine line purity maps on every trivializing open.",
+   "results": "8 hits: VectorBundleCore.trivializationAt_continuousLinearMapAt, VectorPrebundle.totalSpaceMk_isInducing, VectorPrebundle.pretrivialization_linear', VectorBundleCore.localTriv, Trivialization.IsLinear.linear, VectorBundle.trivialization_linear', VectorBundleCore.trivializationAt, Trivialization.contMDiffOn_symm_trans; ordinary scheme or topological/manifold bundle comparisons, not the stated exceptional-pullback comparison",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a vector bundle chart, the adjoint of iterated projective line integration equals the ordered affine space exceptional pullback comparison, by the counit formula for a composite adjunction.",
+   "results": "8 hits: hom_chart, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc, Pretrivialization.continuousLinearMap, CategoryTheory.ExponentiableMorphism.ev_def, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, CategoryTheory.ExponentiableMorphism.ev_coev, CategoryTheory.ExponentiableMorphism.coev_ev; ordinary scheme or topological/manifold bundle comparisons, not the stated exceptional-pullback comparison",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a vector bundle over a finite type scheme in characteristic different from ell, the integration normalized exceptional pullback isomorphism restricts in each trivialization to the ordered affine line purity comparison.",
+   "results": "8 hits: AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_map, AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_pullbackHom, AlgebraicGeometry.pullbackRestrictIsoRestrict_inv_fst, AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso, AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_inv_fst, AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso, AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_hom_fst, AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_inv_snd; ordinary scheme or topological/manifold bundle comparisons, not the stated exceptional-pullback comparison",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction.comp\"",
+   "results": "12 hits: CategoryTheory.Adjunction.comp, CategoryTheory.Adjunction.comp_map_bijective_iff, CategoryTheory.Adjunction.compCoyonedaIso, CategoryTheory.Adjunction.compUliftCoyonedaIso, CategoryTheory.Adjunction.comp_homEquiv, CategoryTheory.Adjunction.compYonedaIso, CategoryTheory.Adjunction.comp_counit_app, CategoryTheory.Adjunction.comp_unit_app; generic adjunction composition/counit only, not normalized geometric purity",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "comp_counit_app|def comp ",
+   "results": "Mathlib/CategoryTheory/Adjunction/Basic.lean:567,580 gives CategoryTheory.Adjunction.comp and CategoryTheory.Adjunction.comp_counit_app (also two uses in Mates.lean:531,564). Read Basic.lean:562–585: this is the generic composite-counit identity, not equality of the two specified geometric comparisons.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The integration normalized exceptional pullback comparison for a vector bundle restricts on a linear trivialization to the ordered composite of affine line trace adjoints.",
+   "results": "Trivialization.pullback_linear, VectorBundle.trivialization_linear', hom_trivializationAt, hom_trivializationAt_baseSet, hom_trivializationAt_source, hom_trivializationAt_target, hom_trivializationAt_apply, Trivialization.apply_eq_prod_continuousLinearEquivAt; topological or manifold bundle/field results, not exceptional pullback integration.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "vectorBundle.*(purity|integration)|affineSpace.*(trace|purity)|TateTwist",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Vector bundle purity integration agrees on a Zariski chart with iterated affine line trace adjunction transposes",
+   "results": "VectorBundleCore.localTriv_symm_apply, VectorBundleCore.trivializationAt_continuousLinearMapAt, VectorBundleCore.localTriv_continuousLinearMapAt, FiberBundle.writtenInExtChartAt_trivializationAt_symm, VectorBundleCore.localTriv, VectorBundle.mk, VectorBundleCore.localTriv_symmL, VectorBundleCore.vectorBundle; topological or manifold bundle/field results, not exceptional pullback integration.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction.comp_homEquiv\"",
+   "results": "CategoryTheory.Adjunction.comp_homEquiv; generic composite-adjunction Hom equivalence only, read Mathlib/CategoryTheory/Adjunction/Basic.lean:567-586, no geometric trace/chart comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional pullback orientation of a vector bundle is locally the adjoint transpose of the composite compact support counit for its affine line coordinate projections",
+   "results": "VectorField.mpullback_apply, VectorBundle.pullback, VectorField.mpullbackWithin_apply, ContMDiffVectorBundle.pullback, VectorField.mpullbackWithin_zero, VectorField.mpullbackWithin_univ, VectorField.mpullbackWithin_comp_of_right, VectorField.mpullbackWithin_comp_of_left; topological or manifold bundle/field results, not exceptional pullback integration.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "thm-pur-finite-coefficient-smooth-purity",
+  "date": "2026-10-22",
+  "group": "Q83"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-finite-coefficient-smooth-purity",
+   "place": "Diagonal orientation factor; vector-bundle model normalization in the unit model paragraph; retained split Step 5: ordered counit versus integration transpose",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-vector-integration-chart-comparison",
+  "worker": "stage1",
+  "summary": "Q57: no exact project attachment or Mathlib match. Retained the complete statement. Wrote the chart-square trace equality and applied the existing trace-transpose base-change statement, then the existing ordered integration transpose identity. Checked open-base domains, all coefficient levels, rank zero and exponent independence. No new nodes.",
+  "blueprint": "Nearest ancestor thm-pur-finite-coefficient-smooth-purity, vector-bundle model clause retained Step 5. Steps 2-3 realize the second paragraph of thm-amb-vector-bundle-purity.proof.md; Step 4 realizes the ordered affine-line counit paragraph of sk-prop-an and lem-amb-affine-space-top-trace.proof.md."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-6881841e4",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-6881841e4 (reviewer sub-agent of L); spot-checked: PASS; no fixes written. Stage-1 split with no new nodes. The statement is unchanged and is a first delivery; there is no re-split note. Source: thm-amb-vector-bundle-purity.proof.md (main-20261015), second paragraph (restriction to a trivializing open gives the adjoint of the affine-space counit). Step 1: domains. U is Noetherian, finite type and separated by the three Mathlib leaves, and A_U is in D^b_ctf. Step 2: the site-comparison statement gives eta^p = C_V(eta^e) and its inverse is the cor-pur identification, so c_pi is the transpose of t_pi^p at the unit object, in the direction Q to Rpi^!A_Z. Step 3: def-amb-vector-integration and the thm-amb statement give t_pi restricted to any chart, frame-independently by GL_d invariance. This moves to the pro-etale site by site-comparison and compact-support-site-coherence (open-restriction identity). lem-pur-trace-transpose-base-change is then applied with f=pi, b=u, a=incl∘phi^{-1}; the square is Cartesian and all hypotheses are met. Step 4: lem-pur-affine-ordered-integration-transposes (existing unsplit node) gives P=Gamma for Y=U, K=A_U. Its line maps and associators match the Gamma of lem-pur-projection-purity-agreement. Step 5: d=0, empty bases, independence of r, and all n are checked. No cycle (closure checked by script). No duplicate: chart-descent is the converse half and the diagonal-DNC chart node is about a different map. No SGA. Minor and not a fault: Step 1 does not say that V is separated finite type over k, which is elementary since pi is affine of finite type."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.VectorIntegrationChartComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.VectorIntegrationChart.vectorIntegration_chart_comparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.VectorIntegrationChart.vectorIntegration_chart_comparison"
+  ],
+  "file": "lean/Sheaf/Paper/VectorIntegrationChartComparison.lean",
+  "statement": "theorem vectorIntegration_chart_comparison (P : WeilConjectures.PurityFiniteSetting.{u}) (Z : Scheme.{u}) (aZ : Z ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aZ] [QuasiCompact aZ] [IsSeparated aZ] (d : ℕ) (F : Z.Modules) [F.IsFiniteLocallyFreeOfRank d] (U : Z.Opens) (e : VectorBundleZeroSection.Trivialization Z d F U) : ChartComparison P Z aZ d F U e",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The canonical source and exceptional target transports are given explicitly; endpoint-only existence/uniqueness theorems fix their maps by HEq to those composites. The chart comparison concerns the independently integration-normalized transpose and the recorded ordered affine comparison, with all annihilating-exponent transitions. The finite Tate API uses level-1 so its positive quotient level is exactly P.level."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b4a7e51a2",
+  "group": "NC",
+  "result": "pass",
+  "note": "Checked node vs Lean clause by clause. c_pi = homEquiv transpose of vectorBundleIntegration under rightDerivedUpperShriekAdjunction pi, matching the cor's VectorPurityGammaNormalized convention. Restriction = a^* of it, then rightDerivedUpperShriekBaseChangeMap on vectorIntegrationChart_isPullback (mate of inverse Ex_!), then unit pullback, then site comparison. Gamma = recorded affineSpacePurityComparison at the unit with canonical tensor/unit source iso and comparison-unit / exceptional-identity target iso. ∃!-HEq transports are satisfiable (affineTraceTower and iteratedAffineLine have identical recursions). First conjunct is the chart equation at l^(level+1); second conjunct is r-independence via baseExponentComparison. Hypotheses: separated finite type via aZ instances, Noetherian derived, finite locally free F of rank d, any open U and any frame e. Edge cases d=0 (identity), empty U/Z, n=1, single universe u. All theorems sorry, defs real, docstrings with source/blueprint, report sections present, no duplicate (DiagonalDncChartNormalization is a different map), no cycle. Advisory: def-amb-vector-integration-charts decls are used outside the stmt_dep closure (maintainer note); unit-object identification with the cor is proof Step 2. No compile: no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-5e63f",
+  "group": "A3",
+  "result": "fix",
+  "landing": "20261025T122442-L-1772857",
+  "kind": "interface",
+  "note": "independent cc review: item node lem-pur-vector-integration-chart-comparison and 3 new sorry statements vs Coordinates extraction (verbatim diff vs clone), existsUnique_vectorIntegrationGluing, ordinaryTraceRaw/integrationTranspose, IntegrationAffineEquations; node stmt refs vs stmt_deps"
+ }
+}

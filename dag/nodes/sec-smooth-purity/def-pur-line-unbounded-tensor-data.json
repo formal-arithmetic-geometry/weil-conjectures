@@ -1,0 +1,135 @@
+{
+ "id": "def-pur-line-unbounded-tensor-data",
+ "kind": "definition",
+ "title": "Degree-zero line-tensor constructions and their K-flat normalization",
+ "status": "split",
+ "statement": "Let $X$ be a scheme and use its small pro-etale site [def-weil-pbc-proetale-site], with site object universe $t+1$, morphism universe $t$, and coefficient universe $r=\\max(a,t+1)$ in which the site is essentially small. Let $R$ be a sheaf of commutative rings and write $\\mathcal A=\\operatorname{Mod}(R)$ for the existing module-sheaf category [def-weil-sheaf-of-modules-category]. Fix the localization universe of the unbounded derived category $D(\\mathcal A)$ and write $Q$ for localization [def-weil-abstract-derived-category]. For arbitrary module sheaves $P,N$, define $P^\\vee=\\mathcal Hom_R(P,R)$ using the internal sheaf Hom [def-pur-sheaf-hom], $T_P=-\\otimes_R P$ using the existing sheaf tensor [def-pur-sheaf-tensor-product], its inherited additive structure, and $P[0]$ using the degree-zero single complex. Define the pure tensor of local sections to be their presheaf tensor followed by the sheafification unit and the canonical tensor/sheafification identification. Given an isomorphism $e:P\\otimes_R N\\cong R$, define the cancellation isomorphism $T_N\\circ T_P\\cong1$ by reassociation, tensoring with $e$, and the right unitor.\n\nUse the total and derived tensor and resolving comparison of [def-sf-ringed-kflat-tensor-representative-data]. Define $\\operatorname{collapse}_P:\\operatorname{Tot}(-\\otimes_R P[0])\\cong T_P$ on cochain complexes to be the canonical degree-zero single-factor collapse, and define $F_P=-\\otimes_R^L Q(P[0])$ by fixing the right argument of that published derived bifunctor. Suppose $P[0]$ is K-flat [def-pc-kflat-complex] and every term of $P[0]$ is flat [def-pc-flat-sheaf-modules]. For a functor $F:D(\\mathcal A)\\to D(\\mathcal A)$, an equality $h:F=F_P$, any unbounded complex $K$, and an isomorphism $c:F(QK)\\cong Q(T_PK)$, define $\\operatorname{normalization}(P,h,K,c)$ to mean that, for every proof that $K$ is K-flat and has flat terms, $c$ equals the composite of the transport along $h$, the inverse of the published comparison $Q\\operatorname{Tot}(K\\otimes_R P[0])\\cong F_P(QK)$, and $Q(\\operatorname{collapse}_{P,K})$. These are existing constructions and a comparison predicate; no local freeness, exactness, or inverse-equivalence assertion is part of this definition.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-sheaf-hom",
+  "def-pur-sheaf-tensor-product",
+  "def-sf-ringed-kflat-tensor-representative-data",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YU (definition-derived-tor and preceding K-flat construction), degree-zero specialization; blueprint main-20261015, sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md, Proof (3), final sentence, termwise tensor and evaluation. Ordinary tensor and sheaf Hom: Modules on Sites, Tags 03EK and 0B8Q."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical tensor with a degree zero sheaf on unbounded complexes and its K-flat derived representative normalization",
+   "results": "[leansearch] OK 8 hit(s): Module.Flat.rTensor_shortComplex_exact; AlgebraicTopology.NormalizedMooreComplex.objX_zero; DerivedCategory.instHasZeroObject; CategoryTheory.Functor.toRightDerivedZero; CategoryTheory.instIsIsoAppFromLeftDerivedZero; CochainComplex.cm5b.instIsStrictlyGEI; CochainComplex.fromSingle₀Equiv; HomologicalComplex.instHasZeroObject",
+   "date": "2026-10-22",
+   "verdict": "Reuse the existing LineUnbounded constructions with existing:true; no definition node owns these helpers and no exact Mathlib interface was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, DerivedCategory.Q",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "Reuse the existing LineUnbounded constructions with existing:true; no definition node owns these helpers and no exact Mathlib interface was found."
+  },
+  {
+   "tool": "grep",
+   "query": "representativeIso|LineUnbounded|map₂HomologicalComplexFlipObjSingleIso Algebra/Homology",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "Reuse the existing LineUnbounded constructions with existing:true; no definition node owns these helpers and no exact Mathlib interface was found."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l LineUnbounded\\.(Modules|dual|tensor|single|pureTensor|cancellation|collapse|derived|normalization) dag/nodes; rg -n LineUnbounded|map₂HomologicalComplexFlipObjSingleIso lean/WeilConjectures lean/Sheaf; blueprint_refs.py search line unbounded tensor",
+   "results": "DAG: only dag/nodes/sec-smooth-purity/lem-pur-line-unbounded-derived-tensor.json. Sheaf: definitions together in lean/Sheaf/Algebra/Homology/LineUnboundedDerivedTensor.lean; other hits use the generic single-tensor collapse. WeilConjectures: generic collapse and its uses only, including FromJoel/Algebra/Homology/BifunctorSingle.lean:175. blueprint_refs: 0 blueprint nodes match line unbounded tensor. No definition node owns the LineUnbounded helpers.",
+   "date": "2026-10-22",
+   "verdict": "Reuse the existing LineUnbounded constructions with existing:true; no definition node owns these helpers and no exact Mathlib interface was found."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-ordinary-line-derived-scalar-comparison",
+  "date": "2026-10-22",
+  "group": "Q132"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-def-sp-tate-twist-locally-free",
+   "place": "Proof (3), final sentence: canonical degree-zero tensor, cancellation, and K-flat representative normalization used in the ordinary scalar comparison.",
+   "via": [
+    "lem-pur-ordinary-line-derived-scalar-comparison",
+    "lem-pur-completed-line-tensor-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.LineUnboundedDerivedTensor",
+  "declaration": "SheafOfModules.LineUnbounded.normalization",
+  "declarations": [
+   "SheafOfModules.LineUnbounded.Modules",
+   "SheafOfModules.LineUnbounded.dual",
+   "SheafOfModules.LineUnbounded.tensor",
+   "SheafOfModules.LineUnbounded.tensorAdditive",
+   "SheafOfModules.LineUnbounded.single",
+   "SheafOfModules.LineUnbounded.pureTensor",
+   "SheafOfModules.LineUnbounded.cancellation",
+   "SheafOfModules.LineUnbounded.collapse",
+   "SheafOfModules.LineUnbounded.derived",
+   "SheafOfModules.LineUnbounded.normalization"
+  ],
+  "statement": "def normalization (P : Modules.{t, a} X R)\n    (hP : CochainComplex.IsKFlatIndependentCoefficients.{t + 1, t, max a (t + 1)}\n      (J := Scheme.ProEt.topology X) (R := R) (single.{t, a} X R P))\n    (hPf : ∀ n : ℤ, IsFlatOnSite.{t + 1, t, max a (t + 1), max a (t + 1)}\n      (J := Scheme.ProEt.topology X) (R := R) ((single.{t, a} X R P).X n))\n    (F : DerivedCategory (Modules.{t, a} X R) ⥤ DerivedCategory (Modules.{t, a} X R))\n    (hF : F = derived.{t, a} X R P) (K : CochainComplex (Modules.{t, a} X R) ℤ)\n    (c : F.obj (DerivedCategory.Q.obj K) ≅ DerivedCategory.Q.obj\n      (((tensor.{t, a} X R P).mapHomologicalComplex (.up ℤ)).obj K)) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q132",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Owns exactly the existing plain constructions Modules, dual, tensor, tensorAdditive, single, pureTensor, cancellation, collapse, derived and normalization in the published module. None is a choice from line_unbounded_derived_tensor. Underlying K-flat tensor and representative comparison are owned by def-sf-ringed-kflat-tensor-representative-data. No module or declaration is added or changed; exactness and inverse-equivalence assertions remain in the theorem node."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c2efe9d10",
+  "group": "Q132",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c2efe9d10",
+  "group": "Q132",
+  "result": "pass",
+  "note": "Re-delivery of the fe1cdfa1 H2 RETURN. The Lean file is byte-identical. The item replaces theorem stmt_dep lem-pur-line-unbounded-derived-tensor with the new def-pur-line-unbounded-tensor-data (existing:true on the unchanged LineUnboundedDerivedTensor, 10 plain defs Modules..normalization); the theorem stays in proof_deps. The item uses 7 LineUnbounded names (Modules/tensor/derived/single/normalization/pureTensor/cancellation), all in the record, none a .choose of the theorem. The record's statement is verbatim with the source. check_existing and check_new_node report no failures. The new node's stmt_deps own its body decls (def-sf-ringed-kflat-tensor-representative-data, def-pur-sheaf-hom, def-pc-kflat-complex, def-pc-flat-sheaf-modules), and the closure has no cycle. Its TeX matches the normalization body. The dep records in the snapshot equal side-live, so no revert. The live item still has 11 stmt_deps and no lean record. Mathematics re-read: the evaluation and tower arrow orders match the node; ordinary/derived/factors/epsilon are pinned; the identity and arbitrary-A_m clauses are correct. Edge cases m=0/±1/negative, zero ring, non-flat ring map and unbounded complexes are covered, with no universe identification. Advisories: base-era owners of scalarExtensionSection/scalarExtensionTowerIso are outside stmt_deps. No compile run (no file changed); the worker reports 55.7 s / 41.7 s clean."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W9",
+  "result": "pass",
+  "landing": "20261024T021953-L-2885575",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "SheafOfModules.LineUnbounded.line_unbounded_derived_tensor"
+  ],
+  "sorry_after": []
+ }
+}

@@ -11,8 +11,19 @@ public import Sheaf.Paper.CoefDerivedSystemEvaluationCalculus
 public import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.KFlatTensorPreservesQuasiIsoIndependentCoefficients
-import Sheaf.Algebra.Homology.ScalarHomTensorCoherence
-import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
+import all Sheaf.Algebra.Homology.StrictScalarHomChain
+import all Sheaf.Algebra.Homology.ScalarHomTensorCoherence
+import Sheaf.Paper.CoefficientRingedTensorHomModel
+import all Sheaf.Algebra.Homology.RingedDerivedTensorHomAdjunction
+import Sheaf.Algebra.Homology.RingedTensorComparisonExtension
+import all Sheaf.Algebra.Homology.ScalarTensorExactRepresentative
+import Sheaf.Algebra.Homology.ScalarOrdinaryEvaluationResolution
+import Sheaf.Algebra.Homology.ScalarOrdinaryEvaluationModel
+import Sheaf.Algebra.Homology.ScalarHomDerivedSquareCoherence
+import all Sheaf.Algebra.Homology.ScalarOrdinaryEvaluationCoefficientSquare
+import all Sheaf.Algebra.Homology.ScalarHomComparisonTower
+import all Sheaf.CategoryTheory.ClosedScalarHomComparison
+import Mathlib.CategoryTheory.Limits.HasLimits
 import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
@@ -30,15 +41,82 @@ formulas and the K-flat normalization; no representative is chosen arbitrarily.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option linter.unusedDecidableInType false
+set_option linter.unusedFintypeInType false
+set_option linter.unusedVariables false
+set_option linter.unusedSimpArgs false
+set_option maxErrors 4
+-- Avoid re-synthesizing the site-universe instances in the section-variable linter.
+set_option linter.unusedSectionVars false
+set_option linter.unusedTactic false
+set_option genSizeOf false
+set_option genSizeOfSpec false
+set_option genInjectivity false
 set_option synthInstance.maxSize 2048
-set_option backward.isDefEq.respectTransparency true
-set_option backward.isDefEq.respectTransparency.types true
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+set_option backward.defeqAttrib.useBackward false
 universe c v r w
 open CategoryTheory CategoryTheory.Limits Opposite SheafOfModules WeilConjectures
+
+attribute [local irreducible] CategoryTheory.Preadditive.preadditiveHasZeroMorphisms
+
+attribute [local irreducible] derivedInternalHomOfUniverses
+  CoefficientClosedStructure.tensor coefficientBaseChangeHom
+  Functor.mapHomologicalComplexUpToQuasiIso Functor.mapHomologicalComplexUpToQuasiIsoFactors
+
+attribute [local irreducible] homComplex homComplexπ
+  RingedDerivedNative.chainEquiv
 
 attribute [local irreducible] coefficientTotalTensor coefficientTensorGenerator
   scalarPairComplexComparison CoefficientTensorModels.iso
   SheafOfModules.monoidalCategory homComplexFunctor
+
+namespace CategoryTheory
+
+private theorem scalar_bijection_baseChange
+    {A : Type*} {B : Type*} [Category A] [Category B]
+    {H : Aᵒᵖ × A ⥤ A} {I : Bᵒᵖ × B ⥤ B}
+    (S : CoefficientClosedStructure H) (T : CoefficientClosedStructure I)
+    {F : A ⥤ B} {U : B ⥤ A} (adj : F ⊣ U)
+    (m : S.tensor ⋙ F ≅ F.prod F ⋙ T.tensor) (X K L : A) (β : X ⟶ H.obj (op K, L)) :
+    (S.transpose (U.obj (F.obj X)) K (U.obj (F.obj L))).symm
+        (ClosedScalarHom.bijection S T adj m _ K (F.obj L)
+          (U.map (F.map β) ≫ U.map (coefficientBaseChangeHom S T F m K L))) =
+      S.tensor.map (Prod.mkHom (𝟙 _) (adj.unit.app K)) ≫
+        ClosedScalarHom.restrictionTensor S T adj m (F.obj X) (F.obj K) ≫
+        U.map (m.inv.app (X, K)) ≫
+        U.map (F.map ((S.transpose X K L).symm β)) := by
+  unfold ClosedScalarHom.bijection
+  dsimp only [Equiv.trans_apply]
+  rw [Equiv.symm_apply_apply]
+  change adj.homEquiv _ _
+    (m.hom.app (U.obj (F.obj X), K) ≫
+      (T.transpose _ (F.obj K) (F.obj L)).symm
+        ((adj.homEquiv _ _).symm
+          (U.map (F.map β) ≫ U.map (coefficientBaseChangeHom S T F m K L))) ≫ 𝟙 _) = _
+  have hs : (adj.homEquiv _ _).symm
+      (U.map (F.map β) ≫ U.map (coefficientBaseChangeHom S T F m K L)) =
+        adj.counit.app (F.obj X) ≫ F.map β ≫ coefficientBaseChangeHom S T F m K L := by
+    have hh := adj.homEquiv_naturality_right_symm
+      (𝟙 (U.obj (F.obj X))) (F.map β ≫ coefficientBaseChangeHom S T F m K L)
+    rw [adj.homEquiv_symm_id] at hh
+    simpa only [Category.id_comp, Functor.map_comp, Category.assoc] using hh
+  rw [hs, scalarUncurry_pre, scalarUncurry_pre, scalarBaseChangeHom_beta]
+  have hn := m.inv.naturality (Prod.mkHom β (𝟙 K))
+  change T.tensor.map (Prod.mkHom (F.map β) (F.map (𝟙 K))) ≫ m.inv.app (_, K) =
+    m.inv.app (X, K) ≫ F.map (S.tensor.map (Prod.mkHom β (𝟙 K))) at hn
+  rw [F.map_id] at hn
+  simp only [Category.comp_id]
+  rw [reassoc_of% hn, Adjunction.homEquiv_unit]
+  rw [reassoc_of% ClosedScalarHom.restrictionTensor_unit S T adj m (F.obj X) K]
+  rw [scalarUncurry]
+  simp only [Functor.map_comp, Category.assoc]
+
+end CategoryTheory
+
+attribute [local irreducible] CochainComplex.IsKFlatIndependentCoefficients
+  SheafOfModules.IsFlatOnSite
 
 namespace CategoryTheory.FlatScalarEvaluation
 
@@ -49,8 +127,8 @@ variable {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
   [∀ R : Sheaf J CommRingCat.{max c v r}, HasDerivedCategory.{w} (scalarModules J R)]
   (M : ScalarHomModels.{c, v, r, w} J)
   (μ : ∀ {R S : Sheaf J CommRingCat.{max c v r}} (a : R ⟶ S),
-    ScalarHomTensorComparison M a)
-  (Θ : ScalarInternalHomAdjunction M μ)
+    ScalarHomTensorComparison.{c, v, r, w} (J := J) M a)
+  (Θ : ScalarInternalHomAdjunction.{c, v, r, w} (J := J) M μ)
 
 /-- Termwise application of the already recorded ordinary extension.
 Source: Stacks 07A6 (blueprint: lem-sfb-hom-flat-scalar-evaluation-model). -/
@@ -180,9 +258,19 @@ def squareTransport {R S R' S' : Sheaf J CommRingCat.{max c v r}}
     eqToIso (congrArg (fun z ↦ (M.scalar z).derived) h) ≪≫
     (scalarHomExtensionComp M a φ').symm
 
-attribute [local irreducible] extendedEvaluation adjunctionEvaluation
-  coefficientBaseChangeHom unitTensor sourceTransport exactRepresentative
+attribute [local irreducible] extendedEvaluation adjunctionEvaluation unitTensor
+  sourceTransport exactRepresentative
 
+/-- The ordinary part of the recorded scalar data, with all normalizations retained.
+Source: Stacks 07A6 (blueprint: lem-sfb-hom-flat-scalar-evaluation-model). -/
+@[no_expose] private abbrev ordinaryScalars :
+    ScalarOrdinaryEvaluation.Scalars.{c, v, r} (J := J) where
+  E := fun a ↦ (M.scalar a).extension
+  additive := fun a ↦ (M.scalar a).extension_additive
+  obj_eq := fun a ↦ (M.scalar a).extension_obj
+  map_eq := fun a ↦ (M.scalar a).extension_map
+  adj := fun a ↦ (M.scalar a).ordinaryAdjunction
+  unit_pure := fun a ↦ (M.scalar a).ordinaryUnit
 
 /-- Representatives packages the displayed normalized maps or equations.
 Source: Stacks 07A4, 08J9, 06YP and the DAG refinement
@@ -348,7 +436,8 @@ structure ChainPresentation where
 /-- Compatibility of the actual h maps with every normalized coefficient square.
 Source: Stacks 07A4, 08J9, 06YP and the DAG refinement
 (blueprint: lem-sfb-hom-flat-scalar-evaluation-model). -/
-def ChainSquare (E : Representatives M) (B : ChainPresentation M) : Prop :=
+def ChainSquare (E : Representatives.{c, v, r, w} (J := J) M) (B : ChainPresentation.{c, v, r, w}
+  (J := J) M) : Prop :=
   ∀ {R S R' S' : Sheaf J CommRingCat.{max c v r}}
     (φ : R ⟶ S) (a : R ⟶ R') (d : S ⟶ S') (φ' : R' ⟶ S')
     (_h : φ ≫ d = a ≫ φ'),
@@ -456,6 +545,281 @@ structure Model where
   /-- Naturality, coefficient composition, identity and compatible derived squares. -/
   coherence : DerivedCoherence M μ
 
+@[no_expose] private def ordinaryRepresentative
+    (E : Representatives.{c, v, r, w} (J := J) M) :
+    ScalarOrdinaryEvaluation.RepresentativeData.{c, v, r} (J := J)
+      (ordinaryScalars.{c, v, r, w} (J := J) M) where
+  nu := E.nu
+  nu_pure := E.nu_pure
+  evaluate := E.evaluate
+  evaluate_pure := E.evaluate_pure
+  scalarEvaluate := E.scalarEvaluate
+  scalarEvaluate_pure := E.scalarEvaluate_pure
+  chainUnitTensor := E.chainUnitTensor
+  chainUnitTensor_pure := E.chainUnitTensor_pure
+
+attribute [local irreducible] scalarHomExtensionComp scalarHomExtensionId
+attribute [local instance] ScalarDerivedPair.extension_additive
+
+private theorem exact_comparison :
+    ∀ {R S : Sheaf J CommRingCat.{max c v r}} (a : R ⟶ S),
+    PreservesFiniteLimits (M.scalar a).extension →
+    ∀ D : StrictScalarHom.Complex.{c, v, r} R,
+      IsIso (representative.{c, v, r, w} (J := J) M a D) := by
+  intro R S a ha D
+  let := ha
+  let := ((ScalarHomModels.scalar.{c, v, r, w} (J := J) M) a).ordinaryAdjunction.isLeftAdjoint
+  obtain ⟨P, t, hp, _, ht, _⟩ :=
+    CochainComplex.exists_isKFlatResolutionIndependentCoefficients D
+  let := ht
+  have : IsIso (representative.{c, v, r, w} (J := J) M a P) := ((ScalarHomModels.scalar.{c, v, r,
+    w} (J := J) M) a).computes P hp
+  have hn := (ScalarHomTensor.pairComparison (J := J) M a).naturality t
+  rw [ScalarHomTensor.pairComparison_app, ScalarHomTensor.pairComparison_app] at hn
+  change ((ScalarHomModels.scalar.{c, v, r, w} (J := J) M) a).derived.map (DerivedCategory.Q.map
+    t) ≫ representative.{c, v, r, w} (J := J) M a D =
+    representative.{c, v, r, w} (J := J) M a P ≫ DerivedCategory.Q.map ((extension.{c, v, r, w} (J
+      := J) M a).map t) at hn
+  have : QuasiIso ((extension.{c, v, r, w} (J := J) M a).map t) :=
+    HomologicalComplex.quasiIso_map_of_preservesHomology t ((ScalarHomModels.scalar.{c, v, r, w}
+      (J := J) M) a).extension
+  have : IsIso (((ScalarHomModels.scalar.{c, v, r, w} (J := J) M) a).derived.map
+    (DerivedCategory.Q.map t) ≫
+      representative.{c, v, r, w} (J := J) M a D) := by rw [hn]; infer_instance
+  exact IsIso.of_isIso_comp_left (((ScalarHomModels.scalar.{c, v, r, w} (J := J) M) a).derived.map
+    (DerivedCategory.Q.map t)) _
+
+
+private theorem derived_coherence : DerivedCoherence.{c, v, r, w} (J := J) M μ := by
+  have h := ScalarHomDerivedCoherence.coherence.{c, v, r, w} (J := J) M μ
+  exact ⟨h.naturality, h.composition, h.identity, h.derived_square⟩
+
+@[no_expose] private def ordinaryTensor :
+    ∀ {R S : Sheaf J CommRingCat.{max c v r}} (a : R ⟶ S),
+      ScalarOrdinaryEvaluation.Tensor.{c, v, r} (J := J) (ordinaryScalars.{c, v, r, w} (J := J) M)
+        a := by
+  intro R S a
+  exact { complexIso := (μ a).complexIso, generators := (μ a).generators }
+
+@[no_expose] private def ordinaryData : ScalarOrdinaryEvaluation.Construction.{c, v, r} (J := J)
+  (ordinaryScalars.{c, v, r, w} (J := J) M) :=
+  Classical.choice (ScalarOrdinaryEvaluation.construction_exists.{c, v, r} (J := J)
+    (ordinaryScalars.{c, v, r, w} (J := J) M)
+    (ordinaryTensor.{c, v, r, w} (J := J) M μ))
+
+attribute [local irreducible] ordinaryData
+
+@[no_expose] private def chainPresentation : ChainPresentation.{c, v, r, w} (J := J) M :=
+  let B := (ordinaryData.{c, v, r, w} (J := J) M μ).presentation
+  ⟨B.chainData, B.chainIso, B.chainIso_pure⟩
+
+private theorem tensorComparison_inv_pure {R S : Sheaf J CommRingCat.{max c v r}}
+    (a : R ⟶ S) (D P : StrictScalarHom.Complex.{c, v, r} R)
+    (n i k : ℤ) (h : n + i = k) (V : Cᵒᵖ)
+    (s : S.obj.obj V) (x : (D.X n).val.obj V) (p : (P.X i).val.obj V) :
+    (((μ a).complexIso D P).inv.f k).val.app V
+      (coefficientTensorGenerator.{r, c, v} J S ((extension.{c, v, r, w} (J := J) M a).obj D)
+        ((extension.{c, v, r, w} (J := J) M a).obj P) n i k h V
+        (extensionSection.{c, v, r, w} (J := J) M a D n V s x) (extensionSection.{c, v, r, w} (J
+          := J) M a P i V 1 p)) =
+      extensionSection.{c, v, r, w} (J := J) M a ((coefficientTotalTensor.{r, c, v} J R).obj (D,
+        P)) k V s
+        (coefficientTensorGenerator.{r, c, v} J R D P n i k h V x p) := by
+  simpa only [extensionSection, one_smul] using
+    ScalarTensorRepresentative.tensorComparison_inv_pure (J := J) M μ a D P n i k h V s x p
+
+private theorem scalar_chain_formula (E : Representatives.{c, v, r, w} (J := J) M)
+    {R S : Sheaf J CommRingCat.{max c v r}} (a : R ⟶ S)
+    (P I D : StrictScalarHom.Complex.{c, v, r} R) (b : D ⟶ homComplex (R := R) P I) :
+    (coefficientTotalTensor.{r, c, v} J R).map
+        (Prod.mkHom ((E.nu a).hom.app D) (𝟙 P)) ≫
+      E.chainUnitTensor a D P ≫
+      (StrictScalarHom.restriction.{c, v, r} a).map ((μ a).complexIso D P).inv ≫
+      (StrictScalarHom.restriction.{c, v, r} a).map
+        ((extension.{c, v, r, w} (J := J) M a).map (E.evaluate P I D b)) = E.scalarEvaluate a P I
+          D b := by
+  exact ScalarOrdinaryEvaluation.evaluation_composite.{c, v, r} (J := J)
+    (ordinaryScalars.{c, v, r, w} (J := J) M) (ordinaryTensor.{c, v, r, w} (J := J) M μ)
+    (ordinaryRepresentative.{c, v, r, w} (J := J) M E) a P I D b
+
+@[no_expose] private def representatives : Representatives.{c, v, r, w} (J := J) M := by
+  classical
+  let T (R : Sheaf J CommRingCat.{max c v r}) :=
+    (ringedTensorComparison_extension.{c, v, r, w} J R ((ScalarHomModels.closed.{c, v, r, w} (J :=
+      J) M) R) ((ScalarHomModels.model.{c, v, r, w} (J := J) M) R)).choose
+  have hT (R : Sheaf J CommRingCat.{max c v r}) :=
+    (ringedTensorComparison_extension.{c, v, r, w} J R ((ScalarHomModels.closed.{c, v, r, w} (J :=
+      J) M) R) ((ScalarHomModels.model.{c, v, r, w} (J := J) M) R)).choose_spec
+  refine {
+    nu := (ordinaryData.{c, v, r, w} (J := J) M μ).nu
+    nu_pure := (ordinaryData.{c, v, r, w} (J := J) M μ).nu_pure
+    evaluate := (ordinaryData.{c, v, r, w} (J := J) M μ).evaluate
+    evaluate_pure := (ordinaryData.{c, v, r, w} (J := J) M μ).evaluate_pure
+    scalarEvaluate := (ordinaryData.{c, v, r, w} (J := J) M μ).scalarEvaluate
+    scalarEvaluate_pure := (ordinaryData.{c, v, r, w} (J := J) M μ).scalarEvaluate_pure
+    chainUnitTensor := (ordinaryData.{c, v, r, w} (J := J) M μ).chainUnitTensor
+    chainUnitTensor_pure := (ordinaryData.{c, v, r, w} (J := J) M μ).chainUnitTensor_pure
+    exact_computes := exact_comparison.{c, v, r, w} (J := J) M
+    tensorIso := fun {R} P hP _ D ↦ T R D P (Or.inr hP)
+    tensorIso_normalization := ?_
+    tensorIso_natural := ?_
+ }
+  · intro R P D hP hp hD
+    exact (hT R).1 D P hD hP
+  · intro R P D D' hP hp t
+    simpa using (hT R).2 D' P D P (Or.inr hP) (Or.inr hP) t (𝟙 P)
+
+attribute [local irreducible] representatives
+
+private theorem chain_square (E : Representatives.{c, v, r, w} (J := J) M) :
+    ChainSquare.{c, v, r, w} (J := J) M μ E
+      (chainPresentation.{c, v, r, w} (J := J) M μ) := by
+  unfold ChainSquare
+  intro R S R' S' φ a d φ' h
+  obtain ⟨Q, hQ⟩ := (ordinaryData.{c, v, r, w} (J := J) M μ).coefficientSquares φ a d φ' h
+  refine ⟨Q, hQ, ?_⟩
+  let E' : ScalarOrdinaryEvaluation.Evaluation.{c, v, r} (J := J) (ordinaryScalars.{c, v, r, w} (J
+    := J) M) :=
+    { scalarEvaluate := E.scalarEvaluate, scalarEvaluate_pure := E.scalarEvaluate_pure }
+  exact ScalarOrdinaryEvaluation.coefficient_square.{c, v, r} (J := J) (ordinaryScalars.{c, v, r,
+    w} (J := J) M) (ordinaryTensor.{c, v, r, w} (J := J) M μ)
+    E' (ordinaryData.{c, v, r, w} (J := J) M μ).presentation φ a d φ' Q hQ
+
+set_option maxHeartbeats 800000 in
+-- Four adjunction bijections and functorial tensor maps are compared explicitly.
+private theorem restricted_uncurry {R S : Sheaf J CommRingCat.{max c v r}} (a : R ⟶ S)
+    (X K L : DerivedCategory (scalarModules J R))
+    (β : X ⟶ (derivedInternalHomOfUniverses.{c, v, r, w} J R).obj (op K, L)) :
+    (((ScalarHomModels.closed.{c, v, r, w} (J := J) M) R).transpose _ K
+        ((scalarDerivedRestriction a).obj (((ScalarHomModels.scalar.{c, v, r, w} (J := J) M)
+          a).derived.obj L))).symm
+      ((scalarDerivedRestriction a).map (((ScalarHomModels.scalar.{c, v, r, w} (J := J) M)
+        a).derived.map β) ≫
+        (scalarDerivedRestriction a).map
+          (coefficientBaseChangeHom ((ScalarHomModels.closed.{c, v, r, w} (J := J) M) R)
+            ((ScalarHomModels.closed.{c, v, r, w} (J := J) M) S) ((ScalarHomModels.scalar.{c, v,
+            r, w} (J := J) M) a).derived
+            (μ a).iso K L) ≫
+        (Θ.iso a).hom.app (op K, ((ScalarHomModels.scalar.{c, v, r, w} (J := J) M) a).derived.obj
+          L)) =
+      unitTensor.{c, v, r, w} (J := J) M μ a (((ScalarHomModels.scalar.{c, v, r, w} (J := J) M)
+        a).derived.obj X) K ≫
+        (scalarDerivedRestriction a).map ((μ a).iso.inv.app (X, K)) ≫
+        (scalarDerivedRestriction a).map (((ScalarHomModels.scalar.{c, v, r, w} (J := J) M)
+          a).derived.map
+          ((((ScalarHomModels.closed.{c, v, r, w} (J := J) M) R).transpose X K L).symm β)) := by
+  have hr := Θ.representing a
+    ((scalarDerivedRestriction a).obj (((ScalarHomModels.scalar.{c, v, r, w} (J := J) M)
+      a).derived.obj X)) K
+    (((ScalarHomModels.scalar.{c, v, r, w} (J := J) M) a).derived.obj L)
+    ((scalarDerivedRestriction a).map (((ScalarHomModels.scalar.{c, v, r, w} (J := J) M)
+      a).derived.map β) ≫
+      (scalarDerivedRestriction a).map
+        (coefficientBaseChangeHom ((ScalarHomModels.closed.{c, v, r, w} (J := J) M) R)
+          ((ScalarHomModels.closed.{c, v, r, w} (J := J) M) S) ((ScalarHomModels.scalar.{c, v, r,
+          w} (J := J) M) a).derived
+          (μ a).iso K L))
+  rw [← Category.assoc, ← hr]
+  convert scalar_bijection_baseChange ((ScalarHomModels.closed.{c, v, r, w} (J := J) M) R)
+    ((ScalarHomModels.closed.{c, v, r, w} (J := J) M) S)
+    ((ScalarHomModels.scalar.{c, v, r, w} (J := J) M) a).adjunction (μ a).iso X K L β using 1 <;>
+    simp only [unitTensor, scalarHomBijection, scalarHomRestrictionTensor,
+      ClosedScalarHom.bijection, ClosedScalarHom.restrictionTensor,
+      CoefficientClosedStructure.tensor, Category.assoc]
+  all_goals rfl
+
+private theorem exactRepresentative_naturality
+    {R S : Sheaf J CommRingCat.{max c v r}} (a : R ⟶ S)
+    (q : ∀ D : StrictScalarHom.Complex.{c, v, r} R, IsIso (representative.{c, v, r, w} (J := J) M
+      a D))
+    {D I : StrictScalarHom.Complex.{c, v, r} R} (f : D ⟶ I) :
+    (scalarDerivedRestriction a).map (((ScalarHomModels.scalar.{c, v, r, w} (J := J) M)
+      a).derived.map (DerivedCategory.Q.map f)) ≫
+        (exactRepresentative.{c, v, r, w} (J := J) M a q I).hom =
+      (exactRepresentative.{c, v, r, w} (J := J) M a q D).hom ≫ DerivedCategory.Q.map
+        ((StrictScalarHom.restriction.{c, v, r} a).map ((extension.{c, v, r, w} (J := J) M a).map
+          f)) := by
+  have hn := (ScalarHomTensor.pairComparison (J := J) M a).naturality f
+  rw [ScalarHomTensor.pairComparison_app, ScalarHomTensor.pairComparison_app] at hn
+  have hU := congrArg (scalarDerivedRestriction a).map hn
+  simp only [Functor.map_comp] at hU
+  simp only [exactRepresentative, Iso.trans_hom, Functor.mapIso_hom, asIso_hom]
+  erw [← Category.assoc, hU]
+  erw [Category.assoc, (scalarRestrictionComparison a).hom.naturality]
+  simp only [Functor.comp_map, Category.assoc]
+  rfl
+
+set_option maxHeartbeats 800000 in
+-- The representative expression contains the two normalized scalar comparison maps.
+private theorem derived_evaluation (E : Representatives.{c, v, r, w} (J := J) M)
+    {R S : Sheaf J CommRingCat.{max c v r}} (a : R ⟶ S)
+    (ha : PreservesFiniteLimits ((ScalarHomModels.scalar.{c, v, r, w} (J := J) M) a).extension)
+    (P I D : StrictScalarHom.Complex.{c, v, r} R)
+    (hP : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) P)
+    (hp : ∀ n : ℤ, IsFlatOnSite (J := J) (R := R) (P.X n))
+    (_hI : I.IsKInjective) (b : D ⟶ homComplex (R := R) P I) :
+    extendedEvaluation.{c, v, r, w} (J := J) M μ a (E.exact_computes a ha) (E.nu a) D P I
+      (E.tensorIso P hP hp D) (E.tensorIso P hP hp ((StrictScalarHom.tensor.{c, v, r} a).obj D))
+      (E.evaluate P I D b) = DerivedCategory.Q.map (E.scalarEvaluate a P I D b) := by
+  let T := coefficientTotalTensor.{r, c, v} J R
+  let k : T.obj ((StrictScalarHom.tensor.{c, v, r} a).obj D, P) ⟶
+      (StrictScalarHom.restriction.{c, v, r} a).obj
+        ((extension.{c, v, r, w} (J := J) M a).obj (T.obj (D, P))) :=
+    T.map (Prod.mkHom ((E.nu a).hom.app D) (𝟙 P)) ≫
+      E.chainUnitTensor a D P ≫
+      (StrictScalarHom.restriction.{c, v, r} a).map ((μ a).complexIso D P).inv
+  have hk : ∀ (n j l : ℤ) (h : n + j = l) (V : Cᵒᵖ)
+      (s : S.obj.obj V) (x : (D.X n).val.obj V) (p : (P.X j).val.obj V),
+      (k.f l).val.app V (coefficientTensorGenerator.{r, c, v} J R _ P n j l h V
+        (StrictScalarHom.tensorSection.{c, v, r} a D n V s x) p) =
+      s • scalarHomUnitSection.{c, v, r, w} (J := J) M a ((T.obj (D, P)).X l) V
+        (coefficientTensorGenerator.{r, c, v} J R D P n j l h V x p) := by
+    intro n j l h V s x p
+    change (((μ a).complexIso D P).inv.f l).val.app V
+      (((E.chainUnitTensor a D P).f l).val.app V
+        (((T.map (Prod.mkHom ((E.nu a).hom.app D) (𝟙 P))).f l).val.app V
+          (coefficientTensorGenerator.{r, c, v} J R _ P n j l h V
+            (StrictScalarHom.tensorSection.{c, v, r} a D n V s x) p))) = _
+    erw [ScalarHomTensor.tensor_generator_map, E.nu_pure]
+    simp only [HomologicalComplex.id_f, SheafOfModules.id_val,
+      PresheafOfModules.id_app, ModuleCat.id_apply]
+    erw [E.chainUnitTensor_pure, tensorComparison_inv_pure]
+    rfl
+  have hm := scalarTensorExactRepresentative.{c, v, r, w} (J := J) M μ a (E.exact_computes a ha)
+    (E.nu a) (E.nu_pure a) P D hP (E.tensorIso P hP hp)
+    (fun X hX ↦ E.tensorIso_normalization P X hP hp hX)
+    (fun X Y t ↦ E.tensorIso_natural P Y X hP hp t) k hk
+  change _ = DerivedCategory.Q.map k at hm
+  have hf := exactRepresentative_naturality.{c, v, r, w} (J := J) M a (E.exact_computes a ha)
+    (E.evaluate P I D b)
+  unfold extendedEvaluation
+  simp only [Functor.map_comp, Category.assoc]
+  rw [hf]
+  have hc : k ≫ (StrictScalarHom.restriction.{c, v, r} a).map
+      ((extension.{c, v, r, w} (J := J) M a).map (E.evaluate P I D b)) = E.scalarEvaluate a P I D
+        b :=
+    scalar_chain_formula.{c, v, r, w} (J := J) M μ E a P I D b
+  rw [← hc, DerivedCategory.Q.map_comp, ← hm]
+  simp only [sourceTransport, unitTensor, exactRepresentative, Category.assoc]
+
+set_option maxHeartbeats 800000 in
+-- The calculation compares the normalized adjunction with the same chain evaluation.
+private theorem calculation (E : Representatives.{c, v, r, w} (J := J) M) : Calculation.{c, v, r,
+  w} (J := J) M μ Θ E := by
+  refine ⟨derived_evaluation.{c, v, r, w} (J := J) M μ E, ?_, ?_⟩
+  · intro R S a ha P I D hP hp hI b
+    rw [← derived_evaluation.{c, v, r, w} (J := J) M μ E a ha P I D hP hp hI b]
+    unfold adjunctionEvaluation extendedEvaluation
+    rw [restricted_uncurry]
+    simp only [transpose, Equiv.symm_apply_apply, Category.assoc]
+  · intro R S a ha P I D V hP hp hI b t hV hv ht
+    have hh := ScalarOrdinaryEvaluation.resolution.{c, v, r} (J := J)
+      (ordinaryScalars.{c, v, r, w} (J := J) M) 
+        (ordinaryRepresentative.{c, v, r, w} (J := J) M E) a ha P I D V hP b t ht
+    refine ⟨hh.1, hh.2.1, hh.2.2.1, hh.2.2.2.1, ?_⟩
+    rw [scalar_chain_formula.{c, v, r, w} (J := J) M μ E a P I V (t ≫ b)]
+    exact hh.2.2.2.2
+
 /-- Flat scalar evaluation, arbitrary-first-complex descent, normalized scalar-Hom
 transposition and coherence for all derived inputs and coefficient squares.
 
@@ -519,7 +883,11 @@ Proof:
     Steps 5 and 9--10 descend those same identities. All complexes may be
     unbounded, coefficient rings may be zero, and no finiteness or continuity
     hypothesis has been used. -/
-theorem model_exists : Nonempty (Model M μ Θ) := by
-  sorry
+theorem model_exists : Nonempty (Model.{c, v, r, w} (J := J) M μ Θ) := by
+  classical
+  let E := representatives.{c, v, r, w} (J := J) M μ
+  exact ⟨⟨E, calculation.{c, v, r, w} (J := J) M μ Θ E, chainPresentation.{c, v, r, w} (J := J) M
+    μ, chain_square.{c, v, r, w} (J := J) M μ E,
+    derived_coherence.{c, v, r, w} (J := J) M μ⟩⟩
 
 end CategoryTheory.FlatScalarEvaluation

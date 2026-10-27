@@ -1,0 +1,112 @@
+{
+ "id": "lem-z8-ordinary-finite-p1-diagonal-integral",
+ "kind": "statement",
+ "title": "Ordinary Finite P1 Diagonal Integral",
+ "statement": "Canonical section variables and instances are those of the attached Lean module.\n\ntheorem ordinaryFiniteP1_scalarTrace_baseChange\n    {S' S : Scheme.{u}} [IsNoetherian S'] [IsNoetherian S]\n    (f : S' ⟶ S) (hS : IsUnit (N : Γ(S, ⊤))) (hS' : IsUnit (N : Γ(S', ⊤))) :\n    (ordinaryFinitePullback A f).map ((b S hS).inv ≫ biprod.snd) ≫\n        (ordinaryFiniteUnitPullback A f).hom =\n      ordinaryFiniteP1Exchange A f\n          ((ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧) ≫\n        (ordinaryFinitePushforward A (ProjectiveLine S' ↘ S')).map\n          (ordinaryFiniteShiftedLinePullback A N hA t\n            (ProjectiveSpace.map (ULift.{u} (Fin 2)) f)\n            (ordinaryFiniteP1_isUnit N S hS)).hom ≫\n        (b S' hS').inv ≫ biprod.snd\n\ntheorem ordinaryFiniteP1_diagonal_integral (hN : 0 < N) [Finite A]\n    (hc : OrdinaryFiniteP1ChernFamilySpec A N hA c)\n    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) :\n    have : IsLocallyNoetherian (ProjectiveLine S) :=\n      LocallyOfFiniteType.isLocallyNoetherian (ProjectiveLine S ↘ S)\n    have : CompactSpace (ProjectiveLine S) :=\n      QuasiCompact.compactSpace_of_compactSpace (ProjectiveLine S ↘ S)\n    have : IsNoetherian (ProjectiveLine S) := ⟨⟩\n    ∃ hI : (pullback.diagonal (ProjectiveLine S ↘ S)).ker.IsInvertible,\n      ∃ κ : CategoryTheory.Abelian.Ext\n        ((lowerStar (ModuleCat.{u + 1} A) (pullback.diagonal (ProjectiveLine S ↘ S))).obj\n          (ordinaryFiniteConstant A (ProjectiveLine S)))\n        (Scheme.finiteEtaleTateLine\n          (pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)) N A hA) 2,\n        SupportedKummerBoundary A N hA (pullback.diagonal (ProjectiveLine S ↘ S)) hI\n          (by simpa using (hS.map\n            ((pullback.fst (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)) ≫\n              (ProjectiveLine S ↘ S)).appTop.hom)) κ ∧\n        ∀ a : Bool,\n          ordinaryFiniteP1DiagonalSupportedMap A N hA S a κ ≫\n            ordinaryFiniteP1DiagonalChartMap A N hA t S hS a ≫\n              (b (ProjectiveLine S) (ordinaryFiniteP1_isUnit N S hS)).inv ≫ biprod.snd =\n            𝟙 (ordinaryFiniteUnit A (ProjectiveLine S))",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Supported diagonal kernel, section projection contractions, and counit base change"
+ },
+ "stmt_deps": [
+  "lem-amb-p1-diagonal-cartier",
+  "lem-asd-ordinary-finite-p1-kummer-maps",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-sp-finite-p1-diagonal-kummer-component-formula"
+ ],
+ "proof": [
+  {
+   "text": "Invert the Kummer decomposition base-change square and apply the second biproduct projection to obtain scalar trace base change. For the diagonal integral, use the existing supported Cartier component formula. The second projection of its two Chern components is identity by the Kummer-normalized splitting and biproduct identities. This yields both scalar diagonal integrals for the existing source unit and chart maps.",
+   "uses": [
+    "lem-amb-p1-diagonal-cartier",
+    "lem-asd-ordinary-supported-kummer",
+    "lem-sp-finite-p1-diagonal-kummer-component-formula"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-p1-diagonal-cartier",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-sp-finite-p1-diagonal-kummer-component-formula"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Explicit canonical-map calculation in the accompanying Lean module"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "projective line etale cohomology trace adjunction diagonal unit triangle identities",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.mkOfUnitCounit",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*triangle|projective.*adjunction",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryFiniteP1DiagonalUnit",
+  "date": "2026-10-26",
+  "group": "Z8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-ordinary-finite-p1-diagonal-unit",
+   "place": "Explicit proof of the supported diagonal unit and its specified counit",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryFiniteP1DiagonalIntegral",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryFiniteP1DiagonalIntegral.lean",
+  "declaration": "AlgebraicGeometry.Etale.ordinaryFiniteP1_diagonal_integral",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ordinaryFiniteP1_scalarTrace_baseChange",
+   "AlgebraicGeometry.Etale.ordinaryFiniteP1_diagonal_integral"
+  ],
+  "statement": "theorem ordinaryFiniteP1_diagonal_integral (hN : 0 < N) [Finite A]\n    (hc : OrdinaryFiniteP1ChernFamilySpec A N hA c)\n    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) :\n    have : IsLocallyNoetherian (ProjectiveLine S) :=\n      LocallyOfFiniteType.isLocallyNoetherian (ProjectiveLine S ↘ S)\n    have : CompactSpace (ProjectiveLine S) :=\n      QuasiCompact.compactSpace_of_compactSpace (ProjectiveLine S ↘ S)\n    have : IsNoetherian (ProjectiveLine S) := ⟨⟩\n    ∃ hI : (pullback.diagonal (ProjectiveLine S ↘ S)).ker.IsInvertible,\n      ∃ κ : CategoryTheory.Abelian.Ext\n        ((lowerStar (ModuleCat.{u + 1} A) (pullback.diagonal (ProjectiveLine S ↘ S))).obj\n          (ordinaryFiniteConstant A (ProjectiveLine S)))\n        (Scheme.finiteEtaleTateLine\n          (pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)) N A hA) 2,\n        SupportedKummerBoundary A N hA (pullback.diagonal (ProjectiveLine S ↘ S)) hI\n          (by simpa using (hS.map\n            ((pullback.fst (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)) ≫\n              (ProjectiveLine S ↘ S)).appTop.hom)) κ ∧\n        ∀ a : Bool,\n          ordinaryFiniteP1DiagonalSupportedMap A N hA S a κ ≫\n            ordinaryFiniteP1DiagonalChartMap A N hA t S hS a ≫\n              (b (ProjectiveLine S) (ordinaryFiniteP1_isUnit N S hS)).inv ≫ biprod.snd =\n            𝟙 (ordinaryFiniteUnit A (ProjectiveLine S))",
+  "branch": "sheaf-dag",
+  "by": "Z8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "independent cc review: 1065e8 vs fd5306 delivery (diff: duplicate square removed, TraceCoordinates reuses FiniteShiftedLineSquare) and adapted modules vs live clone; original FiniteP1TwistedUnitBaseChange compiled against delivered Arrows"
+ }
+}

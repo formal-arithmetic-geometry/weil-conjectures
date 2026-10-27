@@ -1,0 +1,265 @@
+{
+ "id": "lem-trf-sheaf-derivation-relation-representability",
+ "kind": "statement",
+ "title": "The sheaf differential relation cokernel represents derivations",
+ "statement": "Let $\\mathcal C$ be a site [def-weil-pbc-sites-and-cohomology], small in the universe of its sheaf values, and let $\\psi:R_1\\to R_2$ be a morphism of sheaves of commutative rings. For a sheaf of sets $T$, let $R_2[T]$ be the module sheafification [def-weil-presheaf-modules-sheafification] of the sectionwise free modules $U\\mapsto\\bigoplus_{t\\in T(U)}R_2(U)[t]$ [def-weil-pbc-free-module], with semilinear restrictions induced by $[t]\\mapsto[t|_V]$ and generator map $i_T:T\\to|R_2[T]|$. Put\n$$F=R_2[R_2],\\qquad E=R_2[R_2\\times R_2]\\oplus R_2[R_2\\times R_2]\\oplus R_2[R_1].$$\nLet $r:E\\to F$ be the sheaf-module morphism defined by\n$$[(a,b)]\\mapsto[a+b]-[a]-[b],\\quad [(f,g)]\\mapsto[fg]-g[f]-f[g],\\quad [h]\\mapsto[\\psi(h)]$$\non the three summands. Let $q:F\\to Q$ be any cokernel of $r$ in $R_2$-module sheaves [def-weil-sheaf-of-modules-category], and put $d=q\\circ i_{R_2}:R_2\\to|Q|$. A sheaf $\\psi$-derivation into an $R_2$-module sheaf $N$ means a morphism of underlying sheaves of sets $D:R_2\\to|N|$ satisfying $D(a+b)=D(a)+D(b)$, $D(fg)=gD(f)+fD(g)$, and $D(\\psi(h))=0$ on every object. Then $d$ is a sheaf $\\psi$-derivation and for every such $N$, composition with $d$ is a bijection\n$$\\operatorname{Hom}_{R_2}(Q,N)\\xrightarrow{\\sim}\\operatorname{Der}_{\\psi}(R_2,N).$$\nIts inverse sends $D$ to the unique $\\alpha:Q\\to N$ for which $\\alpha q:F\\to N$ takes $[b]$ to $D(b)$; this bijection is natural in $N$. If $M$ is an $R_2$-module sheaf and $d_M:R_2\\to|M|$ is another sheaf $\\psi$-derivation for which composition gives the same bijections for all $N$, there is a unique isomorphism $e:Q\\xrightarrow{\\sim}M$ satisfying $e\\circ d=d_M$. It satisfies $e q([b])=d_M(b)$ for every local section $b$, and $e q:F\\to M$ is again a cokernel of $r$.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 04BL, lemma-universal-module, equation-define-module-differentials and proof of the representing property; Tag 04BN, definition-module-differentials, uniqueness of a representing pair."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-free-module",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-presheaf-modules-sheafification",
+  "def-trf-free-module-sheaf-construction"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-free-module-sheaf-universal-property] with $B=R_2$. The three assignments in the statement are maps of sheaves of sets to $|F|$: for example $([fg]-g[f]-f[g])|_V=[f|_Vg|_V]-g|_V[f|_V]-f|_V[g|_V]$, by semilinearity and the naturality of the generator map; the other checks are $([a+b]-[a]-[b])|_V=[a|_V+b|_V]-[a|_V]-[b|_V]$ and $[\\psi(h)]|_V=[\\psi(h|_V)]$. Extend each assignment uniquely to its free module sheaf, and combine these maps from the three summands to obtain $r$. The construction uses precisely the sectionwise free modules followed by module sheafification appearing in the item, over the same ring sheaf $R_2$. In Lean, extendGenerators constructs the three maps and freeModule_extend_inverse evaluates them on brackets. Write the combined map explicitly as fst followed by the additive extension plus snd followed by (fst followed by the Leibniz extension plus snd followed by the base extension). The identity fst followed by lift(id,0) plus snd followed by lift(0,id) equals id proves extensionality from the summands.",
+   "uses": [
+    "lem-trf-free-module-sheaf-universal-property",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04BL, lemma-universal-module, equation-define-module-differentials and representing-property proof; Tag 04BN, definition-module-differentials."
+   }
+  },
+  {
+   "text": "Use the defining property of the assumed cokernel $q$: $qr=0$, and each $R_2$-linear $t:F\\to N$ satisfying $tr=0$ factors uniquely as $t=\\alpha q$. Here and below juxtaposition means ordinary composition, with the rightmost map applied first. Evaluating $qr=0$ on the generators in its three source summands gives $d(a+b)-d(a)-d(b)=0$, $d(fg)-g d(f)-f d(g)=0$ and $d(\\psi(h))=0$. The map $d=q i_{R_2}$ is already a sheaf map. Thus it is a sheaf $\\psi$-derivation. Any module-sheaf map $\\alpha:Q\\to N$ is sectionwise additive and $R_2$-linear, so applying it to these three equations proves that $\\alpha d$ is a derivation as well.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04BL, lemma-universal-module, equation-define-module-differentials and representing-property proof; Tag 04BN, definition-module-differentials."
+   }
+  },
+  {
+   "text": "Given a sheaf $\\psi$-derivation $D:R_2\\to|N|$, the free-module bijection [lem-trf-free-module-sheaf-universal-property] supplies a unique $t_D:F\\to N$ with $t_D([b])=D(b)$. Its composite with $r$ takes the three sorts of generators to $D(a+b)-D(a)-D(b)$, $D(fg)-gD(f)-fD(g)$ and $D(\\psi(h))$, respectively, all zero. Injectivity of restriction to generators in that same cited bijection says that $t_Dr$ restricted to each free summand is the zero morphism. A map from the direct sum is determined by its three composites with the inclusions, so $t_Dr=0$. This equality is of sheaf morphisms; no assertion that sections of a sheafified free module are globally finite sums is needed.",
+   "uses": [
+    "lem-trf-free-module-sheaf-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04BL, lemma-universal-module, equation-define-module-differentials and representing-property proof; Tag 04BN, definition-module-differentials."
+   }
+  },
+  {
+   "text": "The cokernel property recorded in step 2 now gives a unique $\\alpha_D:Q\\to N$ with $\\alpha_Dq=t_D$. Evaluating at $[b]$ gives $\\alpha_Dd(b)=D(b)$. Conversely, for $\\alpha:Q\\to N$, the maps $t_{\\alpha d}$ and $\\alpha q$ agree on generators and hence are equal by [lem-trf-free-module-sheaf-universal-property]. Uniqueness in the cokernel property then yields $\\alpha_{\\alpha d}=\\alpha$. These are both inverse identities for the asserted bijection and give exactly its stated inverse formula. In particular, maps out of $Q$ are determined by their composites with $d$. In Lean, CokernelCofork.IsColimit.desc' supplies the factorization, Cofork.IsColimit.hom_ext proves injectivity, and Equiv.ofBijective packages the proved postcomposition bijection.",
+   "uses": [
+    "lem-trf-free-module-sheaf-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04BL, lemma-universal-module, equation-define-module-differentials and representing-property proof; Tag 04BN, definition-module-differentials."
+   }
+  },
+  {
+   "text": "For a module-sheaf map $v:N\\to N'$, applying its additive, $R_2$-linear components to the derivation identities shows that $vD$ is again a derivation. Associativity gives $(v\\alpha)d=v(\\alpha d)$, proving naturality of the forward bijection. Both $v\\alpha_D$ and $\\alpha_{vD}$ compose with $d$ to $vD$, so the injectivity just proved gives $v\\alpha_D=\\alpha_{vD}$. Thus the inverse bijection is natural too.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04BL, lemma-universal-module, equation-define-module-differentials and representing-property proof; Tag 04BN, definition-module-differentials."
+   }
+  },
+  {
+   "text": "Suppose $(M,d_M)$ has the assumed representing property. The bijection for $Q$ at $N=M$ gives a unique $e:Q\\to M$ with $ed=d_M$. The assumed bijection for $M$ at $N=Q$ gives a unique $f:M\\to Q$ with $fd_M=d$. Then $(fe)d=d$ and $(ef)d_M=d_M$. Injectivity of the respective bijections at $Q$ and $M$ gives $fe=\\mathrm{id}_Q$ and $ef=\\mathrm{id}_M$. Hence $e$ is an isomorphism. Any other isomorphism satisfying the generator equation has the same underlying morphism by injectivity at $N=M$ and thus is the same isomorphism. The equation $eq([b])=d_M(b)$ follows by the definition of $d$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04BL, lemma-universal-module, equation-define-module-differentials and representing-property proof; Tag 04BN, definition-module-differentials."
+   }
+  },
+  {
+   "text": "Finally $(eq)r=e(qr)=0$. If $t:F\\to N$ has $tr=0$, write $t=\\alpha q$ uniquely by the original cokernel property, and put $\\beta=\\alpha f:M\\to N$. Then $\\beta eq=\\alpha feq=\\alpha q=t$. If $\\beta':M\\to N$ also has $\\beta'eq=t$, uniqueness for $q$ gives $\\beta'e=\\alpha$, whence $\\beta'=\\alpha f=\\beta$. This is the cokernel universal property for $eq:F\\to M$, proving the last clause without any sectionwise surjectivity claim. The Lean proof constructs this new colimit with CokernelCofork.IsColimit.ofπ and proves its factorization and uniqueness using the original cokernel and the two inverse identities.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04BL, lemma-universal-module, equation-define-module-differentials and representing-property proof; Tag 04BN, definition-module-differentials."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-free-module-sheaf-universal-property",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 04BL, lemma-universal-module, equation-define-module-differentials and representing-property proof; Tag 04BN, definition-module-differentials."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of sheaves of commutative rings the cokernel of the free additivity Leibniz and base relation map represents sheaf derivations",
+   "results": "8 hits; PresheafOfModules.HasDifferentials.exists_universal_derivation; PresheafOfModules.DifferentialsConstruction.isUniversal'; PresheafOfModules.Derivation'.Universal.mk; PresheafOfModules.Derivation.Universal; PresheafOfModules.DifferentialsConstruction.derivation'; PresheafOfModules.DifferentialsConstruction.instHasDifferentials; PresheafOfModules.Derivation.Universal.desc; PresheafOfModules.Derivation.Universal.fac; digest=f626e23f0cf7da8e. Presheaf derivation universal properties and ring-level differential uniqueness do not assert representability by this sheaf-module relation cokernel. Read Differentials/Presheaf.lean:85-175,185-242; Sheaf directory has no derivation hit.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal derivation of sheaf rings constructed from free module generators and relations uniquely identifies any two representing sheaf modules",
+   "results": "8 hits; PresheafOfModules.Derivation.Universal.mk.inj; PresheafOfModules.Derivation.instSubsingletonUniversal; PresheafOfModules.Derivation'.Universal.mk; PresheafOfModules.HasDifferentials.exists_universal_derivation; PresheafOfModules.Derivation.Universal; PresheafOfModules.Derivation.ext_iff; PresheafOfModules.DifferentialsConstruction.isUniversal'; PresheafOfModules.Derivation.ext; digest=56d820fd5efaef5c. Presheaf derivation universal properties and ring-level differential uniqueness do not assert representability by this sheaf-module relation cokernel. Read Differentials/Presheaf.lean:85-175,185-242; Sheaf directory has no derivation hit.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Derivation.Universal\"",
+   "results": "5 hits; PresheafOfModulesOfCommRing.Derivation.Universal; PresheafOfModulesOfCommRing.Derivation.Universal.fac; PresheafOfModulesOfCommRing.Derivation.Universal.desc; PresheafOfModulesOfCommRing.Derivation.Universal.postcomp_injective; PresheafOfModulesOfCommRing.Derivation.Universal.mk; digest=6f0d4722888c862a. Presheaf derivation universal properties and ring-level differential uniqueness do not assert representability by this sheaf-module relation cokernel. Read Differentials/Presheaf.lean:85-175,185-242; Sheaf directory has no derivation hit.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Derivation|Differentials|isUniversal [sub=Algebra/Category/ModuleCat/Sheaf]",
+   "results": "0 hits; ; digest=4f53cda18c2baa0c. Presheaf derivation universal properties and ring-level differential uniqueness do not assert representability by this sheaf-module relation cokernel. Read Differentials/Presheaf.lean:85-175,185-242; Sheaf directory has no derivation hit.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cokernel of three differential relation maps in sheaf modules represents derivations with a unique isomorphism preserving the universal derivation",
+   "results": "8 hits; PresheafOfModules.Derivation.Universal; PresheafOfModules.Derivation.instSubsingletonUniversal; Derivation.liftKaehlerDifferential_unique; PresheafOfModules.HasDifferentials.exists_universal_derivation; PresheafOfModules.Derivation.Universal.mk; PresheafOfModules.Derivation'.Universal.mk; CategoryTheory.ShortComplex.cokernelToAbelianCoimageIsCokernel; PresheafOfModules.DifferentialsConstruction.isUniversal'; digest=d058a91fd68500fb. Presheaf derivation universal properties and ring-level differential uniqueness do not assert representability by this sheaf-module relation cokernel. Read Differentials/Presheaf.lean:85-175,185-242; Sheaf directory has no derivation hit.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Derivation|Differentials|isUniversal [sub=Algebra/Category/ModuleCat/Sheaf]",
+   "results": "Logged hits: ; 0 hits; digest=4f53cda18c2baa0c. Read Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean:85-175,185-242. These are presheaf universal derivations, not the specified sheaf relation cokernel; SheafOfModules.Presentation.isColimit concerns an already supplied free presentation, not differential relations.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Derivation.Universal\"",
+   "results": "Logged hits: PresheafOfModulesOfCommRing.Derivation.Universal, PresheafOfModulesOfCommRing.Derivation.Universal.fac, PresheafOfModulesOfCommRing.Derivation.Universal.desc, PresheafOfModulesOfCommRing.Derivation.Universal.postcomp_injective, PresheafOfModulesOfCommRing.Derivation.Universal.mk; 5 hits; digest=6f0d4722888c862a. Read Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean:85-175,185-242. These are presheaf universal derivations, not the specified sheaf relation cokernel; SheafOfModules.Presentation.isColimit concerns an already supplied free presentation, not differential relations.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The sheaf of relative differentials is the cokernel of the additivity Leibniz and base relation map and universally represents derivations of sheaves of rings",
+   "results": "Logged hits: PresheafOfModules.DifferentialsConstruction.relativeDifferentials', PresheafOfModules.DifferentialsConstruction.isUniversal', PresheafOfModules.Derivation.mk, PresheafOfModules.HasDifferentials.exists_universal_derivation, PresheafOfModules.Derivation.Universal, PresheafOfModules.DifferentialsConstruction.derivation', PresheafOfModules.Derivation'.mk, SheafOfModules.Presentation.isColimit; 8 hits; digest=664fa53d0d09755d. Read Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean:85-175,185-242. These are presheaf universal derivations, not the specified sheaf relation cokernel; SheafOfModules.Presentation.isColimit concerns an already supplied free presentation, not differential relations.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cokernel of additivity Leibniz and base relations on the free module sheaf on a sheaf of rings represents relative sheaf derivations",
+   "results": "Logged hits: PresheafOfModules.DifferentialsConstruction.derivation', PresheafOfModules.DifferentialsConstruction.relativeDifferentials', PresheafOfModules.DifferentialsConstruction.instHasDifferentials, PresheafOfModules.Derivation.Universal, PresheafOfModules.Derivation'.Universal.mk, PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj, PresheafOfModules.DifferentialsConstruction.isUniversal', PresheafOfModules.Derivation'; 8 hits; digest=6a77238437fb3878. Read Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean:85-175,185-242. These are presheaf universal derivations, not the specified sheaf relation cokernel; SheafOfModules.Presentation.isColimit concerns an already supplied free presentation, not differential relations.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A universal derivation in sheaves of modules is obtained from generators and relations and any two representing pairs have a unique derivation preserving isomorphism",
+   "results": "Logged hits: PresheafOfModules.Derivation.Universal, PresheafOfModules.Derivation'.Universal.mk, PresheafOfModules.DifferentialsConstruction.isUniversal', PresheafOfModules.HasDifferentials.exists_universal_derivation, PresheafOfModules.Derivation.Universal.mk.inj, PresheafOfModules.Derivation.Universal.desc, PresheafOfModules.Derivation.instSubsingletonUniversal, PresheafOfModules.Derivation.Universal.fac; 8 hits; digest=58f0efde7d036068. Read Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean:85-175,185-242. These are presheaf universal derivations, not the specified sheaf relation cokernel; SheafOfModules.Presentation.isColimit concerns an already supplied free presentation, not differential relations.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-sheafified-module-differentials-cokernel",
+  "date": "2026-10-22",
+  "group": "Q44"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Supporting ring/sheaf input: sheaf cotangent stalks, section maps and ring localization; the underived inverse-image differential comparison uses the sheafified free-module relation-map presentation. Re-split: old steps (6, 7) of lem-trf-sheafified-module-differentials-cokernel: The sheaf differential relation cokernel represents derivations.",
+   "via": [
+    "lem-trf-sheafified-module-differentials-cokernel",
+    "lem-trf-topos-inverse-image-differentials",
+    "lem-trf-affine-cotangent-comparison",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-sheaf-derivation-relation-representability",
+  "worker": "stage1",
+  "summary": "Proved the relation-map construction, derivation identities, free-module lift annihilating relations, cokernel factorization with both inverse identities, naturality, normalized unique isomorphism and transported cokernel property. Reused the reviewed free-module universal-property node; no new nodes and no statement change.",
+  "blueprint": "Supporting underived sheaf-differential presentation in the ancestry of lem-trf-local-term-locality, specifically old steps 6 and 7 of lem-trf-sheafified-module-differentials-cokernel. Read latest blueprint main-20261023-1620; this algebraic support does not change its contracting-correspondence route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q104-1bb1fb65b",
+  "group": "Q104",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-1bb1fb65b (reviewer sub-agent of L); spot-checked: I read the item in full against Stacks sites-modules.tex lines 5907-6035: lemma-universal-module (04BL), equation-define-module-differentials and definition-module-differentials (04BN). The statement, derivation notion, free sheaves and three-summand relation map match the source exactly. The extra clauses (explicit inverse, naturality, normalized unique iso, eq is again a cokernel) are true and proved in the steps. The delivery has no new nodes and leaves the statement and stmt_deps unchanged; proof_deps equals the union of the steps' uses. Step 1 applies the reviewed same-unit node lem-trf-free-module-sheaf-universal-property (Q95 PASS; arbitrary generator sheaf on a small site) to R2xR2, R2xR2 and R1, after checking the restriction formulas by semilinearity. Steps 2-3 evaluate generators using sectionwise linearity; t_D r=0 comes from injectivity of the cited bijection plus the coproduct property, with no global finite-sum or section-surjectivity claim. Step 4 gives both inverse identities from the cokernel property and generator injectivity. Step 5 proves naturality. Step 6 builds e and f and proves fe=id and ef=id by injectivity. Step 7 checks the cokernel property of eq: beta=alpha f, and uniqueness via beta'e=alpha. Edge cases checked: R2=0, psi=id (Q=0), empty coverings or site, restrictions that merge generators. The parent's step 3 uses exactly these clauses. rg -L duplicate search: the trf siblings, def-weil-pbc-kahler-differentials (rings), lem-sfb-relative-differentials-sheaf-universal-property (schemes) and the sfb cotangent nodes all state different things. There is no cycle, no off-unit statement (no tool_uses) and no SGA."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.DerivationRelationRepresentability",
+  "declaration": "CategoryTheory.SheafDerivationRelations.relation_cokernel_represents",
+  "declarations": [
+   "CategoryTheory.SheafDerivationRelations.ringSets",
+   "CategoryTheory.SheafDerivationRelations.bracket",
+   "CategoryTheory.SheafDerivationRelations.symbols",
+   "CategoryTheory.SheafDerivationRelations.pairSymbols",
+   "CategoryTheory.SheafDerivationRelations.relations",
+   "CategoryTheory.SheafDerivationRelations.addGenerator",
+   "CategoryTheory.SheafDerivationRelations.mulGenerator",
+   "CategoryTheory.SheafDerivationRelations.baseGenerator",
+   "CategoryTheory.SheafDerivationRelations.IsRelationMap",
+   "CategoryTheory.SheafDerivationRelations.relation_cokernel_represents"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Sites/DerivationRelationRepresentability.lean",
+  "statement": "theorem relation_cokernel_represents {A B : Sheaf J CommRingCat.{w}} (ψ : A ⟶ B) : (∃! r : relations A B ⟶ symbols B, IsRelationMap ψ r) ∧ ∀ (r : relations A B ⟶ symbols B), IsRelationMap ψ r → ∀ (Q : ringedSiteModules.{w, w, vC, uC} (ring B)) (q : symbols B ⟶ Q) (hq : r ≫ q = 0), IsColimit (CokernelCofork.ofπ q hq) → ∃ (d : Q.val.Derivation' ψ.hom) (e : ∀ N : ringedSiteModules.{w, w, vC, uC} (ring B), (Q ⟶ N) ≃ N.val.Derivation' ψ.hom), (∀ (U : Cᵒᵖ) (b : B.obj.obj U), d.d b = q.val.app U (bracket B (ringSets B) U b)) ∧ (∀ (N : ringedSiteModules.{w, w, vC, uC} (ring B)) (α : Q ⟶ N), e N α = d.postcomp α.val) ∧ (∀ (N : ringedSiteModules.{w, w, vC, uC} (ring B)) (D : N.val.Derivation' ψ.hom), (∀ (U : Cᵒᵖ) (b : B.obj.obj U), (q ≫ (e N).symm D).val.app U (bracket B (ringSets B) U b) = D.d b) ∧ ∀ α : Q ⟶ N, (∀ (U : Cᵒᵖ) (b : B.obj.obj U), (q ≫ α).val.app U (bracket B (ringSets B) U b) = D.d b) → α = (e N).symm D) ∧ (∀ (N N' : ringedSiteModules.{w, w, vC, uC} (ring B)) (v : N ⟶ N') (α : Q ⟶ N), e N' (α ≫ v) = (e N α).postcomp v.val) ∧ (∀ (N N' : ringedSiteModules.{w, w, vC, uC} (ring B)) (v : N ⟶ N') (D : N.val.Derivation' ψ.hom), (e N).symm D ≫ v = (e N').symm (D.postcomp v.val)) ∧ (∀ (M : ringedSiteModules.{w, w, vC, uC} (ring B)) (dM : M.val.Derivation' ψ.hom), (∀ N : ringedSiteModules.{w, w, vC, uC} (ring B), Function.Bijective (fun α : M ⟶ N ↦ dM.postcomp α.val)) → ∃ ε : Q ≅ M, d.postcomp ε.hom.val = dM ∧ (∀ ε' : Q ≅ M, d.postcomp ε'.hom.val = dM → ε' = ε) ∧ (∀ (U : Cᵒᵖ) (b : B.obj.obj U), (q ≫ ε.hom).val.app U (bracket B (ringSets B) U b) = dM.d b) ∧ ∃ h : r ≫ (q ≫ ε.hom) = 0, Nonempty (IsColimit (CokernelCofork.ofπ (q ≫ ε.hom) h)))",
+  "branch": "sheaf-dag",
+  "by": "Q46",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reuses the published free module sheaf and generator. The three finite direct-sum terms are realized by their finite product with the canonical additive inclusions, avoiding an extra chosen biproduct instance. The theorem includes existence and uniqueness of the specified relation map and applies to every cokernel, with an explicit family of natural equivalences and inverse generator formula."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cf7091e14",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Item lem-trf-sheaf-derivation-relation-representability matches the node and Stacks 04BL/04BN clause by clause. Relation map stated as exists-unique; three relations' signs and scalar order correct; direct sum as binary product with (id,0) inclusions, which is the direct sum in module sheaves; holds for every cokernel; d via Mathlib Derivation' (Leibniz order swapped, same equation); forward formula, inverse unique on generators, naturality both ways; comparison iso with any other representing pair unique among all normalized isos, generator value and transported cokernel stated. Only record changes vs live: lean record and added stmt_dep def-trf-free-module-sheaf-construction (landed, reviewed def node, used directly). lean.statement verbatim in file; only proof is sorry; seven proof steps in docstring; source/blueprint docstrings; no universe restriction. SheafifiedDifferentialsCokernel builds presheaf relations in a theorem module, so not a duplicate notion. Report has Worker report and Second reading by Q46 (in-thread pass, stated as such). No files changed, so nothing recompiled."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261026T082142-L-2142011",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

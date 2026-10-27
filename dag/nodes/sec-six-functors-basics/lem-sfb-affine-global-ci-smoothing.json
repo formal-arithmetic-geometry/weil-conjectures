@@ -1,0 +1,358 @@
+{
+ "id": "lem-sfb-affine-global-ci-smoothing",
+ "kind": "statement",
+ "title": "Affine complete intersections admit smoothings of the expected fibre dimension",
+ "statement": "Let $k$ be a field [def-weil-field], let $0\\leq c\\leq N$ be integers, and let $f_1,\\ldots,f_c\\in k[x_1,\\ldots,x_N]$ [def-weil-pbc-mv-polynomial-ring]. Suppose $P=k[x_1,\\ldots,x_N]/(f_1,\\ldots,f_c)\\neq0$ and $\\dim P=N-c=r$, so that $P$ is a global complete intersection over $k$ [def-weil-pbc-complete-intersection-over-field]. Set $R=k[[t]]$ [def-weil-pbc-multivariate-power-series] and $K=R[1/t]=k((t))$. There exist $a_{ij}\\in tR$, for $0\\leq i\\leq N$ and $1\\leq j\\leq c$, such that, with $g_j=f_j+a_{0j}+\\sum_{i=1}^N a_{ij}x_i$ and $Q=R[x_1,\\ldots,x_N]/(g_1,\\ldots,g_c)$, the map $R\\to Q$ is flat [def-weil-pbc-flat-ring-map], the induced $k$-algebra map $Q/tQ\\to P$ sending $x_i$ to $x_i$ is an isomorphism, and $\\operatorname{Spec}(Q[1/t])\\to\\operatorname{Spec}K$ is smooth [def-sbc-smooth-morphisms]. Moreover every nonempty geometric fibre [def-weil-geometric-fibre] of $\\operatorname{Spec}Q\\to\\operatorname{Spec}R$ is equidimensional of dimension $r$ [def-weil-pure-dimension]. Empty sequences of equations and perturbation coefficients are allowed.",
+ "source": {
+  "document": "literature/stacks-project/examples-defos.tex",
+  "place": "Tag 0E7V, lemma-smoothing-affine-lci, including its displayed polynomial construction; the expected fibre-dimension property of that construction is also used explicitly in the proof of Tag 0E7X, lemma-smoothing-at-lci-point."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-complete-intersection-over-field",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-flat-ring-map",
+  "def-sbc-smooth-morphisms",
+  "def-weil-geometric-fibre",
+  "def-weil-pure-dimension",
+  "def-weil-affine-spectrum",
+  "def-weil-ring-localization-away"
+ ],
+ "proof": [
+  {
+   "text": "Put $R=k[[t]]$ and $A=R[x_1,\\ldots,x_N]$. The field $k$ is Noetherian because its only ideals are $0$ and $k$. The power-series Noetherian theorem makes $R$ Noetherian, and the finite-type theorem makes $A$ Noetherian. The power-series domain and local-ring results give that $R$ is a domain with maximal ideal $(t)$: zero constant coefficient means exactly divisibility by $t$. More explicitly, every nonzero series is $t^d u$ for its least nonzero coefficient index $d$, with $u$ a unit. Thus every nonzero prime of $R$ contains $t$, so its only primes are $(0)$ and $(t)$. Inverting $t$ inverts every nonzero series, and hence $R_{(0)}=R[1/t]=K$ is a field, while $R_{(t)}=R$.",
+   "uses": [
+    "lem-weil-pbc-power-series-noetherian",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-power-series-domain",
+    "lem-weil-pbc-power-series-local-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0E7V, lemma-smoothing-affine-lci, flatness paragraph; algebra.tex Tags 0306, 00FN and elementary lowest-coefficient factorization"
+   }
+  },
+  {
+   "text": "Apply the generic perturbation result to the specified $f_j$ and obtain $H\\ne0$ in the $M=c(N+1)$ coefficient variables. Its conclusion holds also when $c=0$, with $M=0$ and $H=1$. This input imposes no smoothness or perfectness hypothesis on $k$ or the special fibre.",
+   "uses": [
+    "lem-sfb-generic-linear-perturbation-jacobian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0E7V, last paragraph, invoking Tag 0E7U, lemma-jouanolou-type-thing"
+   }
+  },
+  {
+   "text": "Choose the coefficients explicitly. If $M=0$ the tuple is empty and $H$ is a nonzero scalar. Otherwise enumerate its variables $z_1,\\ldots,z_M$ and choose an integer $D\\ge2$ larger than every exponent in every monomial of $H$. Set $a_\\ell=t^{D^{\\ell-1}}\\in tR$. Substitution takes the monomial $z_1^{e_1}\\cdots z_M^{e_M}$ to $t^{\\sum_\\ell e_\\ell D^{\\ell-1}}$. The exponents in this finite sum are pairwise distinct by uniqueness of base-$D$ expansion, since $0\\le e_\\ell<D$. The nonzero coefficients of $H$ therefore cannot cancel, so $H(a)\\ne0$ in $R$ and in $K$. Relabel these $a_\\ell$ as $a_{ij}$. This proves the coefficient-choice exercise without requiring $k$ to be infinite.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0E7V, final exercise: no nonzero polynomial vanishes on all tuples in (t)"
+   }
+  },
+  {
+   "text": "Set $g_j=f_j+a_{0j}+\\sum_i a_{ij}x_i$ and $Q=A/(g_1,\\ldots,g_c)$. Reduction of coefficients modulo $t$ sends $g_j$ to $f_j$, so successive quotienting gives $Q/tQ=A/(t,g_1,\\ldots,g_c)=k[x_1,\\ldots,x_N]/(f_1,\\ldots,f_c)=P$. Both directions send each $x_i$ to $x_i$ and each scalar to itself, giving exactly the required $k$-algebra isomorphism. Inverting $t$ similarly gives $Q[1/t]=K[x_1,\\ldots,x_N]/(g_1,\\ldots,g_c)$. Apply the perturbation result over $L=K$ with the coefficients chosen in step 3: this generic fibre is smooth and its $c\\times c$ Jacobian minors generate its unit ideal.",
+   "uses": [
+    "lem-sfb-generic-linear-perturbation-jacobian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0E7V, displayed construction and generic-fibre paragraph"
+   }
+  },
+  {
+   "text": "The polynomial projection $\\operatorname{Spec}A\\to\\operatorname{Spec}R$ is flat, and the affine flatness equivalence gives that $R\\to A$ is a flat ring map. For a prime $\\mathfrak q\\subset Q$ containing $t$, let $\\mathfrak q^*\\subset A$ be its inverse image and let $\\mathfrak p\\subset k[x_1,\\ldots,x_N]$ be its reduction modulo $t$. Then $\\mathfrak p$ contains every $f_j$. Localizing the ambient flat map gives a flat local map $R\\to A_{\\mathfrak q^*}$ of Noetherian local rings: the contraction is $(t)$, $R_{(t)}=R$, and both rings are Noetherian by step 1 and the localized-flat-map theorem. The quotient $A_{\\mathfrak q^*}/tA_{\\mathfrak q^*}$ is $k[x_1,\\ldots,x_N]_{\\mathfrak p}$: reduction and localization commute by sending a fraction $u/v$ to $\\bar u/\\bar v$.",
+   "uses": [
+    "lem-nagata-polynomial-projection-flat",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-weil-pbc-flat-local-ring-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0E7V, flatness paragraph; algebra.tex Tag 00HT and morphisms.tex Tag 01U5"
+   }
+  },
+  {
+   "text": "Since $P\\ne0$ has dimension $N-c$, the complete-intersection local regular-sequence theorem says that $f_1,\\ldots,f_c$ is a regular sequence in $k[x_1,\\ldots,x_N]_{\\mathfrak p}$. These are exactly the reductions of $g_1,\\ldots,g_c$ in the closed fibre of the flat local map in step 5. The Grothendieck regular-sequence lifting theorem therefore makes $A_{\\mathfrak q^*}/(g_1,\\ldots,g_c)$ flat over $R$. Its isomorphism to $Q_{\\mathfrak q}$ sends the class of $u/v$ to $\\bar u/\\bar v$. Conversely every denominator outside $\\mathfrak q$ lifts to one outside $\\mathfrak q^*$; the quotient relations make this inverse independent of the lift. Thus flatness holds at each prime above $(t)$. The argument includes the empty regular sequence.",
+   "uses": [
+    "lem-weil-pbc-global-complete-intersection-local-regular-sequence",
+    "lem-weil-pbc-grothendieck-regular-sequence-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0E7V, flatness paragraph, using algebra.tex Tags 00SC (lemma-lci) and 00MG (lemma-grothendieck-regular-sequence)"
+   }
+  },
+  {
+   "text": "If a prime $\\mathfrak q\\subset Q$ does not contain $t$, its contraction in $R$ is $(0)$ by step 1, and $Q_{\\mathfrak q}$ is a module over the field $R_{(0)}=K$. The field-module flatness theorem makes it flat over $R_{(0)}$. Together with step 6 this verifies the localization condition at every prime of $Q$. The flat-map local criterion now gives flatness of $R\\to Q$.",
+   "uses": [
+    "lem-weil-pbc-module-over-field-flat",
+    "lem-weil-pbc-flat-map-local-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0E7V, flatness at primes above (0); algebra.tex Tag 00HT"
+   }
+  },
+  {
+   "text": "Write $B=Q[1/t]$. At each prime of $B$ some Jacobian minor $\\delta$ is invertible by step 4. Permute variables so that this minor uses the first $c$ variables. The principal open $D(\\delta)$ has coordinate ring $B_\\delta=K[x_1,\\ldots,x_N,y]/(g_1,\\ldots,g_c,y\\delta-1)$. For the $c+1$ derivative columns $x_1,\\ldots,x_c,y$, the displayed Jacobian has upper-right block zero and bottom-right entry $\\delta$; its determinant is $\\delta^2$ up to the harmless permutation sign. It is a unit in $B_\\delta$. Order the variables as $x_1,\\ldots,x_c,y,x_{c+1},\\ldots,x_N$ so these are the first $c+1$ columns. This is a standard smooth presentation with $N+1$ variables and $c+1$ equations. The standard-smooth dimension theorem gives local topological dimension $(N+1)-(c+1)=r$ at every point of this open. For a point $b$ in this principal open $U$, every open neighbourhood $V$ of $b$ in $\\operatorname{Spec}B$ contains the neighbourhood $V\\cap U$ of $b$ in $U$, and $\\dim(V\\cap U)\\leq\\dim V$: a chain of irreducible closed subsets of an open subset gives a chain of the same length by taking closures. Conversely each open neighbourhood of $b$ in $U$ is open in $\\operatorname{Spec}B$. The two minima defining local topological dimension are therefore equal. These opens cover $\\operatorname{Spec}B$, so $\\dim_b\\operatorname{Spec}B=r$ for every $b$. When $c=0$, use the single empty minor $\\delta=1$; the same presentation and calculation apply.",
+   "uses": [
+    "def-weil-pbc-standard-smooth-algebra",
+    "def-weil-pbc-polynomial-partial-derivative",
+    "def-weil-pbc-matrix-determinant",
+    "lem-weil-pbc-standard-smooth-over-field-dimension-at-points",
+    "def-kun-topological-dimension-at-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00T7, lemma-standard-smooth; explicit localization chart for the full-rank minors in examples-defos.tex Tag 0E7U"
+   }
+  },
+  {
+   "text": "The special fibre $\\operatorname{Spec}P$ has local topological dimension $r$ at every point by the global-complete-intersection equidimensionality theorem applied to the given presentation and dimension hypothesis. For any geometric point over $(t)$ with algebraically closed residue field $\\Omega$, the geometric fibre is $\\operatorname{Spec}(P\\otimes_k\\Omega)$ by the isomorphism in step 4. The pointwise field-extension dimension theorem gives local dimension $r$ at every point of it. For a geometric point over $(0)$ the fibre is $\\operatorname{Spec}(B\\otimes_K\\Omega)$, and the same theorem with the result of step 8 gives local dimension $r$ there. Its use is legitimate because $P$ and $B$ are finitely generated algebras over their respective fields. These are all geometric fibres since $(t)$ and $(0)$ are all primes of $R$.",
+   "uses": [
+    "lem-weil-pbc-global-complete-intersection-equidimensional",
+    "lem-weil-pbc-dimension-at-point-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Section 00S8 following Definition 00S9 (definition-lci-field); Tag 00P4, lemma-dimension-at-a-point-preserved-field-extension"
+   }
+  },
+  {
+   "text": "Each geometric fibre has coordinate algebra finitely generated over the field $\\Omega$, hence Noetherian by the finite-type Noetherian theorem. Its spectrum is locally Noetherian by the definition, using its one-member affine cover. Apply the constant-local-dimension component theorem to the whole geometric fibre and the integer $r$: step 9 supplies its local dimension hypothesis, so every irreducible component has dimension $r$. This is equidimensionality of dimension $r$ by definition. The assertion is vacuous for an empty fibre. Steps 3, 4 and 7 give all the other requested conclusions, including the prescribed coordinate identification of the special fibre.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "pqf-def-locnoeth",
+    "lem-sbc-constant-local-dimension-components",
+    "def-weil-pure-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0E7X, lemma-smoothing-at-lci-point, expected fibre dimension of the construction; algebra.tex Tag 00FN; local-to-component dimension as in topology.tex Tags 0055 and 0052"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-topological-dimension-at-point",
+  "def-weil-pbc-matrix-determinant",
+  "def-weil-pbc-polynomial-partial-derivative",
+  "def-weil-pbc-standard-smooth-algebra",
+  "def-weil-pure-dimension",
+  "lem-nagata-polynomial-projection-flat",
+  "lem-sbc-constant-local-dimension-components",
+  "lem-sfb-generic-linear-perturbation-jacobian",
+  "lem-weil-pbc-dimension-at-point-field-extension",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-flat-local-ring-maps",
+  "lem-weil-pbc-flat-map-local-criterion",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-global-complete-intersection-equidimensional",
+  "lem-weil-pbc-global-complete-intersection-local-regular-sequence",
+  "lem-weil-pbc-grothendieck-regular-sequence-flat",
+  "lem-weil-pbc-module-over-field-flat",
+  "lem-weil-pbc-power-series-domain",
+  "lem-weil-pbc-power-series-local-ring",
+  "lem-weil-pbc-power-series-noetherian",
+  "lem-weil-pbc-standard-smooth-over-field-dimension-at-points",
+  "pqf-def-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/examples-defos.tex",
+  "place": "Tag 0E7V, lemma-smoothing-affine-lci; coefficient-choice exercise written out, with the expected fibre-dimension verification used in Tag 0E7X"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every global complete intersection algebra over an arbitrary field has a flat finitely presented deformation over k[[t]] with smooth generic fibre and equidimensional geometric fibres of the expected dimension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"ℕ → (R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"Given a natural number $ n $, a commutative ring $ R $, and a commutative ring $ S $ equipped with an $ R $-algebra structure, the proposition that $ S $ is a standard smooth algebra of relative dimen\"}\n  {\"name\": \"Algebra.smooth_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u_4) [inst : CommRing R] (A : Type u) [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.Smooth R A ↔\\n    autoParam (Algebra.FormallySmooth R A) Algebra.Smooth.formallySmooth._autoParam ∧\\n      autoParam (Algebra.FinitePresentation R A) Algebra.Smooth.finitePresentation._autoParam\", \"doc\": \"For any commutative ring $ R $ and commutative ring $ A $ equipped with an $ R $-algebra structure, $ A $ is smooth over $ R $ if and only if $ A $ is formally smooth over $ R $ and finitely presented\"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"ℕ → {R : Type u} → {S : Type v} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, this proposition asserts that $ S $ is a standard smooth algebra over $ R $ of relative dimension $ n $, where the a\"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension.toAlgebra\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  RingHom.IsStandardSmoothOfRelativeDimension n f → Algebra.IsStandardSmoothOfRelativeDimension n R S\", \"doc\": \"For a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, the target ring $ S $ is a standard smooth algebra over $ R $ of relative dimension $ n $, where the algebra structure\"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.Smooth R A],\\n  Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"RingHom.smooth_def\", \"module\": \"Mathlib/RingTheory/RingHom/Smooth\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.Smooth ↔ f.FormallySmooth ∧ f.FinitePresentation\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is smooth if and only if it is formally smooth and finitely presented as an $ R $-algebra. This means $ S $ must satisfy the formal smoothness lifting property, be \"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension.isStandardSmooth\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S),\\n  RingHom.IsStandardSmoothOfRelativeDimension n f → f.IsStandardSmooth\", \"doc\": \"If a ring homomorphism $ f : R \\to S $ is standard smooth of relative dimension $ n $, then $ f $ is standard smooth.\"}\n  {\"name\": \"Algebra.Smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"(R : Type u_4) → [inst : CommRing R] → (A : Type u) → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The property that the commutative ring $ A $, equipped with an $ R $-algebra structure, is smooth over the commutative ring $ R $.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern smoothness of a supplied algebra or standard smooth presentations; none constructs a deformation of an arbitrary complete intersection"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quotient of a polynomial algebra by the expected number of equations can be smoothed by perturbing the equations over a formal power series discrete valuation ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.SubmersivePresentation.isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} {ι : Type w} {σ : Type t} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : Finite σ] [Finite ι] (P : Algebra.SubmersivePresentation R S ι σ), Algebra.IsStandardSmooth R S\", \"doc\": \"Given a finite index set $\\\\iota$ and a submersive presentation $P$ of an $R$-algebra $S$ with generating set $\\\\sigma$, the algebra $S$ is standard smooth over $R$. This means $S$ is isomorphic to a lo\"}\n  {\"name\": \"Algebra.IsStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"(R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"The property that $ S $ is a standard smooth algebra over $ R $, meaning $ S $ is isomorphic to a polynomial ring $ R[x_1, \\\\ldots, x_n] $ localized at an element $ f $, with the Jacobian matrix of the\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"ℕ → (R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"Given a natural number $ n $, a commutative ring $ R $, and a commutative ring $ S $ equipped with an $ R $-algebra structure, the proposition that $ S $ is a standard smooth algebra of relative dimen\"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"ℕ → {R : Type u} → {S : Type v} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, this proposition asserts that $ S $ is a standard smooth algebra over $ R $ of relative dimension $ n $, where the a\"}\n  {\"name\": \"Algebra.IsStandardSmooth.out\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} {inst : CommRing R} {inst_1 : CommRing S} {inst_2 : Algebra R S}\\n  [self : Algebra.IsStandardSmooth R S],\\n  ∃ ι σ, ∃ (x : Finite σ), Finite ι ∧ Nonempty (Algebra.SubmersivePresentation R S ι σ)\", \"doc\": \"If $ S $ is a standard smooth algebra over a commutative ring $ R $, then there exist finite sets $ \\\\iota $ and $ \\\\sigma $ such that $ S $ admits a submersive presentation: $ S $ is isomorphic to a qu\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"Algebra.instSmoothOfIsStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Algebra.Smooth R S\", \"doc\": \"Every standard smooth algebra over a commutative ring $ R $ is smooth over $ R $. A standard smooth algebra is one isomorphic to a localized polynomial ring $ R[x_1,\\\\ldots,x_n]_f $ with maximal rank J\"}\n  {\"name\": \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Algebra.Smooth R S],\\n  ∃ s, Ideal.span s = ⊤ ∧ ∀ x ∈ s, Algebra.IsStandardSmooth R (Localization.Away x)\", \"doc\": \"Let $R$ and $S$ be commutative rings, and let $S$ be a smooth $R$-algebra. Then there exists a set of elements $s \\\\subseteq S$ such that the ideal generated by $s$ is the whole ring $S$, and for every\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern smoothness of a supplied algebra or standard smooth presentations; none constructs a deformation of an arbitrary complete intersection"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Smooth\", \"PowerSeries\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern smoothness of a supplied algebra or standard smooth presentations; none constructs a deformation of an arbitrary complete intersection"
+  },
+  {
+   "tool": "grep",
+   "query": "smoothing|deformation|fittingIdeal|FittingIdeal",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Perfectoid/FontaineTheta.lean\", \"line\": \"30\", \"text\": \"deformation-theoretic approach via the cotangent complex, as in\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern smoothness of a supplied algebra or standard smooth presentations; none constructs a deformation of an arbitrary complete intersection"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A global complete intersection over a field admits a flat smoothing over the formal power series ring with smooth generic fibre",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"Algebra.Smooth.flat_of_isNoetherianRing\", \"module\": \"Mathlib.RingTheory.Smooth.Flat\", \"type\": \"[IsNoetherianRing R] [Smooth R A] : Module.Flat R A\", \"doc\": \"Let $ R $ be a Noetherian ring and $ A $ a smooth $ R $-algebra. Then $ A $ is flat as an $ R $-module.\"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib.RingTheory.Smooth.Flat\", \"type\": \"[Smooth R A] : Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth) →\\n    AlgebraicGeometry.IsSmooth f\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if for every point $x \\\\in X$, there exist open sets $U \\\\subseteq Y$ and $V \\\\subseteq X$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring homom\"}\n  {\"name\": \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"module\": \"Mathlib.RingTheory.Smooth.Flat\", \"type\": \"(f : S →ₐ[R] A) (hf : Function.Surjective f) [Module.Flat R S] [IsNoetherianRing S] [FormallySmooth R A] :\\n  Module.Flat R A\", \"doc\": \"Let $ R $ be a commutative ring, $ S $ a Noetherian $ R $-algebra that is flat over $ R $, and $ A $ a formally smooth $ R $-algebra. If there exists a surjective $ R $-algebra homomorphism $ f: S \\to \"}\n  {\"name\": \"RingHom.Smooth\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is smooth if the induced $ R $-algebra structure on $ S $ is smooth, meaning $ S $ is flat over $ R $ and the sheaf of differentials $ \\\\Omega_{S/R} $ is locally fre\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern smoothness of a supplied algebra or standard smooth presentations; none constructs a deformation of an arbitrary complete intersection"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generic affine linear perturbations of finitely many polynomials in affine space give a smooth complete intersection with maximal rank Jacobian",
+   "results": "8 hits: Algebra.SubmersivePresentation.isStandardSmooth, Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension, Algebra.IsStandardSmoothOfRelativeDimension.out, Algebra.IsStandardSmooth, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, Algebra.IsStandardSmoothOfRelativeDimension, Algebra.IsStandardSmooth.out, Algebra.Smooth.exists_span_eq_top_isStandardSmooth",
+   "date": "2026-10-22",
+   "verdict": "no match: these results construct or describe standard smooth presentations already supplied as data, not a nonempty coefficient open for arbitrary input equations"
+  },
+  {
+   "tool": "grep",
+   "query": "perturb|jouanolou|smoothing",
+   "results": "0 hits: ; directory RingTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: these results construct or describe standard smooth presentations already supplied as data, not a nonempty coefficient open for arbitrary input equations"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsStandardSmoothOfRelativeDimension, MvPolynomial",
+   "results": "3 hits: Algebra.IsStandardSmoothOfRelativeDimension.mvPolynomial, Algebra.IsStandardSmoothOfRelativeDimension.mvPolynomial_fin, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial",
+   "date": "2026-10-22",
+   "verdict": "no match: these results construct or describe standard smooth presentations already supplied as data, not a nonempty coefficient open for arbitrary input equations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal affine linear perturbation of polynomial equations is smooth over a nonempty open subset of coefficient space",
+   "results": "UNAVAILABLE: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "There is a nonzero polynomial in the coefficients such that adding generic constants and linear forms to any c polynomials makes all c by c Jacobian minors generate the unit ideal",
+   "results": "8 hits: Algebra.SubmersivePresentation.exists_sum_eq_σ_jacobian_mul_σ_jacobian_inv_sub_one, Algebra.SubmersivePresentation.jacobianOfHasCoeffs, Algebra.PreSubmersivePresentation.isUnit_jacobian_of_linearIndependent_of_span_eq_top, Algebra.SubmersivePresentation.jacobianRelations, Algebra.SubmersivePresentation.jacobianRelations_spec, Algebra.SubmersivePresentation.map_jacobianOfHasCoeffs, Algebra.SubmersivePresentation.jacobianRelationsOfHasCoeffs, Algebra.PreSubmersivePresentation.jacobian",
+   "date": "2026-10-22",
+   "verdict": "no match: these results construct or describe standard smooth presentations already supplied as data, not a nonempty coefficient open for arbitrary input equations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-lci-local-fitting-smoothing",
+  "date": "2026-10-22",
+  "group": "Q77"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Smoothing a proper curve with isolated complete-intersection singularities. Supporting input: Local complete-intersection deformations with a Fitting-ideal bound. Affine smoothing input: the polynomial perturbation in Stacks lemma-smoothing-affine-lci, used in the local smoothing construction.",
+   "via": [
+    "lem-sfb-lci-local-fitting-smoothing",
+    "lem-sfb-isolated-lci-curve-smoothing",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-affine-global-ci-smoothing",
+  "worker": "stage1",
+  "summary": "Followed the explicit Stacks polynomial smoothing, reused local regular-sequence, flatness and dimension nodes, and separated only the genuinely generic polynomial perturbation input. Filled the coefficient-choice exercise by base-D monomial weights, checked Noetherian/local hypotheses, and proved the geometric fibre dimension with standard-smooth localization charts and pointwise dimension invariance. The item statement is unchanged. Repair of return 9e465d7afa0: rebased the retained split onto the current unsplit live item, re-read all current dependency statements and retained the exact hypotheses; expanded the open-neighbourhood dimension argument. The required server delivery tool rebuilds this split on current origin/sheaf-dag rather than relying on the unpromoted side completion.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Smoothing a proper curve with isolated complete-intersection singularities. Supporting input: Local complete-intersection deformations with a Fitting-ideal bound. Affine smoothing input: the polynomial perturbation in Stacks lemma-smoothing-affine-lci, used in the local smoothing construction. Steps 1–7 realize the affine smoothing prerequisite and steps 8–10 its expected fibre-dimension bound.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-constant-local-dimension-components",
+    "why": "Generic algebra/dimension input used as stated in this Stacks polynomial smoothing proof; the fixed alteration/moduli unit has no replacement for this local algebra fact."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-at-point-field-extension",
+    "why": "Generic algebra/dimension input used as stated in this Stacks polynomial smoothing proof; the fixed alteration/moduli unit has no replacement for this local algebra fact."
+   },
+   {
+    "node": "lem-weil-pbc-global-complete-intersection-equidimensional",
+    "why": "Generic algebra/dimension input used as stated in this Stacks polynomial smoothing proof; the fixed alteration/moduli unit has no replacement for this local algebra fact."
+   },
+   {
+    "node": "lem-weil-pbc-global-complete-intersection-local-regular-sequence",
+    "why": "Generic algebra/dimension input used as stated in this Stacks polynomial smoothing proof; the fixed alteration/moduli unit has no replacement for this local algebra fact."
+   },
+   {
+    "node": "lem-weil-pbc-grothendieck-regular-sequence-flat",
+    "why": "Generic algebra/dimension input used as stated in this Stacks polynomial smoothing proof; the fixed alteration/moduli unit has no replacement for this local algebra fact."
+   },
+   {
+    "node": "lem-weil-pbc-standard-smooth-over-field-dimension-at-points",
+    "why": "Generic algebra/dimension input used as stated in this Stacks polynomial smoothing proof; the fixed alteration/moduli unit has no replacement for this local algebra fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-constant-local-dimension-components",
+  "lem-weil-pbc-dimension-at-point-field-extension",
+  "lem-weil-pbc-global-complete-intersection-equidimensional",
+  "lem-weil-pbc-global-complete-intersection-local-regular-sequence",
+  "lem-weil-pbc-grothendieck-regular-sequence-flat",
+  "lem-weil-pbc-standard-smooth-over-field-dimension-at-points"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-c32594d59",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-c32594d59 (reviewer sub-agent of L); spot-checked: Fourth push of this split. The three earlier heads (9e465d7a, 7206e67d, dab096ea) were each PASSed, and their landings were refused only because the side completion was not in the live DAG, which is a promotion problem. There is no repair note for this item, so the re-split rules do not apply. clones/live and side-live still hold the item unsplit with no proof, so it is not superseded. Its statement, stmt_deps, source, unit, chapter and blueprint are identical to live, and no SGA source is used. In the normalized JSON diff, the new node lem-sfb-generic-linear-perturbation-jacobian is byte-identical to the earlier heads. The only change in the item is step 6, which now writes out the isomorphism A_{q*}/(g) ≅ Q_q, u/v ↦ ū/v̄, with its inverse obtained by lifting denominators outside q to denominators outside q*. This is just localization commuting with quotients; it is correct and adds no dependency. I re-read all 10 steps and every key cited statement. Step 1: R=k[[t]] has only the primes (0) and (t). Step 3: substituting t^{D^{l-1}} gives H(a)≠0 by uniqueness of base-D expansion, which also works for finite k. Steps 5-6: the global-CI local regular-sequence node (hypotheses T≠0, dim=m−t, J⊆q'') and 00MG (Noetherian flat local map, regular sequence in the closed fibre) give flatness at primes above (t). Step 7: primes above (0) are handled by the module-over-field node and the 00HT local criterion. Step 8: the chart B_δ=K[x,y]/(g,yδ−1) has Jacobian determinant δ², so it is standard smooth of dimension r. Steps 9-10: the geometric fibres are P⊗Ω and B⊗Ω, of dimension r by the pointwise field-extension node and the constant-local-dimension-components node. Stacks examples-defos 0E7V (lines 2998-3041) was read. For the new node I redid the 0E7U incidence count: N + cN − (N−c+1) = M−1 < M. H is defined over k and the conclusion holds after any extension L/k. Small cases c=0, x² in characteristics 0 and 2, x^p−s over an imperfect field, and B=0 all behave. An rg -L duplicate search found only the item and its parent lci-local-fitting-smoothing, and the new node is not a clause of the item. The six generic algebra/dimension tool_uses are accepted. No changes were made."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.AffineCompleteIntersectionSmoothing",
+  "declaration": "MvPolynomial.AffineCISmoothing.exists_smoothing",
+  "declarations": [
+   "MvPolynomial.AffineCISmoothing.equation",
+   "MvPolynomial.AffineCISmoothing.Quotient",
+   "MvPolynomial.AffineCISmoothing.ClosedFiber",
+   "MvPolynomial.AffineCISmoothing.closedCoordinate",
+   "MvPolynomial.AffineCISmoothing.genericMap",
+   "MvPolynomial.AffineCISmoothing.structureMap",
+   "MvPolynomial.AffineCISmoothing.exists_smoothing"
+  ],
+  "file": "lean/Sheaf/RingTheory/AffineCompleteIntersectionSmoothing.lean",
+  "statement": "theorem exists_smoothing (k : Type u) [Field k] (N c : ℕ) (hc : c ≤ N) (f : Fin c → MvPolynomial (Fin N) k) [Nontrivial (MvPolynomial (Fin N) k ⧸ Ideal.span (Set.range f))] (hdim : topologicalKrullDim (PrimeSpectrum (MvPolynomial (Fin N) k ⧸ Ideal.span (Set.range f))) = ((N - c : ℕ) : WithBot ℕ∞)) : ∃ a : Fin (N + 1) → Fin c → PowerSeries k, (∀ (i : Fin (N + 1)) (j : Fin c), a i j ∈ Ideal.span ({PowerSeries.X} : Set (PowerSeries k))) ∧ (algebraMap (PowerSeries k) (Quotient f a)).Flat ∧ (∃ e : ClosedFiber f a ≃ₐ[k] (MvPolynomial (Fin N) k ⧸ Ideal.span (Set.range f)), ∀ i : Fin N, e (closedCoordinate f a i) = Ideal.Quotient.mk _ (MvPolynomial.X i)) ∧ Smooth (Spec.map (CommRingCat.ofHom (genericMap f a))) ∧ ∀ y : Spec (.of (PowerSeries k)), Scheme.IsPureDimension (pullback (structureMap f a) (Spec.map (CommRingCat.ofHom (algebraMap ((Spec (.of (PowerSeries k))).residueField y) (AlgebraicClosure ((Spec (.of (PowerSeries k))).residueField y)))) ≫ (Spec (.of (PowerSeries k))).fromSpecResidueField y)) (N - c)",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cc5ebaf73",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Only the item's lean key changed vs live; the item is not superseded. Every hypothesis matches the node: Field k; c≤N; f : Fin c → MvPolynomial (Fin N) k; Nontrivial P; topologicalKrullDim (PrimeSpectrum P) = ↑(N-c), the same convention as Algebra.IsGlobalCompleteIntersection. Every conclusion matches: a : Fin (N+1) → Fin c → k[[t]] in span{X}; equation and Quotient exactly as displayed; RingHom.Flat; k-AlgEquiv Q/tQ ≃ P fixing x_i; Smooth of Spec.map (IsLocalization.Away.map); IsPureDimension (N-c) of the pullback along the recorded def-weil-geometric-fibre point, vacuous on empty fibres. Edge cases c=0, N=c=0, c=N, finite or imperfect k are covered with a single universe u. Helpers are explicit constructions with source/blueprint docstrings; the proof is sorry only; the 10-step plan is in the docstring; the statement is verbatim; the report has both sections. Not recompiled per instruction; no files changed. Advisory: the helper name Quotient shadows root Quotient; the GCI stmt_dep module is imported but unreferenced."
+ }
+}

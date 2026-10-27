@@ -1,0 +1,334 @@
+{
+ "id": "lem-sfb-derived-scalar-mate-composition",
+ "kind": "statement",
+ "title": "Counit-normalized derived scalar mates respect geometric composition",
+ "statement": "Let $Z\\xrightarrow{g}T\\xrightarrow{f}S$ be morphisms of schemes with small pro-etale sites [def-weil-pbc-proetale-site]. Let $a_S:A_S\\to B_S$ be a map of sheaves of commutative rings and pull it back to $T,Z$ using the canonical inverse-image compositors. Use ordinary unbounded derived categories of module sheaves, equivalently internal module objects [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category, def-weil-pbc-internal-abelian-sheaf-module-equivalence]. For $V=S,T,Z$ put $T_V=B_V\\otimes^L_{A_V}-$ with its representative-normalized scalar adjunction [lem-pur-sheaf-ring-derived-coefficient-adjunction]. For every geometric map $h$ among these maps and their composites, use the canonical adjunction $h_R^*\\dashv Rh_{*,R}$, $R=A,B$ [def-weil-pbc-proetale-operations]. Let $\\lambda_h:h_B^*T_{\\mathrm{target}}\\xrightarrow{\\sim}T_{\\mathrm{source}}h_A^*$ be the balanced tensor/pullback comparison. On a flat-term K-flat representative $P$, it is represented by\n$$h_B^*(B_{\\mathrm{target}}\\otimes_{A_{\\mathrm{target}}}P)\\longrightarrow B_{\\mathrm{source}}\\otimes_{A_{\\mathrm{source}}}h_A^*P.$$\nWrite $\\theta_h:T_{\\mathrm{source}}h_A^*\\xrightarrow{\\sim}h_B^*T_{\\mathrm{target}}$ for the scalar-adjunction mate of the inverse-image/scalar-restriction square [lem-sfb-kflat-scalar-comparison-normalization]. Define $\\beta_{h,K}:T_{\\mathrm{target}}Rh_{*,A}K\\to Rh_{*,B}T_{\\mathrm{source}}K$ as the $h_B^*\\dashv Rh_{*,B}$ adjunct of $T_{\\mathrm{source}}(\\varepsilon^A_{h,K})\\circ\\lambda_{h,Rh_{*,A}K}$.\n\nThen $\\lambda_h=\\theta_h^{-1}$, so this specified $\\beta_h$ is precisely the geometric-adjunction mate of $\\theta_h^{-1}$. With the canonical adjunction-compatible derived direct-image compositors $\\kappa_R:R(fg)_{*,R}\\xrightarrow{\\sim}Rf_{*,R}Rg_{*,R}$ [lem-sfb-ringed-derived-monoidal-comparisons], for every $K\\in D(A_Z)$,\n$$\\kappa_{B,T_ZK}\\circ\\beta_{fg,K}=Rf_{*,B}(\\beta_{g,K})\\circ\\beta_{f,Rg_{*,A}K}\\circ T_S(\\kappa_{A,K}).$$\nUnder the canonical identity comparisons $\\beta_{\\mathrm{id}}$ is the identity. In particular, for any commuting scheme square $j:U\\to X$, $q:V\\to U$, $p:Y\\to X$, $j':V\\to Y$ with $jq=pj'$, and a ring map $A_X\\to B_X$ pulled back to the square, the same normalized compositors identify\n$$Rj_{*,B}(\\beta_{q,K})\\circ\\beta_{j,Rq_{*,A}K}=Rp_{*,B}(\\beta_{j',K})\\circ\\beta_{p,Rj'_{*,A}K}.$$\nThis is an equality for the specified counit mates; no properness, openness, boundedness, flatness or invertibility of any $\\beta$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Agent-extracted formal subargument of paragraph (3), Returned proof step 4: balanced K-flat normalization and composition/pasting around the proper-open square; not a claim that the blueprint supplies this expanded lemma."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "def-weil-pbc-proetale-operations",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-pbc-proetale-derived-pullback-composition"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-kflat-scalar-comparison-normalization] to each of the geometric inverse images with the transported rings. Its hypotheses hold because the sites are small and the source rings are the inverse images of the target rings. Its ordinary comparison is precisely the balanced comparison used to define $\\lambda_h$, and its representative assertion identifies its derived inverse with the specified scalar-adjunction mate. Consequently $\\lambda_h=\\theta_h^{-1}$ on the entire unbounded derived category, not just on a bounded subcategory. Invert its composition identity, with geometric order $Z\\xrightarrow gT\\xrightarrow fS$, to obtain\n$$\\lambda_{fg}=(\\lambda_g f_A^*)\\circ(g_B^*\\lambda_f)$$\nunder the canonical pullback compositors. Its identity assertion gives $\\lambda_{\\mathrm{id}}=1$. The normalization theorem requires neither flatness of the ring map nor exactness of scalar extension.",
+   "uses": [
+    "lem-sfb-kflat-scalar-comparison-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition), 0FPI (lemma-adjoints-push-pull-compatibility); agent-written counit calculation with the normalized comparisons of the cited nodes"
+   }
+  },
+  {
+   "text": "For the component calculation put $L_R=f_R^*$, $M_R=g_R^*$, $U_R=Rf_{*,R}$, $V_R=Rg_{*,R}$ for $R=A,B$, and $E=T_S$, $F=T_T$, $G=T_Z$. Work in the endpoints identified by the specified compositors: $(fg)_R^*=M_RL_R$ and $R(fg)_{*,R}=U_RV_R$. This is notation for transport along those isomorphisms, not a replacement adjunction. The adjunction-compatibility assertion of [lem-sfb-ringed-derived-monoidal-comparisons] says explicitly that the composite counit is\n$$\\varepsilon^{R,fg}_H=\\varepsilon^{R,g}_H\\circ M_R(\\varepsilon^{R,f}_{V_RH}).$$\nBy the mate definition, $\\beta_h$ is natural and satisfies\n$$\\varepsilon^{B,h}_{T_{\\mathrm{source}}H}\\circ h_B^*(\\beta_{h,H})=T_{\\mathrm{source}}(\\varepsilon^{A,h}_H)\\circ\\lambda_{h,Rh_{*,A}H}.$$\nThis is exactly the transpose used in the definition of $\\beta_h$ in the statement, so it is the mate of $\\theta_h^{-1}$. Equality of two candidate components can be tested by this counit transpose, since the adjunction hom correspondence is bijective.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition), 0FPI (lemma-adjoints-push-pull-compatibility); agent-written counit calculation with the normalized comparisons of the cited nodes"
+   }
+  },
+  {
+   "text": "Fix $K\\in D(A_Z)$ and set $X=EU_AV_AK$ and\n$$x=U_B(\\beta_{g,K})\\circ\\beta_{f,V_AK}:X\\longrightarrow U_BV_BGK.$$\nIts transpose under the composite $B$-adjunction is\n$$q=\\varepsilon^{B,g}_{GK}\\circ M_B(\\varepsilon^{B,f}_{V_BGK})\\circ M_BL_B(U_B\\beta_{g,K})\\circ M_BL_B(\\beta_{f,V_AK}).$$\nNaturality of the $f$-counit at $\\beta_{g,K}:FV_AK\\to V_BGK$ reads\n$$\\varepsilon^{B,f}_{V_BGK}\\circ L_BU_B(\\beta_{g,K})=\\beta_{g,K}\\circ\\varepsilon^{B,f}_{FV_AK}.$$\nSubstitute this equality and then the defining transpose equation for $\\beta_f$ from step 2. Functoriality gives\n$$q=\\varepsilon^{B,g}_{GK}\\circ M_B(\\beta_{g,K})\\circ M_BF(\\varepsilon^{A,f}_{V_AK})\\circ M_B(\\lambda_{f,U_AV_AK}).$$",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition), 0FPI (lemma-adjoints-push-pull-compatibility); agent-written counit calculation with the normalized comparisons of the cited nodes"
+   }
+  },
+  {
+   "text": "Use the defining transpose equation for $\\beta_{g,K}$ to replace the first two factors in the last display by $G(\\varepsilon^{A,g}_K)\\circ\\lambda_{g,V_AK}$. Naturality of $\\lambda_g:M_BF\\to GM_A$, at $\\varepsilon^{A,f}_{V_AK}:L_AU_AV_AK\\to V_AK$, gives\n$$\\lambda_{g,V_AK}\\circ M_BF(\\varepsilon^{A,f}_{V_AK})=GM_A(\\varepsilon^{A,f}_{V_AK})\\circ\\lambda_{g,L_AU_AV_AK}.$$\nThus\n$$q=G\\bigl(\\varepsilon^{A,g}_K\\circ M_A(\\varepsilon^{A,f}_{V_AK})\\bigr)\\circ\\lambda_{g,L_AU_AV_AK}\\circ M_B(\\lambda_{f,U_AV_AK}).$$\nBy the $A$-counit formula in step 2 and the inverted normalization identity in step 1 this is\n$$q=G(\\varepsilon^{A,fg}_K)\\circ\\lambda_{fg,U_AV_AK}.$$\nIt is the specified transpose of $\\beta_{fg,K}$. Injectivity of the composite adjunction hom bijection gives equality. Returning to the original endpoints inserts precisely $\\kappa_B$ after $\\beta_{fg}$ and $E(\\kappa_A)$ before $x$, which is the displayed composition equation in the statement. The calculation used naturality and composition only and never inverted a $\\beta$.",
+   "uses": [
+    "lem-sfb-kflat-scalar-comparison-normalization",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition), 0FPI (lemma-adjoints-push-pull-compatibility); agent-written counit calculation with the normalized comparisons of the cited nodes"
+   }
+  },
+  {
+   "text": "For an identity geometric map the normalized adjunction and both geometric functors are the identity by [lem-sfb-ringed-derived-monoidal-comparisons]. Also $\\lambda_{\\mathrm{id}}=1$ by step 1. Its defining counit transpose is therefore $1\\circ1=1$. Under the identity adjunction the transpose map itself is the identity, so $\\beta_{\\mathrm{id}}=1$.",
+   "uses": [
+    "lem-sfb-kflat-scalar-comparison-normalization",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition), 0FPI (lemma-adjoints-push-pull-compatibility); agent-written counit calculation with the normalized comparisons of the cited nodes"
+   }
+  },
+  {
+   "text": "For the square write $h=jq=pj'$. Apply the composition equation first to $(j,q)$ and then to $(p,j')$. The first path is\n$$\\kappa_{j,q,B}\\circ\\beta_{h,K}\\circ T_X(\\kappa_{j,q,A}^{-1}),$$\nand the second is\n$$\\kappa_{p,j',B}\\circ\\beta_{h,K}\\circ T_X(\\kappa_{p,j',A}^{-1}).$$\nBoth therefore become the single arrow $\\beta_{h,K}$ when their endpoints are identified with $T_XRh_{*,A}K$ and $Rh_{*,B}T_VK$. These are exactly the normalized identifications specified in the statement, including the coefficient-ring identifications from $h^{-1}$. In particular the assertion is an equality after these comparisons, without any assertion that either path is invertible. The argument works for every commuting square; no cartesian-square, open-immersion or properness hypothesis has been used. The Lean implementation composes each component equation with the inverse B-compositor, cancels hom followed by inv, and uses equality induction on the given equality of Edge composites to account for both eqToHom transports.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition), 0FPI (lemma-adjoints-push-pull-compatibility); agent-written counit calculation with the normalized comparisons of the cited nodes"
+   }
+  },
+  {
+   "text": "Implemented auxiliary restriction comparisons: the identity-on-sections isomorphism is the unique proEtaleRingRestrictionDirectImage. Its inverse geometric mate is proEtaleRingRestrictionPullbackInv, which is invertible. The derived hom-equivalence compatibility in lem-weil-pbc-ring-sheaf-change-adjunction identifies the exact localization of this action with the geometric mate of proEtaleRingRestrictionDerivedDirectImage. In both the ordinary and derived categories, taking the scalar mate after the geometric mate equals conjugation under the composite adjunctions (Mathlib iterated_mateEquiv_conjugateEquiv_symm). Conjugation preserves isomorphisms, proving ordinaryTheta and theta invertible without a K-flat argument or a flatness assumption on the coefficient map.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6, 0D6D and 0D6E; the adjunction compatibility in lem-weil-pbc-ring-sheaf-change-adjunction; Mathlib CategoryTheory/Adjunction/Mates.lean, iterated_mateEquiv_conjugateEquiv_symm"
+   }
+  },
+  {
+   "text": "Implemented coefficient and ordinary identity obligations: composition compatibility follows by naturality of the inverse-image ring compositor and the two coefficient-square equations; identity compatibility is naturality of the conjugate of lowerStarId. For each coefficient ring construct the ordinary direct-image identity using SheafOfModules.pushforwardCongr₂ along Over.pullbackId.symm, followed by pushforwardId. The required ring map is lowerStarId.inv by unit_conjugateEquiv_symm. Its composite with restriction along pullbackId.inv is the identity since pullbackId.hom and pullbackId.inv are inverse. The resulting module isomorphism has exactly the prescribed section formula. That formula proves uniqueness by extensionality.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 03D8 and 07A6; sectionwise identity construction using Mathlib SheafOfModules.pushforwardCongr₂ and pushforwardId"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), expanded formal coefficient-comparison obligation; counit calculation in proof steps 2--4, supported by Stacks Tags 07A6, 0D6D, 0D6E, 0FPI and the existing normalization nodes; T4 stage-3 partial proof (2026-10-26): restriction and identity auxiliaries, invertibility by iterated conjugation, and commuting_square implemented. Normalization and the geometric composition/identity theorem retain their stated proof plans."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(scalar|changeOfScalars|extendScalars).*(pushforward|rightDerived).*(comp)|(pushforward|rightDerived).*(scalar|changeOfScalars|extendScalars).*(comp)",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical mates, shift structures and underived module-sheaf maps do not identify this normalized derived sheaf coefficient comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv_hcomp\"",
+   "results": "2 hits: CategoryTheory.mateEquiv_hcomp; CategoryTheory.Bicategory.mateEquiv_hcomp",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical mates, shift structures and underived module-sheaf maps do not identify this normalized derived sheaf coefficient comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived coefficient extension direct image mate for a composite equals the composite of the two canonical mates",
+   "results": "8 hits: CategoryTheory.mateEquiv_square; CategoryTheory.Functor.rightDerivedNatTrans_comp; CategoryTheory.mateEquiv; CategoryTheory.comp_rightAdjointMate; CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp; SheafOfModules.pushforwardComp; CategoryTheory.mateEquiv_vcomp; PresheafOfModules.pushforwardComp",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical mates, shift structures and underived module-sheaf maps do not identify this normalized derived sheaf coefficient comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived scalar change direct image comparison for cartesian sheaves of rings respects composition of geometric morphisms by counit mate pasting",
+   "results": "8 hits: SheafOfModules.pullbackComp; SheafOfModules.pushforwardComp_hom_app_val_app; SheafOfModules.pushforwardNatTrans_comp; PresheafOfModules.pullbackComp; SheafOfModules.pushforwardComp; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr; CategoryTheory.Functor.sheafPushforwardContinuousComp'_hom_app_val_app; SheafOfModules.pushforwardComp_inv_app_val_app",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical mates, shift structures and underived module-sheaf maps do not identify this normalized derived sheaf coefficient comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For composable maps of ringed topoi with pulled back coefficient rings the tensor pullback counit transpose is compatible with normalized derived direct image compositors",
+   "results": "8 hits: SheafOfModules.pullbackComp; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; PresheafOfModules.pullbackComp; SheafOfModules.pullback_id_comp; AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical mates, shift structures and underived module-sheaf maps do not identify this normalized derived sheaf coefficient comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_hcomp|mateEquiv_square",
+   "results": "3 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical mates, shift structures and underived module-sheaf maps do not identify this normalized derived sheaf coefficient comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_hcomp|mateEquiv_square",
+   "results": "3 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; grep read Mathlib/CategoryTheory/Adjunction/Mates.lean:209,245",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate laws and underived sheaf operations do not establish the representative-normalized derived coefficient comparison for arbitrary ring sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv_hcomp\"",
+   "results": "2 hits: CategoryTheory.mateEquiv_hcomp; CategoryTheory.Bicategory.mateEquiv_hcomp",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate laws and underived sheaf operations do not establish the representative-normalized derived coefficient comparison for arbitrary ring sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension derived pushforward comparison is compatible with composition and identity via the counit adjunction mate",
+   "results": "8 hits: CategoryTheory.ExponentiableMorphism.comp_pushforward; ModuleCat.ExtendScalars.map'_comp; CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc; ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc; SheafOfModules.pushforwardPushforwardAdj; ModuleCat.RestrictionCoextensionAdj.counit'; ModuleCat.extendScalars_id_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate laws and underived sheaf operations do not establish the representative-normalized derived coefficient comparison for arbitrary ring sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension direct image counit mates respect composition for pulled back sheaves of rings",
+   "results": "8 hits: SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; SheafOfModules.pullbackComp; SheafOfModules.pullbackObjUnitToUnit; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.pullback_id_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate laws and underived sheaf operations do not establish the representative-normalized derived coefficient comparison for arbitrary ring sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The base change comparison from tensoring derived direct image to direct image of a derived tensor product satisfies transitivity by the composite counit identity",
+   "results": "8 hits: CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc; PresheafOfModules.pullbackComp; CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom; SheafOfModules.pullbackComp; CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc; ModuleCat.extendScalarsComp_hom_app_one_tmul; CategoryTheory.ExponentiableMorphism.comp_pushforward",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate laws and underived sheaf operations do not establish the representative-normalized derived coefficient comparison for arbitrary ring sheaves"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-continuous-algcl-open-scalar-comparison",
+  "date": "2026-10-22",
+  "group": "NL"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "det-thm-sf-ctf-stability-direct-images, paragraph (3), all-continuous comparison obligation; Returned proof step 4: balanced K-flat normalization and composition/pasting around the proper-open square",
+   "via": [
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-derived-scalar-mate-composition",
+  "worker": "stage1",
+  "summary": "Q55: no new nodes. Applied the existing K-flat normalization, then explicitly computed composite counit transposes using two naturality identities. Identity and arbitrary commuting-square consequences follow with the specified compositors. No mathematical statement changed. Repaired the null blueprint ancestor from the documented source path; retained inherited search records.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof paragraph (3): direct-image composition used around the proper/open factorization, expanded only at the formal normalized scalar-mate obligation.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-kflat-scalar-comparison-normalization",
+    "why": "Generic inverse-image/scalar-extension normalization; supplies the representative identification and pullback composition equation needed before taking geometric mates."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic normalized derived composition/identity adjunctions; supplies the precise composite counits for the direct-image factorization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-sfb-ringed-derived-monoidal-comparisons"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q55-af8462663",
+  "group": "Q55",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-af8462663 (reviewer sub-agent of L); spot-checked: PASS, no changes: the delivery adds no new nodes and leaves the statement unchanged, and I checked every step by hand.\n\nStatus checks. The statement and stmt_deps are byte-equal to the live and side-live copies, where the item is still unsplit with no proof. Nothing involved is in route-pivot-dropped.txt: the item, its cited nodes, or its citer. There is no repair note for this item, and no SGA source is used.\n\nBlueprint. from.node was null and is now det-thm-sf-ctf-stability-direct-images. That blueprint node exists and is also named as the ancestor by lem-sfb-admissible-direct-image. Its proof paragraph (3) is the source of this lemma.\n\nSteps. Step 1 uses the kflat-normalization node: its ring hypotheses hold because the rings are inverse images, so h^*=h^{-1}. It gives lambda_h=theta_h^{-1}. Re-indexed to Z->g T->f S and inverted, the node's composition identity gives lambda_fg=(lambda_g f^*)(g^*lambda_f); I checked the types. Step 2 takes the composite counit eps^g∘M(eps^f_V) from ringed-derived-monoidal-comparisons and the mate-transpose characterization from def-weil-pbc-adjunction-mate. Steps 3-4: I redid the transpose calculation: f-counit naturality at beta_g, then the beta_f and beta_g transposes, then lambda_g naturality at eps^{A,f}. It yields G(eps^{fg})∘lambda_fg, which is the transpose of beta_fg. Transporting back gives kappa_B∘beta_fg = x∘E(kappa_A), the displayed equation. Step 5: identity normalization gives beta_id=1. Step 6: the square equality is two applications of step 4 to h=jq=pj'. The citer lem-sfb-continuous-algcl-open-scalar-comparison uses exactly this.\n\nAdjunction identification (accepted). The pro-etale-operations adjunction and the comparison node's adjunction are both the canonical derived adjunction, and the item's statement itself fixes that identification.\n\nEdge cases. f=id or g=id reduces the equation to beta_g=beta_g. A non-flat ring map (Z->Z/2) is fine: no step uses flatness or exactness of scalar extension.\n\nDuplicates. lem-weil-pbc-mate-pasting (2) is the general version of the computation in steps 3-4; proving the instance directly is acceptable. The scalar-mate-transitivity nodes are about composing ring maps, not geometric composition, so they are not duplicates.\n\nTool_uses accepted: the two generic normalization nodes from sk-prop-scalar-six and sk-prop-p1-adjunction-rational."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DerivedScalarMateComposition",
+  "declaration": "AlgebraicGeometry.DerivedScalarMate.derived_scalar_mate_composition",
+  "declarations": [
+   "AlgebraicGeometry.DerivedScalarMate.restrict",
+   "AlgebraicGeometry.DerivedScalarMate.ringId",
+   "AlgebraicGeometry.DerivedScalarMate.Coefficients",
+   "AlgebraicGeometry.DerivedScalarMate.Edge",
+   "AlgebraicGeometry.DerivedScalarMate.Edge.pA",
+   "AlgebraicGeometry.DerivedScalarMate.Edge.pB",
+   "AlgebraicGeometry.DerivedScalarMate.Edge.uA",
+   "AlgebraicGeometry.DerivedScalarMate.Edge.uB",
+   "AlgebraicGeometry.DerivedScalarMate.Edge.adjA",
+   "AlgebraicGeometry.DerivedScalarMate.Edge.adjB",
+   "AlgebraicGeometry.DerivedScalarMate.Edge.dA",
+   "AlgebraicGeometry.DerivedScalarMate.Edge.dB",
+   "AlgebraicGeometry.DerivedScalarMate.Edge.restrictionSquare_existsUnique",
+   "AlgebraicGeometry.DerivedScalarMate.Edge.restrictionSquare",
+   "AlgebraicGeometry.DerivedScalarMate.Edge.action",
+   "AlgebraicGeometry.DerivedScalarMate.Edge.action_isIso",
+   "AlgebraicGeometry.DerivedScalarMate.Edge.derivedAction",
+   "AlgebraicGeometry.DerivedScalarMate.Edge.theta",
+   "AlgebraicGeometry.DerivedScalarMate.Edge.ordinaryTheta",
+   "AlgebraicGeometry.DerivedScalarMate.Edge.scalar_isIso",
+   "AlgebraicGeometry.DerivedScalarMate.Edge.chi",
+   "AlgebraicGeometry.DerivedScalarMate.Edge.lambda",
+   "AlgebraicGeometry.DerivedScalarMate.Edge.beta",
+   "AlgebraicGeometry.DerivedScalarMate.Edge.rA",
+   "AlgebraicGeometry.DerivedScalarMate.Edge.rB",
+   "AlgebraicGeometry.DerivedScalarMate.Edge.comp_compatible",
+   "AlgebraicGeometry.DerivedScalarMate.Edge.comp",
+   "AlgebraicGeometry.DerivedScalarMate.Edge.kappaA",
+   "AlgebraicGeometry.DerivedScalarMate.Edge.kappaB",
+   "AlgebraicGeometry.DerivedScalarMate.identity_compatible",
+   "AlgebraicGeometry.DerivedScalarMate.identity",
+   "AlgebraicGeometry.DerivedScalarMate.identity_direct_existsUnique",
+   "AlgebraicGeometry.DerivedScalarMate.identityPullbackA",
+   "AlgebraicGeometry.DerivedScalarMate.identityPullbackB",
+   "AlgebraicGeometry.DerivedScalarMate.identityDirectA",
+   "AlgebraicGeometry.DerivedScalarMate.identityDirectB",
+   "AlgebraicGeometry.DerivedScalarMate.normalization",
+   "AlgebraicGeometry.DerivedScalarMate.derived_scalar_mate_composition",
+   "AlgebraicGeometry.DerivedScalarMate.commuting_square",
+   "AlgebraicGeometry.DerivedScalarMate.coefficientSiteSmall",
+   "AlgebraicGeometry.DerivedScalarMate.coefficientAbSheafify",
+   "AlgebraicGeometry.DerivedScalarMate.coefficientRingSheafify",
+   "AlgebraicGeometry.DerivedScalarMate.coefficientLocallyBijective"
+  ],
+  "file": "lean/Sheaf/Paper/DerivedScalarMateComposition.lean",
+  "statement": "theorem derived_scalar_mate_composition (g : Edge x y) (f : Edge y z) : (∀ K : DerivedCategory (Scheme.proEtaleRingModules X x.A), (g.comp f).beta.app K ≫ (g.kappaB f).hom.app (x.model.T.obj K) = z.model.T.map ((g.kappaA f).hom.app K) ≫ f.beta.app (g.rA.obj K) ≫ f.rB.map (g.beta.app K)) ∧ (∀ K : DerivedCategory (Scheme.proEtaleRingModules X x.A), (identity x).beta.app K ≫ (identityDirectB x).hom.app (x.model.T.obj K) = x.model.T.map ((identityDirectA x).hom.app K))",
+  "branch": "sheaf-dag",
+  "by": "Q51",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The main declaration states geometric composition and identity. normalization fixes the ordinary scalar-unit comparison and its flat-term K-flat representative, and commuting_square states arbitrary square pasting. Helper data retain the original small pro-etale site universes and the published canonical operations. H2 repair: scalar restriction and the ring identity comparison are inline helpers using Mathlib restriction and the canonical lowerStarId conjugate; no inverse-image tensor-comparison theorem is used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-358f9d282",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN of 791665c9: the stmt_dep lem-pur-proetale-inverse-image-tensor-comparison and its import are removed; restrict and ringId are inlined, token-identical to the old helpers (diff checked); no other module change. The item node differs from side-live only in lean and in stmt_deps gaining the landed lem-weil-pbc-proetale-derived-pullback-composition; the statement is verbatim and the declarations list is exact. Mechanical finding: kappaA/kappaB conjugate integralTowerGeneralPullbackComposition = Classical.choose of proEtaleCanonicalPullbackComposition_existsUnique (the theorem's constructed 0D6D compositor, not owned by any def node; ringed-derived-monoidal-comparisons gives only Nonempty System), so the theorem dep is genuine: PASS on that point. Clauses checked: Edge coefficient identifications; normalized model and adjunctions (the coefficient package is inhabitable via nonempty_derivedChangeOfRingsCochainModel and sheafRingDerivedCoefficientAdjunction, and the unit clauses pin the adjunctions); theta = ScalarPullback.mate of the unique sectionwise action square (universe repair: the dep requires one-universe sites); lambda pinned on flat K-flat representatives; beta = mateEquiv dA dB of lambda, matching the node's counit transpose; composition equation orientation; identity via canonical sectionwise identities; arbitrary commuting square. No flatness, boundedness or beta-invertibility assumed; universes kept. Advisory: DerivedChangeOfRingsCochainModel owner node not in stmt_deps; normalization clause 3 definitional. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261026T083058-L-2265385",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

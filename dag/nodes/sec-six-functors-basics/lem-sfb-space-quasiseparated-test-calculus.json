@@ -1,0 +1,246 @@
+{
+ "id": "lem-sfb-space-quasiseparated-test-calculus",
+ "kind": "statement",
+ "title": "Scheme tests and permanence of quasi-separated algebraic-space morphisms",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention], and work with algebraic spaces over $S$ [def-trf-algebraic-space] and their sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Regard schemes as algebraic spaces by [def-trf-scheme-algebraic-space]. Use the algebraic-space predicates of [def-sfb-stack-qcqs-morphism]: a space is quasi-compact if it has a surjective etale atlas from a quasi-compact scheme [def-weil-pbc-quasi-compact-scheme], a morphism $a:A\\to B$ is quasi-compact if $A\\times_BC$ is quasi-compact for every quasi-compact algebraic space $C\\to B$, and $a$ is quasi-separated if $\\Delta_a:A\\to A\\times_BA$ is quasi-compact. Separated means that every scheme base change of $\\Delta_a$ is a closed immersion of schemes [def-weil-closed-immersion]. For any morphism $a:A\\to B$, $a$ is quasi-separated if and only if for every scheme $T$ and map $T\\to B$, the algebraic-space morphism $A\\times_BT\\to T$ is quasi-separated. If $a$ is quasi-separated, then for every algebraic-space morphism $B'\\to B$, its base change $A\\times_BB'\\to B'$ is quasi-separated. If $a:A\\to B$ and $b:B\\to C$ are quasi-separated morphisms of algebraic spaces, then $b\\circ a$ is quasi-separated. Every separated morphism of algebraic spaces is quasi-separated. No finiteness, quasi-compactness, or absolute separation assumption is imposed on $S,A,B,C,B'$ or on the morphisms.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tags 03KM (lemma-separated-local), (1) iff (2), for the quasi-separated axiom; 03KL (lemma-base-change-separated), quasi-separated axiom; 03KQ (lemma-composition-separated), quasi-separated axiom; 03KK (lemma-trivial-implications), separated implies quasi-separated."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-stack-qcqs-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-quasi-compact-scheme"
+ ],
+ "proof": [
+  {
+   "text": "First record the elementary all-test quasi-compactness calculus. If $f:X\\to Y$ is quasi-compact and $Y\\prime\\to Y$ is arbitrary, then for every quasi-compact space $Z\\to Y\\prime$ the source of the tested base change is $X\\times_YZ$, which is quasi-compact by the hypothesis on $f$. If $f:X\\to Y$ and $g:Y\\to Z$ are quasi-compact, then for any quasi-compact $W\\to Z$, first $Y_W$ is quasi-compact, and then $X\\times_YY_W\\cong X\\times_ZW$ is quasi-compact. These identifications follow from the sheaf fibre-product universal property. Thus quasi-compact morphisms are preserved by base change and composition, for exactly the all-algebraic-space-test definition used here.",
+   "uses": [
+    "def-sfb-stack-qcqs-morphism",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 03HE (definition-quasi-compact), 03HF (lemma-base-change-quasi-compact), 03HG (lemma-composition-quasi-compact); the omitted transitivity arguments are written out"
+   }
+  },
+  {
+   "text": "Put $D=A\\times_BA$. For $A\\prime=A\\times_BB\\prime$, the diagonal $\\Delta_{A\\prime/B\\prime}$ is the pullback of $\\Delta_a$ along $A\\prime\\times_{B\\prime}A\\prime\\to D$: a section of either pullback is a single section of $A$ with the prescribed equal pair and the prescribed $B\\prime$-coordinate. For $a:A\\to B$, $b:B\\to C$, there is a factorization $\\Delta_{ba}=j\\circ\\Delta_a$ with $j:D\\to A\\times_CA$. The square with bottom arrow $\\Delta_b:B\\to B\\times_CB$ and right arrow $(a,a):A\\times_CA\\to B\\times_CB$ is cartesian: its sections are pairs $(x_1,x_2)$ with $a(x_1)=a(x_2)$, precisely sections of $D$. These descriptions commute with restriction to every test scheme and hence give the asserted sheaf identities.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 03KL (lemma-base-change-separated), 03KN (lemma-fibre-product-after-map), and 03KQ (lemma-composition-separated): the two diagonal identities"
+   }
+  },
+  {
+   "text": "If $a$ is quasi-separated, $\\Delta_a$ is quasi-compact. The pullback identity of step 2 and base-change calculus of step 1 make $\\Delta_{A\\prime/B\\prime}$ quasi-compact, proving arbitrary algebraic-space base-change stability. In particular every scheme base change is quasi-separated. If $a,b$ are quasi-separated, $\\Delta_a,\\Delta_b$ are quasi-compact; the cartesian square of step 2 makes $j$ quasi-compact and step 1 makes $j\\Delta_a=\\Delta_{ba}$ quasi-compact. By the definition this proves composition stability.",
+   "uses": [
+    "def-sfb-stack-qcqs-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 03KL and 03KQ, quasi-separated clauses; Tag 03KM (lemma-separated-local), (1) implies (2)"
+   }
+  },
+  {
+   "text": "Conversely assume every scheme base change of $a$ is quasi-separated. Choose a representable surjective etale scheme atlas $p:T\\to D=A\\times_BA$. Write its two coordinates as $x_1,x_2:T\\to A$, and give $T$ the common map $ax_1=ax_2$ to $B$. Put $A_T=A\\times_BT$. The two sections $(x_1,\\mathrm{id}_T),(x_2,\\mathrm{id}_T)$ define $s:T\\to A_T\\times_TA_T$. The pullback of $\\Delta_{A_T/T}$ along $s$ is $A\\times_DT\\to T$: on any scheme over $T$, both fibre products impose precisely $x=x_1=x_2$. The hypothesis makes $\\Delta_{A_T/T}$ quasi-compact, so step 1 makes this pullback quasi-compact. Apply quasi-compactness descent to $\\Delta_a$ and the singleton family $\\{p\\}$. This is a small jointly surjective family; its map is flat and locally of finite presentation on scheme charts because it is representable etale and scheme etale maps have these properties by definition. The descent theorem therefore makes $\\Delta_a$ quasi-compact. This proves the reverse scheme-test implication without any quasi-compactness requirement on $T$ or $D$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-weil-etale-morphism",
+    "lem-sfb-space-quasicompact-fppf-local",
+    "def-sfb-stack-qcqs-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03KM (lemma-separated-local), (2) implies (1), expanded by the atlas test for the diagonal; Tag 03KG (lemma-quasi-compact-local), etale descent"
+   }
+  },
+  {
+   "text": "Finally suppose $a$ is separated. For an arbitrary quasi-compact algebraic space $Z\\to D$, choose its representable surjective etale atlas $U\\to Z$ with $U$ a quasi-compact scheme, as in the definition. By separatedness, $E=A\\times_DU\\to U$ is a closed immersion of schemes. The affine characterization of a closed immersion says that the inverse image of an affine open is affine; it is therefore quasi-compact by the affine-scheme lemma. Thus $E\\to U$ is quasi-compact as a scheme morphism, and the quasi-compact inverse-image lemma applied to the quasi-compact open $U$ itself shows that $E$ is a quasi-compact scheme. The map $E\\to A\\times_DZ$ is representable surjective etale, being the pullback of $U\\to Z$. It is consequently a quasi-compact scheme atlas of $A\\times_DZ$. Since $Z$ was any quasi-compact space test, $\\Delta_a$ is quasi-compact in the all-test sense, and $a$ is quasi-separated.",
+   "uses": [
+    "def-sfb-stack-qcqs-morphism",
+    "def-weil-closed-immersion",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03KK (lemma-trivial-implications), separated implies quasi-separated; the representable all-test implication is expanded as in Tag 03HD (lemma-characterize-representable-quasi-compact)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stack-qcqs-morphism",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism",
+  "lem-sfb-space-quasicompact-fppf-local",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tags 03KM, 03KL, 03KQ, 03KK; their diagonal arguments, with the all-test transitivity of 03HF/03HG and etale quasi-compactness descent of 03KG made explicit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|ArtinStack|AlgebraicSpace|quasiSeparated_(comp|isStableUnder)",
+   "results": "{\"t\": \"2026-10-23T14:09:51Z\", \"tool\": \"grep\", \"query\": \"AlgebraicStack|ArtinStack|AlgebraicSpace|quasiSeparated_(comp|isStableUnder)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\"], \"digest\": \"0a75f0fc5f3470eb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected results have Scheme endpoints. Read Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean:46-52,116-130, Affine.lean:43-59 and Separated.lean:119; no algebraic-space or algebraic-stack theorem or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi separated morphisms of algebraic spaces are stable under base change and composition and can be checked after every scheme base change",
+   "results": "{\"t\": \"2026-10-23T14:09:54Z\", \"tool\": \"leanfinder\", \"query\": \"Quasi separated morphisms of algebraic spaces are stable under base change and composition and can be checked after every scheme base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiSeparatedTopMorphismProperty\", \"AlgebraicGeometry.instIsMultiplicativeSchemeQuasiSeparated\", \"AlgebraicGeometry.quasiSeparated_isStableUnderComposition\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated\", \"AlgebraicGeometry.quasiSeparated_comp\", \"AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace\", \"AlgebraicGeometry.QuasiSeparated.of_comp\"], \"digest\": \"7b54b162cec87d26\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected results have Scheme endpoints. Read Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean:46-52,116-130, Affine.lean:43-59 and Separated.lean:119; no algebraic-space or algebraic-stack theorem or one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For morphisms of algebraic spaces the property that the relative diagonal is quasi compact is stable under composition and pullback and is local on scheme tests",
+   "results": "{\"t\": \"2026-10-23T14:10:13Z\", \"tool\": \"leansearch\", \"query\": \"For morphisms of algebraic spaces the property that the relative diagonal is quasi compact is stable under composition and pullback and is local on scheme tests\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.quasiCompact_isStableUnderComposition\", \"AlgebraicGeometry.quasiSeparated_isStableUnderComposition\", \"AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact\", \"AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal\", \"AlgebraicGeometry.instIsMultiplicativeSchemeQuasiSeparated\", \"AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace\", \"AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange\", \"AlgebraicGeometry.QuasiSeparated.of_comp\"], \"digest\": \"ae9d70e0352fc266\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected results have Scheme endpoints. Read Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean:46-52,116-130, Affine.lean:43-59 and Separated.lean:119; no algebraic-space or algebraic-stack theorem or one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.QuasiSeparated, \"comp\"",
+   "results": "{\"t\": \"2026-10-23T14:10:13Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.QuasiSeparated, \\\"comp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.quasiSeparated_isStableUnderComposition\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated\", \"AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiSeparatedTopMorphismProperty\", \"AlgebraicGeometry.QuasiSeparated.of_comp\", \"AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal\", \"AlgebraicGeometry.quasiSeparated_comp\", \"AlgebraicGeometry.QuasiCompact.of_comp\"], \"digest\": \"1563996a2cb75a7e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected results have Scheme endpoints. Read Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean:46-52,116-130, Affine.lean:43-59 and Separated.lean:119; no algebraic-space or algebraic-stack theorem or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraic space morphism whose diagonal is quasi compact: composition pullback and locality after scheme base change",
+   "results": "{\"t\": \"2026-10-23T14:10:14Z\", \"tool\": \"leanfinder\", \"query\": \"Algebraic space morphism whose diagonal is quasi compact: composition pullback and locality after scheme base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange\", \"AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact\", \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated\", \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact\", \"AlgebraicGeometry.quasiSeparated_iff\", \"AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\"], \"digest\": \"94aed9dc76e1fc06\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected results have Scheme endpoints. Read Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean:46-52,116-130, Affine.lean:43-59 and Separated.lean:119; no algebraic-space or algebraic-stack theorem or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|quasiSeparated_(comp|isStableUnder)",
+   "results": "{\"t\": \"2026-10-23T16:28:37Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|quasiSeparated_(comp|isStableUnder)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\"], \"digest\": \"0a75f0fc5f3470eb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned QuasiSeparated declarations and the grep hits concern Scheme endpoints, as read in Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean:46-52,116-130; no theorem for algebraic spaces or one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Morphisms of algebraic spaces whose relative diagonal is quasi compact can be tested after scheme base change",
+   "results": "{\"t\": \"2026-10-23T16:28:37Z\", \"tool\": \"leansearch\", \"query\": \"Morphisms of algebraic spaces whose relative diagonal is quasi compact can be tested after scheme base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.QuasiSeparated\", \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift\", \"AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact\", \"AlgebraicGeometry.quasiSeparated_iff\", \"AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact\", \"AlgebraicGeometry.QuasiSeparated.mk\"], \"digest\": \"b6b11d46c397160c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned QuasiSeparated declarations and the grep hits concern Scheme endpoints, as read in Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean:46-52,116-130; no theorem for algebraic spaces or one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.QuasiSeparated, \"comp\"",
+   "results": "{\"t\": \"2026-10-23T16:28:37Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.QuasiSeparated, \\\"comp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.quasiSeparated_isStableUnderComposition\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated\", \"AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiSeparatedTopMorphismProperty\", \"AlgebraicGeometry.QuasiSeparated.of_comp\", \"AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal\", \"AlgebraicGeometry.quasiSeparated_comp\", \"AlgebraicGeometry.QuasiCompact.of_comp\"], \"digest\": \"1563996a2cb75a7e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned QuasiSeparated declarations and the grep hits concern Scheme endpoints, as read in Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean:46-52,116-130; no theorem for algebraic spaces or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi separated morphisms of algebraic spaces are stable under arbitrary base change and composition and detected on scheme base changes",
+   "results": "{\"t\": \"2026-10-23T16:28:38Z\", \"tool\": \"leanfinder\", \"query\": \"Quasi separated morphisms of algebraic spaces are stable under arbitrary base change and composition and detected on scheme base changes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiSeparatedTopMorphismProperty\", \"AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange\", \"AlgebraicGeometry.instIsMultiplicativeSchemeQuasiSeparated\", \"AlgebraicGeometry.quasiSeparated_isStableUnderComposition\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated\", \"AlgebraicGeometry.quasiSeparated_comp\", \"AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace\", \"AlgebraicGeometry.QuasiSeparated.of_comp\"], \"digest\": \"219a5754fbc7c644\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned QuasiSeparated declarations and the grep hits concern Scheme endpoints, as read in Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean:46-52,116-130; no theorem for algebraic spaces or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves represented by algebraic spaces, quasi compactness of the relative diagonal is local for scheme tests and closed immersions have quasi compact diagonal",
+   "results": "{\"t\": \"2026-10-23T16:29:17Z\", \"tool\": \"leanfinder\", \"query\": \"For sheaves represented by algebraic spaces, quasi compactness of the relative diagonal is local for scheme tests and closed immersions have quasi compact diagonal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact\", \"AlgebraicGeometry.quasiSeparated_iff\", \"AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal\", \"AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact\", \"AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated\", \"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"AlgebraicGeometry.instQuasiCompactLiftSchemeIdOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\"], \"digest\": \"dbbb7794df08e02e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned QuasiSeparated declarations and the grep hits concern Scheme endpoints, as read in Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean:46-52,116-130; no theorem for algebraic spaces or one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-qcqs-composition-affine",
+  "date": "2026-10-23",
+  "group": "Q149"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: the adequate moduli space for the product, before the finiteness criterion; Q44 product-affinization proof: composition of the product projections and the structural map; affine Y to Spec k; Proposition 4.2.1(1),(2): the quasi-compact and quasi-separated hypotheses in Definition 4.1.1; algebraic-space separation calculus used on scheme tests of the two relative diagonals in their composition factorization",
+   "via": [
+    "lem-sfb-stack-qcqs-composition-affine",
+    "lem-sfb-adequately-affine-composition",
+    "lem-sfb-adequate-product-affinization",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-quasiseparated-test-calculus",
+  "worker": "stage1",
+  "summary": "Proved the four clauses through diagonal pullback and factorization, explicit all-test quasi-compactness calculus, etale descent on a diagonal atlas, and a quasi-compact scheme atlas of every tested closed immersion. Reused existing nodes only. Corrected doubled TeX backslashes and explicitly cited the quasi-compact scheme definition; no mathematical hypothesis or conclusion changed.",
+  "blueprint": "Realizes the algebraic-space separation-calculus prerequisite of the inherited blueprint.from.place, used in the relative-diagonal factorization for lem-sfb-stack-qcqs-composition-affine. Read latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md (3): the current text no longer spells out the old alteration/moduli chain, so the inherited null ancestor and via list are preserved, and no unit or chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "General algebraic-space fibre products and stability of representable surjective etale atlases under pullback, needed for diagonal identities and the tested closed-immersion atlas; no statement of this unit supplies this construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q160-4f76ba3ad",
+  "group": "Q160",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q160-4f76ba3ad (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full. The statement is the same as the unsplit live node except for one added citation, def-weil-pbc-quasi-compact-scheme; the live item is still unsplit and there is no re-split note. Source: Stacks spaces-morphisms 03KM (1)<=>(2), 03KL, 03KQ and 03KK; all four clauses are true with no qc or finiteness hypotheses, and no SGA is used. Step 1: the all-test qc base-change and composition arguments are correct. Step 2: I checked on sections that the diagonal base-change pullback and the cartesian square (Delta_b pulled back along (a,a) gives D, j a pullback of Delta_b) are right. Step 3 follows from steps 1 and 2. Step 4: I verified that the pullback of Delta_{A_T/T} along s=((x1,id),(x2,id)) is A x_D T. Descent along the singleton atlas {p} through lem-sfb-space-quasicompact-fppf-local uses the same all-test predicate; etale gives flat and lfp, and representable surjectivity gives field-point surjectivity (elementary, as in 03MC). Step 5: a closed immersion is affine, so E->U is qc and E is qc for qc U; E->A x_D Z is a base change of the atlas U->Z. Edge cases checked: empty spaces, identities, schemes. There are no new nodes and no duplicates (I checked the separated-fp-composition, a1 lqf/monic-diagonal, trf qc-separated-etale-local and qcqs-source-products nodes). The proof has no cycle. Tool use lem-trf-space-fibre-products-etale-covers is a generic fibre-product and atlas tool and already a base stmt_dep, so it is accepted. Batch-5 flag on lem-sfb-space-quasicompact-fppf-local: its 326-node closure has only generic algebraic-space nodes from sec-trace-formula (def-trf-algebraic-space, jointly-surjective-family, fibre products, chartwise etale permanence) and no trace-formula or Poincare-duality proof nodes, so it is outside both assumptions and not a fault."
+ }
+}

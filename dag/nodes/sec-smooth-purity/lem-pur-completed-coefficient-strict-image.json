@@ -1,0 +1,152 @@
+{
+ "id": "lem-pur-completed-coefficient-strict-image",
+ "kind": "statement",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sf-mate",
+ "title": "Normalized direct image of strict semilinear coefficient systems",
+ "statement": "Let $\\ell$ be prime, $E/\\mathbf Q_\\ell$ a finite extension and $f:X\\to Y$ a scheme morphism, using independent site and coefficient universes. For every coefficient comparison C of [def-pur-completed-pushforward-models] and every normalized right derived image T of the levelwise completed-module tower pushforward along C.structureMap, StrictImageData f C T of [def-pur-completed-coefficient-strict-image-data] is nonempty. In particular, the strict-system comparison is constructed before evaluation and has identity underlying sections in every degree, with its universal-unit normalization. No inverse-limit comparison or tower-evaluation comparison is claimed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E, lemma-derived-pushforward-composition (line 4011); Tag 0A07, lemma-Rf-commutes-with-Rlim (line 5150), first proof"
+ },
+ "stmt_deps": [
+  "def-pur-completed-pushforward-models",
+  "def-pur-completed-coefficient-strict-image-data"
+ ],
+ "proof": [
+  {
+   "text": "Construct only the ordinary additive strict-system direct image, its finite evaluation comparisons and the ordinary completed-tower comparison with identity sections. These data do not yet include any derived functor.",
+   "uses": [
+    "lem-pur-completed-coefficient-ordinary-strict-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transfer the Grothendieck property across coefficientSystemEquivalence to the actual coefficient-system category. Apply totalDerivedData to its additive systemPush, obtaining a right derived functor, universal unit and K-injective computation.",
+   "uses": [
+    "lem-pur-system-grothendieck",
+    "lem-pur-coefficient-evaluation-strict-extension",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use systemRestriction_push_acyclic for the supplied source restriction and towerImage. This supplies precisely the second acyclicity hypothesis of the generic derivedCoefficientComparison. Apply that proved generic comparison to the ordinary square and the supplied exact source and target factors.",
+   "uses": [
+    "lem-pur-completed-coefficient-system-restriction-acyclic",
+    "lem-pur-diagram-ring-restriction-pushforward"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precompose the generic normalization equation with the target factor isomorphism and postcompose with towerImage applied to the source factor isomorphism. Cancel each factor against its inverse and use functoriality to obtain Square.normalization. Assemble StrictImageData, retaining the ordinary section identities.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-completed-coefficient-ordinary-strict-image",
+  "lem-pur-system-grothendieck",
+  "lem-pur-coefficient-evaluation-strict-extension",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-pur-completed-coefficient-system-restriction-acyclic",
+  "lem-pur-diagram-ring-restriction-pushforward"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E, lemma-derived-pushforward-composition (line 4011); Tag 0A07, lemma-Rf-commutes-with-Rlim (line 5150), first proof; Q2 Lean assembly through the proved generic derivedCoefficientComparison and its unit equation, 2026-10-27."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image preserves inverse limits of strict module towers and commutes with scalar restriction",
+   "results": "Eight hits: ModuleCat.preservesLimit_restrictScalars, ModuleCat.preservesColimit_restrictScalars, PresheafOfModules.pushforward_obj_map_apply′, restrictScalarsObj, pushforward, ModuleCat.RestrictScalars.obj′, PresheafOfModules.restrictScalars and SheafOfModules.restrictScalars. These supply ordinary functors, not the normalized independent-universe package.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image commutes with restriction of scalars and inverse limits on strict module towers with normalized comparison",
+   "results": "Eight hits, including ModuleCat.restrictScalarsComp′App_inv_naturality, localCohomology.diagram, localCohomology.ofDiagram and ModuleCat.preservesLimit_restrictScalars; no normalized sheaf direct-image package.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.rightDerivedUnique",
+   "results": "Search service reports unknown identifier 'Functor.rightDerivedUnique'. Local Mathlib has this declaration and rightDerived_ext.",
+   "date": "2026-10-26",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived_ext|preservesLimitNatIso_hom_app",
+   "results": "Five Mathlib hits: rightDerived_ext and its uses in Functor/Derived/RightDerived.lean and Adjunction.lean, and preservesLimitNatIso_hom_app in GrothendieckAxioms/Basic.lean. Local searches of WeilConjectures and Sheaf find the general small-site comparison and acyclicity theorems, but not their transport to the supplied completed-coefficient models.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedCoefficientDirectImageDiagrams",
+  "date": "2026-10-26",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "fix-prop-adjunctions",
+   "place": "Proof Step 1: integral derived adjunction; completed coefficient transport, strict finite-reduction towers and direct image.",
+   "via": [
+    "lem-pur-completed-coefficient-direct-image-diagrams",
+    "lem-pur-completed-coefficient-pushforward-comparison"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedCoefficientStrictImage",
+  "file": "lean/Sheaf/Paper/CompletedCoefficientStrictImage.lean",
+  "declaration": "WeilConjectures.CompletedCoefficientPushforward.strictImage_exists",
+  "statement": "theorem strictImage_exists {X Y : Scheme.{t}} (f : X ⟶ Y)\n    (C : CoefficientComparisonData l E f)\n    (towerImage : RightImage\n      ((Functor.whiskeringRight ℕᵒᵖ _ _).obj (push f C.structureMap))) :\n    Nonempty (StrictImageData l E f C towerImage)",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261026T092539-L-3442285",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261026T222747-L-692634",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

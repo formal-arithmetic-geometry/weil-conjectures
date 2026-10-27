@@ -342,16 +342,13 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-fdf37bb8b (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps and both new nodes in full, together with every cited statement. Sources read: ILO II 2.1.1, 2.2.2–2.2.4 and the 3.2.3 exchange sketch (printed pp. 26–31), and Stacks 04GN lemma-henselization with its proof. The item statement is unchanged and matches the ILO exchange in finite form; no SGA is cited. Step 1 is correct: f_*O_Y is free on an affine T, B_H=∏C_t splits into henselian local factors (04GH node), and each C_t is free because a direct summand over a local ring becomes free after localizing at one f_i, which is a unit. Step 2 is correctly marked elementary: d=Σe_t over κ(x), so some e_t is prime to ℓ, and the κ(q)-point of W×_{Y_T}Spec C has residue field κ(q). Step 3 checks the hypotheses of the henselian étale retraction (C henselian, prime with trivial residue extension). Step 4 lifts b to a genuine idempotent, Z_a and W×_T T_a are of finite presentation, and 01ZM(2) gives a morphism over Y_{T_a'}, so f v g = u c holds. Step 5: 06AC applies (everything affine, f_0 locally of finite presentation) and gives constant degree e. Step 6: j is quasi-compact because X is Noetherian, finite type follows, and separatedness holds because j is a monomorphism. Step 7: positive rank gives surjectivity, and the subcover node gives a finite family; empty X is fine. New node lem-per-ordinary-henselian-pointed-neighbourhood-limit is true (04GN applied to A_p, descended along A_g; points κ(x)⊆κ(x_a)⊆κ(H); cofinal directed set; 01YW). It is not a duplicate: the existing etale-triples nodes all carry IsSepClosure, and pair-henselization and prime-ind-etale give no pointed A-system. New node lem-per-completely-decomposed-etale-finite-subcover is true by ILO 2.2.4 (ind-constructible cd loci, X_cons compact) and is not a duplicate. Neither new node restates an item clause. FIX (C1): Step 4 identified lim Y_{T_a}=Spec B_H only 'by the tensor universal property'; it now cites lem-weil-pbc-limit-affine-transition (01YW), which is added to proof_deps and tool_uses. Step 5 now cites the limit clause of the new neighbourhood node for lim T_a=Spec H, which 06AC requires. No other changes. I accept the recorded generic-AG tool_uses.; 1 file(s) fixed by the reviewer"
  },
- "lean": {
+ "lean": null,
+ "lean_removed": {
+  "commit": "f6bf55e2b05",
+  "path": "lean/Sheaf/AlgebraicGeometry/FiniteFlatCdEtaleExchange.lean",
   "module": "Sheaf.AlgebraicGeometry.FiniteFlatCdEtaleExchange",
   "declaration": "AlgebraicGeometry.finite_flat_cd_etale_exchange",
-  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFlatCdEtaleExchange.lean",
-  "statement": "theorem finite_flat_cd_etale_exchange (X Y : Scheme.{u}) [IsNoetherian X] (ell : ℕ) (hell : ell.Prime) (f : Y ⟶ X) (d : ℕ) (hf : f.IsFiniteLocallyFreeOfDegree d) (hd : 0 < d) (hcoprime : Nat.Coprime d ell) {I : Type w} [Finite I] (V : I → Scheme.{u}) (v : ∀ i, V i ⟶ Y) (hv : ∀ i, IsSeparated (v i) ∧ Etale (v i) ∧ LocallyOfFiniteType (v i) ∧ QuasiCompact (v i)) (hcd : ∀ y : Y, ∃ (i : I) (z : V i), v i z = y ∧ IsIso ((v i).residueFieldMap z)) : ∃ (n : ℕ) (U Z : Fin n → Scheme.{u}) (u : ∀ j, U j ⟶ X) (c : ∀ j, Z j ⟶ U j) (r : Fin n → ℕ) (index : Fin n → I) (g : ∀ j, Z j ⟶ V (index j)), (∀ j, IsSeparated (u j) ∧ Etale (u j) ∧ LocallyOfFiniteType (u j) ∧ QuasiCompact (u j)) ∧ (∀ x : X, ∃ (j : Fin n) (z : U j), u j z = x ∧ IsIso ((u j).residueFieldMap z)) ∧ (∀ j, (c j).IsFiniteLocallyFreeOfDegree (r j) ∧ Surjective (c j) ∧ 0 < r j ∧ Nat.Coprime (r j) ell) ∧ (∀ j, g j ≫ v (index j) ≫ f = c j ≫ u j)",
-  "branch": "newtargets-dag",
-  "by": "N5",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.AlgebraicGeometry.FiniteFlatCdEtaleExchange deleted (dead: no target reaches it); this node is not reached either."
+  "reason": "module deleted as dead (no target reaches it, node not reached); declaration exists nowhere else in lean/ or Mathlib, so the node has no Lean statement"
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -361,5 +358,16 @@
   "result": "pass",
   "note": "Statement matches node clause by clause: IsNoetherian X; ell prime with no invertibility; IsFiniteLocallyFreeOfDegree d (checked at side FiberDegree.lean:906 = finite+flat+LFP with fibre degree d) with 0<d and Coprime; finite I : Type w; v separated/etale/LFT/qc; pointwise residueFieldMap IsIso, same encoding as sibling AlterationCoverStandardRefinement; conclusion has Fin n families, u separated etale finite type and completely decomposed, c finite locally free of degree r j, surjective, 0<r j, coprime, g j ≫ v ≫ f = c j ≫ u j. Nothing stronger assumed. Edge cases fine (empty X, empty I, d=1, ell=2). lean.statement verbatim; node differs from live only in lean field; docstrings carry source place, blueprint id and all 7 steps; proof only sorry, no defs; no duplicate found. nt_compile --json clean, 1.6 s, exit 0."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

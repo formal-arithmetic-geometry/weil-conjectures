@@ -22,79 +22,54 @@
  ],
  "proof": [
   {
-   "text": "Use the finite-field and coefficient data of [def-weil-ordinary-compact-cohomology]. In particular $Y$ is a separated finite-type $k$-scheme and $\\ell$ is invertible in $k$. Since $Y$ is proper over $k$, $a_Y:Y\\to s=\\operatorname{Spec}k$ is proper by [def-weil-proper-morphism]. Thus $c_0=(\\operatorname{id}_Y,a_Y)$ is a compactification by [def-weil-compactifications-refinements]. For $j=\\operatorname{id}_Y$, every object $V\\to Y$ factors through $j$, so the presheaf defining $j_!M$ in [def-weil-extension-by-zero] is exactly $M$, on sections, restriction maps and morphisms; it is already a sheaf. Hence $j_!$ is naturally the identity, including on complexes. The formula of [def-compact-support-direct-image-detailed] therefore gives $Ra_{Y!,n}^{c_0}\\cong Ra_{Y*,n}$ for every $n\\geq1$. Bounded constructible finite-coefficient objects have etale origin by [lem-sf-proetale-constructible-origin], so [prop-compactification-coherence-detailed] identifies the compactification-independent functor with this value on its required domain; its identity and cocycle clauses make this identification natural and independent of a common refinement.",
+   "text": "For each bounded finite constructible input, finiteRing_constructibleDerived_origin gives a bounded etale origin, which is bounded below. Fullness of the comparison functor on bounded-below inputs (bijective_comparisonUpperStar_mapDerivedCategory_map) extends any natural comparison given on etale origins to the full finite constructible subcategory, independently of the chosen origins. On etale origins, compare c with the identity compactification by the intrinsic compact-support comparisons sfIntrinsicCompactSupportComparison and the canonical transport fixedCompactSupportOriginIso of the etale compactification comparison, through the intrinsic derived equivalence. Compose with properFiniteIdentityNormalization. This proves the finite natural comparison.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "lem-weil-pbc-fixed-module-derived-hom-bijection",
+    "def-sf-intrinsic-compact-support-realization",
+    "def-sp-fixed-compact-support-comparison",
+    "def-sp-finite-intrinsic-direct-adjunction",
+    "lem-weil-proper-finite-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the integral functor and recorded-value comparison at every coefficient field. The rational functor comparison follows by tensor naturality. The normalized coefficient-action comparison supplies the common-stage functor clause for every pair of actions.",
+   "uses": [
+    "lem-weil-proper-compact-integral-comparisons",
+    "lem-weil-proper-compact-rational-functor-comparison",
+    "lem-weil-proper-compact-coefficient-action-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Evaluate the finite comparison at K, then apply pointFiniteSections and every homology functor. For integral coefficients apply pointIntegralFibre to the recorded value isomorphism and then coefficientFgCohomology. For rational coefficients first apply sfRationalConstructibleLocalization to that same integral value isomorphism, then pointRationalFibre and coefficientFdCohomology. For an algebraically closed input repeat at its literal stage K.stage, apply the stage inclusion, pointQbarFibre and coefficientQbarCohomology. All maps are images of isomorphisms under the actual recorded functors, so their inverse identities are preserved.",
    "uses": [
     "def-weil-ordinary-compact-cohomology",
-    "def-weil-proper-morphism",
-    "def-weil-compactifications-refinements",
-    "def-weil-extension-by-zero",
-    "def-compact-support-direct-image-detailed",
-    "lem-sf-proetale-constructible-origin",
-    "prop-compactification-coherence-detailed"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-input-weights/prop-weil-proper-compact-coincidence.proof.md",
-    "place": "first paragraph, through the finite-level identification and compactification independence"
-   }
-  },
-  {
-   "text": "For integral coefficients choose $c_0$ at every level in [def-weil-integral-rational-qbar-compact-support], and put $K_n=K\\otimes^L_{\\mathcal O_E}A_{E,n}$. The two towers defining $Ra_{Y!}K$ there and $Ra_{Y*}K$ in [def-weil-derived-direct-image] have the same terms $\\operatorname{Res}_n Ra_{Y*,n}K_n$. Their transition maps also agree: [lem-sf-compact-support-restriction-of-scalars] specifies the compact-support coefficient comparison as $j_!\\operatorname{Res}=\\operatorname{Res}j_!$ followed by the ordinary derived-direct-image coefficient comparison. For $j=\\operatorname{id}_Y$ the first map is the identity on every section, so both transitions are the same reduction map $K_{n+1}\\to\\operatorname{Res}K_n$ followed by the same ordinary coefficient comparison. Thus the tower identifications commute with every transition, and taking the derived limit of this identical diagram yields $Ra_{Y!}K\\cong Ra_{Y*}K$, naturally in $K$.",
-   "uses": [
-    "def-weil-integral-rational-qbar-compact-support",
-    "def-weil-derived-direct-image",
-    "lem-sf-compact-support-restriction-of-scalars"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-input-weights/prop-weil-proper-compact-coincidence.proof.md",
-    "place": "first paragraph, passage from all finite coefficient levels to the integral functor"
-   }
-  },
-  {
-   "text": "For $\\Lambda=E$, [def-weil-derived-direct-image] and [def-weil-integral-rational-qbar-compact-support] use the rationalized category of [def-weil-rationalization-karoubi]. Apply localization to the integral isomorphism and its inverse: on a morphism $u\\otimes a$ its naturality equation is the integral naturality equation for $u$ multiplied by $a\\in E$. The two composites remain identities, giving $Ra_{Y!}\\cong Ra_{Y*}$ over $E$. For $\\Lambda=\\Qlb$, use [def-weil-algebraically-closed-coefficients]: on an object $(E,K_E)$ take the isomorphism over $E$, and on a morphism represented over a common extension $L$ use its naturality equation over $L$. The finite-level comparisons above are identities after choosing $c_0$, so extension of coefficients sends each comparison to the comparison for the extended coefficients. Consequently these equations agree after every further extension and define a natural isomorphism in the common-stage category. This treats all four coefficient rings in the statement's notation.",
-   "uses": [
-    "def-weil-derived-direct-image",
-    "def-weil-integral-rational-qbar-compact-support",
     "def-weil-rationalization-karoubi",
     "def-weil-algebraically-closed-coefficients"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-input-weights/prop-weil-proper-compact-coincidence.proof.md",
-    "place": "first paragraph, the functor identification for rational and algebraically closed coefficients"
-   }
-  },
-  {
-   "text": "For each coefficient ring $\\Lambda$ and $K\\in D^b_c(Y,\\Lambda)$ of [def-weil-ordinary-compact-cohomology], apply $\\operatorname{Fib}_s$ to the isomorphism $Ra_{Y!}K\\cong Ra_{Y*}K$ and its inverse. Their composites remain identities. The displayed definitions give $\\RGammac(Y,K)\\cong\\RGamma(Y,K)$. Applying the degree-$i$ cohomology functor to these two inverse maps again gives inverse maps, hence $H_c^i(Y,K)\\cong H^i(Y,K)$ for every integer $i$. For a Weil complex the same assertion applies to its underlying complex, as stipulated in that definition.",
-   "uses": [
-    "def-weil-ordinary-compact-cohomology"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-input-weights/prop-weil-proper-compact-coincidence.proof.md",
-    "place": "first paragraph, from applying Fib_s to the final cohomology conclusion"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-weil-pbc-fixed-module-derived-hom-bijection",
+  "def-sf-intrinsic-compact-support-realization",
+  "def-sp-fixed-compact-support-comparison",
+  "def-sp-finite-intrinsic-direct-adjunction",
+  "lem-weil-proper-finite-normalization",
+  "lem-weil-proper-compact-integral-comparisons",
+  "lem-weil-proper-compact-rational-functor-comparison",
+  "lem-weil-proper-compact-coefficient-action-comparison",
   "def-weil-ordinary-compact-cohomology",
-  "def-weil-proper-morphism",
-  "def-weil-compactifications-refinements",
-  "def-weil-extension-by-zero",
-  "def-compact-support-direct-image-detailed",
-  "lem-sf-proetale-constructible-origin",
-  "prop-compactification-coherence-detailed",
-  "def-weil-integral-rational-qbar-compact-support",
-  "def-weil-derived-direct-image",
-  "lem-sf-compact-support-restriction-of-scalars",
   "def-weil-rationalization-karoubi",
   "def-weil-algebraically-closed-coefficients"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-input-weights/prop-weil-proper-compact-coincidence.proof.md",
-  "place": "first paragraph"
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-zeta-weil/sk-input-weights/prop-weil-proper-compact-coincidence.proof.md",
+  "place": "first paragraph; finite comparison and all fibre/cohomology assembly formalized by W3"
  },
  "mathlib_searches": [
   {
@@ -159,7 +134,18 @@
   "def-weil-scheme-morphism-properties"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-zeta-weil",
  "unit": "sk-input-weights",
  "blueprint_update": {
@@ -179,19 +165,19 @@
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "prop-weil-proper-compact-coincidence",
   "worker": "stage1",
-  "summary": "Identity compactification gives the finite-level proper comparison directly from extension by zero and the compact-support formula, with compactification coherence on the etale-origin domain. The integral tower terms and transition maps coincide; localization and common finite stages give the rational and algebraically closed comparisons. Applying Fib_s and cohomology gives the conclusion. No new nodes.",
-  "blueprint": "Step 1 realizes the identity compactification and finite-level comparison of the current blueprint proof; steps 2 and 3 spell out its passage to the integral, rational and common-stage functors; step 4 realizes its Fib_s and cohomology conclusion."
+  "summary": "Repaired the released 2026-10-22 re-split: three comparable statement-only tasks isolate finite normalization/refinement and quotient compatibility, the integral diagrams including transitions and projections, and scalar-compatible rational/common-stage descent. The statement and statement dependencies are unchanged; the assembly retains the elementary Fib_s/cohomology deduction. Full previous arguments and search results are retained in report.md and searches.jsonl.",
+  "blueprint": "The three new tasks realize the first paragraph: identity compactification and finite levels; passage to integral derived limits; rational and algebraically closed coefficient passage. The final elementary step realizes its Fib_s and H^i conclusion."
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-NE-4150efe88",
-  "group": "NE",
+  "reviewer": "NT-cc-Q111-ddbb3e61a",
+  "group": "Q111",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-4150efe88 (reviewer sub-agent of L); spot-checked: I read the item, the cited node statements, the unit and the main-20261015 source in full; no changes. The statement matches main-20261015 prop-weil-proper-compact-coincidence.md verbatim; only the master parenthetical was dropped, with no weakening. Step 1: (id_Y, a_Y) is a compactification (def-weil-proper-morphism, def-weil-compactifications-refinements); j_! along the identity is sheafification of M itself (def-weil-extension-by-zero); Rf_{!,n}^{c0}=Ra_{Y*,n}; constructible-origin (ii) puts D^b_c inside the coherence domain of prop-compactification-coherence-detailed. Removing cor-cbc-proper-coincidence was correct, since it assumes the identification. Step 2: the integral towers have equal terms and equal transitions (lem-sf-compact-support-restriction-of-scalars = j_!Res identity followed by the same direct-image Res lemma). The integral definition fixes c and says independence of c is a separate statement, so using c0 is a legitimate instance; the DAG has no integral independence node. Step 3: localization (same objects, Hom tensor E) and common-stage representatives. I cross-checked against lem-pur-compact-support-integral-coefficient-comparison that with j=id the coefficient comparison reduces to the direct-image one. Step 4: Fib_s and H^i, elementary. All statement dependencies are in the transitive route of sk-input-weights; no tool uses. No new nodes; no duplicates found in a DAG-wide search. Edge cases: empty Y, Spec k, K=0, P^1; A^1 shows properness is needed. Source field still names the master copy, which is the import convention."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-ddbb3e61a (reviewer sub-agent of L); spot-checked: Re-split of prop-weil-proper-compact-coincidence (released note, keep_plan) meets the order. The live and side-live item is still the NE 10-16 split, so no other group has re-split it; it is not on the dropped list. Statement and stmt_deps are byte-identical to live and match main-20261015 verbatim. Each old step maps to a new node with no argument shortened: old step 1 (identity compactification, (id)_!=id, refinement coherence on the etale-origin domain) to lem-weil-proper-finite-normalization, which adds the quotient square from lem-sf-compact-support-restriction-of-scalars. Old step 2 (equal tower terms and transitions, derived limit) to lem-weil-proper-integral-tower-comparison. Old step 3 (localization, Q̄ common stages, and its hidden scalar-compatibility claim, now stated as an equation) to lem-weil-proper-coefficient-descent. Old step 4 (Fib_s, H^i) is kept verbatim as an elementary step. The three nodes are 2.1-2.6k characters each, statement-only, with three kinds of Mathlib search. The assembly is 1723 characters. All hypotheses check for f=a_Y with Y proper over k. Checked against prop-compactification-coherence-detailed, lem-sf-proetale-constructible-origin(ii), the integral/rational/Q̄ compact-support definitions, def-weil-derived-direct-image, both coefficient-action definitions and def-weil-algebraically-closed-coefficients. Edge cases: X empty, f=id_{Spec k}, n=1, K=0; the affine line A^1 shows properness is needed. The new nodes do not duplicate cor-cbc-proper-coincidence, lem-sf-package-compactified-tower-comparisons, lem-sf-integral-compactification-comparison-bridge, lem-pod-identity-compact-support-normalization or lem-coef-proper-identity-open-site-comparison. The new nodes are in the item's unit, so there is no route departure and no tool_uses. Two B3/C4 fixes. (1) In integral-tower, the uncited 'specified reduction comparisons' for compact support is now an explicit adjunct equation, with stmt_dep lem-weil-derived-scalar-extension-restriction-adjunction added. (2) In coefficient-descent, the θ_E hypothesis now names the integral Rf_!^{c0} and the extension-by-zero identifications, with stmt_deps def-weil-integral-rational-qbar-compact-support and def-weil-extension-by-zero added. Maintainer advisory: the ordinary scalar comparison b_* in coefficient-descent is not pinned by def-weil-derived-direct-image; this is inherited from the base, and the prover should use lem-sf-strict-direct-image-scalar-comparison.; 2 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.ProperCompactCoincidence",
@@ -216,5 +202,15 @@
   "group": "NP",
   "result": "fix",
   "note": "Read node, 6 stmt_deps (nodes and Lean), source, module, report. Clauses 1-2 are natural isos of recorded finite/integral functors (sfIntrinsicCompactSupport vs proEtaleConstantDerivedDirectImage; F^c vs sfCompletedDerivedDirectImage); clauses 5-8 give sections and H^i isos for every K and i at all four coefficient levels; the rational/Qbar ordinary Ra_* exists only objectwise (rationalImage/qbarImage), so the functor comparison at Compactification.ofIsProper plus objectwise isos is accepted. Only hypothesis is IsProper; no extra assumptions or universe restriction; added stmt_deps acyclic; point Over instance is real data with no conflict; docstrings and gates ok; statement verbatim. Finding: clause 4 used ∃ S ∃ S₀ over SfCompactSupportCoefficientAction, weaker than the node and the project convention (sfFieldShriekCompositionQbar_existsUnique quantifies over all actions; actions are not evidently unique). Fixed to ∀ S ∀ S₀ in fixes/ProperCompactCoincidence.lean, the lean-record statement and the report. nt_compile --json: delivered 11.6 s clean, fixed 9.0 s clean, error-injection control rejected."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-19add",
+  "group": "W3",
+  "result": "fix",
+  "landing": "20261025T203606-L-2830963",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 3 new modules/nodes against target clauses, SfCompactSupportCoefficientAction pins, live owners; delivered and fixed sets + both direct importers compiled exit 0; axioms propext/sorryAx/Classical.choice/Quot.sound"
  }
 }

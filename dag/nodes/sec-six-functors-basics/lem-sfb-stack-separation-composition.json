@@ -1,0 +1,277 @@
+{
+ "id": "lem-sfb-stack-separation-composition",
+ "kind": "statement",
+ "title": "Composition preserves proper relative diagonals",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Stacks, Deligne--Mumford stacks, algebraic spaces and 2-fibre products have the conventions of [def-sfb-stable-pointed-moduli-groupoids, def-trf-algebraic-space]. Representable by algebraic spaces means that every scheme base change is equivalent to an algebraic space. Properties of such maps are tested on these algebraic-space base changes. Let $\\mathcal X\\xrightarrow{f}\\mathcal Y\\xrightarrow{g}\\mathcal Z$ be morphisms of Deligne--Mumford stacks over $S$. A morphism $h:\\mathcal P\\to\\mathcal Q$ of these stacks is separated when its relative diagonal $\\Delta_h:\\mathcal P\\to\\mathcal P\\times_{\\mathcal Q}\\mathcal P$ is proper, meaning that for every scheme $T$ and every morphism $T\\to\\mathcal P\\times_{\\mathcal Q}\\mathcal P$ the 2-fibre product $T\\times_{\\mathcal P\\times_{\\mathcal Q}\\mathcal P}\\mathcal P$ is represented by a scheme which is proper over $T$ [def-weil-proper-morphism]. Equivalently, each such base change, which is an algebraic space locally quasi-finite over $T$, is proper over $T$ in the algebraic-space sense (separated, quasi-compact, locally of finite type on etale scheme charts and universally closed); a proper locally quasi-finite algebraic space over $T$ is finite over $T$, hence a scheme. If both $\\Delta_f$ and $\\Delta_g$ are proper, then $\\Delta_{g\\circ f}$ is proper. No properness or finite-type hypothesis on $f$ or $g$ is required.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 050K (lemma-composition-separated), separated case; the diagonal factorization in its proof."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-weil-proper-morphism",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-trf-scheme-algebraic-space"
+ ],
+ "proof": [
+  {
+   "text": "Unpack the diagonal on test schemes using the 2-fibre-product definition in [def-sfb-stable-pointed-moduli-groupoids]. For a stack morphism $h:\\mathcal P\\to\\mathcal Q$ and a scheme $T$ mapping to $\\mathcal P\\times_{\\mathcal Q}\\mathcal P$, write its datum as $(p_1,p_2,\\epsilon:h(p_1)\\xrightarrow{\\sim}h(p_2))$. On a scheme $T\\prime\\to T$, the pullback of $\\Delta_h$ has objects $(p,a:p\\xrightarrow{\\sim}p_1,b:p\\xrightarrow{\\sim}p_2)$ satisfying $h(b)=\\epsilon\\circ h(a)$. Send this object to $\\beta=b\\circ a^{-1}$, for which $h(\\beta)=\\epsilon$. Conversely $\\beta$ gives $(p_1,\\mathrm{id},\\beta)$. An arrow $u:(p,a,b)\\to(p',a',b')$ must satisfy $a'\\circ u=a$ and $b'\\circ u=b$. The first equation forces $u=(a')^{-1}\\circ a$; the second holds exactly when $b\\circ a^{-1}=b'\\circ(a')^{-1}$. Thus an arrow exists exactly when the two values of $\\beta$ agree, and then it is unique. Thus these functors give an equivalence with the discrete groupoid of such $\\beta$. The formulas commute with restriction to every $T\\prime\\to T$, hence give an equivalence over $T$. This is an explicit calculation from the definition, not an appeal to a geometric representability theorem.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04Z1 (lemma-fibre-product-after-map), the groupoid calculation behind Tag 050H; omitted calculation written out here."
+   }
+  },
+  {
+   "text": "Fix any scheme $T$ and map $T\\to\\mathcal X\\times_{\\mathcal Z}\\mathcal X$, with datum $(x_1,x_2,\\theta:g(f(x_1))\\xrightarrow{\\sim}g(f(x_2)))$. It induces $T\\to\\mathcal Y\\times_{\\mathcal Z}\\mathcal Y$ with datum $(f(x_1),f(x_2),\\theta)$. By the hypothesis on $\\Delta_g$, its pullback $E=T\\times_{\\mathcal Y\\times_{\\mathcal Z}\\mathcal Y}\\mathcal Y$ is represented by a scheme proper over $T$. By step 1, its points on any $T\\prime\\to T$ are precisely the isomorphisms $\\alpha:f(x_1)\\xrightarrow{\\sim}f(x_2)$ with $g(\\alpha)=\\theta$. This description uses only the 2-fibre-product definition [def-sfb-stable-pointed-moduli-groupoids] and the stated hypothesis on $\\Delta_g$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 050K (lemma-composition-separated), factorization of the composite diagonal; Tag 050H (lemma-fibre-product-after-map), its 2-cartesian square, tested over T."
+   }
+  },
+  {
+   "text": "Apply the natural description of $E$ in step 2 to its identity $T$-morphism $\\mathrm{id}_E:E\\to E$. This gives the universal isomorphism $\\alpha:f(x_1)|_E\\xrightarrow{\\sim}f(x_2)|_E$; for every $u:U\\to E$, its restriction $u^*\\alpha$ is precisely the isomorphism corresponding to $u$. Together with $x_1|_E,x_2|_E$ it defines $E\\to\\mathcal X\\times_{\\mathcal Y}\\mathcal X$. The hypothesis on $\\Delta_f$ therefore makes $V=E\\times_{\\mathcal X\\times_{\\mathcal Y}\\mathcal X}\\mathcal X$ a scheme proper over $E$. Step 1 and [def-sfb-stable-pointed-moduli-groupoids] identify its points with $\\beta:x_1|_E\\xrightarrow{\\sim}x_2|_E$ satisfying $f(\\beta)=\\alpha$. Applying the hypothesis is legitimate because $E$ is a scheme by step 2; no properness assumption on $f$ itself is involved.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 050K (lemma-composition-separated), the first arrow in the diagonal factorization, after the second arrow has been pulled back to T."
+   }
+  },
+  {
+   "text": "For every scheme $T\\prime\\to T$, the points of $V$ are consequently pairs $(\\alpha,\\beta)$ satisfying $g(\\alpha)=\\theta$ and $f(\\beta)=\\alpha$. Forgetting $\\alpha$ is a bijection onto the isomorphisms $\\beta:x_1\\xrightarrow{\\sim}x_2$ with $(g\\circ f)(\\beta)=\\theta$, with inverse $\\beta\\mapsto(f(\\beta),\\beta)$. Both formulas commute with every restriction map: restricting a pair sends it to the pair of restrictions, and functoriality of $f$ gives $f(\\beta)|_{T\\prime}=f(\\beta|_{T\\prime})$. Between two triples with the same $\\beta$, the unique arrow calculated in step 1 is preserved by these formulas. Thus they identify the fibred groupoids, including arrows. By the explicit equivalence of step 1 applied to $h=g\\circ f$, this identifies the scheme $V$ over $T$ with the stack $T\\times_{\\mathcal X\\times_{\\mathcal Z}\\mathcal X}\\mathcal X$. The same formulas identify the projection to $T$ with $V\\to E\\to T$, not merely the underlying sets. This completes the diagonal factorization directly from [def-sfb-stable-pointed-moduli-groupoids].",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 050K (lemma-composition-separated), factorization; Tag 050H (lemma-fibre-product-after-map), with the identification expanded on each test scheme."
+   }
+  },
+  {
+   "text": "The maps $V\\to E$ and $E\\to T$ are proper morphisms of schemes by steps 3 and 2. Their composite $V\\to T$ is proper by [lem-weil-pbc-proper-composition]. Step 4 identifies it with the arbitrary scheme base change of $\\Delta_{g\\circ f}$. Since $T$ and its map were arbitrary, every such base change is represented by a proper scheme, exactly the separation condition in the statement. This proves the conclusion without a finite-type or properness hypothesis on $f$ or $g$.",
+   "uses": [
+    "lem-weil-pbc-proper-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01W3 (lemma-composition-proper), applied to the two scheme maps produced by the factorization in stacks-morphisms.tex, Tag 050K."
+   }
+  },
+  {
+   "text": "Prove also the algebraic-space assertion in the statement. Fix any $h:\\mathcal P\\to\\mathcal Q$ and test datum $(p_1,p_2,\\epsilon)$ of step 1. By [lem-sfb-dm-isom-space-unramified], $I_P=\\operatorname{Isom}_{\\mathcal P}(p_1,p_2)$ and $I_Q=\\operatorname{Isom}_{\\mathcal Q}(h(p_1),h(p_2))$ are algebraic spaces unramified over $T$: both stacks are Deligne--Mumford and both pairs are objects over the same scheme $T$. Applying $h$ to isomorphisms gives a morphism $a:I_P\\to I_Q$ over $T$, and $\\epsilon$ gives a section $e:T\\to I_Q$. Regard $T$ as its represented algebraic space [def-trf-scheme-algebraic-space]. Then $D=I_P\\times_{I_Q,e}T$ is an algebraic space by [lem-trf-space-fibre-products-etale-covers]. Its points are exactly $\\beta$ with $h(\\beta)=\\epsilon$, naturally on every $T$-scheme, so the equivalence of step 1 identifies $D$ over $T$ with the scheme base change of $\\Delta_h$.",
+   "uses": [
+    "lem-sfb-dm-isom-space-unramified",
+    "def-trf-scheme-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 045G (lemma-representable-diagonal); stacks-morphisms.tex Tags 06N3 (theorem-DM) and 06MB (lemma-properties-covering-imply-diagonal); spaces.tex Tag 02X2 (lemma-fibre-product-spaces)."
+   }
+  },
+  {
+   "text": "The composite $I_P\\xrightarrow{a}I_Q\\to T$ is the unramified structure map from step 6. The cancellation clause of [lem-sfb-space-unramified-permanence] therefore makes $a$ unramified, with no hypothesis on $h$ or on $I_Q\\to T$ needed for cancellation. The base-change clause makes $D\\to T$ unramified. For every representable etale scheme chart $V\\to D$, the same node gives that $V\\to D$ is unramified and that its composite $V\\to T$ is unramified. Apply [lem-weil-pbc-unramified-quasi-finite-at-points] to this morphism of schemes: it is locally quasi-finite at every point. Thus $D\\to T$ is locally quasi-finite in precisely the every-etale-scheme-chart sense required below. No quasi-compactness, finite presentation or finite-type hypothesis on $h$ was used.",
+   "uses": [
+    "lem-sfb-space-unramified-permanence",
+    "lem-weil-pbc-unramified-quasi-finite-at-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 06G6 (lemma-permanence-unramified), 03ZJ (lemma-base-change-unramified), 06CR (lemma-etale-unramified), 03ZI (lemma-composition-unramified); morphisms.tex Tag 02V5 (lemma-unramified-quasi-finite)."
+   }
+  },
+  {
+   "text": "For the remaining equivalence, more generally let $A\\to T$ be any chartwise locally quasi-finite algebraic space over a scheme. Suppose it is proper in the algebraic-space sense stated in the item. In particular its diagonal is a closed immersion after every scheme base change, so [lem-a1-separated-locally-qf-space-representable] gives a scheme $Z$ representing $A$ over $T$. For represented maps the scheme and space properness tests agree: use the identity scheme charts of [def-trf-scheme-algebraic-space]; separatedness is the same diagonal condition, finite type is the same quasi-compact/local-finite-type condition, and universal closedness is the same closedness condition after every scheme base change [def-weil-proper-morphism]. Consequently $Z\\to T$ is proper. Conversely a proper scheme representative satisfies those very same tests and makes $A\\to T$ proper. Taking the identity chart $Z\\to A$ in the assumed chartwise local quasi-finiteness gives that $Z\\to T$ is locally quasi-finite. Hence [pqf-lem-proper-lqf-finite] makes $Z\\to T$ finite. Thus every proper locally quasi-finite algebraic space over $T$ is finite and a scheme. Apply this to the $D$ of steps 6--7: being proper as an algebraic space is equivalent to having a proper scheme representative, which proves every clause of the retained Equivalently sentence.",
+   "uses": [
+    "lem-a1-separated-locally-qf-space-representable",
+    "def-trf-scheme-algebraic-space",
+    "def-weil-proper-morphism",
+    "pqf-lem-proper-lqf-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme); section-representable and definition-proper for agreement on represented morphisms. Finiteness: more-morphisms.tex Tag 02LS (lemma-characterize-finite), (3) implies (1); this also proves the scheme-target case of spaces-more-morphisms.tex Tag 0A4X (lemma-characterize-finite)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-weil-pbc-proper-composition",
+  "lem-sfb-dm-isom-space-unramified",
+  "def-trf-scheme-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-unramified-permanence",
+  "lem-weil-pbc-unramified-quasi-finite-at-points",
+  "lem-a1-separated-locally-qf-space-representable",
+  "def-weil-proper-morphism",
+  "pqf-lem-proper-lqf-finite"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 050K (lemma-composition-separated), separated case; expand its Tag 050H diagonal pullback over a test scheme and use scheme composition Tag 01W3. The elementary groupoid calculation omitted in Categories Tag 04Z1 is supplied explicitly. The retained algebraic-space equivalence is proved in steps 6--8 using Isom spaces, unramified cancellation/base change, Tag 02V5, schemehood Tag 03XX and scheme finiteness Tag 02LS."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Separated and quasi Deligne Mumford morphisms of algebraic stacks are stable under composition",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.stableUnderComposition\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsSeparated\", \"doc\": \"The property of being a separated morphism of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are separated morphisms of schemes, then their composition $ g \\\\circ f:\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_isStableUnderComposition\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.QuasiSeparated\", \"doc\": \"The property of being a quasi-separated morphism of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are quasi-separated morphisms of schemes, then their composition \"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsSeparated\", \"doc\": \"The property of being a separated morphism of schemes is multiplicative; that is, the composition of two separated morphisms is again a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_isStableUnderComposition\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.QuasiCompact\", \"doc\": \"The property of being a quasi-compact morphism of schemes is stable under composition; that is, the composition of two quasi-compact morphisms is again quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [AlgebraicGeometry.QuasiSeparated f]\\n  [AlgebraicGeometry.QuasiSeparated g], AlgebraicGeometry.QuasiSeparated (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two quasi-separated morphisms of schemes is quasi-separated.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instCompScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [AlgebraicGeometry.IsSeparated f]\\n  [AlgebraicGeometry.IsSeparated g], AlgebraicGeometry.IsSeparated (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two separated morphisms of schemes is itself a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.QuasiSeparated\", \"doc\": \"The property of being quasi-separated is multiplicative: the composition of two quasi-separated morphisms of schemes is again quasi-separated.\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.LocallyQuasiFinite\", \"doc\": \"The property of being a locally quasi-finite morphism of schemes is stable under composition; that is, the composition of two locally quasi-finite morphisms is again locally quasi-finite.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, rings, or generic morphism properties; none supplies these Deligne--Mumford stack assertions in one specialization. In particular an ordinary category diagonal theorem does not provide the 2-fibre-product stack geometry."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSeparated\", \"comp\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Presieve.IsSeparatedFor.of_singleton_comp\", \"module\": \"Mathlib.CategoryTheory.Sites.IsSheafFor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {P : CategoryTheory.Functor Cᵒᵖ (Type w)} {X Y S : C} (p : Y ⟶ X) (f : X ⟶ S) (h : CategoryTheory.Presieve.IsSeparatedFor P (CategoryTheory.Presieve.singleton (CategoryTheory.CategoryStruct.comp p f))) : CategoryTheory.Presieve.IsSeparatedFor P (Ca\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.stableUnderComposition\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsSeparated\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsAffineHomIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \" : CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsAffineHom @AlgebraicGeometry.IsSeparated\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsClosedImmersionIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \" : CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsClosedImmersion @AlgebraicGeometry.IsSeparated\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsSeparatedTopMorphismProperty\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \" : CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsSeparated ⊤\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.of_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \" {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [AlgebraicGeometry.IsSeparated (CategoryTheory.CategoryStruct.comp f g)] : AlgebraicGeometry.IsSeparated f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instCompScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \" {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [AlgebraicGeometry.IsSeparated f] [AlgebraicGeometry.IsSeparated g] : AlgebraicGeometry.IsSeparated (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.comp_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \" {X Y Z : AlgebraicGeometry.Scheme} {f : X ⟶ Y} {g : Y ⟶ Z} [AlgebraicGeometry.IsSeparated g] : AlgebraicGeometry.IsSeparated (CategoryTheory.CategoryStruct.comp f g) ↔ AlgebraicGeometry.IsSeparated f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instHasOfPostcompPropertySchemeIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \" : CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsIntegralHom @AlgebraicGeometry.IsSeparated\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" : CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsFinite @AlgebraicGeometry.IsSeparated\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsProper @AlgebraicGeometry.IsSeparated\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeUniversallyClosedIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.UniversallyClosed @AlgebraicGeometry.IsSeparated\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, rings, or generic morphism properties; none supplies these Deligne--Mumford stack assertions in one specialization. In particular an ordinary category diagonal theorem does not provide the 2-fibre-product stack geometry."
+  },
+  {
+   "tool": "grep",
+   "query": "quasiDM|QuasiDM|AlgebraicStack|DeligneMumford",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, rings, or generic morphism properties; none supplies these Deligne--Mumford stack assertions in one specialization. In particular an ordinary category diagonal theorem does not provide the 2-fibre-product stack geometry."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The composite of separated morphisms of algebraic stacks has proper diagonal",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": MorphismProperty.HasOfPostcompProperty @IsProper @IsSeparated\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes and $ g: Y \\\\to Z $ is a separated morphism of schemes, then the composition $ f \\\\circ g: X \\\\to Z $ is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ X \\\\to X \\\\times_Y X $ (constructed as the pullback of $ f $ against itself) is a closed immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.stableUnderComposition\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": MorphismProperty.IsStableUnderComposition @IsSeparated\", \"doc\": \"The property of being a separated morphism of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are separated morphisms of schemes, then their composition $ g \\\\circ f:\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ constructed as the pullback of $ f $ against itself is a closed immersion. This characteriz\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.of_comp_of_isSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsProper (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.IsSeparated g],\\n  AlgebraicGeometry.IsProper f\", \"doc\": \"Let $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ be morphisms of schemes. If the composition $ g \\\\circ f: X \\\\to Z $ is a proper morphism and $ g $ is a separated morphism, then $ f $ is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.of_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsProper (f ≫ g)] [IsSeparated g] : IsProper f\", \"doc\": \"If the composition of a morphism $ f: X \\\\to Y $ with a separated morphism $ g: Y \\\\to Z $ is proper, then $ f $ is a proper morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instCompScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[IsSeparated f] [IsSeparated g] : IsSeparated (f ≫ g)\", \"doc\": \"The composition of two separated morphisms of schemes is itself a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.comp_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[IsSeparated g] : IsSeparated (f ≫ g) ↔ IsSeparated f\", \"doc\": \"If $ g $ is a separated morphism of schemes, then the composition $ f \\\\circ g $ is separated if and only if $ f $ is separated.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, rings, or generic morphism properties; none supplies these Deligne--Mumford stack assertions in one specialization. In particular an ordinary category diagonal theorem does not provide the 2-fibre-product stack geometry."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The diagonal of a composite stack morphism is proper or locally quasi finite if both relative diagonals are",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.stableUnderComposition\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsProper\", \"doc\": \"The property of being a proper morphism of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are proper morphisms of schemes, then their composition $ g \\\\circ f: X \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.LocallyQuasiFinite\", \"doc\": \"The property of being a locally quasi-finite morphism of schemes is stable under composition; that is, the composition of two locally quasi-finite morphisms is again locally quasi-finite.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_isStableUnderComposition\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.QuasiSeparated\", \"doc\": \"The property of being a quasi-separated morphism of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are quasi-separated morphisms of schemes, then their composition \"}\n  {\"name\": \"CategoryTheory.MorphismProperty.diagonal_isStableUnderComposition\", \"module\": \"Mathlib/CategoryTheory/MorphismProperty/Limits\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasPullbacks C]\\n  {P : CategoryTheory.MorphismProperty C} [P.IsStableUnderComposition] [P.RespectsIso] [P.IsStableUnderBaseChange],\\n  P.diagonal.IsStableUnderComposition\", \"doc\": \"If a morphism property $P$ in a category with pullbacks is stable under composition, respects isomorphisms, and is stable under base change, then the diagonal morphism property derived from $P$ is als\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"AlgebraicGeometry.AffineTargetMorphismProperty → AlgebraicGeometry.AffineTargetMorphismProperty\", \"doc\": \"For any scheme $X$ and affine scheme $x$, given a morphism $f: X \\\\to x$, and for any affine schemes $U_1, U_2$ with open immersions $f_1: U_1 \\\\to X$ and $f_2: U_2 \\\\to X$, the property $P$ holds for th\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) {Q : AlgebraicGeometry.AffineTargetMorphismProperty}\\n  [AlgebraicGeometry.HasAffineProperty P Q], AlgebraicGeometry.HasAffineProperty P.diagonal Q.diagonal\", \"doc\": \"If a morphism property $P$ has the affine property with respect to another property $Q$ in the category of schemes, then the diagonal morphism property of $P$ also has the affine property with respect\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsProper\", \"doc\": \"The property of being a proper morphism of schemes is multiplicative, meaning that the composition of two proper morphisms is again a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ {Q : AlgebraicGeometry.AffineTargetMorphismProperty} [Q.IsLocal], Q.diagonal.IsLocal\", \"doc\": \"If a property $ Q $ of morphisms with affine targets is local on the target scheme, then the diagonal property $ Q $ (preserved under pullbacks along open immersions from affine schemes) is also local\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, rings, or generic morphism properties; none supplies these Deligne--Mumford stack assertions in one specialization. In particular an ordinary category diagonal theorem does not provide the 2-fibre-product stack geometry."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The composite of morphisms of Deligne Mumford stacks with proper relative diagonals has proper relative diagonal",
+   "results": "AlgebraicGeometry.IsProper.stableUnderComposition, AlgebraicGeometry.IsProper.instIsMultiplicativeScheme, AlgebraicGeometry.IsProper.instCompScheme, AlgebraicGeometry.IsSeparated.stableUnderComposition, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated, AlgebraicGeometry.IsProper.comp_iff, AlgebraicGeometry.quasiSeparated_isStableUnderComposition, AlgebraicGeometry.quasiCompact_isStableUnderComposition",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme properness/ordinary-category diagonals or prestack descent; no one-line specialization supplies the 2-fibre-product stack assertion. The ordinary-category instance was read at Mathlib/CategoryTheory/MorphismProperty/Limits.lean:827 and needs a genuine 2-categorical comparison for these stacks."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|DeligneMumford|diagonal_isStableUnderComposition",
+   "results": "Mathlib/CategoryTheory/MorphismProperty/Limits.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme properness/ordinary-category diagonals or prestack descent; no one-line specialization supplies the 2-fibre-product stack assertion. The ordinary-category instance was read at Mathlib/CategoryTheory/MorphismProperty/Limits.lean:827 and needs a genuine 2-categorical comparison for these stacks."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Separated morphisms of Deligne Mumford stacks are stable under composition by factoring their relative diagonals",
+   "results": "AlgebraicGeometry.IsSeparated.stableUnderComposition, AlgebraicGeometry.IsSeparated.comp_iff, AlgebraicGeometry.IsSeparated.instCompScheme, AlgebraicGeometry.IsSeparated.of_comp, AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion, AlgebraicGeometry.IsSeparated.isStableUnderBaseChange, AlgebraicGeometry.isSeparated_iff, CategoryTheory.MorphismProperty.diagonal_isStableUnderComposition",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme properness/ordinary-category diagonals or prestack descent; no one-line specialization supplies the 2-fibre-product stack assertion. The ordinary-category instance was read at Mathlib/CategoryTheory/MorphismProperty/Limits.lean:827 and needs a genuine 2-categorical comparison for these stacks."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"diagonal\", \"IsStableUnderComposition\"",
+   "results": "CategoryTheory.MorphismProperty.diagonal_isStableUnderComposition",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme properness/ordinary-category diagonals or prestack descent; no one-line specialization supplies the 2-fibre-product stack assertion. The ordinary-category instance was read at Mathlib/CategoryTheory/MorphismProperty/Limits.lean:827 and needs a genuine 2-categorical comparison for these stacks."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For groupoid valued stacks the sheaf of isomorphisms in X with prescribed image in Z factors through the corresponding isomorphism sheaf in Y and proper maps compose",
+   "results": "CategoryTheory.Pseudofunctor.IsPrestack.isSheaf, CategoryTheory.Pseudofunctor.IsPrestackFor.isSheafFor', CategoryTheory.Pseudofunctor.isPrestackFor_iff_isSheafFor', CategoryTheory.Pseudofunctor.isPrestackFor_iff_isSheafFor, CategoryTheory.Pseudofunctor.IsStack, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, CategoryTheory.GrothendieckTopology.pseudofunctorOver_mapComp_hom_toNatTrans_app_val_app, CategoryTheory.GrothendieckTopology.pseudofunctorOver_mapComp_inv_toNatTrans_app_val_app",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme properness/ordinary-category diagonals or prestack descent; no one-line specialization supplies the 2-fibre-product stack assertion. The ordinary-category instance was read at Mathlib/CategoryTheory/MorphismProperty/Limits.lean:827 and needs a genuine 2-categorical comparison for these stacks."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-proper-locally-quasifinite-composition",
+  "date": "2026-10-22",
+  "group": "Q100"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Composition of the coarse morphism with the finite cover, followed by interpretation on the inertia-free source as an algebraic space. The creation chain has no machine-resolvable blueprint ancestor, as blueprint_refs.py ancestor reports. The main-20261015 blueprint node explicitly named by this inherited place, paragraph (3), Rj_* preservation, records the intended alteration-moduli route. Supporting input: Composition preserves proper relative diagonals.",
+   "via": [
+    "lem-sfb-stack-proper-locally-quasifinite-composition",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stack-separation-composition",
+  "worker": "stage1",
+  "summary": "Repair of the landing refusal at returned head c1475b1b2ac: rebase the retained eight-step split through the delivery tool and reread every cited node on the current DAG. The schemehood node has a new four-step split and review, and the Isom-space node has new Lean metadata; their statements and all other cited statements are unchanged. All fourteen citation records still match verbatim, and no dependency reaches this item. Make both the unique-arrow calculation in step 1 and the restriction/arrow compatibility of the factorization in step 4 explicit. Preserve the statement, statement dependencies, citation records and logged Mathlib searches. No new nodes or Mathlib leaves. Continued interrupted repair on 2026-10-23: initial retained-file dry run passed at 1a2a9ea2003; compared the returned head again with the current read clone and reread both changed dependency records. Made step 3 explicit by obtaining the universal isomorphism from the identity of the representing scheme E. All cited statements and fourteen quotes are unchanged; no new searches or nodes.",
+  "blueprint": "The inherited creation chain serves det-thm-sf-ctf-stability-direct-images, main-20261015 proof (3), through the alteration/moduli prerequisites named in blueprint.from.place. This item supplies only the proper-diagonal part of composition in lem-sfb-stack-proper-locally-quasifinite-composition. Steps 1-4 expand the relative-diagonal factorization; step 5 applies scheme proper-composition. The ancestor command reports None, so the inherited null from.node and via chain are retained. Steps 6--8 discharge the algebraic-space interpretation of the proper-diagonal condition in the same supporting input."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-8acf6c4f4",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-8acf6c4f4 (reviewer sub-agent of L); spot-checked: Fifth delivery of the same split: 90e7 was RETURNed for D5/E; c1475, 75df and 3a84 were PASSed, and each landing was refused because the side completion was not promoted. There is no repair note, the item is not a target, and the commit adds 0 new nodes. Compared field by field with 3a849f01: the statement, stmt_deps, proof_deps, source, blueprint and steps 1, 2 and 4-8 are identical, and there are no tool_uses. Only step 3 changed: α is now the universal element obtained from id_E under step 2's natural description, so u*α corresponds to u. This is correct Yoneda and makes E→X×_Y X natural. I reread every cited statement. Step 1 matches the def-sfb 2-fibre product: (p,a,b) with h(b)=εh(a) goes to β=ba⁻¹, and the arrow u=a'⁻¹a is unique, so the groupoid is discrete. Steps 2-5: E is proper over T from Δ_g, V is proper over E from Δ_f because E is a scheme, V≅{β : gf(β)=θ}, and lem-weil-pbc-proper-composition finishes. This is the separated case of Stacks 050K (stacks-morphisms l.639-665). Steps 6-8: D=I_P×_{I_Q}T is an algebraic space; it is unramified by cancellation, which needs no condition on the second map, and base change; it is chartwise lqf by 02V5; it is a scheme by 03XX; and it is finite by 02LS. Both directions of the 'Equivalently' sentence are proved. Edge cases: h=id, BG with G finite, BG with G=ℤ (no finiteness claimed), empty Isom, nonreduced T. No cycle and no SGA. Batch-5 check: def-trf-scheme-algebraic-space and def-trf-algebraic-space are general definitions, and lem-trf-space-fibre-products-etale-covers is the general fibre-product fact 02X2. The closures of lem-sfb-dm-isom-space-unramified and lem-a1-separated-locally-qf-space-representable reach sec-trace-formula only through general algebraic-space, descent and projective-bundle foundations; they contain no trace, Frobenius, H^i_c or Poincaré node. All four are therefore outside the assumed statements and stay as cited. Off-unit tool_uses are accepted as in the c1475 review (C8). Maintainer note: this is the fourth PASS of the same split; the approved side completion must be promoted to the live DAG, because another re-delivery cannot fix the landing refusal."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackSeparationComposition",
+  "declaration": "CategoryTheory.proper_moduli_diagonal_comp",
+  "declarations": [
+   "CategoryTheory.proper_moduli_diagonal_comp",
+   "CategoryTheory.relative_moduli_diagonal_locallyQuasiFinite",
+   "CategoryTheory.proper_moduli_diagonal_iff_space_tests",
+   "CategoryTheory.proper_locallyQuasiFinite_space_to_scheme_finite"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StackSeparationComposition.lean",
+  "statement": "theorem proper_moduli_diagonal_comp {S : Scheme.{u}} {A : BasedCategory.{v₁, w₁} (Over S)} {B : BasedCategory.{v₂, w₂} (Over S)} {C : BasedCategory.{v₃, w₃} (Over S)} (hA : IsDeligneMumfordModuliStack A) (hB : IsDeligneMumfordModuliStack B) (hC : IsDeligneMumfordModuliStack C) (f : BasedFunctor A B) (g : BasedFunctor B C) (hf : ModuliSchemeTest @IsProper (moduliRelativeDiagonal f)) (hg : ModuliSchemeTest @IsProper (moduliRelativeDiagonal g)) : ModuliSchemeTest @IsProper (moduliRelativeDiagonal (f.comp g))",
+  "branch": "sheaf-dag",
+  "by": "Q42",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Four statements render composition, chartwise local quasi-finiteness of every relative DM diagonal base change, the pointwise equivalence of proper scheme and algebraic-space tests, and finite scheme representability. Uses the already landed intrinsic stack interface and schemeSpace construction; no new definitions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8a5a72baa",
+  "group": "Q42",
+  "result": "pass",
+  "note": "Item differs from live only in lean and stmt_deps; the added stmt_deps are landed def nodes, allowed by brief-stage2 l.177. lean.statement is verbatim and the declarations equal the file. Four sorry theorems: proper_moduli_diagonal_comp (ModuliSchemeTest @IsProper on moduliRelativeDiagonal f, g ⇒ f.comp g; DM hypotheses only, no finite-type or properness assumption on f or g; independent universes); relative_moduli_diagonal_locallyQuasiFinite (ModuliSpaceTest lqf on every étale chart); proper_moduli_diagonal_iff_space_tests (equivalence for each T, t, E, p: SpaceMapIsProper ↔ proper scheme representative with IsSchemeModuliBaseChange); proper_locallyQuasiFinite_space_to_scheme_finite (iso to yoneda Z over T and IsFinite q). All match the node and Stacks 050K/03XX/02LS and are true. Edge cases checked: identity, empty T or Isom, nonreduced T, BG with G infinite, non-surjective charts. Every signature declaration is owned by a def node, never a theorem node; no copies or name clashes; HasProperModuliDiagonal is the absolute diagonal, so not a duplicate. Docstrings carry source, blueprint and proof steps; lines within 100 characters; report sections present. Advisory: unused proof-dependency imports; hqf written inline, equivalent to SpaceMapIsLocallyQuasiFinite; IsSchemeModuliBaseChange, IsLocallyQuasiFinite and IsFinite reached only indirectly through stmt_deps. No file changed, so no compile."
+ }
+}

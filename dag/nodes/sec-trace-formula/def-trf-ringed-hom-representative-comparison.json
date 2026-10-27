@@ -1,0 +1,156 @@
+{
+ "id": "def-trf-ringed-hom-representative-comparison",
+ "kind": "definition",
+ "title": "Fixed ringed Hom augmentation and representative comparison",
+ "status": "split",
+ "statement": "Let $\\mathcal C$ have object universe $c$ and arrow universe $v$, let $J$ be a Grothendieck topology with sheafification of $\\operatorname{AddCommGrpCat}_{\\max(c,v,u)}$ and with locally bijective maps equal to the sheafification equivalences, and let $R$ be a sheaf of commutative rings in universe $\\max(c,v,u)$. Use the category $\\operatorname{Mod}(R)$ of module sheaves [def-weil-sheaf-of-modules-category], its cochain complexes and chosen derived localization $Q:\\operatorname{CoCh}(\\operatorname{Mod}(R))\\to D(R)$ in Hom universe $w$ [def-weil-abstract-derived-category], and the product-total Hom complex [def-pur-hom-complex]. Use the fixed functorial K-injective replacement $I(F)$ and localization-factorization isomorphism $\\lambda_{E,F}:R\\mathcal Hom(QE,QF)\\xrightarrow{\\sim}Q\\mathcal Hom^\\bullet(E,I(F))$ [def-coef-hom-representative-evaluation], with the recorded derived internal Hom [def-pur-derived-internal-hom]. For any complex $F$, define $\\eta_F:F\\to I(F)$ to be the component at $F$ of the fixed natural transformation $\\operatorname{toKInjectiveResolution}$. For any complexes $E,F$, define the representative comparison by the actual composite $\\rho_{E,F}:=Q(\\mathcal Hom^\\bullet(E,\\eta_F))\\,;\\,\\lambda_{E,F}^{-1}:Q\\mathcal Hom^\\bullet(E,F)\\to R\\mathcal Hom(QE,QF)$. These definitions impose no K-flatness, K-injectivity, boundedness or finiteness assumption on $E,F$; they specify the augmentation and comparison maps themselves.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-hom-complex",
+  "def-coef-hom-representative-evaluation",
+  "def-pur-derived-internal-hom"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section Internal hom in the derived category, Tag 0A95, construction by a K-injective representative; injectives.tex Tag 079P for the fixed augmentation. The fixed comparisons used in more-algebra.tex Tag 0A67, proof of lemma-internal-hom-evaluate."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ringedHomRepresentativeMap|ringedHomAugmentation|toKInjectiveResolution in Mathlib/Algebra/Homology",
+   "results": {
+    "n_hits": 0,
+    "note": "",
+    "top": []
+   },
+   "date": "2026-10-22",
+   "verdict": "Generic localization and injective-resolution infrastructure only; reuse the exact existing project definitions, with no second definition."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical comparison from a Hom complex to derived internal Hom by functorial K injective augmentation and localization factorization",
+   "results": {
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app",
+     "HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso",
+     "CategoryTheory.injectiveResolutions",
+     "CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective",
+     "DerivedCategory.Q",
+     "HomologicalComplexUpToQuasiIso.homologyFunctorFactors",
+     "CategoryTheory.Functor.mapDerivedCategoryFactorsh",
+     "CochainComplex.IsKInjective.Qh_map_bijective"
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "Generic localization and injective-resolution infrastructure only; reuse the exact existing project definitions, with no second definition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical comparison from a Hom complex to derived internal Hom by functorial K injective augmentation and localization factorization",
+   "results": {
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app",
+     "CategoryTheory.Functor.toRightDerivedZero",
+     "CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory",
+     "CategoryTheory.Functor.rightDerived_map_eq",
+     "CategoryTheory.InjectiveResolution.toRightDerivedZero'",
+     "CategoryTheory.InjectiveResolution.extMk_hom",
+     "DerivedCategory.right_fac",
+     "DerivedCategory.left_fac"
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "Generic localization and injective-resolution infrastructure only; reuse the exact existing project definitions, with no second definition."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n ringedHomRepresentativeMap|ringedHomAugmentation in lean/WeilConjectures and lean/Sheaf; rg -l of these names in dag/nodes; tools/blueprint_refs.py search Hom representative",
+   "results": "No upstream declaration. Exact definitions are in Sheaf/Algebra/Homology/RingedHomCompositionModel.lean:561-583. The only DAG records containing these names are lem-sfb-ringed-hom-composition-model and lem-sfb-ringed-ordinary-evaluation-localization, both theorem nodes. blueprint_refs.py found 0 matching blueprint nodes. def-coef-hom-representative-evaluation owns the fixed replacement and localization-factorization isomorphism but not these two definitions.",
+   "date": "2026-10-22",
+   "verdict": "Definition ownership record needed; existing:true on the unchanged module, as requested by the independent return."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-double-evaluation-signed-derived-model",
+  "date": "2026-10-22",
+  "group": "Q63"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Fixed Hom representative comparison for the three canonical Hom isomorphisms in the signed double-evaluation model; Stacks 0A67 representative construction and 0A95 internal Hom construction.",
+   "via": [
+    "lem-trf-double-evaluation-signed-derived-model",
+    "lem-trf-derived-evaluation-pseudocoherent",
+    "lem-trf-derived-evaluation-finite-injective",
+    "lem-trf-complete-local-coherent-duality",
+    "lem-trf-semidualizing-rhom-conservative",
+    "lem-trf-algebraic-relative-dualizing-isomorphism",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingedHomCompositionModel",
+  "declaration": "CategoryTheory.ringedHomRepresentativeMap",
+  "declarations": [
+   "CategoryTheory.ringedHomAugmentation",
+   "CategoryTheory.ringedHomRepresentativeMap"
+  ],
+  "statement": "def ringedHomRepresentativeMap\n    (E F : CochainComplex (RingedTensorModules.{c, v, u} J R) ℤ) :\n    DerivedCategory.Q.obj (homComplex (R := R) E F) ⟶\n      (derivedInternalHomOfUniverses.{c, v, u, w} J R).obj\n        (op (DerivedCategory.Q.obj E), DerivedCategory.Q.obj F)",
+  "branch": "sheaf-dag",
+  "by": "Q63",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "H2 ownership repair requested by the independent reviewer of returned head 2bf8faae97c8. Owns the two existing definitions only. They contain actual terms: the fixed toKInjectiveResolution component, then Q.map of postcomposition followed by coefficientHomResolutionIso.inv. They are not chosen from ringedHomComposition_model. No existing module, declaration or docstring is copied or changed."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c5d15df7c",
+  "group": "Q63",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c5d15df7c",
+  "group": "Q63",
+  "result": "pass",
+  "note": "Re-delivery after RETURN of 2bf8faae97c8. The Lean statement text is byte-identical to that head, whose mathematics was found correct; I re-confirmed every clause. (1) Theorem stmt_dep lem-sfb-ringed-hom-composition-model removed. New def node def-trf-ringed-hom-representative-comparison owns ringedHomAugmentation and ringedHomRepresentativeMap: existing:true on the unchanged RingedHomCompositionModel module, signature verbatim from live l.575-579. The node statement matches the real terms (toKInjectiveResolution component; Q.map of Hom(E,eta) then coefficientHomResolutionIso.inv, direction checked), keeps universes c,v,u,w, and its stmt_deps cover every notion. Sources 0A95/079P/0A67. Not a duplicate. (2) def-coef-hom-representative-evaluation added for coefficientHomComponent, with a public import; its dep record is identical to side-live. (3) Unused ModuleHomComplex and FlatModel imports moved from public to plain and justified as proof imports; the module is unlanded, so there are no importers. Item node vs live differs only in stmt_deps and lean. Report sections present. No file changed and no compile run (2026-10-21 rule); the only Lean change is the import move."
+ }
+}

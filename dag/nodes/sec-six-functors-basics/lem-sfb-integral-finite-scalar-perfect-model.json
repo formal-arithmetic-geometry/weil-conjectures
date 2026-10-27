@@ -1,0 +1,299 @@
+{
+ "id": "lem-sfb-integral-finite-scalar-perfect-model",
+ "kind": "statement",
+ "title": "Integral-to-finite coefficient tensor and direct-image mates in a two-term perfect model",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $O=\\mathcal O_E$ with its valuation topology [def-weil-l-adic-coefficient-extension], and a continuous unital map $a:O\\to A$ to a finite commutative discrete ring killed by a power of $\\ell$. Use the condensed rings $\\underline O,\\underline A$ [sk-def-sfb-condensed-ring]. For every scheme $Z$, put $O_Z=p_Z^*\\underline O$, $A_Z=p_Z^*\\underline A$ [sk-def-sfb-pullback-from-point], and use ordinary uncompleted module derived categories [sk-def-sfb-derived-categories]. There exist $r\\ge0$ and an $O$-linear matrix $\\phi:O^r\\to O^r$ with a surjection $q:O^r\\to A$ such that, for all $Z$, the augmented two-term complex\n$$P_Z=[O_Z^{\\oplus r}\\xrightarrow{\\phi_Z}O_Z^{\\oplus r}]\\xrightarrow{q_Z}A_Z[0],\\qquad \\deg(P_Z)=[-1,0],$$\nis a quasi-isomorphism of $O_Z$-complexes and $P_Z$ is K-flat [def-pc-kflat-complex]. For every $K\\in D(O_Z)$ there is a canonical isomorphism\n$$P_Z\\otimes_{O_Z}^LK\\xrightarrow{\\sim}\\operatorname{Res}_{a_Z}(A_Z\\otimes_{O_Z}^LK),$$\ninduced by the augmentation; the left side is represented, for any representative $C^\\bullet$ of $K$, by the direct-sum total tensor $P_Z\\otimes_{O_Z}C^\\bullet$ [def-pc-tensor-complex-sheaves]. All maps commute with inverse image along every scheme morphism, using the monoidal comparison [sk-def-sfb-pullback-from-point-comp].\nLet $f:X\\to Y$ be any scheme morphism with small pro-etale sites [def-weil-pbc-proetale-site]. Use the canonical module adjunctions [def-sfb-module-derived-pushpull-adjunction], and let $T_Z=A_Z\\otimes_{O_Z}^L-$ [sk-def-sfb-coefficient-change]. Define $\\gamma_{f,K}:T_YRf_{*,O}K\\to Rf_{*,A}T_XK$ as the $A$-adjunct of $T_X(\\varepsilon_{f,K})\\circ c_{f,Rf_{*,O}K}$, where $c_f:f_A^*T_Y\\cong T_Xf_O^*$ is the canonical pullback/tensor comparison [det-prop-scalar-six-pullback](1). Under restriction of scalars and the above augmented-complex identifications, this actual $\\gamma_{f,K}$ is the projection morphism\n$$P_Y\\otimes_{O_Y}^LRf_{*,O}K\\longrightarrow Rf_{*,O}(P_X\\otimes_{O_X}^LK)$$\ndefined by the canonical tensor comparison and the $O$-geometric counit [lem-weil-pbc-ringed-projection-mate-exact, lem-weil-pbc-ring-sheaf-change-adjunction]. This projection and $\\gamma_{f,K}$ are isomorphisms for every unbounded $K$. No properness, quasi-compactness, constructibility or flatness of $A$ over $O$ is assumed. The case $A=0$ permits $r=0$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+  "place": "Re-split of returned proof steps 7, 8; corresponding current-blueprint paragraphs"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pullback-from-point",
+  "sk-def-sfb-derived-categories",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "sk-def-sfb-pullback-from-point-comp",
+  "def-weil-pbc-proetale-site",
+  "def-sfb-module-derived-pushpull-adjunction",
+  "sk-def-sfb-coefficient-change",
+  "det-prop-scalar-six-pullback",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "def-sfb-coefficient-extension-integers-topology",
+  "def-sfb-continuous-sections-module",
+  "def-pd-section-derived-realization",
+  "def-sfb-continuous-map-condensed-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the arithmetic presentation, specified condensed arrows, rank-zero clause and quotient identification from perfectModelArithmetic_of_finite_integral, proved using the existing condensed-resolution theorem.",
+   "uses": [
+    "lem-sfb-integral-finite-scalar-arithmetic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply derivedAssertions_of_finite_integral_resolution to that short exact sequence and its two finite free identifications. Retain its normalized beta, pullback square and actual mate equality.",
+   "uses": [
+    "lem-sfb-finite-free-scalar-derived-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply finiteFreeScalarProjection to the same specified cone. The mate equality makes beta_Y followed by restricted gamma, restrictionPush, and R(beta_X inverse) invertible. Cancel the surrounding isomorphisms. Exact restriction reflects isomorphisms: ordinary restriction is conservative after forgetting the action, and its derived functor commutes with cohomology. Hence gamma is invertible. Assemble all data in PerfectModel without changing any interface or hypothesis.",
+   "uses": [
+    "lem-sfb-finite-free-scalar-projection"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-integral-finite-scalar-arithmetic",
+  "lem-sfb-finite-free-scalar-derived-comparison",
+  "lem-sfb-finite-free-scalar-projection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+  "place": "R2 decomposition: proved arithmetic resolution, normalized derived comparison, finite-cone projection; explicit conservative cancellation in Lean"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A continuous map from the integers of a finite l adic field to a finite ring gives a two term free condensed resolution and derived pushforward coefficient comparison",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Condensed.profiniteSolid\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor Profinite (CondensedMod R)\", \"doc\": \"The functor from the category of profinite spaces to the category of condensed $ R $-modules, defined as the right Kan extension of the embedding functor from finite types to profinite spaces along th\"}\n  {\"name\": \"Condensed.profiniteFree\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor Profinite (CondensedMod R)\", \"doc\": \"The functor from the category of profinite spaces to the category of condensed $ R $-modules, defined as the composition of the canonical inclusion functor from profinite spaces to condensed sets and \"}\n  {\"name\": \"CondensedMod.IsSolid.isIso_solidification_map\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"∀ {R : Type (u + 1)} {inst : Ring R} {A : CondensedMod R} [self : CondensedMod.IsSolid R A] (X : Profinite),\\n  CategoryTheory.IsIso ((CategoryTheory.yoneda.obj A).map ((Condensed.profiniteSolidification R).app X).op)\", \"doc\": \"For any profinite space $X$ and solid condensed $R$-module $A$, the morphism induced by the profinite solidification natural transformation at $X$, when mapped through the Yoneda embedding of $A$ (in \"}\n  {\"name\": \"CondensedMod.ofSheafProfinite\", \"module\": \"Mathlib/Condensed/Explicit\", \"type\": \"(R : Type (u + 1)) →\\n  [inst : Ring R] →\\n    (F : CategoryTheory.Functor Profiniteᵒᵖ (ModuleCat R)) →\\n      [CategoryTheory.Limits.PreservesFiniteProducts F] →\\n        CategoryTheory.regularTopology.EqualizerCondition F → CondensedMod R\", \"doc\": \"Given a functor $ F: \\text{Profinite}^\\\\text{op} \\\\to \\\\text{ModuleCat}\\\\, R $ that preserves finite products and satisfies the Equalizer Condition for the regular topology, this constructs the correspondi\"}\n  {\"name\": \"LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"∀ (R : Type u) [inst : Ring R] (M : ModuleCat R),\\n  CategoryTheory.IsIso\\n    ((LightCondensed.forget R).map\\n      ((LightCondensed.discreteUnderlyingAdj (ModuleCat R)).counit.app\\n        ((LightCondMod.LocallyConstant.functor R).obj M)))\", \"doc\": \"For any left $ R $-module $ M $, the morphism obtained by applying the forgetful functor from light condensed $ R $-modules to light condensed sets to the counit of the discrete-underlying adjunction \"}\n  {\"name\": \"Condensed.profiniteSolidification\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → Condensed.profiniteFree R ⟶ Condensed.profiniteSolid R\", \"doc\": \"The natural transformation from the profinite-free $ R $-module functor to the profinite-solid $ R $-module functor, constructed via the counit of the right Kan extension defining the profinite solid \"}\n  {\"name\": \"Condensed.profiniteSolidCounit\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → FintypeCat.toProfinite.comp (Condensed.profiniteSolid R) ⟶ Condensed.finFree R\", \"doc\": \"The natural transformation from the composition of the finite type to profinite space functor followed by the profinite solid module functor to the free condensed $ R $-module functor on finite types,\"}\n  {\"name\": \"CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R] (M : ModuleCat R),\\n  CategoryTheory.IsIso\\n    ((Condensed.forget R).map\\n      ((Condensed.discreteUnderlyingAdj (ModuleCat R)).counit.app ((CondensedMod.LocallyConstant.functor R).obj M)))\", \"doc\": \"For any left $ R $-module $ M $, the counit of the adjunction between discrete condensed modules and the underlying category, evaluated at the locally constant condensed module associated to $ M $, be\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state this canonical derived sheaf comparison or its full model/coherence assertions; source and types checked, including the second semantic phrasing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite torsion condensed modules over a complete discrete valuation ring have a bounded free model whose tensor commutes with derived sheaf direct image",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Condensed.finFree\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor FintypeCat (CondensedMod R)\", \"doc\": \"The functor from the category of finite types to the category of condensed $ R $-modules, constructed by composing the embedding of finite types into profinite spaces (via indiscrete topology), the in\"}\n  {\"name\": \"CondensedMod.IsSolid\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CondensedMod R → Prop\", \"doc\": \"A property of a condensed module $ M $ over a ring $ R $ indicating that $ M $ is solid, i.e., satisfies the defining conditions of solidity in the context of condensed mathematics.\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For a light condensed set $ P $, the free $ R $-module $ \\\\text{free}_R(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e : A \\\\to B\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal closed category. This structure arises from the adjunction between sheafification and inclusion functors,\"}\n  {\"name\": \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightProfinite),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P.toCondensed) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStr\", \"doc\": \"For a light profinite space $ P $, the free $ R $-module $ \\\\text{Free}(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e: A \\\\to B \"}\n  {\"name\": \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightProfinite),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P.toCondensed) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStr\", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light profinite space. The free light condensed $R$-module on the condensed set associated with $P$, denoted $\\\\mathcal{F}(P)$, is internally projective if an\"}\n  {\"name\": \"Condensed.profiniteFree\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor Profinite (CondensedMod R)\", \"doc\": \"The functor from the category of profinite spaces to the category of condensed $ R $-modules, defined as the composition of the canonical inclusion functor from profinite spaces to condensed sets and \"}\n  {\"name\": \"LightCondensed.instMonoidalLightCondSetLightCondModFree\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) → [inst : CommRing R] → (LightCondensed.free R).Monoidal\", \"doc\": \"For any commutative ring $ R $, the free module functor from the category of light condensed sets to the category of light condensed $ R $-modules is a monoidal functor. This means it preserves the te\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state this canonical derived sheaf comparison or its full model/coherence assertions; source and types checked, including the second semantic phrasing"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"extendScalars\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state this canonical derived sheaf comparison or its full model/coherence assertions; source and types checked, including the second semantic phrasing"
+  },
+  {
+   "tool": "grep",
+   "query": "(Condensed|SheafOfModules).*(resolution|KFlat)|projectionFormula|projection_formula",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state this canonical derived sheaf comparison or its full model/coherence assertions; source and types checked, including the second semantic phrasing"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived change from integral l adic coefficients to a finite ring is computed by a two term finite free resolution compatible with direct image",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      (M : Type u) →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] →\\n            [IsNoetherianRing R] →\\n              [Module.Finite R M] → TensorProduct R (AdicCompletion I R) M ≃ₗ[AdicCompletion I R] AdicCompletion I \", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is linearly equivalent to the \"}\n  {\"name\": \"AdicCompletion.sumEquivOfFintype_symm_apply\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Functoriality\", \"type\": \"(x : AdicCompletion I (⨁ j, M j)) : (sumEquivOfFintype I M).symm x = sumInv I M x\", \"doc\": \"For a commutative ring $ R $, ideal $ I $, finite index type $ \\\\iota $, and family of $ R $-modules $ \\\\{M_i\\\\}_{i \\\\in \\\\iota} $, the inverse of the linear equivalence between the $ I $-adic completion o\"}\n  {\"name\": \"ModuleCat.projectiveResolution\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.LeftResolution\", \"type\": \": LeftResolution (ObjectProperty.ι (isProjective (ModuleCat.{u} R)))\", \"doc\": \"For any ring $ R $ and left $ R $-module $ X $, the projective resolution is a left resolution constructed using the free module functor and the forgetful functor. It is defined by lifting the adjunct\"}\n  {\"name\": \"AdicCompletion.sumInv_comp_sum\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Functoriality\", \"type\": \": sumInv I M ∘ₗ sum I M = LinearMap.id\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, a finite index type $ \\\\iota $, and a family of $ R $-modules $ \\\\{M_i\\\\}_{i \\\\in \\\\iota} $, the composition of the linear equivalence between the $ I $-adic c\"}\n  {\"name\": \"IsAdicComplete.of_lift\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"(f : ∀ (n : ℕ), M →ₗ[R] N ⧸ (I ^ n • ⊤ : Submodule R N))\\n  (h : ∀ {m n : ℕ} (hle : m ≤ n), factorPow I N hle ∘ₗ f n = f m) (x : M) :\\n  of I N (lift I f h x) = AdicCompletion.lift I f h x\", \"doc\": \"The canonical $ R $-linear map sending each element $ m $ of an $ R $-module $ M $ to its image in the $ I $-adic completion of $ M $, defined as the inverse limit $ \\\\varprojlim M/I^nM $. This map con\"}\n  {\"name\": \"AdicCompletion.map_val_apply\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Functoriality\", \"type\": \"(f : M →ₗ[R] N) {n : ℕ} (x : AdicCompletion I M) : (map I f x).val n = f.reduceModIdeal (I ^ n) (x.val n)\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, $ R $-modules $ M $ and $ N $, and an $ R $-linear map $ f : M \\to N $, the induced linear map between the $ I $-adic completions of $ M $ and $ N $ satisf\"}\n  {\"name\": \"AdicCompletion.module\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      {M : Type u_3} →\\n        [inst_1 : AddCommGroup M] → [inst_2 : Module R M] → Module (AdicCompletion I R) (AdicCompletion I M)\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, and an $ R $-module $ M $, the $ I $-adic completion of $ M $ admits a scalar multiplication by the $ I $-adic completion of $ R $, making it a module ove\"}\n  {\"name\": \"AdicCompletion\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Type u_4\", \"doc\": \"The adic completion of an $ R $-module $ M $ with respect to an ideal $ I $ of a commutative ring $ R $ is the inverse limit of the quotient modules $ M/I^nM $, where $ I^n $ denotes the $ n $th power\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state this canonical derived sheaf comparison or its full model/coherence assertions; source and types checked, including the second semantic phrasing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a continuous map from the integers of a finite l adic field to a finite ring, the canonical derived coefficient change commutes with arbitrary direct image via a two term free resolution",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.piEquivFin\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) → (n : ℕ) → AdicCompletion I (Fin n → R) ≃ₗ[AdicCompletion I R] Fin n → AdicCompletion I R\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, and a natural number $ n $, this constructs a linear equivalence between the $ I $-adic completion of the product $ \\\\prod_{i=1}^n R $ (viewed as functions\"}\n  {\"name\": \"AdicCompletion.transitionMap_comp_reduceModIdeal\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] (f : M →ₗ[R] N) {m n : ℕ} (hmn : m ≤ n),\\n  AdicCompletion.transitionMap I N hmn ∘ₗ ↑R (LinearMap.reduceModIdeal (I ^ n) f\", \"doc\": \"For any $ R $-linear map $ f : M \\\\to N $ between modules over a commutative ring $ R $, and for natural numbers $ m \\\\leq n $, the composition of the transition map $ M/I^nM \\\\to M/I^mM $ with the reduc\"}\n  {\"name\": \"AdicCompletion.transitionMap_comp_eval\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_4) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {m n : ℕ} (hmn : m ≤ n), AdicCompletion.transitionMap I M hmn ∘ₗ AdicCompletion.eval I M n = AdicCompletion.eval I M m\", \"doc\": \"For natural numbers $m \\\\leq n$, the composition of the transition map $M/I^nM \\\\to M/I^mM$ with the evaluation map at level $n$ equals the evaluation map at level $m$. In other words, projecting an ele\"}\n  {\"name\": \"WittVector.factorPowSucc_comp_fontaineThetaModPPow\", \"module\": \"Mathlib/RingTheory/Perfectoid/FontaineTheta\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {p : ℕ} [inst_1 : Fact (Nat.Prime p)] [inst_2 : Fact ¬IsUnit ↑p]\\n  [IsAdicComplete (Ideal.span {↑p}) R] (n : ℕ),\\n  (Ideal.Quotient.factorPowSucc (Ideal.span {↑p}) (n + 1)).comp (WittVector.fontaineThetaModPPow R p (n + 1)) =\\n    WittVector.fontaineThetaModPPow R p \", \"doc\": \"For any natural number $n$, the composition of the canonical quotient homomorphism $R/(p^{n+2}) \\\\to R/(p^{n+1})$ with the Fontaine theta function $\\\\theta_{n+1}$ modulo $p^{n+1}$ equals the Fontaine th\"}\n  {\"name\": \"AdicCompletion.transitionMap_comp_eval_apply\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_4) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {m n : ℕ} (hmn : m ≤ n) (x : AdicCompletion I M), (AdicCompletion.transitionMap I M hmn) (↑x n) = ↑x m\", \"doc\": \"For natural numbers $ m \\\\leq n $ and any element $ x $ in the $ I $-adic completion of an $ R $-module $ M $, applying the transition map from $ M/I^nM $ to $ M/I^mM $ to the $ n $-th component of $ x\"}\n  {\"name\": \"AdicCompletion.eval_comp_of\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_4) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  (n : ℕ), AdicCompletion.eval I M n ∘ₗ AdicCompletion.of I M = (I ^ n • ⊤).mkQ\", \"doc\": \"For each natural number $n$, the composition of the evaluation map from the $I$-adic completion of $M$ to $M/I^nM$ and the canonical linear map from $M$ to its $I$-adic completion equals the canonical\"}\n  {\"name\": \"AdicCompletion.eval_lift\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ n • ⊤)\\n  (h : ∀ {m n : ℕ} (hle : m ≤ n), AdicCompletion.transitionMap I N hle ∘ₗ f n = f m\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, and $ R $-modules $ M $ and $ N $, given a compatible family of $ R $-linear maps $ f_n : M \\\\to N/I^nN $ satisfying $ \\\\text{transitionMap}_{m,n} \\\\circ f_n\"}\n  {\"name\": \"AdicCompletion.transitionMap_ideal_mk\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {m n : ℕ} (hmn : m ≤ n) (x : R),\\n  (AdicCompletion.transitionMap I R hmn) ((Ideal.Quotient.mk (I ^ n • ⊤)) x) = (Ideal.Quotient.mk (I ^ m • ⊤)) x\", \"doc\": \"For natural numbers $ m \\\\leq n $ and an element $ x \\\\in R $, the transition map from $ R/I^nR $ to $ R/I^mR $ sends the equivalence class of $ x $ modulo $ I^n $ to the equivalence class of $ x $ modu\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned types; completion coordinates, perfection, projective resolutions and light condensed internal projectivity do not supply the stated square condensed model and its actual unbounded geometric coefficient mate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite torsion module over a discrete valuation ring has a square free resolution, exact on continuous functions from profinite sets, whose tensor projection mate is invertible",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Profinite.NobelingProof.succ_exact\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Successor\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o : Ordinal.{u}},\\n  IsClosed C →\\n    ∀ (hsC : Profinite.NobelingProof.contained C (Order.succ o)) (ho : o < Ordinal.type fun x1 x2 => x1 < x2),\\n      {\\n          X₁ :=\\n            ModuleCat.of ℤ\\n              (Loc\", \"doc\": \"For a well-ordered set $ I $, a set $ C $ of Boolean-valued functions on $ I $, and an ordinal $ o $ less than the order type of $ I $, if $ C $ satisfies the containment condition with respect to $ \\\\\"}\n  {\"name\": \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightProfinite),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P.toCondensed) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStr\", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light profinite space. The free light condensed $R$-module on the condensed set associated with $P$, denoted $\\\\mathcal{F}(P)$, is internally projective if an\"}\n  {\"name\": \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightProfinite),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P.toCondensed) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStr\", \"doc\": \"For a light profinite space $ P $, the free $ R $-module $ \\\\text{Free}(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e: A \\\\to B \"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For a light condensed set $ P $, the free $ R $-module $ \\\\text{free}_R(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e : A \\\\to B\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal closed category. This structure arises from the adjunction between sheafification and inclusion functors,\"}\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S.toCondensed) ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light condensed $R$-module. $P$ is an internally projective object if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any ligh\"}\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj ((LightCondensed.free R).obj S.toCondensed) P ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring. A light condensed $R$-module $P$ is internally projective if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any light profinite space $S$\"}\n  {\"name\": \"Profinite.NobelingProof.CC_exact\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Successor\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o : Ordinal.{u}},\\n  IsClosed C →\\n    ∀ (hsC : Profinite.NobelingProof.contained C (Order.succ o)) (ho : o < Ordinal.type fun x1 x2 => x1 < x2)\\n      {f : LocallyConstant ↑C ℤ},\\n      (Profinite.NobelingProof.Linea\", \"doc\": \"In Nobeling's profinite construction, for any locally constant $\\\\mathbb{Z}$-valued function $f$ on $C$ satisfying $\\\\text{Linear}_{C\\\\to C'}(f) = 0$ (where $\\\\text{Linear}_{C\\\\to C'}$ denotes the $\\\\mathbb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned types; completion coordinates, perfection, projective resolutions and light condensed internal projectivity do not supply the stated square condensed model and its actual unbounded geometric coefficient mate"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"extendScalars\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned types; completion coordinates, perfection, projective resolutions and light condensed internal projectivity do not supply the stated square condensed model and its actual unbounded geometric coefficient mate"
+  },
+  {
+   "tool": "grep",
+   "query": "(Condensed|SheafOfModules).*(resolution|KFlat)|projectionFormula|projection_formula",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned types; completion coordinates, perfection, projective resolutions and light condensed internal projectivity do not supply the stated square condensed model and its actual unbounded geometric coefficient mate"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived coefficient comparison from integral l adic coefficients to a finite discrete ring is the perfect projection morphism on unbounded sheaf derived categories",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Perfection.map_apply_coe\", \"module\": \"Mathlib.RingTheory.Perfection\", \"type\": \"∀ {R : Type u₁} [inst : CommSemiring R] (p : ℕ) [hp : Fact (Nat.Prime p)] [inst_1 : CharP R p] {S : Type u₂}\\n  [inst_2 : CommSemiring S] [inst_3 : CharP S p] (φ : R →+* S) (f : Ring.Perfection R p) (n : ℕ),\\n  ↑((Perfection.map p φ) f) n = φ ((Perfection.coeff R p n) f)\", \"doc\": \"For any ring homomorphism $\\\\varphi: R \\\\to S$ between commutative semirings of prime characteristic $p$, and for any $p$-perfect sequence $(f_n) \\\\in \\\\mathrm{Perfection}(R, p)$, the $n$-th coefficient o\"}\n  {\"name\": \"Perfection.coeff_map\", \"module\": \"Mathlib.RingTheory.Perfection\", \"type\": \"(φ : R →+* S) (f : Ring.Perfection R p) (n : ℕ) : coeff S p n (map p φ f) = φ (coeff R p n f)\", \"doc\": \"For any ring homomorphism $\\\\varphi: R \\\\to S$ between commutative semirings of prime characteristic $p$, and for any $p$-perfect sequence $f$ in the perfection of $R$, the $n$-th coefficient of the ima\"}\n  {\"name\": \"AdicCompletion.kerProj\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        {A : Type u_4} →\\n          [inst_2 : CommRing A] →\\n            [inst_3 : Algebra R A] →\\n              [inst_4 : Algebra R S] →\\n                {f : S →ₐ[R] A} → Function.Surjective ⇑f → AdicCompletion\", \"doc\": \"Let $R, S, A$ be commutative rings, where $S$ and $A$ are algebras over $R$. For any surjective $R$-algebra homomorphism $f: S \\\\to A$, this definition constructs an $R$-algebra homomorphism from the a\"}\n  {\"name\": \"CategoryTheory.Abelian.coimageImageComparison'\", \"module\": \"Mathlib.CategoryTheory.Abelian.Images\", \"type\": \": Abelian.coimage f ⟶ Abelian.image f\", \"doc\": \"The canonical morphism from the coimage of a morphism $ f $ to its image in an abelian category, defined via the universal properties of kernels and cokernels.\"}\n  {\"name\": \"PreTilt.coeff\", \"module\": \"Mathlib.RingTheory.Perfection\", \"type\": \"(n : ℕ) : PreTilt O p →+* ModP O p\", \"doc\": \"For a commutative ring $ O $ and prime $ p $, the $ n $-th coefficient homomorphism maps each sequence $ (f_k) $ in the pretilt $ \\\\mathrm{PreTilt}(O, p) $ to its $ n $-th term $ f_n \\\\in O/p $, preserv\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.π'\", \"module\": \"Mathlib.CategoryTheory.Abelian.Projective.Extend\", \"type\": \": R.cochainComplex ⟶ (CochainComplex.singleFunctor C 0).obj X\", \"doc\": \"The morphism $\\\\pi'$ is constructed by first extending the canonical projection $\\\\pi$ from the projective resolution's cochain complex to the single-term complex at degree 0 via the embedding of the do\"}\n  {\"name\": \"DerivedCategory.instEssSurjCochainComplexIntQ\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": (Q : _ ⥤ DerivedCategory C).EssSurj\", \"doc\": \"The canonical localization functor from the category of cochain complexes with integer indices to the derived category is essentially surjective. This means that every object in the derived category i\"}\n  {\"name\": \"CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor\", \"module\": \"Mathlib.Condensed.Discrete.Module\", \"type\": \"(M : ModuleCat R) : IsIso ((forget R).map ((discreteUnderlyingAdj (ModuleCat R)).counit.app ((functor R).obj M)))\", \"doc\": \"For any left $ R $-module $ M $, the counit of the adjunction between discrete condensed modules and the underlying category, evaluated at the locally constant condensed module associated to $ M $, be\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned types; completion coordinates, perfection, projective resolutions and light condensed internal projectivity do not supply the stated square condensed model and its actual unbounded geometric coefficient mate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-prop-scalar-six-direct-image",
+  "date": "2026-10-22",
+  "group": "NM"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "blueprint": {
+  "from": {
+   "node": "det-prop-scalar-six-direct-image",
+   "place": "Current blueprint direct-image proof, Finite free and finitely presented coefficient extensions: square DVR resolution, condensed exactness and its finite-sums/cone projection argument; Formal properties: the actual mate under scalar restriction.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-integral-finite-scalar-perfect-model",
+  "worker": "stage1",
+  "summary": "Q133: complete nine-step split using existing nodes only; constructs the square DVR presentation, verifies topological kernel division and clopen lifts, transports the specified K-flat augmentation, computes the actual coefficient mate under restriction, and proves invertibility by the unit/finite-sums/cone route. Statement unchanged; no Lean or compiler invoked.",
+  "blueprint": "Realizes the integral-to-finite bullet and bounded finite-free complex paragraph of det-prop-scalar-six-direct-image in literature/blueprint/latest, and its formal-properties restriction/mate paragraph.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Valuation-ring DVR structure in step 1; no node of this unit proves the local-field algebra."
+   },
+   {
+    "node": "lem-pe-internal-module-sectionwise-short-exact",
+    "why": "Generic passage from sectionwise short exactness to condensed internal-module short exactness in step 2."
+   },
+   {
+    "node": "lem-weil-pbc-profinite-point-pullback",
+    "why": "Exact monoidal inverse image from the condensed point and coefficient composition coherence in steps 3 and 5."
+   },
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Exact tensor equivalence preserves flatness, K-flatness and total complexes, needed to use ring-sheaf results for internal coefficients."
+   },
+   {
+    "node": "lem-sfb-finite-free-mono-cokernel-kflat",
+    "why": "Generic K-flat cone resolution for a specified finite-free monomorphism and cokernel, not another coefficient-comparison route."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Unbounded resolving representatives for ordinary module-sheaf derived tensors."
+   },
+   {
+    "node": "lem-sf-ringed-derived-native-tensor",
+    "why": "Generic one-K-flat computation and normalized symmetric tensor constraints on arbitrary ringed sites."
+   },
+   {
+    "node": "lem-weil-pbc-total-tensor-homotopy-cone-signs",
+    "why": "Tensor by a K-flat complex preserves arbitrary quasi-isomorphisms; needed for the augmentation computation without flatness of A."
+   },
+   {
+    "node": "lem-pe-restricted-kflat-tensor-identification",
+    "why": "Scalar-first derived extension/restriction model for arbitrary ring sheaf maps."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Resolving-class localization makes the comparisons independent of representatives."
+   },
+   {
+    "node": "lem-pd-section-derived-pushpull-normalization",
+    "why": "Generic equivalence transport of the actual geometric derived adjunction and counit, not a claim about exceptional inverse image."
+   },
+   {
+    "node": "lem-pd-section-derived-tensor-normalization",
+    "why": "Generic normalization of the actual internal pullback tensor arrow by the ringed K-flat tensor arrow."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "Adjunct-compatible restriction/direct-image comparison and conservativity for arbitrary cartesian coefficient squares."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic exact shift-compatible projection mate with unit normalization, used in the finite-complex argument of this unit."
+   },
+   {
+    "node": "lem-weil-pbc-site-pullback-abelian-exact",
+    "why": "Exactness of the abelian inverse image pi_Z^{-1} in step 3 (reviewer repair); generic site lemma."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "Pullback of a flat-term K-flat resolution is again one, step 5 (reviewer repair); generic ringed-topos lemma."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Canonical derived tensor pullback isomorphism used in steps 5 and 7 (reviewer repair); generic ringed-topos lemma."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "why": "Ringed derived pullback of the section model, bridged to def-weil-pbc-proetale-operations in step 6 (reviewer repair)."
+   },
+   {
+    "node": "lem-pc-pre-derived-adjoint-functors-general",
+    "why": "Uniqueness of the derived adjunction bijection, bridging section-model and pro-etale-operations adjunctions in step 6 (reviewer repair)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-pe-internal-module-sectionwise-short-exact",
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-sfb-finite-free-mono-cokernel-kflat",
+  "lem-pc-kflat-resolution",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-weil-pbc-total-tensor-homotopy-cone-signs",
+  "lem-pe-restricted-kflat-tensor-identification",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pd-section-derived-pushpull-normalization",
+  "lem-pd-section-derived-tensor-normalization",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-pc-pre-derived-adjoint-functors-general"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q133-5fcfbd3fa",
+  "group": "Q133",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q133-5fcfbd3fa (reviewer sub-agent of L); spot-checked: I read the item in full. It is a first split of the NM-created child of det-prop-scalar-six-direct-image (step 4), with 0 new nodes and no repair note; statement and stmt_deps are byte-identical to the base, so no target is weakened. Source: the current blueprint direct-image proof (main-20261015, identical to latest), the paragraph on finite free and finitely presented coefficient extensions with its O_E→A bullet, and the paragraph on formal properties (restriction is conservative and commutes with Rf_*). The route is kept and no SGA is used. Step-by-step checks: Step 1: the DVR node plus the Smith Mathlib leaf; equal rank holds because ℓ^s e_r lies in N with nonzero e_r-coordinate in characteristic 0. Step 2: division by d_i is continuous and lifts are locally constant on clopen fibres; sectionwise-short-exact applies on profinite sets. Step 3: finite-free-mono-cokernel-kflat gives the specified augmentation, K-flatness and P = Cone(φ[0]). Step 4: tensoring with a K-flat complex preserves quasi-isomorphisms, used twice; restricted-kflat is applied with the tower O→1 O→a A. Step 5: θ_h = Q(χ_h)^{-1} is the iso of det-prop-scalar-six-pullback (1) (that node's step 2). Step 7: I recomputed the adjunct chain; it gives R(β_X^{-1}) d r_Y(γ) β_Y = adj((1⊗ε)μ), the projection α. Step 8: unit component 1, additivity, cone triangle, then the triangle-iso leaf. Step 9: reflection of isomorphisms. Edge cases: A=0, A=O/ℓ^n (not flat), a not surjective, f=id, empty scheme, unbounded K. No duplicate found by rg over the snapshot DAG. Three repairs, all C1/C3/E1, in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-integral-finite-scalar-perfect-model.json: (a) step 3: point-pullback gives exactness only for a^*, so I cited lem-weil-pbc-site-pullback-abelian-exact for π_Z^{-1}; (b) step 5: I added lem-weil-pbc-ringed-pullback-preserves-kflat (h^{-1}Q is again a flat-term K-flat resolution) and lem-weil-pbc-ringed-topoi-derived-tensor-pullback (the μ used in step 7); (c) step 6: ring-sheaf-change-adjunction is stated for the def-weil-pbc-proetale-operations adjunctions, not the section-model ringed ones, the same gap as Q03, Q84 and Q112. I added the bridge: both use the same exact tensor-formula pullback and K-injective direct images, so both adjunctions are the unique bijection of lem-pc-pre-derived-adjoint-functors-general (with lem-weil-pbc-ringed-topoi-derived-pullback cited as well). All six added nodes are already in the closure, with no cycle. proof_deps is updated and 5 tool_uses are added; I accept the 14 declared tools as generic. Batch 5: lem-pd-section-derived-pushpull-normalization and lem-pd-section-derived-tensor-normalization reach only section-module operation data, ringed tensor/adjunction normalizations, the abstract lem-pod-derived-exact-square-composition, and trf site-point and free-module generalities. lem-sfb-kflat-scalar-comparison-normalization reaches only lem-pod-derived-exact-square-composition and trf inverse-image generalities. None is a step of the Poincaré-duality or trace-formula proof, so all three are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralFiniteScalarPerfectModel",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralFiniteScalar.integralFiniteScalarPerfectModel",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IntegralFiniteScalar.integralFiniteScalarPerfectModel"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralFiniteScalarPerfectModel.lean",
+  "statement": "theorem integralFiniteScalarPerfectModel (ell : ℕ) [Fact ell.Prime] (E : Type u) [Field E] [Algebra (Padic ell) E] [FiniteDimensional (Padic ell) E] (A : Type u) [CommRing A] [Finite A] [TopologicalSpace A] [DiscreteTopology A] (a : Padic.coefficientExtensionIntegers ell E →+* A) (ha : @Continuous _ _ (Padic.coefficientExtensionIntegersTopology ell E) inferInstance a) (_hpow : ∃ n : ℕ, (ell : A) ^ n = 0) (D : ScalarSixPullbackData.{u}) : @PerfectModel (Padic.coefficientExtensionIntegers ell E) A inferInstance inferInstance (Padic.coefficientExtensionIntegersTopology ell E) inferInstance (by let := spectralNorm.normedField (Padic ell) E exact inferInstanceAs (IsTopologicalRing (Padic.coefficientExtensionIntegers ell E))) inferInstance a ha D",
+  "branch": "newtargets-dag",
+  "by": "Q80",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of returned head 5a4f436b2791, H2: condensedMap now bundles continuousMapRingObjMapOfUniverse and its IsMonHom certificate from the recorded definition node; the valuation-topology IsTopologicalRing instance is inlined using spectralNorm.normedField and inferInstanceAs. The two theorem-only statement dependencies are removed. The natural-language statement, proof, canonical-map normalizations and mathematical hypotheses are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ade22d9b1",
+  "group": "Q80",
+  "result": "pass",
+  "note": "Re-delivery of 5a4f RETURN H2, fully repaired. condensedMap is now CommMon.homMk of Profinite.continuousMapRingObjMapOfUniverse.{u,u} a ha with isMonHom_continuousMapRingObjMapOfUniverse, owned by def-sfb-continuous-map-condensed-ring-map (now a stmt_dep); it is sectionwise postcomposition, defeq to continuousCoefficientRingObj, no transport. The IsTopologicalRing instance is inlined (spectralNorm.normedField + inferInstanceAs), token-identical to the removed abbrev, a Prop, on the explicit valuation topology coefficientExtensionIntegersTopology. Theorem stmt_deps lem-sfb-finite-integral-condensed-resolution and lem-sfb-normed-coefficient-realization and their imports are removed. Snapshot diff vs 5a4f: only imports, condensedMap, one docstring line, the inlined instance and the stmt_deps swap; statement, proof, proof_deps and split_report byte-identical; lean.statement verbatim. Clause-by-clause maths of 5a4f reconfirmed (cone +phi in [-1,0], q_Z augmentation, QuasiIso, K-flat, beta pinned by AugmentationNormalized, gamma as A-adjunct of theta.inv then T_X(eps), d conjugate of theta, projection equation, IsIso for all f and unbounded K); edge cases A=0, O/l^n, f=id, empty schemes all covered. Nothing changed, nothing compiled. Advisories: public import of proof dep InternalSectionScalarAdjunction should be plain import; IsCommMonObj instance from maintenance module ContinuousCoefficientCommRing not owned by a cited node; both already in 5a4f."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b2512",
+  "group": "R2",
+  "result": "fix",
+  "landing": "20261025T202921-L-2766219",
+  "kind": "interface",
+  "note": "independent cc review: item Lean and node lem-sfb-integral-finite-scalar-perfect-model and its 4 new nodes against the clone's sheaf-dag versions: target signature unchanged, the 27 moved defs verbatim; the overwritten K8 FiniteFreeScalarProjection checked against FiniteFreeProjectionExchange:248 and lem-pur-finite-free-scalar-projection"
+ }
+}

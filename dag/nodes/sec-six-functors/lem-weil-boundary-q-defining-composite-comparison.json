@@ -19,7 +19,7 @@
  ],
  "proof": [
   {
-   "text": "Use the existing constant-coefficient comparison functor and its native leftDerivedTensorComparison. Its counit characterization computes it on K-flat pairs. The source and target derived braidings satisfy the native braiding_hom_mu_Qh formula. Cancel the target tensor counit (invertible when one factor is K-flat), apply the sheaf pullback braiding identity from doctrinal adjunction, and obtain braiding compatibility on K-flat representatives. Every derived object is isomorphic to such a representative by the existing kFlatMap left derivability structure; naturality extends the equality to arbitrary objects. Conjugate by leftDerivedFunctorIsoMapDerivedCategory to obtain both tensor naturality and signed-braiding compatibility for the exact comparison used in the statement. These are proved as private helpers from the native library API, rather than transported from a different ringed-module presentation.",
+   "text": "Use the existing native theorem CategoryTheory.Functor.leftDerivedFunctor_map_braiding_hom_δ for the canonical Koszul braiding DerivedCategory.braidedCategory'. Install that named braiding locally, as the current upstream API requires. For the exact comparisonUpperStar, the ordinary braiding hypothesis follows from doctrinal adjunction and the lax braided comparisonLowerStar. Conjugate the native leftDerivedTensorComparison braiding identity by leftDerivedFunctorIsoMapDerivedCategory to obtain signed-braiding compatibility for the exact comparison used in the statement. Prove its two-variable tensor naturality from leftDerivedTensorComparison_naturality_tensorHom and naturality of the exact/left-derived identification.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -68,7 +68,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-pf-proetale/thm-sf-pf-proetale.proof.md",
-  "place": "Comparison paragraph; the existing five-step inverse-projection calculation, with tensor naturality and signed symmetry proved directly from the native constant-coefficient derived-functor API."
+  "place": "Comparison paragraph; the existing five-step inverse-projection calculation, using the upstream native derived-functor braiding theorem and conjugation by the exact/left-derived identification."
  },
  "mathlib_searches": [
   {
@@ -227,13 +227,25 @@
   "note": "All clauses match the node with left-to-right composition: arrow compatibility, s and r (both tensor orders kept), the projection square, t_e, t_p and the conclusion. rho = pullbackSquare.symm, eta : C_Z⋙F_p ≅ F_e⋙C_T, both in the right direction; eta on unbounded D is needed for L⊗B. c is the canonical K-flat comparison of strong monoidal ν^*; σ is the Koszul β_ of DerivedCategory.braidedCategory (negOnePow sign); both projection maps are rightAdjointProjectionMap of the derived adjunction (def-kun record). IsIso only on π_e and π_p; no constructibility or Tor hypothesis. A : Type (u+1) matches the dependency records and the ULift citer. Statement verbatim; only the main theorem has sorry; helpers are real; source/blueprint docstrings and the five proof steps are present. Added stmt_dep def-weil-boundary-exceptional-comparison-data (landed, PASSed definition node) owns comparison/etaleImage/proetaleImage/pullbackSquare and does not reach the item (no cycle). No duplicate found. Advisory H9: two proof-only non-public imports. Nothing compiled (no file changed)."
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-23",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q7",
+  "group": "D4",
   "result": "pass",
-  "landing": "20261021T154048-L-2781595",
-  "kind": "interface",
+  "landing": "20261023T102533-L-2921015",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

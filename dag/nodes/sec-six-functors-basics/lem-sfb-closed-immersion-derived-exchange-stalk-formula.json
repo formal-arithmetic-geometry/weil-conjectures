@@ -1,0 +1,402 @@
+{
+ "id": "lem-sfb-closed-immersion-derived-exchange-stalk-formula",
+ "kind": "statement",
+ "title": "Stalk formula for the derived exchange mate along a closed immersion",
+ "statement": "Let $i:Z\\hookrightarrow X$ be a closed immersion of schemes and $f:X'\\to X$ any morphism [def-pc-scheme, def-weil-closed-immersion]. Form the cartesian square $Z'=Z\\times_X X'$ with projections $g:Z'\\to Z$ and $i':Z'\\hookrightarrow X'$ [def-pc-fibre-product]. Use the unbounded derived categories of structure-sheaf modules [def-pc-derived-category] and their derived functors [def-pc-derived-pullback, def-pc-derived-direct-image]. For $K\\in D(\\mathcal O_Z)$ let $\\beta_K:Lf^*Ri_*K\\to Ri'_*Lg^*K$ be the mate of $Li'^*Lf^*Ri_*K\\cong Lg^*Li^*Ri_*K\\to Lg^*K$, using the composition comparisons and the counit [lem-pc-ringed-spaces-derived-pullback-composition, lem-pc-ringed-spaces-derived-adjoint-general]. Stalks mean ordinary Zariski module stalks applied to complexes [def-pc-module-stalk-functor]. For $z'\\in Z'$ put $x'=i'(z')$, $z=g(z')$, $x=i(z)=f(x')$, $R=\\mathcal O_{X,x}$, $A=\\mathcal O_{Z,z}$, $B=\\mathcal O_{X',x'}$, and $C=\\mathcal O_{Z',z'}$, with all ring maps induced by the square. The canonical map $A\\otimes_R B\\to C$ is an isomorphism. There are natural isomorphisms in the unbounded derived category $D(B)$ of modules [def-weil-abstract-derived-category]\n$$ (Lf^*Ri_*K)_{x'}\\cong K_z\\otimes_R^{\\mathbf L}B,\\qquad (Ri'_*Lg^*K)_{x'}\\cong\\operatorname{Res}_{B\\to C}(K_z\\otimes_A^{\\mathbf L}C). $$\nUnder these isomorphisms the morphism $(\\beta_K)_{x'}$ is exactly the canonical ring comparison $K_z\\otimes_R^{\\mathbf L}B\\to K_z\\otimes_A^{\\mathbf L}(A\\otimes_R B)$ of [lem-pc-affine-derived-base-change-comparison-map], with its target restricted to $B$ and then identified using $A\\otimes_R B\\cong C$. If $x'\\notin i'(Z')$, both $(Lf^*Ri_*K)_{x'}$ and $(Ri'_*Lg^*K)_{x'}$ are zero objects. No Tor independence, boundedness or quasi-coherence is assumed.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0E23, lemma-compare-base-change-closed-immersion, proof: exact closed pushforward and the displayed stalk comparison, before invoking Tor independence. Stalk indices written with x and x prime for ambient points."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-ringed-spaces-derived-adjoint-general",
+  "def-pc-module-stalk-functor",
+  "def-weil-abstract-derived-category",
+  "lem-pc-affine-derived-base-change-comparison-map",
+  "def-pc-derived-base-change-map",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "def-sfb-derived-zariski-stalk-functor"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine neighbourhood $U=\\operatorname{Spec}R_0$ of $x$ and an affine neighbourhood $V=\\operatorname{Spec}B_0$ of $x'$ inside $f^{-1}U$. The affine description of a closed immersion gives $i^{-1}U=\\operatorname{Spec}(R_0/I)$. Apply the closed-ideal base-change diagram with structural morphism $\\mathrm{id}_X:X\\to X$, closed subscheme $i:Z\\to X$, and base change $f:X'\\to X$. Its affine clause gives $i'^{-1}V=\\operatorname{Spec}((R_0/I)\\otimes_{R_0}B_0)=\\operatorname{Spec}(B_0/IB_0)$ and $i'$ closed. By the affine stalk localization theorem, writing $\\mathfrak p,\\mathfrak q$ for $x,x'$, we obtain $R=(R_0)_{\\mathfrak p}$, $A=R/IR$, $B=(B_0)_{\\mathfrak q}$ and $C=B/IB$, compatibly with the induced maps. Indeed the prime of the quotient is $\\mathfrak q/IB_0$, so its local ring is $B/IB$, and the same applies to $A$. The canonical map $A\\otimes_R B\\to C$ sends $\\bar r\\otimes b$ to $rb\\bmod IB$; its inverse sends $b\\bmod IB$ to $1\\otimes b$. The tensor balancing relations make both maps well defined and inverse. Thus it is the asserted canonical isomorphism, with no localization factor left over. The same chart shows $i'(Z')=f^{-1}(i(Z))$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-sfb-closed-ideal-base-change-affine-diagram",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-spec-map-stalk-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JU (lemma-fibre-product-immersion), 01JQ (lemma-fibre-product-affines), 01HV (lemma-spec-sheaves); quotient-ring calculation"
+   }
+  },
+  {
+   "text": "Closed pushforward has stalks $\\operatorname{Res}_{\\mathcal O_{X,i(z)}\\to\\mathcal O_{Z,z}}M_z$ on the image, by the natural germ map of the closed-pushforward-stalk theorem, and zero stalks outside it. Scalar restriction preserves kernels and cokernels: the additive groups and the maps are unchanged. Hence this stalk formula and the stalkwise exactness criterion show that $i_*$ preserves exact sequences of module sheaves. The same argument applies to $i'_*$. Taking kernels and images degreewise shows that both termwise functors preserve quasi-isomorphisms. Consequently, for any representative $P$ of $K$, $Ri_*K$ is represented by $i_*P$: compare $P$ with a K-injective resolution in the definition of derived direct image and apply the exact functor $i_*$. Likewise $Ri'_*$ is termwise $i'_*$. These comparisons are the canonical derived direct-image comparisons, not arbitrary isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-closed-pushforward-stalks",
+    "lem-weil-pbc-module-stalk-exact",
+    "def-pc-ringed-spaces-derived-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0E23, lemma-compare-base-change-closed-immersion, first three sentences of proof; modules.tex Tag 01AX"
+   }
+  },
+  {
+   "text": "Choose a flat-term K-flat resolution $P$ representing $K$ on $Z$ and a flat-term K-flat quasi-isomorphism $s:E\\to i_*P$ on $X$, using the K-flat-resolution theorem twice. By the definition of derived pullback and step 2, $Lf^*Ri_*K$ is represented by $f^*E$, and $Ri'_*Lg^*K$ by $i'_*g^*P$. Pullbacks of these flat-term K-flat complexes are K-flat by the ringed-topos pullback theorem (applied to the small sites of opens). Let $u:i^*E\\to P$ be the ordinary adjunct of $s$, and define $v:f^*E\\to i'_*g^*P$ to be the ordinary adjunct of\n$$i'^*f^*E\\ \\cong\\ g^*i^*E\\ \\xrightarrow{g^*u}\\ g^*P.$$\nThe comparison in this display is the ordinary pullback composition isomorphism: by the comparison-is-iso theorem the canonical derived composition comparison is the left-derived lift of the composite pullback counits followed by the conjugate of the ordinary composition, so on the K-flat complex $E$ (where those counits are invertible) it is represented by this ordinary isomorphism. The absolute-derived-functor theorem for tensor pullback makes $Li^*$, $Lg^*$, $Li'^*$ total left derived functors of the ordinary pullbacks, with comparison $\\epsilon$ invertible on K-flat complexes; so the derived-adjunction counit formula applies, and it shows that $u$, after identifying $E$ with $i_*P$, represents the derived counit $Li^*Ri_*K\\to K$. Since $i^*E$ and $P$ are K-flat, $g^*u$ represents its image under $Lg^*$. Apply the same counit formula for $i'$: $v$ therefore represents the derived adjunct of exactly the composite defining $\\beta_K$. Thus $Q(v)=\\beta_K$ under the two model identifications. This computes the specified mate, rather than merely a morphism with the same endpoints.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-pc-derived-pullback",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-pc-ringed-space-tensor-pullback-underived",
+    "lem-sc-derived-adjunction-from-underived",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-ringed-spaces-derived-adjoint-general",
+    "lem-pc-ringed-space-tensor-pullback-absolute",
+    "lem-pc-derived-pullback-comparison-is-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 08HY (remark-base-change), 079W (lemma-adjoint), 0D5S (lemma-derived-pullback-composition); sites-cohomology.tex Tags 06YS and 0G7E"
+   }
+  },
+  {
+   "text": "Apply the exact stalk functors to these models. Exactness ensures that $s_x:E_x\\to(i_*P)_x=P_z$ is a quasi-isomorphism of $R$-complexes. The K-flat stalk criterion makes $E_x$ K-flat over $R$ and $P_z$ K-flat over $A$. The pullback stalk theorem, natural in the module and hence compatible with every differential, gives $(f^*E)_{x'}=E_x\\otimes_R B$ and $(g^*P)_{z'}=P_z\\otimes_A C$ as complex isomorphisms. The closed-pushforward stalk theorem for $i'$ identifies $(i'_*g^*P)_{x'}$ with the latter complex restricted along $B\\to C$. By the K-flat computation of derived tensor these are the two asserted isomorphisms in $D(B)$, valid for the entire complexes, not only their cohomology groups.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-pc-kflat-stalk-criterion",
+    "lem-weil-pbc-module-stalk-pullback",
+    "lem-weil-pbc-closed-pushforward-stalks",
+    "lem-pc-affine-derived-base-change-comparison-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0E23, displayed stalk comparison; cohomology.tex Tag 06YB; sheaves.tex Tags 0098 and 00AE"
+   }
+  },
+  {
+   "text": "Compute $v$ in these stalk coordinates. The pullback-unit germ formula sends $e\\in E_x$ to $e\\otimes1$. Adjunction sends $s$ to $u$, whose stalk map sends $e\\otimes a$ to $a\\,s_x(e)$. Pulling this map back by $g$ and using the composition comparison sends $(e\\otimes b)\\otimes c$ to $c\\,\\bar b\\,s_x(e)$, where $\\bar b$ is the image of $b$ in $C$. Taking the adjunct back along $i'$ therefore gives\n$$v_{x'}:E_x\\otimes_R B\\longrightarrow\\operatorname{Res}_{B\\to C}(P_z\\otimes_A C),\\qquad e\\otimes b\\longmapsto s_x(e)\\otimes\\bar b.$$\nThese formulas commute with the differentials because $s$ is a chain map and all other operations are scalar multiplication; the composition comparison simply reassociates the tensors. With $C=A\\otimes_R B$ from step 1, this is precisely $s_x\\otimes_R B$ followed by the balanced complex isomorphism $P_z\\otimes_R B\\cong\\operatorname{Res}(P_z\\otimes_A(A\\otimes_R B))$. The affine-derived-comparison node defines its canonical comparison by this very map for an $A$-K-flat representative $P_z$ and an $R$-K-flat resolution $E_x\\to P_z$. Step 3 identifies its localization with $(\\beta_K)_{x'}$, proving the asserted equality of derived morphisms. All ordinary stalk maps and units used here are natural. The canonical derived pullback and comparison are independent of the resolutions; hence these identifications and this equality are natural in $K$.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-pullback",
+    "lem-weil-pbc-closed-pushforward-stalks",
+    "lem-pc-ringed-space-tensor-pullback-underived",
+    "lem-pc-base-tensor-ordinary-iso",
+    "lem-pc-affine-derived-base-change-comparison-map",
+    "def-pc-derived-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0E23 proof; more-algebra.tex equation-comparison-map preceding Tag 0661; sheaves.tex Tag 0098"
+   }
+  },
+  {
+   "text": "Finally suppose $x'\\notin i'(Z')$. Step 1 gives $f(x')\\notin i(Z)$. By closed-pushforward stalks the complex $(i_*P)_{f(x')}$ is zero, so exact stalks make $E_{f(x')}$ acyclic. It is K-flat by the stalk criterion. The pullback stalk formula identifies $(f^*E)_{x'}$ with $E_{f(x')}\\otimes_{\\mathcal O_{X,f(x')}}\\mathcal O_{X',x'}$, which represents derived tensor of the zero object by step 4's K-flat computation and is therefore zero in the derived category. The target is represented by $i'_*g^*P$, whose stalk is already the zero complex off the closed image. This proves both zero-object assertions. No part of the argument assumed Tor independence, boundedness, or quasi-coherence.",
+   "uses": [
+    "lem-weil-pbc-closed-pushforward-stalks",
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-pc-kflat-stalk-criterion",
+    "lem-weil-pbc-module-stalk-pullback",
+    "def-pc-derived-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0E23 proof with off-image stalks made explicit; sheaves.tex Tag 00AE"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "lem-sfb-closed-ideal-base-change-affine-diagram",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-spec-map-stalk-localization",
+  "lem-weil-pbc-closed-pushforward-stalks",
+  "lem-weil-pbc-module-stalk-exact",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "lem-pc-kflat-resolution",
+  "def-pc-derived-pullback",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-pc-ringed-space-tensor-pullback-underived",
+  "lem-sc-derived-adjunction-from-underived",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-ringed-spaces-derived-adjoint-general",
+  "lem-pc-kflat-stalk-criterion",
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-pc-affine-derived-base-change-comparison-map",
+  "lem-pc-base-tensor-ordinary-iso",
+  "lem-pc-ringed-space-tensor-pullback-absolute",
+  "lem-pc-derived-pullback-comparison-is-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0E23 proof expanded before Tor independence, using Cohomology 08HY and More on Algebra equation-comparison-map; explicit mate and off-image calculations by NO"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Stalk formula for the canonical derived pullback direct image comparison of a closed immersion without flatness",
+   "results": "{\"t\": \"2026-10-23T20:00:02Z\", \"tool\": \"leanfinder\", \"query\": \"Stalk formula for the canonical derived pullback direct image comparison of a closed immersion without flatness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp_assoc\", \"AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp\", \"AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso\", \"AlgebraicGeometry.stalkMap_toStalk\", \"AlgebraicGeometry.stalkMap_toStalk_apply\", \"AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_hom_app\", \"AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_inv_app\", \"TopCat.Presheaf.stalkPullbackIso\"], \"digest\": \"292bc08a85dec9cb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary inverse-image stalks, open restriction, scheme stalk ring maps or ordinary closed-immersion base change; none identifies the unbounded derived exchange mate with the ring comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*[Dd]erived|[Dd]erived.*stalk|baseChange.*stalk|stalk.*baseChange",
+   "results": "{\"t\": \"2026-10-23T20:00:33Z\", \"tool\": \"grep\", \"query\": \"stalk.*[Dd]erived|[Dd]erived.*stalk|baseChange.*stalk|stalk.*baseChange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks.lean\", \"Mathlib/RingTheory/Flat/LocallyFree.lean\", \"Mathlib/RingTheory/Flat/Rank.lean\", \"Mathlib/RingTheory/Grassmannian.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\"], \"digest\": \"e9e44d2a9a213c73\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary inverse-image stalks, open restriction, scheme stalk ring maps or ordinary closed-immersion base change; none identifies the unbounded derived exchange mate with the ring comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a cartesian square of schemes with a closed immersion the stalk of the derived base change mate is the derived tensor comparison and vanishes off the closed image",
+   "results": "{\"t\": \"2026-10-23T20:00:34Z\", \"tool\": \"leansearch\", \"query\": \"In a cartesian square of schemes with a closed immersion the stalk of the derived base change mate is the derived tensor comparison and vanishes off the closed image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isPullback_of_isClosedImmersion\", \"AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso\", \"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.IsClosedImmersion.toSurjectiveOnStalks\", \"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion\", \"AlgebraicGeometry.isClosedImmersion_iff\"], \"digest\": \"1b237422962b204b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary inverse-image stalks, open restriction, scheme stalk ring maps or ordinary closed-immersion base change; none identifies the unbounded derived exchange mate with the ring comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-23T20:00:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"stalk\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"TopCat.Presheaf.stalkPullbackIso\", \"TopCat.Presheaf.stalkPullbackHom\", \"TopCat.Presheaf.stalkPullbackInv\", \"TopCat.Presheaf.germToPullbackStalk\", \"TopCat.Presheaf.germToPullbackStalk_stalkPullbackHom\", \"TopCat.Presheaf.germ_stalkPullbackInv\", \"TopCat.Presheaf.germToPullbackStalk_stalkPullbackHom_assoc\", \"TopCat.Presheaf.germ_stalkPullbackInv_assoc\"], \"digest\": \"105a69b17f330c83\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary inverse-image stalks, open restriction, scheme stalk ring maps or ordinary closed-immersion base change; none identifies the unbounded derived exchange mate with the ring comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a closed subscheme Z of X and arbitrary base change X prime the derived exchange map on local rings equals K stalk derived tensor over O X into O X prime to K stalk derived tensor over O Z into O Z prime",
+   "results": "{\"t\": \"2026-10-23T20:01:50Z\", \"tool\": \"leanfinder\", \"query\": \"For a closed subscheme Z of X and arbitrary base change X prime the derived exchange map on local rings equals K stalk derived tensor over O X into O X prime to K stalk derived tensor over O Z into O Z prime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo\", \"AlgebraicGeometry.Scheme.localRingHom_comp_stalkIso\", \"AlgebraicGeometry.Scheme.localRingHom_comp_stalkIso_apply\", \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo\", \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.SpecMap_tensorInl_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField\", \"AlgebraicGeometry.stalkMap_toStalk_apply\"], \"digest\": \"c6f017b17c8071e4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary inverse-image stalks, open restriction, scheme stalk ring maps or ordinary closed-immersion base change; none identifies the unbounded derived exchange mate with the ring comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The stalk of the derived base change mate along a closed immersion is the unbounded derived tensor comparison on local rings",
+   "results": "{\"t\": \"2026-10-23T20:23:43Z\", \"tool\": \"leanfinder\", \"query\": \"The stalk of the derived base change mate along a closed immersion is the unbounded derived tensor comparison on local rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.localRingHom_comp_stalkIso\", \"AlgebraicGeometry.localRingHom_comp_stalkIso_apply'\", \"AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp_assoc\", \"AlgebraicGeometry.Scheme.arrowStalkMapSpecIso\", \"AlgebraicGeometry.Scheme.localRingHom_comp_stalkIso\", \"AlgebraicGeometry.stalkMap_toStalk_apply\", \"AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp\", \"AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso\"], \"digest\": \"7df70fcf3c5c4209\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary stalk/ring maps, closed-immersion stability, open restriction or generic derived-category bounds; no theorem computes this unbounded structure-module exchange mate."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"derived\"",
+   "results": "{\"t\": \"2026-10-23T20:23:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"stalk\\\", \\\"derived\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary stalk/ring maps, closed-immersion stability, open restriction or generic derived-category bounds; no theorem computes this unbounded structure-module exchange mate."
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*[Dd]erived|[Dd]erived.*stalk|closedImmersion.*baseChange|baseChange.*closedImmersion",
+   "results": "{\"t\": \"2026-10-23T20:23:43Z\", \"tool\": \"grep\", \"query\": \"stalk.*[Dd]erived|[Dd]erived.*stalk|closedImmersion.*baseChange|baseChange.*closedImmersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\"], \"digest\": \"6bda3f84fe2b3be3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary stalk/ring maps, closed-immersion stability, open restriction or generic derived-category bounds; no theorem computes this unbounded structure-module exchange mate."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed immersion derived pullback pushforward exchange on stalks equals derived tensor base change without Tor independence",
+   "results": "{\"t\": \"2026-10-23T20:23:44Z\", \"tool\": \"leansearch\", \"query\": \"Closed immersion derived pullback pushforward exchange on stalks equals derived tensor base change without Tor independence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso\", \"AlgebraicGeometry.IsClosedImmersion.toSurjectiveOnStalks\", \"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"AlgebraicGeometry.IsOpenImmersion.instIsIsoCommRingCatStalkMap\", \"AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_inv_app\", \"AlgebraicGeometry.isPullback_of_isClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion\", \"AlgebraicGeometry.IsClosedImmersion.mk\"], \"digest\": \"9065137e835cd61d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary stalk/ring maps, closed-immersion stability, open restriction or generic derived-category bounds; no theorem computes this unbounded structure-module exchange mate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an arbitrary unbounded complex of module sheaves on a closed subscheme the derived exchange mate at a point is computed by a K flat resolution tensor map and is zero off the closed image",
+   "results": "{\"t\": \"2026-10-23T20:23:45Z\", \"tool\": \"leanfinder\", \"query\": \"For an arbitrary unbounded complex of module sheaves on a closed subscheme the derived exchange mate at a point is computed by a K flat resolution tensor map and is zero off the closed image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"DerivedCategory.right_fac_of_isStrictlyLE\", \"HomologicalComplex.isSupported_iff\", \"HomologicalComplex.IsSupportedOutside.exactAt\"], \"digest\": \"89ef02de39ccbba5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary stalk/ring maps, closed-immersion stability, open restriction or generic derived-category bounds; no theorem computes this unbounded structure-module exchange mate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-tor-independent-closed-pushforward-comparison",
+  "date": "2026-10-24",
+  "group": "Q54"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 2, Lemma 2.5 (printed pp.178--179), using Section 1, Corollary 1.5 and Lemma 1.6: multiplication and the pushforward exact sequences, retaining the twist by minus the old-marking divisor. Lemma 2.5, first paragraph and final evaluation: Corollary 1.5 supplies vanishing, base-flat direct images, arbitrary base change and generation for the five divisor modules. Corollary 1.5, printed p.167: the general cohomology-and-base-change tool whose conditions (1) and (2) the exceptional-fibre calculation must verify. General tool for Corollary 1.5: finite presentation of the acyclic image: detect pseudo-coherence by perfect tensor tests on V, using proper-support perfect direct image for U -> S. Supporting tool: 0CSL (lemma-characterize-pseudo-coherent). Supporting argument in Tag 0CSL: Tag 0CSJ, lemma-derived-chow, clauses (1)--(6); 0CSJ proof, arbitrary-base descent: the Tor-independent closed-immersion comparison on X times V. The closed-immersion comparison of Tag 0E23, after Tor independence is established, for arbitrary complexes on the closed subscheme. Supporting calculation: Tag 0E23 proof, the displayed stalk map before Tor independence is applied, and its zero stalks outside the closed image.",
+   "via": [
+    "lem-sfb-tor-independent-closed-pushforward-comparison",
+    "lem-sfb-relative-flat-closed-kernel-base-change",
+    "lem-sfb-derived-chow-neighbourhood",
+    "lem-sfb-pseudocoherent-tensor-relative-criterion",
+    "lem-sfb-perfect-tests-detect-pseudocoherence",
+    "lem-sfb-relative-acyclic-direct-image",
+    "lem-sfb-rational-contraction-line-cohomology",
+    "lem-sfb-elementary-contraction-evaluation",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-closed-immersion-derived-exchange-stalk-formula",
+  "worker": "stage1",
+  "summary": "Expanded the no-Tor part of Stacks 0E23 using existing geometry, exact-stalk, K-flat and derived-adjunction nodes. Explicit representative and germ computations identify the specified mate with the ring comparison. No new nodes and no statement change.",
+  "blueprint": "Realizes inherited det-thm-sf-ctf-stability-direct-images proof (3) tool chain through 0CSL, 0CSJ and 0E23. Read latest sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3). The inherited blueprint.from.node is null, as blueprint_refs.py ancestor reports; from.place already specifies the supporting calculation and is retained. No blueprint node states this structure-sheaf-module calculation.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-closed-ideal-base-change-affine-diagram",
+    "why": "Canonical affine quotient charts for the local ring calculation; same inherited 0CSJ/0E23 route. It is a generic tool; no unit-specific replacement supplies this fact."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Generic local-ring identification in affine opens, without changing the unit route. It is a generic tool; no unit-specific replacement supplies this fact."
+   },
+   {
+    "node": "lem-weil-pbc-spec-map-stalk-localization",
+    "why": "Identifies the actual structural stalk maps with the localized ring maps. It is a generic tool; no unit-specific replacement supplies this fact."
+   },
+   {
+    "node": "lem-weil-pbc-closed-pushforward-stalks",
+    "why": "Ordinary Zariski module stalk formula, needed for exactness and both endpoint models. It is a generic tool; no unit-specific replacement supplies this fact."
+   },
+   {
+    "node": "lem-weil-pbc-module-stalk-exact",
+    "why": "Exactness of ordinary module stalks and stalkwise exactness detection. It is a generic tool; no unit-specific replacement supplies this fact."
+   },
+   {
+    "node": "def-pc-ringed-spaces-derived-direct-image",
+    "why": "Definition of the K-injective derived direct image to compare with exact termwise pushforward. It is a generic tool; no unit-specific replacement supplies this fact."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Unbounded flat-term sheaf resolutions on Z and X. It is a generic tool; no unit-specific replacement supplies this fact."
+   },
+   {
+    "node": "def-pc-derived-pullback",
+    "why": "K-flat computation of structure-sheaf derived pullback. It is a generic tool; no unit-specific replacement supplies this fact."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "why": "Generic preservation of flat-term K-flat complexes under the small-open-site pullback. It is a generic tool; no unit-specific replacement supplies this fact."
+   },
+   {
+    "node": "lem-pc-ringed-space-tensor-pullback-underived",
+    "why": "Ordinary tensor adjunction used to construct the representative chain map. It is a generic tool; no unit-specific replacement supplies this fact."
+   },
+   {
+    "node": "lem-sc-derived-adjunction-from-underived",
+    "why": "Generic derived counit normalization required to identify the particular mate. It is a generic tool; no unit-specific replacement supplies this fact."
+   },
+   {
+    "node": "lem-pc-ringed-spaces-derived-pullback-composition",
+    "why": "Canonical derived composition comparison used in the definition of the mate. It is a generic tool; no unit-specific replacement supplies this fact."
+   },
+   {
+    "node": "lem-pc-ringed-spaces-derived-adjoint-general",
+    "why": "The unbounded ringed-space adjunction specifying the mate. It is a generic tool; no unit-specific replacement supplies this fact."
+   },
+   {
+    "node": "lem-pc-kflat-stalk-criterion",
+    "why": "Passage from sheaf K-flat resolutions to ring K-flat resolutions. It is a generic tool; no unit-specific replacement supplies this fact."
+   },
+   {
+    "node": "lem-weil-pbc-module-stalk-pullback",
+    "why": "Ordinary tensor stalk coordinates and the pullback-unit germ formula. It is a generic tool; no unit-specific replacement supplies this fact."
+   },
+   {
+    "node": "lem-pc-affine-derived-base-change-comparison-map",
+    "why": "Canonical ring comparison on arbitrary K-flat models, exactly the algebra calculation requested. It is a generic tool; no unit-specific replacement supplies this fact."
+   },
+   {
+    "node": "lem-pc-base-tensor-ordinary-iso",
+    "why": "Balanced complex isomorphism identifying the literal ring comparison target. It is a generic tool; no unit-specific replacement supplies this fact."
+   },
+   {
+    "node": "lem-pc-ringed-space-tensor-pullback-absolute",
+    "why": "Reviewer FIX: total left derived functor property of tensor pullback with comparison invertible on K-flat complexes, the hypothesis of the derived counit formula. Generic tool."
+   },
+   {
+    "node": "lem-pc-derived-pullback-comparison-is-iso",
+    "why": "Reviewer FIX: the canonical derived composition comparison is the left-derived lift of the ordinary pullback composition, so it is represented by the ordinary isomorphism on K-flat complexes. Generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-closed-ideal-base-change-affine-diagram",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-spec-map-stalk-localization",
+  "lem-weil-pbc-closed-pushforward-stalks",
+  "lem-weil-pbc-module-stalk-exact",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "lem-pc-kflat-resolution",
+  "def-pc-derived-pullback",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-pc-ringed-space-tensor-pullback-underived",
+  "lem-sc-derived-adjunction-from-underived",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-ringed-spaces-derived-adjoint-general",
+  "lem-pc-kflat-stalk-criterion",
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-pc-affine-derived-base-change-comparison-map",
+  "lem-pc-base-tensor-ordinary-iso",
+  "lem-pc-ringed-space-tensor-pullback-absolute",
+  "lem-pc-derived-pullback-comparison-is-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NO-cbb23c206",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-cbb23c206 (reviewer sub-agent of L); spot-checked: Read Stacks perfect.tex 0E23 (l.5337), the item, and all 18 cited statements plus 3 more (tensor-pullback-absolute, comparison-is-iso, comparison-coherence). There are 0 new nodes, and the statement and stmt_deps are unchanged. Step 1: closed-ideal affine diagram with T=X, f=id; A=R/IR, C=B/IB, A⊗_R B≅C; i'(Z')=f^{-1}(i(Z)). Step 2: closed-pushforward stalks and stalkwise exactness make i_* exact, so Ri_* is i_* of any representative. Step 3: I rechecked the mate via naturality of α and the counit formula ε'∘G'(β)=L(ε)∘α; E is needed because i_*P is not K-flat. Step 4: stalk K-flat models of K_z⊗^L_R B and K_z⊗^L_A C. Step 5: v_{x'}(e⊗b)=s_x(e)⊗b̄ equals the balanced iso of base-tensor-ordinary-iso after s_x⊗B, which is the comparison-map node's E⊗_R R'→P⊗_A A'. Step 6: an acyclic K-flat stalk gives zero, and the target stalk is literally 0. Tested i=id, Z=∅, the non-flat self-intersection k⊗^L_{k[t]_(t)}k (augmentation, not an isomorphism, so no hidden Tor use) and nilpotent thickenings. No duplicate: only the 0E23/0CSJ parent chain cites 0E23. The off-unit generic tools listed in split_report.tool_uses are accepted. FIX (C1/C4, one fault): step 3 applied the derived counit formula and identified the canonical composition comparison on K-flat models without citing the statements that give them. I added lem-pc-ringed-space-tensor-pullback-absolute (total left derived functor, ε invertible on K-flat complexes) and lem-pc-derived-pullback-comparison-is-iso (comparison = derived lift of the ordinary composition) to step 3 uses and proof_deps, with a sentence for each, plus two tool_uses entries. Fix file: fixes/dag/nodes/sec-six-functors-basics/<item>.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedImmersionDerivedExchangeStalkFormula",
+  "declaration": "AlgebraicGeometry.ClosedImmersionExchange.derived_exchange_stalk_formula",
+  "declarations": [
+   "AlgebraicGeometry.ClosedImmersionExchange.baseMap",
+   "AlgebraicGeometry.ClosedImmersionExchange.sourceModel",
+   "AlgebraicGeometry.ClosedImmersionExchange.targetModel",
+   "AlgebraicGeometry.ClosedImmersionExchange.actualTargetModel",
+   "AlgebraicGeometry.ClosedImmersionExchange.ringComparison",
+   "AlgebraicGeometry.ClosedImmersionExchange.stalkModel",
+   "AlgebraicGeometry.ClosedImmersionExchange.tensorMap",
+   "AlgebraicGeometry.ClosedImmersionExchange.derived_exchange_stalk_formula"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedImmersionDerivedExchangeStalkFormula.lean",
+  "statement": "theorem derived_exchange_stalk_formula [IsClosedImmersion i] : (∀ z' : Z', Function.Bijective (tensorMap i i' f g sq z') ∧ ∃ (d : targetModel i i' f g sq z' ≅ actualTargetModel i' g z') (s : DerivedCategory.Q ⋙ schemeDerivedDirectImage i ⋙ derivedPullback f ⋙ SingleComplexBaseChange.comparisonDerivedStalk X' (i' z') ≅ stalkModel g z' ⋙ sourceModel i i' f g sq z' ⋙ @DerivedCategory.Q _ _ _ (HasDerivedCategory.standard (ModuleCat.{u} (SingleComplexBaseChange.B i' z')))) (t : DerivedCategory.Q ⋙ derivedPullback g ⋙ schemeDerivedDirectImage i' ⋙ SingleComplexBaseChange.comparisonDerivedStalk X' (i' z') ≅ stalkModel g z' ⋙ actualTargetModel i' g z' ⋙ @DerivedCategory.Q _ _ _ (HasDerivedCategory.standard (ModuleCat.{u} (SingleComplexBaseChange.B i' z')))), (∀ (M : CochainComplex (ModuleCat.{u} (SingleComplexBaseChange.A g z')) ℤ) (n : ℤ) (b : SingleComplexBaseChange.B i' z') (p : ((RingTensorCohomology.resolution (SingleComplexBaseChange.A g z')).obj M).X n), (d.hom.app M).f n (b ⊗ₜ[SingleComplexBaseChange.R i g z', baseMap i i' f g sq z'] p) = ((i'.stalkMap z').hom b ⊗ₜ[SingleComplexBaseChange.A g z', (g.stalkMap z').hom] p)) ∧ ∀ M : CochainComplex (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) ℤ, s.hom.app M ≫ (ringComparison i i' f g sq z').app ((stalkModel g z').obj M) ≫ (@DerivedCategory.Q _ _ _ (HasDerivedCategory.standard (ModuleCat.{u} (SingleComplexBaseChange.B i' z')))).map (d.hom.app ((stalkModel g z').obj M)) = (SingleComplexBaseChange.comparisonDerivedStalk X' (i' z')).map (schemeDerivedBaseChangeMap i i' f g sq.w (DerivedCategory.Q.obj M)) ≫ t.hom.app M) ∧ ∀ (x' : X'), x' ∉ Set.range i' → ∀ K : schemeDerivedCategory Z, IsZero ((SingleComplexBaseChange.comparisonDerivedStalk X' x').obj ((derivedPullback f).obj ((schemeDerivedDirectImage i).obj K))) ∧ IsZero ((SingleComplexBaseChange.comparisonDerivedStalk X' x').obj ((schemeDerivedDirectImage i').obj ((derivedPullback g).obj K)))",
+  "branch": "sheaf-dag",
+  "by": "Q110",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Canonical exchange map, exact derived stalk and stalk-square coordinates reuse landed interfaces, added to stmt_deps. sourceModel and targetModel only specialize the existing functorial K-flat tensor models; ringComparison is selected from its unique span characterization. Natural isomorphisms after Q express the derived statement. The target transport to the actual C-stalk is fixed on pure tensors. Repair H2: the exact derived stalk and its four instances are now attached to def-sfb-derived-zariski-stalk-functor (existing upstream definitions), replacing the unused source-transport theorem node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7414e9b84",
+  "group": "Q110",
+  "result": "pass",
+  "note": "Re-delivery repairing H2 return of fcda0381. Lean module byte-identical to the returned head; item node differs only in stmt_deps (theorem lem-pc-stalk-comparison-source-transport replaced by new def-sfb-derived-zariski-stalk-functor) and lean.note. New def node: existing:true record of upstream comparisonDerivedStalk (= moduleStalkFunctor.mapDerivedCategory with standard stalk localization) plus 4 fully proved exactness instances, StalkComparisonSourceTransport.lean l.143-184; verbatim header; TeX matches Lean; stmt_deps = cited ids; §5 fields complete; source 0E23 + modules lemma-abelian read; no duplicate def node in live (def-sfb-left/right-derived-exact are comparison isos). Re-checked the item: schemeDerivedBaseChangeMap i i' f g sq.w direction/arguments; R,A,B,C stalk square; tensorMap bijective; s,t existential natural isos after Q as in node; d pinned on pure tensors; ringComparison = choose of ∃! in exists_affineDerivedBaseChangeComparison; derived-category square equality; off-image IsZero; no Tor/bounded/qcoh; universes OK; statement verbatim; single sorry; docstrings OK; Worker report and Second reading present. Note: new def node asserts exactness without citing lem-weil-pbc-module-stalk-exact (proof must be [] by §5; instances proved upstream). No compile (no file changed)."
+ }
+}

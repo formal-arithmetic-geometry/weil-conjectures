@@ -1,0 +1,315 @@
+{
+ "id": "lem-sfb-finite-coefficient-derived-exchange-identification",
+ "kind": "statement",
+ "title": "Finite coefficient realization identifies constructible witnesses and the specified derived exchange",
+ "statement": "Let $A$ be a finite discrete commutative ring and let $X'\\xrightarrow{a}X$, $C\\xrightarrow{c}Y$, $f:X\\to Y$, $f':X'\\to C$ be a chosen cartesian square of qcqs schemes [def-weil-pbc-cartesian-square]. Put $A_T=p_T^*\\underline A$. Use ordinary unbounded internal module derived categories with exact inverse images and ordinary derived direct images [sk-def-sfb-module-derived-pushpull, def-weil-size-convention]. Let\n$$E_T:D(\\operatorname{Mod}_{A_T})\\simeq D(T_{\\mathrm{pro\\acute et}},A)$$\nbe the termwise finite discrete coefficient equivalence [lem-sf-module-object-ordinary-coefficient-equivalence]. For every $L\\in D_{\\mathrm{ctf}}(X,\\underline A)$ [sk-def-sfb-constructible], there are $M\\in D^b_c(X_{\\mathrm{\\acute et}},A)$ and an isomorphism $\\nu_X^*M\\cong E_XL$, where $\\nu_X$ is site comparison [def-weil-pbc-site-comparison-morphism]; thus $E_XL$ carries an etale-origin witness [def-weil-pbc-etale-origin-witness].\nThe canonical comparisons identify the specified inverse-image/direct-image adjunctions under $E_T$, including their units, counits and pullback-composition maps. Consequently the following square commutes in the ordinary pro-etale derived category:\n$$\\begin{array}{ccc}E_C(c^*Rf_*L)&\\xrightarrow{E_C(\\operatorname{Ex}^{\\rm int}_L)}&E_C(Rf'_*a^*L)\\\\ \\downarrow\\wr&&\\downarrow\\wr\\\\ c^{-1}Rf_*E_XL&\\xrightarrow{\\operatorname{Ex}^{\\rm ord}_{E_XL}}&Rf'_*a^{-1}E_XL.\\end{array}$$\nBoth horizontal maps are the unit--canonical square--counit mates [def-weil-pbc-ambient-ringed-exchange], rather than arbitrarily chosen endpoint isomorphisms. The comparisons are natural in $L$. Properness and invertibility of either exchange are not assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "(2), finite-coefficient part of the closed-complement calculation; agent extraction of returned step 1, using the finite coefficient equivalence, constructible comparison, and exact-equivalence derived squares."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-module-derived-pushpull",
+  "def-weil-size-convention",
+  "def-weil-pbc-cartesian-square",
+  "lem-sf-module-object-ordinary-coefficient-equivalence",
+  "sk-def-sfb-constructible",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-etale-origin-witness",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-pbc-constructible-complexes",
+  "def-derived-cochain-right-unit"
+ ],
+ "proof": [
+  {
+   "text": "Put $K=E_XL$. The finite-coefficient equivalence identifies bounded constructible finite-Tor subcategories, so $K$ is bounded and each $\\mathcal H^i(K)=E_X\\mathcal H^i(L)$ ($E_X$ is termwise exact) has, on each stratum of a finite stratification of the qcqs scheme $X$ by constructible locally closed subschemes, a pro-etale cover on which it is $A_U\\otimes_AP$ with $P$ a finitely presented $A$-module. Since $A$ is finite, $P$ is a finite $A$-module and $A_U\\otimes_AP$ is the constant sheaf with value $P$, so the restriction to each stratum is locally constant with finite stalks; thus $K$ has bounded intrinsically constructible cohomology in the sense used by the origin theorem, with the same vanishing interval. Apply the arbitrary-finite-ring derived origin theorem to obtain $M\\in D^b_c(X_{\\mathrm{\\acute et}},A)$ and $\\alpha:\\nu_X^*M\\xrightarrow{\\sim}K$. Retain this pair, which is the required etale-origin witness. Finite Tor amplitude is not needed for this existence assertion.",
+   "uses": [
+    "lem-sf-module-object-ordinary-coefficient-equivalence",
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "def-weil-pbc-etale-origin-witness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AL, lemma-compare-constructible-derived; coefficient translation through the cited equivalence"
+   }
+  },
+  {
+   "text": "Factor the underived realization as section-action reconstruction, change of ring by the finite constant-ring identification, and constant-scalar restriction. Internal operation transport identifies the first factor with the section-ring geometric adjunction. For the ring change, the coefficient-sections equality says that the ring isomorphisms commute with the adjunct coefficient maps for each edge $u$. Restriction of an action therefore sends $r\\cdot m$ to the same action on $u_*M$ in either order; inverse image is its adjunction mate. Constant-scalar geometric adjunctions identify the last factor: their normalization hypothesis holds because the coefficient-sections equality takes every constant $a\\in A$ to the same constant $a$. Composing gives natural comparisons $e_Vu^*_{\\rm int}\\cong u^{-1}e_T$ and $e_Tu_{*,\\rm int}\\cong u_*e_V$ identifying the ordinary Hom bijections, hence units and counits. Here $u:V\\to T$ and $e$ denotes the heart equivalence whose termwise extension is $E$.",
+   "uses": [
+    "lem-sf-module-object-ordinary-coefficient-equivalence",
+    "lem-sfb-internal-module-operations-transport",
+    "lem-weil-pbc-finite-discrete-coefficient-sections",
+    "lem-sfb-constant-scalar-geometric-adjunctions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi (6); sites-modules.tex Tag 03D7, lemma-adjoint-pullback-pushforward-modules; coefficient-sections normalization"
+   }
+  },
+  {
+   "text": "Apply compatible derived squares under exact equivalences to the ordinary comparisons of Step 2. This gives natural isomorphisms $b_u:E_T Ru_{*,\\rm int}\\xrightarrow{\\sim}Ru_*E_V$ commuting with the right-derived comparison units, and the termwise pullback comparisons $a_u:E_Vu^*_{\\rm int}\\xrightarrow{\\sim}u^{-1}E_T$. To verify that these identify the independently specified derived adjunctions, apply the exact adjoint-square comparison theorem with $V=e_V$, $W=e_T$, $L=u^*_{\\rm int}$, $L_0=u^{-1}$. Both left adjoints are exact by the conventions of the item and the heart comparison. The additional right-derived hypothesis is supplied by the preceding exact-equivalence derived square, including its universal pair and comparison unit. The theorem gives, for every $N$, $E_V(\\varepsilon_{u,N})=\\varepsilon^{\\rm ord}_{u,E_VN}\\circ u^{-1}(b_{u,N})\\circ a_{u,Ru_*N}$ and the corresponding unit equation. Thus the comparisons preserve the actual derived units and counits on all unbounded objects.",
+   "uses": [
+    "lem-derived-exact-equivalence-squares",
+    "lem-kun-derived-adjoint-square-comparison",
+    "sk-def-sfb-module-derived-pushpull"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09T5, lemma-derived-adjoint-functors; canonical exact-equivalence square and adjoint-square tools"
+   }
+  },
+  {
+   "text": "The ordinary direct-image compositor has the underlying sheaf composition map. Each direct-image comparison of Step 2 is identity on that same sheaf; hence the two composites around its comparison square are equal on every section. The internal pullback compositor is by definition the unique conjugate of this direct-image compositor under the specified adjunctions. On the ordinary side, the derived pullback compositor $c_{h,k}$ entering $\\theta_\\square$ is the class of the termwise canonical comparison of module pullbacks [lem-weil-pbc-proetale-derived-pullback-composition] (on K-flat complexes with flat terms, to which every object is isomorphic, so the natural isomorphism is determined there); that canonical comparison of composite left adjoints is the unique isomorphism carrying the single pullback unit to the two successive units [lem-weil-pbc-conjugate-iso-unit-equation], i.e. the conjugate of the ordinary identity-on-sections direct-image compositor. Since Step 2 identifies their Hom bijections, it identifies these conjugates as well. Pullback is exact, so apply the equality termwise to complexes and then localize: the exact-functor factorization uses these termwise representatives without resolutions. This proves compatibility of the derived pullback-composition maps. In particular, after the $a_u$ comparisons, the internal square map $\\theta_\\square:f'^*c^*\\to a^*f^*$ becomes precisely the ordinary square map $f'^{-1}c^{-1}\\to a^{-1}f^{-1}$ for the chosen equality $fa=cf'$.",
+   "uses": [
+    "def-sfb-module-lower-star-comp",
+    "def-sfb-module-upper-star-comp",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D8, lemma-push-pull-composition-modules; termwise localization of the geometric compositor"
+   }
+  },
+  {
+   "text": "Write $s_L:E_C(c^*Rf_*L)\\xrightarrow{\\sim}c^{-1}Rf_*E_XL$ for $a_c$ followed by $c^{-1}b_f$, and $t_L:E_C(Rf'_*a^*L)\\xrightarrow{\\sim}Rf'_*a^{-1}E_XL$ for $b_{f'}$ followed by $Rf'_*(a_a)$. By the exchange definition, the internal arrow is $\\eta_{f'}$, followed by $Rf'_*(\\theta_\\square)$, followed by $Rf'_*a^*(\\varepsilon_f)$. Substitute the unit and counit equations of Step 3 and the square equation of Step 4 in this three-factor composite. Naturality moves the $a_u,b_u$ past the intervening factors; consecutive inverse comparisons cancel. The resulting equality is\n$$t_L\\circ E_C(\\operatorname{Ex}^{\\rm int}_L)=\\bigl(Rf'_*a^{-1}(\\varepsilon^{\\rm ord}_{f,E_XL})\\circ Rf'_*(\\theta^{\\rm ord}_{\\square,Rf_*E_XL})\\circ\\eta^{\\rm ord}_{f',c^{-1}Rf_*E_XL}\\bigr)\\circ s_L=\\operatorname{Ex}^{\\rm ord}_{E_XL}\\circ s_L.$$\nThis is the requested commutative square. All factors used are natural transformations, so the equality is natural in $L$. The calculation uses neither properness nor invertibility of a horizontal arrow.",
+   "uses": [
+    "def-weil-pbc-ambient-ringed-exchange"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "(2), finite-coefficient normalization of the actual exchange; explicit substitution in its defining mate"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-module-lower-star-comp",
+  "def-sfb-module-upper-star-comp",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "def-weil-pbc-etale-origin-witness",
+  "lem-derived-exact-equivalence-squares",
+  "lem-kun-derived-adjoint-square-comparison",
+  "lem-sf-module-object-ordinary-coefficient-equivalence",
+  "lem-sfb-constant-scalar-geometric-adjunctions",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-finite-discrete-coefficient-sections",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "sk-def-sfb-module-derived-pushpull"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "(2), finite-coefficient part of the closed-complement calculation; explicit assembly from existing coefficient, origin and normalized adjoint-square tools."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite discrete coefficient equivalence transports the proetale derived base change mate and constructible complexes to etale origin",
+   "results": "CondensedMod.isDiscrete_tfae; CondensedSet.isDiscrete_tfae; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; LightCondMod.isDiscrete_tfae; CategoryTheory.Equivalence.transportAndSheafify; AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme; Algebra.FormallyEtale.of_equiv; CategoryTheory.Equivalence.transportIsoSheafToPresheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: discrete condensed modules and ordinary sheaf adjunctions do not identify this pro-etale derived module-object mate or give the constructible witness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived base change transformation for internal modules over finite condensed coefficients equals the ordinary sheaf exchange under the coefficient equivalence",
+   "results": "CondensedMod.ofSheafCompHaus; CompHausLike.LocallyConstantModule.functor_map_val; CondensedMod.LocallyConstant.functorToPresheaves; Condensed.profiniteSolid; CondensedMod.ofSheafProfinite; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; LightCondensed.free_internallyProjective_iff_tensor_condition'; LightCondensed.free_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-22",
+   "verdict": "no match: discrete condensed modules and ordinary sheaf adjunctions do not identify this pro-etale derived module-object mate or give the constructible witness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact equivalences of sheaf module categories identify derived adjunction units counits and base change morphisms",
+   "results": "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app; SheafOfModules.pushforwardSections_unitHomEquiv; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; SheafOfModules.pushforwardPushforwardAdj; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.pushforwardCongr",
+   "date": "2026-10-22",
+   "verdict": "no match: discrete condensed modules and ordinary sheaf adjunctions do not identify this pro-etale derived module-object mate or give the constructible witness"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, DerivedCategory",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: discrete condensed modules and ordinary sheaf adjunctions do not identify this pro-etale derived module-object mate or give the constructible witness"
+  },
+  {
+   "tool": "grep",
+   "query": "(baseChange|exchange|etaleOrigin|constructible).*(equiv|Equiv|transport)|condensed.*finite",
+   "results": "Mathlib/CategoryTheory/GuitartExact/KanExtension.lean:188 | directory CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: discrete condensed modules and ordinary sheaf adjunctions do not identify this pro-etale derived module-object mate or give the constructible witness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite discrete coefficient realization identifies derived adjunction units counits and the base change exchange map",
+   "results": "CondensedMod.LocallyConstant.adjunction; LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor; LightCondMod.LocallyConstant.adjunction; CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor; Condensed.profiniteSolidCounit; Condensed.freeForgetAdjunction; LightCondensed.freeForgetAdjunction; ModuleCat.RestrictionCoextensionAdj.counit'",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf adjunctions, discrete condensed modules and algebraic base change do not state the combined unbounded internal-coefficient exchange and constructible-witness assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, DerivedCategory",
+   "results": "",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf adjunctions, discrete condensed modules and algebraic base change do not state the combined unbounded internal-coefficient exchange and constructible-witness assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact equivalence between internal finite coefficient modules and ordinary proetale sheaves preserves derived base change mates",
+   "results": "IsBaseChange.finitePow; CategoryTheory.Equivalence.precoherent_isSheaf_iff; IsBaseChange.finrank_eq; CategoryTheory.Presheaf.coherentExtensiveEquivalence_inverse_map_val; CategoryTheory.Presheaf.coherentExtensiveEquivalence_inverse_obj_val; LinearEquiv.coe_baseChange; CategoryTheory.Equivalence.sheafCongrPrecoherent; IsBaseChange.toDualBaseChange",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf adjunctions, discrete condensed modules and algebraic base change do not state the combined unbounded internal-coefficient exchange and constructible-witness assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*(equiv|Equiv)|constructible.*(equiv|Equiv)|[Ee]xchange",
+   "results": "Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean; Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean; Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean; Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean; Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean; Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean; Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean; Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean | directory CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf adjunctions, discrete condensed modules and algebraic base change do not state the combined unbounded internal-coefficient exchange and constructible-witness assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact equivalences of abelian sheaf module categories transport unbounded right derived direct images and their adjunctions compatibly with base change mates",
+   "results": "SheafOfModules.pushforwardPushforwardAdj; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.instIsRightAdjointPushforward; SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous; SheafOfModules.pushforwardNatIso; CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.Functor.sheafAdjunctionCocontinuous; SheafOfModules.instAbelian",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf adjunctions, discrete condensed modules and algebraic base change do not state the combined unbounded internal-coefficient exchange and constructible-witness assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qcqs-proper-constructible-closed-base-change",
+  "date": "2026-10-22",
+  "group": "Q145"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms, det-sf-comp-coherence-refinement (2): finite discrete coefficients, etale-origin witness and normalization of the actual ambient exchange (returned step 1).",
+   "via": [
+    "lem-sfb-qcqs-proper-constructible-closed-base-change",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-finite-coefficient-derived-exchange-identification",
+  "worker": "stage1",
+  "summary": "Split into five steps using existing nodes only: arbitrary-finite-ring origin, normalized heart comparison, canonical derived adjoint square, geometric compositor, and explicit mate substitution. Statement unchanged; no new node or Lean attachment.",
+  "blueprint": "det-sf-comp-coherence-refinement (2), finite-coefficient closed-complement argument: supplies the constructible etale witness and identifies the actual ordinary ambient exchange invoked there. Nearest imported ancestor remains det-sf-comp-coherence-cocycle.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-module-object-ordinary-coefficient-equivalence",
+    "why": "Finite-coefficient section-action equivalence and its constructible subcategories; generic coefficient tool, not a compactification-coherence replacement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "why": "Generic arbitrary-finite-ring site comparison; no node of this unit supplies bounded constructible origin for arbitrary finite rings."
+   },
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Generic internal-to-section module adjunction comparison, used only for its ordinary pullback/direct-image clause."
+   },
+   {
+    "node": "lem-weil-pbc-finite-discrete-coefficient-sections",
+    "why": "Generic constant-section coefficient naturality for each geometric edge."
+   },
+   {
+    "node": "lem-sfb-constant-scalar-geometric-adjunctions",
+    "why": "Generic constant-ring to fixed-scalar adjunction comparison for small ringed topoi."
+   },
+   {
+    "node": "lem-derived-exact-equivalence-squares",
+    "why": "Generic compatible universal derived squares; supplies actual right-derived comparison units."
+   },
+   {
+    "node": "lem-kun-derived-adjoint-square-comparison",
+    "why": "Generic normalized exact adjoint-square theorem; supplies unit and counit identities, not a geometric base-change theorem."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic termwise localization of exact functors, used to localize the ordinary compositor equality."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Generic ordinary ringed derived pullback compositor entering the ambient exchange's square map; used only for its termwise description."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-module-object-ordinary-coefficient-equivalence",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-weil-pbc-finite-discrete-coefficient-sections",
+  "lem-sfb-constant-scalar-geometric-adjunctions",
+  "lem-derived-exact-equivalence-squares",
+  "lem-kun-derived-adjoint-square-comparison",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-proetale-derived-pullback-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q145-17c329917",
+  "group": "Q145",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q145-17c329917 (reviewer sub-agent of L); spot-checked: I read all five steps against the statements of the nodes they cite, plus the sources: blueprint det-sf-comp-coherence-refinement.proof (2), Stacks 09AK/09AL (proetale.tex lines 5239/5357) and 03D8 (sites-modules.tex line 1236). There are no new nodes and the statement is unchanged; no SGA is used. Step 2 is correct: the coefficient-sections equality gives exactly the constant-scalar hypothesis of constant-scalar-geometric-adjunctions. Step 3 checks every hypothesis of the kun adjoint-square theorem (exact left adjoints, exact equivalences e_V and e_T, the right-derived hypothesis via the derived-square isomorphism). Step 5 is a correct mate substitution. Two repairs, written to fixes/dag/nodes/sec-six-functors-basics/<item>.json. (1) Step 1 went from the coefficient equivalence's fixed-scalar 'ordinary local model' constructibility to the origin node's locally-constant, finite-stalk constructibility (def-weil-proetale-constructible-sheaf) without saying why. The step now spells it out: X is qcqs, so the stratification is global; P finitely presented over a finite A is finite; A_U⊗P is the constant sheaf P; E_X is exact, so it keeps the cohomology sheaves and the interval. (2) C4: Step 4 said the ordinary pullback compositor is the conjugate of the direct-image compositor without citing it. It now cites lem-weil-pbc-proetale-derived-pullback-composition (the compositor that enters θ_□) and lem-weil-pbc-conjugate-iso-unit-equation (uniqueness of the unit-compatible isomorphism). Step 4 is now marked non-elementary, proof_deps are recomputed and one tool_use is added; there is no cycle. lem-pd-section-derived-pushpull-normalization overlaps the section-action factor but does not duplicate the item. I accept the declared tool_uses as generic coefficient and category tools.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteCoefficientDerivedExchangeIdentification",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.finiteCoefficientDerivedExchangeIdentification",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.Encoding.derivedFunctor",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.internalPull",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.internalPush",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.ordinaryPull",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.ordinaryPush",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.Encoding.heart",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.forgetAb",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.Encoding.underlyingIso",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.internalAdj",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.ordinaryAdj",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.Encoding.factors",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.internalRightUnit",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.ordinaryRightUnit",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.DerivedEdgeComparison",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.compositionCompatible",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.exchangeSourceIso",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.exchangeTargetIso",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.internalCompIso",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.ordinaryCompIso",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.internalExchange",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.ordinaryExchange",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.finiteCoefficientDerivedExchangeIdentification"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteCoefficientDerivedExchangeIdentification.lean",
+  "statement": "theorem finiteCoefficientDerivedExchangeIdentification [Finite A] [DiscreteTopology A] (E : ∀ T : Scheme.{u}, Encoding A T) {X' X C Y : Scheme.{u}} {a : X' ⟶ X} {f' : X' ⟶ C} {f : X ⟶ Y} {c : C ⟶ Y} [CompactSpace X'] [QuasiSeparatedSpace X'] [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace C] [QuasiSeparatedSpace C] [CompactSpace Y] [QuasiSeparatedSpace Y] (sq : ChosenCartesianSquare a f' f c) : (∃ (df : DerivedEdgeComparison A (E X) (E Y) f) (dc : DerivedEdgeComparison A (E C) (E Y) c) (da : DerivedEdgeComparison A (E X') (E X) a) (df' : DerivedEdgeComparison A (E X') (E C) f') (daf : DerivedEdgeComparison A (E X') (E Y) (a ≫ f)) (dfc : DerivedEdgeComparison A (E X') (E Y) (f' ≫ c)), compositionCompatible A da df daf ∧ compositionCompatible A df' dc dfc ∧ ∀ L : DerivedCategory (Internal A X), (E C).derivedFunctor.map ((internalExchange A sq).app L) ≫ (exchangeTargetIso A da df').hom.app L = (exchangeSourceIso A df dc).hom.app L ≫ (ordinaryExchange A sq).app ((E X).derivedFunctor.obj L)) ∧ (∀ L : ConstantModelConstructibleFiniteTor (coefficient A) X, ∃ h : DerivedCategory.TStructure.t.plus ((E X).derivedFunctor.obj L.obj), ∃ W : Scheme.FixedEtaleOriginWitness X (ULift.{u + 1} A) ⟨(E X).derivedFunctor.obj L.obj, h⟩, Etale.DerivedCategory.isBoundedConstructible (ULift.{u + 1} A) X W.complex.obj)",
+  "branch": "newtargets-dag",
+  "by": "Q119",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The statement uses the recorded normalized Encoding and its actual termwise fixedDerived functor. Owned helpers only name the existing derived functors and assemble their normalization equations; they choose no arbitrary comparison. DerivedEdgeComparison retains identity on underlying heart sections, the right-derived unit, and both actual derived-adjunction units/counits. Both pullback-composition paths and the actual mate rectangle are stated. FixedEtaleOriginWitness retains the antecedent/isomorphism pair, and its antecedent is required to be bounded constructible. Additional stmt_deps name the already landed bounded-constructible predicate and cochain right-unit construction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0c3f8ee15",
+  "group": "Q119",
+  "result": "pass",
+  "note": "Read item node, all 12 stmt_deps with lean records, module, report, and dependency Lean (Encoding/fixedDerived, condensedAmbientExchange, ProEtale.derivedBaseChangeMap/leftDerivedUpperStarComp, FixedEtaleOriginWitness, ConstantModelConstructibleFiniteTor, isBoundedConstructible, rightDerivedFunctorUnit). Hypotheses: finite discrete comm ring, ChosenCartesianSquare, CompactSpace+QuasiSeparatedSpace at four corners; universes kept. E_T canonical: Encoding fixes ringIso on constants and both forward functors; fixedDerived depends only on the functor. DerivedEdgeComparison is fully pinned: heartDirect by the identity-on-underlying-Ab-sheaf equation (forgetAb faithful), direct by direct_normalization against the actual right-derived unit, inverse by the unit equation; counit equation as in Step 3. compositionCompatible uses the published internal and ordinary compositors for both square paths. Source/target vertical isos match Step 5 (a_c then c^*b_f; b_f' then Rf'_*a_a). Both horizontal maps are mateEquiv of comp^-1, congr sq.w, comp. Origin clause: ∀ ctf L, retained FixedEtaleOriginWitness with bounded-constructible antecedent. Records: only lean+stmt_deps changed (two landed def nodes added, allowed); statement verbatim; 22 decls present; docstrings with 5 steps; no line >100; only sorry is the theorem proof; no H4 duplicate; live has no lean or module for the item. Advisories: square stated for all unbounded L (stronger, as the proof gives); ordinary maps come from upstream fixed-scalar declarations not owned by stmt_deps (same mate construction); identification is per square edge. No recompile (no file changed)."
+ }
+}

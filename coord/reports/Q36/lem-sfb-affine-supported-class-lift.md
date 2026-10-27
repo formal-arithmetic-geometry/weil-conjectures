@@ -1,0 +1,42 @@
+# Stage-1 delivery: lem-sfb-affine-supported-class-lift
+
+1. Files written:
+   - dag/nodes/sec-six-functors-basics/lem-sfb-affine-supported-class-lift.json: item, seven proof steps; no Mathlib match.
+   - dag/nodes/sec-six-functors-basics/lem-sfb-affine-open-finite-cover-cohomology-bound.json: statement-only dependency; no Mathlib match.
+   - citations.json: exact statement quotations for all step citations.
+2. Attachments: none for the item. ProjectiveTwistFiniteCohomology.lean:380 contains a PRIVATE finite_affine_cover_cohomology_bound with a more general separated-over-affine input, as reference material for the new dependency; it is not a public interface or a Mathlib declaration. QuasicoherentFiniteCohomologicalDimension.lean:105 states only existence of a bound over a field. Neither declares the item.
+3. WANTED: none. All proof sources used are present locally.
+4. The item statement is unchanged and is true. Its source is Tag 08E3, with the cover-size generality justified by the first sentence of that source's proof. The finite principal-open cover used for the Koszul construction can have a different number of members from the given affine cover. The proof deliberately calls these r and s. The blueprint provenance has a null nearest imported-node ancestor (tools/blueprint_refs.py ancestor agrees); the inherited long chain and exact place are retained. The latest blueprint unit at literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/_section.md was read, as were the chapter and unit records. This is a lower-level generic affine approximation tool; it does not replace the six-functor route. No unit record is edited.
+5. Unfinished mathematical work in this delivery: the one new dependency is intentionally unsplit, as required for one-level splitting. The full item proof is supplied.
+
+## Searches and reuse
+
+Searched the entire DAG by Koszul, cohomology-class, finite-affine-cover, 01XI, 08D4 and the exact source label, and the imported blueprint with blueprint_refs.py search (Koszul; represent cohomology; hypercohomology; affine vanishing; finite affine; 01XI). Read all relevant matching statements. Reused the existing Koszul-open system, eventual-zero restriction result, canonical-triangle result, geometric Koszul properties, both Hom exactness lemmas, the unbounded cohomological bound, the standard t-structure, stalk detection, affine quasi-coherent comparison, structure-sheaf Hom identification, and spectrum compactness/basis results.
+
+Searched WeilConjectures by the item id, supported-class and perfect-support notions, and Koszul/finite-cover terms. No declaration states all of the item. The relevant existing Koszul declarations address its ingredients only. Mathlib queries were run exclusively through msearch.py, in two concept phrasings for the item and two for the new dependency, with LeanFinder, Loogle, grep and LeanSearch. Their exact records are preserved from searches.jsonl in mathlib_searches. No service failure was recorded as absence. Search hits concern structure-section zero detection, covers, abstract cocycles, derived fractions and local-cohomology diagrams, not either required theorem.
+
+## Not duplicates
+
+lem-sfb-affine-open-finite-cover-cohomology-bound vs lem-sc-picard-qcoh-finite-cd: the existing 01XI node assumes a field and states existence of an unspecified d_X. The new statement has no field and needs the sharp, specified bound p >= s from the given cover, including the empty cover. Existence of d_X cannot yield this bound. No other node with source Tag 01XI was found.
+
+## Review by Q36
+
+I read perfect.tex, lemma-represent-cohomology-class-on-closed (08E3), including its preceding Koszul triangle and the proof of proposition-represent-cohomology-class-on-open (08DD). I read coherent.tex, lemma-vanishing-nr-affines (01XI), both proofs: the alternating complex has no increasing (p+1)-tuples when p >= s. The statement-only new dependency is precisely the open-of-affine specialization of that bound. Such an open is separated, hence has affine diagonal as required by 01XI. If s=0 its space is empty and all section and cohomology groups are zero. I also read perfect.tex, lemma-application-nice-K-injective (08D4), especially its upper bound (3). There is no boundedness assumption on E hidden in that tool.
+
+Step 1 uses the statements of lem-pc-derived-structure-sheaf-hom-hypercohomology and lem-sc-qcoh-acyclic-derived-sections-comparison, not the proof of the affine equivalence node. The latter comparison applies to id_Y: its direct-image functor is the identity, and it is qcqs. It gives the natural affine H^0 comparison exactly as needed, so c defines psi without assuming pseudo-coherence.
+
+Step 2 uses pqf-lem-sheaf-zero-stalks on each restricted cohomology sheaf, the explicit standard truncation triangle, the new 01XI bound, and the existing 08D4 upper-bound statement. I checked N=s, b=-s: b+N-1=-1, so degree zero vanishes. Products of module sheaves are sectionwise, hence Gamma commutes with countable products. The other triangle term B is in degrees >=1; standard t-structure orthogonality kills Hom(O_U,B), and lem-weil-pbc-hom-into-triangle-exact says precisely that every map into the middle object whose composite with the second map is zero factors through the first. The resulting Hom(O_U,R)=0 kills the restricted morphism, not merely its image in Gamma(U,H^0(R)). The empty complement is handled separately. This step is 1243 characters, with every non-elementary input cited.
+
+Step 3 is the elementary finite-subcover argument from the statements of spectrum quasi-compactness and the principal-open basis. Each original affine is compact; a finite union is compact by explicitly collecting finite subcovers. Then compactness extracts finitely many basis members contained in U. I read def-sc-koszul-open-system to verify it introduces exactly the tails, full complexes, maps and powers used. This proof does not say that the original s affine opens are principal or that r=s.
+
+Step 4 uses the existing eventual-zero node for phi=psi u_1. Its hypothesis is zero restriction of this map, not zero restriction of E; step 2 gives exactly that hypothesis. The canonical-triangle/open-class node explicitly states that the comparison maps commute with the augmentations, so the later composite really is psi u_e. I avoided the stronger supported-object augmentation-vanishing node, whose E|_U=0 hypothesis is unavailable here.
+
+Step 5 cites the canonical distinguished triangle from lem-sc-affine-perfect-open-represent-cohomology and the contravariant Hom exactness clause of lem-weil-pbc-hom-out-of-triangle-exact. These give a with a v_e=psi, with the correct directions. No cone-filling or functorial-cone assumption is used.
+
+Step 6 applies the geometric Koszul statement to the actual tuple f_i^e, which gives perfection and every stalk-support clause. The positive exponent is essential: D(f_i^e)=D(f_i) for e>=1. The actual Koszul complex is in nonpositive cochain degrees by its definition, and the affine derived equivalence states its associated-sheaf image lies in D_QCoh. No regular sequence hypothesis is used. Step 7 defines b by the same natural bijection as step 1 and computes its image using a v_e=psi; both cited statements explicitly provide naturality.
+
+I tested s=0 (T=Y, empty tuple gives K=O_Y), U=empty with a redundant positive cover count, T=empty (the support condition forces the chosen Koszul object acyclic and c=0), the zero ring/empty Y, a principal complement, non-Noetherian A, and complexes unbounded below or above. The negative unbounded tail is precisely why 08D4 is cited. The new dependency works for repeated opens and non-minimal covers. The seven steps are all below 2000 characters; no long inline comparison lemma was hidden. B1-B10 and C1-C8 were checked against the actual node statements: the only new node is self-contained, carries no proof, has the definition dependencies it needs, and is smaller than the item. D1-D5 are avoided by keeping the Koszul factorization argument in the item rather than creating a class-lift restatement. E1-E7 were checked through the hypotheses and edge cases above. No statement correction or SGA source was needed.
+
+## Validation
+
+The required deliver.py --no-push completed successfully with server preflight passed: OK (not pushed), candidate commit 01125aa9493. All DAG, split-review, search-log and citation gates passed. This report update is included in the final dry run before push.

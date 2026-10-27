@@ -1,0 +1,116 @@
+{
+ "id": "lem-pur-finite-smooth-ordinary-twisted-cocycles",
+ "kind": "statement",
+ "title": "Ordinary root-tensor and purity-source quotient cocycles",
+ "statement": "Let $\\ell$ be prime and $f:X\\to Y$ compactifiable, quasi-compact, separated and locally of finite type, smooth of relative dimension $d$, between Noetherian schemes, with $\\ell$ invertible on $Y$. For each positive quotient $A_r\\to A_m$ let twists(r,m) be a generator-normalized CoefficientLineComparison of [def-pur-finite-smooth-coefficient-arrows]. Assume the ordinary pullback comparisons satisfy QuotientCocycle with the actual ordinaryAssociator for all positive triples and every input. Then (i) their ordered shifted d-fold root-line tensor comparisons obey the ordinary twist cocycle, and (ii) the fixed finiteLambda comparisons for finiteSource of [def-pur-finite-smooth-canonical-maps] obey QuotientCocycle on bounded constructible finite-Tor inputs. No pro-etale cocycle or compact-support assertion is included.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+  "place": "Part (3), scalar/tensor and root-line constituents before site transport."
+ },
+ "stmt_deps": [
+  "def-pur-finite-smooth-coefficient-arrows",
+  "def-pur-finite-smooth-canonical-maps"
+ ],
+ "proof": [
+  {
+   "text": "the maps of root sheaves compose because their composites with the kernel\ninclusion into G_m are the power maps with exponents ell^(r-m) and ell^(m-n).\nThe product exponent is ell^(r-n), including equal indices. The kernel inclusion\nis monic. Transpose the scalar-extended root-line sheaf maps under scalar\nextension/restriction. Their values on every scalar/root generator coincide by\ngenerators and the root calculation; the tensor universal property followed by\nsheafification gives equality. The single-sheaf derived normalization transports\nthis equality to derivedIso. Scalar extension preserves the flat root lines,\nso the normalized scalarSingleMap composition is tensor balancing on these\nrepresentatives, even for nonflat coefficient quotients. Induct on d in\nCoefficientLineComparison.tensorPower: d=0 is scalar unit associativity; the\nsuccessor uses scalar tensor associativity, the induction hypothesis, and the\nshift comparison. The latter is the mate of the exact restriction shift, whose\ncomposition is literal on complexes. This proves the first conclusion.\nFor the second, expand finiteLambda and pullbackTwistComparison. The tensor\ncoefficient-composition square follows on flat-term K-flat representatives:\nboth maps send c tensor (b tensor (x tensor y)) to the same balanced tensor,\nwith identical total-complex signs. Localize and use naturality of the scalar\ntensorator. Substitute hpull and the first conclusion in its two factors.\nFunctoriality of the derived tensor bifunctor and naturality of the final scalar\nassociator give exactly QuotientCocycle for finiteSource. The argument is valid\non every input, hence on the stated bounded constructible finite-Tor inputs.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-asd-etale-finite-twist-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+  "place": "Part (3), scalar/tensor and root-line constituents before site transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "composition coherence of derived extension of scalars with pullback tensor products and adjunction mates",
+   "results": "Eight hits include CategoryTheory.mateEquiv_square, Bicategory.mateEquiv_square, Adjunction.isMonoidal_comp and pullback unit/counit composition. They provide generic mate pasting, not the root-normalized finite smooth or pro-etale-origin equations.",
+   "date": "2026-10-27",
+   "verdict": "Reuse generic mate pasting and existing source-library coefficient chains; no exact statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherence of derived scalar extension composition with pullback and tensor product",
+   "results": "ModuleCat.extendScalarsComp and extendScalars_assoc normalize ordinary module tensors. They do not state the displayed derived small-site or transported cocycles.",
+   "date": "2026-10-27",
+   "verdict": "Reuse scalar normalization; no exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "Adjoint-uniqueness composition and unit/counit lemmas exist; they supply categorical normalization, not the full finite smooth cocycle.",
+   "date": "2026-10-27",
+   "verdict": "Use adjunction pasting rather than arbitrary comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarPullback_chain|CompactSupportCocycle|tensorIso.*comp",
+   "results": "Remote Mathlib grep returned Mathlib/CategoryTheory/Monoidal/Functor.lean, not this geometric cocycle. Additional local rg reads of FiniteSmoothCoefficientArrows, ExceptionalCoefficientComparison, FiniteCoefficientDirectImage, EtaleCompactScalarCoherence, FiniteReductionSystemCoherence, CompactSupportQuotientCocycle and OpenScalarCoefficientCoherence found no theorem directly supplying this step. The blueprint_refs search for reduction compatibilities found det-sp-reduction-compatibilities, whose proof supplies the argument.",
+   "date": "2026-10-27",
+   "verdict": "A missing proper subargument of the existing plan, with canonical definitions retained."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteSmoothQuotientCoherence",
+  "date": "2026-10-27",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "nt-target-smooth-purity-qbar",
+   "place": "Part (3), scalar/tensor and root-line constituents before site transport.",
+   "via": [
+    "lem-pur-finite-smooth-quotient-coherence",
+    "lem-pur-finite-smooth-adjunction-general-base",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteSmoothOrdinaryTwistedCocycles",
+  "file": "lean/Sheaf/Paper/FiniteSmoothOrdinaryTwistedCocycles.lean",
+  "declaration": "AlgebraicGeometry.Etale.FiniteSmoothPurity.finiteSmoothOrdinaryTwistedCocycles",
+  "statement": "theorem finiteSmoothOrdinaryTwistedCocycles\n    (ell : ℕ) [Fact ell.Prime]\n    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]\n    (f : X ⟶ Y) [HasCompactification f] [QuasiCompact f] [IsSeparated f]\n    [LocallyOfFiniteType f] (d : ℕ) [SmoothOfRelativeDimension d f]\n    (hY : ∀ y : Y, IsUnit (ell : Y.presheaf.stalk y))\n    (twists : ∀ (r m : ℕ) (_hm : 1 ≤ m) (hmr : m ≤ r),\n      CoefficientLineComparison (FiniteReduction.quotient ell hmr) (ell ^ r) (ell ^ m)\n        (CharP.cast_eq_zero _ _) (CharP.cast_eq_zero _ _) X)\n    (hpull : (∀ (r m n : ℕ) (_hn : 1 ≤ n) (hnm : n ≤ m) (hmr : m ≤ r)\n    (K : DerivedCategoryModule (coefficient ell r) Y),\n    QuotientCocycle\n      (ordinaryScalar (FiniteReduction.quotient ell hmr) Y)\n      (ordinaryScalar (FiniteReduction.quotient ell hnm) Y)\n      (ordinaryScalar (FiniteReduction.quotient ell (hnm.trans hmr)) Y)\n      (ordinaryScalar (FiniteReduction.quotient ell hmr) X)\n      (ordinaryScalar (FiniteReduction.quotient ell hnm) X)\n      (ordinaryScalar (FiniteReduction.quotient ell (hnm.trans hmr)) X)\n      (ordinaryAssociator Y ell hmr hnm)\n      (ordinaryAssociator X ell hmr hnm)\n      ((ordinaryFinitePullback (coefficient ell r) f))\n      ((ordinaryFinitePullback (coefficient ell m) f))\n      ((ordinaryFinitePullback (coefficient ell n) f))\n      (ordinaryPullbackMap (FiniteReduction.quotient ell hmr) f)\n      (ordinaryPullbackMap (FiniteReduction.quotient ell hnm) f)\n      (ordinaryPullbackMap (FiniteReduction.quotient ell (hnm.trans hmr)) f) K)) :\n  (∀ (r m n : ℕ) (hn : 1 ≤ n) (hnm : n ≤ m) (hmr : m ≤ r),\n    (ordinaryScalar (FiniteReduction.quotient ell hnm) X).map\n        ((twists r m (hn.trans hnm) hmr).tensorPower d).hom ≫\n      ((twists m n hn hnm).tensorPower d).hom =\n    (ordinaryAssociator X ell hmr hnm).hom.app\n        (line (coefficient ell r) (ell ^ r) (CharP.cast_eq_zero _ _) X d) ≫\n      ((twists r n hn (hnm.trans hmr)).tensorPower d).hom) ∧\n  (∀ (r m n : ℕ) (hn : 1 ≤ n) (hnm : n ≤ m) (hmr : m ≤ r)\n    (K : DerivedCategoryModule (coefficient ell r) Y),\n    DerivedCategory.boundedConstructibleFiniteTor (coefficient ell r) Y K →\n    QuotientCocycle\n      (ordinaryScalar (FiniteReduction.quotient ell hmr) Y)\n      (ordinaryScalar (FiniteReduction.quotient ell hnm) Y)\n      (ordinaryScalar (FiniteReduction.quotient ell (hnm.trans hmr)) Y)\n      (ordinaryScalar (FiniteReduction.quotient ell hmr) X)\n      (ordinaryScalar (FiniteReduction.quotient ell hnm) X)\n      (ordinaryScalar (FiniteReduction.quotient ell (hnm.trans hmr)) X)\n      (ordinaryAssociator Y ell hmr hnm)\n      (ordinaryAssociator X ell hmr hnm)\n      (finiteSource ell r f d)\n      (finiteSource ell m f d)\n      (finiteSource ell n f d)\n      (finiteLambda ell hmr f d (twists r m (hn.trans hnm) hmr))\n      (finiteLambda ell hnm f d (twists m n hn hnm))\n      (finiteLambda ell (hnm.trans hmr) f d (twists r n hn (hnm.trans hmr))) K)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261027T094430-L-225251",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261027T094430-L-225251",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

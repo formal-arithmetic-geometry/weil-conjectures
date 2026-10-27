@@ -1,0 +1,172 @@
+{
+ "id": "lem-sf-native-open-tensor-localization",
+ "kind": "statement",
+ "title": "Localization of the native open tensor representatives",
+ "statement": "Fix a finite field $k_0$, a prime $\\ell\\ne\\operatorname{char}(k_0)$ and an open immersion $j:U\\to Z$ between separated finite-type $k_0$-schemes. Use the native framework of [def-sf-native-weil-derived-framework], tensor and K-flat predicates of [def-sf-derived-weil-category-and-operations], generic presentations of [def-sf-generic-open-tensor-presentation], concrete operations of [def-sf-native-open-tensor-operations], and native comparison data of [def-sf-native-open-tensor-presentation-data]. For every native sheaf tensor datum $s$, there exist natural derived restriction/tensor and open tensor isomorphisms $\\rho,\\gamma$ and an OpenTensorPresentation $c$. Its extension, restriction, sheaf tensors, total tensors, derived tensors, K-flat predicates, tensor models and summand insertions are exactly the actual native ones. Its sheaf comparisons equal those of $s$, and its derived comparisons equal $\\rho,\\gamma$. All chain summand and K-flat representative normalization squares are those required by OpenTensorPresentation. In Lean these comparisons are pinned by eighteen heterogeneous equalities. No unit-transpose or ordinary-forgetting conclusion is included.",
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-sf-derived-weil-category-and-operations",
+  "def-sf-generic-open-tensor-presentation",
+  "def-sf-native-open-tensor-operations",
+  "def-sf-native-open-tensor-presentation-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0GL1, lemma-j-shriek-and-tensor; Tag 06YN; native parent proof steps 3--6"
+ },
+ "proof": [
+  {
+   "text": "Apply the fixed sheaf comparisons s.sheafGamma and s.sheafRestriction and their inverses in every bidegree, with the actual native tensor and open operations. The signed differential on degree (p,q) is dx tensor y + (-1)^p x tensor dy in both orders. Coproducts are created by forgetting Weil structures. Hence the maps assemble to chain isomorphisms whose every summand is the prescribed sheaf map. The ordinary total-complex theorem gives exactly this direct-sum convention.",
+   "uses": [
+    "lem-sf-ringed-open-total-tensor-kflat",
+    "lem-sf-fixed-pair-created-abelian-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 0E8I (lemma-j-shriek-and-tensor), 03DJ (lemma-extension-by-zero-exact), 03D8 (lemma-push-pull-composition-modules); native equivariant refinement by Q85"
+   }
+  },
+  {
+   "text": "Use the equivariant flat-term K-flat resolution theorem on the twisted action site. Its finite-subextension coefficients agree with the native locally-finite-span coefficient functions: finitely many spanning values generate a finite subextension, and a quasi-compact test object requires finitely many neighborhoods. Their finite compositum gives the identification. By the K-flat preservation fields of s, extension and restriction send these resolutions to K-flat representatives of the exact open functors.",
+   "uses": [
+    "lem-sf-weil-frobenius-action-resolutions",
+    "def-sf-derived-weil-category-and-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; native resolution and coefficient identification by Q85"
+   }
+  },
+  {
+   "text": "Check flat-term preservation too. For a flat sheaf on the open, restrict an ambient short exact sequence, tensor with that sheaf, and extend; the fixed sheaf comparison identifies this with tensor by its extension. For a flat ambient sheaf, extend a short exact sequence on the open, tensor with the ambient sheaf, and restrict back using the invertible unit in s; its restriction is flat. Thus both functors preserve the resolving subcategories. Apply ringed action-site derived tensor descent and the localization universal property to the chain maps and their inverses. Under the prescribed native tensor models and exact-functor factors, obtain rho and gamma and both representative squares. Naturality, resolution independence and the inverse identities descend in each variable. Set every other presentation field to the actual native construction, so its heterogeneous compatibility equalities are reflexive.",
+   "uses": [
+    "lem-sf-twisted-action-ringed-site",
+    "lem-sf-weil-frobenius-action-resolutions",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 0E8I (lemma-j-shriek-and-tensor), 03DJ (lemma-extension-by-zero-exact), 03D8 (lemma-push-pull-composition-modules); native equivariant refinement by Q85"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-derived-weil-category-and-operations",
+  "lem-sf-fixed-pair-created-abelian-structure",
+  "lem-sf-ringed-open-total-tensor-kflat",
+  "lem-sf-twisted-action-ringed-site",
+  "lem-sf-weil-frobenius-action-resolutions",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Native equivariant refinement of Stacks 0GL1/0E8I; parent argument steps 3, 5, 6; full proof in Lean docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "extensionByZero.*[Tt]ensor|[Tt]ensor.*extensionByZero",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-27",
+   "verdict": "No exact match: the results concern ordinary scheme module restriction, not the native equivariant sheaf/complex construction and its specified derived normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extensionByZero\", \"tensor\"",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-27",
+   "verdict": "No exact match: the results concern ordinary scheme module restriction, not the native equivariant sheaf/complex construction and its specified derived normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero commutes with derived tensor products for an open immersion of Frobenius equivariant module sheaves",
+   "results": "OK 8 hits; AlgebraicGeometry.Scheme.Modules.restrict; AlgebraicGeometry.Scheme.Modules.restrictFunctor; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback",
+   "date": "2026-10-27",
+   "verdict": "No exact match: the results concern ordinary scheme module restriction, not the native equivariant sheaf/complex construction and its specified derived normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeOpenDerivedTensor",
+  "date": "2026-10-27",
+  "group": "G7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Native open factor of fix-lem-tensor-adjunction.proof.md, Step 1, second Hom bijection; native parent steps 3, 5, 6",
+   "via": [
+    "lem-sf-native-open-derived-tensor",
+    "lem-sf-derived-weil-compact-projection-formula",
+    "lem-sf-weil-verdier-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeOpenTensorLocalization",
+  "file": "lean/Sheaf/Paper/NativeOpenTensorLocalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.native_open_tensor_localization",
+  "statement": "theorem native_open_tensor_localization (s : NativeOpenTensorData k₀ l j) :\n    ∃ (rho : nativeDerivedTensor k₀ l Z ⋙ nativeOpenPull k₀ l j ≅\n        (nativeOpenPull k₀ l j).prod (nativeOpenPull k₀ l j) ⋙ nativeDerivedTensor k₀ l U)\n      (gamma : nativeOpenDerivedLeft k₀ l j ≅ nativeOpenDerivedRight k₀ l j)\n      (c : OpenTensorPresentation (ProEtaleWeilSheaf k₀ l U) (ProEtaleWeilSheaf k₀ l Z)),\n      HEq c.E (extensionByZero k₀ l j) ∧ HEq c.R (upperStar k₀ l j) ∧\n      HEq c.SA (nativeOpenSheafTensor k₀ l U) ∧ HEq c.SB (nativeOpenSheafTensor k₀ l Z) ∧\n      HEq c.TA (nativeTensorTotal k₀ l U) ∧ HEq c.TB (nativeTensorTotal k₀ l Z) ∧\n      HEq c.DA (nativeDerivedTensor k₀ l U) ∧ HEq c.DB (nativeDerivedTensor k₀ l Z) ∧\n      HEq c.flatA (NativeIsKFlat k₀ l U) ∧ HEq c.flatB (NativeIsKFlat k₀ l Z) ∧\n      HEq c.modelA (nativeOpenTensorModel k₀ l U) ∧\n      HEq c.modelB (nativeOpenTensorModel k₀ l Z) ∧\n      HEq c.iA (nativeOpenTensorInsertion k₀ l U) ∧\n      HEq c.iB (nativeOpenTensorInsertion k₀ l Z) ∧\n      HEq c.sheafGamma s.sheafGamma ∧ HEq c.gamma gamma ∧\n      HEq c.sheafRestriction s.sheafRestriction ∧ HEq c.restriction rho",
+  "branch": "sheaf-dag",
+  "by": "G7",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-sf-native-open-tensor-localization",
+  "worker": "G7 stage3",
+  "summary": "A strict part of the existing native open argument; full source proof in docstring, statement tested at the empty open, identity open, zero inputs and unbounded complexes.",
+  "blueprint": "Retains the native open factor in Step 1, second Hom bijection of fix-lem-tensor-adjunction.proof.md. No unit route is bypassed.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-fixed-pair-created-abelian-structure",
+    "why": "The parent already uses this generic module/site/localization fact as a tool. This lemma retains precisely that application within its separated proof step, rather than replacing the unit route."
+   },
+   {
+    "node": "lem-sf-ringed-open-total-tensor-kflat",
+    "why": "The parent already uses this generic module/site/localization fact as a tool. This lemma retains precisely that application within its separated proof step, rather than replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "The parent already uses this generic module/site/localization fact as a tool. This lemma retains precisely that application within its separated proof step, rather than replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "The parent already uses this generic module/site/localization fact as a tool. This lemma retains precisely that application within its separated proof step, rather than replacing the unit route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-90a6f",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261027T131454-L-2940282",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-90a6f",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261027T131454-L-2940282",
+  "kind": "interface",
+  "note": "independent cc review: native_open_derived_tensor assembled from 3 new holes (sheaf existence / localization ∀s / normalization ∀ pinned ρ,γ,c) against lem-sf-native-open-derived-tensor; 3 data decls verbatim-diffed into NativeOpenTensorComparisonData with public re-export; data node lean trimmed to 3 (19 others owned by generic-presentation/operations nodes); direct importer NativeCompactProjectionFormula compiled 14.5 s vs published 14.2 s; axioms propext/sorryAx/choice/Quot.sound"
+ }
+}

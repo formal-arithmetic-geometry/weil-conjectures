@@ -1,0 +1,267 @@
+{
+ "id": "lem-trf-field-extension-component-local-dimension",
+ "kind": "statement",
+ "title": "Component dimensions after a field extension from local dimensions",
+ "statement": "Let $k$ be a field [def-weil-field], let $g:Y\\to\\operatorname{Spec}k$ be a morphism of schemes locally of finite type [def-weil-finite-type-morphism], and let $L/k$ be any field extension [def-pc-field-extension]. Form $Y_L=Y\\times_{\\operatorname{Spec}k}\\operatorname{Spec}L$ with projection $p:Y_L\\to Y$ [def-pc-fibre-product]. Then $Y_L$ is locally Noetherian [pqf-def-locnoeth], and for every $w\\in Y_L$ one has $\\dim_w(Y_L)=\\dim_{p(w)}Y$, where $\\dim_w$ denotes local topological dimension [def-kun-topological-dimension-at-point]. Every irreducible component $D$ of $Y_L$ [def-weil-irreducible-components] has a generic point $z$ [def-sc-generic-point], and for every such $z$ one has $\\dim D=\\dim_z(Y_L)=\\dim_{p(z)}Y$, with $\\dim$ denoting topological Krull dimension [def-kun-topological-krull-dimension]. In particular, if $d\\in\\mathbb N$ and $\\dim_yY=d$ for every $y\\in Y$, every irreducible component of $Y_L$ has dimension $d$. Empty $Y$ is permitted; no purity or irreducibility of $Y$ and no algebraicity or separability of $L/k$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02FY (lemma-dimension-fibre-after-base-change), part (1), for the structure morphism to Spec k; Tag 01T6 (lemma-finite-type-noetherian) for local Noetherianity. Component-generic-point formula: varieties.tex, Tag 0A21 (lemma-dimension-locally-algebraic), part (5)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-finite-type-morphism",
+  "def-pc-field-extension",
+  "def-pc-fibre-product",
+  "pqf-def-locnoeth",
+  "def-kun-topological-dimension-at-point",
+  "def-weil-irreducible-components",
+  "def-sc-generic-point",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Let $q:Y_L\\to\\operatorname{Spec}L$ be the second projection. The locally-finite-type base-change lemma applies to $g$ and $\\operatorname{Spec}L\\to\\operatorname{Spec}k$, so $q$ is locally of finite type. The field $L$ is Noetherian: its only ideals are $(0)$ and $L$, generated respectively by $0$ and $1$. Thus the single affine chart $\\operatorname{Spec}L$ makes it locally Noetherian. Apply the locally-Noetherian-source lemma to $q$ to obtain that $Y_L$ is locally Noetherian. No finiteness assumption on $L/k$ occurs.",
+   "uses": [
+    "lem-weil-pbc-lft-base-change",
+    "pqf-lem-locnoeth-lft",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T4 (lemma-base-change-finite-type) and 01T6 (lemma-finite-type-noetherian)."
+   }
+  },
+  {
+   "text": "Fix $w\\in Y_L$. Apply the fibre-dimension base-change lemma to the defining cartesian square for $Y_L$ and $g$. Its finite-type hypothesis is exactly the given local finite type of $g$. For the unique points $s\\in\\operatorname{Spec}k$ and $s\\prime\\in\\operatorname{Spec}L$, the fibres $Y_s$ and $(Y_L)_{s\\prime}$ identify respectively with $Y$ and $Y_L$: the residue fields are $k$ and $L$, and pulling back over either base along its identity gives the original scheme. The cited fibre definition identifies their topological spaces with the whole inverse images of these points. The local dimensions in the base-change lemma are the minima of dimensions of open neighbourhoods, as in the two cited dimension definitions. Consequently its equality reads $\\dim_w(Y_L)=\\dim_{p(w)}Y$.",
+   "uses": [
+    "lem-sc-fibre-dimension-after-base-change",
+    "def-pc-scheme-fibre",
+    "def-kun-dimension",
+    "def-kun-topological-dimension-at-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FY (lemma-dimension-fibre-after-base-change), part (1), with S=Spec k and S\\prime=Spec L."
+   }
+  },
+  {
+   "text": "Let $D$ be an irreducible component of $Y_L$. A scheme is sober, so the scheme-sobriety lemma supplies a generic point $z$ of the closed irreducible subset $D$. This establishes the existence required in the statement.",
+   "uses": [
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01IS (lemma-scheme-sober)."
+   }
+  },
+  {
+   "text": "For any generic point $z$ of $D$, one has $D=\\overline{\\{z\\}}$. If another irreducible component $E$ contains $z$, its closedness implies $D\\subseteq E$. Maximality of the irreducible subset $D$ then gives $D=E$. Therefore $D$ is the only component through $z$. Apply the locally-algebraic maximum formula to the locally finite type $L$-scheme $Y_L$ from step 1 at $z$. The maximum has the single value $\\dim D$, so $\\dim_z(Y_L)=\\dim D$. Combining this with step 2 at $w=z$ gives $\\dim D=\\dim_z(Y_L)=\\dim_{p(z)}Y$.",
+   "uses": [
+    "def-sc-generic-point",
+    "def-weil-irreducible-components",
+    "lem-trf-locally-algebraic-dimension-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B1B, first equality in item-dimension-irreducibles-passing-through of lemma-dimension-locally-algebraic."
+   }
+  },
+  {
+   "text": "If $\\dim_yY=d$ for every $y\\in Y$, substitute $y=p(z)$ into step 4 to get $\\dim D=d$ for each component $D$ of $Y_L$. If $Y$ is empty, its fibre product $Y_L$ is empty as well (its first projection has empty target), so there are no points or components to check.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FY (lemma-dimension-fibre-after-base-change), part (1), and the preceding component calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lft-base-change",
+  "pqf-lem-locnoeth-lft",
+  "pqf-def-locnoeth",
+  "lem-sc-fibre-dimension-after-base-change",
+  "def-pc-scheme-fibre",
+  "def-kun-dimension",
+  "def-kun-topological-dimension-at-point",
+  "lem-sc-scheme-sober",
+  "def-sc-generic-point",
+  "def-weil-irreducible-components",
+  "lem-trf-locally-algebraic-dimension-components",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 02FY(1), 01T4 and 01T6, together with schemes.tex Tag 01IS and varieties.tex Tag 0B1B."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Let Y be a scheme locally of finite type over a field k and L an extension. For every irreducible component D of Y_L with generic point z, dim D equals the local topological dimension of Y at the image of z",
+   "results": "8 hits: AlgebraicGeometry.Scheme.height_of_isClosed, AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion, AlgebraicGeometry.Scheme.functionField, AlgebraicGeometry.instFieldCarrierFunctionField, AlgebraicGeometry.IsAffineOpen.primeIdealOf_genericPoint, IsLocalization.AtPrime.ringKrullDim_eq_height, Ring.KrullDimLE.of_isLocalization, AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat; digest=db5f51e52e48a5ad. Read hits: genericPoints and genericPoint_eq_of_isOpenImmersion concern generic points, not dimension under arbitrary field extension; the height and localization results concern stalk dimension, not local topological dimension. Smooth relative-dimension base change (Smooth.lean:166) assumes smoothness; Artinian.lean:66 is only a dimension-zero Artinian criterion. No match for the component formula.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The dimension of an irreducible component after extension of the ground field equals the local dimension at the image of its generic point",
+   "results": "8 hits: genericPoints, genericPoints.component_ofComponent, genericPoints.ofComponent, genericPoints.isGenericPoint, genericPoints.component, IntermediateField.finrank_comap, genericPoints.isGenericPoint_ofComponent, AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion; digest=df37d34c0d706b58. Read hits: genericPoints and genericPoint_eq_of_isOpenImmersion concern generic points, not dimension under arbitrary field extension; the height and localization results concern stalk dimension, not local topological dimension. Smooth relative-dimension base change (Smooth.lean:166) assumes smoothness; Artinian.lean:66 is only a dimension-zero Artinian criterion. No match for the component formula.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "topologicalKrullDim, IsGenericPoint",
+   "results": "0 hits: ; digest=4f53cda18c2baa0c. Read hits: genericPoints and genericPoint_eq_of_isOpenImmersion concern generic points, not dimension under arbitrary field extension; the height and localization results concern stalk dimension, not local topological dimension. Smooth relative-dimension base change (Smooth.lean:166) assumes smoothness; Artinian.lean:66 is only a dimension-zero Artinian criterion. No match for the component formula.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "irreducibleComponents|IsGenericPoint|topologicalKrullDimAt",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean, Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean, Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean, Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean, Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean; digest=99d04d575d60d5c5. Read hits: genericPoints and genericPoint_eq_of_isOpenImmersion concern generic points, not dimension under arbitrary field extension; the height and localization results concern stalk dimension, not local topological dimension. Smooth relative-dimension base change (Smooth.lean:166) assumes smoothness; Artinian.lean:66 is only a dimension-zero Artinian criterion. No match for the component formula.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local topological dimension is unchanged under a field extension and constant local dimension implies equidimensional irreducible components",
+   "results": "8 hits: Real.dimH_of_mem_nhds, Algebra.IsStandardSmoothOfRelativeDimension.out, Algebra.Presentation.localizationAway_dimension_zero, Algebra.IsStandardSmooth.relativeDimension, Module.rankAtStalk_self, topologicalKrullDim, Real.dimH_of_nonempty_interior, Ring.krullDimLE_of_isLocalization_maximal; digest=6d8cdd92d18f8c58. Read hits: genericPoints and genericPoint_eq_of_isOpenImmersion concern generic points, not dimension under arbitrary field extension; the height and localization results concern stalk dimension, not local topological dimension. Smooth relative-dimension base change (Smooth.lean:166) assumes smoothness; Artinian.lean:66 is only a dimension-zero Artinian criterion. No match for the component formula.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dimension.*(baseChange|base_change|field)|topologicalKrullDim|local.*dimension",
+   "results": "10 hits: Mathlib/AlgebraicGeometry/Artinian.lean, Mathlib/AlgebraicGeometry/Artinian.lean, Mathlib/AlgebraicGeometry/Artinian.lean, Mathlib/AlgebraicGeometry/Artinian.lean, Mathlib/AlgebraicGeometry/Artinian.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean; digest=1ca6e638752071d1. Read hits: genericPoints and genericPoint_eq_of_isOpenImmersion concern generic points, not dimension under arbitrary field extension; the height and localization results concern stalk dimension, not local topological dimension. Smooth relative-dimension base change (Smooth.lean:166) assumes smoothness; Artinian.lean:66 is only a dimension-zero Artinian criterion. No match for the component formula.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "topologicalKrullDim, IsGenericPoint",
+   "results": "0 hits; top: none; digest=4f53cda18c2baa0c. Read the hits: generic-point existence, point height, local-ring dimension and Artinian criteria do not identify local topological dimension with component dimensions. Mathlib/Topology/KrullDimension.lean defines global dimension and proves subspace monotonicity, not this locally algebraic maximum formula. Smooth relative-dimension base change assumes smoothness and does not apply to arbitrary locally finite type schemes.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "topologicalKrullDimAt|dimension.*baseChange|genericPoint",
+   "results": "16 hits; top: Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean; digest=118560b79584ed48. Read the hits: generic-point existence, point height, local-ring dimension and Artinian criteria do not identify local topological dimension with component dimensions. Mathlib/Topology/KrullDimension.lean defines global dimension and proves subspace monotonicity, not this locally algebraic maximum formula. Smooth relative-dimension base change assumes smoothness and does not apply to arbitrary locally finite type schemes.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The local topological dimension of a locally finite type scheme is unchanged by field extension",
+   "results": "8 hits; top: AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, topologicalKrullDim, AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian, AlgebraicGeometry.finite_appTop_of_universallyClosed; digest=08787bd538fba67f. Read the hits: generic-point existence, point height, local-ring dimension and Artinian criteria do not identify local topological dimension with component dimensions. Mathlib/Topology/KrullDimension.lean defines global dimension and proves subspace monotonicity, not this locally algebraic maximum formula. Smooth relative-dimension base change assumes smoothness and does not apply to arbitrary locally finite type schemes.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local topological dimension of a scheme locally of finite type over a field is preserved by arbitrary field extension; dimension of an irreducible component equals local dimension at its generic point",
+   "results": "8 hits; top: AlgebraicGeometry.instFieldCarrierFunctionField, Algebra.IsStandardSmoothOfRelativeDimension.out, AlgebraicGeometry.Scheme.functionField, AlgebraicGeometry.stalkFunctionFieldAlgebra, AlgebraicGeometry.functionField_isScalarTower, Algebra.IsAlgebraic.finrank_of_isFractionRing, Module.rankAtStalk_eq, Algebra.Presentation.localizationAway_dimension_zero; digest=32b7ce6d8aad45e4. Read the hits: generic-point existence, point height, local-ring dimension and Artinian criteria do not identify local topological dimension with component dimensions. Mathlib/Topology/KrullDimension.lean defines global dimension and proves subspace monotonicity, not this locally algebraic maximum formula. Smooth relative-dimension base change assumes smoothness and does not apply to arbitrary locally finite type schemes.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For every point after extension of the ground field, the minimum dimension of its open neighborhoods is unchanged",
+   "results": "8 hits; top: UniqueDiffWithinAt.mono_field, Real.dimH_of_mem_nhds, OpenPartialHomeomorph.extend_image_nhds_mem_nhds_of_boundaryless, OpenPartialHomeomorph.map_extend_nhds, IsUnramifiedAtInfinitePlaces.top, OpenPartialHomeomorph.extend_image_nhds_mem_nhds_of_mem_interior_range, OpenPartialHomeomorph.nhdsWithin_extend_target_eq, OpenPartialHomeomorph.extend_source_mem_nhds; digest=69a5c9eee7ed03b2. Read the hits: generic-point existence, point height, local-ring dimension and Artinian criteria do not identify local topological dimension with component dimensions. Mathlib/Topology/KrullDimension.lean defines global dimension and proves subspace monotonicity, not this locally algebraic maximum formula. Smooth relative-dimension base change assumes smoothness and does not apply to arbitrary locally finite type schemes.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-flat-dense-generic-fibre-pure-dimension",
+  "date": "2026-10-22",
+  "group": "Q83"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: after ILO X Theorem 3.4 Step 2 flatifies the curve and horizontal boundary, their dense generic fibres determine pure relative dimensions 1 and 0. Field-extension local and component dimensions (old steps 5--6).",
+   "via": [
+    "lem-trf-flat-dense-generic-fibre-pure-dimension",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-field-extension-component-local-dimension",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Reused base-change, Noetherianity, fibre-dimension and sobriety nodes; exposed the strictly more general locally-algebraic maximum formula as one statement-only node. Proved the generic-component equality by closedness and maximality, then obtained the constant-dimension consequence. Checked the distinction from local-ring dimension and arbitrary field extensions.",
+  "blueprint": "Realizes the field-extension local/component dimension input (old steps 5--6) below the semistable-alteration branch of lem-trf-local-term-locality, proof (1)--(2), as recorded in the item blueprint.from.place.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-fibre-dimension-after-base-change",
+    "why": "Generic base-change equality for local fibre dimension, applied to structure maps to spectra of fields; this trace-formula unit has no replacement for this dimension-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-fibre-dimension-after-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N6-6816c775e",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-6816c775e (reviewer sub-agent of L); spot-checked: I read the item and the new node in full against Stacks 0A21(5)/0B1B, 02FY(1), 01T4, 01T6 and 01IS. The new node lem-trf-locally-algebraic-dimension-components states exactly the first equality of 0B1B (dim_x X = max dim C over the irreducible components C through x) for X locally finite type over a field. I tested it on A^1 at its generic point, a line meeting a plane, a point plus a line, an infinite disjoint union of A^n and empty X. It is not a duplicate: lem-weil-pbc-dimension-at-point-components covers only Spec of a finite type algebra, lem-sc-dimension-locally-algebraic is the irreducible case, and the two lem-sbc nodes assume equidimensional or constant dimension. It does not restate a clause of the item. Step checks: (1) the lft-base-change and 01T6 leaves plus L Noetherian give Y_L locally Noetherian. (2) The fibre-dimension lemma with S=Spec k, S'=Spec L: the fibres are Y and Y_L, and def-kun-dimension equals the topological local dimension. (3) Sobriety gives the generic point. (4) Closedness and maximality make D the only component through z, so the new node gives dim_z = dim D. (5) Elementary, and empty Y gives empty Y_L. proof_deps equal the union of the uses. I accept the tool use of lem-sc-fibre-dimension-after-base-change as a generic dimension tool. Batch-5 check: the new node is pure Stacks 0B1B dimension theory whose stmt_deps are only definitions, and it is in sec-trace-formula only because the item is (the item reaches batch 5 via lem-zl-geometric-closed-curve-smooth-model). It is neither the trace formula, nor Poincare duality, nor a step of their proofs, so it is genuinely outside the assumed statements. No SGA citations. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FieldExtensionComponentLocalDimension",
+  "declaration": "AlgebraicGeometry.field_extension_component_local_dimension",
+  "file": "lean/Sheaf/AlgebraicGeometry/FieldExtensionComponentLocalDimension.lean",
+  "statement": "theorem field_extension_component_local_dimension {k L : Type u} [Field k] [Field L] [Algebra k L] {Y : Scheme.{u}} (g : Y ⟶ Spec (CommRingCat.of k)) [LocallyOfFiniteType g] : IsLocallyNoetherian (pullback g (Spec.map (CommRingCat.ofHom (algebraMap k L)))) ∧ (∀ w : ↥(pullback g (Spec.map (CommRingCat.ofHom (algebraMap k L)))), topologicalKrullDimAt w = topologicalKrullDimAt (pullback.fst g (Spec.map (CommRingCat.ofHom (algebraMap k L))) w)) ∧ (∀ D : Set ↥(pullback g (Spec.map (CommRingCat.ofHom (algebraMap k L)))), D ∈ irreducibleComponents ↥(pullback g (Spec.map (CommRingCat.ofHom (algebraMap k L)))) → (∃ z : ↥(pullback g (Spec.map (CommRingCat.ofHom (algebraMap k L)))), IsGenericPoint z D) ∧ ∀ z : ↥(pullback g (Spec.map (CommRingCat.ofHom (algebraMap k L)))), IsGenericPoint z D → topologicalKrullDim D = topologicalKrullDimAt z ∧ topologicalKrullDimAt z = topologicalKrullDimAt (pullback.fst g (Spec.map (CommRingCat.ofHom (algebraMap k L))) z)) ∧ ∀ d : ℕ, (∀ y : Y, topologicalKrullDimAt y = (d : WithBot ℕ∞)) → ∀ D : Set ↥(pullback g (Spec.map (CommRingCat.ofHom (algebraMap k L)))), D ∈ irreducibleComponents ↥(pullback g (Spec.map (CommRingCat.ofHom (algebraMap k L)))) → topologicalKrullDim D = (d : WithBot ℕ∞)",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3296f3552",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: IsLocallyNoetherian of pullback g (Spec.map algebraMap k L); ∀ w topologicalKrullDimAt w = at pullback.fst w; each irreducible component has IsGenericPoint z and ∀ such z topologicalKrullDim D = dimAt z = dimAt (fst z); constant d ⇒ every component dim d. topologicalKrullDimAt is local topological dim (KrullDimension.lean:343, 04NA), matching node; arbitrary L/k, only LocallyOfFiniteType g, shared universe u forced by pullback in Scheme.{u}; empty Y vacuous, no Nonempty. Math correct via 0B1B (z only on D) + 02FY(1). All 9 stmt_dep records correct; lean.statement verbatim; docstrings with source/blueprint/proof steps; sorry only; no defs. First delivery (live node has no lean record, only N6 S1 PASS/LAND in svc.log), no rebind/H4 clash. No files changed, no compile run."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261026T071219-L-3892320",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.field_extension_component_local_dimension"
+  ],
+  "sorry_after": []
+ }
+}

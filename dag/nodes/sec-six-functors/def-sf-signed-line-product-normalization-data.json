@@ -1,0 +1,123 @@
+{
+ "id": "def-sf-signed-line-product-normalization-data",
+ "kind": "definition",
+ "title": "Signed local basis powers and product normalization",
+ "status": "split",
+ "statement": "Let $(\\mathcal C,J)$ be a site small relative to the coefficient universe, let $R$ be a commutative ring sheaf, and let $L$ be a sheaf of $R$-modules [def-weil-sheaf-of-modules-category]. Use the signed powers $L^{[m]}$ of [def-pur-signed-line-scalar-normalization-data], the sheaf tensor of [def-pur-sheaf-tensor-product], and the internal sheaf Hom of [def-pur-sheaf-hom]. For $U\\in\\mathcal C$, define $\\operatorname{SignedLineBasisPowers}(L,U,e)$ for sections $e_m\\in L^{[m]}(U)$, $m\\in\\mathbf Z$, by the following conditions: for every $m$ and every arrow $V\\to U$, the map $R(V)\\to L^{[m]}(V)$ sending $r$ to $r e_m|_V$ is bijective; $e_0=1$; $e_{n+2}=e_{n+1}\\otimes e_1$ for every $n\\geq0$; and the functional $e_{-(n+1)}$ evaluated on $e_{n+1}|_V$ is $1\\in R(V)$ for every $n\\geq0$ and every $V\\to U$. For a family of isomorphisms $\\mu_{a,b}:L^{[a]}\\otimes_R L^{[b]}\\xrightarrow\\sim L^{[a+b]}$, define $\\operatorname{SignedLineProductNormalized}(L,\\mu)$ to mean that $\\mu_{a,b}(e_a\\otimes e_b)=e_{a+b}$ for every $U$, every family $e$ satisfying this signed-basis predicate, and all integers $a,b$. These are predicates; they do not assert existence of a signed basis or of a normalized product.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+  "place": "Tensor-power/internal-Hom sentence and final common-finite-stage sentence; local signed bases and normalized tensor contractions in lem-pur-signed-line-scalar-tensor-tower; Stacks 03EK and 04TT."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-signed-line-scalar-normalization-data",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-sheaf-hom"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "signed powers of a line sheaf normalized local basis tensor product multiplication",
+   "results": "Eight hits: TensorProduct.tmul_of_gradedMul_of_tmul, GradedTensorProduct.tmul_coe_mul_coe_tmul, TensorProduct.algebraMap_gradedMul, TensorPower.gMul_eq_coe_linearMap, TensorPower.mulEquiv, TensorProduct.gradedMul, TensorPower.gMul_def, LinearMap.mul'.",
+   "date": "2026-10-22",
+   "verdict": "No Mathlib signed sheaf-line normalization predicate; reuse the existing project definitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "signed powers of a line sheaf normalized local basis tensor product multiplication",
+   "results": "Eight hits: Algebra.Generators.cotangentSpaceBasis_repr_tmul, Algebra.FormallyUnramified.finite_of_free_aux, Algebra.Generators.H1Cotangent.δAux_monomial, AlgebraicGeometry.StructureSheaf.const_mul_cancel', AlgebraicGeometry.StructureSheaf.const_mul_cancel, AlgebraicGeometry.StructureSheaf.const_mul, AlgebraicGeometry.Proj.pow_apply, AlgebraicGeometry.StructureSheaf.const_mul_rev.",
+   "date": "2026-10-22",
+   "verdict": "No Mathlib signed sheaf-line normalization predicate; reuse the existing project definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "SignedLineBasisPowers|SignedLineProductNormalized",
+   "results": "No Mathlib hits.",
+   "date": "2026-10-22",
+   "verdict": "No Mathlib signed sheaf-line normalization predicate; reuse the existing project definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "SignedLineBasisPowers|SignedLineProductNormalized in lean/WeilConjectures, lean/Sheaf and dag/nodes; tools/blueprint_refs.py search",
+   "results": "No upstream WeilConjectures definition. Existing Sheaf declarations are in the published parent theorem module. A scan of all definition-node lean records found no owner for the declarations registered by this node; blueprint search found no matching node. The commutative ring tower already has def-sp-commutative-coefficient-ring-tower as owner.",
+   "date": "2026-10-22",
+   "verdict": "Reuse existing definitions; add only missing definition ownership."
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-tower-operations-ground-field-retagging",
+  "date": "2026-10-22",
+  "group": "Q51"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-weil-equivariance-of-purity-and-trace",
+   "place": "Proof Step 1, unchanged ordinary tower operations and signed Tate-line comparisons under ground-field retagging",
+   "via": [
+    "lem-pur-tower-operations-ground-field-retagging",
+    "lem-pur-tower-purity-ground-field-retagging"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "module": "Sheaf.Paper.SignedLineScalarTensorTower",
+  "declaration": "SheafOfModules.SignedLineProductNormalized",
+  "declarations": [
+   "SheafOfModules.SignedLineBasisPowers",
+   "SheafOfModules.SignedLineProductNormalized"
+  ],
+  "statement": "def SignedLineProductNormalized {R : Sheaf J CommRingCat.{max uC vC u}}\n    (L : ringedSiteModules.{max uC vC u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))\n    (μ : ∀ a b : ℤ, (siteSheafTensorRight (signedLinePower.{uC, vC, u} L b)).obj\n      (signedLinePower.{uC, vC, u} L a) ≅\n      signedLinePower.{uC, vC, u} L (a + b)) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q51",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Definition ownership only: the existing published definitions are reused unchanged. This record asserts no existence theorem and introduces no Lean module."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-527254f06",
+  "group": "Q51",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-527254f06",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Re-delivery after the 9ad95781 H2 RETURN. The Lean module is byte-identical (sha c8a72a35) and lean.statement is unchanged and verbatim. The theorem nodes det-sp-coefficient-towers-abelian and lem-pur-signed-line-scalar-tensor-tower are out of stmt_deps and remain in proof_deps. Replaced by four definition owners: def-pur-signed-line-scalar-normalization-data and def-sp-commutative-coefficient-ring-tower (both landed), plus two new existing:true nodes. def-sf-signed-line-product-normalization-data: the statement gives the four SignedLineBasisPowers conditions and the product condition, and the def signature is verbatim with the live l.111. def-sf-coefficient-towers-abelian-presentation: the statement matches every SpCoefficientTowersAbelian field (equivalence and the four HEq pins, Grothendieck, evaluation exactness, HasDerivedCategory, scalar/tensor, ordinaryReduction_eq, reduction_rep, unitor, associator); `structure X` is the live convention; all stmt_deps are definitions; no other live owner. Substance re-read: Over.map Spec σ is a_T ≫ Spec σ; all clauses match; B/μ uniqueness is pinned; edge cases σ=id, empty, d=0, n+1 index, signed m, ramified, zero transitions all hold; universes fine; docstrings and gates pass. Advisory: purTwistIntegralOne, proEtaleRootsOfUnityTower and scalarExtensionEmbedding have owners outside stmt_deps; base-era det-sp-tower-shriek-levels stmt_dep; H9 imports. No compile (no file changed); the worker's scompile is clean."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261024T234306-L-2551027",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "SheafOfModules.existsUnique_signedLineProduct"
+  ],
+  "sorry_after": []
+ }
+}

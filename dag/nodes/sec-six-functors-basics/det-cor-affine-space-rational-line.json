@@ -108,10 +108,9 @@
    }
   },
   {
-   "text": "For the compactification $c=(j,q)$ of step 5, the definition [sk-def-sfb-module-derived-lower-shriek] gives $Rp_!^c=Rq_*D(j_!)$. The functor of [sk-prop-sf-existence] is defined using a chosen compactification $c_p$. Apply [det-sf-comp-coherence-cocycle] to $p$, $c_p$ and $c$; $p$ is separated of finite type and its target $V$ is qcqs, as checked in steps 1–4. It gives a natural isomorphism $Rp_!^{c_p}\\simeq Rp_!^c$ on $\\Loc(\\Dctf)$. The equalities of categories in step 6 give $Rp_!\\simeq Rq_*j_!$ on the claimed $\\Loc(\\Dbc)$ categories, proving (2). Here $j_!$ denotes its exact levelwise derived functor.",
+   "text": "For the compactification $c=(j,q)$ of step 5, the definition [sk-def-sfb-module-derived-lower-shriek] gives $Rp_!^c=Rq_*D(j_!)$. The specified compact-support functor uses the chosen compactification $c_p$. Apply [det-sf-comp-coherence-cocycle] to $p$, $c_p$ and $c$; $p$ is separated of finite type and its target $V$ is qcqs, as checked in steps 1–4. It gives a natural isomorphism $Rp_!^{c_p}\\simeq Rp_!^c$ on $\\Loc(\\Dctf)$. The equalities of categories in step 6 give $Rp_!\\simeq Rq_*j_!$ on the claimed $\\Loc(\\Dbc)$ categories, proving (2). Here $j_!$ denotes its exact levelwise derived functor.",
    "uses": [
     "sk-def-sfb-module-derived-lower-shriek",
-    "sk-prop-sf-existence",
     "det-sf-comp-coherence-cocycle"
    ],
    "elementary": false,
@@ -121,12 +120,12 @@
    }
   },
   {
-   "text": "Identify the candidate right adjoint. The composition isomorphism of module pullbacks in [sk-def-sfb-module-pushforward-pullback] gives $j^*q^*\\simeq(qj)^*=p^*$ on sheaves. These pullbacks are exact by [sk-prop-sfb-cartesian-coefficients], so their derived versions in [sk-def-sfb-module-derived-pushpull] are computed levelwise. Applying the sheaf composition isomorphism in every degree therefore gives the same natural isomorphism on arbitrary unbounded complexes, and then on their localizing subcategories. An exact levelwise pullback commutes with cohomological shifts: both complexes in degree $n$ have term $j^*(L^{n+2})$ and differential $j^*(d^{n+2})$. Apply the final assertion of [det-prop-sfb-cartesian-coefficients-twists] with $f=j$ and $K=q^*N$; $\\ell$ is invertible since $p\\ne\\ell$. It gives $j^*((q^*N)(1))\\simeq(j^*q^*N)(1)$. Combining these natural identifications yields $j^*(q^*N(1)[2])\\simeq p^*N(1)[2]$ for every $N\\in\\Loc(\\Dbc(V,\\Lambda))$.",
+   "text": "Let F be derived pullback along j. It is strong monoidal by [lem-sfb-derived-pullback-strong-monoidal]. Its single-functor comparison and the coefficient line comparison of [def-sfb-rational-tate-pullback-comparison] identify F applied to the degree-zero Tate line on P1 with the degree-zero Tate line on A1. The monoidal tensorator therefore commutes F past tensoring on the right with that line. The CommShift structure of [det-proper-base-change-unbounded-pullback] commutes F with shift two. Replace termwise open pullback with its canonical left-derived comparison and use the composition isomorphism of [sk-def-sfb-module-derived-pushpull] and qj=p. Thus the composite exceptional functor followed by j-star is ambient-isomorphic to p-star followed by Tate twist and shift two.",
    "uses": [
-    "sk-def-sfb-module-pushforward-pullback",
-    "sk-prop-sfb-cartesian-coefficients",
-    "sk-def-sfb-module-derived-pushpull",
-    "det-prop-sfb-cartesian-coefficients-twists"
+    "lem-sfb-derived-pullback-strong-monoidal",
+    "def-sfb-rational-tate-pullback-comparison",
+    "det-proper-base-change-unbounded-pullback",
+    "sk-def-sfb-module-derived-pushpull"
    ],
    "elementary": false,
    "source": {
@@ -135,9 +134,9 @@
    }
   },
   {
-   "text": "Use the adjunction $Rq_*\\dashv q^*(1)[2]$ explicitly asserted by [det-prop-p1-adjunction-rational-triangle], applied over $Y=V$ with the same rational coefficient $\\Lambda$. For $M\\in\\Loc(\\Dbc(\\mathbf A^1_V,\\Lambda))$ and $N\\in\\Loc(\\Dbc(V,\\Lambda))$, steps 6–8 give\n$$\n\\operatorname{Hom}(Rp_!M,N)\\simeq\\operatorname{Hom}(Rq_*j_!M,N)\\simeq\\operatorname{Hom}(j_!M,q^*N(1)[2])\\simeq\\operatorname{Hom}(M,j^*(q^*N(1)[2]))\\simeq\\operatorname{Hom}(M,p^*N(1)[2]).\n$$\nEvery bijection is natural in $M,N$: the first and last are induced by the natural isomorphisms of steps 7 and 8, and the middle two are the Hom bijections of the projective-line and open adjunctions. Their inverses in reverse order give the inverse composite. This exhibits $Rp_!\\dashv p^*(1)[2]$, including that the displayed right adjoint takes values in the required localizing category.",
+   "text": "Supply the canonical strict cycle system, its unique completed limit and its coefficient realization to the rational projective-line triangle theorem, as in [lem-sfb-rational-p1-adjunction-assembly]. Retain its adjunction Q left adjoint S. Compose J left adjoint R with Q left adjoint S to obtain F=JQ left adjoint P=SR. Steps 7 and 8 identify the ambient functors F and P with the chosen compact-support pushforward and twisted shifted affine-line pullback, respectively.",
    "uses": [
-    "det-prop-p1-adjunction-rational-triangle"
+    "lem-sfb-rational-p1-adjunction-assembly"
    ],
    "elementary": false,
    "source": {
@@ -146,12 +145,9 @@
    }
   },
   {
-   "text": "By [sk-prop-sf-existence], $p^!$ is a right adjoint of this same $Rp_!$ on $\\Loc(\\Dctf)$, hence on the equal $\\Loc(\\Dbc)$ categories of step 6. Apply [det-sp-unique-right-adjoint] to $F=Rp_!$, $G=p^!$ and $J=p^*(1)[2]$, the latter adjunction being step 9. The $J$-transpose of the counit $Rp_!p^!N\\to N$ gives the component $p^!N\\to p^*N(1)[2]$; the cited statement makes these components natural, invertible and uniquely compatible with the counits. This proves the final assertion of (3).",
-   "uses": [
-    "sk-prop-sf-existence",
-    "det-sp-unique-right-adjoint"
-   ],
-   "elementary": false,
+   "text": "For any other right adjoint G of F, use Mathlib Adjunction.rightAdjointUniq to obtain the natural isomorphism G to P. The lemma rightAdjointUniq_hom_app_counit gives the required counit identity. If another isomorphism satisfies it, apply injectivity of the adjunction Hom equivalence, component by component, and extensionality of natural transformations and isomorphisms. Thus it is the unique counit-compatible isomorphism.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-affine-space-rational/sk-cor-affine-space-rational-line.md",
     "place": "Proof (3), final sentence: uniqueness of right adjoints and counit compatibility."
@@ -175,19 +171,17 @@
   "det-def-localizing-closure-ctf-equals-bc",
   "det-sf-mate-open-restriction",
   "sk-def-sfb-module-derived-lower-shriek",
-  "sk-prop-sf-existence",
   "det-sf-comp-coherence-cocycle",
-  "sk-def-sfb-module-pushforward-pullback",
-  "sk-prop-sfb-cartesian-coefficients",
+  "lem-sfb-derived-pullback-strong-monoidal",
+  "def-sfb-rational-tate-pullback-comparison",
+  "det-proper-base-change-unbounded-pullback",
   "sk-def-sfb-module-derived-pushpull",
-  "det-prop-sfb-cartesian-coefficients-twists",
-  "det-prop-p1-adjunction-rational-triangle",
-  "det-sp-unique-right-adjoint"
+  "lem-sfb-rational-p1-adjunction-assembly"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-affine-space-rational/sk-cor-affine-space-rational-line.md",
-  "place": "Proof (1)–(3), the same standard-compactification/projective-line-adjunction route; original geometry step replaced by five short steps using existing geometry and Mathlib leaves. Remaining five steps retained, with numerical cross-references updated."
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-cor-affine-space-rational/sk-cor-affine-space-rational-line.md",
+  "place": "Same unit route: standard compactification, open adjunction, P1 adjunction, twist-pullback comparison and categorical uniqueness. Geometry uses the corresponding existing Mathlib instances. The P1 input is assembled from the existing diagonal data theorems; uniqueness uses the proved Mathlib API."
  },
  "mathlib_searches": [
   {
@@ -1002,7 +996,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q135-faf47d365 (reviewer sub-agent of L); spot-checked: I read the item, the unit and the blueprint text in full, plus the statement of all 24 cited nodes, the projective-line setting node (det-prop-p1-adjunction-rational-unit-counit) and the citer (the induction node). Compared with the side-DAG base, only status, proof, proof_deps, proof_origin, mathlib_searches and split_report changed. The statement, stmt_deps, blueprint, lean_audit, tool_uses and reviewed fields are identical. Old steps 2-6 are now steps 6-10 and differ only in renumbered step references. The return is repaired: the old inline geometry in step 1 is replaced by steps 1-5. Step 1 is the chart (blueprint_update target P({0,1};V)) and properness. Step 2 is the elementary Spec R[t] chart, which makes p affine and locally of finite type. Step 3 uses affine-morphism permanence (3) (Stacks 01S7, morphisms.tex l.1721), proper hence finite type hence quasi-compact, V qcqs from qcqs-over-affine, and permanence (2) to make the total spaces quasi-compact. Step 4 uses proper-fp-permanence (e) (01KU, 01T3), Spec k quasi-separated, and permanence (1) (03GI, schemes.tex l.4367) to make the structure maps of finite type and the total spaces qcqs, so the standing setting holds. Step 5 uses permanence (1) to make j quasi-compact, which gives a compactification in the sense of sk-def-nagata-sketch-data. Every hypothesis of the open-adjunction node (clause 1), the Dctf=Dbc node, the compactification-coherence node and the existence node is checked in steps 1-5. The coefficients are E or the finite-subextension condensed Qlb throughout, and q is the same P({0,1}) projection as in the triangle node. Edge cases checked: empty V, the zero ring, and non-affine or non-reduced V. There are no new nodes, no duplicates and no SGA citation. I accept the tool_uses, and the added geometry nodes have Mathlib status. Minor remarks, no change made: citations.json is named in the report but is not in the delivery, and the identification of the two projective-line definitions is pre-existing DAG design. review.md is written."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
@@ -1015,9 +1020,6 @@
   "module": "Sheaf.Targets.AffineSpaceRationalLine",
   "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.det_cor_affine_space_rational_line",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.CondensedRing.rationalLocalizingCategory",
-   "AlgebraicGeometry.ProEtale.CondensedRing.rationalLocalizingInclusion",
-   "AlgebraicGeometry.ProEtale.CondensedRing.rationalTwistFunctor",
    "AlgebraicGeometry.ProEtale.CondensedRing.affineLineChosenCompactification",
    "AlgebraicGeometry.ProEtale.CondensedRing.affineLineRationalAssertion",
    "AlgebraicGeometry.ProEtale.CondensedRing.det_cor_affine_space_rational_line"
@@ -1029,5 +1031,15 @@
   "date": "2026-10-18",
   "existing": false,
   "note": "The assertion specializes the recorded generic localizing closure to constantModelBoundedConstructible (Dbc), uses the published Nagata compactificationOverField of the affine projection in Over(Spec k), and characterizes restrictions by ambient natural isomorphisms. The uniqueness clause applies to every right adjoint of this same restricted compact-support functor, hence to the exceptional adjoint. The projective line and standard chart use the base-change model explicitly specified by the node proof and its chart dependency blueprint_update."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-d1c3b",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261026T002443-L-88663",
+  "kind": "interface",
+  "note": "independent cc review: rationalP1_adjunction_assembly vs rationalP1_triangle adjunction clause (same push/exceptional, diagonal data available from exists_diagonalTowerSystem/diagonalTower_limit/diagonalTower_coefficients); moved defs byte-identical; sandbox build of 4 delivered + 7 visibility-losing modules (Tate importers, KernelContractions, Integral*) + 3 item importers all compile"
  }
 }

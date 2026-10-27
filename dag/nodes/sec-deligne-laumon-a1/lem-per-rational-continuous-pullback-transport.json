@@ -1,0 +1,134 @@
+{
+ "id": "lem-per-rational-continuous-pullback-transport",
+ "kind": "statement",
+ "title": "Normalized actual pullback transport for continuous rational realization",
+ "statement": "For any two normalized continuous rational realizations [def-per-continuous-rational-realization-data] at noetherian finite-dimensional schemes over which l is invertible, and every scheme morphism g, the actual derived ringed pullback, its canonical computation counit, integral balancing and actual reflector-completed pullback admit the normalized Along comparison. The ordinary pullback is exact and the coefficient map invertible for etale maps or immersions.",
+ "stmt_deps": [
+  "def-per-continuous-rational-realization-data"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14(2), with Lemma 6.8.2(1), Proposition 6.8.11(3), Definition 6.8.8 and Remark 6.8.15; completed-ring presentation via Proposition 6.6.11. Scalar-extension and composition compatibility refer to the canonical coefficient and tensor comparisons."
+ },
+ "proof": [
+  {
+   "text": "Apply the ordinary normalized rational pullback theorem. This gives coefficient, its continuous-function normalization and coefficient square, the additive module pullback, universal normalized counit, K-flat computation, and ordinary/derived balanced comparison with both normalization equations. No completed membership or rational comparison is assumed by this step.",
+   "uses": [
+    "lem-per-rational-continuous-ordinary-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose raw module realizations at X and Y and apply rationalRealizationPullbackComparison. Its integral record gives strict completed membership and invertibility of the specified strict unit. The augmentation-normalized strict/reflector comparison pbcActualCompletedPullback_tower carries membership to actual reflector completion by isomorphism closure of the uniform complete category, and its unit equation makes the actual reflector unit invertible on every integral object.",
+   "uses": [
+    "lem-per-rational-module-realization-functor",
+    "lem-per-rational-realization-pullback-comparison",
+    "def-weil-pbc-completed-pullback",
+    "lem-weil-pbc-uniform-complete-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The actual unit restricts to a natural isomorphism from ordinary pullback on the integral category to integralPull followed by the full inclusion. On integral objects form the comparison by aX.integral, inverse derived extension of that unit, inverse ordinary ambient balance, and derivedPull applied to inverse aY.integral. The raw pullback commutes with rationalization by its tensor-with-one Hom formula. Extend this integral natural isomorphism through raw scalar localization using naturalIso_of_integral; no linearity of the target functors is required. Its component equation, inverse uniqueness, and the inverse identities for aY.integral give exactly completion_unit.",
+   "uses": [
+    "lem-real-raw-localization-natural-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Normalized coefficient maps are equal: transpose them through the sheaf adjunction, and apply sheaf, ring-hom, and continuous-function extensionality pointwise. In the etale/immersion case the continuous coefficient slice normalization supplies an isomorphic coefficient map and exact ordinary pullback. Transfer its isomorphism and finite limit/colimit preservation across that equality and the supplied ordinary isomorphism. Assemble Along from these results and step 1.",
+   "uses": [
+    "lem-per-continuous-coefficient-slice-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-completed-pullback",
+  "lem-per-continuous-coefficient-slice-normalization",
+  "lem-per-rational-continuous-ordinary-pullback",
+  "lem-per-rational-module-realization-functor",
+  "lem-per-rational-realization-pullback-comparison",
+  "lem-real-raw-localization-natural-iso",
+  "lem-weil-pbc-uniform-complete-triangulated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "BS Remark 6.8.15. K8: completed membership and actual unit from the existing strict/reflector comparison, categorical descent of the integral comparison, and etale/immersion exactness; ordinary normalization isolated as a smaller obligation."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical normalized derived inverse image commutes with composition scalar extension and restriction to slice sites",
+   "results": "8 hits, including Scheme.Modules pullback pseudofunctors; generic module comparisons only.",
+   "date": "2026-10-25",
+   "verdict": "No theorem for these coefficient encodings and completion units."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLeftDerivedFunctor",
+   "results": "12 hits on Kan extensions and derived uniqueness, including leftDerivedUnique; no project coefficient normalization.",
+   "date": "2026-10-25",
+   "verdict": "Generic universal-property API only."
+  },
+  {
+   "tool": "grep",
+   "query": "RationalRealizationPullbackComparison|ContinuousRational|rationalPullModule",
+   "results": "0 Mathlib hits.",
+   "date": "2026-10-25",
+   "verdict": "No match in Mathlib."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousRationalDerivedRealization",
+  "date": "2026-10-25",
+  "group": "E6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "Continuous rational realization before the standard support bounds.",
+   "via": [
+    "lem-per-continuous-rational-derived-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalContinuousPullbackTransport",
+  "file": "lean/Sheaf/Paper/RationalContinuousPullbackTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ContinuousRational.rationalContinuousPullbackTransport",
+  "statement": "theorem rationalContinuousPullbackTransport\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    {X Y : Base.{u} l} (g : X.scheme ⟶ Y.scheme)\n    (aX : At l E X) (aY : At l E Y) : Nonempty (Along l E g aX aY)",
+  "branch": "sheaf-dag",
+  "by": "E6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-c2133",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261025T043222-L-1690703",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261027T094440-L-229163",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

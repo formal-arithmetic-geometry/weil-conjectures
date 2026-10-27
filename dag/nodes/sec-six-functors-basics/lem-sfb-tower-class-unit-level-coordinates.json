@@ -1,0 +1,124 @@
+{
+ "id": "lem-sfb-tower-class-unit-level-coordinates",
+ "kind": "statement",
+ "title": "Compatible finite coefficient-unit coordinates in normalized geometry",
+ "statement": "For every prime l, finite extension E of Q_l, schemes X,Y and f:X→Y, choose Base b and Geometry g [def-sp-tower-shriek-data] with levelPushUnderlying acting identically on every underlying section. There are finite module isomorphisms delta_n from the n-th evaluation of g.pull of the coefficient system [def-sp-tower-class-systems, def-sp-tower-class-coefficients] to the n-th coefficient module on X. Their hom maps commute with each quotient transition. Transposing ordinaryPullEvaluation.inv followed by delta_n.hom along the actual finite constant-ring adjunction gives the canonical unital constant direct-image map on every coefficient section (with HEq for the coefficient and unit-module carriers). This asserts only finite maps and their horizontal compatibility, not an assembled coefficient-system isomorphism, and asserts no tensor comparison.",
+ "stmt_deps": [
+  "def-sp-tower-shriek-data",
+  "def-sp-tower-class-systems",
+  "def-sp-tower-class-coefficients",
+  "def-coef-semilinear-geometry-base"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "clause (2), finite unit and tensor maps and their transposes"
+ },
+ "proof": [
+  {
+   "text": "Choose Base and Geometry with identity direct-image underlying section comparisons, before selecting any unit maps.",
+   "uses": [
+    "lem-sfb-tower-class-section-geometry-existence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "At each finite level use exists_finiteUnitIso, proved by the regular-module global-section universal property and finality of pro-etale base change. Compose with ordinaryPullEvaluation. The inverse comparison cancels in the transpose, proving the exact section normalization.",
+   "uses": [
+    "lem-sfb-tower-class-finite-unit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply unit_successor_compatibility to these normalized maps. At each site object apply Mathlib NatTrans.ofOpSequence to the underlying section functors on the opposite natural numbers. The adjacent module equations give its hypotheses by the actual transition section formula. Naturality of the resulting transformation at n<=m gives all transition squares, including equality indices. Sectionwise extensionality gives the required module square.",
+   "uses": [
+    "lem-sfb-tower-class-unit-successor-compatibility"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-tower-class-finite-unit",
+  "lem-sfb-tower-class-section-geometry-existence",
+  "lem-sfb-tower-class-unit-successor-compatibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "clause (2), finite unit and tensor maps and their transposes",
+  "note": "Finite unit isomorphism and its exact transpose are proved; adjacent compatibility is extended to all quotients by a proved induction on sequence-site section maps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of sheaves of modules preserves tensor product and the tensor unit",
+   "results": "8 hits: LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, CategoryTheory.sheafToPresheaf_μ, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, CategoryTheory.Sheaf.monoidalCategory, SheafOfModules.pushforwardNatIso_inv, LightCondensed.instMonoidalLightCondSetLightCondModFree, CategoryTheory.sheafToPresheaf_δ, CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf.",
+   "date": "2026-10-27",
+   "verdict": "Generic sheaf and monoidal results; no quotient-compatible normalized tower coordinates. The later loogle query finds the finite unit API."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullbackObjUnitToUnit\"",
+   "results": "SheafOfModules.pullbackObjUnitToUnit; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit.",
+   "date": "2026-10-27",
+   "verdict": "Finite unit map only, no compatible maps on the actual tower or the required geometric coordinates."
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackObjUnitToUnit|geometricOrdinaryTensor_exists|systemIsoOfEvaluation_exists",
+   "results": "5 Mathlib hits in Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean. Local search finds geometricOrdinaryTensor_exists and systemIsoOfEvaluation_exists under Sheaf/Paper.",
+   "date": "2026-10-27",
+   "verdict": "Reuse local tensor and system-assembly lemmas, separating finite comparison construction from assembly."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerClassTensorGeometryExistence",
+  "date": "2026-10-27",
+  "group": "H6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "clause (2), finite unit and tensor maps and their transposes",
+   "via": [
+    "lem-sfb-tower-class-tensor-geometry-existence",
+    "lem-sfb-diagonal-trace-geometric-model-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerClassUnitLevelCoordinates",
+  "file": "lean/Sheaf/Paper/TowerClassUnitLevelCoordinates.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.exists_unitLevelCoordinates",
+  "statement": "theorem exists_unitLevelCoordinates {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    ∃ b : SpTowerShriek.Base l E, ∃ g : SpTowerShriek.Geometry l E b f,\n      (∀ (n : ℕ)\n        (N : SemilinearSections.Mod.{u + 1, u, u + 1} (Scheme.ProEt.topology X)\n          (g.generic.coefficients n)) (U : Y.ProEtᵒᵖ)\n        (x : ((SemilinearSections.underlying.{u + 1, u, u + 1}\n          (Scheme.ProEt.topology Y) (SpTowerShriek.B l E Y n)).obj\n            ((g.generic.levelPush n).obj N)).obj.obj U),\n        HEq (((g.generic.levelPushUnderlying n).hom.app N).hom.app U x) x) ∧ ∃ δ : ∀ n : ℕ,\n      (SpTowerShriek.ev l E X n).obj\n          (g.pull.obj (coefficient Y (Arings l E Y))) ≅\n        (SpTowerShriek.ev l E X n).obj (coefficient X (Arings l E X)),\n      (∀ {m n : ℕ} (h : n ≤ m),\n        (SemilinearSections.transition (Scheme.ProEt.topology X)\n            (SpTowerShriek.B l E X) (SpTowerShriek.tau l E X) h).app\n            (g.pull.obj (coefficient Y (Arings l E Y))) ≫\n          (SemilinearSections.res (SemilinearSections.coefficientMap\n            (Scheme.ProEt.topology X) (SpTowerShriek.B l E X)\n            (SpTowerShriek.tau l E X) h)).map (δ n).hom =\n        (δ m).hom ≫ (SemilinearSections.transition (Scheme.ProEt.topology X)\n          (SpTowerShriek.B l E X) (SpTowerShriek.tau l E X) h).app\n            (coefficient X (Arings l E X))) ∧\n      ∀ (n : ℕ) (U : Y.ProEtᵒᵖ)\n        (x : (SpTowerShriek.B l E Y n).obj.obj U)\n        (x' : ((SpTowerShriek.ev l E Y n).obj\n          (coefficient Y (Arings l E Y))).val.obj U),\n        HEq x x' → HEq\n          ((((Scheme.proEtaleConstantRingAdjunction (SpTowerShriek.R l E n) f).homEquiv\n            _ _) ((g.ordinaryPullEvaluation n).inv.app\n              (coefficient Y (Arings l E Y)) ≫ (δ n).hom)).val.app U x')\n          ((Scheme.proEtaleConstantDirectImageMap.{u, u + 2} f CommRingCat.{u + 1}\n            (CommRingCat.of.{u + 1} (ULift.{u + 1} (SpTowerShriek.R l E n)))).hom.app\n              U x)",
+  "branch": "sheaf-dag",
+  "by": "H6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261027T034655-L-3673153",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E7",
+  "result": "pass",
+  "landing": "20261027T050553-L-238877",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

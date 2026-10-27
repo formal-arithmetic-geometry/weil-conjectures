@@ -1,0 +1,151 @@
+{
+ "id": "lem-pur-condensed-open-coefficient-models",
+ "kind": "statement",
+ "title": "Coherent coefficient models with normalized scalar units",
+ "statement": "Fix a prime ell and a field k of prime characteristic different from ell. Use the completed integral categories, scalar realization, compact-support model and prescribed comparisons of [def-pur-condensed-open-counit-comparisons, lem-pur-compact-support-condensed-realization, lem-weil-pbc-condensed-e-realization]. There exists one family C : Models ell k together with, for every separated finite-type k-scheme T, a ScalarUnit ell k C.coefficient T, such that FactorNormalized ell k C, SystemCounitNormalized ell k C, and UnitNormalized ell k C units hold. Thus the actual strict-system counit and its total-limit image are normalized and coefficient multiplication commutes with restriction as the inverse monoidal pullback unit. No condensed open-counit equation or invertibility of its specified extension comparison is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Agent-formulated open-adjunction normalization needed in Steps 2–3, using the completed reconstruction and condensed scalar comparisons; not claimed to be a literal theorem of the blueprint."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-weil-open-immersion",
+  "def-weil-pbc-bounded-constructible-complete",
+  "lem-coef-derived-system-evaluation-calculus",
+  "prop-weil-pbc-qbar-condensed-two-colimit",
+  "sk-def-sfb-dc-restricted-functors",
+  "lem-weil-pbc-condensed-e-realization",
+  "lem-sf-integral-open-reduction-comparison",
+  "def-sfb-dc-open-lower-shriek-adjunction",
+  "lem-pur-compact-support-condensed-realization",
+  "lem-pur-condensed-tate-realization",
+  "lem-sfb-derived-pullback-strong-monoidal",
+  "def-pur-condensed-open-counit-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Use the arbitrary-field compact-support factorization to construct the coefficient family and its normalized proper/open comparison. The identity between its inverse q and the integralInverse in the present coordinates follows from reconstruction-unit naturality, alpha R(q)=r, and the two triangle identities. This gives FactorNormalized, without imposing a finite-field hypothesis.",
+   "uses": [
+    "lem-pur-compact-support-realization-factorization",
+    "lem-pur-compact-support-condensed-realization",
+    "lem-weil-pbc-condensed-e-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Mate the simultaneous reduction/pullback square to identify the strict-system open counit. Apply total limit and the actual reduction/limit units and cancel the invertible unit on complete objects. These are the two equations in SystemCounitNormalized; no equality of system arrows is inferred merely from their evaluations.",
+   "uses": [
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every base T define the scalar unit by coefficient inclusion on sections. Its derived adjunct is coefficient multiplication; its inverse on flat representatives is b ↦ b tensor 1 tensor 1. Restriction takes the same tensor to the restricted tensor, so the multiplication comparisons commute with scalarRestriction. Successive scalar associativity and the strong monoidal pullback unit identify the lower map with precisely leftDerivedUpperStarUnitIso. At degree zero these are the Tate maps. This proves ScalarUnit and UnitNormalized, also for empty T.",
+   "uses": [
+    "lem-pur-condensed-tate-realization",
+    "lem-sf-open-tensor-normalization",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-sfb-derived-pullback-strong-monoidal"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pur-compact-support-condensed-realization",
+  "lem-pur-compact-support-realization-factorization",
+  "lem-pur-condensed-tate-realization",
+  "lem-sf-integral-open-reduction-comparison",
+  "lem-sf-open-tensor-normalization",
+  "lem-sfb-derived-pullback-strong-monoidal",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-weil-pbc-condensed-e-realization",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Explicit stage-3 decomposition of the open-counit normalization argument; see the steps and Lean docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "derived.*(unit|regular).*iso|open.*(unit|counit)",
+   "results": "{\"t\": \"2026-10-25T15:43:13Z\", \"tool\": \"grep\", \"query\": \"derived.*(unit|regular).*iso|open.*(unit|counit)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/ModularForms/DedekindEta.lean\", \"Mathlib/NumberTheory/ModularForms/DedekindEta.lean\", \"Mathlib/NumberTheory/ModularForms/DedekindEta.lean\", \"Mathlib/NumberTheory/ModularForms/Discriminant.lean\", \"Mathlib/NumberTheory/Padics/PadicNumbers.lean\", \"Mathlib/Analysis/CStarAlgebra/ApproximateUnit.lean\", \"Mathlib/Analysis/CStarAlgebra/GelfandDuality.lean\", \"Mathlib/Analysis/CStarAlgebra/GelfandDuality.lean\"], \"digest\": \"20ffb2cf0396d046\"}",
+   "date": "2026-10-25",
+   "verdict": "No result supplies this completed-coefficient comparison. Generic adjunction identities are used in the parent proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A coefficient scalar extension realization preserves the regular module with the canonical multiplication unit and restriction to open subschemes",
+   "results": "{\"t\": \"2026-10-25T15:43:13Z\", \"tool\": \"leansearch\", \"query\": \"A coefficient scalar extension realization preserves the regular module with the canonical multiplication unit and restriction to open subschemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendScalars.obj'\", \"ModuleCat.ExtendRestrictScalarsAdj.unit\", \"RestrictScalars\", \"IsSMulRegular.of_isLocalizedModule\", \"ModuleCat.CoextendScalars.smul_apply\", \"ModuleCat.ExtendRestrictScalarsAdj.Unit.map\", \"AlgebraicGeometry.Scheme.Modules.map_smul\", \"ModuleCat.ExtendRestrictScalarsAdj.unit_app\"], \"digest\": \"20713f0a47129e62\"}",
+   "date": "2026-10-25",
+   "verdict": "No result supplies this completed-coefficient comparison. Generic adjunction identities are used in the parent proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invertible comparison between two left adjoints and an invertible comparison of right adjoints preserve the units and counits",
+   "results": "{\"t\": \"2026-10-25T15:43:15Z\", \"tool\": \"leanfinder\", \"query\": \"An invertible comparison between two left adjoints and an invertible comparison of right adjoints preserve the units and counits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.leftAdjointCompIso_hom\", \"CategoryTheory.Adjunction.leftAdjointUniq_inv_app\", \"CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app\", \"CategoryTheory.Adjunction.unit_rightAdjointUniq_hom\", \"CategoryTheory.Adjunction.unit_leftAdjointUniq_hom\", \"CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit\", \"CategoryTheory.Adjunction.leftAdjointUniq_trans_app\", \"CategoryTheory.Adjunction.leftAdjointUniq_trans\"], \"digest\": \"840d93e89a0b791a\"}",
+   "date": "2026-10-25",
+   "verdict": "No result supplies this completed-coefficient comparison. Generic adjunction identities are used in the parent proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"counit\", \"mate\"",
+   "results": "{\"t\": \"2026-10-25T14:55:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"counit\\\", \\\"mate\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\"], \"digest\": \"46db0dd75d6df456\"}",
+   "date": "2026-10-25",
+   "verdict": "No result supplies this completed-coefficient comparison. Generic adjunction identities are used in the parent proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedOpenCounitRealization",
+  "date": "2026-10-26",
+  "group": "J9"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-condensed-open-counit-realization",
+   "via": [],
+   "place": "A strictly partial lemma of the existing six-step open-counit argument."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedOpenCoefficientModels",
+  "file": "lean/Sheaf/Paper/CondensedOpenCoefficientModels.lean",
+  "declaration": "WeilConjectures.CondensedOpenCounitRealization.condensed_open_coefficient_models",
+  "statement": "theorem condensed_open_coefficient_models :\n    ∃ (C : Models l k) (units : ∀ T : Base k, ScalarUnit l k C.coefficient T),\n      FactorNormalized l k C ∧ SystemCounitNormalized l k C ∧ UnitNormalized l k C units",
+  "branch": "sheaf-dag",
+  "by": "J9",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261025T180827-L-4038628",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261025T180827-L-4038628",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

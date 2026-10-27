@@ -1,0 +1,89 @@
+{
+ "id": "lem-sfb-finite-dimensional-perfect-pairing",
+ "kind": "statement",
+ "title": "Two-sided nondegenerate finite-dimensional field pairings are perfect",
+ "statement": "Let $K$ be a field [def-weil-field], and let $M,N$ be $K$-vector spaces, with $M$ finite-dimensional [def-weil-finite-dimensional-subspace]. Let $p:M\\times N\\to K$ be bilinear, meaning linear in each variable. Suppose that $p(x,y)=0$ for every $y\\in N$ implies $x=0$, and that $p(x,y)=0$ for every $x\\in M$ implies $y=0$. Then both induced linear maps\n$$M\\longrightarrow\\operatorname{Hom}_K(N,K),\\quad x\\longmapsto p(x,-),\\qquad N\\longrightarrow\\operatorname{Hom}_K(M,K),\\quad y\\longmapsto p(-,y)$$\nare isomorphisms.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I §13, pp.57–58, linear algebra used after rationalizing the finite Weil pairing. Exact general statement in Mathlib/LinearAlgebra/PerfectPairing/Basic.lean:116."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-finite-dimensional-subspace"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A bilinear form on finite dimensional vector spaces which is nondegenerate in both variables induces isomorphisms with the duals",
+   "results": "8 hits; top: LinearMap.BilinForm.toDual, LinearMap.BilinForm.toDual_def, LinearMap.BilinForm.apply_toDual_symm_apply, LinearMap.BilinForm.toDual.congr_simp, LinearMap.BilinForm.Nondegenerate, LinearMap.Nondegenerate, LinearMap.BilinForm.dualBasis, LinearMap.BilinForm.Nondegenerate.flip",
+   "date": "2026-10-23",
+   "verdict": "match: LinearMap.IsPerfPair.of_injective, Mathlib/LinearAlgebra/PerfectPairing/Basic.lean:116"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a field a bilinear pairing on a finite dimensional space is perfect if nondegenerate in both arguments",
+   "results": "8 hits; top: LinearMap.IsPerfPair.of_injective, LinearMap.IsPerfPair.of_injective', LinearMap.IsPerfPair, RootPairing.isPerfPair_toLinearMap, LinearMap.finrank_eq_of_isPerfPair, Module.finrank_of_isPerfPair, LinearMap.IsPerfPair.of_bijective, LinearEquiv.instIsPerfPair",
+   "date": "2026-10-23",
+   "verdict": "match: LinearMap.IsPerfPair.of_injective, Mathlib/LinearAlgebra/PerfectPairing/Basic.lean:116"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.IsPerfPair.of_injective",
+   "results": "1 hits; top: LinearMap.IsPerfPair.of_injective",
+   "date": "2026-10-23",
+   "verdict": "match: LinearMap.IsPerfPair.of_injective, Mathlib/LinearAlgebra/PerfectPairing/Basic.lean:116"
+  },
+  {
+   "tool": "grep",
+   "query": "lemma IsPerfPair.of_injective|theorem lift_spec|theorem lift_unique|theorem ext_of_toZModPow",
+   "results": "25 hits; top: Mathlib/NumberTheory/Padics/RingHoms.lean, Mathlib/NumberTheory/Padics/RingHoms.lean, Mathlib/NumberTheory/Padics/RingHoms.lean, Mathlib/LinearAlgebra/CliffordAlgebra/Basic.lean, Mathlib/LinearAlgebra/FreeProduct/Basic.lean, Mathlib/LinearAlgebra/PerfectPairing/Basic.lean, Mathlib/LinearAlgebra/PerfectPairing/Basic.lean, Mathlib/LinearAlgebra/TensorAlgebra/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "match: LinearMap.IsPerfPair.of_injective, Mathlib/LinearAlgebra/PerfectPairing/Basic.lean:116"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "LinearMap.IsPerfPair.of_injective",
+  "file": "Mathlib/LinearAlgebra/PerfectPairing/Basic.lean",
+  "how": "exact, line 116: the two vanishing hypotheses are injectivity of the curried map and its flip, by subtracting two vectors; IsPerfPair is the two stated bijectivity assertions (definition at lines 40–42).",
+  "line": 116
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-weil-pairing",
+  "date": "2026-10-23",
+  "group": "Q108"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Proposition 14.4(a), printed p.62; polarization convention in I §11, printed p.53. Supporting fact for Proposition 14.4(a): Chapter I §14, printed p.61 (Rosati formula and involution), Theorem 14.3, printed p.62 (positive trace form); §11 p.53 (polarization isogeny); Proposition 10.20, printed pp.50–52 (trace on Tate modules). Supporting input: Chapter I, Remark 8.5, printed p.36; §9 opening, p.41; §13 pp.57–58, Lemma 13.1 and Proposition 13.2(a),(d): Weil pairings, passage to the inverse limit, functoriality and skew symmetry; nondegeneracy from the perfect finite Weil pairings and an isogeny on rational Tate modules. Supporting lemma: Chapter I §13, pp.57–58, linear algebra used after rationalizing the finite Weil pairing. Exact general statement in Mathlib/LinearAlgebra/PerfectPairing/Basic.lean:116.",
+   "via": [
+    "lem-sfb-abelian-weil-pairing",
+    "lem-sfb-rosati-trace-positive",
+    "lem-sfb-polarized-abelian-automorphisms-finite",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

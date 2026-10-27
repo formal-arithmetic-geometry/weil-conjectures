@@ -1,0 +1,145 @@
+{
+ "id": "lem-sf-ordinary-reduction-augmented-computation",
+ "kind": "statement",
+ "title": "Natural augmented computation of ordinary quotient reduction",
+ "statement": "Let l be prime and E a finite extension of Q_l, and W an arbitrary scheme. Fix a coherent derived coefficient-system calculus S of [lem-coef-derived-system-evaluation-calculus] and an ordinary reduction A of [def-sf-open-semilinear-tensor-model-data], including its natural evaluation isomorphisms to actual scalar extension and every ordinary quotient square. On the full category of flat-term K-flat complexes, there is a natural isomorphism goodLocalization⋙S.reduction ≅ goodInclusion⋙A.functor.mapHomologicalComplex⋙Q. For every good complex P, its component and the termwise A evaluation isomorphisms satisfy CoefficientReductionPresentation and IntegralOpenReduction.AugmentedPresentation. Thus the computation is pinned by the transpose of one entire strict chain scalar-unit augmentation, not by its evaluated arrows alone. No completeness, boundedness or quasi-compactness hypothesis is used.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YY, 0941 and 09T5: deriving the ordinary quotient/limit adjunction on good models, with strict scalar-unit normalization."
+ },
+ "stmt_deps": [
+  "def-sf-open-semilinear-tensor-model-data",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Use the ordinary model supplied by fixedCalculusModels. Compare its tensor functor with A using M.evaluation followed by the inverse of A.evaluation at every level. The two quotient equations give the successor squares. The sequenceIsoOfSuccessor construction and sequence_hom_ext assemble these finite isomorphisms into a natural isomorphism of sequence-module functors.",
+   "uses": [
+    "lem-trf-completion-unit-fixed-calculus-models",
+    "stage3-pur-extension-ordinary-association-chain"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the ordinary tensor/limit adjunction along this natural isomorphism. Naturality of inverse-limit projections and of coefficientSequenceRestriction_evaluation, together with the finite comparison equation, preserves the actual scalar-unit formula. Keep the original termwise-limit comparison and its projection equations.",
+   "uses": [
+    "lem-trf-completion-unit-fixed-calculus-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply fixedDerivedComparison to this transported ordinary model, the canonical termwise-limit comparison and the canonical normalized right-derived constant-limit unit. Its comparison is invertible on flat-term K-flat complexes, so restrict it to obtain the required natural isomorphism e. Its finite evaluation equation gives the first presentation condition, and A.quotient gives the second degreewise.",
+   "uses": [
+    "lem-trf-completion-unit-fixed-calculus-models",
+    "lem-trf-completion-unit-canonical-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the transported ordinary unit through the constant-tower/limit adjunction on complexes, inserting the composition comparison between termwise restriction followed by termwise limit and their composite. This constructs a strict chain augmentation a. Its degree-i, level-n component is the ordinary unit followed by the inverse-limit projection. The transported unit formula, the actual scalar-extension unit formula and cancellation of A.evaluation show precisely the required heterogeneous section equality.",
+   "uses": [
+    "lem-trf-completion-unit-fixed-calculus-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any strict constant-tower chain map, the defining factorization equation of the derived adjunction unit and naturality of the right-derived limit unit identify its derived transpose with the localized ordinary transpose followed by the canonical limit comparison and unit. Apply this to a. The termwise-limit projection equations identify the two comparisons; fixedDerivedComparison gives the same normalized transpose for e. Naturality in the restriction-factor isomorphism completes AugmentedPresentation.",
+   "uses": [
+    "lem-trf-completion-unit-canonical-models",
+    "lem-trf-completion-unit-fixed-calculus-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-completion-unit-fixed-calculus-models",
+  "stage3-pur-extension-ordinary-association-chain",
+  "lem-trf-completion-unit-canonical-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YY, 0941 and 09T5. W2 implements the quotient/limit adjunction route using the existing fixed-calculus and canonical-model constructions; generic sequence assembly comes from the ordinary association chain module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero commutes with derived coefficient reduction as a natural strict semilinear system with K flat models",
+   "results": "8 hits: IsAdicComplete.StrictMono.factorPow_comp_extend, IsAdicComplete.StrictMono.extend, IsAdicComplete.StrictMono.extend_eq, IsAdicComplete.StrictMono.of_lift, IsAdicComplete.StrictMono.of_comp_lift, Module.Baer.ExtensionOfMaxAdjoin.extensionToFun, Module.Baer.ExtensionOfMaxAdjoin.extensionToFun_wd, Module.Baer.ExtensionOfMaxAdjoin.snd",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"tensor\"",
+   "results": "10 hits: PresheafOfModulesOfCommRing.Monoidal.tensorObj, PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj, PresheafOfModulesOfCommRing.tensorObj_obj, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight, PresheafOfModulesOfCommRing.Monoidal.tensorHom, PresheafOfModulesOfCommRing.Monoidal.tensorObjMap, PresheafOfModulesOfCommRing.Monoidal.tensorHom_app",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ringedSlice|semilinear.*[Ss]calar",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural comparison between derived reduction of a flat K-flat complex and simultaneous ordinary quotient tensor, normalized by the strict scalar-unit augmentation",
+   "results": "8 hits: Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_exact, Module.Flat.tfae_equational_criterion, Module.Flat.lTensor_exact, Module.FaithfullyFlat.range_le_ker_of_exact_rTensor, Module.Flat.iff_rTensor_exact', Module.FaithfullyFlat.rTensor_exact_iff_exact",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenSemilinearTensorModel",
+  "date": "2026-10-25",
+  "group": "A7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Proof sentence “The maps used here are tensor reassociation, evaluation, and adjunction units and counits”; integral open factor, returned lem-sf-integral-open-reduction-comparison arguments 5-6",
+   "via": [
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OrdinaryReductionAugmentedComputation",
+  "file": "lean/Sheaf/SixFunctors/OrdinaryReductionAugmentedComputation.lean",
+  "declaration": "WeilConjectures.OpenSemilinearTensor.ordinaryReductionAugmentedComputation",
+  "statement": "theorem ordinaryReductionAugmentedComputation (W : Scheme.{t})\n    (S : CoefficientDerivedSystemCalculus l E W)\n    (cS : CoefficientDerivedSystemCoherence l E W S) (A : OrdinaryReduction l E W) :\n    ∃ e : integralOperationsGoodLocalization l E W ⋙ S.reduction ≅\n      (integralOperationsGoodComplex l E W).ι ⋙\n        A.functor.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q,\n      ∀ P : (integralOperationsGoodComplex l E W).FullSubcategory,\n        CoefficientReductionPresentation l E W S.toCoefficientDerivedSystemReduction\n          P.obj P.property.1 _ (e.app P) (A.complexEvaluation l E P.obj) ∧\n        IntegralOpenReduction.AugmentedPresentation l E W S P.obj _ (e.app P)\n          (A.complexEvaluation l E P.obj)",
+  "branch": "sheaf-dag",
+  "by": "A7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-421b5",
+  "group": "A7",
+  "result": "fix",
+  "landing": "20261025T043154-L-1688691",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261026T222805-L-696311",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -19,121 +19,119 @@
  ],
  "proof": [
   {
-   "text": "Write $P=R[T_1,\\ldots,T_n]$, $M=\\prod_iT_i^{a_i}$ and $f=M-\\pi$. The hypotheses on the trait and [def-sc-discrete-valuation-ring] identify $R$ as a DVR, hence a principal ideal domain. Also $R$ is regular local directly from its dimension one and its one-generator maximal ideal. Its only primes are $(0)$ and its maximal ideal: a strictly intermediate prime would give a chain of length two. The localization at $(0)$ is its fraction field, regular local of dimension zero. Thus $R$ is a regular ring.",
+   "text": "Write $P=R[T_1,\\ldots,T_n]$, $M=\\prod_iT_i^{a_i}$ and $f=M-\\pi$, so $B=P/(f)$ as in [def-per-monomial-trait-model]. Since $R$ is Noetherian and $B$ is a finite-type $R$-algebra, [lem-weil-pbc-finite-type-algebra-noetherian] makes $B$ Noetherian. The local ring $R$ is regular directly from [def-weil-regular-scheme]: it has dimension one and maximal ideal $(\\pi)$. Also $\\pi\\ne0$ and $\\pi\\notin(\\pi)^2$: an equation $\\pi=\\pi^2r$ in this domain would imply $1=\\pi r$, contradicting that $\\pi$ belongs to the maximal ideal. For later fibre identifications, [lem-weil-pbc-krull-intersection-jacobson], applied to the finite module $R$ over itself and its maximal ideal $(\\pi)$, gives $\\bigcap_r\\pi^rR=0$. Hence every nonzero $x\\in R$ has a largest $v$ with $x\\in\\pi^vR$; writing $x=\\pi^v u$ forces $u\\notin(\\pi)$, so $u$ is a unit. Thus $R[1/\\pi]=K$.",
    "uses": [
-    "def-sc-discrete-valuation-ring",
-    "def-weil-regular-scheme"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose XVI Lemma 3.5.13(i), pp.250-251; assertion (i) is left as an exercise. The following is an agent-written solution."
-   }
-  },
-  {
-   "text": "By [lem-trf-polynomial-ring-regular-base], $P$ is regular and in particular Noetherian. The quotient $B=P/(f)$ is Noetherian: an ideal of $B$ is the image of its inverse-image ideal of $P$, and the images of finite generators generate it. This uses exactly the finite-generation definition of Noetherianity.",
-   "uses": [
-    "lem-trf-polynomial-ring-regular-base",
+    "def-per-monomial-trait-model",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
     "def-weil-regular-scheme",
-    "def-weil-pbc-noetherian-ring"
+    "lem-weil-pbc-krull-intersection-jacobson"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose XVI Lemma 3.5.13(i), pp.250-251; assertion (i) is left as an exercise. The following is an agent-written solution."
+    "place": "Expose XVI Lemma 3.5.13(i), pp.250--251, exercise; setup; supporting Stacks Algebra Tag 00FN (lemma-Noetherian-permanence), and Definition 00KU."
    }
   },
   {
-   "text": "Choose $j$ with $a_j>0$, put $A=R[T_i:i\\ne j]$, $d=a_j$, and $u=\\prod_{i\\ne j}T_i^{a_i}$. Regard $f$ as $uX^d-\\pi\\in A[X]$. By [lem-per-polynomial-ufd-prime-quotient], $A$ and $P$ are UFDs. The ideal $\\mathfrak p=\\pi A$ is prime since $A/\\pi A=(R/\\pi R)[T_i:i\\ne j]$ is a polynomial domain. In particular $\\pi$ is a prime element of $A$. The monomial $u$ is nonzero modulo $\\pi$, and $\\pi\\notin\\pi^2A$: comparing constant coefficients would otherwise give $1\\in\\pi R$ after cancellation in $R$. A common divisor of $u$ and $\\pi$ is a unit: a nonunit divisor of the prime element $\\pi$ is associated to $\\pi$, which cannot divide $u$. Thus $uX^d-\\pi$ is primitive. Its lower coefficients are zero except $-\\pi$, its leading coefficient is outside $\\mathfrak p$, and its constant coefficient is outside $\\mathfrak p^2$. The Eisenstein criterion makes $f$ irreducible. The prime-quotient clause of [lem-per-polynomial-ufd-prime-quotient] now makes $B$ an integral domain.",
+   "text": "The generic fibre has coordinate ring $C=K\\otimes_R B=K[T_1,\\ldots,T_n]/(f)$: extension of coefficients and the quotient maps give mutually inverse maps on the displayed generators. Choose $j$ with $a_j>0$ and $a_j\\in K^\\times$. In $C$, $M=\\pi\\in K^\\times$, so every $T_i$ with $a_i>0$ is a unit. Consequently $\\partial f/\\partial T_j=a_j\\pi T_j^{-1}$ is a unit. Reorder $T_j$ first. This one-equation presentation is standard smooth by [def-weil-pbc-standard-smooth-algebra], hence $C$ is a smooth $K$-algebra by [lem-weil-pbc-standard-smooth-is-smooth]. Every prime localization of $C$ is regular local by [lem-weil-pbc-smooth-over-field-regular-local].",
    "uses": [
-    "lem-per-polynomial-ufd-prime-quotient",
-    "lem-per-eisenstein-prime-ideal-criterion"
+    "def-weil-pbc-standard-smooth-algebra",
+    "lem-weil-pbc-standard-smooth-is-smooth",
+    "lem-weil-pbc-smooth-over-field-regular-local"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose XVI Lemma 3.5.13(i), pp.250-251; assertion (i) is left as an exercise. The following is an agent-written solution."
+    "place": "Expose XVI Lemma 3.5.13(i), pp.250--251, exercise; generic-fibre Jacobian; supporting Stacks Algebra Tags 00T6 (definition-standard-smooth), 00T7 (lemma-standard-smooth), 00TT (lemma-characterize-smooth-over-field)."
    }
   },
   {
-   "text": "Its generic fibre has coordinate ring $C=K[T_1,\\ldots,T_n]/(f)$. Choose $j$ for which $a_j>0$ is invertible in $K$. In $C$, $M=\\pi$ is a unit. Every $T_i$ with $a_i>0$ is therefore a unit. The formal derivative $D_j(f)=a_jT_j^{a_j-1}\\prod_{i\\ne j}T_i^{a_i}$ is a unit in $C$, since $T_jD_j(f)=a_j\\pi$. This formula follows by the monomial rule in [def-weil-pbc-polynomial-partial-derivative]; variables of exponent zero contribute the factor $1$.",
+   "text": "To check smoothness in the scheme convention, the finite displayed presentation gives local finite presentation by [def-sbc-locally-finite-presentation]. For any $K$-algebra $D$ and ideal $J$ with $J^2=0$, lift the images of the $T_i$ of a map $C\\to D/J$ to $t_i\\in D$. Then $f(t)\\in J$ and $d=(\\partial f/\\partial T_j)(t)$ is a unit: an inverse modulo $J$ lifts to an inverse since $1+z$ has inverse $1-z$ for $z\\in J$. Replacing $t_j$ by $t_j-d^{-1}f(t)$ and fixing the other variables kills $f$ by polynomial expansion, because every quadratic term in the correction lies in $J^2=0$. This gives a lift $C\\to D$. By [lem-weil-pbc-affine-formally-smooth-iff-ring-lifting], $\\operatorname{Spec}C\\to\\operatorname{Spec}K$ is formally smooth, hence smooth by [def-sbc-smooth-morphisms].",
    "uses": [
-    "def-weil-pbc-polynomial-partial-derivative"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose XVI Lemma 3.5.13(i), pp.250-251; assertion (i) is left as an exercise. The following is an agent-written solution."
-   }
-  },
-  {
-   "text": "The generic fibre is smooth by the lifting definition [def-sbc-smooth-morphisms]. Indeed $C$ is finitely presented. For a square-zero ideal $J\\subset D$ in any $K$-algebra and a map $C\\to D/J$, lift the coordinate images to $t_i\\in D$. Then $f(t)\\in J$ and $v=D_j(f)(t)$ is a unit: a lift of an inverse modulo $J$ gives a product $1+e$, $e\\in J$, whose inverse is $1-e$. Keep all coordinates except $j$ fixed and replace $t_j$ by $t_j-f(t)v^{-1}$. Polynomial expansion, with all terms of degree at least two in $J$ zero, gives $f(t)-v f(t)v^{-1}=0$. This defines a lift $C\\to D$. These maps are precisely the required lifts for affine first-order thickenings, so formal smoothness and finite presentation give smoothness.",
-   "uses": [
-    "def-sbc-smooth-morphisms",
-    "def-weil-pbc-polynomial-partial-derivative"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose XVI Lemma 3.5.13(i), pp.250-251; assertion (i) is left as an exercise. The following is an agent-written solution."
-   }
-  },
-  {
-   "text": "For regularity take a prime $q\\subset P$ containing $f$, set $L=P_q$ and $\\mathfrak m=qL$. It is regular local by the regularity of $P$. If $\\pi\\notin q$, then $q\\cap R=(0)$ (the only other prime of $R$ contains $\\pi$), so all nonzero elements of $R$ are invertible in $L$. Hence $L$ is also the localization of $K[T_1,\\ldots,T_n]$ at the extended prime, and $L/(f)$ is a prime localization of $C$. The polynomial ring over the field $K$ is regular by [lem-trf-polynomial-ring-regular-base]. Step 4 supplies a derivation with unit image on $f$, so [lem-weil-pbc-hypersurface-derivation-regular] says $C$ is regular. Consequently $L/(f)$ is regular local.",
-   "uses": [
-    "def-weil-regular-scheme",
-    "lem-trf-polynomial-ring-regular-base",
-    "lem-weil-pbc-hypersurface-derivation-regular"
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-affine-formally-smooth-iff-ring-lifting",
+    "def-sbc-smooth-morphisms"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose XVI Lemma 3.5.13(i), pp.250-251; assertion (i) is left as an exercise. The following is an agent-written solution."
+    "place": "Expose XVI Lemma 3.5.13(i), pp.250--251, exercise; explicit square-zero lifting for the generic fibre; supporting Stacks More on Morphisms Tag 02H4 (lemma-affine-formally-smooth) and Definition 02H0."
    }
   },
   {
-   "text": "Now suppose $\\pi\\in q$. The ring $L/(\\pi)$ is the localization of $(R/\\pi R)[T_1,\\ldots,T_n]$ at the prime induced by $q$, hence regular local by [lem-trf-polynomial-ring-regular-base]. Apply [lem-weil-pbc-regular-local-quotient-independent-generators] to the ideal $I=(\\pi)$ in the regular local ring $L$. It gives generators of $I$ with independent classes in $\\mathfrak m/\\mathfrak m^2$. If $\\pi\\in\\mathfrak m^2$, all these classes would be zero, forcing the generating set to be empty, hence $I=0$. This is impossible: $P$ is a polynomial domain over $R$, and its localization at a prime keeps the nonzero element $\\pi$ nonzero. Therefore $\\pi\\notin\\mathfrak m^2$.",
+   "text": "Let $\\mathfrak q\\subset P$ be any prime containing $f$ and $\\pi$. Since $M\\in\\mathfrak q$, choose $i$ with $a_i>0$ and $T_i\\in\\mathfrak q$. Put $Q=P_{\\mathfrak q}$ with maximal ideal $\\mathfrak n$. The contraction of $\\mathfrak q$ to $R$ is $(\\pi)$, so [lem-trf-polynomial-localization-order-reflection] makes $Q$ regular local. Quotienting by $T_i$ gives a polynomial ring $P'=R[T_h:h\\ne i]$ and a prime $\\mathfrak q'$ whose contraction is again $(\\pi)$. The same order-reflection lemma, now on $P'_{\\mathfrak q'}$, shows that $\\pi$ is not in its squared maximal ideal. The natural map $Q\\to P'_{\\mathfrak q'}$ sends $f$ to $-\\pi$ and sends $\\mathfrak n^2$ into that squared ideal. Therefore $f\\notin\\mathfrak n^2$. Apply [lem-weil-pbc-regular-local-hypersurface-criterion] and [lem-weil-pbc-localization-at-prime-of-quotient] to obtain that the corresponding local ring of $B$ is regular. Every other prime of $B$ avoids $\\pi$ and has local ring equal to a prime localization of $C$ (invert $\\pi$ and then the remaining denominators); these are regular by step 2. Thus $B$ is regular. This also covers $n=1$, when $P'=R$.",
    "uses": [
-    "lem-trf-polynomial-ring-regular-base",
-    "lem-weil-pbc-regular-local-quotient-independent-generators"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose XVI Lemma 3.5.13(i), pp.250-251; assertion (i) is left as an exercise. The following is an agent-written solution."
-   }
-  },
-  {
-   "text": "Let $I_q=\\{i:a_i>0,\\ T_i\\in q\\}$. It is nonempty, since $M=f+\\pi\\in q$ and $q$ is prime. Set $r=\\sum_{i\\in I_q}a_i$. If $r\\ge2$, then $M\\in\\mathfrak m^2$ and $f=M-\\pi\\notin\\mathfrak m^2$ by Step 7. If $r=1$, then $I_q=\\{i\\}$ and $a_i=1$. Write $M=wT_i$, where $w$ is independent of $T_i$ and is a unit in $L$ because all its factors are outside $q$. Extend the partial derivative $D_i$ to $L$ by $D_i(a/s)=(sD_i(a)-aD_i(s))/s^2$. Then $D_i(f)=w$ is a unit. The Leibniz rule gives $D_i(\\mathfrak m^2)\\subseteq\\mathfrak m$, so again $f\\notin\\mathfrak m^2$. In both cases the regular local hypersurface criterion gives $L/(f)$ regular local. These are exactly the remaining prime localizations of $B$; with Step 2 this proves that $B$ is regular.",
-   "uses": [
-    "def-weil-pbc-polynomial-partial-derivative",
+    "lem-trf-polynomial-localization-order-reflection",
     "lem-weil-pbc-regular-local-hypersurface-criterion",
-    "def-weil-regular-scheme"
+    "lem-weil-pbc-localization-at-prime-of-quotient"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose XVI Lemma 3.5.13(i), pp.250-251; assertion (i) is left as an exercise. The following is an agent-written solution."
+    "place": "Expose XVI Lemma 3.5.13(i), pp.250--251, exercise; special-fibre local calculation; supporting Stacks Algebra Tags 031E and 00NO as in the order-reflection lemma; Tag 00NQ (lemma-regular-ring-CM), Tag 00CT (proposition-localize-quotient)."
+   }
+  },
+  {
+   "text": "Apply [lem-per-monomial-quotient-normal-basis] to $(A,c,a)=(R,\\pi,a)$. Thus $B$ has the $R$-basis of monomials $T^b$ with $b\\not\\geq a$ componentwise. In these coordinates $\\pi^rB$ consists exactly of finite coefficient families in $\\pi^rR$. Apply [lem-weil-pbc-krull-intersection-jacobson] to the finite $R$-module $R$ and its maximal ideal $(\\pi)$ to get $\\bigcap_r\\pi^rR=0$. Taking coefficients yields $\\bigcap_r\\pi^rB=0$. This argument uses finite generation only for $R$ over itself, not for the generally infinite-rank $R$-module $B$.",
+   "uses": [
+    "lem-per-monomial-quotient-normal-basis",
+    "lem-weil-pbc-krull-intersection-jacobson"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI Lemma 3.5.13(i), pp.250--251, exercise; connectedness input; monomial coordinates and Stacks Algebra Tag 00IQ (lemma-intersection-powers-ideal-module), part (2)."
+   }
+  },
+  {
+   "text": "Put $k=R/(\\pi)$. Reduction of coefficients identifies $B/\\pi B$ with $k[T_1,\\ldots,T_n]/(M)$; the normal basis of step 5 gives this identification coefficient by coefficient. The quotient is graded by total degree because $(M)$ is homogeneous of positive degree, and its degree-zero part is $k$. If $u^2=u$ in this quotient, its constant term is $0$ or $1$. After replacing $u$ by $1-u$ assume it is $0$. If $u\\ne0$, let $d>0$ be its least nonzero homogeneous degree. The degree-$d$ part of $u^2$ is zero, contradicting $u^2=u$. Hence the only idempotents in $B/\\pi B$ are $0,1$. For an idempotent $e\\in B$, replace $e$ by $1-e$ if necessary so $e\\in\\pi B$. Since $e=e^r\\in\\pi^rB$ for every $r\\ge1$, step 5 implies $e=0$. Thus $B$ has no idempotents other than $0,1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI Lemma 3.5.13(i), pp.250--251, exercise; elementary graded calculation and idempotent separation, supplied to complete the exercise; no completeness or henselianity is used."
+   }
+  },
+  {
+   "text": "The assignment $R\\to k$ and $T_i\\mapsto0$ kills $f$ because $a\\ne0$, giving a surjection $B\\to k$. Its kernel is prime, so $X=\\operatorname{Spec}B$ is nonempty. By [def-weil-affine-spectrum], $\\Gamma(X,\\mathcal O_X)=B$. Step 6 and [lem-pc-scheme-connected-iff-idempotents] show $X$ connected. It is regular by step 4 and [def-weil-regular-scheme]. Apply [lem-sc-regular-connected-integral] to obtain that $X$ is integral. Finally [def-pc-integral-scheme], applied to the nonempty affine open $X$ itself, says that $B$ is an integral domain. Together with steps 1--4 this proves all assertions.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-pc-scheme-connected-iff-idempotents",
+    "def-weil-regular-scheme",
+    "lem-sc-regular-connected-integral",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI Lemma 3.5.13(i), pp.250--251, exercise; integrality from connectedness and regularity; supporting Stacks Properties Tags 0569 (lemma-regular-normal), 033N (lemma-normal-locally-Noetherian), 01OK (definition-integral)."
    }
   }
  ],
  "proof_deps": [
-  "def-sc-discrete-valuation-ring",
-  "def-weil-regular-scheme",
-  "lem-trf-polynomial-ring-regular-base",
-  "def-weil-pbc-noetherian-ring",
-  "lem-per-polynomial-ufd-prime-quotient",
-  "lem-per-eisenstein-prime-ideal-criterion",
-  "def-weil-pbc-polynomial-partial-derivative",
+  "def-pc-integral-scheme",
+  "def-per-monomial-trait-model",
+  "def-sbc-locally-finite-presentation",
   "def-sbc-smooth-morphisms",
-  "lem-weil-pbc-hypersurface-derivation-regular",
-  "lem-weil-pbc-regular-local-quotient-independent-generators",
-  "lem-weil-pbc-regular-local-hypersurface-criterion"
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-standard-smooth-algebra",
+  "def-weil-regular-scheme",
+  "lem-pc-scheme-connected-iff-idempotents",
+  "lem-per-monomial-quotient-normal-basis",
+  "lem-sc-regular-connected-integral",
+  "lem-trf-polynomial-localization-order-reflection",
+  "lem-weil-pbc-affine-formally-smooth-iff-ring-lifting",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-krull-intersection-jacobson",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-regular-local-hypersurface-criterion",
+  "lem-weil-pbc-smooth-over-field-regular-local",
+  "lem-weil-pbc-standard-smooth-is-smooth"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-  "place": "Expose XVI Lemma 3.5.13(i), pp.250-251, left as an exercise; explicit Eisenstein, square-zero lifting, and local hypersurface argument supplied by Q62. Algebra tools checked against Stacks 00PD, 00NR, 00NQ, 07PF and Mathlib sources."
+  "place": "Expose XVI Lemma 3.5.13(i), printed pp.250--251: the source explicitly leaves (i) as an exercise; this is a fresh reconstruction of that exercise."
  },
  "mathlib_searches": [
   {
@@ -205,6 +203,41 @@
    "results": "{\"t\": \"2026-10-18T22:12:14Z\", \"tool\": \"grep\", \"query\": \"monomial.*regular|regular.*monomial|primitive.monomial\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-19",
    "verdict": "no match: no declaration states the combined monomial trait assertion; Eisenstein and UFD results are separate Mathlib inputs"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monomial hypersurface product T_i^a_i = pi over a discrete valuation ring is a regular integral domain and its generic fibre is smooth if some exponent is nonzero in the fraction field",
+   "results": "{\"t\": \"2026-10-24T12:16:12Z\", \"tool\": \"leanfinder\", \"query\": \"A monomial hypersurface product T_i^a_i = pi over a discrete valuation ring is a regular integral domain and its generic fibre is smooth if some exponent is nonzero in the fraction field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.SubmersivePresentation.isStandardSmooth\", \"Algebra.instSmoothOfIsStandardSmooth\", \"RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway\", \"Algebra.IsStandardSmoothOfRelativeDimension.isStandardSmooth\", \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension.localization_away\"], \"digest\": \"b2f2e8c3207d937c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for this item: smooth-presentation infrastructure, Weierstrass results, and polynomial regularity do not assert integrality and regularity of this monomial trait quotient together with generic smoothness."
+  },
+  {
+   "tool": "grep",
+   "query": "monomial.*regular|regular.*monomial|monomial.*IsDomain|IsDomain.*monomial",
+   "results": "{\"t\": \"2026-10-24T12:16:32Z\", \"tool\": \"grep\", \"query\": \"monomial.*regular|regular.*monomial|monomial.*IsDomain|IsDomain.*monomial\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for this item: smooth-presentation infrastructure, Weierstrass results, and polynomial regularity do not assert integrality and regularity of this monomial trait quotient together with generic smoothness."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularRing, MvPolynomial",
+   "results": "{\"t\": \"2026-10-24T12:16:33Z\", \"tool\": \"loogle\", \"query\": \"IsRegularRing, MvPolynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"MvPolynomial.isRegularRing_of_isRegularRing\"], \"digest\": \"67df0db97293e344\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for this item: smooth-presentation infrastructure, Weierstrass results, and polynomial regularity do not assert integrality and regularity of this monomial trait quotient together with generic smoothness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A monomial equation over a discrete valuation ring is regular integral and generically smooth when one exponent is invertible",
+   "results": "{\"t\": \"2026-10-24T12:17:23Z\", \"tool\": \"leansearch\", \"query\": \"A monomial equation over a discrete valuation ring is regular integral and generically smooth when one exponent is invertible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsRegular.monomial\", \"WeierstrassCurve.instIsIntegralOfIsMinimal\", \"MvPolynomial.isRegular_X_pow\", \"of_isDiscreteValuationRing\", \"Algebra.mvPolynomial\", \"IsDiscreteValuationRing.toIsLocalRing\", \"PowerSeries.instIsDiscreteValuationRing\", \"Valuation.IsUniformizer.not_isUnit\"], \"digest\": \"e25146b797159759\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for this item: smooth-presentation infrastructure, Weierstrass results, and polynomial regularity do not assert integrality and regularity of this monomial trait quotient together with generic smoothness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A DVR polynomial quotient by product of powers of variables minus uniformizer is regular and integral with smooth fraction field fibre",
+   "results": "{\"t\": \"2026-10-24T12:17:26Z\", \"tool\": \"leanfinder\", \"query\": \"A DVR polynomial quotient by product of powers of variables minus uniformizer is regular and integral with smooth fraction field fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.IsDistinguishedAt.isWeierstrassDivisorAt\", \"Polynomial.IsDistinguishedAt.isWeierstrassDivisorAt'\", \"StandardEtalePair\", \"PowerSeries.weierstrassDistinguished\", \"PowerSeries.IsWeierstrassDivisor\", \"Algebra.IsStandardEtale\", \"PowerSeries.IsWeierstrassDivision.isWeierstrassFactorization\", \"PowerSeries.isDistinguishedAt_weierstrassDistinguished\"], \"digest\": \"a37a538f83d064a8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for this item: smooth-presentation infrastructure, Weierstrass results, and polynomial regularity do not assert integrality and regularity of this monomial trait quotient together with generic smoothness."
   }
  ],
  "mathlib_match": null,
@@ -235,58 +268,110 @@
   "same_as": [],
   "is": null
  },
+ "lean_removed": {
+  "commit": "f6bf55e2b05",
+  "path": "lean/Sheaf/AlgebraicGeometry/PrimitiveMonomialTraitGeometry.lean",
+  "module": "Sheaf.AlgebraicGeometry.PrimitiveMonomialTraitGeometry",
+  "declaration": "AlgebraicGeometry.primitive_monomial_trait_geometry",
+  "reason": "module deleted as dead (no target reaches it, node not reached); declaration exists nowhere else in lean/ or Mathlib, so the node has no Lean statement"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
-  "date": "2026-10-19",
+  "date": "2026-10-24",
   "item": "lem-per-primitive-monomial-trait-geometry",
   "worker": "stage1",
-  "summary": "Expanded ILO XVI 3.5.13(i), which is left as an exercise, into an Eisenstein integrality argument, direct square-zero lifting for generic smoothness, and regular-local hypersurface checks. Reused polynomial regularity, independent cotangent kernel generators and hypersurface regularity nodes. Added only two Mathlib leaves. Kept every hypothesis, including zero exponents, and imposed neither excellence nor henselianity.",
-  "blueprint": "Realizes the regular monomial-model input to the historical Step 3 of lem-per-artin-gabber-affine-curve along the existing ancestry, specifically ILO XVI 3.5.13(i), supporting Proposition 3.5.12.",
+  "summary": "Fresh reconstruction of the ILO XVI 3.5.13(i) exercise under Q91 repair: preserve statement, source, statement dependencies and blueprint provenance. Prove the generic Jacobian, special-fibre regularity by polynomial-local order reflection, and integrality via monomial-basis separation and graded idempotents. One new general algebra statement-only node; no excluded old proof input.",
+  "blueprint": "Historical proof Step 3 of lem-per-artin-gabber-affine-curve, regular finite-coefficient duality input, via the listed ancestors: ILO XVI Theorem 3.6.2, final paragraph p.253, reduces to Proposition 3.5.12. Supporting input: Expose XVI Lemma 3.5.13(i), printed pp.250--251. The provenance is historical only: this split reconstructs the newly admitted finite-coefficient monomial geometry input and does not reinstate the discarded Artin-Gabber proof. Steps 1--4 prove the geometry and steps 5--7 supply integrality.",
   "tool_uses": [
    {
-    "node": "lem-weil-pbc-regular-local-quotient-independent-generators",
-    "why": "Generic regular-local quotient tool (Stacks 00NR) used only to show the uniformizer has nonzero cotangent class; no theorem of the perverse unit states this algebra fact."
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "Hilbert basis theorem and quotient permanence for the displayed finite presentation. No statement of this unit supplies this generic algebra fact."
+   },
+   {
+    "node": "lem-weil-pbc-standard-smooth-is-smooth",
+    "why": "One-equation Jacobian calculation gives a standard-smooth K-algebra; this generic algebra theorem converts it to ring smoothness. No statement of this unit supplies this generic algebra fact."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-over-field-regular-local",
+    "why": "Regularity of the prime localizations of the smooth generic-fibre algebra. No statement of this unit supplies this generic algebra fact."
+   },
+   {
+    "node": "lem-weil-pbc-affine-formally-smooth-iff-ring-lifting",
+    "why": "Converts the explicit square-zero ring lift into formal smoothness of the affine generic-fibre morphism. No statement of this unit supplies this generic algebra fact."
+   },
+   {
+    "node": "lem-trf-polynomial-localization-order-reflection",
+    "why": "Generic polynomial-local algebra tool: preserves the order of the base uniformizer, both before and after killing a variable; it is not the excluded Eisenstein input. No statement of this unit supplies this generic algebra fact."
    },
    {
     "node": "lem-weil-pbc-regular-local-hypersurface-criterion",
-    "why": "Generic regular-local hypersurface tool (Stacks 00NQ) applied after explicitly checking f is outside the maximal-ideal square."
+    "why": "Converts f not in the squared maximal ideal to regularity of its local quotient. No statement of this unit supplies this generic algebra fact."
    },
    {
-    "node": "lem-weil-pbc-hypersurface-derivation-regular",
-    "why": "Generic derivation criterion for regular hypersurfaces (Stacks 07PF) on the generic fibre; no perverse-unit theorem gives this commutative algebra tool."
+    "node": "lem-weil-pbc-localization-at-prime-of-quotient",
+    "why": "Identifies the local hypersurface quotient with the local ring of Spec B. No statement of this unit supplies this generic algebra fact."
+   },
+   {
+    "node": "lem-weil-pbc-krull-intersection-jacobson",
+    "why": "Used on the finite module R over the local base R to separate uniformizer powers. No statement of this unit supplies this generic algebra fact."
+   },
+   {
+    "node": "lem-pc-scheme-connected-iff-idempotents",
+    "why": "Affine idempotent criterion for connectedness, after the explicit idempotent argument. No statement of this unit supplies this generic algebra fact."
+   },
+   {
+    "node": "lem-sc-regular-connected-integral",
+    "why": "General scheme-algebra tool applied after regularity and connectedness are both proved. No statement of this unit supplies this generic algebra fact."
    }
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-regular-local-quotient-independent-generators",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-standard-smooth-is-smooth",
+  "lem-weil-pbc-smooth-over-field-regular-local",
+  "lem-weil-pbc-affine-formally-smooth-iff-ring-lifting",
+  "lem-trf-polynomial-localization-order-reflection",
   "lem-weil-pbc-regular-local-hypersurface-criterion",
-  "lem-weil-pbc-hypersurface-derivation-regular"
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-krull-intersection-jacobson",
+  "lem-pc-scheme-connected-iff-idempotents",
+  "lem-sc-regular-connected-integral"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-cc-Q62-641e5f8e5",
-  "group": "Q62",
+  "reviewer": "NT-cc-Q49-d0cc38115",
+  "group": "Q49",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-641e5f8e5 (reviewer sub-agent of L); spot-checked: Read the full item, both new Mathlib leaves and every cited statement. Checked against ILO XVI Lemma 3.5.13(i) (pp. 250-251), which states integral + regular + smooth generic fibre and leaves the proof as an exercise. The item statement is verbatim the base statement. No hypothesis was added and no SGA is cited. Step 3: I checked the Eisenstein hypotheses on uX^d - pi over A = R[T_i : i != j]: piA is prime, u is outside piA, pi is not in pi^2 A, and the polynomial is primitive because pi is prime in the UFD A. They match Polynomial.irreducible_of_eisenstein_criterion at Criterion.lean:175-179 (IsDomain context). The UFD leaf gives one declaration per clause, and its lines were checked (PrincipalIdealDomain.lean:371, UniqueFactorization.lean:130, Defs.lean:137, Maximal.lean:148, Quotient/Basic.lean:90). Steps 4-5 give a unit derivative T_j D_j f = a_j pi and a correct Newton square-zero lift. Step 6 uses the 07PF derivation node on K[T] for primes not containing pi. Step 7 uses the 00NR statement to show pi is not in m^2. Step 8 has two cases, r >= 2 and r = 1, the latter using the extended D_i with D_i(m^2) in m, and then applies the 00NQ hypersurface criterion. Small cases tested: (1), (p) in mixed characteristic, zero exponents, (2,2) in characteristic 0. No duplicates found for Eisenstein or polynomial UFD (lem-trf-ufd-height-one and the sbc T^n - pi root node are different statements). Batch-5: the newly cited lem-trf-polynomial-ring-regular-base is a Mathlib leaf (MvPolynomial.isRegularRing_of_isRegularRing) with no proof deps. It is generic commutative algebra, neither the trace formula nor Poincare duality nor a step of their proofs, so the citation is accepted. The three tool_uses for pbc nodes 00NR, 00NQ and 07PF are accepted. Advisory only: the def-sc-discrete-valuation-ring stmt_dep is not referenced in the statement, and the worker wrote tool_uses itself (C8). No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-d0cc38115 (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-per-monomial-quotient-normal-basis, all 19 cited statements, and the source ILO XVI Déf 3.5.11 / Lem 3.5.13(i) on pp.250-251. The source leaves (i) as an exercise, so proof_origin=agent is right. The statement and stmt_deps are identical to the base, where the item was unsplit; this is not a re-split. The statement matches 3.5.13(i) (trait written out as a DVR, no henselian assumption; 'one exponent invertible in η'), with all four conclusions. Step checks: step 1 gives Noetherian via 00FN, R regular, pi not in m^2, and R[1/pi]=K via Krull 00IQ on R itself. Step 2: the Jacobian a_j*pi/T_j is a unit, so standard smooth, smooth (00T6/00T7) and regular localizations (00TT). Step 3: the explicit square-zero lift plus 02H4 give scheme smoothness of the generic fibre. Step 4: every hypothesis of order-reflection checks (contraction m; P/(T_i) with s=0 allowed); f maps to -pi, so f is not in n^2; 00NQ and 00CT then give regularity, and pi-avoiding primes are localizations of C. Step 5: the basis gives ∩ pi^r B = 0. Step 6 is a genuinely elementary graded-idempotent argument. Step 7: nonempty + connected + regular gives integral, so B is a domain. Small cases (1), (2), (1,1), (1,0), (2,2), (p,1) are all consistent. The new node is true over any ring (unique decomposition v=b+k(v)a; the inverse map X^v -> c^k e_b); a=(1,0) and c=0 tested. It meets B1-B7, its searches are honest, and it is no duplicate: the trf-cohen-monomial, monoid-denominator, binomial-laurent and monic-quotient nodes are all different. No cycle. Batch-5 flag: lem-trf-polynomial-localization-order-reflection is pure commutative algebra. Its 73-node closure contains only Hilbert-Samuel and dimension algebra, no étale, trace-formula or Poincaré content, so it lies genuinely outside both assumptions and is accepted. All 10 tool uses are generic algebra and accepted. No SGA source and no Eisenstein node. Only remark: step 1 leaves pi≠0 (dim 1) implicit, which is trivial. No changes."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.PrimitiveMonomialTraitGeometry",
-  "declaration": "AlgebraicGeometry.primitive_monomial_trait_geometry",
+  "declaration": "AlgebraicGeometry.monomialTraitAlgebra_geometry",
   "file": "lean/Sheaf/AlgebraicGeometry/PrimitiveMonomialTraitGeometry.lean",
-  "statement": "theorem primitive_monomial_trait_geometry (R : Type u) [CommRing R] [IsDomain R] [IsLocalRing R] [IsNoetherianRing R] (hdim : ringKrullDim R = 1) (π : R) (hπ : IsLocalRing.maximalIdeal R = Ideal.span {π}) (n : ℕ) (hn : 1 ≤ n) (a : Fin n → ℕ) (ha : ∃ i : Fin n, a i ≠ 0 ∧ IsUnit (a i : FractionRing R)) : IsNoetherianRing (monomialTraitAlgebra R π n a) ∧ IsDomain (monomialTraitAlgebra R π n a) ∧ IsRegularRing (monomialTraitAlgebra R π n a) ∧ Smooth (pullback.snd (Spec.map (CommRingCat.ofHom (monomialTraitAlgebraMap R π n a))) (Spec.map (CommRingCat.ofHom (algebraMap R (FractionRing R)))))",
+  "statement": "theorem monomialTraitAlgebra_geometry (R : Type u) [CommRing R] [IsDomain R] [IsLocalRing R] [IsNoetherianRing R] (hdim : ringKrullDim R = 1) (π : R) (hπ : IsLocalRing.maximalIdeal R = Ideal.span {π}) (n : ℕ) (hn : 1 ≤ n) (a : Fin n → ℕ) (ha : ∃ i : Fin n, a i ≠ 0 ∧ IsUnit (a i : FractionRing R)) : IsNoetherianRing (monomialTraitAlgebra R π n a) ∧ IsDomain (monomialTraitAlgebra R π n a) ∧ IsRegularRing (monomialTraitAlgebra R π n a) ∧ Smooth (pullback.snd (Spec.map (CommRingCat.ofHom (monomialTraitAlgebraMap R π n a))) (Spec.map (CommRingCat.ofHom (algebraMap R (FractionRing R)))))",
   "branch": "newtargets-dag",
-  "by": "Q106",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "Uses def-per-monomial-trait-model, whose existing:true record binds the published literal quotient monomialTraitAlgebra and its canonical coefficient map monomialTraitAlgebraMap. The chart theorem is no longer a statement dependency. Its published module remains the source of these existing definitions; no chart theorem or log-smoothness hypothesis is used. Generic smoothness is stated for the actual pullback to Spec (FractionRing R). 2026-10-20 (U): module Sheaf.AlgebraicGeometry.PrimitiveMonomialTraitGeometry deleted (dead: no target reaches it); this node is not reached either."
+  "by": "Q90",
+  "date": "2026-10-24",
+  "existing": false
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-c137ce00f",
-  "group": "Q106",
+  "reviewer": "NT-stage2-cc-57d71353b",
+  "group": "Q90",
   "result": "pass",
-  "note": "Re-delivery after H2 RETURN (ee9d2113). The theorem stmt_dep is replaced by new def node def-per-monomial-trait-model (ILO XVI Def 3.5.11, p.250, checked in the PDF). Its existing:true record is on the unchanged RegularLogSmoothMonomialChart module and lists monomialTraitAlgebra and monomialTraitAlgebraMap. Bodies at :41-52 match the node; there are only def stmt_deps, so no cycle; no competing owner or live node. Item differs from live only in lean and stmt_deps; the statement field is verbatim, and lean.statement occurs verbatim in the file. Hypotheses (Noetherian local domain, ringKrullDim=1, maximal ideal = span{pi}, n>=1, the same exponent nonzero and a unit in FractionRing R) and the four conclusions (Noetherian, domain, IsRegularRing, Smooth of pullback.snd to Spec K) match the node and Lemma 3.5.13(i). Edge cases and the universe were checked; docstrings and a sorry-only proof are in place. nt_compile --json is clean in 2.7 s, and a broken control fails. Advisories: def-sc-discrete-valuation-ring is unused in the statement (base-era); the public import of the chart module is heavy but is where the existing defs are recorded."
- },
- "lean_audit": {}
+  "note": "Snapshot node differs from live only in lean; lean.statement is verbatim in the file; single sorry. All hypotheses match the node and ILO XVI 3.5.13(i): Noetherian local domain, ringKrullDim=1, maximalIdeal=span{π}, n≥1, a:Fin n→ℕ, same index a_i≠0 and a unit in FractionRing R. The four conclusions are IsNoetherianRing, IsDomain, IsRegularRing and Smooth of pullback.snd(Spec ι, Spec(R→K)) on the existing monomialTraitAlgebra owner. Edge cases (1),(2)/ℤ_(2),(2,2), char-p exclusion and n=0 are consistent; universe-polymorphic. No live name clash or parallel delivery; all imports exist live; docstrings complete; no new definitions. Not compiled because no file was changed. Advisory: def-sc-discrete-valuation-ring is unused in the statement (base-era)."
+ }
 }

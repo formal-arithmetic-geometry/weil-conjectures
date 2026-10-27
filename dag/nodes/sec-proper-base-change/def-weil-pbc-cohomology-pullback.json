@@ -111,7 +111,43 @@
   "item": "lemma-weil-pbc-p1-exchange-geometric-stalk",
   "date": "2026-10-09"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.cohomologyMap",
+    "CategoryTheory.Sheaf.H.mapFunctor"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.cohomologyMap",
+     "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance",
+     "lines": [
+      178,
+      186
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Sheaf.H.mapFunctor",
+     "module": "WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic",
+     "lines": [
+      99,
+      104
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
@@ -127,26 +163,39 @@
   "note": "recipe aligned with Stacks 01F8/01F9; claims inside cited or elementary; the lead added the two pointers (functoriality lemma, derived-unit description) to pointers"
  },
  "lean": {
-  "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance",
-  "declaration": "AlgebraicGeometry.Etale.cohomologyMap",
-  "statement": "def cohomologyMap : Sheaf.H F n →+ Sheaf.H (((f)^*[AddCommGrpCat.{u + 1}]).obj F) n",
-  "branch": "slopmaster2",
-  "by": "C1",
-  "date": "2026-10-11",
-  "existing": true,
+  "module": "Sheaf.AlgebraicGeometry.ModuleDerivedCohomologyPullback",
+  "declaration": "AlgebraicGeometry.Etale.abelianDerivedCohomologyPullback",
   "declarations": [
    "AlgebraicGeometry.Etale.cohomologyMap",
-   "CategoryTheory.Sheaf.H.mapFunctor"
+   "CategoryTheory.Sheaf.H.mapFunctor",
+   "AlgebraicGeometry.Etale.abelianDerivedCohomologyPullback",
+   "AlgebraicGeometry.Etale.moduleDerivedCohomologyPullback",
+   "AlgebraicGeometry.Etale.moduleLerayPlus"
   ],
-  "note": "Existing upstream notion (R-dcp): the pullback map on étale cohomology is AlgebraicGeometry.Etale.cohomologyMap f F n : Sheaf.H F n →+ Sheaf.H ((f)^*[AddCommGrpCat.{u+1}].obj F) n, for f : X ⟶ Y in Scheme.{u}, F an abelian sheaf on Y's small étale site (variables of the section), defined as Sheaf.H.mapFunctor of the exact functor f^* with the constant-sheaf comparison upperStarConstantSheafIso. It is the map every recorded PBC citer states with (bijective_cohomologyMap_*, prop-weil-pbc-gabber-pair-comparison, lemma-weil-pbc-h1-torsor-comparison, prop-weil-pbc-p1-strict-henselian-comparison, ...). The delivered resolution-parametrized module (cohomologyPullbackComplex, cohomologyPullback, derivedCohomologyPullback) was a second spelling of this notion and is left out. As for def-weil-pbc-etale-cohomology (ff2087b8c), the agreement of this Ext-map with the node's K-injective-resolution recipe (Γ of the unit, then Γ of the comparison to J) is a stage-3 bridge, together with Sheaf.H F q ≅ (Etale.cohomology _ T q).obj (single 0 F). The node's derived clause u^*: RΓ(X,K) → RΓ(Y,u^{-1}K) on D^+ has no upstream declaration (Derived/GlobalSections.lean leaves the general derived pullback as TODO; only rightDerivedLowerStarCompRightDerivedGlobalSectionsIso and the iso case upperStarCompRightDerivedGlobalSectionsIso exist); no citer's recorded Lean uses it.",
-  "fixed_by": "R-dcp"
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleDerivedCohomologyPullback.lean",
+  "statement": "def abelianDerivedCohomologyPullback {X Y : Scheme.{u}} (f : Y ⟶ X) (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (AddCommGrpCat.{u + 1}))) : (Sheaf.Γ X.smallEtaleTopology (AddCommGrpCat.{u + 1})).rightDerivedFunctorPlus.obj K ⟶ (Sheaf.Γ Y.smallEtaleTopology (AddCommGrpCat.{u + 1})).rightDerivedFunctorPlus.obj ((upperStar (AddCommGrpCat.{u + 1}) f).mapDerivedCategoryPlus.obj K)",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "§1(B): the old cohomologyMap record covered only abelian sheaf cohomology; its own note explicitly said the D+ derived pullback had no declaration. Retains that map by public import and supplies the canonical abelian and module-valued D+ arrows by right-derived descent of ordinary section pullback, with canonical Leray comparison. No arbitrary map or resolution is an added parameter."
  },
  "reviewed_lean": {
-  "date": "2026-10-11",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "R-dcp",
-  "group": "C1",
-  "result": "fix",
-  "note": "left out new module(s) lean/Sheaf/AlgebraicGeometry/CohomologyPullback.lean (--drop-files, or a record fixed to existing: true)"
+  "reviewer": "NT-stage2-cc-8dc95a22e",
+  "group": "Q17",
+  "result": "pass",
+  "note": "All clauses match the node: k algebraically closed, ℓ prime and invertible in k, N≥1, A a finite free Z/ℓ^N-algebra (rA=0 derived, not assumed), ζ primitive root, H strictly henselian with no finiteness binder, both curves via ∀ b : Bool, C_S the actual pullback and h = pullback.fst; actual derived unit (composed with the finiteEtaleTwistPullbackData c(1) comparison) IsIso; RΓ(unit) ≫ moduleLerayPlus = resolution-defined pullback (true by Leray naturality and the module analogue of derivedCohomologyPullback_eq_derivedUnit, not a tautology); IsIso of the pullback; constants a⊗ζ in H0 preserved ∀ a; G_m Kummer class κ_A(t) preserved via ordinaryFiniteRootMap∘kummerδ₀ and Units.map h.appTop. Theorem stmt_dep lem-asd-etale-finite-twist-pullback: finiteEtaleTwistPullbackData = Classical.choice of the theorem's Nonempty, with c pinned by its laws, so the dependency is genuine (PASS on that point). §1(B) record for def-weil-pbc-cohomology-pullback is a superset that keeps cohomologyMap with a public re-export; the live record notes the D+ clause lacked a declaration; abelian/moduleDerivedCohomologyPullback = rightDerivedDesc of section pullback, identical to the upstream inline LHS; moduleLerayPlus = ModuleCat analogue of NH etaleLerayPlus; no live duplicate. lean.statement verbatim, declaration list matches, docstrings carry source and blueprint tags plus the proof plan, single sorry, no pro-étale substitute. Advisory: def-sbc-affine-space met by the Spec k[t] model; tate-sheaf and raw-scalar modules are imported only transitively. No compile (no file changed)."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $u:Y\\to X$ be a morphism of schemes [def-pc-scheme], with small etale sites $X_{\\Et}$, $Y_{\\Et}$ [def-weil-pbc-etale-site], and let $G$ be an abelian sheaf on $X_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves]. Let $u_*$ be the direct image, $(u_*F)(W)=F(W\\times_XY)$ [def-weil-pbc-direct-image], so that $\\Gamma(X,u_*F)=(u_*F)(X)=F(Y)=\\Gamma(Y,F)$ for every abelian sheaf $F$ on $Y_{\\Et}$, where $\\Gamma(T,-)$ is evaluation at the final object $T$ of $T_{\\Et}$; let $u^{-1}$ be the inverse image, with unit $\\eta_u:\\mathrm{id}\\to u_*u^{-1}$ of the adjunction $u^{-1}\\dashv u_*$ [def-weil-pbc-inverse-image]. Choose a K-injective resolution $G\\to I^\\bullet$ [def-sp-kinjective-bridge] (one exists; a resolution by a bounded below complex of injective abelian sheaves is one [prop-weil-pbc-kinjective-resolutions-exist]) and a K-injective resolution $u^{-1}I^\\bullet\\to J^\\bullet$ of the termwise inverse image on $Y_{\\Et}$. Since $u^{-1}$ is exact [prop-weil-pbc-inverse-image-exact], it commutes with taking cohomology of complexes, so $u^{-1}G\\to u^{-1}I^\\bullet$ is a quasi-isomorphism and the composite $u^{-1}G\\to u^{-1}I^\\bullet\\to J^\\bullet$ is a K-injective resolution of $u^{-1}G$. The *pullback map*\n\n$$\n u^*:H^q(X_{\\Et},G)\\longrightarrow H^q(Y_{\\Et},u^{-1}G)\\qquad(q\\ge0)\n$$\n\nbetween the cohomology groups of [def-weil-pbc-etale-cohomology] (computed there as $\\mathcal H^q(\\Gamma(X,I^\\bullet))$ and $\\mathcal H^q(\\Gamma(Y,J^\\bullet))$, from the K-injective resolutions $I^\\bullet$ and $J^\\bullet$) is the map induced in degree $q$ by the morphism of complexes of abelian groups\n\n$$\n \\Gamma(X,I^\\bullet)\\xrightarrow{\\ \\Gamma(X,\\eta_{u,I^\\bullet})\\ }\\Gamma(X,u_*u^{-1}I^\\bullet)=\\Gamma(Y,u^{-1}I^\\bullet)\\longrightarrow\\Gamma(Y,J^\\bullet),\n$$\n\nthat is, a section $a\\in I^r(X)$ goes to the image of $\\eta_{u,I^r}(a)\\in(u^{-1}I^r)(Y)$ in $J^r(Y)$ (\"pull back the section, then compare with the resolution\"). For $K\\in\\Dplus(X_{\\Et})$ [def-weil-pbc-derived-categories], represented by a bounded below complex $K^\\bullet$, the same recipe, with $K^\\bullet\\to I^\\bullet$ a K-injective resolution, $u^{-1}K^\\bullet$ the termwise inverse image representing $u^{-1}K$ [def-weil-pbc-derived-inverse-image] and $u^{-1}I^\\bullet\\to J^\\bullet$ a K-injective resolution, gives a morphism of complexes $\\Gamma(X,I^\\bullet)\\to\\Gamma(Y,J^\\bullet)$ whose class in $\\Dplus(\\Ab)$ [def-weil-abstract-derived-category] is $u^*:\\RGamma(X_{\\Et},K)\\to\\RGamma(Y_{\\Et},u^{-1}K)$, with $\\RGamma$ as in [def-weil-pbc-etale-cohomology]. The definition depends on the chosen resolutions only through the canonical identifications of [prop-weil-pbc-cohomology-resolution-independent]. On $\\RGamma$, $u^*$ is $\\RGamma(X,-)$ applied to the unit $K\\to Ru_*u^{-1}K$ of the derived adjunction, followed by the identification $\\RGamma(X,Ru_*-)=\\RGamma(Y,-)$.",
+  "proof": [],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

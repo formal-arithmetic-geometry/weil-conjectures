@@ -1,0 +1,218 @@
+{
+ "id": "lem-pur-etale-scalar-pullback-identity-normalization",
+ "kind": "statement",
+ "title": "Identity normalization of canonical geometric and scalar pullback comparisons",
+ "statement": "Let $\\varphi:A\\to B$ be a unital map of finite commutative rings, and let $T$ be an arbitrary scheme [def-pc-scheme]. Use the ordinary unbounded small-etale derived module categories $D_R(T)=D(T_{\\mathrm{et}},R)$ [def-weil-pbc-derived-categories] and scalar extension $Q_T=-\\otimes_A^{\\mathbf L}B$ [lem-pur-derived-change-of-rings]. For $R=A,B$, write $P_R=(\\mathrm{id}_T)^*_R$ for exact constant-ring inverse image on derived categories [prop-weil-pbc-inverse-image-modules-exact]. Let $i_R:P_R\\xrightarrow{\\sim}\\mathrm{id}$ and $c_R:P_R\\xrightarrow{\\sim}P_RP_R$ be respectively the canonical identity comparison and the canonical composition comparison for the pair $(\\mathrm{id}_T,\\mathrm{id}_T)$, computed by ordinary pullback composition on flat-term K-flat representatives [lem-sfb-ringed-derived-monoidal-comparisons]. Let $\\lambda_{\\mathrm{id}}:P_BQ_T\\xrightarrow{\\sim}Q_TP_A$ be the K-flat-normalized scalar/pullback isomorphism [def-pur-etale-scalar-pullback-iso]. Then for $R=A,B$ and every $E\\in D_R(T)$,\n$$i_{R,E}\\circ P_R(i_{R,E})\\circ c_{R,E}=i_{R,E},$$\nand for every $N\\in D_A(T)$,\n$$Q_T(i_{A,N})\\circ\\lambda_{\\mathrm{id},N}=i_{B,Q_TN}.$$\nThus the transported identity-identity geometric compositor and the transported scalar/pullback comparison are identity natural transformations. These equations are for the specified comparisons and impose no boundedness or coefficient flatness condition.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0E46, label remark-compose-base-change: identity specialization of coefficient-change pasting with the canonical geometric identity comparisons; explicit normalization underlying the omitted verification"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-derived-categories",
+  "lem-pur-derived-change-of-rings",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "def-pur-etale-scalar-pullback-iso"
+ ],
+ "proof": [
+  {
+   "text": "Apply the already proved source-library lemma AlgebraicGeometry.Etale.leftDerivedUpperStarComp_id_right_hom_app to the identity scheme morphism, for R=A and R=B, and postcompose with leftDerivedUpperStarId. Associativity and the identity law give the first two conjuncts. This uses the specified comparisons, without unfolding a resolution.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0E46 and 0D6D; identity specialization of scalar composition and canonical geometric unit coherence"
+   }
+  },
+  {
+   "text": "Let e_R:L(id_R)^* ≅ D((id_R)^*) be the canonical comparison with the exact derived functor. Transport i_R to a_R=e_R^{-1};i_R and transport the geometric compositor to the exact-derived compositor. Expand leftDerivedUpperStarComp and leftDerivedFunctorCompIso. Naturality of e_R^{-1}, followed by cancellation of e_R and its inverse, transports the source-library right unit law to c_R;D((id_R)^*)(a_R)=id. The private helper transport_unit writes precisely this cancellation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0E46 and 0D6D; identity specialization of scalar composition and canonical geometric unit coherence"
+   }
+  },
+  {
+   "text": "Transport the specified scalarPullbackIso to t:S;G ≅ F;S, where F and G are exact-derived identity inverse images and S is scalar extension. Its invertibility is part of its definition [def-pur-etale-scalar-pullback-iso]. Apply [lem-sf-scalar-pullback-composition] to two identity scheme maps to obtain d_{SN};G(t_N);t_{FN}=t_N;S(c_N). Postcompose with S(F(a_N)). Naturality of t and the right unit equation for c give d_{SN};G(t_N;S(a_N));t_N=t_N. Cancel invertible t_N. Compare with d_{SN};G(b_{SN})=id, cancel d, and use faithfulness of G (which is isomorphic to the identity) to conclude t_N;S(a_N)=b_{SN}. This is the private elementary categorical helper identity_of_composition.",
+   "uses": [
+    "def-pur-etale-scalar-pullback-iso",
+    "lem-sf-scalar-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0E46 and 0D6D; identity specialization of scalar composition and canonical geometric unit coherence"
+   }
+  },
+  {
+   "text": "Expand t and a_R in the last equation. The consecutive images of e_A and its inverse cancel. Precomposition by e_B^{-1} is injective, so cancelling it gives scalarPullbackIso_N;S(i_A,N)=i_B,SN, exactly the third conjunct. Combine with the first two conjuncts. All calculations hold in the ordinary unbounded derived category; no boundedness or coefficient-flatness hypothesis is added.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0E46 and 0D6D; identity specialization of scalar composition and canonical geometric unit coherence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-etale-scalar-pullback-iso",
+  "lem-sf-scalar-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0E46 and 0D6D; identity specialization of scalar composition and canonical geometric unit coherence",
+  "note": "W2: shorter existing-library route via scalarPullback_composition and the proved source geometric unit law; all glue is proved in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "scalarPullbackIso|scalar.*[Pp]ullback.*[Ii]d|[Pp]ullback.*[Ss]calar.*[Ii]d",
+   "results": "{\"t\": \"2026-10-22T06:42:33Z\", \"tool\": \"grep\", \"query\": \"scalarPullbackIso|scalar.*[Pp]ullback.*[Ii]d|[Pp]ullback.*[Ss]calar.*[Ii]d\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/GroupWithZero/Action/Defs.lean\"], \"digest\": \"458885a9163f0bc5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: identity transformations of generic derived functors and ordinary scheme structure-sheaf pullbacks do not normalize this K-flat small-etale scalar/pullback comparison; no one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived coefficient extension commutes with identity inverse image by the identity natural transformation",
+   "results": "{\"t\": \"2026-10-22T06:42:33Z\", \"tool\": \"leansearch\", \"query\": \"Derived coefficient extension commutes with identity inverse image by the identity natural transformation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.NatTrans.rightDerived_id\", \"CategoryTheory.Functor.leftDerivedNatTrans_id\", \"CategoryTheory.NatTrans.leftDerived_id\", \"CategoryTheory.Functor.rightDerivedNatTrans_id\", \"CategoryTheory.NatTrans.id\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_app\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id\", \"ModuleCat.restrictScalarsId'App_inv_naturality\"], \"digest\": \"3961057d1487e0ea\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: identity transformations of generic derived functors and ordinary scheme structure-sheaf pullbacks do not normalize this K-flat small-etale scalar/pullback comparison; no one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso, CategoryTheory.Functor.leftUnitor",
+   "results": "{\"t\": \"2026-10-22T06:42:33Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.NatIso, CategoryTheory.Functor.leftUnitor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.NatIso'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "invalid query: loogle: unknown identifier 'CategoryTheory.NatIso'; the successful replacement Loogle query and other searches are recorded separately"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalized derived scalar pullback isomorphism for the identity scheme morphism is the identity under canonical geometric identity comparisons",
+   "results": "{\"t\": \"2026-10-22T06:42:42Z\", \"tool\": \"leanfinder\", \"query\": \"The normalized derived scalar pullback isomorphism for the identity scheme morphism is the identity under canonical geometric identity comparisons\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pullbackId\", \"AlgebraicGeometry.Scheme.Pullback.t_id\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackId_hom\", \"AlgebraicGeometry.Scheme.IdealSheafData.comap_id\", \"AlgebraicGeometry.Scheme.Hom.id_appIso\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality\"], \"digest\": \"fb68d8227e6bf85f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: identity transformations of generic derived functors and ordinary scheme structure-sheaf pullbacks do not normalize this K-flat small-etale scalar/pullback comparison; no one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftUnitor",
+   "results": "{\"t\": \"2026-10-22T06:43:06Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.leftUnitor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.leftUnitor\", \"CategoryTheory.Functor.leftUnitor_hom_app\", \"CategoryTheory.Functor.leftUnitor_inv_app\", \"CategoryTheory.Functor.triangleIso\", \"CategoryTheory.Functor.triangleIso_assoc\", \"CategoryTheory.Functor.triangle\", \"CategoryTheory.NatIso.unop_leftUnitor\", \"CategoryTheory.NatIso.op_leftUnitor\"], \"digest\": \"f0655f43ec91ac92\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: identity transformations of generic derived functors and ordinary scheme structure-sheaf pullbacks do not normalize this K-flat small-etale scalar/pullback comparison; no one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical derived scalar extension pullback comparison at the identity morphism agrees with the canonical identity inverse image isomorphism",
+   "results": "{\"t\": \"2026-10-22T07:51:30Z\", \"tool\": \"leanfinder\", \"query\": \"The canonical derived scalar extension pullback comparison at the identity morphism agrees with the canonical identity inverse image isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.pullback_comp_id\", \"PresheafOfModules.pullback_id_comp\", \"AlgebraicGeometry.Scheme.Modules.pullbackId\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackId_hom\", \"PresheafOfModules.pullbackId\", \"SheafOfModules.pullback_comp_id\", \"ModuleCat.extendScalarsId\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapId_hom_τl\"], \"digest\": \"2efc58d33c41f084\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary sheaf/presheaf pullback, scheme structure modules or functor unitors; none states both identities for the specified unbounded small-etale derived scalar/pullback comparison. SheafOfModules.pullback_id_comp and pullback_comp_id were read at Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:204 and :209."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarPullbackIso|upperStar.*[Ii]d|pullbackId",
+   "results": "{\"t\": \"2026-10-22T07:52:11Z\", \"tool\": \"grep\", \"query\": \"scalarPullbackIso|upperStar.*[Ii]d|pullbackId\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean\"], \"digest\": \"21b39d1f335e34b7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary sheaf/presheaf pullback, scheme structure modules or functor unitors; none states both identities for the specified unbounded small-etale derived scalar/pullback comparison. SheafOfModules.pullback_id_comp and pullback_comp_id were read at Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:204 and :209."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical identity pullback commutes with derived extension of coefficients for sheaves of modules on the small etale site",
+   "results": "{\"t\": \"2026-10-22T07:52:11Z\", \"tool\": \"leansearch\", \"query\": \"Canonical identity pullback commutes with derived extension of coefficients for sheaves of modules on the small etale site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullback_id_comp\", \"SheafOfModules.pullback_comp_id\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullbackId\", \"CategoryTheory.GrothendieckTopology.overMapPullback_comp_id_assoc\", \"PresheafOfModules.pullback_id_comp\", \"CategoryTheory.ChosenPullbacksAlong.pullbackId\"], \"digest\": \"166a181b49fb35d6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary sheaf/presheaf pullback, scheme structure modules or functor unitors; none states both identities for the specified unbounded small-etale derived scalar/pullback comparison. SheafOfModules.pullback_id_comp and pullback_comp_id were read at Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:204 and :209."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftUnitor",
+   "results": "{\"t\": \"2026-10-22T07:52:12Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.leftUnitor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.leftUnitor\", \"CategoryTheory.Functor.leftUnitor_hom_app\", \"CategoryTheory.Functor.leftUnitor_inv_app\", \"CategoryTheory.Functor.triangleIso\", \"CategoryTheory.Functor.triangleIso_assoc\", \"CategoryTheory.Functor.triangle\", \"CategoryTheory.NatIso.unop_leftUnitor\", \"CategoryTheory.NatIso.op_leftUnitor\"], \"digest\": \"f0655f43ec91ac92\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary sheaf/presheaf pullback, scheme structure modules or functor unitors; none states both identities for the specified unbounded small-etale derived scalar/pullback comparison. SheafOfModules.pullback_id_comp and pullback_comp_id were read at Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:204 and :209."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-etale-direct-image-scalar-composition",
+  "date": "2026-10-22",
+  "group": "Q149"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "cor-pur-vector-bundle-purity",
+   "place": "Proof, paragraph 2: coefficient reduction and composition of adjunctions before transposing; identity normalization of the canonical scalar/pullback comparison (old direct-image scalar-composition step 7, before taking its mate)",
+   "via": [
+    "lem-pur-etale-direct-image-scalar-composition",
+    "lem-pur-etale-compact-scalar-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-etale-scalar-pullback-identity-normalization",
+  "worker": "stage1",
+  "summary": "Checked the specified comparisons on flat-term K-flat representatives. Wrote the ordinary tensor formulas, the derived geometric identity calculation and the scalar counit cancellation explicitly. Both equations then extend by naturality. Statement unchanged; no new nodes and no attachment.",
+  "blueprint": "Realizes the identity normalization required before transposing the coefficient-reduction and composition compatibilities in cor-pur-vector-bundle-purity, proof paragraph 2, through lem-pur-etale-direct-image-scalar-composition.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "General unbounded flat-term K-flat resolution existence; not a replacement for a purity step."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "General representative computation and preservation of flat-term K-flat complexes for ringed pullbacks, including scalar change."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "General exactness of small-etale constant-ring inverse image, to compute geometric pullback termwise."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Specified derived geometric composition and identity comparisons on representatives; generic coherence machinery needed by the item."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q158-afdf17c6e",
+  "group": "Q158",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q158-afdf17c6e (reviewer sub-agent of L); spot-checked: Read the whole delivery: the item, every cited statement, and Stacks 0E46 and 0D6D at their labels (0E46 ends with 'We omit the verification', so proof_origin 'agent' is correct). One commit; files are the item and the report only; no new nodes; statement and stmt_deps unchanged; proof_deps equals the union of the step uses; searches recorded with grep, leansearch, loogle and leanfinder; no SGA cited. Checked the statement's typing: the geometric equation is the unit axiom P(i)∘c = id. Step 2's formulas are correct: h·I(h)·d = h and F(h_A)∘a = h_B on pure tensors, both without flatness. Step 3 expands c and P(i) on flat-term K-flat representatives and gives the stated equation. Step 4: re-derived the chain from the defining equation of def-pur-etale-scalar-pullback-iso at f=id (naturality of r at h_P, step 2, i_B = q(h)g at FP, naturality of i_B), then cancelled r_P, which lem-pur-derived-change-of-rings(2) makes invertible. It is correct and uses no flatness of B. Step 5 transports along a resolution iso and is correct. Small cases tested: φ = id, Z/4→Z/2, empty T, zero complexes, and odd degrees (no signs). Advisory: the representative form of i_R comes from lem-sfb-ringed-derived-monoidal-comparisons, whose statement only says 'canonical'. I accept it because the item's statement fixes i_R as the representative-computed comparison and the Q63 review accepted the same reading; the precise form is stated in lem-sfb-ringed-derived-identity-comparison, which could be cited later. Not a duplicate of lem-sfb-kflat-scalar-comparison-normalization: θ_id there is a different comparison, the action-identification mate. Route: sk-def-sf-operations, sk-thm-properbasechange, sk-def-exchange and sk-thm-picard-semicon are all on the sk-prop-an route. lem-sfb-ringed-derived-monoidal-comparisons is the only off-route statement; it is declared, and I accept it as a generic coherence tool."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EtaleScalarPullbackIdentityNormalization",
+  "declaration": "AlgebraicGeometry.Etale.etaleScalarPullbackIdentityNormalization",
+  "file": "lean/Sheaf/Paper/EtaleScalarPullbackIdentityNormalization.lean",
+  "statement": "theorem etaleScalarPullbackIdentityNormalization {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) (T : Scheme.{u}) : (∀ E : DerivedCategoryModule A T, (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) (𝟙 T) (𝟙 T) (𝟙 T) (Category.id_comp (𝟙 T)).symm).hom.app E ≫ L(upperStar (ModuleCat.{u + 1} A) (𝟙 T)).map ((leftDerivedUpperStarId (ModuleCat.{u + 1} A) T).hom.app E) ≫ (leftDerivedUpperStarId (ModuleCat.{u + 1} A) T).hom.app E = (leftDerivedUpperStarId (ModuleCat.{u + 1} A) T).hom.app E) ∧ (∀ E : DerivedCategoryModule B T, (leftDerivedUpperStarComp (ModuleCat.{u + 1} B) (𝟙 T) (𝟙 T) (𝟙 T) (Category.id_comp (𝟙 T)).symm).hom.app E ≫ L(upperStar (ModuleCat.{u + 1} B) (𝟙 T)).map ((leftDerivedUpperStarId (ModuleCat.{u + 1} B) T).hom.app E) ≫ (leftDerivedUpperStarId (ModuleCat.{u + 1} B) T).hom.app E = (leftDerivedUpperStarId (ModuleCat.{u + 1} B) T).hom.app E) ∧ (∀ N : DerivedCategoryModule A T, (scalarPullbackIso φ (𝟙 T)).hom.app N ≫ (scalarExtension φ T).map ((leftDerivedUpperStarId (ModuleCat.{u + 1} A) T).hom.app N) = (leftDerivedUpperStarId (ModuleCat.{u + 1} B) T).hom.app ((scalarExtension φ T).obj N))",
+  "branch": "newtargets-dag",
+  "by": "Q112",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3ecd9aebc",
+  "group": "Q112",
+  "result": "pass",
+  "note": "Read the node, all 6 stmt_dep records, Stacks 0E46/03D8/0D6D, and the exact declarations: leftDerivedUpperStarId (derived upperStarId, counit-read by _hom_app_Qh_obj), leftDerivedUpperStarComp (id,id,id; P→P∘P), scalarPullbackIso (unique K-flat-normalized witness; its geometric representative uses the same leftDerivedFunctorCounit), scalarSheafPullbackIso (conjugate of Iso.refl; upperStarId is the conjugate of lowerStarId), scalarExtension. Conjuncts 1-2 render i∘P(i)∘c = i for R=A,B in diagrammatic order; conjunct 3 renders Q(i_A)∘λ_id = i_B∘Q for all N. No extra hypotheses; u+1 is the framework coefficient universe; edge cases (empty T, zero rings, φ=id, Z/4→Z/2, unbounded) are covered. Node differs from live only by the lean field; dependency records unchanged; statement verbatim; existing:false correct (no scalarPullbackIso-at-𝟙 lemma in live lean); sorry only; no new defs; docstrings have the source place, blueprint tag and 5 proof steps; report sections present. Advisory: conjuncts 1-2 follow from the existing leftDerivedUpperStarComp_id_right_hom_app; proof-only plain imports (H9). No compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261027T084507-L-3686134",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

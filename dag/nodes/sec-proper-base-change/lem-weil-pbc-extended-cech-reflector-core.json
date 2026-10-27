@@ -14,20 +14,51 @@
  ],
  "proof": [
   {
-   "text": "On every finite-generator slice, contract the localized extended Cech complex and filter the augmentation cone by its positive localization terms. The internal-Hom tensor identity gives vanishing against each ideal localization, and restriction transports this to the locally derived complete predicate. The same filtration identifies maps out of the completion with maps into any locally complete target, yielding the stated bijection. The sequential-localization comparison required to identify the sheafified finite filtration with the sectionwise localization remains to be proved.",
-   "uses": [],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tags 099B and 099F, proposition-derived-completion"
-   }
+   "text": "Reconstruct naturality of the specified augmentation-induced unit from naturality of evaluation at one and fully faithful whiskering by Q. This repeats the independent calculation from the parent as a private proved helper, since importing that parent would create a cycle. For any exact slice restriction and isomorphism of augmented derived objects, use the RHom restriction comparison and normalize its ring-object component to obtain a natural comparison preserving the actual unit.",
+   "uses": [
+    "lem-sc-hom-complex-unit-evaluation-naturality",
+    "def-pur-derived-internal-hom",
+    "def-weil-pbc-ringed-completion-unit",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take a finite ideal-generating cover. The local extended Cech description gives augmented derived isomorphisms on its slices. The independent finite-Cech unit-idempotence theorem says both G.map(eta) and eta_G are invertible there. Naturality of the normalized completion comparison transfers these two assertions to the restriction of F.map(eta) and eta_F for the global model. Exact restriction commutes with cohomology; the ordinary sheaf isomorphism criterion on a cover therefore descends both isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-finite-ideal-generating-cover",
+    "lem-weil-pbc-ringed-cech-completion-unit-idempotence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the single-object completeness/unit criterion to F(E). Its unit is invertible by the preceding step, hence the completion value is locally derived complete.",
+   "uses": [
+    "lem-weil-pbc-extended-cech-complete-unit-criterion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a complete target L, the same criterion makes eta_L invertible. Given f:E→L, the morphism F.map(f) followed by inverse eta_L extends f, by naturality. If eta_E followed by g and by h agree, apply F and cancel the invertible F.map(eta_E); then cancel eta_L using naturality to deduce g=h. This proves the displayed bijection without another geometric hypothesis.",
+   "uses": [
+    "lem-weil-pbc-extended-cech-complete-unit-criterion"
+   ],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sc-hom-complex-unit-evaluation-naturality",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-ringed-completion-unit",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-finite-ideal-generating-cover",
+  "lem-weil-pbc-ringed-cech-completion-unit-idempotence",
+  "lem-weil-pbc-extended-cech-complete-unit-criterion"
+ ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/algebraization.tex",
-  "place": "Tags 099B and 099F; strict subclause extracted from the reflector theorem"
+  "place": "Tags 099B and 099F; finite-model idempotence and exact restriction, with the single-object local-completeness criterion isolated and the universal mapping argument proved formally"
  },
  "mathlib_searches": [
   {
@@ -99,14 +130,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-25",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E4",
+  "group": "S7",
   "result": "pass",
-  "landing": "20261018T091400-L-3254261",
+  "landing": "20261025T203137-L-2786071",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

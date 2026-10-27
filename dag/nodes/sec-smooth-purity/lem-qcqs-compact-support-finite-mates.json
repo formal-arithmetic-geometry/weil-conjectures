@@ -1,0 +1,130 @@
+{
+ "id": "lem-qcqs-compact-support-finite-mates",
+ "kind": "statement",
+ "title": "Finite scalar mates for qcqs compact support",
+ "statement": "Under the hypotheses of lem-qcqs-compact-support-finite-comparison, every positive finite scalar-adjunction mate of the completed proper/open compact-support image is invertible.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-compact-support.proof.md",
+  "place": "Finite comparison paragraph of the proper/open compact-support argument",
+  "note": "Split from the parent conjunction; the proof uses the normalized quotient mate and proper/open factorization."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Identify the completed and positive finite inverse-image coefficient identifications with those in SfCompleteDirectImageReduction. Their direct-image functors are the sf completed and finite functors. The ordinary restriction/direct-image comparison fixes every section, so after these identifications it is sfDirectImageRestrictionComparison.",
+   "uses": [
+    "lem-sf-complete-direct-image-reduction",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare the two right-derived restriction/direct-image isomorphisms on K-injective representatives. Both satisfy the ordinary comparison square with the universal cochain units. Cancel the invertible finite direct-image unit and the exact restriction factor. Derived natural-transformation extensionality identifies the maps everywhere.",
+   "uses": [
+    "lem-sf-complete-direct-image-reduction",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the normalized left-adjoint uniqueness square for the two scalar extension functors having the same exact restriction right adjoint. Its unit equation and the derived restriction comparison give the projection-formula transport cube with identity equivalence faces. Transport the existing sf_projection_formula from SfCompleteDirectImageReduction. This proves invertibility of the specified proper quotient mate for every ambient complex and every scheme morphism, without finite Tor or finite-field hypotheses.",
+   "uses": [
+    "lem-sf-complete-direct-image-reduction",
+    "lem-weil-pbc-integral-coefficient-presentation-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply comparison_factorization. The proper factor at the completed open extension is invertible by the preceding argument. openComparison_isIso makes the second factor invertible, and proper direct image preserves this isomorphism. Their composite is exactly the required compact-support mate at each positive exponent. The use of openComparison_isIso is precisely [lem-pur-open-coefficient-comparison-isomorphism], not the whole integral coefficient comparison theorem. No assertion above the scalar projection identification is used.",
+   "uses": [
+    "lem-pur-compact-support-comparison-factorization",
+    "lem-pur-open-coefficient-comparison-isomorphism"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-complete-direct-image-reduction",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-integral-coefficient-presentation-comparison",
+  "lem-pur-compact-support-comparison-factorization",
+  "lem-pur-open-coefficient-comparison-isomorphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/Paper/QcqsCompactSupportFiniteMates.lean",
+  "place": "P3: normalized ordinary and derived comparison identification; scalar-adjunction uniqueness transports the existing perfect-quotient projection formula; ordered proper/open factorization.",
+  "note": "B3 dependency correction: the unchanged last Lean step uses openComparison_isIso, now attached to lem-pur-open-coefficient-comparison-isomorphism, rather than the whole integral coefficient comparison theorem. No Lean proof or statement changes."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QcqsCompactSupportFiniteComparison",
+  "date": "2026-10-26",
+  "group": "X6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QcqsCompactSupportFiniteMates",
+  "file": "lean/Sheaf/Paper/QcqsCompactSupportFiniteMates.lean",
+  "declaration": "WeilConjectures.sfQcqsCompactSupport_finiteMates",
+  "declarations": [
+   "WeilConjectures.sfQcqsCompactSupport_finiteMates"
+  ],
+  "statement": "theorem sfQcqsCompactSupport_finiteMates (K : sfIntegralConstructibleCategory l E X) : ∀ n : ℕ, IsIso ((comparison (reduction l E (n + 1) (Nat.le_add_left 1 n)) c).app K.obj)",
+  "branch": "sheaf-dag",
+  "by": "X6",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": "lem-qcqs-compact-support-finite-comparison",
+  "from": null,
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived complete proper direct image compact support finite quotient comparison",
+   "results": "No matching specialized declaration found; component remains a split theorem.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSfDerivedComplete IsIso comparison reduction compact support",
+   "results": "No matching theorem.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "sfQcqsCompactSupport.*complete|comparison.*reduction.*IsIso",
+   "results": "Only the parent declaration and this split component occur.",
+   "date": "2026-10-26",
+   "verdict": "no duplicate"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X6",
+  "result": "pass",
+  "landing": "20261026T003215-L-153011",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-704ba",
+  "group": "B3",
+  "result": "fix",
+  "landing": "20261027T012808-L-2331698",
+  "kind": "interface",
+  "note": "independent cc review: moved realization_existsUnique/realization/gamma_identification signatures vs item original (verbatim, same variable block); item node decls/deps vs Lean; new-node stmt/proof deps vs declarations used in the three new modules; finite-mates dep swap vs its Lean (uses only openComparison_isIso, comparison_factorization)"
+ }
+}

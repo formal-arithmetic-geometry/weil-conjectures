@@ -1,0 +1,113 @@
+{
+ "id": "lem-z8-etale-tensor-trace-base-change",
+ "kind": "statement",
+ "title": "Etale Tensor Trace Base Change",
+ "statement": "Canonical section variables and instances are those of the attached Lean module.\n\ntheorem sectionPullback_tensor {X Y : Scheme.{u}}\n    (s : Y ⟶ X) (p : X ⟶ Y) (h : s ≫ p = 𝟙 Y)\n    (M N : DerivedCategory (Sheaf Y.smallEtaleTopology B)) :\n    (upperStar B s).leftDerivedFunctor.map\n        (((canonicalPullbackTensorComparison B p).app M).app N) ≫\n      ((canonicalPullbackTensorComparison B s).app\n        ((upperStar B p).leftDerivedFunctor.obj M)).app\n          ((upperStar B p).leftDerivedFunctor.obj N) ≫\n      ((leftDerivedUpperStarCompSectionIso B s p h).hom.app M ⊗ₘ\n        (leftDerivedUpperStarCompSectionIso B s p h).hom.app N) =\n      (leftDerivedUpperStarCompSectionIso B s p h).hom.app (M ⊗ N)\n\ntheorem orderedProjection_eq {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (E : DerivedCategory (Sheaf X.smallEtaleTopology B))\n    (K : DerivedCategory (Sheaf Y.smallEtaleTopology B)) :\n    (((derivedUpperStarLowerStarAdjunction B f).rightAdjointProjectionMap\n      (T_C := (derivedTensor B X).flip) (T_D := (derivedTensor B Y).flip)\n      ((flipFunctor _ _ _).map (canonicalPullbackTensorComparison B f))).app E).app K =\n      (β_ K ((lowerStar B f).rightDerivedFunctor.obj E)).hom ≫\n        ((rightDerivedLowerStarProjectionMap B f).app E).app K ≫\n        (lowerStar B f).rightDerivedFunctor.map\n          (β_ E ((upperStar B f).leftDerivedFunctor.obj K)).hom\n\ntheorem etaleSectionIntegralTensor\n    {X Y : Scheme.{u}} (s : X ⟶ Y) (p : Y ⟶ X) (h : s ≫ p = 𝟙 X)\n    (M U : DerivedCategory (Sheaf X.smallEtaleTopology B)) (e : U ≅ 𝟙_ _)\n    (V : DerivedCategory (Sheaf Y.smallEtaleTopology B))\n    (δ : (lowerStar B s).rightDerivedFunctor.obj U ⟶ V)\n    (τ : (lowerStar B p).rightDerivedFunctor.obj V ⟶ U) :\n    let F := (upperStar B p).leftDerivedFunctor\n    let R := (lowerStar B p).rightDerivedFunctor\n    let S := (lowerStar B s).rightDerivedFunctor\n    let l := leftDerivedUpperStarCompSectionIso B s p h\n    let t := conjugateIsoEquiv\n      ((derivedUpperStarLowerStarAdjunction B p).comp\n        (derivedUpperStarLowerStarAdjunction B s)) Adjunction.id l.symm\n    let pF := (derivedUpperStarLowerStarAdjunction B p).rightAdjointProjectionMap\n      (T_C := (derivedTensor B Y).flip) (T_D := (derivedTensor B X).flip)\n      ((flipFunctor\n        (DerivedCategory (Sheaf X.smallEtaleTopology B))\n        (DerivedCategory (Sheaf X.smallEtaleTopology B))\n        (DerivedCategory (Sheaf Y.smallEtaleTopology B))).map\n        (canonicalPullbackTensorComparison B p))\n    let pG := (derivedUpperStarLowerStarAdjunction B s).rightAdjointProjectionMap\n      (T_C := (derivedTensor B X).flip) (T_D := (derivedTensor B Y).flip)\n      ((flipFunctor\n        (DerivedCategory (Sheaf Y.smallEtaleTopology B))\n        (DerivedCategory (Sheaf Y.smallEtaleTopology B))\n        (DerivedCategory (Sheaf X.smallEtaleTopology B))).map\n        (canonicalPullbackTensorComparison B s))\n    let q := (pG.app U).app (F.obj M) ≫\n      S.map (((derivedTensor B X).map (l.hom.app M)).app U ≫\n        ((derivedTensor B X).obj M).map e.hom ≫ (derivedTensorRightUnitor B X M).hom)\n    ∀ [IsIso ((pF.app (S.obj U)).app M)] [IsIso ((pF.app V).app M)] [IsIso q],\n    (t.inv.app U ≫ R.map δ ≫ τ = 𝟙 U) →\n    t.inv.app M ≫ R.map (inv q) ≫ R.map (((derivedTensor B Y).obj (F.obj M)).map δ) ≫\n      inv ((pF.app V).app M) ≫ ((derivedTensor B X).obj M).map τ ≫\n      ((derivedTensor B X).obj M).map e.hom ≫ (derivedTensorRightUnitor B X M).hom = 𝟙 M\n\ntheorem etaleTensorEvaluation_constant_baseChange\n    {X X' Y Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}\n    {g' : X' ⟶ X} {g : Y' ⟶ Y} (sq : CommSq g' f' f g)\n    (L : DerivedCategory (Sheaf X.smallEtaleTopology B))\n    (L' : DerivedCategory (Sheaf X'.smallEtaleTopology B))\n    (c : (upperStar B g').leftDerivedFunctor.obj L ≅ L')\n    (O : DerivedCategory (Sheaf Y.smallEtaleTopology B))\n    (O' : DerivedCategory (Sheaf Y'.smallEtaleTopology B))\n    (cO : (upperStar B g).leftDerivedFunctor.obj O ⟶ O')\n    (r : ∀ K : DerivedCategory (Sheaf Y.smallEtaleTopology B),\n      ((derivedTensor B Y).obj K).obj O ≅ K)\n    (r' : ∀ K : DerivedCategory (Sheaf Y'.smallEtaleTopology B),\n      ((derivedTensor B Y').obj K).obj O' ≅ K)\n    (τ : (lowerStar B f).rightDerivedFunctor.obj L ⟶ O)\n    (τ' : (lowerStar B f').rightDerivedFunctor.obj L' ⟶ O')\n    (ht : (upperStar B g).leftDerivedFunctor.map τ ≫\n        cO =\n      (derivedBaseChangeMap B sq).app L ≫\n        (lowerStar B f').rightDerivedFunctor.map c.hom ≫ τ')\n    (K : DerivedCategory (Sheaf Y.smallEtaleTopology B))\n    (hu : ((canonicalPullbackTensorComparison B g).app K).app O ≫\n        ((derivedTensor B Y').obj ((upperStar B g).leftDerivedFunctor.obj K)).map cO ≫\n          (r' ((upperStar B g).leftDerivedFunctor.obj K)).hom =\n      (upperStar B g).leftDerivedFunctor.map (r K).hom) :\n    let p := (derivedUpperStarLowerStarAdjunction B f).rightAdjointProjectionMap\n      (T_C := (derivedTensor B X).flip) (T_D := (derivedTensor B Y).flip)\n      ((flipFunctor _ _ _).map (canonicalPullbackTensorComparison B f))\n    let p' := (derivedUpperStarLowerStarAdjunction B f').rightAdjointProjectionMap\n      (T_C := (derivedTensor B X').flip) (T_D := (derivedTensor B Y').flip)\n      ((flipFunctor _ _ _).map (canonicalPullbackTensorComparison B f'))\n    ∀ (π : ((derivedTensor B Y).obj K).obj\n        ((lowerStar B f).rightDerivedFunctor.obj L) ⟶\n      (lowerStar B f).rightDerivedFunctor.obj\n        (((derivedTensor B X).obj ((upperStar B f).leftDerivedFunctor.obj K)).obj L))\n      (π' : ((derivedTensor B Y').obj ((upperStar B g).leftDerivedFunctor.obj K)).obj\n        ((lowerStar B f').rightDerivedFunctor.obj L') ⟶\n        (lowerStar B f').rightDerivedFunctor.obj\n          (((derivedTensor B X').obj ((upperStar B f').leftDerivedFunctor.obj\n            ((upperStar B g).leftDerivedFunctor.obj K))).obj L')),\n    π = (p.app L).app K →\n    π' = (p'.app L').app ((upperStar B g).leftDerivedFunctor.obj K) →\n    ∀ [IsIso π] [IsIso π'],\n    (upperStar B g).leftDerivedFunctor.map\n        (inv π ≫ ((derivedTensor B Y).obj K).map τ ≫ (r K).hom) =\n      (derivedBaseChangeMap B sq).app\n          (((derivedTensor B X).obj ((upperStar B f).leftDerivedFunctor.obj K)).obj L) ≫\n        (lowerStar B f').rightDerivedFunctor.map\n          (((canonicalPullbackTensorComparison B g').app\n            ((upperStar B f).leftDerivedFunctor.obj K)).app L ≫\n            (derivedTensorHom B ((derivedSquareUpperStarIso B sq).inv.app K) c.hom)) ≫\n        inv π' ≫\n        ((derivedTensor B Y').obj ((upperStar B g).leftDerivedFunctor.obj K)).map τ' ≫\n          (r' ((upperStar B g).leftDerivedFunctor.obj K)).hom",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Supported diagonal kernel, section projection contractions, and counit base change"
+ },
+ "stmt_deps": [
+  "lem-kun-proj-formula-natural",
+  "lem-z8-etale-canonical-tensor-comparison",
+  "lem-z8-section-projection-unit"
+ ],
+ "proof": [
+  {
+   "text": "The inverse-image compositor's tensor coherence and its identity law give tensor compatibility of a section comparison. The generic section projection identities then tensor any scalar section integral. For base change, transpose exchange and projection using the adjunctions, apply the square tensor coherence and counit identity, and cancel the proper projection maps. Naturality and the supplied scalar trace square give the evaluation square with the specified constant-complex unitors.",
+   "uses": [
+    "lem-kun-proj-formula-natural",
+    "lem-z8-etale-canonical-tensor-comparison",
+    "lem-z8-section-projection-unit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-proj-formula-natural",
+  "lem-z8-etale-canonical-tensor-comparison",
+  "lem-z8-section-projection-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Explicit canonical-map calculation in the accompanying Lean module"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "projective line etale cohomology trace adjunction diagonal unit triangle identities",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.mkOfUnitCounit",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*triangle|projective.*adjunction",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryFiniteP1DiagonalUnit",
+  "date": "2026-10-26",
+  "group": "Z8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-ordinary-finite-p1-diagonal-unit",
+   "place": "Explicit proof of the supported diagonal unit and its specified counit",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleTensorTraceBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleTensorTraceBaseChange.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleTensorEvaluation_constant_baseChange",
+  "declarations": [
+   "AlgebraicGeometry.Etale.sectionPullback_tensor",
+   "AlgebraicGeometry.Etale.orderedProjection_eq",
+   "AlgebraicGeometry.Etale.etaleSectionIntegralTensor",
+   "AlgebraicGeometry.Etale.etaleTensorEvaluation_constant_baseChange"
+  ],
+  "statement": "theorem etaleTensorEvaluation_constant_baseChange\n    {X X' Y Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}\n    {g' : X' ⟶ X} {g : Y' ⟶ Y} (sq : CommSq g' f' f g)\n    (L : DerivedCategory (Sheaf X.smallEtaleTopology B))\n    (L' : DerivedCategory (Sheaf X'.smallEtaleTopology B))\n    (c : (upperStar B g').leftDerivedFunctor.obj L ≅ L')\n    (O : DerivedCategory (Sheaf Y.smallEtaleTopology B))\n    (O' : DerivedCategory (Sheaf Y'.smallEtaleTopology B))\n    (cO : (upperStar B g).leftDerivedFunctor.obj O ⟶ O')\n    (r : ∀ K : DerivedCategory (Sheaf Y.smallEtaleTopology B),\n      ((derivedTensor B Y).obj K).obj O ≅ K)\n    (r' : ∀ K : DerivedCategory (Sheaf Y'.smallEtaleTopology B),\n      ((derivedTensor B Y').obj K).obj O' ≅ K)\n    (τ : (lowerStar B f).rightDerivedFunctor.obj L ⟶ O)\n    (τ' : (lowerStar B f').rightDerivedFunctor.obj L' ⟶ O')\n    (ht : (upperStar B g).leftDerivedFunctor.map τ ≫\n        cO =\n      (derivedBaseChangeMap B sq).app L ≫\n        (lowerStar B f').rightDerivedFunctor.map c.hom ≫ τ')\n    (K : DerivedCategory (Sheaf Y.smallEtaleTopology B))\n    (hu : ((canonicalPullbackTensorComparison B g).app K).app O ≫\n        ((derivedTensor B Y').obj ((upperStar B g).leftDerivedFunctor.obj K)).map cO ≫\n          (r' ((upperStar B g).leftDerivedFunctor.obj K)).hom =\n      (upperStar B g).leftDerivedFunctor.map (r K).hom) :\n    let p := (derivedUpperStarLowerStarAdjunction B f).rightAdjointProjectionMap\n      (T_C := (derivedTensor B X).flip) (T_D := (derivedTensor B Y).flip)\n      ((flipFunctor _ _ _).map (canonicalPullbackTensorComparison B f))\n    let p' := (derivedUpperStarLowerStarAdjunction B f').rightAdjointProjectionMap\n      (T_C := (derivedTensor B X').flip) (T_D := (derivedTensor B Y').flip)\n      ((flipFunctor _ _ _).map (canonicalPullbackTensorComparison B f'))\n    ∀ (π : ((derivedTensor B Y).obj K).obj\n        ((lowerStar B f).rightDerivedFunctor.obj L) ⟶\n      (lowerStar B f).rightDerivedFunctor.obj\n        (((derivedTensor B X).obj ((upperStar B f).leftDerivedFunctor.obj K)).obj L))\n      (π' : ((derivedTensor B Y').obj ((upperStar B g).leftDerivedFunctor.obj K)).obj\n        ((lowerStar B f').rightDerivedFunctor.obj L') ⟶\n        (lowerStar B f').rightDerivedFunctor.obj\n          (((derivedTensor B X').obj ((upperStar B f').leftDerivedFunctor.obj\n            ((upperStar B g).leftDerivedFunctor.obj K))).obj L')),\n    π = (p.app L).app K →\n    π' = (p'.app L').app ((upperStar B g).leftDerivedFunctor.obj K) →\n    ∀ [IsIso π] [IsIso π'],\n    (upperStar B g).leftDerivedFunctor.map\n        (inv π ≫ ((derivedTensor B Y).obj K).map τ ≫ (r K).hom) =\n      (derivedBaseChangeMap B sq).app\n          (((derivedTensor B X).obj ((upperStar B f).leftDerivedFunctor.obj K)).obj L) ≫\n        (lowerStar B f').rightDerivedFunctor.map\n          (((canonicalPullbackTensorComparison B g').app\n            ((upperStar B f).leftDerivedFunctor.obj K)).app L ≫\n            (derivedTensorHom B ((derivedSquareUpperStarIso B sq).inv.app K) c.hom)) ≫\n        inv π' ≫\n        ((derivedTensor B Y').obj ((upperStar B g).leftDerivedFunctor.obj K)).map τ' ≫\n          (r' ((upperStar B g).leftDerivedFunctor.obj K)).hom",
+  "branch": "sheaf-dag",
+  "by": "Z8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "independent cc review: 1065e8 vs fd5306 delivery (diff: duplicate square removed, TraceCoordinates reuses FiniteShiftedLineSquare) and adapted modules vs live clone; original FiniteP1TwistedUnitBaseChange compiled against delivered Arrows"
+ }
+}

@@ -1,0 +1,218 @@
+{
+ "id": "lem-sfb-ringed-site-slice-equivalence-exact-shriek",
+ "kind": "statement",
+ "title": "Exact module lower shriek for functors inducing equivalences on slices",
+ "statement": "Fix the universes of [def-weil-size-convention]. Let $\\mathcal C,\\mathcal D$ be small sites [def-weil-pbc-sites-and-cohomology], and let $u:\\mathcal C\\to\\mathcal D$ be continuous and cocontinuous [def-weil-pbc-special-cocontinuous-functor](1). Let $R$ be a sheaf of commutative rings on $\\mathcal D$, and put $R'=R\\circ u$ with its original restrictions. Assume that $\\mathcal C$ has fibre products and equalizers and that $u$ preserves them (in particular, the corresponding limit cones exist in $\\mathcal D$). For every $c\\in\\mathcal C$, assume that the induced functor $\\mathcal C/c\\to\\mathcal D/u(c)$ is an equivalence of sites with their induced topologies: it is an equivalence of categories and a family covers if and only if its image covers. Equip these slices with the restrictions of $R'$ and $R$; the equivalence identifies those ring sheaves. Then precomposition $T:\\operatorname{Mod}(\\mathcal D,R)\\to\\operatorname{Mod}(\\mathcal C,R')$ [def-weil-sheaf-of-modules-category] has an additive exact left adjoint $L:\\operatorname{Mod}(\\mathcal C,R')\\to\\operatorname{Mod}(\\mathcal D,R)$. Here $L\\dashv T$ means natural bijections $\\operatorname{Hom}_{R}(LM,N)\\simeq\\operatorname{Hom}_{R'}(M,TN)$ for all module sheaves $M,N$, and exact means that $L$ carries every short exact sequence of module sheaves to a short exact sequence.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0797, lemma-lower-shriek-modules, gives the module left adjoint; Tag 0798, remark-when-shriek-equal, identifies its underlying abelian lower shriek when the induced slice functors are equivalences; Tag 04BH, lemma-exactness-lower-shriek, gives exactness of that abelian lower shriek."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-special-cocontinuous-functor",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Use the same sites, functor and ring in [lem-sfb-local-slice-module-shriek-exact]. The small-site universes, continuity, cocontinuity, fibre products, equalizers and their preservation are exactly its hypotheses. Its localized ring sheaves have sections $R|_{u(c)}(d\\to u(c))=R(d)$ and $R'|_c(c'\\to c)=R'(c')$ by [def-pur-localized-ringed-site]. Pulling the first back along $u_c$ gives $R(u(c'))=R'(c')$, with the same restriction homomorphisms. The assumed equivalence of categories and equivalence of covering families is precisely its equivalence of induced slice sites. Thus the ring identification is the required one, with identity structural ring map; no terminal object is needed.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "lem-sfb-local-slice-module-shriek-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04IX (definition-localize-ringed-site); the slice and ring hypotheses of Tags 0797 and 0798."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-local-slice-module-shriek-exact] with these data. Its precomposition functor is exactly $T$, so its conclusion supplies an additive left adjoint $L:\\operatorname{Mod}(\\mathcal C,R')\\to\\operatorname{Mod}(\\mathcal D,R)$ which is exact. The adjunction means the natural bijections $\\operatorname{Hom}_R(LM,N)\\simeq\\operatorname{Hom}_{R'}(M,TN)$, and exactness means preservation of every short exact sequence, giving every assertion of the item. The additional underlying-abelian-sheaf comparison in the cited statement is not required here.",
+   "uses": [
+    "lem-sfb-local-slice-module-shriek-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 0797 (lemma-lower-shriek-modules), 0798 (remark-when-shriek-equal), 04BH (lemma-exactness-lower-shriek); reuse of lem-sfb-local-slice-module-shriek-exact."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "lem-sfb-local-slice-module-shriek-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 0797, 0798 and 04BH, already assembled in the existing node lem-sfb-local-slice-module-shriek-exact; identification of its hypotheses by Tag 04IX."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a continuous cocontinuous functor preserving pullbacks and equalizers, the left adjoint to restriction of module sheaves is exact if localized ringed sites are equivalent",
+   "results": "{\"t\": \"2026-10-23T22:11:11Z\", \"tool\": \"leanfinder\", \"query\": \"For a continuous cocontinuous functor preserving pullbacks and equalizers, the left adjoint to restriction of module sheaves is exact if localized ringed sites are equivalent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafAdjunctionCocontinuous\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.instIsLeftAdjointPullback\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"SheafOfModules.instIsRightAdjointPushforward\", \"SheafOfModules.sheafificationCompPullback\"], \"digest\": \"f7c72dc7de04936c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read SheafOfModules.pullbackPushforwardAdjunction and PullbackConstruction.adjunction in PullbackContinuous.lean and the site adjunction hits; these supply generic left adjoints but do not prove exactness of the module left adjoint from preservation of pullbacks/equalizers and equivalences on slices. Source grep found no exactness declaration in module PullbackContinuous."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact left adjoint lower shriek for sheaves of modules along continuous cocontinuous functor whose slice ringed sites are equivalent",
+   "results": "{\"t\": \"2026-10-23T22:11:09Z\", \"tool\": \"leansearch\", \"query\": \"Exact left adjoint lower shriek for sheaves of modules along continuous cocontinuous functor whose slice ringed sites are equivalent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.PullbackConstruction.adjunction\", \"CategoryTheory.Functor.sheafPullback\", \"TopCat.Sheaf.instIsLeftAdjointPullback\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\", \"CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify\", \"CategoryTheory.Functor.sheafAdjunctionContinuous\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous\", \"SheafOfModules.pullback\"], \"digest\": \"3322b2140a0edcf0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read SheafOfModules.pullbackPushforwardAdjunction and PullbackConstruction.adjunction in PullbackContinuous.lean and the site adjunction hits; these supply generic left adjoints but do not prove exactness of the module left adjoint from preservation of pullbacks/equalizers and equivalences on slices. Source grep found no exactness declaration in module PullbackContinuous."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafPushforwardContinuous\", \"PreservesFiniteLimits\"",
+   "results": "{\"t\": \"2026-10-23T22:11:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"sheafPushforwardContinuous\\\", \\\"PreservesFiniteLimits\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read SheafOfModules.pullbackPushforwardAdjunction and PullbackConstruction.adjunction in PullbackContinuous.lean and the site adjunction hits; these supply generic left adjoints but do not prove exactness of the module left adjoint from preservation of pullbacks/equalizers and equivalences on slices. Source grep found no exactness declaration in module PullbackContinuous."
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|lower_shriek|shriek|PreservesInjectiveObjects",
+   "results": "{\"t\": \"2026-10-23T22:11:08Z\", \"tool\": \"grep\", \"query\": \"lowerShriek|lower_shriek|shriek|PreservesInjectiveObjects\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read SheafOfModules.pullbackPushforwardAdjunction and PullbackConstruction.adjunction in PullbackContinuous.lean and the site adjunction hits; these supply generic left adjoints but do not prove exactness of the module left adjoint from preservation of pullbacks/equalizers and equivalences on slices. Source grep found no exactness declaration in module PullbackContinuous."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A restriction functor on ringed site modules has an exact left adjoint when the site functor preserves fiber products equalizers and gives equivalences on all slice sites",
+   "results": "{\"t\": \"2026-10-23T22:11:44Z\", \"tool\": \"leanfinder\", \"query\": \"A restriction functor on ringed site modules has an exact left adjoint when the site functor preserves fiber products equalizers and gives equivalences on all slice sites\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.instIsLeftAdjointPullback\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.instIsRightAdjointPushforward\"], \"digest\": \"3040af4d9fa300e6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read SheafOfModules.pullbackPushforwardAdjunction and PullbackConstruction.adjunction in PullbackContinuous.lean and the site adjunction hits; these supply generic left adjoints but do not prove exactness of the module left adjoint from preservation of pullbacks/equalizers and equivalences on slices. Source grep found no exactness declaration in module PullbackContinuous."
+  },
+  {
+   "tool": "grep",
+   "query": "preservesFiniteLimits|preservesMonomorphisms|exact|RepresentablyFlat",
+   "results": "{\"t\": \"2026-10-23T22:11:42Z\", \"tool\": \"grep\", \"query\": \"preservesFiniteLimits|preservesMonomorphisms|exact|RepresentablyFlat\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read SheafOfModules.pullbackPushforwardAdjunction and PullbackConstruction.adjunction in PullbackContinuous.lean and the site adjunction hits; these supply generic left adjoints but do not prove exactness of the module left adjoint from preservation of pullbacks/equalizers and equivalences on slices. Source grep found no exactness declaration in module PullbackContinuous."
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|lower_shriek|shriek|PreservesFiniteLimits",
+   "results": "{\"t\": \"2026-10-23T22:39:12Z\", \"tool\": \"grep\", \"query\": \"lowerShriek|lower_shriek|shriek|PreservesFiniteLimits\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean\"], \"digest\": \"a6cde06cac1e19af\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern generic adjunctions, forgetful/evaluation limits, or scalar restriction; they do not state the exact module lower-shriek criterion. Read ModuleCat/Sheaf/PullbackContinuous.lean:45-118, Limits.lean:92-120 and Sites/CoverLifting.lean:318-327. The last adjunction has restriction as LEFT adjoint, the opposite direction from the requested module lower shriek."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction on ringed site modules has an exact additive left adjoint if all slice site functors are equivalences and pullbacks and equalizers are preserved",
+   "results": "{\"t\": \"2026-10-23T22:39:12Z\", \"tool\": \"leansearch\", \"query\": \"Restriction on ringed site modules has an exact additive left adjoint if all slice site functors are equivalences and pullbacks and equalizers are preserved\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.instIsLeftAdjointRestrictScalars\", \"Rep.instIsLeftAdjointActionModuleCatRes\", \"PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification\", \"PresheafOfModules.sheafificationAdjunction\", \"SheafOfModules.instAdditiveRestrictScalars\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"SheafOfModules.pullback\", \"SheafOfModules.PullbackConstruction.adjunction\"], \"digest\": \"f3d52799179f71f2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern generic adjunctions, forgetful/evaluation limits, or scalar restriction; they do not state the exact module lower-shriek criterion. Read ModuleCat/Sheaf/PullbackContinuous.lean:45-118, Limits.lean:92-120 and Sites/CoverLifting.lean:318-327. The last adjunction has restriction as LEFT adjoint, the opposite direction from the requested module lower shriek."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"PreservesFiniteLimits\"",
+   "results": "{\"t\": \"2026-10-23T22:39:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"PreservesFiniteLimits\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.toPresheaf_preservesFiniteLimits\", \"PresheafOfModules.evaluation_preservesFiniteLimits\", \"SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf\", \"SheafOfModules.Finite.forgetPreservesFiniteLimits\", \"SheafOfModules.instPreservesFiniteLimitsFunctorOppositeAddCommGrpCatCompSheafToSheafSheafToPresheaf\", \"SheafOfModules.Finite.evaluationPreservesFiniteLimits\", \"PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification\", \"PresheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatCompSheafOfModulesSheafificationToSheaf\"], \"digest\": \"bc3b628dad9a245a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern generic adjunctions, forgetful/evaluation limits, or scalar restriction; they do not state the exact module lower-shriek criterion. Read ModuleCat/Sheaf/PullbackContinuous.lean:45-118, Limits.lean:92-120 and Sites/CoverLifting.lean:318-327. The last adjunction has restriction as LEFT adjoint, the opposite direction from the requested module lower shriek."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact left adjoint of restriction of sheaves of modules along a continuous cocontinuous functor preserving pullbacks and equalizers and inducing ringed slice equivalences",
+   "results": "{\"t\": \"2026-10-23T22:39:15Z\", \"tool\": \"leanfinder\", \"query\": \"Exact left adjoint of restriction of sheaves of modules along a continuous cocontinuous functor preserving pullbacks and equalizers and inducing ringed slice equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafAdjunctionCocontinuous\", \"SheafOfModules.instIsLeftAdjointPullback\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\", \"SheafOfModules.instIsRightAdjointPushforward\"], \"digest\": \"901173d1ae29c338\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern generic adjunctions, forgetful/evaluation limits, or scalar restriction; they do not state the exact module lower-shriek criterion. Read ModuleCat/Sheaf/PullbackContinuous.lean:45-118, Limits.lean:92-120 and Sites/CoverLifting.lean:318-327. The last adjunction has restriction as LEFT adjoint, the opposite direction from the requested module lower shriek."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafAdjunctionCocontinuous|PreservesFiniteLimits|RepresentablyFlat",
+   "results": "{\"t\": \"2026-10-23T22:39:34Z\", \"tool\": \"grep\", \"query\": \"sheafAdjunctionCocontinuous|PreservesFiniteLimits|RepresentablyFlat\", \"sub\": \"CategoryTheory/Sites/Cocontinuous.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match established: msearch returned zero hits, but this guessed file path does not exist in the read clone. This query is not evidence of absence; the corrected whole CategoryTheory/Sites grep below was run and read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lower shriek for sheaves of modules agrees with abelian extension by zero and is exact under equivalence of localized ringed sites",
+   "results": "{\"t\": \"2026-10-23T22:39:41Z\", \"tool\": \"leanfinder\", \"query\": \"Lower shriek for sheaves of modules agrees with abelian extension by zero and is exact under equivalence of localized ringed sites\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.pushforwardNatIso\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.sheafificationCompPullback\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.instAbelian\", \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\"], \"digest\": \"17e56293557352bf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern generic adjunctions, forgetful/evaluation limits, or scalar restriction; they do not state the exact module lower-shriek criterion. Read ModuleCat/Sheaf/PullbackContinuous.lean:45-118, Limits.lean:92-120 and Sites/CoverLifting.lean:318-327. The last adjunction has restriction as LEFT adjoint, the opposite direction from the requested module lower shriek."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafAdjunctionCocontinuous|RepresentablyFlat",
+   "results": "{\"t\": \"2026-10-23T22:40:06Z\", \"tool\": \"grep\", \"query\": \"sheafAdjunctionCocontinuous|RepresentablyFlat\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/CoverPreserving.lean\", \"Mathlib/CategoryTheory/Sites/CoverPreserving.lean\", \"Mathlib/CategoryTheory/Sites/Pullback.lean\", \"Mathlib/CategoryTheory/Sites/Pullback.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/SheafEquiv.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/SheafEquiv.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/SheafEquiv.lean\", \"Mathlib/CategoryTheory/Sites/Point/Comap.lean\"], \"digest\": \"28ab6503cd08069e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern generic adjunctions, forgetful/evaluation limits, or scalar restriction; they do not state the exact module lower-shriek criterion. Read ModuleCat/Sheaf/PullbackContinuous.lean:45-118, Limits.lean:92-120 and Sites/CoverLifting.lean:318-327. The last adjunction has restriction as LEFT adjoint, the opposite direction from the requested module lower shriek."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-test-fibre-restriction-injectives",
+  "date": "2026-10-24",
+  "group": "Q22"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Flat scalar-section comparison needed in the descent of a power lying in the image of a global algebra map; this does not assert adequate-moduli locality. General cohomological input: preservation of locally quasi-coherent modules and flat comparison maps under qcqs stack direct images. Supporting input: Etale-fppf comparison under locally finitely presented flat comparisons. Sheafified fibre-cohomology formula used to assemble the higher-direct-image comparison. Injective-resolution input: restriction to a test-scheme fibre preserves injectives. Site-theoretic prerequisite: exact module lower shriek from limit preservation and ringed equivalences on slices, before applying the injective extension criterion.",
+   "via": [
+    "lem-sfb-stack-test-fibre-restriction-injectives",
+    "lem-sfb-stack-higher-image-fibre-cohomology-presheaf",
+    "lem-sfb-stack-lqc-lfp-topology-comparison",
+    "lem-sfb-stack-higher-images-flat-comparison",
+    "lem-sfb-stack-flat-scalar-sections",
+    "lem-sfb-adequate-moduli-etale-locality",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-ringed-site-slice-equivalence-exact-shriek",
+  "worker": "stage1",
+  "summary": "Q39 found that the existing same-unit node lem-sfb-local-slice-module-shriek-exact states the full conclusion with identical hypotheses and an additional underlying-abelian comparison. Reused it rather than creating duplicate prerequisites. Checked restricted rings sectionwise, every hypothesis, adjoint direction, Stacks sources, edge cases, and absence of a cycle. Statement unchanged; zero new nodes.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Flat scalar-section comparison needed in the descent of a power lying in the image of a global algebra map; this does not assert adequate-moduli locality. General cohomological input: preservation of locally quasi-coherent modules and flat comparison maps under qcqs stack direct images. Supporting input: Etale-fppf comparison under locally finitely presented flat comparisons. Sheafified fibre-cohomology formula used to assemble the higher-direct-image comparison. Injective-resolution input: restriction to a test-scheme fibre preserves injectives. Site-theoretic prerequisite: exact module lower shriek from limit preservation and ringed equivalences on slices, before applying the injective extension criterion. The two steps discharge this supporting site-theoretic prerequisite of det-thm-sf-ctf-stability-direct-images, proof (3), by reusing the existing exact module lower-shriek criterion. The latest blueprint unit and direct-image proof were read; no unit route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-f05d53cfc",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-f05d53cfc (reviewer sub-agent of L); spot-checked: I read the item and its cited node lem-sfb-local-slice-module-shriek-exact in full, together with def-pur-localized-ringed-site, def-weil-pbc-special-cocontinuous-functor, def-weil-sheaf-of-modules-category and the step of the citer lem-sfb-stack-test-fibre-restriction-injectives that uses the item. I checked the Stacks sources in sites-modules.tex: 04BH (lemma-exactness-lower-shriek, l.1658), 04IX (l.2019), 0797 (lemma-lower-shriek-modules, l.8001) and 0798 (remark-when-shriek-equal, l.8042, equation-compare-on-localizations). The item is true. 0797 gives the module left adjoint of T, which is precomposition, i.e. g^{-1}, with R' = R∘u. When the slices are equivalences of sites, the restricted rings match section by section, so the 0798 comparison is an isomorphism; 04BH then gives exactness. Step 1 is elementary: the hypotheses match the cited node's one by one (small sites, continuous and cocontinuous, fibre products and equalizers preserved, slice equivalence of induced sites). The ring identification R|_{u(c)}∘u_c = R'|_c follows directly from 04IX with the identity map. Step 2 applies the cited statement, not its proof. Its T is the same precomposition in the same direction, and the forget-comparison clause is correctly left unused. I tested the edge cases u = id, u = j_U, R = 0 and C empty, and no terminal object is needed. The delivery has zero new nodes and the statement is unchanged. The cited node was already on the base, created the same day by another item, and is strictly stronger, so reuse is correct and is not a D1 or D2 fault. There is no cycle: the cited node has no proof_deps. The cited node is in the same unit, so no tool_uses are needed. Blueprint fields and all three kinds of search are present, no SGA source is used, and there is no repair note for this item. Maintainer note: the item and lem-sfb-local-slice-module-shriek-exact are same-day duplicates, so they could later be merged under the stages/1-dag.md §2 'Duplicates' rule. That is not a fault of this delivery. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedSiteSliceExactShriek",
+  "declaration": "CategoryTheory.exists_exact_moduleLeftAdjoint_of_sliceEquivalences",
+  "file": "lean/Sheaf/CategoryTheory/RingedSiteSliceExactShriek.lean",
+  "statement": "theorem exists_exact_moduleLeftAdjoint_of_sliceEquivalences {C : Type c} [Category.{vc} C] {D : Type d} [Category.{vd} D] (J : Precoverage C) (K : Precoverage D) (hJ : J.IsSiteForCoverings) (hK : K.IsSiteForCoverings) [HasPullbacks C] [HasEqualizers C] (F : C ⥤ D) [PreservesLimitsOfShape WalkingCospan F] [PreservesLimitsOfShape WalkingParallelPair F] (hcover : ∀ (X : C) (P : Presieve X), P ∈ J X → P.map F ∈ K (F.obj X)) [F.IsContinuous J.toGrothendieck K.toGrothendieck] [F.IsCocontinuous J.toGrothendieck K.toGrothendieck] (hslice : ∀ X : C, (Over.post (X := X) F).IsEquivalence) (hsliceCover : ∀ (X : C) (Y : Over X) (P : Presieve Y), P.map (Over.forget X) ∈ J Y.left ↔ (P.map (Over.post F)).map (Over.forget (F.obj X)) ∈ K (F.obj Y.left)) (R : Sheaf K.toGrothendieck CommRingCat.{max c d vc vd r}) : ∃ L : ringedSiteModules.{max c d vc vd r} ((F.sheafPushforwardContinuous RingCat.{max c d vc vd r} J.toGrothendieck K.toGrothendieck).obj ((sheafCompose K.toGrothendieck (forget₂ CommRingCat.{max c d vc vd r} RingCat.{max c d vc vd r})).obj R)) ⥤ ringedSiteModules.{max c d vc vd r} ((sheafCompose K.toGrothendieck (forget₂ CommRingCat.{max c d vc vd r} RingCat.{max c d vc vd r})).obj R), ∃ hL : L.Additive, Nonempty (L ⊣ SheafOfModules.pushforward.{max c d vc vd r} (F := F) (𝟙 ((F.sheafPushforwardContinuous RingCat.{max c d vc vd r} J.toGrothendieck K.toGrothendieck).obj ((sheafCompose K.toGrothendieck (forget₂ CommRingCat.{max c d vc vd r} RingCat.{max c d vc vd r})).obj R)))) ∧ ∀ S : ShortComplex (ringedSiteModules.{max c d vc vd r} ((F.sheafPushforwardContinuous RingCat.{max c d vc vd r} J.toGrothendieck K.toGrothendieck).obj ((sheafCompose K.toGrothendieck (forget₂ CommRingCat.{max c d vc vd r} RingCat.{max c d vc vd r})).obj R))), S.ShortExact → (@ShortComplex.map _ _ _ _ _ _ S L (@Functor.preservesZeroMorphisms_of_additive _ _ _ _ _ _ L hL)).ShortExact",
+  "branch": "sheaf-dag",
+  "by": "Q137",
+  "date": "2026-10-23",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-0aa4b67ec"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0aa4b67ec",
+  "group": "Q137",
+  "result": "fix",
+  "note": "H3: hsliceCover used Presieve.functorPushforward (Mathlib Sieves.lean:406 = generated downward-closed sieve), so the slice covering iff was about generated sieves belonging to the non-saturated precoverages J,K, not the node's 'a family covers iff its image covers' (vacuous for finite coverings, can differ otherwise). FIX: P.map (Over.forget X) ∈ J Y.left ↔ (P.map (Over.post F)).map (Over.forget (F.obj X)) ∈ K (F.obj Y.left); docstring sentence, lean.statement (lean-record.json) and report note updated; nt_compile --json clean 2.5 s; refit_record no refusals. All other clauses checked against stmt_deps and Stacks 0797/0798/04BH/00XZ: universes, sites, continuity (IsContinuous implied), cocontinuity = dep clause (1), pullbacks/equalizers preserved, R'=R∘u identity map, T=pushforward(𝟙), L ⊣ T direction, Additive, ShortExact preservation; edge cases OK; sibling lem-sfb-local-slice-module-shriek-exact has no Lean (no H4 dup); H11 author-rereading advisory only."
+ }
+}

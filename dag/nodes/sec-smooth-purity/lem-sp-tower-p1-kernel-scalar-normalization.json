@@ -1,0 +1,225 @@
+{
+ "id": "lem-sp-tower-p1-kernel-scalar-normalization",
+ "kind": "statement",
+ "title": "Base change of the tower trace and normalization of the diagonal scalars",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ [def-weil-l-adic-coefficient-extension], and a scheme $S$ on which $\\ell$ is invertible. Put $B_n=\\mathcal O_E/\\ell^n$ and $A_T=((B_n)_T)_n$, with quotient transitions, for schemes $T$ over $S$. Use the coefficient towers [sk-def-sp-coefficient-towers] and their ordinary derived categories [det-sp-coefficient-towers-abelian]. Let $\\nu_T:T_{\\mathrm{proet}}\\to T_{\\mathrm{et}}$ be comparison, and let $\\mathscr C^+(T)$ be the full subcategory of $D^+(\\operatorname{Tow}(T,\\mathcal O_E))$ whose every level has an etale-origin witness [def-weil-pbc-etale-origin-witness], meaning it is isomorphic to $\\nu_T^*L_n$ for some $L_n\\in D^+(T_{\\mathrm{et}},B_n)$. Put $P=\\mathbf P^1_S$, $W=P\\times_SP$, $q:P\\to S$, $p_1,p_2:W\\to P$, and let $\\Delta:P\\hookrightarrow W$ be the diagonal [def-nagata-projective-space-base-change]. Use the Tate twist, supported diagonal map $\\delta_\\bullet:\\Delta_*A_P\\to A_W(1)[2]$, and splitting traces $t_q,t_1,t_2$ of [det-sp-tower-classes]; here $t_i$ is the trace for $p_i$. Write $F=Rq_{*,\\bullet}$ and $G=q_\\bullet^*(-)(1)[2]$.\nUnder the canonical proper exchange and twist identifications for the Cartesian square with edges $p_1,p_2$ over $q,q$, the splitting trace $t_i$ is the pullback of $t_q$ for each $i=1,2$: the unit-and-hyperplane-Chern splitting itself, its inverse, and its second projection commute with this base change as actual tower morphisms.\nLet $\\alpha_i:A_P\\xrightarrow{\\sim}Rp_{i*,\\bullet}\\Delta_*A_P$ be the canonical direct-image composition identification for $p_i\\Delta=1_P$, and define\n$$c_i=t_i\\circ Rp_{i*,\\bullet}(\\delta_\\bullet)\\circ\\alpha_i\\in\\operatorname{End}_{D(\\operatorname{Tow}(P,\\mathcal O_E))}(A_P[0]).$$\nThen $c_1=c_2=1_{A_P}$. More precisely their level-$n$ evaluations, under the canonical direct-image and composition comparisons [lem-coef-semilinear-derived-sections], are $\\nu_P^*$ of the ordinary etale finite composites\n$$t_{P,B_n}\\circ Rp_{i*,B_n}(\\delta_{B_n})\\circ\\alpha_{i,B_n}=1_{(B_n)_P}$$\nof [lem-sp-tower-p1-arbitrary-base-integrals], with $N=\\ell^n$ and the supported sign convention $\\delta_{B_n}u_\\Delta=c_1(\\mathcal O_W(\\Delta))$. Both $c_i$ lie in the image of the fully faithful degree-zero embedding of the abelian tower category [lem-weil-pbc-derived-single-fully-faithful]; consequently equality of their evaluations is equality of these tower-sheaf endomorphisms. No faithfulness of evaluation on arbitrary derived morphisms is asserted. All assertions hold over arbitrary $S$, without a Noetherian or finite-type assumption.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Construction: base change of trace (old step 4, final part); Levelwise check (old steps 5-6)"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sp-coefficient-towers",
+  "det-sp-coefficient-towers-abelian",
+  "def-weil-pbc-etale-origin-witness",
+  "def-nagata-projective-space-base-change",
+  "det-sp-tower-classes",
+  "lem-coef-semilinear-derived-sections",
+  "lem-sp-tower-p1-arbitrary-base-integrals",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "def-sp-tower-p1-kernel-scalar-data"
+ ],
+ "proof": [
+  {
+   "text": "Construct k and its forward splitting square and canonical alpha isomorphisms by the normalized splitting base-change lemma.",
+   "uses": [
+    "lem-sp-tower-p1-kernel-splitting-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the finite comparison lemma to obtain the Cartier proof and all positive-level finite normalizations for this same k.",
+   "uses": [
+    "lem-sp-tower-p1-kernel-finite-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The source comparison is the functorial biproduct comparison followed by the biproduct of the shifted line and coefficient isomorphisms. Cancel the mapped splitting isomorphism in the forward square to get inverse base change and exchange invertibility. Postcompose with the second projection, use biprod.lift_snd and traceQ, and functoriality gives trace base change.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Compose each finite WordComparison square with finite_identity and cancel its invertible endpoint comparison to get identity after derived evaluation. Full faithfulness of singleFunctor at degree zero gives unique abelian lifts. Exact evaluation commutes with singleFunctor by its natural isomorphism, so finite singleFunctor faithfulness gives equality of evaluated abelian lifts.",
+   "uses": [
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "det-sp-coefficient-towers-abelian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tower evaluation is sectionwise restriction to (n,U). Extensionality for module-sheaf maps gives equality of the abelian lifts. Apply singleFunctor to recover the scalar identities; the same sectionwise argument proves the restricted equality detection field.",
+   "uses": [
+    "sk-def-sp-coefficient-towers"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-tower-p1-kernel-splitting-base-change",
+  "lem-sp-tower-p1-kernel-finite-comparison",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "det-sp-coefficient-towers-abelian",
+  "sk-def-sp-coefficient-towers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Reduction of the triangle identities and Levelwise check; V4 categorical assembly"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The diagonal Kummer class of the projective line integrates to identity in the derived category of varying coefficient towers and the splitting trace commutes with base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Generators.H1Cotangent.δAux_ofComp\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"For any element $x$ in the composed algebra $(Q \\\\circ P).\\\\text{Ring}$, the auxiliary differential map $\\\\delta_{\\\\text{Aux}}^{R,Q}$ applied to the algebra homomorphism $(Q.\\\\text{ofComp} \\\\, P).\\\\text{toAl\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δ_comp_equiv\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {ι' : Type w₃} {σ : Type w₂} {σ' : Type w₄} (Q : Algebra.Generators S T ι)\", \"doc\": \"For algebra extensions $ P $ and $ P' $ generated by different index sets over a commutative ring $ R $, the composition of the connecting homomorphism $ \\\\delta_{Q,P} $ with the linear equivalence $ (\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δ_eq\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The connecting homomorphism $\\\\delta: H^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence is constructed via the Snake Lemma from the commutative diagram of cotangent complexes as\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"For algebra extensions $ P $ and $ Q $, the composition of the base-changed cotangent complex map with the lifted base change of the cotangent space homomorphism induced by $ Q \\\\circ P $ equals the co\"}\n  {\"name\": \"CommRing.Pic.mapAlgebra_mapAlgebra\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {A : Type u_7} {B : Type u_8} [inst_1 : CommSemiring A] [inst_2 : CommSemiring B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B] {M : CommRing.Pic R},\\n  (CommRing.Pic.mapAlgebra A B) ((CommRing.Pic.mapAlgebra R A) M\", \"doc\": \"For any commutative semiring $ R $ and $ R $-algebras $ A $ and $ B $, the composition of the group homomorphism $ \\\\mathrm{Pic}(R) \\\\to \\\\mathrm{Pic}(A) $ followed by $ \\\\mathrm{Pic}(A) \\\\to \\\\mathrm{Pic}(\"}\n  {\"name\": \"CommRing.Pic.mapAlgebra_comp_mapAlgebra\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {A : Type u_7} {B : Type u_8} [inst_1 : CommSemiring A] [inst_2 : CommSemiring B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B],\\n  (CommRing.Pic.mapAlgebra A B).comp (CommRing.Pic.mapAlgebra R A) = CommRing.Pic.map\", \"doc\": \"For a commutative semiring $ R $ and $ R $-algebras $ A $ and $ B $, the composition of the group homomorphism $ \\\\mathrm{Pic}(R) \\\\to \\\\mathrm{Pic}(A) $ induced by the $ R $-algebra structure on $ A $ a\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δ_map\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {ι' : Type w₃} {σ : Type w₂} {σ' : Type w₄} (Q : Algebra.Generators S T ι)\", \"doc\": \"The linear map $\\\\delta: \\\\mathrm{H}^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence, constructed via the Snake Lemma from the commutative diagram of cotangent complexes associat\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent.map_comp\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {R' : Type u'}\\n  {S' : Type v'} [inst_3 : CommRing R'] [inst_4 : CommRing S'] [inst_5 : Algebra R' S'] {P' : Algebra.Extension R' S'}\\n  [inst_6 : Algebra R R'] [inst_7 : Algebra S S'] [inst_8 : Algebra R S']\", \"doc\": \"Let $f : P \\\\to P'$ and $g : P' \\\\to P''$ be two composable homomorphisms of algebra extensions. This theorem states that the map on the first cotangent cohomology module, $H^1$, is functorial. Specific\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern generic category theory, algebraic traces, or scheme morphisms; none states this specified projective-line varying-coefficient tower claim."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"singleFunctor\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"DerivedCategory.singleFunctor\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] (n : ℤ) : CategoryTheory.Functor C (DerivedCategory C)\", \"doc\": \"The single functor `C ⥤ DerivedCategory C` which sends `X : C` to the\\nsingle cochain complex with `X` sitting in degree `n : ℤ`.\"}\n  {\"name\": \"DerivedCategory.singleFunctors\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] : CategoryTheory.SingleFunctors C (DerivedCategory C) ℤ\", \"doc\": \"The single functors `C ⥤ DerivedCategory C` for all `n : ℤ` along with\\ntheir compatibilities with shifts.\"}\n  {\"name\": \"DerivedCategory.instAdditiveSingleFunctor\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] (n : ℤ) : (DerivedCategory.singleFunctor C n).Additive\", \"doc\": \"\"}\n  {\"name\": \"DerivedCategory.singleFunctorIsoCompQ\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] (n : ℤ) : DerivedCategory.singleFunctor C n ≅ (CochainComplex.singleFunctor C n).comp DerivedCategory.Q\", \"doc\": \"The isomorphism `singleFunctor C n ≅ CochainComplex.singleFunctor C n ⋙ Q`.\"}\n  {\"name\": \"DerivedCategory.singleFunctorsPostcompQIso\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] : DerivedCategory.singleFunctors C ≅ (CochainComplex.singleFunctors C).postcomp DerivedCategory.Q\", \"doc\": \"The isomorphism\\n`DerivedCategory.singleFunctors C ≅ (CochainComplex.singleFunctors C).postcomp Q`.\"}\n  {\"name\": \"DerivedCategory.singleFunctorIsoCompQh\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] (n : ℤ) : DerivedCategory.singleFunctor C n ≅ (HomotopyCategory.singleFunctor C n).comp DerivedCategory.Qh\", \"doc\": \"The isomorphism `singleFunctor C n ≅ HomotopyCategory.singleFunctor C n ⋙ Qh`.\"}\n  {\"name\": \"DerivedCategory.singleFunctorsPostcompQhIso\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] : DerivedCategory.singleFunctors C ≅ (HomotopyCategory.singleFunctors C).postcomp DerivedCategory.Qh\", \"doc\": \"The isomorphism\\n`DerivedCategory.singleFunctors C ≅ (HomotopyCategory.singleFunctors C).postcomp Qh` given\\nby the definition of `DerivedCategory.singleFunctors`.\"}\n  {\"name\": \"DerivedCategory.singleFunctorIsoCompQ_hom_app\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] (n : ℤ) (X : C) : (DerivedCategory.singleFunctorIsoCompQ C n).hom.app X = CategoryTheory.CategoryStruct.id ((DerivedCategory.singleFunctor C n).obj X)\", \"doc\": \"\"}\n  {\"name\": \"DerivedCategory.singleFunctorIsoCompQ_inv_app\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] (n : ℤ) (X : C) : (DerivedCategory.singleFunctorIsoCompQ C n).inv.app X = CategoryTheory.CategoryStruct.id ((DerivedCategory.singleFunctor C n).obj X)\", \"doc\": \"\"}\n  {\"name\": \"DerivedCategory.singleFunctorsPostcompQIso_hom_hom\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] (x✝ : ℤ) : (DerivedCategory.singleFunctorsPostcompQIso C).hom.hom x✝ = CategoryTheory.CategoryStruct.id ((DerivedCategory.singleFunctors C).functor x✝)\", \"doc\": \"\"}\n  {\"name\": \"DerivedCategory.singleFunctorsPostcompQIso_inv_hom\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] (x✝ : ℤ) : (DerivedCategory.singleFunctorsPostcompQIso C).inv.hom x✝ = CategoryTheory.CategoryStruct.id ((DerivedCategory.singleFunctors C).functor x✝)\", \"doc\": \"\"}\n  {\"name\": \"DerivedCategory.instFaithfulSingleFunctor\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] (n : ℤ) : (DerivedCategory.singleFunctor C n).Faithful\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern generic category theory, algebraic traces, or scheme morphisms; none states this specified projective-line varying-coefficient tower claim."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*trace|trace.*diagonal|kummer|tateTwist",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern generic category theory, algebraic traces, or scheme morphisms; none states this specified projective-line varying-coefficient tower claim.",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Trace of the diagonal kernel in towers of torsion etale sheaves is identity on the coefficient ring in degree zero",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.trace_self\", \"module\": \"Mathlib.RingTheory.Trace.Defs\", \"type\": \": trace R R = LinearMap.id\", \"doc\": \"The trace of the algebra $ R $ over itself is the identity linear map, i.e., $ \\\\text{trace}_R(R) = \\\\text{id} $.\"}\n  {\"name\": \"Algebra.trace_comp_trace\", \"module\": \"Mathlib.RingTheory.Trace.Defs\", \"type\": \"[Algebra S T] [IsScalarTower R S T] [Module.Free R S] [Module.Finite R S] [Module.Free S T] [Module.Finite S T] :\\n  (trace R S).comp ((trace S T).restrictScalars R) = trace R T\", \"doc\": \"Let $R \\\\subseteq S \\\\subseteq T$ be algebras forming a scalar tower, with $S$ finitely generated free over $R$ and $T$ finitely generated free over $S$. The composition of the trace map $\\\\operatorname{\"}\n  {\"name\": \"Algebra.trace_trace\", \"module\": \"Mathlib.RingTheory.Trace.Defs\", \"type\": \"[Algebra S T] [IsScalarTower R S T] [Module.Free R S] [Module.Finite R S] [Module.Free S T] [Module.Finite S T]\\n  (x : T) : trace R S (trace S T x) = trace R T x\", \"doc\": \"Let $ R \\\\subseteq S \\\\subseteq T $ be a scalar tower of commutative semirings, where $ S $ is a finite free $ R $-algebra and $ T $ is a finite free $ S $-algebra. For any element $ x \\\\in T $, the trac\"}\n  {\"name\": \"Algebra.trace_trace_of_basis\", \"module\": \"Mathlib.RingTheory.Trace.Defs\", \"type\": \"[Algebra S T] [IsScalarTower R S T] {ι κ : Type*} [Finite ι] [Finite κ] (b : Basis ι R S) (c : Basis κ S T) (x : T) :\\n  trace R S (trace S T x) = trace R T x\", \"doc\": \"For commutative algebras $S$ and $T$ over a base ring $R$ with compatible scalar tower structures, given finite bases for $S$ over $R$ and $T$ over $S$, the composition of traces $\\\\operatorname{Tr}_{S\"}\n  {\"name\": \"Algebra.trace_comp_trace_of_basis\", \"module\": \"Mathlib.RingTheory.Trace.Defs\", \"type\": \"[Algebra S T] [IsScalarTower R S T] {ι κ : Type*} [Finite ι] [Finite κ] (b : Basis ι R S) (c : Basis κ S T) :\\n  (trace R S).comp ((trace S T).restrictScalars R) = trace R T\", \"doc\": \"Given a scalar tower of commutative semirings $ R \\to S \\to T $ with finite bases for $ S $ over $ R $ and $ T $ over $ S $, the composition of the trace map from $ T $ to $ S $ followed by the trace ma\"}\n  {\"name\": \"groupCohomology.π_comp_H0IsoOfIsTrivial_hom_apply\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.LowDegree\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] (A : Rep k G) [A.IsTrivial]\\n  (x : CategoryTheory.ToType (groupCohomology.cocycles A 0)),\\n  (ModuleCat.Hom.hom (groupCohomology.shortComplexH0 A).f)\\n      ((CategoryTheory.ConcreteCategory.hom (groupCohomology.cocyclesIso₀ A).hom) x) =\\n    (Cat\", \"doc\": \"For a commutative ring $ k $, group $ G $, and trivial $ k $-linear representation $ A $ of $ G $, the composition of the canonical maps from the 0-cocycles to the cochains factors through the isomorp\"}\n  {\"name\": \"LinearMap.trace_eq_contract_of_basis\", \"module\": \"Mathlib.LinearAlgebra.Trace\", \"type\": \"[Finite ι] (b : Basis ι R M) : LinearMap.trace R M ∘ₗ dualTensorHom R M M = contractLeft R M\", \"doc\": \"The trace of a linear operator on a finite-dimensional module $ M $ over a commutative semiring $ R $ is a linear map from the space of endomorphisms of $ M $ to $ R $, defined by taking the trace of \"}\n  {\"name\": \"Algebra.normalizedTrace_self\", \"module\": \"Mathlib.FieldTheory.NormalizedTrace\", \"type\": \": normalizedTrace F F = LinearMap.id\", \"doc\": \"The normalized trace map from a field $ F $ to itself is equal to the identity linear map on $ F $.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern generic category theory, algebraic traces, or scheme morphisms; none states this specified projective-line varying-coefficient tower claim."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Trace of the diagonal kernel in towers of torsion etale sheaves is identity on the coefficient ring in degree zero",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [inst_7 : Algebra.FormallyEtale S T] (s : S),\\n  (KaehlerDifferential.tensorKaehlerEqu\", \"doc\": \"For a formally étale algebra extension $ S \\to T $ over $ R $, the inverse of the base change isomorphism $ \\\\Omega_{S/R} \\\\otimes_S T \\\\cong \\\\Omega_{T/R} $ maps the Kähler differential $ d_T(\\\\mathrm{alge\"}\n  {\"name\": \"Algebra.SubmersivePresentation.sectionCotangent_comp\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ),\\n  P.sectionCotangent ∘ₗ P.toExtension.cotangentComplex = LinearMap.id\", \"doc\": \"The composition of the canonical section map from the cotangent space to the cotangent module and the cotangent complex map from the cotangent module to the cotangent space of an algebra extension equ\"}\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n  {\"name\": \"Algebra.normalizedTrace_algebraMap_eq_id\", \"module\": \"Mathlib/FieldTheory/NormalizedTrace\", \"type\": \"∀ (F : Type u_1) (K : Type u_2) [inst : Field F] [inst_1 : Field K] [inst_2 : Algebra F K] [inst_3 : CharZero F]\\n  [inst_4 : Algebra.IsIntegral F K], Algebra.normalizedTrace F K ∘ₗ Algebra.linearMap F K = LinearMap.id\", \"doc\": \"The composition of the normalized trace map $\\\\operatorname{Tr}_{\\\\text{norm}} : K \\\\to F$ and the canonical algebra map $F \\\\to K$ is equal to the identity map on $F$.\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"(R : Type u_1) →\\n  (S : Type u_2) →\\n    (T : Type u_3) →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given commutative rings $R$, $S$, and $T$ with $S$ an $R$-algebra, $T$ an $S$-algebra, and $T$ an $R$-algebra via the scalar tower $R \\\\to S \\\\to T$, if the algebra $S \\\\to T$ is formally étale, then the\"}\n  {\"name\": \"Algebra.trace_quotient_mk\", \"module\": \"Mathlib/RingTheory/Trace/Quotient\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Free R S]\\n  [Module.Finite R S] [inst_5 : IsLocalRing R] (x : S),\\n  (Algebra.trace (R ⧸ IsLocalRing.maximalIdeal R) (S ⧸ Ideal.map (algebraMap R S) (IsLocalRing.maximalIdeal R)))\\n      ((Ideal.Qu\", \"doc\": \"For a local ring $ R $ and an $ R $-algebra $ S $, given an ideal $ \\\\mathfrak{p} $ of $ R $ and an element $ x \\\\in S $, the trace of the image of $ x $ in the quotient ring $ S/\\\\mathfrak{p}S $ over $ \"}\n  {\"name\": \"trace_quotient_eq_trace_localization_quotient\", \"module\": \"Mathlib/RingTheory/Trace/Quotient\", \"type\": \"∀ {R : Type u_1} (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal R)\\n  [inst_3 : p.IsMaximal] (Rₚ : Type u_3) (Sₚ : Type u_4) [inst_4 : CommRing Rₚ] [inst_5 : CommRing Sₚ]\\n  [inst_6 : Algebra R Rₚ] [inst_7 : IsLocalization.AtPrime Rₚ p] [inst_8 : IsLocalRing\", \"doc\": \"For a commutative ring $ R $ with a prime ideal $ \\\\mathfrak{p} $, an $ R $-algebra $ S $, and an element $ x \\\\in S $, the trace of $ x $ in the quotient ring $ S/\\\\mathfrak{p}S $ over $ R/\\\\mathfrak{p} \"}\n  {\"name\": \"sectionOfRetractionKerToTensor_algebraMap\", \"module\": \"Mathlib/RingTheory/Smooth/Kaehler\", \"type\": \"∀ {R : Type u_1} {P : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing P] [inst_2 : CommRing S]\\n  [inst_3 : Algebra R P] [inst_4 : Algebra P S] (l : TensorProduct P S Ω[P⁄R] →ₗ[P] ↥(RingHom.ker (algebraMap P S)))\\n  (hl : l ∘ₗ KaehlerDifferential.kerToTensor R P S = LinearMap.id) [inst\", \"doc\": \"For any element $x$ in $P$, the constructed $R$-algebra homomorphism evaluates on the image of the algebra map $\\\\mathrm{algebraMap}(P,S)$ as $x - l(1 \\\\otimes d(\\\\sigma(x)))$, where $l$ is a linear map \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern generic category theory, algebraic traces, or scheme morphisms; none states this specified projective-line varying-coefficient tower claim."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*trace|trace.*diagonal|kummer|tateTwist",
+   "results": "Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/Padics/PadicVal/Basic.lean, Mathlib/NumberTheory/Padics/PadicVal/Basic.lean, Mathlib/NumberTheory/Padics/PadicVal/Basic.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: number-field Kummer theory and matrix traces are unrelated to the cohomological diagonal integral."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Trace of the diagonal class of the projective line equals identity for inverse systems of torsion sheaves",
+   "results": "Algebra.trace_self, Matrix.trace_diagonal, Algebra.intTrace.congr_simp, Algebra.normalizedTrace_self, LinearMap.trace_one, Algebra.trace_quotient_eq_of_isDedekindDomain, Algebra.normalizedTrace_algebraMap_eq_id, Algebra.intTrace_eq_trace",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic and matrix trace identities are not the sheaf-tower diagonal integral."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"singleFunctor\"",
+   "results": "DerivedCategory.singleFunctor, DerivedCategory.singleFunctors, DerivedCategory.instAdditiveSingleFunctor, DerivedCategory.singleFunctorIsoCompQ, DerivedCategory.singleFunctorsPostcompQIso, DerivedCategory.singleFunctorIsoCompQh, DerivedCategory.singleFunctorsPostcompQhIso, DerivedCategory.singleFunctorIsoCompQ_hom_app",
+   "date": "2026-10-24",
+   "verdict": "no match: singleFunctor and its faithfulness concern the last algebraic step only, already covered by lem-weil-pbc-derived-single-fully-faithful; not this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change of a projective line splitting trace and identity of the integrated diagonal in derived categories of varying coefficient towers",
+   "results": "WeierstrassCurve.Projective.baseChange_equation, WeierstrassCurve.Projective.baseChange_addXYZ, WeierstrassCurve.Projective.Equation.baseChange, WeierstrassCurve.VariableChange.map_baseChange, WeierstrassCurve.map_baseChange, IsBaseChange.comp_iff, LinearMap.trace_baseChange, Algebra.Generators.H1Cotangent.δAux_ofComp",
+   "date": "2026-10-24",
+   "verdict": "no match: Weierstrass base change, algebraic trace and cotangent declarations do not give sheaf-tower splitting traces or diagonal integrals."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unit and hyperplane first Chern class give a pullback natural projective line decomposition in the derived category of sheaf towers",
+   "results": "AlgebraicGeometry.Proj.pullbackAwayιIso, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst_assoc, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd_assoc, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right_assoc",
+   "date": "2026-10-24",
+   "verdict": "no match: Proj chart pullback isomorphisms do not state the tower cohomological splitting."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-tower-p1-adjunction",
+  "date": "2026-10-22",
+  "group": "Q12"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-tower-p1-adjunction",
+   "place": "Construction: base change of trace (old step 4, final part); Levelwise check (old steps 5-6)",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sp-tower-p1-kernel-scalar-normalization",
+  "worker": "stage1",
+  "summary": "Expanded the tower splitting base-change argument by a Chern pullback lemma and an explicit mate calculation; evaluated the specified finite diagonal composites; used full faithfulness only for degree-zero objects. No statement changes and one new statement-only node.",
+  "blueprint": "det-sp-tower-p1-adjunction: Reduction of the triangle identities, the base-change-of-trace sentence, and the whole Levelwise check paragraph.",
+  "tool_uses": [
+   {
+    "node": "def-pc-projective-space-twist",
+    "why": "The explicit transition-function definition identifies the pulled-back hyperplane bundle; the present unit does not redefine projective twisting sheaves."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Canonical actual tower operations, adjunction transposes, and their evaluation/composition comparisons; this is the varying-ring calculus used by the unit."
+   },
+   {
+    "node": "lem-weil-pbc-derived-single-fully-faithful",
+    "why": "The degree-zero embedding identifies tower-derived endomorphisms with tower-sheaf maps; this generic fully faithful embedding is exactly what the unit levelwise argument requires."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-derived-single-fully-faithful"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q107-8e2b5da30",
+  "group": "Q107",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-8e2b5da30 (reviewer sub-agent of L); spot-checked: Read in full. Item statement unchanged; the node is still unsplit in live and side-live, and there is no repair note (an ordinary one-level split of a Q12-created node with no earlier proof). Blueprint p1.proof 'Reduction of the triangle identities' (the sentence 'Tr_{p_i} is the trace of the projective line p_i (the base change of q)') and 'Levelwise check' were read; they are identical in main-20261015 and latest. Steps 1-3: the base change of the trace through the det-sp-tower-classes(4) splitting and the mate exchange of etale-origin-comparisons. I re-derived E_Y v(a)=R'(w(eps_Y L a))eta'_{vX}: the unit adjunct is 1 and the Chern adjunct is c_1(p_j^*O(1)), which is the relative hyperplane class of p_i (checked on the charts of def-pc-projective-space-twist). Then pr_2 d_i=q^*pr_2, so t_iE_i=q^*t_q for i=1,2. The twist coherence is a generic mate pasting of lem-coef-semilinear-derived-sections; accepted. Steps 4-7: the level-n evaluations come from det-sp-tower-classes(3),(4), with the sign convention matching the arbitrary-base integrals, and the nu^* and alpha_i source identifications come from etale-origin-comparisons. B_n=A_{E,en} is finite, N=l^n is invertible, and S is arbitrary. Full faithfulness of degree-zero objects is applied in Tow and in B_n-modules, followed by componentwise equality. No evaluation-faithfulness shortcut is used. New node lem-sp-tower-chern-pullback: a true pullback naturality of tower Kummer c_1, self-contained, statement only, with 3 kinds of search. Edge cases checked: id, isomorphism, empty X, trivial L, n=1, ramified E. It duplicates no node (finite-p1-kummer-naturality, supported-kummer-boundary-pullback and cartier-kummer-naturality are finite or other settings) and does not restate a clause of the item. tool_uses accepted: projective-space-twist is a definition, coef-semilinear is the generic calculus, single-fully-faithful is a Mathlib leaf. No SGA citation. Batch-5: det-sp-tower-classes is a general definition; its reached node lem-pod-etale-stalk-tensor-scalar is a generic stalk/tensor fact and no step of the trace-formula or Poincaré-duality proofs; the item already cited det-sp-tower-classes on the base, so the closure does not change. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TowerP1KernelScalarNormalization",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerP1.towerP1KernelScalarNormalization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpTowerP1.towerP1KernelScalarNormalization"
+  ],
+  "file": "lean/Sheaf/Paper/TowerP1KernelScalarNormalization.lean",
+  "statement": "theorem towerP1KernelScalarNormalization (S : Scheme.{u}) (hS : IsUnit (l : Γ(S, ⊤))) (p : Presentation l E S hS) : ∃ k : KernelSplittingData l E p, KernelScalarNormalization l E p k",
+  "branch": "sheaf-dag",
+  "by": "Q119",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e89ea4083",
+  "group": "Q119",
+  "result": "pass",
+  "note": "All node clauses rendered exactly. ∃ k KernelSplittingData is fully pinned: CoefficientPullback/LinePullback by section/pure-tensor normalization; splittingQ/splittingProjection by unit+hyperplane-Chern hom formulas, hyperplane via Pic.map along the other projection; traceQ = p.trace. Exchange = Presentation.exchange/exchangeSwap + canonical shifted-line pullback. splitting/inverse/trace base change are non-rfl equations for both a. alpha = canonical sourceUnitAt composition iso, asserted iso. c_i = alpha ≫ p_a*(delta) ≫ t_a = 1 for both a. Levels: WordComparison equations against projectiveLineDiagonalAlpha, positive EtaleWords.delta, chart ≫ pinned bP.trace, finite_identity at N = l^(n+1). Degree-zero unique lift and detection restricted to A_P endomorphisms. Arbitrary S; level one, both projections and universes checked. One sorry, in the main theorem only; docstrings and 7 proof steps present; lean.statement verbatim; node differs from side-live only in lean. Advisory: uncited def-node owners (Presentation, ProjectiveCoordinates, CoefficientPullback, LinePullback, WordComparison, EtaleWords.delta), as in the Q13/Q25 P1 siblings. No compile (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-93df5",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261025T164600-L-1037403",
+  "kind": "interface",
+  "note": "independent cc review: relocated data module vs clone item module (verbatim); item proof vs two new sorried lemmas and their nodes; item node fields vs Lean proof"
+ }
+}

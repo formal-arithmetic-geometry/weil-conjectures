@@ -274,7 +274,8 @@ def realized_errors(nodes, g, units, deps_all, full_carriers, only=None):
 def check(nodes=None, verbose=True) -> list[str]:
     nodes = nodes or dq.load(); units, chapters = load_units()
     errs, info, tools_accepted = [], collections.Counter(), collections.Counter()
-    g = dq.Dag(nodes)
+    import nodefiles
+    g = nodefiles.dag(nodes)
     _dall = {}       # fastland: g.deps(x, "all") per node, computed once
 
     def deps_all(x):

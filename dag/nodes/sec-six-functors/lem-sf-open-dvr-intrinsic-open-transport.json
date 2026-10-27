@@ -1,0 +1,193 @@
+{
+ "id": "lem-sf-open-dvr-intrinsic-open-transport",
+ "kind": "statement",
+ "title": "Intrinsic completeness through the canonical DVR open comparison",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R$ and uniformizer $t$, an adic datum $d$ with ideal $(t)$, and a quasi-compact open immersion $j:U\\hookrightarrow X$. Let $C_U,C_X$ be canonical coefficient models of [def-sf-open-quotient-koszul-models] and $O$ an open model of [def-sf-open-dvr-open-model]. If the actual singleton intrinsic Koszul unit [prop-weil-pbc-koszul-reconstruction] of $C_U(K)$ is invertible for an unbounded completed-integral derived object $K$ on $U$, then that of $C_X(O.jShriek(K))$ is invertible. The extension is the exact adjoint to the actual coefficient restriction specified by $O$.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09BP (lemma-j-shriek-limits), via completedOpenExchangeComparison on the identity square."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-derived-complete",
+  "prop-weil-pbc-koszul-reconstruction",
+  "def-sf-open-quotient-koszul-models",
+  "def-sf-open-dvr-open-model",
+  "lem-sf-open-tensor-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Apply openDvrIntrinsicCriterion to C_U and K to turn invertibility of the actual source intrinsic unit into quotient Roos completeness. At the end apply the same criterion to C_X and O.jShriek(K). The supplied generator equality hd is used in both applications.",
+   "uses": [
+    "lem-sf-open-dvr-intrinsic-criterion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For W=ProEt.mk(j), transport modules on the literal slice X.ProEt/W to modules over the restricted completed ring on U using ProEt.sliceEquiv, sliceDense and module_transport. The composite of its inverse with the actual localizedSystemExtension is left adjoint to the same literal open restriction as O.extension. Adjunction.leftAdjointUniq identifies these extensions. Apply proEtaleRingedExtensionByZero_products with index ULift(N), then transfer preservation along the discrete-index equivalence to obtain preservation of countable products for O.extension.ordinary and therefore for H=O.modules.functor followed by O.extension.ordinary.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-cbc-ringed-open-extension-products",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Project the completed uniformizer section to every finite quotient. The definition of the constant-to-completion lift and toSheafify_naturality identify this projection with the constant uniformizer class. O.ring_projection and O.finite_constants therefore show that O.ring preserves the uniformizer section; the finite projections are jointly monic. O.modules_functor now identifies scalar multiplication after scalar transport. Apply the faithful Hom bijection for O.extension.adjunction to the desired equality of scalar chain maps: naturality of its unit and linearity of each unit component prove equality on every section in every degree. Thus H carries integralKoszulScalar on U to integralKoszulScalar on X.",
+   "uses": [
+    "def-weil-completed-integral-coefficients",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the proved complete_iff_local and complete_iff_principalUnit helpers of CompletedDirectImagePreservesCompleteness, choosing a prime p different from ell, on an arbitrary complex P representing K. The principal completion unit of P is a quasi-isomorphism. Exactness of H preserves it; countable-product preservation supplies the proved principalMapIso. Combined with the equality of scalar chain maps, these give an isomorphism from Q(H(P)) to its principal completion. IntegralPrincipalCone.localCriterion makes that completion locally complete. Transport local completeness across this isomorphism, the exact-derived factorization, the representative isomorphism Q(P)=K, and mapDerivedCategoryCompIso, obtaining quotient completeness of the actual O.jShriek(K). Return through the target intrinsic criterion from Step 1. No characteristic condition on the schemes or boundedness hypothesis is used.",
+   "uses": [
+    "lem-pur-completed-direct-image-preserves-completeness",
+    "lem-pur-integral-principal-cone-local-criterion",
+    "lem-sf-open-dvr-intrinsic-criterion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-completed-integral-coefficients",
+  "lem-cbc-ringed-open-extension-products",
+  "lem-pur-completed-direct-image-preserves-completeness",
+  "lem-pur-integral-principal-cone-local-criterion",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-open-dvr-intrinsic-criterion",
+  "lem-sf-open-tensor-normalization",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09BP (lemma-j-shriek-limits), with the principal-completion argument of Stacks Tags 099B and 0A0E; F8 uses the existing intrinsic DVR criterion and the proved principal-transport helpers instead of the completed-exchange identity square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact equivalence of ring sheaf module categories transports strict quotient tensor towers and the total derived inverse limit adjunction unit",
+   "results": "OK 8 hits: LightCondensed monoidal and internally projective declarations; none identifies these normalized strict quotient constructions.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIso\", \"unit\", \"equivalence\"",
+   "results": "OK 4 hits: CategoryTheory.Adjunction.instIsIsoFunctorCounitOfIsEquivalence, instIsIsoFunctorCounitOfIsEquivalence_1, instIsIsoFunctorUnitOfIsEquivalence, instIsIsoFunctorUnitOfIsEquivalence_1.",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary adjunction equivalence units, not adic completion."
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul.*[Cc]omplet|[Cc]omplet.*Koszul",
+   "results": "OK 0 hits in Mathlib.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived completion over a discrete valuation ring is preserved by extension by zero along a quasicompact open immersion, using a Koszul quotient tower and its derived inverse limit",
+   "results": "OK 8 hits: AdicCompletion ring/module definitions and basic zero identities, IsAdicComplete.bot, Valuation.Completion, DerivedCategory.instHasZeroObject; none identifies the normalized derived sheaf completion or its coefficient comparisons.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenQuotientKoszulCompleteness",
+  "date": "2026-10-24",
+  "group": "M3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Integral coefficient comparisons: tensor reassociation, evaluation and adjunction units and counits; Intrinsic completeness through the canonical DVR open comparison",
+   "via": [
+    "lem-sf-open-quotient-koszul-completeness",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OpenDvrIntrinsicOpenTransport",
+  "file": "lean/Sheaf/SixFunctors/OpenDvrIntrinsicOpenTransport.lean",
+  "declaration": "WeilConjectures.openDvrIntrinsicOpenTransport",
+  "declarations": [
+   "WeilConjectures.openDvrIntrinsicOpenTransport"
+  ],
+  "statement": "theorem openDvrIntrinsicOpenTransport\n    (d : AdicCoefficientDatum (Padic.coefficientExtensionIntegers l E))\n    (hd : Ideal.span (Set.range (fun _ : Fin 1 ↦\n      Padic.coefficientExtensionUniformizer l E)) = d.ideal)\n    {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]\n    (C_U : OpenDvrCoefficientModel l E d U) (C_X : OpenDvrCoefficientModel l E d X)\n    (O : OpenDvrOpenModel l E j)\n    (K : DerivedCategory (scalarReductionSource.{u, u} l E U))\n    (hK : IsIso (completedAdicIntrinsicUnit U d 1\n      (fun _ ↦ Padic.coefficientExtensionUniformizer l E) (C_U.derived.functor.obj K))) :\n    IsIso (completedAdicIntrinsicUnit X d 1\n      (fun _ ↦ Padic.coefficientExtensionUniformizer l E)\n      (C_X.derived.functor.obj (O.jShriek.obj K)))",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-04b5d",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261024T190304-L-4015494",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261027T034706-L-3674777",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "statement_change": {
+  "date": "2026-10-27",
+  "by": "K7 stage 2",
+  "old_statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R$ and uniformizer $t$, an adic datum $d$ with ideal $(t)$, and a quasi-compact open immersion $j:U\\hookrightarrow X$. Let $C_U,C_X$ be canonical coefficient models and $O$ an open model of [def-sf-open-quotient-koszul-models]. If the actual singleton intrinsic Koszul unit [prop-weil-pbc-koszul-reconstruction] of $C_U(K)$ is invertible for an unbounded completed-integral derived object $K$ on $U$, then that of $C_X(O.jShriek(K))$ is invertible. The extension is the exact adjoint to the actual coefficient restriction specified by $O$.",
+  "what": "The open-model definition attachment has been separated from the coefficient/completion attachment; this citation is updated to the same unchanged Lean interface.",
+  "source": {
+   "document": "literature/stacks-project/proetale.tex",
+   "place": "Tag 09BP (lemma-j-shriek-limits), via completedOpenExchangeComparison on the identity square."
+  },
+  "citers": [
+   {
+    "id": "lem-pur-compact-support-scalar-projection-identification",
+    "holds": true,
+    "note": "Existing Lean statement is unchanged. Open-model citations are redirected to def-sf-open-dvr-open-model where appropriate; coefficient and completion citations retain the original id."
+   },
+   {
+    "id": "lem-sf-open-quotient-koszul-completeness",
+    "holds": true,
+    "note": "Existing Lean statement is unchanged. Open-model citations are redirected to def-sf-open-dvr-open-model where appropriate; coefficient and completion citations retain the original id."
+   },
+   {
+    "id": "lem-sf-open-reconstruction-effectivity",
+    "holds": true,
+    "note": "Existing Lean statement is unchanged. Open-model citations are redirected to def-sf-open-dvr-open-model where appropriate; coefficient and completion citations retain the original id."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-l-adic-coefficient-extension",
+   "def-weil-pbc-proetale-site",
+   "def-weil-pbc-adic-coefficient-datum",
+   "def-weil-derived-complete",
+   "prop-weil-pbc-koszul-reconstruction",
+   "def-sf-open-quotient-koszul-models",
+   "lem-sf-open-tensor-normalization"
+  ]
+ }
+}

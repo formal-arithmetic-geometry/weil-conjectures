@@ -1,0 +1,282 @@
+{
+ "id": "lem-pur-associative-stage-family-descent",
+ "kind": "statement",
+ "title": "Functor and transformation descent without identity-normalized stage transitions",
+ "statement": "Let $I$ be a nonempty directed preorder, and let $S=(C_i,T_{ij},a^C_{ijk})$ and $S'=(D_i,U_{ij},a^D_{ijk})$ be stage systems and $P_C,P_D$ their literal pair categories [def-sf-directed-common-stage-data]. Only the associative pentagon is assumed: no unitor or identity normalization of $T_{ii}$ or $U_{ii}$ is required. Write $j_i^C,j_i^D$ for the stage inclusions. Composition below is read from right to left.\n\nSuppose functors $\\Phi_i:C_i\\to D_i$ and natural isomorphisms $b_{ij}:U_{ij}\\Phi_i\\xrightarrow{\\sim}\\Phi_jT_{ij}$ are given for all $i\\le j$. Assume, for every $i\\le j\\le k$ and $x\\in C_i$,\n$$\\Phi_k(a^C_{ijk,x})\\circ b_{jk,T_{ij}x}\\circ U_{jk}(b_{ij,x})=b_{ik,x}\\circ a^D_{ijk,\\Phi_i x}.$$\nThen there is a functor $\\overline\\Phi:P_C\\to P_D$ with literal object formula $\\overline\\Phi(i,x)=(i,\\Phi_i x)$ and representative formula\n$$\\overline\\Phi[m,u]=[m,b_{jm,y}^{-1}\\circ\\Phi_m(u)\\circ b_{im,x}],\\quad u:T_{im}x\\to T_{jm}y.$$\nThere are natural inclusion comparisons $\\overline\\Phi j_i^C\\cong j_i^D\\Phi_i$ with identity components, so the two functors agree on stage arrows.\n\nFor a second such family $(\\Psi_i,c_{ij})$, suppose natural transformations $\\eta_i:\\Phi_i\\Rightarrow\\Psi_i$ satisfy\n$$c_{ij,x}\\circ U_{ij}(\\eta_{i,x})=\\eta_{j,T_{ij}x}\\circ b_{ij,x}.$$\nTheir components $j_i^D(\\eta_{i,x})$ define a natural transformation $\\overline\\eta:\\overline\\Phi\\Rightarrow\\overline\\Psi$. Descent preserves identities and vertical composition of these transformations and hence their equations and inverses. The family $\\Phi_i=1_{C_i}$, $b_{ij}=1_{T_{ij}}$ descends to the identity functor through a natural comparison with identity components. For a third stage system $S''=(B_i,V_{ij},a^B_{ijk})$ on $I$ and a coherent family $\\Gamma_i:D_i\\to B_i$, $d_{ij}:V_{ij}\\Gamma_i\\cong\\Gamma_jU_{ij}$ satisfying the analogous tower equation, the family $\\Gamma_i\\Phi_i$ with comparisons $\\Gamma_j(b_{ij,x})\\circ d_{ij,\\Phi_i x}$ descends to $\\overline\\Gamma\\,\\overline\\Phi$ through a natural comparison with identity components. These statements include repeated indices and impose no faithfulness or exactness condition on transitions.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+  "place": "Retained order-1462 construction, old argument 7: stagewise shift descent; generic interface implemented by WeilConjectures/CategoryTheory/StageSystem/Functor.lean, Morphism (lines 53-67), functor (129-177), descNatTrans and descNatIso (183-256), functorIdIso and functorCompIso (339-389)."
+ },
+ "stmt_deps": [
+  "def-sf-directed-common-stage-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the pair-category representatives, transport, identities and inclusions of [def-sf-directed-common-stage-data]. Put $B_m(u)=b_{jm,y}^{-1}\\Phi_m(u)b_{im,x}$ for $u:T_{im}x\\to T_{jm}y$. For $n\\ge m$, abbreviate $A_i=a^C_{imn,x}$, $A_j=a^C_{jmn,y}$, $D_i=a^D_{imn,\\Phi_i x}$ and $D_j=a^D_{jmn,\\Phi_j y}$. The assumed tower equation, multiplied on the right by $D_i^{-1}$, reads $b_{in,x}=\\Phi_n(A_i)b_{mn,T_{im}x}U_{mn}(b_{im,x})D_i^{-1}$; the same formula holds for $j,y$. No identity normalization is used in this rearrangement.",
+   "uses": [
+    "def-sf-directed-common-stage-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Retained old argument 7, expanded using StageSystem/Functor.lean:72-256 and 280-389; elementary representative calculations for the unnormalized model."
+   }
+  },
+  {
+   "text": "Substitute those two expressions in $B_n(A_jT_{mn}(u)A_i^{-1})$ and cancel $\\Phi_n(A_j)$ and $\\Phi_n(A_i)^{-1}$. The result is\n$$D_jU_{mn}(b_{jm,y}^{-1})b_{mn,T_{jm}y}^{-1}\\Phi_n(T_{mn}(u))b_{mn,T_{im}x}U_{mn}(b_{im,x})D_i^{-1}.$$\nNaturality of $b_{mn}$ gives $b_{mn,T_{jm}y}^{-1}\\Phi_n(T_{mn}(u))b_{mn,T_{im}x}=U_{mn}(\\Phi_m(u))$. Thus the displayed expression is $D_jU_{mn}(B_m(u))D_i^{-1}$, exactly the transport of $B_m(u)$ in the target pair category [def-sf-directed-common-stage-data]. If two representatives become equal at an upper stage, their images become equal at that same stage by this equality. Consequently $[m,u]\\mapsto[m,B_m(u)]$ is well defined on the stated equivalence classes.",
+   "uses": [
+    "def-sf-directed-common-stage-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Retained old argument 7, expanded using StageSystem/Functor.lean:72-256 and 280-389; elementary representative calculations for the unnormalized model."
+   }
+  },
+  {
+   "text": "Give the descended functor the stipulated object function. Since $B_i(1_{T_{ii}x})=b_{ii,x}^{-1}1b_{ii,x}=1$, it preserves the prescribed identity representative [def-sf-directed-common-stage-data]. At a common stage $m$ for composable $u,v$, cancellation of $b_{jm,y}b_{jm,y}^{-1}$ gives $B_m(v)B_m(u)=b_{km,z}^{-1}\\Phi_m(vu)b_{im,x}=B_m(vu)$. Directedness supplies a common upper stage for any two given representatives; step 2 permits replacing them by their transports there. The composition formula in the cited definition therefore proves preservation of every composite. These checks construct the functor, including its representative formula.",
+   "uses": [
+    "def-sf-directed-common-stage-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Retained old argument 7, expanded using StageSystem/Functor.lean:72-256 and 280-389; elementary representative calculations for the unnormalized model."
+   }
+  },
+  {
+   "text": "For $f:x\\to y$ in $C_i$, naturality of $b_{ii}$ gives $b_{ii,y}^{-1}\\Phi_i(T_{ii}(f))b_{ii,x}=U_{ii}(\\Phi_i(f))$. The inclusion formula in [def-sf-directed-common-stage-data] now gives $\\overline\\Phi(j_i^C(f))=j_i^D(\\Phi_i(f))$, while the object functions literally agree. The identity at each common object consequently gives a natural inclusion isomorphism with identity components, in the orientation of the statement. This calculation uses $b_{ii}$ as supplied; it never replaces that isomorphism or $T_{ii}$ by an identity.",
+   "uses": [
+    "def-sf-directed-common-stage-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Retained old argument 7, expanded using StageSystem/Functor.lean:72-256 and 280-389; elementary representative calculations for the unnormalized model."
+   }
+  },
+  {
+   "text": "For any stage arrow $f:x\\to y$ and $i\\le m$, naturality of $a^D_{iim}$ gives $a^D_{iim,y}U_{im}(U_{ii}(f))(a^D_{iim,x})^{-1}=U_{im}(f)$. Hence the inclusion arrow $j_i^D(f)$ has representative $[m,U_{im}(f)]$ by the transport and inclusion definitions [def-sf-directed-common-stage-data]. In particular the proposed transformation component at $(i,x)$ is represented at any $m\\ge i$ by $U_{im}(\\eta_{i,x})$. This establishes the common-stage component formula needed for naturality, also when $m=i$.",
+   "uses": [
+    "def-sf-directed-common-stage-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Retained old argument 7, expanded using StageSystem/Functor.lean:72-256 and 280-389; elementary representative calculations for the unnormalized model."
+   }
+  },
+  {
+   "text": "For a representative $u:T_{im}x\\to T_{jm}y$, write $B_m^\\Phi(u)=b_{jm,y}^{-1}\\Phi_m(u)b_{im,x}$ and $B_m^\\Psi(u)=c_{jm,y}^{-1}\\Psi_m(u)c_{im,x}$. The compatibility assumed for $\\eta$ and its ordinary naturality at $u$ give the three-line equality\n$$U_{jm}(\\eta_{j,y})B_m^\\Phi(u)=c_{jm,y}^{-1}\\eta_{m,T_{jm}y}\\Phi_m(u)b_{im,x}\n=c_{jm,y}^{-1}\\Psi_m(u)\\eta_{m,T_{im}x}b_{im,x}\n=B_m^\\Psi(u)U_{im}(\\eta_{i,x}).$$\nUsing step 5 and composition at stage $m$ [def-sf-directed-common-stage-data], this is precisely the naturality square for $[m,u]$. Every arrow has a representative, so the components define $\\overline\\eta$.",
+   "uses": [
+    "def-sf-directed-common-stage-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Retained old argument 7, expanded using StageSystem/Functor.lean:72-256 and 280-389; elementary representative calculations for the unnormalized model."
+   }
+  },
+  {
+   "text": "Identity transformation families satisfy compatibility because $b_{ij}U_{ij}(1)=1b_{ij}$. If $\\lambda:\\Psi\\Rightarrow\\Omega$ has comparisons $e$, then $e_{ij}U_{ij}(\\lambda_i\\eta_i)=\\lambda_jT_{ij}\\,c_{ij}U_{ij}(\\eta_i)=\\lambda_jT_{ij}\\,\\eta_jT_{ij}\\,b_{ij}$, so vertical composites are compatible. At $(i,x)$ their descended component is $j_i^D(\\lambda_{i,x}\\eta_{i,x})=j_i^D(\\lambda_{i,x})j_i^D(\\eta_{i,x})$; identities are handled by the same inclusion functor [def-sf-directed-common-stage-data]. Equality of transformation families therefore gives equality of descended components. If $\\eta_i$ are invertible, rearranging compatibility gives $b_{ij}U_{ij}(\\eta_i^{-1})=(\\eta_jT_{ij})^{-1}c_{ij}$; the descended inverse has both inverse equations by the just-proved identity and composition formulas.",
+   "uses": [
+    "def-sf-directed-common-stage-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Retained old argument 7, expanded using StageSystem/Functor.lean:72-256 and 280-389; elementary representative calculations for the unnormalized model."
+   }
+  },
+  {
+   "text": "For the identity family its tower equation is the equality $a^C_{ijk}=a^C_{ijk}$. Its arrow formula is $1^{-1}1(u)1=u$ at every stage. Hence its descent has the identity object and arrow functions, so identity components give the claimed natural comparison [def-sf-directed-common-stage-data].",
+   "uses": [
+    "def-sf-directed-common-stage-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Retained old argument 7, expanded using StageSystem/Functor.lean:72-256 and 280-389; elementary representative calculations for the unnormalized model."
+   }
+  },
+  {
+   "text": "For the composite family put $e_{ij,x}=\\Gamma_j(b_{ij,x})d_{ij,\\Phi_i x}$. It is a natural isomorphism since both factors are. Here is its tower calculation (arguments not displayed are the uniquely typed ones at $x$):\n$$e_{ik}a^B=\\Gamma_k(b_{ik})\\Gamma_k(a^D)d_{jk,U_{ij}\\Phi_i x}V_{jk}(d_{ij})\n=\\Gamma_k\\Phi_k(a^C)\\Gamma_k(b_{jk,T_{ij}x})\\Gamma_kU_{jk}(b_{ij,x})d_{jk,U_{ij}\\Phi_i x}V_{jk}(d_{ij})\n=\\Gamma_k\\Phi_k(a^C)\\Gamma_k(b_{jk,T_{ij}x})d_{jk,\\Phi_jT_{ij}x}V_{jk}(\\Gamma_j(b_{ij,x}))V_{jk}(d_{ij})\n=\\Gamma_k\\Phi_k(a^C)e_{jk,T_{ij}x}V_{jk}(e_{ij,x}).$$\nThe first equality is the tower equation for $d$, the second is that for $b$, and the third is naturality of $d_{jk}$ at $b_{ij,x}$. Thus steps 1-3 apply to this coherent family. Expanding its representative formula gives\n$$e_{jm,y}^{-1}\\Gamma_m\\Phi_m(u)e_{im,x}=d_{jm,\\Phi_jy}^{-1}\\Gamma_m(b_{jm,y}^{-1}\\Phi_m(u)b_{im,x})d_{im,\\Phi_ix},$$\nwhich is exactly the successive representative formula for $\\overline\\Gamma\\,\\overline\\Phi$. Objects also agree literally; identity components therefore define the final natural comparison [def-sf-directed-common-stage-data]. All displayed equations permit repeated indices and use only functoriality, naturality, and inverse cancellation.",
+   "uses": [
+    "def-sf-directed-common-stage-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Retained old argument 7, expanded using StageSystem/Functor.lean:72-256 and 280-389; elementary representative calculations for the unnormalized model."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-directed-common-stage-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+  "place": "Old argument 7; explicit elementary expansion checked against lean/WeilConjectures/CategoryTheory/StageSystem/Functor.lean:72-389 and Basic.lean:92-143,388-405. The current blueprint normalized model is context, not an unitor hypothesis."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "StageSystem|PairCategory|descNatTrans|tr_mapAt",
+   "results": "; 0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match: the hits do not construct the nonunital associative-stage quotient functor and its compatible transformations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible functors and transformations descend to a category of common upper stage pairs without requiring identity transitions",
+   "results": "; 8 hits: CategoryTheory.Limits.CatCospanTransform.category, CategoryTheory.Comma.full_map, CategoryTheory.NatTrans.ext', CategoryTheory.Comma.faithful_map, CategoryTheory.Comma.map, CategoryTheory.Functor.CommShift.ofComp_compatibility, CategoryTheory.NatTrans.ext'_iff, CategoryTheory.Comma.isEquivalenceMap",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match: the hits do not construct the nonunital associative-stage quotient functor and its compatible transformations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pseudofunctor, CategoryTheory.Functor",
+   "results": "; 12 hits: CategoryTheory.Functor.toPseudofunctor, CategoryTheory.Functor.toPseudofunctor', CategoryTheory.Pseudofunctor.ObjectProperty.map, CategoryTheory.Pseudofunctor.ObjectProperty.fullsubcategory_toPrelaxFunctor_toPrelaxFunctorStruct_toPrefunctor_map_toFunctor, CategoryTheory.Pseudofunctor.ObjectProperty.ι_app_toFunctor, CategoryTheory.Pseudofunctor.ObjectProperty.mapId, CategoryTheory.Pseudofunctor.ObjectProperty.mapComp, CategoryTheory.Pseudofunctor.ObjectProperty.map₂",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match: the hits do not construct the nonunital associative-stage quotient functor and its compatible transformations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of directed stage systems of categories with associative transition isomorphisms but no identity transitions induces a functor on common stage pairs and compatible natural transformations descend",
+   "results": "; 8 hits: CategoryTheory.SmallObject.SuccStruct.Iteration.subsingleton.MapEq, CategoryTheory.SmallObject.SuccStruct.Iteration.mkOfLimit.functor, CategoryTheory.Functor.IsLocallyDirected, CategoryTheory.SmallObject.SuccStruct.Iteration.mkOfLimit.inductiveSystem, CategoryTheory.SmallObject.SuccStruct.Iteration.F, CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.functorMap_comp, CategoryTheory.SmallObject.SuccStruct.arrowMap, CategoryTheory.NonemptyParallelPairPresentationAux.F₂",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match: the hits do not construct the nonunital associative-stage quotient functor and its compatible transformations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pseudonatural morphism of associative nonunital diagrams of categories descends by conjugation to the eventual equality quotient category of pairs",
+   "results": "; 8 hits: CategoryTheory.Pseudofunctor.DescentData.ofObj_hom, CategoryTheory.Pseudofunctor.DescentData, CategoryTheory.WithInitial.pseudofunctor, CategoryTheory.LocallyDiscrete.mkPseudofunctor_mapComp, CategoryTheory.LocallyDiscrete.mkPseudofunctor_map, CategoryTheory.Functor.toPseudoFunctor_mapComp, CategoryTheory.WithInitial.pseudofunctor_mapComp, CategoryTheory.Pseudofunctor.LocallyDiscreteOpToCat.map_eq_pullHom",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match: the hits do not construct the nonunital associative-stage quotient functor and its compatible transformations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent functors between nonunital associative directed systems of categories descend to the quotient category of common upper stage representatives",
+   "results": "{\"t\": \"2026-10-27T07:51:33Z\", \"tool\": \"leanfinder\", \"query\": \"Coherent functors between nonunital associative directed systems of categories descend to the quotient category of common upper stage representatives\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DirectLimit.map\", \"DirectLimit.map_def\", \"DirectLimit.map₀_def\", \"DirectLimit.lift₂_def₂\", \"DirectLimit.map₂_def₂\", \"DirectLimit.lift₂\", \"DirectLimit.lift₂_def\", \"DirectLimit.lift\"], \"digest\": \"598be3e5424218fd\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: DirectLimit.map covers maps of type-level direct limits only; pseudofunctor descent and Grothendieck constructions require unitor data or have different morphisms, and do not state this common-stage quotient functor and all transformation/composition clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "StageSystem|PairCategory|descNatTrans|tr_mapAt",
+   "results": "{\"t\": \"2026-10-27T07:51:57Z\", \"tool\": \"grep\", \"query\": \"StageSystem|PairCategory|descNatTrans|tr_mapAt\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: DirectLimit.map covers maps of type-level direct limits only; pseudofunctor descent and Grothendieck constructions require unitor data or have different morphisms, and do not state this common-stage quotient functor and all transformation/composition clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Functor and natural transformation descent for coherent nonunital directed category diagrams with eventual equality of common stage morphisms",
+   "results": "{\"t\": \"2026-10-27T07:51:57Z\", \"tool\": \"leansearch\", \"query\": \"Functor and natural transformation descent for coherent nonunital directed category diagrams with eventual equality of common stage morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functorial.noConfusion\", \"CategoryTheory.Pseudofunctor.DescentData.hom\", \"CategoryTheory.NatTrans.ext'\", \"CategoryTheory.NatTrans.mk\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorObjHom_eq\", \"CategoryTheory.Pseudofunctor.DescentData.instCategory\", \"CategoryTheory.Pseudofunctor.DescentData.Hom.mk\", \"CategoryTheory.GrothendieckTopology.diagramFunctor_map\"], \"digest\": \"f5bedd20a2f9de70\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: DirectLimit.map covers maps of type-level direct limits only; pseudofunctor descent and Grothendieck constructions require unitor data or have different morphisms, and do not state this common-stage quotient functor and all transformation/composition clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pseudofunctor, CategoryTheory.Functor",
+   "results": "{\"t\": \"2026-10-27T07:51:58Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Pseudofunctor, CategoryTheory.Functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.toPseudofunctor\", \"CategoryTheory.Functor.toPseudofunctor'\", \"CategoryTheory.Pseudofunctor.ObjectProperty.map\", \"CategoryTheory.Pseudofunctor.ObjectProperty.fullsubcategory_toPrelaxFunctor_toPrelaxFunctorStruct_toPrefunctor_map_toFunctor\", \"CategoryTheory.Pseudofunctor.ObjectProperty.ι_app_toFunctor\", \"CategoryTheory.Pseudofunctor.ObjectProperty.mapId\", \"CategoryTheory.Pseudofunctor.ObjectProperty.mapComp\", \"CategoryTheory.Pseudofunctor.ObjectProperty.map₂\"], \"digest\": \"74de19278c0eded7\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: DirectLimit.map covers maps of type-level direct limits only; pseudofunctor descent and Grothendieck constructions require unitor data or have different morphisms, and do not state this common-stage quotient functor and all transformation/composition clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pseudonatural transformations induce conjugation maps on eventual equality classes of morphisms in filtered pair categories",
+   "results": "{\"t\": \"2026-10-27T07:51:58Z\", \"tool\": \"leanfinder\", \"query\": \"Pseudonatural transformations induce conjugation maps on eventual equality classes of morphisms in filtered pair categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.pseudofunctorOver_toPrelaxFunctor_toPrelaxFunctorStruct_map₂\", \"CategoryTheory.Join.pseudofunctorLeft_toPrelaxFunctor_toPrelaxFunctorStruct_map₂_toNatTrans_app\", \"CategoryTheory.Join.pseudofunctorRight_mapComp_hom_toNatTrans_app\", \"CategoryTheory.Join.pseudofunctorRight_toPrelaxFunctor_toPrelaxFunctorStruct_map₂_toNatTrans_app\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.map_comp_eq\", \"CategoryTheory.Pseudofunctor.LocallyDiscreteOpToCat.map_eq_pullHom\", \"CategoryTheory.Join.pseudofunctorLeft_mapComp_hom_toNatTrans_app\", \"CategoryTheory.Pseudofunctor.Grothendieck.map_comp_eq\"], \"digest\": \"3f36436f2e740826\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: DirectLimit.map covers maps of type-level direct limits only; pseudofunctor descent and Grothendieck constructions require unitor data or have different morphisms, and do not state this common-stage quotient functor and all transformation/composition clauses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-general-legacy-pair-shifts",
+  "date": "2026-10-27",
+  "group": "NO"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-algebraically-closed-coefficients",
+   "place": "Old owning proof argument 7: use stage shift functors as the components of shiftMorphism, and descend their zero and addition isomorphisms. This helper states the general associative-stage functor/transformation descent used in that argument.",
+   "via": [
+    "lem-pur-general-legacy-pair-shifts"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-pur-associative-stage-family-descent",
+  "worker": "stage1",
+  "summary": "Statement and statement dependencies unchanged. Replaced the absent proof by nine explicit calculations on common-stage representatives. In particular wrote the tower substitutions proving transport compatibility, the non-normalized stage-arrow formula needed for naturality, and the composite-family tower equation. No new node is needed: each calculation is substitution, naturality, inverse cancellation or the quotient definition; no non-elementary result is hidden. Reran all required search kinds with two semantic phrasings and read the nearest candidates. Prior attachment was rejected; no attachment disposition is proposed.",
+  "blueprint": "Nearest ancestor def-weil-algebraically-closed-coefficients, retained old argument 7: descend coherent stage functors, zero/addition transformations, and identity/composite comparisons. Steps 1-4 construct functor descent, 5-7 descend transformations, 8-9 give identity/composition comparisons. Current sk-thm-sfb-qlbar-two-colimit clause 4 and det-def-sfb-filtered-two-colimit-model proof supply normalized context only; the live unnormalized definition is retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NP-8cbaf2758",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-8cbaf2758 (reviewer sub-agent of L); spot-checked: I read all of the item, its only cited node def-sf-directed-common-stage-data (pair category, transport u_n=a_{jmn}T_{mn}(u)a_{imn}^{-1}, identity [i,1_{T_ii x}], inclusion [i,T_ii f]), the parent lem-pur-general-legacy-pair-shifts steps that use it, and source sk-thm-sfb-qlbar-two-colimit clause 4. 'Old argument 7' is not verbatim in that source, and proof_origin by:agent is correct. The unit sk-def-sf-operations has no steps, so no route constraint applies and no tool_uses are needed. The statement and stmt_deps are unchanged, there are no new nodes, and all 9 steps are correct elementary calculations; I recomputed each one. Step 1 is the tower equation solved for b_in. Step 2 cancels Phi_n(A) and uses naturality of b_mn, giving D_j U_mn(B_m u) D_i^{-1}, which is exactly the target transport, so the map is well defined. Step 3 checks identity (B_i(1)=1) and composition at a common stage using directedness. Step 4 uses naturality of b_ii, giving Phi-bar j_i = j_i Phi_i. Step 5 uses naturality of a_iim, so [i,U_ii f] transports to U_im f. Step 6 is a three-line naturality square from compatibility at (j,m) and (i,m) plus naturality of eta_m. Step 7 shows compatibility of composites and inverses, and that j_i^D is a functor. Step 8 is the identity family. Step 9 gives the composite tower (d-tower, then b-tower, then naturality of d_jk at b_ij) and the composite representative formula B^Gamma(B^Phi u). Edge cases are covered: singleton I with idempotent T and nonidentity a, repeated indices, and no faithfulness or exactness used. proof_deps equals the union of uses. Searches cover all three kinds. Maintainer finding: the existing unsplit node lem-pur-unnormalized-pair-functor-descent (NR, created 2026-10-27 for lem-pur-general-pair-shift-normalization) states the same theorem and adds a whiskering clause. It is a parallel-creation duplicate that was already on the base, and the worker's duplicate audit missed it. It is not a fault of this delivery. Recommendation: merge the NR node into this split item after adding the whiskering clause, or have the NR node cite this item. No fixes were made."
+ },
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.StageSystem.Functor",
+  "declaration": "CategoryTheory.StageSystem.Morphism.functor",
+  "declarations": [
+   "CategoryTheory.StageSystem.Morphism",
+   "CategoryTheory.StageSystem.Morphism.mapAt",
+   "CategoryTheory.StageSystem.Morphism.tr_mapAt",
+   "CategoryTheory.StageSystem.Morphism.functor",
+   "CategoryTheory.StageSystem.Morphism.functor_obj",
+   "CategoryTheory.StageSystem.Morphism.functor_map_mkHom",
+   "CategoryTheory.StageSystem.Morphism.functor_map_ι",
+   "CategoryTheory.StageSystem.Morphism.ιCompFunctorIso",
+   "CategoryTheory.StageSystem.Morphism.ιCompFunctorIso_hom_app",
+   "CategoryTheory.StageSystem.Morphism.ιCompFunctorIso_inv_app",
+   "CategoryTheory.StageSystem.Morphism.Hom",
+   "CategoryTheory.StageSystem.Morphism.descNatTrans",
+   "CategoryTheory.StageSystem.Morphism.descNatTrans_app",
+   "CategoryTheory.StageSystem.Morphism.Hom.id",
+   "CategoryTheory.StageSystem.Morphism.Hom.comp",
+   "CategoryTheory.StageSystem.Morphism.descNatTrans_id",
+   "CategoryTheory.StageSystem.Morphism.descNatTrans_comp",
+   "CategoryTheory.StageSystem.Morphism.descNatIso",
+   "CategoryTheory.StageSystem.Morphism.isIso_descNatTrans",
+   "CategoryTheory.StageSystem.Morphism.id",
+   "CategoryTheory.StageSystem.Morphism.id_β_hom_app",
+   "CategoryTheory.StageSystem.Morphism.comp",
+   "CategoryTheory.StageSystem.Morphism.comp_β_hom_app",
+   "CategoryTheory.StageSystem.Morphism.functorIdIso",
+   "CategoryTheory.StageSystem.Morphism.functorIdIso_hom_app",
+   "CategoryTheory.StageSystem.Morphism.functorIdIso_inv_app",
+   "CategoryTheory.StageSystem.Morphism.functorCompIso",
+   "CategoryTheory.StageSystem.Morphism.functorCompIso_hom_app",
+   "CategoryTheory.StageSystem.Morphism.functorCompIso_inv_app",
+   "CategoryTheory.StageSystem.Morphism.functor_id_map",
+   "CategoryTheory.StageSystem.Morphism.functor_comp_map"
+  ],
+  "statement": "noncomputable def functor : S.PairCategory ⥤ S'.PairCategory",
+  "branch": "slopmaster2",
+  "by": "NC",
+  "date": "2026-10-27",
+  "existing": true,
+  "note": "Existing declaration family in the live project's StageSystem/Functor.lean, read in full and server-checked. Morphism and Hom encode exactly the tower and transformation equations, without unitors or repeated-index normalization. functor, mapAt and their formulas supply the literal object and representative maps; ιCompFunctorIso supplies the identity-component inclusion comparison; descNatTrans, its identity/composition laws and descNatIso supply transformation descent and inverses; id, comp, functorIdIso and functorCompIso supply the identity and composite families with identity-component comparisons. All clauses are recorded in declarations; no new module, definition, theorem or statement correction is needed. Only the general StageSystem/PairCategory part of def-sf-directed-common-stage-data is used, without its optional exact/shift data."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aa3c74fcc",
+  "group": "NC",
+  "result": "pass",
+  "note": "Existing:true attachment of the StageSystem.Morphism family (Functor.lean, read in full) is correct. Every clause matches: coh = the tower equation (reversed order); functor_obj rfl; mapAt/functor_map_mkHom give the representative formula, well defined via tr_mapAt; ιCompFunctorIso has identity components in the node's orientation; Hom.comm = η-compatibility; descNatTrans_id/_comp/descNatIso/isIso_descNatTrans; functorIdIso; functorCompIso with comp_β_hom_app = Γ_j(b)∘d. No unitor or reflexive-transition normalization; independent universes; Nonempty not needed. Statement verbatim; 31 declarations exist; no sorry or hollow data; record conventions match. Advisory: NR's unsplit lem-pur-unnormalized-pair-functor-descent states the same theorem and should cite or attach to this; upstream docstrings carry the prop-weil-pbc-descent-functors tag."
+ }
+}

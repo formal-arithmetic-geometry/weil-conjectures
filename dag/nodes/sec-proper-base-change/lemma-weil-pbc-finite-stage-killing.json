@@ -79,7 +79,32 @@
    "cites": []
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.exists_cohomologyMap_eq_zero_of_isLimit"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.exists_cohomologyMap_eq_zero_of_isLimit",
+     "module": "WeilConjectures.SixFunctors.Etale.Gabber",
+     "lines": [
+      153,
+      184
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lean": {
@@ -109,20 +134,27 @@
   "sorry_after": []
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $(T,T_0)$ be an affine henselian pair, let $F$ be torsion, and let $c\\in\nH^q(T_0,F|_{T_0})$ with $q>0$. Suppose $c$ vanishes after pullback to an\nintegral strictly local cover that is the inverse limit of finite, finitely\npresented covers $T_\\lambda\\to T$. Then $c$ already vanishes after pullback to\none $T_{\\lambda_0}$.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $S$ be a scheme, $(D_j)_{j\\in J}$ a cofiltered system of quasi-compact\nquasi-separated schemes over $S$ with structure maps $\\pi_j:D_j\\to S$ and\naffine transition morphisms, and let $X=\\varprojlim_jD_j$ with projections\n$p_j:X\\to D_j$. Let $G$ be an abelian sheaf on $S_{\\Et}$ and\n$c\\in H^q(S,G)$. If the pullback of $c$ along $\\pi_{j_0}\\circ p_{j_0}:X\\to S$\nvanishes for some $j_0$, then there is $j$ such that already the pullback of\n$c$ to $D_j$ vanishes.\n\n(In the application, $(T,T_0)$ is an affine henselian pair, the $D_j$ are the\nclosed fibres of a system of finite, finitely presented covers $T_\\lambda\\to T$\nwhose limit is an integral strictly local cover, and $c$ is a class on $T_0$.)",
   "proof": [
    {
-    "text": "Represent the chosen cochain and its null-homotopy on the limit by finitely\nmany sections. Each section and each equality occurs at some index because\nthe system is filtered and the etale site is quasi-compact and quasi-separated.\nChoose one index dominating those finitely many indices. The descended\ncochain and the descended null-homotopy satisfy the coboundary equation at a\nfurther finite index; replacing by that index gives $\\lambda_0$.",
-    "uses": [],
-    "elementary": null
+    "text": "By the continuity of etale cohomology along cofiltered limits of\nquasi-compact quasi-separated schemes with affine transition maps\n[lemma-weil-pbc-etale-cohomology-continuity], the pullback maps induce an\nisomorphism\n\n$$\n \\varinjlim_jH^q(D_j,\\pi_j^{-1}G)\\xrightarrow{\\sim}H^q(X,G|_X).\n$$",
+    "uses": [
+     "lemma-weil-pbc-etale-cohomology-continuity"
+    ],
+    "elementary": false
    },
    {
-    "text": "The $T_\\lambda\\to T$ are finite, hence affine, so $(T_\\lambda)$ is a\ncofiltered inverse system of quasi-compact quasi-separated schemes with affine\ntransition maps (finite morphisms being affine); base changing along the\nclosed immersion $T_0\\hookrightarrow T$ of the affine henselian pair, the\nsystem $((T_\\lambda)_0)$ is of the same kind, with limit $X_0=X\\times_TT_0$,\nand the pullbacks of the torsion sheaf $F_0$ form a compatible system. By the\ncontinuity of etale cohomology along such limits,\n\n$$\n \\varinjlim_\\lambda H^q((T_\\lambda)_0,F_0|)\n \\xrightarrow{\\sim}H^q(X_0,F_0|),\n$$\n\nand the hypothesis that $c$ vanishes after pullback to the integral strictly\nlocal cover $X$ says exactly that the element $(c|_{(T_\\lambda)_0})$ maps to\nzero in this colimit; an element of a filtered colimit that maps to zero is\nalready zero, so $c|_{(T_{\\lambda_0})_0}=0$ for some $T_{\\lambda_0}$, as\nasserted.",
+    "text": "The element of the colimit represented by $\\pi_{j_0}^*c$ maps to the pullback\nof $c$ to $X$, which is zero; hence it is zero in the filtered colimit, so\nthere is $j\\to j_0$ with $\\pi_j^*c=0$ (the pullbacks of $c$ along the\n$\\pi_j$ are compatible with the transition maps).",
     "uses": [],
     "elementary": null
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

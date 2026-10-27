@@ -1,0 +1,116 @@
+{
+ "id": "def-sfb-normal-generic-lisse-sections",
+ "kind": "definition",
+ "title": "Actual generic lisse restriction, geometric sections and field automorphisms",
+ "status": "split",
+ "statement": "Let $X$ be an integral scheme [def-pc-integral-scheme], with function field $k=\\mathcal O_{X,\\eta}$. Let $A$ be a normed field and $L\\in\\mathrm{Lisse}_A(X)$ with the all-continuous coefficient ring $R_{A,X}=p_X^*C(-,A)$ [def-sfb-norm-continuous-monodromy-data]. Let $\\Omega/k$ be a separable closure [def-pd-separable-closure], with $X$, $A$, and $\\Omega$ in a common universe $u$. Define $j:\\operatorname{Spec}k\\to X$ to be the canonical morphism from the stalk at the generic point. Define the generic module $L_\\eta=j^*L$ using the ordinary internal module pullback [sk-def-sfb-module-pushforward-pullback]. Let $U_\\Omega$ be the separable-closure object of $(\\operatorname{Spec}k)_{\\mathrm{proet}}$ [def-sfb-field-separable-cech-nerve]. Define its additive group of geometric sections by $V_A(L)=(L_\\eta)(U_\\Omega)$, equivalently the global sections of the restriction to the slice over $U_\\Omega$. For every $g\\in\\operatorname{Aut}_k(\\Omega)$ define the site endomorphism $a_g:U_\\Omega\\to U_\\Omega$ with underlying morphism $\\operatorname{Spec}(g)$; its over-$k$ equation is $\\operatorname{Spec}(k\\to\\Omega)\\circ\\operatorname{Spec}(g)=\\operatorname{Spec}(k\\to\\Omega)$. The associated map on $V_A(L)$ is restriction along $a_g$. These are the actual pullback and evaluated section objects, without a chosen basis, representation, or assertion of full faithfulness.",
+ "stmt_deps": [
+  "def-pc-integral-scheme",
+  "def-sfb-norm-continuous-monodromy-data",
+  "def-pd-separable-closure",
+  "sk-def-sfb-module-pushforward-pullback",
+  "def-sfb-field-separable-cech-nerve"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Bhatt–Scholze, Lemma 7.4.7 and Lemma 7.4.10, pp. 70–71; actual generic restriction and separable-closure section objects in lem-sfb-generic-lisse-scalar-comparison, proof steps 3 and 5. The canonical Spec(g) endomorphism is the field descent construction of Example 4.1.10."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Generic geometric sections of a lisse pro etale module by restriction to the function field and evaluation at a separable closure, with canonical field automorphism maps",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsSepClosure.recOn\", \"module\": \"Mathlib.FieldTheory.IsSepClosed\", \"type\": \"{k : Type u} →\\n  [inst : Field k] →\\n    {K : Type v} →\\n      [inst_1 : Field K] →\\n        [inst_2 : Algebra k K] →\\n          {motive : IsSepClosure k K → Sort u_1} →\\n            (t : IsSepClosure k K) →\\n              ((sep_closed : IsSepClosed K) → (separable : Algebra.IsSeparable k K) → motive ⋯) →\", \"doc\": \"The proposition that a field extension $ K $ of $ k $ is a separable closure, meaning $ K $ is an algebraic extension of $ k $ that is separably closed (has no nontrivial finite separable extensions) \"}\n  {\"name\": \"separableClosure\", \"module\": \"Mathlib.FieldTheory.SeparableClosure\", \"type\": \": IntermediateField F E\", \"doc\": \"The separable closure of a field $ F $ in an extension field $ E $ is the intermediate field consisting of all elements of $ E $ that are separable over $ F $. An element is separable over $ F $ if it\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.evaluation\", \"module\": \"Mathlib.AlgebraicGeometry.ResidueField\", \"type\": \"(U : X.Opens) (x : X) (hx : x ∈ U) : Γ(X, U) ⟶ X.residueField x\", \"doc\": \"For a scheme $X$, an open subset $U \\\\subseteq X$, and a point $x \\\\in U$, this defines the evaluation map, which is a ring homomorphism from the ring of sections $\\\\Gamma(X, U)$ to the residue field at \"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.AutGalois.π\", \"module\": \"Mathlib.CategoryTheory.Galois.Prorepresentability\", \"type\": \"(A : PointedGaloisObject F) : AutGalois F →* Aut (A : C)\", \"doc\": \"The group homomorphism that evaluates a compatible family of automorphisms (section) in the pre-Galois category at the specific pointed Galois object $ A $, mapping each section to its corresponding a\"}\n  {\"name\": \"separableClosure.algEquivOfAlgEquiv\", \"module\": \"Mathlib.FieldTheory.SeparableClosure\", \"type\": \"(i : E ≃ₐ[F] K) : separableClosure F E ≃ₐ[F] separableClosure F K\", \"doc\": \"Given an $ F $-algebra isomorphism $ i : E ≃ₐ[F] K $ between field extensions of $ F $, this constructs an $ F $-algebra equivalence between the separable closure of $ F $ in $ E $ and the separable c\"}\n  {\"name\": \"AlgEquiv.separableClosure\", \"module\": \"Mathlib.FieldTheory.SeparableClosure\", \"type\": \"{F : Type u} →\\n  {E : Type v} →\\n    [inst : Field F] →\\n      [inst_1 : Field E] →\\n        [inst_2 : Algebra F E] →\\n          {K : Type w} →\\n            [inst_3 : Field K] →\\n              [inst_4 : Algebra F K] → (E ≃ₐ[F] K) → ↥(separableClosure F E) ≃ₐ[F] ↥(separableClosure F K)\", \"doc\": \"Given an $ F $-algebra isomorphism $ i : E ≃ₐ[F] K $ between field extensions of $ F $, this constructs an $ F $-algebra equivalence between the separable closure of $ F $ in $ E $ and the separable c\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.res_apply\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(U V : Opens (PrimeSpectrum.Top R)) (i : V ⟶ U) (s : (structureSheaf R).1.obj (op U)) (x : V) :\\n  ((structureSheaf R).1.map i.op s).1 x = (s.1 (i x) :)\", \"doc\": \"For open subsets $U$ and $V$ of the prime spectrum $\\\\operatorname{Spec}(R)$ with inclusion map $i: V \\\\to U$, and for any section $s$ of the structure sheaf $\\\\mathcal{O}_{\\\\operatorname{Spec}(R)}$ over \"}\n  {\"name\": \"ModuleCat.Tilde.toOpen\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Tilde\", \"type\": \"(U : Opens (PrimeSpectrum.Top R)) : ModuleCat.of R M ⟶ (tildeInModuleCat M).obj (op U)\", \"doc\": \"For an open subset $ U $ of the prime spectrum $ \\\\operatorname{Spec}(R) $, this defines the restriction map from the module $ M $ localized at $ U $ to the sections of the sheaf $ \\\\widetilde{M} $ over\"}\n",
+   "date": "2026-10-23",
+   "verdict": "General search hits do not define the specific generic-section interface. Exact definitions already exist in Sheaf.Paper.NormalGenericLisseCocycle; bind them without a copy. No definition node owns them."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generic restriction of lisse sheaves and sections over a separable closure with endomorphisms induced by Galois automorphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"galRestrictHom\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict\", \"type\": \"(A : Type u_1) →\\n  (K : Type u_2) →\\n    (L : Type u_3) →\\n      (B : Type u_6) →\\n        [inst : CommRing A] →\\n          [inst_1 : CommRing B] →\\n            [inst_2 : Algebra A B] →\\n              [inst_3 : Field K] →\\n                [inst_4 : Field L] →\\n                  [inst_5 : Algebra A K] →\\n    \", \"doc\": \"The structure defines a group isomorphism between the automorphism group of $ L $ over $ K $ and the automorphism group of the integral closure $ B $ of $ A $ in $ L $, constructed by restricting auto\"}\n  {\"name\": \"coe_galRestrict_apply\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict\", \"type\": \"∀ (A : Type u_1) {K : Type u_2} {L : Type u_3} (B : Type u_6) [inst : CommRing A] [inst_1 : CommRing B]\\n  [inst_2 : Algebra A B] [inst_3 : Field K] [inst_4 : Field L] [inst_5 : Algebra A K] [inst_6 : IsFractionRing A K]\\n  [inst_7 : Algebra K L] [inst_8 : Algebra A L] [inst_9 : IsScalarTower A K L] [\", \"doc\": \"There exists a group isomorphism between the Galois group $ \\\\text{Gal}(L/K) $ and the group of $ A $-algebra automorphisms of the integral closure $ B $ of $ A $ in $ L $. This isomorphism is construc\"}\n  {\"name\": \"galRestrict_apply\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict\", \"type\": \"∀ (A : Type u_1) {K : Type u_2} {L : Type u_3} {B : Type u_6} [inst : CommRing A] [inst_1 : CommRing B]\\n  [inst_2 : Algebra A B] [inst_3 : Field K] [inst_4 : Field L] [inst_5 : Algebra A K] [inst_6 : IsFractionRing A K]\\n  [inst_7 : Algebra K L] [inst_8 : Algebra A L] [inst_9 : IsScalarTower A K L] [\", \"doc\": \"There exists a group isomorphism between the Galois group $\\\\text{Gal}(L/K)$ and the group of $A$-algebra automorphisms of the integral closure $B$ of $A$ in $L$. This isomorphism is constructed by res\"}\n  {\"name\": \"galRestrictHom_apply\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict\", \"type\": \"∀ (A : Type u_1) (K : Type u_2) (L : Type u_3) (B : Type u_6) [inst : CommRing A] [inst_1 : CommRing B]\\n  [inst_2 : Algebra A B] [inst_3 : Field K] [inst_4 : Field L] [inst_5 : Algebra A K] [inst_6 : IsFractionRing A K]\\n  [inst_7 : Algebra K L] [inst_8 : Algebra A L] [inst_9 : IsScalarTower A K L] [\", \"doc\": \"For commutative rings $A$ and $B$, fields $K$ and $L$, with $B$ as the integral closure of $A$ in $L$, the group isomorphism between $\\\\text{Aut}_K(L)$ and $\\\\text{Aut}_A(B)$ maps each $K$-algebra autom\"}\n  {\"name\": \"galRestrictHom_symm_apply\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict\", \"type\": \"∀ (A : Type u_1) (K : Type u_2) (L : Type u_3) (B : Type u_6) [inst : CommRing A] [inst_1 : CommRing B]\\n  [inst_2 : Algebra A B] [inst_3 : Field K] [inst_4 : Field L] [inst_5 : Algebra A K] [inst_6 : IsFractionRing A K]\\n  [inst_7 : Algebra K L] [inst_8 : Algebra A L] [inst_9 : IsScalarTower A K L] [\", \"doc\": \"For commutative rings $A$ and $B$, fields $K$ and $L$, with $B$ as the integral closure of $A$ in $L$ and $K$ as the fraction field of $A$, applying the inverse of the group isomorphism between $\\\\text\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.AutGalois\", \"module\": \"Mathlib/CategoryTheory/Galois/Prorepresentability\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{u₂, u₁} C] →\\n    [CategoryTheory.GaloisCategory C] → CategoryTheory.Functor C FintypeCat → Type (max u₁ u₂)\", \"doc\": \"The type of sections of the composed functor from pointed Galois objects to types, obtained by first taking automorphism groups and then forgetting the group structure. This represents compatible fami\"}\n  {\"name\": \"AlgEquiv.restrictNormalHom\", \"module\": \"Mathlib/FieldTheory/Normal/Defs\", \"type\": \"{F : Type u_1} →\\n  [inst : Field F] →\\n    {K₁ : Type u_3} →\\n      [inst_1 : Field K₁] →\\n        [inst_2 : Algebra F K₁] →\\n          (E : Type u_6) →\\n            [inst_3 : Field E] →\\n              [inst_4 : Algebra F E] →\\n                [inst_5 : Algebra E K₁] → [IsScalarTower F E K₁] → [Normal F E]\", \"doc\": \"The monoid homomorphism from the Galois group $\\\\text{Gal}(K_1/F)$ to $\\\\text{Gal}(E/F)$, defined by restricting each automorphism $\\\\chi$ to the subfield $E$. This homomorphism sends $\\\\chi$ to $\\\\chi|_E$\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.endEquivSectionsFibers_π\", \"module\": \"Mathlib/CategoryTheory/Galois/Prorepresentability\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C]\\n  (F : CategoryTheory.Functor C FintypeCat) [inst_2 : CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  (f : CategoryTheory.End F) (A : CategoryTheory.PreGaloisCategory.PointedGaloisObject F),\\n  ↑\", \"doc\": \"For any endomorphism $ f $ of a functor $ F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat} $ in a pre-Galois category $ \\\\mathcal{C} $, and for any pointed Galois object $ A $, the evaluation of the canonical equ\"}\n",
+   "date": "2026-10-23",
+   "verdict": "General search hits do not define the specific generic-section interface. Exact definitions already exist in Sheaf.Paper.NormalGenericLisseCocycle; bind them without a copy. No definition node owns them."
+  },
+  {
+   "tool": "grep",
+   "query": "genericModule|geometricSections|NormalGenericLisse",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "General search hits do not define the specific generic-section interface. Exact definitions already exist in Sheaf.Paper.NormalGenericLisseCocycle; bind them without a copy. No definition node owns them."
+  },
+  {
+   "tool": "grep",
+   "query": "blueprint_refs.py search generic sections; rg genericModule|geometricSections|normal-generic-lisse-sections dag/nodes --glob def-*.json; rg declaration names lean/WeilConjectures lean/Sheaf",
+   "results": "$ python3 tools/blueprint_refs.py search generic sections\n0 blueprint nodes match 'generic sections'\n\nexit 0\n$ rg -n genericModule|geometricSections|normal-generic-lisse-sections dag/nodes --glob def-*.json\n\nexit 1\n$ rg -n (abbrev|def) (genericMap|genericModule|geometricSections|automorphism)|theorem automorphism_over lean/WeilConjectures lean/Sheaf\nlean/Sheaf/Paper/AutomorphismConstructibleStageEquivalence.lean:335:abbrev automorphismStageFiniteCoordinates\nlean/Sheaf/Paper/AutomorphismConstructibleStageEquivalence.lean:407:def automorphismStageFiniteSquare (A : Type u) [CommRing A] [Finite A]\nlean/Sheaf/Paper/AutomorphismConstructibleStageEquivalence.lean:472:def automorphismStageIntegralSquare\nlean/Sheaf/Paper/AutomorphismConstructibleStageEquivalence.lean:504:def automorphismStageRationalSquare\nlean/Sheaf/Paper/AutomorphismConstructibleStageEquivalence.lean:540:def automorphismStageQbarSquare\nlean/Sheaf/Paper/AutomorphismConstructibleStageEquivalence.lean:552:def automorphismStageIntegralCancel\nlean/Sheaf/Paper/AutomorphismConstructibleStageEquivalence.lean:566:def automorphismStageFiniteCancel (A : Type u) [CommRing A] [Finite A]\nlean/Sheaf/Paper/AutomorphismConstructibleStageEquivalence.lean:679:def automorphismStageIntegralFiniteReduction\nlean/Sheaf/Paper/AutomorphismConstructibleStageEquivalence.lean:722:def automorphismStageSystemReduction\nlean/Sheaf/Paper/AutomorphismConstructibleStageEquivalence.lean:737:def automorphismStageSystemSquare\nlean/Sheaf/Paper/AutomorphismConstructibleStageEquivalence.lean:859:def automorphismStageIntegralShiftNormalization\nlean/Sheaf/Paper/AutomorphismConstructibleStageEquivalence.lean:877:def automorphismStageRationalShiftNormalization\nlean/Sheaf/Paper/AutomorphismConstructibleStageEquivalence.lean:894:def automorphismStageQbarShiftNormalization\nlean/Sheaf/Paper/LisseAdicAutomorphismPullback.lean:63:def automorphismEtaleReindex : Y.Etale ⥤ Y.Etale :=\nlean/Sheaf/Paper/LisseAdicAutomorphismPullback.lean:69:def automorphismEtaleReindexEquivalence : Y.Etale ≌ Y.Etale :=\nlean/Sheaf/Paper/LisseAdicAutomorphismPullback.lean:96:def automorphismModuleSheafPullback (R : Type (u + 1)) [Ring R] :\nlean/Sheaf/Paper/LisseAdicAutomorphismPullback.lean:140:def automorphismPointedEtaleLift {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\nlean/Sheaf/Paper/LisseAdicAutomorphismPullback.lean:148:private def automorphismPointedEtaleFunctor {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\nlean/Sheaf/Paper/LisseAdicAutomorphismPullback.lean:232:def automorphismModuleStalkIso (R : Type (u + 1)) [Ring R]\nlean/Sheaf/Paper/LisseAdicAutomorphismPullback.lean:242:def automorphismModuleLiftedStalkIso (R : Type (u + 1)) [Ring R]\nlean/Sheaf/Paper/LisseAdicAutomorphismPullback.lean:253:private def automorphismModuleStalkNatIso (R : Type (u + 1)) [Ring R]\nlean/Sheaf/Paper/LisseAdicAutomorphismPullback.lean:288:private def automorphismModuleLiftedStalkNatIso (R : Type (u + 1)) [Ring R]\nlean/Sheaf/Paper/LisseAdicAutomorphismPullback.lean:383:private def automorphismIntegralMap (F G : LisseIntegralSheaf l E Y) :\nlean/Sheaf/Paper/LisseAdicAutomorphismPullback.lean:614:def automorphismScalarLevelIso (F : LisseIntegralSheaf l E Y) (m : ℕ) :\nlean/Sheaf/Paper/LisseAdicAutomorphismPullback.lean:1341:def automorphismLisseCoefficientStage (E₀ : Padic.FiniteCoefficientFields l K) :\nlean/Sheaf/Paper/LisseAdicAutomorphismPullback.lean:1503:def automorphismLisseCoefficientTransformation :\nlean/Sheaf/AlgebraicGeometry/CondensedGaloisGlobalDescent.lean:139:def geometricSections (R : Profinite.CondensedRing.{u}) [IsCommMonObj R.X] :\nlean/Sheaf/AlgebraicGeometry/ProperCurveAutomorphismScheme.lean:48:def automorphismSchemeStructureMap {S : Scheme.{u}} (C : AlgebraicSpace S) :\nlean/Sheaf/Paper/NormalGenericLisseCocycle.lean:58:abbrev genericMap : Spec (.of X.functionField) ⟶ X :=\nlean/Sheaf/Paper/NormalGenericLisseCocycle.lean:66:abbrev genericModule (L : NormContinuousLisse A X) :=\nlean/Sheaf/Paper/NormalGenericLisseCocycle.lean:75:abbrev geometricSections (L : NormContinuousLisse A X) : AddCommGrpCat.{u + 1} :=\nlean/Sheaf/Paper/NormalGenericLisseCocycle.lean:84:theorem automorphism_over (g : Ω ≃ₐ[X.functionField] Ω) :\nlean/Sheaf/Paper/NormalGenericLisseCocycle.lean:93:def automorphism (g : Ω ≃ₐ[X.functionField] Ω) :\nlean/Sheaf/AlgebraicGeometry/VeryTameDivisorialAction.lean:32:def automorphismEtaleNeighbourhood {X : Scheme.{u}} (e : Aut X) (W : X.Etale) : X.Etale :=\nlean/Sheaf/AlgebraicGeometry/VeryTameDivisorialAction.lean:37:noncomputable def automorphismEtaleLift {X : Scheme.{u}} (e : Aut X) {Ω : Type u}\nlean/Sheaf/AlgebraicGeometry/VeryTameDivisorialAction.lean:50:noncomputable def automorphismStrictLocalMap {X : Scheme.{u}} (e : Aut X) {Ω : Type u}\nlean/Sheaf/AlgebraicGeometry/StableVersalLevelChart.lean:80:def genericMap {A : Type u} [CommRing A] {E : Scheme.{u}}\n\nexit 0\n",
+   "date": "2026-10-23",
+   "verdict": "No owning definition node or WeilConjectures declaration. The five exact declarations are already in NormalGenericLisseCocycle; CondensedGalois.geometricSections is a different condensed-action functor on a base-changed scheme, not this generic small-site evaluation."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-generic-lisse-scalar-comparison",
+  "date": "2026-10-23",
+  "group": "Q108"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof paragraph (3), the all-continuous compatibility obligation: finite coefficient models on source strata before open-image finiteness; monodromy on the reduced normal refinements, before the compact-matrix finite-field argument; old proof Step 9: local scalar tensors, generic comparison and naturality; Step 8 simultaneous transport; the generic restriction and actual geometric sections used in scalar-comparison steps 3 and 5",
+   "via": [
+    "lem-sfb-generic-lisse-scalar-comparison",
+    "lem-sfb-normal-continuous-algcl-monodromy",
+    "lem-sfb-continuous-algcl-stratified-finite-models",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.Paper.NormalGenericLisseCocycle",
+  "declaration": "AlgebraicGeometry.ProEtale.NormalGenericLisse.genericMap",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.NormalGenericLisse.genericMap",
+   "AlgebraicGeometry.ProEtale.NormalGenericLisse.genericModule",
+   "AlgebraicGeometry.ProEtale.NormalGenericLisse.geometricSections",
+   "AlgebraicGeometry.ProEtale.NormalGenericLisse.automorphism_over",
+   "AlgebraicGeometry.ProEtale.NormalGenericLisse.automorphism"
+  ],
+  "statement": "abbrev genericMap : Spec (.of X.functionField) ⟶ X",
+  "branch": "sheaf-dag",
+  "by": "Q108",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "H2 repair requested by the independent reviewer of fac0019fb315: definition owner for five already-published declarations, with no new module or copied data. genericMap is fromSpecStalk at the generic point, genericModule is the actual CondensedRing.upperStar, geometricSections evaluates on closureObject, and automorphism is Over.homMk of Spec(g). automorphism_over supplies only its Prop proof field. None chooses data from normal_generic_lisse_cocycle or needs that theorem conclusion."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9926bfff3",
+  "group": "Q108",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9926bfff3",
+  "group": "Q108",
+  "result": "pass",
+  "note": "Re-delivery after the fac0019f RETURN for H2 and the theorem-stmt_dep rule. The Lean module is byte-identical to the one previously reviewed and accepted clause by clause (sha256 57fc00dc). The item changes only stmt_deps and lean.note: the theorem lem-sfb-normal-generic-lisse-cocycle is replaced by the new definition node def-sfb-normal-generic-lisse-sections, and def-sfb-field-separable-cech-nerve is added; the statement, proof and lean.statement are unchanged. The new node is an existing:true record on genericMap, genericModule, geometricSections, automorphism_over and automorphism in the live NormalGenericLisseCocycle module. I read their bodies: fromSpecStalk at the generic point, CondensedRing.upperStar, evaluation at closureObject, and Over.homMk of Spec(g). They match the node text and binders, the signature is verbatim, and all its stmt_deps are existing definition nodes. The declaration overlap with the theorem's record follows the live cech-nerve precedent. There is no duplicate and the item is still open live. The earlier advisories (flcFiber versus the finite-étale fibre; surjectivity as a hypothesis) are explained in the report. No compile, since no file was changed."
+ }
+}

@@ -1,0 +1,123 @@
+{
+ "id": "lem-sf-integral-expression-coefficient-squares",
+ "kind": "lemma",
+ "title": "Whole-system coefficient squares and compact-support finite projections",
+ "statement": "Fix D, l ≠ char D, operations o, ambient models a and a natural comparison family c obeying the six explicit recursion laws. Let r_e be any natural reduction isomorphisms with R(c_e) followed by r_e inverse equal to the actual counit. On every admissible finite geometric expression domain: (1) the independently defined ordinary-to-completed expression map is an isomorphism; (2) for each CanonicalPair (s,t), R(c_e inverse) counit s = R(t) R(c_f inverse) counit as maps of strict systems; (3) every compact-support comparison satisfies precisely the finite scalar-adjunction projection formula in Realizations.compactSupport, using the specified finite reduction, image and support evaluation maps. These are coefficient identities, before applying L to obtain realization intertwining.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Coefficient-comparison sentence; expanded strict-system realization argument of lem-sf-integral-compactification-system-realization"
+ },
+ "stmt_deps": [
+  "def-sf-integral-realization-assembly-data"
+ ],
+ "proof": [
+  {
+   "text": "For every expression vertex, use the given realization isomorphism and the general domain_of_realization helper in ShortWordIntegralDomain. The root Good bounds give SystemAdmissible after reordering its conjunctions, so its integral value is complete constructible with finite Tor amplitude. Induct on the expression to invert its completionMap. Variables are identities; proper image, open extension and compact support map the child isomorphism. For pullback use finiteTorOrdinaryPullComplete and the actual completion-unit invertibility helper in PrimitiveCompletionEffectivity, then the normalized Pull.comparison isomorphism. Tensor uses finiteTorOrdinaryTensorComplete on both integral child values, tensorClosed to identify the ordinary tensor, and the same actual completion-unit helper. The product of the two child isomorphisms is invertible. Every intermediate domain is obtained by projecting the original expression domain.",
+   "uses": [
+    "lem-sf-short-word-integral-domain",
+    "lem-sf-primitive-completion-effectivity",
+    "lem-sf-finite-tor-ordinary-pull-complete",
+    "lem-sf-finite-tor-ordinary-tensor-complete"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply integralCanonicalRealizationSquare to the given CanonicalPair, obtaining L(s) c_t = c_e r. Cancel the two comparison isomorphisms to get c_e inverse L(s) = r c_t inverse. Applying reduction and then counit naturality gives exactly R(c_e inverse) counit s = R(r) R(c_t inverse) counit. The generic transpose_square helper performs this formal calculation in Lean, without an evaluation-faithfulness assumption.",
+   "uses": [
+    "lem-sf-integral-canonical-realization-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a compact-support expression, project its geometric and admissibility hypotheses to the inner expression, obtaining its domain object Ke. Rewrite the outer comparison with supportRecursion. Apply integralSupportCounitProjection to M equal to the actual inner system expression, H equal to its integral value, b equal to the inner comparison, and rho equal to the given reduction isomorphism. Its counit-normalization hypothesis is exactly the supplied normalization at Ke. This gives the full finite projection formula, including nested compact support, unchanged.",
+   "uses": [
+    "lem-sf-integral-support-counit-projection"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-short-word-integral-domain",
+  "lem-sf-primitive-completion-effectivity",
+  "lem-sf-finite-tor-ordinary-pull-complete",
+  "lem-sf-finite-tor-ordinary-tensor-complete",
+  "lem-sf-integral-canonical-realization-square",
+  "lem-sf-integral-support-counit-projection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Completion induction, adjunction transpose calculation, and primitive compact-support projection substitution, formalized by T1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "canonical simultaneous operations on derived strict systems with finite evaluation and open extension adjunctions",
+   "results": "Derived adjunction and totalRightDerived API; no exact system expression realization result.",
+   "date": "2026-10-25",
+   "verdict": "Use project system models and Mathlib adjunction calculus."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"counit\"",
+   "results": "12 general adjunction API declarations; no canonical integral operation assembly.",
+   "date": "2026-10-25",
+   "verdict": "Use the actual counit and homEquiv in the final proof."
+  },
+  {
+   "tool": "grep",
+   "query": "expression.*(coefficient|realization)|proper.*open.*mate",
+   "results": "7 unrelated Mathlib tactic expression matches; no geometric expression theorem.",
+   "date": "2026-10-25",
+   "verdict": "No exact Mathlib match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralCompactificationSystemRealization",
+  "date": "2026-10-25",
+  "group": "G2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-integral-compactification-system-realization",
+   "place": "Whole-system coefficient squares and compact-support finite projections",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralExpressionCoefficientSquares",
+  "file": "lean/Sheaf/SixFunctors/IntegralExpressionCoefficientSquares.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.integralExpressionCoefficientSquares",
+  "statement": "theorem integralExpressionCoefficientSquares (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)\n    (o : Operations l E) (a : AmbientModels l E o)\n    (comparison : ExpressionRecursion.Comparisons l E D o)\n    (laws : RecursionLaws l E D o a comparison)\n    (reduction : ∀ {I : Type u} [Finite I]\n    {X : I → Over (Spec (CommRingCat.of D.k))}\n    {W : Over (Spec (CommRingCat.of D.k))}\n    (e : Expression _ I X W) (_geometric : e.geometric),\n    (e.domain l E o).ι ⋙ inputReduction l E X ⋙\n      e.evaluate (systemInterpretation l E o) ≅\n    e.realizationTarget l E o ⋙ (calculus l E W.left).reduction)\n    (normalization : ∀ {I : Type u} [Finite I]\n    {X : I → Over (Spec (CommRingCat.of D.k))}\n    {W : Over (Spec (CommRingCat.of D.k))}\n    (e : Expression _ I X W) (g : e.geometric)\n    (K : (e.domain l E o).FullSubcategory),\n    (calculus l E W.left).reduction.map ((comparison e g).hom.app K) ≫\n      (reduction e g).inv.app K =\n    (calculus l E W.left).adjunction.counit.app\n      ((e.evaluate (systemInterpretation l E o)).obj ((inputReduction l E X).obj K.obj))) :\n    (∀ {I : Type u} [Finite I]\n    {X : I → Over (Spec (CommRingCat.of D.k))}\n    {W : Over (Spec (CommRingCat.of D.k))}\n    (e : Expression _ I X W) (_ge : e.geometric)\n    (K : (e.domain l E o).FullSubcategory),\n    IsIso (e.completionMap l E a.ringedModels K.obj)) ∧\n    (∀ {I : Type u} [Finite I]\n    {X : I → Over (Spec (CommRingCat.of D.k))}\n    {W : Over (Spec (CommRingCat.of D.k))}\n    (e t : Expression _ I X W) (ge : e.geometric) (gt : t.geometric)\n    (K : (e.domain l E o).FullSubcategory) (ht : t.domain l E o K.obj)\n    (s : e.systemObj l E o ((inputReduction l E X).obj K.obj) ⟶\n      t.systemObj l E o ((inputReduction l E X).obj K.obj))\n    (r : (e.evaluate (integralInterpretation l E)).obj K.obj ⟶\n      (t.evaluate (integralInterpretation l E)).obj K.obj),\n    CanonicalPair l E o a.compositors a.openComparisons a.canonicalBridge a.properOpen\n      a.ringedModels a.ringedOpenComparisons a.ringedProperOpen\n      ((inputReduction l E X).obj K.obj) K.obj e t s r →\n    (calculus l E W.left).reduction.map ((comparison e ge).inv.app K) ≫\n      (calculus l E W.left).adjunction.counit.app\n        (e.systemObj l E o ((inputReduction l E X).obj K.obj)) ≫ s =\n    (calculus l E W.left).reduction.map r ≫\n      (calculus l E W.left).reduction.map ((comparison t gt).inv.app ⟨K.obj, ht⟩) ≫\n      (calculus l E W.left).adjunction.counit.app\n        (t.systemObj l E o ((inputReduction l E X).obj K.obj))) ∧\n    (∀ {I : Type u} [Finite I]\n    {X : I → Over (Spec (CommRingCat.of D.k))}\n    {U V : Over (Spec (CommRingCat.of D.k))}\n    (f : U ⟶ V) (c : Compactification f.left) (e : Expression _ I X U)\n    (g : (Expression.compactSupport f c e).geometric)\n    (K : ((Expression.compactSupport f c e).domain l E o).FullSubcategory) (n : ℕ),\n    (scalarReductionDerivedExtension l E V.left n).map\n      ((comparison (.compactSupport f c e) g).hom.app K) ≫\n        (PurCompactSupport.finiteReductionIso l E V.left n).inv.app\n          ((PurCompactSupport.image (PurCompactSupport.completed l E) c).obj\n            ((e.evaluate (integralInterpretation l E)).obj K.obj)) ≫\n        (PurCompactSupport.comparison (PurCompactSupport.reduction l E (n + 1)\n          (Nat.le_add_left 1 n)) c).app\n            ((e.evaluate (integralInterpretation l E)).obj K.obj) ≫\n        (PurCompactSupport.finiteImageIso l E n c).hom.app\n          ((pbcDerivedExtend (PurCompactSupport.projection l E (n + 1)\n            (Nat.le_add_left 1 n) U.left)).obj\n              ((e.evaluate (integralInterpretation l E)).obj K.obj)) ≫\n        (sfAmbientCompactSupportCandidate (Padic.coefficientExtensionRing l E (n + 1)) c).map\n          ((PurCompactSupport.finiteReductionIso l E U.left n).hom.app\n            ((e.evaluate (integralInterpretation l E)).obj K.obj)) =\n    ((calculus l E V.left).reductionEvaluation n).inv.app\n      ((coefficientSequenceLimit l E V.left).obj\n        (((Expression.compactSupport f c e).evaluate (systemInterpretation l E o)).obj\n          ((inputReduction l E X).obj K.obj))) ≫\n      (coefficientSequenceDerivedEvaluation l E V.left n).map\n        ((calculus l E V.left).adjunction.counit.app\n          (((Expression.compactSupport f c e).evaluate (systemInterpretation l E o)).obj\n            ((inputReduction l E X).obj K.obj))) ≫\n      (supportEvaluation l E o c n).hom.app\n        ((e.evaluate (systemInterpretation l E o)).obj ((inputReduction l E X).obj K.obj)) ≫\n      (sfAmbientCompactSupportCandidate (Padic.coefficientExtensionRing l E (n + 1)) c).map\n        ((coefficientSequenceDerivedEvaluation l E U.left n).map\n          ((reduction e g.2.2.2.2.2).hom.app ⟨K.obj, K.property.1, by\n            simpa [Expression.admissible] using K.property.2.2.1⟩) ≫\n        ((calculus l E U.left).reductionEvaluation n).hom.app\n          ((e.evaluate (integralInterpretation l E)).obj K.obj)))",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e56b4",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261025T122945-L-1820354",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261026T201551-L-3394761",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

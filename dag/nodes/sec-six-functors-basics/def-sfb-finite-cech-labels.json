@@ -1,0 +1,125 @@
+{
+ "id": "def-sfb-finite-cech-labels",
+ "kind": "definition",
+ "title": "Finite quotient diagrams and consecutive Cech labels",
+ "status": "split",
+ "statement": "For a scheme $T$ [def-pc-scheme] and a profinite group $G$, in compatible small universes [def-weil-size-convention], define $\\mathrm{labelPower}_q(A)=A^{\\{0,\\ldots,q-1\\}}$ on sets and by postcomposition on maps. The finite label diagram sends every open normal subgroup $N$ to $\\coprod_{a\\in(G/N)^q}T$ [lem-weil-pbc-scheme-coproduct-family], and sends $M\\subseteq N$ by the quotient label map and the identity on $T$. For any group $K$ and $g:\\{0,\\ldots,q-1\\}\\to K$, put $p_i(g)=\\prod_{j<i}g_j$, in increasing order (the list prefix product, also defined for all natural $i$). For an order-preserving simplex map $\\varphi:[n]\\to[m]$, define the restricted consecutive labels of $g\\in K^m$ by $g^{\\varphi}_i=p_{\\varphi(i)}(g)^{-1}p_{\\varphi(i+1)}(g)$ for $0\\le i<n$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/",
+  "place": "Bhatt--Scholze section 7.4 and Stacks 097D; consecutive-label construction in lem-sfb-pointed-limit-cech-coordinates, steps 1, 5 and 8"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "PointedCosetSystem|PointedCosetLimit|PointedLimitSplitting|finiteLabelDiagram|cumulativeLabel|restrictedLabels",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib interface. Project search found precisely the existing declarations being relocated, not duplicated; no separate definition node owns them."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pointed connected inverse limit of finite etale coset covers with marked sections finite splitting and right deck action",
+   "results": "8 hits; CategoryTheory.FintypeCat.instGaloisCategoryActionFintypeCat, CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected, Profinite.lim, Profinite.asLimit, ProfiniteGrp.isIso_toLimit, Profinite.asLimitConeIso, Profinite.isoAsLimitConeLift, Profinite.asLimitCone",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib interface. Project search found precisely the existing declarations being relocated, not duplicated; no separate definition node owns them."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Arrow.cechNerve",
+   "results": "12 hits; CategoryTheory.Arrow.cechNerve, CategoryTheory.CechNerveTerminalFrom.iso, CategoryTheory.SimplicialObject.cechNerve_obj, CategoryTheory.Arrow.augmentedCechNerve_left, CategoryTheory.Arrow.cechNerve_obj, CategoryTheory.SimplicialObject.cechNerve_map, CategoryTheory.Arrow.mapCechNerve, CategoryTheory.Arrow.mapAugmentedCechNerve_left",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib interface. Project search found precisely the existing declarations being relocated, not duplicated; no separate definition node owns them."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite quotient labelled coproduct diagrams and cumulative consecutive group labels along simplex maps",
+   "results": "8 hits; SimplexCategoryGenRel.simplicialEvalσ, SimplexCategoryGenRel.standardσ, SimplicialObject.Splitting.summand, SimplexCategoryGenRel.exists_normal_form_P_σ, SimplexCategoryGenRel.mem_isAdmissible_iff, SimplexCategoryGenRel.standardσ_cons, SimplicialObject.Splitting.IndexSet.pull, SimplexCategoryGenRel.lt_and_eval_eq_eval_add_one_of_mem_isAdmissible",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib interface. Project search found precisely the existing declarations being relocated, not duplicated; no separate definition node owns them."
+  },
+  {
+   "tool": "grep",
+   "query": "rg PointedCosetSystem|PointedCosetLimit|PointedLimitSplitting|finiteLabelDiagram|cumulativeLabel|restrictedLabels in lean/WeilConjectures, lean/Sheaf and dag/nodes; blueprint_refs.py search finite label / pointed coset",
+   "results": "No WeilConjectures matches. Sheaf matches only PointedLimitFiniteSplitting definitions, PointedLimitCech definitions and ProfiniteSchemeProductComponents uses. DAG matches only the two original theorem records; both blueprint searches returned 0.",
+   "date": "2026-10-22",
+   "verdict": "Relocate existing definitions without changing their names, signatures or bodies; attach their ownership to new definition nodes as explicitly required by the return."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-pointed-limit-cech-coordinates",
+  "date": "2026-10-22",
+  "group": "Q99"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof paragraph (3), the all-continuous compatibility obligation: finite coefficient models on source strata before open-image finiteness; monodromy on the reduced normal refinements, before the compact-matrix finite-field argument; Complete topological group torsors on a normal scheme; Lemma 7.4.3, p. 69 (cofiltered-limit compatibility for profinite groups), Construction 7.4.4, and the finite-cover fibre functor underlying Lemma 7.4.10. Agent expansion into the pointed finite-etale inverse limit and its Cech coordinates. Upstream reference implementation: lean/WeilConjectures/AlgebraicGeometry/FundamentalGroup/UniversalCoverConstruction.lean, cover/proj/pt, bijective_fiber, transport, loop and continuous_loop, lines 129–164, 305–314, 356–376, 783–852; the full Cech statement here is not asserted to be an already finished Lean declaration.; re-split argument: old item steps [11, 12, 15].; Finite quotient diagrams and consecutive Cech labels.",
+   "via": [
+    "lem-sfb-pointed-limit-cech-coordinates",
+    "lem-sfb-pointed-finite-etale-limit-cover",
+    "lem-sfb-complete-group-torsor-monodromy",
+    "lem-sfb-normal-continuous-algcl-monodromy",
+    "lem-sfb-continuous-algcl-stratified-finite-models",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FundamentalGroup.FiniteCechLabels",
+  "declaration": "AlgebraicGeometry.Scheme.FiniteCechLabels.restrictedLabels",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.FiniteCechLabels.labelPower",
+   "AlgebraicGeometry.Scheme.FiniteCechLabels.finiteLabelDiagram",
+   "AlgebraicGeometry.Scheme.FiniteCechLabels.cumulativeLabel",
+   "AlgebraicGeometry.Scheme.FiniteCechLabels.restrictedLabels"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FundamentalGroup/FiniteCechLabels.lean",
+  "statement": "def restrictedLabels {G : Type u} [Group G] {m n : ℕ} (φ : SimplexCategory.mk n ⟶ SimplexCategory.mk m) (g : Fin m → G) : Fin n → G",
+  "branch": "newtargets-dag",
+  "by": "Q99",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reviewer FIX: declared in namespace FiniteCechLabels. The parent assembly module PointedLimitCech, owned by lem-sfb-pointed-finite-etale-limit-cover, which cites this item and is outside the delivery's closure, still declares the same four UniversalCover.* definitions. Equal names would collide in any module importing both.",
+  "fixed_by": "NT-stage2-cc-e229fabfc"
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e229fabfc",
+  "group": "Q99",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e229fabfc",
+  "group": "Q99",
+  "result": "fix",
+  "note": "Re-delivery of 3afc RETURN. Lean identical to 3afc apart from imports and the moved label_only_cocycle. Maths re-checked: vertices d_{g1..gi}, cumulative/inverse permutations, faces via restrictedLabels with the full first-face base, constant_simplicial via deck_mul, cocycle c02=c01*c12, naturality via fundamentalGroupMap, id/comp, edge cases. Fault (H2/H4): the final packet dropped the parent-module edits (preflight refuses owners outside the closure), so PointedLimitSplittingData, FiniteCechLabels and UniversalCover.label_only_cocycle redeclare names still in live PointedLimitFiniteSplitting/PointedLimitCech. Control: importing the item with PointedLimitCech fails with 'environment already contains UniversalCover.finiteLabelDiagram'. FIX, no stmt_deps change: def-sfb-pointed-limit-splitting-data existing:true on unchanged PointedLimitFiniteSplitting (no cycle; check_existing clean; Data module left out); FiniteCechLabels in namespace FiniteCechLabels, node record renamed; label_only_cocycle moved to PointedLimitCech namespace; item imports PointedLimitFiniteSplitting; lean-record and report updated. nt_compile clean (4.6/6.4/13.3 s); probe with live PointedLimitCech compiles and the label copies are equal by rfl; check_new_node clean for all 3 new nodes. Maintainer note: the stage-3 prover of PointedLimitCech should delete its UniversalCover label copies and label_only_cocycle and import FiniteCechLabels and the item.; left out new module(s) lean/Sheaf/AlgebraicGeometry/FundamentalGroup/PointedLimitSplittingData.lean (--drop-files, or a record fixed to existing: true)"
+ }
+}

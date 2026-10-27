@@ -1,0 +1,182 @@
+{
+ "id": "lem-pur-compact-support-site-exchange-square",
+ "kind": "lemma",
+ "title": "Canonical site comparison intertwines the actual compact-support exchanges",
+ "statement": "For any finite commutative ring A in Type (u+1), Cartesian square of schemes, compactification c, and bounded-below etale complex K, the canonical compactSupportSiteComparisonPlus intertwines the actual proExchange with the etale compactification exchange. The source is adjusted by the inverse fixedComparisonPullbackPlus at the base, and the target by its forward component on K. All maps are the canonical maps of [def-pur-section-compact-source-maps] and [lem-sf-class-compact-support-comparison]. No section or supported constant is involved, and no hypothesis is added on the new base.\n\ntheorem compact_support_site_exchange_square\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X' X B' B : Scheme.{u}} {v : X' ⟶ X} {h' : X' ⟶ B'}\n    {h : X ⟶ B} {g : B' ⟶ B} (sq : IsPullback v h' h g) (c : Compactification h)\n    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) :\n    (ProEtale.upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategoryPlus.map\n        ((ProEtale.compactSupportSiteComparisonPlus A c).hom.app K) ≫\n      proExchange A sq c\n        ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategoryPlus.obj K) =\n    (ProEtale.fixedComparisonPullbackPlus A g).inv.app\n        ((Etale.rightDerivedLowerShriekOfCompactificationPlus\n          (ModuleCat.{u + 1} A) c).obj K) ≫\n      (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) B').mapDerivedCategoryPlus.map\n        ((Etale.rightDerivedLowerShriekOfCompactificationPlusBaseChangeMap A sq c).app K) ≫\n      (ProEtale.compactSupportSiteComparisonPlus A (c.ofIsPullback sq)).hom.app\n        ((Etale.upperStar (ModuleCat.{u + 1} A) v).mapDerivedCategoryPlus.obj K) ≫\n      (ProEtale.rightDerivedLowerShriekOfCompactificationPlus\n        (ModuleCat.{u + 1} A) (c.ofIsPullback sq)).map\n          ((ProEtale.fixedComparisonPullbackPlus A v).hom.app K)",
+ "stmt_deps": [
+  "def-pur-section-compact-source-maps",
+  "lem-sf-class-compact-support-comparison",
+  "lem-weil-pbc-comparison-pullback"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
+  "place": "Step 3, arbitrary-base-change compatibility; proper/open comparison calculation of Stacks Tags 099R and 09AF; proetale.tex lemma-jshriek-comparison and etale-cohomology.tex lemma-shriek-base-change"
+ },
+ "proof": [
+  {
+   "text": "Factor c as its open immersion followed by its proper map. Apply compactSupportProperFactor to the proper pullback square and the extension by zero of K. Properness supplies both qcqs hypotheses. The direct-image comparison is the specified counit mate.",
+   "uses": [
+    "lem-amb-compact-support-proper-factor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply fixSiteOpenExchange to the open pullback square. It holds for arbitrary finite coefficient rings in Type (u+1) and arbitrary base change. The inverse open extension exchanges and the exact pullback comparisons have their specified unit normalizations. Restrict this equality along the fully faithful bounded-below inclusion.",
+   "uses": [
+    "lem-fix-site-open-exchange",
+    "lem-weil-pbc-comparison-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Paste the proper and open equalities using naturality of the proper exchange and the target proper comparison. Expand compactSupportSiteComparisonPlus. Apply the bounded-below inclusion to the claimed identity: proExchange is by definition the preimage of the ambient compact-support exchange conjugated by the exact/left-derived and compact-support inclusion comparisons. Expand that ambient exchange into the proper mate and inverse open factor. The exact-derived adjunction unit/counit identities identify the proper mate, and the termwise extension-zero comparison identifies the open factor. Naturality cancels the intervening inverse comparisons. On the etale side derivedPlusFormalism_pfBaseChange and its open-base-change normalization identify the formalism exchange with the pasted proper/open exchange. Faithfulness of the inclusion gives the result. No finiteness property of the new base is introduced.",
+   "uses": [
+    "lem-sf-class-compact-support-comparison",
+    "def-pur-section-compact-source-maps",
+    "def-cbc-exchange-map",
+    "lem-weil-pbc-transport-identifies-exchange",
+    "lem-cbc-proetale-extension-zero-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-compact-support-proper-factor",
+  "lem-fix-site-open-exchange",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-sf-class-compact-support-comparison",
+  "def-pur-section-compact-source-maps",
+  "def-cbc-exchange-map",
+  "lem-weil-pbc-transport-identifies-exchange",
+  "lem-cbc-proetale-extension-zero-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
+  "place": "Step 3; the proper/open transport identity needed before inserting section-source and supported-constant normalizations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "([Cc]ompact[Ss]upport|[Ll]ower[Ss]hriek).*[Cc]omparison|[Cc]omparison.*([Cc]ompact[Ss]upport|[Ll]ower[Ss]hriek)",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "note": "",
+    "digest": "4f53cda18c2baa0c",
+    "subdirectory": ""
+   },
+   "date": "2026-10-26",
+   "verdict": "No exact match. Results concern condensed sheaves, stability of scheme properties, or algebraic scalar base change, rather than the specified compact-support comparison morphisms."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"comparison\"",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "note": "",
+    "digest": "4f53cda18c2baa0c",
+    "subdirectory": ""
+   },
+   "date": "2026-10-26",
+   "verdict": "No exact match. Results concern condensed sheaves, stability of scheme properties, or algebraic scalar base change, rather than the specified compact-support comparison morphisms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical etale proetale compact support site comparison intertwines compactification base change exchange on bounded below complexes",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "Condensed.profiniteSolid",
+     "Condensed.profiniteSolidification",
+     "Condensed.lanSheafProfinite",
+     "Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit",
+     "Condensed.profiniteSolidCounit",
+     "Condensed.ofSheafForgetProfinite",
+     "LightCondensed.lanLightCondSet",
+     "Condensed.lanCondensedSet"
+    ],
+    "note": "",
+    "digest": "378ad6bfaabce527",
+    "subdirectory": ""
+   },
+   "date": "2026-10-26",
+   "verdict": "No exact match. Results concern condensed sheaves, stability of scheme properties, or algebraic scalar base change, rather than the specified compact-support comparison morphisms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical etale proetale compact support comparison commutes with compactification base change exchange on bounded below complexes",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme",
+     "RingHom.Etale.isStableUnderBaseChange",
+     "Algebra.Etale.baseChange",
+     "AlgebraicGeometry.quasiCompact_isStableUnderBaseChange",
+     "Algebra.Etale.comp",
+     "AlgebraicGeometry.IsProper.isStableUnderBaseChange",
+     "ComplexShape.Embedding.AreComplementary.isStrictlySupportedOutside₂_iff",
+     "Algebra.FormallyEtale.of_restrictScalars"
+    ],
+    "note": "",
+    "digest": "be74e7e369e05a78",
+    "subdirectory": ""
+   },
+   "date": "2026-10-26",
+   "verdict": "No exact match. Results concern condensed sheaves, stability of scheme properties, or algebraic scalar base change, rather than the specified compact-support comparison morphisms."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SectionSourceProExchange",
+  "date": "2026-10-26",
+  "group": "J6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rank-one-thom",
+   "place": "Proof Step 3: compatibility of the transported compact-support map with arbitrary base change",
+   "via": [
+    "lem-pur-section-source-pro-exchange",
+    "lem-pur-section-compact-source-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportSiteExchangeSquare",
+  "file": "lean/Sheaf/Paper/CompactSupportSiteExchangeSquare.lean",
+  "declaration": "AlgebraicGeometry.SectionCompactSource.compact_support_site_exchange_square",
+  "statement": "theorem compact_support_site_exchange_square\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X' X B' B : Scheme.{u}} {v : X' ⟶ X} {h' : X' ⟶ B'}\n    {h : X ⟶ B} {g : B' ⟶ B} (sq : IsPullback v h' h g) (c : Compactification h)\n    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) :\n    (ProEtale.upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategoryPlus.map\n        ((ProEtale.compactSupportSiteComparisonPlus A c).hom.app K) ≫\n      proExchange A sq c\n        ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategoryPlus.obj K) =\n    (ProEtale.fixedComparisonPullbackPlus A g).inv.app\n        ((Etale.rightDerivedLowerShriekOfCompactificationPlus\n          (ModuleCat.{u + 1} A) c).obj K) ≫\n      (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) B').mapDerivedCategoryPlus.map\n        ((Etale.rightDerivedLowerShriekOfCompactificationPlusBaseChangeMap A sq c).app K) ≫\n      (ProEtale.compactSupportSiteComparisonPlus A (c.ofIsPullback sq)).hom.app\n        ((Etale.upperStar (ModuleCat.{u + 1} A) v).mapDerivedCategoryPlus.obj K) ≫\n      (ProEtale.rightDerivedLowerShriekOfCompactificationPlus\n        (ModuleCat.{u + 1} A) (c.ofIsPullback sq)).map\n          ((ProEtale.fixedComparisonPullbackPlus A v).hom.app K)",
+  "branch": "sheaf-dag",
+  "by": "J6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261025T211633-L-4004841",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261025T211633-L-4004841",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

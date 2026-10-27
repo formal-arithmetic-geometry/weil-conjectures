@@ -1,0 +1,438 @@
+{
+ "id": "lem-sfb-scalar-dual-evaluation-inverse",
+ "kind": "statement",
+ "title": "Finite-projective inverse formula for a normalized scalar sheaf-dual comparison",
+ "statement": "Let $R$ be a commutative ring and $(\\mathcal C,J)$ a site small in the chosen module universe [def-weil-size-convention, def-weil-pbc-sites-and-cohomology]. Let $B$ be a sheaf of commutative rings with a morphism $\\alpha:\\underline R\\to B$, where underlines denote constant sheaves [def-weil-pbc-constant-sheaf]. For an $R$-module $V$, let $\\underline V$ be its constant module sheaf [def-sf-site-constant-module-functor] and put $C_B(V)=B\\otimes_{\\underline R}\\underline V$, using module sheaves and ordinary sheaf tensor [def-weil-sheaf-of-modules-category, def-pur-sheaf-tensor-product]. Write $V^*=\\operatorname{Hom}_R(V,R)$ and use internal sheaf Hom [def-pur-sheaf-hom]. In formulas with $r\\in R$ in a section of $B$, $r$ means the image under $\\alpha$ of the constant section $r$.\nAssume $V$ is finitely generated and projective [def-weil-finitely-generated-module, def-weil-pbc-projective-module], and let $\\beta:C_B(V^*)\\to\\mathcal Hom_B(C_B(V),B)$ be any $B$-linear sheaf morphism satisfying $\\beta(b\\otimes\\phi)(b'\\otimes v)=bb'\\alpha(\\phi(v))$ on all localized sites. There exist $N\\geq0$ and linear maps $i:V\\to R^N$, $p:R^N\\to V$ with $pi=1_V$. For every such splitting put $v_j=p(e_j)$ and $\\lambda_j=e_j^*i$, using the standard basis and coordinates of $R^N$ [def-weil-pbc-free-module]. They satisfy\n$$v=\\sum_j\\lambda_j(v)v_j,\\qquad \\phi=\\sum_j\\phi(v_j)\\lambda_j.$$\nFor every object $U$ and section $h\\in\\mathcal Hom_B(C_B(V),B)(U)$, equivalently a morphism $C_B(V)|_U\\to B|_U$ on the localized ringed site [def-pur-localized-ringed-site], set\n$$\\gamma_U(h)=\\sum_j h(1\\otimes v_j)\\otimes\\lambda_j\\in C_B(V^*)(U).$$\nThe maps $\\gamma_U$ are $B(U)$-linear and commute with restriction, hence define a sheaf morphism $\\gamma$. They satisfy $\\beta\\gamma=1$ and $\\gamma\\beta=1$, including on sections not globally expressible as pure tensors. Thus $\\beta$ is an isomorphism with inverse $\\gamma$, and $\\gamma$ is independent of the chosen splitting. The assertion includes $N=0$, $V=0$ and non-flat $B$ over $\\underline R$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JJ, lemma-dual-perfect-complex, final finite-free/direct-summand reduction; scalar dual generators and inverse extracted from returned steps 1 and 5 (finite projective splitting: algebra.tex Tags 05CE/05CF, definition-projective and lemma-characterize-projective)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-constant-sheaf",
+  "def-sf-site-constant-module-functor",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-sheaf-hom",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-projective-module",
+  "def-weil-pbc-free-module",
+  "def-pur-localized-ringed-site",
+  "def-sfb-transported-constant-module-scalar-extension",
+  "def-sfb-constant-module-coefficient-transport",
+  "def-sfb-scalar-extension-pure-tensor-section"
+ ],
+ "proof": [
+  {
+   "text": "Choose generators $w_1,\\ldots,w_N$ of $V$ and define the surjection $p:R^N\\to V$ by $p(e_j)=w_j$. The lifting characterization of projectivity applied to $1_V:V\\to V$ and this surjection supplies $i:V\\to R^N$ with $pi=1_V$. This proves existence; henceforth take ANY splitting as in the statement. For $V=0$ the empty generating family gives $N=0$.",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "def-weil-pbc-projective-module",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 05CE and 05CF, definition-projective and lemma-characterize-projective, proof of projective implies a summand: choose a surjection from a free module and split it."
+   }
+  },
+  {
+   "text": "Expand $i(v)=\\sum_j\\lambda_j(v)e_j$ in the standard coordinates and apply $p$. This gives $v=\\sum_j\\lambda_j(v)v_j$. Applying any $\\phi:V\\to R$ to this identity gives, as an equality of functionals, $\\phi=\\sum_j\\phi(v_j)\\lambda_j$. In particular the maps $t:V^*\\to R^N$, $t(\\phi)=(\\phi(v_j))_j$, and $q:R^N\\to V^*$, $q((a_j))=\\sum_j a_j\\lambda_j$, satisfy $qt=1_{V^*}$.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, lemma-dual-perfect-complex, final finite-free/direct-summand calculation, expanded for constant-module scalar extension; sites-modules.tex Section 03EK and Section 04TT."
+   }
+  },
+  {
+   "text": "Write $E=C_B(V)$ and $D=C_B(V^*)$. Constant-module sheafification and tensoring act on a linear map $f$ by the map induced from $b\\otimes v\\mapsto b\\otimes f(v)$; this preserves identities and composition by the uniqueness in sheafification. Apply $C_B$ to $pi=1$ and $qt=1$. The finite-power isomorphism $C_B(R^N)\\cong B^N$ of the cited presentation-extension node sends $b\\otimes(a_j)$ to $(b\\alpha(a_j))_j$ and its inverse sends $(b_j)$ to $\\sum_j b_j\\otimes e_j$. Thus for EVERY object $T$ and EVERY $x\\in E(T)$, taking the coordinates $(a_j)$ of $C_B(i)(x)$ gives $x=\\sum_j a_j(1\\otimes v_j)$. Likewise EVERY $y\\in D(T)$ has an expansion $y=\\sum_j c_j(1\\otimes\\lambda_j)$, by taking the coordinates of $C_B(t)(y)$ and applying $C_B(q)$. The formulas for $C_B(p)$ and $C_B(q)$ follow on each basis vector and then by $B(T)$-linearity on $B(T)^N$. These are global finite expansions from a split retraction, not an assertion that arbitrary sections of a sheaf tensor are pure tensors. No exactness or flatness is used.",
+   "uses": [
+    "def-sf-site-constant-module-functor",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-sfb-constant-finite-free-presentation-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, lemma-dual-perfect-complex, final finite-free/direct-summand calculation, expanded for constant-module scalar extension; sites-modules.tex Section 03EK and Section 04TT."
+   }
+  },
+  {
+   "text": "For $h\\in\\mathcal Hom_B(E,B)(U)$ define $\\gamma_U(h)=\\sum_j h_U(1\\otimes v_j)\\otimes\\lambda_j$. Evaluation and the sum are additive, and $\\gamma_U(a h)=a\\gamma_U(h)$ for $a\\in B(U)$. For $f:T\\to U$, naturality of the localized morphism $h$ gives $B(f)(h_U(1\\otimes v_j))=(h|_T)_T(1\\otimes v_j)$. Restrictions of the constant generators $v_j,\\lambda_j$ are the same generators. Restricting the finite sum therefore gives exactly $\\gamma_T(h|_T)$, so these maps form a $B$-linear sheaf morphism.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-pur-sheaf-tensor-product",
+    "def-sf-site-constant-module-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, lemma-dual-perfect-complex, final finite-free/direct-summand calculation, expanded for constant-module scalar extension; sites-modules.tex Section 03EK and Section 04TT."
+   }
+  },
+  {
+   "text": "For $T\\to U$ and $v\\in V$, normalization and the first dual-generator identity give $(\\beta_U\\gamma_U(h))_T(1\\otimes v)=\\sum_j h_T(1\\otimes v_j)\\alpha(\\lambda_j(v))=h_T(1\\otimes v)$. Both localized maps are $B$-linear. The expansion of every $x\\in E(T)$ from step 3, valid for every $T\\to U$, extends this equality to all sections. Thus they are equal as morphisms on $\\mathcal C/U$, which means $\\beta\\gamma=1$.",
+   "uses": [
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, lemma-dual-perfect-complex, final finite-free/direct-summand calculation, expanded for constant-module scalar extension; sites-modules.tex Section 03EK and Section 04TT."
+   }
+  },
+  {
+   "text": "For $b\\in B(U)$ and $\\phi\\in V^*$, normalization gives $\\gamma_U\\beta_U(b\\otimes\\phi)=\\sum_j b\\alpha(\\phi(v_j))\\otimes\\lambda_j=b\\otimes\\sum_j\\phi(v_j)\\lambda_j=b\\otimes\\phi$. The second expansion in step 3 and $B(U)$-linearity extend this equality to every $y\\in D(U)$, proving $\\gamma\\beta=1$. If $\\gamma\\prime$ comes from any other splitting, $\\gamma\\prime=\\gamma\\prime\\beta\\gamma=\\gamma$, so the inverse is independent of it. When $N=0$, the split retractions in step 3 give $E=D=0$, and all sums and identities still hold. The same argument covers $V=0$ with a nonzero chosen $N$, the zero ring, the zero coefficient sheaf and non-flat $B$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, lemma-dual-perfect-complex, final finite-free/direct-summand calculation, expanded for constant-module scalar extension; sites-modules.tex Section 03EK and Section 04TT."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-projective-module",
+  "def-weil-pbc-free-module",
+  "def-sf-site-constant-module-functor",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-sfb-constant-finite-free-presentation-extension",
+  "def-pur-sheaf-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JJ finite-free/direct-summand calculation, with explicit scalar-extension inverse and restriction calculations supplied by Q61; algebra.tex Tags 05CE/05CF."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Given a finite projective R module V and a normalized sheaf dual comparison, the inverse on local morphisms h is sum h(1 tensor v_i) tensor lambda_i for any finite dual generating system",
+   "results": {
+    "top": [],
+    "n_hits": 0,
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse to finite projective dual evaluation after constant sheaf scalar extension, independent of a finite free splitting, including zero rank",
+   "results": {
+    "top": [
+     "FGModuleCat.FGModuleCatEvaluation",
+     "FGModuleCat.FGModuleCatCoevaluation",
+     "FGModuleCat.FGModuleCatEvaluation_apply",
+     "CommRing.Pic.inv_eq_dual",
+     "FGModuleCat.FGModuleCatEvaluation_apply'",
+     "CommRing.Pic.mk_dual",
+     "Module.dual_projective",
+     "PresheafOfModules.freeYonedaEquiv_symm_app"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: dualTensorHomEquiv (Contraction.lean:282) concerns ordinary R-module tensor and linear Hom; it does not identify constant-module sheaf scalar extension with internal sheaf duals or give a restriction-compatible inverse on every localized site."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of scalars from constant modules to sheaves commutes with dual of finite projective modules by evaluation; inverse is sum of dual basis coordinates",
+   "results": {
+    "top": [
+     "SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply",
+     "FGModuleCat.FGModuleCatCoevaluation",
+     "SheafOfModules.freeHomEquiv_symm_comp",
+     "FGModuleCat.FGModuleCatEvaluation_apply",
+     "SheafOfModules.freeHomEquiv_freeMap",
+     "FGModuleCat.FGModuleCatEvaluation_apply'",
+     "FGModuleCat.FGModuleCatEvaluation",
+     "SheafOfModules.freeHomEquiv"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: dualTensorHomEquiv (Contraction.lean:282) concerns ordinary R-module tensor and linear Hom; it does not identify constant-module sheaf scalar extension with internal sheaf duals or give a restriction-compatible inverse on every localized site."
+  },
+  {
+   "tool": "loogle",
+   "query": "dualTensorHomEquiv",
+   "results": {
+    "top": [
+     "dualTensorHomEquiv",
+     "dualTensorHomEquivOfBasis_eq_dualTensorHomEquiv",
+     "dualTensorHomEquiv_eq_dualTensorHomEquivOfBasis",
+     "toLinearMap_dualTensorHomEquiv",
+     "dualTensorHomEquiv_tmul",
+     "dualTensorHom_dualTensorHomEquiv_symm",
+     "dualTensorHomEquiv_symm_dualTensorHom",
+     "LinearMap.trace_eq_contract'"
+    ],
+    "n_hits": 9,
+    "note": "",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: dualTensorHomEquiv (Contraction.lean:282) concerns ordinary R-module tensor and linear Hom; it does not identify constant-module sheaf scalar extension with internal sheaf duals or give a restriction-compatible inverse on every localized site."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Dual, TensorProduct",
+   "results": {
+    "top": [
+     "TensorProduct.dualDistrib",
+     "TensorProduct.AlgebraTensorModule.dualDistrib",
+     "TensorProduct.dualDistrib_apply",
+     "TensorProduct.AlgebraTensorModule.dualDistrib_apply",
+     "TensorProduct.dualDistrib_apply_comm",
+     "contractLeft",
+     "contractRight",
+     "dualTensorHom"
+    ],
+    "n_hits": 12,
+    "note": "",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: dualTensorHomEquiv (Contraction.lean:282) concerns ordinary R-module tensor and linear Hom; it does not identify constant-module sheaf scalar extension with internal sheaf duals or give a restriction-compatible inverse on every localized site."
+  },
+  {
+   "tool": "grep",
+   "query": "dualTensorHomEquiv|exists_comp_eq_id_of_projective",
+   "results": {
+    "top": [
+     "Mathlib/LinearAlgebra/Trace.lean",
+     "Mathlib/LinearAlgebra/Trace.lean",
+     "Mathlib/LinearAlgebra/Trace.lean",
+     "Mathlib/LinearAlgebra/Trace.lean",
+     "Mathlib/LinearAlgebra/Trace.lean",
+     "Mathlib/LinearAlgebra/TensorProduct/Associator.lean",
+     "Mathlib/LinearAlgebra/Dual/Lemmas.lean",
+     "Mathlib/LinearAlgebra/Dual/Lemmas.lean"
+    ],
+    "n_hits": 13,
+    "note": "",
+    "sub": "LinearAlgebra"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: dualTensorHomEquiv (Contraction.lean:282) concerns ordinary R-module tensor and linear Hom; it does not identify constant-module sheaf scalar extension with internal sheaf duals or give a restriction-compatible inverse on every localized site."
+  },
+  {
+   "tool": "grep",
+   "query": "dual|internalHom|internal.hom",
+   "results": {
+    "top": [],
+    "n_hits": 0,
+    "note": "",
+    "sub": "Algebra/Category/ModuleCat/Sheaf"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: dualTensorHomEquiv (Contraction.lean:282) concerns ordinary R-module tensor and linear Hom; it does not identify constant-module sheaf scalar extension with internal sheaf duals or give a restriction-compatible inverse on every localized site."
+  },
+  {
+   "tool": "grep",
+   "query": "dualTensorHomEquiv|dualBasis|exists_comp_eq_id_of_projective",
+   "results": {
+    "top": [
+     "Mathlib/LinearAlgebra/Trace.lean",
+     "Mathlib/LinearAlgebra/Trace.lean",
+     "Mathlib/LinearAlgebra/Trace.lean",
+     "Mathlib/LinearAlgebra/Trace.lean",
+     "Mathlib/LinearAlgebra/Trace.lean",
+     "Mathlib/LinearAlgebra/PiTensorProduct/Dual.lean",
+     "Mathlib/LinearAlgebra/PiTensorProduct/Dual.lean",
+     "Mathlib/LinearAlgebra/PiTensorProduct/Dual.lean"
+    ],
+    "n_hits": 25,
+    "note": "",
+    "sub": "LinearAlgebra"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module dual/base-change and free-sheaf universal properties do not state the normalized scalar-extension internal-sheaf-Hom inverse on arbitrary sites; read Contraction.lean:282, Dual/BaseChange.lean:112-140 and ModuleCat/Sheaf/Free.lean:61-94."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse of dual evaluation map for scalar extension of finite projective modules to sheaves on a site",
+   "results": {
+    "top": [
+     "Module.Dual.congr_apply_apply",
+     "Module.Dual.eval",
+     "LinearEquiv.trans_dualMap_symm_flip",
+     "Module.eval_apply_injective",
+     "Module.Dual.eval_apply",
+     "LinearEquiv.dualMap_symm",
+     "IsBaseChange.toDual",
+     "ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module dual/base-change and free-sheaf universal properties do not state the normalized scalar-extension internal-sheaf-Hom inverse on arbitrary sites; read Contraction.lean:282, Dual/BaseChange.lean:112-140 and ModuleCat/Sheaf/Free.lean:61-94."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, Module.Dual",
+   "results": {
+    "top": [],
+    "n_hits": 0,
+    "note": "",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module dual/base-change and free-sheaf universal properties do not state the normalized scalar-extension internal-sheaf-Hom inverse on arbitrary sites; read Contraction.lean:282, Dual/BaseChange.lean:112-140 and ModuleCat/Sheaf/Free.lean:61-94."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite projective constant module scalar extension to ringed site sheaf dual evaluation inverse finite dual basis",
+   "results": {
+    "top": [
+     "SheafOfModules.ιFree_mapFree_inv",
+     "Module.instIsReflexiveOfFiniteOfProjective",
+     "SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply",
+     "SheafOfModules.freeHomEquiv_symm_comp",
+     "FGModuleCat.FGModuleCatEvaluation_apply'",
+     "FGModuleCat.FGModuleCatEvaluation_apply",
+     "FGModuleCat.FGModuleCatEvaluation",
+     "SheafOfModules.freeHomEquiv"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module dual/base-change and free-sheaf universal properties do not state the normalized scalar-extension internal-sheaf-Hom inverse on arbitrary sites; read Contraction.lean:282, Dual/BaseChange.lean:112-140 and ModuleCat/Sheaf/Free.lean:61-94."
+  },
+  {
+   "tool": "grep",
+   "query": "dual|internalHom|internal.hom",
+   "results": {
+    "top": [],
+    "n_hits": 0,
+    "note": "",
+    "sub": "Algebra/Category/ModuleCat/Sheaf"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module dual/base-change and free-sheaf universal properties do not state the normalized scalar-extension internal-sheaf-Hom inverse on arbitrary sites; read Contraction.lean:282, Dual/BaseChange.lean:112-140 and ModuleCat/Sheaf/Free.lean:61-94."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constant sheaf of finite projective module dual commutes with extension of scalars, inverse by a finite generating dual system",
+   "results": {
+    "top": [
+     "SheafOfModules.ιFree_mapFree_inv",
+     "SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply",
+     "FGModuleCat.rightRigidCategory",
+     "LightCondensed.free_internallyProjective_iff_tensor_condition",
+     "SheafOfModules.freeHomEquiv_symm_comp",
+     "LightCondensed.free_internallyProjective_iff_tensor_condition'",
+     "LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'",
+     "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module dual/base-change and free-sheaf universal properties do not state the normalized scalar-extension internal-sheaf-Hom inverse on arbitrary sites; read Contraction.lean:282, Dual/BaseChange.lean:112-140 and ModuleCat/Sheaf/Free.lean:61-94."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-scalar-perfect-dual-realization",
+  "date": "2026-10-22",
+  "group": "NU"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-internal-hom",
+   "place": "Paragraph 2 final sentence, coefficient dual of a locally constant perfect complex: finite-projective dual generators and restriction-compatible inverse to scalar evaluation.",
+   "via": [
+    "lem-sfb-scalar-perfect-dual-realization",
+    "lem-sfb-internal-hom-dual-constructible-models"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-scalar-dual-evaluation-inverse",
+  "worker": "stage1",
+  "summary": "Q61: six explicit steps using existing finite-power scalar-extension comparison; no new nodes. Finite generators plus projective lifting give a splitting; coordinate expansions on both split retracts justify the two inverse calculations on all sections. Normalization, restrictions, splitting independence and zero/non-flat cases checked.",
+  "blueprint": "det-thm-sf-ctf-stability-internal-hom, coefficient-dual clause P^vee=internal Hom(P,Lambda_S), elaborating its degree-zero finite-projective scalar local model; the imported md contains the statement but no proof paragraphs. The inherited from.place describes that local-model expansion, realized by steps 1-6.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-constant-finite-free-presentation-extension",
+    "why": "Uses only its unconditional finite-power identification E_B(R^s)=B^s, with explicit inverse, to control every section of a split retract. This generic scalar-extension calculation already exists in the coefficient-local-model unit; no new purity or cohomology route is substituted."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-constant-finite-free-presentation-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-90eaf52c2",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-90eaf52c2 (reviewer sub-agent of L); spot-checked: This is a first split with 0 new nodes. The statement and stmt_deps are byte-identical to the NU-created node, and the citer is unaffected. There is no repair note and the item is not dropped. proof_deps equals the union of the uses. The 13 searches cover all three kinds. No SGA is cited. Sources read: Stacks 05CE/05CF (choose a free surjection and split it = step 1) and 08JJ lemma-dual-perfect-complex (finite-free summand reduction), plus 03EK/04TT. Step 1: the projective lifting of 1_V along p gives i with pi=1. Step 2: I checked v=Σλ_j(v)v_j, φ=Σφ(v_j)λ_j and qt=1. Step 3: the cited unconditional clause E_B(R^s)≅B^s (inverse Σb_i⊗e_i) of lem-sfb-constant-finite-free-presentation-extension gives the global expansions x=Σa_j(1⊗v_j) and y=Σc_j(1⊗λ_j) through the split retracts, with no flatness. Step 4: naturality of h gives restriction compatibility, and the action gives B-linearity. Step 5: normalization plus R-balancing (one line, its tensor-node citation implicit) gives βγ=1 on generators, and step 3 extends it to all sections. Step 6: γβ(b⊗φ)=b⊗φ, extended by linearity, and the inverse does not depend on the splitting. Tested V=0 with N=2, V=eR for an idempotent e, and non-flat Z→Z/2. Duplicates: lem-pc-finite-projective-internal-hom-evaluation (one ring sheaf, would need an adjunction plus the constant-dual identification), the finite-retract-dual-exact node, lem-sp-scalar-extension-dual-evaluation and finite-free-scalar-coordinates. None of them is a duplicate. Accepted tool use: lem-sfb-constant-finite-free-presentation-extension (generic finite-power clause, already accepted for the parent)."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ScalarDualEvaluationInverse",
+  "declaration": "CategoryTheory.ScalarDualEvaluation.scalarDualEvaluationInverse",
+  "declarations": [
+   "CategoryTheory.ScalarDualEvaluation.pureTensor",
+   "CategoryTheory.ScalarDualEvaluation.inverseSection",
+   "CategoryTheory.ScalarDualEvaluation.scalarDualEvaluationInverse"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ScalarDualEvaluationInverse.lean",
+  "statement": "theorem scalarDualEvaluationInverse (V : ModuleCat.{max u v} R) [Module.Finite R V] [Module.Projective R V] (β : extension J R B α (ModuleCat.of R (Module.Dual R V)) ⟶ SheafOfModules.homObj (R := B) (extension J R B α V) (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B))) (hβ : ∀ (U : Cᵒᵖ) (b : B.obj.obj U) (φ : Module.Dual R V) (W : (Over U.unop)ᵒᵖ) (b' : B.obj.obj (op W.unop.left)) (x : V), (β.val.app U (pureTensor J R B α _ U b φ)).app W (pureTensor J R B α V (op W.unop.left) b' x) = B.obj.map W.unop.hom.op b * b' * α.hom.app (op W.unop.left) ((toSheafify J ((Functor.const Cᵒᵖ).obj (CommRingCat.of R))).app (op W.unop.left) (φ x))) : (∃ (N : ℕ) (i : V →ₗ[R] (Fin N → R)) (p : (Fin N → R) →ₗ[R] V), p.comp i = LinearMap.id) ∧ ∀ (N : ℕ) (i : V →ₗ[R] (Fin N → R)) (p : (Fin N → R) →ₗ[R] V), p.comp i = LinearMap.id → (∀ x : V, x = ∑ j : Fin N, (i x j) • p (Pi.single j 1)) ∧ (∀ φ : Module.Dual R V, φ = ∑ j : Fin N, φ (p (Pi.single j 1)) • ((LinearMap.proj j).comp i)) ∧ ∃ γ : SheafOfModules.homObj (R := B) (extension J R B α V) (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B)) ⟶ extension J R B α (ModuleCat.of R (Module.Dual R V)), (∀ (U : Cᵒᵖ) (h : (SheafOfModules.homObj (R := B) (extension J R B α V) (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B))).val.obj U), γ.val.app U h = inverseSection J R B α V i p U h) ∧ γ ≫ β = 𝟙 _ ∧ β ≫ γ = 𝟙 _ ∧ IsIso β ∧ ∀ (N' : ℕ) (i' : V →ₗ[R] (Fin N' → R)) (p' : (Fin N' → R) →ₗ[R] V), p'.comp i' = LinearMap.id → ∀ (U : Cᵒᵖ) (h : (SheafOfModules.homObj (R := B) (extension J R B α V) (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B))).val.obj U), inverseSection J R B α V i' p' U h = γ.val.app U h",
+  "branch": "newtargets-dag",
+  "by": "Q56",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-84e948458",
+  "group": "Q56",
+  "result": "pass",
+  "note": "Re-delivery after return L (8c73528f): the theorem stmt_dep lem-sfb-constant-finite-free-presentation-extension is replaced by the new existing:true def node def-sfb-transported-constant-module-scalar-extension, which owns the plain defs extension/extensionMap (l.60-70; no .choose; statement verbatim). The landed owners def-sfb-constant-module-coefficient-transport and def-sfb-scalar-extension-pure-tensor-section are added under STMT_DEPS MAY GAIN LANDED NODES. The Lean differs from the returned head only by two public imports. Clause-by-clause check: hβ quantifies over every slice W; γ is pinned by inverseSection; γ≫β=1, β≫γ=1, IsIso; splitting independence across ranks; N=0, V=0, zero ring and non-flat B covered. New node H12 fields ok, no cycle, no competing owner. No compile (no file changed). Advisory: base-era imports; the theorem node still co-lists extension in its declarations (NY precedent)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261023T123356-L-1177746",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.ScalarDualEvaluation.scalarDualEvaluationInverse"
+  ],
+  "sorry_after": []
+ }
+}

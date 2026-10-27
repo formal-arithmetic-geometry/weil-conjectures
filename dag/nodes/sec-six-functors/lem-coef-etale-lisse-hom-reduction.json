@@ -1,0 +1,394 @@
+{
+ "id": "lem-coef-etale-lisse-hom-reduction",
+ "kind": "statement",
+ "title": "Lisse stratum Hom reduction with exceptional Tor bounds",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and integers $n\\ge m\\ge1$. Put $A=\\mathcal O_E/(\\varpi_E^n)$, $B=\\mathcal O_E/(\\varpi_E^m)$ with the quotient map [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Let $X$ be a separated finite-type $k$-scheme [def-weil-scheme-morphism-properties]. Use ordinary unbounded derived categories of sheaves of modules over constant coefficient rings on small etale sites [def-weil-pbc-derived-categories]. Write $F_T=-\\otimes_A^LB$ on a scheme $T$, and $H_R(U,V)=R\\mathcal Hom_R(U,V)$ for $R=A,B$ [lem-pur-derived-change-of-rings, def-pur-derived-internal-hom]. The full subcategory $D^b_{ctf}$ consists of complexes with bounded constructible cohomology and Tor amplitude in some finite interval $[a,b]$: $\\mathcal H^i(K\\otimes_R^L W)=0$ for every degree-zero module sheaf $W$ and $i\\notin[a,b]$ [def-weil-pbc-constructible-complexes, def-kun-tor-amplitude]. Let $g:Z\\hookrightarrow X$ be closed and $j:S\\hookrightarrow Z$ open, set $s=gj$, $Rs_!=g_*j_!$ and $Rs_A^!=j^*Rg_A^!$, with $g_*\\dashv Rg_A^!$ the etale closed-support adjunction [def-weil-closed-immersion, def-weil-open-immersion, lem-exc-closed-ambient, def-amb-etale-compact-support]. Let $L$ be a locally constant sheaf of finite projective $A$-modules on $S_{\\mathrm{et}}$, placed in degree zero: etale locally it is constant with value a finite projective $A$-module. Let $M\\in D^b_{ctf}(X,A)$ have Tor amplitude $[a,b]$. Choose nonnegative integers $d_X,d_S$ bounding $\\dim X,\\dim S$; the bound zero is allowed for an empty scheme. Then $L$ is etale locally finite free, is site-perfect in degree zero, and has Tor interval $[0,0]$. The object $N=Rs_A^!M$ is bounded constructible of Tor amplitude in $[a,b+2d_X+1]$, and $Q=H_A(L,N)$ is bounded constructible of Tor amplitude in $[a-2d_S,b+2d_X+1+2d_S]$.\n\nThe evaluation-transpose comparison $u:Q\\otimes_A^LB\\to H_B(L\\otimes_A^LB,N\\otimes_A^LB)$ is an isomorphism in $D^b_{ctf}(S,B)$, with both endpoints in that category. More precisely, on every etale covering object trivializing $L$ as $A^t[0]$, $t\\ge0$, and for a bounded flat model $P$ of $N$ restricted there, the canonical bounded-free Hom models identify $Q$ with $P^{\\oplus t}$, the target with $(P\\otimes_A B)^{\\oplus t}$, and $u$ with the identity of $(P\\otimes_A B)^{\\oplus t}$. This identification is compatible with restriction, the $B$ action, and evaluation, including rank zero.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+  "place": "Proof paragraphs 2–3; returned proof steps 4, 5, 6; extracted argument preserved verbatim in Q07 report, not a new literature theorem"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-derived-categories",
+  "lem-pur-derived-change-of-rings",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-constructible-complexes",
+  "def-kun-tor-amplitude",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "lem-exc-closed-ambient",
+  "def-amb-etale-compact-support",
+  "def-weil-site-perfect-complex",
+  "def-sf-etale-finite-coefficient-hom-arrow",
+  "def-sf-etale-bounded-flat-complex",
+  "def-pur-etale-scalar-pullback-iso",
+  "def-sf-finite-free-hom-evaluation-coordinates",
+  "def-sf-finite-free-hom-local-calculation",
+  "def-sf-etale-site-perfect-complex"
+ ],
+ "proof": [
+  {
+   "text": "Refine the given projective trivialization to a finite-free one [lem-coef-etale-lisse-hom-finite-free-cover]; then L[0] is site-perfect, of Tor amplitude [0,0] and bounded constructible [lem-coef-etale-lisse-hom-lisse-bounds], and a site-perfect complex is dualizable [lem-sf-source-etale-site-perfect-dualizable].",
+   "uses": [
+    "lem-coef-etale-lisse-hom-finite-free-cover",
+    "lem-coef-etale-lisse-hom-lisse-bounds",
+    "lem-sf-source-etale-site-perfect-dualizable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+    "place": "Paragraphs 2–3, lisse degree-zero specialization of the site-perfect stratum argument"
+   }
+  },
+  {
+   "text": "X is Noetherian, being quasi-compact and locally of finite type over k. A closed immersion is proper and an open immersion of a Noetherian scheme is quasi-compact and separated, so Z and S are separated, quasi-compact and locally of finite type over k.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-separated-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+    "place": "Paragraphs 2–3, lisse degree-zero specialization of the site-perfect stratum argument"
+   }
+  },
+  {
+   "text": "N=j^*Rg^!M is bounded constructible with Tor amplitude [a,b+2d_X+1] by [lem-coef-etale-lisse-hom-exceptional-bounds].",
+   "uses": [
+    "lem-coef-etale-lisse-hom-exceptional-bounds"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+    "place": "Paragraphs 2–3, lisse degree-zero specialization of the site-perfect stratum argument"
+   }
+  },
+  {
+   "text": "With the dualizable L[0] and the separated finite-type S, [lem-coef-etale-lisse-hom-endpoint-bounds] gives Q bounded constructible of Tor amplitude [a-2d_S,b+2d_X+1+2d_S] and both comparison endpoints bounded constructible of finite Tor amplitude over B.",
+   "uses": [
+    "lem-coef-etale-lisse-hom-endpoint-bounds"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+    "place": "Paragraphs 2–3, lisse degree-zero specialization of the site-perfect stratum argument"
+   }
+  },
+  {
+   "text": "Widen the interval of N to [min(a,b+2d_X+1),b+2d_X+1]; the derived finite-free cover of L[0] and [lem-coef-etale-lisse-hom-comparison-data] give the invertibility of the canonical comparison and the local and restriction predicates on every etale object.",
+   "uses": [
+    "lem-coef-etale-lisse-hom-comparison-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+    "place": "Paragraphs 2–3, lisse degree-zero specialization of the site-perfect stratum argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-etale-lisse-hom-finite-free-cover",
+  "lem-coef-etale-lisse-hom-lisse-bounds",
+  "lem-sf-source-etale-site-perfect-dualizable",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-separated-cancellation",
+  "lem-coef-etale-lisse-hom-exceptional-bounds",
+  "lem-coef-etale-lisse-hom-endpoint-bounds",
+  "lem-coef-etale-lisse-hom-comparison-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Lisse projective stratum argument: source-library open complement, closed support and Hom bounds; bounded-flat local calculation and restriction compatibility."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom from finite locally constant projective etale sheaf commutes with nonflat change of coefficients",
+   "results": "[leanfinder] OK 8 hit(s); LightCondensed.ihomPoints_symm_comp [Mathlib/Condensed/Light/InternallyProjective]; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat [Mathlib/Condensed/Light/Monoidal]; LightCondensed.free_internallyProjective_iff_tensor_condition' [Mathlib/Condensed/Light/InternallyProjective]; LightCondensed.free_internallyProjective_iff_tensor_condition [Mathlib/Condensed/Light/InternallyProjective]; LightCondensed.ihomPoints [Mathlib/Condensed/Light/InternallyProjective]; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition' [Mathlib/Condensed/Light/InternallyProjective]; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition [Mathlib/Condensed/Light/InternallyProjective]; LightCondensed.ihom_map_val_app [Mathlib/Condensed/Light/InternallyProjective] No match: ordinary/light-condensed free-sheaf Hom and module base change do not state exceptional Tor bounds and the derived etale lisse comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally free finite rank sheaf internal Hom scalar extension comparison evaluation is isomorphism",
+   "results": "[leanfinder] OK 8 hit(s); SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply [Mathlib/Algebra/Category/ModuleCat/Sheaf/Free]; SheafOfModules.freeHomEquiv_symm_comp [Mathlib/Algebra/Category/ModuleCat/Sheaf/Free]; SheafOfModules.ιFree_mapFree_inv [Mathlib/Algebra/Category/ModuleCat/Sheaf/Free]; SheafOfModules.freeHomEquiv_comp_apply [Mathlib/Algebra/Category/ModuleCat/Sheaf/Free]; SheafOfModules.freeHomEquiv_freeMap [Mathlib/Algebra/Category/ModuleCat/Sheaf/Free]; SheafOfModules.map_ιFree_mapFree_hom [Mathlib/Algebra/Category/ModuleCat/Sheaf/Free]; SheafOfModules.freeHomEquiv [Mathlib/Algebra/Category/ModuleCat/Sheaf/Free]; SheafOfModules.ιFree_mapFree_inv_assoc [Mathlib/Algebra/Category/ModuleCat/Sheaf/Free] No match: ordinary/light-condensed free-sheaf Hom and module base change do not state exceptional Tor bounds and the derived etale lisse comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"internalHom\"",
+   "results": "[loogle] OK 0 hit(s); No hits. No match: ordinary/light-condensed free-sheaf Hom and module base change do not state exceptional Tor bounds and the derived etale lisse comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Hh]om.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*[Hh]om|derived.*[Hh]om",
+   "results": "[grep] OK 25 hit(s); Mathlib/Algebra/Lie/CartanCriterion.lean:190   have hbc_inj : Injective (End.baseChangeHom R A M) := LinearMap.baseChangeHom_injective R M A; Mathlib/Algebra/Lie/CartanCriterion.lean:191   have aux : (toEnd R (derivedSeries R L 1) M ⟨x, hx⟩).baseChangeHom R A M =; Mathlib/Algebra/Module/LinearMap/Polynomial.lean:273     dsimp only [coe_mk, AddHom.coe_mk, smul_apply, baseChangeHom_apply]; Mathlib/Algebra/Module/FinitePresentation.lean:681     IsBaseChange S (LinearMap.baseChangeHom R S (ι → R) N) := by; Mathlib/Algebra/Module/FinitePresentation.lean:698     IsBaseChange S (LinearMap.baseChangeHom R S M N) := by; Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean:104       (AlgebraTensorModule.distribBaseChange R S M₁ M₂).toModuleIso.hom :=; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:381   ofHom (@LinearMap.baseChange R S M1 M2 _ _ ((algebraMap S _).comp f).toAlgebra _ _ _ _ l.hom); Mathlib/Algebra/Homology/Localization.lean:321 /-- When we define the derived category as `HomologicalComplexUpToQuasiIso C (ComplexShape.up ℤ)`,; Mathlib/Algebra/Homology/Localization.lean:323 example shall say that the derived category is also the localization of the homotopy; Mathlib/Algebra/Category/Ring/Under/Property.lean:89     (hQp : RingHom.HasFiniteProducts Q) [(toMorphismProperty Q).IsStableUnderCobaseChange]; Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean:37 /-- The homology functor on the derived category is induced by the homology; Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean:53 /-- The homology functor on the derived category is induced by the homology; Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean:223     (DerivedCategory.homologyFunctorFactors C n₀).hom.app T.obj₃ ≫; Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean:225     DerivedCategory.HomologySequence.δ; Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean:227         (DerivedCategory.homologyFunctorFactors C n₁).hom.app T.obj₁ := by; Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean:8 public import Mathlib.Algebra.Homology.DerivedCategory.SmallShiftedHom; Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean:95     ⟨DerivedCategory.Plus.ι.preimageIso ((asIso (DerivedCategory.Q.map i.hom)).symm ≪≫ e.symm)⟩⟩; Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean:371 instance : F.HasPointwiseRightDerivedFunctor (HomotopyCategory.Plus.quasiIso C) :=; Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean:376   [F'.IsRightDerivedFunctor α (HomotopyCategory.Plus.quasiIso C)]; Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean:8 public import Mathlib.Algebra.Homology.DerivedCategory.SmallShiftedHom; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:47 lemma mapDerivedCategoryFactors_hom_naturality {X Y : CochainComplex C₁ ℤ} (f : X ⟶ Y) :; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:48     F.mapDerivedCategory.map (DerivedCategory.Q.map f) ≫ F.mapDerivedCategoryFactors.hom.app Y =; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:49       F.mapDerivedCategoryFactors.hom.app X ≫; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:50         DerivedCategory.Q.map ((F.mapHomologicalComplex (ComplexShape.up ℤ)).map f) :=; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:51   F.mapDerivedCategoryFactors.hom.naturality f No match: ordinary/light-condensed free-sheaf Hom and module base change do not state exceptional Tor bounds and the derived etale lisse comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale locally free sheaf derived internal Hom coefficient reduction",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; No hits. ",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional inverse image along locally closed immersion preserves bounded constructible finite Tor amplitude etale sheaves",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image [Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation]; AlgebraicGeometry.Scheme.Hom.isConstructible_image [Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation]; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified [Mathlib/AlgebraicGeometry/Morphisms/Etale]; AlgebraicGeometry.Scheme.Hom.isConstructible_preimage [Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation]; PrimeSpectrum.isConstructible_comap_image [Mathlib/RingTheory/Spectrum/Prime/Chevalley]; AlgebraicGeometry.IsEtale.of_comp [Mathlib/AlgebraicGeometry/Morphisms/Etale]; AlgebraicGeometry.HasRingHomProperty.respects_isOpenImmersion [Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties]; Topology.IsLocallyConstructible.preimage_of_isOpenEmbedding [Mathlib/Topology/Constructible] No match: ordinary/light-condensed free-sheaf Hom and module base change do not state exceptional Tor bounds and the derived etale lisse comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite locally constant projective sheaf is locally finite free and exceptional pullback has Tor amplitude bound",
+   "results": "[leanfinder] OK 8 hit(s); LightCondensed.free_internallyProjective_iff_tensor_condition [Mathlib/Condensed/Light/InternallyProjective]; LightCondensed.free_internallyProjective_iff_tensor_condition' [Mathlib/Condensed/Light/InternallyProjective]; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition' [Mathlib/Condensed/Light/InternallyProjective]; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition [Mathlib/Condensed/Light/InternallyProjective]; LightCondensed.internallyProjective_iff_tensor_condition [Mathlib/Condensed/Light/InternallyProjective]; LightCondensed.internallyProjective_iff_tensor_condition' [Mathlib/Condensed/Light/InternallyProjective]; CategoryTheory.Presheaf.isSheaf_coherent_of_projective_comp [Mathlib/CategoryTheory/Sites/Coherent/SheafComparison]; CategoryTheory.Presheaf.isSheaf_coherent_of_projective_of_comp [Mathlib/CategoryTheory/Sites/Coherent/SheafComparison] No match: ordinary/light-condensed free-sheaf Hom and module base change do not state exceptional Tor bounds and the derived etale lisse comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Flat\"",
+   "results": "[loogle] OK 1 hit(s); CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat [Mathlib.CategoryTheory.Sites.Pullback] No match: ordinary/light-condensed free-sheaf Hom and module base change do not state exceptional Tor bounds and the derived etale lisse comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional.*[Tt]or|[Tt]or.*exceptional|locallyConstant.*projective",
+   "results": "[grep] OK 0 hit(s); No hits. No match: ordinary/light-condensed free-sheaf Hom and module base change do not state exceptional Tor bounds and the derived etale lisse comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally closed exceptional pullback finite Tor dimension constructible sheaves",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; No hits. ",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom from a finite locally free etale sheaf commutes with nonflat scalar extension and exceptional pullback has finite Tor amplitude",
+   "results": "Returned 8 hits: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.FormallyEtale.instTensorProduct, AlgebraicGeometry.IsEtale.of_comp, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, Algebra.FormallyEtale.comp, Algebra.FormallyEtale.of_restrictScalars, KaehlerDifferential.isBaseChange_of_formallyEtale, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars. Read the sheaf Free.lean:61–76, PullbackFree.lean:118–134 and ChangeOfRings.lean:17–43 candidates: these are ordinary free-sheaf universal properties and scalar adjunctions, not the derived etale comparison with exceptional Tor bounds.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional.*[Tt]or|[Tt]or.*exceptional|derived.*[Hh]om.*scalar|scalar.*derived.*[Hh]om",
+   "results": "Returned 0 hits: . Read the sheaf Free.lean:61–76, PullbackFree.lean:118–134 and ChangeOfRings.lean:17–43 candidates: these are ordinary free-sheaf universal properties and scalar adjunctions, not the derived etale comparison with exceptional Tor bounds.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite locally free sheaf derived internal Hom commutes with extension of coefficient rings",
+   "results": "Returned 8 hits: ModuleCat.CoextendScalars.obj', AlgebraicGeometry.Scheme.Modules.Hom, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm, ModuleCat.RestrictionCoextensionAdj.HomEquiv.fromRestriction, SheafOfModules.pullbackObjFreeIso_hom_naturality, PresheafOfModules.homEquivOfIsLocallyBijective, SheafOfModules.free, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom. Read the sheaf Free.lean:61–76, PullbackFree.lean:118–134 and ChangeOfRings.lean:17–43 candidates: these are ordinary free-sheaf universal properties and scalar adjunctions, not the derived etale comparison with exceptional Tor bounds.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"internalHom\"",
+   "results": "Returned 0 hits: . Read the sheaf Free.lean:61–76, PullbackFree.lean:118–134 and ChangeOfRings.lean:17–43 candidates: these are ordinary free-sheaf universal properties and scalar adjunctions, not the derived etale comparison with exceptional Tor bounds.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite locally free sheaf L and a bounded flat complex P, derived sheaf Hom from L commutes with derived change of rings by the evaluation comparison",
+   "results": "Returned 8 hits: SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.map_ιFree_mapFree_hom_assoc, SheafOfModules.ιFree_mapFree_inv_assoc, SheafOfModules.mapFree, SheafOfModules.ιFree_mapFree_inv, SheafOfModules.Presentation.map_π_eq, SheafOfModules.freeHomEquiv_comp_apply, SheafOfModules.freeFunctorCompPullbackIso. Read the sheaf Free.lean:61–76, PullbackFree.lean:118–134 and ChangeOfRings.lean:17–43 candidates: these are ordinary free-sheaf universal properties and scalar adjunctions, not the derived etale comparison with exceptional Tor bounds.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "thm-coef-finite-hom",
+  "date": "2026-10-22",
+  "group": "Q07"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "thm-coef-finite-hom",
+   "place": "Proof paragraphs 2–3: the inner complex is finite-Tor constructible; move coefficient change through internal Hom by its finite-projective model",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-coef-etale-lisse-hom-reduction",
+  "worker": "stage1",
+  "summary": "Preserve the statement; split the extracted lisse-stratum argument using existing nodes only. Check exceptional and Hom intervals separately, establish both ctf endpoints, and identify the actual evaluation-transpose arrow as the identity on every finite-free covering model, including rank zero. No new nodes, no Lean, no compiler.",
+  "blueprint": "thm-coef-finite-hom proof paragraphs 2–3, current main-20261015 sk-lem-sp-tower placement: locally projective stratum, exceptional domain, and the inner Hom coefficient comparison. Retains the same argument as the master snapshot and Q07 returned steps 4–6.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic The valuation ring of a finite extension of $\\mathbf Q_\\ell$ is a discrete valuation ring with finite residue field used in the local projective Hom computation or its domain preparation; it does not replace the unit biduality route."
+   },
+   {
+    "node": "lem-weil-valued-dvr-finite-quotients",
+    "why": "Generic Finite quotients of a discrete valuation ring with finite residue field used in the local projective Hom computation or its domain preparation; it does not replace the unit biduality route."
+   },
+   {
+    "node": "lem-weil-pbc-projective-module-flat",
+    "why": "Generic Projective modules are flat used in the local projective Hom computation or its domain preparation; it does not replace the unit biduality route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-flat-local-free",
+    "why": "Generic A finitely generated flat module over a local ring is free used in the local projective Hom computation or its domain preparation; it does not replace the unit biduality route."
+   },
+   {
+    "node": "def-weil-pbc-etale-constructible-sheaf",
+    "why": "Generic Constructible sheaf of modules on the small etale site used in the local projective Hom computation or its domain preparation; it does not replace the unit biduality route."
+   },
+   {
+    "node": "def-weil-closed-immersion",
+    "why": "Generic Closed immersion of schemes used in the local projective Hom computation or its domain preparation; it does not replace the unit biduality route."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic Permanence of proper, separated, finite type, finitely presented morphisms and of immersions used in the local projective Hom computation or its domain preparation; it does not replace the unit biduality route."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic An open subscheme of a Noetherian scheme is Noetherian used in the local projective Hom computation or its domain preparation; it does not replace the unit biduality route."
+   },
+   {
+    "node": "lem-weil-pbc-qc-open-immersion-finite-type",
+    "why": "Generic A quasi-compact open immersion is of finite type used in the local projective Hom computation or its domain preparation; it does not replace the unit biduality route."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic Finite-type morphisms are stable under composition and base change used in the local projective Hom computation or its domain preparation; it does not replace the unit biduality route."
+   },
+   {
+    "node": "lem-weil-pbc-separated-cancellation",
+    "why": "Generic Immersions are separated; cancellation for separated morphisms used in the local projective Hom computation or its domain preparation; it does not replace the unit biduality route."
+   },
+   {
+    "node": "thm-pur-open-complement-unconditional",
+    "why": "Generic The open-complement condition is unconditional and uniform in the coefficient ring used in the local projective Hom computation or its domain preparation; it does not replace the unit biduality route."
+   },
+   {
+    "node": "prop-exc-closed-tor",
+    "why": "Generic Finite Tor amplitude for closed support used in the local projective Hom computation or its domain preparation; it does not replace the unit biduality route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic Derived internal Hom calculus on small ringed sites used in the local projective Hom computation or its domain preparation; it does not replace the unit biduality route."
+   },
+   {
+    "node": "lem-sf-flat-model",
+    "why": "Generic Bounded flat model of finite Tor amplitude used in the local projective Hom computation or its domain preparation; it does not replace the unit biduality route."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Generic Bounded-above flat complexes on a ringed site are K-flat used in the local projective Hom computation or its domain preparation; it does not replace the unit biduality route."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "Generic Change of rings preserves K-flat complexes with flat terms used in the local projective Hom computation or its domain preparation; it does not replace the unit biduality route."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic Derived change of rings along a morphism of sheaves of rings, computed by K-flat resolutions used in the local projective Hom computation or its domain preparation; it does not replace the unit biduality route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+    "why": "Generic Bounded-above finite-projective sheaf Hom model used in the local projective Hom computation or its domain preparation; it does not replace the unit biduality route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic Derived tensor comparison for arbitrary ringed topoi used in the local projective Hom computation or its domain preparation; it does not replace the unit biduality route."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic Conservativity of geometric stalks used in the local projective Hom computation or its domain preparation; it does not replace the unit biduality route."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Exact restriction of module sheaves makes the local flat models represent the restricted complexes and detects cohomology on covers."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-projective-module-flat",
+  "lem-weil-pbc-finite-flat-local-free",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-separated-cancellation",
+  "thm-pur-open-complement-unconditional",
+  "prop-exc-closed-tor",
+  "lem-sf-flat-model",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q125-9756816a1",
+  "group": "Q125",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-9756816a1 (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement; there are no new nodes. I also read the master and main-20261015 thm-coef-finite-hom paragraphs 2–3 and the Q07 returned steps 4–6. The item is unsplit in live and in side-live, neither it nor any cited node is in the drop list, and the statement and stmt_deps are unchanged. The nine steps expand old steps 4–6 faithfully. ℓ∈m_E gives ℓ^nA=0, and 00NZ makes L locally free. Steps 2–3 prove that Z and S are separated and of finite type. In step 4, thm-pur-open-complement (T=X, c=2d_X) and prop-exc-closed-tor give [a,b+2d_X+1], and the domain-calculus j* clause keeps that interval. In step 5 the cor formula gives exactly [a−2d_S,b+2d_X+1+2d_S]. Step 6 puts both endpoints in ctf without assuming invertibility, and there is no cycle. Step 7 meets the hypotheses of bounded-free-rhom-model (A^t[0] bounded above and finite free, P bounded below), with flat models computing ⊗^L B. I checked by hand that the step 8 transpose is the identity of (P⊗B)^t, including t=0. Step 9 applies stalk conservativity to the cone's cohomology sheaves. I tested rank 0, varying ranks, n=m, empty S and X, Z=X and M=0. No duplicate of this étale finite-coefficient comparison exists, and all 22 declared tool uses are generic, so I accept them. FIX (C1): in step 1, 'locally L⊗^L W=W^t[0]' cited no node for restriction commuting with derived tensor or for A^t[0] being K-flat. I added lem-weil-pbc-ringed-topoi-derived-tensor-pullback and lem-pc-bounded-above-flat-kflat-site with one sentence; both were already proof_deps. Advisory: the stmt_dep def-weil-site-perfect-complex is defined for the pro-étale site while the item uses its étale reading. That part of the statement comes from Q07 and I left it unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EtaleLisseHomReduction",
+  "declaration": "WeilConjectures.etaleLisseHomReduction",
+  "declarations": [
+   "WeilConjectures.lisseHomPositiveCoefficientFinite",
+   "WeilConjectures.lisseHomStratumExceptional",
+   "WeilConjectures.LisseHomLocalFreeCalculation",
+   "WeilConjectures.LisseHomRestrictedLocalFreeCalculation",
+   "WeilConjectures.LisseHomRestrictionCompatibility",
+   "WeilConjectures.etaleLisseHomReduction"
+  ],
+  "file": "lean/Sheaf/Paper/EtaleLisseHomReduction.lean",
+  "statement": "theorem etaleLisseHomReduction (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p) (n m : ℕ) (hmn : m ≤ n) (X Z S : Scheme.{u}) [X.Over (Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] (g : Z ⟶ X) [IsClosedImmersion g] (j : S ⟶ Z) [IsOpenImmersion j] (dX dS : ℕ) (_hdX : topologicalKrullDim X ≤ (dX : WithBot ℕ∞)) (_hdS : topologicalKrullDim S ≤ (dS : WithBot ℕ∞)) (L : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))))) (_hL : ∃ U : Scheme.Cover.{u} Scheme.etalePrecoverage S, ∀ i : U.I₀, ∃ V : ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))), Module.Finite (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) V ∧ Module.Projective (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) V ∧ Nonempty ((Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))) (U.f i)).obj L ≅ (lisseHomConstantFunctor (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) (U.X i)).obj V)) (M : finiteHomEtale l E X n) (a b : ℤ) (_hM : Etale.DerivedCategory.isBoundedConstructible (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) X M) (_hTor : Etale.DerivedCategory.hasTorAmplitudeIn (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) X a b M) : (∃ U : Scheme.Cover.{u} Scheme.etalePrecoverage S, ∀ i : U.I₀, ∃ t : ℕ, Nonempty ((Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))) (U.f i)).obj L ≅ (lisseHomConstantFunctor (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) (U.X i)).obj (ModuleCat.of (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) (Fin t → ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))))) ∧ Etale.DerivedCategory.IsSitePerfect ((_root_.DerivedCategory.singleFunctor _ 0).obj L) ∧ Etale.DerivedCategory.hasTorAmplitudeIn (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) S 0 0 ((_root_.DerivedCategory.singleFunctor _ 0).obj L) ∧ Etale.DerivedCategory.isBoundedConstructible (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) S ((lisseHomStratumExceptional l E n g j).obj M) ∧ Etale.DerivedCategory.hasTorAmplitudeIn (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) S a (b + 2 * (dX : ℤ) + 1) ((lisseHomStratumExceptional l E n g j).obj M) ∧ Etale.DerivedCategory.isBoundedConstructible (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) S ((finiteHomEtaleInternalHom l E S n).obj (op ((_root_.DerivedCategory.singleFunctor _ 0).obj L), (lisseHomStratumExceptional l E n g j).obj M)) ∧ Etale.DerivedCategory.hasTorAmplitudeIn (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) S (a - 2 * (dS : ℤ)) (b + 2 * (dX : ℤ) + 1 + 2 * (dS : ℤ)) ((finiteHomEtaleInternalHom l E S n).obj (op ((_root_.DerivedCategory.singleFunctor _ 0).obj L), (lisseHomStratumExceptional l E n g j).obj M)) ∧ Etale.DerivedCategory.isBoundedConstructible (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (m + 1))) S ((finiteHomEtaleReduction l E S hmn).obj ((finiteHomEtaleInternalHom l E S n).obj (op ((_root_.DerivedCategory.singleFunctor _ 0).obj L), (lisseHomStratumExceptional l E n g j).obj M))) ∧ Etale.DerivedCategory.finiteTorAmplitude (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (m + 1)))) S ((finiteHomEtaleReduction l E S hmn).obj ((finiteHomEtaleInternalHom l E S n).obj (op ((_root_.DerivedCategory.singleFunctor _ 0).obj L), (lisseHomStratumExceptional l E n g j).obj M))) ∧ Etale.DerivedCategory.isBoundedConstructible (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (m + 1))) S ((finiteHomEtaleInternalHom l E S m).obj (op ((finiteHomEtaleReduction l E S hmn).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj L)), (finiteHomEtaleReduction l E S hmn).obj ((lisseHomStratumExceptional l E n g j).obj M))) ∧ Etale.DerivedCategory.finiteTorAmplitude (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (m + 1)))) S ((finiteHomEtaleInternalHom l E S m).obj (op ((finiteHomEtaleReduction l E S hmn).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj L)), (finiteHomEtaleReduction l E S hmn).obj ((lisseHomStratumExceptional l E n g j).obj M))) ∧ IsIso (etaleFiniteHomCanonical l E S hmn ((_root_.DerivedCategory.singleFunctor _ 0).obj L) ((lisseHomStratumExceptional l E n g j).obj M)) ∧ (∀ U : S.Etale, LisseHomRestrictedLocalFreeCalculation l E S U.left U.hom hmn ((_root_.DerivedCategory.singleFunctor _ 0).obj L) ((lisseHomStratumExceptional l E n g j).obj M)) ∧ (∀ U : S.Etale, LisseHomRestrictionCompatibility l E S U.left U.hom hmn ((_root_.DerivedCategory.singleFunctor _ 0).obj L) ((lisseHomStratumExceptional l E n g j).obj M))",
+  "branch": "sheaf-dag",
+  "by": "Q143",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-586601c33",
+  "group": "Q143",
+  "result": "pass",
+  "note": "Re-delivery after the 20565c32 RETURN (H2, three ownership points), all repaired. (1) The item and def-sf-finite-free-hom-local-calculation cite the existing:true owner def-pur-etale-scalar-pullback-iso instead of the theorem lem-pur-etale-scalar-mate-projection. (2) lem-sf-flat-model is replaced by the new existing:true def-sf-etale-bounded-flat-complex; its statement matches FlatModel.lean IsBoundedFlatComplex (Λ in u+1, X in u, arbitrary a,b, IsZero outside, flat terms), and the local-calculation module adds the public import, the only Lean change. (3) New existing:true def-sf-etale-site-perfect-complex matches SitePerfect.lean IsSitePerfect (étale cover, per-member bounds, retracts of constant Fin m → Λ, L f^* K ≅ Q P). No other DAG node owns either declaration (scan of live and side-live). New nodes' stmt_deps equal their citations; lean.statement fields are verbatim. The item changes only lean and stmt_deps (adds 6 def nodes, loses none, adds no theorem). The other changed dep records equal side-live (Q84/Y7 base movement). Theorem and coordinate modules are byte-identical to the returned head, whose mathematics was checked clause by clause and re-read: index shift, projective L, Tor intervals [a,b+2dX+1] and [a-2dS,b+2dX+1+2dS], both ctf endpoints, IsIso of the canonical etaleFiniteHomCanonical, local evaluation identity including t=0, restriction square. sorry only in the theorem; no hollow defs; no pro-étale substitute. Not compiled (no file changed). Advisory: Lean-file source.document on the ownership nodes; the item imports the old Hom/change-of-rings modules, which the rebound Q84 modules re-export; the unused inherited def-weil-site-perfect-complex stmt_dep; the second reading was by the same worker."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-aed7c",
+  "group": "E8",
+  "result": "fix",
+  "landing": "20261026T065553-L-3086827",
+  "kind": "interface",
+  "note": "independent cc review: 6 new item-module theorems + 3 new modules + FFHEC abbrev adaptation + 10 nodes vs packet/clone (item and target statements unchanged, FFHLC importer compiled against adapted FFHEC); private helpers vs public sorry statements; EndpointBounds vs counterexample dS=-1"
+ }
+}

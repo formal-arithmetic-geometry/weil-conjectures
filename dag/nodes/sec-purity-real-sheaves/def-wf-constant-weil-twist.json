@@ -92,20 +92,65 @@
   "def-wf-weil-category",
   "def-wf-weil-group"
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.WeilSheaf.constantTwist",
+    "AlgebraicGeometry.WeilSheaf.nonempty_equiv_stalk_constantTwist"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.constantTwist",
+     "module": "WeilConjectures.WeilSheaf.Tensor",
+     "lines": [
+      80,
+      89
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.nonempty_equiv_stalk_constantTwist",
+     "module": "WeilConjectures.WeilSheaf.StalkConstantTwist",
+     "lines": [
+      144,
+      150
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-purity-real-sheaves",
  "unit": "sk-d-real-operations",
  "lean": {
-  "module": "WeilConjectures.WeilSheaf.Tensor",
-  "declaration": "AlgebraicGeometry.WeilSheaf.constantTwist",
-  "branch": "slopmaster2",
-  "line": 82,
+  "module": "Sheaf.Paper.PbcConstantWeilTwist",
+  "declaration": "WeilConjectures.pbcConstantWeilLine",
   "declarations": [
-   "AlgebraicGeometry.WeilSheaf.constantTwist",
-   "AlgebraicGeometry.WeilSheaf.nonempty_equiv_stalk_constantTwist"
+   "WeilConjectures.constantTwistScalarIso",
+   "WeilConjectures.sfFiniteConstantTwist",
+   "WeilConjectures.pbcFiniteConstantWeilLine",
+   "WeilConjectures.pbcConstantWeilLine",
+   "WeilConjectures.sfCommonConstantTwist",
+   "WeilConjectures.pbcFiniteConstantWeilTensor",
+   "WeilConjectures.constantTwistEtaleTheta_existsUnique",
+   "WeilConjectures.constantTwistEtaleLine"
   ],
-  "sorry_free": true,
-  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here); Lean refresh 7d675a26 (L): sorry-free on 7d675a263"
+  "file": "lean/Sheaf/Paper/PbcConstantWeilTwist.lean",
+  "statement": "def pbcConstantWeilLine (E : Padic.FiniteCoefficientFields c.l c.Qbar) (b : E.valˣ) : WeilDQbar D c X₀",
+  "branch": "newtargets-dag",
+  "by": "O3",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The recorded upstream constantTwist belongs to the older pro-etale coefficient model and does not construct the explicit J-image in the current node statement. This module builds the specified finite and common PBC line, scalar rescaling, and actual completed tensor, using the existing constant object and tensor. The etale presentation uses the existing lisse unit, with its Frobenius uniquely normalized on constant fibres."
  },
  "split_report": {
   "date": "2026-10-21",
@@ -122,5 +167,23 @@
   "group": "Q122",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-24f8645f1 (reviewer sub-agent of L); spot-checked: I read the item in full, the main-20261015 and master source def-wf-constant-weil-twist (identical text), the unit sk-d-real-operations (B_b action b^deg, Q(n)=B_{q^-n}), every cited node statement and WeilSheaf/Tensor.lean constantTwist. constantTwist sets F's Weil structure to b•φ directly and is not an exact match, so it was rightly not attached. There are no new nodes. Live still has the item imported, it is not on the drop list and it has no repair note. The construction is correct: (U_E=J(R_E[0] rationalized), e_E=J(θ_E)∘c_E), B_b=(E,(U_E,b e_E)). The typing of c_E and j^{-1} checks out. b need not be an integral unit. Empty and disconnected X_0 are handled. The sign under the geometric-Frobenius convention is right, since T_s=b gives ρ=b^deg, consistent with Q(1) Frobenius q^{-1}. F1 (claims inside a definition; D1-type restatement): the definition also asserted lisse rank one, Weil-pair stage maps, the representation b^deg with trivial geometric action, and F⊗B_b≅(K,bφ_K) via the completed right unitor. These are exactly the statement of the reviewed citer lem-wf-constant-twist-coefficient-comparison (steps 2-9), copied in without proof to avoid the cycle. Fixed: I kept the data, turned the claims into a labelled remark that points to that lemma (backticks, not a citation), and dropped 6 claim-only stmt_deps (lem-tw-lisse-rational-realization, lem-per-lisse-completed-system-comparison, cor-galois-lisse-representations, lem-sf-ringed-derived-closed-symmetric-monoidal, lem-weil-pbc-ringed-koszul-completion-reflector, lem-sfb-ringed-derived-monoidal-comparisons). The citer lemma stays true. F2: the source's 'tensoring by B_b' had been narrowed to constructible Weil sheaves. I widened it to Weil complexes, since citers twist complexes (lem-wf-constant-twist-cohomology, d-real-cohom). Batch-5: all 15 delivered deps are already in the nt-target closure, so the delivery adds 0 nodes. lem-per-lisse-completed-system-comparison, def-wf-fundamental-representation and cor-galois-lisse-representations are general definitions or the Galois correspondence, not statements or proof steps of the trace formula or Poincaré duality. I accepted them, and two of them are removed by the fix anyway. Note: the snapshot's chapter symlinks point to a missing dagsnap, so I read the cited nodes from clones/side-live. The fix file is fixes/dag/nodes/sec-purity-real-sheaves/def-wf-constant-weil-twist.json.; 1 file(s) fixed by the reviewer"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "For $b\\in\\Qlb^\\times$, let $\\mathcal B_b$ be the rank-one\nWeil sheaf on a separated finite-type\n$k_0$-scheme $X_0$ whose underlying sheaf is the constant module\n$\\overline{\\mathbf Q}_{\\ell,X}=p_X^*\\underline{\\Qlb}$ on $X_{\\mathrm{proét}}$\n([det-def-sfb-pulled-back-coefficients]) and whose Weil structure is $b\\,\\varphi_{\\Qlb}$,\nthe canonical structure $\\varphi_{\\Qlb}$ of [sk-def-sf-weil-complexes] multiplied by $b$\n([def-weil-weil-sheaf-complex]). Its\nWeil representation sends\n$g\\in W(X_0)$ to $b^{\\deg(g)}$ and is trivial on\n$\\pi_1(X)$. Tensoring by $\\mathcal B_b$ is called a *constant\nWeil twist*.",
+  "proof": [],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8919d0f4a",
+  "group": "O3",
+  "result": "pass",
+  "note": "Re-delivery after the 8da7a3dc RETURN; all three points repaired: (1) H2 stmt_dep now def-per-lisse-completed-system-data with the LisseCompletedSystemData import; (2) lem-fd record unchanged, the interface owned by new def node def-wf-weil-coefficient-comparison-interface (fields per H12), ConstantTwistWeilComparison.stage_transition pins the stage isos to the SF transition, normalized finite scalar and PBC transIso; (3) citer audit of the def-wf-constant-weil-twist rebind lists 16 citers (spot-checked d-real-cohom docstring-only, lem-wf-constant-twist-weight). Mechanical theorem stmt_dep lem-weil-constant-weil-structure-stage-independence: the item uses constantWeilStageScalar = .choose of that module's ∃! Weil iso over alpha (clause 1 of the theorem), i.e. an object the theorem's conclusion constructs -> PASS on that point; the rebuilt dependency module states both clauses, finite type only. Clause by clause: J_E with unit-normalized transport; B = J(E_X,b theta) as pbcConstantWeilLine; integral rep R[0], section-normalized; rank one, vacuous on empty X; E-independence plus associator; eta ∃!-pinned to the completed right unit (wfCompletionExtend of rightUnitor) with naturality, scalar square, common descent keeping b, J^-1 transport; local conjugacy at extension and closed points with recorded localQbar operators; connected clause with rho = b^deg via a pinned etale theta and a fully faithful realization; universes lifted via ULift. No hollow defs, all sorry, docstrings OK, lines <=100. Advisory: lem-fd and koszul-reflector theorem modules own FdCoefficientComparisonSystem/wfCompletionExtend uses; the stage-independence module imports the new interface without a stmt_dep (dependency nodes change lean only); H11 self second reading. No compile (no change)."
  }
 }

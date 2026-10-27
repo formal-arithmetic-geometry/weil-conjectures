@@ -1,0 +1,252 @@
+{
+ "id": "lem-sfb-relative-split-torus-invariant-affines",
+ "kind": "statement",
+ "title": "Invariant affine charts for a split torus on a normal ample scheme over an affine base",
+ "statement": "Let $S$ be an affine Noetherian scheme [def-pc-scheme] [pqf-def-locnoeth]. Let $X\\to S$ be a separated finite-type morphism of schemes [def-weil-pbc-scheme-conventions], assume every local ring of $X$ is a normal domain [def-weil-pbc-normal-ring], and assume $X$ has an ample invertible module [def-sc-invertible-module] [def-weil-pbc-ample-invertible-module]. Let the split torus $T=\\mathbf G_{m,S}^r$, for an integer $r\\geq0$ [def-sc-gm-ga], act on $X$ over $S$. This means a morphism $a:T\\times_SX\\to X$ satisfying the unit and associativity identities [def-pc-fibre-product]. Then every point of $X$ has an affine open neighbourhood $U\\subseteq X$ invariant under $T$: $a$ restricts to $T\\times_SU\\to U$. Thus $X$ admits a covering by $T$-invariant affine open subschemes. The acting torus is required to be split; no assertion for nonsplit tori is included.",
+ "source": {
+  "document": "literature/thomason-equivariant-resolution-linearization.pdf",
+  "place": "Theorem 3.3 and Corollary 3.4(3), printed p.32, Adv. Math.65 (1987), followed by weight-homogeneous affine projective charts avoiding the invariant boundary. WANTED local copy; the affine-chart consequence is the supporting lemma stated here."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-normal-ring",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "def-sc-gm-ga",
+  "def-pc-fibre-product",
+  "def-sfb-relative-split-torus"
+ ],
+ "proof": [
+  {
+   "text": "Write $S=\\operatorname{Spec}A$; the ring $A$ is Noetherian by [pqf-lem-affine-open-locnoeth], applied to the affine open $S$ of the locally Noetherian scheme $S$. Choose an ample invertible module $L$ as in the hypothesis. By [lem-weil-pbc-ample-very-ample-immersion-affine-base], $X\\to S$ admits an immersion into finite-dimensional projective space, so it is quasi-projective in the sense required by [lem-sfb-relative-torus-diagonal-projective-embedding]. Apply that node to the given normal finite-type separated $X$ and split torus $T$; obtain an equivariant immersion $j:X\\hookrightarrow P=\\mathbf P^n_A$ with coordinate weights $w_i$. Normal local domains are reduced (a nilpotent element in a domain is zero). Hence the image $W=j(X)$ is reduced. The empty $X$ case is vacuous; henceforth fix any $x\\in X$ and put $p=j(x)$.",
+   "uses": [
+    "pqf-lem-affine-open-locnoeth",
+    "lem-weil-pbc-ample-very-ample-immersion-affine-base",
+    "lem-sfb-relative-torus-diagonal-projective-embedding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 03GL, lemma-closed-in-projective-space; Tag 01M4, lemma-standard-open. Agent boundary-avoiding weight-chart argument after Thomason Corollary 3.4(3), printed p.32 (local copy WANTED)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-relative-diagonal-projective-boundary] to the invariant reduced locally closed image $W$. It gives invariant reduced closed subschemes $Z,B\\subseteq P$, with $W=Z\\setminus|B|$, and weight-stability of each boundary equation module $I(B)_d$. By [lem-sfb-projective-closed-subscheme-homogeneous-ideal], the total-degree homogeneous ideal $I=\\bigoplus_dI(B)_d$ satisfies $B=\\operatorname{Proj}(R/I)$ for $R=A[z_0,\\ldots,z_n]$. These are equations on schemes over $A$, not equations inferred from rational points of the fibres.",
+   "uses": [
+    "lem-sfb-relative-diagonal-projective-boundary",
+    "lem-sfb-projective-closed-subscheme-homogeneous-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 03GL, lemma-closed-in-projective-space; Tag 01M4, lemma-standard-open. Agent boundary-avoiding weight-chart argument after Thomason Corollary 3.4(3), printed p.32 (local copy WANTED)."
+   }
+  },
+  {
+   "text": "Let $\\mathfrak p$ be the homogeneous prime of $R$ corresponding to $p$. Since $p\\notin|B|=V_+(I)$, choose a total-degree homogeneous $f\\in I_d\\setminus\\mathfrak p$ [def-pc-proj]. Indeed, if every total-degree component of every element of $I$ were in the prime, then $I\\subseteq\\mathfrak p$. If $d=0$, choose $z_i\\notin\\mathfrak p$ (the prime does not contain the irrelevant ideal), and replace $f$ by $fz_i\\in I_1\\setminus\\mathfrak p$. Thus $d>0$. Write $f=\\sum_mf_m$ by grouping its finitely many monomials by weight. The boundary lemma makes every $f_m$ a member of $I(B)_d$. At least one $h=f_m$ is outside $\\mathfrak p$, since otherwise their sum would be in that ideal. Thus $h$ is a positive-total-degree boundary equation with coaction $h\\mapsto t^mh$.",
+   "uses": [
+    "def-pc-proj",
+    "lem-sfb-relative-diagonal-projective-boundary"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 03GL, lemma-closed-in-projective-space; Tag 01M4, lemma-standard-open. Agent boundary-avoiding weight-chart argument after Thomason Corollary 3.4(3), printed p.32 (local copy WANTED)."
+   }
+  },
+  {
+   "text": "Put $U=j^{-1}D_+(h)$. It contains $x$. Since $h\\in I(B)$, $D_+(h)$ misses $|B|$. The equality $W=Z\\setminus|B|$ of Step 2 therefore identifies $U$ with $Z\\cap D_+(h)$ as an open subscheme of $Z$. By [prop-nagata-proj-standard-open], $D_+(h)$ is affine because $d>0$. The affine characterization of closed immersions in [def-weil-closed-immersion] makes its intersection with the closed subscheme $Z$ a spectrum of a quotient ring, hence affine. This is where avoidance of the entire boundary is needed.",
+   "uses": [
+    "prop-nagata-proj-standard-open",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 03GL, lemma-closed-in-projective-space; Tag 01M4, lemma-standard-open. Agent boundary-avoiding weight-chart argument after Thomason Corollary 3.4(3), printed p.32 (local copy WANTED)."
+   }
+  },
+  {
+   "text": "For any $A$-algebra $C$, any $t\\in T(C)$ and any $C$-point of $P$, locally represent its homogeneous coordinates in a trivialization of its invertible quotient by $v_0,\\ldots,v_n$. The coordinate action replaces $v_i$ by $t^{w_i}v_i$; every monomial of $h$ has weight $m$, so $h(t^{w_0}v_0,\\ldots,t^{w_n}v_n)=t^mh(v_0,\\ldots,v_n)$. The Laurent monomial $t^m$ is a unit. Consequently the action preserves the open where $h$ generates the corresponding tensor-power line. This local criterion is independent of its frame and applies to nonreduced $C$ too. Apply it to the universal point of $T\\times_SU$ and use equivariance of $j$; the action maps into $U$. The open-immersion factorization property [def-weil-open-immersion] gives the restricted action morphism. Its unit and associativity laws follow by composing with the monic inclusion $U\\hookrightarrow X$. Since $x$ was arbitrary these opens cover $X$. For $r=0$ the unique weight is zero and the same calculation applies.",
+   "uses": [
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 03GL, lemma-closed-in-projective-space; Tag 01M4, lemma-standard-open. Agent boundary-avoiding weight-chart argument after Thomason Corollary 3.4(3), printed p.32 (local copy WANTED)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-affine-open-locnoeth",
+  "lem-weil-pbc-ample-very-ample-immersion-affine-base",
+  "lem-sfb-relative-torus-diagonal-projective-embedding",
+  "lem-sfb-relative-diagonal-projective-boundary",
+  "lem-sfb-projective-closed-subscheme-homogeneous-ideal",
+  "def-pc-proj",
+  "prop-nagata-proj-standard-open",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Agent relative boundary-avoiding character-chart argument, using Tag 03GL and Tag 01M4; equivariant embedding input from Thomason Corollary 3.4(3), printed p.32 (read online; local copy WANTED)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A normal quasi-projective scheme over a Noetherian affine base with a split torus action has a cover by invariant affine open subschemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.affineOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) → [inst_3 : GradedRing 𝒜] → (AlgebraicGeometry.Proj 𝒜).AffineOpenCover\", \"doc\": \"Given a graded commutative ring $\\\\mathcal{A}$, if the irrelevant ideal (elements with zero degree component) is contained in the ideal generated by homogeneous elements $\\\\{f_i\\\\}$ of positive degree, t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineBasisCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"(X : AlgebraicGeometry.Scheme) → X.OpenCover\", \"doc\": \"For any scheme $X$, this constructs an open cover by affine open immersions obtained by taking the standard affine open subsets (localizations at elements) of each affine open subscheme in $X$'s affin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"(X : AlgebraicGeometry.Scheme) → X.OpenCover\", \"doc\": \"For a scheme $X$, this constructs an open cover consisting of affine open immersions $\\\\{\\\\operatorname{Spec}(R_x) \\\\to X\\\\}_{x \\\\in X}$ whose images form a jointly surjective family, ensuring every point \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → (AlgebraicGeometry.Scheme.Hom.normalization f).OpenCover\", \"doc\": \"The open cover of the normalization scheme constructed via locally directed gluing data from the affine Zariski site, formed by canonical open immersion morphisms that collectively cover the colimit s\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineXSchemeAffineCover\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (x : ↥X), AlgebraicGeometry.IsAffine (X.affineCover.X x)\", \"doc\": \"Each element of the affine open cover of a scheme is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"AlgebraicGeometry.Scheme → Type (max (v + 1) (u + 1))\", \"doc\": \"The type of affine open covers of a scheme $X$, which consists of collections of affine open immersions into $X$ whose images form a covering of $X$ in the Zariski topology. This is defined as the abb\"}\n  {\"name\": \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {ι : Type u_2} →\\n                (f : ι → A) →\\n                  {m : ι → ℕ} →\\n            \", \"doc\": \"Given a graded commutative ring $\\\\mathcal{A}$ over a commutative ring $A$, if the irrelevant ideal (consisting of elements with zero zeroth homogeneous component) is contained in the ideal generated b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none states this relative scheme/group-action theorem, nor a one-line generalization. The second semantic phrasing also has no match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"invariant\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none states this relative scheme/group-action theorem, nor a one-line generalization. The second semantic phrasing also has no match."
+  },
+  {
+   "tool": "grep",
+   "query": "Sumihiro|invariant.*affine|affine.*invariant",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none states this relative scheme/group-action theorem, nor a one-line generalization. The second semantic phrasing also has no match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every point of a normal scheme with an ample line bundle and a split torus action has an invariant affine neighborhood over an affine Noetherian base",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_isAffineOpen_mem_and_subset\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{X : Scheme.{u}} {x : X} {U : X.Opens} (hxU : x ∈ U) : ∃ W : X.Opens, IsAffineOpen W ∧ x ∈ W ∧ W.1 ⊆ U\", \"doc\": \"For any scheme $X$, point $x \\\\in X$, and open subset $U \\\\subseteq X$ containing $x$, there exists an affine open subset $W \\\\subseteq X$ such that $x \\\\in W$ and $W \\\\subseteq U$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_affine_mem_range_and_range_subset\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"{X : Scheme.{u}} {x : X} {U : X.Opens} (hxU : x ∈ U) :\\n  ∃ R, ∃ (f : Spec R ⟶ X), IsOpenImmersion f ∧ x ∈ Set.range f ∧ Set.range f ⊆ U\", \"doc\": \"For any point $x$ in an open subset $U$ of a scheme $X$, there exists an affine scheme $\\\\operatorname{Spec}(R)$ and an open immersion $f: \\\\operatorname{Spec}(R) \\\\to X$ such that $x$ lies in the image \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.local_affine\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"∀ (self : AlgebraicGeometry.Scheme) (x : ↑self.toTopCat),\\n  ∃ U R, Nonempty (self.restrict ⋯ ≅ AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op R))\", \"doc\": \"For any scheme $X$ and any point $x$ in its underlying topological space, there exists an open neighborhood $U$ of $x$ and a commutative ring $R$ such that the restriction of $X$ to $U$ is isomorphic \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{P : Sort u} →\\n  {toLocallyRingedSpace : AlgebraicGeometry.LocallyRingedSpace} →\\n    {local_affine :\\n        ∀ (x : ↑toLocallyRingedSpace.toTopCat),\\n          ∃ U R,\\n            Nonempty\\n              (toLocallyRingedSpace.restrict ⋯ ≅ AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op R))\", \"doc\": \"A scheme is a locally ringed space such that every point has an open neighborhood isomorphic to the affine scheme associated to some commutative ring, constructed via the Spec functor applied to the o\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_of_affine_cover\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{ι} {S : ι → X.affineOpens} (hS : (⨆ i, S i : X.Opens) = ⊤) (hS' : ∀ i, IsNoetherianRing Γ(X, S i)) :\\n  IsLocallyNoetherian X\", \"doc\": \"If a scheme $ X $ admits an affine open cover $ \\\\{S_i\\\\} $ such that the union of all $ S_i $ is $ X $ and each ring of global sections $ \\\\Gamma(S_i) $ is Noetherian, then $ X $ is a locally Noetherian\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (x : ↑X.toTopCat), X.affineOpenCover.X x = Classical.choose ⋯\", \"doc\": \"For any scheme $X$ and any point $x$ in its underlying topological space, the $X$-component of the affine open cover at $x$ is the affine open neighborhood selected by the classical choice function, e\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsNoetherian X], AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"If a scheme $X$ is Noetherian, then it is locally Noetherian, meaning it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian.component_noetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsLocallyNoetherian X] (U : ↑X.affineOpens),\\n  IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑U))\", \"doc\": \"For a locally Noetherian scheme $ X $, the ring of sections over every affine open subset $ U $ of $ X $ is a Noetherian ring, i.e., $ \\\\mathcal{O}_X(U) $ is Noetherian.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none states this relative scheme/group-action theorem, nor a one-line generalization. The second semantic phrasing also has no match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative Sumihiro theorem for split multiplicative group actions on normal quasi projective schemes over rings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_inr_normalizationCoprodIso_hom\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {U V : AlgebraicGeometry.Scheme} {iU : U ⟶ X} {iV : V ⟶ X}\\n  (e : CategoryTheory.Limits.IsColimit (CategoryTheory.Limits.BinaryCofan.mk iU iV))\\n  [inst_2 : Algebra\", \"doc\": \"The composition of the normalization morphism of the composite morphism $ i_V \\\\circ f $, followed by the right inclusion into the coproduct and the hom-component of the normalization coproduct isomorp\"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], (AlgebraicGeometry.Proj 𝒜).IsSeparated\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is a separated scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, where $\\\\mathcal{A}_0$ i\"}\n  {\"name\": \"AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a scheme $X$ equipped with a ring homomorphism $f: \\\\mathcal{A}_0 \\\\to \\\\mathcal{O}_X(\\\\top)$ from the degree-zero component of $\\\\mathcal{A}$ to the structure sheaf o\"}\n  {\"name\": \"AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a scheme $X$ equipped with a ring homomorphism $f: \\\\mathcal{A}_0 \\\\to \\\\mathcal{O}_X(\\\\top)$ from the degree-zero component of $\\\\mathcal{A}$ to the structure sheaf o\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsAffineHom f],\\n  AlgebraicGeometry.IsAffineHom (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the induced morphism from $ X $ to the normalization of $ f $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens),\\n  CategoryTheory.CategoryStruct.comp ((AlgebraicGeometry.Scheme.Hom.normalizationOpenCover f).f U)\\n      (AlgebraicGeometry.Scheme.Hom.fromNo\", \"doc\": \"For an affine open subset $U$ of $Y$, the composition of the open cover morphism $f.\\\\text{normalizationOpenCover}.f(U)$ with the normalization morphism $f.\\\\text{fromNormalization}$ equals the composit\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none states this relative scheme/group-action theorem, nor a one-line generalization. The second semantic phrasing also has no match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split torus action on a normal scheme with an ample line bundle over a Noetherian affine base has invariant affine open neighborhoods",
+   "results": "{\"t\": \"2026-10-24T03:39:41Z\", \"tool\": \"leanfinder\", \"query\": \"A split torus action on a normal scheme with an ample line bundle over a Noetherian affine base has invariant affine open neighborhoods\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.exists_isAffineOpen_mem_and_subset\", \"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"AlgebraicGeometry.Proj.affineOpenCover\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"AlgebraicGeometry.Scheme.affineOpenCover_idx\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.reduce_to_affine_global\"], \"digest\": \"f94124f4cfa26805\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; Proj charts, ordinary affine covers, abstract representations and homogeneous-ideal definitions do not assert this equivariant scheme theorem over rings."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative Sumihiro theorem invariant affine covering of normal quasi projective schemes with a split torus action",
+   "results": "{\"t\": \"2026-10-24T03:39:32Z\", \"tool\": \"leansearch\", \"query\": \"Relative Sumihiro theorem invariant affine covering of normal quasi projective schemes with a split torus action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.Scheme.affineOpenCover\", \"AlgebraicGeometry.Scheme.AffineCover.ctorIdx\", \"AlgebraicGeometry.Scheme.affineOpenCover_f\", \"AlgebraicGeometry.Scheme.AffineCover\", \"AlgebraicGeometry.Scheme.AffineOpenCover\", \"AlgebraicGeometry.Scheme.affineBasisCover\", \"AlgebraicGeometry.Scheme.openCoverBasicOpenTop\"], \"digest\": \"01d5850b8f7b322d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; Proj charts, ordinary affine covers, abstract representations and homogeneous-ideal definitions do not assert this equivariant scheme theorem over rings."
+  },
+  {
+   "tool": "grep",
+   "query": "Sumihiro|invariant.*affine|affine.*invariant",
+   "results": "{\"t\": \"2026-10-24T03:39:32Z\", \"tool\": \"grep\", \"query\": \"Sumihiro|invariant.*affine|affine.*invariant\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; Proj charts, ordinary affine covers, abstract representations and homogeneous-ideal definitions do not assert this equivariant scheme theorem over rings."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"invariant\"",
+   "results": "{\"t\": \"2026-10-24T03:39:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"invariant\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; Proj charts, ordinary affine covers, abstract representations and homogeneous-ideal definitions do not assert this equivariant scheme theorem over rings."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relatively-ample-subtorus-quotient-schematicity",
+  "date": "2026-10-24",
+  "group": "Q05"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Relative torus quotient input: invariant affine covering of the normal ample source after finite étale splitting of the torus. This is the relative-base replacement for the field-only Sumihiro lemma.",
+   "via": [
+    "lem-sfb-relatively-ample-subtorus-quotient-schematicity",
+    "lem-sfb-normal-semiabelian-generic-torus-quotient",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-split-torus-invariant-affines",
+  "worker": "stage1",
+  "summary": "Q32 preserves the statement and splits the relative affine-chart argument through diagonal equivariant projective embedding and invariant reduced boundary equations over a Noetherian ring. Field-only Sumihiro and finite-dimensional representation nodes are deliberately not applied over arbitrary bases. New nodes are statement-only and searched with logged commands.",
+  "blueprint": "Realizes the recorded relative torus quotient prerequisite: obtain invariant affine charts after finite etale splitting; it stays below the unit direct-image alteration/Picard route. The inherited nearest blueprint ancestor is null, confirmed by blueprint_refs.py ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ample-very-ample-immersion-affine-base",
+    "why": "Generic ample-to-projective-immersion theorem over the given affine base; no node of this unit supplies this scheme-theoretic preparatory tool."
+   },
+   {
+    "node": "prop-nagata-proj-standard-open",
+    "why": "Generic affineness of a positive-degree Proj standard chart, used after selecting the boundary-avoiding eigenpolynomial; it does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ample-very-ample-immersion-affine-base",
+  "prop-nagata-proj-standard-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-93e566e95",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-93e566e95 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement and the report. Thomason is not in literature/ and is marked WANTED (agent origin), so I checked the embedding node by hand. For a normal X over a split torus, units and Pic of X[t^±] give a linearization of a power of L; the Z^r-graded weight components of an immersion-defining set of sections then give the diagonal equivariant immersion. True, including X empty, r=0, nonreduced A and disconnected X. Boundary node is correct: Z and B are invariant because T×Z is reduced and T×W is dense in it (F(t,p)=(t,tp)); each weight component of a boundary equation stays in I(B)_d by comparing coefficients on the Laurent basis in each chart D_+(z_i); tested on G_m acting on P^1. Steps 2-5 are correct: B=Proj(R/I), p∉V_+(I) gives a weight eigen-equation h of positive degree, D_+(h)∩Z is affine and avoids B, D_+(h) is invariant because t^m is a unit. No duplicates: the existing Sumihiro, linearization, embedding and boundary nodes are all over an algebraically closed field. Neither new node restates a parent clause. Fixes: (C1) step 1 now cites pqf-lem-affine-open-locnoeth for A Noetherian, added to uses and proof_deps; (B3) both new nodes now define T=G_{m,S}^r inline as Spec A[t^±] with its Hopf structure, since def-sc-gm-ga is field-only. tool_uses accepted: lem-weil-pbc-ample-very-ample-immersion-affine-base, prop-nagata-proj-standard-open.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeSplitTorusInvariantAffines",
+  "declaration": "AlgebraicGeometry.exists_relative_split_torus_invariant_affine_neighbourhood",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeSplitTorusInvariantAffines.lean",
+  "statement": "theorem exists_relative_split_torus_invariant_affine_neighbourhood (S : Scheme.{u}) [IsAffine S] [IsLocallyNoetherian S] (r : ℕ) (X : CategoryTheory.Mod (Over S) (relativeSplitTorus S r).X) [IsSeparated X.X.hom] [LocallyOfFiniteType X.X.hom] [QuasiCompact X.X.hom] (hnormal : ∀ p : X.X.left, IsDomain (X.X.left.presheaf.stalk p) ∧ IsIntegrallyClosed (X.X.left.presheaf.stalk p)) (L : X.X.left.Modules) [L.IsInvertible] (hL : Scheme.Modules.IsAmple X.X.left L) (x : X.X.left) : ∃ (U : CategoryTheory.Mod (Over S) (relativeSplitTorus S r).X) (i : U ⟶ X), IsOpenImmersion i.hom.left ∧ IsAffine U.X.left ∧ x ∈ Set.range i.hom.left",
+  "branch": "sheaf-dag",
+  "by": "Q110",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0d7bf91e0",
+  "group": "Q110",
+  "result": "pass",
+  "note": "Clause-by-clause check against the node: affine locally Noetherian S; separated + finite type (IsSeparated, LocallyOfFiniteType, QuasiCompact); normal-domain stalks in the recorded inline form; IsInvertible + absolute IsAmple L; split torus of any rank r : ℕ via the new relativeSplitTorus; action as Mod (Over S) T, whose product is the fibre product over S, with exactly the unit/assoc laws; conclusion an equivariant affine open immersion containing x, which is equivalent to an invariant affine open with the restricted action. Edge cases (empty X, empty S, r=0) covered; one universe, all binders explicit. New node def-sfb-relative-split-torus is real data (Over.pullback S.toSpecΓ).mapGrp of hopfSpec Γ(S)[Fin r→ℤ], matches Stacks 022U and the node text; record fields follow the H12 rule. Item record diff vs live: only lean and stmt_deps (+new node). lean.statement verbatim; docstrings carry source, blueprint id and the 5 proof steps; only sorry is the theorem proof. Same-day parallel def-sfb-relative-torus (functor of points) and def-sfb-ring-diagonalizable-group (over Spec R only) do not carry this group scheme over arbitrary S: advisory maintainer note, not H4. No files changed, no compile run."
+ }
+}

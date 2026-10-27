@@ -1,0 +1,283 @@
+{
+ "id": "lem-trf-etale-source-fibre-preparation",
+ "kind": "statement",
+ "title": "Etale source-cover structural descent and geometric-fibre preparation",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme], and let $(h_i:U_i\\to X)_{i\\in I}$ be etale morphisms [def-weil-etale-morphism] whose images cover $X$. Then $f$ is flat [def-weil-flat-morphism] if and only if every $f\\circ h_i$ is flat, and $f$ is locally of finite presentation [def-sbc-locally-finite-presentation] if and only if every $f\\circ h_i$ is locally of finite presentation. Assume either of the equivalent finite-presentation conditions. For every algebraically closed field $\\Omega$ [def-weil-field, def-weil-algebraic-closure] and morphism $g:\\operatorname{Spec}\\Omega\\to S$ [def-weil-affine-spectrum], put $C=X\\times_S\\operatorname{Spec}\\Omega$ and $D_i=U_i\\times_S\\operatorname{Spec}\\Omega$ [def-pc-fibre-product]. There are canonical isomorphisms $D_i\\cong U_i\\times_X C$ over $C$, characterized by their projections to $U_i$ and $\\operatorname{Spec}\\Omega$. Under these identifications the projections $e_i:D_i\\to C$ are etale and jointly surjective. The schemes $C$ and all $D_i$ are locally of finite type over $\\Omega$ [def-weil-finite-type-morphism] and locally Noetherian [pqf-def-locnoeth]. For any finite-presentation affine chart $\\operatorname{Spec}A\\subset X$ above $\\operatorname{Spec}R\\subset S$ through which $g$ factors, its pullback is $\\operatorname{Spec}(\\Omega\\otimes_R A)$ and its algebra is finitely presented over $\\Omega$ [def-weil-pbc-finitely-presented-algebra]; the same holds for each $U_i$. These charts cover the respective fibres. No quasi-compactness, separatedness or Noetherian assumption on $X,S,U_i$ is made. Empty sources, empty fibres and the empty covering of the empty source are allowed.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C5D, lemma-nodal-family-etale-local-source, structural descent and geometric-fibre preparation (old steps 1--4); descent.tex Tags 036K lemma-flat-fpqc-local-source and 036N lemma-locally-finite-presentation-fppf-local-source; algebra.tex Tag 05G5 lemma-base-change-finiteness (4); morphisms.tex Tag 01T6 lemma-finite-type-noetherian"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-etale-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-weil-finite-type-morphism",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-finitely-presented-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Each $h_i$ is flat and locally of finite presentation by [def-weil-etale-morphism]. Suppose $f$ is flat. At $u\\in U_i$, writing $x=h_i(u)$ and $s=f(x)$, the stalk map of $fh_i$ is the composite $\\mathcal O_{S,s}\\to\\mathcal O_{X,x}\\to\\mathcal O_{U_i,u}$. Both maps are flat by [def-weil-flat-morphism], so [lem-weil-pbc-flat-ring-map-comp] makes the composite flat. Thus every $fh_i$ is flat.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-flat-ring-map-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 036K, lemma-flat-fpqc-local-source, forward implication on local rings"
+   }
+  },
+  {
+   "text": "Conversely suppose all $fh_i$ are flat. For any $x\\in X$ choose $i,u$ with $h_i(u)=x$ and set $A=\\mathcal O_{S,f(x)}$, $B=\\mathcal O_{X,x}$ and $E=\\mathcal O_{U_i,u}$. The map $B\\to E$ is flat and local, hence faithfully flat by [lem-weil-pbc-flat-local-hom-faithfully-flat]. The composite $A\\to E$ is flat by [def-weil-flat-morphism]. Apply [lem-trf-flatness-faithfully-flat-extension] to $A\\to B\\to E$ and $N=B$: multiplication identifies $E\\otimes_B B$ with $E$, with inverse $e\\mapsto e\\otimes1$, and respects the $A$-actions. It follows that $B$ is flat over $A$. This holds at every $x$, proving flatness of $f$.",
+   "uses": [
+    "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "def-weil-flat-morphism",
+    "lem-trf-flatness-faithfully-flat-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 036K, lemma-flat-fpqc-local-source, reverse implication; algebra.tex Tag 0584, lemma-flatness-descends-more-general (2)"
+   }
+  },
+  {
+   "text": "The family $(h_i)$ is jointly surjective, flat and locally of finite presentation, the latter two properties having been extracted from [def-weil-etale-morphism] in step 1. Apply [lem-trf-lfp-fppf-source-locality] to precisely this family. Its two implications prove the asserted equivalence for local finite presentation, without assuming that $f$ is flat. For the remaining steps assume these equivalent conditions, so both $f$ and every $fh_i$ are locally of finite presentation.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-trf-lfp-fppf-source-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 036N, lemma-locally-finite-presentation-fppf-local-source"
+   }
+  },
+  {
+   "text": "Put $T=\\operatorname{Spec}\\Omega$. The universal property [def-pc-fibre-product] gives $a_i:D_i\\to U_i\\times_X C$ with components $p_{U_i}$ and $(h_i p_{U_i},p_T)$, and $b_i:U_i\\times_X C\\to D_i$ with components $q_{U_i}$ and $p_Tq_C$. The required compatibility equations are respectively the defining equations of $D_i$ and $U_i\\times_X C$. Both composites have the same two projections as the corresponding identity, so uniqueness in that universal property proves $a_ib_i=1$ and $b_ia_i=1$. The map to $C$ is preserved and the projections to $U_i,T$ characterize this isomorphism. Apply [lem-weil-pbc-etale-covering-base-change] to $(h_i)$ and $C\\to X$. It gives an etale jointly surjective family $C\\times_X U_i\\to C$; exchanging the two factors, again by their projection universal property, gives $U_i\\times_X C\\to C$. Under $a_i$, these maps are exactly $e_i=(h_i p_{U_i},p_T)$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-etale-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C5D, lemma-nodal-family-etale-local-source, taking fibres; morphisms.tex Tags 02GO/01S1 (base change of etale maps/surjectivity)"
+   }
+  },
+  {
+   "text": "Choose an affine open $V=\\operatorname{Spec}R\\subseteq S$ containing the image of $g$; it exists by [lem-weil-pbc-affine-opens-basis]. Since $T$ has one point, $g$ factors through $V$. Cover $f^{-1}(V)$ by affine opens $W=\\operatorname{Spec}A$ using the same basis lemma. By [lem-weil-pbc-lfp-affine-opens-finite-presentation], $R\\to A$ is finitely presented. The pullback $W\\times_S T=W\\times_V T$ is an open subscheme of $C$ by [lem-weil-pbc-open-immersion-base-change]; its image is the inverse image of $W$, since a map into an open subscheme is exactly a map whose image lies in that open. Thus these opens cover $C$. Apply [lem-weil-pbc-fibre-product-affine-spectra] with the two factors ordered as $T,W$: it identifies this open with $\\operatorname{Spec}(\\Omega\\otimes_R A)$, with the specified structure and projection maps. By clause (1) of [lem-weil-pbc-finite-presentation-base-change-composition] this is a finitely presented $\\Omega$-algebra. The same argument, now with $fh_i$ in place of $f$, gives such a covering of each $D_i$. It also proves the formula for every finite-presentation affine chart specified in the statement, not just the chosen covers.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-finite-presentation-base-change-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I4, lemma-fibre-product-affine-schemes; Tag 01JY, lemma-base-change-immersion; morphisms.tex Tag 01TQ, lemma-locally-finite-presentation-characterize; algebra.tex Tag 05G5 (4), lemma-base-change-finiteness"
+   }
+  },
+  {
+   "text": "A finite presentation $\\Omega[t_1,\\ldots,t_n]/(r_1,\\ldots,r_m)$ is generated as an $\\Omega$-algebra by the finitely many images of the $t_j$ [def-weil-pbc-finitely-presented-algebra]. The affine covers in step 5 therefore show that $C$ and each $D_i$ are locally of finite type over $\\Omega$ by [def-weil-finite-type-morphism]. Indeed, the only nonempty open of $\\operatorname{Spec}\\Omega$ is itself. Every ideal of the field $\\Omega$ is either zero or contains a unit and is the whole ring, generated respectively by $0$ or $1$. Thus $\\Omega$ is Noetherian by [def-weil-pbc-noetherian-ring], and its spectrum is locally Noetherian by [pqf-def-locnoeth]. Apply [pqf-lem-locnoeth-lft] to the structure maps of $C$ and $D_i$ to obtain their local Noetherianity. If a source or fibre is empty, its pointwise conditions and affine-cover assertions are vacuous. The empty covering of empty $X$ causes no choice in step 2. All choices and arguments above are local; no finite subcover, separatedness, or condition on the base beyond those stated has been used.",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-weil-finite-type-morphism",
+    "def-weil-pbc-noetherian-ring",
+    "pqf-def-locnoeth",
+    "pqf-lem-locnoeth-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian; algebra.tex Tag 00F3, definition-finite-type"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-flat-ring-map-comp",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-trf-flatness-faithfully-flat-extension",
+  "lem-trf-lfp-fppf-source-locality",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-noetherian-ring",
+  "pqf-def-locnoeth",
+  "pqf-lem-locnoeth-lft"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C5D, lemma-nodal-family-etale-local-source, structural descent and taking fibres; expanded using Descent Tags 036K and 036N, Schemes Tags 01I4 and 01JY, Algebra Tag 05G5 (4), and Morphisms Tags 01TQ and 01T6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "geometric.*fibre|geometric.*fiber|source.*cover.*finite.*presentation",
+   "results": "{\"t\": \"2026-10-22T07:20:15Z\", \"tool\": \"grep\", \"query\": \"geometric.*fibre|geometric.*fiber|source.*cover.*finite.*presentation\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/Etale.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\"], \"digest\": \"243cdc7afe0f8b3f\"}. Hits give individual etale, finite-presentation, geometric-fibre, and Noetherian APIs, not the stated arbitrary-family structural equivalences together with the specified fibre preparation. Read Noetherian.lean:239 and Etale.lean:138--148; these supply only individual ingredients, so this is not a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric fibres of locally finitely presented schemes are locally noetherian and an etale source covering pulls back to an etale covering",
+   "results": "{\"t\": \"2026-10-22T07:20:15Z\", \"tool\": \"leansearch\", \"query\": \"Geometric fibres of locally finitely presented schemes are locally noetherian and an etale source covering pulls back to an etale covering\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian\", \"AlgebraicGeometry.IsLocallyNoetherian\", \"AlgebraicGeometry.Scheme.Hom.fiber\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.isLocallyNoetherian_of_affine_cover\", \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\"], \"digest\": \"28fdc50614228efe\"}. Hits give individual etale, finite-presentation, geometric-fibre, and Noetherian APIs, not the stated arbitrary-family structural equivalences together with the specified fibre preparation. Read Noetherian.lean:239 and Etale.lean:138--148; these supply only individual ingredients, so this is not a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.Etale",
+   "results": "{\"t\": \"2026-10-22T07:20:15Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.Etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Etale.of_formallyUnramified_of_flat\", \"AlgebraicGeometry.Etale.iff_flat_and_formallyUnramified\"], \"digest\": \"40e6e8e6e70966f3\"}. Hits give individual etale, finite-presentation, geometric-fibre, and Noetherian APIs, not the stated arbitrary-family structural equivalences together with the specified fibre preparation. Read Noetherian.lean:239 and Etale.lean:138--148; these supply only individual ingredients, so this is not a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local finite presentation and flatness are local for etale covers of the source; geometric fibres are locally finite type over fields",
+   "results": "{\"t\": \"2026-10-22T07:20:25Z\", \"tool\": \"leanfinder\", \"query\": \"Local finite presentation and flatness are local for etale covers of the source; geometric fibres are locally finite type over fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.Etale.finitePresentation\", \"AlgebraicGeometry.IsEtale\", \"Algebra.isOpen_etaleLocus\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instIsSmooth\"], \"digest\": \"7f661942dd0884d8\"}. Hits give individual etale, finite-presentation, geometric-fibre, and Noetherian APIs, not the stated arbitrary-family structural equivalences together with the specified fibre preparation. Read Noetherian.lean:239 and Etale.lean:138--148; these supply only individual ingredients, so this is not a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A jointly surjective etale source cover detects flatness and local finite presentation and induces etale covers of locally noetherian geometric fibres",
+   "results": "{\"t\": \"2026-10-22T07:20:26Z\", \"tool\": \"leanfinder\", \"query\": \"A jointly surjective etale source cover detects flatness and local finite presentation and induces etale covers of locally noetherian geometric fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"Algebra.IsStandardEtale.of_surjective\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.Scheme.Etale\", \"RingHom.Etale.toAlgebra\", \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\"], \"digest\": \"2e34d87072cf2868\"}. Hits give individual etale, finite-presentation, geometric-fibre, and Noetherian APIs, not the stated arbitrary-family structural equivalences together with the specified fibre preparation. Read Noetherian.lean:239 and Etale.lean:138--148; these supply only individual ingredients, so this is not a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Etale.iff_flat|LocallyOfFiniteType.isLocallyNoetherian|LocallyOfFinitePresentation.*Local|isLocal.*LocallyOfFinitePresentation",
+   "results": "{\"t\": \"2026-10-22T07:30:12Z\", \"tool\": \"grep\", \"query\": \"Etale.iff_flat|LocallyOfFiniteType.isLocallyNoetherian|LocallyOfFinitePresentation.*Local|isLocal.*LocallyOfFinitePresentation\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Artinian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\"], \"digest\": \"fce1d5aaf4c77fd7\"}. Hits give individual etale, finite-presentation, geometric-fibre, and Noetherian APIs, not the stated arbitrary-family structural equivalences together with the specified fibre preparation. Read Noetherian.lean:239 and Etale.lean:138--148; these supply only individual ingredients, so this is not a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A jointly surjective etale covering of the source detects flatness and local finite presentation; its geometric fibres have finite presentation affine charts and are locally noetherian",
+   "results": "{\"t\": \"2026-10-23T10:04:38Z\", \"tool\": \"leanfinder\", \"query\": \"A jointly surjective etale covering of the source detects flatness and local finite presentation; its geometric fibres have finite presentation affine charts and are locally noetherian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.Scheme.Etale\", \"Algebra.isOpen_etaleLocus\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\"], \"digest\": \"4617ec5bb1f8cba8\"}. Read Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:45--106, Morphisms/Etale.lean:138--148 and Noetherian.lean:239--250. Hits give separate flatness, finite-presentation, base-change and Noetherian APIs, not this source-family theorem with its specified geometric-fibre preparation. Target base-change descent does not itself prove source-precomposition descent.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "of_comp_of_flat|LocallyOfFiniteType.isLocallyNoetherian|etale.*[Cc]over",
+   "results": "{\"t\": \"2026-10-23T10:06:29Z\", \"tool\": \"grep\", \"query\": \"of_comp_of_flat|LocallyOfFiniteType.isLocallyNoetherian|etale.*[Cc]over\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Artinian.lean\", \"Mathlib/AlgebraicGeometry/Sites/Etale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\"], \"digest\": \"32f56307297e758c\"}. Read Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:45--106, Morphisms/Etale.lean:138--148 and Noetherian.lean:239--250. Hits give separate flatness, finite-presentation, base-change and Noetherian APIs, not this source-family theorem with its specified geometric-fibre preparation. Target base-change descent does not itself prove source-precomposition descent.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric fibres of locally finitely presented morphisms and etale covering families are locally noetherian schemes",
+   "results": "{\"t\": \"2026-10-23T10:06:29Z\", \"tool\": \"leansearch\", \"query\": \"Geometric fibres of locally finitely presented morphisms and etale covering families are locally noetherian schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian\", \"AlgebraicGeometry.IsLocallyNoetherian\", \"AlgebraicGeometry.isLocallyNoetherian_of_affine_cover\", \"AlgebraicGeometry.IsNoetherian.noetherianSpace\", \"AlgebraicGeometry.IsLocallyNoetherian.mk\", \"AlgebraicGeometry.instIsLocallyNoetherianXScheme\", \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"AlgebraicGeometry.LocallyOfFinitePresentation\"], \"digest\": \"6efe60379900b8e1\"}. Read Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:45--106, Morphisms/Etale.lean:138--148 and Noetherian.lean:239--250. Hits give separate flatness, finite-presentation, base-change and Noetherian APIs, not this source-family theorem with its specified geometric-fibre preparation. Target base-change descent does not itself prove source-precomposition descent.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.Flat",
+   "results": "{\"t\": \"2026-10-23T10:06:30Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.Flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Etale.of_formallyUnramified_of_flat\", \"AlgebraicGeometry.Etale.iff_flat_and_formallyUnramified\", \"AlgebraicGeometry.instFaithfulOverSchemePullbackOfSurjectiveOfFlatOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.instDescendsAlongSchemeLocallyOfFinitePresentationMinMorphismPropertySurjectiveFlatQuasiCompact\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.Scheme.Hom.isLocallyConstant_finrank\"], \"digest\": \"2c507d8605ee08b2\"}. Read Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:45--106, Morphisms/Etale.lean:138--148 and Noetherian.lean:239--250. Hits give separate flatness, finite-presentation, base-change and Noetherian APIs, not this source-family theorem with its specified geometric-fibre preparation. Target base-change descent does not itself prove source-precomposition descent.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flatness and local finite presentation are etale local on the source and base change to an algebraically closed field gives finite type affine charts",
+   "results": "{\"t\": \"2026-10-23T10:08:55Z\", \"tool\": \"leanfinder\", \"query\": \"Flatness and local finite presentation are etale local on the source and base change to an algebraically closed field gives finite type affine charts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"RingHom.Etale.propertyIsLocal\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"Algebra.Etale.finitePresentation\", \"Algebra.isOpen_etaleLocus\", \"Algebra.etaleLocus_eq_univ_iff_etale\"], \"digest\": \"996720ba32632e85\"}. Read Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:45--106, Morphisms/Etale.lean:138--148 and Noetherian.lean:239--250. Hits give separate flatness, finite-presentation, base-change and Noetherian APIs, not this source-family theorem with its specified geometric-fibre preparation. Target base-change descent does not itself prove source-precomposition descent.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-nodal-family-etale-source-locality",
+  "date": "2026-10-22",
+  "group": "NR"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical semistable auxiliary branch of lem-trf-local-term-locality, Proof (1)--(2), via the strictification input to Temkin Remark 4.5.2: Nodal curves are etale local on the source. This is a general local tool for the explicit symmetric blowup calculation, not an alternate trace-formula route. Re-split of lem-trf-nodal-family-etale-source-locality: proof structural descent and reduction to a field (old steps 1--4); Descent labels lemma-flat-fpqc-local-source and lemma-locally-finite-presentation-fppf-local-source; algebra.tex lemma-base-change-finiteness (4); morphisms.tex lemma-finite-type-noetherian",
+   "via": [
+    "lem-trf-nodal-family-etale-source-locality",
+    "lem-trf-valuation-symmetric-nodal-blowup",
+    "lem-trf-valuation-marked-strictification",
+    "lem-trf-valuation-common-strict-semistable-refinement",
+    "lem-trf-valuation-semistable-dominates-stable",
+    "lem-trf-stable-modification-uniqueness-normal",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-etale-source-fibre-preparation",
+  "worker": "stage1",
+  "summary": "Proved flatness pointwise using the local-ring tower and faithful-flat reflection; reused fppf source locality for finite presentation. Wrote the projection-preserving fibre-product isomorphisms, pulled back the existing etale covering theorem, constructed covering affine tensor charts and applied the existing Noetherian ascent theorem. No new nodes; statement unchanged. Checked every cited statement and the empty cases.",
+  "blueprint": "Inherited historical semistable auxiliary branch of lem-trf-local-term-locality, old proof (1)--(2), via nodal source locality: structural descent and reduction to a field (old steps 1--4). The latest blueprint replaces the trace-level argument by contracting correspondences; this item remains a generic scheme-theoretic tool, not a replacement route. No equivalent standalone node found in the latest blueprint.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q151-0886caf34",
+  "group": "Q151",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q151-0886caf34 (reviewer sub-agent of L); spot-checked: I read the whole item at 0886caf3; there are no new nodes. Its statement and stmt_deps are byte-identical to side-live, so no target is weakened. The node is still unsplit on live and side-live, and no repair note exists for it. Each step checks out against its cited statements. Step 1 (forward flatness) composes the stalk maps O_S→O_X→O_U and uses flat-ring-map-comp, as in 036K. Step 2 (reverse flatness) uses flat-local-hom-faithfully-flat for B→E, then lem-trf-flatness-faithfully-flat-extension with N=B and E⊗_B B≅E, which is the 036K argument with 0584(2). Step 3 applies lem-trf-lfp-fppf-source-locality (036N); its hypotheses (a jointly surjective, flat, lfp family) come from def-weil-etale-morphism. Step 4 writes out the comparison D_i≅U_i×_X C over C by universal properties and pulls back the covering with etale-covering-base-change. Step 5 builds affine charts: Spec R contains g's one-point image, R→A is f.p. by 01TQ, the open-immersion base change applies, Spec(Ω⊗_R A) comes from 01I4, and 05G5(4) gives finite presentation over Ω. Step 6 gets finite type from the definition (the affine opens of Spec Ω are ∅ and Spec Ω), shows Ω is Noetherian directly, and then applies 01T6. The empty cases (empty I, empty U_i, empty fibre with the zero algebra) are handled, and the example k′/k finite separable is consistent. Every Stacks tag resolves to its cited label in literature/stacks-project, and no SGA is used. Off-unit citations are all Mathlib leaves or definitions, so tool_uses=[] is correct. Advisory only: steps 1–2 re-derive what lem-trf-relative-flatness-source-cover gives with G=O_Y (same unit); this is legitimate and fully cited. The proof is about 4600 characters across six short steps, all citing existing nodes, so no uncited argument needs new nodes. The report mentions citations.json and searches.jsonl, but the commit does not contain them; this does not affect the DAG."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleSourceFibrePreparation",
+  "declaration": "AlgebraicGeometry.etale_source_fibre_preparation",
+  "declarations": [
+   "AlgebraicGeometry.etale_source_fibre_preparation",
+   "AlgebraicGeometry.geometric_fibre_finite_presentation_affine_chart",
+   "AlgebraicGeometry.geometric_fibre_finite_presentation_affine_charts_cover"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSourceFibrePreparation.lean",
+  "statement": "theorem etale_source_fibre_preparation {X S : Scheme.{u}} (f : X ⟶ S) {I : Type v} (U : I → Scheme.{u}) (h : ∀ i : I, U i ⟶ X) [∀ i : I, Etale (h i)] (hjoint : ∀ x : X, ∃ (i : I) (y : U i), h i y = x) : (Flat f ↔ ∀ i : I, Flat (h i ≫ f)) ∧ (LocallyOfFinitePresentation f ↔ ∀ i : I, LocallyOfFinitePresentation (h i ≫ f)) ∧ (LocallyOfFinitePresentation f → ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ S), (∀ i : I, ∃! a : pullback (h i ≫ f) g ≅ pullback (h i) (pullback.fst f g), a.hom ≫ pullback.fst (h i) (pullback.fst f g) = pullback.fst (h i ≫ f) g ∧ a.hom ≫ pullback.snd (h i) (pullback.fst f g) ≫ pullback.snd f g = pullback.snd (h i ≫ f) g) ∧ (∀ i : I, Etale ((pullbackRightPullbackFstIso f g (h i)).inv ≫ pullback.snd (h i) (pullback.fst f g))) ∧ (∀ x : (pullback f g : Scheme.{u}), ∃ (i : I) (y : (pullback (h i ≫ f) g : Scheme.{u})), ((pullbackRightPullbackFstIso f g (h i)).inv ≫ pullback.snd (h i) (pullback.fst f g)) y = x) ∧ LocallyOfFiniteType (pullback.snd f g) ∧ IsLocallyNoetherian (pullback f g) ∧ ∀ i : I, LocallyOfFiniteType (pullback.snd (h i ≫ f) g) ∧ IsLocallyNoetherian (pullback (h i ≫ f) g))",
+  "branch": "newtargets-dag",
+  "by": "Q26",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "All clauses are carried by the main theorem and the two recorded affine-chart theorems: geometric_fibre_finite_presentation_affine_chart and geometric_fibre_finite_presentation_affine_charts_cover. Canonical comparison uses Mathlib pullbackRightPullbackFstIso, not a new construction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d1e6c3208",
+  "group": "Q26",
+  "result": "pass",
+  "note": "Read node, 11 stmt_dep records, Stacks 0C5D (curves.tex:4823) and all cited tags, module and report. The item node differs from side-live only by its lean record, which matches the file verbatim. Flat/lfp equivalences carry no extra hypotheses. The canonical D_i≅U_i×_X C is stated as unique and pinned by both projections; Mathlib's pullbackRightPullbackFstIso.inv satisfies both projection conditions, so it is that iso and the e_i built from it are étale and jointly surjective. Fibres are LocallyOfFiniteType and IsLocallyNoetherian. The chart theorem fixes both Algebra structures via ha/hg (b mono) and gives Spec(Ω⊗_R A) with both projections specified plus FinitePresentation over Ω; the cover theorem gives a chart through every point of C; U_i follows by f:=h i≫f. Edge cases (empty I/X/fibre/U_i, zero A) are covered; no qc/sep/Noetherian/Nonempty assumptions; index universe free, Ω in the scheme universe as Spec requires. def-weil-field and def-weil-algebraic-closure are Mathlib leaves (Field, IsAlgClosed). Plain imports are proof-dep modules required by the brief. Docstrings and line widths OK; no defs, sorry only, no name collision. No files changed, so no compile."
+ }
+}

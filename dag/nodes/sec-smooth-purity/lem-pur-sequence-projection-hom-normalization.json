@@ -1,0 +1,257 @@
+{
+ "id": "lem-pur-sequence-projection-hom-normalization",
+ "kind": "statement",
+ "title": "Sequence projection and normalized whole-system Hom correspondence",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R$ and uniformizer $t$, and a finite-type $k$-scheme $W$ [def-weil-finite-field-fiber]. On a fixed small skeleton $\\mathcal V=W_{\\mathrm{proet}}$ set $B_n=(R/t^n)_W$ for $n\\ge1$ and $A=\\lim_nB_n$. Let $\\mathcal T$ be the ringed sequence site with ring $B=(B_n)_n$, and let $\\mathscr S_W=\\operatorname{Mod}_{\\mathcal T}(B)$ be its strict quotient-semilinear module systems [def-coef-ringed-sequence-site]. Use ordinary unbounded derived categories and cochain shifts, with $d_{K[r]}=(-1)^r d_K$ [def-weil-abstract-derived-category]. Fix a supplied coefficient calculus $S$ with its coherence data, reduction $\\mathcal R$ and total limit $\\mathcal L=R\\lim D(U)$ [lem-coef-derived-system-evaluation-calculus]; $U$ is termwise scalar restriction along $A\\to B_n$.\n\nThere is a canonical ringed projection $p:(\\operatorname{Sh}(\\mathcal T),B)\\to(\\operatorname{Sh}(\\mathcal V),A)$ [def-pur-ringed-topos-morphism-of-universes], with underlying constant-system inverse image $c$ and structural map $cA\\to B$ given by the quotient projections. It factors as $p=g\\circ a$ through $(\\operatorname{Sh}(\\mathcal T),cA)$, where $a$ has identity underlying geometric morphism, $a_*=U$ is exact, and $g_*=\\lim$. Its ordinary module adjunction is\n$$p^*Q=(Q\\otimes_A B_n)_n,\\qquad p_*M=\\lim UM.$$\nFor $h:Q\\to\\lim UM$ its adjunct has components $f_n(x\\otimes b)=b\\pi_nh(x)$, where $\\pi_n$ is the limit projection; conversely $f$ has transpose $x\\mapsto(f_n(x\\otimes1))_n$. These inverse correspondences are natural sheaf-module correspondences, including the quotient transitions.\n\nLet $\\alpha:Lp^*\\xrightarrow{\\sim}\\mathcal R$ be the canonical comparison of universal left-derived functors, normalized on flat-term K-flat representatives by the same strict quotient tensor complex [def-pc-kflat-complex, def-pc-flat-sheaf-modules]. Let $\\kappa:Rp_*\\xrightarrow{\\sim}\\mathcal L$ be the canonical composition comparison for $p=g\\circ a$, normalized on every K-injective $B$-complex $I$ and every K-injective replacement $j:UI\\to J$ by the class of $\\lim j$ [def-pur-kinjective-complex, lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. Then $\\alpha,\\kappa$ identify the canonical derived adjunction $Lp^*\\dashv Rp_*$ with the specified adjunction $\\mathcal R\\dashv\\mathcal L$ of $S$, on the entire derived system Hom sets. Explicitly, for every flat-term K-flat complex $Q$, K-injective $B$-complex $I$, chain map $f:p^*Q\\to I$ and replacement $j:UI\\to J$, its transpose under this identification is represented by\n$$Q\\xrightarrow{\\operatorname{adj}_0(f)}\\lim UI\\xrightarrow{\\lim j}\\lim J,$$\nwhere $\\operatorname{adj}_0(f)$ is the ordinary transpose just specified. The unit and counit of $S$ are the identity transposes for precisely this derived Hom correspondence. The correspondence is natural in all derived inputs and independent of resolution choices. Equality on evaluated Hom sets is not a hypothesis.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+  "place": "Old proof steps 1, 2 and 7: construction and full Hom identification for the coefficient-comparison sentence of fix-prop-coherence.proof.md; Stacks Tag 03D7 (sites-modules.tex, lemma-adjoint-pullback-pushforward-modules), and Tag 09T5 (derived.tex, lemma-derived-adjoint-functors), with agent resolution normalization."
+ },
+ "stmt_deps": [
+  "def-coef-ringed-sequence-site",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "def-pur-kinjective-complex",
+  "def-pur-ringed-topos-morphism-of-universes",
+  "def-weil-abstract-derived-category",
+  "def-weil-finite-field-fiber",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "def-pur-sequence-adjoint-resolution-data"
+ ],
+ "proof": [
+  {
+   "text": "Construct ordinary quotient adjoints O together with the constant-ring factorization H. Construct the universal derived data A for this O and H, and assemble D=(O,H,A).",
+   "uses": [
+    "lem-pur-sequence-ordinary-factorization",
+    "lem-pur-sequence-derived-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Coefficient-comparison paragraph, via original sequence-projection normalization proof steps."
+   }
+  },
+  {
+   "text": "Expand both adjunction Hom equivalences as their unit followed by the right functor on the input map. Replace the supplied unit by D.derived.unit. Naturality of D.derived.right identifies the remaining composites. This proves the whole-system Hom formula on arbitrary derived inputs.",
+   "uses": [
+    "def-pur-sequence-adjoint-resolution-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/CategoryTheory/Adjunction/Basic.lean",
+    "place": "Adjunction.homEquiv_unit; naturality of the right comparison."
+   }
+  },
+  {
+   "text": "Apply the whole-Hom formula to the representative map. Cancel D.derived.left.hom with its inverse, use D.derived.hom_normalization, reassociate, and apply D.derived.composition_model. This gives the simultaneous-replacement formula exactly.",
+   "uses": [
+    "def-pur-sequence-adjoint-resolution-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Coefficient-comparison paragraph, via original sequence-projection normalization proof steps."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-sequence-ordinary-factorization",
+  "lem-pur-sequence-derived-normalization",
+  "def-pur-sequence-adjoint-resolution-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Ordinary/derived construction separated; whole-Hom and simultaneous-replacement equations proved by unit naturality and the normalized data fields."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sequenceSite|StrictRingSystem|pullbackPushforwardAdjunction",
+   "results": "Hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean; 25 total hits. Read the returned candidates; they concern generic adjunction, scalar extension or K-injective infrastructure, not this normalized quotient-sequence comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match: the quotient-system comparison with its stated representative normalization is not supplied by these hits"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Aa]djunction|[Aa]djunction.*derived|pullbackPushforwardAdjunction",
+   "results": "Hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean; 25 total hits. Read the returned candidates; they concern generic adjunction, scalar extension or K-injective infrastructure, not this normalized quotient-sequence comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match: the quotient-system comparison with its stated representative normalization is not supplied by these hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived Hom adjunction for ringed sequence projection agrees with the supplied coefficient reduction total limit calculus under canonical resolution comparisons",
+   "results": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derived",
+   "results": "Hits: CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derived_unit; 3 total hits. Read the returned candidates; they concern generic adjunction, scalar extension or K-injective infrastructure, not this normalized quotient-sequence comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match: the quotient-system comparison with its stated representative normalization is not supplied by these hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On K-flat and K-injective representatives the derived quotient reduction and inverse limit adjunction is the scalar tensor transpose followed by limit of the K-injective replacement, preserving the canonical unit and counit",
+   "results": "Hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, DerivedCategory.quotientCompQhIso, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_app_assoc, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc, CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_assoc, CategoryTheory.Functor.toRightDerivedZero; 8 total hits. Read the returned candidates; they concern generic adjunction, scalar extension or K-injective infrastructure, not this normalized quotient-sequence comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match: the quotient-system comparison with its stated representative normalization is not supplied by these hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constant system geometric morphism for an inverse sequence of ring sheaves and its derived tensor inverse limit adjunction with normalized unit and counit on system Hom sets",
+   "results": "Hits: LightCondMod.LocallyConstant.adjunction, SheafOfModules.PullbackConstruction.adjunction, Condensed.profiniteSolidCounit, CategoryTheory.constantSheafAdj_counit_w, LightCondensed.ihomPoints_symm_comp, LightCondensed.freeForgetAdjunction, LightCondMod.ofSheafLightProfinite, LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor; 8 total hits. Read the returned candidates; they concern generic adjunction, scalar extension or K-injective infrastructure, not this normalized quotient-sequence comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match: the quotient-system comparison with its stated representative normalization is not supplied by these hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor and inverse limit adjunction for a strict quotient sequence of sheaf modules agrees on whole derived Hom sets with the ordinary tensor transpose on K-flat and K-injective complexes",
+   "results": "Read hits: LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.free_internallyProjective_iff_tensor_condition, localCohomology.diagram, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition; 8 hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: generic ordinary/derived adjunction infrastructure does not state the quotient-sequence projection and its normalized identification with the supplied coefficient calculus"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derived",
+   "results": "Read hits: CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derived_unit; 3 hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: generic ordinary/derived adjunction infrastructure does not state the quotient-sequence projection and its normalized identification with the supplied coefficient calculus"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Aa]djunction|pullbackPushforwardAdjunction|sequenceSite",
+   "results": "Read hits: Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; 25 hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: generic ordinary/derived adjunction infrastructure does not state the quotient-sequence projection and its normalized identification with the supplied coefficient calculus"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constant system ringed topos projection derived tensor quotient reduction and total derived inverse limit adjunction with normalized representative Hom correspondence",
+   "results": "Read hits: CategoryTheory.Localization.HasProductsOfShapeAux.adj, CondensedMod.LocallyConstant.adjunction, LightCondMod.LocallyConstant.adjunction, TensorProduct.toDirectLimit, TensorProduct.directLimitRight, TensorProduct.directLimitLeft, PresheafOfModules.limitCone_π_app_app, CategoryTheory.Sheaf.ΓNatIsoLim; 8 hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: generic ordinary/derived adjunction infrastructure does not state the quotient-sequence projection and its normalized identification with the supplied coefficient calculus"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical comparison of derived functor adjunctions is determined by the ordinary Hom transpose after K-flat and K-injective resolutions",
+   "results": "Read hits: CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Adjunction.derivedη_fac_app, CategoryTheory.Adjunction.derived'; 8 hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: generic ordinary/derived adjunction infrastructure does not state the quotient-sequence projection and its normalized identification with the supplied coefficient calculus"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-sequence-adjoint-resolution-shifts",
+  "date": "2026-10-22",
+  "group": "Q42"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Unit Step 2 transport through the reduction/total-limit adjunction; coefficient-comparison sentence of fix-prop-coherence.proof.md. Extracted from returned parent proof steps 1–3 and the adjunction-identification part of step 4. Agent resolution-normalized specialization of Stacks sites-cohomology.tex Tag 0D6E (lemma-derived-pushforward-composition). Old proof steps 1, 2 and 7: construction and full Hom identification for the coefficient-comparison sentence of fix-prop-coherence.proof.md; Stacks Tag 03D7 (sites-modules.tex, lemma-adjoint-pullback-pushforward-modules), and Tag 09T5 (derived.tex, lemma-derived-adjoint-functors), with agent resolution normalization.",
+   "via": [
+    "lem-pur-sequence-adjoint-resolution-shifts",
+    "lem-pur-reduction-limit-shift-adjunction",
+    "lem-pur-integral-realization-shift-coherence",
+    "lem-pur-adic-projection-shift-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-pur-sequence-projection-hom-normalization",
+  "worker": "stage1",
+  "summary": "Seven-step split with zero new nodes. Reused the existing general ringed sequence projection, derived adjunction and canonical transport to total limit. Wrote the ordinary inverse formulas and transition check, obtained the representative transpose via resolving-class normalization and lim j, and checked whole derived-system Hom coverage before identifying the supplied canonical units/counits. Statement unchanged.",
+  "blueprint": "thm-pur-rational-and-qbar-purity coefficient transport, via the recorded sequence-adjunction ancestors; realizes the coefficient-comparison paragraph of the current fix-prop-coherence.proof.md by the actual tensor/limit adjunction, preserving the compatibility unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-derived-system-evaluation-calculus",
+    "why": "Specified coefficient calculus and its canonical reduction/limit adjunction, exactly the object assumed in the item. This is an auxiliary tool below the unit, not a replacement for a compatibility or purity step."
+   },
+   {
+    "node": "lem-coef-sequence-projection-derived-adjunction",
+    "why": "Generic sequence-ring tensor/limit adjunction and universal K-flat model, including its full derived fraction-extension Hom bijection. This is an auxiliary tool below the unit, not a replacement for a compatibility or purity step."
+   },
+   {
+    "node": "lem-coef-sequence-pushforward-limit-projections",
+    "why": "Specified transport of the canonical sequence adjunction to total inverse limit, used as a tool to compare the supplied canonical calculus. This is an auxiliary tool below the unit, not a replacement for a compatibility or purity step."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic unbounded ringed-site flat-term K-flat replacements, used only for representative calculations. This is an auxiliary tool below the unit, not a replacement for a compatibility or purity step."
+   },
+   {
+    "node": "lem-pur-sequence-site-completion-projection",
+    "why": "Generic sequence-site construction supplies the geometric constant/limit projection for the actual quotient tower. This is an auxiliary tool below the unit, not a replacement for a compatibility or purity step."
+   },
+   {
+    "node": "lem-sfb-resolving-derived-adjunction-normalization",
+    "why": "Generic normalized Hom formula for universal derived functors of an additive adjunction; no coefficient-specific theorem is replaced. This is an auxiliary tool below the unit, not a replacement for a compatibility or purity step."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic full Hom computation into a K-injective, needed to cover whole system Hom sets. This is an auxiliary tool below the unit, not a replacement for a compatibility or purity step."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "why": "Generic universal ringed-topos pullback and its comparison on the flat-term K-flat resolving class. This is an auxiliary tool below the unit, not a replacement for a compatibility or purity step."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic canonical direct-image composition, explicitly normalized by lim j in the present factorization. This is an auxiliary tool below the unit, not a replacement for a compatibility or purity step."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic K-injective resolutions on the two small ringed sites, without a boundedness hypothesis. This is an auxiliary tool below the unit, not a replacement for a compatibility or purity step."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NC-c23bbe37e",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-c23bbe37e (reviewer sub-agent of L); spot-checked: Read in full: the item, its 7 steps (0 new nodes) and the statement of every cited node. The statement and stmt_deps are identical to live. The live node is still unsplit and has no repair note of its own; it was created by the Q42 re-split of its parent. All three arguments Q42 handed to this node (old parent steps 1, 2, 7) are still here. Step 1 now cites lem-pur-sequence-site-completion-projection for the constant/limit geometric morphism instead of building it by hand, then factors p=g∘a with a_*=U exact and g_*=lim. Step 2 writes out the inverse tensor/limit correspondence. I checked balancing, the semilinear transition equation τ_n f_{n+1}(x⊗b)=b̄π_n h(x) and that the two maps are inverse; marking it elementary is correct. Step 3: K-flat resolutions, and derived pullback inverts quasi-isomorphisms on flat-term K-flat representatives, with the same strict complex as the calculus's R. Step 4: smallness holds, and the composition node gives κ=[lim j] without assuming UI is K-injective. Step 5: every hypothesis of lem-sfb-resolving-derived-adjunction-normalization holds, giving the transpose [lim j][adj_0 f]. Step 6: by lem-weil-pbc-kinjective-hom-derived (Stacks 070I(3)) every derived morphism comes from a chain map, so the formula pins down the whole Hom bijection; this is the fraction-extension bijection of Stacks 09T5/9517. Step 7: transporting the adjunction gives E_S(v)=κ_N E_p(vα_P); I checked the unit and counit as identity transposes, so nothing is inferred from evaluations (Milnor/lim¹ is noted). Stacks tags and labels match: 03D7, 0940, 06YY, 0D6E, 09T5, 070I. No SGA. Edge cases: W empty, zero complex, j=id, A→B_n not flat, transitions not surjective. The 10 declared tool_uses are generic and accepted. Advisory: step 7 identifies the 'specified comparison' of lem-coef-sequence-pushforward-limit-projections with κ. Only that node's proof (step 1) says it is the lim j-normalized composition comparison; its statement does not, and projection preservation alone would not fix it. I accept this under the canonical-construction convention; maintainer: tighten that node's statement. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurSequenceProjectionHomNormalization",
+  "declaration": "WeilConjectures.purSequenceProjectionHomNormalization",
+  "file": "lean/Sheaf/Paper/PurSequenceProjectionHomNormalization.lean",
+  "statement": "theorem purSequenceProjectionHomNormalization (F : FiniteFieldDatum.{t}) (hl : l ≠ F.p) [W.Over (Spec (.of F.k))] [LocallyOfFiniteType (W ↘ Spec (.of F.k))] [QuasiCompact (W ↘ Spec (.of F.k))] (S : CoefficientDerivedSystemCalculus l E W) (hS : CoefficientDerivedSystemCoherence l E W S) : ∃ D : PurSequenceResolutionData l E W S, (∀ (P : DerivedCategory (scalarReductionSource l E W)) (N : coefficientSequenceDerived l E W) (v : S.reduction.obj P ⟶ N), S.adjunction.homEquiv P N v = D.derived.adjunction.homEquiv P N (D.derived.left.hom.app P ≫ v) ≫ D.derived.right.hom.app N) ∧ (∀ (Q : CochainComplex (scalarReductionSource l E W) ℤ) (hQ : CochainComplex.IsKFlatIndependentCoefficients (J := Scheme.ProEt.topology W) (R := completedIntegralCommRingSheafUnrestricted l E W) Q) (flatQ : ∀ i : ℤ, SheafOfModules.IsFlatOnSite (J := Scheme.ProEt.topology W) (R := completedIntegralCommRingSheafUnrestricted l E W) (Q.X i)) (I : CochainComplex (coefficientSequenceModules l E W) ℤ) [I.IsKInjective] (f : (D.ordinary.pullback.mapHomologicalComplex (.up ℤ)).obj Q ⟶ I) (J : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ) [J.IsKInjective] (j : ((coefficientSequenceRestriction l E W).mapHomologicalComplex (.up ℤ)).obj I ⟶ J) [QuasiIso j], S.adjunction.homEquiv (DerivedCategory.Q.obj Q) (DerivedCategory.Q.obj I) (D.derived.left.inv.app (DerivedCategory.Q.obj Q) ≫ D.derived.ε.app Q ≫ DerivedCategory.Q.map f) ≫ (D.derived.model I J j).hom = DerivedCategory.Q.map ((D.ordinary.adjunction.mapHomologicalComplex (.up ℤ)).homEquiv Q I f) ≫ DerivedCategory.Q.map ((NatIso.mapHomologicalComplex D.ordinary.limit (.up ℤ)).hom.app I) ≫ DerivedCategory.Q.map (((lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤ scalarReductionSource l E W).mapHomologicalComplex (.up ℤ)).map j))",
+  "branch": "sheaf-dag",
+  "by": "Q23",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-29c275263",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Read the item node, all 10 stmt_deps, the live PurSequenceAdjointResolutionData record (Ordinary/Derived/Factorization structures), the parent shift theorem and the calculus adjunction/CoefficientReductionPresentation. The node changes only lean plus one stmt_dep, def-pur-sequence-adjoint-resolution-data, which landed 2026-10-21 and is on base. Statement is verbatim with the file; one sorry; no new defs; docstrings carry source, blueprint and the 7 steps. Clauses checked: setup hypotheses; projection p, factorization g∘a, a_*=U exact, g_*=lim; tensor/limit adjunction with transpose formulas; alpha via left_model; kappa via composition_model/model_eq; whole-Hom equation over all P,N,v; second clause typed by hand with alpha's inverse at the input and the limit iso plus lim j; unit/counit fields. Both clauses follow from the record's unit, hom_normalization and composition_model fields, so the content is existence of a fully pinned D, as the node claims; not hollow, and consistent with the parent split. Edge cases: empty W, zero complexes, j=id, independent universes. No compile: no file changed (the worker reports clean per-file compiles). Advisories: alpha pinned through the calculus's evaluation-level presentation (dependency design); some proof-dependency modules imported plainly; lem-weil-pbc-kinjective-hom-derived has no Lean record yet."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S6",
+  "result": "pass",
+  "landing": "20261024T191050-L-238762",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

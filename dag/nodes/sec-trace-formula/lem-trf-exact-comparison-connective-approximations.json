@@ -1,0 +1,213 @@
+{
+ "id": "lem-trf-exact-comparison-connective-approximations",
+ "kind": "statement",
+ "title": "Exact comparisons are detected on approximations with increasingly connective tails",
+ "statement": "Let $\\mathcal T$ be a triangulated category [def-weil-triangulated-category], let $\\mathcal A$ be an abelian category [def-sp-abelian], and fix its unbounded derived category $D(\\mathcal A)$ with cohomology functors $H^d$ [def-weil-abstract-derived-category]. Let $F,G:\\mathcal T\\to D(\\mathcal A)$ be exact functors with specified shift isomorphisms, and let $e:F\\Rightarrow G$ be a natural transformation compatible with these isomorphisms, so that it gives a morphism between the image distinguished triangles. Fix $K\\in\\mathcal T$. For every $n\\in\\mathbf Z$, suppose given a distinguished triangle $A_n\\xrightarrow{i_n}K\\to E_n\\to A_n[1]$. Suppose $e_{A_n}$ is an isomorphism for every $n$, and suppose there exists a single integer $c$ such that for every $n$ and $r\\le n-c$ one has $H^r(F(E_n))=H^r(G(E_n))=0$. Then $e_K:F(K)\\to G(K)$ is an isomorphism. More precisely, for every $d\\in\\mathbf Z$ and every $n\\ge d+c$, both $H^d(F(i_n))$ and $H^d(G(i_n))$ are isomorphisms, and\n$$H^d(e_K)=H^d(G(i_n))\\circ H^d(e_{A_n})\\circ H^d(F(i_n))^{-1}.$$\nNo boundedness of $K$, no compatibility maps between different $A_n$, and no preservation of infinite limits or colimits is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A69, lemma-internal-hom-evaluate-isomorphism-technical, proof: The sentence after the truncation triangle: reduce the isomorphism to the truncated case and a uniform cohomological lower bound for both tails; old item Step 6, abstracted to exact functors."
+ },
+ "stmt_deps": [
+  "def-weil-triangulated-category",
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Fix $d\\in\\mathbf Z$ and $n\\ge d+c$. Then $d-1\\le d\\le n-c$. For each $J\\in\\{F,G\\}$, exactness of $J$ sends the given triangle to a distinguished triangle $J(A_n)\\xrightarrow{J(i_n)}J(K)\\to J(E_n)\\to J(A_n)[1]$. The long exact cohomology sequence gives the exact segment $H^{d-1}(J(E_n))\\to H^d(J(A_n))\\xrightarrow{H^d(J(i_n))}H^d(J(K))\\to H^d(J(E_n))$. Both outside terms are zero by the tail hypothesis. Thus the middle arrow has zero kernel and cokernel, hence is mono and epi. To spell out invertibility in the abelian category: a mono $a$ is a kernel of some $b$; since $a$ is epi and $ba=0$, $b=0$, and the universal property of its kernel identifies $a$ with the identity kernel of the zero map. Consequently $H^d(F(i_n))$ and $H^d(G(i_n))$ are isomorphisms.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-sf-derived-homology-long-exact",
+    "def-sp-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A69, label lemma-internal-hom-evaluate-isomorphism-technical, proof, reduction after the truncation triangle; abstract cohomological argument made explicit."
+   }
+  },
+  {
+   "text": "Naturality of $e$ at $i_n:A_n\\to K$ says $e_K\\circ F(i_n)=G(i_n)\\circ e_{A_n}$. Apply the cohomology functor $H^d$ and compose on the right with $H^d(F(i_n))^{-1}$ from Step 1. Functoriality gives precisely $H^d(e_K)=H^d(G(i_n))\\circ H^d(e_{A_n})\\circ H^d(F(i_n))^{-1}$. The middle factor is invertible: applying $H^d$ to the two inverse identities for $e_{A_n}$ gives its inverse $H^d(e_{A_n}^{-1})$. All three factors are therefore isomorphisms, so $H^d(e_K)$ is an isomorphism for every $n\\ge d+c$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A69, label lemma-internal-hom-evaluate-isomorphism-technical, proof, reduction after the truncation triangle; abstract cohomological argument made explicit."
+   }
+  },
+  {
+   "text": "For every integer $d$ take $n=d+c$. Step 2 proves that $H^d(e_K)$ is an isomorphism. The cohomology criterion for the unbounded derived category now implies that $e_K$ is an isomorphism. This argument chooses a separate approximation for each degree and uses no relations between the $A_n$, no boundedness of $K$, and no infinite limit or colimit.",
+   "uses": [
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A69, label lemma-internal-hom-evaluate-isomorphism-technical, proof, reduction after the truncation triangle; abstract cohomological argument made explicit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-triangulated-category",
+  "lem-sf-derived-homology-long-exact",
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A69, label lemma-internal-hom-evaluate-isomorphism-technical, proof, reduction after the truncation triangle; abstract cohomological argument made explicit. The source gives the tensor/internal-Hom special case; this proof supplies its abstract exact-functor argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Tt]runc.*[Ii]sIso|[Ii]sIso.*[Tt]runc|[Tt]ail.*[Cc]omparison",
+   "results": "25 hits; top=['Mathlib/Algebra/Homology/Embedding/CochainComplex.lean', 'Mathlib/Algebra/Homology/Embedding/CochainComplex.lean', 'Mathlib/Algebra/Homology/Embedding/CochainComplex.lean', 'Mathlib/Algebra/Homology/Embedding/CochainComplex.lean', 'Mathlib/Algebra/Homology/Embedding/CochainComplex.lean', 'Mathlib/Algebra/Homology/Embedding/TruncLEHomology.lean', 'Mathlib/Algebra/Homology/Embedding/TruncLEHomology.lean', 'Mathlib/Algebra/Homology/Embedding/TruncLEHomology.lean']; subdirectory=Algebra/Homology; note=; digest=81bd8c3c471c80a9",
+   "date": "2026-10-22",
+   "verdict": "no match: support, injective-resolution, exact-sequence and truncation infrastructure do not state this comparison with these hypotheses in one specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural comparison of exact derived functors is invertible if invertible on all upper truncations and the cohomology of both image tails vanishes in every fixed degree for sufficiently large truncation",
+   "results": "0 hits; top=[]; subdirectory=; note=service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; digest=4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, CategoryTheory.NatTrans, CategoryTheory.IsIso",
+   "results": "0 hits; top=[]; subdirectory=; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: support, injective-resolution, exact-sequence and truncation infrastructure do not state this comparison with these hypotheses in one specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact natural transformation between functors from a triangulated category to a derived category is an isomorphism on K if it is an isomorphism on approximations A n and both images of the cone have cohomology vanishing through n-c",
+   "results": "8 hits; top=['DerivedCategory.triangleOfSESIso', 'CategoryTheory.ShortComplex.ShortExact.singleTriangleIso', 'CategoryTheory.Functor.IsHomological.exact', 'CategoryTheory.Functor.map_distinguished_exact', 'CategoryTheory.ShortComplex.ShortExact.singleTriangleIso_hom_hom₁', 'CategoryTheory.Functor.mem_homologicalKernel_W_iff', 'CochainComplex.mappingCone.quasiIso_descShortComplex', 'DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE']; subdirectory=; note=; digest=34d297b97f8216e8",
+   "date": "2026-10-22",
+   "verdict": "no match: support, injective-resolution, exact-sequence and truncation infrastructure do not state this comparison with these hypotheses in one specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Detecting an isomorphism of exact functors on an unbounded object from approximations whose two image cones are increasingly connective",
+   "results": "8 hits; top=[\"CategoryTheory.ComposableArrows.Exact.isIso_map'\", 'CategoryTheory.Functor.exact_tfae', 'CategoryTheory.Functor.IsEventuallyConstantTo.isIso_map', 'CategoryTheory.Functor.IsEventuallyConstantFrom.isIso_map', 'CategoryTheory.ComposableArrows.exact_iff_of_iso', 'CategoryTheory.OrthogonalReflection.isIso_toSucc_iff', 'CategoryTheory.ComposableArrows.exact_of_iso', 'CategoryTheory.Functor.IsEventuallyConstantFrom.isoMap']; subdirectory=; note=; digest=76cfc3dbecd27d29",
+   "date": "2026-10-22",
+   "verdict": "no match: support, injective-resolution, exact-sequence and truncation infrastructure do not state this comparison with these hypotheses in one specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso.*(approx|cone)|approx.*[Ii]sIso|isIso_homologyMap_mor",
+   "results": "0 hits; top=[]; subdirectory=Algebra/Homology/DerivedCategory; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: returned triangle, localization, derived-zero comparison or cohomology infrastructure does not state the exact-functor approximation criterion; the cohomology criterion hit is reused as existing leaf lem-weil-pbc-unbounded-derived-iso-cohomology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural transformation between exact functors to an unbounded derived category is an isomorphism from approximations with cohomologically vanishing cones",
+   "results": "8 hits; top=['CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective', 'CategoryTheory.instIsIsoAppFromLeftDerivedZeroOfProjective', 'CategoryTheory.instIsIsoFunctorToRightDerivedZero', 'CategoryTheory.Functor.toRightDerivedZero', 'CategoryTheory.AdditiveFunctor.ofExact_map', 'CategoryTheory.RightExactFunctor.ofExact_map', 'CategoryTheory.instIsIsoFunctorFromLeftDerivedZero', 'CochainComplex.mappingCone.mapTrianglehIso']; subdirectory=; note=; digest=13fa8c23a5168206",
+   "date": "2026-10-22",
+   "verdict": "no match: returned triangle, localization, derived-zero comparison or cohomology infrastructure does not state the exact-functor approximation criterion; the cohomology criterion hit is reused as existing leaf lem-weil-pbc-unbounded-derived-iso-cohomology"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, CategoryTheory.NatTrans, CategoryTheory.IsIso",
+   "results": "0 hits; top=[]; subdirectory=; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: returned triangle, localization, derived-zero comparison or cohomology infrastructure does not state the exact-functor approximation criterion; the cohomology criterion hit is reused as existing leaf lem-weil-pbc-unbounded-derived-iso-cohomology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact natural transformation of triangulated functors to a derived category is an isomorphism on an object if it is invertible on approximations and the image cones have cohomology vanishing through n minus a fixed constant",
+   "results": "8 hits; top=['DerivedCategory.triangleOfSESIso', 'CategoryTheory.ShortComplex.ShortExact.singleTriangleIso', 'DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE', 'CategoryTheory.Functor.mem_homologicalKernel_W_iff', 'DerivedCategory.exists_iso_Q_obj_of_isLE', 'DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE', 'DerivedCategory.exists_iso_Q_obj_of_isGE', 'CategoryTheory.ShortComplex.ShortExact.singleTriangleIso_hom_hom₁']; subdirectory=; note=; digest=a12e31dd2a08b7bc",
+   "date": "2026-10-22",
+   "verdict": "no match: returned triangle, localization, derived-zero comparison or cohomology infrastructure does not state the exact-functor approximation criterion; the cohomology criterion hit is reused as existing leaf lem-weil-pbc-unbounded-derived-iso-cohomology"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_iff|isIso_homologyMap_mor",
+   "results": "11 hits; top=['Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean', 'Mathlib/Algebra/Homology/SpectralObject/Basic.lean', 'Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean', 'Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean', 'Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean', 'Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean', 'Mathlib/Algebra/Homology/ShortComplex/Basic.lean', 'Mathlib/Algebra/Homology/DerivedCategory/Plus.lean']; subdirectory=Algebra/Homology; note=; digest=b3683a07d6930cb1",
+   "date": "2026-10-22",
+   "verdict": "no match: returned triangle, localization, derived-zero comparison or cohomology infrastructure does not state the exact-functor approximation criterion; the cohomology criterion hit is reused as existing leaf lem-weil-pbc-unbounded-derived-iso-cohomology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Detect invertibility of a comparison using long exact cohomology sequences of triangles with increasingly vanishing tails and naturality on the approximation maps",
+   "results": "8 hits; top=['DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE', 'DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE', 'CochainComplex.cm5b', 'CochainComplex.isKInjective_of_injective_aux', 'DerivedCategory.right_fac_of_isStrictlyLE', 'DerivedCategory.left_fac_of_isStrictlyGE', 'CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply', 'CategoryTheory.Abelian.Ext.preadditiveYoneda_homologySequenceδ_singleTriangle_apply']; subdirectory=; note=; digest=8a22d5abbcf43d77",
+   "date": "2026-10-22",
+   "verdict": "no match: returned triangle, localization, derived-zero comparison or cohomology infrastructure does not state the exact-functor approximation criterion; the cohomology criterion hit is reused as existing leaf lem-weil-pbc-unbounded-derived-iso-cohomology"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-derived-evaluation-finite-injective",
+  "date": "2026-10-22",
+  "group": "NA"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Derived Hom from a semidualizing complex detects bounded coherent isomorphisms. Auxiliary algebraic input: Coherent biduality over a complete Noetherian local ring. Supporting input: Canonical unbounded biduality in the second paragraph of the proof of dualizing.tex Tag 0A7C, lemma-dualizing. The sentence after the truncation triangle: reduce the isomorphism to the truncated case and a uniform cohomological lower bound for both tails; old item Step 6, abstracted to exact functors.",
+   "via": [
+    "lem-trf-derived-evaluation-finite-injective",
+    "lem-trf-complete-local-coherent-duality",
+    "lem-trf-semidualizing-rhom-conservative",
+    "lem-trf-algebraic-relative-dualizing-isomorphism",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-exact-comparison-connective-approximations",
+  "worker": "stage1",
+  "summary": "Read Stacks 0A69 and made explicit its fixed-degree comparison argument: apply the long exact cohomology sequence to both exact image triangles, use vanishing in degrees d-1 and d for every n >= d+c, solve the naturality square, and apply the unbounded cohomology criterion. Reused two existing Mathlib leaves and created no nodes. Statement unchanged; boundary case n=d+c checked; no finished project declaration was found.",
+  "blueprint": "Auxiliary exact-functor detection argument under lem-trf-local-term-locality proof (1)--(2), via the existing ancestor chain in blueprint.from, specifically the truncation-tail reduction in lem-trf-derived-evaluation-finite-injective (Stacks 0A69). The item is not a unit key node; no chapter or unit route or realization changes.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q88-04ad834f9",
+  "group": "Q88",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-04ad834f9 (reviewer sub-agent of L); spot-checked: Read in full against Stacks 0A69, label lemma-internal-hom-evaluate-isomorphism-technical in more-algebra.tex. The item abstracts the proof's 'suffices' sentence: comparison isomorphisms on the approximations, plus one constant c for which both tails vanish in degrees <= n-c. The statement is byte-identical to live and true; the n=d+c boundary needs vanishing in degrees d-1 and d, and the hypothesis gives both. Step 1: exactness of F and G (def-weil-triangulated-category), the long exact sequence leaf lem-sf-derived-homology-long-exact (HomologySequence.exact1/2/3, lines 171-181 read) and mono+epi => iso in an abelian category, written out from def-sp-abelian. Step 2: the naturality square solved for H^d(e_K), correctly marked elementary. Step 3: lem-weil-pbc-unbounded-derived-iso-cohomology (DerivedCategory.isIso_iff, HomologySequence.lean:88-89 read). proof_deps equals the union of the step uses. No new nodes. No duplicate found by rg -L: the nearest nodes are bounded-below-hom-test, texact-truncation-comparison, bounded-flat-bifunctor-detection and tensor-comparison-stupid-tail, which state different criteria. The item is not in the route-pivot drop list and neither is its via chain. It is still unsplit in live and side-live, has no repair note and cites no SGA. Its only citer, derived-evaluation-finite-injective Step 5, uses exactly this statement. All off-unit citations are Mathlib leaves or definitions, so tool_uses is empty as it should be."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Triangulated.ExactComparisonConnectiveApproximations",
+  "declaration": "CategoryTheory.isIso_comparison_of_connective_approximations",
+  "file": "lean/Sheaf/CategoryTheory/Triangulated/ExactComparisonConnectiveApproximations.lean",
+  "statement": "theorem isIso_comparison_of_connective_approximations {T : Type uT} [Category.{vT} T] [Preadditive T] [HasZeroObject T] [HasShift T ℤ] [∀ n : ℤ, (shiftFunctor T n).Additive] [Pretriangulated T] [IsTriangulated T] {A : Type uA} [Category.{vA} A] [Abelian A] [HasDerivedCategory.{w} A] (F G : T ⥤ DerivedCategory A) [F.CommShift ℤ] [G.CommShift ℤ] [F.IsTriangulated] [G.IsTriangulated] (e : F ⟶ G) [NatTrans.CommShift e ℤ] (K : T) (P E : ℤ → T) (i : ∀ n : ℤ, P n ⟶ K) (p : ∀ n : ℤ, K ⟶ E n) (q : ∀ n : ℤ, E n ⟶ (P n)⟦(1 : ℤ)⟧) (hTriangle : ∀ n : ℤ, Triangle.mk (i n) (p n) (q n) ∈ distTriang T) (hApprox : ∀ n : ℤ, IsIso (e.app (P n))) (c : ℤ) (hTail : ∀ n r : ℤ, r ≤ n - c → IsZero ((DerivedCategory.homologyFunctor A r).obj (F.obj (E n))) ∧ IsZero ((DerivedCategory.homologyFunctor A r).obj (G.obj (E n)))) : IsIso (e.app K) ∧ ∀ d n : ℤ, d + c ≤ n → ∃ (hF : IsIso ((DerivedCategory.homologyFunctor A d).map (F.map (i n)))) (_hG : IsIso ((DerivedCategory.homologyFunctor A d).map (G.map (i n)))), (DerivedCategory.homologyFunctor A d).map (e.app K) = @inv A _ _ _ ((DerivedCategory.homologyFunctor A d).map (F.map (i n))) hF ≫ (DerivedCategory.homologyFunctor A d).map (e.app (P n)) ≫ (DerivedCategory.homologyFunctor A d).map (G.map (i n))",
+  "branch": "newtargets-dag",
+  "by": "Q71",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bfe5ab1b2",
+  "group": "Q71",
+  "result": "pass",
+  "note": "Lean statement matches the node clause by clause: triangulated T and abelian A as recorded; exact F,G with CommShift/IsTriangulated and NatTrans.CommShift e; three-arrow distinguished triangles indexed by n:ℤ with no transition maps; hApprox; one c with hTail for r ≤ n-c on both F and G. Conclusion: IsIso e_K in D(A), and for all d,n with d+c ≤ n, both H^d isos exist and H^d(e_K) = inv(H^d F i_n) ≫ H^d(e_{P n}) ≫ H^d(G i_n), correct order by naturality. At n=d+c the tail vanishes in degrees d-1 and d as the long exact sequence needs. lean.statement is copied exactly from the file; node differs from side-live only in the lean field; no new nodes or statement change. Docstrings carry source place, blueprint tag and all three proof steps; proof is sorry only; no duplicate in Sheaf, WeilConjectures or Mathlib; citer derived-evaluation-finite-injective Step 5 fits the interface. Not compiled (no file changed). Advisory: some imports may be transitively redundant (H9)."
+ }
+}

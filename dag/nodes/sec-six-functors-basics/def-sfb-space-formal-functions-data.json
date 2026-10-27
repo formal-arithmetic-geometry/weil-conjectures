@@ -1,0 +1,183 @@
+{
+ "id": "def-sfb-space-formal-functions-data",
+ "kind": "definition",
+ "title": "Normalized strict-local infinitesimal cohomology tower for formal functions",
+ "status": "split",
+ "import_flags": [],
+ "statement": "For a scheme $Y$ [def-pc-scheme], an algebraic space $X$ and map $f:X\\to Y$ [def-trf-algebraic-space], and an algebraically closed geometric point $\\bar y$ [def-weil-geometric-point], let $A$ and the module germ functor be the normalized ring and module colimits of pointed affine etale neighbourhoods [def-sfb-space-geometric-stalk-models]. A strict-local infinitesimal geometry consists of a local-ring structure on this $A$, a map $c:\\operatorname{Spec}A\\to Y$ equal on every affine pointed neighbourhood to its colimit germ map followed by its structure map, and spaces $X_n$ with both projections forming the pullback of $f$ along $\\operatorname{Spec}(A/\\mathfrak m^{n+1})\\to Y$ [lem-trf-space-fibre-products-etale-covers]. Consecutive transitions commute with both projections and the specified quotient-ring maps. Index $n\\in\\mathbb N$ denotes exponent $n+1$, so no exponent-zero fibre is included. Put $\\widehat A=\\operatorname{AdicCompletion}_{\\mathfrak m}A$ [def-weil-pbc-adic-completion]. For an original module $F$, its finite-level complex is actual ordinary tensor pullback of $F[0]$ [def-trf-space-etale-module-functors]. Use the existing small-model right derived module direct image [def-sfb-space-derived-module-calculus], affine module global sections [def-sfb-space-affine-hom-comparison], and completed scalars acting on each finite level by reduction $\\widehat A\\to A/\\mathfrak m^{n+1}$. All derived categories are the standard localizations [def-weil-abstract-derived-category], on the actual equivalent small ringed models. The canonical map $F[0]\\to Ri_{n,*}(i_n^*F)[0]$ is the derived-adjunction unit followed by the right image of the existing comparison from total derived tensor pullback to actual ordinary pullback [def-sfb-space-base-change-comparisons]; no flatness of $i_n$ is assumed. Tensor transitivity [def-sfb-space-module-tensor-composition] supplies the identification of consecutive restrictions. Pushforward composition is the right-adjoint conjugate, through the normalized derived adjunctions [def-sfb-space-affine-hom-comparison], of the canonical derived pullback composition [def-sfb-space-derived-pullback]. A normalized cohomology presentation records exactness of the existing geometric-stalk functor, the ordinary stalk/finite-sections and consecutive sections/direct-image compositors, and their derived compositors. The ordinary stalk compositor is required to send a germ to its direct-image projection on every finite-fibre chart lying over the canonical map to the pointed neighbourhood; the consecutive compositor is required to preserve every iterated chart projection. Their derived compositors satisfy the square with these ordinary compositors and the fixed right-derived units on every K-injective complex. Original-site modules use the existing sheafification structures [def-sfb-space-comm-algebra-sheaf]. Define $M_q$ by applying the geometric stalk to $H^q(Rf_*F[0])$, and $H_{n,q}$ by $H^q$ of actual derived affine module global sections of the finite-level complex, with its $\\widehat A$ action. Define $r_{n,q}:M_q\\to H_{n,q}$ by these derived unit/compositor maps and exact-stalk homology compatibility; define $H_{n+1,q}\\to H_{n,q}$ by the same derived restriction and tensor transitivity, and define the inverse system using these consecutive arrows. These structures specify the canonical maps by their chart and derived-unit equations; they assert no existence or isomorphism of the formal-functions map.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sfb-space-geometric-stalk-models",
+  "def-trf-space-etale-module-functors",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-affine-hom-comparison",
+  "def-sfb-space-base-change-comparisons",
+  "def-sfb-space-module-tensor-composition",
+  "def-sfb-space-derived-pullback",
+  "def-sfb-space-comm-algebra-sheaf",
+  "def-weil-pbc-adic-completion",
+  "def-weil-abstract-derived-category",
+  "def-weil-geometric-point"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 08B1, lemma-formal-functions-stalk and its proof; Tag 08AZ, theorem-formal-functions."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized infinitesimal fibres of an algebraic space at a geometric stalk, derived module restriction maps, and formal functions cohomology tower",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_hom_app\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(f : X ⟶ Y) [IsOpenImmersion f] (x : X) (M : Y.Modules) (hxU : x ∈ U) :\\n  ((restrictFunctor f).obj M).presheaf.germ U _ hxU ≫ (restrictStalkNatIso f x).hom.app M =\\n    M.presheaf.germ _ _ (by simpa)\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes, and let $\\\\mathcal{M}$ be a sheaf of $\\\\mathcal{O}_Y$-modules. Let $f^*\\\\mathcal{M}$ be the restriction of $\\\\mathcal{M}$ to $X$. For any point $x \\\\in X$,\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \": IsIso ((X.ofRestrict h).stalkMap x)\", \"doc\": \"Let $X$ be a locally ringed space and $U$ an open subset of $X$. Let $X|_U$ be the restriction of $X$ to $U$. The canonical inclusion morphism $i: X|_U \\\\to X$ induces for each point $x \\\\in U$ a ring h\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.isLocalHomStalkMap'\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"{X Y : LocallyRingedSpace.{u}} (f : X ⟶ Y) (x : X) : IsLocalHom (f.toHom.stalkMap x).hom\", \"doc\": \"For any morphism $f : X \\\\to Y$ between two locally ringed spaces, and for any point $x \\\\in X$, the ring homomorphism $\\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$ induced by $f$ at $x$ is a local rin\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.Hom.stalkMap\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"{X Y : LocallyRingedSpace.{u}} (f : Hom X Y) (x : X) : Y.presheaf.stalk (f.1.1 x) ⟶ X.presheaf.stalk x\", \"doc\": \"For a morphism of locally ringed spaces $f: X \\\\to Y$ and a point $x \\\\in X$, `stalkMap` defines the induced ring homomorphism from the stalk of the structure sheaf of $Y$ at $f(x)$, denoted $\\\\mathcal{O\"}\n  {\"name\": \"ModuleCat.Tilde.toOpen\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Tilde\", \"type\": \"(U : Opens (PrimeSpectrum.Top R)) : ModuleCat.of R M ⟶ (tildeInModuleCat M).obj (op U)\", \"doc\": \"For an open subset $ U $ of the prime spectrum $ \\\\operatorname{Spec}(R) $, this defines the restriction map from the module $ M $ localized at $ U $ to the sections of the sheaf $ \\\\widetilde{M} $ over\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.restrictStalkIso_inv_eq_ofRestrict\", \"module\": \"Mathlib.Geometry.RingedSpace.Stalks\", \"type\": \"{U : TopCat} (X : PresheafedSpace.{_, _, v} C) {f : U ⟶ (X : TopCat.{v})} (h : IsOpenEmbedding f) (x : U) :\\n  (X.restrictStalkIso h x).inv = (X.ofRestrict h).stalkMap x\", \"doc\": \"For a presheafed space $X$ over a category $\\\\mathcal{C}$, an open subset $U \\\\subseteq X$ with open embedding $f: U \\\\to X$, and a point $x \\\\in U$, the inverse of the stalk isomorphism $\\\\mathcal{F}_{X|_\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \": (X.restrict h).presheaf.stalk x ≅ X.presheaf.stalk (f x)\", \"doc\": \"For a locally ringed space $ X $, an open subset $ U $ with open embedding $ f: U \\\\to X $, and a point $ x \\\\in U $, the stalk of the restricted locally ringed space at $ x $ is isomorphic to the stalk\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.ofRestrict_stalkMap_isIso\", \"module\": \"Mathlib.Geometry.RingedSpace.Stalks\", \"type\": \"{U : TopCat} (X : PresheafedSpace.{_, _, v} C) {f : U ⟶ (X : TopCat.{v})} (h : IsOpenEmbedding f) (x : U) :\\n  IsIso ((X.ofRestrict h).stalkMap x)\", \"doc\": \"For a presheafed space $X$ over a category $\\\\mathcal{C}$, an open subset $U \\\\subseteq X$ with open embedding $f: U \\\\to X$, and a point $x \\\\in U$, the stalk map induced by the restriction morphism $X|_\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No matching algebraic-space geometric-stalk infinitesimal cohomology tower or canonical restriction interface."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"InjectiveResolution\", \"AdicCompletion\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No matching algebraic-space geometric-stalk infinitesimal cohomology tower or canonical restriction interface."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized algebraic space infinitesimal fibre cohomology tower with injective resolutions and canonical restriction maps",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Opensᵒᵖ CommRingCat\", \"doc\": \"The functor assigns to each open subset $ U $ of $ Y $ the integral closure of the ring of sections $ \\\\Gamma(Y, U) $ in $ \\\\Gamma(X, f^{-1}(U)) $, and to each inclusion $ V \\\\subseteq U $ the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (f : X ⟶ Y) → Y.presheaf ⟶ AlgebraicGeometry.Scheme.Hom.normalizationDiagram f\", \"doc\": \"A morphism from the presheaf of a scheme $ Y $ to the normalization diagram associated with a morphism $ f $, which encodes the integral closure data of $ Y $ in the context of the morphism $ f $.\"}\n  {\"name\": \"Algebra.H1Cotangent.map\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          (S' : Type u_2) →\\n            [inst_3 : CommRing S'] →\\n              [inst_4 : Algebra R S'] →\\n                (T : Type w) →\\n                  [inst_5 : CommRing T] →\\n \", \"doc\": \"The $ S' $-linear map from the first cotangent cohomology module of $ R \\to S' $ to that of $ S \\to T $, induced by the canonical algebra homomorphism between the generator-based extensions of $ S' $ an\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent.map\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {R' : Type u'} →\\n            {S' : Type v'} →\\n              [inst_3 : CommRing R'] →\\n                [inst_4 : CommRing S'] →\\n                  [inst_5 : Algebra R' S'] \", \"doc\": \"The linear map from the first cotangent cohomology module $ H^1(P) $ to $ H^1(P') $, induced by an algebra extension homomorphism $ f: P \\to P' $, which preserves the $ S $-module structure through sca\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens),\\n  CategoryTheory.CategoryStruct.comp ((AlgebraicGeometry.Scheme.Hom.normalizationOpenCover f).f U)\\n      (AlgebraicGeometry.Scheme.Hom.fromNo\", \"doc\": \"For an affine open subset $U$ of $Y$, the composition of the open cover morphism $f.\\\\text{normalizationOpenCover}.f(U)$ with the normalization morphism $f.\\\\text{fromNormalization}$ equals the composit\"}\n  {\"name\": \"Algebra.Extension.homInfinitesimal\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          (P₁ : Algebra.Extension R A) →\\n            (P₂ : Algebra.Extension R A) → [Algebra.FormallySmooth R P₁.Ring] → P₁.infinitesimal.Hom P₂.infinitesimal\", \"doc\": \"Given commutative rings $ R $ and $ A $ with an $ R $-algebra structure on $ A $, and formally smooth algebra extensions $ P_1 $ and $ P_2 $ of $ R $ over $ A $, this constructs a homomorphism between\"}\n  {\"name\": \"Algebra.Extension.cotangentComplex_injective_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] (P : Algebra.Extension R A)\\n  [Algebra.FormallySmooth R P.Ring], Function.Injective ⇑P.cotangentComplex ↔ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"For an $ R $-algebra extension $ P $, the cotangent complex map $ P.\\text{cotangentComplex} $ is injective if and only if the first cohomology group $ \\text{Algebra.H1Cotangent}(R, A) $ is trivial (i.e.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No matching algebraic-space geometric-stalk infinitesimal cohomology tower or canonical restriction interface."
+  },
+  {
+   "tool": "grep",
+   "query": "formalFunctions|formal_functions|SpaceFormalFunctionsData",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No matching algebraic-space geometric-stalk infinitesimal cohomology tower or canonical restriction interface."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n formalFunctions|SpaceFormalFunctionsData|formal_functions lean/WeilConjectures",
+   "results": "lean/WeilConjectures/AlgebraicGeometry/FormalFunctionsFiniteQuotientIso.lean:22:Proof: Write A = O_y, g' : X' → X and i'_n = formalFunctionsFiniteι f y n.\nlean/WeilConjectures/AlgebraicGeometry/FormalFunctionsFiniteQuotientIso.lean:26:units in formalFunctionsFiniteFMap. Coherence implies quasi-coherence, preserved\nlean/WeilConjectures/AlgebraicGeometry/FormalFunctionsFiniteQuotientIso.lean:31:then identifies b_n H^p(q_n) with formalFunctionsFinitePullback f y F p n.\nlean/WeilConjectures/AlgebraicGeometry/FormalFunctionsFiniteQuotientIso.lean:45:theorem formalFunctions_finite_quotient_iso {X Y : Scheme.{u}} (f : X ⟶ Y)\nlean/WeilConjectures/AlgebraicGeometry/FormalFunctionsFiniteQuotientIso.lean:61:    ∃ r : ∀ n : ℕ, formalFunctionsLocalCohomology f y F p →ₗ[Y.presheaf.stalk y]\nlean/WeilConjectures/AlgebraicGeometry/FormalFunctionsFiniteQuotientIso.lean:63:      (∀ (n : ℕ) (z : formalFunctionsLocalCohomology f y F p),\nlean/WeilConjectures/AlgebraicGeometry/FormalFunctionsFiniteQuotientIso.lean:65:      ∀ (n : ℕ) (z : formalFunctionsLocalCohomology f y F p),\nlean/WeilConjectures/AlgebraicGeometry/FormalFunctionsFiniteQuotientIso.lean:66:        r n z = formalFunctionsFinitePullback f y F p n z := by\nlean/WeilConjectures/AlgebraicGeometry/FormalFunctionsFiniteQuotientIso.lean:68:  obtain ⟨b, hb⟩ := formalFunctions_finite_quotient_iso_b f F hF y p\nlean/WeilConjectures/AlgebraicGeometry/FormalFunctionsFiniteQuotientIso.lean:69:  obtain ⟨r, hr, hp⟩ := formalFunctions_finite_quotient_iso_r f F hF y p b hb\nlean/WeilConjectures/AlgebraicGeometry/FormalFunctionsFiniteQuotientComparison.lean:54:theorem formalFunctions_finite_quotient_comparison {X Y : Scheme.{u}} (f : X ⟶ Y)\nlean/WeilConjectures/AlgebraicGeometry/FormalFunctionsFiniteQuotientComparison.lean:70:    ∃ r : ∀ n : ℕ, formalFunctionsLocalCohomology f y F p →ₗ[Y.presheaf.stalk y]\nlean/WeilConjectures/AlgebraicGeometry/FormalFunctionsFiniteQuotientComparison.lean:72:      (∀ (n : ℕ) (z : formalFunctionsLocalCohomology f y F p),\nlean/WeilConjectures/AlgebraicGeometry/FormalFunctionsFiniteQuotientComparison.lean:74:      ∀ a : formalFunctionsStalk f y F p →ₗ[Y.presheaf.stalk y]\nlean/WeilConjectures/AlgebraicGeometry/FormalFunctionsFiniteQuotientComparison.lean:75:          formalFunctionsLocalCohomology f y F p,\nlean/WeilConjectures/AlgebraicGeometry/FormalFunctionsFiniteQuotientComparison.lean:79:  obtain ⟨b, r, hr, hpull⟩ := formalFunctions_finite_quotient_iso f F hF y p\nlean/WeilConjectures/AlgebraicGeometry/FormalFunctionsFiniteQuotientComparison.lean:82:  exact formalFunctions_finite_quotient_maps f F hF y p n (r n) (hpull n) a ha\nlean/WeilConjectures/AlgebraicGeometry/FormalCompletionMapSurjectiveProper.lean:70:  obtain ⟨E, hE⟩ := globalSections_formalFunctions_complete_base I f H\nlean/WeilConjectures/AlgebraicGeometry/FormalFunctionsFiniteOpenUnitPasting.lean:123:formalFunctionsFiniteFMap along tensorPullback g. Its transpose is the i-unit,\nlean/WeilConjectures/AlgebraicGeometry/FormalFunctionsFiniteOpenUnitPasting.lean:142:theorem formalFunctions_finite_open_unit_pasting {X Y : Scheme.{u}} (f : X ⟶ Y)\nlean/WeilConjectures/AlgebraicGeometry/FormalFunctionsFiniteOpenUnitPasting.lean:151:    let j := formalFunctionsFiniteι f y n\nlean/WeilConjectures/AlgebraicGeometry/FormalFunctionsFiniteOpenUnitPasting.lean:171:        formalFunctionsFiniteFMap f y F n ≫ (Scheme.Modules.pushforward j).map\nlean/WeilConjectures/AlgebraicGeometry/FormalFunctionsFiniteOpenUnitPasting.lean:183:  let j := formalFunctionsFiniteι f y n\nlean/WeilConjectures/AlgebraicGeometry/FormalFunctionsFiniteOpenUnitPasting.lean:196:        (Scheme.Modules.pushforward g).map (formalFunctionsFiniteFMap f y F n) =\nlean/WeilConjectures/AlgebraicGeometry/FormalFunctionsFiniteOpenUnitPasting.lean:198:        (Scheme.Modules.pushforwardCongr (formalFunctionsFiniteι_snd f y n).symm).hom.app",
+   "date": "2026-10-24",
+   "verdict": "Scheme ordinary-Zariski formal functions exists; the existing geometric-stalk and affine-section APIs are reused. No matching space tower interface."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n formalFunctions|SpaceFormalFunctionsData|formal_functions lean/Sheaf",
+   "results": "lean/Sheaf/AlgebraicGeometry/FormalFunctionsFiniteSheafQuotientCore.lean:23:comparison for `formalFunctionsFiniteι`, gives the result.\nlean/Sheaf/AlgebraicGeometry/FormalFunctionsFiniteSheafQuotientCore.lean:25:theorem formalFunctionsFiniteι_isClosedImmersion {X Y : Scheme.{u}} (f : X ⟶ Y)\nlean/Sheaf/AlgebraicGeometry/FormalFunctionsFiniteSheafQuotientCore.lean:26:    (y : Y) (n : ℕ) : IsClosedImmersion (formalFunctionsFiniteι f y n) := by\nlean/Sheaf/AlgebraicGeometry/FormalFunctionsFiniteSheafQuotientCore.lean:28:      (formalFunctionsFiniteι f y n)\nlean/Sheaf/AlgebraicGeometry/FormalFunctionsFiniteSheafQuotientCore.lean:32:      (by simp [formalFunctionsFiniteι])).mp\nlean/Sheaf/AlgebraicGeometry/FormalFunctionsFiniteSheafQuotientCore.lean:33:    simpa [formalFunctionsFiniteι, formalFibreBaseMap, formalFibreι] using\nlean/Sheaf/AlgebraicGeometry/FormalFunctionsFiniteSheafQuotientCore.lean:119:`formalFunctionsFiniteFMap`, yielding the displayed isomorphism and equation.\nlean/Sheaf/AlgebraicGeometry/FormalFunctionsFiniteSheafQuotientCore.lean:121:theorem formalFunctionsFinite_sheaf_quotient_iso {X Y : Scheme.{u}} (f : X ⟶ Y)\nlean/Sheaf/AlgebraicGeometry/FormalFunctionsFiniteSheafQuotientCore.lean:129:        (Scheme.Modules.pushforward (formalFunctionsFiniteι f y n)).obj\nlean/Sheaf/AlgebraicGeometry/FormalFunctionsFiniteSheafQuotientCore.lean:132:        formalFunctionsFiniteFMap f y F n := by\nlean/Sheaf/AlgebraicGeometry/FormalFunctionsFiniteSheafQuotientCore.lean:137:  let i := formalFunctionsFiniteι f y n\nlean/Sheaf/AlgebraicGeometry/FormalFunctionsFiniteSheafQuotientCore.lean:145:      (by simp [i, formalFunctionsFiniteι])).mp\nlean/Sheaf/AlgebraicGeometry/FormalFunctionsFiniteSheafQuotientCore.lean:146:    simpa [i, p, formalFunctionsFiniteι, formalFibreBaseMap, formalFibreι] using\nlean/Sheaf/AlgebraicGeometry/FormalFunctionsFiniteSheafQuotientCore.lean:153:  have : IsClosedImmersion i := formalFunctionsFiniteι_isClosedImmersion f y n\nlean/Sheaf/AlgebraicGeometry/FormalFunctionsFiniteSheafQuotientCore.lean:164:    (formalFunctionsFiniteι_snd f y n).symm",
+   "date": "2026-10-24",
+   "verdict": "Scheme ordinary-Zariski formal functions exists; the existing geometric-stalk and affine-section APIs are reused. No matching space tower interface."
+  },
+  {
+   "tool": "grep",
+   "query": "DAG id def-sfb-space-formal-functions-data; blueprint_refs.py search formal-functions",
+   "results": "No node with this id. 0 blueprint nodes match formal-functions. Other formal-functions nodes are theorems, not a definition of this normalized tower.",
+   "date": "2026-10-24",
+   "verdict": "New definition needed."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-formal-functions-geometric-stalk",
+  "date": "2026-10-24",
+  "group": "Q31"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Quasi-coherent cohomological dimension of algebraic-space curve families. Supporting cohomology input: local scheme representability of the curve family, before using scheme cohomology. Supporting input in Tag 0E6F proof, first paragraph: the smooth covering with a relatively ample invertible module obtained from Tag 0DQ0. Picard-stack input in the smoothness paragraph of Tag 0DQ0 (lemma-polarized-curves-over-curves): moduli.tex Tag 0DPJ, for an algebraic-space total space. Supporting Coherent higher-image fibre-dimension bound for proper algebraic spaces. Supporting input in the proof of Tag 0A4T: the completed geometric stalk is computed by infinitesimal-fibre cohomology (Tag 08B1). Definition of the canonical infinitesimal-fibre tower and restriction maps in Tag 08B1.",
+   "via": [
+    "lem-sfb-space-formal-functions-geometric-stalk",
+    "lem-sfb-noetherian-space-fibre-cohomology-bound",
+    "lem-sfb-space-picard-stack-smooth",
+    "lem-sfb-curve-smooth-polarization-cover",
+    "lem-sfb-curve-etale-scheme-cover",
+    "lem-sfb-proper-space-curve-qcoh-bound",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceFormalFunctionsData",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.FormalFunctions.Cohomology",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.FormalFunctions.base",
+   "AlgebraicGeometry.AlgebraicSpace.FormalFunctions.point",
+   "AlgebraicGeometry.AlgebraicSpace.FormalFunctions.stalk",
+   "AlgebraicGeometry.AlgebraicSpace.FormalFunctions.ring",
+   "AlgebraicGeometry.AlgebraicSpace.FormalFunctions.Geometry",
+   "AlgebraicGeometry.AlgebraicSpace.FormalFunctions.Geometry.ideal",
+   "AlgebraicGeometry.AlgebraicSpace.FormalFunctions.Geometry.quotient",
+   "AlgebraicGeometry.AlgebraicSpace.FormalFunctions.Geometry.completion",
+   "AlgebraicGeometry.AlgebraicSpace.FormalFunctions.Geometry.finiteBase",
+   "AlgebraicGeometry.AlgebraicSpace.FormalFunctions.Geometry.sections",
+   "AlgebraicGeometry.AlgebraicSpace.FormalFunctions.complex",
+   "AlgebraicGeometry.AlgebraicSpace.FormalFunctions.restriction",
+   "AlgebraicGeometry.AlgebraicSpace.FormalFunctions.Composition",
+   "AlgebraicGeometry.AlgebraicSpace.FormalFunctions.smallStalk",
+   "AlgebraicGeometry.AlgebraicSpace.FormalFunctions.Geometry.scalars",
+   "AlgebraicGeometry.AlgebraicSpace.FormalFunctions.Geometry.Compatible",
+   "AlgebraicGeometry.AlgebraicSpace.FormalFunctions.Cohomology",
+   "AlgebraicGeometry.AlgebraicSpace.FormalFunctions.single",
+   "AlgebraicGeometry.AlgebraicSpace.FormalFunctions.Geometry.finiteComplex",
+   "AlgebraicGeometry.AlgebraicSpace.FormalFunctions.source",
+   "AlgebraicGeometry.AlgebraicSpace.FormalFunctions.Geometry.finite",
+   "AlgebraicGeometry.AlgebraicSpace.FormalFunctions.Cohomology.map",
+   "AlgebraicGeometry.AlgebraicSpace.FormalFunctions.Geometry.tensorTransition",
+   "AlgebraicGeometry.AlgebraicSpace.FormalFunctions.Cohomology.transition",
+   "AlgebraicGeometry.AlgebraicSpace.FormalFunctions.Cohomology.tower"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceFormalFunctionsData.lean",
+  "statement": "structure Cohomology {Y : Scheme.{u}} {X : AlgebraicSpace Y} {f : X ⟶ base Y} {Ω : Type u} [Field Ω] [IsAlgClosed Ω] {y : Spec (.of Ω) ⟶ Y} (D : Geometry X f y)",
+  "branch": "sheaf-dag",
+  "by": "Q31",
+  "date": "2026-10-24",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-e443bc972"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e443bc972",
+  "group": "Q31",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e443bc972",
+  "group": "Q31",
+  "result": "fix",
+  "note": "Read item node (only lean + 2 appended stmt_deps vs live), Tag 08B1, both modules and every cited declaration. Clauses match: IsLocallyNoetherian Y, MapIsProper f, IsQuasicoherent + jointly surjective affine Noetherian finite-module charts, Ω alg. closed; A = geometric stalk ring, Noetherian + local concluded; X_n real IsPullback, exponent n+1; for all q, ∃! Â-linear iso AdicCompletion m M ≅ limit tower, normalized to C.map. ∃ D C acceptable: c, X_n, transitions, ordinary and derived compositors are all pinned by canonical/pullback/chart/K-injective normalizations. Edge cases ok (empty X, F=0, q=0, m=0, empty I, single universe u). H2 fixed: new def node cited theorem node lem-sfb-space-derived-etale-chart-calculus only for plain def spaceDerivedChartDirectImageComp. fixes/SpaceFormalFunctionsData.lean inlines its identical conjugateIsoEquiv body (spaceDerivedAdjunction + spaceDerivedPullbackComp) with swapped imports; fixes/def-sfb-space-formal-functions-data.json repoints stmt_dep and citation to def-sfb-space-derived-pullback (on base). Fixed module compiled clean in 49.5 s via nt_compile --json; unchanged original also timed out under load ~72 (control), so timeouts are load; item module not recompiled (combined run timed out under load, signatures unchanged). Advisory: lem-trf-space-fibre-products-etale-covers is cited by the new node as a reference only, no declaration from its module is used."
+ }
+}

@@ -1,0 +1,487 @@
+{
+ "id": "lem-sfb-evaluated-positive-bar-row-transfer",
+ "kind": "statement",
+ "title": "Finite-index transfer on evaluated vertical-cohomology bar rows",
+ "statement": "Let $A$ be a commutative condensed $\\mathbf Q$-algebra on the small coherent profinite site with finite jointly surjective covers [sk-def-sfb-condensed-ring, def-weil-size-convention]. Let $G$ be a profinite group and $N$ an internal $A$-module with $A$-linear condensed $G$-action [sk-def-sfb-module-objects, def-sfb-condensed-action-module]. Fix a nonnegative equivariant injective resolution $a:N[0]\\to I^\\bullet$ [def-sp-injective-resolutions]. For every open subgroup $J\\subseteq G$, including $G$, define a first-quadrant double complex of abstract $\\mathbf Q$-vector spaces\n$$D_J^{p,q}=\\underline{\\operatorname{Hom}}_A(A[\\underline J^p],UI^q)(*)=I^q(J^p),\\qquad p,q\\geq0,$$\nwhere $U$ forgets the action, $*$ is the one-point profinite set, and $A[\\underline J^p]$ is the free internal module. Use the evaluation identification and the action-dependent inhomogeneous cofaces of [def-sfb-condensed-equivariant-bar-data]: first face uses the $J$-action on $I^q$, interior faces multiply adjacent entries, and last face drops the last entry. Write $d_h$ for their alternating sum and $d_v$ for the resolution differential. They commute [def-sp-double-complex-total]. For each $q\\geq0$, put\n$$V_{J,q}^p=\\ker(d_v:D_J^{p,q}\\to D_J^{p,q+1})/\\operatorname{im}(d_v:D_J^{p,q-1}\\to D_J^{p,q}),\\qquad E_J^{p,q}=H^p(V_{J,q}^\\bullet,d_h),$$\nwith $D_J^{p,-1}=0$ and ordinary kernel-modulo-image cohomology [def-weil-abstract-derived-category]. Restriction of sections along $J^p\\hookrightarrow G^p$ gives a cochain map $r_J:V_{G,q}^\\bullet\\to V_{J,q}^\\bullet$.\n\nFor every open subgroup $H\\subseteq G$ and every $q\\geq0$, there exist $\\mathbf Q$-linear cochain maps $t_H:V_{H,q}^\\bullet\\to V_{G,q}^\\bullet$ and degree-minus-one maps $h_H$ such that\n$$t_Hr_H-[G:H]\\,1=d_hh_H+h_Hd_h.$$\nThese may be chosen simultaneously natural in equivariant chain maps of resolutions, by fixing coset representatives. Consequently the induced maps satisfy\n$$H^p(t_H)H^p(r_H)=[G:H]\\,1_{E_G^{p,q}}$$\nfor every $p,q\\geq0$. No vanishing of the individual $V_{J,q}^p$ or of their cohomology is asserted. The statement includes $H=G$, trivial $G$ and $N=0$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), arithmetic coefficient topology, evaluated norm-coefficient bar comparison; agent expansion: finite coset transfer on vertical cohomology rows, before the spectral sequence collapse Agent-formulated obligation; exact reference WANTED."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-size-convention",
+  "sk-def-sfb-module-objects",
+  "def-sfb-condensed-action-module",
+  "def-sp-injective-resolutions",
+  "def-sp-double-complex-total",
+  "def-sfb-condensed-equivariant-bar-data",
+  "def-weil-abstract-derived-category",
+  "def-sfb-condensed-derived-invariants"
+ ],
+ "proof": [
+  {
+   "text": "For any equivariant internal module $M$, interpret $c\\in M(P)$ as a natural generalized section: for a continuous tuple $x:T\\to P$, write $c(x)=x^*c\\in M(T)$. This is the evaluation convention of [def-sfb-condensed-equivariant-bar-data], not a function $P\\to M(*)$. Let $B_J^p(M)\\subset M(J^{p+1})$ consist of homogeneous sections satisfying $F(ax_0,\\ldots,ax_p)=a\\cdot F(x_0,\\ldots,x_p)$ after every profinite base change; this is one equality over the universal parameter $J^{p+2}$. With alternating deletion differential $\\delta$, define\n$$\\Phi_JF(g_1,\\ldots,g_p)=F(1,g_1,g_1g_2,\\ldots,g_1\\cdots g_p),$$\n$$\\Psi_Jc(x_0,\\ldots,x_p)=x_0\\cdot c(x_0^{-1}x_1,\\ldots,x_{p-1}^{-1}x_p).$$\nPullback along these continuous coordinate maps and the sectionwise action of [def-sfb-condensed-action-module] define actual $\\mathbf Q$-linear maps. In the second formula, simultaneous left multiplication leaves all successive ratios unchanged and multiplies the initial action by $a$; hence $\\Psi_Jc$ is homogeneous. Substitution gives $\\Phi_J\\Psi_J=1$. Conversely the successive ratios of $(x_0,\\ldots,x_p)$ reconstruct $(1,x_0^{-1}x_1,\\ldots,x_0^{-1}x_p)$, so homogeneity gives $\\Psi_J\\Phi_JF=F$. These are inverse maps on sections, including $p=0$.",
+   "uses": [
+    "def-sfb-condensed-equivariant-bar-data",
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image, arithmetic coefficient comparison: agent-written finite-coset argument for the evaluated internal bar complex; not an assertion made verbatim in the blueprint."
+   }
+  },
+  {
+   "text": "Check each coface under these coordinate maps. On the prefix tuple $(1,g_1,g_1g_2,\\ldots,g_1\\cdots g_{p+1})$, deletion of position zero, followed by homogeneity with $a=g_1$, gives $g_1\\cdot\\Phi_JF(g_2,\\ldots,g_{p+1})$. Deletion of position $i$ for $1\\leq i\\leq p$ joins the two successive ratios into $g_ig_{i+1}$. Deletion of position $p+1$ drops the last ratio. Thus the alternating deletion differential becomes exactly the action-dependent inhomogeneous differential of [def-sfb-condensed-equivariant-bar-data], with the same signs. This also verifies $(dc)(g)=g c-c$ in degree zero. Deleting coordinates twice in the two orders cancels with opposite signs, so $\\delta^2=0$. Both coordinate maps commute with restriction $H\\hookrightarrow G$ and with any equivariant coefficient map $b:M\\to M'$: pullbacks commute with $b$ and $b(x\\cdot m)=x\\cdot b(m)$. In particular they commute with each equivariant resolution differential $I^q\\to I^{q+1}$, giving an isomorphism of double complexes with homogeneous columns. Denote homogeneous restriction by $R$.",
+   "uses": [
+    "def-sfb-condensed-equivariant-bar-data",
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image, arithmetic coefficient comparison: agent-written finite-coset argument for the evaluated internal bar complex; not an assertion made verbatim in the blueprint."
+   }
+  },
+  {
+   "text": "The right cosets $Hs$ are open and cover compact $G$, so finitely many cover it; since cosets are disjoint there are finitely many in total. Choose a transversal $S$ with representative $1$ for $H$, and put $m=|S|=[G:H]$. Define $\\rho(x)=xs^{-1}\\in H$ on $Hs$. This is continuous on each open coset, hence continuous on $G$, with $\\rho(hx)=h\\rho(x)$ and $\\rho|_H=1$. Each coset is also closed, since its complement is a union of open cosets. For $a\\in G$ let $\\pi_a(s)=u$ when $Hsa=Hu$ and put $h_s(a)=sa u^{-1}\\in H$. Right multiplication permutes the cosets, so $\\pi_a$ is a permutation. For each $s$, $\\pi_a(s)$ is locally constant in $a$. The finite intersections of its fibers, over all $s$, give a finite clopen partition of $G$ on each part of which the whole permutation is constant. These constructions use only the topological-group axioms and compactness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image, arithmetic coefficient comparison: agent-written finite-coset argument for the evaluated internal bar complex; not an assertion made verbatim in the blueprint."
+   }
+  },
+  {
+   "text": "Define $T_M:B_H^p(M)\\to M(G^{p+1})$ by\n$$(T_Mf)(x_0,\\ldots,x_p)=\\sum_{s\\in S}s^{-1}\\cdot f(\\rho(sx_0),\\ldots,\\rho(sx_p)).$$\nThis expression means the sum of pullbacks along the continuous maps $x\\mapsto(\\rho(sx_i))_i$, followed by the action of the constant section $s^{-1}$. It is a well-defined $\\mathbf Q$-linear operator on sections, without any topology on $M(*)$. Pullback, finite addition and the action commute with every equivariant coefficient map by [def-sfb-condensed-action-module]. Deletion commutes with applying $\\rho(s-)$ to every coordinate, and the constant action is linear. Expanding the two finite sums therefore gives $\\delta T_M=T_M\\delta$ before imposing homogeneity on the output.",
+   "uses": [
+    "def-sfb-condensed-action-module",
+    "def-sfb-condensed-equivariant-bar-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image, arithmetic coefficient comparison: agent-written finite-coset argument for the evaluated internal bar complex; not an assertion made verbatim in the blueprint."
+   }
+  },
+  {
+   "text": "To verify homogeneity, work over the universal parameters $(a,x_0,\\ldots,x_p)\\in G^{p+2}$. On a clopen piece where $\\pi_a$ is a fixed permutation, write $sa=h_s(a)u$ with $u=\\pi_a(s)$. Then\n$$\\rho(sax_i)=h_s(a)\\rho(ux_i),\\qquad s^{-1}h_s(a)=a u^{-1}.$$\nHomogeneity of $f$ is valid for the variable section $h_s(a)$, not just for constant elements of $H$. It changes the $s$-summand at $(ax_i)$ to $a u^{-1}\\cdot f((\\rho(ux_i))_i)$. Reindex by the permutation $s\\mapsto u$ to obtain $(T_Mf)(ax)=a\\cdot(T_Mf)(x)$ on that piece. The clopen pieces give a finite jointly surjective cover of the parameter set; the separatedness part of the sheaf condition in [sk-def-sfb-condensed-ring] and the module-sheaf interpretation in [def-sfb-condensed-equivariant-bar-data] give the global equality. Thus $T_M$ lands in $B_G^p(M)$. Put $a_s(x)=s^{-1}\\rho(sx)\\in G$. For homogeneous $F$ on $G$, the same equivariance formula with the constant $s^{-1}$ gives\n$$(T_MRF)(x_0,\\ldots,x_p)=\\sum_{s\\in S}F(a_s(x_0),\\ldots,a_s(x_p))=:L_MF.$$\nAlso $a_s(ax)=a a_{\\pi_a(s)}(x)$ on each such piece.",
+   "uses": [
+    "sk-def-sfb-condensed-ring",
+    "def-sfb-condensed-equivariant-bar-data",
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image, arithmetic coefficient comparison: agent-written finite-coset argument for the evaluated internal bar complex; not an assertion made verbatim in the blueprint."
+   }
+  },
+  {
+   "text": "Set $K_M^0=0$ and, for $p\\geq1$, define\n$$(K_M^pF)(x_0,\\ldots,x_{p-1})=\\sum_{s\\in S}\\sum_{i=0}^{p-1}(-1)^i F(x_0,\\ldots,x_i,a_s(x_i),\\ldots,a_s(x_{p-1})).$$\nEvery summand is pullback of a section along a continuous map $G^p\\to G^{p+1}$, so this defines a $\\mathbf Q$-linear map into $M(G^p)$. For simultaneous translation by the universal variable $a$, use the same finite clopen partition as in step 5. On each piece the mixed tuple in the summand is $a$ times the tuple with $s$ replaced by $\\pi_a(s)$. Homogeneity of $F$ and reindexing $s$ prove homogeneity of the sum on that piece; sheaf separatedness gives it globally. Consequently $K_M^p:B_G^p(M)\\to B_G^{p-1}(M)$. Each summand is a pullback, so $K_M$ commutes with every equivariant coefficient map by the evaluation convention of [def-sfb-condensed-equivariant-bar-data].",
+   "uses": [
+    "sk-def-sfb-condensed-ring",
+    "def-sfb-condensed-equivariant-bar-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image, arithmetic coefficient comparison: agent-written finite-coset argument for the evaluated internal bar complex; not an assertion made verbatim in the blueprint."
+   }
+  },
+  {
+   "text": "Use the explicit algebraic prism identity of [lem-trf-coefficient-bar-prism-homotopy]. For a fixed $s$, the category with objects the underlying set of $G$ and exactly one arrow between each pair is small in the fixed universe. Set $v=1$, $w=a_s$, use the unique-arrow natural transformation, and constant $\\mathbf Z$ coefficients with $t=1$. With $x_j=U_{n-j}$ its prism is the formal signed tuple sum\n$$P_n^s[x_0,\\ldots,x_n]=\\sum_{i=0}^n(-1)^i[x_0,\\ldots,x_i,a_s(x_i),\\ldots,a_s(x_n)],$$\nand the cited face identities give $\\partial P^s+P^s\\partial=(a_s)_*-1$. This identity also holds as a formal sum of continuous tuple maps: all face identities are coordinate identities before any input tuple is chosen. Namely deletion before the repeated position is the $j<i$ identity; deletion after it is the $j>i+1$ identity; the two joining faces of consecutive prisms agree and cancel; the two outer faces leave $(a_s(x_j))_j$ and $(x_j)_j$, with signs plus and minus. Apply contravariant pullback to these identities and finite addition in the section group. This gives $\\delta K_M^{p,s}+K_M^{p+1,s}\\delta=(a_s^{\\times(p+1)})^*-1$ on $M(G^{p+1})$; no evaluation at ordinary points of $M$ is used. Summing over $s$ gives\n$$\\delta K_M^p+K_M^{p+1}\\delta=L_M-m1=T_MR-m1.$$\nFor $p=0$, the sole prism evaluates $\\delta F$ on $(x_0,a_s(x_0))$, giving $F(a_s(x_0))-F(x_0)$; hence the identity includes degree zero.",
+   "uses": [
+    "lem-trf-coefficient-bar-prism-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 019S, lemma-homotopy-s-N and equation-homotopy-to-homotopy, with the explicit category-bar prism identity of lem-trf-coefficient-bar-prism-homotopy (Stacks 08PH, example-morphism-categories, agent natural-transformation expansion)."
+   }
+  },
+  {
+   "text": "Use steps 1–7 with $M=I^q$ in every $q$ and the same $S,\\rho$. On the original inhomogeneous double complexes define\n$$\\tau^{p,q}=\\Phi_G^p T_{I^q}^p\\Psi_H^p,\\qquad k^{p,q}=\\Phi_G^{p-1}K_{I^q}^p\\Psi_G^p\\ (p\\geq1),\\quad k^{0,q}=0.$$\nRestriction becomes $r=\\Phi_H R\\Psi_G$. The coordinate cochain identities and step 7 give\n$$d_h\\tau=\\tau d_h,\\qquad \\tau r-m1=d_hk+kd_h.$$\nFor every equivariant $b:M\\to M'$, the action and pullbacks in $T$ commute with $b$, and all pullbacks in $K$ commute with $b$; steps 1–2 give the same for $\\Phi,\\Psi$. Thus $\\tau$ and $k$ commute with each $d_v$ and with every equivariant chain map between resolutions. This uses actual coefficient morphisms, not any exactness of section evaluation. There is no extra sign: $d_v$ here is the commuting column differential, not the signed differential $(-1)^p d_v$ in the totalization of [def-sp-double-complex-total].",
+   "uses": [
+    "def-sp-double-complex-total",
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image, arithmetic coefficient comparison: agent-written finite-coset argument for the evaluated internal bar complex; not an assertion made verbatim in the blueprint."
+   }
+  },
+  {
+   "text": "For any one of the operators $u=\\tau,r,k$ just constructed, $d_vu=ud_v$ implies $u(\\ker d_v)\\subseteq\\ker d_v$ and $u(d_vz)=d_v(uz)$. Hence $[z]\\mapsto[uz]$ is well defined on the ordinary kernel-modulo-image groups in [def-weil-abstract-derived-category], including $q=0$ where the incoming term is zero. This constructs the desired $t_H$ and $h_H$ on every $V_{J,q}$; the same argument gives the horizontal differential there. The identities in step 8 pass to the quotients because sums and composites are evaluated on representatives. Thus $t_H$ is a cochain map and $t_Hr_H-m1=d_hh_H+h_Hd_h$. Naturality passes to the quotients by the identical representative formula, simultaneously for every equivariant chain map of resolutions.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image, arithmetic coefficient comparison: agent-written finite-coset argument for the evaluated internal bar complex; not an assertion made verbatim in the blueprint."
+   }
+  },
+  {
+   "text": "If $[z]\\in E_G^{p,q}$ is represented by a horizontal cocycle $z\\in V_{G,q}^p$, the last identity gives $(t_Hr_H-m1)z=d_h(h_Hz)$ because $d_hz=0$. The difference is a horizontal boundary, proving $H^p(t_H)H^p(r_H)=m1$. For $p=0$, $h_Hz$ lies in the zero negative term, so the same computation is valid. If $H=G$, choose $S=\\{1\\}$, $\\rho=1_G$, so $T=R=1$ and $a_1=1_G$; the prism identity still holds (one may instead choose $h_H=0$). Trivial $G$ is this case. For $N=0$ the construction still applies to any chosen resolution, which need not be the zero complex; no step used nonzero coefficients or any vanishing of its evaluated columns. Only finite sums, restriction, action and representatives in kernels and images were used, so no individual $V_{J,q}^p$ or its cohomology was assumed to vanish.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image, arithmetic coefficient comparison: agent-written finite-coset argument for the evaluated internal bar complex; not an assertion made verbatim in the blueprint."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-condensed-equivariant-bar-data",
+  "def-sfb-condensed-action-module",
+  "sk-def-sfb-condensed-ring",
+  "lem-trf-coefficient-bar-prism-homotopy",
+  "def-sp-double-complex-total",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image, arithmetic coefficient comparison: agent-written finite-coset argument for the evaluated internal bar complex; not an assertion made verbatim in the blueprint."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(corestr|corestrict|transfer).*(homotop|restrict)|(restrict).*(corestr|corestrict|transfer)",
+   "results": {
+    "t": "2026-10-23T04:34:17Z",
+    "tool": "grep",
+    "query": "(corestr|corestrict|transfer).*(homotop|restrict)|(restrict).*(corestr|corestrict|transfer)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 11,
+    "note": "",
+    "top": [
+     "Mathlib/FieldTheory/Galois/Abelian.lean",
+     "Mathlib/FieldTheory/NormalizedTrace.lean",
+     "Mathlib/GroupTheory/Transfer.lean",
+     "Mathlib/GroupTheory/Transfer.lean",
+     "Mathlib/GroupTheory/Transfer.lean",
+     "Mathlib/GroupTheory/Transfer.lean",
+     "Mathlib/GroupTheory/Focal.lean",
+     "Mathlib/GroupTheory/Focal.lean"
+    ],
+    "digest": "6bc2d5d4f1ce0d14"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: abstract Rep Shapiro and finite group transfer do not give maps on the vertical cohomology rows of section-valued internal condensed bar resolutions; GroupTheory.Transfer concerns group homomorphisms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite index restriction corestriction on cohomology of the vertical homology rows of an internal condensed bar resolution",
+   "results": {
+    "t": "2026-10-23T04:34:17Z",
+    "tool": "leansearch",
+    "query": "Finite index restriction corestriction on cohomology of the vertical homology rows of an internal condensed bar resolution",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "groupCohomology.coindIso",
+     "groupCohomology.linearYonedaObjResProjectiveResolutionIso",
+     "groupCohomology.H1InfRes",
+     "Rep.resIndAdjunction_homEquiv_symm_apply",
+     "groupCohomology.resNatTrans",
+     "Rep.resIndAdjunction",
+     "groupCohomology.H1InfRes_g",
+     "Rep.coindResAdjunction"
+    ],
+    "digest": "222fd5785db677f4"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: abstract Rep Shapiro and finite group transfer do not give maps on the vertical cohomology rows of section-valued internal condensed bar resolutions; GroupTheory.Transfer concerns group homomorphisms."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"corestriction\"",
+   "results": {
+    "t": "2026-10-23T04:34:17Z",
+    "tool": "loogle",
+    "query": "\"corestriction\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: abstract Rep Shapiro and finite group transfer do not give maps on the vertical cohomology rows of section-valued internal condensed bar resolutions; GroupTheory.Transfer concerns group homomorphisms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction and corestriction for the higher vertical cohomology rows of a condensed group bar double complex satisfy the finite index multiplication formula",
+   "results": {
+    "t": "2026-10-23T04:34:19Z",
+    "tool": "leanfinder",
+    "query": "Restriction and corestriction for the higher vertical cohomology rows of a condensed group bar double complex satisfy the finite index multiplication formula",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "groupCohomology.H1InfRes_X₂",
+     "groupCohomology.H1InfRes_X₃",
+     "groupCohomology.H1InfRes",
+     "groupCohomology.infNatTrans_app",
+     "groupCohomology.π_map_apply",
+     "groupCohomology.H1InfRes_f",
+     "groupCohomology.H1InfRes_g",
+     "groupCohomology.infNatTrans"
+    ],
+    "digest": "ac6ca3b55156e8be"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: abstract Rep Shapiro and finite group transfer do not give maps on the vertical cohomology rows of section-valued internal condensed bar resolutions; GroupTheory.Transfer concerns group homomorphisms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite coset bar chain homotopy induces index times identity after taking vertical homology of a double complex of sections of condensed modules",
+   "results": {
+    "t": "2026-10-23T04:38:02Z",
+    "tool": "leanfinder",
+    "query": "Finite coset bar chain homotopy induces index times identity after taking vertical homology of a double complex of sections of condensed modules",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Rep.standardComplex.εToSingle₀_comp_eq",
+     "Rep.standardComplex.forget₂ToModuleCatHomotopyEquiv",
+     "Rep.standardComplex.forget₂ToModuleCatHomotopyEquiv_f_0_eq",
+     "Rep.barComplex.isoStandardComplex",
+     "Rep.standardComplex.quasiIso_forget₂_εToSingle₀",
+     "groupHomology.inhomogeneousChainsIso",
+     "Rep.standardComplex.instQuasiIsoNatεToSingle₀",
+     "groupHomology.isoShortComplexH1_hom"
+    ],
+    "digest": "58a282c5bdc23c88"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: abstract Rep Shapiro and finite group transfer do not give maps on the vertical cohomology rows of section-valued internal condensed bar resolutions; GroupTheory.Transfer concerns group homomorphisms."
+  },
+  {
+   "tool": "grep",
+   "query": "(corestr|corestrict|transfer).*(homotop|restrict)|(restrict).*(corestr|corestrict|transfer)",
+   "results": {
+    "t": "2026-10-23T10:56:18Z",
+    "tool": "grep",
+    "query": "(corestr|corestrict|transfer).*(homotop|restrict)|(restrict).*(corestr|corestrict|transfer)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 11,
+    "note": "",
+    "top": [
+     "Mathlib/GroupTheory/Transfer.lean",
+     "Mathlib/GroupTheory/Transfer.lean",
+     "Mathlib/GroupTheory/Transfer.lean",
+     "Mathlib/GroupTheory/Transfer.lean",
+     "Mathlib/FieldTheory/Galois/Abelian.lean",
+     "Mathlib/FieldTheory/NormalizedTrace.lean",
+     "Mathlib/GroupTheory/Focal.lean",
+     "Mathlib/GroupTheory/Focal.lean"
+    ],
+    "digest": "ab8f49c99c837302"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: groupCohomology restriction and inflation act on abstract representations, not the vertical cohomology of evaluated condensed sections; group-theoretic transfer is a group homomorphism, not this cochain homotopy."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"corestriction\"",
+   "results": {
+    "t": "2026-10-23T10:56:18Z",
+    "tool": "loogle",
+    "query": "\"corestriction\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: groupCohomology restriction and inflation act on abstract representations, not the vertical cohomology of evaluated condensed sections; group-theoretic transfer is a group homomorphism, not this cochain homotopy."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite coset transfer and restriction homotopy on cochains of condensed modules natural in coefficient chain maps",
+   "results": {
+    "t": "2026-10-23T10:56:19Z",
+    "tool": "leansearch",
+    "query": "Finite coset transfer and restriction homotopy on cochains of condensed modules natural in coefficient chain maps",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "groupCohomology.cochainsMap_comp",
+     "groupCohomology.resNatTrans",
+     "Homotopy.shift",
+     "groupCohomology.cochainsMap₁",
+     "CochainComplex.HomComplex.Cochain.ofHomotopy",
+     "groupCohomology.cochainsMap_f_hom",
+     "CochainComplex.ConnectData.restrictionLEIso_hom_f",
+     "CochainComplex.mappingCone.descHomotopy"
+    ],
+    "digest": "7a29db60ad97c528"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: groupCohomology restriction and inflation act on abstract representations, not the vertical cohomology of evaluated condensed sections; group-theoretic transfer is a group homomorphism, not this cochain homotopy."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite index subgroup restriction and transfer on vertical cohomology rows of a double complex of sections of condensed equivariant modules have a natural cochain homotopy to index times identity",
+   "results": {
+    "t": "2026-10-23T10:56:19Z",
+    "tool": "leanfinder",
+    "query": "Finite index subgroup restriction and transfer on vertical cohomology rows of a double complex of sections of condensed equivariant modules have a natural cochain homotopy to index times identity",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "groupCohomology.infNatTrans",
+     "groupCohomology.infNatTrans_app",
+     "groupCohomology.isoShortComplexH2_hom",
+     "groupCohomology.cochainsMap_f_2_comp_cochainsIso₂_apply",
+     "groupCohomology.map_H0Iso_hom_f_apply",
+     "groupCohomology.isoShortComplexH1_hom",
+     "groupCohomology.cochainsMap_f_1_comp_cochainsIso₁_assoc",
+     "groupCohomology.cochainsMap_f_1_comp_cochainsIso₁_apply"
+    ],
+    "digest": "8e9086285946bcd0"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: groupCohomology restriction and inflation act on abstract representations, not the vertical cohomology of evaluated condensed sections; group-theoretic transfer is a group homomorphism, not this cochain homotopy."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction corestriction finite index chain homotopy for sheaf valued group bar cochains after taking cohomology in a coefficient resolution",
+   "results": {
+    "t": "2026-10-23T10:56:21Z",
+    "tool": "leanfinder",
+    "query": "Restriction corestriction finite index chain homotopy for sheaf valued group bar cochains after taking cohomology in a coefficient resolution",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "groupCohomology.π_map_apply",
+     "groupCohomology.toCocycles_comp_isoCocycles₂_hom_apply",
+     "groupCohomology.toCocycles_comp_isoCocycles₁_hom_apply",
+     "groupCohomology.cocyclesMap_cocyclesIso₀_hom_f",
+     "groupCohomology.π_map",
+     "groupCohomology.toCocycles_comp_isoCocycles₁_hom",
+     "groupCohomology.toCocycles_comp_isoCocycles₂_hom",
+     "groupCohomology.cocyclesIso₀_hom_comp_f"
+    ],
+    "digest": "d01d9aaa194775b5"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: groupCohomology restriction and inflation act on abstract representations, not the vertical cohomology of evaluated condensed sections; group-theoretic transfer is a group homomorphism, not this cochain homotopy."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-norm-algcl-evaluated-bar-augmentation",
+  "date": "2026-10-23",
+  "group": "Q69"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), arithmetic coefficient topology, evaluated norm-coefficient bar comparison; agent expansion: finite coset transfer on vertical cohomology rows, before the spectral sequence collapse",
+   "via": [
+    "lem-sfb-norm-algcl-evaluated-bar-augmentation",
+    "lem-sfb-profinite-algcl-derived-invariants-comparison",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-evaluated-positive-bar-row-transfer",
+  "worker": "stage1",
+  "group": "Q80",
+  "summary": "Retained the statement and all statement dependencies. Constructed the transfer and homotopy on generalized homogeneous sections, checked the action cofaces and finite clopen gluing for variable group parameters, used the existing category-bar prism for its universal face identity, and descended actual coefficient-natural maps to vertical cohomology. No new nodes, no Lean writing or builds.",
+  "blueprint": "Latest direct-images proof paragraph (3), arithmetic coefficient comparison auxiliary expansion. The latest blueprint itself only cites open-coefficient stability; the evaluated-row lemma is an agent-formulated auxiliary obligation. Ancestor prints None; retained inherited null ancestor and via chain, with its specified place. Whole-blueprint transfer, homogeneous and prism searches found no exact duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-coefficient-bar-prism-homotopy",
+    "why": "Generic signed prism face identities on arbitrary small categories, applied to the unique-arrow category on the underlying set of G. It supplies no coefficient comparison or geometric route; this unit has no general category-bar prism identity."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-coefficient-bar-prism-homotopy"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q80-77663fe98",
+  "group": "Q80",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-77663fe98 (reviewer sub-agent of L); spot-checked: I read the whole item, its 10 steps and every cited statement. The delivery has no new nodes; the statement and its 8 stmt_deps are unchanged; proof_deps equals the union of the step uses. Steps re-derived: (1) Φ/Ψ are inverse, with homogeneity used at the variable section x_0. (2) The deletion faces match the action-dependent inhomogeneous cofaces of def-sfb-condensed-equivariant-bar-data, including dc(g)=gc−c in degree 0. (3) H is open in compact G, so there are finitely many right cosets; ρ(hx)=hρ(x); π_a is locally constant because Hsa'=Hsa iff a'a⁻¹∈s⁻¹Hs, which gives a finite clopen partition. (4–5) For the transfer, ρ(sax)=h_s(a)ρ(ux) and s⁻¹h_s(a)=au⁻¹; reindexing over the permutation gives homogeneity, glued by sheaf separatedness on the finite clopen cover (sk-def-sfb-condensed-ring); TRF=ΣF∘a_s and a_s(ax)=a·a_{π_a(s)}(x). (6) The homotopy K is homogeneous by the same reindexing. (7) The prism node is applied to the codiscrete category on the set G with v=id, w=a_s, constant ℤ coefficients and t=id. Its face identities are equalities of tuple maps, so pulling back gives δK+Kδ=(a_s^×)^*−1 with the correct sign; I checked degree 0. (8) τ=Φ_G T Ψ_H, k=Φ_G K Ψ_G and r=Φ_H R Ψ_G give τr−m=d_h k+k d_h; all of these commute with d_v and with equivariant chain maps; the column differential is unsigned, matching def-sp-double-complex-total. (9–10) The operators descend to ker/im, and I checked the edge cases p=0, q=0, H=G, trivial G and N=0. Batch-5 flag on lem-trf-coefficient-bar-prism-homotopy: accepted. It is a generic category-bar prism identity (Stacks 08PH expansion) whose only proof_dep is def-weil-abstract-derived-category, so its closure reaches no trace-formula or Poincaré-duality node. Neither assumption gives it and it is not a step of their proofs. It is already cited as a tool by lem-sfb-equivariant-continuous-cochain-prism. The declared tool_use is accepted. Duplicates: the existing continuous-cochain transfer, averaging and prism nodes apply only to jointly continuous functions into topological vector spaces, not to sections of internal injective modules, so none of them states this item. Source: main-20261015 direct-images paragraph (3) does not contain this argument, and the node correctly marks the proof as agent-written with the exact reference WANTED. No SGA is used. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.EvaluatedPositiveBarRowTransfer",
+  "declaration": "CategoryTheory.CondensedBar.Evaluated.exists_transfer",
+  "declarations": [
+   "CategoryTheory.CondensedBar.Evaluated.rationalSections",
+   "CategoryTheory.CondensedBar.Evaluated.sectionFunctor",
+   "CategoryTheory.CondensedBar.Evaluated.sectionFunctor_additive",
+   "CategoryTheory.CondensedBar.Evaluated.pullback",
+   "CategoryTheory.CondensedBar.Evaluated.face",
+   "CategoryTheory.CondensedBar.Evaluated.differential",
+   "CategoryTheory.CondensedBar.Evaluated.differential_laws",
+   "CategoryTheory.CondensedBar.Evaluated.bar",
+   "CategoryTheory.CondensedBar.Evaluated.bar_additive",
+   "CategoryTheory.CondensedBar.Evaluated.row",
+   "CategoryTheory.CondensedBar.Evaluated.openTopological",
+   "CategoryTheory.CondensedBar.Evaluated.openCompact",
+   "CategoryTheory.CondensedBar.Evaluated.inclusion",
+   "CategoryTheory.CondensedBar.Evaluated.powerInclusion",
+   "CategoryTheory.CondensedBar.Evaluated.restriction_comm",
+   "CategoryTheory.CondensedBar.Evaluated.restriction",
+   "CategoryTheory.CondensedBar.Evaluated.rowRestriction",
+   "CategoryTheory.CondensedBar.Evaluated.exists_transfer"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/EvaluatedPositiveBarRowTransfer.lean",
+  "statement": "theorem exists_transfer (H : OpenSubgroup G) : ∃ (t : ∀ (N : Equivariant A G) (I : InjectiveResolution N) (q : ℕ), (row (inclusion H) q).obj I.cocomplex ⟶ (row (ContinuousMonoidHom.id G) q).obj I.cocomplex) (h : ∀ (N : Equivariant A G) (I : InjectiveResolution N) (q : ℕ), Homotopy ((rowRestriction H q).app I.cocomplex ≫ t N I q) (H.toSubgroup.index • 𝟙 ((row (ContinuousMonoidHom.id G) q).obj I.cocomplex))), (∀ (N : Equivariant A G) (I : InjectiveResolution N) (p q : ℕ), HomologicalComplex.homologyMap ((rowRestriction H q).app I.cocomplex) p ≫ HomologicalComplex.homologyMap (t N I q) p = H.toSubgroup.index • 𝟙 (((row (ContinuousMonoidHom.id G) q).obj I.cocomplex).homology p)) ∧ (∀ (N M : Equivariant A G) (I : InjectiveResolution N) (J : InjectiveResolution M) (f : I.cocomplex ⟶ J.cocomplex) (q : ℕ), (row (inclusion H) q).map f ≫ t M J q = t N I q ≫ (row (ContinuousMonoidHom.id G) q).map f) ∧ (∀ (N M : Equivariant A G) (I : InjectiveResolution N) (J : InjectiveResolution M) (f : I.cocomplex ⟶ J.cocomplex) (q p r : ℕ), ((row (ContinuousMonoidHom.id G) q).map f).f p ≫ (h M J q).hom p r = (h N I q).hom p r ≫ ((row (ContinuousMonoidHom.id G) q).map f).f r)",
+  "branch": "newtargets-dag",
+  "by": "Q61",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-05749ba93",
+  "group": "Q61",
+  "result": "pass",
+  "note": "Node diff vs live: only lean + added landed stmt_dep def-sfb-condensed-derived-invariants (supplies Abelian(Equivariant A G) for InjectiveResolution; no cycle; §5 allows). lean.statement verbatim. Hypotheses match: CommMon ring + sectionwise Algebra ℚ (equivalent, unique ℚ-structure), profinite G, recorded ActionModule, Mathlib InjectiveResolution, single universe u. Faces checked against BarDiagram.face (act by j∘eval0 on drop-first, mergeTuple interior, drop last; (-1)^i; d c=g c−c in degree 0). row takes ordinary homology in q AFTER evaluation (ModuleCat ℚ, ℕ-indexed so D^{p,-1}=0); rowRestriction is actual section pullback. Homotopy (r≫t)(index•𝟙) = t r − [G:H] = d_h h + h d_h; cohomology clause all p,q; naturality of t and all h components in arbitrary chain maps between resolutions. Edge cases p=0,q=0,H=G,trivial G,N=0,zero algebra covered. No duplicate (rg side-live, sibling nodes, Mathlib). No hollow defs; only sorry in differential_laws/restriction_comm/exists_transfer (node-asserted facts, documented); docstrings with source+blueprint and 10-step proof. Report has Worker report + Second reading by Q61. Advisory only: global Module ℚ instance via compHom."
+ }
+}

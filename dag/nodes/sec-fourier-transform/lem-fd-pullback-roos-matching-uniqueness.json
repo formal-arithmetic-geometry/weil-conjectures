@@ -1,0 +1,128 @@
+{
+ "id": "lem-fd-pullback-roos-matching-uniqueness",
+ "kind": "statement",
+ "title": "Uniqueness of the matched integral pullback comparison",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega/\\mathbf Q_\\ell$, and noetherian finite-dimensional schemes $U,T$ on which $\\ell$ is invertible in every stalk. Let $C_U,C_T$ be the coefficient comparison data of [def-fd-coefficient-comparison-datum], let $h:U\\simeq T$, let $E$ be a finite coefficient field in $\\Omega$, let $R$ be an integral comparison system [def-sf-integral-comparison-system-data], and let $d$ be a finite pullback comparison [def-fd-finite-pullback-comparison-datum]. Suppose $d$ satisfies the whole-tower matching predicate [lem-fd-pullback-augmentation-counit-matching] for $R$. For every common strict-tower datum $b$ [def-fd-common-strict-tower-models] and integral constructible object $K$ over $E$ on $T$, the selected ambient component $d_K^{amb}$ equals $(b_K^{actual})^{-1}$. This asserts no scalar square and constructs neither data nor a pullback family.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-fourier-transform/sk-cor-plancherel/def-fd-trace-function.md",
+  "place": "Auxiliary coefficient-category identification argument recorded in lem-fd-normalized-pullback-integral-scalar, proof steps 8--10 (not a verbatim assertion of the current blueprint trace definition); supporting Stacks 0941, sites-cohomology.tex lemma-derived-limit-is-ok, and 099N(2),(5), proetale.tex lemma-pushforward-Noetherian-case."
+ },
+ "stmt_deps": [
+  "def-fd-coefficient-comparison-datum",
+  "def-sf-integral-comparison-system-data",
+  "def-fd-finite-pullback-comparison-datum",
+  "lem-fd-pullback-augmentation-counit-matching",
+  "def-fd-common-strict-tower-models"
+ ],
+ "proof": [
+  {
+   "text": "choose a flat-term K-flat representative of the integral constructible input.\nUse the strict tower isomorphism of the common model to present its framework\nquotient tower. The matching equations and the common model's cone normalization\nexpress both comparisons using the same actual completion unit and the same\nquotient augmentation. The two cone coordinates are fixed by the quotient\nprojections and the zero shifted augmentation coordinate. On a K-injective tower\nresolution the normalized Roos comparison is H(q) followed by inverse iota;\nits resolution formula identifies the two entire-tower realizations. Cancel the\ninvertible realization maps and the framework augmentation on the complete input.\nThis identifies the matching b with the common model comparison. Invert and use\nthe first matching clause to identify the selected ambient component. Naturality\ntransports this equality along the representative isomorphism to the input K.\nThis uses no inverse of a quotient transition and applies to zero inputs and\nidentity scheme maps as well.",
+   "uses": [
+    "lem-fd-pullback-common-strict-tower-models",
+    "lem-fd-pullback-augmentation-counit-matching",
+    "lem-weil-strict-roos-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-fd-pullback-common-strict-tower-models",
+  "lem-fd-pullback-augmentation-counit-matching",
+  "lem-weil-strict-roos-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-fourier-transform/sk-cor-plancherel/def-fd-trace-function.md",
+  "place": "Auxiliary coefficient-category identification argument recorded in lem-fd-normalized-pullback-integral-scalar, proof steps 8--10 (not a verbatim assertion of the current blueprint trace definition); supporting Stacks 0941, sites-cohomology.tex lemma-derived-limit-is-ok, and 099N(2),(5), proetale.tex lemma-pushforward-Noetherian-case."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A normalized natural comparison determined by a quotient tower augmentation is unique",
+   "results": "Eight results about normalization monoids and generic normal epimorphisms; no completed-sheaf comparison identification.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "uniqueness of natural isomorphisms between derived tensor functors with the same normalization on complexes",
+   "results": "Eight results about monoidal homological complexes; no quotient-normalized coefficient transport uniqueness.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NatIso\", \"naturality\"",
+   "results": "NatIso.naturality_1, naturality_2 and reassociated variants provide categorical cancellation only.",
+   "date": "2026-10-27",
+   "verdict": "Useful for assembly, not either normalization statement."
+  },
+  {
+   "tool": "grep",
+   "query": "FdPullbackRoosMatching|FdScalarCoefficientTransport|integral_scalar.*scalarCompletionIso",
+   "results": "Mathlib msearch found zero hits for the project notions; rg of WeilConjectures and Sheaf found their definitions and the existing common-model scalar squares, but no identification of a fixed matched ambient map or fixed chi-normalized coefficient scalar map.",
+   "date": "2026-10-27",
+   "verdict": "Two missing identification steps; reuse the existing scalar square."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FdNormalizedPullbackIntegralScalar",
+  "date": "2026-10-27",
+  "group": "V7"
+ },
+ "chapter": "sec-fourier-transform",
+ "unit": "sk-def-trace",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Auxiliary coefficient-category identification argument recorded in lem-fd-normalized-pullback-integral-scalar, proof steps 8--10 (not a verbatim assertion of the current blueprint trace definition); supporting Stacks 0941, sites-cohomology.tex lemma-derived-limit-is-ok, and 099N(2),(5), proetale.tex lemma-pushforward-Noetherian-case.",
+   "via": [
+    "lem-fd-normalized-pullback-integral-scalar",
+    "lem-fd-whole-tower-integral-pullback-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FdPullbackRoosMatchingUniqueness",
+  "file": "lean/Sheaf/Paper/FdPullbackRoosMatchingUniqueness.lean",
+  "declaration": "WeilConjectures.fdPullbackRoosMatching_uniqueness",
+  "statement": "theorem fdPullbackRoosMatching_uniqueness\n    {U T : Scheme.{u}} [IsNoetherian U] [IsNoetherian T]\n    [Fact (∃ n : ℕ, topologicalKrullDim U ≤ n)]\n    [Fact (∀ t : U, IsUnit (l : U.presheaf.stalk t))]\n    [Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]\n    [Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]\n    (CU : FdCoefficientComparison l Ω U) (CT : FdCoefficientComparison l Ω T)\n    (h : U ≅ T) (E : Padic.FiniteCoefficientFields l Ω)\n    (R : IntegralComparisonSystem.{u} l) (d : FdPullbackComparison l Ω CU CT h E)\n    (hm : FdPullbackRoosMatching l Ω CU CT h E R d)\n    (b : FdCommonStrictTowerModels l (pbcFiniteField.{u} l Ω E) h)\n    (K : sfIntegralConstructibleCategory l (pbcFiniteField.{u} l Ω E) T) :\n    d.ambient.hom.app K = b.actual_ambient.inv.app K",
+  "branch": "sheaf-dag",
+  "by": "V7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V7",
+  "result": "pass",
+  "landing": "20261027T112441-L-1584948",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V7",
+  "result": "pass",
+  "landing": "20261027T112441-L-1584948",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

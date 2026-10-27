@@ -1,0 +1,141 @@
+{
+ "id": "lem-weil-pbc-ringed-projection-local-tensor-square",
+ "kind": "statement",
+ "title": "Tensor coherence of the normalized localized pullback square",
+ "statement": "Fix schemes X,Y, f:X to Y, coefficient ring sheaves RY,RX and c:f-inverse RY isomorphic to RX. Let g be any Global datum, V any object of Y-pro-etale, and l any Local datum of [def-weil-pbc-ringed-projection-restriction-data]. Put F=g.operation.left, G=l.restrictionY.model.functor, H=l.restrictionX.model.functor, K=l.operation.left, and theta=l.pullback.inv:G K to F H. Let tF,tG,tH,tK be the homomorphisms of the global pullback tensor comparison, the Y restriction comparison, the X restriction comparison and the local pullback comparison. For every P,Q in Der(RY), theta(P tensor Q);H(tF(P,Q));tH(FP,FQ) equals K(tG(P,Q));tK(GP,GQ);(theta(P) tensor theta(Q)). This is only a pullback-tensor coherence equation; it neither constructs l nor asserts any equation for projection mates.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 04J0 and 07A4; the tensor-square subargument in construction step 4 of the parent local-model node, before taking projection mates."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-projection-restriction-data"
+ ],
+ "proof": [
+  {
+   "text": "Construct the ordinary inverse mate of ordinaryDirectImage.hom. The normalization theorem, proved from the actual canonical cochain adjunction unit, K-injective resolution naturality and mate_counit, gives theta(QP);bFH(P)=bGK(P);Q(gamma_P) for every complex P.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-local-pullback-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 04J0 and 07A4; the tensor-square subargument in construction step 4 of the parent local-model node, before taking projection mates."
+   }
+  },
+  {
+   "text": "The ordinary tensor-square theorem follows from the inverse-mate unit identity, the two pure_unit formulas, restriction pure_sections and pure-section extensionality. Apply it to each (p,q) summand of the signed total tensor: the summand inclusions for totalMap and naturality of gamma reduce the chain-square equality to the inverse ordinary square. This is proved in private total_square; the bidegrees do not change.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-local-ordinary-tensor-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 04J0 and 07A4; the tensor-square subargument in construction step 4 of the parent local-model node, before taking projection mates."
+   }
+  },
+  {
+   "text": "Invert the four TensorComparison representative equations and paste them in pairs (private model_inverse and two_models). The private four_models_inverse calculation stays abstract in the four module functors to avoid unfolding concrete site constructions. Naturality of the target tensor representative, the just-proved chain square, and normalization at P,Q and total(P,Q) identify the two inverse tensor routes on resolving inputs; cancel their exact factor and tensor-model isomorphisms. Both inverse routes form natural transformations on pairs of derived objects. Faithfulness of restriction to resolving pairs extends equality to all inputs, and cancelling the composite tensor comparison isomorphisms gives the stated forward equation.",
+   "uses": [
+    "lem-sf-cochain-tensor-model-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 04J0 and 07A4; the tensor-square subargument in construction step 4 of the parent local-model node, before taking projection mates."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-projection-local-pullback-normalization",
+  "lem-weil-pbc-ringed-projection-local-ordinary-tensor-square",
+  "lem-sf-cochain-tensor-model-rigidity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 04J0 and 07A4; direct independent-universe normalization, ordinary pure tensors, signed totalization and resolving-pair descent in the supplied Local presentation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived restriction to a localized ringed site commutes with direct image and tensor product",
+   "results": "Eight hits, including Scheme.Modules.restrictFunctor and LocallyRingedSpace.restrict; none is a normalized derived module localization package or its tensor square.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.overFunctor\"",
+   "results": "SheafOfModules.overFunctor and SheafOfModules.overFunctorMap in Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous.",
+   "date": "2026-10-27",
+   "verdict": "Ordinary restriction only; no derived comparison or tensor coherence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of sheaf modules to slice sites commutes with the projection formula via adjunction mates",
+   "results": "Eight hits including SheafOfModules.PullbackConstruction.adjunction and ordinary pullback/unit formulas.",
+   "date": "2026-10-27",
+   "verdict": "No combined normalized derived theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "overFunctor|overMap in Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; overFunctor.*[Tt]ensor|[Tt]ensor.*overFunctor in Mathlib/Algebra/Category/ModuleCat/Sheaf; localData_exists|localTensorSquare in lean/Sheaf and dag/nodes",
+   "results": "Ordinary overFunctor, overFunctorMap, and overMapPushforwardAdj; no normalized localized data package or four-comparison tensor equation. Existing project RingedSquareTensorCompatibility works on different presentations.",
+   "date": "2026-10-27",
+   "verdict": "New statements isolate the required specialization and representative normalization; no duplicate found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedProjectionLocalModel",
+  "date": "2026-10-27",
+  "group": "G6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-perfect-projection-formula",
+   "place": "Normalized localization subargument used for the projection formula, before the finite-complex argument; Tags 04J0 and 07A4; the tensor-square subargument in construction step 4 of the parent local-model node, before taking projection mates.",
+   "via": [
+    "lem-weil-pbc-ringed-projection-local-model",
+    "lem-weil-pbc-ringed-projection-restriction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingedProjectionLocalTensorSquare",
+  "file": "lean/Sheaf/Paper/RingedProjectionLocalTensorSquare.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProjectionRestriction.localTensorSquare",
+  "statement": "theorem localTensorSquare\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})\n    (R_X : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R_Y ≅ R_X)\n    (g : Global f R_Y R_X c) (V : Y.ProEt)\n    (l : Local f R_Y R_X c g V) :\n    letI := l.restrictionYAdditive\n    letI := l.restrictionXAdditive\n    ∀ P Q : Der R_Y,\n    l.pullback.inv.app (g.tensorY.functor.obj (P, Q)) ≫\n        l.restrictionX.model.functor.map (g.tensorComparison.comparison.hom.app (P, Q)) ≫\n        l.restrictionTensorX.comparison.hom.app\n          (g.operation.left.obj P, g.operation.left.obj Q) =\n      l.operation.left.map (l.restrictionTensorY.comparison.hom.app (P, Q)) ≫\n        l.tensorComparison.comparison.hom.app\n          (l.restrictionY.model.functor.obj P, l.restrictionY.model.functor.obj Q) ≫\n        l.tensorX.functor.map (CategoryTheory.Prod.mkHom\n          (l.pullback.inv.app P) (l.pullback.inv.app Q))",
+  "branch": "sheaf-dag",
+  "by": "G6",
+  "date": "2026-10-27",
+  "sorry_free": true
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261027T034651-L-3672443",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261027T050630-L-247356",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

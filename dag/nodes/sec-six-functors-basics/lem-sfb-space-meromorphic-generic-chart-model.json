@@ -1,0 +1,422 @@
+{
+ "id": "lem-sfb-space-meromorphic-generic-chart-model",
+ "kind": "statement",
+ "title": "Generic-field and affine-chart models of meromorphic sections on a regular space",
+ "statement": "Let $X$ be a regular Noetherian separated algebraic space [def-trf-algebraic-space, def-weil-regular-scheme, pqf-def-locnoeth]: regular means all etale scheme charts are regular; Noetherian means quasi-compact, quasi-separated and locally Noetherian; separated means the diagonal over $\\operatorname{Spec}\\mathbf Z$ is a closed immersion. Let $\\mathcal K_X$ be the sheafification on the small etale site of $U\\mapsto S(U)^{-1}\\mathcal O_X(U)$, where $S(U)$ consists of functions whose multiplication on $\\mathcal O_U$ is injective. For a line module $L$, put $\\mathcal K_X(L)=L\\otimes_{\\mathcal O_X}\\mathcal K_X$.\n\nThe space $X$ is reduced (its etale scheme charts have no nonzero nilpotents in their local rings) and normal (the local rings of those charts are domains integrally closed in their fraction fields). Every Noetherian etale scheme chart is a finite disjoint union of integral regular normal schemes; in particular the rings of nonempty connected affine charts are Noetherian normal domains. The irreducible components of $X$ have finitely many generic points $\\eta$, all contained in its schematic locus; their local rings $k(\\eta)=\\mathcal O_{X,\\eta}$ are fields. With $j_\\eta:\\operatorname{Spec}k(\\eta)\\to X$, there are natural identifications\n$$\\mathcal K_X=\\prod_\\eta j_{\\eta,*}k(\\eta),\\qquad \\mathcal K_X(L)=\\prod_\\eta j_{\\eta,*}L_\\eta,$$\nand hence $\\Gamma(X,\\mathcal K_X(L))=\\prod_\\eta L_\\eta$, where $L_\\eta$ is a one-dimensional $k(\\eta)$-vector space. The natural maps $\\mathcal O_X\\to\\mathcal K_X$ and $L\\to\\mathcal K_X(L)$ are injective. For every dense open $W\\subset X$, restriction induces an isomorphism on global meromorphic sections of $L$ and an injection $\\Gamma(X,L)\\to\\Gamma(W,L|_W)$.\n\nFor every affine etale chart $U=\\operatorname{Spec}A\\to X$, $\\mathcal K_X(U)=Q(A)$, the localization of $A$ at its non-zero-divisors. Restricting $\\mathcal K_X$ and $\\mathcal K_X(L)$ to $U_{\\mathrm{et}}$ gives the usual scheme meromorphic sheaves, via the ordinary-to-etale module comparison [lem-trf-scheme-etale-invertible-comparison]; these identifications commute with further etale restrictions.",
+ "source": {
+  "document": "literature/stacks-project/spaces-divisors.tex",
+  "place": "Tags 0EN3 (definition-sheaf-meromorphic-functions), 0EN6 (lemma-meromorphic-quasi-coherent), 0EN7 (lemma-meromorphic-quasi-coherent-agree), 0ENA (lemma-compute-meromorphic); hypotheses specialized using 0EN1 (lemma-weakass-reduced) and spaces-properties.tex Tag 0BGT (lemma-regular-normal). The component description uses properties.tex Tag 033M (lemma-normal-Noetherian), etale locally. Dense-open injectivity is the generic-product description. This node states the meromorphic model, not any divisor classification."
+ },
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-regular-scheme",
+  "pqf-def-locnoeth",
+  "lem-trf-scheme-etale-invertible-comparison",
+  "def-sc-generic-point",
+  "def-pc-integral-scheme",
+  "def-sc-meromorphic-module",
+  "def-trf-space-etale-module-functors",
+  "def-weil-pbc-module-localization",
+  "def-weil-irreducible-components",
+  "def-a1-space-open-subspace",
+  "def-pur-sheaf-tensor-product",
+  "def-sfb-space-divisors",
+  "def-sfb-space-total-fractions",
+  "def-sfb-space-small-ringed-model",
+  "def-trf-space-module-scheme-restriction",
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-space-module-structure-map",
+  "def-a1-space-point-topology"
+ ],
+ "proof": [
+  {
+   "text": "Every etale scheme chart is regular by hypothesis. Clause (1) of [rem-pc-regular-normal] makes all its local rings integrally closed domains, so they have no nonzero nilpotents; this proves normality and reducedness of $X$ in the stated chart sense. On a Noetherian chart clause (2) gives finitely many disjoint clopen normal integral components. Their local rings are the original regular local rings, so the components are regular too. A nonempty connected affine chart has just one component. Its ring $A$ is a domain by [def-pc-integral-scheme], is Noetherian by [pqf-lem-affine-open-locnoeth], and is integrally closed by [lem-weil-pbc-normal-domain-of-local-normal], using [lem-weil-pbc-affine-open-stalk-localization] to identify all its localizations with normal local rings. The empty chart instead has zero ring.",
+   "uses": [
+    "rem-pc-regular-normal",
+    "def-pc-integral-scheme",
+    "pqf-lem-affine-open-locnoeth",
+    "lem-weil-pbc-normal-domain-of-local-normal",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 033M (lemma-normal-Noetherian), 033L (lemma-integral-normal); spaces-properties.tex Tag 0BGT (lemma-regular-normal)"
+   }
+  },
+  {
+   "text": "By [lem-sfb-noetherian-space-topology] and [lem-sc-noetherian-finite-irreducible-components], $|X|$ has finitely many irreducible components. Sobriety [lem-sfb-quasiseparated-space-sober] supplies their unique generic points. Choose a dense open scheme $V\\subset X$ by [lem-sfb-quasiseparated-space-dense-scheme-open]. Every generic point $\\eta_i$ lies in $V$: remove the other finitely many components from its component, giving a nonempty open subset of $X$; density makes $V$ meet this subset, and an open meeting an irreducible component contains its generic point. Thus all $\\eta_i$ lie in the schematic locus. Every open of a Noetherian topological space is quasi-compact: a cover without a finite subcover would produce a strictly increasing infinite sequence of finite unions of its members, contrary to the descending condition on their closed complements. Thus $V$ is quasi-compact and locally Noetherian, hence Noetherian. Each $\\eta_i$ is a generic point of an integral normal component of this regular Noetherian scheme $V$, by clauses (1) and (2) of [rem-pc-regular-normal]. Apply [lem-sc-integral-function-field-affine-fraction] there to see that $\\mathcal O_{X,\\eta_i}$ is a field, and [lem-sc-invertible-module-generic-stalk] after [lem-trf-scheme-etale-invertible-comparison] to see that $L_{\\eta_i}$ has dimension one.",
+   "uses": [
+    "lem-sfb-noetherian-space-topology",
+    "lem-sc-noetherian-finite-irreducible-components",
+    "lem-sfb-quasiseparated-space-sober",
+    "lem-sfb-quasiseparated-space-dense-scheme-open",
+    "rem-pc-regular-normal",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-sc-invertible-module-generic-stalk",
+    "lem-trf-scheme-etale-invertible-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 0ENA (lemma-compute-meromorphic), first paragraph; decent-spaces.tex Tag 086U (theorem-decent-open-dense-scheme)"
+   }
+  },
+  {
+   "text": "For an etale scheme chart $a:U\\to X$, a point $u$ is a generic point of a component of $U$ exactly when $a(u)$ is one of the $\\eta_i$. Indeed a generic $u$ cannot have image with a strict generalization: [lem-sfb-quasiseparated-space-etale-specializations] would lift it to a strict generalization of $u$. Conversely, a generalization of a point over $\\eta_i$ must still map to $\\eta_i$, since $\\eta_i$ has no strict generalization; the noncollapse clause of that same node makes it equal to $u$. In a scheme, points with no strict generalizations are precisely generic points of components. Use the open scheme $V$ of step 2 near $\\eta_i$. The fibre $U\\times_X\\operatorname{Spec}k(\\eta_i)$ is the fibre of the etale scheme map $U\\times_XV\\to V$. By [lem-sfb-local-spectrum-base-change-stalks] its local rings at points over $\\eta_i$ are $\\mathcal O_{U,u}$. By [lem-weil-pbc-etale-fibre-discrete-separable-points] it is a disjoint union of spectra of these fields. For affine $U$ there are finitely many such $u$, by step 1. This identifies the generic fibre, including its structure maps, with the finite disjoint union of the generic local spectra of $U$.",
+   "uses": [
+    "lem-sfb-quasiseparated-space-etale-specializations",
+    "lem-sfb-local-spectrum-base-change-stalks",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 0ENA (lemma-compute-meromorphic), computation on affine U; spaces-properties.tex lemma-codimension-0-points"
+   }
+  },
+  {
+   "text": "For every affine chart $U=\\operatorname{Spec}A$, $A$ is reduced and Noetherian by step 1 and [pqf-lem-affine-open-locnoeth]. Give it the ordinary quasi-coherent sheaf $\\widetilde{Q(A)}$ of [lem-weil-pbc-spec-module-tilde-sections], and pass to the etale site using [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence]. Every map $f:W\\to U$ between etale charts is etale: factor it as its graph $W\\to W\\times_XU$ and the projection to $U$. The graph is a section of the etale projection to $W$; it is an open immersion since it is a base change of the open diagonal of that etale map, using [def-weil-etale-morphism] and [def-weil-unramified-morphism]. Etale base change is [lem-trf-space-fibre-products-etale-covers], and the scheme composition and open-immersion assertions are [lem-weil-pbc-etale-composition-cancellation]. For an affine chart map $\\operatorname{Spec}B\\to\\operatorname{Spec}A$, [lem-weil-pbc-module-pullback-affine-sections] and [lem-sfb-etale-total-fraction-base-change] identify its pullback with $\\widetilde{Q(B)}$. The comparison sends $(a/s)\\otimes b$ to $f(a)b/f(s)$; applying two chart maps gives the same fraction as their composite, so the identity and cocycle conditions hold. Affine opens form a basis by [lem-weil-pbc-affine-opens-basis]; gluing over them gives these modules on arbitrary charts. Now [lem-sfb-space-qcoh-cartesian-chart-family] gives a quasi-coherent module $F$ on $X$ with $F(U)=Q(A)$ and the specified fraction restrictions. Multiplication and unit glue too, since those fraction comparisons are algebra maps.",
+   "uses": [
+    "pqf-lem-affine-open-locnoeth",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-sfb-etale-total-fraction-base-change",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-sfb-space-qcoh-cartesian-chart-family",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-etale-morphism",
+    "def-weil-unramified-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 0EN6 (lemma-meromorphic-quasi-coherent), proof of (1)-(2); spaces-properties.tex Tag 03LZ"
+   }
+  },
+  {
+   "text": "The fraction presheaf defining $\\mathcal K_X$ maps to $F$: a denominator regular on a chart is regular on each affine open, where it is a non-zero-divisor. These local fraction maps glue. On an affine $U=\\operatorname{Spec}A$, regularity of multiplication on $\\mathcal O_U$ is equivalent to being a non-zero-divisor in $A$: one implication follows on global sections and the other by localization on affine basic opens. When $\\mathcal O_U$ is read as the etale structure sheaf of [def-trf-algebraic-space] restricted to $U_{\\mathrm{et}}$, injectivity on every affine etale $\\operatorname{Spec}B\\to U$ is the first clause $f(T_A)\\subseteq T_B$ of [lem-sfb-etale-total-fraction-base-change], so both readings give exactly the non-zero-divisors of $A$. Thus the presheaf map on affine objects is exactly $S(U)^{-1}A=Q(A)=F(U)$. Every chart and every covering refines to affine charts. Consequently any section of $F$ locally comes from a fraction, and two fractions with the same image agree after such a refinement. This proves that $F$ has the sheafification universal property [def-weil-pbc-sheafification], hence $F=\\mathcal K_X$. In particular $\\mathcal K_X(U)=Q(A)$ canonically, and it is quasi-coherent. On a scheme chart its Zariski restriction is the ordinary meromorphic sheaf [def-sc-meromorphic-module]: both sheafifications are the same fractions on affine opens. The equivalence [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] therefore identifies its etale restriction with that ordinary sheaf's etale realization. Tensoring with the line module, locally free of rank one, gives the same comparison for $\\mathcal K_X(L)$ using [lem-trf-scheme-etale-invertible-comparison]. All comparisons keep $a/s$ and local line generators, so they commute with further etale restrictions.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "def-sc-meromorphic-module",
+    "def-trf-algebraic-space",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-trf-scheme-etale-invertible-comparison",
+    "lem-sfb-etale-total-fraction-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tags 0EN3 (definition-sheaf-meromorphic-functions), 0EN6 (lemma-meromorphic-quasi-coherent), 0EN7 (lemma-meromorphic-quasi-coherent-agree)"
+   }
+  },
+  {
+   "text": "Put $G=\\prod_i j_{\\eta_i,*}k(\\eta_i)$. Its restriction to a chart is the pushforward from the generic fibres, by [lem-trf-space-etale-module-pushforward-restriction]. On affine $U=\\operatorname{Spec}A$, step 3 therefore identifies $G(U)$ with $\\prod_{u\\text{ generic in }U}\\mathcal O_{U,u}$. By [lem-weil-pbc-reduced-noetherian-total-ring-fractions] and [lem-weil-pbc-affine-open-stalk-localization], the canonical map $Q(A)\\to G(U)$ is an isomorphism: its components are exactly the localization maps at the minimal primes, corresponding to the components by [lem-weil-pbc-spec-irreducible-components-minimal-primes]. These maps are restrictions of a single sheaf map: send a local fraction to its pullback on each generic fibre. Its denominators are units there, since a regular function remains nonzero at every generic point of a reduced chart; this also follows from the total-quotient decomposition just cited. Thus $\\mathcal K_X\\to G$ is an isomorphism on the affine basis and hence on the site. To twist, trivialize $L$ on an etale cover. On a frame $e$, tensoring sends a tuple $(a_i)$ to $(a_i e_{\\eta_i})$; changing frame by a unit $v$ multiplies both expressions by $v_{\\eta_i}$. These maps glue and prove $\\mathcal K_X(L)=\\prod_i j_{\\eta_i,*}L_{\\eta_i}$. Evaluating at $X$ gives $\\Gamma(X,\\mathcal K_X(L))=\\prod_i L_{\\eta_i}$ by the definition of direct image.",
+   "uses": [
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 0ENA (lemma-compute-meromorphic), displayed formulas and affine computation"
+   }
+  },
+  {
+   "text": "On an affine chart $A\\to Q(A)$ is injective: $a/1=0$ says $sa=0$ for a non-zero-divisor $s$, hence $a=0$, by [def-weil-pbc-module-localization]. It follows that $\\mathcal O_X\\to\\mathcal K_X$ is injective, since equality of sheaf sections is local. On a local frame of $L$ its map to $\\mathcal K_X(L)$ is this same injection, so it too is injective. Let $W\\subseteq X$ be dense open. The finite-component argument of step 2 puts every $\\eta_i$ in $W$. Restricting the product sheaves of step 6 to $W$ leaves exactly the same generic fields and fibres. Their global sections on $W$ and $X$ are therefore the identical product, and restriction is its identity. If a section of $L$ restricts to zero on $W$, its image in this product is zero and the just-proved injection forces the original section to be zero. This proves both dense-open claims.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Definition 0EN3, following paragraph; Tag 0ENA (lemma-compute-meromorphic), final paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "rem-pc-regular-normal",
+  "def-pc-integral-scheme",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-weil-pbc-normal-domain-of-local-normal",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-sfb-noetherian-space-topology",
+  "lem-sc-noetherian-finite-irreducible-components",
+  "lem-sfb-quasiseparated-space-sober",
+  "lem-sfb-quasiseparated-space-dense-scheme-open",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-sc-invertible-module-generic-stalk",
+  "lem-trf-scheme-etale-invertible-comparison",
+  "lem-sfb-quasiseparated-space-etale-specializations",
+  "lem-sfb-local-spectrum-base-change-stalks",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-sfb-etale-total-fraction-base-change",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-sfb-space-qcoh-cartesian-chart-family",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-weil-etale-morphism",
+  "def-weil-unramified-morphism",
+  "def-weil-pbc-sheafification",
+  "def-sc-meromorphic-module",
+  "def-trf-algebraic-space",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-divisors.tex",
+  "place": "Tags 0EN6, 0EN7, 0ENA, with regularity specialization via properties.tex 033M and the existing etale chart and quasi-coherent comparison nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a regular Noetherian algebraic space the sheaf of total quotient rings is the product of the pushforwards of its generic fields and evaluates to total fractions on affine etale charts",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [inst : AlgebraicGeometry.IsIntegral X] (x : ↥X),\\n  IsFractionRing ↑(X.presheaf.stalk x) ↑X.functionField\", \"doc\": \"For any integral scheme $X$ and any point $x$ in $X$, the function field of $X$ is the fraction ring of the stalk of the structure sheaf at $x$. This means every non-zero divisor in the stalk becomes \"}\n  {\"name\": \"AlgebraicGeometry.functionField_isFractionRing_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [inst : AlgebraicGeometry.IsIntegral X] (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ [inst_1 : Nonempty ↥↑U], IsFractionRing ↑(X.presheaf.obj (Opposite.op U)) ↑X.functionField\", \"doc\": \"For an integral scheme $X$ and a non-empty affine open subset $U$ of $X$, the function field of $X$ is the fraction field of the ring of sections $\\\\Gamma(X, U)$. This follows from the fact that every \"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R))\\n  (s : ↑((AlgebraicGeometry.Spec.structureSheaf R).val.obj (Opposite.op U))) {ι : Type u_1} (t : Finset ι) (a h : ι → R)\\n  (iDh : (i : ι) → PrimeSpectrum.basicOpen (h i) ⟶ U),\\n  U ≤ ⨆ i ∈ t, Prim\", \"doc\": \"Given an open set $ U $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ of a commutative ring $ R $, a section $ s $ of the structure sheaf over $ U $, and a finite cover of $ U $ by basic open sets \"}\n  {\"name\": \"AlgebraicGeometry.instAlgebraCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensFunctionFieldOfNonemptyToScheme\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"(X : AlgebraicGeometry.Scheme) →\\n  [inst : IrreducibleSpace ↥X] →\\n    (U : X.Opens) → [Nonempty ↥↑U] → Algebra ↑(X.presheaf.obj (Opposite.op U)) ↑X.functionField\", \"doc\": \"For an irreducible scheme $X$ and a non-empty open subset $U$ of $X$, the ring of sections $\\\\Gamma(X, U)$ over $U$ is equipped with an algebra structure over the function field of $X$. This algebra st\"}\n  {\"name\": \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"(X : AlgebraicGeometry.Scheme) → [inst : AlgebraicGeometry.IsIntegral X] → Field ↑X.functionField\", \"doc\": \"For any integral scheme $X$, its function field (defined as the stalk of the structure sheaf $\\\\mathcal{O}_X$ at the generic point of $X$) is a field. This follows from the fact that every nonzero elem\"}\n  {\"name\": \"AlgebraicGeometry.functionField_isFractionRing_of_affine\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ (R : CommRingCat) [inst : IsDomain ↑R], IsFractionRing ↑R ↑(AlgebraicGeometry.Spec R).functionField\", \"doc\": \"For any integral scheme $X$, its function field (defined as the stalk of the structure sheaf $\\\\mathcal{O}_X$ at the generic point of $X$) is a field. This follows from the fact that every nonzero elem\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.functionField\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"(X : AlgebraicGeometry.Scheme) → [IrreducibleSpace ↥X] → CommRingCat\", \"doc\": \"For an irreducible scheme $X$, the function field is defined as the stalk of the structure sheaf $\\\\mathcal{O}_X$ at the generic point of $X$. This corresponds to the commutative ring obtained by takin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.germToFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"(X : AlgebraicGeometry.Scheme) →\\n  [inst : IrreducibleSpace ↥X] → (U : X.Opens) → [h : Nonempty ↥↑U] → X.presheaf.obj (Opposite.op U) ⟶ X.functionField\", \"doc\": \"For an irreducible scheme $X$ and a non-empty open subset $U$ of $X$, this is the morphism from the sections of the structure sheaf over $U$ to the function field of $X$, defined by taking the germ at\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme function-field, analytic meromorphic, topology, localization and ramification facts do not state the algebraic-space generic-chart model or descent of codimension-one cycles. No one-line specialization gives this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Meromorphic functions and meromorphic sections of line bundles on algebraic spaces computed on etale scheme charts and at generic points",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.germToFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"(X : AlgebraicGeometry.Scheme) →\\n  [inst : IrreducibleSpace ↥X] → (U : X.Opens) → [h : Nonempty ↥↑U] → X.presheaf.obj (Opposite.op U) ⟶ X.functionField\", \"doc\": \"For an irreducible scheme $X$ and a non-empty open subset $U$ of $X$, this is the morphism from the sections of the structure sheaf over $U$ to the function field of $X$, defined by taking the germ at\"}\n  {\"name\": \"MeromorphicNFOn.meromorphicOn\", \"module\": \"Mathlib/Analysis/Meromorphic/NormalForm\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {f : 𝕜 → E} {U : Set 𝕜}, MeromorphicNFOn f U → MeromorphicOn f U\", \"doc\": \"If a function $ f : \\\\mathbb{K} \\\\to E $ has a meromorphic normal form on a set $ U $, then $ f $ is meromorphic on $ U $. This means that the existence of a local representation $ f(w) = (w - z)^n \\\\cdo\"}\n  {\"name\": \"meromorphicNFOn_toMeromorphicNFOn\", \"module\": \"Mathlib/Analysis/Meromorphic/NormalForm\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] (f : 𝕜 → E) (U : Set 𝕜), MeromorphicNFOn (toMeromorphicNFOn f U) U\", \"doc\": \"The function obtained by applying toMeromorphicNFOn to $ f $ and a set $ U $ has a meromorphic normal form on $ U $.\"}\n  {\"name\": \"toMeromorphicNFOn\", \"module\": \"Mathlib/Analysis/Meromorphic/NormalForm\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u_2} → [inst_1 : NormedAddCommGroup E] → [NormedSpace 𝕜 E] → (𝕜 → E) → Set 𝕜 → 𝕜 → E\", \"doc\": \"The function maps elements of the nontrivially normed field $\\\\mathbb{K}$ to the normed space $E$, representing the meromorphic normal form on a specified set $U$. For points in $U$ where the function \"}\n  {\"name\": \"MeromorphicNFAt.meromorphicAt\", \"module\": \"Mathlib/Analysis/Meromorphic/NormalForm\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {f : 𝕜 → E} {x : 𝕜}, MeromorphicNFAt f x → MeromorphicAt f x\", \"doc\": \"If a function $ f $ has a meromorphic normal form at a point $ x $, then $ f $ is meromorphic at $ x $. This means that the existence of an integer $ n $ and an analytic function $ g $ (with $ g(x) \\\\n\"}\n  {\"name\": \"meromorphicNFAt_toMeromorphicNFAt\", \"module\": \"Mathlib/Analysis/Meromorphic/NormalForm\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {f : 𝕜 → E} {x : 𝕜}, MeromorphicNFAt (toMeromorphicNFAt f x) x\", \"doc\": \"The function obtained by converting $ f $ to its meromorphic normal form at $ x $ via $ \\\\text{toMeromorphicNFAt} $ satisfies the meromorphic normal form condition at $ x $, i.e., $ \\\\text{toMeromorphic\"}\n  {\"name\": \"toMeromorphicNFOn_eq_toMeromorphicNFAt\", \"module\": \"Mathlib/Analysis/Meromorphic/NormalForm\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {f : 𝕜 → E} {x : 𝕜} {U : Set 𝕜},\\n  MeromorphicOn f U → x ∈ U → toMeromorphicNFOn f U x = toMeromorphicNFAt f x x\", \"doc\": \"For a function $ f $ mapping from a nontrivially normed field $ \\\\mathbb{K} $ to a normed space $ E $, if $ f $ is meromorphic on a set $ U $ and $ x \\\\in U $, then the meromorphic normal form of $ f $ \"}\n  {\"name\": \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"(X : AlgebraicGeometry.Scheme) → [inst : AlgebraicGeometry.IsIntegral X] → Field ↑X.functionField\", \"doc\": \"For any integral scheme $X$, its function field (defined as the stalk of the structure sheaf $\\\\mathcal{O}_X$ at the generic point of $X$) is a field. This follows from the fact that every nonzero elem\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme function-field, analytic meromorphic, topology, localization and ramification facts do not state the algebraic-space generic-chart model or descent of codimension-one cycles. No one-line specialization gives this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"meromorphic\", \"Scheme\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme function-field, analytic meromorphic, topology, localization and ramification facts do not state the algebraic-space generic-chart model or descent of codimension-one cycles. No one-line specialization gives this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "meromorphic|totalQuotient|totalFraction",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme function-field, analytic meromorphic, topology, localization and ramification facts do not state the algebraic-space generic-chart model or descent of codimension-one cycles. No one-line specialization gives this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf meromorphic functions algebraic space product generic stalks etale charts",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"MeromorphicOn.fun_mul\", \"module\": \"Mathlib.Analysis.Meromorphic.Basic\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {s t : 𝕜 → 𝕜} {U : Set 𝕜},\\n  MeromorphicOn s U → MeromorphicOn t U → MeromorphicOn (fun i => s i * t i) U\", \"doc\": \"If two functions $ s $ and $ t $ are meromorphic on a set $ U $ in a nontrivially normed field $ \\\\mathbb{K} $, then their product function $ s(z) \\\\cdot t(z) $ is also meromorphic on $ U $.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.𝒪\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \": Sheaf CommRingCat X.toTopCat\", \"doc\": \"The sheaf $\\\\mathcal{O}_X$ of commutative rings on the underlying topological space of a locally ringed space $X$, where every stalk is a local ring. This is the canonical sheaf associated to the local\"}\n  {\"name\": \"AlgebraicGeometry.stalkwise\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Constructors\", \"type\": \"(P : ∀ {R S : Type u} [CommRing R] [CommRing S], (R →+* S) → Prop) : MorphismProperty Scheme.{u}\", \"doc\": \"A morphism property of schemes defined by requiring that for every point $x$ in the domain scheme, the induced ring homomorphism on the stalk at $x$ satisfies the predicate $P$ applied to the correspo\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.Hom.stalkMap\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"{X Y : LocallyRingedSpace.{u}} (f : Hom X Y) (x : X) : Y.presheaf.stalk (f.1.1 x) ⟶ X.presheaf.stalk x\", \"doc\": \"For a morphism of locally ringed spaces $f: X \\\\to Y$ and a point $x \\\\in X$, `stalkMap` defines the induced ring homomorphism from the stalk of the structure sheaf of $Y$ at $f(x)$, denoted $\\\\mathcal{O\"}\n  {\"name\": \"MeromorphicAt.mul\", \"module\": \"Mathlib.Analysis.Meromorphic.Basic\", \"type\": \"{f g : 𝕜 → 𝕜} (hf : MeromorphicAt f x) (hg : MeromorphicAt g x) : MeromorphicAt (f * g) x\", \"doc\": \"If $ f $ and $ g $ are meromorphic functions at a point $ x $ in a nontrivially normed field $ \\\\mathbb{K} $, then their product $ f \\\\cdot g $ is also meromorphic at $ x $. This follows from the fact t\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.germ_toOpen\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(U : Opens (PrimeSpectrum.Top R)) (x : PrimeSpectrum.Top R) (hx : x ∈ U) (f : R) :\\n  (structureSheaf R).presheaf.germ U x hx (toOpen R U f) = toStalk R x f\", \"doc\": \"For any open subset $ U $ of $\\\\operatorname{Spec}(R)$ containing a point $ x $ (corresponding to a prime ideal $\\\\mathfrak{p}$), and for any $ f \\\\in R $, the germ at $ x $ of the section $\\\\text{toOpen}\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.stalkMap_germ_apply\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"(U : Opens Y) (x : X) (hx : f.base x ∈ U) (y) :\\n  f.stalkMap x (Y.presheaf.germ U (f.base x) hx y) = X.presheaf.germ ((Opens.map f.base).obj U) x hx (f.c.app (op U) y)\", \"doc\": \"Let $f: (X, \\\\mathcal{O}_X) \\\\to (Y, \\\\mathcal{O}_Y)$ be a morphism of locally ringed spaces, consisting of a continuous map (also denoted $f$) and a sheaf morphism $f^\\\\sharp: \\\\mathcal{O}_Y \\\\to f_*\\\\mathc\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.instIsLocalRingCarrierStalkCommRingCatPresheaf\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"(x : X) : IsLocalRing (X.presheaf.stalk x)\", \"doc\": \"For any locally ringed space $X$ and any point $x$ in $X$, the stalk of the structure sheaf (a presheaf of commutative rings) at $x$ is a local ring. This asserts the defining property of a locally ri\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme function-field, analytic meromorphic, topology, localization and ramification facts do not state the algebraic-space generic-chart model or descent of codimension-one cycles. No one-line specialization gives this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Meromorphic functions on algebraic spaces generic stalk product affine etale comparison",
+   "results": "{\"t\": \"2026-10-23T14:10:55Z\", \"tool\": \"leansearch\", \"query\": \"Meromorphic functions on algebraic spaces generic stalk product affine etale comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MeromorphicOn.fun_prod\", \"MeromorphicAt.prod\", \"Meromorphic.fun_prod\", \"MeromorphicOn\", \"MeromorphicAt.fun_prod\", \"MeromorphicAt\", \"Meromorphic\", \"MeromorphicOn.prod\"], \"digest\": \"a9b3c94b7846ed49\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme function fields and analytic meromorphic functions do not give this algebraic-space meromorphic sheaf and its chart comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"meromorphic\", \"Scheme\"",
+   "results": "{\"t\": \"2026-10-23T14:10:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"meromorphic\\\", \\\"Scheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme function fields and analytic meromorphic functions do not give this algebraic-space meromorphic sheaf and its chart comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Meromorphic sections of a line bundle on a regular Noetherian separated algebraic space are products of generic fibres and evaluate on affine etale charts to total quotient rings",
+   "results": "{\"t\": \"2026-10-23T14:10:57Z\", \"tool\": \"leanfinder\", \"query\": \"Meromorphic sections of a line bundle on a regular Noetherian separated algebraic space are products of generic fibres and evaluate on affine etale charts to total quotient rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.functionField\", \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\", \"AlgebraicGeometry.StructureSheaf.IsFraction\", \"AlgebraicGeometry.Scheme.germToFunctionField\", \"AlgebraicGeometry.StructureSheaf.isLocallyFraction_pred\", \"AlgebraicGeometry.instAlgebraCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensFunctionFieldOfNonemptyToScheme\"], \"digest\": \"ca3046fac46d77de\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme function fields and analytic meromorphic functions do not give this algebraic-space meromorphic sheaf and its chart comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraic space meromorphic sheaf rational sections identified etale locally with products of local rings at generic points",
+   "results": "{\"t\": \"2026-10-23T14:12:08Z\", \"tool\": \"leanfinder\", \"query\": \"Algebraic space meromorphic sheaf rational sections identified etale locally with products of local rings at generic points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.isLocallyFraction\", \"AlgebraicGeometry.StructureSheaf.IsFraction\", \"AlgebraicGeometry.Scheme.germToFunctionField\", \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"AlgebraicGeometry.StructureSheaf.isLocallyFraction_pred\", \"AlgebraicGeometry.Scheme.functionField\", \"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\"], \"digest\": \"e303f9761a0f2320\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme function fields and analytic meromorphic functions do not give this algebraic-space meromorphic sheaf and its chart comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-regular-space-divisor-line-dictionary",
+  "date": "2026-10-23",
+  "group": "Q80"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Extension and uniqueness of rigidified lines over a regular base. Supporting input for the rigidified-line split: Divisors and rationally trivialized lines on a regular algebraic space. Current blueprint: sk-thm-sf-ctf-stability-direct-images.proof.md, clause (3), proper-direct-image input; this live supporting branch retains the regular-base Picard geometry described in its existing provenance.",
+   "via": [
+    "lem-sfb-regular-space-divisor-line-dictionary",
+    "lem-sfb-regular-group-rigidified-line-extension",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-meromorphic-generic-chart-model",
+  "worker": "stage1",
+  "summary": "Seven-step proof of the regular-space meromorphic model using existing regular-normal, topology, chart, total-fraction and quasi-coherent descent tools. One new statement-only algebra lemma is the etale total-fraction base-change isomorphism inside Stacks 0EN6. Corrected connected affine charts to nonempty connected affine charts: the empty chart has zero ring, not a domain. All generic fibres and comparison maps are identified explicitly; every cited statement was read and quoted.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Extension and uniqueness of rigidified lines over a regular base. Supporting input for the rigidified-line split: Divisors and rationally trivialized lines on a regular algebraic space. Current blueprint: sk-thm-sf-ctf-stability-direct-images.proof.md, clause (3), proper-direct-image input; this live supporting branch retains the regular-base Picard geometry described in its existing provenance. Steps realize the meromorphic model prerequisite; latest sk-thm-sf-ctf-stability-direct-images.proof.md clause (3), maintaining the inherited supporting Picard geometry.",
+  "tool_uses": [
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Normality of regular schemes and finite clopen normal integral components of a normal Noetherian scheme; used on charts, not to replace the unit route."
+   },
+   {
+    "node": "pqf-lem-affine-open-locnoeth",
+    "why": "Noetherian coordinate rings on affine opens of locally Noetherian schemes; needed on etale charts."
+   },
+   {
+    "node": "lem-weil-pbc-normal-domain-of-local-normal",
+    "why": "A domain whose prime localizations are integrally closed is integrally closed; used only for a connected affine chart."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Identifies affine scheme local rings with prime localizations for chart and generic-fibre calculations."
+   },
+   {
+    "node": "lem-sc-noetherian-finite-irreducible-components",
+    "why": "Finiteness of irreducible components of a Noetherian topological space; the unit has no substitute topology lemma."
+   },
+   {
+    "node": "lem-sc-integral-function-field-affine-fraction",
+    "why": "Identifies the generic local ring of an integral scheme with its fraction field, applied in the dense open scheme."
+   },
+   {
+    "node": "lem-sc-invertible-module-generic-stalk",
+    "why": "A line module on an integral scheme has one-dimensional generic stalk, applied to each dense-open component."
+   },
+   {
+    "node": "lem-trf-scheme-etale-invertible-comparison",
+    "why": "Compares ordinary and etale line modules on schemes and their pullbacks; needed for the chart comparison and generic fibres."
+   },
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "An etale scheme over a field is a disjoint union of separable field spectra; used to evaluate generic-fibre sections."
+   },
+   {
+    "node": "lem-weil-pbc-spec-module-tilde-sections",
+    "why": "The affine quasi-coherent sheaf associated with a module has that module as its global sections."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "The ordinary/etale equivalence for quasi-coherent modules transfers the affine fraction module to chart sites."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "Affine pullback of associated module sheaves is tensor product, needed with the new fraction base-change lemma."
+   },
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Affine opens form a scheme basis, allowing the explicit chart modules to glue on all charts."
+   },
+   {
+    "node": "lem-trf-space-etale-module-pushforward-restriction",
+    "why": "Restricts etale direct image to a chart by the fibre product, exactly the generic-fibre computation."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+    "why": "The total quotient ring of a reduced Noetherian ring is the product of its minimal-prime localizations; used for chart sections."
+   },
+   {
+    "node": "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "why": "Identifies irreducible components of an affine spectrum with minimal primes; needed to index the fraction product."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Etale base change for space charts, used for projections in the graph argument."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Open immersions and composites of etale scheme maps are etale, used for maps of charts."
+   }
+  ]
+ },
+ "tool_uses": [
+  "rem-pc-regular-normal",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-weil-pbc-normal-domain-of-local-normal",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-sc-noetherian-finite-irreducible-components",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-sc-invertible-module-generic-stalk",
+  "lem-trf-scheme-etale-invertible-comparison",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-etale-composition-cancellation"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-8bf04624a",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-8bf04624a (reviewer sub-agent of L); spot-checked: I read the item, its 7 steps, every cited statement, the new node and the source: Stacks spaces-divisors 0EN3, lemma-describe-S, lemma-regular-section-structure-sheaf (line 1455), 0EN6, 0EN7, 0ENA. The route follows the 0EN6/0ENA proofs and uses no SGA. This is an ordinary first split: no re-split note was found in the snapshot coord. The only statement change is 'nonempty connected affine charts'. It is a correct repair: Spec 0 is not a domain, and Stacks 004S's convention already requires connected spaces to be nonempty. The new node lem-sfb-etale-total-fraction-base-change (Q(A)⊗_A B ≅ Q(B) for reduced Noetherian A and étale A→B, with f(T_A)⊆T_B) is true. Proof sketch: flatness gives the first clause; Q(A)=∏A_p; each A_p⊗B is a finite product of separable fields; minimal primes of B are exactly the primes over minimal primes of A; B is reduced Noetherian, so T_B becomes invertible. I tested A=0, A→0, k→k×k', k[x,y]/(xy)→A_x×A_y, and the A[t] failure. It is not a duplicate: lem-weil-pbc-total-fraction-fiber-decomposition only gives T_A^{-1}B≅∏κ(q)⊗B and says nothing about T_B or Q(B); the sc-meromorphic generic-product and single-ring total-quotient nodes do not cover base change. It is not a clause of the item. Steps 1-7 check against the cited statements, including: the hypotheses of rem-pc-regular-normal (1)(2); the quasi-compact-diagonal hypotheses of the sober, dense-open and specialization nodes; why each η_i lies in V; the lift and noncollapse clauses; the generic fibre via local-spectrum base change and the étale-over-field node; the cocycle condition from the fraction formula; the descent hypotheses; pushforward-restriction for G(U); the product from reduced-noetherian-total-ring-fractions (2). Batch-5: all ten flagged citations are general algebraic-space foundations (definitions of module functors and open subspaces, |X| topology, Zariski/étale QCoh equivalence, QCoh descent, fibre products, étale restriction of f_*), not trace-formula or Poincaré-duality content, so they are accepted. The worker's 18 off-unit tool_uses are accepted. FIX, as a full item JSON under fixes/dag/nodes/sec-six-functors-basics/: (1) step 2 text now cites [rem-pc-regular-normal], which was already in its uses; (2) step 5: when 'regular on O_U' is read on the étale site, the direction NZD ⇒ injective needed flatness. It now cites the first clause f(T_A)⊆T_B of lem-sfb-etale-total-fraction-base-change (added to the step's uses; already in proof_deps), and the text cites [def-trf-algebraic-space]. No statement, stmt_dep or node drop.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceMeromorphicGenericChartModel",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.space_meromorphic_generic_chart_model",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.meromorphicSmallModule",
+   "AlgebraicGeometry.AlgebraicSpace.meromorphicSpaceModule",
+   "AlgebraicGeometry.AlgebraicSpace.toMeromorphicSpaceModule",
+   "AlgebraicGeometry.AlgebraicSpace.meromorphicOpenCharts",
+   "AlgebraicGeometry.AlgebraicSpace.meromorphicOpenRestriction",
+   "AlgebraicGeometry.AlgebraicSpace.meromorphicLocalSpectrum",
+   "AlgebraicGeometry.AlgebraicSpace.meromorphicGenericInclusion",
+   "AlgebraicGeometry.AlgebraicSpace.meromorphicGenericFactor",
+   "AlgebraicGeometry.AlgebraicSpace.meromorphicRegularGerm",
+   "AlgebraicGeometry.AlgebraicSpace.space_meromorphic_generic_chart_model"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceMeromorphicGenericChartModel.lean",
+  "statement": "theorem space_meromorphic_generic_chart_model (X : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))) (hX : IsRegularNoetherianSeparated X) : (∀ T : X.EtaleSite, IsReduced (X.etaleForget.obj T) ∧ ∀ x : X.etaleForget.obj T, IsDomain ((X.etaleForget.obj T).presheaf.stalk x) ∧ IsIntegrallyClosed ((X.etaleForget.obj T).presheaf.stalk x)) ∧ (∀ T : X.EtaleSite, IsNoetherian (X.etaleForget.obj T) → ∃ (n : ℕ) (U : Fin n → (X.etaleForget.obj T).Opens), Set.range (fun i : Fin n ↦ (U i : Set (X.etaleForget.obj T))) = irreducibleComponents (X.etaleForget.obj T) ∧ (∀ i : Fin n, IsClosed (U i : Set (X.etaleForget.obj T))) ∧ (∀ i j : Fin n, i ≠ j → Disjoint (U i) (U j)) ∧ (⨆ i : Fin n, U i) = ⊤ ∧ (∀ i : Fin n, IsIntegral (U i).toScheme ∧ IsRegularScheme (U i).toScheme ∧ ∀ x : (U i).toScheme, IsDomain ((U i).toScheme.presheaf.stalk x) ∧ IsIntegrallyClosed ((U i).toScheme.presheaf.stalk x)) ∧ Nonempty (IsColimit (Cofan.mk (X.etaleForget.obj T) (fun i : Fin n ↦ (U i).ι)))) ∧ (∀ T : X.EtaleSite, IsAffine (X.etaleForget.obj T) → Nonempty (X.etaleForget.obj T) → PreconnectedSpace (X.etaleForget.obj T) → IsNoetherianRing Γ(X.etaleForget.obj T, ⊤) ∧ IsDomain Γ(X.etaleForget.obj T, ⊤) ∧ IsIntegrallyClosed Γ(X.etaleForget.obj T, ⊤)) ∧ (genericPoints (Point X.obj.obj)).Finite ∧ (∀ Z : Set (Point X.obj.obj), Z ∈ irreducibleComponents (Point X.obj.obj) → ∃! η : Point X.obj.obj, IsGenericPoint η Z) ∧ (∀ U : X.SmallEtaleModel, IsIso ((toSheafify X.smallEtaleModelTopology (spaceTotalFractionPresheaf X)).app (op U))) ∧ (∀ (L : X.Modules), X.IsLineModule L → Mono (toMeromorphicSpaceModule X L)) ∧ Mono (spaceToTotalFractions X) ∧ (∀ (L : X.Modules), X.IsLineModule L → (∀ (W : Set (Point X.obj.obj)), IsOpen W → Dense W → Function.Bijective (meromorphicOpenRestriction X (meromorphicSpaceModule X L) W) ∧ Function.Injective (meromorphicOpenRestriction X L W)) ∧ ∃ c : ∀ T : X.EtaleSite, (X.schemeRestriction T).obj (meromorphicSpaceModule X L) ≅ Scheme.Modules.meromorphicModule (X.etaleForget.obj T) ((X.schemeRestriction T).obj L), (∀ T : X.EtaleSite, (X.schemeRestriction T).map (toMeromorphicSpaceModule X L) ≫ (c T).hom = Scheme.Modules.toMeromorphicModule (X.etaleForget.obj T) ((X.schemeRestriction T).obj L)) ∧ ∀ (T U : X.EtaleSite) (f : T ⟶ U) (W : (X.etaleForget.obj U).Opens) (a : (schemeOpens X T).obj ((X.etaleForget.map f) ⁻¹ᵁ W) ⟶ (schemeOpens X U).obj W), X.etaleForget.map a = (X.etaleForget.map f) ∣_ W → ∀ (m : Γ((X.schemeRestriction U).obj L, W)) (b : Scheme.Modules.meromorphicDenominators (X.etaleForget.obj U) W) (d : Scheme.Modules.meromorphicDenominators (X.etaleForget.obj T) ((X.etaleForget.map f) ⁻¹ᵁ W)), d.val = (X.etaleForget.map f).app W b.val → (c T).hom.app ((X.etaleForget.map f) ⁻¹ᵁ W) ((meromorphicSpaceModule X L).val.map a.op ((c U).inv.app W (Scheme.Modules.meromorphicFraction (X.etaleForget.obj U) ((X.schemeRestriction U).obj L) W (LocalizedModule.mk m b)))) = Scheme.Modules.meromorphicFraction (X.etaleForget.obj T) ((X.schemeRestriction T).obj L) ((X.etaleForget.map f) ⁻¹ᵁ W) (LocalizedModule.mk (L.val.map a.op m) d)) ∧ ∃ T : X.EtaleSite, IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) T.obj.hom ∧ Topology.IsOpenEmbedding (schemePointMap T.obj.hom) ∧ DenseRange (schemePointMap T.obj.hom) ∧ schemePointMap T.obj.hom '' genericPoints (X.etaleForget.obj T) = genericPoints (Point X.obj.obj) ∧ (∀ x : X.etaleForget.obj T, x ∈ genericPoints (X.etaleForget.obj T) → IsField ((X.etaleForget.obj T).presheaf.stalk x)) ∧ (∃ e : meromorphicSpaceModule X (SheafOfModules.unit X.structureSheaf) ≅ ∏ᶜ (fun η : {x : X.etaleForget.obj T // x ∈ genericPoints (X.etaleForget.obj T)} ↦ (moduleDirectImage (meromorphicGenericInclusion X T η.val)).obj (SheafOfModules.unit (schemeSpace (meromorphicLocalSpectrum X T η.val)).structureSheaf)), ∀ η : {x : X.etaleForget.obj T // x ∈ genericPoints (X.etaleForget.obj T)}, toMeromorphicSpaceModule X (SheafOfModules.unit X.structureSheaf) ≫ e.hom ≫ Pi.π _ η = moduleStructureMap (meromorphicGenericInclusion X T η.val)) ∧ ∀ (L : X.Modules), X.IsLineModule L → (∀ η : {x : X.etaleForget.obj T // x ∈ genericPoints (X.etaleForget.obj T)}, Module.finrank ((X.etaleForget.obj T).presheaf.stalk η.val) (((X.schemeRestriction T).obj L).presheaf.stalk η.val) = 1) ∧ (∃ e : meromorphicSpaceModule X L ≅ ∏ᶜ (fun η : {x : X.etaleForget.obj T // x ∈ genericPoints (X.etaleForget.obj T)} ↦ meromorphicGenericFactor X T η.val L), ∀ η : {x : X.etaleForget.obj T // x ∈ genericPoints (X.etaleForget.obj T)}, toMeromorphicSpaceModule X L ≫ e.hom ≫ Pi.π _ η = (moduleTensorAdjunction (meromorphicGenericInclusion X T η.val)).unit.app L) ∧ ∃ g : (meromorphicSpaceModule X L).sections ≃ (∀ η : {x : X.etaleForget.obj T // x ∈ genericPoints (X.etaleForget.obj T)}, ((X.schemeRestriction T).obj L).presheaf.stalk η.val), (∀ (s : L.sections) (η : {x : X.etaleForget.obj T // x ∈ genericPoints (X.etaleForget.obj T)}), g (SheafOfModules.sectionsMap (toMeromorphicSpaceModule X L) s) η = meromorphicRegularGerm X T L η.val s) ∧ ∀ (s : (meromorphicSpaceModule X L).sections) (η : {x : X.etaleForget.obj T // x ∈ genericPoints (X.etaleForget.obj T)}) (W : (X.etaleForget.obj T).Opens) (hη : η.val ∈ W) (a : Γ(X.etaleForget.obj T, W)) (m : Γ((X.schemeRestriction T).obj L, W)), (toMeromorphicSpaceModule X L).val.app (op ((schemeOpens X T).obj W)) m = (schemeOpensRingHom X T).app (op W) a • @id ((meromorphicSpaceModule X L).val.obj (op ((schemeOpens X T).obj W))) (s.val (op ((schemeOpens X T).obj W))) → ((X.schemeRestriction T).obj L).presheaf.germ W η.val hη m = (X.etaleForget.obj T).presheaf.germ W η.val hη a • g s η",
+  "branch": "newtargets-dag",
+  "by": "Q96",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fb2deb928",
+  "group": "Q96",
+  "result": "pass",
+  "note": "Item node changed only in lean and stmt_deps; the 7 added stmt_deps are landed def owners (space-divisors, total-fractions, small-ringed-model, scheme-restriction, scheme-algebraic-space, module-structure-map, point-topology); all other dep records identical to side-live; statement verbatim; declaration list exact; only the theorem is sorried. Every clause matched: reduced/normal charts; Noetherian chart = finite clopen integral regular normal cofan; nonempty connected affine ring is a Noetherian normal domain; finitely many generic points with unique generic point per component; open-immersion dense chart T contains all generic points and its generic stalks are fields; K and K(L) ≅ ∏ j_* pinned by moduleStructureMap and adjunction unit (uniquely determined); finrank 1; Γ(K(L)) ≃ ∏ L_η pinned on regular sections and local fractions; Mono O→K and L→K(L); dense-open bijective/injective restriction via sectionsPrecomp to charts in W; IsIso of toSheafify on the affine small model gives K(U)=Q(A); chart comparison c_T with fraction formula under every étale chart map. ∃T before ∀L. Edge cases empty X, Spec 0, disconnected, field/DVR, universes OK. No duplicates found (own rg). No compile (no file changed). Advisories: meromorphicOpenCharts unused; 4 base stmt_deps unreferenced; K product stated as module iso."
+ }
+}

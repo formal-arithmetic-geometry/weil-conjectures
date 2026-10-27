@@ -1,0 +1,129 @@
+{
+ "id": "lem-pe-coefficient-open-extension",
+ "kind": "statement",
+ "title": "Open extension and comparison on coefficient-sized sites",
+ "statement": "Let $j:U\\hookrightarrow X$ be an open immersion of schemes in universe $u$, and let $A$ be a commutative ring in universe $\\max(v,u+1)$. On the existing coefficient-sized site models [def-weil-proetale-inverse-image, def-weil-pbc-site-comparison-morphism], compose site objects with $j$ and transport this functor by AsSmall. Define $j_!$ on both etale and pro-etale $A$-module sheaves by left Kan extension along this functor followed by sheafification. There is a canonical natural isomorphism $\\nu_X^*\\circ j^{\\mathrm{et}}_!\\cong j^{\\mathrm{proet}}_!\\circ\\nu_U^*$; equivalently $\\nu_X^*(j^{\\mathrm{et}}_!G)\\cong j^{\\mathrm{proet}}_!(\\nu_U^*G)$ for every $G$. No finiteness or quasi-compactness assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AF, lemma-jshriek-comparison; extension construction in Sites Modules, Tag 03DI"
+ },
+ "stmt_deps": [
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-site-comparison-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Composition along the open immersion is continuous on both original sites. AsSmall.down is continuous for the induced topology, and AsSmall.up is continuous for the transported topology. Their composites give continuous functors on the coefficient-sized models. Left Kan extension followed by sheafification supplies each extension functor and its adjunction to sectionwise restriction. All indexing categories and coefficients lie in max(v,u+1).",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The two composites of comparison inclusion and open composition are definitionally equal, including their actions on arrows. Consequently the two composite right adjoints are the same restriction functor on module sheaves. Apply conjugateIsoEquiv to the identity isomorphism of these right adjoints and invert it, obtaining the displayed natural isomorphism of composite left adjoints. This is a constructed natural isomorphism, with no existence theorem or chosen witness.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AF, lemma-jshriek-comparison; extension construction in Sites Modules, Tag 03DI; explicit coefficient-sized site construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "comparison of sites commutes with extension by zero using the composite adjunctions",
+   "results": "Eight hits, including sheafPullbackConstruction.sheafAdjunctionContinuous, sheafAdjunctionCocontinuous, and Sheaf.adjunction.",
+   "date": "2026-10-26",
+   "verdict": "Generic adjunction tools; no coefficient-sized pro-etale comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateIsoEquiv\"",
+   "results": "CategoryTheory.conjugateIsoEquiv in Mathlib/CategoryTheory/Adjunction/Mates.lean and its component equations.",
+   "date": "2026-10-26",
+   "verdict": "Used to construct the canonical comparison after identifying right adjoints."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateIsoEquiv|leftAdjointUniq",
+   "results": "Generic mate and uniqueness APIs in Mathlib/CategoryTheory/Adjunction/Mates.lean, Sites/ConstantSheaf.lean and elsewhere.",
+   "date": "2026-10-26",
+   "verdict": "Generic tools used in the proof, no specialized declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoefficientFixedLocalizationKernelComparison",
+  "date": "2026-10-26",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Constructible comparison induction: identify the open endpoint of the localization sequence and commute open extension with etale comparison.",
+   "via": [
+    "lem-pe-coefficient-fixed-kernel-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-thm-pe-constructible-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoefficientOpenExtension",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoefficientOpenExtension.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.coefficientOpenExtensionComparisonIso",
+  "statement": "def coefficientOpenExtensionComparisonIso (A : Type (max v (u + 1))) [CommRing A]\n    {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :\n    coefficientOpenEtaleExtension.{u, v} A j ⋙\n      Functor.sheafPullbackConstruction.sheafPullback\n        (Scheme.smallModelComparisonInclusion.{u, v} X) (ModuleCat.{max v (u + 1)} A)\n        (Scheme.smallModelComparisonEtaleTopology.{u, v} X)\n        (Scheme.coefficientProEtaleModelTopology.{u, v} X) ≅\n    Functor.sheafPullbackConstruction.sheafPullback\n        (Scheme.smallModelComparisonInclusion.{u, v} U) (ModuleCat.{max v (u + 1)} A)\n        (Scheme.smallModelComparisonEtaleTopology.{u, v} U)\n        (Scheme.coefficientProEtaleModelTopology.{u, v} U) ⋙\n      coefficientOpenProEtaleExtension.{u, v} A j",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-26",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.coefficientOpenProEtaleMap",
+   "AlgebraicGeometry.ProEtale.coefficientOpenEtaleMap",
+   "AlgebraicGeometry.ProEtale.coefficientOpenProEtaleMap_isContinuous",
+   "AlgebraicGeometry.ProEtale.coefficientOpenEtaleMap_isContinuous",
+   "AlgebraicGeometry.ProEtale.coefficientOpenProEtaleExtension",
+   "AlgebraicGeometry.ProEtale.coefficientOpenEtaleExtension",
+   "AlgebraicGeometry.ProEtale.coefficientOpenExtensionComparisonIso"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261026T065250-L-2776723",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261026T065250-L-2776723",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

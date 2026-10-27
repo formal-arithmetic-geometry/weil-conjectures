@@ -1,0 +1,152 @@
+{
+ "id": "def-sfb-scheme-cardinal-size",
+ "kind": "definition",
+ "title": "Cardinal size of a scheme",
+ "status": "split",
+ "statement": "Let $Z$ be a scheme [def-pc-scheme]. Let $\\mathcal B(Z)$ be its set of affine open subsets, each with its induced open subscheme structure, and let $\\Gamma(U,\\mathcal O_Z)$ be the ring of sections of its structure sheaf on $U$. Define the cardinal size of $Z$ by $s(Z)=\\max\\{\\aleph_0,|\\mathcal B(Z)|,\\sup_{U\\in\\mathcal B(Z)}|\\Gamma(U,\\mathcal O_Z)|\\}$. The empty scheme is allowed.",
+ "stmt_deps": [
+  "def-pc-scheme"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sets.tex",
+  "place": "section-categories-schemes, definition of size preceding Tag 000I (lemma-bounded-size)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "schemeSize|scheme_size|cardinalSize|size.*[Ss]cheme|[Ss]cheme.*size",
+   "results": {
+    "t": "2026-10-23T12:22:18Z",
+    "tool": "grep",
+    "query": "schemeSize|scheme_size|cardinalSize|size.*[Ss]cheme|[Ss]cheme.*size",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Modules/Tilde.lean"
+    ],
+    "digest": "e4fdf7b214706bdb"
+   },
+   "date": "2026-10-23",
+   "verdict": "No matching size definition: affine opens and scheme structures are present, but the three-term cardinal invariant is not. The grep hit concerns preservation of colimits, and structural SizeOf results do not measure Stacks scheme size."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The size of a scheme is the maximum of aleph zero, the cardinality of affine open subsets, and the supremum of the cardinalities of their rings of sections",
+   "results": {
+    "t": "2026-10-23T12:22:18Z",
+    "tool": "leansearch",
+    "query": "The size of a scheme is the maximum of aleph zero, the cardinality of affine open subsets, and the supremum of the cardinalities of their rings of sections",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.affineOpens",
+     "AlgebraicGeometry.Scheme.mk.noConfusion",
+     "AlgebraicGeometry.Scheme.mk",
+     "AlgebraicGeometry.IsAffineOpen",
+     "AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.scheme",
+     "AlgebraicGeometry.AffineScheme",
+     "AlgebraicGeometry.isLocallyNoetherian_of_affine_cover",
+     "AlgebraicGeometry.Scheme.Cover.RelativeGluingData.mk.sizeOf_spec"
+    ],
+    "digest": "6d961f9e9dc1cf6d"
+   },
+   "date": "2026-10-23",
+   "verdict": "No matching size definition: affine opens and scheme structures are present, but the three-term cardinal invariant is not. The grep hit concerns preservation of colimits, and structural SizeOf results do not measure Stacks scheme size."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"affineOpens\", \"Cardinal\"",
+   "results": {
+    "t": "2026-10-23T12:22:18Z",
+    "tool": "loogle",
+    "query": "\"affineOpens\", \"Cardinal\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "No matching size definition: affine opens and scheme structures are present, but the three-term cardinal invariant is not. The grep hit concerns preservation of colimits, and structural SizeOf results do not measure Stacks scheme size."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qc-lft-scheme-size-bound",
+  "date": "2026-10-23",
+  "group": "Q103"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: Effectivity step in quot-lemma-curves-stack via quot-lemma-spaces-stack; finite-type part (2) of bootstrap-lemma-descend-algebraic-space. Supporting input: 04U0, the scheme size estimates ensuring that the coproducts of the refined bases and of their affine atlases belong to the original big site. Split prerequisite: the bound on each quasi-compact locally finite type affine atlas summand. The inline size invariant s(Z) in the statement of Tag 04T7.",
+   "via": [
+    "lem-sfb-qc-lft-scheme-size-bound",
+    "lem-sfb-bounded-affine-lft-coproduct",
+    "lem-sfb-space-finite-type-fppf-effectivity",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeCardinalSize",
+  "declaration": "AlgebraicGeometry.Scheme.cardinalSize",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeCardinalSize.lean",
+  "statement": "def cardinalSize (X : Scheme.{u}) : Cardinal.{u}",
+  "branch": "newtargets-dag",
+  "by": "Q103",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bee6b1bbf",
+  "group": "Q103",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bee6b1bbf",
+  "group": "Q103",
+  "result": "pass",
+  "note": "Item theorem cardinalSize_le_of_locallyOfFiniteType {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] [CompactSpace X] : X.cardinalSize ≤ S.cardinalSize matches the node and Stacks 04T7 (sets.tex l.609-623) hypothesis by hypothesis, with no extra qc/qs assumptions; lean.statement verbatim. New def node def-sfb-scheme-cardinal-size = max ℵ₀ (max #X.affineOpens (⨆ U, #Γ(X,U.1))) in Cardinal.{u}, matching the sets.tex size definition; affineOpens = {U | IsAffineOpen U}; supremum is a genuine bound by Cardinal.bddAbove_range (small index); empty scheme gives ℵ₀; no duplicate in Mathlib, lean/Sheaf or the DAG; §5 fields correct (import_flags allowed). Item node changes only by stmt_deps gaining the new (A) node plus its lean record; not superseded. Docstrings with source, blueprint and four proof steps; only sorry is the theorem proof; no line over 100 characters; plain Cardinal.Arithmetic import = module of proof dependency lem-weil-pbc-finite-list-cardinality. No recompile per instruction (worker reports clean per-file compiles). Advisory: DAG has duplicate open-cover size nodes (lem-sfb-open-cover-scheme-size vs lem-sfb-scheme-size-open-cover-bound); sibling nodes should cite def-sfb-scheme-cardinal-size."
+ }
+}

@@ -1,0 +1,39 @@
+## Worker report
+
+Files written:
+
+- `dag/nodes/sec-trace-formula/lem-trf-separated-local-isomorphism-generic-injectivity.json`: item, statement, split into five steps; no exact Mathlib match.
+- `citations.json`: one verbatim statement quotation for each cited node in each proof step.
+- `searches.jsonl`: actual Mathlib search results logged by the required command.
+
+New nodes: 0. New Mathlib leaves: 0.
+
+Attachments: none. Searching the blueprint tag in `lean/WeilConjectures/` found no declaration. The relevant upstream file `WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/LocalIso.lean` proves `AlgebraicGeometry.IsLocalIso.exists_opens_isOpenImmersion` only for an irreducible reduced target. The item's target is arbitrary, so this theorem is not an attachment. Mathlib's `IsOpenImmersion.of_forall_source_exists` requires injectivity on all points, which is the conclusion the present argument must first establish.
+
+WANTED: none.
+
+The imported statement is correct and unchanged. It is exactly Stacks 09NG, with variables renamed and its absence of finiteness assumptions made explicit. Its proof was empty; the delivery supplies the generic-point argument, including the two compressed source assertions that the lifts are generic and that separatedness forces the specializations to coincide. No statement dispute or unit-route change is necessary. The nearest blueprint ancestor is `lem-trf-local-term-locality`; this node is a generic scheme-theoretic tool in the existing supporting 09NI dependency chain, not a replacement of the ancestor's contracting-correspondence route. I read the latest blueprint ancestor proof, chapter and unit records, and the three route levels in SETUP.md.
+
+Nothing remains unfinished for the assigned one-level split. The statements and definitions cited below are existing Mathlib leaves, so no new off-unit unsplit tool needs approval.
+
+## Review by Q115
+
+I read varieties.tex Tag 09NG (`lemma-characterize-open-immersion`) in full and the final paragraph of 09NI where the parent uses it. For the generic-point details I read topology.tex Tag 004W (`lemma-irreducible`, especially (3)-(4)) and schemes.tex Tag 01IS (`lemma-scheme-sober`). For the separatedness detail I read schemes.tex Tag 01KK's definition as recorded in `def-weil-proper-morphism`, the base-change statement and proof at Tag 01JY (`lemma-base-change-immersion`), and its immediate fibre-product form; I also read Tag 01KM's equalizer construction as a check on the diagonal argument. I read the source of Mathlib's final local-source criterion at Morphisms/OpenImmersion.lean:73-95 and the LocalIso class and its chart lemma. There are no new-node sources to review.
+
+Step 1 uses exactly the existing statements of `def-weil-open-immersion`, `lem-sc-irreducible-components-cover`, and `lem-sc-scheme-sober`. The first gives open images and the chart homeomorphisms; the second puts x in a component without a Noetherian hypothesis; the third gives its generic point. An open containing a specialization contains its generalization by the definition of closure, so both inverse charts lift the same generic point. These citations provide existence for the arbitrary schemes actually in the statement.
+
+Step 2 uses the same component-cover and sobriety statements on Y, together with `def-weil-irreducible-components` (maximal irreducible subsets) and `def-weil-open-immersion` (chart injectivity and homeomorphism). I wrote out the elementary argument rather than assuming that a local isomorphism sends every generic point into X^0. If zeta generalizes the lifted point, its image generalizes xi; the irreducible singleton closure contains the component C and equals it by maximality. Sobriety and chart injectivity force zeta to be the lifted point. The closure of a singleton is irreducible by the explicit closed-cover argument in the step. No component correspondence or finiteness lemma is being used without citation.
+
+Step 3 is just the hypothesis of generic-point injectivity applied to the two lifts established in Step 2; it uses no additional node. It identifies a point of the actual overlap of the two source charts.
+
+Step 4 uses the statements of `def-pc-fibre-product`, `def-weil-open-immersion`, `def-weil-proper-morphism`, `lem-weil-pbc-closed-immersion-base-change`, and `def-weil-closed-immersion`. I checked each statement in its file: the first gives the universal property, the second identifies each chart with its open image, the third explicitly defines the relative diagonal as a closed immersion for a separated morphism, the fourth allows its pullback along ANY scheme morphism, and the fifth gives a closed underlying image. The base of the diagonal is X and its source is Y: it is Y -> Y x_X Y. Its restriction is V_i intersect V_j -> V_i x_X V_j, and the latter scheme is W=U_i intersect U_j. Both identifications are proved by their test morphisms in the step. Hence E is closed in W and contains xi, so also x. This avoids any need to infer equality of scheme morphisms from topological density on a nonreduced scheme. Neither an affine intersection nor reducedness is assumed.
+
+Step 5 uses only `def-weil-open-immersion` and `lem-weil-pbc-open-immersion-injective-local-source`. The closed overlap supplies an actual point z mapping to x, so chart injectivity identifies z with both original points. This proves the global injectivity hypothesis of the cited local-source criterion; the given cover supplies its other hypothesis verbatim. I checked the criterion's statement, not merely its proof or title.
+
+I checked B-E of delivery-errors.md against the saved JSON and these sources. There are no new nodes, so no statement-only node, missing new notion, or duplicate clause is introduced. The existing statement's definition references are retained. All step uses are real statements with matching hypotheses, quoted verbatim in citations.json; proof_deps is their exact union. No source is used as a substitute for a dependency. The component maximality and fibre-product descriptions are short arguments written in place, not hidden standalone lemmas. No non-elementary step exceeds 2000 characters. The new argument uses only existing Mathlib leaves, so creates no dependency cycle or off-route unsplit tool. Whole-DAG tag and keyword searches and blueprint_refs searches found no other node stating 09NG; its parent mentions it as a dependency and cannot be cited backwards. The semantic searches were made in two phrasings and the Loogle and grep hits were read; none discharges the full item. Existing search records were retained and new records use the exact logged tool/query pairs.
+
+Small cases: empty Y gives vacuous injectivity and the same final criterion; empty X forces Y empty. On a nonreduced target such as Spec(k[e]/(e^2)), the proof only propagates membership in a closed underlying subset. Reducible targets allow x at a component intersection: choosing any one component through x works, and maximality shows each lift is genuinely a generic point of Y. No enumeration of components or cover members occurs, so infinitely many components or a non-quasi-compact source cause no change. A disjoint union of two copies of X fails the generic-point injectivity hypothesis. The doubled-origin affine line maps locally isomorphically and injectively on its single generic point, but is not separated; its two-chart overlap image is the nonclosed punctured line, locating exactly where Step 4 would fail without the separatedness assumption.
+
+## Not duplicates
+
+No new nodes were created. Existing component-cover, sobriety, closed-base-change and local-source leaves are reused. The stronger hypotheses of the finished irreducible-reduced-target LocalIso decomposition prevent its use as an attachment for this arbitrary-target item.

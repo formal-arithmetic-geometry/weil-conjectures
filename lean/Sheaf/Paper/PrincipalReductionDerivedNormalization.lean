@@ -8,6 +8,8 @@ module
 public import Sheaf.Paper.DerivedNakayamaResolution
 public import Sheaf.SixFunctors.ProEtale.DerivedCompletion
 public import Mathlib.Algebra.Homology.HomotopyCategory.Pretriangulated
+import Sheaf.Paper.PrincipalConeTensorNormalization
+import Sheaf.Paper.PrincipalTensorScalarExtension
 
 /-! # Normalized derived principal quotient cones
 
@@ -19,6 +21,8 @@ and first-reduction proof, Cones paragraph.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+set_option backward.defeqAttrib.useBackward true
 set_option synthInstance.maxSize 4096
 
 universe u
@@ -26,6 +30,8 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.PrincipalNormalization
+
+attribute [local irreducible] upperStarFromPoint
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})
@@ -101,6 +107,59 @@ theorem derived_principal_normalization
             (reduction l E X n).map ((DerivedCategory.Q.commShiftIso r).hom.app M) ≫
             (Functor.commShiftIso (self := sF n) (reduction l E X n) r).hom.app
               (DerivedCategory.Q.obj M)) := by
-  sorry
+  let (n : ℕ) : (DerivedNakayama.reductionFunctor l E X (n + 1)).CommShift ℤ :=
+    tensorReductionShift l E X n
+  let (n : ℕ) : (DerivedNakayama.reductionFunctor l E X (n + 1)).Additive := by
+    change (tensorRight _).Additive
+    infer_instance
+  let (n : ℕ) : (DerivedNakayama.reductionFunctor l E X (n + 1)).IsTriangulated := by
+    change (tensorRight _).IsTriangulated
+    infer_instance
+  obtain ⟨c, hc, hu, hsigned⟩ := principal_cone_tensor_normalization l E X d hd hs
+  obtain ⟨e, he, hunit⟩ := principal_tensor_scalar_extension l E X
+  let e' (n : ℕ) : DerivedNakayama.reductionFunctor l E X (n + 1) ≅
+      reduction l E X n := e n
+  let sF (n : ℕ) : (reduction l E X n).CommShift ℤ :=
+    Functor.CommShift.ofIso (e' n) ℤ
+  let κ (n : ℕ) : DerivedNakayama.coneFunctor l E X (d ^ (n + 1)) ≅
+      DerivedCategory.Q ⋙ reduction l E X n :=
+    c n ≪≫ Functor.isoWhiskerLeft DerivedCategory.Q (e' n)
+  refine ⟨sF, κ, ?_, ?_, ?_, ?_⟩
+  · intro n
+    let := sF n
+    have : NatTrans.CommShift (e' n).hom ℤ :=
+      Functor.CommShift.ofIso_compatibility (e' n) ℤ
+    exact ⟨Functor.additive_of_iso (e' n), Functor.isTriangulated_of_iso (e' n)⟩
+  · intro n M
+    change _ ≫ ((c n).hom.app M ≫ (e' n).hom.app (DerivedCategory.Q.obj M)) =
+      ((c (n + 1)).hom.app M ≫ (e' (n + 1)).hom.app (DerivedCategory.Q.obj M)) ≫ _
+    rw [← Category.assoc, hc, Category.assoc, he, ← Category.assoc]
+  · intro n M
+    change _ ≫ ((c n).hom.app M ≫ (e' n).hom.app (DerivedCategory.Q.obj M)) = _
+    rw [← Category.assoc, hu, hunit]
+  · intro n r M
+    let := sF n
+    have : NatTrans.CommShift (e' n).hom ℤ :=
+      Functor.CommShift.ofIso_compatibility (e' n) ℤ
+    change _ ≫ _ ≫ ((c n).hom.app M ≫
+      (e' n).hom.app (DerivedCategory.Q.obj M))⟦r⟧' =
+        ((c n).hom.app (M⟦r⟧) ≫ (e' n).hom.app (DerivedCategory.Q.obj (M⟦r⟧))) ≫ _ ≫ _
+    calc
+      _ = (c n).hom.app (M⟦r⟧) ≫
+          (DerivedNakayama.reductionFunctor l E X (n + 1)).map
+            ((DerivedCategory.Q.commShiftIso r).hom.app M) ≫
+          (Functor.commShiftIso (DerivedNakayama.reductionFunctor l E X (n + 1)) r).hom.app
+            (DerivedCategory.Q.obj M) ≫
+          ((e' n).hom.app (DerivedCategory.Q.obj M))⟦r⟧' := by
+        simpa only [Functor.map_comp, Category.assoc] using
+          congrArg (fun f ↦ f ≫ ((e' n).hom.app (DerivedCategory.Q.obj M))⟦r⟧')
+            (hsigned n r M)
+      _ = _ := by
+        rw [NatTrans.shift_app_comm (e' n).hom r (DerivedCategory.Q.obj M)]
+        simp only [Category.assoc]
+        congr 1
+        rw [← Category.assoc, ← Category.assoc]
+        congr 1
+        exact (e' n).hom.naturality ((DerivedCategory.Q.commShiftIso r).hom.app M)
 
 end AlgebraicGeometry.ProEtale.PrincipalNormalization

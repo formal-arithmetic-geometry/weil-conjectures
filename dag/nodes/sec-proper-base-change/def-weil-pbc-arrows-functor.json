@@ -85,7 +85,54 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "CategoryTheory.Cat.arrows_map_id",
+    "CategoryTheory.Cat.arrows_map_comp",
+    "CategoryTheory.Cat.arrows"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "CategoryTheory.Cat.arrows_map_id",
+     "module": "WeilConjectures.CategoryTheory.ArrowsFunctor",
+     "lines": [
+      33,
+      39
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Cat.arrows_map_comp",
+     "module": "WeilConjectures.CategoryTheory.ArrowsFunctor",
+     "lines": [
+      41,
+      50
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Cat.arrows",
+     "module": "WeilConjectures.CategoryTheory.ArrowsFunctor",
+     "lines": [
+      52,
+      59
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lean": {
@@ -128,5 +175,21 @@
   "landing": "20261012T060734-L-2905814",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "For a category $C$ whose objects and morphisms are sets, let $\\mathrm{Arrows}(C)$ be the set of triples $(X,Y,f)$ with $f:X\\to Y$. For a functor $v:C\\to D$, put $\\mathrm{Arrows}(v)(X,Y,f)=(vX,vY,vf)$. These maps define the functor $\\mathrm{Arrows}:\\mathit{Cat}\\to\\mathit{Sets}$ used to form the arrow-set diagram of a strict system of categories.",
+  "proof": [
+   {
+    "text": "The map on objects is $C\\mapsto\\mathrm{Arrows}(C)$ and on morphisms $v\\mapsto\\mathrm{Arrows}(v)$. For the identity functor, $\\mathrm{Arrows}(\\mathrm{id}_C)(X,Y,f)=(X,Y,f)$, so $\\mathrm{Arrows}(\\mathrm{id}_C)=\\mathrm{id}$. For functors $v:C\\to D$ and $w:D\\to E$, both $\\mathrm{Arrows}(w\\circ v)$ and $\\mathrm{Arrows}(w)\\circ\\mathrm{Arrows}(v)$ send $(X,Y,f)$ to $(wvX,wvY,wvf)$, so they agree. Hence $\\mathrm{Arrows}$ is a functor.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

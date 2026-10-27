@@ -1,0 +1,108 @@
+{
+ "id": "def-sp-finite-coefficient-intrinsic-derived-comparison",
+ "kind": "definition",
+ "title": "Finite-coefficient derived comparison in intrinsic constant-ring coordinates",
+ "status": "split",
+ "statement": "Let $T$ be a scheme and $B$ a finite commutative ring. Use the small etale/pro-etale sites and specified comparison inverse image $\\nu_T^*$ on fixed-$B$ module sheaves of [def-weil-pbc-proetale-modules], and sheafification of [def-weil-pbc-sheafification]. Let $B_T$ be the constant commutative ring sheaf on the small pro-etale site, the sheafification of the constant presheaf with value $B$ [def-weil-pbc-constant-sheaf]. In the small-site size convention, coefficients and module values are lifted from universe $u$ to $u+1$. Realize a fixed-$B$ module sheaf as a module over $B_T$ by keeping its module presheaf and applying associated-module-sheafification along the constant-scalar unit $B\\to B_T$. Compose this realization with the specified comparison inverse image on etale module sheaves. Define the intrinsic finite-coefficient derived comparison $D(T_{\\mathrm{et}},B)\\to D(\\operatorname{Mod}(B_T))$ to be the functor obtained by applying this additive exact comparison termwise to complexes and localizing at quasi-isomorphisms [def-weil-abstract-derived-category]. This specifies the canonical functor, with no constructibility, full-faithfulness or essential-surjectivity assertion.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+  "place": "Local pairs: the separate finite-level etale origins used by chart domains; canonical constant-ring presentation (Stacks Tags 099R and 00YV)"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived etale to proetale inverse image with finite coefficients in the intrinsic constant ring module presentation",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.finitePresentation\", \"RingHom.Etale\", \"Algebra.Etale.formallyEtale\", \"Algebra.Etale.recOn\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.Etale.exists_subalgebra_fg\", \"RingHom.Etale.toAlgebra\", \"Algebra.Etale.casesOn\"]}",
+   "date": "2026-10-24",
+   "verdict": "no Mathlib match; reuse the exact published Sheaf definitions located by source grep"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived etale to proetale inverse image with finite coefficients in the intrinsic constant ring module presentation",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePresentation.toSubmersivePresentation\", \"StandardEtalePresentation.toSubmersivePresentation_toPreSubmersivePresentation_toPresentation\", \"StandardEtalePresentation.toPresentation\", \"StandardEtalePresentation.toPresentation_σ'\", \"StandardEtalePresentation.hasMap\", \"Algebra.Etale.finitePresentation\", \"StandardEtalePresentation.P\", \"StandardEtalePresentation\"]}",
+   "date": "2026-10-24",
+   "verdict": "no Mathlib match; reuse the exact published Sheaf definitions located by source grep"
+  },
+  {
+   "tool": "grep",
+   "query": "spEllTwist|finiteCoefficientIntrinsicDerivedComparison",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-24",
+   "verdict": "no Mathlib match; reuse the exact published Sheaf definitions located by source grep"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n spEllTwistLine|SpEllTwistComparisonsNormalized|finiteCoefficientIntrinsicDerivedComparison lean/WeilConjectures lean/Sheaf; rg -l the same names dag/nodes; inspect definition-node lean declarations",
+   "results": "No upstream match. Sheaf/Paper/TowerOperationsGroundFieldRetagging.lean:105,125 and Sheaf/AlgebraicGeometry/ProEtaleFiniteModuleIntrinsicComparison.lean:203 define the required data. No definition node owns these declarations; theorem nodes cite or list them only.",
+   "date": "2026-10-24",
+   "verdict": "existing published data, no new Lean definition; attach an existing:true definition owner"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-tower-chart-admissibility",
+  "date": "2026-10-24",
+  "group": "NN"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-gluing",
+   "place": "Local pairs: the separate finite-level etale origins used by chart domains; canonical constant-ring presentation (Stacks Tags 099R and 00YV)",
+   "via": [
+    "lem-sp-tower-chart-admissibility"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleFiniteModuleIntrinsicComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteCoefficientIntrinsicDerivedComparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteCoefficientIntrinsicDerivedComparison"
+  ],
+  "statement": "def finiteCoefficientIntrinsicDerivedComparison :\n    FiniteCoefficientEtaleDerivedCategory T (ULift.{u + 1, u} B) ⥤\n      Scheme.proEtaleDerivedCategory T B",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "H2 repair: ownership of exact existing plain definitions only; no assertion of existence, equivalence, preservation or retagging, and no choice from a theorem."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-005fd1b38",
+  "group": "NN",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-005fd1b38",
+  "group": "NN",
+  "result": "pass",
+  "note": "Re-delivery repairs both faults of the prior return (808318107987). H2: theorem stmt_deps (retagging, sk-lem-sp-tower-bound, finite-ring origin) replaced by definition owners: new existing:true def-sp-ell-twist-quotient-data (6 plain spEllTwist* defs; text matches Lean; deps live), live def-sp-tower-shriek-realization, new existing:true def-sp-finite-coefficient-intrinsic-derived-comparison (comparisonUpperStar ⋙ intrinsic realization, mapDerivedCategory; module now imported publicly). The theorems stay in proof_deps; no other def node owns these decls; item not landed elsewhere. H3: conclusion now ∀ w over Twists. Snapshot diff vs the prior delivery: only imports, docstring and ∃→∀ in the module; only stmt_deps in the node. Re-checked clauses (1)-(3): chart [a-2d,b-2d]/[s-2d,t-2d], compact support [s,t+2d] for both intervals, separate levelwise origins with ν^*L≅M, K.IsGE, geometric points over any algebraically closed Ω, recursive affine stages; edge cases d=0, r=0, empty schemes. One sorry; docstrings OK; no compile (no file changed). Advisory: w-independent clauses are also under ∀ w and no theorem asserts Nonempty Twists. Not hollow: Twists is mathematically inhabited and its HEq codomains are propositionally equal; splitting those clauses out is a later lean-only refinement."
+ }
+}

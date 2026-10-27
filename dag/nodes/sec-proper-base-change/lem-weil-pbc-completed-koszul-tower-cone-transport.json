@@ -1,0 +1,128 @@
+{
+ "id": "lem-weil-pbc-completed-koszul-tower-cone-transport",
+ "kind": "lemma",
+ "title": "Generic strict tower cone transport and successor comparison",
+ "statement": "For an abelian category, levelwise mapping-cone evaluation, additive tensor mapping-cone comparison, and successor-compatible component isomorphisms assemble into strict tower isomorphisms.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YP, strict tensor-cone comparison and naturality of the total tensor cone"
+ },
+ "stmt_deps": [
+  "lem-pc-tensor-mapping-cone-iso"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate mapping cones levelwise and verify the two structure maps by the mapping-cone component formulas.",
+   "uses": [
+    "lem-pc-tensor-mapping-cone-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the existing natural signed tensor-cone isomorphism and its naturality for the transition square.",
+   "uses": [
+    "lem-pc-tensor-mapping-cone-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the tower isomorphism from pointwise isomorphisms and successor naturality using NatTrans.ofOpSequence.",
+   "uses": [
+    "lem-pc-tensor-mapping-cone-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-tensor-mapping-cone-iso"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Generic strict tower and cone transport, written by P5, 2026-10-27"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "mapping cone functor evaluation tensor isomorphism",
+   "results": "No direct complete theorem; existing mapping-cone APIs used.",
+   "date": "2026-10-27",
+   "verdict": "Use existing mapping-cone and NatTrans APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "NatTrans.ofOpSequence",
+   "results": "Mathlib CategoryTheory.Functor.OfSequence provides the constructor.",
+   "date": "2026-10-27",
+   "verdict": "Use NatTrans.ofOpSequence."
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCone mapHomologicalComplexIso mapBifunctorMappingCone",
+   "results": "Existing source-library generic lemmas inspected.",
+   "date": "2026-10-27",
+   "verdict": "Use generic cone comparison declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedKoszulTensorConeComparison",
+  "date": "2026-10-27",
+  "group": "P5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-completed-koszul-tensor-cone-comparison",
+   "place": "Generic infrastructure needed by the strict tower proof",
+   "via": [
+    "lem-pc-tensor-mapping-cone-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedKoszulTensorConeComparisonAux",
+  "file": "lean/Sheaf/Paper/CompletedKoszulTensorConeComparisonAux.lean",
+  "declaration": "AlgebraicGeometry.Scheme.coneComparison_fst",
+  "statement": "lemma coneComparison_fst\n    {B : Type*} [Category B] [Abelian B]\n    {D : Type*} [Category D] [Abelian D]\n    {K L : CochainComplex B ℤ} (f : K ⟶ L) (E : B ⥤ D) [E.Additive] (r : ℤ) :\n    ((CochainComplex.mappingCone.mapHomologicalComplexIso f E).hom.f r) ≫\n      (CochainComplex.mappingCone.fst ((E.mapHomologicalComplex (.up ℤ)).map f)).1.v\n        r (r + 1) rfl = E.map ((CochainComplex.mappingCone.fst f).1.v r (r + 1) rfl)",
+  "branch": "sheaf-dag",
+  "by": "P5",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261027T034721-L-3678701",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261027T034721-L-3678701",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

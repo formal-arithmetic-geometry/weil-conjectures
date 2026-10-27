@@ -22,106 +22,52 @@
  ],
  "proof": [
   {
-   "text": "Both $S$ and $X$ are Noetherian: a field is Noetherian (its only ideals are zero and the whole field), so [pqf-lem-locnoeth-lft] gives local Noetherianity, and finite type gives quasi-compactness. Apply [sk-lem-stratified-lattice] to the given lisse $E_S$-module. Obtain a finite locally closed partition $S=\\coprod_iT_i$ with lisse $\\mathcal O_{E,T_i}$-submodules $M_i\\subseteq L|_{T_i}$ and $M_i[1/\\ell]\\cong L|_{T_i}$. This theorem allows varying ranks and does not require a global lattice.",
+   "text": "Finite type over k gives Noetherian S and X. Apply the ordered spectral lattice theorem to get open-prefix strata, integral lisse lattices, monic inclusions and invertible scalar-extension adjoints.",
    "uses": [
-    "sk-def-sfb-dc-setting",
     "pqf-lem-locnoeth-lft",
-    "sk-lem-stratified-lattice"
+    "lem-sfb-ordered-spectral-lattices"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-generators.proof.md",
-    "place": "(1), choosing stratified lattices"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-generators.proof.md",
+    "place": "Proof (1), filtration of the lisse extension by zero"
    }
   },
   {
-   "text": "For every scheme $T$ write $Q_T(M)=E_T\\otimes_{\\mathcal O_{E,T}}M$. By [lem-sfb-continuous-ring-universe-realization], applied to the totally disconnected rings $\\mathcal O_E$ and $E$, the pulled-back coefficient rings $\\mathcal O_{E,T}=p_T^*\\underline{\\mathcal O}_E$ and $E_T=p_T^*\\underline E$ are canonically and multiplicatively identified with the continuous-function ring sheaves $V\\mapsto C(|V|,\\mathcal O_E)$ and $V\\mapsto C(|V|,E)$. The comparison is built from the inverse-image adjunction and the profinite test projection, so it is natural in the topological ring and carries $p_T^*$ of the inclusion $\\underline{\\mathcal O}_E\\to\\underline E$ to postcomposition with $\\mathcal O_E\\subset E$. That postcomposition is the continuous integral-to-field coefficient inclusion of [lem-sfb-integral-rationalization-exact], so $Q_T$ is exact on arbitrary module sheaves. Derived coefficient change is $LQ_T$ by [sk-def-sfb-coefficient-change]. The exact-functor clause of [sk-def-sfb-derived-categories] therefore identifies $LQ_T$ with termwise $Q_T$. In particular $E_T\\otimes^{\\mathbf L}_{\\mathcal O_{E,T}}M[0]\\cong Q_T(M)[0]$ for every module sheaf $M$, including extensions by zero which need not be lisse on $T$.",
+   "text": "Apply the coefficient-independent ordered filtration theorem on the actual canonical extension a_! L. Its proof transports the open-prefix filtration through the exact extension functor and identifies the quotient with extension of the rational restriction along each composite immersion.",
    "uses": [
-    "lem-sfb-continuous-ring-universe-realization",
-    "lem-sfb-integral-rationalization-exact",
-    "sk-def-sfb-coefficient-change",
-    "sk-def-sfb-derived-categories"
+    "lem-sfb-locally-closed-ordered-filtration"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-generators.proof.md",
-    "place": "(1), ordinary versus derived rationalization"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-generators.proof.md",
+    "place": "Proof (1), filtration of the lisse extension by zero"
    }
   },
   {
-   "text": "Apply [det-lem-coefficient-heart-common-stratification](1) on the Noetherian scheme $S$, with $\\Lambda=E$, to refine the partition $\\{T_i\\}$ into $S_1,\\ldots,S_m$ with $U_b=\\bigcup_{c\\le b}S_c$ open in $S$. For each refinement immersion $h:S_b\\hookrightarrow T_i$, put $L_{0,b}=h^*M_i$. By [sk-prop-sfb-cartesian-coefficients], inverse image is exact for both coefficient systems and identifies their rings; thus it preserves the lattice inclusion and carries each local free basis to a local free basis of the same rank. Clause (1) of [det-prop-scalar-six-pullback], specialized to $\\mathcal O_E\\to E$ and the degree-zero $M_i$, together with Step 2, gives $Q_{S_b}(L_{0,b})\\cong h^*Q_{T_i}(M_i)\\cong L|_{S_b}$. Hence these restricted submodules are the required lattices on the ordered refinement.",
+   "text": "Turn each invertible lattice adjoint into an isomorphism. Map its inverse through extension by zero and compose the quotient isomorphism with ordinary scalar compatibility for the composite immersion. This gives exactly each displayed rationalized integral quotient. No flatness, derived rationalization or constructibility conversion is needed.",
    "uses": [
-    "det-lem-coefficient-heart-common-stratification",
-    "sk-prop-sfb-cartesian-coefficients",
-    "det-prop-scalar-six-pullback"
+    "lem-sfb-condensed-locally-closed-scalar-extension"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-generators.proof.md",
-    "place": "(1), ordered refinement and restriction of the chosen lattices"
-   }
-  },
-  {
-   "text": "The lisse sheaf $L$ is constructible by the characterization in [sk-lem-coefficient-heart]. Every restriction to the chosen strata is lisse, so this ordered stratification is adapted to $L$. Apply [det-lem-coefficient-heart-filtration] on $S$. With $v_b:U_b\\hookrightarrow S$ and $t_b:S_b\\hookrightarrow S$, it gives $G_b=v_{b!}v_b^*L\\subseteq L$, endpoints $G_0=0$, $G_m=L$, and short exact sequences $0\\to G_{b-1}\\to G_b\\to t_{b!}(L|_{S_b})\\to0$.",
-   "uses": [
-    "sk-lem-coefficient-heart",
-    "det-lem-coefficient-heart-filtration"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-generators.proof.md",
-    "place": "(1), filtration of L on its ordered stratification"
-   }
-  },
-  {
-   "text": "Set $F_b=a_!G_b$. Exactness of locally closed extension in [lem-sfb-locally-closed-extension-coherence], applied to $R=E_X$, preserves the inclusions and the short exact sequences of Step 4. Its composition isomorphism identifies $a_!t_{b!}$ with $a_{b!}$, so $F_0=0$, $F_m=a_!L$ and $F_b/F_{b-1}\\cong a_{b!}(L|_{S_b})$. All coefficient restrictions are those of [sk-prop-sfb-cartesian-coefficients]. The composite $a_b$ is locally closed directly from the immersion description [def-weil-closed-immersion]: write $S$ closed in an open $V\\subseteq X$ and $S_b$ closed in an open $W\\subseteq S$; choose an open $V'\\subseteq V$ with $W=S\\cap V'$. Then $W$ is closed in $V'$, and $S_b$ is closed there, since the two surjective structure-sheaf maps compose to a surjection.",
-   "uses": [
-    "lem-sfb-locally-closed-extension-coherence",
-    "sk-prop-sfb-cartesian-coefficients",
-    "def-weil-closed-immersion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-generators.proof.md",
-    "place": "(1), pushing the filtration through a_! and composing immersions"
-   }
-  },
-  {
-   "text": "Apply [det-prop-scalar-six-pullback](2) to $a_b$, $\\mathcal O_E\\to E$, and $L_{0,b}[0]$. The standing finite-type separated hypotheses hold for $S_b$ and $X$. The extension by zero $a_{b!}$ of that clause is the functor of [lem-sfb-locally-closed-extension-coherence]. That lemma identifies it with $i_*u_!$ for the factorization $a_b=i\\circ u$ through the closure. On $\\mathcal O_E$-module objects this is the functor $a_{b!}$ of the statement [sk-def-sfb-module-lower-shriek], whose underlying sheaf is the abelian extension by zero, and on $E$-modules it is the $a_{b!}$ of [sk-lem-coefficient-heart] used in Step 5. Step 2 identifies both derived scalar extensions with ordinary ones, and exact $a_{b!}$ acts termwise. Taking degree-zero cohomology gives an $E_X$-linear isomorphism $Q_X(a_{b!}L_{0,b})\\cong a_{b!}Q_{S_b}(L_{0,b})$. Combining this with Step 3 and the quotient identification in Step 5 gives $F_b/F_{b-1}\\cong E_X\\otimes_{\\mathcal O_{E,X}}a_{b!}L_{0,b}$, as asserted. For $S=\\varnothing$ take $m=0$; zero ranks or empty strata merely give repeated filtration terms and zero quotients, which are permitted.",
-   "uses": [
-    "det-prop-scalar-six-pullback",
-    "lem-sfb-locally-closed-extension-coherence",
-    "sk-def-sfb-module-lower-shriek",
-    "sk-lem-coefficient-heart"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-generators.proof.md",
-    "place": "(1), rationalizing the integral subquotients"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-generators.proof.md",
+    "place": "Proof (1), filtration of the lisse extension by zero"
    }
   }
  ],
  "proof_deps": [
-  "sk-def-sfb-dc-setting",
   "pqf-lem-locnoeth-lft",
-  "sk-lem-stratified-lattice",
-  "lem-sfb-integral-rationalization-exact",
-  "sk-def-sfb-coefficient-change",
-  "sk-def-sfb-derived-categories",
-  "det-lem-coefficient-heart-common-stratification",
-  "sk-prop-sfb-cartesian-coefficients",
-  "det-prop-scalar-six-pullback",
-  "sk-lem-coefficient-heart",
-  "det-lem-coefficient-heart-filtration",
-  "lem-sfb-locally-closed-extension-coherence",
-  "def-weil-closed-immersion",
-  "lem-sfb-continuous-ring-universe-realization",
-  "sk-def-sfb-module-lower-shriek"
+  "lem-sfb-ordered-spectral-lattices",
+  "lem-sfb-locally-closed-ordered-filtration",
+  "lem-sfb-condensed-locally-closed-scalar-extension"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-generators.proof.md",
-  "place": "Proof (1), expanded using existing DAG statements for the lattice filtration and coefficient comparison"
+  "group": "R9",
+  "date": "2026-10-25",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-generators.proof.md",
+  "place": "Proof (1), filtration of the lisse extension by zero"
  },
  "mathlib_searches": [
   {
@@ -242,11 +188,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-sfb-locally-closed-extension-coherence",
-  "det-prop-scalar-six-pullback",
-  "lem-sfb-continuous-ring-universe-realization"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -255,7 +197,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-1ae51b64b (reviewer sub-agent of L); spot-checked: The six-step split of lem-sfb-lattice-subquotient-filtration follows blueprint main-20261015 generators proof (1) and sk-lem-integral-models proof (4) in order. Steps 1 and 3 get the lattices from sk-lem-stratified-lattice (01T6 gives Noetherianity) and order the strata with common-stratification (1). Step 4 gets the lisse filtration from det-lem-coefficient-heart-filtration, Step 5 pushes it forward with the exact, transitive a_! of the coherence lemma (composite-immersion argument checked), and Step 6 rationalizes with det-prop-scalar-six-pullback(2). The statement is identical to the landed base; there are no new nodes, no cycle, no SGA, and no re-split note. I tested S or X empty, L=0, varying rank, Spec k, G_m in A^1 and the nodal P^1 without a global lattice. Batch-5: lem-sfb-integral-rationalization-exact reaches sec-poincare-duality only through definitions and the Galois correspondence of finite local systems (def-pod-l-adic-representations via the stmt_dep def-sfb-monodromy-realization-data). It is used only for exactness of localization, which neither the trace formula nor Poincare duality gives, so I accepted it. FIX, two repairs: (C1/C4) Step 2 equated the continuous-function coefficient inclusion of the rationalization lemma with the pulled-back O_E->E without a citation; I added lem-sfb-continuous-ring-universe-realization, which applies naturally to both O_E and E, and recorded it as a tool_use. (C4, minor) Step 6 did not say that the clause-(2) a_! of the coherence lemma is the statement's a_{b!} of sk-def-sfb-module-lower-shriek on O_E and the a_! of sk-lem-coefficient-heart on E; I added that via the coherence lemma's i_*u_! identification. I accepted tool_uses for the coherence lemma and scalar-six-pullback.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.LatticeSubquotientFiltration",
   "declaration": "AlgebraicGeometry.ProEtale.exists_latticeSubquotientFiltration",
@@ -279,5 +232,19 @@
   "group": "N0",
   "result": "pass",
   "note": "Statement verbatim = base; only lean + stmt_deps changed (added landed def-sfb-continuous-map-condensed-ring(-map), allowed). lean.statement verbatim in file. All clauses checked: recorded abstract E/O_E (spectral norm), pulled-back continuous condensed rings via condensedRingObj, canonical O_E→E inclusion, IsLisseCoefficientModule (Mod.IsFree per pro-étale cover member, varying rank), FiniteLocallyClosedStratification with open prefixes, lattices as Mono ι with IsIso extend/restrict adjoint, Subobject filtration ⊥..⊤ non-strict, cokernel ≅ extendScalars of a_{b!}(M b) along R.immersion b ≫ a; Noetherian derived not assumed; edge cases (empty S/X, rank 0, empty strata, open/closed a) and universes (E,k : Type u) ok; docstrings/source/blueprint tags and 6-step plan present; no hollow defs, sorry-only. Advisory: a_{b!} via closure i_*u_! (same as landed coefficient-heart, proof step 6) rather than chosen-compactification lowerShriek; stage 3 needs E-model/universe transports; non-public Noetherian import reached transitively. No compile (none changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261025T205432-L-3239393",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.exists_latticeSubquotientFiltration"
+  ],
+  "sorry_after": []
  }
 }

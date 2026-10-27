@@ -73,11 +73,22 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-deligne-laumon-a1",
  "unit": "sk-p-dl-a1-perverse",
  "lean": {
-  "module": "Sheaf.Paper.PbcDescentFunctors",
+  "module": "Sheaf.Paper.PbcDescentInterfaces",
   "declaration": "AlgebraicGeometry.Scheme.pbcDescentDirectImage",
   "declarations": [
    "AlgebraicGeometry.Scheme.pbcDescentDirectImage",
@@ -88,7 +99,8 @@
   "by": "NA",
   "date": "2026-10-18",
   "existing": true,
-  "note": "R2: binds the unchanged operation definition and canonical scalar-mate predicate, not prop-weil-pbc-descent-functors as a theorem dependency. The choice inside the predicate is the uniquely normalized comparison of pbcScalarDirectImage_rational."
+  "note": "R2: binds the unchanged operation definition and canonical scalar-mate predicate, not prop-weil-pbc-descent-functors as a theorem dependency. The choice inside the predicate is the uniquely normalized comparison of pbcScalarDirectImage_rational. A4 2026-10-22: these two unchanged definitions move to PbcDescentInterfaces, publicly re-exported by PbcDescentFunctors. Only this attachment location changes.",
+  "file": "lean/Sheaf/Paper/PbcDescentInterfaces.lean"
  },
  "reviewed": {
   "date": "2026-10-18",
@@ -107,20 +119,13 @@
   "note": "Re-delivery after RETURN e5b4e9e8. R1 fixed: def-weil-pbc-qbar-category record identical to live; item imports NM's IntrinsicQbarCategory. R2 fixed: new existing:true def nodes def-per-adic-base-stages (AdicHeartPullbackFibres: Base/baseNoetherian/baseDimension/basePrimeUnit/stages/inclusion, a module no live node owns) and def-per-rational-direct-image-family (PbcDescentFunctors: pbcDescentDirectImage/PbcDirectImageBetaSpec), recorded signatures verbatim, node texts accurate, no id collision; both theorem stmt_deps dropped. R3 fixed: ip/ir pinned to pbcConditionalIntegral; ep/er/qp/qr have identity components (HEq pins satisfiable, objects defeq or provably equal) and must commute with shifts; with faithful ι, rationalization keeping the same objects, and ιCompFunctorIso commuting with shifts, sIP/sIR/sPE/sRE/sP/sR are all determined, so (a E).CommShift, adj.CommShift and IsTriangulated have content; #synth confirms canonical named instances (commShiftι, pbcRationalizationCommShift, pbcStageInclusionCommShift, pbcActualCompletedPullShift, pbcActualPushShift). Advisory addressed: ai pinned to pbcActualDerivedAdjunction + completed unit, a E to its localization. Statement verbatim; all hypotheses and clauses match; edge cases empty X/Y, f=id, E=F, char 0, all n. nt_compile --json 10.9 s EXIT 0 clean. Advisories only: some used declarations owned by nodes outside stmt_deps or by no node (as in the returned head); adj typed with pbcQbarPullFamily.functor, equal by definition to pbcQbarCompletedPull."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C2",
+  "reviewer": "C-f13bb",
+  "group": "A4",
   "result": "pass",
-  "landing": "20261019T002513-L-2143196",
+  "landing": "20261022T113810-L-253425",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.pbcDescentFunctors",
-   "AlgebraicGeometry.Scheme.pbcDescentOperations"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.pbcDescentOperations"
-  ]
+  "note": "independent cc review: delivered PbcDescentFunctors + 8 new modules and nodes against the clone (moved defs byte-identical), the item/sorry statements against PbcScalarExtension exchange routes, and the 9 direct importers compiled against the delivered modules (all rc 0); #print axioms only upstream sorryAx"
  }
 }

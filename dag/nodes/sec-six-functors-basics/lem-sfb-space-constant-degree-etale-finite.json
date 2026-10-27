@@ -1,0 +1,238 @@
+{
+ "id": "lem-sfb-space-constant-degree-etale-finite",
+ "kind": "statement",
+ "title": "Constant geometric degree makes a separated etale chart finite",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $X$ an algebraic space over $S$ [def-trf-algebraic-space], $W$ a scheme, and $f:W\\to X$ a representable etale morphism [def-weil-etale-morphism]. Suppose $f$ is quasi-compact on scheme tests (inverse images of quasi-compact opens are quasi-compact) and separated (its representable diagonal is a closed immersion [def-weil-closed-immersion]). Let $d\\geq0$ be an integer. Suppose for every map $\\operatorname{Spec}\\Omega\\to X$ with $\\Omega$ algebraically closed [def-weil-geometric-point], the geometric fibre $W\\times_X\\operatorname{Spec}\\Omega$ [lem-trf-space-fibre-products-etale-covers] has exactly $d$ points. Then $f$ is finite locally free of degree $d$ on every scheme test [def-pc-finite-locally-free], and remains etale. Neither $X$ nor $W$ is assumed Noetherian or of finite type over $S$.",
+ "source": {
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 07S8, lemma-quasi-compact-reasonable-stratification, universal property on the degree-d stratum; etale case, using geometric cardinality as degree."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-geometric-point",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-pc-finite-locally-free"
+ ],
+ "proof": [
+  {
+   "text": "Fix an arbitrary scheme test $a:T\\to X$ and put $Y=W\\times_XT$, $p:Y\\to T$. By [def-trf-algebraic-space] and [lem-trf-space-fibre-products-etale-covers], representability makes $Y$ a scheme and representable etaleness makes $p$ etale. The quasi-compactness assumption on scheme tests makes $p$ quasi-compact. Its diagonal is the scheme test of $\\Delta_f$ along $Y\\times_TY\\to W\\times_XW$ (both represent pairs of sections with equal image); $\\Delta_f$ is a closed immersion by the separatedness hypothesis, so its base change $\\Delta_p$ is a closed immersion by [lem-weil-pbc-closed-immersion-base-change], and $p$ is separated. By [def-weil-etale-morphism], $p$ is flat, locally of finite presentation and unramified. Apply [lem-weil-pbc-unramified-quasi-finite-at-points] to obtain that $p$ is locally quasi-finite. No property of the structure maps to $S$ is needed.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 07S8 (lemma-quasi-compact-reasonable-stratification), reduction to scheme tests; morphisms.tex Tag 02V5 (lemma-unramified-quasi-finite)."
+   }
+  },
+  {
+   "text": "For $t\\in T$, let $k=\\kappa(t)$ and $F=Y\\times_T\\operatorname{Spec}k$. The base change of the quasi-compact scheme morphism $p$ is quasi-compact by [lem-pc-quasi-compact-base-change]; hence $F$ is quasi-compact, since $\\operatorname{Spec}k$ is quasi-compact. By [lem-weil-pbc-etale-fibre-discrete-separable-points], $F$ is a disjoint union of spectra of finite separable extensions $L_i/k$. Its singleton components are open, so quasi-compactness gives finitely many of them. Each $\\operatorname{Spec}L_i\\to\\operatorname{Spec}k$ is finite by [def-weil-finite-integral-morphism]: a field basis finitely generates $L_i$ as a $k$-module. Induction with [lem-weil-pbc-finite-coproduct] makes their finite disjoint union finite over $k$; the empty case is $\\operatorname{Spec}0$, finite because its section algebra is the zero module. By [lem-weil-pbc-finite-over-field-affine-finite-dim], write $F=\\operatorname{Spec}B$ for its finite-dimensional section algebra, and set $e_t=\\dim_k B$.",
+   "uses": [
+    "lem-pc-quasi-compact-base-change",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-finite-coproduct",
+    "lem-weil-pbc-finite-over-field-affine-finite-dim"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GL (lemma-etale-over-field), part (2); schemes.tex Tag 01K5 (lemma-quasi-compact-preserved-base-change); Tag 0CYI (lemma-finite-union-finite)."
+   }
+  },
+  {
+   "text": "Choose an algebraic closure $\\Omega$ of $k$ and the geometric point $\\bar t:\\operatorname{Spec}\\Omega\\to T$. By [lem-weil-pbc-fibre-degree-base-change] applied to $p$ and $\\bar t$, the fibre $E=Y\\times_T\\operatorname{Spec}\\Omega$ is finite of degree $e_t$ over $\\Omega$. The fibre-product universal property identifies $E$ with $W\\times_X\\operatorname{Spec}\\Omega$ for $a\\bar t$: both give a section of $W$ and a section of $\\operatorname{Spec}\\Omega$ with the same image in $X$. Thus $E$ has exactly $d$ points by the hypothesis. Apply [lem-weil-pbc-etale-fibre-discrete-separable-points] to the etale projection $E\\to\\operatorname{Spec}\\Omega$, which is etale by representability of $f$. Every component is the spectrum of a finite separable extension of $\\Omega$; that extension equals $\\Omega$, since the minimal polynomial of any element is irreducible and splits over $\\Omega$, hence has degree one. Consequently $E$ is a disjoint union of exactly $d$ copies of $\\operatorname{Spec}\\Omega$. The sheaf condition on this disjoint open cover identifies its section algebra with $\\Omega^d$, whose coordinate vectors are a basis of size $d$. It follows that $e_t=d$, including $d=0$ when the section algebra is zero.",
+   "uses": [
+    "lem-weil-pbc-fibre-degree-base-change",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 03J5 (lemma-characterize-universally-bounded), proof, and 03J7 (lemma-base-change-universally-bounded); Tag 02GL (lemma-etale-over-field), part (2)."
+   }
+  },
+  {
+   "text": "All fibres of $p$ are finite of degree $d$ by steps 2--3, so $d$ is a universal fibre-degree bound. Together with step 1 this supplies every hypothesis of [lem-weil-pbc-flat-fp-lqf-bounded-stratification]. Apply it to $p$ and obtain its strata $T_r$. For each $t\\in T$, the pullback to $\\operatorname{Spec}\\kappa(t)$ is finite by step 2, flat and locally of finite presentation because it is etale by representability of $f$, and has degree $d$ by step 3. By [def-pc-finite-locally-free] it is therefore finite locally free of degree $d$. The universal property in the cited stratification theorem, applied to $\\operatorname{Spec}\\kappa(t)\\to T$, gives $t\\in T_d$. Hence $|T|=T_d$. Apply the same universal property to $\\mathrm{id}_T$ to conclude that $p$ itself is finite locally free of degree $d$. It is etale already by step 1. Since $T\\to X$ was arbitrary, this proves the assertion on every scheme test. If $T$ is empty the containment in $T_d$ is vacuous and the same universal property applies; no nonemptiness, Noetherianity or finite-type assumption has entered.",
+   "uses": [
+    "lem-weil-pbc-flat-fp-lqf-bounded-stratification",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 07RY (lemma-stratify-flat-fp-lqf-universally-bounded), universal property; decent-spaces.tex Tag 07S8 (lemma-quasi-compact-reasonable-stratification), scheme-test reduction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-finite-locally-free",
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism",
+  "def-weil-finite-integral-morphism",
+  "lem-pc-quasi-compact-base-change",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-fibre-degree-base-change",
+  "lem-weil-pbc-finite-coproduct",
+  "lem-weil-pbc-finite-over-field-affine-finite-dim",
+  "lem-weil-pbc-flat-fp-lqf-bounded-stratification",
+  "lem-weil-pbc-unramified-quasi-finite-at-points"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 07S8 (lemma-quasi-compact-reasonable-stratification), reduction to schemes and the universal degree-stratum property; scheme input more-morphisms.tex Tag 07RY (lemma-stratify-flat-fp-lqf-universally-bounded). Geometric-cardinality/degree comparison expanded using morphisms.tex Tags 02GL and 03J7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact separated etale morphism from a scheme to an algebraic space with every geometric fibre having d points is finite locally free of degree d",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsPreimmersion; ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only or unrelated hits; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Separated etale maps with constant finite geometric fibre cardinality are finite etale",
+   "results": "OK 8 hits: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.FormallyEtale.of_isSeparable_aux, Algebra.Etale.finitePresentation, Algebra.Etale.iff_exists_algEquiv_prod, RingHom.Etale.of_bijective, AlgebraicGeometry.IsEtale.of_comp, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.FormallyEtale.iff_isSeparable; ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only or unrelated hits; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi compact separated etale chart of constant geometric degree is finite locally free",
+   "results": "OK 8 hits: AlgebraicGeometry.IsEtale, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.LocallyQuasiFinite.recOn, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType, AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion; ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only or unrelated hits; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"IsFinite\"",
+   "results": "OK 0 hits: ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only or unrelated hits; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*(degree|cardinal).*([Ee]tale|[Ff]ib)|([Ee]tale|[Ff]ib).*constant.*degree|AlgebraicSpace",
+   "results": "OK 0 hits: ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only or unrelated hits; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact separated etale morphism with constant geometric fibre cardinality d is finite locally free of rank d",
+   "results": "OK 8 hits: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale, Algebra.Etale.finitePresentation, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.of_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: hits provide definitions, permanence, or finiteness of fibres under an already finite morphism; none proves finiteness from constant geometric cardinality, for schemes or algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An etale morphism with constant finite number of geometric fibre points is finite etale",
+   "results": "OK 8 hits: AlgebraicGeometry.IsFinite.recOn, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale, RingHom.Etale, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, Algebra.Etale.finitePresentation, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: hits provide definitions, permanence, or finiteness of fibres under an already finite morphism; none proves finiteness from constant geometric cardinality, for schemes or algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separated flat locally finitely presented quasi finite morphism with constant finite fibre degree is finite locally free",
+   "results": "OK 8 hits: AlgebraicGeometry.IsFinite, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.IsFinite.of_comp, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated, AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType",
+   "date": "2026-10-23",
+   "verdict": "no match: hits provide definitions, permanence, or finiteness of fibres under an already finite morphism; none proves finiteness from constant geometric cardinality, for schemes or algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-quasiseparated-space-dense-scheme-open",
+  "date": "2026-10-23",
+  "group": "Q22"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: the local-dimension bound on the points over x in the first paragraph of the proof of Tag 0ADD. Conversion of the topological dimension hypothesis to chart local-ring bounds in the proof of Tag 0ADD, first paragraph; comparison supplied by Tags 0A4J and 0BAN. Supporting point-topology input to Tag 0A4J: Sobriety of a quasi-separated algebraic space. In Tag 03K6, the sentence applying theorem-decent-open-dense-scheme to the reduced closed subspace. Supporting input to the dense schematic locus argument: Constant geometric degree makes a separated etale chart finite.",
+   "via": [
+    "lem-sfb-quasiseparated-space-dense-scheme-open",
+    "lem-sfb-quasiseparated-space-sober",
+    "lem-sfb-space-topological-dimension-local-rings",
+    "lem-sfb-space-quasifinite-source-dimension-bound",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-constant-degree-etale-finite",
+  "worker": "stage1",
+  "summary": "Statement retained verbatim. Reused the existing scheme bounded-degree stratification theorem instead of creating a duplicate algebraic-space stratification node. Checked its hypotheses on an arbitrary scheme test, proved ordinary fibres finite from quasi-compactness and the existing etale fibre decomposition, and identified their degree with geometric cardinality before applying the universal property. All dependencies read and quoted in citations.json; all Mathlib searches run with msearch.py. No new nodes or Lean files.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: the local-dimension bound on the points over x in the first paragraph of the proof of Tag 0ADD. Conversion of the topological dimension hypothesis to chart local-ring bounds in the proof of Tag 0ADD, first paragraph; comparison supplied by Tags 0A4J and 0BAN. Supporting point-topology input to Tag 0A4J: Sobriety of a quasi-separated algebraic space. In Tag 03K6, the sentence applying theorem-decent-open-dense-scheme to the reduced closed subspace. Supporting input to the dense schematic locus argument: Constant geometric degree makes a separated etale chart finite. The four steps supply precisely the constant-degree chart input to the dense schematic locus argument; the latest direct-image proof (3) remains the ancestor route. The ancestry command reports None on the inherited created.item chain; the inherited from.node and via fields are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "why": "Generic scheme theorem: the unramified clause of etaleness implies local quasi-finiteness, a hypothesis of the degree stratification used in this unit."
+   },
+   {
+    "node": "lem-weil-pbc-flat-fp-lqf-bounded-stratification",
+    "why": "Generic scheme stratification theorem explicitly used in the proof of Stacks 07S8, the item source; applied to each scheme test, preserving the algebraic-space route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-unramified-quasi-finite-at-points",
+  "lem-weil-pbc-flat-fp-lqf-bounded-stratification"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-d78eb40b7",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-d78eb40b7 (reviewer sub-agent of L); spot-checked: Read the item and every cited statement against Stacks decent-spaces 07S8 (l.1436) and more-morphisms 07RY (l.12761). The statement is unchanged and there are no new nodes. The delivery applies 07RY directly to each scheme test p:W×_X T→T, which is 07S8's own scheme input. Step 1: p is qc, etale, flat, lfp and lqf (02V5), and Δ_p is the base change of Δ_f. Fixed fault C1: the base change of the closed immersion Δ_f was used without citation; step 1 now cites lem-weil-pbc-closed-immersion-base-change in its text, uses and proof_deps. Step 2: ordinary fibres are finite by 01K5 + 02GL(2) + 0CYI, with the empty case Spec 0. Step 3: fibre-degree base change (03J5/03J7) plus 02GL over Ω gives Γ(E)=Ω^d, so e_t=d. Step 4: the 07RY iff applied to each residue point puts T inside T_d, then applied to id_T shows p is finite locally free of degree d, with no reducedness used. Tested d=0, W=∅, T=∅ and nonreduced T; the non-separated doubled-origin example shows separatedness is needed. No duplicate: closed-degree-loci and maximum-degree state different things. No cycle. Accepted tool_uses: the unramified⇒lqf and 07RY stratification nodes. The null blueprint.from.node is inherited from the created.item chain (maintainer note).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceConstantDegreeEtaleFinite",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.finiteLocallyFreeOfDegree_of_constant_geometric_cardinality",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceConstantDegreeEtaleFinite.lean",
+  "statement": "theorem finiteLocallyFreeOfDegree_of_constant_geometric_cardinality {S : Scheme.{u}} (X : AlgebraicSpace S) (W : Over S) (f : yoneda.obj W ⟶ X.obj.obj) (hf : IsEtale f) (hqc : IsRepresentableWith (fun _ _ p ↦ QuasiCompact p.left) f) (hsep : IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) (pullback.diagonal f)) (d : ℕ) (hdegree : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (b : Spec (CommRingCat.of Ω) ⟶ S) (a : yoneda.obj (Over.mk b) ⟶ X.obj.obj) (U : Over S) (p : U ⟶ Over.mk b) (q : yoneda.obj U ⟶ yoneda.obj W), IsPullback q (yoneda.map p) f a → Nonempty (U.left ≃ Fin d)) : IsRepresentableWith (fun _ _ p ↦ p.left.IsFiniteLocallyFreeOfDegree d ∧ Etale p.left) f",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a233ab0a1",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Only the lean record differs from the live node; lean.statement matches the file verbatim. Every clause checked against the dependency declarations read in source (IsRepresentableWith, IsEtale, IsFiniteLocallyFreeOfDegree, inline geometric point): f representable étale, quasi-compact on tests, diagonal a closed immersion on tests, d : ℕ, geometric fibres in bijection with Fin d over every representing square (equivalent to the node's single fibre since such squares exist and are isomorphic), conclusion finite locally free of degree d and étale on every scheme test. No Noetherian or finite-type assumptions or extra instances; Ω : Type u is harmless. Edge cases d=0, W=∅, X=∅, empty and non-reduced tests are fine. No duplicate declaration in the project Lean trees. Only proof is sorry, no hollow definitions; docstrings carry the source place, blueprint id and the four proof steps; report has Worker report and Second reading by Q06. Imported modules exist. No compile: no file changed."
+ }
+}

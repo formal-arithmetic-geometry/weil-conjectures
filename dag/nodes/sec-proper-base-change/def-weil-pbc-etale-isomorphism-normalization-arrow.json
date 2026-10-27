@@ -1,0 +1,108 @@
+{
+ "id": "def-weil-pbc-etale-isomorphism-normalization-arrow",
+ "kind": "definition",
+ "title": "Canonical etale pullback of a normalization arrow",
+ "statement": "Let Y be a scheme, q:R→S a commutative ring homomorphism, C a derived R-module sheaf and D a derived S-module sheaf on Y_et [def-weil-pbc-derived-normalization-arrows]. For d:C→Res_q(D) and an etale Y-object U, define its localized normalization arrow by applying the exact etale inverse image to d and then the canonical derived coefficient mate. Its endpoints are C|U and Res_q(D|U); use the source-site exact restriction of [def-weil-pbc-derived-local-isomorphism-sheaf]. No universal property or invertibility is assumed.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 03DA and 03ED, canonical coefficient restriction mate and etale inverse image; Tag 09BV, local Isom presheaves."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-normalization-arrows",
+  "def-weil-pbc-derived-local-isomorphism-sheaf"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of sections of a sheafified presheaf of derived isomorphisms preserves a coefficient normalization square",
+   "results": "8 results, including isoSheafify, sheafificationIso, presheafToSheafCompSheafFiber and sheafSectionsNatIsoEvaluation; generic sheafification only. A second query for normalized finite quotient tower descent returned condensed locally constant diagrams and scheme flat descent, not this statement.",
+   "date": "2026-10-27",
+   "verdict": "No direct match; use the project derived comparison and normalization constructions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite locally constant sheaf of derived isomorphisms between perfect complexes and evaluation compatible with scalar reduction",
+   "results": "8 results about condensed locally constant module functors; no derived Isom normalization result.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIso\", \"StructuredArrow.IsUniversal\"",
+   "results": "0 hits. The additional query \"Sheaf\", \"IsIso\" returned 12 generic Kan-extension and sheafification results.",
+   "date": "2026-10-27",
+   "verdict": "No normalized derived Isom evaluation or finite quotient presentation result."
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*[Ii]so|[Ii]so.*normalization; normalized.*presheaf.*evaluat|presheaf.*normaliz.*evaluat|isomorphism.*presentation",
+   "results": "Mathlib search returned algebraic normalization and unrelated field-theory results. Project searches found the existing source/slice Isom evaluation and the archived normalized reduction APIs. No fixed-presheaf-map preservation theorem or completed-adic etale presentation datum exists. blueprint_refs search for isomorphism normalization returned 0 blueprint nodes.",
+   "date": "2026-10-27",
+   "verdict": "Reuse existing source evaluation and finite-ring local constancy; the two missing interfaces are narrower than the assigned theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePerfectAdicIsomorphismSections",
+  "date": "2026-10-27",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Tags 03DA and 03ED, canonical coefficient restriction mate and etale inverse image; Tag 09BV, local Isom presheaves.",
+   "via": [
+    "lem-weil-pbc-finite-perfect-adic-isomorphism-sections",
+    "lem-weil-pbc-finite-perfect-adic-tower-extraction",
+    "lem-weil-pbc-finite-perfect-adic-realization",
+    "lem-weil-pbc-residue-lisse-perfect-lift",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SourceIsomorphismNormalizedPresheafEvaluation",
+  "file": "lean/Sheaf/Paper/SourceIsomorphismNormalizedPresheafEvaluation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etaleIsomorphismNormalizationArrow",
+  "statement": "def etaleIsomorphismNormalizationArrow (Y : Scheme.{t})\n    {R S : Type (t + 1)} [CommRing R] [CommRing S] (q : R →+* S)\n    {C : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{t + 1} R))}\n    {D : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{t + 1} S))}\n    (d : C ⟶ (normalizationRestrict Y.smallEtaleTopology q).obj D) (U : Y.Etale) :\n    (localIsomorphismRestriction Y R U).obj C ⟶\n      (normalizationRestrict U.left.smallEtaleTopology q).obj\n        ((localIsomorphismRestriction Y S U).obj D)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261027T084357-L-3673757",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W7",
+  "result": "pass",
+  "landing": "20261027T112442-L-1585266",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Scheme.sourceIsomorphism_normalized_presheaf_evaluation"
+  ],
+  "sorry_after": []
+ }
+}

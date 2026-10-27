@@ -224,24 +224,65 @@
  },
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-def-sfb-constructible",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "CategoryTheory.Mod.IsFinitelyPresented",
+    "AlgebraicGeometry.ProEtale.IsLocallyFinitelyPresented",
+    "AlgebraicGeometry.ProEtale.IsConstructible"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "CategoryTheory.Mod.IsFinitelyPresented",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.Free",
+     "lines": [
+      48,
+      51
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.IsLocallyFinitelyPresented",
+     "module": "WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def",
+     "lines": [
+      66,
+      72
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.IsConstructible",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf",
+     "lines": [
+      67,
+      74
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "NT-stage2-cc-3e6de7fe5",
-  "group": "N7",
+  "reviewer": "NT-stage2-cc-8c99fcd48",
+  "group": "NI",
   "result": "pass",
-  "note": "Item and the supplied dependency sk-def-sfb-constructible read against the node, the blueprint source and every det-lem-int-ext-* statement and proof. Every hypothesis and clause matches: Dbc/Cons over the genuine Λ_X = p_X^*O̲_E (rfl-checked), all q, a common termwise lower bound, the canonical colimit comparison via colimit.desc, and d_C chosen before N with Ext as Subsingleton derived Hom. Setting (F̄_q, ℓ≠p, separated finite type) as in sk-def-sf-setting. Dependency module is non-hollow and correct: constant scalar models through finitely presented Λ-modules on the point (entries in Λ(*)), Mathlib proetalePrecoverage covers, genuine module pullback, finite constructible locally closed stratifications, affine-local convention, Cons/Dbc/Dctf. No duplicate. lean.statement fields verbatim; node changes limited to lean. Docstrings with source and blueprint tags, proof steps in the item docstring; sorry only (standard axioms). Both files compile clean with nt_compile.py (2.4 s, about 5.5 s). Note only: Q04's landed FiniteLocallyClosedStratification is equivalent to upstream Scheme.Stratification minus constructibility; no change required."
+  "note": "Read node (corrected 5-coefficient statement), report (Worker report + Second reading by NI present), both delivered modules and dependency interfaces. hΛ = IsLocalizingAdmissibleCoefficient minus padicAlgClRingObj, matching {A,Z_l,O_E,Q_l,E}; P extremally disconnected, no nonemptiness; site coherentTopology.over P, R = overPullback Λ = profiniteCoefficient; B,C via Mod.IsFinitelyPresented on the condensed point = scalar-matrix cokernels (End(Λ)=Λ(pt)); v arbitrary module-sheaf morphism; HasFiniteConstantProfiniteLocalModel = covering sieve on final object with varying point presentations; hull = literal intersection with IsTriangulated, iso, retract (i≫p=𝟙), Type(u+1) products, generators, strict bounded-below filtered colimits then Q, same shape as consumer supportedImageGenerationHull; conclusion singleFunctor 0 (kernel v). lean.statement verbatim for item and sk-def-sfb-constructible §1(B) companion record (public import retains all prior declarations; no existing profinite-slice predicate found). No hollow defs, only sorry, docstrings with source/blueprint and 5-step plan. Edge cases: empty P, zero ring, zero modules/maps, empty products. Advisory: unused private import of free-matrix proof dep; rank-one annihilator input mathematically open per NC stage-1 review (stage-3 matter). No compile (no file changed)."
  },
  "lean": {
-  "module": "Sheaf.Paper.CondensedConstantConstructibility",
-  "declaration": "AlgebraicGeometry.ProEtale.IsConstantModelConstructible",
-  "file": "lean/Sheaf/Paper/CondensedConstantConstructibility.lean",
-  "statement": "def IsConstantModelConstructible (X : Scheme.{u}) (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) : Prop",
-  "branch": "newtargets-dag",
-  "by": "N7",
-  "date": "2026-10-18",
-  "existing": false,
+  "module": "Sheaf.Paper.ProfiniteFiniteConstantLocalModel",
+  "declaration": "AlgebraicGeometry.ProEtale.HasFiniteConstantProfiniteLocalModel",
   "declarations": [
    "AlgebraicGeometry.ProEtale.HasFiniteConstantLocalModel",
    "AlgebraicGeometry.ProEtale.IsFiniteConstantStratified",
@@ -249,8 +290,48 @@
    "AlgebraicGeometry.ProEtale.ConstantModelConstructible",
    "AlgebraicGeometry.ProEtale.constantModelBoundedConstructible",
    "AlgebraicGeometry.ProEtale.ConstantModelBoundedConstructible",
-   "AlgebraicGeometry.ProEtale.ConstantModelConstructibleFiniteTor"
+   "AlgebraicGeometry.ProEtale.ConstantModelConstructibleFiniteTor",
+   "AlgebraicGeometry.ProEtale.HasFiniteConstantRingedLocalModel",
+   "AlgebraicGeometry.ProEtale.HasFiniteScalarConstantModelOn",
+   "AlgebraicGeometry.ProEtale.HasFiniteScalarConstantLocalModel",
+   "AlgebraicGeometry.ProEtale.HasFiniteConstantProfiniteLocalModel"
   ],
-  "note": "Missing dependency supplied in this delivery. The node has no recorded declaration or Mathlib match. Upstream IsConstructibleModuleObject uses arbitrary local finite-presentation matrices, whereas this node requires finite constant scalar models and the affine-local convention on general schemes. The module states exactly that notion: finite presentations are chosen over the condensed coefficient ring on the point, before pullback to each member of the cover, so their matrices have entries in Λ(*); it also defines Cons, Dbc and Dctf using the existing ordinary derived category and generic Tor-amplitude predicates."
+  "file": "lean/Sheaf/Paper/ProfiniteFiniteConstantLocalModel.lean",
+  "statement": "def HasFiniteConstantProfiniteLocalModel (P : Profinite.{u}) (M : Mod (Sheaf ((coherentTopology Profinite.{u}).over P) Ab.{u + 1}) (CondensedRing.profiniteCoefficient Λ P)) : Prop",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-25",
+  "existing": false,
+  "note": "Section 1(B): the existing HasFiniteScalarConstantLocalModel is restricted to C : Type r with SmallCategory C and sectionwise modules, whereas Prof/u has object universe u+1 and morphism universe u and this item uses internal module objects. The existing HasFiniteConstantLocalModel is restricted to scheme pro-etale sites. This companion states the same finite scalar local-model condition on the actual profinite slice, using the same Mod.IsFinitelyPresented presentations on the condensed point and monoidal slice pullbacks. The prior module SectionwiseFiniteConstantLocalModel and all its original declarations remain publicly imported unchanged. No second scalar-extension construction is introduced."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "The definition of a constructible sheaf makes sense for any condensed ring. Recall that for\n$g\\colon Z\\to X$ the restriction $M|_Z=g^*M$ of a $\\Lambda_X$-module is a\n$\\Lambda_Z$-module, since $g^{-1}\\Lambda_X\\simeq\\Lambda_Z$\n([det-def-sfb-pulled-back-coefficients], [det-def-sfb-transport]); thus\n$g^*\\colon\\Mod(X_{\\mathrm{proét}},\\Lambda)\\to\\Mod(Z_{\\mathrm{proét}},\\Lambda)$.\n\nLet $\\Lambda$ be a commutative condensed ring.\n\n1. A $\\Lambda_X$-module $M$ has a *finite constant local model* if there is a pro-étale\n   cover $\\{U_i\\to X\\}$ ([def-weil-pbc-proetale-site]) and finitely presented modules $P_i$\n   over the scalar ring $\\Lambda(*)$ such that\n   $$\n   M|_{U_i}\\simeq\\Lambda_{U_i}\\otimes_{\\Lambda(*)}P_i .\n   $$\n   Here $\\Lambda(*)$ and $P_i$ are constant sheaves on $U_i$, acting through\n   $\\Lambda(*)\\to\\Lambda_{U_i}$. Equivalently, on each $U_i$ the module $M$ has a\n   presentation by a finite matrix with entries in the scalar ring $\\Lambda(*)$.\n2. For qcqs $X$, a $\\Lambda_X$-module $M$ is *constructible* if there is a finite\n   stratification $X=\\coprod_aX_a$ by constructible locally closed subschemes\n   ([def-constructible-stratification]) such that each $M|_{X_a}$ has a finite constant\n   local model. On an arbitrary scheme this condition is imposed locally on affine opens.\n   The word constructible requires each stratum to be a constructible subset; for\n   Noetherian schemes this is automatic for locally closed strata.\n\nWe write $\\Cons(X,\\Lambda)\\subset\\Mod(X_{\\mathrm{proét}},\\Lambda)$ for the full subcategory\nof constructible sheaves, and $\\Dbc(X,\\Lambda)\\subset D(X_{\\mathrm{proét}},\\Lambda)$ for the\nfull subcategory of bounded complexes with constructible cohomology sheaves (compare\n[det-def-sfb-bounded-constructible]). A complex $K$ has *Tor amplitude in $[a,b]$* if\n$K\\otimes^{\\mathbf L}_{\\Lambda_X}N$ has cohomology only in $[a,b]$ for every sheaf $N$ of\n$\\Lambda_X$-modules. We write $\\Dctf(X,\\Lambda)$ for the full subcategory of\n$\\Dbc(X,\\Lambda)$ of complexes of finite Tor amplitude (compare [sk-def-sf-categories]).",
+  "proof": [
+   {
+    "text": "The three notions are [def-sfb-finitely-presented-module],\n[def-sfb-locally-finitely-presented] and [def-sfb-constructible-module]. Restriction along\n$g$ is defined because $g^*$ is lax monoidal (indeed strong monoidal)\n[sk-def-sfb-finite-pushforward-pullback], so $\\operatorname{mapMod}(g^*)$ of\n[det-def-sfb-transport] applies. Cokernels and finite direct sums of modules exist because\nmodule categories over ring objects of $\\Sh(Z_{\\mathrm{proét}},\\mathcal A)$ are abelian\n[det-prop-sfb-module-category].",
+    "uses": [
+     "def-sfb-finitely-presented-module",
+     "def-sfb-locally-finitely-presented",
+     "def-sfb-constructible-module",
+     "det-def-sfb-transport"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The finite constant local models of part (1), their matrix description and their relation\nto local finite presentation are [det-def-sfb-constructible-local-model]. Tor amplitude and\nthe subcategory $\\Dctf(X,\\Lambda)$ are [def-weil-finite-tor-amplitude].",
+    "uses": [
+     "det-def-sfb-constructible-local-model",
+     "def-weil-finite-tor-amplitude"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

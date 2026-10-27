@@ -1,0 +1,273 @@
+{
+ "id": "lem-sfb-relative-torus-diagonal-projective-embedding",
+ "kind": "statement",
+ "title": "Diagonal projective embedding of a normal quasi-projective split-torus scheme over a ring",
+ "statement": "Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], $S=\\operatorname{Spec}A$ [def-weil-affine-spectrum], $r\\geq0$, and $T=\\mathbf G_{m,S}^r=\\operatorname{Spec}A[t_1^{\\pm1},\\ldots,t_r^{\\pm1}]$, the base change to $S$ of the split torus of [def-sc-gm-ga]: its coordinate ring has $A$-basis the Laurent monomials $t^w=\\prod_{\\nu=1}^rt_\\nu^{w_\\nu}$ ($w\\in\\mathbf Z^r$) with $t^wt^{w'}=t^{w+w'}$, and its group law is given by $t_\\nu\\mapsto t_\\nu\\otimes t_\\nu$, counit $t_\\nu\\mapsto1$ and antipode $t_\\nu\\mapsto t_\\nu^{-1}$ (for $r=0$, $T=S$). Let $X\\to S$ be a separated finite-type scheme [def-pc-scheme, def-weil-pbc-scheme-conventions], with every local ring an integrally closed domain [def-weil-pbc-normal-ring]. Suppose $X$ is quasi-projective over $S$, meaning it admits an $S$-immersion into some $\\mathbf P^N_A=\\operatorname{Proj}A[z_0,\\ldots,z_N]$ with the total-degree grading [def-pc-proj, def-weil-pbc-mv-polynomial-ring, def-weil-closed-immersion, def-weil-open-immersion]. Let $a:T\\times_SX\\to X$ be an action [def-pc-fibre-product], satisfying the unit and associativity identities as scheme-morphism equalities. Then there are $n\\geq0$, weights $w_0,\\ldots,w_n\\in\\mathbf Z^r$, and a $T$-equivariant $S$-immersion $j:X\\hookrightarrow\\mathbf P^n_A$. The action on this projective space is specified by the graded algebra coaction\n$$A[z_0,\\ldots,z_n]\\longrightarrow A[t_1^{\\pm1},\\ldots,t_r^{\\pm1}][z_0,\\ldots,z_n],\\qquad z_i\\longmapsto t^{w_i}z_i,\\quad a\\longmapsto a\\ (a\\in A),$$\nwhere $t^w=\\prod_{\\nu=1}^rt_\\nu^{w_\\nu}$ and the displayed map determines the projective action by pullback of homogeneous coordinates. Equivariance is equality of scheme morphisms, including after every base change. Empty $X$, $r=0$, nonreduced $A$, and disconnected $X$ are allowed.",
+ "source": {
+  "document": "literature/thomason-equivariant-resolution-linearization.pdf",
+  "place": "WANTED local copy. R. W. Thomason, Equivariant resolution, linearization, and Hilbert's fourteenth problem over arbitrary base schemes, Adv. Math. 65 (1987), Theorem 3.3 and Corollary 3.4(3), printed p.32; read primary article full text online at https://www.researchgate.net/publication/243015730_Equivariant_resolution_linearization_and_Hilbert%27s_fourteenth_problem_over_arbitrary_base_schemes . Split-torus diagonal free enlargement of its equivariant vector bundle is the agent's ring-coefficient consequence; no Stacks tag is claimed for the linearization theorem."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-noetherian-ring",
+  "def-sc-gm-ga",
+  "def-pc-fibre-product",
+  "def-pc-proj",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-normal-ring",
+  "def-sfb-diagonal-projective-action"
+ ],
+ "proof": [
+  {
+   "text": "Let $i:X\\hookrightarrow\\mathbf P^N_A$ be the immersion in the hypotheses and put $L_0=i^*\\mathcal O(1)$. The canonical twist and quotient on projective space of [lem-trf-projective-bundle-quotient-geometry] make $L_0$ relatively very ample by [def-trf-relatively-very-ample]. Apply [lem-sfb-relative-normal-line-power-linearization] to obtain $m\\geq1$ and a linearization of $L_0^{\\otimes m}$. Its assumptions are exactly the given normality of $X$, separated finite type over the Noetherian affine base, and the split-torus action; no normality of the base is needed.",
+   "uses": [
+    "lem-trf-projective-bundle-quotient-geometry",
+    "def-trf-relatively-very-ample",
+    "lem-sfb-relative-normal-line-power-linearization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/thomason-equivariant-resolution-linearization.pdf",
+    "place": "WANTED local copy. R. W. Thomason, Equivariant resolution, linearization, and Hilbert's fourteenth problem over arbitrary base schemes, Adv. Math. 65 (1987), proof of Theorem 3.3, printed p.32, first paragraph: the positive-power linearization input before choosing a coherent submodule of sections. Read primary article online at https://www.researchgate.net/publication/243015730_Equivariant_resolution_linearization_and_Hilbert%27s_fourteenth_problem_over_arbitrary_base_schemes . This is the split-torus case of that input; no Stacks tag is asserted for this theorem."
+   }
+  },
+  {
+   "text": "By [lem-trf-relative-ample-very-ample], relative very ampleness of $L_0$ implies that $L_0^{\\otimes d}$ is relatively very ample for every sufficiently large $d$. Choose $d=mk$ in that range with $k\\geq1$ and set $L=L_0^{\\otimes mk}$. Tensoring the preceding linearization $k$ times gives a linearization $\\theta$ of $L$: identity and cocycle follow by tensoring those same equalities. Apply [lem-sfb-very-ample-affine-finite-sections] to obtain sections $s_0,\\ldots,s_N$ generating $L$ whose quotient defines an immersion $i_s:X\\to\\mathbf P^N_A$. Finite type and affine base are precisely the hypotheses for this finite section system.",
+   "uses": [
+    "lem-trf-relative-ample-very-ample",
+    "lem-sfb-very-ample-affine-finite-sections",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01VM (definition-very-ample), 01VU (lemma-finite-type-ample-very-ample), 02NP (lemma-very-ample-finite-type-over-affine)."
+   }
+  },
+  {
+   "text": "Use [lem-sfb-relative-linearized-line-sections-coaction] for $(X,L,\\theta)$ and write $c(s_i)=\\sum_u s_{i,u}\\otimes t^u$, with finite support. Comparing the $t^u$ coefficients in $(c\\otimes1)c(s_i)=(1\\otimes\\Delta)c(s_i)$ gives $c(s_{i,u})=s_{i,u}\\otimes t^u$; the counit gives $s_i=\\sum_u s_{i,u}$. Thus the finitely many coefficients $v_0,\\ldots,v_n$ of these finitely many sums still generate $L$. Assign to each $v_j$ its exponent $u_j$. Append a zero section with exponent zero if necessary so the list is nonempty. This comparison uses the stated Laurent monomial basis over $A$, so works with torsion and nilpotents and uses no eigenbasis over a field.",
+   "uses": [
+    "lem-sfb-relative-linearized-line-sections-coaction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02KH, lemma-flat-base-change-cohomology, degree zero for the flat Laurent algebra C and its tensor square. The normalized section coaction is an agent-formulated consequence of that base-change map and the explicit linearization identity and cocycle, not a verbatim assertion of 02KH."
+   }
+  },
+  {
+   "text": "The quotient $q:f^*\\mathcal O_S^{n+1}\\twoheadrightarrow L$, $e_j\\mapsto v_j$, classifies an $S$-morphism $j:X\\to\\mathbf P^n_A$ by [lem-trf-projective-bundle-quotient-geometry]. To verify that $j$ is an immersion, define $\\alpha:\\mathcal O_S^{N+1}\\to\\mathcal O_S^{n+1}$ by sending $e_i$ to the sum of the basis vectors for the coefficients of $s_i$. Then $q\\circ f^*\\alpha$ is the old quotient defining $i_s$. Apply [lem-trf-projective-quotient-comparison] with its single base open $S$, $E=\\mathcal O_S^{N+1}$ and $F=\\mathcal O_S^{n+1}$. Its old quotient is surjective and its old classifying map is the immersion $i_s$, so its conclusion is that $j$ is an immersion. This does not assert that adding sections gives a closed immersion.",
+   "uses": [
+    "lem-trf-projective-bundle-quotient-geometry",
+    "lem-trf-projective-quotient-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VR, lemma-relatively-very-ample, proof (2) implies (4), comparison of the quotient with a finite immersion system; Constructions Tags 01OA and 01OE for quotient classification and free projective space."
+   }
+  },
+  {
+   "text": "Set $w_j=-u_j$. For every $A$-algebra $B$ and $g\\in T(B)$, the normalization in [lem-sfb-relative-linearized-line-sections-coaction] gives $\\theta_{g,x}(v_j(x))=g^{u_j}v_j(gx)$, hence $v_j(gx)=g^{w_j}\\theta_{g,x}(v_j(x))$. This is an equality of pulled-back sections on the test scheme. Under quotient classification [lem-trf-projective-bundle-quotient-geometry], the common line isomorphism $\\theta_{g,x}$ identifies the coordinates of $j(gx)$ with $(g^{w_j}v_j(x))_j$. The substitution $z_j\\mapsto t^{w_j}z_j$, fixing $A$, therefore gives exactly the required projective action and makes $j$ equivariant. On generators its identity and product laws are $1^{w_j}=1$ and $(gh)^{w_j}=g^{w_j}h^{w_j}$. Quotient classification is natural under arbitrary pullback, so the equality holds as scheme morphisms and after any base change, including nonflat or nonreduced tests. For $r=0$ all weights are zero. For empty $X$ the nonempty zero-section list defines its unique immersion, including when $A$ is the zero ring; none of the preceding arguments selects a connected component.",
+   "uses": [
+    "lem-sfb-relative-linearized-line-sections-coaction",
+    "lem-trf-projective-bundle-quotient-geometry"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VR, lemma-relatively-very-ample, proof (2) implies (4), comparison of the quotient with a finite immersion system; Constructions Tags 01OA and 01OE for quotient classification and free projective space."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-projective-bundle-quotient-geometry",
+  "def-trf-relatively-very-ample",
+  "lem-sfb-relative-normal-line-power-linearization",
+  "lem-trf-relative-ample-very-ample",
+  "lem-sfb-very-ample-affine-finite-sections",
+  "def-pur-sheaf-tensor-product",
+  "lem-sfb-relative-linearized-line-sections-coaction",
+  "lem-trf-projective-quotient-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/thomason-equivariant-resolution-linearization.pdf",
+  "place": "Proof of Theorem 3.3, printed p.32, positive-power linearization followed by finite sections; direct split-torus coefficient construction and quotient comparison supplied by Q144 using Stacks 01VR, 01VU, 02NP and 02KH. Local Thomason copy WANTED; primary full text read online."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A normal quasi projective scheme over a Noetherian affine ring with a split torus action admits an equivariant immersion in a projective space with diagonal weights",
+   "results": "{\"t\": \"2026-10-24T03:39:12Z\", \"tool\": \"leanfinder\", \"query\": \"A normal quasi projective scheme over a Noetherian affine ring with a split torus action admits an equivariant immersion in a projective space with diagonal weights\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj.awayι\", \"AlgebraicGeometry.Proj.instIsOpenImmersionAwayι\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion\", \"AlgebraicGeometry.Proj.isSeparated\", \"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\"], \"digest\": \"66045c379f49936a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; Proj charts, ordinary affine covers, abstract representations and homogeneous-ideal definitions do not assert this equivariant scheme theorem over rings."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"equivariant\"",
+   "results": "{\"t\": \"2026-10-24T03:39:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"equivariant\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; Proj charts, ordinary affine covers, abstract representations and homogeneous-ideal definitions do not assert this equivariant scheme theorem over rings."
+  },
+  {
+   "tool": "grep",
+   "query": "Sumihiro|Thomason|equivariant.*immersion|lineariz.*ample",
+   "results": "{\"t\": \"2026-10-24T03:39:10Z\", \"tool\": \"grep\", \"query\": \"Sumihiro|Thomason|equivariant.*immersion|lineariz.*ample\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; Proj charts, ordinary affine covers, abstract representations and homogeneous-ideal definitions do not assert this equivariant scheme theorem over rings."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A torus action on a normal quasi projective scheme over a ring can be embedded equivariantly in a projective representation",
+   "results": "{\"t\": \"2026-10-24T03:39:11Z\", \"tool\": \"leansearch\", \"query\": \"A torus action on a normal quasi projective scheme over a ring can be embedded equivariantly in a projective representation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.instProjective\", \"Projectivization.instMulAction.congr_simp\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion\", \"Projectivization.instMulAction\", \"Rep.isZero_Tor_succ_of_projective\", \"Projectivization.smul_mk\", \"AddAction.orbitRel.Quotient.orbit.coe_vadd\", \"SubMulAction.subtype\"], \"digest\": \"3bbb91f1a61f21f4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; Proj charts, ordinary affine covers, abstract representations and homogeneous-ideal definitions do not assert this equivariant scheme theorem over rings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative linearization of split multiplicative group actions on normal schemes over affine bases",
+   "results": "{\"t\": \"2026-10-24T03:39:13Z\", \"tool\": \"leanfinder\", \"query\": \"Relative linearization of split multiplicative group actions on normal schemes over affine bases\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"Rep.linearizationOfMulActionIso\", \"AlgebraicGeometry.AffineSpace.instIsOverHomOfVectorOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"AlgebraicGeometry.AffineSpace.over\"], \"digest\": \"00a88f6cef3e9b0d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; Proj charts, ordinary affine covers, abstract representations and homogeneous-ideal definitions do not assert this equivariant scheme theorem over rings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normal quasi projective scheme over a Noetherian affine ring with a split torus action embeds equivariantly in projective space with diagonal character weights",
+   "results": "{\"t\": \"2026-10-24T04:03:32Z\", \"tool\": \"leanfinder\", \"query\": \"A normal quasi projective scheme over a Noetherian affine ring with a split torus action embeds equivariantly in projective space with diagonal character weights\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj.awayι\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.projIsoSpec\", \"AlgebraicGeometry.Proj.toSpecZero\", \"AlgebraicGeometry.Proj.isSeparated\"], \"digest\": \"5fa5eb09f528e945\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned projective-spectrum constructions, abstract group representations, Laurent Hopf algebra structures and ordinary section lemmas do not assert the stated relative equivariant sheaf theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"equivariant\"",
+   "results": "{\"t\": \"2026-10-24T04:03:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"equivariant\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned projective-spectrum constructions, abstract group representations, Laurent Hopf algebra structures and ordinary section lemmas do not assert the stated relative equivariant sheaf theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "Sumihiro|Thomason|equivariant.*immersion|lineariz.*ample",
+   "results": "{\"t\": \"2026-10-24T04:03:32Z\", \"tool\": \"grep\", \"query\": \"Sumihiro|Thomason|equivariant.*immersion|lineariz.*ample\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned projective-spectrum constructions, abstract group representations, Laurent Hopf algebra structures and ordinary section lemmas do not assert the stated relative equivariant sheaf theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivariant projective embeddings for split torus actions over affine rings",
+   "results": "{\"t\": \"2026-10-24T04:03:33Z\", \"tool\": \"leansearch\", \"query\": \"Equivariant projective embeddings for split torus actions over affine rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Projectivization.instMulAction\", \"Projectivization.instMulAction.congr_simp\", \"Function.Injective.addActionHom_embedding\", \"Module.Projective.of_split\", \"Rep.instProjective\", \"WeierstrassCurve.Projective.instSetoidForallFinOfNatNat\", \"Module.Projective.of_ringEquiv\", \"AffineEquiv.casesOn\"], \"digest\": \"acfba4b1ce83edb8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned projective-spectrum constructions, abstract group representations, Laurent Hopf algebra structures and ordinary section lemmas do not assert the stated relative equivariant sheaf theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative linearization of multiplicative group actions on normal quasiprojective schemes over affine bases",
+   "results": "{\"t\": \"2026-10-24T04:04:30Z\", \"tool\": \"leanfinder\", \"query\": \"Relative linearization of multiplicative group actions on normal quasiprojective schemes over affine bases\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.linearizationOfMulActionIso\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.AffineSpace.instIsOverHomOfVectorOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.AffineSpace.over\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.AffineSpace.homOfVector\"], \"digest\": \"99a01fbad63b0407\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned projective-spectrum constructions, abstract group representations, Laurent Hopf algebra structures and ordinary section lemmas do not assert the stated relative equivariant sheaf theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-split-torus-invariant-affines",
+  "date": "2026-10-24",
+  "group": "Q32"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Relative torus quotient input: invariant affine covering of the normal ample source after finite étale splitting of the torus. This is the relative-base replacement for the field-only Sumihiro lemma. Supporting input: Equivariant projective embedding before selecting boundary-avoiding weight charts.",
+   "via": [
+    "lem-sfb-relative-split-torus-invariant-affines",
+    "lem-sfb-relatively-ample-subtorus-quotient-schematicity",
+    "lem-sfb-normal-semiabelian-generic-torus-quotient",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-torus-diagonal-projective-embedding",
+  "worker": "stage1",
+  "summary": "Retained the ring-base statement. Split the proof through relative positive-power linearization and the relative section coaction, then constructed finitely many weight sections and used the existing quotient-comparison theorem to preserve immersion. Checked inverse signs on coordinate weights and arbitrary base-change equality; no field-only lemma was applied over A.",
+  "blueprint": "The inherited blueprint ancestor is null (confirmed by blueprint_refs.py ancestor). This realizes the recorded relative torus quotient/invariant-affine supporting input by constructing its diagonal projective embedding. The newest blueprint was searched globally and its ctf-stability proof read; no blueprint node states either new intermediate.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-projective-bundle-quotient-geometry",
+    "why": "Canonical invertible-quotient classification and free projective space; needed to define the coordinate morphisms and compare their universal quotients."
+   },
+   {
+    "node": "def-trf-relatively-very-ample",
+    "why": "Uses the existing relative very-ampleness notion, not the proper-over-field convention."
+   },
+   {
+    "node": "lem-trf-relative-ample-very-ample",
+    "why": "Choose a sufficiently large multiple of the linearization exponent that is still relatively very ample."
+   },
+   {
+    "node": "lem-trf-projective-quotient-comparison",
+    "why": "Adding finitely many homogeneous sections preserves the immersion, by comparison with the original quotient."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-projective-bundle-quotient-geometry",
+  "def-trf-relatively-very-ample",
+  "lem-trf-relative-ample-very-ample",
+  "lem-trf-projective-quotient-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q144-2505d02a7",
+  "group": "Q144",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q144-2505d02a7 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full. Item statement and stmt_deps are byte-identical to clones/live. Live and side-live still show the item unsplit, and there is no repair note. Step 1: L0=i^*O(1) is relatively very ample by def-trf-relatively-very-ample with E=O^{N+1}, using the P(O^{N+1})=P^N_A identification in lem-trf-projective-bundle-quotient-geometry. The new linearization node's hypotheses (A Noetherian, X normal, separated, finite type) all hold. Step 2: lem-trf-relative-ample-very-ample (01VU) makes every large power very ample, so L=L0^{mk}; the tensor power of the linearization is still one; lem-sfb-very-ample-affine-finite-sections (02NP) applies over the affine base for a finite-type map. Step 3: comparing t^u coefficients over the free Laurent basis gives c(s_u)=s_u⊗t^u, and the counit gives s=Σs_u; elementary and correct, with v_j indexed by the pairs (i,u). Step 4: lem-trf-projective-quotient-comparison with the single open S, E=O^{N+1}, F=O^{n+1} and α(e_i)=sum of the e_j coming from s_i; q∘α is the old immersion quotient, so j is an immersion. Step 5: sign checked, θ(p2^*v_j)=t^{u_j}a^*v_j on T×X, so w_j=-u_j makes the quotients of j∘a and ρ∘(1×j) agree, and classification gives equality of morphisms. New nodes: (1) relative-normal-line-power-linearization is true, even with m=1, because Pic(X×G_m^r)=Pic(X) for normal Noetherian X and units of O(X_i)[s^±,t^±] are u·s^a·t^b, so the cocycle defect is 1. It is not a duplicate: the existing lem-sfb-normal-line-bundle-power-linearization is over an algebraically closed field, and the item has no linearization clause. (2) relative-linearized-line-sections-coaction is true via c=(1⊗S)θ^{-1}(a^*s) in Γ(T×X,p2^*L)=V⊗C (C free, X quasi-compact); g·s is a left action by the cocycle law. It is not a duplicate: the existing coaction nodes are over a field. Both new nodes are statement-only and self-contained, carry 5 recorded Mathlib searches and blueprint fields, and have no cycle. Stacks tags 01VM/01VU/02NP/01VR/01OA/01OE/02KH were checked. Thomason has no local copy (WANTED), so I could not check that place; the proof is marked agent-written and I checked the mathematics independently. No SGA. Batch-5: every trf citation (relatively-very-ample def, projective-bundle quotient classification, 01VU, 01VR comparison, and very-ample-affine-finite-sections reaching only that def) is generic Stacks Morphisms/Constructions material, not part of the trace formula or Poincaré duality, so all are accepted as tool_uses. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeTorusDiagonalProjectiveEmbedding",
+  "declaration": "AlgebraicGeometry.exists_relative_torus_diagonal_projective_embedding",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeTorusDiagonalProjectiveEmbedding.lean",
+  "statement": "theorem exists_relative_torus_diagonal_projective_embedding (A : Type u) [CommRing A] [IsNoetherianRing A] (r : ℕ) (X : CategoryTheory.Mod (Over (Spec (.of A))) (torus A r).X) [IsSeparated X.X.hom] [LocallyOfFiniteType X.X.hom] [QuasiCompact X.X.hom] (hnormal : ∀ p : X.X.left, IsDomain (X.X.left.presheaf.stalk p) ∧ IsIntegrallyClosed (X.X.left.presheaf.stalk p)) (hquasiprojective : ∃ (N : ℕ) (i : X.X ⟶ space A N), IsImmersion i.left) : ∃ (n : ℕ) (w : ULift.{u} (Fin (n + 1)) → Fin r → ℤ) (a : ModObj (torus A r).X (space A n)) (j : X.X ⟶ space A n), IsDiagonal A r n w a ∧ IsImmersion j.left ∧ X.mod.smul ≫ j = ((torus A r).X ◁ j) ≫ a.smul",
+  "branch": "sheaf-dag",
+  "by": "Q36",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0b924dde2",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Read item, new node def-sfb-diagonal-projective-action, both modules, all stmt_deps, the ringDiagonalizableGroup/relativeSplitTorus/splitTorus owners, Mathlib ModObj and Proj.map. Every hypothesis matches, none stronger: Noetherian A, Spec A, r, Mod action with one_smul/mul_smul, IsSeparated+LocallyOfFiniteType+QuasiCompact, normal stalks, S-immersion into Proj A[z]. Conclusion (n, weights, IsDiagonal action, IsImmersion j, equivariance j∘a_X=a_P∘(1×j)) matches in order. IsDiagonal fully pins the action: φ,ψ ring maps given exactly, e fixed by fst/snd, a.smul = e.inv≫Proj.map φ, unique by ModObj.ext; satisfiable. torus reuses DAG def ringDiagonalizableGroup (field-only def-sc-gm-ga record unusable over rings); ULift index types exclude no rank. Edge cases r=0, n=0, empty X, zero ring, nonreduced A, disconnected X covered. Item differs from live only by lean + added new-node stmt_dep; lean.statement verbatim in both; only proof is sorry; docstrings/report sections OK; no compile needed (no change). Maintainer note: landed citer (Q110) uses relativeSplitTorus S r; stage-3 needs the canonical iso to ringDiagonalizableGroup A (ULift ℤ^r) over Spec A."
+ }
+}

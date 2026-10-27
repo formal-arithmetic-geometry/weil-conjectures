@@ -1,0 +1,434 @@
+{
+ "id": "lem-sfb-space-big-small-ringed-comparison",
+ "kind": "statement",
+ "title": "Ordinary big-small etale ringed comparison for algebraic spaces",
+ "statement": "Work in the universes and small-site convention of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme]. A category fibred in groupoids on $S$-schemes means [def-sfb-stable-pointed-moduli-groupoids]. Its big etale site has every object and arrow of the fibred category, with coverings lying over jointly surjective etale scheme maps, and structure sheaf $\\mathcal O(x)=\\Gamma(T,\\mathcal O_T)$ for $x$ over $T$. Use module sheaves [def-weil-sheaf-of-modules-category] and morphisms of ringed topoi [def-weil-pbc-ringed-topos-morphism]. If $\\mathcal C$ is such a category represented by an algebraic space $A$ [def-trf-algebraic-space], the inclusion of etale scheme charts gives a canonical morphism $\\pi_A:(\\operatorname{Sh}(\\mathcal C_{\\mathrm{et}}),\\mathcal O_{\\mathcal C})\\to(\\operatorname{Sh}(A_{\\mathrm{et}}),\\mathcal O_A)$ whose module direct image is restriction $\\pi_{A,*}H(T\\to A)=H(T\\to A)$. This module direct image is exact. For a functor $h:\\mathcal C\\to\\mathcal D$ over $S$-schemes between categories represented by algebraic spaces $A,B$, let $h_s:A_{\\mathrm{et}}\\to B_{\\mathrm{et}}$ be the canonical ringed morphism with the module functors of [def-trf-space-etale-module-functors]. There is a canonical ring-compatible commutation $\\pi_Bh\\cong h_s\\pi_A$. Its direct-image comparison $t_h:\\pi_{B,*}h_*\\xrightarrow{\\sim}h_{s,*}\\pi_{A,*}$ is the identification of compatible sections on etale scheme charts of $A\\times_BV$, for every etale scheme $V\\to B$, and preserves every such chart projection. It is natural in modules and test schemes. More generally, for any category fibred in groupoids $\\mathcal E$ with the same big etale ringed site, any module $H$ on it, tests $z:A\\to\\mathcal E$, $w:B\\to\\mathcal E$, and an arrow $u:A\\to B$ with a specified two-isomorphism $z\\cong wu$, put $H_z(T\\to A)=H(z|_T)$ on etale scheme charts. Restriction gives a natural comparison $c_{u,H}:u_s^*H_w\\to H_z$, whose adjoint $H_w\\to u_{s,*}H_z$ is restriction of the big-site adjunction unit $w^*H\\to u_*u^*w^*H$, followed by $t_u$. These maps respect identities, composition, the specified two-isomorphisms, and chart projections. No algebraicity, quasi-coherence, flatness or finiteness assumption is imposed beyond representability of $\\mathcal C,\\mathcal D$ by $A,B$.",
+ "source": {
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 073M (lemma-compare), Tag 073N (lemma-compare-morphism), equation-compare-big-small and Tag 076R (equation-comparison-algebraic-spaces-modules) with the following sentence. Exactness of the module restriction is the assertion used in the proof of Tag 075N, lemma-compare-morphism-cohomology."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-trf-space-etale-module-functors"
+ ],
+ "proof": [
+  {
+   "text": "Choose the representing equivalence over $S$-schemes and write $\\mathcal C=\\mathcal S_A$: its objects are scheme maps $T\\to A$, and its arrows are the commuting scheme maps. Precomposition by this equivalence and its quasi-inverse identify sheaves, their structure rings and all restrictions; the equivalence is over the same underlying schemes, so it preserves covers and regular functions. For the inclusion $i:A_{\\mathrm{et}}\\to\\mathcal S_{A,\\mathrm{et}}$, covers and their pullbacks agree. Any big-site cover of an etale chart consists again of etale charts, by composition. Thus $i$ is continuous and cocontinuous. Fibre products of small charts are schemes and are computed by the same universal property in both sites. For parallel arrows $a,b:T\\rightrightarrows V$ of small charts the equalizer is $T\\times_{V\\times_A V}V$, using $(a,b)$ and the diagonal. All these objects are schemes; the diagonal is an arrow between etale charts, hence etale by the scheme-test lemma, and its base change is etale. This proves existence and preservation of the equalizer. These verifications use only the stated algebraic-space and site definitions and the representable etale scheme-test permanence statements.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-special-cocontinuous-functor",
+    "lem-trf-space-representable-etale-scheme-tests"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 073M (lemma-compare), proof, construction of u and its connected-limit properties"
+   }
+  },
+  {
+   "text": "Let $R$ be restriction and $L=(i_p-)^\\#$. The connected-limit lemma gives $L\\dashv R$ and preservation of fibre products and equalizers. Check the missing terminal-sheaf condition as follows. Choose a surjective etale atlas $U\\to A$ and put $P=U\\times_AU$. For any big sheaf $G$, a map $1\\to RG$ is determined by $s\\in G(U)$ with equal restrictions in $G(P)$: on any etale chart, pull back the atlas and glue. The same pair describes a map $1\\to G$ on the big site: for each arbitrary $T\\to A$, glue the pullback of $s$ on the etale cover $T\\times_AU\\to T$; equality over $P$ is exactly the overlap condition, and uniqueness gives compatibility with every map of $T$'s. These are inverse constructions. Consequently $\\operatorname{Hom}(L1,G)=\\operatorname{Hom}(1,RG)=\\operatorname{Hom}(1,G)$ naturally; the canonical $L1\\to1$ is an isomorphism. Products are fibre products over $1$, and finite limits are equalizers of maps between finite products, so $L$ preserves finite limits. It defines $\\pi_A$ on sheaves of sets with direct image $R$. All sites and chart index categories are taken in the compatible universes fixed in the statement.",
+   "uses": [
+    "lem-sfb-site-left-adjoint-connected-limits",
+    "def-trf-algebraic-space",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 073M (lemma-compare), proof, final-sheaf argument with the atlas"
+   }
+  },
+  {
+   "text": "The equality $R\\mathcal O_{\\mathcal C}=\\mathcal O_A$ is equality of regular functions and all restriction and ring operations on each chart. By step 2, $L$ preserves finite products, so the ring-object adjunction lemma makes $L\\mathcal O_A$ a commutative ring object and shows that the adjunct $L\\mathcal O_A\\to\\mathcal O_{\\mathcal C}$ of the ring isomorphism $\\mathcal O_A=R\\mathcal O_{\\mathcal C}$ is a morphism of ring objects; it equips $\\pi_A$ with its ringed structure. By the definition of the induced module direct image its values and module actions are therefore exactly restriction. This restriction is exact: kernels are computed sectionwise, and a module epimorphism is locally surjective on underlying abelian sheaves. A section on an etale chart lifts on a big etale covering of that chart; every member of this cover is again etale over $A$, so it is already a covering in the small site. Thus restriction preserves epimorphisms as well as kernels. Here the generic module-sheaf lemma supplies exact faithful forgetting, sectionwise kernels and sheafified cokernels, and the general-site epimorphism criterion supplies the local lifts. No assertion about preservation of injective modules is used.",
+   "uses": [
+    "def-weil-pbc-ringed-topos-morphism",
+    "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "lem-trf-space-representable-etale-scheme-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 073M, omitted structural-ring check; Tag 075N (lemma-compare-morphism-cohomology), proof (2), exactness of restriction"
+   }
+  },
+  {
+   "text": "For $h:\\mathcal S_A\\to\\mathcal S_B$ normalize by the representing equivalences as in step 1. Its functor over schemes is continuous and cocontinuous by the fibred-site lemma. The general cocontinuous adjunction computes $(h_*F)(V/B)$ as compatible families $s_{T,a}\\in F(T/A)$ for all scheme objects $T\\to A$ and arrows $h(T/A)\\to V/B$, with compatibility under all such scheme maps. The two indexings are identical: such an arrow is precisely a map $a:T\\to V$ with $h(T\\to A)=(T\\xrightarrow{a}V\\to B)$. Equivalently these are all scheme maps to $X=A\\times_BV$. The structure-ring pullback for $h$ is the identity on functions on each underlying scheme. The ringed module adjunction therefore gives this same compatible-family formula on modules, with $\\Gamma(V,\\mathcal O_V)$ acting on a component through $a^\\sharp$. This also proves that the big pullback on modules is precomposition. The unit sends a section to all its restrictions, as in the cited adjunction formula.",
+   "uses": [
+    "lem-sfb-fibred-site-functor-continuity",
+    "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 073N (lemma-compare-morphism), proof; equation-pushforward and Tag 06TS"
+   }
+  },
+  {
+   "text": "Compare the family of step 4 with the limit defining $(h_{s,*}RF)(V)$: the latter retains just the etale scheme charts $T\\to X$. Indeed $X\\to A$ is etale; a chart $T\\to A$ with a map to $X$ is etale over $X$ by chartwise etale cancellation, and the converse follows by composition. Restricting the big family gives this small family. Conversely, from a compatible family on etale charts choose a surjective etale scheme atlas $Q\\to X$. For an arbitrary scheme $T\\to X$, the pullback $T'=T\\times_XQ\\to T$ is a surjective etale scheme map. Pull the prescribed section on $Q$ to $T'$. The two resulting sections on $T'\\times_TT'$ agree because both pull back the equal sections on $Q\\times_XQ$ prescribed by the original chart family. The big sheaf axiom gives a unique section on $T$. Pulling to the cover from a common atlas proves independence of $Q$; pulling the covers back along any $T_1\\to T$ proves compatibility of these extensions. If $T$ was itself an etale chart, the glued section equals the prescribed one, by compatibility on $T'$. A big family is likewise recovered by this gluing, since it already restricts to the given section on $T'$. The two operations are inverse and preserve every chart projection. The fibre-product lemma and the scheme-test lemma ensure every covering object and overlap used here is a scheme; $X$ itself need not be one.",
+   "uses": [
+    "def-trf-space-etale-module-functors",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 073N (lemma-compare-morphism), general case with U and R; equation-compare-big-small"
+   }
+  },
+  {
+   "text": "The inverse in step 5 commutes with addition and scalar multiplication: on $T'$ these operations are the operations on the restricted sections, and equality of the glued results follows by uniqueness in the sheaf axiom. On every component the scalar $r\\in\\Gamma(V,\\mathcal O_V)$ acts by its image under $T\\to V$, exactly the action defining the small chart limit. Hence this is an $\\mathcal O_B$-linear isomorphism $t_h$. A module map commutes with every restriction used in gluing, so its two composites with $t_h$ have the same chart projections. For $V_1\\to V$, restricting a compatible family is precomposing its chart maps with $V_1\\to V$; both composites again have the identical chart projections. The limit universal property proves naturality. For sets the enlarged-etale ringed-site model computes $h_{s,*}G(V)$ as $\\widetilde G(X)$, with its stated atlas equalizer. The chart-limit/enlarged-sections lemma identifies the chart-limit module direct image with the enlarged-model one by the unique isomorphism whose chart components are restriction from $\\widetilde G(X)$, so the underlying sheaf of the module direct image is this set-level direct image, with the same chart projections. Thus the same gluing argument for sheaves of sets gives the direct-image isomorphism of geometric morphisms, with the underlying maps of $t_h$, whose inverse-image mate is the canonical commutation $\\pi_Bh\\cong h_s\\pi_A$. For structure rings the formulas are ordinary pullback of functions on each chart, so this commutation respects the structural ring maps. Changing the representing equivalences gives the same chart maps and thus the same commutation up to its specified canonical isomorphism.",
+   "uses": [
+    "def-trf-space-etale-module-functors",
+    "def-weil-pbc-ringed-topos-morphism",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-trf-space-chart-limit-enlarged-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 073N and equation-compare-big-small, functoriality and structural-ring checks omitted in the source"
+   }
+  },
+  {
+   "text": "For the general tests $z,w$ of the statement, precomposition with the corresponding functors from the represented fibred categories makes $z^*H$ and $w^*H$ big module sheaves. This follows from fibred-site continuity and the cocontinuous adjunction, with identical structure rings, followed by the ringed module adjunction. Their restrictions are precisely $H_z,H_w$. Apply the unit of the big module adjunction for $u$ to $w^*H$, identify $u^*w^*H$ with $z^*H$ through the specified two-isomorphism, and restrict to $B$. Compose with $t_u$ to obtain $d:H_w\\to u_{s,*}H_z$. Its small tensor-pullback adjoint defines $c_{u,H}$. More explicitly, on $V\\to B$ a section $m\\in H_w(V)$ has, under $d$, component $H(a)(m)\\in H_z(T)$ at a chart $(T,a:T\\to V)$ over $A$. Here the arrow in $\\mathcal E$ uses the given two-isomorphism. The tensor-adjunction chart formula then gives $b\\otimes m\\mapsto b\\,H(a)(m)$ on local representatives. This proves both the restriction description and the required unit-and-$t_u$ normalization.",
+   "uses": [
+    "lem-sfb-fibred-site-functor-continuity",
+    "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "def-trf-space-etale-module-functors",
+    "lem-trf-space-chart-adjunction-tensor-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 076R (equation-comparison-algebraic-spaces-modules), definition by adjunction"
+   }
+  },
+  {
+   "text": "Check coherence on the preceding formula. For an identity, $H(\\mathrm{id})(m)=m$, so the tensor-unit identification $b\\otimes m\\mapsto bm$ gives the identity. For composable $u:A\\to B$, $v:B\\to C$, two successive local tensors are identified by the cited tensor-composition formula $a\\otimes(b\\otimes m)\\mapsto a\\,u^\\sharp(b)\\otimes m$. Their images under successive comparisons are $a\\,u^\\sharp(b)\\,H(\\alpha)H(\\beta)(m)=a\\,u^\\sharp(b)\\,H(\\beta\\alpha)(m)$, by functoriality of $H$ and its module action. This is the image for the composite comparison. The tensor formula is on local representatives generating the sheafified tensor products, so equality there implies equality of module maps by gluing; it does not assume global pure-tensor expressions. The prescribed two-isomorphisms identify the arrows $\\alpha,\\beta$ with the arrow for their composite, and applying the contravariant functor $H$ respects their composition. A map of $H$ commutes with $H(\\alpha)$, and restriction to a further chart replaces $\\alpha$ by its composite with that chart arrow. These give naturality and compatibility with two-isomorphisms and every chart projection. All uses of covers were etale base changes of atlases, and all other maps were arbitrary; no additional flatness, quasi-coherence or finiteness hypothesis occurred.",
+   "uses": [
+    "lem-trf-space-chart-adjunction-tensor-realization",
+    "def-trf-space-etale-module-functors",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 076R, following sentence referring to properties (1)--(4) of Tag 075D; explicit verification of identity and composition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-special-cocontinuous-functor",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-sfb-site-left-adjoint-connected-limits",
+  "def-weil-size-convention",
+  "def-weil-pbc-ringed-topos-morphism",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "lem-sfb-fibred-site-functor-continuity",
+  "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-space-etale-module-functors",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-chart-adjunction-tensor-realization",
+  "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+  "lem-trf-space-chart-limit-enlarged-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tags 073M, 073N, 076R and exactness assertion in the proof of 075N. The terminal-sheaf, gluing, ring-compatibility and coherence verifications omitted in Stacks are written explicitly here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "morphism.big.small|big.small.etale|compare.*etale|etale.*compare",
+   "results": "{\"t\": \"2026-10-23T21:18:59Z\", \"tool\": \"grep\", \"query\": \"morphism.big.small|big.small.etale|compare.*etale|etale.*compare\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the scheme small-etale topology and generic continuous-site pushforward composition do not construct the algebraic-space big-small ringed morphisms, their exact module restriction, or the chart-normalized commutation. SheafOfModules.pushforwardComp (Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:139) only composes already supplied continuous-site functors."
+  },
+  {
+   "tool": "grep",
+   "query": "big.*small.*[Ee]tale|small.*big.*[Ee]tale|AlgebraicSpace|AlgebraicStack",
+   "results": "{\"t\": \"2026-10-23T21:18:59Z\", \"tool\": \"grep\", \"query\": \"big.*small.*[Ee]tale|small.*big.*[Ee]tale|AlgebraicSpace|AlgebraicStack\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the scheme small-etale topology and generic continuous-site pushforward composition do not construct the algebraic-space big-small ringed morphisms, their exact module restriction, or the chart-normalized commutation. SheafOfModules.pushforwardComp (Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:139) only composes already supplied continuous-site functors."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism of algebraic spaces gives a commutative ringed topos square between big etale sites and small etale sites with the canonical direct image restriction isomorphism",
+   "results": "{\"t\": \"2026-10-23T21:19:00Z\", \"tool\": \"leansearch\", \"query\": \"A morphism of algebraic spaces gives a commutative ringed topos square between big etale sites and small etale sites with the canonical direct image restriction isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.appTop\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.LocallyRingedSpace.Hom\", \"AlgebraicGeometry.Scheme.arrowStalkMapSpecIso\", \"AlgebraicGeometry.LocallyRingedSpace.Hom.stalkMap\", \"AlgebraicGeometry.Spec.locallyRingedSpaceMap\", \"AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso\", \"AlgebraicGeometry.LocallyRingedSpace.restrictTopIso\"], \"digest\": \"7da13a45ce01ed0f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the scheme small-etale topology and generic continuous-site pushforward composition do not construct the algebraic-space big-small ringed morphisms, their exact module restriction, or the chart-normalized commutation. SheafOfModules.pushforwardComp (Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:139) only composes already supplied continuous-site functors."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafPushforward\", \"Exact\"",
+   "results": "{\"t\": \"2026-10-23T21:19:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"sheafPushforward\\\", \\\"Exact\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the scheme small-etale topology and generic continuous-site pushforward composition do not construct the algebraic-space big-small ringed morphisms, their exact module restriction, or the chart-normalized commutation. SheafOfModules.pushforwardComp (Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:139) only composes already supplied continuous-site functors."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an algebraic space the small etale inclusion into its big etale category gives a morphism of ringed topoi whose direct image is exact restriction",
+   "results": "{\"t\": \"2026-10-23T21:19:00Z\", \"tool\": \"leansearch\", \"query\": \"For an algebraic space the small etale inclusion into its big etale category gives a morphism of ringed topoi whose direct image is exact restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.Opens.ι_appTop\", \"AlgebraicGeometry.LocallyRingedSpace.restrictTopIso\", \"AlgebraicGeometry.LocallyRingedSpace.restrict\", \"AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso\", \"RingHom.Etale\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.PresheafedSpace.toRestrictTop_base\"], \"digest\": \"81890012a9493314\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the scheme small-etale topology and generic continuous-site pushforward composition do not construct the algebraic-space big-small ringed morphisms, their exact module restriction, or the chart-normalized commutation. SheafOfModules.pushforwardComp (Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:139) only composes already supplied continuous-site functors."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushforwardComp\", \"SheafOfModules\"",
+   "results": "{\"t\": \"2026-10-23T21:19:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"pushforwardComp\\\", \\\"SheafOfModules\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"PresheafOfModules.pushforwardCompToPresheaf\", \"PresheafOfModules.pushforwardComp\", \"PresheafOfModules.pushforwardCompCoyonedaFreeYonedaCorepresentableBy\", \"PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp\", \"SheafOfModules.pushforwardComp\", \"SheafOfModules.pushforwardComp_hom_app_val_app\", \"SheafOfModules.pushforwardComp_inv_app_val_app\", \"SheafOfModules.pushforwardCompForgetToSheafModuleCat\"], \"digest\": \"321992abd89bdd38\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the scheme small-etale topology and generic continuous-site pushforward composition do not construct the algebraic-space big-small ringed morphisms, their exact module restriction, or the chart-normalized commutation. SheafOfModules.pushforwardComp (Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:139) only composes already supplied continuous-site functors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an algebraic space the small etale inclusion into its big etale category gives a morphism of ringed topoi whose direct image is exact restriction",
+   "results": "{\"t\": \"2026-10-23T21:19:03Z\", \"tool\": \"leanfinder\", \"query\": \"For an algebraic space the small etale inclusion into its big etale category gives a morphism of ringed topoi whose direct image is exact restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\"], \"digest\": \"c55373acf0250827\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the scheme small-etale topology and generic continuous-site pushforward composition do not construct the algebraic-space big-small ringed morphisms, their exact module restriction, or the chart-normalized commutation. SheafOfModules.pushforwardComp (Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:139) only composes already supplied continuous-site functors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of algebraic spaces gives a commutative ringed topos square between big etale sites and small etale sites with the canonical direct image restriction isomorphism",
+   "results": "{\"t\": \"2026-10-23T21:19:04Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism of algebraic spaces gives a commutative ringed topos square between big etale sites and small etale sites with the canonical direct image restriction isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'\"], \"digest\": \"96ddb2988bd42cb2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the scheme small-etale topology and generic continuous-site pushforward composition do not construct the algebraic-space big-small ringed morphisms, their exact module restriction, or the chart-normalized commutation. SheafOfModules.pushforwardComp (Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:139) only composes already supplied continuous-site functors."
+  },
+  {
+   "tool": "grep",
+   "query": "def pushforwardComp|def smallEtaleTopology",
+   "results": "{\"t\": \"2026-10-23T21:19:37Z\", \"tool\": \"grep\", \"query\": \"def pushforwardComp|def smallEtaleTopology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/Etale.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pushforward.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pushforward.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean\"], \"digest\": \"f70d117294345ca7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the scheme small-etale topology and generic continuous-site pushforward composition do not construct the algebraic-space big-small ringed morphisms, their exact module restriction, or the chart-normalized commutation. SheafOfModules.pushforwardComp (Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:139) only composes already supplied continuous-site functors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact restriction of module sheaves from the big etale site of an algebraic space to its small etale site as ringed direct image",
+   "results": "{\"t\": \"2026-10-23T21:19:38Z\", \"tool\": \"leanfinder\", \"query\": \"Exact restriction of module sheaves from the big etale site of an algebraic space to its small etale site as ringed direct image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"AlgebraicGeometry.Scheme.Modules.restrict\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"AlgebraicGeometry.Scheme.Modules.pushforward\"], \"digest\": \"27f7899029bb3a4d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the scheme small-etale topology and generic continuous-site pushforward composition do not construct the algebraic-space big-small ringed morphisms, their exact module restriction, or the chart-normalized commutation. SheafOfModules.pushforwardComp (Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:139) only composes already supplied continuous-site functors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to the small etale site commutes with pushforward between categories fibred in groupoids represented by algebraic spaces as a canonical ringed topos identity",
+   "results": "{\"t\": \"2026-10-23T21:19:39Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction to the small etale site commutes with pushforward between categories fibred in groupoids represented by algebraic spaces as a canonical ringed topos identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorId\", \"AlgebraicGeometry.Scheme.restrictFunctorΓ\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"AlgebraicGeometry.PresheafedSpace.ofRestrict_c_app\", \"AlgebraicGeometry.PresheafedSpace.restrict_top_presheaf\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app\"], \"digest\": \"55fb9849947793a8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the scheme small-etale topology and generic continuous-site pushforward composition do not construct the algebraic-space big-small ringed morphisms, their exact module restriction, or the chart-normalized commutation. SheafOfModules.pushforwardComp (Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:139) only composes already supplied continuous-site functors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an algebraic space restriction from its big etale ringed site to its small etale site is exact and commutes with direct images",
+   "results": "{\"t\": \"2026-10-23T21:59:14Z\", \"tool\": \"leanfinder\", \"query\": \"For an algebraic space restriction from its big etale ringed site to its small etale site is exact and commutes with direct images\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.SheafedSpace.restrict\", \"AlgebraicGeometry.SheafedSpace.ofRestrict\", \"AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\"], \"digest\": \"26349d39b20c70c4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the scheme small-etale topology and generic continuous-site module-pushforward composition are only ingredients. Read Mathlib/AlgebraicGeometry/Sites/Etale.lean:51 and Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:139-151; these do not give the algebraic-space ringed comparison or its chart normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "big.*small.*[Ee]tale|AlgebraicSpace|AlgebraicStack",
+   "results": "{\"t\": \"2026-10-23T22:00:32Z\", \"tool\": \"grep\", \"query\": \"big.*small.*[Ee]tale|AlgebraicSpace|AlgebraicStack\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the scheme small-etale topology and generic continuous-site module-pushforward composition are only ingredients. Read Mathlib/AlgebraicGeometry/Sites/Etale.lean:51 and Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:139-151; these do not give the algebraic-space ringed comparison or its chart normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "def pushforwardComp|def smallEtaleTopology",
+   "results": "{\"t\": \"2026-10-23T22:00:32Z\", \"tool\": \"grep\", \"query\": \"def pushforwardComp|def smallEtaleTopology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/Etale.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pushforward.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pushforward.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean\"], \"digest\": \"f70d117294345ca7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the scheme small-etale topology and generic continuous-site module-pushforward composition are only ingredients. Read Mathlib/AlgebraicGeometry/Sites/Etale.lean:51 and Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:139-151; these do not give the algebraic-space ringed comparison or its chart normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an algebraic space restriction from the big etale site to the small etale site is exact and commutes with module direct image",
+   "results": "{\"t\": \"2026-10-23T22:00:33Z\", \"tool\": \"leansearch\", \"query\": \"For an algebraic space restriction from the big etale site to the small etale site is exact and commutes with module direct image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.Modules.restrict_obj\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"ModuleCat.Tilde.toOpen_res\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\"], \"digest\": \"b6f298aa996201a4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the scheme small-etale topology and generic continuous-site module-pushforward composition are only ingredients. Read Mathlib/AlgebraicGeometry/Sites/Etale.lean:51 and Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:139-151; these do not give the algebraic-space ringed comparison or its chart normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Cocontinuous\", \"PreservesFiniteLimits\"",
+   "results": "{\"t\": \"2026-10-23T22:00:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"Cocontinuous\\\", \\\"PreservesFiniteLimits\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the scheme small-etale topology and generic continuous-site module-pushforward composition are only ingredients. Read Mathlib/AlgebraicGeometry/Sites/Etale.lean:51 and Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:139-151; these do not give the algebraic-space ringed comparison or its chart normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"pushforwardComp\"",
+   "results": "{\"t\": \"2026-10-23T22:00:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"pushforwardComp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"PresheafOfModules.pushforwardCompToPresheaf\", \"PresheafOfModules.pushforwardComp\", \"PresheafOfModules.pushforwardCompCoyonedaFreeYonedaCorepresentableBy\", \"PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp\", \"SheafOfModules.pushforwardComp\", \"SheafOfModules.pushforwardComp_hom_app_val_app\", \"SheafOfModules.pushforwardComp_inv_app_val_app\", \"SheafOfModules.pushforwardCompForgetToSheafModuleCat\"], \"digest\": \"321992abd89bdd38\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the scheme small-etale topology and generic continuous-site module-pushforward composition are only ingredients. Read Mathlib/AlgebraicGeometry/Sites/Etale.lean:51 and Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:139-151; these do not give the algebraic-space ringed comparison or its chart normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical ringed topos comparison for a category fibred in groupoids represented by an algebraic space identifies big and small etale pushforwards",
+   "results": "{\"t\": \"2026-10-23T22:00:34Z\", \"tool\": \"leanfinder\", \"query\": \"The canonical ringed topos comparison for a category fibred in groupoids represented by an algebraic space identifies big and small etale pushforwards\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.LocallyRingedSpace.comp_c\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"AlgebraicGeometry.PresheafedSpace.sheafIsoOfIso\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\"], \"digest\": \"8520e1e4065138d4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the scheme small-etale topology and generic continuous-site module-pushforward composition are only ingredients. Read Mathlib/AlgebraicGeometry/Sites/Etale.lean:51 and Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:139-151; these do not give the algebraic-space ringed comparison or its chart normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-representable-derived-restriction",
+  "date": "2026-10-24",
+  "group": "Q72"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Flat scalar-section comparison needed in the descent of a power lying in the image of a global algebra map; this does not assert adequate-moduli locality. General cohomological input: preservation of locally quasi-coherent modules and flat comparison maps under qcqs stack direct images. Supporting input: Derived restriction of representable stack direct image to a scheme test. Supporting input: Ordinary big-small etale ringed comparison for algebraic spaces.",
+   "via": [
+    "lem-sfb-stack-representable-derived-restriction",
+    "lem-sfb-stack-higher-images-flat-comparison",
+    "lem-sfb-stack-flat-scalar-sections",
+    "lem-sfb-adequate-moduli-etale-locality",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-big-small-ringed-comparison",
+  "worker": "stage1",
+  "summary": "Constructed the ringed big-small morphism using connected-limit preservation plus atlas gluing for the terminal sheaf. Proved exactness via local lifting, compared all-scheme and etale-chart families, and checked ring compatibility and unit-normalized test-map coherence. One general site lemma is left statement-only; the item statement is unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Flat scalar-section comparison needed in the descent of a power lying in the image of a global algebra map; this does not assert adequate-moduli locality. General cohomological input: preservation of locally quasi-coherent modules and flat comparison maps under qcqs stack direct images. Supporting input: Derived restriction of representable stack direct image to a scheme test. Supporting input: Ordinary big-small etale ringed comparison for algebraic spaces. The current blueprint direct-images proof (3) is realized through the inherited prerequisite chain; this item supplies the ordinary ringed comparison needed by representable derived restriction.",
+  "tool_uses": [
+   {
+    "node": "def-trf-algebraic-space",
+    "why": "General site or ringed module-sheaf infrastructure used through its stated universal property; no node of this unit supplies this generic tool."
+   },
+   {
+    "node": "def-weil-pbc-sites-and-cohomology",
+    "why": "General site or ringed module-sheaf infrastructure used through its stated universal property; no node of this unit supplies this generic tool."
+   },
+   {
+    "node": "def-weil-pbc-special-cocontinuous-functor",
+    "why": "General site or ringed module-sheaf infrastructure used through its stated universal property; no node of this unit supplies this generic tool."
+   },
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Ensures scheme fibre products and etale cancellation for charts and the atlas covers used in steps 1--5; no ringed comparison is taken from it."
+   },
+   {
+    "node": "def-weil-size-convention",
+    "why": "General site or ringed module-sheaf infrastructure used through its stated universal property; no node of this unit supplies this generic tool."
+   },
+   {
+    "node": "def-weil-pbc-ringed-topos-morphism",
+    "why": "General site or ringed module-sheaf infrastructure used through its stated universal property; no node of this unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "General site or ringed module-sheaf infrastructure used through its stated universal property; no node of this unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "why": "General site or ringed module-sheaf infrastructure used through its stated universal property; no node of this unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
+    "why": "General site or ringed module-sheaf infrastructure used through its stated universal property; no node of this unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "General site or ringed module-sheaf infrastructure used through its stated universal property; no node of this unit supplies this generic tool."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Gives the algebraic-space fibre product X and stability of surjective etale atlases under arbitrary base change."
+   },
+   {
+    "node": "def-trf-space-etale-module-functors",
+    "why": "General site or ringed module-sheaf infrastructure used through its stated universal property; no node of this unit supplies this generic tool."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Identifies A(h,V) with the etale scheme charts of A times_B V using etale composition and cancellation."
+   },
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "Provides the set-sheaf small-etale direct image and its atlas equalizer, needed to identify the geometric-morphism square as well as its module comparison."
+   },
+   {
+    "node": "lem-trf-space-chart-adjunction-tensor-realization",
+    "why": "Provides the normalized local tensor formula and its composition isomorphism; used to check that the comparison adjoint to restrictions respects composition."
+   },
+   {
+    "node": "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+    "why": "Generic adjunction fact: the adjunct of a ring-object map under a finite-product-preserving left adjoint is a ring-object map (step 3, structure ring of pi_A); no node of this unit supplies it."
+   },
+   {
+    "node": "lem-trf-space-chart-limit-enlarged-sections",
+    "why": "Generic algebraic-space infrastructure: chart-limit module direct image equals the enlarged-site direct image with restriction projections (step 6); no node of this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-trf-algebraic-space",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-special-cocontinuous-functor",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "def-weil-size-convention",
+  "def-weil-pbc-ringed-topos-morphism",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-space-etale-module-functors",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-chart-adjunction-tensor-realization",
+  "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+  "lem-trf-space-chart-limit-enlarged-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q116-88087026c",
+  "group": "Q116",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q116-88087026c (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps and the new node lem-sfb-site-left-adjoint-connected-limits in full, against Stacks 073M (lemma-compare: proof, final-sheaf argument), remark-compare, equation-restrict, 076R/075D, sites 00XR and 00XS. The new node states exactly 00XR(2) with 00XS, (a)-(c). It has no proof fields and its statement is self-contained. A search for the tag over dag/nodes finds no duplicate; lem-trf-bigger-site-retraction needs final objects and full faithfulness. It does not restate a clause of the item, and I tested it on the empty site and on the identity functor. Step 1: the equalizer is T x_{VxV} V; the diagonal is etale by scheme-test cancellation, and it is a monomorphism, so this is the equalizer. Step 2: L1=1 by Yoneda through atlas gluing; this is equivalent to Stacks' coequalizer proof. Step 3: exactness checked through local lifting on a big cover that is already small, plus faithful exact forgetting. Steps 4-5: the index set of arrows h(T/A)->V/B is the same as maps T->AxV; chartwise cancellation and Q-atlas gluing checked. Steps 7-8: adjoint formula c(b pi eta m)=b H(a)m and composition a u#(b) H(alpha)H(beta)m checked. The statement is unchanged and the item is unsplit on live and side-live. FIX 1: step 3 now cites lem-weil-pbc-adjunction-lifts-group-ring-objects (2) for the adjunct L O_A->O_C being a ring-object map; its hypothesis is step 2's finite-product preservation. FIX 2: step 6 now cites lem-trf-space-chart-limit-enlarged-sections, which identifies the chart-limit module direct image with the enlarged-model set direct image. proof_deps and split_report.tool_uses are updated to match. Batch 5: the 5 flagged trf nodes (representable-etale-scheme-tests, fibre-products-etale-covers, chartwise-etale-permanence, enlarged-etale-ringed-site-model, chart-adjunction-tensor-realization) and my added chart-limit-enlarged-sections are generic algebraic-space foundations (Stacks 03EC, 02X2, 03FR, 03G0-03G8, 03D7/03LV). Their dependency closures contain no thm-, sk- or nt- node and nothing from the trace-formula or Poincare-duality proofs, so I accept them. I checked that the closures of both added nodes do not contain the item, so there is no cycle. No SGA.; 1 file(s) fixed by the reviewer"
+ }
+}

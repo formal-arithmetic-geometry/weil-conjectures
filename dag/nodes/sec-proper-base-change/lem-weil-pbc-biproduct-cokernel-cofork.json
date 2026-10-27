@@ -1,0 +1,226 @@
+{
+ "id": "lem-weil-pbc-biproduct-cokernel-cofork",
+ "kind": "statement",
+ "title": "A block diagonal pair of cokernel coforks is a cokernel cofork",
+ "statement": "Let $\\mathcal A$ be an additive category [def-weil-additive-category]. For $k=1,2$, let $a_k:Q_k\\to P_k$ and $c_k:P_k\\to C_k$ be morphisms such that $c_k$ is a cokernel of $a_k$: $c_ka_k=0$, and every morphism $f:P_k\\to T$ with $fa_k=0$ factors uniquely through $c_k$. Define block diagonal maps $a=i_{P_1}a_1p_{Q_1}+i_{P_2}a_2p_{Q_2}:Q_1\\oplus Q_2\\to P_1\\oplus P_2$ and $c=i_{C_1}c_1p_{P_1}+i_{C_2}c_2p_{P_2}:P_1\\oplus P_2\\to C_1\\oplus C_2$, using the biproduct injections and projections. Then $c$ is a cokernel of $a$, with its stated projection map, so the cokernel coforks are compatible with both biproduct injections.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 01PJ, lemma-directed-colimit-diagram-finite-presentation, proof at the sentence that finite direct sums of finitely presented modules are finitely presented; the generic block-cokernel calculation is an agent-extracted auxiliary lemma for that omitted argument (additive-category notion: Homology Tag 0104, definition-additive-category)."
+ },
+ "stmt_deps": [
+  "def-weil-additive-category"
+ ],
+ "proof": [
+  {
+   "text": "Use ordinary composition, so $uv=u\\circ v$. For $V=Q,P,C$, write $i^V_k,p^V_k$ for the two biproduct injections and projections. The relations in [def-weil-additive-category] and bilinearity in [def-weil-preadditive-category] give $ai^Q_k=i^P_ka_k$, $ci^P_k=i^C_kc_k$, and\n$$ca=\\sum_{k=1}^2 i^C_kc_ka_kp^Q_k=0.$$\nThe identities $ci^P_k=i^C_kc_k$, together with $ai^Q_k=i^P_ka_k$, are precisely compatibility of the given coforks with both injections.",
+   "uses": [
+    "def-weil-additive-category",
+    "def-weil-preadditive-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tags 0103 (remark-direct-sum), 0104 (definition-additive-category), 0106 (definition-kernel, cokernel clause); agent-written binary universal-property calculation for the finite-direct-sum sentence in Tag 01PJ (properties.tex, lemma-directed-colimit-diagram-finite-presentation)."
+   }
+  },
+  {
+   "text": "Let $f:P_1\\oplus P_2\\to T$ satisfy $fa=0$. Put $f_k=fi^P_k$. Step 1 gives $f_ka_k=fai^Q_k=0$. The assumed cokernel property of $c_k$ therefore gives a unique $h_k:C_k\\to T$ with $h_kc_k=f_k$. Define $h=h_1p^C_1+h_2p^C_2:C_1\\oplus C_2\\to T$. The biproduct relations of [def-weil-additive-category], expanded using [def-weil-preadditive-category], give $hi^C_k=h_k$.",
+   "uses": [
+    "def-weil-additive-category",
+    "def-weil-preadditive-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tags 0103 (remark-direct-sum), 0104 (definition-additive-category), 0106 (definition-kernel, cokernel clause); agent-written binary universal-property calculation for the finite-direct-sum sentence in Tag 01PJ (properties.tex, lemma-directed-colimit-diagram-finite-presentation)."
+   }
+  },
+  {
+   "text": "Expanding the maps using bilinearity [def-weil-preadditive-category], the relations $p^C_ki^C_j=\\delta_{kj}$ and $\\sum_k i^P_kp^P_k=\\mathrm{id}$ from [def-weil-additive-category] give\n$$hc=\\sum_k h_kc_kp^P_k=\\sum_k f_kp^P_k=\\sum_k fi^P_kp^P_k=f.$$\nThus $h$ is a factor of $f$ through the stated map $c$.",
+   "uses": [
+    "def-weil-additive-category",
+    "def-weil-preadditive-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tags 0103 (remark-direct-sum), 0104 (definition-additive-category), 0106 (definition-kernel, cokernel clause); agent-written binary universal-property calculation for the finite-direct-sum sentence in Tag 01PJ (properties.tex, lemma-directed-colimit-diagram-finite-presentation)."
+   }
+  },
+  {
+   "text": "If $h':C_1\\oplus C_2\\to T$ also satisfies $h'c=f$, then $(h'i^C_k)c_k=h'ci^P_k=fi^P_k=f_k$. Uniqueness in the assumed cokernel property of $c_k$ implies $h'i^C_k=h_k$ for both $k$. The identity $\\sum_k i^C_kp^C_k=\\mathrm{id}$ in [def-weil-additive-category] and bilinearity in [def-weil-preadditive-category] yield $h'=\\sum_k(h'i^C_k)p^C_k=\\sum_k h_kp^C_k=h$. Together with $ca=0$, this proves the full cokernel universal property for $c$, with the injection identities established in Step 1.",
+   "uses": [
+    "def-weil-additive-category",
+    "def-weil-preadditive-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tags 0103 (remark-direct-sum), 0104 (definition-additive-category), 0106 (definition-kernel, cokernel clause); agent-written binary universal-property calculation for the finite-direct-sum sentence in Tag 01PJ (properties.tex, lemma-directed-colimit-diagram-finite-presentation)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-additive-category",
+  "def-weil-preadditive-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tags 0103 (remark-direct-sum), 0104 (definition-additive-category), 0106 (definition-kernel, cokernel clause); agent-written binary universal-property calculation for the finite-direct-sum sentence in Tag 01PJ (properties.tex, lemma-directed-colimit-diagram-finite-presentation)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In an additive category the binary biproduct of two cokernel coforks is a cokernel cofork of the block diagonal map",
+   "results": "CategoryTheory.Limits.instHasCokernelι, CategoryTheory.Limits.biprod.inrCokernelCofork, CategoryTheory.Limits.biprod.inlCokernelCofork, CategoryTheory.Limits.cokernelCoforkBiproductFromSubtype_cocone, CategoryTheory.CommSq.cokernelCofork, CategoryTheory.Square.cokernelCofork, CategoryTheory.Limits.BinaryBicone.inlCokernelCofork, CategoryTheory.Limits.instHasCokernelInl",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Taking a direct sum of two cokernels gives the cokernel of the direct sum of two morphisms in an abelian category",
+   "results": "CategoryTheory.NonPreadditiveAbelian.isColimitσ, CategoryTheory.kernelCokernelCompSequence.π, CategoryTheory.kernelCokernelCompSequence.isColimit, CategoryTheory.Limits.instHasCokernelι, CategoryTheory.Limits.instHasCokernelFromSubtype, CategoryTheory.NonPreadditiveAbelian.has_cokernels, CategoryTheory.kernelCokernelCompSequence.inr_π, CategoryTheory.Limits.instHasCokernelInl",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The direct sum of two cokernel coforks is a cokernel of the block diagonal morphism in an additive category",
+   "results": "CategoryTheory.Preadditive.isColimitCoforkOfCokernelCofork_desc, CategoryTheory.Abelian.BiproductToPushoutIsCokernel.biproductToPushoutCofork, CategoryTheory.CommSq.cokernelCofork, CategoryTheory.Preadditive.isColimitCokernelCoforkOfCofork, CategoryTheory.Preadditive.cokernelCoforkOfCofork, CategoryTheory.Square.IsPushout.isColimitCokernelCofork, CategoryTheory.Limits.biprod.isCokernelInlCokernelFork, CategoryTheory.Preadditive.isColimitCoforkOfCokernelCofork",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.CokernelCofork, CategoryTheory.Limits.biprod.map",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "biprod.*(cokernel|Cokernel)|(cokernel|Cokernel).*biprod",
+   "results": "Mathlib/CategoryTheory/Preadditive/FreydCategory/Homotopy.lean, Mathlib/CategoryTheory/Preadditive/FreydCategory/RightFreyd.lean, Mathlib/CategoryTheory/Abelian/DiagramLemmas/KernelCokernelComp.lean",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an additive category the binary biproduct of two cokernel coforks is a cokernel of the block diagonal map",
+   "results": "CategoryTheory.Square.cokernelCofork, CategoryTheory.CommSq.cokernelCofork, CategoryTheory.Limits.biprod.isCokernelInlCokernelFork, CategoryTheory.Limits.biprod.isCokernelInrCokernelFork, CategoryTheory.Limits.biprod.inrCokernelCofork, CategoryTheory.Limits.biprod.inlCokernelCofork, CategoryTheory.Limits.instHasCokernelInr, CategoryTheory.Limits.instHasCokernelInl",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.CokernelCofork, CategoryTheory.Limits.biprod.map",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "biprod.*(cokernel|Cokernel)|(cokernel|Cokernel).*biprod",
+   "results": "Mathlib/CategoryTheory/Preadditive/FreydCategory/Homotopy.lean, Mathlib/CategoryTheory/Preadditive/FreydCategory/RightFreyd.lean, Mathlib/CategoryTheory/Preadditive/FreydCategory/RightFreyd.lean, Mathlib/CategoryTheory/Preadditive/FreydCategory/RightFreyd.lean, Mathlib/CategoryTheory/Preadditive/FreydCategory/RightFreyd.lean, Mathlib/CategoryTheory/Abelian/Basic.lean, Mathlib/CategoryTheory/Abelian/Basic.lean, Mathlib/CategoryTheory/Abelian/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite direct sum of cokernel diagrams is a cokernel diagram in an additive category",
+   "results": "AddCommGrpCat.cokernelIsColimit, CategoryTheory.Limits.cokerIsCokernel, CategoryTheory.Limits.cokernelIsCokernel, CategoryTheory.ShortComplex.Exact.gIsCokernel, CategoryTheory.kernelCokernelCompSequence.isColimit, CategoryTheory.Limits.isColimitAux, CategoryTheory.ShortComplex.ShortExact.gIsCokernel, CategoryTheory.Functor.preservesFiniteCoproductsOfAdditive",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The coproduct of two coequalizer diagrams is a coequalizer diagram, hence binary direct sums preserve cokernels",
+   "results": "CategoryTheory.Limits.biprod.isCokernelInlCokernelFork, CategoryTheory.Limits.hasCokernels_of_hasCoequalizers, CategoryTheory.Limits.BinaryBicone.isColimitInrCokernelCofork, CategoryTheory.Limits.biprod.isCokernelInrCokernelFork, CategoryTheory.Preadditive.hasCoequalizers_of_hasCokernels, CategoryTheory.Preadditive.isColimitCoforkOfCokernelCofork, CategoryTheory.Preadditive.hasCoequalizer_of_hasCokernel, CategoryTheory.Limits.instHasCokernelInl",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isColimit.*[Cc]okernel.*[Bb]iprod|[Bb]iprod.*[Cc]okernel|[Cc]oproduct.*[Cc]oequalizer",
+   "results": "Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Preadditive/FreydCategory/Homotopy.lean, Mathlib/CategoryTheory/Preadditive/FreydCategory/RightFreyd.lean, Mathlib/CategoryTheory/Abelian/DiagramLemmas/KernelCokernelComp.lean, Mathlib/CategoryTheory/Abelian/DiagramLemmas/KernelCokernelComp.lean, Mathlib/CategoryTheory/Abelian/DiagramLemmas/KernelCokernelComp.lean, Mathlib/CategoryTheory/Abelian/Basic.lean, Mathlib/CategoryTheory/Abelian/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-module-finite-presentation-direct-sum",
+  "date": "2026-10-22",
+  "group": "Q46"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "blueprint": {
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "step 4 of its split (source: Lemma 0A5H (lemma-efface-cohomology-on-fibre-by-finite-cover), etale-cohomology.tex line 16164, proof, third paragraph, 'By Lemma 09Z7 (lemma-constructible-maps-into-constant-general) and the remarks above we may assume F is of the form f_*M where M is a finite Z/lZ-module and f: Y -> X is a finite morphism of finite presentation'); auxiliary presentation calculation in the 01PJ branch, extracted from lem-weil-pbc-module-finite-presentation-direct-sum old Step 5",
+   "via": [
+    "lem-weil-pbc-module-finite-presentation-direct-sum",
+    "lem-weil-pbc-module-filtered-colimit-finite-presentation",
+    "lem-weil-pbc-module-directed-colimit-finite-presentation",
+    "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+    "lem-weil-pbc-integral-morphism-limit-of-finite",
+    "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
+    "lem-weil-pbc-constructible-module-finite-pushforward-embedding"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-pbc-biproduct-cokernel-cofork",
+  "worker": "stage1",
+  "group": "Q75",
+  "summary": "Expanded the binary cokernel universal property directly: zero composite and injection compatibility, componentwise factors, factorization, uniqueness. All four steps are elementary consequences of the explicit biproduct relations, bilinearity, and the cokernel hypotheses. No new nodes or statement changes. No Mathlib exact match was found in logged searches. Repair of returned head 44235e12699: rebased through deliver.py onto the current live DAG, re-read both cited definition statements and retained their verbatim quotations; made the bilinearity input explicit also in the uniqueness step. The current repository item remains unsplit, so the retained four-step argument supplies its missing proof.",
+  "blueprint": "The existing ancestor reference to lemma-weil-pbc-h1-constructible-representation is retained. This item supplies the block-presentation calculation in the 01PJ finite-direct-sum branch extracted from lem-weil-pbc-module-finite-presentation-direct-sum, corresponding to the constructible finite-pushforward reduction; it introduces no alternative unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-b4dbe534a",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-b4dbe534a (reviewer sub-agent of L); spot-checked: This re-delivers 44235e12699. A reader passed that head, but the landing refused it with 'side completion never promoted; L promotes it'. The live and side-live clones still show the item as unsplit with no proof, so it is not superseded, and there is no re-split repair note. The only change from 44235 is that Step 4 now also cites def-weil-preadditive-category for the bilinearity it uses, plus an extended split_report. The statement, deps, source, unit, blueprint ancestry and searches are unchanged. I read the item in full against both cited statements. def-weil-additive-category gives the five biproduct relations and def-weil-preadditive-category gives bilinearity. Step 1: a i^Q_k = i^P_k a_k, c i^P_k = i^C_k c_k, and ca = Σ i^C_k c_k a_k p^Q_k = 0; this also gives compatibility with the injections. Step 2: f_k = f i^P_k satisfies f_k a_k = f a i^Q_k = 0, which gives a unique h_k, and h = Σ h_k p^C_k has h i^C_k = h_k. Step 3: hc = Σ h_k c_k p^P_k = f. Step 4: if h'c = f then (h' i^C_k) c_k = f_k, so h' i^C_k = h_k by uniqueness, and h' = h'Σ i^C p^C = h. All steps are elementary. Neither abelianness nor ambient cokernels are used. Edge cases: a_k = 0 with c_k = id; a_k = id with C_k = 0; one summand zero; multiplication by 2 on ℤ⊕ℤ. Sources: Stacks properties.tex 01PJ (l.3040, 'direct sum of φ_i and φ_{i'}') and homology.tex 0103/0104/0106 (l.155/199/210); the cokernel clause matches the item. There is no SGA. The only citer is lem-weil-pbc-module-finite-presentation-direct-sum Step 4, which uses exactly this statement. No duplicate in the DAG and no Mathlib match. No fixes and no tool_uses. Maintainer note: this is the promotion-refusal loop; please promote this head."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.BiprodCokernelCofork",
+  "declaration": "CategoryTheory.Limits.exists_isColimit_biprod_map_cokernelCofork",
+  "file": "lean/Sheaf/CategoryTheory/BiprodCokernelCofork.lean",
+  "statement": "theorem exists_isColimit_biprod_map_cokernelCofork {A : Type u} [Category.{v} A] [Preadditive A] [HasZeroObject A] [HasBinaryBiproducts A] {Q₁ Q₂ P₁ P₂ C₁ C₂ : A} (a₁ : Q₁ ⟶ P₁) (a₂ : Q₂ ⟶ P₂) (c₁ : P₁ ⟶ C₁) (c₂ : P₂ ⟶ C₂) (w₁ : a₁ ≫ c₁ = 0) (w₂ : a₂ ≫ c₂ = 0) (h₁ : IsColimit (CokernelCofork.ofπ c₁ w₁)) (h₂ : IsColimit (CokernelCofork.ofπ c₂ w₂)) : ∃ w : biprod.map a₁ a₂ ≫ biprod.map c₁ c₂ = 0, Nonempty (IsColimit (CokernelCofork.ofπ (biprod.map c₁ c₂) w)) ∧ (biprod.inl : Q₁ ⟶ Q₁ ⊞ Q₂) ≫ biprod.map a₁ a₂ = a₁ ≫ biprod.inl ∧ (biprod.inr : Q₂ ⟶ Q₁ ⊞ Q₂) ≫ biprod.map a₁ a₂ = a₂ ≫ biprod.inr ∧ (biprod.inl : P₁ ⟶ P₁ ⊞ P₂) ≫ biprod.map c₁ c₂ = c₁ ≫ biprod.inl ∧ (biprod.inr : P₂ ⟶ P₁ ⊞ P₂) ≫ biprod.map c₁ c₂ = c₂ ≫ biprod.inr",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fa277b855",
+  "group": "Q16",
+  "result": "pass",
+  "note": "H3: the Lean matches the node clause by clause. A additive is Preadditive+HasZeroObject+HasBinaryBiproducts (the dependency's own formulation, nothing stronger); IsColimit(CokernelCofork.ofπ cₖ wₖ) is the full universal property with no abelian assumption; block maps are biprod.map (biprod.map_eq); the conclusion ∃ w, Nonempty IsColimit is on the stated projection biprod.map c₁ c₂, plus the four inl/inr identities the node states. Universes u,v independent, autoImplicit false. H2: snapshot node equals the side-live node except lean (live still unsplit with no lean); lean.statement verbatim; record complete. H4: the related ZModPowGLLift isColimitCokernelCoforkBiproductMap is an indexed theorem helper, not a notion and not binary with injection clauses; no Mathlib match (own grep); no name collision. H5/H6: single sorry. H8: docstrings carry the source, blueprint id and 4 proof steps. H9: one used import, lines ≤100. No recompile (no file changed). Advisory: the Second reading is a self-check under the direct-delivery policy (H11 advisory only); the dependency record names HasFiniteBiproducts but the Lean uses the equivalent zero+binary spelling (Mathlib does not derive it as an instance)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261023T104916-L-3457598",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.Limits.exists_isColimit_biprod_map_cokernelCofork"
+  ],
+  "sorry_after": []
+ }
+}

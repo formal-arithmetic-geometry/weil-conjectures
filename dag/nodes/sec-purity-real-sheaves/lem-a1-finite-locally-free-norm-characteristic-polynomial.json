@@ -24,140 +24,57 @@
    }
   },
   {
-   "text": "Let $f:\\operatorname{Spec}B\\to\\operatorname{Spec}A$ and $E=f_*\\mathcal O_{\\operatorname{Spec}B}$. The hypotheses of [def-pc-finite-locally-free] give finiteness, flatness and local finite presentation. The rank in [lem-weil-pbc-finite-flat-rank-iso] is explicitly the residue-field dimension in our degree hypothesis, hence is $r$ everywhere. Apply [lem-sc-finite-pushforward-rank-on-open] to the whole target. Thus $E$ is locally free of constant rank $r$. In the meaning of [def-amb-finite-locally-free-module], choose a trivializing open cover $V_a$ with $E|_{V_a}\\cong\\mathcal O_{V_a}^{\\oplus r}$; $E$ is quasi-coherent. The structure sheaf is itself locally free of rank one, so it too is quasi-coherent.",
+   "text": "Apply [lem-a1-finite-locally-free-principal-basis-cover] to $\\varphi$. Its hypotheses are exactly the given degree-$r$ finite locally free hypothesis. Obtain $f_i$ generating the unit ideal of $A$, rank-$r$ bases of $B_{f_i}$, and the quasi-coherent pushforward and section identifications.",
    "uses": [
-    "def-pc-finite-locally-free",
-    "lem-weil-pbc-finite-flat-rank-iso",
-    "lem-sc-finite-pushforward-rank-on-open",
-    "def-amb-finite-locally-free-module"
+    "lem-a1-finite-locally-free-principal-basis-cover"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/morphisms.tex; literature/stacks-project/modules.tex",
-    "place": "Tags 02KB (lemma-finite-flat), 04MH (lemma-finite-locally-free), 01C6 and 01C7"
+    "document": "literature/stacks-project/morphisms.tex; literature/stacks-project/schemes.tex",
+    "place": "Tags 02KB (morphisms-lemma-finite-flat), 04MH (morphisms-lemma-finite-locally-free), and 01IA (schemes-lemma-quasi-coherent-affine); finite principal refinement and localization of sections in old item proof steps 2-3."
    }
   },
   {
-   "text": "Refine the $V_a$ by the principal-open basis of [lem-weil-pbc-spec-localization-away-basic-open]. By [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact], choose a finite subcover $D(f_1),\\ldots,D(f_m)$; the $f_i$ generate the unit ideal. Discard empty members. To identify the sections on these opens, apply [lem-weil-pbc-affine-module-basic-open-localization] to $F=E$ and $F=\\mathcal O$ on the affine whole target. Since $f_i|_{D(f_i)}$ is a unit by [lem-weil-pbc-basic-open-function], the map $F(X)_{f_i}\\to F(D(f_i))$, $t/f_i^n\\mapsto f_i^{-n}t|_{D(f_i)}$, exists. Clause (1) gives surjectivity, and clause (2) gives injectivity: a fraction with zero image has $f_i^kt=0$ for some $k$, hence is zero. Thus $\\mathcal O(D(f_i))=A_{f_i}$ and $E(D(f_i))=B_{f_i}$ canonically, with scalar actions respected. Restrict the chosen sheaf trivialization to $D(f_i)$ and take sections; finite tuples of sections are the sections of a finite direct sum, so $B_{f_i}\\cong A_{f_i}^{\\oplus r}$.",
+   "text": "Apply [lem-a1-finite-locally-free-polynomial-basis-charts] with this cover. Thus $\\varphi[T]$ is finite locally free of degree $r$, with quasi-coherent pushforward; $g_i=C(f_i)$ generate $A[T]$, and the localized polynomial algebras have the stated constant bases.",
    "uses": [
-    "lem-weil-pbc-spec-localization-away-basic-open",
-    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
-    "lem-weil-pbc-affine-module-basic-open-localization",
-    "lem-weil-pbc-basic-open-function"
+    "lem-a1-finite-locally-free-polynomial-basis-charts"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/algebra.tex; literature/stacks-project/schemes.tex",
-    "place": "Tags 00E0, 00E4, 00E8, 01IA and 01HZ; explicit localization argument also in WeilConjectures/Mathlib/AlgebraicGeometry/Modules/Tilde.lean, isLocalizedModule_Away"
+    "document": "literature/stacks-project/exercises.tex; literature/stacks-project/morphisms.tex",
+    "place": "Tag 02DV (exercises-exercise-trace-det-rings)(3), polynomial scalar extension; Tag 02KD (morphisms-lemma-base-change-finite-locally-free); old item proof steps 4-5, including explicit polynomial tensor and common-denominator maps."
    }
   },
   {
-   "text": "The ring isomorphism $B\\otimes_A A[T]\\cong B[T]$ sends $b\\otimes\\sum_j a_jT^j$ to $\\sum_j b\\varphi(a_j)T^j$; its inverse sends $\\sum_j b_jT^j$ to $\\sum_j b_j\\otimes T^j$. The tensor relations and coefficientwise polynomial operations show these are inverse ring homomorphisms. By [lem-weil-pbc-fibre-product-affine-spectra], the polynomial extension on spectra is therefore the base change of $f$ along $\\operatorname{Spec}A[T]\\to\\operatorname{Spec}A$. It is finite by [lem-weil-pbc-finite-morphism-permanence](a), flat by [lem-weil-pbc-flat-morphism-base-change], and locally of finite presentation by [lem-weil-pbc-qcqs-morphism-permanence](3). Its rank at every point is $r$ by [lem-weil-pbc-finite-flat-rank-iso](2). Hence it is finite locally free of degree $r$ in the required sense. Applying [lem-sc-finite-pushforward-rank-on-open] also to this morphism makes its structure-sheaf pushforward locally free of rank $r$, hence quasi-coherent by [def-amb-finite-locally-free-module].",
+   "text": "Apply [lem-a1-principal-free-algebra-determinant-norm] to $(R,D)=(A,B)$ and $(A[T],B[T])$, using respectively the covers $f_i$ and $g_i$ and their rank-$r$ bases. Using a separate characteristic-polynomial variable $Z$, it constructs both unique norms by $N(u)=(-1)^r\\chi_u(0)$. For the polynomial pair the coefficient ring here is $A[T]$, so $Z$ is distinct from $T$. Its affine-chart clause applies to the quasi-coherent pushforwards already obtained, so these are precisely the locally characterized norms in the statement, independent of bases.",
    "uses": [
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-finite-morphism-permanence",
-    "lem-weil-pbc-flat-morphism-base-change",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-weil-pbc-finite-flat-rank-iso",
-    "lem-sc-finite-pushforward-rank-on-open",
-    "def-amb-finite-locally-free-module"
+    "lem-a1-principal-free-algebra-determinant-norm"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/schemes.tex; literature/stacks-project/morphisms.tex",
-    "place": "Tags 01I4, 01WL, 01U9, 01TS, 02KD and 04MH; explicit polynomial tensor isomorphism"
+    "document": "literature/stacks-project/exercises.tex; literature/stacks-project/more-algebra.tex",
+    "place": "Tags 02DU (exercises-exercise-trace-det)(1) and 02DV (exercises-exercise-trace-det-rings)(1); Tag 09XI (more-algebra-lemma-characterize-henselian-pair), proof (3) implies (1), characteristic-polynomial gluing paragraph; old item proof steps 6-7."
    }
   },
   {
-   "text": "Put $g_i=C(f_i)\\in A[T]$. They generate the unit ideal because an equality $\\sum_i u_if_i=1$ maps to $\\sum_i C(u_i)g_i=1$. There are canonical isomorphisms $A[T]_{g_i}\\cong A_{f_i}[T]$ and $B[T]_{g_i}\\cong B_{f_i}[T]$: send a polynomial divided by $f_i^n$ to its coefficientwise fractions. Conversely a polynomial with finitely many fractional coefficients has a common denominator $f_i^N$, where $N$ is the largest of their exponents. The localization relations show the maps are well-defined and inverse. If $e_1,\\ldots,e_r$ is the basis in step 3, its constant polynomials form a basis of $B_{f_i}[T]$: expand each coefficient uniquely in the $e_k$ and gather the coefficient polynomials for each $k$. Thus both pairs $(A,B)$ and $(A[T],B[T])$ have finite principal covers with free module rank $r$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/exercises.tex",
-    "place": "Tag 02DV(3), polynomial base change: explicit common-denominator and coefficient-basis calculation"
-   }
-  },
-  {
-   "text": "For either pair $(R,D)=(A,B)$ or $(A[T],B[T])$ and each $u\\in D$, let $\\mu_u:D\\to D$ be multiplication by $u$, an $R$-linear endomorphism. Apply [lem-weil-pbc-charpoly-locally-free-existence] to the cover just obtained, using a separate indeterminate $Z$. It gives a unique $\\chi_u(Z)\\in R[Z]$ characterized by its matrix characteristic polynomial after every scalar extension making $D$ free of rank $r$, and with the form $Z^r+\\sum_{j<r}c_jZ^j$. In particular, on our localization charts it is $\\det(ZI_r-M_i(u))$. The localization of $\\mu_u$ is indeed multiplication by $u/1$: this follows either directly on fractions or from the naturality assertion of [lem-weil-pbc-localization-module-tensor].",
+   "text": "For $b\\in B$, let $M_i(b)$ be its multiplication matrix in the basis from step 2. Under the coefficientwise localization maps and constant bases of [lem-a1-finite-locally-free-polynomial-basis-charts], multiplication by $T-C(b)$ has matrix $TI_r-M_i(b)$: its $k$th column comes from $Te_{i,k}-be_{i,k}$. By [lem-a1-principal-free-algebra-determinant-norm], the image of $N_{\\varphi[T]}(v)$ is the determinant of multiplication by the image of $v$, for every $v\\in B[T]$. Thus the exact local hypothesis of [lem-a1-principal-free-norm-polynomial-comparison] holds with $N_T=N_{\\varphi[T]}$. Its conclusion gives $P_b=\\chi_b=T^r+\\sum_{j<r}a_jT^j$, annihilation after coefficient extension and evaluation at $b$, and monicity and degree $r$ for $A\\ne0$. Its rank-zero clause gives $B=0$ and $P_b=1_A$; step 1 covers the zero base ring.",
    "uses": [
-    "lem-weil-pbc-charpoly-locally-free-existence",
-    "lem-weil-pbc-localization-module-tensor"
+    "lem-a1-principal-free-norm-polynomial-comparison",
+    "lem-a1-finite-locally-free-polynomial-basis-charts",
+    "lem-a1-principal-free-algebra-determinant-norm"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/more-algebra.tex; literature/stacks-project/algebra.tex",
-    "place": "Tag 09XI (lemma-characterize-henselian-pair), characteristic-polynomial gluing paragraph; Tag 00DK (lemma-tensor-localization)"
-   }
-  },
-  {
-   "text": "Define the determinant norm on either pair by the real construction $N_{D/R}(u)=(-1)^r\\chi_u(0)$. On any free scalar-extension chart its value is $(-1)^r\\det(-M(u))=\\det M(u)$: each term of the determinant permutation sum has exactly $r$ matrix entries, so replacing $M$ by $-M$ multiplies the determinant by $(-1)^r$. This is the determinant of multiplication in [def-weil-endomorphism-determinant]. It is independent of the basis by [lem-weil-pbc-charpoly-free-module-properties](a). It also has this description on every affine open where the algebra is free of rank $r$: the canonical section identification with scalar extension is [lem-weil-pbc-quasi-coherent-affine-section-base-change], applied to the quasi-coherent pushforward of step 2 (and to the quasi-coherent polynomial pushforward established in step 4). The characterization in step 6 then applies. Any other proposed norm with this local characterization has the same image in every $R_{f_i}$ (or $R_{g_i}$); [lem-weil-pbc-standard-covering-glue](i) makes the values equal in $R$. This constructs precisely the norms in the statement, with no choice of global basis.",
-   "uses": [
-    "def-weil-endomorphism-determinant",
-    "lem-weil-pbc-charpoly-free-module-properties",
-    "lem-weil-pbc-quasi-coherent-affine-section-base-change",
-    "lem-weil-pbc-standard-covering-glue"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/exercises.tex; literature/stacks-project/algebra.tex; literature/stacks-project/constructions.tex",
-    "place": "Tags 02DU(1), 02DV(1), 00EJ (lemma-standard-covering), 01LN (lemma-spec-inclusion); determinant permutation-sum calculation"
-   }
-  },
-  {
-   "text": "Fix $b\\in B$ and let $M_i$ be the matrix of multiplication by $b/1$ on the basis of $B_{f_i}$. In the constant polynomial basis of step 5, multiplication by $T-b/1$ has matrix $TI_r-M_i$, since $(T-b/1)e_k=Te_k-\\sum_l(M_i)_{lk}e_l$. Therefore the local determinant characterization of step 7 gives $P_b|_{A_{f_i}[T]}=\\det(TI_r-M_i)$. On the other hand, this is exactly the localization of $\\chi_b(T)$ from step 6. Apply [lem-weil-pbc-standard-covering-glue](i) to each coefficient of $P_b-\\chi_b$ in $A$. All these coefficients vanish, so $P_b=\\chi_b=T^r+\\sum_{j<r}a_jT^j$. As $A\\ne0$, its coefficient of $T^r$ is the nonzero element $1_A$ and its higher coefficients are zero, proving monicity and degree exactly $r$.",
-   "uses": [
-    "lem-weil-pbc-standard-covering-glue"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/exercises.tex; literature/stacks-project/groupoids.tex; literature/stacks-project/algebra.tex",
-    "place": "Tags 02DV(1), 00EJ; groupoids-lemma-integral-over-invariants, norm polynomial and its leading coefficient"
-   }
-  },
-  {
-   "text": "Every retained $D(f_i)$ is nonempty, hence $A_{f_i}\\ne0$. Apply [lem-weil-cayley-hamilton-free-module] over $A_{f_i}$ to $\\mu_{b/1}$ on the free module $B_{f_i}$. With $a_r=1$ and the coefficient notation of step 8, it says $\\sum_{j=0}^r(a_j/1)\\mu_{b/1}^{\\,j}=0$. Evaluate this equality of endomorphisms at $1_{B_{f_i}}$. Induction on $j$ gives $\\mu_{b/1}^{\\,j}(1)=(b/1)^j$ (including $j=0$), so $\\sum_{j=0}^r\\varphi_{f_i}(a_j/1)(b/1)^j=0$ in $B_{f_i}$. This is exactly the localization of $\\sum_{j=0}^r\\varphi(a_j)b^j$, by the fraction formulas for addition and multiplication.",
-   "uses": [
-    "lem-weil-cayley-hamilton-free-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex; literature/stacks-project/groupoids.tex",
-    "place": "Tag 00DX (lemma-charpoly); groupoids-lemma-integral-over-invariants, precise Cayley-Hamilton assertion"
-   }
-  },
-  {
-   "text": "Apply the injectivity clause of [lem-weil-pbc-cover-module-exact] to the $A$-module $M=B$ and the unit-ideal family $f_i$. Step 9 shows that $z=\\sum_{j=0}^r\\varphi(a_j)b^j$ maps to zero in each $B_{f_i}$, hence $z=0$ in $B$. By the definitions of polynomial coefficient extension and evaluation, this is $(\\varphi[T](P_b))(b)=0$. If $r=0$, every $B_{f_i}$ is the zero module, so the same injectivity makes $B=0$; the empty determinant is $1_A$, $P_b=1_A$, and its evaluation in $B$ is zero. Thus rank zero, the empty basis, nonfaithful $A\\to B$, and non-Noetherian rings are all included; the zero base ring was handled separately in step 1.",
-   "uses": [
-    "lem-weil-pbc-cover-module-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex; literature/stacks-project/exercises.tex",
-    "place": "Tag 00EK (lemma-cover-module), injectivity; Tags 02DU and 02DV, rank-zero determinant convention"
+    "document": "literature/stacks-project/exercises.tex; literature/stacks-project/algebra.tex; literature/stacks-project/groupoids.tex",
+    "place": "Tag 02DV (exercises-exercise-trace-det-rings)(1),(3); Tag 00DX (algebra-lemma-charpoly), Tag 00EK (algebra-lemma-cover-module); groupoids-lemma-integral-over-invariants, monicity and precise Cayley-Hamilton paragraph; old item proof steps 8-10."
    }
   }
  ],
  "proof_deps": [
-  "def-pc-finite-locally-free",
-  "lem-weil-pbc-finite-flat-rank-iso",
-  "lem-sc-finite-pushforward-rank-on-open",
-  "def-amb-finite-locally-free-module",
-  "lem-weil-pbc-spec-localization-away-basic-open",
-  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
-  "lem-weil-pbc-affine-module-basic-open-localization",
-  "lem-weil-pbc-basic-open-function",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-finite-morphism-permanence",
-  "lem-weil-pbc-flat-morphism-base-change",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-weil-pbc-charpoly-locally-free-existence",
-  "lem-weil-pbc-localization-module-tensor",
-  "def-weil-endomorphism-determinant",
-  "lem-weil-pbc-charpoly-free-module-properties",
-  "lem-weil-pbc-quasi-coherent-affine-section-base-change",
-  "lem-weil-pbc-standard-covering-glue",
-  "lem-weil-cayley-hamilton-free-module",
-  "lem-weil-pbc-cover-module-exact"
+  "lem-a1-finite-locally-free-principal-basis-cover",
+  "lem-a1-finite-locally-free-polynomial-basis-charts",
+  "lem-a1-principal-free-algebra-determinant-norm",
+  "lem-a1-principal-free-norm-polynomial-comparison"
  ],
  "proof_origin": {
   "by": "agent",
@@ -247,37 +164,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-a1-finite-locally-free-norm-characteristic-polynomial",
   "worker": "stage1",
-  "summary": "Gave ten explicit steps using only existing DAG nodes: constant-rank sheaf charts, fractions and finite principal cover, polynomial base change, determinant norm via the constant coefficient of the existing locally free characteristic polynomial, the TI-M calculation, Cayley-Hamilton evaluated at 1 and module-cover injectivity. No new nodes or statement changes. Zero rings, empty bases, rank zero and nonfaithful structural maps checked.",
-  "blueprint": "Retains ancestor lem-a1-affine-hc0 and the inherited created.item/via chain. This supporting algebra statement realizes parent lem-a1-affine-groupoid-integral-invariants step 3, the monicity and Cayley-Hamilton sentences of Stacks groupoids-lemma-integral-over-invariants. Corrected the stale 'fourth paragraph' place locator after reading both blueprint snapshots: master has one support paragraph, main-20261015 only the ancestor statement. This is ancestry metadata repair, not a unit-route replacement. Searches for 'norm characteristic', 'characteristic polynomial', 'Cayley' and 'locally free characteristic' found no equivalent blueprint statement.",
-  "tool_uses": [
-   {
-    "node": "lem-sc-finite-pushforward-rank-on-open",
-    "why": "Converts the given constant fibre degree to a fixed-rank local trivialization of the finite algebra; a generic affine-geometric tool, not a replacement for the unit route."
-   },
-   {
-    "node": "lem-weil-pbc-affine-module-basic-open-localization",
-    "why": "Its two fraction assertions identify sections on the chosen principal opens with B localized as an A-module, without assuming Noetherianity."
-   },
-   {
-    "node": "lem-weil-pbc-qcqs-morphism-permanence",
-    "why": "Only clause (3), stability of local finite presentation under base change, is used for the polynomial morphism."
-   },
-   {
-    "node": "lem-weil-pbc-charpoly-locally-free-existence",
-    "why": "The already closed gluing interface constructs a characteristic polynomial from finite principal free charts; no Henselian-pair hypothesis is used."
-   },
-   {
-    "node": "lem-weil-pbc-quasi-coherent-affine-section-base-change",
-    "why": "Identifies affine free section charts with scalar extension, so the universal locally free characteristic-polynomial characterization applies."
-   },
-   {
-    "node": "lem-weil-pbc-cover-module-exact",
-    "why": "Only injectivity on a finite principal cover is used to descend the locally zero element from B_fi to B."
-   }
-  ]
+  "summary": "Repair of the human re-split order: preserve the statement and replace the ten-step 7825-character proof by a short assembly of four new, comparably sized statement-only tasks. Old steps 2-3, 4-5, 6-7 and 8-10 are assigned respectively to the principal basis cover, polynomial basis charts, determinant norm construction and norm-polynomial comparison nodes. The zero-ring argument remains explicit. The report preserves the full old proof verbatim and gives sources, searches and an argument-by-argument handoff. Repair of the returned side-completion delivery: compared the retained old proof with the current live ten-step proof (all ten agree), reread its existing dependencies, and made the final assembly's TI-M local hypothesis explicit; refreshed the citation witnesses before rebuilding on current origin/sheaf-dag. Current-DAG repair 2026-10-23: reread all retained proof dependencies and all four assembly interfaces; distinguished four newly encountered same-tag nodes, clarified that the comparison hypothesis localizes N_T(v), and retained the live statement and maintainer metadata unchanged. Resumed landing repair: the mandatory initial current-server dry run passed at a968fb7bc89. Rechecked all current dependency statements, all ten retained arguments, and all six verbatim citation witnesses; made explicit that the characteristic-polynomial variable Z is separate from the coefficient-ring variable T when constructing the polynomial norm. The delivery is rebuilt on the current live base, not the returned side-completion head.",
+  "blueprint": "Retains ancestor lem-a1-affine-hc0 and the inherited created.item/via chain. This supporting algebra statement realizes parent lem-a1-affine-groupoid-integral-invariants step 3, the monicity and Cayley-Hamilton sentences of Stacks groupoids-lemma-integral-over-invariants. Corrected the stale 'fourth paragraph' place locator after reading both blueprint snapshots: master has one support paragraph, main-20261015 only the ancestor statement. This is ancestry metadata repair, not a unit-route replacement. Searches for 'norm characteristic', 'characteristic polynomial', 'Cayley' and 'locally free characteristic' found no equivalent blueprint statement. The four new nodes retain this same route and historical ancestry, with this item inserted first in their via lists."
  },
  "tool_uses": [
   "lem-sc-finite-pushforward-rank-on-open",
@@ -288,12 +179,12 @@
   "lem-weil-pbc-cover-module-exact"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-Codex-Q63-ca1f67307",
-  "group": "Q63",
+  "reviewer": "NT-cc-Q15-38785c3d4",
+  "group": "Q15",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q63-ca1f67307 (reviewer sub-agent of L); spot-checked: Read the item, all ten steps, all 22 distinct cited statements, unit/chapter route, and cited source passages. Checked polynomial base change, determinant characterization, Cayley–Hamilton descent, zero rings, rank zero, and nilpotents. No new nodes, duplicates, cycles, missing dependencies, or non-elementary steps over 2000 characters. Six generic tool uses accepted. Full findings and source-access limits recorded in review.md; no fixes needed."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-38785c3d4 (reviewer sub-agent of L); spot-checked: I read the mathematics in full. This is the third push of this re-split, after 9a40 and a89b, which both got FIX and whose landings were refused as unpromoted side completions. The repair note (released, stage 1, keep_plan, human re-split of 2026-10-21/22) is still in force. Live and side-live still hold the old 10-step proof (split_report 2026-10-18) and none of the 4 new ids exists there, so the delivery is not superseded. Delta against a89b: principal-basis-cover, polynomial-basis-charts and determinant-norm are byte-identical, so the earlier B3 fix (def-pc-fibre-product) was lost again. The comparison node's only change makes the referent explicit ('the coefficientwise image of N_T(v)'). In the item, step 2 now says 'the unit ideal of A', step 4 states N(u)=(-1)^r chi_u(0) with a separate variable Z, and split_report grew; the statement, stmt_deps, steps 1/3/5 and the Lean record are unchanged. Re-split compliance: old steps 2-3, 4-5, 6-7 and 8-10 each became one self-contained statement-only node of 1.3-1.6k characters and every old argument is an explicit clause. The assembly is 2502 characters and only assembles the cited nodes. All 4 new statements were rechecked and are true. Free charts give (-1)^r det(-M)=det M. Bases of other sizes on nonzero localizations have size r by IBN. The column of T-C(b) is Te_k - sum_l M_lk e_l, so the matrix is TI-M. Cayley-Hamilton at 1 plus 00EK injectivity gives annihilation. Edge cases checked: A=0 with the empty family, r=0 (B=0, P_b=1), D=R^r. All 11 cited statements were read and their hypotheses match, including charpoly-locally-free-existence. Stacks 02DU/02DV (exercises.tex l.1587/1605) and the groupoids.tex l.4243 norm paragraph were read. Tags 00DX, 00EK, 02KB, 04MH, 02KD, 01IA and 09XI exist. No SGA is cited and no duplicates were found. FIX (B3, re-applied verbatim from a89b): polynomial-basis-charts now names the base change Spec B x_{Spec A} Spec A[T] -> Spec A[T], cites [def-pc-fibre-product] and adds it to stmt_deps (fixes/dag/nodes/sec-purity-real-sheaves/lem-a1-finite-locally-free-polynomial-basis-charts.json; only statement and stmt_deps differ).; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -320,5 +211,16 @@
   "existing": false,
   "note": "The theorem spells out unique existence of both norms from their local determinant characterization, together with polynomial base change, expansion, annihilation, and conditional monicity/degree. The two following definitions choose only these uniquely determined norm functions and form N_{φ[X]}(X-C b). The local determinant predicate is a helper for this owning node, not a replacement for the finite locally free hypothesis."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

@@ -1,0 +1,105 @@
+{
+ "id": "lem-per-rank-normal-cokernel",
+ "kind": "statement",
+ "title": "Cokernel tail coordinates after prescribed invertible matrix operations",
+ "statement": "Let R be a commutative ring and D:R^m→R^n a rectangular matrix, with ρ≤m and ρ≤n. Suppose P∈GL_n(R), Q∈GL_m(R) satisfy PDQ=J, where J_ij=1 if i=j<ρ and is zero otherwise. The categorical cokernel of D is isomorphic to R^(n−ρ), and the composite of its projection and this isomorphism sends x to the final n−ρ coordinates of Px. The statement includes m=0, n=0, ρ=0, and ρ=n.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14(2), finite-presentation calculation; Stacks, algebra.tex lemma-tensor-product-exact; sites-modules.tex section-constant and section-tensor-product."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "For the rank matrix, compute each coordinate of Jx: it is x_i for i<ρ and zero otherwise. Its image is exactly the kernel of tail extraction; construct a preimage from the first ρ coordinates, padded with zeros.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Tail extraction is surjective, by zero padding. Use ModuleCat.isColimitCokernelCofork to identify the cokernel with the tail power.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use PD=JQ inverse to obtain a commuting square of isomorphisms and transport the cokernel. The cokernel map projection equation gives tail(Px).",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "proof step 5: supplied rank normal form and its normalized cokernel; explicit algebraic/categorical implementation by F8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A constant sheaf module realization followed by scalar extension preserves a matrix cokernel and its quotient projection, and an invertible change of rows identifies the cokernel with the remaining coordinates",
+   "results": "ModuleCat.cokernelIsoRangeQuotient, ModuleCat.cokernelIsColimit, Module.Presentation.ofExact, SheafOfModules.presentationOfIsCokernelFree and related generic presentation infrastructure. No complete normalized finite-power scalar and row-operation comparison. Used categorical cokernel infrastructure.",
+   "date": "2026-10-27",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.isColimitCokernelCofork; CategoryTheory.Limits.PreservesCokernel.iso",
+   "results": "Found ModuleCat.isColimitCokernelCofork and PreservesCokernel.iso with its projection equation. These are used to construct the normalized comparisons; neither supplies the coefficientwise finite-power normalization or the rank-tail computation.",
+   "date": "2026-10-27",
+   "verdict": "generic tools used"
+  },
+  {
+   "tool": "grep",
+   "query": "cokernel.*(matrix|Matrix)|rank.normal.*cokernel|tail.*(cokernel|quotient)|constant.*scalar.*cokernel",
+   "results": "Read Mathlib ModuleCat/Kernels, ChangeOfRings, TensorProduct/Pi, Matrix/ToLin, Limits/Preserves/Shapes/Kernels. Project search found the parent presentationModels hole, ScalarNormalizedConstantModels (different internal-module encoding), and IntegralScalarModelCoordinates (different discrete-model setting). No duplicate of these normalized helpers.",
+   "date": "2026-10-27",
+   "verdict": "no duplicate"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalStratumFiniteFreeModel",
+  "date": "2026-10-27",
+  "group": "F8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-rational-stratum-finite-free-model",
+   "place": "proof step 5: supplied rank normal form and its normalized cokernel",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.LinearAlgebra.RankNormalCokernel",
+  "file": "lean/Sheaf/LinearAlgebra/RankNormalCokernel.lean",
+  "declaration": "Matrix.rankNormalCokernel",
+  "statement": "theorem rankNormalCokernel {R : Type u} [CommRing R] {m n ρ : ℕ} (D : Matrix (Fin n) (Fin m) R) (hρn : ρ ≤ n) (hρm : ρ ≤ m) (P : GeneralLinearGroup (Fin n) R) (Q : GeneralLinearGroup (Fin m) R) (hnorm : (P : Matrix (Fin n) (Fin n) R) * D * (Q : Matrix (Fin m) (Fin m) R) = fun i j ↦ if i.val = j.val ∧ i.val < ρ then 1 else 0) : ∃ a : cokernel (ModuleCat.ofHom (Matrix.toLin' D)) ≅ ModuleCat.of R (Fin (n - ρ) → R), ∀ (x : Fin n → R) (j : Fin (n - ρ)), a.hom (cokernel.π (ModuleCat.ofHom (Matrix.toLin' D)) x) j = (P : Matrix (Fin n) (Fin n) R).mulVec x (Fin.cast (Nat.add_sub_of_le hρn) (Fin.natAdd ρ j))",
+  "branch": "sheaf-dag",
+  "by": "F8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261026T235858-L-1464850",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261026T235858-L-1464850",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

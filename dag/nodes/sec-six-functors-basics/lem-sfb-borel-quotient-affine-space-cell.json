@@ -1,0 +1,212 @@
+{
+ "id": "lem-sfb-borel-quotient-affine-space-cell",
+ "kind": "statement",
+ "title": "An affine-space cell in a Borel quotient",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field], [def-weil-algebraic-closure]. Let $G$ be a smooth connected affine $F$-group scheme of finite type [def-sc-group-scheme], [def-sbc-smooth-morphisms], [def-weil-connected-scheme], [def-weil-finite-type-morphism]. Let $B\\subseteq G$ be a Borel subgroup, meaning a maximal smooth connected solvable closed subgroup, where solvable means that iterating the scheme-theoretic derived subgroup eventually gives the trivial group; the derived subgroup is the smallest closed subgroup through which the commutator morphism factors. Let $Q$ represent the fppf sheaf quotient $G/B$ (the sheafification of $A\\mapsto G(A)/B(A)$ for faithfully flat finitely presented coverings of commutative $F$-algebras). There exist an integer $d\\geq0$ and a dense open immersion $j:\\mathbf A^d_F\\hookrightarrow Q$ [def-weil-open-immersion], [def-sbc-affine-space]. Dense means that the topological closure of the image is all of $Q$. The case $G=B$, with $d=0$, is included.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 18.21, proof, printed p.392: the open subvariety U isomorphic to affine n-space; it invokes Proposition 13.52 and the proof of Theorem 17.65, printed p.374. The standing group is split connected, automatic over F; no reductivity hypothesis is imposed."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "def-sbc-affine-space",
+  "def-sfb-borel-subgroup-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-borel-quotient-affine-cell] to the given $F,G,B,Q$. Its field, smoothness, connectedness, affineness and finite-type hypotheses are exactly those in the statement; its Borel definition and fppf quotient are the same ones. It supplies $n\\geq0$, a dense open subscheme $U\\subseteq Q$, and an $F$-isomorphism $h:U\\xrightarrow{\\sim}\\operatorname{Spec}F[t_1,\\ldots,t_n]$. Only this cell clause is needed; no reductivity assumption is introduced.",
+   "uses": [
+    "lem-sfb-borel-quotient-affine-cell"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 18.21, proof, printed p.392; Proposition 13.52, printed p.275, and proof of Theorem 17.65, printed p.374."
+   }
+  },
+  {
+   "text": "Put $d=n$. By the affine-base description in [def-sbc-affine-space], identify $\\mathbf A_F^d$ with $\\operatorname{Spec}F[t_1,\\ldots,t_n]$. Define $j$ to be this identification followed by $h^{-1}$ and $U\\hookrightarrow Q$. It identifies its source isomorphically with the open subscheme $U$, hence is an open immersion by [def-weil-open-immersion]. Its topological image is exactly $U$, whose closure is all of $Q$ by step 1. Thus $j$ is dense.",
+   "uses": [
+    "def-sbc-affine-space",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 18.21, proof, printed p.392; Proposition 13.52, printed p.275, and proof of Theorem 17.65, printed p.374."
+   }
+  },
+  {
+   "text": "For the explicit case $G=B$, every quotient set $G(A)/B(A)$ is a singleton, so its sheafification is the terminal fppf sheaf. Thus its representing $F$-scheme $Q$ is $\\operatorname{Spec}F$: both represent the functor with one element on every test algebra, and the mutually unique maps are inverse. Take $d=0$ and the resulting isomorphism $j:\\mathbf A_F^0=\\operatorname{Spec}F\\xrightarrow{\\sim}Q$ using [def-sbc-affine-space]. This is an open immersion by [def-weil-open-immersion], with image all of $Q$.",
+   "uses": [
+    "def-sbc-affine-space",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 18.21, proof, printed p.392; zero-dimensional case from the quotient and affine-space definitions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-borel-quotient-affine-cell",
+  "def-sbc-affine-space",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 18.21, proof, printed p.392; Proposition 13.52, printed p.275, and proof of Theorem 17.65, printed p.374."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The quotient of a smooth connected affine algebraic group by a Borel subgroup is smooth projective and contains a dense open affine space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"module\": \"Mathlib/CategoryTheory/Galois/EssSurj\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] {F : CategoryTheory.Functor C FintypeCat}\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  (V : OpenSubgroup (CategoryTheory.Aut F)),\\n  ∃ X,\\n    Nonempty\\n      ((CategoryTheory.PreGaloisCatego\", \"doc\": \"For any open subgroup $V$ of the automorphism group $\\\\mathrm{Aut}(F)$ of a functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, there exists an object $X \\\\in \\\\mathcal{C}$ such that the action of $\\\\mathrm{\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"module\": \"Mathlib/CategoryTheory/Galois/EssSurj\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [inst_1 : TopologicalSpace G] [inst_2 : IsTopologicalGroup G]\\n  [inst_3 : CompactSpace G] (X : Action FintypeCat G) [inst_4 : TopologicalSpace X.V.carrier]\\n  [DiscreteTopology X.V.carrier] [ContinuousSMul G X.V.carrier],\\n  ∃ ι,\\n    ∃ (x : Finite ι),\\n      ∃ f,\\n     \", \"doc\": \"For a compact topological group $G$ and an open subgroup $H$, the quotient group $G/H$ is finite.\"}\n  {\"name\": \"surjective_cosetToCuspOrbit\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"∀ (𝒢 : Subgroup (GL (Fin 2) ℝ)) [inst : 𝒢.IsArithmetic], Function.Surjective (cosetToCuspOrbit 𝒢)\", \"doc\": \"For any arithmetic subgroup $\\\\mathcal{G} \\\\leq \\\\mathrm{GL}(2, \\\\mathbb{R})$, the map from cosets of $\\\\mathcal{G}$ in $\\\\mathrm{SL}(2, \\\\mathbb{Z})$ to cusp orbits is surjective. This means every cusp orbi\"}\n  {\"name\": \"QuotientGroup.instCompactSpaceQuotientSubgroup\", \"module\": \"Mathlib/Topology/Algebra/Group/Quotient\", \"type\": \"∀ {G : Type u_1} [inst : TopologicalSpace G] [inst_1 : Group G] [CompactSpace G] (N : Subgroup G), CompactSpace (G ⧸ N)\", \"doc\": \"For any compact topological group $G$ and its subgroup $N$, the quotient group $G/N$ equipped with the quotient topology is also a compact space.\"}\n  {\"name\": \"Subgroup.quotient_finite_of_isOpen\", \"module\": \"Mathlib/Topology/Algebra/OpenSubgroup\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [inst_1 : TopologicalSpace G] [ContinuousMul G] [CompactSpace G] (U : Subgroup G),\\n  IsOpen ↑U → Finite (G ⧸ U)\", \"doc\": \"If $ G $ is a compact topological group with continuous multiplication and $ U $ is an open subgroup of $ G $, then the quotient group $ G/U $ is finite.\"}\n  {\"name\": \"Subgroup.quotient_finite_of_isOpen'\", \"module\": \"Mathlib/Topology/Algebra/OpenSubgroup\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [inst_1 : TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] (U : Subgroup G)\\n  (K : Subgroup ↥U), IsOpen ↑U → IsOpen ↑K → Finite (↥U ⧸ K)\", \"doc\": \"Let $G$ be a compact topological group, $U$ an open subgroup of $G$, and $K$ an open subgroup of $U$. Then the quotient group $U/K$ formed by the left cosets of $K$ in $U$ is finite. This follows from\"}\n  {\"name\": \"Subgroup.instFiniteQuotientOfContinuousMulOfCompactSpace\", \"module\": \"Mathlib/Topology/Algebra/OpenSubgroup\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [inst_1 : TopologicalSpace G] [ContinuousMul G] [CompactSpace G] (U : OpenSubgroup G),\\n  Finite (G ⧸ ↑U)\", \"doc\": \"If $G$ is a compact topological group with continuous multiplication and $U$ is an open subgroup of $G$, then the quotient group $G/U$ is finite.\"}\n  {\"name\": \"QuotientGroup.instLocallyCompactSpace\", \"module\": \"Mathlib/Topology/Algebra/Group/Quotient\", \"type\": \"∀ {G : Type u_1} [inst : TopologicalSpace G] [inst_1 : Group G] [ContinuousMul G] [LocallyCompactSpace G]\\n  (N : Subgroup G), LocallyCompactSpace (G ⧸ N)\", \"doc\": \"For any locally compact topological group $ G $ and its subgroup $ N $, the quotient group $ G/N $ equipped with the quotient topology is locally compact.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are topological group quotients, affine space itself, and properness of Proj; no Borel quotient or affine-space big cell theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flag variety G over B has a big cell isomorphic to affine space and is geometrically integral proper",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Nonempty ↥S] [Nonempty n],\\n  ¬AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any nonempty scheme $ S $ and nonempty type $ n $, the canonical morphism from the affine $ n $-space $ \\\\mathbb{A}^n_S $ to $ S $ is not an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"Type v → AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $ S $ and a type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is constructed as the fiber product (pullback) of $ S $ and the affine $ n $-space over the integers $ \\\\operatorname{Spec}(\\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme),\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S) ↔ IsEmpty ↥S ∨ IsEmpty n\", \"doc\": \"The structure morphism of the affine space $\\\\mathbb{A}^n_S$ over a scheme $S$ is an integral morphism if and only if the base scheme $S$ is empty or the type $n$ is empty.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine S],\\n  AlgebraicGeometry.IsAffine (AlgebraicGeometry.AffineSpace n S)\", \"doc\": \"If $ S $ is an affine scheme, then the affine space $ \\\\mathbb{A}^n_S $ over $ S $ is also affine. This instance asserts that when the base scheme $ S $ satisfies the affineness condition, the construc\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isOpenMap_over\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme),\\n  IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.AffineSpace n S ↘ S).base)\", \"doc\": \"For any scheme $ S $ and natural number $ n $, the canonical morphism $ \\\\mathbb{A}^n_S \\\\to S $ from the affine $ n $-space over $ S $ to $ S $ is an open map, meaning the image of every open subset of\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme), AlgebraicGeometry.Surjective (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"The canonical morphism from the affine space $\\\\mathbb{A}^n_S$ to the base scheme $S$ is surjective, meaning its underlying continuous map on topological spaces is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.IsProper (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If the zero-graded component $ \\\\mathcal{A}_0 $ of a graded ring $ \\\\mathcal{A} $ is a finitely generated $ A $-algebra, then the canonical morphism from the projective spectrum $ \\\\operatorname{Proj}(\\\\m\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are topological group quotients, affine space itself, and properness of Proj; no Borel quotient or affine-space big cell theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Borel\", \"Scheme\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are topological group quotients, affine space itself, and properness of Proj; no Borel quotient or affine-space big cell theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "[Bb]orel[Ss]ubgroup|[Ff]lag[Vv]ariety|[Bb]ig[Cc]ell|[Bb]ruhat",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Algebra/Module/Lattice.lean\", \"line\": \"23\", \"text\": \"`ι → K` by the homothety relation, one obtains the vertices of what is called the Bruhat-Tits tree\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are topological group quotients, affine space itself, and properness of Proj; no Borel quotient or affine-space big cell theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Borel quotient smooth projective rational variety affine big cell",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"QuotientGroup.borelSpace\", \"module\": \"Mathlib.MeasureTheory.Constructions.Polish.Basic\", \"type\": \"{G : Type*} [TopologicalSpace G] [PolishSpace G] [Group G] [IsTopologicalGroup G] [MeasurableSpace G] [BorelSpace G]\\n  {N : Subgroup G} [N.Normal] [IsClosed (N : Set G)] : BorelSpace (G ⧸ N)\", \"doc\": \"If $ G $ is a Polish topological group and $ N $ is a closed normal subgroup of $ G $, then the quotient group $ G/N $ is equipped with the Borel $ \\\\sigma $-algebra generated by the quotient topology \"}\n  {\"name\": \"Quotient.borelSpace\", \"module\": \"Mathlib.MeasureTheory.Constructions.Polish.Basic\", \"type\": \"{X : Type*} [TopologicalSpace X] [PolishSpace X] [MeasurableSpace X] [BorelSpace X] {s : Setoid X}\\n  [T0Space (Quotient s)] [SecondCountableTopology (Quotient s)] : BorelSpace (Quotient s)\", \"doc\": \"For a Polish space $X$ equipped with its Borel $\\\\sigma$-algebra and an equivalence relation $s$ on $X$, if the quotient space $X/s$ satisfies the T₀ separation axiom and is second-countable, then $X/s\"}\n  {\"name\": \"CosetSpace.borelSpace\", \"module\": \"Mathlib.MeasureTheory.Constructions.Polish.Basic\", \"type\": \"{G : Type*} [TopologicalSpace G] [PolishSpace G] [Group G] [MeasurableSpace G] [BorelSpace G] {N : Subgroup G}\\n  [T2Space (G ⧸ N)] [SecondCountableTopology (G ⧸ N)] : BorelSpace (G ⧸ N)\", \"doc\": \"For a Polish group $G$ and its subgroup $N$, if the quotient space $G/N$ is Hausdorff and second-countable, then $G/N$ is equipped with a Borel $\\\\sigma$-algebra generated by its quotient topology. Thi\"}\n  {\"name\": \"AddCosetSpace.borelSpace\", \"module\": \"Mathlib.MeasureTheory.Constructions.Polish.Basic\", \"type\": \"∀ {G : Type u_3} [inst : TopologicalSpace G] [PolishSpace G] [inst_2 : AddGroup G] [inst_3 : MeasurableSpace G]\\n  [BorelSpace G] {N : AddSubgroup G} [T2Space (G ⧸ N)] [SecondCountableTopology (G ⧸ N)], BorelSpace (G ⧸ N)\", \"doc\": \"Given a Polish additive group $ G $ and a closed additive subgroup $ N $, if the quotient space $ G/N $ is Hausdorff (T2) and second-countable, then $ G/N $ is a Borel space. This means the measurable\"}\n  {\"name\": \"QuotientAddGroup.borelSpace\", \"module\": \"Mathlib.MeasureTheory.Constructions.Polish.Basic\", \"type\": \"∀ {G : Type u_3} [inst : TopologicalSpace G] [PolishSpace G] [inst_2 : AddGroup G] [IsTopologicalAddGroup G]\\n  [inst_4 : MeasurableSpace G] [BorelSpace G] {N : AddSubgroup G} [N.Normal] [IsClosed ↑N], BorelSpace (G ⧸ N)\", \"doc\": \"Let $ G $ be a Polish space equipped with the structure of an additive group, where the group operations are continuous. Let $ N $ be a closed normal additive subgroup of $ G $. Then the quotient grou\"}\n  {\"name\": \"borel\", \"module\": \"Mathlib.MeasureTheory.Constructions.BorelSpace.Basic\", \"type\": \"(α : Type u) [TopologicalSpace α] : MeasurableSpace α\", \"doc\": \"The Borel σ-algebra on a topological space $\\\\alpha$ is the σ-algebra generated by the collection of all open subsets of $\\\\alpha$, i.e., the smallest σ-algebra containing every open set in the topology\"}\n  {\"name\": \"BorelSpace.opensMeasurable\", \"module\": \"Mathlib.MeasureTheory.Constructions.BorelSpace.Basic\", \"type\": \"{α : Type*} [TopologicalSpace α] [MeasurableSpace α] [BorelSpace α] : OpensMeasurableSpace α\", \"doc\": \"For any topological space $\\\\alpha$ equipped with a Borel space structure, the measurable space structure on $\\\\alpha$ coincides with the $\\\\sigma$-algebra generated by the open sets of $\\\\alpha$.\"}\n  {\"name\": \"OpensMeasurableSpace\", \"module\": \"Mathlib.MeasureTheory.Constructions.BorelSpace.Basic\", \"type\": \"(α : Type u_6) → [TopologicalSpace α] → [h : MeasurableSpace α] → Prop\", \"doc\": \"The measurable space $ \\\\Sigma $ is the σ-algebra generated by the open sets of the topological space on $ \\\\alpha $.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are topological group quotients, affine space itself, and properness of Proj; no Borel quotient or affine-space big cell theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "[Bb]orel[Ss]ubgroup|[Ff]lag[Vv]ariety|[Bb]ig[Cc]ell|[Bb]ruhat",
+   "results": "{\"t\": \"2026-10-23T20:13:21Z\", \"tool\": \"grep\", \"query\": \"[Bb]orel[Ss]ubgroup|[Ff]lag[Vv]ariety|[Bb]ig[Cc]ell|[Bb]ruhat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Module/Lattice.lean\"], \"digest\": \"f5278a47a6485886\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no Borel-subgroup quotient cell theorem; returned results concern topological quotients, affine opens in general, affine-space projection, or dominance."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic group quotient by Borel subgroup dense open affine space",
+   "results": "{\"t\": \"2026-10-23T20:13:22Z\", \"tool\": \"leansearch\", \"query\": \"Algebraic group quotient by Borel subgroup dense open affine space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.AffineZariskiSite.instIsDenseSubsiteOpensCarrierCarrierCommRingCatGrothendieckTopologyGrothendieckTopologyToOpensFunctor\", \"AlgebraicGeometry.IsAffineOpen\", \"QuotientGroup.borelSpace\", \"QuotientAddGroup.dense_image_mk\", \"AlgebraicGeometry.isAffineOpen_top\", \"Dense.quotient\", \"QuotientAddGroup.dense_preimage_mk\", \"QuotientGroup.dense_preimage_mk\"], \"digest\": \"ec95d3d93bd28b75\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no Borel-subgroup quotient cell theorem; returned results concern topological quotients, affine opens in general, affine-space projection, or dominance."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Borel\", \"Scheme\"",
+   "results": "{\"t\": \"2026-10-23T20:13:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"Borel\\\", \\\"Scheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no Borel-subgroup quotient cell theorem; returned results concern topological quotients, affine opens in general, affine-space projection, or dominance."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flag variety of a connected linear algebraic group has an open big cell isomorphic to affine n space",
+   "results": "{\"t\": \"2026-10-23T20:13:23Z\", \"tool\": \"leanfinder\", \"query\": \"Flag variety of a connected linear algebraic group has an open big cell isomorphic to affine n space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.isOpenMap_over\", \"Submodule.connectedComponentIn_eq_self_of_one_lt_codim\", \"AlgebraicGeometry.iSup_affineOpens_eq_top\", \"AlgebraicGeometry.Proj.affineOpenCover\", \"CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"isPathConnected_compl_of_one_lt_codim\", \"isConnected_compl_singleton_of_one_lt_rank\"], \"digest\": \"232162fa1ef326cd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no Borel-subgroup quotient cell theorem; returned results concern topological quotients, affine opens in general, affine-space projection, or dominance."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Borel quotient of a smooth connected affine algebraic group over an algebraically closed field contains a dense open affine space",
+   "results": "{\"t\": \"2026-10-23T20:13:24Z\", \"tool\": \"leanfinder\", \"query\": \"A Borel quotient of a smooth connected affine algebraic group over an algebraically closed field contains a dense open affine space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"QuotientGroup.dense_image_mk\", \"AlgebraicGeometry.dominant_eq_topologically\", \"AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\", \"isPathConnected_compl_of_one_lt_codim\", \"UnitAddTorus.span_mFourier_closure_eq_top\", \"AlgebraicGeometry.isDominant_of_of_appTop_injective\", \"Submodule.connectedComponentIn_eq_self_of_one_lt_codim\", \"Set.Countable.isPathConnected_compl_of_one_lt_rank\"], \"digest\": \"6fce9ffa26b88360\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no Borel-subgroup quotient cell theorem; returned results concern topological quotients, affine opens in general, affine-space projection, or dominance."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flag-projective-linear-system",
+  "date": "2026-10-24",
+  "group": "Q123"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplicative simply connected covering of a semisimple algebraic group. Supporting Milne construction: Proposition 18.22 (Iversen 1976, 2.7), printed pp.392--393, under the standing split connected group-variety hypothesis (automatic over F); definitions 18.1 and 18.7. Supporting Proposition 18.22 input: Proposition 18.22, proof, printed p.393, paragraph beginning Let V, and 18.12--18.13, printed p.390: projective complete-linear-system maps and the homogeneous tautological line (Iversen 1976, 1.2--1.3). Supporting complete-linear-system argument: the affine-space cell used in Milne 18.21, before the projective action asserted in 18.22.",
+   "via": [
+    "lem-sfb-flag-projective-linear-system",
+    "lem-sfb-picard-trivial-multiplicative-cover",
+    "lem-sfb-semisimple-multiplicative-universal-cover",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-borel-quotient-affine-space-cell",
+  "worker": "stage1",
+  "summary": "Reused the existing strictly stronger general Borel-quotient affine-cell node instead of duplicating its statement. Converted its dense open polynomial-spectrum chart into the required open immersion and verified the explicit G=B, d=0 case. No statement change, new nodes, or Lean work.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplicative simply connected covering of a semisimple algebraic group. Supporting Milne construction: Proposition 18.22 (Iversen 1976, 2.7), printed pp.392--393, under the standing split connected group-variety hypothesis (automatic over F); definitions 18.1 and 18.7. Supporting Proposition 18.22 input: Proposition 18.22, proof, printed p.393, paragraph beginning Let V, and 18.12--18.13, printed p.390: projective complete-linear-system maps and the homogeneous tautological line (Iversen 1976, 1.2--1.3). Supporting complete-linear-system argument: the affine-space cell used in Milne 18.21, before the projective action asserted in 18.22. This is the affine-cell prerequisite of Milne 18.21/18.22; the latest blueprint direct-image proof (3) remains the compactification route. Existing sibling lem-sfb-borel-quotient-affine-cell supplies the same cell together with regular geometry."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-7478e4c84",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-7478e4c84 (reviewer sub-agent of L); spot-checked: I read the item, the three steps, the cited node, the defs and the Milne source in full. The delivery has 0 new nodes, and the statement and stmt_deps are unchanged: they match clones/live and clones/side-live, where the item is still unsplit, so no parallel group has superseded it. There is no repair note, so the re-split rule does not apply. Step 1 cites the existing node lem-sfb-borel-quotient-affine-cell, created by Q120 on 2026-10-24 with empty proof_deps, so there is no cycle. I compared every hypothesis. F algebraically closed, G smooth connected affine of finite type, and the Borel definition are word-for-word the same in both nodes. The fppf covers are worded differently (faithfully flat fp vs jointly surjective flat fp), but they give the same topology on affine F-algebras and the same Q. The cited node's last clause gives a dense open U ≅ Spec F[t1..tn] with n=0 allowed. Step 2 is elementary: def-sbc-affine-space over the affine base Spec F gives A^n_F ≅ Spec F[t]; composing with h^{-1} and the inclusion of U gives an open immersion in the sense of def-weil-open-immersion, with dense image U. Step 3 (G=B): Q is the terminal sheaf, so Q = Spec F = A^0. It is correct but redundant. Source: Milne iAG Lemma 18.21 proof (p.392) via Prop 13.52 (p.275) and the proof of Thm 17.65 (p.374), which assumes no reductivity. Small cases: tori and G=B give d=0; SL2 gives P^1 ⊃ A^1; GL3 gives the A^3 big cell; for non-reductive G, R_u ⊂ B so the cell persists. No SGA, proof_deps equals the union of the step uses, and no tool_uses. Maintainer note: the item and lem-sfb-borel-quotient-affine-cell overlap and were created the same day (Q123 and Q120). Citing the stronger node is the brief's reuse rule, but merging the two nodes is a later maintainer option."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.BorelQuotientAffineSpaceCell",
+  "declaration": "AlgebraicGeometry.exists_borelQuotient_affineSpace_denseOpen",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/BorelQuotientAffineSpaceCell.lean",
+  "statement": "theorem exists_borelQuotient_affineSpace_denseOpen {F : Type u} [Field F] [IsAlgClosed F] (G B : Over (Spec (.of F))) [GrpObj G] [GrpObj B] [Smooth G.hom] [ConnectedSpace G.left] [IsAffine G.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] (i : B ⟶ G) (hB : IsBorelGroupScheme i) (Q : Over (Spec (.of F))) (hQ : Presheaf.IsSheaf (Scheme.fppfTopology.over (Spec (.of F))) (yoneda.obj Q)) (ηQ : coequalizer (yoneda.map (fst G B)) (yoneda.map (lift (fst G B) (snd G B ≫ i) ≫ μ[G])) ⟶ yoneda.obj Q) (hηQ : ∀ Z : Sheaf (Scheme.fppfTopology.over (Spec (.of F))) (Type u), Function.Bijective (fun f : yoneda.obj Q ⟶ Z.obj ↦ ηQ ≫ f)) : ∃ (d : ℕ) (j : (AffineSpace (ULift.{u} (Fin d)) (Spec (.of F))).asOver (Spec (.of F)) ⟶ Q), IsOpenImmersion j.left ∧ DenseRange j.left",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e527c98b9",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Node differs from side-live only in lean + added landed stmt_dep def-sfb-borel-subgroup-scheme (allowed); statement verbatim. All clauses match: alg-closed F; G GrpObj over Spec F smooth/connected/affine/LocallyOfFiniteType∧QuasiCompact; IsBorelGroupScheme i (Milne 17.6, scheme-theoretic solvability, maximality); Q = fppf sheafification of right-coset presheaf via coequalizer + hQ/ηQ/hηQ universal property (same interface as landed exists_homogeneous_fppf_quotient); conclusion ∃ d, ∃ j over Spec F from AffineSpace (ULift (Fin d)) with IsOpenImmersion ∧ DenseRange, not stronger. G=B/d=0 covered, no extra hypotheses or universe restriction; no duplicate in Sheaf/Mathlib; sorry only, docstrings with source/blueprint/proof plan, report sections present. No file changed so no compile. Advisory: Sites.Sheafification import possibly unused."
+ }
+}

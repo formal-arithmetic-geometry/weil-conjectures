@@ -321,51 +321,37 @@ criterion that locally closed sets are constructible identifies the two finite
 stratification conventions. Rank zero, empty strata and the empty scheme are included. -/
 theorem coefficientHeart_closure (ℓ : ℕ) [Fact ℓ.Prime]
     (Λ : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
-    [IsCommMonObj ((sheafCompose (coherentTopology Profinite.{u})
-        (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Λ)]
+    [IsCommMonObj (coefficientHeartRingObj Λ)]
     (hΛ : (∃ E : IntermediateField ℚ_[ℓ] (PadicAlgCl ℓ),
       FiniteDimensional ℚ_[ℓ] E ∧ Λ = Profinite.padicSubfieldCondensedRing ℓ E) ∨
       Λ = Profinite.padicAlgClCondensedRing ℓ) :
     (∀ (S : Scheme.{u}) [TopologicalSpace.NoetherianSpace S],
       ObjectProperty.IsClosedUnderExtensions
-        (IsLisseCoefficientModule ((sheafCompose (coherentTopology Profinite.{u})
-            (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Λ) (X := S)) ∧
+        (IsLisseCoefficientModule (coefficientHeartRingObj Λ) (X := S)) ∧
       ObjectProperty.IsClosedUnderKernels
-        (IsLisseCoefficientModule ((sheafCompose (coherentTopology Profinite.{u})
-            (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Λ) (X := S)) ∧
+        (IsLisseCoefficientModule (coefficientHeartRingObj Λ) (X := S)) ∧
       ObjectProperty.IsClosedUnderCokernels
-        (IsLisseCoefficientModule ((sheafCompose (coherentTopology Profinite.{u})
-            (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Λ) (X := S))) ∧
+        (IsLisseCoefficientModule (coefficientHeartRingObj Λ) (X := S))) ∧
     (∀ (X : Scheme.{u}) [IsNoetherian X],
       ObjectProperty.IsClosedUnderKernels
-        (IsConstantModelConstructible ((sheafCompose (coherentTopology Profinite.{u})
-            (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Λ) X) ∧
+        (IsConstantModelConstructible (coefficientHeartRingObj Λ) X) ∧
       ObjectProperty.IsClosedUnderCokernels
-        (IsConstantModelConstructible ((sheafCompose (coherentTopology Profinite.{u})
-            (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Λ) X) ∧
+        (IsConstantModelConstructible (coefficientHeartRingObj Λ) X) ∧
       ObjectProperty.IsClosedUnderExtensions
-        (IsConstantModelConstructible ((sheafCompose (coherentTopology Profinite.{u})
-            (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Λ) X) ∧
-      Nonempty (Abelian (ConstantModelConstructible ((sheafCompose (coherentTopology Profinite.{u})
-          (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Λ) X)) ∧
+        (IsConstantModelConstructible (coefficientHeartRingObj Λ) X) ∧
+      Nonempty (Abelian (ConstantModelConstructible (coefficientHeartRingObj Λ) X)) ∧
       PreservesFiniteLimits
         (ObjectProperty.ι (IsConstantModelConstructible
-          ((sheafCompose (coherentTopology Profinite.{u})
-            (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Λ) X)) ∧
+          (coefficientHeartRingObj Λ) X)) ∧
       PreservesFiniteColimits
         (ObjectProperty.ι (IsConstantModelConstructible
-          ((sheafCompose (coherentTopology Profinite.{u})
-            (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Λ) X)) ∧
+          (coefficientHeartRingObj Λ) X)) ∧
       ∀ M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-          (condensedRingObj ((sheafCompose (coherentTopology Profinite.{u})
-              (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Λ) X),
-        IsConstantModelConstructible ((sheafCompose (coherentTopology Profinite.{u})
-            (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Λ) X M ↔
+          (condensedRingObj (coefficientHeartRingObj Λ) X),
+        IsConstantModelConstructible (coefficientHeartRingObj Λ) X M ↔
           ∃ R : X.FiniteLocallyClosedStratification, ∀ a : Fin R.n,
-            IsLisseCoefficientModule ((sheafCompose (coherentTopology Profinite.{u})
-                (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Λ)
-              ((CondensedRing.upperStar ((sheafCompose (coherentTopology Profinite.{u})
-                  (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Λ) (R.immersion a)).obj M)) := by
+            IsLisseCoefficientModule (coefficientHeartRingObj Λ)
+              ((CondensedRing.upperStar (coefficientHeartRingObj Λ) (R.immersion a)).obj M)) := by
   apply heart_closure_generic
   intro Y _ M hM
   rcases hΛ with ⟨E, hE, rfl⟩ | rfl

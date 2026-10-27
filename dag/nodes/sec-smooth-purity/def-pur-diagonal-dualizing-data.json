@@ -1,0 +1,126 @@
+{
+ "id": "def-pur-diagonal-dualizing-data",
+ "kind": "definition",
+ "title": "Fixed-coefficient diagonal dualizing objects and coordinate normalization",
+ "statement": "In the finite coefficient setting [def-pur-conventions], write A=P.Coefficient and N=P.diagonalExponent as in [def-coefficient-twists-detailed]. For a compactifiable scheme morphism f:X→Y define the ordinary object omega0_f=Rf^times(A_Y[0]) and the transported pro-etale object omega_f=sfFiniteExceptionalAt(f)(nu_Y^* A_Y[0]) [def-weil-exceptional-inverse-image]. The comparison-unit isomorphism at the bounded-below unit induces c_f:omega_f≈nu_X^*omega0_f. For an ordinary isomorphism e:omega0_f≈A_X(d)[2d], define coordinate normalization as follows: on every pair of separated quasi-compact etale maps j:U→X and v:U→A^d_Y with v p=j f, j^*(e inverse) followed by the source-etale exceptional locality is the finite Tate pullback comparison, followed by v^* of the actual ordered affine counit transpose and its source-etale locality. Use the equality-induced comparison for v p=j f. Quantify over every normalized twist transport, projective-line datum and compact-support normalization [def-asd-ordinary-finite-p1-kummer-class, def-amb-vector-integration, def-pur-etale-exceptional-precomp-locality]. Define DiagonalDualizingConclusion to assert a unique theta:omega_f≈A_X(d)[2d] admitting a normalized ordinary presentation e and satisfying theta=c_f composed with nu_X^*e. All definitions here are the existing declarations extracted verbatim, not alternative notions.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/thm-pur-diagonal-dualizing-object.proof.md",
+  "place": "Steps 1--2 and combining/canonicity paragraph"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-sbc-smooth-morphisms",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-exceptional-inverse-image",
+  "def-coefficient-twists-detailed",
+  "def-asd-ordinary-finite-p1-kummer-class",
+  "def-amb-vector-integration",
+  "def-pur-etale-exceptional-precomp-locality"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compatible isomorphisms between shifted sheaves glue uniquely over a Zariski open cover",
+   "results": "8 hits: TopCat.Sheaf.existsUnique_gluing and variants, and TopCat.Sheaf.interUnionPullbackConeLift. Read signatures: gluing sections of topological sheaves, not maps of derived etale module objects or exceptional orientations. Reuse the project degree-zero derived-map gluing interface.",
+   "date": "2026-10-25",
+   "verdict": "no matching smooth-purity or normalized derived-map statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism of shifted sheaves is uniquely determined by its restrictions to an etale covering",
+   "results": "8 hits: Functor.IsCoverDense.sheafIso, isoOver, sheafIso_hom_val, Types.sheafIso, Types.isoOver, Types.sheafIso_hom_val, iso_of_restrict_iso and presheafIso. Their types concern restriction along dense subsite functors, not exceptional orientations or shifted derived objects. Project search found EtaleSheafHomFamilyGluing and DegreeZeroDerivedMapGluing as the underlying tools, but no lemma for the present diagonal normalization predicate independent of its existence theorem.",
+   "date": "2026-10-25",
+   "verdict": "no match; reuse existing sheaf and degree-zero gluing tools"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, CategoryTheory.Iso",
+   "results": "0 hits. The source smooth purity Nonempty iso has no prescribed normalization and assumes absolutely separated base; it does not replace this argument.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "DiagonalOrientationNormalization|diagonalOrdinaryDualizing|diagonalOrientationRefinement",
+   "results": "0 Mathlib hits. rg of both library roots finds the definitions in PurityDiagonalDualizingObject and chartOrdinaryOrientation in DiagonalDncChartNormalization. The latter is selected from the present existence theorem, hence cannot be used in its proof. Blueprint search for diagonal orientation found only det-sp-orientation-charts, det-sp-orientation-vector-bundle and composition/base-change descendants, which also depend on this orientation; degree zero gluing returned zero blueprint hits.",
+   "date": "2026-10-25",
+   "verdict": "no duplicate independent assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurityDiagonalDualizingObject",
+  "date": "2026-10-25",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-diagonal-dualizing-object",
+   "place": "Steps 1--2 and combining/canonicity paragraph",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurityDiagonalDualizingData",
+  "file": "lean/Sheaf/Paper/PurityDiagonalDualizingData.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.DiagonalOrientationNormalization",
+  "statement": "def DiagonalOrientationNormalization (P : PurityFiniteSetting.{u})\n    {X Y : Scheme.{u}} (d : ℕ) (f : X ⟶ Y) [HasCompactification f]\n    [IsNoetherian X] [IsNoetherian Y]\n    (aY : Y ⟶ Spec (.of P.field.k))\n    (e : P.diagonalOrdinaryDualizing f ≅ P.diagonalTwistEtale X d) : Prop",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-25",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.diagonalOrdinaryDualizing",
+   "WeilConjectures.PurityFiniteSetting.diagonalDualizing",
+   "WeilConjectures.PurityFiniteSetting.diagonalUnitPlus",
+   "WeilConjectures.PurityFiniteSetting.diagonalDualizingComparison",
+   "WeilConjectures.PurityFiniteSetting.diagonalEtaleLocality",
+   "WeilConjectures.PurityFiniteSetting.diagonalAffineMate",
+   "WeilConjectures.PurityFiniteSetting.diagonalDualizingCongr",
+   "WeilConjectures.PurityFiniteSetting.DiagonalOrientationNormalization",
+   "WeilConjectures.PurityFiniteSetting.DiagonalDualizingConclusion"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2a76a",
+  "group": "K3",
+  "result": "fix",
+  "landing": "20261025T101229-L-3673535",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2a76a",
+  "group": "K3",
+  "result": "fix",
+  "landing": "20261025T101229-L-3673535",
+  "kind": "interface",
+  "note": "independent cc review: Item proof and 3 new sorry lemmas (gluing/normalization/rigidity) against thm-pur-diagonal-dualizing-object, the Chart/BetaNormalized defs and the moved data block (byte-identical to published); 22 modules (5 delivered + 17 direct importers) compiled clean"
+ }
+}

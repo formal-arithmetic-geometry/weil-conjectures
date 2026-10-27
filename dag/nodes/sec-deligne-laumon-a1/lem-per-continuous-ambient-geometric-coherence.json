@@ -1,0 +1,140 @@
+{
+ "id": "lem-per-continuous-ambient-geometric-coherence",
+ "kind": "statement",
+ "title": "Normalized ordinary and derived geometric coherence",
+ "statement": "Let l be prime and E a finite extension of Q_l. Let X,Y,Z satisfy the noetherian, finite-dimensional, l-invertible scheme hypotheses, with normalized continuous realizations and prescribed Along comparisons ag, ah, ac for g:X→Y, h:Z→X and h≫g, and ai for the identity of Y [def-per-continuous-rational-realization-data]. There exist ordinary, cochain and ambient derived composition comparisons satisfying the coefficient, tensor-unit, component and normalized-counit equations of Composition, without its raw isomorphism or realization compatibility. There also exist the site, ordinary and ambient identity comparisons with the site-projection, tensor-unit and normalized-counit equations of Identity, without its raw isomorphism or realization compatibility. These data are the records AmbientComposition and AmbientIdentity.",
+ "stmt_deps": [
+  "def-per-continuous-rational-realization-data"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14(2), Remark 6.8.15; Stacks Tags 0D6D, 0A0E and 0A0G. Expansion of the normalized comparison argument."
+ },
+ "proof": [
+  {
+   "text": "Choose the normalized rational module realizations and their pullback comparisons for g, h, h≫g and the identity. The normalized coefficient adjuncts are equal pointwise on continuous functions, hence equal by the ring-sheaf adjunction. Apply the already proved rationalScalarPullComposition and rationalScalarPullIdentity wrappers and rewrite their coefficient maps by these equalities. Retain only their ordinary comparisons, unit formulas, ambient comparisons and computation equations.",
+   "uses": [
+    "lem-per-rational-module-realization-functor",
+    "lem-per-rational-realization-pullback-comparison",
+    "lem-per-rational-realization-scalar-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each supplied Along, extract e and eC from IsNormalizedPullCounit. The component equation identifies eC with the degreewise image of e. The pure-section normalization, after canceling the object equality transports, says e sends the old tensor-unit section to moduleUnit. The normalized composite ringed-module and scalar adjunction gives naturality of the old unit; transport through e gives naturality of moduleUnit. Conjugate the old ordinary compositor by e_c inverse, e_h on the old g pullback, and the new h pullback of e_g. Its unit formula follows by inverse cancellation, the old unit formula and naturality along the actual fibre-product associator. For identity use e_i inverse followed by the old ordinary unitor.",
+   "uses": [
+    "def-per-continuous-rational-realization-data",
+    "lem-per-rational-realization-scalar-coherence",
+    "lem-pod-canonical-module-adjunction-unit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Take the new complex compositor to be the degreewise image of the new ordinary compositor; its component equation is definitional. Keep the old ambient derived compositor. Expand each supplied counit as the old computation counit followed by Q(e). Cancel e_c with e_c inverse in the degreewise comparison, apply the old derived composition equation, and use naturality of the supplied h counit at the degreewise e_g. The remaining expression is the desired normalized composition equation. The identity equation follows by canceling the degreewise e_i and applying the old identity computation equation. Both equations in fact hold for every complex, so in particular under the stated K-flat and flat-term hypotheses.",
+   "uses": [
+    "def-per-continuous-rational-realization-data",
+    "lem-per-rational-realization-scalar-coherence"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-per-continuous-rational-realization-data",
+  "lem-per-rational-module-realization-functor",
+  "lem-per-rational-realization-pullback-comparison",
+  "lem-per-rational-realization-scalar-coherence",
+  "lem-pod-canonical-module-adjunction-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "T7 transport of the existing normalized rational pullback composition and identity equations through the scalar cancellation already specified by IsNormalizedPullCounit; BS Remark 6.8.15 and Stacks 0D6D."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Normalized derived pullback and coefficient extension comparisons obey composition and identity",
+   "results": "8 hits on scheme normalization (hom_ext, normalizationDesc_comp, toNormalization_fromNormalization and related lemmas), none on continuous coefficient tensor normalization.",
+   "date": "2026-10-27",
+   "verdict": "No match for the concrete normalized tensor and completion data."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedUnique",
+   "results": "1 hit: CategoryTheory.Functor.leftDerivedUnique, generic uniqueness of left derived functors.",
+   "date": "2026-10-27",
+   "verdict": "A generic proof tool; it does not state the coefficient and tensor-unit equations."
+  },
+  {
+   "tool": "grep",
+   "query": "pbcReductionNormalization|IsNormalizedPullCounit|RationalRealizationScalar",
+   "results": "0 Mathlib hits.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A left derived inverse image functor between ringed sites has composition and identity isomorphisms normalized on K-flat complexes.",
+   "results": "8 hits: SheafOfModules.pullbackComp and instIsLeftAdjointPullback in Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous; sheafPushforwardContinuousComp variants in Mathlib.CategoryTheory.Sites.Continuous; leftDerivedZeroIsoSelf identities in Mathlib.CategoryTheory.Abelian.LeftDerived. Read pullbackComp: it compares ordinary inverse images, without the normalized derived computation equations.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; ordinary pullback and tensor coherence are useful proof tools but do not state these normalized derived equations."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalContinuousComparisonCoherence",
+  "date": "2026-10-27",
+  "group": "H8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "First proof paragraph: cohomology sheaves of pullback are pullbacks, via the continuous rational realization and its normalized scheme/coefficient comparisons.",
+   "via": [
+    "lem-per-rational-continuous-comparison-coherence",
+    "lem-per-continuous-rational-derived-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousAmbientGeometricCoherence",
+  "file": "lean/Sheaf/Paper/ContinuousAmbientGeometricCoherence.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ContinuousRational.continuousAmbientGeometricCoherence",
+  "statement": "theorem continuousAmbientGeometricCoherence\n    {X Y Z : Base.{u} l} (g : X.scheme ⟶ Y.scheme) (h : Z.scheme ⟶ X.scheme)\n    (aX : At l E X) (aY : At l E Y) (aZ : At l E Z)\n    (ag : Along l E g aX aY) (ah : Along l E h aZ aX)\n    (ac : Along l E (h ≫ g) aZ aY) (ai : Along l E (𝟙 Y.scheme) aY aY) :\n    Nonempty (AmbientComposition l E g h aX aY aZ ag ah ac) ∧\n      Nonempty (AmbientIdentity l E Y aY ai)",
+  "branch": "sheaf-dag",
+  "by": "H8",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ContinuousRational.AmbientComposition",
+   "AlgebraicGeometry.Scheme.ContinuousRational.AmbientIdentity",
+   "AlgebraicGeometry.Scheme.ContinuousRational.continuousAmbientGeometricCoherence"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261027T094422-L-223889",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261027T103514-L-1092667",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

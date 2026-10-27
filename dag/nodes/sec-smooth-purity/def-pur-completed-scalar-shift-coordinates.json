@@ -1,0 +1,191 @@
+{
+ "id": "def-pur-completed-scalar-shift-coordinates",
+ "kind": "definition",
+ "title": "Signed completed scalar shift coordinates and representative normalization",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$, finite extensions $E,L$ of $\\mathbf Q_\\ell$ in one coefficient universe, a $\\mathbf Q_\\ell$-embedding $\\iota:E\\to L$, and a scheme $Y$ in an independent universe. Interpret the coefficient inclusion through $\\iota$. Put $R_F=\\widehat{\\mathcal O}_{F,Y}$ for $F=E,L$, and use the completed coefficient module categories and quotient scalar extension of [def-weil-integral-scalar-extension]. For $n\\in\\mathbf N$ (quotient exponent $n+1$), write\n$$B_n(P)=\\operatorname{Res}^L_{n+1}\\bigl(P\\otimes_{R_E}(\\mathcal O_L/\\varpi_L^{n+1})_Y\\bigr),\\qquad X_P=\\prod_n B_n(P).$$\nUse the actual quotient transitions $t_n:B_{n+1}(P)\\to B_n(P)$, and define $h_P=1-s_P$ by $\\mathrm{pr}_n h_P=\\mathrm{pr}_n-t_n\\mathrm{pr}_{n+1}$ [def-weil-tower-transition-endomorphism]; this is the strict transition endomorphism of the coefficient-extension tower specified in [lem-weil-finite-free-completed-scalar-comparison]. The strict Roos cochain functor is $C(P)=\\operatorname{Cone}(h_P)[-1]$, with its mapping-cocone convention as in [def-weil-signed-mapping-cocone-functor]. Let $Q$ be complex localization and use integer cochain shifts $P[m]^j=P^{j+m}$, $d_{P[m]}^j=(-1)^m d_P^{j+m}$, with the standard localization comparison $\\eta_{P,m}:Q(P[m])\\simeq(QP)[m]$ [def-weil-abstract-derived-category]. A good complex means a K-flat complex with flat terms [def-a1-flat-term-kflat-complex]. Use the derived scalar functor $T$ of [def-weil-integral-scalar-extension] and retain its natural representative comparison $d_P:T(QP)\\simeq QC(P)$ on good complexes [lem-weil-integral-scalar-extension-well-defined].\n\nA coherent integer shift structure on a functor $F$ means natural isomorphisms $e_{F,m,P}:F(P[m])\\simeq F(P)[m]$, equal to the canonical identity comparison for $m=0$ and satisfying the addition law: under the standard associativity identifications, $e_{F,a+b,P}=e_{F,a,P}[b]\\circ e_{F,b,P[a]}$. This specifies the meaning of the structures below, without asserting their existence.\n\nDefine $\\operatorname{completedScalarShiftLevelIso}_{P,m,n}:B_n(P[m])\\simeq B_n(P)[m]$ by the additive finite tensor shift followed by the additive restriction-of-scalars shift. Each has the identity degree component after reindexing. Define $\\operatorname{completedScalarShiftProductIso}_{P,m}=\\beta_{P,m}:X_{P[m]}\\simeq X_P[m]$ as the product of these level maps followed by the inverse product-preservation comparison for shift. Thus its projection to every shifted factor is precisely the specified level map; its inverse is the product of the inverse degree reindexings. No tower or product isomorphism is chosen independently.\n\nFor a coherent integer shift structure $e_C$ on $C$, define $\\operatorname{completedScalarShiftConeFormula}(e_C,P,m)$ by the following two equations. Write $u_P^j:X_P^j\\to C(P)^j$ for the unshifted mapping-cocone inclusion and $v_P^{i,j}:X_P^i\\to C(P)^j$ for the other inclusion, defined when $i+1=j$. These are the degree components of the two inclusions of the specified mapping cocone, not an assertion that both inclusions are chain maps. Let $r_{P,m,j}:C(P)[m]^j\\simeq C(P)^{j+m}$ be standard degree reindexing. Require, for every $j\\in\\mathbf Z$ and every $i+1=j$,\n$$\\begin{aligned}\n(e_{C,m,P})^j\\circ u_{P[m]}^j\n &=r_{P,m,j}^{-1}\\circ u_P^{j+m}\\circ\\beta_{P,m}^j,\\\\\n(e_{C,m,P})^j\\circ v_{P[m]}^{i,j}\n &=(-1)^m\\,r_{P,m,j}^{-1}\\circ v_P^{i+m,j+m}\\circ\\beta_{P,m}^i.\n\\end{aligned}$$\nThus the prescribed map is $(x,y)\\mapsto(x,(-1)^m y)$ in mapping-cocone coordinates $C(P)^j=X_P^j\\oplus X_P^{j-1}$, via the fixed product map and reindexing.\n\nFor $e_C$ and a coherent shift structure $e_T$ on $T$, define $\\operatorname{completedScalarShiftIntegralNormalization}(e_C,e_T)$ to mean that for every good $P$ and integer $m$, there exists a witness that $P[m]$ is good and\n$$d_P[m]\\circ e_{T,m,QP}=\\eta_{C(P),m}\\circ Q(e_{C,m,P})\\circ d_{P[m]}\\circ T(\\eta_{P,m}^{-1}).$$\nBoth sides are morphisms $T((QP)[m])\\to(QC(P))[m]$. These are definitions of maps and predicates only: no existence of $e_C,e_T$, chain-shift compatibility, or descent theorem is asserted.",
+ "stmt_deps": [
+  "def-weil-integral-scalar-extension",
+  "def-weil-tower-transition-endomorphism",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "def-weil-signed-mapping-cocone-functor",
+  "def-weil-abstract-derived-category",
+  "def-a1-flat-term-kflat-complex",
+  "lem-weil-integral-scalar-extension-well-defined"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "homology.tex Tag 011G (integer cochain shift); derived.tex Tags 014E and 08TC (cone and derived-limit conventions); sites-cohomology.tex Tags 06YS, 06YT, 06YU (K-flat resolution and derived tensor normalization); blueprint main-20261015 sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md, Weil-structures paragraph, auxiliary scalar shift normalization used by lem-sf-framework-theta-shift-compatibility."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalization predicates for signed cochain shifts of completed strict tower scalar extension and descent through derived localization",
+   "results": "8 hits: CochainComplex.shiftFunctor, CochainComplex.HomComplex.Cochain.leftShift_v, CochainComplex.HomComplex.Cochain.δ_shift, Homotopy.shift, ModuleCat.instIsScalarTowerLocalizationCarrierLocalizedModule, CochainComplex.HomComplex.Cochain.leftShift_rightShift_eq_negOnePow_rightShift_leftShift, CochainComplex.HomComplex.Cocycle.leftUnshift_coe, Ring.instIsScalarTowerNormalClosure. No completed scalar normalization predicate.",
+   "date": "2026-10-22",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical product shift reindexing and signed mapping cocone coordinates for completed scalar extension",
+   "results": "8 hits: CategoryTheory.extendCofan_ι_app, CategoryTheory.Limits.Cocone.extend_ι, CategoryTheory.Limits.ProductsFromFiniteCofiltered.finiteSubproductsCocone_π_app_eq_sum, CategoryTheory.Limits.Cocones.extendComp, CategoryTheory.GradedObject.mapBifunctorRightUnitorCofan, CategoryTheory.extendCofan, CategoryTheory.extendCofan_pt, CategoryTheory.GradedObject.mapBifunctorLeftUnitorCofan. No exact scalar shift coordinate or descent interface.",
+   "date": "2026-10-22",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "completedScalarShift|Scalar.*Shift.*Normalization",
+   "results": "msearch Mathlib grep: OK 0 hits.",
+   "date": "2026-10-22",
+   "verdict": "no Mathlib match"
+  },
+  {
+   "tool": "rg",
+   "query": "completedScalarShift(ConeFormula|IntegralNormalization|LevelIso|ProductIso)|Scalar.*Shift.*Normalization in lean/WeilConjectures, lean/Sheaf; completedScalarShift in dag/nodes",
+   "results": "No upstream WeilConjectures hit. The seven definitions exist only in Sheaf.Paper.CompletedScalarShift, lines 51-175, recorded only on the theorem node lem-weil-point-completed-scalar-shift. Other DAG hits are consumers or distinct chain-shift/descent theorems. No definition node owns these definitions; extract them unchanged, not a duplicate.",
+   "date": "2026-10-22",
+   "verdict": "ownership extraction required by the return"
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "completed scalar shift",
+   "results": "0 blueprint nodes match 'completed scalar shift'; ancestor of lem-sf-framework-theta-shift-compatibility is prop-sf-open-closed-triangle-all-stages.",
+   "date": "2026-10-22",
+   "verdict": "no duplicate blueprint definition"
+  },
+  {
+   "tool": "grep",
+   "query": "completedScalarShift|Scalar.*Shift.*Normalization",
+   "results": "0 hits: none",
+   "date": "2026-10-22",
+   "verdict": "no exact match; generic shifts, additive reindexings or products only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalization predicates for signed cochain shifts of completed strict tower scalar extension and descent through derived localization",
+   "results": "8 hits: CochainComplex.shiftFunctor, CochainComplex.HomComplex.Cochain.leftShift_v, CochainComplex.HomComplex.Cochain.δ_shift, Homotopy.shift, ModuleCat.instIsScalarTowerLocalizationCarrierLocalizedModule, CochainComplex.HomComplex.Cochain.leftShift_rightShift_eq_negOnePow_rightShift_leftShift, CochainComplex.HomComplex.Cocycle.leftUnshift_coe, Ring.instIsScalarTowerNormalClosure",
+   "date": "2026-10-22",
+   "verdict": "no exact match; generic shifts, additive reindexings or products only"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapCochainComplexShiftIso, PreservesProduct.iso",
+   "results": "0 hits: none; loogle: unknown identifier 'Functor.mapCochainComplexShiftIso'",
+   "date": "2026-10-22",
+   "verdict": "no exact match; generic shifts, additive reindexings or products only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical product shift reindexing and signed mapping cocone coordinates for completed scalar extension",
+   "results": "8 hits: Profinite.Extend.cocone_ι_app, ComplexShape.Embedding.liftExtend.f, TopModuleCat.ofCocone, LightProfinite.Extend.cocone_ι_app, ComplexShape.Embedding.liftExtend, CategoryTheory.SmallObject.SuccStruct.ofCocone.map, ComplexShape.Embedding.liftExtend.f_eq, CategoryTheory.SmallObject.SuccStruct.ofCocone_map_to_top",
+   "date": "2026-10-22",
+   "verdict": "no exact match; generic shifts, additive reindexings or products only"
+  },
+  {
+   "tool": "grep",
+   "query": "mapCochainComplexShiftIso|namespace PreservesProduct|def iso|class CommShift",
+   "results": "21 hits: Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/HomologicalComplex.lean, Mathlib/Algebra/Homology/HomologicalComplex.lean",
+   "date": "2026-10-22",
+   "verdict": "no exact match; generic shifts, additive reindexings or products only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapCochainComplexShiftIso\"",
+   "results": "3 hits: CategoryTheory.Functor.mapCochainComplexShiftIso, CategoryTheory.Functor.mapCochainComplexShiftIso_hom_app_f, CategoryTheory.Functor.mapCochainComplexShiftIso_inv_app_f",
+   "date": "2026-10-22",
+   "verdict": "no exact match; generic shifts, additive reindexings or products only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A completed scalar extension functor on complexes has a shift normalization defined by two signed Roos mapping cocone inclusion equations and a derived localization square",
+   "results": "8 hits: CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism, CategoryTheory.Shift.linear_of_localization, ComplexShape.Embedding.extendFunctor, CategoryTheory.Functor.isHomological_of_localization, DerivedCategory.singleFunctors, ComplexShape.Embedding.extendFunctor_obj, CategoryTheory.Shift.instLinearLocalizationShiftFunctorOfCommShiftOfQ, CategoryTheory.Shift.instLinearLocalization'ShiftFunctorOfCommShiftOfQ'",
+   "date": "2026-10-22",
+   "verdict": "no exact match; generic shifts, additive reindexings or products only"
+  },
+  {
+   "tool": "grep",
+   "query": "namespace mappingCocone|def mappingCocone|def inl|def inr",
+   "results": "2 hits: 72, 76",
+   "date": "2026-10-22",
+   "verdict": "no exact match; generic shifts, additive reindexings or products only"
+  },
+  {
+   "tool": "grep",
+   "query": "namespace mappingCocone|noncomputable def inl|noncomputable def inr|def mappingCocone",
+   "results": "10 hits: Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean, Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean, Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean, Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean, Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean, Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean, Mathlib/Algebra/Homology/HomotopyCofiber.lean, Mathlib/Algebra/Homology/HomotopyCofiber.lean",
+   "date": "2026-10-22",
+   "verdict": "no exact match; generic shifts, additive reindexings or products only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PreservesProduct.iso\"",
+   "results": "2 hits: CategoryTheory.Limits.PreservesProduct.iso, CategoryTheory.Limits.PreservesProduct.iso_hom",
+   "date": "2026-10-22",
+   "verdict": "no exact match; generic shifts, additive reindexings or products only"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-framework-theta-shift-compatibility",
+  "date": "2026-10-22",
+  "group": "NE"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-open-closed-triangle-all-stages",
+   "place": "Weil-structures paragraph: compatibility of the prescribed automorphism and immersion pullbacks with shifts and coefficient extension.",
+   "via": [
+    "lem-sf-framework-theta-shift-compatibility",
+    "lem-sf-automorphism-constructible-stage-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "lean": {
+  "module": "Sheaf.Paper.CompletedScalarShiftCoordinates",
+  "declaration": "WeilConjectures.completedScalarShiftConeFormula",
+  "declarations": [
+   "WeilConjectures.completedScalarShiftLevelIso",
+   "WeilConjectures.completedScalarShiftProductIso",
+   "WeilConjectures.completedScalarShiftConeFormula",
+   "WeilConjectures.completedScalarShiftIntegralNormalization"
+  ],
+  "file": "lean/Sheaf/Paper/CompletedScalarShiftCoordinates.lean",
+  "statement": "def completedScalarShiftConeFormula\n    (eC : (integralScalarComplexFunctor l E L ι Y).CommShift ℤ)\n    (P : CochainComplex (integralTowerModules l E Y) ℤ) (m : ℤ) : Prop",
+  "branch": "sheaf-dag",
+  "by": "NE",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Extracted with all four names, signatures and bodies unchanged from CompletedScalarShift, which now publicly imports this definition module. Only the owning blueprint tags in the extracted docstrings change. The other three predicates, used together in that theorem conclusion, remain in its module."
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "def-pur-completed-scalar-shift-coordinates",
+  "worker": "stage1",
+  "summary": "Audited this definition-only ownership extraction against all four existing Sheaf definitions, the actual scalar tower, Stacks shift/cone conventions and the statements of its dependencies. Made the two degree-component equations and coherence convention explicit; cited the existing derived-localization and representative-comparison nodes rather than attributing those interfaces to the triangulated-category axioms. Removed the unused finite-free comparison theorem: the definition needs neither a derived-complete input nor the completion comparison theorem. No new nodes or proof assertions; proof and proof_deps stay empty. Searched the whole DAG, blueprint and upstream source; no exact project attachment or Mathlib match.",
+  "blueprint": "prop-sf-open-closed-triangle-all-stages, Weil-structures paragraph: the auxiliary scalar shift normalization used to express equivariant shift compatibility through lem-sf-framework-theta-shift-compatibility. No change of the open-closed unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-O3-79d0d7bb7",
+  "group": "O3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O3-79d0d7bb7 (reviewer sub-agent of L); spot-checked: Verdict FIX. I read the item in full; it is a definition with four maps/predicates, no proof and zero new nodes. I compared it clause by clause with the landed Lean bodies in Sheaf/Paper/CompletedScalarShiftCoordinates.lean. Checks: (1) The finite levels B_n with quotient exponent n+1 match def-weil-integral-scalar-extension. (2) h_P=1-s_P matches def-weil-tower-transition-endomorphism; in Lean, completedScalarRoosEndomorphism is towerTransitionEndomorphism on the integralScalarTowerFunctor tower. (3) The cocone matches Mathlib mappingCocone = (mappingCone)⟦-1⟧ (MappingCocone.lean:33): inl is a degree-0 cochain and inr a degree-1 cocycle, as the item's u and v (i+1=j) say. (4) The shift convention matches Stacks 011G (homology.tex l.3427-3437); the cone matches Stacks 014E (derived.tex l.2471). (5) LevelIso, ProductIso, ConeFormula and IntegralNormalization agree factor by factor with the Lean bodies; both normalization sides go T((QP)[m])→(QC(P))[m]. Sign test: whatever the signs of the cocone differential, (x,εy) is a chain map C(P[m])→C(P)[m] iff ε=(-1)^m. So the predicate is satisfiable, agrees with lem-weil-point-completed-scalar-shift's α_{m,P}, and is the identity at m=0. Duplicate search (rg -L over the DAG) found only the consumer theorems lem-weil-point-completed-scalar-shift and lem-weil-completed-scalar-shift-descent. The ancestor place is the Weil-structures paragraph of the blueprint open-closed triangle proof (l.75-80). No SGA is cited. No cycles. The re-split rule does not apply. Two repairs, in fixes/dag/nodes/sec-smooth-purity/def-pur-completed-scalar-shift-coordinates.json (statement and stmt_deps only): (C4/B3-1) The delivery dropped lem-weil-finite-free-completed-scalar-comparison as unused, but completedScalarShiftConeFormula is built on completedScalarRoosEndomorphism, a declaration of that node's module with no other owner. I restored the stmt_dep and added a clause citing it for h_P. (B3-2) 'Good complex' cited def-pur-integral-derived-operations, which does not define the predicate. The Lean uses integralOperationsGoodComplex, owned by def-a1-flat-term-kflat-complex, so I recited that node and dropped the otherwise unused def-pur stmt_dep. Advisory: integralOperationsRestrict (owner def-a1-integral-finite-pullback-tower) is used in the LevelIso body but not cited; completedScalarRoosEndomorphism is a plain def inside a theorem node's module, so a later existing:true definition node owning it would be cleaner. No tool_uses are involved.; 1 file(s) fixed by the reviewer"
+ }
+}

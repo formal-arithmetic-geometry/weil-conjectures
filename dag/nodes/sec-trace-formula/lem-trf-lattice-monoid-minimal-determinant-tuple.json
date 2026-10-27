@@ -1,0 +1,202 @@
+{
+ "id": "lem-trf-lattice-monoid-minimal-determinant-tuple",
+ "kind": "statement",
+ "title": "A spanning lattice monoid has a tuple with least positive absolute determinant",
+ "statement": "Let $r\\geq1$ and let $S\\subseteq\\mathbf Z^r$ be an additive submonoid, meaning $0\\in S$ and $s+t\\in S$ for $s,t\\in S$. Suppose there are $s_1,\\ldots,s_m\\in S$ such that every element of $S$ is a nonnegative integer combination of the $s_i$ and every element of $\\mathbf Z^r$ is an integer combination of the $s_i$. For an ordered tuple $v=(v_1,\\ldots,v_r)$ in $S$, let $A_v$ be the integer matrix with these columns and let $d(v)=|\\det A_v|$, with determinant as in [def-weil-pbc-matrix-determinant]. Then there is such a tuple $v$ with $d(v)>0$ and $d(v)\\leq d(w)$ for every ordered tuple $w$ in $S$ with $d(w)>0$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 0F0K (algebra-item-cauchy-binet, algebra.tex lines 282--288), applied to BC=I; agent-supplied well-ordering application in the chart refinement of ILO VI Proposition 1.9. Extracts old proof steps 3--4 of lem-trf-fs-chart-free-factorization."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-matrix-determinant"
+ ],
+ "proof": [
+  {
+   "text": "Choose the generators $s_1,\\ldots,s_m$ in the hypothesis and form the $r\\times m$ integer matrix $B$ with these columns. For each standard coordinate vector $e_j\\in\\mathbf Z^r$, the group-spanning hypothesis supplies integers $c_{ij}$ with $e_j=\\sum_{i=1}^m c_{ij}s_i$. Let $C=(c_{ij})$ be the $m\\times r$ integer matrix. Entrywise, $(BC)_{kj}=\\sum_i(s_i)_k c_{ij}=(e_j)_k=\\delta_{kj}$, so $BC=I_r$. This uses integer combinations, not nonnegative combinations.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0F0K, algebra-item-cauchy-binet, lines 282–288; agent-supplied application to the generator matrix and its right inverse"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-cauchy-binet] over $\\mathbf Z$ with its row size $r$, intermediate size $m$, and factors $B,C$. The Leibniz formula of [def-weil-pbc-matrix-determinant] gives $\\det I_r=1$: only the identity permutation contributes. Hence $1=\\sum_{J\\subseteq\\{1,\\ldots,m\\},\\ |J|=r}\\det(B^J)\\det(C_J)$. If every column minor $\\det(B^J)$ were zero, the sum would be zero, contradicting $1\\ne0$ in $\\mathbf Z$. Thus some such $J$ has $\\det(B^J)\\ne0$. In particular $m\\ge r$, including when this was not known initially. List its indices increasingly as $j_1,\\ldots,j_r$ and set $w=(s_{j_1},\\ldots,s_{j_r})$. All its entries lie in $S$, and $d(w)=|\\det(B^J)|>0$.",
+   "uses": [
+    "lem-weil-pbc-cauchy-binet",
+    "def-weil-pbc-matrix-determinant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0F0K, algebra-item-cauchy-binet, lines 282–288; agent-supplied application to the generator matrix and its right inverse"
+   }
+  },
+  {
+   "text": "Let $D=\\{d(w):w\\in S^r,\\ d(w)>0\\}\\subseteq\\mathbf N$, using the natural-number absolute value of each integer determinant. Step 2 proves that $D$ is nonempty. Regard $D$ as a subset of the ordered set $\\{-\\infty,0,1,\\ldots,\\infty\\}$ and apply [lem-kun-extended-naturals-minimum]. Its least element belongs to $D$, so it is a finite positive integer $n$, and by the defining membership in $D$ there is $v\\in S^r$ with $d(v)=n$. Every $w\\in S^r$ with $d(w)>0$ has $d(w)\\in D$, whence $0<d(v)=n\\le d(w)$. The order on the finite natural numbers is unchanged by this inclusion, so these are exactly the required inequalities.",
+   "uses": [
+    "lem-kun-extended-naturals-minimum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent-supplied least-positive-determinant argument after Tag 0F0K, using the existing minimum lemma as an order-theoretic tool"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cauchy-binet",
+  "def-weil-pbc-matrix-determinant",
+  "lem-kun-extended-naturals-minimum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0F0K, algebra-item-cauchy-binet, lines 282–288; agent-supplied application to the generator matrix and its right inverse; least attained determinant by lem-kun-extended-naturals-minimum",
+  "note": "The Stacks item states Cauchy–Binet, not the monoid assertion; the matrix construction and minimization assembly are agent-supplied."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finitely generated additive submonoid of Z^r generating Z^r as a group contains an r tuple with least positive absolute determinant",
+   "results": "{\"t\": \"2026-10-22T06:14:42Z\", \"tool\": \"leanfinder\", \"query\": \"A finitely generated additive submonoid of Z^r generating Z^r as a group contains an r tuple with least positive absolute determinant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddSubgroup.index_eq_natAbs_det\", \"Submodule.natAbs_det_basis_change\", \"AddSubgroup.relIndex_eq_abs_det\", \"AddSubgroup.relindex_eq_abs_det\", \"AddSubgroup.relIndex_eq_natAbs_det\", \"AddSubgroup.relindex_eq_natAbs_det\", \"Module.Basis.SmithNormalForm.toAddSubgroup_index_ne_zero_iff\", \"Submodule.natAbs_det_equiv\"], \"digest\": \"f760c3dec5f5095b\"}; No exact match. AddSubgroup.index_eq_natAbs_det and Submodule.natAbs_det_basis_change (Mathlib/LinearAlgebra/FreeModule/Finite/CardQuotient.lean:98,85) compute indices for already supplied subgroup bases; they do not find a tuple in a prescribed monoid or minimize its determinant. The other hits concern total unimodularity, matrix invertibility, or diagonal dominance. Cauchy--Binet and a well-ordering choice are separate inputs, not a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.det, AddSubmonoid",
+   "results": "{\"t\": \"2026-10-22T06:14:31Z\", \"tool\": \"loogle\", \"query\": \"Matrix.det, AddSubmonoid\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No exact match. AddSubgroup.index_eq_natAbs_det and Submodule.natAbs_det_basis_change (Mathlib/LinearAlgebra/FreeModule/Finite/CardQuotient.lean:98,85) compute indices for already supplied subgroup bases; they do not find a tuple in a prescribed monoid or minimize its determinant. The other hits concern total unimodularity, matrix invertibility, or diagonal dominance. Cauchy--Binet and a well-ordering choice are separate inputs, not a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "det.*(exists|submatrix)|exists.*det",
+   "results": "{\"t\": \"2026-10-22T06:14:31Z\", \"tool\": \"grep\", \"query\": \"det.*(exists|submatrix)|exists.*det\", \"sub\": \"LinearAlgebra/Matrix\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Matrix/Adjugate.lean\", \"Mathlib/LinearAlgebra/Matrix/Adjugate.lean\", \"Mathlib/LinearAlgebra/Matrix/Adjugate.lean\", \"Mathlib/LinearAlgebra/Matrix/Adjugate.lean\", \"Mathlib/LinearAlgebra/Matrix/Adjugate.lean\", \"Mathlib/LinearAlgebra/Matrix/SemiringInverse.lean\", \"Mathlib/LinearAlgebra/Matrix/SemiringInverse.lean\", \"Mathlib/LinearAlgebra/Matrix/SemiringInverse.lean\"], \"digest\": \"c72e0a437b82d7fa\"}; No exact match. AddSubgroup.index_eq_natAbs_det and Submodule.natAbs_det_basis_change (Mathlib/LinearAlgebra/FreeModule/Finite/CardQuotient.lean:98,85) compute indices for already supplied subgroup bases; they do not find a tuple in a prescribed monoid or minimize its determinant. The other hits concern total unimodularity, matrix invertibility, or diagonal dominance. Cauchy--Binet and a well-ordering choice are separate inputs, not a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A full rank integer matrix has a nonsingular maximal minor; among tuples in a spanning monoid a positive absolute determinant is minimal",
+   "results": "{\"t\": \"2026-10-22T06:14:41Z\", \"tool\": \"leanfinder\", \"query\": \"A full rank integer matrix has a nonsingular maximal minor; among tuples in a spanning monoid a positive absolute determinant is minimal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.isTotallyUnimodular_iff_fintype\", \"Matrix.isTotallyUnimodular_iff\", \"Matrix.IsTotallyUnimodular\", \"det_ne_zero_of_sum_col_lt_diag\", \"det_ne_zero_of_sum_row_lt_diag\", \"Matrix.det_ne_zero_of_sum_col_pos\", \"Matrix.det_ne_zero_of_sum_row_pos\", \"Matrix.diagonal_transvection_induction_of_det_ne_zero\"], \"digest\": \"d2c1fa77bfaa9113\"}; No exact match. AddSubgroup.index_eq_natAbs_det and Submodule.natAbs_det_basis_change (Mathlib/LinearAlgebra/FreeModule/Finite/CardQuotient.lean:98,85) compute indices for already supplied subgroup bases; they do not find a tuple in a prescribed monoid or minimize its determinant. The other hits concern total unimodularity, matrix invertibility, or diagonal dominance. Cauchy--Binet and a well-ordering choice are separate inputs, not a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finitely generated additive submonoid of Z^r generating the integer lattice contains a tuple minimizing positive absolute determinant",
+   "results": "{\"t\": \"2026-10-22T06:15:17Z\", \"tool\": \"leansearch\", \"query\": \"A finitely generated additive submonoid of Z^r generating the integer lattice contains a tuple minimizing positive absolute determinant\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Unavailable: rate-limited service; no absence verdict inferred.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "index_eq_natAbs_det|natAbs_det_basis_change",
+   "results": "{\"t\": \"2026-10-22T06:15:17Z\", \"tool\": \"grep\", \"query\": \"index_eq_natAbs_det|natAbs_det_basis_change\", \"sub\": \"LinearAlgebra/FreeModule/Finite\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/FreeModule/Finite/CardQuotient.lean\", \"Mathlib/LinearAlgebra/FreeModule/Finite/CardQuotient.lean\", \"Mathlib/LinearAlgebra/FreeModule/Finite/CardQuotient.lean\", \"Mathlib/LinearAlgebra/FreeModule/Finite/CardQuotient.lean\", \"Mathlib/LinearAlgebra/FreeModule/Finite/CardQuotient.lean\"], \"digest\": \"88042964a9867b4f\"}; No exact match. AddSubgroup.index_eq_natAbs_det and Submodule.natAbs_det_basis_change (Mathlib/LinearAlgebra/FreeModule/Finite/CardQuotient.lean:98,85) compute indices for already supplied subgroup bases; they do not find a tuple in a prescribed monoid or minimize its determinant. The other hits concern total unimodularity, matrix invertibility, or diagonal dominance. Cauchy--Binet and a well-ordering choice are separate inputs, not a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.det, AddSubmonoid",
+   "results": "{\"t\": \"2026-10-23T09:25:53Z\", \"tool\": \"loogle\", \"query\": \"Matrix.det, AddSubmonoid\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No hits for determinant and additive submonoid together.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "index_eq_natAbs_det|natAbs_det_basis_change",
+   "results": "{\"t\": \"2026-10-23T09:25:53Z\", \"tool\": \"grep\", \"query\": \"index_eq_natAbs_det|natAbs_det_basis_change\", \"sub\": \"LinearAlgebra/FreeModule/Finite\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/FreeModule/Finite/CardQuotient.lean\", \"Mathlib/LinearAlgebra/FreeModule/Finite/CardQuotient.lean\", \"Mathlib/LinearAlgebra/FreeModule/Finite/CardQuotient.lean\", \"Mathlib/LinearAlgebra/FreeModule/Finite/CardQuotient.lean\", \"Mathlib/LinearAlgebra/FreeModule/Finite/CardQuotient.lean\"], \"digest\": \"88042964a9867b4f\"}; Read CardQuotient.lean:85–103: index formulas assume a supplied basis; Matrix/BaseChange.lean:27–65 concerns entries of an inverse in a subfield; Echelon/Pivot.lean:145–162 assumes pivot data. The other determinant hits concern identities or square-matrix kernels; none asserts the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A spanning additive submonoid of an integer lattice contains an ordered tuple minimizing the positive absolute determinant",
+   "results": "{\"t\": \"2026-10-23T09:25:54Z\", \"tool\": \"leanfinder\", \"query\": \"A spanning additive submonoid of an integer lattice contains an ordered tuple minimizing the positive absolute determinant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ZLattice.normBound_pos\", \"NumberField.mixedEmbedding.fundamentalDomain_integerLattice\", \"ZLattice.normBound\", \"ZLattice.exists_forall_abs_repr_le_norm\", \"ZSpan.fundamentalDomain_subset_parallelepiped\", \"NumberField.house.exists_ne_zero_int_vec_house_le\", \"ZLattice.abs_repr_le\", \"ZSpan.volume_real_fundamentalDomain\"], \"digest\": \"a07a10a6c227f136\"}; The returned lattice norm bounds, fundamental domains, fixed-determinant matrix representatives and total-unimodularity definitions do not find a minimizing tuple inside a prescribed additive monoid.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "det.*(exists|submatrix)|exists.*det",
+   "results": "{\"t\": \"2026-10-23T09:26:44Z\", \"tool\": \"grep\", \"query\": \"det.*(exists|submatrix)|exists.*det\", \"sub\": \"LinearAlgebra/Matrix\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Matrix/BaseChange.lean\", \"Mathlib/LinearAlgebra/Matrix/BaseChange.lean\", \"Mathlib/LinearAlgebra/Matrix/Determinant/Bird/Correctness.lean\", \"Mathlib/LinearAlgebra/Matrix/Determinant/Bird/Correctness.lean\", \"Mathlib/LinearAlgebra/Matrix/Echelon/Pivot.lean\", \"Mathlib/LinearAlgebra/Matrix/ToLinearEquiv.lean\", \"Mathlib/LinearAlgebra/Matrix/ToLinearEquiv.lean\", \"Mathlib/LinearAlgebra/Matrix/ToLinearEquiv.lean\"], \"digest\": \"4427a5fea6c142e2\"}; Read CardQuotient.lean:85–103: index formulas assume a supplied basis; Matrix/BaseChange.lean:27–65 concerns entries of an inverse in a subfield; Echelon/Pivot.lean:145–162 assumes pivot data. The other determinant hits concern identities or square-matrix kernels; none asserts the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A spanning submonoid of Z to the r contains an r tuple attaining the least nonzero absolute determinant",
+   "results": "{\"t\": \"2026-10-23T09:26:44Z\", \"tool\": \"leansearch\", \"query\": \"A spanning submonoid of Z to the r contains an r tuple attaining the least nonzero absolute determinant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.closure_le_toAddSubmonoid_span\", \"AddSubmonoid.instMin\", \"Submodule.exists_span_set_card_eq_spanRank\", \"AddSubmonoid.instBot\", \"Submonoid.FG.exists_minimal_closure_eq\", \"AddSubmonoid.exists_minimal_closure_eq_top\", \"AddMonoidAlgebra.mem_closure_of_mem_span_closure\", \"Submodule.span\"], \"digest\": \"d3f47778b47314ae\"}; Span definitions and existence of inclusion-minimal generating sets do not give a least positive determinant tuple.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integer matrix whose columns generate the whole integer lattice has a nonsingular maximal minor, and the set of positive minor determinants of tuples in a monoid has a minimum",
+   "results": "{\"t\": \"2026-10-23T09:26:50Z\", \"tool\": \"leanfinder\", \"query\": \"An integer matrix whose columns generate the whole integer lattice has a nonsingular maximal minor, and the set of positive minor determinants of tuples in a monoid has a minimum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FixedDetMatrices.reps\", \"Matrix.IsTotallyUnimodular\", \"FixedDetMatrices.reps_entries_le_m'\", \"FixedDetMatrices.reduce_mem_reps\", \"FixedDetMatrices.reduce\", \"Int.Matrix.exists_ne_zero_int_vec_norm_le\", \"FixedDetMatrix\", \"Int.Matrix.exists_ne_zero_int_vec_norm_le'\"], \"digest\": \"bc28458901bef81e\"}; The returned lattice norm bounds, fundamental domains, fixed-determinant matrix representatives and total-unimodularity definitions do not find a minimizing tuple inside a prescribed additive monoid.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-fs-chart-free-factorization",
+  "date": "2026-10-22",
+  "group": "Q160"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration input under lem-trf-local-term-locality proof (1)--(2), through lem-trf-nodal-pair-projective-resolution: the injective chart at the end of ILO VI Proposition 1.9, using VI 1.8. Auxiliary lattice argument: old chart-factorization proof steps 3--4 (Cauchy--Binet nonsingular tuple and least determinant).",
+   "via": [
+    "lem-trf-fs-chart-free-factorization",
+    "lem-trf-log-smooth-log-regular",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-lattice-monoid-minimal-determinant-tuple",
+  "worker": "stage1",
+  "group": "NN",
+  "summary": "Unchanged statement. Construct an integer right inverse from the group-spanning hypothesis, apply the existing Cauchy–Binet node to obtain a nonzero generator minor, then apply the existing extended-natural minimum leaf to all positive absolute determinants. No new nodes. Checked generator and matrix dimensions, m<r, determinant signs, and a monoid without a basis. No finished project declaration was found.",
+  "blueprint": "The auxiliary lattice argument named in blueprint.from.place, old chart-factorization steps 3–4. The latest lem-trf-local-term-locality proof now follows contracting correspondences; this historical descendant does not replace or alter that route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-cauchy-binet",
+    "why": "Rectangular determinant formula over the integers; generic linear-algebra tool for the historical chart refinement."
+   },
+   {
+    "node": "lem-kun-extended-naturals-minimum",
+    "why": "Attainment of a minimum on a nonempty set of finite natural numbers, a specialization of its extended-natural statement; no such order-theoretic statement in the item unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-cauchy-binet",
+  "lem-kun-extended-naturals-minimum"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NN-05d3fbbe9",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-05d3fbbe9 (reviewer sub-agent of L); spot-checked: I read the item, the three cited statements, the parent's step 3 and Stacks 0F0K (algebra.tex lines 282-288, tag line 18765). Unchanged and true; no new nodes, no SGA; proof_deps equal the union of the step uses. Step 1 is elementary: the group-spanning hypothesis gives integers c_ij with e_j = sum_i c_ij s_i, so the generator matrix B (r x m) and C=(c_ij) (m x r) satisfy BC = I_r; I checked the indices. Step 2 applies lem-weil-pbc-cauchy-binet over Z with its sizes (r,m). Its statement allows any commutative ring and gives an empty sum when m<r, so m>=r is derived, not assumed. The Leibniz definition gives det I = 1. Columns are taken in increasing order, so the nonzero minor B^J is exactly A_w for a tuple w in S^r. Step 3 applies the Mathlib leaf lem-kun-extended-naturals-minimum (ciInf_mem/csInf_mem on WithBot ENat) to D, the set of positive values of d(w) for w in S^r. The least element is attained and the bound holds for all ordered tuples. This leaf is more than needed but correctly used. The citer lem-trf-fs-chart-free-factorization step 3 (S = pi(Q) in L = Z^r) matches the hypotheses exactly. Edge cases: S = <2,3> in Z has minimum 2, not 1; S = -N gives 1 via the absolute value; generators (1,0),(1,1),(1,2) give 1; zero or repeated generators do no harm; m<r is excluded by step 2. A grep of dag/nodes for minimal/least determinant, nonzero maximal minor and cauchy-binet finds no duplicate. lem-weil-pbc-matrix-left-inverse-minors would need n>=m to be assumed, so the Cauchy-Binet route is the better one. Accepted tool_uses: lem-weil-pbc-cauchy-binet (Lean Matrix.cauchy_binet) and lem-kun-extended-naturals-minimum, both generic. This historical auxiliary node replaces no step of unit sk-i-curve-zero. No changes."
+ }
+}

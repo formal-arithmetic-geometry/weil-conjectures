@@ -1,0 +1,326 @@
+{
+ "id": "lem-sfb-space-etale-finite-fp-envelope",
+ "kind": "statement",
+ "title": "Finite finitely presented envelope for a separated etale morphism",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and work with algebraic spaces over $S$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention]. Use sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. A morphism is finite if representable and finite on all scheme tests [def-weil-finite-integral-morphism]. Local finite presentation is tested on etale scheme charts [def-sbc-locally-finite-presentation]; finite presentation additionally requires quasi-compactness and quasi-separatedness, meaning a quasi-compact relative diagonal. Let $T$ be quasi-compact and quasi-separated, where a quasi-compact space admits a surjective etale atlas from a quasi-compact scheme and quasi-separated means that its absolute diagonal is quasi-compact. Let $f:W\\to T$ be quasi-compact, separated and etale. Here quasi-compactness is tested after pullback to affine schemes, separated means that the relative diagonal is a representable closed immersion [def-weil-closed-immersion], and etale is tested on compatible etale scheme charts [def-weil-etale-morphism]. Then there are an algebraic space $Y$, a quasi-compact representable open immersion $j:W\\hookrightarrow Y$ [def-weil-open-immersion], and a finite morphism of finite presentation $\\pi:Y\\to T$ such that $f=\\pi\\circ j$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0874 (lemma-quasi-finite-separated-pass-through-finite-addendum), with Tag 082K (lemma-quasi-finite-separated-pass-through-finite); etale morphisms are locally of finite presentation and locally quasi-finite, so the quasi-compact etale case is included."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-finite-integral-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-closed-immersion",
+  "def-weil-etale-morphism",
+  "def-weil-open-immersion",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-stack-qcqs-morphism",
+  "def-sfb-space-absolute-quasi-separated",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-stack-chartwise-smooth-etale-calculus], applied to algebraic spaces viewed as discrete algebraic stacks, $f$ is locally of finite presentation, hence locally of finite type, and its arbitrary scheme base changes are chartwise etale. They remain separated by [lem-sfb-space-separated-fp-composition]. For every scheme $B\\to T$, [lem-a1-separated-etale-space-scheme] therefore represents $W\\times_TB$ by a scheme etale over $B$. Consequently $f$ is representable; this uses separatedness, rather than assuming that every chartwise etale map is representable.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-space-separated-fp-composition",
+    "lem-a1-separated-etale-space-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 03XU (lemma-etale-locally-quasi-finite), 03XX (proposition-locally-quasi-finite-separated-over-scheme), 03KL (lemma-base-change-separated); chartwise base change: spaces-properties.tex Tag 03FU (lemma-base-change-etale)."
+   }
+  },
+  {
+   "text": "On each etale scheme chart of the target, the representing scheme morphism is etale, thus unramified by [def-weil-etale-morphism] and locally quasi-finite by [lem-weil-pbc-unramified-quasi-finite-at-points]. Hence $f$ is quasi-finite at every point in the precise chartwise sense used in [lem-sfb-space-normalization-quasifinite-locus]. Since it is quasi-compact and separated, take its relative normalization $W\\xrightarrow{a}N\\xrightarrow{n}T$ from [lem-sfb-space-relative-integral-factorization]. That universal property is exactly the normalization hypothesis of the locus lemma. Apply it to the representable finite-type separated $f$: its open isomorphism locus has inverse image all of $W$, so $a$ identifies $W$ with an open subspace of $N$. The integral morphism $n$ is affine and separated and $N$ is quasi-compact and quasi-separated by [lem-sfb-space-integral-qcqs-permanence]. Since $na=f$ is quasi-compact and $n$ is quasi-separated, [lem-sfb-space-qc-cancellation] makes $a$ quasi-compact.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "lem-sfb-space-normalization-quasifinite-locus",
+    "lem-sfb-space-relative-integral-factorization",
+    "lem-sfb-space-integral-qcqs-permanence",
+    "lem-sfb-space-qc-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 0ABR (lemma-finite-type-separated), 0ABS (lemma-quasi-finite-separated-quasi-affine), 0823 (lemma-characterize-normalization), 03KS (lemma-quasi-compact-permanence); morphisms.tex Tag 02V5 (lemma-unramified-quasi-finite)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-integral-space-finite-presentation-limit] to $n:N\\to T$. Obtain a small nonempty directed inverse system $(N_i)$ over $T$, with affine transitions, each $N_i\\to T$ finite and finitely presented and each $N_i$ quasi-compact and quasi-separated, with limit $N$. The limit is also the fppf sheaf limit by [lem-sfb-space-affine-limits-schematic-stages]: its sheaf limit is an algebraic space, hence has the same universal property and is uniquely isomorphic to $N$. The open $W\\subset N$ is quasi-compact as a space. Indeed $N$ is quasi-compact, so choose a surjective etale map $U\\to N$ from a quasi-compact scheme. Since $a$ is quasi-compact on affine tests, [lem-sfb-space-quasicompact-affine-tests] makes its pullback $W\\times_NU$ over the quasi-compact scheme $U$ a quasi-compact space. Composing a surjective etale map from a quasi-compact scheme onto $W\\times_NU$ with the base change $W\\times_NU\\to W$ of $U\\to N$, which is surjective and etale by [lem-sfb-stack-chartwise-smooth-etale-calculus], gives a surjective etale map from a quasi-compact scheme onto $W$. Apply [lem-sfb-space-limit-open-cover-descent] to the two-member finite open cover $(W,N)$ of $N$. In particular it supplies some index $i$ and a quasi-compact open $V_i\\subset N_i$ with $N\\times_{N_i}V_i=W$. Including $N$ in the cover is necessary: the cited statement concerns a covering family, not an arbitrary single open.",
+   "uses": [
+    "lem-sfb-integral-space-finite-presentation-limit",
+    "lem-sfb-space-affine-limits-schematic-stages",
+    "lem-sfb-space-quasicompact-affine-tests",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-space-limit-open-cover-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tags 09YA (lemma-integral-limit-finite-and-finite-presentation), 07SF (lemma-directed-inverse-system-has-limit), 0827 (lemma-descend-opens); the finite-stage construction in spaces-more-morphisms.tex Tag 082K. Quasi-compactness of W: spaces-morphisms.tex Tag 03KG (lemma-quasi-compact-local)."
+   }
+  },
+  {
+   "text": "Restrict to the directed tail $k\\ge i$ and put $V_k=N_k\\times_{N_i}V_i$. [lem-sfb-space-limit-open-cover-descent] ensures that all $V_k$ are quasi-compact and quasi-separated and their transitions are affine. By the base-change/limit identity of [lem-sfb-space-affine-limits-schematic-stages], their limit is $N\\times_{N_i}V_i=W$, with the compatible maps induced by $a$. Use [lem-sfb-space-eventual-closed-immersion] with base $B=T$, inverse system $(V_k)$, and the identity closed immersion from $W$ to its limit. The source $W\\to T$ is locally of finite type by step 1, and all stages are quasi-compact. Thus for some $k\\ge i$ the projection $b:W\\to V_k$ is a closed immersion. Fix this $k$ and write $C=N_k$, $V=V_k$, and $p:C\\to T$.",
+   "uses": [
+    "lem-sfb-space-limit-open-cover-descent",
+    "lem-sfb-space-affine-limits-schematic-stages",
+    "lem-sfb-space-eventual-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tags 07SF (lemma-directed-inverse-system-has-limit), 0828 (lemma-finite-type-eventually-closed), clause (1), applied as in spaces-more-morphisms.tex Tag 082K."
+   }
+  },
+  {
+   "text": "The open inclusion $V\\hookrightarrow C$ is quasi-compact: $V$ is quasi-compact and $C$ quasi-separated, so apply [lem-sfb-space-qcqs-permanence]. It is finitely presented by [lem-sfb-space-qc-open-finite-presentation]. Since $p$ is finitely presented, [lem-sfb-space-separated-fp-composition] makes $V\\to T$ finitely presented, hence locally of finite type by [lem-sfb-stack-chartwise-smooth-etale-calculus]. Now $W\\to T$ is locally of finite presentation (step 1); [lem-sfb-space-relative-lfp-permanence] applied to $W\\xrightarrow{b}V\\to T$ makes $b$ locally of finite presentation. Let $\\mathcal I\\subset\\mathcal O_V$ be its quasi-coherent ideal, supplied by [lem-sfb-space-ideal-closed-subspace-correspondence]. The equivalence in [lem-sfb-space-closed-structure-finite-presentation] shows that $\\mathcal I$ is of finite type.",
+   "uses": [
+    "lem-sfb-space-qcqs-permanence",
+    "lem-sfb-space-qc-open-finite-presentation",
+    "lem-sfb-space-separated-fp-composition",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-space-relative-lfp-permanence",
+    "lem-sfb-space-ideal-closed-subspace-correspondence",
+    "lem-sfb-space-closed-structure-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 06CN (lemma-open-immersion-locally-finite-presentation), 03XQ (lemma-composition-finite-presentation), 05WT (lemma-finite-presentation-permanence), 084Q (lemma-closed-immersion-finite-presentation)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-finite-type-submodule-extension] on the quasi-compact quasi-separated space $C$, its quasi-compact open $V$, and $\\mathcal F=\\mathcal O_C$, to $\\mathcal I\\subset\\mathcal O_C|_V$. This gives a finite-type quasi-coherent submodule $\\mathcal J\\subset\\mathcal O_C$ restricting exactly to $\\mathcal I$. A submodule of the structure ring module is already an ideal: for local sections $r\\in\\mathcal O_C$ and $s\\in\\mathcal J$, the product $rs$ is the scalar action and lies in $\\mathcal J$. By [lem-sfb-space-ideal-closed-subspace-correspondence] form $e:Y=V(\\mathcal J)\\hookrightarrow C$. Under the etale base change $V\\hookrightarrow C$, its ideal is $\\mathcal J|_V=\\mathcal I$, so the same bijection identifies $Y\\times_CV$ with the given closed subspace $b:W\\hookrightarrow V$. The inclusion $j:W\\to Y$ is therefore an open immersion, as can be checked on each scheme test by pulling back the open $V\\subset C$. By construction $ej$ is the fixed map $W\\to C$ from the inverse system.",
+   "uses": [
+    "lem-sfb-space-finite-type-submodule-extension",
+    "lem-sfb-space-ideal-closed-subspace-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0853 (lemma-extend), with F equal to the structure sheaf; spaces-morphisms.tex Tag 03MB (lemma-closed-immersion-ideals). This is the finite-type-ideal refinement of the immersion reversal used in Tag 082K."
+   }
+  },
+  {
+   "text": "Because $\\mathcal J$ is of finite type, [lem-sfb-space-closed-structure-finite-presentation] makes $e$ finitely presented. Set $\\pi=pe:Y\\to T$. It is finitely presented by [lem-sfb-space-separated-fp-composition]. It is finite directly on scheme tests: for any affine test $H=\\operatorname{Spec}R\\to T$, $C_H=\\operatorname{Spec}A$ with $A$ finite as an $R$-module, and the closed immersion $Y_H\\hookrightarrow C_H$ has the form $\\operatorname{Spec}(A/J)\\hookrightarrow\\operatorname{Spec}A$ by [def-weil-closed-immersion]. The images of a finite set of $R$-module generators of $A$ generate $A/J$, proving finiteness by [def-weil-finite-integral-morphism]. Thus $\\pi$ is affine and separated by [lem-sfb-space-affine-locality]. Since $\\pi j=f$ is quasi-compact, [lem-sfb-space-qc-cancellation] makes $j$ quasi-compact. The equality $\\pi j=f$ is the equality $p(ej)=f$ of the compatible $T$-maps fixed in steps 3-6. This gives every required clause, without requiring $Y\\to T$ to be etale.",
+   "uses": [
+    "lem-sfb-space-closed-structure-finite-presentation",
+    "lem-sfb-space-separated-fp-composition",
+    "def-weil-closed-immersion",
+    "def-weil-finite-integral-morphism",
+    "lem-sfb-space-affine-locality",
+    "lem-sfb-space-qc-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 084Q (lemma-closed-immersion-finite-presentation), 03XQ (lemma-composition-finite-presentation), 03KS (lemma-quasi-compact-permanence); scheme affine quotient test: morphisms.tex Tag 01QO (lemma-characterize-closed-immersion)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-space-separated-fp-composition",
+  "lem-a1-separated-etale-space-scheme",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-unramified-quasi-finite-at-points",
+  "lem-sfb-space-normalization-quasifinite-locus",
+  "lem-sfb-space-relative-integral-factorization",
+  "lem-sfb-space-integral-qcqs-permanence",
+  "lem-sfb-space-qc-cancellation",
+  "lem-sfb-integral-space-finite-presentation-limit",
+  "lem-sfb-space-affine-limits-schematic-stages",
+  "lem-sfb-space-quasicompact-affine-tests",
+  "lem-sfb-space-limit-open-cover-descent",
+  "lem-sfb-space-eventual-closed-immersion",
+  "lem-sfb-space-qcqs-permanence",
+  "lem-sfb-space-qc-open-finite-presentation",
+  "lem-sfb-space-relative-lfp-permanence",
+  "lem-sfb-space-ideal-closed-subspace-correspondence",
+  "lem-sfb-space-closed-structure-finite-presentation",
+  "lem-sfb-space-finite-type-submodule-extension",
+  "def-weil-closed-immersion",
+  "def-weil-finite-integral-morphism",
+  "lem-sfb-space-affine-locality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tags 082K and 0874, with a finite-presentation refinement of the finite-stage/immersion-reversal argument: use Tag 09YA for the integral envelope, then Tags 05WT, 084Q and 0853 to extend the finite-type ideal. This avoids adding another finite-envelope or approximation node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact separated etale morphism of algebraic spaces into a quasi compact quasi separated base factors through a finite finitely presented space by an open immersion",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"AlgebraicGeometry.IsOpenImmersion.DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an open immersion descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes an open \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.isImmersion_iff_exists_of_quasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [AlgebraicGeometry.QuasiCompact f],\\n  AlgebraicGeometry.IsImmersion f ↔\\n    ∃ Z g₁ g₂,\\n      AlgebraicGeometry.IsOpenImmersion g₁ ∧\\n        AlgebraicGeometry.IsClosedImmersion g₂ ∧ CategoryTheory.CategoryStruct.comp g₁ g₂ = f\", \"doc\": \"For a quasi-compact morphism $ f: X \\\\to Y $ of schemes, $ f $ is an immersion if and only if there exists a scheme $ Z $ and morphisms $ g_1: X \\\\to Z $ (an open immersion) and $ g_2: Z \\\\to Y $ (a clos\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsPreimmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Preimmersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A property on morphisms $ f : X \\\\to Y $ between schemes, defined inductively to characterize when $ f $ satisfies the conditions of a preimmersion in algebraic geometry.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme immersion and etale permanence results and ring-level Zariski Main property do not supply a finite finitely presented envelope for algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"IsFinite\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme immersion and etale permanence results and ring-level Zariski Main property do not supply a finite finitely presented envelope for algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "ZariskiMain|zariskiMain|exists.*[Ff]inite.*[Ii]mmersion|[Ff]inite.*[Cc]ompactification",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme immersion and etale permanence results and ring-level Zariski Main property do not supply a finite finitely presented envelope for algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Zariski main theorem separated quasi finite morphism factors as open immersion and finite morphism of finite presentation",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.ZariskisMainProperty\", \"module\": \"Mathlib.RingTheory.ZariskisMainTheorem\", \"type\": \"(p : Ideal S) : Prop\", \"doc\": \"An ideal $\\\\mathfrak{p} \\\\subseteq S$ satisfies Zariski's Main Theorem property if there exists an element $r$ in the integral closure of $R$ in $S$ such that $r \\\\notin \\\\mathfrak{p}$ and the induced rin\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"[IsOpenImmersion f] : LocallyOfFinitePresentation f\", \"doc\": \"Every open immersion of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.isImmersion_iff_exists_of_quasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Immersion\", \"type\": \"[QuasiCompact f] :\\n  IsImmersion f ↔ ∃ (Z : Scheme) (g₁ : X ⟶ Z) (g₂ : Z ⟶ Y), IsOpenImmersion g₁ ∧ IsClosedImmersion g₂ ∧ g₁ ≫ g₂ = f\", \"doc\": \"For a quasi-compact morphism $ f: X \\\\to Y $ of schemes, $ f $ is an immersion if and only if there exists a scheme $ Z $ and morphisms $ g_1: X \\\\to Z $ (an open immersion) and $ g_2: Z \\\\to Y $ (a clos\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.of_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"(f : X ⟶ Y) (g : Y ⟶ Z) [IsFinite (f ≫ g)] [IsSeparated g] : IsFinite f\", \"doc\": \"If the composition of morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ is a finite morphism, and $ g $ is separated, then $ f $ is a finite morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [LocallyQuasiFinite f] : LocallyQuasiFinite (f ∣_ V)\", \"doc\": \"For any morphism $ f: X \\to Y $ of schemes and any open subset $ V $ of $ Y $, if $ f $ is locally quasi-finite, then the restriction of $ f $ to $ V $ is also locally quasi-finite.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"[IsFinite f] : LocallyQuasiFinite f\", \"doc\": \"Every finite morphism of schemes is quasi-finite. That is, if $ f: X \\to Y $ is a finite morphism of schemes, then $ f $ satisfies the conditions of being quasi-finite, which typically requires it to b\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"[IsImmersion f] : LocallyQuasiFinite f\", \"doc\": \"Every immersion of schemes is a quasi-finite morphism.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme immersion and etale permanence results and ring-level Zariski Main property do not supply a finite finitely presented envelope for algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite presentation refinement of Zariski main theorem for algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyOfFinitePresentation\\n  fun {R S} [CommRing R] [CommRing S] => RingHom.FinitePresentation\", \"doc\": \"A morphism of schemes is locally of finite presentation if and only if the corresponding ring homomorphism is finitely presented. This instance establishes that the scheme-theoretic property of being \"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyOfFinitePresentation f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n \", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is locally of finite presentation if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ contained in $ f^{-1\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"Algebra.ZariskisMainProperty\", \"module\": \"Mathlib/RingTheory/ZariskisMainTheorem\", \"type\": \"(R : Type u_1) → {S : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Ideal S → Prop\", \"doc\": \"An ideal $\\\\mathfrak{p} \\\\subseteq S$ satisfies Zariski's Main Theorem property if there exists an element $r$ in the integral closure of $R$ in $S$ such that $r \\\\notin \\\\mathfrak{p}$ and the induced rin\"}\n  {\"name\": \"Algebra.FinitePresentation.of_span_eq_top_target_of_isLocalizationAway\", \"module\": \"Mathlib/RingTheory/RingHom/FinitePresentation\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {ι : Type u_3}\\n  (s : ι → S),\\n  Ideal.span (Set.range s) = ⊤ →\\n    ∀ (T : ι → Type u_4) [inst_3 : (i : ι) → CommRing (T i)] [inst_4 : (i : ι) → Algebra R (T i)]\\n      [inst_5 : (i : ι) → Algebra S (T i)]\", \"doc\": \"If the ideal generated by the elements $ s_i $ in $ S $ equals the entire ring $ S $, and for each $ i $, $ T_i $ is a localization of $ R $ at $ s_i $ with $ T_i $ finitely presented over $ R $, then\"}\n  {\"name\": \"Algebra.FinitePresentation.of_isLocalizationAway\", \"module\": \"Mathlib/RingTheory/Localization/Away/AdjoinRoot\", \"type\": \"∀ {R : Type u_2} {S : Type u_3} {S' : Type u_4} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing S']\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R S'] [inst_5 : Algebra S S'] [IsScalarTower R S S'] (f : S)\\n  [IsLocalization.Away f S'] [Algebra.FinitePresentation R S], Algebra.FinitePresen\", \"doc\": \"Given commutative rings $ R $, $ S $, and $ S' $ with $ S $ finitely presented over $ R $, if $ S' $ is the localization of $ S $ at an element $ f $, then $ S' $ is also finitely presented over $ R $\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme immersion and etale permanence results and ring-level Zariski Main property do not supply a finite finitely presented envelope for algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "Zariski.*[Mm]ain|exists.*[Ii]sFinite|AlgebraicSpace",
+   "results": "{\"t\": \"2026-10-24T01:59:21Z\", \"tool\": \"grep\", \"query\": \"Zariski.*[Mm]ain|exists.*[Ii]sFinite|AlgebraicSpace\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Birational/Composition.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\"], \"digest\": \"cf45f8b84af9a046\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the inspected hits are scheme or ring declarations; none states the algebraic-space finite finitely presented envelope."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Zariski main theorem for algebraic spaces finite presentation refinement of finite factorization",
+   "results": "{\"t\": \"2026-10-24T01:59:22Z\", \"tool\": \"leansearch\", \"query\": \"Zariski main theorem for algebraic spaces finite presentation refinement of finite factorization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.ZariskisMainProperty\", \"Algebra.ZariskisMainProperty.of_isIntegral\", \"Algebra.zariskisMainProperty_iff'\", \"Algebra.zariskisMainProperty_iff\", \"Algebra.ZariskisMainProperty.restrictScalars\", \"Algebra.zariskisMainProperty_iff_exists_saturation_eq_top\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"Algebra.ZariskisMainProperty.trans\"], \"digest\": \"74588ebb4e64f45a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the inspected hits are scheme or ring declarations; none states the algebraic-space finite finitely presented envelope."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"IsFinite\"",
+   "results": "{\"t\": \"2026-10-24T01:59:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsEtale\\\", \\\"IsFinite\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the inspected hits are scheme or ring declarations; none states the algebraic-space finite finitely presented envelope."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact separated etale morphism of algebraic spaces to a quasi compact quasi separated space has a finite finitely presented compactification",
+   "results": "{\"t\": \"2026-10-24T01:59:25Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi compact separated etale morphism of algebraic spaces to a quasi compact quasi separated space has a finite finitely presented compactification\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.quasiCompact_of_compactSpace\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.quasiCompact_over_affine_iff\"], \"digest\": \"2b69b1d0433d7e72\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the inspected hits are scheme or ring declarations; none states the algebraic-space finite finitely presented envelope."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separated locally quasi finite morphism factors as a quasi compact open immersion into a finite morphism of finite presentation over a qcqs algebraic space",
+   "results": "{\"t\": \"2026-10-24T01:59:54Z\", \"tool\": \"leanfinder\", \"query\": \"A separated locally quasi finite morphism factors as a quasi compact open immersion into a finite morphism of finite presentation over a qcqs algebraic space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion\", \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.LocallyQuasiFinite.of_comp\"], \"digest\": \"ddb4c3baa983dc90\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the inspected hits are scheme or ring declarations; none states the algebraic-space finite finitely presented envelope."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-etale-ideal-factor",
+  "date": "2026-10-24",
+  "group": "Q50"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting subargument for proper-support Grothendieck existence in Stacks Tag 08BE, serving the inherited compactification/direct-image prerequisite chain of sk-thm-sf-ctf-stability; the Chow modification in the third paragraph. Construction input: Tag 088S proof, apply 088R to the chosen open immersion into projective space; affine-base projectivity is handled separately. Supporting Tag 088Q (lemma-find-common-blowups); U-admissible centres as defined in spaces-divisors.tex Tag 086B (definition-admissible-blowup).. Supporting Tag 088Q proof, choice of the two blowups whose strict transforms are open subspaces. Precise input to the Tag 087F proof: Tag 087E (lemma-flat-after-blowing-up), statement; strict transform convention spaces-divisors.tex Tag 0862 (definition-strict-transform). Supporting Tag 087E proof: Tag 087C (theorem-flatten-module); strict transform convention spaces-divisors.tex Tag 0862 (definition-strict-transform). Supporting Tag 087C proof, second paragraph: choose an ideal on the base by Tag 087B (lemma-push-ideal). Supporting Tag 087B proof: first paragraph, finite finitely presented compactification by Tag 0874.",
+   "via": [
+    "lem-sfb-space-etale-ideal-factor",
+    "lem-sfb-space-module-flattening-by-admissible-blowup",
+    "lem-sfb-space-flattening-by-admissible-blowup",
+    "lem-sfb-space-zariski-after-admissible-blowup",
+    "lem-sfb-space-common-admissible-blowups",
+    "lem-sfb-space-blowup-embedding-extension",
+    "lem-sfb-space-chow-dense-modification",
+    "lem-sfb-space-supported-adic-existence",
+    "lem-sfb-space-coherent-formal-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-etale-finite-fp-envelope",
+  "worker": "stage1",
+  "summary": "Proved the envelope using existing normalization, affine-limit, eventual-closed-immersion, ideal-extension and finite-presentation nodes only. Kept the statement and all inherited metadata unchanged. Checked chartwise etaleness versus representability, used the actual two-open cover for open descent, and obtained finite presentation by extending the finite-type ideal. No new nodes.",
+  "blueprint": "Current latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md, proof (3), compactification/direct-image prerequisite chain. The inherited from.place ends in Tag 087B, first paragraph, the Tag 0874 factorization. Steps 1-7 establish exactly that supporting input. blueprint_refs.py ancestor reports None for this inherited non-blueprint chain; its existing from.node and via are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-separated-etale-space-scheme",
+    "why": "Separated etale algebraic spaces over a scheme are schemes; applied on every scheme test to establish representability. This is a generic foundational tool, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "why": "Scheme-local quasi-finiteness of etale maps, needed to verify the normalization isomorphism-locus hypothesis. This is a generic foundational tool, not a replacement of a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-separated-etale-space-scheme",
+  "lem-weil-pbc-unramified-quasi-finite-at-points"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q26-d38dc0f4d",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-d38dc0f4d (reviewer sub-agent of L); spot-checked: Read the item in full: 7 steps, 0 new nodes, and it is still unsplit in live, so nothing supersedes it. Statement, stmt_deps and metadata are unchanged against live. Sources read: Stacks 082K and 0874 (statements and proofs), plus 0828, 09YA and 0853. The item is 0874 with 082K applied to quasi-compact separated étale f over a qcqs T, and nothing is weakened. The delivery's own route is valid and declared agent-written in proof_origin: normalization N by 0823/0ABR, then 09YA stages, 0827 open descent on the cover (W,N), 0828(1) eventual closed immersion, 05WT/084Q for a finite-type ideal, and 0853 to extend it. Every cited statement checks out against its step's hypotheses: representability through 03XX after base change; the normalization universal property matches the locus node word for word; the stages are qcqs with affine transitions; W to T is locally of finite type; the étale base-change ideal clause gives Y x_C V = W as closed subspaces; finiteness of A/J; and j is quasi-compact by 03KS. Small cases checked: W empty, T empty, f finite étale, non-Noetherian and non-reduced bases. Duplicate search on 0874/082K finds only the scheme version 0F2N, integral-only compactifications and 084Z, so no duplicate. The two declared tool uses (lem-a1-separated-etale-space-scheme and lem-weil-pbc-unramified-quasi-finite-at-points) are generic and accepted. Batch-5: all 19 listed citations reach sec-trace-formula only through the general definition def-trf-algebraic-space; they are general algebraic-space foundation results, none part of the trace formula or Poincaré duality, so nothing needs an assumption leaf. FIX (C4), step 3: quasi-compactness of W was taken from lem-sfb-space-quasicompact-fppf-local, whose quasi-compact morphisms are tested against quasi-compact spaces. Step 2 only proved a quasi-compact on affine tests. The step now cites lem-sfb-space-quasicompact-affine-tests (same unit, no cycle) with a quasi-compact scheme atlas and the chartwise calculus, drops the fppf-local node, adds Tag 03KG to the source, and recomputes proof_deps as the union of uses. The corrected file is fixes/dag/nodes/sec-six-functors-basics/lem-sfb-space-etale-finite-fp-envelope.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceEtaleFiniteFpEnvelope",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_finite_finitePresentation_envelope_of_etale",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceEtaleFiniteFpEnvelope.lean",
+  "statement": "theorem exists_finite_finitePresentation_envelope_of_etale {S : Scheme.{u}} {W T : AlgebraicSpace S} (f : W ⟶ T) (hTqc : IsQuasiCompact T.obj) (hTqs : IsAbsolutelyQuasiSeparated T) (hfqc : MapIsQuasiCompact f.hom.hom) (hfsep : MapIsSeparated f) (hfet : MapIsLocally (@Etale) f) : ∃ (Y : AlgebraicSpace S) (j : W ⟶ Y) (π : Y ⟶ T), IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) j.hom.hom ∧ MapIsQuasiCompact j.hom.hom ∧ IsRepresentableWith (fun _ _ p ↦ IsFinite p.left) π.hom.hom ∧ MapIsLocallyOfFinitePresentation π ∧ MapIsQuasiCompact π.hom.hom ∧ MapIsQuasiCompact (pullback.diagonal π.hom.hom) ∧ j ≫ π = f",
+  "branch": "sheaf-dag",
+  "by": "Q23",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the already landed algebraic-space morphism, atlas quasi-compactness, absolute quasi-separatedness and affine-test quasi-compactness predicates from the four added statement dependencies. No new notion and no statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-55d1276c6",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Read the item node, the 13 stmt_deps and their Lean declarations (MapIsLocally, MapIsSeparated, MapIsLocallyOfFinitePresentation, IsQuasiCompact, IsAbsolutelyQuasiSeparated, MapIsQuasiCompact, IsRepresentableWith), and Stacks 082K/0874. Every hypothesis (T quasi-compact by existential atlas, T absolutely quasi-separated by 0AHR test, f quasi-compact on affine tests, separated by closed-immersion diagonal, chartwise étale) and every conclusion clause (j representable open immersion and quasi-compact; pi finite on scheme tests, locally of finite presentation, quasi-compact, quasi-compact diagonal; j ≫ π = f) matches the node, none weaker or stronger. Node diff vs live: only lean plus 4 landed definition nodes added to stmt_deps (allowed). Statement verbatim; sorry only; source and blueprint docstrings with the 7 steps; no definitions, so nothing hollow; edge cases (W, T, S empty; f finite étale; identity) and single universe u fine; no duplicate predicate in lean/Sheaf or Mathlib. Advisory: MapIsQuasiSeparated could be used by name. No compile needed (no file changed)."
+ }
+}

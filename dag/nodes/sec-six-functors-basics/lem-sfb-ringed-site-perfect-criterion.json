@@ -1,0 +1,268 @@
+{
+ "id": "lem-sfb-ringed-site-perfect-criterion",
+ "kind": "statement",
+ "title": "Perfectness criterion on a ringed site",
+ "statement": "Let $(\\mathcal C,\\mathcal O)$ be a ringed site, small relative to the universe of its module sheaves [def-weil-size-convention], and let $K\\in D(\\mathcal O)$. Use unbounded derived categories of sheaves of modules [def-weil-abstract-derived-category, def-weil-sheaf-of-modules-category]. A strictly perfect complex is a bounded complex whose terms are direct summands of finite free structure modules. On a ringed site, an object $K$ is $m$-pseudo-coherent if locally on every object of the site there are a strictly perfect complex $P^\\bullet$ and a map $P^\\bullet\\to K$ in the derived category inducing isomorphisms on $H^j$ for $j>m$ and a surjection on $H^m$; it is pseudo-coherent if this holds for every integer $m$. Write $\\otimes^{\\mathbf L}$ for the derived tensor product, computed by a K-flat resolution [def-pc-kflat-complex] and the total tensor complex [def-pc-tensor-complex-sheaves]. An object $K$ has Tor amplitude in $[a,b]$, for integers $a\\le b$, if $H^j(K\\otimes^{\\mathbf L}F)=0$ for every structure-module sheaf $F$ and every $j\\notin[a,b]$. It has finite Tor dimension if such an interval exists; it locally has finite Tor dimension if locally on every site object some such interval exists, allowed to depend on the covering member. Then $K$ is perfect, meaning locally on every site object isomorphic in the derived category to a strictly perfect complex, if and only if $K$ is pseudo-coherent and locally has finite Tor dimension. No quasi-compactness, coherence of $\\mathcal O$, or global boundedness of $K$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08G8 (lemma-perfect), with Tags 08FT (definition-pseudo-coherent), 08FZ (definition-tor-amplitude), and 08G5 (definition-perfect)."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-size-convention",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-sfb-ringed-site-pseudocoherent-complex",
+  "def-sfb-ringed-site-locally-finite-tor-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Suppose $K$ is perfect. For each site object choose a cover on which $K$ is isomorphic to a bounded complex $P$ of finite-free summands. The same isomorphism is an $m$-pseudo-coherent approximation for every $m$, so the definition gives pseudo-coherence. Each term is flat: after tensoring an exact sequence, its tensor sequence is a retract of the exact sequence obtained by taking a finite direct sum of that sequence, hence is exact. Here tensor is additive and its unit is the structure sheaf. Choose any interval containing the finitely many nonzero degrees of $P$ (choose $[0,0]$ for the zero complex). The bounded-flat-model equivalence gives the Tor bound for $K$ on this covering member, as required.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-sp-ringed-site-tor-flat-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08G8 (lemma-perfect), implication (1) to (2); Tag 08G1 (lemma-tor-amplitude)."
+   }
+  },
+  {
+   "text": "Conversely fix an object $U$. Choose a cover on which $K$ has Tor amplitude $[a,b]$, allowing a different interval on each member. Work on one such localized site. Pseudo-coherence restricts: apply its covering condition to each object over $U$; exact restriction preserves the cohomology comparisons, and relocalization identifies the resulting slices with the original slices. Choose an $(a-1)$-approximation $P_0\\to K$ by a strictly perfect complex. Replace $P_0$ by its brutal truncation $P=\\sigma_{\\ge a-1}P_0$ and compose the inclusion with this map. The new complex is still bounded with finite-free-summand terms and its comparison is an isomorphism on $H^j$ for every $j\\ge a$: kernels and incoming images in those degrees have not changed. Its terms are flat by the retract argument of Step 1. The Tor interval persists under any further localization by the cited restriction lemma.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-sf-site-tor-interval-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08G8 (lemma-perfect), implication (2) to (1); Tag 08G7 (lemma-perfect-precise), first paragraph."
+   }
+  },
+  {
+   "text": "Put $Q=\\operatorname{coker}(P^{a-1}\\to P^a)$. The flat-approximation-opcycle lemma applies on this localized site: $P$ is bounded flat, zero below $a-1$, its comparison is an isomorphism in every degree at least $a$, and $K$ has the required universal Tor interval. Thus $Q$ is flat. It is also finitely presented. Indeed choose splittings $P^{a-1}\\xrightarrow{i_1}\\mathcal O^r\\xrightarrow{p_1}P^{a-1}$ and $P^a\\xrightarrow{i_0}\\mathcal O^s\\xrightarrow{p_0}P^a$. With $e=i_0p_0$, the map $\\mathcal O^{r+s}\\to\\mathcal O^s$, $(x,y)\\mapsto i_0d^{a-1}p_1(x)+(1-e)y$, has cokernel $Q$: its second summand kills the complement of $P^a$, and its first kills exactly the image of $d^{a-1}$. This gives a finite presentation, also after restriction to every slice.",
+   "uses": [
+    "lem-sfb-flat-approximation-opcycle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08G7 (lemma-perfect-precise), flatness of E′ and the finite-presentation hypothesis preceding application of Modules on Sites Tag 08FD."
+   }
+  },
+  {
+   "text": "Form the good lower truncation $T=\\tau_{\\ge a}P$: its degree-$a$ term is $Q$, its higher terms are those of $P$, and its lower terms are zero. For the standard t-structure this is the lower truncation of $P$. The Tor assumption, tested on $\\mathcal O$, gives $K\\in D^{\\ge a}$. By the left-adjoint property of lower truncation, the comparison $P\\to K$ factors through $T\\to K$. For $j\\ge a$, the projection $P\\to T$ induces the identity on cohomology, so this factor induces $H^j(P)\\cong H^j(K)$; below $a$ both objects have zero cohomology. Both objects are bounded below, so the cited cohomology criterion makes $T\\to K$ an isomorphism in the derived category.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-weil-heart-short-exact-triangles",
+    "lem-weil-pbc-derived-plus-iso-on-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08G7 (lemma-perfect-precise), lower truncation implicit in the final displayed complex. Standard good truncation and its adjunction identify its derived object."
+   }
+  },
+  {
+   "text": "Apply the flat, locally finitely presented sheaf lemma to $Q$, whose two hypotheses were proved in Step 3. On a further cover $Q$ is a direct summand of a finite free structure module. Restrict $T$ to that cover. Exact restriction preserves the cokernel description and the derived isomorphism of Step 4. All its other terms retain their finite-free splittings. Hence this restricted bounded complex is strictly perfect and represents the restriction of $K$. Do not brutally cut off the high terms at $b$: their existing finite upper bound suffices. Compose the covers chosen for the local Tor bound, the pseudo-coherent approximation and the splitting of $Q$. Relocalization identifies every final representative with a representative on the corresponding original slice. Since $U$ was arbitrary this is exactly perfectness.",
+   "uses": [
+    "lem-sf-site-flat-fp-finite-retract",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08G7 (lemma-perfect-precise), final paragraph, using Modules on Sites Tag 08FD (lemma-flat-locally-finite-presentation); Tag 08G8, locality."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-sp-ringed-site-tor-flat-model",
+  "def-pur-localized-ringed-site",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-site-tor-interval-restriction",
+  "lem-sfb-flat-approximation-opcycle",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-weil-heart-short-exact-triangles",
+  "lem-weil-pbc-derived-plus-iso-on-cohomology",
+  "lem-sf-site-flat-fp-finite-retract"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08G8 (lemma-perfect), both implications, expanding its invocation of Tag 08G7 (lemma-perfect-precise)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a ringed site a derived object is perfect if and only if it is pseudo coherent and locally has finite Tor dimension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.IsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, this proposition holds if $ X $ belongs to the family $ \\\\mathcal{G}_n $ of the T-structure defined\"}\n  {\"name\": \"DerivedCategory.TStructure.t\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : HasDerivedCategory C] → CategoryTheory.Triangulated.TStructure (DerivedCategory C)\", \"doc\": \"The T-structure on the derived category of an abelian category is defined by two families of objects: $\\\\mathcal{L}_n$ consisting of objects isomorphic to cochain complexes strictly supported in degree\"}\n  {\"name\": \"DerivedCategory.isGE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsGE n ↔ K.IsGE n\", \"doc\": \"For a cochain complex $ K $ in an abelian category and integer $ n $, the image of $ K $ under the localization functor $ Q $ to the derived category satisfies the cohomological support condition $ \\\\t\"}\n  {\"name\": \"DerivedCategory.isLE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsLE n ↔ K.IsLE n\", \"doc\": \"For any cochain complex $ K $ with integer indices and any integer $ n $, the object $ Q(K) $ in the derived category belongs to the left subcategory $ \\\\mathcal{L}_n $ of the T-structure at degree $ n\"}\n  {\"name\": \"HasDerivedCategory.standard\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"(C : Type u) → [inst : CategoryTheory.Category.{v, u} C] → [inst_1 : CategoryTheory.Abelian C] → HasDerivedCategory C\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsGE n], (DerivedCategory.Q.obj K).IsGE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the family $ \\\\mathcal{G}_n $ of the T-structure defined by cohomological support, then its image under the localization functor $ Q $ to the deriv\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsGE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ belongs to the $ \\\\mathcal{G}_n $ family of the T-structure (i.e., is isomorphic to a coc\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsLE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyLE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$ that belongs to the left subcategory $\\\\mathcal{L}_n$ of the T-structure at degree $n$, there exists a cochain complex $K\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern morphism properties, cohomological bounds, or module presentations, not this assertion about perfect or pseudo-coherent complexes and Tor amplitude"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect complexes on ringed sites characterized by pseudo coherence and locally bounded derived tensor amplitude",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"(M : SheafOfModules.{u} R) [M.IsFinitePresentation] : M.IsQuasicoherent\", \"doc\": \"Every sheaf of modules with finite presentation over a ring sheaf is quasicoherent.\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.TStructure\", \"type\": \"(X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b] :\\n  ∃ (K : CochainComplex C ℤ) (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.TStructure\", \"type\": \"[HasExt.{w} C] (K L : CochainComplex C ℤ) [K.IsGE 0] [K.IsLE 0] [L.IsGE 0] [L.IsLE 0] :\\n  HasSmallLocalizedShiftedHom.{w} (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) ℤ K L\", \"doc\": \"For cochain complexes $ K $ and $ L $ concentrated at degree 0 (satisfying both $ K $ is bounded below at 0 and $ K $ is bounded above at 0, and similarly for $ L $), the localized hom-sets between $ \"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"HomologicalComplexUpToQuasiIso\", \"module\": \"Mathlib.Algebra.Homology.Localization\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {ι : Type u_2} →\\n      (c : ComplexShape ι) →\\n        [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C] →\\n          [inst_2 : CategoryTheory.CategoryWithHomology C] →\\n            [(HomologicalComplex.quasiIso C c).HasLocalizati\", \"doc\": \"The category obtained by localizing the category of homological complexes (with shape $\\\\iota$ in category $\\\\mathcal{C}$) at quasi-isomorphisms, which are morphisms inducing isomorphisms on all homolog\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern morphism properties, cohomological bounds, or module presentations, not this assertion about perfect or pseudo-coherent complexes and Tor amplitude"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Perfect\", \"PseudoCoherent\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern morphism properties, cohomological bounds, or module presentations, not this assertion about perfect or pseudo-coherent complexes and Tor amplitude"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coherent.*perfect|perfect.*pseudo.?coherent",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern morphism properties, cohomological bounds, or module presentations, not this assertion about perfect or pseudo-coherent complexes and Tor amplitude"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A perfect complex on a ringed site is equivalent to pseudo coherent with locally finite Tor dimension",
+   "results": "{\"t\": \"2026-10-23T12:30:38Z\", \"tool\": \"leanfinder\", \"query\": \"A perfect complex on a ringed site is equivalent to pseudo coherent with locally finite Tor dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.IsFiniteType\", \"DerivedCategory.IsGE\", \"DerivedCategory.TStructure.t\", \"DerivedCategory.isGE_Q_obj_iff\", \"CochainComplex.IsKProjective\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.IsLE\"], \"digest\": \"10776e98c89f5334\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: derived-category support bounds and sheaf finite presentations do not characterize perfect objects by pseudo-coherence and locally finite Tor dimension"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Perfect\", \"PseudoCoherent\"",
+   "results": "{\"t\": \"2026-10-23T12:35:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"Perfect\\\", \\\"PseudoCoherent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: derived-category support bounds and sheaf finite presentations do not characterize perfect objects by pseudo-coherence and locally finite Tor dimension"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect complexes of sheaves are pseudo coherent and locally of finite Tor dimension",
+   "results": "{\"t\": \"2026-10-23T12:35:38Z\", \"tool\": \"leansearch\", \"query\": \"Perfect complexes of sheaves are pseudo coherent and locally of finite Tor dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.IsQuasicoherent.mk\", \"SheafOfModules.IsQuasicoherent.casesOn\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.IsQuasicoherent\", \"SheafOfModules.IsQuasicoherent.recOn\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\"], \"digest\": \"f52058bdeba64fb9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: derived-category support bounds and sheaf finite presentations do not characterize perfect objects by pseudo-coherence and locally finite Tor dimension"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coherent.*perfect|perfect.*pseudo.?coherent",
+   "results": "{\"t\": \"2026-10-23T12:36:58Z\", \"tool\": \"grep\", \"query\": \"pseudo.?coherent.*perfect|perfect.*pseudo.?coherent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: derived-category support bounds and sheaf finite presentations do not characterize perfect objects by pseudo-coherence and locally finite Tor dimension"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-etale-detects-perfect",
+  "date": "2026-10-23",
+  "group": "N8"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 08HG (lemma-descend-perfect), with the ringed-site perfectness convention of sites-cohomology.tex Tag 08G5 (definition-perfect). Supporting input for 08HG: Tag 08G8 (lemma-perfect), with Tags 08FT (definition-pseudo-coherent), 08FZ (definition-tor-amplitude), and 08G5 (definition-perfect).",
+   "via": [
+    "lem-sfb-etale-detects-perfect",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-ringed-site-perfect-criterion",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Followed Stacks 08G8, expanding 08G7 into a local finite approximation, a flat lower cokernel, an explicit finite presentation, good truncation and local finite-free splittings. Added only the bounded-flat approximation opcycle lemma; reused the existing arbitrary-site flat-model and flat-finite-presentation lemmas. No global boundedness, points, or coherence is introduced.",
+  "blueprint": "Supporting perfectness criterion for the inherited direct-image route; realizes Stacks 08G8 in both directions, and 08G7 without assuming a perfect representative in the converse. The newest blueprint does not itself state this supporting lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic tool on arbitrary module sheaves or derived categories used for the elementary flatness of finite-free summands. No statement in this unit supplies this generic tool."
+   },
+   {
+    "node": "lem-sp-ringed-site-tor-flat-model",
+    "why": "Generic tool on arbitrary module sheaves or derived categories used for the forward finite Tor bound. No statement in this unit supplies this generic tool."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic tool on arbitrary module sheaves or derived categories used for restriction of cohomology comparisons and truncations. No statement in this unit supplies this generic tool."
+   },
+   {
+    "node": "lem-sf-site-tor-interval-restriction",
+    "why": "Generic tool on arbitrary module sheaves or derived categories used for preserving the local Tor interval under refinement. No statement in this unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-heart-short-exact-triangles",
+    "why": "Generic tool on arbitrary module sheaves or derived categories used for the lower-truncation adjunction. No statement in this unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-derived-plus-iso-on-cohomology",
+    "why": "Generic tool on arbitrary module sheaves or derived categories used for recognizing the bounded-below truncation comparison as an isomorphism. No statement in this unit supplies this generic tool."
+   },
+   {
+    "node": "lem-sf-site-flat-fp-finite-retract",
+    "why": "Generic tool on arbitrary module sheaves or derived categories used for the final local splitting of the flat finitely presented cokernel. No statement in this unit supplies this generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-sp-ringed-site-tor-flat-model",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-site-tor-interval-restriction",
+  "lem-weil-heart-short-exact-triangles",
+  "lem-weil-pbc-derived-plus-iso-on-cohomology",
+  "lem-sf-site-flat-fp-finite-retract"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q95-cb9167c82",
+  "group": "Q95",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-cb9167c82 (reviewer sub-agent of L); spot-checked: I read Stacks 08G7 and 08G8 in sites-cohomology.tex in full. The item statement is unchanged and matches 08G8 on an arbitrary ringed site: 08FT pseudo-coherence for every m, the 08FZ Tor amplitude with a local interval that may vary by covering member, and 08G5 perfectness. There is no repair note and live/side-live still have the item unsplit, so the delivery is neither a re-split nor superseded. It cites no SGA source. Step 1: an isomorphism to a strictly perfect complex is an m-approximation for every m; summands of O^n are flat by additivity and unit (lem-pc-sheaf-modules-tensor-closed), and lem-sp-ringed-site-tor-flat-model (2)=>(1) gives the Tor bound. Step 2: relocalization and exact restriction carry pseudo-coherence, lem-sf-site-tor-interval-restriction carries the Tor interval, and the brutal truncation at a-1 is a subcomplex that keeps H^j for j>=a. Step 3: every hypothesis of the new node holds. I checked that the map (x,y) -> i0 d p1 x + (1-e)y has cokernel exactly Q, which gives a global finite presentation. Step 4: the good truncation T is quasi-isomorphic to P/tau<=a-1 P, K lies in D>=a by the Tor test on O, the factorization uses the left adjoint of clause (1) of the heart lemma, and DerivedCategory.Plus.isIso_iff applies because T is bounded and K is in D>=a. Step 5: lem-sf-site-flat-fp-finite-retract gives local finite-free retracts of Q, so the restricted T is strictly perfect and the covers compose. New node lem-sfb-flat-approximation-opcycle is true by the 08G7 cone argument: C is R[2-a] with R = ker d^(a-1), tensoring with N makes S⊗N -> P^a⊗N injective, so Tor_1(Q,N) = 0 and Q is flat by 08FG. I tested it on P=O with K=0, and on [O -x-> O] over k[x] and [Z -2-> Z] over Z, which the Tor hypothesis excludes as it should. It is self-contained, statement-only, records all three search kinds, and is not a clause of the item. Duplicate search: opcycles-retract assumes an isomorphism, site-flat-quotient-tensor-ses is a smaller ingredient, the lem-pc-* 08CQ nodes are scheme-only and the remaining perfect-criterion nodes are ring-level. I accept the seven declared tool uses as generic. Advisory only: the unchanged item statement says locally without citing the localization or derived-restriction definitions in stmt_deps."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingedSitePerfectCriterion",
+  "declaration": "SheafOfModules.isPerfectOnRingedSite_iff_pseudoCoherent_locallyFiniteTor",
+  "file": "lean/Sheaf/Algebra/Homology/RingedSitePerfectCriterion.lean",
+  "statement": "theorem isPerfectOnRingedSite_iff_pseudoCoherent_locallyFiniteTor {C : Type u} [Category.{v} C] (J : GrothendieckTopology C) [HasSheafify J AddCommGrpCat.{max u v r}] [J.WEqualsLocallyBijective AddCommGrpCat.{max u v r}] [∀ U : C, HasSheafify (J.over U) AddCommGrpCat.{max u v r}] [∀ U : C, (J.over U).WEqualsLocallyBijective AddCommGrpCat.{max u v r}] (R : Sheaf J CommRingCat.{max u v r}) [HasDerivedCategory.{w} (ringedSiteModules.{max u v r} ((sheafCompose J (forget₂ CommRingCat.{max u v r} RingCat.{max u v r})).obj R))] [∀ U : C, HasDerivedCategory.{w'} (ringedSiteModules.{max u v r} (((sheafCompose J (forget₂ CommRingCat.{max u v r} RingCat.{max u v r})).obj R).over U))] (K : DerivedCategory (ringedSiteModules.{max u v r} ((sheafCompose J (forget₂ CommRingCat.{max u v r} RingCat.{max u v r})).obj R))) : IsPerfectOnRingedSiteOfUniverses.{u, v, r} R K ↔ IsPseudoCoherentOnRingedSite.{u, v, r, w, w'} R K ∧ HasLocallyFiniteTorDimensionOnRingedSite.{u, v, r, w, w'} R K",
+  "branch": "sheaf-dag",
+  "by": "Q99",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2d2f703b1",
+  "group": "Q99",
+  "result": "fix",
+  "note": "Lean exact against Stacks 08G8 (+08FT/08FU/08FZ/08G5). Statement unchanged; stmt_deps gain the two new def nodes plus the landed owner def-weil-pbc-strict-perfect-coefficient-package (allowed: STMT_DEPS MAY GAIN LANDED NODES). Perfectness = existing IsPerfectOnRingedSiteOfUniverses (one definition per notion); new def-sfb-ringed-site-pseudocoherent-complex (for all m, covering sieve, strictly perfect P, derived alpha into canonical restriction K|_V, IsIso H^j for j>m, Epi H^m) and def-sfb-ringed-site-locally-finite-tor-dimension (covering sieve, interval chosen after V, existing HasFiniteRingedSiteTorAmplitudeOfUniverses on R.over V testing all O_V-modules) are faithful, have real bodies and no duplicate (pc version scheme-only). Biconditional; no qc/coherence/bounds; universes u v r w w' independent; edge cases (empty site/cover, K=0, zero ring, a=b, negative m) consistent. lean.statement verbatim x3; docstrings/source/blueprint/5-step proof present; sorry only. Sole fault H11: second reading was the worker's self-check -> fixes/lem-sfb-ringed-site-perfect-criterion.report.md (worker report + New nodes verbatim + independent clause-by-clause reading). No Lean changed, no compile run."
+ }
+}

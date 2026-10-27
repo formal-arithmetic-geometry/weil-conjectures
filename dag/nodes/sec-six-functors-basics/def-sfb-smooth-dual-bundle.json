@@ -1,0 +1,116 @@
+{
+ "id": "def-sfb-smooth-dual-bundle",
+ "kind": "definition",
+ "title": "Smooth fibrewise dual bundle",
+ "statement": "Let $N$ be a smooth real manifold [def-sfb-smooth-real-manifold] and $E\\to N$ a smooth rank-$q$ real vector bundle [def-sfb-smooth-real-vector-bundle]. The dual bundle $E^*\\to N$ is the smooth bundle with fibre $E_x^*=\\operatorname{Hom}_{\\mathbf R,\\mathrm{cont}}(E_x,\\mathbf R)$, the continuous real-linear maps $E_x\\to\\mathbf R$; these are all real-linear maps because the fibres are finite-dimensional Hausdorff vector spaces. Its local trivializations are the duals of those of $E$: if vector coordinates change by $v_j=g_{ji}(x)v_i$, covector column coordinates change by $\\lambda_j=g_{ji}(x)^{-\\mathsf T}\\lambda_i$. Evaluation is the fibrewise map $(\\lambda,v)\\mapsto\\lambda(v)$.",
+ "source": {
+  "document": "Mathlib/Geometry/Manifold/VectorBundle/Hom.lean",
+  "place": "specializes in one line per clause: ContMDiffVectorBundle.continuousLinearMap, Hom.lean:128–130, with E₂=Bundle.Trivial N ℝ; its smoothness instance is Bundle.Trivial.contMDiffVectorBundle, VectorBundle/Basic.lean:616–621. LinearMap.toContinuousLinearMap, Mathlib/Topology/Algebra/Module/FiniteDimension.lean:306–310 (assumptions 301–303), identifies all fibre linear maps with continuous ones. Dual coordinate changes are the specialization of continuousLinearMapCoordChange, Mathlib/Topology/VectorBundle/Hom.lean:61–64, with the real-line transition the identity."
+ },
+ "stmt_deps": [
+  "def-sfb-smooth-real-manifold",
+  "def-sfb-smooth-real-vector-bundle"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The dual of a smooth real vector bundle is the bundle of continuous linear maps to the trivial real line bundle",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ContMDiffVectorBundle.continuousLinearMap\", \"module\": \"Mathlib/Geometry/Manifold/VectorBundle/Hom\", \"type\": \"∀ {𝕜 : Type u_1} {B : Type u_2} {F₁ : Type u_3} {F₂ : Type u_4} {n : WithTop ℕ∞} {E₁ : B → Type u_6} {E₂ : B → Type u_7}\\n  [inst : NontriviallyNormedField 𝕜] [inst_1 : (x : B) → AddCommGroup (E₁ x)] [inst_2 : (x : B) → Module 𝕜 (E₁ x)]\\n  [inst_3 : NormedAddCommGroup F₁] [inst_4 : NormedSpace 𝕜 F₁] [\", \"doc\": \"Given a manifold with corners $ B $ modeled on a normed vector space with corners, and two smooth vector bundles $ E_1 $ and $ E_2 $ over $ B $ with fibers modeled on normed vector spaces over a nontr\"}\n  {\"name\": \"Bundle.ContinuousLinearMap.vectorBundle\", \"module\": \"Mathlib/Topology/VectorBundle/Hom\", \"type\": \"∀ {𝕜₁ : Type u_1} [inst : NontriviallyNormedField 𝕜₁] {𝕜₂ : Type u_2} [inst_1 : NontriviallyNormedField 𝕜₂]\\n  (σ : 𝕜₁ →+* 𝕜₂) {B : Type u_3} (F₁ : Type u_4) [inst_2 : NormedAddCommGroup F₁] [inst_3 : NormedSpace 𝕜₁ F₁]\\n  (E₁ : B → Type u_5) [inst_4 : (x : B) → AddCommGroup (E₁ x)] [inst_5 : (x : B) \", \"doc\": \"Given two vector bundles $ E_1 $ and $ E_2 $ over a base space $ B $, with fibers modeled on normed vector spaces $ F_1 $ and $ F_2 $ over nontrivially normed fields, and a scalar action $ \\\\sigma $ co\"}\n  {\"name\": \"Bundle.ContinuousLinearMap.fiberBundle\", \"module\": \"Mathlib/Topology/VectorBundle/Hom\", \"type\": \"{𝕜₁ : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜₁] →\\n    {𝕜₂ : Type u_2} →\\n      [inst_1 : NontriviallyNormedField 𝕜₂] →\\n        (σ : 𝕜₁ →+* 𝕜₂) →\\n          {B : Type u_3} →\\n            (F₁ : Type u_4) →\\n              [inst_2 : NormedAddCommGroup F₁] →\\n                [inst_3 : NormedSpace 𝕜₁ F\", \"doc\": \"The space of continuous linear maps between the fibers of two vector bundles, compatible with a scalar action $\\\\sigma$, forms a fiber bundle over the base space. The topology on the total space is def\"}\n  {\"name\": \"Bundle.ContinuousLinearMap.vectorPrebundle\", \"module\": \"Mathlib/Topology/VectorBundle/Hom\", \"type\": \"{𝕜₁ : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜₁] →\\n    {𝕜₂ : Type u_2} →\\n      [inst_1 : NontriviallyNormedField 𝕜₂] →\\n        (σ : 𝕜₁ →+* 𝕜₂) →\\n          {B : Type u_3} →\\n            (F₁ : Type u_4) →\\n              [inst_2 : NormedAddCommGroup F₁] →\\n                [inst_3 : NormedSpace 𝕜₁ F\", \"doc\": \"A vector prebundle structure where each fiber over a base point $ x $ consists of continuous linear maps from $ E_1(x) $ to $ E_2(x) $ compatible with a scalar action $ \\\\sigma: \\\\mathbb{K}_1 \\\\to \\\\mathb\"}\n  {\"name\": \"instContMDiffVectorBundleOfNatWithTopENat_1\", \"module\": \"Mathlib/Geometry/Manifold/VectorBundle/Basic\", \"type\": \"∀ {𝕜 : Type u_1} {B : Type u_2} (F : Type u_4) (E : B → Type u_6) [inst : NontriviallyNormedField 𝕜] {EB : Type u_7}\\n  [inst_1 : NormedAddCommGroup EB] [inst_2 : NormedSpace 𝕜 EB] {HB : Type u_8} [inst_3 : TopologicalSpace HB]\\n  {IB : ModelWithCorners 𝕜 EB HB} [inst_4 : TopologicalSpace B] [inst_5 :\", \"doc\": \"The total space $ E $ forms a continuous vector bundle over a manifold with corners $ B $, where the transition maps between local trivializations are continuous (i.e., of class $ C^0 $) and compatibl\"}\n  {\"name\": \"Bundle.ContinuousLinearMap.vectorPrebundle.isContMDiff\", \"module\": \"Mathlib/Geometry/Manifold/VectorBundle/Hom\", \"type\": \"∀ {𝕜 : Type u_1} {B : Type u_2} {F₁ : Type u_3} {F₂ : Type u_4} {n : WithTop ℕ∞} {E₁ : B → Type u_6} {E₂ : B → Type u_7}\\n  [inst : NontriviallyNormedField 𝕜] [inst_1 : (x : B) → AddCommGroup (E₁ x)] [inst_2 : (x : B) → Module 𝕜 (E₁ x)]\\n  [inst_3 : NormedAddCommGroup F₁] [inst_4 : NormedSpace 𝕜 F₁] [\", \"doc\": \"The vector prebundle whose fibers consist of continuous linear maps between the fibers of two vector bundles is smooth (of class $C^n$) with respect to the given model with corners $IB$. This means it\"}\n  {\"name\": \"instContMDiffVectorBundleOfSomeENatTopOfLEInfty\", \"module\": \"Mathlib/Geometry/Manifold/VectorBundle/Basic\", \"type\": \"∀ {𝕜 : Type u_1} {B : Type u_2} (F : Type u_4) (E : B → Type u_6) [inst : NontriviallyNormedField 𝕜] {EB : Type u_7}\\n  [inst_1 : NormedAddCommGroup EB] [inst_2 : NormedSpace 𝕜 EB] {HB : Type u_8} [inst_3 : TopologicalSpace HB]\\n  {IB : ModelWithCorners 𝕜 EB HB} [inst_4 : TopologicalSpace B] [inst_5 :\", \"doc\": \"If a vector bundle over a manifold with corners is smooth (C^∞), then it is also a C^a vector bundle for any extended natural number a that is less than or equal to infinity.\"}\n  {\"name\": \"instContMDiffVectorBundleOfTopWithTopENat\", \"module\": \"Mathlib/Geometry/Manifold/VectorBundle/Basic\", \"type\": \"∀ {𝕜 : Type u_1} {B : Type u_2} (F : Type u_4) (E : B → Type u_6) [inst : NontriviallyNormedField 𝕜] {EB : Type u_7}\\n  [inst_1 : NormedAddCommGroup EB] [inst_2 : NormedSpace 𝕜 EB] {HB : Type u_8} [inst_3 : TopologicalSpace HB]\\n  {IB : ModelWithCorners 𝕜 EB HB} [inst_4 : TopologicalSpace B] [inst_5 :\", \"doc\": \"If a vector bundle over a manifold with corners has a smooth structure of class $ C^k $ for some $ k $, then it also has a smooth structure of class $ C^a $ for any extended natural number $ a $ (incl\"}",
+   "date": "2026-10-24",
+   "verdict": "match: smooth Hom bundle specialized to the trivial real line, with the explicit finite-dimensional linear/continuous-linear equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth continuous linear map bundle specialized to fibrewise duals of finite dimensional vector bundles",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"contMDiffWithinAt_hom_bundle\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.Hom\", \"type\": \"(f : M → LE₁E₂) {s : Set M} {x₀ : M} :\\n  ContMDiffWithinAt IM (IB.prod 𝓘(𝕜, F₁ →L[𝕜] F₂)) n f s x₀ ↔\\n    ContMDiffWithinAt IM IB n (fun x ↦ (f x).1) s x₀ ∧\\n      ContMDiffWithinAt IM 𝓘(𝕜, F₁ →L[𝕜] F₂) n\\n        (fun x ↦ inCoordinates F₁ E₁ F₂ E₂ (f x₀).1 (f x).1 (f x₀).1 (f x).1 (f x).2) s x₀\", \"doc\": \"A function $ f: M \\to L(E_1, E_2) $ is $ C^n $-smooth within a set $ S $ at $ x_0 $ if and only if both its first component map $ M \\to E_1 $ is $ C^n $-smooth within $ S $ at $ x_0 $, and its second co\"}\n  {\"name\": \"ContMDiffOn.clm_bundle_apply\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.Hom\", \"type\": \"(hϕ :\\n    ContMDiffOn IM (IB.prod 𝓘(𝕜, F₁ →L[𝕜] F₂)) n\\n      (fun m ↦ TotalSpace.mk' (F₁ →L[𝕜] F₂) (E := fun (x : B) ↦ (E₁ x →L[𝕜] E₂ x)) (b m) (ϕ m)) s)\\n  (hv : ContMDiffOn IM (IB.prod 𝓘(𝕜, F₁)) n (fun m ↦ TotalSpace.mk' F₁ (b m) (v m)) s) :\\n  ContMDiffOn IM (IB.prod 𝓘(𝕜, F₂)) n (fun m ↦ TotalSpace\", \"doc\": \"If $\\\\phi$ is a smooth section of a bundle of continuous linear maps $E_1 \\\\to E_2$ over base space $B$, and $v$ is a smooth section of the $E_1$-bundle, then the section obtained by applying $\\\\phi$ to \"}\n  {\"name\": \"ContMDiffVectorBundle.continuousLinearMap\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.Hom\", \"type\": \": ContMDiffVectorBundle n (F₁ →L[𝕜] F₂) ((fun (b : B) ↦ E₁ b →L[𝕜] E₂ b)) IB\", \"doc\": \"Given a manifold with corners $ B $ modeled on a normed vector space with corners, and two smooth vector bundles $ E_1 $ and $ E_2 $ over $ B $ with fibers modeled on normed vector spaces over a nontr\"}\n  {\"name\": \"Bundle.mdifferentiableOn_proj\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.MDifferentiable\", \"type\": \"{s : Set (TotalSpace F E)} : MDifferentiableOn (IB.prod 𝓘(𝕜, F)) IB (π F E) s\", \"doc\": \"The projection map $\\\\pi : E \\\\to B$ of a fiber bundle is $C^\\\\infty$-differentiable on any subset $S \\\\subseteq E$ with respect to the product model with corners $\\\\mathcal{I}_B \\\\times \\\\mathcal{I}_F$, whe\"}\n  {\"name\": \"Bundle.ContinuousLinearMap.vectorPrebundle.isContMDiff\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.Hom\", \"type\": \": (Bundle.ContinuousLinearMap.vectorPrebundle (RingHom.id 𝕜) F₁ E₁ F₂ E₂).IsContMDiff IB n\", \"doc\": \"The vector prebundle whose fibers consist of continuous linear maps between the fibers of two vector bundles is smooth (of class $C^n$) with respect to the given model with corners $IB$. This means it\"}\n  {\"name\": \"WeakSpace.map\", \"module\": \"Mathlib.Topology.Algebra.Module.WeakDual\", \"type\": \"(f : E →L[𝕜] F) : WeakSpace 𝕜 E →L[𝕜] WeakSpace 𝕜 F\", \"doc\": \"Given a continuous linear map $ f : E \\to F $, this constructs the induced continuous linear map from the weak dual space of $ F $ to the weak dual space of $ E $, defined by precomposing continuous li\"}\n  {\"name\": \"ContinuousLinearMap.inCoordinates\", \"module\": \"Mathlib.Topology.VectorBundle.Basic\", \"type\": \"(x₀ x : B) (y₀ y : B') (ϕ : E x →SL[σ] E' y) : F →SL[σ] F'\", \"doc\": \"Given points $x_0,x \\\\in B$ and $y_0,y \\\\in B'$, and a continuous linear map $\\\\phi:E_x \\\\to E'_y$ between fibers of vector bundles, this constructs the corresponding continuous linear map $F \\\\to F'$ betw\"}\n  {\"name\": \"mdifferentiableOn_coordChangeL\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.MDifferentiable\", \"type\": \": MDifferentiableOn IB 𝓘(𝕜, F →L[𝕜] F) (fun b : B ↦ (e.coordChangeL 𝕜 e' b : F →L[𝕜] F)) (e.baseSet ∩ e'.baseSet)\", \"doc\": \"The coordinate change map between two linear trivializations $ e $ and $ e' $ of a vector bundle is continuously differentiable (of class $ C^k $) on the intersection of their base sets $ e.baseSet \\\\c\"}",
+   "date": "2026-10-24",
+   "verdict": "match: smooth Hom bundle specialized to the trivial real line, with the explicit finite-dimensional linear/continuous-linear equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "ContMDiffVectorBundle.continuousLinearMap",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"ContMDiffVectorBundle.continuousLinearMap\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.Hom\", \"type\": \" {𝕜 : Type u_1} {B : Type u_2} {F₁ : Type u_3} {F₂ : Type u_4} {n : WithTop ℕ∞} {E₁ : B → Type u_6} {E₂ : B → Type u_7} [NontriviallyNormedField 𝕜] [(x : B) → AddCommGroup (E₁ x)] [(x : B) → Module 𝕜 (E₁ x)] [NormedAddCommGroup F₁] [NormedSpace 𝕜 F₁] [TopologicalSpace (Bundle.TotalSpace F₁ E₁)] [(x \", \"doc\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "match: smooth Hom bundle specialized to the trivial real line, with the explicit finite-dimensional linear/continuous-linear equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "continuousLinearMap|coordChange",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"28\", \"line\": \"open Bundle Set OpenPartialHomeomorph ContinuousLinearMap Pretrivialization\", \"text\": \"\"}\n  {\"file\": \"53\", \"line\": \"theorem contMDiffOn_continuousLinearMapCoordChange\", \"text\": \"\"}\n  {\"file\": \"58\", \"line\": \"      (continuousLinearMapCoordChange (RingHom.id 𝕜) e₁ e₁' e₂ e₂') \", \"text\": \"= by\"}\n  {\"file\": \"59\", \"line\": \"  have h₁ \", \"text\": \"= contMDiffOn_coordChangeL (IB := IB) e₁' e₁ (n := n)\"}\n  {\"file\": \"60\", \"line\": \"  have h₂ \", \"text\": \"= contMDiffOn_coordChangeL (IB := IB) e₂ e₂' (n := n)\"}",
+   "date": "2026-10-24",
+   "verdict": "match: smooth Hom bundle specialized to the trivial real line, with the explicit finite-dimensional linear/continuous-linear equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "continuous_of_finiteDimensional|def toContinuousLinearMap",
+   "results": "{\"t\": \"2026-10-24T04:19:15Z\", \"tool\": \"grep\", \"query\": \"continuous_of_finiteDimensional|def toContinuousLinearMap\", \"sub\": \"Topology/Algebra/Module/\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/Topology/Algebra/Module/Equiv.lean\", \"Mathlib/Topology/Algebra/Module/FiniteDimension.lean\", \"Mathlib/Topology/Algebra/Module/FiniteDimension.lean\", \"Mathlib/Topology/Algebra/Module/FiniteDimension.lean\", \"Mathlib/Topology/Algebra/Module/FiniteDimension.lean\", \"Mathlib/Topology/Algebra/Module/FiniteDimension.lean\", \"Mathlib/Topology/Algebra/Module/Alternating/Basic.lean\", \"Mathlib/Topology/Algebra/Module/Multilinear/Basic.lean\"], \"digest\": \"077f743e4679b865\"}",
+   "date": "2026-10-24",
+   "verdict": "match: smooth Hom bundle specialized to the trivial real line, with the explicit finite-dimensional linear/continuous-linear equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "Bundle.Trivial.contMDiffVectorBundle|ContMDiffVectorBundle.continuousLinearMap",
+   "results": "{\"t\": \"2026-10-24T04:19:15Z\", \"tool\": \"grep\", \"query\": \"Bundle.Trivial.contMDiffVectorBundle|ContMDiffVectorBundle.continuousLinearMap\", \"sub\": \"Geometry/Manifold/VectorBundle/\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Geometry/Manifold/VectorBundle/Basic.lean\", \"Mathlib/Geometry/Manifold/VectorBundle/Hom.lean\"], \"digest\": \"9982f4e233f7c7ce\"}",
+   "date": "2026-10-24",
+   "verdict": "match: smooth Hom bundle specialized to the trivial real line, with the explicit finite-dimensional linear/continuous-linear equivalence."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "ContMDiffVectorBundle.continuousLinearMap, Bundle.Trivial.contMDiffVectorBundle, LinearMap.toContinuousLinearMap",
+  "file": "Mathlib/Geometry/Manifold/VectorBundle/Hom.lean",
+  "line": 128,
+  "how": "specializes in one line per clause: ContMDiffVectorBundle.continuousLinearMap, Hom.lean:128–130, with E₂=Bundle.Trivial N ℝ; its smoothness instance is Bundle.Trivial.contMDiffVectorBundle, VectorBundle/Basic.lean:616–621. LinearMap.toContinuousLinearMap, Mathlib/Topology/Algebra/Module/FiniteDimension.lean:306–310 (assumptions 301–303), identifies all fibre linear maps with continuous ones. Dual coordinate changes are the specialization of continuousLinearMapCoordChange, Mathlib/Topology/VectorBundle/Hom.lean:61–64, with the real-line transition the identity."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "def-sfb-smooth-bundle-test-distributions",
+  "date": "2026-10-24",
+  "group": "NY"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2, Gårding inequality (2.3) and Sobolev lemma (2.1), printed p.289; smooth-right-hand-side consequence for bundle-valued systems; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Further analytic input: VI §2, weak Gårding inequality (2.3), printed p.289 (PDF page 289), finite-order regularity and norm estimate for an operator on one bundle. Parametrix proof of the finite-order weak estimate: Symbol classes and real bundle pseudodifferential operators. Underlying notion: distributional bundle sections and their test-density pairing, used before local symbol quantization. Supporting input: the fibrewise dual bundle E* in the test-density clause",
+   "via": [
+    "def-sfb-smooth-bundle-test-distributions",
+    "def-sfb-symbol-pseudodifferential-operators",
+    "lem-sfb-weak-garding-sobolev-estimate",
+    "lem-sfb-elliptic-adjoint-regularity",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -13,95 +13,76 @@
     "lem-weil-pbc-constructible-module-finite-pushforward-embedding"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "A quasi-coherent module on a qcqs scheme is a filtered colimit of modules of finite presentation, indexed by a filtered category (Stacks 01PJ)",
- "statement": "Let $X$ be a scheme [def-pc-scheme] which is quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions], and let $\\mathcal F$ be a quasi-coherent $\\mathcal O_X$-module [pqf-def-coherent], [def-weil-sheaf-of-modules-category]. An $\\mathcal O_X$-module $\\mathcal G$ is *of finite presentation* if every point of $X$ has an open neighbourhood $U$ with an exact sequence $\\mathcal O_U^{\\oplus m}\\to\\mathcal O_U^{\\oplus n}\\to\\mathcal G|_U\\to0$ of $\\mathcal O_U$-modules (Stacks, Modules, Definition 01BN). Then there exist a small filtered category $\\mathcal I$ (its objects form a set; it is nonempty, any two objects $i,i'$ admit morphisms $i\\to i''$, $i'\\to i''$ to a common object, and any two parallel morphisms $a,b:i\\to i'$ are equalized by some $c:i'\\to i''$, $ca=cb$) [def-weil-pbc-category-colimit], a functor $M:\\mathcal I\\to\\Mod(\\mathcal O_X)$, $i\\mapsto\\mathcal F_i$, with every $\\mathcal F_i$ of finite presentation, and $\\mathcal O_X$-module maps $\\varphi_i:\\mathcal F_i\\to\\mathcal F$ with $\\varphi_{i'}\\circ M(a)=\\varphi_i$ for every morphism $a:i\\to i'$ of $\\mathcal I$, such that $(\\mathcal F,(\\varphi_i)_i)$ is a colimit of $M$ in the category of $\\mathcal O_X$-modules [def-weil-pbc-category-colimit].",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] which is quasi-compact [def-weil-pbc-quasi-compact-scheme] and quasi-separated [def-weil-quasi-separated-morphism], and let $\\mathcal F$ be a quasi-coherent $\\mathcal O_X$-module [pqf-def-coherent], [def-weil-sheaf-of-modules-category]. An $\\mathcal O_X$-module $\\mathcal G$ is *of finite presentation* if every point of $X$ has an open neighbourhood $U$ with an exact sequence $\\mathcal O_U^{\\oplus m}\\to\\mathcal O_U^{\\oplus n}\\to\\mathcal G|_U\\to0$ of $\\mathcal O_U$-modules [def-weil-pbc-module-finite-type-presentation] (Stacks, Modules, Definition 01BN). Then there exist a small filtered category $\\mathcal I$ (its objects form a set; it is nonempty, any two objects $i,i'$ admit morphisms $i\\to i''$, $i'\\to i''$ to a common object, and any two parallel morphisms $a,b:i\\to i'$ are equalized by some $c:i'\\to i''$, $ca=cb$) [def-weil-pbc-category-colimit], a functor $M:\\mathcal I\\to\\Mod(\\mathcal O_X)$, $i\\mapsto\\mathcal F_i$, with every $\\mathcal F_i$ of finite presentation, and $\\mathcal O_X$-module maps $\\varphi_i:\\mathcal F_i\\to\\mathcal F$ with $\\varphi_{i'}\\circ M(a)=\\varphi_i$ for every morphism $a:i\\to i'$ of $\\mathcal I$, such that $(\\mathcal F,(\\varphi_i)_i)$ is a colimit of $M$ in the category of $\\mathcal O_X$-modules [def-weil-pbc-category-colimit].",
  "source": {
   "document": "literature/stacks-project/properties.tex",
   "place": "Properties, Lemma 01PJ (lemma-directed-colimit-diagram-finite-presentation, line 3040); its proof uses Modules, Lemma 01BC (lemma-set-isomorphism-classes-finite-type-modules), direct sums and cokernels of finitely presented modules, stalks of colimits (Sheaves, Section 009E), Properties, Lemma 01PF (lemma-extend, line 2847) and Lemma 01PI (lemma-extend-finite-presentation, line 2924)"
  },
  "stmt_deps": [
   "def-pc-scheme",
-  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-quasi-separated-morphism",
   "pqf-def-coherent",
   "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-finite-type-presentation",
   "def-weil-pbc-category-colimit"
  ],
  "proof": [
   {
-   "text": "Choose a set $I$ of pairs $(\\mathcal F_i,\\varphi_i)$, where $\\mathcal F_i$ is of finite presentation and $\\varphi_i:\\mathcal F_i\\to\\mathcal F$, containing a representative of every such pair up to isomorphism over $\\mathcal F$. This is possible by [lem-weil-pbc-module-finite-presentation-representatives]: finite-presentation modules form a set up to isomorphism, and each Hom collection is a set. Make $I$ a category by taking morphisms $i\\to i'$ to be maps $a:\\mathcal F_i\\to\\mathcal F_{i'}$ satisfying $\\varphi_{i'}a=\\varphi_i$.",
+   "text": "Apply the finitely presented pairs lemma to $X,\\mathcal F$. It supplies a small filtered category $\\mathcal I$, a diagram $M(i)=\\mathcal F_i$ of finitely presented modules, and a cocone $(\\varphi_i)$ to $\\mathcal F$. Every finitely presented pair over $\\mathcal F$ is represented up to an isomorphism over $\\mathcal F$, and arrows are all module maps commuting with those maps to $\\mathcal F$.",
    "uses": [
-    "lem-weil-pbc-module-finite-presentation-representatives"
+    "lem-weil-pbc-finite-presentation-pairs-filtered"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/properties.tex",
-    "place": "Properties, Lemma 01PJ proof, first paragraph (lines 3060-3069), using Modules 01BC"
+    "place": "Lemma 01PJ, choice of pairs and filteredness, lines 3066-3120"
    }
   },
   {
-   "text": "The category $I$ is nonempty (use the zero module). Given $i,i'$, the map $\\mathcal F_i\\oplus\\mathcal F_{i'}\\to\\mathcal F$ induced by $\\varphi_i,\\varphi_{i'}$ has finite-presentation source by [lem-weil-pbc-module-finite-presentation-direct-sum], hence is isomorphic over $\\mathcal F$ to some chosen pair $(\\mathcal F_{i''},\\varphi_{i''})$; the two summand inclusions give morphisms $i\\to i''$ and $i'\\to i''$.",
+   "text": "Mathlib supplies all small colimits in X.Modules. Form L = colim M, with comparison φ : L → F from the canonical cocone. By the module-stalk filtered-colimit lemma, the stalk cocone of L is a colimit of the diagram of module stalks. The elementwise filtered-module-colimit lemma therefore represents each element of L_x by a germ at a stage.",
    "uses": [
-    "lem-weil-pbc-module-finite-presentation-direct-sum"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties, Lemma 01PJ proof, second paragraph (lines 3070-3090)"
-   }
-  },
-  {
-   "text": "For parallel $a,b:i\\to i'$, put $\\mathcal G=\\operatorname{Coker}(a-b)$. It is of finite presentation by [lem-weil-pbc-module-finite-presentation-cokernel]. Since $\\varphi_{i'}a=\\varphi_i=\\varphi_{i'}b$, $\\varphi_{i'}$ factors through $\\mathcal G\\to\\mathcal F$; representing this pair by some $i''$ gives a morphism $i'\\to i''$ equalizing $a,b$. Thus $I$ is filtered.",
-   "uses": [
-    "lem-weil-pbc-module-finite-presentation-cokernel"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties, Lemma 01PJ proof, third paragraph (lines 3091-3117)"
-   }
-  },
-  {
-   "text": "The maps $\\varphi_i$ form a cocone, hence induce $\\varphi:\\varinjlim_i\\mathcal F_i\\to\\mathcal F$. By [lem-weil-pbc-module-stalk-filtered-colimit], its stalk at $x$ is the map $\\varinjlim_i(\\mathcal F_i)_x\\to\\mathcal F_x$. To prove that $\\varphi$ is an isomorphism it suffices to prove these stalk maps bijective, by [lem-weil-pbc-module-iso-on-stalks].",
-   "uses": [
+    "def-weil-pbc-category-colimit",
     "lem-weil-pbc-module-stalk-filtered-colimit",
-    "lem-weil-pbc-module-iso-on-stalks",
-    "def-weil-pbc-category-colimit"
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/properties.tex",
-    "place": "Properties, Lemma 01PJ proof, fourth paragraph (lines 3119-3131); Sheaves Section 009E"
+    "place": "Lemma 01PJ, stalk comparison; Modules 01AH; Modules on Sites 03DB"
    }
   },
   {
-   "text": "For injectivity, let $s\\in(\\mathcal F_i)_x$ map to zero in $\\mathcal F_x$. On a quasi-compact neighbourhood $U$ of $x$, represent $s$ by a section still denoted $s$ with $\\varphi_i(s)=0$. The cyclic image $\\mathcal K_U=\\operatorname{Im}(\\mathcal O_U\\xrightarrow{1\\mapsto s}\\mathcal F_i|_U)$ is a finite-type quasi-coherent submodule: quasi-coherence and the identification with the image sheaf follow from [lem-weil-pbc-quasi-coherent-module-cokernel-image], and finite type follows because it is a quotient of $\\mathcal O_U$ by its kernel. Since $\\mathcal K_U\\subseteq\\ker(\\varphi_i)|_U$, [lem-weil-pbc-module-finite-type-submodule-extension] extends it to a finite-type quasi-coherent $\\mathcal K\\subseteq\\ker(\\varphi_i)$. The quotient map $\\mathcal F_i\\to\\mathcal F_i/\\mathcal K$ has finite-presentation source and target quotient by [lem-weil-pbc-module-finite-presentation-cokernel], and its induced map to $\\mathcal F$ is represented by some $i'$. The resulting transition $i\\to i'$ kills $s$, so the class of $s$ vanishes in $\\varinjlim_i(\\mathcal F_i)_x$.",
+   "text": "For a stage germ $s\\in(\\mathcal F_i)_x$ with $(\\varphi_i)_x(s)=0$, kernel-germ effacement gives a finitely presented quotient $q:\\mathcal F_i\\to\\mathcal Q$ and $\\beta:\\mathcal Q\\to\\mathcal F$ with $\\beta q=\\varphi_i$ and $q_x(s)=0$. Choose its representative $e:\\mathcal F_j\\xrightarrow{\\sim}\\mathcal Q$, with $\\beta e=\\varphi_j$. Then $e^{-1}q:i\\to j$ is an arrow killing $s$. Every element of $L_x$ has a stage representative, so zero detection in the filtered colimit proves $\\varphi_x$ injective.",
    "uses": [
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-    "lem-weil-pbc-module-finite-type-submodule-extension",
-    "lem-weil-pbc-module-finite-presentation-cokernel"
+    "lem-weil-pbc-finite-presentation-kernel-germ-effacement",
+    "lem-weil-pbc-finite-presentation-pairs-filtered",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/properties.tex",
-    "place": "Properties, Lemma 01PJ proof, injectivity paragraph (lines 3132-3162), using Lemma 01PF"
+    "place": "Lemma 01PJ, injectivity paragraph, lines 3137-3163"
    }
   },
   {
-   "text": "For surjectivity, take $s\\in\\mathcal F_x$ and represent it on a quasi-compact neighbourhood $U$ by $s\\in\\mathcal F(U)$, equivalently by the map $\\mathcal O_U\\to\\mathcal F|_U$, $1\\mapsto s$. By [lem-weil-pbc-module-finite-presentation-extension], this map extends to $\\mathcal G\\to\\mathcal F$ with $\\mathcal G$ of finite presentation on $X$. Represent the pair by some $(\\mathcal F_i,\\varphi_i)$; the section $1$ over $U$ gives a germ in $(\\mathcal F_i)_x$ mapping to $s$. Hence every stalk map is surjective.",
+   "text": "For $s\\in\\mathcal F_x$, the germ-lifting lemma gives a finitely presented $\\mathcal G$, a map $\\psi:\\mathcal G\\to\\mathcal F$ and $t\\in\\mathcal G_x$ with $\\psi_x(t)=s$. Choose its representative $e:\\mathcal F_i\\xrightarrow{\\sim}\\mathcal G$, with $\\psi e=\\varphi_i$. The germ $(e^{-1})_x(t)$ represents an element of $L_x$ whose image under $\\varphi_x$ is $s$. Thus $\\varphi_x$ is surjective.",
    "uses": [
-    "lem-weil-pbc-module-finite-presentation-extension"
+    "lem-weil-pbc-finite-presentation-stalk-germ-lifting",
+    "lem-weil-pbc-finite-presentation-pairs-filtered"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/properties.tex",
-    "place": "Properties, Lemma 01PJ proof, surjectivity paragraph (lines 3163-3187), using Lemma 01PI"
+    "place": "Lemma 01PJ, surjectivity paragraph, lines 3164-3188"
    }
   },
   {
-   "text": "Steps 5 and 6 show every stalk of $\\varphi$ is bijective, so Step 4 gives that $\\varphi$ is an isomorphism. Transporting the canonical colimit cocone across this isomorphism makes $(\\mathcal F,(\\varphi_i)_i)$ a colimit of the filtered diagram, as required.",
+   "text": "Stalkwise detection makes $\\varphi$ invertible. For any cocone $(\\mu_i)$ to $N$, let $h:L\\to N$ be its unique colimit factor. Then $h\\varphi^{-1}$ factors $(\\mu_i)$ through $\\mathcal F$. Any other factor $g$ satisfies $g\\varphi=h$ by uniqueness for $L$, hence equals $h\\varphi^{-1}$. This proves the required colimit property.",
    "uses": [
     "lem-weil-pbc-module-iso-on-stalks",
     "def-weil-pbc-category-colimit"
@@ -109,20 +90,18 @@
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/properties.tex",
-    "place": "Properties, Lemma 01PJ proof, conclusion (line 3188)"
+    "place": "Lemma 01PJ, conclusion"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-module-finite-presentation-representatives",
-  "lem-weil-pbc-module-finite-presentation-direct-sum",
-  "lem-weil-pbc-module-finite-presentation-cokernel",
-  "lem-weil-pbc-module-stalk-filtered-colimit",
-  "lem-weil-pbc-module-iso-on-stalks",
+  "lem-weil-pbc-finite-presentation-pairs-filtered",
   "def-weil-pbc-category-colimit",
-  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-  "lem-weil-pbc-module-finite-type-submodule-extension",
-  "lem-weil-pbc-module-finite-presentation-extension"
+  "lem-weil-pbc-module-stalk-filtered-colimit",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "lem-weil-pbc-finite-presentation-kernel-germ-effacement",
+  "lem-weil-pbc-finite-presentation-stalk-germ-lifting",
+  "lem-weil-pbc-module-iso-on-stalks"
  ],
  "proof_origin": {
   "by": "document",
@@ -171,6 +150,48 @@
    "results": "IsFinitePresentation only in Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean; no line combining it with colimit/filtered/directed; no stacks attribute 01PK/01PJ/01PG/01PI/01PF/01BC; IsQuasicoherent in AlgebraicGeometry only in Modules/Tilde.lean (tilde M quasi-coherent, restriction along open immersions); no local presentability of SheafOfModules/Scheme.Modules in CategoryTheory/Presentable",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsQuasicoherent|IsFinitePresentation",
+   "results": "Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean:135,137; Quasicoherent.lean:236,239,243,251,254. Definitions and instances, no approximation result. Searched subdirectory Algebra/Category/ModuleCat/Sheaf.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "On a qcqs scheme a quasi-coherent O_X-module admits a small filtered colimit presentation by modules of finite presentation",
+   "results": "SheafOfModules.isFinitePresentation, QuasicoherentData.IsFinitePresentation and constructors, IsFinitePresentation.mk, Presentation.isColimit; ModuleCat.FilteredColimits.colimit and M.mk. Presentation.isColimit is a single finite-free cokernel presentation, not the required filtered diagram of finitely presented sheaves.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFinitePresentation, CategoryTheory.Limits.IsColimit",
+   "results": "0 hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every quasi-coherent sheaf of modules on a quasi-compact quasi-separated scheme is a filtered colimit of finitely presented sheaves of modules",
+   "results": "SheafOfModules.QuasicoherentData.IsFinitePresentation and its presentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation, isFinitePresentation, IsFinitePresentation.exists_quasicoherentData, instIsQuasicoherentOfIsFinitePresentation; AlgebraicGeometry.Scheme.Modules.instHasColimits. Definitions, finite presentation implies quasi-coherence, and existence of arbitrary colimits, not finite-presentation approximation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "filtered|colimit|presentab",
+   "results": "AlgebraicGeometry/Modules/Sheaf.lean:9,53,523 and Modules/Tilde.lean:429,430,434,435,460: HasColimits and preservation by tilde, no finite-presentation approximation. Searched subdirectory AlgebraicGeometry/Modules.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every quasicoherent sheaf on a qcqs scheme is a directed colimit of finitely presented modules; the category of maps from finitely presented sheaves to it is filtered",
+   "results": "SheafOfModules.IsFinitePresentation and mk and exists_quasicoherentData; isFinitePresentation; QuasicoherentData.IsFinitePresentation and mk and isFinite_presentation; Presentation.isColimit. Definitions and a cokernel presentation, no matching approximation theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
@@ -181,21 +202,41 @@
   "item": "lem-weil-pbc-module-directed-colimit-finite-presentation",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "reviewed": {
-  "date": "2026-10-10",
+  "date": "2026-10-22",
   "by": "L",
-  "group": "E1",
+  "reviewer": "NT-cc-Q45-72092a347",
+  "group": "Q45",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L read the seven steps against Properties 01PJ (set of representatives; filteredness via direct sums and cokernels; stalkwise comparison; injectivity via 01PF applied to the cyclic image, now justified through the reviewed cokernel-image node; surjectivity via 01PI; conservativity of stalks) and the six new statements (01BC, 01PF, 01PI, 01BN, 0H96, 009E), now self-contained: correct; the E1 review states what was checked"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-72092a347 (reviewer sub-agent of L); spot-checked: This re-delivery promotes the 23a57b4d split, which already PASSed, after the landing refused it as side-only. I compared it with that snapshot. The three new nodes (pairs-filtered, kernel-germ-effacement, stalk-germ-lifting) are byte-identical. In the item only split_report.summary changed; the statement, stmt_deps, the five steps and proof_deps are unchanged, so no target is weakened. All cited sec-proper-base-change statements are unchanged on the new base. lem-cbc-sieve-module-sheafification and the off-chapter definitions were not in the earlier snapshot, so I re-read them on the current base: they say what the steps take from them. I read Stacks Properties 01PJ (properties.tex 3039-3188) in full. Step 1: the step uses only the pairs node's representatives, explicit Hom sets and cocone. Step 2: Lambda=Z sieve sheafification gives the hypothesis of the module-colimit node (2); stalk-filtered-colimit then identifies L_x with colim (F_i)_x; the elementwise lemma (1)+(2) holds for any small filtered category. Step 3: phi_j e^-1 q = beta q = phi_i, so e^-1 q is an arrow of I and kills s, which gives injectivity. Step 4: (phi_i)_x (e^-1)_x t = psi_x t = s, which gives surjectivity. Step 5: iso-on-stalks, then transfer of the universal property, correctly marked elementary. New nodes: pairs-filtered follows 3066-3120 (zero module, direct sum, Coker(a-b) via 0H96; the node's alpha_j u = alpha_i fixes Stacks' composition-order typo). Kernel-germ follows 3137-3163 (01PF, then G/K fp because K is of finite type). Germ-lifting follows 3164-3188 (01PI on an affine, hence quasi-compact, U). Edge cases checked: X empty, s=0, Spec R with arbitrary M, and a non-finitely-generated ideal J in a non-Noetherian R. B1-B7 hold and no SGA source is used. The rg -L duplicate search found no node stating any child: quotient-map-small-models, presentation-transport, the colimit criterion, global-approximation, qc-extension, the presheaf stalk colimit node and the directed-colimit parent were each read and differ. The re-split note is met: old steps 1-3, 5 and 6 are now nodes, old step 4 is carried by existing cited nodes, and the item is a short assembly. The off-unit tool use of lem-weil-pbc-module-sheaves-colimits-forgetful is accepted. No changes. Maintainer note: identical promotion of 23a57b4d."
  },
  "split_report": {
-  "date": "2026-10-10",
+  "date": "2026-10-22",
   "item": "lem-weil-pbc-module-filtered-colimit-finite-presentation",
   "worker": "stage1",
-  "summary": "Split Stacks 01PJ into seven steps: choose a small representative category, prove its two filteredness conditions using finite direct sums and cokernels, identify the colimit stalkwise, prove injectivity using the existing quasi-coherent image theorem and 01PF, prove surjectivity using 01PI, and conclude by stalkwise detection of isomorphisms. Created six public child nodes for the reusable non-elementary inputs; reused the existing stalkwise-isomorphism and quasi-coherent-image nodes."
+  "group": "Q45",
+  "summary": "Repaired every point of the returned D1/D2 re-split: retained the kernel-germ effacement child unchanged and retained the colimit-existence/stalk-comparison step verbatim. Extracted the entire representative-category/filteredness argument and the entire geometric germ-lifting argument into two additional statement-only nodes. The item is now only the assembly of these three independent auxiliary results with existing colimit tools and stalkwise detection. No old geometric or category argument is shortened inline; mathematical statement unchanged. Landing-return L repair: rebased maintained metadata on the current shared DAG, reopened all current assembly dependencies, revalidated all 12 verbatim citation pairs, and preserved the approved three-child proof route. The side completion is not treated as a live landing; deliver.py builds this repaired package on the current meeting-point head for promotion.",
+  "blueprint": "Realizes the finite-pushforward approximation of lemma-weil-pbc-h1-constructible-representation (current main-20261015 proof: the paragraph beginning The finite-pushforward lemma gives a monomorphism), via the unchanged integral-morphism and module-directed-colimit ancestors. Below that route, Stacks 01PJ paragraphs for the small filtered representative category, injectivity and surjectivity now have separate statement-only children. The five assembly steps use those children, the preserved colimit comparison and the final universal property.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "General existence of small module-sheaf colimits on the Zariski opens site; the unit has a stalk preservation statement but no unconditional colimit-existence statement."
+   }
+  ]
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.ModuleFilteredColimitFinitePresentation",
@@ -214,5 +255,16 @@
   "group": "C1",
   "result": "pass",
   "note": "X:Scheme.{u} qc (CompactSpace) qs (QuasiSeparatedSpace); F:X.Modules with Mathlib IsQuasicoherent (pqf-def-coherent's clause, not hollow: infer_instance fails); ∃ I:Type u SmallCategory IsFiltered (index in objects' universe, #check pp.universes all u); M:I⥤X.Modules each IsFinitePresentation (01BN via presentationOfIsCokernelFree); φ:M⟶const F (compatibility = naturality); Nonempty IsColimit (Cocone.mk F φ) as sibling ModuleStalkFilteredColimit"
+ },
+ "tool_uses": [],
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261023T102810-L-2975986",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

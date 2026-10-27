@@ -162,7 +162,18 @@
   "def-wf-middle-extension"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-purity-real-sheaves",
  "unit": "sk-i-real-boundary",
  "split_report": {
@@ -230,5 +241,50 @@
    "AlgebraicGeometry.WeilGroup.BoundaryChart.boundaryStalkEquivInvariants_boundaryStalkMap"
   ],
   "note": "attached by the lead's tool step2_attach.py 2026-10-18 03:19 UTC (L, propagation 2026-10-18), live declaration stated, proof open in WeilConjectures.EtaleCohomology.Purity.RealSheaves.Boundary: the blueprint item lem-wf-boundary-stalk-invariants's upstream Lean declarations as live states them; their proofs are still `sorry` in live (stage-3 route work)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $j:U_0\\hookrightarrow C_0$ be a dense open immersion of smooth\ncurves over $k_0$, let $\\mathcal F$ be lisse on $U_0$, and let\n$x\\in C_0\\setminus U_0$ be a closed boundary point with local residue\nfield $\\kappa(x)$ and inertia group $I_x$ of [d-real-boundary] inside the local\nfundamental group of the\nfundamental representation.\nThen the boundary stalk of the\nmiddle extension is\n\n$$\n(j_*\\mathcal F)_{\\bar x}\\simeq\\mathcal F_{\\bar\\eta}^{I_x},\n$$\n\nwhere $\\mathcal F_{\\bar\\eta}$ is the\ngeometric generic stalk of\n$\\mathcal F$ at $x$ and the invariants are formed for the inertia\naction. The identification is equivariant for Frobenius: the geometric\nFrobenius of $\\kappa(x)$ acting on the stalk of the Weil sheaf\n$j_*\\mathcal F$ at $\\bar x$ corresponds to the action of a residue\nFrobenius lift on $\\mathcal F_{\\bar\\eta}^{I_x}$ of [d-real-boundary]\n(which is independent of the lift).",
+  "proof": [
+   {
+    "text": "Write $\\mathcal F$ also for the underlying lisse $\\overline{\\mathbf Q}_{\\ell,U}$-module\nand $V=\\mathcal F_{\\bar\\eta}$. The strict-henselization stalk formula of\n[prop-weil-pbc-strict-henselization-stalk-formula] is a statement about\ntorsion sheaves, and a lisse $\\Qlb$-sheaf is in general not trivialized\nby any finite etale cover (the unipotent Kummer extension on\n$\\mathbf G_m$ has infinite geometric monodromy), so the computation passes\nthrough an integral model, used here only as a consequence of the condensed theory.\nBy [p-real-integral], after enlarging $E$, there are a $\\pi_1(U)$-stable\n$\\cO_E$-lattice $M\\subset V$ and a lisse $\\cO_{E,U}$-module $\\mathcal F_0$ with stalk\n$M$, with $\\mathcal F\\simeq\\mathcal F_0\\otimes_{\\cO_{E,U}}\\overline{\\mathbf Q}_{\\ell,U}$,\nwhose reductions $\\mathcal F_n=\\mathcal F_0/\\mathfrak m_E^n\\mathcal F_0$ are locally\nconstant sheaves of finite $\\cO_E/\\mathfrak m_E^n$-modules with stalks\n$M_n=M/\\mathfrak m_E^nM$.",
+    "uses": [
+     "prop-weil-pbc-strict-henselization-stalk-formula",
+     "p-real-integral"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Finite levels.* By [sk-thm-sf-ctf-stability], $Rj_*\\mathcal F_0\\in\\Dbc(C,\\cO_E)$, and by\nthe coefficient comparisons of [sk-prop-scalar-six]\n$Rj_*\\mathcal F\\simeq Rj_*\\mathcal F_0\\otimes_{\\cO_E}\\Qlb$ and\n$Rj_*\\mathcal F_0\\otimes^{\\mathbf L}_{\\cO_E}\\cO_E/\\mathfrak m_E^n\\simeq Rj_*\\mathcal F_n$.\nAt finite level $Rj_*\\mathcal F_n$ is the étale direct image\n([sk-thm-pe-direct-image-comparison]), so its stalk at the geometric point $\\bar x$ is\ncomputed by [prop-weil-pbc-strict-henselization-stalk-formula] on the\npunctured strict henselian trait\n$\\operatorname{Spec}\\mathcal O^{\\mathrm{sh}}_{C_0,\\bar x}\\setminus\\{x\\}$,\nthe spectrum of a field with absolute Galois group the inertia group\n$I_x=\\operatorname{Gal}(\\overline{\\kappa(\\eta_x)}/\\kappa(\\eta_x))$: the\nsections of the locally constant sheaf $\\mathcal F_n$ over it are the\ninvariants $M_n^{I_x}$, and $(Rj_*\\mathcal F_n)_{\\bar x}$ has no cohomology in negative\ndegrees.",
+    "uses": [
+     "sk-thm-pe-direct-image-comparison",
+     "prop-weil-pbc-strict-henselization-stalk-formula"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Limit.* The stalk $\\bar x^*Rj_*\\mathcal F_0$ lies in $\\Dbc(\\bar x,\\cO_E)$, since pullback\npreserves $\\Dbc(-,\\cO_E)$ ([sk-lem-integral-models] (3)), hence is derived complete\n([def-pe-derived-complete], [sk-prop-integral-criterion]). Its reductions modulo $\\pi_E^n$ are the stalks\n$(Rj_*\\mathcal F_n)_{\\bar x}$, because $\\bar x^*$ commutes with\n$-\\otimes^{\\mathbf L}_{\\cO_E}\\cO_E/\\pi_E^n$ ([def-weil-derived-pullback-tensor-hom]) and by\nthe comparison of the finite levels. So\n$\\bar x^*Rj_*\\mathcal F_0\\simeq R\\varprojlim_n(Rj_*\\mathcal F_n)_{\\bar x}$, and the global\nsections over $\\bar x$, a right adjoint, commute with this derived limit. The Milnor\nsequence ([sk-prop-pe-milnor]) in degree $0$, whose $\\varprojlim^1$-term involves only\ndegree $-1$ and vanishes, gives\n$(j_*\\mathcal F_0)_{\\bar x}=\\varprojlim_nM_n^{I_x}=M^{I_x}$, since invariants commute\nwith inverse limits; the tower $(M_n^{I_x})_n$ need not be adic, but only its limit\nenters.",
+    "uses": [
+     "sk-lem-integral-models",
+     "def-pe-derived-complete",
+     "def-weil-derived-pullback-tensor-hom"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Scalars.* As $\\overline{\\mathbf Q}_{\\ell,C}$ is flat over $\\cO_{E,C}$ ([sk-prop-sfb-qlbar-colimit-x], [sk-prop-sfb-finite-extension-compatibility]) and stalks are exact,\n$(j_*\\mathcal F)_{\\bar x}=\\mathcal H^0(Rj_*\\mathcal F)_{\\bar x}\n=M^{I_x}\\otimes_{\\cO_E}\\Qlb$. Invariants commute with inverting $\\ell$ (an invariant\nvector of $M[1/\\ell]$ has an invariant multiple in $M$) and with the base change\n$E\\to\\Qlb$ ($\\Qlb$ is free as an $E$-vector space), so\n$M^{I_x}\\otimes_{\\cO_E}\\Qlb=(M\\otimes_{\\cO_E}\\Qlb)^{I_x}=\\mathcal F_{\\bar\\eta}^{I_x}$.\nThis is the displayed identification.\n\nFor the Frobenius equivariance, let $D_x=\\operatorname{Gal}(\\overline K_x/K_x)$\nbe the decomposition group of [d-real-boundary], $K_x$ the fraction\nfield of the henselization $\\mathcal O^{\\mathrm h}_{C_0,x}$, so that\n$D_x/I_x=\\operatorname{Gal}(\\overline{\\kappa(x)}/\\kappa(x))$ and\n$\\overline K_x^{I_x}$ is the fraction field of\n$\\mathcal O^{\\mathrm{sh}}_{C_0,\\bar x}$. The identification above is\nthe restriction of sections of $\\mathcal F_n$ from the punctured strict\nhenselian trait to its geometric generic point, compatibly in $n$ and then\npassed through the limit and the extension of scalars; it is natural in\nautomorphisms of $\\mathcal O^{\\mathrm{sh}}_{C_0,\\bar x}$ over\n$\\mathcal O^{\\mathrm h}_{C_0,x}$. An element $\\sigma\\in D_x$ induces\nsuch an automorphism, acting on $(j_*\\mathcal F)_{\\bar x}$ through its\nimage in $\\operatorname{Gal}(\\overline{\\kappa(x)}/\\kappa(x))$ and on\n$\\mathcal F_{\\bar\\eta}$ through the Weil fundamental representation of\n[def-wf-fundamental-representation]; naturality says that these actions\ncorrespond on $\\mathcal F_{\\bar\\eta}^{I_x}$. Taking $\\sigma$ a lift of\nthe geometric Frobenius of $\\kappa(x)$ (in the local Weil group, so that\nthe action on $\\mathcal F_{\\bar\\eta}$ is defined for a Weil sheaf) gives\nthe stated equivariance; two lifts differ by an element of $I_x$, which\nacts trivially on the invariants.",
+    "uses": [
+     "sk-prop-sfb-qlbar-colimit-x",
+     "d-real-boundary",
+     "def-wf-fundamental-representation"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

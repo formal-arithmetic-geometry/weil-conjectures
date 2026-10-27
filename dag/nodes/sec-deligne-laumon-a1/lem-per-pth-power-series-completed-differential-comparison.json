@@ -179,20 +179,37 @@
   "module": "Sheaf.RingTheory.PthPowerSeriesCompletedDifferentialComparison",
   "declaration": "KaehlerDifferential.pth_power_series_completed_differential_comparison",
   "file": "lean/Sheaf/RingTheory/PthPowerSeriesCompletedDifferentialComparison.lean",
-  "statement": "theorem pth_power_series_completed_differential_comparison (F : Type u) [Field F] (p : ℕ) (hp : p ≠ 0) [CharP F p] (r : ℕ) (C : Type v) [CommRing C] [Algebra F C] [IsLocalRing C] [IsNoetherianRing C] [IsAdicComplete (IsLocalRing.maximalIdeal C) C] [Algebra (MvPowerSeries (Fin r) F) C] [IsScalarTower F (MvPowerSeries (Fin r) F) C] [IsLocalHom (algebraMap (MvPowerSeries (Fin r) F) C)] [Module.Finite (MvPowerSeries (Fin r) F) C] (hcont : ∀ n : ℕ, ∃ N : ℕ, IsLocalRing.maximalIdeal (MvPowerSeries (Fin r) F) ^ N ≤ (IsLocalRing.maximalIdeal C ^ n).comap (algebraMap (MvPowerSeries (Fin r) F) C)) : (∀ b : (MvPowerSeries.expand (σ := Fin r) (R := F) p hp).range, AdicCompletion.of (IsLocalRing.maximalIdeal C) (KaehlerDifferential F C) (D F C (algebraMap (MvPowerSeries (Fin r) F) C b)) = 0) ∧ ∃ e : KaehlerDifferential (MvPowerSeries.expand (σ := Fin r) (R := F) p hp).range C ≃ₗ[C] AdicCompletion (IsLocalRing.maximalIdeal C) (KaehlerDifferential F C), ∀ c : C, e (D (MvPowerSeries.expand (σ := Fin r) (R := F) p hp).range C c) = AdicCompletion.of (IsLocalRing.maximalIdeal C) (KaehlerDifferential F C) (D F C c)",
+  "statement": "theorem pth_power_series_completed_differential_comparison (F : Type u) [Field F] (p : ℕ) [CharP F p] (hp : p ≠ 0) (r : ℕ) (C : Type v) [CommRing C] [IsLocalRing C] [IsNoetherianRing C] [Algebra F C] [Algebra (MvPowerSeries (Fin r) F) C] [IsScalarTower F (MvPowerSeries (Fin r) F) C] [IsLocalHom (algebraMap (MvPowerSeries (Fin r) F) C)] [IsAdicComplete (IsLocalRing.maximalIdeal C) C] [Module.Finite (MvPowerSeries (Fin r) F) C] (hcont : @Continuous (MvPowerSeries (Fin r) F) C (Ideal.span (Set.range (MvPowerSeries.X (σ := Fin r) (R := F)))).adicTopology (IsLocalRing.maximalIdeal C).adicTopology (algebraMap (MvPowerSeries (Fin r) F) C)) : (∀ b : (MvPowerSeries.expand (σ := Fin r) (R := F) p hp).range, AdicCompletion.of (IsLocalRing.maximalIdeal C) (KaehlerDifferential F C) (KaehlerDifferential.D F C (algebraMap (MvPowerSeries (Fin r) F) C b.val)) = 0) ∧ ∃ e : KaehlerDifferential (MvPowerSeries.expand (σ := Fin r) (R := F) p hp).range C ≃ₗ[C] AdicCompletion (IsLocalRing.maximalIdeal C) (KaehlerDifferential F C), ∀ c : C, e (KaehlerDifferential.D (MvPowerSeries.expand (σ := Fin r) (R := F) p hp).range C c) = AdicCompletion.of (IsLocalRing.maximalIdeal C) (KaehlerDifferential F C) (KaehlerDifferential.D F C c)",
   "branch": "newtargets-dag",
-  "by": "Q90",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.RingTheory.PthPowerSeriesCompletedDifferentialComparison deleted (dead: no target reaches it); this node is not reached either."
+  "by": "Q67",
+  "date": "2026-10-24",
+  "existing": false
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-c1e4d665d",
-  "group": "Q90",
+  "reviewer": "NT-stage2-cc-944a4b520",
+  "group": "Q67",
   "result": "pass",
-  "note": "Single theorem module + lean record; node text byte-identical to live; lean.statement verbatim. All clauses match: F field CharP p≠0, r:ℕ, B=MvPowerSeries (Fin r) F, C complete Noetherian local F-algebra, u via Algebra B C + IsScalarTower + IsLocalHom + adic continuity hcont, Module.Finite B C, B₁=(MvPowerSeries.expand p hp).range (range = series with exponents divisible by p, by coeff_expand_smul/coeff_expand_of_not_dvd; coefficients fixed, so fine for imperfect F), Ω̂=AdicCompletion 𝔪 Ω[C/F] (same as conormal prerequisite), vanishing on u(B₁), and ∃ C-linear equiv normalized on D c (canonical map). Independent universes u,v; no extra hypotheses; r=0, identity and non-injective u covered. No H4 duplicate in Mathlib/side (checked trf continuous-differentials and completion-comparison modules). Docstrings carry source, blueprint and 5 steps; imports follow rule 7. nt_compile --json clean (2.2 s). Advisory: hcont is implied by IsLocalHom but kept because the node states it."
+  "note": "Node unchanged except for lean (the earlier lean_removed was a dead-module prune). lean.statement matches the file verbatim; one sorry, no definitions; no name clash in live/side. All clauses match: Field+CharP p, p≠0; MvPowerSeries (Fin r) F; C local Noetherian adically complete; u = algebraMap with IsScalarTower+IsLocalHom (not forced injective); hcont with both adic topologies; Module.Finite B C; B1 = (MvPowerSeries.expand p hp).range, i.e. the series with exponents divisible by p and fixed coefficients (checked in Mathlib Expand.lean); completed module = AdicCompletion 𝔪 Ω[C/F]; vanishing conjunct; ∃ C-linear equivalence fixed on D c (the canonical map). Universes u,v independent. Edge cases r=0, inseparable residue field, C=B, non-injective u all fine. Mathlib stmt_dep records used exactly; ContinuousKaehlerDifferential is another unit's encoding and not cited, so no H4 duplicate. Docstrings carry source, blueprint and the 5 steps. No compile (no change); worker and the earlier Q90 compile were clean. Maintainer note: lean_removed says the node is unreached and it has no blueprint-index row, so the module may be pruned again."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean_removed": {
+  "commit": "f6bf55e2b05",
+  "path": "lean/Sheaf/RingTheory/PthPowerSeriesCompletedDifferentialComparison.lean",
+  "module": "Sheaf.RingTheory.PthPowerSeriesCompletedDifferentialComparison",
+  "declaration": "KaehlerDifferential.pth_power_series_completed_differential_comparison",
+  "reason": "module deleted as dead (no target reaches it by imports; this node is not reached either); the declaration does not live on elsewhere, so the node has no Lean statement"
+ }
 }

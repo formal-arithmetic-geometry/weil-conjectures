@@ -1,0 +1,300 @@
+{
+ "id": "lem-sfb-quadratic-series-field-factors",
+ "kind": "statement",
+ "title": "Field factors and integral generators of a quadratic coefficient series algebra",
+ "statement": "Let $F$ be a field and $\\beta,\\gamma\\in F$ with $\\beta^2-4\\gamma\\ne0$. Put $p(Z)=Z^2+\\beta Z+\\gamma$, $L=F[Z]/(p)$, let $z$ be the class of $Z$, and set $B=L[[t]]$ and $A=F+tB$, with $F$ embedded as constant series. Polynomial rings, power series, and quotients use [def-weil-polynomial-ring], [def-weil-pbc-multivariate-power-series], and [def-weil-pbc-algebra-hom-quotient].\nIf $p$ has a root $r\\in F$, then $s=-\\beta-r$ is a distinct second root and evaluation at $r,s$ induces an $F$-algebra isomorphism $L\\cong F\\times F$. If $p$ has no root in $F$, then $L$ is a field of degree two over $F$. Thus there are $m\\in\\{1,2\\}$ and field extensions $K_i/F$ with an $F$-algebra isomorphism $L\\cong\\prod_{i=1}^mK_i$, whose coefficientwise extension is an isomorphism\n$$B\\cong\\prod_{i=1}^mD_i,\\qquad D_i=K_i[[t]],$$\nsending $t$ to the tuple of power-series variables. Every $D_i$ is an integral domain integrally closed in its fraction field $E_i=\\operatorname{Frac}(D_i)$, meaning that every fraction satisfying a monic polynomial over $D_i$ lies in $D_i$. Hence $B$ is reduced (has no nonzero nilpotent elements).\nEvery $h\\in B$ has a unique expression $h=u+zv$ with $u,v\\in F[[t]]\\subseteq A$, and satisfies\n$$h^2+(\\beta v-2u)h+(u^2-\\beta uv+\\gamma v^2)=0.$$\nIn particular $1,z$ generate $B$ as an $A$-module, so $B$ is finite over $A$ [def-weil-finitely-generated-module], and every element of $B$ is integral over $A$ [def-weil-pbc-integral-closure]. Multiplication by $t$ is injective on $B$ and on $A$. These assertions include characteristic two and the split case.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C4A (lemma-2-branches-delta-1), proof of (1) implies (2), Cases I and II: separable quadratic coefficient algebra and its series ring; normality of field-factor series rings from algebra.tex, Tag 0BI0 (lemma-power-series-over-Noetherian-normal-domain). Extracted from returned steps 5-7; the explicit conjugate/norm and coefficient calculations are preserved in the report."
+ },
+ "stmt_deps": [
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-monic-quotient-free] to the monic degree-two polynomial $p$. Thus $1,z$ are an $F$-basis of $L$: each element is uniquely $a+bz$ with $a,b\\in F$. In particular the scalar map $F\\to L$ is injective and $\\dim_F L=2$. The quotient relation is $z^2=-\\beta z-\\gamma$.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof of (1) implies (2), Cases I and II; explicit coefficient-algebra calculations expanding the two displayed normalization models."
+   }
+  },
+  {
+   "text": "If $p(r)=0$, set $s=-\\beta-r$. Then $rs=\\gamma$, $p=(Z-r)(Z-s)$, and $(r-s)^2=\\beta^2-4\\gamma\\ne0$, so $r\\ne s$. Evaluation descends to an $F$-algebra map $L\\to F\\times F$. On the basis coordinates it is $a+bz\\mapsto(a+br,a+bs)$, with inverse $(c,d)\\mapsto (rd-sc)/(r-s)+((c-d)/(r-s))z$. Substitution gives both inverse identities. This proves the split assertion without invoking a further Chinese-remainder result.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof of (1) implies (2), Cases I and II; explicit coefficient-algebra calculations expanding the two displayed normalization models."
+   }
+  },
+  {
+   "text": "If $p$ has no root, let $w=a+bz\\ne0$ and put $N=a^2-\\beta ab+\\gamma b^2$. If $b=0$, then $a\\ne0$, so $N\\ne0$; if $b\\ne0$, then $N=b^2p(-a/b)\\ne0$. Expanding with $z^2=-\\beta z-\\gamma$ gives $(a+bz)(a-\\beta b-bz)=N$. Thus $w^{-1}=(a-\\beta b-bz)/N$. The commutative nonzero ring $L$ is therefore a field, and its degree over $F$ is two by step 1. Take $m=1$, $K_1=L$ in this case, and $m=2$, $K_1=K_2=F$ in step 2. No division by $2$ has been used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof of (1) implies (2), Cases I and II; explicit coefficient-algebra calculations expanding the two displayed normalization models."
+   }
+  },
+  {
+   "text": "Write $\\phi:L\\xrightarrow{\\sim}\\prod_i K_i$ for the resulting algebra isomorphism. Define $\\Phi:B\\to\\prod_iK_i[[t]]$ by $\\Phi(\\sum_n h_nt^n)_i=\\sum_n\\phi(h_n)_it^n$. Its inverse sends $(\\sum_n a_{i,n}t^n)_i$ to $\\sum_n\\phi^{-1}((a_{i,n})_i)t^n$. These maps are inverse coefficientwise. They preserve addition and multiplication because each coefficient of a product is the finite sum $\\sum_{j=0}^n h_jh_{n-j}$. Constants are preserved and $t$ maps to $(t)_i.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof of (1) implies (2), Cases I and II; explicit coefficient-algebra calculations expanding the two displayed normalization models."
+   }
+  },
+  {
+   "text": "Each field $K_i$ is Noetherian: its only ideals are $0$ and $K_i$, generated by $0$ and $1$. It is a normal domain, since every fraction $a/b$ with $b\\ne0$ already equals $ab^{-1}\\in K_i$. These verify the hypotheses, using [def-weil-pbc-noetherian-ring] and [def-weil-pbc-normal-ring], of [lem-weil-pbc-power-series-normal-domain]. That node gives that $D_i=K_i[[t]]$ is an integral domain and is integrally closed in $E_i=\\operatorname{Frac}(D_i)$. If $h\\in B$ has $h^n=0$ for $n\\ge1$, each component of $\\Phi(h)$ has zero $n$-th power and hence is zero in its domain; injectivity of $\\Phi$ gives $h=0$. Thus $B$ is reduced.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-normal-ring",
+    "lem-weil-pbc-power-series-normal-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0BI0 (lemma-power-series-over-Noetherian-normal-domain), statement, applied to a field; the nilpotent calculation in a product of domains is elementary."
+   }
+  },
+  {
+   "text": "For $h=\\sum_n h_nt^n$, write the unique coordinates from step 1 as $h_n=a_n+zb_n$ and set $u=\\sum_n a_nt^n$, $v=\\sum_n b_nt^n$ in $F[[t]]$. Then $h=u+zv$, uniquely by comparing coefficients. The scalar series map $F[[t]]\\to B$ is injective coefficientwise. Every scalar series $u$ equals $a_0+t\\sum_n a_{n+1}t^n$, so belongs to $A=F+tB$. This is a subring, since $tB$ is an ideal of $B$ and scalar constants form a subring.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof of (1) implies (2), Cases I and II; explicit coefficient-algebra calculations expanding the two displayed normalization models."
+   }
+  },
+  {
+   "text": "Using $z^2=-\\beta z-\\gamma$, expand $(u+zv)(u-\\beta v-zv)=u^2-\\beta uv+\\gamma v^2$. The second factor equals $2u-\\beta v-h$, so rearrangement gives the displayed monic equation $h^2+(\\beta v-2u)h+(u^2-\\beta uv+\\gamma v^2)=0$. Its coefficients lie in $F[[t]]\\subseteq A$. Hence every $h$ is integral over $A$ by [def-weil-pbc-integral-closure]. Also $h=u\\cdot1+v\\cdot z$ has coefficients in $A$, so $1,z$ generate $B$ as an $A$-module and it is finite by [def-weil-finitely-generated-module].",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof of (1) implies (2), Cases I and II; explicit coefficient-algebra calculations expanding the two displayed normalization models."
+   }
+  },
+  {
+   "text": "Finally multiplication by $t$ shifts coefficients: for $h=\\sum_n h_nt^n$, the constant coefficient of $th$ is zero and its coefficient in degree $n+1$ is $h_n$. Thus $th=0$ forces $h=0$, and multiplication by $t$ is injective on $B$. Since $t\\in tB\\subseteq A$ and $A\\subseteq B$, its restriction is injective on $A$. All coefficient and norm identities above are ring identities valid also in characteristic two and in the product case.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof of (1) implies (2), Cases I and II; explicit coefficient-algebra calculations expanding the two displayed normalization models."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-monic-quotient-free",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring",
+  "lem-weil-pbc-power-series-normal-domain",
+  "def-weil-pbc-integral-closure",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C4A (lemma-2-branches-delta-1), proof of (1) implies (2), Cases I and II; explicit coefficient-algebra calculations expanding the two displayed normalization models."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Power series over a separable quadratic algebra split as one or two power series rings over fields and have the coefficient basis 1,z and an explicit quadratic norm equation",
+   "results": "{\"t\": \"2026-10-22T06:09:25Z\", \"tool\": \"leanfinder\", \"query\": \"Power series over a separable quadratic algebra split as one or two power series rings over fields and have the coefficient basis 1,z and an explicit quadratic norm equation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"QuadraticAlgebra\", \"QuadraticAlgebra.C\", \"QuadraticAlgebra.basis\", \"QuadraticAlgebra.norm\", \"QuadraticAlgebra.norm_def\", \"QuadraticAlgebra.instField\", \"QuadraticAlgebra.mk_eta\", \"QuadraticAlgebra.coe\"], \"digest\": \"1a1a210e16a271f5\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: QuadraticAlgebra basis, norm and field instances, PowerSeries domain and DVR instances, and Laurent-series completion equivalences are ingredients; none states the quotient-algebra factor decomposition together with the power-series generators and explicit integral equation over F+tB"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PowerSeries\", \"AdjoinRoot\"",
+   "results": "{\"t\": \"2026-10-22T06:09:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"PowerSeries\\\", \\\"AdjoinRoot\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: QuadraticAlgebra basis, norm and field instances, PowerSeries domain and DVR instances, and Laurent-series completion equivalences are ingredients; none states the quotient-algebra factor decomposition together with the power-series generators and explicit integral equation over F+tB"
+  },
+  {
+   "tool": "grep",
+   "query": "(AdjoinRoot|QuadraticAlgebra).*(PowerSeries|prod|norm)|PowerSeries.*(AdjoinRoot|QuadraticAlgebra)",
+   "results": "{\"t\": \"2026-10-22T06:09:14Z\", \"tool\": \"grep\", \"query\": \"(AdjoinRoot|QuadraticAlgebra).*(PowerSeries|prod|norm)|PowerSeries.*(AdjoinRoot|QuadraticAlgebra)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/KummerPolynomial.lean\", \"Mathlib/Analysis/Normed/Algebra/GelfandMazur.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\", \"Mathlib/Algebra/QuadraticAlgebra/NormDeterminant.lean\", \"Mathlib/Algebra/QuadraticAlgebra/Basic.lean\", \"Mathlib/Algebra/QuadraticAlgebra/Basic.lean\", \"Mathlib/Algebra/QuadraticAlgebra/Basic.lean\", \"Mathlib/Algebra/QuadraticAlgebra/Basic.lean\"], \"digest\": \"1303fea99c2531b1\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: QuadraticAlgebra basis, norm and field instances, PowerSeries domain and DVR instances, and Laurent-series completion equivalences are ingredients; none states the quotient-algebra factor decomposition together with the power-series generators and explicit integral equation over F+tB"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For L=F[Z]/(Z^2+beta*Z+gamma) with nonzero discriminant, L[[t]] is a product of normal power series domains and is finite integral over F+tL[[t]]",
+   "results": "{\"t\": \"2026-10-22T06:10:05Z\", \"tool\": \"leanfinder\", \"query\": \"For L=F[Z]/(Z^2+beta*Z+gamma) with nonzero discriminant, L[[t]] is a product of normal power series domains and is finite integral over F+tL[[t]]\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LaurentSeries.mem_integers_of_powerSeries\", \"LaurentSeries.exists_powerSeries_of_memIntegers\", \"LaurentSeries.instAlgebraSubtypeAdicCompletionPolynomialRatFuncIdealXMemValuationSubringAdicCompletionIntegers\", \"PowerSeries.exists_isWeierstrassFactorization\", \"LaurentSeries.powerSeriesRingEquiv\", \"PowerSeries.IsWeierstrassFactorization\", \"LaurentSeries.powerSeriesAlgEquiv\", \"PowerSeries.instIsDiscreteValuationRing\"], \"digest\": \"3572c88892fbac76\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: QuadraticAlgebra basis, norm and field instances, PowerSeries domain and DVR instances, and Laurent-series completion equivalences are ingredients; none states the quotient-algebra factor decomposition together with the power-series generators and explicit integral equation over F+tB"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A power series ring over a separable quadratic coefficient algebra has two generators over its scalar constant coefficient subring and satisfies the quadratic trace norm equation",
+   "results": "{\"t\": \"2026-10-22T06:09:54Z\", \"tool\": \"leansearch\", \"query\": \"A power series ring over a separable quadratic coefficient algebra has two generators over its scalar constant coefficient subring and satisfies the quadratic trace norm equation\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
+  },
+  {
+   "tool": "grep",
+   "query": "(prod|pi|integrallyClosed|isDomain|basis|finite)",
+   "results": "{\"t\": \"2026-10-22T06:09:54Z\", \"tool\": \"grep\", \"query\": \"(prod|pi|integrallyClosed|isDomain|basis|finite)\", \"sub\": \"RingTheory/PowerSeries\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/PowerSeries/GaussNorm.lean\", \"Mathlib/RingTheory/PowerSeries/GaussNorm.lean\", \"Mathlib/RingTheory/PowerSeries/GaussNorm.lean\", \"Mathlib/RingTheory/PowerSeries/GaussNorm.lean\", \"Mathlib/RingTheory/PowerSeries/GaussNorm.lean\", \"Mathlib/RingTheory/PowerSeries/Binomial.lean\", \"Mathlib/RingTheory/PowerSeries/Binomial.lean\", \"Mathlib/RingTheory/PowerSeries/NoZeroDivisors.lean\"], \"digest\": \"a8aac016bc25c5aa\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: QuadraticAlgebra basis, norm and field instances, PowerSeries domain and DVR instances, and Laurent-series completion equivalences are ingredients; none states the quotient-algebra factor decomposition together with the power-series generators and explicit integral equation over F+tB"
+  },
+  {
+   "tool": "grep",
+   "query": "(norm_def|instField|isUnit_iff_norm_isUnit|mul_conj|basis)",
+   "results": "{\"t\": \"2026-10-22T06:12:09Z\", \"tool\": \"grep\", \"query\": \"(norm_def|instField|isUnit_iff_norm_isUnit|mul_conj|basis)\", \"sub\": \"Algebra/QuadraticAlgebra\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/Algebra/QuadraticAlgebra/NormDeterminant.lean\", \"Mathlib/Algebra/QuadraticAlgebra/NormDeterminant.lean\", \"Mathlib/Algebra/QuadraticAlgebra/Basic.lean\", \"Mathlib/Algebra/QuadraticAlgebra/Basic.lean\", \"Mathlib/Algebra/QuadraticAlgebra/Basic.lean\", \"Mathlib/Algebra/QuadraticAlgebra/Basic.lean\", \"Mathlib/Algebra/QuadraticAlgebra/Basic.lean\", \"Mathlib/Algebra/QuadraticAlgebra/Defs.lean\"], \"digest\": \"513a01a6eceaa9dd\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: QuadraticAlgebra basis, norm and field instances, PowerSeries domain and DVR instances, and Laurent-series completion equivalences are ingredients; none states the quotient-algebra factor decomposition together with the power-series generators and explicit integral equation over F+tB"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a separable quadratic coefficient algebra L over F the power series ring L[[t]] is a product of normal field power series rings and is finite integral over F+tL[[t]]",
+   "results": "{\"t\": \"2026-10-23T09:27:06Z\", \"tool\": \"leanfinder\", \"query\": \"For a separable quadratic coefficient algebra L over F the power series ring L[[t]] is a product of normal field power series rings and is finite integral over F+tL[[t]]\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.isNoetherianRing\", \"PowerSeries.instUniqueFactorizationMonoid\", \"PowerSeries.hasUnitMulPowIrreducibleFactorization\", \"PowerSeries.instIsDiscreteValuationRing\", \"PowerSeries.IsWeierstrassFactorization\", \"PowerSeries.IsWeierstrassDivision\", \"PowerSeries.IsWeierstrassFactorizationAt\", \"PowerSeries.exists_isWeierstrassFactorization\"], \"digest\": \"d2929818596650f1\"}",
+   "date": "2026-10-23",
+   "verdict": "no exact match: the hits provide quadratic-algebra coordinates, norm formulas, or field power-series DVR properties, but not the quotient decomposition together with the finite integral F+tB extension and its explicit equation"
+  },
+  {
+   "tool": "grep",
+   "query": "(AdjoinRoot|QuadraticAlgebra).*(PowerSeries|norm)|PowerSeries.*(AdjoinRoot|QuadraticAlgebra)",
+   "results": "{\"t\": \"2026-10-23T09:27:52Z\", \"tool\": \"grep\", \"query\": \"(AdjoinRoot|QuadraticAlgebra).*(PowerSeries|norm)|PowerSeries.*(AdjoinRoot|QuadraticAlgebra)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/KummerPolynomial.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\", \"Mathlib/Algebra/QuadraticAlgebra/NormDeterminant.lean\", \"Mathlib/Algebra/QuadraticAlgebra/Basic.lean\", \"Mathlib/Algebra/QuadraticAlgebra/Basic.lean\", \"Mathlib/Algebra/QuadraticAlgebra/Basic.lean\", \"Mathlib/Algebra/QuadraticAlgebra/Basic.lean\", \"Mathlib/Algebra/QuadraticAlgebra/Basic.lean\"], \"digest\": \"1e5751145d6ed48f\"}",
+   "date": "2026-10-23",
+   "verdict": "no exact match: the hits provide quadratic-algebra coordinates, norm formulas, or field power-series DVR properties, but not the quotient decomposition together with the finite integral F+tB extension and its explicit equation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Power series over a separable quadratic algebra decompose into field power series factors and are finite integral over F+tB",
+   "results": "{\"t\": \"2026-10-23T09:27:52Z\", \"tool\": \"leansearch\", \"query\": \"Power series over a separable quadratic algebra decompose into field power series factors and are finite integral over F+tB\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsSeparable.isIntegral\", \"PowerSeries.hasUnitMulPowIrreducibleFactorization\", \"IsSeparable.isIntegral\", \"PowerSeries.instUniqueFactorizationMonoid\", \"PowerSeries.instIsDiscreteValuationRing\", \"Algebra.isSeparable_iff\", \"IsSepClosed.factors_of_separable\", \"Algebra.IsSeparable.of_integral\"], \"digest\": \"59dd6b96aeb38014\"}",
+   "date": "2026-10-23",
+   "verdict": "no exact match: the hits provide quadratic-algebra coordinates, norm formulas, or field power-series DVR properties, but not the quotient decomposition together with the finite integral F+tB extension and its explicit equation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PowerSeries\", \"AdjoinRoot\"",
+   "results": "{\"t\": \"2026-10-23T09:27:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"PowerSeries\\\", \\\"AdjoinRoot\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no exact match: the hits provide quadratic-algebra coordinates, norm formulas, or field power-series DVR properties, but not the quotient decomposition together with the finite integral F+tB extension and its explicit equation"
+  },
+  {
+   "tool": "grep",
+   "query": "(norm_def|mul_conj|isUnit_iff_norm_isUnit|basis)",
+   "results": "{\"t\": \"2026-10-23T09:28:43Z\", \"tool\": \"grep\", \"query\": \"(norm_def|mul_conj|isUnit_iff_norm_isUnit|basis)\", \"sub\": \"Algebra/QuadraticAlgebra\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/Algebra/QuadraticAlgebra/NormDeterminant.lean\", \"Mathlib/Algebra/QuadraticAlgebra/NormDeterminant.lean\", \"Mathlib/Algebra/QuadraticAlgebra/Basic.lean\", \"Mathlib/Algebra/QuadraticAlgebra/Basic.lean\", \"Mathlib/Algebra/QuadraticAlgebra/Basic.lean\", \"Mathlib/Algebra/QuadraticAlgebra/Basic.lean\", \"Mathlib/Algebra/QuadraticAlgebra/Basic.lean\", \"Mathlib/Algebra/QuadraticAlgebra/Defs.lean\"], \"digest\": \"513a01a6eceaa9dd\"}",
+   "date": "2026-10-23",
+   "verdict": "no exact match: the hits provide quadratic-algebra coordinates, norm formulas, or field power-series DVR properties, but not the quotient decomposition together with the finite integral F+tB extension and its explicit equation"
+  },
+  {
+   "tool": "grep",
+   "query": "(instIsDiscreteValuationRing|instUniqueFactorizationMonoid|hasUnitMulPowIrreducibleFactorization)",
+   "results": "{\"t\": \"2026-10-23T09:28:43Z\", \"tool\": \"grep\", \"query\": \"(instIsDiscreteValuationRing|instUniqueFactorizationMonoid|hasUnitMulPowIrreducibleFactorization)\", \"sub\": \"RingTheory/PowerSeries\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/PowerSeries/Inverse.lean\", \"Mathlib/RingTheory/PowerSeries/Inverse.lean\", \"Mathlib/RingTheory/PowerSeries/Inverse.lean\", \"Mathlib/RingTheory/PowerSeries/Inverse.lean\"], \"digest\": \"a549da0c5a5ec998\"}",
+   "date": "2026-10-23",
+   "verdict": "no exact match: the hits provide quadratic-algebra coordinates, norm formulas, or field power-series DVR properties, but not the quotient decomposition together with the finite integral F+tB extension and its explicit equation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quadratic quotient algebra has basis one and the root, explicit conjugation norm inverse, and its formal power series have a coefficientwise basis over scalar power series",
+   "results": "{\"t\": \"2026-10-23T09:28:46Z\", \"tool\": \"leanfinder\", \"query\": \"A quadratic quotient algebra has basis one and the root, explicit conjugation norm inverse, and its formal power series have a coefficientwise basis over scalar power series\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"QuadraticAlgebra.basis\", \"QuadraticAlgebra.instAlgebra\", \"QuadraticAlgebra\", \"QuadraticAlgebra.omega\", \"QuadraticAlgebra.basis_repr_apply\", \"QuadraticAlgebra.C\", \"QuadraticAlgebra.instFree\", \"QuadraticAlgebra.instFinite\"], \"digest\": \"f90d9145d5c6dd6b\"}",
+   "date": "2026-10-23",
+   "verdict": "no exact match: the hits provide quadratic-algebra coordinates, norm formulas, or field power-series DVR properties, but not the quotient decomposition together with the finite integral F+tB extension and its explicit equation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-quadratic-series-integral-closure",
+  "date": "2026-10-22",
+  "group": "Q127"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), ILO X Lemma 2.2 alteration reduction; de Jong Lemma 5.7 proof, first paragraph: the inverse image of the singular points under fibrewise normalization; also the quasi-splitting preservation used on printed p.617. Local tangent-cone construction for the two branch choices. Quadratic completed local-ring calculation filling the tangent-Proj/normalization comparison omitted in Stacks 0CBT. Tag 0C4A (lemma-2-branches-delta-1), proof of (1) implies (2), Cases I and II: separable quadratic coefficient algebra and its series ring; normality of field-factor series rings from algebra.tex, Tag 0BI0 (lemma-power-series-over-Noetherian-normal-domain). Extracted from returned steps 5-7; the explicit conjugate/norm and coefficient calculations are preserved in the report.",
+   "via": [
+    "lem-sfb-quadratic-series-integral-closure",
+    "lem-sfb-nodal-local-tangent-normalization",
+    "lem-sfb-nodal-branch-double-cover",
+    "lem-sfb-nodal-finite-quasi-splitting",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-quadratic-series-field-factors",
+  "worker": "stage1",
+  "summary": "Preserved the statement; expanded the split/no-root alternatives by interpolation and the explicit quadratic inverse, extended the coefficient algebra isomorphism coefficientwise, applied the existing normal-series theorem with its field hypotheses verified, and proved the series coordinates, norm equation, finiteness, integrality and regularity directly. No new nodes.",
+  "blueprint": "Latest blueprint, det-thm-sf-ctf-stability-direct-images proof (3): local coefficient-algebra calculation below the alteration/nodal-normalization route already recorded in blueprint.from.place; realizes Stacks 0C4A Cases I and II, without replacing the unit route. The inherited ancestor command returns None.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-series-normal-domain",
+    "why": "Generic algebra theorem, Tag 0BI0, used only to show that each field-factor series ring is a normal domain. The current unit supplies no general normal-series theorem; this is a tool below the existing nodal-normalization route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-normal-domain"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-ad9cb81b1",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-ad9cb81b1 (reviewer sub-agent of L); spot-checked: I read every step in full and found no fault. Shape: the item's statement, stmt_deps and blueprint are unchanged from the Q127 base; only proof, proof_deps, proof_origin, status, split_report and mathlib_searches changed. There are no new nodes, no SGA citation and no repair note for this item, and proof_deps equals the union of the step uses. Source: Stacks curves.tex 0C4A (proof of (1)⇒(2), Cases I and II, split and nonsplit) and algebra.tex 0BI0 (line 8150), both read. Step 1: the monic-quotient leaf gives the basis 1,z with z²=−βz−γ. Step 2: s=−β−r gives rs=γ and (r−s)²=β²−4γ≠0, and the inverse ((rd−sc)/(r−s),(c−d)/(r−s)) is correct without dividing by 2. Step 3: (a+bz)(a−βb−bz)=a²−βab+γb²=b²p(−a/b)≠0, so L is a field of degree 2. Step 4: the coefficientwise extension Φ is a ring isomorphism because Cauchy sums are finite. Step 5: fields satisfy the hypotheses of the 0BI0 node, so each K[[t]] is a normal domain, and reducedness follows by checking each component through the injective Φ. Step 6: the coordinates u,v are unique and F[[t]]⊆F+tB, which is a subring. Step 7: (u+zv)(u−βv−zv)=u²−βuv+γv² gives the monic equation with the stated signs, and h=u·1+v·z gives the generators. Step 8: t-multiplication shifts coefficients, so it is injective on B and A. Edge cases: F₂ split (β=1,γ=0); F₄ (β=γ=1); Z² excluded by the discriminant hypothesis; in the split case B is reduced but not a domain, matching the statement. Duplicates: the trf quadratic-completion, split-node and binary-quadratic nodes read are not duplicates. Accepted tool use: lem-weil-pbc-power-series-normal-domain (sk-thm-p1), the generic 0BI0 normality theorem. Note: blueprint.from.node null is inherited from the base."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.QuadraticSeriesFieldFactors",
+  "declaration": "QuadraticSeries.field_factors",
+  "declarations": [
+   "QuadraticSeries.scalarConstantSubring",
+   "QuadraticSeries.field_factors"
+  ],
+  "file": "lean/Sheaf/RingTheory/QuadraticSeriesFieldFactors.lean",
+  "statement": "theorem field_factors (F : Type u) [Field F] (β γ : F) (p : Polynomial F) (hp : p = Polynomial.X ^ 2 + Polynomial.C β * Polynomial.X + Polynomial.C γ) (hdisc : β ^ 2 - 4 * γ ≠ 0) : (∀ r : F, p.eval r = 0 → p.eval (-β - r) = 0 ∧ r ≠ -β - r ∧ ∃ e : AdjoinRoot p ≃ₐ[F] F × F, ∀ q : Polynomial F, e (AdjoinRoot.mk p q) = (q.eval r, q.eval (-β - r))) ∧ ((¬ ∃ r : F, p.eval r = 0) → IsField (AdjoinRoot p) ∧ Module.finrank F (AdjoinRoot p) = 2) ∧ (∃ m : ℕ, (m = 1 ∨ m = 2) ∧ ∃ (K : Fin m → Type u) (_ : ∀ i, Field (K i)) (_ : ∀ i, Algebra F (K i)), ∃ (φ : AdjoinRoot p ≃ₐ[F] (∀ i, K i)) (Φ : PowerSeries (AdjoinRoot p) ≃ₐ[F] (∀ i, PowerSeries (K i))), (∀ (h : PowerSeries (AdjoinRoot p)) (i : Fin m) (n : ℕ), PowerSeries.coeff n (Φ h i) = φ (PowerSeries.coeff n h) i) ∧ Φ PowerSeries.X = (fun i ↦ (PowerSeries.X : PowerSeries (K i))) ∧ ∀ i : Fin m, IsDomain (PowerSeries (K i)) ∧ IsIntegrallyClosed (PowerSeries (K i))) ∧ IsReduced (PowerSeries (AdjoinRoot p)) ∧ (∀ h : PowerSeries (AdjoinRoot p), h ∈ scalarConstantSubring p ↔ ∃ (a : F) (g : PowerSeries (AdjoinRoot p)), h = PowerSeries.C (algebraMap F (AdjoinRoot p) a) + PowerSeries.X * g) ∧ Function.Injective (PowerSeries.map (algebraMap F (AdjoinRoot p))) ∧ (∀ u : PowerSeries F, PowerSeries.map (algebraMap F (AdjoinRoot p)) u ∈ scalarConstantSubring p) ∧ (∀ h : PowerSeries (AdjoinRoot p), ∃ u v : PowerSeries F, h = PowerSeries.map (algebraMap F (AdjoinRoot p)) u + PowerSeries.C (AdjoinRoot.root p) * PowerSeries.map (algebraMap F (AdjoinRoot p)) v ∧ (∀ u' v' : PowerSeries F, h = PowerSeries.map (algebraMap F (AdjoinRoot p)) u' + PowerSeries.C (AdjoinRoot.root p) * PowerSeries.map (algebraMap F (AdjoinRoot p)) v' → u' = u ∧ v' = v) ∧ h ^ 2 + (PowerSeries.C (algebraMap F (AdjoinRoot p) β) * PowerSeries.map (algebraMap F (AdjoinRoot p)) v - 2 * PowerSeries.map (algebraMap F (AdjoinRoot p)) u) * h + (PowerSeries.map (algebraMap F (AdjoinRoot p)) u ^ 2 - PowerSeries.C (algebraMap F (AdjoinRoot p) β) * PowerSeries.map (algebraMap F (AdjoinRoot p)) u * PowerSeries.map (algebraMap F (AdjoinRoot p)) v + PowerSeries.C (algebraMap F (AdjoinRoot p) γ) * PowerSeries.map (algebraMap F (AdjoinRoot p)) v ^ 2) = 0) ∧ Submodule.span (scalarConstantSubring p) ({1, PowerSeries.C (AdjoinRoot.root p)} : Set (PowerSeries (AdjoinRoot p))) = ⊤ ∧ Module.Finite (scalarConstantSubring p) (PowerSeries (AdjoinRoot p)) ∧ (∀ h : PowerSeries (AdjoinRoot p), IsIntegral (scalarConstantSubring p) h) ∧ PowerSeries.X ∈ scalarConstantSubring p ∧ Function.Injective (fun h : PowerSeries (AdjoinRoot p) ↦ PowerSeries.X * h) ∧ Function.Injective (fun h : scalarConstantSubring p ↦ PowerSeries.X * (h : PowerSeries (AdjoinRoot p)))",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The polynomial binder p is fixed by hp to the displayed monic quadratic; this is the node's notation, not an extra restriction. scalarConstantSubring p is the concrete inverse image of the scalar field under constant coefficient, and the theorem explicitly identifies it with F+tB. Field factors are existential field/algebra structures; no field or domain assumption is imposed on the quadratic quotient. The coefficientwise identity characterizes the series equivalence. All clauses, including characteristic two and the split case, are retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-76fc6b86e",
+  "group": "NI",
+  "result": "pass",
+  "note": "First S2 delivery: only the lean record of the node changes; the live lean record is null. QuadraticSeries.field_factors renders every clause of the node exactly, with no extra hypotheses: the split case with an evaluation-pinned F-algebra iso L≅F×F and s=-β-r a distinct root; the no-root case with IsField and finrank 2; m∈{1,2} fields K i (universe u) with φ and a coefficientwise-pinned Φ:B≃ₐ[F]Π K i[[t]] sending X to the tuple of X's, each factor IsDomain ∧ IsIntegrallyClosed; IsReduced B; A=scalarConstantSubring (constantCoeff⁻¹ of F, which is Stacks 0C4A {f: f(0)∈κ}) proved equal to F+tB; F[[t]]↪A; the unique u,v decomposition with the exact monic equation; span A {1,z}=⊤, Module.Finite and IsIntegral; X∈A and X-multiplication injective on B and A. Char 2, the split case and m≠0 are covered, and β=γ=0 is excluded by hdisc. lean.statement matches the file verbatim; all 5 stmt_deps are Mathlib-backed and used; no H4 clash with the parent QuadraticSeriesIntegralClosure (polynomial/CoefficientAlgebra not redeclared); the helper has real data and docstrings with source and blueprint; the proof is only sorry; imports exist. No compile needed since no file was changed."
+ }
+}

@@ -1,0 +1,127 @@
+{
+ "id": "def-sf-finite-projection-fixed-coordinates",
+ "kind": "definition",
+ "title": "Fixed coefficient coordinates for finite projections",
+ "statement": "For a finite operation datum S at positive coefficient exponent n, let J_X be the full bounded constructible inclusion followed by the inverse of its published coefficient equivalence R_X. Let P_f be the fixed K-flat inverse image and Q_f the fixed right derived direct image with their published adjunction. Define tensorCoordinates to be the inverse coefficient unit at T_X(J_X K,R_X^{-1}L). Define directCoordinates from S.finiteDirectImage, direct image of the inverse coefficient counit at K, and the published sfIntrinsicDerivedDirectImageComparison, then apply R_Y^{-1} and cancel its unit. Define targetCoordinates by tensorCoordinates followed by tensor in the second slot of fixedPullRealization at L. Define directTensorCoordinates by tensorCoordinates followed by tensor in the first slot of directCoordinates at K. Define pullCoordinatesIso by whiskering S.finitePullback with the inverse coefficient realization, the two mapDerivedCategory composition comparisons, the inverse coefficient unit, and the inverse K-flat/exact comparison. Its components are exactly fixedPullRealization. TensorCoordinates and targetCoordinates are natural in the unrestricted first input. No object or comparison is selected from an arbitrary existence statement.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Proper-factor paragraph: the direct-image projection is the transpose of counit tensor identity, read through pullback monoidality; finite coefficient normalization"
+ },
+ "stmt_deps": [
+  "def-fix-six-functor-datum",
+  "def-sf-constructible-projection-mates",
+  "def-sf-finite-partial-pullback-tensor"
+ ],
+ "proof": [
+  {
+   "text": "Construct each comparison as the stated composite of existing isomorphisms. Functor composition and whiskering make pullCoordinatesIso natural, and expanding its components gives fixedPullRealization. Naturality of the inverse coefficient unit gives tensorCoordinates_naturality. Compose this with naturality of the fixed tensor in its second argument to obtain targetCoordinates_naturality.",
+   "uses": [
+    "def-sf-constructible-projection-mates",
+    "def-sf-finite-partial-pullback-tensor",
+    "def-sf-operation-stages",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-constructible-projection-mates",
+  "def-sf-finite-partial-pullback-tensor",
+  "def-sf-operation-stages",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Proper-factor paragraph: the direct-image projection is the transpose of counit tensor identity, read through pullback monoidality; finite coefficient normalization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Transporting a right adjoint counit through an equivalence and a full subcategory preserves its specified coefficient normalization",
+   "results": "Adjunction.map_restrictFullyFaithful_counit_app and Equivalence.counit_naturality_assoc give generic component formulas. Neither states the compatibility of the specified intrinsic derived coefficient comparisons and fixed coefficient projection.",
+   "date": "2026-10-27",
+   "verdict": "Use the generic naturality and adjunction identities; no specialized normalization found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The projection map of a right adjoint has transpose equal to tensor pullback comparison followed by counit tensor identity",
+   "results": "Eight generic monoidal and Cartesian adjunction results, including CategoryTheory.frobeniusMorphism. None identifies the prescribed constructible/fixed coefficient comparisons. Loogle search for CategoryTheory.Adjunction.map_rightAdjointProjectionMap_app_app_comp_counit found no Mathlib identifier; the adopted source library supplies it.",
+   "date": "2026-10-27",
+   "verdict": "No specialized Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointProjectionMap; unitInv_naturality; sfIntrinsicDerivedDirectImageComparison; fixedPullRealization in Mathlib/CategoryTheory and the two library roots",
+   "results": "Mathlib Equivalence provides unitInv_naturality and triangle identities. Source Adjunction/ProjectionMap and ProEtale/FiniteCoefficient/Derived/LowerStarProjection provide the fixed scalar projection and its counit transpose. ConstructibleProjectionMates and SfIntrinsicRealizationTransport provide the actual coefficient comparisons, but not these two normalization equations.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing constructions; only their two normalization equations remain new."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteProperProjectionTranspose",
+  "date": "2026-10-27",
+  "group": "P6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-pf-coherence",
+   "place": "Proper-factor paragraph: the direct-image projection is the transpose of counit tensor identity, read through pullback monoidality; finite coefficient normalization",
+   "via": [
+    "lem-sf-finite-proper-projection-transpose",
+    "lem-sf-projection-identity-proper-counit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteProjectionFixedCoordinates",
+  "file": "lean/Sheaf/Paper/FiniteProjectionFixedCoordinates.lean",
+  "declaration": "WeilConjectures.CompactSupportFiniteProjection.directCoordinates",
+  "declarations": [
+   "WeilConjectures.CompactSupportFiniteProjection.coordinates",
+   "WeilConjectures.CompactSupportFiniteProjection.fixedDirect",
+   "WeilConjectures.CompactSupportFiniteProjection.fixedAdjunction",
+   "WeilConjectures.CompactSupportFiniteProjection.tensorCoordinates",
+   "WeilConjectures.CompactSupportFiniteProjection.directCoordinates",
+   "WeilConjectures.CompactSupportFiniteProjection.targetCoordinates",
+   "WeilConjectures.CompactSupportFiniteProjection.directTensorCoordinates",
+   "WeilConjectures.CompactSupportFiniteProjection.coordinatesFaithful",
+   "WeilConjectures.CompactSupportFiniteProjection.pullCoordinatesIso",
+   "WeilConjectures.CompactSupportFiniteProjection.pullCoordinatesIso_hom_app",
+   "WeilConjectures.CompactSupportFiniteProjection.tensorCoordinates_naturality",
+   "WeilConjectures.CompactSupportFiniteProjection.targetCoordinates_naturality"
+  ],
+  "statement": "def directCoordinates (S : SixFunctorFiniteOperations D C E n hn)\n    {X Y : SixFunctorSpace D} (f : X ⟶ Y)\n    (K : sixFunctorFiniteCategory D C E n hn X) :\n    (coordinates (C := C) (E := E) (n := n) (hn := hn) Y).obj\n        ((S.finite.direct f).obj K) ≅\n      (fixedDirect (C := C) (E := E) (n := n) f).obj\n        ((coordinates (C := C) (E := E) (n := n) (hn := hn) X).obj K)",
+  "branch": "sheaf-dag",
+  "by": "P6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261027T112418-L-1581539",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261027T112418-L-1581539",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

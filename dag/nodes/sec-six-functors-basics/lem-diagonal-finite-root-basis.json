@@ -1,0 +1,103 @@
+{
+ "id": "lem-diagonal-finite-root-basis",
+ "kind": "statement",
+ "title": "Finite root bases over annihilated coefficients",
+ "statement": "Let X be a scheme, l prime, W an object of its pro-etale site, and n natural. Let zeta be a section of the l^(n+1) root module on W, with an isomorphism from the unit module on that slice to the root module sending every section a to a times the restriction of zeta. Let B be any commutative internal ring in abelian sheaves on the pro-etale site, whose section groups are annihilated by l^(n+1). Then, on the same slice W, the section reconstruction of the regular B-module is isomorphic to the section reconstruction of the internal free B-module on mu_(l^(n+1)).",
+ "stmt_deps": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), expected finite coefficient reductions"
+ },
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), expected finite coefficient reductions",
+  "by": "U1",
+  "note": "Extract a complete proved helper into its own module so every delivered file compiles within the per-file limit."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalQuotientRootEndpoint",
+  "date": "2026-10-27",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-diagonal-quotient-root-projection-iso",
+   "place": "local rank-one proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "proof": [
+  {
+   "text": "Use the cyclic tensor insertion and tensor-sheafification calculation from the proved finite root basis. Annihilation makes b -> b tensor 1 a bijection from each B section group to its integer tensor with Z/N. Whisker the normalized cyclic root basis with B and the locally bijective tensor comparison. The composite is the B-linear insertion of the prescribed root section. It is locally bijective and hence an isomorphism; remove the identity-scalar restriction using comapId.",
+   "uses": [
+    "lem-sp-root-basis-level"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-root-basis-level"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If a coefficient group is annihilated by N, tensoring it over integers with ZMod N is isomorphic to the coefficient group",
+   "date": "2026-10-27",
+   "results": "8 hits, including TensorProduct.tensorQuotEquivQuotSMul and ModN.liftEquiv.",
+   "verdict": "The quotient tensor identity is the algebraic input; the sheaf normalization is supplied by the existing root-basis helpers."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.rid",
+   "date": "2026-10-27",
+   "results": "12 hits, including TensorProduct.rid and TensorProduct.toLinearMap_symm_rid.",
+   "verdict": "These cover tensors over the base ring, rather than the integer tensor with Z/N used by the actual internal module."
+  },
+  {
+   "tool": "grep",
+   "query": "zmod.*[Tt]ensor|[Tt]ensor.*zmod",
+   "date": "2026-10-27",
+   "results": "0 hits.",
+   "verdict": "Reuse the proved local cyclic insertion calculation from SpRootBasisLevel."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalFiniteRootBasis",
+  "file": "lean/Sheaf/Paper/DiagonalFiniteRootBasis.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonalFiniteRootBasis",
+  "statement": "theorem diagonalFiniteRootBasis\n    (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (W : X.ProEt) (n : ℕ)\n    (ζ : (Scheme.purTwistRootsModule X ℓ n).val.obj (op W))\n    (e : (SheafOfModules.unit\n        (Scheme.purTwistRing X (Scheme.purTwistFiniteRing X ℓ n))).over W ≅\n      (Scheme.purTwistRootsModule X ℓ n).over W)\n    (he : ∀ (V : (Over W)ᵒᵖ)\n      (a : ((Scheme.purTwistRing X (Scheme.purTwistFiniteRing X ℓ n)).over W).obj.obj V),\n      e.hom.val.app V a =\n        a • (Scheme.purTwistRootsModule X ℓ n).val.map V.unop.hom.op ζ)\n    (B : Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1})\n    [MonObj B] [IsCommMonObj B]\n    (hB : ∀ (V : X.ProEtᵒᵖ) (b : B.obj.obj V), (ℓ ^ (n + 1)) • b = 0) :\n    Nonempty ((spRootBasisSliceSections X B W).obj (Mod.regular B) ≅\n      (spRootBasisSliceSections X B W).obj\n        ((Mod.free B).obj (Scheme.proEtaleRootsOfUnitySheaf X (ℓ ^ (n + 1)))))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261027T034751-L-3684319",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261027T034751-L-3684319",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

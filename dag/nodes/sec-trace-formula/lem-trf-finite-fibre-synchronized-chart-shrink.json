@@ -1,0 +1,286 @@
+{
+ "id": "lem-trf-finite-fibre-synchronized-chart-shrink",
+ "kind": "statement",
+ "title": "Shrink a finite special-fibre map and synchronize the original quasi-finite chart",
+ "statement": "Let $\\rho:R\\to A$ be a finite type homomorphism of commutative rings [def-weil-pbc-finite-type-algebra], let $\\mathfrak q_A\\subset A$ be prime, put $\\mathfrak p=\\rho^{-1}(\\mathfrak q_A)$ and $k=\\kappa(\\mathfrak p)$ [def-weil-pbc-localization-at-prime], and let $g\\in A\\setminus\\mathfrak q_A$. Suppose $\\alpha:E=R[t_1,\\ldots,t_n]\\to B=A_g$ is an $R$-algebra map of finite type and quasi-finite at every prime [def-weil-pbc-mv-polynomial-ring, def-weil-ring-localization-away, def-weil-pbc-ring-map-quasi-finite-at-prime]. Put $\\mathfrak q_B=\\mathfrak q_A B$ and $\\mathfrak q'=\\alpha^{-1}(\\mathfrak q_B)$. Fix $f\\in R\\setminus\\mathfrak p$, put $C=R_f[x_1,\\ldots,x_n]$ and $D=R_f[t_1,\\ldots,t_n]$, and suppose an $R_f$-algebra map $\\psi:C\\to D$ is of finite type and its scalar extension $C\\otimes_{R_f}k\\to D\\otimes_{R_f}k$ is finite (its target is a finitely generated module over its source [def-weil-finitely-generated-module]). Write $\\mathfrak q_D=\\mathfrak q'D$, $P=\\psi^{-1}(\\mathfrak q_D)$ and $\\alpha_f:D\\to B_f$ for the localized map. There exist $h\\in D\\setminus\\mathfrak q_D$, $a\\in A\\setminus\\mathfrak q_A$, and $N\\ge0$ such that $\\alpha_f(h)=a/(g\\rho(f))^N$ in $B_f\\cong A_{g\\rho(f)}$. The maps $C\\to D_h$ and $D_h\\to T=B_f[1/\\alpha_f(h)]$, and their composite, are of finite type and quasi-finite at every prime. With $d=g\\rho(f)a$, there is an $A$-algebra isomorphism $T\\cong A_d$, $d\\notin\\mathfrak q_A$, and the image of $\\rho(f)$ is a unit in $A_d$. Under this isomorphism the composite defines $\\theta:C\\to A_d$ satisfying $\\theta^{-1}(\\mathfrak q_A A_d)=P$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0520 (lemma-refined-quasi-finite-over-polynomial-algebra), proof, finite special-fibre map through the final composite; Tag 00QA (lemma-quasi-finite-open) and Tag 00PO (lemma-quasi-finite-composition). The target localization includes the image of f."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "Put $S=R_f$ and $s=g\\rho(f)\\in A$. The localization-prime correspondence gives primes $\\mathfrak q_B=\\mathfrak q_A B$ and $\\mathfrak q_B B_f$ contracting to $\\mathfrak q_A$, since $g,\\rho(f)\\notin\\mathfrak q_A$. Thus $\\mathfrak q'\\cap R=\\mathfrak p$, $f\\notin\\mathfrak q'$, and $\\mathfrak q_D=\\mathfrak q'D$ is prime. To identify $D=E_f$, extend the coefficient map $R\\to R_f$ and fix each $t_i$; conversely extend $E\\to E_f$ to coefficients in $R_f$ and fix $t_i$. The polynomial and localization universal properties make these maps inverse. Consequently $\\alpha_f^{-1}(\\mathfrak q_B B_f)=\\mathfrak q_D$: for $v/f^j\\in E_f$ membership is equivalent to $\\alpha(v)\\in\\mathfrak q_B$, hence to $v\\in\\mathfrak q'$. Since $\\psi$ is an $S$-algebra map, $P\\cap S=\\mathfrak pS$. Set $L=\\kappa(P)$. The map $R\\to L$ kills $\\mathfrak p$ and sends every element outside $\\mathfrak p$ to a nonzero element of the field $L$; extending fractions and then quotienting gives the compatible map $k\\to L$.",
+   "uses": [
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-ring-localization-universal-property",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0520 (lemma-refined-quasi-finite-over-polynomial-algebra), localized polynomial rings and the chosen prime; Tags 00CP and 00E3"
+   }
+  },
+  {
+   "text": "Write $C_k=C\\otimes_S k$, $D_k=D\\otimes_S k$. There is a $L$-algebra isomorphism $F=D\\otimes_C L\\cong D_k\\otimes_{C_k}L$. Explicitly the map from right to left sends $(d\\otimes\\lambda)\\otimes\\mu$ to $d\\otimes(\\lambda\\mu)$, where $k\\to L$ is the map just constructed; its inverse sends $d\\otimes\\mu$ to $(d\\otimes1)\\otimes\\mu$. The balancing relations over $S$, $k$ and $C$ make both formulas well defined; on pure tensors their composites are the identity, so the tensor universal properties give the claimed isomorphism. Choose finite $C_k$-module generators $u_1,\\ldots,u_r$ of $D_k$ from the hypothesis. Every tensor $v\\otimes\\mu$ with $v=\\sum_j c_j u_j$ equals $\\sum_j(u_j\\otimes1)c_j\\mu$. Since pure tensors span, the $u_j\\otimes1$ generate $F$ over $L$. Hence $F$ is a finite $L$-algebra.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0520, assertion that the lifted map is quasi-finite at the chosen prime: explicit fibre calculation; Tag 00CX (lemma-tensor-product)"
+   }
+  },
+  {
+   "text": "The field $L$ is local with its zero ideal as its only prime. Apply the finite-over-zero-dimensional-local-ring lemma to the finite $L$-algebra $F$ from step 2: $\\operatorname{Spec}F$ is finite discrete. In particular its prime corresponding to $\\mathfrak q_D$ is isolated. The map $C\\to D$ is finite type by hypothesis, so the definition of quasi-finiteness at a prime, applied to $P=\\psi^{-1}(\\mathfrak q_D)$ and its fibre $F=D\\otimes_C\\kappa(P)$, says that $\\psi$ is quasi-finite at $\\mathfrak q_D$.",
+   "uses": [
+    "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+    "def-weil-pbc-ring-map-quasi-finite-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0520, finite special-fibre map implies quasi-finiteness at the chosen prime; Tag 06RS (lemma-local-dimension-zero-henselian), first part of proof, applied over a field"
+   }
+  },
+  {
+   "text": "Apply the open quasi-finite locus lemma to $\\psi:C\\to D$ at $\\mathfrak q_D$. It gives $h\\in D\\setminus\\mathfrak q_D$ such that $C\\to D_h$ is quasi-finite at every prime. This map is also finite type: the images of $t_1,\\ldots,t_n,h^{-1}$ generate $D_h$ over $C$, because the image of $C$ contains $S$ and $D=S[t_1,\\ldots,t_n]$.",
+   "uses": [
+    "lem-weil-pbc-ring-quasi-finite-locus-open",
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 0520 and 00QA (lemma-quasi-finite-open), principal shrinking at the chosen prime"
+   }
+  },
+  {
+   "text": "The localization universal property identifies $B_f=(A_g)_{\\rho(f)}$ with $A_s$: in $A_s$ both $g$ and $\\rho(f)$ are units, with inverses $\\rho(f)/s$ and $g/s$, and in $B_f$ their product $s$ is a unit. The two induced $A$-maps are inverse by uniqueness. Therefore write $\\alpha_f(h)=a/s^N$ for some $a\\in A$ and $N\\ge0$. Step 1 and $h\\notin\\mathfrak q_D$ give $\\alpha_f(h)\\notin\\mathfrak q_B B_f$. Under the identification with $A_s$ this prime is $\\mathfrak q_A A_s$, and $a/s^N$ belongs to it exactly when $a\\in\\mathfrak q_A$, since $s\\notin\\mathfrak q_A$. Thus $a\\notin\\mathfrak q_A$.",
+   "uses": [
+    "lem-weil-pbc-ring-localization-universal-property",
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-localization-prime-residue-field-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0520, simultaneous localization; Tag 00CP (proposition-universal-property-localization) and Tag 00E3 (lemma-spec-localization)"
+   }
+  },
+  {
+   "text": "Apply principal-localization invariance of quasi-finiteness to $\\alpha:E\\to B$ with source element $f$ and target element $1$. Every prime of $B_f$ contracts to a prime of $B$ avoiding $\\rho(f)$, where $\\alpha$ is quasi-finite by hypothesis. Using $D=E_f$, the lemma gives that $\\alpha_f:D\\to B_f$ is finite type and quasi-finite everywhere. Apply the same lemma again, now to $D\\to B_f$, with source element $h$ and target element $1$. Every prime of $T=(B_f)_{\\alpha_f(h)}$ contracts to a prime avoiding $\\alpha_f(h)$; its contraction in $D$ avoids $h$. The conclusion is exactly that $D_h\\to T$ is finite type and quasi-finite everywhere. Finally compose this map with the finite type, everywhere quasi-finite map $C\\to D_h$ of step 4, using the quasi-finite composition lemma. This proves all three assertions about the two arrows and their composite.",
+   "uses": [
+    "lem-weil-pbc-quasi-finite-at-prime-principal-localization",
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "lem-trf-quasi-finite-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 077H (lemma-quasi-finite-local) twice, and Tag 00PO (lemma-quasi-finite-composition), as used in the final composite of Tag 0520"
+   }
+  },
+  {
+   "text": "Set $d=sa=g\\rho(f)a$. In $T=A_s[1/(a/s^N)]$, the elements $s$ and $a=s^N(a/s^N)$ are units. In $A_d$, both $s$ and $a$ are units, with inverses $a/d$ and $s/d$, so $a/s^N$ is a unit as well. The localization universal property gives inverse $A$-algebra maps $T\\rightleftarrows A_d$, their composites being identities since they fix $A$ and hence all the fractions. All three factors of $d$ avoid $\\mathfrak q_A$, so $d\\notin\\mathfrak q_A$ by primality. The image of $\\rho(f)$ is a unit in $A_d$, explicitly with inverse $ga/d$.",
+   "uses": [
+    "lem-weil-pbc-ring-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0520, final target localization made explicit; Tag 00CP (proposition-universal-property-localization)"
+   }
+  },
+  {
+   "text": "The prime $\\mathfrak q_A A_s$ avoids $a/s^N$ by step 5, so extends to a prime of $T$ contracting back to $\\mathfrak q_A A_s$. Under the $A$-algebra isomorphism $T\\cong A_d$ it is $\\mathfrak q_A A_d$, by uniqueness in the localization-prime correspondence. Its contraction along $D\\to B_f\\to T$ is $\\mathfrak q_D$ by step 1; along $D_h\\to T$ it is $\\mathfrak q_D D_h$ since $h\\notin\\mathfrak q_D$. Therefore the composite $\\theta:C\\to D_h\\to T\\cong A_d$ satisfies $\\theta^{-1}(\\mathfrak q_A A_d)=\\psi^{-1}(\\mathfrak q_D)=P$, as required.",
+   "uses": [
+    "lem-weil-pbc-localization-prime-residue-field-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0520, prime contraction under the final composite; Tag 00E3 (lemma-spec-localization)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-ring-localization-universal-property",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime",
+  "lem-weil-pbc-ring-quasi-finite-locus-open",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-quasi-finite-at-prime-principal-localization",
+  "lem-trf-quasi-finite-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0520 (lemma-refined-quasi-finite-over-polynomial-algebra), proof from the finite residue-field polynomial map to the final composite; fibre calculation and localization universal-property arguments expanded using Tags 00CX, 00CP, 00E3, 06RS, 077H, 00QA and 00PO."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A polynomial algebra map finite on a residue field fibre is quasi finite near a prime and composes with a quasi finite chart after simultaneous localization of source and base",
+   "results": "{\"t\": \"2026-10-22T06:47:00Z\", \"tool\": \"leanfinder\", \"query\": \"A polynomial algebra map finite on a residue field fibre is quasi finite near a prime and composes with a quasi finite chart after simultaneous localization of source and base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.quasiFinite_iff\", \"Algebra.QuasiFinite.finite_fiber\", \"Algebra.instFiniteResidueFieldOfQuasiFiniteAt\", \"Algebra.QuasiFiniteAt\", \"Polynomial.map_under_lt_comap_of_quasiFiniteAt\", \"Algebra.QuasiFinite.instResidueField\", \"Algebra.QuasiFinite.instFiniteResidueField\", \"RingHom.QuasiFinite.holdsForLocalizationAway\"], \"digest\": \"03d15b41058fcd3f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Algebra.QuasiFinite.finite_fiber, RingHom.QuasiFinite.holdsForLocalizationAway and Algebra.QuasiFinite.of_isLocalization concern already quasi-finite maps. They do not produce a principal quasi-finite neighbourhood from a finite special-fibre map, nor the synchronized A-localization and prime contraction. Mathlib quasi-finiteness also omits the finite-type condition required here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiFinite\", \"TensorProduct\"",
+   "results": "{\"t\": \"2026-10-22T06:46:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"QuasiFinite\\\", \\\"TensorProduct\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Algebra.QuasiFinite.finite_fiber, RingHom.QuasiFinite.holdsForLocalizationAway and Algebra.QuasiFinite.of_isLocalization concern already quasi-finite maps. They do not produce a principal quasi-finite neighbourhood from a finite special-fibre map, nor the synchronized A-localization and prime contraction. Mathlib quasi-finiteness also omits the finite-type condition required here."
+  },
+  {
+   "tool": "grep",
+   "query": "quasiFinite.*(localiz|[Tt]ensor|[Ff]iber)|[Ff]iber.*quasiFinite|[Ll]ocaliz.*quasiFinite",
+   "results": "{\"t\": \"2026-10-22T06:46:49Z\", \"tool\": \"grep\", \"query\": \"quasiFinite.*(localiz|[Tt]ensor|[Ff]iber)|[Ff]iber.*quasiFinite|[Ll]ocaliz.*quasiFinite\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/RingHom/QuasiFinite.lean\", \"Mathlib/RingTheory/RingHom/QuasiFinite.lean\", \"Mathlib/RingTheory/RingHom/QuasiFinite.lean\", \"Mathlib/RingTheory/RingHom/QuasiFinite.lean\", \"Mathlib/RingTheory/QuasiFinite/Basic.lean\", \"Mathlib/RingTheory/QuasiFinite/Basic.lean\", \"Mathlib/RingTheory/QuasiFinite/Basic.lean\", \"Mathlib/RingTheory/QuasiFinite/Basic.lean\"], \"digest\": \"5f2ec700ad8c4055\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Algebra.QuasiFinite.finite_fiber, RingHom.QuasiFinite.holdsForLocalizationAway and Algebra.QuasiFinite.of_isLocalization concern already quasi-finite maps. They do not produce a principal quasi-finite neighbourhood from a finite special-fibre map, nor the synchronized A-localization and prime contraction. Mathlib quasi-finiteness also omits the finite-type condition required here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite special fibre implies quasi finite on a principal open and simultaneous localization preserves a composed chart",
+   "results": "{\"t\": \"2026-10-22T06:47:07Z\", \"tool\": \"leansearch\", \"query\": \"finite special fibre implies quasi finite on a principal open and simultaneous localization preserves a composed chart\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"Algebra.QuasiFiniteAt\", \"Algebra.QuasiFinite.instLocalization\", \"RingHom.QuasiFinite.holdsForLocalizationAway\", \"AlgebraicGeometry.LocallyQuasiFinite.recOn\", \"AlgebraicGeometry.LocallyQuasiFinite.of_comp\", \"AlgebraicGeometry.instLocallyQuasiFiniteMorphismRestrict\", \"AlgebraicGeometry.LocallyQuasiFinite.mk\"], \"digest\": \"e03f14da0a02ec0b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Algebra.QuasiFinite.finite_fiber, RingHom.QuasiFinite.holdsForLocalizationAway and Algebra.QuasiFinite.of_isLocalization concern already quasi-finite maps. They do not produce a principal quasi-finite neighbourhood from a finite special-fibre map, nor the synchronized A-localization and prime contraction. Mathlib quasi-finiteness also omits the finite-type condition required here."
+  },
+  {
+   "tool": "grep",
+   "query": "quasiFinite.*(localiz|[Ff]iber)|[Ll]ocaliz.*quasiFinite|quasiFiniteAt.*[Ff]iber",
+   "results": "{\"t\": \"2026-10-23T12:33:06Z\", \"tool\": \"grep\", \"query\": \"quasiFinite.*(localiz|[Ff]iber)|[Ll]ocaliz.*quasiFinite|quasiFiniteAt.*[Ff]iber\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/QuasiFinite/Basic.lean\", \"Mathlib/RingTheory/QuasiFinite/Basic.lean\", \"Mathlib/RingTheory/QuasiFinite/Basic.lean\", \"Mathlib/RingTheory/QuasiFinite/Basic.lean\", \"Mathlib/RingTheory/QuasiFinite/Basic.lean\", \"Mathlib/RingTheory/RingHom/QuasiFinite.lean\", \"Mathlib/RingTheory/RingHom/QuasiFinite.lean\", \"Mathlib/RingTheory/RingHom/QuasiFinite.lean\"], \"digest\": \"4fdf3be02e2eb592\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern finite fibres, existing quasi-finite maps, localization permanence or composition, not this existence-and-synchronization statement. Mathlib QuasiFinite does not include finite type (Basic.lean lines 54–70); no hit gives all clauses as an exact match or one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A ring map finite after residue field base change is quasi finite near a prime and quasi finite maps compose after simultaneous principal localization",
+   "results": "{\"t\": \"2026-10-23T12:33:06Z\", \"tool\": \"leansearch\", \"query\": \"A ring map finite after residue field base change is quasi finite near a prime and quasi finite maps compose after simultaneous principal localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.QuasiFinite.comp\", \"RingHom.QuasiFinite\", \"RingHom.QuasiFinite.of_finite\", \"Algebra.QuasiFinite.mk\", \"RingHom.QuasiFinite.stableUnderComposition\", \"RingHom.QuasiFinite.of_comp\", \"Algebra.QuasiFiniteAt\", \"RingHom.QuasiFinite.of_isIntegral_of_finiteType\"], \"digest\": \"6e32ad671943f4b2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern finite fibres, existing quasi-finite maps, localization permanence or composition, not this existence-and-synchronization statement. Mathlib QuasiFinite does not include finite type (Basic.lean lines 54–70); no hit gives all clauses as an exact match or one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiFinite\", \"Localization\"",
+   "results": "{\"t\": \"2026-10-23T12:33:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"QuasiFinite\\\", \\\"Localization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Algebra.QuasiFinite.instLocalization\", \"Algebra.QuasiFinite.of_isLocalization\", \"RingHom.QuasiFinite.holdsForLocalizationAway\", \"RingHom.QuasiFinite.ofLocalizationSpanTarget\", \"Algebra.WeaklyQuasiFiniteAt.finite_localization\", \"Algebra.WeaklyQuasiFiniteAt.of_algHom_localization\"], \"digest\": \"4e5eec48e4add06f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern finite fibres, existing quasi-finite maps, localization permanence or composition, not this existence-and-synchronization statement. Mathlib QuasiFinite does not include finite type (Basic.lean lines 54–70); no hit gives all clauses as an exact match or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type map of polynomial algebras finite on a residue field fibre admits a quasi finite principal neighbourhood compatible with an existing quasi finite chart and localization",
+   "results": "{\"t\": \"2026-10-23T12:33:08Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type map of polynomial algebras finite on a residue field fibre admits a quasi finite principal neighbourhood compatible with an existing quasi finite chart and localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.QuasiFinite.finite_fiber\", \"Algebra.quasiFinite_iff\", \"Algebra.QuasiFiniteAt\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\", \"RingHom.QuasiFinite.holdsForLocalizationAway\", \"RingHom.QuasiFinite.ofLocalizationSpanTarget\", \"Algebra.instFiniteResidueFieldOfQuasiFiniteAt\", \"Algebra.QuasiFinite.of_isIntegral_of_finiteType\"], \"digest\": \"25135c037fbdd064\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern finite fibres, existing quasi-finite maps, localization permanence or composition, not this existence-and-synchronization statement. Mathlib QuasiFinite does not include finite type (Basic.lean lines 54–70); no hit gives all clauses as an exact match or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely generated algebra homomorphism the quasi finite locus in the target spectrum is open and contains a prime where its fibre is finite dimensional",
+   "results": "{\"t\": \"2026-10-23T12:34:12Z\", \"tool\": \"leanfinder\", \"query\": \"For a finitely generated algebra homomorphism the quasi finite locus in the target spectrum is open and contains a prime where its fibre is finite dimensional\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.QuasiFinite.finite_primeSpectrum\", \"Algebra.QuasiFiniteAt\", \"Algebra.QuasiFinite.iff_finite_comap_preimage_singleton\", \"Algebra.QuasiFinite.finite_comap_preimage_singleton\", \"Algebra.QuasiFinite.finite_comap_preimage\", \"Algebra.quasiFinite_iff\", \"RingHom.QuasiFinite.propertyIsLocal\", \"Algebra.QuasiFinite.finite_primesOver\"], \"digest\": \"fa3a08904225ae50\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern finite fibres, existing quasi-finite maps, localization permanence or composition, not this existence-and-synchronization statement. Mathlib QuasiFinite does not include finite type (Basic.lean lines 54–70); no hit gives all clauses as an exact match or one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-refined-quasi-finite-polynomial-pure-transcendental",
+  "date": "2026-10-22",
+  "group": "Q74"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "the refined quasi-finite affine-space chart with purely transcendental image residue field in the affine elementary-etale finite-over-smooth ingredient (Stacks 0520 and 052E); 0520 finite-fibre comparison and simultaneous shrinking (returned proof steps 4 and 5)",
+   "via": [
+    "lem-trf-refined-quasi-finite-polynomial-pure-transcendental",
+    "lem-trf-etale-finite-smooth-local-structure",
+    "lem-trf-elementary-module-devissage",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-finite-fibre-synchronized-chart-shrink",
+  "worker": "stage1",
+  "summary": "Expanded the finite-special-fibre argument of Stacks 0520 using the explicit tensor fibre, finite module generators and the existing discrete-spectrum lemma; used the existing open-locus, principal-localization and composition lemmas; wrote the numerator, product-localization and prime-contraction calculations. Statement unchanged. No new nodes.",
+  "blueprint": "The inherited ancestor is lem-trf-local-term-locality; this item serves the previously extracted refined polynomial chart in its flattening/alteration branch, specifically Stacks 0520 finite-fibre comparison and simultaneous shrinking, steps 4–5 of the parent refined-chart split. The latest ancestor proof has no direct polynomial-chart clause; its contracting-correspondence normal-cone route and unit statement are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-localization-prime-residue-field-iso",
+    "why": "Localization-prime correspondence for the chosen prime and its contractions; the unit has no ring-localization replacement."
+   },
+   {
+    "node": "lem-weil-pbc-ring-localization-universal-property",
+    "why": "Construct inverse maps between the explicit principal localizations; generic commutative-ring tool."
+   },
+   {
+    "node": "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "why": "Define the mutually inverse maps on the fibre tensor products; generic ring-tensor universal property."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+    "why": "A finite algebra over the field kappa(P) has discrete spectrum, giving an isolated fibre prime; generic finite-ring tool."
+   },
+   {
+    "node": "lem-weil-pbc-ring-quasi-finite-locus-open",
+    "why": "The principal quasi-finite neighbourhood required by the Stacks 0520 route; generic open-locus tool."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-finite-at-prime-principal-localization",
+    "why": "Apply Tag 077H twice to preserve the original chart after localizing the base and then h; generic ring-map tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-ring-localization-universal-property",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+  "lem-weil-pbc-ring-quasi-finite-locus-open",
+  "lem-weil-pbc-quasi-finite-at-prime-principal-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q151-15843fff9",
+  "group": "Q151",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q151-15843fff9 (reviewer sub-agent of L); spot-checked: Read the item in full (8 steps, no new nodes) against Stacks algebra.tex Tag 0520 (lemma-refined-quasi-finite-over-polynomial-algebra, l.31211 ff.), from the 'becomes finite after tensoring with κ(p)' sentence to the final composite. The statement is byte-identical to the one in the four earlier Q74 snapshots and gives exactly what the parent refined-chart step uses: d∉q_A, a finite-type quasi-finite θ:C→A_d with θ^{-1}(q_A A_d)=P, and ρ(f) a unit in A_d. Step checks: (1) q'∩R=p, D=E_f, α_f^{-1}(q_B B_f)=q_D and P∩S=pS all follow from clause (1) of the localization-prime correspondence; the map k→L comes from the localization universal property. (2) D⊗_C L≅D_k⊗_{C_k}L through the algebra-tensor universal property, and generators of D_k over C_k give generators of F over L. (3) A finite algebra over a field has finite discrete spectrum, so the prime over q_D is isolated in the defining fibre over P. (4) The open-locus lemma gives h∉q_D; t_i and 1/h generate D_h over C. (5) α_f(h)=a/s^N with a∉q_A by contraction; no cancellation is used. (6) 077H is applied twice (source element f, then h; target element 1); every prime of the localized target avoids the denominator, and the composition lemma gives finite type and quasi-finiteness of the composite. (7) T=A_s[(a/s^N)^{-1}]≅A_{sa} by mutual universal properties; ρ(f)^{-1}=ga/d. (8) The prime q_A T contracts to q_D D_h, hence to P in C. Small cases tested: a field with n=0 and identity maps; k[ε]/(ε²)→k; n=0 with ψ the identity; the zero ring (empty statement). proof_deps equals the union of uses; no SGA; blueprint fields filled. The six split_report.tool_uses on sk-thm-p1 generic commutative-algebra nodes (localization primes and universal property, tensor universal property, finite-over-zero-dimensional discrete spectrum, open quasi-finite locus, 077H principal localization) are each used as a black box for their stated content: accepted. No changes."
+ }
+}

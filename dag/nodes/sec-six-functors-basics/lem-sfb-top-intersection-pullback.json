@@ -1,0 +1,245 @@
+{
+ "id": "lem-sfb-top-intersection-pullback",
+ "kind": "statement",
+ "title": "Top self-intersection under an arbitrary proper-variety morphism",
+ "statement": "Let $k$ be a field [def-weil-field] and let $X,Y$ be nonempty proper integral $k$-schemes of finite type of the same dimension $g\\geq1$ [def-pc-integral-scheme, def-weil-proper-morphism, def-weil-finite-type-morphism, def-kun-topological-krull-dimension]. Let $f:X\\to Y$ be a $k$-morphism and $\\mathcal L$ an invertible module on $Y$ [def-sc-invertible-module]. In the intersection-number convention [def-sc-intersection-number],\n$$((f^*\\mathcal L)^g\\cdot X)=\\begin{cases}[k(X):f^*k(Y)](\\mathcal L^g\\cdot Y),&f\\text{ dominant},\\\\0,&f\\text{ not dominant}.\\end{cases}$$\nHere dominant means that the image is dense; in the dominant case the induced extension of function fields [def-sc-function-field] is finite. No finiteness of $f$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BET, lemma-intersection-number-and-pullback, with Z=X and all entries equal; zero-image-dimension clause"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-integral-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-sc-invertible-module",
+  "def-sc-intersection-number",
+  "def-sc-function-field",
+  "def-pc-module-pullback",
+  "def-sfb-dominant-function-field-map",
+  "lem-weil-pbc-invertible-pullback-tensor"
+ ],
+ "proof": [
+  {
+   "text": "The morphism $f$ is proper by [lemma-nagata-proper-to-separated-target], since $X$ is proper over $k$ and $Y$ is separated over $k$. $Y$ is Noetherian, being of finite type over $\\operatorname{Spec}k$ [lem-weil-pbc-finite-type-over-noetherian]. Put $\\mathcal F_i=R^if_*\\mathcal O_X$; by [lem-pc-coherent-hi] (proper $f$, Noetherian $Y$) every $\\mathcal F_i$ is coherent and only finitely many are nonzero. For $\\mathbf n=(n_1,\\ldots,n_g)\\in\\mathbf Z^g$ put $\\mathcal M(\\mathbf n)=\\bigotimes_{j=1}^g\\mathcal L^{\\otimes n_j}$; tensor powers with negative exponent mean powers of the inverse invertible module. Pullback commutes with these tensor products: on opens trivializing $\\mathcal L$, the canonical tensor comparison is the identity on a free rank-one module, so it is an isomorphism and the comparisons glue; thus $f^*\\mathcal M(\\mathbf n)\\cong\\bigotimes_j(f^*\\mathcal L)^{\\otimes n_j}$. The same local calculation shows that the tensor powers and their pullbacks are invertible, so that $\\mathcal G_{\\mathbf n}=f^*\\mathcal M(\\mathbf n)$ is coherent on $X$. The Euler--Leray clause of [lem-pc-euler-additive] for the proper $k$-schemes $X,Y$ and $\\mathcal G_{\\mathbf n}$ gives $\\chi(X,\\mathcal G_{\\mathbf n})=\\sum_i(-1)^i\\chi(Y,R^if_*\\mathcal G_{\\mathbf n})$. By [lem-pc-projection-formula] ($f$ is qcqs, $\\mathcal O_X$ is quasi-coherent, $\\mathcal M(\\mathbf n)$ invertible), $Rf_*(\\mathcal O_X)\\otimes\\mathcal M(\\mathbf n)\\cong Rf_*(f^*\\mathcal M(\\mathbf n))$. Tensoring with the locally free $\\mathcal M(\\mathbf n)$ is exact, so taking $i$-th cohomology sheaves gives $R^if_*\\mathcal G_{\\mathbf n}\\cong\\mathcal F_i\\otimes\\mathcal M(\\mathbf n)$. Hence\n$$P_X(\\mathbf n):=\\chi(X,\\bigotimes_j(f^*\\mathcal L)^{\\otimes n_j})=\\sum_i(-1)^i\\chi(Y,\\mathcal F_i\\otimes\\mathcal M(\\mathbf n)),$$\na finite sum of Euler characteristics of coherent modules.",
+   "uses": [
+    "lemma-nagata-proper-to-separated-target",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-pc-coherent-hi",
+    "def-sc-invertible-module",
+    "def-pc-module-pullback",
+    "lem-pc-euler-additive",
+    "lem-pc-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BET, lemma-intersection-number-and-pullback, first displayed equality and the sentence after it (Lemma 0BEK and the projection formula Cohomology 01E8); coherence and finiteness as in the proof of Tag 0BEK (Tag 02O5)"
+   }
+  },
+  {
+   "text": "Suppose $f$ is not dominant. Put $Z=f(X)\\subsetneq Y$. This set is closed because $f$ is proper, and is nonempty and irreducible because $X$ is nonempty and integral. On $V=Y\\setminus Z$ the inverse image is empty, so [lem-pc-higher-direct-image-open-restriction] gives $\\mathcal F_i|_V=0$ for every $i$. Thus every support is contained in $Z$. Any chain of irreducible closed subsets of $Z$ can be extended by the strict inclusion $Z\\subsetneq Y$; therefore $\\dim Z\\leq g-1$ by [def-kun-topological-krull-dimension]. By [lem-sc-snapper-numerical-polynomial], each nonzero summand in step 1 has total degree at most $g-1$. Its coefficient of $n_1\\cdots n_g$ is zero. The finite sum therefore has this coefficient zero. By [def-sc-intersection-number] this coefficient is $((f^*\\mathcal L)^g\\cdot X)$, proving the nondominant case.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-pc-higher-direct-image-open-restriction",
+    "def-kun-topological-krull-dimension",
+    "lem-sc-snapper-numerical-polynomial",
+    "def-sc-intersection-number"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BET, zero-image-dimension paragraph; Tag 0BEL"
+   }
+  },
+  {
+   "text": "Suppose $f$ is dominant. By [lem-sfb-equal-dimension-generic-structure-image], the actual extension $k(X)/f^*k(Y)$ is finite of degree $e$, there is a nonempty open $U\\subseteq Y$ on which every $\\mathcal F_i$ for $i>0$ vanishes, and $(\\mathcal F_0)_{\\eta_Y}=k(X)$ as a $k(Y)$-vector space. The supports of $\\mathcal F_i$ for $i>0$ lie in the proper closed subset $Y\\setminus U$. Every chain there extends by $Y$, so each has dimension at most $g-1$. By [lem-sc-snapper-numerical-polynomial], all positive-$i$ terms in step 1 have total degree less than $g$ and do not contribute to the coefficient of $n_1\\cdots n_g$.",
+   "uses": [
+    "lem-sfb-equal-dimension-generic-structure-image",
+    "def-kun-topological-krull-dimension",
+    "lem-sc-snapper-numerical-polynomial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BET, generic-image paragraph and higher-image lower-degree terms"
+   }
+  },
+  {
+   "text": "The support of $\\mathcal F_0$ is $Y$: it contains $\\eta_Y$ by step 3, and a coherent module has closed support (locally a finite presentation gives a finite generating list; if its stalk is zero, finitely many neighbourhoods on which these generators vanish have a common open intersection). Since $Y$ is integral its only top-dimensional support component is $Y$ itself, with generic local ring $\\mathcal O_{Y,\\eta_Y}=k(Y)$. Its generic multiplicity is $e$: a basis of the finite-dimensional vector space $k(X)$ gives a filtration by spans with exactly $e$ one-dimensional simple successive quotients. Apply [lem-sc-numerical-polynomial-leading-term] to $\\mathcal F_0$ and the $g$ entries all equal to $\\mathcal L$. It gives\n$$\\chi(Y,\\mathcal F_0\\otimes\\mathcal M(\\mathbf n))-e\\chi(Y,\\mathcal M(\\mathbf n))$$\nof total degree less than $g$. With steps 1 and 3, the coefficient of $n_1\\cdots n_g$ in $P_X$ is therefore $e$ times that in $\\chi(Y,\\mathcal M(\\mathbf n))$. By [def-sc-intersection-number] these two coefficients are respectively $((f^*\\mathcal L)^g\\cdot X)$ and $(\\mathcal L^g\\cdot Y)$. This proves the dominant formula, including the asserted finiteness of the induced function-field extension.",
+   "uses": [
+    "lem-sc-numerical-polynomial-leading-term",
+    "def-sc-function-field",
+    "def-sc-intersection-number"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BET, final displayed equality modulo lower-degree terms; Tag 0BEN"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lemma-nagata-proper-to-separated-target",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-pc-coherent-hi",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "lem-pc-euler-additive",
+  "lem-pc-projection-formula",
+  "def-weil-proper-morphism",
+  "lem-pc-higher-direct-image-open-restriction",
+  "def-kun-topological-krull-dimension",
+  "lem-sc-snapper-numerical-polynomial",
+  "def-sc-intersection-number",
+  "lem-sfb-equal-dimension-generic-structure-image",
+  "lem-sc-numerical-polynomial-leading-term",
+  "def-sc-function-field"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BET, lemma-intersection-number-and-pullback, proof specialized to Z=X and g equal invertible entries"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "intersectionNumber|intersection_number|degree_pullback",
+   "results": "0 hits;  (Mathlib/AlgebraicGeometry)",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphism definitions, rational maps or pullback ranges, not intersection numbers"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Top self intersection number pullback proper morphism degree function field",
+   "results": "8 hits; AlgebraicGeometry.IsProper.instIsMultiplicativeScheme, AlgebraicGeometry.IsProper, RatFunc.intDegree, Subfield.relrank_comap, AlgebraicGeometry.Scheme.Pullback.range_fst_comp, AlgebraicGeometry.IsOpenImmersion.range_pullback_to_base_of_left, Field.finSepDegree_self, RatFunc.intDegree_neg",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphism definitions, rational maps or pullback ranges, not intersection numbers"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"degree\", \"pullback\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphism definitions, rational maps or pullback ranges, not intersection numbers"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The top intersection number of a pulled back line bundle under a morphism of proper varieties is multiplied by the function field degree and is zero if the morphism is not dominant",
+   "results": "8 hits; AlgebraicGeometry.Scheme.PartialMap.fromFunctionField, AlgebraicGeometry.Scheme.Pullback.range_fst_comp, AlgebraicGeometry.Scheme.Pullback.range_snd_comp, AlgebraicGeometry.Scheme.RationalMap.fromFunctionField, AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_toRationalMap, AlgebraicGeometry.IsOpenImmersion.range_pullback_to_base_of_right, AlgebraicGeometry.IsOpenImmersion.range_pullback_to_base_of_left, AlgebraicGeometry.Scheme.image_preimage_eq_of_isPullback",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphism definitions, rational maps or pullback ranges, not intersection numbers"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Euler characteristic intersection coefficient projection formula for line bundles on proper schemes",
+   "results": "8 hits; AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.Proj.pullbackAwayιIso, AlgebraicGeometry.Proj.homOfLE_toBasicOpenOfGlobalSections_ι, AlgebraicGeometry.Proj.fromOfGlobalSections_resLE, AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict, AlgebraicGeometry.Proj.homOfLE_toBasicOpenOfGlobalSections_ι_assoc, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphism definitions, rational maps or pullback ranges, not intersection numbers"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-degree-polynomial",
+  "date": "2026-10-23",
+  "group": "Q142"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Theorem 10.15, printed p.49 (finite free Hom conclusion); §10 endomorphism-ring convention, printed pp.42–43. Supporting argument: Chapter I, Remark 10.11, printed p.47, and Proposition 10.13 with its proof, printed pp.47–48; degree convention before Theorem 10.9, printed p.46. Homogeneous means every nonzero monomial has total degree 2g; zero restrictions are allowed. Supporting input in Milne Proposition 10.13: Tag 0BET, lemma-intersection-number-and-pullback, with Z=X and all entries equal; zero-image-dimension clause",
+   "via": [
+    "lem-sfb-abelian-degree-polynomial",
+    "lem-sfb-abelian-hom-finite-free",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-top-intersection-pullback",
+  "worker": "stage1",
+  "summary": "Specialized Stacks 0BET coefficient proof. Reused the existing Snapper degree-bound and leading-term nodes; isolated twisted coherent Euler projection and equal-dimensional generic structure-image calculations as two statement-only inputs. Checked dominant, constant, birational nonfinite and purely inseparable cases. No change to the mathematical statement. Maintainer reader FIX (2026-10-23): the delivered twisted Euler-Leray node was dropped; it is the Euler-Leray clause of the existing lem-pc-euler-additive applied to f^*M, combined with the existing invertible-twist projection formula lem-pc-projection-formula and the coherence/vanishing of lem-pc-coherent-hi, a few lines now written out in step 1.",
+  "blueprint": "Realizes the inherited from.place supporting input in Milne Proposition 10.13: Tag 0BET Euler equality, zero-image-dimension paragraph, generic multiplicity and coefficient extraction. blueprint_refs.py ancestor returns None, retained as inherited.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-higher-direct-image-open-restriction",
+    "why": "Detects higher-image support outside the closed image by restricting to an empty inverse image."
+   },
+   {
+    "node": "lem-sc-snapper-numerical-polynomial",
+    "why": "Bounds the total degree by support dimension in both branches."
+   },
+   {
+    "node": "lem-sc-numerical-polynomial-leading-term",
+    "why": "Identifies the degree-g part with generic multiplicity."
+   },
+   {
+    "node": "lem-pc-euler-additive",
+    "why": "Euler-Leray identity chi(X,G)=sum(-1)^i chi(Y,R^if_*G) for a coherent module and a morphism of proper k-schemes; generic coherent-cohomology tool, no node of the unit states it."
+   },
+   {
+    "node": "lem-pc-coherent-hi",
+    "why": "Coherence and eventual vanishing of R^if_*O_X for the proper morphism f over a Noetherian target, needed for the finite sum and for Snapper; generic coherent-cohomology tool."
+   },
+   {
+    "node": "lem-pc-projection-formula",
+    "why": "Projection formula Rf_*(E) tensor N = Rf_*(E tensor f^*N) for invertible N, identifying R^if_*(f^*M) with R^if_*O_X tensor M; generic coherent-cohomology tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-higher-direct-image-open-restriction",
+  "lem-sc-snapper-numerical-polynomial",
+  "lem-sc-numerical-polynomial-leading-term",
+  "lem-pc-euler-additive",
+  "lem-pc-coherent-hi",
+  "lem-pc-projection-formula"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-d477b6d22",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-d477b6d22 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and the sources: Stacks varieties.tex 0BET with its full proof, 0BEK and its proof, 0BEL/0BEN through their nodes, 02NW, 01Y6, and the tags file for 01E8, 0A21 and 02O5. The item is 0BET with Z equal to the whole source, all entries equal and d=g. 'Not dominant' is the same as the source's dim f(Z)<g, because the image is closed and a proper closed subset has dimension at most g-1. The statement is unchanged against live, and the two stmt_deps added (module pullback, dominant function-field map) are both used. The item is unsplit on live and side-live, there is no repair note, and the new ids are new. Step 2 checks out: open restriction on Y\\f(X) where the preimage is empty, the chain-extension dimension bound and Snapper (0BEL). Step 3 checks out: new node 2 plus the same Snapper bound. Step 4 checks out: Supp f_*O_X=Y, multiplicity e equal to dim_{k(Y)} k(X), 0BEN, then coefficient extraction through def-sc-intersection-number. I tested an identity map, Frobenius on P^1 (inseparable, e=p), a constant map (coefficient 0), a birational non-finite blow-up and the g=0 case of node 2. New node lem-sfb-equal-dimension-generic-structure-image is true and kept: trdeg/0A21 gives a finite extension and a one-point generic fibre, 02NW(4) gives finiteness over an open, 01Y6 gives R^i vanishing there, and B tensored with K is k(X). It is not a duplicate: lem-per-generic-fibre-finiteness-criterion, lem-sfb-proper-generic-radicial-etale-factorization and lem-weil-pbc-generic-finite-morphism-open-neighborhood all assume the finiteness this node derives. FIX (C5/C1): the worker's report calls the higher projection formula 'not-yet-present', but lem-pc-projection-formula exists (Rf_*E tensor N = Rf_*(E tensor f^*N) for invertible N). So lem-sfb-invertible-coherent-euler-projection is three lines from existing nodes: the Euler-Leray clause of lem-pc-euler-additive applied to f^*M(n), plus lem-pc-projection-formula and lem-pc-coherent-hi. I dropped that node and rewrote step 1 to cite lemma-nagata-proper-to-separated-target, lem-weil-pbc-finite-type-over-noetherian, lem-pc-coherent-hi, lem-pc-euler-additive, lem-pc-projection-formula, def-sc-invertible-module and def-pc-module-pullback. I recomputed proof_deps and added the three off-unit nodes to tool_uses; the corrected file is fixes/dag/nodes/sec-six-functors-basics/lem-sfb-top-intersection-pullback.json. Batch 5: the closures of lem-sc-snapper-numerical-polynomial and lem-sc-numerical-polynomial-leading-term reach only def-trf-schematically-dense-open, lem-trf-affine-open-limit-descent and lem-pod-separated-finite-type-base-change. These are general scheme theory reached through Nagata/Chow and coherent finiteness, not steps of the trace formula or of Poincare duality, and neither assumption gives Snapper or the leading-term formula, so I accept both citations. lem-pc-euler-additive and lem-pc-coherent-hi reach the same three nodes; lem-pc-projection-formula reaches none. Accepted tool_uses: lem-pc-higher-direct-image-open-restriction, the Snapper and leading-term nodes, and the three added nodes. No SGA is cited anywhere.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TopIntersectionPullback",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.selfIntersectionNumber_tensorPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/TopIntersectionPullback.lean",
+  "statement": "theorem selfIntersectionNumber_tensorPullback (k : Type u) [Field k] (X Y : Scheme.{u}) [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [IsIntegral X] [IsIntegral Y] [IsProper (X ↘ Spec (.of k))] [IsProper (Y ↘ Spec (.of k))] (g : ℕ) (_hg : 1 ≤ g) (hX : topologicalKrullDim X = ((g : ℕ∞) : WithBot ℕ∞)) (hY : topologicalKrullDim Y = ((g : ℕ∞) : WithBot ℕ∞)) (f : X ⟶ Y) [f.IsOver (Spec (.of k))] (L : Y.Modules) [L.IsInvertible] : (∀ [IsDominant f], @Module.Finite Y.functionField X.functionField _ _ (f.dominantFunctionFieldAlgebra).toModule ∧ @selfIntersectionNumber k _ X _ _ X _ (𝟙 X) inferInstance g hX ((tensorPullback f).obj L) ((invertible_pullback_tensor f).1 L).2 = (@Module.finrank Y.functionField X.functionField _ _ (f.dominantFunctionFieldAlgebra).toModule : ℚ) * selfIntersectionNumber k Y Y (𝟙 Y) g hY L) ∧ (¬ IsDominant f → @selfIntersectionNumber k _ X _ _ X _ (𝟙 X) inferInstance g hX ((tensorPullback f).obj L) ((invertible_pullback_tensor f).1 L).2 = 0)",
+  "branch": "sheaf-dag",
+  "by": "ND",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b2ca598e3",
+  "group": "ND",
+  "result": "pass",
+  "note": "Read the item node, all 11 stmt_dep records, Stacks 0BET (Z=X, all entries equal), the module, the report and the live IntersectionNumber/LocalDimensionFormula sources. Every clause matches: k a field (universe u); X,Y with IsIntegral (gives Nonempty), IsProper over Spec k (gives finite type), common topologicalKrullDim g with 1 ≤ g; f with IsOver; L with IsInvertible; f^*L = recorded tensorPullback; self-intersection numbers via selfIntersectionNumber with i = 𝟙, explicit args in the definition's order. Dominant branch gives Module.Finite (a conclusion) and the formula with finrank via the actual dominantFunctionFieldAlgebra; non-dominant branch gives 0. No extra hypotheses. Edge cases: g=0 and empty schemes excluded; constant, blow-up, Frobenius checked. Against the live node only the added stmt_dep changed; the statement appears verbatim in the file. Mechanical finding on theorem stmt_dep lem-weil-pbc-invertible-pullback-tensor: the statement uses its conclusion (the IsInvertible proof for tensorPullback f L that selfIntersectionNumber needs) and no definition from its module, so this point passes. Proof is sorry only; docstrings carry the source and blueprint tag and 4 proof steps; plain imports exist; no file changed, so no compile."
+ }
+}

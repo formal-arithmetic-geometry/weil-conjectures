@@ -1,0 +1,115 @@
+{
+ "id": "lem-pur-independent-expression-source-component-decomposition",
+ "kind": "lemma",
+ "title": "Source component decomposition through pointwise reduction and limit",
+ "status": "split",
+ "statement": "For every independent expression and input family, the existing sourceShiftComponent equals the composition of the pointwise input-reduction shift isomorphism, the expression integral-system shift and the fixed total-limit commShift component, with the explicit endpoint equality transports shown in its Lean declaration.",
+ "stmt_deps": [
+  "lem-pur-independent-expression-reduction-shift"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Step 2, source shift component: pointwise reduction, context shift and total-limit shift."
+ },
+ "proof": [
+  {
+   "text": "Expand sourceShiftComponent and sourceShift. Use the pointwise reduction component equation to replace the reduction-and-context endpoint transports by the map of the pointwise input shift. Then use the definitions of sourceShift and the explicit dependent update equality to identify the remaining context endpoints. Functoriality of coefficientSequenceLimit and associativity yield the displayed equality.",
+   "uses": [
+    "lem-pur-independent-expression-reduction-shift"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-independent-expression-reduction-shift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Step 2, source component decomposition."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality and functorial composition of source shift component with total limit",
+   "results": "8 generic category-theory hits; no exact project declaration.",
+   "date": "2026-10-26",
+   "verdict": "Project-specific endpoint equation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equality of an isomorphism composition after functor map and endpoint equality transports",
+   "results": "8 generic congruence and mapIso hits; no exact source component theorem.",
+   "date": "2026-10-26",
+   "verdict": "Generic mapIso API reused."
+  },
+  {
+   "tool": "grep",
+   "query": "sourceShiftComponent_decomposition|pointwiseInputShiftIso",
+   "results": "No duplicate declaration.",
+   "date": "2026-10-26",
+   "verdict": "New intermediate statement required."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralOperationShiftData",
+  "date": "2026-10-26",
+  "group": "X6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Step 2, source shift component",
+   "via": [
+    "lem-pur-integral-realization-shift-coherence",
+    "lem-pur-adic-projection-shift-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "module": "Sheaf.SixFunctors.IntegralOperationShiftData",
+  "file": "lean/Sheaf/SixFunctors/IntegralOperationShiftData.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.IndependentExpression.sourceShiftComponent_decomposition",
+  "declarations": [
+   "WeilConjectures.IntegralSystemRealization.IndependentExpression.sourceShiftComponent_decomposition"
+  ],
+  "statement": "theorem IndependentExpression.sourceShiftComponent_decomposition\n    {B : Scheme.{u}} {I : Type u} {X : I → Over B}\n    (o : Operations l E) {W : Over B}\n    (e : IndependentExpression B I X W)\n    (M : ∀ j, Integral l E (X j).left) (i : I) (r : ℤ) :\n    e.sourceShiftComponent l E o M i r =\n      (coefficientSequenceLimit l E W.left).mapIso\n        ((e.val.evaluate (systemInterpretation l E o)).mapIso\n            ((pointwiseInputShiftIso (C := fun j ↦ Integral l E (X j).left)\n              (D := fun j ↦ System l E (X j).left)\n              (fun j ↦ (calculus l E (X j).left).reduction)\n              (fun j ↦ reductionShift l E (X j).left) i r).app M) ≪≫\n          (e.val.evaluate (systemInterpretation l E o)).mapIso\n            (eqToIso (inputShift_obj _ ((inputReduction l E X).obj M) i r)) ≪≫\n          e.shift (systemInterpretation l E o) (systemShifts l E o)\n            ((inputReduction l E X).obj M) i r) ≪≫\n        (Functor.commShiftIso (coefficientSequenceLimit l E W.left)\n          (self := limitShift l E W.left) r).app\n          ((e.val.evaluate (systemInterpretation l E o)).obj\n            ((inputReduction l E X).obj M))",
+  "branch": "sheaf-dag",
+  "by": "X6",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-acd0d",
+  "group": "X6",
+  "result": "fix",
+  "landing": "20261026T003221-L-153828",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261027T012846-L-2340820",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.IntegralSystemRealization.IndependentExpression.sourceShiftComponent_decomposition",
+   "WeilConjectures.IntegralSystemRealization.limitShift_roos"
+  ],
+  "sorry_after": [
+   "WeilConjectures.IntegralSystemRealization.limitShift_roos"
+  ]
+ }
+}

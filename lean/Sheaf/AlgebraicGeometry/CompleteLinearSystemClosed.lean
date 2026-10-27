@@ -76,7 +76,11 @@ private theorem nativeHom_eq_generatingSections
 open Scheme.Modules ProjectiveSpace in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-private theorem generatingSections_pair
+/-- The projective morphism of generating sections pulls back the universal sections.
+
+Source: Stacks Project, Constructions, Lemma 01NE
+(blueprint: lem-pc-complete-linear-system-closed). -/
+theorem generatingSections_pair
     {Y S : Scheme.{u}} {I : Type u} [Finite I] (g : Y ⟶ S)
     (L : Y.Modules) [L.IsInvertible] (s : I → L.sections)
     (hgen : Epi (L.freeHomEquiv.symm s)) :

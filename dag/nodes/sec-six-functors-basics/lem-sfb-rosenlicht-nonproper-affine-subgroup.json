@@ -1,0 +1,277 @@
+{
+ "id": "lem-sfb-rosenlicht-nonproper-affine-subgroup",
+ "kind": "statement",
+ "title": "A nonproper connected group contains a positive-dimensional affine subgroup",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Group schemes and homomorphisms are as in [def-sc-group-scheme], closed and normal subgroups as in [def-sc-group-scheme-subgroup], smoothness as in [def-sbc-smooth-morphisms], connectedness as in [def-weil-connected-scheme], and finite type as in [def-weil-finite-type-morphism]. Separated means that the diagonal is a closed immersion [def-weil-proper-morphism]. Affine means isomorphic to the spectrum of a commutative ring [def-pc-scheme]. Dimensions are topological Krull dimensions [def-kun-topological-krull-dimension]. Let $H$ be a smooth connected separated finite-type $k$-group scheme which is not proper over $k$. There exists a smooth connected affine closed subgroup scheme $U\\hookrightarrow H$ with $\\dim U>0$. The subgroup $U$ is not asserted to be normal in $H$. No commutativity assumption is imposed on $H$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 8.25 (Rosenlicht dichotomy), printed pp.153--154. Passing from its positive-dimensional affine subgroup to its reduced identity component uses Corollary 1.35 and Corollary 1.39, printed pp.17--18. No equivariant-completion theorem is assumed: the source notes that its later Theorem 8.44 uses Proposition 8.25. No Stacks tag states this dichotomy."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-pc-scheme",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Write $G$ for the group called $H$ in the statement. Prove the assertion for all such groups by strong induction on $d=\\dim G$. The dimension clause of [lem-sfb-affine-normal-subgroup-products] makes $d$ a finite nonnegative integer, bounds dimensions of closed subgroups, and gives strict dimension drop for proper smooth connected subgroup inclusions. If $d=0$, [lem-pc-zero-dimensional-closed-subscheme-finite] applied to the identity closed immersion $G\\hookrightarrow G$ makes $G$ finite over $k$, hence proper by [lem-weil-pbc-finite-proper], a contradiction. Thus $d>0$.",
+   "uses": [
+    "lem-sfb-affine-normal-subgroup-products",
+    "lem-pc-zero-dimensional-closed-subscheme-finite",
+    "lem-weil-pbc-finite-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.25, pp.153--154; dimension induction in the referenced Milne (2013), Proposition 4.1 proof. Zero-dimensional case: Stacks Tag 06LH, varieties.tex, lemma-algebraic-scheme-dim-0 (as recorded in the cited finite-scheme node)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-rational-boundary-positive-stabilizer] to obtain $X,P,V,\\alpha$ and the reduced closed subgroup $S$ with $\\dim S\\geq1$. Let $C=(S^0)_{\\mathrm{red}}$. By [lem-sfb-locally-algebraic-group-identity-component], $C$ is a smooth connected integral separated finite-type closed subgroup. By [lem-sfb-group-neutral-component-translates], the finitely many components of $S$ are translates of $S^0$ and thus have the same dimension. A chain of irreducible closed subsets in a finite disjoint union of open-and-closed components lies in a single component. Consequently $\\dim S=\\dim S^0=\\dim C$, the last equality because reduction leaves the topological space unchanged. In particular $\\dim C>0$.",
+   "uses": [
+    "lem-sfb-rational-boundary-positive-stabilizer",
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "lem-sfb-group-neutral-component-translates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.25, p.154, rational-action paragraph; Corollaries 1.35 and 1.39 and dimension discussion, pp.17--18. Identity subgroup and smooth reduction: Stacks 0B7R, 047R, 047P/047N."
+   }
+  },
+  {
+   "text": "First suppose $C=G$. Then $S=G$, so the partial stabilizer is Zariski dense in $G$. In the open $V$, the equalizer of $g\\mapsto\\alpha(g,P)$ and $g\\mapsto P$ is closed (pull back the closed diagonal of $X$) and contains that dense set. Its defining ideal is zero: on each affine open of $V$, which is reduced by smoothness of $G$ and [sbc-lem-smooth-geometrically-reduced],, every element of the ideal lies in every prime, hence is nilpotent and therefore zero. Thus $\\alpha$ fixes $P$ on $V$. Its regular action on the dense open $j(G)$ is faithful: if a subgroup acts trivially, evaluation at $j(e)$ makes its inclusion in $G$ the identity section, on all algebra points. Apply [lem-sfb-rational-fixed-point-affineness] to obtain that $G$ is affine. Taking $U=G$ proves this case, since $d>0$.",
+   "uses": [
+    "lem-sfb-rational-fixed-point-affineness",
+    "sbc-lem-smooth-geometrically-reduced"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.25 rational-action proof; Proposition 8.9 finite-jet argument, p.150; final case of the referenced Milne (2013), Proposition 4.1 proof, p.9."
+   }
+  },
+  {
+   "text": "Henceforth $C\\neq G$, so $\\dim C<d$ by the strict dimension clause of [lem-sfb-affine-normal-subgroup-products]. If $C$ is not proper, the induction hypothesis applies to $C$ and gives a smooth connected affine closed subgroup $U\\hookrightarrow C$ with positive dimension. Its composite into $G$ is closed: locally the composite of the two quotient maps of coordinate rings is a quotient map. It has all the required properties, so this case is complete.",
+   "uses": [
+    "lem-sfb-affine-normal-subgroup-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.25, p.154, rational-action proof; proper-stabilizer induction in Milne (2013), Proposition 4.1 proof, p.8."
+   }
+  },
+  {
+   "text": "It remains that $C$ is proper. It is an abelian variety by [def-sc-abelian-variety]. By [lem-sfb-abelian-subvariety-central], its inclusion in $G$ is central. Apply [lem-sfb-rosenlicht-connected-almost-complement] to $C\\hookrightarrow G$. Obtain a smooth connected separated finite-type closed normal subgroup $N\\hookrightarrow G$ and a surjective faithfully flat homomorphism $m:C\\times_kN\\to G$ with $\\dim G=\\dim C+\\dim N$. Since $\\dim C>0$, this gives $\\dim N<d$.",
+   "uses": [
+    "def-sc-abelian-variety",
+    "lem-sfb-abelian-subvariety-central",
+    "lem-sfb-rosenlicht-connected-almost-complement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 8.13, p.151; Theorem 8.24, p.153; complete-stabilizer case in the referenced Milne (2013), Proposition 4.1 proof, pp.8--9."
+   }
+  },
+  {
+   "text": "The group $N$ cannot be proper. Otherwise $C\\times_kN$ is proper: its projection to $N$ is the base change of the proper structure map of $C$ by [lem-weil-pbc-proper-base-change], and compose with the proper structure map of $N$ by [lem-weil-pbc-proper-composition]. By [lem-weil-pbc-scheme-theoretic-image-proper], its scheme-theoretic image under $m$ in the separated finite-type $G$ is proper. This image is all of $G$: surjectivity gives its full underlying space, and $G$ is reduced by [sbc-lem-smooth-geometrically-reduced]. On an affine open $\\operatorname{Spec}B$ the image ideal lies in every prime of $B$, hence is zero since $B$ is reduced. This would make $G$ proper, contradicting the hypothesis. Apply the induction hypothesis to the nonproper $N$, whose dimension is smaller, obtaining the desired smooth connected affine positive-dimensional $U\\hookrightarrow N$. Compose its closed inclusion with $N\\hookrightarrow G$ as in step 4. This completes the induction and proves the statement without asserting normality of $U$ in $G$.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-proper-composition",
+    "lem-weil-pbc-scheme-theoretic-image-proper",
+    "sbc-lem-smooth-geometrically-reduced"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.25 rational-action proof; complete-stabilizer almost-complement case in Milne (2013), Proposition 4.1 proof, pp.8--9. Proper image: Stacks Tag 0AH6, morphisms.tex, lemma-scheme-theoretic-image-is-proper; Milne Appendix A.75(c),(d)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-affine-normal-subgroup-products",
+  "lem-pc-zero-dimensional-closed-subscheme-finite",
+  "lem-weil-pbc-finite-proper",
+  "lem-sfb-rational-boundary-positive-stabilizer",
+  "lem-sfb-locally-algebraic-group-identity-component",
+  "lem-sfb-group-neutral-component-translates",
+  "lem-sfb-rational-fixed-point-affineness",
+  "sbc-lem-smooth-geometrically-reduced",
+  "def-sc-abelian-variety",
+  "lem-sfb-abelian-subvariety-central",
+  "lem-sfb-rosenlicht-connected-almost-complement",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-scheme-theoretic-image-proper"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 8.25 rational-action paragraph, pp.153--154, expanded by dimension induction from the referenced Milne (2013), Proposition 4.1 proof (local article WANTED, read online); not the circular completion sketch."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A nonproper smooth connected algebraic group over an algebraically closed field contains a positive dimensional connected affine closed subgroup",
+   "results": "{\"t\": \"2026-10-24T08:53:53Z\", \"tool\": \"leanfinder\", \"query\": \"A nonproper smooth connected algebraic group over an algebraically closed field contains a positive dimensional connected affine closed subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isConnected_compl_of_one_lt_codim\", \"isConnected_compl_singleton_of_one_lt_rank\", \"isPathConnected_compl_of_one_lt_codim\", \"Set.Countable.isConnected_compl_of_one_lt_rank\", \"isPathConnected_compl_singleton_of_one_lt_rank\", \"Submodule.connectedComponentIn_eq_self_of_one_lt_codim\", \"Set.Countable.isPathConnected_compl_of_one_lt_rank\", \"Subgroup.connectedComponentOfOne\"], \"digest\": \"e3e5a5caa4079117\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; ordinary abstract or topological group actions, affine-scheme instances and Hopf algebras of already affine groups do not state this scheme-theoretic assertion for a possibly non-affine group."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"IsProper\"",
+   "results": "{\"t\": \"2026-10-24T08:53:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"GrpObj\\\", \\\"IsProper\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; ordinary abstract or topological group actions, affine-scheme instances and Hopf algebras of already affine groups do not state this scheme-theoretic assertion for a possibly non-affine group."
+  },
+  {
+   "tool": "grep",
+   "query": "Rosenlicht|nonproper|non.proper.*subgroup|dichotomy",
+   "results": "{\"t\": \"2026-10-24T08:53:52Z\", \"tool\": \"grep\", \"query\": \"Rosenlicht|nonproper|non.proper.*subgroup|dichotomy\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; ordinary abstract or topological group actions, affine-scheme instances and Hopf algebras of already affine groups do not state this scheme-theoretic assertion for a possibly non-affine group."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A noncomplete group variety contains an affine algebraic subgroup of positive dimension",
+   "results": "{\"t\": \"2026-10-24T08:53:52Z\", \"tool\": \"leansearch\", \"query\": \"A noncomplete group variety contains an affine algebraic subgroup of positive dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NonarchimedeanGroup.is_nonarchimedean\", \"Subgroup.dense_of_no_min\", \"Subgroup.dense_iff_ne_zpowers\", \"Subgroup.instCompleteLattice\", \"QuotientAddGroup.completeSpace\", \"Subgroup.le_topologicalClosure\", \"Subgroup.coe_nonempty\", \"NormedAddCommGroup.denseRange_toCompl\"], \"digest\": \"5ede2d9f96f2446a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; ordinary abstract or topological group actions, affine-scheme instances and Hopf algebras of already affine groups do not state this scheme-theoretic assertion for a possibly non-affine group."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A noncomplete group variety has a positive dimensional affine algebraic subgroup, Rosenlicht dichotomy",
+   "results": "{\"t\": \"2026-10-24T09:04:31Z\", \"tool\": \"leanfinder\", \"query\": \"A noncomplete group variety has a positive dimensional affine algebraic subgroup, Rosenlicht dichotomy\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Group.IsVirtuallyNilpotent\", \"Subgroup.dense_or_cyclic\", \"Subgroup.widthInfty\", \"AmpleSet.of_one_lt_codim\", \"IsSolvable.commutator_lt_top_of_nontrivial\", \"isConnected_compl_of_one_lt_codim\", \"isPathConnected_compl_of_one_lt_codim\", \"RelSeries.nonempty_of_finiteDimensional\"], \"digest\": \"51e4852dd4263c93\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; ordinary abstract or topological group actions, affine-scheme instances and Hopf algebras of already affine groups do not state this scheme-theoretic assertion for a possibly non-affine group."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-pseudoabelian-proper-algclosed",
+  "date": "2026-10-24",
+  "group": "Q44"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Milne Theorem 8.26 proof, last case: apply Proposition 8.25 to the noncomplete reduced central identity component.",
+   "via": [
+    "lem-sfb-pseudoabelian-proper-algclosed",
+    "lem-sfb-barsotti-chevalley-decomposition",
+    "lem-sfb-smooth-connected-semiabelian-subgroup",
+    "lem-sfb-semiabelian-closed-subgroup-trivial-torsion-finite",
+    "lem-sfb-generically-isomorphic-semiabelian-open-immersion",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-rosenlicht-nonproper-affine-subgroup",
+  "worker": "stage1",
+  "summary": "Retained the statement. Used the noncircular rational-action proof and explicit strong dimension induction, not the equivariant-completion sketch. Added three statement-only inputs: boundary partial stabilizer, rational fixed-point affineness, and centrality of an abelian subvariety. Reused the general smooth identity-component, component translations and connected almost-complement nodes. Checked properness of the almost-complement by the scheme-theoretic proper image. All searches and step citations are recorded.",
+  "blueprint": "The ancestor command returns None as for the parent; retained the inherited null from.node and via chain. This realizes Milne Proposition 8.25 invoked in the parent pseudo-abelian properness proof, last central-component case, below det-thm-sf-ctf-stability-direct-images (3). Read latest blueprint stability unit and direct-images proof. Whole blueprint searches found no boundary-stabilizer, rational fixed-point or abelian-centrality duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-zero-dimensional-closed-subscheme-finite",
+    "why": "Generic scheme foundation for the dimension-induction base or proper-image argument; does not replace a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-finite-proper",
+    "why": "Generic scheme foundation for the dimension-induction base or proper-image argument; does not replace a unit step."
+   },
+   {
+    "node": "def-sc-abelian-variety",
+    "why": "Generic scheme foundation for the dimension-induction base or proper-image argument; does not replace a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "Generic scheme foundation for the dimension-induction base or proper-image argument; does not replace a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-proper-composition",
+    "why": "Generic scheme foundation for the dimension-induction base or proper-image argument; does not replace a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-theoretic-image-proper",
+    "why": "Generic scheme foundation for the dimension-induction base or proper-image argument; does not replace a unit step."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic scheme foundation for the dimension-induction base or proper-image argument; does not replace a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-zero-dimensional-closed-subscheme-finite",
+  "lem-weil-pbc-finite-proper",
+  "def-sc-abelian-variety",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-scheme-theoretic-image-proper",
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N8-99de06e5f",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-99de06e5f (reviewer sub-agent of L); spot-checked: I read the item, its six steps and the three new unsplit nodes in full, together with every cited statement. I checked them against Milne iAG2017, printed pp.150-154: Prop 8.9, Cor 8.13, Def 8.15, Thm 8.24, and Prop 8.25 with its footnote on the circular completion. The statement is unchanged, and this is a first split, not a 2026-10-21 re-split. The strong induction on dim G holds. Base case: zero-dimensional implies finite, hence proper. Step 2 takes C=(S^0)_red with dim C=dim S>=1, via the component-translates and identity-component nodes. In step 3 (C=G) the equalizer argument on reduced V and faithfulness by evaluation at j(e) meet every hypothesis of rational-fixed-point-affineness. In step 4 (C not proper) the strict dimension drop allows induction. In step 5 (C proper) C is an abelian variety, the new centrality node applies, and then the existing almost-complement node. In step 6 a proper N would make the scheme-theoretic image of C x N, which is all of reduced G, proper, a contradiction; so induction applies to N. I checked the new nodes myself because Milne 2013 is not held locally. Boundary node: the orbit of the boundary point stays in the boundary, so the stabilizer has dimension at least dim G - dim boundary >= 1. If (g,P) and (h,gP) lie in Dom then (hg,P) does, so the partial stabilizer is a constructible submonoid and its closure is a subgroup. Tested on Ga and Gm in P^1, E x Ga, and Ga^2. The fixed-point node is the rational form of 8.9, and the centrality node is Cor 8.13; both are true. No duplicates, restatements or cycles. Fault fixed: all three new nodes cite def-weil-field and def-weil-algebraic-closure in the statement but left them out of stmt_deps; corrected whole JSONs are under fixes/dag/nodes/sec-six-functors-basics/. Batch-5 flag: lem-sfb-affine-normal-subgroup-products is cited only for its dimension clause. Its path reaches lem-trf-smooth-fpqc-base-descent, a Mathlib leaf for fpqc descent of smoothness: general geometry, not a step of the trace formula or Poincare duality, so accepted. The split_report tool_uses are generic scheme facts and accepted.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RosenlichtNonproperAffineSubgroup",
+  "declaration": "AlgebraicGeometry.exists_smooth_connected_affine_closed_subgroup_of_not_isProper",
+  "file": "lean/Sheaf/AlgebraicGeometry/RosenlichtNonproperAffineSubgroup.lean",
+  "statement": "theorem exists_smooth_connected_affine_closed_subgroup_of_not_isProper (k : Type u) [Field k] [IsAlgClosed k] (H : Over (Spec (.of k))) [GrpObj H] [Smooth H.hom] [ConnectedSpace H.left] [IsSeparated H.hom] [LocallyOfFiniteType H.hom] [QuasiCompact H.hom] (hH : ¬ IsProper H.hom) : ∃ (U : Over (Spec (.of k))) (_ : GrpObj U) (i : U ⟶ H), IsClosedSubgroupScheme i ∧ Smooth U.hom ∧ ConnectedSpace U.left ∧ IsAffine U.left ∧ 0 < topologicalKrullDim U.left",
+  "branch": "newtargets-dag",
+  "by": "Q68",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9108a4fe4",
+  "group": "Q68",
+  "result": "pass",
+  "note": "The Lean statement matches every clause of the node: algebraically closed k (IsAlgClosed); H : Over (Spec k) with GrpObj, smooth, connected, separated, locally of finite type plus quasi-compact; ¬IsProper H.hom. It concludes ∃ U with GrpObj and i : U ⟶ H such that IsClosedSubgroupScheme i (read in GroupScheme/Defs: IsMonHom, R-point injectivity, closed immersion), Smooth, ConnectedSpace, IsAffine, and 0 < topologicalKrullDim. No normality, commutativity, extra assumption or universe restriction. The node differs from live only in its lean field, and lean.statement is verbatim in the file. Single sorry theorem with source, blueprint and 6-step docstring. No duplicate found in the live Sheaf/WeilConjectures trees. Edge cases (empty H, dim 0, affine H) are fine. No file changed, so no compile was run."
+ }
+}

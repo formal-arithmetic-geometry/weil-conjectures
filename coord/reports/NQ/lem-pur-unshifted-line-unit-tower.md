@@ -1,0 +1,55 @@
+## Files written
+
+- `dag/nodes/sec-smooth-purity/lem-pur-unshifted-line-unit-tower.json`: statement, split into seven proof steps; not a Mathlib leaf. The statement, its statement dependencies, creation metadata and blueprint ancestry are unchanged.
+- `citations.json`: twelve exact excerpts, one for every node citation in the seven steps.
+- No new DAG nodes and no Mathlib leaves. Local `write_split.py` only writes this item's sandbox artifacts.
+
+## Attachments
+
+None. Searched all of `lean/WeilConjectures/` for the exact blueprint tag/id and for unshifted lines, Tate towers, twist/scalar and coefficient/unit terminology. No project declaration states these complete specified sheaf-derived maps and both tower laws. The abstract module-complex coefficient-unit declarations do not state this item.
+
+## WANTED
+
+None. The elementary tensor argument is written out; all non-elementary interfaces it needs already have DAG nodes and the supporting documents are present locally.
+
+## What needed correction
+
+The imported item had a statement but no proof. Its statement is retained exactly: there is no statement dispute and no weakening. In particular, repeated coefficient fields, the zero twist and the natural completed identity comparison are retained. The actual completed ring sheaf is used throughout; no discrete constant integral sheaf is substituted.
+
+The blueprint ancestor `thm-pur-rational-and-qbar-purity` in `literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/` states coefficient transport without this multiplication calculation. I read it, the transport unit, the live `sk-thm-sf-compatibility` unit record, and the smooth-purity chapter. This item supplies the old Steps 4–5 and identity part of old Step 7 named in its ancestry, below coefficient coherence clause (7). It is not the statement/key node of that unit, so no unit record is changed. No unit route is replaced.
+
+The proof is marked agent-written: the precise auxiliary statement is not a numbered Stacks theorem. I read Stacks `sites-modules.tex`, Tag 03EK (`section-tensor-product`), including associativity, change of rings and the bilinear universal property following Tag 0GMW (`lemma-sheafification-tensor`); and `sites-cohomology.tex`, Tag 0G7E (`lemma-pullback-K-flat`) and the K-flat construction used in Tag 06YY (`lemma-derived-base-change`). The blueprint `prop-weil-twist-preserves.md`, final integral/common-stage paragraph, is the source of the already existing twist comparisons, rather than an additional uncited theorem. No SGA source is used.
+
+The additional searches in `searches.jsonl` were run through the required msearch command: LeanFinder twice, LeanSearch, Loogle, and grep. I read all results, then Mathlib `Algebra/Category/ModuleCat/ChangeOfRings.lean:984–1032`. `ModuleCat.extendScalarsComp`, its pure-tensor formula and its associativity are about ordinary modules over commutative rings, without these ring sheaves, integral Tate lines, K-flat resolving maps or the specified completion comparison. They are useful underlying algebra, but do not make this item a one-line specialization/Mathlib leaf. The LeanSearch base-change-composition results and first LeanFinder's presheaf/cohomology results likewise do not state the item. Existing searches recorded on the imported item have been retained; the appended entries are the sandbox's actual logged searches, verbatim in tool and query. Whole-blueprint searches for `coefficient multiplication`, `Tate-line`, `twist scalar` and `K-flat`, plus whole-DAG statement searches, found no blueprint node stating the complete item. They located reusable infrastructure, most notably the existing sibling `lem-pur-tate-unit-flat-model-domains`; no replacement node is introduced.
+
+## Unfinished work
+
+None for this one-level split. Existing dependencies that are unsplit remain their own items. The required server dry run and direct delivery are recorded below after execution.
+
+## Review by NQ
+
+I checked B–E of `coord/delivery-errors.md` against the item, the cited node statements and the local sources. There are no new statements to disguise a clause of the item, no duplicate nodes to distinguish and no deferred proof in a new statement. The seven steps carry the multiplication argument themselves, rather than appeal to a renamed tower lemma. All step texts are below 2000 characters. The statement introduces all three fields, coefficient ring sheaves, units, lines, functors and specified comparisons; its definition dependencies were read and retained. Inclusions are non-strict throughout.
+
+1. Step 1 uses the statement of `lem-pur-tate-unit-flat-model-domains`, not its proof: that statement explicitly supplies the identity K-flat models, completeness and constructible category membership needed for applying beta to the units. The hypotheses match exactly: a separated finite-type scheme over the fixed characteristic-p field, ell distinct from p, finite coefficient fields, m nonnegative, and n=0. `lem-pur-derived-change-of-rings` explicitly computes on a K-flat resolution. `lem-pur-kflat-change-of-rings` explicitly says that changing rings preserves K-flatness and flat terms. This is needed to compute the second extension on the already extended model. Its flat-term condition is supplied, not inferred from a bare definition. This also avoids making any assumption that scalar extension is strictly a functorial identity on a chosen model.
+
+2. Step 2 uses `lem-pc-sites-sheaf-tensor-bilinear-universal`, whose statement gives an actual bijection between sheaf morphisms out of the tensor and sectionwise bilinear maps. Multiplication is balanced because the coefficient inclusion preserves multiplication. The two inverse identities are written using the balancing relation, including the formula 1 tensor iota(x)b = x tensor b. This is an elementary construction from the cited universal property. It does not assume that every global tensor-sheaf section is a single pure tensor.
+
+3. Step 3 uses the explicit chain formula in `lem-weil-integral-twist-derived-scalar`. Its C must be a derived-complete constructible integral object; step 1 supplies precisely this for U_i, and its required flat-term K-flat resolution is the identity model. The formula's notation l tensor 1 is the canonical image under the line base-change map. Applying u(m) then yields exactly the statement's line formula, including the coefficient iota(x)b. No tower coherence for beta is silently assumed: the subsequent proof computes it on these models. Its natural comparison is the specified chi, as required by the node's statement.
+
+4. Step 4 constructs both directions of the ordinary scalar associator explicitly and checks the balancing relation making their composites identities. The iterated sheaf-tensor universal property is the same cited bijection, used twice. The identity and extended K-flat models from step 1 ensure that these chain maps represent the specified derived alpha. All objects here are degree zero, so no Koszul sign or shifted-complex comparison is hidden.
+
+5. Step 5 computes both unit paths. The only algebraic identity is iota_21(iota_10(x)b)c = iota_20(x)iota_21(b)c, from composition of the coefficient inclusions and ring multiplication. The cited tensor universal property upgrades equality of balanced formulas to equality of sheaf maps. `def-weil-abstract-derived-category` defines the localization functor; applying a functor preserves this already proved equality. This cites a definition only for a definition-level operation, not for a homological theorem.
+
+6. Step 6 computes the successive line path as well as the direct path, retaining both line factors in the text. I opened `lem-weil-integral-twist-base-change`: its last sentence explicitly gives compatibility with inclusions in a tower. This is exactly b_20(z tensor 1) = b_21(b_10(z tensor 1) tensor 1) after ordinary tensor reassociation. The coefficient factor is computed independently and agrees as in step 5. The cited sheaf-tensor universal property then gives equality of morphisms; localization gives equality of derived morphisms. There is no unstated assertion that equal stalk values alone detect the maps, nor an arbitrary replacement of the specified beta.
+
+7. Step 7 treats the identity inclusion directly. The line base-change node defines the nonnegative twist maps by tensor associativity; specializing the identity ring map gives z tensor b mapped to bz (including the zeroth power/coefficient ring). Thus the formula for w becomes the line multiplication unitor. I opened the full statement of `lem-weil-finite-free-completed-scalar-comparison`: its final sentence explicitly says that at L=E, chi is the natural derived-completeness map after the multiplication isomorphism. The proof uses exactly that assertion and never identifies the completed identity extension strictly with identity. This comparison is applied only to complete objects, supplied by step 1.
+
+Small cases checked: m=0 makes J_i=R_i and reduces the line calculation to the ring calculation via the usual unitors; m=1 checks the actual twist line; L_0=L_1, L_1=L_2 and all fields equal give exactly multiplication unitors on either side, with chi remaining the natural completion map. The empty scheme gives the unique maps of the zero module sheaves; the proof never requires a nonzero generator or an exact nonempty Tor support. No negative twist is used, so no dualization or base-change-for-Hom lemma is missing. No unramifiedness or compatible choices of uniformizers are assumed in the algebra: all operations use the canonical completed coefficient inclusions.
+
+Off-unit citations are generic tools declared in `split_report.tool_uses`: K-flat derived change of rings and its preservation, the bilinear sheaf universal property, and the named twist/scalar, twist-line and ordinary/completed comparisons. They support the coefficient calculation below the unit route. The accepted top-level `tool_uses` field is left to the maintainer. Every cited node is unmerged; citations.json contains verbatim excerpts from its statement. There are zero new nodes, so B1–B9's new-node, source-tag and no-duplicate gates do not require manufacturing a node or a Not duplicates pair.
+
+## Validation
+
+The required server dry run exited successfully: `OK (not pushed) deliver/NQ/lem-pur-unshifted-line-unit-tower at 6f91f4ca016: preflight passed`. This included the server's DAG/split and delivery checks. A final dry run is repeated after adding this record, before direct push. No Lean file was written and no compiler, Lake or build tool was run. All manual writes were confined to the sandbox; the delivery tool manages its own authorized temporary worktree.
+
+The historical standing brief mentions `coord/dag-sync.md`, which is absent in the shared read repository. The current item, chapter, unit, source and delivery instructions were available and used; this missing historical coordination document did not affect the mathematics or the required server checks.

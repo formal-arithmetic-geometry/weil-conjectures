@@ -1,0 +1,283 @@
+{
+ "id": "lem-cbc-proper-open-alpha-pasting",
+ "kind": "statement",
+ "title": "Clopen alpha projections commute with pasting and pullback before derivation",
+ "statement": "Let $B$ be a commutative ring. For every scheme $X$ use its small pro-etale site with the chosen small skeleton, its constant ring sheaf $\\underline B_X$, the abelian category of module sheaves, and $\\mathcal T_X=\\operatorname{Fun}(\\mathbf N_{\\geq1}^{op},\\operatorname{Mod}(\\underline B_X))$ of strict inverse systems. Work in the ordinary unbounded derived categories $D(\\mathcal T_X)$. Use the termwise inverse image $G_u$, total derived termwise direct image $R_u$, and exact open extension $J_j$ with their specified adjunctions and compositors [def-cbc-strict-constant-tower-operations] [def-cbc-strict-tower-open-extension]. Let $Q$ be a commutative square of schemes with $k:V\\hookrightarrow W$, $i:S\\hookrightarrow T$ quasi-compact open immersions, $r:V\\to S$, $p:W\\to T$ proper, and $pk=ir$. Put $W_S=W\\times_T S$ with projections $b:W_S\\to W$, $q:W_S\\to S$, and $s=(k,r):V\\to W_S$. For each such square take the clopen component projector and the open-unit-normalized cartesian comparison and form $\\alpha_Q:G_pJ_i\\to J_kG_r$ by the intrinsic construction [def-cbc-strict-tower-proper-open-arrows] [def-cbc-strict-tower-ordinary-proper-open-arrows]. For vertically stacked squares $Q_1$ above $Q_2$, with left proper maps $r_1,r_2$, right proper maps $p_1,p_2$ and middle open $i_1$, their intrinsic outer alpha satisfies\n$$\\alpha_{Q_2Q_1}=(\\alpha_{Q_1}G_{r_2})\\circ(G_{p_1}\\alpha_{Q_2}).$$\nFor horizontal squares $Q_1$ left of $Q_2$, with top opens $k,l$, bottom opens $i,j$ and verticals $r,p,q$, it satisfies\n$$\\alpha_{Q_2Q_1}=(J_l\\alpha_{Q_1})\\circ(\\alpha_{Q_2}J_i).$$\nFor any base change $h:T_1\\to T$, let $a:W_1\\to W$, $c:S_1\\to S$, $d:V_1\\to V$ be the projections and $Q_1$ the induced square. With $\\theta:G_{p_1}G_h\\cong G_aG_p$ the canonical square identification, one has\n$$(\\beta_kG_r)\\circ(G_a\\alpha_Q)\\circ(\\theta J_i)=(\\alpha_{Q_1}G_c)\\circ(G_{p_1}\\beta_i).$$\nEvery formula inserts the canonical inverse-image and open-extension compositors. These equalities hold already for module sheaves, termwise on strict towers and complexes, and after exact localization in their unbounded derived categories. They identify the intrinsic outer clopen construction with the pasted one; no chosen factorization, finite-coefficient condition, cartesianness of the original squares, or faithfulness of derived evaluation is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7C (lemma-shriek-proper-and-open-compose), 0F7D (lemma-shriek-proper-and-open-compose-horizontal), 0F7F (lemma-shriek-proper-and-open-base-change); underived clopen alpha and exact-descent refinement, original parent proof steps 7-10"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-inverse-system",
+  "def-weil-abstract-derived-category",
+  "def-cbc-strict-constant-tower-operations",
+  "def-cbc-strict-tower-open-extension",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-closed-immersion",
+  "def-cbc-strict-tower-proper-open-arrows",
+  "def-cbc-strict-tower-ordinary-proper-open-arrows",
+  "def-cbc-open-immersion-square"
+ ],
+ "proof": [
+  {
+   "text": "Apply the three module-sheaf component identities to every module M. Natural-transformation extensionality and the identity components of associators give the equations alphaVerticalPasted=alphaVerticalOuter, alphaHorizontalOuter=alphaHorizontalPasted, and alphaCubeOriginal=alphaCubeChanged.",
+   "uses": [
+    "lem-cbc-proper-open-alpha-vertical-modules",
+    "lem-cbc-proper-open-alpha-horizontal-modules",
+    "lem-cbc-proper-open-alpha-base-change-modules"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply congrArg to mapHomologicalComplex, to whiskeringRight on inverse systems, and to their composite. This gives the complex, tower, and tower-complex equalities without any evaluation-faithfulness claim.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Encode each finite diagram as an ExactDerivedPasting.Expression over words of the exact tower functors. At every tower index, the ordinary evaluation is the appropriate module-sheaf component identity, so the two expressions have equal ordinary evaluation. Localization.natTrans_ext, the word factorization and expression_factors identify their derived evaluations. The intrinsic alpha cell is identified by alpha_eq_localized_singleAlpha, using uniqueness after Q and cancellation of invertible factorization maps. The gComp cell follows from its definition. The jComp and beta cells are identified using the proved jComp_fac and beta_fac; square cells use squareG_lift and exact square factorization. Thus all derived cells are the specified alpha, beta, squareG, gComp and jComp. Taking components of the equality of derived natural transformations gives exactly the final equation in each theorem. No derived evaluation is used to detect morphisms. The proved helper exactPasting_congr packages this localization congruence without an unnecessary finiteness assumption on the indexing type; its private component API normalizes the finite pasting trees.",
+   "uses": [
+    "def-cbc-strict-constant-tower-operations",
+    "def-cbc-strict-tower-open-extension",
+    "def-cbc-strict-tower-proper-open-arrows",
+    "def-cbc-strict-tower-ordinary-proper-open-arrows",
+    "lem-cbc-tower-open-beta-normalization",
+    "lem-sp-exact-derived-transformation-pasting",
+    "lem-cbc-exact-derived-pasting-components"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-proper-open-alpha-vertical-modules",
+  "lem-cbc-proper-open-alpha-horizontal-modules",
+  "lem-cbc-proper-open-alpha-base-change-modules",
+  "def-cbc-strict-constant-tower-operations",
+  "def-cbc-strict-tower-open-extension",
+  "def-cbc-strict-tower-proper-open-arrows",
+  "def-cbc-strict-tower-ordinary-proper-open-arrows",
+  "lem-cbc-tower-open-beta-normalization",
+  "lem-sp-exact-derived-transformation-pasting",
+  "lem-cbc-exact-derived-pasting-components"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7C, 0F7D, 0F7F with the existing underived arbitrary-ring refinement. E8 separates the three module-sheaf identities and proves their termwise and exact-localization transport using the existing specified cells."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The intrinsic clopen component projection defining the underived proper-open alpha transformation on arbitrary constant pro-etale module sheaves obeys vertical and horizontal pasting and arbitrary base-change cube identities, and these descend to derived strict towers.",
+   "results": "8 hits: Algebra.FormallyEtale.comp, AlgebraicGeometry.IsEtale.of_comp, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, KaehlerDifferential.isBaseChange_of_formallyEtale, Algebra.FormallyEtale.of_restrictScalars, PresheafOfModules.Derivation.Universal.fac, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical/module or algebraic-etale facts do not state this normalized pro-etale/etale tower assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans, CategoryTheory.Adjunction",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical/module or algebraic-etale facts do not state this normalized pro-etale/etale tower assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "properOpen|proper_open|clopen.*(pasting|projection)|alpha_vertical",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical/module or algebraic-etale facts do not state this normalized pro-etale/etale tower assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The intrinsic clopen component projection defining the underived proper-open alpha transformation on arbitrary constant pro-etale module sheaves obeys vertical and horizontal pasting and arbitrary base-change cube identities, and these descend to derived strict towers.",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSheafedSpaceHom_c, AlgebraicGeometry.IsProper.isStableUnderBaseChange, AlgebraicGeometry.UniversallyOpen.snd, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.PresheafedSpace.GlueData.componentwise_diagram_π_isIso",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical/module or algebraic-etale facts do not state this normalized pro-etale/etale tower assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functoriality of nested clopen summand projections on module sheaves under horizontal and vertical commutative-square composition and pullback",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₂₄_op_glue, TopCat.Sheaf.interUnionPullbackConeLift_right, TopCat.Sheaf.interUnionPullbackConeLift_left, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₃₄_op_glue, AlgebraicGeometry.PresheafedSpace.GlueData.π_ιInvApp_π, Profinite.NobelingProof.GoodProducts.square_commutes, AlgebraicGeometry.PresheafedSpace.GlueData.opensImagePreimageMap_app, AlgebraicGeometry.PresheafedSpace.GlueData.snd_invApp_t_app",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern ordinary module adjunctions, topological gluing or algebraic etaleness, not the full specified comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of modules on the small proetale site restriction along an open immersion is injective on morphisms whose target is extension by zero; the canonical map from extension by zero to direct image is a monomorphism",
+   "results": "8 hits: AlgebraicGeometry.PresheafedSpace.ofRestrict_mono, CategoryTheory.instMonoSheafTypeImageι, AlgebraicGeometry.SheafedSpace.mono_of_base_injective_of_stalk_epi, PresheafOfModules.injective_of_mono, CategoryTheory.Sheaf.Hom.mono_iff_presheaf_mono, CategoryTheory.Sheaf.instIsLocallyInjectiveHomObjForgetTypeImageι, CategoryTheory.Sheaf.mono_of_isLocallyInjective, PresheafOfModules.mono_of_injective",
+   "date": "2026-10-22",
+   "verdict": "no match: returned gluing, monomorphism or pullback lemmas do not state intrinsic arbitrary-B pro-etale proper/open alpha coherence"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, Mono",
+   "results": "0 hits: ; loogle: unknown identifier 'Mono'",
+   "date": "2026-10-22",
+   "verdict": "invalid query: unknown identifier Mono; corrected by the later fully qualified query"
+  },
+  {
+   "tool": "grep",
+   "query": "shriek.*[Mm]ono|[Mm]ono.*shriek|extensionByZero|extension_by_zero",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned gluing, monomorphism or pullback lemmas do not state intrinsic arbitrary-B pro-etale proper/open alpha coherence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Clopen projections defining pullback of extension by zero commute with composition of commutative proper open squares and arbitrary base change",
+   "results": "8 hits: CategoryTheory.MorphismProperty.Over.pullbackComp, AlgebraicGeometry.Scheme.Pullback.lift_comp_ι, AlgebraicGeometry.Scheme.Pullback.p_comm, AlgebraicGeometry.Scheme.Cover.pullbackHom_map, CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtension.compTwoSquare, AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_inv_snd, AlgebraicGeometry.UniversallyOpen.snd, CategoryTheory.IsPullback.of_hasBinaryProduct",
+   "date": "2026-10-22",
+   "verdict": "no match: returned gluing, monomorphism or pullback lemmas do not state intrinsic arbitrary-B pro-etale proper/open alpha coherence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Clopen component projection defining pullback of open extension by zero is compatible with composition of proper open squares and arbitrary base change",
+   "results": "8 hits: CompHausLike.pullback.condition, TopCat.GlueData.MkCore.t', AlgebraicGeometry.Scheme.Pullback.lift_comp_ι, AlgebraicGeometry.PresheafedSpace.GlueData.opensImagePreimageMap_app, AlgebraicGeometry.Scheme.Pullback.t'_fst_fst_fst, AlgebraicGeometry.Scheme.Pullback.t'_snd_snd, AlgebraicGeometry.Scheme.Pullback.t'_fst_fst_snd, AlgebraicGeometry.Scheme.Pullback.t'_snd_fst_fst",
+   "date": "2026-10-22",
+   "verdict": "no match: returned gluing, monomorphism or pullback lemmas do not state intrinsic arbitrary-B pro-etale proper/open alpha coherence"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans, CategoryTheory.Adjunction",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned gluing, monomorphism or pullback lemmas do not state intrinsic arbitrary-B pro-etale proper/open alpha coherence"
+  },
+  {
+   "tool": "grep",
+   "query": "properOpen|proper_open|clopen.*pasting|alpha_vertical",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned gluing, monomorphism or pullback lemmas do not state intrinsic arbitrary-B pro-etale proper/open alpha coherence"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-cbc-strict-tower-proper-open-calculus",
+  "date": "2026-10-22",
+  "group": "Q65"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "from": {
+   "node": "thm-cbc-complete-proetale",
+   "place": "Proof, last sentence: 'with the compatibility of the comparisons ... with the completed maps' — strict-tower open/proper comparison and coherence underlying the passage to derived limits; parent proof steps 7,8,9,10: Clopen alpha projections commute with pasting and pullback before derivation",
+   "via": [
+    "lem-cbc-strict-tower-proper-open-calculus"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-cbc-proper-open-alpha-pasting",
+  "worker": "stage1",
+  "summary": "Proved all three intrinsic alpha laws by explicit open-restriction calculations at module-sheaf level, using existing ringed open/closed exactness and clopen-projector statements. Applied termwise functoriality and existing exact-localization pasting. No new nodes or statement changes.",
+  "blueprint": "thm-cbc-complete-proetale proof, final sentence on compatibility of compact-support comparisons with completed maps; parent lem-cbc-strict-tower-proper-open-calculus steps 7-10.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic ringed pro-etale open/closed exact sequence and vanishing used to detect maps into open extension; the unit has no separate statement of this general sheaf tool."
+   },
+   {
+    "node": "lem-sp-exact-derived-transformation-pasting",
+    "why": "Generic exact-localization theorem transporting finite diagrams of exact-functor transformations and their specified compositors; it is independent of the compact-support route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-exact-derived-transformation-pasting"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q52-dbf8aa05d",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-dbf8aa05d (reviewer sub-agent of L); spot-checked: Read the item's full 7-step split in full; the delivery has no new nodes. Statement and stmt_deps are identical to the base and to live/side-live, where the item is still unsplit, so it is not superseded. This is the first split of Q65's statement-only node, so no argument was shortened. Sources read: Stacks more-etale 0F7C, 0F7D and 0F7F with their proofs (γ-level étale statements; proof_origin=agent is correct) and the blueprint main-20261015 thm-cbc-complete-proetale proof, last sentence. No SGA. I type-checked the vertical, horizontal and base-change α laws: the vertical law is the form whose mate is the parent's γ law, and β_k is defined because V1=V×_W W1. Step 1: detection into j_!M through the open/closed sequence of lem-weil-pbc-proetale-ringed-open-closed (any A, qc j) is correct, and I cross-checked it with j_!↪j_*. It is applied only to the qc opens k, lk and k1, and only for sheaves. Step 2: I checked the transpose equation and its inversion. Step 3 gives (N), using the projector node's α formula and G_sπ_s=1. Steps 4-6: I checked each restriction and compositor chain, including h i1 r1 = i c r1 = i r d = p k d = p a k1. Step 7: lem-sp-exact-derived-transformation-pasting covers noninvertible cells in unbounded derived categories. The cited nodes do not reach the item, so there is no cycle. The two declared off-unit tool uses are generic and accepted. Duplicate candidates: lem-sf-semilinear-alpha-pullback and lem-sp-varying-ring-proper-open-pasting both depend on the parent, so citing them here would be circular. The ambient A_n nodes only cover A_n=R/t^n over F̄_q. The cbc pullback-square and direct-image coherence nodes are about derived compositors, not α. Edge cases tested: B=0, V=∅, cartesian squares, identity maps, an extra component of W_S. FIX (C1/C4): step 2 inverts the sheaf-level cartesian open comparison for arbitrary B, but its invertibility is only a claim inside def-cbc-strict-tower-proper-open-arrows. I added the same-unit node lem-cbc-tower-open-beta-normalization, which states it on sheaves, towers, complexes and derived categories, to step 2 (elementary=false), to step 7 and to proof_deps. Corrected file: fixes/dag/nodes/sec-smooth-purity/lem-cbc-proper-open-alpha-pasting.json. Advisory for the maintainer: the item's base-change clause overlaps the 2026-10-21 varying-ring lem-sf-semilinear-alpha-pullback. That overlap goes back to Q65's node creation, not this delivery.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperOpenAlphaPasting",
+  "declaration": "AlgebraicGeometry.ProEtale.StrictTower.alpha_vertical_beforeDerivation",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.StrictTower.alphaVerticalPasted",
+   "AlgebraicGeometry.ProEtale.StrictTower.alphaVerticalOuter",
+   "AlgebraicGeometry.ProEtale.StrictTower.alphaHorizontalOuter",
+   "AlgebraicGeometry.ProEtale.StrictTower.alphaHorizontalPasted",
+   "AlgebraicGeometry.ProEtale.StrictTower.alphaCubeOriginal",
+   "AlgebraicGeometry.ProEtale.StrictTower.alphaCubeChanged",
+   "AlgebraicGeometry.ProEtale.StrictTower.alpha_vertical_beforeDerivation",
+   "AlgebraicGeometry.ProEtale.StrictTower.alpha_horizontal_beforeDerivation",
+   "AlgebraicGeometry.ProEtale.StrictTower.alpha_baseChange_beforeDerivation"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperOpenAlphaPasting.lean",
+  "statement": "theorem alpha_vertical_beforeDerivation {A C E B₀ D F : Scheme.{u}} (k : A ⟶ B₀) (i : C ⟶ D) (j : E ⟶ F) (r₁ : A ⟶ C) (r₂ : C ⟶ E) (p₁ : B₀ ⟶ D) (p₂ : D ⟶ F) [IsOpenImmersion k] [IsOpenImmersion i] [IsOpenImmersion j] [QuasiCompact k] [QuasiCompact i] [QuasiCompact j] [IsProper r₁] [IsProper r₂] [IsProper p₁] [IsProper p₂] (h₁ : k ≫ p₁ = r₁ ≫ i) (h₂ : i ≫ p₂ = r₂ ≫ j) (h : k ≫ (p₁ ≫ p₂) = (r₁ ≫ r₂) ≫ j) : alphaVerticalPasted B k i j r₁ r₂ p₁ p₂ h₁ h₂ = alphaVerticalOuter B k j r₁ r₂ p₁ p₂ h ∧ NatTrans.mapHomologicalComplex (alphaVerticalPasted B k i j r₁ r₂ p₁ p₂ h₁ h₂) (.up ℤ) = NatTrans.mapHomologicalComplex (alphaVerticalOuter B k j r₁ r₂ p₁ p₂ h) (.up ℤ) ∧ (Functor.whiskeringRight ℕᵒᵖ (Modules B E) (Modules B B₀)).map (alphaVerticalPasted B k i j r₁ r₂ p₁ p₂ h₁ h₂) = (Functor.whiskeringRight ℕᵒᵖ (Modules B E) (Modules B B₀)).map (alphaVerticalOuter B k j r₁ r₂ p₁ p₂ h) ∧ NatTrans.mapHomologicalComplex ((Functor.whiskeringRight ℕᵒᵖ (Modules B E) (Modules B B₀)).map (alphaVerticalPasted B k i j r₁ r₂ p₁ p₂ h₁ h₂)) (.up ℤ) = NatTrans.mapHomologicalComplex ((Functor.whiskeringRight ℕᵒᵖ (Modules B E) (Modules B B₀)).map (alphaVerticalOuter B k j r₁ r₂ p₁ p₂ h)) (.up ℤ) ∧ ∀ N : Derived B E, (gComp B p₁ p₂).hom.app ((J B j).obj N) ≫ (G B p₁).map ((alpha B i r₂ p₂ j h₂).app N) ≫ (alpha B k r₁ p₁ i h₁).app ((G B r₂).obj N) = (alpha B k (r₁ ≫ r₂) (p₁ ≫ p₂) j h).app N ≫ (J B k).map ((gComp B r₁ r₂).hom.app N)",
+  "branch": "newtargets-dag",
+  "by": "Q95",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-100d627a4",
+  "group": "Q95",
+  "result": "pass",
+  "note": "Re-delivery after the 93ca8644a20f landing refusal (singleOpenUnit_isIso duplicated FiniteOpenBaseChangeNormalized.openUnit_isIso). diff -r vs 93ca: 7 ordinary declarations removed and replaced by existing public arbitrary-B ones: clopenModule_openUnit_isIso/clopenModuleToDirect(_isIso)/clopenModulePi (lem-cbc-proper-open-clopen-projector) and openBetaModule(_isIso)/openBetaModuleJComp (lem-cbc-tower-open-beta-normalization). Read in the live source: same bodies term for term, so singleAlpha is unchanged. alpha_eq_localized_singleAlpha restated via the existing ClopenProjectorDescent with clopenTowerAbelian; it still pins derived alpha uniquely to the localization of towerAlpha. New def node: 4 declarations match the module, statement verbatim, TeX cites exactly its 9 stmt_deps; the two added theorem stmt_deps supply theorem-constructed defs (inv/asIso of their isIso claims), no cycle. Item module: 4 renames only; H3 re-checked (vertical/horizontal/cube orientation with compositors, induced pullback cube, 5 levels, arbitrary B, edge cases B=0, V=empty, cartesian Q). statement_change citation-only; old_statement and old_stmt_deps equal live; sole citer holds; def-cbc-strict-tower-proper-open-arrows record equals live. No duplicates of the 4 remaining declarations in live or side-live. 4 sorry, docstrings and report sections present. No compile (no file changed). Advisory: moduleSquareG reached transitively.",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-23",
+  "by": "Q95 stage 2",
+  "old_statement": "Let $B$ be a commutative ring. For every scheme $X$ use its small pro-etale site with the chosen small skeleton, its constant ring sheaf $\\underline B_X$, the abelian category of module sheaves, and $\\mathcal T_X=\\operatorname{Fun}(\\mathbf N_{\\geq1}^{op},\\operatorname{Mod}(\\underline B_X))$ of strict inverse systems. Work in the ordinary unbounded derived categories $D(\\mathcal T_X)$. Use the termwise inverse image $G_u$, total derived termwise direct image $R_u$, and exact open extension $J_j$ with their specified adjunctions and compositors [def-cbc-strict-constant-tower-operations] [def-cbc-strict-tower-open-extension]. Let $Q$ be a commutative square of schemes with $k:V\\hookrightarrow W$, $i:S\\hookrightarrow T$ quasi-compact open immersions, $r:V\\to S$, $p:W\\to T$ proper, and $pk=ir$. Put $W_S=W\\times_T S$ with projections $b:W_S\\to W$, $q:W_S\\to S$, and $s=(k,r):V\\to W_S$. For each such square take the clopen component projector and the open-unit-normalized cartesian comparison and form $\\alpha_Q:G_pJ_i\\to J_kG_r$ by the intrinsic construction [def-cbc-strict-tower-proper-open-arrows]. For vertically stacked squares $Q_1$ above $Q_2$, with left proper maps $r_1,r_2$, right proper maps $p_1,p_2$ and middle open $i_1$, their intrinsic outer alpha satisfies\n$$\\alpha_{Q_2Q_1}=(\\alpha_{Q_1}G_{r_2})\\circ(G_{p_1}\\alpha_{Q_2}).$$\nFor horizontal squares $Q_1$ left of $Q_2$, with top opens $k,l$, bottom opens $i,j$ and verticals $r,p,q$, it satisfies\n$$\\alpha_{Q_2Q_1}=(J_l\\alpha_{Q_1})\\circ(\\alpha_{Q_2}J_i).$$\nFor any base change $h:T_1\\to T$, let $a:W_1\\to W$, $c:S_1\\to S$, $d:V_1\\to V$ be the projections and $Q_1$ the induced square. With $\\theta:G_{p_1}G_h\\cong G_aG_p$ the canonical square identification, one has\n$$(\\beta_kG_r)\\circ(G_a\\alpha_Q)\\circ(\\theta J_i)=(\\alpha_{Q_1}G_c)\\circ(G_{p_1}\\beta_i).$$\nEvery formula inserts the canonical inverse-image and open-extension compositors. These equalities hold already for module sheaves, termwise on strict towers and complexes, and after exact localization in their unbounded derived categories. They identify the intrinsic outer clopen construction with the pasted one; no chosen factorization, finite-coefficient condition, cartesianness of the original squares, or faithfulness of derived evaluation is assumed.",
+  "what": "The returned ownership repair moves the ordinary singleAlpha interface into a separate definition node. The original TeX citation named only the published derived-arrow node, so the item statement citation was incomplete after that split. Adding the ordinary-arrow citation changes no hypothesis, object, formula, or conclusion; it records the canonical ordinary construction used by the already delivered module.",
+  "source": {
+   "document": "literature/stacks-project/more-etale.tex",
+   "place": "Tags 0F7C, 0F7D and 0F7F, with the ordinary refinement of thm-cbc-complete-proetale proof final compatibility sentence: citation-only ownership repair requested by the independent review of 05b6168cc8f2 (H13/H4)."
+  },
+  "citers": [
+   {
+    "id": "lem-cbc-strict-tower-proper-open-calculus",
+    "holds": true,
+    "note": "Uses this item only as a proof dependency; the added ordinary-arrow citation leaves its use of the item’s derived alpha laws valid."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-pc-scheme",
+   "def-weil-pbc-proetale-site",
+   "def-weil-pbc-constant-sheaf",
+   "def-weil-sheaf-of-modules-category",
+   "def-weil-inverse-system",
+   "def-weil-abstract-derived-category",
+   "def-cbc-strict-constant-tower-operations",
+   "def-cbc-strict-tower-open-extension",
+   "def-pc-fibre-product",
+   "def-weil-open-immersion",
+   "def-weil-finite-type-morphism",
+   "def-weil-proper-morphism",
+   "def-weil-closed-immersion",
+   "def-cbc-strict-tower-proper-open-arrows",
+   "def-cbc-open-immersion-square"
+  ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E8",
+  "result": "pass",
+  "landing": "20261027T064444-L-2180476",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

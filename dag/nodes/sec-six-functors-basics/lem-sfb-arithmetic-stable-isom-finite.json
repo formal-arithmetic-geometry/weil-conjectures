@@ -1,0 +1,336 @@
+{
+ "id": "lem-sfb-arithmetic-stable-isom-finite",
+ "kind": "statement",
+ "title": "Finite unramified Isom schemes for stable families over arbitrary bases",
+ "statement": "Let $T$ be any scheme [def-pc-scheme], let $g\\geq2$, and let $C\\to T$ and $D\\to T$ be stable unpointed genus-$g$ families in [def-sfb-stable-pointed-moduli-groupoids]. The functor on $T$-schemes sending $T'\\to T$ to the set of $T'$-isomorphisms $C_{T'}\\xrightarrow{\\sim}D_{T'}$ is represented by a finite unramified $T$-scheme $I_T(C,D)$. Its representing bijections commute with arbitrary base change and identify the universal point with a universal isomorphism of the two pulled-back curves. There is no field-base, finite-type, Noetherian, normality or reducedness hypothesis on $T$. The functor includes all disconnected and nonreduced test schemes. Finite means affine and finite as an algebra module on every affine chart [def-weil-finite-integral-morphism]; unramified means locally of finite type with diagonal an open immersion [def-weil-unramified-morphism]. Pullbacks are scheme fibre products [def-pc-fibre-product].",
+ "source": {
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Tag 0DSQ (lemma-curves-diagonal-separated-fp), Tag 0E7A (lemma-stable-curves-deligne-mumford), Tag 0E9A (lemma-stable-separated): stable diagonal is proper and unramified, hence finite; spaces-morphisms.tex Tag 0418 (lemma-locally-quasi-finite-separated-representable), and spaces-more-morphisms.tex Tag 0A4X (lemma-characterize-finite) for the finite scheme realization."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-finite-integral-morphism",
+  "def-weil-unramified-morphism",
+  "def-pc-fibre-product",
+  "def-sfb-stable-fiber-curve"
+ ],
+ "proof": [
+  {
+   "text": "Cover $T$ by affine opens $U=\\operatorname{Spec}A$. The restrictions of $C,D$ are proper by [lem-trf-projective-bundle-proper], and are flat finitely presented curve families by [def-sfb-stable-pointed-curve]. By [lemma-nagata-noetherian-inverse-system-affine], $U$ is the inverse limit of the spectra $S_i$ of finitely generated $\\mathbf Z$-subalgebras of $A$. This is a small directed system (its rings form a subset of the power set of $A$), with affine transitions. Apply the object-descent clause of [lem-sfb-curve-limit-preservation] twice and pass to a common stage $i$. Obtain proper flat finitely presented algebraic-space curve families $C_i,D_i$ over $S_i$ and chosen identifications of their pullbacks to $U$ with $C_U,D_U$. These initial families need not be stable.",
+   "uses": [
+    "lem-trf-projective-bundle-proper",
+    "def-sfb-stable-pointed-curve",
+    "lemma-nagata-noetherian-inverse-system-affine",
+    "lem-sfb-curve-limit-preservation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D55 (lemma-curves-limits), object descent; affine Noetherian approximation."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-arithmetic-stable-open-bounded] to each descended family, and let $S\\subseteq S_i$ be the intersection of their stable genus-$g$ opens. The map $U\\to S_i$ factors through both opens, hence through $S$, because its two pulled-back families are the original stable families. Over $S$ both $C_i,D_i$ are schemes and stable families in exactly the projective-bundle convention required here. The stage $S_i$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since it is of finite type over $\\mathbf Z$; its open $S$ is locally Noetherian by [pqf-def-locnoeth]. Replace the stage families by their restrictions $C_S,D_S$. No eventual stability on an entire affine stage is asserted or needed.",
+   "uses": [
+    "lem-sfb-arithmetic-stable-open-bounded",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tags 0E76 (lemma-stable-curves), 0E78 (lemma-stable-one-piece-per-genus): base-change-compatible stable genus locus."
+   }
+  },
+  {
+   "text": "Use [lem-sfb-labelled-stable-isom-unramified] over the locally Noetherian scheme $S$, with $n=0$ and its unique permutation. This gives a separated finite-type unramified scheme $J\\to S$ representing all isomorphisms between $C_S,D_S$, naturally on all $S$-schemes. There are no marking equations when $n=0$. For a DVR square $\\operatorname{Spec}K\\to J$, $\\operatorname{Spec}R\\to S$, naturality identifies the top arrow with a $K$-isomorphism of the two pulled-back stable families. By [lem-sfb-stable-labelled-isom-trait-extension] this extends to exactly one $R$-isomorphism. The representing bijection identifies it with exactly one lift $\\operatorname{Spec}R\\to J$ of the square, including the prescribed generic restriction. Thus [lem-sfb-noetherian-dvr-properness] makes $J\\to S$ proper. Its finite-type hypothesis comes from the Isom lemma; no excellence or smooth generic-fibre hypothesis is used.",
+   "uses": [
+    "lem-sfb-labelled-stable-isom-unramified",
+    "lem-sfb-stable-labelled-isom-trait-extension",
+    "lem-sfb-noetherian-dvr-properness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0E9A (lemma-stable-separated), diagonal properness; expanded using the existing persistently nodal trait-extension node and limits.tex Tag 0208 (lemma-Noetherian-dvr-valuative-proper)."
+   }
+  },
+  {
+   "text": "Since $J\\to S$ is unramified, [lem-weil-pbc-unramified-quasi-finite-at-points] makes it locally quasi-finite. Apply [pqf-lem-proper-lqf-finite] to its properness from step 3 to conclude that $J\\to S$ is finite. Put $I_U=J\\times_SU$. The finite and unramified base-change clauses of [lem-weil-pbc-finite-morphism-permanence] and [lem-weil-pbc-unramified-base-change-open] show that $I_U\\to U$ is finite unramified.",
+   "uses": [
+    "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "pqf-lem-proper-lqf-finite",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-unramified-base-change-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02LS (lemma-characterize-finite), proper locally quasi-finite implies finite; morphisms.tex Tags 02V5, 01W2, 02GA for quasi-finiteness and base change."
+   }
+  },
+  {
+   "text": "For every $V\\to U$, the universal property [def-pc-fibre-product] identifies maps $V\\to I_U$ over $U$ with maps $V\\to J$ over $S$. The natural representing bijection of [lem-sfb-labelled-stable-isom-unramified], followed by conjugation by the chosen pullback identifications from step 1, identifies these with $\\operatorname{Isom}_V(C_V,D_V)$. The two identifications are natural in $V$. In particular $I_U$ represents the required functor on every $U$-scheme, with no reducedness or connectedness restriction.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-sfb-labelled-stable-isom-unramified"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0DSQ (lemma-curves-diagonal-separated-fp), interpretation by Isom functors; elementary fibre-product identification of the pulled-back representative."
+   }
+  },
+  {
+   "text": "On any overlap $U\\cap U'$ the two restricted representatives have naturally identical functors, by step 5. Apply [lem-galois-yoneda-fully-faithful] in the category of schemes over this overlap to the identity natural transformation and its inverse: obtain mutually inverse scheme maps. On triple overlaps their composites agree because they induce the same identity transformation; faithfulness gives the cocycle. This reasoning works on the actual open overlaps, which need not be affine. Now [lem-weil-pbc-glue-schemes] glues the $I_U$ to a scheme $I$. Their structure maps to $T$ agree on overlaps and glue by [lem-weil-pbc-scheme-morphism-gluing] to $I\\to T$, with $I\\times_TU\\simeq I_U$.",
+   "uses": [
+    "lem-galois-yoneda-fully-faithful",
+    "lem-weil-pbc-glue-schemes",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Scheme gluing along open overlaps; the canonical overlap maps are supplied by categories.tex Tag 001P (lemma-yoneda)."
+   }
+  },
+  {
+   "text": "Given any $V\\to T$, cover $V$ by the inverse images $V_U$ of the chosen opens $U$. A map $V\\to I$ gives isomorphisms $C_{V_U}\\to D_{V_U}$ by step 5, agreeing on overlaps by the definition of the gluing maps. Apply [lem-weil-pbc-scheme-morphism-gluing] to these maps on the open cover of $C_V$, and separately to their inverses on $D_V$. The composites are identity locally, hence globally by uniqueness in the same lemma. This constructs a $V$-isomorphism. Conversely a $V$-isomorphism gives compatible local maps $V_U\\to I_U\\subseteq I$, which glue uniquely. These operations are inverse and commute with every pullback, since they do so on each $V_U$ and the gluings are unique. Thus $I$ represents the required functor, including disconnected and nonreduced tests.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Gluing morphisms on open covers, applied both to isomorphisms and their inverses; elementary assembly of the local representing bijections."
+   }
+  },
+  {
+   "text": "Finiteness of $I\\to T$ follows from [lem-weil-pbc-finite-local-on-target], applied to the affine covering used above. Unramifiedness follows from [lem-sfb-scheme-unramified-etale-locality]: at a point of $I_U$ use the open charts $I_U\\to I$, $U\\to T$, which are etale by [lem-weil-pbc-open-immersion-etale], and the unramified map $I_U\\to U$. For any $T'\\to T$ and $V\\to T'$, [def-pc-fibre-product] identifies maps $V\\to I\\times_TT'$ over $T'$ with maps $V\\to I$ over $T$, and hence with $\\operatorname{Isom}_V(C_V,D_V)$ by step 7. This proves arbitrary-base-change compatibility. Evaluate the representing bijection at $V=I$ and $\\mathrm{id}_I$ to obtain the universal isomorphism; naturality says its pullback along any $V\\to I$ is the corresponding isomorphism. The empty base is handled by the empty cover and empty representative.",
+   "uses": [
+    "lem-weil-pbc-finite-local-on-target",
+    "lem-sfb-scheme-unramified-etale-locality",
+    "lem-weil-pbc-open-immersion-etale",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tags 0DSQ, 0E7A, 0E9A: assembly of finite unramified arbitrary-base Isom representation; naturality gives the universal point and base change."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-sfb-stable-pointed-curve",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-sfb-arithmetic-stable-open-bounded",
+  "lem-sfb-curve-limit-preservation",
+  "lem-sfb-labelled-stable-isom-unramified",
+  "lem-sfb-noetherian-dvr-properness",
+  "lem-sfb-scheme-unramified-etale-locality",
+  "lem-sfb-stable-labelled-isom-trait-extension",
+  "lem-trf-projective-bundle-proper",
+  "lem-weil-pbc-finite-local-on-target",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-glue-schemes",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-unramified-base-change-open",
+  "lem-weil-pbc-unramified-quasi-finite-at-points",
+  "lemma-nagata-noetherian-inverse-system-affine",
+  "pqf-def-locnoeth",
+  "pqf-lem-proper-lqf-finite"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Arithmetic version of Tags 0DSQ, 0E7A, 0E9A, expanded by affine Noetherian approximation and the existing nodal trait-extension proof, rather than assuming a field base."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Isomorphisms between stable curves over any scheme are represented by a finite unramified scheme",
+   "results": "{\"t\": \"2026-10-23T11:50:40Z\", \"tool\": \"leanfinder\", \"query\": \"Isomorphisms between stable curves over any scheme are represented by a finite unramified scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instOverCoverOfIsIsoOfIsOver\", \"AlgebraicGeometry.IsFinite.instOfIsIsoScheme\", \"AlgebraicGeometry.Scheme.Hom.isIso_toLRSHom\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.IsProper.instRespectsIsoScheme\", \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.instHasAffinePropertyIsomorphismsSchemeAndIsAffineIsIsoCommRingCatAppTop\"], \"digest\": \"7807515d8e13f7ed\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; only scheme morphism properties, generic compactness, elliptic-curve isomorphisms or interpolation occur, not the specified moduli theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Stable proper genus at least two families have finite unramified Isom functor over arbitrary bases",
+   "results": "{\"t\": \"2026-10-23T11:50:39Z\", \"tool\": \"leansearch\", \"query\": \"Stable proper genus at least two families have finite unramified Isom functor over arbitrary bases\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified.recOn\", \"Algebra.FormallyUnramified.iff_of_equiv\", \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"RingHom.FormallyUnramified.isStableUnderBaseChange\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\"], \"digest\": \"9fdc2d3f731a8234\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; only scheme morphism properties, generic compactness, elliptic-curve isomorphisms or interpolation occur, not the specified moduli theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFinite\", \"FormallyUnramified\"",
+   "results": "{\"t\": \"2026-10-23T11:50:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsFinite\\\", \\\"FormallyUnramified\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; only scheme morphism properties, generic compactness, elliptic-curve isomorphisms or interpolation occur, not the specified moduli theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ii]som.*[Cc]urve|[Cc]urve.*[Ii]som|[Ss]table[Cc]urve",
+   "results": "{\"t\": \"2026-10-23T11:50:38Z\", \"tool\": \"grep\", \"query\": \"[Ii]som.*[Cc]urve|[Cc]urve.*[Ii]som|[Ss]table[Cc]urve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/IsomOfJ.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\"], \"digest\": \"a3a4435c0e8eec47\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; only scheme morphism properties, generic compactness, elliptic-curve isomorphisms or interpolation occur, not the specified moduli theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The stable curves moduli stack is quasi compact and the isomorphism functor of stable curves is finite unramified over an arbitrary base",
+   "results": "{\"t\": \"2026-10-23T11:45:56Z\", \"tool\": \"leanfinder\", \"query\": \"The stable curves moduli stack is quasi compact and the isomorphism functor of stable curves is finite unramified over an arbitrary base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"AlgebraicGeometry.quasiCompact_isStableUnderComposition\", \"AlgebraicGeometry.quasiCompact_of_isIso\", \"AlgebraicGeometry.instIsMultiplicativeSchemeQuasiCompact\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatFiberOfQuasiCompact\", \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\"], \"digest\": \"a95c17ce2fb08c45\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; only scheme morphism properties, generic compactness, elliptic-curve isomorphisms or interpolation occur, not the specified moduli theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Stable curves form a bounded moduli problem and have finite unramified diagonal over the integers",
+   "results": "{\"t\": \"2026-10-23T11:45:48Z\", \"tool\": \"leansearch\", \"query\": \"Stable curves form a bounded moduli problem and have finite unramified diagonal over the integers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified.recOn\", \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.IsImmersion.instDiagonalScheme\", \"AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme\"], \"digest\": \"a9fe47e9a2f60d3f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; only scheme morphism properties, generic compactness, elliptic-curve isomorphisms or interpolation occur, not the specified moduli theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"StableCurve\"",
+   "results": "{\"t\": \"2026-10-23T13:37:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"StableCurve\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits read; generic scheme morphism properties and affine limit facts do not state the stable-curve Isom theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "stable.?curve|stable.?famil|stable.?moduli",
+   "results": "{\"t\": \"2026-10-23T13:37:23Z\", \"tool\": \"grep\", \"query\": \"stable.?curve|stable.?famil|stable.?moduli\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits read; generic scheme morphism properties and affine limit facts do not state the stable-curve Isom theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A stable curve over an arbitrary affine base descends to a stable curve over a finitely generated integer subalgebra",
+   "results": "{\"t\": \"2026-10-23T13:37:23Z\", \"tool\": \"leanfinder\", \"query\": \"A stable curve over an arbitrary affine base descends to a stable curve over a finitely generated integer subalgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\"], \"digest\": \"3c22bb4b8f2e2dab\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits read; generic scheme morphism properties and affine limit facts do not state the stable-curve Isom theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Stable proper nodal curves spread out to a finite type base over the integers",
+   "results": "{\"t\": \"2026-10-23T13:39:19Z\", \"tool\": \"leansearch\", \"query\": \"Stable proper nodal curves spread out to a finite type base over the integers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"AlgebraicGeometry.isProper_iff\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"WeierstrassCurve.integralModel\"], \"digest\": \"1cdb18c717bcac26\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits read; generic scheme morphism properties and affine limit facts do not state the stable-curve Isom theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Limit preserving moduli of proper flat stable curves and noetherian approximation over affine schemes",
+   "results": "{\"t\": \"2026-10-23T13:39:21Z\", \"tool\": \"leanfinder\", \"query\": \"Limit preserving moduli of proper flat stable curves and noetherian approximation over affine schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineScheme.hasLimits\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit\", \"AlgebraicGeometry.Scheme.nonempty_of_isLimit\"], \"digest\": \"5d329669af4ada95\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits read; generic scheme morphism properties and affine limit facts do not state the stable-curve Isom theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Isom functor between stable curves of genus at least two is represented by a finite unramified scheme over an arbitrary base",
+   "results": "{\"t\": \"2026-10-23T13:40:16Z\", \"tool\": \"leanfinder\", \"query\": \"The Isom functor between stable curves of genus at least two is represented by a finite unramified scheme over an arbitrary base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instOfIsIsoScheme\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.instOverCoverOfIsIsoOfIsOver\", \"AlgebraicGeometry.IsFinite.instContainsIdentitiesScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme\"], \"digest\": \"ef07cc3fe0105dd5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits read; generic scheme morphism properties and affine limit facts do not state the stable-curve Isom theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite unramified diagonal of the moduli stack of stable curves over the integers",
+   "results": "{\"t\": \"2026-10-23T13:40:17Z\", \"tool\": \"leansearch\", \"query\": \"Finite unramified diagonal of the moduli stack of stable curves over the integers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"AlgebraicGeometry.FormallyUnramified.recOn\", \"Algebra.FormallyUnramified\", \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"AlgebraicGeometry.FormallyUnramified\", \"Algebra.unramifiedLocus\", \"Algebra.Unramified.mk\"], \"digest\": \"c880389c28d7f7fa\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits read; generic scheme morphism properties and affine limit facts do not state the stable-curve Isom theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFinite\", \"FormallyUnramified\"",
+   "results": "{\"t\": \"2026-10-23T13:40:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsFinite\\\", \\\"FormallyUnramified\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits read; generic scheme morphism properties and affine limit facts do not state the stable-curve Isom theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stable-moduli-regular-universal-atlas",
+  "date": "2026-10-23",
+  "group": "Q51"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Regular universal etale presentation of the stable moduli groupoid. Arithmetic diagonal input, used both for the Deligne--Mumford criterion and for schematic arbitrary-base pullbacks and finite overlap schemes.",
+   "via": [
+    "lem-sfb-stable-moduli-regular-universal-atlas",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-arithmetic-stable-isom-finite",
+  "worker": "stage1",
+  "group": "Q68",
+  "summary": "Split with no new nodes. Descend both families on each affine chart to a finite-type integer stage, restrict to the common stable open, use the existing Noetherian labelled Isom theorem and arbitrary-DVR extension to get properness, then proper+lqf gives finiteness. Pull back, glue via Yoneda, and verify naturality and the universal isomorphism explicitly.",
+  "blueprint": "Read latest sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3). This is the existing alteration/stable-moduli auxiliary chain serving direct-image preservation; steps 1--8 supply the arithmetic diagonal input in the parent atlas split, retaining the inherited exact from.place and via chain. The latest blueprint does not contain this auxiliary theorem as a separate node.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-projective-bundle-proper",
+    "why": "Only projective-bundle implies proper for the given stable families is used, to enter the existing proper-curve limit-preservation theorem; it does not replace any unit step."
+   },
+   {
+    "node": "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "why": "Generic unramified implies locally quasi-finite is needed before the existing proper+lqf finite leaf; there is no stable-moduli alternative being substituted."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-projective-bundle-proper",
+  "lem-weil-pbc-unramified-quasi-finite-at-points"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q68-7d46408af",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-7d46408af (reviewer sub-agent of L); spot-checked: PASS, no fixes. Read the item, all 21 cited node statements and Stacks 0E9A, 0D55, 0208, 02V5, 02LS, 0DSQ, 0E7A, 0E76 and 0E78. The delivery has no new nodes, no SGA citation and no repair note (so the re-split rule does not apply), keeps the statement and stmt_deps, has proof_deps equal to the union of the step uses, and has no cycle. Step 1: the projective-bundle family is proper (lem-trf-projective-bundle-proper), flat, finitely presented and of fibre dimension at most 1, so it lies in the curve-limit category; the Nagata finitely generated Z-subalgebra system is small and directed, and both families descend to a common stage. Step 2: def-sfb-proper-curve-moduli is the same class, and the test characterization of the stable open gives the factorization of U through the intersection S; S is locally Noetherian but need not be affine, which is all later steps need. Step 3: the valuative existence and uniqueness for J is correctly derived from the representing bijection plus the arbitrary-DVR trait-extension node, so 0208 gives properness. Step 4: unramified gives locally quasi-finite, proper plus that gives finite, and base change keeps both properties. Steps 5 to 7: Yoneda gives the overlap maps and cocycle, schemes and morphisms glue, and gluing isomorphisms with their inverses gives representability on arbitrary, including nonreduced, test schemes. Step 8: finiteness is local on the target, unramifiedness follows from the etale chart criterion, and base change and the universal point follow from the fibre-product property. Edge cases checked: empty base, n=0 with g at least 2, any DVR including those whose generic point does not map to a generic point of S, and a non-affine S. No duplicate of the arithmetic statement exists in the DAG. Tool use accepted: lem-trf-projective-bundle-proper, the generic fact that projective implies proper. Batch-5 findings: every flagged citation reaches only generic definitions or scheme facts (projective-bundle definition and properness, algebraic-space definition, affine presentations of P(E), schematically dense open, formally unramified from stalks); none is a step of the trace formula or Poincare duality proof."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ArithmeticStableIsomFinite",
+  "declaration": "AlgebraicGeometry.StablePointedModuli.arithmetic_stable_isom_finite",
+  "file": "lean/Sheaf/AlgebraicGeometry/ArithmeticStableIsomFinite.lean",
+  "statement": "theorem arithmetic_stable_isom_finite (T : Scheme.{u}) (g : ℕ) (hg : 2 ≤ g) (C D : Fiber T g 0 (Over.mk (𝟙 T))) : ∃ I : Over T, IsFinite I.hom ∧ IsUnramified I.hom ∧ ∃ e : (Over.pullback I.hom).obj (fiberCurve C) ≅ (Over.pullback I.hom).obj (fiberCurve D), ∀ (V : Over T) (eV : (Over.pullback V.hom).obj (fiberCurve C) ≅ (Over.pullback V.hom).obj (fiberCurve D)), ∃! b : V ⟶ I, eV.hom.left ≫ pullback.fst (fiberCurve D).hom V.hom = pullback.map (fiberCurve C).hom V.hom (fiberCurve C).hom I.hom (𝟙 _) b.left (𝟙 _) ((Category.comp_id _).trans (Category.id_comp _).symm) ((Category.comp_id _).trans (Over.w b).symm) ≫ e.hom.left ≫ pullback.fst (fiberCurve D).hom I.hom",
+  "branch": "sheaf-dag",
+  "by": "Q37",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1fc565a31",
+  "group": "Q37",
+  "result": "pass",
+  "note": "Read item, 6 stmt_dep records and Lean (StablePointedModuli/Fiber/forget, fiberCurve, IsUnramified, IsFinite, pullback.map, Over.pullback), Stacks 0DSQ/0E7A/0E9A. Universal-element form ∃ I finite unramified, ∃ e : C_I≅D_I, ∀ V eV ∃! b with eV.hom.left≫fst_D = pullback.map(𝟙,b,𝟙)≫e.hom.left≫fst_D is exactly eV = b^*e (maps over V determined by D-component), giving representing bijections, naturality, base change, universal point. Arbitrary T, g≥2, r=0 over identity base, same universe u, all tests. Edge cases empty T, empty Isom, C=D automorphisms OK. Node differs from live only in lean and stmt_deps (+landed def-sfb-stable-fiber-curve, allowed); dep files identical; statement verbatim; lines ≤100; docstrings with source/blueprint/8 steps; no defs, only sorry; imports exist (proof-dep modules). No duplicate found. No compile (no change)."
+ }
+}

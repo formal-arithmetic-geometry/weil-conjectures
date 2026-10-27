@@ -1,0 +1,225 @@
+{
+ "id": "lem-sfb-central-torus-semisimple-derived-product",
+ "kind": "statement",
+ "title": "Multiplication by a central torus with semisimple quotient and the derived group",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $G$ be a smooth connected affine $F$-group scheme of finite type [def-sc-group-scheme], and let $R\\subset G$ be a central torus, meaning a central closed subgroup isomorphic over $F$ to $(\\mathbf G_m)^r$ for some $r\\geq0$, where $\\mathbf G_m(A)=A^\\times$. Assume the fppf sheaf quotient $G/R$ is represented by a semisimple $F$-group scheme; this quotient is the sheafification of $A\\mapsto G(A)/R(A)$ for faithfully flat finitely presented coverings. Let $D=G^{\\mathrm{der}}$ denote the smallest closed subgroup scheme through which the commutator morphism $(x,y)\\mapsto xyx^{-1}y^{-1}$ factors. Then $D$ is smooth, connected, affine, of finite type and semisimple, and the multiplication homomorphism $m:R\\times_F D\\to G$, $(t,d)\\mapsto td$, is faithfully flat with finite central kernel of multiplicative type. Its kernel is isomorphic to the scheme-theoretic intersection $R\\cap D$ by $a\\mapsto(a,a^{-1})$. Here a semisimple group is a smooth connected affine group scheme of finite type with no nontrivial smooth connected solvable normal closed subgroup scheme; solvable means that its successive derived subgroup schemes eventually become trivial. A multiplicative isogeny means a homomorphism whose pullback on coordinate algebras is faithfully flat and whose scheme-theoretic kernel is finite and of multiplicative type. Faithfully flat means that extension of scalars is exact and detects zero modules. Finite means having finite-dimensional coordinate algebra. A finite group scheme is of multiplicative type if, after extension to an algebraic closure, it is diagonalizable: it is isomorphic to $D(M)=\\operatorname{Spec}F[M]$ for a finite abelian group $M$, with comultiplication $e_m\\mapsto e_m\\otimes e_m$ on the group-algebra basis. Central means commuting with every group element after every scalar extension. ",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 12.46(a),(b), printed pp.245--246; Theorem 21.50 (semisimple groups are perfect); Proposition 19.21(b),(c), printed pp.401--402; proof of Proposition 21.60(a)--(c), printed p.442; Sections 12.9--12.10 and 12.14 on subgroups of split tori. The kernel of multiplication is the inverse diagonal of the scheme-theoretic intersection."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sfb-semisimple-group-scheme",
+  "def-sfb-tori-multiplicative-type",
+  "def-sfb-finite-diagonalizable-group-scheme",
+  "def-sfb-fppf-group-quotient-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Write $Q=G/R$; since $R$ is central it is normal in $G$. By [lem-sfb-affine-normal-quotient-geometry] for $R\\subseteq G$, the fppf quotient $G/R$ is represented by an affine group scheme of finite type whose quotient homomorphism is faithfully flat with scheme-theoretic kernel $R$; as $Q$ represents the same sheaf compatibly with the projections, $q:G\\to Q$ is faithfully flat with $\\ker q=R$. Apply [lem-sfb-smooth-connected-derived-subgroup] to $G$ and $Q$: their derived subgroups are smooth connected closed affine groups of finite type, and their $F$-points are the abstract commutator subgroups. Apply [lem-sfb-semisimple-group-perfect] to $Q$; it gives $Q^{\\mathrm{der}}=Q$. Since $Q$ is smooth and $q$ is faithfully flat, [lem-sfb-affine-group-homomorphism-image] makes $q$ surjective on $F$-points. Given an expression of an element of $Q(F)$ as a product of commutators, lift the entries of those commutators to $G(F)$; their commutator product belongs to $D(F)$ and maps to that element. Thus $q|_D:D(F)\\to Q(F)$ is surjective. The same rational-point criterion, with smooth target $Q$, makes $q|_D:D\\to Q$ faithfully flat.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-smooth-connected-derived-subgroup",
+    "lem-sfb-semisimple-group-perfect",
+    "lem-sfb-affine-group-homomorphism-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 12.46(b), printed pp.245--246; Corollary 21.50, printed p.440; Propositions 5.47 and 6.20(b); quotient projection by the existing node lem-sfb-affine-normal-quotient-geometry"
+   }
+  },
+  {
+   "text": "Use [lem-sfb-central-torus-faithful-weight-blocks] for $(G,R)$, obtaining $\\rho$ and $V=\\bigoplus_i V_i$ with characters $\\chi_i$ and positive integers $n_i=\\dim_F V_i$. The determinant of each block action is a homomorphism $\\delta_i:G\\to\\mathbf G_m$. Since its target is commutative, [lem-sfb-smooth-connected-derived-subgroup] says that $\\delta_i|_D=1$ as a morphism of group schemes. For the scheme-theoretic intersection $K=R\\cap D$ this gives $\\chi_i|_K^{n_i}=1$ over every $F$-algebra, rather than merely on geometric points.",
+   "uses": [
+    "lem-sfb-central-torus-faithful-weight-blocks",
+    "lem-sfb-smooth-connected-derived-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 12.46(a), proof, printed p.246 (block determinants)"
+   }
+  },
+  {
+   "text": "The closed immersion $(\\chi_i):R\\hookrightarrow\\mathbf G_m^s$ restricts to a closed immersion of $K$ and factors through $\\prod_i\\mu_{n_i}$ by the preceding equations. In coordinates this gives a surjection $F[z_1^{\\pm1},\\ldots,z_s^{\\pm1}]/(z_i^{n_i}-1)_i\\twoheadrightarrow F[K]$: the map before imposing the relations is surjective, so it stays surjective after imposing relations that vanish on $K$. The source is spanned over $F$ by the finitely many monomials $\\prod_i z_i^{a_i}$ with $0\\leq a_i<n_i$ (replace inverses using $z_i^{-1}=z_i^{n_i-1}$). Thus $F[K]$ is finite-dimensional. This proves scheme-theoretic finiteness even when the characteristic divides some $n_i$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 12.46(a), proof, printed p.246 (coordinate refinement of the scalar-matrix argument)"
+   }
+  },
+  {
+   "text": "The kernel of $q|_D$ is $D\\times_G\\ker q=D\\times_G R=K$, since $\\ker q=R$ by step 1 ([lem-sfb-affine-normal-quotient-geometry]). Step 1 makes $q|_D$ faithfully flat, and step 3 makes its kernel finite. Both $D$ and $Q$ are smooth connected affine groups of finite type, as required by [lem-sfb-semisimple-isogeny-source]. Applying that lemma to $D\\to Q$ proves that $D$ is semisimple.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-semisimple-isogeny-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 19.14, printed p.400; proof of Proposition 21.60(b) implies (c), printed p.442"
+   }
+  },
+  {
+   "text": "Centrality of $R$ makes multiplication $m:R\\times_F D\\to G$ a group-scheme homomorphism: $(t_1d_1)(t_2d_2)=(t_1t_2)(d_1d_2)$ over every scalar algebra. For $g\\in G(F)$ choose $d\\in D(F)$ with $q(d)=q(g)$ by step 1. Then $t=gd^{-1}\\in\\ker(q)(F)=R(F)$ and $g=td$. Hence $m$ is surjective on $F$-points. Its target $G$ is smooth, so [lem-sfb-affine-group-homomorphism-image] makes $m$ faithfully flat.",
+   "uses": [
+    "lem-sfb-affine-group-homomorphism-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 12.46(b), proof, printed p.246; Proposition 5.47"
+   }
+  },
+  {
+   "text": "For every commutative $F$-algebra $A$, a pair $(t,d)\\in R(A)\\times D(A)$ is in $\\ker(m)(A)$ exactly when $d=t^{-1}$. It then determines $t\\in K(A)$, and conversely $a\\in K(A)$ gives $(a,a^{-1})$. These formulas commute with every algebra map and use the subgroup inclusions and inversion morphisms, so define inverse morphisms $K\\simeq\\ker(m)$. Both $a$ and $a^{-1}$ are central in $G$; therefore $(a,a^{-1})$ commutes with every $(t,d)$ after every scalar extension. This proves centrality of the scheme-theoretic kernel, including infinitesimal elements.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 12.46(b), sequence (78) and its kernel identification"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-split-torus-subgroups-diagonalizable] to the closed subgroup $K\\subset R\\simeq\\mathbf G_m^r$. It gives $K\\simeq D(M)$ for a finitely generated abelian group $M$, which is finite because $F[K]$ is finite-dimensional by step 3. Step 6 identifies this finite diagonalizable group with $\\ker(m)$. This is precisely the claimed finite central kernel of multiplicative type.",
+   "uses": [
+    "lem-sfb-split-torus-subgroups-diagonalizable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.9(c), printed pp.233--234; Proposition 12.46, printed pp.245--246"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-affine-normal-quotient-geometry",
+  "lem-sfb-smooth-connected-derived-subgroup",
+  "lem-sfb-semisimple-group-perfect",
+  "lem-sfb-affine-group-homomorphism-image",
+  "lem-sfb-central-torus-faithful-weight-blocks",
+  "lem-sfb-semisimple-isogeny-source",
+  "lem-sfb-split-torus-subgroups-diagonalizable"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 12.46(a),(b), with Corollary 21.50 and Lemma 19.14 as in Proposition 21.60(b) implies (c); scheme-theoretic kernel and finite-coordinate refinement written explicitly"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected affine group with a central torus and semisimple quotient is the almost direct product of this torus and its semisimple derived subgroup",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieAlgebra.IsSemisimple\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Defs\", \"type\": \"(R : Type u_1) → (L : Type u_2) → [inst : CommRing R] → [inst_1 : LieRing L] → [LieAlgebra R L] → Prop\", \"doc\": \"The Lie algebra $ L $ over the commutative ring $ R $ is semisimple.\"}\n  {\"name\": \"LieAlgebra.IsSemisimple.sSup_atoms_eq_top\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Defs\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} {inst : CommRing R} {inst_1 : LieRing L} {inst_2 : LieAlgebra R L}\\n  [self : LieAlgebra.IsSemisimple R L], sSup {I | IsAtom I} = ⊤\", \"doc\": \"In a semisimple Lie algebra $ L $ over a commutative ring $ R $, the supremum (sum) of all atoms (minimal non-zero Lie submodules) in the lattice of $ L $-submodules equals the entire module $ L $. Th\"}\n  {\"name\": \"LieAlgebra.IsSemisimple.booleanGenerators\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsSemisimple R L], IsCompactlyGenerated.BooleanGenerators {I | IsAtom I}\", \"doc\": \"The set of atomic Lie ideals in a semisimple Lie algebra forms a set of Boolean generators for the complete lattice of Lie submodules. This means the set is closed under finite meets, joins, and compl\"}\n  {\"name\": \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"module\": \"Mathlib/Algebra/Lie/CartanExists\", \"type\": \"∀ (K : Type u_1) (L : Type u_2) [inst : Field K] [inst_1 : LieRing L] [inst_2 : LieAlgebra K L] [Module.Finite K L]\\n  [Infinite K], ∃ x, (LieSubalgebra.engel K x).IsCartanSubalgebra\", \"doc\": \"For an infinite field $ K $, there exists an element $ x $ in the Lie algebra $ L $ such that the Engel subalgebra associated with $ x $ forms a Cartan subalgebra of $ L $. This means the maximal gene\"}\n  {\"name\": \"Sylow.directProductOfNormal\", \"module\": \"Mathlib/GroupTheory/Sylow\", \"type\": \"{G : Type u} →\\n  [inst : Group G] →\\n    [Finite G] →\\n      (∀ {p : ℕ} [Fact (Nat.Prime p)] (P : Sylow p G), (↑P).Normal) →\\n        ((p : ↥(Nat.card G).primeFactors) → (P : Sylow (↑p) G) → ↥P) ≃* G\", \"doc\": \"For any finite group $ G $, if all Sylow $ p $-subgroups of $ G $ are normal, then the direct product of these Sylow $ p $-subgroups (taken over all distinct prime factors $ p $ of the order of $ G $)\"}\n  {\"name\": \"LieAlgebra.IsKilling.instSemisimple\", \"module\": \"Mathlib/Algebra/Lie/Killing\", \"type\": \"∀ (K : Type u_2) (L : Type u_3) [inst : Field K] [inst_1 : LieRing L] [inst_2 : LieAlgebra K L]\\n  [LieAlgebra.IsKilling K L] [Module.Finite K L], LieAlgebra.IsSemisimple K L\", \"doc\": \"If a Lie algebra $ L $ over a field $ K $ is finite-dimensional as a vector space and its Killing form is non-degenerate, then $ L $ is a semisimple Lie algebra. This means that $ L $ has no nontrivia\"}\n  {\"name\": \"LieAlgebra.InvariantForm.isSemisimple_of_nondegenerate\", \"module\": \"Mathlib/Algebra/Lie/InvariantForm\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : LieRing L] [inst_2 : LieAlgebra K L] [Module.Finite K L]\\n  (Φ : LinearMap.BilinForm K L),\\n  Φ.Nondegenerate →\\n    LinearMap.BilinForm.lieInvariant L Φ →\\n      Φ.IsRefl → (∀ (I : LieIdeal K L), IsAtom I → ¬IsLieAbelian ↥I) → LieAlgebra.IsSemi\", \"doc\": \"If a Lie algebra $\\\\mathfrak{g}$ over a field $K$ admits a non-degenerate invariant bilinear form, then $\\\\mathfrak{g}$ is semisimple.\"}\n  {\"name\": \"LieModule.isCompl_genWeightSpace_zero_posFittingComp\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (R : Type u_2) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [IsNoetherian R M] [IsArtinian R M],\\n  IsComp\", \"doc\": \"In a Lie module $ M $ over a commutative ring with a nilpotent Lie algebra action, the generalized weight space associated with the zero weight function and the positive Fitting component form complem\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Lie algebras, abstract groups, semisimple rings or Galois categories, not the asserted structure of affine group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multiplication of a central torus and the commutator algebraic subgroup is faithfully flat with finite diagonalizable kernel when the quotient is semisimple",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas\", \"type\": \"∀ (k : Type u_1) (L : Type u_2) (M : Type u_3) [inst : Field k] [CharZero k] [inst_2 : LieRing L]\\n  [inst_3 : LieAlgebra k L] [Module.Finite k L] [inst_5 : AddCommGroup M] [inst_6 : Module k M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule k L M] [Module.Finite k M] [LieModule.IsIrreducible k L\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a field $k$ with an irreducible and faithful module $M$, the radical of $\\\\mathfrak{g}$ is central, and an element $x \\\\in \\\\mathfrak{g}$ lies in the center if and o\"}\n  {\"name\": \"Algebra.IsCentral.left_of_tensor\", \"module\": \"Mathlib/Algebra/Central/TensorProduct\", \"type\": \"∀ (K : Type u_1) (B : Type u_2) (C : Type u_3) [inst : CommSemiring K] [inst_1 : Semiring B] [inst_2 : Semiring C]\\n  [inst_3 : Algebra K B] [inst_4 : Algebra K C],\\n  Function.Injective ⇑(algebraMap K C) →\\n    ∀ [Module.Flat K B] [hbc : Algebra.IsCentral K (TensorProduct K B C)], Algebra.IsCentral K \", \"doc\": \"Let $ K $ be a commutative semiring, and let $ B $ and $ C $ be $ K $-algebras. If the canonical algebra map $ K \\\\to C $ is injective, $ B $ is a flat $ K $-module, and the tensor product $ B \\\\otimes_\"}\n  {\"name\": \"Algebra.IsCentral.right_of_tensor\", \"module\": \"Mathlib/Algebra/Central/TensorProduct\", \"type\": \"∀ (K : Type u_1) (B : Type u_2) (C : Type u_3) [inst : CommSemiring K] [inst_1 : Semiring B] [inst_2 : Semiring C]\\n  [inst_3 : Algebra K B] [inst_4 : Algebra K C],\\n  Function.Injective ⇑(algebraMap K B) →\\n    ∀ [Module.Flat K C] [Algebra.IsCentral K (TensorProduct K B C)], Algebra.IsCentral K C\", \"doc\": \"Let $ K $ be a commutative semiring, and let $ B $ and $ C $ be $ K $-algebras. If the canonical algebra map $ K \\\\to B $ is injective, $ C $ is a flat $ K $-module, and the tensor product algebra $ B \"}\n  {\"name\": \"LieAlgebra.isSolvable_tensorProduct_iff\", \"module\": \"Mathlib/Algebra/Lie/Solvable\", \"type\": \"∀ (R : Type u) (L : Type v) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] {A : Type u_1}\\n  [inst_3 : CommRing A] [inst_4 : Algebra R A] [Module.FaithfullyFlat R A],\\n  LieAlgebra.IsSolvable (TensorProduct R A L) ↔ LieAlgebra.IsSolvable L\", \"doc\": \"The Lie algebra formed by extending scalars of a Lie algebra $ L $ over a commutative ring $ R $ via an $ R $-algebra $ A $ is solvable if and only if $ L $ is solvable. Formally, $ \\\\text{IsSolvable}(\"}\n  {\"name\": \"RootPairing.GeckConstruction.instIsLieAbelianSubtypeMatrixSumMemFinsetSupportLieSubalgebraLieAlgebraCartanSubalgebra'\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N}\\n  [inst_5 : P.IsCrystallographic] {b : P.Base} [inst_6 : Finite ι] [inst_7 : IsDomain R] [inst\", \"doc\": \"The Cartan subalgebra constructed via the Geck method in the matrix algebra $ \\\\text{Mat}_{(S \\\\oplus \\\\iota) \\\\times (S \\\\oplus \\\\iota)}(R) $ is an abelian Lie subalgebra, meaning that the Lie bracket of a\"}\n  {\"name\": \"LieAlgebra.center_eq_bot\", \"module\": \"Mathlib/Algebra/Lie/Abelian\", \"type\": \"∀ (R : Type u) (L : Type v) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieModule.IsFaithful R L L], LieAlgebra.center R L = ⊥\", \"doc\": \"For a Lie algebra $ L $ over a commutative ring $ R $, if the action of $ L $ on itself is faithful (i.e., the only element acting as zero on all of $ L $ is the zero element itself), then the center \"}\n  {\"name\": \"LieAlgebra.isFaithful_self_iff\", \"module\": \"Mathlib/Algebra/Lie/Abelian\", \"type\": \"∀ (R : Type u) (L : Type v) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L],\\n  LieModule.IsFaithful R L L ↔ LieAlgebra.center R L = ⊥\", \"doc\": \"A Lie algebra $ L $ over a commutative ring $ R $ is a faithful module over itself if and only if its center $ \\\\text{center}(R, L) $ is trivial, i.e., equal to the zero submodule $ \\\\{0\\\\} $.\"}\n  {\"name\": \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"module\": \"Mathlib/Algebra/Lie/CartanExists\", \"type\": \"∀ (K : Type u_1) (L : Type u_2) [inst : Field K] [inst_1 : LieRing L] [inst_2 : LieAlgebra K L] [Module.Finite K L]\\n  [Infinite K], ∃ x, (LieSubalgebra.engel K x).IsCartanSubalgebra\", \"doc\": \"For an infinite field $ K $, there exists an element $ x $ in the Lie algebra $ L $ such that the Engel subalgebra associated with $ x $ forms a Cartan subalgebra of $ L $. This means the maximal gene\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Lie algebras, abstract groups, semisimple rings or Galois categories, not the asserted structure of affine group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"commutator\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no declaration for multiplicative isogenies or the stated algebraic-group structure theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "centralIsogeny|central_isogeny|ReductiveGroup|SemisimpleGroup|almostDirectProduct",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no declaration for multiplicative isogenies or the stated algebraic-group structure theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A connected reductive algebraic group is an almost direct product of its central radical torus and its derived semisimple subgroup",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LieAlgebra.hasCentralRadical_iff\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Defs\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L],\\n  LieAlgebra.HasCentralRadical R L ↔ LieAlgebra.radical R L = LieAlgebra.center R L\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$, the radical of $\\\\mathfrak{g}$ is a central ideal if and only if the radical of $\\\\mathfrak{g}$ is equal to the center of $\\\\mathfrak{g}$.\"}\n  {\"name\": \"LieAlgebra.HasCentralRadical.radical_eq_center\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Defs\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} {inst : CommRing R} {inst_1 : LieRing L} {inst_2 : LieAlgebra R L}\\n  [self : LieAlgebra.HasCentralRadical R L], LieAlgebra.radical R L = LieAlgebra.center R L\", \"doc\": \"For any commutative ring $ R $ and Lie algebra $ L $ over $ R $ with a central radical, the radical of $ L $ is equal to its center. That is, $ \\\\operatorname{rad}(L) = \\\\mathfrak{z}(L) $, where $ \\\\oper\"}\n  {\"name\": \"LieAlgebra.HasCentralRadical.casesOn\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Defs\", \"type\": \"{R : Type u_1} →\\n  {L : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : LieRing L] →\\n        [inst_2 : LieAlgebra R L] →\\n          {motive : LieAlgebra.HasCentralRadical R L → Sort u} →\\n            (t : LieAlgebra.HasCentralRadical R L) →\\n              ((radical_eq_center : LieAlgebra.radical \", \"doc\": \"Given a property of Lie algebras with central radical, if we can define it for the case where the radical equals the center, then this case analysis principle allows decomposing the property into this\"}\n  {\"name\": \"LieAlgebra.HasCentralRadical.recOn\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Defs\", \"type\": \"{R : Type u_1} →\\n  {L : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : LieRing L] →\\n        [inst_2 : LieAlgebra R L] →\\n          {motive : LieAlgebra.HasCentralRadical R L → Sort u} →\\n            (t : LieAlgebra.HasCentralRadical R L) →\\n              ((radical_eq_center : LieAlgebra.radical \", \"doc\": \"Given a property of Lie algebras with central radical, if we can define it for the case where the radical equals the center, then this recursion principle allows extending the definition to all such L\"}\n  {\"name\": \"LieAlgebra.HasCentralRadical.mk\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Defs\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L],\\n  LieAlgebra.radical R L = LieAlgebra.center R L → LieAlgebra.HasCentralRadical R L\", \"doc\": \"If the radical of a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ equals its center, then $\\\\mathfrak{g}$ has a central radical (i.e., its radical is a central ideal).\"}\n  {\"name\": \"LieAlgebra.HasCentralRadical\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Defs\", \"type\": \"(R : Type u_1) → (L : Type u_2) → [inst : CommRing R] → [inst_1 : LieRing L] → [LieAlgebra R L] → Prop\", \"doc\": \"The Lie algebra $ L $ over the commutative ring $ R $ has a central radical, meaning its radical is a central ideal.\"}\n  {\"name\": \"SemidirectProduct.instInhabited\", \"module\": \"Mathlib.GroupTheory.SemidirectProduct\", \"type\": \": Inhabited (N ⋊[φ] G)\", \"doc\": \"Given groups $N$ and $G$, and a group homomorphism $\\\\phi: G \\\\to \\\\text{Aut}(N)$, the semidirect product $N \\\\rtimes_\\\\phi G$ is a group. This instance equips the semidirect product with the canonical gro\"}\n  {\"name\": \"SemidirectProduct.mulEquivProd_apply\", \"module\": \"Mathlib.GroupTheory.SemidirectProduct\", \"type\": \"∀ {N : Type u_1} {G : Type u_2} [inst : Group N] [inst_1 : Group G] (x : N ⋊[1] G),\\n  SemidirectProduct.mulEquivProd x = (x.left, x.right)\", \"doc\": \"Under a trivial group action, the multiplicative equivalence from the semidirect product $ N \\rtimes G $ to the direct product $ N \\times G $ sends each element to the pair of its components in $ N $ an\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Lie algebras, abstract groups, semisimple rings or Galois categories, not the asserted structure of affine group schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-torus-simply-connected-cover",
+  "date": "2026-10-23",
+  "group": "Q03"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplication by a central torus with semisimple quotient and the derived group.",
+   "via": [
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-central-torus-semisimple-derived-product",
+  "worker": "stage1",
+  "summary": "Read Milne Proposition 12.46, Corollary 21.50, Lemma 19.14 and the proof of Proposition 21.60. Expanded the determinant argument into a coordinate-algebra proof valid for nonreduced finite kernels, proved rational-point surjectivity by lifting commutators, and identified the kernel functorially. Six reusable structure inputs are stated only, searched, and cited. No statement change.",
+  "blueprint": "Inherited created-item chain serves det-thm-sf-ctf-stability-direct-images (3), the alteration/moduli/Haboush central-cover prerequisite. The current blueprint route was read at latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md. This item expands the Milne central-cover subargument below that route; blueprint_refs.py ancestor reports None, preserved from the existing chain."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q155-203c87432",
+  "group": "Q155",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q155-203c87432 (reviewer sub-agent of L); spot-checked: FIX for one duplicate fault (C5/D). The statement is unchanged from base: the base node was unsplit with an empty proof, there is no re-split note, and the only change to statement fields is the justified stmt_dep def-sc-group-scheme-subgroup. Every cited node is in unit sk-thm-sf-ctf-stability; there are no tool_uses and no SGA citations. I read the Milne sources in the PDF: 12.46(a),(b) pp.245-246, 21.60 (b)=>(c) p.442, Cor 21.50 p.440, Lemma 19.14 p.400 (its isogeny goes from target to source, as in the new node), Thm 5.39 and Prop 5.47 pp.108-110, 6.16-6.20 pp.129-130, Thm 12.9. Steps 1-7 are correct: lifting commutators through q gives D(F)->Q(F) surjective; block determinants vanish on D at the morphism level, so chi_i^{n_i}|K=1; F[K] is a quotient of F[z]/(z_i^{n_i}-1), so it is finite-dimensional even for nonreduced kernels; isogeny ascent gives D semisimple; m is surjective on F-points and its target is smooth; the kernel identification is functorial; 12.9(c) gives D(M) with M finite. I checked the five other new nodes on small cases (GL_n, H=1, r=0, mu_p in characteristic p); all are true and none duplicates an existing node. Fault: in lem-sfb-affine-group-homomorphism-image, the factorization clause duplicates lem-sfb-algebraic-group-homomorphism-factorization and the faithful flatness of the quotient projection duplicates the same-unit node lem-sfb-affine-normal-quotient-geometry. Both are on base, and the report's not-duplicates list misses both. Repair: the node is narrowed to the new Milne 5.47 rational-point criterion (title, source and stmt_deps updated). Item steps 1 and 4 now cite lem-sfb-affine-normal-quotient-geometry for q faithfully flat with ker q=R, and proof_deps is the union of the uses. Corrected files are in fixes/dag/nodes/sec-six-functors-basics/. coord/dag-sync.md is absent from the snapshot.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.CentralTorusDerivedProduct",
+  "declaration": "AlgebraicGeometry.centralTorus_semisimple_derived_product",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/CentralTorusDerivedProduct.lean",
+  "statement": "theorem centralTorus_semisimple_derived_product {F : Type u} [Field F] [IsAlgClosed F] (G R Q : Grp (Over (Spec (.of F)))) [Smooth G.X.hom] [ConnectedSpace G.X.left] [IsAffine G.X.left] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] (i : R ⟶ G) [IsClosedSubgroupScheme i.hom.hom] (hR : ∃ r : ℕ, Nonempty (R ≅ MultiplicativeType.splitTorus F r)) (hcentral : ∀ (T : Over (Spec (.of F))) (t : T ⟶ R.X) (g : T ⟶ G.X), (t ≫ i.hom.hom) * g = g * (t ≫ i.hom.hom)) (q : G ⟶ Q) (hquot : IsFppfGroupQuotient i q) (hQ : IsSemisimpleGroupScheme Q.X) : ∃ (D : Grp (Over (Spec (.of F)))) (d : D ⟶ G) (m : R.X ⊗ D.X ⟶ G.X) (_ : IsMonHom m), IsDerivedGroupScheme d.hom.hom ∧ IsSemisimpleGroupScheme D.X ∧ m = (fst R.X D.X ≫ i.hom.hom) * (snd R.X D.X ≫ d.hom.hom) ∧ m.left.appTop.hom.FaithfullyFlat ∧ IsFinite (GrpObj.ker m).hom ∧ IsFiniteDiagonalizableGroupScheme (GrpObj.ker m) ∧ (∀ (T : Over (Spec (.of F))) (a : T ⟶ GrpObj.ker m) (x : T ⟶ R.X ⊗ D.X), (a ≫ GrpObj.kerι m) * x = x * (a ≫ GrpObj.kerι m)) ∧ ∃ e : pullback i.hom.hom d.hom.hom ≅ GrpObj.ker m, e.hom ≫ GrpObj.kerι m = lift (pullback.fst i.hom.hom d.hom.hom) ((pullback.snd i.hom.hom d.hom.hom)⁻¹)",
+  "branch": "newtargets-dag",
+  "by": "Q36",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the already landed semisimple/derived, split-torus, finite-diagonalizable and fppf-quotient definition nodes, added to stmt_deps. No new notions, dependency repairs or statement correction. Multiplication and the inverse-diagonal kernel isomorphism are specified by equalities of morphisms, retaining nonreduced scheme structure."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9379b9303",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Every clause matches the node: alg. closed F; G smooth/connected/affine/finite type; R closed central (all T-points) split torus of any rank; IsFppfGroupQuotient i q with semisimple Q; ∃ D with IsDerivedGroupScheme (unique up to iso); IsSemisimpleGroupScheme D; m an IsMonHom pinned as (fst≫i)*(snd≫d); faithfully flat on Γ (both sides affine); IsFinite and IsFiniteDiagonalizable kernel (= multiplicative type over alg. closed F); kernel central on all T-points; e : pullback i d ≅ ker m with e.hom≫kerι = lift fst snd⁻¹. Only node change besides lean: 4 added stmt_deps, all landed def nodes; IsFppfGroupQuotient owned by def-sfb-fppf-group-quotient-presentation (existing:true). Statement verbatim; sorry only; source/blueprint docstrings and 7-step proof; no name collision. Edge cases r=0, G=R, GL_n/μ_n nonreduced, universes OK. Report's second reading is by the same worker, stated openly. No recompile per instructions; no fixes."
+ }
+}

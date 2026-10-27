@@ -1,0 +1,229 @@
+{
+ "id": "lem-sfb-sheaf-dg-binary-gluing",
+ "kind": "statement",
+ "title": "Binary open gluing of sheaf dg objects with compatible target maps",
+ "statement": "Fix universes as in [def-weil-size-convention]. Let $X$ be a topological space with a sheaf $\\mathcal S$ of commutative rings, and let $\\mathcal C$ be a sheaf dg $\\mathcal S$-algebra. Use left dg modules, signed shifts and cones, and the localization $D_X(\\mathcal C)$ at underlying quasi-isomorphisms of [def-sfb-sheaf-dg-module-localization]. Let $U,V\\subseteq X$ be open with $X=U\\cup V$, and put $T=U\\cap V$. Suppose given $L\\in D_U(\\mathcal C|_U)$, $M\\in D_V(\\mathcal C|_V)$, and an isomorphism $c:L|_T\\xrightarrow{\\sim}M|_T$. Then there exist $F\\in D_X(\\mathcal C)$ and isomorphisms $f:F|_U\\xrightarrow{\\sim}L$, $g:F|_V\\xrightarrow{\\sim}M$ satisfying $g|_T=c\\circ f|_T$.\n\nMoreover, given any $N\\in D_X(\\mathcal C)$ and maps $a:L\\to N|_U$, $b:M\\to N|_V$ satisfying $a|_T=b|_T\\circ c$, these objects and isomorphisms can be chosen with a map $d:F\\to N$ whose restrictions are $a\\circ f$ and $b\\circ g$. No quasi-coherence, perfectness, boundedness, or vanishing of negative Ext is assumed. This asserts existence of an actual global derived object and map; it does not assert uniqueness of a morphism from its open restrictions.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Agent sheaf-dg analogue of Tag 08DG (lemma-glue), including its compatible-target-map clause, and Tag 08BW (lemma-mayer-vietoris-hom). These tags state the ordinary ringed-space versions; the dg versions with the specified action and signed cones are independent obligations, using sdga.tex Tag 0FT5 (definition-derived-category)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sfb-sheaf-dg-module-localization"
+ ],
+ "proof": [
+  {
+   "text": "The existing homotopy-system theorem applies to left modules by the following sign conversion. Form the dg opposite algebra $\\mathcal C^{\\mathrm{op}}$, with $a\\star b=(-1)^{|a||b|}ba$, and make a left module a right module by $m\\cdot a=(-1)^{|a||m|}am$. The two Leibniz formulas agree after substitution; a signed left map of degree $r$ becomes an ordinary right graded-linear map because $(-1)^{|a||m|+r|a|}=(-1)^{|a|(|m|+r)}$. The conversion and its inverse preserve the differential, degree-zero maps, homotopies, underlying cohomology, and the displayed shifts and cones. Thus the homotopy-system theorem gives a triangulated $K_X(\\mathcal C)$ and its compatible multiplicative system $W$. Apply triangulated localization to obtain the specified cone triangulation on $D_X(\\mathcal C)$. The same argument works on every open subspace. In particular any derived arrow has a distinguished cone triangle; no chain-level representative of the given $c$ is required.",
+   "uses": [
+    "lem-sfb-sheaf-dg-homotopy-system",
+    "lem-pur-localization-triangles-05r6",
+    "def-sfb-sheaf-dg-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tags 0FS7 (proposition-homotopy-category-triangulated), 0FT4 (lemma-qis), 0FT5 (definition-derived-category); derived.tex Tag 05R6 (proposition-construct-localization); explicit left/right sign conversion"
+   }
+  },
+  {
+   "text": "Write $u:U\\hookrightarrow X$, $v:V\\hookrightarrow X$ and $t:T\\hookrightarrow X$, and put $P=t_!(L|_T)$ and $B=u_!L\\oplus v_!M$. Use the open extension adjunction and its nested-open identifications to define $\\alpha:P\\to B$ with components adjoint to $1_{L|_T}$ and $-c$, respectively. Choose a distinguished triangle\n$$P\\xrightarrow{\\alpha}B\\xrightarrow{q}F\\xrightarrow{\\delta}P[1].$$\nThe inclusions of the two summands followed by $q$, restricted to $U$ and $V$ and using $u^*u_!\\simeq1$, $v^*v_!\\simeq1$, give $i_U:L\\to F|_U$ and $i_V:M\\to F|_V$. Restriction preserves this triangle by the open-extension calculus. Consecutive arrows compose to zero by the Hom-into-triangle lemma (also on rotations).",
+   "uses": [
+    "lem-sfb-sheaf-dg-open-extension-calculus",
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08DG (lemma-glue), agent dual construction using sdga Tag 0FRW and derived Tag 0146 (lemma-composition-zero)"
+   }
+  },
+  {
+   "text": "We verify the local isomorphisms by a split-cone calculation, using only triangle exactness. On $U$, let $A=(T\\hookrightarrow U)_!(L|_T)$ and let $h:A\\to L$ be the adjunction counit. Identify $(T\\hookrightarrow U)_!(M|_T)$ with $A$ using $c^{-1}$. The restricted first arrow is then $(h,-1):A\\to L\\oplus A$. Put $p=(1,h):L\\oplus A\\to L$. Since $p(h,-1)=0$, Hom-out exactness gives $r:F|_U\\to L$ with $rq=p$. Hence $ri_U=1$ and $q\\operatorname{in}_A=i_Uh$. The left inverse $-\\operatorname{pr}_A$ of $(h,-1)$, together with the zero composition $(h,-1)[1]\\delta=0$ in the rotated triangle, gives $\\delta=0$. Now $(1-i_Ur)q=0$, so Hom-out exactness in its second clause gives $1-i_Ur=k\\delta=0$. Thus $i_U$ is invertible. On $V$, identify the overlap source using $c$ and order the two summands as $M\\oplus(T\\hookrightarrow V)_!(M|_T)$. The first arrow is $(-h',1)$, where $h'$ is the counit; changing the source by $-1$ reduces it to the same calculation. Thus $i_V$ is invertible. Set $f=i_U^{-1}$ and $g=i_V^{-1}$.",
+   "uses": [
+    "lem-sfb-sheaf-dg-open-extension-calculus",
+    "lem-weil-pbc-hom-out-of-triangle-exact",
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08DG (lemma-glue), split local triangle; derived.tex Tags 0146 (lemma-composition-zero), 0149 (lemma-representable-homological); explicit dual split-cone calculation"
+   }
+  },
+  {
+   "text": "Restrict $q\\alpha=0$ to $T$. By the unit and counit identifications in the open-extension calculus, its two terms become $i_U|_T$ and $-i_V|_T\\circ c$. Therefore $i_U|_T=i_V|_T\\circ c$. Inverting $i_U|_T$ and $i_V|_T$ gives exactly $g|_T=c\\circ f|_T$. This proves the required transition, rather than just separate local isomorphisms.",
+   "uses": [
+    "lem-sfb-sheaf-dg-open-extension-calculus",
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08DG (lemma-glue), transition identity; sdga Tag 0FRW (lemma-extension-by-zero-dg)"
+   }
+  },
+  {
+   "text": "For the additional data, let $\\widetilde a:u_!L\\to N$ and $\\widetilde b:v_!M\\to N$ be the adjoints of $a$ and $b$, and put $e=(\\widetilde a,\\widetilde b):B\\to N$. By naturality of the adjunction and the nested-open counit compatibility, the adjoint of $e\\alpha:t_!(L|_T)\\to N$ is $a|_T-b|_T\\circ c=0$. Thus $e\\alpha=0$ as a global derived arrow. Hom-out exactness supplies $d:F\\to N$ with $dq=e$. Restricting this equation and composing with the two summand inclusions gives $d|_U\\,i_U=a$ and $d|_V\\,i_V=b$, hence $d|_U=af$ and $d|_V=bg$. Without target data the preceding construction already proves the first clause; with target data it uses the very same $F,f,g$. Exactness asserts existence only, so no uniqueness or vanishing of negative Ext has been used.",
+   "uses": [
+    "lem-sfb-sheaf-dg-open-extension-calculus",
+    "lem-weil-pbc-hom-out-of-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 08DG (lemma-glue), compatible-target-map clause, and 08BW (lemma-mayer-vietoris-hom); dual proof via sdga 0FRW and derived 0149 (lemma-representable-homological)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-sheaf-dg-homotopy-system",
+  "lem-pur-localization-triangles-05r6",
+  "def-sfb-sheaf-dg-module-localization",
+  "lem-sfb-sheaf-dg-open-extension-calculus",
+  "def-weil-triangulated-category",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-weil-pbc-hom-out-of-triangle-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Agent dg adaptation of Tag 08DG (lemma-glue), using the dual extension-by-zero cone and sdga Tag 0FRW; target-map existence is the triangle-exactness form of the Tag 08BW Mayer--Vietoris argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Glue two sheaves of differential graded modules in the derived category along an isomorphism on the intersection of two open subsets with a compatible map to a global target",
+   "results": "{\"t\": \"2026-10-24T07:31:31Z\", \"tool\": \"leanfinder\", \"query\": \"Glue two sheaves of differential graded modules in the derived category along an isomorphism on the intersection of two open subsets with a compatible map to a global target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk\", \"AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val\", \"AlgebraicGeometry.SheafedSpace.GlueData\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.glue\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₃₄_op_glue\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₂₄_op_glue\", \"AlgebraicGeometry.SheafedSpace.GlueData.toGlueData\", \"TopCat.Sheaf.existsUnique_gluing'\"], \"digest\": \"03624b044901b918\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned ordinary sheaf generators/colimits, ringed-space gluing, differentials, or commutation of categorical limits; none states derived sheaf dg binary gluing with target maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Binary open gluing of derived dg modules and compatible morphisms on a ringed space",
+   "results": "{\"t\": \"2026-10-24T07:31:29Z\", \"tool\": \"leanfinder\", \"query\": \"Binary open gluing of derived dg modules and compatible morphisms on a ringed space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.GlueData\", \"AlgebraicGeometry.LocallyRingedSpace.GlueData.toGlueData\", \"AlgebraicGeometry.LocallyRingedSpace.GlueData.toSheafedSpaceGlueData\", \"AlgebraicGeometry.SheafedSpace.GlueData\", \"AlgebraicGeometry.SheafedSpace.GlueData.toGlueData\", \"AlgebraicGeometry.LocallyRingedSpace.GlueData.isoSheafedSpace\", \"AlgebraicGeometry.SheafedSpace.GlueData.f_open\", \"AlgebraicGeometry.LocallyRingedSpace.GlueData.ι_isoSheafedSpace_inv\"], \"digest\": \"8175b918646077f3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned ordinary sheaf generators/colimits, ringed-space gluing, differentials, or commutation of categorical limits; none states derived sheaf dg binary gluing with target maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"glue\"",
+   "results": "{\"t\": \"2026-10-24T07:31:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"DerivedCategory\\\", \\\"glue\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no source or Loogle hits"
+  },
+  {
+   "tool": "grep",
+   "query": "dg.*glu|glu.*dg|derived.*glu|glu.*derived",
+   "results": "{\"t\": \"2026-10-24T07:31:23Z\", \"tool\": \"grep\", \"query\": \"dg.*glu|glu.*dg|derived.*glu|glu.*derived\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no source or Loogle hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Gluing differential graded sheaf modules on two opens in the derived category with compatible arrows to a fixed target",
+   "results": "{\"t\": \"2026-10-24T07:31:24Z\", \"tool\": \"leansearch\", \"query\": \"Gluing differential graded sheaf modules on two opens in the derived category with compatible arrows to a fixed target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"TopCat.Sheaf.interUnionPullbackConeLift\", \"TopCat.Sheaf.existsUnique_gluing\", \"CategoryTheory.GlueData.sigmaOpens\", \"CategoryTheory.Precoverage.ZeroHypercover.glueMorphisms\", \"AlgebraicGeometry.SheafedSpace.GlueData.toGlueData\", \"CategoryTheory.GrothendieckTopology.OneHypercover.glueMorphisms\", \"AlgebraicGeometry.Scheme.OpenCover.glueMorphismsOverOfLocallyDirected\"], \"digest\": \"03855fc72de97409\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned ordinary sheaf generators/colimits, ringed-space gluing, differentials, or commutation of categorical limits; none states derived sheaf dg binary gluing with target maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gluing two derived sheaves of differential graded modules along an isomorphism on their open overlap with a compatible morphism to a fixed object",
+   "results": "{\"t\": \"2026-10-24T08:14:56Z\", \"tool\": \"leanfinder\", \"query\": \"Gluing two derived sheaves of differential graded modules along an isomorphism on their open overlap with a compatible morphism to a fixed object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.SheafedSpace.GlueData\", \"AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₃₄_op_glue\", \"AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val\", \"AlgebraicGeometry.SheafedSpace.GlueData.toGlueData\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₂₄_op_glue\", \"AlgebraicGeometry.LocallyRingedSpace.GlueData.isoSheafedSpace\", \"TopCat.Sheaf.existsUnique_gluing'\"], \"digest\": \"0dc818716b94877c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary sheaf or ringed-space gluing; none gives gluing in the localization of sheaf dg modules with the compatible-target-map clause."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"glue\"",
+   "results": "{\"t\": \"2026-10-24T08:14:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"DerivedCategory\\\", \\\"glue\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary sheaf or ringed-space gluing; none gives gluing in the localization of sheaf dg modules with the compatible-target-map clause."
+  },
+  {
+   "tool": "grep",
+   "query": "dg.*glu|glu.*dg|derived.*glu|glu.*derived",
+   "results": "{\"t\": \"2026-10-24T08:14:55Z\", \"tool\": \"grep\", \"query\": \"dg.*glu|glu.*dg|derived.*glu|glu.*derived\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary sheaf or ringed-space gluing; none gives gluing in the localization of sheaf dg modules with the compatible-target-map clause."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Binary open gluing of differential graded sheaf modules in an unbounded derived category",
+   "results": "{\"t\": \"2026-10-24T08:14:55Z\", \"tool\": \"leansearch\", \"query\": \"Binary open gluing of differential graded sheaf modules in an unbounded derived category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf.interUnionPullbackConeLift\", \"AlgebraicGeometry.LocallyRingedSpace.GlueData.casesOn\", \"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"AlgebraicGeometry.LocallyRingedSpace.GlueData.f_open\", \"AlgebraicGeometry.LocallyRingedSpace.GlueData\", \"AlgebraicGeometry.SheafedSpace.GlueData.mk.sizeOf_spec\", \"AlgebraicGeometry.SheafedSpace.GlueData.ι_isoPresheafedSpace_inv\", \"AlgebraicGeometry.SheafedSpace.GlueData.casesOn\"], \"digest\": \"75be923135ac8f20\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary sheaf or ringed-space gluing; none gives gluing in the localization of sheaf dg modules with the compatible-target-map clause."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-perfect-sheaf-dg-finite-stage-descent",
+  "date": "2026-10-24",
+  "group": "Q55"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Independent prerequisite: Pseudo-coherent perfect direct images between flat finitely presented families. Kiehl finiteness input: the unnumbered general relative-pseudo-coherence assertion following Stacks lemma-flat-proper-pseudo-coherent-direct-image-general. Finite-degree Noetherian descente input for the Kiehl finiteness assertion. Independent prerequisite: Relative sheaf descente on a prescribed Noetherian envelope. Two-open gluing prerequisite, conditional on approximation on both opens and their intersection, uniform in a supplied finite coefficient stage. Single-degree induction step: cancel finite polynomial-chart top obstructions globally while retaining the prescribed scalar-action normalization. Mayer--Vietoris subproblem for one degree: given a global coherent witness at cutoff n+1 and witnesses on two opens at cutoff n, obtain a global witness at cutoff n. The supplied global witness is part of the hypothesis. Independent input: finite coherent factorization of a cohomologically surjective perfect dg arrow to an ordinary scheme complex, with cohomologically surjective first factor. Uniform Mayer--Vietoris locality step: the predicate on each open covers all perfect sources, ordinary targets, integer cutoffs and arrows surjective on cohomology above the cutoff; conditional on this full predicate on both opens and their intersection. Independent prerequisite: finite coefficient descent of the perfect sheaf dg source, before transposing the arrow to an ordinary coherent object. Binary gluing of finite-stage dg objects and a map to the restricted original object; no coefficient descent is asserted here.",
+   "via": [
+    "lem-sfb-perfect-sheaf-dg-finite-stage-descent",
+    "lem-sfb-perfect-arrow-coherent-factorization-locality",
+    "lem-sfb-perfect-coefficient-arrow-finite-realization",
+    "lem-sfb-global-witness-one-degree-binary-patching",
+    "lem-sfb-sheaf-single-degree-coefficient-cancellation",
+    "lem-sfb-relative-coefficient-window-two-open-locality",
+    "lem-sfb-prescribed-envelope-relative-sheaf-descente",
+    "lem-sfb-relative-complex-noetherian-cohomology-approximation",
+    "lem-sfb-kiehl-relative-pseudocoherent-direct-image",
+    "lem-sfb-flat-family-perfect-direct-image-pseudocoherent",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-sheaf-dg-binary-gluing",
+  "worker": "stage1",
+  "summary": "Constructed the signed overlap cone using dg extension by zero, verified both restriction isomorphisms by explicit split-cone identities, checked the transition, and lifted compatible target maps by the existing generic Hom-out exactness leaf. Added one independent open-extension-calculus node; reused the right-module homotopy theorem through an explicit Koszul conversion and the generic triangulated-localization theorem. Statement unchanged.",
+  "blueprint": "Latest sk-thm-sf-ctf-stability, direct-images proof (3): independent dg gluing prerequisite in the inherited finite-stage descent route; retains the recorded ancestor place and realizes binary gluing without changing any unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-localization-triangles-05r6",
+    "why": "Generic triangulated localization theorem, applied to the already available sheaf-dg compatible multiplicative system; the unit has no alternative statement of this categorical tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-localization-triangles-05r6"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-O1-58be6e35f",
+  "group": "O1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-58be6e35f (reviewer sub-agent of L); spot-checked: I read the whole item, the new node, every cited statement, Stacks cohomology.tex 08DG (lemma-glue, statement and proof) and sdga.tex 0FRV/0FRW. Statement unchanged and agrees with 08DG. The source error the report names is real: 0FRV says j_! is 'right adjoint to j_*', but 0FRW gives j_! left adjoint to j^*. Step 1: I checked the left-to-right conversion through C^op by hand (C^op Leibniz, associativity, right Leibniz, degree-r maps, and that the shifted left action becomes the unchanged right action), so homotopy-system plus 05r6 triangulate D_X(C) on every open. Steps 2-3: the overlap arrow restricts on U to (h,-1); I checked (1,h)(h,-1)=0, then r with rq=p, delta=0 from the left inverse -pr_A and the rotated zero composite, then 1-i_U r = k delta = 0 by Hom-out (ii). On V the arrow (-h',1) reduces to the same case by -1. Step 4: q alpha=0 restricted to T gives i_U|_T = i_V|_T c, hence g|_T = c f|_T (direction checked). Step 5: e alpha=0 follows from the adjunction bijection, not from local detection; Hom-out (i) gives d. New node lem-sfb-sheaf-dg-open-extension-calculus: statement only, self-contained, true (degreewise exact j_!, j^*; the dg-level 0FRW adjunction descends to the localizations; the base-change and nested isomorphisms come from degreewise identities). Tested on U=X, U empty, T empty. Not a duplicate: searched for 0FRA/0FRW and all sheaf-dg/dg-module nodes. flat-ringed-dg-pushpull needs K-flatness and the ordinary open-extension nodes carry no dg action. Not a clause of the item, no cycle. Batch-5 flag: homotopy-system reaches lem-trf-triangulated-subcategory-cone-system, a Mathlib leaf of generic Verdier-localization theory, neither the trace formula, Poincare duality nor a step of their proofs; the parent finite-stage-descent node already cites homotopy-system. Outside the assumptions. Accepted tool_use: lem-pur-localization-triangles-05r6 (generic triangulated localization). No changes."
+ }
+}

@@ -1,0 +1,322 @@
+{
+ "id": "lem-sfb-affine-smooth-trivialization-lift",
+ "kind": "statement",
+ "title": "Marked trivializations of flat smooth affine deformations lift across nilpotent quotients",
+ "statement": "Let $k$ be a field [def-weil-field], let $R$ be a commutative $k$-algebra, and let $I\\subseteq R$ be an ideal with $I^N=0$ for some $N\\geq1$. Put $R_0=R/I$. Let $T$ be an affine $k$-scheme [def-pc-scheme] smooth over $k$ [def-sbc-smooth-morphisms], and for any commutative $k$-algebra $B$ write $T_B=T\\times_{\\operatorname{Spec}k}\\operatorname{Spec}B$ [def-weil-affine-spectrum, def-pc-fibre-product]. Let $D\\to\\operatorname{Spec}R$ be a flat scheme [def-weil-flat-morphism]. For every $R_0$-isomorphism $\\theta_0:D\\times_{\\operatorname{Spec}R}\\operatorname{Spec}R_0\\xrightarrow{\\sim}T_{R_0}$ there exists an $R$-isomorphism $\\theta:D\\xrightarrow{\\sim}T_R$ whose base change to $R_0$ is $\\theta_0$. No affineness or finite-presentation hypothesis is imposed on $D$. The empty affine scheme $T$ and the zero base ring are allowed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tags 06AD (lemma-thickening-affine-scheme) and 02H0 (definition-formally-smooth): relative marked-trivialization consequence for a smooth affine target and a flat source. This is the affine lifting input behind examples-defos.tex, Tag 0DZN (lemma-glueing-smooth); the direct ring argument is recorded in the worker report."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-weil-flat-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Put $D_j=D\\times_{\\operatorname{Spec}R}\\operatorname{Spec}(R/I^j)$ for $1\\le j\\le N$. Write $T=\\operatorname{Spec}A$. The affine fibre-product lemma makes $T_{R/I}$ affine, so $D_1$ is affine via $\\theta_0$. For $1\\le j<N$, the kernel $I^j/I^{j+1}$ of $R/I^{j+1}\\to R/I^j$ has square zero, since $2j\\ge j+1$. Its spectral closed immersion is a first order thickening. By the universal property of fibre products, $D_{j+1}\\times_{\\operatorname{Spec}(R/I^{j+1})}\\operatorname{Spec}(R/I^j)\\cong D_j$ over $D_{j+1}$, so the first-order base-change lemma makes $D_j\\hookrightarrow D_{j+1}$ a first order thickening, hence a thickening. Apply affineness under thickenings successively to obtain affine $D_N=D$. This argument imposes neither finite presentation nor affineness on $D$ in advance.",
+   "uses": [
+    "def-pc-scheme",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-sbc-first-order-thickening",
+    "lem-weil-pbc-first-order-thickening-base-change",
+    "lem-weil-pbc-thickening-affine-scheme",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 06AD (lemma-thickening-affine-scheme), 09ZU (lemma-base-change-thickening), and 04EX (definition-thickening); iterate square-zero thickenings"
+   }
+  },
+  {
+   "text": "Choose $D=\\operatorname{Spec}C$ over $R$. The affine flatness criterion applied to its given structure morphism says that $C$ is flat as an $R$-module. Put $J=IC$; then $J^N=0$. The affine fibre-product and quotient-tensor identifications give $D_1=\\operatorname{Spec}(C/J)$ and $T_R=\\operatorname{Spec}P$ with $P=A\\otimes_kR$. Under these identifications the specified $\\theta_0$ corresponds contravariantly to an $R/I$-algebra isomorphism $\\alpha_0:A\\otimes_k(R/I)\\xrightarrow{\\sim}C/J$. Set $u_1(a)=\\alpha_0(a\\otimes1)$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-tensor-quotient-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01U5 (lemma-flat-characterize); Schemes Tags 01I4/01JQ; Algebra Tag 00DF quotient-tensor calculation"
+   }
+  },
+  {
+   "text": "Smoothness of $T\\to\\operatorname{Spec}k$ includes formal smoothness. By the affine formal-smoothness equivalence, $A$ has the square-zero lifting property for $k$-algebra maps. Starting with $u_1:A\\to C/J$, construct compatible $u_j:A\\to C/J^j$ for $1\\le j\\le N$: at the induction step apply that property to $C/J^{j+1}\\twoheadrightarrow C/J^j$, whose kernel $J^j/J^{j+1}$ has square zero because $2j\\ge j+1$. Thus $u=u_N:A\\to C$ reduces to $u_1$ modulo $J$. Define the $R$-algebra map $\\alpha:P\\to C$ by $\\alpha(a\\otimes r)=u(a)r$. Its reduction $P/IP\\to C/IC$ equals $\\alpha_0$: both send $a\\otimes\\bar r$ to $u_1(a)\\bar r$.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-affine-formally-smooth-iff-ring-lifting",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 02H0 (definition-formally-smooth), 02H4 (lemma-affine-formally-smooth); explicit iteration over powers of J"
+   }
+  },
+  {
+   "text": "The map $\\alpha$ is surjective. Indeed its reduction modulo $I$ is the isomorphism $\\alpha_0$, so $C=\\alpha(P)+IC$. Apply nilpotent Nakayama to the $R$-linear map $\\alpha:P\\to C$. This version requires no finite generation.",
+   "uses": [
+    "lem-weil-pbc-nakayama-nilpotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DV (lemma-NAK), part (11)"
+   }
+  },
+  {
+   "text": "For any $R$-module $M$, identify $(R/I)\\otimes_RM$ with $M/IM$ explicitly: $\\bar r\\otimes m\\mapsto rm\\bmod IM$, with inverse $m\\bmod IM\\mapsto\\bar1\\otimes m$. The first map is well-defined by bilinearity and the second because $\\bar1\\otimes im=\\bar i\\otimes m=0$ for $i\\in I$. The two composites are identities on the indicated generators. These formulas identify a tensored module homomorphism with its induced quotient map.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DF (lemma-tensor-product-exact), quotient-tensor identification from the defining bilinear relations"
+   }
+  },
+  {
+   "text": "Let $K=\\ker\\alpha$. By step 4, $0\\to K\\to P\\xrightarrow{\\alpha}C\\to0$ is short exact over $R$, and $C$ is $R$-flat by step 2. The flat-quotient tensor lemma with $N=R/I$ gives an exact sequence $0\\to(R/I)\\otimes_RK\\to(R/I)\\otimes_RP\\to(R/I)\\otimes_RC\\to0$. By step 5 this is $0\\to K/IK\\to P/IP\\xrightarrow{\\alpha_0}C/IC\\to0$. Since $\\alpha_0$ is injective, $K/IK=0$, hence $K=IK$. Nilpotent Nakayama applied to $K$ gives $K=0$. Thus $\\alpha$ is bijective. We used flatness of $C$ over $R$, without assuming flatness of the map $P\\to C$.",
+   "uses": [
+    "lem-weil-pbc-flat-quotient-tensor-injective",
+    "lem-weil-pbc-nakayama-nilpotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HL (lemma-flat-tor-zero) and Tag 00DV (lemma-NAK), part (9)"
+   }
+  },
+  {
+   "text": "The inverse of the bijective $R$-algebra map $\\alpha$ preserves addition, multiplication, unit and $R$-scalars by applying $\\alpha$ to each required identity. Taking spectra gives $\\theta:D\\xrightarrow{\\sim}T_R$. Its reduction is $\\theta_0$: by the affine fibre-product lemma (projections are spectra of $c\\mapsto c\\otimes1$ and $\\bar r\\mapsto1\\otimes\\bar r$) and the uniqueness in the universal property of fibre products, the base change $\\theta\\times_{\\operatorname{Spec}R}\\operatorname{Spec}R_0$ is, under the identifications of step 2, the spectrum of $\\alpha\\otimes_R\\mathrm{id}_{R/I}$, which the quotient-tensor identification turns into the reduction $P/IP\\to C/IC$ of $\\alpha$; this is exactly $\\alpha_0$ by step 3, and morphisms of affine spectra are determined by their ring maps. For $N=1$ the two inductions have no steps and $I=0$. If $T$ is empty then $A=0$, $C/IC=0$ and nilpotent Nakayama gives $C=0$, so both schemes are empty. If $R=0$, every $R$-algebra is zero and both schemes are empty as well.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-tensor-quotient-base-change",
+    "lem-weil-pbc-nakayama-nilpotent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Affine-spectrum correspondence (Tag 01I2, lemma-category-affine-schemes); nilpotent Nakayama (Algebra Tag 00DV) for the empty cases; Schemes Tags 01I4/01JQ for the base change of an affine morphism"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-sbc-first-order-thickening",
+  "lem-weil-pbc-first-order-thickening-base-change",
+  "lem-weil-pbc-thickening-affine-scheme",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-tensor-quotient-base-change",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-affine-formally-smooth-iff-ring-lifting",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-nakayama-nilpotent",
+  "lem-weil-pbc-flat-quotient-tensor-injective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Direct marked-trivialization argument combining 06AD and 02H4 with Algebra 00DV and 00HL; supports examples-defos.tex 0DZN without invoking deformation-category smoothness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A trivialization of a flat deformation of a smooth affine scheme lifts across a nilpotent quotient of the base ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.exists_lift\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type u_1}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallySmooth R A] (I : Ideal B),\\n  IsNilpotent I → ∀ (g : A →ₐ[R] B ⧸ I), ∃ f, (Ideal.Quotient.mkₐ R I).comp f = g\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ a formally smooth $ R $-algebra, $ B $ a ring with a nilpotent ideal $ I $, and $ g: A \\\\to B/I $ an $ R $-algebra homomorphism. Then there exists an $ R $-algebr\"}\n  {\"name\": \"Algebra.FormallySmooth.lift\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          {B : Type u_1} →\\n            [inst_3 : CommRing B] →\\n              [inst_4 : Algebra R B] →\\n                [Algebra.FormallySmooth R A] → (I : Ideal B) → IsNilpotent I \", \"doc\": \"Given a commutative ring $ R $, a formally smooth $ R $-algebra $ A $, a ring $ B $ with a nilpotent ideal $ I $, and an $ R $-algebra homomorphism $ g: A \\to B/I $, there exists an $ R $-algebra homom\"}\n  {\"name\": \"Algebra.FormallyUnramified.lift_unique\", \"module\": \"Mathlib/RingTheory/Unramified/Basic\", \"type\": \"∀ {R : Type v} [inst : CommRing R] {A : Type u} [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type w}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallyUnramified R A] (I : Ideal B),\\n  IsNilpotent I → ∀ (g₁ g₂ : A →ₐ[R] B), (Ideal.Quotient.mkₐ R I).comp g₁ = (Ideal.Quotient.mkₐ R I\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ a formally unramified $ R $-algebra, and $ B $ an $ R $-algebra with a nilpotent ideal $ I $. If $ g_1, g_2 : A \\\\to B $ are $ R $-algebra homomorphisms such that\"}\n  {\"name\": \"Algebra.FormallySmooth.mk_lift\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type u_1}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra.FormallySmooth R A] (I : Ideal B) (hI : IsNilpotent I)\\n  (g : A →ₐ[R] B ⧸ I) (x : A), (Ideal.Quotient.mk I) ((Algebra.FormallyS\", \"doc\": \"For a formally smooth algebra $ A $ over a commutative ring $ R $, given a nilpotent ideal $ I $ of a commutative ring $ B $ and an algebra homomorphism $ g : A \\\\to B/I $, the image of the lift of any\"}\n  {\"name\": \"Algebra.FormallySmooth.comp_lift\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type u_1}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra.FormallySmooth R A] (I : Ideal B) (hI : IsNilpotent I)\\n  (g : A →ₐ[R] B ⧸ I), (Ideal.Quotient.mkₐ R I).comp (Algebra.FormallySm\", \"doc\": \"For a formally smooth algebra $ A $ over a commutative ring $ R $, given a nilpotent ideal $ I $ of a ring $ B $ and an $ R $-algebra homomorphism $ g: A \\\\to B/I $, the composition of the canonical qu\"}\n  {\"name\": \"Algebra.Extension.homInfinitesimal\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          (P₁ : Algebra.Extension R A) →\\n            (P₂ : Algebra.Extension R A) → [Algebra.FormallySmooth R P₁.Ring] → P₁.infinitesimal.Hom P₂.infinitesimal\", \"doc\": \"Given commutative rings $ R $ and $ A $ with an $ R $-algebra structure on $ A $, and formally smooth algebra extensions $ P_1 $ and $ P_2 $ of $ R $ over $ A $, this constructs a homomorphism between\"}\n  {\"name\": \"Algebra.FormallyUnramified.lift_unique_of_ringHom\", \"module\": \"Mathlib/RingTheory/Unramified/Basic\", \"type\": \"∀ {R : Type v} [inst : CommRing R] {A : Type u} [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type w}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallyUnramified R A] {C : Type u_1} [inst_6 : Ring C]\\n  (f : B →+* C), IsNilpotent (RingHom.ker f) → ∀ (g₁ g₂ : A →ₐ[R] B), f.comp ↑g₁ \", \"doc\": \"Given a formally unramified $ R $-algebra $ A $, if $ f : B \\\\to C $ is a ring homomorphism with nilpotent kernel, then any two $ A $-algebra homomorphisms $ g_1, g_2 : A \\\\to B $ satisfying $ f \\\\circ g\"}\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: formal-smooth algebra-map lifts, closed-immersion lifts and flatness alone do not supply the specified isomorphism of flat scheme deformations; affineness and a nilpotent flat comparison are additional arguments"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth affine k scheme T and a flat R scheme D an isomorphism D modulo a nilpotent ideal with T over the quotient lifts to an R isomorphism with T times Spec R",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.liftQuotient\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {A : CommRingCat} →\\n    (f : X.Hom (AlgebraicGeometry.Spec A)) →\\n      (I : Ideal ↑A) →\\n        I ≤\\n            RingHom.ker\\n              (CommRingCat.Hom.hom\\n                (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.ΓSpecIso A).inv f.appTop)) →\", \"doc\": \"Let $f: X \\\\to \\\\mathrm{Spec}(A)$ be a morphism from a scheme $X$ to an affine scheme $\\\\mathrm{Spec}(A)$, and let $I$ be an ideal of the commutative ring $A$. The morphism $f$ corresponds to a ring homo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.liftQuotient_comp_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {A : CommRingCat} (f : X.Hom (AlgebraicGeometry.Spec A)) (I : Ideal ↑A)\\n  (hI :\\n    I ≤\\n      RingHom.ker\\n        (CommRingCat.Hom.hom (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.ΓSpecIso A).inv f.appTop)))\\n  {Z : AlgebraicGeometry.Scheme} (h : Alge\", \"doc\": \"Given a scheme $X$, a commutative ring $A$, a morphism $f : X \\\\to \\\\operatorname{Spec}(A)$, an ideal $I \\\\subseteq A$ contained in the kernel of the induced ring homomorphism $\\\\Gamma(f) : A \\\\to \\\\Gamma(X\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.liftQuotient_comp\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {A : CommRingCat} (f : X.Hom (AlgebraicGeometry.Spec A)) (I : Ideal ↑A)\\n  (hI :\\n    I ≤\\n      RingHom.ker\\n        (CommRingCat.Hom.hom (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.ΓSpecIso A).inv f.appTop))),\\n  CategoryTheory.CategoryStruct.comp (f.l\", \"doc\": \"Let $f: X \\\\to \\\\mathrm{Spec}(A)$ be a morphism from a scheme $X$ to an affine scheme $\\\\mathrm{Spec}(A)$, and let $f^\\\\sharp: A \\\\to \\\\Gamma(X, \\\\mathcal{O}_X)$ be the corresponding ring homomorphism on glo\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.isIso_lift\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {Z₁ Z₂ X : AlgebraicGeometry.Scheme} (i₁ : Z₁ ⟶ X) (i₂ : Z₂ ⟶ X) [inst : AlgebraicGeometry.IsClosedImmersion i₁]\\n  [AlgebraicGeometry.IsClosedImmersion i₂]\\n  (h : AlgebraicGeometry.Scheme.Hom.ker i₁ = AlgebraicGeometry.Scheme.Hom.ker i₂),\\n  CategoryTheory.IsIso (AlgebraicGeometry.IsClosedImmersion\", \"doc\": \"Given two closed immersions $i_1: Z_1 \\\\to X$ and $i_2: Z_2 \\\\to X$ into a scheme $X$ with equal kernel ideal sheaves ($i_1.\\\\ker = i_2.\\\\ker$), the morphism $\\\\mathrm{lift}(i_1, i_2)$ constructed by facto\"}\n  {\"name\": \"Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {R S : Type u} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Algebra.FormallyUnramified R S]\\n  [Algebra.EssFiniteType R S],\\n  AlgebraicGeometry.IsOpenImmersion\\n    (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.lmul' R).toRingHom))\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ S $ that is formally unramified and of essential finite type, the morphism $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(S \\\\otimes_R S) $ induced\"}\n  {\"name\": \"Algebra.Extension.homInfinitesimal\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          (P₁ : Algebra.Extension R A) →\\n            (P₂ : Algebra.Extension R A) → [Algebra.FormallySmooth R P₁.Ring] → P₁.infinitesimal.Hom P₂.infinitesimal\", \"doc\": \"Given commutative rings $ R $ and $ A $ with an $ R $-algebra structure on $ A $, and formally smooth algebra extensions $ P_1 $ and $ P_2 $ of $ R $ over $ A $, this constructs a homomorphism between\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.SpecIso_inv_over\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (R : CommRingCat),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.AffineSpace.SpecIso n R).inv\\n      (AlgebraicGeometry.AffineSpace n (AlgebraicGeometry.Spec R) ↘ AlgebraicGeometry.Spec R) =\\n    AlgebraicGeometry.Spec.map (CommRingCat.ofHom MvPolynomial.C)\", \"doc\": \"The composition of the inverse isomorphism $\\\\operatorname{Spec}(R[x_1, \\\\dots, x_n]) \\\\to \\\\mathbb{A}^n_{\\\\operatorname{Spec}(R)}$ with the canonical morphism $\\\\mathbb{A}^n_{\\\\operatorname{Spec}(R)} \\\\to \\\\o\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.SpecIso_inv_over_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (R : CommRingCat) {Z : AlgebraicGeometry.Scheme} (h : AlgebraicGeometry.Spec R ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.AffineSpace.SpecIso n R).inv\\n      (CategoryTheory.CategoryStruct.comp\\n        (AlgebraicGeometry.AffineSpace n (AlgebraicGeometry.Spec R) ↘ Alg\", \"doc\": \"For any commutative ring $ R $, type $ n $, and scheme $ Z $, the composition of the inverse of the isomorphism $ \\\\mathbb{A}^n_{\\\\operatorname{Spec}(R)} \\\\cong \\\\operatorname{Spec}(R[x_1,\\\\dots,x_n]) $ wi\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: formal-smooth algebra-map lifts, closed-immersion lifts and flatness alone do not supply the specified isomorphism of flat scheme deformations; affineness and a nilpotent flat comparison are additional arguments"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.FormallySmooth, CategoryTheory.IsIso",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'AlgebraicGeometry.FormallySmooth'\n",
+   "date": "2026-10-22",
+   "verdict": "no match: query rejected because AlgebraicGeometry.FormallySmooth is not an identifier in the search index; corrected by the next Loogle query"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallySmooth, AlgEquiv",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.of_equiv\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \" {R : Type u_4} [CommRing R] {A : Type u_5} {B : Type u_6} [CommRing A] [Algebra R A] [CommRing B] [Algebra R B] [Algebra.FormallySmooth R A] (e : A ≃ₐ[R] B) : Algebra.FormallySmooth R B\", \"doc\": \"\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_of_equiv\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \" {R : Type u_4} [CommRing R] {A : Type u_5} {B : Type u_6} [CommRing A] [Algebra R A] [CommRing B] [Algebra R B] (e : A ≃ₐ[R] B) : Algebra.FormallySmooth R A ↔ Algebra.FormallySmooth R B\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: formal-smooth algebra-map lifts, closed-immersion lifts and flatness alone do not supply the specified isomorphism of flat scheme deformations; affineness and a nilpotent flat comparison are additional arguments"
+  },
+  {
+   "tool": "grep",
+   "query": "(trivial.*deform|deform.*trivial|lift.*[Ii]so|[Ii]so.*lift|nilpotent.*[Ii]somorph)",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"line\": \"242\", \"text\": \"  IsOpenImmersion.lift V.ι U.ι (by simpa using e)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"line\": \"247\", \"text\": \"  IsOpenImmersion.lift_fac _ _ _\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"line\": \"716\", \"text\": \"    pullbackRestrictIsoRestrict_hom_ι_assoc, pullback.lift_fst_assoc, Category.comp_id]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean\", \"line\": \"65\", \"text\": \"  IsOpenImmersion.lift f.coborderRange.ι f (by simpa using! subset_coborder)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean\", \"line\": \"74\", \"text\": \"  IsOpenImmersion.lift_fac _ _ _\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"line\": \"119\", \"text\": \"      limit.lift_π, PullbackCone.mk_π_app, pullbackSpecIso_inv_snd,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"line\": \"331\", \"text\": \"  let φ : Spec (.of <| K) ⟶ _ := IsOpenImmersion.lift _ _ this\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"line\": \"336\", \"text\": \"    rw [← Proj.awayι_toSpecZero _ _ (hxd i i.2), IsOpenImmersion.lift_fac_assoc]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"line\": \"350\", \"text\": \"    convert! IsOpenImmersion.lift_fac _ _ this using 1\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors.lean\", \"line\": \"150\", \"text\": \"    .of_iso (pullback_fst_map_snd_isPullback f (𝟙 _) (𝒰.f i.1 ≫ pullback.lift (𝟙 _) f)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors.lean\", \"line\": \"151\", \"text\": \"      (𝒰.f i.2 ≫ pullback.lift (𝟙 _) f)) (asIso (pullback.map _ _ _ _ (𝟙 _) (𝟙 _)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\", \"line\": \"171\", \"text\": \"  let g : X ⟶ (⨆ i, U i : Y.Opens) := IsOpenImmersion.lift (Scheme.Opens.ι _) f (by simpa using H)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\", \"line\": \"172\", \"text\": \"  rw [← IsOpenImmersion.lift_fac (⨆ i, U i).ι f (by simpa using H)]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"line\": \"143\", \"text\": \"  let g' : Y ⟶ U := IsOpenImmersion.lift U.ι g (by simp [U])\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"line\": \"150\", \"text\": \"      rwa [AlgebraicGeometry.IsOpenImmersion.lift_fac]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"line\": \"159\", \"text\": \"  rw [← IsOpenImmersion.lift_fac U.ι g (by simp [U])]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/RelativeGluing.lean\", \"line\": \"182\", \"text\": \"    apply IsOpenImmersion.lift (colimit.ι d.functor i) s.snd\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/RelativeGluing.lean\", \"line\": \"189\", \"text\": \"    rw [← cancel_mono (𝒰.f i), Category.assoc, ← ι_toBase, IsOpenImmersion.lift_fac_assoc,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean\", \"line\": \"207\", \"text\": \"  refine ⟨R, IsOpenImmersion.lift U.ι f (by simp [hf]), ?_⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean\", \"line\": \"211\", \"text\": \"  rwa [← Set.range_comp, ← TopCat.coe_comp, ← Scheme.Hom.comp_base, IsOpenImmersion.lift_fac]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"line\": \"393\", \"text\": \"  refine ⟨R, LocallyRingedSpace.IsOpenImmersion.lift (toLocallyRingedSpaceHom _ f) _ h₂, ?_, ?_⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"line\": \"394\", \"text\": \"  · rw [LocallyRingedSpace.IsOpenImmersion.lift_range]; exact h₁\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"line\": \"395\", \"text\": \"  · delta LocallyRingedSpace.IsOpenImmersion.lift; infer_instance\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"line\": \"702\", \"text\": \"  ⟨LocallyRingedSpace.IsOpenImmersion.lift f.toLRSHom g.toLRSHom H'⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"line\": \"706\", \"text\": \"  Scheme.Hom.ext' <| LocallyRingedSpace.IsOpenImmersion.lift_fac f.toLRSHom g.toLRSHom H'\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: formal-smooth algebra-map lifts, closed-immersion lifts and flatness alone do not supply the specified isomorphism of flat scheme deformations; affineness and a nilpotent flat comparison are additional arguments",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "grep",
+   "query": "deformation|trivialization|trivialisation|nilpotent.*isomorphism",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: formal-smooth algebra-map lifts, closed-immersion lifts and flatness alone do not supply the specified isomorphism of flat scheme deformations; affineness and a nilpotent flat comparison are additional arguments",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat deformation of a smooth affine scheme is trivial with any prescribed trivialization modulo a nilpotent ideal",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib.RingTheory.Smooth.Flat\", \"type\": \"[Smooth R A] : Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"Algebra.Smooth.flat_of_isNoetherianRing\", \"module\": \"Mathlib.RingTheory.Smooth.Flat\", \"type\": \"[IsNoetherianRing R] [Smooth R A] : Module.Flat R A\", \"doc\": \"Let $ R $ be a Noetherian ring and $ A $ a smooth $ R $-algebra. Then $ A $ is flat as an $ R $-module.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $V \\\\subseteq f^{-1}(U)$, the ring homomorphism $\\\\Gamma(U, \\\\mathc\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"[IsAffine X] [IsAffine Y] : Flat f ∧ Surjective f ↔ f.appTop.hom.FaithfullyFlat\", \"doc\": \"For affine schemes $X$ and $Y$, a morphism $f : X \\to Y$ is flat and surjective if and only if the induced ring homomorphism on global sections $f_{\\text{appTop}}$ is faithfully flat.\"}\n  {\"name\": \"Module.FaithfullyFlat.iff_flat_and_rTensor_reflects_triviality\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \":\\n  FaithfullyFlat R M ↔\\n    (Flat R M ∧ ∀ (N : Type max u v) [AddCommGroup N] [Module R N], Subsingleton (N ⊗[R] M) → Subsingleton N)\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is faithfully flat if and only if it is flat and for every $ R $-module $ N $, if the tensor product $ N \\\\otimes_R M $ is trivial (i.e., the zero module), \"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: formal-smooth algebra-map lifts, closed-immersion lifts and flatness alone do not supply the specified isomorphism of flat scheme deformations; affineness and a nilpotent flat comparison are additional arguments"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, Function.Bijective",
+   "results": "['Module.IsLocalRing.linearCombination_bijective_of_flat', 'Algebra.Extension.tensorH1CotangentOfFormallyEtale', 'Algebra.Extension.tensorToH1Cotangent_bijective_of_flat', 'Module.algebraMap_bijective_of_rankAtStalk', 'Module.algebraMap_bijective_iff_rankAtStalk', 'Module.Flat.tfae_algebraMap_surjective', 'Module.bijective_of_surjective_of_rankAtStalk_eq']; ; 7 hits; full results read when run",
+   "date": "2026-10-23",
+   "verdict": "no match: results give formal-smooth map lifts, flatness dictionaries, or finite/local module criteria; none states the prescribed scheme isomorphism lifting with arbitrary flat D."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An R linear map between flat modules which is bijective modulo a nilpotent ideal is bijective",
+   "results": "['Module.IsLocalRing.linearCombination_bijective_of_flat', 'Module.FaithfullyFlat.lTensor_bijective_iff_bijective', 'bijective_of_localized_span', 'RingHom.FaithfullyFlat.codescendsAlong_bijective', 'Module.FaithfullyFlat', 'Module.FaithfullyFlat.bijective_of_tensorProduct', 'Module.FinitePresentation.exists_notMem_bijective', 'Module.Flat.tfae_equational_criterion']; ; 8 hits; full results read when run",
+   "date": "2026-10-23",
+   "verdict": "no match: results give formal-smooth map lifts, flatness dictionaries, or finite/local module criteria; none states the prescribed scheme isomorphism lifting with arbitrary flat D."
+  },
+  {
+   "tool": "grep",
+   "query": "(trivial.*deform|deform.*trivial|nilpotent.*[Ii]somorph)",
+   "results": "[]; ; 0 hits; full results read when run",
+   "date": "2026-10-23",
+   "verdict": "no match: results give formal-smooth map lifts, flatness dictionaries, or finite/local module criteria; none states the prescribed scheme isomorphism lifting with arbitrary flat D."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat deformation of a smooth affine scheme is trivial over a nilpotent thickening with a prescribed trivialization on the quotient",
+   "results": "['AlgebraicGeometry.IsSmooth.casesOn', 'AlgebraicGeometry.FormallyUnramified.recOn', 'Algebra.Smooth.flat', 'Algebra.Smooth.flat_of_isNoetherianRing', 'AlgebraicGeometry.FormallyUnramified.casesOn', 'AlgebraicGeometry.Flat.comp', 'AlgebraicGeometry.Flat.mk', 'AlgebraicGeometry.IsSmooth.recOn']; ; 8 hits; full results read when run",
+   "date": "2026-10-23",
+   "verdict": "no match: results give formal-smooth map lifts, flatness dictionaries, or finite/local module criteria; none states the prescribed scheme isomorphism lifting with arbitrary flat D."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallySmooth, AlgEquiv",
+   "results": "['Algebra.FormallySmooth.of_equiv', 'Algebra.FormallySmooth.iff_of_equiv']; ; 2 hits; full results read when run",
+   "date": "2026-10-23",
+   "verdict": "no match: results give formal-smooth map lifts, flatness dictionaries, or finite/local module criteria; none states the prescribed scheme isomorphism lifting with arbitrary flat D."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A marked trivialization of a flat deformation of a smooth affine scheme lifts across any nilpotent ideal of the base ring",
+   "results": "['Algebra.FormallySmooth.exists_lift', 'Algebra.FormallySmooth.lift', 'Algebra.Smooth.formallySmooth', 'Algebra.FormallyUnramified.lift_unique', 'Algebra.FormallySmooth.mk_lift', 'AlgebraicGeometry.FormallyUnramified', 'Algebra.Extension.homInfinitesimal', 'Algebra.FormallySmooth']; ; 8 hits; full results read when run",
+   "date": "2026-10-23",
+   "verdict": "no match: results give formal-smooth map lifts, flatness dictionaries, or finite/local module criteria; none states the prescribed scheme isomorphism lifting with arbitrary flat D."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every flat scheme over R whose reduction modulo a nilpotent ideal is a smooth affine constant family is isomorphic to that constant family compatibly with the reduction",
+   "results": "['AlgebraicGeometry.Flat.instHasRingHomPropertyFlat', 'RingHom.smooth_def', 'AlgebraicGeometry.flat_iff', 'Algebra.Smooth.formallySmooth', 'Algebra.smoothLocus_eq_univ_iff', 'Algebra.smooth_iff', 'Algebra.Smooth.flat', 'AlgebraicGeometry.isSmoothOfRelativeDimension_iff']; ; 8 hits; full results read when run",
+   "date": "2026-10-23",
+   "verdict": "no match: results give formal-smooth map lifts, flatness dictionaries, or finite/local module criteria; none states the prescribed scheme isomorphism lifting with arbitrary flat D."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-open-deformation-lift",
+  "date": "2026-10-22",
+  "group": "Q23"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Smoothing a proper curve with isolated complete-intersection singularities. Supporting input: Compatible local deformations of isolated curve singularities lift globally. Gluing part of the formal-lifting input: proof of Stacks 0DZP, application of lemma-glueing-smooth to U_1 smooth and U_12 smooth. Supporting affine rigidity input: lift a specified trivialization across a nilpotent quotient before gluing the smooth open to the prescribed deformation.",
+   "via": [
+    "lem-sfb-smooth-open-deformation-lift",
+    "lem-sfb-isolated-curve-formal-lifting",
+    "lem-sfb-isolated-lci-curve-smoothing",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-affine-smooth-trivialization-lift",
+  "worker": "stage1",
+  "summary": "Retained the entire statement. Seven explicit steps: square-zero tower recovers affineness; affine flatness and quotient coordinates; lift the marked map by formal smoothness through every power of IC; nilpotent Nakayama gives surjectivity; explicit module quotient-tensor formulas; flat-last-term tensor injectivity and Nakayama kill the kernel; take spectra and check markings and empty cases. All inputs already have DAG nodes, so no new nodes. No Lean written or compiled. Maintainer reader FIX: step 1 cites the fibre-product definition for the identification D_{j+1} x Spec(R/I^j) = D_j; step 7 cites the affine fibre-product lemma, the fibre-product definition and the quotient-tensor lemma for the computation of the base change of theta.",
+  "blueprint": "Current latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3), via the inherited alteration and curve-smoothing prerequisite chain described in blueprint.from.place: this split supplies the marked affine rigidity input to the application of Stacks 0DZN. The ancestor command returns None for the inherited created.item chain, retained without changing provenance.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-thickening-affine-scheme",
+    "why": "Affineness under thickenings is the source-prescribed 06AD input, needed before using formal smoothness on affine schemes; the unit has no such general scheme theorem."
+   },
+   {
+    "node": "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "why": "Converts given scheme flatness to flatness of the coordinate algebra over R, the generic affine dictionary; it does not change the deformation route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-formally-smooth-iff-ring-lifting",
+    "why": "The generic affine dictionary 02H4 supplies square-zero k-algebra lifts; the unit has no ring-lifting dictionary of its own."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-thickening-affine-scheme",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-affine-formally-smooth-iff-ring-lifting"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NR-10099ddd8",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-10099ddd8 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 16 cited node statements, the Stacks sources 06AD (more-morphisms.tex:157), 02H4 (more-morphisms.tex:3164) and 00HL (algebra.tex:9037), and the parent's two uses of the item. Delivery shape: one commit with the item and its report, 0 new nodes. The statement is byte-identical to live, where the item is still unsplit, so nothing supersedes this delivery. The mathematics is correct. Step 1: D is affine because each D_j into D_{j+1} is a base change of a square-zero thickening (09ZU), and any thickening of an affine scheme is affine (06AD, with no finite-order hypothesis). Step 2: C is R-flat by 01U5, and the marking α0 runs in the right direction. Step 3: u is lifted through the square-zero quotients C/J^{j+1} → C/J^j, and the reduction of α is α0 on generators. Step 4: nilpotent Nakayama without finiteness gives surjectivity. Step 5: elementary quotient-tensor identification. Step 6: since C is flat, 00HL gives K/IK → P/IP injective with image ker α0 = 0, so K = IK = 0; this uses flatness of C, not of P → C. Step 7: θ = Spec α. Edge cases N=1, T empty and R=0 hold. Hypotheses hold in both parent applications. No duplicate found by searching the DAG for nilpotent/smooth/isomorphism/flat statements and for tags 0DZN, 0DZP and 06AD. The tool_uses 06AD, 01U5 and 02H4 are generic dictionaries; accepted. The other sk-thm-p1 cites are Lean-closed or Mathlib leaves. No SGA. FIX (C1, missing citations): step 1 now cites def-pc-fibre-product for D_{j+1} ×_{R/I^{j+1}} R/I^j ≅ D_j. Step 7 now cites lem-weil-pbc-fibre-product-affine-spectra, def-pc-fibre-product and lem-weil-pbc-tensor-quotient-base-change, and says how the base change θ ×_R R0 = Spec(α ⊗ id) reduces to α0. proof_deps was recomputed as the union of uses. The statement and stmt_deps are unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineSmoothTrivializationLift",
+  "declaration": "AlgebraicGeometry.exists_affine_smooth_trivialization_lift",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineSmoothTrivializationLift.lean",
+  "statement": "theorem exists_affine_smooth_trivialization_lift (k R : Type u) [Field k] [CommRing R] [Algebra k R] (I : Ideal R) (N : ℕ) (hN : 1 ≤ N) (hI : I ^ N = ⊥) (T : Scheme.{u}) [IsAffine T] (t : T ⟶ Spec (CommRingCat.of k)) [Smooth t] (D : Scheme.{u}) (d : D ⟶ Spec (CommRingCat.of R)) [Flat d] (θ₀ : pullback d (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))) ≅ pullback t (Spec.map (CommRingCat.ofHom (algebraMap k (R ⧸ I))))) (hθ₀ : θ₀.hom ≫ pullback.snd t (Spec.map (CommRingCat.ofHom (algebraMap k (R ⧸ I)))) = pullback.snd d (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))) : ∃ θ : D ≅ pullback t (Spec.map (CommRingCat.ofHom (algebraMap k R))), θ.hom ≫ pullback.snd t (Spec.map (CommRingCat.ofHom (algebraMap k R))) = d ∧ pullback.fst d (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))) ≫ θ.hom ≫ pullback.fst t (Spec.map (CommRingCat.ofHom (algebraMap k R))) = θ₀.hom ≫ pullback.fst t (Spec.map (CommRingCat.ofHom (algebraMap k (R ⧸ I))))",
+  "branch": "sheaf-dag",
+  "by": "NJ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9ec804c77",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Live diff: only the lean field differs and the item has no live binding, so nothing supersedes it. H3: every node clause matches (k field; R a k-algebra with no Nontrivial; I^N=⊥ with 1≤N; T IsAffine and Smooth t; D with Flat d and no affine/fp hypothesis; θ₀ with hθ₀ over Spec R0). The conclusion's over-R clause plus the T-projection clause, with hθ₀ and the pullback universal property, say exactly that θ restricts to θ₀: not weaker or stronger, no arbitrary comparison iso. Edge cases N=1, T empty, R=0 and arbitrary D are covered. Common universe u is the Mathlib convention. Stmt_dep records are existing Mathlib (Scheme, Smooth, Spec, pullback, Flat, Field). Plain imports equal the proof_dep modules. lean.statement is verbatim. Module and theorem docstrings have the source, the blueprint tag and all 7 proof steps. sorry only, no definitions, no SGA, no pro-étale. Report has Worker report and Second reading sections. Mathematics re-read and correct. No duplicate found. No fixes, no compile."
+ }
+}

@@ -1,0 +1,248 @@
+{
+ "id": "lem-trf-localized-universal-derived-pair-transport",
+ "kind": "statement",
+ "title": "Localization-compatible transport of a universal derived pair and its counit",
+ "statement": "Let $\\mathcal C,\\mathcal C',\\mathcal L,\\mathcal L',\\mathcal H,\\mathcal H'$ be categories in a sufficiently large common universe [def-nagata-category]. Let $W,W'$ be classes of morphisms of $\\mathcal C,\\mathcal C'$ and let $Q:\\mathcal C\\to\\mathcal L$, $Q':\\mathcal C'\\to\\mathcal L'$ be localizations in the functor-category sense of [lem-weil-pbc-localization-universal-property]. Let $e:\\mathcal C\\rightleftarrows\\mathcal C':i$ be inverse equivalences with triangle-compatible unit and counit, with $e(W)\\subset W'$ and $i(W')\\subset W$. Then there are inverse equivalences $d:\\mathcal L\\rightleftarrows\\mathcal L':j$ and natural isomorphisms $dQ\\cong Q'e$ and $jQ'\\cong Qi$. Their units and counits are the unique localized lifts of those of $e,i$; their inverse and triangle identities hold compatibly with these comparisons.\n\nLet $t:\\mathcal H\\rightleftarrows\\mathcal H':u$ be another pair of inverse equivalences, let $F:\\mathcal C\\to\\mathcal H$, $G:\\mathcal C'\\to\\mathcal H'$ be functors, and fix a natural isomorphism $\\sigma:tF\\cong Ge$. Suppose $(L,\\varepsilon)$ is a universal total left derived pair along $Q$: $L:\\mathcal L\\to\\mathcal H$, $\\varepsilon:LQ\\to F$, and for every $H:\\mathcal L\\to\\mathcal H$ the map $\\operatorname{Nat}(H,L)\\to\\operatorname{Nat}(HQ,F)$, $\\alpha\\mapsto\\varepsilon\\circ(\\alpha Q)$, is bijective. This specifies the universal-pair convention of [lem-pur-left-derived-from-kflat-class]. Put $L'=tLj$. The composite $\\gamma:L'Q'=tLjQ'\\xrightarrow{\\sim}tLQi\\xrightarrow{t\\varepsilon i}tFi\\xrightarrow{\\sigma i}Gei\\xrightarrow{\\sim}G$, using the counit $ei\\cong1$, is natural and makes $(L',\\gamma)$ a universal total left derived pair along $Q'$. More precisely, for every $H':\\mathcal L'\\to\\mathcal H'$ the composite bijection\n$$\\operatorname{Nat}(H',tLj)\\cong\\operatorname{Nat}(uH'd,L)\\cong\\operatorname{Nat}(uH'dQ,F)\\cong\\operatorname{Nat}(H'Q',G)$$\nis exactly $\\alpha\\mapsto\\gamma\\circ(\\alpha Q')$. The comparison $L'd\\cong tL$ obtained from $jd\\cong1$ intertwines $\\gamma$ and $t\\varepsilon$ under $dQ\\cong Q'e$ and $\\sigma$. In particular invertibility of the counit on a specified class of objects is preserved by this transport. No exactness, adjunction, tensor, boundedness, or flatness assumptions are required beyond the hypotheses explicitly stated.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tags 04VG (lemma-properties-left-localization) and 04VK (lemma-properties-right-localization), combined with derived.tex Tag 05S9 (definition-right-derived-functor-defined) and equation-everywhere. Agent formulation of simultaneous localization and universal-pair transport, not a verbatim theorem of these tags."
+ },
+ "stmt_deps": [
+  "def-nagata-category",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-pur-left-derived-from-kflat-class"
+ ],
+ "proof": [
+  {
+   "text": "Write composition right to left, and choose the given equivalence data as $\\eta:1\\xrightarrow{\\sim}ie$, $\\theta:ei\\xrightarrow{\\sim}1$, with $\\theta_e\\circ e\\eta=1_e$ and $i\\theta\\circ\\eta_i=1_i$. Since $Q'e$ inverts $W$ and $Qi$ inverts $W'$, clause (1) of [lem-weil-pbc-localization-universal-property] supplies $d,j$ and comparisons $a:dQ\\xrightarrow{\\sim}Q'e$, $b:jQ'\\xrightarrow{\\sim}Qi$. No calculus-of-fractions condition on $W,W'$ is used.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 04VG / 04VK, lemma-properties-left-localization / lemma-properties-right-localization; functor-category strengthening stated in the cited node, clause (1)"
+   }
+  },
+  {
+   "text": "Put $c=b_e\\circ j(a):jdQ\\xrightarrow{\\sim}Qie$ and $f=a_i\\circ d(b):djQ'\\xrightarrow{\\sim}Q'ei$. By clause (2) of [lem-weil-pbc-localization-universal-property], lift $c^{-1}\\circ Q\\eta$ uniquely to $U:1_{\\mathcal L}\\xrightarrow{\\sim}jd$ and lift $Q'\\theta\\circ f$ uniquely to $V:dj\\xrightarrow{\\sim}1_{\\mathcal L'}$. Thus $c\\circ U_Q=Q\\eta$ and $V_{Q'}=Q'\\theta\\circ f$. The lifts are isomorphisms because the same clause lifts inverses and preserves composites and identities. This specifies the uniqueness relative to $a,b$ intended by the statement.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 04VG / 04VK; cited node clause (2), including lifting isomorphisms and composition"
+   }
+  },
+  {
+   "text": "Check the triangle identities after precomposing with $Q$ or $Q'$, which detects equality by clause (3) of [lem-weil-pbc-localization-universal-property]. Explicitly, for every $X\\in\\mathcal C$ and $Y\\in\\mathcal C'$ the conjugated components are\n$$a_X\\circ V_{dQX}\\circ d(U_{QX})\\circ a_X^{-1}=Q'(\\theta_{eX}\\circ e(\\eta_X))=1_{Q'eX},$$\n$$b_Y\\circ j(V_{Q'Y})\\circ U_{jQ'Y}\\circ b_Y^{-1}=Q(i(\\theta_Y)\\circ\\eta_{iY})=1_{QiY}.$$\nFor the first equation, naturality of $V$ moves $a_X$ to $dj(a_X)$; inserting $V_{Q'eX}=Q'\\theta_{eX}\\circ a_{ieX}\\circ d(b_{eX})$ cancels $d(c_X)$ against $d(U_{QX})=d(c_X^{-1}\\circ Q\\eta_X)$, and naturality of $a$ at $\\eta_X$ gives the displayed result. For the second, naturality of $U$ at $b_Y$ gives $jd(b_Y)\\circ U_{jQ'Y}=U_{QiY}\\circ b_Y$; inserting $V_{Q'Y}$ and $c_{iY}\\circ U_{QiY}=Q\\eta_{iY}$ cancels $j(a_{iY})$, and naturality of $b$ at $\\theta_Y$ gives the result. The original triangles finish both equalities. Consequently $(d,j,U,V)$ is an adjoint equivalence compatible with the original one; reversing $U,V$ gives inverse equivalence data.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 04VG / 04VK; cited node clause (3), equality detection; explicit triangle calculation"
+   }
+  },
+  {
+   "text": "Choose triangle-compatible isomorphisms $\\rho:1_{\\mathcal H}\\xrightarrow{\\sim}ut$ and $\\tau:tu\\xrightarrow{\\sim}1_{\\mathcal H'}$ for the target equivalence. For a test functor $H':\\mathcal L'\\to\\mathcal H'$ define\n$$B(\\alpha)=\\rho_L^{-1}\\circ u(tL(U^{-1}))\\circ u(\\alpha_d):uH'd\\longrightarrow L.$$\nIts inverse is\n$$B^{-1}(\\beta)=t(\\beta_j)\\circ t(uH'(V^{-1}))\\circ\\tau_{H'}^{-1}.$$\nAll factors have their displayed source and target and are natural. Substitution gives $B^{-1}B(\\alpha)=\\alpha$ and $BB^{-1}(\\beta)=\\beta$: move $\\alpha$ or $\\beta$ across $U,V$ by naturality and cancel $V_d\\circ dU=1$, $jV\\circ U_j=1$, $\\tau_t\\circ t\\rho=1$, $u\\tau\\circ\\rho_u=1$. Hence this is the first bijection in the statement, with no derived-functor existence assertion used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Agent calculation from the stated naturality and triangle identities; universal-pair convention of derived.tex, definition-right-derived-functor-defined and equation-everywhere"
+   }
+  },
+  {
+   "text": "Define $r=Q'\\theta\\circ a_i:dQi\\xrightarrow{\\sim}Q'$. The third bijection can be specified in the reverse direction by\n$$P(\\zeta)=\\rho_F^{-1}\\circ u(\\sigma^{-1})\\circ u(\\zeta_e)\\circ uH'(a):uH'dQ\\longrightarrow F.$$\nIts inverse sends $\\delta:uH'dQ\\to F$ to\n$$P^{-1}(\\delta)=G\\theta\\circ\\sigma_i\\circ t(\\delta_i)\\circ t(uH'(r^{-1}))\\circ\\tau_{H'Q'}^{-1}.$$\nIndeed $r_e\\circ dQ\\eta=a$ follows from naturality of $a$ and $\\theta_e\\circ e\\eta=1$; also $i\\theta\\circ\\eta_i=1$. Substitution in $P^{-1}P$ and $PP^{-1}$, using these two identities and the $\\rho,\\tau$ triangles, cancels all inserted equivalence isomorphisms, leaving respectively $\\zeta$ and $\\delta$. This proves the required bijection rather than assuming invariance of Kan extensions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Agent calculation from the stated naturality and triangle identities; universal-pair convention of derived.tex, definition-right-derived-functor-defined and equation-everywhere"
+   }
+  },
+  {
+   "text": "Let $L'=tLj$ and put\n$$\\gamma=G\\theta\\circ\\sigma_i\\circ t(\\varepsilon_i)\\circ tL(b):L'Q'\\longrightarrow G,\\qquad k=tL(U^{-1}):L'd\\xrightarrow{\\sim}tL.$$\nThey are natural composites. Their precise compatibility is\n$$\\gamma_e\\circ L'(a)=\\sigma\\circ t\\varepsilon\\circ k_Q.$$\nTo check it substitute $b_e\\circ j(a)=Q\\eta\\circ U_Q^{-1}$ from step 2. The left side becomes $G\\theta_e\\circ\\sigma_{ie}\\circ t\\varepsilon_{ie}\\circ tLQ\\eta\\circ k_Q$. Naturality of $\\varepsilon$ changes the middle two factors to $tF\\eta\\circ t\\varepsilon$; naturality of $\\sigma$ then leaves $G(\\theta_e\\circ e\\eta)\\circ\\sigma\\circ t\\varepsilon\\circ k_Q$, which is the right side.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Agent calculation from the stated naturality and triangle identities; universal-pair convention of derived.tex, definition-right-derived-functor-defined and equation-everywhere"
+   }
+  },
+  {
+   "text": "For $\\alpha:H'\\to L'$ set $\\zeta=\\gamma\\circ\\alpha_{Q'}$. Naturality of $\\alpha$ along $a$ and the equality in step 6 give\n$$P(\\zeta)=\\rho_F^{-1}\\circ u(\\sigma^{-1})\\circ u(\\gamma_e\\circ\\alpha_{Q'e})\\circ uH'(a)\n=\\rho_F^{-1}\\circ ut\\varepsilon\\circ u(k_Q)\\circ u(\\alpha_{dQ})\n=\\varepsilon\\circ B(\\alpha)_Q.$$\nThe last equality is naturality of $\\rho$. Thus $P^{-1}\\circ(\\beta\\mapsto\\varepsilon\\circ\\beta_Q)\\circ B$ is exactly $\\alpha\\mapsto\\gamma\\circ\\alpha_{Q'}$. The middle map is bijective by the universal-pair hypothesis, and steps 4--5 give inverse maps for the outer two. This proves universality and identifies the entire displayed composite bijection with the specified counit map.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Agent calculation from the stated naturality and triangle identities; universal-pair convention of derived.tex, definition-right-derived-functor-defined and equation-everywhere"
+   }
+  },
+  {
+   "text": "For each $X\\in\\mathcal C$, the compatibility in step 6 expresses $\\gamma_{eX}$ as $t(\\varepsilon_X)$ conjugated by the isomorphisms $L'(a_X)$, $\\sigma_X$, and $k_{QX}$. A functor takes inverses to inverses; conversely, if $t(h)$ is invertible, then $h=\\rho^{-1}\\circ ut(h)\\circ\\rho$ is invertible. Hence $\\gamma_{eX}$ is invertible if and only if $\\varepsilon_X$ is. For a general $Y\\in\\mathcal C'$, its defining composite gives invertibility of $\\gamma_Y$ if and only if that of $\\varepsilon_{iY}$; the isomorphism $\\theta_Y:e(iY)\\to Y$ identifies these with the corresponding replete classes. This proves the last assertion and completes all clauses without extra homological hypotheses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Agent calculation from the stated naturality and triangle identities; universal-pair convention of derived.tex, definition-right-derived-functor-defined and equation-everywhere"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tags 04VG / 04VK for localization; explicit natural-transformation calculations for the universal pair, with convention from derived.tex Tag 05S9 and equation-everywhere. These sources do not state the combined result verbatim."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Equivalences of categories preserving weak equivalences induce equivalences of localizations and transport a right Kan extension together with its universal counit",
+   "results": "{\"t\": \"2026-10-22T06:47:23Z\", \"tool\": \"leanfinder\", \"query\": \"Equivalences of categories preserving weak equivalences induce equivalences of localizations and transport a right Kan extension together with its universal counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isRightKanExtensionAlongEquivalence\", \"CategoryTheory.Functor.isRightKanExtension_iff_postcomp₁\", \"CategoryTheory.Functor.hasRightExtension_iff_postcomp₁\", \"CategoryTheory.Functor.isRightKanExtension_iff_precomp\", \"CategoryTheory.Functor.isRightKanExtensionAlongEquivalence'\", \"CategoryTheory.Functor.isPointwiseRightKanExtensionOfIsoOfIsLocalization\", \"CategoryTheory.Functor.instIsEquivalenceRightExtensionPostcomp₁OfIsIso\", \"CategoryTheory.Functor.hasPointwiseRightKanExtensionAt_of_equivalence\"], \"digest\": \"9833fddd7fddf9ed\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Kan-extension invariance lemmas assume the relevant equivalences already exist; the statement also constructs inverse localized equivalences and their compatible counit and universal-pair transport"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport a universal total left derived functor and its natural counit through equivalences of source localization and target categories",
+   "results": "{\"t\": \"2026-10-22T06:47:15Z\", \"tool\": \"leansearch\", \"query\": \"Transport a universal total left derived functor and its natural counit through equivalences of source localization and target categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit\", \"CategoryTheory.Functor.totalLeftDerived\", \"CategoryTheory.Functor.totalLeftDerivedCounit\", \"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Abelian.LeftResolution.transport\", \"CategoryTheory.Functor.leftDerivedNatTrans_comp\", \"CategoryTheory.Functor.IsLeftDerivedFunctor.mk\", \"CategoryTheory.Functor.isLeftDerivedFunctor_iff_of_inverts\"], \"digest\": \"360982897ccce859\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Kan-extension invariance lemmas assume the relevant equivalences already exist; the statement also constructs inverse localized equivalences and their compatible counit and universal-pair transport"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRightKanExtension\", \"equivalence\"",
+   "results": "{\"t\": \"2026-10-22T06:47:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsRightKanExtension\\\", \\\"equivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isRightKanExtensionAlongEquivalence\", \"CategoryTheory.Functor.isRightKanExtensionAlongEquivalence'\", \"CategoryTheory.Functor.isRightKanExtension_iff_precomp_equivalence\"], \"digest\": \"41586a5ad253ec2f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Kan-extension invariance lemmas assume the relevant equivalences already exist; the statement also constructs inverse localized equivalences and their compatible counit and universal-pair transport"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ee]quiv|[Ii]so",
+   "results": "{\"t\": \"2026-10-22T06:47:15Z\", \"tool\": \"grep\", \"query\": \"[Ee]quiv|[Ii]so\", \"sub\": \"CategoryTheory/Functor/Derived/LeftDerived.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"63\", \"67\", \"127\", \"128\", \"130\"], \"digest\": \"c286ba2ca7d3b8d9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Kan-extension invariance lemmas assume the relevant equivalences already exist; the statement also constructs inverse localized equivalences and their compatible counit and universal-pair transport"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Conjugating a right Kan extension by equivalences preserves its universal natural transformation bijection",
+   "results": "{\"t\": \"2026-10-22T06:47:26Z\", \"tool\": \"leanfinder\", \"query\": \"Conjugating a right Kan extension by equivalences preserves its universal natural transformation bijection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isRightKanExtension_iff_postcomp₁\", \"CategoryTheory.Functor.isRightKanExtension_iff_of_iso\", \"CategoryTheory.Functor.isRightKanExtension_iff_precomp\", \"CategoryTheory.Functor.isRightKanExtension_iff_of_iso₂\", \"CategoryTheory.Functor.homEquivOfIsRightKanExtension\", \"CategoryTheory.Functor.hasRightExtension_iff_postcomp₁\", \"CategoryTheory.Functor.isRightKanExtension_of_iso\", \"CategoryTheory.Functor.RightExtension.isUniversalEquivOfIso₂\"], \"digest\": \"87fa481b0c1925b1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Kan-extension invariance lemmas assume the relevant equivalences already exist; the statement also constructs inverse localized equivalences and their compatible counit and universal-pair transport"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivalences preserving weak equivalences induce equivalences of localizations and transport universal left derived functors and counits",
+   "results": "{\"t\": \"2026-10-23T04:08:39Z\", \"tool\": \"leanfinder\", \"query\": \"Equivalences preserving weak equivalences induce equivalences of localizations and transport universal left derived functors and counits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isLeftDerivedFunctor_iff_of_iso\", \"CategoryTheory.Functor.leftDerivedNatIso_hom\", \"CategoryTheory.Functor.isLeftDerivedFunctor_of_inverts\", \"CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit\", \"CategoryTheory.Functor.leftDerived_fac\", \"CategoryTheory.Functor.hasLeftDerivedFunctor_iff_of_iso\", \"CategoryTheory.Functor.leftDerived_fac_app\", \"CategoryTheory.Functor.isRightDerivedFunctor_iff_of_iso\"], \"digest\": \"c6dac754545e3b45\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: these declarations do not simultaneously construct the localized equivalence and identify the transported universal counit"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRightKanExtension\", \"equivalence\"",
+   "results": "{\"t\": \"2026-10-23T04:09:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsRightKanExtension\\\", \\\"equivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isRightKanExtensionAlongEquivalence\", \"CategoryTheory.Functor.isRightKanExtensionAlongEquivalence'\", \"CategoryTheory.Functor.isRightKanExtension_iff_precomp_equivalence\"], \"digest\": \"41586a5ad253ec2f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: these declarations do not simultaneously construct the localized equivalence and identify the transported universal counit"
+  },
+  {
+   "tool": "grep",
+   "query": "equivalence|Equivalence|isRightKanExtension_iff",
+   "results": "{\"t\": \"2026-10-23T04:09:04Z\", \"tool\": \"grep\", \"query\": \"equivalence|Equivalence|isRightKanExtension_iff\", \"sub\": \"CategoryTheory/Functor/KanExtension\", \"ok\": true, \"n_hits\": 22, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/KanExtension/Dense.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Dense.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Dense.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Dense.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Dense.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean\"], \"digest\": \"0bb2b2b5b27e08a7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: these declarations do not simultaneously construct the localized equivalence and identify the transported universal counit"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport a universal total left derived functor and its counit across equivalences of source and target",
+   "results": "{\"t\": \"2026-10-23T04:09:33Z\", \"tool\": \"leansearch\", \"query\": \"Transport a universal total left derived functor and its counit across equivalences of source and target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.totalLeftDerivedCounit\", \"CategoryTheory.Abelian.LeftResolution.transport\", \"CategoryTheory.Functor.totalLeftDerived\", \"CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit\", \"CategoryTheory.Functor.isLeftKanExtensionAlongEquivalence\", \"CategoryTheory.Functor.leftDerivedNatTrans.congr_simp\", \"CategoryTheory.Functor.isLeftDerivedFunctor_iff_isIso_leftDerivedLift\", \"CategoryTheory.Adjunction.derivedη\"], \"digest\": \"68e73bbd948b7d1b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: these declarations do not simultaneously construct the localized equivalence and identify the transported universal counit"
+  },
+  {
+   "tool": "grep",
+   "query": "def congrLeft|def congrRight|def congr|def homEquiv",
+   "results": "{\"t\": \"2026-10-23T04:10:16Z\", \"tool\": \"grep\", \"query\": \"def congrLeft|def congrRight|def congr|def homEquiv\", \"sub\": \"CategoryTheory/Equivalence\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Equivalence/Symmetry.lean\"], \"digest\": \"66c2788a409b6411\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for item: directory search found only congrLeftFunctor in Symmetry.lean; subsequently read congrLeft and congrRight in sibling Equivalence.lean:423,436"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Precomposition and postcomposition by an equivalence of categories are equivalences on functor categories",
+   "results": "{\"t\": \"2026-10-23T04:10:22Z\", \"tool\": \"leanfinder\", \"query\": \"Precomposition and postcomposition by an equivalence of categories are equivalences on functor categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Equivalence.congrLeft\", \"CategoryTheory.Equivalence.congrRight\", \"CategoryTheory.Equivalence.congrRightFunctor\", \"CategoryTheory.Functor.instIsEquivalenceObjWhiskeringLeft\", \"CategoryTheory.Equivalence.congrLeftFunctor\", \"CategoryTheory.Functor.instIsEquivalenceObjWhiskeringRight\", \"CategoryTheory.Equivalence.congrLeft_functor\", \"CategoryTheory.Equivalence.congrRight_functor\"], \"digest\": \"669f8964579f0421\"}",
+   "date": "2026-10-23",
+   "verdict": "match for elementary whiskering operations only (Equivalence.congrLeft, congrRight); read their definitions at Mathlib/CategoryTheory/Equivalence.lean:423,436; these do not state the complete item"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-one-point-derived-ring-identification",
+  "date": "2026-10-22",
+  "group": "Q86"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Polynomial resolutions remain resolutions under Tor-independent tensoring. In the Stacks 08QP resolution computation, identify the one-object ringed-site K-flat scalar-extension construction with ordinary ring-module scalar extension, including the universal derived counit. Old steps 7, 10 and 11: inverse localized equivalences, explicit conjugation of the counit and the natural-transformation bijection.",
+   "via": [
+    "lem-trf-one-point-derived-ring-identification",
+    "lem-trf-tor-independent-cotangent-base-change",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-localized-universal-derived-pair-transport",
+  "worker": "stage1",
+  "summary": "Construct the localized equivalence by the existing localization universal-property leaf, lift the unit and counit and check triangles. Give explicit inverse natural-transformation bijections, compute the transported counit compatibility, and use it to identify the universal map and preserve its invertibility locus. No new nodes or statement corrections. Repair of returned head 36011fc8cc6: compared the retained delivery with the current unsplit DAG item, re-read the live proof citation and statement dependencies, and expanded the two localized triangle component calculations before rebuilding the delivery on the current DAG.",
+  "blueprint": "Auxiliary ordinary-category calculation for lem-trf-local-term-locality proof (1)--(2), through the recorded one-point derived ring identification chain; realizes the localization and universal-counit transport specified in the existing blueprint.from.place."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-87d3280d0",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-87d3280d0 (reviewer sub-agent of L); spot-checked: Re-delivery of 36011fc8, which an earlier maintainer reader passed and which was returned at landing only because a side completion had not been promoted. I diffed the item JSON of the two snapshots. Only step 3, now written out as explicit triangle components, and the split_report summary changed. The statement, stmt_deps, source and proof_deps are unchanged. The cited leaf lem-weil-pbc-localization-universal-property, lem-pur-left-derived-from-kflat-class, def-nagata-category and the citer lem-trf-one-point-derived-ring-identification are byte-identical to the earlier snapshot. I recomputed the new step 3. First triangle: naturality of V at a_X, then V_{Q'eX}=Q'theta.a_{ie}.d(b_e), then d(c) cancels d(c^{-1}Q eta), and naturality of a at eta gives Q'(theta_e.e eta)=1. Second triangle: naturality of U at b_Y, then j(a_{iY}).U_{QiY}=b_{eiY}^{-1}Q eta_{iY}, and naturality of b at theta_Y gives Q(i theta.eta_i)=1. Clause (3) detects both. I re-checked that every factor in steps 4-8 is well-typed: B and B^{-1}, P and P^{-1}, the counit identity gamma_e.L'(a)=sigma.t eps.k_Q, the identification P(gamma.alpha_Q')=eps.B(alpha)_Q, and the theta_Y invertibility transfer. Small cases: identity data, an empty source category, W equal to identities only, and a non-invertible eps. The citer's steps 4-5 use only what the item states. Stacks 04VG/04VK are at categories.tex l.4406/4693. There are no new nodes, no duplicates and no tool_uses needed. The re-split rule does not apply because the item was statement-only with no earlier proof."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LocalizedUniversalDerivedPairTransport",
+  "declaration": "CategoryTheory.localized_universalDerivedPair_transport",
+  "file": "lean/Sheaf/CategoryTheory/LocalizedUniversalDerivedPairTransport.lean",
+  "statement": "theorem localized_universalDerivedPair_transport {C : Type uC} [Category.{vC} C] {C' : Type uC'} [Category.{vC'} C'] {Lcat : Type uD} [Category.{vD} Lcat] {Lcat' : Type uD'} [Category.{vD'} Lcat'] {H : Type uH} [Category.{vH} H] {H' : Type uH'} [Category.{vH'} H'] (W : MorphismProperty C) (W' : MorphismProperty C') (Q : C ⥤ Lcat) (Q' : C' ⥤ Lcat') [Q.IsLocalization W] [Q'.IsLocalization W'] (e : C ≌ C') (he : ∀ {X Y : C} (f : X ⟶ Y), W f → W' (e.functor.map f)) (hi : ∀ {X Y : C'} (f : X ⟶ Y), W' f → W (e.inverse.map f)) : ∃ (D : Lcat ≌ Lcat') (a : Q ⋙ D.functor ≅ e.functor ⋙ Q') (b : Q' ⋙ D.inverse ≅ e.inverse ⋙ Q), (∀ X : C, D.unitIso.hom.app (Q.obj X) ≫ D.inverse.map (a.hom.app X) ≫ b.hom.app (e.functor.obj X) = Q.map (e.unitIso.hom.app X)) ∧ (∀ Y : C', D.counitIso.hom.app (Q'.obj Y) = D.functor.map (b.hom.app Y) ≫ a.hom.app (e.inverse.obj Y) ≫ Q'.map (e.counitIso.hom.app Y)) ∧ (∀ U : 𝟭 Lcat ⟶ D.functor ⋙ D.inverse, (∀ X : C, U.app (Q.obj X) ≫ D.inverse.map (a.hom.app X) ≫ b.hom.app (e.functor.obj X) = Q.map (e.unitIso.hom.app X)) → U = D.unitIso.hom) ∧ (∀ V : D.inverse ⋙ D.functor ⟶ 𝟭 Lcat', (∀ Y : C', V.app (Q'.obj Y) = D.functor.map (b.hom.app Y) ≫ a.hom.app (e.inverse.obj Y) ≫ Q'.map (e.counitIso.hom.app Y)) → V = D.counitIso.hom) ∧ ∀ (T : H ≌ H') (F : C ⥤ H) (G : C' ⥤ H') (σ : F ⋙ T.functor ≅ e.functor ⋙ G) (L : Lcat ⥤ H) (ε : Q ⋙ L ⟶ F), L.IsLeftDerivedFunctor ε W → ∃ (γ : Q' ⋙ D.inverse ⋙ L ⋙ T.functor ⟶ G) (k : D.functor ⋙ D.inverse ⋙ L ⋙ T.functor ≅ L ⋙ T.functor), (∀ Y : C', γ.app Y = T.functor.map (L.map (b.hom.app Y)) ≫ T.functor.map (ε.app (e.inverse.obj Y)) ≫ σ.hom.app (e.inverse.obj Y) ≫ G.map (e.counitIso.hom.app Y)) ∧ (∀ Z : Lcat, k.hom.app Z = T.functor.map (L.map (D.unitIso.inv.app Z))) ∧ (∀ X : C, (D.inverse ⋙ L ⋙ T.functor).map (a.hom.app X) ≫ γ.app (e.functor.obj X) = k.hom.app (Q.obj X) ≫ T.functor.map (ε.app X) ≫ σ.hom.app X) ∧ (D.inverse ⋙ L ⋙ T.functor).IsLeftDerivedFunctor γ W' ∧ (∀ K : Lcat' ⥤ H', ∃ (B : (K ⟶ D.inverse ⋙ L ⋙ T.functor) ≃ (D.functor ⋙ K ⋙ T.inverse ⟶ L)) (M : (D.functor ⋙ K ⋙ T.inverse ⟶ L) ≃ (Q ⋙ D.functor ⋙ K ⋙ T.inverse ⟶ F)) (P : (Q' ⋙ K ⟶ G) ≃ (Q ⋙ D.functor ⋙ K ⋙ T.inverse ⟶ F)), (∀ (α : K ⟶ D.inverse ⋙ L ⋙ T.functor) (Z : Lcat), (B α).app Z = T.inverse.map (α.app (D.functor.obj Z)) ≫ T.inverse.map (T.functor.map (L.map (D.unitIso.inv.app Z))) ≫ T.unitIso.inv.app (L.obj Z)) ∧ (∀ β : D.functor ⋙ K ⋙ T.inverse ⟶ L, M β = Functor.whiskerLeft Q β ≫ ε) ∧ (∀ (ζ : Q' ⋙ K ⟶ G) (X : C), (P ζ).app X = T.inverse.map (K.map (a.hom.app X)) ≫ T.inverse.map (ζ.app (e.functor.obj X)) ≫ T.inverse.map (σ.inv.app X) ≫ T.unitIso.inv.app (F.obj X)) ∧ (∀ α : K ⟶ D.inverse ⋙ L ⋙ T.functor, P.symm (M (B α)) = Functor.whiskerLeft Q' α ≫ γ)) ∧ (∀ X : C, IsIso (γ.app (e.functor.obj X)) ↔ IsIso (ε.app X)) ∧ (∀ Y : C', IsIso (γ.app Y) ↔ IsIso (ε.app (e.inverse.obj Y)))",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3f91977c0",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Single theorem localized_universalDerivedPair_transport (proof sorry); item JSON differs from live only in lean; lean.statement verbatim equals file signature; no name clash. Clause by clause: IsLocalization, Equivalence e, he/hi, existence of D,a,b with the unit/counit lift equations plus uniqueness over all natural transformations; L.IsLeftDerivedFunctor ε W matches the convention of the recorded lem-pur-left-derived-from-kflat-class Lean and is equivalent to the node's bijectivity via homEquivOfIsRightKanExtension; γ is the node's composite (types checked), k = tL(U⁻¹), compatibility square, IsLeftDerivedFunctor γ W', and B/M/P equivalences with step-4/5 component formulas whose composite is α ↦ α_{Q'} ≫ γ; pointwise IsIso transfer in both directions. Re-derived the compatibility square, the final equation, Equiv existence, and uniqueness via natTrans_ext. Universes independent, no extra hypotheses, edge cases (identity data, empty categories, arbitrary W, non-invertible ε) fine. Docstrings carry source, blueprint tag and all 8 steps; nothing hollow; no compile needed since no file changed."
+ }
+}

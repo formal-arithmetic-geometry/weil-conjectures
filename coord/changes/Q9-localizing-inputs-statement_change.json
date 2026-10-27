@@ -1,0 +1,107 @@
+{
+  "date": "2026-10-25",
+  "by": "L maintenance for Q9",
+  "item": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocalizingInputs",
+  "kind": "statement_change",
+  "source": {
+    "document": "dag/nodes/sec-six-functors-basics/lem-sfb-dc-tensor-preserves.json",
+    "place": "statement and stmt_deps: schemes of sk-def-sfb-dc-setting; LocalizingInputs module docstring, The setting; isMonoidal_boundedConstructible in Derived/BoundedConstructible.lean"
+  },
+  "reason": "The archive claims tensor closure beyond its documented/DAG geometric setting; verbatim restoration fails three TensorLE syntheses. This correction aligns Lean with the existing statement rather than asserting a new arbitrary-scheme theorem.",
+  "statement_change": [
+    {
+      "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocalizingInputs",
+      "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_tensor_padicIntegersRingObj",
+      "old_statement": {
+        "section_omit": "omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]\n  [IsSeparated X.hom] in",
+        "theorem_header": "theorem boundedConstructible_tensor_padicIntegersRingObj\n    {K L : 𝔻[Profinite.padicIntegersRingObj.{u} ℓ E](X.left)}\n    (hK : boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left) K)\n    (hL : boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left) L) :\n    boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left)\n      (K ⊗ L)"
+      },
+      "new_statement": {
+        "section_omit": "omit [Fact (ringChar k).Prime] in",
+        "theorem_header": "theorem boundedConstructible_tensor_padicIntegersRingObj\n    {K L : 𝔻[Profinite.padicIntegersRingObj.{u} ℓ E](X.left)}\n    (hK : boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left) K)\n    (hL : boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left) L) :\n    boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left)\n      (K ⊗ L)"
+      },
+      "what": "The old omit clause discarded the geometric setting needed by the existing tensor proof. Restore [LocallyOfFiniteType X.hom], [QuasiCompact X.hom], [IsSeparated X.hom]; keep the original characteristic-prime omission and the entire proof body.",
+      "users": [
+        "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaAdic",
+        "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaField"
+      ]
+    },
+    {
+      "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocalizingInputs",
+      "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_tensor_continuousMapRingObj",
+      "old_statement": {
+        "section_omit": "omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]\n  [IsSeparated X.hom] in",
+        "theorem_header": "theorem boundedConstructible_tensor_continuousMapRingObj\n    {K L : 𝔻[𝐄](X.left)}\n    (hK : boundedConstructible (condensedRingObj 𝐄 X.left) K)\n    (hL : boundedConstructible (condensedRingObj 𝐄 X.left) L) :\n    boundedConstructible (condensedRingObj 𝐄 X.left) (K ⊗ L)"
+      },
+      "new_statement": {
+        "section_omit": "omit [Fact (ringChar k).Prime] in",
+        "theorem_header": "theorem boundedConstructible_tensor_continuousMapRingObj\n    {K L : 𝔻[𝐄](X.left)}\n    (hK : boundedConstructible (condensedRingObj 𝐄 X.left) K)\n    (hL : boundedConstructible (condensedRingObj 𝐄 X.left) L) :\n    boundedConstructible (condensedRingObj 𝐄 X.left) (K ⊗ L)"
+      },
+      "what": "The old omit clause discarded the geometric setting needed by the existing tensor proof. Restore [LocallyOfFiniteType X.hom], [QuasiCompact X.hom], [IsSeparated X.hom]; keep the original characteristic-prime omission and the entire proof body.",
+      "users": [
+        "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaAdic",
+        "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaField"
+      ]
+    },
+    {
+      "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocalizingInputs",
+      "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_tensor_padicAlgClRingObj",
+      "old_statement": {
+        "section_omit": "omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]\n  [IsSeparated X.hom] in",
+        "theorem_header": "theorem boundedConstructible_tensor_padicAlgClRingObj\n    {K L : 𝔻[𝐐](X.left)}\n    (hK : boundedConstructible (condensedRingObj 𝐐 X.left) K)\n    (hL : boundedConstructible (condensedRingObj 𝐐 X.left) L) :\n    boundedConstructible (condensedRingObj 𝐐 X.left) (K ⊗ L)"
+      },
+      "new_statement": {
+        "section_omit": "omit [Fact (ringChar k).Prime] in",
+        "theorem_header": "theorem boundedConstructible_tensor_padicAlgClRingObj\n    {K L : 𝔻[𝐐](X.left)}\n    (hK : boundedConstructible (condensedRingObj 𝐐 X.left) K)\n    (hL : boundedConstructible (condensedRingObj 𝐐 X.left) L) :\n    boundedConstructible (condensedRingObj 𝐐 X.left) (K ⊗ L)"
+      },
+      "what": "The old omit clause discarded the geometric setting needed by the existing tensor proof. Restore [LocallyOfFiniteType X.hom], [QuasiCompact X.hom], [IsSeparated X.hom]; keep the original characteristic-prime omission and the entire proof body.",
+      "users": [
+        "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaAdic",
+        "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaField"
+      ]
+    },
+    {
+      "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaField",
+      "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.tensor_mem_localizingBoundedConstructible_continuousMapRingObj",
+      "old_statement": {
+        "section_omit": "omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]\n  [IsSeparated X.hom] in",
+        "theorem_header": "theorem tensor_mem_localizingBoundedConstructible_continuousMapRingObj :\n    (∀ K L : 𝔻[𝐄](X.left), boundedConstructible (condensedRingObj 𝐄 X.left) K →\n      boundedConstructible (condensedRingObj 𝐄 X.left) L →\n        boundedConstructible (condensedRingObj 𝐄 X.left) (K ⊗ L)) ∧\n    ∀ A B : 𝔻[𝐄](X.left), localizingBoundedConstructible 𝐄 X.left A →\n      localizingBoundedConstructible 𝐄 X.left B → localizingBoundedConstructible 𝐄 X.left (A ⊗ B)"
+      },
+      "new_statement": {
+        "section_omit": "omit [Fact (ringChar k).Prime] in",
+        "theorem_header": "theorem tensor_mem_localizingBoundedConstructible_continuousMapRingObj :\n    (∀ K L : 𝔻[𝐄](X.left), boundedConstructible (condensedRingObj 𝐄 X.left) K →\n      boundedConstructible (condensedRingObj 𝐄 X.left) L →\n        boundedConstructible (condensedRingObj 𝐄 X.left) (K ⊗ L)) ∧\n    ∀ A B : 𝔻[𝐄](X.left), localizingBoundedConstructible 𝐄 X.left A →\n      localizingBoundedConstructible 𝐄 X.left B → localizingBoundedConstructible 𝐄 X.left (A ⊗ B)"
+      },
+      "what": "The old omit clause discarded the geometric setting needed by the existing tensor proof. Restore [LocallyOfFiniteType X.hom], [QuasiCompact X.hom], [IsSeparated X.hom]; keep the original characteristic-prime omission and the entire proof body.",
+      "users": [
+        "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaField"
+      ]
+    },
+    {
+      "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaField",
+      "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.tensor_mem_localizingBoundedConstructible_padicAlgClRingObj",
+      "old_statement": {
+        "section_omit": "omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]\n  [IsSeparated X.hom] in",
+        "theorem_header": "theorem tensor_mem_localizingBoundedConstructible_padicAlgClRingObj :\n    (∀ K L : 𝔻[𝐐](X.left), boundedConstructible (condensedRingObj 𝐐 X.left) K →\n      boundedConstructible (condensedRingObj 𝐐 X.left) L →\n        boundedConstructible (condensedRingObj 𝐐 X.left) (K ⊗ L)) ∧\n    ∀ A B : 𝔻[𝐐](X.left), localizingBoundedConstructible 𝐐 X.left A →\n      localizingBoundedConstructible 𝐐 X.left B → localizingBoundedConstructible 𝐐 X.left (A ⊗ B)"
+      },
+      "new_statement": {
+        "section_omit": "omit [Fact (ringChar k).Prime] in",
+        "theorem_header": "theorem tensor_mem_localizingBoundedConstructible_padicAlgClRingObj :\n    (∀ K L : 𝔻[𝐐](X.left), boundedConstructible (condensedRingObj 𝐐 X.left) K →\n      boundedConstructible (condensedRingObj 𝐐 X.left) L →\n        boundedConstructible (condensedRingObj 𝐐 X.left) (K ⊗ L)) ∧\n    ∀ A B : 𝔻[𝐐](X.left), localizingBoundedConstructible 𝐐 X.left A →\n      localizingBoundedConstructible 𝐐 X.left B → localizingBoundedConstructible 𝐐 X.left (A ⊗ B)"
+      },
+      "what": "The old omit clause discarded the geometric setting needed by the existing tensor proof. Restore [LocallyOfFiniteType X.hom], [QuasiCompact X.hom], [IsSeparated X.hom]; keep the original characteristic-prime omission and the entire proof body.",
+      "users": [
+        "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaField"
+      ]
+    }
+  ],
+  "unchanged": [
+    "All proof bodies, names, attributes and imports",
+    "Nine existing root sorry bodies; no added sorry, axiom, instance or definition",
+    "DAG statement, proof and proof_deps; no attachment names the corrected five declarations",
+    "All Challenge signatures and target meanings"
+  ],
+  "consumers": {
+    "ProjectionFormulaField": "Two exact downstream uses require the same setting correction; all other uses already carry it.",
+    "ProjectionFormulaAdic": "Restored byte for byte, with all required geometric instances already in scope.",
+    "other": "Full search of lean/, quarantine/, and DAG attachments finds no other consumers of the five corrected names."
+  }
+}

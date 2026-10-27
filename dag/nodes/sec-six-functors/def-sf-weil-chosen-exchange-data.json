@@ -1,0 +1,129 @@
+{
+ "id": "def-sf-weil-chosen-exchange-data",
+ "kind": "definition",
+ "title": "Interfaces of the specified chosen-duality Weil exchange",
+ "statement": "For the existing bounded constructible common-stage categories and Frobenius fixed-pair categories, retain the specified three-transpose component, chosen-adjoint comparison, Exchange structure, model point and structure map, carrier and pair categories, permitted Hom pair, ordinary and exceptional lifted adjunctions, HomLift with carrier object/map/evaluation normalization, tensor-unit-normalized Constant and its pair, geometric compactification, Data of Hom lifts and composition/projection isomorphisms with their carrier normalizations, OrdinaryMaps, and Data.Laws. These are the existing definitions moved unchanged to an interface module, not existence or naturality theorems.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-tensor-hom/lem-sf-tensor-hom.proof.md",
+  "place": "Existing interfaces of lem-sf-weil-chosen-duality-exchange, relocated unchanged for acyclic proof decomposition; inverse projection/evaluation/transposes of Step 1 and chosen composition mate of thm-sf-verdier-exchange Step 1."
+ },
+ "stmt_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-derived-direct-image",
+  "cor-coef-verdier-weil-equivariance",
+  "fix-prop-projection-formula",
+  "def-weil-exceptional-inverse-image",
+  "def-fix-six-functor-datum",
+  "def-pod-constructible-weil-model-squares",
+  "def-sf-constructible-common-stage-data",
+  "def-sf-derived-argument-first-evaluation",
+  "def-pod-weil-lift-interfaces",
+  "def-pod-partial-closed-interfaces",
+  "def-sf-adic-closed-reindexing-maps",
+  "def-sf-constructible-projection-mates",
+  "def-sf-rational-common-tensor-symmetries",
+  "def-a1-common-stage-coefficient-unit",
+  "def-weil-frobenius-square-exchange",
+  "def-sf-operation-stages"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Frobenius fixed pairs internal Hom adjunction evaluation contravariant naturality",
+   "results": "ihom.ev, ihom.ev_naturality_assoc and Adjunction.homEquiv_naturality_left/right and square variants. These are generic tools, not normalized sheaf Frobenius constructions.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "homEquiv, homEquiv_unit, homEquiv_counit and comp_homEquiv. Used in the completed ordinary_maps proof; no normalized construction or first-variable chain naturality.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_naturality|tensorHom.*naturality; local HomLift|transposeComponent|WeilChosenDualityExchange",
+   "results": "Mathlib adjunction naturality formulas; source and project searches find the existing assigned interfaces only. PodHomChainUncurriedTransport and HomChainPairingNaturality are finite-Tor presentations and target-variable assertions, not this supplied Weil-pair first-variable chain.",
+   "date": "2026-10-25",
+   "verdict": "no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.WeilChosenDualityExchange",
+  "date": "2026-10-25",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Existing interfaces of lem-sf-weil-chosen-duality-exchange, relocated unchanged for acyclic proof decomposition; inverse projection/evaluation/transposes of Step 1 and chosen composition mate of thm-sf-verdier-exchange Step 1.",
+   "via": [
+    "lem-sf-weil-chosen-duality-exchange",
+    "lem-sf-weil-upper-shriek-verdier-conjugate"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.WeilChosenDualityExchangeData",
+  "file": "lean/Sheaf/Paper/WeilChosenDualityExchangeData.lean",
+  "declaration": "WeilConjectures.WeilChosenDualityExchange.transposeComponent",
+  "declarations": [
+   "WeilConjectures.WeilChosenDualityExchange.transposeComponent",
+   "WeilConjectures.WeilChosenDualityExchange.chosenComparison",
+   "WeilConjectures.WeilChosenDualityExchange.Exchange",
+   "WeilConjectures.WeilChosenDualityExchange.point",
+   "WeilConjectures.WeilChosenDualityExchange.structureMap",
+   "WeilConjectures.WeilChosenDualityExchange.Carrier",
+   "WeilConjectures.WeilChosenDualityExchange.Pair",
+   "WeilConjectures.WeilChosenDualityExchange.homPair",
+   "WeilConjectures.WeilChosenDualityExchange.ordinaryAdjunction",
+   "WeilConjectures.WeilChosenDualityExchange.exceptionalAdjunction",
+   "WeilConjectures.WeilChosenDualityExchange.HomLift",
+   "WeilConjectures.WeilChosenDualityExchange.Constant",
+   "WeilConjectures.WeilChosenDualityExchange.Constant.pair",
+   "WeilConjectures.WeilChosenDualityExchange.geometricCompactification",
+   "WeilConjectures.WeilChosenDualityExchange.Data",
+   "WeilConjectures.WeilChosenDualityExchange.OrdinaryMaps",
+   "WeilConjectures.WeilChosenDualityExchange.Data.Laws"
+  ],
+  "statement": "def transposeComponent {X : Type a} {Y : Type b} [Category.{va} X] [Category.{vb} Y] {F : X ⥤ Y} {G : Y ⥤ X} {P : Y ⥤ X} {Q : X ⥤ Y} (exceptional : F ⊣ G) (ordinary : P ⊣ Q) (TX : X ⥤ X ⥤ X) (TY : Y ⥤ Y ⥤ Y) (HX : Xᵒᵖ × X ⥤ X) (HY : Yᵒᵖ × Y ⥤ Y) (closedX : ∀ M, TX.obj M ⊣ (Functor.curry.obj HX).obj (op M)) (closedY : ∀ N, TY.obj N ⊣ (Functor.curry.obj HY).obj (op N)) (projection : ∀ M A, (TY.obj (F.obj M)).obj A ≅ F.obj ((TX.obj M).obj (P.obj A))) (omega : Y) (M : X) : HY.obj (op (F.obj M), omega) ⟶ Q.obj (HX.obj (op M, G.obj omega))",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-d87eb",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261025T122702-L-1796890",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-d87eb",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261025T122702-L-1796890",
+  "kind": "interface",
+  "note": "independent cc review: relocated interface block vs clone d6dfe898 (verbatim substring); item signature vs clone; two new sorry statements vs item node Steps 1,4,5,6 and the carrier normalizations of Data/HomLift; node proof_deps vs step uses; #print axioms in /tmp sandbox vs published"
+ }
+}

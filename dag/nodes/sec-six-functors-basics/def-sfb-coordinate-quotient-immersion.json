@@ -1,0 +1,142 @@
+{
+ "id": "def-sfb-coordinate-quotient-immersion",
+ "kind": "definition",
+ "title": "Canonical graded quotient map and induced coordinate quotient immersion",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $k$ be a field [def-weil-field] and $N\\geq0$. Give $B=k[z_0,\\ldots,z_N]$ its standard total-degree grading, let $J$ be a homogeneous ideal, and give the actual quotient $A=B/J$ the image grading $A_m=q(B_m)$ of [def-sfb-coordinate-quotient-grading]. The canonical graded quotient homomorphism $q_J:B\\to A$ is the actual ring quotient map $b\\mapsto b\\bmod J$, with its degree-preserving structure supplied by these image submodules. Define the canonical coordinate quotient morphism of schemes [def-pc-scheme] $j_J:\\operatorname{Proj}(A)\\to\\operatorname{Proj}(B)$ [def-pc-proj] to be the Proj morphism induced by $q_J$. The irrelevant-ideal condition for this Proj map is supplied by the surjectivity of the quotient homomorphism. This construction imposes no saturation or properness condition on $J$, and includes $J=B$ and the zero quotient.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-coordinate-quotient-grading",
+  "def-pc-scheme",
+  "def-pc-proj"
+ ],
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01N0, lemma-surjective-graded-rings-map-proj, applied to the actual homogeneous quotient; Tag 03GL, lemma-closed-in-projective-space, for its coordinate application. The quotient grading is Algebra, Tag 00JL."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The graded quotient homomorphism by a homogeneous ideal induces the canonical morphism from Proj of the quotient to Proj of the graded polynomial ring",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Ideal.Quotient.mk\", \"module\": \"Mathlib.RingTheory.Ideal.Quotient.Defs\", \"type\": \": R →+* R ⧸ I\", \"doc\": \"The canonical ring homomorphism from $ R $ to the quotient ring $ R/I $, which maps each element $ a \\\\in R $ to its equivalence class $ [a] $ in $ R/I $. This homomorphism preserves addition and multi\"}\n  {\"name\": \"AlgebraicGeometry.Proj.toSpecZero\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \": Proj 𝒜 ⟶ Spec (.of <| 𝒜 0)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, constructed by composing the inverse of the top isomor\"}\n  {\"name\": \"DoubleQuot.quotLeftToQuotSupₐ\", \"module\": \"Mathlib.RingTheory.Ideal.Quotient.Operations\", \"type\": \": A ⧸ I →ₐ[R] A ⧸ I ⊔ J\", \"doc\": \"The canonical algebra homomorphism from the quotient ring $ A/I $ to $ A/(I + J) $ over $ R $, induced by the inclusion of the ideal $ I $ into $ I + J $. This map sends each equivalence class $ a + I\"}\n  {\"name\": \"AlgebraicGeometry.Proj.awayι_toSpecZero\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \": awayι 𝒜 f f_deg hm ≫ toSpecZero 𝒜 = Spec.map (CommRingCat.ofHom (fromZeroRingHom 𝒜 _))\", \"doc\": \"The composition of the inclusion morphism $\\\\operatorname{Spec}(\\\\mathcal{A}_{(f)}) \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ with the canonical morphism $\\\\operatorname{Proj}(\\\\mathcal{A}) \\\\to \\\\operatorname{\"}\n  {\"name\": \"Ideal.Quotient.factor\", \"module\": \"Mathlib.RingTheory.Ideal.Quotient.Defs\", \"type\": \"(H : S ≤ T) : R ⧸ S →+* R ⧸ T\", \"doc\": \"Given a ring $R$ and two ideals $S$ and $T$ of $R$ such that $S$ is a sub-ideal of $T$ (i.e., $S \\\\subseteq T$), this defines the canonical ring homomorphism from the quotient ring $R/S$ to the quotien\"}\n  {\"name\": \"DoubleQuot.quotLeftToQuotSup\", \"module\": \"Mathlib.RingTheory.Ideal.Quotient.Operations\", \"type\": \": R ⧸ I →+* R ⧸ I ⊔ J\", \"doc\": \"The canonical ring homomorphism from the quotient ring $ R/I $ to $ R/(I + J) $, induced by the inclusion of the ideal $ I $ into the sum ideal $ I + J $. This map sends each equivalence class $ a + I\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections.congr_simp\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {X : AlgebraicGeometry.Scheme} (f f_1 : A →+* ↑(X.presheaf.obj (Opposite.op ⊤)))\\n  (e_f : f = f_1) (hf : Ideal.map f (HomogeneousIdeal.irrelevant 𝒜).toIdeal \", \"doc\": \"For a graded ring $ A $ and a scheme $ X $, if two ring homomorphisms $ f, f_1 : A \\\\to \\\\Gamma(X, \\\\mathcal{O}_X) $ are equal and both map the irrelevant ideal of $ A $ to the entire ring $ \\\\Gamma(X, \\\\m\"}\n  {\"name\": \"Ideal.quotientMap_comp_mk\", \"module\": \"Mathlib.RingTheory.Ideal.Quotient.Operations\", \"type\": \"{J : Ideal R} {I : Ideal S} [I.IsTwoSided] [J.IsTwoSided] {f : R →+* S} (H : J ≤ I.comap f) :\\n  (quotientMap I f H).comp (Quotient.mk J) = (Quotient.mk I).comp f\", \"doc\": \"Given a ring homomorphism $ f : R → S $, ideals $ J ⊴ R $ and $ I ⊴ S $ with $ J ⊆ f^{-1}(I) $, the composition of the induced quotient homomorphism $ R/J → S/I $ and the canonical projection $ R → R/\"}\n",
+   "date": "2026-10-24",
+   "verdict": "General quotient/Proj primitives; exact polynomial quotient specialization exists in the recorded Sheaf module and is reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical closed subscheme immersion Proj of a homogeneous polynomial quotient induced by the quotient graded ring map",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n  {\"name\": \"AlgebraicGeometry.Proj.awayι\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              (f : A) →\\n                {m : ℕ} →\\n                  f ∈ 𝒜 m →\\n                    0 < m →\", \"doc\": \"The canonical morphism from the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_{(f)})$ to the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$, constructed by composing the inverse of the isomor\"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.toFun\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          {𝒜 : ℕ → σ} →\\n            [inst_3 : GradedRing 𝒜] →\\n              {f : A} →\\n                {m : ℕ} →\\n                  f ∈ 𝒜 m →\\n                    0 < m\", \"doc\": \"The function maps a prime ideal $ q $ in the degree-zero localization $ A_f^0 $ of a graded ring $ \\\\mathcal{A} $ to a homogeneous prime ideal in $ \\\\text{Proj}(\\\\mathcal{A}) $ that does not contain the \"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              (f : A) →\\n                (AlgebraicGeometry.Proj.toLocallyRingedSpace 𝒜).restrict ⋯ ⟶\\n  \", \"doc\": \"The morphism of locally ringed spaces from the restriction of the projective spectrum $ \\\\text{Proj}(A) $ to the basic open set $ D_+(f) $ (defined by exclusion of the homogeneous element $ f $) to the\"}\n  {\"name\": \"AlgebraicGeometry.Proj.toSpecZero\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              AlgebraicGeometry.Proj 𝒜 ⟶\\n                AlgebraicGeometry.Spec { carrier := ↥(𝒜 0), comm\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, constructed by composing the inverse of the top isomor\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsOpenImmersionAwayι\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] (f : A) {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m),\\n  AlgebraicGeometry.IsOpenImmersion (AlgebraicGeometry.Proj.awayι 𝒜 f f_deg hm)\", \"doc\": \"The canonical morphism from the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_{(f)})$ to the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$, constructed by composing the inverse of the isomor\"}\n  {\"name\": \"AlgebraicGeometry.Proj.SpecMap_awayMap_awayι\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m') {x : A}\\n  (hx : x = f * g),\\n  CategoryTheory.CategoryStruct.comp\\n      (Al\", \"doc\": \"For a graded ring $\\\\mathcal{A}$, element $f$ of degree $f_\\\\deg$, and element $x$ divisible by $f$ with degree $x_\\\\deg$, the composition of the morphism $\\\\operatorname{Spec}(\\\\mathcal{A}_{(x)}) \\\\to \\\\ope\"}\n",
+   "date": "2026-10-24",
+   "verdict": "General Proj and chart constructions; use the already landed quotient specialization, without a new Lean construction."
+  },
+  {
+   "tool": "grep",
+   "query": "coordinateQuotientGradedMap|coordinateQuotientImmersion|quotient.*[Pp]roj (Mathlib/AlgebraicGeometry)",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib grep hit for the specialized coordinate-quotient declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "coordinateQuotientGradedMap|coordinateQuotientImmersion|def-sfb-coordinate-quotient-immersion (lean/WeilConjectures)",
+   "results": "",
+   "date": "2026-10-24",
+   "verdict": "No upstream exact definitions under these names."
+  },
+  {
+   "tool": "grep",
+   "query": "coordinateQuotientGradedMap|coordinateQuotientImmersion|def-sfb-coordinate-quotient-immersion (lean/Sheaf)",
+   "results": "/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/ProjectiveCoordinateRingEulerPolynomial.lean:43:def coordinateQuotientGradedMap\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/ProjectiveCoordinateRingEulerPolynomial.lean:52:def coordinateQuotientImmersion\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/ProjectiveCoordinateRingEulerPolynomial.lean:56:  Proj.map (coordinateQuotientGradedMap J)\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/ProjectiveCoordinateRingEulerPolynomial.lean:66:    (OverClass.ofHom (coordinateQuotientImmersion J ≫\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/ProjectiveCoordinateRingEulerPolynomial.lean:68:    ((Scheme.Modules.tensorPullback (coordinateQuotientImmersion J)).obj\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/ProjectiveCoordinateRingEulerPolynomial.lean:110:    (he : e.hom ≫ coordinateQuotientImmersion K = coordinateQuotientImmersion J)\n",
+   "date": "2026-10-24",
+   "verdict": "Exact existing definitions are in Sheaf.AlgebraicGeometry.ProjectiveCoordinateRingEulerPolynomial; reference them with existing:true."
+  },
+  {
+   "tool": "grep",
+   "query": "coordinateQuotientGradedMap|coordinateQuotientImmersion|def-sfb-coordinate-quotient-immersion (dag/nodes)",
+   "results": "/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-projective-coordinate-ring-euler-polynomial.json:190:   \"AlgebraicGeometry.coordinateQuotientGradedMap\",\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-projective-coordinate-ring-euler-polynomial.json:191:   \"AlgebraicGeometry.coordinateQuotientImmersion\",\n",
+   "date": "2026-10-24",
+   "verdict": "Only the theorem node lists these declarations; there is no definition node for them."
+  },
+  {
+   "tool": "blueprint_refs.py",
+   "query": "search coordinate quotient immersion; ancestor lem-sfb-projective-field-coordinate-euler-polynomial",
+   "results": "0 blueprint nodes match 'coordinate quotient immersion'; a node created for lem-sfb-projective-field-coordinate-euler-polynomial has blueprint.from.node = None",
+   "date": "2026-10-24",
+   "verdict": "No independent blueprint definition duplicate. Preserve the item ancestry with null ancestor."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-field-coordinate-euler-polynomial",
+  "date": "2026-10-24",
+  "group": "NY"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, projective Hilbert schemes underlying the relative morphism scheme; Hilbert construction prerequisite: Local constancy and base change of projective fibre Hilbert polynomials; re-split of the returned proof: returned step 1 (proper Noetherian field fibres and coherence) and step 4 (Snapper, homogeneous ideal, eventual coordinate comparison and uniqueness); definition underlying the ideal presentation in step 5 and the coordinate comparison in step 6: actual graded quotient map and induced Proj morphism.",
+   "via": [
+    "lem-sfb-projective-field-coordinate-euler-polynomial",
+    "lem-sfb-flat-projective-hilbert-polynomial-locality",
+    "lem-sfb-projective-hilbert-polynomial-representability",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveCoordinateRingEulerPolynomial",
+  "declaration": "AlgebraicGeometry.coordinateQuotientImmersion",
+  "declarations": [
+   "AlgebraicGeometry.coordinateQuotientGradedMap",
+   "AlgebraicGeometry.coordinateQuotientImmersion"
+  ],
+  "statement": "def coordinateQuotientImmersion\n    (J : HomogeneousIdeal (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (N + 1))) k)) :\n    Proj (coordinateQuotientPiece J) ⟶\n      Proj.projectiveSpaceOverAffine (ULift.{u} (Fin (N + 1))) k",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "H2 repair requested by L at immutable head 20932675af92. These two plain definitions already live in the theorem module: the graded map is Ideal.Quotient.mk with degree preservation, and the immersion is Proj.map with the surjective quotient irrelevant-ideal bound. Neither chooses data from the Euler-polynomial theorem. No declaration is moved, copied or redefined."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cff42aac7",
+  "group": "NY",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cff42aac7",
+  "group": "NY",
+  "result": "pass",
+  "note": "Re-delivery of the H2 RETURN at 20932675af92. The Lean file is byte-identical (sha b0643212). In the item's stmt_deps the theorem lem-sfb-projective-coordinate-ring-euler-polynomial is replaced by the new def-sfb-coordinate-quotient-immersion; the theorem stays in proof_deps. Statement, proof and other fields are unchanged against side-live apart from the lean record and the stmt_deps (+def-weil-pbc-proj-twisting-sheaf, +def-sfb-coordinate-quotient-immersion). New def node: q_J = Ideal.Quotient.mk and j_J = Proj.map with the surjective irrelevant-ideal bound (Stacks 01N0/00JL), no saturation condition, J=B allowed; stmt_deps field/quotient-grading/scheme/proj; existing:true on the live module for coordinateQuotientGradedMap/coordinateQuotientImmersion (read at lines 43-57, not hollow, no .choose of the theorem, statement verbatim); no move or copy; no duplicate in side-live or the sheaf DAG. All item clauses and edge cases re-checked (n=0, J=(1)/empty X, unsaturated J, d<0, universes). sorry only, docstrings present, report sections present. No compile (no file changed). Advisory A1 retained: the twist text cites def-pc-projective-space-twist while the Lean uses Proj.twist."
+ }
+}

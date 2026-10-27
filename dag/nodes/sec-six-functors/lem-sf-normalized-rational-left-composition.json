@@ -1,0 +1,98 @@
+{
+ "id": "lem-sf-normalized-rational-left-composition",
+ "kind": "statement",
+ "title": "Composition law for normalized rational left coefficient comparisons",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "statement": "For every compactification c, finite stages E,L,M, algebra embeddings i,j and K in the rational E category, the displayed composite of rational comparison q maps and sfRationalScalarComp equals the direct comparison along j.comp i.",
+ "stmt_deps": [
+  "lem-sf-normalized-ring-compact-scalar-cocycle",
+  "lem-sf-rational-left-coefficient-localization",
+  "lem-coef-integral-residue-tor",
+  "lem-weil-scalar-extension-composition",
+  "lem-weil-finite-free-completed-scalar-comparison"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+  "place": "The construction paragraph of the constructible exceptional adjunction blueprint; this is the normalized coefficient construction split from the assembly theorem."
+ },
+ "proof": [
+  {
+   "text": "Apply the normalized ring compact-support cocycle to the three completed coefficient changes, with the supplied left realizations and scalar associators. The compact-support residue-unit construction supplies invertibility of the coefficient prime on residue fields. Every rational object has its unchanged integral representative in the finite-Tor domain by the residue-Tor theorem. Identify rational scalar action on localized integral arrows using the specified scalar functor equalities and the raw scalar formula. Identify the two scalar associator components by the scalar-only localization lemma. The given rationalAction supplies the functor-image term and rational_normalized supplies the three q components. Applying the target rationalization functor to the integral cocycle preserves composition. Heterogeneous composition transports each factor through its recorded object equality and gives the required rational equation.",
+   "uses": [
+    "lem-sf-normalized-ring-compact-scalar-cocycle",
+    "lem-coef-integral-residue-tor",
+    "lem-weil-scalar-extension-composition",
+    "lem-sf-normalized-scalar-associator-localization",
+    "lem-weil-compact-support-normalized-scalar-isomorphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+    "place": "The construction paragraph of the constructible exceptional adjunction blueprint; this is the normalized coefficient construction split from the assembly theorem."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-normalized-ring-compact-scalar-cocycle",
+  "lem-coef-integral-residue-tor",
+  "lem-weil-scalar-extension-composition",
+  "lem-sf-normalized-scalar-associator-localization",
+  "lem-weil-compact-support-normalized-scalar-isomorphisms"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+  "place": "The construction paragraph of the constructible exceptional adjunction blueprint; this is the normalized coefficient construction split from the assembly theorem."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedRationalLeftLaws",
+  "date": "2026-10-27",
+  "group": "H6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-normalized-rational-left-laws",
+   "place": "The composition and identity components of the normalized rational left laws.",
+   "via": [
+    "lem-sf-normalized-rational-left-laws"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedRationalLeftComposition",
+  "file": "lean/Sheaf/Paper/NormalizedRationalLeftComposition.lean",
+  "declaration": "WeilConjectures.ConstructibleExceptionalCoefficients.normalized_rational_left_composition",
+  "statement": "theorem normalized_rational_left_composition (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)\n    {X Y : Scheme.{max u v}} {f : X ⟶ Y}\n    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]\n    [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (R : CoefficientConstructionRing.{u, v} l Ω D hl (f := f))\n    (F : CoefficientConstructionFields.{u, v} l Ω D hl R) :\n    ∀ (c : Compactification f) (E L M : FieldStage.{max u v} l)\n      (i : E.carrier →ₐ[Padic l] L.carrier) (j : L.carrier →ₐ[Padic l] M.carrier)\n      (K : C.{u, v} l Ω X (.rational E)),\n      (rationalScalar.{u, v} l Ω L M j Y).map\n          ((F.rationalComparison c E L i).q.hom.app K) ≫\n        (F.rationalComparison c L M j).q.hom.app\n          ((rationalScalar.{u, v} l Ω E L i X).obj K) ≫\n        (R.operation c (.rational M)).F.map\n          ((sfRationalScalarComp l E.carrier L.carrier i X 0\n            (Fact.out : l.Prime).ne_zero M.carrier j).hom.app K) =\n      (sfRationalScalarComp l E.carrier L.carrier i Y 0\n        (Fact.out : l.Prime).ne_zero M.carrier j).hom.app\n          ((R.operation c (.rational E)).F.obj K) ≫\n        (F.rationalComparison c E M (j.comp i)).q.hom.app K",
+  "branch": "sheaf-dag",
+  "by": "H6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261027T050607-L-242029",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261027T094537-L-240992",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

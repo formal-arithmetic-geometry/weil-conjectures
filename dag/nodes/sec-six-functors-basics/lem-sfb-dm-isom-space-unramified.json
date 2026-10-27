@@ -1,0 +1,244 @@
+{
+ "id": "lem-sfb-dm-isom-space-unramified",
+ "kind": "statement",
+ "title": "Isomorphism spaces of a Deligne--Mumford stack are unramified",
+ "statement": "Let $S$ and $T$ be schemes [def-pc-scheme], with $T$ an $S$-scheme, and let $\\mathcal X$ be a Deligne--Mumford stack over $S$ in the etale-stack and scheme-atlas convention of [def-sfb-stable-pointed-moduli-groupoids]. For any $x,y\\in\\mathcal X(T)$, the functor on $T$-schemes\n$$v:T'\\to T\\quad\\longmapsto\\quad\\operatorname{Isom}_{\\mathcal X(T')}(v^*x,v^*y)$$\nis represented by an algebraic space $I$ over $T$ [def-trf-algebraic-space]. Its structure map $I\\to T$ is unramified: for every representable etale scheme chart $V\\to I$, the composite $V\\to T$ is an unramified morphism of schemes [def-weil-unramified-morphism]. Etale scheme charts have the meaning of [def-trf-algebraic-space, def-weil-etale-morphism].",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tags 06N3 (theorem-DM), direction (3) implies (1), and 06MB (lemma-properties-covering-imply-diagonal), part (1); Isom as a base change of the diagonal: algebraic.tex Tag 045G (lemma-representable-diagonal); base-change stability: spaces-morphisms.tex Tag 03ZJ (lemma-base-change-unramified). These statements are used in the etale-stack convention through the atlas and Isom-space formulation."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-weil-unramified-morphism",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Use the given etale atlas as a smooth atlas: Mathlib Etale implies Smooth on every scheme chart. Apply lem-sfb-unramified-diagonal-etale-atlas to obtain HasUnramifiedModuliDiagonal F.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-unramified-diagonal-etale-atlas"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct cartesian sections associated with x and y by the fibered-category lifting property. Obtain Z over T times T representing the iso-comma category from the unramified diagonal. A vertical natural isomorphism between functors into a discrete moduli category makes those functors equal. Transport the representing equivalence along these equalities so its two projections are exactly the prescribed projections. For each pair q,r of scheme maps, evaluate its comparison isomorphism at a section of Z over (q,r). Full faithfulness proves injectivity: an arrow between two equal comparison objects lifts uniquely to a vertical arrow between sections, which forces equality. Essential surjectivity proves surjectivity: take a preimage of the prescribed comparison object and pull its section back by the inverse of its base isomorphism. The comma square gives the prescribed comparison. Naturality follows by the comma square of the restriction arrow.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 04SI, explicit identification of the isomorphism sheaf as a 2-fibre product; algebraic.tex Tag 045G"
+   }
+  },
+  {
+   "text": "Form the actual sheaf pullback I = Z times_(T times T) T along the diagonal. It is an algebraic space by lem-trf-space-fibre-products-etale-covers; the representable scheme sheaf is an algebraic space by lem-trf-space-enlarged-etale-ringed-site-model. Its pointwise pullback universal property and Yoneda identify sections over q with sections of Z over (q,q). Compose with the bijections of step 2. Compare arbitrary cartesian lifts with the chosen ones by their unique cartesian isomorphisms. Conjugation gives the required bijections for all lifts. Cartesian uniqueness and associativity give the displayed restriction equation.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Verify unramifiedness of I over T by pulling back a representable surjective etale scheme atlas of Z. The resulting atlas of I is the base change of the unramified scheme map from the atlas of Z to T times T, so is unramified over T by Mathlib base-change stability of locally finite type and formally unramified morphisms. For any etale scheme chart V of I, represent its pullback of this atlas by E. Both chart projections are etale, and E to V is surjective. Precomposition and the pointwise source-and-target locality criterion from lem-sfb-scheme-unramified-etale-locality imply that V to T is unramified. Representability and etaleness of the pullback use lem-trf-space-chartwise-etale-permanence.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-unramified-morphism",
+    "lem-sfb-scheme-unramified-etale-locality",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03ZJ, base change of unramified morphisms; scheme locality in Descent Tag 04R3(9)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-unramified-diagonal-etale-atlas",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "def-weil-unramified-morphism",
+  "lem-sfb-scheme-unramified-etale-locality",
+  "lem-trf-space-chartwise-etale-permanence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks.tex",
+  "place": "Tag 04SI and algebraic.tex Tag 045G, implemented via normalized iso-comma presentations and cartesian comparison; unramifiedness from stacks-morphisms.tex Tags 06N3 and 06MB and spaces-morphisms.tex Tag 03ZJ"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a Deligne Mumford stack the sheaf of isomorphisms between two objects over a scheme is an unramified algebraic space",
+   "results": "OK 8 hit(s); returned declarations/files: AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.FormallyUnramified.instIsStableUnderCompositionScheme, AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern schemes or algebras; none constructs Isom spaces for a Deligne--Mumford stack or proves their unramifiedness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale atlas makes the automorphism sheaf of any object unramified over its base scheme",
+   "results": "OK 8 hit(s); returned declarations/files: AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.FormallyEtale.instFormallyUnramified, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale.of_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern schemes or algebras; none constructs Isom spaces for a Deligne--Mumford stack or proves their unramifiedness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The diagonal of a Deligne Mumford stack is unramified",
+   "results": "OK 8 hit(s); returned declarations/files: AlgebraicGeometry.FormallyUnramified.recOn, AlgebraicGeometry.FormallyUnramified.casesOn, AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme, AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.IsImmersion.instDiagonalScheme, AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal, AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern schemes or algebras; none constructs Isom spaces for a Deligne--Mumford stack or proves their unramifiedness."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Unramified\"",
+   "results": "OK 12 hit(s); returned declarations/files: AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme, AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.FormallyUnramified.instIsStableUnderCompositionScheme, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified, AlgebraicGeometry.FormallyUnramified.of_comp, AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme, AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern schemes or algebras; none constructs Isom spaces for a Deligne--Mumford stack or proves their unramifiedness."
+  },
+  {
+   "tool": "grep",
+   "query": "DeligneMumford|deligneMumford|AlgebraicStack|algebraicStack|Isom.*[Uu]nramified",
+   "results": "OK 0 hit(s); returned declarations/files: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern schemes or algebras; none constructs Isom spaces for a Deligne--Mumford stack or proves their unramifiedness."
+  },
+  {
+   "tool": "grep",
+   "query": "DeligneMumford|deligneMumford|AlgebraicStack|algebraicStack|Isom.*[Uu]nramified",
+   "results": "OK 0 hit(s): ",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern morphisms of schemes or algebras, not Isom spaces of a stack with an etale atlas."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The isomorphism space of two points of a Deligne Mumford stack is unramified over their base scheme",
+   "results": "OK 8 hit(s): AlgebraicGeometry.FormallyUnramified.recOn, AlgebraicGeometry.FormallyUnramified.casesOn, AlgebraicGeometry.formallyUnramified_iff, AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.FormallyUnramified.mk",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern morphisms of schemes or algebras, not Isom spaces of a stack with an etale atlas."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Unramified\"",
+   "results": "OK 12 hit(s): AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme, AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.FormallyUnramified.instIsStableUnderCompositionScheme, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified, AlgebraicGeometry.FormallyUnramified.of_comp, AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme, AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern morphisms of schemes or algebras, not Isom spaces of a stack with an etale atlas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A stack admitting an etale scheme atlas has unramified diagonal",
+   "results": "OK 8 hit(s): AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme, AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern morphisms of schemes or algebras, not Isom spaces of a stack with an etale atlas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Deligne Mumford stack the isomorphism sheaf of two objects over a scheme is an unramified algebraic space",
+   "results": "OK 8 hit(s): AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme, AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.FormallyUnramified.instIsStableUnderCompositionScheme, AlgebraicGeometry.IsEtale, AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern morphisms of schemes or algebras, not Isom spaces of a stack with an etale atlas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dm-geometric-inertia-trivial",
+  "date": "2026-10-22",
+  "group": "NF"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Passage from trivial geometric level stabilizers to an algebraic space on all test schemes, before identifying the coarse scheme. Sublemma: the unramified automorphism-space input for passing from geometric level stabilizers to automorphisms over arbitrary test schemes.",
+   "via": [
+    "lem-sfb-dm-geometric-inertia-trivial",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-dm-isom-space-unramified",
+  "worker": "stage1",
+  "summary": "Kept the statement and all its hypotheses. Reused the existing unramified-diagonal/etale-atlas equivalence rather than creating a duplicate. Checked algebraicity using etale-implies-smooth on charts, wrote out the natural triple-to-isomorphism equivalence, and applied the existing every-base-change/chart definition. No new nodes. Searched the live project for an attachment and Mathlib by two semantic phrasings, LeanSearch, Loogle and grep; no match.",
+  "blueprint": "Realizes the inherited det-thm-sf-ctf-stability-direct-images proof (3) supporting chain: the unramified automorphism-space input in the geometric-inertia-trivial prerequisite to abelian level rigidification. Steps 1--2 use the etale atlas, step 3 identifies its diagonal base change with Isom, and step 4 provides unramifiedness on all test schemes. The inherited blueprint.from.node is null and its detailed from.place/via are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "Only the etale-implies-smooth clause on scheme charts is used to check the algebraic-stack hypothesis. This is a generic morphism-property implication; the present unit has no replacement for it."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q62-6e932bc90",
+  "group": "Q62",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-6e932bc90 (reviewer sub-agent of L); spot-checked: I read the whole item and all four steps. This is a statement-only node created by the NF split of lem-sfb-dm-geometric-inertia-trivial and now split for the first time. It has no repair note, it is not on route-pivot-dropped, and side-live still has it unsplit. The statement is unchanged and matches Stacks 06N3 (3)⇒(1) via 06MB(1) (stacks-morphisms.tex l.904, l.4376), together with 045G (algebraic.tex l.1120) and 04SI (stacks.tex l.226). Step 1: the DM definition in def-sfb-stable-pointed-moduli-groupoids gives an étale scheme atlas, and the étale⇒smooth clause of lem-weil-pbc-etale-smooth-zero-dimensional-fibres turns it into a smooth atlas, so X is an algebraic stack in the convention of the cited equivalence node. I accept that tool_use: it is generic and nothing in unit sk-thm-sf-ctf-stability gives it. Step 2: the existing unsplit lem-sfb-unramified-diagonal-etale-atlas (same unit, no dependence on the item, so no cycle) gives the unramified relative diagonal. Step 3: I checked the 2-fibre-product triples (z,α,β)↦βα⁻¹ by hand; the arrow between two triples with the same γ is uniquely h=α'⁻¹α, so the fibre product represents Isom as in 04SI. Step 4 applies the cited node's every-scheme-base-change, every-étale-chart definition of unramified to the base change along (x,y), which gives exactly the item's chartwise conclusion via def-weil-unramified-morphism. Small cases behave correctly: BG for finite étale G is fine; BG_m and Bμ_p in characteristic p are correctly excluded because they have no étale atlas; X=S gives I=T; empty or nonreduced T is harmless. The Isom, unramified-diagonal and DM nodes in the DAG are curve- or M̄_g-specific or are the equivalence itself, so there is no duplicate. There are no new nodes, proof_deps equals the union of the uses, and no SGA source is cited."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DMIsomSpaceUnramified",
+  "declaration": "CategoryTheory.dm_isom_space_unramified",
+  "file": "lean/Sheaf/AlgebraicGeometry/DMIsomSpaceUnramified.lean",
+  "statement": "theorem dm_isom_space_unramified {S : Scheme.{u}} (F : BasedCategory.{v, w} (Over S)) (hF : IsDeligneMumfordModuliStack F) (T : Over S) (x y : Functor.Fiber F.p T) : ∃ (I : AlgebraicSpace S) (p : I.obj.obj ⟶ yoneda.obj T), (∀ (V : Over S) (b : yoneda.obj V ⟶ I.obj.obj), AlgebraicSpace.IsEtale b → IsUnramified ((yoneda.preimage (b ≫ p)).left)) ∧ ∃ e : ∀ (U : Over S) (q : U ⟶ T) (xU yU : Functor.Fiber F.p U) (a : xU.val ⟶ x.val) (b : yU.val ⟶ y.val), F.p.IsHomLift q a → F.p.IsHomLift q b → {z : I.obj.obj.obj (op U) // p.app (op U) z = q} ≃ (xU ≅ yU), ∀ (U U' : Over S) (f : U' ⟶ U) (q : U ⟶ T) (xU yU : Functor.Fiber F.p U) (xU' yU' : Functor.Fiber F.p U') (a : xU.val ⟶ x.val) (b : yU.val ⟶ y.val) (a' : xU'.val ⟶ x.val) (b' : yU'.val ⟶ y.val) (ha : F.p.IsHomLift q a) (hb : F.p.IsHomLift q b) (ha' : F.p.IsHomLift (f ≫ q) a') (hb' : F.p.IsHomLift (f ≫ q) b') (c : xU'.val ⟶ xU.val) (d : yU'.val ⟶ yU.val), F.p.IsHomLift f c → F.p.IsHomLift f d → c ≫ a = a' → d ≫ b = b' → ∀ (z : {z : I.obj.obj.obj (op U) // p.app (op U) z = q}) (z' : {z : I.obj.obj.obj (op U') // p.app (op U') z = f ≫ q}), z'.val = I.obj.obj.map f.op z.val → (e U' (f ≫ q) xU' yU' a' b' ha' hb' z').hom.val ≫ d = c ≫ (e U q xU yU a b ha hb z).hom.val",
+  "branch": "sheaf-dag",
+  "by": "Q143",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2b7a9ae3e",
+  "group": "Q143",
+  "result": "pass",
+  "note": "Node unchanged except the lean record; statement verbatim. hF = recorded IsDeligneMumfordModuliStack, no extra assumptions, universes v,w free. I : AlgebraicSpace S with p to yoneda T (relative convention of HasSpaceBaseChange/SpaceMapIsEtale). The Isom bijection e covers all pullback lifts, which are cartesian by IsFibredInGroupoids, so there is no cleavage or extra hypothesis. The naturality clause e(z').hom ≫ d = c ≫ e(z).hom type-checks and makes e a natural isomorphism with Isom (the f = id case gives independence of the lift); it is satisfiable via the 04SI triple construction. The unramified clause is SpaceMapIsEtale with Etale replaced by IsUnramified on every IsEtale chart. Edge cases checked: empty T/U, empty Isom, x = y (consumer use), BG_m/Bμ_p excluded, universes. Docstrings carry source and blueprint tags and the 4 proof steps; sorry only; no definitions; no duplicate in Mathlib or Sheaf; consistent with unramifiedModuliDiagonal_iff_etaleAtlas and dm_geometric_inertia_trivial; report has both sections. No change made, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261023T231651-L-3631061",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

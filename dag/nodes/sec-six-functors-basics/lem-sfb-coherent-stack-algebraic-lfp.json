@@ -1,0 +1,256 @@
+{
+ "id": "lem-sfb-coherent-stack-algebraic-lfp",
+ "kind": "statement",
+ "title": "Algebraicity and local finite presentation of the stack of flat coherent families",
+ "statement": "For a scheme $S$ and a separated, flat morphism $f:X\\to S$ of finite presentation [def-pc-scheme, def-weil-proper-morphism, def-weil-flat-morphism, def-sbc-locally-finite-presentation], let $\\mathcal C_f$ be the category fibred in groupoids over $S$-schemes whose objects over $T\\to S$ are quasi-coherent $\\mathcal O_{X_T}$-modules $F$ of finite presentation, flat over $T$, with support proper over $T$ [pqf-def-coherent, def-pc-base-change]. Here support proper over $T$ means that there are a closed immersion $i:Z\\to X_T$ [def-weil-closed-immersion] with $Z\\to T$ proper and a quasi-coherent $\\mathcal O_Z$-module $G$ of finite type with $i_*G\\cong F$. Here finite presentation of a module means locally a cokernel of a map between finite rank free modules, and flat over $T$ means that $F_x$ is flat over $\\mathcal O_{T,t}$ for every $x\\mapsto t$. Arrows over $u:T\\to T_1$ are isomorphisms $u_X^*F_1\\cong F$ [def-pc-module-pullback]. Then $\\mathcal C_f$ is an algebraic stack [def-sfb-algebraic-moduli-stack]. Its structure morphism to $S$ is locally of finite presentation, meaning that a smooth surjective scheme atlas $U\\to\\mathcal C_f$ has locally finitely presented composite $U\\to S$. No Noetherian hypothesis on $S$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tag 08WC, theorem-coherent-algebraic (flat case), and moduli.tex Tag 0DLZ, lemma-coherent-qs-lfp. Category: quot.tex situation-coherent."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-algebraic-moduli-stack",
+  "def-weil-proper-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "pqf-def-coherent",
+  "def-pc-base-change",
+  "def-pc-module-pullback",
+  "def-weil-closed-immersion",
+  "def-sfb-flat-coherent-moduli"
+ ],
+ "proof": [
+  {
+   "text": "Regard the schemes $X,S$ as their representable algebraic spaces. The identity scheme charts identify the space local finite-presentation condition with the scheme condition. For every affine scheme $V\\to S$ the pullback of $h_X\\to h_S$ is represented by the scheme $X\\times_SV$, which is quasi-compact because quasi-compactness is stable under base change and $V$ is affine; the same applies to the diagonal, so quasi-compactness and quasi-separatedness are unchanged. The diagonal of $h_X\\to h_S$ is the representable sheaf of the scheme diagonal, a closed immersion; every scheme base change of it is a closed immersion because closed immersions are stable under base change, so separatedness is also unchanged. Thus $f:X\\to S$ satisfies the separated finite-presentation hypotheses of the general coherent-stack theorem with parameter base $B=S$ and ambient base $S$.",
+   "uses": [
+    "def-trf-scheme-algebraic-space",
+    "def-sfb-space-morphism-properties",
+    "lem-sfb-space-local-properties-chart-test",
+    "lem-pc-quasi-compact-base-change",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Situation 08KB and Tag 09DS (theorem-coherent-algebraic-general), specialized to schemes and B=S."
+   }
+  },
+  {
+   "text": "For each $S$-scheme $T$, use the quasi-coherent Zariski/small-etale equivalence on $X_T$. The finiteness comparison preserves and reflects finite presentation and finite type. Relative flatness is the same condition on the identity chart; on any other etale chart it is equivalent by relative-flatness detection on flat source maps, since etale maps are flat. A closed subspace of the scheme $X_T$ is a scheme: base change its representable closed immersion by the identity of $X_T$. Conversely a scheme closed immersion defines a space closed immersion, since its scheme base changes are closed immersions by base-change stability. The closed-pushforward comparison of the equivalence identifies the proper-support presentations $i_*G\\simeq F$ on the two sites (on every affine open its inverse image is the affine quotient, giving quasi-compactness; its diagonal is an isomorphism, giving separatedness). The map $h_Z\\to h_T$ is representable by schemes (its scheme base changes are the scheme fibre products), so by the representable properness test it is proper as a morphism of spaces if and only if every scheme base change $Z\\times_TT'\\to T'$ is proper; since proper scheme morphisms are stable under base change, this holds exactly when $Z\\to T$ is proper. The tensor-pullback comparison identifies the pullback-isomorphism arrows over every $T\\to T_1$. Hence these equivalences identify the entire fibred groupoid $\\mathcal C_f$ with $\\mathcal C_{X/S}$ of the general coherent-stack theorem: the map $T\\to B=S$ in its objects is the already specified structural map.",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+    "lem-trf-relative-flatness-source-cover",
+    "def-weil-etale-morphism",
+    "def-sfb-space-morphism-properties",
+    "def-sfb-space-proper-quot-functor",
+    "def-weil-closed-immersion",
+    "lem-sfb-space-representable-proper-tests",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Situation 08KB; the Zariski/etale comparison uses descent.tex Tags 03DX, 03LC, 05VG, and morphisms.tex Tag 02JZ."
+   }
+  },
+  {
+   "text": "Apply the existing general coherent-stack theorem to $f$ from step 1. Its algebraicity assertion gives a representable diagonal and smooth surjective scheme atlas for $\\mathcal C_{X/S}$. Since $B=S$ is a scheme, its final clause also gives a locally finitely presented structural composite of that atlas to $S$. The equivalence in step 2 identifies descent data and their effective objects, so the stack condition transfers. Transport the atlas and diagonal along that equivalence. All scheme base changes of the atlas are identified by that equivalence, and its structural composite to $S$ is unchanged. This proves both algebraicity and the stated local finite presentation of $\\mathcal C_f$. The cited theorem imposes neither Noetherianity nor ambient flatness, so the extra flatness assumption on $f$ causes no restriction.",
+   "uses": [
+    "lem-sfb-space-coherent-stack-general",
+    "def-sfb-algebraic-moduli-stack"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 09DS; scheme-base local finite presentation is the existing theorem's explicit final clause (08KD and stack limit criterion)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-space-morphism-properties",
+  "lem-sfb-space-local-properties-chart-test",
+  "lem-pc-quasi-compact-base-change",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+  "lem-trf-relative-flatness-source-cover",
+  "def-weil-etale-morphism",
+  "def-sfb-space-proper-quot-functor",
+  "def-weil-closed-immersion",
+  "lem-sfb-space-representable-proper-tests",
+  "lem-sfb-space-coherent-stack-general",
+  "def-sfb-algebraic-moduli-stack"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Situation 08KB and Tag 09DS, via the existing general algebraic-space theorem; local finite presentation from its scheme-base clause."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The stack of finitely presented sheaves flat over the base with proper support is algebraic and locally of finite presentation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.LocallyOfFinitePresentation\", \"doc\": \"The property of being locally of finite presentation for morphisms of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are morphisms of schemes that are locally of fi\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism, ring/module or categorical results do not state this geometric stack or global Picard obstruction theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraicity of the moduli stack of coherent sheaves flat families proper support",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RingHom.Flat\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \"{R : Type u} {S : Type v} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, the property that $ S $ is a flat $ R $-module under the induced algebra structure defined by $ f $. This means that\"}\n  {\"name\": \"Module.Flat.finsupp\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \"(ι : Type v) : Flat R (ι →₀ R)\", \"doc\": \"For any index type $\\\\iota$, the module of finite support functions $\\\\iota \\\\to_0 R$ is flat over the commutative semiring $R$.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [toIsSeparated : AlgebraicGeometry.IsSeparated f]\\n  [toUniversallyClosed : AlgebraicGeometry.UniversallyClosed f]\\n  [toLocallyOfFiniteType : AlgebraicGeometry.LocallyOfFiniteType f], AlgebraicGeometry.IsProper f\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \": Set X\", \"doc\": \"The closed subset of a scheme $X$ consisting of points where the stalk of the ideal sheaf is non-zero, constructed by pairing the support set with its closedness proof.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.Flat.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $V \\\\subseteq f^{-1}(U)$, the ring homomorphism $\\\\Gamma(U, \\\\mathc\"}\n  {\"name\": \"AlgebraicGeometry.Flat.stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"[Flat f] (x : X) : (f.stalkMap x).hom.Flat\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. Then for any point $x \\\\in X$, the induced ring homomorphism on stalks, $f_x^\\\\sharp: \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$, is a flat ring homomo\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism, ring/module or categorical results do not state this geometric stack or global Picard obstruction theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Stack\", \"Coherent\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism, ring/module or categorical results do not state this geometric stack or global Picard obstruction theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "CohStack|coherentStack|stackOfCoherent|Cohstack",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism, ring/module or categorical results do not state this geometric stack or global Picard obstruction theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Moduli of finitely presented modules on a separated finitely presented scheme has a smooth scheme atlas",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative (@AlgebraicGeometry.IsSmoothOfRelativeDimension 0)\", \"doc\": \"The property of being a smooth morphism of relative dimension zero is multiplicative. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are smooth morphisms of relative dimension zero, then their composit\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.IsSmooth fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth\", \"doc\": \"A morphism of schemes is smooth if and only if it is locally standard smooth, meaning that for every point in the domain, there exists an open neighborhood where the morphism is isomorphic to a standa\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism, ring/module or categorical results do not state this geometric stack or global Picard obstruction theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraicity and local finite presentation of the moduli stack of flat coherent sheaves with proper support",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyOfFinitePresentation\\n  fun {R S} [CommRing R] [CommRing S] => RingHom.FinitePresentation\", \"doc\": \"A morphism of schemes is locally of finite presentation if and only if the corresponding ring homomorphism is finitely presented. This instance establishes that the scheme-theoretic property of being \"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyOfFinitePresentation f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n \", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is locally of finite presentation if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ contained in $ f^{-1\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme finite presentation and flatness and the finite-presentation module predicate are not a theorem providing a smooth atlas for this fibred groupoid"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The stack of flat finitely presented sheaves on a separated finitely presented scheme is algebraic locally of finite presentation",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $f(V) \\\\subseteq U$, the induced ring homomorphism $\\\\mathcal{O}_Y\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a quasicoherent sheaf data $ q $ over a ring sheaf $ \\\\mathcal{O} $, if every indexed presentation $ q.\\text{presentation}(i) $ is finite (admits finite generators and relations), then $ q $ itsel\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [hf : LocallyOfFinitePresentation f] : LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme finite presentation and flatness and the finite-presentation module predicate are not a theorem providing a smooth atlas for this fibred groupoid"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Stack\", \"Coherent\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme finite presentation and flatness and the finite-presentation module predicate are not a theorem providing a smooth atlas for this fibred groupoid"
+  },
+  {
+   "tool": "grep",
+   "query": "Cohstack|coherentStack|stackOfCoherent",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme finite presentation and flatness and the finite-presentation module predicate are not a theorem providing a smooth atlas for this fibred groupoid"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth atlas for the groupoid of flat proper support finite presentation modules over arbitrary schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.IsSmooth fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth\", \"doc\": \"A morphism of schemes is smooth if and only if it is locally standard smooth, meaning that for every point in the domain, there exists an open neighborhood where the morphism is isomorphic to a standa\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative (@AlgebraicGeometry.IsSmoothOfRelativeDimension 0)\", \"doc\": \"The property of being a smooth morphism of relative dimension zero is multiplicative. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are smooth morphisms of relative dimension zero, then their composit\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsSmooth\", \"doc\": \"For any morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ of schemes, if $ f $ and $ g $ are smooth, then their composition $ g \\\\circ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.Smooth R A],\\n  Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme finite presentation and flatness and the finite-presentation module predicate are not a theorem providing a smooth atlas for this fibred groupoid"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-picard-stack-curve-geometry",
+  "date": "2026-10-23",
+  "group": "Q32"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: Representability and smoothness of the Picard space of a relative curve. Supporting stack-of-line-bundles input before passing to isomorphism classes. Algebraicity part: ambient coherent stack, before taking the invertible locus.",
+   "via": [
+    "lem-sfb-picard-stack-curve-geometry",
+    "lem-sfb-picard-space-curves-smooth",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-coherent-stack-algebraic-lfp",
+  "worker": "stage1",
+  "summary": "Specialize the existing general coherent-stack theorem to B=S and schemes. Check the scheme/space morphism properties and compare Zariski and etale module families, including finite presentation, relative flatness, proper-support presentations and pullback arrows. No new nodes are needed; the earlier Artin split is archived in the sandbox because the live DAG already has the more general theorem.",
+  "blueprint": "Retains the inherited from.place chain serving ambient coherent-stack algebraicity in the Picard-stack prerequisite of direct-image stability; latest det-thm-sf-ctf-stability-direct-images proof (3) read. No corresponding coherent-family or Artin criterion blueprint node was found.",
+  "tool_uses": [
+   {
+    "node": "def-trf-scheme-algebraic-space",
+    "why": "Generic scheme-as-space or module comparison input for the coherent-stack specialization; no replacement of the unit route."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic scheme-as-space or module comparison input for the coherent-stack specialization; no replacement of the unit route."
+   },
+   {
+    "node": "lem-trf-relative-flatness-source-cover",
+    "why": "Generic scheme-as-space or module comparison input for the coherent-stack specialization; no replacement of the unit route."
+   },
+   {
+    "node": "def-weil-etale-morphism",
+    "why": "Generic scheme-as-space or module comparison input for the coherent-stack specialization; no replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-trf-scheme-algebraic-space",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-relative-flatness-source-cover",
+  "def-weil-etale-morphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q82-92d180594",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-92d180594 (reviewer sub-agent of L); spot-checked: Read in full: the item, every cited statement, and quot.tex 08KB/08WC/09DS/08KD and moduli.tex 0DLZ. The statement is 08WC+0DLZ with X and B=S schemes; it is unchanged and not weakened. The delivery adds no new nodes. Main input: the existing unsplit lem-sfb-space-coherent-stack-general (09DS for spaces, plus the lfp clause when B is a scheme, same unit). It is strictly more general than the item, not a restatement. Its closure does not contain the item, and the 09DS proof does not use 08WC, so no latent cycle. Step 2 is correct: the Zariski/étale equivalence with pullback and direct-image comparisons handles arrows and i_*G=F (a closed immersion is qc and separated); finiteness is preserved and reflected; flatness goes through 02JZ on étale charts; T->B=S is the structure map. Step 3 transports algebraicity and the lfp composite along an equivalence over Sch/S. Edge cases checked: X empty, f=id (giving ⊔BGL_n), zero module, non-proper X, non-Noetherian S. Batch-5: every flagged trf/sfb citation is a generic foundation (025Y/03G1, 03DX/03LC, 05VG/06VE, 02JZ, chart locality, definitions); the closure has no nt-assume node and no trace-formula or duality step, so I accept them and the tool_uses. FIX (C1/C4, two faults). (1) Step 1 used base-change stability of quasi-compactness and of closed immersions without citing it: added lem-pc-quasi-compact-base-change and lem-weil-pbc-proper-fp-permanence. (2) Step 2 asserted that scheme and space properness agree 'by the space morphism convention', but the definition does not say that; the comparison is the 6-step lem-sfb-space-representable-proper-tests (083R), applied to h_Z->h_T together with 01W4. Step 2 also now cites closed-immersion base change for the converse direction. proof_deps is now the union of the step uses. Corrected file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-coherent-stack-algebraic-lfp.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoherentStackAlgebraicLfp",
+  "declaration": "AlgebraicGeometry.coherent_stack_algebraic_lfp",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentStackAlgebraicLfp.lean",
+  "statement": "theorem coherent_stack_algebraic_lfp {X S : Scheme.{u}} (f : X ⟶ S) [IsSeparated f] [Flat f] [LocallyOfFinitePresentation f] [QuasiCompact f] : IsAlgebraicModuliStack (FlatCoherentModuli.category f) ∧ ∃ (U : Over S) (a : BasedFunctor (discreteModuli (yoneda.obj U)) (FlatCoherentModuli.category f)), IsSmoothModuliAtlas (FlatCoherentModuli.category f) U a ∧ LocallyOfFinitePresentation U.hom",
+  "branch": "sheaf-dag",
+  "by": "Q33",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b9357efa7",
+  "group": "Q33",
+  "result": "pass",
+  "note": "Read the item, all 10 stmt_deps, new node def-sfb-flat-coherent-moduli, both modules, report (Worker report + Second reading by Q33), quot.tex 08KB/08WC and moduli.tex 0DLZ. Hypotheses: IsSeparated+Flat+LocallyOfFinitePresentation+QuasiCompact = separated flat fp (separated ⇒ qs); no Noetherian or universe restriction. FlatCoherentModuli objects: Over S base, qcoh + fp module on X_T, stalkwise flatness over O_{T,t} via the actual stalkMap, existential closed-immersion proper-support presentation with G qcoh finite type (recorded IsQuasiCoherentFiniteType). Arrows: iso moduleBaseChange(u) F1 ≅ F, direction as in 08KB. Identity/composition from the canonical tensorPullbackSectionId/Comp (leftAdjointUniq mates); only the true category_laws postponed and stated in the node. Conclusion: IsAlgebraicModuliStack ∧ ∃ smooth surjective atlas with LocallyOfFinitePresentation U.hom (same pattern as IsSmoothModuliStack). Item record differs from live only in stmt_deps(+new node) and lean; statements verbatim; declarations present; imports exist in side-live, plain ones are proof_dep modules; one sorry per file; docstrings with source/blueprint/proof steps. Edge cases: empty X/T, zero module, f=id, nonproper X, non-Noetherian S. No existing construction found. Advisory: flatness is stated inline in the node's stalk form instead of the existing IsFlatOver (def-pc-scheme-module-flat-over); faithful to the node, not an H4 fault. No compile (no file changed)."
+ }
+}

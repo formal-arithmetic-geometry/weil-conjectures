@@ -18,38 +18,52 @@
  ],
  "proof": [
   {
-   "text": "Let T_h be the set of points z of Z for which h is unramified on some open neighbourhood of z. By the definition of W_h as the union of all such opens, W_h has underlying point set T_h. Stacks, Morphisms, Tag 0475 (lemma-set-points-where-fibres-unramified), identifies T_h with the set of points whose fibre Z_{h(z)} is unramified over the residue field at that point, proves that this set is open, and proves for every base change h' that T_{h'}=(g')^{-1}(T_h). For the forward inclusion in the base-change equality directly from the union description, base-change each unramified open using [lem-weil-pbc-unramified-base-change-open] (and its open-restriction clause); Tag 0475 supplies the converse and the pointwise identification. Therefore W_h is open, has the fibrewise description in the statement, and commutes with arbitrary base change.",
+   "text": "The locus is open directly from its definition: an unramified open neighbourhood of a point is contained in the locus. For a locally finite type morphism, membership in this locus is equivalent to formal unramifiedness of its actual stalk map. The forward implication uses the stalk map of the open restriction and cancels its isomorphism; the converse applies lem-sbc-formally-unramified-stalk-neighbourhood and the Mathlib open-diagonal criterion for a locally finite type formally unramified morphism.",
    "uses": [
-    "lem-weil-pbc-unramified-base-change-open"
+    "lem-sbc-formally-unramified-stalk-neighbourhood"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 0475 (lemma-set-points-where-fibres-unramified), statement and proof"
+    "place": "Tag 02GF, equivalence (1) with (3) and openness proof"
    }
   },
   {
-   "text": "Fix z in Z, put s=h(z), and write h_s:Z_s=Z×_S Spec κ(s)→Spec κ(s) for the fibre morphism. The fibre morphism is locally of finite type by [lem-weil-pbc-lft-base-change], applied to h and Spec κ(s)→S. Apply [lem-trf-unramified-maximal-ideal-residue-criterion] to h_s at z. Since the base local ring κ(s) is a field, its maximal ideal is zero; hence the criterion says that z is unramified in the fibre exactly when the maximal ideal of O_{Z_s,z} is zero and κ(z)/κ(s) is finite separable. The canonical residue map O_{Z_s,z}→κ(z) is then an isomorphism, and conversely that isomorphism says the maximal ideal is zero. This is precisely the displayed local-ring and residue-field characterization.",
+   "text": "Prove arbitrary-base-change compatibility on affine neighbourhoods. For a finite module M over A and a prime q of an A-algebra B, q belongs to the support of B tensor_A M exactly when its contraction belongs to the support of M. Use Mathlib Module.mem_support_iff_nontrivial_residueField_tensorProduct, tensor associativity, and faithful flatness of the extension kappa(p) to kappa(q). Apply this to the finite module of Kahler differentials and Mathlib KaehlerDifferential.tensorKaehlerEquiv; Algebra.unramifiedLocus_eq_compl_support gives the ring-level pointwise equivalence for a pushout. Choose affine opens in the base and the two factors containing the images of a point of the scheme pullback. Their inverse-image intersection is affine and its section square is a pushout. Mathlib arrowStalkMapIso identifies the actual stalk maps with the localizations of the affine section maps. Composition with the formally unramified localization of the base identifies formal unramifiedness over the localized base with formal unramifiedness over the original affine base. The ring-level equivalence and the membership criterion of step 1 therefore give the equality of loci. Locally finite type persists under base change by lem-weil-pbc-lft-base-change. Specialize this equality to Spec kappa(h(z)) and the canonical point h.asFiber z; the first projection maps it to z, giving the fibrewise clause.",
    "uses": [
-    "lem-weil-pbc-lft-base-change",
-    "lem-trf-unramified-maximal-ideal-residue-criterion"
+    "lem-weil-pbc-lft-base-change"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 02GF (lemma-unramified-at-point), equivalence (1) with (6), applied to the scheme-theoretic fibre"
+    "place": "Tag 0475, differential base-change and residue-vector-space argument; Tag 02GF (3)--(5)"
+   }
+  },
+  {
+   "text": "Apply lem-trf-unramified-maximal-ideal-residue-criterion directly to h at z, retaining its finite separable residue-field condition unchanged. By lem-sbc-scheme-fibre-stalk-quotient, the canonical map from the source stalk to the fibre stalk is surjective and has kernel m_s O_Z,z. It is a local homomorphism. Hence contraction of the fibre maximal ideal is the source maximal ideal, and injectivity of ideal contraction along a surjection shows that the fibre maximal ideal is zero exactly when m_s O_Z,z is the source maximal ideal. The canonical residue map of the fibre stalk is always surjective; it is an isomorphism exactly when its kernel, the maximal ideal, is zero. Combining these equivalences gives the residue-map clause without transporting residue-field extensions between the fibre and the source.",
+   "uses": [
+    "lem-trf-unramified-maximal-ideal-residue-criterion",
+    "lem-sbc-scheme-fibre-stalk-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GF, equivalence (1) with (6); fibre stalk quotient Tag 0HA1"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-unramified-base-change-open",
+  "lem-sbc-formally-unramified-stalk-neighbourhood",
   "lem-weil-pbc-lft-base-change",
-  "lem-trf-unramified-maximal-ideal-residue-criterion"
+  "lem-trf-unramified-maximal-ideal-residue-criterion",
+  "lem-sbc-scheme-fibre-stalk-quotient"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Tag 0475 (lemma-set-points-where-fibres-unramified), with Tag 02GF (lemma-unramified-at-point), equivalence (1) with (6)"
+  "place": "Tags 0475 and 02GF; affine support proof of differential base change, with the existing fibre-stalk quotient for (6)",
+  "group": "V7",
+  "date": "2026-10-23"
  },
  "mathlib_searches": [
   {
@@ -150,7 +164,6 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-unramified-base-change-open",
   "lem-weil-pbc-lft-base-change"
  ],
  "reviewed": {
@@ -183,5 +196,26 @@
   "date": "2026-10-17",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V7",
+  "result": "pass",
+  "landing": "20261023T152102-L-442174",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

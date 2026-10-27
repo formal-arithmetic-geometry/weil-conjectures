@@ -1,0 +1,229 @@
+{
+ "id": "lem-sfb-subcanonical-splitting-clifford-bound",
+ "kind": "statement",
+ "title": "Clifford bound for subcanonical clusters with a splitting correction",
+ "statement": "Let $k$ be algebraically closed [def-weil-algebraic-closure] and let $X$ be a nonempty connected projective reduced $k$-scheme of pure dimension one [def-kun-projective, def-pc-reduced-scheme, def-weil-connected-scheme, def-weil-pure-dimension]. Assume $X$ is smooth except at ordinary nodes, meaning that at every singular closed point its completed local $k$-algebra is $k[[u,v]]/(uv)$ [def-sbc-smooth-morphisms, def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series]. Write $h^i(X,F)=\\dim_kH^i(X,F)$ for Zariski module cohomology [def-sc-ringed-space-module-cohomology]. Assume that for every decomposition $X=A\\cup B$ into nonempty reduced unions of components with no common component, $\\dim_k\\Gamma(A\\times_XB,\\mathcal O_{A\\times_XB})\\ge2$ [def-weil-irreducible-components, def-pc-fibre-product]. Put $p_a(X)=1-\\chi(X,\\mathcal O_X)$ [def-pc-euler-characteristic]. For every subcanonical zero-dimensional closed subscheme $T\\subseteq X$, with ideal $I_T$, dualizing line $\\omega_X$ and splitting index $r(T)$ as defined in [def-sfb-subcanonical-splitting-index], put $\\ell(T)=\\dim_k\\Gamma(T,\\mathcal O_T)$. Then\n$$h^0(X,I_T\\otimes\\omega_X)\\le p_a(X)-\\tfrac12\\ell(T)+\\tfrac12r(T).$$\nThe subscheme $T$ need not be Cartier or reduced.",
+ "source": {
+  "document": "literature/franciosi-tenni-clifford-singular-curves-2014.pdf",
+  "place": "Theorem 3.7, inequality (9), printed pp.242--246, specialized to reduced nodal curves; numerical two-connectedness is boundary-node length; local PDF WANTED, author-hosted primary text read online.",
+  "url": "https://pagine.dm.unipi.it/franciosi/lavori/clifford.pdf"
+ },
+ "stmt_deps": [
+  "def-kun-projective",
+  "def-pc-euler-characteristic",
+  "def-pc-fibre-product",
+  "def-pc-reduced-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-sc-ringed-space-module-cohomology",
+  "def-sfb-subcanonical-splitting-index",
+  "def-weil-algebraic-closure",
+  "def-weil-connected-scheme",
+  "def-weil-irreducible-components",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pure-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Put $p=p_a(X)$, $R=r(T)$, $v(U)=h^0(X,I_U\\otimes\\omega_X)$ and $c(U)=2p-\\ell(U)-2v(U)$. We must prove $c(T)\\ge-R$. By the residual-duality lemma, all these numbers are finite, $v(U)\\le h^0(X,\\omega_X)=p$, and $0\\le\\ell(U)\\le2p-2$ for every subcanonical $U$. Thus only finitely many integer pairs $(c(U),\\ell(U))$ occur. If $c(T)\\ge0$, the assertion follows from $R\\ge0$. Otherwise set $\\Sigma_R=\\{U:U\\text{ subcanonical},\\ r(U)\\le R\\}$ and choose, among all subcanonical $U$ with $r(U)\\le R$, a cluster $S$ minimizing $c(U)$ and, among minimizers, maximizing $\\ell(U)$. This is selection from a finite nonempty set of integer pairs, not a compactness assertion about a parameter scheme. We have $c(S)\\le c(T)<0$. No residual-invariance closure is assumed for $\\Sigma_R$; the later union will be proved to lie in this same class before invoking extremality.",
+   "uses": [
+    "lem-sfb-subcanonical-residual-duality",
+    "def-sfb-subcanonical-splitting-index"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/franciosi-tenni-clifford-singular-curves-2014.pdf",
+    "place": "Theorem 3.7 proof, beginning and Step 2, pp.243 and 246; bounded integer-pair selection made explicit.",
+    "url": "https://pagine.dm.unipi.it/franciosi/lavori/clifford.pdf"
+   }
+  },
+  {
+   "text": "The empty cluster has $v=p$ and $c=0$. If $\\ell(U)=2p-2$, residual duality gives $U^*=\\varnothing$, $v(U)=1$ and $c(U)=0$. Hence $0<\\ell(S)<2p-2$. For each component partition $\\mathcal P$ with $|\\mathcal P|-1>R$, put $W_{\\mathcal P}=\\sum_{A\\in\\mathcal P}(V_S)_A\\subset V_S$, using the supported subspaces of the splitting definition. Disjoint generic supports make this sum direct: a sum zero vanishes on each component, and a section of a line on the reduced curve vanishing at all generic points is zero. If $W_{\\mathcal P}=V_S$, the partition would be admissible, contrary to $r(S)\\le R$. Thus these finitely many $W_{\\mathcal P}$ are proper linear subspaces. Choose $s$ outside all of them, nonzero at every component generic point, and in the moving-component lemma's nonempty open. Such a choice exists: the generic-point zero loci are also proper linear subspaces, and in coordinates each of these finitely many nonempty opens contains a principal open defined by a nonzero polynomial. Their product is nonzero and has a nonzero value over the infinite field $k$, by induction on the number of variables and the one-variable root bound.",
+   "uses": [
+    "lem-sfb-subcanonical-residual-duality",
+    "def-sfb-subcanonical-splitting-index",
+    "lem-sfb-extremal-cluster-moving-component"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/franciosi-tenni-clifford-singular-curves-2014.pdf",
+    "place": "Theorem 3.7 (9), proof Step 1; agent correction of the use of Remark 2.18 and Lemma 3.1."
+   }
+  },
+  {
+   "text": "Let $S^*$ be the residual of this $s$ and let $U=S\\cup S^*$, so $V_U=V_S\\cap V_{S^*}$ inside the canonical section space. Evaluating the inclusion $F_S\\hookrightarrow\\omega_X$ at $s$ gives $s\\in V_{S^*}$ in the residual construction; hence $s\\in V_U$ is generically nonzero and $U$ is subcanonical. If a partition $\\mathcal P$ with $|\\mathcal P|-1>R$ were admissible for $V_U$, decomposing $s$ in its supported summands would put $s\\in W_{\\mathcal P}$, since $V_U\\subseteq V_S$. This contradicts its choice. Since $U\\supseteq S\\ne\\varnothing$, its splitting index uses the largest-admissible-partition formula, and $r(U)\\le R$. All hypotheses of the corrected nesting lemma now hold: $c(S)<0$, minimal Clifford index and maximal length in $\\Sigma_R$, and the verified union bound. It follows that $S^*\\subseteq S$. This argument does not compare $r(S^*)$ with $r(S)$ and does not use monotonicity of $r$.",
+   "uses": [
+    "lem-sfb-subcanonical-residual-duality",
+    "def-sfb-subcanonical-splitting-index",
+    "lem-sfb-extremal-cluster-residual-nesting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/franciosi-tenni-clifford-singular-curves-2014.pdf",
+    "place": "Theorem 3.7 (9), proof Step 1; agent correction of the use of Remark 2.18 and Lemma 3.1."
+   }
+  },
+  {
+   "text": "The ideal inclusion $I_S\\subseteq I_{S^*}$ from $S^*\\subseteq S$ gives $V_S\\subseteq V_{S^*}$ as subspaces of canonical sections. It gives the same inclusion of their images on every component. If the image of $V_S$ on some $\\Gamma$ had dimension at least two, both images would have dimension at least two. The moving-component lemma would give $\\ell(S^*)=2$ and $v(S^*)=p-1$, so $c(S^*)=2p-2-2(p-1)=0$. Residual duality says $c(S^*)=c(S)<0$, a contradiction. Every component image of $V_S$ is therefore at most one-dimensional; subcanonicity supplies a section nonzero at its generic point, so each image has dimension exactly one.",
+   "uses": [
+    "lem-sfb-extremal-cluster-moving-component",
+    "lem-sfb-subcanonical-residual-duality",
+    "def-sfb-subcanonical-splitting-index"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/franciosi-tenni-clifford-singular-curves-2014.pdf",
+    "place": "Theorem 3.7 proof Step 1, Cases 1 and 2, p.243; nested residual forces the rank-one branch.",
+    "url": "https://pagine.dm.unipi.it/franciosi/lavori/clifford.pdf"
+   }
+  },
+  {
+   "text": "Write $q=r(S)\\le R$ and $d=2p-2-\\ell(S)\\ge0$. Apply the rank-one component lemma with the actual restriction images just verified. It gives $v(S)=q+1$. If $q=0$, then $c(S)=2p-\\ell(S)-2=d\\ge0$, contradicting $c(S)<0$. If $q>0$, its degree bound gives $d\\ge q$, and consequently\n$$c(S)=2p-\\ell(S)-2(q+1)=d-2q\\ge-q\\ge-R.$$\nSince $c(T)\\ge c(S)$, we obtain $c(T)\\ge-R$ also in the negative case. Rearranging $2p-\\ell(T)-2v(T)\\ge-R$ proves the stated inequality. Every residual and restriction argument allowed non-Cartier and nonreduced clusters.",
+   "uses": [
+    "lem-sfb-component-rank-one-cluster-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/franciosi-tenni-clifford-singular-curves-2014.pdf",
+    "place": "Theorem 3.7 proof Step 1, Case 2 with B=C=C_red, pp.243--245, and Step 2 p.246; Lemma 3.6 and numerical rearrangement.",
+    "url": "https://pagine.dm.unipi.it/franciosi/lavori/clifford.pdf"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-subcanonical-residual-duality",
+  "def-sfb-subcanonical-splitting-index",
+  "lem-sfb-extremal-cluster-moving-component",
+  "lem-sfb-extremal-cluster-residual-nesting",
+  "lem-sfb-component-rank-one-cluster-dimension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/franciosi-tenni-clifford-singular-curves-2014.pdf",
+  "place": "Theorem 3.7 (9), reduced nodal specialization; agent repair replaces the false Remark 2.18 by a finite-partition generic-section argument and union-bounded nesting. Primary PDF read online; local PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "subcanonical|splitting.index|clifford.*inequality",
+   "results": "{\"t\": \"2026-10-23T13:32:36Z\", \"tool\": \"grep\", \"query\": \"subcanonical|splitting.index|clifford.*inequality\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Gluing.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/BigZariski.lean\"], \"digest\": \"b6e4aa5954f4754d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern general submodule sums, simplicial splittings, Clifford algebras, Weierstrass equations, or scheme zero loci, not this curve statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Clifford theorem with splitting index correction term for torsion free rank one sheaves on a nodal curve",
+   "results": "{\"t\": \"2026-10-23T13:32:37Z\", \"tool\": \"leansearch\", \"query\": \"Clifford theorem with splitting index correction term for torsion free rank one sheaves on a nodal curve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CliffordAlgebra.instAlgebra'\", \"WeierstrassCurve.natDegree_preΨ₄_pos\", \"CliffordAlgebra.instNontrivialOfInvertibleOfNat\", \"WeierstrassCurve.IsCharTwoJNeZeroNF.a₄\", \"WeierstrassCurve.c₄_of_isShortNF_of_char_three\", \"WeierstrassCurve.natDegree_preΨ₄_le\", \"WeierstrassCurve.IsCharThreeJNeZeroNF.a₄\", \"WeierstrassCurve.leadingCoeff_preΨ₄\"], \"digest\": \"9b9336f05f7b03bd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern general submodule sums, simplicial splittings, Clifford algebras, Weierstrass equations, or scheme zero loci, not this curve statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"cohomology\"",
+   "results": "{\"t\": \"2026-10-23T13:32:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"Scheme\\\", \\\"cohomology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.EllAdicCohomology\", \"AlgebraicGeometry.Scheme.instAddCommGroupEllAdicCohomology\", \"AlgebraicGeometry.Scheme.instSubsingletonEllAdicCohomologyOfIsEmptyCarrierCarrierCommRingCat\"], \"digest\": \"89918880a003c010\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern general submodule sums, simplicial splittings, Clifford algebras, Weierstrass equations, or scheme zero loci, not this curve statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bound sections of a canonical sheaf vanishing on a finite subscheme by genus minus half its length plus half the number of splitting pieces",
+   "results": "{\"t\": \"2026-10-23T13:32:38Z\", \"tool\": \"leanfinder\", \"query\": \"Bound sections of a canonical sheaf vanishing on a finite subscheme by genus minus half its length plus half the number of splitting pieces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ChevalleyThm.degBound\", \"ChevalleyThm.numBound\", \"ChevalleyThm.MvPolynomialC.numBound\", \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"ChevalleyThm.MvPolynomialC.degBound\", \"PrimeSpectrum.ConstructibleSetData.degBound\", \"ChevalleyThm.MvPolynomialC.numBound_succ\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\"], \"digest\": \"7c089b286a4142b3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern general submodule sums, simplicial splittings, Clifford algebras, Weierstrass equations, or scheme zero loci, not this curve statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a subcanonical cluster S of splitting index r on a two connected nodal curve h0 of its canonical ideal is at most arithmetic genus minus half length S plus half r",
+   "results": "{\"t\": \"2026-10-23T13:32:41Z\", \"tool\": \"leanfinder\", \"query\": \"For a subcanonical cluster S of splitting index r on a two connected nodal curve h0 of its canonical ideal is at most arithmetic genus minus half length S plus half r\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ChevalleyThm.degBound\", \"ChevalleyThm.numBound\", \"WeierstrassCurve.natDegree_preΨ'_le\", \"WeierstrassCurve.natDegree_preΨ_le\", \"WeierstrassCurve.natDegree_preΨ₄_le\", \"ChevalleyThm.MvPolynomialC.numBound_succ\", \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_ne_one\", \"WeierstrassCurve.natDegree_ΨSq_le\"], \"digest\": \"2c7f84e76b5c9b38\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern general submodule sums, simplicial splittings, Clifford algebras, Weierstrass equations, or scheme zero loci, not this curve statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Clifford bound for a subcanonical cluster of splitting index r on a two connected nodal curve",
+   "results": "{\"t\": \"2026-10-23T14:47:50Z\", \"tool\": \"leanfinder\", \"query\": \"Clifford bound for a subcanonical cluster of splitting index r on a two connected nodal curve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ChevalleyThm.degBound\", \"ChevalleyThm.numBound\", \"WeierstrassCurve.natDegree_preΨ'_le\", \"WeierstrassCurve.natDegree_preΨ_le\", \"WeierstrassCurve.natDegree_ΨSq_le\", \"WeierstrassCurve.natDegree_Φ_le\", \"ChevalleyThm.MvPolynomialC.numBound\", \"ChevalleyThm.MvPolynomialC.degBound\"], \"digest\": \"05a519a05c98a20b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern elliptic-curve ideals and reduction, Clifford algebras, general scheme rank/residue fields, sites, or unrelated splitting and rank formulas; none states this canonical-cluster theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical sections vanishing on finite subscheme of curve bounded by genus minus half length plus half splitting index",
+   "results": "{\"t\": \"2026-10-23T14:47:49Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical sections vanishing on finite subscheme of curve bounded by genus minus half length plus half splitting index\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.natDegree_preΨ'_le\", \"ChevalleyThm.numBound\", \"WeierstrassCurve.natDegree_preΨ_le\", \"ClassGroup.finsetApprox\", \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"WeierstrassCurve.Affine.CoordinateRing.exists_smul_basis_eq\", \"ChevalleyThm.MvPolynomialC.numBound\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_mul_XYIdeal\"], \"digest\": \"1065a88643a221c1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern elliptic-curve ideals and reduction, Clifford algebras, general scheme rank/residue fields, sites, or unrelated splitting and rank formulas; none states this canonical-cluster theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"cohomology\"",
+   "results": "{\"t\": \"2026-10-23T14:47:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"Scheme\\\", \\\"cohomology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.EllAdicCohomology\", \"AlgebraicGeometry.Scheme.instAddCommGroupEllAdicCohomology\", \"AlgebraicGeometry.Scheme.instSubsingletonEllAdicCohomologyOfIsEmptyCarrierCarrierCommRingCat\"], \"digest\": \"89918880a003c010\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern elliptic-curve ideals and reduction, Clifford algebras, general scheme rank/residue fields, sites, or unrelated splitting and rank formulas; none states this canonical-cluster theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "subcanonical|splitting.index|clifford.*inequality",
+   "results": "{\"t\": \"2026-10-23T14:47:45Z\", \"tool\": \"grep\", \"query\": \"subcanonical|splitting.index|clifford.*inequality\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Gluing.lean\", \"Mathlib/AlgebraicGeometry/Sites/BigZariski.lean\"], \"digest\": \"67c9b6224f4cf34c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern elliptic-curve ideals and reduction, Clifford algebras, general scheme rank/residue fields, sites, or unrelated splitting and rank formulas; none states this canonical-cluster theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Clifford inequality with splitting correction on nodal curves",
+   "results": "{\"t\": \"2026-10-23T14:47:46Z\", \"tool\": \"leansearch\", \"query\": \"Clifford inequality with splitting correction on nodal curves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.natDegree_preΨ_le\", \"WeierstrassCurve.leadingCoeff_preΨ'\", \"WeierstrassCurve.IsCharTwoJNeZeroNF.a₄\", \"CliffordAlgebra.evenOdd_isCompl\", \"WeierstrassCurve.coeff_preΨ'\", \"WeierstrassCurve.natDegree_preΨ'_le\", \"Polynomial.splits_iff_card_roots\", \"WeierstrassCurve.natDegree_preΨ'\"], \"digest\": \"1ccbbf9076b4d0a2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern elliptic-curve ideals and reduction, Clifford algebras, general scheme rank/residue fields, sites, or unrelated splitting and rank formulas; none states this canonical-cluster theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-two-connected-clifford",
+  "date": "2026-10-23",
+  "group": "NE"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Log-canonical linear series on stable pointed curves over a field. Supporting input: normal generation: a numerical multiplication theorem for an arbitrary line bundle, independent of logarithmic canonical powers or stability; Theorem 4.2 proof: Proposition 4.1 strict inequality on nonempty subclusters of a general hyperplane section; Section 2, Theorem 2.7 (Cartier subcanonical case), printed pp.40--41, and Section 4 Proposition 4.1 proof, printed p.48, two-connected case; replace the injective map by its Cartier zero divisor and use Riemann--Roch. Supporting input: Theorem 3.7, inequality (9), printed pp.242--246, specialized to reduced nodal curves; numerical two-connectedness is boundary-node length",
+   "via": [
+    "lem-sfb-nodal-two-connected-clifford",
+    "lem-sfb-general-section-cluster-strict-bound",
+    "lem-sfb-nodal-numerical-section-multiplication",
+    "lem-sfb-stable-pointed-field-linear-series",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-subcanonical-splitting-clifford-bound",
+  "worker": "stage1",
+  "summary": "Repair of E2 and E1/route: deleted false residual splitting-index invariance; strengthened nesting by the explicit union bound r(S union S*)<=R. Extremal selection remains precisely over Sigma_R, with no residual-closure assumption. A finite proper-subspace avoidance argument verifies that union bound for a chosen generic section before invoking nesting. Five proof steps, four retained statement-only prerequisites, original item statement unchanged.",
+  "blueprint": "Current latest blueprint det-thm-sf-ctf-stability-direct-images, proof (3), through the inherited stable-curve chain; supporting Theorem 3.7 (9), Step 1 Cases 1--2. Repaired missing union-stratum inference below the unit level; no change to the chapter or unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-08abe0291",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-08abe0291 (reviewer sub-agent of L); spot-checked: Re-delivery of 00bc RETURN (E2, E1). Both points repaired. E2: lem-sfb-subcanonical-residual-duality drops the false r(S*)=r(S) (two curves meeting in two nodes, S=n1: r=1 vs 0). The remaining clauses are checked true: evaluation embedding (s is a nonzerodivisor); Gorenstein linkage on the Cartier divisor D_s, so the double residual is S; ℓ(S)+ℓ(S*)=2p-2; v(S)-v(S*)=p-1-ℓ(S) from χ and Serre duality; c(S*)=c(S); h0(ω)=p; ℓ≤2p-2. E1: the nesting node now explicitly assumes U=S∪S* is subcanonical with r(U)≤R. Checked true: U and B=S∩S* are linked by the same s, so c(B)=c(U). The ideal sequence 0→I_Uω→I_Sω⊕I_{S*}ω→I_Bω→0 gives c(U)≤c(S). Minimality gives equality, maximal length forces I_U=I_S, hence S*⊆S. Item step 3 proves the union hypothesis: s lies outside the finitely many proper W_P=⊕(V_S)_A with |P|-1>R; s∈V_{S*} because the inclusion F_S↪ω evaluates to s; V_U=V_S∩V_{S*}, so any admissible P for U would put s in W_P. Steps 1, 2, 4, 5 checked: finite lexicographic selection over Σ_R; c=0 at the endpoints; avoidance of finitely many opens over an infinite field; nested component images against c(S*)=0<-contradiction; c=d-2q≥-q≥-R. The rank-one node is unchanged and re-verified (dim=r+1; d≥r+1 from 2-connectedness). The moving node is unchanged and true vacuously: c(S)=0 contradicts maximal length via D_s; for c(S)<0, nesting gives supp D_s=supp S, which a moving pencil on Γ violates. Small cases: smooth curve (classical Clifford), T=∅, T=D_s, 3-cycle (r is not monotone and is not used), p=0. No duplicates (rg -L over dag/nodes); downstream lem-sfb-nodal-two-connected-clifford is not cited, so no cycle. The item statement is identical to live and the new ids are absent on live/side-live. Batch-5 flags (4×, all via def → nodal-line-serre-riemann-roch → lem-trf-degree-weighted-irreducible-components = Stacks 0AYW degree by components): a general curve fact, not part of the trace formula or Poincaré duality, so accepted. No SGA, no tool_uses. Franciosi–Tenni recorded as WANTED, proof_origin agent. No fixes."
+ }
+}

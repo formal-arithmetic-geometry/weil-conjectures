@@ -1,0 +1,263 @@
+{
+ "id": "lem-coef-compact-support-quotient-cocycle",
+ "kind": "statement",
+ "title": "Unit and quotient cocycle for the specified compact-support reduction maps",
+ "statement": "Fix a field $k$, a prime $\\ell$ invertible in $k$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R=\\mathcal O_E$ and uniformizer $\\varpi$, and $A_n=R/\\varpi^n$ for $n\\geq1$ [def-weil-l-adic-coefficient-extension]. Let $X,Y$ be finite-type $k$-schemes, $f:X\\to Y$ separated of finite type, and fix one compactification $c=(j,p)$ of $f$ [def-weil-scheme-morphism-properties, def-weil-compactifications-refinements]. On the small pro-etale site of each $T=X,Y$ [def-weil-pbc-proetale-site] put $B_{T,n}=(A_n)_T$ and $\\widehat R_T=\\varprojlim_n B_{T,n}$ [def-weil-completed-integral-coefficients]. Write $q_{m,n}:B_{T,m}\\to B_{T,n}$ for quotient maps and $\\operatorname{Res}_{m,n}$ for their exact scalar restrictions [def-pc-sheaf-restrict-scalars]. Work in the unbounded derived categories [def-weil-abstract-derived-category] of the abelian categories of module sheaves [def-weil-sheaf-of-modules-category]. For arbitrary $K\\in D(\\operatorname{Mod}(\\widehat R_X))$, put $K_n=K\\otimes^L_{\\widehat R_X}B_{X,n}$ [def-weil-integral-derived-reduction]. Define $\\rho_{m,n}:K_m\\to\\operatorname{Res}_{m,n}K_n$ by the maps $P\\otimes B_{X,m}\\to\\operatorname{Res}_{m,n}(P\\otimes B_{X,n})$, $x\\otimes u\\mapsto x\\otimes q_{m,n}(u)$, on a K-flat flat-term representative $P$ of $K$ [def-pc-kflat-complex, def-pc-flat-sheaf-modules]. Use the scalar-unit-normalized derived tensor/restriction adjunction and write its unit as $\\eta$ [lem-pur-sheaf-ring-derived-coefficient-adjunction].\n\nThese maps are independent of $P$. Their adjoints are the canonical isomorphisms $\\beta_{m,n}:K_m\\otimes^L_{B_{X,m}}B_{X,n}\\xrightarrow{\\sim}K_n$, represented by $(x\\otimes u)\\otimes v\\mapsto x\\otimes q_{m,n}(u)v$, and $\\rho_{m,n}=\\operatorname{Res}_{m,n}(\\beta_{m,n})\\eta_{K_m}$. They satisfy $\\rho_{n,n}=1$ and $\\rho_{r,n}=\\operatorname{Res}_{r,m}(\\rho_{m,n})\\rho_{r,m}$ for $r\\geq m\\geq n$.\n\nSet $F_n=Rp_{*,n}j_!$ [def-compact-support-direct-image-detailed], and let $\\sigma_{m,n}:F_m\\operatorname{Res}_{m,n}\\xrightarrow{\\sim}\\operatorname{Res}_{m,n}F_n$ be the canonical proper/open scalar-restriction comparison [lem-sf-compact-support-restriction-of-scalars]. For $M_n=F_nK_n$ and $\\tau_{m,n}=\\sigma_{m,n,K_n}F_m(\\rho_{m,n})$, one has $\\tau_{n,n}=1$ and $\\tau_{r,n}=\\operatorname{Res}_{r,m}(\\tau_{m,n})\\tau_{r,m}$ under the canonical restriction-composition identifications. No constructibility or Tor bound on $K$ is required.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-compact-support.proof.md",
+  "place": "Paragraph 2, coefficient maps making the compact-support objects a normalized tower: input quotient maps and output unit/cocycle; returned normalized-realization proof Steps 1--2."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-integral-derived-reduction",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "def-compact-support-direct-image-detailed",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "def-coef-compact-support-reduction-maps",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-coef-scalar-restriction-identity"
+ ],
+ "proof": [
+  {
+   "text": "The coordinate module proves the identity and composition of the actual quotient ring maps and retains the canonical restriction identity/composition isomorphisms and the ordinary cochain computations unchanged; its module-specification body factors the same equations through reducible section-formula abbreviations.",
+   "uses": [
+    "lem-coef-compact-support-quotient-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every flat-term K-flat P, the universal scalarReductionDerivedExistence witness says each homotopy counit is invertible. The cochain computation map is its composite with images of localization isomorphisms, hence is invertible. Construct the ordinary chain maps using their section formulas, then apply the separate universal-comparison theorem to these given maps. Combine these two facts with computation-map invertibility to prove compactSupportQuotient_representatives.",
+   "uses": [
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "lem-coef-compact-support-quotient-model-maps",
+    "lem-coef-compact-support-quotient-computation-squares"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved abstract adjunction calculation to the integral-to-m, integral-to-n and quotient adjunctions, with compactSupportRestrictionComp. It identifies the quotient adjunct with the canonical left-adjoint composition isomorphism, proving IsIso. The Hom equivalence apply_symm_apply identity gives the displayed rho = eta;Res(beta) equation. No representative or additional hypothesis is used.",
+   "uses": [
+    "lem-coef-compact-support-quotient-adjunct"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The input identity and quotient composition laws hold for the prescribed rho maps in the canonical constant-coefficient presentation. The presentation-conversion lemma restates them with the original scalar-reduction functors, restriction functors and identification isomorphisms of the public statement; the canonical wrappers have exactly these values.",
+   "uses": [
+    "lem-coef-compact-support-quotient-input-laws",
+    "lem-coef-compact-support-quotient-raw-input"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the output identity conversion to the input identity: compact support with the normalized identity coefficient square transports the input identity, written with the original intrinsic compact-support functor, comparison and identity identification.",
+   "uses": [
+    "lem-coef-compact-support-quotient-raw-output-identity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the output composition conversion to the input laws: the transported cocycle of the native presentation, obtained from the published coefficient composition square with the quotient composite cast, naturality and functoriality, is restated with the original intrinsic compact-support expressions. Pair all clauses.",
+   "uses": [
+    "lem-coef-compact-support-quotient-raw-output-composition",
+    "lem-coef-compact-support-quotient-input-laws"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-compact-support-quotient-coordinates",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "lem-coef-compact-support-quotient-model-maps",
+  "lem-coef-compact-support-quotient-computation-squares",
+  "lem-coef-compact-support-quotient-adjunct",
+  "lem-coef-compact-support-quotient-input-laws",
+  "lem-coef-compact-support-quotient-raw-input",
+  "lem-coef-compact-support-quotient-raw-output-identity",
+  "lem-coef-compact-support-quotient-raw-output-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-compact-support.proof.md",
+  "place": "Explicit Lean proof of computation-map invertibility, the ordinary tensor chain maps, adjunction normalization and naturality transport; the derived comparison squares, input coherence and identity coefficient normalization remain separate strictly smaller statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Quotient induced maps between derived reductions are independent of K flat resolutions and compact support preserves their unit and cocycle",
+   "results": "[leanfinder] OK 8 hit(s); CochainComplex.HomComplex.CohomologyClass.toHom_mk; CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk; CochainComplex.HomComplex.CohomologyClass.toSmallShiftedHom; CochainComplex.HomComplex.CohomologyClass.toHom; CochainComplex.HomComplex.CohomologyClass.toSmallShiftedHom_mk; CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk; CategoryTheory.InjectiveResolution.extMk; CochainComplex.HomComplex.CohomologyClass.descAddMonoidHom_cohomologyClass",
+   "date": "2026-10-22",
+   "verdict": "no match: Hom-complex cocycles, ordinary scalar restrictions and general localization do not give compact-support quotient maps and their output cocycle."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"restrict\"",
+   "results": "[loogle] OK 0 hit(s); No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: Hom-complex cocycles, ordinary scalar restrictions and general localization do not give compact-support quotient maps and their output cocycle."
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*cocycle|compactSupport.*restrict|lowerShriek",
+   "results": "[grep] OK 0 hit(s); No hits; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: Hom-complex cocycles, ordinary scalar restrictions and general localization do not give compact-support quotient maps and their output cocycle."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compactly supported derived direct image carries quotient reduction maps to a compatible inverse sequence",
+   "results": "[leansearch] OK 8 hit(s); InverseSystem.pEquivOnGlue; DirectLimit.map; HomologicalComplexUpToQuasiIso.quotientCompQhIso; HomotopyCategory.homotopyOutMap; DerivedCategory.quotientCompQhIso; CompactlySupportedContinuousMap.comp; CategoryTheory.Functor.mapDerivedCategoryFactorsh; Module.DirectLimit.quotMk_of",
+   "date": "2026-10-22",
+   "verdict": "no match: Hom-complex cocycles, ordinary scalar restrictions and general localization do not give compact-support quotient maps and their output cocycle."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural family of restriction of scalars comparisons transports the cocycle of coefficient reduction maps",
+   "results": "[leanfinder] OK 8 hit(s); groupCohomology.resNatTrans_app; groupCohomology.mapCocycles₁; ModuleCat.restrictScalarsComp'App; groupCohomology.cocyclesMap_comp_isoCocycles₁_hom_apply; groupCohomology.mapCocycles₂; groupCohomology.coe_mapCocycles₁; groupCohomology.cocyclesMap; ModuleCat.restrictScalarsComp'_hom_app",
+   "date": "2026-10-22",
+   "verdict": "no match: Hom-complex cocycles, ordinary scalar restrictions and general localization do not give compact-support quotient maps and their output cocycle."
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*cocycle|compactSupport.*restrict|lowerShriek",
+   "results": "OK 0 hit(s): none; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: returned ordinary module/sheaf restrictions, module associators and adic module quotients do not state the fixed-compactification unbounded pro-etale assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compact support derived direct image restriction of scalars coefficient quotient transition cocycle",
+   "results": "OK 8 hit(s): SheafOfModules.restrictScalars, PresheafOfModules.restrictScalars, PresheafOfModules.restrictScalarsObj, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, Derivation.restrictScalars, ModuleCat.Tilde.toOpen, ContDiffMapSupportedIn.coe_smul, SheafOfModules.restrictScalars_map_val",
+   "date": "2026-10-22",
+   "verdict": "no match: returned ordinary module/sheaf restrictions, module associators and adic module quotients do not state the fixed-compactification unbounded pro-etale assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"restrictScalars\"",
+   "results": "OK 0 hit(s): none",
+   "date": "2026-10-22",
+   "verdict": "no match: returned ordinary module/sheaf restrictions, module associators and adic module quotients do not state the fixed-compactification unbounded pro-etale assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived reduction modulo nested ideals has canonical quotient transition maps independent of K flat resolutions",
+   "results": "OK 8 hit(s): Ideal.quotientToQuotientRangePowQuotSuccAux_mk, AdicCompletion.transitionMap_ideal_mk, AdicCompletion.transitionMap_comp_reduceModIdeal, Ideal.quotientToQuotientRangePowQuotSuccAux, AdicCompletion.transitionMapₐ, Ideal.powQuotSuccInclusion_apply_coe, Ideal.quotientToQuotientRangePowQuotSucc_mk, Ideal.powQuotSuccInclusion",
+   "date": "2026-10-22",
+   "verdict": "no match: returned ordinary module/sheaf restrictions, module associators and adic module quotients do not state the fixed-compactification unbounded pro-etale assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars composition associator on unbounded derived categories of sheaves of modules",
+   "results": "OK 8 hit(s): ModuleCat.extendScalars_assoc', SheafOfModules.pushforward_assoc, ModuleCat.extendScalars_assoc, ModuleCat.extendScalars_assoc_assoc, CategoryTheory.Abelian.Ext.comp_assoc, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.NatTrans.rightDerived_comp_assoc, CategoryTheory.Functor.mapExactFunctor_smul",
+   "date": "2026-10-22",
+   "verdict": "no match: returned ordinary module/sheaf restrictions, module associators and adic module quotients do not state the fixed-compactification unbounded pro-etale assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-compact-support-normalized-realization",
+  "date": "2026-10-22",
+  "group": "O1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "lem-coef-integral-compact-support",
+   "place": "Paragraph 2, coefficient maps making the compact-support objects a normalized tower: input quotient maps and output unit/cocycle; returned normalized-realization proof Steps 1--2.",
+   "via": [
+    "lem-coef-compact-support-normalized-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-coef-compact-support-quotient-cocycle",
+  "worker": "stage1",
+  "summary": "Q118 checked the current blueprint and existing node statements, found no exact upstream declaration or Mathlib match, and supplied a six-step proof without new nodes. Resolution independence follows from uniqueness under the integral coefficient adjunction; the tensor inverse, identity and both cocycles are explicit. Statement unchanged.",
+  "blueprint": "lem-coef-integral-compact-support.proof.md, paragraph 2: the coefficient maps making the compact-support objects a normalized tower; input quotient normalization and output unit/cocycle only.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Provides unbounded flat-term K-flat representatives, a generic homological tool; no compact-support argument is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "why": "Provides K-flatness and flat terms after scalar extension along the identity topos; generic resolution tool absent from this unit."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Computes the derived scalar extensions on these representatives and gives their canonical model identifications."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Its normalized Hom bijection defines the quotient arrow intrinsically and identifies its adjunct on representatives."
+   },
+   {
+    "node": "lem-sf-compact-support-restriction-of-scalars",
+    "why": "Provides the already specified coherent fixed-compactification restriction comparison used in the statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sf-compact-support-restriction-of-scalars"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q118-2a11b2c48",
+  "group": "Q118",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q118-2a11b2c48 (reviewer sub-agent of L); spot-checked: I read all six steps and every cited statement in full, and found no fault. Shape: one commit; the statement, stmt_deps and blueprint fields are byte-identical to the live side node, which is still unsplit. No new nodes. The transitive closure (11598 nodes) has no cycle and nothing from route-pivot-dropped.txt. No SGA. This is a new node of the parent's re-split (it is cited as normalized-realization Step 1); it has no re-split note of its own, so the ordinary split rules apply. Step 1: lem-pc-kflat-resolution, then ringed-topos-kflat-pullback with u=id and c=pi_m, then derived-change-of-rings(2) for P_m. Stacks 06YS, 0G7E and 06YY were checked at their labels. Step 2: the Hom bijection for pi_m with target Res_{m,n}K_n. U_m Res_{m,n}=U_n holds literally because q pi_m=pi_n; that identity comes from def-weil-completed-integral-coefficients, a stmt_dep not cited in the step (advisory only). Clauses (1) and (2) give the adjunct of u_n as x(x)u -> x(x)q(u), so rho is intrinsic and independent of P. Step 3: clause (2) for q_{m,n} on the K-flat flat-term P_m gives b. I checked the inverse x(x)v -> (x(x)1)(x)v is balanced over R-hat, both composites are the identity, and the maps respect differentials; then rho=Res(beta)eta. Step 4: the identity and cocycle hold on a common P, which Step 2 justifies. Step 5: the hypotheses of lem-sf-compact-support-restriction-of-scalars hold: finite rings A_n, ell invertible on Y, one fixed compactification c, full unbounded D. Its composition clause with A->A->A gives sigma=sigma*sigma, hence sigma=1. Step 6: I re-derived the naturality-plus-composition calculation and the sources and targets match. Edge cases checked: K=0, m=n, r=m, n=1 non-flat quotient, proper f with j=id. Nearby nodes lem-pe-kflat-scalar-tower-realization and def-coef-compact-support-reduction-maps were read: they overlap in part but neither restates the item. tool_uses accepted: generic K-flat and adjunction tools from picard-semicon, properbasechange and sf-operations, plus the sigma node the statement mandates."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompactSupportQuotientCocycle",
+  "declaration": "WeilConjectures.compactSupport_quotient_cocycle",
+  "declarations": [
+   "WeilConjectures.compactSupportQuotient_representatives",
+   "WeilConjectures.compactSupport_quotient_cocycle"
+  ],
+  "file": "lean/Sheaf/Paper/CompactSupportQuotientCocycle.lean",
+  "statement": "theorem compactSupport_quotient_cocycle (k : Type u) [Field k] (_hl : IsUnit (l : k)) {X Y : Scheme.{u}} {f : X ⟶ Y} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [f.IsOver (Spec (.of k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) (K : DerivedCategory (scalarReductionSource.{u, u} l E X)) : (∀ (m n : ℕ) (h : n ≤ m), IsIso ((((pbcDerivedScalarAdjunction (compactSupportLevelSheafQuotient l E X m n h)).homEquiv _ _).symm (compactSupportReductionMap l E X m n h K))) ∧ compactSupportReductionMap l E X m n h K = (pbcDerivedScalarAdjunction (compactSupportLevelSheafQuotient l E X m n h)).unit.app ((scalarReductionDerivedExtension.{u, u} l E X m).obj K) ≫ (proEtaleCoefficientRestrictScalars X (compactSupportLevelQuotient l E m n h)).mapDerivedCategory.map ((((pbcDerivedScalarAdjunction (compactSupportLevelSheafQuotient l E X m n h)).homEquiv _ _).symm (compactSupportReductionMap l E X m n h K)))) ∧ (∀ n : ℕ, compactSupportReductionMap l E X n n le_rfl K ≫ (compactSupportQuotientResId l E X n).hom.app ((scalarReductionDerivedExtension.{u, u} l E X n).obj K) = 𝟙 _) ∧ (∀ (r m n : ℕ) (hrm : m ≤ r) (hmn : n ≤ m), compactSupportReductionMap l E X r m hrm K ≫ (proEtaleCoefficientRestrictScalars X (compactSupportLevelQuotient l E r m hrm)).mapDerivedCategory.map (compactSupportReductionMap l E X m n hmn K) ≫ (compactSupportQuotientResComp l E X r m n hrm hmn).hom.app ((scalarReductionDerivedExtension.{u, u} l E X n).obj K) = compactSupportReductionMap l E X r n (hmn.trans hrm) K) ∧ (∀ n : ℕ, ((sfIntrinsicCompactSupport c (Padic.coefficientExtensionRing l E (n + 1))).map (compactSupportReductionMap l E X n n le_rfl K) ≫ (sfCompactSupportRestriction c (compactSupportLevelQuotient l E n n le_rfl)).hom.app ((scalarReductionDerivedExtension.{u, u} l E X n).obj K)) ≫ (compactSupportQuotientResId l E Y n).hom.app ((sfIntrinsicCompactSupport c (Padic.coefficientExtensionRing l E (n + 1))).obj ((scalarReductionDerivedExtension.{u, u} l E X n).obj K)) = 𝟙 _) ∧ (∀ (r m n : ℕ) (hrm : m ≤ r) (hmn : n ≤ m), ((sfIntrinsicCompactSupport c (Padic.coefficientExtensionRing l E (r + 1))).map (compactSupportReductionMap l E X r m hrm K) ≫ (sfCompactSupportRestriction c (compactSupportLevelQuotient l E r m hrm)).hom.app ((scalarReductionDerivedExtension.{u, u} l E X m).obj K)) ≫ (proEtaleCoefficientRestrictScalars Y (compactSupportLevelQuotient l E r m hrm)).mapDerivedCategory.map (((sfIntrinsicCompactSupport c (Padic.coefficientExtensionRing l E (m + 1))).map (compactSupportReductionMap l E X m n hmn K) ≫ (sfCompactSupportRestriction c (compactSupportLevelQuotient l E m n hmn)).hom.app ((scalarReductionDerivedExtension.{u, u} l E X n).obj K))) ≫ (compactSupportQuotientResComp l E Y r m n hrm hmn).hom.app ((sfIntrinsicCompactSupport c (Padic.coefficientExtensionRing l E (n + 1))).obj ((scalarReductionDerivedExtension.{u, u} l E X n).obj K)) = ((sfIntrinsicCompactSupport c (Padic.coefficientExtensionRing l E (r + 1))).map (compactSupportReductionMap l E X r n (hmn.trans hrm) K) ≫ (sfCompactSupportRestriction c (compactSupportLevelQuotient l E r n (hmn.trans hrm))).hom.app ((scalarReductionDerivedExtension.{u, u} l E X n).obj K)))",
+  "branch": "sheaf-dag",
+  "by": "Q50",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Representative formulas and resolution independence are stated in compactSupportQuotient_representatives and CompactSupportQuotientModuleSpec. The main declaration gives the normalized beta/unit equation and both input/output unit and quotient cocycles, on arbitrary unbounded K. Natural index n denotes positive exponent n+1. Canonical published rho and sigma are used directly."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4ca8568ec",
+  "group": "Q50",
+  "result": "pass",
+  "note": "Re-delivery of 4b896f (RETURN H2+H13; maths accepted then). H13 fixed: the delivered lem-sf-compact-support-restriction-of-scalars record equals the live N2 record (IntrinsicCompactSupportRestriction, existing:false, by N2) with only sfCompactSupportRestriction and sfCompactSupportRestriction_comp appended. H2 fixed: theorem stmt_dep lem-sf-open-extension-scalar-restriction-coherence replaced by new def-coef-scalar-restriction-identity, existing:true on the unchanged ProEtaleOpenScalarRestrictionCoherence; its decls sfOpenCoefficientRestrictionId (l.82) and sfOpenDerivedCoefficientRestrictionId (l.614) are real (sectionwise restrictScalarsId' transported through sfIntrinsicModuleEquivalence, then termwise localisation and mapDerivedCategoryIdIso); its statement is verbatim in live; its stmt_deps are all def nodes; no other def node owns these decls. No base stmt_dep dropped. Lean delta: only attribute [local irreducible] Padic.coefficientExtensionIdeal and redundant em.hom/en.hom type ascriptions; meaning unchanged; main signature verbatim. Re-checked: σ stmt_dep genuine (sfDerivedImageRestriction = .choose); sfDerivedCoefficientRestrictionComp is part of that node's own composition clause; ρ/τ unit and cocycle and β clause orientations; hypotheses; edge cases m=n, r=m, n=0 (exponent 1). No file changed, so no compile; worker reports server compiles 38.3/32.7 s and deliver2 dry-run OK. Advisory: the def node's Lean uses sfRealizationRestriction (.choose in the σ module) without citing that node."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-c35df",
+  "group": "Q3",
+  "result": "fix",
+  "landing": "20261027T135438-L-3708061",
+  "kind": "interface",
+  "note": "independent cc review: Q3 c35df53c819c (byte-identical to fd5b): item theorems vs published signatures, 20 new modules vs their nodes, node proof_deps vs step uses and merge rules (stage3_delivery check_nodes), both direct importers compiled against the delivered modules"
+ }
+}

@@ -1,0 +1,221 @@
+{
+ "id": "lem-sfb-complete-dvr-cocharacter-cartan",
+ "kind": "statement",
+ "title": "Cocharacter Cartan factorization over a complete DVR",
+ "statement": "Let $A$ be a discrete valuation ring [def-sc-discrete-valuation-ring], let $\\pi$ be a uniformizer, and let $K$ be its fraction field. Assume $A\\to\\varprojlim_{n\\geq1}A/(\\pi^n)$ is bijective [def-weil-pbc-adic-completion]. An $A$-group scheme has multiplication, identity and inverse satisfying the diagrams of [def-sc-group-scheme] with base $\\operatorname{Spec}A$. A reductive $A$-group scheme here means a smooth [def-sbc-smooth-morphisms] affine finite-type [def-weil-finite-type-morphism] $A$-group scheme with reductive geometric fibres: over every algebraically closed field a fibre is connected [def-weil-connected-scheme], with no nontrivial smooth connected normal unipotent subgroup. Unipotent means that all geometric points are unipotent matrices in a faithful representation. Write $\\mathbf G_{m,A}=\\operatorname{Spec}A[z,z^{-1}]$ with multiplication of units. For an $A$-algebra $B$, $H(B)$ means $A$-scheme morphisms $\\operatorname{Spec}B\\to H$, with the induced group law. A cocharacter is an $A$-group homomorphism $\\mathbf G_{m,A}\\to H$. Let $H$ be a reductive $A$-group scheme. For every $g\\in H(K)$ there exist $a,b\\in H(A)$ and a cocharacter $\\lambda:\\mathbf G_{m,A}\\to H$ such that $g=a\\lambda_K(\\pi)b$ in $H(K)$. There is no assumption that the residue field is perfect, finite or algebraically closed, and no splitness assumption on $H$.",
+ "source": {
+  "document": "literature/alper-halpern-leistner-heinloth-cartan-iwahori-matsumoto.pdf",
+  "place": "WANTED locally; read author-hosted https://sites.math.washington.edu/~jarod/papers/iwahori.pdf. Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-adic-completion",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-connected-scheme",
+  "def-sfb-reductive-torus-centralizer-terminology"
+ ],
+ "proof": [
+  {
+   "text": "Put $k=A/(\\pi)$, $X=\\operatorname{Spec}A[s,t]/(st-\\pi)$ and $o=V(s,t)$. Give $X$ weights $(1,-1)$ and put $U=X\\setminus\\{o\\}=D(s)\\cup D(t)$. On $D(s)=\\operatorname{Spec}A[s,s^{-1}]$ and $D(t)=\\operatorname{Spec}A[t,t^{-1}]$, take the trivial right $H$-torsors with action only on the base. On their intersection, $\\operatorname{Spec}K[s,s^{-1}]$, identify the fibre coordinates by $h_t=g h_s$. The inverse transition is multiplication by $g^{-1}$; these satisfy the cocycle identities. Apply [lem-galois-glue] to glue the schemes. The right $H$-actions and the left $\\mathbf G_m$-actions agree on the overlap because left multiplication by $g$ commutes with right multiplication and $g$ is constant along the base action. They glue by the same uniqueness; the torsor identities and local triviality hold on both charts. Denote the resulting equivariant torsor by $P_g\\to U$.",
+   "uses": [
+    "lem-galois-glue",
+    "def-sfb-split-solvable-right-torsors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-halpern-leistner-heinloth-cartan-iwahori-matsumoto.pdf",
+    "place": "Section 2, Claim 1; Section 3.3, construction of rho_g before Lemma 3.6."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-reductive-nodal-equivariant-torsor-extension] to $P_g$: its group is precisely the smooth affine finite-type reductive $A$-group in the hypotheses. Obtain an equivariant torsor $\\widetilde P\\to X$ with $\\widetilde P|_U\\simeq P_g$. Restrict to the branch $t=0$, which is $L=\\operatorname{Spec}k[s]$ with weight $+1$. Let $T=\\widetilde P|_o$. Compare $\\widetilde P|_L$ with the constant torsor $L\\times_kT$, on which the action is the diagonal of scaling on $L$ and the induced action on $T$. Their fibres at zero are equivariantly identified by the identity on $T$, so [lem-sfb-contracting-line-equivariant-torsor-rigidity] identifies the two torsors on $L$. At $s=1$ the first is trivial, since this point lies in $D(s)$ and the prescribed restriction is $P_g$. Thus $T$ has a $k$-point $p$. Right translation $h\\mapsto ph$ trivializes $T$.",
+   "uses": [
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-contracting-line-equivariant-torsor-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-halpern-leistner-heinloth-cartan-iwahori-matsumoto.pdf",
+    "place": "Lemma 3.6, proof of (2) implies (1), first paragraph, with the two branches interchanged."
+   }
+  },
+  {
+   "text": "The action on the trivialized fibre $T$ determines $\\lambda_0:\\mathbf G_{m,k}\\to H_k$ by $z\\cdot p=p\\lambda_0(z)$. Commutation with the right action gives $z\\cdot(ph)=p\\lambda_0(z)h$; the action identity gives $\\lambda_0(zz\\prime)=\\lambda_0(z)\\lambda_0(z\\prime)$ on all test schemes. It is a morphism of schemes since it is the action on $p$ composed with the torsor trivialization. Apply [lem-sfb-complete-dvr-cocharacter-lifting] to lift it to $\\lambda:\\mathbf G_{m,A}\\to H$. Define $P_\\lambda=X\\times_A H$ with $z\\cdot(x,h)=(z\\cdot x,\\lambda(z)h)$. The chosen point $p$ gives an equivariant isomorphism $P_\\lambda|_o\\simeq T$. By [lem-sfb-nodal-equivariant-torsor-rigidity] this extends to an equivariant isomorphism $P_\\lambda\\simeq\\widetilde P$. Both applications use the stipulated completeness of $A$ and smoothness and affineness of $H$; neither uses any property of the residue field.",
+   "uses": [
+    "lem-sfb-complete-dvr-cocharacter-lifting",
+    "lem-sfb-nodal-equivariant-torsor-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-halpern-leistner-heinloth-cartan-iwahori-matsumoto.pdf",
+    "place": "Lemma 3.6, proof of (2) implies (1), second paragraph; Lemma 3.3."
+   }
+  },
+  {
+   "text": "Here is the transition calculation, including its orientation. For the global fibre coordinate $h$ on $P_\\lambda$, use $q_s=\\lambda(s)^{-1}h$ on $D(s)$ and $q_t=\\lambda(t)h$ on $D(t)$. These coordinates are invariant under $z$, because $s$ has weight $+1$, $t$ has weight $-1$ and $h$ transforms by $\\lambda(z)$. On the overlap, $q_t=\\lambda(t)\\lambda(s)q_s=\\lambda(\\pi)q_s$, so $P_\\lambda|_U$ has transition $\\lambda_K(\\pi)$. Invert the preceding isomorphism to get $P_g\\simeq P_\\lambda|_U$. A right $H$-equivariant map in either chart is left multiplication by a chart morphism to $H$. Base equivariance makes that morphism invariant under scaling; evaluating the equality $f(zs)=f(s)$ at $s=1$ (respectively $f(z^{-1}t)=f(t)$ at $t=1$) makes it the pullback of a point $c_s\\in H(A)$ (respectively $c_t\\in H(A)$). Compatibility with the two transitions is $c_tg=\\lambda_K(\\pi)c_s$. Hence $g=c_t^{-1}\\lambda_K(\\pi)c_s$. Take $a=c_t^{-1}$ and $b=c_s$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/alper-halpern-leistner-heinloth-cartan-iwahori-matsumoto.pdf",
+    "place": "Lemma 3.6, observations (A), (B) and conclusion; Section 2, final observations (A), (B)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-galois-glue",
+  "def-sfb-split-solvable-right-torsors",
+  "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+  "lem-sfb-contracting-line-equivariant-torsor-rigidity",
+  "lem-sfb-complete-dvr-cocharacter-lifting",
+  "lem-sfb-nodal-equivariant-torsor-rigidity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/alper-halpern-leistner-heinloth-cartan-iwahori-matsumoto.pdf",
+  "place": "Following the author-hosted paper, Theorem 1.3 (1) implies (2) implies (3), Lemmas 3.3 and 3.6; WANTED local archival copy. The argument is recorded as agent-written pending local acquisition."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cartan decomposition for a connected reductive group scheme over a complete discrete valuation ring with arbitrary residue field using an integral cocharacter",
+   "results": "{\"t\": \"2026-10-24T03:15:16Z\", \"tool\": \"leanfinder\", \"query\": \"Cartan decomposition for a connected reductive group scheme over a complete discrete valuation ring with arbitrary residue field using an integral cocharacter\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.cartanSubalgebra'\", \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra'\", \"RootPairing.GeckConstruction.h'\", \"RootPairing.GeckConstruction.cartanSubalgebra\", \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra\", \"RootPairing.GeckConstruction.cartanSubalgebra_le_lieAlgebra\", \"LieAlgebra.cartan_sup_iSup_rootSpace_eq_top\", \"RootPairing.GeckConstruction.instIsTriangularizableSubtypeMatrixSumMemFinsetSupportLieSubalgebraLieAlgebraCartanSubalgebra'Forall\"], \"digest\": \"c7ee8b0b5da0509e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Cartan subalgebras and valuation uniformizers do not provide a decomposition of rational points of reductive group schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Over a complete discrete valuation ring every rational point of a reductive group equals h1 lambda uniformizer h2",
+   "results": "{\"t\": \"2026-10-24T03:15:15Z\", \"tool\": \"leansearch\", \"query\": \"Over a complete discrete valuation ring every rational point of a reductive group equals h1 lambda uniformizer h2\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Valuation.IsUniformizer\", \"ValuativeRel.uniformizer\", \"Valuation.Uniformizer.mk'\", \"Valuation.IsUniformizer.not_isUnit\", \"Valuation.Uniformizer.ext\", \"Valuation.IsUniformizer.congr_simp\", \"Valuation.IsUniformizer.iff\", \"ValuativeRel.le_uniformizer_iff\"], \"digest\": \"b8cb307ed5deac1c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Cartan subalgebras and valuation uniformizers do not provide a decomposition of rational points of reductive group schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsDiscreteValuationRing\", \"DoubleCoset\"",
+   "results": "{\"t\": \"2026-10-24T03:15:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsDiscreteValuationRing\\\", \\\"DoubleCoset\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Cartan subalgebras and valuation uniformizers do not provide a decomposition of rational points of reductive group schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "Cartan.*decomposition|Iwahori|hyperspecial|SplitReductive",
+   "results": "{\"t\": \"2026-10-24T03:15:14Z\", \"tool\": \"grep\", \"query\": \"Cartan.*decomposition|Iwahori|hyperspecial|SplitReductive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Cartan subalgebras and valuation uniformizers do not provide a decomposition of rational points of reductive group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every element of a reductive algebraic group over a complete valued discretely valued field is integral times a uniformizer evaluated at a one parameter subgroup times integral",
+   "results": "{\"t\": \"2026-10-24T03:16:16Z\", \"tool\": \"leanfinder\", \"query\": \"Every element of a reductive algebraic group over a complete valued discretely valued field is integral times a uniformizer evaluated at a one parameter subgroup times integral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Valuation.exists_pow_Uniformizer\", \"Valuation.Uniformizer.val\", \"Valuation.Uniformizer.instCoeSubtypeMemSubringInteger\", \"Valuation.Uniformizer\", \"ValuativeRel.uniformizer\", \"Valuation.exists_isUniformizer_of_isCyclic_of_nontrivial\", \"Valuation.IsUniformizer.zpowers_eq_valueGroup\", \"Valuation.instNonemptyUniformizer\"], \"digest\": \"7fccdd3bed06a2b4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Cartan subalgebras and valuation uniformizers do not provide a decomposition of rational points of reductive group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Double cosets of integral points and one parameter subgroups in a reductive group over a complete DVR",
+   "results": "CuspOrbits: For a subgroup $\\mathcal{G}$ of $\\mathrm{GL}(2, \\mathbb{R})$, this is the quotient of the set of cusps (points in $\\text{OnePoint}\\, \\mathbb{R}$ fixed by parabolic elements of $\\mathcal{G}$) by the eq; cosetToCuspOrbit: The function maps each coset of the preimage subgroup $\\mathcal{G} \\subseteq \\mathrm{GL}(2, \\mathbb{R})$ in $\\mathrm{SL}(2, \\mathbb{Z})$ to the cusp orbit containing the image of $\\infty$ under the ac; surjective_cosetToCuspOrbit: For any arithmetic subgroup $\\mathcal{G} \\leq \\mathrm{GL}(2, \\mathbb{R})$, the map from cosets of $\\mathcal{G}$ in $\\mathrm{SL}(2, \\mathbb{Z})$ to cusp orbits is surjective. This means every cusp orbi; cosetToCuspOrbit_apply_mk: For an arithmetic subgroup $\\mathcal{G} \\subseteq \\mathrm{GL}(2, \\mathbb{R})$ and any element $g \\in \\mathrm{SL}(2, \\mathbb{Z})$, applying the coset-to-cusp-orbit map to the coset $[g]$ yields the cus; Subgroup.IsRegularAtInfty: A subgroup $\\mathcal{G} \\subseteq \\mathrm{GL}(2,R)$ is regular at infinity if its strict periods subgroup equals its periods subgroup, i.e., when $\\mathcal{G}.\\text{strictPeriods} = \\mathcal{G}.\\text{; NumberField.mixedEmbedding.fundamentalCone.exists_unitSMul_mem_integerSet: For any non-zero element $x$ in the image of the canonical embedding of the ring of integers $\\mathcal{O}_K$ into the mixed embedding space of a number field $K$, there exists a unit $u \\in (\\mathcal{; Subgroup.IsArithmetic: A predicate asserting that a given subgroup of the general linear group $\\mathrm{GL}(2, \\mathbb{R})$ is arithmetic, meaning it satisfies conditions related to commensurability with the group of intege; ModularGroup.exists_smul_mem_fd: For every complex number $ z $ in the upper half-plane $ \\mathbb{H} $, there exists an element $ g $ in the modular group $ \\mathrm{SL}(2, \\mathbb{Z}) $ such that the Möbius transformation $ g \\cdot z",
+   "date": "2026-10-24",
+   "verdict": "no match: Only general algebraic or topological torsors, ring lifting, or unrelated geometric declarations; none states this equivariant group-scheme result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartan factorization reductive group scheme complete discrete valuation ring",
+   "results": "IsDiscreteValuationRing.ofHasUnitMulPowIrreducibleFactorization: If a commutative domain $ R $ contains an irreducible element $ p $ such that every non-zero element of $ R $ is associated to $ p^n $ for some natural number $ n $, then $ R $ is a discrete valuation; IsDiscreteValuationRing.HasUnitMulPowIrreducibleFactorization: There exists an irreducible element $ p $ in the commutative ring $ R $ such that every non-zero element $ x $ of $ R $ is associated to $ p^n $ for some natural number $ n $.; LieSubalgebra.IsCartanSubalgebra.casesOn: A Cartan subalgebra of a Lie algebra over a commutative ring $ R $ is a nilpotent Lie subalgebra that is equal to its own normalizer in the Lie algebra.; Valued.integer.compactSpace_iff_completeSpace_and_isDiscreteValuationRing_and_finite_residueField: For a valued field $ K $ with a rank one valuation, the ring of integers $ \\mathcal{O}[K] $ is compact if and only if it is complete, a discrete valuation ring, and its residue field $ \\kappa[K] $ is ; Valued.integer.properSpace_iff_completeSpace_and_isDiscreteValuationRing_integer_and_finite_residueField: For a field $ K $ equipped with a rank one valuation, the topology induced by the valuation makes $ K $ a proper space (every closed ball is compact) if and only if $ K $ is complete, its ring of inte; IsNonarchimedeanLocalField.instCompleteSpaceSubtypeMemSubringIntegerValueGroupWithZeroValuation: The ring of integers $\\mathcal{O}_K$ in a non-Archimedean local field $K$ is a complete topological space with respect to the topology induced by the valuation on $K$.; PadicInt.instIsDiscreteValuationRing: The ring of p-adic integers $\\mathbb{Z}_p$ is a discrete valuation ring. This means it is a commutative integral domain with a discrete valuation, characterized by having a unique non-zero maximal ide; IsDiscreteValuationRing.isRankOneDiscrete: For a discrete valuation ring $ A $ with fraction field $ K $, the valuation associated to the maximal ideal of $ A $ is a rank one discrete valuation. This means its value group is a linearly ordered",
+   "date": "2026-10-24",
+   "verdict": "no match: Only general algebraic or topological torsors, ring lifting, or unrelated geometric declarations; none states this equivariant group-scheme result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-reductive-dvr-cartan-decomposition",
+  "date": "2026-10-24",
+  "group": "Q143"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1.",
+   "via": [
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-complete-dvr-cocharacter-cartan",
+  "worker": "stage1",
+  "summary": "Retained the statement over arbitrary complete DVRs; expanded the equivariant torsor proof rather than using the algebraically closed residue-field version. Four smaller statement-only inputs isolate reductive extension, contraction, cocharacter lifting and nodal fullness; all were searched with two semantic phrasings, Loogle, grep and LeanSearch. Wrote the final chart calculation explicitly, checked its signs and cited general scheme gluing with a tool-use declaration.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images proof (3) through the existing alteration/moduli/reductivity chain recorded in blueprint.from; realizes the complete-DVR input in the parent Cartan split without changing the unit route. The inherited nearest-ancestor field is null because the creation chain ends at a stage-3 module; the prescribed ancestor tool also returns None.",
+  "tool_uses": [
+   {
+    "node": "lem-galois-glue",
+    "why": "General Zariski gluing of schemes and its uniqueness constructs the two-chart torsor and glues the compatible actions; the current unit has no generic scheme-gluing statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-galois-glue"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-ed1f8813c",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-ed1f8813c (reviewer sub-agent of L); spot-checked: Read the item, all 4 new nodes, the cited nodes and the only citer (split-reductive-dvr-cartan, which uses the item verbatim). The Alper–Halpern-Leistner–Heinloth paper is not archived locally; I read the author-hosted PDF in full and the place fields match it. Item = Thm 1.3 (1)=>(3) with Def 3.4 (p.1, pp.5-6). Arbitrary residue field is the paper's own theorem; checked on the anisotropic torus over R[[t]] (T(K)=T(A)) and on G_m. Step 1 = Claim 1: charts D(s)=A[s^±], D(st)=K[s^±]; the constant transition g commutes with both actions; lem-galois-glue accepted as a generic gluing tool_use. Step 2 = Claim 2 plus the inner claim of Lemma 3.6, on branch L=k[s] with weight +1; the point (1,0) lies in D(s), so T has a k-point and no residue-field property is used. Step 3: lambda_0 is a homomorphism (checked); P_lambda is equivariant and matches T via p; Lemma 3.3 fullness extends it. Step 4 checked by hand: the chart coordinates are invariant, the transition is lambda(pi), equivariant chart maps are constants c_s, c_t in H(A), and g=c_t^{-1}lambda(pi)c_s. New nodes: extension = S-completeness of BH (connected fibres, no completeness); contracting-line fullness, true over any field (unipotent kernel has H^1=0); cocharacter lifting (completeness needed, per §4); nodal fullness = Lemma 3.3. All four are true and self-contained, none restates the item, none is a duplicate (DAG statement scan), and no SGA is cited. Notes: archive the PDF; later splits of the lifting and extension nodes need non-SGA routes, since AHLH uses SGA3 IX 7.3 and étale-local splitting. blueprint.from.node=null is inherited from the base. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.CompleteDvrCocharacterCartan",
+  "declaration": "AlgebraicGeometry.completeDvr_cocharacter_cartan",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/CompleteDvrCocharacterCartan.lean",
+  "statement": "theorem completeDvr_cocharacter_cartan (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A] (pi : A) (hpi : Irreducible pi) [IsAdicComplete (Ideal.span ({pi} : Set A)) A] (K : Type u) [Field K] [Algebra A K] [IsFractionRing A K] (H : Grp (Over (Spec (.of A)))) [IsAffine H.X.left] [Smooth H.X.hom] [LocallyOfFiniteType H.X.hom] [QuasiCompact H.X.hom] (hred : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (f : A →+* Ω), ReductiveTorusCentralizer.IsReductive ((Over.pullback (Spec.map (CommRingCat.ofHom f))).mapGrp.obj H)) (g : (Spec (.of K)).asOver (Spec (.of A)) ⟶ H.X) : ∃ (a b : 𝟙_ (Over (Spec (.of A))) ⟶ H.X) (lambda : Grp.mk ((Spec (.of (LaurentPolynomial A))).asOver (Spec (.of A))) ⟶ H) (t : (Spec (.of K)).asOver (Spec (.of A)) ⟶ (Spec (.of (LaurentPolynomial A))).asOver (Spec (.of A))), t.left = Spec.map (CommRingCat.ofHom (LaurentPolynomial.eval₂ (algebraMap A K) (Units.mk0 (algebraMap A K pi) ((map_ne_zero_iff (algebraMap A K) (IsFractionRing.injective A K)).mpr hpi.ne_zero)))) ∧ g = (toUnit ((Spec (.of K)).asOver (Spec (.of A))) ≫ a) * (t ≫ lambda.hom.hom) * (toUnit ((Spec (.of K)).asOver (Spec (.of A))) ≫ b)",
+  "branch": "sheaf-dag",
+  "by": "Q116",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e3caa5429",
+  "group": "Q116",
+  "result": "pass",
+  "note": "Item changes only lean + stmt_deps (adds landed def-sfb-reductive-torus-centralizer-terminology, allowed by brief-stage2 §5); lean.statement verbatim; no live/side-live lean record for the item. Clauses checked: IsDiscreteValuationRing + Irreducible pi = DVR/uniformizer; IsAdicComplete (span{pi}) = bijectivity to lim A/(pi^n); Grp (Over Spec A) with IsAffine/Smooth/LocallyOfFiniteType/QuasiCompact = smooth affine finite-type group scheme; hred over every f : A →+* Ω (Ω alg. closed, Type u) with IsReductive of the actual pullback group; IsUnipotent includes Smooth, so only smooth connected normal unipotent subgroups are excluded (not stronger than the node); G_m = Spec of Mathlib's Hopf group algebra A[ℤ] (group-like comultiplication); λ a Grp hom; t pinned by t.left = Spec eval₂(algebraMap A K, π), exists and unique; g = (a_K)(λ_K(π))(b_K) in source order. Edge cases: trivial H, G_m, anisotropic tori, arbitrary residue fields and characteristics, universes all bound in u. Gates: no definitions, sorry only, source and blueprint docstrings with the 4-step proof, plain imports = recorded proof_dep modules. Not compiled: no file changed (2026-10-21 instruction). No findings."
+ }
+}

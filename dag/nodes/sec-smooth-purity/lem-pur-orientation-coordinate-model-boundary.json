@@ -1,0 +1,135 @@
+{
+ "id": "lem-pur-orientation-coordinate-model-boundary",
+ "kind": "statement",
+ "title": "Agreement of the two coordinate-boundary presentations",
+ "statement": "The Gysin chart and the ordinary/pro-etale coordinate model represent the same\nsupported class. Only the coordinate boundary is compared; no pullback or residue\nnormalization is asserted.\n\nIts exact Lean specification is: theorem orientation_coordinate_model_boundary (P : PurityFiniteSetting.{u}) (h : P.ramificationIndex ∣ P.level) (Y : Scheme.{u}) (a : Y ⟶ Spec (CommRingCat.of P.field.k)) (D : OrientationSupportData P h Y) (M : CoordinateBoundaryModel P Y) : D.coordinateBoundary P h a = M.alphaPro P h a\n\nNotions: [def-pur-conventions], [def-pur-affine-line-datum], [def-pur-orientation-support-data], [lem-pur-coordinate-boundary-geometric-pullback].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-pur-affine-line-orientation.proof.md",
+  "place": "geometric-fibre sentence: coordinate boundary and its rank-one local normalization"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-affine-line-datum",
+  "def-pur-orientation-support-data",
+  "lem-pur-coordinate-boundary-geometric-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Identify coordinateProInput with gysinInput. In degree one the right-derived\ncomparison sends evaluation of the Ext morphism on the constant unit to its global\ncohomology class. Both coordinateEtaleOpenClass and gysinKummerSection use exactly\nthis evaluation, the inverse canonical root-line pullback, and the canonical open\nlocalization isomorphism. The comparison unit and comparisonUpperStarCompUpperStarIso\ntherefore identify their open sections; uniqueness of isomorphisms over Line Y\nidentifies the two presentations of the open complement. On a bounded-below injective\nresolution, D.boundary_normalized and M.pro_normalized identify their model boundaries\nwith ShortExact.delta for the identical supported-kernel and restriction sequence.\nProof irrelevance identifies its short-exactness witnesses. Cancel the canonical\nsupportSequenceModelIso isomorphisms to identify the boundary components on that\nrepresentative. Naturality and an injective resolution of the input extend the equality\nto gysinInput. Applying this boundary equality to the already identified open sections\ngives the displayed equality with its specified sign. This works for arbitrary Y\nand a, including the empty scheme; finite type is unnecessary for this comparison.",
+   "uses": [
+    "lem-pur-relative-kummer-site-normalization",
+    "thm-pur-with-support-exactness",
+    "def-pur-support-boundary-normalization",
+    "lem-sc-bounded-below-injective-resolution-existence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-relative-kummer-site-normalization",
+  "thm-pur-with-support-exactness",
+  "def-pur-support-boundary-normalization",
+  "lem-sc-bounded-below-injective-resolution-existence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-pur-affine-line-orientation.proof.md",
+  "place": "geometric-fibre sentence: coordinate boundary and its rank-one local normalization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The localization boundary of the Kummer class of the affine line coordinate gives the normalized fundamental class of the zero section",
+   "results": "['WeierstrassCurve.Affine.CoordinateRing.XClass', 'WeierstrassCurve.Affine.CoordinateRing.XClass_ne_zero', 'WeierstrassCurve.Affine.CoordinateRing.YClass', \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'\", 'WeierstrassCurve.Affine.Point.toClass_zero', 'WeierstrassCurve.Affine.Point.toClass_apply', 'WeierstrassCurve.Affine.Point.toClass_some', 'WeierstrassCurve.Affine.Point.toClass']",
+   "date": "2026-10-25",
+   "verdict": "no match: displayed results concern unrelated objects; project comparison declarations were read separately"
+  },
+  {
+   "tool": "grep",
+   "query": "supportBoundaryNormalization|affineLine_orientation|coordinate_boundary_geometric_pullback",
+   "results": "[]",
+   "date": "2026-10-25",
+   "verdict": "no match: displayed results concern unrelated objects; project comparison declarations were read separately"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology with supports localization boundary Kummer class coordinate has residue one",
+   "results": "['IsLocalRing.isLocalHom_residue', 'IsLocalRing.residue_def', 'AlgebraicGeometry.Scheme.residue', 'AlgebraicGeometry.Scheme.residueField', 'AlgebraicGeometry.Scheme.residue_descResidueField', 'NumberField.dedekindZeta_residue_ne_zero', 'IsLocalRing.residue', 'IsLocalization.coeffIntegerNormalization_mem_support']",
+   "date": "2026-10-25",
+   "verdict": "no match: displayed results concern unrelated objects; project comparison declarations were read separately"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Kummer boundary of the affine line coordinate gives an orientation normalized to one at each geometric point",
+   "results": "['Complex.orientation', 'EuclideanGeometry.o', 'instOneTangentSpaceRealEuclideanSpaceFinOfNatNatEuclideanHalfSpaceModelWithCornersEuclideanHalfSpaceElemIcc', 'sign_eq_of_affineCombination_mem_affineSpan_single_lineMap', 'Orientation.volumeForm_def', 'AffineMap.lineMap_apply_one', 'Finset.affineCombinationLineMapWeights', 'Affine.Triangle.prod_div_one_sub_eq_one_of_mem_line_point_lineMap']",
+   "date": "2026-10-25",
+   "verdict": "no match: displayed results concern unrelated objects; project comparison declarations were read separately"
+  },
+  {
+   "tool": "grep",
+   "query": "gysinKummerSection|supportBoundaryNormalization|coordinateBoundary",
+   "results": "[]",
+   "date": "2026-10-25",
+   "verdict": "no match: displayed results concern unrelated objects; project comparison declarations were read separately"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatibility of the Kummer class and normalized support boundary with geometric pullback and the rank one residue",
+   "results": "['KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk.congr_simp', 'AlgebraicGeometry.Scheme.residue_descResidueField', 'AddValuation.onQuot_comap_eq', 'Valuation.self_le_supp_comap', 'Valuation.HasExtension.algebraMap_residue_eq_residue_algebraMap', 'KummerDedekind.emultiplicity_factors_map_eq_emultiplicity', 'KummerDedekind.normalizedFactors_ideal_map_eq_normalizedFactors_min_poly_mk_map', 'AlgebraicGeometry.Scheme.Pullback.residueFieldCongr_inv_residueFieldMap_ofPoint']",
+   "date": "2026-10-25",
+   "verdict": "no match: displayed results concern unrelated objects; project comparison declarations were read separately"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurityAffineLineOrientation",
+  "group": "C4",
+  "date": "2026-10-25"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-affine-line-orientation",
+   "place": "geometric-fibre sentence: coordinate boundary and its rank-one local normalization",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OrientationCoordinateModelBoundary",
+  "file": "lean/Sheaf/Paper/OrientationCoordinateModelBoundary.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.orientation_coordinate_model_boundary",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.orientation_coordinate_model_boundary"
+  ],
+  "statement": "theorem orientation_coordinate_model_boundary (P : PurityFiniteSetting.{u}) (h : P.ramificationIndex ∣ P.level) (Y : Scheme.{u}) (a : Y ⟶ Spec (CommRingCat.of P.field.k)) (D : OrientationSupportData P h Y) (M : CoordinateBoundaryModel P Y) : D.coordinateBoundary P h a = M.alphaPro P h a",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-125b4",
+  "group": "C4",
+  "result": "fix",
+  "landing": "20261025T122613-L-1789949",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-125b4",
+  "group": "C4",
+  "result": "fix",
+  "landing": "20261025T122613-L-1789949",
+  "kind": "interface",
+  "note": "independent cc review: delivered Lean and node files (identical to the 5b85642a3aa delivery) against clone 57df89d; delivered and corrected Data module each compiled with the 6 direct importers + Uniqueness in a sandbox; orientationSupportRestriction delivered body against the old body; split statements against their nodes; fix-file naming against tools/batch_land.py fixes()"
+ }
+}

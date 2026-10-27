@@ -291,7 +291,7 @@ theorem exists_localizingLowerShriekComposition_model
   have hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ := by
     rcases _hΛ with h | h
     · exact Or.inr (Or.inr (Or.inr (Or.inl ⟨E, h⟩)))
-    · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr h)))))
+    · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr h))))
   obtain ⟨_, _, hJ, _, _⟩ :=
     (openImmersionLowerShriek_localizing ℓ k (ringChar k) ((Fact.out : (ringChar k).Prime).pos)
       (Fact.out : ringChar k ≠ ℓ) Λ hΛ cf.i).2.2

@@ -1,0 +1,143 @@
+{
+ "id": "lem-pur-integral-object-pullback-quotient-basis",
+ "kind": "statement",
+ "title": "Compatible finite quotient bases under inverse image along a pro-etale object",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, a scheme $X$, an object $W\\to X$ of its small pro-etale site [def-weil-pbc-proetale-site], and a module sheaf $L$ over the completed integral coefficient sheaf $R_X$ [def-weil-completed-integral-coefficients]. Suppose $L|_W\\cong R_X|_W$ on the slice site [def-pur-localized-ringed-site]. Put $P=L[0]$ and $O=R_{W}[0]$, where $R_W$ is the completed coefficient sheaf on $W.left$. For every $n\\ge0$, let $F_n=\\operatorname{Res}_n W^*(P\\otimes_{R_X}A_{n,X})$ be the actual strict finite pullback complex [lem-pur-integral-operations-well-defined], and let $G_n$ be the strict identity-coefficient scalar-extension quotient of $O$ [lem-weil-integral-scalar-extension-well-defined]. Here $A_{n,T}$ denotes the constant quotient at exponent $n+1$, restriction is along the completed projection, and both towers retain their prescribed quotient transitions. There exist chain isomorphisms $b_n:F_n\\cong G_n$ such that $t^F_n b_n=b_{n+1}t^G_n$ for every $n$, in left-to-right composition order. No local freeness, invertibility of $\\ell$ on $X$, boundedness beyond the displayed single complexes, or finiteness of $X$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 04J0, lemma-localize-morphism-ringed-sites; scalar extension and localization, applied to the quotient-basis step of lem-pur-integral-object-pullback-line",
+  "also": [
+   {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 3.4.10 and Lemma 6.5.9, finite quotient inverse images"
+   },
+   {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), compatible integral bases reduced to finite coefficient levels"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-pur-localized-ringed-site",
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-integral-scalar-extension-well-defined"
+ ],
+ "proof": [
+  {
+   "text": "For each exponent choose the normalized finite basis c_n supplied by lem-pur-integral-object-finite-basis. Its inverse on a section z is z times the explicitly constructed inverse-image tensor generator of the one integral basis. These inverse formulas uniquely determine c_n.",
+   "uses": [
+    "lem-pur-integral-object-finite-basis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the prescribed pullback transition with its explicit finite-linear mate. Its unit formula carries the generator at exponent n+2 to the generator at exponent n+1: naturality of the underlying additive presheaf map commutes with restriction along U -> W times_X V, and the original tensor transition sends 1 tensor x to 1 tensor x. Finite semilinearity consequently sends z beta_(n+1) to reduction(z) beta_n. The normalized inverse formulas prove the pullback-basis transition equation.",
+   "uses": [
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the already proved finite regular scalar multiplication isomorphisms s_n and their transition formula. Restrict c_n and s_n along the completed coefficient projection and put b_n=c_n followed by inverse(s_n). Cancel these isomorphisms to compare the successor square on the regular finite single complex. Outside degree zero its source is zero. In degree zero, the preceding inverse-basis calculation and the scalar multiplication transition formula both give the finite quotient reduction of z. This proves the required chain-map equation.",
+   "uses": [
+    "lem-weil-constant-scalar-strict-unit",
+    "lem-weil-integral-scalar-extension-well-defined"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-object-finite-basis",
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-constant-scalar-strict-unit",
+  "lem-weil-integral-scalar-extension-well-defined"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 04J0 for finite bases; explicit normalized-generator and finite-semilinear transition calculation in the delivered Lean proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Completed derived pullback of a locally free module trivialized on a pro etale site object is the unit module in degree zero",
+   "results": "8 hits including SheafOfModules.pullbackObjFreeIso, pullbackObjUnitToUnit, freeFunctorCompPullbackIso and instIsIsoPullbackObjUnitToUnitOfFinal.",
+   "date": "2026-10-26",
+   "verdict": "Ordinary unit pullback only; no compatible quotient basis comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackObjUnitToUnit",
+   "results": "6 hits: pullbackObjUnitToUnit, instIsIsoPullbackObjUnitToUnitOfFinal, pullback_map_ιFree_comp_pullbackObjFreeIso_hom and its reassoc lemma, and two adjunction formulas.",
+   "date": "2026-10-26",
+   "verdict": "Useful ordinary free-module normalization, but no slice/scalar quotient transition theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*single|single.*pullback|pullback.*unit",
+   "results": "25 hits including Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean and ordinary scheme module unitors.",
+   "date": "2026-10-26",
+   "verdict": "No strict quotient tower comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A basis on a slice of a ringed site induces compatible bases of the finite quotient inverse images of a module",
+   "results": "8 hits including IsLocalRing.basisQuotient, basisQuotient_apply, basisQuotient_repr and ModN.basis.",
+   "date": "2026-10-26",
+   "verdict": "Ring-module quotient bases only; no sheaf or strict inverse-image tower comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralObjectPullbackLine",
+  "date": "2026-10-26",
+  "group": "Q8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-def-sp-tate-twist-locally-free",
+   "place": "Proof (3), compatible finite reductions of one integral basis",
+   "via": [
+    "lem-pur-integral-object-pullback-line"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralObjectPullbackQuotientBasis",
+  "file": "lean/Sheaf/Paper/IntegralObjectPullbackQuotientBasis.lean",
+  "declaration": "WeilConjectures.integralObjectPullbackQuotientBasis",
+  "statement": "theorem integralObjectPullbackQuotientBasis (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (X : Scheme.{u}) (W : X.ProEt) (L : integralTowerModules.{u, u} l E X)\n    (e : L.over W ≅\n      (SheafOfModules.unit.{u, u + 1, u + 1}\n        (completedIntegralCoefficientSheafUnrestricted.{u, u} l E X)).over W) :\n    ∃ b : ∀ n : ℕ,\n      (integralOperationsPullbackLevel.{u, u} l E W.hom n).obj\n          ((CochainComplex.singleFunctor (integralTowerModules.{u, u} l E X) 0).obj L) ≅\n        (integralScalarLevel.{u, u} l E E (AlgHom.id _ _) W.left n).obj\n          ((CochainComplex.singleFunctor\n              (integralTowerModules.{u, u} l E W.left) 0).obj\n            (SheafOfModules.unit.{u, u + 1, u + 1}\n              (completedIntegralCoefficientSheafUnrestricted.{u, u} l E W.left))),\n      ∀ n : ℕ,\n        (integralOperationsPullbackTransition.{u, u} l E W.hom n).app\n            ((CochainComplex.singleFunctor\n              (integralTowerModules.{u, u} l E X) 0).obj L) ≫ (b n).hom =\n          (b (n + 1)).hom ≫\n            (integralScalarTransition.{u, u} l E E (AlgHom.id _ _) W.left n).app\n              ((CochainComplex.singleFunctor\n                  (integralTowerModules.{u, u} l E W.left) 0).obj\n                (SheafOfModules.unit.{u, u + 1, u + 1}\n                  (completedIntegralCoefficientSheafUnrestricted.{u, u} l E W.left)))",
+  "branch": "sheaf-dag",
+  "by": "Q8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q8",
+  "result": "pass",
+  "landing": "20261025T202853-L-2761972",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261026T003019-L-139539",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

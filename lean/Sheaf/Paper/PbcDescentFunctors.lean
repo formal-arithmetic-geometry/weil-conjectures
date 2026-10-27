@@ -9,12 +9,10 @@ public import WeilConjectures.CategoryTheory.StageSystem.Functor
 public import Mathlib.CategoryTheory.Triangulated.Functor
 public import Sheaf.Paper.PbcScalarExtension
 public import Sheaf.Paper.PbcQbarCategory
-import Sheaf.Paper.PbcRationalTransport
-import Sheaf.Paper.FiniteStagePairCategory
-import Sheaf.Paper.CommonStageCalculus
-import Sheaf.Paper.PbcCommonStageCones
-import Sheaf.Paper.IntrinsicQbarCategory
-import Sheaf.Paper.PbcVerdierAxioms
+public import Sheaf.Paper.PbcDescentInterfaces
+import Sheaf.Paper.PbcDirectImageCoherentFamily
+import Sheaf.Paper.PbcPullbackCoherentFamily
+import Sheaf.Paper.PbcExchangeCompatibleFamily
 
 /-!
 # Descent of scalar-compatible exact functors
@@ -54,33 +52,6 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory.StageSystem
 
-/-- A family of exact finite-stage functors with scalar-extension comparisons.
-The `base` field contains the stage functors `Φ_E`, comparisons `β_{F/E}`, and
-their associator coherence.  The remaining fields record additivity,
-compatibility with shifts of the stage functors and comparisons, and
-preservation of distinguished triangles at every stage. On the normalized PBC
-stage systems, the unit equation follows from associator coherence at repeated
-stages: the resulting idempotent isomorphism component is the identity.
-Source: blueprint main-20261015, order 1312
-(blueprint: prop-weil-pbc-descent-functors). -/
-structure CoherentExactMorphism {I : Type w} [Preorder I]
-    {C : I → Type u} [∀ i, Category.{v} (C i)]
-    {D : I → Type u'} [∀ i, Category.{v'} (D i)]
-    (S : StageSystem C) (S' : StageSystem D)
-    [∀ i, Preadditive (C i)] [∀ i, Preadditive (D i)]
-    [∀ i, HasZeroObject (C i)] [∀ i, HasZeroObject (D i)]
-    [∀ i, HasShift (C i) ℤ] [∀ i, HasShift (D i) ℤ]
-    [∀ i, ∀ n : ℤ, (shiftFunctor (C i) n).Additive]
-    [∀ i, ∀ n : ℤ, (shiftFunctor (D i) n).Additive]
-    [∀ i, Pretriangulated (C i)] [∀ i, Pretriangulated (D i)]
-    [∀ (i j : I) (h : i ≤ j), (S.T h).CommShift ℤ]
-    [∀ (i j : I) (h : i ≤ j), (S'.T h).CommShift ℤ] where
-  base : StageSystem.Morphism S S'
-  additive : ∀ i, (base.Φ i).Additive
-  [commShift : ∀ i, (base.Φ i).CommShift ℤ]
-  betaCommShift : ∀ {i j : I} (h : i ≤ j),
-    NatTrans.CommShift (base.β h).hom ℤ
-  triangulated : ∀ i, (base.Φ i).IsTriangulated
 
 namespace Morphism
 
@@ -383,32 +354,6 @@ namespace AlgebraicGeometry.Scheme
 variable (l : ℕ) [Fact l.Prime] (Ω : Type w)
   [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
 
-/-- The rational finite-stage direct image is the restriction of the actual ringed
-pro-etale derived direct image followed by the recorded raw scalar localization.
-Source: blueprint main-20261015, order 1312, final paragraph, using
-prop-weil-pbc-rational-transport (blueprint: prop-weil-pbc-descent-functors). -/
-def pbcDescentDirectImage {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (h : ∀ (E : Padic.FiniteCoefficientFields l Ω) (K : pbcIntegralStage l Ω X E),
-      PbcIsBoundedConstructibleComplete Y (pbcStageDatum.{u} l Ω E)
-        ((pbcActualDerivedPush f (pbcStageDatum.{u} l Ω E)).obj K.obj))
-    (E : Padic.FiniteCoefficientFields l Ω) :
-    pbcStageCategory l Ω X E ⥤ pbcStageCategory l Ω Y E :=
-  pbcConditionalRational (pbcStageDatum.{u} l Ω E)
-    (pbcActualDerivedPush f (pbcStageDatum.{u} l Ω E)) (h E) (pbcStageUniformizer.{u} l Ω E)
-
-/-- The rational finite-stage pullback is the restriction of the actual completed
-ringed pro-etale pullback followed by the recorded raw scalar localization.
-Source: blueprint main-20261015, order 1312, final paragraph, using
-prop-weil-pbc-rational-transport (blueprint: prop-weil-pbc-descent-functors). -/
-def pbcDescentPullback {X Y : Scheme.{u}} (g : X ⟶ Y)
-    (h : ∀ (E : Padic.FiniteCoefficientFields l Ω) (K : pbcIntegralStage l Ω Y E),
-      PbcIsBoundedConstructibleComplete X (pbcStageDatum.{u} l Ω E)
-        ((pbcActualCompletedPull g (pbcStageDatum.{u} l Ω E)).obj K.obj))
-    (E : Padic.FiniteCoefficientFields l Ω) :
-    pbcStageCategory l Ω Y E ⥤ pbcStageCategory l Ω X E :=
-  pbcConditionalRational (pbcStageDatum.{u} l Ω E)
-    (pbcActualCompletedPull g (pbcStageDatum.{u} l Ω E)) (h E)
-    (pbcStageUniformizer.{u} l Ω E)
 
 variable (X Y X' Y' : Scheme.{u})
   [IsNoetherian X]
@@ -424,78 +369,8 @@ variable (X Y X' Y' : Scheme.{u})
   [dY' : Fact (∃ n : ℕ, topologicalKrullDim Y' ≤ (n : WithBot ℕ∞))]
   [iY' : Fact (∀ t : Y', IsUnit (l : Y'.presheaf.stalk t))]
 
-section CanonicalBeta
-variable {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
-  [dX : Fact (∃ n : ℕ, topologicalKrullDim X ≤ (n : WithBot ℕ∞))]
-  [iX : Fact (∀ t : X, IsUnit (l : X.presheaf.stalk t))]
-  [dY : Fact (∃ n : ℕ, topologicalKrullDim Y ≤ (n : WithBot ℕ∞))]
-  [iY : Fact (∀ t : Y, IsUnit (l : Y.presheaf.stalk t))]
-
-/-- Direct-image β is the localized canonical scalar mate, conjugated by the
-integral/scalar comparisons, including equal coefficient stages. The right-hand
-side is the unique comparison characterized by the localized ambient mate in
-`pbcScalarDirectImage_rational`, at the canonical small coefficient fields.
-The endpoint equalities are already concluded separately for every stage;
-quantification over their proofs does not impose an additional assumption.
-Source: blueprint main-20261015, descent proposition, final paragraph
-(blueprint: prop-weil-pbc-descent-functors). -/
-def PbcDirectImageBetaSpec (f : X ⟶ Y)
-    (pres : ∀ (E : Padic.FiniteCoefficientFields l Ω) (K : pbcIntegralStage l Ω X E),
-      PbcIsBoundedConstructibleComplete Y (pbcStageDatum.{u} l Ω E)
-        ((pbcActualDerivedPush f (pbcStageDatum.{u} l Ω E)).obj K.obj))
-    (Rf : StageSystem.Morphism (pbcScalarSystem l Ω X dX.out iX.out)
-      (pbcScalarSystem l Ω Y dY.out iY.out)) : Prop := by
-  exact ∀ {E F : Padic.FiniteCoefficientFields l Ω} (hEF : E ≤ F)
-    (eE : Rf.Φ E = pbcDescentDirectImage l Ω f pres E)
-    (eF : Rf.Φ F = pbcDescentDirectImage l Ω f pres F)
-    (K : pbcIntegralStage l Ω X E),
-    let β := Functor.isoWhiskerRight (eqToIso eE).symm _ ≪≫ Rf.β hEF ≪≫
-      Functor.isoWhiskerLeft _ (eqToIso eF)
-    HEq
-      ((pbcScalarIntegralComparison l Ω Y dY.out iY.out hEF).inv.app
-          ((pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
-            (pbcActualDerivedPush f (pbcStageDatum.{u} l Ω E)) (pres E)).obj K) ≫
-        β.hom.app (ScalarLocalization.mk K) ≫
-        (pbcDescentDirectImage l Ω f pres F).map
-          ((pbcScalarIntegralComparison l Ω X dX.out iX.out hEF).hom.app K))
-      (((pbcScalarDirectImage_rational l (pbcFiniteField.{u} l Ω E)
-        (pbcFiniteField.{u} l Ω F) (pbcFiniteFieldInclusion l Ω hEF) f
-        dX.out dY.out iX.out iY.out (pres E) (pres F)).exists.choose).hom.app
-          (ScalarLocalization.mk K))
-
-/-- Pullback β inverse is the localized canonical completed scalar comparison,
-conjugated by the integral/scalar comparisons, including equal stages. The
-right-hand side is the unique comparison characterized by the localized
-completed tensor comparison in `pbcScalarCompletedPull_rational`, at the small
-coefficient fields. Its orientation is opposite to `Morphism.β`. Endpoint
-identifications are concluded separately, so this predicate fixes every β.
-Source: blueprint main-20261015, descent proposition, final paragraph
-(blueprint: prop-weil-pbc-descent-functors). -/
-def PbcPullbackBetaSpec (g : X ⟶ Y)
-    (pres : ∀ (E : Padic.FiniteCoefficientFields l Ω) (K : pbcIntegralStage l Ω Y E),
-      PbcIsBoundedConstructibleComplete X (pbcStageDatum.{u} l Ω E)
-        ((pbcActualCompletedPull g (pbcStageDatum.{u} l Ω E)).obj K.obj))
-    (Lg : StageSystem.Morphism (pbcScalarSystem l Ω Y dY.out iY.out)
-      (pbcScalarSystem l Ω X dX.out iX.out)) : Prop := by
-  exact ∀ {E F : Padic.FiniteCoefficientFields l Ω} (hEF : E ≤ F)
-    (eE : Lg.Φ E = pbcDescentPullback l Ω g pres E)
-    (eF : Lg.Φ F = pbcDescentPullback l Ω g pres F)
-    (K : pbcIntegralStage l Ω Y E),
-    let β := Functor.isoWhiskerRight (eqToIso eE).symm _ ≪≫ Lg.β hEF ≪≫
-      Functor.isoWhiskerLeft _ (eqToIso eF)
-    HEq
-      ((pbcDescentPullback l Ω g pres F).map
-          ((pbcScalarIntegralComparison l Ω Y dY.out iY.out hEF).inv.app K) ≫
-        β.inv.app (ScalarLocalization.mk K) ≫
-        (pbcScalarIntegralComparison l Ω X dX.out iX.out hEF).hom.app
-          ((pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
-            (pbcActualCompletedPull g (pbcStageDatum.{u} l Ω E)) (pres E)).obj K))
-      (((pbcScalarCompletedPull_rational l (pbcFiniteField.{u} l Ω E)
-        (pbcFiniteField.{u} l Ω F) (pbcFiniteFieldInclusion l Ω hEF) g
-        dX.out dY.out iX.out iY.out (pres E) (pres F)).exists.choose).hom.app
-          (ScalarLocalization.mk K))
-end CanonicalBeta
-
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The actual direct-image and completed-pullback families supplied by rational
 transport admit coherent stage-system structures and their canonical exchange descends.
 The four stage functors are identified with `pbcDescentDirectImage` and
@@ -506,20 +381,12 @@ with the localization of `pbcActualCompletedExchange`.
 Source: Weil conjectures blueprint main-20261015, proper base change, order 1312
 (blueprint: prop-weil-pbc-descent-functors).
 
-Proof: restrict the actual derived operations using the four preservation hypotheses
-and rationalize by pbcConditionalRational. Use pbcScalarDirectImage_rational and
-pbcScalarCompletedPull_rational for the comparison isomorphisms, transporting their
-normalizations to the small finite-coefficient stage presentation. The two completed
-coefficient inclusions agree by their unique finite-quotient specifications. Conjugate
-by pbcScalarIntegralComparison at both endpoints to normalize the scalar transitions;
-for pullback use the inverse comparison. This proves the four BetaSpec clauses, on
-every integral object and therefore every rational object, including repeated stages.
-The operation coherence in PbcScalarExtension gives their unit, associator and shift equations;
-pbcScalarCompletedExchange gives compatibility of the canonical exchange. Apply
-pbcDescentFunctors to each of the four coherent families to obtain exactness. The
-localized pbcActualCompletedExchange therefore defines a compatible transformation
-between the composite families. Descend it componentwise and conjugate by
-functorCompIso to obtain the transformation between the descended composites. -/
+Proof: use pbcDirectImageCoherentFamily twice and pbcPullbackCoherentFamily twice.
+Their canonical normalizations let pbcExchangeCompatibleFamily supply the compatible
+finite-stage exchange. Apply pbcDescentFunctors to each family to obtain exactness.
+Descend the exchange by descNatTrans and conjugate with the two functorCompIso
+comparisons. Their components are identities, so descNatTrans_app proves the stated
+component formula -/
 theorem pbcDescentOperations
     (f : X ⟶ Y) (f' : X' ⟶ Y') (g : Y' ⟶ Y) (g' : X' ⟶ X)
     (sq : ChosenCartesianSquare g' f' f g)
@@ -590,6 +457,39 @@ theorem pbcDescentOperations
               (StageSystem.Morphism.functorCompIso Lg'.base Rf'.base).hom ∧
           ∀ K : pbcQbarCategory l Ω X,
             ExQ.app K = ((pbcScalarSystem l Ω Y' dY'.out iY'.out).ι K.stage).map
-              ((Ex.τ K.stage).app K.obj) := sorry
+              ((Ex.τ K.stage).app K.obj) := by
+  classical
+  have hf := pbcDirectImageCoherentFamily (X := X) (Y := Y) l Ω f presRf
+  let Rf := hf.choose
+  have hRf := hf.choose_spec.1
+  have bRf : PbcDirectImageBetaSpec l Ω f presRf Rf.base := hf.choose_spec.2
+  have hf' := pbcDirectImageCoherentFamily (X := X') (Y := Y') l Ω f' presRf'
+  let Rf' := hf'.choose
+  have hRf' := hf'.choose_spec.1
+  have bRf' : PbcDirectImageBetaSpec l Ω f' presRf' Rf'.base := hf'.choose_spec.2
+  have hg := pbcPullbackCoherentFamily (X := Y') (Y := Y) l Ω g presLg
+  let Lg := hg.choose
+  have hLg := hg.choose_spec.1
+  have bLg : PbcPullbackBetaSpec l Ω g presLg Lg.base := hg.choose_spec.2
+  have hg' := pbcPullbackCoherentFamily (X := X') (Y := X) l Ω g' presLg'
+  let Lg' := hg'.choose
+  have hLg' := hg'.choose_spec.1
+  have bLg' : PbcPullbackBetaSpec l Ω g' presLg' Lg'.base := hg'.choose_spec.2
+  have hex := pbcExchangeCompatibleFamily l Ω X Y X' Y' f f' g g' sq
+    presRf presRf' presLg presLg' Rf.base Rf'.base Lg.base Lg'.base
+    hRf hRf' hLg hLg' bRf bRf' bLg bLg'
+  let Ex := hex.choose
+  have hEx := hex.choose_spec
+  refine ⟨Rf, Rf', Lg, Lg', hRf, hRf', hLg, hLg', bRf, bRf', bLg, bLg',
+    (pbcDescentFunctors l Ω X Y Rf).1, (pbcDescentFunctors l Ω X' Y' Rf').1,
+    (pbcDescentFunctors l Ω Y Y' Lg).1, (pbcDescentFunctors l Ω X X' Lg').1,
+    Ex, hEx, ?_⟩
+  refine ⟨(StageSystem.Morphism.functorCompIso Rf.base Lg.base).inv ≫
+    StageSystem.Morphism.descNatTrans Ex ≫
+      (StageSystem.Morphism.functorCompIso Lg'.base Rf'.base).hom, rfl, ?_⟩
+  intro K
+  simp only [NatTrans.comp_app, StageSystem.Morphism.functorCompIso_inv_app,
+    StageSystem.Morphism.functorCompIso_hom_app, Category.id_comp, Category.comp_id]
+  rfl
 
 end AlgebraicGeometry.Scheme

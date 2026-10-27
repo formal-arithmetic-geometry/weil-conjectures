@@ -11,9 +11,82 @@
   "def-pc-field-extension",
   "def-trf-valuation-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Restriction preserves the inverse alternative of [def-trf-valuation-ring]: for $x\\in K^\\times$, either $x\\in W\\cap K$ or $x^{-1}\\in W\\cap K$. Thus $V$ and every $W'\\cap K$ are valuation rings of $K$; the same alternative writes each nonzero $x$ as a fraction of their elements. Also $K^\\times\\cap W^\\times=V^\\times$, since a unit is exactly an element whose inverse is in the ring. Hence $K^\\times/V^\\times$ identifies with $w(K^\\times)$, preserving order because $b/a\\in W$ for $a,b\\in K^\\times$ is equivalent to $b/a\\in V$.",
+   "uses": [
+    "def-trf-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00IB (lemma-valuation-ring-x-or-x-inverse), 00ID (lemma-valuation-group), 0AAV (lemma-valuation-ring-cap-field-finite); agent-written fraction calculation reconstructing the valued-field input referred to in ILO XX 4.4, printed pp.373–374."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-valuation-value-group-torsion] to $K\\subseteq L$ and the subring $W$. Its hypotheses hold because the extension is algebraic and $W$ satisfies the inverse alternative. For each $x\\in L^\\times$ obtain $n\\geq1$, $a\\in K^\\times$ and $u\\in W^\\times$ with $x^n=au$. Taking classes gives $n w(x)=w(a)\\in\\Gamma_V$. Surjectivity of $w$ proves the asserted torsion property.",
+   "uses": [
+    "lem-trf-valuation-value-group-torsion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ASJ (lemma-etale-extension-valuation-ring), first proof paragraph; use its algebraic value-group input in the element form stated by lem-trf-valuation-value-group-torsion."
+   }
+  },
+  {
+   "text": "For an overring $V'\\supseteq V$ put $S(V')=\\{s\\in V\\setminus\\{0\\}:s^{-1}\\in V'\\}$ and $B(V')=\\{y/s:y\\in W,\\ s\\in S(V')\\}\\subseteq L$. The set $S(V')$ contains $1$ and is multiplicatively closed. These fractions form a subring: $(y/s)+(z/t)=(yt+zs)/(st)$, $(y/s)(z/t)=yz/(st)$, and $-(y/s)=(-y)/s$. It contains $W$ by denominator $1$, so the inverse alternative in $W$ implies it for $B(V')$; its fraction field is $L$ because it contains $W$. Thus [def-trf-valuation-ring] makes $B(V')$ a valuation overring of $W$.",
+   "uses": [
+    "def-trf-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00IB (lemma-valuation-ring-x-or-x-inverse), 00ID (lemma-valuation-group), 0AAV (lemma-valuation-ring-cap-field-finite); agent-written fraction calculation reconstructing the valued-field input referred to in ILO XX 4.4, printed pp.373–374."
+   }
+  },
+  {
+   "text": "We have $B(V')\\cap K=V'$. If $x=y/s\\in B(V')\\cap K$, then $y=sx\\in W\\cap K=V$, so $x=y s^{-1}\\in V'$. Conversely $0\\in B(V')$; for $x\\in V'\\setminus\\{0\\}$, if $x\\in V$ use $x=x/1$. Otherwise [def-trf-valuation-ring] gives $s=x^{-1}\\in V$, and $s^{-1}=x\\in V'$, so $s\\in S(V')$ and $x=1/s\\in B(V')$.",
+   "uses": [
+    "def-trf-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00IB (lemma-valuation-ring-x-or-x-inverse), 00ID (lemma-valuation-group), 0AAV (lemma-valuation-ring-cap-field-finite); agent-written fraction calculation reconstructing the valued-field input referred to in ILO XX 4.4, printed pp.373–374."
+   }
+  },
+  {
+   "text": "Restriction reflects inclusion among overrings of $W$. Suppose $W\\subseteq U,T$ and $U\\cap K\\subseteq T\\cap K$. For nonzero $x\\in U$, [lem-trf-valuation-value-group-torsion] gives $x^n=au$ with $n>0$, $a\\in K^\\times$, and $u,u^{-1}\\in W$. Thus $a=x^nu^{-1}\\in U\\cap K\\subseteq T\\cap K$, whence $x^n=au\\in T$. A valuation subring is closed under positive roots: $v_T(x)^n\\leq1$ implies $v_T(x)\\leq1$ in its linearly ordered value group with zero. Therefore $x\\in T$. Zero belongs to every subring. In particular restriction is injective. This replaces the explicit fraction calculation for uniqueness in the original plan.",
+   "uses": [
+    "def-trf-valuation-ring",
+    "lem-trf-valuation-value-group-torsion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00IB (lemma-valuation-ring-x-or-x-inverse), 00ID (lemma-valuation-group), 0AAV (lemma-valuation-ring-cap-field-finite); agent-written fraction calculation reconstructing the valued-field input referred to in ILO XX 4.4, printed pp.373–374."
+   }
+  },
+  {
+   "text": "Steps 3–4 give a lift of every overring downstairs, so restriction is surjective. Step 5 gives injectivity and reflection of inclusion; restriction itself preserves inclusion directly. Its bijection is therefore an order isomorphism. The top overring $L$ restricts to $K$, and injectivity makes it the only overring with that restriction. For a proper overring $R$ downstairs, apply the inverse order isomorphism to obtain an overring $U$ of $W$ with restriction $R$; the top equivalence implies $U\\ne L$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00IB (lemma-valuation-ring-x-or-x-inverse), 00ID (lemma-valuation-group), 0AAV (lemma-valuation-ring-cap-field-finite); agent-written fraction calculation reconstructing the valued-field input referred to in ILO XX 4.4, printed pp.373–374."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-valuation-ring",
+  "lem-trf-valuation-value-group-torsion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00IB (lemma-valuation-ring-x-or-x-inverse), 00ID (lemma-valuation-group), 0AAV (lemma-valuation-ring-cap-field-finite); agent-written fraction calculation reconstructing the valued-field input referred to in ILO XX 4.4, printed pp.373–374. G4 stage-3 formalization: fraction lift proves surjectivity, and the power-times-unit equality plus positive-root closure proves reflection of inclusion."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +129,52 @@
    "results": "{\"t\": \"2026-10-18T23:56:53Z\", \"tool\": \"grep\", \"query\": \"ValueGroup|value.group|coarsen\", \"sub\": \"RingTheory/Valuation\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Valuation/ValuationRing.lean\", \"Mathlib/RingTheory/Valuation/ValuationRing.lean\", \"Mathlib/RingTheory/Valuation/ValuationRing.lean\", \"Mathlib/RingTheory/Valuation/ValuationRing.lean\", \"Mathlib/RingTheory/Valuation/ValuationRing.lean\", \"Mathlib/RingTheory/Valuation/DiscreteValuativeRel.lean\", \"Mathlib/RingTheory/Valuation/DiscreteValuativeRel.lean\", \"Mathlib/RingTheory/Valuation/DiscreteValuativeRel.lean\"], \"digest\": \"bf4ad774ed3739bb\"}",
    "date": "2026-10-18",
    "verdict": "no match: HasExtension tracks equivalence of restricted valuations, and primeSpectrumEquiv classifies overrings of a single valuation ring. Neither states torsion of the value-group quotient or restriction of coarsenings along an algebraic field extension. Read ValuationSubring.lean:264-395."
+  },
+  {
+   "tool": "grep",
+   "query": "coarsen|torsion|comap.*[Oo]rderIso",
+   "results": "{\"t\": \"2026-10-24T11:14:30Z\", \"tool\": \"grep\", \"query\": \"coarsen|torsion|comap.*[Oo]rderIso\", \"sub\": \"RingTheory/Valuation\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Valuation/ValuationSubring.lean\", \"Mathlib/RingTheory/Valuation/ValuationSubring.lean\", \"Mathlib/RingTheory/Valuation/ValuationSubring.lean\", \"Mathlib/RingTheory/Valuation/ValuationSubring.lean\", \"Mathlib/RingTheory/Valuation/Basic.lean\", \"Mathlib/RingTheory/Valuation/Extension.lean\", \"Mathlib/RingTheory/Valuation/Extension.lean\"], \"digest\": \"90bec5922d82c232\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: candidates give equivalence of restricted valuations or classify overrings for a single field, not the algebraic restriction bijection together with value-group torsion; source read in ValuationSubring.lean:264–395, Extension.lean:57–85, Minpoly.lean:39–58 and LocalSubring.lean:36–115."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coarsenings of valuations in an algebraic field extension correspond by restriction",
+   "results": "{\"t\": \"2026-10-24T11:14:31Z\", \"tool\": \"leansearch\", \"query\": \"Coarsenings of valuations in an algebraic field extension correspond by restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Valuation.HasExtension.val_isEquiv_comap\", \"Valuation.HasExtension.val_map_eq_one_iff\", \"Valuation.HasExtension.ofComapInteger\", \"Valuation.HasExtension.mk\", \"ValuativeExtension.mapValueGroupWithZero\", \"ValuativeExtension.compatible_comap\", \"Valuation.HasExtension.val_algebraMap\", \"Valuation.HasExtension.val_map_le_one_iff\"], \"digest\": \"05f033db8a855f17\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: candidates give equivalence of restricted valuations or classify overrings for a single field, not the algebraic restriction bijection together with value-group torsion; source read in ValuationSubring.lean:264–395, Extension.lean:57–85, Minpoly.lean:39–58 and LocalSubring.lean:36–115."
+  },
+  {
+   "tool": "loogle",
+   "query": "ValuationSubring, Algebra.IsAlgebraic",
+   "results": "{\"t\": \"2026-10-24T11:14:31Z\", \"tool\": \"loogle\", \"query\": \"ValuationSubring, Algebra.IsAlgebraic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: candidates give equivalence of restricted valuations or classify overrings for a single field, not the algebraic restriction bijection together with value-group torsion; source read in ValuationSubring.lean:264–395, Extension.lean:57–85, Minpoly.lean:39–58 and LocalSubring.lean:36–115."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction from an algebraic extension of valued fields gives a bijection on valuation overrings and the quotient of value groups is torsion",
+   "results": "{\"t\": \"2026-10-24T11:14:32Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction from an algebraic extension of valued fields gives a bijection on valuation overrings and the quotient of value groups is torsion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Valuation.HasExtension.val_isEquiv_comap\", \"bijective_rangeRestrict_comp_of_valuationRing\", \"Valuation.HasExtension.algebraMap_residue_eq_residue_algebraMap\", \"Valuation.Integers.bijective_algebraMap_of_subsingleton_units_mrange\", \"Valuation.HasExtension.val_map_eq_iff\", \"Valuation.HasExtension.ofComapInteger\", \"IsNonarchimedeanLocalField.valueGroupWithZeroIsoInt\", \"ValuationRing.coe_equivInteger_apply\"], \"digest\": \"887b0df51f86033e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: candidates give equivalence of restricted valuations or classify overrings for a single field, not the algebraic restriction bijection together with value-group torsion; source read in ValuationSubring.lean:264–395, Extension.lean:57–85, Minpoly.lean:39–58 and LocalSubring.lean:36–115."
+  },
+  {
+   "tool": "grep",
+   "query": "primeSpectrumEquiv|exists.*pow|IsAlgebraic|isAlgebraic",
+   "results": "{\"t\": \"2026-10-24T11:14:59Z\", \"tool\": \"grep\", \"query\": \"primeSpectrumEquiv|exists.*pow|IsAlgebraic|isAlgebraic\", \"sub\": \"RingTheory/Valuation\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Valuation/IsTrivialOn.lean\", \"Mathlib/RingTheory/Valuation/IsTrivialOn.lean\", \"Mathlib/RingTheory/Valuation/ValuationSubring.lean\", \"Mathlib/RingTheory/Valuation/ValuationSubring.lean\", \"Mathlib/RingTheory/Valuation/ValuationSubring.lean\", \"Mathlib/RingTheory/Valuation/ValuationSubring.lean\", \"Mathlib/RingTheory/Valuation/ValuationSubring.lean\", \"Mathlib/RingTheory/Valuation/Minpoly.lean\"], \"digest\": \"38c2b5f8b891f148\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: candidates give equivalence of restricted valuations or classify overrings for a single field, not the algebraic restriction bijection together with value-group torsion; source read in ValuationSubring.lean:264–395, Extension.lean:57–85, Minpoly.lean:39–58 and LocalSubring.lean:36–115."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic extension of fields with a valuation ring, every element has a positive power equal to a base field element times a unit, and overrings are obtained by localizing at base elements",
+   "results": "{\"t\": \"2026-10-24T11:15:01Z\", \"tool\": \"leanfinder\", \"query\": \"An algebraic extension of fields with a valuation ring, every element has a positive power equal to a base field element times a unit, and overrings are obtained by localizing at base elements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Tilt\", \"Valuation.HasExtension.instAlgebra_valuationSubring\", \"ValuationRing.iff_isInteger_or_isInteger\", \"ValuationRing.isFractionRing_iff\", \"ValuationRing.isInteger_or_isInteger\", \"Valuation.Integers.isFractionRing\", \"ValuationRing.of_field\", \"Tilt.instField\"], \"digest\": \"ac02be428d99901e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: candidates give equivalence of restricted valuations or classify overrings for a single field, not the algebraic restriction bijection together with value-group torsion; source read in ValuationSubring.lean:264–395, Extension.lean:57–85, Minpoly.lean:39–58 and LocalSubring.lean:36–115."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-henselian-finite-extension-topology",
@@ -89,5 +204,68 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-algebraic-valuation-coarsening-correspondence",
+  "worker": "stage1",
+  "summary": "Reconstructed the released algebraic coarsening interface without reviving its withdrawn proof. Reused the existing algebraic value-group torsion lemma and gave the inverse correspondence by explicit fractions with denominators in the base valuation ring. Checked restriction, uniqueness, both inclusion directions and the trivial coarsening. No new nodes; statement, source, statement dependencies and blueprint provenance preserved.",
+  "blueprint": "Proof Step 3: dimension-normalized Verdier duality; regular finite-torsion local-model purity input. Testing closed-point purity after strict completion. Completion part: compare the open complements by the abelian completion comparison, ILO XX section 4.4, before applying the support triangle. ILO XX 4.4: admissible blowups, their limit spectral sequence, and its valuative stalks. Dense-field comparison: Algebraic prolongations and finite separable extension topologies of a henselian valuation. Algebraic coarsening and value-group input for the finite extension comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-valuation-value-group-torsion",
+    "why": "General algebraic valued-field tool supplying x^n=a u with a in the base field and u a unit; the current unit has no replacement for this algebraic input, and the explicit fraction calculations realize the admitted coarsening interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-valuation-value-group-torsion"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q96-1ca1a177c",
+  "group": "Q96",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-1ca1a177c (reviewer sub-agent of L); spot-checked: I read the whole item. The statement, source, stmt_deps and blueprint fields are unchanged, the proof has 6 steps and there are no new nodes. Step 2 cites only the statement of lem-trf-valuation-value-group-torsion (x^n=au with a in K^x and u a unit of W), and its hypotheses hold: algebraic extension, inverse alternative in W. I checked the fraction calculation in Steps 3–5. S(V') is multiplicatively closed and B(V')=W[S^-1] is a valuation ring. B(V') intersected with K equals V', since y=sx lies in W∩K=V. Uniqueness: a lies in R^x and s=a^-1=u x^-n lies in V, and u x^-(n-1)/s = x, including n=1. So the restriction map is a monotone bijection, B(K)=L, and W'=L exactly when W'∩K=K. Edge cases: K=L; W=L; V=K forces W=L, which matches Stacks 0AAV; and k ⊂ k(t) shows algebraicity is needed. I checked Stacks 00IB, 00ID and 0AAV in algebra.tex. A grep for coarsening/overring across the DAG finds no duplicate. Tool use accepted for the maintainer to record: lem-trf-valuation-value-group-torsion from unit sk-i-curve-zero. Batch-5 check: this node's closure contains only five mathlib definition nodes. It is a general commutative-algebra fact (Stacks 0ASJ input) that neither assumption gives, and citing it imports nothing from the trace-formula or Poincaré-duality proofs, so it is not a reason to RETURN."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.AlgebraicValuationCoarsening",
+  "declaration": "ValuationSubring.algebraic_coarsening_correspondence",
+  "file": "lean/Sheaf/RingTheory/AlgebraicValuationCoarsening.lean",
+  "statement": "theorem algebraic_coarsening_correspondence (K : Type u) (L : Type v) [Field K] [Field L] [Algebra K L] [FiniteDimensional K L] (W : ValuationSubring L) : (∀ δ : Additive (OrderDual W.ValueGroupˣ), ∃ n : ℕ, 0 < n ∧ ∃ a : Kˣ, n • δ = Additive.ofMul (OrderDual.toDual (Units.map W.valuation.toMonoidWithZeroHom.toMonoidHom (Units.map (algebraMap K L).toMonoidHom a)))) ∧ (∃ e : {U : ValuationSubring L // W ≤ U} ≃o {R : ValuationSubring K // W.comap (algebraMap K L) ≤ R}, ∀ U : {U : ValuationSubring L // W ≤ U}, (e U).1 = U.1.comap (algebraMap K L)) ∧ (∀ U : ValuationSubring L, W ≤ U → (U = ⊤ ↔ U.comap (algebraMap K L) = ⊤)) ∧ (∀ R : ValuationSubring K, W.comap (algebraMap K L) ≤ R → R ≠ ⊤ → ∃ U : ValuationSubring L, W ≤ U ∧ U ≠ ⊤ ∧ U.comap (algebraMap K L) = R)",
+  "branch": "sheaf-dag",
+  "by": "Q137",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1dc351ffc",
+  "group": "Q137",
+  "result": "pass",
+  "note": "Node unchanged except lean. Each clause matched: FiniteDimensional K L gives the finite algebraic extension; W : ValuationSubring L; V = W.comap algebraMap; Γ_W = Additive(OrderDual W.ValueGroupˣ), units removing the zero class; torsion ∀δ ∃n>0 ∃a:Kˣ, n•δ = w(a); order iso of overrings pinned to comap; ⊤ iff clause; explicit proper-lift clause. No extra hypotheses, independent universes u v. Edge cases K=L, W=L, V=K⇒W=L (0AAV), δ=0 covered. No new defs; nearest project theorem primeSpectrum_comap_orderIso_of_isAlgebraic is a different statement. The torsion proof dep is imported non-public. Docstrings carry the source, blueprint and 6 proof steps, proof is only sorry. Report sections present. No file changed, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261026T091616-L-3357584",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

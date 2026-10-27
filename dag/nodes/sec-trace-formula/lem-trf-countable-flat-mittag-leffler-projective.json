@@ -14,42 +14,18 @@
  ],
  "proof": [
   {
-   "text": "By [lem-weil-pbc-flat-tensor-exact], tensoring with the flat module $P$ preserves exactness, including injectivity at the left end. By [lem-weil-pbc-tensor-right-exact] it also preserves surjectivity at the right end. Thus it preserves every short exact sequence, which is precisely the hypothesis of [lem-kun-lazard-flat-module]. That node gives a small nonempty directed poset $I$, finite free modules $F_i\\cong R^{r_i}$, and compatible maps exhibiting $P$ as their colimit.",
+   "text": "Apply [lem-trf-countable-flat-ml-sequential-presentation] to $R,P$ with the given flatness, tensor-product Mittag-Leffler condition and at most countable generating set. Obtain a sequence $G_n\\cong R^{r_n}$, maps $u_n:G_n\\to G_{n+1}$ and compatible maps $\\iota_n:G_n\\to P$ that exhibit $P$ as its colimit, indexed by the positive integers.",
    "uses": [
-    "lem-weil-pbc-flat-tensor-exact",
-    "lem-weil-pbc-tensor-right-exact",
-    "lem-kun-lazard-flat-module"
+    "lem-trf-countable-flat-ml-sequential-presentation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 059X, opening sentence; Tag 058G (theorem-lazard)."
+    "place": "Tag 059X (lemma-countgen-projective), opening paragraph; sequential form following Tag 059W."
    }
   },
   {
-   "text": "Every $F_i\\cong R^{r_i}$ is finitely presented, with presentation $R^0\\to R^{r_i}\\to F_i\\to0$. Apply [lem-trf-ml-countable-colimit] using the assumed countable generation and tensor-product Mittag-Leffler property of $P$. Obtain a nonempty countable directed subset $J\\subseteq I$ for which the restricted cocone still exhibits $P$ as colimit.",
-   "uses": [
-    "lem-trf-ml-countable-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 059X, application of Tag 059W (lemma-ML-countable-colimit)."
-   }
-  },
-  {
-   "text": "Enumerate $J$ by a sequence $j_1,j_2,\\ldots$, repeating entries when $J$ is finite. Recursively choose $k_1=j_1$ and $k_{n+1}\\in J$ above both $k_n$ and $j_{n+1}$. Set $G_n=F_{k_n}$ and use the inherited transitions. These indices are cofinal. To verify the colimit directly, a compatible family $a_n:G_n\\to T$ extends to $F_j\\to T$ by $a_n f_{j,k_n}$ whenever $j\\le k_n$. Two such choices agree by passing to a larger sequence index; the same computation proves compatibility with every arrow of $J$. Conversely, restriction recovers $a_n$. The universal property in [def-weil-pbc-category-colimit] therefore exhibits $P$ as $\\operatorname{colim}_{n\\ge1}G_n$.",
-   "uses": [
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 059W, paragraph immediately after its proof; explicit cofinal-sequence argument."
-   }
-  },
-  {
-   "text": "Apply [lem-trf-mittag-leffler-hom-systems] to this sequence of finite free, hence finitely presented, modules and its colimit $P$. For every $R$-module $N$, it says exactly that the inverse sequence $\\operatorname{Hom}_R(G_n,N)$ has eventually constant transition images, that is, is Mittag-Leffler as defined in [def-weil-pbc-mittag-leffler-system].",
+   "text": "Each $G_n$ is finitely presented, using $R^0\\to R^{r_n}\\to G_n\\to0$ and $G_n\\cong R^{r_n}$. The positive integers form a small nonempty directed poset. Apply [lem-trf-mittag-leffler-hom-systems] to this diagram and the actual colimit cocone $(P,(\\iota_n))$ from step 1. For every $R$-module $N$ and $n\\ge1$, obtain $c\\ge n$ such that for all $k\\ge c$ the images of $\\operatorname{Hom}_R(G_k,N)\\to\\operatorname{Hom}_R(G_n,N)$ and $\\operatorname{Hom}_R(G_c,N)\\to\\operatorname{Hom}_R(G_n,N)$ agree. Their maps are precomposition with $u_{k-1}\\cdots u_n$ and $u_{c-1}\\cdots u_n$, with an empty composite the identity. These are exactly the composites of $h\\mapsto h u_n$. Equal submodules have equal underlying subgroups, so this inverse sequence is ML by [def-weil-pbc-mittag-leffler-system], with stabilization index $c(n)=c$.",
    "uses": [
     "lem-trf-mittag-leffler-hom-systems",
     "def-weil-pbc-mittag-leffler-system"
@@ -57,57 +33,33 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 059X, Hom-system Mittag-Leffler assertion; Tags 059M and 059E (4)."
+    "place": "Tag 059X, Hom-system assertion, justified by Tags 059M (proposition-ML-tensor) and 059E (proposition-ML-characterization), condition (4)."
    }
   },
   {
-   "text": "Fix an arbitrary short exact sequence $0\\to N_1\\xrightarrow{a}N_2\\xrightarrow{b}N_3\\to0$. For every $n$ the induced sequence $0\\to\\operatorname{Hom}_R(G_n,N_1)\\to\\operatorname{Hom}_R(G_n,N_2)\\to\\operatorname{Hom}_R(G_n,N_3)\\to0$ is exact. Indeed, choose a basis identifying $G_n$ with $R^{s_n}$; Hom becomes the finite power $N^{s_n}$. Injectivity and equality of kernel with image hold coordinatewise, and a tuple in $N_3^{s_n}$ lifts by choosing a preimage in $N_2$ of each of its finitely many coordinates. Precomposition with $G_n\\to G_{n+1}$ commutes with postcomposition by $a,b$, so these sequences form a short exact sequence of inverse systems.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 059X, finite-free Hom exactness, coordinate proof."
-   }
-  },
-  {
-   "text": "The kernel inverse system $\\operatorname{Hom}_R(G_n,N_1)$ is Mittag-Leffler by step 4. All three systems are indexed by positive integers and the maps commute with transitions by step 5. Hence part (3) of [lem-weil-pbc-mittag-leffler-limit-exact], applied to the underlying abelian groups, gives the short exact sequence of their inverse limits. The limit maps are $R$-linear because all component maps are; exactness of underlying groups is exactness of the $R$-modules.",
+   "text": "Fix any short exact sequence $0\\to N_1\\xrightarrow{a}N_2\\xrightarrow{b}N_3\\to0$. Apply [lem-trf-sequential-free-colimit-hom-exact] to the same finite-free stages, cocone and colimit $P$ from step 1. Step 2 with $N=N_1$ supplies its kernel-system ML hypothesis, so $0\\to\\operatorname{Hom}_R(P,N_1)\\xrightarrow{a\\circ-}\\operatorname{Hom}_R(P,N_2)\\xrightarrow{b\\circ-}\\operatorname{Hom}_R(P,N_3)\\to0$ is exact. Thus $\\operatorname{Hom}_R(P,-)$ is exact. Explicitly, for any surjection $b:X\\to Y$, the inclusion $\\ker b\\hookrightarrow X$ is injective with image exactly $\\ker b$, so $0\\to\\ker b\\to X\\xrightarrow{b}Y\\to0$ meets the helper's hypotheses; use step 2 at $N=\\ker b$. Surjectivity of the literal map $b\\circ-$ supplies, for every $h:P\\to Y$, a lift $\\widetilde h:P\\to X$ with $b\\widetilde h=h$. Hence $P$ is projective by [def-weil-pbc-projective-module].",
    "uses": [
-    "lem-weil-pbc-mittag-leffler-limit-exact"
+    "lem-trf-sequential-free-colimit-hom-exact",
+    "def-weil-pbc-projective-module"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 059X, application of Tag 0598 (lemma-ML-exact-sequence)."
-   }
-  },
-  {
-   "text": "For every $N$, map $h:P\\to N$ to $(h\\iota_n)_n$, where $\\iota_n:G_n\\to P$ are the colimit maps. The universal property [def-weil-pbc-category-colimit] gives a unique inverse map from every compatible family. Addition and scalar multiplication agree after restriction to every $G_n$, so this is an $R$-linear isomorphism $\\operatorname{Hom}_R(P,N)\\cong\\varprojlim_n\\operatorname{Hom}_R(G_n,N)$. For $v:N\\to N^\\prime$, the equality $(vh)\\iota_n=v(h\\iota_n)$ proves naturality. These isomorphisms therefore identify the exact sequence of step 6 with the sequence obtained by applying $\\operatorname{Hom}_R(P,-)$ to the arbitrary short exact sequence in step 5. Consequently this Hom functor is exact, so $P$ is projective by [def-weil-pbc-projective-module].",
-   "uses": [
-    "def-weil-pbc-category-colimit",
-    "def-weil-pbc-projective-module"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 059X, final paragraph and projectivity conclusion."
+    "place": "Tag 059X, final Hom exactness conclusion."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-category-colimit",
   "def-weil-pbc-mittag-leffler-system",
   "def-weil-pbc-projective-module",
-  "lem-kun-lazard-flat-module",
+  "lem-trf-countable-flat-ml-sequential-presentation",
   "lem-trf-mittag-leffler-hom-systems",
-  "lem-trf-ml-countable-colimit",
-  "lem-weil-pbc-flat-tensor-exact",
-  "lem-weil-pbc-mittag-leffler-limit-exact",
-  "lem-weil-pbc-tensor-right-exact"
+  "lem-trf-sequential-free-colimit-hom-exact"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 059X (lemma-countgen-projective), with the positive-integer reindexing and naturality written explicitly."
+  "place": "Tag 059X (lemma-countgen-projective); assembly of the sequential-presentation and Hom-exactness subarguments."
  },
  "mathlib_searches": [
   {
@@ -208,33 +160,24 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-countable-flat-mittag-leffler-projective",
   "worker": "stage1",
-  "summary": "Statement unchanged. Followed Tag 059X: existing Lazard presentation and tensor exactness leaves, new statement-only Tag 059W countable extraction and Tags 059M/059E Hom-system bridge, explicit cofinal sequence, finite-free coordinate exactness, existing countable Mittag-Leffler limit exactness, and the natural Hom-colimit identification. No attachment or new Mathlib leaf.",
+  "summary": "Landing-return repair resumed after the provider interruption. The current return records head e9d27d5be7d (2026-10-23 11:52 UTC); 3824befbbea in the retained log is an earlier push. Rebuilt the parent from the current DAG, retaining only the four stage-1-owned proof fields. Re-read all current citation statements and Stacks 059X, 059W and 0598; no cited statement changed against the retained quotes. The initial resumed dry run passed at 642454ab272. Preserved both statement-only helper tasks, the original argument allocation, explicit kernel lifting, actual search records and all prior review material. The assembly totals 2024 characters. No statement or proof route change was necessary; final server validation and push follow.",
   "blueprint": "Proof (1)--(2), semistable-alteration input: the projectivity of S over R (Tag 05FT) used with Tag 05FQ. Supporting proof of Tag 05DP (lemma-flat-pure-over-complete-projective). Last sentence: 'countably generated, flat and Mittag-Leffler ... whence projective'. The seven steps supply the Tag 059X projectivity sentence inside this inherited supporting algebra branch. Current main-20261015 contracting-correspondence ancestry is retained; no unit route is replaced.",
-  "tool_uses": [
-   {
-    "node": "lem-kun-lazard-flat-module",
-    "why": "Generic flat-module finite-free directed presentation, explicitly used by Tag 059X; the trace-formula unit has no replacement algebra lemma."
-   },
-   {
-    "node": "lem-weil-pbc-mittag-leffler-limit-exact",
-    "why": "Generic exactness of countable inverse limits when the kernel system is Mittag-Leffler, explicitly used by Tag 059X; the trace-formula unit has no replacement."
-   }
-  ]
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-kun-lazard-flat-module",
   "lem-weil-pbc-mittag-leffler-limit-exact"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-Codex-Q61-01d851a46",
-  "group": "Q61",
+  "reviewer": "NT-cc-Q132-0a49886b5",
+  "group": "Q132",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q61-01d851a46 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, cited statements and Stacks sources in full. All seven steps are valid; 059M/059E justify Hom stabilization and 059W justifies countable extraction. No duplicates, circularity, hidden long steps or forbidden machinery found. Accepted both algebraic tool_uses. No repairs needed; detailed checks are in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q132-0a49886b5 (reviewer sub-agent of L); spot-checked: PASS; no fixes written. Follows the human's re-split note of 2026-10-21. Comparing the live 7-step proof with the delivery, nothing was dropped or blurred: old steps 1-3 (Lazard presentation, countable extraction by Stacks 059W, reindexing to a cofinal sequence; 1479 characters) became lem-trf-countable-flat-ml-sequential-presentation, and old steps 5-7 (exact finite-free Hom rows, exact inverse limits by 0598 with an ML kernel, natural iso Hom(P,N)=lim Hom(G_n,N); 1879 characters) became lem-trf-sequential-free-colimit-hom-exact. Old step 4 is item step 2. The two nodes are of comparable size, neither restates the item, and the assembly is 2024 characters. The item changed only in proof, proof_deps, proof_origin and split_report; neither new id exists in live yet. Step 1: the presentation node takes exactly the item's three hypotheses. Step 2: lem-trf-mittag-leffler-hom-systems applies (each R^{r_n} is finitely presented as the cokernel of R^0 to R^{r_n}; positive integers form a small, nonempty, directed index; same cocone; tensor-sense ML), and its conclusion is literally def-weil-pbc-mittag-leffler-system with c(i)=j. Step 3: the Hom node at N1 gives exactness of Hom(P,-), which is the first clause of def-weil-pbc-projective-module. Both new statements match Stacks algebra.tex 059X (lemma-countgen-projective), 059W plus the paragraph after it, and 0598. They hold for P=0, R=0, a finite extracted index, zero ranks, non-injective transitions and N1=0; only ML of the kernel system is needed. Both are self-contained statement-only nodes (B1-B7) with blueprint from/via/same_as correct. Advisory: on the presentation node, LeanSearch is honestly recorded as unavailable (rate limit), and LeanFinder, Loogle and grep searches are present. I searched for duplicates by rg -L over the tags and labels and read 11 candidates (ml-countable-colimit, kun-lazard, directed-function-closure, restricted-colimit-generators-kernels, pbc ML-limit-exact, tower-limit nodes, hom-product-stabilization and others); none duplicates either node. Item steps use only nodes of unit sk-i-curve-zero; there is no SGA use and no cycle."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -254,5 +197,16 @@
   "date": "2026-10-18",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

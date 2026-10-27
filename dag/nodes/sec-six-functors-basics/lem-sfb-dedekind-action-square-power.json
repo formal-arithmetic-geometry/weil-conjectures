@@ -1,0 +1,371 @@
+{
+ "id": "lem-sfb-dedekind-action-square-power",
+ "kind": "statement",
+ "title": "A positive line power satisfies the square condition on a smooth action with connected generic fibre",
+ "statement": "Let $D$ be a Noetherian integrally closed domain of Krull dimension at most one, put $S=\\operatorname{Spec}D$ [def-weil-affine-spectrum], and put $K=\\operatorname{Frac}D$. Let $H\\to S$ be a smooth separated group scheme of finite type with geometrically connected fibres [def-pc-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism, def-weil-connected-scheme]. A group scheme has multiplication, inverse and identity satisfying the group identities (the relative version of [def-sc-group-scheme]); separated means its diagonal is a closed immersion [def-weil-closed-immersion]. Let $X\\to S$ be smooth, separated and of finite type, with an action $a:H\\times_SX\\to X$ satisfying unit and associativity [def-pc-fibre-product], and let $L$ be an invertible $\\mathcal O_X$-module [def-sc-invertible-module]. Assume the generic fibre $X_K=X\\times_S\\operatorname{Spec}K$ is nonempty and geometrically connected, meaning that it stays connected after every extension of $K$ [def-pc-geometrically-irreducible]. Then there is an integer $r\\geq1$ such that $M=L^{\\otimes r}$ satisfies the square condition for this action. For any $S$-scheme $B$, write $X_B=X\\times_SB$, $q_B:X_B\\to B$, and $M_B$ for tensor pullback [def-pc-module-pullback]. For $g\\in H(B)$ let $\\tau_g$ be translation by $g$ on $X_B$. Say that an invertible module $M$ satisfies the square condition if for every $B$ and $g,h\\in H(B)$ there is an invertible module $N$ on $B$ and an isomorphism $$\\tau_{gh}^*M_B\\otimes M_B\\cong\\tau_g^*M_B\\otimes\\tau_h^*M_B\\otimes q_B^*N,$$ with sheaf tensor product [def-pur-sheaf-tensor-product]. No chosen isomorphisms or coherence data are required.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 6.3 Theorem 1, printed p.149 (PDF p.155), together with the functorial square-condition definition on printed pp.148–149 (PDF pp.154–155). Affine integral dimension-at-most-one specialization, with extra separatedness hypotheses; field case included. Local PDF WANTED; online primary scan read.",
+  "url": "https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-connected-scheme",
+  "def-sc-group-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-pc-geometrically-irreducible",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "The base $S$ is regular. Indeed each $D_{\\mathfrak p}$ is Noetherian and integrally closed: ideals localize their finite generators, and if $z$ is integral over a localization, multiplying $z$ by a common denominator in its monic equation makes it integral over $D$. Its dimension is at most one by the prime correspondence. A zero-dimensional local domain is a field, hence regular; in dimension one apply [lem-weil-pbc-regular-local-dim-one-iff-normal]. Set $T=H\\times_SH$, $Y=T\\times_SX$, and denote their projections by $t:T\\to S$, $f:Y\\to T$, $p:Y\\to X$, and $q:X\\to S$. Base change of smoothness [lem-pc-proper-base-change] and composition [lem-trf-smooth-composition] show that $T,Y$ are smooth over $S$. The affine-local smooth-ring interpretation in [def-sbc-smooth-morphisms] and [lem-weil-pbc-regular-ring-smooth-ascent] make $H,X,T,Y$ regular. All are locally Noetherian by [pqf-lem-locnoeth-lft] and quasi-compact by finite type over the affine Noetherian base; hence Noetherian. Each smooth separated finite-type morphism here is of finite presentation: it is locally of finite presentation and quasi-compact, and its closed diagonal is quasi-compact. These are precisely the three conditions in [def-sbc-locally-finite-presentation].",
+   "uses": [
+    "lem-weil-pbc-regular-local-dim-one-iff-normal",
+    "lem-pc-proper-base-change",
+    "lem-trf-smooth-composition",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-regular-ring-smooth-ascent",
+    "pqf-lem-locnoeth-lft",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD (lemma-characterize-dvr), (3) iff (5); Tag 07NF (lemma-regular-goes-up). BLR 6.3 Lemma 2, regularity of the products."
+   }
+  },
+  {
+   "text": "For any $s\\in S$ and any field extension $F/\\kappa(s)$, the scheme $H_F$ is nonempty (identity section) and is normal and integral by [lem-trf-smooth-connected-fibre-normal-integrality]. Applied to $X_K\\to\\operatorname{Spec}K$, the same node makes $X_K$ geometrically integral. Also $H_F\\times_FH_F$ is integral: apply [lem-sbc-smooth-connected-generic-geometry-core] to its projection onto the normal integral scheme $H_F$. This projection is smooth by base change and all its fibres are geometrically connected base changes of $H_F$. Now $X$ is normal by [rem-pc-regular-normal](1), and its finitely many irreducible components are disjoint open and closed by clause (2). Every nonempty affine open $\\operatorname{Spec}A\\subset X$ meets $X_K$: smoothness is flat by [lem-pc-smooth-flat], so [lem-trf-flat-module-torsionfree-domain] makes $A\\to A\\otimes_DK$ injective; its nonzero target has a prime. Thus every component meets $X_K$. Since $X_K$ is integral, only one component is possible. Consequently $X$ is normal integral, its generic point maps to the generic point of $S$, and $X_K$ is dense. In particular this argument imposes no connectedness or nonemptiness requirement on the special fibres of $X$.",
+   "uses": [
+    "lem-trf-smooth-connected-fibre-normal-integrality",
+    "lem-sbc-smooth-connected-generic-geometry-core",
+    "lem-pc-proper-base-change",
+    "rem-pc-regular-normal",
+    "lem-pc-smooth-flat",
+    "lem-trf-flat-module-torsionfree-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 057J (lemma-normal-morphism-irreducible), smooth geometric-fibre specialization; properties.tex Tag 033M. BLR 6.3 Lemma 2, integral-base reduction."
+   }
+  },
+  {
+   "text": "On $H\\times_SH\\times_SX$ define $b(u,v,x)=(uv^{-1})x$ and $A=b^*L$. Apply [lem-sfb-field-product-square-power] over $K$ to the three factors $H_K,H_K,X_K$ and the line $A_K$. Their geometric integrality is Step 2; smoothness, separatedness and finite presentation survive base change by [lem-pc-proper-base-change], [lem-weil-pbc-separated-base-change] and [lem-weil-pbc-qcqs-morphism-permanence](3). We obtain $r\\geq1$ and a line $J_K$ on $H_K^4$ such that $D(A_K^{\\otimes r})\\cong\\pi_K^*J_K$, with $D$ and $\\pi_K$ exactly as in the cited node. Put $M=L^{\\otimes r}$. Pullbacks preserve lines, duals and tensor products: on a local frame the tensor pullback of [def-pc-module-pullback] sends its generator to $1\\otimes e$, so these assertions follow by multiplying generators [def-sc-invertible-module]. Thus $A_K^{\\otimes r}=b_K^*M_K$.",
+   "uses": [
+    "lem-sfb-field-product-square-power",
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-separated-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-pc-module-pullback",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Proposition 5.2(ii), field case, printed pp.11-12; March 31, 2026 author PDF read online. BLR 6.3 Theorem 1, final field reduction."
+   }
+  },
+  {
+   "text": "Define maps $c_{12},c_1,c_2:Y\\to X$ by $c_{12}(g,h,x)=(gh)x$, $c_1(g,h,x)=gx$, $c_2(g,h,x)=hx$, and define the line $$C=c_{12}^*M\\otimes p^*M\\otimes(c_1^*M)^{-1}\\otimes(c_2^*M)^{-1}.$$ Pull the isomorphism of Step 3 back along $$Y_K\\longrightarrow H_K^4\\times_KX_K,\\qquad(g,h,x)\\longmapsto(g,e,h^{-1},e,x).$$ In the order $(r_{00},r_{11},r_{01},r_{10})$ of the field-product node, the four composites with $b_K$ are $(gh)x,x,gx,hx$. Therefore $$C_K\\cong f_K^*N_K,\\qquad N_K=(g,h\\mapsto(g,e,h^{-1},e))^*J_K.$$ Pullback composition is the formula of [def-pc-module-pullback], and cancellation of lines uses [def-sc-invertible-module]. No factors of $H$ have been commuted.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-sc-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "6.3, printed p.149 (PDF p.155), universal square-difference line; the coordinate specialization supplies its generic descent line."
+   }
+  },
+  {
+   "text": "Extend $N_K$ to a line $N$ on $T$. Here are the two separate extension inputs. Index by the small directed set of finite subsets $E\\subset D\\setminus\\{0\\}$ and set $d_E=\\prod_{a\\in E}a$, $T_E=T\\times_SD(d_E)$. Each $T_E$ is quasi-compact and quasi-separated, by the finite-presentation and separated base-change clauses used in Step 3. Transition maps are affine: on any affine chart they are localization at the additional base elements. Their inverse limit is $T_K$, since a morphism to $T$ factors through every $T_E$ exactly when all nonzero elements of $D$ become units, equivalently when its base map factors through $\\operatorname{Spec}K$. By [lem-trf-invertible-affine-limit-descent], $N_K$ descends to a line on some open $T_E$. Every local ring of $T$ is regular by Step 1, hence a UFD by [lem-trf-regular-local-ufd-boundary-factorization] with the empty parameter tuple. Apply [lem-sfb-invertible-extension-factorial-complement] to $T_E\\subseteq T$ to obtain $N$ extending that line, with $N|_{T_K}\\cong N_K$. In the field case one can take $T_E=T$.",
+   "uses": [
+    "lem-trf-invertible-affine-limit-descent",
+    "lem-trf-regular-local-ufd-boundary-factorization",
+    "lem-sfb-invertible-extension-factorial-complement",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-separated-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0B8W (lemma-descend-invertible-modules), (2); divisors.tex Tag 0BD9 (lemma-extend-invertible-module); more-algebra.tex Tag 0AG0 (lemma-regular-local-UFD). BLR 6.3 Lemma 2, extension of the generic base line."
+   }
+  },
+  {
+   "text": "Put $R=C\\otimes(f^*N)^{-1}$ on $Y$. Step 4 gives $R|_{Y_K}\\cong\\mathcal O_{Y_K}$. Apply [lem-sfb-normal-noetherian-generic-line-pullback] to $p:Y\\to X$ and $R$. Its hypotheses hold as follows: $X$ is normal integral by Step 2; $X,Y$ are Noetherian by Step 1; $p$ is smooth, hence flat and locally of finite type, by base change and [lem-pc-smooth-flat]. For any $x\\in X$ mapping to $s\\in S$, its fibre is $H_{\\kappa(x)}\\times_{\\kappa(x)}H_{\\kappa(x)}$, integral and nonempty by Step 2, applied to $\\kappa(x)/\\kappa(s)$. Finally the generic point of $X$ lies in $X_K$, so $R$ is trivial on the generic fibre of $p$, by restriction of its trivialization on $Y_K$. The cited node therefore gives a line $P$ on $X$ and $R\\cong p^*P$. This uses the projection to $X$, whose fibres are integral, rather than the projection to $T$, whose fibres need not be integral.",
+   "uses": [
+    "lem-sfb-normal-noetherian-generic-line-pullback",
+    "lem-pc-proper-base-change",
+    "lem-pc-smooth-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD7 (lemma-in-image-pullback), all hypotheses (1)-(5). BLR 6.3 Lemma 2, projection onto X in the vertical-divisor argument."
+   }
+  },
+  {
+   "text": "Let $e_2:S\\to T$ be $(e,e)$ and let $\\sigma:X\\to Y$ be $x\\mapsto(e,e,x)$. The action unit identity gives $\\sigma^*C\\cong M\\otimes M\\otimes M^{-1}\\otimes M^{-1}\\cong\\mathcal O_X$. Also $p\\sigma=\\mathrm{id}_X$ and $f\\sigma=e_2q$. Pulling $R\\cong p^*P$ back along $\\sigma$ thus gives $$P\\cong q^*(e_2^*N)^{-1}.$$ Since $qp=tf$, substitution into $C\\cong f^*N\\otimes p^*P$ yields $$C\\cong f^*N_0,\\qquad N_0=N\\otimes t^*(e_2^*N)^{-1}.$$ These equalities use only pullback composition and the local-frame tensor and dual formulas [def-pc-module-pullback, def-sc-invertible-module].",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-sc-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "6.3 Lemma 2, printed p.151 (PDF p.157), pullback along the pair of identity sections; normalized correction of the base line."
+   }
+  },
+  {
+   "text": "For any $S$-scheme $B$ and $g,h\\in H(B)$, pull $C\\cong f^*N_0$ back along $$X_B\\longrightarrow Y,\\qquad x\\longmapsto(g,h,x).$$ Its four left factors become $\\tau_{gh}^*M_B,M_B,(\\tau_g^*M_B)^{-1},(\\tau_h^*M_B)^{-1}$; its right side becomes $q_B^*(g,h)^*N_0$. Tensor both sides with $\\tau_g^*M_B\\otimes\\tau_h^*M_B$ and cancel inverse lines [def-sc-invertible-module]. This is exactly the required square condition, with base line $(g,h)^*N_0$ and the single exponent $r$ from Step 3. The computation uses tensor pullback and its composition law [def-pc-module-pullback]; it is valid for nonreduced, disconnected or empty $B$ as well as for field-valued points.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-sc-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "6.3, printed pp.149-150 (PDF pp.155-156), universal square difference and its pullback at two arbitrary functorial points."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-regular-local-dim-one-iff-normal",
+  "lem-pc-proper-base-change",
+  "lem-trf-smooth-composition",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-regular-ring-smooth-ascent",
+  "pqf-lem-locnoeth-lft",
+  "def-sbc-locally-finite-presentation",
+  "lem-trf-smooth-connected-fibre-normal-integrality",
+  "lem-sbc-smooth-connected-generic-geometry-core",
+  "rem-pc-regular-normal",
+  "lem-pc-smooth-flat",
+  "lem-trf-flat-module-torsionfree-domain",
+  "lem-sfb-field-product-square-power",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "lem-trf-invertible-affine-limit-descent",
+  "lem-trf-regular-local-ufd-boundary-factorization",
+  "lem-sfb-invertible-extension-factorial-complement",
+  "lem-sfb-normal-noetherian-generic-line-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "6.3 Theorem 1 and Lemma 2, printed pp.149-151, online primary scan read. Field input realized by the existing Guo Proposition 5.2(ii) node; generic base-line extension and residual descent explicitly use Stacks 0B8W, 0BD9 and 0BD7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Tt]heorem.of.the.[Ss]quare|Picard.admiss|square.condition",
+   "results": "{\"t\": \"2026-10-24T08:50:30Z\", \"tool\": \"grep\", \"query\": \"[Tt]heorem.of.the.[Ss]quare|Picard.admiss|square.condition\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; affine basic-open/local-property, ring Picard-group, and ordinary square/smoothness results do not state this scheme-action or ampleness reduction theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Theorem of the square for line bundles on smooth connected schemes with an action of a smooth connected group over a strictly henselian trait",
+   "results": "{\"t\": \"2026-10-24T08:50:31Z\", \"tool\": \"leansearch\", \"query\": \"Theorem of the square for line bundles on smooth connected schemes with an action of a smooth connected group over a strictly henselian trait\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSquare.isSumSq\", \"Algebra.FormallySmooth.of_split\", \"IsSepClosed.exists_eq_mul_self\", \"IsSquare.exists_mul_self\", \"Subgroup.sq_mem_of_index_two\", \"IsSquare.mul_self\", \"isSquare_unop_iff\", \"tensorKaehlerQuotKerSqEquiv\"], \"digest\": \"ebe5b207f20060b9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; affine basic-open/local-property, ring Picard-group, and ordinary square/smoothness results do not state this scheme-action or ampleness reduction theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth connected scheme surjective over a strictly henselian discrete valuation ring a tensor power of every line bundle satisfies the theorem of the square for a connected smooth group action",
+   "results": "{\"t\": \"2026-10-24T08:50:35Z\", \"tool\": \"leanfinder\", \"query\": \"For a smooth connected scheme surjective over a strictly henselian discrete valuation ring a tensor power of every line bundle satisfies the theorem of the square for a connected smooth group action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor\", \"AlgebraicGeometry.instBraidedCategoryScheme\", \"Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul\", \"Algebra.Extension.tensorH1Cotangent\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensor\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl\", \"RingHom.SurjectiveOnStalks.exists_mul_eq_tmul\", \"IsPurelyInseparable.exists_pow_pow_mem_range_tensorProduct_of_expChar\"], \"digest\": \"317b0154e4c23f35\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; affine basic-open/local-property, ring Picard-group, and ordinary square/smoothness results do not state this scheme-action or ampleness reduction theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Theorem of the square for a smooth group acting on a smooth finite type scheme with geometrically connected generic fibre over a Dedekind scheme: a positive tensor power of every invertible sheaf has additive translation differences",
+   "results": "{\"t\": \"2026-10-24T08:56:18Z\", \"tool\": \"leanfinder\", \"query\": \"Theorem of the square for a smooth group acting on a smooth finite type scheme with geometrically connected generic fibre over a Dedekind scheme: a positive tensor power of every invertible sheaf has additive translation differences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom_assoc\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm\", \"Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor\"], \"digest\": \"3e24d30b4342f97e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; affine basic-open/local-property, ring Picard-group, and ordinary square/smoothness results do not state this scheme-action or ampleness reduction theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "IsAmple|isAmple|[Tt]heorem.of.the.[Ss]quare|Picard.admiss",
+   "results": "{\"t\": \"2026-10-24T08:59:19Z\", \"tool\": \"grep\", \"query\": \"IsAmple|isAmple|[Tt]heorem.of.the.[Ss]quare|Picard.admiss\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; affine basic-open/local-property, ring Picard-group, and ordinary square/smoothness results do not state this scheme-action or ampleness reduction theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a connected smooth scheme with geometrically connected generic fibre over a normal one dimensional base and a connected smooth group action some positive tensor power of a line bundle satisfies the theorem of the square",
+   "results": "{\"t\": \"2026-10-24T08:59:19Z\", \"tool\": \"leansearch\", \"query\": \"For a connected smooth scheme with geometrically connected generic fibre over a normal one dimensional base and a connected smooth group action some positive tensor power of a line bundle satisfies the theorem of the square\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"AlgebraicGeometry.ValuativeCommSq.i₁\", \"AlgebraicGeometry.ValuativeCommSq.algebra\", \"AlgebraicGeometry.AffineSpace.isPullback_map\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\"], \"digest\": \"40a4d1d09d25166f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; affine basic-open/local-property, ring Picard-group, and ordinary square/smoothness results do not state this scheme-action or ampleness reduction theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, PicardGroup",
+   "results": "{\"t\": \"2026-10-24T09:25:48Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry, PicardGroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A positive tensor power of an invertible sheaf on a smooth scheme over a Dedekind domain satisfies the theorem of the square for a connected smooth group action",
+   "results": "{\"t\": \"2026-10-24T09:25:50Z\", \"tool\": \"leanfinder\", \"query\": \"A positive tensor power of an invertible sheaf on a smooth scheme over a Dedekind domain satisfies the theorem of the square for a connected smooth group action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.pow_apply\", \"CommRing.Pic.mul_eq_tensor\", \"CommRing.Pic.mk_tensor\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"CommRing.Pic.mapAlgebra_apply\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.Scheme.basicOpen_pow\", \"CommRing.Pic.mapAlgebra\"], \"digest\": \"8e954f32cbf227f4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned ring Picard-group, basic-open, manifold-sheaf and ordinary algebra results do not state a scheme-action theorem of the square."
+  },
+  {
+   "tool": "grep",
+   "query": "[Tt]heorem.of.the.[Ss]quare|square.condition|Picard",
+   "results": "{\"t\": \"2026-10-24T09:28:01Z\", \"tool\": \"grep\", \"query\": \"[Tt]heorem.of.the.[Ss]quare|square.condition|Picard\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\"], \"digest\": \"6bb700cdd5010361\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned ring Picard-group, basic-open, manifold-sheaf and ordinary algebra results do not state a scheme-action theorem of the square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Translation differences of a line bundle form a group homomorphism from a connected smooth group to the relative Picard functor after taking a positive tensor power",
+   "results": "{\"t\": \"2026-10-24T09:29:03Z\", \"tool\": \"leanfinder\", \"query\": \"Translation differences of a line bundle form a group homomorphism from a connected smooth group to the relative Picard functor after taking a positive tensor power\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRing.Pic.functor\", \"CommRing.relPic\", \"Submodule.unitsToPic\", \"Submodule.range_unitsToPic\", \"CommRing.Pic.mapAlgebra\", \"instCommGroupPic\", \"Submodule.unitsQuotEquivRelPic\", \"CommRing.Pic.mapRingHom\"], \"digest\": \"69220c0c37c83489\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned ring Picard-group, basic-open, manifold-sheaf and ordinary algebra results do not state a scheme-action theorem of the square."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Theorem of the square for a smooth group action on an invertible sheaf over a Dedekind domain",
+   "results": "{\"t\": \"2026-10-24T09:29:03Z\", \"tool\": \"leansearch\", \"query\": \"Theorem of the square for a smooth group action on an invertible sheaf over a Dedekind domain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.relNorm_smul\", \"smoothSheafCommGroup\", \"smoothSheafGroup\", \"integralClosure.coe_smul\", \"Algebra.FormallySmooth.of_split\", \"IsLocalRing.ResidueField.residue_smul\", \"Polynomial.smul_mem_rootSet_iff\", \"instSMulCommClassSubtypeMemSubalgebraIntegralClosure\"], \"digest\": \"05b512d69dd5c819\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned ring Picard-group, basic-open, manifold-sheaf and ordinary algebra results do not state a scheme-action theorem of the square."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dedekind-action-boundary-ampleness",
+  "date": "2026-10-24",
+  "group": "Q35"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), open direct image preservation through sk-prop-open-coefficients; in the DAG refinement of admissible direct image, trait-extension input and finite-flat Néron lft descent (BLR 10.1 Proposition 4). BLR 10.1, proof of Proposition 4, printed p.291 (PDF p.297), first sentence; preceding discussion printed p.290 and 6.4 Theorem 1 for the affine-neighbourhood input. Boundary ampleness criterion used in 6.4 Theorem 1, separated from both the construction of the affine complement and finite-set prime avoidance. Auxiliary to the boundary ampleness proof: A positive line power satisfies the square condition on a smooth action with connected generic fibre.",
+   "via": [
+    "lem-sfb-dedekind-action-boundary-ampleness",
+    "lem-sfb-neron-lft-finite-set-affine",
+    "lem-sfb-neron-lft-weil-restriction-geometry",
+    "lem-sfb-finite-flat-neron-lft-descent",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dedekind-action-square-power",
+  "worker": "stage1",
+  "summary": "O2: eight-step BLR generic-fibre square proof using the existing field product theorem and Stacks Picard descent and extension nodes. No statement change and no new nodes. Explicitly checks X integrality without connected special fibres, the finite-presentation requirements, the correct projection for 0BD7, and the noncommutative translation order.",
+  "blueprint": "The inherited provenance is the auxiliary boundary-ampleness input to the open-direct-image step of sk-thm-sf-ctf-stability, through sk-prop-open-coefficients. Read their current latest files. The present split realizes BLR 6.3 Theorem 1 below that fixed route; no unit or chapter changes. Whole-DAG and blueprint searches for theorem of the square, square condition and Picard found no same-statement blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-regular-local-dim-one-iff-normal",
+    "why": "Step 1 uses only the local normal-dimension-one regularity criterion; the unit supplies no such commutative algebra tool."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Steps 1, 2, 3 and 6 use only clause (2), stability of smoothness under base change, not its properness clause."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-smooth-ascent",
+    "why": "Step 1 uses regularity under smooth affine ring maps to justify factorial extension of the generic line."
+   },
+   {
+    "node": "lem-trf-smooth-connected-fibre-normal-integrality",
+    "why": "Step 2 uses normal integral geometry of smooth geometrically connected field fibres; this is a generic geometry tool."
+   },
+   {
+    "node": "lem-sbc-smooth-connected-generic-geometry-core",
+    "why": "Step 2 applies the normal integral total-space assertion to the projection H_F squared to H_F, to verify the integral-fibre hypothesis of 0BD7."
+   },
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Step 2 uses clauses (1) and (2), regular implies normal and disjoint integral components of a Noetherian normal scheme."
+   },
+   {
+    "node": "lem-trf-invertible-affine-limit-descent",
+    "why": "Step 5 uses only descent of one invertible module through affine-transition limits to spread the generic base line before 0BD9."
+   },
+   {
+    "node": "lem-trf-regular-local-ufd-boundary-factorization",
+    "why": "Step 5 uses only the regular-local UFD assertion with r=0, a generic algebra tool needed for 0BD9."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-regular-local-dim-one-iff-normal",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-regular-ring-smooth-ascent",
+  "lem-trf-smooth-connected-fibre-normal-integrality",
+  "lem-sbc-smooth-connected-generic-geometry-core",
+  "rem-pc-regular-normal",
+  "lem-trf-invertible-affine-limit-descent",
+  "lem-trf-regular-local-ufd-boundary-factorization"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-O2-f10b92065",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-f10b92065 (reviewer sub-agent of L); spot-checked: I read the item and all 8 steps in full, plus the statement of every cited node; no new nodes and no fixes. Not a re-split: the base proof was empty, and there is no repair note. BLR is not in literature/ (WANTED carried forward), so the steps were checked mathematically. Step 1: base and spaces regular via 00PD and smooth ascent; finite presentation from separated + finite type. Step 2: H_F and X_K integral; H_F×H_F integral via sbc-core on the projection; flat⇒torsion-free means every component of X meets X_K, so X is integral with no special-fibre hypothesis. Step 3: field-product-square-power hypotheses rechecked for H_K, H_K, X_K and b*L. Step 4: substitution (g,e,h^{-1},e) recomputed and gives (gh)x, x, gx, hx in the order of D; H need not be commutative. Step 5: lim T_E = T_K checked, then 0B8W, regular⇒UFD, 0BD9. Step 6: 0BD7 (1)-(5) checked against divisors.tex for p:Y→X, whose fibres H_{κ(x)}×H_{κ(x)} are integral. Step 7: σ=(e,e,id) normalization gives C≅f*N0. Step 8: pullback along (g,h,x) gives the square condition for all B. Sanity cases (D a field, elliptic curve over a DVR, G_m on A^1) are fine. The 8 declared tool_uses are generic and accepted; the other off-unit citations are Mathlib leaves or definitions; no cycle. Batch-5: every flagged citation (trf smooth-composition, smooth-fibre integrality, flat torsion-free, 0B8W limit descent, regular-local UFD, and the closures via field-product, factorial extension and generic-line-pullback) is generic algebra or geometry, not part of the trace formula or Poincaré duality, so all are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DedekindActionSquarePower",
+  "declaration": "AlgebraicGeometry.exists_tensorPow_square_of_dedekind_action",
+  "file": "lean/Sheaf/AlgebraicGeometry/DedekindActionSquarePower.lean",
+  "statement": "theorem exists_tensorPow_square_of_dedekind_action (D : Type u) [CommRing D] [IsDomain D] [IsNoetherianRing D] [IsIntegrallyClosed D] (hdim : ringKrullDim D ≤ 1) (H : Over (Spec (CommRingCat.of D))) [GrpObj H] [Smooth H.hom] [IsSeparated H.hom] [LocallyOfFiniteType H.hom] [QuasiCompact H.hom] [GeometricallyConnected H.hom] (X : Over (Spec (CommRingCat.of D))) [Smooth X.hom] [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [ModObj H X] (hgeneric : GeometricallyConnected (pullback.snd X.hom (Spec.map (CommRingCat.ofHom (algebraMap D (FractionRing D)))))) (L : X.left.Modules) [L.IsInvertible] : ∃ r : ℕ, 1 ≤ r ∧ ∀ (B : Over (Spec (CommRingCat.of D))) (g h : B ⟶ H), ∃ N : B.left.Modules, N.IsInvertible ∧ Nonempty (((Scheme.Modules.tensorPullback (((snd X B ≫ (g * h)) • fst X B).left)).obj (L.tensorPow r) ⊗ (Scheme.Modules.tensorPullback (fst X B).left).obj (L.tensorPow r)) ≅ (((Scheme.Modules.tensorPullback (((snd X B ≫ g) • fst X B).left)).obj (L.tensorPow r) ⊗ (Scheme.Modules.tensorPullback (((snd X B ≫ h) • fst X B).left)).obj (L.tensorPow r)) ⊗ (Scheme.Modules.tensorPullback (snd X B).left).obj N))",
+  "branch": "newtargets-dag",
+  "by": "Q69",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-76884081b",
+  "group": "Q69",
+  "result": "pass",
+  "note": "Lean statement matches the node clause by clause. D: Noetherian integrally closed domain, ringKrullDim ≤ 1, field case allowed. H: GrpObj in Over Spec D with Smooth/IsSeparated/LOFT/QC/GeometricallyConnected; the nonempty-fibre part is implied by the identity section, so not stronger. X: same four classes + ModObj (unit/assoc). X_K: GeometricallyConnected of pullback.snd along Spec Frac D, ConnectedSpace gives nonemptiness. L: IsInvertible. Conclusion: ∃ r≥1, ∀ B g h, ∃ invertible N, Nonempty iso; translations via ModObj smul lift m x ≫ γ = (x,b)↦g(b)x; g*h order kept, H noncommutative ok. Edge cases: empty X/X_K excluded, any B allowed, special fibres unconstrained, r=0 excluded. Single universe u. lean.statement verbatim (checked by script); stmt_deps unchanged and publicly imported; only the lean field differs from live. No new defs, docstring has source place + blueprint + 8 proof steps, body sorry. Report has Worker report and Second reading by Q69. ⊗ instance may resolve to either sheaf-tensor instance, both are the sheaf tensor product, same as landed NormalGroupSquarePower. No compile (worker reports clean scompile); no fixes."
+ }
+}

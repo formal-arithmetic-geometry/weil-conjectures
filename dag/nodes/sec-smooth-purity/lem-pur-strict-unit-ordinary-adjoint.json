@@ -1,0 +1,133 @@
+{
+ "id": "lem-pur-strict-unit-ordinary-adjoint",
+ "kind": "statement",
+ "title": "Ordinary quotient adjunct of the strict coefficient unit",
+ "statement": "Fix a prime l and a finite extension E of ℚ_l, with scheme and coefficient universes independent. Complex, level, transition, ordinaryAlpha and the named constructor predicates refer to the actual strict ringed sequence-site complexes and maps [def-pur-strict-quotient-expressions]. S and D range over the normalized derived tensor and finite quotient calculi, whose units and tensor model are pinned [lem-coef-derived-system-evaluation-calculus]. The following holds for all displayed schemes, maps, complexes and levels (level n denotes exponent n+1):\n\ntheorem strictUnitOrdinaryAdjoint (W : Scheme.{t})\n    (S : CoefficientDerivedSystemTensors l E W)\n    (D : CoefficientFiniteQuotientCalculus l E W S) {m n : ℕ} (hmn : n ≤ m) :\n    IsIso (ordinaryAlpha l E (𝟙_ (Complex l E W)) S D hmn)",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A6; sites-modules.tex Tag 03EL; unit constructor of quotient normalization."
+ },
+ "stmt_deps": [
+  "def-pur-strict-quotient-expressions",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate the strict coefficient module unit at each level. The canonical map from the finite ring unit to this evaluation is induced by the inverse of coefficientSequenceEvaluationRing_eq. Every section component is the corresponding ring isomorphism, hence this map is an isomorphism (evaluationUnit).",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "def-pur-strict-quotient-expressions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The section formula in coefficientSequenceTransition_exists, applied to the strict module unit, shows that the actual horizontal transition sends one to one. Apply unitHomEquiv to identify its conjugate by the two evaluationUnit isomorphisms with unitToPushforwardObjUnit for the quotient ring map. Equality follows by evaluation at one, since a map out of the rank-one unit is determined by its global section.",
+   "uses": [
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any adjunction from a module category to another whose right adjoint is scalar restriction along a ring map, the adjunct of unitToPushforwardObjUnit is invertible. Indeed, precomposition by that adjunct corresponds under the adjunction and unitHomEquiv to the identity on global sections; scalar restriction changes neither sections nor their compatibility condition. Thus this precomposition map is bijective for every target, and coyoneda detects isomorphisms. Conjugating by the evaluationUnit isomorphisms proves unit_module_adjoint_isIso for the given D.ordinaryAdjunction. Invertibility needs no chosen ordinary-unit normalization.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The strict complex unit is the single complex on the strict module unit in degree zero. The cochain adjunct is degreewise the module adjunct. In degree zero use naturality along singleObjXSelf and unit_module_adjoint_isIso; in every other degree the single complex is zero, and additive evaluation and scalar extension preserve zero objects. Each component is therefore invertible. HomologicalComplex.Hom.isIso_of_components proves the displayed ordinaryAlpha is invertible.",
+   "uses": [
+    "def-pur-strict-quotient-expressions",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-sequence-site",
+  "def-pur-strict-quotient-expressions",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A6; sites-modules.tex Tag 03EL; the unit construction, proved by the global-section Hom bijection of Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree and degreewise single-complex evaluation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars for sheaf complexes sends the unit to the unit, the adjunct of tensor transitions is tensor of adjuncts, and inverse image commutes with quotient adjuncts",
+   "results": "SheafOfModules.pushforwardSections_unitHomEquiv, unitToPushforwardObjUnit and pullbackObjUnitToUnit; ordinary sheaf-unit building blocks, no strict sequence-site constructor equation.",
+   "date": "2026-10-26",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"IsIso\"",
+   "results": "Generic adjunction and fully faithful functor lemmas; no constructor law with evaluated strict sequence transitions.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*adjoint|adjoint.*quotient|tensor.*adjunct",
+   "results": "Nineteen ordinary tensor-adjunction hits; no strict coefficient sequence constructor law.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QuotientExpressionKFlatOperations",
+  "date": "2026-10-26",
+  "group": "E5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Former proof step 5; constructor step of the strict quotient-expression normalization extracted in lem-pur-integral-coherence-tower. Ordinary quotient adjunct of the strict coefficient unit.",
+   "via": [
+    "lem-pur-quotient-expression-kflat-operations",
+    "lem-pur-quotient-expression-kflat-normalization",
+    "lem-pur-integral-coherence-tower",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictUnitOrdinaryAdjoint",
+  "file": "lean/Sheaf/Paper/StrictUnitOrdinaryAdjoint.lean",
+  "declaration": "WeilConjectures.StrictQuotient.strictUnitOrdinaryAdjoint",
+  "statement": "theorem strictUnitOrdinaryAdjoint (W : Scheme.{t})\n    (S : CoefficientDerivedSystemTensors l E W)\n    (D : CoefficientFiniteQuotientCalculus l E W S) {m n : ℕ} (hmn : n ≤ m) :\n    IsIso (ordinaryAlpha l E (𝟙_ (Complex l E W)) S D hmn)",
+  "branch": "sheaf-dag",
+  "by": "E5",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-31f2e",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261026T065545-L-3078776",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V8",
+  "result": "pass",
+  "landing": "20261026T092944-L-3483687",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

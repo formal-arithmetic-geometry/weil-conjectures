@@ -3,26 +3,32 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: NO stage 2
 -/
+module
 
-import Sheaf.AlgebraicGeometry.MonoschemeToricRealization
-import Sheaf.RingTheory.GeometricallyReducedBaseChange
-import Sheaf.RingTheory.AffineMonoidAlgebraNormalization
-import WeilConjectures.AlgebraicGeometry.Thickening
-import Mathlib.AlgebraicGeometry.Group.Affine
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.CategoryTheory.Monoidal.Cartesian.Mod
-import Mathlib.RingTheory.HopfAlgebra.MonoidAlgebra
-import Mathlib.Algebra.Field.ULift
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Mathlib.Topology.Connected.Basic
-import Sheaf.AlgebraicGeometry.FineFanBlowup
-import Mathlib.LinearAlgebra.FreeModule.PID
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Sheaf.AlgebraicGeometry.MonoschemeToricRealization
+import Sheaf.AlgebraicGeometry.MonoschemeFiniteChartComponents
+import Sheaf.AlgebraicGeometry.LatticeTorusCoordinatesAction
+import WeilConjectures.AlgebraicGeometry.GroupScheme.Cartier
+import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
+import Sheaf.AlgebraicGeometry.ComponentTorusActionLaws
+import Mathlib.Topology.Connected.TotallyDisconnected
+import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import WeilConjectures.AlgebraicGeometry.Thickening
+public import Mathlib.AlgebraicGeometry.Group.Affine
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.Mod
+public import Mathlib.RingTheory.HopfAlgebra.MonoidAlgebra
+public import Mathlib.Algebra.Field.ULift
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+public import Mathlib.Topology.Connected.Basic
+public import Sheaf.AlgebraicGeometry.FineFanBlowup
+public import Mathlib.LinearAlgebra.FreeModule.PID
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 
 /-!
 # Finite-type reduced toric realizations and their smooth tori
@@ -45,6 +51,8 @@ properties.  The proof uses the dependency nodes
 `lem-trf-geometrically-reduced-base-change`, `def-sbc-locally-finite-presentation`,
 `def-sbc-first-order-thickening`, and the definitions cited below.
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 
@@ -71,6 +79,61 @@ noncomputable abbrev coordinateTorusGroup (k : Type u) [Field k] (r : ℕ) :
     Grp (Over (Spec (.of k))) :=
   Grp.mk ((Spec (.of (MonoidAlgebra k (Multiplicative (Fin r → ℤ))))).asOver
     (Spec (.of k)))
+
+private theorem finite_union (n : ℕ) (X : Fin n → Scheme.{u})
+    (S : Scheme.{u}) (f : ∀ i, X i ⟶ S)
+    (hr : ∀ i, IsReduced (X i))
+    (ht : ∀ i, LocallyOfFiniteType (f i))
+    (hq : ∀ i, QuasiCompact (f i))
+    (hc : ∀ i, Finite (ConnectedComponents (X i)))
+    [CompactSpace S] [QuasiSeparatedSpace S] :
+    IsReduced (∐ X) ∧ Finite (ConnectedComponents (∐ X : Scheme.{u})) ∧
+      LocallyOfFiniteType (Sigma.desc f) ∧ QuasiCompact (Sigma.desc f) := by
+  have hri (i : Fin n) : IsReduced (X i) := hr i
+  have hci (i : Fin n) : CompactSpace (X i) := by
+    have : QuasiCompact (f i) := hq i
+    exact QuasiCompact.compactSpace_of_compactSpace (f i)
+  have hfi (i : Fin n) : Finite (ConnectedComponents (X i)) := hc i
+  have : Finite (sigmaOpenCover X).I₀ := inferInstanceAs (Finite (Fin n))
+  have : ∀ i, CompactSpace ((sigmaOpenCover X).X i) := hci
+  have : ∀ i, IsReduced ((sigmaOpenCover X).X i) := hri
+  have : CompactSpace (∐ X : Scheme.{u}) := (sigmaOpenCover X).compactSpace
+  refine ⟨IsReduced.of_openCover (∐ X) (sigmaOpenCover X), ?_,
+    IsZariskiLocalAtSource.sigmaDesc (P := @LocallyOfFiniteType) ht, inferInstance⟩
+  let g : (Σ i, ConnectedComponents (X i)) → ConnectedComponents (∐ X : Scheme.{u}) :=
+    fun ⟨i, c⟩ ↦ (Sigma.ι X i).continuous.connectedComponentsMap c
+  apply Finite.of_surjective g
+  intro c
+  obtain ⟨x, rfl⟩ := ConnectedComponents.surjective_coe c
+  obtain ⟨i, xi, rfl⟩ := (sigmaOpenCover X).exists_eq x
+  exact ⟨⟨i, ConnectedComponents.mk xi⟩, by rfl⟩
+
+private theorem component_torus_smooth (k : Type u) [Field k] [CharZero k]
+    (M : Fine.{u}) (hM : M.IsTorsionFree) (C : ToricComponent M) :
+    Smooth (torusToBase k C) := by
+  obtain ⟨r, ⟨b⟩⟩ := (finite_chart_components_algebra k M hM C).2.1
+  have : LocallyOfFiniteType (torusToBase k C) :=
+    (latticeTorus_finiteType k C.lattice r b).2.1
+  let : GrpObj (Over.mk (torusToBase k C)) := (torusGroup k C).grp
+  exact smooth_of_grpObj_of_charZero (torusToBase k C)
+
+private theorem component_torus_projection_surjective (k : Type u) [Field k]
+    {M : Fine.{u}} (C : ToricComponent M) (Y : Scheme.{u})
+    (fY : Y ⟶ Spec (.of k)) : Surjective (pullback.snd (torusToBase k C) fY) := by
+  let ε := Spec.map (CommRingCat.ofHom
+    (Bialgebra.counitAlgHom k (MonoidAlgebra k C.lattice)).toRingHom)
+  have hε : ε ≫ torusToBase k C = 𝟙 _ := by
+    change Spec.map _ ≫ Spec.map _ = 𝟙 _
+    rw [← Spec.map_comp, ← Spec.map_id]
+    congr 1
+    exact CommRingCat.hom_ext (RingHom.ext fun c ↦
+      Bialgebra.counit_algebraMap (R := k) (A := MonoidAlgebra k C.lattice) c)
+  let s : Y ⟶ pullback (torusToBase k C) fY :=
+    pullback.lift (fY ≫ ε) (𝟙 Y) (by simp [Category.assoc, hε])
+  have hs : s ≫ pullback.snd (torusToBase k C) fY = 𝟙 Y := by simp [s]
+  constructor
+  intro y
+  exact ⟨s y, congrArg (fun f : Y ⟶ Y ↦ f y) hs⟩
 
 /-- Fine torsion-free monoschemes with finite affine covers have reduced finite-type
 realizations, integral connected components, and smooth split component tori.
@@ -163,6 +226,45 @@ theorem toric_realization_finite_type (M : Fine.{u})
               (Sigma.desc (fun i : Fin n => realizationToBase (ULift.{u} ℚ) (N i))) ∧
             QuasiCompact
               (Sigma.desc (fun i : Fin n => realizationToBase (ULift.{u} ℚ) (N i)))) := by
-  sorry
+  classical
+  have : CharZero (ULift.{u} ℚ) :=
+    ⟨fun _ _ h ↦ Nat.cast_injective (R := ℚ) (congrArg ULift.down h)⟩
+  obtain ⟨hred, hft, hqc, hfin, _, ⟨e, he⟩, hint, _⟩ :=
+    finite_chart_components_realization (ULift.{u} ℚ) M hM
+  have hb (C : ToricComponent M) :
+      ∃ r : ℕ, Nonempty (C.lattice ≃* Multiplicative (Fin r → ℤ)) :=
+    (finite_chart_components_algebra (ULift.{u} ℚ) M hM C).2.1
+  refine ⟨hred, hft, hqc, hfin, ?_, ?_, ?_, ?_⟩
+  · intro D
+    obtain ⟨C, rfl⟩ := e.surjective D
+    exact ⟨C, he C⟩
+  · intro C
+    obtain ⟨r, ⟨b⟩⟩ := hb C
+    obtain ⟨_, _, _, _, _, _, ⟨i, _⟩⟩ :=
+      latticeTorus_coordinates (ULift.{u} ℚ) C.lattice r b
+    obtain ⟨_, ht, hq⟩ := latticeTorus_finiteType (ULift.{u} ℚ) C.lattice r b
+    have hs := component_torus_smooth (ULift.{u} ℚ) M hM C
+    refine ⟨(hint C).2.1, r, ⟨b⟩, ⟨i⟩, hs, ht, hq, ?_, ?_⟩
+    · exact Classical.choose_spec (existsUnique_torusAction (ULift.{u} ℚ) C).exists
+    · exact component_torus_action_laws (ULift.{u} ℚ) M hM C
+  · intro C Y fY hY htY hqY
+    obtain ⟨r, ⟨b⟩⟩ := hb C
+    have : Smooth (torusToBase (ULift.{u} ℚ) C) :=
+      component_torus_smooth (ULift.{u} ℚ) M hM C
+    have : IsReduced Y := hY
+    have : LocallyOfFiniteType fY := htY
+    have := LocallyOfFiniteType.isLocallyNoetherian fY
+    obtain ⟨ht, hq⟩ :=
+      ((latticeTorus_finiteType (ULift.{u} ℚ) C.lattice r b).1 (Over.mk fY)).2 htY hqY
+    exact ⟨inferInstance, ht, hq, inferInstance,
+      component_torus_projection_surjective (ULift.{u} ℚ) C Y fY⟩
+  · intro n N hN
+    have hn (i : Fin n) :=
+      finite_chart_components_realization (ULift.{u} ℚ) (N i) (hN i)
+    exact finite_union n (fun i ↦ realization (ULift.{u} ℚ) (N i))
+      (Spec (.of (ULift.{u} ℚ)))
+      (fun i ↦ realizationToBase (ULift.{u} ℚ) (N i))
+      (fun i ↦ (hn i).1) (fun i ↦ (hn i).2.1)
+      (fun i ↦ (hn i).2.2.1) (fun i ↦ (hn i).2.2.2.1)
 
 end AlgebraicGeometry.Monoscheme

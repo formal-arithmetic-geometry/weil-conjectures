@@ -1,0 +1,132 @@
+{
+ "id": "lem-pur-integral-tensor-left-shift-unique",
+ "kind": "statement",
+ "title": "Unique normalized completed integral first slot shift",
+ "statement": "Fix a prime l, a finite extension E of Q_l, an arbitrary scheme W and an integer r. There exists exactly one natural isomorphism moving the shift r in the completed integral first slot to a shift of the tensor output, satisfying integralTensorLeftProperty of [def-pur-integral-tensor-shift-properties]. The normalization is required on every resolving pair, with no condition that l be invertible on W. Uniqueness is equality of the natural isomorphisms, not merely existence of an isomorphism between their endpoints.",
+ "stmt_deps": [
+  "def-pur-integral-tensor-shift-properties"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Step 2: integral transport; representative tensor-shift detail of def-pur-integral-operation-shift-data; Stacks Tags 011G, 012Z, 014E, 06YU, 0941."
+ },
+ "proof": [
+  {
+   "text": "Construct the unsigned first-slot cochain shift using Mathlib mapBifunctorShift₁Iso, with reduction and restriction commuting with shift. Evaluate its injection identity on sections with abstract coefficients, then specialize to the recorded finite tensor. This gives coefficient one on finite pure tensors. Conjugate each quotient transition by the level comparisons and unshift it; the generator formula and uniqueness of the recorded quotient transition identify this with the original transition. Assemble the natural finite comparisons into the tower isomorphism.",
+   "uses": [
+    "def-pur-integral-tensor-shift-properties",
+    "lem-sf-completed-tensor-finite-shift",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reuse the generic product, signed mapping-cone, and Roos shift construction proved in CompletedTensorShiftRight. Its cone coordinates are (1,(-1)^r). Good complexes are stable under shift. The strict inclusion of shifted good pairs and the quotient shift give the model comparison. The universal property of completed tensor descent transports it to the derived category, and the component identities give precisely the required normalization. The generic helpers used here require no invertibility hypothesis on the scheme. Carry out the model argument with abstract coefficient category, tower, finite normalization predicate, quotient, output shift, tensor and comparison data, using the factored normalization definition; specialize once to the canonical completed tensor data. The canonical predicate remains definitionally the original formula.",
+   "uses": [
+    "lem-sf-completed-tensor-shift-right",
+    "lem-pur-integral-operations-well-defined",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For uniqueness, sheafification and pure-tensor extensionality determine the finite tensor maps; the total-complex injection extensionality and fully faithful restriction along the locally surjective coefficient projection determine each tower component. The two mapping-cone injections determine the cone comparison. The normalization equation and cancellation of its outer isomorphisms determine the derived component on every good pair. Essential surjectivity of the good-model localization supplies a good representative for each member of every derived pair. Naturality along the product of these representative isomorphisms transports equality to every pair. Extensionality then determines the natural transformation and its natural isomorphism.",
+   "uses": [
+    "def-pur-integral-tensor-shift-properties",
+    "lem-sf-completed-tensor-shift-right",
+    "lem-pur-integral-operations-well-defined",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-integral-tensor-shift-properties",
+  "lem-sf-completed-tensor-finite-shift",
+  "lem-pur-integral-operations-well-defined",
+  "lem-sf-completed-tensor-shift-right",
+  "lem-pc-kflat-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Step 2: integral transport; finite generator, signed cone and good-model descent argument implemented by A8, 2026-10-26. Stacks Tags 011G, 012Z, 014E, 06YU, 0941."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Existence and uniqueness of natural isomorphisms for left and right shifts of derived tensor with K-flat and completed Roos normalization",
+   "results": "8 hits: Functor.leftDerivedUnique, rightDerivedUnique, leftDerivedNatIso and generic shift/adjunction isomorphisms. These do not state the coefficient-site generator or Roos normalizations.",
+   "date": "2026-10-25",
+   "verdict": "Generic tools only; no exact normalized slot theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unique natural isomorphism commuting shifts of derived tensor products determined by K-flat representatives",
+   "results": "8 hits: induced mapDerivedCategory CommShift instances and factors, quotientCompQhIso CommShift, mapDerivedCategorySingleFunctor, Tor and Tor'. No normalized coefficient tensor uniqueness statement.",
+   "date": "2026-10-25",
+   "verdict": "No exact match for these representative-normalized slot comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctor.*Shift|Tensor.*Shift",
+   "results": "6 hits, including CochainComplex.mapBifunctorHomologicalComplexShift₁Iso and the BifunctorShift module documentation; read mapBifunctorShift₁Iso and mapBifunctorShift₂Iso generator formulas. They supply the cochain reindexings, not descent with the specified coefficient models.",
+   "date": "2026-10-25",
+   "verdict": "No exact match. The cochain formulas are available in Mathlib.Algebra.Homology.BifunctorShift."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralOperationShiftData",
+  "date": "2026-10-25",
+  "group": "A9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Adic Step 2: representative-normalized tensor shifts used in independent-slot shift coherence.",
+   "via": [
+    "def-pur-integral-operation-shift-data",
+    "lem-pur-integral-realization-shift-coherence",
+    "lem-pur-adic-projection-shift-coherence",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralTensorLeftShiftUnique",
+  "file": "lean/Sheaf/SixFunctors/IntegralTensorLeftShiftUnique.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.integralTensorLeftShift_existsUnique",
+  "statement": "theorem integralTensorLeftShift_existsUnique (W : Scheme.{u}) (r : ℤ) : ∃! σ : tensorShiftFirst (Integral l E W) r ⋙ integralCompletedTensor l E W ≅ integralCompletedTensor l E W ⋙ shiftFunctor (Integral l E W) r, integralTensorLeftProperty l E W r σ",
+  "branch": "sheaf-dag",
+  "by": "A9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-29cbf",
+  "group": "A9",
+  "result": "fix",
+  "landing": "20261025T161932-L-154737",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-aa8e0",
+  "group": "A8",
+  "result": "fix",
+  "landing": "20261026T022806-L-446879",
+  "kind": "interface",
+  "note": "independent cc review: item proof and the def/abbrev refactor of integralTensorLeftProperty/tensorShiftFirst against the clone's IntegralTensorShiftProperties, the change records and both nodes; all direct importers compiled with the delivered modules"
+ }
+}

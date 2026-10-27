@@ -1,0 +1,152 @@
+{
+ "id": "lem-sfb-representable-pullback-presheaf-scheme-tests",
+ "kind": "statement",
+ "title": "Scheme tests of a presheaf presentation of a representable pullback",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with universes as in [def-weil-size-convention]. Let $F,G$ be categories over $\\mathrm{Sch}/S$ and let $f:F\\to G$ be a based functor representable by algebraic spaces in the scheme-test sense of [def-sfb-stable-pointed-moduli-groupoids] and [def-trf-algebraic-space]. Let $P,Q:(\\mathrm{Sch}/S)^{\\mathrm{op}}\\to\\mathrm{Type}_u$ be presheaves, $a:P\\to Q$ a natural transformation, and $g:\\mathcal S_Q\\to G$ a based functor. Suppose a based equivalence $e:\\mathcal S_P\\to\\mathcal S_Q\\times_G F$ is specified together with a two-isomorphism between its first projection and $\\mathcal S_a$. Then for every $S$-scheme $T$ and natural transformation $t:h_T\\to Q$ there is an algebraic space $B$ over $S$ and an isomorphism of presheaves $h_T\\times_Q P\\simeq B$. The pullback is the presheaf of pairs $(u,p)$ satisfying $t(u)=a(p)$, with componentwise restriction; no sheaf or algebraicity hypothesis on $P$ or $Q$ is used.",
+ "source": {
+  "document": "literature/stacks-project/algebraic.tex",
+  "place": "Tag 0300, lemma-base-change-by-space-representable-by-space, proof, scheme-test comparison; Tag 04SY, lemma-map-fibred-setoids-representable-algebraic-spaces."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space"
+ ],
+ "proof": [
+  {
+   "text": "Fix a scheme T and t : h_T -> Q. Apply hf to the based composite discreteModuli h_T -> discreteModuli Q -> G, obtaining an algebraic space B and an equivalence from discreteModuli B to h_T x_G F.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-trf-algebraic-space",
+    "def-weil-size-convention"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Base change e along t, using the supplied projection two-isomorphism. The resulting equivalence identifies h_T x_Q P with h_T x_G F as fibred groupoids. Explicitly, a pair (u,p) with t(u)=a(p) is sent using e(p) to a triple (u,x,phi). The Q-coordinate of e(p) is identified with a(p) by the supplied two-isomorphism. Conversely, use essential surjectivity of e to represent (t(u),x,phi); the same two-isomorphism gives the required equation t(u)=a(p). Full faithfulness gives exactly the arrows between these representatives, so the constructions are inverse up to unique vertical isomorphism and commute with restriction.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-trf-algebraic-space",
+    "def-weil-size-convention"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Combine with the equivalence in step 1. Both ends are discrete fibred groupoids, so the equivalence induces bijections of their section sets on every scheme. Yoneda identifies the section sets of the first with the sections of the presheaf pullback. The bijections commute with restriction, hence give an isomorphism pullback t a = B as presheaves. This argument works for empty section sets as well as nonempty ones.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-trf-algebraic-space",
+    "def-weil-size-convention"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebraic.tex",
+  "place": "Tag 0300, lemma-base-change-by-space-representable-by-space, proof, scheme-test comparison; Tag 04SY, lemma-map-fibred-setoids-representable-algebraic-spaces."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A category fibred in setoids is equivalent over the base to the category of elements of a presheaf; algebraic space base change of a representable morphism of groupoids",
+   "results": "8 hits; CategoryTheory.Grothendieck.grothendieckTypeToCat, CategoryTheory.overEquivPresheafCostructuredArrow, HasFibers.instIsEquivalenceFibFiberInducedFunctor, CategoryTheory.Grothendieck.grothendieckTypeToCatInverse, CategoryTheory.Grothendieck.compAsSmallFunctorEquivalenceInverse_obj_fiber, CategoryTheory.Pseudofunctor.CoGrothendieck.instIsEquivalenceαCategoryObjLocallyDiscreteOppositeCatMkOpFiberForgetInducedFunctor, HasFibers.canonical, CategoryTheory.Grothendieck.compAsSmallFunctorEquivalenceFunctor_obj_fiber",
+   "date": "2026-10-26",
+   "verdict": "No match: no equivalence from a thin fibred groupoid to a small class presheaf, nor transfer of representable scheme tests through such an equivalence. The generic fibre/Grothendieck results do not supply these constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "discreteModuli|IsFibredInGroupoids|fibred.*setoid",
+   "results": "0 hits; ",
+   "date": "2026-10-26",
+   "verdict": "No match: no equivalence from a thin fibred groupoid to a small class presheaf, nor transfer of representable scheme tests through such an equivalence. The generic fibre/Grothendieck results do not supply these constructions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A category fibred in setoids is equivalent to a small presheaf category of elements and equivalences of discrete fibred groupoids induce isomorphisms of presheaves",
+   "results": "8 hits; HasFibers.mk, TopCat.Presheaf.presheafEquivOfIso, HasFibers.instIsEquivalenceFibFiberInducedFunctor, CategoryTheory.Pseudofunctor.CoGrothendieck.instIsEquivalenceαCategoryObjLocallyDiscreteOppositeCatMkOpFiberForgetInducedFunctor, CategoryTheory.Equivalence.preregular_isSheaf_iff_of_essentiallySmall, CategoryTheory.Functor.IsFibered.toIsPreFibered, HasFibers.canonical, CategoryTheory.sheafBotEquivalence",
+   "date": "2026-10-26",
+   "verdict": "No match: no equivalence from a thin fibred groupoid to a small class presheaf, nor transfer of representable scheme tests through such an equivalence. The generic fibre/Grothendieck results do not supply these constructions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RepresentablePullbackOverSpace",
+  "date": "2026-10-26",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas. Proof of the unramified-diagonal/etale-atlas criterion: Chartwise calculus for smooth and etale representable morphisms. Supporting input: representability input for testing a composite on the algebraic space obtained from its second factor; Stacks 0300, before 045B.; Step 3: comparison of scheme tests on triples.",
+   "via": [
+    "lem-sfb-representable-pullback-over-space",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-unramified-diagonal-etale-atlas",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RepresentablePullbackPresheafSchemeTests",
+  "file": "lean/Sheaf/AlgebraicGeometry/RepresentablePullbackPresheafSchemeTests.lean",
+  "declaration": "CategoryTheory.representable_pullback_presheaf_scheme_tests",
+  "statement": "theorem representable_pullback_presheaf_scheme_tests {S : Scheme.{u}}\n    {F : BasedCategory.{v₁, w₁} (Over S)} {G : BasedCategory.{v₂, w₂} (Over S)}\n    (f : BasedFunctor F G) (hf : IsRepresentableByAlgebraicSpaces f)\n    {P Q : (Over S)ᵒᵖ ⥤ Type u} (g : BasedFunctor (discreteModuli Q) G)\n    (a : P ⟶ Q) (e : BasedFunctor (discreteModuli P) (moduliTwoFiberProduct g f))\n    (he : e.toFunctor.IsEquivalence)\n    (hprojection : Nonempty\n      (ModuliTwoIso (e.comp (moduliTwoFiberFst g f)) (discreteModuliMap a))) :\n    ∀ (T : Over S) (t : yoneda.obj T ⟶ Q),\n      ∃ B : AlgebraicSpace S, Nonempty (Limits.pullback t a ≅ B.obj.obj)",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261026T092111-L-3401471",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261026T092111-L-3401471",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,236 @@
+{
+ "id": "lem-sfb-finite-type-stack-closed-specialization",
+ "kind": "statement",
+ "title": "Closed specializations in finite-type stacks with quasi-compact diagonal",
+ "statement": "Let $k$ be a field [def-weil-field] and let $\\mathcal X$ be an algebraic stack of finite type over $k$ [def-sfb-algebraic-moduli-stack, def-weil-finite-type-morphism]: it is quasi-compact and its structural morphism is locally of finite type on smooth scheme charts. Suppose the diagonal of $\\mathcal X$ is quasi-compact and separated, with quasi-compactness interpreted by [def-sfb-stack-qcqs-morphism]. Give $|\\mathcal X|$ the field-point set and smooth-atlas topology of [lem-sfb-stack-point-topology]. This topological space is Noetherian and sober: descending chains of closed subsets stabilize, and every nonempty irreducible closed subset has a unique generic point. In particular every nonempty closed subset of $|\\mathcal X|$ contains a point whose singleton is closed in $|\\mathcal X|$. The empty stack is allowed. No quasi-finiteness of the diagonal is assumed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tags 06R6 (lemma-locally-finite-type-locally-noetherian), 0DQI (lemma-Noetherian-topology), and 0DQQ (lemma-sober-qs). Last clause follows by choosing a minimal nonempty closed subset in a Noetherian T0 space. This is the closed-point selection used in Alper Lemma 8.3.1, printed p.39."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-algebraic-moduli-stack",
+  "def-weil-finite-type-morphism",
+  "def-sfb-stack-qcqs-morphism",
+  "lem-sfb-stack-point-topology",
+  "def-sfb-relative-moduli-inertia",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "By [def-sfb-stack-qcqs-morphism], choose a smooth surjective atlas $p:U\\to\\mathcal X$ with $U$ a quasi-compact scheme. The finite-type hypothesis, tested on smooth charts, says $U\\to\\operatorname{Spec}k$ is locally of finite type. Every ideal of a field is zero or the unit ideal, hence finitely generated [def-weil-field, def-weil-pbc-noetherian-ring]; thus $\\operatorname{Spec}k$ is locally Noetherian by [def-weil-affine-spectrum, pqf-def-locnoeth]. Apply [pqf-lem-locnoeth-lft] to this scheme morphism to see that $U$ is locally Noetherian. Together with its quasi-compactness this makes $U$ a Noetherian scheme.",
+   "uses": [
+    "def-sfb-stack-qcqs-morphism",
+    "def-weil-field",
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-affine-spectrum",
+    "pqf-def-locnoeth",
+    "pqf-lem-locnoeth-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tags 06R6 (lemma-locally-finite-type-locally-noetherian), 0DQI (lemma-Noetherian-topology), and 0DQN (lemma-spectral-qc-diagonal-qc); elementary closed-subset argument."
+   }
+  },
+  {
+   "text": "By [lem-sfb-stack-point-topology], $|p|$ is surjective and inverse images of closed subsets of $|\\mathcal X|$ are closed in $|U|$. Given a nonempty family $\\mathcal F$ of closed subsets of $|\\mathcal X|$, apply [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal] to the family $\\{|p|^{-1}(F):F\\in\\mathcal F\\}$. Choose $F_0$ whose inverse image is minimal. A strict inclusion $F\\subsetneq F_0$ would give a strict inclusion of inverse images, by surjectivity, a contradiction. Hence every such family has a minimal member; in particular any descending chain of closed subsets stabilizes at its minimal member. This proves Noetherianity, and also provides the minimal-member form needed below.",
+   "uses": [
+    "lem-sfb-stack-point-topology",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tags 06R6 (lemma-locally-finite-type-locally-noetherian), 0DQI (lemma-Noetherian-topology), and 0DQN (lemma-spectral-qc-diagonal-qc); elementary closed-subset argument."
+   }
+  },
+  {
+   "text": "The assumed quasi-compactness of $\\mathcal X$ and its diagonal together with the affine base $S=\\operatorname{Spec}k$ are exactly the hypotheses of [lem-sfb-qc-stack-spectral-point-space]. Consequently $|\\mathcal X|$ is spectral, and thus sober by the definition [def-weil-spectral-space]. The separatedness assumption on the diagonal is allowed but unnecessary in this application.",
+   "uses": [
+    "lem-sfb-qc-stack-spectral-point-space",
+    "def-weil-spectral-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tags 06R6 (lemma-locally-finite-type-locally-noetherian), 0DQI (lemma-Noetherian-topology), and 0DQN (lemma-spectral-qc-diagonal-qc); elementary closed-subset argument."
+   }
+  },
+  {
+   "text": "Let $C$ be nonempty and closed. Step 2 gives a minimal nonempty closed subset $D\\subseteq C$. For each $y\\in D$, the closure $\\overline{\\{y\\}}$ is nonempty, closed and contained in $D$, so equals $D$. This closure is irreducible: if contained in a union of two closed subsets, $y$ lies in one, and then its whole closure lies there. Thus every point of $D$ is a generic point of the same nonempty irreducible closed subset $D$. Sobriety from step 3 forces all these points to coincide. Hence $D=\\{y\\}$ is closed in $|\\mathcal X|$, proving the claimed closed-point existence. For the empty stack there is no nonempty $C$, so this last assertion is vacuous.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tags 06R6 (lemma-locally-finite-type-locally-noetherian), 0DQI (lemma-Noetherian-topology), and 0DQN (lemma-spectral-qc-diagonal-qc); elementary closed-subset argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stack-qcqs-morphism",
+  "def-weil-affine-spectrum",
+  "def-weil-field",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-spectral-space",
+  "lem-sfb-qc-stack-spectral-point-space",
+  "lem-sfb-stack-point-topology",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "pqf-def-locnoeth",
+  "pqf-lem-locnoeth-lft"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tags 06R6 (lemma-locally-finite-type-locally-noetherian), 0DQI (lemma-Noetherian-topology), and 0DQN (lemma-spectral-qc-diagonal-qc); elementary closed-subset argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every nonempty closed subset of a finite type algebraic stack over a field contains a closed point",
+   "results": "{\"t\": \"2026-10-23T11:00:02Z\", \"tool\": \"leanfinder\", \"query\": \"Every nonempty closed subset of a finite type algebraic stack over a field contains a closed point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"AlgebraicGeometry.LocallyOfFiniteType.jacobsonSpace\", \"AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.compactSpace_of_universallyClosed\", \"AlgebraicGeometry.IsIntegral.nonempty\"], \"digest\": \"785380cd74e04257\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned hits; they concern schemes, rings or abstract topology and do not supply this algebraic-stack assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type algebraic stack over a field has a closed point in every nonempty closed subset of its underlying topological space",
+   "results": "{\"t\": \"2026-10-23T11:26:00Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type algebraic stack over a field has a closed point in every nonempty closed subset of its underlying topological space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"AlgebraicGeometry.LocallyOfFiniteType.jacobsonSpace\", \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"AlgebraicGeometry.compactSpace_of_universallyClosed\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat\"], \"digest\": \"f7c60654bda36144\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned hits; they concern schemes, rings or abstract topology and do not supply this algebraic-stack assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite type algebraic stack with adequate moduli space has a noetherian sober point space",
+   "results": "{\"t\": \"2026-10-23T11:08:13Z\", \"tool\": \"leansearch\", \"query\": \"A finite type algebraic stack with adequate moduli space has a noetherian sober point space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"AlgebraicGeometry.IsLocallyArtinian.of_isLocallyNoetherian_of_discreteTopology\", \"AlgebraicGeometry.IsNoetherian.noetherianSpace\", \"AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"AlgebraicGeometry.noetherianSpace_of_isAffine\", \"AlgebraicGeometry.IsArtinianScheme.iff_isNoetherian_and_discreteTopology\"], \"digest\": \"36be841c47eaeef1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned hits; they concern schemes, rings or abstract topology and do not supply this algebraic-stack assertion or specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"NoetherianSpace\"",
+   "results": "{\"t\": \"2026-10-23T11:08:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"NoetherianSpace\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsNoetherian.noetherianSpace\", \"AlgebraicGeometry.instNoetherianSpaceCarrierCarrierCommRingCatSpecOfIsNoetherianRingCarrier\", \"AlgebraicGeometry.quasiCompact_of_noetherianSpace_source\", \"AlgebraicGeometry.noetherianSpace_of_isAffineOpen\", \"AlgebraicGeometry.noetherianSpace_of_isAffine\"], \"digest\": \"16aac1fbb50a3298\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned hits; they concern schemes, rings or abstract topology and do not supply this algebraic-stack assertion or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "adequate|AlgebraicStack|stack.*Noetherian",
+   "results": "{\"t\": \"2026-10-23T11:08:13Z\", \"tool\": \"grep\", \"query\": \"adequate|AlgebraicStack|stack.*Noetherian\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Noetherian.lean\"], \"digest\": \"10e23db822ff1e76\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned hits; they concern schemes, rings or abstract topology and do not supply this algebraic-stack assertion or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "NoetherianSpace|AlgebraicStack|closedPoints",
+   "results": "{\"t\": \"2026-10-23T11:25:59Z\", \"tool\": \"grep\", \"query\": \"NoetherianSpace|AlgebraicStack|closedPoints\", \"sub\": \"AlgebraicGeometry/Noetherian.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"38\", \"178\", \"179\", \"181\", \"182\"], \"digest\": \"648780868b92dfa6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned hits; they concern schemes, rings or abstract topology and do not supply this algebraic-stack assertion or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|stack.*Noetherian|Noetherian.*stack",
+   "results": "{\"t\": \"2026-10-23T13:00:50Z\", \"tool\": \"grep\", \"query\": \"AlgebraicStack|stack.*Noetherian|Noetherian.*stack\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/RingTheory/HopkinsLevitzki.lean\", \"Mathlib/RingTheory/FiniteType.lean\"], \"digest\": \"ca3473c7794c96fe\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; scheme-only spectral/Noetherian instances and abstract topology do not establish the assertion for algebraic stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite type algebraic stack over a field has Noetherian sober underlying space",
+   "results": "{\"t\": \"2026-10-23T13:00:50Z\", \"tool\": \"leansearch\", \"query\": \"Finite type algebraic stack over a field has Noetherian sober underlying space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"AlgebraicGeometry.noetherianSpace_of_isAffine\", \"AlgebraicGeometry.IsNoetherian.noetherianSpace\", \"Algebra.FiniteType.isNoetherianRing\", \"AlgebraicGeometry.compactSpace_of_universallyClosed\", \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"AlgebraicGeometry.isNoetherian_iff\", \"AlgebraicGeometry.IsArtinianScheme.iff_isNoetherian_and_discreteTopology\"], \"digest\": \"f83832cae75d7316\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; scheme-only spectral/Noetherian instances and abstract topology do not establish the assertion for algebraic stacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"NoetherianSpace\"",
+   "results": "{\"t\": \"2026-10-23T13:00:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"NoetherianSpace\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsNoetherian.noetherianSpace\", \"AlgebraicGeometry.instNoetherianSpaceCarrierCarrierCommRingCatSpecOfIsNoetherianRingCarrier\", \"AlgebraicGeometry.quasiCompact_of_noetherianSpace_source\", \"AlgebraicGeometry.noetherianSpace_of_isAffineOpen\", \"AlgebraicGeometry.noetherianSpace_of_isAffine\"], \"digest\": \"16aac1fbb50a3298\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; scheme-only spectral/Noetherian instances and abstract topology do not establish the assertion for algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type algebraic stack over a field has a Noetherian sober underlying topological space and every nonempty closed subset contains a closed point",
+   "results": "{\"t\": \"2026-10-23T13:00:51Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type algebraic stack over a field has a Noetherian sober underlying topological space and every nonempty closed subset contains a closed point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsNoetherian\", \"AlgebraicGeometry.IsLocallyNoetherian\", \"AlgebraicGeometry.IsNoetherian.noetherianSpace\", \"AlgebraicGeometry.IsArtinianScheme.finite\", \"AlgebraicGeometry.IsLocallyArtinian\", \"AlgebraicGeometry.IsArtinianScheme\", \"AlgebraicGeometry.isNoetherian_iff\", \"AlgebraicGeometry.IsArtinianScheme.isNoetherianScheme\"], \"digest\": \"e1f46a5fdd46a0ed\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; scheme-only spectral/Noetherian instances and abstract topology do not establish the assertion for algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed point specializations in the field point topology of finite type algebraic stacks",
+   "results": "{\"t\": \"2026-10-23T13:00:52Z\", \"tool\": \"leanfinder\", \"query\": \"Closed point specializations in the field point topology of finite type algebraic stacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.specializes_closedPoint\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.Spec_closedPoint\", \"AlgebraicGeometry.Scheme.range_fromSpecStalk\", \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.Scheme.fromSpecStalk_closedPoint\"], \"digest\": \"71dcdd0610918d1b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; scheme-only spectral/Noetherian instances and abstract topology do not establish the assertion for algebraic stacks"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-adequate-integral-comparison-finite",
+  "date": "2026-10-23",
+  "group": "Q149"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: Lemma 8.3.1 applied to the diagonal, keeping its closed-point and integral-base hypotheses explicit Supporting input: existence of closed points in the source and target of the integral Zariski-main factor; Noetherianity is only used for the original finite-type stacks.",
+   "via": [
+    "lem-sfb-adequate-integral-comparison-finite",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-type-stack-closed-specialization",
+  "worker": "stage1",
+  "summary": "Proved Noetherianity through a quasi-compact smooth scheme atlas using the existing scheme local-Noetherianity and minimal-closed-family nodes. Added only the general spectral-stack theorem Tag 0DQN, then proved closed-point existence by minimality and sobriety. Statement unchanged.",
+  "blueprint": "The inherited provenance identifies det-thm-sf-ctf-stability-direct-images (3), via the alteration and moduli prerequisites. This split supplies the closed-point choice in the adequate-integral-comparison proof without changing that route; ancestor command returns None, retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q55-1b7424f5d",
+  "group": "Q55",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-1b7424f5d (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement and Stacks 0DQI/0DQN/0DQQ (stacks-morphisms.tex l.2040, 6721, 6805). All four steps are correct, and the statement, stmt_deps and source are unchanged. (1) The quasi-compact atlas from def-sfb-stack-qcqs-morphism is locally of finite type over Spec k. k is Noetherian, so pqf-lem-locnoeth-lft gives a Noetherian scheme U. (2) lem-sfb-stack-point-topology gives a surjective |p| and the closed-preimage criterion. With the minimal-closed-family leaf, surjectivity carries strict inclusions down to the preimages, which gives the minimal-member form and DCC. (3) The new node with S=Spec k gives sobriety. (4) A minimal nonempty closed D ⊆ C has every point generic, sobriety forces D={y}, and the point is closed in all of |X|. New node lem-sfb-qc-stack-spectral-point-space: it is Stacks 0DQN specialised to an affine base, which is true because Δ_{X/S} is qc iff the absolute diagonal is (base change of the closed immersion S→S×S). I tested it on the empty stack, Spec of a non-Noetherian ring, BG and an affine variety. It is statement-only and self-contained, with no Noetherian overclaim. It supplies only the sobriety input in a wider setting, not a restatement of the item: steps 1-2 and 4 carry the Noetherian and closed-point work. A grep -R over the DAG for the tags/labels and for spectral/sober together with stack finds no duplicate. Batch-5 check: the new citations (def-sfb-algebraic-moduli-stack, def-sfb-stack-qcqs-morphism, lem-sfb-stack-point-topology) reach only the general definition def-trf-algebraic-space, which is not part of the trace-formula or Poincaré duality proofs, and the item already cites all three on the base. No SGA citation. Blueprint ancestor None is inherited and consistent. No tool_uses needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteTypeStackClosedSpecialization",
+  "declaration": "CategoryTheory.finite_type_stack_closed_specialization",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteTypeStackClosedSpecialization.lean",
+  "statement": "theorem finite_type_stack_closed_specialization (k : Type u) [Field k] (F : BasedCategory.{v, w} (Over (Spec (.of k)))) (hF : IsAlgebraicModuliStack F) (hqc : IsQuasiCompactModuli F) (hft : ∀ (U : Over (Spec (.of k))) (a : BasedFunctor (discreteModuli (yoneda.obj U)) F), IsSmoothModuliAtlas F U a → LocallyOfFiniteType U.hom) (hdiag : ∀ (T : Over (Spec (.of k))) (t : BasedFunctor (discreteModuli (yoneda.obj T)) (moduliTwoFiberProduct (moduliBaseStructure F) (moduliBaseStructure F))), ∃ (Z : AlgebraicSpace (Spec (.of k))) (p : Z.obj.obj ⟶ yoneda.obj T), HasSpaceBaseChange (moduliRelativeDiagonal (moduliBaseStructure F)) T t Z p ∧ AlgebraicSpace.MapIsQuasiCompact p ∧ AlgebraicSpace.MapToSchemeIsSeparated Z T p) : TopologicalSpace.NoetherianSpace (ModuliPoints F) ∧ (∀ C : Set (ModuliPoints F), IsClosed C → IsIrreducible C → ∃! x : ModuliPoints F, IsGenericPoint x C) ∧ (∀ C : Set (ModuliPoints F), IsClosed C → C.Nonempty → ∃ x ∈ C, IsClosed ({x} : Set (ModuliPoints F)))",
+  "branch": "newtargets-dag",
+  "by": "Q141",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-896ac6d96",
+  "group": "Q141",
+  "result": "pass",
+  "note": "Node differs from live only in lean and stmt_deps (two added landed def nodes: relative-moduli-inertia for moduliBaseStructure, proper-curve-moduli for MapIsQuasiCompact/MapToSchemeIsSeparated). Statement verbatim. Hypotheses match the node: general IsAlgebraicModuliStack, IsQuasiCompactModuli, every-smooth-atlas LocallyOfFiniteType (equivalent to the some-atlas form), and hdiag tests every scheme base change of the canonical moduliRelativeDiagonal(moduliBaseStructure F) via HasSpaceBaseChange with MapIsQuasiCompact and MapToSchemeIsSeparated, mirroring the landed IsQuasiSeparatedAlgebraicModuliMap. Conclusions: NoetherianSpace, ∃! generic point for closed irreducible C, ambient-closed singleton in each nonempty closed C. Empty stack, empty C, BG, arbitrary field and independent universes u v w checked. No duplicate in side-live; DM-oriented finite-type predicates rightly avoided. No hollow defs, proof is sorry, docstrings give source, blueprint id and four proof steps. Report has both required sections. No file changed, so no compile. Advisory: diagonal and base-change owner nodes are only transitive stmt_deps; the consumer uses the existential lft atlas form (equivalent)."
+ }
+}

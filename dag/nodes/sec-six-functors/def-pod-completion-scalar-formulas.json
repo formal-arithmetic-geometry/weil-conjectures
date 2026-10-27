@@ -1,0 +1,106 @@
+{
+ "kind": "definition",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+  "place": "Coefficient normalization in the opening sentence; existing completion scalar intertwining definitions, generalized only in the scheme parameter."
+ },
+ "stmt_deps": [
+  "def-weil-completed-integral-coefficients",
+  "lem-a1-principal-koszul-strict-replacement",
+  "def-pur-principal-quotient-completion-model",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-trf-completion-unit-strict-quotient-model",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-strict-roos-comparison",
+  "lem-weil-integral-scalar-extension-well-defined",
+  "lem-weil-finite-free-completed-scalar-comparison"
+ ],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "V9",
+  "item": "Sheaf.Paper.PodCompletionUnitScalarIntertwining",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-point-dualizing-complex",
+   "place": "Opening sentence, normalized coefficient calculation; parent lem-pod-completion-unit-scalar-intertwining steps [2, 3, 4]. Bhatt--Scholze Definitions 3.5.2--3.5.3 and Lemma 6.8.2(1); agent-formulated refinement.",
+   "via": [
+    "lem-pod-completion-unit-scalar-intertwining",
+    "lem-pod-identity-compact-support-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "id": "def-pod-completion-scalar-formulas",
+ "title": "Shared normalization predicates for completion and scalar extension",
+ "statement": "For a prime $\\ell$, finite extensions $E,L$ of $\\mathbf Q_\\ell$, an embedding $\\iota:E\\to L$, and a scheme $W$, use the completed coefficient sheaves and principal uniformizer quotient models [def-weil-completed-integral-coefficients, lem-a1-principal-koszul-strict-replacement, def-pur-principal-quotient-completion-model]. Define three predicates, with independent site and coefficient universes. QuotientRealization expresses the whole-unit equality with the actual reduction-limit adjunction and a strict quotient-tower comparison preserving augmentation and the K-flat counit [lem-coef-derived-system-evaluation-calculus, lem-trf-completion-unit-strict-quotient-model]. SameIndexFormula records the balanced quotient map, its canonical product comparison, both signed Roos coordinates, and its localized counit square [lem-pur-derived-change-of-rings, lem-weil-strict-roos-comparison]. MultiplicationFormula records the quotient tensor multiplication formula, both cone coordinates and the counit square with the specified scalar extension [lem-weil-integral-scalar-extension-well-defined, lem-weil-finite-free-completed-scalar-comparison]. These are exactly the existing point predicates with $\\operatorname{Spec}(\\overline{\\mathbf F}_q)$ replaced by $W$; the point predicates are their specializations. No existence or mathematical property is asserted by this definition.",
+ "proof": [],
+ "proof_deps": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "normalized derived completion quotient tower scalar comparison formulas",
+   "results": "AdicCompletion scalar tower and val_smul results; ordinary completion only.",
+   "verdict": "no match",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived completion scalar extension normalization Roos cone formulas",
+   "results": "IsAdicComplete.StrictMono, Cones.extendComp and AdicCompletion.ofTensorProduct_naturality; no such predicates.",
+   "verdict": "no match",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "grep",
+   "query": "QuotientRealization|SameIndexFormula|MultiplicationFormula",
+   "results": "0 Mathlib matches.",
+   "verdict": "no match",
+   "date": "2026-10-26"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodCompletionScalarFormulas",
+  "file": "lean/Sheaf/Paper/PodCompletionScalarFormulas.lean",
+  "declaration": "WeilConjectures.PodCompletionScalar.ModelData.QuotientRealization",
+  "declarations": [
+   "WeilConjectures.PodCompletionScalar.ModelData.quotientModel",
+   "WeilConjectures.PodCompletionScalar.ModelData.scalarModel",
+   "WeilConjectures.PodCompletionScalar.ModelData.QuotientRealization",
+   "WeilConjectures.PodCompletionScalar.ModelData.SameIndexFormula",
+   "WeilConjectures.PodCompletionScalar.ModelData.MultiplicationFormula"
+  ],
+  "statement": "def QuotientRealization (A : CoefficientDerivedSystemCalculus l E W)\n    (M : CompletionUnit.OrdinaryModel l E W)\n    (N : CompletionUnit.DerivedModel l E W A M)\n    (CR : quotientModel l E W)\n    (α : CR.completion ≅ A.reduction ⋙ coefficientSequenceLimit l E W) : Prop",
+  "branch": "sheaf-dag",
+  "by": "V9",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261025T205945-L-3425099",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261025T205945-L-3425099",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

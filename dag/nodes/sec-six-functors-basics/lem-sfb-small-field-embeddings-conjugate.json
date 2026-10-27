@@ -1,0 +1,240 @@
+{
+ "id": "lem-sfb-small-field-embeddings-conjugate",
+ "kind": "statement",
+ "title": "Conjugating small-field embeddings inside a large algebraically closed field",
+ "statement": "Let $F$ and $K$ be fields [def-weil-field], with $K$ algebraically closed [def-weil-algebraic-closure], and let $a,b:F\\hookrightarrow K$ be field embeddings [def-pc-field-extension]. Let $P\\subseteq K$ be the prime subfield, namely the smallest subfield containing $1$. Assume $$\\max(\\aleph_0,|F|)<\\operatorname{trdeg}_{P}K,$$ where transcendence degree is as in [def-kun-transcendence-degree], $|F|$ is set cardinality, $\\aleph_0=|\\mathbf N|$, and all cardinalities are compared in a common universe. Then there is a field automorphism $\\tau:K\\xrightarrow{\\sim}K$ (a bijective ring homomorphism) such that $\\tau\\circ a=b$.",
+ "source": {
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 04LR (lemma-groupoid-on-field-explain-points), proof, construction (3): extension of the isomorphism between i(k) and sigma(t(k)) by matching complementary transcendence bases and extending to algebraic closures."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-pc-field-extension",
+  "def-kun-transcendence-degree"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\mu=\\max(\\aleph_0,|F|)$ and $\\lambda=\\operatorname{trdeg}_P K$. By [def-kun-transcendence-degree], $\\lambda$ is a supremum of cardinalities of subsets of $K$. Every such cardinality is at most $|K|$, so $\\lambda\\leq|K|$. The hypothesis therefore gives $\\mu<|K|$, and in particular both $|F|<|K|$ and $\\aleph_0<|K|$.",
+   "uses": [
+    "def-kun-transcendence-degree"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04LR (lemma-groupoid-on-field-explain-points), proof, construction (3): make the large-transcendence-degree hypothesis quantitative."
+   }
+  },
+  {
+   "text": "View $K$ first as an $F$-extension through $a$ and then as an $F$-extension through $b$; these are separate scalar structures on two copies of the same field [def-pc-field-extension]. Apply [lem-exc-transcendence-basis-exists] to obtain subsets $I,J\\subseteq K$ with inclusion families $x:I\\to K$ and $y:J\\to K$ that are transcendence bases for these respective extension structures. Thus $x$ is independent over $a(F)$ and $K/a(F)(x)$ is algebraic, and the analogous assertions hold for $y,b(F)$ [def-weil-pbc-transcendence-basis].",
+   "uses": [
+    "def-pc-field-extension",
+    "lem-exc-transcendence-basis-exists",
+    "def-weil-pbc-transcendence-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04LR (lemma-groupoid-on-field-explain-points), proof, construction (3): choose bases directly over i(k) and sigma(t(k)), retaining those coefficient fields throughout."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-algclosed-transcendence-basis-cardinal-bound] to each of these two $F$-extension structures. It gives $|K|\\leq\\max(\\mu,|I|)$ and $|K|\\leq\\max(\\mu,|J|)$. Since $I,J$ are subsets of $K$, their cardinalities are at most $|K|$. If $|I|<|K|$, both entries of $\\max(\\mu,|I|)$ would be strictly smaller than $|K|$, contradicting the first inequality. Thus $|I|=|K|$; the same argument gives $|J|=|K|$. Consequently there is a bijection $e:I\\xrightarrow{\\sim}J$. This argument does not assume that $F$ is countable or that the cardinal $|K|$ is regular.",
+   "uses": [
+    "lem-sfb-algclosed-transcendence-basis-cardinal-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04LR (lemma-groupoid-on-field-explain-points), proof, construction (3): the two complementary bases have equal cardinality; elementary cardinal-order argument after the cited bound."
+   }
+  },
+  {
+   "text": "Let $A=a(F)[x_i:i\\in I]\\subseteq K$ and $B=b(F)[y_j:j\\in J]\\subseteq K$ be the indicated polynomial subrings. Algebraic independence [def-weil-pbc-transcendence-basis] means that a polynomial expression in each basis has a unique formal polynomial over the abstract coefficient field $F$. Define $f:A\\to B$ by replacing every coefficient $a(c)$ with $b(c)$, for $c\\in F$, and every variable $x_i$ with $y_{e(i)}$. Addition and multiplication of polynomials show that this is a unital ring homomorphism. The reverse substitution replaces $b(c)$ with $a(c)$ and uses $e^{-1}$ on the variables. Both composites fix all coefficients and variables and hence all polynomials, so $f$ is a ring isomorphism, with $f(a(c))=b(c)$.",
+   "uses": [
+    "def-weil-pbc-transcendence-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04LR (lemma-groupoid-on-field-explain-points), proof, construction (3): explicit coefficient and variable substitution; using the original coefficient fields avoids a separate preliminary extension between their relative algebraic closures."
+   }
+  },
+  {
+   "text": "Inside the source and target copies of $K$, put $L=a(F)(x_i:i\\in I)$ and $M=b(F)(y_j:j\\in J)$, the smallest subfields containing $A$ and $B$. These consist exactly of fractions $u/v$ with $u,v\\in A$, $v\\ne0$, and respectively of fractions from $B$: the fractions form a subfield, and every subfield containing the subring contains these fractions. Define $h:L\\to M$ by $h(u/v)=f(u)/f(v)$. The denominator stays nonzero because $f$ is injective. Equality of fractions is cross-multiplication, and $f$ preserves this equality, so $h$ is well-defined. The fraction formulas for addition and multiplication make $h$ a field homomorphism. Substitution with $f^{-1}$ gives its inverse. Therefore $h$ is a field isomorphism and $h(a(c))=b(c)$ for all $c\\in F$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04LR (lemma-groupoid-on-field-explain-points), proof, construction (3): the corresponding rational-function fields are isomorphic; fraction construction written explicitly."
+   }
+  },
+  {
+   "text": "By [lem-exc-transcendence-basis-algebraic-closure], the source copy of $K$ is an algebraic closure of $L$ and the target copy is an algebraic closure of $M$. Give the target copy the $L$-extension map $L\\xrightarrow{h}M\\hookrightarrow K$. It is still algebraically closed. For any target element, take its nonzero polynomial relation over $M$ and apply $h^{-1}$ to every coefficient. At least one coefficient remains nonzero, and evaluation through this new $L$-extension map gives the original zero, so the target is algebraic over $L$. We now have two algebraic closures of the same field $L$, with specified structure maps. Clause (2) of [lem-pc-algebraic-closure-exists-unique] gives a field isomorphism $\\tau:K\\xrightarrow{\\sim}K$ whose restriction to $L$ is $h$. Hence for every $c\\in F$, $\\tau(a(c))=h(a(c))=b(c)$, proving $\\tau\\circ a=b$. Bijectivity follows from this isomorphism conclusion, rather than from an arbitrary extension embedding.",
+   "uses": [
+    "lem-exc-transcendence-basis-algebraic-closure",
+    "lem-pc-algebraic-closure-exists-unique"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04LR (lemma-groupoid-on-field-explain-points), proof, construction (3): extend to the algebraic closures; Stacks 09GV (fields-lemma-algebraic-closures-isomorphic), applied over L with the target structure map twisted by h."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-transcendence-degree",
+  "def-pc-field-extension",
+  "lem-exc-transcendence-basis-exists",
+  "def-weil-pbc-transcendence-basis",
+  "lem-sfb-algclosed-transcendence-basis-cardinal-bound",
+  "lem-exc-transcendence-basis-algebraic-closure",
+  "lem-pc-algebraic-closure-exists-unique"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 04LR (lemma-groupoid-on-field-explain-points), proof, construction (3); choose bases directly over the two embedded coefficient fields and extend their rational-function isomorphism using Tag 09GV."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism between subfields of an algebraically closed field extends to an automorphism if the subfields have cardinality smaller than its transcendence degree",
+   "results": "{\"t\": \"2026-10-23T21:32:02Z\", \"tool\": \"leanfinder\", \"query\": \"An isomorphism between subfields of an algebraically closed field extends to an automorphism if the subfields have cardinality smaller than its transcendence degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAlgClosed.ringEquiv_of_equiv_of_charZero\", \"Field.embEquivOfIsAlgClosed\", \"IsAlgClosed.ringEquiv_of_equiv_of_char_eq\", \"Field.Emb.Cardinal.succEquiv\", \"Field.Emb.Cardinal.succEquiv_coherence\", \"IsAlgClosed.nonempty_algEquiv_or_of_finrank_eq_two\", \"algebraicClosure.algEquivOfAlgEquiv\", \"FirstOrder.Field.ACF_categorical\"], \"digest\": \"54081e6182d8424d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsAlgClosure.equivOfEquiv assumes K is algebraic over the compared bases; equivOfTranscendenceBasis needs already chosen equipotent bases. Classification gives an unspecified isomorphism and does not extend prescribed embeddings. The cardinal and basis-extension argument remains."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given two ring embeddings a b from a small field F into an algebraically closed field K with larger transcendence degree, exists ring equivalence tau of K with tau composed a equal b",
+   "results": "{\"t\": \"2026-10-23T21:33:04Z\", \"tool\": \"leanfinder\", \"query\": \"Given two ring embeddings a b from a small field F into an algebraically closed field K with larger transcendence degree, exists ring equivalence tau of K with tau composed a equal b\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Field.embEquivOfIsAlgClosed\", \"Field.embEquivOfEquiv\", \"Field.Emb.Cardinal.succEquiv_coherence\", \"IsAlgClosed.ringEquiv_of_equiv_of_charZero\", \"Field.embProdEmbOfIsAlgebraic\", \"IsAlgClosed.ringEquiv_of_equiv_of_char_eq\", \"Field.Emb.Cardinal.succEquiv\", \"Field.Emb.Cardinal.embEquivPi\"], \"digest\": \"d25a018bfaa15075\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsAlgClosure.equivOfEquiv assumes K is algebraic over the compared bases; equivOfTranscendenceBasis needs already chosen equipotent bases. Classification gives an unspecified isomorphism and does not extend prescribed embeddings. The cardinal and basis-extension argument remains."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend an isomorphism of small subfields to an automorphism of a large algebraically closed field",
+   "results": "{\"t\": \"2026-10-23T21:32:01Z\", \"tool\": \"leansearch\", \"query\": \"Extend an isomorphism of small subfields to an automorphism of a large algebraically closed field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAlgClosure.equivOfEquiv.congr_simp\", \"galRestrictHom_symm_apply\", \"IsAlgClosed.ringEquiv_of_equiv_of_char_eq\", \"AlgEquiv.liftNormal\", \"Field.embEquivOfIsAlgClosed\", \"IsAlgClosed.of_ringEquiv\", \"algebraicClosure.algEquivOfAlgEquiv\", \"Field.embEquivOfEquiv\"], \"digest\": \"1af5163e14b553ef\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsAlgClosure.equivOfEquiv assumes K is algebraic over the compared bases; equivOfTranscendenceBasis needs already chosen equipotent bases. Classification gives an unspecified isomorphism and does not extend prescribed embeddings. The cardinal and basis-extension argument remains."
+  },
+  {
+   "tool": "loogle",
+   "query": "RingEquiv, IsAlgClosed",
+   "results": "{\"t\": \"2026-10-23T21:33:01Z\", \"tool\": \"loogle\", \"query\": \"RingEquiv, IsAlgClosed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"IsAlgClosed.of_ringEquiv\", \"IsAlgClosed.ringEquiv_of_equiv_of_charZero\", \"IsAlgClosed.ringEquiv_of_equiv_of_char_eq\", \"IsAlgClosed.equivOfTranscendenceBasis\", \"WittVector.exists_frobenius_solution_fractionRing\", \"WittVector.exists_frobenius_solution_fractionRing_aux\"], \"digest\": \"a9c64a4e2b240c50\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsAlgClosure.equivOfEquiv assumes K is algebraic over the compared bases; equivOfTranscendenceBasis needs already chosen equipotent bases. Classification gives an unspecified isomorphism and does not extend prescribed embeddings. The cardinal and basis-extension argument remains."
+  },
+  {
+   "tool": "grep",
+   "query": "equivOfEquiv|algEquivOf.*[Tt]ranscendence|[Tt]ranscendence.*[Ee]quiv|extend.*[Aa]utomorphism|small.*subfield",
+   "results": "{\"t\": \"2026-10-23T21:33:01Z\", \"tool\": \"grep\", \"query\": \"equivOfEquiv|algEquivOf.*[Tt]ranscendence|[Tt]ranscendence.*[Ee]quiv|extend.*[Aa]utomorphism|small.*subfield\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/IsAlgClosed/Classification.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\", \"Mathlib/FieldTheory/SeparableDegree.lean\", \"Mathlib/FieldTheory/SeparableDegree.lean\"], \"digest\": \"51669765bbee787b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsAlgClosure.equivOfEquiv assumes K is algebraic over the compared bases; equivOfTranscendenceBasis needs already chosen equipotent bases. Classification gives an unspecified isomorphism and does not extend prescribed embeddings. The cardinal and basis-extension argument remains."
+  },
+  {
+   "tool": "grep",
+   "query": "extend.*automorphism|small.*subfield|equivOfTranscendenceBasis|equivOfEquiv",
+   "results": "{\"t\": \"2026-10-23T22:39:07Z\", \"tool\": \"grep\", \"query\": \"extend.*automorphism|small.*subfield|equivOfTranscendenceBasis|equivOfEquiv\", \"sub\": \"FieldTheory/IsAlgClosed\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Classification.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Classification.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Classification.lean\"], \"digest\": \"1b7835c0a8a7e621\"}",
+   "date": "2026-10-23",
+   "verdict": "no full-item match: the cardinal bound and basis-classification constructions do not by themselves prove the prescribed restriction from the stated size hypothesis; algebraic embedding equivalences assume algebraicity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a prescribed isomorphism of small subfields to an automorphism of an algebraically closed field with larger transcendence degree",
+   "results": "{\"t\": \"2026-10-23T22:39:08Z\", \"tool\": \"leansearch\", \"query\": \"Extend a prescribed isomorphism of small subfields to an automorphism of an algebraically closed field with larger transcendence degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAlgClosed.cardinal_le_max_transcendence_basis'\", \"AlgEquiv.isTranscendenceBasis\", \"Field.infinite_emb_of_transcendental\", \"galRestrictHom_symm_apply\", \"IsAlgClosed.ringEquiv_of_equiv_of_char_eq\", \"AlgEquiv.liftNormal\", \"IsAlgClosed.of_ringEquiv\", \"IsTranscendenceBasis.lift_cardinalMk_eq_max_lift\"], \"digest\": \"57e651948e8f5014\"}",
+   "date": "2026-10-23",
+   "verdict": "no full-item match: the cardinal bound and basis-classification constructions do not by themselves prove the prescribed restriction from the stated size hypothesis; algebraic embedding equivalences assume algebraicity"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAlgClosed, RingEquiv",
+   "results": "{\"t\": \"2026-10-23T22:39:08Z\", \"tool\": \"loogle\", \"query\": \"IsAlgClosed, RingEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"IsAlgClosed.of_ringEquiv\", \"IsAlgClosed.ringEquiv_of_equiv_of_charZero\", \"IsAlgClosed.ringEquiv_of_equiv_of_char_eq\", \"IsAlgClosed.equivOfTranscendenceBasis\", \"WittVector.exists_frobenius_solution_fractionRing\", \"WittVector.exists_frobenius_solution_fractionRing_aux\"], \"digest\": \"a9c64a4e2b240c50\"}",
+   "date": "2026-10-23",
+   "verdict": "no full-item match: the cardinal bound and basis-classification constructions do not by themselves prove the prescribed restriction from the stated size hypothesis; algebraic embedding equivalences assume algebraicity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Any two embeddings of a field F into an algebraically closed field K whose transcendence degree is larger than max aleph0 cardinal F are conjugate by an automorphism of K",
+   "results": "{\"t\": \"2026-10-23T22:39:09Z\", \"tool\": \"leanfinder\", \"query\": \"Any two embeddings of a field F into an algebraically closed field K whose transcendence degree is larger than max aleph0 cardinal F are conjugate by an automorphism of K\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Field.embEquivOfIsAlgClosed\", \"Field.embProdEmbOfIsAlgebraic\", \"Field.embEquivOfEquiv\", \"Field.Emb.Cardinal.succEquiv_coherence\", \"Field.embEquivOfAdjoinSplits\", \"Field.Emb.Cardinal.succEquiv\", \"Field.Emb.Cardinal.embEquivPi\", \"IsAlgClosed.ringEquiv_of_equiv_of_charZero\"], \"digest\": \"4bd1676646b9d16e\"}",
+   "date": "2026-10-23",
+   "verdict": "no full-item match: the cardinal bound and basis-classification constructions do not by themselves prove the prescribed restriction from the stated size hypothesis; algebraic embedding equivalences assume algebraicity"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-field-groupoid-point-lift",
+  "date": "2026-10-24",
+  "group": "Q57"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Adequate moduli spaces are universal for separated targets. Alper Theorem 7.2.1, locally separated case through Proposition 7.1.1: Proposition 7.1.1, proof, printed p.36: surjectivity of the diagonal pullback W from condition (a), expanded as its closure-equivalence input. Rational points of a locally separated space over an algebraically closed field have closed images; continuity gives the assertion. This is the geometric-points sublemma, not the universality conclusion. Supporting geometric input: rational sections after field base change are closed immersions. Supporting input: The absolute locally separated space has quasi-compact field-valued representatives. First paragraph of Tag 088J: apply 04Q9 to the kernel relation on the field spectrum and its pair groupoid. Supporting Second proof paragraph of 04Q9: apply 04Q6 to the morphism from the reduced source into the closure groupoid. Supporting Tag 04Q6, first proof paragraph: choose a field extension and a lifted point adapted to the groupoid and the chosen boundary point. Supporting Tag 04LR (lemma-groupoid-on-field-explain-points), proof, construction (3): extension of the isomorphism between i(k) and sigma(t(k)) by matching complementary transcendence bases and extending to algebraic closures.",
+   "via": [
+    "lem-sfb-field-groupoid-point-lift",
+    "lem-sfb-field-groupoid-open-image-closed",
+    "lem-sfb-field-kernel-relation-immersion-closed",
+    "lem-sfb-locally-separated-space-decent",
+    "lem-sfb-locally-separated-rational-point-closed-immersion",
+    "lem-sfb-locally-separated-closure-equivalent-images",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-small-field-embeddings-conjugate",
+  "worker": "stage1",
+  "group": "NL",
+  "summary": "Kept the statement and its statement dependencies. Quantified the large-field argument, matched bases over the original two embedded copies of F using one new Mathlib cardinal-bound leaf, wrote polynomial and fraction substitution explicitly, and used the existing algebraic-closure interfaces with a specified twisted structure map. No Lean written or compiled.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Adequate moduli spaces are universal for separated targets. Alper Theorem 7.2.1, locally separated case through Proposition 7.1.1: Proposition 7.1.1, proof, printed p.36: surjectivity of the diagonal pullback W from condition (a), expanded as its closure-equivalence input. Rational points of a locally separated space over an algebraically closed field have closed images; continuity gives the assertion. This is the geometric-points sublemma, not the universality conclusion. Supporting geometric input: rational sections after field base change are closed immersions. Supporting input: The absolute locally separated space has quasi-compact field-valued representatives. First paragraph of Tag 088J: apply 04Q9 to the kernel relation on the field spectrum and its pair groupoid. Supporting Second proof paragraph of 04Q9: apply 04Q6 to the morphism from the reduced source into the closure groupoid. Supporting Tag 04Q6, first proof paragraph: choose a field extension and a lifted point adapted to the groupoid and the chosen boundary point. Supporting Tag 04LR (lemma-groupoid-on-field-explain-points), proof, construction (3): extension of the isomorphism between i(k) and sigma(t(k)) by matching complementary transcendence bases and extending to algebraic closures. Steps 1-3 justify basis matching; steps 4-5 give the coefficient-preserving rational-function isomorphism; step 6 extends it to the ambient field. Current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3) remains the ancestor route; this is the generic field-theoretic sublemma reached in that route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NL-d7060dd63",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-d7060dd63 (reviewer sub-agent of L); spot-checked: PASS, no fixes. Source: Stacks 04LR (more-groupoids.tex, lemma-groupoid-on-field-explain-points), proof item (3), lines 1084-1106, read. The delivery matches transcendence bases directly over a(F) and b(F) instead of complements over the relative algebraic closures. It still uses the same three ingredients (equal-size bases, the rational-function-field isomorphism, uniqueness of the algebraic closure) and stays on the unit route. The item statement and stmt_deps are unchanged, the proof_deps are exactly the union of the step uses, and on live/side-live the item is still unsplit with no repair note, so this is a first split. Step 1: trdeg ≤ |K|, so μ < |K|. Step 2: the Mathlib leaf lem-exc-transcendence-basis-exists gives a basis through each of a and b. Step 3: the new node gives |K| ≤ max(μ,|I|), so |I| = |J| = |K|, which is valid for singular |K| and needs no cardinal subtraction. Steps 4-5: the polynomial and fraction-field substitutions are written out explicitly and are genuinely elementary. Step 6: lem-exc-transcendence-basis-algebraic-closure says K is algebraic over L. Twisting the target by h keeps it algebraic, checked by pulling coefficients back through h⁻¹. Clause (2) of lem-pc-algebraic-closure-exists-unique then gives σ with σ|_L = h, hence τ∘a = b. New node lem-sfb-algclosed-transcendence-basis-cardinal-bound is an exact one-line field specialization of IsAlgClosed.cardinal_le_max_transcendence_basis (Classification.lean:92-94 read; it assumes only a CommRing and has no Nonempty hypothesis). It is statement-only, B1-B9 are satisfied, and it only bounds a cardinality, so it does not restate the item. It was tested with I empty, F finite, F uncountable with E/F algebraic, and I infinite. Duplicate checks: the countable-base equality node, the trdeg upper-bound node, the live lower-bound existence node and the Galois automorphism nodes all differ, and no other node carries the same mathlib declaration. The off-unit citations are status-mathlib leaves, so no tool_uses are needed. No SGA source is used."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.SmallFieldEmbeddingsConjugate",
+  "declaration": "IsAlgClosed.exists_ringEquiv_comp_eq_of_small",
+  "file": "lean/Sheaf/FieldTheory/SmallFieldEmbeddingsConjugate.lean",
+  "statement": "theorem exists_ringEquiv_comp_eq_of_small (F : Type u) (K : Type v) [Field F] [Field K] [IsAlgClosed K] (a b : F →+* K) (hsmall : max Cardinal.aleph0 (Cardinal.lift.{v} (Cardinal.mk F)) < Cardinal.lift.{u} (Algebra.trdeg (⊥ : Subfield K) K)) : ∃ τ : K ≃+* K, τ.toRingHom.comp a = b",
+  "branch": "sheaf-dag",
+  "by": "Q86",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a829651b6",
+  "group": "Q86",
+  "result": "pass",
+  "note": "Snapshot node differs from side-live only in lean; statement verbatim in file. Clause check: Field F/K (independent universes u,v), IsAlgClosed K (dep mathlib_match names IsAlgClosed), a b : F →+* K (injective automatically), P = (⊥ : Subfield K) via Subfield.toAlgebra, max ℵ₀ (lift #F) < lift (Algebra.trdeg ⊥ K) in Cardinal.{max u v} with no universe equality, conclusion ∃ τ : K ≃+* K, τ∘a = b exact. No extra hypotheses, no definitions, sorry only, Tag 04LR source + blueprint docstrings with the 6 proof steps, imports public/plain split correctly. Edge cases (finite/countable F, trdeg ≤ ℵ₀, a=b, singular |K|, u≠v) as in the node. No existing Mathlib equivalent (equivOfTranscendenceBasis needs chosen bases). Not compiled per instruction; worker reports clean scompile. Second reading was by the same worker, noted only."
+ }
+}

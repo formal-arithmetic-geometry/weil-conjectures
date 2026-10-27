@@ -1,0 +1,188 @@
+{
+ "id": "lem-sf-completed-coefficient-unit-complete",
+ "kind": "statement",
+ "title": "The canonical quotient completion unit fixes the completed coefficient sheaf",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbb Q_\\ell$ [def-weil-l-adic-coefficient-extension], and a quasi-compact quasi-separated scheme $T$ on which $\\ell$ is invertible [def-pc-scheme, def-weil-quasi-separated-morphism]. Let $B_T$ be the completed integral coefficient sheaf on the small pro-etale site [def-weil-pbc-proetale-site, def-weil-completed-integral-coefficients]. In the derived category of $B_T$-module sheaves [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], use exactly $C_T$ and its specified quotient augmentation $\\eta$ of [def-pur-integral-derived-operations], formed with restricted scalar extensions [def-pc-sheaf-restrict-scalars] and the strict product mapping-fibre model [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. The morphism $\\eta_{B_T[0]}:B_T[0]\\to C_T(B_T[0])$ is an isomorphism. Here B_T[0] is the existing derived single functor on the coefficient unit; the site and coefficient universes remain independent. No assertion about bounded complexes or tensor products is included.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Propositions 3.1.9-3.1.10, pp. 17-18, and Lemma 6.5.5, pp. 49-50; Stacks Tags 099I and 0941; parent proof step 6."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-pur-integral-derived-operations"
+ ],
+ "proof": [
+  {
+   "text": "The coefficient unit is categorically flat by its left unitor. The proved comparison siteSheafTensorRightIso identifies site tensor with categorical tensor, so its degree-zero term is site-flat. All other terms are zero and hence flat. Apply isKFlatIndependentCoefficients_of_boundedAbove_flatOnSite at bound zero to obtain a Good representative.",
+   "uses": [
+    "lem-weil-pbc-independent-bounded-flat-kflat",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.5, pp. 49-50; bounded-flat K-flatness"
+   }
+  },
+  {
+   "text": "Use the proved coefficientCone_isLimit, coefficientUnitProjection_epi, coefficientStep_epi, extensionUnit_normalized and normalizedUnit_single helpers of CompletedFreeCellOrdinaryLimit directly at the coefficient unit, avoiding a rank-one product and any auxiliary finite-field datum. The defining section formulas identify the actual IntegralOnSlice augmentation with the scalar-extension adjunction unit. The normalized scalar-extension isomorphisms then carry it to the coefficient projections. Each augmentation is epic; cancel it to prove successor naturality of the levelwise isomorphisms. Postcompose cones with the resulting natural isomorphism to obtain the ordinary limit property. Naturality of its degreewise isomorphisms transfers epimorphic transitions from the coefficient diagram placed in degree zero.",
+   "uses": [
+    "lem-sf-completed-free-cell-ordinary-limit",
+    "def-pur-integral-derived-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Propositions 3.1.9-3.1.10; parent proof step 6"
+   }
+  },
+  {
+   "text": "Apply the proved sheaf_tower_epi helper of ProEtaleMilnorEpimorphic to the quotient tower in each complex degree. The map_transition product-comparison identity and the fact that evaluation preserves products make the complex one-minus-shift map epic. The proved generic tower_kernel helper identifies the specified product augmentation, using its actual components, with its kernel. These give a short exact sequence of complexes. The proved cocone_lift_quasiIso helper, based on the degreewise-epimorphic kernel-to-shifted-cone theorem, shows that its lift with zero second coordinate is a quasi-isomorphism. This lift is definitionally the specified roosUnit; its null-homotopy proof is roosUnit_condition.",
+   "uses": [
+    "det-pe-milnor-epimorphic",
+    "lem-weil-degreewise-epi-kernel-cocone-qis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-pe-milnor/det-pe-milnor-epimorphic.proof.md",
+    "place": "Steps 1-2: epimorphism of one minus shift in each degree, and the short exact sequence of complexes; kernel-to-mapping-fibre comparison."
+   }
+  },
+  {
+   "text": "Package the degree-zero coefficient complex with its proved Good property. The defining choose_spec of completionUnit_existsUnique evaluates the actual completionUnit followed by completionComparison to DerivedCategory.Q.map of the specified roosUnit. Localization sends its quasi-isomorphism to an isomorphism. Since the comparison component is an isomorphism, cancel it on the right. DerivedCategory.singleFunctor is definitionally the single-complex functor followed by localization, so this is exactly the unchanged conclusion.",
+   "uses": [
+    "def-pur-integral-derived-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 06XN and 08TC; representative normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-sf-completed-free-cell-ordinary-limit",
+  "def-pur-integral-derived-operations",
+  "det-pe-milnor-epimorphic",
+  "lem-weil-degreewise-epi-kernel-cocone-qis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "M9: the normalized coefficient-unit and ordinary-cone helpers of CompletedFreeCellOrdinaryLimit; the proved degreewise epimorphic-tower/kernel/cocone helpers of ProEtaleMilnorEpimorphic; the existing completionUnit normalization. Same Bhatt--Scholze/Stacks argument, directly on the unit without auxiliary finite-field data."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical derived completion unit on the single complex of a completed coefficient sheaf is an isomorphism",
+   "results": "DerivedCategory.singleFunctorIsoCompQ; HomologicalComplex.tensorUnitIso; unrelated sheafification and condensed locally constant adjunction units. None proves quotient-Roos completeness.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The degree zero single complex of the completed coefficient sheaf on a proetale site is fixed by the canonical derived quotient completion unit",
+   "results": "BDeRhamPlus; BDeRham; SheafOfModules.Presentation.map_π_eq; representation-complex unit equations. None is the derived quotient-completion augmentation.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIso\", \"DerivedCategory.singleFunctor\"",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*(Additive|CommShift|IsTriangulated)|IsIso.*completionUnit, Mathlib source",
+   "results": "Normed-group and nonarchimedean additive completions; no quotient-Roos sheaf completion or normalized derived unit.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-fix-bounded-projective-tensor-complete",
+  "date": "2026-10-24",
+  "group": "D9"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof paragraph beginning For an admissible exceptional adjoint, evaluation ordinary-to-completed tensor comparison: rank-one completed coefficient calculation.",
+   "via": [
+    "lem-fix-bounded-projective-tensor-complete",
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedCoefficientUnitComplete",
+  "declaration": "WeilConjectures.completedCoefficientUnit_completionUnit_isIso",
+  "file": "lean/Sheaf/Paper/CompletedCoefficientUnitComplete.lean",
+  "statement": "theorem completedCoefficientUnit_completionUnit_isIso\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (T : AlgebraicGeometry.Scheme.{t}) [CompactSpace T] [QuasiSeparatedSpace T]\n    (_hl : ∀ x : T, IsUnit (l : T.residueField x)) :\n    IsIso ((completionUnit l E T none).app\n      ((DerivedCategory.singleFunctor (Mod l E T none) 0).obj\n        (SheafOfModules.unit (rings l E T none))))",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "D9",
+  "date": "2026-10-24"
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sf-completed-coefficient-unit-complete",
+  "worker": "stage3",
+  "summary": "Separate source result extracted from the completion structure part of bounded-projective tensor completeness; no definition or target signature changes.",
+  "blueprint": "The completion structure used in the ordinary-to-completed tensor comparison for evaluation.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-independent-bounded-flat-kflat",
+    "why": "The existing generic homological algebra result is used with the actual completed coefficient module sheaves; it does not replace the unit route."
+   },
+   {
+    "node": "lem-sf-completed-free-cell-ordinary-limit",
+    "why": "The existing generic homological algebra result is used with the actual completed coefficient module sheaves; it does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-proetale-surjective-tower-derived-limit",
+    "why": "The existing generic homological algebra result is used with the actual completed coefficient module sheaves; it does not replace the unit route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261024T204542-L-3793492",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M9",
+  "result": "pass",
+  "landing": "20261027T021340-L-2759866",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,329 @@
+{
+ "id": "lem-trf-affinoid-spectral-banach-norm",
+ "kind": "statement",
+ "title": "The spectral norm gives the Banach topology of a reduced affinoid",
+ "statement": "Let $K$ be an algebraically closed field [def-weil-field], complete for a nontrivial real-valued nonarchimedean absolute value. A Tate algebra $T_r=K\\langle X_1,\\ldots,X_r\\rangle$ is the restricted-series ring of [def-trf-restricted-series-presentation], with Gauss norm $\\|\\sum a_\\nu X^\\nu\\|_G=\\sup_\\nu|a_\\nu|$. Let $C\\ne0$ be a reduced quotient of such an algebra with its affinoid Banach topology. Define $\\rho(c)=\\sup_\\chi|\\chi(c)|$, where $\\chi:C\\to K$ runs over continuous unital $K$-algebra homomorphisms. Then $\\rho$ is a complete nonarchimedean $K$-algebra norm: $\\rho(c)=0$ iff $c=0$, $\\rho(1)=1$, $\\rho(c+d)\\le\\max(\\rho(c),\\rho(d))$, $\\rho(cd)\\le\\rho(c)\\rho(d)$, and $\\rho(ac)=|a|\\rho(c)$ for $a\\in K$. It is power-multiplicative: $\\rho(c^m)=\\rho(c)^m$ for every $m\\ge1$. For any Tate quotient norm $\\|\\cdot\\|_0$ on $C$ there is $M\\ge1$ such that $\\rho(c)\\le\\|c\\|_0\\le M\\rho(c)$ for every $c\\in C$.",
+ "source": {
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "BGR Theorem 6.2.4/1 (spectral norm is a Banach norm); compare Conrad, Several approaches to non-archimedean geometry, Theorem 1.2.6(1),(5) and the following paragraph, PDF pp.6–7, read online 2026-10-24. The character formula specializes maximal ideals to K-rational characters because K is algebraically closed. Archival copy WANTED; not present in this checkout.",
+  "url": "https://math.stanford.edu/~conrad/papers/aws.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-restricted-series-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Fix an arbitrary Tate presentation with quotient norm $\\|\\cdot\\|_0$. By [lem-trf-affinoid-quotient-norm-topology] this norm is complete and gives the stated topology. Put $s_C(c)=\\sup_{\\mathfrak m\\in\\operatorname{Max}C}|c\\bmod\\mathfrak m|$. By [lem-trf-affinoid-supremum-seminorm-calculus], every residue field is finite over $K$, hence is $K$ because $K$ is algebraically closed, and $s_C(c)\\le\\|c\\|_0$. The quotient norm has $\\|1\\|_0\\le1$ from the constant lift and $\\|1\\|_0\\ge1$ from nondegeneracy and submultiplicativity. The resulting residue characters are contractive by [lem-per-banach-character-norm-bound], hence continuous. Conversely a unital $K$-algebra map $C\\to K$ is onto (it fixes $K$), has maximal kernel and is precisely that kernel's residue character. Thus the two indexing sets agree and $\\rho=s_C$, in particular $\\rho$ is finite. Nonzero $C$ has a maximal ideal, so this character set is nonempty.",
+   "uses": [
+    "lem-trf-affinoid-quotient-norm-topology",
+    "lem-trf-affinoid-supremum-seminorm-calculus",
+    "lem-per-banach-character-norm-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kskedlaya.org/18.727/spectra2.pdf",
+    "place": "Theorem 4, PDF pp.2-3, finite-envelope and trace argument; agent assembly with finite-module strictness in place of Lemma 3 for arbitrary inclusions. Read online 2026-10-24; archival copy WANTED."
+   }
+  },
+  {
+   "text": "Choose $j:C\\hookrightarrow B=\\prod_{i=1}^s B_i$ and $T_i\\hookrightarrow B_i$ by [lem-trf-affinoid-finite-galois-envelope], with their quotient norms $\\|\\cdot\\|_i$. Give $B$ the maximum norm. It is a complete finite $C$-module: coordinatewise limits prove completeness and concatenating finite generating lists proves module finiteness. The bounded maps $j_i$ give $\\|cb\\|_B\\le(\\max_i D_i)\\|c\\|_0\\|b\\|_B$. Apply [lem-trf-affinoid-finite-module-strictness] to the injective $C$-linear map $j:C\\to B$. We get $A>0$ with $\\|c\\|_0\\le A\\max_i\\|j_i(c)\\|_i$. Only this finite inclusion is used; no assertion about closedness of an arbitrary affinoid inclusion is needed.",
+   "uses": [
+    "lem-trf-affinoid-finite-galois-envelope",
+    "lem-trf-affinoid-finite-module-strictness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kskedlaya.org/18.727/spectra2.pdf",
+    "place": "Theorem 4, PDF pp.2-3, finite-envelope and trace argument; agent assembly with finite-module strictness in place of Lemma 3 for arbitrary inclusions. Read online 2026-10-24; archival copy WANTED."
+   }
+  },
+  {
+   "text": "For each $i$ put $F_i=\\operatorname{Frac}(T_i)$ and $L_i=\\operatorname{Frac}(B_i)$, and let $n_i=[L_i:F_i]\\ge1$. Every element of $L_i$ is $\\beta/t$ with $\\beta\\in B_i$ and $0\\ne t\\in T_i$: for $0\\ne b'\\in B_i$ take an integral equation $b'^r+t_{r-1}b'^{r-1}+\\cdots+t_0=0$ over $T_i$ of minimal degree; then $t_0\\ne0$ since $B_i$ is a domain, and $1/b'=-(b'^{r-1}+\\cdots+t_1)/t_0$. Hence $B_i$ spans $L_i$ over $F_i$, and we choose an $F_i$-basis $e_{i1},\\ldots,e_{in_i}\\in B_i$. By [lem-trf-tate-galois-trace-supremum-bound] the trace $\\operatorname{Tr}_{L_i/F_i}(b)$ lies in $T_i$ for every $b\\in B_i$; in particular every entry of $G_i=(\\operatorname{Tr}(e_{ik}e_{i\\ell}))_{k,\\ell}$ and every $\\operatorname{Tr}(e_{ik}b)$ lies in $T_i$, so $\\Phi_i(b)=(\\operatorname{Tr}(e_{ik}b))_k$ is a $T_i$-linear map $B_i\\to T_i^{n_i}$. Since $L_i/F_i$ is a finite separable field extension, $L_i$ is an étale $F_i$-algebra (a product with one separable factor), so by [lem-sbc-trace-form-nondegenerate-iff-etale-field] the trace form of $L_i/F_i$ is nondegenerate, i.e. $\\det G_i\\ne0$. If $\\Phi_i(b)=0$, write $b=\\sum_\\ell f_\\ell e_{i\\ell}$ with $f_\\ell\\in F_i$; then $G_i(f_\\ell)_\\ell=0$. Multiplying by the adjugate and using $\\det G_i\\ne0$ gives all $f_\\ell=0$, so $b=0$.",
+   "uses": [
+    "lem-trf-tate-galois-trace-supremum-bound",
+    "lem-sbc-trace-form-nondegenerate-iff-etale-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kskedlaya.org/18.727/spectra2.pdf",
+    "place": "Theorem 4, PDF pp.2-3, finite-envelope and trace argument; agent assembly with finite-module strictness in place of Lemma 3 for arbitrary inclusions. Read online 2026-10-24; archival copy WANTED."
+   }
+  },
+  {
+   "text": "Equip $T_i^{n_i}$ with the maximum Gauss norm; it is complete by [lem-trf-restricted-series-gauss-completion] and coordinatewise limits. The $T_i$-action on $B_i$ is bounded by the constants $E_i$ from step 2 and submultiplicativity. Both modules are finite over the affinoid $T_i$. Apply [lem-trf-affinoid-finite-module-strictness] to $\\Phi_i$: there is $H_i>0$ such that $\\|b\\|_i\\le H_i\\max_k\\|\\operatorname{Tr}(e_{ik}b)\\|_G$. By [lem-trf-tate-galois-trace-supremum-bound] each coordinate is at most $\\rho_{B_i}(e_{ik}b)\\le\\rho_{B_i}(e_{ik})\\rho_{B_i}(b)$; the latter inequality follows by applying multiplicativity in each residue field and taking suprema. Hence $\\|b\\|_i\\le H_i R_i\\rho_{B_i}(b)$, where $R_i=\\max(1,\\max_k\\rho_{B_i}(e_{ik}))$ is finite by [lem-trf-affinoid-supremum-seminorm-calculus].",
+   "uses": [
+    "lem-trf-restricted-series-gauss-completion",
+    "lem-trf-affinoid-finite-module-strictness",
+    "lem-trf-tate-galois-trace-supremum-bound",
+    "lem-trf-affinoid-supremum-seminorm-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kskedlaya.org/18.727/spectra2.pdf",
+    "place": "Theorem 4, PDF pp.2-3, finite-envelope and trace argument; agent assembly with finite-module strictness in place of Lemma 3 for arbitrary inclusions. Read online 2026-10-24; archival copy WANTED."
+   }
+  },
+  {
+   "text": "For every $j_i:C\\to B_i$, [lem-trf-affinoid-supremum-seminorm-calculus] gives $\\rho_{B_i}(j_i(c))\\le s_C(c)=\\rho(c)$. Substitution into steps 2 and 4 yields $\\|c\\|_0\\le A\\max_i(H_iR_i)\\rho(c)$. Taking $M=\\max(1,A\\max_i(H_iR_i))$ and combining with step 1 gives $\\rho(c)\\le\\|c\\|_0\\le M\\rho(c)$. In particular $\\rho(c)=0$ forces $\\|c\\|_0=0$, hence $c=0$; the converse holds since every character maps zero to zero. The quotient presentation was arbitrary, so this proves the assertion for every Tate quotient norm.",
+   "uses": [
+    "lem-trf-affinoid-supremum-seminorm-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kskedlaya.org/18.727/spectra2.pdf",
+    "place": "Theorem 4, PDF pp.2-3, finite-envelope and trace argument; agent assembly with finite-module strictness in place of Lemma 3 for arbitrary inclusions. Read online 2026-10-24; archival copy WANTED."
+   }
+  },
+  {
+   "text": "For every character $\\chi$, $|\\chi(1)|=1$, $|\\chi(c+d)|\\le\\max(|\\chi(c)|,|\\chi(d)|)$, $|\\chi(cd)|=|\\chi(c)||\\chi(d)|$ and $|\\chi(ac)|=|a||\\chi(c)|$. Taking suprema in the nonempty bounded character family gives respectively $\\rho(1)=1$, the ultrametric inequality, submultiplicativity, and scalar homogeneity (for $a=0$ both sides are zero). Also $\\rho(-c)=\\rho(c)$. The positive-power identity $\\rho(c^m)=\\rho(c)^m$ follows directly from the positive-power identity for $s_C$ in [lem-trf-affinoid-supremum-seminorm-calculus], since step 1 identified these functions.",
+   "uses": [
+    "lem-trf-affinoid-supremum-seminorm-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kskedlaya.org/18.727/spectra2.pdf",
+    "place": "Theorem 4, PDF pp.2-3, finite-envelope and trace argument; agent assembly with finite-module strictness in place of Lemma 3 for arbitrary inclusions. Read online 2026-10-24; archival copy WANTED."
+   }
+  },
+  {
+   "text": "If $(c_n)$ is $\\rho$-Cauchy, the upper inequality $\\|c_n-c_m\\|_0\\le M\\rho(c_n-c_m)$ makes it $\\|\\cdot\\|_0$-Cauchy. Completeness of the quotient norm from step 1 gives $c\\in C$ with $\\|c_n-c\\|_0\\to0$. The lower inequality $\\rho(c_n-c)\\le\\|c_n-c\\|_0$ gives convergence for $\\rho$. Thus the norm is complete. The same inequalities show equality of the two topologies by their metric balls, so this is the affinoid Banach topology.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kskedlaya.org/18.727/spectra2.pdf",
+    "place": "Theorem 4, PDF pp.2-3, finite-envelope and trace argument; agent assembly with finite-module strictness in place of Lemma 3 for arbitrary inclusions. Read online 2026-10-24; archival copy WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-affinoid-quotient-norm-topology",
+  "lem-trf-affinoid-supremum-seminorm-calculus",
+  "lem-per-banach-character-norm-bound",
+  "lem-trf-affinoid-finite-galois-envelope",
+  "lem-trf-affinoid-finite-module-strictness",
+  "lem-sbc-trace-form-nondegenerate-iff-etale-field",
+  "lem-trf-tate-galois-trace-supremum-bound",
+  "lem-trf-restricted-series-gauss-completion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kskedlaya.org/18.727/spectra2.pdf",
+  "place": "Theorem 4, PDF pp.2-3, finite-envelope and trace argument; agent assembly with finite-module strictness in place of Lemma 3 for arbitrary inclusions. Read online 2026-10-24; archival copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "affinoid|spectral.?radius|spectralAlgNorm|IsPowMul",
+   "results": "{\"t\": \"2026-10-24T08:06:50Z\", \"tool\": \"grep\", \"query\": \"affinoid|spectral.?radius|spectralAlgNorm|IsPowMul\", \"sub\": \"Analysis/Normed\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Normed/Algebra/Spectrum.lean\", \"Mathlib/Analysis/Normed/Algebra/Spectrum.lean\", \"Mathlib/Analysis/Normed/Algebra/Spectrum.lean\", \"Mathlib/Analysis/Normed/Algebra/Spectrum.lean\", \"Mathlib/Analysis/Normed/Algebra/Spectrum.lean\", \"Mathlib/Analysis/Normed/Algebra/GelfandFormula.lean\", \"Mathlib/Analysis/Normed/Algebra/GelfandFormula.lean\", \"Mathlib/Analysis/Normed/Algebra/GelfandFormula.lean\"], \"digest\": \"f8b18a35038f5d1c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: spectralNorm and spectralAlgNorm in Analysis/Normed/Unbundled/SpectralNorm.lean assume the algebra is a FIELD algebraic over the base (read lines 629–679), whereas C may be a positive-dimensional affinoid with zero divisors; smoothing of a seminorm alone does not give completeness, nondegeneracy or equivalence with the quotient norm."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Spectral norm on a reduced nonarchimedean affinoid algebra is equivalent to any Banach quotient norm",
+   "results": "{\"t\": \"2026-10-24T08:06:50Z\", \"tool\": \"leansearch\", \"query\": \"Spectral norm on a reduced nonarchimedean affinoid algebra is equivalent to any Banach quotient norm\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"spectralAlgNorm\", \"spectralNorm.normedSpace\", \"isNonarchimedean_spectralNorm\", \"spectralNorm_unique\", \"spectralNorm.spectralNorm_eq_norm_coeff_zero_rpow\", \"isNonarchimedean_spectralNorm_of_finiteDimensional_normal\", \"spectralAlgNorm_def\", \"spectralNorm.seminormedAddCommGroup\"], \"digest\": \"210924f9f18b1c83\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: spectralNorm and spectralAlgNorm in Analysis/Normed/Unbundled/SpectralNorm.lean assume the algebra is a FIELD algebraic over the base (read lines 629–679), whereas C may be a positive-dimensional affinoid with zero divisors; smoothing of a seminorm alone does not give completeness, nondegeneracy or equivalence with the quotient norm."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spectralNorm\"",
+   "results": {
+    "t": "2026-10-24T08:55:32Z",
+    "tool": "loogle",
+    "query": "\"spectralNorm\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "spectralNorm",
+     "spectralNorm_nonneg",
+     "spectralNorm_one",
+     "spectralNorm_zero",
+     "isNonarchimedean_spectralNorm",
+     "isPowMul_spectralNorm",
+     "eq_zero_of_map_spectralNorm_eq_zero",
+     "spectralNorm.metricSpace"
+    ],
+    "digest": "8f972011a141306e"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralAlgNorm in SpectralNorm.lean lines 629-679 concerns algebraic FIELD extensions, whereas C can have positive dimension and zero divisors; quotient norm infrastructure alone supplies no spectral domination."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The spectral radius on a reduced strict affinoid algebra is a complete power multiplicative norm equivalent to the quotient norm",
+   "results": "{\"t\": \"2026-10-24T08:06:51Z\", \"tool\": \"leanfinder\", \"query\": \"The spectral radius on a reduced strict affinoid algebra is a complete power multiplicative norm equivalent to the quotient norm\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"spectralNorm_unique\", \"isPowMul_spectralNorm\", \"spectralAlgNorm_isPowMul\", \"spectralMulAlgNorm\", \"spectralMulAlgNorm_def\", \"isPowMul_spectralNorm_of_finiteDimensional_normal\", \"spectralAlgNorm\", \"spectralAlgNorm_def\"], \"digest\": \"67635d34bad8a113\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: spectralNorm and spectralAlgNorm in Analysis/Normed/Unbundled/SpectralNorm.lean assume the algebra is a FIELD algebraic over the base (read lines 629–679), whereas C may be a positive-dimensional affinoid with zero divisors; smoothing of a seminorm alone does not give completeness, nondegeneracy or equivalence with the quotient norm."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maximum modulus principle for affinoid algebras spectral seminorm attained at a maximal ideal with finite residue extension",
+   "results": "{\"t\": \"2026-10-24T08:06:52Z\", \"tool\": \"leanfinder\", \"query\": \"Maximum modulus principle for affinoid algebras spectral seminorm attained at a maximal ideal with finite residue extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isNonarchimedean_spectralNorm\", \"spectralAlgNorm\", \"spectralMulAlgNorm\", \"max_norm_root_eq_spectralValue\", \"norm_le_spectralNorm\", \"isNonarchimedean_spectralNorm_of_finiteDimensional_normal\", \"spectralNorm_eq_invariantExtension\", \"spectralMulAlgNorm_def\"], \"digest\": \"1e457d04b27138b0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: spectralNorm and spectralAlgNorm in Analysis/Normed/Unbundled/SpectralNorm.lean assume the algebra is a FIELD algebraic over the base (read lines 629–679), whereas C may be a positive-dimensional affinoid with zero divisors; smoothing of a seminorm alone does not give completeness, nondegeneracy or equivalence with the quotient norm."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The supremum over continuous scalar valued characters on a reduced affinoid algebra is a complete norm equivalent to the quotient Gauss norm",
+   "results": {
+    "t": "2026-10-24T08:55:30Z",
+    "tool": "leanfinder",
+    "query": "The supremum over continuous scalar valued characters on a reduced affinoid algebra is a complete norm equivalent to the quotient Gauss norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralMulAlgNorm",
+     "spectralNorm.normedSpace",
+     "spectralAlgNorm",
+     "spectralMulAlgNorm_def",
+     "spectralNorm_unique",
+     "isNonarchimedean_spectralNorm",
+     "spectralNorm.seminormedAddCommGroup",
+     "spectralNorm.normedField"
+    ],
+    "digest": "c8a585e1c2037004"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralAlgNorm in SpectralNorm.lean lines 629-679 concerns algebraic FIELD extensions, whereas C can have positive dimension and zero divisors; quotient norm infrastructure alone supplies no spectral domination."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reduced affinoid algebra spectral supremum norm equivalent quotient norm",
+   "results": {
+    "t": "2026-10-24T08:55:31Z",
+    "tool": "leansearch",
+    "query": "Reduced affinoid algebra spectral supremum norm equivalent quotient norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Ideal.Quotient.normedCommRing",
+     "spectralAlgNorm",
+     "Ideal.Quotient.semiNormedCommRing",
+     "spectralNorm_eq_iSup_of_finiteDimensional_normal",
+     "Ideal.Quotient.norm_mk_le",
+     "spectralNorm.normedSpace",
+     "spectralNorm.seminormedAddCommGroup",
+     "QuotientAddGroup.instNorm"
+    ],
+    "digest": "1dedf8b446388a1c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralAlgNorm in SpectralNorm.lean lines 629-679 concerns algebraic FIELD extensions, whereas C can have positive dimension and zero divisors; quotient norm infrastructure alone supplies no spectral domination."
+  },
+  {
+   "tool": "grep",
+   "query": "affinoid|spectralAlgNorm",
+   "results": {
+    "t": "2026-10-24T08:55:32Z",
+    "tool": "grep",
+    "query": "affinoid|spectralAlgNorm",
+    "sub": "Analysis/Normed/Unbundled",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean"
+    ],
+    "digest": "5bf4c598772ee42b"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralAlgNorm in SpectralNorm.lean lines 629-679 concerns algebraic FIELD extensions, whereas C can have positive dimension and zero divisors; quotient norm infrastructure alone supplies no spectral domination."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-affinoid-distinguished-presentation",
+  "date": "2026-10-24",
+  "group": "Q104"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: The spectral norm gives the Banach topology of a reduced affinoid.",
+   "via": [
+    "lem-trf-affinoid-distinguished-presentation",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-affinoid-spectral-banach-norm",
+  "worker": "stage1",
+  "summary": "Q96 proved quotient-norm domination by finite Galois envelopes, trace-coordinate injection from the nondegenerate separable trace form, and finite-module strictness; character identification, norm identities and completeness are explicit. Three statement-only analytic inputs are searched. The item statement is unchanged. An arbitrary-inclusion gap in Kedlaya Lemma 3 is avoided by finite modules.",
+  "blueprint": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: The spectral norm gives the Banach topology of a reduced affinoid. Latest blueprint ancestor has contracting-local-term clauses (1)-(3), no analytic sentence; this supplies the inherited supporting analytic input below node level without replacing the current unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-trace-form-nondegenerate-iff-etale-field",
+    "why": "Generic finite-algebra fact: the trace form of a finite separable (étale) field extension is nondegenerate; used in step 3 for det G_i != 0. Replaces the earlier trace-dual-lattice citation from the route dropped 2026-10-19 (reviewer FIX)."
+   },
+   {
+    "node": "lem-per-banach-character-norm-bound",
+    "why": "The complete normed-algebra character contractivity theorem identifies algebraic residue characters with continuous characters in step 1; no local unit statement supplies this general Banach-algebra fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-trace-form-nondegenerate-iff-etale-field",
+  "lem-per-banach-character-norm-bound"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q96-55aca49f8",
+  "group": "Q96",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-55aca49f8 (reviewer sub-agent of L); spot-checked: The mechanical finding is confirmed. Step 3 cited lem-per-integral-trace-dual-lattice, which was created on 2026-10-19 under the dropped lem-per-artin-gabber-affine-curve / ILO XVII / Qbar middle-t-structure chain, so the citation cannot stand. Repair: step 3 is rewritten. It chooses an F_i-basis inside B_i; spanning is elementary, from a minimal-degree integral equation with nonzero constant term. Tr(B_i) is contained in T_i by the new node lem-trf-tate-galois-trace-supremum-bound. det G_i is nonzero because L_i/F_i is finite separable, hence étale, and the existing node lem-sbc-trace-form-nondegenerate-iff-etale-field then gives a nondegenerate trace form. proof_deps, tool_uses and summary are updated in fixes/dag/nodes/sec-trace-formula/lem-trf-affinoid-spectral-banach-norm.json; the item statement is unchanged. Every other step was checked against the cited statements. Step 1: quotient-norm-topology, supremum-calculus (finite residue fields equal to K, rho bounded by the quotient norm), the norm of 1 equal to 1, and the character bound (a mathlib-status node, accepted as a tool use). Steps 2 and 4: finite-module strictness, applied to j:C into the product of the B_i and to Phi_i, with the scalar-action bounds checked. Step 5: functoriality from the supremum calculus. Steps 6 and 7 are elementary. The three new statement-only nodes are true and are not restatements of the item. The envelope node holds: minimal primes, Noether normalization, p^m-root variables (K perfect) so that the compositum is separable, then a normal closure whose integral closure is finite by the Japanese property, and finite over C through T0. The strictness node is BGR 3.7.2-3.7.3 plus the open mapping theorem. The trace bound holds: B is the integral closure of T so Galois preserves it, T is normal, and the Gauss norm equals the sup norm; it also holds for d=0 and in wild degree p. Small cases tested: C=K, a Tate algebra, KxK, and K<X,Y>/(XY). The source error is handled correctly: Kedlaya Lemma 3's claim that arbitrary affinoid inclusions have closed image is false (T maps to pi*T), and only finite inclusions are used. No SGA source and no forbidden route material.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.AffinoidSpectralBanachNorm",
+  "declaration": "RestrictedSeries.affinoid_spectral_banach_norm",
+  "file": "lean/Sheaf/RingTheory/AffinoidSpectralBanachNorm.lean",
+  "statement": "theorem affinoid_spectral_banach_norm (K : Type u) [NontriviallyNormedField K] [IsUltrametricDist K] [CompleteSpace K] [IsAlgClosed K] (C : Type v) [CommRing C] [Nontrivial C] [IsReduced C] [Algebra K C] [TopologicalSpace C] (haff : ∃ (r : ℕ) (q : (MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin r ↦ (1 : ℝ))) →+* C), Function.Surjective q ∧ q.comp (constants K r) = algebraMap K C ∧ ∀ U : Set C, IsOpen U ↔ ∀ s, q s ∈ U → ∃ ε : ℝ, 0 < ε ∧ ∀ t, MvPowerSeries.gaussNorm (norm : K → ℝ) (fun _ : Fin r ↦ 1) (t.val - s.val) < ε → q t ∈ U) : ∃ ρ : AlgebraNorm K C, (∀ c : C, ρ c = sSup {x : ℝ | ∃ χ : C →ₐ[K] K, Continuous χ ∧ x = ‖χ c‖}) ∧ ρ 1 = 1 ∧ IsNonarchimedean ρ ∧ IsPowMul ρ ∧ @CompleteSpace C ρ.toRingNorm.toNormedRing.toUniformSpace ∧ ρ.toRingNorm.toNormedRing.toUniformSpace.toTopologicalSpace = (inferInstance : TopologicalSpace C) ∧ ∀ (r : ℕ) (q : (MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin r ↦ (1 : ℝ))) →+* C), Function.Surjective q → q.comp (constants K r) = algebraMap K C → ∃ M : ℝ, 1 ≤ M ∧ ∀ c : C, ρ c ≤ sInf {x : ℝ | ∃ s, q s = c ∧ x = MvPowerSeries.gaussNorm (norm : K → ℝ) (fun _ : Fin r ↦ 1) s.val} ∧ sInf {x : ℝ | ∃ s, q s = c ∧ x = MvPowerSeries.gaussNorm (norm : K → ℝ) (fun _ : Fin r ↦ 1) s.val} ≤ M * ρ c",
+  "branch": "newtargets-dag",
+  "by": "Q56",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d92a73761",
+  "group": "Q56",
+  "result": "pass",
+  "note": "Read node, both stmt_deps (Field; RestrictedSeriesPresentation constants/IsAffinoidQuotient), module, report (Worker report + Second reading by Q56 present). Node diff vs side-live only lean; lean.statement verbatim in file. Hypotheses match exactly (nontrivially normed ultrametric complete alg-closed K; nontrivial reduced C; haff = surjective scalar-compatible Tate presentation with Gauss-ball quotient topology, same interface as landed grauert_remmert_powerbounded). Conclusion: AlgebraNorm pinned to sSup over continuous AlgHoms, rho 1=1, IsNonarchimedean, IsPowMul (1<=m), completeness, topology equality (implied, matches title/step 7), and for all presentations exists M>=1 with rho <= sInf-Gauss quotient norm <= M rho. Edge cases r=0, C=K, KxK, nodal, C=0/non-reduced excluded; universes u,v independent. No duplicate (Mathlib spectralNorm is field-only). No defs, sorry only, docstrings with source/blueprint and 7 steps, imports = deps/proof-dep modules. No compile (no file changed)."
+ }
+}

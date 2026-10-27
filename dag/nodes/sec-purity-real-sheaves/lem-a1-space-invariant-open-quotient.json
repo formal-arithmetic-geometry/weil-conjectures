@@ -1,0 +1,285 @@
+{
+ "id": "lem-a1-space-invariant-open-quotient",
+ "kind": "statement",
+ "title": "The invariant-open quotient of an etale atlas",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $X$ be an algebraic space over $S$ [def-trf-algebraic-space], and let $p:h_U\\to X$ be a representable surjective etale scheme atlas. Give $|X|$ its field-valued point classes and atlas topology [def-a1-space-point-topology]. For any open subset $O\\subseteq|X|$, let $V\\subseteq U$ be the open subscheme with underlying set $|p|^{-1}(O)$ [def-weil-open-immersion]. Let $R=U\\times_XU$ with projections $s,t:R\\to U$, and let $R_V=V\\times_{U,s}R\\times_{t,U}V$ [lem-trf-space-fibre-products-etale-covers]. Then $s^{-1}(V)=t^{-1}(V)=R_V$ as open subschemes of $R$, the restricted projections $R_V\\rightrightarrows V$ form an etale equivalence relation, and its fppf sheaf quotient $J=V/R_V$ [def-weil-pbc-sheafification, def-pc-fppf-site] is an algebraic space. The map $h_V\\to J$ is representable surjective etale, the induced map $j:J\\to X$ is representable by open immersions, and its point image is $O$. Identifying $J$ with the image subfunctor of $j$ gives an open subspace of $X$ [def-a1-space-open-subspace].",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03BZ (lemma-open-subspaces), invariant-open quotient construction; spaces.tex Tags 0262 (lemma-space-presentation), 02WU (lemma-finding-opens), 02WW (theorem-presentation)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-a1-space-point-topology",
+  "def-a1-space-open-subspace",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-open-immersion",
+  "def-weil-pbc-sheafification",
+  "def-pc-fppf-site"
+ ],
+ "proof": [
+  {
+   "text": "The representing kernel-pair square makes the coequalizer descent f into X sectionwise injective: lift two quotient sections to atlas sections, use hR to join equal images by a relation section, and apply the coequalizer equation. Sheafify its range as a subpresheaf of the already existing fppf sheaf X, using Mathlib Subfunctor.sheafify and its universal property. This constructs Q and its quotient unit in Type u without a global sheafification instance. Apply etale_atlas_presentation to obtain the original relation, surjective etale projections, and the comparison isomorphism Q to X with atlas compatibility.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-pbc-sheafification",
+    "lem-a1-etale-atlas-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03BZ (lemma-open-subspaces), inverse construction; field-point calculation uses Tags 03BU/03BV/03H5 and schemes.tex field-valued point factorization."
+   }
+  },
+  {
+   "text": "The final topology makes the inverse image W of O along p open. Set V to the actual scheme restriction to W and i to its inclusion. A field-valued scheme section has the same point class as the residue-field map of its image, by the factorization from Spec of a field. This proves naturality of schemePointMap and makes the inverse-image opens under s and t equal, using hR.w. For the canonical double restricted relation, invariance factors the second endpoint of the first pullback through i; the first projection from the double pullback is therefore an isomorphism. Transport the first pullback square across this isomorphism. Its open range and invariance give the second pullback square by the open-immersion pullback criterion, with the very same relation-to-R map.",
+   "uses": [
+    "def-a1-space-point-topology",
+    "def-a1-algebraic-space-point-classes",
+    "lem-weil-pbc-morphism-from-spec-field",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-open-preimage-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03BZ (lemma-open-subspaces), inverse construction; field-point calculation uses Tags 03BU/03BV/03H5 and schemes.tex field-valued point factorization."
+   }
+  },
+  {
+   "text": "Open immersions are etale. Apply etale_pullback_relation_presheaf to i: it gives the canonical restricted projections, monicity, their equivalence-relation property, etaleness, and the sectionwise injective map v of quotient presheaves. The composite v followed by f embeds the restricted quotient presheaf in X. Sheafify this subpresheaf inside X exactly as in step 1 to construct J and its unit eta, with the required hom-set bijections.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-trf-etale-pullback-relation-presheaf",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03BZ (lemma-open-subspaces), inverse construction; field-point calculation uses Tags 03BU/03BV/03H5 and schemes.tex field-valued point factorization."
+   }
+  },
+  {
+   "text": "Apply etale_relation_restriction_quotient to Q and J to obtain the monomorphism beta. Etaleness supplies flatness and local finite presentation, so etale_relation_finding_opens also gives a map alpha from J to Q representable by open immersions. The two maps have the same composite with the quotient atlas. Cancel the presheaf coequalizer projection, then use injectivity of the hom-set bijection for eta to show alpha equals beta. Thus alpha is both monic and representable by open immersions.",
+   "uses": [
+    "lem-trf-etale-relation-restriction-quotient",
+    "def-weil-etale-morphism",
+    "lem-trf-etale-relation-finding-opens"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03BZ (lemma-open-subspaces), inverse construction; field-point calculation uses Tags 03BU/03BV/03H5 and schemes.tex field-valued point factorization."
+   }
+  },
+  {
+   "text": "Apply etale_relation_quotient to the restricted relation and the constructed unit eta. This proves J is an algebraic space and its canonical atlas q is representable surjective etale. Compose alpha with the original presentation isomorphism to obtain j. The two atlas-compatibility equations prove q followed by j equals i followed by p. Transport representing squares along that isomorphism to prove j is representable by open immersions; it is also monic.",
+   "uses": [
+    "lem-trf-etale-relation-quotient",
+    "lem-a1-etale-atlas-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03BZ (lemma-open-subspaces), inverse construction; field-point calculation uses Tags 03BU/03BV/03H5 and schemes.tex field-valued point factorization."
+   }
+  },
+  {
+   "text": "Prove directly that any representably surjective scheme-source map is surjective on point classes: test against a field-valued representative, lift the closed point to the representing surjective scheme, and use the residue-field comparison and the pullback equation. Applied to q and p, this computes pointImage j as the range of schemePointMap of q followed by j, hence as p applied to the range of i, namely p applied to the inverse image of O, which is O. The already defined mapPoint is used only to transport equality of quotient-point classes. Monicity makes Subfunctor.toRange j an isomorphism. Transport each representing square along that isomorphism to see the range inclusion is representable by open immersions; package the range as an OpenSubspace.",
+   "uses": [
+    "def-a1-algebraic-space-point-classes",
+    "lem-weil-pbc-morphism-from-spec-field",
+    "def-sfb-proper-curve-moduli",
+    "def-a1-space-point-topology",
+    "def-a1-space-open-subspace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03BZ (lemma-open-subspaces), inverse construction; field-point calculation uses Tags 03BU/03BV/03H5 and schemes.tex field-valued point factorization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-pbc-sheafification",
+  "lem-a1-etale-atlas-presentation",
+  "def-a1-space-point-topology",
+  "def-a1-algebraic-space-point-classes",
+  "lem-weil-pbc-morphism-from-spec-field",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-open-preimage-fibre-product",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-trf-etale-pullback-relation-presheaf",
+  "lem-trf-etale-relation-restriction-quotient",
+  "def-weil-etale-morphism",
+  "lem-trf-etale-relation-finding-opens",
+  "lem-trf-etale-relation-quotient",
+  "def-sfb-proper-curve-moduli",
+  "def-a1-space-open-subspace"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03BZ inverse construction, with Spaces Tags 0262, 02WT, 045Z, 02WW and 02WU. Lean implementation by C6 constructs the needed quotient sheaves by subsheaf closure inside X and proves the needed point-surjectivity and image calculation directly from residue-field representatives."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The quotient of the restriction of an etale equivalence relation to an invariant open is an open algebraic subspace with that atlas pullback",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.restrict_presheaf_map\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"(V W) (i : V ⟶ W) :\\n  (X.restrict h).presheaf.map i =\\n    X.presheaf.map\\n      (homOfLE (show X.ofRestrict h ''ᵁ W.unop ≤ X.ofRestrict h ''ᵁ V.unop from Set.image_mono i.unop.le)).op\", \"doc\": \"Given a scheme $X$, an open subset $U$ of its underlying topological space, and an open immersion $h: U \\to X$, the morphism from the restricted scheme $X|_U$ to $X$ is an open immersion. This means th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.ofRestrict_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"(V W e) :\\n  (X.ofRestrict h).appLE V W e =\\n    X.presheaf.map (homOfLE (show X.ofRestrict h ''ᵁ _ ≤ _ by exact Set.image_subset_iff.mpr e)).op\", \"doc\": \"Given a scheme $X$, an open subset $U$ of its underlying topological space, and an open immersion $h: U \\to X$, the morphism from the restricted scheme $X|_U$ to $X$ constructed via $h$ is an open imme\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.toScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"{X : Scheme.{u}} (U : X.Opens) : Scheme.{u}\", \"doc\": \"Given a scheme $X$ and an open subset $U$ of its underlying topological space, this function constructs the scheme structure on $U$ by restricting $X$ through the canonical open embedding $U \\to X$. Th\"}\n  {\"name\": \"AlgebraicGeometry.morphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) (U : Y.Opens) : (f ⁻¹ᵁ U).toScheme ⟶ U\", \"doc\": \"Given a morphism of schemes $f: X \\\\to Y$ and an open subset $U$ of $Y$, this defines the restriction of $f$ as a morphism from the open subscheme $X|_{f^{-1}(U)}$ to the open subscheme $Y|_U$.\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.ofRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": IsOpenImmersion (X.ofRestrict h)\", \"doc\": \"The morphism from the restricted scheme $ X|_U $ to $ X $, constructed via an open immersion $ h: U \\\\to X $, is an open immersion. This means the underlying continuous map is the open embedding $ h $,\"}\n  {\"name\": \"AlgebraicGeometry.pullbackRestrictIsoRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) (U : Y.Opens) : pullback f U.ι ≅ f ⁻¹ᵁ U\", \"doc\": \"Let $X$ and $Y$ be schemes, $f: X \\\\to Y$ be a morphism between them, and $U$ be an open subset of $Y$. Let $\\\\iota : U \\\\to Y$ be the canonical inclusion morphism of the corresponding open subscheme. Th\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict_assoc\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.LocallyRingedSpace} (f : X ⟶ Y) [H : AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion f]\\n  {Z : AlgebraicGeometry.LocallyRingedSpace} (h : Y ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict f).hom\\n      (Categ\", \"doc\": \"Given an open immersion $ f: X \\to Y $ between locally ringed spaces, there exists an isomorphism between $ X $ and the restriction of $ Y $ to the open subset defined by the underlying open embedding \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.restrict\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"{X : Scheme.{u}} (𝒰 : X.OpenCover) (U : Opens X) : U.toScheme.OpenCover\", \"doc\": \"Given a scheme $X$, an open cover $\\\\mathcal{U}$ of $X$, and an open subset $U \\\\subseteq X$, this function constructs an open cover of the restricted scheme $X|_U$ by restricting each morphism in $\\\\mat\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern schemes, ring maps, or generic topology; none supplies this statement for field-valued point classes of algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given an etale scheme atlas U of X and an open point subset O, V equal to the inverse image of O has restricted relation R V and quotient V over R V is an open subspace with point image O",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.isOpenEmbedding_fromGlued\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover),\\n  Topology.IsOpenEmbedding ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Cover.fromGlued 𝒰).base)\", \"doc\": \"Given an open cover $\\\\mathcal{U}$ of a scheme $X$, the canonical morphism from the glued scheme constructed via colimit from the gluing data of $\\\\mathcal{U}$ to the original scheme $X$ is an open imme\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.restrict\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"{U : TopCat} →\\n  (X : AlgebraicGeometry.Scheme) →\\n    {f : U ⟶ { carrier := ↥X, str := X.instTopologicalSpaceCarrierCarrier }} →\\n      Topology.IsOpenEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f) → AlgebraicGeometry.Scheme\", \"doc\": \"Given a scheme $X$, an open subset $U$ of its underlying topological space, and an open embedding $h: U \\to X$, the restriction of $X$ to $U$ forms a scheme by inheriting the local affine structure thr\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.restrict_X\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (U : X.Opens) (x : 𝒰.I₀),\\n  (𝒰.restrict U).X x = ↑((TopologicalSpace.Opens.map (𝒰.f x).base).obj U)\", \"doc\": \"Given a scheme $X$, an open cover $\\\\mathcal{U}$ of $X$, and an open subset $U \\\\subseteq X$, the object mapping of the restricted open cover $\\\\mathcal{U}|_U$ at each index $x \\\\in I_0$ corresponds to th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.fromGlued_isOpenEmbedding\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover),\\n  Topology.IsOpenEmbedding ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Cover.fromGlued 𝒰).base)\", \"doc\": \"For any open cover $\\\\mathcal{U}$ of a scheme $X$, the canonical morphism from the glued scheme constructed via colimit from the gluing data of $\\\\mathcal{U}$ to the original scheme $X$ has an underlyin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.restrict_carrier\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {U : TopCat} (X : AlgebraicGeometry.Scheme) {f : U ⟶ { carrier := ↥X, str := X.instTopologicalSpaceCarrierCarrier }}\\n  (h : Topology.IsOpenEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f)), ↑(X.restrict h).toPresheafedSpace = U\", \"doc\": \"Restricting a scheme $X$ to an open subset $U$ via an open immersion results in a scheme whose underlying topological space is exactly $U$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"Algebra.basicOpen_subset_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.etaleLocus R A ↔ Algebra.FormallyEtale R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in the Zariski topology on $ \\\\operatorname{Spec}(A) $ is contained in the étale locus of $ A $ over $ R $ if and on\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern schemes, ring maps, or generic topology; none supplies this statement for field-valued point classes of algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"quotient\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern schemes, ring maps, or generic topology; none supplies this statement for field-valued point classes of algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|invariant.*open.*quotient|OpenSubspace",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern schemes, ring maps, or generic topology; none supplies this statement for field-valued point classes of algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of an etale equivalence relation to an invariant open subscheme descends to an open immersion of its fppf sheaf quotient",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsOpenImmersionAppOverSchemeOpensDiagramι\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (i : I)\\n  (U : (D.obj i).Opens) (j : CategoryTheory.Over i),\\n  AlgebraicGeometry.IsOpenImmersion ((AlgebraicGeometry.opensDiagramι D i U).app j)\", \"doc\": \"For a diagram $D : I \\to \\text{Sch}$ of schemes indexed by a category $I$, and an open subset $U$ of $D(i)$, the natural transformation $\\\\iota$ associated to the open subset diagram functor has componen\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.isOpenImmersion_glueDataObjMap\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) {V : ↑X.affineOpens} (f : ↑(X.presheaf.obj (Opposite.op ↑V))),\\n  AlgebraicGeometry.IsOpenImmersion (I.glueDataObjMap ⋯)\", \"doc\": \"For a scheme $X$ with ideal sheaf data $\\\\mathcal{I}$, an affine open subset $V \\\\subseteq X$, and a section $f$ of the structure sheaf over $V$, the morphism induced by the inclusion $D(f) \\\\subseteq V$\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.instIsOpenImmersionMapI₀Functor\", \"module\": \"Mathlib/AlgebraicGeometry/RelativeGluing\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} {𝒰 : S.OpenCover} [inst : CategoryTheory.Category.{u_2, u_1} 𝒰.I₀]\\n  [inst_1 : AlgebraicGeometry.Scheme.Cover.LocallyDirected 𝒰] (d : AlgebraicGeometry.Scheme.Cover.RelativeGluingData 𝒰)\\n  {i j : 𝒰.I₀} (hij : i ⟶ j), AlgebraicGeometry.IsOpenImmersion (d.functor.map h\", \"doc\": \"For any morphism $i \\to j$ in the zeroth component category $\\\\mathcal{U}_0$ of an open cover $\\\\mathcal{U}$, the corresponding morphism of schemes induced by the relative gluing data functor is an open \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.ofRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {U : TopCat} (X : AlgebraicGeometry.Scheme) {f : U ⟶ { carrier := ↥X, str := X.instTopologicalSpaceCarrierCarrier }}\\n  (h : Topology.IsOpenEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f)),\\n  AlgebraicGeometry.IsOpenImmersion (X.ofRestrict h)\", \"doc\": \"The morphism from the restricted scheme $ X|_U $ to $ X $, constructed via an open immersion $ h: U \\\\to X $, is an open immersion. This means the underlying continuous map is the open embedding $ h $,\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.instLift\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [inst : AlgebraicGeometry.IsOpenImmersion f]\\n  (H' :\\n    Set.range ⇑(CategoryTheory.ConcreteCategory.hom g.base) ⊆ Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base))\\n  [AlgebraicGeometry.IsOpenImmersion g],\\n  AlgebraicGeometry.IsOpen\", \"doc\": \"Given two open immersions $ f: X \\to Z $ and $ g: Y \\to Z $ between schemes, if the image of $ g $ is contained within the image of $ f $, then there exists an open immersion $ Y \\to X $ constructed by t\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern schemes, ring maps, or generic topology; none supplies this statement for field-valued point classes of algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|invariant.*open.*quotient|OpenSubspace",
+   "results": "0 hits; none",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme gluing/restrictions, etale loci or set/topological quotients; no algebraic-space invariant-open sheaf quotient."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quotient of an invariant open subset of an etale equivalence relation is an open algebraic subspace",
+   "results": "8 hits; instTopologicalSpaceQuot, Algebra.isOpen_etaleLocus, instTopologicalSpaceQuotient, DiscreteQuotient.ofIsClopen, DiscreteQuotient.mk, DiscreteQuotient.isOpen_setOf_rel, AlgebraicGeometry.opensRestrict, AlgebraicGeometry.coe_opensRestrict_apply_coe",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme gluing/restrictions, etale loci or set/topological quotients; no algebraic-space invariant-open sheaf quotient."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"quotient\"",
+   "results": "0 hits; none",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme gluing/restrictions, etale loci or set/topological quotients; no algebraic-space invariant-open sheaf quotient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fppf quotient of an etale equivalence relation restricted to an invariant open defines an open immersion of algebraic spaces",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Cover.RelativeGluingData.instIsOpenImmersionMapI₀Functor, AlgebraicGeometry.Scheme.Cover.instIsOpenImmersionFromGlued, AlgebraicGeometry.IsOpenImmersion.of_forall_source_exists, AlgebraicGeometry.Scheme.LocalRepresentability.instIsOpenImmersionToGlued, AlgebraicGeometry.instIsOpenImmersionAppOverSchemeOpensDiagramι, AlgebraicGeometry.Scheme.GlueData.ι_isOpenImmersion, AlgebraicGeometry.Scheme.GlueData.f_open, AlgebraicGeometry.Scheme.GlueData.instIsOpenImmersionFLocallyRingedSpaceToLocallyRingedSpaceGlueData",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme gluing/restrictions, etale loci or set/topological quotients; no algebraic-space invariant-open sheaf quotient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open subset of the point space of an algebraic space is obtained by restricting an etale scheme presentation and taking the sheaf quotient",
+   "results": "8 hits; Algebra.isOpen_etaleLocus, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.Etale.forget, StandardEtalePresentation.P, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toScheme, Algebra.etaleLocus, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.scheme",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme gluing/restrictions, etale loci or set/topological quotients; no algebraic-space invariant-open sheaf quotient."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-space-etale-open-image",
+  "date": "2026-10-22",
+  "group": "N7"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "The geometric representability branch beneath lem-a1-affine-hc0, via 03XX and its lemma-neighbourhood-scheme (03XW): first paragraph, open image and its quasi-compactness; fourth paragraph, inverse image of that open. Refines the returned open-image proof: steps 3 and 4: restrict the atlas relation to the inverse image of the open and form its quotient.",
+   "via": [
+    "lem-a1-space-etale-open-image",
+    "lem-a1-etale-quasi-affine-image-scheme",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-a1-space-invariant-open-quotient",
+  "worker": "stage1",
+  "summary": "Checked the invariant-open construction in Stacks 03BZ against 0262, 02WT, 045Z, 02WW and 02WU. Wrote the scheme-level equality of inverse-image opens and the point-image calculation explicitly. All non-elementary inputs already have nodes; no new nodes and no statement changes. Confirmed that etaleness supplies exactly the flatness and local finite-presentation hypotheses of finding-opens; no quasi-compactness assumption is used.",
+  "blueprint": "Realizes the geometric open-subspace construction beneath lem-a1-affine-hc0, through lem-a1-space-etale-open-image: the ancestor branch recorded in blueprint.from.place, namely the invariant-open quotient used in the 03XW neighbourhood argument below 03XX. All inherited ancestry and the unit route are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-etale-relation-restriction-quotient",
+    "why": "Generic restriction of an etale equivalence relation and injection of quotient sheaves; the unit has no replacement for this groupoid tool."
+   },
+   {
+    "node": "lem-trf-etale-relation-quotient",
+    "why": "Generic algebraicity and representable etale atlas of an etale relation quotient; used as a black box in the 03BZ route."
+   },
+   {
+    "node": "lem-trf-etale-relation-finding-opens",
+    "why": "Generic representable open immersion of restriction quotients, exactly the 02WU input used by the source 03BZ."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-etale-relation-restriction-quotient",
+  "lem-trf-etale-relation-quotient",
+  "lem-trf-etale-relation-finding-opens"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-06d905156",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-06d905156 (reviewer sub-agent of L); spot-checked: I read Stacks 03BZ(1) and 02WU. The six steps follow 03BZ(1) exactly. Step 1, atlas-presentation (0262): kernel pair, surjective étale s and t, U/R≅X; openness of |p|^-1(O) comes from the final topology. Step 2, 01JR: the preimages under s and t are equal open subschemes, and R_V is their intersection; elementary. Step 3, 02GP plus restriction-quotient: g étale, so R_V is an étale equivalence relation and J→U/R is injective; the surjectivity clause is not used. Step 4, 02WW: the hypotheses, a monic equivalence relation with étale s and t, hold; J is algebraic and q is surjective étale. Step 5, 02WU: étale gives flat+lfp, and s and t are surjective by 0262; the open-immersion conclusion is transported along U/R≅X. Step 6: |q| and |p| are surjective by the 03H5 clause of point-open-calculus; im|j| = |p|(|p|^-1 O) = O; the image subfunctor satisfies the open-subspace definition. Only the surjectivity clause of point-open-calculus is used, and no proof_dep closure contains the item. Edge cases checked: O empty, O=|X|, p=id, disconnected atlas. Tags and labels are verified. The statement, stmt_deps and blueprint are unchanged from live, where the item is still unsplit; there is no repair note and no new nodes. lem-trf-etale-open-chart-morphism-descent is related but does not state the quotient J, the atlas or the point image, so it is not a duplicate. Batch-5 check: the restriction-quotient, quotient and finding-opens trf nodes, and def-trf-algebraic-space reached via atlas-presentation, are generic algebraic-space foundations (02WT/045Z/02WW/02WU). Neither assumption leaf gives them, and their closures hold only fppf descent and relation-quotient lemmas, no cohomological trace-formula or duality content. Accepted, with the three declared tool_uses. No SGA."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceInvariantOpenQuotient",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.space_invariant_open_quotient",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceInvariantOpenQuotient.lean",
+  "statement": "theorem space_invariant_open_quotient {S : Scheme.{u}} (X : AlgebraicSpace S) (U : Over S) (p : yoneda.obj U ⟶ X.obj.obj) (hp : IsEtale p) (hsur : IsSurjective p) (O : Set (Point X.obj.obj)) (hO : IsOpen O) (R : Over S) (s t : R ⟶ U) (hR : IsPullback (yoneda.map s) (yoneda.map t) p p) : ∃ (V : Over S) (i : V ⟶ U), IsOpenImmersion i.left ∧ Set.range i.left.base = schemePointMap p ⁻¹' O ∧ ∃ (RV : Over S) (r : RV ⟶ R) (sV tV : RV ⟶ V), IsPullback r sV s i ∧ IsPullback r tV t i ∧ Mono (prod.lift sV tV) ∧ (∀ T : Over S, Equivalence (fun a b : T ⟶ V ↦ ∃ v : T ⟶ RV, v ≫ sV = a ∧ v ≫ tV = b)) ∧ Etale sV.left ∧ Etale tV.left ∧ ∃ (J : Sheaf (Scheme.fppfTopology.over S) (Type u)) (η : coequalizer (yoneda.map sV) (yoneda.map tV) ⟶ J.obj), (∀ G : Sheaf (Scheme.fppfTopology.over S) (Type u), Function.Bijective (fun a : J.obj ⟶ G.obj ↦ η ≫ a)) ∧ IsAlgebraicSpace J ∧ IsEtale (coequalizer.π (yoneda.map sV) (yoneda.map tV) ≫ η) ∧ IsSurjective (coequalizer.π (yoneda.map sV) (yoneda.map tV) ≫ η) ∧ ∃ j : J.obj ⟶ X.obj.obj, (coequalizer.π (yoneda.map sV) (yoneda.map tV) ≫ η) ≫ j = yoneda.map i ≫ p ∧ IsRepresentableWith (fun _ _ f ↦ IsOpenImmersion f.left) j ∧ pointImage j = O ∧ IsIso (Subfunctor.toRange j) ∧ ∃ A : OpenSubspace X, A.val = Subfunctor.range j",
+  "branch": "sheaf-dag",
+  "by": "Q72",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The supplied hR specifies an arbitrary scheme representative of U ×_X U. The conclusion constructs the invariant open subscheme and a common representative RV of both open pullbacks, with both cartesian squares; these also identify RV with the double restricted relation. It constructs the quotient and its sheafification unit, rather than assuming existence of global sheafification. The final clauses identify the quotient with the image subfunctor as an OpenSubspace."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b4a1931ed",
+  "group": "Q72",
+  "result": "pass",
+  "note": "Read node, Stacks 03BZ proof, all 8 stmt_dep records and declarations (IsEtale/IsSurjective/IsAlgebraicSpace, Point/schemePointMap/pointImage/final topology, OpenSubspace, fppfTopology.over, sheafification UP). Every clause rendered: V via open immersion with range |p|^-1(O); arbitrary pullback representative R; common r for both pullback squares = s^-1V=t^-1V=R_V; étale equivalence relation in the project's Mono+Equivalence convention; J with η bijective onto every fppf sheaf (no global HasWeakSheafify); j unique by the compatibility since X is a sheaf; open-immersion representability, pointImage j = O, IsIso toRange, OpenSubspace. No extra hypotheses, single universe u, edge cases O=∅, O=|X|, empty U ok. lean.statement verbatim; only the lean field changed vs live; docstrings have source, blueprint tag and 6 proof steps; single sorry, no defs. Not recompiled per instruction."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261026T091304-L-3329173",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

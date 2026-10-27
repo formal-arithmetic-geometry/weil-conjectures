@@ -1,0 +1,252 @@
+{
+ "id": "lem-sfb-reductive-torus-fixed-subgroup",
+ "kind": "statement",
+ "title": "Torus centralizers preserve reductivity",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups are affine group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], and subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Use reductivity, maximal tori, and scheme-theoretic centralizer points as in [def-sfb-reductive-torus-centralizer-terminology]. A torus is a group isomorphic to $\\mathbf G_m^r$ for an integer $r\\geq0$, where $\\mathbf G_m(A)=A^\\times$ [def-sc-gm-ga]. Let $G$ be reductive and let $S\\subseteq G$ be any torus, not necessarily maximal. Then the centralizer functor $C_G(S)$ is represented by a reductive closed subgroup scheme of $G$. In particular it is smooth and connected. Smoothness is as in [def-sbc-smooth-morphisms], and connectedness as in [def-weil-connected-scheme].",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 17.59, printed p.371; its proof uses Corollary 17.57 (unipotent radical of a torus centralizer), Theorem 17.38, and Corollary 13.9."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-sc-gm-ga",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Choose a torus $T\\subseteq G$ containing $S$ of greatest dimension. Such a choice exists: $S$ is one candidate, tori are smooth and connected by [lem-sfb-multiplicative-type-largest-subtorus], and their dimensions are nonnegative integers bounded by $\\dim G$ by [lem-sfb-solvable-normal-subgroup-products]. The same node says a proper inclusion of smooth connected groups strictly increases dimension. Thus no larger torus contains $T$, so $T$ is maximal.",
+   "uses": [
+    "lem-sfb-multiplicative-type-largest-subtorus",
+    "lem-sfb-solvable-normal-subgroup-products"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.57, proof: choose a maximal torus containing S; greatest-dimension argument as in Proposition 6.42, printed p.134."
+   }
+  },
+  {
+   "text": "By [lem-sfb-torus-centralizer-smooth-connected], the functor $C_G(S)$ is represented by a smooth connected closed subgroup $C\\subseteq G$. Its all-algebras centralizer condition is exactly the condition in the item. In particular $C$ is an affine finite-type group to which the cited structure theorems apply. It remains to exclude nontrivial smooth connected normal unipotent subgroups of $C$.",
+   "uses": [
+    "lem-sfb-torus-centralizer-smooth-connected"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.59, proof, printed p.371; Corollary 13.10 and Theorem 17.38."
+   }
+  },
+  {
+   "text": "Let $U\\subseteq C$ be any smooth connected normal unipotent closed subgroup. It is solvable by [lem-sfb-smooth-unipotent-solvable]. Apply [lem-sfb-general-borel-flag-variety] to the smooth connected group $C$, obtaining the nonempty proper finite-type scheme $X=\\mathcal B(C)$ with its $C$-action and the stated Borel stabilizers. Restrict this action to $U$. By [lem-sfb-solvable-proper-fixed-point] there is $x=b_D\\in X(F)$ fixed scheme-theoretically by $U$, where $D$ is a Borel of $C$.",
+   "uses": [
+    "lem-sfb-smooth-unipotent-solvable",
+    "lem-sfb-general-borel-flag-variety",
+    "lem-sfb-solvable-proper-fixed-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.57, proof, containment in Borel subgroups; expanded using Theorems 17.3 and 17.9 and Proposition 14.21."
+   }
+  },
+  {
+   "text": "For any Borel $D\\subseteq C$, write $b_D=c\\cdot x$ with $c\\in C(F)$ using the transitivity in [lem-sfb-general-borel-flag-variety]. For every commutative $F$-algebra $A$ and $u\\in U(A)$, normality gives $c_A^{-1}uc_A\\in U(A)$. Therefore $u\\cdot(b_D)_A=c_A\\cdot((c_A^{-1}uc_A)\\cdot x_A)=c_A\\cdot x_A=(b_D)_A$. The same node identifies the scheme-theoretic stabilizer of $b_D$ with $D$, so $U\\subseteq D$ on every test algebra. This uses the fixed point from step 3 and proves the needed containment without passing from rational points to subgroup schemes.",
+   "uses": [
+    "lem-sfb-general-borel-flag-variety"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.57, proof: the unipotent radical lies in each Borel; elementary normality calculation with Theorem 17.9."
+   }
+  },
+  {
+   "text": "For each Borel subgroup $B\\subseteq G$ containing $T$, we also have $S\\subseteq B$. By [lem-sfb-torus-centralizer-borel-intersection], $D_B=C\\cap B$ is a Borel subgroup of $C$. Step 4 gives $U\\subseteq D_B\\subseteq B$ as closed subgroup functors. Hence $U\\to G$ factors through the scheme-theoretic intersection $I=\\bigcap_{B\\supseteq T}B$: on affine coordinate rings the sum of the ideals of the $B$ maps to zero.",
+   "uses": [
+    "lem-sfb-torus-centralizer-borel-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.57, proof, printed p.371; Theorem 17.46, printed pp.365--366."
+   }
+  },
+  {
+   "text": "The scheme $U$ is reduced, since it is smooth over a field by [sbc-lem-smooth-geometrically-reduced]. By [lem-weil-pbc-reduced-source-factors-through-closed-subscheme], $U\\to I$ factors through $I_{\\mathrm{red}}$. Its image is connected and contains the identity, so it is contained in the identity component; the same reduced-source factorization statement gives a factorization through $(I_{\\mathrm{red}})^\\circ$. By [lem-sfb-chevalley-borel-intersection], this closed subgroup equals $R_u(G)\\cdot T$. Here $R_u(G)$ is the largest smooth connected normal unipotent subgroup of $G$ in that node. Reductivity of $G$ makes this subgroup trivial by [def-sfb-reductive-torus-centralizer-terminology]. Thus $(I_{\\mathrm{red}})^\\circ=T$, and the original inclusion $U\\to G$ factors through $T\\to G$.",
+   "uses": [
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "lem-sfb-chevalley-borel-intersection",
+    "def-sfb-reductive-torus-centralizer-terminology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.57, reverse inclusion, and Theorem 17.56, first equality, printed p.371; its reduced identity-component interpretation."
+   }
+  },
+  {
+   "text": "The homomorphism $U\\to T$ is trivial by [lem-sfb-unipotent-to-multiplicative-trivial], since $U$ is smooth unipotent in its equivalent geometric-matrix sense and $T\\simeq\\mathbf G_m^r$ is of multiplicative type. Its composite $U\\to G$ is the original closed subgroup inclusion and is therefore a monomorphism. A trivial monomorphism of group functors has only the identity as an $A$-point for every $A$, so $U$ is the trivial group scheme. As $U$ was arbitrary, $C$ is reductive by [def-sfb-reductive-torus-centralizer-terminology]; the base field is already algebraically closed. Together with step 2 this proves all clauses.",
+   "uses": [
+    "lem-sfb-unipotent-to-multiplicative-trivial",
+    "def-sfb-reductive-torus-centralizer-terminology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.57, final unipotent subgroup argument, and Corollary 17.59, printed p.371; Corollary 14.18 (unipotent to multiplicative type)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-multiplicative-type-largest-subtorus",
+  "lem-sfb-solvable-normal-subgroup-products",
+  "lem-sfb-torus-centralizer-smooth-connected",
+  "lem-sfb-smooth-unipotent-solvable",
+  "lem-sfb-general-borel-flag-variety",
+  "lem-sfb-solvable-proper-fixed-point",
+  "lem-sfb-torus-centralizer-borel-intersection",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-sfb-chevalley-borel-intersection",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "lem-sfb-unipotent-to-multiplicative-trivial"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 17.59, proof via the reverse inclusion of Corollary 17.57 and Theorem 17.56, printed p.371. The containment in Borels is expanded by Theorems 17.3 and 17.9."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The centralizer of any torus subgroup of a reductive algebraic group is reductive in arbitrary characteristic",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas\", \"type\": \"∀ (k : Type u_1) (L : Type u_2) (M : Type u_3) [inst : Field k] [CharZero k] [inst_2 : LieRing L]\\n  [inst_3 : LieAlgebra k L] [Module.Finite k L] [inst_5 : AddCommGroup M] [inst_6 : Module k M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule k L M] [Module.Finite k M] [LieModule.IsIrreducible k L\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a field $k$ with an irreducible and faithful module $M$, the radical of $\\\\mathfrak{g}$ is central, and an element $x \\\\in \\\\mathfrak{g}$ lies in the center if and o\"}\n  {\"name\": \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"module\": \"Mathlib/Algebra/Lie/CartanExists\", \"type\": \"∀ (K : Type u_1) (L : Type u_2) [inst : Field K] [inst_1 : LieRing L] [inst_2 : LieAlgebra K L] [Module.Finite K L]\\n  [Infinite K], ∃ x, (LieSubalgebra.engel K x).IsCartanSubalgebra\", \"doc\": \"For an infinite field $ K $, there exists an element $ x $ in the Lie algebra $ L $ such that the Engel subalgebra associated with $ x $ forms a Cartan subalgebra of $ L $. This means the maximal gene\"}\n  {\"name\": \"LieSubalgebra.normalizer_eq_self_of_isCartanSubalgebra\", \"module\": \"Mathlib/Algebra/Lie/CartanSubalgebra\", \"type\": \"∀ {R : Type u} {L : Type v} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] (H : LieSubalgebra R L)\\n  [H.IsCartanSubalgebra], H.toLieSubmodule.normalizer = H.toLieSubmodule\", \"doc\": \"If $ \\\\mathfrak{h} $ is a Cartan subalgebra of a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $, then the normalizer of $ \\\\mathfrak{h} $ in $ \\\\mathfrak{g} $ is equal to $ \\\\mathfrak{h} $ its\"}\n  {\"name\": \"LieAlgebra.hasCentralRadical_of_radical_le\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Defs\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L],\\n  LieAlgebra.radical R L ≤ LieAlgebra.center R L → LieAlgebra.HasCentralRadical R L\", \"doc\": \"For a Lie algebra $ L $ over a commutative ring $ R $, if the radical of $ L $ is contained within its center, then $ L $ has a central radical (i.e., its radical is a central ideal).\"}\n  {\"name\": \"LieAlgebra.center_le_radical\", \"module\": \"Mathlib/Algebra/Lie/Solvable\", \"type\": \"∀ (R : Type u) (L : Type v) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L],\\n  LieAlgebra.center R L ≤ LieAlgebra.radical R L\", \"doc\": \"For any commutative ring $ R $ and Lie algebra $ L $ over $ R $, the center of $ L $ is contained in its radical, i.e., $\\\\mathrm{center}(R, L) \\\\subseteq \\\\mathrm{radical}(R, L)$.\"}\n  {\"name\": \"LieAlgebra.hasCentralRadical_iff\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Defs\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L],\\n  LieAlgebra.HasCentralRadical R L ↔ LieAlgebra.radical R L = LieAlgebra.center R L\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$, the radical of $\\\\mathfrak{g}$ is a central ideal if and only if the radical of $\\\\mathfrak{g}$ is equal to the center of $\\\\mathfrak{g}$.\"}\n  {\"name\": \"LieAlgebra.center_le_maxNilpotentIdeal\", \"module\": \"Mathlib/Algebra/Lie/Nilpotent\", \"type\": \"∀ (R : Type u) (L : Type v) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L],\\n  LieAlgebra.center R L ≤ LieAlgebra.maxNilpotentIdeal R L\", \"doc\": \"For any commutative ring $R$ and Lie algebra $\\\\mathfrak{g}$ over $R$, the center $\\\\mathfrak{z}(\\\\mathfrak{g})$ is contained in the maximal nilpotent ideal $\\\\mathfrak{n}$ of $\\\\mathfrak{g}$, i.e., $\\\\math\"}\n  {\"name\": \"LieAlgebra.HasCentralRadical.radical_eq_center\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Defs\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} {inst : CommRing R} {inst_1 : LieRing L} {inst_2 : LieAlgebra R L}\\n  [self : LieAlgebra.HasCentralRadical R L], LieAlgebra.radical R L = LieAlgebra.center R L\", \"doc\": \"For any commutative ring $ R $ and Lie algebra $ L $ over $ R $ with a central radical, the radical of $ L $ is equal to its center. That is, $ \\\\operatorname{rad}(L) = \\\\mathfrak{z}(L) $, where $ \\\\oper\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, topological tori, or matrix definitions; none asserts the algebraic-group-scheme theorem in all characteristics"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fixed subgroup under a torus acting on a reductive algebraic group is smooth connected reductive",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"FixedPoints.subgroup\", \"module\": \"Mathlib.GroupTheory.GroupAction.Defs\", \"type\": \": Subgroup α\", \"doc\": \"The subgroup of $\\\\alpha$ consisting of elements $a$ satisfying $m \\\\cdot a = a$ for all $m \\\\in M$, where $M$ is a monoid acting on $\\\\alpha$. This subgroup is formed by taking the submonoid of fixed poi\"}\n  {\"name\": \"fixingSubgroup\", \"module\": \"Mathlib.GroupTheory.GroupAction.FixingSubgroup\", \"type\": \"(s : Set α) : Subgroup M\", \"doc\": \"Given a group $M$ acting on a type $\\\\alpha$ and a subset $s \\\\subseteq \\\\alpha$, the fixing subgroup is the subgroup of $M$ consisting of all elements $\\\\phi \\\\in M$ that fix every element $x \\\\in s$ under\"}\n  {\"name\": \"FixedPoints.mem_subgroup\", \"module\": \"Mathlib.GroupTheory.GroupAction.Defs\", \"type\": \"(a : α) : a ∈ α^*M ↔ ∀ m : M, m • a = a\", \"doc\": \"An element $ a $ belongs to the subgroup $ \\\\alpha^{*M} $ of fixed points under the monoid action of $ M $ on $ \\\\alpha $ if and only if for every $ m \\\\in M $, the action of $ m $ on $ a $ satisfies $ m\"}\n  {\"name\": \"fixingAddSubgroup\", \"module\": \"Mathlib.GroupTheory.GroupAction.FixingSubgroup\", \"type\": \"(M : Type u_1) → {α : Type u_2} → [inst : AddGroup M] → [AddAction M α] → Set α → AddSubgroup M\", \"doc\": \"Given an additive group $M$ acting on a type $\\\\alpha$ and a subset $s \\\\subseteq \\\\alpha$, this constructs the additive subgroup of $M$ consisting of all elements $\\\\phi \\\\in M$ that fix every element $x \"}\n  {\"name\": \"SubMulAction.fixingSubgroup_smul_eq_fixingSubgroup_map_conj\", \"module\": \"Mathlib.GroupTheory.GroupAction.SubMulAction.OfFixingSubgroup\", \"type\": \": fixingSubgroup M (g • s) = (fixingSubgroup M s).map (MulAut.conj g).toMonoidHom\", \"doc\": \"For a group $M$ acting on a type $\\\\alpha$ and a subset $s \\\\subseteq \\\\alpha$, the fixing subgroup of the set $g \\\\cdot s$ (obtained by applying the group action of $g$ to each element of $s$) is equal t\"}\n  {\"name\": \"FixedPoints.subalgebra\", \"module\": \"Mathlib.Algebra.Algebra.Subalgebra.Operations\", \"type\": \": Subalgebra A B\", \"doc\": \"Given a commutative semiring $ A $, a ring $ B $ with an $ A $-algebra structure, and a monoid $ G $ acting on $ B $ via a multiplicative semiring action that commutes with $ A $-scalar multiplication\"}\n  {\"name\": \"FixedPoints.addSubgroup\", \"module\": \"Mathlib.Algebra.Ring.Action.Submonoid\", \"type\": \": AddSubgroup α\", \"doc\": \"Given a monoid $M$ acting distributively on an additive group $\\\\alpha$, this constructs the additive subgroup consisting of all elements $a \\\\in \\\\alpha$ satisfying $m \\\\cdot a = a$ for all $m \\\\in M$. Th\"}\n  {\"name\": \"MulAction.fixingSubgroup_le_stabilizer\", \"module\": \"Mathlib.GroupTheory.GroupAction.SubMulAction.OfFixingSubgroup\", \"type\": \"(s : Set α) : fixingSubgroup G s ≤ stabilizer G s\", \"doc\": \"For a group $G$ acting on a set $\\\\alpha$ and a subset $s \\\\subseteq \\\\alpha$, the fixing subgroup of $s$ (consisting of elements of $G$ that fix every element of $s$) is contained within the stabilizer \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, topological tori, or matrix definitions; none asserts the algebraic-group-scheme theorem in all characteristics"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"centralizer\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Set.addCentralizer\", \"module\": \"Mathlib.Algebra.Group.Center\", \"type\": \" {M : Type u_1} (S : Set M) [Add M] : Set M\", \"doc\": \"The centralizer of a subset of an additive magma.\"}\n  {\"name\": \"Set.centralizer\", \"module\": \"Mathlib.Algebra.Group.Center\", \"type\": \" {M : Type u_1} (S : Set M) [Mul M] : Set M\", \"doc\": \"The centralizer of a subset of a magma.\"}\n  {\"name\": \"Set.addCenter_subset_addCentralizer\", \"module\": \"Mathlib.Algebra.Group.Center\", \"type\": \" {M : Type u_1} [Add M] (S : Set M) : Set.addCenter M ⊆ S.addCentralizer\", \"doc\": \"\"}\n  {\"name\": \"Set.center_subset_centralizer\", \"module\": \"Mathlib.Algebra.Group.Center\", \"type\": \" {M : Type u_1} [Mul M] (S : Set M) : Set.center M ⊆ S.centralizer\", \"doc\": \"\"}\n  {\"name\": \"Set.addCentralizer_eq_univ\", \"module\": \"Mathlib.Algebra.Group.Center\", \"type\": \" (M : Type u_1) {S : Set M} [AddCommSemigroup M] : S.addCentralizer = Set.univ\", \"doc\": \"\"}\n  {\"name\": \"Set.addCentralizer_univ\", \"module\": \"Mathlib.Algebra.Group.Center\", \"type\": \" (M : Type u_1) [AddSemigroup M] : Set.univ.addCentralizer = Set.addCenter M\", \"doc\": \"\"}\n  {\"name\": \"Set.centralizer_eq_univ\", \"module\": \"Mathlib.Algebra.Group.Center\", \"type\": \" (M : Type u_1) {S : Set M} [CommSemigroup M] : S.centralizer = Set.univ\", \"doc\": \"\"}\n  {\"name\": \"Set.centralizer_univ\", \"module\": \"Mathlib.Algebra.Group.Center\", \"type\": \" (M : Type u_1) [Semigroup M] : Set.univ.centralizer = Set.center M\", \"doc\": \"\"}\n  {\"name\": \"Set.subset_addCentralizer_addCentralizer\", \"module\": \"Mathlib.Algebra.Group.Center\", \"type\": \" {M : Type u_1} {S : Set M} [Add M] : S ⊆ S.addCentralizer.addCentralizer\", \"doc\": \"\"}\n  {\"name\": \"Set.subset_centralizer_centralizer\", \"module\": \"Mathlib.Algebra.Group.Center\", \"type\": \" {M : Type u_1} {S : Set M} [Mul M] : S ⊆ S.centralizer.centralizer\", \"doc\": \"\"}\n  {\"name\": \"Set.addCentralizer_addCentralizer_addCentralizer\", \"module\": \"Mathlib.Algebra.Group.Center\", \"type\": \" {M : Type u_1} [Add M] (S : Set M) : S.addCentralizer.addCentralizer.addCentralizer = S.addCentralizer\", \"doc\": \"\"}\n  {\"name\": \"Set.centralizer_centralizer_centralizer\", \"module\": \"Mathlib.Algebra.Group.Center\", \"type\": \" {M : Type u_1} [Mul M] (S : Set M) : S.centralizer.centralizer.centralizer = S.centralizer\", \"doc\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, topological tori, or matrix definitions; none asserts the algebraic-group-scheme theorem in all characteristics"
+  },
+  {
+   "tool": "grep",
+   "query": "reductive.*centraliz|centraliz.*reductive|IsReductive",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, topological tori, or matrix definitions; none asserts the algebraic-group-scheme theorem in all characteristics"
+  },
+  {
+   "tool": "grep",
+   "query": "reductive.*centraliz|centraliz.*reductive|IsReductive",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern abstract group actions or Lie algebras, not centralizers of tori in affine algebraic group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fixed subgroup under a torus acting on a reductive algebraic group is smooth connected reductive",
+   "results": "8 hits; FixedPoints.subgroup, fixingSubgroup, FixedPoints.mem_subgroup, fixingAddSubgroup, SubMulAction.fixingSubgroup_smul_eq_fixingSubgroup_map_conj, FixedPoints.subalgebra, FixedPoints.addSubgroup, MulAction.fixingSubgroup_le_stabilizer",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern abstract group actions or Lie algebras, not centralizers of tori in affine algebraic group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"centralizer\"",
+   "results": "12 hits; Set.addCentralizer, Set.centralizer, Set.addCenter_subset_addCentralizer, Set.center_subset_centralizer, Set.addCentralizer_eq_univ, Set.addCentralizer_univ, Set.centralizer_eq_univ, Set.centralizer_univ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern abstract group actions or Lie algebras, not centralizers of tori in affine algebraic group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The centralizer of a torus subgroup in a reductive algebraic group is smooth connected and reductive",
+   "results": "8 hits; LieAlgebra.exists_isCartanSubalgebra_engel, LieSubalgebra.normalizer_eq_self_of_isCartanSubalgebra, LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful, LieSubalgebra.IsCartanSubalgebra.self_normalizing, LieSubalgebra.IsCartanSubalgebra, LieSubalgebra.isCartanSubalgebra_iff_isUcsLimit, LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card, LieAlgebra.is_cartan_of_zeroRootSubalgebra_eq",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern abstract group actions or Lie algebras, not centralizers of tori in affine algebraic group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "reductive|algebraic.*torus|torus.*algebraic",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern abstract group actions or Lie algebras, not centralizers of tori in affine algebraic group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth connected affine algebraic group with trivial unipotent radical, centralizers of subtori also have trivial unipotent radical",
+   "results": "8 hits; LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful, LieAlgebra.center_le_maxNilpotentIdeal, LieSubalgebra.isCartanSubalgebra_iff_isUcsLimit, LieSubalgebra.ucs_eq_self_of_isCartanSubalgebra, LieAlgebra.hasCentralRadical_of_radical_le, LieAlgebra.zeroRootSubalgebra_normalizer_eq_self, LieAlgebra.center_le_radical, LieAlgebra.exists_isCartanSubalgebra_engel",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern abstract group actions or Lie algebras, not centralizers of tori in affine algebraic group schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-rank-one-reflections",
+  "date": "2026-10-23",
+  "group": "Q69"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: Construct the finite integral root datum from rank-one SL2 coroots, normalizer reflections and finite W, rather than presupposing the root datum. Supporting lemma: Torus centralizers preserve reductivity.",
+   "via": [
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-reductive-torus-fixed-subgroup",
+  "worker": "stage1",
+  "summary": "Followed Milne 17.59 through the reverse-inclusion argument of 17.57. Reused the existing smooth-connected centralizer, Borel intersection, Chevalley intersection, fixed-point and unipotent-to-torus nodes. Expanded the normality calculation on every test algebra, and supplied the reduced identity-component factorization. Added the missing field and algebraic-closure statement dependencies. No new nodes or weakened hypotheses.",
+  "blueprint": "Supports the inherited torus-centralizer prerequisite below det-thm-sf-ctf-stability-direct-images proof (3), through the existing alteration/moduli/invariant-theory chain. The current latest blueprint has no separate torus-centralizer statement. Steps 1--7 realize Milne 17.59 via 17.57; the unit and chapter route are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NU-e81b22c15",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-e81b22c15 (reviewer sub-agent of L); spot-checked: I read the whole delivery. It adds no new nodes and splits the item into 7 steps over 12 existing nodes; the inherited statement is unchanged apart from listing def-weil-field and def-weil-algebraic-closure in stmt_deps. Source checked in the PDF: Milne iAG2017 Cor 17.59 (p.371) and the reverse inclusion of Cor 17.57, Thm 17.46 (p.365) and Thm 17.56 (Chevalley). Step 1: by lem-sfb-multiplicative-type-largest-subtorus and the dimension clauses of lem-sfb-solvable-normal-subgroup-products, a torus T above S of greatest dimension is maximal in the sense the Chevalley node uses. Step 2: the centralizer functor of torus-centralizer-smooth-connected is the same as the C_i of the terminology node. Step 3: smooth-unipotent-solvable (series form) matches the derived-series form used by the flag and fixed-point nodes, which def-sfb-solvable-group-structure records as the same notion; the flag variety of C plus the fixed-point lemma give a U-fixed point b_D. Step 4: transitivity, the all-algebras stabilizer clause and A-point normality from def-sc-group-scheme-subgroup put U in every Borel of C on all test algebras. Step 5: torus-centralizer-borel-intersection applies because S is in T, which is in B. Step 6: U is reduced, so it factors through (I_red)°; this equals R_u(G)T, and R_u(G)=1 by reductivity, so U lies in T. Step 7: the unipotent-to-multiplicative node's notion matches for smooth U, so U→T is trivial and U=1 because the inclusion is a monomorphism. Edge cases checked: trivial S, central S, G a torus, trivial G, mu_p/alpha_p in characteristic p; the proof never deduces scheme equality from F-points. No cycle (the deps' closure excludes the item and its citer). No duplicate found by rg -L. sbc smooth-geometrically-reduced and pbc reduced-source factorization are generic tool_uses, which I accept. Batch-5 finding: the trf nodes reached are generic (02VL fpqc smoothness, 021O fppf base change, 02W5 descent-datum definition, ILO VIII 3.2.12 split-torus smoothness, Mathlib flat tensor). None is a step of the trace formula or Poincaré duality, so no assumption leaf is needed. No SGA source is used."
+ }
+}

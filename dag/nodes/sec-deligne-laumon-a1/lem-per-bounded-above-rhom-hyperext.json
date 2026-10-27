@@ -19,145 +19,48 @@
  ],
  "proof": [
   {
-   "text": "Write $T^n(M)=H^nR\\mathcal Hom(K,M)$. For every $M$, take a representative $P$ of $K$ and a K-injective representative $I$ of $M$ as in [def-pur-derived-internal-hom]. Applying [lem-pur-rhom-into-kinjective-local] to $P[-n]$ and $I$ identifies $H^n\\Gamma(U,\\mathcal Hom^\\bullet(P,I))$ with $\\operatorname{Hom}_{D(\\mathcal O_U)}(K|_U,M|_U[n])$: the signed source-shift identification gives $\\mathcal Hom^\\bullet(P[-n],I)\\simeq\\mathcal Hom^\\bullet(P,I)[n]$, directly from the Hom-complex differential. Exact module sheafification [lem-weil-pbc-ringed-site-module-sheafification-exact] commutes with the kernel, image and quotient defining cohomology. Thus $T^n(M)$ is the sheafification of the presheaf $U\\mapsto\\operatorname{Hom}_{D(\\mathcal O_U)}(K|_U,M|_U[n])$. This identification is additive and natural in $M$ and $U$: the local bijection sends a cocycle $f$ to its derived morphism $Q_U(f)$, so postcomposition and restriction give the same maps on both sides.",
+   "text": "Put $T^n(M)=H^nR\\mathcal Hom(K,M)$. Apply [lem-per-rhom-local-cohomological-bound] to the given small ringed site and $K$. It supplies an additive homological $T^0$, its coherent shifts $T^n$, natural boundary maps, and $T^n(M)=0$ when $M\\in D^{\\ge b}$ and $n<b-r$. Thus the amplitude hypothesis used below holds for every integer $b$, and $T^n(L)=0$ below $c-r$.",
    "uses": [
-    "def-pur-derived-internal-hom",
-    "lem-pur-rhom-into-kinjective-local",
-    "lem-weil-pbc-ringed-site-module-sheafification-exact"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0A94, lemma-RHom-into-K-injective; Tag 0A95, lemma-RHom-well-defined (its sheafification argument); module sheafification Tag 03EI, sites-modules-lemma-sheafification-exact."
-   }
-  },
-  {
-   "text": "If $M\\in D^{\\ge b}$, exact restriction [lem-pur-site-restriction-module-adjunction-exact] preserves cohomology, so $K|_U\\in D^{\\le r}$ and $M|_U[n]\\in D^{\\ge b-n}$ for every $U$. For $n<b-r$ one has $b-n>r$, hence $\\operatorname{Hom}(K|_U,M|_U[n])=0$ by orthogonality of the standard t-structure [def-sbc-standard-tstructure-derived-category, def-weil-t-structure]. The presheaf in Step 1 is zero, so $T^n(M)=0$. Taking $b=c$ already proves the claimed vanishing below $c-r$; taking $b=0$ gives $\\mathcal Ext^p(K,F)=0$ for $p<-r$.",
-   "uses": [
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "def-sbc-standard-tstructure-derived-category",
-    "def-weil-t-structure"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08J5, remark-truncation-distinguished-triangle; standard orthogonality of upper and lower truncations, as recorded in the cited standard t-structure; Tag 0A94 for Step 1."
-   }
-  },
-  {
-   "text": "The functors $T^n$ carry a distinguished triangle $A\\to B\\to C\\xrightarrow{w}A[1]$ to a natural long exact sequence. Indeed exact restriction induces a functor on derived categories preserving cone triangles: it commutes with shifts and with the finite direct sums in the cone formula [def-weil-abstract-derived-category, lem-pur-site-restriction-module-adjunction-exact]. Over each $U$, apply [lem-weil-pbc-hom-into-triangle-exact] and rotations and shifts of the restricted triangle. The connecting homomorphism is postcomposition with $w[n]$ followed by the shift identification. This gives an exact sequence of presheaves, and exact module sheafification gives the asserted sequence of the $T^n$ by Step 1. Naturality of these connecting maps follows directly from the last commuting square of a morphism of triangles, $a[1]w=w'c$; hence it also holds after sheafification.",
-   "uses": [
-    "def-weil-abstract-derived-category",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-weil-pbc-hom-into-triangle-exact",
-    "lem-weil-pbc-ringed-site-module-sheafification-exact"
+    "lem-per-rhom-local-cohomological-bound"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0A94, lemma-RHom-into-K-injective; compare Tag 08JC, lemma-RHom-triangulated. Exactness is proved here from local representable Hom, not inferred from the etale-only lem-sf-hom-triangulated."
+    "place": "Tag 0A94, local comparison; extracted Steps 1–3."
    }
   },
   {
-   "text": "Use the functorial triangles of [lem-weil-pbc-truncation-triangle] for $L$: $\\tau_{\\le q-1}L\\to\\tau_{\\le q}L\\to H^q(L)[-q]\\to(\\tau_{\\le q-1}L)[1]$. Put $D^{p,q}=T^{p+q}(\\tau_{\\le q}L)$ and $E^{p,q}=T^{p+q}(H^q(L)[-q])$. Let $\\alpha:D^{p,q}\\to D^{p-1,q+1}$ be induced by the next inclusion, $g:D^{p,q}\\to E^{p,q}$ by the quotient, and $f:E^{p,q}\\to D^{p+2,q-1}$ by the boundary. Step 3 gives respectively $\\ker\\alpha=\\operatorname{im}f$, $\\ker f=\\operatorname{im}g$, $\\ker g=\\operatorname{im}\\alpha$, and zero consecutive composites. Thus this is the exact couple of [def-sp-exact-couple]. Its derived-couple construction [lem-sp-derived-couple-exact] gives pages starting at $E_2=E$, with $d_s$ of bidegree $(s,1-s)$ and $E_{s+1}=\\ker d_s/\\operatorname{im}d_s$.",
+   "text": "Apply [lem-per-postnikov-additive-exact-couple] with $\\mathcal A=\\mathcal B=\\operatorname{Mod}(\\mathcal O)$ and the functor of Step 1. Its terms are $D^{p,q}=T^{p+q}(\\tau_{\\le q}L)$ and $E_2^{p,q}=T^p(H^q(L)[0])=\\mathcal Ext^p_{\\mathcal O}(K,H^qL)$, with precisely the required differential bidegrees. This also supplies additive page maps for every morphism of $L$ and compatibility with canonical abutment maps and filtrations after any fixed first-index translation. In Lean, form the E2 spectral-sequence functor by restricting each page along the translation (p,q) ↦ (p+r,q); the restriction homology comparisons give its next-page isomorphisms. Conjugation by the page comparisons gives naturality and additivity, and the initial layer comparison followed by the coherent shift comparison gives the asserted E2 identification.",
    "uses": [
-    "lem-weil-pbc-truncation-triangle",
-    "def-sp-exact-couple",
-    "lem-sp-derived-couple-exact"
+    "lem-per-postnikov-additive-exact-couple"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/homology.tex",
-    "place": "Tags 011Q, definition-exact-couple; 011R, lemma-derived-exact-couple; 011S, definition-spectral-sequence-associated-exact-couple. Use the project E2 indexing and the truncation triangles of derived.tex Tag 08J5."
+    "place": "Tag 011Q, exact couples; extracted Steps 4–5 and 9."
    }
   },
   {
-   "text": "The right-argument shift comparison [lem-pur-derived-internal-hom-shift-right] identifies $E_2^{p,q}=H^{p+q}R\\mathcal Hom(K,H^q(L)[-q])$ naturally with $H^pR\\mathcal Hom(K,H^q(L)[0])=\\mathcal Ext^p(K,H^qL)$. Step 2 makes this zero for $p<-r$; it is zero for $q<c$ because $H^qL=0$. Also $D^{p,q}=0$ for $q<c$: all cohomology of $\\tau_{\\le q}L$ is zero, so it is the zero derived object. Iterated pages retain these support bounds since they are subquotients.",
+   "text": "Apply [lem-per-postnikov-finite-cutoff-abutment] to this couple, using Step 1's bound for all $b$ and the assumed $L\\in D^{\\ge c}$. It gives support $p\\ge-r,q\\ge c$ and identifies the reindexed canonical abutment $T^n(\\tau_{\\le n+r}L)$ with $T^n(L)$ by the natural inclusion. Its transported filtration is $F^pT^n(L)=\\operatorname{im}(T^n(\\tau_{\\le n-p}L)\\to T^n(L))$, finite exhaustive and separated, with graded pieces $E_\\infty^{p,n-p}$. Only $c\\le q\\le n+r$ occur. The comparison is natural, so Step 2's additive maps on abutments, filtration steps and graded pieces transport to the actual $T^n(u)$ and their restrictions. This proves every asserted compatibility, including the empty range $n+r<c$. To verify coherence for the chosen late-page isomorphisms, first use stabilization to show that the limiting cycle subobject equals every sufficiently late finite cycle subobject. The comparison from limiting cycles to finite cycles is therefore an isomorphism. Cancel this map and the epimorphic cycle-to-page projection to prove the transition and naturality equations. Finite cycle maps are constructed inductively using the given kernel and homology squares. Transport filtration steps along the natural isomorphisms T^0(-[n]) ≅ T^n(-); uniqueness through monic inclusions proves additivity of restrictions, and uniqueness through cokernel projections proves additivity and naturality of graded maps.",
    "uses": [
-    "lem-pur-derived-internal-hom-shift-right",
-    "def-sbc-standard-tstructure-derived-category",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08J5, remark-truncation-distinguished-triangle; right-argument shift as in sites-cohomology.tex Tag 08JA (definition of internal Hom)."
-   }
-  },
-  {
-   "text": "Reindex the entire exact couple by $\\widetilde D^{P,Q}=D^{P-r,Q}$ and $\\widetilde E^{P,Q}=E^{P-r,Q}$. All structure-map bidegrees are unchanged; now $\\widetilde D=0$ for $Q<c$, and $\\widetilde E=0$ unless $P\\ge0,Q\\ge c$. Apply [thm-sp-half-plane-convergence] with $a=c$. It gives finite exhaustive separated filtrations on $\\widetilde A^N=\\widetilde D^{0,N}$, whose graded pieces are $\\widetilde E_\\infty^{P,N-P}$, and stabilization for $s>\\max(Q-c+1,P)$. Returning to the original indices, $N=n+r$, $P=p+r$, $Q=q$; the abutment is initially $A_n=T^n(\\tau_{\\le n+r}L)$. At total degree $n$, the support conditions are $p\\ge-r$ and $q\\ge c$ with $p+q=n$, hence exactly $c\\le q\\le n+r$. Stabilization occurs for $s>\\max(q-c+1,p+r)$.",
-   "uses": [
-    "thm-sp-half-plane-convergence"
+    "lem-per-postnikov-finite-cutoff-abutment"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/homology.tex",
-    "place": "Tags 011T, lemma-spectral-sequence-associated-exact-couple, and 0BDU/0BDV, definition-bounded-ss/lemma-relate-boundedness; the cited project theorem provides the complete half-plane abutment assertion."
-   }
-  },
-  {
-   "text": "The initial abutment map $a_n:A_n\\to T^n(L)$ is an isomorphism. In the canonical truncation triangle $\\tau_{\\le n+r}L\\to L\\to\\tau_{\\ge n+r+1}L\\to$, the last unshifted term has lower cohomological bound $n+r+1$ [def-sbc-standard-tstructure-derived-category, lem-sf-derived-truncation-triangle]. By Step 2 its $T^j$ vanish for $j<n+1$, in particular at $j=n-1,n$. The exact sequence of Step 3 therefore reads $0\\to A_n\\xrightarrow{a_n}T^n(L)\\to0$. This also works when $n+r<c$, when $A_n=0$. All $a_n$ are induced by the natural inclusion of the truncation, so these isomorphisms are natural in $L$.",
-   "uses": [
-    "def-sbc-standard-tstructure-derived-category",
-    "lem-sf-derived-truncation-triangle"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08J5, remark-truncation-distinguished-triangle; Step 2 supplies the necessary tail vanishing without any completeness or cohomological-dimension assumption."
-   }
-  },
-  {
-   "text": "Transport the filtration from Step 6 along $a_n$. Explicitly its $p$-th step in the original indexing is $F^pT^n(L)=\\operatorname{im}(T^n(\\tau_{\\le n-p}L)\\to T^n(L))$. For $p+r\\ge0$, this is precisely the image filtration of [thm-sp-half-plane-convergence] under the preceding reindexing. For $p+r\\le0$, $n-p\\ge n+r$ and the map from this larger truncation is an isomorphism on $T^n$, by the same tail calculation as Step 7; thus its image is the whole object, as required by that theorem. For $p\\ge n-c+1$, the truncation index is $<c$, so the filtration step is zero. Consequently $F^{-r}=T^n(L)$, $F^{n-c+1}=0$, and $F^p/F^{p+1}\\simeq E_\\infty^{p,n-p}$. This is the finite exhaustive separated convergence of the statement, including degrees with empty support.",
-   "uses": [
-    "thm-sp-half-plane-convergence",
-    "def-sp-filtration",
-    "def-sp-convergence"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tags 011T and 012F (lemma-filtered-differential-ss-converges), with the project half-plane theorem; image filtration spelled out after reindexing."
-   }
-  },
-  {
-   "text": "For a morphism $u:L\\to L'$, functoriality of the truncation triangles [lem-weil-pbc-truncation-triangle] and the explicit natural boundary of Step 3 give maps $D(u),E(u)$ commuting with $\\alpha,f,g$. Apply [lem-sp-couple-morphism] to the reindexed couples: the page maps commute with differentials and with the abutment filtrations and graded identifications. Conjugating the abutment map by the natural $a_n$ of Step 7 gives exactly $T^n(u)$; the filtration map is its restriction to the displayed images in Step 8. These constructions are additive in $u$. In fact the canonical truncation and cohomology maps are additive by their kernel/quotient formulas, and postcomposition in each local derived Hom is additive. Thus $D(u+v)=D(u)+D(v)$ and $E(u+v)=E(u)+E(v)$ initially. At every derived-couple stage the maps on images, kernels and their quotients are uniquely characterized by commuting with their inclusions or quotient projections; the sum of the maps for $u,v$ satisfies those equations for $u+v$. Induction proves additivity on all pages, stable pages, filtration steps and graded maps. Identity and composition follow from the same uniqueness and the cited couple-morphism theorem. This proves all the asserted naturality and additivity.",
-   "uses": [
-    "lem-weil-pbc-truncation-triangle",
-    "lem-sp-couple-morphism",
-    "def-sp-exact-couple",
-    "lem-sp-derived-couple-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 011Q, definition-exact-couple (morphisms); Tag 011R, lemma-derived-exact-couple; the project couple-morphism statement supplies compatibility with the canonical abutment filtrations."
+    "place": "Tag 011T, finite half-plane abutment; extracted Steps 6–8."
    }
   }
  ],
  "proof_deps": [
-  "def-pur-derived-internal-hom",
-  "def-sbc-standard-tstructure-derived-category",
-  "def-sp-convergence",
-  "def-sp-exact-couple",
-  "def-sp-filtration",
-  "def-weil-abstract-derived-category",
-  "def-weil-t-structure",
-  "lem-pur-derived-internal-hom-shift-right",
-  "lem-pur-rhom-into-kinjective-local",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-sf-derived-truncation-triangle",
-  "lem-sp-couple-morphism",
-  "lem-sp-derived-couple-exact",
-  "lem-weil-pbc-hom-into-triangle-exact",
-  "lem-weil-pbc-ringed-site-module-sheafification-exact",
-  "lem-weil-pbc-truncation-triangle",
-  "thm-sp-half-plane-convergence"
+  "lem-per-rhom-local-cohomological-bound",
+  "lem-per-postnikov-additive-exact-couple",
+  "lem-per-postnikov-finite-cutoff-abutment"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Internal-Hom/Postnikov exact-couple expansion of the filtered-derived method Tag 015W, using local Hom Tag 0A94 and exact module sheafification Tag 03EI; the Ext-to-representable-sums inference is ILO XVII 10.1.1, proof p. 325. This is not an application of a left-exact-functor spectral sequence to a complex first argument."
+  "place": "Internal-Hom/Postnikov exact-couple expansion of the filtered-derived method Tag 015W, using local Hom Tag 0A94 and exact module sheafification Tag 03EI; the Ext-to-representable-sums inference is ILO XVII 10.1.1, proof p. 325. This is not an application of a left-exact-functor spectral sequence to a complex first argument. X2 2026-10-24: Lean assembly follows these three declared dependencies, with proved private helpers for index translation, finite-cycle naturality, and transport of filtration steps and quotients."
  },
  "mathlib_searches": [
   {
@@ -273,73 +176,21 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-19",
+  "date": "2026-10-22",
   "item": "lem-per-bounded-above-rhom-hyperext",
   "worker": "stage1",
-  "summary": "Statement unchanged. Built the hyper-Ext exact couple from local representable derived Hom, exact sheafification and the existing Postnikov triangles. Proved the lower support bound by local standard orthogonality, reindexed by P=p+r to apply the existing half-plane theorem, proved its abutment comparison by tail vanishing, and checked filtration, morphism and additive compatibility. No new nodes.",
-  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve Step 1 relative-duality coefficient chain, via the inherited ancestry: expands ILO XVII 10.1.1 p.325 Ext continuity to representable sums as required by parent lem-per-constructible-rhom-coproduct-continuity Step 3.",
-  "tool_uses": [
-   {
-    "node": "lem-pur-derived-internal-hom-shift-right",
-    "why": "Generic shift comparison for the second argument of internal derived Hom, identifying the E2 terms."
-   },
-   {
-    "node": "lem-pur-rhom-into-kinjective-local",
-    "why": "Generic local representable-Hom calculation on an arbitrary ringed site, giving the actual cocycle-to-derived-morphism comparison; no node of the curve unit supplies it."
-   },
-   {
-    "node": "lem-pur-site-restriction-module-adjunction-exact",
-    "why": "Generic exactness of restriction to a localized ringed site, preserving support bounds and cone triangles."
-   },
-   {
-    "node": "lem-sf-derived-truncation-triangle",
-    "why": "Generic standard truncation triangle, used only to compare a finite truncation with L."
-   },
-   {
-    "node": "lem-sp-couple-morphism",
-    "why": "Generic page and abutment functoriality for exact couples, used after the explicit index translation."
-   },
-   {
-    "node": "lem-sp-derived-couple-exact",
-    "why": "Generic exact-couple iteration and page-cohomology construction, with the specified E2 bidegrees."
-   },
-   {
-    "node": "lem-weil-pbc-hom-into-triangle-exact",
-    "why": "Generic covariant representable exactness in a triangulated category, used locally; the curve unit does not replace this formal tool."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-site-module-sheafification-exact",
-    "why": "Generic exactness of module sheafification, needed to pass local derived Hom sequences to module sheaves; no curve-unit replacement exists."
-   },
-   {
-    "node": "lem-weil-pbc-truncation-triangle",
-    "why": "Generic functorial successive Postnikov triangles in any derived category, used as a formal tool below the unit route."
-   },
-   {
-    "node": "thm-sp-half-plane-convergence",
-    "why": "Generic half-plane exact-couple convergence theorem, applied after P=p+r; no curve-unit node supplies the formal finite-filtration argument."
-   }
-  ]
+  "summary": "Human re-split repair: statement and statement dependencies unchanged; three independent statement-only lemmas distribute the nine original arguments into local cohomological RHom (Steps 1–3), additive Postnikov exact couples (Steps 4–5,9), and finite cutoff/actual abutment (Steps 6–8). The original arguments are retained verbatim with their exact source and dependency records in report.md for the next workers. The item is now a short assembly.",
+  "blueprint": "Preserves the inherited ancestor lem-per-artin-gabber-affine-curve Step 1 coefficient comparison ancestry and ILO XVII 10.1.1 p.325 Ext-continuity passage. The three nodes expand the same internal-Hom/Postnikov route, with no unit or chapter change.",
+  "tool_uses": []
  },
- "tool_uses": [
-  "lem-pur-derived-internal-hom-shift-right",
-  "lem-pur-rhom-into-kinjective-local",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-sf-derived-truncation-triangle",
-  "lem-sp-couple-morphism",
-  "lem-sp-derived-couple-exact",
-  "lem-weil-pbc-hom-into-triangle-exact",
-  "lem-weil-pbc-ringed-site-module-sheafification-exact",
-  "lem-weil-pbc-truncation-triangle",
-  "thm-sp-half-plane-convergence"
- ],
+ "tool_uses": [],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q88-aecb38b20",
-  "group": "Q88",
+  "reviewer": "NT-cc-Q119-00c9b9b1c",
+  "group": "Q119",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-aecb38b20 (reviewer sub-agent of L); spot-checked: I read all nine steps in full against the statements of all 17 cited nodes. Step 1: the local Hom lemma for K-injective targets (lem-pur-rhom-into-kinjective-local) applied to P[-n], plus exact sheafification, gives T^n as a sheafified local derived Hom. Step 2: exact restriction and t-structure orthogonality give the vanishing for n<b-r. Step 3: covariant Hom out of K|_U applied to the restricted triangles gives the long exact sequence, with the explicit boundary w[n] and naturality from a[1]w=w'c. Step 4: the couple D^{p,q}=T^{p+q}(tau<=q L), E^{p,q}=T^{p+q}(H^qL[-q]) has bidegrees (-1,1), (2,-1), (0,0), and the three exactness equations of def-sp-exact-couple match the long exact sequence of the truncation triangle (checked). Step 5: the right-argument shift gives E2=Ext^p(K,H^qL), and D=0 for q<c. Step 6: reindexing by P=p+r and a=c meets the half-plane theorem's hypotheses exactly, and A^N=T^n(tau<=n+r L). Step 7: the tail tau>=n+r+1 has T^{n-1}=T^n=0, so a_n is an isomorphism. Step 8: re-derived F^p=im T^n(tau<=n-p L); F^{-r} is the whole object, F^{n-c+1}=0, and the graded pieces are E_inf^{p,n-p}. Step 9: the couple-morphism lemma plus the uniqueness of maps on subquotients gives naturality and additivity. Tested on K=O[0], K=F[t], K or L zero, and n+r<c (empty abutment, consistent). No duplicates: thm-sp-truncation-e2 needs a left exact functor between hearts, and RHom(K,-) for a complex K is not one; the other candidates are global, coherent, colimit or lisse statements. There are no new nodes and no cycle (closure of 225 nodes). The ten declared tool_uses are generic homological-algebra tools and I accept them. The Stacks tags 015W/0A94/03EI/08J5/011R were checked in the tags file, there is no SGA, and the statement is unchanged and covers the parent's Step 3 use. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q119-00c9b9b1c (reviewer sub-agent of L); spot-checked: I read all four files in full against the base node (dagsnap 6fd1c5af), the released re-split note (at least 2 new nodes, at most 3000 characters) and the statements of every cited node. Sources read: Stacks 0A94/0A95 (sites-cohomology.tex l.8720/8754) and 011Q/011R/011T (homology.tex l.5289-5356). The item's statement and stmt_deps are byte-identical to the base. All 9 old steps survive verbatim in the report and each is a conclusion of a new node: Steps 1-3 go to lem-per-rhom-local-cohomological-bound (sheafified local Hom via 0A94 and exact sheafification, natural long exact sequences with boundary w[n], amplitude bound n<b-r). Steps 4, 5 (E2 part) and 9 go to lem-per-postnikov-additive-exact-couple (bidegrees (-1,1), (2,-1), (0,0) and the three exactness equations checked against the triangle long exact sequence, E2=T^p(H^q[0]), additivity on subquotients by uniqueness). Steps 5 (support part) and 6-8 go to lem-per-postnikov-finite-cutoff-abutment (reindexing P=p+r gives N=n+r; a tail in D>=m+1 kills T^{n-1} and T^n for every m>=n+r; F^p=im T^n(tau<=n-p L), all of it for p<=-r and zero for p>=n-c+1; stabilization bound max(q-c+1,p+r)). The three statements are of comparable size (2009, 2120 and 2434 characters) and none restates the item. The assembly is 3 steps, 1536 characters. Its passage from T^0(-[n]) to H^n RHom uses clause 2 of rhom-local, and the additivity transport is conjugation by the natural iso a_n. Small cases tested: point with field coefficients, K=k[-r] gives T^n(L)=H^{n+r}(L); n=c-r; n<c-r; zero objects. Statement-only form, all citations and stmt_deps exist and are unmerged, four kinds of search logged, blueprint from/via correct, same unit, graph acyclic, no SGA in delivered fields. The live node is still the old 9-step version, so no other group superseded this delivery. Advisories: the exact-couple hypothesis of finite-cutoff is redundant but harmless; Mathlib TStructure/SpectralObject.lean is a possible later route for additive-couple but not a leaf match. No fixes."
  },
  "lean": {
   "module": "Sheaf.Algebra.Homology.BoundedAboveRHomHyperExt",
@@ -366,14 +217,25 @@
   "note": "Read item, 8 stmt_deps, filtration/spectral-sequence/derived-Hom interfaces. All clauses match: K.IsLE r, L in the IsGE c subcategory; Ext=H^p RHom(K,F[0]) via the recorded derivedInternalHomOfUniverses; Mathlib E2 spectral sequence (d_s bidegree (s,1-s)); E2 iso natural on maps; additivity on pages, filtration steps and graded maps; support p>=-r,q>=c on all pages; finite exhaustive separated DecreasingFiltration on the actual T^n(L), F(-r)=top, F(n-c+1)=0; late-page isos to gr with the in/out differentials zero by support (=E_inf); c<=q<=n+r; T^n=0 for n<c-r. Not hollow. Universes independent. Edge cases n<c-r, n=c-r, zero objects consistent. Statement verbatim; only lean field changed; docstrings with all 9 steps; nt_compile --json clean 6.3 s. Advisory: restrictionSteps/gradedMapSteps are choose-defs owned by theorem lem-sp-finite-filtration-induction outside stmt_deps (landed precedent); unused proof-plan imports; module docstring cites 012U where the node's step 8 cites 012F."
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "C-69894",
-  "group": "X3",
+  "reviewer": "COMPILER",
+  "group": "X2",
   "result": "pass",
-  "landing": "20261020T161325-L-3477155",
+  "landing": "20261025T002545-L-3136010",
   "kind": "interface",
-  "note": "independent cc review: Lean/DAG files byte-identical to previously passed head 36e974bf (diff -r), compared with live (only HomPreservingSteps→FilteredObject.Hom, import, linter and stub changes); change-record Users now lists the QcoherentNormalized* modules (Scheme.IsSeparated) the landing named; 16 delivered + 27 live direct importers compile 43/43 clean"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

@@ -1,0 +1,379 @@
+{
+ "id": "lem-sfb-hausdorff-charts-qc-open-closed",
+ "kind": "statement",
+ "title": "Quasi-compact opens are closed immersions in quasi-separated schemes with Hausdorff affine charts",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "statement": "Let $X$ be a quasi-separated scheme [def-pc-scheme, def-weil-quasi-separated-morphism]. Let $J$ be a set and $(V_j)_{j\\in J}$ an affine open covering of $X$ such that the underlying topological space of each $V_j$ is Hausdorff, meaning that distinct points have disjoint open neighbourhoods. For every quasi-compact open subscheme $U\\subseteq X$ [def-weil-pbc-quasi-compact-scheme], the subset $U$ is closed in $X$ and its original open inclusion $U\\hookrightarrow X$ is a closed immersion [def-weil-closed-immersion]. In particular, the closed subscheme structure is the given open subscheme structure, with its restricted structure sheaf. The empty open and the empty scheme are allowed. The covering need not be finite, and $X$ need not be quasi-compact or Noetherian.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 0CKV, lemma-dimension-zero, proof of (1) implies (2): quasi-compact overlaps are closed in Hausdorff affine charts, and an open immersion with closed image is closed. Local closedness generalized to any quasi-compact open, with the finite-neighbourhood argument and local-to-global complement calculation of the returned item, old steps 3 (overlaps), 4 and 5."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Fix $j\\in J$. The affine scheme $V_j$ is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. Since $X$ is quasi-separated and $U,V_j$ are quasi-compact opens of $X$, [pqf-lem-qs-intersection-qc] gives that $E_j=U\\cap V_j$ is quasi-compact. Its topology as an open subscheme is the subspace topology, whether taken inside $X$ or inside $V_j$.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "pqf-lem-qs-intersection-qc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0CKV, lemma-dimension-zero, proof (1) implies (2), first sentence; replace the first affine open by the given quasi-compact open U."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-compact-subset-hausdorff-closed] in the Hausdorff space $V_j$ to $E_j$. It follows that $U\\cap V_j$ is closed in $V_j$ for every $j\\in J$.",
+   "uses": [
+    "lem-sfb-compact-subset-hausdorff-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 08YB, lemma-quasi-compact-in-Hausdorff (1), used in Tag 0CKV proof (1) implies (2)."
+   }
+  },
+  {
+   "text": "Each $V_j\\setminus U$ is open in $V_j$, hence open in $X$ since $V_j$ is open. As the charts cover $X$, $X\\setminus U=\\bigcup_{j\\in J}(V_j\\setminus U)$ is open. Thus $U$ is closed in $X$. This uses an arbitrary union, so the covering need not be finite.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0CKV, lemma-dimension-zero, local closedness argument, expanded by the complement identity."
+   }
+  },
+  {
+   "text": "Let $i:U\\hookrightarrow X$ be the original open inclusion. By [def-weil-open-immersion] its structure sheaf is $\\mathcal O_X|_U$, and its underlying map is a homeomorphism onto $U$, now closed. For any open $W\\subseteq X$ and $s\\in\\mathcal O_U(W\\cap U)$, glue $s$ on $W\\cap U$ with the zero section on $W\\setminus U$. These two opens cover $W$ and have empty intersection, so the sheaf axiom gives a section of $\\mathcal O_X(W)$ restricting to $s$. Consequently $\\mathcal O_X\\to i_*\\mathcal O_U$ is surjective even on sections. The definition [def-weil-closed-immersion] proves that this same $i$ is a closed immersion, with the given open subscheme structure. If $U=\\varnothing$, glue only the zero section on $W$; if $X=\\varnothing$, the complement calculation is an empty union. No quasi-compactness of $X$ or Noetherian hypothesis was used.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0CKV, lemma-dimension-zero, proof (1) implies (2), sentence that an open immersion with closed image is a closed immersion; explicit sheaf-gluing verification."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "pqf-lem-qs-intersection-qc",
+  "lem-sfb-compact-subset-hausdorff-closed",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 0CKV, lemma-dimension-zero, proof (1) implies (2), with Topology Tag 08YB(1); the local argument is applied to U and each V_j and globalized by the complement identity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a quasi separated scheme covered by Hausdorff affine opens every quasi compact open inclusion is a closed immersion",
+   "results": {
+    "t": "2026-10-22T06:11:20Z",
+    "tool": "leanfinder",
+    "query": "In a quasi separated scheme covered by Hausdorff affine opens every quasi compact open inclusion is a closed immersion",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.quasiSeparatedSpace_of_isAffine",
+     "AlgebraicGeometry.Scheme.IdealSheafData.instQuasiCompactSubschemeι",
+     "AlgebraicGeometry.instQuasiSeparatedToSpecΓOfQuasiSeparatedSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.quasiSeparatedSpace_iff_affine",
+     "AlgebraicGeometry.quasiSeparatedSpace_iff_forall_affineOpens",
+     "AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion",
+     "AlgebraicGeometry.IsImmersion.isImmersion_iff_exists_of_quasiCompact"
+    ],
+    "digest": "e0aa291d7ac23785"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the quasi-separated intersection criteria give compact overlaps but no closedness in the whole scheme; the returned immersion/quasi-affine criteria do not give this closed immersion. No combined local Hausdorff theorem was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi compact open subset of a quasi separated scheme with Hausdorff affine charts is closed",
+   "results": {
+    "t": "2026-10-22T06:11:02Z",
+    "tool": "leansearch",
+    "query": "A quasi compact open subset of a quasi separated scheme with Hausdorff affine charts is closed",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, QuasiSeparatedSpace",
+   "results": {
+    "t": "2026-10-22T06:11:02Z",
+    "tool": "loogle",
+    "query": "AlgebraicGeometry.IsClosedImmersion, QuasiSeparatedSpace",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the quasi-separated intersection criteria give compact overlaps but no closedness in the whole scheme; the returned immersion/quasi-affine criteria do not give this closed immersion. No combined local Hausdorff theorem was found."
+  },
+  {
+   "tool": "grep",
+   "query": "Hausdorff|T2Space|T1Space",
+   "results": {
+    "t": "2026-10-22T06:11:02Z",
+    "tool": "grep",
+    "query": "Hausdorff|T2Space|T1Space",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Properties.lean",
+     "Mathlib/AlgebraicGeometry/Properties.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/Finite.lean"
+    ],
+    "digest": "c5a655b306257648"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the quasi-separated intersection criteria give compact overlaps but no closedness in the whole scheme; the returned immersion/quasi-affine criteria do not give this closed immersion. No combined local Hausdorff theorem was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi separated locally Hausdorff scheme has closed compact open subsets",
+   "results": {
+    "t": "2026-10-22T06:11:53Z",
+    "tool": "leanfinder",
+    "query": "A quasi separated locally Hausdorff scheme has closed compact open subsets",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.quasiSeparatedSpace_iff_affine",
+     "AlgebraicGeometry.quasiSeparatedSpace_iff_forall_affineOpens",
+     "AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover",
+     "AlgebraicGeometry.quasiCompact_iff_compactSpace",
+     "AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace",
+     "AlgebraicGeometry.isRetrocompact_basicOpen",
+     "AlgebraicGeometry.quasiCompact_of_compactSpace",
+     "AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace"
+    ],
+    "digest": "daf1e4bc5f02fdb9"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the quasi-separated intersection criteria give compact overlaps but no closedness in the whole scheme; the returned immersion/quasi-affine criteria do not give this closed immersion. No combined local Hausdorff theorem was found."
+  },
+  {
+   "tool": "grep",
+   "query": "isClosed.*isCompact|isCompact.*isClosed|isClosed.*[Oo]pen",
+   "results": {
+    "t": "2026-10-22T06:11:25Z",
+    "tool": "grep",
+    "query": "isClosed.*isCompact|isCompact.*isClosed|isClosed.*[Oo]pen",
+    "sub": "Topology/QuasiSeparated",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the quasi-separated intersection criteria give compact overlaps but no closedness in the whole scheme; the returned immersion/quasi-affine criteria do not give this closed immersion. No combined local Hausdorff theorem was found."
+  },
+  {
+   "tool": "grep",
+   "query": "Hausdorff|T2Space|T1Space",
+   "results": {
+    "t": "2026-10-23T04:26:28Z",
+    "tool": "grep",
+    "query": "Hausdorff|T2Space|T1Space",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Properties.lean",
+     "Mathlib/AlgebraicGeometry/Properties.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/Finite.lean"
+    ],
+    "digest": "c5a655b306257648"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: hits supply affine compactness, quasi-separated intersections or compact-to-closed facts, but no declaration combines the local Hausdorff cover with the global closed immersion conclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi compact open subset of a quasi separated scheme with Hausdorff affine charts is closed",
+   "results": {
+    "t": "2026-10-23T04:26:28Z",
+    "tool": "leansearch",
+    "query": "A quasi compact open subset of a quasi separated scheme with Hausdorff affine charts is closed",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "TopologicalSpace.Compacts.toCloseds",
+     "QuasiSeparatedSpace.isRetrocompact_iff_isCompact",
+     "AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens",
+     "AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_affineOpens",
+     "AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_basicOpen",
+     "AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union",
+     "AlgebraicGeometry.isCompact_iff_exists",
+     "AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen"
+    ],
+    "digest": "69012867ae0bc531"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: hits supply affine compactness, quasi-separated intersections or compact-to-closed facts, but no declaration combines the local Hausdorff cover with the global closed immersion conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, QuasiSeparatedSpace",
+   "results": {
+    "t": "2026-10-23T04:26:28Z",
+    "tool": "loogle",
+    "query": "AlgebraicGeometry.IsClosedImmersion, QuasiSeparatedSpace",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: hits supply affine compactness, quasi-separated intersections or compact-to-closed facts, but no declaration combines the local Hausdorff cover with the global closed immersion conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a quasi separated scheme covered by Hausdorff affine opens every quasi compact open inclusion is a closed immersion",
+   "results": {
+    "t": "2026-10-23T04:26:39Z",
+    "tool": "leanfinder",
+    "query": "In a quasi separated scheme covered by Hausdorff affine opens every quasi compact open inclusion is a closed immersion",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.quasiSeparatedSpace_of_isAffine",
+     "AlgebraicGeometry.Scheme.IdealSheafData.instQuasiCompactSubschemeι",
+     "AlgebraicGeometry.instQuasiSeparatedToSpecΓOfQuasiSeparatedSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.quasiSeparatedSpace_iff_affine",
+     "AlgebraicGeometry.quasiSeparatedSpace_iff_forall_affineOpens",
+     "AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion",
+     "AlgebraicGeometry.IsImmersion.isImmersion_iff_exists_of_quasiCompact"
+    ],
+    "digest": "e0aa291d7ac23785"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: hits supply affine compactness, quasi-separated intersections or compact-to-closed facts, but no declaration combines the local Hausdorff cover with the global closed immersion conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi separated locally Hausdorff scheme has closed compact open subsets",
+   "results": {
+    "t": "2026-10-23T04:27:26Z",
+    "tool": "leanfinder",
+    "query": "A quasi separated locally Hausdorff scheme has closed compact open subsets",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.isCompact_basicOpen",
+     "AlgebraicGeometry.isRetrocompact_basicOpen",
+     "AlgebraicGeometry.quasiSeparatedSpace_iff_affine",
+     "AlgebraicGeometry.quasiSeparatedSpace_iff_forall_affineOpens",
+     "AlgebraicGeometry.compact_open_induction_on",
+     "AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace",
+     "AlgebraicGeometry.quasiCompact_of_compactSpace"
+    ],
+    "digest": "0d02664e0bb73de4"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: hits supply affine compactness, quasi-separated intersections or compact-to-closed facts, but no declaration combines the local Hausdorff cover with the global closed immersion conclusion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qcqs-zero-dimensional-affine",
+  "date": "2026-10-22",
+  "group": "Q140"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Tag 0CKV, lemma-dimension-zero, proof of (1) implies (2): quasi-compact overlaps are closed in Hausdorff affine charts, and an open immersion with closed image is closed. Local closedness generalized to any quasi-compact open, with the finite-neighbourhood argument and local-to-global complement calculation of the returned item, old steps 3 (overlaps), 4 and 5. Supports Paragraph (3) of lem-sfb-field-profinite-galois-site, the qcqs field-site-object affineness reduction below the ordinary direct-image clause of det-thm-sf-ctf-stability-direct-images.",
+   "via": [
+    "lem-sfb-qcqs-zero-dimensional-affine",
+    "lem-sfb-field-profinite-galois-site",
+    "lem-sfb-condensed-galois-global-descent",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-hausdorff-charts-qc-open-closed",
+  "worker": "stage1",
+  "summary": "Retained the statement and its hypotheses; assembled the existing affine compactness and quasi-separated intersection nodes with one exact Mathlib leaf for Hausdorff compact closedness. Wrote the global complement identity and direct section-lifting proof for the original inclusion; checked arbitrary covers and empty cases.",
+  "blueprint": "The inherited blueprint ancestor is null (blueprint_refs.py ancestor confirms this); retains its original via chain and precise from.place. Realizes the Tag 0CKV local chart argument specified there, supporting paragraph (3) of lem-sfb-field-profinite-galois-site and the ordinary direct-image clause of det-thm-sf-ctf-stability-direct-images. No unit route changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q148-427ce46a9",
+  "group": "Q148",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q148-427ce46a9 (reviewer sub-agent of L); spot-checked: I read the item and the one new node in full; no fixes were written. The item statement is unchanged and covers the parent lem-sfb-qcqs-zero-dimensional-affine step 2 (U=U_i). Step 1: lem-weil-pbc-affine-scheme-qcqs (affine ⇒ quasi-compact) and pqf-lem-qs-intersection-qc (quasi-separated X, quasi-compact opens ⇒ quasi-compact intersection) give U∩V_j quasi-compact; I checked all hypotheses. Step 2: the new leaf in the Hausdorff space V_j gives U∩V_j closed in V_j. Step 3: X\\U=⋃(V_j\\U) is an open union; arbitrary and empty covers are fine. Step 4: W∩U and W\\U form a disjoint open cover of W, so gluing s with 0 proves O_X→i_*O_U surjective, which is the def-weil-closed-immersion definition (read), with O_U=O_X|_U from def-weil-open-immersion. Sources match: Stacks properties.tex 0CKV l.1332-1337 for (1)⇒(2), and topology.tex 08YB(1) l.1677. No SGA is cited. New node lem-sfb-compact-subset-hausdorff-closed = 08YB(1), an exact Mathlib match: IsCompact.isClosed [T2Space] at Topology/Separation/Hausdorff.lean:592, read in the file. I tested E=∅, T=∅ and ℝ; Sierpiński shows Hausdorff is needed. It is not a restatement of the item. A scan of all DAG statements found no duplicate. Advisory only: step 4 could instead cite lem-weil-pbc-immersion-closed-image-closed-immersion, but the elementary argument is complete. There is no repair or re-split note for this item."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.HausdorffChartsQuasiCompactOpenClosed",
+  "declaration": "AlgebraicGeometry.isClosed_and_isClosedImmersion_of_hausdorff_affine_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/HausdorffChartsQuasiCompactOpenClosed.lean",
+  "statement": "theorem isClosed_and_isClosedImmersion_of_hausdorff_affine_cover (X : Scheme.{u}) [QuasiSeparated (terminal.from X)] (J : Type v) (V : J → X.Opens) (hVaffine : ∀ j : J, IsAffineOpen (V j)) (hVhausdorff : ∀ j : J, T2Space (V j).toScheme) (hVcover : iSup V = ⊤) (U : X.Opens) [CompactSpace U.toScheme] : IsClosed (U : Set X) ∧ IsClosedImmersion U.ι",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8d2beb780",
+  "group": "NX",
+  "result": "pass",
+  "note": "Every clause of the node matches the Lean (quasi-separated X via QuasiSeparated (terminal.from X); arbitrary J : Type v; affine V with iSup V = ⊤; T2Space charts; CompactSpace U.toScheme; IsClosed U ∧ IsClosedImmersion U.ι on the original inclusion). No extra hypotheses. lean.statement matches the file verbatim; the node differs from live only in lean; the four stmt_deps are existing Mathlib records used as recorded. Docstrings carry Stacks 0CKV/08YB, the blueprint tag and the 4 proof steps. Proof is sorry only, no defs, imported module QuasiCompactOpenIntersection exists in live. Edge cases (empty U, empty X/J, infinite cover, non-qc X) covered. No name collision or existing combined result. Not recompiled (no file changed)."
+ }
+}

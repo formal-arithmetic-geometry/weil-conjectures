@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-finite-model-derived-scalar-comparison",
+ "kind": "statement",
+ "title": "Derived scalar extension of a constant algebraic model with coefficient transport",
+ "statement": "Let X be a scheme, B,C,D commutative rings in universe t, q:B -> C a ring homomorphism, and rho:C ~= D a ring equivalence. For a B-complex P, let L:D(B) -> D(C) with counit epsilon be any total left derived extension along q [def-weil-abstract-derived-category, def-weil-module-base-change]. Let K be the canonical complex representative of L(Q(P)), transported to D by restriction along rho inverse. Use the actual universe-lifted constant complexes finiteModelConstantComplex [def-weil-pbc-finite-perfect-quotient-model-data] and scalar extension along adicConstantMap(rho composed with q) [def-weil-pbc-complete-coefficient-datum, lem-pur-derived-change-of-rings]. Assume that the two koszul constant functors preserve zero morphisms, so these complexes are defined. Then sheaf derived scalar extension of Q(finiteModelConstantComplex(X,B,P)) is isomorphic to Q(finiteModelConstantComplex(X,D,K)). There is no adic ideal, completed object, chart, or input local isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "lemma-derived-base-change (06YY), lemma-pullback-K-flat (0G7E), and lemma-derived-pullback-composition (0D6D); sites-modules.tex lemma-constant-exact (093J) for constant realization"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-module-base-change",
+  "def-weil-pbc-finite-perfect-quotient-model-data",
+  "def-weil-pbc-complete-coefficient-datum",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof": [
+  {
+   "text": "Choose a filtered-free K-projective resolution in the original coefficient universe. Lifting its rings along ULift ring equivalences and its module carriers by ModuleCat.uliftFunctor preserves the filtration and free generators. It is therefore still a K-flat resolution in the larger universe. The maps up(c tensor x) -> up(c) tensor up(x) and their inverse are balanced and commute with differentials, so ordinary scalar extension commutes with this lift.",
+   "uses": [
+    "lem-pc-large-filtered-free-resolution",
+    "lem-pc-filtered-free-kprojective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing constant-realization scalar-extension comparison to the lifted ring map. The koszul constant functor is the same constant module presheaf followed by module sheafification, with the ring universe lift. This gives an isomorphism between sheaf derived scalar extension of the constant model and constant realization of the lifted algebraic scalar extension.",
+   "uses": [
+    "lem-sfb-constant-realization-derived-scalar-extension",
+    "def-weil-pbc-intrinsic-koszul-completion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The universal property of L with epsilon identifies its result on the original K-projective resolution with the algebraic scalar-extension computation. Restriction along rho inverse is an exact ring-equivalence transport and is left adjoint to restriction along rho. Thus uniqueness of adjoints identifies it with extension along rho; derived composition identifies the ring map rho composed with q. Exact coefficient transport and exact realization carry the canonical isomorphism Q(objPreimage(L(Q(P)))) -> L(Q(P)) to the final representative comparison.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-derived-module-scalar-adjunction",
+    "def-weil-pbc-finite-perfect-quotient-model-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-large-filtered-free-resolution",
+  "lem-pc-filtered-free-kprojective",
+  "lem-sfb-constant-realization-derived-scalar-extension",
+  "def-weil-pbc-intrinsic-koszul-completion",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-derived-module-scalar-adjunction",
+  "def-weil-pbc-finite-perfect-quotient-model-data"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY, 0G7E and 0D6D, specialized to the localization of a ringed site and to constant coefficients; explicit universe and localization-representative transport by K6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Constant module sheaf realization with universe lift commutes with derived extension of scalars of unbounded algebraic complexes",
+   "results": "8 hits: CondensedMod.LocallyConstant.functor, CompHausLike.LocallyConstantModule.functor, CondensedMod.LocallyConstant.functorToPresheaves, LightCondMod.LocallyConstant.functor, Condensed.free, SheafOfModules.mapFree, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, CategoryTheory.Sheaf.H.",
+   "date": "2026-10-27",
+   "verdict": "No exact comparison. Reuse existing constructions and state only the missing interface between them."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.uliftFunctor",
+   "results": "12 hits, including uliftFunctor, fullyFaithfulUliftFunctor, exactness, additivity and preservation of projective objects. No derived constant scalar comparison.",
+   "date": "2026-10-27",
+   "verdict": "No exact comparison. Reuse existing constructions and state only the missing interface between them."
+  },
+  {
+   "tool": "grep",
+   "query": "constantRealizationDerivedScalarExtension|completedAdicNormalizationOnModel",
+   "results": "Existing ConstantRealizationDerivedScalarExtension supplies the common coefficient-universe comparison. CompletedAdicCoefficientDatum supplies ordinary balancing. Neither directly identifies finiteModelConstantComplex with the algebraic functor L in its smaller module universe. Blueprint scalar extension search: 72 matches, none this universe/representative bridge.",
+   "date": "2026-10-27",
+   "verdict": "No exact comparison. Reuse existing constructions and state only the missing interface between them."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteQuotientModelResidueComparison",
+  "date": "2026-10-27",
+  "group": "K6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Integral lattice argument: compatibility of finite derived reductions with constant realization and restriction, through the residue-perfect local lifting subargument.",
+   "via": [
+    "lem-weil-pbc-finite-quotient-model-residue-comparison",
+    "lem-weil-pbc-finite-quotient-model-residue-projective",
+    "lem-weil-pbc-residue-perfect-finite-quotient-models",
+    "lem-weil-pbc-residue-lisse-perfect-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteModelDerivedScalarComparison",
+  "file": "lean/Sheaf/Paper/FiniteModelDerivedScalarComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteModel_derivedScalarComparison",
+  "statement": "theorem finiteModel_derivedScalarComparison\n    (X : Scheme.{t}) {B C D : Type t} [CommRing B] [CommRing C] [CommRing D]\n    (q : B →+* C) (ρ : C ≃+* D)\n    [(koszulConstantFunctor X B).PreservesZeroMorphisms]\n    [(koszulConstantFunctor X D).PreservesZeroMorphisms]\n    (P : CochainComplex (ModuleCat.{t} B) ℤ)\n    (L : DerivedCategory (ModuleCat.{t} B) ⥤ DerivedCategory (ModuleCat.{t} C))\n    (ε : DerivedCategory.Qh ⋙ L ⟶\n      @Functor.mapHomotopyCategory _ _ _ _ _ _ _ (ModuleCat.extendScalars q)\n        (ModuleCat.extendRestrictScalarsAdj q).left_adjoint_additive\n        (.up ℤ) ⋙ DerivedCategory.Qh)\n    (hL : L.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso _ (.up ℤ))) :\n    let K := ((ModuleCat.restrictScalars.{t} ρ.symm.toRingHom).mapHomologicalComplex\n      (.up ℤ)).obj (DerivedCategory.Q.objPreimage (L.obj (DerivedCategory.Q.obj P)))\n    Nonempty\n      ((completedAdicDerivedChange X (adicConstantMap X (ρ.toRingHom.comp q))).obj\n          (DerivedCategory.Q.obj (finiteModelConstantComplex X B P)) ≅\n        DerivedCategory.Q.obj (finiteModelConstantComplex X D K))",
+  "branch": "sheaf-dag",
+  "by": "K6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261027T112406-L-1578342",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261027T112406-L-1578342",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

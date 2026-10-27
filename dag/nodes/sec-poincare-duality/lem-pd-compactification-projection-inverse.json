@@ -1,0 +1,243 @@
+{
+ "id": "lem-pd-compactification-projection-inverse",
+ "kind": "statement",
+ "title": "Canonical compactification projection: normalization, inverse and restriction",
+ "statement": "Fix a prime $\\ell$ and a field $k$ of characteristic $p>0$ with $p\\ne\\ell$. Let $f:X\\to Y$ be a morphism of separated finite-type $k$-schemes, and choose a compactification $c=(X\\xrightarrow{j}Z\\xrightarrow{q}Y)$ with $j$ open, $q$ proper and $f=qj$, with $Z$ also separated of finite type over $k$ [sk-def-sfb-dc-setting]. Put $\\Lambda=\\mathrm{Profinite.padicAlgClRingObj}(\\ell)$, the finite-subextension-valued condensed algebraic closure [sk-def-sfb-qlbar-condensed], and $\\mathcal C_T=D_{\\mathrm{cons}}(T,\\Lambda)$ with exactly the bounded-constructible internal-module predicate of [sk-def-sfb-bounded-constructible]. Use the restricted functors and relative derived tensors of [sk-def-sfb-dc-restricted-functors], $F_c=Rq_*j_!$ of [sk-def-sfb-dc-lower-shriek], and the specified composition isomorphism $a:Lj^*Lq^*\\xrightarrow{\\sim}Lf^*$ of [def-sfb-dc-upper-star-comp]. The restricted adjunctions and all tensor maps below are the restrictions of the actual ambient module-object structures.\nFor $K\\in\\mathcal C_X$ and $B\\in\\mathcal C_Y$, put $A=j_!K$. Let $\\alpha_{A,B}:Rq_*A\\otimes B\\to Rq_*(A\\otimes Lq^*B)$ be the adjoint under $Lq^*\\dashv Rq_*$ of the actual oplax map $\\delta_q$ followed by $\\varepsilon_A\\otimes1$, where $\\varepsilon$ is this adjunction's counit. Let $\\eta,\\varepsilon^j$ be the unit and counit of $j_!\\dashv Lj^*$ [def-sfb-dc-open-lower-shriek-adjunction], and let $\\mu_j$ be the actual lax pullback tensor map, inverse to $\\delta_j$. For $N\\in\\mathcal C_Z$ define\n$$Q_{K,N}=\\varepsilon^j_{j_!K\\otimes N}\\circ j_!(\\mu_{j,j_!K,N})\\circ j_!(\\eta_K\\otimes1):j_!(K\\otimes Lj^*N)\\longrightarrow j_!K\\otimes N.$$\nUnder the specified section-module equivalences $D(E_T)$ of [lem-pd-module-ringed-topos-derived-comparison], $\\alpha$ is the canonical ringed-topos projection arrow of [lem-weil-pbc-ringed-projection-mate-exact], and $Q$ is the ringed open projection with precisely these unit, lax tensor and counit maps. Both $\\alpha_{A,B}$ and $Q_{K,N}$ are invertible. Define\n$$P^c_{K,B}=Rq_*j_!(1_K\\otimes a_B)\\circ Rq_*(Q_{K,Lq^*B}^{-1})\\circ\\alpha_{A,B}:F_cK\\otimes B\\longrightarrow F_c(K\\otimes Lf^*B).$$\nThis specified composite is invertible in $\\mathcal C_Y$, with two-sided inverse\n$$R^c_{K,B}=\\alpha_{A,B}^{-1}\\circ Rq_*(Q_{K,Lq^*B})\\circ Rq_*j_!(1_K\\otimes a_B^{-1}).$$\nIn particular $R^c_{K,B}P^c_{K,B}=1$ and $P^c_{K,B}R^c_{K,B}=1$. For every $h:B\\to B'$ in $\\mathcal C_Y$ it satisfies\n$$P^c_{K,B'}\\circ(1_{F_cK}\\otimes h)=F_c(1_K\\otimes Lf^*h)\\circ P^c_{K,B}.$$\nAt the chosen compactification $c_f$ this is exactly the component of the target's $\\mathrm{boundedConstructibleExceptionalProjection}$, including its ambient inclusion and composition comparison. No identification with a common finite coefficient-stage category is part of this assertion.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
+  "place": "Open immersions and Derived version, combined with the specified proper and open comparison maps; canonical-map equality delegated to lem-pd-module-ringed-topos-derived-comparison"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-bounded-constructible",
+  "sk-def-sfb-dc-restricted-functors",
+  "sk-def-sfb-dc-lower-shriek",
+  "def-sfb-dc-upper-star-comp",
+  "def-sfb-dc-open-lower-shriek-adjunction",
+  "lem-pd-module-ringed-topos-derived-comparison",
+  "lem-weil-pbc-ringed-projection-mate-exact"
+ ],
+ "proof": [
+  {
+   "text": "By [sk-def-sfb-dc-restricted-functors], the tensors, functors and adjunctions here are restrictions along full inclusions. Apply [lem-pd-module-ringed-topos-derived-comparison] to $q$ and $j$: it identifies the actual oplax map and proper counit, hence their adjoint $\\alpha$, with the specified ringed projection mate; for $j$ it identifies extension by zero, its unit, counit and actual lax map. Applying these identifications to the three factors defining $Q$ gives exactly the ringed open projection composite. This verifies equality of the specified arrows, rather than merely identifying their endpoints.",
+   "uses": [
+    "sk-def-sfb-dc-restricted-functors",
+    "lem-pd-module-ringed-topos-derived-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
+    "place": "Open immersions and Derived version, combined with the specified proper and open comparison maps; canonical-map equality delegated to lem-pd-module-ringed-topos-derived-comparison"
+   }
+  },
+  {
+   "text": "The coefficient $\\Lambda$ is the algebraic-closure case of [lem-pd-condensed-proper-projection-formula]. Apply that statement to $f=qj$, its given compactification and $K,B$: its $A=Di_!K$ is our $j_!K$, and its adjoint-defined arrow is exactly $\\alpha_{A,B}$, so $\\alpha$ is invertible. Apply [lem-pd-condensed-open-exceptional-projection-formula] with $U=X$, ambient scheme $Z$, and arbitrary $N\\in\\mathcal C_Z$. Its displayed $q_{j,K,N}$ is term for term our $Q_{K,N}$, and it is an isomorphism in the restricted category. All schemes remain separated finite type over $k$, as required.",
+   "uses": [
+    "lem-pd-condensed-proper-projection-formula",
+    "lem-pd-condensed-open-exceptional-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
+    "place": "Open immersions and Derived version, combined with the specified proper and open comparison maps; canonical-map equality delegated to lem-pd-module-ringed-topos-derived-comparison"
+   }
+  },
+  {
+   "text": "Set $s_B=Rq_*j_!(1_K\\otimes a_B)$ and $t_B=Rq_*(Q_{K,Lq^*B})$. The specified natural comparison [def-sfb-dc-upper-star-comp] makes $s_B$ invertible, with inverse $Rq_*j_!(1_K\\otimes a_B^{-1})$. Functoriality gives $t_B^{-1}=Rq_*(Q_{K,Lq^*B}^{-1})$. Thus $P_B=s_Bt_B^{-1}\\alpha_B$ and the claimed $R_B=\\alpha_B^{-1}t_Bs_B^{-1}$. Associativity and cancellation give $R_BP_B=\\alpha_B^{-1}t_Bt_B^{-1}\\alpha_B=1$ and $P_BR_B=s_Bt_B^{-1}t_Bs_B^{-1}=1$. These equations hold inside the full subcategory because its morphisms and composition are inherited.",
+   "uses": [
+    "def-sfb-dc-upper-star-comp",
+    "sk-def-sfb-bounded-constructible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
+    "place": "Open immersions and Derived version, combined with the specified proper and open comparison maps; canonical-map equality delegated to lem-pd-module-ringed-topos-derived-comparison"
+   }
+  },
+  {
+   "text": "For $h:B\\to B'$, write $u=1_{F_cK}\\otimes h$, $v=Rq_*(1_A\\otimes Lq^*h)$, $w=Rq_*j_!(1_K\\otimes Lj^*Lq^*h)$ and $z=F_c(1_K\\otimes Lf^*h)$. Naturality of the ringed mate [lem-weil-pbc-ringed-projection-mate-exact], identified in Step 1, says $\\alpha_{B'}u=v\\alpha_B$. Naturality of the precise open comparison [lem-pd-condensed-open-exceptional-projection-formula] says $t_{B'}w=vt_B$; multiplying by the inverses gives $t_{B'}^{-1}v=wt_B^{-1}$. Naturality of $a$ [def-sfb-dc-upper-star-comp] says $s_{B'}w=zs_B$. Substitution yields $P_{B'}u=s_{B'}t_{B'}^{-1}v\\alpha_B=s_{B'}wt_B^{-1}\\alpha_B=zP_B$, the required equation.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-pd-condensed-open-exceptional-projection-formula",
+    "def-sfb-dc-upper-star-comp"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
+    "place": "Open immersions and Derived version, combined with the specified proper and open comparison maps; canonical-map equality delegated to lem-pd-module-ringed-topos-derived-comparison"
+   }
+  },
+  {
+   "text": "At $c=c_f$, [sk-def-sfb-dc-lower-shriek] defines $F_c$ to be the chosen lower shriek, with its ambient inclusion. Unfold the upstream definitions in WeilConjectures/PoincareDuality/ProjectionFormula.lean: exceptionalProjectionMorphismOfCompactification (lines 602–611) is $\\alpha$ followed by $Rq_*(Q^{-1}\\circ j_!(1\\otimes a))$; the inverse component of leftDerivedUpperStarCompactificationIso is exactly $a$. Functoriality separates its last two factors to give $P^{c_f}$. boundedConstructibleExceptionalProjectionMorphism (lines 674–680) wraps that same ambient morphism with ObjectProperty.homMk, and boundedConstructibleExceptionalProjection (lines 750–759) uses precisely those components. Faithfulness of the full inclusion therefore gives the asserted component equality, including the composition comparison; no coefficient-stage identification enters this calculation.",
+   "uses": [
+    "sk-def-sfb-dc-lower-shriek",
+    "def-sfb-dc-upper-star-comp"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
+    "place": "Open immersions and Derived version, combined with the specified proper and open comparison maps; canonical-map equality delegated to lem-pd-module-ringed-topos-derived-comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-dc-upper-star-comp",
+  "lem-pd-condensed-open-exceptional-projection-formula",
+  "lem-pd-condensed-proper-projection-formula",
+  "lem-pd-module-ringed-topos-derived-comparison",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "sk-def-sfb-bounded-constructible",
+  "sk-def-sfb-dc-lower-shriek",
+  "sk-def-sfb-dc-restricted-functors"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
+  "place": "Open immersions and Derived version; assembly of existing proper/open canonical-map statements; final definition check in lean/WeilConjectures/PoincareDuality/ProjectionFormula.lean:590–611,674–680,750–765"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For bounded constructible condensed module sheaves the exceptional projection map from a compactification has inverse given by the proper projection inverse and the open projection comparison",
+   "results": "{\"n_hits\": 8, \"top\": [\"Condensed.isoLocallyConstantOfIsColimit_inv\", \"LightCondensed.isoLocallyConstantOfIsColimit_inv\", \"lightProfiniteToLightCondSetIsoTopCatToLightCondSet_inv_app_val_app_hom_hom\", \"LightCondensed.ihomPoints_symm_comp\", \"lightProfiniteToLightCondSetIsoTopCatToLightCondSet\", \"CondensedMod.IsSolid.isIso_solidification_map\", \"Condensed.isoLocallyConstantOfIsColimit\", \"LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor\"], \"note\": \"\", \"digest\": \"919cf8f980255d0a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction equivalences or condensed point results do not state the specified compactification projection, ringed normalization and its inverse"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The specified projection formula for proper pushforward and extension by zero compose to an invertible natural exceptional projection map with explicit inverse",
+   "results": "{\"n_hits\": 8, \"top\": [\"Profinite.NobelingProof.iso_map\", \"Profinite.NobelingProof.coe_πs'\", \"Profinite.NobelingProof.πs'_apply_apply\", \"Profinite.NobelingProof.GoodProducts.smaller_factorization\", \"Profinite.NobelingProof.projRestricts_eq_comp\", \"Profinite.NobelingProof.coe_πs\", \"Profinite.NobelingProof.ProjRestricts\", \"Profinite.NobelingProof.πs'\"], \"note\": \"\", \"digest\": \"c09e3a90a98731ae\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction equivalences or condensed point results do not state the specified compactification projection, ringed normalization and its inverse"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.IsIso",
+   "results": "{\"n_hits\": 12, \"top\": [\"CategoryTheory.Adjunction.toEquivalence\", \"CategoryTheory.Adjunction.toEquivalence_functor\", \"CategoryTheory.Adjunction.toEquivalence_inverse\", \"CategoryTheory.Adjunction.toEquivalence_counitIso_hom_app\", \"CategoryTheory.Adjunction.toEquivalence_unitIso_hom_app\", \"CategoryTheory.Adjunction.toEquivalence_counitIso_inv_app\", \"CategoryTheory.Adjunction.toEquivalence_unitIso_inv_app\", \"CategoryTheory.Adjunction.fullyFaithfulLOfIsIsoUnit\"], \"note\": \"\", \"digest\": \"d8bcc4f09265b2a4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction equivalences or condensed point results do not state the specified compactification projection, ringed normalization and its inverse"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptionalProjection|properProjectionMorphism|openImmersionProjectionComparison",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction equivalences or condensed point results do not state the specified compactification projection, ringed normalization and its inverse"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived exceptional projection formula for compactification of a separated morphism with condensed coefficients",
+   "results": "{\"n_hits\": 8, \"top\": [\"AlgebraicGeometry.IsProper.toIsSeparated\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.IsSeparated.instQuasiSeparated\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsSeparatedTopMorphismProperty\", \"AlgebraicGeometry.Proj.isSeparated\", \"AlgebraicGeometry.IsSeparated.instFstScheme\", \"Condensed.epi_iff_locallySurjective_on_compHaus\", \"AlgebraicGeometry.IsSeparated.stableUnderComposition\"], \"note\": \"\", \"digest\": \"26dfb4b32918883a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction equivalences or condensed point results do not state the specified compactification projection, ringed normalization and its inverse"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptionalProjection|properProjectionMorphism|openImmersionProjectionComparison",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern condensed embeddings, projectivity, topological compactifications or abstract adjunction equivalences; none states this geometric canonical projection composite"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical compactification projection formula with inverse for bounded constructible condensed module objects",
+   "results": "{\"n_hits\": 8, \"top\": [\"CondensedSet.compactlyGeneratedAdjunction\", \"profiniteToCondensed\", \"CondensedSet.fullyFaithfulCompactlyGeneratedToCondensedSet\", \"Profinite.presentation.\\u03c0\", \"CondensedSet.compactlyGeneratedAdjunctionCounitHomeo\", \"CondensedMod.ofSheafCompHaus\", \"CondensedMod.IsSolid.isIso_solidification_map\", \"compHausToCondensed\"], \"note\": \"\", \"digest\": \"09fbf80042bfb161\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern condensed embeddings, projectivity, topological compactifications or abstract adjunction equivalences; none states this geometric canonical projection composite"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.IsIso",
+   "results": "{\"n_hits\": 12, \"top\": [\"CategoryTheory.Adjunction.toEquivalence\", \"CategoryTheory.Adjunction.toEquivalence_functor\", \"CategoryTheory.Adjunction.toEquivalence_inverse\", \"CategoryTheory.Adjunction.toEquivalence_counitIso_hom_app\", \"CategoryTheory.Adjunction.toEquivalence_unitIso_hom_app\", \"CategoryTheory.Adjunction.toEquivalence_counitIso_inv_app\", \"CategoryTheory.Adjunction.toEquivalence_unitIso_inv_app\", \"CategoryTheory.Adjunction.fullyFaithfulLOfIsIsoUnit\"], \"note\": \"\", \"digest\": \"d8bcc4f09265b2a4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern condensed embeddings, projectivity, topological compactifications or abstract adjunction equivalences; none states this geometric canonical projection composite"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical projection formula for a compactification is the composite of proper projection and inverse extension by zero projection, with explicit inverse",
+   "results": "{\"n_hits\": 8, \"top\": [\"preStoneCechExtend_extends\", \"stoneCechExtend_extends\", \"preStoneCechExtend_preStoneCechUnit\", \"stoneCechExtend_stoneCechUnit\", \"BoundedContinuousFunction.extend_comp\", \"OnePoint.map_some\", \"stoneCechExtend\", \"preStoneCechExtend\"], \"note\": \"\", \"digest\": \"79070a3b71fe8b04\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern condensed embeddings, projectivity, topological compactifications or abstract adjunction equivalences; none states this geometric canonical projection composite"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper derived pushforward and open immersion extension by zero satisfy a natural tensor projection isomorphism on bounded constructible condensed modules",
+   "results": "{\"n_hits\": 8, \"top\": [\"LightCondensed.internallyProjective_iff_tensor_condition'\", \"LightCondensed.internallyProjective_iff_tensor_condition\", \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"PresheafOfModules.pushforward\\u2080CompToPresheaf\"], \"note\": \"\", \"digest\": \"2f8f46f6c5a4528f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern condensed embeddings, projectivity, topological compactifications or abstract adjunction equivalences; none states this geometric canonical projection composite"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "nt-target-poincare-isiso",
+  "date": "2026-10-22",
+  "group": "Q59"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Tensor-Hom proof used by sk-thm-sf-verdier-exchange, projection-formula input; creating item former Step 2: actual compactification factors, inverse and naturality. The ancestor command returns None for the seeded target.",
+   "via": [
+    "nt-target-poincare-isiso"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pd-compactification-projection-inverse",
+  "worker": "stage1",
+  "summary": "Reused the existing precise proper/open projection theorems and module/ringed comparison. Wrote inverse cancellation, explicit naturality squares and upstream component definition check. Statement and statement dependencies unchanged; no new nodes.",
+  "blueprint": "The seeded target has no imported blueprint ancestor (ancestor command: None). Realizes the projection input to the tensor–Hom route of sk-thm-sf-verdier-exchange; open comparison follows det-lem-int-tensor-projection, Open immersions and Derived version.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic canonical ringed-topos projection mate naturality, used only after the existing module/ringed comparison; does not replace the tensor–Hom route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-projection-mate-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q95-aa5133528",
+  "group": "Q95",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-aa5133528 (reviewer sub-agent of L); spot-checked: I read the item, all of its 5 steps and every cited statement: module-ringed comparison, proper and open projection nodes, ringed projection mate, upper-star-comp, dc-lower-shriek, restricted functors, open-lower-shriek adjunction, qlbar, bounded-constructible and dc-setting. I also read the blueprint source det-lem-int-tensor-projection.proof.md (main-20261015), unit sk-thm-sf-verdier-exchange, and lean/WeilConjectures/PoincareDuality/ProjectionFormula.lean lines 279, 326, 594–611, 674–680 and 750–759. Statement, stmt_deps and blueprint are byte-identical to the Q59-delivered item; only the proof fields and split_report are added. There are no new nodes. Λ = padicAlgClRingObj is the algebraicClosure case of IsEllAdicFinitenessCoefficient, which covers the proper node's Q̄_ℓ. Its α ('adjoint of actual oplax then ε_A⊗1', A=Di_!K) and the open node's q = ε∘e(μ)∘e(η⊗1) for all K,L, natural, with the restricted Q̄_ℓ case, match the item's α and Q term for term, with N=Lq^*B ∈ C_Z. In Lean, a is leftDerivedUpperStarCompactificationIso.inv; exceptionalProjectionMorphismOfCompactification = α≫Rq_*(Q⁻¹≫j_!(K◁a)), and the bounded version is its homMk, so Step 5 is a genuine definition check. I recomputed the inverse cancellation (Step 3) and the three naturality squares (Step 4). Edge cases j=q=id, X=∅, K=0 and B=0 hold. No duplicates: the Weil-category, ringed site-perfect, finite-Λ and adic projection nodes live in other categories. No SGA source is used. proof_deps equals the union of the step uses. I accept the declared tool use of lem-weil-pbc-ringed-projection-mate-exact for generic mate naturality; it is already a stmt_dep and replaces no route step. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompactificationProjectionInverse",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.compactification_projection_inverse",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.compactificationProjectionPullbackIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.compactification_projection_inverseClauses",
+   "AlgebraicGeometry.ProEtale.CondensedRing.compactification_projection_ambient_normalizationClauses",
+   "AlgebraicGeometry.ProEtale.CondensedRing.compactification_projection_proper_normalizationClauses",
+   "AlgebraicGeometry.ProEtale.CondensedRing.compactification_projection_open_normalizationClauses",
+   "AlgebraicGeometry.ProEtale.CondensedRing.compactification_projection_inverse"
+  ],
+  "file": "lean/Sheaf/Paper/CompactificationProjectionInverse.lean",
+  "statement": "theorem compactification_projection_inverse [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1, u + 1, u + 2} (ModuleRingedComparison.modules.{u} (Profinite.padicAlgClRingObj.{u} ℓ) T)] (K : ProEtale.BoundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)) : compactification_projection_inverseClauses (Profinite.padicAlgClRingObj ℓ) ℓ c K ∧ (∀ (B : ProEtale.BoundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y.left)) (N : ProEtale.BoundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) c.Z)), compactification_projection_ambient_normalizationClauses (Profinite.padicAlgClRingObj ℓ) ℓ c K B N) ∧ (∀ B : ProEtale.BoundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y.left), compactification_projection_proper_normalizationClauses (Profinite.padicAlgClRingObj.{u} ℓ) c.g ((D((c.i)_!open⟦Profinite.padicAlgClRingObj ℓ⟧)).obj K.obj) B.obj) ∧ (∀ N : ProEtale.BoundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) c.Z), compactification_projection_open_normalizationClauses (Profinite.padicAlgClRingObj.{u} ℓ) c.i K.obj N.obj)",
+  "branch": "sheaf-dag",
+  "by": "Q38",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The main theorem specializes the complete clauses to the specified finite-subextension-valued algebraic-closure coefficient. The auxiliary predicates spell out the fixed forward and reverse composites, both inverse identities, all second-variable naturality maps, chosen-compactification component equality, the ambient restrictions and both section-module ringed normalization squares. HasDerivedCategory is the existing section-module derived-realization choice, with its actual universes; no finite coefficient-stage identification is used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7645c476f",
+  "group": "Q38",
+  "result": "pass",
+  "note": "Read item node, report (Worker report + Second reading by Q38 present), module, all 9 stmt_deps and the side-live sources: BoundedConstructible.lean (restricted adjunctions = restrictFullyFaithful of the same ambient adjunctions; UpperStarComp = restriction of leftDerivedUpperStarComp), PoincareDuality/ProjectionFormula.lean (exceptionalProjectionMorphismOfCompactification l.592, bounded homMk l.664/740), ModuleRingedToposDerivedComparison.lean (internalProjection/internalOpenProjection/projection_comparison/openProjection_comparison). alpha.hom and Q.hom pinned to the restricted projectionMorphism/projectionComparison, Q for all N; P.hom and P.inv pinned to the node's composites with both identities; naturality for all h; at c=compactificationOverField f an HEq with the upstream component, true and non-vacuous; ambient + ringed normalization clauses. Hypotheses, Λ=padicAlgClRingObj and universes match; edge cases (empty schemes, zero objects, identity j or q) covered; lean.statement verbatim; statement/stmt_deps unchanged; no hollow def; only sorry. Advisory: boundedConstructibleExceptionalProjection has no owner node (target declaration, cycle); normalization clauses copy the dep theorems, but the node delegates that sentence and the item-specific link is stated separately; the HasDerivedCategory binder scopes the whole theorem (dep convention); snake_case clause def names; second reading is a self-reread. No compile (no file changed)."
+ }
+}

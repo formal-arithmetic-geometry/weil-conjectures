@@ -1,0 +1,272 @@
+{
+ "id": "lem-sfb-space-proper-support-below-coherent-image",
+ "kind": "statement",
+ "title": "Bounded-below coherent direct image with proper supports on algebraic spaces",
+ "statement": "Let $Y$ be a Noetherian scheme [def-pc-scheme], meaning quasi-compact, quasi-separated and locally Noetherian [pqf-def-locnoeth, def-weil-pbc-noetherian-ring]; quasi-compact means every open cover has a finite subcover and quasi-separated means the diagonal is quasi-compact. Let $X$ be an algebraic space over $Y$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention], and let $f:X\\to Y$ be its structure morphism. Assume $f$ is locally of finite type on etale scheme charts [def-weil-finite-type-morphism]. Use module sheaves on the small etale ringed sites [def-weil-sheaf-of-modules-category] and their unbounded derived categories [def-weil-abstract-derived-category]. Coherent means quasi-coherent [def-trf-space-quasi-coherent-module] and, on Noetherian affine etale charts $\\operatorname{Spec}R$, associated to a finitely generated $R$-module, whose associated sheaf has value $B\\otimes_R M$ on affine etale charts $\\operatorname{Spec}B\\to\\operatorname{Spec}R$ [def-weil-finitely-generated-module]. Let $G\\in D(\\mathcal O_X)$ have coherent cohomology, zero in all sufficiently negative degrees. For every integer $q$, assume its support $\\operatorname{Supp}_X\\mathcal H^q(G)$ [def-sfb-space-module-support] is a closed subset whose reduced induced closed subspace is proper over $Y$. Here a reduced induced closed subspace is the closed subspace with that point set and reduced etale charts, and proper means separated, of finite type and universally closed [def-sfb-space-morphism-properties]. Write $Rf_*$ for the total right derived functor [def-sfb-right-derived-functor] of canonical module direct image [def-trf-space-etale-module-functors], computed with K-injective resolutions [def-pur-kinjective-complex]. Then $Rf_*G$ has coherent cohomology and its cohomology vanishes in all sufficiently negative degrees. No properness, separatedness or quasi-compactness of $f$, and no upper bound on $G$, is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0D0R (lemma-direct-image-coherent-bdd-below), with the auxiliary base scheme S=Y; unlike the proper-morphism specialization, supports alone are proper."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-noetherian-ring",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-finite-type-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-finitely-generated-module",
+  "def-sfb-space-module-support",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-right-derived-functor",
+  "def-trf-space-etale-module-functors",
+  "def-pur-kinjective-complex",
+  "def-sfb-space-derived-module-calculus",
+  "def-trf-scheme-algebraic-space",
+  "def-pc-reduced-scheme",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "Work on the small site skeletons prescribed by [def-weil-size-convention]. Their structure sheaves are commutative ring sheaves, so [lem-pur-ringed-site-grothendieck-abelian] makes both categories of module sheaves Grothendieck abelian. The smallness hypothesis is satisfied in the enlarged universe in which the module and derived categories are formed; no smallness or quasi-compactness of the underlying space is being inferred.",
+   "uses": [
+    "def-weil-size-convention",
+    "lem-pur-ringed-site-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section 07A5 (section-unbounded), first paragraph: module sheaves on a ringed site are Grothendieck abelian"
+   }
+  },
+  {
+   "text": "The canonical module functor $f_*$ is additive and left exact directly from [def-trf-space-etale-module-functors]. Indeed its sections at $V$ are compatible families of chart sections; addition and the induced maps are componentwise. By the sectionwise kernel formula of [def-weil-sheaf-of-modules-category], a family is killed by $f_*u$ exactly when every chart component lies in $\\ker u$. These are precisely the compatible families defining $f_*(\\ker u)$. The terminal zero family is preserved as well. Thus the kernel and zero-object tests for left exactness hold. On bounded below inputs, the functor $Rf_*$ of [def-sfb-right-derived-functor] is the same right derived functor used in the two abstract lemmas below: choose the same K-injective resolution on either side and both give its degreewise direct image.",
+   "uses": [
+    "def-trf-space-etale-module-functors",
+    "def-weil-sheaf-of-modules-category",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0D0R (lemma-direct-image-coherent-bdd-below), setup of the truncation proof; canonical module direct image and K-injective convention"
+   }
+  },
+  {
+   "text": "Choose $b\\in\\mathbf Z$ such that $\\mathcal H^j(G)=0$ for $j<b$. Apply [lem-weil-pbc-derived-functor-negative-vanishing] to $v=f_*$, the module categories verified above, and this lower bound. It gives $\\mathcal H^j(Rf_*G)=0$ for every $j<b$. This bound is fixed once for $G$ and does not depend on a truncation degree.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-negative-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TC (lemma-negative-vanishing), part (1), used in the Tag 0D0R truncation argument"
+   }
+  },
+  {
+   "text": "Fix any integer $n\\ge b$ and put $G_n=\\tau_{\\le n}G$ using [def-sbc-standard-tstructure-derived-category]. Its cohomology is $\\mathcal H^q(G)$ for $q\\le n$ and zero for $q>n$; hence it is zero outside $[b,n]$. The nonzero cohomology sheaves have the original coherent modules and proper supports. The zero sheaves are coherent and have empty support, whose reduced closed subspace is empty and proper over $Y$. Thus [lem-sfb-space-proper-support-bounded-coherent-image] applies with auxiliary scheme $S=Y$ and $E=G_n$: the morphism is locally of finite type, the target is Noetherian, and every cohomology support is proper over the target. It follows that $Rf_*G_n$ has coherent cohomology. This application requires no quasi-compactness, separatedness or properness of $f$.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-sfb-space-proper-support-bounded-coherent-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0D0R (lemma-direct-image-coherent-bdd-below), second proof: apply Tag 08GK (lemma-direct-image-coherent) to a bounded truncation"
+   }
+  },
+  {
+   "text": "For the canonical map $c_n:G_n\\to G$, apply the final clause of [lem-weil-pbc-derived-functor-truncation-iso] with $v=f_*$. Both inputs are bounded below by $b$; more explicitly $\\mathcal H^i(c_n)$ is an isomorphism for $i\\le n$ and its map in degree $n+1$ is $0\\to\\mathcal H^{n+1}(G)$, a monomorphism. The lemma therefore gives $\\mathcal H^n(Rf_*G_n)\\xrightarrow{\\sim}\\mathcal H^n(Rf_*G)$. Coherence is unchanged under an isomorphism, since on each affine etale chart it is the property of being associated to a finite module. Step 4 proves coherence of the left side, so the right side is coherent. This handles every $n\\ge b$; all degrees below $b$ are zero by step 3 and hence coherent. Together with that fixed lower bound, this proves the assertion.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-truncation-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0D0R (lemma-direct-image-coherent-bdd-below), truncation-triangle proof, using derived.tex Tag 05TC (lemma-negative-vanishing), part (2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "def-trf-space-etale-module-functors",
+  "def-weil-sheaf-of-modules-category",
+  "def-sfb-right-derived-functor",
+  "lem-weil-pbc-derived-functor-negative-vanishing",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-sfb-space-proper-support-bounded-coherent-image",
+  "lem-weil-pbc-derived-functor-truncation-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0D0R (lemma-direct-image-coherent-bdd-below), second proof by bounded truncations, with auxiliary base S=Y; derived.tex Tag 05TC for the cohomology comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "proper.*support|support.*proper|coherent.*[Pp]ush|coherent.*[Dd]irect",
+   "results": "OK 3 hits: Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Morphisms/Basic.lean; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme local-Noetherianity, abstract derived truncation and coherent Grothendieck topologies do not state coherence of proper-support algebraic-space derived images. The grep hits concern ordinary affine quasi-coherent pushforward only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image of bounded below coherent complex with proper cohomology supports is coherent",
+   "results": "OK 8 hits: DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.exists_iso_Q_obj_of_isGE, CochainComplex.isStrictlyGE_of_iso, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.TStructure.t, CochainComplex.isStrictlyGE_of_ge",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme local-Noetherianity, abstract derived truncation and coherent Grothendieck topologies do not state coherence of proper-support algebraic-space derived images. The grep hits concern ordinary affine quasi-coherent pushforward only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coherent\", \"directImage\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme local-Noetherianity, abstract derived truncation and coherent Grothendieck topologies do not state coherence of proper-support algebraic-space derived images. The grep hits concern ordinary affine quasi-coherent pushforward only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct image of coherent complexes supported on proper closed subspaces is coherent without properness of ambient map",
+   "results": "OK 8 hits: CategoryTheory.Presheaf.isSheaf_coherent_of_projective_comp, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfForallEffectiveEpiHasPullbackOfPreservesFiniteLimits, CategoryTheory.Presheaf.isSheaf_coherent_of_projective_of_comp, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, CategoryTheory.Functor.sheafPushforwardCocontinuous, TopCat.Sheaf.pushforward_sheaf_of_sheaf, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme local-Noetherianity, abstract derived truncation and coherent Grothendieck topologies do not state coherence of proper-support algebraic-space derived images. The grep hits concern ordinary affine quasi-coherent pushforward only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally finite type algebraic space to a Noetherian base derived pushforward preserves bounded below coherent cohomology with proper supports",
+   "results": "OK 8 hits: AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian, AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType, AlgebraicGeometry.quasiCompact_of_noetherianSpace_source, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType, AlgebraicGeometry.locallyOfFiniteType_of_comp, AlgebraicGeometry.isNoetherian_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme local-Noetherianity, abstract derived truncation and coherent Grothendieck topologies do not state coherence of proper-support algebraic-space derived images. The grep hits concern ordinary affine quasi-coherent pushforward only."
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*support|support.*proper|coherent.*directImage|coherent.*pushforward",
+   "results": "{\"t\": \"2026-10-23T21:00:30Z\", \"tool\": \"grep\", \"query\": \"proper.*support|support.*proper|coherent.*directImage|coherent.*pushforward\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\"], \"digest\": \"a389cdfee9418dbf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the hits; abstract t-structure bounds and underived scheme/module pushforwards do not assert coherent higher direct images with proper supports for algebraic spaces. Read Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean:180 and Mathlib/AlgebraicGeometry/Modules/Tilde.lean:567-587; these are not the stated theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coherent\", \"directImage\"",
+   "results": "{\"t\": \"2026-10-23T21:00:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"coherent\\\", \\\"directImage\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the hits; abstract t-structure bounds and underived scheme/module pushforwards do not assert coherent higher direct images with proper supports for algebraic spaces. Read Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean:180 and Mathlib/AlgebraicGeometry/Modules/Tilde.lean:567-587; these are not the stated theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image of a bounded below coherent complex on an algebraic space with proper cohomology supports has bounded below coherent cohomology",
+   "results": "{\"t\": \"2026-10-23T21:00:35Z\", \"tool\": \"leanfinder\", \"query\": \"Derived direct image of a bounded below coherent complex on an algebraic space with proper cohomology supports has bounded below coherent cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.instIsGEObjSingleFunctor\", \"DerivedCategory.IsGE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"DerivedCategory.instIsLEObjSingleFunctor\"], \"digest\": \"2f05c0766df0ef00\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the hits; abstract t-structure bounds and underived scheme/module pushforwards do not assert coherent higher direct images with proper supports for algebraic spaces. Read Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean:180 and Mathlib/AlgebraicGeometry/Modules/Tilde.lean:567-587; these are not the stated theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pushforward preserves bounded below coherent cohomology for complexes with proper supports",
+   "results": "{\"t\": \"2026-10-23T21:01:17Z\", \"tool\": \"leansearch\", \"query\": \"Derived pushforward preserves bounded below coherent cohomology for complexes with proper supports\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf.pushforward\", \"TopCat.Sheaf.pushforward_sheaf_of_sheaf\", \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"SheafOfModules.pushforward\", \"PresheafOfModules.pushforward₀\", \"AlgebraicGeometry.Scheme.Modules.instAdditivePushforward\", \"SheafOfModules.instIsRightAdjointPushforward\", \"SheafOfModules.pushforward_assoc\"], \"digest\": \"b263183d1d0cba80\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the hits; abstract t-structure bounds and underived scheme/module pushforwards do not assert coherent higher direct images with proper supports for algebraic spaces. Read Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean:180 and Mathlib/AlgebraicGeometry/Modules/Tilde.lean:567-587; these are not the stated theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pushforward along a locally finite type algebraic space morphism to a Noetherian scheme preserves coherent cohomology for bounded below complexes supported properly over the target",
+   "results": "{\"t\": \"2026-10-23T21:01:18Z\", \"tool\": \"leanfinder\", \"query\": \"Pushforward along a locally finite type algebraic space morphism to a Noetherian scheme preserves coherent cohomology for bounded below complexes supported properly over the target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"AlgebraicGeometry.Scheme.Modules.instAdditivePushforward\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"SheafOfModules.pushforward_assoc\", \"SheafOfModules.pushforward_obj_val\"], \"digest\": \"a8b526ec92e6e88b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the hits; abstract t-structure bounds and underived scheme/module pushforwards do not assert coherent higher direct images with proper supports for algebraic spaces. Read Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean:180 and Mathlib/AlgebraicGeometry/Modules/Tilde.lean:567-587; these are not the stated theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-proper-support-module-ext-finite",
+  "date": "2026-10-24",
+  "group": "Q48"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tag 08W8 (lemma-coherent-tangent-space), Situation 08KB (situation-coherent). More precisely, the final Ext finiteness argument with proper support, without assuming the whole fibre proper. Input of the proper-support Ext argument: Tag 0D0R with auxiliary base S equal to the target Y, allowing a nonproper ambient morphism and no upper bound on the input complex.",
+   "via": [
+    "lem-sfb-space-proper-support-module-ext-finite",
+    "lem-sfb-space-coherent-tangent-finite",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-proper-support-below-coherent-image",
+  "worker": "stage1",
+  "summary": "Checked the unchanged proper-support statement against Tag 0D0R with S=Y. Realized its bounded-truncation proof using the existing Tag 08GK bounded proper-support theorem and existing abstract negative-vanishing and truncation-comparison nodes. Verified module-category and left-exactness hypotheses, the empty supports of the truncated zero cohomology, and independence of the lower bound from n. No new nodes or Lean attachments.",
+  "blueprint": "Retains the inherited null nearest blueprint ancestor and via chain; serves the proper-support Ext finiteness input below coherent-family algebraicity in the inherited direct-image/alteration prerequisites. Read latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/_section.md and sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3). Blueprint searches for proper support, coherent direct image, 08GK, 0D0R and truncation found no duplicate of this coherent structure-sheaf theorem. The proof follows the cited Stacks truncation route, without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic module-category theorem on small ringed sites, establishing the Grothendieck hypotheses of the derived-functor tools."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-negative-vanishing",
+    "why": "Generic lower-cohomology bound for right derived left exact additive functors; applies to canonical module direct image without any geometric restrictions."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-truncation-iso",
+    "why": "Generic cohomological comparison with bounded truncations for a right derived left exact functor; supplies the exact comparison in the source proof, not a replacement geometric route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-weil-pbc-derived-functor-negative-vanishing",
+  "lem-weil-pbc-derived-functor-truncation-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-a1e4d5445",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-a1e4d5445 (reviewer sub-agent of L); spot-checked: I read the item, all nine cited statements and the sources. Stacks spaces-perfect Tag 0D0R (l.1220) with S=Y: the statement and stmt_deps are unchanged against live, and live and side-live still have the item unsplit. No repair note exists, so the re-split rule does not apply. There are no new nodes, proof_deps equals the union of the steps' uses, the DAG has no cycle and there is no SGA. Step 1: lem-pur-ringed-site-grothendieck-abelian, with small site skeletons from def-weil-size-convention and commutative étale structure sheaves (sites-cohomology 07A5 l.3921). Step 2 is elementary: f_* is a limit of chart sections and kernels are sectionwise, so f_* is left exact; def-sfb-right-derived-functor gives RF(K)≅F(I), which agrees with def-sp-kinjective-bridge on D^+. Step 3: 05TC(1) through negative-vanishing, with b fixed independently of n. Step 4: τ≤n G is bounded in [b,n] with coherent cohomology; its zero sheaves have empty support, which is proper. 08GK (bounded node) then applies with every hypothesis met, since f is locally of finite type, Y is Noetherian and only the supports need to be proper. Step 5: the final clause of truncation-iso (05TC(2)) gives H^n(Rf_*τ≤nG)≅H^n(Rf_*G), and coherence is invariant under isomorphism. Edge cases checked: G=0, X empty, b<0, n=b, infinitely many nonzero cohomology sheaves, X a non-quasi-compact disjoint union, f=id. Duplicates: the scheme-proper node (0D0B) and the proper-space node (08AR) are both narrower. Tool uses accepted: the ringed-site lemma is on route anyway, and the two 05TC lemmas are generic derived-functor tools. Batch-5 flag: the full closure of the bounded 08GK node reaches only algebraic-space foundations (190 nodes in sk-i-curve-zero) and generic algebra and category lemmas. It contains no trace-formula or Poincaré-duality theorem and no sk-thm-trace-transport or nt- node. 08GK finiteness is outside both assumptions and def-trf-algebraic-space is a general definition, so this is not a violation. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceProperSupportBelowCoherentImage",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.properSupport_below_coherent_image",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceProperSupportBelowCoherentImage.lean",
+  "statement": "theorem properSupport_below_coherent_image (Y : Scheme.{u}) [IsNoetherian Y] (X : AlgebraicSpace Y) (f : X ⟶ schemeSpace (Over.mk (𝟙 Y))) (hf : MapIsLocally (@LocallyOfFiniteType) f) [HasDerivedCategory.{w} X.SmallModules] [HasDerivedCategory.{w} (schemeSpace (Over.mk (𝟙 Y))).SmallModules] (G : X.DerivedModules) (hcoh : ∀ q : ℤ, (X.smallModuleEquivalence.inverse.obj ((DerivedCategory.homologyFunctor X.SmallModules q).obj G)).IsFinitePresentation) (hbelow : ∃ b : ℤ, ∀ q : ℤ, q < b → IsZero ((DerivedCategory.homologyFunctor X.SmallModules q).obj G)) (hsupport : ∀ q : ℤ, IsClosed (moduleSupport (X.smallModuleEquivalence.inverse.obj ((DerivedCategory.homologyFunctor X.SmallModules q).obj G))) ∧ ∃ (Z : AlgebraicSpace Y) (i : Z ⟶ X), IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) i.hom.hom ∧ (∀ T : Z.EtaleSite, IsReduced (Z.etaleForget.obj T)) ∧ Set.range (mapPoint i.hom.hom) = moduleSupport (X.smallModuleEquivalence.inverse.obj ((DerivedCategory.homologyFunctor X.SmallModules q).obj G)) ∧ MapIsProper (i ≫ f)) : (∀ q : ℤ, ((schemeSpace (Over.mk (𝟙 Y))).smallModuleEquivalence.inverse.obj ((DerivedCategory.homologyFunctor (schemeSpace (Over.mk (𝟙 Y))).SmallModules q).obj ((derivedDirectImage f).obj G))).IsFinitePresentation) ∧ ∃ b : ℤ, ∀ q : ℤ, q < b → IsZero ((DerivedCategory.homologyFunctor (schemeSpace (Over.mk (𝟙 Y))).SmallModules q).obj ((derivedDirectImage f).obj G))",
+  "branch": "sheaf-dag",
+  "by": "Q01",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-be7b4ec04",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Re-delivery of 9fda (RETURN H2: mapPoint used without owner def-sfb-proper-curve-moduli). Snapshot diff: only change is that stmt_dep plus a public import of Sheaf.AlgebraicGeometry.ProperCurveModuli and report repair section; signature byte-identical. Independent clause check vs Stacks 0D0R (S=Y): IsNoetherian Y; f into the terminal schemeSpace(id_Y) = structure map; MapIsLocally LocallyOfFiniteType; IsFinitePresentation = coherent on locally Noetherian X; ∃ lower bound; per-q closed support with reduced closed-immersion Z, Set.range mapPoint = moduleSupport, MapIsProper (i≫f); conclusion coherent + bounded below via derivedDirectImage (K-injective RDF). Edge cases G=0/empty supports, X empty, f=id, b<0, non-qc X with q-dependent Z covered; universes u,w explicit. sorry-only, docstrings with source/blueprint/5 steps, report sections present. No findings; no compile (no fix)."
+ }
+}

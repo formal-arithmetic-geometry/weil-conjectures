@@ -60,7 +60,18 @@
    "where": "statement"
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-nagata-compactification",
  "unit": "sk-prop-nagata-sketch-approximation",
  "split_report": {
@@ -115,15 +126,20 @@
   "result": "pass"
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Descend every chart algebra in $\\mathsf R_X$ using\n[lemma-nagata-affine-fp-descends], every quasi-compact overlap open\nusing [lemma-nagata-qc-open-descends], and both directions of every\noverlap isomorphism using [lemma-nagata-morphism-descends]. Define\n$\\lambda_{\\mathrm{raw}}(X/S)$ to be the selected\nupper bound of their finitely many stages, and denote the resulting raw\ndatum over $S_{\\lambda_{\\mathrm{raw}}}$ by\n$\\mathsf R_{X,\\lambda_{\\mathrm{raw}}}^{\\mathrm{raw}}$.",
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $(S_\\lambda)$ be a cofiltered inverse system of quasi-compact\nquasi-separated schemes with affine transition morphisms and limit $S$, and\nlet $X\\to S$ be of finite presentation with $X$ quasi-separated. For a\nscheme $T$, schemes $Y_a\\to T$ and a morphism $B\\to T$, a *relative gluing\ndatum* over $B$ consists of opens $V_{ab}$ of the charts\n$Y_a\\times_TB$ and $T$-morphisms $\\psi_{ab}\\colon V_{ab}\\to Y_b$; the\nassociated overlap maps $V_{ab}\\to Y_b\\times_TB$ are $B$-morphisms.\n\nStarting from $\\mathsf R_X$:\n\n1. select a common index $\\lambda_1\\geq\\lambda_0$ and affine schemes $Y_a$\nof finite presentation over $S_{\\lambda_1}$ with\n$Y_a\\times_{S_{\\lambda_1}}S\\cong W_a$ (the descended chart algebras, as in\n[lemma-nagata-affine-fp-descends]), and let\n$\\ell_a\\colon Y_a\\times_{S_{\\lambda_1}}S\\to X$ be the resulting open\nimmersions;\n1. descend each overlap $\\ell_a^{-1}(W_b)$, a quasi-compact open, to a\nquasi-compact open at a stage $\\mu_{ab}$ using\n[lemma-nagata-qc-open-descends];\n1. descend each overlap map $\\ell_a^{-1}(W_b)\\to Y_b$ over\n$S_{\\lambda_1}$ to a morphism from the descended overlap at a later stage\n$\\nu_{ab}\\geq\\mu_{ab}$, as in [lemma-nagata-morphism-descends].\n\nDefine $\\lambda_{\\mathrm{raw}}(X/S)$ to be a selected common bound of the\nfinitely many stages $\\nu_{ab}$, and let\n$\\mathsf R_{X,\\lambda_{\\mathrm{raw}}}^{\\mathrm{raw}}$ be the relative\ngluing datum over $S_{\\lambda_{\\mathrm{raw}}}$ with charts\n$Y_a\\times_{S_{\\lambda_1}}S_{\\lambda_{\\mathrm{raw}}}$ formed by the\ndescended overlaps and overlap maps transported to\n$\\lambda_{\\mathrm{raw}}$.",
   "proof": [
    {
-    "text": "Each object is transported by the canonical base-change map to the selected\nupper bound. Functoriality supplies the comparison maps and coherence, so\nthe raw datum is well defined.",
+    "text": "Each affine chart $W_a$ is of finite presentation over the inverse image of\nthe affine open $V_a$ in $S$, whose ring is the filtered colimit of the\nrings of its inverse images at later stages, so it descends to an affine\nscheme of finite presentation at some stage; cofilteredness gives one\ncommon index $\\lambda_1$ for the finitely many charts. Since $X$ is\nquasi-separated, the overlaps $\\ell_a^{-1}(W_b)$ are quasi-compact, so they\ndescend. Because every overlap map takes values in the fixed scheme $Y_b$,\nthe datum can be transported along every transition morphism; functoriality\nof base change supplies the comparison maps and coherence, so the raw datum\nover $S_{\\lambda_{\\mathrm{raw}}}$ is well defined.",
     "uses": [],
     "elementary": null
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

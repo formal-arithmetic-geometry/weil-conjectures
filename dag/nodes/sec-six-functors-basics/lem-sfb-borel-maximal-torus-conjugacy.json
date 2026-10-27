@@ -1,0 +1,247 @@
+{
+ "id": "lem-sfb-borel-maximal-torus-conjugacy",
+ "kind": "statement",
+ "title": "Maximal tori inside Borels and conjugacy of maximal tori",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups are affine $F$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], and subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness are as in [def-sbc-smooth-morphisms, def-weil-connected-scheme]. A torus is a group isomorphic to $\\mathbf G_m^r$ for an integer $r\\geq0$, where $\\mathbf G_m(A)=A^\\times$ [def-sc-gm-ga]. A maximal torus is a torus subgroup maximal under inclusion. A group is solvable if its successive scheme-theoretic derived subgroups eventually become trivial, where the derived subgroup is the smallest closed subgroup through which the commutator morphism factors. A Borel subgroup is a maximal smooth connected solvable subgroup. Let $G$ be smooth and connected. Every Borel subgroup $B\\subseteq G$ contains a torus that is maximal in $G$. For any two maximal tori $T_1,T_2\\subseteq G$, there is $g\\in G(F)$ with $gT_1g^{-1}=T_2$ as subgroup schemes. Equality of conjugate subgroups means equality after every commutative $F$-algebra extension. No reductivity hypothesis is imposed; the rank-zero torus is allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 17.10, printed pp.354--355; paragraph following Definition 17.12, printed p.355; solvable case Theorem 16.33(d), printed pp.336--337."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-gm-ga",
+  "def-sfb-tori-multiplicative-type",
+  "def-sfb-semisimple-group-scheme",
+  "def-sfb-borel-subgroup-scheme",
+  "def-sfb-reductive-torus-centralizer-terminology"
+ ],
+ "proof": [
+  {
+   "text": "Choose maximal subgroups by dimension. Every torus is smooth and connected by [lem-sfb-multiplicative-type-largest-subtorus], and is solvable because it is commutative. The dimension bound and strict-inclusion assertion of [lem-sfb-solvable-normal-subgroup-products] show that every torus lies in a maximal torus: among the tori containing it choose one of greatest dimension. The rank-zero torus makes this set nonempty. The same greatest-dimension argument among smooth connected solvable subgroups containing a given torus gives a Borel containing it. In particular Borels and ambient maximal tori exist.",
+   "uses": [
+    "lem-sfb-multiplicative-type-largest-subtorus",
+    "lem-sfb-solvable-normal-subgroup-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 17.6 and the paragraph before Example 17.7, printed pp.353--354; proof of Theorem 17.10 and paragraph following Definition 17.12, printed p.355."
+   }
+  },
+  {
+   "text": "Let B and C be Borels. Form X=G/B using [lem-sfb-homogeneous-orbit-quotient-geometry]. Its fppf coset description defines left translation by G: (h,gB) maps to hgB; this is well-defined on cosets, commutes with base change, and hence defines the action on the represented quotient. The identity coset makes X nonempty. The map q:G to X is a quotient in the sense required by [lem-sfb-borel-quotient-proper-geometry]: it is faithfully flat and of finite type over F, hence of finite presentation; the isomorphism G x_F B = G x_X G says that two T-points have the same image exactly when their ratio lies in B; and every T-point of X lifts fppf, hence fpqc, locally because X represents the fppf sheaf quotient. By [lem-sfb-borel-quotient-proper-geometry], X is proper and of finite type. Apply [lem-sfb-solvable-proper-fixed-point] to C acting on X. It gives an F-point x fixed by C after every F-algebra extension. Lift x to g in G(F) using [lem-sfb-homogeneous-orbit-quotient-geometry]. For every F-algebra A and c in C(A), fixedness says cgB=gB, so the coset-fibre assertion gives g^{-1}cg in B(A). Thus g^{-1}Cg is a closed smooth connected solvable subgroup of B, and maximality of the Borel g^{-1}Cg forces equality with B. Consequently C=gBg^{-1} as subgroup schemes.",
+   "uses": [
+    "lem-sfb-homogeneous-orbit-quotient-geometry",
+    "lem-sfb-borel-quotient-proper-geometry",
+    "lem-sfb-solvable-proper-fixed-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.9(b), proof, printed p.354; quotient action in Definition 5.20, printed p.104."
+   }
+  },
+  {
+   "text": "Establish the solvable case with its actual section argument. Let H be smooth, connected and solvable, and let S_1,S_2 be maximal tori of H. By [lem-sfb-smooth-connected-derived-subgroup] the derived subgroup of a smooth connected group is a normal smooth connected closed subgroup; iterating, each term of the derived series of H is smooth and connected and normal in its predecessor. Each quotient D^iH/D^{i+1}H is commutative, since the commutator morphism of D^iH factors through D^{i+1}H, so the presheaf quotients and their fppf sheafifications are commutative. Thus the derived series is a finite closed-subgroup normal series with commutative fppf quotients, so [lem-sfb-lie-kolchin-triangular-embedding] applies and identifies H with J inside B_n. By [lem-sfb-triangular-diagonal-kernel], V=J intersect U_n is smooth connected normal unipotent, D=J/V is smooth and connected and embeds as a closed subgroup of (G_m)^n. Hence D is a torus by [lem-sfb-multiplicative-type-largest-subtorus]. Apply [lem-sfb-solvable-torus-complements] to H=J, U=V: each q|_{S_i}:S_i to D is an isomorphism. The composites s_i:D to S_i to J using its inverse are group-scheme sections of q. Since D is smooth, [lem-sfb-triangular-quotient-section-conjugacy] supplies v in V(F) with s_2=Int(v) composed with s_1. Their images are S_2 and vS_1v^{-1}, so S_2=vS_1v^{-1}. This equality is on every F-algebra, as is the cited section equality.",
+   "uses": [
+    "lem-sfb-smooth-connected-derived-subgroup",
+    "lem-sfb-lie-kolchin-triangular-embedding",
+    "lem-sfb-triangular-diagonal-kernel",
+    "lem-sfb-multiplicative-type-largest-subtorus",
+    "lem-sfb-solvable-torus-complements",
+    "lem-sfb-triangular-quotient-section-conjugacy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.33(d), printed p.336; Theorems 16.26--16.27, printed pp.332--333; Summary 16.29(b), printed p.334."
+   }
+  },
+  {
+   "text": "Let T_1,T_2 be maximal tori of G. By step 1 choose Borels B_1,B_2 containing them. Step 2 gives g in G(F) such that gB_1g^{-1}=B_2. The tori gT_1g^{-1} and T_2 are maximal in B_2: a larger torus in B_2 would be a larger torus in G (after conjugating back for T_1). Apply the solvable case of step 3 to B_2 to obtain b in B_2(F) with b(gT_1g^{-1})b^{-1}=T_2. Then h=bg satisfies hT_1h^{-1}=T_2. The calculation holds on A-points for every commutative F-algebra A, so it is the required equality of closed subgroup schemes.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.10 and proof, printed pp.354--355."
+   }
+  },
+  {
+   "text": "Finally fix any Borel B. By step 1 choose an ambient maximal torus T and a Borel B_0 containing T. Step 2 supplies g in G(F) with gB_0g^{-1}=B. Therefore gTg^{-1} is a torus contained in B. It is maximal in G, since conjugating any larger torus back by g^{-1} would contradict maximality of T. Both conclusions are preserved when the maximal torus has rank zero, and no step used reductivity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Paragraph following Definition 17.12, printed p.355."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-multiplicative-type-largest-subtorus",
+  "lem-sfb-solvable-normal-subgroup-products",
+  "lem-sfb-homogeneous-orbit-quotient-geometry",
+  "lem-sfb-borel-quotient-proper-geometry",
+  "lem-sfb-solvable-proper-fixed-point",
+  "lem-sfb-smooth-connected-derived-subgroup",
+  "lem-sfb-lie-kolchin-triangular-embedding",
+  "lem-sfb-triangular-diagonal-kernel",
+  "lem-sfb-solvable-torus-complements",
+  "lem-sfb-triangular-quotient-section-conjugacy"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 17.10 and paragraph following Definition 17.12, printed pp.354--355, with the solvable case expanded through Theorem 16.33(d), printed p.336."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every Borel subgroup of a smooth connected affine algebraic group contains an ambient maximal torus and any two maximal tori of a smooth connected group are conjugate",
+   "results": "{\"t\": \"2026-10-23T20:18:56Z\", \"tool\": \"leanfinder\", \"query\": \"Every Borel subgroup of a smooth connected affine algebraic group contains an ambient maximal torus and any two maximal tori of a smooth connected group are conjugate\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.connectedComponentOfOne\", \"instDiscreteTopologySubtypeGeneralLinearGroupMemSubgroupAdjoinNegOneOfIsTopologicalRingOfT2Space\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"Subgroup.Normal.pathComponentOne\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"instNormalCommutatorClosure\", \"Subgroup.pathComponentOne\", \"OpenNormalSubgroup.instIsClosedCoePathComponentOne\"], \"digest\": \"89579918dea22b30\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract subgroups, Lie algebras, linear maps or general scheme morphisms; none states this algebraic-group-scheme assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torus\", \"conjugate\"",
+   "results": "{\"t\": \"2026-10-23T20:20:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"torus\\\", \\\"conjugate\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract subgroups, Lie algebras, linear maps or general scheme morphisms; none states this algebraic-group-scheme assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "maximal.tor(us|i)|BorelSubgroup|borel.subgroup",
+   "results": "{\"t\": \"2026-10-23T20:20:30Z\", \"tool\": \"grep\", \"query\": \"maximal.tor(us|i)|BorelSubgroup|borel.subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract subgroups, Lie algebras, linear maps or general scheme morphisms; none states this algebraic-group-scheme assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Maximal tori of a connected algebraic group are conjugate",
+   "results": "{\"t\": \"2026-10-23T20:20:31Z\", \"tool\": \"leansearch\", \"query\": \"Maximal tori of a connected algebraic group are conjugate\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Group.conjugatesOfSet_mono\", \"ConjAct.orbitRel_conjAct\", \"isConj_iff_conjugatesOf_eq\", \"Group.conjugatesOfSet\", \"MulAction.IwasawaStructure.is_conj\", \"ConjAct.instGroup\", \"ConjAct.orbit_eq_carrier_conjClasses\", \"Group.mem_conjugatesOfSet_iff\"], \"digest\": \"4aefa747c3abba02\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract subgroups, Lie algebras, linear maps or general scheme morphisms; none states this algebraic-group-scheme assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Conjugacy of split maximal torus subgroup schemes of connected linear algebraic groups and existence in a prescribed Borel",
+   "results": "{\"t\": \"2026-10-23T20:20:32Z\", \"tool\": \"leanfinder\", \"query\": \"Conjugacy of split maximal torus subgroup schemes of connected linear algebraic groups and existence in a prescribed Borel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.ωConj_mem_of_mem\", \"RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff\", \"RootPairing.GeckConstruction.cartanSubalgebra'\", \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra'\", \"RootPairing.GeckConstruction.mem_ωConjLieSubmodule_iff\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieAlgebra.cartan_sup_iSup_rootSpace_eq_top\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\"], \"digest\": \"67e8cb9b585f22ae\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract subgroups, Lie algebras, linear maps or general scheme morphisms; none states this algebraic-group-scheme assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maximal tori in a connected affine algebraic group over an algebraically closed field are conjugate and every Borel contains an ambient maximal torus",
+   "results": "{\"t\": \"2026-10-23T21:28:00Z\", \"tool\": \"leanfinder\", \"query\": \"Maximal tori in a connected affine algebraic group over an algebraically closed field are conjugate and every Borel contains an ambient maximal torus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.exists_isCartanSubalgebra_engel\", \"RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"RootPairing.GeckConstruction.cartanSubalgebra_le_lieAlgebra\", \"LieSubalgebra.IsCartanSubalgebra.self_normalizing\", \"LieAlgebra.zeroRootSubalgebra_eq_iff_is_cartan\", \"LieAlgebra.is_cartan_of_zeroRootSubalgebra_eq\", \"LieSubalgebra.isCartanSubalgebra_iff_isUcsLimit\"], \"digest\": \"0f17815781ff2073\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern abstract groups, Lie algebras or root-system constructions, not affine algebraic-group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "maximal.tor(us|i)|BorelSubgroup|borel.subgroup",
+   "results": "{\"t\": \"2026-10-23T21:28:27Z\", \"tool\": \"grep\", \"query\": \"maximal.tor(us|i)|BorelSubgroup|borel.subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern abstract groups, Lie algebras or root-system constructions, not affine algebraic-group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Maximal tori in a smooth connected solvable algebraic group are conjugate",
+   "results": "{\"t\": \"2026-10-23T21:28:28Z\", \"tool\": \"leansearch\", \"query\": \"Maximal tori in a smooth connected solvable algebraic group are conjugate\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Group.conjugatesOfSet_mono\", \"subgroup_solvable_of_solvable\", \"IsSolvable\", \"MulAction.IwasawaStructure.is_conj\", \"MulAction.IwasawaStructure.mk.inj\", \"LieAlgebra.radical_eq_top_of_isSolvable\", \"ConjAct.orbitRel_conjAct\", \"LieAlgebra.ofAbelianIsSolvable\"], \"digest\": \"8c58c7e2add6f984\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern abstract groups, Lie algebras or root-system constructions, not affine algebraic-group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torus\", \"conjugate\"",
+   "results": "{\"t\": \"2026-10-23T21:28:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"torus\\\", \\\"conjugate\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern abstract groups, Lie algebras or root-system constructions, not affine algebraic-group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Conjugacy of split maximal torus subgroup schemes of connected linear algebraic groups and containment in Borel subgroups",
+   "results": "{\"t\": \"2026-10-23T21:28:45Z\", \"tool\": \"leanfinder\", \"query\": \"Conjugacy of split maximal torus subgroup schemes of connected linear algebraic groups and containment in Borel subgroups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.ωConj_mem_of_mem\", \"Subgroup.conj_smul_le_of_le\", \"RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff\", \"RootPairing.GeckConstruction.mem_ωConjLieSubmodule_iff\", \"Subgroup.conj_smul_subgroupOf\", \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra'\", \"GroupExtension.IsConj.trans\", \"RootPairing.GeckConstruction.cartanSubalgebra_le_lieAlgebra\"], \"digest\": \"6a7ce1373fcf9a04\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern abstract groups, Lie algebras or root-system constructions, not affine algebraic-group schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-borel-scheme-normalizer",
+  "date": "2026-10-24",
+  "group": "Q22"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplicative simply connected covering of a semisimple algebraic group. Supporting Milne construction: Proposition 18.18, sequence (129), printed p.391, specialized to finite multiplicative kernel; all connected groups are split over the algebraically closed F. Supporting step in Milne Proposition 18.18: Borel quotients and Borel characters under a multiplicative isogeny. Supporting input in the proof of Milne Proposition 18.18: Theorem 17.48 puts the central multiplicative kernel inside the chosen Borel, scheme-theoretically. Supporting lemma for Milne Theorem 17.48: Theorem 17.10, printed pp.354--355; paragraph following Definition 17.12, printed p.355; solvable case Theorem 16.33(d), printed pp.336--337.",
+   "via": [
+    "lem-sfb-borel-scheme-normalizer",
+    "lem-sfb-multiplicative-isogeny-borel-comparison",
+    "lem-sfb-character-picard-isogeny-sequence",
+    "lem-sfb-semisimple-multiplicative-universal-cover",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-borel-maximal-torus-conjugacy",
+  "worker": "stage1",
+  "summary": "Q10 read Milne 17.9--17.12 and 16.26--16.33; proved existence by dimension, Borel conjugacy from the proper coset quotient and the solvable fixed-point theorem, and expanded solvable torus conjugacy into quotient-isomorphism sections and conjugacy of sections. Reused nine existing nodes and created none. Avoided the general flag-variety node because its dependency closure passes through this item. Statement unchanged; all equalities are scheme-theoretic.",
+  "blueprint": "Supports the Milne 17.48 normalizer input in the existing from.place chain, ultimately det-thm-sf-ctf-stability-direct-images proof (3). The newest blueprint has no Borel/maximal-torus statement; this supporting argument is below the fixed unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-c4b5a121d",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-c4b5a121d (reviewer sub-agent of L); spot-checked: FIX with two small repairs and no new nodes; the item proof follows Milne iAG2017. Source places read: 17.9(a,b) with its proof, 17.10 with its proof, the paragraph after Def 17.12, and 16.27/16.33(d). Statement, stmt_deps and source are unchanged. Live and side-live still hold the item unsplit, so it is not superseded. I computed the closures of all ten cited nodes on the snapshot: none contains the item, so there is no cycle. All citations are in the same unit and no tool_uses are needed. Steps: 1 picks maximal tori and Borels by greatest dimension (strict dim drop from products-node; tori smooth and connected from largest-subtorus). 2 is Milne 17.9(b): fixed point of C on the proper G/B, lift to g in G(F), fibre-product iso gives g^{-1}Cg in B, then maximality. 3 is the solvable case as in 16.27: Lie-Kolchin, V and D from diagonal-kernel, D a torus, q|S_i iso by torus-complements, sections conjugate by v in V(F). 4 and 5 are elementary 17.10/17.12 assembly. Edge cases checked: G=1, G a torus, G unipotent, B_2 in GL_2, rank 0. The duplicate search over maximal-tor/conjugat/two-Borel finds no node stating the item. FIXES in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-borel-maximal-torus-conjugacy.json: (C1) step 3 relied on normality and smoothness of the scheme-theoretic derived series without a node, so it now cites lem-sfb-smooth-connected-derived-subgroup, with commutativity of the quotients spelled out. (E1) step 2 did not check that q:G->G/B is a quotient in the sense required by lem-sfb-borel-quotient-proper-geometry, so a sentence now derives fp, the ratio criterion and fpqc lifting from homogeneous-orbit-quotient-geometry. proof_deps is recomputed. Batch-5: all nine flagged citations reach only the Mathlib leaves lem-trf-smooth-fpqc-base-descent (Stacks 02VL) and lem-trf-fppf-covering-base-change (021O). These are generic descent facts, not steps of the trace-formula or Poincare-duality proofs, so all nine are accepted. The added node adds 0 nodes to the closure.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.BorelMaximalTorusConjugacy",
+  "declaration": "AlgebraicGeometry.borel_contains_maximal_torus_and_conjugacy",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/BorelMaximalTorusConjugacy.lean",
+  "statement": "theorem borel_contains_maximal_torus_and_conjugacy {F : Type u} [Field F] [IsAlgClosed F] (G : Grp (Over (Spec (.of F)))) [IsAffine G.X.left] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] [Smooth G.X.hom] [ConnectedSpace G.X.left] : (∀ (B : Grp (Over (Spec (.of F)))) (iB : B ⟶ G), IsBorelGroupScheme iB.hom.hom → ∃ (T : Grp (Over (Spec (.of F)))) (iT : T ⟶ G), ReductiveTorusCentralizer.IsMaximalTorus iT ∧ ∃ j : T ⟶ B, j ≫ iB = iT) ∧ (∀ (T₁ T₂ : Grp (Over (Spec (.of F)))) (i₁ : T₁ ⟶ G) (i₂ : T₂ ⟶ G), ReductiveTorusCentralizer.IsMaximalTorus i₁ → ReductiveTorusCentralizer.IsMaximalTorus i₂ → ∃ g : 𝟙_ (Over (Spec (.of F))) ⟶ G.X, ∀ (A : Type u) [CommRing A] [Algebra F A] (z : StandardGroupSchemes.affine F A ⟶ G.X), (∃ t₂ : StandardGroupSchemes.affine F A ⟶ T₂.X, t₂ ≫ i₂.hom.hom = z) ↔ ∃ t₁ : StandardGroupSchemes.affine F A ⟶ T₁.X, (toUnit (StandardGroupSchemes.affine F A) ≫ g) * (t₁ ≫ i₁.hom.hom) * (toUnit (StandardGroupSchemes.affine F A) ≫ g)⁻¹ = z)",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6db79c88e",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Read the item node, all 12 stmt_dep records and the live Lean of IsMaximalTorus, IsBorelGroupScheme, IsTorus/splitTorus, StandardGroupSchemes.affine and Mathlib Hom.group. Records: only lean (new) and stmt_deps changed (+4 landed def nodes torus/semisimple-solvable/Borel/maximal-torus, which the statement uses; no cycle). lean.statement is verbatim in the file. Clauses match: F alg. closed; G affine (LOFT+QC) smooth connected Grp over Spec F; no reductivity. IsTorus over alg. closed F is equivalent to split G_m^r, rank 0 allowed. Clause 1: torus maximal in G and factoring through the Borel. Clause 2: one F-point g with T2(A) = g T1(A) g^-1 for every F-algebra A : Type u, no reducedness. Edge cases (trivial, torus, unipotent, solvable G, char p, zero/nonreduced A) ok. No duplicate (downstream cocharacter-conjugate citer uses the same form). Single sorry, no new defs, source and blueprint docstrings, 5 proof steps in the docstring, report sections present. No compile: no file changed."
+ }
+}

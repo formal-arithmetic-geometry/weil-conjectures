@@ -1,0 +1,106 @@
+{
+ "id": "lem-pur-rational-exceptional-final-equations",
+ "kind": "statement",
+ "title": "Final exceptional coefficient equations",
+ "statement": "Fix a finite-field datum D and coefficient datum C with prime ell different from the characteristic. Let f : X → Y be a separated finite-type morphism between separated finite-type schemes over the fixed algebraic closure of the finite field, and let S be its normalized constructible exceptional coefficient system. Use the raw rational constructible categories, coefficient fields E ≤ F ≤ L, functors Q and G, exceptional comparisons b and gLocalization, scalar functors T, unitors, associators, and integer shift structures of [def-pur-rational-scalar-comparison-data]. Then gLocalization respects the recorded composite shifts; every component b_{F/E,K} is the adjunction transpose coefficientTranspose_{F/E,K} of scalar extension of the exceptional counit following the inverse compact-support comparison; b_{E/E} satisfies UnitEquation for the recorded scalar unitors; and b_{F/E}, b_{L/F}, b_{L/E} satisfy CompositionEquation for the recorded scalar associators.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport-coefficient-change.proof.md",
+  "place": "Parts (2)-(3), counit normalization and coefficient coherence"
+ },
+ "stmt_deps": [
+  "def-pur-rational-scalar-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Unfold the normalized rationalizationComparison and rationalComparison fields of the fixed exceptional coefficient system. Its bShift field gives the localization shift compatibility; its comparison counit and the adjunction Hom bijection give coefficientTranspose; rationalIdentityRight gives the repeated-field unit; rationalCocycle.right gives the three-field composition equation. The wrappers are definitionally the coordinates in def-pur-rational-scalar-comparison-data.",
+   "uses": [
+    "def-pur-rational-scalar-comparison-data",
+    "lem-coef-rational-operations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-rational-scalar-comparison-data",
+  "lem-coef-rational-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport-coefficient-change.proof.md",
+  "place": "Parts (2)-(3), counit normalization and coefficient coherence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Rationalization of completed integral scalar extension identifies the exceptional inverse image comparison with the counit preserving adjunction mate and preserves the smooth purity square",
+   "results": "{\"t\": \"2026-10-22T06:05:52Z\", \"tool\": \"leanfinder\", \"query\": \"Rationalization of completed integral scalar extension identifies the exceptional inverse image comparison with the counit preserving adjunction mate and preserves the smooth purity square\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.Localization.ε_app\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"CategoryTheory.Adjunction.localization_counit_app\", \"CategoryTheory.Adjunction.derivedε_fac_app\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"AlgebraicGeometry.ΓSpec.isIso_adjunction_counit\", \"CategoryTheory.Adjunction.Localization.η_app\"], \"digest\": \"4d9a9c532072dff2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not identify the specified derived-complete constructible coefficient constructions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateEquiv\", \"counit\"",
+   "results": "{\"t\": \"2026-10-22T06:05:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"conjugateEquiv\\\", \\\"counit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.conjugateEquiv_counit\", \"CategoryTheory.conjugateEquiv_counit_symm\"], \"digest\": \"cc0ff5929eb8eb11\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not identify the specified derived-complete constructible coefficient constructions"
+  },
+  {
+   "tool": "grep",
+   "query": "smoothPurity|purity.*scalar|scalar.*purity|completed.*[Ss]calar.*[Cc]omparison",
+   "results": "{\"t\": \"2026-10-22T06:05:33Z\", \"tool\": \"grep\", \"query\": \"smoothPurity|purity.*scalar|scalar.*purity|completed.*[Ss]calar.*[Cc]omparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not identify the specified derived-complete constructible coefficient constructions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalScalarComparisonIdentification",
+  "date": "2026-10-25",
+  "group": "E1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Steps 1-2, coefficient comparison and counit normalization",
+   "via": [
+    "lem-pur-rational-scalar-comparison-identification"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalExceptionalFinalEquations",
+  "file": "lean/Sheaf/Paper/RationalExceptionalFinalEquations.lean",
+  "declaration": "WeilConjectures.RationalScalarComparisonIdentification.rationalExceptionalFinalEquations",
+  "statement": "theorem rationalExceptionalFinalEquations : (∀ (E : AdicPurityScalarNaturality.Field D C), ShiftCompatibility (target D C f S E ⋙ Q D C E X) (Q D C E Y ⋙ G D C f S E) (composeShift _ _ (targetShift D C f S E) (qXShift D C f S E)) (composeShift _ _ (qYShift D C f S E) (gShift D C f S E)) (gLocalization D C f S E)) ∧ (∀ (E F : AdicPurityScalarNaturality.Field D C) (h : E ≤ F) (K : RCat D C E Y), (b D C f S E F h).hom.app K = coefficientTranspose D C f S E F h K) ∧ (∀ (E : AdicPurityScalarNaturality.Field D C), UnitEquation (b D C f S E E le_rfl) (unit D C E X) (unit D C E Y)) ∧ (∀ (E F L : AdicPurityScalarNaturality.Field D C) (h : E ≤ F) (k : F ≤ L), CompositionEquation (b D C f S E F h) (b D C f S F L k) (b D C f S E L (h.trans k)) (alpha D C E F L h k X) (alpha D C E F L h k Y))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-a902c",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261025T122802-L-1807300",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-a902c",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261025T122802-L-1807300",
+  "kind": "interface",
+  "note": "independent cc review: item Result + 28 moved defs vs published RationalScalarComparisonIdentification (byte-identical; coefficientTranspose rfl-equal in scratch compile); 5 new sorried helpers vs Result's conjuncts and pinning predicates; 7 node files vs Lean"
+ }
+}

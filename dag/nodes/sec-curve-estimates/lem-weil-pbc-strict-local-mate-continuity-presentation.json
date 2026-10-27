@@ -21,7 +21,7 @@
  ],
  "proof": [
   {
-   "text": "Choose canonical StrictLocalNeighbourhoodGeometry using the adopted nonempty_strictLocalNeighbourhoodGeometry theorem directly; the small-model existence wrapper is an exact alias and is unnecessary. Its smallModelLegs and smallModelIsLimit API transports the cone onto the original small coordinate-ring colimit. Choose the projection identifications with smallModel_nonempty_strictLocalMateProjectionData. The cohomology domain diagram and source legs are the explicit small-model constructions, not the canonical strictLocalization source maps.",
+   "text": "Use the adopted nonempty_strictLocalNeighbourhoodGeometry theorem and its smallModelLegs/smallModelIsLimit transport to the original small coordinate-ring colimit. Choose smallModel_nonempty_strictLocalMateProjectionData. The smallModel_nonempty_strictLocalBaseChange_continuityPresentation theorem retains the original small-model cohomology diagram, source legs, target map and all projection equations; only its explicit API name and module change.",
    "uses": [
     "lem-weil-pbc-strict-local-neighbourhood-geometry",
     "lem-weil-pbc-strict-local-mate-projection-formulas",
@@ -63,7 +63,7 @@
   "def-weil-pbc-small-model-cohomology-germs"
  ],
  "proof_origin": {
-  "by": "T2, reusing the adopted geometry existence theorem and the original small-model cohomology maps",
+  "by": "G6, preserving the complete small-model assembly proof while retiring the ambiguous twin name",
   "document": "Stacks Project, etale-cohomology.tex",
   "place": "Tags 03Q8 and 03Q9; the existing neighbourhood colimit and projection restriction argument, using the proved small-model geometry transport."
  },
@@ -112,15 +112,15 @@
  "unit": "sk-prop-h2",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.StrictLocalMateContinuityPresentation",
-  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalMateContinuityPresentation.lean",
-  "declaration": "AlgebraicGeometry.Etale.nonempty_strictLocalBaseChange_continuityPresentation",
-  "statement": "theorem nonempty_strictLocalBaseChange_continuityPresentation {X S : Scheme.{v}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f] {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1})) (n : ℤ) : Nonempty (GlobalCohomologyContinuityPresentation X K n ((Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology AddCommGrpCat.{v + 1}).map ((DerivedCategory.Plus.homologyFunctor _ n).map ((mateEquiv (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} f).derivedPlus (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} (pullback.snd f (Scheme.strictHenselizationStructuralMap s))).derivedPlus (TwoSquare.mk _ _ _ _ (pullbackSquareComparison AddCommGrpCat.{v + 1} (IsPullback.of_hasPullback f (Scheme.strictHenselizationStructuralMap s)).toCommSq).hom)) |>.natTrans.app K))))",
+  "module": "Sheaf.AlgebraicGeometry.StrictLocalSmallModel.MateContinuityPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalSmallModel/MateContinuityPresentation.lean",
+  "declaration": "AlgebraicGeometry.Etale.smallModel_nonempty_strictLocalBaseChange_continuityPresentation",
+  "statement": "theorem smallModel_nonempty_strictLocalBaseChange_continuityPresentation {X S : Scheme.{v}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f] {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1})) (n : ℤ) : Nonempty (GlobalCohomologyContinuityPresentation X K n ((Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology AddCommGrpCat.{v + 1}).map ((DerivedCategory.Plus.homologyFunctor _ n).map ((mateEquiv (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} f).derivedPlus (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} (pullback.snd f (Scheme.strictHenselizationStructuralMap s))).derivedPlus (TwoSquare.mk _ _ _ _ (pullbackSquareComparison AddCommGrpCat.{v + 1} (IsPullback.of_hasPullback f (Scheme.strictHenselizationStructuralMap s)).toCommSq).hom)) |>.natTrans.app K))))",
   "branch": "sheaf-dag",
-  "by": "J1",
-  "date": "2026-10-12",
+  "by": "G6",
+  "date": "2026-10-23",
   "declarations": [
-   "AlgebraicGeometry.Etale.nonempty_strictLocalBaseChange_continuityPresentation"
+   "AlgebraicGeometry.Etale.smallModel_nonempty_strictLocalBaseChange_continuityPresentation"
   ]
  },
  "reviewed": {
@@ -134,16 +134,27 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-22",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "C-a9e15",
-  "group": "H1",
+  "reviewer": "C-3cdbd",
+  "group": "G6",
   "result": "pass",
-  "landing": "20261022T025328-L-1279972",
+  "landing": "20261023T042719-L-2050548",
   "kind": "interface",
-  "note": "independent cc review: old item vs new StrictLocalSmallModel/MateProjectionData (identical modulo two renames); withdrawn smallModel_isIso_strictLocalCohomologyGermMap vs WeilConjectures isIso_strictLocalCohomologyGermMap (identical statement); 13 adapted unclaimed consumers vs live (rename/import edits only); 15 delivered + 14 downstream modules compiled together: 29/29 OK, max 46.7 s"
+  "note": "independent cc review: new StrictLocalSmallModel/MateContinuityPresentation vs live withdrawn module (identical modulo smallModel_ rename and import narrowing); adapted importer vs live (2-line import/call change); node lean record vs new signature; adapted importer + 2 downstream modules compiled against delivered modules"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "statement_change": {
   "date": "2026-10-22",
   "by": "H1 stage 2",

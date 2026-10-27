@@ -1,0 +1,149 @@
+{
+ "id": "lem-sc-hilbert-denominator-kernel-comparison",
+ "kind": "statement",
+ "title": "The two regular-denominator tensor maps have the same kernel",
+ "statement": "Let $X$ be a locally Noetherian scheme [pqf-def-locnoeth], $F$ a coherent module [pqf-def-coherent] with nonzero stalk at every point [def-weil-pbc-module-stalk]. Suppose that on every affine open $U$, every associated prime of $\\Gamma(U,F)$ is minimal among its associated primes (associated primes are prime annihilators of nonzero elements). Let $L$ be invertible [def-sc-invertible-module] and $s:\\mathcal O_X\\to K_X(L)$ a regular meromorphic section: its canonical extension $K_X\\to K_X(L)$ is monomorphic [def-sc-meromorphic-module]. Put $I=\\mathcal O_X\\times_{K_X(L)}L$, with projections $i:I\\to\\mathcal O_X$ and $j:I\\to L$. Using the tensor product [def-pur-sheaf-tensor-product], write $f=(i\\otimes F);\\lambda_F:I\\otimes F\\to F$ and $g=(j\\otimes F);\\beta_{L,F}:I\\otimes F\\to F\\otimes L$. Then $\\ker(f)\\hookrightarrow I\\otimes F\\xrightarrow{g}F\\otimes L$ and $\\ker(g)\\hookrightarrow I\\otimes F\\xrightarrow{f}F$ are both zero.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 02P2, lemma-make-maps-regular-section, affine injectivity calculation before the cokernel-support calculation"
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "pqf-def-coherent",
+  "def-sc-invertible-module",
+  "def-sc-meromorphic-module",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sc-hilbert-denominator-ideal-nowhere-dense], choose affine trivializing neighbourhoods with s=a/b and a,b ring nonzerodivisors. The coherent affine section theorem makes M=Gamma(U,F) finite. The affine stalk/support comparison and full stalk support give Supp(M)=Spec(A). Minimal primes over Ann(M) are associated primes; full support identifies these with ring minimal primes. Since every associated prime is minimal among associated primes, Ass(M) is contained in the ring minimal primes.",
+   "uses": [
+    "lem-sc-hilbert-denominator-ideal-nowhere-dense",
+    "lem-weil-pbc-coherent-affine-sections-finite",
+    "lem-weil-pbc-finite-type-module-support-closed",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-sc-hilbert-affine-denominator-module] on the chart. Its map sigma:IM to M satisfies b sigma(z)=a z and is injective. The same lemma gives injectivity of M to M_b. Thus multiplication by a/b on IM has kernel zero.",
+   "uses": [
+    "lem-sc-hilbert-affine-denominator-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The two pullback projections satisfy i;s=j;toMeromorphic. On a trivializing chart the map L to K_X(L) is injective: each allowed denominator acts injectively on L, detected on its stalks, and sheafification preserves a monomorphism. Clearing b in the fraction formula therefore identifies j(t) with (a/b)i(t). Apply the affine tensor-section comparison. On elementary tensors, f sends t tensor m to i(t)m and g sends it to j(t) tensor m. Consequently g equals multiplication by a/b after f, with the image of f equal to IM. Bilinearity extends the equality to all section tensors.",
+   "uses": [
+    "def-sc-meromorphic-module",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On every such affine chart, ker(f) maps to zero under g by this factorization. Conversely ker(g) maps to zero under f because multiplication by a/b on IM is injective. Restrict further to affine basic opens when testing a section of either kernel. These opens cover X; separatedness of the target sheaves glues the zero composites. This gives precisely kernel.ι(f);g=0 and kernel.ι(g);f=0, also on the empty scheme.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-hilbert-denominator-ideal-nowhere-dense",
+  "lem-weil-pbc-coherent-affine-sections-finite",
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-sc-hilbert-affine-denominator-module",
+  "def-sc-meromorphic-module",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 02P2, affine multiplication and its canonical image factorization; categorical details supplied in Lean for the maps lemma."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "two maps from denominator ideal tensor a coherent module with no embedded primes have the same kernel",
+   "results": "Eight hits on tensor kernels and flat equalizers, including LinearMap.tensorKerEquiv and TensorProduct.map_ker; no meromorphic denominator comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.image, CategoryTheory.Limits.kernel",
+   "results": "Twelve hits including Abelian.coimageIsoImage' and kernelFactorThruImage. The former is used in the proved categorical image factorization; none is the geometric assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "denominator.*tensor|tensor.*denominator|kernel.*meromorphic",
+   "results": "Five hits, all on the analytic Cartan kernel in value distribution; no algebraic geometric denominator theorem. Direct source and blueprint searches also found no duplicate.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "two maps induced by a regular meromorphic section from an ideal tensor coherent sheaf have the same kernel",
+   "results": "Eight hits: LinearMap.tensorKer and tensorKerEquiv (Mathlib.RingTheory.Flat.Equalizer), sheaf sectionsMap, scheme ideal-sheaf kernel identities, and CategoryTheory.Limits.kernel.map. None states the regular meromorphic comparison; tensorKerEquiv assumes flatness.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HilbertDifference",
+  "date": "2026-10-23",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-hilbert-polynomial",
+   "place": "proof reference to Stacks Varieties Tag 0BEM: regular-section exact sequences in the forward-difference induction, expanded by Divisors Tag 02P2",
+   "via": [
+    "lem-sc-hilbert-difference"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-def-av-ample-degree",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.HilbertDenominatorKernelComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/HilbertDenominatorKernelComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.hilbert_denominator_kernel_comparison",
+  "statement": "theorem hilbert_denominator_kernel_comparison {X : Scheme.{u}} [IsLocallyNoetherian X]\n    (F : X.Modules)\n    (hFcoh : AlgebraicGeometry.RingedSpace.IsCoherent X.toRingedSpace F)\n    (hFsupport : ∀ x : X, ¬ Subsingleton ((presheaf F).stalk x))\n    (hFnoEmbedded : ∀ (U : X.Opens) (_ : IsAffineOpen U)\n      (p : Ideal (Γ(X, U))),\n      p ∈ associatedPrimes (Γ(X, U)) (Γ(F, U)) →\n        Minimal (fun q : Ideal (Γ(X, U)) =>\n          q ∈ associatedPrimes (Γ(X, U)) (Γ(F, U))) p)\n    (L : X.Modules) [L.IsInvertible]\n    (s : unit X ⟶ meromorphicModule X L)\n    (hs : Mono (meromorphicSectionMap X L s)) :\n    kernel.ι ((pullback.fst s (toMeromorphicModule X L)) ▷ F ≫ (λ_ F).hom) ≫\n        ((pullback.snd s (toMeromorphicModule X L)) ▷ F ≫ (β_ L F).hom) = 0 ∧\n      kernel.ι ((pullback.snd s (toMeromorphicModule X L)) ▷ F ≫ (β_ L F).hom) ≫\n        ((pullback.fst s (toMeromorphicModule X L)) ▷ F ≫ (λ_ F).hom) = 0",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261023T135105-L-2833884",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261023T135105-L-2833884",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleInjectiveSectionsComparison
+public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.EtaleInjectiveSectionsComparison
 public import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexSingle
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs

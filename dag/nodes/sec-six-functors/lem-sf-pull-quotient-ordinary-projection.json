@@ -1,0 +1,136 @@
+{
+ "id": "lem-sf-pull-quotient-ordinary-projection",
+ "kind": "statement",
+ "title": "Finite projection of the ordinary quotient pullback mate",
+ "statement": "Fix a prime l, a finite extension E/Q_l, arbitrary schemes X,Y and f:X→Y, an OrdinaryLimitModel a [def-sf-integral-system-canonical-bridge] and a normalized strict Pull presentation p [def-sf-pull-completion-comparison]. For any unbounded completed-coefficient complex P on Y and n≥0, put R=f*P termwise, C=f*_seq(red_Y(P)) termwise, and Z=Res(C) as a complex of towers. Let b:R→lim(Z) be the ordinary reduction/limit adjunction unit on R, followed by the ordinary limit of a.reductionPullComplex(f,P) and the canonical complex-of-composite comparison. Then b followed by the nth termwise limit projection and the nth component of pullbackTensorPullbackTower(f,P) [def-pur-completed-pullback-tower-realizations] equals the nth quotient augmentation of R [def-pur-integral-derived-operations] followed by the nth component of p.tower on P. This is an equality of cochain maps before derived localization; P need not be K-flat or complete.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Maps-used sentence, primitive tensor/pullback coefficient comparison and open-factor normalization. Ordinary unit calculation: Stacks 03D7, sites-modules.tex, lemma-adjoint-pullback-pushforward-modules; tensor interchange: 03EL, sites-modules.tex, lemma-tensor-product-pullback. Ordinary projections: 0941, sites-cohomology.tex, lemma-derived-limit-is-ok."
+ },
+ "stmt_deps": [
+  "def-sf-integral-system-canonical-bridge",
+  "def-sf-pull-completion-comparison",
+  "def-pur-completed-pullback-tower-realizations",
+  "def-pur-integral-derived-operations",
+  "lem-pur-integral-operations-well-defined"
+ ],
+ "proof": [
+  {
+   "text": "In each degree apply the unit identity for inverse adjoint conjugates to a.comparison. It identifies the ordinary mate with the ordinary scalar unit followed by the sequence pullback unit, transported by a.comparison. Project to n using a.projections.",
+   "uses": [
+    "def-sf-integral-system-canonical-bridge"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The unit normalizations of the ordinary reduction evaluation and inverse-image evaluation cancel their inverses in pullbackTensorPullbackTower. The projected mate sends the integral pullback unit of x to the finite pullback unit of 1 tensor x. Use the already proved section normalization in scalarReductionExtension_adjunction to identify the finite scalar unit with the sheafified section 1 tensor x.",
+   "uses": [
+    "def-pur-completed-pullback-tower-realizations",
+    "lem-weil-derived-scalar-extension-restriction-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By the prescribed augmentation formula and p.generators, the other composite has the same values. The ordinary pullback Hom bijection and sectionwise extensionality prove equality in each degree, hence equality of cochain maps. All formulas apply to empty schemes, zero complexes, exponent one and identities.",
+   "uses": [
+    "def-sf-pull-completion-comparison",
+    "def-pur-integral-derived-operations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-system-canonical-bridge",
+  "def-pur-completed-pullback-tower-realizations",
+  "def-sf-pull-completion-comparison",
+  "def-pur-integral-derived-operations",
+  "lem-weil-derived-scalar-extension-restriction-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Ordinary projected-section part of proof step 2 of lem-sf-pull-quotient-augmentation-on-good; the tensor and geometric adjunction units in the maps-used sentence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "Adjunction.unit_naturality",
+   "results": "loogle: unknown identifier 'Adjunction.unit_naturality'; 0 hits; generic adjunction or scalar units only, no matching specified ordinary projection.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction transpose commutes with natural transformation and derived localization on cochain complexes",
+   "results": "; 8 hits; generic adjunction or scalar units only, no matching specified ordinary projection.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Roos.*[Tt]ranspose|[Tt]ranspose.*Roos|[Qq]uotient.*[Aa]ugmentation",
+   "results": "; 0 hits; generic adjunction or scalar units only, no matching specified ordinary projection.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension and inverse image commute through adjunction units and limit projections of sheaves of modules",
+   "results": "; 8 hits; generic adjunction or scalar units only, no matching specified ordinary projection.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.PullQuotientAugmentationOnGood",
+  "date": "2026-10-27",
+  "group": "K7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Proof, maps-used sentence: ordinary tensor and geometric adjunction units; projected-section calculation in the primitive pullback comparison.",
+   "via": [
+    "lem-sf-pull-quotient-augmentation-on-good",
+    "lem-sf-primitive-quotient-augmentations"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.PullQuotientOrdinaryProjection",
+  "file": "lean/Sheaf/SixFunctors/PullQuotientOrdinaryProjection.lean",
+  "declaration": "WeilConjectures.GeneratorReduction.pullQuotientOrdinaryProjection",
+  "statement": "theorem pullQuotientOrdinaryProjection\n    (a : IntegralSystemRealization.OrdinaryLimitModel l E)\n    {X Y : Scheme.{u}} (f : X ⟶ Y) (p : OpenFactorCoherence.Pull l E f)\n    (P : CochainComplex (integralTowerModules l E Y) ℤ) (n : ℕ) :\n    let R := (OpenFactorCoherence.pullCx l E f).obj P\n    let C := ((pullbackTensorSequenceInverse l E f).mapHomologicalComplex (.up ℤ)).obj\n      (((pullbackTensorOrdinaryReduction l E Y).mapHomologicalComplex (.up ℤ)).obj P)\n    let Z := ((coefficientSequenceRestriction l E X).mapHomologicalComplex (.up ℤ)).obj C\n    ((pullbackTensorOrdinaryAdjunction l E X).mapHomologicalComplex (.up ℤ)).unit.app R ≫\n        ((pullbackTensorOrdinaryLimit l E X).mapHomologicalComplex (.up ℤ)).map\n          (a.reductionPullComplex l E f P) ≫\n        (Functor.mapHomologicalComplexCompIso\n          (Iso.refl (coefficientSequenceRestriction l E X ⋙\n            pullbackTensorConstantLimit l E X)) (.up ℤ)).inv.app C ≫\n        (NatTrans.mapHomologicalComplex (lim.π (op n)) (.up ℤ)).app Z ≫\n        (pullbackTensorPullbackTower l E f P).hom.app (op n) =\n      ((IntegralOnSlice.augmentation l E X none).app R).app (op n) ≫\n        (p.tower.hom.app P).app (op n)",
+  "branch": "sheaf-dag",
+  "by": "K7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261027T034707-L-3675027",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261027T034707-L-3675027",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,132 @@
+{
+ "id": "def-trf-blowup-square-pullback-maps",
+ "kind": "definition",
+ "title": "Induced morphism and ordinary module comparison for a flat blowup square",
+ "statement": "Let $f:X\\to S$, $e:T\\to S$, $g:Y\\to T$, and $j:Y\\to X$ be morphisms of schemes with $f\\circ j=e\\circ g$ [def-pc-scheme], and assume $e$ is flat [def-weil-flat-morphism]. Let $\\mathcal I\\subseteq\\mathcal O_S$ be a quasi-coherent ideal [pqf-def-coherent], and put $\\mathcal I_T=\\mathcal I\\mathcal O_T$ [def-nagata-extended-ideal]. Write $b:B=\\operatorname{Bl}_{\\mathcal I}S\\to S$ and $b_T:B_T=\\operatorname{Bl}_{\\mathcal I_T}T\\to T$ [def-nagata-global-blowup]. Let $\\beta:B_T\\to B$ be the composite of the canonical flat blowup base-change map with its projection to $B$ [def-nagata-blowup-flat-base-change-map]. Set $P=X\\times_SB$, $Q=Y\\times_TB_T$, with projections $p:P\\to X$, $q:P\\to B$, $r:Q\\to Y$, and $s:Q\\to B_T$ [def-pc-fibre-product]. Define $u:Q\\to P$ to be the unique induced morphism with $p\\circ u=j\\circ r$ and $q\\circ u=\\beta\\circ s$. For every sheaf of modules $\\mathcal F$ on $X$, define the ordinary-pullback comparison $\\gamma:u^*p^*\\mathcal F\\xrightarrow{\\sim}r^*j^*\\mathcal F$ [def-pc-module-pullback] as the composite $u^*p^*\\mathcal F\\cong(p\\circ u)^*\\mathcal F=(j\\circ r)^*\\mathcal F\\cong r^*j^*\\mathcal F$ using the section-normalized composition comparisons of that pullback. These are the constructions named moduleStrictTransformFlatPullbackMap and moduleStrictTransformFlatPullbackSourceIso, respectively. No flatness of $j$, finite-type condition on $\\mathcal I$, or quasi-coherence condition on $\\mathcal F$ is part of this definition.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tags 0805 (lemma-flat-base-change-blowing-up) and 080D (definition-strict-transform); flat.tex Tag 0814 (lemma-flatten-module-etale-localize), proof paragraphs 1--2: canonical restriction of blown-up sources and ordinary pullbacks."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "pqf-def-coherent",
+  "def-nagata-extended-ideal",
+  "def-nagata-global-blowup",
+  "def-nagata-blowup-flat-base-change-map",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "moduleStrictTransformFlatPullbackMap|moduleStrictTransformFlatPullbackSourceIso|blowupFlatBaseChange",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match for the specified induced morphism and section-normalized pullback comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical morphism of blown up sources for a flat base change square and the induced composition isomorphism of ordinary module pullbacks",
+   "results": "[leansearch] OK 8 hit(s); SheafOfModules.pullbackIso, AlgebraicGeometry.Scheme.Modules.pullbackComp, Module.Flat.isBaseChange, KaehlerDifferential.tensorKaehlerEquiv, RingHom.Flat.isStableUnderBaseChange, Algebra.IsPushout.cancelBaseChangeAux, AlgebraicGeometry.Scheme.Modules.pullbackCongr, KaehlerDifferential.tensorKaehlerEquivBase.",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match for the specified induced morphism and section-normalized pullback comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical morphism of blown up sources for a flat base change square and the induced composition isomorphism of ordinary module pullbacks",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat.instFstScheme, AlgebraicGeometry.pullbackSpecIso_hom_base, AlgebraicGeometry.Flat.instSndScheme, AlgebraicGeometry.pullbackSpecIso_hom_base_assoc, AlgebraicGeometry.pullbackSpecIso_hom_fst'_assoc, AlgebraicGeometry.pullbackSpecIso_hom_snd_assoc, AlgebraicGeometry.pullbackSpecIso_hom_fst_assoc.",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match for the specified induced morphism and section-normalized pullback comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "moduleStrictTransformFlatPullbackMap|moduleStrictTransformFlatPullbackSourceIso in lean/WeilConjectures and lean/Sheaf",
+   "results": "No WeilConjectures matches. Sheaf/AlgebraicGeometry/ModuleStrictTransformFlatPullback.lean declares the map at line 42 and the source isomorphism at line 61; the remaining occurrences in that file are their uses.",
+   "date": "2026-10-24",
+   "verdict": "Reuse both existing definitions by public import; do not redeclare their names or data."
+  },
+  {
+   "tool": "grep",
+   "query": "moduleStrictTransformFlatPullbackMap|moduleStrictTransformFlatPullbackSourceIso in dag/nodes; blueprint_refs.py search strict transform pullback; blueprint_refs.py search blowup",
+   "results": "Literal names occur only in lem-trf-module-strict-transform-flat-pullback. Blueprint searches return 0 and 66 nodes respectively. The flat-pullback theorem and lem-trf-blowup-square-pullback-quotient-data assert properties of these maps; neither is a definition node owning these constructions. def-nagata-blowup-flat-base-change-map owns the base blowup comparison, not the induced source map or its module comparison.",
+   "date": "2026-10-24",
+   "verdict": "No existing definition node owns this pair; add an owning definition node with a re-export module."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-etale-flatification-affine-refinement",
+  "date": "2026-10-24",
+  "group": "NB"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument is applied to the finite-type module i_* O_X on an affine-space neighbourhood. Stacks 0815 proof paragraph 1: the question is etale local on the source and target. Expanded 0814 argument: Tag 0814, lemma-flatten-module-etale-localize, proof paragraph 2: finite open refinement after applying lemma-push-ideal; preliminary finite affine refinement of the local bases. Returned proof steps 1 and 5. Canonical blowup-square and ordinary-pullback maps in refinement proof step 6.",
+   "via": [
+    "lem-trf-etale-flatification-affine-refinement",
+    "lem-trf-etale-flattening-descent",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BlowupSquarePullbackMaps",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.blowupSquarePullbackMap",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.blowupSquarePullbackMap",
+   "AlgebraicGeometry.Scheme.Modules.moduleStrictTransformFlatPullbackMap",
+   "AlgebraicGeometry.Scheme.Modules.moduleStrictTransformFlatPullbackSourceIso"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/BlowupSquarePullbackMaps.lean",
+  "statement": "abbrev blowupSquarePullbackMap {X S Y T : Scheme.{u}} (f : X ⟶ S) (e : T ⟶ S) (g : Y ⟶ T) (j : Y ⟶ X) (h : j ≫ f = g ≫ e) [Flat e] (I : S.IdealSheafData) : Limits.pullback g (I.comap e).blowupMap ⟶ Limits.pullback f I.blowupMap",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Owns and publicly re-exports the two existing constructions from ModuleStrictTransformFlatPullback, without redeclaring their names or data. The primary declaration is a transparent abbreviation of the induced map; lean.declarations records both re-exported definitions. The comparison theorem is not a hypothesis or a construction used here."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7c76c0b23",
+  "group": "NB",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7c76c0b23",
+  "group": "NB",
+  "result": "pass",
+  "note": "Re-delivery after 2b21 H2 RETURN. The item module is byte-identical to 2b21 except imports. Item JSON differs from live only in lean + stmt_deps: +new def node def-trf-blowup-square-pullback-maps and +def-nagata-blowup-flat-base-change-map (closed upstream, accepted as landed); the theorem node moved to proof_deps only. Re-checked all hypotheses and conclusion clauses, the affine D(a) version, edge cases and universes: correct. New def node statement matches live moduleStrictTransformFlatPullbackMap (pullback.lift via blowupFlatBaseChangeIso) and SourceIso (tensorPullbackSectionComp composite). Module = public re-export + transparent abbrev, not hollow, docstrings OK, no clash or cycle. Advisories: the two defs are double-listed in the theorem node's and new node's lean.declarations; def-nagata-blowup-flat-base-change-map has no lean record. No recompile (no file changed); worker reports clean compiles."
+ }
+}

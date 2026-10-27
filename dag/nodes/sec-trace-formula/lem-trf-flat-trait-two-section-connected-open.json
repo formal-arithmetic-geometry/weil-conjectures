@@ -1,0 +1,332 @@
+{
+ "id": "lem-trf-flat-trait-two-section-connected-open",
+ "kind": "statement",
+ "title": "Connected open containing two sections over a trait with reduced closed fibre",
+ "statement": "Let $R$ be a discrete valuation ring [def-sc-discrete-valuation-ring], let $S=\\operatorname{Spec}R$ with generic point $\\eta$ and closed point $s$, and let $f:X\\to S$ be flat [def-weil-flat-morphism] and of finite presentation (locally of finite presentation [def-sbc-locally-finite-presentation], quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]). Let $\\sigma,\\tau:S\\to X$ be sections, $f\\circ\\sigma=f\\circ\\tau=\\mathrm{id}_S$ [def-pc-scheme, def-pc-section]. Assume the closed fibre $X_s$ [def-pc-scheme-fibre] is reduced [def-pc-reduced-scheme]. Put $F=f^{-1}(\\{s\\})$ and let $D$ be the connected component of $\\sigma(s)$ in $F$ [def-weil-connected-scheme]. If $\\tau(s)\\in D$, there exists an open subscheme $W\\subseteq X$ [def-weil-open-immersion] containing $D$ such that $W\\cap F=D$, $W$ is connected and nonempty, and both sections factor as scheme morphisms through $W$. The restriction $h:W\\to S$ is flat, its closed fibre $W_s$ is reduced, and its generic fibre $W_\\eta$ is connected and nonempty. In particular $\\tau(\\eta)$ belongs to the connected component of $\\sigma(\\eta)$ in $f^{-1}(\\{\\eta\\})$.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 055Q, lemma-connected-along-section-open-neighbourhood, last paragraph: remove other closed-fibre components, retain a connected open, apply the connected-generic-fibre theorem"
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-scheme",
+  "def-pc-section",
+  "def-pc-scheme-fibre",
+  "def-pc-reduced-scheme",
+  "def-weil-connected-scheme",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "The DVR $R$ is Noetherian: every ideal is principal, hence finitely generated. The single affine chart $S=\\operatorname{Spec}R$ therefore makes $S$ locally Noetherian, and the affine-scheme quasi-compactness lemma makes $S$ quasi-compact. Thus $S$ is a Noetherian scheme, in the precise sense used by the finite-type-over-Noetherian theorem.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "def-weil-pbc-noetherian-ring",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01OV, definition-noetherian; Tag 055Q, final paragraph, DVR case; affine quasi-compactness: Algebra Tag 00E8"
+   }
+  },
+  {
+   "text": "Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation supplies the proved instance [LocallyOfFinitePresentation f] → LocallyOfFiniteType f, by affineLocally_le and RingHom.FiniteType.of_finitePresentation. Thus f is locally of finite type without the cancellation theorem lem-a1-map-over-base-finite-presentation. Apply LocallyOfFiniteType.isLocallyNoetherian to f and QuasiCompact.compactSpace_of_compactSpace to f to obtain IsNoetherian X, then its IsNoetherian.noetherianSpace instance gives the Noetherian underlying space directly. This uses the existing Mathlib matches of the finite-type-over-Noetherian and Noetherian-topology nodes; no separate minimal-closed-set argument is needed.",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian; Properties Tag 01OZ, lemma-Noetherian-topology"
+   }
+  },
+  {
+   "text": "Every subspace of a Noetherian space is Noetherian (the subtype instance of Mathlib.Topology.NoetherianSpace). Indeed each descending relatively closed chain can be represented by intersections with descending ambient closed sets, using successive finite intersections, and hence stabilizes. Apply this to F and to the open subspace constructed below, including the empty-subspace case.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0052, lemma-Noetherian, first assertion and its elementary chain argument"
+   }
+  },
+  {
+   "text": "Let F be the closed point-set fibre and x its point given by σ(s), using the section equation. Let D be its connected component. By lem-sfb-noetherian-connected-components-open the component of x in the subtype F is open, so its complement is closed in F. Since s is closed, F is closed in X; the image C of this complement under the closed embedding F → X is therefore closed. Put U = X minus C. The subtype image formula for connectedComponentIn gives D ⊆ U and U ∩ F = D. Let W be the connected component of σ(s) in U. The Noetherian component-openness theorem makes X locally connected by applying the same theorem to its open subspaces, so W is open in X. Connectedness of D and maximality of W give D ⊆ W, whence W ∩ F = D. The component W is connected and nonempty since it contains σ(s).",
+   "uses": [
+    "lem-sfb-noetherian-connected-components-open",
+    "def-weil-connected-scheme",
+    "def-weil-open-immersion",
+    "def-pc-section"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055Q, lemma-connected-along-section-open-neighbourhood, final paragraph; Tag 055J, lemma-connected-flat-over-dvr"
+   }
+  },
+  {
+   "text": "For either section φ the special point φ(s) belongs to W: use σ(s) ∈ D or the hypothesis τ(s) ∈ D and D ⊆ W. Every prime of the spectrum of a local ring specializes to its closed point. Continuity of φ and stability of an open under generization imply φ(z) ∈ W for every z. Thus the range of φ lies in the range of W.ι. The open-immersion lifting construction IsOpenImmersion.lift gives φW with φW ≫ W.ι = φ; its sheaf maps are the restrictions of those of φ. Apply this to both σ and τ.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-pc-section",
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055Q, lemma-connected-along-section-open-neighbourhood, final paragraph; Tag 055J, lemma-connected-flat-over-dvr"
+   }
+  },
+  {
+   "text": "Put h = W.ι ≫ f. Open immersions are flat and flat morphisms compose, so h is flat. The pullback map h.fiber s → f.fiber s induced by W.ι and identity maps on Spec κ(s) and Spec R is an open immersion, by base change of the open immersion W.ι. It follows that h.fiber s is reduced: isReduced_of_isOpenImmersion applies to this map and the assumed reducedness of f.fiber s. This comparison map is precisely the fibre-product restriction used in the source.",
+   "uses": [
+    "def-weil-flat-morphism",
+    "def-pc-scheme-fibre",
+    "def-weil-open-immersion",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055Q, lemma-connected-along-section-open-neighbourhood, final paragraph; Tag 055J, lemma-connected-flat-over-dvr"
+   }
+  },
+  {
+   "text": "Let η be the zero prime of the domain R, the generic point. Apply lem-sbc-connected-generic-fibre-trait to h using connectedness and nonemptiness of W, flatness of h, and reducedness of its closed fibre. Its generic fibre is connected and nonempty. Put g = h.fiberι η ≫ W.ι and A = range g; continuity makes A preconnected. For either factored section φW, its section equation gives h(φW(η)) = η. The inverse of h.fiberHomeo η therefore gives a point of h.fiber η projecting to φW(η), and then to φ(η), so both σ(η) and τ(η) lie in A. The fibre homeomorphism also shows A ⊆ f⁻¹({η}). Maximality of the connected component in that fibre, via IsPreconnected.subset_connectedComponentIn, implies A is contained in the component of σ(η). This proves the last assertion.",
+   "uses": [
+    "lem-sbc-connected-generic-fibre-trait",
+    "def-pc-scheme-fibre",
+    "def-weil-connected-scheme",
+    "def-pc-section",
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055Q, lemma-connected-along-section-open-neighbourhood, final paragraph; Tag 055J, lemma-connected-flat-over-dvr"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-noetherian-ring",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-sfb-noetherian-connected-components-open",
+  "def-weil-connected-scheme",
+  "def-weil-open-immersion",
+  "def-pc-section",
+  "def-weil-flat-morphism",
+  "def-pc-scheme-fibre",
+  "def-pc-reduced-scheme",
+  "lem-sbc-connected-generic-fibre-trait"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 055Q, lemma-connected-along-section-open-neighbourhood, final paragraph; Tag 055J, lemma-connected-flat-over-dvr. Formalized by U1 using Mathlib Noetherian, open-immersion and fibre APIs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Two sections of a flat finitely presented scheme over a discrete valuation ring meeting the same connected component of the reduced special fibre factor through a connected open with connected generic fibre",
+   "results": "8 hits: AlgebraicGeometry.ValuativeCriterion.eq, AlgebraicGeometry.ValuativeCriterion.Existence.eq, AlgebraicGeometry.ValuativeCriterion.existence, AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap, AlgebraicGeometry.ValuativeCriterion.uniqueness, AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap, AlgebraicGeometry.Flat.generalizingMap, AlgebraicGeometry.IsSeparated.valuativeCriterion. No exact result or one-line specialization; reviewed the returned types and relevant source.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "09355e6672047bf3"
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a flat finite presentation family over a DVR with reduced closed fibre two sections in one special component lie in a connected open whose generic fibre is connected",
+   "results": "8 hits: AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono, AlgebraicGeometry.Flat.mk, AlgebraicGeometry.Flat.flat_of_affine_subset, AlgebraicGeometry.Flat.instMorphismRestrict, AlgebraicGeometry.Flat.casesOn, AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat.instResLE, AlgebraicGeometry.UniversallyOpen.of_flat. No exact result or one-line specialization; reviewed the returned types and relevant source.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "9a9d6130d085b77b"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, ConnectedSpace",
+   "results": "0 hits: . No exact result or one-line specialization; reviewed the returned types and relevant source.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "grep",
+   "query": "connected.*generic.*[fF]ibre|section.*connectedComponentIn|connectedComponentIn.*section",
+   "results": "0 hits: . No exact result or one-line specialization; reviewed the returned types and relevant source.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat scheme over a DVR with reduced special fibre the connected component containing two sections has connected generic fibre",
+   "results": "8 hits: AlgebraicGeometry.Flat.generalizingMap, AlgebraicGeometry.ValuativeCommSq.domain, AlgebraicGeometry.ValuativeCriterion.Existence.eq, AlgebraicGeometry.Flat, AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap, AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap, AlgebraicGeometry.IsIntegral, AlgebraicGeometry.irreducibleSpace_of_isIntegral. No exact result or one-line specialization; reviewed the returned types and relevant source.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "0645177923c1a433"
+  },
+  {
+   "tool": "grep",
+   "query": "[rR]educed.*[cC]onnected|[cC]onnected.*[rR]educed|connectedComponent",
+   "results": "8 hits: Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean. No exact result or one-line specialization; reviewed the returned types and relevant source.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "828d306562aa2205"
+  },
+  {
+   "tool": "grep",
+   "query": "connected.*generic.*[fF]ibre|trait_sections_mem_same_generic_component|two.section",
+   "results": "0 hits: . Returned types read; no exact match or one-line specialization to the full flat two-section open assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat finite presentation family over a discrete valuation ring with reduced special fibre admits a connected open containing two sections through the same special component",
+   "results": "8 hits: AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Flat.flat_appLE, Module.Flat.flat_iff_torsion_eq_bot_of_valuationRing_localization_isMaximal, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.flat_iff, AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE. Returned types read; no exact match or one-line specialization to the full flat two-section open assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "c50f5df2c6167dbe"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, ConnectedSpace",
+   "results": "0 hits: . Returned types read; no exact match or one-line specialization to the full flat two-section open assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two sections of a flat finitely presented scheme over a DVR with reduced closed fibre meeting the same special connected component factor through a connected open with connected generic fibre",
+   "results": "8 hits: AlgebraicGeometry.ValuativeCriterion.eq, AlgebraicGeometry.ValuativeCriterion.Existence.eq, AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap, AlgebraicGeometry.ValuativeCriterion.existence, AlgebraicGeometry.Flat.generalizingMap, AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap, AlgebraicGeometry.ValuativeCommSq.domain, AlgebraicGeometry.spread_out_of_isGermInjective'. Returned types read; no exact match or one-line specialization to the full flat two-section open assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "b1f8e8c6fbc8f281"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat degeneration over a trait a reduced special fibre prevents a connected total space from having a disconnected generic fibre, and two sections can be restricted to the same open connected component",
+   "results": "8 hits: AlgebraicGeometry.Flat.generalizingMap, AlgebraicGeometry.Flat, AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget, AlgebraicGeometry.ValuativeCriterion.Existence.eq, AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap, AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap, AlgebraicGeometry.ext_of_isDominant_of_isSeparated, AlgebraicGeometry.spread_out_of_isGermInjective'. Returned types read; no exact match or one-line specialization to the full flat two-section open assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "3a981a01fd53e3f6"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-flat-reduced-section-component-generalization",
+  "date": "2026-10-22",
+  "group": "Q52"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Tag 055Q generalization argument used in Tag 055R: the section-component openness needed for the flat slicing and alteration route beneath lem-trf-local-term-locality (the nearby-cycle/specialization proof). Auxiliary 055Q argument: Tag 055Q, lemma-connected-along-section-open-neighbourhood, last paragraph: remove other closed-fibre components, retain a connected open, apply the connected-generic-fibre theorem.",
+   "via": [
+    "lem-trf-flat-reduced-section-component-generalization",
+    "lem-trf-flat-reduced-section-component-open",
+    "lem-trf-finite-locally-free-multisection-connected-open",
+    "lem-trf-geometrically-connected-fibre-open-spreading",
+    "lem-trf-geometrically-integral-fibre-neighbourhood",
+    "lem-trf-etale-finite-smooth-local-structure",
+    "lem-trf-elementary-module-devissage",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-flat-trait-two-section-connected-open",
+  "worker": "stage1",
+  "summary": "Repair of L refusal of returned head ab8993490f0. The retained split first passed the current-server dry run at 42018b7a40d. Compared current live item fields and reread all statement/proof dependencies: no cited mathematical statement changed, all 24 citation pairs remain verbatim, and the readable live item remains unsplit. Retained all proof, report and genuine search evidence. Step 7 now proves that any prime representing the generic point equals the zero prime, using its closure and the zero-prime point itself, so the exact generic point in the existing trait theorem is justified in both directions. No statement, hypothesis, blueprint lineage or route changed; no new nodes or Mathlib leaves. deliver.py reconstructs this adjusted delivery on current server main for the maintainer promotion identified by L.",
+  "blueprint": "Auxiliary Tag 055Q trait argument identified in blueprint.from.place, beneath lem-trf-local-term-locality through the existing flattening/slicing dependency chain. The latest ancestor statement (blueprint main ef6f9619fdbffa59e88528fb56483d76c70258c8) was read; no chapter or unit route is replaced. Steps 1-4 realize removal of other closed-fibre components and retention of a connected open; steps 5-7 give section restriction and the Tag 055J application.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "why": "Generic Noetherian-topology tool converting the Noetherian scheme to its underlying space; the trace unit has no replacement for this topology fact."
+   },
+   {
+    "node": "lem-sfb-noetherian-connected-components-open",
+    "why": "Generic topological component-openness tool used for F and U; not a replacement of any trace-formula unit step."
+   },
+   {
+    "node": "lem-sbc-connected-generic-fibre-trait",
+    "why": "Exactly the Tag 055J theorem called by the item source 055Q; used for a flat connected open with reduced closed fibre, not the stronger smooth-only section theorem."
+   },
+   {
+    "node": "lem-a1-map-over-base-finite-presentation",
+    "why": "Generic Stacks 02FV permanence (with q = id_S) giving locally of finite type from locally of finite presentation in step 2; added by the Q117 Codex reader (FIX); already cited by trace-formula nodes of this chain (lem-trf-elementary-devissage-finite-presentation)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-sfb-noetherian-connected-components-open",
+  "lem-sbc-connected-generic-fibre-trait"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q117-b8c7ea08c",
+  "group": "Q117",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-b8c7ea08c (reviewer sub-agent of L); spot-checked: 19th head of the side-completion promotion loop. Live and side-live items are still unsplit; 0 new nodes; statement, stmt_deps, source and blueprint unchanged. Compared with ab8993490f06 (snapshot and fixes/), the only new content is step 7: if a prime p represents η then V(p)=Spec R, so (0)∈V(p), p⊆(0) and p=(0). This is correct and matches the zero-prime fibre of lem-sbc-connected-generic-fibre-trait. Regression (C1/C2), lost for the 9th time: step 2 again says 'lfp + qc give finite type'. def-sbc-locally-finite-presentation only gives a finitely presented chart pair around each point, while def-weil-finite-type-morphism asks for a finite-type cover over every affine V, which needs locality (02FV). FIX: proof[1], proof_deps and the lem-a1 tool_use copied from the ab89 fixes/, i.e. cite lem-a1-map-over-base-finite-presentation with q=id_S. Steps 1 and 3-7 are verbatim from the head, and proof_deps (17) equals the union of uses. Full re-read of steps 1-7: S Noetherian via DVR, locnoeth and affine qc; X Noetherian via finite-type-over-Noetherian and the DCC on closed sets; subspace chains via cumulative intersections; D open in F and W the component in U=X minus (F minus D), with W∩F=D; both sections factor through W (unit argument, open-target restriction, unique); h flat by equal stalks; W_s isomorphic to p^-1(W), open in the reduced X_s; 055J (more-morphisms.tex:8132) applied with all hypotheses; component maximality gives tau(eta) in the component of sigma(eta). All cited statements are byte-identical to the ab89 snapshot and none is merged. Source is 055Q, final trait paragraph. Edge cases: sections exclude empty X and empty closed fibre; D=F gives U=X; X=S⊔S works; R[t]/(t(t-pi)) shows reducedness is needed. Accepted generic tool uses: Noetherian-topology DCC, component-openness, 055J, 02FV lem-a1. No SGA. Maintainer: please put the step-2 fix into the worker sandbox; it has been dropped on every re-push.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatTraitTwoSectionConnectedOpen",
+  "declaration": "AlgebraicGeometry.exists_connected_open_two_sections_of_flat_trait",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatTraitTwoSectionConnectedOpen.lean",
+  "statement": "theorem exists_connected_open_two_sections_of_flat_trait {R : Type u} [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] {X : Scheme.{u}} (f : X ⟶ Spec (.of R)) [Flat f] [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] (σ τ : Spec (.of R) ⟶ X) (hσ : σ ≫ f = 𝟙 (Spec (.of R))) (hτ : τ ≫ f = 𝟙 (Spec (.of R))) [IsReduced (f.fiber (closedPoint R))] (hτD : τ (closedPoint R) ∈ connectedComponentIn (f ⁻¹' {closedPoint R}) (σ (closedPoint R))) : (∃ W : X.Opens, connectedComponentIn (f ⁻¹' {closedPoint R}) (σ (closedPoint R)) ⊆ (W : Set X) ∧ (W : Set X) ∩ f ⁻¹' {closedPoint R} = connectedComponentIn (f ⁻¹' {closedPoint R}) (σ (closedPoint R)) ∧ ConnectedSpace W.toScheme ∧ (∃ σW : Spec (.of R) ⟶ W.toScheme, σW ≫ W.ι = σ) ∧ (∃ τW : Spec (.of R) ⟶ W.toScheme, τW ≫ W.ι = τ) ∧ Flat (W.ι ≫ f) ∧ IsReduced ((W.ι ≫ f).fiber (closedPoint R)) ∧ ConnectedSpace ((W.ι ≫ f).fiber (⟨⊥, Ideal.isPrime_bot⟩ : PrimeSpectrum R))) ∧ τ (⟨⊥, Ideal.isPrime_bot⟩ : PrimeSpectrum R) ∈ connectedComponentIn (f ⁻¹' {(⟨⊥, Ideal.isPrime_bot⟩ : PrimeSpectrum R)}) (σ (⟨⊥, Ideal.isPrime_bot⟩ : PrimeSpectrum R))",
+  "branch": "sheaf-dag",
+  "by": "Q76",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-95b39c151",
+  "group": "Q76",
+  "result": "pass",
+  "note": "Only the lean field differs from the live node, which had no lean record before (not a rebind). Clause-by-clause match: DVR with IsDomain; Flat+LocallyOfFinitePresentation+QuasiCompact+QuasiSeparated exactly as def-weil-pbc-scheme-conventions; sections by equation; IsReduced on f.fiber (closedPoint R); D = connectedComponentIn; conclusion W : X.Opens with D ⊆ W, W ∩ F = D, ConnectedSpace (nonempty included), factorizations σW ≫ W.ι = σ and τW ≫ W.ι = τ, Flat/IsReduced/ConnectedSpace for W.ι ≫ f, τ(η) in the component of σ(η) outside the ∃. Matches the hypotheses and generic-point form of the recorded 055J theorem connectedSpace_generic_fibre_of_flat_trait; matches 055Q's final DVR paragraph. Universe u bound, statement field verbatim, sorry-only, docstrings with source, blueprint tag and 7 steps, report sections present, no new nodes or defs. Not recompiled (no file changed). No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261026T092727-L-3460873",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

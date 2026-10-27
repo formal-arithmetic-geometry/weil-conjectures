@@ -1,0 +1,131 @@
+{
+ "id": "lem-sf-canonical-reduction-pull-tensor",
+ "kind": "statement",
+ "title": "Canonical ordinary reduction respects open restriction and tensor",
+ "statement": "Fix a prime l, a finite extension E of Q_l, and the representative-normalized operation data o of [def-sf-generator-reduction-data], including the whole-system reduction functors R_T, the ordinary ringed tensor T_T, and its comparison mu_T with system tensor, the ordinary restriction P_j, the system restriction Psys_j, and the specified comparison chi_j : R_U P_j -> Psys_j R_X of [def-sf-integral-system-canonical-bridge]. For every open immersion j : U -> X and arbitrary ordinary derived completed-coefficient modules H,N on X, reduction of the canonical restriction/tensor comparison, followed by mu_U and tensor(chi_j(H),chi_j(N)), equals chi_j(T_X(H,N)), followed by Psys_j(mu_X(H,N)) and the canonical system restriction/tensor comparison. This is equality of whole strict derived-system morphisms. No completion, extension by zero, projection formula, constructibility or boundedness is asserted or assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Maps-used sentence; open-adjunction expansion, restriction/tensor compatibility."
+ },
+ "stmt_deps": [
+  "def-sf-generator-reduction-data",
+  "def-sf-integral-system-canonical-bridge"
+ ],
+ "proof": [
+  {
+   "text": "Choose simultaneous flat-term K-flat representatives of H and N. Apply the tensorRepresentative and reductionPull model normalizations from the canonical bridge and the reduction tensor representative normalization. At every quotient n the two routes send x tensor y to (1 tensor j*x) tensor (1 tensor j*y). Pullback preserves coefficient projections and the scalar unit, so these formulas commute with every strict transition. On the (a,b) summand both differentials are dx tensor y + (-1)^a x tensor dy. Therefore the two maps of strict quotient complexes agree before localization. The source and target representative identifications are exactly those in the specified ringed and system comparisons, so their localization yields the square on good representatives.",
+   "uses": [
+    "def-sf-integral-system-canonical-bridge",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Maps-used sentence; open-adjunction expansion, restriction/tensor compatibility."
+   }
+  },
+  {
+   "text": "The two routes are natural in both ordinary derived inputs. Flat-term K-flat representatives resolve every input; tensor descent therefore extends the representative equality uniquely to all H,N. Equivalently, use naturality along the two resolving isomorphisms and cancel their image under the source bifunctor. Zero objects, the identity open and the empty open use the same pure-tensor and transition formulas.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Maps-used sentence; open-adjunction expansion, restriction/tensor compatibility."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-system-canonical-bridge",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Maps-used sentence; open-adjunction expansion, restriction/tensor compatibility."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Coefficient extension of module sheaves commutes with pullback and derived tensor products as natural transformations",
+   "results": "SheafOfModules.pullback, Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.freeFunctorCompPullbackIso and ordinary free-module formulas; none states the normalized whole-system derived coefficient square.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Monoidal",
+   "results": "Generic Monoidal, CoreMonoidal, id/composition/equivalence APIs only; no comparison for these specified ringed and strict-system operations.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*pullback|pullback.*tensor",
+   "results": "Mathlib AlgebraicGeometry.PullbackCarrier and generic cartesian monoidal over-category results; no normalized coefficient square. Blueprint search for reduction tensor pullback found no matching node. Repository scalarPull_tensor_coefficient_coherence is for scalar changes on one ringed site at fixed coefficients, not the whole strict reduction system.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenTensorReductionSquare",
+  "date": "2026-10-27",
+  "group": "J5"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Maps-used sentence; open-adjunction expansion, restriction/tensor compatibility.",
+   "via": [
+    "lem-sf-open-tensor-reduction-square",
+    "lem-sf-open-interchange-reduction-squares",
+    "lem-sf-generator-reduction-coherence",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CanonicalReductionPullTensor",
+  "file": "lean/Sheaf/SixFunctors/CanonicalReductionPullTensor.lean",
+  "declaration": "WeilConjectures.GeneratorReduction.canonicalReductionPullTensor",
+  "declarations": [
+   "WeilConjectures.GeneratorReduction.canonicalReductionPullTensor"
+  ],
+  "statement": "theorem canonicalReductionPullTensor\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (o : Operations l E) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]\n    (H N : DerivedCategory (scalarReductionSource l E X)) :\n    let μU := Functor.whiskerRight (eqToIso (o.ringed.tensorClosed U)).hom\n      (IntegralSystemRealization.calculus l E U).reduction ≫\n        (IntegralSystemRealization.calculus l E U).reductionTensor.hom\n    let μX := Functor.whiskerRight (eqToIso (o.ringed.tensorClosed X)).hom\n      (IntegralSystemRealization.calculus l E X).reduction ≫\n        (IntegralSystemRealization.calculus l E X).reductionTensor.hom\n    (IntegralSystemRealization.calculus l E U).reduction.map\n        ((IntegralSystemRealization.ringedTensorPull l E o.ringed j).hom.app (H, N)) ≫\n        μU.app ((IntegralSystemRealization.ringedPull l E j).obj H,\n          (IntegralSystemRealization.ringedPull l E j).obj N) ≫\n        (IntegralSystemRealization.calculus l E U).systemClosed.tensor.map\n          (Prod.mkHom ((o.realization.reductionPull j).hom.app H)\n            ((o.realization.reductionPull j).hom.app N)) =\n      (o.realization.reductionPull j).hom.app\n          ((o.ringed.tensor X).ordinary.tensor.obj (H, N)) ≫\n        (IntegralSystemRealization.pull l E j).map (μX.app (H, N)) ≫\n        (pullbackTensorSystemComparison l E j).hom.app\n          ((IntegralSystemRealization.calculus l E X).reduction.obj H,\n            (IntegralSystemRealization.calculus l E X).reduction.obj N)",
+  "branch": "sheaf-dag",
+  "by": "J5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J5",
+  "result": "pass",
+  "landing": "20261027T021333-L-2758403",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J5",
+  "result": "pass",
+  "landing": "20261027T021333-L-2758403",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

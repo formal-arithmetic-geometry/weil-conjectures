@@ -1,0 +1,66 @@
+# Stage-1 report: lem-trf-bounded-quotient-stalk-realization
+
+## Files written
+
+- dag/nodes/sec-trace-formula/lem-trf-bounded-quotient-stalk-realization.json: item split into seven proof steps; no whole-item Mathlib match. Its statement and existing metadata are retained unchanged.
+- citations.json: 19 verbatim excerpts, one for every use in every proof step.
+- searches.jsonl: the six actual Mathlib searches run through msearch.py; all results were read. The item retains its prior searches and appends these searches with their exact query texts.
+- report.md: this report and the signed mathematical review below.
+
+No new nodes or Mathlib leaves. write_split.py is a sandbox-only preparation script, not a delivery file. No Lean file was written and no compiler, Lake, or build tool was run. No repository or launcher file was modified.
+
+## Attachments
+
+None. Searches in lean/WeilConjectures for the exact blueprint tag and for bounded quotient/stalk, completed stalk, and Roos notions found no declaration stating every clause. The general Roos and ordinary finite stalk declarations do not prove this item. Project declarations containing sorry were not treated as completed proofs.
+
+## WANTED
+
+None: the sources needed for this split are present locally.
+
+## What needed work
+
+The item was statement-only, with no earlier split or report in this sandbox. I retained its statement and all original fields, including its original Mathlib search history, chapter, unit, source and blueprint ancestry. I read the archived original steps 1--2 in coord/reports/Q127/lem-trf-completed-stalk-reparametrization-coherence.md. Their arguments remain present, now made explicit in seven shorter steps.
+
+The original proof referred to the bounded finite-stalk theorem when the K-flat representative itself can be unbounded. Step 3 applies the sheaf case to each individual term concentrated in degree zero; naturality for the differential assembles a chain isomorphism. The bounded zigzag then agrees with that isomorphism, rather than licensing an unsupported application of a bounded theorem to an unbounded complex.
+
+The existing lem-trf-point-pullback-representative-diagram states the arbitrary-input whole-tower comparison with final-object sections, including its fixed cone coordinates, canonical representative comparisons and roofs. It is used directly at f=v; the completed specialization of lem-trf-point-sections-completion-cone only mentions the Frobenius self-map and is not substituted for this more general assertion. This avoids manufacturing another node that would duplicate the existing general representative lemma.
+
+No statement dispute was found. In particular the uniform cohomological interval is actually a hypothesis of the project's definition of the integral category, not a claimed consequence of finite Tor-amplitude. The target statements in GOAL.md are untouched. No unit/chapter route was changed, and the unit record is not written because this item is not its key statement.
+
+## What could not be finished
+
+Nothing mathematical remains in the split. New nodes are unnecessary because the non-elementary ingredients already have nodes. Delivery validation and push are performed after this report is written.
+
+## Not duplicates
+
+There are no new nodes. Whole-blueprint searches for stalks, quotient stalks and truncations and DAG searches for Roos, sectionwise, exact point sections and bounded truncation found the existing tools used below. No blueprint node states the whole item in another form, so blueprint.same_as remains [].
+
+The item is distinct from lem-trf-point-pullback-representative-diagram: that general lemma compares completed pullback sections with the evaluated finite-pullback tower, without a geometric stalk target or simultaneous bounded truncations. Here its map is composed with the explicitly normalized germ comparison. It is distinct from lem-trf-point-sections-completion-cone: that node's completed specialization fixes a Frobenius self-map of s, whereas this item has every geometric v:s->T and the bounded tower replacement. It is distinct from lem-trf-proetale-pullback-stalk-coherence: that theorem is at a finite coefficient level and does not realize an integral tower.
+
+## Review by Q03
+
+I read coord/brief-stage1.md, stages/1-dag.md, the three blueprint levels in SETUP.md, GOAL.md, roles/worker.md, and both complete B--E copies in coord/delivery-errors.md. I read the chapter sec-trace-formula and unit sk-thm-trace-transport, and the current main-20261015 Euler-product proof's Step 1, Local powers, especially input (b). This is the requested canonical integral stalk input for that rational argument. The source route uses no SGA material.
+
+For the mathematical sources I read proetale.tex Tag 0993 (lemma-classical-point), its proof by the initial pointed strict localization and the warning following it about nonconservativity of classical points. At the algebraically closed point s, the initial pointed object is s itself. I read sites.tex Tag 05V1 (lemma-point-morphism-sites), statement and both proof openings: inverse image respects the composed site point. I read homology.tex Tag 0118 (section-truncations), including the cochain kernel/cokernel formulas and their retained cohomology, and sites-cohomology.tex Tag 0941 (lemma-derived-limit-is-ok), including the K-injective tower computation and the resulting product triangle. The specified chain-coordinate normalization and representative independence are additional agent arguments carried by the cited nodes, not assertions attributed verbatim to those Stacks tags. Accordingly proof_origin.by is agent.
+
+For every cited dependency I opened its actual statement, rather than relying on its title or its proof. There are no new nodes whose sources require a separate review. The correspondence between those statements and the seven steps is as follows.
+
+Step 1 uses def-pur-integral-derived-operations for exactly the simultaneous quotient complexes representing the reductions, def-weil-derived-complete-integral-detailed for exactly the common interval, and def-kun-truncations for the explicit good truncations and their cohomology. I checked both arrow directions: the upper truncation includes into P_n, and it projects onto the double truncation. The proof explains why both arrows are quasi-isomorphisms, not merely that their endpoints are bounded. For a=b, the retained quotient is taken inside the upper kernel, so the result is H^a rather than the whole cokernel of d^{a-1}.
+
+Step 2 uses the same operation definition to regard transitions between different quotient rings as completed-ring-linear maps. Kernel restriction and induced quotient maps make the simultaneous construction strictly functorial. The exactness statement of prop-weil-pbc-proetale-constant-exact expressly preserves kernels and cokernels, and uses the underlying inverse image independently of its transported finite-ring action. Those are precisely the hypotheses needed to preserve both endpoints and the semilinear quotient-transition squares. I do not assert the lower truncated terms are flat or K-flat. The zero terms outside the interval, rather than termwise boundedness of the original P, give the bounded replacement.
+
+Step 3 uses the actual pointed-neighbourhood definition in def-weil-proetale-geometric-stalk to prove the identity-point comparison by two mutually inverse representative formulas. For each sheaf term, lem-trf-proetale-pullback-stalk-coherence supplies the coefficient-linear finite comparison and its representative normalization. That theorem's bounded-complex assumption is satisfied by a single sheaf in degree zero. Its naturality then handles every differential of the unbounded complex and the two truncation arrows; this does not assume bounded terms or finite Tor-amplitude. The geometric source k and the compatible site/universe convention are exactly those of the item and the cited comparison.
+
+Step 4 uses the same normalized finite comparison and the constant-ring inverse-image description. I checked the transition equation on a representative: reduction changes x to its image but does not change V or the pointed lift, in either order. This also works for an arbitrary coefficient-linear chain-map component and for the transition from level 2 to level 1. This equation is the strict tower equation needed for the shift s, not just a family of derived equalities at separate levels.
+
+Step 5 uses clause (1) of lem-pur-integral-operations-preserve-constructible only for Lv*M belonging to the integral constructible category; its hypotheses hold because ell is invertible on T and s and M belongs to that category. Def-weil-finite-coefficient-point then identifies Fib_s with exact sections. I read lem-trf-point-pullback-representative-diagram in full: its Y is an arbitrary scheme, f is any map from s, K is arbitrary, and its flat-term K-flat P is exactly the given representative. Its map v_{f,K,P,q} is the specified product comparison on both cone components. Thus it is applicable with Y=T, f=v, K=M. The step composes this with the strict tower isomorphism of Step 4 and checks its whole differential: product(e) commutes with d and conjugates 1-s, so both diagonal coordinates work with the stipulated minus sign and the off-diagonal entries are zero. This is an explicit construction of the claimed e_{v,P}.
+
+Step 6 checks all quasi-isomorphism hypotheses. Lem-weil-point-proetale-sections-exact preserves them on the section tower. Lem-cbc-proetale-classical-stalk expressly makes every classical geometric stalk exact, so it preserves them on the stalk tower. I use neither conservativity of these points nor an identification of all pro-etale sheaves with constant sheaves. Lem-weil-strict-roos-comparison is a functor on the derived category of strict towers, not a choice of unrelated cone fillers. Its exact-product assumption holds for completed coefficient module sheaves by lem-weil-proetale-countable-products-exact, and for ordinary R-modules by coordinatewise lifting of a family of surjections. All index sets are the countable positive integers in the chosen common universe. The two naturality squares from Step 3 therefore compare the very two arrows of the bounded zigzag. A termwise cone or product calculation alone would not license arbitrary derived comparison choices, which is why the normalized strict theorem is cited.
+
+Step 7 uses exactly the all-derived-morphism, inverse-quasi-isomorphism and roof clauses in lem-trf-point-pullback-representative-diagram, together with naturality of the finite comparison from lem-trf-proetale-pullback-stalk-coherence. Inversion of a commuting square with isomorphism sides is an elementary algebraic argument. This proves canonical representative independence with the same section product maps and germ normalization; it does not infer uniqueness from an unspecified distinguished triangle.
+
+I tested zero M, a=b, the case v=id_s, n=1, non-surjective transitions after good truncation, and an unbounded flat-term K-flat representative of a bounded reduction. The proof does not need the truncated transitions to be surjective: it uses exact products and the derived strict-cone functor. Zero gives the zero cone and the unique comparison. When v=id_s the finite comparison is the canonical identity normalization followed by the inverse identity-stalk/sections map. For a=b the previously checked homology quotient is necessary and is present. The differential sign also gives d^2(b,a)=(d(1-s)a-(1-s)da,0)=0. None of these cases forces additional hypotheses or changes the item.
+
+I checked C1 and C4 step by step against the open statements and wrote citations.json by copying actual substrings, with an assertion that each is verbatim in its node. B1--B10 introduce no new-node obligations; the existing node's TeX and statement are unchanged. For D1--D5, the seven steps carry the truncation, germ, quotient and cone argument; nothing is moved into a new restatement or a circular citation. The existing generic lemmas were checked for paths back to this item and had none. For E1--E7, all hypotheses and source labels were checked as explained above; there is no disputed statement. All seven steps are below 2000 characters, and none hides a new non-elementary comparison lemma: the comparisons it invokes are the explicit statements named above.
+
+The off-unit generic tools are declared only in split_report.tool_uses, with one justification per tool. No maintainer-owned tool_uses field was added. They are general sheaf, exactness, derived-product and representative-model tools needed inside this unit's fixed stalk route; they do not replace a step of the trace transport unit. The item's original metadata and all imported search records are retained. The new six searches are the actual commands logged in searches.jsonl: both semantic phrasings were read, as were the local Mathlib definitions for stalkPullbackIso (Stalks.lean:335), sheafFiberComapIso (Comap.lean:69), ellAdicSheaf, and the cochain truncation maps and quasiIsoAt lemmas (Embedding/CochainComplex.lean:38--74). These are constituent notions or tools, not a one-line specialization proving the whole item. No unavailable service result was recorded as absence.

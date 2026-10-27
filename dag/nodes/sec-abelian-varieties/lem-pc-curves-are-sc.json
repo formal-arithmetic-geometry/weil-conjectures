@@ -157,7 +157,30 @@
   "def-pc-dimension"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.IsSmoothProjectiveCurve.isConnectedCurve_and_smooth",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective",
+     "lines": [
+      153,
+      161
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-abelian-varieties",
  "unit": "sk-def-av-jacobian",
  "split_report": {
@@ -185,5 +208,26 @@
   "group": "F1",
   "result": "pass",
   "note": "k alg closed = [Field k][IsAlgClosed k]; smooth projective curve = [f.IsSmoothProjectiveCurve] (H1 class, f explicit as IsConnectedCurve requires); nonempty+connected, separated, finite type, topologicalKrullDim=1 = IsConnectedCurve f (WeilConjectures, def-sc-curves, #check resolves to the one class); smooth = Smooth f; no hollow hyp, shared universe u forced by Spec (.of k)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $k$ be a field and let $X$ be a\nsmooth projective curve over\n$k$. Then $X$ is a smooth proper *connected curve over $k$* in the sense of\n[def-sc-curves]: $X$ is nonempty, connected, separated, of finite type over\n$k$ and of dimension one, and smooth and proper over $k$.",
+  "proof": [
+   {
+    "text": "By [def-pc-smooth-projective-curve] $X$ is a\ncurve over $k$, hence a\nvariety: integral, with\n$X\\to\\operatorname{Spec}(k)$ separated and of finite type ([def-pc-curve]); in\nparticular $X$ is nonempty, connected (being irreducible), separated,\nof finite type and, being a\ncurve, of dimension $1$. Its structure morphism is smooth by hypothesis,\nand proper since it is projective. Being a\nconnected curve in the sense of\n[def-sc-curves] requires exactly: nonempty, connected, separated scheme of\nfinite type of dimension one; none of this uses that $k$ is\nalgebraically closed. This proves the\nclaim.",
+    "uses": [
+     "def-pc-smooth-projective-curve",
+     "def-pc-curve",
+     "def-sc-curves"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

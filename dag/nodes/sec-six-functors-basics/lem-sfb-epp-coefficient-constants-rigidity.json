@@ -1,0 +1,287 @@
+{
+ "id": "lem-sfb-epp-coefficient-constants-rigidity",
+ "kind": "statement",
+ "title": "Coefficient constants rigidity",
+ "statement": "Let $A\\hookrightarrow B$ be an injective local map of complete discrete valuation rings [def-sc-discrete-valuation-ring, def-weil-pbc-adically-complete-ring], with fraction fields $K\\subseteq L$ [def-pc-field-extension]. Local means that the inverse image of the maximal ideal is the maximal ideal. Suppose $\\mathfrak m_AB=\\mathfrak m_B$ and $K$ has characteristic zero. Put $k=A/\\mathfrak m_A$ and $l=B/\\mathfrak m_B$, and assume $\\operatorname{char}(k)=p>0$, with $p$ prime, and $k=\\bigcap_{r\\geq0}l^{p^r}$ inside $l$, where $l^{p^r}=\\{x^{p^r}:x\\in l\\}$. Then $k$ is perfect (the map $x\\mapsto x^p$ on $k$ is surjective), and every element of $L$ algebraic over $K$ belongs to $K$. Here algebraic means satisfying a nonzero polynomial with coefficients in $K$. In particular, every root of unity in $B$ belongs to $A$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09E8, remark-finite-separable-extension (degree equals ramification index times residue degree for a complete DVR), and the perfect-core hypothesis in Tag 09F5, lemma-lowering-the-level. The constants-rigidity deduction used to descend zeta is supplied by the worker."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-pc-field-extension"
+ ],
+ "proof": [
+  {
+   "text": "First prove that $k$ is perfect. For $a\\in k$, the perfect-core hypothesis gives $b\\in l$ with $b^p=a$. For every $r\\geq0$ it also gives $c\\in l$ with $c^{p^{r+1}}=a$. Injectivity of Frobenius in the field $l$ implies $b=c^{p^r}$. Thus $b\\in\\bigcap_r l^{p^r}=k$, as required. Injectivity here follows directly from $(x-y)^p=x^p-y^p$ in characteristic $p$ and the absence of nonzero nilpotents in a field.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09F5, lemma-lowering-the-level, perfect-core hypothesis and the proof sentence asserting perfectness; explicit elementary verification."
+   }
+  },
+  {
+   "text": "Fix $x\\in L$ algebraic over $K$. By [lem-weil-pbc-algebraic-generators-finite-extension], $E=K(x)\\subseteq L$ is finite over $K$. Let $C\\subseteq E$ be the integral closure of $A$: its elements satisfy monic polynomials over $A$ [def-weil-pbc-integral-closure]. The DVR $A$ is Noetherian [lem-weil-pbc-pid-noetherian-normal] and complete, so by [lem-weil-pbc-complete-local-nagata] applied to the prime $0$ the domain $A$ is N-2 [def-weil-pbc-japanese-domain]: $C$ is a finite $A$-module. As $C\\subseteq E$ is a domain, [lem-weil-pbc-finite-over-complete-local-product] makes $C$ a Noetherian complete local ring whose maximal ideal $\\mathfrak m_C$ is the only prime over $\\mathfrak m_A$. $A$ is a Noetherian local domain of dimension one with $\\mathfrak m_A\\ne0$ [lem-sc-dvr-dimension-one], so [lem-sfb-finite-normalization-local-dvr] gives a prime $\\mathfrak q$ of $C$ over $\\mathfrak m_A$, hence $\\mathfrak q=\\mathfrak m_C$, and says $\\{c/s:s\\notin\\mathfrak m_C\\}$ is a DVR with fraction field $E$ and maximal ideal meeting $A$ in $\\mathfrak m_A$. Elements of $C\\setminus\\mathfrak m_C$ are units of the local ring $C$, so this subring is $C$ itself: $C$ is a complete DVR, finite over $A$, with fraction field $E$, and $A\\to C$ is local. Since $B$ is a PID by [def-sc-discrete-valuation-ring], [lem-weil-pbc-pid-noetherian-normal] makes $B$ integrally closed in $L$. Every $c\\in C$ satisfies its monic equation also over $B$, so $c\\in B$. Hence $A\\subseteq C\\subseteq B$ inside $L$.",
+   "uses": [
+    "lem-weil-pbc-algebraic-generators-finite-extension",
+    "def-weil-pbc-integral-closure",
+    "lem-weil-pbc-pid-noetherian-normal",
+    "lem-weil-pbc-complete-local-nagata",
+    "def-weil-pbc-japanese-domain",
+    "lem-weil-pbc-finite-over-complete-local-product",
+    "lem-sc-dvr-dimension-one",
+    "lem-sfb-finite-normalization-local-dvr",
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09E8, remark-finite-separable-extension, finite normalization; Tags 09EM, remark-construction (4),(8), and 09F8, lemma-special-case, proof first paragraph, complete DVR normalization. Simple-field finiteness: Fields Tag 09GH. Finiteness and locality of the normalization: algebra.tex Tag 032W (lemma-Noetherian-complete-local-Nagata) and Tag 0325 (lemma-quotient-complete-local)."
+   }
+  },
+  {
+   "text": "Choose uniformizers $\\pi$ of $A$ and $t$ of $C$. The DVRs are Noetherian by [lem-weil-pbc-pid-noetherian-normal]. Apply [lem-weil-pbc-dvr-unit-times-uniformizer-power] in $C$ to write $\\pi=u t^e$ with $u\\in C^\\times$. Localness of $A\\to C$ gives $e\\geq1$. The image of $\\pi$ generates $\\mathfrak m_B$ by hypothesis, so it is not a unit of $B$; since $u$ remains a unit, $t$ is not a unit of $B$ either. If $e\\geq2$, then $\\pi\\in\\mathfrak m_B^2=\\pi^2B$, contradicting cancellation of the nonzero $\\pi$ (which would make $\\pi$ a unit). Thus $e=1$ and $\\mathfrak m_C=tC=\\pi C$. Moreover $C\\to B$ is local: a unit of $C$ stays a unit of $B$, and every nonunit of $C$ is a multiple of $t\\in\\mathfrak m_B$. The residue map $h=C/\\mathfrak m_C\\to l$ is consequently injective and compatible with $k\\to l$.",
+   "uses": [
+    "lem-weil-pbc-pid-noetherian-normal",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD, lemma-characterize-dvr, unit-times-uniformizer-power description; direct cancellation using the weakly unramified hypothesis."
+   }
+  },
+  {
+   "text": "Identify $h=C/\\mathfrak m_C$ with its image in $l$. Since $\\mathfrak m_C=\\mathfrak m_AC$, the images of any finite set of $A$-module generators of $C$ span $h$ over $k$. Hence $h/k$ is finite-dimensional and algebraic: for each $a\\in h$, sufficiently many of $1,a,a^2,\\ldots$ are linearly dependent, giving a nonzero polynomial over $k$ that vanishes at $a$. Step 1 and [lem-per-algebraic-extension-perfect] therefore imply that $h$ is perfect. For $a\\in h$ and every $r$, iterating surjectivity of Frobenius on $h$ gives $b\\in h\\subseteq l$ with $b^{p^r}=a$. Thus $h\\subseteq\\bigcap_r l^{p^r}=k$. Since $k\\subseteq h$ via the residue map, $h=k$, with their specified embeddings in $l$.",
+   "uses": [
+    "lem-per-algebraic-extension-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/FieldTheory/Perfect.lean",
+    "place": "Algebra.IsAlgebraic.perfectField, lines 343-347, applied to the finite residue extension; the inclusions into the perfect core are the explicit elementary argument."
+   }
+  },
+  {
+   "text": "The finite $A$-module $C$ satisfies $C/\\mathfrak m_AC=h=k$, and the class of $1\\in C$ spans this quotient over $k$. Apply [lem-weil-pbc-nakayama-local-generators] to $M=C$ and the single generator $1$. Its hypotheses hold because $A$ is local and $C$ is finite over $A$ by step 2. It follows that $C=A\\cdot1=A$ as subrings of $L$.",
+   "uses": [
+    "lem-weil-pbc-nakayama-local-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DV, lemma-NAK (8): lift the single residue generator 1."
+   }
+  },
+  {
+   "text": "Taking fraction fields of $C=A$ gives $E=K$. Since $x\\in E$, the arbitrary element $x\\in L$ algebraic over $K$ lies in $K$. This proves the entire algebraic-constants assertion, not just its root-of-unity consequence.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09E8, remark-finite-separable-extension; elementary conclusion of the finite-normalization argument."
+   }
+  },
+  {
+   "text": "Let $\\zeta\\in B$ satisfy $\\zeta^n=1$ for some integer $n\\geq1$. The polynomial $T^n-1$ is nonzero and monic over $A$, so $\\zeta$ is algebraic over $K$ and step 6 gives $\\zeta\\in K$. The same monic equation makes it integral over $A$. By [def-sc-discrete-valuation-ring] $A$ is a PID, and [lem-weil-pbc-pid-noetherian-normal] says precisely that every such element of its fraction field belongs to $A$. Thus $\\zeta\\in A$.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-pid-noetherian-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD, lemma-characterize-dvr, normality of a DVR; monic root-of-unity equation and the preceding rigidity assertion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-algebraic-generators-finite-extension",
+  "def-weil-pbc-integral-closure",
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-weil-pbc-complete-local-nagata",
+  "def-weil-pbc-japanese-domain",
+  "lem-weil-pbc-finite-over-complete-local-product",
+  "lem-sc-dvr-dimension-one",
+  "lem-sfb-finite-normalization-local-dvr",
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-per-algebraic-extension-perfect",
+  "lem-weil-pbc-nakayama-local-generators"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Constants-rigidity deduction from Tag 09F5 perfect-core hypothesis and Tag 09E8 finite-normalization route. The residue argument and ramification-one cancellation are written explicitly; Tag 00DV Nakayama replaces the degree formula."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An injective local map of complete discrete valuation rings with ramification index one and relatively algebraically closed perfect residue field has relatively algebraically closed fraction field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing\", \"module\": \"Mathlib/RingTheory/Unramified/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u_2) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A]\\n  [Algebra.FormallyUnramified K A] [Algebra.EssFiniteType K A] [IsAlgClosed K] [IsLocalRing A], IsField A\", \"doc\": \"If $ K $ is an algebraically closed field and $ A $ is a local ring that is formally unramified as a $ K $-algebra, then $ A $ is a field.\"}\n  {\"name\": \"Algebra.FormallyUnramified.bijective_of_isAlgClosed_of_isLocalRing\", \"module\": \"Mathlib/RingTheory/Unramified/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u_2) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A]\\n  [Algebra.FormallyUnramified K A] [Algebra.EssFiniteType K A] [IsAlgClosed K] [IsLocalRing A],\\n  Function.Bijective ⇑(algebraMap K A)\", \"doc\": \"If $ K $ is an algebraically closed field and $ A $ is a local ring, then the canonical algebra homomorphism from $ K $ to $ A $ is bijective.\"}\n  {\"name\": \"Algebra.instFormallyUnramifiedResidueField_1\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)]\\n  [Algebra.FormallyUnramified R S], Algebra.FormallyUnramified (IsLocalRing.ResidueField R) (IsLocalRing.Residue\", \"doc\": \"If $ S $ is formally unramified over $ R $, then the residue field of $ S $ is formally unramified over the residue field of $ R $. This instance asserts that the formal unramified property of a local\"}\n  {\"name\": \"Algebra.instFormallyUnramifiedResidueField\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {S : Type u_2} [inst : CommRing S] [inst_1 : IsLocalRing S], Algebra.FormallyUnramified S (IsLocalRing.ResidueField S)\", \"doc\": \"For any commutative local ring $ S $, its residue field (obtained by quotienting $ S $ by its unique maximal ideal) is formally unramified over $ S $ as an $ S $-algebra. This means the canonical quot\"}\n  {\"name\": \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S]\\n  [Algebra.FormallyUnramified R S], Algebra.IsSeparable (IsLocalRing.ResidueField R)\", \"doc\": \"For any local rings $ R $ and $ S $ where $ S $ is formally unramified over $ R $, the residue field of $ S $ is a separable algebra over the residue field of $ R $.\"}\n  {\"name\": \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S]\\n  [Algebra.FormallyUnramified R S], Module.Finite (IsLocalRing.ResidueField R) (IsLo\", \"doc\": \"If $ S $ is a formally unramified $ R $-algebra, then the residue field of $ S $ is a finitely generated module over the residue field of $ R $.\"}\n  {\"name\": \"Ring.instIsGaloisFractionRingNormalClosure\", \"module\": \"Mathlib/RingTheory/NormalClosure\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsDomain R] [inst_3 : IsDomain S]\\n  [inst_4 : Algebra R S] [inst_5 : Module.IsTorsionFree R S] [Module.Finite R S] [PerfectField (FractionRing R)],\\n  IsGalois (FractionRing R) (FractionRing (Ring.NormalClosure R S))\", \"doc\": \"The fraction field of the integral closure of a commutative ring $ S $ in a field $ E $ forms a Galois extension over $ K $.\"}\n  {\"name\": \"Algebra.FormallySmooth.of_perfectField\", \"module\": \"Mathlib/RingTheory/Smooth/Field\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field L] [inst_1 : Field K] [inst_2 : Algebra K L] [PerfectField K]\\n  [Algebra.EssFiniteType K L], Algebra.FormallySmooth K L\", \"doc\": \"If $ K $ is a perfect field and $ L $ is a finitely generated $ K $-algebra, then $ L $ is formally smooth over $ K $. This instance asserts that for a perfect field $ K $ and an algebra $ L $ of esse\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: formal unramifiedness and finite residue fields do not assert relative algebraic closure of fraction fields under a perfect-core hypothesis."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic constants in a weakly unramified extension of complete DVRs with residue field equal to the perfect core",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Unramified\", \"module\": \"Mathlib.RingTheory.Unramified.Basic\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → (A : Type u_2) → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"Given a commutative ring $ R $ and a commutative ring $ A $ equipped with an $ R $-algebra structure, this is the proposition that $ A $ is unramified over $ R $.\"}\n  {\"name\": \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"module\": \"Mathlib.RingTheory.Unramified.LocalRing\", \"type\": \":\\n  Algebra.FormallyUnramified R S ↔\\n    Algebra.IsSeparable (ResidueField R) (ResidueField S) ∧ (maximalIdeal R).map (algebraMap R S) = maximalIdeal S\", \"doc\": \"An algebra $ S $ over a commutative ring $ R $ is formally unramified if and only if the residue field of $ S $ is separable over the residue field of $ R $, and the image of the maximal ideal of $ R \"}\n  {\"name\": \"Algebra.Unramified.baseChange\", \"module\": \"Mathlib.RingTheory.Unramified.Basic\", \"type\": \"[Unramified R A] : Unramified B (B ⊗[R] A)\", \"doc\": \"If $ A $ is an unramified algebra over a commutative ring $ R $, then for any commutative ring $ B $ extending $ R $, the base change $ B \\\\otimes_R A $ is an unramified algebra over $ B $.\"}\n  {\"name\": \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"module\": \"Mathlib.RingTheory.Unramified.LocalRing\", \"type\": \"[FormallyUnramified R S] : Algebra.IsSeparable (ResidueField R) (ResidueField S)\", \"doc\": \"For any local rings $ R $ and $ S $ where $ S $ is formally unramified over $ R $, the residue field of $ S $ is a separable algebra over the residue field of $ R $.\"}\n  {\"name\": \"Algebra.instFormallyUnramifiedResidueField_1\", \"module\": \"Mathlib.RingTheory.Unramified.LocalRing\", \"type\": \"[FormallyUnramified R S] : FormallyUnramified (ResidueField R) (ResidueField S)\", \"doc\": \"If $ S $ is formally unramified over $ R $, then the residue field of $ S $ is formally unramified over the residue field of $ R $. This instance asserts that the formal unramified property of a local\"}\n  {\"name\": \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"module\": \"Mathlib.RingTheory.Unramified.LocalRing\", \"type\": \"[FormallyUnramified R S] : Module.Finite (ResidueField R) (ResidueField S)\", \"doc\": \"If $ S $ is a formally unramified $ R $-algebra, then the residue field of $ S $ is a finitely generated module over the residue field of $ R $.\"}\n  {\"name\": \"IsUnramifiedAtInfinitePlaces.bot\", \"module\": \"Mathlib.NumberTheory.NumberField.InfinitePlace.Ramification\", \"type\": \"[h₁ : IsUnramifiedAtInfinitePlaces k F] [Algebra.IsAlgebraic K F] : IsUnramifiedAtInfinitePlaces k K\", \"doc\": \"If a field extension $ F/k $ is unramified at all infinite places and $ K $ is an algebraic extension of $ F $, then the extension $ K/k $ is also unramified at all infinite places.\"}\n  {\"name\": \"Algebra.Unramified.finiteType\", \"module\": \"Mathlib.RingTheory.Unramified.Basic\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {A : Type u_2} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Unramified R A], Algebra.FiniteType R A\", \"doc\": \"If $ A $ is an unramified algebra over a commutative ring $ R $, then $ A $ is finitely generated as an $ R $-algebra, i.e., there exist elements $ s_1, \\\\ldots, s_n \\\\in A $ such that every element of \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: formal unramifiedness and finite residue fields do not assert relative algebraic closure of fraction fields under a perfect-core hypothesis."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, IsAlgClosedIn",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'IsAlgClosedIn'",
+   "date": "2026-10-24",
+   "verdict": "no match: formal unramifiedness and finite residue fields do not assert relative algebraic closure of fraction fields under a perfect-core hypothesis."
+  },
+  {
+   "tool": "grep",
+   "query": "IsAlgClosedIn|relatively.*algebraically.*closed",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: formal unramifiedness and finite residue fields do not assert relative algebraic closure of fraction fields under a perfect-core hypothesis."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite intermediate fields of a complete discretely valued extension with trivial ramification and trivial residue extension are the base field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsNonarchimedeanLocalField.instFiniteResidueFieldSubtypeMemSubringIntegerValueGroupWithZeroValuation\", \"module\": \"Mathlib/NumberTheory/LocalField/Basic\", \"type\": \"∀ (K : Type u_1) [inst : Field K] [inst_1 : ValuativeRel K] [inst_2 : TopologicalSpace K]\\n  [inst_3 : IsNonarchimedeanLocalField K], Finite (IsLocalRing.ResidueField ↥(ValuativeRel.valuation K).integer)\", \"doc\": \"For any non-Archimedean local field $ K $, its residue field (obtained by quotienting the valuation ring $ \\\\mathcal{O}_K $ by its unique maximal ideal) is a finite field.\"}\n  {\"name\": \"IsUnramifiedAtInfinitePlaces.id\", \"module\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Ramification\", \"type\": \"∀ (K : Type u_2) [inst : Field K], IsUnramifiedAtInfinitePlaces K K\", \"doc\": \"The field extension $ K/K $ is unramified at all infinite places, meaning that the trivial extension does not introduce any ramification in archimedean valuations corresponding to embeddings into $ \\\\m\"}\n  {\"name\": \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S]\\n  [Algebra.FormallyUnramified R S], Module.Finite (IsLocalRing.ResidueField R) (IsLo\", \"doc\": \"If $ S $ is a formally unramified $ R $-algebra, then the residue field of $ S $ is a finitely generated module over the residue field of $ R $.\"}\n  {\"name\": \"IsUnramifiedAtInfinitePlaces.bot\", \"module\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Ramification\", \"type\": \"∀ (k : Type u_1) [inst : Field k] (K : Type u_2) [inst_1 : Field K] (F : Type u_3) [inst_2 : Field F]\\n  [inst_3 : Algebra k K] [inst_4 : Algebra k F] [inst_5 : Algebra K F] [IsScalarTower k K F]\\n  [h₁ : IsUnramifiedAtInfinitePlaces k F] [Algebra.IsAlgebraic K F], IsUnramifiedAtInfinitePlaces k K\", \"doc\": \"If a field extension $ F/k $ is unramified at all infinite places and $ K $ is an algebraic extension of $ F $, then the extension $ K/k $ is also unramified at all infinite places.\"}\n  {\"name\": \"IsUnramifiedAtInfinitePlaces\", \"module\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Ramification\", \"type\": \"(k : Type u_1) → [inst : Field k] → (K : Type u_2) → [inst_1 : Field K] → [Algebra k K] → Prop\", \"doc\": \"The field extension $ K/k $ is unramified at all infinite places, meaning that the extension does not introduce ramification in the archimedean valuations corresponding to embeddings into $ \\\\mathbb{R}\"}\n  {\"name\": \"IsUnramifiedAtInfinitePlaces.top\", \"module\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Ramification\", \"type\": \"∀ (k : Type u_1) [inst : Field k] (K : Type u_2) [inst_1 : Field K] (F : Type u_3) [inst_2 : Field F]\\n  [inst_3 : Algebra k K] [inst_4 : Algebra k F] [inst_5 : Algebra K F] [IsScalarTower k K F]\\n  [h : IsUnramifiedAtInfinitePlaces k F], IsUnramifiedAtInfinitePlaces K F\", \"doc\": \"If the field extension $ k/F $ is unramified at all infinite places, then the extension $ K/F $ is also unramified at all infinite places. This means that the property of being unramified in archimede\"}\n  {\"name\": \"Valued.integer.properSpace_iff_completeSpace_and_isDiscreteValuationRing_integer_and_finite_residueField\", \"module\": \"Mathlib/Topology/Algebra/Valued/LocallyCompact\", \"type\": \"∀ {K : Type u_1} {Γ₀ : Type u_2} [inst : Field K] [inst_1 : LinearOrderedCommGroupWithZero Γ₀] [inst_2 : Valued K Γ₀]\\n  [inst_3 : Valued.v.RankOne],\\n  ProperSpace K ↔ CompleteSpace K ∧ IsDiscreteValuationRing ↥(Valued.integer K) ∧ Finite (Valued.ResidueField K)\", \"doc\": \"For a field $ K $ equipped with a rank one valuation, the topology induced by the valuation makes $ K $ a proper space (every closed ball is compact) if and only if $ K $ is complete, its ring of inte\"}\n  {\"name\": \"Algebra.instFormallyUnramifiedResidueField\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {S : Type u_2} [inst : CommRing S] [inst_1 : IsLocalRing S], Algebra.FormallyUnramified S (IsLocalRing.ResidueField S)\", \"doc\": \"For any commutative local ring $ S $, its residue field (obtained by quotienting $ S $ by its unique maximal ideal) is formally unramified over $ S $ as an $ S $-algebra. This means the canonical quot\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: formal unramifiedness and finite residue fields do not assert relative algebraic closure of fraction fields under a perfect-core hypothesis."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The perfect core of a field of characteristic p is a perfect relatively algebraically closed subfield",
+   "results": "{\"t\": \"2026-10-24T07:50:50Z\", \"tool\": \"leanfinder\", \"query\": \"The perfect core of a field of characteristic p is a perfect relatively algebraically closed subfield\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PerfectClosure.instPerfectField\", \"perfectClosure.perfectField\", \"perfectClosure.perfectRing\", \"IsAlgClosed.perfectRing\", \"PerfectClosure.instField\", \"perfectClosure\", \"PerfectRing.toPerfectField\", \"perfectClosure.isAlgebraic\"], \"digest\": \"dc1ff97a99cc91a4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: perfect closures, valuation integrality, and unramifiedness do not give relative algebraic closure of fraction fields from the perfect-core hypothesis."
+  },
+  {
+   "tool": "loogle",
+   "query": "PerfectField, Algebra.IsAlgebraic",
+   "results": "{\"t\": \"2026-10-24T07:50:51Z\", \"tool\": \"loogle\", \"query\": \"PerfectField, Algebra.IsAlgebraic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Algebra.IsAlgebraic.perfectField\", \"Algebra.IsAlgebraic.isSeparable_of_perfectField\"], \"digest\": \"4e0b41703788a363\"}",
+   "date": "2026-10-24",
+   "verdict": "related match only: algebraic extensions of perfect fields are perfect; reused existing lem-per-algebraic-extension-perfect. Does not state the item."
+  },
+  {
+   "tool": "grep",
+   "query": "ramificationIdx_mul_inertiaDeg_of_isLocalRing|perfectClosure|PerfectClosure|perfectCore",
+   "results": "{\"t\": \"2026-10-24T07:50:51Z\", \"tool\": \"grep\", \"query\": \"ramificationIdx_mul_inertiaDeg_of_isLocalRing|perfectClosure|PerfectClosure|perfectCore\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: perfect closures, valuation integrality, and unramifiedness do not give relative algebraic closure of fraction fields from the perfect-core hypothesis.",
+   "subdirectory": "RingTheory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an extension of complete discrete valuation rings with ramification index one and perfect core residue subfield every algebraic fraction field element is in the base field",
+   "results": "{\"t\": \"2026-10-24T08:00:21Z\", \"tool\": \"leanfinder\", \"query\": \"In an extension of complete discrete valuation rings with ramification index one and perfect core residue subfield every algebraic fraction field element is in the base field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Tilt\", \"IsDiscreteValuationRing.exists_lift_of_le_one\", \"IsUnramifiedAtInfinitePlaces\", \"Tilt.instField\", \"Algebra.instFormallyUnramifiedResidueField\", \"Algebra.instFormallyUnramifiedResidueField_1\", \"Valuation.HasExtension.algebraMap_residue_eq_residue_algebraMap\", \"Algebra.instFiniteResidueFieldOfFormallyUnramified\"], \"digest\": \"b34f8fe7e87dfb8c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: perfect closures, valuation integrality, and unramifiedness do not give relative algebraic closure of fraction fields from the perfect-core hypothesis."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An unramified extension of complete discrete valuation rings whose residue base is relatively algebraically closed has no new algebraic constants",
+   "results": "{\"t\": \"2026-10-24T08:00:21Z\", \"tool\": \"leansearch\", \"query\": \"An unramified extension of complete discrete valuation rings whose residue base is relatively algebraically closed has no new algebraic constants\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.FormallyUnramified\", \"Algebra.Unramified.formallyUnramified\", \"Ideal.ramificationIdx_eq_one_of_isUnramifiedAt\", \"Algebra.Unramified\", \"Algebra.Unramified.baseChange\", \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"IsUnramifiedAtInfinitePlaces.bot\", \"Algebra.Unramified.of_isLocalization_Away\"], \"digest\": \"0e10de14a4c3907d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: perfect closures, valuation integrality, and unramifiedness do not give relative algebraic closure of fraction fields from the perfect-core hypothesis."
+  },
+  {
+   "tool": "grep",
+   "query": "algebraic.*constant|relatively.*closed|IsAlgClosedIn|perfectCore",
+   "results": "{\"t\": \"2026-10-24T08:00:21Z\", \"tool\": \"grep\", \"query\": \"algebraic.*constant|relatively.*closed|IsAlgClosedIn|perfectCore\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/Topology/LocallyConstant/Algebra.lean\", \"Mathlib/Topology/Defs/Induced.lean\", \"Mathlib/Topology/Coherent.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\", \"Mathlib/MeasureTheory/Function/Jacobian.lean\", \"Mathlib/MeasureTheory/Function/Jacobian.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\"], \"digest\": \"a76c90f4ffe0f8f0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: perfect closures, valuation integrality, and unramifiedness do not give relative algebraic closure of fraction fields from the perfect-core hypothesis."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-epp-mixed-level-lowering",
+  "date": "2026-10-24",
+  "group": "NE"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through the creation chain of lem-sfb-epp-essentially-finite-type-traits. Current latest direct-image proof (3) does not state this auxiliary algebra result. Weak Epp at each normalized branch over the perfect-residue algebraic preparation. Supporting Finite coefficient triple in Epp elimination. Source subargument: Tag 09F5, lemma-lowering-the-level, including its definition of level immediately before the lemma. Supporting subargument: Tag 09E8, remark-finite-separable-extension (degree equals ramification index times residue degree for a complete DVR), and the perfect-core hypothesis in Tag 09F5, lemma-lowering-the-level. The constants-rigidity deduction used to descend zeta is supplied by the worker.",
+   "via": [
+    "lem-sfb-epp-mixed-level-lowering",
+    "lem-sfb-epp-finite-coefficient-triple",
+    "lem-sfb-epp-weak-perfect-residue",
+    "lem-sfb-epp-essentially-finite-type-traits",
+    "lem-sfb-raynaud-faltings-normalized-reduction",
+    "lem-sfb-group-model-potential-smooth-normalization",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-epp-coefficient-constants-rigidity",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Proved perfectness directly, proved that the integral closure of A in K(x) is a finite complete DVR from Tags 032W and 0325 and the finite-normalization DVR lemma of the unit, proved ramification index one by cancellation in B, showed the finite perfect residue field lies in the perfect core, and applied Nakayama to the generator 1. Reused all supporting nodes; no new nodes or Mathlib leaves. No completed project declaration matches the item.",
+  "blueprint": "Historical supporting algebra input to det-thm-sf-ctf-stability-direct-images proof (3), through the creation chain in blueprint.from. Read literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/_section.md and sk-thm-sf-ctf-stability-direct-images.proof.md. The current paragraph (3) does not state this auxiliary result; this split supplies the source subargument of Tag 09F5 and does not change any current unit step. The ancestor command returns None, matching the inherited blueprint.from.node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-complete-local-nagata",
+    "why": "Tag 032W: a complete Noetherian local domain is N-2, giving finiteness of the integral closure C of A in K(x); no node of the unit states it."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-complete-local-product",
+    "why": "Tag 0325: a domain finite over a complete local ring is complete local with a unique prime over the maximal ideal; no node of the unit states it."
+   },
+   {
+    "node": "lem-sc-dvr-dimension-one",
+    "why": "Mathlib leaf: a DVR has Krull dimension one, the hypothesis of lem-sfb-finite-normalization-local-dvr."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-complete-local-nagata",
+  "lem-weil-pbc-finite-over-complete-local-product",
+  "lem-sc-dvr-dimension-one"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-4e64d7731",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-4e64d7731 (reviewer sub-agent of L); spot-checked: Read the item in full: 7 steps, no new nodes, statement unchanged. Source: Stacks more-algebra 09F5 (lemma-lowering-the-level). Its hypothesis (5) is κ_A = ∩ κ_B^{p^n}, and its proof says this makes κ_A perfect (the text calls it '(4)', a typo for (5)). 09E8 gives the normalization route. The statement is true. I tested it on A = B, x ∈ K, ζ = 1, p = 2, W(F_{p^2})/W(F_p) (fails the perfect-core hypothesis), Z_p[√p] (excluded by m_A B = m_B) and a transcendental residue extension. Step 1: elementary, uses injectivity of Frobenius. Step 3: correct; π = u t^e, and e ≥ 2 would force π ∈ π²B, a contradiction, so e = 1 and C→B is local. Step 4: correct; h is finite over the perfect field k, so h is perfect and h ⊂ ∩ l^{p^r} = k. Steps 5–7 are correct: Nakayama on the generator 1, then fraction fields, then the monic polynomial T^n − 1 and PID normality. Drop-list point 1: lem-per-complete-dvr-finite-normalization (route-pivot-dropped line 1453), cited in step 2. The delivery did not address the drop, so I repointed step 2 to lem-weil-pbc-complete-local-nagata (032W at the prime 0, using def-weil-pbc-japanese-domain, so C is finite), lem-weil-pbc-finite-over-complete-local-product (0325: C is complete local with a unique prime over m_A), lem-sc-dvr-dimension-one, and the same-unit lem-sfb-finite-normalization-local-dvr (C_q is a DVR, and C_q = C because C is local). By BFS on the snapshot, none of these reaches the item or a dropped node. proof_deps and tool_uses are updated (032W, 0325 and dvr-dimension-one declared) and the dropped id is removed. Drop-list point 2: lem-per-algebraic-extension-perfect (line 1408) is accepted at step 4. It is a Mathlib leaf (Algebra.IsAlgebraic.perfectField) with no route content, it is already cited by the live lem-sfb-epp-essentially-finite-type-traits (so it adds 0 nodes), and no non-dropped twin exists; the drop entry is stale for the sfb Epp route. No Artin–Gabber-forbidden ingredient and no SGA source is used. Duplicate search: lem-sfb-epp-compatible-coefficient-dvrs states something different, and the other perfect-core nodes are dropped and state other things. Fix file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-epp-coefficient-constants-rigidity.json.; 1 file(s) fixed by the reviewer"
+ }
+}

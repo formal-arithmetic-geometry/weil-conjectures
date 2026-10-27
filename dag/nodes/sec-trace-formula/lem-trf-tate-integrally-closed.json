@@ -1,0 +1,425 @@
+{
+ "id": "lem-trf-tate-integrally-closed",
+ "kind": "statement",
+ "title": "A finite-variable Tate algebra is an integrally closed domain",
+ "statement": "Let $K$ be a field [def-weil-field], complete for a nontrivial real-valued nonarchimedean absolute value. For $d\\ge0$ let $T=K\\langle U_1,\\ldots,U_d\\rangle$ be the restricted-series ring [def-trf-restricted-series-presentation]. Then $T$ is a domain, and every element of its fraction field that satisfies a monic polynomial with coefficients in $T$ belongs to $T$. The case $d=0$, when $T=K$, is included.",
+ "source": {
+  "document": "https://kskedlaya.org/18.727/tate-algebras.pdf",
+  "place": "Kedlaya, Tate algebras (2004), Proposition 5, printed/PDF p.5 (Tate algebras are unique factorization domains), integrally-closed consequence; read online 2026-10-24, archival copy WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-restricted-series-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Write $D_n=K\\langle U_1,\\ldots,U_n\\rangle$. The Gauss norm is a genuine norm by [lem-trf-restricted-series-gauss-completion] and multiplicative by [lem-trf-tate-gauss-multiplicative]. Hence $1\\ne0$, and $fg=0$ implies $\\|f\\|\\|g\\|=0$, so $f=0$ or $g=0$. Thus every $D_n$ is a domain. We prove by induction on $n$ that it is a normal domain in the explicit sense of [def-weil-pbc-normal-ring]. For $n=0$, coefficient families are just constants, so $D_0=K$ by [def-trf-restricted-series-presentation], and its fraction field is itself. This proves the base case.",
+   "uses": [
+    "lem-trf-restricted-series-gauss-completion",
+    "lem-trf-tate-gauss-multiplicative",
+    "def-weil-pbc-normal-ring",
+    "def-trf-restricted-series-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kskedlaya.org/18.727/tate-algebras.pdf",
+    "place": "Kedlaya, Tate algebras (2004), Theorem 3 and Proposition 5, printed pp.3–5; agent assembly via monic prime factorization over the inductively normal coefficient ring."
+   }
+  },
+  {
+   "text": "Fix $n\\ge1$ and assume $A=D_{n-1}$ is normal. Put $D=D_n$ and $X=U_n$. Grouping coefficients by $X$ gives the isometric ring description in [lem-trf-restricted-series-gauss-completion]. For any $0\\ne f\\in D$, [lem-per-tate-triangular-distinguished-coordinate] gives an isometric $K$-algebra automorphism $\\sigma$, a unit $v\\in A$, and $g=v\\sigma(f)=\\sum a_iX^i$ with $a_d=1$, lower coefficient norms at most $1$, and upper tail norm less than $1$. Applying [lem-trf-tate-weierstrass-norm-division] gives $g=uw$, where $u\\in D^\\times$ and $w\\in A[X]$ is monic of degree $d$ with all lower coefficient norms at most $1$. Thus $f$ is, up to a unit and an automorphism, such a polynomial. If $d=0$, $w=1$ and $f$ is a unit.",
+   "uses": [
+    "lem-trf-restricted-series-gauss-completion",
+    "lem-per-tate-triangular-distinguished-coordinate",
+    "lem-trf-tate-weierstrass-norm-division"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kskedlaya.org/18.727/tate-algebras.pdf",
+    "place": "Kedlaya, Tate algebras (2004), Theorem 3 and Proposition 5, printed pp.3–5; agent assembly via monic prime factorization over the inductively normal coefficient ring."
+   }
+  },
+  {
+   "text": "For the monic $w$ just obtained, apply [lem-sfb-normal-domain-monic-prime-factorization] with the inductively normal domain $A$ and its fraction field. It gives $w=\\prod_{j=1}^s h_j$ with $h_j\\in A[X]$ monic of positive degree and $A[X]/(h_j)$ a nonzero domain. Each $h_j$, and its monic complementary product, has Gauss norm at least $1$, because its leading coefficient is $1$. Multiplicativity [lem-trf-tate-gauss-multiplicative] and $\\|w\\|=1$ force both norms to equal $1$. Hence every coefficient of $h_j$ has norm at most $1$. In particular each $h_j$, regarded as a restricted series, satisfies the division hypotheses with upper tail zero. The empty factor list covers $w=1$.",
+   "uses": [
+    "lem-sfb-normal-domain-monic-prime-factorization",
+    "lem-trf-tate-gauss-multiplicative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kskedlaya.org/18.727/tate-algebras.pdf",
+    "place": "Kedlaya, Tate algebras (2004), Theorem 3 and Proposition 5, printed pp.3–5; agent assembly via monic prime factorization over the inductively normal coefficient ring."
+   }
+  },
+  {
+   "text": "Fix one $h=h_j$ of degree $e>0$. The inclusion of polynomials induces $\\theta:A[X]/(h)\\to D/(h)$ [def-weil-pbc-algebra-hom-quotient]. Division by $h$ in [lem-trf-tate-weierstrass-norm-division] represents every analytic class by a polynomial of degree less than $e$, so $\\theta$ is surjective. For injectivity, the basis in [lem-weil-pbc-monic-quotient-free] represents any polynomial class by $r$ of degree less than $e$. If $\\theta([r])=0$, then $r=qh$ in $D$; the two division expressions $r=0h+r=qh+0$ and uniqueness force $r=0$. Thus $\\theta$ is a ring isomorphism.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "lem-trf-tate-weierstrass-norm-division",
+    "lem-weil-pbc-monic-quotient-free"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kskedlaya.org/18.727/tate-algebras.pdf",
+    "place": "Kedlaya, Tate algebras (2004), Theorem 3 and Proposition 5, printed pp.3–5; agent assembly via monic prime factorization over the inductively normal coefficient ring."
+   }
+  },
+  {
+   "text": "The quotient $D/(h_j)$ is therefore a nonzero domain, since $A[X]/(h_j)$ is one. Consequently $h_j$ is a prime element of $D$: it is nonzero by its leading coefficient, is not a unit because its quotient is nonzero, and if $h_j\\mid ab$, the classes of $a,b$ have product zero in the quotient, so one class is zero and $h_j$ divides that factor. By the quotient map kernel statement [def-weil-pbc-algebra-hom-quotient], being zero in the quotient means exactly membership in $h_jD$. Applying $\\sigma^{-1}$ preserves these assertions directly: a product divisible by $\\sigma^{-1}(h_j)$ maps to a product divisible by $h_j$. Step 2 and $w=\\prod h_j$ now give, for every nonzero $f\\in D$, an expression $f=\\varepsilon\\prod_{j=1}^s p_j$ with $\\varepsilon$ a unit and each $p_j$ prime; explicitly $p_j=\\sigma^{-1}(h_j)$ and $\\varepsilon=\\sigma^{-1}(v^{-1}u)$.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kskedlaya.org/18.727/tate-algebras.pdf",
+    "place": "Kedlaya, Tate algebras (2004), Theorem 3 and Proposition 5, printed pp.3–5; agent assembly via monic prime factorization over the inductively normal coefficient ring."
+   }
+  },
+  {
+   "text": "Let $z\\in\\operatorname{Frac}(D)$ satisfy a monic equation $z^m+\\sum_{i=0}^{m-1}c_i z^i=0$, $c_i\\in D$. Its degree satisfies $m\\ge1$, since a monic degree-zero polynomial is $1$ and $1\\ne0$. Choose $z=a/b$, $b\\ne0$, and use step 5 to write $b=\\varepsilon\\prod_{j=1}^s p_j$. If $s>0$, put $p=p_1$. Multiplication by $b^m$ gives the explicit identity $a^m+\\sum_{i=0}^{m-1}c_i a^i b^{m-i}=0$ in $D$, using the injective inclusion into its fraction field. Since $p\\mid b$, each summand of the sum is divisible by $p$, so $p\\mid a^m$. Repeatedly applying the defining prime-product property shows $p\\mid a$: for $m=1$ this is immediate, and for $m>1$ apply it to $a\\cdot a^{m-1}$ and descend if necessary. Write $a=pa_1$ and $b=pb_1$, where $b_1=\\varepsilon\\prod_{j=2}^s p_j\\ne0$. Cancellation in the fraction field gives $z=a_1/b_1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0AFV, lemma-UFD-normal, denominator-prime argument written explicitly; prime factorizations here were established in steps 2–5 without invoking a UFD theorem."
+   }
+  },
+  {
+   "text": "Iterate step 6 by induction on the finite number $s$ of prime factors of the chosen denominator. The case $s=0$ has unit denominator, so $z=a\\varepsilon^{-1}\\in D$. The positive case replaces $a/b$ by $a_1/b_1$ representing the same $z$, still satisfying the same monic equation, and with one fewer denominator factor. The induction terminates in a denominator that is a unit, proving $z\\in D$. Therefore $D_n$ is normal, completing the dimension induction. Together with step 1 this gives both clauses of the item for every $n\\ge0$, with exactly the original completeness and nontrivial nonarchimedean hypotheses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0AFV, lemma-UFD-normal; finite denominator cancellation, written out by Q25."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-restricted-series-gauss-completion",
+  "lem-trf-tate-gauss-multiplicative",
+  "def-weil-pbc-normal-ring",
+  "def-trf-restricted-series-presentation",
+  "lem-per-tate-triangular-distinguished-coordinate",
+  "lem-trf-tate-weierstrass-norm-division",
+  "lem-sfb-normal-domain-monic-prime-factorization",
+  "def-weil-pbc-algebra-hom-quotient",
+  "lem-weil-pbc-monic-quotient-free"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-trace-formula/sk-i-curve-zero/lem-trf-local-term-locality.proof.md",
+  "place": "Historical analytic supporting branch recorded in blueprint.from; agent induction from existing Weierstrass nodes and Stacks 00H6/0AFV, informed by Kedlaya Theorem 3 and Proposition 5 (online; archival copy WANTED)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The Tate algebra of restricted power series in finitely many variables over a complete nonarchimedean field is an integrally closed domain",
+   "results": {
+    "t": "2026-10-24T09:31:48Z",
+    "tool": "leanfinder",
+    "query": "The Tate algebra of restricted power series in finitely many variables over a complete nonarchimedean field is an integrally closed domain",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PowerSeries.instIsDiscreteValuationRing",
+     "LaurentSeries.mem_integers_of_powerSeries",
+     "LaurentSeries.instAlgebraSubtypeAdicCompletionPolynomialRatFuncIdealXMemValuationSubringAdicCompletionIntegers",
+     "FunctionField.ringOfIntegers.instIsIntegrallyClosedSubtypeMemSubalgebraPolynomial",
+     "LaurentSeries.instAlgebraRatFuncAdicCompl",
+     "PowerSeries.idealX",
+     "LaurentSeries.algebraMap_C_mem_adicCompletionIntegers",
+     "instCommRingBDeRhamPlus"
+    ],
+    "digest": "2aa08e2f13c06a9a"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern formal power series, valuation rings, or abstract integral closure. Reading MvPowerSeries/Restricted.lean confirms the restricted subring exists, but no normality theorem for it was found by either phrasing."
+  },
+  {
+   "tool": "grep",
+   "query": "IsIntegrallyClosed|UniqueFactorizationMonoid|IsDomain",
+   "results": {
+    "t": "2026-10-24T09:33:09Z",
+    "tool": "grep",
+    "query": "IsIntegrallyClosed|UniqueFactorizationMonoid|IsDomain",
+    "sub": "RingTheory/MvPowerSeries",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern formal power series, valuation rings, or abstract integral closure. Reading MvPowerSeries/Restricted.lean confirms the restricted subring exists, but no normality theorem for it was found by either phrasing."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries.IsRestricted, IsIntegrallyClosed",
+   "results": {
+    "t": "2026-10-24T09:33:09Z",
+    "tool": "loogle",
+    "query": "MvPowerSeries.IsRestricted, IsIntegrallyClosed",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern formal power series, valuation rings, or abstract integral closure. Reading MvPowerSeries/Restricted.lean confirms the restricted subring exists, but no normality theorem for it was found by either phrasing."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Tate algebra over a complete nonarchimedean field is integrally closed in its fraction field",
+   "results": {
+    "t": "2026-10-24T09:33:09Z",
+    "tool": "leansearch",
+    "query": "The Tate algebra over a complete nonarchimedean field is integrally closed in its fraction field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Valuation.Integers.integrallyClosed",
+     "IsDedekindRing.toIsIntegralClosure",
+     "Valuation.Integers.isIntegrallyClosed",
+     "IsDedekindDomainInv.integrallyClosed",
+     "IsIntegrallyClosed.of_isIntegrallyClosedIn",
+     "isIntegrallyClosed_iff_isIntegrallyClosedIn",
+     "Valuation.Integers.isIntegrallyClosed_integers",
+     "isIntegrallyClosed_iff"
+    ],
+    "digest": "bc08a6ed5b77cebc"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern formal power series, valuation rings, or abstract integral closure. Reading MvPowerSeries/Restricted.lean confirms the restricted subring exists, but no normality theorem for it was found by either phrasing."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restricted convergent multivariate power series ring over a complete valued field is normal or factorial",
+   "results": {
+    "t": "2026-10-24T09:33:14Z",
+    "tool": "leanfinder",
+    "query": "Restricted convergent multivariate power series ring over a complete valued field is normal or factorial",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PowerSeries.instUniqueFactorizationMonoid",
+     "PowerSeries.instNormalizationMonoid",
+     "PowerSeries.hasUnitMulPowIrreducibleFactorization",
+     "PowerSeries.instIsDiscreteValuationRing",
+     "MvPowerSeries.instIsLocalRing",
+     "PowerSeries.instUniqueFactorizationMonoidOfIsPrincipalIdealRingOfIsDomain",
+     "PowerSeries.isNoetherianRing",
+     "MvPowerSeries.WithPiTopology.instCompleteSpace"
+    ],
+    "digest": "834a410d56c12a57"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern formal power series, valuation rings, or abstract integral closure. Reading MvPowerSeries/Restricted.lean confirms the restricted subring exists, but no normality theorem for it was found by either phrasing."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The finite variable Tate algebra of restricted convergent power series over a complete ultrametric field is an integrally closed domain",
+   "results": {
+    "t": "2026-10-24T14:01:18Z",
+    "tool": "leanfinder",
+    "query": "The finite variable Tate algebra of restricted convergent power series over a complete ultrametric field is an integrally closed domain",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "FunctionField.ringOfIntegers.instIsIntegrallyClosedSubtypeMemSubalgebraPolynomial",
+     "PowerSeries.instIsDiscreteValuationRing",
+     "LaurentSeries.mem_integers_of_powerSeries",
+     "LaurentSeries.instAlgebraRatFuncAdicCompl",
+     "LaurentSeries.instAlgebraSubtypeAdicCompletionPolynomialRatFuncIdealXMemValuationSubringAdicCompletionIntegers",
+     "LaurentSeries.exists_powerSeries_of_memIntegers",
+     "LaurentSeries.algebraMap_C_mem_adicCompletionIntegers",
+     "LaurentSeries.RatFuncAdicCompl"
+    ],
+    "digest": "02227225b10ad6a5"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: formal PowerSeries factoriality and valuation-ring closure do not state normality of the restricted-series subring; read MvPowerSeries/Restricted.lean:29–34 and PowerSeries/WeierstrassPreparation.lean:454–460. Generic algebra matches were not mistaken for the analytic item."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries.IsRestricted, IsIntegrallyClosed",
+   "results": {
+    "t": "2026-10-24T14:01:18Z",
+    "tool": "loogle",
+    "query": "MvPowerSeries.IsRestricted, IsIntegrallyClosed",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: formal PowerSeries factoriality and valuation-ring closure do not state normality of the restricted-series subring; read MvPowerSeries/Restricted.lean:29–34 and PowerSeries/WeierstrassPreparation.lean:454–460. Generic algebra matches were not mistaken for the analytic item."
+  },
+  {
+   "tool": "grep",
+   "query": "IsIntegrallyClosed|UniqueFactorizationMonoid|IsDomain",
+   "results": {
+    "t": "2026-10-24T14:01:18Z",
+    "tool": "grep",
+    "query": "IsIntegrallyClosed|UniqueFactorizationMonoid|IsDomain",
+    "sub": "RingTheory/MvPowerSeries",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: formal PowerSeries factoriality and valuation-ring closure do not state normality of the restricted-series subring; read MvPowerSeries/Restricted.lean:29–34 and PowerSeries/WeierstrassPreparation.lean:454–460. Generic algebra matches were not mistaken for the analytic item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Tate algebra of restricted power series over a complete valued field is normal",
+   "results": {
+    "t": "2026-10-24T14:01:19Z",
+    "tool": "leansearch",
+    "query": "The Tate algebra of restricted power series over a complete valued field is normal",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PowerSeries.X_eq_normalizeX",
+     "PowerSeries.isNoetherianRing",
+     "PowerSeries.IsRestricted",
+     "PowerSeries.WithPiTopology.instCompleteSpace",
+     "LaurentSeries.powerSeriesAlgEquiv",
+     "PowerSeries.instNormalizationMonoid",
+     "PowerSeries.instIsNoetherianRing",
+     "HasFPowerSeriesOnBall.restrictScalars"
+    ],
+    "digest": "b0529db2276f7eb2"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: formal PowerSeries factoriality and valuation-ring closure do not state normality of the restricted-series subring; read MvPowerSeries/Restricted.lean:29–34 and PowerSeries/WeierstrassPreparation.lean:454–460. Generic algebra matches were not mistaken for the analytic item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strictly convergent multivariable power series over a complete nonarchimedean field form a normal factorial ring",
+   "results": {
+    "t": "2026-10-24T14:03:36Z",
+    "tool": "leanfinder",
+    "query": "Strictly convergent multivariable power series over a complete nonarchimedean field form a normal factorial ring",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PowerSeries.instUniqueFactorizationMonoid",
+     "PowerSeries.hasUnitMulPowIrreducibleFactorization",
+     "PowerSeries.instNormalizationMonoid",
+     "PowerSeries.instIsDiscreteValuationRing",
+     "PowerSeries.isNoetherianRing",
+     "MvPowerSeries.instIsLocalRing",
+     "PowerSeries.instUniqueFactorizationMonoidOfIsPrincipalIdealRingOfIsDomain",
+     "PowerSeries.exists_isWeierstrassFactorization"
+    ],
+    "digest": "09b6363c35c26ec1"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: formal PowerSeries factoriality and valuation-ring closure do not state normality of the restricted-series subring; read MvPowerSeries/Restricted.lean:29–34 and PowerSeries/WeierstrassPreparation.lean:454–460. Generic algebra matches were not mistaken for the analytic item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-tate-galois-trace-supremum-bound",
+  "date": "2026-10-24",
+  "group": "Q142"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: The spectral norm gives the Banach topology of a reduced affinoid. Supporting input: The Galois field trace decreases the Tate supremum norm. Supporting input: A finite-variable Tate algebra is an integrally closed domain.",
+   "via": [
+    "lem-trf-tate-galois-trace-supremum-bound",
+    "lem-trf-affinoid-spectral-banach-norm",
+    "lem-trf-affinoid-distinguished-presentation",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-tate-integrally-closed",
+  "worker": "stage1",
+  "summary": "Q25 retained the exact statement and wrote a normality induction using existing coordinate normalization, Weierstrass division/preparation, monic prime factorization over normal domains, quotient power bases and Gauss multiplicativity. The quotient identification is a three-line argument, and prime-denominator cancellation is explicit. No new nodes, Lean edits or compilation.",
+  "blueprint": "The inherited historical analytic prerequisite of the Temkin normalization chain beneath lem-trf-local-term-locality, specifically the integrally-closed Tate input to the Galois trace supremum bound. The latest blueprint ancestor instead proves contracting-correspondence locality; this delivery does not alter that chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-per-tate-triangular-distinguished-coordinate",
+    "why": "Generic analytic coordinate normalization for a nonzero restricted series; its statement is precisely the needed distinguished-coordinate input and the item unit has no separate node for it."
+   },
+   {
+    "node": "lem-sfb-normal-domain-monic-prime-factorization",
+    "why": "Generic commutative algebra factorization of monic polynomials over any normal domain, used with the inductively normal smaller Tate algebra; it does not replace any step of the geometric unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-per-tate-triangular-distinguished-coordinate",
+  "lem-sfb-normal-domain-monic-prime-factorization"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-29a07b1ef",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-29a07b1ef (reviewer sub-agent of L); spot-checked: I read the whole delivery. The item statement is unchanged, there are no new nodes, and none of the 9 cited nodes depends on the item (closure of 22 nodes checked, so no cycle). The 7 steps are correct. Step 1: Gauss norm from gauss-completion plus multiplicativity gives a domain; base case D_0=K. Step 2: triangular-distinguished-coordinate (r=n>=1) gives a_d=1, lower coefficients <=1, tail <1, which are exactly the hypotheses of weierstrass-norm-division with s=n-1, so g=uw with w monic and ||w||=1. Step 3: normal-domain-monic-prime-factorization over the inductively normal A gives monic h_j with A[X]/(h_j) a nonzero domain; multiplicativity and the monic leading coefficients force coefficients <=1. Step 4: the comparison A[X]/(h)->D/(hD) is surjective by Weierstrass division and injective by the monic basis plus uniqueness of division. Step 5: h_j is prime and so is sigma^-1(h_j); the unit factor is checked. Steps 6-7: written-out denominator-prime cancellation with exponents m-i>=1, induction on the number of prime factors. Hypotheses match: complete field, nontrivial real nonarchimedean absolute value; no discreteness needed. Cases checked: d=0, unit f, w=1, repeated factor, empty factor list. No existing DAG node duplicates the item. Note: the in-unit unsplit lem-trf-tate-separated-monic-quotient (case s=1) already states the step-4 comparison and the report wrongly says none exists; the inline proof is correct and short, so it is kept. Kedlaya Prop 5 is not in literature/ and is marked WANTED; the proof is marked agent-written and does not rely on Kedlaya. Accepted tool_uses: lem-per-tate-triangular-distinguished-coordinate and lem-sfb-normal-domain-monic-prime-factorization. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TateIntegrallyClosed",
+  "declaration": "RestrictedSeries.tate_isDomain_and_isIntegrallyClosed",
+  "file": "lean/Sheaf/RingTheory/TateIntegrallyClosed.lean",
+  "statement": "theorem tate_isDomain_and_isIntegrallyClosed (K : Type u) [NontriviallyNormedField K] [IsUltrametricDist K] [CompleteSpace K] (d : ℕ) : IsDomain (MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin d ↦ (1 : ℝ))) ∧ IsIntegrallyClosed (MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin d ↦ (1 : ℝ)))",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c3b5c0e17",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: NontriviallyNormedField+IsUltrametricDist+CompleteSpace = complete nontrivial real nonarchimedean field (extends Field, def-weil-field); T = Mathlib IsRestricted.subring (Fin d, radius 1) as in def-trf-restricted-series-presentation module (coeffs→0 cofinite); IsDomain ∧ IsIntegrallyClosed (Mathlib inline, elementwise via isIntegrallyClosed_iff) = both clauses; d=0 via Fin 0 gives K. No extra hypotheses, explicit universe, lean.statement verbatim, docstrings with source+blueprint and 7-step proof, imports = stmt_dep module + proof-dep Mathlib records, only sorry, no new defs. H4: no existing Tate-normality statement in side-live lean or Mathlib. Report sections present. No changes, no compile."
+ }
+}

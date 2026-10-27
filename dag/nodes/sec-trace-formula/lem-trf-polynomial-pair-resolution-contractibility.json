@@ -1,0 +1,276 @@
+{
+ "id": "lem-trf-polynomial-pair-resolution-contractibility",
+ "kind": "statement",
+ "title": "Contractibility of representable mapping sets into a polynomial-pair resolution",
+ "statement": "Let $A\\to B$ be a homomorphism of commutative rings, let $E$ be a set, and put $C=B[E]$. Work in a common infinite size bound containing all rings and generator sets [def-weil-size-convention]. Let $\\mathcal A$ be the category of compatible augmented polynomial pairs $(P\\to B,Q\\to C)$, where $P$ is polynomial over $A$ and $Q$ is polynomial over $P$, with commuting augmentation-preserving algebra-map pairs as morphisms; let $\\mathcal B$ be the category of augmented polynomial $B$-algebras $T\\to C$, and $v^+:\\mathcal A\\to\\mathcal B$ the base-change functor $Q\\otimes_P B$ [def-trf-polynomial-presentation-pair-categories]. Let $P_\\bullet\\to\\operatorname{const} B$ be an augmented simplicial $A$-algebra, each $P_n$ polynomial over $A$ with generators in the bound [def-weil-pbc-simplicial-object]. Assume both $P_\\bullet\\to\\operatorname{const} B$ and $P_\\bullet[E]\\to\\operatorname{const} C$ are trivial Kan fibrations of underlying simplicial sets [def-weil-pbc-trivial-kan-fibration]. Then $U_n=(P_n\\to B,P_n[E]\\to C)$ with operators fixing $E$ defines a simplicial object of $\\mathcal A$, transported through isomorphisms to the chosen small representatives if necessary. There is a canonical simplicial isomorphism $v^+U_\\bullet\\cong\\operatorname{const}(C\\xrightarrow{1}C)$, induced by $P_n[E]\\otimes_{P_n}B\\cong B[E]$ and fixing coefficients and variables. For every $W=(A[S]\\xrightarrow{\\beta}B,A[S][T]\\xrightarrow{\\gamma}C)$ in $\\mathcal A$, there is an isomorphism of simplicial sets\n$$\\operatorname{Hom}_{\\mathcal A}(W,U_\\bullet)\\cong\\prod_{s\\in S}(P_\\bullet\\times_{\\operatorname{const}B}\\{\\beta(X_s)\\})\\times\\prod_{t\\in T}(P_\\bullet[E]\\times_{\\operatorname{const}C}\\{\\gamma(X_t)\\}).$$\nThe unique map $\\operatorname{Hom}_{\\mathcal A}(W,U_\\bullet)\\to *$ is a trivial Kan fibration and a homotopy equivalence to a singleton, for arbitrary, possibly empty or infinite, $S,T,E$.",
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08QV (lemma-polynomial-on-top), construction of U and product of representable fibres; simplicial.tex Tag 08NS (lemma-trivial-kan-homotopy)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-trf-polynomial-presentation-pair-categories",
+  "def-weil-pbc-simplicial-object",
+  "def-weil-pbc-trivial-kan-fibration",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\epsilon_n:P_n\\to B$ for the augmentation. For every simplicial operator $u:P_n\\to P_m$, extend $u$ to $u[E]:P_n[E]\\to P_m[E]$ by applying $u$ to coefficients and fixing every $X_e$. The polynomial universal property [def-weil-pbc-mv-polynomial-ring] implies $(u\\circ w)[E]=u[E]\\circ w[E]$ and $1[E]=1$. Since $\\epsilon_m u=\\epsilon_n$, the pairs $(u,u[E])$ preserve both augmentations. Thus the pairs $U_n$ and these operators form a simplicial object of the category in [def-trf-polynomial-presentation-pair-categories], with variance as in [def-weil-pbc-simplicial-object].",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-trf-polynomial-presentation-pair-categories",
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QV (lemma-polynomial-on-top), first paragraph, construction of U; expressed in the ordinary algebra-map category, opposite to the source site."
+   }
+  },
+  {
+   "text": "Each $P_n$ admits a polynomial presentation $A[S_n]\\cong P_n$ with $S_n$ in the fixed bound. Choose these presentations once, and extend them fixing $E$ to isomorphisms of augmented pairs $i_n:\\widetilde U_n\\xrightarrow{\\sim}U_n$. The small representative operator is $i_m^{-1}(u,u[E])i_n$. Composition cancels the middle $i_m i_m^{-1}$, so identities and all simplicial relations persist; postcomposition by $i_n$ identifies the two representable Hom sets in every degree and commutes with these operators. This realizes the replacement within [def-weil-size-convention] and [def-trf-polynomial-presentation-pair-categories].",
+   "uses": [
+    "def-weil-size-convention",
+    "def-trf-polynomial-presentation-pair-categories",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QV (lemma-polynomial-on-top), construction of U; explicit conjugation into the chosen bounded polynomial representatives."
+   }
+  },
+  {
+   "text": "In the coordinate definition of $v^+$ in [def-trf-polynomial-presentation-pair-categories], the pair $(A[S_n]\\to B,A[S_n][E]\\to C)$ is sent to $(E,e\\mapsto X_e)$, namely $C\\xrightarrow{1}C$. Every induced operator is a $B$-algebra map fixing each $X_e$, hence is the identity by [def-weil-pbc-mv-polynomial-ring]. Consequently these identifications give the claimed simplicial isomorphism $v^+U_\\bullet\\cong\\operatorname{const}(C\\xrightarrow{1}C)$. By the defining base-change identification of the cited category, its degree-$n$ map is $P_n[E]\\otimes_{P_n}B\\cong B[E]$ with $p\\otimes b\\mapsto\\epsilon_n(p)b$ for coefficients $p\\in P_n$, and $X_e\\otimes1\\mapsto X_e$.",
+   "uses": [
+    "def-trf-polynomial-presentation-pair-categories",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QV (lemma-polynomial-on-top), first paragraph: u_3(U) is constant; coordinate base-change functor from the construction before Tag 08QU."
+   }
+  },
+  {
+   "text": "For $W=(A[S]\\xrightarrow{\\beta}B,A[S][T]\\xrightarrow{\\gamma}C)$, send a morphism $(f,g):W\\to U_n$ to $(f(X_s))_{s\\in S},(g(X_t))_{t\\in T}$. Conversely, for elements $a_s\\in P_n$ and $b_t\\in P_n[E]$ with $\\epsilon_n(a_s)=\\beta(X_s)$ and $\\epsilon_n[E](b_t)=\\gamma(X_t)$, the polynomial universal property first gives the unique $A$-algebra map $f$ with $X_s\\mapsto a_s$, and then the unique map $g$ whose restriction to $A[S]$ is $A[S]\\xrightarrow f P_n\\to P_n[E]$ and with $X_t\\mapsto b_t$. The augmentations agree on coefficients and all generators, hence everywhere. These operations are inverse. Postcomposition by $(u,u[E])$ applies $u$ to each $a_s$ and $u[E]$ to each $b_t$, exactly the fibre-product operators. The bijections therefore give the displayed simplicial isomorphism.",
+   "uses": [
+    "def-trf-polynomial-presentation-pair-categories",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QV (lemma-polynomial-on-top), representable mapping set and its product of generator fibres; universal-property expansion."
+   }
+  },
+  {
+   "text": "Let $p:X\\to\\operatorname{const}D$ be either assumed trivial Kan fibration and $d\\in D$. For a boundary map into $F_d=X\\times_{\\operatorname{const}D}\\{d\\}$, compose with $F_d\\to X$ and use the constant map $\\Delta[n]\\to\\operatorname{const}D$ of value $d$. The lifting condition in [def-weil-pbc-trivial-kan-fibration] gives a simplex over $d$ extending the prescribed boundary, which therefore lies in $F_d$. In degree zero choose a preimage of $d$ using the required surjectivity of $p_0$. Hence $F_d\\to *$ is a trivial Kan fibration. Apply this separately to every $\\beta(X_s)\\in B$ and $\\gamma(X_t)\\in C$.",
+   "uses": [
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QV (lemma-polynomial-on-top), fibres F_s and F_t; simplicial.tex Tag 08NN (lemma-trivial-kan-base-change), here proved directly for fibres."
+   }
+  },
+  {
+   "text": "A boundary map into the product of Step 4 projects to one boundary map in each factor. Step 5 supplies a filler in each factor; choose one for every index in the set $S\\amalg T$ and take their tuple. Its restriction is the original boundary because this holds on each coordinate. The same coordinatewise choice gives a vertex of the product. This verifies both conditions in [def-weil-pbc-trivial-kan-fibration] for the product map to $*$. If $S\\amalg T$ is empty, the product is already $*$ and the filler is the unique tuple. Transporting across Step 4 proves that $\\operatorname{Hom}_{\\mathcal A}(W,U_\\bullet)\\to *$ is a trivial Kan fibration, without a finiteness hypothesis.",
+   "uses": [
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QV (lemma-polynomial-on-top), product of generator fibres; simplicial.tex Tag 08NR (lemma-product-trivial-kan), coordinatewise lifting argument written out."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-trivial-kan-homotopy-equivalence] to the map $p:\\operatorname{Hom}_{\\mathcal A}(W,U_\\bullet)\\to *$ proved to be a trivial Kan fibration in Step 6. Its statement supplies a section $g$ with $p\\circ g=1_*$ and a simplicial homotopy from the identity to $g\\circ p$. These are precisely a homotopy inverse and the required homotopy equivalence to a singleton.",
+   "uses": [
+    "lem-weil-pbc-trivial-kan-homotopy-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08NS (lemma-trivial-kan-homotopy), applied to the representable map to a singleton."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-trf-polynomial-presentation-pair-categories",
+  "def-weil-pbc-simplicial-object",
+  "def-weil-size-convention",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-weil-pbc-trivial-kan-homotopy-equivalence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08QV (lemma-polynomial-on-top), construction and product-of-fibres argument, with simplicial.tex Tags 08NN, 08NR, 08NS; elementary universal-property and lifting details expanded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Representable mapping simplicial sets from pairs of free polynomial algebra presentations to a polynomial resolution are contractible by coordinatewise boundary lifting",
+   "results": "{\"t\": \"2026-10-22T06:44:01Z\", \"tool\": \"leanfinder\", \"query\": \"Representable mapping simplicial sets from pairs of free polynomial algebra presentations to a polynomial resolution are contractible by coordinatewise boundary lifting\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.IsCoskeletal\", \"SSet.stdSimplex.isoOfRepresentableBy\", \"CategoryTheory.Nerve.instIsCoskeletalNerveOfNatNat\", \"SSet.isTerminalHoFunctorDeltaZero\", \"SSet.unitHomEquiv\", \"SSet.stdSimplex.ext₀_iff\", \"SSet.stdSimplex.ext₀\", \"SSet.Finite.instIsFinitelyPresentableObjSimplexCategoryStdSimplex\"], \"digest\": \"d29e0190e53cb45e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: free algebra presentations, coskeleta and standard simplices do not compute the representable mapping simplicial sets of the two-stage augmented polynomial-presentation category."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"Contractible\"",
+   "results": "{\"t\": \"2026-10-22T06:43:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPolynomial\\\", \\\"Contractible\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: free algebra presentations, coskeleta and standard simplices do not compute the representable mapping simplicial sets of the two-stage augmented polynomial-presentation category."
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]resentation.*[Cc]ontractib|[Pp]olynomial.*[Tt]rivial.*[Kk]an",
+   "results": "{\"t\": \"2026-10-22T06:43:49Z\", \"tool\": \"grep\", \"query\": \"[Pp]resentation.*[Cc]ontractib|[Pp]olynomial.*[Tt]rivial.*[Kk]an\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: free algebra presentations, coskeleta and standard simplices do not compute the representable mapping simplicial sets of the two-stage augmented polynomial-presentation category."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Maps from pairs of polynomial algebra presentations to a polynomial resolution form a contractible simplicial set",
+   "results": "{\"t\": \"2026-10-22T06:43:50Z\", \"tool\": \"leansearch\", \"query\": \"Maps from pairs of polynomial algebra presentations to a polynomial resolution form a contractible simplicial set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FinitePresentation.polynomial\", \"Algebra.Presentation.naive\", \"MvPolynomial.universalFactorizationMapPresentation\", \"Algebra.Presentation.naive.congr_simp\", \"instIsPushoutPolynomial\", \"instIsPushoutPolynomial_1\", \"Algebra.FormallySmooth.polynomial\", \"Algebra.PreSubmersivePresentation.mk.congr_simp\"], \"digest\": \"1961e8e7934a2630\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: free algebra presentations, coskeleta and standard simplices do not compute the representable mapping simplicial sets of the two-stage augmented polynomial-presentation category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The simplicial Hom from a free two stage algebra presentation into a resolution is a product of contractible fibers",
+   "results": "{\"t\": \"2026-10-22T06:44:12Z\", \"tool\": \"leanfinder\", \"query\": \"The simplicial Hom from a free two stage algebra presentation into a resolution is a product of contractible fibers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule\", \"SimplicialObject.Splitting.ι\", \"AlgebraicTopology.DoldKan.Γ₀'_obj\", \"SimplexCategoryGenRel.toSimplexCategory\", \"SimplicialObject.Splitting.πSummand\", \"CategoryTheory.Abelian.LeftResolution.chainComplexMap_f_1\", \"SimplicialObject.Splitting\", \"AlgebraicTopology.DoldKan.Γ₀.splitting\"], \"digest\": \"25e5db88b6aada92\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: free algebra presentations, coskeleta and standard simplices do not compute the representable mapping simplicial sets of the two-stage augmented polynomial-presentation category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simplicial maps from augmented free polynomial algebra pairs are products of fibers and contractible for trivial Kan resolutions",
+   "results": "{\"t\": \"2026-10-23T14:57:32Z\", \"tool\": \"leanfinder\", \"query\": \"Simplicial maps from augmented free polynomial algebra pairs are products of fibers and contractible for trivial Kan resolutions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"classifyingSpaceUniversalCover.extraDegeneracyAugmentedCechNerve\", \"classifyingSpaceUniversalCover.compForgetAugmented\", \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmented\", \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv\", \"AlgebraicTopology.DoldKan.Γ₀'\", \"AlgebraicTopology.DoldKan.Γ₀'_obj\", \"AlgebraicTopology.DoldKan.Γ₀.splitting\"], \"digest\": \"fcc96480838412b0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern general simplicial objects, Dold-Kan decompositions or noncommutative free algebras; none identifies these augmented polynomial-pair mapping sets or gives all clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "polynomial.*trivial.*[Kk]an|polynomial.*[Cc]ontractib|[Pp]resentation[Pp]air",
+   "results": "{\"t\": \"2026-10-23T14:57:33Z\", \"tool\": \"grep\", \"query\": \"polynomial.*trivial.*[Kk]an|polynomial.*[Cc]ontractib|[Pp]resentation[Pp]air\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern general simplicial objects, Dold-Kan decompositions or noncommutative free algebras; none identifies these augmented polynomial-pair mapping sets or gives all clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"SSet\"",
+   "results": "{\"t\": \"2026-10-23T14:57:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPolynomial\\\", \\\"SSet\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern general simplicial objects, Dold-Kan decompositions or noncommutative free algebras; none identifies these augmented polynomial-pair mapping sets or gives all clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representable simplicial mapping sets of augmented polynomial algebra pairs into a simplicial polynomial resolution are contractible",
+   "results": "{\"t\": \"2026-10-23T14:57:34Z\", \"tool\": \"leansearch\", \"query\": \"Representable simplicial mapping sets of augmented polynomial algebra pairs into a simplicial polynomial resolution are contractible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.augment_hom_app\", \"CategoryTheory.SimplicialCategory.sHom\", \"SSet.stdSimplex.isoOfRepresentableBy\", \"CategoryTheory.SimplicialObject.Augmented.point\", \"SSet.modelCategoryQuillen.cofibrations_eq\", \"CategoryTheory.SimplicialObject.Augmented.const_obj_hom\", \"SSet.toTop\", \"SSet.RelativeMorphism.ext\"], \"digest\": \"146f3779efbae706\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern general simplicial objects, Dold-Kan decompositions or noncommutative free algebras; none identifies these augmented polynomial-pair mapping sets or gives all clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom from free algebra presentations is the product of prescribed generator fibers of a simplicial resolution",
+   "results": "{\"t\": \"2026-10-23T14:58:58Z\", \"tool\": \"leanfinder\", \"query\": \"Hom from free algebra presentations is the product of prescribed generator fibers of a simplicial resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.MorphComponents.φ\", \"AlgebraicTopology.DoldKan.MorphComponents\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.obj₂\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.summand\", \"AlgebraicTopology.DoldKan.Γ₀'\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map\", \"AlgebraicTopology.DoldKan.Γ₀.obj\", \"AlgCat.free_map\"], \"digest\": \"8174b0919d6aba2b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern general simplicial objects, Dold-Kan decompositions or noncommutative free algebras; none identifies these augmented polynomial-pair mapping sets or gives all clauses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-cotangent-lower-shriek-polynomial-top",
+  "date": "2026-10-22",
+  "group": "Q01"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Auxiliary computation of the polynomial-presentation lower-shriek counits (Stacks 08QW), used for the three homology comparisons in the transitivity triangle. Polynomial-top auxiliary computation in the supporting cotangent lower-shriek counits: Stacks 08QV, first two paragraphs and representable mapping simplicial sets; returned polynomial-top proof Step 1 (construction of U) and Step 4.",
+   "via": [
+    "lem-trf-cotangent-lower-shriek-polynomial-top",
+    "lem-trf-cotangent-lower-shriek",
+    "lem-trf-cotangent-transitivity-triangle",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-polynomial-pair-resolution-contractibility",
+  "worker": "Q43",
+  "summary": "Expanded Stacks 08QV into seven steps using existing nodes only. Polynomial evaluation constructs operators and the generator-fibre bijection; the already defined coordinate base-change functor identifies the constant target. Fibre and arbitrary-product boundary lifting are written directly from the trivial Kan definition, then the existing 08NS node gives the homotopy inverse. No statement change, new node, or Lean writing. Added the polynomial-ring universal-property notion as a statement dependency.",
+  "blueprint": "Supports the inherited nearby-cycle/semistable-alteration chain under lem-trf-local-term-locality, proof (1)--(2), via the polynomial-top cotangent computation in the inherited from.place; realizes Stacks 08QV construction of U and representable contractibility. Latest blueprint main c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f read.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+    "why": "Generic simplicial-set theorem giving a section and cylinder homotopy for a trivial Kan fibration, exactly the 08NS invocation in 08QV; the unit has no replacement for this abstract tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-trivial-kan-homotopy-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-39357a37f",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-39357a37f (reviewer sub-agent of L); spot-checked: I read Stacks 08QV (cotangent.tex lines 1222-1290, lemma-polynomial-on-top) and simplicial.tex 08NN/08NR/08NS. The statement is byte-identical to the base on dagsnap d9234bc; the only stmt_deps change is the added def-weil-pbc-mv-polynomial-ring, which the statement uses. The delivery has no new nodes, cites no SGA, and proof_deps equals the union of the step uses. Steps 1-4 check by the polynomial universal property and the pair-category definition: the operators fix E and preserve both augmentations; transport by conjugating with presentations extended fixing E; v+ of the transported U_n is literally (E, e->X_e) and its operators are the identity by uniqueness; Hom(W,U_n) is in bijection with generator tuples, and augmentation agreement on A[S] uses the compatibility of W's augmentations. Steps 5-6 are the fibre (08NN) and arbitrary-product (08NR) lifting arguments written out from the definition, with n=0 handled by surjectivity and the empty product equal to *; I accept them as elementary. Step 7 applies the 08NS node with Y=*. This departs from Stacks' products-of-homotopy-equivalences argument but is valid and simpler. Stacks derives that P[E]->C is trivial Kan by a filtered colimit; here it is a hypothesis, which the parent's Step 1 supplies. Edge cases checked: empty S, T and E, infinite sets, B=0, non-surjective A->B. lem-trf-polynomial-presentation-homology is a single-presentation analogue, not a duplicate. tool_use lem-weil-pbc-trivial-kan-homotopy-equivalence (sk-prop-h2, generic 08NS) is accepted. Route pivot: def-weil-pbc-trivial-kan-fibration is a Mathlib-leaf definition of combinatorial trivial Kan fibrations (Stacks 08NL), not the dropped infinity/dg/model machinery; it belongs to the unchanged base statement and is used at named Steps 5-7. 'quillen' appears only in a recorded Mathlib search result and in the cited node's Mathlib-match name, and 'simplicial set' means ordinary simplicial sets. coord/dag-sync.md is absent from the snapshot, so it was not read. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PolynomialPairResolutionContractibility",
+  "declaration": "Algebra.PolynomialPresentation.polynomial_pair_resolution_contractibility",
+  "declarations": [
+   "Algebra.PolynomialPresentation.pairLowerAlgebras",
+   "Algebra.PolynomialPresentation.pairUpperRings",
+   "Algebra.PolynomialPresentation.resolutionPolynomialRings",
+   "Algebra.PolynomialPresentation.resolutionPolynomialAugmentation",
+   "Algebra.PolynomialPresentation.resolutionGeneratorFibres",
+   "Algebra.PolynomialPresentation.resolutionGeneratorProjection",
+   "Algebra.PolynomialPresentation.resolutionLowerFibres",
+   "Algebra.PolynomialPresentation.resolutionUpperFibres",
+   "Algebra.PolynomialPresentation.PairResolutionContractibility",
+   "Algebra.PolynomialPresentation.polynomial_pair_resolution_contractibility"
+  ],
+  "file": "lean/Sheaf/RingTheory/PolynomialPairResolutionContractibility.lean",
+  "statement": "theorem polynomial_pair_resolution_contractibility (I A B : Type u) [Infinite I] [CommRing A] [CommRing B] [Algebra A B] (_boundA : Nonempty (A ↪ I)) (_boundB : Nonempty (B ↪ I)) (E : Set I) (P : SimplicialObject (CommAlgCat.{u} A)) (ε : P ⟶ (SimplicialObject.const (CommAlgCat.{u} A)).obj (CommAlgCat.of A B)) (_polynomial : ∀ n : SimplexCategoryᵒᵖ, ∃ S : Set I, Nonempty (CommAlgCat.of A (MvPolynomial S A) ≅ P.obj n)) (_hP : SSet.Enhanced.trivialKanFibration (Functor.whiskerRight ε (forget (CommAlgCat.{u} A)))) (_hPE : SSet.Enhanced.trivialKanFibration (resolutionPolynomialAugmentation E ε)) : Nonempty (PairResolutionContractibility I A B E P ε)",
+  "branch": "newtargets-dag",
+  "by": "Q67",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The conclusion structure records all clauses simultaneously, with natural isomorphisms to the given P and P[E], their augmentation and coefficient equations, the canonical specialization square for base change, and both generator-evaluation normalizations. The terminal simplicial set is a singleton. All auxiliary definitions contain real data."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-24be8fea0",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Statement verbatim in module; non-lean node fields identical to side-live (no statement/stmt_dep change, no new nodes). Hypotheses match node exactly (CommRing/Algebra A B, Infinite I with A,B↪I and E⊆I as in the pair-category dep, P simplicial CommAlgCat A with ε to const B, ∃ bounded polynomial presentation per degree, trivialKanFibration (=I.rlp alias) on P→B and on the MvPolynomial.map-based P[E]→B[E]). Conclusion structure: U in Pair with natural isos lower/upper pinned by coefficient and both augmentation equations (satisfiable with T_n=E); baseChangeIso U⋙baseChange≅const topTarget pinned by specialization square (unique by B-linearity); coordinates iso Hom(W,U_•)=U⋙coyoneda(op W) ≅ ∏ pullback fibres × ∏ upper fibres with generator-evaluation normalizations (upperValues t = γ(X_t)); trivial Kan to terminal; section + ι₀/ι₁ cylinder homotopy matching the 08NS node. Edge cases empty/infinite S,T,E, B=0, n=0 covered; no finiteness, universes bound, autoImplicit false; helpers real; docstrings with source/blueprint and 7 proof steps; sorry only. Advisory: PolynomialPresentationHomology fibre helpers are category-specific (not reusable); Q67 second reading self-described as non-independent. No compile (no file changed)."
+ }
+}

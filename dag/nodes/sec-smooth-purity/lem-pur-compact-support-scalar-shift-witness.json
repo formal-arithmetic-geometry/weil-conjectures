@@ -1,0 +1,132 @@
+{
+ "id": "lem-pur-compact-support-scalar-shift-witness",
+ "kind": "statement",
+ "title": "Normalized scalar witness and its shift square",
+ "statement": "In the original geometric setup, there exists gamma satisfying the exact scalar-limit factorization; for every integral finite-Tor constructible M and integer r, M[r] is again integral finite-Tor constructible and gamma obeys its specified canonical shift equation. This is the gamma part of the final witness clause of the original theorem, with definitions [def-pur-compact-support-scalar-limit-maps] and shifts [def-pur-compact-support-scalar-shift-structures]. The strict-arrow and scalarLimitArrow shift squares of that clause follow from the strict scalar mate shift and scalar limit constraint shift lemmas and are not restated; nor are the original-site or diagram-site constituent CommShift clauses, normalization uniqueness or individual limit-constraint clauses.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 05SU, 06YU, 07A6, 0B56, 0941, 099I, 099L; retained canonical scalar-shift argument of lem-pur-compact-support-scalar-shift-normalization."
+ },
+ "stmt_deps": [
+  "def-pur-compact-support-scalar-limit-maps",
+  "def-pur-compact-support-scalar-shift-structures"
+ ],
+ "proof": [
+  {
+   "text": "obtain gamma and its exact factorization and completeness conclusions\nfrom compactSupportScalarLimitReduction. Integral triangulated closure\n(lem-pur-integral-ctf-shift-closure) supplies membership of each M[r]. The\nscalarLimitArrow square is the last clause of scalarLimitConstraintShift.\nConjugate scalarLimitArrow by scalarCompletion and the support/limit\nisomorphisms; their canonical shift squares (scalarLimitConstraintShift) produce\na shift-compatible beta on constant restrictions. The exact factorization gives\nrestriction(gamma)=beta by cancellation. Both support objects are complete.\nFinite-free scalar extension preserves completeness by finite sums, and shifts\npreserve completeness. The normalized constant/completed equivalence is fully\nfaithful on these objects. Restrict the gamma equation, use naturality of the\nrestriction shift, and substitute the two factorization equations at M and M[r].\nThe result is beta's shift square, so faithfulness proves it. This works for all\ninteger shifts, including zero and negative shifts; positive e is used only for\ninverse arithmetic restriction.",
+   "uses": [
+    "lem-pur-compact-support-scalar-limit-reduction",
+    "lem-pur-scalar-limit-constraint-shift",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-pur-integral-ctf-shift-closure",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-compact-support-scalar-limit-reduction",
+  "lem-pur-scalar-limit-constraint-shift",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-pur-integral-ctf-shift-closure",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Expanded retained comparison Steps 12--13; detailed proof in the Lean docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformations of derived scalar extension commute with shifts, uniquely normalized by the localization counit",
+   "results": "Functor.commShiftOfLocalization; mapDerivedCategoryFactors CommShift; useful for the proved tensor uniqueness clause.",
+   "date": "2026-10-25",
+   "verdict": "Component results only; no statement for the specified canonical maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars along a flat completion map is fully faithful on derived complete modules",
+   "results": "ModuleCat.instFaithfulRestrictScalars and ordinary sheaf restriction; does not apply directly to derived morphisms.",
+   "date": "2026-10-25",
+   "verdict": "Component results only; no statement for the specified canonical maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CommShift\", \"unique\"",
+   "results": "Adjunction.CommShift.compatibilityUnit_unique_left/right; no combined proper/open or Roos constraint lemma.",
+   "date": "2026-10-25",
+   "verdict": "Component results only; no statement for the specified canonical maps."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarCommShift_existsUnique|scalarLimitArrow|originalScalarMateShift|completeScalarRestrictionFaithful",
+   "results": "Existing scalarCommShift_existsUnique is reused; original-site and diagram-site factor equations and complete Hom injectivity are not separately stated. Blueprint scalar shift and complete restriction searches found no exact match.",
+   "date": "2026-10-25",
+   "verdict": "Component results only; no statement for the specified canonical maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportScalarShiftNormalization",
+  "date": "2026-10-25",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Imported Proof Step 2 (Qbar-stage), independence of finite coefficient extension; unit sk-thm-purity-transport Step 3, transitivity in coefficient extensions; auxiliary Canonical shifts of scalar proper/open mates and scalar limit maps (returned comparison Steps 12, 13); substep: Constant restriction detects maps between complete scalar objects; completed gamma shift descent",
+   "via": [
+    "lem-pur-compact-support-scalar-shift-normalization",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportScalarShiftWitness",
+  "file": "lean/Sheaf/Paper/CompactSupportScalarShiftWitness.lean",
+  "declaration": "WeilConjectures.PurStrictScalar.compactSupportScalarShiftWitness",
+  "statement": "theorem compactSupportScalarShiftWitness (c : Compactification f) (S : CoefficientDerivedSystemCalculus.{u, u} l E X) (S' : CoefficientDerivedSystemCalculus.{u, u} l F X) (e : ℕ) (he : PurCompactSupport.Ramification l E F i e) (hepos : 1 ≤ e) : ∃ γ : (finiteTorConstructibleIntegral l E X).ι ⋙ scalarSupport l E c S ⋙ pbcDerivedExtend (completedCoefficientMap l E F i Y) ⟶ (finiteTorConstructibleIntegral l E X).ι ⋙ pbcDerivedExtend (completedCoefficientMap l E F i X) ⋙ scalarSupport l F c S', ∀ M : finiteTorConstructibleIntegralCategory l E X, ((baseTensor l E F i Y).map ((scalarSupportLimit l E c S).hom.app M.obj) ≫ scalarLimitArrow l E F i c S S' e he hepos M.obj = (scalarCompletion l E F i Y).hom.app ((scalarSupport l E c S).obj M.obj) ≫ (scalarConstantRestriction l F Y).map (γ.app M) ≫ (scalarSupportLimit l F c S').hom.app ((pbcDerivedExtend (completedCoefficientMap l E F i X)).obj M.obj)) ∧ (∀ r : ℤ, ∃ hMr : finiteTorConstructibleIntegral l E X (M.obj⟦r⟧), γ.app ⟨M.obj⟦r⟧, hMr⟩ ≫ ((pbcDerivedExtend (completedCoefficientMap l E F i X) ⋙ scalarSupport l F c S').commShiftIso r).hom.app M.obj = ((scalarSupport l E c S ⋙ pbcDerivedExtend (completedCoefficientMap l E F i Y)).commShiftIso r).hom.app M.obj ≫ (γ.app M)⟦r⟧')",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-bb474",
+  "group": "Q2",
+  "result": "fix",
+  "landing": "20261025T164128-L-956705",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-bb474",
+  "group": "Q2",
+  "result": "fix",
+  "landing": "20261025T164128-L-956705",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs published (identical); moved instance block vs clone (identical but one docstring line); split lemmas vs item conjuncts; witness clauses vs strictScalarMateShift/scalarLimitConstraintShift conclusions; attachment nodes vs scalarCommShift_existsUnique/integralTriangulated"
+ }
+}

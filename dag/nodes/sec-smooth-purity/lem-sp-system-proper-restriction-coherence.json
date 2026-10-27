@@ -1,0 +1,131 @@
+{
+ "id": "lem-sp-system-proper-restriction-coherence",
+ "kind": "statement",
+ "title": "Proper direct image coefficient restriction coherence on strict systems",
+ "statement": "Fix a prime $\\ell$, schemes $Z,Y$, a proper morphism $p:Z\\to Y$, and any section-normalized restriction identifications $c$ of [def-sp-system-compact-support-restriction-data]. Coefficients are finite $\\ell$-power-torsion inverse sequences as in [def-pur-etale-system-projection-data]; use the actual operations on whole-system unbounded derived categories of [def-sp-varying-ring-operations]. There are geometric squares $g_a$ for every coefficient map $a:B\\to C$ and normalized proper comparisons $q_a:P_BU_a^Z\\cong U_a^YP_C$, where $P_B=Rp_{*,B}$. Each g has identity section maps and its prescribed inverse-image adjunction mate. Each q has exactly ProperComparison.normalized: on every K-injective H over C and EVERY K-injective resolution v of its B-restriction, the image p_*v is a quasi-isomorphism and q is its inverse under the canonical quotient and right-derived identifications. For maps $a:B\\to C,b:C\\to D$, writing $\\rho^c_W:U_a^W\\circ U_b^W\\cong U_{ab}^W$ for successive restriction first b then a, the comparisons satisfy $P_B(\\rho^c_{Z,M})\\,q_{ab,M}=q_{a,U_bM}\\,U_a^Y(q_{b,M})\\,\\rho^c_{Y,P_DM}$ in Lean left-to-right composition. They satisfy the identity equation $q_{\\mathrm{id},M}\\,\\epsilon^c_{Y,P_BM}=P_B(\\epsilon^c_{Z,M})$. The maps of coefficients may be nonflat, objects unbounded, and restricted K-injectives need not be K-injective.",
+ "stmt_deps": [
+  "def-sp-system-compact-support-restriction-data",
+  "def-pur-etale-system-projection-data",
+  "def-sp-varying-ring-operations"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E, lemma-derived-pushforward-composition; derived.tex Tag 070Y; parent steps 2, 3 and 6."
+ },
+ "proof": [
+  {
+   "text": "naturality of constant sheaves gives the commuting structural ring square.\nThe identity on sections gives the ordinary direct-image comparison, and its inverse\nadjunction mate gives the invertible inverse-image comparison, constructing g. On small\nrepresentatives of the two sequence sites, restriction is the direct image of the\nidentity-site ringed morphism with the given structural map. The two composites with p\nare the same ringed morphism. Apply unbounded derived pushforward composition to both\nfactorizations, identifying the derived exact restriction with its termwise localization.\nThe ratio of the two composition comparisons constructs q. On a target-coefficient\nK-injective H and a source-coefficient K-injective resolution v of its restriction,\nthe resolution equation for composition is precisely q.normalized: the image of v is\na quasi-isomorphism and the component is its inverse after the displayed quotient\nidentifications. To compose two coefficient maps, take a common K-injective resolution\nof the successive restrictions; naturality and cancellation of the three invertible\nresolution maps give the proper cocycle. Equivalently apply the normalized-derived-\ncomparison composition theorem in the identical-carrier model, then transport its exact\nrestriction comparisons to c using the identity section formulas. This never assumes\nthat a restriction preserves K-injectives. For the identity map choose the identity\nresolution of each K-injective H. The normalization gives the unitor equation on QH.\nEvery derived object is isomorphic to such a QH; naturality and cancellation transport\nthe equation to every object. The same argument proves uniqueness of the normalized\ncomparison. All statements concern whole derived systems, including unbounded objects\nand nonflat coefficient maps.",
+   "uses": [
+    "lem-pur-system-ringed-sequence-site",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-restriction-ringed-topos-module-direct-image",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-sf-normalized-derived-comparison-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; derived.tex Tag 070Y; parent steps 2, 3 and 6."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-system-ringed-sequence-site",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-restriction-ringed-topos-module-direct-image",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-sf-normalized-derived-comparison-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E, lemma-derived-pushforward-composition; derived.tex Tag 070Y; parent steps 2, 3 and 6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact coefficient restriction commutes with extension by zero on a ringed sequence site with units and composition",
+   "results": "ModuleCat.ExtendRestrictScalarsAdj.unit_app, unit and Unit.map; RestrictionCoextensionAdj.unit and app; three Ext exact sequence statements. These are ordinary module units or unrelated exact sequence results, not whole-system open/proper restriction or finite-evaluation normalization.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K-injective normalized derived direct image of inverse systems commutes with restriction of scalars and satisfies composition and unit laws",
+   "results": "localCohomology.diagram and ofDiagram, Condensed.profiniteSolid/profiniteFree, CondensedMod.ofSheafProfinite and LightCondMod.ofSheafLightProfinite; ordinary module/condensed constructions rather than the specified normalized whole-system comparison.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*(rightDerived|[Cc]ocycle)|rightDerivedFunctorComparison; rg RestrictionIdentifications|ProperComparison|OpenComparison|GeometricSquare|FiniteCompatibility lean/Sheaf/Paper lean/WeilConjectures",
+   "results": "Mathlib PointwiseRightDerived gives six generic rightDerivedFunctorComparison declarations. Project search finds the existing data/evaluation specifications, the parent theorem and fixed finite-coefficient cocycle. Read their signatures: none states this factor result. Reuse these definitions and generic derived composition instead of duplicating a definition. Blueprint searches restriction coherence and restriction finite normalization both return zero nodes.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SystemCompactSupportRestrictionCocycle",
+  "date": "2026-10-25",
+  "group": "A8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-compact-support-finite-field-independence",
+   "place": "Tag 0D6E, lemma-derived-pushforward-composition; derived.tex Tag 070Y; parent steps 2, 3 and 6.",
+   "via": [
+    "lem-weil-system-compact-support-restriction-cocycle",
+    "lem-weil-compact-support-normalized-scalar-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SystemProperRestrictionCoherence",
+  "file": "lean/Sheaf/Paper/SystemProperRestrictionCoherence.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SystemCompactSupportRestriction.systemProperRestrictionCoherence",
+  "statement": "theorem systemProperRestrictionCoherence (l : ℕ) [Fact l.Prime]\n    {Z Y : Scheme.{u}} (p : Z ⟶ Y) [IsProper p]\n    (c : RestrictionIdentifications.{u} l) :\n    ∃ (g : ∀ (B C : Etale.SystemProjection.Coefficients.{u} l)\n        (a : B.rings ⟶ C.rings), GeometricSquare a p)\n      (q : ∀ (B C : Etale.SystemProjection.Coefficients.{u} l)\n        (a : B.rings ⟶ C.rings), ProperComparison (g B C a)),\n      (∀ (B C D : Etale.SystemProjection.Coefficients.{u} l)\n        (a : B.rings ⟶ C.rings) (b : C.rings ⟶ D.rings)\n        (M : VaryingRing.Derived (levels D) (steps D) Z),\n        (VaryingRing.P (levels B) (steps B) p).map ((c.rho Z a b).hom.app M) ≫\n            (q B D (a ≫ b)).iso.hom.app M =\n          (q B C a).iso.hom.app ((derivedRestriction Z b).obj M) ≫\n            (derivedRestriction Y a).map ((q C D b).iso.hom.app M) ≫\n            (c.rho Y a b).hom.app ((VaryingRing.P (levels D) (steps D) p).obj M)) ∧\n      (∀ (B : Etale.SystemProjection.Coefficients.{u} l)\n        (M : VaryingRing.Derived (levels B) (steps B) Z),\n        (q B B (𝟙 B.rings)).iso.hom.app M ≫\n            (c.derivedUnit Y B).hom.app ((VaryingRing.P (levels B) (steps B) p).obj M) =\n          (VaryingRing.P (levels B) (steps B) p).map\n            ((c.derivedUnit Z B).hom.app M))",
+  "branch": "sheaf-dag",
+  "by": "A8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261025T161855-L-134278",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261025T161855-L-134278",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

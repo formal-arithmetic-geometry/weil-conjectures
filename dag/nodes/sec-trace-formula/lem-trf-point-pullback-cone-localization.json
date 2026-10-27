@@ -1,0 +1,277 @@
+{
+ "id": "lem-trf-point-pullback-cone-localization",
+ "kind": "statement",
+ "title": "Localization of point-section maps into completed-pullback cones",
+ "chapter": "sec-trace-formula",
+ "unit": "sk-d-weil",
+ "statement": "Fix the finite-field datum $p,a,q,k_0,k$ with $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $\\mathcal O_E$, a uniformizer $\\varpi$, and $A_n=\\mathcal O_E/\\varpi^n$ for $n\\ge1$ [def-trf-coefficient-conventions]. Put $s=\\operatorname{Spec}k$, $g=\\operatorname{Spec}(\\gamma)$ for geometric Frobenius [def-weil-frobenius-detailed], $R=\\widehat{\\mathcal O}_{E,s}=\\lim_n(A_n)_s$, and $\\Gamma=\\Gamma(s,-)$, with its constant $\\mathcal O_E$-action, on the small pro-etale site in its module universes [def-weil-pbc-proetale-site, def-weil-completed-integral-coefficients, lem-weil-point-proetale-sections-exact]. For any flat-term K-flat complex $P$ of $R$-module sheaves [def-pc-kflat-complex, def-pc-flat-sheaf-modules], set $P_n=P\\otimes_R(A_n)_s$, $r_{P,n}(x)=x\\otimes1$ and $t_n=1\\otimes(A_{n+1}\\to A_n)$ [def-weil-pbc-adic-coefficient-datum]. Put $C(P)_n=\\operatorname{Res}_ng_n^*P_n$ with the actual coefficient-induced transitions $v_n$ of [def-weil-inverse-image-pullback-comparison](b), and $D(P)_n=\\Gamma P_n$, $B(P)_n=\\Gamma C(P)_n$. All towers are restricted to the single integral coefficient ring. For any strict tower $X$ with transitions $w_n$ put $s_X((x_n))=(w_nx_{n+1})$ and $H(X)=\\operatorname{Cone}(1-s_X)[-1]$, with $H(X)^i=\\prod_nX_n^{i-1}\\oplus\\prod_nX_n^i$ and differential $d(b,a)=(-db-(1-s_X)a,da)$ [lem-pur-integral-operations-well-defined]. For a strict tower map $f:X\\to Y$ let $H(f)(b,a)=((\\prod_nf_n)b,(\\prod_nf_n)a)$. Let $c_X:\\Gamma H(X)\\xrightarrow{\\sim}H(\\Gamma X)$ be the normalized identity on both sectionwise product coordinates for a tower of $R$-module sheaves [def-trf-point-sections-roos-comparison].\n\nLet $\\mathcal P_R$ be the full subcategory of the homotopy category of $R$-module complexes on flat-term K-flat objects, with quasi-isomorphisms $W_R$ [lem-weil-pbc-site-derived-tensor-descent]. Define $S(P)=[\\Gamma P]$ and $T(P)=[H(B(P))]$, and on chain maps $h$ put $S(h)=[\\Gamma h]$ and $T(h)=[H(\\Gamma C(h))]$. Let $\\overline S=\\Gamma$ and $\\overline T=\\Gamma Lg^*$ on $D(R)=D(s_{\\mathrm{proet}},R)$, where $Lg^*$ is the ambient completed pullback [def-pur-integral-derived-operations], with its specified representative comparisons [lem-pur-integral-operations-well-defined]. For a quasi-isomorphism $q:P\\to N$, with $N$ any $R$-module complex, write $b_q:\\overline T[N]\\xrightarrow{\\sim}T(P)$ for that comparison followed by $c_{C(P)}$.\n\nThe assignments $S,T$ factor through $\\mathcal P_R$ and invert $W_R$. For every family of derived morphisms $\\eta_P:S(P)\\to T(P)$ which is natural for all chain maps between these representatives, there exists a unique natural transformation $\\overline\\eta:\\overline S\\to\\overline T$ such that, for every $q:P\\to N$ as above,\n$$b_q\\overline\\eta_{[N]}=\\eta_P[\\Gamma(q)]^{-1}.$$\nIn particular the right hand side, transported back by $b_q$, is independent of the representative. For every roof $P\\xleftarrow{a}Q\\xrightarrow{b}P'$ within the resolving class with $a$ a quasi-isomorphism, both $S(a)$ and $T(a)$ are invertible and\n$$T(b)T(a)^{-1}\\eta_P=\\eta_{P'}S(b)S(a)^{-1}.$$\nThis equation is independent of the roof presentation and expresses naturality for its arbitrary derived morphism. No completeness, boundedness or constructibility assumption is imposed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "clause (3), point-transport comparison supplement; original steps 7 and 8: homotopy factorization, inversion of good quasi-isomorphisms, unique descent and explicit roof square"
+ },
+ "stmt_deps": [
+  "def-trf-coefficient-conventions",
+  "def-weil-frobenius-detailed",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "lem-weil-point-proetale-sections-exact",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-inverse-image-pullback-comparison",
+  "lem-pur-integral-operations-well-defined",
+  "def-trf-point-sections-roos-comparison",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-pur-integral-derived-operations"
+ ],
+ "proof": [
+  {
+   "text": "Use the proved product-preserving sections/Roos natural comparison from lem-trf-point-quotient-augmentation-diagram. Its two projection identities satisfy def-trf-point-sections-roos-comparison; uniqueness there identifies each component with the specified sectionsRoos. Compose integralDerivedPullbackComparison, exact sectionsFactors and this comparison to obtain the natural isomorphism d: L ⋙ G ≅ target, where L is Q restricted to the good complexes and G is completed pullback followed by sections. Exact sectionsFactors also gives e: L ⋙ F ≅ source.",
+   "uses": [
+    "lem-trf-point-quotient-augmentation-diagram",
+    "def-trf-point-sections-roos-comparison",
+    "lem-pur-integral-operations-well-defined",
+    "lem-weil-point-proetale-sections-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the functors Qh ⋙ F and Qh ⋙ G on the good homotopy subcategory through the componentwise comparisons F(quotientCompQhIso) ≫ e and G(quotientCompQhIso) ≫ d. Define the transported maps by conjugation. Naturality of quotientCompQhIso and e,d proves strict equality of their restrictions with source and target. Since Qh inverts homotopy quasi-isomorphisms, both transported functors invert that class. The same comparisons show that source and target invert every good chain quasi-isomorphism.",
+   "uses": [
+    "lem-pc-quasi-isomorphisms-multiplicative-system"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the existing proved goodComplexes localization theorem integralOperationsGoodLocalization_isLocalization from lem-pur-integral-operations-well-defined. Precomposition by L is fully faithful by lem-weil-pbc-localization-universal-property. For arbitrary eta:source→target take the preimage of e.hom ≫ eta ≫ d.inv. Its component identity is etaBar_[P] ≫ d_P = e_P ≫ eta_P. No invertibility of eta is used.",
+   "uses": [
+    "lem-pur-integral-operations-well-defined",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the specified representativeComparison at q:P→N as G([q]^{-1}) ≫ d_P, using the normalized sections/Roos comparison. Precompose the desired equation with the invertible F([q]). Naturality of etaBar, then the component identity and naturality of sectionsFactors, gives the formula for every resolution. At q=id the formula recovers the component identity; localization natural-transformation extensionality proves uniqueness.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a good roof, precompose the asserted naturality equation by source(a), apply eta.naturality to a, cancel target(a), and apply eta.naturality to b. For either comparison e or d, conjugation identifies inv(F₀(a)) ≫ F₀(b) with comparison_P.inv ≫ F(inv(L(a)) ≫ L(b)) ≫ comparison_Pprime.hom. Thus equal derived roofs have equal images for both source and target.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply DerivedCategory.right_fac to an arbitrary derived morphism, yielding an ambient chain roof K→P,K→Pprime. Resolve K by the flat-term K-flat resolution R→K of lem-pc-kflat-resolution and compose both legs. The denominator is a quasi-isomorphism by composition. Functoriality, inverse-of-composite and cancellation of Q(R→K) show that the resulting good roof represents the original morphism.",
+   "uses": [
+    "lem-pc-right-fraction-representation",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-point-quotient-augmentation-diagram",
+  "def-trf-point-sections-roos-comparison",
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-pc-right-fraction-representation",
+  "lem-pc-kflat-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "clause (3), original steps 7–8; Lean proof Y3 uses the existing normalized natural sections/Roos comparison and the already proved localization of good chain complexes, followed by transport to the good homotopy category and explicit roof cancellation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Chain natural maps from point sections of flat term K flat sheaf complexes into completed pullback Roos cones descend to all derived morphisms and roofs",
+   "results": "8 hits: CategoryTheory.RanIsSheafOfIsCocontinuous.lift, CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.glue, CategoryTheory.GrothendieckTopology.coneCompEvaluationOfConeCompDiagramFunctorCompEvaluation_π_app, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₂₄_op_glue, CategoryTheory.GrothendieckTopology.liftToPlusObjLimitObj_fac. Localization.liftNatTrans is the generic existing localization tool, not the assertion that these particular sectionwise completed-pullback cone functors factor through the homotopy category, invert good quasi-isomorphisms, and have the specified representative comparisons.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "liftNatTrans|natTrans_ext|mapDerivedCategoryFactors",
+   "results": "25 hits: Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean, Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean, Mathlib/CategoryTheory/Quotient.lean, Mathlib/CategoryTheory/Quotient.lean, Mathlib/CategoryTheory/Galois/Decomposition.lean, Mathlib/CategoryTheory/Galois/IsFundamentalgroup.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean. Localization.liftNatTrans is the generic existing localization tool, not the assertion that these particular sectionwise completed-pullback cone functors factor through the homotopy category, invert good quasi-isomorphisms, and have the specified representative comparisons.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural maps on flat term K flat representatives into completed pullback cones descend through quasi isomorphism roofs",
+   "results": "8 hits: AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.RepresentablyFlat.of_iso, AlgebraicGeometry.Flat.isQuotientMap_of_surjective, HomologicalComplexUpToQuasiIso.quotientCompQhIso, CategoryTheory.PreservesFiniteLimitsOfFlat.uniq. Localization.liftNatTrans is the generic existing localization tool, not the assertion that these particular sectionwise completed-pullback cone functors factor through the homotopy category, invert good quasi-isomorphisms, and have the specified representative comparisons.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.liftNatTrans",
+   "results": "10 hits: CategoryTheory.Localization.liftNatTrans, CategoryTheory.Localization.liftNatTrans_id, CategoryTheory.Localization.liftNatIso_hom, CategoryTheory.Localization.liftNatIso_inv, CategoryTheory.Localization.comp_liftNatTrans, CategoryTheory.Localization.comp_liftNatTrans_assoc, CategoryTheory.Localization.liftNatTrans_app, CategoryTheory.NatTrans.CommShift.liftNatTrans. Localization.liftNatTrans is the generic existing localization tool, not the assertion that these particular sectionwise completed-pullback cone functors factor through the homotopy category, invert good quasi-isomorphisms, and have the specified representative comparisons.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def liftNatTrans|lemma natTrans_ext|mapDerivedCategoryFactors",
+   "results": "1 hits: Mathlib/CategoryTheory/Localization/Predicate.lean. Localization.liftNatTrans is the generic existing localization tool, not the assertion that these particular sectionwise completed-pullback cone functors factor through the homotopy category, invert good quasi-isomorphisms, and have the specified representative comparisons.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformations from sections to sections of the derived completed pullback extend from K flat representatives by inversion of quasi isomorphisms",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.leftDerived_ext, CategoryTheory.InjectiveResolution.rightDerivedToHomotopyCategory_app_eq, CategoryTheory.NatTrans.leftDerived, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app, CategoryTheory.NatTrans.rightDerived. Localization.liftNatTrans is the generic existing localization tool, not the assertion that these particular sectionwise completed-pullback cone functors factor through the homotopy category, invert good quasi-isomorphisms, and have the specified representative comparisons.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "liftNatTrans|fullyFaithfulWhiskeringLeft|mappingCone.*homotopy",
+   "results": "25 hits: Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean, Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean, Mathlib/CategoryTheory/Center/Localization.lean, Mathlib/CategoryTheory/Center/Localization.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean. Generic localization and exact-derived-functor infrastructure is present; it does not assert homotopy factorization and the normalized comparisons for these particular completed-pullback point-section cones.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural maps from sections to completed derived pullback extend uniquely from K flat representatives",
+   "results": "8 hits: UniformSpace.Completion.map_unique, SheafOfModules.sheafificationCompPullback, IsAdicComplete.StrictMono.factorPow_comp_extend, Derivation.liftKaehlerDifferential_unique_iff, SheafOfModules.pushforwardSections, LaurentSeries.extensionAsRingHom, UniformSpace.Completion.map, CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat. Generic localization and exact-derived-functor infrastructure is present; it does not assert homotopy factorization and the normalized comparisons for these particular completed-pullback point-section cones.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.liftNatTrans",
+   "results": "10 hits: CategoryTheory.Localization.liftNatTrans, CategoryTheory.Localization.liftNatTrans_id, CategoryTheory.Localization.liftNatIso_hom, CategoryTheory.Localization.liftNatIso_inv, CategoryTheory.Localization.comp_liftNatTrans, CategoryTheory.Localization.comp_liftNatTrans_assoc, CategoryTheory.Localization.liftNatTrans_app, CategoryTheory.NatTrans.CommShift.liftNatTrans. Generic localization and exact-derived-functor infrastructure is present; it does not assert homotopy factorization and the normalized comparisons for these particular completed-pullback point-section cones.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformations from point sections of flat term K flat sheaf complexes to completed pullback Roos cones descend to derived morphisms",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.coneCompEvaluationOfConeCompDiagramFunctorCompEvaluation_π_app, CategoryTheory.Sheaf.multiforkEvaluationCone, CategoryTheory.PreservesFiniteLimitsOfFlat.lift, CategoryTheory.compatiblePreservingOfFlat, CategoryTheory.GrothendieckTopology.coneCompEvaluationOfConeCompDiagramFunctorCompEvaluation, SheafOfModules.Presentation.map_π_eq, CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux, CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map'. Generic localization and exact-derived-functor infrastructure is present; it does not assert homotopy factorization and the normalized comparisons for these particular completed-pullback point-section cones.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation between two functors on K flat complexes that invert quasi isomorphisms extends uniquely to the derived category by localization",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory, DerivedCategory.left_fac, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors, DerivedCategory.right_fac. Generic localization and exact-derived-functor infrastructure is present; it does not assert homotopy factorization and the normalized comparisons for these particular completed-pullback point-section cones.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-point-transport-cone-comparison-descent",
+  "date": "2026-10-22",
+  "group": "Q134"
+ },
+ "blueprint": {
+  "from": {
+   "node": "prop-trf-rational-frobenius-integral-model",
+   "place": "proof clause (3), passage from levelwise compact-support maps to the integral derived limit; original steps 7 and 8: homotopy factorization, inversion of good quasi-isomorphisms, unique descent and explicit roof square",
+   "via": [
+    "lem-trf-point-transport-cone-comparison-descent",
+    "lem-trf-integral-point-transport-tower-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-point-pullback-cone-localization",
+  "worker": "stage1",
+  "summary": "Split into eight explicit steps using existing statements only: quotient-tower and signed Roos homotopies, naturality of the normalized sections comparison, quasi-isomorphism invariance, localization of good representatives, specified comparisons, unique extension, the formula for every resolution, and arbitrary-roof naturality. Statement and statement dependencies retained verbatim. No new nodes or Lean edits.",
+  "blueprint": "Realizes proof clause (3) of prop-trf-rational-frobenius-integral-model, the passage from compatible finite-level maps to the integral derived-limit map; specifically original descent steps 7 and 8 named by the item source and parent comparison-descent proof step 5.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-point-proetale-sections-exact",
+    "why": "Exact sections at an algebraically closed pro-etale point preserve quasi-isomorphisms; this generic point-site fact is not supplied by the Weil-data unit."
+   },
+   {
+    "node": "lem-pur-strict-roos-homotopy-functor",
+    "why": "The generic signed Roos construction carries transition-compatible homotopies to homotopies; the unit does not supply this cone-sign lemma."
+   },
+   {
+    "node": "lem-pur-integral-operations-well-defined",
+    "why": "The ambient completed pullback inverts good quasi-isomorphisms and supplies its specified natural representative comparisons; no Weil-data lemma supplies this construction."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Only its first assertion, that good K-flat homotopy representatives localize equivalently to D(R), is used; this general ringed-site localization tool is not specific to the unit."
+   },
+   {
+    "node": "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "why": "The ambient homotopy category has the right calculus of quasi-isomorphism fractions, a general derived-category tool."
+   },
+   {
+    "node": "lem-pc-right-fraction-representation",
+    "why": "Arbitrary derived morphisms are ambient right fractions; this generic categorical tool is not a Weil-data proof route."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Resolve the middle complex of an ambient roof by a flat-term K-flat complex, without boundedness; this general ringed-site resolution theorem is not proved in the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-point-proetale-sections-exact",
+  "lem-pur-integral-operations-well-defined",
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "lem-pc-right-fraction-representation",
+  "lem-pc-kflat-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-5535d9721",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-5535d9721 (reviewer sub-agent of L); spot-checked: I read the item, all ten cited statements and blueprint main-20261015 prop-trf-rational-frobenius-integral-model clause (3) (line 55 ff., 'derived limit of the levelwise maps'). I checked the Stacks places: 014E derived-definition-cone; 04VG/04VI/04VK; and 06YS lemma-K-flat-resolution at sites-cohomology.tex:3207, which needs no boundedness. There is no SGA citation. The delivery has no new nodes and no repair note, so this is a first split and the re-split rule does not apply. The item is not in the dropped lists. Steps checked: (1) Homotopy factorization is correct: quotient-tower-homotopy (same unit, any automorphism g) supplies transition-compatible homotopies, and strict-roos-homotopy-functor in Mod(O_E) turns them into a homotopy with the same sign convention (-db-(1-s)a,da). (2) Naturality of c_X holds on both roosFirst and roosSecond, which jointly determine each degree map. (3) By clause (1) of integral-operations-well-defined, T_g matches C(P) with the coefficient-induced v_n, and conjugating the exact-sections quasi-isomorphism by c makes T(f) invertible. (4) L is a localization: the K-flat descent equivalence composed with fraction localization, using only the first assertion. (5) alpha comes from the clause (2) natural representative comparisons, and b_q = alpha_P T̄([q])^{-1}; I checked the direction. (6) Universal-property clause (2) applies with phi=(1,alpha) and gives alpha_P η̄_[P] = η_P without invertibility of η. (7) I verified the cancellation formula for every q, and uniqueness follows from q=id. (8) I verified the roof algebra. Every derived morphism is reached by a right fraction in K(R) with the middle complex K-flat resolved, so arbitrary unbounded complexes are covered. Edge cases P=0, η=0, q=id, the identity roof and contractible P are consistent. The statement is not weakened, and no completeness or boundedness hypothesis is added. I accept the 7 tool_uses as generic black boxes with no route replacement: point sections exact, Roos homotopy, well-defined pullback, K-flat descent, the two pc fraction leaves and K-flat resolution. There is no cycle, and Mathlib searches of all three kinds are recorded. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointPullbackConeLocalization",
+  "declaration": "WeilConjectures.PointPullbackCone.pointPullbackConeLocalization",
+  "declarations": [
+   "WeilConjectures.PointPullbackCone.source",
+   "WeilConjectures.PointPullbackCone.target",
+   "WeilConjectures.PointPullbackCone.goodHomotopy",
+   "WeilConjectures.PointPullbackCone.toHomotopy",
+   "WeilConjectures.PointPullbackCone.sectionsFactors",
+   "WeilConjectures.PointPullbackCone.representativeComparison",
+   "WeilConjectures.PointPullbackCone.pointPullbackConeLocalization"
+  ],
+  "file": "lean/Sheaf/Paper/PointPullbackConeLocalization.lean",
+  "statement": "theorem pointPullbackConeLocalization (_hl : l ≠ D.p) : ∃ (S T : (goodHomotopy D l E).FullSubcategory ⥤ @DerivedCategory (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionIntegers l E))) _ _ (HasDerivedCategory.ofIsGrothendieckAbelian _)), toHomotopy D l E ⋙ S = source D l E ∧ toHomotopy D l E ⋙ T = target D l E ∧ ((HomotopyCategory.quasiIso _ (.up ℤ)).inverseImage (goodHomotopy D l E).ι).IsInvertedBy S ∧ ((HomotopyCategory.quasiIso _ (.up ℤ)).inverseImage (goodHomotopy D l E).ι).IsInvertedBy T ∧ ∃ hInv : ∀ (P P' : (integralOperationsGoodComplex l E (Spec (.of D.k))).FullSubcategory) (a : P ⟶ P'), QuasiIso a.hom → IsIso ((source D l E).map a) ∧ IsIso ((target D l E).map a), (∀ η : source D l E ⟶ target D l E, ∃! ηbar : pointFibreIntegralAmbient D l E ⟶ integralDerivedPullback l E (frobeniusPointIso D).hom ⋙ pointFibreIntegralAmbient D l E, ∀ (N : CochainComplex (integralTowerModules l E (Spec (.of D.k))) ℤ) (P : (integralOperationsGoodComplex l E (Spec (.of D.k))).FullSubcategory) (q : P.obj ⟶ N) [QuasiIso q], ηbar.app (DerivedCategory.Q.obj N) ≫ (representativeComparison D l E (frobeniusPointIso D).hom N P q).hom = (sectionsFactors D l E).hom.app N ≫ inv ((CompletedStalk.moduleQ l E).map ((CompletedStalk.sectionsComplex D l E).map q)) ≫ η.app P) ∧ (∀ (η : source D l E ⟶ target D l E) (P Q P' : (integralOperationsGoodComplex l E (Spec (.of D.k))).FullSubcategory) (a : Q ⟶ P) (b : Q ⟶ P') (ha : QuasiIso a.hom), η.app P ≫ inv (I := (hInv Q P a ha).2) ((target D l E).map a) ≫ (target D l E).map b = inv (I := (hInv Q P a ha).1) ((source D l E).map a) ≫ (source D l E).map b ≫ η.app P') ∧ (∀ (P P' Q Q' : (integralOperationsGoodComplex l E (Spec (.of D.k))).FullSubcategory) (a : Q ⟶ P) (b : Q ⟶ P') (a' : Q' ⟶ P) (b' : Q' ⟶ P') (ha : QuasiIso a.hom) (ha' : QuasiIso a'.hom), inv (I := (DerivedCategory.isIso_Q_map_iff_quasiIso _ a.hom).mpr ha) (DerivedCategory.Q.map a.hom) ≫ DerivedCategory.Q.map b.hom = inv (I := (DerivedCategory.isIso_Q_map_iff_quasiIso _ a'.hom).mpr ha') (DerivedCategory.Q.map a'.hom) ≫ DerivedCategory.Q.map b'.hom → (inv (I := (hInv Q P a ha).1) ((source D l E).map a) ≫ (source D l E).map b = inv (I := (hInv Q' P a' ha').1) ((source D l E).map a') ≫ (source D l E).map b') ∧ (inv (I := (hInv Q P a ha).2) ((target D l E).map a) ≫ (target D l E).map b = inv (I := (hInv Q' P a' ha').2) ((target D l E).map a') ≫ (target D l E).map b')) ∧ (∀ (P P' : (integralOperationsGoodComplex l E (Spec (.of D.k))).FullSubcategory) (φ : DerivedCategory.Q.obj P.obj ⟶ DerivedCategory.Q.obj P'.obj), ∃ (Q : (integralOperationsGoodComplex l E (Spec (.of D.k))).FullSubcategory) (a : Q ⟶ P) (b : Q ⟶ P') (ha : QuasiIso a.hom), φ = inv (I := (DerivedCategory.isIso_Q_map_iff_quasiIso _ a.hom).mpr ha) (DerivedCategory.Q.map a.hom) ≫ DerivedCategory.Q.map b.hom)",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3811e407e",
+  "group": "NW",
+  "result": "pass",
+  "note": "Item node differs from live only by the new lean record; statement verbatim; 7 declarations present; dependency nodes unchanged; lines ≤95 chars; only sorry is the theorem proof. All 16 node clauses match: S,T pinned by toHomotopy ⋙ S = source / ⋙ T = target; W_R = quasiIso.inverseImage ι; hInv; ∀η ∃! ηbar with b_q ηbar_[N] = η_P[Γq]^{-1} for every q:P→N, N arbitrary, sectionsFactors inserted; b_q = Γ Lg*([q]^{-1}) ≫ Γ(integralDerivedPullbackComparison.app P) ≫ sectionsFactors ≫ moduleQ(sectionsRoos C(P)), codomain literally target P; roof square direction correct; equal-roof independence and good-roof existence explicit; g = Spec of geometricFrobeniusAlgEquivOfAlgebraic; no completeness or boundedness. Universe sharing of k and E is inherited from the recorded sectionsRoos and pointFibreIntegralAmbient. Advisories: A1 sectionsFactors/representativeComparison duplicate the parent PointTransportCone helpers, forced because the parent cites this item in proof_deps (import cycle); A2 owners of frobeniusPointIso, pointFibreIntegralAmbient, integralOperationsGoodComplex and the IntegralOperationsWellDefined plain defs are outside the unchanged S1 stmt_deps (theorem stmt_dep genuine via .choose); A3 proof-only imports unused by the statement. No recompile, since no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261025T061120-L-2399707",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

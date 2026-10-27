@@ -1,0 +1,290 @@
+{
+ "id": "lem-a1-groupoid-invariant-open-restriction-degree",
+ "kind": "statement",
+ "title": "Restriction of a groupoid to an invariant open and transport of degree",
+ "statement": "Let $U,R$ be schemes [def-pc-scheme], with maps $s,t:R\\to U$, $e:U\\to R$, $i:R\\to R$ and $c:R\\times_{s,U,t}R\\to R$ defining a groupoid scheme [def-a1-groupoid-scheme]. Let $W\\subseteq U$ be an open subscheme [def-weil-open-immersion] satisfying $s^{-1}(W)=t^{-1}(W)$ as open subsets, and denote the common open subscheme by $V$. Write $j:W\\hookrightarrow U$ and $k:V\\hookrightarrow R$ for the inclusions. There are unique restrictions $s_W,t_W:V\\to W$, $e_W:W\\to V$, $i_W:V\\to V$, and $c_W:V\\times_{s_W,W,t_W}V\\to V$ [def-pc-fibre-product] forming a groupoid scheme. They satisfy $j\\circ s_W=s\\circ k$, $j\\circ t_W=t\\circ k$, $k\\circ e_W=e\\circ j$, $k\\circ i_W=i\\circ k$, and $k\\circ c_W=c\\circ\\lambda$, where $\\lambda:V\\times_{s_W,W,t_W}V\\to R\\times_{s,U,t}R$ is induced by $k$ on both factors. The map $i_W$ is an involutive isomorphism and $s_W\\circ i_W=t_W$, so it identifies the morphisms $t_W$ and $s_W$ over $W$. For every integer $r\\geq0$, if $s_W$ is finite locally free of degree $r$ [def-pc-finite-locally-free], then $t_W$ is finite locally free of degree $r$. The open $W$ may be empty; affineness and finite locally free hypotheses on the original $s,t$ are not required.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 02VB (groupoids-lemma-restrict-groupoid), Tag 03BC (groupoids-definition-invariant-open) and its following paragraph; degree transport in the last two sentences of Tag 03BI (groupoids-lemma-finite-locally-free-disjoint-free)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-a1-groupoid-scheme",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product",
+  "def-pc-finite-locally-free"
+ ],
+ "proof": [
+  {
+   "text": "By $V=s^{-1}(W)=t^{-1}(W)$, both $s\\circ k$ and $t\\circ k$ have image in $W$. Apply [lem-weil-pbc-morphism-factors-through-open-subscheme] to obtain unique $s_W,t_W:V\\to W$ with $j s_W=s k$ and $j t_W=t k$. The inclusions $j$ and $k$ are monomorphisms by [lem-weil-pbc-open-immersion-monomorphism]; consequently equalities of maps into $W$ or $V$ can be checked after these inclusions.",
+   "uses": [
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "lem-weil-pbc-open-immersion-monomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BC (definition-invariant-open), following paragraph; restriction maps in Tag 02VB (lemma-restrict-groupoid), expanded using Schemes Tags 01HI and 01L7"
+   }
+  },
+  {
+   "text": "The groupoid identities $s e=\\mathrm{id}_U$ and $s i=t$ are part of [def-a1-groupoid-scheme]. Thus $e(j(W))\\subseteq s^{-1}(W)=V$ and $i(k(V))\\subseteq s^{-1}(W)=V$, the latter because $t(k(V))\\subseteq W$. Apply [lem-weil-pbc-morphism-factors-through-open-subscheme] to obtain unique $e_W:W\\to V$ and $i_W:V\\to V$ satisfying $k e_W=e j$ and $k i_W=i k$. These are actual morphisms of schemes, not merely maps of underlying sets.",
+   "uses": [
+    "def-a1-groupoid-scheme",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 02VB (lemma-restrict-groupoid), omitted construction expanded; Tag 03BC following paragraph"
+   }
+  },
+  {
+   "text": "Put $P=V\\times_{s_W,W,t_W}V$, with projections $p_0,p_1$. Since $s k p_0=j s_Wp_0=j t_Wp_1=t k p_1$, [def-pc-fibre-product] gives the unique map $\\lambda:P\\to R\\times_{s,U,t}R$ with projections $k p_0,k p_1$. The identity $s c=s\\operatorname{pr}_1$ of [def-a1-groupoid-scheme] implies $s c\\lambda=s k p_1=j s_Wp_1$. Hence $c\\lambda$ has image in $V=s^{-1}(W)$. By [lem-weil-pbc-morphism-factors-through-open-subscheme] it factors uniquely as $k c_W$, defining $c_W:P\\to V$ and the required compatibility with composition.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-a1-groupoid-scheme",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 02VB (lemma-restrict-groupoid), omitted construction of composition expanded; Tag 03BC following paragraph"
+   }
+  },
+  {
+   "text": "For each test scheme $H$, the injective maps $W(H)\\to U(H)$ and $V(H)\\to R(H)$ identify the restricted operations with the original ones. Indeed this follows from the five commuting equations just proved and the universal property in [def-pc-fibre-product]. The equations $s_We_W=t_We_W=\\mathrm{id}_W$, $s_Wi_W=t_W$, $t_Wi_W=s_W$, $s_Wc_W=s_Wp_1$ and $t_Wc_W=t_Wp_0$ follow by composing with $j$, using the corresponding identities of [def-a1-groupoid-scheme], and cancelling $j$ by [lem-weil-pbc-open-immersion-monomorphism]. For $a,b,d\\in V(H)$ with matching endpoints, composing the two restricted unit equations, the two inverse equations, and $c_W(c_W(a,b),d)=c_W(a,c_W(b,d))$ with $k$ gives exactly the original equations in $R(H)$. Cancel $k$ to obtain all of them. Naturality in $H$ is precomposition of scheme morphisms. Thus [def-a1-groupoid-scheme] applies. Uniqueness of all five maps was already supplied by their factorizations.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-a1-groupoid-scheme",
+    "lem-weil-pbc-open-immersion-monomorphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 02VB (lemma-restrict-groupoid), omitted verification of groupoid laws expanded"
+   }
+  },
+  {
+   "text": "Apply the groupoid laws from [def-a1-groupoid-scheme] directly to the restricted groupoid. For an arrow a, associativity for (i(i(a)), i(a), a), the two inverse equations, and the two unit equations give i(i(a)) = a: its left-associated composite is a and its right-associated composite is i(i(a)). In Lean take the test scheme V and the universal arrow id_V. This proves i_W squared is id_V without cancelling an inclusion. Hence i_W is its own inverse as a scheme isomorphism. The restricted inverse-source law gives i_W followed by s_W equals t_W.",
+   "uses": [
+    "def-a1-groupoid-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BI (lemma-finite-locally-free-disjoint-free), final sentence: inverse identifies source and target"
+   }
+  },
+  {
+   "text": "Assume s_W is finite locally free of degree r, as defined in [def-pc-finite-locally-free]. Rewrite t_W as i_W followed by s_W. Mathlib instances for [def-weil-finite-integral-morphism], [def-weil-flat-morphism], and [def-sbc-locally-finite-presentation] show that isomorphisms have each property and that each property is closed under composition. These provide the three fields of the finite locally free structure on t_W.",
+   "uses": [
+    "def-pc-finite-locally-free",
+    "def-weil-finite-integral-morphism",
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BI (lemma-finite-locally-free-disjoint-free), final sentence, isomorphism transport expanded from the definitions"
+   }
+  },
+  {
+   "text": "For each w in W, apply the already proved source-library lemma AlgebraicGeometry.Scheme.Hom.fiberDegree_comp_left_of_isIso to i_W and s_W. It identifies the fibre degree of i_W followed by s_W with that of s_W; its proof is the pullback comparison from [def-pc-fibre-product] and the fibre-degree definition of [def-pc-finite-locally-free]. The latter degree is r by hypothesis. This completes the degree-r structure on t_W. No point of W was chosen globally, so the construction and proof also cover the empty open.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BI (lemma-finite-locally-free-disjoint-free), final sentence, fibre-degree comparison expanded"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-open-immersion-monomorphism",
+  "def-a1-groupoid-scheme",
+  "def-pc-fibre-product",
+  "def-pc-finite-locally-free",
+  "def-weil-finite-integral-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tags 02VB and 03BC; last sentence of Tag 03BI. A9 formalized restriction by factorization and monomorphism cancellation, proved involutivity directly in the restricted groupoid, and used the existing fiberDegree_comp_left_of_isIso API for the fibre comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a groupoid scheme to an invariant open subset is a groupoid and inversion identifies the restricted source and target morphisms preserving finite locally free degree",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"closedUnderRestriction'\", \"module\": \"Mathlib/Geometry/Manifold/StructureGroupoid\", \"type\": \"∀ {H : Type u_1} [inst : TopologicalSpace H] {G : StructureGroupoid H} [ClosedUnderRestriction G]\\n  {e : OpenPartialHomeomorph H H}, e ∈ G → ∀ {s : Set H}, IsOpen s → e.restr s ∈ G\", \"doc\": \"If $ G $ is a structure groupoid on a topological space $ H $ that is closed under restriction, and $ e $ is a partial homeomorphism in $ G $, then for any open subset $ s $ of the domain of $ e $, th\"}\n  {\"name\": \"ClosedUnderRestriction.closedUnderRestriction\", \"module\": \"Mathlib/Geometry/Manifold/StructureGroupoid\", \"type\": \"∀ {H : Type u_1} {inst : TopologicalSpace H} {G : StructureGroupoid H} [self : ClosedUnderRestriction G]\\n  {e : OpenPartialHomeomorph H H}, e ∈ G → ∀ (s : Set H), IsOpen s → e.restr s ∈ G\", \"doc\": \"For a topological space $ H $ and a structure groupoid $ G $ on $ H $, if $ G $ is closed under restriction, then for any homeomorphism $ e \\\\in G $ and any open subset $ s $ of the domain of $ e $, th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.restrict_f\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (U : X.Opens) (x : 𝒰.I₀), (𝒰.restrict U).f x = 𝒰.f x ∣_ U\", \"doc\": \"For any scheme $X$, open cover $\\\\mathcal{U}$ of $X$, open subset $U \\\\subseteq X$, and index $x \\\\in \\\\mathcal{U}.I_0$, the morphism $f_x$ in the restricted open cover $\\\\mathcal{U}|_U$ is equal to the re\"}\n  {\"name\": \"AlgebraicGeometry.morphismRestrictRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (U : Y.Opens) →\\n      (V : (↑U).Opens) →\\n        CategoryTheory.Arrow.mk (f ∣_ U ∣_ V) ≅\\n          CategoryTheory.Arrow.mk (f ∣_ (AlgebraicGeometry.Scheme.Hom.opensFunctor U.ι).obj V)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes, and let $V \\\\subseteq U$ be open subsets of $Y$. This theorem establishes that restricting the morphism $f$ first to $U$ and then to $V$ is canonically isomor\"}\n  {\"name\": \"AlgebraicGeometry.instIsIsoSchemeMorphismRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [CategoryTheory.IsIso f] (U : Y.Opens), CategoryTheory.IsIso (f ∣_ U)\", \"doc\": \"If $ f : X \\to Y $ is an isomorphism of schemes and $ U $ is an open subset of $ Y $, then the restriction of $ f $ to $ U $ is also an isomorphism between the corresponding open subsets of $ X $ and $\"}\n  {\"name\": \"closedUnderRestriction_idRestrGroupoid\", \"module\": \"Mathlib/Geometry/Manifold/StructureGroupoid\", \"type\": \"∀ {H : Type u_1} [inst : TopologicalSpace H], ClosedUnderRestriction idRestrGroupoid\", \"doc\": \"The identity restriction groupoid on a topological space $ H $, consisting of open partial homeomorphisms equivalent to identity maps, is closed under restriction: for any homeomorphism in the groupoi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.restrict_X\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (U : X.Opens) (x : 𝒰.I₀),\\n  (𝒰.restrict U).X x = ↑((TopologicalSpace.Opens.map (𝒰.f x).base).obj U)\", \"doc\": \"Given a scheme $X$, an open cover $\\\\mathcal{U}$ of $X$, and an open subset $U \\\\subseteq X$, the object mapping of the restricted open cover $\\\\mathcal{U}|_U$ at each index $x \\\\in I_0$ corresponds to th\"}\n  {\"name\": \"TopologicalSpace.Opens.instHasGroupoid\", \"module\": \"Mathlib/Geometry/Manifold/HasGroupoid\", \"type\": \"∀ {H : Type u} {M : Type u_2} [inst : TopologicalSpace H] [inst_1 : TopologicalSpace M] [inst_2 : ChartedSpace H M]\\n  (G : StructureGroupoid H) [HasGroupoid M G] (s : TopologicalSpace.Opens M) [ClosedUnderRestriction G],\\n  HasGroupoid (↥s) G\", \"doc\": \"If a structure groupoid $G$ on a topological space $H$ is closed under restriction, then every open subset $s$ of a charted space $M$ over $H$ inherits a $G$-compatible charted space structure. This m\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: manifold structure-groupoid restriction, ordinary subgroupoids, or scheme morphism restriction do not supply the internal groupoid restrictions and their source-target degree comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"restrict\"",
+   "results": "[loogle] OK 5 hit(s)\n  {\"name\": \"closedUnderRestriction_idRestrGroupoid\", \"module\": \"Mathlib.Geometry.Manifold.StructureGroupoid\", \"type\": \" {H : Type u_1} [TopologicalSpace H] : ClosedUnderRestriction idRestrGroupoid\", \"doc\": \"The trivial restriction-closed groupoid is indeed `ClosedUnderRestriction`.\"}\n  {\"name\": \"instClosedUnderRestrictionContinuousGroupoid\", \"module\": \"Mathlib.Geometry.Manifold.StructureGroupoid\", \"type\": \" {H : Type u_1} [TopologicalSpace H] : ClosedUnderRestriction (continuousGroupoid H)\", \"doc\": \"The groupoid of all open partial homeomorphisms on a topological space `H`\\nis closed under restriction.\"}\n  {\"name\": \"StructureGroupoid.trans_restricted\", \"module\": \"Mathlib.Geometry.Manifold.HasGroupoid\", \"type\": \" {H : Type u} {M : Type u_2} [TopologicalSpace H] [TopologicalSpace M] [ChartedSpace H M] {e e' : OpenPartialHomeomorph M H} {G : StructureGroupoid H} (he : e ∈ atlas H M) (he' : e' ∈ atlas H M) [HasGroupoid M G] [ClosedUnderRestriction G] {s : TopologicalSpace.Opens M} (hs : Nonempty ↥s) : (e.subty\", \"doc\": \"If `G` is closed under restriction, the transition function between the restriction of two\\ncharts `e` and `e'` lies in `G`.\"}\n  {\"name\": \"StructureGroupoid.restriction_mem_maximalAtlas_subtype\", \"module\": \"Mathlib.Geometry.Manifold.HasGroupoid\", \"type\": \" {H : Type u} {M : Type u_2} [TopologicalSpace H] [TopologicalSpace M] [ChartedSpace H M] {G : StructureGroupoid H} {e : OpenPartialHomeomorph M H} (he : e ∈ atlas H M) (hs : Nonempty ↑e.source) [HasGroupoid M G] [ClosedUnderRestriction G] :\\n  let s := { carrier := e.source, is_open' := ⋯ };\\n  let t\", \"doc\": \"Restricting a chart to its source `s ⊆ M` yields a chart in the maximal atlas of `s`.\"}\n  {\"name\": \"instClosedUnderRestrictionContDiffGroupoid\", \"module\": \"Mathlib.Geometry.Manifold.IsManifold.Basic\", \"type\": \" {n : WithTop ℕ∞} {𝕜 : Type u_1} [NontriviallyNormedField 𝕜] {E : Type u_2} [NormedAddCommGroup E] [NormedSpace 𝕜 E] {H : Type u_3} [TopologicalSpace H] {I : ModelWithCorners 𝕜 E H} : ClosedUnderRestriction (contDiffGroupoid n I)\", \"doc\": \"The `C^n` groupoid is closed under restriction.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: manifold structure-groupoid restriction, ordinary subgroupoids, or scheme morphism restriction do not supply the internal groupoid restrictions and their source-target degree comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*(restrict|invariant)|(?:restrict|invariant).*groupoid",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Geometry/Manifold/LocalInvariantProperties.lean\", \"line\": \"11\", \"text\": \"# Local properties invariant under a groupoid\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/LocalInvariantProperties.lean\", \"line\": \"25\", \"text\": \"  invariant under composition by elements of the groupoids `G` and `G'` of `H` and `H'`\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/LocalInvariantProperties.lean\", \"line\": \"512\", \"text\": \"theorem liftPropAt_chart [HasGroupoid M G] (hG : G.LocalInvariantProp G Q) (hQ : ∀ y, Q id univ y) :\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/LocalInvariantProperties.lean\", \"line\": \"516\", \"text\": \"theorem liftPropOn_chart [HasGroupoid M G] (hG : G.LocalInvariantProp G Q) (hQ : ∀ y, Q id univ y) :\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/LocalInvariantProperties.lean\", \"line\": \"520\", \"text\": \"theorem liftPropAt_chart_symm [HasGroupoid M G] (hG : G.LocalInvariantProp G Q)\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/StructureGroupoid.lean\", \"line\": \"60\", \"text\": \"/-! One could add to the definition of a structure groupoid the fact that the restriction of an\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/StructureGroupoid.lean\", \"line\": \"66\", \"text\": \"defined on sets of the form `s × E`. There is a typeclass `ClosedUnderRestriction` for groupoids\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/StructureGroupoid.lean\", \"line\": \"377\", \"text\": \"/-- A groupoid is closed under restriction if it contains all restrictions of its element local\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/StructureGroupoid.lean\", \"line\": \"379\", \"text\": \"class ClosedUnderRestriction (G : StructureGroupoid H) : Prop where\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/StructureGroupoid.lean\", \"line\": \"383\", \"text\": \"theorem closedUnderRestriction' {G : StructureGroupoid H} [ClosedUnderRestriction G]\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Sheaf/Basic.lean\", \"line\": \"15\", \"text\": \"of `StructureGroupoid.LocalInvariantProp`) property `P` on the model spaces of `M` and `M'`. For\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Sheaf/Basic.lean\", \"line\": \"21\", \"text\": \"`StructureGroupoid.LocalInvariantProp`: that is, showing that a differential-geometric \\\"locally\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Sheaf/Basic.lean\", \"line\": \"26\", \"text\": \"* `StructureGroupoid.LocalInvariantProp.localPredicate`: the `TopCat.LocalPredicate` (in the\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Sheaf/Basic.lean\", \"line\": \"29\", \"text\": \"* `StructureGroupoid.LocalInvariantProp.sheaf`: the sheaf-of-types of functions `f : M → M'`\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Sheaf/Basic.lean\", \"line\": \"38\", \"text\": \"open Set TopologicalSpace StructureGroupoid StructureGroupoid.LocalInvariantProp Opposite\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Sheaf/Smooth.lean\", \"line\": \"19\", \"text\": \"types using the construction `StructureGroupoid.LocalInvariantProp.sheaf` from the file\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Sheaf/Smooth.lean\", \"line\": \"113\", \"text\": \"  TopCat.stalkToFiber (StructureGroupoid.LocalInvariantProp.localPredicate M N _) x\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Sheaf/Smooth.lean\", \"line\": \"119\", \"text\": \"  TopCat.stalkToFiber (StructureGroupoid.LocalInvariantProp.localPredicate M N _) x\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/ContMDiff/Atlas.lean\", \"line\": \"160\", \"text\": \"  (contDiffWithinAt_localInvariantProp n).liftPropOn_of_mem_groupoid contDiffWithinAtProp_id h\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/ContMDiff/Defs.lean\", \"line\": \"38\", \"text\": \"as being `Cⁿ` is a local property invariant under the `Cⁿ` groupoid. We take advantage of the\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/ContMDiff/Defs.lean\", \"line\": \"102\", \"text\": \"    (contDiffGroupoid n I).LocalInvariantProp (contDiffGroupoid n I')\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/ContMDiff/Defs.lean\", \"line\": \"144\", \"text\": \"    (contDiffGroupoid n I).LocalInvariantProp (contDiffGroupoid n I')\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/ContMDiff/Defs.lean\", \"line\": \"689\", \"text\": \"  StructureGroupoid.LocalInvariantProp.liftPropWithinAt_mono_of_mem_nhdsWithin\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/IsManifold/Basic.lean\", \"line\": \"760\", \"text\": \"/-- The `C^n` groupoid is closed under restriction. -/\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/IsManifold/Basic.lean\", \"line\": \"761\", \"text\": \"instance : ClosedUnderRestriction (contDiffGroupoid n I) :=\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: manifold structure-groupoid restriction, ordinary subgroupoids, or scheme morphism restriction do not supply the internal groupoid restrictions and their source-target degree comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An invariant open subspace of an internal groupoid inherits all groupoid structure maps and source target are isomorphic via inversion",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"isOpenMap_inv\", \"module\": \"Mathlib.Topology.Algebra.Group.Basic\", \"type\": \": IsOpenMap (Inv.inv : G → G)\", \"doc\": \"The inverse function $x \\\\mapsto x^{-1}$ in a topological group is an open map, meaning it maps open sets to open sets.\"}\n  {\"name\": \"TopologicalSpace.Opens.instHasGroupoid\", \"module\": \"Mathlib.Geometry.Manifold.HasGroupoid\", \"type\": \"[ClosedUnderRestriction G] : HasGroupoid s G\", \"doc\": \"If a structure groupoid $G$ on a topological space $H$ is closed under restriction, then every open subset $s$ of a charted space $M$ over $H$ inherits a $G$-compatible charted space structure. This m\"}\n  {\"name\": \"CategoryTheory.Subgroupoid.inv\", \"module\": \"Mathlib.CategoryTheory.Groupoid.Subgroupoid\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Groupoid C] (self : CategoryTheory.Subgroupoid C) {c d : C} {p : c ⟶ d},\\n  p ∈ self.arrows c d → CategoryTheory.Groupoid.inv p ∈ self.arrows d c\", \"doc\": \"For any subgroupoid $\\\\mathcal{D}$ of a groupoid $\\\\mathcal{C}$, if a morphism $p : c \\\\to d$ belongs to $\\\\mathcal{D}$, then its inverse morphism $p^{-1} : d \\\\to c$ also belongs to $\\\\mathcal{D}$. This as\"}\n  {\"name\": \"CategoryTheory.Subgroupoid.coe\", \"module\": \"Mathlib.CategoryTheory.Groupoid.Subgroupoid\", \"type\": \": Groupoid S.objs\", \"doc\": \"For any subgroupoid $\\\\mathcal{S}$ of a groupoid $\\\\mathcal{C}$, the set of objects $\\\\mathcal{S}.\\text{objs}$ (those objects in $\\\\mathcal{C}$ with non-empty isotropy in $\\\\mathcal{S}$) forms a groupoid un\"}\n  {\"name\": \"CategoryTheory.Subgroupoid.coe_inv_coe\", \"module\": \"Mathlib.CategoryTheory.Groupoid.Subgroupoid\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Groupoid C] (S : CategoryTheory.Subgroupoid C) {X Y : ↑S.objs}\\n  (p : ↑(S.arrows ↑X ↑Y)), ↑(CategoryTheory.Groupoid.inv p) = CategoryTheory.Groupoid.inv ↑p\", \"doc\": \"For any subgroupoid $\\\\mathcal{S}$ of a groupoid $\\\\mathcal{C}$, objects $X,Y$ in $\\\\mathcal{S}$.objs, and morphism $p : X \\\\to Y$ in $\\\\mathcal{S}$.arrows, the inverse of the inclusion of $p$ into $\\\\mathc\"}\n  {\"name\": \"StructureGroupoid.symm'\", \"module\": \"Mathlib.Geometry.Manifold.StructureGroupoid\", \"type\": \"∀ {H : Type u_2} [inst : TopologicalSpace H] (self : StructureGroupoid H), ∀ e ∈ self.members, e.symm ∈ self.members\", \"doc\": \"For any topological space $ H $ and its structure groupoid, if a partial homeomorphism $ e $ between open subsets of $ H $ belongs to the groupoid, then its inverse $ e^{-1} $ also belongs to the grou\"}\n  {\"name\": \"CategoryTheory.IsIso.of_groupoid\", \"module\": \"Mathlib.CategoryTheory.Groupoid\", \"type\": \"(f : X ⟶ Y) : IsIso f\", \"doc\": \"In a groupoid, every morphism is an isomorphism.\"}\n  {\"name\": \"idGroupoid\", \"module\": \"Mathlib.Geometry.Manifold.StructureGroupoid\", \"type\": \"(H : Type*) [TopologicalSpace H] : StructureGroupoid H\", \"doc\": \"For a topological space $ H $, this is the structure groupoid consisting of the identity open partial homeomorphism on $ H $ and all open partial homeomorphisms with empty source domain. It satisfies \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: manifold structure-groupoid restriction, ordinary subgroupoids, or scheme morphism restriction do not supply the internal groupoid restrictions and their source-target degree comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For groupoid schemes source and target on an invariant open subscheme have the same finite locally free constant rank",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.resLE_congr\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {U U' : Y.Opens} {V V' : X.Opens}\\n  (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U) (e₁ : U = U') (e₂ : V = V')\\n  (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme),\\n  P (AlgebraicGeometry.Scheme.Hom.resLE f U V e) ↔ P (AlgebraicGeometry\", \"doc\": \"For any open subsets $U, U', V, V'$ of a scheme, if $U = U'$ and $V = V'$, then a morphism property $P$ holds for the restriction of a morphism $f$ to $U$ and $V$ if and only if it holds for the restr\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalIso\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalIso\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $ X $ and $ Y $, a morphism $ f : X \\to Y $ is a local isomorphism if there exists an open cover $ \\\\{U_i\\\\} $ of $ X $ such that for each $ i $, the restriction $ f|_{U_i} $ is an isomorphis\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension 0 f\", \"doc\": \"Every open immersion of schemes is smooth of relative dimension 0. That is, if $ f: X \\to Y $ is an open immersion (a morphism that is a topological open embedding with isomorphic stalks on its image),\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.isLocalIso_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalIso\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsLocalIso f ↔\\n    ∀ (x : ↥X), ∃ U, x ∈ U ∧ AlgebraicGeometry.IsOpenImmersion (CategoryTheory.CategoryStruct.comp U.ι f)\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is a local isomorphism if and only if for every point $x \\\\in X$, there exists an open neighborhood $U$ of $x$ such that the restriction of $f$ to the open subscheme \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.appLE_congr\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {U U' : Y.Opens} {V V' : X.Opens}\\n  (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U) (e₁ : U = U') (e₂ : V = V')\\n  (P : {R S : CommRingCat} → (R ⟶ S) → Prop),\\n  P (AlgebraicGeometry.Scheme.Hom.appLE f U V e) ↔ P (AlgebraicGeometry.Scheme.Hom.appLE f \", \"doc\": \"For a morphism $f$ between schemes, if $U = U'$ and $V = V'$ are equal open subsets, then a property $P$ of the morphism $f$ applied to the inclusion $V \\\\subseteq f^{-1}(U)$ is equivalent to the same \"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: manifold structure-groupoid restriction, ordinary subgroupoids, or scheme morphism restriction do not supply the internal groupoid restrictions and their source-target degree comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of groupoid scheme to invariant open and transport of finite locally free degree",
+   "results": "Actual search log: 8 hits; top declarations: AlgebraicGeometry.IsFinite.instMorphismRestrict, AlgebraicGeometry.Scheme.OpenCover.restrict_f, AlgebraicGeometry.morphismRestrict, AlgebraicGeometry.Scheme.OpenCover.restrict_I₀, AlgebraicGeometry.morphismRestrictRestrict, AlgebraicGeometry.instLocallyOfFiniteTypeMorphismRestrict, AlgebraicGeometry.Scheme.OpenCover.restrict, AlgebraicGeometry.Scheme.restrictFunctor_obj_left",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme restriction definitions and manifold groupoid facts do not state internal scheme groupoid restriction with degree transport"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme groupoid invariant open finite locally free",
+   "results": "Actual search log: 0 hits; top declarations: . loogle: <input>:1:26: expected end of input",
+   "date": "2026-10-24",
+   "verdict": "unavailable: invalid query syntax; superseded by valid quoted-name Loogle query"
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*invariant|finite.*locally.*free.*degree",
+   "results": "Actual search log: 0 hits; top declarations: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme restriction definitions and manifold groupoid facts do not state internal scheme groupoid restriction with degree transport"
+  },
+  {
+   "tool": "grep",
+   "query": "GroupoidScheme|groupoidScheme|groupoid_scheme|Groupoid.*restrict",
+   "results": "Actual search log: 14 hits; top declarations: Mathlib/Geometry/Manifold/LocalInvariantProperties.lean, Mathlib/Geometry/Manifold/LocalInvariantProperties.lean, Mathlib/Geometry/Manifold/LocalInvariantProperties.lean, Mathlib/Geometry/Manifold/StructureGroupoid.lean, Mathlib/Geometry/Manifold/StructureGroupoid.lean, Mathlib/Geometry/Manifold/StructureGroupoid.lean, Mathlib/Geometry/Manifold/StructureGroupoid.lean, Mathlib/Geometry/Manifold/StructureGroupoid.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme restriction definitions and manifold groupoid facts do not state internal scheme groupoid restriction with degree transport"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An invariant open subscheme of a groupoid scheme inherits groupoid operations and inversion preserves the degree of source and target",
+   "results": "Actual search log: 8 hits; top declarations: TopologicalSpace.Opens.instHasGroupoid, ClosedUnderRestriction.mk, CategoryTheory.Subgroupoid.inv, StructureGroupoid.LocalInvariantProp.rec, isOpenMap_inv, IsOpen.inv, StructureGroupoid.symm, StructureGroupoid.LocalInvariantProp.is_local",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme restriction definitions and manifold groupoid facts do not state internal scheme groupoid restriction with degree transport"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"restrict\"",
+   "results": "Actual search log: 5 hits; top declarations: closedUnderRestriction_idRestrGroupoid, instClosedUnderRestrictionContinuousGroupoid, StructureGroupoid.trans_restricted, StructureGroupoid.restriction_mem_maximalAtlas_subtype, instClosedUnderRestrictionContDiffGroupoid",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme restriction definitions and manifold groupoid facts do not state internal scheme groupoid restriction with degree transport"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An internal groupoid in schemes restricts its operations to an open invariant subset with source and target isomorphic by inversion",
+   "results": "Actual search log: 8 hits; top declarations: AlgebraicGeometry.Scheme.restrictFunctor, closedUnderRestriction_idRestrGroupoid, TopologicalSpace.Opens.instHasGroupoid, AlgebraicGeometry.Scheme.restrictFunctor_obj_left, ClosedUnderRestriction, AlgebraicGeometry.opensRestrict, Topology.IsOpenEmbedding.singleton_hasGroupoid, AlgebraicGeometry.Scheme.Opens.toScheme",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme restriction definitions and manifold groupoid facts do not state internal scheme groupoid restriction with degree transport"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-affine-groupoid-invariant-rank-strata",
+  "date": "2026-10-22",
+  "group": "Q11"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Tag 03BI final restriction and inverse-transport sentences, supporting the ancestor fourth-paragraph affine quotient route; old item step 7, with the restriction construction of Tags 02VB and 03BC.",
+   "via": [
+    "lem-a1-affine-groupoid-invariant-rank-strata",
+    "lem-a1-affine-groupoid-integral-invariants",
+    "lem-a1-finite-flat-affine-relation-quotient",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-a1-groupoid-invariant-open-restriction-degree",
+  "worker": "stage1",
+  "summary": "Expanded the omitted invariant-open groupoid restriction construction using the existing open-factorization and monomorphism lemmas; checked every restricted operation and groupoid law, involutivity, and finite/flat/finite-presentation and fibre-degree transport. Statement unchanged; no new nodes. Read the current blueprint and the Stacks sources.",
+  "blueprint": "Realizes the historical ancestor route recorded in blueprint.from.place: restriction and inverse-transport sentences of Tag 03BI, using Tags 02VB and 03BC. The current latest lem-a1-affine-hc0 proof uses the compact-support route and no longer contains that historical affine-quotient paragraph; this generic tool is still explicitly used by its live direct parent lem-a1-affine-groupoid-invariant-rank-strata. No unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "why": "Generic scheme fact: constructs the five morphisms by factorization through open subschemes; the groupoid restriction route requires it and no lemma of this unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-monomorphism",
+    "why": "Generic scheme fact: cancels the open inclusions to descend the original groupoid equations; no theorem of this unit replaces this categorical property."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-open-immersion-monomorphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q87-1e1a0901e",
+  "group": "Q87",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-1e1a0901e (reviewer sub-agent of L); spot-checked: I read all seven steps in full; every step is correct, and I made no fixes. No new nodes and the item statement is unchanged; it is not a re-split (no repair note). Sources: groupoids.tex 02VB lemma-restrict-groupoid (proof omitted, so D5 asks for the details and the delivery writes them out), 03BC definition-invariant-open and the paragraph after it (invariant iff s^{-1}W=t^{-1}W, R_W=s^{-1}W), and the last sentence of 03BI (t isomorphic to s by the inverse). The statement keeps full generality: arbitrary schemes, W may be empty, and nothing finite is assumed on s,t. Steps 1-3: lem-weil-pbc-morphism-factors-through-open-subscheme (01HI) is applied each time with the image condition checked: se=id, si=t, and s c lambda = s k p_1 for c_W, with the fibre-product factor order matching def-a1-groupoid-scheme. Step 4: I checked by hand the endpoint, unit and associativity laws after cancelling j and k (01L7). Step 5: i^2=id from inverse uniqueness on R-points with a=id_R, so i_W^2=id. Step 6: finite, flat and finite presentation carried by the automorphism i_W over W (t_W=s_W i_W). Step 7: the fibre isomorphism i_W x id over kappa(w) gives equal dimensions, so the degree itself is checked. Small cases tested: W empty, W=U, trivial groupoid, pair groupoid (the invariance hypothesis is needed), constant group. Duplicate search with rg -L: def-sfb-restricted-groupoid-relation, lem-sfb-fppf-groupoid-restriction-quotient, lem-sfb-field-groupoid-restriction-open, lem-a1-space-invariant-open-quotient and lem-trf-invariant-open-image-pullback are all different statements. The parent lem-a1-affine-groupoid-invariant-rank-strata cites the item 3 times. No SGA. Accepted tool_uses: the two generic mathlib-status lemmas 01HI and 01L7."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupoidInvariantOpenRestrictionDegree",
+  "declaration": "AlgebraicGeometry.IsGroupoidScheme.existsUnique_invariantOpen_restriction_degree",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupoidInvariantOpenRestrictionDegree.lean",
+  "statement": "theorem IsGroupoidScheme.existsUnique_invariantOpen_restriction_degree {U R : Scheme.{u}} (s t : R ⟶ U) (e : U ⟶ R) (i : R ⟶ R) (c : pullback s t ⟶ R) (hG : IsGroupoidScheme s t e i c) (W : U.Opens) (hW : s ⁻¹ᵁ W = t ⁻¹ᵁ W) : ∃ (sW tW : (s ⁻¹ᵁ W).toScheme ⟶ W.toScheme) (eW : W.toScheme ⟶ (s ⁻¹ᵁ W).toScheme) (iW : (s ⁻¹ᵁ W).toScheme ⟶ (s ⁻¹ᵁ W).toScheme) (cW : pullback sW tW ⟶ (s ⁻¹ᵁ W).toScheme) (hs : sW ≫ W.ι = (s ⁻¹ᵁ W).ι ≫ s) (ht : tW ≫ W.ι = (s ⁻¹ᵁ W).ι ≫ t), (∀ sW' : (s ⁻¹ᵁ W).toScheme ⟶ W.toScheme, sW' ≫ W.ι = (s ⁻¹ᵁ W).ι ≫ s ↔ sW' = sW) ∧ (∀ tW' : (s ⁻¹ᵁ W).toScheme ⟶ W.toScheme, tW' ≫ W.ι = (s ⁻¹ᵁ W).ι ≫ t ↔ tW' = tW) ∧ (∀ eW' : W.toScheme ⟶ (s ⁻¹ᵁ W).toScheme, eW' ≫ (s ⁻¹ᵁ W).ι = W.ι ≫ e ↔ eW' = eW) ∧ (∀ iW' : (s ⁻¹ᵁ W).toScheme ⟶ (s ⁻¹ᵁ W).toScheme, iW' ≫ (s ⁻¹ᵁ W).ι = (s ⁻¹ᵁ W).ι ≫ i ↔ iW' = iW) ∧ (∀ cW' : pullback sW tW ⟶ (s ⁻¹ᵁ W).toScheme, cW' ≫ (s ⁻¹ᵁ W).ι = pullback.map sW tW s t (s ⁻¹ᵁ W).ι (s ⁻¹ᵁ W).ι W.ι hs ht ≫ c ↔ cW' = cW) ∧ IsGroupoidScheme sW tW eW iW cW ∧ IsIso iW ∧ iW ≫ iW = 𝟙 (s ⁻¹ᵁ W).toScheme ∧ iW ≫ sW = tW ∧ ∀ r : ℕ, sW.IsFiniteLocallyFreeOfDegree r → tW.IsFiniteLocallyFreeOfDegree r",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-24",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-bc1188483"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bc1188483",
+  "group": "Q25",
+  "result": "fix",
+  "note": "Read node, Stacks 02VB/03BC/03BI, all 5 stmt deps (IsGroupoidScheme fields, pullback.map argument order, IsFiniteLocallyFreeOfDegree in FiberDegree.lean:899-909), module and report. Every hypothesis and clause matches, with no extra hypotheses; edge cases (W empty, r=0, universe u) are fine; no H4 duplicate, no Lean citers. One H3 fault: five chained ∃! binders (∃! sW, ∃! tW, ∃! eW, ∃! iW, ∃! cW, package) make each map's uniqueness depend on the whole package, which is weaker than the node's uniqueness by compatibility square (steps 1-4). FIX: plain ∃ of all five maps with hs/ht, plus per-map clauses ∀ x', square x' ↔ x' = x (cW via pullback.map … hs ht ≫ c); all other clauses unchanged. The fixed module compiled once with nt_compile --json: 6.6 s, exit 0, clean. Fixes: fixes/GroupoidInvariantOpenRestrictionDegree.lean and fixes/lem-a1-groupoid-invariant-open-restriction-degree.lean-record.json (verbatim statement)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261026T080938-L-1712622",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

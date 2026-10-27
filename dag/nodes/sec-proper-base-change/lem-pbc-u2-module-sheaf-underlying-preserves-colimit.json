@@ -111,5 +111,43 @@
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $X$ be a scheme and $\\Lambda$ a commutative ring. The functor from sheaves of $\\Lambda$-modules on the small etale site of $X$ to abelian sheaves, which forgets the $\\Lambda$-module structure sectionwise, preserves colimits of every small diagram.",
+  "proof": [
+   {
+    "text": "Let $U$ be the forgetful functor from $\\Lambda$-modules to abelian groups. It preserves limits and filtered colimits, so sheafification commutes with $U$: forgetting the module structure of a presheaf and then sheafifying as abelian presheaf is naturally isomorphic to sheafifying as presheaf of $\\Lambda$-modules and then forgetting.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Forgetting on presheaves preserves colimits, since colimits of presheaves are computed objectwise and $U$ preserves colimits; abelian sheafification preserves colimits as a left adjoint. By the natural isomorphism above, the composite of module sheafification with the sheaf-level forgetful functor preserves colimits.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "A colimit of a diagram of sheaves of $\\Lambda$-modules is the sheafification of its presheaf colimit, and the inclusion of sheaves into presheaves is fully faithful. Hence the sheaf-level forgetful functor preserves colimits of every small diagram.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

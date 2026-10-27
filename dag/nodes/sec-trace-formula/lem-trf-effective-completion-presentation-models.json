@@ -1,0 +1,223 @@
+{
+ "id": "lem-trf-effective-completion-presentation-models",
+ "kind": "statement",
+ "title": "The actual completion unit on every simultaneous quotient presentation",
+ "statement": "Fix a prime l, a finite extension E/Q_l and a scheme X with l invertible in every residue field. There exist a derived quotient-system calculus S and a normalized natural Roos model r such that for every flat-term K-flat complex P and whole-system adjunction-coherent simultaneous quotient presentation (C,e,kappa), in the sense of IsIntegralComparisonPresentationCoherent from [def-trf-integral-comparison-realization-models], the actual S adjunction unit followed by realization of e and the fixed Roos comparison is the localization of a chain map v. The nth unshifted product component of v sends x to the canonical restricted system section corresponding to kappa_n inverse of 1 tensor x; all shifted product components vanish. No completeness, boundedness or constructibility hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03EK, 07A6, 09T5, 0D6E and 0941; actual-unit normalization transported along the strict simultaneous quotient tower comparison, as in the recorded strict-quotient-completion-unit and isomorphism-multiplication-cone-descent refinements."
+ },
+ "stmt_deps": [
+  "def-trf-integral-comparison-realization-models",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pc-kflat-resolution"
+ ],
+ "proof": [
+  {
+   "text": "Choose the compatible canonical models S, M and D. Use the existing proved private roosModel of the isomorphism-derived-pullback normalization module: its comparison is D.roos inverse, with K-injective normalization proved there.",
+   "uses": [
+    "lem-trf-completion-unit-canonical-models",
+    "lem-weil-isomorphism-derived-pullback-comparison-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply strictQuotientCompletionRealization directly to S and r to obtain rho. For the given whole-system coherent presentation, its normalization supplies the strict tower isomorphism a and the entire derived equation for rho. This uses the coherent hypothesis and never infers equality of a derived map from finite evaluations.",
+   "uses": [
+    "lem-trf-strict-quotient-completion-realization",
+    "def-trf-integral-comparison-realization-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let b be the actual strict quotient cone augmentation and set v=b followed by H(a inverse). The proved normalized_tower_map helper identifies a_n with the canonical restriction/evaluation comparison followed by Res(kappa_n). Cancel its two isomorphisms to obtain the inverse equation. After the nth product projection, the proved Roos coordinate formula reduces v to the quotient unit followed by a_n inverse. unrestrictedTowerUnit_condition gives 1 tensor x and restricted_section_cancel cancels the canonical section casts. The second Roos coordinate is zero since the strict augmentation has zero shifted coordinate and the Roos map is diagonal.",
+   "uses": [
+    "def-trf-strict-quotient-cone-augmentation",
+    "lem-trf-strict-quotient-completion-unit",
+    "lem-pur-integral-ambient-operation-models",
+    "lem-weil-integral-reduction-tower-well-defined",
+    "lem-trf-coherent-primitive-reduction-presentation",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Postcompose the desired derived equality with Q(H(a hom)). The normalization of rho makes the left side the actual unit followed by rho; the inverse identities make the right side Q(b). Apply strictQuotientCompletionUnit, using that the fixed r is D.roos inverse, and cancel the isomorphism. The same construction includes zero complexes and empty sites with no boundedness or completeness condition.",
+   "uses": [
+    "lem-trf-strict-quotient-completion-unit"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-completion-unit-canonical-models",
+  "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+  "lem-trf-strict-quotient-completion-realization",
+  "def-trf-integral-comparison-realization-models",
+  "def-trf-strict-quotient-cone-augmentation",
+  "lem-trf-strict-quotient-completion-unit",
+  "lem-pur-integral-ambient-operation-models",
+  "lem-weil-integral-reduction-tower-well-defined",
+  "lem-trf-coherent-primitive-reduction-presentation",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03EK, 07A6, 09T5, 0D6E and 0941; transport of the strict quotient augmentation along the whole-system coherent strict tower comparison, using the existing normalized completion realization directly."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "R1",
+  "item": "Sheaf.Paper.EffectiveComparisonRealizationModels",
+  "date": "2026-10-25"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-karoubi-independence",
+   "place": "Final common-stage Frobenius transport sentence, normalized integral comparison construction: strict quotient augmentation on every simultaneous presentation. The retained parent route is recorded by its released repair.",
+   "via": [
+    "lem-trf-effective-comparison-realization-models",
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-trf-local-frobenius-transport-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EffectiveCompletionPresentationModels",
+  "file": "lean/Sheaf/Paper/EffectiveCompletionPresentationModels.lean",
+  "declaration": "WeilConjectures.effectiveCompletionPresentationModels",
+  "statement": "theorem effectiveCompletionPresentationModels\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{t})\n    [∀ x : X, Invertible (l : X.residueField x)] :\n    ∃ (S : CoefficientDerivedSystemCalculus l E X)\n      (ρ : IntegralComparisonRoosModel l E X),\n    ∀ (P : (integralOperationsGoodComplex l E X).FullSubcategory)\n    (C : CochainComplex (coefficientSequenceModules l E X) ℤ)\n    (e : S.reduction.obj (DerivedCategory.Q.obj P.obj) ≅ DerivedCategory.Q.obj C)\n    (κ : ∀ n : ℕ,\n      ((coefficientSequenceEvaluation l E X n).mapHomologicalComplex (.up ℤ)).obj C ≅\n        (unrestrictedIntegralFiniteComplex l E X n).obj P.obj),\n    CoefficientReductionPresentation l E X S.toCoefficientDerivedSystemReduction\n      P.obj P.property.1 C e κ →\n    IsIntegralComparisonPresentationCoherent l E X S P.obj C e κ →\n    ∃ v : P.obj ⟶ integralOperationsRoos\n        (((coefficientSequenceRestriction l E X).mapHomologicalComplex (.up ℤ)).obj C).asFunctor,\n      (∀ (n : ℕ) (i : ℤ) (U : X.ProEtᵒᵖ) (x : (P.obj.X i).val.obj U),\n        (((v ≫ CochainComplex.mappingCocone.fst (scalarRoosBoundary\n          (((coefficientSequenceRestriction l E X).mapHomologicalComplex (.up ℤ)).obj\n            C).asFunctor) ≫ Pi.π (fun m ↦\n              ((((coefficientSequenceRestriction l E X).mapHomologicalComplex (.up ℤ)).obj\n                C).asFunctor.obj (op m))) n).f i).val.app U) x =\n          integralComparisonRestrictedSection l E X (C.X i) n U\n            (integralComparisonSequenceSection l E X (C.X i) n U\n              (((κ n).inv.f i).val.app U\n                (unrestrictedIntegralTensorSection l E X n (P.obj.X i) U 1 x)))) ∧\n      (∀ (i j : ℤ) (h : i + -1 = j), v.f i ≫\n        (CochainComplex.mappingCocone.snd (scalarRoosBoundary\n          (((coefficientSequenceRestriction l E X).mapHomologicalComplex (.up ℤ)).obj\n            C).asFunctor)).v i j h = 0) ∧\n      S.adjunction.unit.app (DerivedCategory.Q.obj P.obj) ≫\n        (coefficientSequenceLimit l E X).map e.hom ≫\n        (integralComparisonRoosBridge l E X ρ C).hom = DerivedCategory.Q.map v",
+  "by": "E1",
+  "date": "2026-10-27",
+  "branch": "sheaf-dag"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Assemble normalized Roos models, primitive pullback and scalar realization models, and effectivity of derived quotient systems",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"Profinite.profiniteToCompHausEffectivePresentation\", \"Condensed.StoneanProfinite.stoneanToProfiniteEffectivePresentation\", \"CategoryTheory.Functor.EffectivelyEnough.presentation\", \"Profinite.instEffectivelyEnoughCompHausProfiniteToCompHaus\", \"CategoryTheory.Precoherent.pullback\", \"CategoryTheory.Functor.EffectivePresentation\", \"CategoryTheory.Functor.EffectivelyEnough\", \"CategoryTheory.effectiveEpiFamilyStructOfEffectiveEpiDesc_aux\"], \"digest\": \"e64ccc5c357abc25\"}",
+   "date": "2026-10-24",
+   "verdict": "No direct statement of the project quotient/Roos normalization. Generic derived-adjunction units do not fix the presentation generator maps. Use the existing strict quotient unit and normalized presentation comparison, then prove transport through the inverse tower isomorphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "Nonempty, And",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"top\": [\"exists_prop'\", \"forall_and_left\", \"forall_and_right\", \"exists_const_iff\", \"nonempty_pprod\", \"nonempty_prod\", \"unique_iff_subsingleton_and_nonempty\", \"Prod.map_involutive\"], \"digest\": \"bcfb46d0030edf7b\"}",
+   "date": "2026-10-24",
+   "verdict": "No direct statement of the project quotient/Roos normalization. Generic derived-adjunction units do not fix the presentation generator maps. Use the existing strict quotient unit and normalized presentation comparison, then prove transport through the inverse tower isomorphism."
+  },
+  {
+   "tool": "grep",
+   "query": "IntegralComparisonRoosModel|effectiveQuotientModelDescent",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No direct statement of the project quotient/Roos normalization. Generic derived-adjunction units do not fix the presentation generator maps. Use the existing strict quotient unit and normalized presentation comparison, then prove transport through the inverse tower isomorphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"top\": [\"CategoryTheory.Adjunction.leftAdjointUniq\", \"CategoryTheory.Adjunction.leftAdjointUniq_refl\", \"CategoryTheory.Adjunction.leftAdjointUniq_inv_app\", \"CategoryTheory.Adjunction.leftAdjointUniq_hom_counit\", \"CategoryTheory.Adjunction.unit_leftAdjointUniq_hom\", \"CategoryTheory.Adjunction.leftAdjointUniq_trans\", \"CategoryTheory.Adjunction.leftAdjointUniq_trans_app\", \"CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit\"], \"digest\": \"ef3654c89ecf172c\"}",
+   "date": "2026-10-25",
+   "verdict": "No direct statement of the project quotient/Roos normalization. Generic derived-adjunction units do not fix the presentation generator maps. Use the existing strict quotient unit and normalized presentation comparison, then prove transport through the inverse tower isomorphism."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived completion adjunction unit on a flat complex is the quotient map to the Roos inverse limit complex",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"CategoryTheory.Adjunction.derived_unit\", \"CategoryTheory.Adjunction.derivedη\", \"CategoryTheory.LiftRightAdjoint.unitEqualises\", \"AdicCompletion\", \"AdicCompletion.mk_apply_coe\", \"AdicCompletion.flat_of_isNoetherian\", \"AdicCompletion.of_apply\", \"DerivedCategory.quotientCompQhIso\"], \"digest\": \"fd7efac61d8ca377\"}",
+   "date": "2026-10-25",
+   "verdict": "No direct statement of the project quotient/Roos normalization. Generic derived-adjunction units do not fix the presentation generator maps. Use the existing strict quotient unit and normalized presentation comparison, then prove transport through the inverse tower isomorphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived reduction and completion adjunction unit on a simultaneous quotient presentation with zero shifted Roos coordinate",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"CategoryTheory.Adjunction.derived'_unit\", \"CategoryTheory.Adjunction.derived_unit\", \"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.derivedη\", \"CategoryTheory.Adjunction.derivedε_fac_app\", \"CategoryTheory.Adjunction.derivedη_fac_app\", \"CategoryTheory.Adjunction.derived'_counit\", \"CategoryTheory.Adjunction.derived\"], \"digest\": \"e232be159f867d7a\"}",
+   "date": "2026-10-25",
+   "verdict": "No direct statement of the project quotient/Roos normalization. Generic derived-adjunction units do not fix the presentation generator maps. Use the existing strict quotient unit and normalized presentation comparison, then prove transport through the inverse tower isomorphism."
+  },
+  {
+   "tool": "blueprint search",
+   "query": "quotient augmentation",
+   "results": "Two blueprint matches: lem-weil-pbc-intrinsic-to-tower-complete and lemma-weil-pbc-koszul-quotient-limit. Both concern intrinsic adic completeness rather than actual adjunction units on arbitrary simultaneous quotient presentations.",
+   "date": "2026-10-25",
+   "verdict": "No duplicate blueprint statement; use the existing strict quotient unit and normalized presentation comparison nodes."
+  },
+  {
+   "tool": "grep",
+   "query": "effectiveCompletionPresentation|IsEffectiveComparisonCompletionNormalized",
+   "results": "Only the assigned definition and its existing consumer occur in lean/Sheaf; no existing theorem supplies the coordinate transport for every presentation.",
+   "date": "2026-10-25",
+   "verdict": "Use the existing private tower-component identification and Roos coordinate API to prove the presentation transport, without duplicating them."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261025T143836-L-1090351",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-0bf65",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261027T123432-L-2297458",
+  "kind": "interface",
+  "note": "independent cc review: effectiveCompletionPresentationModels + IsEffectiveComparisonCompletionNormalized (coherence premise added) against nodes lem-trf-effective-completion-presentation-models / lem-trf-effective-comparison-realization-models, change record E1-effective-completion-presentation-coherence (P4/S9 precedent), Pod private adaptation, 3b importers 3 OK, axioms check"
+ },
+ "statement_change": {
+  "date": "2026-10-27",
+  "by": "E1 stage 2",
+  "old_statement": "Fix a prime l, a finite extension E/Q_l and a scheme X with l invertible in every residue field. There exist a derived quotient-system calculus S and a normalized natural Roos model r such that for every flat-term K-flat complex P and simultaneous quotient presentation (C,e,kappa), the actual S adjunction unit followed by realization of e and the fixed Roos comparison is the localization of a chain map v. The nth unshifted product component of v sends x to the canonical restricted system section corresponding to kappa_n inverse of 1 tensor x; all shifted product components vanish. No completeness, boundedness or constructibility hypothesis is imposed.",
+  "what": "STATEMENT-DISPUTED in the old version: finite derived evaluations do not detect morphisms. The reviewed invisible-twist counterexample of P4-strict-completion-presentation-coherence.md applies unchanged. Add the existing IsIntegralComparisonPresentationCoherent hypothesis, as already required by TrfCompletionRoosNormalized, and prove the corrected auxiliary statement. This is not a proof of the old false assertion.",
+  "source": {
+   "document": "literature/stacks-project/sites-cohomology.tex",
+   "place": "Tags 03D7, 07A6, 09T5, 0D6E and 0941 (lemma-derived-limit-is-ok), whole-system derived adjunction and Roos comparison. See coord/changes/E1-effective-completion-presentation-coherence.md for the reviewed counterexample and consumer audit."
+  },
+  "citers": [
+   {
+    "id": "lem-trf-effective-comparison-realization-models",
+    "holds": true,
+    "note": "The parent completion-normalization predicate is corrected in the same delivery to require the existing whole-system presentation coherence. Its assembly uses the corrected theorem verbatim. All geometric and coefficient operations remain unchanged; this does not assert the previous false universal quantifier."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Choose compatible canonical ordinary and derived completion models. The existing proved private inverse Roos model from the isomorphism-derived-pullback-comparison normalization module has the requisite K-injective normalization. Apply multiplication-cone descent to the identity scheme map to obtain a normalized representative completion comparison rho. For a presentation C let a identify its restricted tower with the strict quotient tower of P. Transport the strict quotient cone augmentation b by H(a inverse). Its product components are the quotient units transported by kappa inverse; its shifted components vanish because the Roos map preserves the two coordinates diagonally. Postcompose the derived identity with Q(H(a)): rho normalization and the strict quotient completion unit theorem identify both sides with Q(b). Cancel the isomorphism. The argument also applies to the zero complex.",
+    "uses": [
+     "lem-trf-completion-unit-canonical-models",
+     "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+     "lem-trf-strict-quotient-completion-unit",
+     "lem-trf-isomorphism-multiplication-cone-descent",
+     "def-trf-strict-quotient-cone-augmentation",
+     "lem-pur-integral-ambient-operation-models",
+     "lem-weil-integral-reduction-tower-well-defined",
+     "def-trf-integral-comparison-realization-models"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-trf-completion-unit-canonical-models",
+   "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+   "lem-trf-strict-quotient-completion-unit",
+   "lem-trf-isomorphism-multiplication-cone-descent",
+   "def-trf-strict-quotient-cone-augmentation",
+   "lem-pur-integral-ambient-operation-models",
+   "lem-weil-integral-reduction-tower-well-defined",
+   "def-trf-integral-comparison-realization-models"
+  ]
+ }
+}

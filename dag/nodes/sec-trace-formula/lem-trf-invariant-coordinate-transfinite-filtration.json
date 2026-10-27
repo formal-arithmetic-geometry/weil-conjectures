@@ -1,0 +1,235 @@
+{
+ "id": "lem-trf-invariant-coordinate-transfinite-filtration",
+ "kind": "statement",
+ "title": "Exhaustive transfinite filtration by invariant coordinate submodules",
+ "statement": "Let $R$ be a commutative ring, $J$ a set and $(N_j)_{j\\in J}$ a family of $R$-modules. Put $M=\\bigoplus_{j\\in J}N_j$ [def-weil-pbc-direct-sum-modules], and let $M_A\\subseteq M$ denote the families supported in $A\\subseteq J$ [def-trf-coordinate-submodule]. Let $f:M\\to M$ be $R$-linear. Suppose that for every $j\\in J$ a specified at most countable subset $D_j\\subseteq J$ contains $j$ and satisfies $f(M_{D_j})\\subseteq M_{D_j}$. Then there exist a set ordinal $\\kappa$, a bijective enumeration $\\eta:\\{\\beta:\\beta<\\kappa\\}\\to J$, and an increasing family $(A_\\alpha)_{\\alpha\\leq\\kappa}$ of subsets of $J$ with the following properties. One has $A_0=\\varnothing$, $A_\\kappa=J$, and $A_\\lambda=\\bigcup_{\\beta<\\lambda}A_\\beta$ at every nonzero limit $\\lambda\\leq\\kappa$. For $\\alpha<\\kappa$, if $A_\\alpha=J$ then $A_{\\alpha+1}=A_\\alpha$; otherwise, for the least $\\gamma<\\kappa$ with $\\eta(\\gamma)\\notin A_\\alpha$, one has $A_{\\alpha+1}=A_\\alpha\\cup D_{\\eta(\\gamma)}$. Every difference $A_{\\alpha+1}\\setminus A_\\alpha$ is at most countable, and $\\eta(\\{\\beta:\\beta<\\alpha\\})\\subseteq A_\\alpha$ for all $\\alpha\\leq\\kappa$. The coordinate submodules satisfy $M_{A_0}=0$, $M_{A_\\kappa}=M$, $f(M_{A_\\alpha})\\subseteq M_{A_\\alpha}$ for every $\\alpha\\leq\\kappa$, and $M_{A_\\lambda}=\\bigcup_{\\beta<\\lambda}M_{A_\\beta}$ at every nonzero limit $\\lambda\\leq\\kappa$. No countable-generation assumption on the $N_j$ is required.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 058X (theorem-kaplansky-direct-sum), proof lines 20500–20533 and 20555–20565: transfinite coordinate recursion, stability, continuity and exhaustion; given countable invariant blocks."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-direct-sum-modules",
+  "def-trf-coordinate-submodule"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-well-ordering-theorem] choose a well-order on $J$. Apply [lem-trf-well-order-ordinal-enumeration] to obtain a set ordinal $\\kappa$ and a bijection $\\eta:\\{\\beta<\\kappa\\}\\to J$ in that order. This includes $J=\\varnothing$, when $\\kappa=0$.",
+   "uses": [
+    "lem-weil-pbc-well-ordering-theorem",
+    "lem-trf-well-order-ordinal-enumeration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058X (theorem-kaplansky-direct-sum), proof: coordinate transfinite recursion, lines 20500–20533, and exhaustion, lines 20555–20565; specified invariant blocks replace the countable-matrix construction."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-transfinite-recursion] on the set of ordinals $\\alpha\\leq\\kappa$, with values in $\\mathcal P(J)$. Put $A_0=\\varnothing$; at a nonzero limit put $A_\\lambda=\\bigcup_{\\beta<\\lambda}A_\\beta$; at a successor keep $A_\\alpha$ if it is $J$, and otherwise put $A_{\\alpha+1}=A_\\alpha\\cup D_{\\eta(\\gamma)}$, where $\\gamma$ is the least index with $\\eta(\\gamma)\\notin A_\\alpha$. Such an index exists by surjectivity of $\\eta$, and has a least value in the ordinal order. The rule depends only on earlier values. Transfinite induction proves $A_\\beta\\subseteq A_\\alpha$ for $\\beta<\\alpha$: successors contain the preceding set, and a limit contains each preceding set by its union formula.",
+   "uses": [
+    "lem-weil-pbc-transfinite-recursion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058X (theorem-kaplansky-direct-sum), proof: coordinate transfinite recursion, lines 20500–20533, and exhaustion, lines 20555–20565; specified invariant blocks replace the countable-matrix construction."
+   }
+  },
+  {
+   "text": "From [def-trf-coordinate-submodule], $B\\subseteq C$ implies $M_B\\subseteq M_C$, and $M_{B\\cup C}=M_B+M_C$: split a finite-support family into its coordinates in $B$ and its remaining coordinates in $C\\setminus B$. These restrictions have finite support by [def-weil-pbc-direct-sum-modules]. Thus if $f$ preserves $M_B$ and $M_C$, linearity gives $f(x_B+x_C)=f(x_B)+f(x_C)\\in M_{B\\cup C}$. At stage zero $M_\\varnothing=0$ is invariant. At each successor the induction hypothesis and the assumed invariance of the selected $M_{D_{\\eta(\\gamma)}}$ give invariance of $M_{A_{\\alpha+1}}$; a stationary stage needs no change.",
+   "uses": [
+    "def-trf-coordinate-submodule",
+    "def-weil-pbc-direct-sum-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058X (theorem-kaplansky-direct-sum), proof: coordinate transfinite recursion, lines 20500–20533, and exhaustion, lines 20555–20565; specified invariant blocks replace the countable-matrix construction."
+   }
+  },
+  {
+   "text": "Let $0<\\lambda\\leq\\kappa$ be a limit. For $x\\in M_{A_\\lambda}$ its finite support $F$ lies in $\\bigcup_{\\beta<\\lambda}A_\\beta$ by [def-trf-coordinate-submodule] and [def-weil-pbc-direct-sum-modules]. For each $j\\in F$ choose $\\beta_j<\\lambda$ with $j\\in A_{\\beta_j}$. If $F$ is nonempty its finitely many indices have a maximum $\\delta<\\lambda$, so monotonicity gives $F\\subseteq A_\\delta$; if $F$ is empty take $\\delta=0<\\lambda$. Therefore $x\\in M_{A_\\delta}$. The reverse inclusion is monotonicity, giving $M_{A_\\lambda}=\\bigcup_{\\beta<\\lambda}M_{A_\\beta}$. If earlier stages are invariant, then $f(x)\\in M_{A_\\delta}\\subseteq M_{A_\\lambda}$. Together with the preceding step, transfinite induction proves invariance at every stage.",
+   "uses": [
+    "def-trf-coordinate-submodule",
+    "def-weil-pbc-direct-sum-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058X (theorem-kaplansky-direct-sum), proof: coordinate transfinite recursion, lines 20500–20533, and exhaustion, lines 20555–20565; specified invariant blocks replace the countable-matrix construction."
+   }
+  },
+  {
+   "text": "Transfinite induction proves $\\eta(\\{\\beta<\\alpha\\})\\subseteq A_\\alpha$. The assertion is empty at zero. At $\\alpha+1$ earlier elements persist; if $\\eta(\\alpha)$ is missing from $A_\\alpha$, all indices below $\\alpha$ are already present by induction, so the least missing index is exactly $\\alpha$. Since $\\eta(\\alpha)\\in D_{\\eta(\\alpha)}$, the successor adds it. If it was already present nothing is needed. At a nonzero limit $\\lambda$, each $\\beta<\\lambda$ has $\\beta+1<\\lambda$, so $\\eta(\\beta)\\in A_{\\beta+1}\\subseteq A_\\lambda$. Surjectivity of $\\eta$ now gives $A_\\kappa=J$, without any assumption that the individual $N_j$ are nonzero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058X (theorem-kaplansky-direct-sum), proof: coordinate transfinite recursion, lines 20500–20533, and exhaustion, lines 20555–20565; specified invariant blocks replace the countable-matrix construction."
+   }
+  },
+  {
+   "text": "At a nonstationary successor, $A_{\\alpha+1}\\setminus A_\\alpha\\subseteq D_{\\eta(\\gamma)}$, so the difference is at most countable by restricting a countability injection for that specified block; at a stationary successor the difference is empty. By [def-trf-coordinate-submodule], families supported in $\\varnothing$ are zero and every family is supported in $J$, hence $M_{A_0}=0$ and $M_{A_\\kappa}=M$. All other requested identities are the recursion and the preceding steps. Only finite support and the hypotheses on the specified $D_j$ were used, so no generation assumption on $N_j$ enters.",
+   "uses": [
+    "def-trf-coordinate-submodule"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058X (theorem-kaplansky-direct-sum), proof: coordinate transfinite recursion, lines 20500–20533, and exhaustion, lines 20555–20565; specified invariant blocks replace the countable-matrix construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-well-ordering-theorem",
+  "lem-trf-well-order-ordinal-enumeration",
+  "lem-weil-pbc-transfinite-recursion",
+  "def-trf-coordinate-submodule",
+  "def-weil-pbc-direct-sum-modules"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 058X (theorem-kaplansky-direct-sum), proof: coordinate transfinite recursion, lines 20500–20533, and exhaustion, lines 20555–20565; specified invariant blocks replace the countable-matrix construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "transfinite|[Ii]nvariant.*[Ff]iltration|[Cc]oordinate.*[Ff]iltration|[Cc]ountable.*[Ii]ncrement",
+   "results": "{\"t\": \"2026-10-22T06:46:24Z\", \"tool\": \"grep\", \"query\": \"transfinite|[Ii]nvariant.*[Ff]iltration|[Cc]oordinate.*[Ff]iltration|[Cc]ountable.*[Ii]ncrement\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Algebra/EuclideanDomain/Defs.lean\", \"Mathlib/Algebra/EuclideanDomain/Defs.lean\", \"Mathlib/Algebra/EuclideanDomain/Defs.lean\"], \"digest\": \"bc726c4083f9f600\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: IsModuleFiltration is a predicate, not an existence theorem; Field.Emb.Cardinal.filtration concerns intermediate fields of algebraic field extensions; HahnEmbedding requires an ordered module over an Archimedean ordered division ring; the second semantic search returns Nobeling good-product results for closed Boolean cubes. None constructs invariant coordinate subsets with countable increments for an arbitrary module endomorphism. Read FilteredAlgebra/Basic.lean:85–110, FieldTheory/CardinalEmb.lean:1–100,125–185, and Algebra/Order/Module/HahnEmbedding.lean:140–180. The Algebra grep found only transfinite Euclidean domains, and the SetTheory grep only ordinal exponentiation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "continuous transfinite invariant coordinate filtration of a direct sum with countable successive differences",
+   "results": "{\"t\": \"2026-10-22T06:46:25Z\", \"tool\": \"leansearch\", \"query\": \"continuous transfinite invariant coordinate filtration of a direct sum with countable successive differences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MeasureTheory.Filtration.piFinset\", \"MeasureTheory.Filtration.rightCont_eq_of_exists_gt\", \"MeasureTheory.Filtration.IsRightContinuous.eq\", \"MeasureTheory.Filtration.rightCont_apply\", \"ProbabilityTheory.countableFiltration\", \"MeasureTheory.Filtration.le_rightCont\", \"SummationFilter\", \"MeasureTheory.Filtration.rightCont_eq_of_nhdsGT_eq_bot\"], \"digest\": \"f9fadbbf0572188e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: IsModuleFiltration is a predicate, not an existence theorem; Field.Emb.Cardinal.filtration concerns intermediate fields of algebraic field extensions; HahnEmbedding requires an ordered module over an Archimedean ordered division ring; the second semantic search returns Nobeling good-product results for closed Boolean cubes. None constructs invariant coordinate subsets with countable increments for an arbitrary module endomorphism. Read FilteredAlgebra/Basic.lean:85–110, FieldTheory/CardinalEmb.lean:1–100,125–185, and Algebra/Order/Module/HahnEmbedding.lean:140–180. The Algebra grep found only transfinite Euclidean domains, and the SetTheory grep only ordinal exponentiation."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ordinal, Monotone, Set.Countable",
+   "results": "{\"t\": \"2026-10-22T06:46:25Z\", \"tool\": \"loogle\", \"query\": \"Ordinal, Monotone, Set.Countable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: IsModuleFiltration is a predicate, not an existence theorem; Field.Emb.Cardinal.filtration concerns intermediate fields of algebraic field extensions; HahnEmbedding requires an ordered module over an Archimedean ordered division ring; the second semantic search returns Nobeling good-product results for closed Boolean cubes. None constructs invariant coordinate subsets with countable increments for an arbitrary module endomorphism. Read FilteredAlgebra/Basic.lean:85–110, FieldTheory/CardinalEmb.lean:1–100,125–185, and Algebra/Order/Module/HahnEmbedding.lean:140–180. The Algebra grep found only transfinite Euclidean domains, and the SetTheory grep only ordinal exponentiation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given countable invariant coordinate blocks for an endomorphism of a direct sum of modules, construct an exhaustive continuous transfinite filtration by invariant coordinate submodules with countable increments",
+   "results": "{\"t\": \"2026-10-22T06:46:35Z\", \"tool\": \"leanfinder\", \"query\": \"Given countable invariant coordinate blocks for an endomorphism of a direct sum of modules, construct an exhaustive continuous transfinite filtration by invariant coordinate submodules with countable increments\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsModuleFiltration\", \"Field.Emb.Cardinal.directed_filtration\", \"Field.Emb.Cardinal.iSup_filtration\", \"Module.End.genEigenspace_directed\", \"HahnEmbedding.ArchimedeanStrata.instDecompositionFiniteArchimedeanClassSubtypeMemSubmoduleBaseDomainStratum'\", \"Field.Emb.Cardinal.filtration_apply\", \"IsModuleFiltration.mk_int\", \"Field.Emb.Cardinal.filtration\"], \"digest\": \"8cd9ae467cd1b7af\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: IsModuleFiltration is a predicate, not an existence theorem; Field.Emb.Cardinal.filtration concerns intermediate fields of algebraic field extensions; HahnEmbedding requires an ordered module over an Archimedean ordered division ring; the second semantic search returns Nobeling good-product results for closed Boolean cubes. None constructs invariant coordinate subsets with countable increments for an arbitrary module endomorphism. Read FilteredAlgebra/Basic.lean:85–110, FieldTheory/CardinalEmb.lean:1–100,125–185, and Algebra/Order/Module/HahnEmbedding.lean:140–180. The Algebra grep found only transfinite Euclidean domains, and the SetTheory grep only ordinal exponentiation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Well-ordering and transfinite recursion of increasing subsets covering an index set with countable differences and invariant finite support submodules",
+   "results": "{\"t\": \"2026-10-22T06:47:17Z\", \"tool\": \"leanfinder\", \"query\": \"Well-ordering and transfinite recursion of increasing subsets covering an index set with countable differences and invariant finite support submodules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.GoodProducts.MaxToGood\", \"Profinite.NobelingProof.GoodProducts.maxTail_isGood\", \"Profinite.NobelingProof.GoodProducts.linearIndependentAux\", \"Profinite.NobelingProof.P\", \"Profinite.NobelingProof.GoodProducts.spanFin\", \"Profinite.NobelingProof.GoodProducts.span\", \"Profinite.NobelingProof.GoodProducts.span_iff_products\", \"Profinite.NobelingProof.Products.isGood\"], \"digest\": \"ff0b06794efdb0b9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: IsModuleFiltration is a predicate, not an existence theorem; Field.Emb.Cardinal.filtration concerns intermediate fields of algebraic field extensions; HahnEmbedding requires an ordered module over an Archimedean ordered division ring; the second semantic search returns Nobeling good-product results for closed Boolean cubes. None constructs invariant coordinate subsets with countable increments for an arbitrary module endomorphism. Read FilteredAlgebra/Basic.lean:85–110, FieldTheory/CardinalEmb.lean:1–100,125–185, and Algebra/Order/Module/HahnEmbedding.lean:140–180. The Algebra grep found only transfinite Euclidean domains, and the SetTheory grep only ordinal exponentiation."
+  },
+  {
+   "tool": "grep",
+   "query": "transfinite|countable.*[Dd]iff|countable.*[Ff]iltration|invariant.*[Ff]iltration",
+   "results": "{\"t\": \"2026-10-22T06:48:12Z\", \"tool\": \"grep\", \"query\": \"transfinite|countable.*[Dd]iff|countable.*[Ff]iltration|invariant.*[Ff]iltration\", \"sub\": \"SetTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/SetTheory/Ordinal/Exponential.lean\"], \"digest\": \"6a7ec225fb4d57ae\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: IsModuleFiltration is a predicate, not an existence theorem; Field.Emb.Cardinal.filtration concerns intermediate fields of algebraic field extensions; HahnEmbedding requires an ordered module over an Archimedean ordered division ring; the second semantic search returns Nobeling good-product results for closed Boolean cubes. None constructs invariant coordinate subsets with countable increments for an arbitrary module endomorphism. Read FilteredAlgebra/Basic.lean:85–110, FieldTheory/CardinalEmb.lean:1–100,125–185, and Algebra/Order/Module/HahnEmbedding.lean:140–180. The Algebra grep found only transfinite Euclidean domains, and the SetTheory grep only ordinal exponentiation."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ii]nvariant.*[Ff]iltration|[Cc]oordinate.*[Ff]iltration|[Cc]ountable.*[Ii]ncrement",
+   "results": "{\"t\": \"2026-10-23T10:46:02Z\", \"tool\": \"grep\", \"query\": \"[Ii]nvariant.*[Ff]iltration|[Cc]oordinate.*[Ff]iltration|[Cc]ountable.*[Ii]ncrement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the semantic hits are measurable-space or ideal filtrations, or the predicate IsModuleFiltration, not existence of invariant coordinate subsets for an arbitrary linear endomorphism. Read FilteredAlgebra/Basic.lean:85–110, MeasurableSpace/Card.lean:40–65, PartitionFiltration.lean:100–123, Process/Filtration.lean:224–240. Loogle and whole-Mathlib grep returned zero hits. The inherited second phrasing also returned only Nobeling and intermediate-field constructions; retained without rerunning."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transfinite continuous filtration of a direct sum by invariant coordinate submodules with countable differences",
+   "results": "{\"t\": \"2026-10-23T10:46:02Z\", \"tool\": \"leansearch\", \"query\": \"Transfinite continuous filtration of a direct sum by invariant coordinate submodules with countable differences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsModuleFiltration.toIsFiltration\", \"IsModuleFiltration\", \"Ideal.Filtration.recOn\", \"MeasureTheory.Filtration.piFinset\", \"ProbabilityTheory.countableFiltration\", \"Ideal.Filtration\", \"Ideal.stableFiltration\", \"Ideal.Filtration.rec\"], \"digest\": \"4d1dc5e1b24c8e66\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the semantic hits are measurable-space or ideal filtrations, or the predicate IsModuleFiltration, not existence of invariant coordinate subsets for an arbitrary linear endomorphism. Read FilteredAlgebra/Basic.lean:85–110, MeasurableSpace/Card.lean:40–65, PartitionFiltration.lean:100–123, Process/Filtration.lean:224–240. Loogle and whole-Mathlib grep returned zero hits. The inherited second phrasing also returned only Nobeling and intermediate-field constructions; retained without rerunning."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ordinal, Monotone, Set.Countable",
+   "results": "{\"t\": \"2026-10-23T10:46:02Z\", \"tool\": \"loogle\", \"query\": \"Ordinal, Monotone, Set.Countable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the semantic hits are measurable-space or ideal filtrations, or the predicate IsModuleFiltration, not existence of invariant coordinate subsets for an arbitrary linear endomorphism. Read FilteredAlgebra/Basic.lean:85–110, MeasurableSpace/Card.lean:40–65, PartitionFiltration.lean:100–123, Process/Filtration.lean:224–240. Loogle and whole-Mathlib grep returned zero hits. The inherited second phrasing also returned only Nobeling and intermediate-field constructions; retained without rerunning."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct a continuous increasing exhaustive filtration of subsets of a set by adjoining specified countable blocks, choosing the least omitted element at each successor ordinal",
+   "results": "{\"t\": \"2026-10-23T10:46:03Z\", \"tool\": \"leanfinder\", \"query\": \"Construct a continuous increasing exhaustive filtration of subsets of a set by adjoining specified countable blocks, choosing the least omitted element at each successor ordinal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MeasurableSpace.generateMeasurableRec\", \"ProbabilityTheory.countableFiltration\", \"MeasureTheory.filtrationOfSet\", \"MeasureTheory.Filtration.cylinderEventsCompl\", \"ProbabilityTheory.partitionFiltration\", \"MeasurableSpace.generateMeasurableRec_omega1\", \"MeasureTheory.Filtration\", \"MeasurableSpace.iUnion_mem_generateMeasurableRec\"], \"digest\": \"c8ff27bbe01de793\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the semantic hits are measurable-space or ideal filtrations, or the predicate IsModuleFiltration, not existence of invariant coordinate subsets for an arbitrary linear endomorphism. Read FilteredAlgebra/Basic.lean:85–110, MeasurableSpace/Card.lean:40–65, PartitionFiltration.lean:100–123, Process/Filtration.lean:224–240. Loogle and whole-Mathlib grep returned zero hits. The inherited second phrasing also returned only Nobeling and intermediate-field constructions; retained without rerunning."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-projective-kaplansky-direct-summand",
+  "date": "2026-10-22",
+  "group": "Q100"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Within the imported ancestor proof clause “In the proof of Tag 0593, Lemma 0590 reduces to countable generation by Theorem 058Y (theorem-projective-direct-sum)”: the proof of Tag 058Y invokes Theorem 058X (theorem-kaplansky-direct-sum). Tag 058X (theorem-kaplansky-direct-sum), proof lines 20500–20533 and 20555–20565: transfinite coordinate recursion, stability, continuity and exhaustion; given countable invariant blocks.",
+   "via": [
+    "lem-trf-projective-kaplansky-direct-summand",
+    "lem-trf-projective-countable-decomposition",
+    "lem-trf-projective-over-local-free",
+    "lem-trf-local-universal-injective-residue",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-invariant-coordinate-transfinite-filtration",
+  "worker": "stage1",
+  "summary": "Split the given-block filtration directly along Stacks 058X. Reuse the existing Mathlib well-ordering and transfinite-recursion nodes; add only the exact Mathlib leaf Ordinal.enum for passage to a set ordinal. Prove monotonicity, successor invariance, finite-support continuity, least-omitted exhaustion, and countable increments explicitly. Retain the statement, source, ancestry and inherited actual searches. No countable generation or nonzero summand assumption is introduced.",
+  "blueprint": "Realizes the inherited 058X recursion and exhaustion input beneath lem-trf-projective-kaplansky-direct-summand: choose a well-order, take unions at limits, adjoin the least omitted coordinate block, and prove exhaustive invariance. The latest ancestor lem-trf-local-term-locality now states contracting local terms; its historical 0593/058Y/058X ancestry is retained as provenance, not claimed to appear in the revised latest proof. This split changes neither chapter/unit nor the parent route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NK-57d5b1287",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-57d5b1287 (reviewer sub-agent of L); spot-checked: Read the item, the new node and every cited statement in full. Source checks: Stacks algebra.tex Tag 058X proof (lines 20475–20565) and sets.tex Tag 05N1 (lines 113–115). Mathlib Ordinal.enum at SetTheory/Ordinal/Basic.lean:472 is a relation iso from Iio(type r) to r, so the new leaf lem-trf-well-order-ordinal-enumeration is an exact match, holds for E empty, and duplicates no existing node. The item statement is unchanged from base and agrees with what the parent kaplansky-direct-summand uses. Steps: 1 picks a well-order and enumerates J by ordinals. 2 builds A_α by set-valued recursion (Mathlib leaf); the least omitted index exists because η is surjective; monotonicity by induction. 3 shows M_{B∪C}=M_B+M_C, which gives successor invariance. 4 uses the finite maximum of witness stages to get limit continuity and invariance (the δ=0 case covers empty support); together with 3 this is a correctly set-up transfinite induction. 5 proves η({β<α})⊆A_α (at a successor, a missing η(α) forces the least omitted index to be α), hence A_κ=J; it tracks subsets, so it is right when N_j=0. 6 gives countable increments and M_∅=0, M_J=M. Edge cases tested: J empty, J=ω with singleton blocks, early exhaustion with D_j=J, all N_j=0, f=0 and f=id, overlapping blocks. All cited dependencies other than same-unit definitions are Mathlib leaves, so there is no route issue and no tool_uses. Live and side-live still have the item unsplit, so the delivery is not superseded. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.InvariantCoordinateTransfiniteFiltration",
+  "declaration": "DirectSum.exists_invariant_coordinate_transfinite_filtration",
+  "file": "lean/Sheaf/RingTheory/InvariantCoordinateTransfiniteFiltration.lean",
+  "statement": "theorem exists_invariant_coordinate_transfinite_filtration (R : Type u) [CommRing R] (J : Type v) (N : J → Type w) [∀ j, AddCommGroup (N j)] [∀ j, Module R (N j)] (f : (DirectSum J N) →ₗ[R] DirectSum J N) (D : J → Set J) (hD_countable : ∀ j, (D j).Countable) (hD_self : ∀ j, j ∈ D j) (hD_invariant : ∀ j x, x ∈ coordinateSubmodule R J N (D j) → f x ∈ coordinateSubmodule R J N (D j)) : ∃ (κ : Ordinal.{v}) (η : Set.Iio κ ≃ J) (A : Set.Iic κ → Set J), Monotone A ∧ A ⟨0, (bot_le : (0 : Ordinal.{v}) ≤ κ)⟩ = ∅ ∧ A ⟨κ, le_refl κ⟩ = Set.univ ∧ (∀ μ : Set.Iic κ, Order.IsSuccLimit μ.val → A μ = ⋃ (β : Set.Iic κ) (_ : β < μ), A β) ∧ (∀ (α : Ordinal.{v}) (hα : α < κ), (A ⟨α, le_of_lt hα⟩ = Set.univ → A ⟨Order.succ α, Order.succ_le_of_lt hα⟩ = A ⟨α, le_of_lt hα⟩) ∧ (A ⟨α, le_of_lt hα⟩ ≠ Set.univ → ∃ γ : Set.Iio κ, η γ ∉ A ⟨α, le_of_lt hα⟩ ∧ (∀ δ : Set.Iio κ, δ < γ → η δ ∈ A ⟨α, le_of_lt hα⟩) ∧ A ⟨Order.succ α, Order.succ_le_of_lt hα⟩ = A ⟨α, le_of_lt hα⟩ ∪ D (η γ))) ∧ (∀ (α : Ordinal.{v}) (hα : α < κ), (A ⟨Order.succ α, Order.succ_le_of_lt hα⟩ \\ A ⟨α, le_of_lt hα⟩).Countable) ∧ (∀ (α : Set.Iic κ) (β : Set.Iio κ), β.val < α.val → η β ∈ A α) ∧ coordinateSubmodule R J N (A ⟨0, (bot_le : (0 : Ordinal.{v}) ≤ κ)⟩) = ⊥ ∧ coordinateSubmodule R J N (A ⟨κ, le_refl κ⟩) = ⊤ ∧ (∀ (α : Set.Iic κ) x, x ∈ coordinateSubmodule R J N (A α) → f x ∈ coordinateSubmodule R J N (A α)) ∧ (∀ μ : Set.Iic κ, Order.IsSuccLimit μ.val → (coordinateSubmodule R J N (A μ) : Set (DirectSum J N)) = ⋃ (β : Set.Iic κ) (_ : β < μ), (coordinateSubmodule R J N (A β) : Set (DirectSum J N)))",
+  "branch": "newtargets-dag",
+  "by": "Q153",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2ada58c80",
+  "group": "Q153",
+  "result": "pass",
+  "note": "Node unchanged from side-live apart from the added lean record; lean.statement verbatim in the file. Read the Stacks 058X proof lines 20503-20565, the landed DirectSum.coordinateSubmodule (carrier: coordinates outside A vanish) and the parent kaplansky step citing this item. Every node clause matches the Lean: R CommRing; N_j in an independent universe w; D_j countable, containing j, f-invariant; κ : Ordinal.{v}; η : Iio κ ≃ J; monotone A on Iic κ with ∅ and univ endpoints; IsSuccLimit (= nonzero limit) unions; stationary successor or the least missing γ (fully expressed) with A_{α+1} = A_α ∪ D(ηγ); countable differences; prefix clause; ⊥/⊤; invariance at every stage; limit clause as an actual set union. Edge cases fine: J empty (κ=0), N_j=0, early exhaustion, overlapping blocks. No hollow defs; only sorry; source and blueprint docstrings present with the 6-step proof; both report sections present; no duplicate found. Advisory: two private proof-only imports unused by sorry. No compile needed (no file changed)."
+ }
+}

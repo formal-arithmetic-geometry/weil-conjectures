@@ -1,0 +1,136 @@
+{
+ "id": "lem-weil-pbc-completed-koszul-coefficient-comparison",
+ "kind": "statement",
+ "title": "Finite exterior coefficient tower versus the dual positive tensor tower",
+ "statement": "For a scheme X, adic coefficient datum d over A, and a finite list a : Fin r → A, let F be inverse coefficient restriction followed by the explicitly constructed small-site equivalence [def-weil-pbc-completed-cech-site-transport], H its action on complexes, O the transported completed ring and b the compatible-residue sections. The transported finite exterior coefficient complexes H(completedKoszulPowerSheaf(m)) are isomorphic to the strict dual positive tensor tower at m. The isomorphisms commute with the consecutive exterior power transitions. The transported degree-zero exterior augmentation, preceded by the regular-module section 1, equals the degree-zero component of the dual tensor augmentation. No arbitrary input complex is present. Empty lists, zero rings, and arbitrary generator lists are allowed.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "More on Algebra, Tag 0664, lemma-join-sequences-koszul-complex; Tag 0A0E, proof of lemma-derived-completion-koszul: the finite free dual identification, before tensoring with E."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-completed-cech-site-transport",
+  "def-weil-pbc-intrinsic-completion",
+  "def-weil-pbc-ringed-koszul-system"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the algebraic exterior-to-negative-tensor comparison and map its isomorphisms through the composite of completed constant extension, inverse coefficient restriction and site equivalence. Compose with the rank-one tensor-to-dual transport. Functoriality and associativity combine the two consecutive transition squares.",
+   "uses": [
+    "lem-weil-pbc-exterior-negative-koszul-tensor",
+    "lem-weil-pbc-negative-koszul-tensor-dual-transport"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Expand completedKoszulSheafUnitZero as completedKoszulOne followed by the constant functor applied to finiteKoszulExteriorUnitZero. Functor.map_comp and the algebraic unit equality convert this to the recursive tensor unit. The tensor-dual transport unit equality gives exactly the required degree-zero equation.",
+   "uses": [
+    "lem-weil-pbc-exterior-negative-koszul-tensor",
+    "lem-weil-pbc-negative-koszul-tensor-dual-transport",
+    "def-weil-pbc-intrinsic-completion"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-intrinsic-completion",
+  "lem-weil-pbc-exterior-negative-koszul-tensor",
+  "lem-weil-pbc-negative-koszul-tensor-dual-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0664 and algebraization.tex Tag 0A0E; E9 composes the algebraic ordered tensor comparison with rank-one coefficient/dual transport, including actual transition and unit calculations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The exterior Koszul complex on a finite sequence is the dual of the tensor product of two term complexes",
+   "results": "8 hits: tensorObj, PiTensorProduct.dualDistribInvOfBasis, ModuleCat.exteriorPower, PiTensorProduct.dualDistrib, ModuleCat.exteriorPower.iso₀, HasTensor, PiTensorProduct.dualDistribEquiv, ExteriorAlgebra. No comparison of these complex models.",
+   "date": "2026-10-25",
+   "verdict": "No direct theorem; use the existing exterior and tensor APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exteriorPower\", \"Iso\"",
+   "results": "10 hits, the degree-zero and degree-one natural isomorphisms only.",
+   "date": "2026-10-25",
+   "verdict": "No finite augmented tower comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*(dual|tensor)|Koszul.*(dual|tensor)",
+   "results": "No Mathlib hits. Local source search found completedKoszulPowerSheaf, ringedKoszulDualTower, mapBifunctorComparison and sliceTensorIso; none states the required comparison across both coefficient restriction and this site equivalence.",
+   "date": "2026-10-25",
+   "verdict": "The finite coefficient comparison and the tensor transport are distinct missing ingredients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.WeilCompletedKoszulRoosComparison",
+  "date": "2026-10-25",
+  "group": "B8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "More on Algebra, Tag 0664, lemma-join-sequences-koszul-complex; Tag 0A0E, proof of lemma-derived-completion-koszul: the finite free dual identification, before tensoring with E.",
+   "via": [
+    "lem-weil-pbc-completed-fiber-roos-comparison",
+    "lem-weil-pbc-completed-koszul-product-comparison",
+    "lem-weil-pbc-completed-fiber-roos-representative-comparison",
+    "lem-weil-pbc-completed-fiber-strict-limit-comparison",
+    "lem-weil-pbc-completed-fiber-cech-comparison",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.WeilCompletedKoszulCoefficientComparison",
+  "file": "lean/Sheaf/Paper/WeilCompletedKoszulCoefficientComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completedKoszulCoefficientComparison",
+  "statement": "theorem completedKoszulCoefficientComparison (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (r : ℕ) (a : Fin r → A) : let F := intrinsicPresentationModulesBack X d ⋙ (completedCechModulesEquiv X d).functor let H := F.mapHomologicalComplex (.up ℤ) let O := completedCechRing X d let b := fun i ↦ completedCechScalar X d (a i) let K := completedKoszulPowerSheaf X (intrinsicPresentationDatum d) r a ∃ e : ∀ m : ℕ, H.obj (K m) ≅ (ringedKoszulDualTower O r b).obj (op m), (∀ m, H.map (((completedKoszulConstant X (intrinsicPresentationDatum d)).mapHomologicalComplex (.up ℤ)).map (completedKoszulTransition (A := A) r a m)) ≫ (e m).hom = (e (m + 1)).hom ≫ (ringedKoszulDualTower O r b).map (homOfLE (Nat.le_succ m)).op) ∧ (∀ m, completedCechCoefficientUnit X d ≫ F.map (completedKoszulSheafUnitZero X (intrinsicPresentationDatum d) r a m) ≫ (e m).hom.f 0 = (HomologicalComplex.singleObjXSelf (.up ℤ) 0 _).inv ≫ (ringedKoszulDualUnit O r b m).f 0)",
+  "branch": "sheaf-dag",
+  "by": "B8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-70624",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261025T162026-L-211085",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261025T201802-L-2618116",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

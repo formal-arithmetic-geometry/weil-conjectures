@@ -1,0 +1,111 @@
+{
+ "id": "def-sf-integral-local-completion-test",
+ "kind": "definition",
+ "title": "Uniformizer section and local derived-completeness test",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$ [def-weil-l-adic-coefficient-extension], and a scheme $X$. Let $B=\\widehat{\\mathcal O}_{E,X}$ and $\\underline{\\mathcal O_E}\\to B$ be the canonical constant-to-completion map [def-weil-completed-integral-coefficients]. Use the global and slice ring sheaves and their standard derived categories of [def-pur-integral-derived-operations]. For $V\\in X_{\\mathrm{proet}}$, define $\\operatorname{integralCompletionScalarValue}(V)\\in B(V)$ to be the value at $V$ of the completed uniformizer section $\\pi_X\\in\\Gamma(X_{\\mathrm{proet}},B)$ [def-sp-completed-uniformizer-section], that is, the image of $\\varpi_E$ under the constant-presheaf sheafification unit followed by the canonical constant-to-completion map. For $K\\in D(B)$, $U\\in X_{\\mathrm{proet}}$ and a global section $s$ of $B|_U$ on the slice, define $\\operatorname{integralCompletionLocalTest}(K,U,s)$ to be $R\\mathcal Hom_{B|_U}((B|_U)[1/s][0],K|_U)$. Here the localization is the sheafified sectionwise localization [def-weil-pbc-ringed-section-localization], restriction is the standard derived slice restriction [def-weil-pbc-ringed-site-derived-restriction], and internal Hom is the existing derived internal Hom [def-pur-derived-internal-hom]. Scheme and coefficient universes are independent, the site's object and morphism universes are respectively $t+1$ and $t$, and coefficients and modules have size $\\max(u,t+1)$. These definitions assert no vanishing or completeness equivalence.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-sp-completed-uniformizer-section",
+  "def-pur-integral-derived-operations",
+  "def-weil-pbc-ringed-section-localization",
+  "def-weil-pbc-ringed-site-derived-restriction",
+  "def-pur-derived-internal-hom"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0999, definition-derived-complete, and Tag 0A0E, lemma-derived-completion-koszul; uniformizer specialization"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Koszul derived completion presentation functor and unit for module sheaves and uniformizer local derived completeness test",
+   "results": "8 hits: BDeRhamPlus, BDeRham, AdicCompletion.module, AdicCompletion, localCohomology.diagram, IsAdicComplete, Hausdorffification, AdicCompletion.of",
+   "date": "2026-10-23",
+   "verdict": "No matching Mathlib declaration; reuse the existing project definitions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived completion by the total limit of the Koszul tower for sheaves of modules and derived internal Hom from localization at a uniformizer ideal section",
+   "results": "8 hits: AdicCompletion.module, AdicCompletion, AdicCompletion.instModuleOfIsScalarTower, AlgebraicGeometry.Scheme.Modules.instHasLimits, AdicCompletion.instModuleOfIsScalarTower.congr_simp, IsAdicComplete.StrictMono.of_comp_lift, SheafOfModules.hasLimitsOfShape, SheafOfModules.hasLimit",
+   "date": "2026-10-23",
+   "verdict": "No matching Mathlib declaration; reuse the existing project definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "KoszulPresentation|koszulCompletion|koszulUnit|integralCompletionScalarValue|integralCompletionLocalTest",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "No matching Mathlib declaration; reuse the existing project definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n KoszulPresentation|koszulCompletion|koszulUnit|integralCompletionScalarValue|integralCompletionLocalTest lean/WeilConjectures lean/Sheaf; rg -l KoszulPresentation|integralCompletionScalarValue|integralCompletionLocalTest dag/nodes; tools/blueprint_refs.py search Koszul presentation",
+   "results": "No exact wrapper in WeilConjectures. The three Koszul wrappers occur in ConstantCompletionEquivalence; the two integral helpers occur in RoosIntrinsicCompletenessEquivalence. No definition node owns these five names. The generic RingedKoszulLimitPresentation is owned by def-weil-pbc-ringed-koszul-system and is reused. Blueprint search: zero matches for Koszul presentation.",
+   "date": "2026-10-23",
+   "verdict": "Existing project definitions without definition-node owners; add existing:true records only."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-ambient-completed-tensor-adjunction",
+  "date": "2026-10-23",
+  "group": "Q59"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-lem-tensor-adjunction",
+   "place": "Proof Step 1, tensor–internal-Hom adjunction at the integral stage; returned detailed step 2: strict quotient balancing, Koszul completion of the ordinary tensor and the completion-unit mapping property (returned step 1, ambient currying, is the closed structure of lem-sf-ringed-derived-closed-symmetric-monoidal)",
+   "via": [
+    "lem-sf-ambient-completed-tensor-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.Paper.RoosIntrinsicCompletenessEquivalence",
+  "declaration": "WeilConjectures.integralCompletionLocalTest",
+  "declarations": [
+   "WeilConjectures.integralCompletionScalarValue",
+   "WeilConjectures.integralCompletionLocalTest"
+  ],
+  "statement": "def integralCompletionLocalTest\n    (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (T : AlgebraicGeometry.Scheme.{t}) (K : IntegralOnSlice.D l E T none)\n    (U : T.ProEt)\n    (s : ((IntegralOnSlice.ring l E T (some U)).obj ⋙ forget CommRingCat).sections) :\n    IntegralOnSlice.D l E T (some U)",
+  "branch": "sheaf-dag",
+  "by": "Q59",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Existing unchanged real definitions in RoosIntrinsicCompletenessEquivalence. The scalar value uses the actual constant-to-limit map; the test uses localized coefficient internal Hom and canonical slice restriction. Neither chooses data from roosIntrinsicCompletenessEquivalence. Definition ownership requested by return F1 of head 8af3b04444db. Review FIX (3b28c55bd7ff): integralCompletionScalarValue is the sectionwise value of the completed uniformizer section of def-sp-completed-uniformizer-section (same sectionsMk formula as PrincipalKoszulStrictReplacement.uniformizer); that node is cited rather than the notion restated."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3b28c55bd",
+  "group": "Q59",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3b28c55bd",
+  "group": "Q59",
+  "result": "fix",
+  "note": "Re-delivery of returned 8af3b04444db. F1 done: theorem nodes lem-weil-pbc-constant-completion-equivalence and lem-pur-roos-intrinsic-completeness-equivalence moved to proof_deps only; def-sfb-constant-completion-coefficient-data, def-pur-strict-quotient-completion-data and def-sfb-quotient-kernel-completeness cited; new existing:true nodes def-sf-constant-coefficient-koszul-completion-data (KoszulPresentation/koszulCompletion/koszulUnit) and def-sf-integral-local-completion-test (integralCompletionScalarValue/integralCompletionLocalTest) checked against live bodies and owner records. F2 done: copied bare Nonempty clause dropped; the Lean diff vs 8af3 is only that clause and its docstring; main signature byte-identical to the one accepted earlier; dep nodes identical to side-live; item not yet landed live. FIX (H12): integralCompletionScalarValue is the sectionwise value of PrincipalKoszulStrictReplacement.uniformizer, whose owner def-sp-completed-uniformizer-section is on base; fixes/def-sf-integral-local-completion-test.json cites that node in text and stmt_deps and extends lean.note; no Lean change, so no compile. Advisories: Good uses K-flat and flat-term predicates whose owner nodes are outside stmt_deps (accepted before); site and coefficient ring share universe u in the general declaration."
+ }
+}

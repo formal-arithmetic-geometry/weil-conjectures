@@ -1,0 +1,146 @@
+{
+ "id": "lem-sf-scalar-direct-transition-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Proof, ordinary scalar direct-image comparison: compatibility with successor transitions",
+   "via": [
+    "lem-sf-semilinear-scalar-adjunctions",
+    "lem-sf-semilinear-proper-open-mate-pasting",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Transition compatibility of normalized scalar direct-image components",
+ "statement": "Let C be the prescribed ordinary scalar restriction of [lem-sf-semilinear-scalar-restriction], from the actual varying-ring systems of [def-sp-varying-ring-operations] to strict B towers. Fix f:X -> Y and a system M on X. Suppose d_n is a family of isomorphisms from the n-th level of C_Y(push_f M) to the pushforward of the n-th level of C_X(M), and after postcomposing by the pushed C_X level identification each d_n agrees on sections with the C_Y level identification. Then the d_n commute with every successor transition, hence can be assembled as a morphism of towers. No claim about constructing the d_n, functoriality in M, inverse-image mates, or open extension is made.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, coefficient systems and ordinary direct-image transition maps; agent-written compatibility of section-normalized coefficient restriction"
+ },
+ "stmt_deps": [
+  "def-sp-varying-ring-operations",
+  "lem-sf-semilinear-scalar-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Postcompose the asserted successor square with the pushforward of the n-th C_X level isomorphism, and evaluate on sections. The given normalization and C_Y.transitions identify the left side with the horizontal successor restriction of the level n+1 section. In the actual direct image, base change changes only the site coordinate: its functor maps the identity site arrow to the identity, so this horizontal section restriction is the one on X. Use the normalization at n+1, then C_X.transitions, and the section formula for pushed morphisms to identify the right side. Extensionality and cancellation of the pushed level isomorphism prove the square.",
+   "uses": [
+    "def-sp-varying-ring-operations",
+    "lem-sf-semilinear-scalar-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, coefficient systems and ordinary direct-image transition maps; agent-written compatibility of section-normalized coefficient restriction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-varying-ring-operations",
+  "lem-sf-semilinear-scalar-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, coefficient systems and ordinary direct-image transition maps; agent-written compatibility of section-normalized coefficient restriction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A levelwise morphism of semilinear coefficient systems respects transition maps if its level comparisons are identity on sections",
+   "results": "8 hits: LightProfinite.transitionMapLE, Module.DirectLimit.map_apply_of, CochainComplex.ofHom_f, InverseSystem.globalEquiv_compatibility, AdicCompletion.transitionMap_comp_eval_apply, InverseSystem.globalEquiv_naturality, CochainComplex.HomComplex.Cochain.InductionUp.sequence_eqUpTo, CochainComplex.mkHomAux. No statement for the project-specific section-normalized scalar restriction.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.ofOpSequence",
+   "results": "2 hits: CategoryTheory.NatTrans.ofOpSequence, CategoryTheory.NatTrans.ofOpSequence_app. No statement for the project-specific section-normalized scalar restriction.",
+   "date": "2026-10-27",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "ordinaryScalarDirectComponents_step",
+   "results": "0 hits: . No statement for the project-specific section-normalized scalar restriction.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pointwise identity comparisons between inverse systems of module sheaves commute with the successor transition maps",
+   "results": "8 hits: InverseSystem.globalEquiv_naturality, InverseSystem.recOn, SheafOfModules.pushforwardCongr_inv_app_val_app, InverseSystem, AbstractCompletion.inverse_compare, InverseSystem.piEquivSucc.congr_simp, InverseSystem.pEquivOnGlue, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapId_inv_τl. No statement for the project-specific section-normalized scalar restriction.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SemilinearScalarAdjunctions",
+  "date": "2026-10-27",
+  "group": "B4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SemilinearScalarDirectTransitions",
+  "file": "lean/Sheaf/AlgebraicGeometry/SemilinearScalarDirectTransitions.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.VaryingRing.ordinaryScalarDirectComponents_step",
+  "statement": "theorem ordinaryScalarDirectComponents_step (C : OrdinaryScalarRestriction R φ B ψ)\n    {X Y : Scheme.{u}} (f : X ⟶ Y) (M : Modules R φ X)\n    (d : ∀ n : ℕ, (((C.rho Y).obj ((push R φ f).obj M)).obj (op n)) ≅\n      (StrictTower.moduleDirectImage B f).obj (((C.rho X).obj M).obj (op n)))\n    (hd : ∀ (n : ℕ) (H : Y.ProEtᵒᵖ)\n      (x : (((C.rho Y).obj ((push R φ f).obj M)).obj (op n)).val.obj H),\n      HEq (((StrictTower.moduleDirectImage B f).map ((C.level X n).hom.app M)).val.app H\n        ((d n).hom.val.app H x))\n        (((C.level Y n).hom.app ((push R φ f).obj M)).val.app H x))\n    (n : ℕ) :\n    (((C.rho Y).obj ((push R φ f).obj M)).map (homOfLE (Nat.le_succ n)).op) ≫\n        (d n).hom =\n      (d (n + 1)).hom ≫ (StrictTower.moduleDirectImage B f).map\n        (((C.rho X).obj M).map (homOfLE (Nat.le_succ n)).op)",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "Sheaf.AlgebraicGeometry.SemilinearScalarAdjunctions",
+  "worker": "stage3",
+  "summary": "Fully proved successor compatibility for normalized component comparisons. No new sorry. Extracted after private section APIs and explicit carrier equations to keep each file within the compile-time limit.",
+  "blueprint": "Inherited ordinary scalar direct-image comparison in fix-prop-coherence.",
+  "tool_uses": [
+   {
+    "node": "def-sp-varying-ring-operations",
+    "why": "Uses the actual direct-image transition maps and prescribed restriction normalization; no unit step is bypassed."
+   },
+   {
+    "node": "lem-sf-semilinear-scalar-restriction",
+    "why": "Uses the actual direct-image transition maps and prescribed restriction normalization; no unit step is bypassed."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261026T194319-L-2318044",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261026T194319-L-2318044",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

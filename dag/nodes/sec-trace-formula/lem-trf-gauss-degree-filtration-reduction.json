@@ -1,0 +1,399 @@
+{
+ "id": "lem-trf-gauss-degree-filtration-reduction",
+ "kind": "statement",
+ "title": "Reduction preserves the integral degree filtration",
+ "statement": "Let $k$ be a field [def-weil-field] with a nontrivial real-valued multiplicative nonarchimedean absolute value, $n\\ge1$, $A=k[X_1,\\ldots,X_n]$ [def-weil-pbc-mv-polynomial-ring], and $R=\\operatorname{Frac}(A)$ with the Gauss absolute value. For a finite field extension $E/R$ give $E$ its minimal-polynomial spectral norm $s_G$ [lem-trf-incomplete-spectral-algebra-norm]. Write $\\widetilde k=\\{|a|\\le1\\}/\\{|a|<1\\}$ and $\\widetilde E=\\{s_G\\le1\\}/\\{s_G<1\\}$. Under the coefficient-reduction identification $\\widetilde R=\\widetilde k(X_1,\\ldots,X_n)$, view $\\widetilde E$ as a finite reduced algebra over this field. Independently give $R$ the total-degree absolute value $|f/g|_t=\\exp(\\deg f-\\deg g)$ for nonzero $f,g$, and let $s_t$ be its spectral norm on $E$. Let $B$ be the integral closure of $A$ in $E$ and $C$ the integral closure of $\\widetilde k[X_1,\\ldots,X_n]$ in $\\widetilde E$ [def-weil-pbc-integral-closure]. Give $\\widetilde E$ the spectral norm $\\bar s_t$ derived from the total-degree absolute value on $\\widetilde k(X_1,\\ldots,X_n)$, using the same monic-minimal-polynomial formula. Put $B(\\nu)=\\{z\\in B:s_t(z)\\le\\exp(\\nu)\\}$ and $C(\\nu)=\\{z\\in C:\\bar s_t(z)\\le\\exp(\\nu)\\}$. For every integer $\\nu\\ge0$, reduction induces an injective $\\widetilde k$-linear map $$\\frac{B(\\nu)\\cap\\{s_G\\le1\\}}{B(\\nu)\\cap\\{s_G<1\\}}\\ \\longrightarrow\\ C(\\nu),\\qquad[z]\\longmapsto\\bar z.$$ No completeness, stability, divisibility of the value group, or separability hypothesis is required.",
+ "source": {
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Proof of Proposition 5.3.3/3, equation (4) and the monic-polynomial calculation following it, printed pp.216–217 (scan PDF pp.222–223). Primary scan read online 2026-10-24; local archival copy WANTED.",
+  "url": "https://math.arizona.edu/~cais/scans/BGR-Non_Archimedean_Analysis.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-integral-closure",
+  "lem-trf-incomplete-spectral-algebra-norm"
+ ],
+ "proof": [
+  {
+   "text": "Put $F=\\widetilde k$ and $D=\\widetilde E$. The norm laws of [lem-trf-incomplete-spectral-algebra-norm] make $E^\\circ=\\{s_G\\le1\\}$ a ring and $E^{\\circ\\circ}=\\{s_G<1\\}$ its ideal: use submultiplicativity for a product with one factor of norm less than one. By [lem-trf-spectral-reduction-dimension-criterion], $D$ is a nonzero finite reduced algebra over $\\widetilde R$. Here $\\widetilde R=F(X)$ explicitly: for $f/g\\in R$ of Gauss norm at most one divide $f,g$ by a coefficient $c$ of $g$ attaining its maximum absolute value. The normalized denominator has nonzero coefficient reduction; the normalized numerator has integral coefficients. Send the fraction to $\\overline{f/c}/\\overline{g/c}$. Two presentations give the same fraction by reducing their cross-product equality. Its kernel is precisely the fractions of norm less than one, because $\\overline{g/c}\\ne0$ and $\\overline{f/c}=0$ exactly when all its finitely many coefficients have norm less than one. Conversely lift the finitely many coefficients of any fraction over $F$, lifting zero to zero and nonzero coefficients to units. This proves surjectivity and the claimed identification, including its action on polynomials.",
+   "uses": [
+    "lem-trf-incomplete-spectral-algebra-norm",
+    "lem-trf-spectral-reduction-dimension-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proof of Proposition 5.3.3/3, equation (4), printed pp.216–217 (scan PDF pp.222–223); coefficient reduction and monic-polynomial estimate."
+   }
+  },
+  {
+   "text": "Fix $z\\in B(\\nu)$ with $s_G(z)\\le1$. The field $k$ is normal: its fraction field is itself. Iterating [lem-weil-pbc-polynomial-ring-normal-domain] shows that $A=k[X_1,\\ldots,X_n]$ is normal; the iterated and multivariate polynomial rings agree by grouping each finite monomial by its exponent of the last variable, compatibly with sums and products. Apply [lem-sfb-integral-minpoly-fraction-descent] to $A\\subset E$, taking $S=E$ (its fraction field is itself). Since $z$ is integral over $A$, its monic minimal polynomial over $R$ has the form $p(T)=T^r+\\sum_{i=1}^r a_iT^{r-i}$ with $a_i\\in A$ and $p(z)=0$. The same algebraic minimal polynomial is used for both absolute values: its definition uses only the field extension, not a norm.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-normal-domain",
+    "lem-sfb-integral-minpoly-fraction-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 030A (lemma-polynomial-domain-normal) and 00H7 (lemma-minimal-polynomial-normal-domain), as in BGR p.216."
+   }
+  },
+  {
+   "text": "The coefficient formula of [lem-trf-incomplete-spectral-algebra-norm] gives $\\max_i G(a_i)^{1/i}=s_G(z)\\le1$, so every coefficient of every $a_i$ is in $k^\\circ$. Reducing $p(z)=0$ in the quotient ring of Step 1 gives $\\bar p(\\bar z)=0$, with $\\bar p(T)=T^r+\\sum_i\\bar a_iT^{r-i}\\in F[X][T]$. It is still monic, even if some or all $a_i$ reduce to zero. Thus $\\bar z\\in C$ by [def-weil-pbc-integral-closure]. For every nonzero $\\bar a_i$, its monomials are a subset of those of $a_i$, so $\\deg\\bar a_i\\le\\deg a_i$ and $|\\bar a_i|_t\\le|a_i|_t$. The same inequality holds if $\\bar a_i=0$, since its absolute value is zero. Applying the coefficient formula with the independent total-degree absolute value gives $$U:=\\max_i|\\bar a_i|_t^{1/i}\\le\\max_i|a_i|_t^{1/i}=s_t(z)\\le\\exp(\\nu).$$",
+   "uses": [
+    "lem-trf-incomplete-spectral-algebra-norm",
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proof of Proposition 5.3.3/3, equation (4), printed pp.216–217 (scan PDF pp.222–223); coefficient reduction and monic-polynomial estimate."
+   }
+  },
+  {
+   "text": "First the norm laws of $\\bar s_t$ on $D$. By Step 1, $D$ is a nonzero finite-dimensional reduced $F(X)$-algebra, so it is Artinian by [lem-weil-pbc-finite-dim-algebra-artinian], and [lem-sfb-reduced-artinian-residue-product] gives a $D$-algebra, hence $F(X)$-algebra, isomorphism $D\\cong\\prod_{j\\in I}L_j$ with $I$ finite, nonempty because $D\\ne0$, and each $L_j=D/\\mathfrak m_j$ a field spanned by the image of a finite basis of $D$, hence a finite extension of $F(X)$. Corresponding elements have the same annihilating polynomials, hence the same minimal polynomial, so [lem-trf-product-minpoly-spectral-maximum] over $(F(X),|\\cdot|_t)$ gives $\\bar s_t(x)=\\max_j s_j(x_j)$, where $s_j$ is the spectral norm of $L_j$. Each $s_j$ is definite, ultrametric, $F(X)$-homogeneous with $s_j(1)=1$ by [lem-trf-incomplete-spectral-algebra-norm] and power-multiplicative by [lem-trf-algebraic-spectral-norm-powers]; taking the maximum over the nonempty finite set $I$ coordinatewise, $\\bar s_t$ has the same five properties. Put $v=\\bar s_t(\\bar z)$. If $v>U$, then $v>0$ and $|\\bar a_i|_t<v^i$ for every $i$. These laws applied to $\\bar z^r=-\\sum_i\\bar a_i\\bar z^{r-i}$ give $$v^r\\le\\max_i |\\bar a_i|_t v^{r-i}<v^r,$$ a contradiction; the term with exponent zero uses $\\bar s_t(1)=1$. Hence $\\bar s_t(\\bar z)\\le U\\le\\exp(\\nu)$, proving $\\bar z\\in C(\\nu)$. This argument uses an annihilating monic polynomial, and does not assume that $\\bar p$ remains minimal or irreducible.",
+   "uses": [
+    "lem-weil-pbc-finite-dim-algebra-artinian",
+    "lem-sfb-reduced-artinian-residue-product",
+    "lem-trf-product-minpoly-spectral-maximum",
+    "lem-trf-incomplete-spectral-algebra-norm",
+    "lem-trf-algebraic-spectral-norm-powers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proof of Proposition 5.3.3/3, equation (4), printed pp.216–217 (scan PDF pp.222–223); coefficient reduction and monic-polynomial estimate."
+   }
+  },
+  {
+   "text": "The norm laws of [lem-trf-incomplete-spectral-algebra-norm] show that $B(\\nu)$ is a $k$-vector space: the total-degree absolute value of each nonzero constant in $k$ is $1$, the ultrametric inequality preserves the bound, and the integral closure is a subring containing $k$ by [def-weil-pbc-integral-closure]. The same reasoning using the norm laws of $\\bar s_t$ proved in Step 4 makes $C(\\nu)$ an $F$-vector space. Put $L=B(\\nu)\\cap E^\\circ$ and $L_0=B(\\nu)\\cap E^{\\circ\\circ}$. They are $k^\\circ$-modules, and $k^{\\circ\\circ}L\\subset L_0$ by $s_G(az)=|a|s_G(z)$. Thus $L/L_0$ is an $F$-vector space. Steps 3–4 show reduction maps $L$ into $C(\\nu)$; it is additive and respects scalar lifts. Its kernel is exactly $L_0$, by the definition $D=E^\\circ/E^{\\circ\\circ}$. If two elements of $L$ have the same image, their difference therefore belongs to $L_0$. Consequently $[z]\\mapsto\\bar z$ is the asserted injective $F$-linear map.",
+   "uses": [
+    "lem-trf-incomplete-spectral-algebra-norm",
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proof of Proposition 5.3.3/3, equation (4), printed pp.216–217 (scan PDF pp.222–223); coefficient reduction and monic-polynomial estimate."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-incomplete-spectral-algebra-norm",
+  "lem-trf-spectral-reduction-dimension-criterion",
+  "lem-weil-pbc-polynomial-ring-normal-domain",
+  "lem-sfb-integral-minpoly-fraction-descent",
+  "def-weil-pbc-integral-closure",
+  "lem-weil-pbc-finite-dim-algebra-artinian",
+  "lem-sfb-reduced-artinian-residue-product",
+  "lem-trf-product-minpoly-spectral-maximum",
+  "lem-trf-algebraic-spectral-norm-powers"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Proof of Proposition 5.3.3/3, equation (4), printed pp.216–217; with the root estimate of Proposition 3.1.2/1 expanded explicitly using Theorem 3.2.2/2(i)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Reduction of degree bounded integral elements of a Gauss normed finite function field extension embeds in the degree bounded integral closure of its residue algebra",
+   "results": {
+    "t": "2026-10-24T15:47:22Z",
+    "tool": "leanfinder",
+    "query": "Reduction of degree bounded integral elements of a Gauss normed finite function field extension embeds in the degree bounded integral closure of its residue algebra",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.algebraMap_intNorm",
+     "Algebra.intNormAux",
+     "Algebra.map_intNormAux",
+     "FunctionField.ringOfIntegers.instIsIntegralClosureSubtypeMemSubalgebraPolynomial",
+     "exists_integral_multiples",
+     "Algebra.intNorm",
+     "Polynomial.gaussNorm_intAdicAbv_le_one",
+     "Algebra.algebraMap_intNorm_fractionRing"
+    ],
+    "digest": "df7aaaec650b198a"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: gaussNorm_intAdicAbv_le_one only bounds polynomial coefficients; norm_root_le_spectralValue gives one ingredient but not the normalization/reduction comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spectralNorm\", \"IsIntegral\"",
+   "results": {
+    "t": "2026-10-24T15:47:23Z",
+    "tool": "loogle",
+    "query": "\"spectralNorm\", \"IsIntegral\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: gaussNorm_intAdicAbv_le_one only bounds polynomial coefficients; norm_root_le_spectralValue gives one ingredient but not the normalization/reduction comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "gauss.*(reduction|integral)|spectral.*integralClosure",
+   "results": {
+    "t": "2026-10-24T15:47:23Z",
+    "tool": "grep",
+    "query": "gauss.*(reduction|integral)|spectral.*integralClosure",
+    "sub": "",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/LinearAlgebra/Matrix/Rank.lean",
+     "Mathlib/Probability/Moments/SubGaussian.lean",
+     "Mathlib/Probability/Moments/SubGaussian.lean",
+     "Mathlib/Probability/Moments/SubGaussian.lean",
+     "Mathlib/Probability/Distributions/Gaussian/CharFun.lean",
+     "Mathlib/Probability/Distributions/Gaussian/CharFun.lean",
+     "Mathlib/Probability/Distributions/Gaussian/Multivariate.lean",
+     "Mathlib/Probability/Distributions/Gaussian/Multivariate.lean"
+    ],
+    "digest": "b84f643962bbf8a2"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: gaussNorm_intAdicAbv_le_one only bounds polynomial coefficients; norm_root_le_spectralValue gives one ingredient but not the normalization/reduction comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reduction of degree bounded integral elements of a Gauss normed finite function field extension embeds in the degree bounded integral closure of its residue algebra",
+   "results": {
+    "t": "2026-10-24T15:47:23Z",
+    "tool": "leansearch",
+    "query": "Reduction of degree bounded integral elements of a Gauss normed finite function field extension embeds in the degree bounded integral closure of its residue algebra",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "FunctionField.ringOfIntegers",
+     "integralClosure",
+     "Ring.instFiniteNormalClosure_1",
+     "Ring.NormalClosure",
+     "Ring.instFiniteNormalClosure",
+     "Ring.instIsIntegrallyClosedNormalClosure",
+     "IsGalois.integral",
+     "Polynomial.isIntegrallyClosed_iff'"
+    ],
+    "digest": "e367f769052359ff"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: gaussNorm_intAdicAbv_le_one only bounds polynomial coefficients; norm_root_le_spectralValue gives one ingredient but not the normalization/reduction comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Specialization modulo the valuation ideal preserves integrality and decreases the total degree spectral bound",
+   "results": {
+    "t": "2026-10-24T15:52:08Z",
+    "tool": "leanfinder",
+    "query": "Specialization modulo the valuation ideal preserves integrality and decreases the total degree spectral bound",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ChevalleyThm.MvPolynomialC.degBound",
+     "Polynomial.gaussNorm_intAdicAbv_le_one",
+     "PowerSeries.degree_weierstrassMod_lt",
+     "ChevalleyThm.MvPolynomialC.degBound_le_degBound",
+     "ChevalleyThm.MvPolynomialC.degBound_casesOn_succ",
+     "ChevalleyThm.MvPolynomialC.degBound_pos",
+     "norm_root_le_spectralValue",
+     "ChevalleyThm.MvPolynomialC.numBound"
+    ],
+    "digest": "796dcb0b0d09a996"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: gaussNorm_intAdicAbv_le_one only bounds polynomial coefficients; norm_root_le_spectralValue gives one ingredient but not the normalization/reduction comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reduction of integral elements of bounded total degree spectral norm in a finite Gauss valued rational function field extension preserves that degree bound",
+   "results": {
+    "t": "2026-10-24T16:43:51Z",
+    "tool": "leanfinder",
+    "query": "Reduction of integral elements of bounded total degree spectral norm in a finite Gauss valued rational function field extension preserves that degree bound",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Polynomial.degree_integralNormalization",
+     "Polynomial.integralNormalization_degree",
+     "Polynomial.natDegree_integralNormalization",
+     "Polynomial.gaussNorm_intAdicAbv_le_one",
+     "spectralNorm.spectralNorm_pow_natDegree_eq_prod_roots",
+     "denomsClearable_of_natDegree_le",
+     "spectralNorm.spectralNorm_eq_norm_coeff_zero_rpow",
+     "NumberField.Embeddings.coeff_bdd_of_norm_le"
+    ],
+    "digest": "e4379c9dd36b5252"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: integralNormalization preserves a polynomial degree but does not compare residue reductions; gaussNorm_intAdicAbv_le_one is only a coefficient norm bound. The spectral norm declarations do not state the filtered integral-closure injection."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Specialization modulo the valuation ideal preserves integrality and decreases the total degree spectral bound",
+   "results": {
+    "t": "2026-10-24T16:43:52Z",
+    "tool": "leanfinder",
+    "query": "Specialization modulo the valuation ideal preserves integrality and decreases the total degree spectral bound",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ChevalleyThm.MvPolynomialC.degBound",
+     "Polynomial.gaussNorm_intAdicAbv_le_one",
+     "PowerSeries.degree_weierstrassMod_lt",
+     "ChevalleyThm.MvPolynomialC.degBound_le_degBound",
+     "ChevalleyThm.MvPolynomialC.degBound_casesOn_succ",
+     "ChevalleyThm.MvPolynomialC.degBound_pos",
+     "norm_root_le_spectralValue",
+     "ChevalleyThm.MvPolynomialC.numBound"
+    ],
+    "digest": "796dcb0b0d09a996"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: integralNormalization preserves a polynomial degree but does not compare residue reductions; gaussNorm_intAdicAbv_le_one is only a coefficient norm bound. The spectral norm declarations do not state the filtered integral-closure injection."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reduction of integral elements of bounded total degree spectral norm in a finite Gauss valued rational function field extension preserves that degree bound",
+   "results": {
+    "t": "2026-10-24T16:42:23Z",
+    "tool": "leansearch",
+    "query": "Reduction of integral elements of bounded total degree spectral norm in a finite Gauss valued rational function field extension preserves that degree bound",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm",
+     "Polynomial.degree_integralNormalization",
+     "spectralAlgNorm",
+     "Algebra.isIntegral_norm",
+     "norm_le_spectralNorm",
+     "Algebra.intNormAux",
+     "NumberField.Embeddings.finite_of_norm_le",
+     "Polynomial.natDegree_integralNormalization"
+    ],
+    "digest": "1a68caf26b2a2a5c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: integralNormalization preserves a polynomial degree but does not compare residue reductions; gaussNorm_intAdicAbv_le_one is only a coefficient norm bound. The spectral norm declarations do not state the filtered integral-closure injection."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spectralNorm\", \"IsIntegral\"",
+   "results": {
+    "t": "2026-10-24T16:42:24Z",
+    "tool": "loogle",
+    "query": "\"spectralNorm\", \"IsIntegral\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: integralNormalization preserves a polynomial degree but does not compare residue reductions; gaussNorm_intAdicAbv_le_one is only a coefficient norm bound. The spectral norm declarations do not state the filtered integral-closure injection."
+  },
+  {
+   "tool": "grep",
+   "query": "gauss.*(reduction|integral)|spectral.*integralClosure",
+   "results": {
+    "t": "2026-10-24T16:42:24Z",
+    "tool": "grep",
+    "query": "gauss.*(reduction|integral)|spectral.*integralClosure",
+    "sub": "",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/LinearAlgebra/Matrix/Rank.lean",
+     "Mathlib/MeasureTheory/Measure/Lebesgue/VolumeOfBalls.lean",
+     "Mathlib/RingTheory/Polynomial/GaussLemma.lean",
+     "Mathlib/Probability/Moments/SubGaussian.lean",
+     "Mathlib/Probability/Moments/SubGaussian.lean",
+     "Mathlib/Probability/Moments/SubGaussian.lean",
+     "Mathlib/Probability/Distributions/Gaussian/CharFun.lean",
+     "Mathlib/Probability/Distributions/Gaussian/CharFun.lean"
+    ],
+    "digest": "9aa936491f1074e0"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: integralNormalization preserves a polynomial degree but does not compare residue reductions; gaussNorm_intAdicAbv_le_one is only a coefficient norm bound. The spectral norm declarations do not state the filtered integral-closure injection."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-gauss-rational-function-stability",
+  "date": "2026-10-24",
+  "group": "Q58"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: Norm-preserving lifts for a Tate epimorphism surjective on canonical reductions. Independent analytic input: Finite affinoid maps are finite on spectral unit balls over an algebraically closed field. Proof input: Orthogonal spectral norm on the fraction field of a finite affinoid domain. Supporting input: Stability of the Gauss fraction field of a Tate algebra. BGR stability proof input: Sections 5.3.3–5.3.4, especially Proposition 5.3.3/3 and the conclusion of Section 5.3.4, printed pp.215 and 218–220 (scan PDF pp.221 and 224–226); Section 5.3.4 removes the divisible-value-group restriction. Supporting input for the present split: Proof of Proposition 5.3.3/3, equation (4) and the monic-polynomial calculation following it, printed pp.216–217 (scan PDF pp.222–223).",
+   "via": [
+    "lem-trf-gauss-rational-function-stability",
+    "lem-trf-tate-gauss-fraction-stability",
+    "lem-trf-tate-fraction-orthogonal-spectral-norm",
+    "lem-trf-finite-affinoid-unit-ball-finiteness",
+    "lem-trf-tate-reduction-norm-lifting",
+    "lem-trf-affinoid-distinguished-presentation",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-trf-gauss-degree-filtration-reduction",
+  "worker": "stage1",
+  "summary": "Read BGR equation (4), verified integral minimal-polynomial descent via existing normal-polynomial and 00H7 Mathlib leaves, wrote coefficient reduction and the dominating-term root estimate explicitly, and constructed the residue-linear quotient injection. The norm laws on the finite reduced residue algebra, which need not be a field, come from its product decomposition and the existing product spectral-maximum node (maintainer-reader FIX: the proposed new node was dropped as a few-line consequence of existing nodes). No statement change or extra completeness/separability hypothesis.",
+  "blueprint": "Preserves the inherited historical analytic branch below lem-trf-local-term-locality (Temkin normalization/presentation input); realizes BGR 5.3.3/3 equation (4) in the parent Gauss stability proof, not a replacement of the current sk-i-curve-zero contracting-correspondence route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NO-14f4422e6",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-14f4422e6 (reviewer sub-agent of L); spot-checked: I read the item, all 5 steps, the new node, the report and every cited statement in full. The mathematics is correct. Step 1: the criterion node gives D as a nonzero finite reduced algebra; I checked R~=F(X) through the max-coefficient normalization (well-defined, ring map, kernel = {norm<1}, surjective). Step 2: 030A iterated from a field, then 00H7 with R=A and S=E, so the integral minimal polynomial has coefficients in A. Step 3: the coefficient bound puts every coefficient in k°, the reduced monic equation shows z̄ is in C, and reduction cannot raise total degree; |.|_t is a valid absolute value, so s_t(z)=max|a_i|_t^{1/i}. Step 4: the dominant-term contradiction is correct. Step 5: kernel L∩E°°=L_0, so the map is injective and F-linear. Edge cases checked: z=0, X_1^nu, nu=0, T^p-X_1, product algebras with idempotents. The new node is true but is a few-line consequence of nodes already on the base: lem-weil-pbc-finite-dim-algebra-artinian and lem-sfb-reduced-artinian-residue-product (D is a finite product of fields), lem-trf-product-minpoly-spectral-maximum (same unit, missed by the worker's duplicate search), and the field laws lem-trf-incomplete-spectral-algebra-norm and lem-trf-algebraic-spectral-norm-powers. Fix (C1/C5): I dropped the node; Step 4 now derives the five norm laws of s̄_t from these nodes before the unchanged root estimate; Step 5 refers to Step 4; proof_deps and the split_report summary were updated. Statement, stmt_deps and blueprint are unchanged. No tool_uses, no cycle, no SGA. BGR pp.137-138 and 216-217 are not in literature/ (WANTED in the report), so I checked the mathematics directly.; 1 file(s) fixed by the reviewer"
+ }
+}

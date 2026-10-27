@@ -65,7 +65,32 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-nagata-compactification",
  "unit": "sk-lem-nagata-sketch-graph",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Compactification.nonempty_properExtension"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Compactification.nonempty_properExtension",
+     "module": "WeilConjectures.Compactification.GraphExtension",
+     "lines": [
+      81,
+      287
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "lean": {
   "module": "WeilConjectures.Compactification.GraphExtension",
   "declaration": "AlgebraicGeometry.Compactification.nonempty_properExtension",
@@ -83,5 +108,25 @@
   "group": "Q120",
   "result": "pass",
   "note": "Existing attachment AlgebraicGeometry.Compactification.nonempty_properExtension (WeilConjectures.Compactification.GraphExtension, the blueprint's own lean target, Stacks 0F3Z). Only the node's lean field changed. Hypotheses match: qcqs S, separated finite-type u, compact V; the Compactification needs no density, so it is weaker and more general. ProperExtension gives the V-admissible blow-up via the landed IsAdmissible, open Vgr containing V over c.i, proper ψ, ψ⁻¹V = range v, v≫ψ = V.ι, plus a harmless iso-over-V and lying over S. Edge cases V=⊥/⊤ and empty schemes are covered; the single universe u is the source convention. lean.statement is verbatim at source lines 85-89. nt_compile --json check file: clean in 3.8 s, #check/#print as recorded, axioms propext/choice/Quot.sound only. Report has Worker report and Second reading by Q120. No findings."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $S$ be qcqs, $M\\to S$ separated of finite type, and $V\\subseteq M$ a\nquasi-compact open with a compactification $V\\subseteq Y$ over $S$. After a\n$V$-admissible blow-up of $Y$ ([sk-def-nagata-admissible]) there is an open\n$V\\subseteq V'\\subseteq Y$ and a proper map $\\psi:V'\\to M$ with\n$\\psi^{-1}(V)=V$ and $\\psi|_V=\\mathrm{id}_V$.",
+  "proof": [
+   {
+    "text": "Form the schematic closure $G$ of the graph of $V\\to M$ in $Y\\times_SM$\n([sk-lem-nagata-sketch-closure]). Its projection to $Y$ is separated of\nfinite type and is an isomorphism over $V$. By\n[sk-lem-nagata-sketch-elimination] its strict transform is an open\n$V'\\subseteq Y'$ after an admissible blow-up. Formation of the graph closure\nunder this modification gives that strict transform: both are the closure of\nthe same graph outside the exceptional divisor (Stacks 0F3Y;\n[lemma-nagata-scheme-image-strict-transform]). On the other hand $G'$ is closed in\n$Y'\\times_SM$, whose projection to $M$ is proper. Thus $V'\\simeq G'\\to M$ is\nproper. Its inverse image of $V$ is the closed graph over $V$, namely $V$\nitself. This proves the lemma; it is also Stacks 0F3Z.",
+    "uses": [
+     "sk-lem-nagata-sketch-closure",
+     "sk-lem-nagata-sketch-elimination",
+     "lemma-nagata-scheme-image-strict-transform"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

@@ -1,0 +1,296 @@
+{
+ "id": "lem-sfb-relative-tensor-faithfully-flat-comparison",
+ "kind": "statement",
+ "title": "Relative derived tensor under a faithfully flat extension of the coefficient algebra",
+ "statement": "Let $R\\to A\\to B$ be homomorphisms of commutative rings, with $A\\to B$ faithfully flat [def-weil-pbc-faithfully-flat-ring-map]. Use unbounded derived categories of modules [def-weil-abstract-derived-category] and derived tensors computed by K-flat resolutions [def-pc-module-kflat-complex]. Let $K\\in D(A)$ be arbitrary. The exact functor $-\\otimes_A B$ applied termwise to any representing $A$-complex computes $K\\otimes_A^{\\mathbf L}B$. For every degree-zero $R$-module $N$, give $K\\otimes_R^{\\mathbf L}N$ its $A$-action on the $K$ factor. There is a natural isomorphism in $D(B)$\n$$ (K\\otimes_R^{\\mathbf L}N)\\otimes_A^{\\mathbf L}B\\ \\cong\\ (K\\otimes_A^{\\mathbf L}B)\\otimes_R^{\\mathbf L}N. $$\nNaturality is in $K\\in D(A)$ and in $R$-module maps of $N$. For every pair of integers $a\\le b$, $K$, restricted to $R$, has Tor amplitude in $[a,b]$ if and only if $K\\otimes_A^{\\mathbf L}B$, restricted to $R$, has Tor amplitude in $[a,b]$. Here Tor amplitude over $R$ means vanishing of $H^i(-\\otimes_R^{\\mathbf L}N)$ for all degree-zero $R$-modules $N$ and all $i\\notin[a,b]$. Neither $A$ nor $B$ is assumed flat over $R$, and no boundedness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0DJF, lemma-no-change-tor-amplitude, statement and its total-tensor calculation, expressed as an isomorphism in D(B)."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pc-module-kflat-complex",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-pc-mixed-total-tensor"
+ ],
+ "proof": [
+  {
+   "text": "Write T(C)=C\\otimes_A B termwise. Faithful flatness implies that T is exact. The exact-functor cohomology lemma gives H^i(T(C))\\cong H^i(C)\\otimes_A B naturally, for every unbounded C, hence T preserves quasi-isomorphisms. To compare with derived extension, take an A-K-flat resolution P\\to C. Apply clause (2) of the derived-second-factor tensor lemma with base ring A, coefficient algebra B and fixed complex B[0]: C\\otimes_A^{\\mathbf L}B is represented by P\\otimes_A B. The quasi-isomorphism T(P)\\to T(C) identifies this with T(C) in D(B). Thus every representative computes derived extension, including any complex appearing below.",
+   "uses": [
+    "def-weil-pbc-faithfully-flat-ring-map",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-pc-source-module-kflat-resolution",
+    "lem-pc-derived-tensor-second-factor-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0DJF (lemma-no-change-tor-amplitude), proof; mixed derived tensor construction Tag 06Y6 (lemma-derived-base-change) and K-flat resolutions Tag 06Y4 (lemma-K-flat-resolution)."
+   }
+  },
+  {
+   "text": "Choose an arbitrary A-complex C representing K and an R-K-flat resolution F\\to N[0], which exists with no boundedness condition. Clause (2) of the derived-second-factor tensor lemma, with fixed coefficient complex C, computes N\\otimes_R^{\\mathbf L}K in D(A) by Tot(F\\otimes_R C). The signed symmetry f\\otimes c\\mapsto(-1)^{pq}c\\otimes f in bidegree (p,q) identifies this with U=Tot(C\\otimes_R F). The mixed-tensor restriction comparison identifies its underlying R-complex with the ordinary total tensor, so U represents K\\otimes_R^{\\mathbf L}N with precisely the A-action on C. Applying the same construction to T(C) gives V=Tot(T(C)\\otimes_R F), representing (K\\otimes_A^{\\mathbf L}B)\\otimes_R^{\\mathbf L}N in D(B).",
+   "uses": [
+    "lem-pc-source-module-kflat-resolution",
+    "lem-pc-derived-tensor-second-factor-functor",
+    "lem-pc-mixed-tensor-restriction-comparison",
+    "def-pc-mixed-total-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0DJF (lemma-no-change-tor-amplitude), proof; mixed derived tensor construction Tag 06Y6 (lemma-derived-base-change) and K-flat resolutions Tag 06Y4 (lemma-K-flat-resolution)."
+   }
+  },
+  {
+   "text": "Apply the mixed-total-tensor scalar-extension isomorphism to R\\to A\\to B, Q=C and the chosen F. Using M\\otimes_A(A\\otimes_R E)\\cong M\\otimes_R E from the mixed-tensor definition, and commuting the degree-zero B factor, it is the B-linear chain isomorphism T(U)\\xrightarrow{\\sim}V whose diagonal formula is (c\\otimes f)\\otimes b\\mapsto(c\\otimes b)\\otimes f. Its inverse sends (c\\otimes b)\\otimes f to (c\\otimes f)\\otimes b. Steps 1 and 2 identify its source and target with the two derived objects in the statement; localization therefore gives the required isomorphism in D(B). This uses the full chain isomorphism, not merely isomorphisms on cohomology.",
+   "uses": [
+    "new-lem-pc-mixed-total-tensor-scalar-extension",
+    "def-pc-mixed-total-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0DJF (lemma-no-change-tor-amplitude), proof; mixed derived tensor construction Tag 06Y6 (lemma-derived-base-change) and K-flat resolutions Tag 06Y4 (lemma-K-flat-resolution)."
+   }
+  },
+  {
+   "text": "The diagonal formula of step 3 commutes with maps C\\to C' and F\\to F': both routes send (c\\otimes f)\\otimes b to (u(c)\\otimes b)\\otimes v(f). For fixed F, mixed K-flat tensor preserves every quasi-isomorphism in C, and T does so by step 1. The localization universal property thus descends these natural squares to all K-morphisms in D(A), including inverses of quasi-isomorphisms. For fixed C, regard T(U) and V as functors of the R-complex F. Clause (2) of the derived-second-factor tensor lemma supplies their canonical K-flat computation, and clause (1), equivalently mixed K-flat invariance, ensures independence of the resolution F\\to N[0]. Deriving the natural chain comparison gives the corresponding natural transformation in D(R); its components are isomorphisms since they are computed by step 3 on each K-flat resolution. This is the universal left-derived-functor comparison, so its squares are the derived squares in N. Clause (3) of the same lemma identifies changes of the fixed coefficient complex with the chain maps 1_F\\otimes u; hence the two naturalities agree. Restrict the R-derived variable to degree-zero modules to obtain the stated naturality in module maps N\\to N'.",
+   "uses": [
+    "new-lem-pc-mixed-total-tensor-scalar-extension",
+    "lem-pc-mixed-tensor-kflat-quasi-iso",
+    "lem-pc-derived-tensor-second-factor-functor",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0DJF (lemma-no-change-tor-amplitude), proof; mixed derived tensor construction Tag 06Y6 (lemma-derived-base-change) and K-flat resolutions Tag 06Y4 (lemma-K-flat-resolution)."
+   }
+  },
+  {
+   "text": "Apply the exact-functor cohomology comparison of step 1 to U and the chain isomorphism T(U)\\cong V of step 3. In every integer degree i this gives H^i(K\\otimes_R^{\\mathbf L}N)\\otimes_A B\\cong H^i((K\\otimes_A^{\\mathbf L}B)\\otimes_R^{\\mathbf L}N). The left cohomology is an A-module because U is an A-complex; the right is a B-module. Thus all scalar actions needed for faithful-flat detection are the ones already specified, without assuming A or B flat over R.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0DJF (lemma-no-change-tor-amplitude), proof; mixed derived tensor construction Tag 06Y6 (lemma-derived-base-change) and K-flat resolutions Tag 06Y4 (lemma-K-flat-resolution)."
+   }
+  },
+  {
+   "text": "Fix a\\le b. If K has R-Tor amplitude in [a,b], each left cohomology module in step 5 is zero for every R-module N and i\\notin[a,b], so its tensor with B and hence the right cohomology vanish. Conversely, if all those right cohomology groups vanish, step 5 and faithful-flat tensor detection (with base A, faithfully flat module B and test module H^i(K\\otimes_R^{\\mathbf L}N)) imply that each left cohomology module is zero. Quantifying over N and i\\notin[a,b] is exactly the two Tor-amplitude conditions. Forgetting to R does not change whether a cohomology module is zero.",
+   "uses": [
+    "lem-sc-faithfully-flat-tensor-zero"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0DJF (lemma-no-change-tor-amplitude), proof; mixed derived tensor construction Tag 06Y6 (lemma-derived-base-change) and K-flat resolutions Tag 06Y4 (lemma-K-flat-resolution)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-pc-source-module-kflat-resolution",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-pc-mixed-tensor-restriction-comparison",
+  "def-pc-mixed-total-tensor",
+  "new-lem-pc-mixed-total-tensor-scalar-extension",
+  "lem-pc-mixed-tensor-kflat-quasi-iso",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-sc-faithfully-flat-tensor-zero"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0DJF (lemma-no-change-tor-amplitude), proof; its equality of total tensors is retained as the chain isomorphism and localized to D(B), with the K-flat formulation of Tags 06Y4, 064L and 06Y6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For ring homomorphisms R to A to B with A to B faithfully flat the relative Tor amplitude over R of an A complex is unchanged by tensoring with B",
+   "results": "8 hits; top=['Module.Flat.iff_flat_tensorProduct', 'Module.Flat.of_flat_tensorProduct', 'Module.FaithfullyFlat.instTensorProduct', 'Module.FaithfullyFlat.iff_exact_iff_rTensor_exact', 'Module.FaithfullyFlat.iff_exact_iff_lTensor_exact', 'Module.Flat.iff_rTensor_preserves_shortComplex_exact', 'Module.Flat.iff_lTensor_preserves_shortComplex_exact', 'Module.FaithfullyFlat.rTensor_reflects_exact']; digest=f95b02f3355b6e21; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module flatness, scalar restriction, Henselian terminology or ordinary tensor identities do not state this unbounded derived comparison or its Tor-interval assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(FaithfullyFlat|faithfullyFlat|faithfully_flat).*(Tor|amplitude)|(Tor|amplitude).*(FaithfullyFlat|faithfullyFlat|faithfully_flat)",
+   "results": "0 hits; top=[]; digest=4f53cda18c2baa0c; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module flatness, scalar restriction, Henselian terminology or ordinary tensor identities do not state this unbounded derived comparison or its Tor-interval assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Faithfully flat extension of coefficient algebra preserves relative Tor amplitude over a base ring",
+   "results": "8 hits; top=['Module.FaithfullyFlat.instTensorProduct', 'Module.Flat.of_flat_tensorProduct', 'RingHom.FaithfullyFlat', 'Module.FaithfullyFlat.toFlat', 'Algebra.FormallyUnramified.flat_of_restrictScalars', 'RingHom.Flat', 'RingHom.Flat.isStableUnderBaseChange', 'RingTheory.Sequence.IsRegular.of_faithfullyFlat']; digest=54d36719c581d6b3; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module flatness, scalar restriction, Henselian terminology or ordinary tensor identities do not state this unbounded derived comparison or its Tor-interval assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FaithfullyFlat\", \"Tor\"",
+   "results": "0 hits; top=[]; digest=4f53cda18c2baa0c; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module flatness, scalar restriction, Henselian terminology or ordinary tensor identities do not state this unbounded derived comparison or its Tor-interval assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Faithfully flat extension of the coefficient algebra preserves and reflects relative finite Tor intervals of arbitrary derived complexes",
+   "results": "8 hits; top=['Module.FaithfullyFlat.lTensor_reflects_exact', 'Module.FaithfullyFlat.rTensor_reflects_exact', 'Module.FaithfullyFlat.iff_exact_iff_rTensor_exact', 'Module.FaithfullyFlat.iff_exact_iff_lTensor_exact', 'Module.FaithfullyFlat.lTensor_exact_iff_exact', 'Module.FaithfullyFlat.trans', 'RingHom.FaithfullyFlat', 'Module.FaithfullyFlat.rTensor_exact_iff_exact']; digest=34c53acf7d0d28aa; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module flatness, scalar restriction, Henselian terminology or ordinary tensor identities do not state this unbounded derived comparison or its Tor-interval assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived tensor product commutes with flat extension of the coefficient algebra while keeping the base ring fixed",
+   "results": "8 hits; top=['Algebra.kerTensorProductMapIdToAlgHomEquiv', 'Algebra.TensorProduct.cancelBaseChange_tmul', 'Module.Flat.instTensorProduct', 'Module.Flat.baseChange', 'Algebra.kerTensorProductMapIdToAlgHomEquiv_symm_apply', 'RingHom.CodescendsAlong.algebraMap_tensorProduct', 'RingHom.Flat.isStableUnderBaseChange', 'Module.Flat.of_flat_tensorProduct']; digest=a6a6b25cf59ad792; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module flatness, scalar restriction, Henselian terminology or ordinary tensor identities do not state this unbounded derived comparison or its Tor-interval assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(FaithfullyFlat|faithfullyFlat|faithfully_flat).*(Tor|amplitude)|(Tor|amplitude).*(FaithfullyFlat|faithfullyFlat|faithfully_flat)",
+   "results": "0 hits; top=[]; digest=4f53cda18c2baa0c; subdirectory=",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module flatness, scalar-extension composition and exactness do not give the unbounded mixed derived comparison and the relative Tor-interval equivalence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative derived tensor product over a base ring commutes with faithfully flat extension of the coefficient algebra",
+   "results": "8 hits; top=['Module.Flat.of_flat_tensorProduct', 'Module.FaithfullyFlat.iff_exact_iff_rTensor_exact', 'Module.FaithfullyFlat.instTensorProduct', 'Module.FaithfullyFlat.iff_exact_iff_lTensor_exact', 'Module.Flat.iff_flat_tensorProduct', 'Module.FaithfullyFlat.iff_zero_iff_lTensor_zero', 'Module.FaithfullyFlat.subsingleton_tensorProduct_iff_right', 'RingHom.FaithfullyFlat']; digest=b8c14ed0923f3022; subdirectory=",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module flatness, scalar-extension composition and exactness do not give the unbounded mixed derived comparison and the relative Tor-interval equivalence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FaithfullyFlat\", \"Tor\"",
+   "results": "0 hits; top=[]; digest=4f53cda18c2baa0c; subdirectory=",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module flatness, scalar-extension composition and exactness do not give the unbounded mixed derived comparison and the relative Tor-interval equivalence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For arbitrary unbounded complexes of A modules relative derived tensor over R commutes with faithfully flat extension from A to B and preserves Tor amplitude",
+   "results": "8 hits; top=['Module.FaithfullyFlat.rTensor_reflects_exact', 'Module.FaithfullyFlat.iff_exact_iff_rTensor_exact', 'Module.FaithfullyFlat.rTensor_exact_iff_exact', 'Module.FaithfullyFlat.lTensor_reflects_exact', 'Module.FaithfullyFlat.lTensor_exact_iff_exact', 'Module.FaithfullyFlat.iff_exact_iff_lTensor_exact', 'Module.Flat.rTensor_shortComplex_exact', 'Module.Flat.iff_rTensor_preserves_shortComplex_exact']; digest=00bf3d07b3567891; subdirectory=",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module flatness, scalar-extension composition and exactness do not give the unbounded mixed derived comparison and the relative Tor-interval equivalence"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Tt]ensor|[Tt]ensor.*derived|torAmplitude|[Tt]or[Aa]mplitude",
+   "results": "0 hits; top=[]; digest=4f53cda18c2baa0c; subdirectory=Algebra/Homology",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module flatness, scalar-extension composition and exactness do not give the unbounded mixed derived comparison and the relative Tor-interval equivalence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension from A to a flat A algebra B commutes with tensoring an unbounded A complex by a module over R without A flat over R",
+   "results": "8 hits; top=['ModuleCat.preservesFiniteLimits_extendScalars_of_flat', 'ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat', 'ModuleCat.extendScalarsComp_hom_app_one_tmul', 'Module.Flat.rTensor_shortComplex_exact', 'Module.Flat.lTensor_shortComplex_exact', 'Module.Flat.baseChange', 'Module.Flat.iff_rTensor_preserves_shortComplex_exact', 'Module.Flat.iff_lTensor_preserves_shortComplex_exact']; digest=e42342d2fe1dfe17; subdirectory=",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module flatness, scalar-extension composition and exactness do not give the unbounded mixed derived comparison and the relative Tor-interval equivalence"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-etale-relative-tor-comparison",
+  "date": "2026-10-23",
+  "group": "NO"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Relative dualizing line of an arbitrary nodal family. Derived-complex prerequisite: proper flat duality and its normalized polynomial models, before applying the regular-equation calculation. Supporting input: Diagonal pair associated to proper flat duality over a qcqs base. Supporting input: Relative Tor amplitude across the Zariski and small etale sites. Supporting input: Tag 0DJF, lemma-no-change-tor-amplitude, statement and its total-tensor calculation, expressed as an isomorphism in D(B).",
+   "via": [
+    "lem-sfb-etale-relative-tor-comparison",
+    "lem-sfb-proper-adjoint-diagonal-pair",
+    "lem-sfb-proper-flat-dualizing-polynomial-model",
+    "lem-sfb-gorenstein-curve-relative-dualizing",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-tensor-faithfully-flat-comparison",
+  "worker": "stage1",
+  "summary": "Q133 checked Stacks 0DJF and the unbounded mixed-tensor inputs, found no exact finished project attachment, and supplied a six-step proof using existing DAG nodes only. The chain comparison in D(B), its two naturalities, exact termwise scalar extension and both directions of relative Tor-interval detection are explicit. No statement change and no new nodes.",
+  "blueprint": "Supports the inherited provenance of det-thm-sf-ctf-stability-direct-images proof (3), the relative-Tor prerequisite of lem-sfb-etale-relative-tor-comparison. Read the current latest blueprint direct-images proof and its unit; this is an algebraic tool below that route. The ancestor command reports blueprint.from.node=None in the inherited chain, retained unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-source-module-kflat-resolution",
+    "why": "Unbounded ordinary-module K-flat resolutions over A and R; a generic algebraic input, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-pc-derived-tensor-second-factor-functor",
+    "why": "Mixed derived tensor computation in D(A) or D(B), including canonical model comparison and coefficient-complex naturality, with no flatness of A over R."
+   },
+   {
+    "node": "lem-pc-mixed-tensor-restriction-comparison",
+    "why": "Identifies the underlying R-complex of the mixed tensor with the ordinary tensor, retaining the prescribed A-action."
+   },
+   {
+    "node": "new-lem-pc-mixed-total-tensor-scalar-extension",
+    "why": "Ordinary scalar-extension chain isomorphism for mixed total tensors before deriving; a purely algebraic comparison valid without flatness."
+   },
+   {
+    "node": "lem-pc-mixed-tensor-kflat-quasi-iso",
+    "why": "Quasi-isomorphism invariance in each mixed-tensor variable, used to descend naturality and make replacement independence explicit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-source-module-kflat-resolution",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-pc-mixed-tensor-restriction-comparison",
+  "new-lem-pc-mixed-total-tensor-scalar-extension",
+  "lem-pc-mixed-tensor-kflat-quasi-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q133-f712e0b7d",
+  "group": "Q133",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q133-f712e0b7d (reviewer sub-agent of L); spot-checked: I read the full Stacks 0DJF (more-algebra.tex lemma-no-change-tor-amplitude) and checked that tags 06Y4/064L/06Y6/010N/00HP resolve in tags/tags. The statement is byte-identical to live, which is still unsplit with no repair note, so this is not superseded. It is a stronger but true form of 0DJF (iso in D(B), naturality, termwise computation of -⊗_A B). I read all ten cited statements. Step 1: exactness comes from the ff definition plus the exact-functor cohomology leaf, and clause (2) of the derived-second-factor lemma applies with A→B and N=B[0]. Step 2: R-K-flat resolution F→N[0], mixed derived tensor with coefficient complex C, signed flip, and the restriction comparison gives the A- and B-actions as stated. Step 3: the scalar-extension node applies with Aq=B, Q=C; it needs no flatness and gives the chain iso T(U)≅V. Step 4: naturality from the generator formula, descended through kflat-quasi-iso (ii) and the localization universal property in K, and through clause (2)/(3) in N. Steps 5–6 are elementary: H^i(-)⊗_A B and ff zero-detection, for both directions. Edge cases: zero ring; A=B; R=ℤ, A=𝔽_p, B=𝔽_p[t] with K=𝔽_p, amplitude [-1,0] on both sides, so no R-flatness is used; ℤ→ℚ shows ff is needed. The duplicate search (0DJF, ff plus Tor amplitude) finds only the parent and site-specific nodes. The parent lem-sfb-etale-relative-tor-comparison uses the item consistent with its statement. No new nodes, no SGA. I accept the five declared tool_uses (pc module K-flat/mixed-tensor algebra lemmas) as generic black boxes. Advisory only: blueprint.from.node=null is inherited maintainer provenance, and the step TeX has no $ delimiters (backslashes intact). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RelativeTensorFaithfullyFlatComparison",
+  "declaration": "DerivedCategory.relative_tensor_faithfully_flat_comparison",
+  "file": "lean/Sheaf/Algebra/Homology/RelativeTensorFaithfullyFlatComparison.lean",
+  "statement": "theorem relative_tensor_faithfully_flat_comparison (R A B : Type u) [CommRing R] [CommRing A] [CommRing B] [Algebra R A] [Algebra A B] [Algebra R B] [IsScalarTower R A B] [Module.FaithfullyFlat A B] [HasDerivedCategory.{wR} (ModuleCat.{u} R)] [HasDerivedCategory.{wA} (ModuleCat.{u} A)] [HasDerivedCategory.{wB} (ModuleCat.{u} B)] : PreservesFiniteLimits (ModuleCat.extendScalars.{u, u, u} (algebraMap A B)) ∧ ∃ (L : DerivedCategory (ModuleCat.{u} A) ⥤ DerivedCategory (ModuleCat.{u} B)) (ε : Q ⋙ L ⟶ (ModuleCat.extendScalars (algebraMap A B)).mapHomologicalComplex (.up ℤ) ⋙ Q), L.IsLeftDerivedFunctor ε (HomologicalComplex.quasiIso (ModuleCat A) (.up ℤ)) ∧ IsIso ε ∧ ∃ (TA : DerivedCategory (ModuleCat.{u} A) ⥤ DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory (ModuleCat.{u} A)) (TB : DerivedCategory (ModuleCat.{u} B) ⥤ DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory (ModuleCat.{u} B)) (εA : (((Functor.whiskeringLeft₂ (DerivedCategory (ModuleCat.{u} A))).obj Q).obj Q).obj TA ⟶ ModuleCat.mixedTotalTensor (algebraMap R A) ⋙ (Functor.whiskeringRight _ _ _).obj Q) (εB : (((Functor.whiskeringLeft₂ (DerivedCategory (ModuleCat.{u} B))).obj Q).obj Q).obj TB ⟶ ModuleCat.mixedTotalTensor (algebraMap R B) ⋙ (Functor.whiskeringRight _ _ _).obj Q), (∀ C : CochainComplex (ModuleCat.{u} A) ℤ, (TA.obj (Q.obj C)).IsLeftDerivedFunctor (Functor.bifunctorCounit₁ εA C) (HomologicalComplex.quasiIso (ModuleCat R) (.up ℤ))) ∧ (∀ C : CochainComplex (ModuleCat.{u} B) ℤ, (TB.obj (Q.obj C)).IsLeftDerivedFunctor (Functor.bifunctorCounit₁ εB C) (HomologicalComplex.quasiIso (ModuleCat R) (.up ℤ))) ∧ (∀ (C : CochainComplex (ModuleCat.{u} A) ℤ) (F : CochainComplex (ModuleCat.{u} R) ℤ), (HomologicalComplex.quasiIso (ModuleCat R) (.up ℤ)).kFlat F → IsIso ((εA.app C).app F)) ∧ (∀ (C : CochainComplex (ModuleCat.{u} B) ℤ) (F : CochainComplex (ModuleCat.{u} R) ℤ), (HomologicalComplex.quasiIso (ModuleCat R) (.up ℤ)).kFlat F → IsIso ((εB.app C).app F)) ∧ Nonempty (TA ⋙ (Functor.whiskeringRight _ _ _).obj L ⋙ (Functor.whiskeringLeft _ _ _).obj (singleFunctor (ModuleCat.{u} R) 0) ≅ L ⋙ TB ⋙ (Functor.whiskeringLeft _ _ _).obj (singleFunctor (ModuleCat.{u} R) 0)) ∧ (∀ (a b : ℤ), a ≤ b → ∀ K : DerivedCategory (ModuleCat.{u} A), (∀ (N : ModuleCat.{u} R) (i : ℤ), i < a ∨ b < i → IsZero ((homologyFunctor (ModuleCat.{u} A) i).obj ((TA.obj K).obj ((singleFunctor (ModuleCat.{u} R) 0).obj N)))) ↔ (∀ (N : ModuleCat.{u} R) (i : ℤ), i < a ∨ b < i → IsZero ((homologyFunctor (ModuleCat.{u} B) i).obj ((TB.obj (L.obj K)).obj ((singleFunctor (ModuleCat.{u} R) 0).obj N)))))",
+  "branch": "sheaf-dag",
+  "by": "NI",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5b8ee7b6b",
+  "group": "NI",
+  "result": "pass",
+  "note": "Read Stacks 0DJF (more-algebra.tex:17262), the 4 stmt_deps (DerivedCategory, kFlat, Module.FaithfullyFlat, mixedTotalTensor = M⊗_A(A⊗_R E)) and the snapshot module/node. Clauses match: ff A→B only, no R-flatness or boundedness; L pinned by IsLeftDerivedFunctor + IsIso ε (termwise extension on any representative); TA/TB pinned by εA/εB, left-derived in the R variable and iso on R-K-flat F; Nonempty natural iso of curried functors gives L(TA(K,N[0])) ≅ TB(LK,N[0]), natural in K∈D(A) and N (node says 'there is'); Tor-interval iff for all a≤b over degree-zero R-modules. Universes u wR wA wB bound; common u forced by recorded mixedTotalTensor. Statement verbatim; only node changes are lean record + landed def stmt_dep def-pc-mixed-total-tensor. H4: derivedExtendScalars is Type(u+1) only; no ordinary-module mixed derived tensor or Tor-amplitude def node. Docstrings and six-step proof present; sorry only; report sections present. No findings."
+ }
+}

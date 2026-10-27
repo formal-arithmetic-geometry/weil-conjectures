@@ -1,0 +1,479 @@
+{
+ "id": "lem-sfb-cm-groupoid-double-restriction",
+ "kind": "statement",
+ "title": "Cohen--Macaulay saturation after two successive groupoid restrictions",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] in the universes of [def-weil-size-convention], and let $(U,R,s,t,e,i,c)$ be a groupoid scheme over $S$ [def-a1-groupoid-scheme], all structure morphisms being over $S$. A morphism $f:X\\to Y$ is Cohen--Macaulay at $x\\in X$ if it is flat at $x$ (the local ring $\\mathcal O_{X,x}$ is flat over $\\mathcal O_{Y,f(x)}$) [def-weil-flat-morphism] and the local ring at $x$ of the scheme-theoretic fibre $X_{f(x)}$ [def-pc-scheme-fibre] is Noetherian [def-weil-pbc-noetherian-ring] with depth [def-weil-pbc-depth] equal to Krull dimension [def-weil-pbc-krull-dimension-ring]. It is Cohen--Macaulay if this holds at every point. Let $g:B\\to U$ and $j:C\\to B$ be morphisms of $S$-schemes. Form the restricted groupoid $R_B=B\\times_{g,U,t}R\\times_{s,U,g}B$ with source $s_B$ the last projection and target $t_B$ the first projection [def-pc-fibre-product]. Define $h_B=s\\circ\\operatorname{pr}_R:B\\times_{g,U,t}R\\to U$, $h_{C/B}=s_B\\circ\\operatorname{pr}_{R_B}:C\\times_{j,B,t_B}R_B\\to B$, and $h_C=s\\circ\\operatorname{pr}_R:C\\times_{g\\circ j,U,t}R\\to U$. If $h_B$ and $h_{C/B}$ are Cohen--Macaulay and locally of finite presentation [def-sbc-locally-finite-presentation], then $h_C$ is Cohen--Macaulay and locally of finite presentation. No surjectivity onto $U$ is assumed for $h_B$.",
+ "source": {
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 04MX (lemma-double-restrict-property), forward implication for P = Cohen--Macaulay and locally of finite presentation, tau = fppf; Tag 04MW (lemma-double-restrict). The application is made explicitly in the final paragraph of Tag 04MZ. More on Morphisms, Tag 045V (lemma-CM-local-source-and-target) supplies fppf target locality."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-a1-groupoid-scheme",
+  "def-weil-flat-morphism",
+  "def-pc-scheme-fibre",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-pc-fibre-product",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Put $W=B\\times_{g,U,t}R$, $Z=C\\times_{gj,U,t}R$, $D=C\\times_{j,B,t_B}R_B$, and $E=W\\times_{h_B,U,h_C}Z$. Write $p:W\\to B$ for the first projection and $k:D\\to B$ for $h_{C/B}$. There is an isomorphism $E\\cong W\\times_{p,B,k}D$ over $W$. Here are the maps, including the omitted details of Tag 04MW. For any test scheme, write a point of $E$ as $((b,r_0),(z,r_1))$ with $t(r_0)=g(b)$, $t(r_1)=gj(z)$, and $s(r_0)=s(r_1)$. Send it to $((b,r_0),(z,(j(z),a,b)))$, where $a=c(r_1,i(r_0))$. The arrow $a$ has source $g(b)$ and target $gj(z)$, so the displayed element is in $D$, with $k=b$. Conversely, send $((b,r_0),(z,(j(z),a,b)))$ to $((b,r_0),(z,c(a,r_0)))$. The groupoid axioms give $c(c(r_1,i(r_0)),r_0)=r_1$ and $c(c(a,r_0),i(r_0))=a$. The formulas are compositions of structure morphisms and the unique maps into fibre products, so they define inverse scheme morphisms. Thus $E\\to W$ is the base change of $k$ along $p$; by its definition it is also the base change of $h_C$ along $h_B$.",
+   "uses": [
+    "def-a1-groupoid-scheme",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04MW, lemma-double-restrict: the two cartesian squares and the explicit inverse"
+   }
+  },
+  {
+   "text": "The Cohen--Macaulay hypothesis makes $h_B$ flat. By [lem-weil-pbc-flat-lfp-open], $V=h_B(W)$ is open in $U$. Regard it with its open subscheme structure. The corestriction $q:W\\to V$ is surjective and flat: the local rings at a point of $V$ and of $U$ coincide, by the germ definition. It is locally finitely presented as well. Indeed, choose an affine open of $V$ around the image of a given point of $W$ and then an affine source neighbourhood mapping into it. These are also affine opens of $U$ and $W$, so [lem-weil-pbc-lfp-affine-opens-finite-presentation] supplies the required finite presentation. Consequently $\\{q\\}$ is an fppf covering and hence an fpqc covering by [lem-trf-fppf-covering-is-fpqc]. The morphism $Z\\to W$, $(z,r)\\mapsto(j(z),r)$, has composite with $h_B$ equal to $h_C$. In particular $h_C$ factors as $f:Z\\to V$ followed by the open inclusion $V\\to U$. This uses surjectivity only onto $V$, not onto $U$.",
+   "uses": [
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "def-sbc-locally-finite-presentation",
+    "def-pc-fppf-site",
+    "lem-trf-fppf-covering-is-fpqc",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04MX, lemma-double-restrict-property, forward proof: replace the lower right corner by the open image; Morphisms Tag 01UA, lemma-fppf-open; Topologies Tag 022C"
+   }
+  },
+  {
+   "text": "The map $k:D\\to B$ is flat and locally finitely presented by hypothesis. By [lem-weil-pbc-flat-morphism-base-change] and clause (3) of [lem-weil-pbc-qcqs-morphism-permanence], its base change $E\\to W$ has these properties. It also has Cohen--Macaulay fibres. For $w\\in W$ with image $b\\in B$, the fibre-product universal property identifies $E_w$ with $D_b\\times_{\\operatorname{Spec}\\kappa(b)}\\operatorname{Spec}\\kappa(w)$. The fibre $D_b$ is locally of finite type over $\\kappa(b)$: a finite-presentation affine chart of $k$ gives, after tensoring with $\\kappa(b)$, a chart $\\operatorname{Spec}(\\kappa(b)[x_1,\\ldots,x_n]/(F_1,\\ldots,F_m))$ of the fibre. This uses the affine fibre-product formula, and its displayed generators verify local finite type directly. At every point above $D_b$, the first paragraph of [lem-pur-cohen-macaulay-field-extension] therefore transfers Cohen--Macaulayness to $E_w$. Combined with flatness, this proves that $E\\to W$ is Cohen--Macaulay. No finite-type hypothesis on $p:W\\to B$ is needed: the cited field-extension assertion allows arbitrary field extensions.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-pc-scheme-fibre",
+    "def-pc-fibre-product",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-finite-type-morphism",
+    "lem-pur-cohen-macaulay-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 045V, lemma-CM-local-source-and-target, fibrewise argument; arbitrary field extensions handled by Algebra Tag 00RJ, lemma-extend-field-CM-locus; Morphisms Tags 01TS and 01UB"
+   }
+  },
+  {
+   "text": "Since $Z\\to U$ factors through $V$, the fibre-product universal property identifies $E=W\\times_U Z$ with $W\\times_V Z$. Thus $E\\to W$ is the base change of $f:Z\\to V$ by the fpqc covering $\\{q:W\\to V\\}$. Applying [lem-weil-pbc-fpqc-descend-flat] and [lem-weil-pbc-fpqc-descend-locally-finite-presentation] to this covering and the properties proved in step 3 shows that $f$ is flat and locally of finite presentation.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-fpqc-descend-flat",
+    "lem-weil-pbc-fpqc-descend-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 02L2, lemma-descending-property-flat, and 02KY, lemma-descending-property-locally-finite-presentation; the descent step in Tag 04MX"
+   }
+  },
+  {
+   "text": "Fix $x\\in Z$, and write $v=f(x)$. Surjectivity of $q$ and [lem-weil-pbc-surjective-base-change] give a point $e\\in E=W\\times_V Z$ above $x$. Let $w$ be its image in $W$. Associativity of fibre products identifies $E_w$ with $Z_v\\times_{\\operatorname{Spec}\\kappa(v)}\\operatorname{Spec}\\kappa(w)$, and $e$ gives a point of this scheme above the point $x$ of $Z_v$. By step 4, $Z_v$ is locally of finite type over $\\kappa(v)$, using exactly the finite-presentation chart calculation in step 3. By step 3 the local ring of $E_w$ at $e$ is Cohen--Macaulay. Apply the reverse implication of the first paragraph of [lem-pur-cohen-macaulay-field-extension] to conclude that the local ring of $Z_v$ at $x$ is Noetherian with depth equal to dimension. As $x$ was arbitrary, $f$ is Cohen--Macaulay, its flatness having already been proved in step 4. This proves the needed target locality rather than assuming an uncited descent statement.",
+   "uses": [
+    "lem-weil-pbc-surjective-base-change",
+    "def-pc-fibre-product",
+    "def-pc-scheme-fibre",
+    "lem-pur-cohen-macaulay-field-extension",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 045V, lemma-CM-local-source-and-target, target descent via fibres; Algebra Tag 00RJ; Morphisms Tag 01S1, lemma-base-change-surjective"
+   }
+  },
+  {
+   "text": "Finally $h_C$ is $f$ followed by the inclusion of the open subscheme $V$ in $U$. At every source point, the target local ring and residue field are unchanged by this inclusion, so the local flatness and the local ring of the scheme-theoretic fibre are exactly those for $f$. Hence $h_C$ is Cohen--Macaulay. Every affine target neighbourhood witnessing finite presentation for $f$ is also an affine open of $U$, with the same ring map. The definition of locally finite presentation therefore gives that $h_C$ is locally of finite presentation. If $V$ is empty, then $Z$ is empty by step 2 and both properties hold vacuously.",
+   "uses": [
+    "def-weil-flat-morphism",
+    "def-pc-scheme-fibre",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04MX, lemma-double-restrict-property, passage from the open image back to U"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-a1-groupoid-scheme",
+  "def-pc-fibre-product",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-fppf-site",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-finite-type-morphism",
+  "lem-pur-cohen-macaulay-field-extension",
+  "lem-weil-pbc-fpqc-descend-flat",
+  "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tags 04MW (lemma-double-restrict) and 04MX (lemma-double-restrict-property), with target locality expanded using More on Morphisms Tag 045V and Algebra Tag 00RJ"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Groupoid\"",
+   "results": {
+    "t": "2026-10-23T14:43:34Z",
+    "tool": "loogle",
+    "query": "\"AlgebraicGeometry\", \"Groupoid\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary composition and base-change stability of smooth/lfp morphisms and generic descent do not identify or control the iterated groupoid saturation map."
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*restrict|Cohen.?Macaulay",
+   "results": {
+    "t": "2026-10-23T14:46:43Z",
+    "tool": "grep",
+    "query": "groupoid.*restrict|Cohen.?Macaulay",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary composition and base-change stability of smooth/lfp morphisms and generic descent do not identify or control the iterated groupoid saturation map."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohen Macaulay saturation map of an iterated groupoid restriction descends by a flat locally finitely presented cover of its open image",
+   "results": {
+    "t": "2026-10-23T14:46:44Z",
+    "tool": "leansearch",
+    "query": "Cohen Macaulay saturation map of an iterated groupoid restriction descends by a flat locally finitely presented cover of its open image",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget",
+     "AlgebraicGeometry.Flat.instResLE",
+     "AlgebraicGeometry.Flat.instMorphismRestrict",
+     "AlgebraicGeometry.UniversallyOpen.of_flat",
+     "AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact",
+     "AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'",
+     "CategoryTheory.Coverage.Saturate.top",
+     "AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact"
+    ],
+    "digest": "db04c4600a74e465"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary composition and base-change stability of smooth/lfp morphisms and generic descent do not identify or control the iterated groupoid saturation map."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Groupoid\"",
+   "results": {
+    "t": "2026-10-23T14:46:44Z",
+    "tool": "loogle",
+    "query": "\"AlgebraicGeometry\", \"Groupoid\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary composition and base-change stability of smooth/lfp morphisms and generic descent do not identify or control the iterated groupoid saturation map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two successive restrictions of a groupoid scheme with Cohen Macaulay locally finitely presented saturation maps have Cohen Macaulay locally finitely presented composite saturation",
+   "results": {
+    "t": "2026-10-23T14:46:46Z",
+    "tool": "leanfinder",
+    "query": "Two successive restrictions of a groupoid scheme with Cohen Macaulay locally finitely presented saturation maps have Cohen Macaulay locally finitely presented composite saturation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth",
+     "AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation",
+     "AlgebraicGeometry.FormallyUnramified.instIsStableUnderCompositionScheme",
+     "AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType",
+     "AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme",
+     "AlgebraicGeometry.HasRingHomProperty.stableUnderComposition",
+     "AlgebraicGeometry.isSmooth_comp",
+     "AlgebraicGeometry.HasRingHomProperty.of_comp"
+    ],
+    "digest": "17f739fe8a387265"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary composition and base-change stability of smooth/lfp morphisms and generic descent do not identify or control the iterated groupoid saturation map."
+  },
+  {
+   "tool": "grep",
+   "query": "Cohen.?Macaulay|cohen.?macaulay|CM.*fppf",
+   "results": {
+    "t": "2026-10-23T18:56:38Z",
+    "tool": "grep",
+    "query": "Cohen.?Macaulay|cohen.?macaulay|CM.*fppf",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits give flatness, local finite presentation, or generic descent interfaces, but no theorem about Cohen--Macaulay fibres of successive groupoid restrictions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohen Macaulay morphisms are local on the target in the fppf topology",
+   "results": {
+    "t": "2026-10-23T18:56:38Z",
+    "tool": "leansearch",
+    "query": "Cohen Macaulay morphisms are local on the target in the fppf topology",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsLocalAtTarget",
+     "AlgebraicGeometry.targetAffineLocally",
+     "CategoryTheory.MorphismProperty.IsLocalAtTarget.mk_of_isStableUnderBaseChange",
+     "CategoryTheory.MorphismProperty.IsLocalAtTarget.mk_of_iff",
+     "CategoryTheory.MorphismProperty.IsLocalAtTarget.mk",
+     "AlgebraicGeometry.HasAffineProperty.isLocal_affineProperty",
+     "AlgebraicGeometry.HasAffineProperty.iff_of_openCover",
+     "AlgebraicGeometry.IsLocalAtSource.isLocalAtTarget"
+    ],
+    "digest": "397b8b6b70eb92f6"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits give flatness, local finite presentation, or generic descent interfaces, but no theorem about Cohen--Macaulay fibres of successive groupoid restrictions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CohenMacaulay\"",
+   "results": {
+    "t": "2026-10-23T18:56:38Z",
+    "tool": "loogle",
+    "query": "\"CohenMacaulay\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits give flatness, local finite presentation, or generic descent interfaces, but no theorem about Cohen--Macaulay fibres of successive groupoid restrictions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohen Macaulay morphisms locally of finite presentation descend along a surjective flat locally finitely presented base change",
+   "results": {
+    "t": "2026-10-23T18:56:39Z",
+    "tool": "leanfinder",
+    "query": "Cohen Macaulay morphisms locally of finite presentation descend along a surjective flat locally finitely presented base change",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget",
+     "AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange",
+     "AlgebraicGeometry.HasRingHomProperty.descendsAlong",
+     "AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact",
+     "AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact",
+     "AlgebraicGeometry.UniversallyOpen.of_flat",
+     "AlgebraicGeometry.Flat.isStableUnderBaseChange",
+     "AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact"
+    ],
+    "digest": "38ac443942f46177"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits give flatness, local finite presentation, or generic descent interfaces, but no theorem about Cohen--Macaulay fibres of successive groupoid restrictions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Depth equals Krull dimension in the fibres of a flat morphism is invariant and descends under faithfully flat finitely presented base change",
+   "results": {
+    "t": "2026-10-23T18:57:08Z",
+    "tool": "leanfinder",
+    "query": "Depth equals Krull dimension in the fibres of a flat morphism is invariant and descends under faithfully flat finitely presented base change",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.HasGoingDown.of_flat",
+     "RingHom.Flat.propertyIsLocal",
+     "RingHom.Flat.isStableUnderBaseChange",
+     "RingHom.FaithfullyFlat.isStableUnderBaseChange",
+     "Ideal.exists_isPrime_liesOver_of_faithfullyFlat",
+     "Module.FaithfullyFlat.of_flat_of_isLocalHom",
+     "RingHom.Flat.ofLocalizationPrime",
+     "instFlatAtPrime"
+    ],
+    "digest": "6a78ff1b4320352d"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits give flatness, local finite presentation, or generic descent interfaces, but no theorem about Cohen--Macaulay fibres of successive groupoid restrictions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Saturation map of a twice restricted groupoid scheme is Cohen Macaulay if both successive saturation maps are flat locally finitely presented with Cohen Macaulay fibres",
+   "results": {
+    "t": "2026-10-23T18:58:26Z",
+    "tool": "leanfinder",
+    "query": "Saturation map of a twice restricted groupoid scheme is Cohen Macaulay if both successive saturation maps are flat locally finitely presented with Cohen Macaulay fibres",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Flat",
+     "AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme",
+     "AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension",
+     "AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth",
+     "AlgebraicGeometry.isSmoothOfRelativeDimension_comp",
+     "AlgebraicGeometry.Flat.instHasRingHomPropertyFlat",
+     "AlgebraicGeometry.Flat.instIsMultiplicativeScheme",
+     "AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension"
+    ],
+    "digest": "11b79aacaf7ae147"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits give flatness, local finite presentation, or generic descent interfaces, but no theorem about Cohen--Macaulay fibres of successive groupoid restrictions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-cm-groupoid-maximal-slice",
+  "date": "2026-10-24",
+  "group": "Q101"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: Effectivity step in quot-lemma-curves-stack via quot-lemma-spaces-stack; finite-type part (2) of bootstrap-lemma-descend-algebraic-space. Supporting input: theorem-final-bootstrap (3), applied after constructing a representable fppf cover of the descended sheaf. Subdivision of the final bootstrap: slicing the schematic kernel equivalence relation (Tag 0489). Supporting input in Tag 0489: Tag 04N0 (lemma-max-slice-quasi-finite), clauses (1)--(4), with Situation 04MY (situation-slice), specialized to an equivalence relation, whose stabilizer is the identity V. Only the local slice and its saturation map are asserted. Supporting input in the proof of Tag 04N0: maximal slice, before imposing any quasi-finiteness conclusion (04MZ). Final paragraph of Tag 04MZ: assemble the inductively constructed second slice with the first by Tag 04MX, retaining a Cohen--Macaulay locally finitely presented saturation over the original object scheme.",
+   "via": [
+    "lem-sfb-cm-groupoid-maximal-slice",
+    "lem-sfb-cm-relation-point-slice",
+    "lem-sfb-fppf-space-relation-slicing",
+    "lem-sfb-fppf-space-atlas-bootstrap",
+    "lem-sfb-space-finite-type-fppf-effectivity",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-cm-groupoid-double-restriction",
+  "worker": "stage1",
+  "summary": "Kept the statement and all statement dependencies. Expanded the two-cartesian-square argument of 04MW with both inverse formulas. Proved flat, locally finitely presented and Cohen--Macaulay descent over the open saturation image, using existing DAG nodes only. The arbitrary field-extension paragraph of the CM-locus node supplies both ascent and descent, without any Noetherian hypothesis on the groupoid base. No new nodes or attachment.",
+  "blueprint": "Supporting input beneath det-thm-sf-ctf-stability-direct-images proof (3), the existing alteration/bootstrap/slice chain: final paragraph of Tag 04MZ invokes 04MX to assemble the second slice; steps 1--6 realize that precise double-restriction input. The current blueprint was read in literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/. No imported blueprint ancestor exists in this seed chain, as blueprint_refs.py ancestor confirms.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-cohen-macaulay-field-extension",
+    "why": "Only its first paragraph: Cohen--Macaulay local rings on locally finite-type field schemes ascend and descend under arbitrary field extensions. A generic commutative-algebra tool for fibres, not a purity argument."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-flat",
+    "why": "Fpqc target descent of flatness, applied to the singleton cover of the open image; generic scheme descent, not a proper-base-change argument."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+    "why": "Fpqc target descent of local finite presentation for that same cover; generic scheme descent absent from the unit itself."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-cohen-macaulay-field-extension",
+  "lem-weil-pbc-fpqc-descend-flat",
+  "lem-weil-pbc-fpqc-descend-locally-finite-presentation"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-4ba6fa070",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-4ba6fa070 (reviewer sub-agent of L); spot-checked: I read the whole item: statement unchanged vs live (live still unsplit), 6 steps, no new nodes, no SGA. Source check: Stacks 04MW/04MX in more-groupoids.tex. R_B = B×_{g,U,t}R×_{s,U,g}B matches Stacks' R' because everything is over S. 04MX needs h_B open with {h_B} a cover of its image; the item does not assume this and derives it in step 2 from flat+lfp (lem-weil-pbc-flat-lfp-open). Step 1: I recomputed both maps with the groupoid convention of def-a1-groupoid-scheme (a=c(r_1,i r_0) has s a=g b and t a=gj z; the inverse is c(a,r_0); both composites reduce to the identity by the associativity/inverse/unit laws). This fills in the details Stacks omitted, and elementary is justified. Step 2: q:W→V is surjective, flat and lfp, so {q} is fppf hence fpqc; h_C factors through V via (z,r)↦(j z,r). Step 3: base change of flat/lfp (01U9, permanence clause (3)); the fibre E_w is D_b⊗κ(w); the first paragraph of lem-pur-cohen-macaulay-field-extension (00RJ, arbitrary K/k) carries CM up the extension, and the Noetherian relative paragraph is correctly not used. Step 4: fpqc descent of flat (02L2) and lfp (02KY). Step 5: surjective base change (01S1) lifts x to e; E_w = Z_v⊗κ(w); the reverse direction of 00RJ gives Z_v CM at x. Step 6: open immersion V⊂U changes nothing. Edge cases checked: identity groupoid (reduces to composition of CM maps), B open and strictly inside U (V≠U, so the step-2 replacement is needed), empty B or C, non-Noetherian U, non-finitely generated residue field extensions. Duplicates: rg -L for 04MW/04MX/045V/045T finds only the item and its downstream citers, so no duplicate and no cycle. Batch-5 flag: lem-trf-fppf-covering-is-fpqc is a Mathlib leaf (fppfPrecoverage_le_fpqcPrecoverage, Stacks 022C) with definition-only stmt_deps. It is the general comparison of topologies, not a step of the trace formula or Poincaré duality, and is already widely cited outside trf, so I accept it. The worker-written tool_uses (CM field extension, fpqc descent of flat and of lfp) are generic tools and I accept them. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CohenMacaulayGroupoidDoubleRestriction",
+  "declaration": "AlgebraicGeometry.cm_groupoid_double_restriction",
+  "declarations": [
+   "AlgebraicGeometry.groupoidSaturationMap",
+   "AlgebraicGeometry.groupoidRestrictionSource",
+   "AlgebraicGeometry.groupoidRestrictionTarget",
+   "AlgebraicGeometry.groupoidSecondSaturationMap",
+   "AlgebraicGeometry.cm_groupoid_double_restriction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CohenMacaulayGroupoidDoubleRestriction.lean",
+  "statement": "theorem cm_groupoid_double_restriction {S U R B C : Scheme.{u}} (p : U ⟶ S) (q : R ⟶ S) (s t : R ⟶ U) (e : U ⟶ R) (i : R ⟶ R) (c : pullback s t ⟶ R) (hG : IsGroupoidScheme s t e i c) (hs : s ≫ p = q) (ht : t ≫ p = q) (g : B ⟶ U) (j : C ⟶ B) [Flat (groupoidSaturationMap s t g)] [LocallyOfFinitePresentation (groupoidSaturationMap s t g)] (hcmB : ∀ (y : U) (x : (groupoidSaturationMap s t g).fiber y), IsNoetherianRing (((groupoidSaturationMap s t g).fiber y).presheaf.stalk x) ∧ (IsLocalRing.depth (R := ((groupoidSaturationMap s t g).fiber y).presheaf.stalk x) (((groupoidSaturationMap s t g).fiber y).presheaf.stalk x) : WithBot ℕ∞) = ringKrullDim (((groupoidSaturationMap s t g).fiber y).presheaf.stalk x)) [Flat (groupoidSecondSaturationMap s t g j)] [LocallyOfFinitePresentation (groupoidSecondSaturationMap s t g j)] (hcmCB : ∀ (y : B) (x : (groupoidSecondSaturationMap s t g j).fiber y), IsNoetherianRing (((groupoidSecondSaturationMap s t g j).fiber y).presheaf.stalk x) ∧ (IsLocalRing.depth (R := ((groupoidSecondSaturationMap s t g j).fiber y).presheaf.stalk x) (((groupoidSecondSaturationMap s t g j).fiber y).presheaf.stalk x) : WithBot ℕ∞) = ringKrullDim (((groupoidSecondSaturationMap s t g j).fiber y).presheaf.stalk x)) : Flat (groupoidSaturationMap s t (j ≫ g)) ∧ LocallyOfFinitePresentation (groupoidSaturationMap s t (j ≫ g)) ∧ ∀ (y : U) (x : (groupoidSaturationMap s t (j ≫ g)).fiber y), IsNoetherianRing (((groupoidSaturationMap s t (j ≫ g)).fiber y).presheaf.stalk x) ∧ (IsLocalRing.depth (R := ((groupoidSaturationMap s t (j ≫ g)).fiber y).presheaf.stalk x) (((groupoidSaturationMap s t (j ≫ g)).fiber y).presheaf.stalk x) : WithBot ℕ∞) = ringKrullDim (((groupoidSaturationMap s t (j ≫ g)).fiber y).presheaf.stalk x)",
+  "branch": "newtargets-dag",
+  "by": "Q58",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-214731b90",
+  "group": "Q58",
+  "result": "pass",
+  "note": "First delivery (live node has no lean record; snapshot differs only in lean). lean.statement verbatim equal to the file (diff). Clause check: IsGroupoidScheme (c≫s=snd≫s convention) + p,q,hs,ht give the relative groupoid; h_B=pullback.snd g t≫s; R_B=pullback h_B g with s_B=snd (last) and t_B=fst≫fst (first), orientation checked; h_{C/B}=snd j t_B≫s_B; h_C=groupoidSaturationMap s t (j≫g)=g∘j. CM = Flat + ∀ fibre points: Noetherian stalk ∧ IsLocalRing.depth (WithBot ℕ∞) = ringKrullDim; lfp in hypotheses and conclusion; no surjectivity or extra assumptions; single universe u, autoImplicit false. Edge cases ok: empty B/C, non-surjective h_B, non-Noetherian base, depth ⊤. Helpers are transparent pullback composites with source/blueprint docstrings; only sorry; 6-step proof docstring. H4: no Mathlib/project CM-morphism or saturation-map declaration. Note: def-sfb-restricted-groupoid-relation (Q59 restrictedEtaleRelation, opposite orientation, Over S) is not cited by the node and stmt_deps cannot change in S2; helpers accepted as node-local notation. No change, no compile."
+ }
+}

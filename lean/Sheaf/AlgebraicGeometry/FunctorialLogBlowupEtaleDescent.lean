@@ -3,10 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group Q153
 -/
-import Sheaf.AlgebraicGeometry.StrictEtaleLogBlowupProcedure
+module
+public import Sheaf.AlgebraicGeometry.StrictEtaleLogBlowupProcedure
 import WeilConjectures.AlgebraicGeometry.FiniteCoproductLfpQcqs
 import Sheaf.AlgebraicGeometry.CoherentLogIdealChartConstruction
-import Sheaf.CategoryTheory.SetSheafCoverDescent
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 import Sheaf.AlgebraicGeometry.FineFanBlowup
 import Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup
@@ -22,6 +22,8 @@ stagewise gluing of centers using VIII 3.3.7--3.3.10
 
 set_option autoImplicit false
 set_option relaxedAutoImplicit false
+
+@[expose] public section
 
 universe u
 

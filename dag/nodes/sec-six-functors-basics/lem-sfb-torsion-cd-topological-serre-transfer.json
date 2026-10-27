@@ -4,7 +4,7 @@
  "title": "Transfer from uniform affine étale torsion dimension to the topological-coefficient weak Serre hull",
  "chapter": "sec-six-functors-basics",
  "unit": "sk-prop-sf-comp-coherence",
- "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega=\\overline{\\mathbf Q}_\\ell$, a finite subextension $E/\\mathbf Q_\\ell$, and a finite commutative ring $A$ killed by a power of $\\ell$. Let $\\Lambda\\in\\{A,\\mathbf Z_\\ell,\\mathcal O_E,\\mathbf Q_\\ell,E,\\Omega\\}$, with the discrete topology on $A$ and the induced $\\ell$-adic topology on the other rings [sk-def-localizing-closure]. The associated condensed ring is $P\\mapsto C(P,\\Lambda)$ on profinite sets; all continuous functions are used, also for $\\Omega$. Let $X$ be an affine scheme [def-pc-scheme], and use the small étale and pro-étale sites [def-weil-pbc-etale-site, def-weil-pbc-proetale-site], the small-site/indexing universe [def-weil-size-convention], and ordinary internal module-object derived categories [sk-def-sfb-module-derived-pushpull].\n\nLet $d\\geq0$ be an integer. Assume that for every affine étale morphism $v:V\\to X$ [def-weil-etale-morphism], every torsion abelian sheaf $F$ on $V_{\\mathrm{et}}$, and every integer $q>d$, one has $H^q(V_{\\mathrm{et}},F)=0$ [def-sc-etale-torsion-cd]. Torsion here is local torsion, without a common annihilator.\n\nPut $\\Lambda_X=p_X^*\\Lambda$ and let $\\mathcal P_X$ be the intersection of all replete classes in $\\operatorname{Mod}_{\\Lambda_X}$ containing zero and every finite constant scalar-model constructible module [sk-def-sfb-constructible], closed under kernels and cokernels of maps between members, extensions, and all small ambient coproducts. Extension closure means that if $0\\to M'\\to M\\to M''\\to0$ is exact and $M',M''$ belong to the class, so does $M$. Then for every $M\\in\\mathcal P_X$ and every integer $q>d+2$,\n$$H^q\\bigl(R\\Gamma(X_{\\mathrm{pro\\acute et}},M[0])\\bigr)=0.$$\nHere $R\\Gamma$ is the actual right derived functor of global sections of internal $\\Lambda_X$-modules to abelian groups. No completion of modules or coefficients is made. No Noetherianity, finite-type structure map to a field, characteristic restriction, invertibility of $\\ell$, or finite-subextension-valued replacement of $C(-,\\Omega)$ is assumed. Empty $X$, $d=0$, and the zero coefficient ring are included.",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\overline{\\mathbf Q}_\\ell$, a finite subextension $E/\\mathbf Q_\\ell$, and a finite commutative ring $A$ killed by a power of $\\ell$. Let $\\Lambda\\in\\{A,\\mathbf Z_\\ell,\\mathcal O_E,\\mathbf Q_\\ell,E\\}$, with the discrete topology on $A$ and the induced $\\ell$-adic topology on the other rings [sk-def-localizing-closure]. The associated condensed ring is $P\\mapsto C(P,\\Lambda)$ on profinite sets. Let $X$ be an affine scheme [def-pc-scheme], and use the small étale and pro-étale sites [def-weil-pbc-etale-site, def-weil-pbc-proetale-site], the small-site/indexing universe [def-weil-size-convention], and ordinary internal module-object derived categories [sk-def-sfb-module-derived-pushpull].\n\nLet $d\\geq0$ be an integer. Assume that for every affine étale morphism $v:V\\to X$ [def-weil-etale-morphism], every torsion abelian sheaf $F$ on $V_{\\mathrm{et}}$, and every integer $q>d$, one has $H^q(V_{\\mathrm{et}},F)=0$ [def-sc-etale-torsion-cd]. Torsion here is local torsion, without a common annihilator.\n\nPut $\\Lambda_X=p_X^*\\Lambda$ and let $\\mathcal P_X$ be the intersection of all replete classes in $\\operatorname{Mod}_{\\Lambda_X}$ containing zero and every finite constant scalar-model constructible module [sk-def-sfb-constructible], closed under kernels and cokernels of maps between members, extensions, and all small ambient coproducts. Extension closure means that if $0\\to M'\\to M\\to M''\\to0$ is exact and $M',M''$ belong to the class, so does $M$. Then for every $M\\in\\mathcal P_X$ and every integer $q>d+2$,\n$$H^q\\bigl(R\\Gamma(X_{\\mathrm{pro\\acute et}},M[0])\\bigr)=0.$$\nHere $R\\Gamma$ is the actual right derived functor of global sections of internal $\\Lambda_X$-modules to abelian groups. No completion of modules or coefficients is made. No Noetherianity, finite-type structure map to a field, characteristic restriction, or invertibility of $\\ell$ is assumed. Empty $X$, $d=0$, and the zero coefficient ring are included.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
   "place": "Refinement proof (2), first paragraph. Agent-formulated coefficient transfer obligation, separated from affine torsion geometry. Exact source WANTED. Compare Hemo–Richarz–Scholbach, Constructible sheaves on schemes, Section 8, condition (8.1) and Lemma 8.6, only for motivation: those results do not assert this weak-Serre hull statement with all-continuous norm-topological algebraic-closure coefficients."
@@ -18,11 +18,49 @@
   "sk-def-sfb-module-derived-pushpull",
   "def-weil-etale-morphism",
   "def-sc-etale-torsion-cd",
-  "sk-def-sfb-constructible"
+  "sk-def-sfb-constructible",
+  "def-sfb-condensed-module-sections"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let P be the weak Serre coproduct hull and B the property that H^r(RΓ(X,N[0])) vanishes for every r>d+2. Put Q=P∩B. Every constructible generator is in Q: realize it as its single complex, apply the finite-complex heart bound at the identity pro-etale object, and transport along upperStarId.",
+   "uses": [
+    "lem-sfb-constructible-finite-heart",
+    "lem-sfb-finite-constructible-complex-heart-cd"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The long exact sequence of ordinary derived module sections makes B extension closed. It contains zero and is replete. Finite sums are extensions, and any small coproduct is the filtered colimit of its finite partial sums. Apply the proved filtered continuity/ind-vanishing theorem in each r>d+2. Intersecting with P gives these closure properties for Q.",
+   "uses": [
+    "lem-sfb-condensed-sections-ind-vanishing"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a map f between Q objects, the bounded-kernel theorem applies because its sources are in P and both input bounds are part of Q. It gives B(kernel f); kernel closure of P gives Q(kernel f). For the cokernel, first use 0→ker(f)→M→coim(f)→0: the degree-r long exact sequence and the kernel bound in degree r+1 give B(coim(f)). Then use 0→coim(f)→N→coker(f)→0 to obtain B(coker(f)). Transport through arbitrary universal kernels and cokernels. This proves the actual cokernel step without a new obligation.",
+   "uses": [
+    "lem-sfb-torsion-cd-bounded-serre-kernel"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Now Q is a replete weak Serre coproduct class containing every constructible generator. Apply the defining minimality of P to hM. Its B component in degree q is the required conclusion. The finite discrete specialization stays proved by its direct etale-origin argument.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-constructible-finite-heart",
+  "lem-sfb-finite-constructible-complex-heart-cd",
+  "lem-sfb-condensed-sections-ind-vanishing",
+  "lem-sfb-torsion-cd-bounded-serre-kernel"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "Paragraph (2), first paragraph. X3 replaces the refuted arbitrary-affine filtered-heart approximation with weak Serre induction on P intersected with the cohomologically bounded objects. The complete Lean assembly uses one new kernel step; cokernel closure follows by two long exact sequences. This is a decomposition, with one new unresolved kernel obligation, not an unconditional proof."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +96,45 @@
    "results": "8 hits: CategoryTheory.HasInjectiveDimensionLE, CategoryTheory.HasInjectiveDimensionLT, CategoryTheory.HasInjectiveDimensionLT.mk, CategoryTheory.hasInjectiveDimensionLT_iff, CategoryTheory.HasInjectiveDimensionLT.mk', CategoryTheory.injectiveDimension, CategoryTheory.HasProjectiveDimensionLT.mk, CategoryTheory.instHasInjectiveDimensionLTHAddNat_1",
    "date": "2026-10-22",
    "verdict": "no match: these results do not state the ordinary pro-etale topological-coefficient weak-Serre cohomological dimension transfer or its geometric affine specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform torsion etale cohomological dimension bounds ordinary pro etale cohomology with topological ell adic coefficients in a weak Serre coproduct closure",
+   "results": "8 hits: Algebra.FormallyEtale.instForallOfFinite, Algebra.etaleLocus_eq_compl_support, CategoryTheory.HasProjectiveDimensionLT.mk, Algebra.FormallyEtale.comp, CategoryTheory.HasInjectiveDimensionLT.mk, CategoryTheory.hasProjectiveDimensionLT_iff, Algebra.formallyEtale_iff, CategoryTheory.hasInjectiveDimensionLT_of_ge",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract complexes, filtered colimits, or condensed module axioms; none states this pro-étale finite-complex coefficient theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologicalDimension|weakSerreCoproductClosure|pro[Ee]tale",
+   "results": "10 hits: Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract complexes, filtered colimits, or condensed module axioms; none states this pro-étale finite-complex coefficient theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Filtered colimits of finite constructible complexes control kernels cokernels extensions and coproducts of topological coefficient module sheaves on the pro etale site",
+   "results": "8 hits: HomologicalComplex.instHasFilteredColimitsOfSize, CategoryTheory.Limits.colimitLimitIso, CategoryTheory.Sheaf.hasFilteredColimitsOfSize, CategoryTheory.Limits.filtered_colim_preservesFiniteLimits, SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat, ModuleCat.FilteredColimits.colimitCoconeIsColimit, CategoryTheory.IsFiltered.of_hasFiniteColimits, SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract complexes, filtered colimits, or condensed module axioms; none states this pro-étale finite-complex coefficient theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CondensedMod, DerivedCategory.IsLE",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract complexes, filtered colimits, or condensed module axioms; none states this pro-étale finite-complex coefficient theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary derived global sections of the weak Serre coproduct hull of constructible modules over norm topological algebraic closure of the ell adic numbers has finite cohomological amplitude",
+   "results": "8 hits: DerivedCategory.isLE_iff, LightCondensed.instIsGrothendieckAbelianLightCondMod, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.isGE_iff, Condensed.finFree, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CondensedMod.IsSolid, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract complexes, filtered colimits, or condensed module axioms; none states this pro-étale finite-complex coefficient theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-affine-profinite-family-serre-cd",
@@ -83,5 +156,86 @@
   },
   "same_as": [],
   "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-torsion-cd-topological-serre-transfer",
+  "worker": "stage1",
+  "summary": "Preserved the full statement and coefficient topology. Split the transfer into a finite-complex local heart cohomology estimate and an independent filtered-presentation/weak-Serre closure theorem, then used existing bounded-below filtered continuity. Both new nodes are statement-only obligations, with precise full-generality references WANTED; neither HRS 8.6 nor Noetherian ind-heart lemmas are misquoted as supplying them. Searched the live DAG, latest blueprint, project Lean and Mathlib; no exact attachment or leaf.",
+  "blueprint": "det-sf-comp-coherence-cocycle, Refinement isomorphisms, via det-sf-comp-coherence-refinement (2), first paragraph: the direct-sum-preservation input leads through the existing ancestor chain to this affine heart estimate. Steps 1–2 separate its finite-complex and hull-structure obligations; step 3 is the bounded-below filtered assembly.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+    "why": "Its global-sections clause gives bounded-below filtered continuity for arbitrary internal condensed coefficient modules on qcqs X. It is a generic site/cohomology tool; the unit coherence route does not replace it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-condensed-qcqs-pushforward-continuity"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O1-c5da6ce92",
+  "group": "O1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-c5da6ce92 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, all cited statements, the blueprint det-sf-comp-coherence-refinement proof (2) (same text in main-20261015 and latest) and HRS Lemma 5.3, §8 (8.1), Prop 8.2, Lemmas 8.5–8.6. The item statement is unchanged. Step 1: the hypothesis of lem-sfb-finite-constructible-complex-heart-cd (local torsion cd ≤ d on affine étale V) matches the item word for word and gives the uniform bound c = d+2 on N_K over every affine pro-étale U. Step 2: the approximation node's I_X is replete, contains 0 and C_X, and is closed under ker/coker, all extensions and small coproducts, so P_X ⊆ I_X and M ≅ colim N_{K_i}. Step 3: the global-sections clause of lem-weil-pbc-condensed-qcqs-pushforward-continuity (any condensed Λ, qcqs X, lower bound 0) gives H^q(M) = colim H^q(N_i) = 0 for q > d+2. That tool use is accepted as generic. The new nodes are HRS (8.1) made explicit plus an Ind-closure theorem. Neither restates the item, and both are plausible: tested on discrete A, F_ℓ over a separably closed point, Z_ℓ over Q_p, and empty X. The all-continuous Ω branch is correctly marked WANTED, since HRS 8.6 goes through Lemma 7.9 colimits. Duplicate search: det-ind-heart-*, lem-integral-ind-heart-realization and the proper-serre-heart nodes are all narrower (finite type over a field or Noetherian), so none is a duplicate. No SGA, no cycle. FIX (B3): the approximation node cites [def-weil-pbc-etale-site] in its statement but lacked it in stmt_deps; it is added in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-finite-complex-heart-filtered-approximation.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TorsionCdTopologicalSerreTransfer",
+  "declaration": "AlgebraicGeometry.ProEtale.torsionCd_topological_serreHeart_cohomology_vanishes",
+  "file": "lean/Sheaf/Paper/TorsionCdTopologicalSerreTransfer.lean",
+  "statement": "theorem torsionCd_topological_serreHeart_cohomology_vanishes (ℓ : ℕ) [Fact ℓ.Prime] (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (hΛ : (∃ (A : Type) (_ : CommRing A) (_ : TopologicalSpace A) (_ : DiscreteTopology A) (_ : IsTopologicalRing A), Finite A ∧ (∃ n : ℕ, ∀ a : A, (ℓ ^ n) • a = 0) ∧ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj A))) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℤ_[ℓ])) ∨ (∃ E : PadicAlgCl.FiniteIntermediateField ℓ, Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ℓ E))) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℚ_[ℓ])) ∨ (∃ E : PadicAlgCl.FiniteIntermediateField ℓ, Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E)))) (X : Scheme.{u}) [IsAffine X] (d : ℕ) (hcd : ∀ (V : Scheme.{u}) (v : V ⟶ X) [IsAffine V] [Etale v], V.HasTorsionEtaleCohomologicalDimensionLE d) (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) (hM : ObjectProperty.weakSerreCoproductClosure.{u + 1} (IsConstantModelConstructible Λ X) M) (q : ℤ) (hq : (d : ℤ) + 2 < q) : IsZero ((DerivedCategory.homologyFunctor _ q).obj ((condensedModuleSections Λ X).rightDerivedFunctor.obj ((DerivedCategory.singleFunctor _ 0).obj M)))",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5f902f0b2",
+  "group": "NP",
+  "result": "pass",
+  "note": "Read the item, all 10 stmt_dep records and the exact decls in side-live. hΛ = the first 6 branches of IsLocalizingAdmissibleCoefficient, verbatim; the 7th (padicAlgClRingObj) is correctly excluded per the node. hcd = HasTorsionEtaleCohomologicalDimensionLE (local torsion, q ∈ ℕ equivalent since d ≥ 0) on affine étale V; affine V ⇔ affine v over affine X. hM = weakSerreCoproductClosure.{u+1} of IsConstantModelConstructible: replete, ker/coker between members, extensions, Type (u+1) coproducts, zero via the empty coproduct, exactly P_X. Conclusion: IsZero of H^q of R(condensedModuleSections)(M[0]) for integer q > d+2, i.e. actual uncompleted RΓ. Added stmt_dep def-sfb-condensed-module-sections is landed (Q03) and is the owner of the decl used. lean.statement is verbatim in the file. Docstrings carry source place, WANTED caveat, blueprint tag and the 3-step plan; proof is sorry only; no defs. Consistent with consumer AffineProfiniteFamilySerreCd. Edge cases (empty X, d=0, zero ring, zero module, identity test) covered. No compile (no file changed); worker reports a clean compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261025T124348-L-1986965",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "statement_change": {
+  "date": "2026-10-25",
+  "by": "L maintenance (coefficient removal)",
+  "old_statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega=\\overline{\\mathbf Q}_\\ell$, a finite subextension $E/\\mathbf Q_\\ell$, and a finite commutative ring $A$ killed by a power of $\\ell$. Let $\\Lambda\\in\\{A,\\mathbf Z_\\ell,\\mathcal O_E,\\mathbf Q_\\ell,E,\\Omega\\}$, with the discrete topology on $A$ and the induced $\\ell$-adic topology on the other rings [sk-def-localizing-closure]. The associated condensed ring is $P\\mapsto C(P,\\Lambda)$ on profinite sets; all continuous functions are used, also for $\\Omega$. Let $X$ be an affine scheme [def-pc-scheme], and use the small étale and pro-étale sites [def-weil-pbc-etale-site, def-weil-pbc-proetale-site], the small-site/indexing universe [def-weil-size-convention], and ordinary internal module-object derived categories [sk-def-sfb-module-derived-pushpull].\n\nLet $d\\geq0$ be an integer. Assume that for every affine étale morphism $v:V\\to X$ [def-weil-etale-morphism], every torsion abelian sheaf $F$ on $V_{\\mathrm{et}}$, and every integer $q>d$, one has $H^q(V_{\\mathrm{et}},F)=0$ [def-sc-etale-torsion-cd]. Torsion here is local torsion, without a common annihilator.\n\nPut $\\Lambda_X=p_X^*\\Lambda$ and let $\\mathcal P_X$ be the intersection of all replete classes in $\\operatorname{Mod}_{\\Lambda_X}$ containing zero and every finite constant scalar-model constructible module [sk-def-sfb-constructible], closed under kernels and cokernels of maps between members, extensions, and all small ambient coproducts. Extension closure means that if $0\\to M'\\to M\\to M''\\to0$ is exact and $M',M''$ belong to the class, so does $M$. Then for every $M\\in\\mathcal P_X$ and every integer $q>d+2$,\n$$H^q\\bigl(R\\Gamma(X_{\\mathrm{pro\\acute et}},M[0])\\bigr)=0.$$\nHere $R\\Gamma$ is the actual right derived functor of global sections of internal $\\Lambda_X$-modules to abelian groups. No completion of modules or coefficients is made. No Noetherianity, finite-type structure map to a field, characteristic restriction, invertibility of $\\ell$, or finite-subextension-valued replacement of $C(-,\\Omega)$ is assumed. Empty $X$, $d=0$, and the zero coefficient ring are included.",
+  "what": "Decision of the human, 2026-10-25: the ring of all continuous maps to the algebraic closure (continuousMapRingObj (PadicAlgCl l)) is no longer an admissible coefficient. The blueprint's algebraic-closure coefficient of sk-def-localizing-closure is the finite-subextension-valued ring (sk-def-sfb-qlbar-condensed), which this statement never listed. The all-continuous case was dropped from this statement and from its Lean hypothesis; the remaining coefficients are unchanged.",
+  "source": {
+   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/_section.md",
+   "place": "coefficient list A, Z_l, O_E, Q_l, E, Qbar_l, with Qbar_l read as sk-def-sfb-qlbar-condensed"
+  },
+  "citers": [
+   {
+    "id": "lem-sfb-affine-profinite-family-serre-cd",
+    "holds": true,
+    "note": "cites it only for A, Z_l, O_E, Q_l, E or the finite-subextension-valued Qbar_l; the all-continuous coefficient is not admissible any more"
+   }
+  ]
  }
 }

@@ -1,0 +1,116 @@
+{
+ "id": "def-sfb-scalar-matrix-inclusion",
+ "kind": "definition",
+ "title": "Scalar matrix inclusion of the multiplicative group",
+ "statement": "Let $k$ be a field [def-weil-field] and $r\\geq1$. Use the group schemes and their morphisms over $k$ [def-sc-group-scheme], the multiplicative group $\\mathbf G_{m,k}=\\operatorname{Spec} k[t,t^{-1}]$ [def-sc-gm-ga], and the matrix scheme $\\operatorname{GL}_{r,k}=\\operatorname{Spec} k[x_{ij},\\det(x)^{-1}]$ [def-sc-general-linear-group]. Define the scalar matrix inclusion $s_{k,r}:\\mathbf G_{m,k}\\to\\operatorname{GL}_{r,k}$ to be the morphism induced by the $k$-algebra homomorphism $x_{ij}\\mapsto t\\delta_{ij}$, $\\det(x)^{-1}\\mapsto t^{-r}$. On every commutative $k$-algebra $A$ this is the scalar matrix map $A^\\times\\to\\operatorname{GL}_r(A)$, $z\\mapsto zI_r$, including nonreduced test algebras. The same coordinate substitution is defined also for $r=0$, when its target is the trivial matrix group.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Example 5.49, printed p.111 (Gm embedded diagonally in GL_n), and its coordinate scalar substitution."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sc-gm-ga",
+  "def-sc-general-linear-group"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The scalar matrix inclusion morphism of group schemes Gm to GL n sends an invertible scalar t to t times the identity matrix",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Matrix.GeneralLinearGroup.mem_center_iff_val_eq_scalar\", \"module\": \"Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.Basic\", \"type\": \"{g : GL n R} : g ∈ Subgroup.center (GL n R) ↔ g.val ∈ Set.range (scalar _)\", \"doc\": \"An invertible $ n \\\\times n $ matrix over a semiring $ R $ lies in the center of the general linear group $ \\\\text{GL}(n, R) $ if and only if it is a scalar matrix (i.e., a scalar multiple of the identi\"}\n  {\"name\": \"Matrix.toLin_scalar\", \"module\": \"Mathlib.LinearAlgebra.Matrix.ToLin\", \"type\": \"(r : R) : Matrix.toLin v₁ v₁ (scalar n r) = r • LinearMap.id\", \"doc\": \"For any scalar $ r $ in a commutative semiring $ R $, the linear map corresponding to the $ n \\\\times n $ scalar matrix with $ r $ on the diagonal is equal to $ r $ multiplied by the identity linear ma\"}\n  {\"name\": \"Matrix.scalar_apply\", \"module\": \"Mathlib.Data.Matrix.Basic\", \"type\": \"(a : α) : scalar n a = diagonal fun _ => a\", \"doc\": \"For any element $ a $ in a non-associative semiring $ \\\\alpha $, the scalar matrix obtained by applying the scalar homomorphism to $ a $ is equal to the diagonal matrix where every diagonal entry is $ \"}\n  {\"name\": \"Matrix.GeneralLinearGroup.map_one\", \"module\": \"Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.Defs\", \"type\": \": map f (1 : GL n R) = 1\", \"doc\": \"For ring homomorphism $ f : R \\\\to S $, the induced group homomorphism $ \\\\text{GL}(n, R) \\\\to \\\\text{GL}(n, S) $ maps the identity matrix in $ \\\\text{GL}(n, R) $ to the identity matrix in $ \\\\text{GL}(n, S\"}\n  {\"name\": \"Matrix.GeneralLinearGroup.center_eq_range_units\", \"module\": \"Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.Basic\", \"type\": \": Subgroup.center (GL n R) = (Units.map (algebraMap R _).toMonoidHom).range\", \"doc\": \"The center of the general linear group $\\\\mathrm{GL}(n, R)$ consists precisely of the scalar matrices formed by invertible elements of the semiring $R$, i.e., $\\\\mathrm{Z}(\\\\mathrm{GL}(n, R)) = \\\\{ \\\\lambd\"}\n  {\"name\": \"Matrix.scalar\", \"module\": \"Mathlib.Data.Matrix.Basic\", \"type\": \"(n : Type u) [DecidableEq n] [Fintype n] : α →+* Matrix n n α\", \"doc\": \"The ring homomorphism from a non-associative semiring $\\\\alpha$ to the square matrices $\\\\text{Matrix } n \\\\, n \\\\, \\\\alpha$ that maps each element $a \\\\in \\\\alpha$ to the scalar matrix with $a$ on the diago\"}\n  {\"name\": \"Matrix.scalarAlgHom_apply\", \"module\": \"Mathlib.Data.Matrix.Basic\", \"type\": \"(a : α) : scalarAlgHom n R a = scalar n a\", \"doc\": \"For any element $ a $ in a semiring $ \\\\alpha $, applying the scalar algebra homomorphism $ \\\\text{scalarAlgHom} $ to $ a $ yields the scalar matrix with $ a $ on the diagonal and zeros elsewhere, i.e.,\"}\n  {\"name\": \"Matrix.UnitaryGroup.embeddingGL\", \"module\": \"Mathlib.LinearAlgebra.UnitaryGroup\", \"type\": \": unitaryGroup n α →* GeneralLinearGroup α (n → α)\", \"doc\": \"The monoid homomorphism from the unitary group of $ n \\times n $ matrices over a star ring $ \\\\alpha $ to the general linear group $ \\\\operatorname{GL}(n, \\\\alpha) $, which maps each unitary matrix to its\"}\n",
+   "date": "2026-10-24",
+   "verdict": "Exact existing declaration found: AlgebraicGeometry.ProjectiveMatrixCentralCover.scalar in Sheaf.AlgebraicGeometry.ProjectiveMatrixCentralCover. Reuse it with existing:true; the new definition node records this plain scalar morphism independently of the central-cover theorem. No duplicate or renamed map is introduced."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The scalar inclusion of the multiplicative group scheme into the general linear group scheme given by t times identity",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SpecialLinearGroup.toGeneralLinearGroup\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"{R : Type u_1} →\\n  {V : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : AddCommGroup V] → [inst_2 : Module R V] → SpecialLinearGroup R V →* LinearMap.GeneralLinearGroup R V\", \"doc\": \"The canonical group homomorphism from the special linear group $\\\\text{SL}(V)$ to the general linear group $\\\\text{GL}(V)$, mapping each determinant-1 linear equivalence $A : V \\\\simeq_R V$ to itself as \"}\n  {\"name\": \"SpecialLinearGroup.coe_toGeneralLinearGroup_apply\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  (u : SpecialLinearGroup R V), ↑(SpecialLinearGroup.toGeneralLinearGroup u) = ↑(SpecialLinearGroup.toLinearEquiv u)\", \"doc\": \"For any element $ u $ in the special linear group $ \\\\text{SL}(V) $, the underlying linear equivalence of the inclusion map from $ \\\\text{SL}(V) $ to $ \\\\text{GL}(V) $ applied to $ u $ is equal to $ u $ \"}\n  {\"name\": \"Matrix.SpecialLinearGroup.toGL\", \"module\": \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Defs\", \"type\": \"{n : Type u} →\\n  [inst : DecidableEq n] →\\n    [inst_1 : Fintype n] → {R : Type v} → [inst_2 : CommRing R] → Matrix.SpecialLinearGroup n R →* GL n R\", \"doc\": \"The monoid homomorphism embedding the special linear group $\\\\text{SL}(n, R)$ into the general linear group $\\\\text{GL}(n, R)$, which maps each invertible $n \\\\times n$ matrix with determinant 1 to itsel\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.mapGL\", \"module\": \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Defs\", \"type\": \"{n : Type u} →\\n  [inst : DecidableEq n] →\\n    [inst_1 : Fintype n] →\\n      {R : Type v} →\\n        [inst_2 : CommRing R] →\\n          (S : Type u_1) → [inst_3 : CommRing S] → [Algebra R S] → Matrix.SpecialLinearGroup n R →* GL n S\", \"doc\": \"The monoid homomorphism from $\\\\text{SL}(n, R)$ to $\\\\text{GL}(n, S)$ induced by a ring homomorphism $f : R \\\\to S$, defined by first applying $f$ to each matrix entry (preserving determinant 1) and then\"}\n  {\"name\": \"Matrix.GeneralLinearGroup.upperRightHom_apply\", \"module\": \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo\", \"type\": \"∀ {R : Type u_1} [inst : Ring R] (x : R),\\n  Matrix.GeneralLinearGroup.upperRightHom x =\\n    { val := !![1, x; 0, 1], inv := !![1, -x; 0, 1], val_inv := ⋯, inv_val := ⋯ }\", \"doc\": \"For any ring $ R $ and element $ x \\\\in R $, the additive character $ \\\\chi : R \\\\to \\\\mathrm{GL}(2,R) $ maps $ x $ to the invertible $ 2 \\\\times 2 $ matrix $ \\\\begin{pmatrix} 1 & x \\\\\\\\ 0 & 1 \\\\end{pmatrix} $\"}\n  {\"name\": \"SpecialLinearGroup.toGeneralLinearGroup_toLinearEquiv_apply\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  (u : SpecialLinearGroup R V),\\n  (SpecialLinearGroup.toGeneralLinearGroup u).toLinearEquiv = SpecialLinearGroup.toLinearEquiv u\", \"doc\": \"For any element $ u $ in the special linear group $ \\\\text{SL}(V) $, the linear equivalence obtained by first mapping $ u $ to the general linear group $ \\\\text{GL}(V) $ and then converting to a linear \"}\n  {\"name\": \"Matrix.GeneralLinearGroup.map_id\", \"module\": \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Defs\", \"type\": \"∀ {n : Type u} [inst : DecidableEq n] [inst_1 : Fintype n] {R : Type v} [inst_2 : CommRing R],\\n  Matrix.GeneralLinearGroup.map (RingHom.id R) = MonoidHom.id (GL n R)\", \"doc\": \"The induced group homomorphism on the general linear group $ \\\\text{GL}(n, R) $ via the identity ring homomorphism on $ R $ is equal to the identity homomorphism on $ \\\\text{GL}(n, R) $.\"}\n  {\"name\": \"SpecialLinearGroup.instCoeFunForall\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"{R : Type u_1} →\\n  {V : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : AddCommGroup V] → [inst_2 : Module R V] → CoeFun (SpecialLinearGroup R V) fun x => V → V\", \"doc\": \"The special linear group $ \\text{SL}(V) $ over a commutative ring $ R $ consists of all invertible linear transformations (linear equivalences) of an $ R $-module $ V $ that have determinant equal to 1\"}\n",
+   "date": "2026-10-24",
+   "verdict": "Exact existing declaration found: AlgebraicGeometry.ProjectiveMatrixCentralCover.scalar in Sheaf.AlgebraicGeometry.ProjectiveMatrixCentralCover. Reuse it with existing:true; the new definition node records this plain scalar morphism independently of the central-cover theorem. No duplicate or renamed map is introduced."
+  },
+  {
+   "tool": "grep",
+   "query": "def scalar|scalar.*GeneralLinear; Mathlib AlgebraicGeometry, WeilConjectures/AlgebraicGeometry/GroupScheme, Sheaf/AlgebraicGeometry/ProjectiveMatrixCentralCover.lean; DAG exact new id and blueprint_refs scalar matrix inclusion",
+   "results": "[grep] OK 0 hit(s)\nlean/Sheaf/AlgebraicGeometry/ProjectiveMatrixCentralCover.lean:66:def scalar : StandardGroupSchemes.multiplicative k ⟶\n0 blueprint nodes match 'scalar matrix inclusion'\n",
+   "date": "2026-10-24",
+   "verdict": "Exact existing declaration found: AlgebraicGeometry.ProjectiveMatrixCentralCover.scalar in Sheaf.AlgebraicGeometry.ProjectiveMatrixCentralCover. Reuse it with existing:true; the new definition node records this plain scalar morphism independently of the central-cover theorem. No duplicate or renamed map is introduced."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-representation-smooth-lift",
+  "date": "2026-10-24",
+  "group": "Q02"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Milne Proposition 18.22, proof p.393: the scalar quotient of GL(V) and the scalar kernel of SL(V) -> PGL(V), using Example 5.49, p.111. Record the existing scalar map for the projective-representation lifting statement.",
+   "via": [
+    "lem-sfb-projective-representation-smooth-lift",
+    "lem-sfb-picard-trivial-multiplicative-cover",
+    "lem-sfb-semisimple-multiplicative-universal-cover",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveMatrixCentralCover",
+  "declaration": "AlgebraicGeometry.ProjectiveMatrixCentralCover.scalar",
+  "statement": "def scalar : StandardGroupSchemes.multiplicative k ⟶\n    GeneralLinearGroup (LinearGroupSchemes.Index.{u} r) k",
+  "branch": "newtargets-dag",
+  "by": "Q02",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Repair of duplicate-declaration return for immutable head 241835c2f50d: reuse the existing AlgebraicGeometry.ProjectiveMatrixCentralCover.scalar directly from its live module, without extracting, renaming or redeclaring it. This definition node records the plain coordinate map s:Gm -> GL, not the central-cover theorem. The existing body evaluates GL coordinates on tI and matches the node for every rank, including rank one and nonreduced test algebras. There is no new Lean module for this node."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8af3fd1f2",
+  "group": "Q02",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8af3fd1f2",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Re-delivery after the landing refusal of 241835c2, which redeclared ProjectiveMatrixCentralCover.scalar in ScalarMatrixInclusion. The extraction module and the central-cover change are dropped. New def node def-sfb-scalar-matrix-inclusion is existing:true on the live ProjectiveMatrixCentralCover.scalar: its signature is verbatim and its coordinate formula x_ij->t delta_ij, det^-1->t^-r (Milne Ex. 5.49) matches the evalAlgHom-at-tI body for every r. Its stmt_deps are only definition nodes, it has 3 search kinds, and no other def node or Sheaf declaration owns a Gm->GL map. The item module differs from the reviewed 241835c2 module only in imports (public import of the central-cover module), and lean.statement is verbatim in the file. Compared with side-live, the item node changes only stmt_deps (+4 landed def nodes and the new scalar node; no theorem stmt_dep) and lean. Clause-by-clause recheck passes: fppf quotient P with pi pinned by hscalar/hquotient; IsPullback E with p and r monoid homs; U = identity component with nilradical reduction H, group law pinned by the closed immersion; H smooth, connected, affine, finite type; F[G]->F[H] faithfully flat; ker q iso D(M) with M finite; closed j into mu_n with scalar normalisation; rho-bar = a o q; no prime-to-p assumption. Edge cases n=1, char|n, M=0 and universes are covered. No hollow defs; only sorry; source-place and blueprint docstrings with all 7 steps; report sections present. No compile run because no file was changed. Advisory only: def-sfb-projective-linear-quotient is not cited, and the inline specification is accepted."
+ }
+}

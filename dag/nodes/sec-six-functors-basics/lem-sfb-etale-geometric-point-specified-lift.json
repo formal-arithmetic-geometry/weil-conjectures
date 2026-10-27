@@ -1,0 +1,233 @@
+{
+ "id": "lem-sfb-etale-geometric-point-specified-lift",
+ "kind": "statement",
+ "title": "Lift an algebraic-space geometric point over a specified etale chart point",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $X,U$ be algebraic spaces over $S$ [def-trf-algebraic-space], and let $e:U\\to X$ be an etale morphism, meaning a representable map whose base change by every scheme over $X$ is etale [def-trf-algebraic-space, def-weil-etale-morphism]. For an algebraic space $Z$, let $|Z|$ be the set of equivalence classes of field-valued points $\\operatorname{Spec}L\\to Z$, where two such points are equivalent if their maps agree over a common field extension. Let $\\Omega$ be an algebraically closed field and $\\bar x:\\operatorname{Spec}\\Omega\\to X$ a geometric point, and write $x\\in|X|$ for its image. For every $u\\in|U|$ with $e(u)=x$, there is $\\bar u:\\operatorname{Spec}\\Omega\\to U$ with image $u$ and $e\\bar u=\\bar x$. In particular the field $\\Omega$ need not be enlarged.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 05VN, lemma-geometric-lift-to-usual, statement and proof."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism",
+  "def-a1-algebraic-space-point-classes",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "Put $T=\\operatorname{Spec}\\Omega$ and form the sheaf fibre product $P=T\\times_XU$, with projections $a:P\\to T$ and $b:P\\to U$. By the definition of a representable etale map in [def-trf-algebraic-space], $P$ is represented by a scheme and $a$ is etale: these are precisely the requirements on the base change of $e$ by the scheme map $\\bar x:T\\to X$. The fibre-product identity is $e\\circ b=\\bar x\\circ a$.",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 05VN, lemma-geometric-lift-to-usual, proof; Tag 03H4, lemma-points-cartesian, proof."
+   }
+  },
+  {
+   "text": "Choose a field-valued representative v of u. First verify that the common-field relation defining point classes is an equivalence: reflexivity and symmetry are immediate; for transitivity, take the scheme pullback of the two common field spectra over the middle field spectrum. Mathlib Scheme.exists_preimage_of_isPullback gives a point because the middle spectrum has one point; the residue field of this pullback point gives the common extension and the pullback equation gives agreement of restrictions. Thus Quot.eqvGen_exact applied to e(u) = [xbar] supplies one common-field witness. Evaluate the representing pullback square from step 1 on that field spectrum. Types.exists_of_isPullback gives a map j into the representing scheme P whose composite with b is the restriction of v. Put p = j(default). The class of b at p is u: any field-valued scheme map factors through the residue field of its image, and this factorization witnesses equality with schemePointMap.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-a1-algebraic-space-point-classes"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 05VN, lemma-geometric-lift-to-usual, proof; Tag 03H4, lemma-points-cartesian, proof."
+   }
+  },
+  {
+   "text": "Apply Scheme.exists_fac_of_etale_of_isSepClosed from [lem-weil-pbc-etale-cover-geometric-point-lift] directly to the etale projection a:P→Spec Ω, the identity of Spec Ω, and p. The required equality of image points holds because Spec Ω has one point. Algebraic closedness implies separable closedness. The lemma gives l:Spec Ω→P with l≫a=id and l(default)=p. The structure map identity for a makes l a map over S.",
+   "uses": [
+    "lem-weil-pbc-etale-cover-geometric-point-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PR, lemma-geometric-lift-to-cover; prescribed-point form from Morphisms Tag 02GL, lemma-etale-over-field, as stated in the cited Mathlib leaf."
+   }
+  },
+  {
+   "text": "Set ubar = yoneda.map(l)≫b. The representing square and l≫a=id imply ubar≫e=xbar. Factor both the field-valued map l and the temporary common-field map j through the residue fields of their image points; since their images are both p, their composites with b have the same point class. The latter class equals u by the common-field witness from step 2. The source of ubar is the original Spec Ω, so the temporary common extension does not enlarge its field.",
+   "uses": [
+    "def-a1-algebraic-space-point-classes"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 05VN, lemma-geometric-lift-to-usual, proof; Tag 03H4, lemma-points-cartesian, proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-a1-algebraic-space-point-classes",
+  "lem-weil-pbc-etale-cover-geometric-point-lift"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 05VN, lemma-geometric-lift-to-usual, proof, with the common-field point construction of Tag 03H4; the etale-scheme-over-field step is supplied by the existing scheme lifting leaf (Tag 03PR / Morphisms Tag 02GL). Lean implementation expands equality in Quot by proving equivalence of the common-field relation, using the residue field of a scheme pullback point (Morphisms Tag 01RZ), and compares field-valued maps with schemePointMap through residue-field factorization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an etale morphism of algebraic spaces every geometric point lifts over any specified source point above its image with the same algebraically closed field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only or standard-etale presentation results do not state this assertion for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale morphism and algebraically closed field geometric lift centered at prescribed point of source",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"StandardEtalePair.homEquiv\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] → (P : StandardEtalePair R) → (P.Ring →ₐ[R] S) ≃ { x // P.HasMap x }\", \"doc\": \"For a commutative ring $R$, a standard étale pair $P=(f,g)$ over $R$, and a commutative $R$-algebra $S$, there is a natural equivalence:\\\\n$$ \\\\operatorname{Hom}_{R\\\\text{-alg}}(P.\\\\text{Ring}, S) \\\\cong \\\\\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"RingHom.Etale.toAlgebra\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S}, f.Etale → Algebra.Etale R S\", \"doc\": \"If $ f : R \\\\to S $ is an étale ring homomorphism between commutative rings, then the induced algebra structure on $ S $ over $ R $ is étale, meaning $ S $ is finitely presented as an $ R $-algebra and\"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} {n : ℕ},\\n  RingHom.IsStandardSmoothOfRelativeDimension n f → ∃ g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"For any ring homomorphism $ f : R \\\\to S $ that is standard smooth of relative dimension $ n $, there exists an étale ring homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ such that $ g \\\\circ C = f $, whe\"}\n  {\"name\": \"StandardEtalePair.HasMap.map\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] {P : StandardEtalePair R} {x : S},\\n  P.HasMap x → ∀ (f : S →ₐ[R] T), P.HasMap (f x)\", \"doc\": \"For any $ R $-algebra homomorphism $ \\\\phi: S \\\\to T $, if $ x \\\\in S $ satisfies $ f(x) = 0 $ and $ g(x) $ is a unit in $ S $, then $ \\\\phi(x) $ satisfies $ f(\\\\phi(x)) = 0 $ and $ g(\\\\phi(x)) $ is a unit \"}\n  {\"name\": \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.IsStandardSmooth → ∃ n g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"Given a standard smooth ring homomorphism $ f : R \\to S $, there exists a natural number $ n $ and an étale ring homomorphism $ g : R[x_1,\\\\ldots,x_n]_f \\\\to S $ such that $ g $ composed with the canonic\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only or standard-etale presentation results do not state this assertion for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsEtale, IsAlgClosed",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'AlgebraicGeometry.IsEtale'",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only or standard-etale presentation results do not state this assertion for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift a geometric point through an etale algebraic space morphism at any specified point of its fibre",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift_fac\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \"(H' : Set.range g.base ⊆ Set.range f.base) : lift f g H' ≫ f = g\", \"doc\": \"For an open immersion $ f: X \\to Y $ and a morphism $ g: Z \\to Y $ whose underlying continuous map has image contained in the image of $ f $, the composition of the lifted morphism $ \\\\text{lift}(f, g) $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.asFiber\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (x : X) : f.fiber (f x)\", \"doc\": \"The function maps a point $ x $ in scheme $ X $ to the fiber of the morphism $ f $ over $ f(x) $, which is the set of all points in $ X $ mapping to $ f(x) $ under $ f $, equipped with the subspace to\"}\n  {\"name\": \"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"module\": \"Mathlib.AlgebraicGeometry.SpreadingOut\", \"type\": \"{U : X.Opens} {x : X} (hxU) (φ : A ⟶ X.presheaf.stalk x) (φRA : R ⟶ A) (φRX : R ⟶ Γ(X, U))\\n  (hφRA : RingHom.FiniteType φRA.hom) (e : φRA ≫ φ = φRX ≫ X.presheaf.germ U x hxU) :\\n  ∃ (V : X.Opens) (hxV : x ∈ V), V ≤ U ∧ RingHom.range φ.hom ≤ RingHom.range (X.presheaf.germ V x hxV).hom\", \"doc\": \"Given a point $x$ in an open subset $U$ of a scheme $X$, a morphism $\\\\phi: A \\\\to \\\\mathcal{F}_x$ to the stalk of a presheaf $\\\\mathcal{F}$ at $x$, and compatible ring homomorphisms $\\\\phi_{RA}: R \\\\to A$ \"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift.congr_simp\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.LocallyRingedSpace} (f f_1 : X ⟶ Z) (e_f : f = f_1) (g g_1 : Y ⟶ Z) (e_g : g = g_1)\\n  [H : AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion f]\\n  (H' :\\n    Set.range ⇑(CategoryTheory.ConcreteCategory.hom g.base) ⊆ Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base\", \"doc\": \"Given an open immersion $ f: X \\to Y $ between locally ringed spaces and a morphism $ g: Z \\to Y $ whose underlying continuous map has image contained in the image of $ f $, there exists a morphism $ Z \"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.lift\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"(H' : Set.range g ⊆ Set.range f) : Y ⟶ X\", \"doc\": \"Given an open immersion $ f: X \\to Y $ and a morphism $ g: Z \\to Y $ whose underlying continuous map has image contained in the image of $ f $, this constructs a morphism $ Y \\to X $ by taking the invers\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.lift\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y Z : Scheme.{u}} (f : X ⟶ Z) (g : Y ⟶ Z) [IsClosedImmersion f] (H : f.ker ≤ g.ker) : Y ⟶ X\", \"doc\": \"Given a closed immersion $ f: X \\to Z $ and a morphism $ g: Y \\to Z $ whose kernel ideal sheaf contains that of $ f $, this constructs a morphism $ Y \\to X $ by factoring through the image subschemes. Sp\"}\n  {\"name\": \"RingHom.FormallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R → S $ between commutative rings is formally étale if the induced algebra structure on $ S $ over $ R $ satisfies the infinitesimal lifting property characterizing étale mor\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.lift_app\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"{X Y U : Scheme.{u}} (f : U ⟶ Y) (g : X ⟶ Y) [IsOpenImmersion f] (H) (V : U.Opens) :\\n  (lift f g H).app V =\\n    (f.appIso V).inv ≫\\n      g.app (f ''ᵁ V) ≫ X.presheaf.map (eqToHom <| app_eq_invApp_app_of_comp_eq_aux _ _ _ (lift_fac ..).symm V).op\", \"doc\": \"Let $f: U \\\\to Y$ be an open immersion of schemes and $g: X \\\\to Y$ be a morphism of schemes whose image is contained in the image of $f$. Let $h: X \\\\to U$ be the unique morphism lifting $g$ along $f$, \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only or standard-etale presentation results do not state this assertion for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "geometric.*lift|lift.*geometric|exists.*lift",
+   "results": "[grep] OK 15 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"line\": \"186\", \"text\": \"Then there exists a lift `φₗ : 𝒜_{(x₀)} →+* O` for some `x₀`\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"line\": \"130\", \"text\": \"  obtain ⟨l, hl₁, hl₂⟩ := (H { R := A, K := X.residueField x', commSq := ⟨w⟩, .. }).exists_lift\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"line\": \"208\", \"text\": \"  obtain ⟨l₀, hl₁, hl₂⟩ := (hf commSq').exists_lift\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\", \"line\": \"73\", \"text\": \"lemma isIntegral_of_exists_lift {W : WeierstrassCurve K}\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\", \"line\": \"173\", \"text\": \"    apply isIntegral_of_exists_lift R\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\", \"line\": \"188\", \"text\": \"    apply isIntegral_of_exists_lift R\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"line\": \"245\", \"text\": \"lemma exists_lift_of_germInjective_aux {U : X.Opens} {x : X} (hxU)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"line\": \"282\", \"text\": \"lemma exists_lift_of_germInjective {x : X} [X.IsGermInjectiveAt x] {U : X.Opens} (hxU : x ∈ U)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"line\": \"288\", \"text\": \"  obtain ⟨V, hxV, iVU, hV⟩ := exists_lift_of_germInjective_aux hxU φ φRA φRX hφRA e\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"line\": \"353\", \"text\": \"    exists_lift_of_germInjective (R := Γ(S, U)) (A := Γ(Y, V)) (U := sX ⁻¹ᵁ U) (x := x) hxU\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/Directed.lean\", \"line\": \"72\", \"text\": \"lemma exists_lift_trans_eq {i j : 𝒰.I₀} (x : (pullback (𝒰.f i) (𝒰.f j)).carrier) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/Directed.lean\", \"line\": \"82\", \"text\": \"  obtain ⟨k, fi, fj, xk, rfl⟩ := 𝒰.exists_lift_trans_eq z\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/Directed.lean\", \"line\": \"107\", \"text\": \"    · use ⟨(𝒰.exists_lift_trans_eq x).choose, (𝒰.exists_lift_trans_eq x).choose_spec.choose,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/Directed.lean\", \"line\": \"108\", \"text\": \"        (𝒰.exists_lift_trans_eq x).choose_spec.choose_spec.choose⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/Directed.lean\", \"line\": \"109\", \"text\": \"      exact (𝒰.exists_lift_trans_eq x).choose_spec.choose_spec.choose_spec\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only or standard-etale presentation results do not state this assertion for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"lift\"",
+   "results": "[loogle] OK 5 hit(s)\n  {\"name\": \"StandardEtalePair.lift\", \"module\": \"Mathlib.RingTheory.Etale.StandardEtale\", \"type\": \" {R : Type u_1} {S : Type u_2} [CommRing R] [CommRing S] [Algebra R S] (P : StandardEtalePair R) (x : S) (h : P.HasMap x) : P.Ring →ₐ[R] S\", \"doc\": \"The map `R[X][Y]/⟨f, Yg-1⟩ →ₐ[R] S` sending `X` to `x`, given `P.HasMap x`.\"}\n  {\"name\": \"StandardEtalePair.lift_X_left\", \"module\": \"Mathlib.RingTheory.Etale.StandardEtale\", \"type\": \" {R : Type u_1} [CommRing R] (P : StandardEtalePair R) : P.lift P.X ⋯ = AlgHom.id R P.Ring\", \"doc\": \"\"}\n  {\"name\": \"StandardEtalePair.lift_X\", \"module\": \"Mathlib.RingTheory.Etale.StandardEtale\", \"type\": \" {R : Type u_1} {S : Type u_2} [CommRing R] [CommRing S] [Algebra R S] (P : StandardEtalePair R) (x : S) (h : P.HasMap x) : (P.lift x h) P.X = x\", \"doc\": \"\"}\n  {\"name\": \"StandardEtalePresentation.lift_bijective\", \"module\": \"Mathlib.RingTheory.Etale.StandardEtale\", \"type\": \" {R : Type u_4} {S : Type u_5} [CommRing R] [CommRing S] [Algebra R S] (self : StandardEtalePresentation R S) : Function.Bijective ⇑(self.lift self.x ⋯)\", \"doc\": \"\"}\n  {\"name\": \"Algebra.WeaklyEtale.ulift_iff\", \"module\": \"Mathlib.RingTheory.Etale.Weakly\", \"type\": \" {R : Type u_1} {S : Type u_2} [CommRing R] [CommRing S] [Algebra R S] : Algebra.WeaklyEtale (ULift.{u₁, u_1} R) (ULift.{u₂, u_2} S) ↔ Algebra.WeaklyEtale R S\", \"doc\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only or standard-etale presentation results do not state this assertion for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|geometric.*lift|lift.*geometric",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme-only etale or standard-etale algebra declarations do not state the algebraic-space assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An etale map of algebraic spaces lifts a geometric point to any specified point of its fibre",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale.of_comp, Algebra.Etale.formallyEtale, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsOpenImmersion.lift_app",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme-only etale or standard-etale algebra declarations do not state the algebraic-space assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"lift\"",
+   "results": "5 hits; StandardEtalePair.lift, StandardEtalePair.lift_X_left, StandardEtalePair.lift_X, StandardEtalePresentation.lift_bijective, Algebra.WeaklyEtale.ulift_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme-only etale or standard-etale algebra declarations do not state the algebraic-space assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a representable etale morphism of algebraic spaces a geometric point lifts at any prescribed point above it without extending the algebraically closed field",
+   "results": "8 hits; StandardEtalePresentation.lift_bijective, StandardEtalePair.homEquiv_symm_apply, AlgebraicGeometry.Scheme.Etale, StandardEtalePair.lift_X, AlgebraicGeometry.Scheme.instFullEtaleOverForget, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme-only etale or standard-etale algebra declarations do not state the algebraic-space assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A prescribed source point above a geometric point lifts to a map from the same algebraically closed field through an etale morphism",
+   "results": "8 hits; StandardEtalePair.homEquiv_symm_apply, StandardEtalePair.hasMap_X, AlgebraicGeometry.Scheme.Etale, StandardEtalePair.HasMap.map, StandardEtalePair.lift_X, StandardEtalePair.lift, AlgebraicGeometry.IsEtale, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme-only etale or standard-etale algebra declarations do not state the algebraic-space assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-strict-local-flatness",
+  "date": "2026-10-23",
+  "group": "Q98"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas. Proof of the unramified-diagonal/etale-atlas criterion: Fibrewise regular equations cut a flat slice of a stack presentation. Supporting input: Etale local rings on charts and flat morphisms of algebraic spaces. In the present split: the choice of a lifted geometric point centered at the selected scheme-chart point in 04NG, via 05VN.",
+   "via": [
+    "lem-sfb-space-strict-local-flatness",
+    "lem-sfb-stack-fibre-regular-slice-flat",
+    "lem-sfb-unramified-diagonal-etale-atlas",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-etale-geometric-point-specified-lift",
+  "worker": "stage1",
+  "summary": "Checked Tag 05VN and its point-fibre argument (03H4). Kept the statement, constructed the representable scheme fibre and a point centered over the prescribed class, then used the existing prescribed-point scheme lifting Mathlib leaf. No new nodes or Lean attachments. All cited statements were read and quoted in citations.json.",
+  "blueprint": "The inherited from.place locates this prerequisite in det-thm-sf-ctf-stability-direct-images (3), via lem-sfb-space-strict-local-flatness: lift the geometric point over the selected chart point. The current latest direct-images proof no longer spells out that alteration subroute. This local Stacks prerequisite is proved without changing either chapter or unit route. blueprint_refs.py ancestor returns None; retained the inherited from.node=null and via chain.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NX-17a346e22",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-17a346e22 (reviewer sub-agent of L); spot-checked: I read the item and every cited node in full, Stacks spaces-properties 05VN (lemma-geometric-lift-to-usual) and 03H4 (lemma-points-cartesian) together with the definition of points, and the Mathlib source of exists_fac_of_etale_of_isSepClosed (EtalePoint.lean ~36-54), which proves l default = x. No repair note exists, so this is an ordinary one-level split with no new nodes. The statement is unchanged; its representable étale map is a special case of 05VN and is enough for the only citer (strict-local-flatness step 3, scheme chart). Step 1 instantiates def-trf-algebraic-space: P is a scheme and a is étale. Step 2 is the three-line 03H4 common-field argument, correctly marked elementary; b(p)=u holds with the same field M in one equivalence step, so transitivity is not needed. Step 3: all hypotheses of the prescribed-point clause of the Mathlib leaf lem-weil-pbc-etale-cover-geometric-point-lift hold (singleton jointly surjective family over Spec Ω, id_T is a geometric point because Ω is algebraically closed). Step 4: ū=b s lies over u and e ū = x̄. proof_deps equal the union of the uses. The only non-definition dependency is a Mathlib leaf, so no tool_uses entry is needed, and no SGA source is used. The duplicate scan for 05VN and for geometric-point lift statements over algebraic spaces found nothing. Edge cases checked: empty U, the identity, a disjoint union of copies of Spec Ω, non-quasi-compact e. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleGeometricPointSpecifiedLift",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_etale_geometricPoint_specified_lift",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGeometricPointSpecifiedLift.lean",
+  "statement": "theorem exists_etale_geometricPoint_specified_lift {S : Scheme.{u}} {X U : AlgebraicSpace S} (e : U ⟶ X) (he : IsEtale e.hom.hom) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (xbar : yoneda.obj (Over.mk s) ⟶ X.obj.obj) (u : Point U.obj.obj) (hu : mapPoint e.hom.hom u = Quot.mk _ ⟨Ω, s, yonedaEquiv xbar⟩) : ∃ ubar : yoneda.obj (Over.mk s) ⟶ U.obj.obj, Quot.mk _ ⟨Ω, s, yonedaEquiv ubar⟩ = u ∧ ubar ≫ e.hom.hom = xbar",
+  "branch": "sheaf-dag",
+  "by": "Q125",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8fa833252",
+  "group": "Q125",
+  "result": "pass",
+  "note": "Clause-by-clause match of exists_etale_geometricPoint_specified_lift with node and Stacks 05VN/03H4: AlgebraicSpace S, IsEtale e.hom.hom (representable étale, no extra hypotheses), Point/Rel common-extension classes, mapPoint for e(u)=x, xbar as yoneda map from Over.mk s; conclusion ∃ ubar over the same Ω and s with class u and ubar ≫ e = xbar. Single universe u consistent with point-class defs. Edge cases (empty U/X, identity, disjoint unions, non-qc) fine. lean.statement verbatim; added stmt_deps def-a1-algebraic-space-point-classes and def-sfb-proper-curve-moduli are landed, unchanged, and own Point/mapPoint; no duplicate point map; no defs, sorry proof, source/blueprint docstrings with proof steps; Mathlib leaf exists_fac_of_etale_of_isSepClosed confirmed. No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261026T083515-L-2373341",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

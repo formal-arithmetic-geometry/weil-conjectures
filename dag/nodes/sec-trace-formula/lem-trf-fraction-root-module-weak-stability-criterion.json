@@ -1,0 +1,345 @@
+{
+ "id": "lem-trf-fraction-root-module-weak-stability-criterion",
+ "kind": "statement",
+ "title": "Bounded separation of root modules implies weak stability of a fraction field",
+ "statement": "Let $A$ be an integral domain with a real-valued multiplicative nonarchimedean absolute value $G$, and let $K=\\operatorname{Frac}(A)$ be its fraction field [def-weil-field], with $|a/b|=G(a)/G(b)$, assumed nontrivial. Suppose $\\operatorname{char}(K)=p>0$. In an algebraic closure $\\overline K$, put $K^{1/p}=\\{z:z^p\\in K\\}$ and $A^{1/p}=\\{z:z^p\\in A\\}$, endowed with $N(z)=|z^p|^{1/p}$. Suppose that for every finitely generated $A$-submodule $M\\subseteq A^{1/p}$ (that is, $M=\\sum_{j=1}^r Am_j$ for finitely many $m_j$) and every nonzero $x\\in M$, there is an $A$-linear map $\\lambda:M\\to A$ with $\\lambda(x)\\ne0$ and a real $B>0$ such that $G(\\lambda(y))\\le B N(y)$ for all $y\\in M$. Then for every finite extension $L/K$, every $K$-basis $v_1,\\ldots,v_d$ of $L$, and its minimal-polynomial spectral norm $s_{L/K}$ [lem-trf-incomplete-spectral-algebra-norm], there are real $c,C>0$ such that $$c\\max_i|a_i|\\le s_{L/K}(\\sum_i a_iv_i)\\le C\\max_i|a_i|\\qquad(a_i\\in K).$$ Neither completeness of $K$ nor separability of $L/K$ is assumed.",
+ "source": {
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Lemma 3.5.3/2, printed p.155 (scan PDF p.163), with the definition of b-separable modules and weak stability in 3.5.2/1.",
+  "url": "https://math.arizona.edu/~cais/scans/BGR-Non_Archimedean_Analysis.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "lem-trf-incomplete-spectral-algebra-norm"
+ ],
+ "proof": [
+  {
+   "text": "Put $K_1=K^{1/p}$ and $A_1=A^{1/p}$. The characteristic-$p$ identities $(z+w)^p=z^p+w^p$ and $(az)^p=a^pz^p$ show directly that $K_1$ is a field, $A_1$ an $A$-submodule, and $N$ a definite multiplicative nonarchimedean absolute value extending $|\\cdot|$ on $K$. Fix any finite-dimensional $V\\subseteq K_1$ with basis $v_1,\\ldots,v_r$. If $r=0$, take both coordinate constants to be $1$. Otherwise write $v_i^p=b_i/a_i$ with $a_i,b_i\\in A$, $a_i\\ne0$, and put $m_i=a_iv_i$. Then $m_i^p=a_i^{p-1}b_i\\in A$, so $M=\\sum_i Am_i\\subseteq A_1$ is finitely generated and has $K$-span $V$. For $y=\\sum_i q_im_i$, writing $q_i=c_i/d_i$ in $K$ and taking $d=\\prod_i d_i\\ne0$ gives $dy\\in M$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Lemma 3.5.3/2, printed p.155, and its preceding denominator calculation on p.154; bounded separation to weak cartesianness as in Lemma 2.3.3/3. Explicit module localization and matrix estimates supplied by the agent; local PDF WANTED."
+   }
+  },
+  {
+   "text": "Given an $A$-linear $\\lambda:M\\to A$ with $G(\\lambda(x))\\le B N(x)$ on $M$, define $h(y)=\\lambda(dy)/d\\in K$ for any nonzero $d\\in A$ with $dy\\in M$. This is independent of $d$: if also $ey\\in M$, then $e\\lambda(dy)=\\lambda(edy)=d\\lambda(ey)$. For $y,z\\in V$ choose one denominator putting both in $M$; additivity of $\\lambda$ gives $h(y+z)=h(y)+h(z)$. For $q=b/a\\in K$, choose $dy\\in M$; then $ad(qy)=bdy\\in M$, giving $h(qy)=\\lambda(bdy)/(ad)=q h(y)$. Thus $h$ is $K$-linear. Moreover $$|h(y)|=G(\\lambda(dy))/G(d)\\le B N(dy)/G(d)=B N(y).$$ This uses $N(dy)=G(d)N(y)$, so no norm estimate is lost by denominators.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Lemma 3.5.3/2, printed p.155, and its preceding denominator calculation on p.154; bounded separation to weak cartesianness as in Lemma 2.3.3/3. Explicit module localization and matrix estimates supplied by the agent; local PDF WANTED."
+   }
+  },
+  {
+   "text": "The bounded $K$-linear forms just constructed separate points of $V$. Indeed, for $0\\ne y\\in V$, choose $0\\ne d\\in A$ with $dy\\in M$; the domain property gives $dy\\ne0$. Apply the hypothesis to $x=dy\\in M$ and extend the resulting $\\lambda$ by step 2. Then $h(y)=\\lambda(dy)/d\\ne0$. Choose $r$ such forms $h_1,\\ldots,h_r$ with zero common kernel: start with $V$, and, whenever the current intersection $W$ of kernels is nonzero, choose $0\\ne y\\in W$ and a separating form nonzero at $y$. Its restriction to $W$ is a nonzero map to the one-dimensional space $K$, so intersecting with its kernel lowers the dimension by exactly one. After $r$ choices the dimension is zero. Retain a bound $B_j>0$ for each $h_j$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Lemma 3.5.3/2, printed p.155, and its preceding denominator calculation on p.154; bounded separation to weak cartesianness as in Lemma 2.3.3/3. Explicit module localization and matrix estimates supplied by the agent; local PDF WANTED."
+   }
+  },
+  {
+   "text": "The square matrix $H=(h_j(v_i))_{j,i}$ has zero kernel and is invertible over $K$. Write $T=H^{-1}$, $D=\\max_{i,j}|T_{ij}|>0$, and $B_*=\\max_j B_j>0$. For $y=\\sum_i q_iv_i$ the equality $(q_i)_i=T(h_j(y))_j$ and the ultrametric inequality give $$\\max_i|q_i|\\le D\\max_j|h_j(y)|\\le D B_* N(y).$$ Conversely $$N(y)\\le\\max_i |q_i|N(v_i)\\le C_V\\max_i|q_i|,$$ where $C_V=\\max_iN(v_i)>0$. Taking $c_V=(DB_*)^{-1}>0$ proves both coordinate bounds for this arbitrary $V$ and its original basis. No topological finite-dimensional theorem over an incomplete base has been invoked.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Lemma 3.5.3/2, printed p.155, and its preceding denominator calculation on p.154; bounded separation to weak cartesianness as in Lemma 2.3.3/3. Explicit module localization and matrix estimates supplied by the agent; local PDF WANTED."
+   }
+  },
+  {
+   "text": "Every finite-dimensional subspace of $K_1$ now satisfies the hypothesis of [lem-trf-frobenius-root-coordinate-test], with the same field $K$, positive characteristic $p$, and the root norm $N(z)=|z^p|^{1/p}$. That theorem gives exactly the two displayed bounds for every finite $L/K$ and every basis of $L$, with its minimal-polynomial spectral norm. Its hypotheses impose neither completeness nor separability, so it applies to the extensions in the statement.",
+   "uses": [
+    "lem-trf-frobenius-root-coordinate-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Theorem 3.5.3/1, printed p.154 (scan PDF p.162), with Definition 3.5.2/1: finite-dimensional coordinate formulation of weak cartesianness. Primary-source indexed online text read 2026-10-25; local archival PDF WANTED.",
+    "url": "https://math.arizona.edu/~cais/scans/BGR-Non_Archimedean_Analysis.pdf"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-frobenius-root-coordinate-test"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Lemma 3.5.3/2, printed p.155 (scan PDF p.163), online indexed primary-source statement and preceding p.154 denominator reduction read 2026-10-25. Agent-written expansion of bounded separation into explicit localization and inverse-matrix estimates. The local archival PDF is absent and WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A nonarchimedean valued fraction field in characteristic p is weakly stable if bounded linear functionals to the ring separate points on each finitely generated submodule of its pth root ring",
+   "results": {
+    "t": "2026-10-24T15:38:24Z",
+    "tool": "leanfinder",
+    "query": "A nonarchimedean valued fraction field in characteristic p is weakly stable if bounded linear functionals to the ring separate points on each finitely generated submodule of its pth root ring",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Tilt",
+     "PreTilt.valAux",
+     "PreTilt.val",
+     "Tilt.instField",
+     "PreTilt",
+     "PreTilt.isDomain",
+     "IsNonarchimedeanLocalField.instIsRankLeOne",
+     "PreTilt.valAux_eq"
+    ],
+    "digest": "6b9c6c681e8128f5"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Perfection and purely inseparable field declarations construct roots but do not give the bounded-module weak-stability criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A valued field is weakly stable exactly when its pth root field with spectral valuation is weakly cartesian over the field",
+   "results": {
+    "t": "2026-10-24T15:40:21Z",
+    "tool": "leanfinder",
+    "query": "A valued field is weakly stable exactly when its pth root field with spectral valuation is weakly cartesian over the field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Tilt",
+     "Tilt.instField",
+     "PerfectClosure.R",
+     "IsPRadical.isPurelyInseparable",
+     "IsPurelyInseparable.isPRadical",
+     "IsPerfectClosure",
+     "PerfectClosure",
+     "PerfectClosure.r_iff"
+    ],
+    "digest": "0538c2e523073dd5"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Perfection and purely inseparable field declarations construct roots but do not give the bounded-module weak-stability criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "in characteristic p weak stability criterion p-th root field weakly cartesian spectral valuation",
+   "results": {
+    "t": "2026-10-24T15:40:22Z",
+    "tool": "leansearch",
+    "query": "in characteristic p weak stability criterion p-th root field weakly cartesian spectral valuation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Perfection.pthRoot_frobenius",
+     "IsPurelyInseparable.isPRadical",
+     "IsAlgClosed.perfectRing",
+     "PerfectRing.ofFiniteOfIsReduced",
+     "Tilt.instField",
+     "Perfection.perfectRing",
+     "Perfection.pthRoot",
+     "PerfectClosure.instPerfectRing"
+    ],
+    "digest": "3a750263e0576afa"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Perfection and purely inseparable field declarations construct roots but do not give the bounded-module weak-stability criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "p.?root|weak.?cartesian|b.separable",
+   "results": {
+    "t": "2026-10-24T15:40:22Z",
+    "tool": "grep",
+    "query": "p.?root|weak.?cartesian|b.separable",
+    "sub": "RingTheory",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/Discriminant.lean",
+     "Mathlib/RingTheory/AdjoinRoot.lean",
+     "Mathlib/RingTheory/Trace/Basic.lean",
+     "Mathlib/RingTheory/Algebraic/Basic.lean",
+     "Mathlib/RingTheory/Algebraic/Basic.lean",
+     "Mathlib/RingTheory/IsAdjoinRoot.lean",
+     "Mathlib/RingTheory/Norm/Basic.lean",
+     "Mathlib/RingTheory/RootsOfUnity/Basic.lean"
+    ],
+    "digest": "ad23fe2b912ad8dc"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Perfection and purely inseparable field declarations construct roots but do not give the bounded-module weak-stability criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spectralNorm\", \"IsPurelyInseparable\"",
+   "results": {
+    "t": "2026-10-24T15:44:09Z",
+    "tool": "loogle",
+    "query": "\"spectralNorm\", \"IsPurelyInseparable\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Perfection and purely inseparable field declarations construct roots but do not give the bounded-module weak-stability criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "spectralNorm|spectralAlgNorm|completeSpace",
+   "results": {
+    "t": "2026-10-24T16:16:45Z",
+    "tool": "grep",
+    "query": "spectralNorm|spectralAlgNorm|completeSpace",
+    "sub": "Analysis/Normed/Unbundled/SpectralNorm.lean",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "50",
+     "52",
+     "57",
+     "58",
+     "59"
+    ],
+    "digest": "1a8e7e0a2f086a3b"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern spectral norm axioms, tilts, valuation-preserving wrappers, or generic bounded linear maps; none proves the ring-module separation criterion for weak stability. CompleteSpace assumptions on finite spectral topology cannot be supplied for this item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded A linear maps separate points on finite submodules of A to the one over p implies finite extensions of Frac A have equivalent spectral and coordinate norms",
+   "results": {
+    "t": "2026-10-24T16:16:45Z",
+    "tool": "leansearch",
+    "query": "Bounded A linear maps separate points on finite submodules of A to the one over p implies finite extensions of Frac A have equivalent spectral and coordinate norms",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralAlgNorm",
+     "spectralNorm",
+     "IsBoundedLinearMap.mk",
+     "ContinuousLinearMap.exist_extension_of_finiteDimensional_range",
+     "IsBoundedLinearMap",
+     "Seminorm.IsBounded",
+     "spectralNorm_extends",
+     "IsLinearMap.with_bound"
+    ],
+    "digest": "e9bd11ecea2b0025"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern spectral norm axioms, tilts, valuation-preserving wrappers, or generic bounded linear maps; none proves the ring-module separation criterion for weak stability. CompleteSpace assumptions on finite spectral topology cannot be supplied for this item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spectralNorm\", \"LinearMap\"",
+   "results": {
+    "t": "2026-10-24T16:16:45Z",
+    "tool": "loogle",
+    "query": "\"spectralNorm\", \"LinearMap\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern spectral norm axioms, tilts, valuation-preserving wrappers, or generic bounded linear maps; none proves the ring-module separation criterion for weak stability. CompleteSpace assumptions on finite spectral topology cannot be supplied for this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral domain whose finitely generated modules in the pth root ring admit bounded separating linear forms has a weakly stable valued fraction field",
+   "results": {
+    "t": "2026-10-24T16:16:46Z",
+    "tool": "leanfinder",
+    "query": "An integral domain whose finitely generated modules in the pth root ring admit bounded separating linear forms has a weakly stable valued fraction field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Tilt",
+     "PreTilt.isDomain",
+     "Tilt.instField",
+     "PreTilt.valAux",
+     "PreTilt",
+     "WithVal.instIsFractionRing",
+     "PreTilt.val",
+     "WittVector.isDiscreteValuationRing"
+    ],
+    "digest": "e916e4b352594fbc"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern spectral norm axioms, tilts, valuation-preserving wrappers, or generic bounded linear maps; none proves the ring-module separation criterion for weak stability. CompleteSpace assumptions on finite spectral topology cannot be supplied for this item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-tate-fraction-weak-stability",
+  "date": "2026-10-24",
+  "group": "ND"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: Norm-preserving lifts for a Tate epimorphism surjective on canonical reductions. Independent analytic input: Finite affinoid maps are finite on spectral unit balls over an algebraically closed field. Proof input: Orthogonal spectral norm on the fraction field of a finite affinoid domain. Supporting input: Stability of the Gauss fraction field of a Tate algebra. BGR stability proof input: Theorem 5.3.1/1 and its proof, printed pp.212–213 (scan PDF pp.218–219); Definition 3.5.2/1, printed p.153 (scan PDF p.161), gives weak stability. The displayed inequalities spell out the weakly cartesian topology for a finite basis. Proof of BGR 5.3.1/1: Lemma 3.5.3/2, printed p.155 (scan PDF p.163), with the definition of b-separable modules and weak stability in 3.5.2/1.",
+   "via": [
+    "lem-trf-tate-fraction-weak-stability",
+    "lem-trf-tate-gauss-fraction-stability",
+    "lem-trf-tate-fraction-orthogonal-spectral-norm",
+    "lem-trf-finite-affinoid-unit-ball-finiteness",
+    "lem-trf-tate-reduction-norm-lifting",
+    "lem-trf-affinoid-distinguished-presentation",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-trf-fraction-root-module-weak-stability-criterion",
+  "worker": "stage1",
+  "summary": "Expanded the bounded-module argument: explicit root denominators, well-defined bounded localization of A-linear maps, finite separating family, and inverse-matrix coordinate estimates. Added only the strictly smaller field-theoretic Frobenius-root test as an unsplit dependency. Corrected the source locator for bounded separation, without changing the statement. No project attachment or Mathlib match found. Local BGR PDF WANTED; agent expansion marked explicitly.",
+  "blueprint": "Retains the inherited historical analytic input under lem-trf-local-term-locality through the Tate-fraction weak-stability chain. The present latest blueprint proof paragraphs (1)-(2) instead quote contracting correspondences; no unit or chapter route is changed. At the inherited analytic place, steps 1-4 realize the bounded-module reduction in BGR 3.5.3/2 and step 5 uses BGR 3.5.3/1. Searches of all blueprint nodes for weak stability, bounded linear, weakly cartesian, Frobenius root, root, 3.5.2 and 3.5.3/1 found no equivalent blueprint node."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-ea2f35df2",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-ea2f35df2 (reviewer sub-agent of L); spot-checked: Read the item and new node lem-trf-frobenius-root-coordinate-test in full. The BGR PDF is absent locally (recorded as WANTED), so I checked both statements independently; the review gives the source checks and edge cases. Item: statement unchanged and used verbatim by its only citer lem-trf-tate-fraction-weak-stability. Steps 1-4 are elementary and correct. Step 1: m_i=a_i v_i, so m_i^p=a_i^{p-1}b_i lies in A, and r=0 is handled. Step 2: h(y)=lambda(dy)/d is well defined, K-linear and bounded, since N(dy)=G(d)N(y). Step 3: forms are chosen so the common kernel drops by one dimension each time, giving r forms. Step 4: H is invertible and max|q_i| <= D*B_* N(y), so all constants are positive. Step 5's hypotheses and conclusion match the new node exactly (same K, p, N, s_{L/K}). New node (direction <= of BGR Thm 3.5.3/1): true, because the root-coordinate hypothesis on K^{1/p} means K-hat/K is separable, so L tensor K-hat is reduced for every finite L, which gives the spectral-norm equivalence. It is statement-only and self-contained, with clean TeX and recorded searches. Its blueprint from/via are correct and it is in the same unit. It is not a restatement of the item and not a duplicate of the char-zero, dense-transfer, Tate b-separation or spectral-uniqueness nodes. Not a re-split item, no SGA, no tool_uses, no fixes."
+ }
+}

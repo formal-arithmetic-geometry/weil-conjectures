@@ -1,0 +1,356 @@
+{
+ "id": "lem-sf-cbc-constant-perfect-projection-models",
+ "kind": "statement",
+ "title": "Constant finite-projective models and evaluated diagram projections",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "statement": "Let $A$ be a commutative ring and let $u:\\mathscr X\\to\\mathscr Y$ be a morphism of topoi presented by small sites, with the canonical identification $u^{-1}\\underline A_{\\mathscr Y}\\cong\\underline A_{\\mathscr X}$ [def-weil-pbc-ringed-topos-morphism, def-weil-pbc-constant-sheaf]. Use module sheaves and their ordinary unbounded derived categories [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Let $(B_n)_{n\\geq1}$ be an inverse sequence of commutative $A$-algebras with unital $A$-algebra transitions [def-weil-inverse-system]. Assume each underlying $A$-module $B_n[0]$ is perfect [def-pc-perfect-ring-complex]. Write $c_T$ for exact termwise constant realization on $T=\\mathscr X,\\mathscr Y$ [def-sfb-site-derived-constant-module-functor], $\\mathcal T_T=\\operatorname{Fun}(\\mathbf N_{\\geq1}^{op},\\operatorname{Mod}(\\underline A_T))$, and $\\Delta_T$ for constant towers, using the diagram sites [lem-weil-pbc-diagram-site-realization]. Put\n$$\\mathcal B_T(F)=\\Delta_TF\\otimes^L_{\\Delta_T\\underline A_T}(\\underline{B_n}_T)_n.$$\nLet $P=Ru_*$ and $Q=Ru_*^{\\mathcal T}$, and use the normalized constant-tower comparison $\\chi_F:\\Delta_{\\mathscr Y}PF\\xrightarrow{\\sim}Q\\Delta_{\\mathscr X}F$ [lem-weil-pbc-constant-tower-pushforward-normalization]. Define $h_F:\\mathcal B_{\\mathscr Y}(PF)\\to Q\\mathcal B_{\\mathscr X}(F)$ to be the diagram-site projection adjoint to counit tensored with identity, with source identified through $\\chi_F$ [lem-weil-pbc-augmented-diagram-projection-mate].\nFor each $n$, any chosen bounded complex $E_n^\\bullet$ of finite projective $A$-modules representing $B_n[0]$ gives a bounded representative $c_T(E_n^\\bullet)$ of $\\underline{B_n}_T[0]$. If $E_n^r\\xrightarrow{s_{n,r}}A^{m_{n,r}}\\xrightarrow{p_{n,r}}E_n^r$ are finite-free splitting maps with $p_{n,r}s_{n,r}=1$, their constant realizations, under $c_T(A^{m_{n,r}})\\cong\\underline A_T^{m_{n,r}}$, satisfy the same identity. Thus they give a strict-perfect coefficient package [def-weil-pbc-strict-perfect-coefficient-package] representing that constant coefficient. Under canonical evaluation/direct-image and tensor comparisons, for every unbounded $F\\in D(\\mathscr X,\\underline A)$,\n$$\\operatorname{ev}_n(h_F)=\\pi_{u,F,\\underline{B_n}_{\\mathscr Y}}:(PF)\\otimes^L\\underline{B_n}_{\\mathscr Y}\\longrightarrow P(F\\otimes^L\\underline{B_n}_{\\mathscr X}),$$\nwhere $\\pi$ is the canonical counit-tensor projection of [lem-sbc-ringed-site-perfect-projection-formula]; this specified evaluated morphism is invertible, naturally in $F$. The representatives and splittings may be chosen independently for different $n$: no chain-level lifts of coefficient transitions and no common bound on their lengths or ranks are required.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0944 (lemma-projection-formula), Equation 0B56 (equation-projection-formula-map); sites-modules.tex Tag 03EI (lemma-sheafification-exact). Agent constant-model and strict-evaluation refinement of fix-lem-exchanges Proof Step 5, direct-image-reduction-unit old Step 4."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-inverse-system",
+  "def-pc-perfect-ring-complex",
+  "def-sfb-site-derived-constant-module-functor",
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-pbc-constant-tower-pushforward-normalization",
+  "lem-weil-pbc-augmented-diagram-projection-mate",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "lem-sbc-ringed-site-perfect-projection-formula"
+ ],
+ "proof": [
+  {
+   "text": "Fix $n$ and any bounded finite-projective representative $E_n^\\bullet$ with an isomorphism $E_n^\\bullet\\simeq B_n[0]$ in $D(A)$; such representatives exist by [def-pc-perfect-ring-complex]. In each nonzero degree take finite generators of $E_n^r$ [def-weil-finitely-generated-module], giving a surjection $p_{n,r}:A^{m_{n,r}}\\to E_n^r$. The lifting characterization of projectivity [def-weil-pbc-projective-module], applied to $1_{E_n^r}$ and this surjection, gives $s_{n,r}$ with $p_{n,r}s_{n,r}=1$. Outside the finite interval use the zero module and rank zero. This constructs precisely degreewise splittings, without imposing any equation between splittings and differentials.",
+   "uses": [
+    "def-pc-perfect-ring-complex",
+    "def-weil-finitely-generated-module",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 0518 (definition-module-finite-type), 05CE (definition-projective), 05CF (lemma-characterize-projective); finite-generator surjection and projective lifting, as in Tag 00NX (lemma-finite-projective)"
+   }
+  },
+  {
+   "text": "For $T=\\mathscr X,\\mathscr Y$, constant module realization is the sheafification of constant module presheaves and acts on maps by sheafifying the same linear map [def-sf-site-constant-module-functor]. The presheaf $A^m$ is the finite product of $m$ copies of the constant presheaf $A$. Finite-product preservation of sheafification [lem-weil-pbc-sheafification-sets-exact] identifies $c_T(A^m)$ with $\\underline A_T^m$, including $m=0$; the projections and scalar actions are the sheafifications of the coordinate maps, so this is an isomorphism of module sheaves. Functoriality gives $c_T(p_{n,r})c_T(s_{n,r})=c_T(1)=1$. Hence each $c_T(E_n^r)$ is a finite-free retract. These maps are the data of [def-weil-pbc-strict-perfect-coefficient-package]; their idempotent equations follow by composing this splitting identity. No claim that these terms are projective objects of the sheaf category is used.",
+   "uses": [
+    "def-sf-site-constant-module-functor",
+    "lem-weil-pbc-sheafification-sets-exact",
+    "def-weil-pbc-strict-perfect-coefficient-package"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 0H7J (example-constant-sheaf), 00WJ (lemma-sheafification-exact); sites-modules.tex Tag 03CY (lemma-sheafification-presheaf-modules)"
+   }
+  },
+  {
+   "text": "By [def-sfb-site-derived-constant-module-functor], the exact additive constant module functor descends to $D(A)$ with its termwise representative comparison. Apply this functor to the chosen isomorphism $E_n^\\bullet\\simeq B_n[0]$. Its two images are represented by $c_T(E_n^\\bullet)$ and $\\underline{B_n}_T[0]$, respectively, and the image is an isomorphism. Additivity preserves zero terms and the equation $d^{r+1}d^r=0$, so $c_T(E_n^\\bullet)$ has the same finite degree interval. Together with Step 2 this is a bounded finite-free-retract representative, hence a perfect coefficient object in the exact sense of [def-weil-pbc-strict-perfect-coefficient-package]. The argument works for every chosen representative, not merely a particular resolution.",
+   "uses": [
+    "def-sfb-site-derived-constant-module-functor",
+    "def-weil-pbc-strict-perfect-coefficient-package"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EI (lemma-sheafification-exact); sites-cohomology.tex paragraph before Tag 09BD (lemma-map-out-of-locally-constant)"
+   }
+  },
+  {
+   "text": "Use the canonical constant-ring identification in the hypothesis. For this geometric morphism, [lem-pe-constant-left-module-inverse-image] makes module pullback $u_A^*$ exact. By [lem-sfb-geometric-inverse-image-constant-module], for every $A$-module $M$ there is the canonical natural isomorphism $u_A^*\\underline M_{\\mathscr Y}\\cong\\underline M_{\\mathscr X}$. Apply it to $M=B_n$ and to every transition $B_{n+1}\\to B_n$. The comparisons carry constant elements to the same constant elements, so they respect multiplication and unit as well: locally all coefficient sections are constant, and on two constant sections both sides send $(b,b')$ to $bb'$, and send $1$ to $1$. Thus the tower $Q_{Y,\\bullet}=(\\underline{B_n}_{\\mathscr Y})_n$ pulls back to precisely $(\\underline{B_n}_{\\mathscr X})_n$ as a tower of algebra sheaves with its given transitions. By [lem-weil-pbc-exact-functor-derived-factorization], this exact pullback preserves quasi-isomorphisms and is computed termwise. To compare with the derived pullback $Lu^*$ of the projection formula, choose a quasi-isomorphism $p:P\\to\\underline{B_n}_{\\mathscr Y}[0]$ with $P$ K-flat with flat terms [lem-pc-kflat-resolution]. By [lem-weil-pbc-ringed-topoi-derived-pullback], $\\epsilon_P\\circ Lu^*(p)^{-1}$ identifies $Lu^*(\\underline{B_n}_{\\mathscr Y}[0])$ with $u^*P$, where $u^*$ is $u_A^*$ under the ring identification. Exactness makes $u_A^*(p)$ a quasi-isomorphism, so $Lu^*(\\underline{B_n}_{\\mathscr Y}[0])\\cong\\underline{B_n}_{\\mathscr X}[0]$, compatibly with transitions by naturality in resolutions.",
+   "uses": [
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-sfb-geometric-inverse-image-constant-module",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-topoi-derived-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 0H7J (example-constant-sheaf), 00YV (proposition-functoriality-algebraic-structures-topoi); derived.tex Tag 015F (lemma-right-derived-exact-functor)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-augmented-diagram-projection-mate] with $f=u$, $R_T=\\underline A_T$, the algebra tower of Step 4, and $K=F$. The explicit formula in [lem-weil-pbc-reduction-pullback-derived-tower] identifies its reduction $B_T(K)$ with $\\mathcal B_T(K)$, and its source identification is exactly the $\\chi_F$ specified in the item. It therefore constructs this same morphism $h_F$, not just a morphism between isomorphic objects. The normalized constant comparison [lem-weil-pbc-constant-tower-pushforward-normalization] evaluates to the identity. The evaluated-mate clause then says that, under the canonical tensor and direct-image comparisons, $\\operatorname{ev}_n(h_F)$ is the counit-tensor morphism $PF\\otimes^L\\underline{B_n}_{\\mathscr Y}\\to P(F\\otimes^L\\underline{B_n}_{\\mathscr X})$. Under Step 4's pullback identification, this is precisely $\\pi_{u,F,\\underline{B_n}_{\\mathscr Y}}$: both are adjuncts of the canonical pullback-tensor comparison followed by $\\varepsilon_F\\otimes1$, with the same counit. The augmented-mate statement also supplies naturality in $F$.",
+   "uses": [
+    "lem-weil-pbc-reduction-pullback-derived-tower",
+    "lem-weil-pbc-augmented-diagram-projection-mate",
+    "lem-weil-pbc-constant-tower-pushforward-normalization",
+    "lem-sbc-ringed-site-perfect-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56 (equation-projection-formula-map), Tag 0944 (lemma-projection-formula), and Tag 0A07 (lemma-Rf-commutes-with-Rlim), diagram-topos evaluation normalization"
+   }
+  },
+  {
+   "text": "For every fixed $n$, Step 3 makes $\\underline{B_n}_{\\mathscr Y}[0]$ perfect. Apply [lem-sbc-ringed-site-perfect-projection-formula] to the original ringed-topos morphism $u$, $E=F$ and $P=\\underline{B_n}_{\\mathscr Y}[0]$. Its hypotheses require only a perfect coefficient object and allow arbitrary unbounded $F$; the sites are small and the coefficient rings are commutative as assumed. It follows that the specified map in Step 5 is invertible. Its naturality in $F$ is the naturality of the counit-tensor projection [lem-weil-pbc-ringed-projection-mate-exact]. Thus this is the claimed natural isomorphism, with the stipulated map as forward arrow.",
+   "uses": [
+    "lem-sbc-ringed-site-perfect-projection-formula",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0944 (lemma-projection-formula), Equation 0B56 (equation-projection-formula-map)"
+   }
+  },
+  {
+   "text": "The tower morphism used above was constructed from the actual algebra transitions before any choices of $E_n^\\bullet$ or degreewise splittings. The choices in Steps 1--3 only verify the perfectness hypothesis separately for each evaluation in Step 6. No map between chosen complexes at different indices is used in any step, and only the finite interval for the single fixed $n$ enters that application. Therefore the representatives and splittings can be chosen independently at all indices, with no common bound on interval lengths or finite ranks.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0944 (lemma-projection-formula), applied separately at each n; agent bookkeeping of the independent choices"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-ring-complex",
+  "def-sf-site-constant-module-functor",
+  "def-sfb-site-derived-constant-module-functor",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-projective-module",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "lem-pc-kflat-resolution",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-sbc-ringed-site-perfect-projection-formula",
+  "lem-sfb-geometric-inverse-image-constant-module",
+  "lem-weil-pbc-augmented-diagram-projection-mate",
+  "lem-weil-pbc-constant-tower-pushforward-normalization",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-reduction-pullback-derived-tower",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-sheafification-sets-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0944 and Equation 0B56; constant-model and diagram-evaluation combination using sites.tex Tags 0H7J, 00WJ, 00YV and sites-modules.tex Tag 03EI",
+  "note": "The projection theorem is read from Stacks; assembling independent constant perfect models with the existing normalized diagram mate is an agent argument, serving fix-lem-exchanges Step 5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A tower of perfect modules over a commutative ring has bounded finite projective constant sheaf models at each index and its canonical derived direct image projection is an isomorphism of strict towers",
+   "results": "8 hits: ModuleCat.tildeInModuleCat, Module.Flat.of_projective, Module.Invertible.instProjective, ModuleCat.Tilde.stalkIso, ModuleCat.projective_of_module_projective, Module.instIsReflexiveOfFiniteOfProjective, SheafOfModules.IsFiniteType, SheafOfModules.Finite.hasFiniteLimits",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern tilde sheaves, ordinary projective/flat modules, light condensed internal projectivity, or perfect rings in characteristic p; none gives the constant bounded models and canonical evaluated derived-tower projection."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_isIso, DerivedCategory",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern tilde sheaves, ordinary projective/flat modules, light condensed internal projectivity, or perfect rings in characteristic p; none gives the constant bounded models and canonical evaluated derived-tower projection."
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]erfect.*[Cc]onstant|[Cc]onstant.*[Pp]erfect|[Pp]rojection[Ff]ormula",
+   "results": "3 hits: Mathlib/Topology/CantorBendixson.lean, Mathlib/Topology/CantorBendixson.lean, Mathlib/Topology/CantorBendixson.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern tilde sheaves, ordinary projective/flat modules, light condensed internal projectivity, or perfect rings in characteristic p; none gives the constant bounded models and canonical evaluated derived-tower projection."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The exact constant sheaf functor carries bounded finite projective complexes to perfect sheaf complexes and evaluation of the counit tensor projection gives an isomorphism of derived strict towers",
+   "results": "8 hits: LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, CategoryTheory.instIsIsoAppFromLeftDerivedZeroOfProjective",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern tilde sheaves, ordinary projective/flat modules, light condensed internal projectivity, or perfect rings in characteristic p; none gives the constant bounded models and canonical evaluated derived-tower projection."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For arbitrary individually perfect algebra coefficients in a strict inverse sequence the derived diagram site projection map is invertible without uniform amplitude bounds",
+   "results": "8 hits: Perfection.lift_symm_apply, PerfectionMap.comp_symm_equiv, PerfectionMap.comp_symm_equiv', IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq, IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq', PreTilt.exists_smodEq_untiltAux, FormalMultilinearSeries.rightInv, FormalMultilinearSeries.rightInv_coeff",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern tilde sheaves, ordinary projective/flat modules, light condensed internal projectivity, or perfect rings in characteristic p; none gives the constant bounded models and canonical evaluated derived-tower projection."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.formula|perfect.*constant|constant.*perfect",
+   "results": "{\"t\": \"2026-10-22T06:52:25Z\", \"tool\": \"grep\", \"query\": \"projection.formula|perfect.*constant|constant.*perfect\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no projection-formula or perfect-constant-complex declaration in the searched CategoryTheory sources."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.constantSheaf, DerivedCategory",
+   "results": "{\"t\": \"2026-10-22T06:52:25Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.constantSheaf, DerivedCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no declaration contains both requested notions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The exact constant module sheaf functor sends a bounded complex of finite projective modules to a perfect complex and evaluation of a derived diagram projection morphism is the counit tensor projection formula",
+   "results": "{\"t\": \"2026-10-22T06:52:25Z\", \"tool\": \"leansearch\", \"query\": \"The exact constant module sheaf functor sends a bounded complex of finite projective modules to a perfect complex and evaluation of a derived diagram projection morphism is the counit tensor projection formula\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.constantSheafAdj_counit_app\", \"CompHausLike.LocallyConstant.counit_app_val\", \"CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app\", \"CategoryTheory.constantPresheafAdj\", \"CategoryTheory.constantSheafAdj\", \"CategoryTheory.Sheaf.instIsIsoAppCounitConstantSheafAdjOfFaithfulOfFullConstantSheafOfIsConstant\", \"CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app'\", \"CompHausLike.LocallyConstant.counit\"], \"digest\": \"80e8c8364c837cb7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are constant-sheaf adjunctions and their counits, not bounded finite-projective models or derived diagram-site projections."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constant sheaf realization of bounded finite projective complexes preserves finite free retracts and the derived projection formula for a morphism of ringed topoi applies to each coefficient of an inverse system",
+   "results": "{\"t\": \"2026-10-22T06:52:36Z\", \"tool\": \"leanfinder\", \"query\": \"Constant sheaf realization of bounded finite projective complexes preserves finite free retracts and the derived projection formula for a morphism of ringed topoi applies to each coefficient of an inverse system\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.Presentation.map_π_eq\", \"Condensed.profiniteFree\", \"Condensed.profiniteSolid\", \"CondensedMod.ofSheafProfinite\", \"CategoryTheory.Presheaf.isSheaf_coherent_of_projective_comp\", \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"LightCondMod.ofSheafLightProfinite\"], \"digest\": \"745820dfe0e8b4d8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are sheaf presentation functoriality, condensed free objects and internal projectivity, not the constant perfect derived-tower projection assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-cbc-direct-image-reduction-unit",
+  "date": "2026-10-22",
+  "group": "NF"
+ },
+ "blueprint": {
+  "from": {
+   "node": "fix-lem-exchanges",
+   "place": "Proof Step 5, proper/direct-image ingredient; individually perfect constant coefficients and the evaluated strict projection, formerly direct-image-reduction-unit Step 4",
+   "via": [
+    "lem-sf-cbc-direct-image-reduction-unit",
+    "lem-sf-cbc-compact-support-composition-limit"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-cbc-constant-perfect-projection-models",
+  "worker": "stage1",
+  "summary": "Seven steps construct finite-free splitting data and its constant sheaf realization, transport any chosen bounded representative through the exact derived constant functor, identify the actual constant algebra tower under geometric pullback, use the existing normalized diagram mate to identify its evaluated forward arrow, and apply the unbounded perfect projection formula independently at every index. No new node and no statement change.",
+  "blueprint": "fix-lem-exchanges Proof Step 5 (independence and proper/direct-image ingredient), through lem-sf-cbc-direct-image-reduction-unit old Step 4: Steps 1--3 supply the independent constant perfect models, Step 4 the constant-coefficient identification, Steps 5--6 the specified evaluated projection isomorphism, Step 7 the absence of inter-index choices. Whole-blueprint searches for constant perfect, constant realization, projective summand and diagram projection found no node stating this entire general topoi-and-independent-models statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sheafification-sets-exact",
+    "why": "Finite-product preservation identifies the constant finite free module; a generic sheafification tool, with no compact-support step replaced."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Exact constant-coefficient module pullback for arbitrary geometric morphisms; a generic construction needed for the ringed-topos hypotheses."
+   },
+   {
+    "node": "lem-sfb-geometric-inverse-image-constant-module",
+    "why": "Canonical natural constant-module pullback for arbitrary small-site topoi; the scheme-specific constant-pullback nodes do not cover this item."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Termwise unbounded derived realization of an exact functor; a localization tool, not a replacement for compact-support base change."
+   },
+   {
+    "node": "lem-weil-pbc-constant-tower-pushforward-normalization",
+    "why": "Identity evaluation of the specified constant-tower comparison; a strict-diagram normalization tool."
+   },
+   {
+    "node": "lem-weil-pbc-augmented-diagram-projection-mate",
+    "why": "The canonical strict derived-tower projection and its evaluated counit-tensor map for arbitrary algebra towers."
+   },
+   {
+    "node": "lem-sbc-ringed-site-perfect-projection-formula",
+    "why": "Unbounded perfect projection formula for an arbitrary morphism of ringed topoi, specializing to the individually constant coefficients."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Naturality of the specified counit-tensor projection; a generic ringed-topos derived tensor tool."
+   },
+   {
+    "node": "lem-weil-pbc-reduction-pullback-derived-tower",
+    "why": "The explicit strict derived-tower reduction formula identifies B_T with the tensor-defined functor of the item; a general algebra-tower construction, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "why": "Computation of the K-flat derived pullback Lu^* on a flat K-flat resolution; needed to identify Lu^* of the constant coefficient with its underived pullback, a generic ringed-topos tool."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Existence of a K-flat resolution with flat terms of the constant coefficient; a generic homological tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sheafification-sets-exact",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-sfb-geometric-inverse-image-constant-module",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-constant-tower-pushforward-normalization",
+  "lem-weil-pbc-augmented-diagram-projection-mate",
+  "lem-sbc-ringed-site-perfect-projection-formula",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-reduction-pullback-derived-tower",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-pc-kflat-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-ae4635b3b",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-ae4635b3b (reviewer sub-agent of L); spot-checked: Read the item, all 15 cited statements, the parent's Step 3 and Stacks sites-cohomology Eq. 0B56 and Lemma 0944 (lines 13666-13700); no SGA. The statement and stmt_deps are identical to the NF snapshot that created the item, no new nodes, and no cycle. The statement is true and unweakened; checked B_n=0, A=Z with B_n=Z/n (perfect, not flat), u=id, and padded models that differ across n. Steps 1-3 are elementary and correct: splittings from finite generators plus projective lifting; c(A^m)≅A^m by finite-product sheafification; derived constant realization of E_n≅B_n[0]; perfectness via K=c(E_n). Step 4's algebra-tower identification is sound: maps out of coproducts of terminals are fixed by their values on (b,b'). Fault (C4): Step 4 took Lu^*(B_n_Y[0])≅B_n_X[0] from lem-weil-pbc-exact-functor-derived-factorization, whose termwise F_D is not the K-flat Lu^* used by π. FIX: Step 4 now cites lem-pc-kflat-resolution and lem-weil-pbc-ringed-topoi-derived-pullback (ε_P∘Lu^*(p)^{-1}, then exactness makes u^*(p) a quasi-isomorphism); proof_deps are updated and both nodes are declared in tool_uses. Step 5: the augmented mate with the reduction formula gives the same h, χ evaluates to the identity, and the evaluated counit-tensor map is the adjunct of (ε⊗1)μ, i.e. π. Step 6: perfect projection formula for unbounded F, naturality from ringed-projection-mate-exact. Step 7 is bookkeeping. The 9 declared tool uses are generic black boxes and are accepted. Advisory: lem-sp-constant-perfect-quotient-projection (same unit) is a pro-étale A/I^n special-case sibling, not a duplicate.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConstantPerfectProjectionModels",
+  "declaration": "CategoryTheory.ConstantPerfectProjection.constantPerfectProjectionIdentification",
+  "declarations": [
+   "CategoryTheory.ConstantPerfectProjection.constantComplex",
+   "CategoryTheory.ConstantPerfectProjection.finiteFreeCoordinate_linear",
+   "CategoryTheory.ConstantPerfectProjection.finiteFreeCoordinateComponent",
+   "CategoryTheory.ConstantPerfectProjection.finiteFreeCoordinate_naturality",
+   "CategoryTheory.ConstantPerfectProjection.finiteFreeCoordinate",
+   "CategoryTheory.ConstantPerfectProjection.finiteFreeComparison",
+   "CategoryTheory.ConstantPerfectProjection.finiteFreeComparison_isIso",
+   "CategoryTheory.ConstantPerfectProjection.constantPerfectModel",
+   "CategoryTheory.ConstantPerfectProjection.coefficientModules",
+   "CategoryTheory.ConstantPerfectProjection.coefficientTower",
+   "CategoryTheory.ConstantPerfectProjection.constantSection",
+   "CategoryTheory.ConstantPerfectProjection.coefficientUnit",
+   "CategoryTheory.ConstantPerfectProjection.coefficientUnit_naturality",
+   "CategoryTheory.ConstantPerfectProjection.coefficientAugmentation",
+   "CategoryTheory.ConstantPerfectProjection.scalarElement",
+   "CategoryTheory.ConstantPerfectProjection.constantCoefficientPullback",
+   "CategoryTheory.ConstantPerfectProjection.constantPerfectProjectionModels",
+   "CategoryTheory.ConstantPerfectProjection.totalTensor",
+   "CategoryTheory.ConstantPerfectProjection.tensorCochainCounit_existsUnique",
+   "CategoryTheory.ConstantPerfectProjection.tensorCochainCounit",
+   "CategoryTheory.ConstantPerfectProjection.tensorWithSingle",
+   "CategoryTheory.ConstantPerfectProjection.tensorSingleCounitApp",
+   "CategoryTheory.ConstantPerfectProjection.tensorSingleCounit_naturality",
+   "CategoryTheory.ConstantPerfectProjection.tensorSingleCounit",
+   "CategoryTheory.ConstantPerfectProjection.reductionTensorComparison_existsUnique",
+   "CategoryTheory.ConstantPerfectProjection.reductionTensorComparison",
+   "CategoryTheory.ConstantPerfectProjection.edgePullback",
+   "CategoryTheory.ConstantPerfectProjection.exactPullbackComparison_existsUnique",
+   "CategoryTheory.ConstantPerfectProjection.exactPullbackComparison",
+   "CategoryTheory.ConstantPerfectProjection.projectionRightComparison",
+   "CategoryTheory.ConstantPerfectProjection.derivedCoefficientComparison",
+   "CategoryTheory.ConstantPerfectProjection.evaluatedProjectionInTensor",
+   "CategoryTheory.ConstantPerfectProjection.constantTensorCorner",
+   "CategoryTheory.ConstantPerfectProjection.constantEdgePullback_additive",
+   "CategoryTheory.ConstantPerfectProjection.constantPerfectProjectionIdentification"
+  ],
+  "file": "lean/Sheaf/Paper/ConstantPerfectProjectionModels.lean",
+  "statement": "theorem constantPerfectProjectionIdentification [HasDerivedCategory.{wA} (ModuleCat.{u} A)] [HasDerivedCategory.{w} (realizationModules J A)] [HasDerivedCategory.{w} (realizationModules K A)] [HasDerivedCategory.{wTY} (ℕᵒᵖ ⥤ realizationModules J A)] [HasDerivedCategory.{wTX} (ℕᵒᵖ ⥤ realizationModules K A)] (TY : DerivedCategory (realizationModules J A) × DerivedCategory (realizationModules J A) ⥤ DerivedCategory (realizationModules J A)) (TX : DerivedCategory (realizationModules K A) × DerivedCategory (realizationModules K A) ⥤ DerivedCategory (realizationModules K A)) (e : RingedTensorEdge (constantTensorCorner J A TY) (constantTensorCorner K A TX)) [IsIso e.ringMap] [e.pushforward.Additive] [PreservesFiniteLimits e.pullback] [PreservesFiniteColimits e.pullback] (a : RingedTensorModel (constantTensorCorner J A TY)) (b : RingedTensorModel (constantTensorCorner K A TX)) (k : Comparison.{u, u, u, u, u} (edgePullback e)) (point : e.inverse.obj ((constantSheaf J (Type u)).obj PUnit.{u + 1}) ≅ (constantSheaf K (Type u)).obj PUnit.{u + 1}) (hconstant : ∀ r : A, e.inverse.map (scalarElement J A r) ≫ e.algebraic.ringUnderlying.hom ≫ (sheafCompose K (forget CommRingCat.{u})).map e.ringMap = point.hom ≫ scalarElement K A r) (B : ℕᵒᵖ ⥤ CommAlgCat.{u} A) (hB : ∀ n : ℕᵒᵖ, DerivedCategory.IsPerfectRingComplex ((DerivedCategory.singleFunctor _ 0).obj ((coefficientModules A B).obj n))) (MY : RingedModel.{u, u, u, w, wTY} (R := realizationRing J A) (coefficientTower J A B) (coefficientAugmentation J A B)) (MX : RingedModel.{u, u, u, w, wTX} (R := realizationRing K A) (coefficientTower J A B ⋙ e.pullback) (pulledUnit e.pullback (moduleUnit (edgePullback e) k) (coefficientTower J A B) (coefficientAugmentation J A B))) (tau : MY.B ⋙ (termwise (edgePullback e).L).mapDerivedCategory.{wTY, wTX, u, u, u + 1, u + 1} ≅ (edgePullback e).L.mapDerivedCategory.{w, w, u, u, u + 1, u + 1} ⋙ MX.B) (htau : IsNormalized.{u + 1, u, u + 1, u, w, w, wTY, wTX} (A := realizationModules J A) (B := realizationModules K A) (edgePullback e).L (coefficientTower J A B) (coefficientAugmentation J A B) (moduleUnit (edgePullback e) k) (flatRepresentatives (realizationRing J A)) (flatRepresentatives (realizationRing K A)) MY MX k.mu k.naturality tau) (P : AugmentedProjectionDirectImage.{u + 1, u, u + 1, u, w, w, wTX, wTY} (edgePullback e).L (edgePullback e).V (edgePullback e).moduleAdj) : ∀ (n : ℕᵒᵖ) (F : DerivedCategory (realizationModules K A)), evaluatedProjectionInTensor e a b (coefficientTower J A B) (coefficientAugmentation J A B) (moduleUnit (edgePullback e) k) MY MX tau P n F = e.projection a b F ((DerivedCategory.singleFunctor _ 0).obj ((coefficientTower J A B).obj n)) ∧ IsIso (evaluatedProjectionInTensor e a b (coefficientTower J A B) (coefficientAugmentation J A B) (moduleUnit (edgePullback e) k) MY MX tau P n F)",
+  "branch": "newtargets-dag",
+  "by": "Q152",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Repair of returned head 65f4c05d1fbd: fixed canonical coordinate finite-product comparison; explicit evaluated augmented arrow conjugated by beta and counit-pinned tensor, exact/K-flat pullback, and adjunction comparisons equals RingedTensorEdge.projection, with IsIso. The original independently sized evaluated IsIso theorem and constant-coefficient characterization are retained. All helper data are explicit constructions or determined by unique normalization equations."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ecd4ab1f1",
+  "group": "Q152",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed 65f4c05d1fbd; all three findings repaired. (F1) constantPerfectProjectionIdentification states evaluatedProjectionInTensor = e.projection a b F (single 0 B_n,Y) (pi of the stmt_dep) plus IsIso of that map. Its conjugating comparisons are pinned: tensorCochainCounit, reductionTensorComparison and exactPullbackComparison are Classical.choose of proved-unique maps; projectionRightComparison is rightAdjointUniq; derivedCoefficientComparison is a composite. Transposed by beta_counit, the equation reduces to tau vs tensorComparison on flat representatives, both from a CanonicalRingedTensorComparison pinned by q_one and pure: true and item-specific. (F2) finiteFreeComparison is the fixed Pi.lift of sheafified coordinates; HEq splittings are pinned, rank 0 included. (F3) a real Second reading section is present. Node diff is lean only; statement verbatim; 35/35 declarations recorded; 12 sorry; source/blueprint docstrings present; the single shared localization size in the identification theorem is forced by the RingedTensorEdge API; other universes independent. Edge cases B_n=0, rank 0, b<a, u=id, Z/m checked. Advisories: finiteFreeComparison parallels the RingCat-only strictPerfectConstantFiniteFreeComparison; StrictPerfectCoefficientPackageOnSite is not a recorded declaration; some instances are provable but come from dependency interfaces. No file changed, no compile."
+ }
+}

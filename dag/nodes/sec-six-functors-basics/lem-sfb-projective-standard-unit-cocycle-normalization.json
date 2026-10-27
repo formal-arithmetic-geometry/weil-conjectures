@@ -1,0 +1,159 @@
+{
+ "id": "lem-sfb-projective-standard-unit-cocycle-normalization",
+ "kind": "statement",
+ "title": "Unit cocycles on the standard projective-space cover",
+ "statement": "Let k be a field [def-weil-field], r>=3, P=projective space with r homogeneous coordinates over Spec k, U_i=D_+(T_i), and transitionUnit(d,i,j)=(T_i/T_j)^d [def-pc-projective-space-twist]. Let t_ij be a unit of Gamma(U_i intersection U_j,O_P) for every pair, including equal indices. Suppose that on every open W contained in U_i,U_j,U_l, the restrictions satisfy t_ij*t_jl=t_il. There exist an integer d and units a_i of Gamma(U_i,O_P) such that on every double overlap res(a_i)*t_ij=transitionUnit(d,i,j)*res(a_j). This concerns functions only and asserts no module classification or gluing.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BXJ, lemma-Pic-projective-space-UFD, double- and triple-overlap calculation."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-projective-space-twist"
+ ],
+ "proof": [
+  {
+   "text": "For distinct indices i,j identify the overlap ring with k[t,t^-1,z], t=T_i/T_j. Polynomial degree in each z adds under products over a domain, so a unit and its inverse have degree zero in z. The greatest and least Laurent exponents also add; their difference for a unit is zero. Thus the unit is uniquely c_ij*(T_i/T_j)^e_ij with c_ij in k^*. These comparisons are compatible with restriction to triple overlaps.",
+   "uses": [
+    "def-pc-projective-space-twist",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-laurent-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BXJ, lemma-Pic-projective-space-UFD, double- and triple-overlap calculation."
+   }
+  },
+  {
+   "text": "For distinct i,j,l use the two independent Laurent variables T_i/T_j and T_j/T_l on their triple overlap. The assumed cocycle identity gives e_ij=e_jl=e_il and c_ij*c_jl=c_il by comparing coefficients. The identities with repeated indices give t_ii=1 and t_ji=t_ij^-1, so reversing a pair preserves its exponent. Every pair of edges is joined by triples when r>=3; hence all exponents equal one integer d.",
+   "uses": [
+    "def-pc-projective-space-twist"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BXJ, lemma-Pic-projective-space-UFD, double- and triple-overlap calculation."
+   }
+  },
+  {
+   "text": "Fix an index b. Put c_ii=1. The scalar equations give c_ij=c_ib/c_jb, including pairs involving b. On chart i choose the constant unit a_i=c_ib^-1. Then res(a_i)*t_ij=(T_i/T_j)^d*res(a_j) on every overlap. For i=j both sides equal a_i. This proves exactly the conclusion, without gluing any module.",
+   "uses": [
+    "def-pc-projective-space-twist"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BXJ, lemma-Pic-projective-space-UFD, double- and triple-overlap calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-projective-space-twist",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-laurent-polynomial-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BXJ, lemma-Pic-projective-space-UFD, double- and triple-overlap calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A cocycle of invertible regular functions on the standard charts of projective space over a field is a coboundary times a power of the coordinate ratios",
+   "results": "Eight hits: group-cohomology coboundary and Hilbert-90 results, homological cocycles and Proj structure-sheaf fractions. No standard-cover unit normalization theorem.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A multiplicative Cech cocycle of units on standard projective space charts is a coboundary times a fixed integer power of coordinate ratios",
+   "results": "Eight hits: Hilbert 90, group coboundaries, Mobius denominators, homological cocycles and PresheafOfGroups.OneCohomologyRelation. The latter defines the relation but proves no normalization for projective space.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "cocycle.*projective|projective.*cocycle|fiber.*projective|projective.*fiber; rg on repository and blueprint for projective unit cocycle and fibre twist model",
+   "results": "Mathlib has two unrelated Proj stalkToFiberRingHom hits. Repository has transitionUnit_mul_transitionUnit, proving the standard cocycle is a cocycle; it does not classify arbitrary unit cocycles. Projective-line results have only two coordinates. Full blueprint search found no duplicate normalization statement.",
+   "date": "2026-10-27",
+   "verdict": "New statement needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveBundleFiberDegree",
+  "date": "2026-10-27",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "Fibre-degree proof step 2: normalize the unit cocycle on the standard cover in dimension at least two.",
+   "via": [
+    "lem-sfb-projective-bundle-fiber-degree",
+    "lem-sfb-projective-bundle-local-normal-form",
+    "lem-sfb-projective-bundle-picard-classification",
+    "lem-sfb-projective-frames-pgl",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveSpace.StandardUnitCocycleNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveSpace/StandardUnitCocycleNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProjectiveSpace.exists_standardUnitCocycle_normalization",
+  "statement": "theorem exists_standardUnitCocycle_normalization (k : Type u) [Field k]\n    (r : ℕ) (hr : 3 ≤ r)\n    (t : ∀ i j : ULift.{u} (Fin r),\n      Γ(ℙ(ULift.{u} (Fin r); Spec (.of k)),\n        standardOpen _ (Spec (.of k)) i ⊓ standardOpen _ (Spec (.of k)) j)ˣ)\n    (ht : ∀ (i j l : ULift.{u} (Fin r))\n      (W : ℙ(ULift.{u} (Fin r); Spec (.of k)).Opens)\n      (hi : W ≤ standardOpen _ (Spec (.of k)) i)\n      (hj : W ≤ standardOpen _ (Spec (.of k)) j)\n      (hl : W ≤ standardOpen _ (Spec (.of k)) l),\n      (ℙ(ULift.{u} (Fin r); Spec (.of k))).presheaf.map\n          (homOfLE (le_inf hi hj)).op (t i j).val *\n        (ℙ(ULift.{u} (Fin r); Spec (.of k))).presheaf.map\n          (homOfLE (le_inf hj hl)).op (t j l).val =\n        (ℙ(ULift.{u} (Fin r); Spec (.of k))).presheaf.map\n          (homOfLE (le_inf hi hl)).op (t i l).val) :\n    ∃ d : ℤ, ∃ a : ∀ i : ULift.{u} (Fin r),\n      Γ(ℙ(ULift.{u} (Fin r); Spec (.of k)), standardOpen _ (Spec (.of k)) i)ˣ,\n      ∀ i j : ULift.{u} (Fin r),\n        (ℙ(ULift.{u} (Fin r); Spec (.of k))).presheaf.map\n            (homOfLE inf_le_left).op (a i).val * (t i j).val =\n          (transitionUnit _ (Spec (.of k)) d i j).val *\n            (ℙ(ULift.{u} (Fin r); Spec (.of k))).presheaf.map\n              (homOfLE inf_le_right).op (a j).val",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261027T123516-L-2314137",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261027T123516-L-2314137",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

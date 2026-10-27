@@ -1,0 +1,277 @@
+{
+ "id": "lem-sp-open-scalar-counit-square",
+ "kind": "statement",
+ "title": "Open extension and scalar restriction preserve the normalized scalar counit",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "statement": "Let $j:X\\hookrightarrow Z$ be an open immersion of schemes and $A\\to B$ a unital homomorphism of finite commutative rings. Use ordinary uncompleted unbounded derived categories $D(W_{\\mathrm{proet}},R)$ of constant-ring module sheaves, for $W=X,Z$ and $R=A,B$ [def-weil-pbc-proetale-modules]. Put $T_W=-\\otimes^L_{A_W}B_W$ and let $r_W$ be exact scalar restriction, with the representative-normalized adjunction $T_W\\dashv r_W$ and counit $\\epsilon_W$ [lem-pur-sheaf-ring-derived-coefficient-adjunction]. Write $J_R=j_{!,R}$ for the sheafified extension-by-zero construction [def-weil-extension-by-zero] and its exact derived adjunction $J_R\\dashv j_R^{-1}$ [lem-cbc-proetale-extension-zero]. Let $a_L:J_Ar_XL\\xrightarrow{\\sim}r_ZJ_BL$ be the canonical sectionwise restriction-of-scalars comparison of that node. Let $E_M:T_ZJ_AM\\xrightarrow{\\sim}J_BT_XM$ be the canonical open tensor comparison, normalized by its balanced tensor map on the open, as in [def-sp-reduction-direct-image-comparison].\nThe unit $M\\to j_R^{-1}J_RM$ is the identity under the sectionwise identification on objects over $X$, for every $M\\in D(X_{\\mathrm{proet}},R)$; in particular restriction to $X$ determines a derived arrow with source $J_RM$ through this adjunction. Under these unit identifications and the canonical restriction/tensor and restriction/scalar identifications, $j_B^{-1}E_M$ and $j_A^{-1}a_L$ are identity comparisons. For every ambient $L\\in D(X_{\\mathrm{proet}},B)$ one has the scalar counit equation\n$$\\epsilon_Z(J_BL)\\circ T_Z(a_L)=J_B(\\epsilon_X(L))\\circ E_{r_XL}.$$\nThe isomorphisms $a,E$ and this equation are natural in their derived arguments. For the identity ring homomorphism they are the identity comparisons under the canonical scalar unitors. These assertions require no flatness of $B/A$, boundedness, constructibility or Tor condition on $L$ or $r_XL$.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0E8I, lemma-j-shriek-and-tensor; sites-cohomology.tex Tag 07A6, lemma-adjoint. Agent-formulated derived open scalar-counit square for det-sp-tower-gluing, Levels paragraph; old step 3 and open identity part of step 7."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-modules",
+  "def-weil-open-immersion",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "def-weil-extension-by-zero",
+  "lem-cbc-proetale-extension-zero",
+  "def-sp-reduction-direct-image-comparison",
+  "def-sp-open-scalar-tensor-data",
+  "def-sp-open-scalar-restriction-comparison",
+  "def-coef-scalar-restriction-identity",
+  "def-trf-finite-pullback-coordinate-comparison",
+  "def-sp-finite-intrinsic-open-square",
+  "def-sp-proetale-constant-coefficient-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Write $u_R=j_R^{-1}$ and $\\eta^R:1\\to u_RJ_R$ for the open unit. Apply [lem-sf-open-tensor-normalization] to the constant ring sheaf $R_Z$ on the small pro-etale site and the open $j$, for $R=A,B$. It gives the actual section-normalized isomorphism $\\eta^R$, on the ordinary unbounded derived category. Thus $u_RJ_R$ is identified with the identity using $(\\eta^R)^{-1}$. In particular the adjunction bijection sends $h:J_RM\\to N$ to $u_R(h)\\eta^R_M$. Hence two such arrows with equal restrictions are equal, by injectivity of that bijection. This is a statement about arrows with source $J_RM$, not faithfulness of restriction on the ambient derived category.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "lem-cbc-proetale-extension-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 03DI/03DJ (sites-modules.tex, lemma-extension-by-zero and lemma-extension-by-zero-exact); exact open adjunction and section normalization; agent application to Hom injectivity."
+   }
+  },
+  {
+   "text": "The scalar restriction isomorphism of [lem-cbc-proetale-extension-zero], in the orientation $a:J_Ar_X\\to r_ZJ_B$, is induced by the identity of the extension presheaves after forgetting the $B$-action. Over an object factoring through $X$, both presheaves have the same module and the map is the identity; their restrictions to the open are already sheaves. The sheafification universal property therefore identifies $u_A(a_L)$ with the identity, under $u_A r_Z=r_Xu_B$ and the units of step 1. Applying this degreewise and localizing preserves this equality, since these are the exact, degreewise-derived functors in that node. This also establishes the naturality of $a$.",
+   "uses": [
+    "lem-cbc-proetale-extension-zero",
+    "def-weil-extension-by-zero",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03DI, sites-modules.tex, lemma-extension-by-zero; canonical scalar comparison evaluated on the open."
+   }
+  },
+  {
+   "text": "Put $\\lambda:u_BT_Z\\xrightarrow{\\sim}T_Xu_A$ for canonical restriction/tensor balancing. The comparison in [def-sp-reduction-direct-image-comparison] is defined by the common right adjoint. Apply [lem-fix-open-scalar-tensor-normalization] to this same finite-ring, ordinary unbounded pro-etale datum: its $\\beta_j$ has exactly that definition, and its inverse is the open adjunct of $\\lambda^{-1}T_X(\\eta^A)$. It identifies this comparison with the balanced open tensor comparison. Consequently, by taking that open transpose and using the units of step 1,\n$$u_B(E_M)=\\lambda_{J_AM}$$\nunder $u_AJ_A\\cong1$ and $u_BJ_B\\cong1$. In particular $u_B(E_M)$ is the identity comparison under the specified tensor identifications. All maps here are the specified comparisons, rather than a freely chosen natural isomorphism.",
+   "uses": [
+    "def-sp-reduction-direct-image-comparison",
+    "lem-fix-open-scalar-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; Tag 0E8I, sites-modules.tex, lemma-j-shriek-and-tensor; agent identification via the common-right-adjoint normalization."
+   }
+  },
+  {
+   "text": "Let $H\\in D(Z_{\\mathrm{proet}},B)$ and let $\\rho_H:u_Ar_ZH\\xrightarrow{\\sim}r_Xu_BH$ be the identity-on-actions comparison. By [lem-sfb-kflat-scalar-comparison-normalization], $\\theta=\\lambda^{-1}:T_Xu_A\\to u_BT_Z$ is precisely the scalar-adjunction mate of $\\rho$ for the representative-normalized scalar adjunctions. In the mate definition [def-weil-pbc-adjunction-mate], take $L_1=T_Z$, $R_1=r_Z$, $L_2=T_X$, $R_2=r_X$, $G=u_A$, $H=u_B$, and $\\alpha=\\theta$. The equivalent transpose formula in that definition gives the actual equality\n$$u_B(\\epsilon_Z(H))\\circ\\lambda^{-1}_{r_ZH}=\\epsilon_X(u_BH)\\circ T_X(\\rho_H).$$\nThis is valid for every unbounded $H$: the cited normalization theorem expressly makes no flatness assumption. In particular it does not replace the derived counit by underived multiplication on an arbitrary representative.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-sfb-kflat-scalar-comparison-normalization",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6, lemma-adjoint; agent use of the scalar mate transpose formula with the canonical balanced restriction comparison."
+   }
+  },
+  {
+   "text": "Let $f=\\epsilon_Z(J_BL)\\circ T_Z(a_L)$ and $g=J_B(\\epsilon_X(L))\\circ E_{r_XL}$. Restrict $f$ using $\\lambda$ and its naturality, and then use step 4 with $H=J_BL$. Under the open unit identifications this reads\n$$u_B(f)=\\epsilon_X(L)\\circ T_X(\\rho_{J_BL}\\circ u_A(a_L))=\\epsilon_X(L),$$\nbecause step 2 identifies the map in parentheses with the identity. Step 3 gives $u_B(g)=\\epsilon_X(L)$ as well. To conclude, precompose both $f$ and $g$ by $E_{r_XL}^{-1}:J_BT_Xr_XL\\to T_ZJ_Ar_XL$. Their restrictions remain equal, so step 1's open-adjunction injectivity gives $fE^{-1}=gE^{-1}$. Cancel this isomorphism to obtain the asserted counit equation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Agent assembly of steps 1-4; the restriction test is applied only after identifying the source with an open extension."
+   }
+  },
+  {
+   "text": "The map $a$ is natural by step 2. The common-right-adjoint comparison $E$ is natural by [lem-fix-open-scalar-tensor-normalization]; scalar counits are natural by their adjunction [lem-pur-sheaf-ring-derived-coefficient-adjunction]. Thus the displayed equality is an equality of natural transformations. For $A\\xrightarrow{1}A$, $a$ is the identity sectionwise, and $E$ is the identity under scalar unitors by the identity normalization in [lem-fix-open-scalar-tensor-normalization]. The representative formulas $p\\mapsto p\\otimes1$ and $p\\otimes a\\mapsto ap$ in the scalar adjunction identify its counit with the scalar unitor in this case, so the equation becomes the identity equation. The arguments used only finite commutative rings and arbitrary unbounded derived objects. In particular $r_XL$ need not be K-flat or have finite Tor amplitude. Empty opens, the whole open $X=Z$, and zero complexes obey the same formulas (zero sources in the empty case).",
+   "uses": [
+    "lem-fix-open-scalar-tensor-normalization",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Agent naturality and identity normalization from the cited comparison and normalized scalar adjunction; Tag 07A6."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-open-tensor-normalization",
+  "lem-cbc-proetale-extension-zero",
+  "def-weil-extension-by-zero",
+  "def-weil-presheaf-modules-sheafification",
+  "def-sp-reduction-direct-image-comparison",
+  "lem-fix-open-scalar-tensor-normalization",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+  "place": "det-sp-tower-gluing, Levels paragraph: coefficient comparisons have the same chart description; scalar/open counit compatibility made explicit using Stacks Tags 03DI, 0E8I, 0GL1, 07A6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(extensionByZero|extension_by_zero|lowerShriek).*(scalar|tensor|counit)|(scalar|tensor).*(extensionByZero|extension_by_zero|lowerShriek)",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical/module/presheaf facts do not identify the specified unbounded pro-etale comparisons; read Mates.lean 123-132, ModuleCat/Presheaf/Pushforward.lean 90-91 and ModuleCat/ChangeOfRings.lean."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero derived tensor scalar extension restriction adjunction counit compatibility",
+   "results": "{\"n_hits\": 8, \"top\": [\"ModuleCat.ExtendRestrictScalarsAdj.counit\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map\", \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"ModuleCat.RestrictionCoextensionAdj.counit'_app\", \"CategoryTheory.Adjunction.derivedε\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical/module/presheaf facts do not identify the specified unbounded pro-etale comparisons; read Mates.lean 123-132, ModuleCat/Presheaf/Pushforward.lean 90-91 and ModuleCat/ChangeOfRings.lean."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"counit\", \"whisker\"",
+   "results": "{\"n_hits\": 10, \"top\": [\"CategoryTheory.Adjunction.whiskerLeftLCounitIsoOfIsIsoUnit\", \"CategoryTheory.Adjunction.whiskerLeftRUnitIsoOfIsIsoCounit\", \"CategoryTheory.Adjunction.whiskerLeft_counit_iso_of_L_fully_faithful\", \"CategoryTheory.Adjunction.whiskerRight_counit_iso_of_L_fully_faithful\", \"CategoryTheory.Adjunction.whiskerLeftLCounitIsoOfIsIsoUnit_hom_app\", \"CategoryTheory.Adjunction.whiskerLeftRUnitIsoOfIsIsoCounit_inv_app\", \"CategoryTheory.Adjunction.whiskerLeftLCounitIsoOfIsIsoUnit_inv_app\", \"CategoryTheory.Adjunction.whiskerLeftRUnitIsoOfIsIsoCounit_hom_app\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical/module/presheaf facts do not identify the specified unbounded pro-etale comparisons; read Mates.lean 123-132, ModuleCat/Presheaf/Pushforward.lean 90-91 and ModuleCat/ChangeOfRings.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero on proetale sheaves commutes with derived change of rings and its comparison respects the scalar extension restriction counit",
+   "results": "{\"n_hits\": 8, \"top\": [\"Condensed.profiniteSolidCounit\", \"Condensed.profiniteSolidification\", \"Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit\", \"ModuleCat.ExtendRestrictScalarsAdj.counit\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map\", \"ModuleCat.ExtendRestrictScalarsAdj.unit\", \"LightCondensed.lanPresheafNatIso\", \"Condensed.lanPresheafNatIso_hom_app\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical/module/presheaf facts do not identify the specified unbounded pro-etale comparisons; read Mates.lean 123-132, ModuleCat/Presheaf/Pushforward.lean 90-91 and ModuleCat/ChangeOfRings.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open immersion derived module sheaves scalar counit square determined by restriction to the open with identity adjunction unit",
+   "results": "{\"n_hits\": 8, \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback\", \"AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical/module/presheaf facts do not identify the specified unbounded pro-etale comparisons; read Mates.lean 123-132, ModuleCat/Presheaf/Pushforward.lean 90-91 and ModuleCat/ChangeOfRings.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero commutes with derived extension of scalars and the scalar adjunction counit on unbounded sheaf complexes",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.Abelian.Ext.singleFunctor_map_comp_hom\", \"HomologicalComplex.extendSingleIso_hom_f_assoc\", \"HomologicalComplex.pOpcycles_extendOpcyclesIso_hom\", \"HomologicalComplex.extendSingleIso_inv_f_assoc\", \"HomologicalComplex.extendSingleIso\", \"HomologicalComplex.extendMap_comp_assoc\", \"HomologicalComplex.extendMap_comp\", \"HomologicalComplex.pOpcycles_extendOpcyclesIso_inv\"], \"note\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the generic mate/counit identities in Mathlib/CategoryTheory/Adjunction/Mates.lean and ordinary module counits in Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; neither states the pro-etale open scalar comparison and all its normalization clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"counit\", \"conjugate\"",
+   "results": "{\"n_hits\": 2, \"top\": [\"CategoryTheory.conjugateEquiv_counit\", \"CategoryTheory.conjugateEquiv_counit_symm\"], \"note\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the generic mate/counit identities in Mathlib/CategoryTheory/Adjunction/Mates.lean and ordinary module counits in Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; neither states the pro-etale open scalar comparison and all its normalization clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "(extensionByZero|extension_by_zero|lowerShriek).*(scalar|tensor|counit)|(scalar|tensor).*(extensionByZero|extension_by_zero|lowerShriek)",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the generic mate/counit identities in Mathlib/CategoryTheory/Adjunction/Mates.lean and ordinary module counits in Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; neither states the pro-etale open scalar comparison and all its normalization clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open immersion extension by zero and derived scalar extension preserve the extension restriction adjunction counit",
+   "results": "{\"n_hits\": 8, \"top\": [\"ModuleCat.RestrictionCoextensionAdj.counit'\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"ModuleCat.RestrictionCoextensionAdj.counit'_app\", \"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"ModuleCat.ExtendRestrictScalarsAdj.counit\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\"], \"note\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the generic mate/counit identities in Mathlib/CategoryTheory/Adjunction/Mates.lean and ordinary module counits in Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; neither states the pro-etale open scalar comparison and all its normalization clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an open immersion j, the derived change of rings comparison T j_! is compatible with the scalar extension restriction counit and has identity restriction to the open",
+   "results": "{\"n_hits\": 8, \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\"], \"note\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the generic mate/counit identities in Mathlib/CategoryTheory/Adjunction/Mates.lean and ordinary module counits in Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; neither states the pro-etale open scalar comparison and all its normalization clauses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-restriction-transition-transpose",
+  "date": "2026-10-22",
+  "group": "Q42"
+ },
+ "blueprint": {
+  "from": {
+   "node": "det-sp-tower-gluing",
+   "place": "Levels paragraph: open factor of the coefficient comparison in actual transitions; old step 3 and the identity normalization of step 7.",
+   "via": [
+    "lem-sp-restriction-transition-transpose",
+    "lem-sp-coefficient-tower-shriek-calculus"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sp-open-scalar-counit-square",
+  "worker": "stage1",
+  "summary": "Kept the statement and reused existing general open/tensor and scalar-mate normalization nodes. Proved the actual scalar counit equation by the scalar mate transpose formula, then the injective open-adjunction Hom map. No new nodes or Mathlib leaves. No flatness, boundedness, geometric-stalk conservativity or K-flatness of scalar restriction is used.",
+  "blueprint": "det-sp-tower-gluing, Levels paragraph: the coefficient comparisons have the same chart description; realizes the open factor of the actual transition comparisons and its identity normalization.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic section-normalized open unit on unbounded ringed pro-etale derived categories; the tower unit needs the actual finite open adjunction, not a replacement of its geometric route."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero",
+    "why": "Generic exact open adjunction and sectionwise scalar restriction comparison on finite-coefficient pro-etale sheaves."
+   },
+   {
+    "node": "lem-fix-open-scalar-tensor-normalization",
+    "why": "Generic common-right-adjoint open scalar comparison with its normalized inverse transpose, identification with balanced tensor, and identities; no tower-gluing argument is substituted."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic representative-normalized scalar adjunction for arbitrary unbounded module complexes."
+   },
+   {
+    "node": "lem-sfb-kflat-scalar-comparison-normalization",
+    "why": "Generic identification of restriction/tensor balancing with the scalar mate of identity on actions; needed to compare the actual scalar counits."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-open-tensor-normalization",
+  "lem-cbc-proetale-extension-zero",
+  "lem-fix-open-scalar-tensor-normalization",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sfb-kflat-scalar-comparison-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q136-ca41ec0f1",
+  "group": "Q136",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q136-ca41ec0f1 (reviewer sub-agent of L); spot-checked: Read the item in full and all 11 cited statements. Not a re-split: there is no repair note, and the base item was unsplit with an empty proof; statement and stmt_deps are byte-identical to the Q42 creation snapshots. Steps check against their citations. Step 1: the open unit from lem-sf-open-tensor-normalization makes Hom(J_R M,-) injective under restriction. Step 2: sheafification is taken on abelian presheaves, so the sectionwise a is the sheafified identity and u_A(a)=id; lem-cbc-ringed-open-scalar-adjunction states the same unit compatibility. Step 3: lem-fix's beta_j has inverse = adjunct of lambda^{-1}S_U(eta), giving u_B(E)=lambda; def-sp's transport through r_j gives the same map by uniqueness of conjugates. Step 4: lem-sfb (h=j, no flatness) gives theta=lambda^{-1} as the mate of rho, and the def-weil-pbc-adjunction-mate transpose clause gives the displayed formula exactly. Step 5: the lambda factors match on both sides, and precomposing with E^{-1} makes the source an open extension, so injectivity applies. Step 6: identity case via lem-fix 'including identities' and representative formula (2). Types verified throughout. Coefficient categories (constant finite R, ordinary unbounded pro-etale) are the same as in def-sp and lem-fix. Edge cases: empty X, X=Z, nonflat Z/4->Z/2, A=B. Duplicate search over counit/extension-by-zero/scalar statements: the nearest nodes concern the open counit, D^b_ctf only, or ULift Z; none states this square. Five tool_uses (generic open/scalar normalization nodes) accepted. Batch-5 flags: both citations reach sec-poincare-duality only through lem-pod-derived-exact-square-composition, a generic lemma on exact functors and their derived comparisons with only generic dependencies. It is not part of the trace formula or Poincare duality, so both citations are accepted. The live statement of lem-cbc-proetale-extension-zero keeps its scalar clause: its blueprint_update drops the clause but is marked not reopened. Minor report slip: citations.json is mentioned but not delivered. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.OpenScalarCounitSquare",
+  "declaration": "AlgebraicGeometry.ProEtale.openScalarCounitSquare",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.openScalarCounitAdjunction",
+   "AlgebraicGeometry.ProEtale.openScalarCounitScalarUnitor",
+   "AlgebraicGeometry.ProEtale.openScalarCounitUnit",
+   "AlgebraicGeometry.ProEtale.openScalarCounitRestriction",
+   "AlgebraicGeometry.ProEtale.openScalarCounitSquare",
+   "AlgebraicGeometry.ProEtale.openScalarCounitIdentity"
+  ],
+  "file": "lean/Sheaf/Paper/OpenScalarCounitSquare.lean",
+  "statement": "theorem openScalarCounitSquare {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] : Functor.whiskerRight (sfOpenRestrictionDerived j φ).hom (scalarExtensionFunctor φ Z) ≫ Functor.whiskerLeft (sfIntrinsicExtensionByZero j B).mapDerivedCategory (proEtaleRingDerivedExtensionAdjunction (proEtaleConstantRingMap (T := Z) φ)).counit = Functor.whiskerLeft (scalarRestriction φ X) (reductionOpenScalarIso φ j).hom ≫ Functor.whiskerRight (proEtaleRingDerivedExtensionAdjunction (proEtaleConstantRingMap (T := X) φ)).counit (sfIntrinsicExtensionByZero j B).mapDerivedCategory",
+  "branch": "newtargets-dag",
+  "by": "Q87",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3dc65d05c",
+  "group": "Q87",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN at 2d2128af2ba5. The Lean module is byte-identical to the accepted one (sha 155db2cb). The theorem stmt_deps lem-sf-open-extension-scalar-restriction-coherence and lem-trf-open-square-exchange are removed; the 6 base stmt_deps are kept; statement, proof and proof_deps are unchanged. New def-sp-open-scalar-restriction-comparison (existing:true) owns sfOpenRestriction and sfOpenRestrictionDerived: its signature matches side-live verbatim, its text describes the leftAdjointUniq-transport-then-localization construction, it has no theorem content, and its deps exist; on side-live only the theorem node named these defs, so it is not a duplicate. The requested owners are cited: def-coef-scalar-restriction-identity, def-trf-finite-pullback-coordinate-comparison, def-sp-finite-intrinsic-open-square, plus def-sp-open-scalar-tensor-data and def-sp-proetale-constant-coefficient-ring-map. Maths re-confirmed: no extra hypotheses or universe restriction; the square is a NatTrans equality with correct orientations; injectivity is claimed only on Hom(J_R M, N); restriction and identity clauses match; helper defs are real; proofs are sorry only. Advisory: sfIntrinsicDerivedOpenUnit is not in its owner's declarations list (dry run passed); two proof docstrings still name the removed theorem; three transitive owners are uncited. No compile, since no file changed."
+ }
+}

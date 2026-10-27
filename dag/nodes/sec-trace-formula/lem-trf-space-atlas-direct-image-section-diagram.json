@@ -1,0 +1,272 @@
+{
+ "id": "lem-trf-space-atlas-direct-image-section-diagram",
+ "kind": "statement",
+ "title": "Canonical atlas direct-image section diagram on the enlarged etale site",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $f:X\\to Y$ a morphism of algebraic spaces over $S$ [def-trf-algebraic-space], and $p:U\\to X$ an etale map from a scheme, not necessarily surjective. Regard schemes as algebraic spaces by [def-trf-scheme-algebraic-space]. Put $R=U\\times_XU$ [lem-trf-space-fibre-products-etale-covers], with projections $p_1,p_2$, $a=f p$ and $b=f p p_1=f p p_2$. For an $\\mathcal O_X$-module sheaf $F$ [def-weil-sheaf-of-modules-category], put $F_U=p^*F$, $F_R=p_1^*F_U\\simeq p_2^*F_U$, using the tensor pullbacks and specified chart-limit direct images of [def-trf-space-etale-module-functors]. Let $\\widetilde F$ be the extension to $\\mathcal C_X$ of [lem-trf-space-enlarged-etale-ringed-site-model]. For every etale scheme $V\\to Y$, put $W=V\\times_YX$, $Z=V\\times_YU$, $Q=V\\times_YR$. There are canonical $\\mathcal O_Y(V)$-linear identifications $(f_*F)(V)\\simeq\\widetilde F(W)$, $(a_*F_U)(V)\\simeq\\widetilde F(Z)$ and $(b_*F_R)(V)\\simeq\\widetilde F(Q)$. Under them the canonical map $f_*F\\to a_*F_U$ is restriction along $Z\\to W$, and the two maps $a_*F_U\\rightrightarrows b_*F_R$ are restriction along $Q\\rightrightarrows Z$ induced by $p_1,p_2$. The identifications and all three arrows are natural in $V$ and $F$ and preserve every specified scheme-chart projection of the direct-image limits. The scalar actions on all three section modules come from pullback of regular functions along the maps to $V$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03M8 (lemma-compute-pushforward), extension to X_spaces,etale and identification of the three section terms and restriction arrows."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-scheme-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-chartwise-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-trf-space-fibre-products-etale-covers], $R$ is a scheme. By [lem-trf-space-chartwise-etale-permanence], $p_1,p_2$ and $R\\to X$ are etale, and $W,Z,Q\\to X$ are etale: they are respectively base changes of $V\\to Y$ and composites with $p$ or $R\\to X$. Thus all three are objects of $\\mathcal C_X$. The enlarged model [lem-trf-space-enlarged-etale-ringed-site-model] identifies $\\mathcal C_U$ with $\\mathcal C_X/U$ and $\\mathcal C_R$ with $\\mathcal C_X/R$, with the restricted structure rings. No use of surjectivity of $p$ is made.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-trf-space-enlarged-etale-ringed-site-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 03LP (lemma-etale-morphism-topoi), 03FT (lemma-composition-etale), 03FU (lemma-base-change-etale)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-space-chart-adjunction-tensor-realization] to the etale maps $p,p_1,p_2$ and $R\\to X$. It identifies their specified tensor pullbacks with restriction and identifies their specified units with the tensor units. The section formula is $c\\otimes m\\mapsto cm$, with inverse $m\\mapsto1\\otimes m$. Hence the extension of $F_U$ has value $\\widetilde F(T)$ at $T\\to U$, and the extension of $F_R$ has value $\\widetilde F(T)$ at $T\\to R$. Both paths through $p_1$ and $p_2$ use this same value: the cited composition formula sends $c\\otimes(d\\otimes m)$ to $c\\,p_i^\\sharp(d)\\otimes m$, which becomes multiplication followed by restriction. This fixes the canonical identification of the two descriptions of $F_R$.",
+   "uses": [
+    "lem-trf-space-chart-adjunction-tensor-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 03LV (lemma-etale-exact-pullback), 03LW (equation-restrict-modules); sites-modules.tex Tag 03D8 (lemma-push-pull-composition-modules)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-space-chart-limit-enlarged-sections] to $(f,F)$, $(a,F_U)$ and $(b,F_R)$. The latter two vertices, using step 2, are $\\widetilde F(Z)$ and $\\widetilde F(Q)$; the first is $\\widetilde F(W)$. For each map $l=f,a,b$ the comparison is characterized by $\\pi_{T,d}(s)=s|_T$ for every chart $(T,d)\\in\\mathcal A(l,V)$. This proves the three claimed identifications for the specified direct images of [def-trf-space-etale-module-functors], retaining all their projections, including when the all-chart category is larger than the module universe.",
+   "uses": [
+    "lem-trf-space-chart-limit-enlarged-sections",
+    "def-trf-space-etale-module-functors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03M8 (lemma-compute-pushforward), first paragraph of proof; chart-limit normalization of the direct-image evaluation."
+   }
+  },
+  {
+   "text": "Compute the canonical first arrow as $f_*\\eta^p_F$ followed by the projection-preserving direct-image composition comparison of [lem-trf-space-enlarged-ringed-composition-localization]. On the enlarged localized sites of step 1 the tensor unit sends $s$ to $1\\otimes s|_{W\\times_XU}$, which step 2 sends to $s|_{W\\times_XU}$. This is precisely the unit normalization in [lem-trf-space-chart-adjunction-tensor-realization], checked on each scheme chart and hence on enlarged sections by the limiting-cone statement of [lem-trf-space-chart-limit-enlarged-sections]. The fibre-product isomorphism $W\\times_XU\\simeq Z$ sends $((v,x),u)$ to $(v,u)$ and its inverse sends $(v,u)$ to $((v,p(u)),u)$; these formulas mean the universal projection maps. Therefore the arrow is $s\\mapsto s|_Z$, and its projection to any chart $T\\to Z$ is $s|_T$.",
+   "uses": [
+    "lem-trf-space-chart-adjunction-tensor-realization",
+    "lem-trf-space-chart-limit-enlarged-sections",
+    "lem-trf-space-enlarged-ringed-composition-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03M8 (lemma-compute-pushforward), restriction arrow; sites-modules.tex Tag 03D7 (lemma-adjoint-pullback-pushforward-modules), unit."
+   }
+  },
+  {
+   "text": "Apply the same unit computation to each $p_i:R\\to U$ and $F_U$, and then apply $a_*$, using the same projection-preserving composition comparison [lem-trf-space-enlarged-ringed-composition-localization]. The fibre-product comparison $(V\\times_YU)\\times_UR\\simeq V\\times_YR$ is $((v,u),r)\\mapsto(v,r)$ with inverse $(v,r)\\mapsto((v,p_i(r)),r)$. Thus the $i$th arrow sends $t\\in\\widetilde F(Z)$ to its restriction along $q_i:Q\\to Z$, $(v,r)\\mapsto(v,p_i(r))$. The two descriptions of the target coincide by step 2; they introduce no extra automorphism of $F_R$. On a chart $T\\to Q$ its value is $t|_{q_iT}$, by the projection formula of [lem-trf-space-chart-limit-enlarged-sections].",
+   "uses": [
+    "lem-trf-space-chart-limit-enlarged-sections",
+    "lem-trf-space-chart-adjunction-tensor-realization",
+    "lem-trf-space-enlarged-ringed-composition-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03M8 (lemma-compute-pushforward), the two restriction maps t and s in the proof."
+   }
+  },
+  {
+   "text": "The comparisons of step 3 are natural in $V$ and module maps by [lem-trf-space-chart-limit-enlarged-sections]. For $V'\\to V$, the induced maps of $W,Z,Q$ commute with $Z\\to W$ and both $q_i$, since their projections are $(v',x)\\mapsto(v,x)$ and the analogous maps with $u,r$. Contravariant functoriality of restrictions therefore makes all three arrow squares commute. A module morphism commutes with these restrictions by [def-weil-sheaf-of-modules-category]. For $c\\in\\mathcal O_Y(V)$, every chart component is multiplication by its pullback along $T\\to V$, as specified in the limiting cone. The maps to $V$ agree on both sides of each restriction arrow, so each arrow is $\\mathcal O_Y(V)$-linear. These same component formulas verify preservation of every specified chart projection.",
+   "uses": [
+    "lem-trf-space-chart-limit-enlarged-sections",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03M8 (lemma-compute-pushforward), final functoriality sentence; spaces-properties.tex Tag 03G8 (lemma-morphism-ringed-topoi), regular-function formula."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-chart-adjunction-tensor-realization",
+  "lem-trf-space-chart-limit-enlarged-sections",
+  "def-trf-space-etale-module-functors",
+  "lem-trf-space-enlarged-ringed-composition-localization",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03M8 (lemma-compute-pushforward), section evaluation and restriction-arrow portion of proof; adjunction normalization expanded using Tags 03D7, 03D8, 03LV, 03LW."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Direct image module sheaf sections on an algebraic space and pullback to etale charts commute with canonical chart projections",
+   "results": "{\"top\": [], \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "enlarged.*etale|moduleDirectImage|etale.*module.*pushforward",
+   "results": "{\"top\": [], \"n_hits\": 0, \"note\": \"\", \"sub\": \"AlgebraicGeometry\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no enlarged algebraic-space ringed-site comparison with canonical chart projections"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, AlgebraicGeometry.Scheme.Modules.pushforward",
+   "results": "{\"top\": [], \"n_hits\": 0, \"note\": \"\", \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no enlarged algebraic-space ringed-site comparison with canonical chart projections"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical sections of direct image of an algebraic space module on an etale test scheme identify its atlas restriction maps with restrictions on the enlarged etale site",
+   "results": "{\"top\": [\"ModuleCat.Tilde.toOpen_res\", \"AlgebraicGeometry.Scheme.ofRestrict_app\", \"AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app\", \"ModuleCat.Tilde.res_apply\", \"AlgebraicGeometry.Scheme.ofRestrict_appLE\", \"AlgebraicGeometry.morphismRestrict_appTop\", \"AlgebraicGeometry.Scheme.restrict_presheaf_map\", \"AlgebraicGeometry.Scheme.Hom.app_eq_appLE\"], \"n_hits\": 8, \"note\": \"\", \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no enlarged algebraic-space ringed-site comparison with canonical chart projections"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compare the chart limit definition of direct image modules on algebraic spaces with evaluation on enlarged etale objects and identify the two atlas arrows functorially",
+   "results": "{\"top\": [\"smoothSheafCommRing.forgetStalk_inv_comp_eval_apply\", \"smoothSheafCommRing.forgetStalk_hom_comp_evalHom_apply\", \"smoothSheafCommRing.forgetStalk_hom_comp_evalHom\", \"smoothSheafCommRing.forgetStalk_inv_comp_eval\", \"smoothSheafCommRing.ι_forgetStalk_hom\", \"smoothSheafCommRing.ι_forgetStalk_hom_apply\", \"smoothSheafCommRing.ι_forgetStalk_inv\", \"smoothSheafCommRing.forgetStalk_inv_comp_eval_assoc\"], \"n_hits\": 8, \"note\": \"\", \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no enlarged algebraic-space ringed-site comparison with canonical chart projections"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|enlarged.*[Ee]tale|atlas.*[Dd]irect[Ii]mage",
+   "results": "{\"t\": \"2026-10-23T14:19:30Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|enlarged.*[Ee]tale|atlas.*[Dd]irect[Ii]mage\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme Zariski restriction formulas and abstract module adjunctions do not give the projection-normalized algebraic-space etale atlas diagram"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale atlas restriction arrows of module direct images are restriction on enlarged algebraic space site sections",
+   "results": "{\"t\": \"2026-10-23T14:19:30Z\", \"tool\": \"leansearch\", \"query\": \"Etale atlas restriction arrows of module direct images are restriction on enlarged algebraic space site sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.ΓRes\", \"ModuleCat.Tilde.res_apply\", \"ModuleCat.Tilde.toOpen_res\", \"AlgebraicGeometry.Scheme.Modules.restrict_obj\", \"ModuleCat.Tilde.toOpen\", \"AlgebraicGeometry.Scheme.Modules.restrict\", \"PresheafOfModules.restrictScalarsObj\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\"], \"digest\": \"07d28ee6a12af933\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme Zariski restriction formulas and abstract module adjunctions do not give the projection-normalized algebraic-space etale atlas diagram"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward, SheafOfModules.pullback",
+   "results": "{\"t\": \"2026-10-23T14:19:31Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.pushforward, SheafOfModules.pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SheafOfModules.pullback\", \"SheafOfModules.instIsLeftAdjointPullback\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pullback_comp_id\", \"SheafOfModules.pullback_id_comp\", \"SheafOfModules.conjugateEquiv_pullbackId_hom\", \"SheafOfModules.pullback_assoc\"], \"digest\": \"de3cefe46418329c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme Zariski restriction formulas and abstract module adjunctions do not give the projection-normalized algebraic-space etale atlas diagram"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Direct image of a module sheaf on algebraic spaces evaluated on etale schemes is sections on the fibre product, with atlas unit arrows equal to restriction maps",
+   "results": "{\"t\": \"2026-10-23T14:19:31Z\", \"tool\": \"leanfinder\", \"query\": \"Direct image of a module sheaf on algebraic spaces evaluated on etale schemes is sections on the fibre product, with atlas unit arrows equal to restriction maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrict\", \"AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"AlgebraicGeometry.Scheme.Modules.pushforward_obj_presheaf_map\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"AlgebraicGeometry.Scheme.Modules.restrict_obj\", \"ModuleCat.Tilde.res_apply\"], \"digest\": \"bf1e81b939c41cc2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme Zariski restriction formulas and abstract module adjunctions do not give the projection-normalized algebraic-space etale atlas diagram"
+  },
+  {
+   "tool": "grep",
+   "query": "def pushforward|def pullback|def pullbackPushforwardAdjunction",
+   "results": "{\"t\": \"2026-10-23T14:19:53Z\", \"tool\": \"grep\", \"query\": \"def pushforward|def pullback|def pullbackPushforwardAdjunction\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\"], \"digest\": \"27fa324c8c0cdbe6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme Zariski restriction formulas and abstract module adjunctions do not give the projection-normalized algebraic-space etale atlas diagram"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The adjunction unit for restriction to an object of a ringed site acts by restriction of sections, and direct image is evaluation on a fibre product",
+   "results": "{\"t\": \"2026-10-23T14:19:54Z\", \"tool\": \"leanfinder\", \"query\": \"The adjunction unit for restriction to an object of a ringed site acts by restriction of sections, and direct image is evaluation on a fibre product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\", \"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.unitToPushforwardObjUnit\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\"], \"digest\": \"061f7074337fe459\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme Zariski restriction formulas and abstract module adjunctions do not give the projection-normalized algebraic-space etale atlas diagram"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-space-pushforward-atlas-equalizer",
+  "date": "2026-10-22",
+  "group": "Q13"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Stacks 03M9 proof, the affine-target paragraph invoking 03M8: the direct image is computed by the equalizer from a surjective etale scheme atlas U -> X and its relation R = U x_X U. Extracted argument: Tag 03M8 (lemma-compute-pushforward), extension to X_spaces,etale and identification of the three section terms and restriction arrows.",
+   "via": [
+    "lem-trf-space-pushforward-atlas-equalizer",
+    "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+    "lem-trf-space-section-algebra-etale-base-change",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-space-atlas-direct-image-section-diagram",
+  "worker": "stage1",
+  "summary": "Six-step split using existing chart-limit and unit-normalized tensor-realization nodes. Explicitly computes the first unit arrow and both relation arrows, identifies both restrictions to R, and verifies naturality, scalar actions and every chart projection. No new nodes or statement changes. Reuses the interrupted turn search log after reading the candidate source declarations.",
+  "blueprint": "Historical helper below lem-trf-local-term-locality through the retained via chain: Stacks 03M9 affine-target equalizer input, specifically Tag 03M8 section evaluation and restriction arrows. The current latest blueprint ancestor is read; its contracting-correspondence route is not changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q93-278033638",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-278033638 (reviewer sub-agent of L); spot-checked: Read the item's statement and all 6 steps, the statements of all 7 cited nodes, and Stacks 03M8 (spaces-morphisms.tex l.1838 ff.). The item is still unsplit with no review in live and side-live, and there is no repair note. The statement and stmt_deps match the base byte for byte; only proof, proof_deps, proof_origin, mathlib_searches, status and split_report changed. There are no new nodes. Step 1 gets R as a scheme from fibre-products-etale-covers, the etale maps W/Z/Q/R->X from chartwise-etale-permanence (base change and composition), and C_U=C_X/U, C_R=C_X/R from the localization clause of the enlarged model. Step 2 applies the etale clause of tensor-realization (a(x)m->am, inverse m->1(x)m) and its composition clause with k=p_i, f=p, fk=R->X. Both p_i^*F_U then go to F|_R by the same map, which is the canonical F_R iso. Step 3 uses chart-limit: its projections are restrictions, it needs no representability, and its vertex is small. Step 4 is f_* of the unit followed by the composition comparison of enlarged-ringed-composition-localization, whose hypotheses the enlarged model supplies. The unit normalization gives s->s|; I checked the map W x_X U ~ Z, ((v,x),u)->(v,u). Step 5 gives q_i(v,r)=(v,p_i r), from (V x_Y U) x_U R ~ V x_Y R. Step 6 is elementary: naturality and O_Y(V)-linearity follow from the cited naturality clauses and from the common maps to V. proof_deps equals the union of the step uses. Every cited theorem is in unit sk-i-curve-zero, so tool_uses=[] is right. The dependency closure (346 nodes) does not contain the item, so there is no cycle. I checked 7 candidate duplicates (the parent equalizer, atlas-base-change-cech-geometry, etale-module-pushforward-restriction, enlarged-cover-module-kernel, zariski-etale comparison square, sfb flat base change, sfb limit sections): none states these arrows, and the item does not restate a clause of its parent. All step-source tags and labels exist (03LP, 03FT, 03FU, 03LV, 03LW, 03D7, 03D8, 03G8). There is no SGA. Edge cases checked: p=id, U empty, a non-surjective open immersion, F=0, f non-representable. The dropped surjectivity is correct, because only the parent's exactness step needs the covering. Minor: the report mentions a citations.json that is not in the commit; this has no effect on the DAG. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceAtlasDirectImageSectionDiagram",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.space_atlas_direct_image_section_diagram",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.atlasSectionObject",
+   "AlgebraicGeometry.AlgebraicSpace.atlasSectionToBase",
+   "AlgebraicGeometry.AlgebraicSpace.atlasSectionArrow",
+   "AlgebraicGeometry.AlgebraicSpace.atlasSectionTestMap",
+   "AlgebraicGeometry.AlgebraicSpace.atlasSectionChartLift",
+   "AlgebraicGeometry.AlgebraicSpace.atlasSectionScalar",
+   "AlgebraicGeometry.AlgebraicSpace.atlasSectionModule",
+   "AlgebraicGeometry.AlgebraicSpace.atlasSectionProjection",
+   "AlgebraicGeometry.AlgebraicSpace.AtlasSectionComparison",
+   "AlgebraicGeometry.AlgebraicSpace.AtlasNestedTensorFormula",
+   "AlgebraicGeometry.AlgebraicSpace.space_atlas_direct_image_section_diagram"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceAtlasDirectImageSectionDiagram.lean",
+  "statement": "theorem space_atlas_direct_image_section_diagram (f : X ⟶ Y) (U : Over S) (p : schemeSpace U ⟶ X) (hp : IsChartwiseEtale p) : ∃ (R : Over S) (p₁ p₂ : schemeSpace R ⟶ schemeSpace U) (h₁ : IsChartwiseEtale p₁) (h₂ : IsChartwiseEtale p₂), IsPullback p₁.hom p₂.hom p.hom p.hom ∧ ∃ (w : p₂ ≫ p = p₁ ≫ p) (hr : IsChartwiseEtale (p₁ ≫ p)) (α : moduleDirectImage f ≅ (smallEnlargedModuleEquivalence.{u, u} X).inverse ⋙ SheafOfModules.pushforward (enlargedStructuralMap f) ⋙ smallEnlargedModuleRestriction Y) (CU : AtlasSectionComparison f p hp (moduleTensorPullback p)) (CR : AtlasSectionComparison f (p₁ ≫ p) hr (moduleTensorPullback p ⋙ moduleTensorPullback p₁)) (c : moduleTensorPullback p ⋙ moduleTensorPullback p₂ ≅ moduleTensorPullback p ⋙ moduleTensorPullback p₁) (ι : moduleDirectImage f ⟶ moduleTensorPullback p ⋙ moduleDirectImage (p ≫ f)) (r₁ r₂ : moduleTensorPullback p ⋙ moduleDirectImage (p ≫ f) ⟶ (moduleTensorPullback p ⋙ moduleTensorPullback p₁) ⋙ moduleDirectImage ((p₁ ≫ p) ≫ f)), (∀ (F : X.Modules) (V : Y.EtaleSite) (q : ModuleChart f V) s, (((smallEnlargedModuleEquivalence.{u, u} X).counitIso.hom.app F).val.app (op q.left)) (((smallEnlargedModuleEquivalence.{u, u} X).inverse.obj F).val.map (enlargedChartLift f q.left V q.hom.left q.hom.w).op ((α.hom.app F).val.app (op V) s)) = ((moduleDirectImageModel f).projection F V).app (op q) s) ∧ (∀ (F : X.Modules) (V : X.EtaleSite) (q : ModuleChart p V) (a : (schemeSpace U).structureSheaf.obj.obj (op q.left)) (m : F.val.obj (op V)), (CU.restriction.hom.app F).val.app (op q.left) (moduleTensorSection p F V q a m) = a • F.val.map (ObjectProperty.homMk q.hom : (chartwiseEtaleMap p hp).obj q.left ⟶ V).op m) ∧ AtlasNestedTensorFormula p hp p₁ h₁ (moduleTensorPullback p ⋙ moduleTensorPullback p₁) (Iso.refl _) (p₁ ≫ p) hr CR.restriction ∧ AtlasNestedTensorFormula p hp p₂ h₂ (moduleTensorPullback p ⋙ moduleTensorPullback p₁) c (p₁ ≫ p) hr CR.restriction ∧ (∀ (F : X.Modules) (V : Y.EtaleSite) s, CU.sections F V ((ι.app F).val.app (op V) s) = (((smallEnlargedModuleEquivalence.{u, u} X).inverse.obj F).val.map (atlasSectionToBase f p hp V).op) ((α.hom.app F).val.app (op V) s)) ∧ (∀ (F : X.Modules) (V : Y.EtaleSite) s, CR.sections F V ((r₁.app F).val.app (op V) s) = (((smallEnlargedModuleEquivalence.{u, u} X).inverse.obj F).val.map (atlasSectionArrow f (p₁ ≫ p) p hr hp p₁ rfl V).op) (CU.sections F V s)) ∧ (∀ (F : X.Modules) (V : Y.EtaleSite) s, CR.sections F V ((r₂.app F).val.app (op V) s) = (((smallEnlargedModuleEquivalence.{u, u} X).inverse.obj F).val.map (atlasSectionArrow f (p₁ ≫ p) p hr hp p₂ w V).op) (CU.sections F V s))",
+  "branch": "sheaf-dag",
+  "by": "Q69",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The theorem supplies a scheme representing the overlap, the three normalized section comparisons and all three natural arrows. The helpers construct the actual enlarged fibre-product maps, scalar actions and chart projections. Tensor and nested-tensor formulas fix the comparisons and the identification of the two overlap pullbacks. Chartwise etaleness for the scheme sources is equivalent to representable etaleness by chartwise_etale_permanence. No affineness or surjectivity is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c02ff49fa",
+  "group": "Q69",
+  "result": "pass",
+  "note": "Re-delivery after the 5ad3 RETURN (H2). def-sfb-space-chartwise-etale-morphism is added to stmt_deps; the rest of the node is unchanged apart from the lean record. All five theorem-owned helpers (enlargedSmallModuleDirectImage, enlargedModuleChartLift, enlargedModuleChartRestriction from chart-limit-enlarged-sections; chartTensorEtaleRestriction, chartTensorEtaleArrow from chart-adjunction-tensor-realization) are inlined, each checked identical to its source body in side-live, so the statement is unchanged in substance. The original letI is not needed because chartwiseEtaleMap_continuous is a global instance. The remaining enlarged-model defs come from lem-trf-space-enlarged-etale-ringed-site-model, which is cited in stmt_deps and named in the node text. Imports match the recorded modules (SchemeEtaleCotangentRingMap, AlgebraicSpaceModuleOperations); proof-only modules are plain imports. lean.statement appears verbatim in the file; all 11 declarations exist; the theorem is the only sorry and no definition is hollow. The report's unit-equation overstatement is corrected. The mathematics, reviewed in full at 5ad3, is unchanged: non-surjective atlas, IsPullback overlap, c pinned by the nested formulas, alpha/CU/CR fixed by chart projections, iota/r1/r2 restrictions along the pullback.map arrows; edge cases and universes fine. The item is not yet landed in side-live. No file changed, so no compile; the worker reports a clean compile and dry run."
+ }
+}

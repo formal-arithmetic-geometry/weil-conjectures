@@ -1,0 +1,132 @@
+{
+ "id": "lem-pur-restricted-affine-diagonal-dnc-trace",
+ "kind": "statement",
+ "title": "DNC normalization of integration on the local diagonal section",
+ "statement": "Let P be a finite purity setting [def-pur-conventions], Y a Noetherian scheme, aY:Y to Spec k a locally finite-type quasi-compact structure morphism, and d a natural number. Let p:A^d_Y to Y be the ordered affine projection [def-amb-affine-trace-tower], assumed smooth of relative dimension d. Let V be an affine open of Y and E a normalized DNC Chart for p,aY,d,V [lem-pur-diagonal-orientation-refinement]. Put B=p inverse V, h=p restricted to V, and s=diagonal h. For any normalized finite twist transport t and P1 family D [def-asd-ordinary-finite-p1-arrows, def-asd-ordinary-finite-p1-data], let S be the actual affine section trace over B [def-pur-restricted-affine-diagonal-section-trace]. Let delta be the chosen normalized DNC isomorphism C(pr1,s) to C(normal projection,zero), and beta the normal-section comparison of E. Then S followed by delta followed by beta is the identity of A_B(d)[2d]. The equation involves neither alpha nor rho nor the affine counit over Y.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Agreement on the model: standard-pair DNC identity and zero-section restriction of normalized vector integration"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-diagonal-counit-comparison-data",
+  "def-pur-diagonal-dualizing-data",
+  "lem-pur-diagonal-orientation-refinement",
+  "def-amb-affine-trace-tower",
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-asd-ordinary-finite-p1-data",
+  "def-pur-restricted-affine-diagonal-section-trace"
+ ],
+ "proof": [
+  {
+   "text": "Obtain a common vector presentation of source and normal from restrictedAffineDiagonalDncVectorCoordinates and its geometric DNC equation.",
+   "uses": [
+    "lem-pur-restricted-affine-diagonal-dnc-vector-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply restrictedAffineDiagonalVectorIntegration to the source presentation. Apply E.normalized to the normal presentation: betaEtale.inv followed by cN.hom is vectorBetaInverse. Map this equation through nu-star.",
+   "uses": [
+    "lem-pur-restricted-affine-diagonal-vector-integration",
+    "def-pur-diagonal-orientation-refinement-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precompose the DNC equation by the local section trace and substitute the integration and beta-normalization equations. Cancel nu-star(cN.hom). This gives S followed by delta and normalComparison equal to nu-star(betaEtale.inv). Unfold beta and cancel betaEtale.inv followed by betaEtale.hom. Associativity and functoriality finish.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-restricted-affine-diagonal-dnc-vector-coordinates",
+  "lem-pur-restricted-affine-diagonal-vector-integration",
+  "def-pur-diagonal-orientation-refinement-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Agreement on the model: standard-pair DNC identity and zero-section restriction of normalized vector integration",
+  "note": "E5: genuine two-component reduction, geometric DNC coordinates and integration restriction; the chart-normalization and cancellation assembly is proved in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "section restriction of affine integration commutes with deformation to normal cone",
+   "results": "8 hits about scheme normalization and ideal-sheaf gluing; none concerns exceptional adjoints or DNC integration.",
+   "date": "2026-10-26",
+   "verdict": "No matching geometric integration identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsPullback.isoIsPullback",
+   "results": "9 hits: isoIsPullback and its two projection equations, their inverse versions, and reassociated forms.",
+   "date": "2026-10-26",
+   "verdict": "Used to construct the coordinates; no integration or DNC identity."
+  },
+  {
+   "tool": "grep",
+   "query": "sectionInvariant|affineTraceCounit|Dnc",
+   "results": "msearch found 0 Mathlib hits. Project rg found the affine-diagonal calculations, but their import closure reaches this item through VectorIntegrationSiteComparison and PurityDiagonalDualizingObject.",
+   "date": "2026-10-26",
+   "verdict": "No independent duplicate of the two equations with the newly constructed local section trace."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalDncAffineModel",
+  "date": "2026-10-26",
+  "group": "K4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-diagonal-dualizing-object",
+   "place": "Agreement on the model: standard-pair DNC identity and zero-section restriction of normalized vector integration",
+   "via": [
+    "lem-pur-diagonal-dnc-affine-model",
+    "lem-pur-diagonal-affine-counit-restriction",
+    "lem-pur-diagonal-ordinary-orientation-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RestrictedAffineDiagonalDncTrace",
+  "file": "lean/Sheaf/Paper/RestrictedAffineDiagonalDncTrace.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.restrictedAffineDiagonalDncTrace",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.restrictedAffineDiagonalDncTrace"
+  ],
+  "statement": "theorem restrictedAffineDiagonalDncTrace (P : PurityFiniteSetting.{u})\n    (Y : Scheme.{u}) [IsNoetherian Y] (d : ℕ)\n    [SmoothOfRelativeDimension d (affineTraceProjection Y d)]\n    (aY : Y ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aY] [QuasiCompact aY]\n    (V : Y.affineOpens)\n    (E : OrientationRefinement.Chart P (affineTraceProjection Y d) aY d V)\n    (t : Etale.OrdinaryFiniteTwistTransport P.Coefficient P.diagonalExponent\n      P.diagonalExponent_annihilates)\n    (D : ∀ (T : Scheme.{u}) [IsNoetherian T]\n      (hT : IsUnit (P.diagonalExponent : Γ(T, ⊤))),\n      Etale.OrdinaryFiniteP1Datum P.Coefficient P.diagonalExponent\n        P.diagonalExponent_annihilates t T hT) :\n    OrientationCounit.restrictedAffineDiagonalSectionTrace P Y d aY V E.geometry t D ≫\n        (OrientationRefinement.delta P (affineTraceProjection Y d) aY d V E.geometry).hom ≫\n        (OrientationRefinement.beta P (affineTraceProjection Y d) aY d V\n          E.geometry E.betaEtale).hom =\n      𝟙 (P.diagonalTwist (affineTraceProjection Y d ⁻¹ᵁ V.1).toScheme d)",
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261026T183327-L-3711903",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261026T222630-L-675880",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

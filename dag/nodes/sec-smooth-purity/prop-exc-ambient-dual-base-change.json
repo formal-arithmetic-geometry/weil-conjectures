@@ -62,7 +62,47 @@
   "def-weil-pbc-derived-categories"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-existence"
+ "unit": "sk-prop-sf-existence",
+ "blueprint_update": {
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let\n\n$$\n\\begin{array}{ccc}\nX'&\\xrightarrow{\\ g'\\ }&X\\\\\nf'\\downarrow&&\\downarrow f\\\\\nY'&\\xrightarrow{\\ g\\ }&Y\n\\end{array}\n$$\n\nbe Cartesian with $f,f'$ separated finite type carrying the ambient\nexceptional right adjoint datum of\n[def-weil-ambient-exceptional-adjoint], and let $g$ be arbitrary.\nThen the right-adjoint mate of the compact-support base-change\nisomorphism of [def-cbc-exchange-map],\n\n$$\n\\beta^{\\vee}:\\ Rf^{\\times}Rg_*\\xrightarrow{\\ \\sim\\ }Rg'_*Rf'^{\\times},\n$$\n\nis an isomorphism. On the blueprint's coefficient class\n[def-sf-fullcd-used-class], for a Cartesian square of finite-type schemes\nover $k=\\overline{\\mathbf F}_q$ and $A=A_{E,n}$, the ambient datum is not\nneeded: there $Rf^{\\times}$ and $Rf'^{\\times}$ are the right adjoints\nrelative to the bounded-below objects of étale origin of\n[thm-sf-ambient-adjoint-class], and $\\beta^{\\vee}_L$ is an isomorphism for\nevery bounded-below $L$ on $Y'$ without hypothesis. The unrestricted\nambient datum is false in general and is retained only for the complexes\noutside that class, [rem-sf-class-adjoint-residue].",
+  "proof": [
+   {
+    "text": "Compact-support base change is the isomorphism\n$Lg^*Rf_!\\xrightarrow{\\sim}Rf'_!Lg'^*$ of\n[def-cbc-exchange-map]. By\n[def-weil-ambient-exceptional-adjoint] the functors $Rf_!$ and\n$Rf'_!$ have the right adjoints $Rf^{\\times}$ and $Rf'^{\\times}$;\nthe right adjoint of the composite $Lg^*Rf_!$ is the composite\n$Rf^{\\times}Rg_*$ of the right adjoints, and the right adjoint of\n$Rf'_!Lg'^*$ is $Rg'_*Rf'^{\\times}$. An isomorphism of functors\ninduces, by uniqueness of right adjoints, a unique isomorphism of their\nright adjoints compatible with the units and counits; applied to the\ndisplayed compact-support base change this is $\\beta^{\\vee}$.",
+    "uses": [
+     "def-cbc-exchange-map",
+     "def-weil-ambient-exceptional-adjoint"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "On the coefficient class the same argument runs object-wise with the\nrelative adjunctions of [thm-sf-ambient-adjoint-class]. Let $L$ be\nbounded below on $Y'$ and let $K$ be a bounded-below object of étale\norigin on $X$. Then $Rg_*L$ is bounded below, and $Lg'^*K$ is bounded\nbelow and of étale origin by [lem-weil-pbc-comparison-pullback], so the\nbijections\n\n$$\n\\begin{aligned}\n\\operatorname{Hom}(K,Rf^{\\times}Rg_*L)&\\cong\\operatorname{Hom}(Rf_!K,Rg_*L)\n\\cong\\operatorname{Hom}(Lg^*Rf_!K,L)\\\\\n&\\cong\\operatorname{Hom}(Rf'_!Lg'^*K,L)\n\\cong\\operatorname{Hom}(Lg'^*K,Rf'^{\\times}L)\n\\cong\\operatorname{Hom}(K,Rg'_*Rf'^{\\times}L)\n\\end{aligned}\n$$\n\nare defined, natural in $K$, and given by composition with\n$\\beta^{\\vee}_L$. Both $Rf^{\\times}Rg_*L=\\nu_X^*f^{\\times}R\\nu_{Y,*}Rg_*L$ and\n$Rg'_*Rf'^{\\times}L=Rg'_*\\nu_{X'}^*f'^{\\times}R\\nu_{Y',*}L$ are bounded below\nand of étale origin: the étale right adjoints $f^{\\times}$, $f'^{\\times}$\ncarry bounded-below objects to bounded-below ones, the étale\ncompact-support functors having finite cohomological dimension, and\n$Rg'_*\\nu_{X'}^*\\cong\\nu_X^*Rg'_{\\mathrm{et},*}$ on bounded-below objects\nby [prop-weil-pbc-comparison-direct-image], $g'$ being quasi-compact and\nquasi-separated. Taking $K$ to be each of these two objects, the Yoneda\nargument in the full subcategory of bounded-below objects of étale origin\nshows that $\\beta^{\\vee}_L$ is an isomorphism.",
+    "uses": [
+     "thm-sf-ambient-adjoint-class",
+     "lem-weil-pbc-comparison-pullback",
+     "prop-weil-pbc-comparison-direct-image"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; a worker who touches the node follows it"
+ }
 }

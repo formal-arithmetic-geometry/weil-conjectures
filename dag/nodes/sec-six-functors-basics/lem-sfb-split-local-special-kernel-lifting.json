@@ -1,0 +1,239 @@
+{
+ "id": "lem-sfb-split-local-special-kernel-lifting",
+ "kind": "statement",
+ "title": "Lifting a split torus special kernel over a Noetherian local ring",
+ "statement": "Let $(R,\\mathfrak m)$ be a nonzero commutative Noetherian local ring [def-weil-pbc-noetherian-ring], put $k=R/\\mathfrak m$ [def-weil-residue-field], and put $S=\\operatorname{Spec}R$ [def-weil-affine-spectrum]. For any finitely generated additive abelian group $M$, write $D_R(M)=\\operatorname{Spec}R[M]$, where $R[M]$ has basis $e_m$ indexed by $m\\in M$, multiplication $e_me_n=e_{m+n}$, comultiplication $e_m\\mapsto e_m\\otimes e_m$, counit $e_m\\mapsto1$, and inverse $e_m\\mapsto e_{-m}$. An $S$-group scheme means an $S$-scheme with multiplication, identity section and inverse satisfying the group diagrams. Let $r\\geq0$, let $P=D_R(\\mathbf Z^r)=\\mathbf G_{m,S}^r$ [def-sc-gm-ga], let $G$ be a separated $S$-group scheme of finite presentation [def-pc-scheme, def-weil-pbc-scheme-conventions], and let $u:P\\to G$ be an $S$-group homomorphism. Define $\\ker(u_k)=P_k\\times_{G_k,e_k}\\operatorname{Spec}k$, with scheme-theoretic fibre products and base changes [def-pc-base-change]. There exists a subgroup $L\\subseteq\\mathbf Z^r$ such that the closed immersion $j:D_R(\\mathbf Z^r/L)\\hookrightarrow P$ [def-weil-closed-immersion], induced by $R[\\mathbf Z^r]\\twoheadrightarrow R[\\mathbf Z^r/L]$, has closed fibre $j_k$ equal to $\\ker(u_k)\\hookrightarrow P_k$, and $u\\circ j$ is the identity-valued homomorphism $D_R(\\mathbf Z^r/L)\\to G$.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Reductive group schemes, Remark B.1.2 (printed p.280) and Corollary B.2.7 (p.287). Agent-formulated local consequence: split special-kernel subgroup, nilpotent rigidity, and coefficientwise Krull intersection; original not archived locally. No Stacks tag states the group-scheme lifting assertion."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-residue-field",
+  "def-weil-affine-spectrum",
+  "def-sc-gm-ga",
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-base-change",
+  "def-weil-closed-immersion",
+  "def-sfb-ring-diagonalizable-group"
+ ],
+ "proof": [
+  {
+   "text": "Put $v=e_G\\circ p_P:P\\to G$ and form the equalizer $K=P\\times_{G\\times_SG,(u,v),\\Delta_G}G$. The definition of separatedness [def-weil-proper-morphism] makes $\\Delta_G$ a closed immersion; [lem-weil-pbc-closed-immersion-base-change] therefore makes $K\\to P$ a closed immersion. The fibre-product universal property identifies $K$ with $P\\times_{G,u,e_G}S$: an equality $u(x)=e_G$ determines the common value in $G$ uniquely. The same universal property identifies its closed fibre with the kernel in the statement. On points over every $k$-algebra the kernel is closed under multiplication and inverse because $u_k$ preserves them. Restricting the multiplication and inverse morphisms through this fibre product therefore gives $K_k$ its group structure and makes $K_k\\hookrightarrow P_k$ a group homomorphism. By [def-weil-closed-immersion] write $K_k=\\operatorname{Spec}B$ and its inclusion as a surjection $q:k[\\mathbf Z^r]\\twoheadrightarrow B$. Here [lem-weil-pbc-fibre-product-affine-spectra] identifies $P_k$ with the spectrum of $k[\\mathbf Z^r]$: tensoring the displayed free monomial algebra with $k$ simply reduces its coefficients.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.9(c), printed p.234; the kernel and its closedness expanded using the separated diagonal"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-affine-group-coordinate-hopf] to the affine $k$-group $K_k$. Pulling back the group-homomorphism diagrams for its inclusion shows that $b_a=q(e_a)$ is group-like, has counit $1$, and satisfies $b_ab_c=b_{a+c}$ and $b_a^{-1}=b_{-a}$. Let $L=\\{a\\in\\mathbf Z^r:b_a=1\\}$ and $M=\\mathbf Z^r/L$. Since $a\\mapsto b_a$ is a homomorphism into $B^\\times$, $L$ is a subgroup and $b_a=b_c$ exactly when $a-c\\in L$. Thus the distinct elements $b_{\\bar a}$ indexed by $M$ span $B$ (apply $q$ to a finite monomial expansion). They are linearly independent by [lem-sfb-coalgebra-group-like-independent], whose base-field hypothesis holds for the residue field $k$; it does not require algebraic closedness or reducedness. Consequently $k[M]\\to B$, $e_{\\bar a}\\mapsto b_a$, is a bijective algebra map. On the displayed basis it preserves coproduct, counit and antipode. Its composite with $k[\\mathbf Z^r]\\to k[M]$ is $q$. Hence, as a closed subscheme of $P_k$, $K_k$ is exactly $D_k(M)$ embedded by this quotient; the equality is scheme-theoretic, not just equality of geometric points. The images of the $r$ standard basis vectors generate $M$.",
+   "uses": [
+    "lem-sfb-affine-group-coordinate-hopf",
+    "lem-sfb-coalgebra-group-like-independent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorems 12.8 and 12.9(c), printed pp.233-234; explicit image group and inclusion, using Proposition 4.23"
+   }
+  },
+  {
+   "text": "Set $H=D_R(M)$ and define $j:H\\to P$ by $e_a\\mapsto e_{\\bar a}$. This algebra map is surjective since every basis element has a representative, so [def-weil-closed-immersion] makes $j$ a closed immersion. Its compatibility with coproduct, counit and antipode is checked on $e_a$: both coproduct composites send it to $e_{\\bar a}\\otimes e_{\\bar a}$, both counits send it to $1$, and both antipode composites send it to $e_{-\\bar a}$. Under the affine product formula [lem-weil-pbc-fibre-product-affine-spectra], these are precisely the three group-homomorphism diagrams. For any quotient $R\\to A$, the coefficient map $R[M]\\otimes_RA\\to A[M]$ sends $e_m\\otimes c$ to $ce_m$ and has inverse $ce_m\\mapsto e_m\\otimes c$, extended additively. Thus it identifies the base-changed group and inclusion with $D_A(M)\\hookrightarrow D_A(\\mathbf Z^r)$. For $A=k$, Step 2 gives $j_k=\\ker(u_k)\\hookrightarrow P_k$. In particular $f=u\\circ j$ is identity-valued on the closed fibre.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.9(a),(c), pp.233-234; group-algebra construction over R and coefficient base change written explicitly"
+   }
+  },
+  {
+   "text": "For each $n\\geq1$ put $A_n=R/\\mathfrak m^n$ and $J_n=\\mathfrak m/\\mathfrak m^n\\subseteq A_n$. Then $J_n^n=0$ and $A_n/J_n=k$. Apply [lem-sfb-diagonalizable-nilpotent-triviality] to $D_{A_n}(M)$, $G_{A_n}$ and $f_{A_n}$. The group $M$ is finitely generated by Step 2, the required base change of $H$ is the explicit one in Step 3, and the restriction of $f_{A_n}$ modulo $J_n$ is identity-valued by Step 3. Hence $f_{A_n}=e_{G_{A_n}}\\circ p_{H_{A_n}}$ for every $n\\geq1$. This application uses the arbitrary-target clause of the cited statement.",
+   "uses": [
+    "lem-sfb-diagonalizable-nilpotent-triviality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary B.2.7, printed p.287, applied over R/m^n"
+   }
+  },
+  {
+   "text": "Form the equalizer $E$ of $f:H\\to G$ and $e_G\\circ p_H$. As in Step 1, it is the pullback of the closed diagonal of $G$, so [lem-weil-pbc-closed-immersion-base-change] and [def-weil-closed-immersion] give $E=\\operatorname{Spec}(R[M]/I)$ for an ideal $I\\subseteq R[M]$. For each $n$, Step 4 says that $H_{A_n}\\to H$ factors through $E$. On rings this means $I$ maps to zero in $A_n[M]$; equivalently every coefficient of every $x\\in I$ lies in $\\mathfrak m^n$. Apply [lem-weil-pbc-krull-intersection-jacobson] with ring $R$, ideal $\\mathfrak m$ and finite module $R$: $R$ is Noetherian, $R$ is generated by $1$ as an $R$-module, and the unique maximal ideal $\\mathfrak m$ is the Jacobson radical. It gives $\\bigcap_n\\mathfrak m^n=0$. Write $x\\in I$ as a finite sum $\\sum_m c_me_m$. Each $c_m$ is in that intersection, hence zero, so $I=0$. Therefore $E=H$ and $f=e_G\\circ p_H$. This proves the required identity-valued assertion together with the special-fibre equality already proved in Step 3; Krull intersection was applied only to the finite module $R$, not to the generally infinite free module $R[M]$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-krull-intersection-jacobson"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IQ (lemma-intersection-powers-ideal-module), part (2), applied coefficientwise; equalizer as in Step 1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-sfb-affine-group-coordinate-hopf",
+  "lem-sfb-coalgebra-group-like-independent",
+  "lem-sfb-diagonalizable-nilpotent-triviality",
+  "lem-weil-pbc-krull-intersection-jacobson"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Assembly of Remark B.1.2 and Corollary B.2.7, pp.280 and 287, with the explicit coalgebra proof of Milne Theorem 12.9(c), pp.233-234, and coefficientwise Stacks Tag 00IQ. Conrad read online, local archive WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "diagonali[sz]able|multiplicative.type|torus",
+   "results": "0 hits; ; returned names/files: ; Mathlib/AlgebraicGeometry/ searched",
+   "date": "2026-10-24",
+   "verdict": "no match: coordinate-ring or abstract-group kernels and formally unramified ring maps do not lift subgroup schemes inside a relative split torus; the latter require an unramified target, absent here. The bialgebra instances construct group-algebra structures only. Both semantic phrasings inspected."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The kernel of a homomorphism from a split torus over a local Noetherian ring contains the diagonalizable lift of its special fibre kernel",
+   "results": "8 hits; ; returned names/files: RingHom.ker, AlgebraicGeometry.Scheme.Hom.ker, LieHom.ker, Ideal.kerLiftAlg_toRingHom, Ideal.kerLiftAlg, AlgHom.ker_coe, ModuleCat.kernelIsLimit, Ideal.kerLiftAlg_injective",
+   "date": "2026-10-24",
+   "verdict": "no match: coordinate-ring or abstract-group kernels and formally unramified ring maps do not lift subgroup schemes inside a relative split torus; the latter require an unramified target, absent here. The bialgebra instances construct group-algebra structures only. Both semantic phrasings inspected."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidAlgebra\", \"bialgebra\"",
+   "results": "2 hits; ; returned names/files: AddMonoidAlgebra.instBialgebra, MonoidAlgebra.instBialgebra",
+   "date": "2026-10-24",
+   "verdict": "no match: coordinate-ring or abstract-group kernels and formally unramified ring maps do not lift subgroup schemes inside a relative split torus; the latter require an unramified target, absent here. The bialgebra instances construct group-algebra structures only. Both semantic phrasings inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a homomorphism from a split torus over a Noetherian local ring to a separated group scheme, the kernel on the residue field lifts to a split diagonalizable subgroup killed by the homomorphism",
+   "results": "8 hits; ; returned names/files: IsDedekindDomain.selmerGroup.fromUnit_ker, IsDedekindDomain.selmerGroup.valuation_ker_eq, ValuationSubring.ker_unitGroupToResidueFieldUnits, AlgHom.ker_kerSquareLift, AdicCompletion.kerProj_of, Algebra.FormallySmooth.exists_kerProj_comp_eq_id, Algebra.Extension.Hom.subToKer, AlgHom.kerSquareLift_mk",
+   "date": "2026-10-24",
+   "verdict": "no match: coordinate-ring or abstract-group kernels and formally unramified ring maps do not lift subgroup schemes inside a relative split torus; the latter require an unramified target, absent here. The bialgebra instances construct group-algebra structures only. Both semantic phrasings inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Infinitesimal rigidity of diagonalizable group homomorphisms: a homomorphism trivial on the residue field is trivial over nilpotent thickenings and its special kernel lifts",
+   "results": "8 hits; ; returned names/files: Algebra.FormallyUnramified.lift_unique, Algebra.FormallyUnramified.ext, Algebra.FormallyUnramified.ext', Algebra.Extension.homInfinitesimal, Algebra.FormallyUnramified.lift_unique_of_ringHom, Algebra.FormallyUnramified.lift_unique', Algebra.FormallyUnramified.ext_of_iInf, RingHom.FormallyEtale",
+   "date": "2026-10-24",
+   "verdict": "no match: coordinate-ring or abstract-group kernels and formally unramified ring maps do not lift subgroup schemes inside a relative split torus; the latter require an unramified target, absent here. The bialgebra instances construct group-algebra structures only. Both semantic phrasings inspected."
+  },
+  {
+   "tool": "grep",
+   "query": "torus.*kernel|kernel.*torus|diagonali[sz]able",
+   "results": "0 hits; ; returned names/files: ; Mathlib/AlgebraicGeometry searched",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned residue-field and abstract-group kernel, quotient-algebra and formally smooth algebra maps do not lift subgroup schemes. AddMonoidAlgebra.instBialgebra (Mathlib/RingTheory/Bialgebra/MonoidAlgebra.lean:61, generated additive instance) only constructs the bialgebra. Earlier second semantic phrasing retained from the source node; new semantic hits inspected."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A special fibre kernel of a split torus homomorphism lifts over a local Noetherian ring as a diagonalizable subgroup killed by the homomorphism",
+   "results": "8 hits; ; returned names/files: QuotientGroup.ker_lift, RingCon.rangeS_kerLift, Ideal.kerLiftAlg_toRingHom, NormedAddGroupHom.ker.lift, RingCon.kerLift_range_eq, CompleteOrthogonalIdempotents.lift_of_isNilpotent_ker_aux, MonoidHom.fiberEquivKer, Algebra.FormallySmooth.liftOfSurjective",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned residue-field and abstract-group kernel, quotient-algebra and formally smooth algebra maps do not lift subgroup schemes. AddMonoidAlgebra.instBialgebra (Mathlib/RingTheory/Bialgebra/MonoidAlgebra.lean:61, generated additive instance) only constructs the bialgebra. Earlier second semantic phrasing retained from the source node; new semantic hits inspected."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AddMonoidAlgebra\", \"Bialgebra\"",
+   "results": "1 hits; ; returned names/files: AddMonoidAlgebra.instBialgebra",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned residue-field and abstract-group kernel, quotient-algebra and formally smooth algebra maps do not lift subgroup schemes. AddMonoidAlgebra.instBialgebra (Mathlib/RingTheory/Bialgebra/MonoidAlgebra.lean:61, generated additive instance) only constructs the bialgebra. Earlier second semantic phrasing retained from the source node; new semantic hits inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The kernel on the residue field of a homomorphism from a split torus over a Noetherian local ring lifts to a diagonalizable subgroup in the kernel",
+   "results": "8 hits; ; returned names/files: ValuationSubring.ker_unitGroupToResidueFieldUnits, IsLocalRing.ker_residue, IsDedekindDomain.selmerGroup.valuation_ker_eq, Ideal.ResidueField.lift, Ideal.ker_algebraMap_residueField, AlgHom.ker_kerSquareLift, AlgHom.kerSquareLift_mk, IsDedekindDomain.selmerGroup.fromUnit_ker",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned residue-field and abstract-group kernel, quotient-algebra and formally smooth algebra maps do not lift subgroup schemes. AddMonoidAlgebra.instBialgebra (Mathlib/RingTheory/Bialgebra/MonoidAlgebra.lean:61, generated additive instance) only constructs the bialgebra. Earlier second semantic phrasing retained from the source node; new semantic hits inspected."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-torus-hom-generic-closed-rigidity",
+  "date": "2026-10-24",
+  "group": "Q22"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Generic torus quotient input, closedness of the extended generic torus inclusion: Lifting a split torus special kernel over a Noetherian local ring. No imported blueprint ancestor was found (blueprint_refs.py ancestor returns None).",
+   "via": [
+    "lem-sfb-torus-hom-generic-closed-rigidity",
+    "lem-sfb-normal-semiabelian-generic-torus-quotient",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-split-local-special-kernel-lifting",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Split the special-kernel construction through explicit monomial-image coalgebra classification over the arbitrary residue field, one new unsplit nilpotent-triviality input, and coefficientwise Krull intersection. Reused three Mathlib theorem leaves instead of re-creating them; no exact project attachment.",
+  "blueprint": "Current latest main-20261024 direct-images proof (3) was read. The inherited created-node provenance has no imported blueprint ancestor (blueprint_refs ancestor returns None). Steps 1-3 realize the special-kernel subgroup input recorded in the parent torus-hom-generic-closed-rigidity proof; Step 4 supplies its nilpotent rigidity, and Step 5 its coefficientwise Krull intersection. No change to the upper unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-d6a8f4460",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-d6a8f4460 (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited statement in full. Source: Conrad, Reductive group schemes. I fetched the author's PDF read-only because it is not in literature/. Corollary B.2.7 (printed p.287) says verbatim that if J^{n+1}=0, a homomorphism H→G from a multiplicative-type H to an ARBITRARY S-group scheme G that is trivial over S0 is trivial. The new node lem-sfb-diagonalizable-nilpotent-triviality is exactly the split case D_A(M), M finitely generated, J^N=0, and its hypotheses match one for one. I also checked it independently: the difference derivation is primitive in J⊗A[M], so it is zero. Remark B.1.2 (p.280) supports the item's subgroup description. Step 1: the kernel is the pullback of the closed diagonal (separatedness), so K_k is affine and closed in P_k. Step 2: the coordinate-ring Hopf node and the group-like independence node both work over an arbitrary field, giving k[M]≅B compatibly with q. It correctly avoids the algebraically-closed-field subgroup node. Step 3 is an elementary base change. Step 4 applies the new node over A_n=R/m^n with J_n=m/m^n, J_n^n=0. Step 5 forces every coefficient of I into m^n, and Krull on the finite module R gives I=0. Edge cases checked: r=0, L=0, L=Z^r, R a field, R=k[ε], μ_p in characteristic p; for the new node M=0, J=0 and J=A. Duplicate search (rg -L for diagonalizable, multiplicative type, rigid, nilpotent, B.2.7) found no existing node stating this rigidity; the nearest ones assume algebraically closed fields, connected parameter spaces or actions, and the parent node would make a cycle. All proof_deps are Mathlib leaves, so there are no tool_uses. The item statement is unchanged, there is no SGA citation, and the blueprint fields are consistent (no imported ancestor). This is a first split, not a re-split. No changes were needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SplitLocalSpecialKernelLifting",
+  "declaration": "AlgebraicGeometry.splitLocalSpecialKernelLifting",
+  "file": "lean/Sheaf/AlgebraicGeometry/SplitLocalSpecialKernelLifting.lean",
+  "statement": "theorem splitLocalSpecialKernelLifting (R : Type u) [CommRing R] [IsLocalRing R] [IsNoetherianRing R] (r : ℕ) (G : Over (Spec (.of R))) [GrpObj G] [IsSeparated G.hom] [LocallyOfFinitePresentation G.hom] [QuasiCompact G.hom] [QuasiSeparated G.hom] (f : (ringDiagonalizableGroup R (Fin r → ULift.{u} ℤ)).X ⟶ G) [IsMonHom f] : ∃ L : AddSubgroup (Fin r → ULift.{u} ℤ), IsClosedImmersion (ringDiagonalizableGroupMap R (QuotientAddGroup.mk' L)).hom.hom.left ∧ IsPullback (((Over.pullback (Spec.map (CommRingCat.ofHom (IsLocalRing.residue R)))).map (ringDiagonalizableGroupMap R (QuotientAddGroup.mk' L)).hom.hom).left) (((Over.pullback (Spec.map (CommRingCat.ofHom (IsLocalRing.residue R)))).map (toUnit (ringDiagonalizableGroup R ((Fin r → ULift.{u} ℤ) ⧸ L)).X)).left) (((Over.pullback (Spec.map (CommRingCat.ofHom (IsLocalRing.residue R)))).map f).left) (((Over.pullback (Spec.map (CommRingCat.ofHom (IsLocalRing.residue R)))).map η[G]).left) ∧ (ringDiagonalizableGroupMap R (QuotientAddGroup.mk' L)).hom.hom ≫ f = toUnit (ringDiagonalizableGroup R ((Fin r → ULift.{u} ℤ) ⧸ L)).X ≫ η[G]",
+  "branch": "sheaf-dag",
+  "by": "NA",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-553221a98",
+  "group": "NA",
+  "result": "pass",
+  "note": "Item node differs from live only in lean + stmt_deps (adds new def node); 8 dep nodes byte-identical to live; both lean.statement fields verbatim. Every hypothesis and clause matched: Noetherian local R (IsLocalRing gives nonzero); P = hopfSpec of AddMonoidAlgebra R (Fin r → ULift ℤ), r=0 allowed, ULift only moves the lattice to universe u; G GrpObj, IsSeparated + LocallyOfFinitePresentation + QuasiCompact + QuasiSeparated (scheme-conventions reading), nothing extra; f IsMonHom; ∃ L AddSubgroup; j = canonical mapDomainBialgHom of mk' L; IsClosedImmersion; closed-fibre IsPullback of j_k, p_k, f_k, e_k under one Over.pullback along Spec(residue), i.e. scheme-theoretic kernel incl. nonreduced; j ≫ f = toUnit ≫ η[G]. Edge cases r=0, L=0/⊤, R field, nonreduced, char p checked. New node def-sfb-ring-diagonalizable-group justified (only field-based diagonalizableGroup / def-sc-gm-ga declarations exist), fields correct, abbrevs of canonical Mathlib hopfSpec construction, no hollow data. Docstrings with source/blueprint and 5 proof steps; proof sorry; lines ≤100. Advisory: public BaseChangeConventions import not used by the signature; def-sc-gm-ga cited for G_m over a ring is harmless since P is defined explicitly. No file changed, no compile run."
+ }
+}

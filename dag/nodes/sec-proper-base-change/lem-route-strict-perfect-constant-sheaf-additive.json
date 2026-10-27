@@ -1,0 +1,187 @@
+{
+ "id": "lem-route-strict-perfect-constant-sheaf-additive",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-adic-completion-reduction",
+   "via": [
+    "lem-weil-pbc-koszul-completion-scalar-comparison"
+   ],
+   "place": "Constant coefficient passage in the adic-completion scalar-comparison route: sheafify the constant finite-projective coefficient complex termwise. This helper supplies additivity of that constant module functor (StrictPerfectCoefficientPackage.lean:168-196), needed to form its complex functor. The recorded ancestor is historical; the current blueprint latest has no file with this ancestor id."
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The constant module sheaf functor is additive.",
+ "statement": "Let $\\mathcal C$ be a small category with a Grothendieck topology $J$, and let $\\Lambda$ be a commutative ring. Fix one universe containing the objects and morphisms of $\\mathcal C$, the ring $\\Lambda$, and all modules considered, as required by this same-universe formulation [def-weil-size-convention]. Write $\\Lambda_0$ for the constant presheaf of rings, $\\Lambda_0(U)=\\Lambda$ with identity restriction maps, and $\\underline\\Lambda=\\Lambda_0^\\#$ for its ring sheafification [def-weil-pbc-constant-sheaf]. For a $\\Lambda$-module $M$, let $cM$ be the presheaf of $\\Lambda_0$-modules with value $M$ and identity restrictions; for a linear map $f:M\\to N$, put $(cf)_U=f$. Let $a:\\operatorname{PMod}(\\Lambda_0)\\to\\operatorname{Mod}(\\underline\\Lambda)$ be module sheafification along $\\Lambda_0\\to\\underline\\Lambda$ [lem-pc-sites-module-sheafification-interface], with the sectionwise module-sheaf category [def-weil-sheaf-of-modules-category]. Then the functor $T=a\\circ c$, which is $\\mathrm{SheafOfModules.strictPerfectConstantSheaf}\\ J\\ \\Lambda$, is additive [def-weil-pbc-additive-functor]: for any $\\Lambda$-modules $M,N$ and linear maps $f,g:M\\to N$,\n$$T(f+g)=T(f)+T(g).$$",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-adic-completion-reduction.proof.md",
+  "place": "lem-weil-pbc-koszul-completion-scalar-comparison: the Lean of this node (its module Sheaf.Paper.KoszulCompletionScalarComparison imports Sheaf.Paper.StrictPerfectCoefficientPackage (1 step)) reaches SheafOfModules.strictPerfectConstantSheaf_additive, a sorry on the sorry route of batch3, batch4, batch5 with no node; Lean: SHEAF file lean/Sheaf/Paper/StrictPerfectCoefficientPackage.lean, declaration SheafOfModules.strictPerfectConstantSheaf_additive (module Sheaf.Paper.StrictPerfectCoefficientPackage, lines 191-196, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-constant-sheaf",
+  "lem-pc-sites-module-sheafification-interface",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-additive-functor"
+ ],
+ "proof": [
+  {
+   "text": "For the constant-presheaf functor $c$ in the statement, identity restrictions are semilinear over identity maps of $\\Lambda$. A linear map gives a natural transformation because every restriction is the identity; identities and compositions are preserved componentwise. Addition is pointwise: at every object $U$ and $m\\in M$, $(c(f+g))_U(m)=(f+g)(m)=f(m)+g(m)=(cf+cg)_U(m)$. Hence $c(f+g)=cf+cg$. This is a componentwise equality of the explicitly defined maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY (lemma-sheafification-presheaf-modules), universal property; applied to the constant presheaf of rings. Identification with the attached functor: lean/Sheaf/Paper/StrictPerfectCoefficientPackage.lean:168-196."
+   }
+  },
+  {
+   "text": "Let $P,Q$ be presheaves of $\\Lambda_0$-modules and $h,k:P\\to Q$. By [lem-pc-sites-module-sheafification-interface], with $\\mathcal O=\\Lambda_0$ and $\\mathcal O^\\#=\\underline\\Lambda$, every map $P\\to i(aQ)$ extends uniquely through the unit $\\eta_P:P\\to i(aP)$; $i$ forgets the sheaf condition and restricts scalars. The definition of $a(h)$ gives $i(a(h))\\eta_P=\\eta_Qh$, and similarly for $k$ and $h+k$. Since module morphisms and their sums are sectionwise linear [def-weil-sheaf-of-modules-category], $i(a(h)+a(k))\\eta_P=\\eta_Qh+\\eta_Qk=\\eta_Q(h+k)$. Thus $a(h)+a(k)$ and $a(h+k)$ extend the same map. Uniqueness in the cited universal property gives $a(h+k)=a(h)+a(k)$. No claim that $\\Lambda_0$ is already a sheaf is used.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY (lemma-sheafification-presheaf-modules), universal property; applied to the constant presheaf of rings. Identification with the attached functor: lean/Sheaf/Paper/StrictPerfectCoefficientPackage.lean:168-196."
+   }
+  },
+  {
+   "text": "Apply step 2 to $h=cf$ and $k=cg$, and use step 1. Then $T(f+g)=a(c(f+g))=a(cf+cg)=a(cf)+a(cg)=T(f)+T(g)$. This is exactly additivity [def-weil-pbc-additive-functor]. The formula for $T$ is the defining composite of $\\mathrm{strictPerfectConstantSheaf}$, so it proves the attached declaration.",
+   "uses": [
+    "def-weil-pbc-additive-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY (lemma-sheafification-presheaf-modules), universal property; applied to the constant presheaf of rings. Identification with the attached functor: lean/Sheaf/Paper/StrictPerfectCoefficientPackage.lean:168-196."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-additive-functor",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-sites-module-sheafification-interface"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CY (lemma-sheafification-presheaf-modules), elementary uniqueness calculation for additivity, following the attached Lean docstring construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rlw 'strictPerfectConstantSheaf_additive' lean/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-26",
+   "verdict": "no match",
+   "note": "name grep by tools/route_nodes.py only; the stage-1 worker adds LeanSearch / Loogle / LeanFinder searches"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafification.*[Aa]dditive|[Aa]dditive.*sheafification|left_adjoint_additive",
+   "results": "3 hits: Mathlib/CategoryTheory/Adjunction/Additive.lean, Mathlib/CategoryTheory/Adjunction/Additive.lean, Mathlib/CategoryTheory/Adjunction/Additive.lean",
+   "date": "2026-10-25",
+   "verdict": "no exact match: hits provide the module sheafification construction, its universal property, or additive forgetful functors; none states additivity of this explicitly defined constant module-sheaf composite"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheafification of presheaves of modules is an additive functor",
+   "results": "8 hits: PresheafOfModules.sheafification, PresheafOfModules.sheafify, PresheafOfModules.sheafification_map, PresheafOfModules.sheafifyMap, PresheafOfModules.toSheafify, CategoryTheory.sheafification, CategoryTheory.presheafToSheaf, CategoryTheory.plusPlusSheaf",
+   "date": "2026-10-25",
+   "verdict": "no exact match: hits provide the module sheafification construction, its universal property, or additive forgetful functors; none states additivity of this explicitly defined constant module-sheaf composite"
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.sheafification",
+   "results": "12 hits: PresheafOfModules.sheafification, PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification, PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification, PresheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatCompSheafOfModulesSheafificationToSheaf, PresheafOfModules.sheafificationAdjunction, PresheafOfModules.sheafificationCompToSheaf, PresheafOfModules.sheafificationHomEquiv, PresheafOfModules.sheafificationCompForgetCompToPresheaf",
+   "date": "2026-10-25",
+   "verdict": "no exact match: hits provide the module sheafification construction, its universal property, or additive forgetful functors; none states additivity of this explicitly defined constant module-sheaf composite"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The functor from modules over a ring to sheaves of modules over its constant ring sheaf obtained by sheafifying constant presheaves preserves addition of morphisms",
+   "results": "8 hits: SheafOfModules.add_val, SheafOfModules.instAdditivePresheafOfModulesValRingCatForget, SheafOfModules.instAdditiveSheafAddCommGrpCatToSheaf, PresheafOfModules.Sheafify.add_smul, PresheafOfModules.Sheafify.smul_add, SheafOfModules.instPreadditive, AlgebraicGeometry.Scheme.Modules.Hom.add_app, CategoryTheory.presheafToSheaf_additive",
+   "date": "2026-10-25",
+   "verdict": "no exact match: hits provide the module sheafification construction, its universal property, or additive forgetful functors; none states additivity of this explicitly defined constant module-sheaf composite"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafificationHomEquiv|sheafificationAdjunction|instAdditive|map_add",
+   "results": "18 hits: Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/ChangeOfRings.lean",
+   "date": "2026-10-25",
+   "verdict": "no exact match: hits provide the module sheafification construction, its universal property, or additive forgetful functors; none states additivity of this explicitly defined constant module-sheaf composite"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constant presheaf module functor is additive and composition with module sheafification preserves sums of linear maps",
+   "results": "8 hits: PresheafOfModules.Sheafify.add_smul, PresheafOfModules.Sheafify.smul_add, PresheafOfModules.instPreadditive, SheafOfModules.instAdditivePresheafOfModulesValRingCatForget, SheafOfModules.map_ιFree_mapFree_hom, PresheafOfModules.toPresheaf_map_toSheafify, PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def",
+   "date": "2026-10-25",
+   "verdict": "no exact match: hits provide the module sheafification construction, its universal property, or additive forgetful functors; none states additivity of this explicitly defined constant module-sheaf composite"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "lem-weil-pbc-koszul-completion-scalar-comparison",
+  "date": "2026-10-26",
+  "tool": "tools/route_nodes.py",
+  "why": "PROVISIONAL: sorried declaration on the sorry route (local/sorry-route.json) with no DAG node, recorded automatically after the route recompute (the human, 2026-10-23: every proof-related upstream sorry gets a node, and a node without a written proof goes to stage 1). The statement is only the Lean signature and docstring: the stage-1 worker writes it in words with [node] citations and stmt_deps, does the Mathlib searches (LeanSearch, Loogle or LeanFinder, local grep), fills blueprint.same_as, and splits it"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.Paper.StrictPerfectCoefficientPackage",
+  "file": "lean/Sheaf/Paper/StrictPerfectCoefficientPackage.lean",
+  "declaration": "SheafOfModules.strictPerfectConstantSheaf_additive",
+  "declarations": [
+   "SheafOfModules.strictPerfectConstantSheaf_additive"
+  ],
+  "statement": "theorem strictPerfectConstantSheaf_additive : (strictPerfectConstantSheaf J Λ).Additive := sorry",
+  "by": "maintainer",
+  "date": "2026-10-26",
+  "note": "SHEAF declaration attached as it stands, proof still `sorry`; recorded by tools/route_nodes.py"
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "lem-route-strict-perfect-constant-sheaf-additive",
+  "worker": "stage1",
+  "group": "NA",
+  "summary": "Replaced the provisional Lean-signature placeholder by the full small-site module statement, matching the attached same-universe functor. Proved constant-presheaf additivity componentwise and sheafification additivity directly from the existing general presheaf-ring sheafification universal property. No new nodes; no reliance on the separate sorried constant-presheaf helper. Checked Mathlib and the source library; no finished project declaration states the complete item.",
+  "blueprint": "Retained the existing adic-completion ancestor and via chain. The helper realizes the termwise constant coefficient construction used by the strict-perfect package in the scalar-comparison route. The newest blueprint (latest -> main-20261025) has reorganized the chapter and contains neither the recorded historical ancestor file nor a strict-perfect package file; the live Lean declaration and Stacks 03CY specify the helper precisely. No unit or chapter change."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-cc-NA-2bb088d4a",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-2bb088d4a (reviewer sub-agent of L); spot-checked: I read all three steps of the item in full; the delivery has no new nodes. The statement matches the Lean of StrictPerfectCoefficientPackage.lean (strictPerfectConstantSheaf, C : Type u with Category.{u} C, Λ : Type u commutative ring). The functor is the constant module presheaf c followed by module sheafification along the RingCat unit of the constant ring sheaf. No hypothesis is added or dropped and nothing is weakened. All five stmt_deps exist and say what the statement uses. def-weil-size-convention is only a loose fit for the universe convention, but it is the usual citation for it. Step 1: c(f+g)=cf+cg holds componentwise and is elementary. Step 2: the unique-factorization clause of lem-pc-sites-module-sheafification-interface (Mathlib leaf), checked against Stacks 03CY at sites-modules.tex:815-844 for a presheaf of rings O with O→O#, makes a(h)+a(k) and a(h+k) extensions of the same map. Sums are sectionwise by def-weil-sheaf-of-modules-category. The step never identifies Λ_0 with the constant sheaf. Step 3 substitutes into step 2. proof_deps equals the union of the uses. The route is fine: every cited node is a definition or a Mathlib leaf, so no tool_uses are needed. Edge cases checked: zero ring, f=g=0, empty covers, and a one-object site with the trivial topology. Duplicate search: lem-weil-pbc-finite-type-constant-exact (same unit, reviewed) says the same functor preserves finite limits and colimits, so additivity also follows in one line. That node is a generalization, not a duplicate of this route node, and the direct proof here is correct and lighter, so this is advisory only. def-sf-site-constant-module-functor and def-sfb-site-derived-constant-module-functor build a related functor with independent universes or a CommRingCat presentation; they are not the same declaration. Advisory: the separate presheaf sorry strictPerfectConstantPresheaf_additive has no node; step 1 contains its whole argument. The searches recorded (leansearch, loogle, leanfinder, grep) have real hit lists. No fixes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261025T202810-L-2753329",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "ModuleCat.StrictPerfectCoefficientPackage.identities",
+   "SheafOfModules.StrictPerfectCoefficientPackage.identities",
+   "SheafOfModules.strictPerfectConstantCoordinateComponent_map_add",
+   "SheafOfModules.strictPerfectConstantCoordinateComponent_map_smul",
+   "SheafOfModules.strictPerfectConstantCoordinate_naturality",
+   "SheafOfModules.strictPerfectConstantFiniteFreeComparison_isIso",
+   "SheafOfModules.strictPerfectConstantPresheaf_additive",
+   "SheafOfModules.strictPerfectConstantSheaf_additive",
+   "SheafOfModules.strictPerfectConstant_splitting"
+  ],
+  "sorry_after": []
+ }
+}

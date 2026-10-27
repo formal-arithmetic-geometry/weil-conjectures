@@ -1,0 +1,154 @@
+{
+ "id": "lem-pe-coefficient-fp-local-system-etale-cover",
+ "kind": "lemma",
+ "title": "Etale constant charts for independently sized finitely presented local systems",
+ "statement": "Let X be a scheme and let A be a commutative ring in the independent coefficient universe. Use the equivalent coefficient-sized sites and inclusion i of [def-weil-pbc-site-comparison-morphism, def-weil-proetale-inverse-image], constant sheaves [def-weil-pbc-constant-sheaf], module sheaves [def-weil-sheaf-of-modules-category], and finite presentation [def-sc-finitely-presented-module]. If a pro-etale module sheaf F is locally constant with finitely presented models on a covering sieve over every object, then there exist a family V_i of coefficient-sized etale objects and finitely presented A-modules M_i with F restricted to i(V_i) isomorphic to constant M_i on that slice. The objects i(V_i) cover the final object of the pro-etale site. This asserts only etale constant charts, not an etale antecedent or a comparison isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099Y, proof of lemma-compare-locally-constant, model-type loci and Isom torsor paragraphs"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-finitely-presented-module"
+ ],
+ "proof": [
+  {
+   "text": "Apply the local-model hypothesis at the terminal AsSmall object. Index its covering sieve by pairs (U, arrow U to the terminal object in the sieve). This produces a coefficient-sized family U_i covering the final object, with finitely presented constant models M_i and slice isomorphisms e_i. No conversion to a scheme covering or index shrinking is needed.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Construct the set sheaf H_i of slice isomorphisms from F to constant M_i by gluing maps and inverses in sheafHom. Iterated slices identify its restriction to U_j with the Isom sheaf between constant M_j and constant M_i. The private fixedConstantHom helpers prove local injectivity using a finite generating set and local surjectivity by lifting its images and using injectivity of the constant-sheaf unit away from empty covers. Lift both maps of an isomorphism and refine by the two inverse equations; sheafification then identifies this Isom sheaf with constant (M_j isomorphic to M_i). Finite presentation supplies finite generation for both models. Hence every H_i is locally constant. All these assertions are proved by private helpers in the delivered Lean, in an arbitrary small-site universe.",
+   "uses": [
+    "def-sc-finitely-presented-module",
+    "lem-weil-pbc-site-constant-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The family H_i is jointly locally inhabited: on U_j use e_j followed by the constant-sheaf restriction isomorphism as a section of H_j. Apply coefficientLocallyConstant_etaleSections to obtain etale objects whose pro-etale images cover and which each have a section of some H_i. This only requires local constancy of set sheaves, and it permits the empty isomorphism sets that occur between different model types.",
+   "uses": [
+    "lem-pe-coefficient-locally-constant-etale-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each resulting section is an isomorphism F.over i(V_j) to the restriction of constant M_i. Compose with the inverse constant-sheaf restriction isomorphism. Retain the previously chosen finite-presentation proof of M_i; these are exactly the required charts.",
+   "uses": [
+    "lem-weil-pbc-site-constant-restriction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-finitely-presented-module",
+  "lem-pe-coefficient-locally-constant-etale-sections",
+  "lem-weil-pbc-site-constant-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099Y, Isom-sheaf proof, using the family of all model Isom sheaves to avoid the open partition; finite-generator Hom proof generalized from ProEtaleUniformModelEtaleCover; set-valued section comparison follows Bhatt-Scholze Lemma 5.1.4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Locally constant proetale sheaf of finitely presented modules is pulled back from etale sheaf with arbitrary coefficient universe",
+   "results": [
+    "CompHausLike.LocallyConstantModule.functor",
+    "SheafOfModules.isFinitePresentation",
+    "LightCondMod.LocallyConstant.functorToPresheaves",
+    "CondensedMod.LocallyConstant.functor",
+    "SheafOfModules.IsFinitePresentation",
+    "LightCondMod.ofSheafLightProfinite"
+   ],
+   "date": "2026-10-26",
+   "verdict": "No etale/pro-etale comparison for independently sized module coefficients. Condensed discrete functors concern different sites."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"essImage\", \"sheafPullback\"",
+   "results": [],
+   "date": "2026-10-26",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientFpLocalSystem|finiteLocalSystemsTwist|isIso_of_coversTop",
+   "results": [
+    "Mathlib/CategoryTheory/Sites/LocalProperties.lean:35 Sheaf.isIso_of_coversTop",
+    "Mathlib/CategoryTheory/Sites/LocalProperties.lean:70 Sheaf.isIso_iff_of_coversTop"
+   ],
+   "date": "2026-10-26",
+   "verdict": "The generic local isomorphism theorem assembles the parent proof but does not produce etale charts or the restricted comparison counit."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An etale covering trivializes any locally constant proetale sheaf of finitely presented modules, and the etale proetale comparison counit is an isomorphism on a constant etale chart.",
+   "results": [
+    "CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app",
+    "CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app'",
+    "CondensedMod.isDiscrete_tfae",
+    "CondensedSet.LocallyConstant.functorFullyFaithful",
+    "AlgebraicGeometry.Scheme.smallEtaleTopology"
+   ],
+   "date": "2026-10-26",
+   "verdict": "Constant-sheaf adjunction counits are not etale/pro-etale comparison counits. No exact comparison statement found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoefficientFpLocalSystemOrigin",
+  "date": "2026-10-26",
+  "group": "B8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-pe-constructible-comparison",
+   "place": "Proof first sentence: finite local-system comparison handles a single stratum; Tag 099Y, proof of lemma-compare-locally-constant, model-type loci and Isom torsor paragraphs",
+   "via": [
+    "lem-pe-coefficient-fp-local-system-origin",
+    "lem-pe-coefficient-stratified-continuity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-thm-pe-constructible-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoefficientFpLocalSystemEtaleCover",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoefficientFpLocalSystemEtaleCover.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.coefficientFpLocalSystem_etaleCover",
+  "statement": "theorem coefficientFpLocalSystem_etaleCover (X : Scheme.{u})\n    (A : Type (max v (u + 1))) [CommRing A]\n    (F : Sheaf (Scheme.coefficientProEtaleModelTopology.{u, v} X)\n      (ModuleCat.{max v (u + 1)} A))\n    (hF : ∀ V : Scheme.coefficientProEtaleSiteModel.{u, v} X,\n      ∃ S : Sieve V, S ∈ Scheme.coefficientProEtaleModelTopology.{u, v} X V ∧\n        ∀ (U : Scheme.coefficientProEtaleSiteModel.{u, v} X) (f : U ⟶ V), S f →\n          ∃ M : ModuleCat.{max v (u + 1)} A, Module.FinitePresentation A M ∧\n            Nonempty (F.over U ≅\n              (constantSheaf ((Scheme.coefficientProEtaleModelTopology.{u, v} X).over U)\n                (ModuleCat.{max v (u + 1)} A)).obj M)) :\n    ∃ (I : Type (max v (u + 1)))\n      (V : I → Scheme.smallModelComparisonEtaleSite.{u, v} X),\n      (Scheme.coefficientProEtaleModelTopology.{u, v} X).CoversTop\n        (fun i ↦ (Scheme.smallModelComparisonInclusion.{u, v} X).obj (V i)) ∧\n      ∀ i : I, ∃ M : ModuleCat.{max v (u + 1)} A,\n        Module.FinitePresentation A M ∧\n          Nonempty (F.over ((Scheme.smallModelComparisonInclusion.{u, v} X).obj (V i)) ≅\n            (constantSheaf ((Scheme.coefficientProEtaleModelTopology.{u, v} X).over\n              ((Scheme.smallModelComparisonInclusion.{u, v} X).obj (V i)))\n              (ModuleCat.{max v (u + 1)} A)).obj M)",
+  "branch": "sheaf-dag",
+  "by": "B8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261025T201447-L-2525296",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261026T001125-L-4170867",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

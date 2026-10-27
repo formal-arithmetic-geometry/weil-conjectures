@@ -1,0 +1,221 @@
+{
+ "id": "lem-trf-normal-boundary-fraction-clearing",
+ "kind": "statement",
+ "title": "Clearing a boundary-supported fraction and its inverse in a normal domain",
+ "statement": "Let $R$ be a Noetherian normal commutative domain [def-weil-pbc-noetherian-ring], [def-weil-pbc-normal-ring], let $K=\\operatorname{Frac}(R)$, and let $I$ be a finite set indexing distinct height-one prime ideals $\\mathfrak p_i$ of $R$. For every height-one prime $\\mathfrak q$ write $v_{\\mathfrak q}:K^\\times\\to\\mathbf Z$ for the normalized additive valuation of the discrete valuation ring $R_{\\mathfrak q}$ [def-weil-pbc-localization-at-prime], [def-sc-discrete-valuation-ring]. A height-one prime is nonzero with no prime strictly between it and $(0)$. Suppose $\\tau\\in R\\setminus\\{0\\}$ satisfies $v_{\\mathfrak p_i}(\\tau)>0$ for every $i\\in I$ and $v_{\\mathfrak q}(\\tau)=0$ for every height-one prime not in this list. If $f\\in K^\\times$ satisfies $v_{\\mathfrak q}(f)=0$ for every height-one prime outside the list, then there exist integers $N,H\\ge0$ such that $h=f\\tau^N$ and $h'=f^{-1}\\tau^H$ both belong to $R$, and $hh'=\\tau^{N+H}$ in $R$. More precisely, every $N,H\\ge0$ satisfying $v_{\\mathfrak p_i}(f)+Nv_{\\mathfrak p_i}(\\tau)\\ge0$ and $-v_{\\mathfrak p_i}(f)+Hv_{\\mathfrak p_i}(\\tau)\\ge0$ for all $i$ has this property. The empty set $I$ is allowed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00PD (lemma-characterize-dvr), 031S (lemma-criterion-normal), and 031T (lemma-normal-domain-intersection-localizations-height-1); agent-formulated simultaneous valuation-clearing consequence, extracted from original steps 7--8 of lem-trf-complete-toric-boundary-class-injectivity."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-sc-discrete-valuation-ring",
+  "def-trf-height-one-fraction-order"
+ ],
+ "proof": [
+  {
+   "text": "Write $a_i=v_{\\mathfrak p_i}(f)$ and $b_i=v_{\\mathfrak p_i}(\\tau)$. Since $b_i$ is a positive integer, $b_i\\ge1$. Set $N_0=\\max(\\{0\\}\\cup\\{-a_i:i\\in I\\})$ and $H_0=\\max(\\{0\\}\\cup\\{a_i:i\\in I\\})$. These maxima exist because $I$ is finite, including when it is empty. Then $a_i+N_0b_i\\ge a_i+N_0\\ge0$ and $-a_i+H_0b_i\\ge-a_i+H_0\\ge0$. Thus admissible nonnegative exponents exist. It remains to prove the asserted property for any admissible $N,H$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 031T (lemma-normal-domain-intersection-localizations-height-1), clause (2), with the explicit valuation-clearing argument supplied by the agent."
+   }
+  },
+  {
+   "text": "Fix any such $N,H$ and put $h=f\\tau^N$, $h\\prime=f^{-1}\\tau^H$ in $K^\\times$. An additive valuation satisfies $v(xy)=v(x)+v(y)$, hence $v(x^{-1})=-v(x)$ and $v(x^n)=nv(x)$ by induction. At $\\mathfrak p_i$ these formulas give the two assumed nonnegative integers. At every other height-one prime both valuations are zero by the support hypotheses. The DVR and membership assertions of [lem-trf-normal-domain-principal-divisor-kernel] therefore put both $h$ and $h\\prime$ in every $R_{\\mathfrak q}$. All hypotheses of that node hold: $R$ is a Noetherian normal domain and these are its height-one primes.",
+   "uses": [
+    "lem-trf-normal-domain-principal-divisor-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD (lemma-characterize-dvr), normalized valuation; applied to the given height-one localizations."
+   }
+  },
+  {
+   "text": "For each $g\\in\\{h,h\\prime\\}$ write $g=a/b$ with $a,b\\in R$, $b\\ne0$. Every associated prime $\\mathfrak q$ of $R/bR$ has height one by [lem-weil-pbc-normal-domain-principal-quotient-associated-height]. Since $g\\in R_{\\mathfrak q}$, the fraction definition [def-weil-pbc-localization-at-prime] writes $a/b=c/s$ with $c\\in R$ and $s\\notin\\mathfrak q$. Cross multiplication in $K$, and the injective inclusion $R\\subset K$, give $sa=bc$. Thus $s$ annihilates the class $\\bar a\\in R/bR$. The equivalence in [lem-weil-pbc-module-injects-localizations-associated-primes], applied to the Noetherian ring $R$ and the module $R/bR$, gives $\\bar a=0$. Hence $a=br$ for some $r\\in R$, so $g=r\\in R$. The same argument covers an empty set of associated primes because the cited statement explicitly allows the empty product.",
+   "uses": [
+    "lem-weil-pbc-normal-domain-principal-quotient-associated-height",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-module-injects-localizations-associated-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 031T (lemma-normal-domain-intersection-localizations-height-1), proof of (2) from (1), using Tag 0311 (lemma-zero-at-ass-zero)."
+   }
+  },
+  {
+   "text": "In $K$ cancellation gives $hh\\prime=(f\\tau^N)(f^{-1}\\tau^H)=\\tau^{N+H}$. All factors now lie in $R$ and $R\\to K$ is injective, so the equality holds in $R$. This proves the claim for every admissible pair and hence for the explicit pair of step 1. If $I$ is empty, $N_0=H_0=0$ and the argument says directly that $f,f^{-1}\\in R$ and their product is $1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 031T (lemma-normal-domain-intersection-localizations-height-1), clause (2), with the explicit valuation-clearing argument supplied by the agent."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-normal-domain-principal-divisor-kernel",
+  "lem-weil-pbc-normal-domain-principal-quotient-associated-height",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-module-injects-localizations-associated-primes"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Explicit finite valuation estimates and cancellation, with membership following the proof of Stacks Tag 031T (2) using (1) and Tag 0311."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a normal Noetherian domain a rational function with divisor supported on finitely many primes can be multiplied by powers of a function positive at these primes to put it and its inverse in the ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Function.FactorizedRational.divisor\", \"module\": \"Mathlib/Analysis/Meromorphic/FactorizedRational\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {U : Set 𝕜} {D : Function.locallyFinsuppWithin U ℤ},\\n  D.support.Finite → MeromorphicOn.divisor (∏ᶠ (u : 𝕜), (fun x => x - u) ^ D u) U = D\", \"doc\": \"For a divisor $ D $ with finite support on a set $ U $ in a nontrivially normed field $ \\\\mathbb{K} $, taking values in a normed vector space $ E $, the divisor of the meromorphic function defined as t\"}\n  {\"name\": \"Polynomial.valuation_of_mk\", \"module\": \"Mathlib/FieldTheory/RatFunc/AsPolynomial\", \"type\": \"∀ (K : Type u_1) [inst : Field K] (f : Polynomial K) {g : Polynomial K},\\n  g ≠ 0 →\\n    (IsDedekindDomain.HeightOneSpectrum.valuation (RatFunc K) (Polynomial.idealX K)) (RatFunc.mk f g) =\\n      (Polynomial.idealX K).intValuation f / (Polynomial.idealX K).intValuation g\", \"doc\": \"For any polynomial $f$ and non-zero polynomial $g$, the valuation of the rational function $\\\\frac{f}{g}$ at the ideal generated by $X$ is equal to the valuation of $f$ minus the valuation of $g$. This\"}\n  {\"name\": \"RatFunc.denom_dvd\", \"module\": \"Mathlib/FieldTheory/RatFunc/Basic\", \"type\": \"∀ {K : Type u} [inst : Field K] {x : RatFunc K} {q : Polynomial K},\\n  q ≠ 0 → (x.denom ∣ q ↔ ∃ p, x = (algebraMap (Polynomial K) (RatFunc K)) p / (algebraMap (Polynomial K) (RatFunc K)) q)\", \"doc\": \"For any rational function $x$ over a commutative domain $K$ and non-zero polynomial $q$, the normalized denominator of $x$ divides $q$ if and only if there exists a polynomial $p$ such that $x = \\\\frac\"}\n  {\"name\": \"Function.FactorizedRational.meromorphicNFOn\", \"module\": \"Mathlib/Analysis/Meromorphic/FactorizedRational\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] (d : 𝕜 → ℤ) (U : Set 𝕜),\\n  MeromorphicNFOn (∏ᶠ (u : 𝕜), (fun x => x - u) ^ d u) U\", \"doc\": \"The product function $\\\\prod_{u \\\\in U} (\\\\cdot - u)^{d(u)}$ has a meromorphic normal form on the set $U$. Specifically, for each $z \\\\in U$, either the function vanishes identically in a neighborhood of \"}\n  {\"name\": \"RatFunc.num_dvd\", \"module\": \"Mathlib/FieldTheory/RatFunc/Basic\", \"type\": \"∀ {K : Type u} [inst : Field K] {x : RatFunc K} {p : Polynomial K},\\n  p ≠ 0 →\\n    (x.num ∣ p ↔ ∃ q, q ≠ 0 ∧ x = (algebraMap (Polynomial K) (RatFunc K)) p / (algebraMap (Polynomial K) (RatFunc K)) q)\", \"doc\": \"For any rational function $ x \\\\in \\\\text{RatFunc}(K) $ and non-zero polynomial $ p \\\\in K[X] $, the numerator $ \\\\text{num}(x) $ (in its normalized form with a monic denominator coprime to the numerator)\"}\n  {\"name\": \"Function.FactorizedRational.meromorphicNFOn_univ\", \"module\": \"Mathlib/Analysis/Meromorphic/FactorizedRational\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] (d : 𝕜 → ℤ),\\n  MeromorphicNFOn (∏ᶠ (u : 𝕜), (fun x => x - u) ^ d u) Set.univ\", \"doc\": \"The factorized rational function defined as the product of $(w - u)^{d(u)}$ over all $u$ has a meromorphic normal form on the universal set of $\\\\mathbb{K}$. This means that for every point $z \\\\in \\\\mat\"}\n  {\"name\": \"RatFunc.num_inv_dvd\", \"module\": \"Mathlib/FieldTheory/RatFunc/Basic\", \"type\": \"∀ {K : Type u} [inst : Field K] {x : RatFunc K}, x ≠ 0 → x⁻¹.num ∣ x.denom\", \"doc\": \"For any non-zero rational function $x$ over a commutative ring $K$, the numerator of its multiplicative inverse $x^{-1}$ divides the denominator of $x$. Specifically, if $x$ is expressed in normalized\"}\n  {\"name\": \"RatFunc.v_def\", \"module\": \"Mathlib/FieldTheory/RatFunc/AsPolynomial\", \"type\": \"∀ (K : Type u_1) [inst : Field K] {x : RatFunc K},\\n  Valued.v x = (IsDedekindDomain.HeightOneSpectrum.valuation (RatFunc K) (Polynomial.idealX K)) x\", \"doc\": \"For any field $ K $, the valuation $ v $ on the field of rational functions $ \\\\text{RatFunc}(K) $ is defined as the valuation induced by the height one prime ideal $ (X) $ in the polynomial ring $ K[X\"}\n\nNo match: the DedekindDomain height-one intersection theorem (Ideal/Lemmas.lean:564) assumes dimension at most one; the local-properties hits assume an intersection equality instead of proving the normal Noetherian boundary-clearing result.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Clear both positive and negative boundary valuations using a monomial and intersect height one localizations of a normal domain",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.valuation\", \"module\": \"Mathlib.RingTheory.DedekindDomain.AdicValuation\", \"type\": \"(v : HeightOneSpectrum R) : Valuation K ℤᵐ⁰\", \"doc\": \"For a Dedekind domain $ R $ and its fraction field $ K $, this valuation maps elements of $ K $ to the multiplicative integers with zero ($\\\\mathbb{Z}^\\\\times_0$) by extending the integer valuation defi\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.intValuation\", \"module\": \"Mathlib.RingTheory.DedekindDomain.AdicValuation\", \"type\": \": Valuation R ℤᵐ⁰\", \"doc\": \"For a Dedekind domain $ A $ and a height one prime ideal $ v $, this valuation maps elements of $ A $ to the multiplicative integers with zero ($\\\\mathbb{Z}^\\\\times_0$) by assigning to each nonzero elem\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.valuation_def\", \"module\": \"Mathlib.RingTheory.DedekindDomain.AdicValuation\", \"type\": \"(x : K) :\\n  v.valuation K x =\\n    v.intValuation.extendToLocalization (fun r hr => Set.mem_compl (v.intValuation_ne_zero' ⟨r, hr⟩)) K x\", \"doc\": \"For a Dedekind domain $ R $ with fraction field $ K $ and a height one prime ideal $ v $, the valuation on $ K $ at $ v $ is defined by extending the integer valuation on $ R $ (which assigns to each \"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.valuationOfNeZeroToFun\", \"module\": \"Mathlib.RingTheory.DedekindDomain.SelmerGroup\", \"type\": \"(x : Kˣ) : Multiplicative ℤ\", \"doc\": \"For a nonzero element $x$ in the fraction field $K$ of a Dedekind domain $A$, this function computes the valuation associated to a height one prime ideal $\\\\mathfrak{p}$ by taking the representative $(\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.intValuation_ne_zero'\", \"module\": \"Mathlib.RingTheory.DedekindDomain.AdicValuation\", \"type\": \"(x : nonZeroDivisors R) : v.intValuation x ≠ 0\", \"doc\": \"For any non-zero element $x$ in a Dedekind domain $R$, the valuation at a height one prime ideal $v$ does not vanish, i.e., $v(x) \\neq 0$.\"}\n  {\"name\": \"instIsDiscreteValuationRingSubtypeMemSubringIntegerWithZeroMultiplicativeIntValuation\", \"module\": \"Mathlib.NumberTheory.NumberField.FinitePlaces\", \"type\": \": IsDiscreteValuationRing (v.valuation K).integer\", \"doc\": \"For a Dedekind domain $ R $ and its fraction field $ K $, the valuation ring associated with a height one prime ideal $ v $ is a discrete valuation ring. This ring consists of elements of $ K $ with n\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.intValuation_singleton\", \"module\": \"Mathlib.RingTheory.DedekindDomain.AdicValuation\", \"type\": \"{r : R} (hr : r ≠ 0) (hv : v.asIdeal = Ideal.span { r }) : v.intValuation r = exp (-1 : ℤ)\", \"doc\": \"For a Dedekind domain $A$ and a height one prime ideal $v$, if $r$ is a non-zero element such that the ideal corresponding to $v$ is the principal ideal generated by $r$, then the integer valuation of\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.valuation_le_one\", \"module\": \"Mathlib.RingTheory.DedekindDomain.AdicValuation\", \"type\": \"(r : R) : v.valuation K r ≤ 1\", \"doc\": \"For any element $ r $ in the Dedekind domain $ R $, the valuation $ v(r) $ associated with a height one prime ideal is less than or equal to 1.\"}\n\nNo match: the DedekindDomain height-one intersection theorem (Ideal/Lemmas.lean:564) assumes dimension at most one; the local-properties hits assume an intersection equality instead of proving the normal Noetherian boundary-clearing result.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIntegrallyClosed, Localization.AtPrime",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"IsIntegrallyClosed.of_localization_maximal\", \"module\": \"Mathlib.RingTheory.LocalProperties.IntegrallyClosed\", \"type\": \" {R : Type u_1} [CommRing R] [IsDomain R] (h : ∀ (p : Ideal R), p ≠ ⊥ → ∀ [inst : p.IsMaximal], IsIntegrallyClosed (Localization.AtPrime p)) : IsIntegrallyClosed R\", \"doc\": \"An integral domain `R` is integral closed if `Rₘ` is integral closed\\nfor any maximal ideal `m` of `R`.\"}\n  {\"name\": \"IsIntegrallyClosed.of_localization\", \"module\": \"Mathlib.RingTheory.LocalProperties.IntegrallyClosed\", \"type\": \" {R : Type u_1} [CommRing R] [IsDomain R] (S : Set (PrimeSpectrum R)) (h : ∀ p ∈ S, IsIntegrallyClosed (Localization.AtPrime p.asIdeal)) (hs : ⨅ p ∈ S, Localization.subalgebra (FractionRing R) p.asIdeal.primeCompl ⋯ = ⊥) : IsIntegrallyClosed R\", \"doc\": \"An integral domain $R$ is integrally closed if there exists a set of prime ideals $S$ such that\\n$\\\\bigcap_{\\\\mathfrak{p} \\\\in S} R_{\\\\mathfrak{p}} = R$ and for every $\\\\mathfrak{p} \\\\in S$,\\n$R_{\\\\mathfrak{p}\"}\n\nNo match: the DedekindDomain height-one intersection theorem (Ideal/Lemmas.lean:564) assumes dimension at most one; the local-properties hits assume an intersection equality instead of proving the normal Noetherian boundary-clearing result.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "iInf.*localization|intersection.*height|height.*intersection|valuation.*nonneg",
+   "results": "[grep] OK 8 hit(s)\n  {\"file\": \"Mathlib/RingTheory/LocalProperties/IntegrallyClosed.lean\", \"line\": \"52\", \"text\": \"  IsIntegrallyClosed.of_iInf_eq_bot (fun i ↦ Localization.subalgebra (FractionRing R) (S i) (h i))\"}\n  {\"file\": \"Mathlib/RingTheory/LocalProperties/IntegrallyClosed.lean\", \"line\": \"78\", \"text\": \"    convert! MaximalSpectrum.iInf_localization_eq_bot R (FractionRing R)\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Maximal/Localization.lean\", \"line\": \"35\", \"text\": \"theorem iInf_localization_eq_bot : (⨅ v : MaximalSpectrum R,\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Maximal/Localization.lean\", \"line\": \"60\", \"text\": \"theorem iInf_localization_eq_bot : ⨅ v : PrimeSpectrum R,\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Maximal/Localization.lean\", \"line\": \"62\", \"text\": \"  refine bot_unique (.trans (fun _ ↦ ?_) (MaximalSpectrum.iInf_localization_eq_bot R K).le)\"}\n  {\"file\": \"Mathlib/RingTheory/DedekindDomain/Ideal/Lemmas.lean\", \"line\": \"562\", \"text\": \"/-- A Dedekind domain is equal to the intersection of its localizations at all its height one\"}\n  {\"file\": \"Mathlib/RingTheory/DedekindDomain/Ideal/Lemmas.lean\", \"line\": \"564\", \"text\": \"theorem iInf_localization_eq_bot [Algebra R K] [hK : IsFractionRing R K] :\"}\n  {\"file\": \"Mathlib/RingTheory/DedekindDomain/Ideal/Lemmas.lean\", \"line\": \"575\", \"text\": \"  all_goals rw [← MaximalSpectrum.iInf_localization_eq_bot, Algebra.mem_iInf]\"}\n\nNo match: the DedekindDomain height-one intersection theorem (Ideal/Lemmas.lean:564) assumes dimension at most one; the local-properties hits assume an intersection equality instead of proving the normal Noetherian boundary-clearing result.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fraction with boundary supported divisor admits h=f t^N and k=f inverse t^H in the ring of a normal Noetherian domain with h k=t^(N+H)",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"exists_reduced_fraction'\", \"module\": \"Mathlib/RingTheory/Localization/Away/Basic\", \"type\": \"∀ {R : Type u_3} [inst : CommRing R] (x : R) (B : Type u_4) [inst_1 : CommRing B] [inst_2 : Algebra R B]\\n  [inst_3 : IsLocalization.Away x B] [IsDomain R] [WfDvdMonoid R] {b : B},\\n  b ≠ 0 → Irreducible x → ∃ a n, ¬x ∣ a ∧ selfZPow x B n * (algebraMap R B) a = b\", \"doc\": \"Let `R` be an integral domain with well-founded divisibility, and let `x \\\\in R` be an irreducible element. Let $B$ be the localization of `R` at the powers of `x`. For any non-zero element $b \\\\in B$, \"}\n  {\"name\": \"Function.FactorizedRational.divisor\", \"module\": \"Mathlib/Analysis/Meromorphic/FactorizedRational\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {U : Set 𝕜} {D : Function.locallyFinsuppWithin U ℤ},\\n  D.support.Finite → MeromorphicOn.divisor (∏ᶠ (u : 𝕜), (fun x => x - u) ^ D u) U = D\", \"doc\": \"For a divisor $ D $ with finite support on a set $ U $ in a nontrivially normed field $ \\\\mathbb{K} $, taking values in a normed vector space $ E $, the divisor of the meromorphic function defined as t\"}\n  {\"name\": \"RatFunc.laurentAux_ofFractionRing_mk\", \"module\": \"Mathlib/FieldTheory/Laurent\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (r : R) (p : Polynomial R) (q : ↥(nonZeroDivisors (Polynomial R))),\\n  (RatFunc.laurentAux r) { toFractionRing := Localization.mk p q } =\\n    { toFractionRing := Localization.mk ((Polynomial.taylor r) p) ⟨(Polynomial.taylor r) ↑q, ⋯⟩ }\", \"doc\": \"For a polynomial $ p $ and a non-zero divisor $ q $ in $ R[X] $, the Laurent auxiliary ring homomorphism $ \\\\operatorname{laurentAux}_r $ maps the rational function $ \\\\frac{p}{q} $ to $ \\\\frac{\\\\operator\"}\n  {\"name\": \"PowerSeries.IsWeierstrassFactorization.isWeierstrassDivision\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] [inst_1 : IsLocalRing A] {g : PowerSeries A} {f : Polynomial A} {h : PowerSeries A}\\n  (H : g.IsWeierstrassFactorization f h),\\n  (PowerSeries.X ^ ((PowerSeries.map (IsLocalRing.residue A)) g).order.toNat).IsWeierstrassDivision g (↑⋯.unit⁻¹)\\n    (Polynomial.X ^ ((P\", \"doc\": \"If a power series $ g $ over a local ring $ A $ factors as a polynomial $ f $ multiplied by a power series $ h $ (with $ h $ a unit modulo the maximal ideal of $ A $), then $ X^{k} $ (where $ k $ is t\"}\n  {\"name\": \"IsLocalization.coeffIntegerNormalization\", \"module\": \"Mathlib/RingTheory/Localization/Integral\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (M : Submonoid R) →\\n      {S : Type u_2} → [inst_1 : CommRing S] → [inst_2 : Algebra R S] → [IsLocalization M S] → Polynomial S → ℕ → R\", \"doc\": \"For a polynomial $ p $ over the localization $ S $ of a commutative ring $ R $ at a submonoid $ M $, this function returns an element of $ R $ corresponding to the $ i $-th coefficient of $ p $ under \"}\n  {\"name\": \"PowerSeries.IsWeierstrassDivision.isWeierstrassFactorization\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] [inst_1 : IsLocalRing A] {g q : PowerSeries A} {r : Polynomial A}\\n  (hg : (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0)\\n  (H : (PowerSeries.X ^ ((PowerSeries.map (IsLocalRing.residue A)) g).order.toNat).IsWeierstrassDivision g q r),\\n  g.IsWeierstrassFactorizat\", \"doc\": \"Let $ A $ be a local ring with maximal ideal $ \\\\mathfrak{m} $, and let $ g $ be a power series over $ A $ whose image in the residue field $ A/\\\\mathfrak{m} $ is nonzero. If there exists a Weierstrass \"}\n  {\"name\": \"PowerSeries.weierstrassDiv\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    [inst_1 : IsLocalRing A] →\\n      PowerSeries A → PowerSeries A → [IsPrecomplete (IsLocalRing.maximalIdeal A) A] → PowerSeries A\", \"doc\": \"Given a commutative local ring $ A $ with maximal ideal $ \\\\mathfrak{m} $, and power series $ f, g \\\\in A[[X]] $, the Weierstrass division of $ f $ by $ g $ is defined as follows: if the image of $ g $ \"}\n  {\"name\": \"MeromorphicOn.divisor_of_toMeromorphicNFOn\", \"module\": \"Mathlib/Analysis/Meromorphic/NormalForm\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {f : 𝕜 → E} {U : Set 𝕜},\\n  MeromorphicOn f U → MeromorphicOn.divisor (toMeromorphicNFOn f U) U = MeromorphicOn.divisor f U\", \"doc\": \"For a meromorphic function $ f $ on a set $ U $ in a nontrivially normed field $ \\\\mathbb{K} $, taking values in a normed vector space $ E $, the divisor of the meromorphic normal form of $ f $ on $ U \"}\n\nNo match: the DedekindDomain height-one intersection theorem (Ideal/Lemmas.lean:564) assumes dimension at most one; the local-properties hits assume an intersection equality instead of proving the normal Noetherian boundary-clearing result.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "iInf.*localization|intersection.*height|height.*intersection|valuation.*nonneg",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/LocalProperties/IntegrallyClosed.lean\", \"Mathlib/RingTheory/LocalProperties/IntegrallyClosed.lean\", \"Mathlib/RingTheory/Spectrum/Maximal/Localization.lean\", \"Mathlib/RingTheory/Spectrum/Maximal/Localization.lean\", \"Mathlib/RingTheory/Spectrum/Maximal/Localization.lean\", \"Mathlib/RingTheory/DedekindDomain/Ideal/Lemmas.lean\", \"Mathlib/RingTheory/DedekindDomain/Ideal/Lemmas.lean\", \"Mathlib/RingTheory/DedekindDomain/Ideal/Lemmas.lean\"], \"digest\": \"77ba3854d7f03568\"}; Read the actual returned hits. Dedekind-domain hits require dimension at most one; of_localization assumes the intersection equality; no match for the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A rational element of a normal Noetherian domain with nonnegative valuations at every height one prime belongs to the ring",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomain.HeightOneSpectrum.mem_integers_of_valuation_le_one\", \"IsDiscreteValuationRing.exists_lift_of_le_one\", \"IsDedekindDomain.HeightOneSpectrum.intValuation_lt_one_iff_mem\", \"IsDedekindDomain.HeightOneSpectrum.intValuation_le_pow_iff_mem\", \"ValuationRing.isInteger_or_isInteger\", \"Valuation.Integers.mem_of_integral\", \"Set.integer_valuation_le_one\", \"Rat.valuation_le_one_iff_den\"], \"digest\": \"cff996c7d1c2abf3\"}; Read the actual returned hits. Dedekind-domain hits require dimension at most one; of_localization assumes the intersection equality; no match for the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIntegrallyClosed, Localization.AtPrime",
+   "results": "{\"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"IsIntegrallyClosed.of_localization_maximal\", \"IsIntegrallyClosed.of_localization\"], \"digest\": \"8cc83b74aa57cf81\"}; Read the actual returned hits. Dedekind-domain hits require dimension at most one; of_localization assumes the intersection equality; no match for the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a Noetherian normal domain a fraction with valuations zero outside a finite boundary becomes integral after multiplication by a large power of an element positive on that boundary",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"exists_integral_multiples\", \"IsDedekindDomain.HeightOneSpectrum.mem_integers_of_valuation_le_one\", \"Set.coe_integer\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletion.mul_nonZeroDivisor_mem_adicCompletionIntegers\", \"IsIntegral.isAlmostIntegral\", \"Set.integer_valuation_le_one\", \"Set.integer\", \"Valuation.Integers.isIntegral_iff_v_le_one\"], \"digest\": \"2d0d6c3fe90be801\"}; Read the actual returned hits. Dedekind-domain hits require dimension at most one; of_localization assumes the intersection equality; no match for the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fraction and its inverse in a normal Noetherian domain are in the localization away from tau when their height one valuations vanish outside the zeros of tau",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Set.coe_unit\", \"ValuationRing.isInteger_or_isInteger\", \"Rat.valuation_le_one_iff_den\", \"IsLocalization.Away.sec_spec\", \"IsDedekindDomain.HeightOneSpectrum.valuation_of_mk'\", \"IsDedekindDomain.HeightOneSpectrum.mem_integers_of_valuation_le_one\", \"ValuationRing.iff_isInteger_or_isInteger\", \"IsFractionRing.isUnit_den_iff\"], \"digest\": \"8a931f5b95583358\"}; Read the actual returned hits. Dedekind-domain hits require dimension at most one; of_localization assumes the intersection equality; no match for the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-complete-toric-boundary-class-injectivity",
+  "date": "2026-10-22",
+  "group": "Q137"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2) nearby-duality alteration ancestry of lem-trf-local-term-locality, through log-regular divisorial structure: Class-group input to the complete-local recognition equality: the cokernel of the primitive facet-valuation map injects into the Weil divisor class group of the completed model (the Mori-type injectivity issue in the return). Auxiliary Clearing a boundary-supported fraction and its inverse in a normal domain; original boundary-class proof steps 7, 8.",
+   "via": [
+    "lem-trf-complete-toric-boundary-class-injectivity",
+    "lem-trf-complete-toric-kato-recognition",
+    "lem-trf-log-regular-divisorial-structure",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-normal-boundary-fraction-clearing",
+  "worker": "stage1",
+  "summary": "Kept the statement and statement dependencies. Gave explicit maxima for both exponents, checked all height-one valuations, and reproduced the denominator argument of 031T (2) using existing associated-prime nodes. No new nodes and no attachment; searched the project and Mathlib.",
+  "blueprint": "Auxiliary for the existing ancestry from lem-trf-local-term-locality proof (1)--(2), through the log-regular/complete-toric recognition route; realizes original boundary-class-injectivity steps 7--8 by explicit simultaneous clearing. Latest blueprint locality statement and proof read; no identical blueprint node found.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-normal-domain-principal-quotient-associated-height",
+    "why": "Generic 031T (1) associated-height fact for a principal quotient; used in the denominator membership argument. No node of this unit states this general module fact."
+   },
+   {
+    "node": "lem-weil-pbc-module-injects-localizations-associated-primes",
+    "why": "Generic 0311 detection of zero by associated-prime localizations, applied to the class of a numerator in R/bR. No node of this unit states this module theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-normal-domain-principal-quotient-associated-height",
+  "lem-weil-pbc-module-injects-localizations-associated-primes"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q88-c916bcd95",
+  "group": "Q88",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-c916bcd95 (reviewer sub-agent of L); spot-checked: Read in full: the item, all four cited nodes and Stacks 031T, with 00PD and 0311 checked through tags/tags. The delivery is one commit with the item JSON and the report, and has no new nodes. The statement, stmt_deps and source are unchanged, and the base proof was empty, so this is not a re-split. Step 1 picks exponents N0=max(0,-a_i) and H0=max(0,a_i), which works because b_i>=1 and also covers I empty. Step 2: the two valuations are >=0 at each p_i and 0 off the list, so the membership criterion of lem-trf-normal-domain-principal-divisor-kernel (Noetherian normal domain, height-one primes, matching this item) puts h and h' in every R_q. Step 3 is exactly the proof of 031T(2): associated primes of R/bR have height one (pbc 031T(1) node), then sa=bc gives s·ā=0, then the 0311 node gives ā=0. A unit b leaves no associated primes, which that node allows. Step 4 is cancellation plus injectivity of R into K. proof_deps equals the union of the uses, and a BFS shows no cycle. The two pbc tool_uses are declared and are the same pair accepted in the sibling divisor-kernel step 6; I accept them. Duplicates checked: krull-normalization would also give step 3 but is much heavier; divisor-kernel covers only div=0; the S2 total-fraction node is a different statement. None duplicates the item. Edge cases checked: R a field, k[x] with f=x^{-3}, the cone xy=z^2 with tau=x (off-list valuations correctly exclude z/x), and non-minimal exponents. No SGA is cited. The citer boundary-class-injectivity step 3 uses the item's statement, which is unchanged. One cosmetic point: the report lists sandbox-only files that are not in the delivery."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.NormalBoundaryFractionClearing",
+  "declaration": "Ring.normal_boundary_fraction_clearing",
+  "file": "lean/Sheaf/RingTheory/NormalBoundaryFractionClearing.lean",
+  "statement": "theorem normal_boundary_fraction_clearing (R : Type u) [CommRing R] [IsDomain R] [IsNoetherianRing R] [IsIntegrallyClosed R] (I : Type v) [Finite I] (p : I → WeilHeightOnePrime R) (hdistinct : Function.Injective p) (τ : R) (hτ : τ ≠ 0) (hpositive : ∀ i : I, 0 < weilFractionOrder (p i) (algebraMap R (FractionRing R) τ)) (hτoutside : ∀ q : WeilHeightOnePrime R, q ∉ Set.range p → weilFractionOrder q (algebraMap R (FractionRing R) τ) = 0) (f : (FractionRing R)ˣ) (hfoutside : ∀ q : WeilHeightOnePrime R, q ∉ Set.range p → weilFractionOrder q (f : FractionRing R) = 0) : (∃ N H : ℕ, ∃ h h' : R, algebraMap R (FractionRing R) h = (f : FractionRing R) * algebraMap R (FractionRing R) τ ^ N ∧ algebraMap R (FractionRing R) h' = ((f⁻¹ : (FractionRing R)ˣ) : FractionRing R) * algebraMap R (FractionRing R) τ ^ H ∧ h * h' = τ ^ (N + H)) ∧ (∀ N H : ℕ, (∀ i : I, 0 ≤ weilFractionOrder (p i) (f : FractionRing R) + (N : ℤ) * weilFractionOrder (p i) (algebraMap R (FractionRing R) τ) ∧ 0 ≤ -weilFractionOrder (p i) (f : FractionRing R) + (H : ℤ) * weilFractionOrder (p i) (algebraMap R (FractionRing R) τ)) → ∃ h h' : R, algebraMap R (FractionRing R) h = (f : FractionRing R) * algebraMap R (FractionRing R) τ ^ N ∧ algebraMap R (FractionRing R) h' = ((f⁻¹ : (FractionRing R)ˣ) : FractionRing R) * algebraMap R (FractionRing R) τ ^ H ∧ h * h' = τ ^ (N + H))",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0cface098",
+  "group": "N8",
+  "result": "pass",
+  "note": "Every clause matches the node (Noetherian integrally closed domain, finite distinct height-one primes indexed by an independent universe v, τ≠0 positive on the list and zero off it, f a unit with zero order off the list, existence clause and every-admissible-N,H clause, product in R); no extra hypotheses. New def-trf-height-one-fraction-order (weilFractionOrder = weilOrder of numerator minus denominator via IsLocalization.sec) is real data and the normalized DVR valuation for x≠0 (00PD); no duplicate in Sheaf/WeilConjectures; Ring.ordFrac needs KrullDimLE 1 and the Dedekind valuation needs Dedekind. Both lean.statement fields verbatim in their files; item node unchanged apart from lean and the added stmt_dep; public statement imports and plain proof_dep imports correct; docstrings carry source tags, blueprint id and the 4 proof steps; Stacks 031T/00PD/031S/02MD/02RJ confirmed. Edge cases (empty I, R a field, τ a unit) covered. No file changed, no compile run; worker reports clean compiles."
+ }
+}

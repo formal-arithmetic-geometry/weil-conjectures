@@ -477,18 +477,36 @@
   "file": "lean/Sheaf/AlgebraicGeometry/RegularLCIGeometricCalculus.lean",
   "statement": "theorem exists_regularClosedImmersion_factor_of_regular {Y X : Scheme.{u}} [IsNoetherian Y] [IsNoetherian X] (i : Y ⟶ X) [IsImmersion i] (hY : IsRegularScheme Y) (hX : IsRegularScheme X) : ∃ (U : X.Opens) (j : Y ⟶ U.toScheme) (c : Y → ℕ), j ≫ U.ι = i ∧ IsRegularClosedImmersionWithCodimension j c",
   "branch": "newtargets-dag",
-  "by": "Q63",
-  "date": "2026-10-18",
+  "by": "NU",
+  "date": "2026-10-24",
   "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.AlgebraicGeometry.RegularLCIGeometricCalculus deleted (dead: no target reaches it); this node is not reached either."
+  "note": "Restores the unavailable deleted statement module against the live library; uses the existing sourcewise codimension definition and the upstream quasi-finite predicates. No change to the mathematical statement or dependencies."
+ },
+ "lean_removed": {
+  "commit": "f6bf55e2b05",
+  "path": "lean/Sheaf/AlgebraicGeometry/RegularLCIGeometricCalculus.lean",
+  "module": "Sheaf.AlgebraicGeometry.RegularLCIGeometricCalculus",
+  "declaration": "AlgebraicGeometry.exists_regularClosedImmersion_factor_of_regular",
+  "reason": "module deleted as dead (no target reaches it, node not reached); declaration exists nowhere else in lean/ or Mathlib, so the node has no Lean statement"
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-c3caacac5",
-  "group": "Q63",
+  "reviewer": "NT-stage2-cc-428e2c474",
+  "group": "NU",
   "result": "pass",
-  "note": "Item node unchanged from the stage-1 PASS apart from the lean record and the new def node in stmt_deps. All 10 theorems match the node clause by clause: rank/local constancy/uniqueness; immersion between regular schemes via an open ambient; flat base change with c∘fst; composition with c+d∘i; separated smooth section of codim r; smooth over regular; affine closed presentation, existence plus every such immersion; virtual-dimension formula with varying r (dim_z of fibre), integer subtraction and canonical residue map; independence of factorization; quasi-finite in both readings gives finite residue extension and trdeg 0. Formula checked against Stacks 00ON/04NA and the regular-sequence dimension drop. New def IsRegularClosedImmersionWithCodimension is genuine (063D/063J, source-points only, so codimension 0 on a clopen piece and empty sources work). nt_compile --json of both files: rc 0, sorry-only (1.6 s, 2.1 s). Verbatim statements, declarations, docstrings and imports OK; no name clash. Maintainer notes: (1) overlap with Q02's constant-c IsStalkRegularClosedImmersion, present at base and not mentioned in the report; a generalisation, not a duplicate; a bridge lemma is advised for stage 3; (2) stmt_deps def-weil-proper-morphism and pqf-def-locnoeth are unused, inherited from stage 1."
+  "note": "Restoration of the deleted Q63 module (previously PASSed); only the lean field changes vs live. 10 sorry theorems checked clause by clause against node and Stacks 0E9J/067P/067Q/067R/07NF/01T2/00ON/02FX/01TG: open-ambient regular factor; locally constant, conormal-rank, unique codimension; flat base change c∘fst; composition c+d∘i; separated smooth section codim r; smooth over regular; affine-space closed presentation existence and regularity; virtual dimension with varying r via topologicalKrullDimAt of p.asFiber, integer witnesses, canonical residueFieldMap trdeg; independence of factorization; quasi-finite in both readings (upstream IsQuasiFinite read) gives finite residue extension and trdeg 0. Dependency declarations read in live. Edge cases (empty, c=0, r=0, negative, universes) OK. Statement verbatim, declarations, docstrings, imports all present and none dropped; no name clash. Advisory: IsImmersion/topologicalKrullDimAt owners not in stmt_deps (as in the earlier PASS); lightly used inherited stmt_deps; live note says the node is unreached (dispatcher's call). No compile (no FIX)."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

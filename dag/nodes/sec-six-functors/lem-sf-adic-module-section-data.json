@@ -1,0 +1,113 @@
+{
+ "id": "lem-sf-adic-module-section-data",
+ "kind": "definition",
+ "title": "Native adic comparison records",
+ "statement": "For a prime ℓ and scheme X, the normalized section comparison record consists of the actual coefficient functions, an equivalence of native internal modules with sectionwise module sheaves, and the unit, tensor, slice-Hom, evaluation, bidual and finite coordinate comparisons, pinned by their formulas on sections. The local tensor, evaluation, pullback and dual pullback maps are the specified composites of the native maps. This record is exactly AdicModuleSectionComparison from lem-sf-adic-module-slice-hom-comparison, without changing any field.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CV, 03EK, 03EO and 0E8H; steps of lem-sf-adic-module-slice-hom-comparison."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-hom"
+ ],
+ "proof": [
+  {
+   "text": "Unchanged records and canonical composite maps from the original comparison statement.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Native/sectionwise module comparison, Stacks 03CV, 03EK, 03EO and 0E8H; formal assembly follows the section normalizations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Internal modules over a sheaf of algebras in sheaves of vector spaces equivalent to sheaves of modules, preserving underlying sections tensor and internal Hom",
+   "results": "SheafOfModules.forgetToSheafModuleCat; SheafOfModules.over; SheafOfModules.instCategory; SheafOfModules.toSheaf_obj_val; SheafOfModules.toSheaf; SheafOfModules.unitHomEquiv; SheafOfModules.forgetToSheafModuleCat_obj_val; SheafOfModules.unit",
+   "date": "2026-10-24",
+   "verdict": "No comparison with the native adic internal-module category; section-module definitions alone do not identify its actions or tensor/Hom maps."
+  },
+  {
+   "tool": "grep",
+   "query": "adicConstantSheafObjMonHom|module.*equivalence.*sheaf",
+   "results": "No hits",
+   "date": "2026-10-24",
+   "verdict": "No comparison with the native adic internal-module category; section-module definitions alone do not identify its actions or tensor/Hom maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal modules over an algebra sheaf in vector space sheaves agree with sectionwise modules preserving relative tensor and slice internal Hom",
+   "results": "SheafOfModules; AlgebraicGeometry.Scheme.Modules; SheafOfModules.noConfusionType; SheafOfModules.hom_ext; SheafOfModules.instCategory; SheafOfModules.mk; AlgebraicGeometry.Scheme.Modules.instModuleCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensCarrierAbPresheaf; SheafOfModules.sections",
+   "date": "2026-10-24",
+   "verdict": "No comparison with the native adic internal-module category; section-module definitions alone do not identify its actions or tensor/Hom maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.AdicModuleSliceHomComparison",
+  "date": "2026-10-24",
+  "group": "E2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The native module/slice-Hom comparison required by lisse biduality; the specific steps of lem-sf-adic-module-slice-hom-comparison recorded in proof.",
+   "via": [
+    "lem-sf-adic-module-slice-hom-comparison",
+    "lem-sf-weil-lisse-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.AdicModuleSectionComparison",
+  "file": "lean/Sheaf/SixFunctors/AdicModuleSectionComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.AdicModuleSectionComparison",
+  "statement": "structure AdicModuleSectionComparison (l : ℕ) [Fact l.Prime] (X : Scheme.{u})",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-25",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.adicComparisonTmul",
+   "AlgebraicGeometry.ProEtale.adicComparisonEval",
+   "AlgebraicGeometry.ProEtale.AdicModuleSectionComparison",
+   "AlgebraicGeometry.ProEtale.AdicModuleSectionComparison.ring",
+   "AlgebraicGeometry.ProEtale.adicComparisonRestriction",
+   "AlgebraicGeometry.ProEtale.adicComparisonPullSection",
+   "AlgebraicGeometry.ProEtale.adicComparisonDualSlice"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-9c0de",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261024T224912-L-1826302",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-9c0de",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261024T224912-L-1826302",
+  "kind": "interface",
+  "note": "independent cc review: item structure/theorem vs clone (byte-identical); moved AdicModuleSectionComparison data vs old item text (verbatim, change record); two split sorry statements vs original fields (base family fully pinned by section normalizations, so universal quantification is not stronger); node lean records vs Lean signatures; item proof_deps vs proof as written"
+ }
+}

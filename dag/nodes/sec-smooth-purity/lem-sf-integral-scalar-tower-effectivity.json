@@ -1,0 +1,166 @@
+{
+ "id": "lem-sf-integral-scalar-tower-effectivity",
+ "kind": "statement",
+ "title": "Effectivity of the actual strict scalar quotient tower",
+ "statement": "Let E and L be finite extensions of Q_l with an embedding E -> L, and let Y be a scheme. For a K-flat complex P of completed O_E-module sheaves with flat terms [lem-pur-integral-operations-well-defined], let N be integralScalarExtension(Q(P)) [def-weil-integral-scalar-extension]. Then N is derived complete [def-weil-derived-complete]. For every n >= 0 its canonical derived reduction modulo pi_L^(n+1) [def-weil-integral-derived-reduction] is isomorphic to Q(P tensor (O_L/pi_L^(n+1))), the actual complex integralScalarFiniteComplex before restriction to completed coefficients. There is no completeness, boundedness, constructibility or geometric finiteness hypothesis.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 3.5.1 and Definition 3.5.2; normalized scalar quotient tower argument of lem-weil-integral-scalar-extension-constructible, steps 2 and 6--7. Compare current blueprint latest, sec-smooth-purity/sk-lem-sp-tower/lem-coef-normalized-dvr-effectivity.proof.md. Bhatt--Scholze Lemmas 3.5.4--3.5.5 supply normalized system effectivity, with the unbounded clause applying to the regular uniformizer ideal."
+ },
+ "stmt_deps": [
+  "def-weil-integral-scalar-extension",
+  "lem-pur-integral-operations-well-defined",
+  "def-weil-derived-complete",
+  "def-weil-integral-derived-reduction"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the canonical derived coefficient-system calculus and semilinear scalar-system data for the actual quotient inclusions. The finite balanced association theorem gives the ordinary tensor comparison, normalized on local pure tensors. Apply coefficientExtensionStrictRepresentative_exists to obtain a simultaneous strict model, its finite evaluations, the representative comparison, the actual scalar quotient transitions and normalization of the resulting derived L-sequence N.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "stage3-pur-finite-extension-association",
+    "stage3-pur-extension-strict-representatives"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply coefficientExtensionRepresentativeRoos_exists to the strict model and its transition formula. At P its comparison identifies the total limit of N with the same strict Roos object used by integralScalarExtensionComparison. Composing these comparisons gives a fixed isomorphism from integralScalarExtension(Q(P)) to coefficientSequenceLimit(N).",
+   "uses": [
+    "stage3-pur-extension-representative-roos",
+    "def-weil-integral-scalar-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply coefficientSequence_roosModel to the normalized sequence N. It gives a normalized DVR tower T, level isomorphisms to the actual derived evaluations of N, a product witness, and a distinguished Roos triangle on coefficientSequenceLimit(N). Transport only its limit vertex through the preceding isomorphism a: replace its first map p by a.hom followed by p and its third map delta by delta followed by shift(a.inv). The triangle isomorphism has components a, identity, identity, so distinguishedness is preserved.",
+   "uses": [
+    "lem-coef-sequence-roos-model",
+    "def-coef-normalized-dvr-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply normalizedDVRTower_effectivity to the transported triangle. Its last clause gives derived completeness of the specified scalar extension, and its first clause makes every canonical finite-reduction counit invertible. Compose that counit isomorphism with the tower level identification, the derived evaluation of the representative model, the exact evaluation/localization factorization, and the strict finite evaluation isomorphism. This identifies integralDerivedReduction with Q(integralScalarFiniteComplex(P,n)) for every n.",
+   "uses": [
+    "lem-coef-normalized-dvr-effectivity",
+    "def-weil-derived-complete",
+    "def-weil-integral-derived-reduction",
+    "stage3-pur-extension-strict-representatives"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-semilinear-derived-sections",
+  "stage3-pur-finite-extension-association",
+  "stage3-pur-extension-strict-representatives",
+  "stage3-pur-extension-representative-roos",
+  "def-weil-integral-scalar-extension",
+  "lem-coef-sequence-roos-model",
+  "def-coef-normalized-dvr-tower",
+  "lem-coef-normalized-dvr-effectivity",
+  "def-weil-derived-complete",
+  "def-weil-integral-derived-reduction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "description": "V8: the same normalized scalar quotient tower argument, using the existing simultaneous coefficient-extension representatives and canonical sequence Roos model as generic tools. The Lean proof transports the actual limit vertex and composes the finite evaluation isomorphisms; no new statement or proof hole.",
+  "group": "V8",
+  "date": "2026-10-26"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite residue field extension preserves constructible cohomology and normalized DVR tower effectivity",
+   "results": "Residue field finiteness and discrete valuation ring geometry results; no sheaf constructibility or tower effectivity theorem.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite residue field scalar extension cohomological bounds; normalized quotient tower effective derived limit",
+   "results": "Generic algebra, local rings and condensed objects; none states either needed comparison for the pro-etale coefficient sheaves.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLeftDerivedFunctor\"",
+   "results": "Generic derived functor universal properties only.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*[Ss]calar|[Ss]calar.*constructible; finite.*[Ll]evel.*bounds|[Ss]calar.*effectivity",
+   "results": "No Mathlib scalar-constructibility match. Project FiniteFieldSheafScalarExtension and FilteredCoefficientTensorBounds supply parts of the finite-filtration argument; NormalizedDVREffectivity and StrictRoosDerivedLimitComparison supply the abstract effectivity pieces. No existing theorem connects these to the actual integralScalarFiniteComplex on arbitrary good representatives. CoefIntegralFiniteExtension adds finite-type geometric hypotheses and depends on the parent.",
+   "date": "2026-10-25",
+   "verdict": "no duplicate or one-line specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralScalarExtensionConstructible",
+  "date": "2026-10-25",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-rationalization-karoubi",
+   "place": "Proposition 3.5.1 and Definition 3.5.2; normalized scalar quotient tower argument of lem-weil-integral-scalar-extension-constructible, steps 2 and 6--7. Compare current blueprint latest, sec-smooth-purity/sk-lem-sp-tower/lem-coef-normalized-dvr-effectivity.proof.md.",
+   "via": [
+    "lem-weil-integral-scalar-extension-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralScalarTowerEffectivity",
+  "file": "lean/Sheaf/Paper/IntegralScalarTowerEffectivity.lean",
+  "declaration": "WeilConjectures.integralScalarTower_effectivity",
+  "statement": "theorem integralScalarTower_effectivity\n    (P : (integralOperationsGoodComplex l E Y).FullSubcategory) :\n    IsDerivedComplete l L Y D hl\n      ((integralScalarExtension l E L ι Y).obj (DerivedCategory.Q.obj P.obj)) ∧\n    ∀ n : ℕ, Nonempty\n      (((integralDerivedReduction l L Y D hl n).obj\n          ((integralScalarExtension l E L ι Y).obj (DerivedCategory.Q.obj P.obj))) ≅\n        DerivedCategory.Q.obj ((integralScalarFiniteComplex l E L ι Y n).obj P.obj))",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261025T180812-L-4035762",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V8",
+  "result": "pass",
+  "landing": "20261025T203544-L-2827721",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

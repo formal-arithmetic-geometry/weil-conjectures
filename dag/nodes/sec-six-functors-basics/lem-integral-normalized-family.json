@@ -1,0 +1,148 @@
+{
+ "id": "lem-integral-normalized-family",
+ "kind": "statement",
+ "title": "Referenced integral diagonal coefficient family",
+ "statement": "For every prime ell and separated finite-type scheme Y over a field of positive characteristic different from ell, there is a diagonal coefficient Family whose completed class and all three traces have a Reference. Localization-size choices and the completed arrow are retained existentially; no arbitrary data are defined from existence.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md",
+  "place": "Paragraph (1), diagonal unit, trace counit and the two triangle identities"
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-reference",
+  "def-sfb-diagonal-coefficient-diagrams"
+ ],
+ "proof": [
+  {
+   "text": "The characteristic assumption makes ell nonzero in k; map its unit along k -> Gamma(Y, top). Finite type over Spec(k), then the projective-line morphism and its base change, give Noetherianity of Y, P1_Y and its self-square. Construct the localization choices: pro-etale abelian and module sheaves are Grothendieck, as are completed module sheaves by the coefficient-universe theorem. Countable functor categories inherit filtered exact colimits and a separator constructed from the evaluation left adjoints applied to a separator of the coefficient category. K-injective resolutions and local smallness give the derived localizations in universe u+1; Grothendieck abelianity also supplies Ext in that universe. These are constructed choices, retained existentially in the conclusion.",
+   "uses": [
+    "lem-sfb-proetale-sheaves-grothendieck",
+    "lem-pur-ringed-site-grothendieck-coefficient-universe",
+    "lem-sfb-grothendieck-k-injective",
+    "lem-pc-derived-category-locally-small"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exists_diagonalTowerSystem with the constructed unit and localization choices to obtain D, its completion specification and its normalized strict cycle system.",
+   "uses": [
+    "det-prop-diagonal-tower-system"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply diagonalTower_limit with p=ringChar(k) to D. Retain its nine data witnesses, the finite Cartier normalization and both ordinary cone comparisons. Two proved private logical lemmas rearrange this dependent existential presentation and extract the uniquely specified completed arrow from the final compatibility conjunction. They retain both invertible derived-limit comparisons, completeness of both endpoints, the equation and uniqueness for that same arrow, and every finite reduction. This is exactly the existing IsDiagonalLimit predicate. The generic logical proof avoids repeated kernel reduction of the concrete sheaf categories. No uniqueness from individual finite reductions is asserted.",
+   "uses": [
+    "det-prop-diagonal-tower-limit",
+    "def-sfb-diagonal-trace-limit-characterization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply diagonalTower_coefficients to this same D and delta with the normalized limit characterization. Keep its Family and Reference, and package them with the same unit proof and all three localization choices as IntegralFamilyReference. No choice of a Family is made in a definition, and no uniqueness from individual reductions is asserted.",
+   "uses": [
+    "det-prop-diagonal-tower-coefficients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-proetale-sheaves-grothendieck",
+  "lem-pur-ringed-site-grothendieck-coefficient-universe",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-pc-derived-category-locally-small",
+  "det-prop-diagonal-tower-system",
+  "det-prop-diagonal-tower-limit",
+  "det-prop-diagonal-tower-coefficients",
+  "def-sfb-diagonal-trace-limit-characterization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md",
+  "place": "Paragraph (1), instantiation of the diagonal tower system, completed limit and coefficient extension; Lean witness assembly by Z5, 2026-10-26"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A diagonal class and normalized projective line traces extend from completed integral coefficients to a family of coefficient rings",
+   "results": "8 hits: Algebra.normalizedTrace_algebraMap_of_lifts, Algebra.normalizedTrace, Algebra.normalizedTrace_surjective, Algebra.normalizedTrace_map, Algebra.normalizedTrace_algebraMap, Algebra.normalizedTrace_algebraMap_apply, Algebra.normalizedTrace_algebraMap_apply_eq_self, Algebra.normalizedTrace_trans",
+   "date": "2026-10-25",
+   "verdict": "No matching normalized integral projective-line statement; the general categorical tools are used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.ext",
+   "results": "1 hits: CategoryTheory.NatTrans.ext",
+   "date": "2026-10-25",
+   "verdict": "No matching normalized integral projective-line statement; the general categorical tools are used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*(integral|trace)|unitCounit.*exists",
+   "results": "7 hits: Mathlib/LinearAlgebra/Matrix/ToLin.lean, Mathlib/LinearAlgebra/Matrix/Trace.lean, Mathlib/LinearAlgebra/Matrix/Trace.lean, Mathlib/LinearAlgebra/Matrix/Trace.lean, Mathlib/LinearAlgebra/Matrix/Trace.lean, Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple.lean, Mathlib/Algebra/DirectSum/LinearMap.lean",
+   "date": "2026-10-25",
+   "verdict": "No matching normalized integral projective-line statement; the general categorical tools are used in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A pair of natural transformations satisfying the two triangle identities defines an adjunction",
+   "results": "8 hits, including CategoryTheory.Adjunction.mkOfUnitCounit, CategoryTheory.Adjunction.mk, CategoryTheory.Adjunction.CoreUnitCounit.mk.",
+   "date": "2026-10-25",
+   "verdict": "The general unit-counit constructor closes the assembly; it does not construct the geometric Tate comparisons, coefficient family, natural transformations, or contraction formulas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralProjectiveLineAdjunction",
+  "date": "2026-10-25",
+  "group": "K5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-int-restriction-line",
+   "place": "Paragraph (1), Referenced integral diagonal coefficient family",
+   "via": [
+    "lem-sfb-integral-projective-line-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-int-restriction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralNormalizedFamily",
+  "file": "lean/Sheaf/SixFunctors/IntegralNormalizedFamily.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.IntegralRestriction.integralNormalizedFamily_exists",
+  "statement": "theorem integralNormalizedFamily_exists\n    (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]\n    (Y : Scheme.{u}) [Y.Over (Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    [IsSeparated (Y ↘ Spec (.of k))] :\n    ∃ family : Family ℓ Y, IntegralFamilyReference ℓ Y family",
+  "branch": "sheaf-dag",
+  "by": "K5",
+  "date": "2026-10-25",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralRestriction.IntegralFamilyReference",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralRestriction.integralNormalizedFamily_exists"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261025T202418-L-2714738",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261026T024303-L-655411",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

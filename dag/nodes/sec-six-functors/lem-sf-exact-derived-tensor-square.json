@@ -1,0 +1,172 @@
+{
+ "id": "lem-sf-exact-derived-tensor-square",
+ "kind": "statement",
+ "title": "A monoidal square of exact functors stays monoidal after derivation",
+ "statement": "Let A,B,C,D be closed braided monoidal Grothendieck abelian categories with additive tensor and functorial flat resolutions. Let F1:A→B, F2:B→D, G1:A→C and G2:C→D be additive exact strong monoidal left adjoints preserving flats. If τ:G1⋙G2≅F1⋙F2 is monoidal, the square D(G1)⋙D(G2)≅D(F1)⋙D(F2) obtained by localizing τ and the canonical exact-functor composition identifications is monoidal for the tensor structures transported from the canonical K-flat derived tensor comparisons.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08JB (lemma-restriction-RHom-to-U) and 07A4; exact-functor and tensor-Hom localization argument made explicit below."
+ },
+ "proof": [
+  {
+   "text": "The canonical tensor comparison for left-derived functors commutes with composition and with an ordinary monoidal natural isomorphism. Consequently the left-derived square satisfies the oplax tensor equation. A strong monoidal functor’s unit is determined by its tensor comparison: apply left unitality at the unit and cancel the invertible tensor comparison. Transporting the monoidal structure along the square therefore gives the same unit, so the square is monoidal.",
+   "uses": [
+    "new-integral-residue-derived-monoidal-counit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08JB (lemma-restriction-RHom-to-U) and 07A4; exact-functor and tensor-Hom localization argument made explicit below."
+   }
+  },
+  {
+   "text": "Expand the canonical comparison between the left-derived and exact derived squares. Naturality of the exact-functor identification and its inverse gives the conjugation formula. Each of the two exact-functor identifications is monoidal by transport. Whisker, compose and invert these monoidal identifications to obtain the canonical exact derived square. Use the shared irreducible exact-derived monoidal construction of [lem-sf-exact-closed-derived-hom] so concrete applications reuse the same canonical structure.",
+   "uses": [
+    "new-lem-kun-exact-monoidal-equivalence-derived",
+    "lem-sf-exact-closed-derived-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08JB (lemma-restriction-RHom-to-U) and 07A4; exact-functor and tensor-Hom localization argument made explicit below."
+   }
+  }
+ ],
+ "proof_deps": [
+  "new-integral-residue-derived-monoidal-counit",
+  "new-lem-kun-exact-monoidal-equivalence-derived",
+  "lem-sf-exact-closed-derived-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M2",
+  "date": "2026-10-24",
+  "note": "Complete Lean proof using the existing ordinary Hom-complex, derived tensor/counit and localization APIs; no new holes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The internal Hom comparison of an exact monoidal functor commutes with shifts and its isomorphism locus is triangulated",
+   "results": "CategoryTheory.Adjunction.IsTriangulated.commShift; CategoryTheory.Functor.IsHomological.exact; CategoryTheory.Functor.map_distinguished_exact; CategoryTheory.Adjunction.IsTriangulated.rightAdjoint_isTriangulated; CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated; CategoryTheory.Adjunction.IsTriangulated.mk'; CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated; CategoryTheory.Adjunction.IsTriangulated.mk''",
+   "date": "2026-10-24",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ihomComparison\"",
+   "results": "No matching declarations.",
+   "date": "2026-10-24",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "ihomComparison.*[Ss]hift|[Ss]hift.*ihomComparison",
+   "results": "No matching declarations.",
+   "date": "2026-10-24",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact closed strong monoidal functor with an exact left adjoint preserves internal Hom in unbounded derived categories",
+   "results": "CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; CategoryTheory.Functor.mapExactFunctor_smul; CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.Abelian.Ext.mapExactFunctor",
+   "date": "2026-10-24",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*[Mm]onoidal|[Mm]onoidal.*mapDerivedCategory",
+   "results": "No matching declarations.",
+   "date": "2026-10-24",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Monoidal\" \"IsMonoidal\"",
+   "results": "loogle: Function expected at\n  \"Monoidal\"\nbut this term has type\n  String\n\nNote: Expected a function because this term is being applied to the argument\n  \"IsMonoidal\"",
+   "date": "2026-10-24",
+   "verdict": "invalid query; not evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal natural isomorphism between composites of exact monoidal functors induces a monoidal natural isomorphism of derived functors",
+   "results": "CategoryTheory.Functor.leftDerivedNatIso; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Localization.Monoidal.functorCoreMonoidalOfComp; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app",
+   "date": "2026-10-24",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.IsMonoidal",
+   "results": "CategoryTheory.NatTrans.IsMonoidal.id; CategoryTheory.NatTrans.IsMonoidal; CategoryTheory.LaxMonoidalFunctor.Hom.isMonoidal; CategoryTheory.NatTrans.IsMonoidal.instHomFunctorLeftUnitor; CategoryTheory.NatTrans.IsMonoidal.instHomFunctorRightUnitor; CategoryTheory.Functor.Monoidal.natTransIsMonoidal_of_transport; CategoryTheory.Iso.instIsMonoidalInvFunctor; CategoryTheory.LaxMonoidalFunctor.Hom.mk",
+   "date": "2026-10-24",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "ihomComparison",
+   "results": "No matching declarations.",
+   "date": "2026-10-24",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A monoidal natural isomorphism between composites of exact monoidal functors induces a monoidal square on derived categories",
+   "results": "CategoryTheory.LaxMonoidalFunctor.isoOfComponents; CategoryTheory.Functor.Monoidal.μNatIso; CategoryTheory.Functor.mapMonCompIso; CategoryTheory.Functor.Monoidal.coreMonoidalTransport; CategoryTheory.LaxMonoidalFunctor.isoMk; CategoryTheory.Functor.Monoidal.transport; CategoryTheory.Functor.mapMonNatIso; CategoryTheory.Functor.mapDerivedCategorySingleFunctor",
+   "date": "2026-10-24",
+   "verdict": "no exact Mathlib match; general constructions do not identify the derived tensor square or closed comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SiteHomComparisonThick",
+  "date": "2026-10-24",
+  "group": "M2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-finite-duality-site-comparison",
+   "place": "Proof, first paragraph: comparison commutes with restrictions; evaluation-transpose compatibility on the étale slice.",
+   "via": [
+    "lem-sf-site-hom-comparison-thick"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedCategory.ExactDerivedTensorSquare",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/ExactDerivedTensorSquare.lean",
+  "declaration": "CategoryTheory.Functor.exactDerivedSquare_monoidal",
+  "statement": "theorem exactDerivedSquare_monoidal :\n    letI := exactClosedDerivedMonoidal F₁\n    letI := exactClosedDerivedMonoidal F₂\n    letI := exactClosedDerivedMonoidal G₁\n    letI := exactClosedDerivedMonoidal G₂\n    NatTrans.IsMonoidal ((mapDerivedCategoryCompIso G₁ G₂).symm ≪≫\n      mapDerivedCategoryNatIso τ ≪≫ mapDerivedCategoryCompIso F₁ F₂).hom",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261025T002522-L-3122912",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261025T002522-L-3122912",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -35,47 +35,33 @@
  ],
  "proof": [
   {
-   "text": "Work first over the algebraically closed field $k$, without requiring a finite-field model of intermediate cuts. For any smooth connected affine $Y/k$ of pure dimension $e\\ge2$, any connected finite etale cover $P\\to Y$, and the prescribed set $S$, apply [lem-zl-bertini-prescribed-point-smooth-system] to choose $n,V_n,U_{\\rm sm}$. The system on $Y$ satisfies all hypotheses of [lem-zl-bertini-finite-cover-irreducible-system]; let $U_{\\rm irr}$ be its nonempty open. Their intersection is nonempty since $\\mathbf A(V_n)$ is irreducible, and has a $k$-point since $k$ is algebraically closed. Its zero scheme $Y_1$ is closed affine, smooth of pure dimension $e-1$, contains $S$, and is geometrically irreducible. The inverse image $P_1=P\\times_Y Y_1$ is connected and finite etale over $Y_1$.",
+   "text": "Prove the geometric curve assertion for every positive relative dimension d over any algebraically closed field by strong induction. For d=1 choose X and its identity immersion; pullback along identity is isomorphic to T. For d≥2 apply lem-zl-bertini-finite-cover-dimension-cut to obtain j:Y→X of relative dimension d−1, with Y and T×_X Y connected. Lift the finite set of prescribed sections to Y using their factorizations through the closed immersion, and form its finite image. These lifts remain sections over k.",
    "uses": [
-    "lem-zl-bertini-prescribed-point-smooth-system",
-    "lem-zl-bertini-finite-cover-irreducible-system"
+    "lem-zl-bertini-finite-cover-dimension-cut"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-bertini-finite-cover-curve.proof.md",
-    "place": "Proof paragraphs 2-4, simultaneous choice of a member"
-   }
+   "elementary": false
   },
   {
-   "text": "Induct on the positive dimension $e$ for the assertion that such a pair $(Y,P)$ has a closed smooth connected affine curve through $S$ with connected inverse image. If $e=1$, take $Y$ and its identity immersion. If $e\\ge2$, Step 1 gives $(Y_1,P_1)$ in dimension $e-1$ with the same prescribed points; apply the induction hypothesis to it. Compose the closed immersions to obtain a closed curve in $Y$: on affine coordinate rings these are successive quotient maps, whose composite is surjective. The defining pullback squares identify its inverse image in $P$ with that in $P_1$. Starting with $(X,T)$ proves the geometric conclusion. Every use of Step 1 has $e\\ge2$, including the final cut from dimension two.",
+   "text": "Apply the induction hypothesis in dimension d−1 to Y and the finite étale morphism pullback.snd π j. Compose the resulting closed immersion i:C→Y with j. Its smooth curve structure is the same composite structure map, its prescribed points factor by composition, and the canonical pullbackLeftPullbackSndIso identifies (T×_X Y)×_Y C with T×_X C, transporting connectedness. Apply this result to the geometric fibre; base change preserves smooth relative dimension, affineness and geometric connectedness.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-bertini-finite-cover-curve.proof.md",
-    "place": "Proof paragraph 4, iteration to dimension one"
-   }
+   "elementary": true
   },
   {
-   "text": "Apply [lem-zl-bertini-finite-field-descent] to the resulting closed immersion $i:C\\hookrightarrow X=X_0\\times_{k_0}k$. The original $X_0$ is of finite type since it is smooth and affine over $k_0$. This gives $m\\ge1$, the closed model $C_m$ over $\\mathbf F_{q^m}$, and the automorphism $\\varphi$ satisfying $i\\circ\\varphi=g_X^m\\circ i$. With $g_X=\\mathrm{id}_{X_0}\\times\\sigma$, this is exactly the required Frobenius stability. All geometric properties are those obtained in Step 2.",
+   "text": "Construct a FiniteFieldDatum with base k₀ and closure AlgebraicClosure k₀, using FiniteField.card′ to obtain the prime and positive exponent of its cardinality. Apply lem-zl-bertini-finite-field-descent to the closed curve and the finite-type model X₀. Its datum geometric Frobenius equals the source geometricGaloisFrobenius: both fix the first pullback projection and compose the second with Spec of the same geometric field Frobenius. Pullback extensionality gives equality of automorphisms, hence of their powers. The descent equivariance is exactly the final target clause.",
    "uses": [
     "lem-zl-bertini-finite-field-descent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-bertini-finite-cover-curve.proof.md",
-    "place": "Proof last paragraph, finite constant-field descent"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-zl-bertini-finite-cover-irreducible-system",
-  "lem-zl-bertini-finite-field-descent",
-  "lem-zl-bertini-prescribed-point-smooth-system"
+  "lem-zl-bertini-finite-cover-dimension-cut",
+  "lem-zl-bertini-finite-field-descent"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-bertini-finite-cover-curve.proof.md",
-  "place": "Proof"
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-lem-wgen-bertini-cover/lem-zl-bertini-finite-cover-curve.proof.md",
+  "place": "Paragraph 4; W9 formal strong induction, prescribed-section lifting, pullback transport and finite-field datum comparison; paragraphs 2–3 remain in the single-cut dependency"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -96,7 +82,32 @@
   "def-weil-scheme-morphism-properties"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.Hom.exists_isClosedImmersion_connectedSpace_pullback"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Hom.exists_isClosedImmersion_connectedSpace_pullback",
+     "module": "WeilConjectures.AlgebraicGeometry.Bertini",
+     "lines": [
+      53,
+      71
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-deligne-laumon-general",
  "unit": "sk-i-dl-general-real",
  "lean": {
@@ -161,5 +172,15 @@
   "group": "Q127",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q127-3038767b5 (reviewer sub-agent of L); spot-checked: Re-split under the 2026-10-21 repair note (at least 1 new node, assembly at most 3000 characters). The base is the live Q137 split; live is unchanged, so the delivery is not superseded. I compared the old 5-step proof with the new one step by step. Old steps 1–2 (0FD5 on the projective closure, 0B5T Serre vanishing on the first-order neighbourhoods, jet surjectivity, m∖m² regular hypersurface, 0FD6 off S, pure dimension d−1) are now the statement lem-zl-bertini-prescribed-point-smooth-system. Old step 3 (unramified cotangent via 0B2G, independent v2,v3, regular quotients are domains, height exactly 2, 0G4F on X and on T) and the étale smoothness of T_v are now lem-zl-bertini-finite-cover-irreducible-system. The item keeps the intersection of the two opens and a k-point, an explicit induction on e (base e=1, every cut has e>=2), and the finite-field-descent citation (i∘φ=g_X^m∘i). The assembly is 1987 characters, and nothing was dropped or blurred. I checked both new statements against Stacks 0FD5, 0FD6, 0G4F and 0B5T (labels confirmed in the tags file), including the hypotheses for 0G4F on T (π^*ψ, base locus π^{-1}S of codimension d>=2, π surjective so T_v is nonempty). Both are true. Edge cases checked: single point S, d=2, identity cover. Neither node restates the item or a clause of it, and there are no duplicates (sections, smooth-member, irreducible-member, independent-functions, hypersurface-nonzero-differential, curve-testing-irreducibility all differ). No SGA source. Fix: B3 in both new nodes, which used 'pure dimension' without citing def-weil-pure-dimension; I added the citation and the stmt_dep. Advisory: the item's maintainer field tool_uses is now stale; those tools belong to the future proofs of the new nodes. The snapshot DAG directory disappeared mid-review, so I read the remaining definition statements from the live DAG, read-only.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W9",
+  "result": "pass",
+  "landing": "20261025T124313-L-1971070",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

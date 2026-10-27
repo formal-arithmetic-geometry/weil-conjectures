@@ -16,106 +16,62 @@
  ],
  "proof": [
   {
-   "text": "Put $P(T)=\\{(x,y)\\in F(T)\\times G(T):f(x)=g(y)\\text{ in }H(T)\\}$, with componentwise restrictions. This is a sheaf: a matching family of pairs glues uniquely in $F$ and $G$; the images of the two glued sections in $H(T)$ agree because their restrictions agree on the covering and $H$ is a sheaf. This uses the sheaf equalizer condition in [def-weil-pbc-sites-and-cohomology] and the sheaf part of [def-trf-algebraic-space]. Thus $P$ is the sheaf fibre product.",
+   "text": "Apply [lem-trf-sheaf-pullback-diagonal] to the underlying sheaves and the representable diagonals from [def-trf-algebraic-space]. The explicit compatible-pair cone is limiting pointwise (Mathlib Types.pullbackLimitCone and evaluationJointlyReflectsLimits). The sheaf-to-presheaf functor preserves the chosen sheaf pullback; uniqueness of pullbacks identifies its underlying presheaf with the compatible-pair presheaf. Transport the representable diagonal through this isomorphism and its induced product isomorphism. Transport of a representable-with-property predicate is proved directly by transporting each representing pullback square.",
    "uses": [
-    "def-trf-algebraic-space",
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/spaces.tex",
-    "place": "Tag 04T9, first paragraph of proof: the sheaf condition, expanded using the sheaf equalizer definition"
-   }
-  },
-  {
-   "text": "To test the diagonal of $P$, take a scheme $T$ and two sections $(x_1,y_1),(x_2,y_2)\\in P(T)$. The equality locus $A=T\\times_{(x_1,x_2),F\\times F,\\Delta_F}F$ is a scheme, and likewise $B=T\\times_{(y_1,y_2),G\\times G,\\Delta_G}G$, by representability of the two diagonals. For every scheme $Z\\to T$, a section of $A\\times_TB$ is precisely simultaneous equality of the two $F$ sections and the two $G$ sections, hence equality of the two $P$ sections. Consequently $A\\times_TB$ represents the pullback of $\\Delta_P$ to $T$. This scheme exists by [def-pc-fibre-product], so $\\Delta_P$ is representable.",
-   "uses": [
-    "def-trf-algebraic-space",
-    "def-pc-fibre-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/spaces.tex",
-    "place": "Tag 04T9, diagonal cartesian square, with representability checked directly on a scheme test"
-   }
-  },
-  {
-   "text": "Choose the representable surjective etale atlases $U\\to F$ and $V\\to G$ supplied by [def-trf-algebraic-space]. The sheaf $W=U\\times_HV$ is a scheme: it is the pullback of $\\Delta_H:H\\to H\\times H$ along the map $U\\times_SV\\to H\\times H$ induced by $U\\to H$ and $V\\to H$. The source of this test is a scheme by [def-pc-fibre-product], and the diagonal of the algebraic space $H$ is representable. The maps to $F$ and $G$ induce $W\\to P$.",
-   "uses": [
-    "def-trf-algebraic-space",
-    "def-pc-fibre-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/spaces.tex",
-    "place": "Tag 04T9, last paragraph: the scheme atlas U times_H V"
-   }
-  },
-  {
-   "text": "For a scheme $T\\to P$ with components $x:T\\to F$, $y:T\\to G$, form the schemes $A=T\\times_FU$ and $B=T\\times_GV$. Their maps to $T$ are surjective etale by the atlas definition. The pullback $T\\times_PW$ is represented by $A\\times_TB$: on every test scheme its data are exactly the two lifts of $x,y$, whose images in $H$ already agree. The projection $A\\times_TB\\to B$ is surjective and etale by [lem-weil-pbc-surjective-base-change] and [lem-weil-pbc-etale-scheme-base-change]. Composing with $B\\to T$ preserves surjectivity by [lem-trf-surjective-morphism-composition] and etaleness by [lem-weil-pbc-etale-composition-cancellation](2). Thus $W\\to P$ is representable surjective etale. Together with steps 1 and 2 this verifies all three algebraic-space conditions and proves that $P$ is an algebraic space.",
-   "uses": [
-    "def-trf-algebraic-space",
-    "def-pc-fibre-product",
-    "lem-weil-pbc-surjective-base-change",
-    "lem-weil-pbc-etale-scheme-base-change",
-    "lem-trf-surjective-morphism-composition",
-    "lem-weil-pbc-etale-composition-cancellation"
+    "lem-trf-sheaf-pullback-diagonal",
+    "def-trf-algebraic-space"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/spaces.tex",
-    "place": "Tag 04T9, last paragraph; the atlas tested on schemes, with scheme permanence from Tags 01S1, 02GO and 02GN"
+    "place": "Tags 04T9 (lemma-fibre-product-spaces-over-sheaf-with-representable-diagonal), first two conditions of the proof, and 02X2 (lemma-fibre-product-spaces), universal property."
    }
   },
   {
-   "text": "For any algebraic space $Q$, a morphism $Q\\to P$ sends a section $q$ to a compatible pair of sections in $F$ and $G$. Conversely a pair of natural transformations $Q\\to F$, $Q\\to G$ whose composites to $H$ agree defines $q\\mapsto(a(q),b(q))$ in $P$, naturally in the test scheme. These constructions are inverse. Since morphisms of algebraic spaces are natural transformations [def-trf-algebraic-space], this is exactly the required categorical universal property.",
+   "text": "Choose atlases of F and G using [def-trf-algebraic-space]. Apply [lem-trf-fibre-product-atlas-tests] with the representable diagonal of H. It supplies a scheme D representing the presheaf pullback of the two atlases and a representable etale, surjective atlas map to the presheaf pullback of F and G. Compose with the representing isomorphism at the source and with the comparison to the underlying chosen sheaf pullback at the target. Transporting the scheme-test squares preserves etaleness and surjectivity. Together with step 1 these give IsAlgebraicSpace of the chosen sheaf pullback.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-fibre-product-atlas-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 04T9 (lemma-fibre-product-spaces-over-sheaf-with-representable-diagonal), last paragraph: construction and scheme tests of the atlas."
+   }
+  },
+  {
+   "text": "The universal property of the chosen sheaf pullback gives the unique lift of any compatible pair of sheaf maps. Morphisms of algebraic spaces are the morphisms of their underlying sheaves by [def-trf-algebraic-space], so apply the ordinary categorical pullback lift and its projection equations; pullback.hom_ext proves uniqueness. No additional hypothesis about the test algebraic space is needed.",
    "uses": [
     "def-trf-algebraic-space"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/spaces.tex",
-    "place": "Tag 02X2, universal property in the full subcategory, written on sections"
+    "place": "Tags 04T9 (lemma-fibre-product-spaces-over-sheaf-with-representable-diagonal), first two conditions of the proof, and 02X2 (lemma-fibre-product-spaces), universal property."
    }
   },
   {
-   "text": "Apply the fibre-product construction just proved to $G\\to H$ and $H_i\\to H$, so $P_i=G\\times_HH_i$ is an algebraic space. For every scheme $T\\to G$, the pullback $T\\times_GP_i$ is $T\\times_HH_i$: both functors consist of a section of $T$ and a compatible section of $H_i$. Since $H_i\\to H$ is representable etale in the convention of the statement, this is a scheme etale over $T$. Thus each $P_i\\to G$ is representable etale by [def-trf-algebraic-space]. In particular, taking $T=G$ when $G$ is a scheme shows that $P_i$ is a scheme, as required.",
+   "text": "Apply [lem-trf-presheaf-pullback-etale-point-lifting] to the underlying sheaves. Transport its IsEtale assertion along the explicit-to-chosen pullback isomorphism from step 1. For joint surjectivity, apply the lemma to a field-valued point of G, then apply the same isomorphism to its lifted compatible pair; the projection equation preserves the required equality. This works for any index type, including the empty one. For the scheme special case, apply the lemma with a singleton family and compose its representing isomorphism with the inverse explicit-to-chosen pullback comparison.",
    "uses": [
-    "def-trf-algebraic-space"
+    "lem-trf-presheaf-pullback-etale-point-lifting"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/spaces-topologies.tex",
-    "place": "Tag 041F(3), etaleness and scheme special case proved directly by the scheme-test definition"
-   }
-  },
-  {
-   "text": "It remains to prove joint surjectivity, without invoking the omitted proof of Tag 041F(3). Let $z\\in|G|$ be represented by $a:\\operatorname{Spec}K\\to G$. Joint surjectivity of the given family gives $i$ and a representative $b:\\operatorname{Spec}L\\to H_i$ whose image in $|H|$ is the image of $z$. By the point equivalence relation stated above, there is a common extension $M$ of $K$ and $L$ on which the two maps to $H$ agree. The pair $(a|_M,b|_M)$ is therefore a section of the sheaf $G\\times_HH_i$ over $\\operatorname{Spec}M$, and its point maps to $z$ because $a|_M$ is equivalent to $a$. This proves that every point is covered. If $I$ is empty, the hypothesis gives $|H|=\\varnothing$ and any point of $G$ would map to a point of $H$, so $|G|=\\varnothing$ and the conclusion still holds.",
-   "uses": [
-    "def-trf-algebraic-space",
-    "def-weil-field"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/spaces-properties.tex",
-    "place": "Tag 03BU (definition-points) and Tag 03H4 (lemma-points-cartesian), common-field-extension argument; supplies the joint-surjectivity detail omitted at spaces-topologies.tex Tag 041F(3)"
+    "place": "Tag 041F (lemma-etale), part (3), with its omitted details supplied by spaces-properties.tex Tag 03BU (definition-points) and Tag 03H4 (lemma-points-cartesian), common-field-extension proof."
    }
   }
  ],
  "proof_deps": [
-  "def-pc-fibre-product",
   "def-trf-algebraic-space",
-  "def-weil-field",
-  "def-weil-pbc-sites-and-cohomology",
-  "lem-trf-surjective-morphism-composition",
-  "lem-weil-pbc-etale-composition-cancellation",
-  "lem-weil-pbc-etale-scheme-base-change",
-  "lem-weil-pbc-surjective-base-change"
+  "lem-trf-fibre-product-atlas-tests",
+  "lem-trf-presheaf-pullback-etale-point-lifting",
+  "lem-trf-sheaf-pullback-diagonal"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/spaces.tex",
-  "place": "Tag 04T9, the explicit diagonal and atlas construction; Tag 02X2, universal property. For Tag 041F(3), the omitted joint-surjectivity proof is supplied by the common-extension argument of spaces-properties.tex, Tag 03BU and Tag 03H4 (lemma-points-cartesian)."
+  "place": "Tags 04T9 and 02X2, assembled from the three stated dependencies. For the covering clause, spaces-topologies.tex Tag 041F(3), using spaces-properties.tex Tags 03BU and 03H4 through the point-lifting lemma. The Lean glue uses uniqueness of pullbacks and transport of scheme-test squares under isomorphisms."
  },
  "mathlib_searches": [
   {
@@ -207,20 +163,20 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-space-fibre-products-etale-covers",
   "worker": "stage1",
-  "summary": "Repair of the return at 2544e89fce: withdrew the unsplit 04T9 restatement and replaced its application by scheme-test proofs of the diagonal and an explicit atlas U times_H V. Four existing Mathlib leaves supply exactly scheme etale/surjective base change and composition. The 041F(3) covering assertion is proved using common field extensions in the definition of points, rather than invoked with its omitted proof. Expanded the meaning of jointly surjective inline without changing hypotheses or conclusions. No new nodes. Retained current-base metadata and complete historical blueprint ancestry; reconciled searches with the retained actual command log.",
-  "blueprint": "Historical polarized-descent input below lem-trf-local-term-locality, through the full existing via chain beginning lem-trf-algebraic-space-ample-local: steps 1-5 construct the fibre products needed for scheme tests, and steps 6-7 pull back the etale covering family. This is a helper of that chain, not a replacement for the unit contracting-correspondence argument.",
+  "summary": "Repair of the 2026-10-22 re-split return: preserve the statement verbatim and distribute all seven old arguments over three independent statement-only sheaf-construction tasks. Old steps 1,2,5 go to the sheaf/equality-locus task; 3,4 to the atlas-test task; 6,7 to the scheme-test/field-lifting task. The parent now only assembles the three criteria, full-subcategory universal property, and pullback assertions. The complete old proof and its scheme permanence citations are retained in report.md for the next workers.",
+  "blueprint": "Historical polarized-descent input below lem-trf-local-term-locality, through the full existing via chain beginning lem-trf-algebraic-space-ample-local: steps 1-5 construct the fibre products needed for scheme tests, and steps 6-7 pull back the etale covering family. This is a helper of that chain, not a replacement for the unit contracting-correspondence argument. The three new nodes subdivide exactly this historical helper without changing its route.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-NX-3e0a27c25",
-  "group": "NX",
+  "reviewer": "NT-cc-Q119-a60ab5493",
+  "group": "Q119",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-3e0a27c25 (reviewer sub-agent of L); spot-checked: Read the required instructions, packet, report, item, unit/chapter route, all cited DAG statements, and Stacks Tags 025Y, 02X2, 04T9, 041F, 03BU, and 03H4. Verified every proof step, hypotheses, scheme base-change/composition citations, universal property, common-field joint-surjectivity argument, edge cases, searches, route restrictions, and long-step rule. No new nodes or duplicate/restated children remain. Wrote review.md with detailed checks; no repairs required."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q119-a60ab5493 (reviewer sub-agent of L); spot-checked: Re-split of the human's 2026-10-21 decision (repair note released 2026-10-22). Only proof, proof_deps and split_report changed; the statement and Lean records are byte-identical to the live item, which is still unsplit-proof and not superseded. All 7 old steps are now statements of new nodes: steps 1, 2, 5 (sheaf, equality-locus diagonal A×_T B, Hom bijection) in lem-trf-sheaf-pullback-diagonal; steps 3, 4 (U×_H V as the pullback of Δ_H along U×_S V, h_T×_P W ≅ h_{A×_T B}, composite A×_T B→B→T surjective étale) in lem-trf-fibre-product-atlas-tests; steps 6, 7 (scheme-test iso h_T×_G P_i ≅ h_T×_H H_i, extension lifts, I=∅) in lem-trf-presheaf-pullback-etale-point-lifting. Statement sizes are 1189, 1216 and 1413 characters; the parent assembly is 1411 characters. Each node checked true: node 1 needs only Δ_F, Δ_G representable and H a sheaf; node 2 is exactly the last paragraph of 04T9; node 3's lift follows directly from def-trf-algebraic-space-jointly-surjective-family, which is itself phrased by extension lifts, so no transitivity of the point relation is needed. Checked against spaces.tex 04T9 (l.914-954) and 02X2, and spaces-topologies 041F(3) (proof omitted there). Item steps 1-4 use only cited statements; step 3 is genuinely elementary. No duplicates: rg -L on tags 04T9/02X2/041F/03H4 and on representable-diagonal wording; read lem-a1-space-fibre-product-point, a1 point/atlas/open-image nodes, sfb bootstrap/stack nodes and trf chartwise permanence (which depends on the item). Searches are recorded, LeanSearch as unavailable. No SGA; no tool_uses. Batch-5 flags on all three cited sec-trace-formula nodes: accepted. They are general fibre-product facts about sheaves and algebraic spaces, with only definitions as stmt_deps and no proof_deps, so their closure cannot reach the trace formula, Poincaré duality or batch-4 targets, and they are not steps of either assumed proof."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceFibreProductsEtaleCovers",
@@ -246,5 +202,26 @@
   "result": "fix",
   "note": "Mathematics, dependencies, universes, source clauses, and edge cases verified; both immutable Lean files compile cleanly. Wrote review.md and a complete report replacement in fixes/lem-trf-space-fibre-products-etale-covers.report.md, repairing the placeholder second-reading section (H11)."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261026T082834-L-2230085",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

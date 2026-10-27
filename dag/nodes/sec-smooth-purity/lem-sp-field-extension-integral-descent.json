@@ -1,0 +1,128 @@
+{
+ "id": "lem-sp-field-extension-integral-descent",
+ "kind": "statement",
+ "title": "Reconstruct coherent integral comparisons from whole systems",
+ "statement": "Fix $P$ [def-pur-conventions], simultaneous coefficient models $D$ [def-sp-field-shriek-system-models], and separated finite-type schemes $X,Y$ over its algebraically closed field. Let $j:X\\to Z$ be open, $p:Z\\to Y$ proper, and $f=p\\circ j$ a smooth separated morphism over the fixed field of pure relative dimension $d$. Suppose the whole-system proper/open coefficient laws, normalized domains, tower adjunctions, and exceptional transpose laws are given for this factorization [def-sp-field-exceptional-system-domains] [def-sp-field-exceptional-system-adjoints] [def-sp-field-exceptional-system-laws]. Supply a family of normalized reduction comparisons for every coefficient inclusion and every pair of reduction-tower presentations [def-sp-field-extension-reduction-limits]. Then there are integral models $m_E$ [def-sp-field-extension-integral-models] for every finite coefficient subfield and integral comparisons $i_{E,F}$ [def-sp-field-extension-integral-comparisons] for every inclusion. Their scalar reductions on $X$ and $Y$ are the supplied reduction family. They satisfy LimitEquations [def-sp-field-extension-limit-equations] and IntegralComposition [def-sp-field-extension-composition] for every triple $E\\subset F\\subset L$. No rational-model or arbitrary strict-limit assertion is part of this conclusion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "(2), apply Rlim and reconstruct the integral comparisons and equations"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-l-adic-coefficient-extension",
+  "def-sp-field-shriek-system-models",
+  "def-sbc-smooth-morphisms",
+  "def-sf-setting",
+  "def-sp-field-extension-integral-models",
+  "def-sp-field-extension-integral-comparisons",
+  "def-sp-field-extension-reduction-limits",
+  "def-sp-field-extension-limit-equations",
+  "def-sp-field-extension-composition",
+  "def-sp-field-exceptional-system-domains",
+  "def-sp-field-exceptional-system-adjoints",
+  "def-sp-field-exceptional-system-laws"
+ ],
+ "proof": [
+  {
+   "text": "for each coefficient field choose the reduction tower and normalized\nreconstruction equivalence. Transfer the supplied tower right adjoint and its\nfinite adjunction evaluations through the section equivalences. The integral\nadjunction realization theorem supplies the reconstructed functors, adjunction,\nfinite units and counits, and actual gamma. Exact Tate tensor and its K-flat\nmultiplication map supply SourceNormalization. This constructs the integral models.\nRestrict the supplied proper/open comparison and its counit mate to normalized\nconstructible systems and conjugate by the same equivalences. Use the supplied\nreduction family for the scalarReduction maps. Full faithfulness of reconstruction\nlifts the resulting tower comparison uniquely to the integral comparison; its\nunit and counit equations follow by injectivity on Hom groups. The orientation,\nprojection and tensor-transpose identities give the tower purity square. Applying\nthe total limit and inserting the reconstruction unit gives integral purity and\nLimitEquations, with the indicated normalized scalar reductions. The canonical\nsource word is fixed on K-flat tensors independently of gamma. Finally multiplication\nof three tensor factors gives the system coefficient cocycle, and full faithfulness\ntransports it to the three integral composition equations. This argument uses\nfaithfulness of normalized reconstruction, never of finite derived evaluation.",
+   "uses": [
+    "det-sp-reduction-tower-normalized",
+    "det-sp-integral-adjunction-bijection",
+    "lem-sp-field-exceptional-system-comparison",
+    "lem-sp-field-orientation-system-comparison",
+    "lem-sp-field-projection-origin-witnesses",
+    "lem-sp-field-projection-system-square",
+    "lem-sp-field-purity-system-transpose",
+    "det-sp-integral-direct-image-tower"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-sp-reduction-tower-normalized",
+  "det-sp-integral-adjunction-bijection",
+  "lem-sp-field-exceptional-system-comparison",
+  "lem-sp-field-orientation-system-comparison",
+  "lem-sp-field-projection-origin-witnesses",
+  "lem-sp-field-projection-system-square",
+  "lem-sp-field-purity-system-transpose",
+  "det-sp-integral-direct-image-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "(2), apply Rlim and reconstruct the integral comparisons and equations; explicit coordinate-transport obligation, M3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Fully faithful normalized reconstruction transports coefficient comparison adjunctions and purity maps from derived systems to complete integral sheaves",
+   "results": "8 hits; CategoryTheory.Adjunction.restrictFullyFaithful, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pushforwardPushforwardAdj, CategoryTheory.Adjunction.fullyFaithfulROfCompIsoId, CondensedSet.LocallyConstant.functorFullyFaithful, LightCondSet.LocallyConstant.functorFullyFaithful, AlgebraicGeometry.Spec.faithful, PresheafOfModules.sheafificationAdjunction. Generic module, limit, or localization results; none supplies this normalized coefficient-model statement.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral reconstruction of coefficient comparison adjunctions via fully faithful normalized tower equivalence",
+   "results": "8 hits; CategoryTheory.Monad.MonadicityInternal.comparisonLeftAdjointHomEquiv, CategoryTheory.Monad.comparisonForget, CategoryTheory.Monad.MonadicityInternal.comparisonLeftAdjointHomEquiv_apply_f, CategoryTheory.Monad.MonadicityInternal.comparisonLeftAdjointHomEquiv_symm_apply, CategoryTheory.Endofunctor.Adjunction.Algebra.homEquiv_naturality_str, CategoryTheory.Monad.left_comparison, CategoryTheory.Monad.comparisonForget_hom_app, CategoryTheory.Reflective.comparison_full. Generic module, limit, or localization results; none supplies this normalized coefficient-model statement.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesKInjectiveComplexes|preservesLimitIso|restrictFullyFaithful|Adjunction.localization",
+   "results": "25 hits; Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/Condensed/Light/TopCatAdjunction.lean, Mathlib/Condensed/TopCatAdjunction.lean, Mathlib/Geometry/RingedSpace/OpenImmersion.lean, Mathlib/Geometry/RingedSpace/OpenImmersion.lean, Mathlib/CategoryTheory/Limits/Preserves/Limits.lean, Mathlib/CategoryTheory/Limits/Preserves/Limits.lean. Generic module, limit, or localization results; none supplies this normalized coefficient-model statement.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FieldExtensionTowers",
+  "date": "2026-10-26",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-field-extension-towers",
+   "place": "proof (2), apply Rlim and reconstruct the integral comparisons and equations",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-field-extension",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FieldExtensionIntegralDescent",
+  "file": "lean/Sheaf/Paper/FieldExtensionIntegralDescent.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.FieldExtensionTowers.field_extension_integral_descent",
+  "statement": "theorem field_extension_integral_descent\n    [SmoothOfRelativeDimension d (j ≫ p)] [IsSeparated (j ≫ p)]\n    (b : FieldShriekSystem.Laws P D (SpTowerGamma.factorization j p))\n    (a : FieldExceptionalSystem.Domains P D (SpTowerGamma.factorization j p))\n    (A : FieldExceptionalSystem.Adjoints P D (SpTowerGamma.factorization j p) b a)\n    (laws : FieldExceptionalSystem.Laws P D (SpTowerGamma.factorization j p) b a A)\n    (red : ∀ (E F : FieldShriekSystem.Index P) (h : E ≤ F) (T : Scheme.{u})\n      (RA : SpReductionTower P.coefficients.l E.val T ((D.coordinates E).abelian T))\n      (RB : SpReductionTower P.coefficients.l F.val T ((D.coordinates F).abelian T)),\n      Reduction P D E F h T RA RB) :\n    ∃ (m : ∀ E : FieldShriekSystem.Index P, IntegralModel P D E j p d)\n      (i : ∀ (E F : FieldShriekSystem.Index P) (h : E ≤ F),\n        IntegralComparison P D j p d E F h (m E) (m F)),\n      (∀ (E F : FieldShriekSystem.Index P) (h : E ≤ F) (M : Integral P E X),\n        HEq ((i E F h).scalarReductionX.hom.app M).hom\n          ((red E F h X (m E).reductionX (m F).reductionX).reduction.hom.app M)) ∧\n      (∀ (E F : FieldShriekSystem.Index P) (h : E ≤ F) (K : Integral P E Y),\n        HEq ((i E F h).scalarReductionY.hom.app K).hom\n          ((red E F h Y (m E).reductionY (m F).reductionY).reduction.hom.app K)) ∧\n      (∀ (E F : FieldShriekSystem.Index P) (h : E ≤ F),\n        LimitEquations P D j p d E F h (m E) (m F) (i E F h)) ∧\n      ∀ (E F L : FieldShriekSystem.Index P) (h : E ≤ F) (k : F ≤ L),\n        IntegralComposition P D j p d E F L h k (m E) (m F) (m L)\n          (i E F h) (i F L k) (i E L (h.trans k))",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261026T070248-L-3503399",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261026T070248-L-3503399",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

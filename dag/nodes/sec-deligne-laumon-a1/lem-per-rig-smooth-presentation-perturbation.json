@@ -1,0 +1,296 @@
+{
+ "id": "lem-per-rig-smooth-presentation-perturbation",
+ "kind": "statement",
+ "title": "Stability of power-split completed presentations under perturbation",
+ "statement": "Let $A$ be a Noetherian commutative ring [def-weil-pbc-noetherian-ring], let $I\\subseteq A$ be an ideal, and put $P=\\widehat{A[x_1,\\ldots,x_r]}_I$ for $r\\geq0$ [def-weil-pbc-mv-polynomial-ring, def-weil-pbc-adic-completion]. Let $g_1,\\ldots,g_m\\in P$, put $J=(g_1,\\ldots,g_m)$ and $B=P/J$, and suppose $B$ is $I$-adically complete. Let $K=(k_{j\\ell})\\in\\operatorname{Mat}_{m\\times t}(P)$, where $m,t\\geq0$, and assume that the sequence $P^{\\oplus t}\\xrightarrow{K}P^{\\oplus m}\\xrightarrow{(g_1,\\ldots,g_m)}P\\to B\\to0$ is exact at $P^{\\oplus m}$, $P$, and $B$. Let $\\delta:J/J^2\\to B^{\\oplus r}$ send $f\\bmod J^2$ to $(\\partial f/\\partial x_i\\bmod J)_i$, with derivatives extended continuously from polynomials. Suppose there is $c\\geq0$ such that for every $a\\in I^c$ there is a $B$-linear $h_a:B^{\\oplus r}\\to J/J^2$ with $h_a\\delta=a\\operatorname{id}$. Then there is $N\\geq1$ such that for every $g'_1,\\ldots,g'_m\\in P$ and $K'=(k'_{j\\ell})\\in\\operatorname{Mat}_{m\\times t}(P)$ satisfying $\\sum_{j=1}^m g'_jk'_{j\\ell}=0$ for every $\\ell$, $g_j-g'_j\\in I^NP$ for every $j$, and $k_{j\\ell}-k'_{j\\ell}\\in I^NP$ for every $j,\\ell$, there is an $A$-algebra isomorphism $B\\cong P/(g'_1,\\ldots,g'_m)$.",
+ "source": {
+  "document": "literature/stacks-project/restricted.tex",
+  "place": "Tag 0GAR (lemma-close-enough); its rig-smooth hypothesis is written as the continuous conormal power-splitting criterion of lemma-equivalent-with-artin-smooth, condition (3). The missing completion hat in the printed definition of P is restored."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-adic-completion",
+  "def-per-completed-polynomial-conormal"
+ ],
+ "proof": [
+  {
+   "text": "Write $H=IP$. The polynomial algebra $A[x_1,\\ldots,x_r]$ is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian], so [lem-weil-pbc-adic-completion-noetherian] makes $P$ Noetherian. Its completion ideal is finitely generated, and [lem-weil-pbc-adic-completion-mod-ideal] makes $P$ $H$-adically complete with $P/H=(A/I)[x_1,\\ldots,x_r]$. Thus [lem-weil-pbc-adic-complete-jacobson-radical] puts $H$ in every maximal ideal. For every ideal $J'\\subseteq P$, the quotient $P/J'$ is Noetherian by the finite-type lemma over $P$, and is $H$-adically complete by [lem-weil-pbc-finite-module-complete-over-complete-noetherian], since it is generated as a $P$-module by $1$. The module completion and ring completion agree by their componentwise operations. In particular these facts hold for $B$ and every $B'=P/(g')$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-adic-complete-jacobson-radical",
+    "lem-weil-pbc-finite-module-complete-over-complete-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tag 0GAR, preliminary hypotheses for (B) and the application of 0GAQ; Algebra Tags 0316, 05GG, 05GI, 00MA."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-artin-rees] over $P$ to $\\operatorname{im}K\\subseteq P^{\\oplus m}$ and $J=\\operatorname{im}g\\subseteq P$. Choose a common enlarged bound $b\\geq0$. If $u:U\\to V$ is either $K$ or $g$, the resulting inclusion is $\\operatorname{im}u\\cap H^dV\\subseteq u(H^{d-b}U)$ for $d\\geq b$: lift each summand $ay$ in $H^{d-b}\\operatorname{im}u$ to $ax$ with $u(x)=y$. Suppose a perturbed complex is congruent modulo $H^N$, with $N\\geq b+1$. Apply [lem-sfb-perturbed-image-artin-rees-bound] to $(L,M,V,f,g,f',g')=(P^{\\oplus t},P^{\\oplus m},P,K,g,K',g')$. All modules are finite, $\\operatorname{im}K=\\ker g$ is assumed, $g' K'=0$ is assumed, $H$ lies in every maximal ideal by step 1, and coefficient congruence implies the required image congruences. Consequently $J'\\cap H^d\\subseteq g'(H^{d-b}P^{\\oplus m})$ for every $d\\geq b$.",
+   "uses": [
+    "lem-weil-pbc-artin-rees",
+    "lem-sfb-perturbed-image-artin-rees-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07VE (lemma-approximate-complex), preservation of the right differential Artin-Rees bound; Algebra 00IN."
+   }
+  },
+  {
+   "text": "For every $d\\geq0$ we have $H^{d+1}+(J\\cap H^d)=H^{d+1}+(J'\\cap H^d)$. For $d\\leq b$, replace $g(v)\\in J\\cap H^d$ by $g'(v)$: their difference lies in $H^N\\subseteq H^{d+1}$, so the latter lies in $J'\\cap H^d$. Interchanging the two rows proves the reverse inclusion. For $d>b$, step 2 writes $y\\in J\\cap H^d$ as $g(v)$ with $v\\in H^{d-b}P^{\\oplus m}$. Replacing it by $g'(v)$ changes it by an element of $H^{N+d-b}\\subseteq H^{d+1}$. The perturbed bound in step 2 gives the reverse inclusion by the same explicit replacement. The degree-$d$ graded quotients of $B,B'$ are therefore the identical quotient $H^d/(H^{d+1}+J\\cap H^d)=H^d/(H^{d+1}+J'\\cap H^d)$. Sending a representative $p$ to that same $p$ commutes with addition and multiplication of representatives and with scalars from $A/I$. By the multiplication formula of [lem-weil-pbc-associated-graded-ring-structure] these maps give a degree-preserving $A/I$-algebra isomorphism $E:\\operatorname{gr}_I(B)\\to\\operatorname{gr}_I(B')$.",
+   "uses": [
+    "lem-weil-pbc-associated-graded-ring-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07VF (lemma-approximate-complex-graded), the common-subquotient calculation, with N=P."
+   }
+  },
+  {
+   "text": "Apply [lem-per-power-split-uniform-adic-map-lifting] to the given $A,I,P,J,B,c$ and reference target $C_0=B$. Step 1 supplies its Noetherian and completeness hypotheses and the power splitting is exactly the hypothesis of the item. Obtain $e\\geq0$ and $n_0\\geq e+1$, and set $N=\\max(b+1,n_0)$. Fix any perturbation as in the statement and put $B'=P/J'$. The equality $J+I^NP=J'+I^NP$, obtained by replacing each generator by its congruent partner in both directions, gives an $A$-algebra map $\\psi_N:B\\to B'/I^NB'$ inducing the canonical isomorphism on the quotients modulo $I^N$. Steps 1 and 3 give the completeness and graded-isomorphism hypotheses for target $C=B'$ (use $E^{-1}$). The cited lifting lemma supplies $\\varphi:B\\to B'$ agreeing with $\\psi_N$ modulo $I^{N-e}$, hence modulo $I$, since $N-e\\geq1$.",
+   "uses": [
+    "lem-per-power-split-uniform-adic-map-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tag 0GAR, (A), (C), choice of n and the paragraph applying Tag 0GAQ."
+   }
+  },
+  {
+   "text": "Let $q:P\\to B$ and $q':P\\to B'$ be the quotient maps. Agreement modulo $I$ gives $\\varphi(q(p))-q'(p)\\in IB'$ for every $p\\in P$. For $p\\in H^d=I^dP$, write $p=\\sum a_jp_j$ with $a_j\\in I^d\\subseteq A$. Since $\\varphi$ is an $A$-algebra map, $\\varphi(q(p))-q'(p)=\\sum a_j(\\varphi(q(p_j))-q'(p_j))\\in I^{d+1}B'$. Thus on each graded piece the actual map induced by $\\varphi$ is exactly the common-representative map $E$ of step 3. In particular it is injective in every degree; this checks the compatibility which the source leaves as a tiny argument.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tag 0GAR, final paragraph, parenthetical alternative: the lifted map induces the isomorphism found above."
+   }
+  },
+  {
+   "text": "The extension to $B'$ of the ideal $IB\\subseteq B$ through $\\varphi$ is exactly $IB'$: both are generated by the same images of $a\\in I$, because $\\varphi$ fixes $A$ and $1$. Hence [lem-weil-pbc-complete-source-surjective-mod-ideal] applies to $R=B$, $S=B'$, ideal $IB$, and $f=\\varphi$. The source is complete, the target is separated by step 1, and the map modulo the extended ideal is the canonical isomorphism from step 4. Therefore $\\varphi$ is surjective. If $\\varphi(z)=0$, induction on $d$ shows $z\\in I^dB$: the case $d=0$ is tautological, and if $z\\in I^dB$, injectivity on the degree-$d$ piece from step 5 forces $z\\in I^{d+1}B$. The intersection of these powers is zero because $B\\to\\varprojlim B/I^dB$ is injective by completeness. Thus $z=0$, so $\\varphi$ is also injective. Its set-theoretic inverse preserves sums, products, $1$ and $A$ by applying the injective map $\\varphi$ to each required equality. This is the asserted $A$-algebra isomorphism.",
+   "uses": [
+    "lem-weil-pbc-complete-source-surjective-mod-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tag 0GAR, final two paragraphs; Algebra 0315 for surjectivity; injectivity from separatedness."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-adic-complete-jacobson-radical",
+  "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+  "lem-weil-pbc-artin-rees",
+  "lem-sfb-perturbed-image-artin-rees-bound",
+  "lem-weil-pbc-associated-graded-ring-structure",
+  "lem-per-power-split-uniform-adic-map-lifting",
+  "lem-weil-pbc-complete-source-surjective-mod-ideal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/restricted.tex",
+  "place": "Tag 0GAR (lemma-close-enough), proof (A)-(C) and final paragraphs, using the explicit common-representative alternative for the associated graded map."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite determinacy of a completed polynomial quotient when its conormal differential splits after multiplication by a power of an ideal",
+   "results": "{\"t\": \"2026-10-24T04:46:18Z\", \"tool\": \"leanfinder\", \"query\": \"Finite determinacy of a completed polynomial quotient when its conormal differential splits after multiplication by a power of an ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.IsDistinguishedAt.algEquivQuotient\", \"Polynomial.IsDistinguishedAt.algEquivQuotient_apply\", \"Polynomial.IsDistinguishedAt.algEquivQuotient_symm_apply\", \"Polynomial.IsDistinguishedAt.isWeierstrassDivisorAt'\", \"PowerSeries.IsWeierstrassDivisorAt.mod'\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply\", \"PowerSeries.IsWeierstrassDivisorAt.mk_mod'_eq_self\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient\"], \"digest\": \"f2f1d83651cb3f8e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Weierstrass division concerns one distinguished equation, and formal smoothness lifting and invariance under a supplied isomorphism do not give stability of simultaneous equations and syzygies"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complete algebra with conormal derivative split up to an ideal power is unchanged by sufficiently close perturbations of equations and relations",
+   "results": "{\"t\": \"2026-10-24T04:46:54Z\", \"tool\": \"leanfinder\", \"query\": \"A complete algebra with conormal derivative split up to an ideal power is unchanged by sufficiently close perturbations of equations and relations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdicComplete.henselianRing\", \"PowerSeries.IsWeierstrassDivisorAt.mk_mod'_eq_self\", \"PreTilt.exists_smodEq_untiltAux\", \"PowerSeries.IsWeierstrassDivisorAt.mod'_mk_eq_mod\", \"PreTilt.untiltAux_smodEq_untiltFun\", \"Algebra.FormallyUnramified.ext_of_iInf\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\"], \"digest\": \"19a02cfa0bc019ff\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Weierstrass division concerns one distinguished equation, and formal smoothness lifting and invariance under a supplied isomorphism do not give stability of simultaneous equations and syzygies"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"IsIso\"",
+   "results": "{\"t\": \"2026-10-24T04:46:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"AdicCompletion\\\", \\\"IsIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Weierstrass division concerns one distinguished equation, and formal smoothness lifting and invariance under a supplied isomorphism do not give stability of simultaneous equations and syzygies"
+  },
+  {
+   "tool": "grep",
+   "query": "rig.?smooth|Elkik|finite.determinacy|close.enough",
+   "results": "{\"t\": \"2026-10-24T04:46:51Z\", \"tool\": \"grep\", \"query\": \"rig.?smooth|Elkik|finite.determinacy|close.enough\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Weierstrass division concerns one distinguished equation, and formal smoothness lifting and invariance under a supplied isomorphism do not give stability of simultaneous equations and syzygies",
+   "subdirectory": "RingTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sufficiently close perturbation of defining equations and their syzygies of a rig smooth complete algebra gives an isomorphic quotient",
+   "results": "{\"t\": \"2026-10-24T04:46:52Z\", \"tool\": \"leansearch\", \"query\": \"A sufficiently close perturbation of defining equations and their syzygies of a rig smooth complete algebra gives an isomorphic quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmooth.of_algEquiv\", \"Algebra.Smooth.of_equiv\", \"RingCon.congrₐ\", \"IsLocalization.Away.mvPolynomialQuotientEquiv.congr_simp\", \"Algebra.FormallySmooth.iff_comp_surjective\", \"Algebra.IsStandardSmoothOfRelativeDimension.of_algEquiv\", \"Algebra.Presentation.quotientEquiv\", \"Algebra.FormallySmooth.of_equiv\"], \"digest\": \"19c8e1c706b5fd8f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Weierstrass division concerns one distinguished equation, and formal smoothness lifting and invariance under a supplied isomorphism do not give stability of simultaneous equations and syzygies"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite determinacy of completed polynomial quotients under perturbation of equations and syzygies",
+   "results": "{\"t\": \"2026-10-24T07:00:18Z\", \"tool\": \"leanfinder\", \"query\": \"Finite determinacy of completed polynomial quotients under perturbation of equations and syzygies\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.IsDistinguishedAt.algEquivQuotient_apply\", \"Polynomial.IsDistinguishedAt.algEquivQuotient\", \"Algebra.SubmersivePresentation.ofHasCoeffs\", \"Algebra.SubmersivePresentation.isStandardSmooth\", \"Algebra.IsStandardSmooth.out\", \"Algebra.SubmersivePresentation\", \"Algebra.SubmersivePresentation.jacobianRelationsOfHasCoeffs\", \"MvPolynomial.finitePresentation_universalFactorizationMap\"], \"digest\": \"ea37bc31190a1b2b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary smoothness and Weierstrass equivalences do not prove stability of general power-split completed presentations and their syzygies."
+  },
+  {
+   "tool": "grep",
+   "query": "rig.?smooth|Elkik|finite.determinacy|close.enough",
+   "results": "{\"t\": \"2026-10-24T07:00:18Z\", \"tool\": \"grep\", \"query\": \"rig.?smooth|Elkik|finite.determinacy|close.enough\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary smoothness and Weierstrass equivalences do not prove stability of general power-split completed presentations and their syzygies.",
+   "subdirectory": "RingTheory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sufficiently close simultaneous changes in relations and syzygies of a complete rig smooth algebra preserve its isomorphism class",
+   "results": "{\"t\": \"2026-10-24T07:01:57Z\", \"tool\": \"leanfinder\", \"query\": \"Sufficiently close simultaneous changes in relations and syzygies of a complete rig smooth algebra preserve its isomorphism class\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmooth.hcongr_5\", \"RingHom.isStandardSmoothOfRelativeDimension_respectsIso\", \"Algebra.IsStandardSmooth\", \"Algebra.Smooth\", \"Algebra.Smooth.formallySmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.SubmersivePresentation.isStandardSmooth\", \"Algebra.instSmoothOfIsStandardSmooth\"], \"digest\": \"b3e712f0690ec4cb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary smoothness and Weierstrass equivalences do not prove stability of general power-split completed presentations and their syzygies."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAdicComplete\", \"FormallySmooth\"",
+   "results": "{\"t\": \"2026-10-24T07:01:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsAdicComplete\\\", \\\"FormallySmooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\"], \"digest\": \"f37ced4758d53cbc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary smoothness and Weierstrass equivalences do not prove stability of general power-split completed presentations and their syzygies."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A complete algebra with conormal differential split up to an ideal power is isomorphic to sufficiently close presentations",
+   "results": "{\"t\": \"2026-10-24T07:01:58Z\", \"tool\": \"leansearch\", \"query\": \"A complete algebra with conormal differential split up to an ideal power is isomorphic to sufficiently close presentations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.iff_split_injection\", \"Algebra.FormallySmooth.iff_split_surjection\", \"Algebra.FormallySmooth.exists_kerProj_comp_eq_id\", \"Algebra.FormallySmooth.of_split\", \"Algebra.FormallySmooth.iff_comp_surjective\", \"AdicCompletion.ofAlgEquiv_apply\", \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"Algebra.smooth_iff\"], \"digest\": \"2f63e2d9fcb26ecc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary smoothness and Weierstrass equivalences do not prove stability of general power-split completed presentations and their syzygies."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-g-ring-rig-smooth-algebraization",
+  "date": "2026-10-24",
+  "group": "O4"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "The inherited formal-algebraization branch serving ancestor Step 3 (the ≥-direction); the latest ancestor Step 3 now uses Verdier exchange and has no formal-algebraization sentence. This split refines the inherited commutative-algebra tool, without changing the unit or chapter route. Tag 0GAR (lemma-close-enough); its rig-smooth hypothesis is written as the continuous conormal power-splitting criterion of lemma-equivalent-with-artin-smooth, condition (3). The missing completion hat in the printed definition of P is restored.",
+   "via": [
+    "lem-per-g-ring-rig-smooth-algebraization",
+    "lem-per-rig-principal-formal-algebraization",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-rig-smooth-presentation-perturbation",
+  "worker": "stage1",
+  "summary": "Kept the corrected imported statement. Split Stacks 0GAR into Noetherian-complete preparation, a uniform Artin-Rees estimate, the explicit common initial-ideal calculation, uniform map lifting, identification of the actual graded map, and surjectivity plus separatedness. Only the genuinely non-elementary uniform lifting theorem is new. No exactness conclusion is taken from the existing perturbed-image node, which states only its Artin-Rees estimate.",
+  "blueprint": "Inherited formal-algebraization branch of ancestor Step 3 (the >= direction), via the rig-smooth algebraization tool. The latest ancestor Step 3 uses Verdier exchange and contains no algebraization assertion; this is a refinement only of the inherited commutative-algebra dependency. In Stacks 0GAR, the paragraph applying lemma-get-morphism-general-better after identifying the associated graded quotients.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "Generic commutative-algebra tool used exactly in the cited proof step of Stacks 0GAR, not a substitute for a geometric step of this unit; no node of this unit states the required Finitely generated algebras over Noetherian rings are Noetherian."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Generic commutative-algebra tool used exactly in the cited proof step of Stacks 0GAR, not a substitute for a geometric step of this unit; no node of this unit states the required The completion of a Noetherian ring is Noetherian."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-mod-ideal",
+    "why": "Generic commutative-algebra tool used exactly in the cited proof step of Stacks 0GAR, not a substitute for a geometric step of this unit; no node of this unit states the required The completion along a finitely generated ideal is complete with the same quotient."
+   },
+   {
+    "node": "lem-weil-pbc-adic-complete-jacobson-radical",
+    "why": "Generic commutative-algebra tool used exactly in the cited proof step of Stacks 0GAR, not a substitute for a geometric step of this unit; no node of this unit states the required The ideal of a complete ring lies in the Jacobson radical."
+   },
+   {
+    "node": "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+    "why": "Generic commutative-algebra tool used exactly in the cited proof step of Stacks 0GAR, not a substitute for a geometric step of this unit; no node of this unit states the required A finite module over a Noetherian ring complete along an ideal is complete."
+   },
+   {
+    "node": "lem-weil-pbc-artin-rees",
+    "why": "Generic commutative-algebra tool used exactly in the cited proof step of Stacks 0GAR, not a substitute for a geometric step of this unit; no node of this unit states the required Artin-Rees lemma."
+   },
+   {
+    "node": "lem-sfb-perturbed-image-artin-rees-bound",
+    "why": "Generic commutative-algebra tool used exactly in the cited proof step of Stacks 0GAR, not a substitute for a geometric step of this unit; no node of this unit states the required A simultaneous perturbation preserves the Artin-Rees bound for the right differential."
+   },
+   {
+    "node": "lem-weil-pbc-associated-graded-ring-structure",
+    "why": "Generic commutative-algebra tool used exactly in the cited proof step of Stacks 0GAR, not a substitute for a geometric step of this unit; no node of this unit states the required The associated graded ring of an ideal is a commutative graded ring and an A/J-algebra."
+   },
+   {
+    "node": "lem-weil-pbc-complete-source-surjective-mod-ideal",
+    "why": "Generic commutative-algebra tool used exactly in the cited proof step of Stacks 0GAR, not a substitute for a geometric step of this unit; no node of this unit states the required Surjectivity modulo an ideal implies surjectivity from a precomplete ring."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-adic-complete-jacobson-radical",
+  "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+  "lem-weil-pbc-artin-rees",
+  "lem-sfb-perturbed-image-artin-rees-bound",
+  "lem-weil-pbc-associated-graded-ring-structure",
+  "lem-weil-pbc-complete-source-surjective-mod-ideal"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NR-5b26663eb",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-5b26663eb (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, all six steps, the new node lem-per-power-split-uniform-adic-map-lifting and every statement the steps cite. Sources read: Stacks 0GAR with its whole proof, 0GAQ with its proof, 0GAJ conditions (1)-(3), the C' category definition, local-cohomology section-uniform (the definitions of d(S) and q(S)), and 07VE with its proof. The item's statement is unchanged and matches 0GAR hypothesis by hypothesis: the completion hat is restored, 'resolution' is written as exactness at P^m, P and B, rig-smoothness is written as 0GAJ(3), and the perturbed complex is written as g'K'=0. Step 1: the Noetherian and completeness nodes apply to P and to every P/J'; I-adic and IP-adic completeness agree for P-modules. Step 2: the perturbed-image node's hypotheses hold (IP lies in every maximal ideal, im K = ker g, g'K'=0, congruences of order b+1), and only its Artin-Rees bound is used, not exactness. Step 3: I checked the modular-law identification of the graded pieces and both ranges d<=b and d>b; the common-representative map is a graded A/I-algebra isomorphism E. Step 4: N=max(b+1,n_0) is fixed before the perturbation, J+I^NP=J'+I^NP gives psi_N, and N-e>=1. Step 5: A-linearity shows that the graded map of phi is E, so it is injective; this replaces 0GAR's Hopfian argument with no gap. Step 6: surjectivity follows from the surjectivity-mod-ideal node (B precomplete, B' Hausdorff, IB extends to IB'); injectivity follows by induction on d and B being complete. New node: it is 0GAQ with Ext annihilation replaced by 0GAJ(3), taking e=(d+1)c and n_0=max(q_0+e, 2e+1), so n_0>=e+1. It holds uniformly for every C whose associated graded ring is isomorphic to that of C_0, because d(S) and q(S) depend only on the graded ring up to isomorphism. I tested it with I=0, I=A, c=0, C=0 and r=0. It is not a duplicate: the only nearby node, lem-per-principal-adic-homomorphism-lift (0AK7), is for a principal ideal with a two-sided split. It does not restate a clause of the item. B1-B7 hold. I accept the nine generic commutative-algebra tool_uses. No SGA is used. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RigSmoothPresentationPerturbation",
+  "declaration": "AlgebraicGeometry.rigSmooth_presentation_perturbation",
+  "file": "lean/Sheaf/RingTheory/RigSmoothPresentationPerturbation.lean",
+  "statement": "theorem rigSmooth_presentation_perturbation (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A) (r m t : ℕ) (g : Fin m → rigPolynomialCompletion A I r) (K : Matrix (Fin m) (Fin t) (rigPolynomialCompletion A I r)) [IsAdicComplete I (rigPolynomialCompletion A I r ⧸ Ideal.span (Set.range g))] (hexact : Function.Exact (Matrix.mulVec K) (fun v ↦ ∑ j, g j * v j)) (hsplit : ∃ c : ℕ, ∀ a ∈ I ^ c, ∃ h : (Fin r → rigPolynomialCompletion A I r ⧸ Ideal.span (Set.range g)) →ₗ[rigPolynomialCompletion A I r ⧸ Ideal.span (Set.range g)] (Ideal.span (Set.range g)).Cotangent, ∀ z : (Ideal.span (Set.range g)).Cotangent, h (rigJacobianDifferential I r (Ideal.span (Set.range g)) z) = algebraMap A (rigPolynomialCompletion A I r ⧸ Ideal.span (Set.range g)) a • z) : ∃ N : ℕ, 1 ≤ N ∧ ∀ (g' : Fin m → rigPolynomialCompletion A I r) (K' : Matrix (Fin m) (Fin t) (rigPolynomialCompletion A I r)), (∀ l, ∑ j, g' j * K' j l = 0) → (∀ j, g j - g' j ∈ (I ^ N).map (algebraMap A (rigPolynomialCompletion A I r))) → (∀ j l, K j l - K' j l ∈ (I ^ N).map (algebraMap A (rigPolynomialCompletion A I r))) → Nonempty ((rigPolynomialCompletion A I r ⧸ Ideal.span (Set.range g)) ≃ₐ[A] (rigPolynomialCompletion A I r ⧸ Ideal.span (Set.range g')))",
+  "branch": "newtargets-dag",
+  "by": "Q132",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6edd243f1",
+  "group": "Q132",
+  "result": "pass",
+  "note": "Read the Stacks source (0GAR and condition (3) of lemma-equivalent-with-artin-smooth), all 4 statement dependencies and the landed CompletedPolynomialConormal module (rigPolynomialCompletion, rigJacobianDifferential). The Lean matches the node clause by clause: Noetherian A : Type u, completed P along IQ, B = P/span g, IsAdicComplete I B, Function.Exact (mulVec K) (sum g*v) for exactness at P^m, hsplit = Stacks condition (3) with a B-linear h and the same quantifier order, conclusion with N>=1, g'K'=0, congruences modulo (I^N).map and Nonempty (B ≃ₐ[A] P/(g')). Edge cases r,m,t,c=0, I=0, I=A and A=0 are covered. The only node change besides the lean record is the added statement dependency def-per-completed-polynomial-conormal, which has a lean record on the base (allowed by stage2_delivery.py); this repairs the earlier return. Statement text and statement field are unchanged and verbatim. No duplicate definition or name clash, proof is sorry only, docstrings and report sections are present. No file changed, so no compile."
+ }
+}

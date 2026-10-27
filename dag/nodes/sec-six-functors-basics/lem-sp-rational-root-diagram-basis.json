@@ -1,0 +1,157 @@
+{
+ "id": "lem-sp-rational-root-diagram-basis",
+ "kind": "statement",
+ "title": "Normalized rational root bases compatible with finite field inclusions",
+ "statement": "Fix a scheme X and a prime ell invertible on X. Let W be a pro-etale object and let zeta_n and e_n be the compatible root sections and normalized slice-module bases of [sk-def-sp-tate-twist]. Let A(E)=E_X be the pulled-back continuous-function coefficient diagram, M(E)=E_X(1) its specified rational twist diagram, and O restriction to the slice over W. There is a natural isomorphism b: A composed with O -> M composed with O. For each E its component is E_X|W-linear: multiplication followed by b_E equals identity tensor b_E followed by the specified rational twist action (using the lax monoidal comparison of O). This statement takes neither the colimit over E nor positive tensor powers.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+  "place": "Local-generator paragraph: finite-field-extension compatibility of the normalized integral and rational root bases, before taking the field colimit"
+ },
+ "stmt_deps": [
+  "sk-def-sp-tate-twist"
+ ],
+ "proof": [
+  {
+   "text": "Use spRootBasisLevel at each n to choose its normalized coefficient-to-twist basis. Restrict naturality of the root transition to each slice object and use h_zeta; tensor naturality then proves the successor squares. NatTrans.ofOpSequence assembles these into a natural isomorphism, retaining the component formula instead of forgetting it.",
+   "uses": [
+    "lem-sp-root-basis-level",
+    "def-pur-roots-of-unity-sheaf",
+    "sk-def-sp-tate-twist"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+    "place": "Local-generator paragraph: finite-field-extension compatibility of the normalized integral and rational root bases, before taking the field colimit"
+   }
+  },
+  {
+   "text": "Apply section reconstruction and slice restriction to the coefficient cone and the actual twist limit cone. Sectionwise evaluation shows both remain limit cones. Transport the coefficient cone along the normalized tower isomorphism and take the unique limit-point isomorphism. Lift its section-linear map to an internal slice-module isomorphism by tensor-sheaf hom extensionality. The limit comparison equations preserve its normalized formula on every projection.",
+   "uses": [
+    "lem-sp-ell-coefficient-cone-limit",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "clause (3), extension of the prescribed integral basis to rational coefficients"
+   }
+  },
+  {
+   "text": "For E contained in F, compare the two integral basis composites using the underlying slice limit cone of F. Its projections reduce the equation to the normalized finite-level formula, the specified square for spEllMap, and lax tensor naturality with the identity on roots. Thus the constructed integral bases, with their actual actions, commute with field inclusions.",
+   "uses": [
+    "sk-def-sp-tate-twist"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+    "place": "Local-generator paragraph: finite-field-extension compatibility of the normalized integral and rational root bases, before taking the field colimit"
+   }
+  },
+  {
+   "text": "Extend each prescribed integral slice basis using the normalized scalar-extension lemma. The tensor normalization of the actual rational transition implies its naturality on extension units. Regard both sides of the desired rational naturality square as linear maps from the regular E coefficient module, with the F target restricted along E -> F. Mod.regular_hom_ext reduces their equality to their value on one. The normalized scalar-extension equation, integral naturality, and ring-map unit equations prove this equality. Assemble the components with NatIso.ofComponents. Their Mod.act_hom identities are exactly the required displayed action equations.",
+   "uses": [
+    "lem-sp-slice-normalized-scalar-extension-basis",
+    "sk-def-sp-tate-twist"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "clause (3), extension of the prescribed integral basis to rational coefficients"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-root-basis-level",
+  "def-pur-roots-of-unity-sheaf",
+  "sk-def-sp-tate-twist",
+  "lem-sp-ell-coefficient-cone-limit",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-sp-slice-normalized-scalar-extension-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M4",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+  "place": "clause (3), extension of the prescribed integral basis to rational coefficients"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "compatible bases of rational Tate twists as an isomorphism of diagrams over finite extensions of p-adic fields",
+   "results": "Eight hits on padic scalar towers, base-change bases and root pairings; no Tate sheaf diagram comparison.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compatible tower of bases of roots of unity trivializes the Tate twist over the algebraic closure of the p-adic numbers",
+   "results": "Eight cyclotomic-character declarations, no sheaf or rational twist diagram theorem.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rational.*root.*diagram|RationalRootDiagram|rational.*basis.*natural; colimit.*[Ii]so|lineSignedOverUnit",
+   "results": "Searched Mathlib, WeilConjectures, Sheaf and the DAG. Generic colimit isomorphisms and existing integral/rational slice bases exist, but no theorem includes rational field-transition compatibility.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SpQbarPositiveRootBasis",
+  "date": "2026-10-27",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-int-restriction-line",
+   "via": [
+    "lem-sp-qbar-positive-root-basis",
+    "lem-sp-qbar-root-basis",
+    "lem-route-sp-twists-common-cover",
+    "lem-sfb-integral-tate-line-constructible"
+   ],
+   "place": "Local-generator paragraph: finite-field-extension compatibility of the normalized integral and rational root bases, before taking the field colimit"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-int-restriction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SpRationalRootDiagramBasis",
+  "file": "lean/Sheaf/Paper/SpRationalRootDiagramBasis.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.spRationalRootDiagramBasis",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.spRationalRootDiagramBasis"
+  ],
+  "statement": "theorem spRationalRootDiagramBasis\n    (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]\n    [∀ x : X, Invertible (ℓ : X.residueField x)] (W : X.ProEt)\n    (ζ : ∀ n : ℕ, (Scheme.purTwistRootsModule X ℓ n).val.obj (op W))\n    (e : ∀ n : ℕ,\n      (SheafOfModules.unit (Scheme.purTwistRing X (Scheme.purTwistFiniteRing X ℓ n))).over W ≅\n        (Scheme.purTwistRootsModule X ℓ n).over W)\n    (hζ : ∀ n : ℕ,\n      (Scheme.proEtaleRootsOfUnityTransition X (ℓ ^ (n + 1)) (ℓ ^ (n + 2))\n        (pow_pos (Fact.out : ℓ.Prime).pos _) (pow_pos (Fact.out : ℓ.Prime).pos _)\n        (pow_dvd_pow ℓ (Nat.le_succ (n + 1)))).hom.app (op W) (ζ (n + 1)) = ζ n)\n    (he : ∀ (n : ℕ) (V : (Over W)ᵒᵖ)\n      (a : ((Scheme.purTwistRing X (Scheme.purTwistFiniteRing X ℓ n)).over W).obj.obj V),\n      (e n).hom.val.app V a =\n        a • (Scheme.purTwistRootsModule X ℓ n).val.map V.unop.hom.op (ζ n)) :\n    let A := Profinite.padicSubfieldRingObjFunctor.{u} ℓ ⋙ upperStarFromPoint X\n    let O := (Scheme.ProEt.topology X).overPullback AddCommGrpCat.{u + 1} W\n    ∃ b : A ⋙ O ≅ spRationalTwistDiagram X ℓ ⋙ O,\n      ∀ E : PadicAlgCl.FiniteIntermediateField ℓ,\n        Functor.LaxMonoidal.μ O (A.obj E) (A.obj E) ≫\n            O.map (MonObj.mul (X := condensedRingObj.{u}\n              (Profinite.continuousMapRingObj.{u} E.1) X)) ≫ b.hom.app E =\n          O.obj (A.obj E) ◁ b.hom.app E ≫\n            Functor.LaxMonoidal.μ O (A.obj E) (spRationalTwist X ℓ E).X ≫\n              O.map (Mod.act (A := condensedRingObj.{u}\n                (Profinite.continuousMapRingObj.{u} E.1) X) (spRationalTwist X ℓ E).X)",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261026T235905-L-1466217",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261027T012906-L-2344467",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

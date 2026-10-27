@@ -1,0 +1,253 @@
+{
+ "id": "lem-sfb-derived-pullback-strong-monoidal",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-proper-image-localizing-open",
+   "place": "the Lean proof of det-proper-image-localizing-open's declarations uses (or, for the batch import closure, sits beside) AlgebraicGeometry.ProEtale.CondensedRing.monoidal_leftDerivedUpperStar (found by the 2026-10-22 maintainer audit of upstream sorries without a DAG node); in blueprint terms: the projection formula for an open immersion compares Lf^*(K ⊗^L L) with Lf^*K ⊗^L Lf^*L (monoidality of the derived pullback)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The derived pullback of module objects is strong monoidal",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring] and $f\\colon X\\to Y$ a morphism of schemes. Write $\\Mod_{\\Lambda_T}$ for module objects over the pulled-back ring on the pro-étale site of $T$, $f^*$ for the (exact, monoidal) pullback of module objects, $Lf^*$ for its left derived functor and $\\otimes^L$ for the derived tensor product [sk-def-sfb-module-derived-pushpull, sk-def-sfb-derived-tensor-hom]; $Q_h\\colon K(\\Mod_{\\Lambda_T})\\to D(\\Mod_{\\Lambda_T})$ is the localization of the homotopy category. The derived pullback $Lf^*\\colon D(\\Mod_{\\Lambda_Y})\\to D(\\Mod_{\\Lambda_X})$ with tensorator the inverse of the comparison isomorphism $Lf^*(K\\otimes^LL)\\cong Lf^*K\\otimes^LLf^*L$ and unit comparison $Lf^*\\mathbb 1\\cong\\mathbb 1$ (the counit followed by the unit comparison of $f^*$) satisfies the associativity and the two unitality axioms of a monoidal functor; hence $Lf^*$ is strong monoidal.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-open-ctf/sk-prop-proper-image-localizing-open.md",
+  "place": "det-proper-image-localizing-open: the projection formula for an open immersion compares Lf^*(K ⊗^L L) with Lf^*K ⊗^L Lf^*L (monoidality of the derived pullback); Lean: upstream file lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/Monoidal.lean, declaration AlgebraicGeometry.ProEtale.CondensedRing.monoidal_leftDerivedUpperStar (module WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal, lines 305-315, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-derived-tensor-hom",
+  "def-sfb-strong-monoidal-functor"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\mathcal C_T=\\Mod_{\\Lambda_T}$, $F=f^*$, $E=Lf^*$, and $Q_T=Q_h$ on $T=X,Y$. These are exactly the full composite module pullback and its total unbounded left derived functor of [sk-def-sfb-module-derived-pushpull], with the relative derived tensors of [sk-def-sfb-derived-tensor-hom]. Apply [new-proetale-derived-module-pullback-monoidal] to the given commutative condensed ring $\\Lambda$ and the given scheme morphism $f$. Its statement holds for arbitrary $\\Lambda,f$ and unbounded complexes, so no finiteness, flatness of coefficients, or boundedness assumption is added. It supplies a strong monoidal structure on this same $E$, with invertible comonoidal comparison $\\delta$, characterized by its specified tensor counits. We next identify those maps with the prescribed maps; mere existence of some monoidal structure would not suffice.",
+   "uses": [
+    "sk-def-sfb-module-derived-pushpull",
+    "sk-def-sfb-derived-tensor-hom",
+    "new-proetale-derived-module-pullback-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+    "place": "Two-variable derived tensor and descent of constraints, specialized through the existing canonical pro-etale module-pullback theorem."
+   }
+  },
+  {
+   "text": "Write $F_h$ for termwise pullback on homotopy complexes, $\\gamma_A:EQ_YA\\to Q_XF_hA$ for the derived counit, $\\mu_T$ for the localization tensorator, and $b_{A,B}:F_hA\\otimes F_hB\\xrightarrow{\\sim}F_h(A\\otimes B)$ for the ordinary total-complex tensorator. By [def-sfb-upper-star-tensor-counit], the right counit used to define $m$ is\n$$r_{A,B}=Q_X(b_{A,B})\\circ\\mu_{X;F_hA,F_hB}\\circ(\\gamma_A\\otimes\\gamma_B).$$\nBy [def-sfb-derived-pullback-tensor-left-counit], its left counit is\n$$l_{A,B}=\\gamma_{A\\otimes B}\\circ E(\\mu_{Y;A,B}).$$\nThese are literally the two formulas in the statement of [new-proetale-derived-module-pullback-monoidal]. That statement exhibits both source bifunctors as total left derived bifunctors and characterizes $\\delta$ by $r_{A,B}\\circ\\delta_{Q_YA,Q_YB}=l_{A,B}$. The comparison $m$ is the universal comparison for these same counits. Uniqueness of that universal comparison therefore gives $m=\\delta$ as natural transformations of bifunctors, not merely an unspecified isomorphism between their values. Consequently the strong tensorator supplied in step 1 is exactly $m^{-1}$.",
+   "uses": [
+    "new-proetale-derived-module-pullback-monoidal",
+    "def-sfb-upper-star-tensor-counit",
+    "def-sfb-derived-pullback-tensor-left-counit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+    "place": "Two-variable left derived universal property; comparison characterized by the counit equation."
+   }
+  },
+  {
+   "text": "Let $I_T=\\Lambda_T[0]$ and let $j:F_hI_Y\\xrightarrow{\\sim}I_X$ be the ordinary unit comparison in degree zero. The unit clause of [new-proetale-derived-module-pullback-monoidal] says that the inverse unit of its strong monoidal structure is exactly\n$$c=Q_X(j)\\circ\\gamma_{I_Y}:E\\mathbf1_Y\\xrightarrow{\\sim}\\mathbf1_X,$$\nusing the native identifications $Q_TI_T=\\mathbf1_T$. This is the counit followed by the unit comparison of $f^*$ specified in the statement. Thus its forward unit is exactly $c^{-1}$, and step 1's strong structure has both of the prescribed maps.",
+   "uses": [
+    "new-proetale-derived-module-pullback-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+    "place": "Unit constraints induced from complexes; explicit degree-zero coefficient unit and derived counit."
+   }
+  },
+  {
+   "text": "Use the defining equations of [def-sfb-strong-monoidal-functor] for the strong structure given by [new-proetale-derived-module-pullback-monoidal], and substitute its tensorator $m^{-1}$ from step 2 and its unit $c^{-1}$ from step 3. Writing $\\nu=m^{-1}$ and $e=c^{-1}$, these equations are\n$$E(\\alpha_{K,L,M})\\circ\\nu_{K\\otimes^L L,M}\\circ(\\nu_{K,L}\\otimes1)=\\nu_{K,L\\otimes^L M}\\circ(1\\otimes\\nu_{L,M})\\circ\\alpha_{EK,EL,EM},$$\n$$E(\\lambda_K)\\circ\\nu_{\\mathbf1,K}\\circ(e\\otimes1)=\\lambda_{EK},\\qquad E(\\rho_K)\\circ\\nu_{K,\\mathbf1}\\circ(1\\otimes e)=\\rho_{EK}.$$\nThey are precisely associativity and the two unitality requirements for the prescribed data. Naturality of $\\nu$ follows by inverting the natural isomorphism $m$. Hence the specified unit and tensor isomorphisms define the required strong monoidal functor.",
+   "uses": [
+    "new-proetale-derived-module-pullback-monoidal",
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+    "place": "Descent of coherence identities, read with the strong monoidal functor convention of Stacks Tag 0FFL."
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-derived-tensor-hom",
+  "new-proetale-derived-module-pullback-monoidal",
+  "def-sfb-upper-star-tensor-counit",
+  "def-sfb-derived-pullback-tensor-left-counit",
+  "def-sfb-strong-monoidal-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+  "place": "Formal identification with the existing canonical derived module-pullback theorem: its universal tensor counits and its degree-zero unit are the item's prescribed maps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "left derived functor of a monoidal exact functor preserving flat objects is strong monoidal for derived tensor product",
+   "results": "Functor.IsLeftDerivedFunctor.mk (Mathlib.CategoryTheory.Functor.Derived.LeftDerived), Tor (Mathlib.CategoryTheory.Monoidal.Tor), Functor.Monoidal.ofBifunctor: no derived monoidal functor",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerived, CategoryTheory.Functor.Monoidal",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlE 'leftDerivedFunctor.*Monoidal|Monoidal.*leftDerived' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived inverse image functor on sheaves of modules over a commutative condensed ring is strong monoidal with canonical tensor and unit comparison",
+   "results": "8 hits: LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalCategoryLightCondMod, LightCondensed.instMonoidalLightCondSetLightCondModFree, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedLightCondMod, LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, instMonoidalClosedLightCondSet",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerived.*[Mm]onoidal|[Mm]onoidal.*leftDerived",
+   "results": "0 hits:  (subdirectory CategoryTheory)",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The left derived pullback functor of modules over a condensed commutative ring is strong monoidal",
+   "results": "8 hits: SheafOfModules.pullback, ModuleCat.instMonoidalLinear, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction, ModuleCat.instMonoidalPreadditive, ModuleCat.instMonoidalClosed, PresheafOfModules.pullback, ModuleCat.instMonoidalFree",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerived, CategoryTheory.Functor.Monoidal",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Mm]onoidal|[Mm]onoidal.*derived",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CoreMonoidal.toMonoidal",
+   "results": "3 hits: CategoryTheory.Functor.CoreMonoidal.toMonoidal, CategoryTheory.Functor.CoreMonoidal.toMonoidal_toLaxMonoidal, CategoryTheory.Functor.CoreMonoidal.toMonoidal_toOplaxMonoidal",
+   "date": "2026-10-22",
+   "verdict": "no match for item: constructor requires the three coherence proofs; useful for the final packaging only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The total left derived functor of an exact strong monoidal functor preserves the derived tensor product coherently",
+   "results": "8 hits: CategoryTheory.Tor_map, CategoryTheory.Tor'_map_app, CategoryTheory.Tor'_obj_map, CategoryTheory.Tor, CategoryTheory.Tor', CategoryTheory.Tor_obj, CategoryTheory.Tor'_obj_obj, CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": null,
+  "date": "2026-10-22",
+  "why": "upstream sorried declaration in a batch target's import closure without a DAG node (maintainer audit of dag/lean_audit.json with_sorry_and_no_node, 2026-10-22, the human's order); no sorry-free SHEAF proof found; recorded so that stage 1 splits it"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.CondensedRing.monoidal_leftDerivedUpperStar"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.monoidal_leftDerivedUpperStar",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal",
+     "lines": [
+      407,
+      420
+     ],
+     "kind": "instance",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-lem-sf-open-ctf",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal",
+  "file": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/Monoidal.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.monoidal_leftDerivedUpperStar",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.monoidal_leftDerivedUpperStar"
+  ],
+  "statement": "noncomputable instance monoidal_leftDerivedUpperStar : L((f)^*⟦Λ⟧).Monoidal :=\n  letI := leftDerivedUpperStarOplaxMonoidal Λ f\n  haveI (K L : DerivedCategory\n      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))) :\n      IsIso (Functor.OplaxMonoidal.δ L((f)^*⟦Λ⟧) K L) :=\n    inferInstanceAs (IsIso (((leftDerivedUpperStarTensor Λ f).app K).app L))\n  haveI : IsIso (Functor.OplaxMonoidal.η L((f)^*⟦Λ⟧)) := by\n    rw [leftDerivedUpperStarOplaxMonoidal_η]\n    infer_instance\n  have hμ (K L : DerivedCategory\n      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))) :\n      (((leftDerivedUpperStarTensorIso Λ f).app K).app L).symm =\n        (asIso (Functor.OplaxMonoidal.δ L((f)^*⟦Λ⟧) K L)).symm := by\n    ext\n    exact (IsIso.inv_eq_of_hom_inv_id\n      (((leftDerivedUpperStarTensorIso Λ f).app K).app L).hom_inv_id).symm\n  have hε : (leftDerivedUpperStarUnitIso Λ f).symm =\n      (asIso (Functor.OplaxMonoidal.η L((f)^*⟦Λ⟧))).symm := by\n    ext\n    refine (IsIso.inv_eq_of_hom_inv_id ?_).symm\n    rw [leftDerivedUpperStarOplaxMonoidal_η, Iso.symm_hom, Iso.hom_inv_id]\n  Functor.CoreMonoidal.toMonoidal\n    { εIso := (leftDerivedUpperStarUnitIso Λ f).symm\n      μIso K L := (((leftDerivedUpperStarTensorIso Λ f).app K).app L).symm\n      μIso_hom_natural_left φ L :=\n        NatTrans.congr_app ((leftDerivedUpperStarTensorIso Λ f).inv.naturality φ) L\n      μIso_hom_natural_right K ψ :=\n        ((leftDerivedUpperStarTensorIso Λ f).inv.app K).naturality ψ\n      associativity K L M := by\n        rw [hμ, hμ, hμ, hμ]\n        exact (Functor.CoreMonoidal.ofOplaxMonoidal L((f)^*⟦Λ⟧)).associativity K L M\n      left_unitality K := by\n        rw [hμ, hε]\n        exact (Functor.CoreMonoidal.ofOplaxMonoidal L((f)^*⟦Λ⟧)).left_unitality K\n      right_unitality K := by\n        rw [hμ, hε]\n        exact (Functor.CoreMonoidal.ofOplaxMonoidal L((f)^*⟦Λ⟧)).right_unitality K }",
+  "branch": "slopmaster2",
+  "by": "maintainer",
+  "date": "2026-10-27",
+  "note": "upstream proof (slopmaster2 94795abff8, PR #1694) ported to live 2026-10-27 by hand, in the 60 s split of the sync work tree (Monoidal + 7 modules); declaration now in WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal, proved"
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-derived-pullback-strong-monoidal",
+  "worker": "stage1",
+  "summary": "Reused the existing reviewed canonical pro-etale derived module-pullback theorem rather than creating duplicate coherence lemmas. Identified its tensor comparison by equality of both universal counits and its unit by the explicit degree-zero counit formula, then substituted into the three strong monoidal identities. Statement unchanged; no new nodes. Upstream instance still has three sorry fields and is not an attachment.",
+  "blueprint": "The ancestor det-proper-image-localizing-open states extension by zero on localizing categories; this auxiliary item provides the monoidal pullback input to its projection-formula context. The actual argument follows the module-derived-pushpull and derived-monoidal constructions. No chapter or unit statement or route is replaced.",
+  "tool_uses": [
+   {
+    "node": "new-proetale-derived-module-pullback-monoidal",
+    "why": "Existing canonical unbounded derived pullback theorem for arbitrary condensed coefficients, used to identify the precise tensor and unit maps required by the projection-formula input. The open-ctf unit has no independent tensor-coherence theorem; this reuses the already reviewed categorical construction without replacing its extension-by-zero argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "new-proetale-derived-module-pullback-monoidal"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-ab3479398",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-ab3479398 (reviewer sub-agent of L); spot-checked: I read the item, the full statement and all 8 proof steps of new-proetale-derived-module-pullback-monoidal, both counit defs, def-sfb-strong-monoidal-functor, the pushpull and derived-tensor definitions, and upstream Monoidal.lean lines 180-320 (source only, nothing compiled). The item restates the existing reviewed node: that node covers arbitrary Λ, arbitrary f and unbounded complexes, gives the strong monoidal structure, and says δ is the universal comparison with r∘δ=l and the unit map is Q_X(j)∘γ at Λ_Y[0]. Step 1 matches the objects: F = Ext∘mapMod and the Layer-B relative tensor. Step 2: r and l are exactly upperStarTensorCounit and leftDerivedUpperStarTensorLeftCounit, the Lean m is leftDerived₂Lift with r∘m=l, so uniqueness gives m=δ; I checked that the maps point the same way. Step 3: the unit matches leftDerivedUpperStarUnitIso. Step 4: substituting ν=m⁻¹ and e=c⁻¹ into the strong-monoidal equations gives exactly the three axioms. No new nodes, statement unchanged, no cycle, no SGA source. The off-route tool_use is accepted because the cited node is a generic categorical foundation used as a black box. Batch-5 check: def-trf-geometric-morphism is the general definition of a geometric-morphism datum. It is not part of the trace formula or Poincaré duality or their proofs, so it does not force a RETURN. Advisory: 'the comparison isomorphism' is defined in the DAG by the unsplit sibling lem-sfb-derived-pullback-tensor-comparison-iso. Step 2 states the same definition inline and it matches the Lean, so I added no citation. The siblings comparison-iso and tensor-left-derived are also contained in the cited node."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261026T114231-L-2276331",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.monoidal_leftDerivedUpperStar",
+   "AlgebraicGeometry.ProEtale.CondensedRing.upperStarTensorCounit"
+  ],
+  "sorry_after": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.monoidal_leftDerivedUpperStar"
+  ]
+ }
+}

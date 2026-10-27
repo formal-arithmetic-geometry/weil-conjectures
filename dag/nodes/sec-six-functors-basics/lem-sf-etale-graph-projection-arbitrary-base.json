@@ -1,0 +1,350 @@
+{
+ "id": "lem-sf-etale-graph-projection-arbitrary-base",
+ "kind": "statement",
+ "title": "Graph comparison and compact-support projection for arbitrary-base etale maps",
+ "statement": "Let $A$ be a finite commutative ring and $e:V\\to W$ a separated etale morphism of arbitrary schemes [def-weil-etale-morphism, def-weil-proper-morphism]. Fix a factorization $V\\xrightarrow{j}Z\\xrightarrow{r}W$ with $j$ an open immersion [def-weil-open-immersion], $r$ proper and $rj=e$, with no quasi-compactness condition on $j$. On the ordinary unbounded small-etale derived categories put $F=Rr_*Dj_!$ and let $P_{M,K}:FM\\otimes_A^LK\\xrightarrow{\\sim}F(M\\otimes_A^Le^*K)$ be the specified proper-counit/open-tensor projection of [lem-sf-etale-ambient-adjoint-projection]. Put $S=D(e_{\\Sigma!})$ for the exact sum extension [def-weil-pbc-etale-sum-extension, lem-weil-pbc-etale-restriction-injectives], and $E=D(e^*)$, with the termwise sum/evaluation adjunction $S\\dashv E$ and unit $v$. Give $E$ its canonical strong monoidal structure from derived pullback [prop-weil-pbc-inverse-image-modules-exact, lem-weil-pbc-ringed-topoi-derived-tensor-pullback, lem-sfb-ringed-derived-monoidal-comparisons], transported along the exact/left-derived comparison $Le^*\\cong E$, with unit comparison $u_e:EA_W\\cong A_V$ [def-pur-etale-exact-pullback-unit-composition-comparisons]. Write $\\mu_{B,K}:E(B\\otimes_A^LK)\\xrightarrow{\\sim}EB\\otimes_A^LEK$ for the inverse tensor comparison. Define $\\kappa_{M,K}:S(M\\otimes_A^LEK)\\to SM\\otimes_A^LK$ to be the unique $S\\dashv E$ adjunct of $\\mu_{SM,K}^{-1}(v_M\\otimes1)$, as in [lem-pur-unit-adjunct-tensor-action].\n\nHere is a specified graph comparison $a:S\\to F$. Form $B=Z\\times_WV$ with projections $q_Z:B\\to Z$ and $q:B\\to V$, and graph $\\sigma=(j,1):V\\to B$. This is an open and closed immersion. Let $t_M:q^*M\\to q_Z^*Dj_!M$ be the composite\n$$q^*M\\longrightarrow D\\sigma_!\\sigma^*q^*M\\cong D\\sigma_!M\\cong D\\sigma_!\\sigma^*q_Z^*Dj_!M\\longrightarrow q_Z^*Dj_!M.$$\nThe first arrow is the unit of $\\sigma^*\\dashv D\\sigma_!$ on the open-and-closed piece, the last is the counit of $D\\sigma_!\\dashv\\sigma^*$, and the middle identifications use $q\\sigma=1$, $q_Z\\sigma=j$ and $j^*Dj_!\\cong1$. Let $u_M:M\\to EF M$ be\n$$M\\longrightarrow Rq_*q^*M\\xrightarrow{Rq_*t_M}Rq_*q_Z^*Dj_!M\\xrightarrow{\\operatorname{Ex}_r^{-1}}e^*Rr_*Dj_!M,$$\nwhere the first map is the ordinary pullback/direct-image unit and $\\operatorname{Ex}_r$ is proper base change [def-kun-unbounded-exchange, lem-kun-proper-base-change-torsion-ring]. Define $a_M:SM\\to FM$ as the $S\\dashv E$ adjunct of $u_M$.\n\nThen $a$ is a natural isomorphism, and, for all unbounded $M\\in D(V_{\\mathrm{et}},A)$ and $K\\in D(W_{\\mathrm{et}},A)$,\n$$P_{M,K}^{-1}\\circ a_{M\\otimes_A^LEK}=(a_M\\otimes1_K)\\circ\\kappa_{M,K}.$$\nThis is an equality of the specified derived morphisms, without a Noetherian, quasi-compactness, constructibility or boundedness hypothesis.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+  "place": "Paragraph 3: the etale projection/counit normalization; agent formulation over arbitrary schemes. Stacks more-etale.tex Tag 0GKF (lemma-f-shriek-projection), the canonical tensor map. The graph construction and its invertibility are also the source declarations compactificationEtaleComparison and isIso_compactificationEtaleComparison in WeilConjectures/SixFunctors/Etale/Derived/EtaleLowerShriekCompactification.lean:160 and EtaleLowerShriekCompactificationIso.lean:276; the tensor square is an additional claim, not an attachment to those declarations."
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-proper-morphism",
+  "lem-sf-etale-ambient-adjoint-projection",
+  "def-weil-pbc-etale-sum-extension",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-unit-adjunct-tensor-action",
+  "def-kun-unbounded-exchange",
+  "lem-kun-proper-base-change-torsion-ring",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "def-pur-etale-exact-pullback-unit-composition-comparisons",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Apply the existing source theorem isIso_compactificationEtaleComparison, recorded in lem-sf-etale-graph-comparison-isomorphism, to obtain the first conjunct directly. Its arbitrary-base proof supplies the graph geometry, base-change and fibre detection already present in the source.",
+   "uses": [
+    "lem-sf-etale-graph-comparison-isomorphism"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transport unit_map_compactificationEtaleComparison from Le* to D(e*) by naturality of the canonical comparison; this identifies the sum-unit followed by E(a) with the specified exact graph unit. Naturality of supportExactPullbackTensorIso follows by expressing it as the composite of the three natural tensor/comparison isomorphisms.",
+   "uses": [
+    "def-pur-supported-localization-comparisons",
+    "lem-weil-pbc-etale-restriction-injectives"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Postcompose the desired tensor square with the forward projection isomorphism. Transpose under the exact sum/evaluation adjunction. The defining Hom transpose of kappa and homEquiv naturality give (v_M tensor 1);mu_SM,K^-1;E(a_M tensor 1);E(P). Tensor naturality combines its first factors into (u_M tensor 1);mu_FM,K^-1;E(P). The graph-unit tensor lemma identifies this with u_(M tensor EK), the transpose of a_(M tensor EK). Injectivity of the Hom equivalence and cancellation of the projection isomorphism prove the second conjunct.",
+   "uses": [
+    "lem-sf-etale-graph-unit-tensor",
+    "lem-sf-etale-ambient-adjoint-projection"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-etale-graph-comparison-isomorphism",
+  "def-pur-supported-localization-comparisons",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lem-sf-etale-graph-unit-tensor",
+  "lem-sf-etale-ambient-adjoint-projection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+  "place": "Source invertibility theorem plus the complete Lean adjunction calculation from graph-unit tensor identity (original steps 6--7)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"projection\"",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compactificationEtaleComparison|etaleLowerShriek|graph.*[Pp]rojection",
+   "results": "Mathlib/Geometry/Manifold/Instances/Sphere.lean; Mathlib/Geometry/Manifold/Instances/Sphere.lean; Mathlib/Geometry/Manifold/Instances/Sphere.lean; Mathlib/Geometry/Manifold/Instances/Sphere.lean; Mathlib/Geometry/Manifold/Instances/Sphere.lean",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale compactification comparison commutes with the canonical tensor projection map",
+   "results": "AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst; PiTensorProduct.tprodL; Algebra.FormallyEtale.instTensorProduct; TensorProduct.mapOfCompatibleSMul_tmul; PiTensorProduct.lift_tprod; TensorProduct.fromDirectLimit; PiTensorProduct.ext_iff",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an etale morphism of arbitrary schemes compactified pushforward equals exact extension by sums compatibly with the projection formula",
+   "results": "AlgebraicGeometry.IsEtale.of_comp; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app; AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap; AlgebraicGeometry.Scheme.Modules.pushforwardComp; AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap; AlgebraicGeometry.Scheme.Hom.normalizationDiagram",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compactification graph comparison between derived etale extension by zero and proper pushforward of open extension preserves tensor action",
+   "results": "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply; Algebra.Extension.tensorCotangentSpace; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap; Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale; Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq; AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo; KaehlerDifferential.isBaseChange_of_formallyEtale",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale compactification graph comparison commutes with the derived tensor projection formula over arbitrary schemes",
+   "results": "AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo; AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField; AlgebraicGeometry.Scheme.Pullback.Triplet.SpecMap_tensorInl_fromSpecResidueField; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd_assoc; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst_assoc; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst; AlgebraicGeometry.pullbackSpecIso_hom_snd_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compactificationEtaleComparison|clopenTransfer|etaleLowerShriekTensor",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale extension by zero graph comparison respects tensor projection on unbounded derived categories",
+   "results": "Algebra.FormallyEtale.instTensorProduct; DerivedCategory.instHasZeroObject; Algebra.Etale.baseChange; TensorProduct.Eqv.of_zero_left; AlgebraicGeometry.IsEtale; CategoryTheory.Abelian.Ext.zero_hom; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale; Algebra.Extension.Cotangent.val_zero",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "clopenTransfer|clopen.*[Tt]ensor|[Tt]ensor.*clopen",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"clopen\", \"tensor\"",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism restricted to a clopen component and extended by zero commutes with tensor product and base change",
+   "results": "IsBaseChange; TensorProduct.map_zero_left; IsLocalization.instIsLocalizedModuleTensorProductMap; PresheafOfModules.Monoidal.tensorObjMap; LinearMap.baseChange_zero; IsBaseChange.finsuppPow; PresheafOfModules.Monoidal.tensorHom; Function.locallyFinsuppWithin.restrictMonoidHom",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to an open and closed component followed by extension by zero commutes with inverse image and derived tensor",
+   "results": "ModuleCat.Tilde.toOpen_res; ModuleCat.Tilde.res_apply; AlgebraicGeometry.morphismRestrict_ι; AlgebraicGeometry.morphismRestrict_appLE; AlgebraicGeometry.Scheme.Hom.resLE_appLE; AlgebraicGeometry.morphismRestrict_app'; AlgebraicGeometry.morphismRestrictRestrict; AlgebraicGeometry.morphismRestrict_appTop",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unbounded derived category of sheaves on a disjoint union is a product and restriction of a clopen projector is identity or zero compatibly with derived tensor",
+   "results": "TopCat.Sheaf.isProductOfDisjoint; CompHausLike.LocallyConstant.sigmaComparison_comp_sigmaIso; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition'; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'; Condensed.instPreservesFiniteProductsOppositeStoneanVal; Condensed.instPreservesFiniteProductsOppositeProfiniteVal",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem isProductOfDisjoint|def isProductOfDisjoint",
+   "results": "Mathlib/Topology/Sheaves/SheafCondition/PairwiseIntersections.lean",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-etale-unit-tensor-arbitrary-base",
+  "date": "2026-10-22",
+  "group": "NZ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": "sk-prop-sf-rf-shriek-preservation",
+   "place": "Unit step 3 (smooth case), through thm-asd-smooth-tensor.proof.md paragraph 3: etale counit and projection normalization in the smooth chart, before taking right-adjoint mates.",
+   "via": [
+    "lem-sf-etale-unit-tensor-arbitrary-base",
+    "lem-sf-smooth-dualizing-complex-invertible"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-etale-graph-projection-arbitrary-base",
+  "worker": "stage1",
+  "summary": "Preserved the specified arbitrary-base statement. Proved the actual graph comparison tensor square by clopen transfer, proper exchange and transposition; proved invertibility by a separately normalized finite geometric-fibre calculation. Reused existing clopen sheaf and exact descent nodes, creating no unnecessary elementary nodes. Repaired the null blueprint ancestor.",
+  "blueprint": "sk-prop-sf-rf-shriek-preservation step 3, smooth chart; thm-asd-smooth-tensor.proof.md paragraph 3: transpose projection and etale evaluation counit.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "Generic input: Properness is stable under base change. Used only for the geometry, ordinary unbounded etale operations or coherence explicitly described in the proof; the unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-section-separated-closed-immersion",
+    "why": "Generic input: A section of a separated morphism is a closed immersion. Used only for the geometry, ordinary unbounded etale operations or coherence explicitly described in the proof; the unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-finite-limits",
+    "why": "Generic input: The base-change functor between small etale sites commutes with finite limits. Used only for the geometry, ordinary unbounded etale operations or coherence explicitly described in the proof; the unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Generic input: Open immersions are etale; etale morphisms compose and cancel. Used only for the geometry, ordinary unbounded etale operations or coherence explicitly described in the proof; the unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-pe-flat-lfp-monomorphism-open",
+    "why": "Generic input: Flat monomorphisms locally of finite presentation are open immersions. Used only for the geometry, ordinary unbounded etale operations or coherence explicitly described in the proof; the unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-sheaf-clopen-product",
+    "why": "Generic input: Abelian etale sheaves on a finite clopen coproduct decompose componentwise. Used only for the geometry, ordinary unbounded etale operations or coherence explicitly described in the proof; the unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic input: The functor induced by an exact functor is its own right and left derived functor. Used only for the geometry, ordinary unbounded etale operations or coherence explicitly described in the proof; the unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Generic input: Universal property of a localization of categories: functors and natural transformations inverting W factor through it. Used only for the geometry, ordinary unbounded etale operations or coherence explicitly described in the proof; the unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic input: Extension by zero is exact (étale site). Used only for the geometry, ordinary unbounded etale operations or coherence explicitly described in the proof; the unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic input: Derived tensor comparison for arbitrary ringed topoi. Used only for the geometry, ordinary unbounded etale operations or coherence explicitly described in the proof; the unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-kun-derived-pullback-composition-monoidal",
+    "why": "Generic input: Canonical derived etale inverse-image composition is monoidal. Used only for the geometry, ordinary unbounded etale operations or coherence explicitly described in the proof; the unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic input: Monoidal and adjunction normalization of derived ringed-topos comparisons. Used only for the geometry, ordinary unbounded etale operations or coherence explicitly described in the proof; the unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-pur-etale-open-derived-tensor",
+    "why": "Generic input: Open extension by zero and unbounded derived tensor on ordinary etale sites. Used only for the geometry, ordinary unbounded etale operations or coherence explicitly described in the proof; the unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-asd-open-projection-exchange",
+    "why": "Generic input: Ordinary etale open tensor comparison commutes with base change. Used only for the geometry, ordinary unbounded etale operations or coherence explicitly described in the proof; the unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-asd-open-base-change-unit-mate",
+    "why": "Generic input: Derived open base-change is the mate of the pullback square map. Used only for the geometry, ordinary unbounded etale operations or coherence explicitly described in the proof; the unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-kun-proper-base-change-torsion-ring",
+    "why": "Generic input: Unbounded proper base change over a torsion coefficient ring. Used only for the geometry, ordinary unbounded etale operations or coherence explicitly described in the proof; the unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "why": "Generic input: Projection-formula coherence for a square of ringed topoi. Used only for the geometry, ordinary unbounded etale operations or coherence explicitly described in the proof; the unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-pur-unit-adjunct-tensor-action",
+    "why": "Generic input: Tensor action and counit equations for a unit-defined left-adjoint projection. Used only for the geometry, ordinary unbounded etale operations or coherence explicitly described in the proof; the unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-shriek-base-change-modules",
+    "why": "Generic input: Etale extension by zero commutes with base change for module sheaves. Used only for the geometry, ordinary unbounded etale operations or coherence explicitly described in the proof; the unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic input: Mates of pasted squares and of conjugate-whiskered squares. Used only for the geometry, ordinary unbounded etale operations or coherence explicitly described in the proof; the unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic input: A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6). Used only for the geometry, ordinary unbounded etale operations or coherence explicitly described in the proof; the unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-sc-affine-noetherian-underlying-space",
+    "why": "Generic input: An affine scheme with Noetherian coordinate ring has Noetherian underlying space. Used only for the geometry, ordinary unbounded etale operations or coherence explicitly described in the proof; the unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-kun-finite-union-noetherian",
+    "why": "Generic input: A finite union of Noetherian subspaces is Noetherian. Used only for the geometry, ordinary unbounded etale operations or coherence explicitly described in the proof; the unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-sfb-noetherian-space-compact-subsets",
+    "why": "Generic input: Every subset of a Noetherian topological space is compact. Used only for the geometry, ordinary unbounded etale operations or coherence explicitly described in the proof; the unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "Generic input: The fibres of an etale morphism are disjoint unions of spectra of finite separable field extensions. Used only for the geometry, ordinary unbounded etale operations or coherence explicitly described in the proof; the unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-asd-clopen-geometric-sections-derived-evaluation",
+    "why": "Generic input: Unbounded evaluation on finitely many clopen geometric sections. Used only for the geometry, ordinary unbounded etale operations or coherence explicitly described in the proof; the unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-restriction-injectives",
+    "why": "Generic input: Etale restriction preserves injectives. Used only for the geometry, ordinary unbounded etale operations or coherence explicitly described in the proof; the unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-etale-derived-jointly-surjective-conservative",
+    "why": "Generic input: Jointly surjective pullbacks detect unbounded etale derived isomorphisms. Used only for the geometry, ordinary unbounded etale operations or coherence explicitly described in the proof; the unit has no replacement for this tool."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q64-a200f815d",
+  "group": "Q64",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-a200f815d (reviewer sub-agent of L); spot-checked: Ordinary first S1 split, one commit (item and report), 0 new nodes. Item still unsplit in live, side-live and sheaf tree, no repair note, so not superseded. Statement and stmt_deps are byte-identical to live. Statement is true (the classical e_Σ! ≅ Rr_*j_! comparison for separated étale e) and is not weakened. blueprint.from.node repaired null → sk-prop-sf-rf-shriek-preservation, which is a blueprint node and the from.node of the maintainer-created ancestor; correct. Read thm-asd-smooth-tensor.proof.md paragraph 3; the item makes its étale counit/projection normalization explicit. Read the statement of all 39 dependencies. Steps: (1) σ is clopen via the section lemma, étale cancellation and flat+lfp mono ⇒ open. (2)-(3) derived clopen product and transfer = (ψ,0), elementary from the clopen-product, exact-descent and localization clauses (2)/(3). (4) j^*γ is the tensor identification via open-projection-exchange plus open-unit-mate at a=j. (5) checked the transpose ε-triangle calculation. (6) exchange/tensor coherence plus P = Rr_*γ∘π_r gives (*); re-derived. (7) tensor square re-derived from κ's transpose and naturality of μ. (8) base change via sum-mate unit equation, unit-mate, step 3 and cube pasting clause 1, with exchanges invertible by torsion proper base change. (9) Z_P Noetherian ⇒ V_P quasi-compact, discrete, residue fields Ω ⇒ finite clopen sections. (10) hypotheses of the clopen evaluation lemma match; a′ has identity diagonal and zero off-diagonal ⇒ sum-to-product iso; I=∅ checked. (11) geometric-point conservativity, small family, exact pullback = La^*. Stacks tags 02GW/02GO/01KT/015F/070Y/0GL1/0E46/0E47/0E48/03S6/01T6/02GL/0053 match their labels. No SGA, no cycle, proof_deps equals the union of uses. 28 generic tool_uses accepted. Minor, not faults: step 8 compresses the unit-mate identity, which is a two-line consequence of the exchange definition."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SfEtaleGraphProjectionArbitraryBase",
+  "declaration": "AlgebraicGeometry.Etale.sfEtaleGraphProjectionArbitraryBase",
+  "declarations": [
+   "AlgebraicGeometry.Etale.sfEtaleExactPullbackTensorIso",
+   "AlgebraicGeometry.Etale.sfEtaleSumExactTensorMap",
+   "AlgebraicGeometry.Etale.sfEtaleExactProjectionIso",
+   "AlgebraicGeometry.Etale.sfEtaleGraphProjectionArbitraryBase"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SfEtaleGraphProjectionArbitraryBase.lean",
+  "statement": "theorem sfEtaleGraphProjectionArbitraryBase (A : Type (u + 1)) [CommRing A] [Finite A] {V W : Scheme.{u}} (e : V ⟶ W) [Etale e] [IsSeparated e] (c : Compactification e) : IsIso (compactificationEtaleComparison A e c) ∧ ∀ (M : DerivedCategoryModule A V) (K : DerivedCategoryModule A W), (compactificationEtaleComparison A e c).app (((derivedTensor (ModuleCat.{u + 1} A) V).obj M).obj (D((e)^*[ModuleCat.{u + 1} A]).obj K)) ≫ (sfEtaleExactProjectionIso A c M K).inv = sfEtaleSumExactTensorMap A e M K ≫ ((derivedTensor (ModuleCat.{u + 1} A) W).map ((compactificationEtaleComparison A e c).app M)).app K",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-25",
+  "existing": false,
+  "note": "Reuses the specified upstream compactificationEtaleComparison and its clopen transfer; no replacement comparison is chosen. The three helper definitions spell out canonical exact/left-derived tensor transport, the sum/evaluation Hom transpose kappa, and the existing proper/open projection in the exact inverse-image model. Compactification has no quasi-compact-open field. The theorem states both natural invertibility and the equality of these specified derived morphisms. Review FIX (H4): sfEtaleExactPullbackTensorIso is now an abbrev of the existing AlgebraicGeometry.Etale.supportExactPullbackTensorIso (Sheaf.AlgebraicGeometry.SupportedLocalizationComparisons, owner def-pur-supported-localization-comparisons) at ModuleCat A; the delivered body was the same composite verbatim. R6 repair: only the import owner of the unchanged supportExactPullbackTensorIso is now ExactPullbackTensorComparison; the current G9 proof and all its dependency records are retained.",
+  "fixed_by": "NT-stage2-cc-16a85f4ae"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-16a85f4ae",
+  "group": "NA",
+  "result": "fix",
+  "note": "Statement matches node clause by clause: finite A in Type (u+1), no Nontrivial; Etale+IsSeparated e; Compactification c (no qc field); a = upstream compactificationEtaleComparison (transpose under ofNatIsoRight of termwise S⊣E, so the node's exact-model adjunct after canonical Le*≅E); P = asIso projectionMapOfCompactification ≫ F(M⊗(L≅D)_K), .inv used; κ = homEquiv.symm((v_M⊗1) ≫ μ.inv), variance correct; conclusion IsIso(a) ∧ ∀ M K, a_{M⊗EK} ≫ P⁻¹ = κ ≫ (a_M⊗1). Edge cases (empty schemes, A=0, non-qc open j, unbounded complexes) covered; no hollow defs; only the theorem is sorry; docstrings carry source, blueprint id and 11 steps; node changed only in lean. H4 FIX: sfEtaleExactPullbackTensorIso was a verbatim copy of existing AlgebraicGeometry.Etale.supportExactPullbackTensorIso (SupportedLocalizationComparisons:131, owner def-pur-supported-localization-comparisons); fixes/SfEtaleGraphProjectionArbitraryBase.lean makes it an abbrev at ModuleCat A plus the public import (theorem signature unchanged); lean-record.json note updated. nt_compile --json on the fix: 3.4 s, exit 0, clean. Advisory: second reading is a same-worker pass but clause by clause."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-12d89",
+  "group": "R6",
+  "result": "pass",
+  "landing": "20261025T123642-L-1886209",
+  "kind": "interface",
+  "note": "independent cc review: delivered files vs clones/live (only the intended edits; G9 graph proof preserved); moved defs block-diffed verbatim; cycle path verified by import BFS; sandbox compile of 5 delivered modules + 5 direct importers clean; #print axioms of item and helpers"
+ }
+}

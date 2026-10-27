@@ -1,0 +1,254 @@
+{
+ "id": "lem-trf-flat-strict-transform-generic-closures",
+ "kind": "statement",
+ "title": "Flat strict transforms are their generic closures",
+ "statement": "Let $S$ and $T$ be integral Noetherian schemes [def-pc-integral-scheme, def-weil-pbc-noetherian-ring] (Noetherian means admitting a finite affine cover by spectra of Noetherian rings), with generic points $\\eta$ and $\\eta_T$ [def-sc-generic-point]. Let $v:T\\to S$ be a proper morphism [def-weil-proper-morphism] which is an isomorphism over a nonempty open $U\\subset S$. Let $X\\to S$ be a dominant finite type morphism [def-weil-finite-type-morphism] with $X$ integral, and let $H\\subset X$ be the schematic closure [def-nagata-scheme-theoretic-image] of a closed subscheme $H_\\eta\\subset X_\\eta$ [def-pc-scheme-fibre, def-weil-closed-immersion], possibly empty. Write $X'$ and $H'$ for the schematic closures of $X_U\\times_U v^{-1}(U)$ and $H_U\\times_U v^{-1}(U)$ in $X\\times_S T$ and $H\\times_S T$, respectively [def-pc-fibre-product]. Assume that $X'\\to T$ and $H'\\to T$ are flat [def-weil-flat-morphism]. Then their generic fibres identify with $X_\\eta$ and $H_\\eta$ over the canonical residue-field isomorphism $\\kappa(\\eta)\\xrightarrow{\\sim}\\kappa(\\eta_T)$ [def-weil-residue-field] induced by $v$. Each generic fibre is topologically and schematically dense in its transform; that is, local functions are determined by restriction to it. Consequently, inside $X\\times_S T$, $X'$ and $H'$ are precisely the schematic closures of $X_\\eta\\times_S T$ and $H_\\eta\\times_S T$. The scheme $X'$ is integral, $H'$ is a closed subscheme of $X'$, and $X'\\to X$ is proper and an isomorphism over the dense open $X_U$, hence birational (the two integral schemes have isomorphic dense open subschemes via this projection).",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 080D, definition-strict-transform, schematic-closure description; ILO Expose X Theorem 3.4, paragraph before the proof and Step 2, printed p.160. Flat generic-density and integrality argument supplied in retained parent proof Steps 5--6."
+ },
+ "stmt_deps": [
+  "def-nagata-scheme-theoretic-image",
+  "def-pc-fibre-product",
+  "def-pc-integral-scheme",
+  "def-pc-scheme-fibre",
+  "def-sc-generic-point",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-proper-morphism",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "Put $W=X\\times_S T$ and $W_H=H\\times_S T$. By [lem-weil-pbc-proper-base-change], $W\\to X$ is proper. In particular it is finite type by [def-weil-proper-morphism]. Apply [lem-weil-pbc-finite-type-over-noetherian] first to $X\\to S$ and then to $W\\to X$: both $X$ and $W$ are Noetherian. By [lem-weil-pbc-closed-immersion-base-change], $W_H\\to W$ is a closed immersion. Here the Noetherian convention in [lem-weil-pbc-finite-type-over-noetherian] is locally Noetherian and quasi-compact: by [pqf-def-locnoeth] choose an affine cover of $W$ with Noetherian coordinate rings, and use quasi-compactness to extract a finite subcover. Conversely the finite affine-cover convention in our hypotheses implies these two properties, since affine schemes are quasi-compact and a finite union of quasi-compact subsets is quasi-compact. By [lem-sc-affine-noetherian-underlying-space] each chart is a Noetherian space, and by [lem-sfb-noetherian-space-compact-subsets] every subset of each chart is quasi-compact. Every subset of $W$ is consequently quasi-compact: restrict any open cover to these finitely many chart intersections and unite the finite subcovers. This also applies to every subset of $W_H$. Thus the open immersions $W_U\\to W$ and $(W_H)_U\\to W_H$ are quasi-compact: their inverse images of affine opens are subsets of the spaces just considered. Consequently the quasi-compact kernel description of schematic image in [def-nagata-scheme-theoretic-image] applies to both transforms.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-nagata-scheme-theoretic-image",
+    "lem-sc-affine-noetherian-underlying-space",
+    "lem-sfb-noetherian-space-compact-subsets",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01W2 (lemma-base-change-proper), 01T6 (lemma-finite-type-noetherian), 01QR (lemma-base-change-closed-immersion), 01R8 (lemma-quasi-compact-scheme-theoretic-image). Algebra Tag 00FQ (lemma-Noetherian-topology) and Topology Tag 04ZA (lemma-Noetherian-quasi-compact). Properties Tag 01OV (definition-noetherian), finite subcover of the locally Noetherian affine cover."
+   }
+  },
+  {
+   "text": "First the closure $H$ has the prescribed generic fibre: on an affine $\\operatorname{Spec}B\\subset X$ over $\\operatorname{Spec}A\\subset S$, put $K=\\kappa(\\eta)=\\operatorname{Frac}(A)$ by [lem-sc-integral-function-field-affine-fraction]. The given closed subscheme has ideal $J\\subset B\\otimes_A K=B_{A\\setminus\\{0\\}}$ by [lem-weil-pbc-fibre-product-affine-spectra] and [def-weil-closed-immersion]. Its map to this affine of $X$ is a map of affine schemes, hence quasi-compact. The kernel formula of [def-nagata-scheme-theoretic-image] therefore gives the closure ideal $I=\\ker(B\\to B_{A\\setminus\\{0\\}}/J)$, the contraction of $J$. Then $IB_{A\\setminus\\{0\\}}=J$: if $b/s\\in J$, multiplication by the unit $s$ gives $b/1\\in J$, hence $b\\in I$; the reverse inclusion is immediate. This proves $H\\times_S\\eta=H_\\eta$, using the fractions in [def-weil-pbc-module-localization]. On the open $W_U$, restriction of $\\ker(\\mathcal O_W\\to j_*\\mathcal O_{W_U})$ is zero, because the restricted map is the identity. Hence $X'_U=W_U\\simeq X_U$. The identical calculation inside $W_H$ gives $H'_U\\simeq H_U$. Since $U$ is nonempty in integral $S$, it contains $\\eta$. The isomorphism $v^{-1}U\\simeq U$ sends $\\eta_T$ to $\\eta$ and induces the specified residue-field isomorphism. By the universal property of [def-pc-fibre-product] and [def-pc-scheme-fibre], base change of these open identifications to that point gives $X'_{\\eta_T}\\simeq X_\\eta$ and $H'_{\\eta_T}\\simeq H_\\eta$, compatibly with their maps into $W$. Also $X_\\eta\\times_S T\\simeq X'_{\\eta_T}$ and $H_\\eta\\times_S T\\simeq H'_{\\eta_T}$, since $T\\times_S\\operatorname{Spec}\\kappa(\\eta)\\simeq\\operatorname{Spec}\\kappa(\\eta_T)$.",
+   "uses": [
+    "def-nagata-scheme-theoretic-image",
+    "def-pc-fibre-product",
+    "def-pc-scheme-fibre",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-closed-immersion",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01R8 (lemma-quasi-compact-scheme-theoretic-image), restriction of its kernel formula to the original open; generic base change through that open. Generic localization and contraction-extension of ideals, using Schemes Tags 01I4 and 01JQ, Morphisms Tag 01RV, and Algebra Tag 07JZ."
+   }
+  },
+  {
+   "text": "Let $Y$ be either $X'$ or $H'$. For every affine open $\\operatorname{Spec}B\\subset Y$ mapping into a nonempty affine $\\operatorname{Spec}A\\subset T$, [lem-weil-pbc-flat-morphism-affine-criterion] makes $B$ a flat $A$-module. The ring $A$ is a domain, and [lem-sc-integral-function-field-affine-fraction] identifies $K=\\kappa(\\eta_T)$ with its fraction field. By [lem-trf-flat-module-torsionfree-domain], $ab=0$ with $0\\ne a\\in A$ implies $b=0$. The affine fibre formula [lem-weil-pbc-fibre-product-affine-spectra] identifies the generic restriction with $B\\to B\\otimes_A K$. This tensor product is the localization of $B$ at $A\\setminus\\{0\\}$: the mutually inverse maps send $b\\otimes(a/s)$ to $ab/s$ and $b/s$ to $b\\otimes(1/s)$. By the fraction equivalence relation in [def-weil-pbc-module-localization], $b/1=0$ means $ab=0$ for some nonzero $a\\in A$, so this restriction is injective. Such affine opens cover every open of $Y$. A local section restricting to zero on the generic fibre is therefore zero on this affine cover and hence zero. Thus $\\mathcal O_Y\\to(i_Y)_*\\mathcal O_{Y_{\\eta_T}}$ is injective.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-trf-flat-module-torsionfree-domain",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01U5 (lemma-flat-characterize); More on Algebra Tag 0538 (lemma-flat-torsion-free); Tag 01RV (lemma-integral-scheme-rational-functions); Schemes Tags 01I4 and 01JQ (affine fibre products); Algebra Tag 07JZ (definition-localization-module)."
+   }
+  },
+  {
+   "text": "The morphism $i_Y:Y_{\\eta_T}\\to Y$ is quasi-compact: on an affine open $\\operatorname{Spec}B$ over an affine open of $T$ its inverse image is the affine scheme $\\operatorname{Spec}(B\\otimes_A K)$ from Step 3. For an arbitrary affine open of $Y$, cover it by finitely many such affine subopens (it is quasi-compact), so its inverse image is again quasi-compact. The zero kernel from Step 3 means $\\operatorname{SIm}(i_Y)=Y$ by [def-nagata-scheme-theoretic-image]. By [lemma-nagata-scheme-image-ideal-qc], the closure of its topological range is all of $Y$, giving topological density too. Inside $W$ the kernel of restriction to $X'$ equals the kernel of restriction to $X'_{\\eta_T}$, because restriction on $X'$ is injective. The generic-fibre map to $W$ is also quasi-compact: over an affine open of $W$ mapping into an affine of $T$, its preimage is the generic fibre of the affine closed subscheme cut out by $X'$. Thus these are the quasi-coherent restriction kernels defining the schematic images, and their schematic images in $W$ agree. The same holds for $H'$ inside $W_H$, and also inside $W$, since $W_H$ is closed there. Together with Step 2 these are exactly the two asserted generic-closure equalities. This argument works for the empty scheme as well: its structure sheaf is zero and its closure is empty.",
+   "uses": [
+    "def-nagata-scheme-theoretic-image",
+    "lemma-nagata-scheme-image-ideal-qc"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01R8 (lemma-quasi-compact-scheme-theoretic-image), parts (1), (2), (4), and comparison of the restriction kernels."
+   }
+  },
+  {
+   "text": "We verify the closed inclusion scheme-theoretically. On an affine $\\operatorname{Spec}R\\subset W$, write $W_H\\cap\\operatorname{Spec}R=\\operatorname{Spec}(R/J)$, using the closed immersion of Step 1 and [def-weil-closed-immersion]. The ideal of $X'$ is the kernel of restriction from $R$ to $W_U\\cap\\operatorname{Spec}R$. The inverse image in $R$ of the ideal defining $H'$ in $R/J$ is the kernel of restriction from $R$ to $(W_H)_U\\cap\\operatorname{Spec}R$. The latter restriction factors through the former, so the first kernel is contained in the second. These inclusions on affine opens identify $H'$ with a closed subscheme of $X'$. This uses the schematic restriction kernels, rather than an inclusion of underlying sets.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-nagata-scheme-theoretic-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01R8 (lemma-quasi-compact-scheme-theoretic-image), kernel formula; Tag 01QO (lemma-characterize-closed-immersion), affine quotient description."
+   }
+  },
+  {
+   "text": "Dominance of $X\\to S$ implies $X_U\\ne\\varnothing$. As a nonempty open of integral $X$, it is reduced and irreducible. Its isomorphic copy $W_U$ is reduced; [lem-trf-reduced-scheme-image] therefore identifies $X'$ with the reduced induced closed subscheme on $\\overline{|W_U|}$ in $W$. This closure is nonempty and irreducible (the closure of an irreducible subset is irreducible). Hence $X'$ is integral by [def-pc-integral-scheme]. Finally $X'\\to W\\to X$ is proper by [lem-weil-pbc-closed-immersion-proper], clause (b), using Step 1. Its restriction over $X_U$ is the isomorphism of Step 2. The open $X_U$ is dense in integral $X$; its inverse image $W_U$ is dense in $X'$ by the closure description just used. Thus this projection identifies dense opens of the two integral schemes and is birational, as asserted.",
+   "uses": [
+    "lem-trf-reduced-scheme-image",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-closed-immersion-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 056B (lemma-scheme-theoretic-image-reduced); Properties Tag 01ON (lemma-characterize-integral); Tags 01W5 (lemma-closed-immersion-proper) and 01W3 (lemma-composition-proper)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-scheme-theoretic-image",
+  "def-pc-fibre-product",
+  "def-pc-integral-scheme",
+  "def-pc-scheme-fibre",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-module-localization",
+  "def-weil-proper-morphism",
+  "lem-sc-affine-noetherian-underlying-space",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-trf-flat-module-torsionfree-domain",
+  "lem-trf-reduced-scheme-image",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-proper-base-change",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "pqf-def-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Explicit affine-kernel argument for the item, using Tags 01R8, 01U5, 01RV, 056B, 01W2, 01W5, and More on Algebra Tag 0538; compatible with Divisors Tag 080D."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A flat strict transform over an integral birational modification is the schematic closure of its generic fibre and an integral generic fibre gives an integral transform",
+   "results": "8 hits; top=['AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization', 'AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc', 'AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization', 'AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization', 'AlgebraicGeometry.Flat.generalizingMap', 'AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom', 'AlgebraicGeometry.IsIntegralHom', 'AlgebraicGeometry.Scheme.Hom.toNormalization']; ; digest=e9952ad7b954e994. Types read: Normalization and the generalizing-map property do not give the closure identifications and birational projections.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat schemes over a domain have schematically dense generic fibre and strict transforms of integral schemes are proper birational",
+   "results": "8 hits; top=['AlgebraicGeometry.Flat', 'AlgebraicGeometry.Flat.mk', 'AlgebraicGeometry.IsIntegralHom.instUniversallyClosed', 'AlgebraicGeometry.flat_iff', 'AlgebraicGeometry.IsIntegral.mk', 'AlgebraicGeometry.Scheme.Hom.denseRange', 'AlgebraicGeometry.Flat.generalizingMap', 'AlgebraicGeometry.Flat.rec']; ; digest=1afca5fedca8aaa6. Types read: Normalization and the generalizing-map property do not give the closure identifications and birational projections.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"schematicallyDense\"",
+   "results": "0 hits; top=[]; ; digest=4f53cda18c2baa0c. Types read: Normalization and the generalizing-map property do not give the closure identifications and birational projections.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "schematicallyDense|schematically_dense|strictTransform|genericFiber",
+   "results": "0 hits; top=[]; ; digest=4f53cda18c2baa0c. Types read: Normalization and the generalizing-map property do not give the closure identifications and birational projections.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat strict transform over an integral base is schematically the closure of its generic fibre and is integral when its generic fibre is integral",
+   "results": "8 hits; top=['AlgebraicGeometry.IsIntegralHom', 'AlgebraicGeometry.Flat.generalizingMap', 'AlgebraicGeometry.Flat', 'AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization', 'AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization', 'AlgebraicGeometry.isIntegral_appTop_of_universallyClosed', 'AlgebraicGeometry.IsIntegralHom.instUniversallyClosed', 'AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion']; ; digest=45ed428c7657cf54. Read returned types: properness, normalization and topological dominance cover only parts, not this strict-transform conjunction.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictTransform|strict_transform|schematicallyDense|schematically_dense",
+   "results": "0 hits; top=[]; ; digest=4f53cda18c2baa0c. Read returned types: properness, normalization and topological dominance cover only parts, not this strict-transform conjunction.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict transform of an integral scheme along a proper birational base modification is proper birational and the schematic closure of its generic fibre",
+   "results": "8 hits; top=['AlgebraicGeometry.IsProper.isStableUnderBaseChange', 'AlgebraicGeometry.isProper_iff', 'AlgebraicGeometry.isProper_eq', 'AlgebraicGeometry.IsProper.toLocallyOfFiniteType', 'AlgebraicGeometry.universallyClosed_isStableUnderBaseChange', 'AlgebraicGeometry.IsProper.toUniversallyClosed', 'AlgebraicGeometry.IsIntegralHom.instUniversallyClosed', 'AlgebraicGeometry.IsProper.instOfIsFinite']; ; digest=7e7c01ceed61fb26. Read returned types: properness, normalization and topological dominance cover only parts, not this strict-transform conjunction.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"strictTransform\"",
+   "results": "0 hits; top=[]; ; digest=4f53cda18c2baa0c. Read returned types: properness, normalization and topological dominance cover only parts, not this strict-transform conjunction.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "generic[Ff]ib|generic_[Ff]ib|schematic.*[Dd]ens",
+   "results": "0 hits; top=[]; ; digest=4f53cda18c2baa0c. Read returned types: properness, normalization and topological dominance cover only parts, not this strict-transform conjunction.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Schematic density of the generic fibre of a flat scheme over a domain implies equality with the scheme theoretic image of its generic fibre",
+   "results": "8 hits; top=['AlgebraicGeometry.Flat.generalizingMap', 'AlgebraicGeometry.Scheme.Hom.denseRange', 'AlgebraicGeometry.IsDominant.denseRange', 'AlgebraicGeometry.Scheme.PartialMap.dense_domain', 'AlgebraicGeometry.isDominant_iff', 'AlgebraicGeometry.Scheme.RationalMap.dense_domain', 'AlgebraicGeometry.IsDominant', 'AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι']; ; digest=d956a778b9501f37. Read returned types: properness, normalization and topological dominance cover only parts, not this strict-transform conjunction.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-flatification-horizontal-curve-pair",
+  "date": "2026-10-22",
+  "group": "N5"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO X Theorem 3.4 Step 2, flatification of the curve and horizontal boundary before the stable modification theorem. Parent retained proof Steps 5--6: Flat strict transforms are their generic closures.",
+   "via": [
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-flat-strict-transform-generic-closures",
+  "worker": "stage1",
+  "summary": "Q34 checked the general proper modification formulation, all generic identifications and the empty marking case. Six explicit steps prove affine generic restriction injectivity, both closure equalities, scheme-theoretic boundary inclusion and proper birational integrality, using existing DAG nodes only. Clarified the canonical residue-field isomorphism and the meanings of Noetherian and birational; no hypotheses or conclusions changed. All new Mathlib queries were logged; no complete project or Mathlib declaration attaches to the item. Repair of returned head 51807634cfd: reread every current cited statement, aligned Step 1 with the current locally-Noetherian-plus-quasi-compact convention and cited its affine-cover definition, and made the quasi-compact kernel calculation for the original generic marking explicit in Step 2. Retained the approved six-step route and logged searches; no new nodes.",
+  "blueprint": "Retains the ancestor lem-trf-local-term-locality nearby-cycle semistable-alteration branch recorded in blueprint.from, via lem-trf-flatification-horizontal-curve-pair Step 3. Its generic-density and integrality assertions are realized by Steps 2--6; the current main-20261015 locality node has no separate flat-transform statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-045c0432a",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-045c0432a (reviewer sub-agent of L); spot-checked: PASS: I read the item and all six steps in full. There are no new nodes and no fixes. The statement changes from the live unsplit base are clarifications only: (1) Noetherian is spelled out as a finite Noetherian affine cover, which is equivalent to locally Noetherian plus quasi-compact; (2) the residue-field equality becomes the isomorphism induced by v, and def-weil-residue-field is added; (3) birational is spelled out. No hypothesis was added or dropped and no conclusion weakened, and the parent flatification-horizontal-curve-pair Step 3 uses exactly these hypotheses and conclusions. This re-delivery of 51807634 (previously approved, then refused at landing) is not identical: Step 1 now cites pqf-def-locnoeth and Step 2 states the quasi-compactness behind the kernel formula. S1: proper base change and 01T6 twice make W Noetherian; with 00FQ and 04ZA every subset is quasi-compact, so W_U→W and (W_H)_U→W_H are quasi-compact open immersions and the kernel description of the image applies; W_H→W is a closed immersion. S2: on affine charts the closure ideal I of H_eta is the contraction of J, and I·B_K=J, so H×η=H_eta. The kernel vanishes on W_U, so X'_U≅X_U and H'_U≅H_U. T×_S κ(η)=κ(η_T) gives the generic-fibre identifications. S3: flatness over a domain gives torsion-freeness (0538), and B→B⊗K=B_{A∖0} is injective; this is the only use of flatness. S4: the generic fibre has kernel 0, so it is schematically dense; the support clause gives topological density; left exactness of the pushforward gives the closures in W, and in W_H for H'. S5: the restriction kernels give H'⊂X' as schemes, in the correct direction. S6: 056B gives the reduced induced structure on an irreducible closure, so X' is integral; it is proper by clause (b) of the closed-immersion-proper node; and X'→X is an isomorphism over X_U with W_U dense, hence birational. Sources checked: Stacks 01R8, 056B, 0538, 01U5, and ILO X Thm 3.4 Step 2, printed p.160 ('proper transforms will coincide with the base changes'). The proof is correctly marked agent-written, and no SGA source is used. Edge cases tested: v=id, empty H_eta, nonreduced K[x]/(x^2), dim S≥2, and nonflat A/(t). Duplicate search found only a field-based equivariant variant (lem-sfb-flat-generic-closure-equivariance), a dense-integral-open criterion and the Chow closure node; none restates the item. Route: all proof deps are Mathlib leaves or definitions, plus the same-unit 056B node, so tool_uses=[] is correct. Advisory, not delivery faults: lem-trf-flat-module-torsionfree-domain cites 0539 for content that is 0538, and lem-sc-affine-noetherian-underlying-space cites 0052 where the affine statement is 00FQ."
+ }
+}

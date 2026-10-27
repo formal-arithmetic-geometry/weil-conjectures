@@ -1,0 +1,322 @@
+{
+ "id": "lem-sfb-space-adic-modification-push-pull",
+ "kind": "statement",
+ "title": "Bounded-error formal comparison along a proper modification",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and use algebraic spaces over $S$ and their small etale structure sheaves [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Modules, tensor pullback and direct image are on these ringed sites [def-trf-space-quasi-coherent-module, def-trf-space-etale-module-functors]. Locally Noetherian means locally Noetherian on etale scheme charts [pqf-def-locnoeth]; Noetherian means additionally quasi-compact and quasi-separated (quasi-compact diagonal). Coherent means quasi-coherent with coherent pullbacks on etale scheme charts [pqf-def-coherent]. Let $q:V\\to X$ be a representable proper morphism of Noetherian algebraic spaces [def-sfb-space-morphism-properties], and let $J,K\\subseteq\\mathcal O_X$ be quasi-coherent ideals [def-sfb-space-quasi-coherent-ideal]. Suppose $q^{-1}(U)\\to U$ is an isomorphism for $U=X\\setminus V(K)$, where $V(K)$ is the locus where the geometric stalk of $K$ is not the unit ideal. Let $M\\in\\mathrm{Coh}(X,J)$, let $E$ be coherent on $V$, and let $\\beta:q^*M\\xrightarrow{\\sim}\\widehat E_{J\\mathcal O_V}$ be an isomorphism of adic systems [def-sfb-space-coherent-adic-system]. Then $q_*E$ is coherent and there is a morphism $a:M\\to\\widehat{q_*E}_J$ whose kernel and cokernel are killed by a power of $K$: some $t\\geq1$ kills the ordinary sheaf kernels and cokernels of every component $a_n$. The morphism can be chosen so that its composite at level $n$ with the natural comparison $(q_*E)/J^n(q_*E)\\to q_*(E/(J\\mathcal O_V)^nE)$ is the unit map $M_n\\to q_*q^*M_n$ followed by $q_*\\beta_n$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 08BD (lemma-inverse-systems-push-pull), statement and the unique comparison constructed in its proof; boundedness means Tag 08BA (remark-inverse-systems-kernel-cokernel-annihilated-by)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "pqf-def-locnoeth",
+  "pqf-def-coherent",
+  "def-sfb-space-coherent-adic-system",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-quasi-coherent-ideal"
+ ],
+ "proof": [
+  {
+   "text": "Put $H=q_*E$ and $I=J\\mathcal O_V$. The degree-zero case of proper coherent higher direct images shows that $H$ is coherent, so its completion is defined. Choose a quasi-compact surjective etale scheme atlas and cover it by finitely many affine opens; their finite disjoint union $p:T\\to X$ is an affine surjective etale atlas. The atlas existence is part of the quasi-compact-space assertion of [lem-sfb-space-flat-proper-fp-locality]; the affine covering and finite disjoint union are scheme constructions. The Noetherian atlas-relation lemma gives that $T$ and $T\\times_XT$ are Noetherian schemes. For any affine etale chart $C\\to X$, representability of $q$ says that $V_C=V\\times_XC$ is a scheme, and proper base change gives a proper scheme morphism $q_C:V_C\\to C$. The definition of locally Noetherian gives that $C$ is Noetherian. Its inverse image of $X\\setminus V(K)$ is precisely $C\\setminus V(K\\mathcal O_C)$: a proper ideal in a local ring stays proper under the local homomorphisms of stalks, and a unit ideal stays the unit ideal. The isomorphism over this open is preserved by base change.",
+   "uses": [
+    "lem-sfb-space-proper-coherent-higher-images",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-noetherian-affine-atlas-relation",
+    "def-trf-algebraic-space",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 08BD, first sentence and reduction to an affine etale chart; Tag 03H6 (lemma-quasi-compact-affine-cover), Tag 08AR (lemma-proper-pushforward-coherent)."
+   }
+  },
+  {
+   "text": "Write $P_n=q_*(E/I^nE)$, with quotient transitions. Define $\\gamma_n=q_*\\beta_n\\circ\\eta_{M_n}:M_n\\to P_n$ using the specified adjunction. Naturality of its unit and the transition compatibility of $\\beta$ give a map of inverse diagrams $\\gamma$. The map $q_*E\\to P_n$ kills $J^nH$: on every chart, a product of $n$ sections of $J$ acts through $I^n$ on $E/I^nE$ and hence acts as zero. The cokernel universal property therefore gives a unique $\\kappa_n:H/J^nH\\to P_n$ with $\\kappa_n\\pi^H_n=q_*\\pi^E_n$. Precomposing the transition equation with the surjective quotient map $H\\to H/J^{n+1}H$ proves that the $\\kappa_n$ form a map of diagrams. Under etale base change, the pushforward comparison is the identity on compatible chart sections and the tensor comparison keeps the local tensor. Thus these constructions restrict to the same quotient maps and to the unit $m\\mapsto1\\otimes m$ on every chart.",
+   "uses": [
+    "def-trf-space-etale-module-functors",
+    "def-sfb-space-coherent-adic-system",
+    "lem-trf-space-etale-module-pushforward-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 08BD, definition of gamma and the defining comparison equation; Tag 03LX (lemma-pushforward-etale-base-change-modules)."
+   }
+  },
+  {
+   "text": "Fix an affine etale chart $C\\to X$. The canonical Zariski/small-etale equivalence for quasi-coherent modules respects tensor pullback and the direct image of the quasi-compact separated scheme map $q_C$. Its exactness into all module sheaves and its preservation of finite presentation identify coherent modules and their actual ideal-power quotients on the two sites. Consequently $M|_C$, $E|_{V_C}$ and $\\beta|_{V_C}$ give exactly the scheme data of [lem-weil-pbc-formal-systems-push-pull-comparison], after reindexing its level $r\\geq0$ as our level $n=r+1$. The coherence hypothesis there holds because $H|_C=(q_C)_*(E|_{V_C})$ by etale restriction. That lemma supplies a map $a^C:M|_C\\to\\widehat{H|_C}_{J|_C}$ with $\\kappa^C_na^C_n=\\gamma^C_n$. Indeed its quotient comparison equals $\\kappa|_C$, since both have the same composite with the quotient epimorphism, and its adjunction equation is the equation from step 2. Apply this for every affine etale chart, including affine opens in overlaps.",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-weil-pbc-formal-systems-push-pull-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 08BD, scheme reduction; Tag 088B (lemma-inverse-systems-push-pull), first half of proof; Tags 03DX, 03LC, 06VE, 05VG."
+   }
+  },
+  {
+   "text": "Here is uniqueness on an affine chart $C=\\operatorname{Spec}B$, without assuming that any individual $\\kappa_n$ is injective. Put $N=\\varprojlim M_n(C)$ and $L=\\Gamma(V_C,E|_{V_C})=H(C)$. The affine formal-module equivalence identifies a formal map $b:M|_C\\to\\widehat{H|_C}$ with a $\\widehat B$-linear map $v:N\\to\\widehat L$; its source projection $N\\to M_n(C)$ is surjective. The degree-zero formal-functions theorem identifies $\\psi=\\varprojlim\\kappa_n(C):\\widehat L\\to\\varprojlim P_n(C)$ as an isomorphism, with precisely the quotient-induced component maps. Taking limits of $\\kappa_nb_n=\\gamma_n$ forces $\\psi v=\\varprojlim\\gamma_n(C)$ and hence $v=\\psi^{-1}\\varprojlim\\gamma_n(C)$. Thus at most one $b$ satisfies the equations. Conversely equality of the resulting component equations after precomposing $N\\to M_n(C)$ implies equality before precomposition by surjectivity. The affine equivalence and the faithful quasi-coherent chart realization identify module maps from their sections, so this proves uniqueness of formal maps on the small etale chart as well.",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-modules-affine",
+    "lem-weil-pbc-theorem-formal-functions",
+    "lem-sfb-space-qcoh-affine-chart-calculus",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 08BD, uniqueness used for descent; Tag 088B, affine limit construction; Tag 087W (lemma-inverse-systems-affine) and Tag 02OC (theorem-formal-functions)."
+   }
+  },
+  {
+   "text": "On $R=T\\times_XT$, restrict the two pullbacks of $a^T$. Their composites with $\\kappa|_R$ are both $\\gamma|_R$, because step 2 identifies these comparisons on every etale localization. Every affine open of $R$ is an affine etale chart of $X$, so uniqueness from step 4 makes the two maps equal there, and consequently equal on $R$. The same reasoning shows that the chart maps commute with every refinement. Componentwise they therefore glue: for any etale test $W\\to X$ and any section of $M_n(W)$, take its images after pulling back to the covering $W\\times_XT\\to W$; agreement on the double overlap gives a unique section of $(H/J^nH)(W)$ by the sheaf condition. This operation commutes with restriction and is linear, and so defines $a_n$. The transition equations and $\\kappa_na_n=\\gamma_n$ hold on the covering and hence globally by uniqueness in the sheaf condition. Thus $a=(a_n)$ is the required formal-system map. No descent assertion about termwise kernels in the category of adic systems is used.",
+   "uses": [
+    "lem-sfb-noetherian-affine-atlas-relation",
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "def-trf-algebraic-space",
+    "def-sfb-space-coherent-adic-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 08BD, etale descent by uniqueness; discussion of descent immediately before Tag 089P (lemma-inverse-systems-abelian)."
+   }
+  },
+  {
+   "text": "To bound this particular $a$, restrict it and $\\kappa$ to the affine atlas $T$. Translate to Zariski modules by the exact scheme/small-etale comparison as in step 3. All hypotheses of [lem-weil-pbc-formal-systems-push-pull-affine-annihilation] now hold: $q_T$ is proper, is an isomorphism off $V(K|_T)$, its module is coherent, its pullback-system isomorphism is $\\beta|_{V_T}$, its direct image is the coherent $H|_T$, and its two comparison equations were proved in steps 2 and 5. That lemma bounds the kernel and cokernel of $u=\\varprojlim a_n(T)$ by a power of $K(T)$. Apply [lem-weil-pbc-formal-systems-annihilated-by-power], implication (2) to (1), on the affine scheme $T$ (equivalently use its singleton affine cover). It yields a single positive exponent $t$ annihilating the ordinary kernels and cokernels of every component of $a|_T$. The exponent may increase in this implication; its commutative-algebra statement allows doubling. The exact scheme/small-etale comparison carries these actual component kernels and cokernels, and their annihilation, to the small etale site. This argument bounds the map constructed above, rather than a possibly different existential comparison.",
+   "uses": [
+    "lem-weil-pbc-formal-systems-push-pull-affine-annihilation",
+    "lem-weil-pbc-formal-systems-annihilated-by-power",
+    "lem-sfb-scheme-etale-module-exact-finiteness-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 08BD, final reduction to Tag 088B; Tag 0888 (remark-inverse-systems-kernel-cokernel-annihilated-by), conditions (1)-(3); Tag 08BA."
+   }
+  },
+  {
+   "text": "For each $n$, the ordinary sheaf kernel and cokernel of $a_n$ are coherent by [lem-sfb-space-coherent-abelian]. Restricting to a localized etale site commutes with kernels (computed sectionwise) and cokernels (a local lift of a section in a sheafified quotient remains a local lift on the localized site). Ideal products also restrict to the same products of local generators. Step 6 therefore says that multiplication by $K^t$ on either sheaf becomes zero on the covering $T\\to X$. Every etale test is covered by its pullback of this covering; the sheaf separation axiom makes that multiplication zero globally. The same $t\\geq1$ works for all $n$, since step 6 already supplied one exponent for the entire tower. Together with coherence of $H$ and the equation from step 5, this proves every clause.",
+   "uses": [
+    "lem-sfb-space-coherent-abelian",
+    "def-trf-algebraic-space",
+    "def-sfb-space-coherent-adic-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 08BA, componentwise boundedness and etale-local testing; Tag 08BD, conclusion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-proper-coherent-higher-images",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-noetherian-affine-atlas-relation",
+  "def-trf-algebraic-space",
+  "pqf-def-locnoeth",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-coherent-adic-system",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+  "lem-weil-pbc-formal-systems-push-pull-comparison",
+  "lem-weil-pbc-coherent-formal-modules-affine",
+  "lem-weil-pbc-theorem-formal-functions",
+  "lem-sfb-space-qcoh-affine-chart-calculus",
+  "lem-weil-pbc-formal-systems-push-pull-affine-annihilation",
+  "lem-weil-pbc-formal-systems-annihilated-by-power",
+  "lem-sfb-space-coherent-abelian"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 08BD (lemma-inverse-systems-push-pull), etale descent and its reduction to coherent.tex Tag 088B; Tag 08BA and coherent.tex Tag 0888 for componentwise boundedness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A proper representable modification of Noetherian algebraic spaces gives an adic push pull comparison whose kernel and cokernel are annihilated by a power of the exceptional ideal",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"localCohomology.diagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) →\\n          ℕ → CategoryTheory.Functor Dᵒᵖ (CategoryTheory.Functor (ModuleCat R) (ModuleCat R))\", \"doc\": \"For a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs a functor from $ \\\\mathcal{D}^{\\\\text{op}} $ to the category of $ R\"}\n  {\"name\": \"localCohomology.isoSelfLERadical\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (J : Ideal R) → [IsNoetherian R R] → (i : ℕ) → localCohomology.ofSelfLERadical J i ≅ localCohomology J i\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ J $, and a natural number $ i $, this establishes a natural isomorphism between the $ i $-th local cohomology functor constructed using ideal powers\"}\n  {\"name\": \"AdicCompletion.map_exact\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Exactness\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {I : Ideal R} {M : Type u} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : Type u} [inst_5 : AddCommGroup P]\\n  [inst_6 : Module R P] [IsNoetherianRing R] [Module.Finite R N] {f : M →ₗ[R] N} {g : N \", \"doc\": \"If $ f : M \\\\to N $ and $ g : N \\\\to P $ are $ R $-linear maps forming an exact sequence (i.e., $ \\\\operatorname{im} f = \\\\ker g $), then their induced $ I $-adic completions $ \\\\hat{f} : \\\\hat{M} \\\\to \\\\hat{\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"localCohomology\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} → [inst : CommRing R] → Ideal R → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $ and an ideal $ J $, the $ i $-th local cohomology functor with respect to $ J $ is constructed as the colimit of a diagram formed by the descending chain of powers $ J^n\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  (AlgebraicGeometry.Scheme.Modules.pushforward f).Faithful\", \"doc\": \"For any morphism $ f: X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure sh\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.ker_ideal_of_isPullback_of_isOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X Y U V : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (f' : U ⟶ V) (iU : U ⟶ X) (iV : V ⟶ Y)\\n  [inst : AlgebraicGeometry.IsOpenImmersion iV] [AlgebraicGeometry.QuasiCompact f],\\n  CategoryTheory.IsPullback f' iU iV f →\\n    ∀ (W : ↑V.affineOpens),\\n      (AlgebraicGeometry.Scheme.Hom.ker f').ideal W =\\n   \", \"doc\": \"Given schemes $X,Y,U,V$ with morphisms $f:X\\\\to Y$, $f':U\\\\to V$, open immersions $i_U:U\\\\to X$ and $i_V:V\\\\to Y$, and assuming $f$ is quasi-compact with the square formed by $f',i_U,i_V,f$ being a pullba\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; module completion, scheme morphism properties, general sheaf presentations and presheaf Hom do not state this algebraic-space coherent-adic assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraization after proper modification produces a comparison from the original coherent formal system to the completed proper pushforward with bounded exceptional torsion",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instFullPushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pushforward f).Full\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure s\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.algebraMap_pushforward_stalk\", \"module\": \"Mathlib.AlgebraicGeometry.Spec\", \"type\": \": algebraMap R ((Spec.topMap f _* (structureSheaf S).1).stalk p) = (f ≫ StructureSheaf.toPushforwardStalk f p).hom\", \"doc\": \"The algebra map from $ R $ to the stalk of the pushforward structure sheaf at $ p $ is equal to the composition of the ring homomorphism $ f $ with the stalk map at $ p $.\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"module\": \"Mathlib.RingTheory.Smooth.AdicCompletion\", \"type\": \"{I : Ideal S} (f : A →ₐ[R] S ⧸ I) :\\n  ∃ (g : A →ₐ[R] AdicCompletion I S), ((AdicCompletion.evalOneₐ I).restrictScalars R).comp g = f\", \"doc\": \"For any commutative rings $R$ and $S$, an ideal $I$ of $S$, and a formally smooth $R$-algebra $A$, given an $R$-algebra homomorphism $f : A \\\\to S/I$, there exists an $R$-algebra homomorphism $g : A \\\\t\"}\n  {\"name\": \"Algebra.FormallyUnramified.of_equiv\", \"module\": \"Mathlib.RingTheory.Unramified.Basic\", \"type\": \"[FormallyUnramified R A] (e : A ≃ₐ[R] B) : FormallyUnramified R B\", \"doc\": \"Given a commutative ring $ R $ and an $ R $-algebra $ A $ that is formally unramified over $ R $, if there exists an algebra equivalence $ e : A \\to B $ to another $ R $-algebra $ B $, then $ B $ is al\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.instAlgebraCarrierStalkCommRingCatObjPresheafTopObjPushforwardTopMapValOpensCarrierTopStructureSheaf\", \"module\": \"Mathlib.AlgebraicGeometry.Spec\", \"type\": \": Algebra R ((Spec.topMap f _* (structureSheaf S).1).stalk p)\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ and a point $ p $ in the prime spectrum $ \\\\operatorname{Spec}(S) $, the stalk of the pushforward of the structure sheaf $ \\\\mathcal{O}_{\\\\operatorname{Spec}(S)} \"}\n  {\"name\": \"Algebra.FormallySmooth.iff_comp_surjective\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \":\\n  FormallySmooth R A ↔\\n    ∀ ⦃B : Type max u v⦄ [CommRing B] [Algebra R B] (I : Ideal B),\\n      I ^ 2 = ⊥ → Function.Surjective ((Ideal.Quotient.mkₐ R I).comp : (A →ₐ[R] B) → A →ₐ[R] B ⧸ I)\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is formally smooth if and only if for every commutative ring $ B $ equipped with an $ R $-algebra structure and every ideal $ I $ of $ B $ with $ I^2 = 0\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom\", \"module\": \"Mathlib.AlgebraicGeometry.Spec\", \"type\": \": IsLocalizedModule p.asIdeal.primeCompl (toPushforwardStalkAlgHom R S p).toLinearMap\", \"doc\": \"Given a commutative ring $ R $, an $ R $-algebra $ S $, and a prime ideal $ p $ in $ S $, the linear map associated to the canonical $ R $-algebra homomorphism from $ S $ to the stalk of the pushforwa\"}\n  {\"name\": \"Algebra.FormallyEtale.iff_comp_bijective\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \":\\n  FormallyEtale R A ↔\\n    ∀ ⦃B : Type max u v⦄ [CommRing B] [Algebra R B] (I : Ideal B),\\n      I ^ 2 = ⊥ → Function.Bijective ((Ideal.Quotient.mkₐ R I).comp : (A →ₐ[R] B) → A →ₐ[R] B ⧸ I)\", \"doc\": \"An $ R $-algebra $ A $ is formally étale if and only if for every $ R $-algebra $ B $ and every ideal $ I \\\\subseteq B $ with $ I^2 = 0 $, the natural map $ \\\\text{Hom}_R(A, B) \\\\to \\\\text{Hom}_R(A, B/I) \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; module completion, scheme morphism properties, general sheaf presentations and presheaf Hom do not state this algebraic-space coherent-adic assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"IsAdicComplete\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; module completion, scheme morphism properties, general sheaf presentations and presheaf Hom do not state this algebraic-space coherent-adic assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "inverse.systems.push.pull|adic.*modification|completion.*pushforward",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; module completion, scheme morphism properties, general sheaf presentations and presheaf Hom do not state this algebraic-space coherent-adic assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "adic.*modification|formal.*push.*pull|algebraic.space.*completion",
+   "results": "No hits",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern ordinary adic modules, scheme-limit sections or generic sheaf adjunctions; none states the algebraic-space formal comparison and its uniform exceptional-ideal bound."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Formal completion of a proper pushforward is compared to a coherent formal module by adjunction and formal functions",
+   "results": "Returned SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.PullbackConstruction.adjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pullbackPushforwardAdjunction",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern ordinary adic modules, scheme-limit sections or generic sheaf adjunctions; none states the algebraic-space formal comparison and its uniform exceptional-ideal bound."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"SheafOfModules\"",
+   "results": "No hits",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern ordinary adic modules, scheme-limit sections or generic sheaf adjunctions; none states the algebraic-space formal comparison and its uniform exceptional-ideal bound."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper modification of Noetherian algebraic spaces has a canonical comparison of coherent adic systems with uniformly annihilated kernel and cokernel",
+   "results": "Returned AdicCompletion.map_exact, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.flat_of_isNoetherian, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, AdicCompletion.exists_smodEq_pow_add_one_smul, AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top, IsAdicComplete, AdicCompletion",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern ordinary adic modules, scheme-limit sections or generic sheaf adjunctions; none states the algebraic-space formal comparison and its uniform exceptional-ideal bound."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent formal sheaves on a noetherian algebraic space descend along etale charts and proper pushforward comparison has bounded torsion error",
+   "results": "Returned AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern ordinary adic modules, scheme-limit sections or generic sheaf adjunctions; none states the algebraic-space formal comparison and its uniform exceptional-ideal bound."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-supported-adic-existence",
+  "date": "2026-10-24",
+  "group": "Q73"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting subargument for proper-support Grothendieck existence in Stacks Tag 08BE, serving the inherited compactification/direct-image prerequisite chain of sk-thm-sf-ctf-stability; the comparison morphism in the last paragraph, before applying 08BC.",
+   "via": [
+    "lem-sfb-space-supported-adic-existence",
+    "lem-sfb-space-coherent-formal-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-adic-modification-push-pull",
+  "worker": "stage1",
+  "summary": "Read Stacks 08BD and the entire scheme proof 088B. Reused existing scheme construction and canonical-map affine-annihilation statements, proved uniqueness from formal functions and the affine formal-module equivalence, and descended component maps and a uniform componentwise bound. No new nodes. Normalized inherited doubled TeX escapes and explicitly cited the ideal definition; no mathematical statement change.",
+  "blueprint": "Supporting comparison in Stacks 08BE, last paragraph of the maximal-ideal devissage, before applying 08BC; realizes the created-node ancestry recorded in blueprint.from, within the inherited compactification/direct-image prerequisite chain of sk-thm-sf-ctf-stability. The item has no imported blueprint ancestor (blueprint_refs.py ancestor returned None). The latest unit and chapter were read; their route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-etale-module-pushforward-restriction",
+    "why": "Generic Etale localization commutes with direct image of arbitrary space modules: used for the chartwise formal-comparison/descent argument of Stacks 08BD; the inherited unit supplies no alternative result with this statement."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic Zariski and small etale quasi-coherent modules agree functorially: used for the chartwise formal-comparison/descent argument of Stacks 08BD; the inherited unit supplies no alternative result with this statement."
+   },
+   {
+    "node": "lem-weil-pbc-formal-systems-push-pull-comparison",
+    "why": "Generic Construction of the canonical formal push-pull comparison: used for the chartwise formal-comparison/descent argument of Stacks 08BD; the inherited unit supplies no alternative result with this statement."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-formal-modules-affine",
+    "why": "Generic Coherent formal modules on an affine Noetherian scheme are finite modules over the completion: used for the chartwise formal-comparison/descent argument of Stacks 08BD; the inherited unit supplies no alternative result with this statement."
+   },
+   {
+    "node": "lem-weil-pbc-theorem-formal-functions",
+    "why": "Generic Theorem on formal functions over a Noetherian affine base: used for the chartwise formal-comparison/descent argument of Stacks 08BD; the inherited unit supplies no alternative result with this statement."
+   },
+   {
+    "node": "lem-weil-pbc-formal-systems-push-pull-affine-annihilation",
+    "why": "Generic Affine limit annihilation of the canonical formal comparison: used for the chartwise formal-comparison/descent argument of Stacks 08BD; the inherited unit supplies no alternative result with this statement."
+   },
+   {
+    "node": "lem-weil-pbc-formal-systems-annihilated-by-power",
+    "why": "Generic Morphisms of coherent formal modules whose kernel and cokernel are annihilated by a power of an ideal: used for the chartwise formal-comparison/descent argument of Stacks 08BD; the inherited unit supplies no alternative result with this statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-formal-systems-push-pull-comparison",
+  "lem-weil-pbc-coherent-formal-modules-affine",
+  "lem-weil-pbc-theorem-formal-functions",
+  "lem-weil-pbc-formal-systems-push-pull-affine-annihilation",
+  "lem-weil-pbc-formal-systems-annihilated-by-power"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-93adf5b11",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-93adf5b11 (reviewer sub-agent of L); spot-checked: I read the item in full: no new nodes, 7 steps, and the base statement unchanged apart from a correct added citation of def-sfb-space-quasi-coherent-ideal. Live and side-live still show the item unsplit, so it is not superseded. Source: Stacks 08BD (spaces-more-morphisms.tex 9941-9987). Its statement matches the item hypothesis by hypothesis, and the item's 'can be chosen' equation is the unique α of the 08BD proof. Steps follow that proof. (1) Coherence of q_*E via 08AR; an affine Noetherian atlas T with Noetherian R=T×_X T; base change to charts; V(K) pulls back to V(K|_C). (2) Definition of γ_n and κ_n. (3) On an affine chart, pass to Zariski modules (03DX plus exactness and finite presentation) and apply the 088B construction, with levels reindexed n=r+1. The unit compatibility holds because the scheme lemma allows any adjunction and the standard one has unit m↦1⊗m. (4) Uniqueness from 087W (surjective projections, equivalence) and 02OC at p=0; it never needs κ_n injective. (5) Gluing along T→X, using affine opens of a possibly non-affine R. (6) The 088B affine-annihilation lemma bounds the constructed a on T, and 0888 (3)⇒(1) with a single cover gives a uniform exponent 2t. (7) Coherent kernels and cokernels; K^t kills them on the cover, hence globally. Edge cases tested: empty X; M=E=0; J=O and J=0; K=O and K=0; non-separated X. Duplicate search (rg -L for 08BD, inverse-systems-push-pull): only scheme nodes, so no duplicate. All 17 citations are split and reviewed, the graph is acyclic and nothing cites SGA. The seven declared tool_uses (03LX, 03DX, 088B in two halves, 087W, 02OC, 0888) are accepted as generic. Batch-5 check: every flagged citation reaches sec-trace-formula only through the definitions def-trf-algebraic-space or def-trf-schematically-dense-open, or is a generic Stacks module foundation housed in trf (03LX, 03DX). None is a step of the trace formula or of Poincaré duality, so none needs an assumption leaf. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceAdicModificationPushPull",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_adicModification_pushPull",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceAdicModificationPushPull.lean",
+  "statement": "theorem exists_adicModification_pushPull {S : Scheme.{u}} {V X : AlgebraicSpace S} (hlnV : ∀ T : V.EtaleSite, IsLocallyNoetherian (V.etaleForget.obj T)) (hqcV : CompactSpace (Point V.obj.obj)) (hqsV : IsAbsolutelyQuasiSeparated V) (hlnX : ∀ T : X.EtaleSite, IsLocallyNoetherian (X.etaleForget.obj T)) (hqcX : CompactSpace (Point X.obj.obj)) (hqsX : IsAbsolutelyQuasiSeparated X) (q : V ⟶ X) (hqrep : IsRepresentable q.hom.hom) (hqproper : MapIsProper q) (J K : QuasiCoherentIdeal X) (hU : ∀ T : X.EtaleSite, idealSectionImage K.val.arrow T = ⊤ → IsIso (Limits.pullback.snd q.hom.hom T.obj.hom)) (I : QuasiCoherentIdeal V) (hI : ∃ e : (moduleTensorPullback q).obj (J.val : X.Modules) ⟶ (I.val : V.Modules), Epi e ∧ e ≫ I.val.arrow = idealTensorMap q J) (M : CoherentAdicSystem X J hlnX hqcX hqsX) (E : V.Modules) (hEqc : E.IsQuasicoherent) (hEcoh : ∀ T : V.EtaleSite, RingedSpace.IsCoherent (V.etaleForget.obj T).toRingedSpace ((V.schemeRestriction T).obj E)) (β : (coherentAdicPullbackDiagram q).obj M.obj ≅ (coherentAdicCompletionDiagram I).obj E) : ∃ hH : ((moduleDirectImage q).obj E).IsQuasicoherent ∧ ∀ T : X.EtaleSite, RingedSpace.IsCoherent (X.etaleForget.obj T).toRingedSpace ((X.schemeRestriction T).obj ((moduleDirectImage q).obj E)), ∃ κ : (coherentAdicCompletionDiagram J).obj ((moduleDirectImage q).obj E) ⟶ (coherentAdicCompletionDiagram I).obj E ⋙ moduleDirectImage q, ∃ a : M ⟶ (coherentAdicCompletion J hlnX hqcX hqsX).obj ⟨(moduleDirectImage q).obj E, hH⟩, CoherentAdicKernelCokernelKilled K a.hom ∧ (∀ n : ℕ, (adicQuotientModel J).projection ((moduleDirectImage q).obj E) n ≫ κ.app (op n) = (moduleDirectImage q).map ((adicQuotientModel I).projection E n)) ∧ (∀ n : ℕ, a.hom.app (op n) ≫ κ.app (op n) = (moduleTensorAdjunction q).unit.app (M.obj.obj (op n)) ≫ (moduleDirectImage q).map (β.hom.app (op n)))",
+  "branch": "sheaf-dag",
+  "by": "Q12",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The extended ideal is bound with the epimorphic factorization of idealTensorMap, uniquely determining its subobject; no arbitrary pullback ideal or comparison map is assumed. The isomorphism over the complement is tested on all etale charts whose ideal of sections is the unit ideal. The two quotient/adjunction equations normalize the existential comparison."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e0baadcda",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Read the item, the stmt_dep records and the dependency sources (SpaceCoherentAdicSystem, QuasiCoherentIdeal/idealTensorMap, idealSectionImage, MapIsProper, EtaleSite). The statement matches Stacks 08BD/08BA clause by clause. hU (iso over every chart where K's section ideal is the unit ideal) is equivalent to the iso over X∖V(K). The extended ideal I is fixed by the epi factorization of idealTensorMap, the same convention as in five landed modules. κ is pinned by the quotient-projection equation. hH is a conclusion. CoherentAdicKernelCokernelKilled gives one t≥1 for all levels. The unit/β equation uses moduleTensorAdjunction. lean.statement is verbatim and the node record changes only lean. No duplicate. Docstrings carry source and blueprint, the proof is sorry only, and no definitions are added. Edge cases (empty, zero modules, J/K = 0 or 𝒪, non-separated, arbitrary base) are covered. Not recompiled since no file changed; the worker reports a clean compile."
+ }
+}

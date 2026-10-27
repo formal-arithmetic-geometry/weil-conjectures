@@ -1,0 +1,348 @@
+{
+ "id": "lem-trf-projective-order-completed-normal-form",
+ "kind": "statement",
+ "title": "Completed normal form and weighted order at a projective point",
+ "statement": "Let $k$ be a field [def-weil-field], $r\\ge0$, and $B=k[X_0,\\ldots,X_r]$ with the grading by total degree [def-weil-pbc-mv-polynomial-ring, def-pc-standard-graded-algebra]. Let $\\mathfrak p\\subset k[t_1,\\ldots,t_r]$ be a prime ideal, $L=k[t_1,\\ldots,t_r]_{\\mathfrak p}$, and $N=\\mathfrak pL$ [def-weil-pbc-localization-at-prime]. Write $\\delta(f)=f(1,t_1,\\ldots,t_r)/1$, $U_d=\\{f\\in B_d:\\delta(f)\\in N^d\\}$, and $U=\\bigoplus_{d\\ge0}U_d$. For any ideal $J$, write $\\operatorname{ord}_J(h)=\\sup\\{n:h\\in J^n\\}$, with value $\\infty$ for membership in every power. Suppose $0\\le e\\le r$, $1\\le q_1\\le\\cdots\\le q_e$, and $c_{i\\ell}\\in k$ give a triangular presentation\n$$\\sigma_i=X_i^{q_i}+\\sum_{\\ell=i+1}^{r+1}c_{i\\ell}X_\\ell^{q_i},\\quad X_{r+1}=X_0,\\qquad U=k[\\sigma_1,\\ldots,\\sigma_e],$$\nwhere $q_i=1$ in characteristic zero and the $q_i$ are powers of the characteristic otherwise. Set $\\rho_i=\\delta(\\sigma_i)$, $\\Delta=\\{\\beta\\in\\mathbf N^e:0\\le\\beta_i<q_i\\}$, and $L_0=k[t_{e+1},\\ldots,t_r]_{\\mathfrak p\\cap k[t_{e+1},\\ldots,t_r]}$ with maximal ideal $N_0$. Denote maximal-ideal completions by hats [def-weil-pbc-adic-completion]. There exist $a_i\\in L_0$, $h\\ge0$, $\\omega_1,\\ldots,\\omega_h\\in N_0$, and a field $F\\subset\\widehat L_0$ such that $z_i=t_i-a_i\\in N$, and the induced inclusions and continuous isomorphisms identify\n$$\\widehat L_0=F[[\\omega_1,\\ldots,\\omega_h]],\\qquad \\widehat L=F[[\\omega_1,\\ldots,\\omega_h,z_1,\\ldots,z_e]].$$\nHere power series have their usual coefficientwise meaning [def-weil-pbc-multivariate-power-series], the displayed variables generate the respective maximal ideals, and $F\\to L_0/N_0\\to L/N$ is an isomorphism. The natural map $L\\to\\widehat L$ is injective and preserves orders: $\\operatorname{ord}_N(u)=\\operatorname{ord}_{N\\widehat L}(u)$ for $u\\in L$. Every $v\\in\\widehat L$ has a unique convergent expansion\n$$v=\\sum_{A\\in\\mathbf N^e,\\,\\beta\\in\\Delta,\\,\\gamma\\in\\mathbf N^h}v_{A\\beta\\gamma}\\rho^Az^\\beta\\omega^\\gamma,\\qquad v_{A\\beta\\gamma}\\in F,$$\nand\n$$\\operatorname{ord}_{N\\widehat L}(v)=\\min\\{q\\cdot A+|\\beta|+|\\gamma|:v_{A\\beta\\gamma}\\ne0\\},\\qquad q\\cdot A=\\sum_iq_iA_i,$$\nwith minimum of the empty set $\\infty$. Let $\\epsilon_0:k\\hookrightarrow F$ be the homomorphism obtained by reducing $k$ to $L_0/N_0$ and inverting the residue isomorphism of $F$. For a weighted homogeneous polynomial $P(S_1,\\ldots,S_e)\\in k[S]$ of weight $d$, where $S_i$ has weight $q_i$, write $P^{\\epsilon_0}$ for its coefficient image. Then\n$$P(\\rho)-P^{\\epsilon_0}(\\rho)\\in(N\\widehat L)^{d+1}.$$\nNo containment of the original copy of $k$ in $F$ is asserted. Empty variable tuples are included.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "External source read online: Hironaka, Certain numerical characters of singularities, J. Math. Kyoto Univ. 10-1 (1970), Lemma 14 and (14.1)-(14.2), p.169; Remarks (16.1)-(16.2), pp.171-172. https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf. Archival copy WANTED; the ILO document is the VIII 2.3.13 ancestor motivation only. No Stacks tag states this specialized assertion."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-pc-standard-graded-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-trf-permissible-basis-chart-data",
+  "def-trf-local-standard-basis-invariants"
+ ],
+ "proof": [
+  {
+   "text": "For $1\\le j\\le e+1$, put $R_j=k[t_j,\\ldots,t_r]_{\\mathfrak p\\cap k[t_j,\\ldots,t_r]}$ and let $M_j$ be its maximal ideal; thus $R_{e+1}=L_0$. By [lem-weil-pbc-polynomial-ring-field-regular-ring], these rings and $L$ are Noetherian regular local. Localizing first the suffix coefficients and then the remaining variables identifies $L$ with a localization of $R_j[t_1,\\ldots,t_{j-1}]$ at a prime contracting to $M_j$. The denominators on both sides are exactly those inverted by localization at $\\mathfrak p$. By [lem-trf-polynomial-localization-order-reflection], $N^a\\cap R_j=M_j^a$ for every $a$. Since $\\sigma_j\\in U_{q_j}$, we obtain $\\rho_j\\in M_j^{q_j}$ for $j\\le e$.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-field-regular-ring",
+    "lem-trf-polynomial-localization-order-reflection",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hironaka-certain-numerical-characters-of-singularities-1970.pdf",
+    "place": "Lemma 14, proof, p.169: suffix local rings and contraction of powers; explicit application of the generic polynomial-localization lemma."
+   }
+  },
+  {
+   "text": "Write $K_{j+1}=R_{j+1}/M_{j+1}$. The quotient $R_j/M_{j+1}R_j$ is $K_{j+1}[t_j]_{Q_j}$ for a prime $Q_j$. The image $g_j$ of $\\rho_j$ is monic of degree $q_j$ and belongs to $(Q_jK_{j+1}[t_j]_{Q_j})^{q_j}$. It is nonzero and nonunit, so $Q_j\\ne0$. By [lem-pur-polynomial-field-pid], write $Q_j=(f_j)$ with $f_j$ monic irreducible. Membership of $g_j$ in the localized power implies $f_j^{q_j}\\mid g_j$ in the polynomial ring: a denominator outside $(f_j)$ is coprime to $f_j$, so Bezout cancels it successively. Thus $q_j\\deg f_j\\le\\deg g_j=q_j$, whence $f_j=t_j-b_j$ for $b_j\\in K_{j+1}$. Consequently $R_j/M_j=K_{j+1}$ by the natural map. Applying this for $j=e,e-1,\\ldots,1$ proves $L_0/N_0\\xrightarrow{\\sim}L/N$.",
+   "uses": [
+    "lem-pur-polynomial-field-pid"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hironaka-certain-numerical-characters-of-singularities-1970.pdf",
+    "place": "Lemma 14, proof, p.169. Degree-versus-order calculation in the one-variable closed fibre; the PID input is Stacks Tag 030A (lemma-polynomial-domain-normal), field case."
+   }
+  },
+  {
+   "text": "Choose $a_i\\in L_0$ lifting the residue of $t_i$ under the preceding residue isomorphism and put $z_i=t_i-a_i$. In $L_0[t_1,\\ldots,t_e]$, the prime defining $L$ contains $(N_0,z_1,\\ldots,z_e)$, whose quotient is the field $L_0/N_0$. Hence that prime equals this maximal ideal. Translation of the variables therefore identifies\n$$L=(L_0[z_1,\\ldots,z_e])_{(N_0,z_1,\\ldots,z_e)}.$$\nThe identification fixes $L_0$, and each $z_i$ lies in $N$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hironaka-certain-numerical-characters-of-singularities-1970.pdf",
+    "place": "After Lemma 14, p.169, choice of lifts and (14.1)."
+   }
+  },
+  {
+   "text": "Choose a regular system of parameters $\\omega_1,\\ldots,\\omega_h$ of $L_0$, so $h=\\dim L_0$ and $N_0=(\\omega)$. By [lem-weil-pbc-completion-regular-local] and [lem-weil-pbc-completion-dimension], $\\widehat L_0$ is Noetherian regular local of dimension $h$, with maximal ideal $N_0\\widehat L_0$; by [lem-weil-pbc-completion-noetherian-quotient-noetherian] it is $N_0\\widehat L_0$-adically complete. Apply [lem-weil-pbc-cohen-coefficient-ring-exists] to it: it gives a coefficient ring $\\Lambda\\subseteq\\widehat L_0$ with maximal ideal $p\\Lambda$, $p$ the characteristic of $L_0/N_0$, mapping isomorphically onto $L_0/N_0$. Since $k\\subset L_0$, this characteristic is that of $k$: if it is $0$, $\\Lambda$ is a field; if it is $p>0$, then $p=0$ in $\\widehat L_0$, so $p\\Lambda=0$ and again $\\Lambda$ is a field. Let $c:L_0/N_0\\to\\widehat L_0$ be the inverse residue isomorphism followed by inclusion, a section of the residue map, and set $F=c(L_0/N_0)=\\Lambda$. Apply [lem-trf-parameter-chart-completion-substitution] with $R=L_0$, parameters $\\omega$, $r=e$ and $J=\\varnothing$ to the ring in Step 3. It gives the continuous coordinate isomorphisms $\\widehat L_0=F[[\\omega]]$ and $\\widehat L=F[[\\omega,z]]$, with their stated parameter images and coefficient inclusion. The induced map between completions is inclusion of the $\\omega$ variables and coefficients, hence is injective. The field maps on residues are those of Step 2.",
+   "uses": [
+    "lem-weil-pbc-completion-regular-local",
+    "lem-weil-pbc-completion-dimension",
+    "lem-weil-pbc-completion-noetherian-quotient-noetherian",
+    "lem-weil-pbc-cohen-coefficient-ring-exists",
+    "lem-trf-parameter-chart-completion-substitution",
+    "def-weil-pbc-regular-system-of-parameters"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hironaka-certain-numerical-characters-of-singularities-1970.pdf",
+    "place": "(14.1)-(14.2), p.169; Cohen structure is used only for a coefficient section. Stacks Tags 07NY, 07NV, 05GH, 032A and 0C0S via the cited nodes."
+   }
+  },
+  {
+   "text": "The maximal ideal of $L$ is finitely generated, since $L$ is Noetherian. By [lem-weil-pbc-adic-completion-mod-power], the map $L\\to\\widehat L/(N\\widehat L)^a$ is the quotient map $L\\to L/N^a$ for every $a\\ge1$. Thus $u\\in N^a$ if and only if its completed image lies in $(N\\widehat L)^a$, and the two orders agree, including infinite order. The kernel of $L\\to\\widehat L$ is $\\bigcap_aN^a$, which is zero by [lem-weil-pbc-krull-intersection-jacobson], with module $L$ and ideal $N$ contained in the Jacobson radical of the local ring. This proves injectivity.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-mod-power",
+    "lem-weil-pbc-krull-intersection-jacobson"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hironaka-certain-numerical-characters-of-singularities-1970.pdf",
+    "place": "Remark (16.2), p.172, parenthetical order equality; Stacks Tags 05GG (lemma-hathat-finitely-generated) and 00IQ (lemma-intersection-powers-ideal-module)."
+   }
+  },
+  {
+   "text": "In the coordinates of Step 4, put $\\mathfrak m=(\\omega,z)$. Additivity of the $q_i$-th power in positive characteristic (and $q_i=1$ in characteristic zero) gives\n$$\\rho_i=z_i^{q_i}+\\sum_{i<\\ell\\le e}c_{i\\ell}z_\\ell^{q_i}+b_i,\\qquad b_i\\in L_0.$$\nHere $b_i=a_i^{q_i}+\\sum_{i<\\ell\\le e}c_{i\\ell}a_\\ell^{q_i}+\\sum_{e<\\ell\\le r}c_{i\\ell}t_\\ell^{q_i}+c_{i,r+1}$. Since $\\rho_i\\in\\mathfrak m^{q_i}$ and all displayed $z$ terms have that order or higher, $b_i\\in\\mathfrak m^{q_i}$. Setting $z=0$ gives $b_i\\in(\\omega)^{q_i}F[[\\omega]]$. An element of $(\\omega,z)^n$ is exactly a series with no terms of total degree below $n$: one implication follows by multiplication, and conversely group each monomial of degree at least $n$ by a chosen degree-$n$ divisor, obtaining a finite sum of degree-$n$ monomials times series. Hence the degree-$q_i$ form of $\\rho_i$ is\n$$H_i=Z_i^{q_i}+\\sum_{i<\\ell\\le e}\\epsilon_0(c_{i\\ell})Z_\\ell^{q_i}+B_i(W),$$\nwhere $B_i$ is homogeneous of degree $q_i$. Coefficients $c_{i\\ell}$ may have higher $\\omega$ terms; only their residues enter $H_i$.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hironaka-certain-numerical-characters-of-singularities-1970.pdf",
+    "place": "(13.2), p.168, (14.2), p.169 and Remark (16.2), p.172; explicit initial homogeneous forms."
+   }
+  },
+  {
+   "text": "For each $n$, the forms $H^AZ^\\beta W^\\gamma$ with $q\\cdot A+|\\beta|+|\\gamma|=n$ are a basis of the degree-$n$ homogeneous polynomials in $(Z,W)$. Indeed, order degree-$n$ monomials lexicographically with $Z_1>\\cdots>Z_e>W_1>\\cdots>W_h$. The leading monomial of $H_i$ is $Z_i^{q_i}$ with coefficient $1$; therefore the leading monomial of $H^AZ^\\beta W^\\gamma$ is $Z^{qA+\\beta}W^\\gamma$, with coefficient $1$. The componentwise Euclidean divisions $D_i=q_iA_i+\\beta_i$, $0\\le\\beta_i<q_i$, biject these triples with all degree-$n$ monomials. The change-of-coordinates matrix on this finite ordered set is triangular with diagonal $1$: successive subtraction of the largest monomial gives spanning, and the largest monomial of a nonzero finite combination proves independence. This proves the claim without a freeness or division theorem. It also shows that the degree-$q_i$ form of $\\rho_i$ is nonzero, so $\\operatorname{ord}_{\\mathfrak m}(\\rho_i)=q_i$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hironaka-certain-numerical-characters-of-singularities-1970.pdf",
+    "place": "Remark (16.2), p.172, largest-exponent argument expanded degree by degree. The homogeneous triangular matrix is finite in every degree."
+   }
+  },
+  {
+   "text": "Construct the coefficients of $v$ by successive total degrees. After degrees below $n$ have been subtracted, the remainder lies in $\\mathfrak m^n$. Expand its degree-$n$ component in the basis of Step 7 and subtract the corresponding finite sum of $\\rho^Az^\\beta\\omega^\\gamma$. Its degree-$n$ component is exactly that basis expansion by Step 6, so the new remainder lies in $\\mathfrak m^{n+1}$. Starting with $n=0$ constructs the required series; it converges because all terms added at stage $n$ lie in $\\mathfrak m^n$, and the coefficientwise model $F[[\\omega,z]]$ is complete and separated. If two coefficient families differ, choose the least weight where they differ; finitely many triples have that weight, and their nonzero combination has nonzero initial form by Step 7. Thus the families cannot yield the same series. The same argument at the least nonzero coefficient weight proves the displayed order formula. The all-zero family represents zero and has order $\\infty$. With empty variable tuples the argument is unchanged (degree zero alone when all variables are absent).",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hironaka-certain-numerical-characters-of-singularities-1970.pdf",
+    "place": "(14.2), p.169, and Remark (16.2), p.172: formal basis obtained by the finite-degree triangular reduction, with convergence and uniqueness written out."
+   }
+  },
+  {
+   "text": "The composite $k\\to L_0/N_0\\xrightarrow{c}F$ is the required injective homomorphism $\\epsilon_0$, since the residue of a nonzero field element is nonzero. For every $a\\in k$, the elements $a$ and $\\epsilon_0(a)$ of $\\widehat L_0$ have the same residue, so their difference lies in $(\\omega)\\subseteq\\mathfrak m$. Write the weighted homogeneous polynomial as $P=\\sum_{q\\cdot A=d}a_AS^A$. Then\n$$P(\\rho)-P^{\\epsilon_0}(\\rho)=\\sum_{q\\cdot A=d}(a_A-\\epsilon_0(a_A))\\rho^A\\in\\mathfrak m^{d+1},$$\nsince $\\rho_i\\in\\mathfrak m^{q_i}$. The zero polynomial and $d=0$ are covered by the same computation. This proves the last assertion without requiring that the original copy of $k$ lie in $F$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/hironaka-certain-numerical-characters-of-singularities-1970.pdf",
+    "place": "Remark (16.1), pp.171-172, the explicit coefficient-difference computation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-regular-system-of-parameters",
+  "lem-pur-polynomial-field-pid",
+  "lem-trf-parameter-chart-completion-substitution",
+  "lem-trf-polynomial-localization-order-reflection",
+  "lem-weil-pbc-adic-completion-mod-power",
+  "lem-weil-pbc-cohen-coefficient-ring-exists",
+  "lem-weil-pbc-completion-dimension",
+  "lem-weil-pbc-completion-noetherian-quotient-noetherian",
+  "lem-weil-pbc-completion-regular-local",
+  "lem-weil-pbc-krull-intersection-jacobson",
+  "lem-weil-pbc-polynomial-ring-field-regular-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hironaka-certain-numerical-characters-of-singularities-1970.pdf",
+  "place": "Detailed reconstruction of Hironaka, Certain numerical characters of singularities (1970), Lemma 14, (14.1)-(14.2), p.169 and Remarks (16.1)-(16.2), pp.171-172; read online at https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf; archival copy WANTED. Generic local algebra from the cited Stacks nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coefficientField|coefficient_field|weightedOrder|weighted_order",
+   "results": "{\"t\": \"2026-10-23T21:20:04Z\", \"tool\": \"grep\", \"query\": \"coefficientField|coefficient_field|weightedOrder|weighted_order\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 24, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/PowerSeries/Substitution.lean\", \"Mathlib/RingTheory/PowerSeries/Substitution.lean\", \"Mathlib/RingTheory/PowerSeries/Substitution.lean\", \"Mathlib/RingTheory/PowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean\", \"Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean\", \"Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean\", \"Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean\"], \"digest\": \"7ab27e029da8a56b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Read returned signatures. Generic polynomial bases, homogeneous components, power-series weighted orders, division, or abstract projective lifting do not provide this projective-prime coordinate or filtered-relation assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weighted valuation formula in the completion of a polynomial local ring using triangular additive polynomials",
+   "results": "{\"t\": \"2026-10-23T21:20:04Z\", \"tool\": \"leansearch\", \"query\": \"Weighted valuation formula in the completion of a polynomial local ring using triangular additive polynomials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Valuation.instCoeCompletion\", \"AdicCompletion.val_sum_apply\", \"Valued.extensionValuation\", \"Valued.extension\", \"Valuation.Completion\", \"Valued.valuedCompletion_apply\", \"IsDiscreteValuationRing.addVal\", \"AdicCompletion.val_sum\"], \"digest\": \"883449e2d8b96c31\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Read returned signatures. Generic polynomial bases, homogeneous components, power-series weighted orders, division, or abstract projective lifting do not provide this projective-prime coordinate or filtered-relation assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPowerSeries\", \"order\"",
+   "results": "{\"t\": \"2026-10-23T21:20:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPowerSeries\\\", \\\"order\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"MvPowerSeries.order\", \"MvPowerSeries.weightedOrder\", \"MvPowerSeries.order_zero\", \"MvPowerSeries.weightedOrder_zero\", \"MvPowerSeries.weightedOrder_one\", \"MvPowerSeries.order_eq_top_iff\", \"MvPowerSeries.weightedOrder_eq_top_iff\", \"MvPowerSeries.ne_zero_iff_order_finite\"], \"digest\": \"e50feda20422d594\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Read returned signatures. Generic polynomial bases, homogeneous components, power-series weighted orders, division, or abstract projective lifting do not provide this projective-prime coordinate or filtered-relation assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed local polynomial ring at a prime has weighted monomial normal expansion in maximal order additive forms",
+   "results": "{\"t\": \"2026-10-23T21:20:06Z\", \"tool\": \"leanfinder\", \"query\": \"Completed local polynomial ring at a prime has weighted monomial normal expansion in maximal order additive forms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.weierstrassDistinguished\", \"PowerSeries.weierstrassMod\", \"PowerSeries.weierstrassDiv\", \"PowerSeries.exists_isWeierstrassFactorization\", \"PowerSeries.isWeierstrassFactorization_weierstrassDistinguished_weierstrassUnit\", \"PowerSeries.weierstrassDistinguished_mul\", \"PowerSeries.isDistinguishedAt_weierstrassDistinguished\", \"PowerSeries.weierstrassUnit\"], \"digest\": \"9a827e527c038993\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Read returned signatures. Generic polynomial bases, homogeneous components, power-series weighted orders, division, or abstract projective lifting do not provide this projective-prime coordinate or filtered-relation assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPowerSeries.weightedOrder\"",
+   "results": "{\"t\": \"2026-10-23T21:22:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPowerSeries.weightedOrder\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"MvPowerSeries.weightedOrder\", \"MvPowerSeries.weightedOrder_zero\", \"MvPowerSeries.weightedOrder_one\", \"MvPowerSeries.weightedOrder_eq_top_iff\", \"MvPowerSeries.weightedOrder_neg\", \"MvPowerSeries.weightedOrder_mul_ge\", \"MvPowerSeries.weightedOrder_add_of_weightedOrder_ne\", \"MvPowerSeries.weightedOrder_monomial_of_ne_zero\"], \"digest\": \"398dae4f9fe72b5a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Read returned signatures. Generic polynomial bases, homogeneous components, power-series weighted orders, division, or abstract projective lifting do not provide this projective-prime coordinate or filtered-relation assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normal form valuation equals least weighted degree for a finite free power series extension with bounded monomial exponents",
+   "results": "{\"t\": \"2026-10-23T21:22:17Z\", \"tool\": \"leanfinder\", \"query\": \"Normal form valuation equals least weighted degree for a finite free power series extension with bounded monomial exponents\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPowerSeries.le_weightedOrder\", \"MvPowerSeries.nat_le_weightedOrder\", \"MvPowerSeries.weightedOrder_eq_nat\", \"MvPowerSeries.weightedOrder_le\", \"MvPowerSeries.weightedOrder_monomial\", \"MvPowerSeries.weightedOrder\", \"MvPowerSeries.weightedOrder_monomial_of_ne_zero\", \"MvPowerSeries.ne_zero_iff_weightedOrder_finite\"], \"digest\": \"bbc612b85a491ccd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Read returned signatures. Generic polynomial bases, homogeneous components, power-series weighted orders, division, or abstract projective lifting do not provide this projective-prime coordinate or filtered-relation assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed local polynomial ring at a prime has weighted monomial normal expansion in maximal order additive forms",
+   "results": "{\"t\": \"2026-10-23T22:09:09Z\", \"tool\": \"leanfinder\", \"query\": \"Completed local polynomial ring at a prime has weighted monomial normal expansion in maximal order additive forms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.weierstrassDistinguished\", \"PowerSeries.weierstrassMod\", \"PowerSeries.weierstrassDiv\", \"PowerSeries.exists_isWeierstrassFactorization\", \"PowerSeries.isWeierstrassFactorization_weierstrassDistinguished_weierstrassUnit\", \"PowerSeries.weierstrassDistinguished_mul\", \"PowerSeries.isDistinguishedAt_weierstrassDistinguished\", \"PowerSeries.weierstrassUnit\"], \"digest\": \"9a827e527c038993\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Generic MvPowerSeries weightedOrder declarations concern an already supplied power series, not the projective residue-field, coordinate or triangular normal-form comparison. Valuation completions and Weierstrass division do not state the item. Read Mathlib/RingTheory/MvPowerSeries/Order.lean and RegularLocalRing/Polynomial.lean."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weighted valuation formula in the completion of a polynomial local ring using triangular additive polynomials",
+   "results": "{\"t\": \"2026-10-23T22:10:22Z\", \"tool\": \"leansearch\", \"query\": \"Weighted valuation formula in the completion of a polynomial local ring using triangular additive polynomials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Valuation.instCoeCompletion\", \"AdicCompletion.val_sum_apply\", \"Valued.extensionValuation\", \"Valued.extension\", \"Valuation.Completion\", \"Valued.valuedCompletion_apply\", \"IsDiscreteValuationRing.addVal\", \"AdicCompletion.val_sum\"], \"digest\": \"883449e2d8b96c31\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Generic MvPowerSeries weightedOrder declarations concern an already supplied power series, not the projective residue-field, coordinate or triangular normal-form comparison. Valuation completions and Weierstrass division do not state the item. Read Mathlib/RingTheory/MvPowerSeries/Order.lean and RegularLocalRing/Polynomial.lean."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPowerSeries\", \"order\"",
+   "results": "{\"t\": \"2026-10-23T22:10:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPowerSeries\\\", \\\"order\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"MvPowerSeries.order\", \"MvPowerSeries.weightedOrder\", \"MvPowerSeries.order_zero\", \"MvPowerSeries.weightedOrder_zero\", \"MvPowerSeries.weightedOrder_one\", \"MvPowerSeries.order_eq_top_iff\", \"MvPowerSeries.weightedOrder_eq_top_iff\", \"MvPowerSeries.ne_zero_iff_order_finite\"], \"digest\": \"e50feda20422d594\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Generic MvPowerSeries weightedOrder declarations concern an already supplied power series, not the projective residue-field, coordinate or triangular normal-form comparison. Valuation completions and Weierstrass division do not state the item. Read Mathlib/RingTheory/MvPowerSeries/Order.lean and RegularLocalRing/Polynomial.lean."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientField|coefficient_field|weightedOrder|weighted_order",
+   "results": "{\"t\": \"2026-10-23T22:10:22Z\", \"tool\": \"grep\", \"query\": \"coefficientField|coefficient_field|weightedOrder|weighted_order\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 24, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/PiTopology.lean\", \"Mathlib/RingTheory/MvPowerSeries/PiTopology.lean\", \"Mathlib/RingTheory/MvPowerSeries/PiTopology.lean\", \"Mathlib/RingTheory/MvPowerSeries/PiTopology.lean\", \"Mathlib/RingTheory/MvPowerSeries/PiTopology.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\"], \"digest\": \"58ee82307b7c89b0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Generic MvPowerSeries weightedOrder declarations concern an already supplied power series, not the projective residue-field, coordinate or triangular normal-form comparison. Valuation completions and Weierstrass division do not state the item. Read Mathlib/RingTheory/MvPowerSeries/Order.lean and RegularLocalRing/Polynomial.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normal form valuation equals least weighted degree for a finite free power series extension with bounded monomial exponents",
+   "results": "{\"t\": \"2026-10-23T22:16:38Z\", \"tool\": \"leanfinder\", \"query\": \"Normal form valuation equals least weighted degree for a finite free power series extension with bounded monomial exponents\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPowerSeries.le_weightedOrder\", \"MvPowerSeries.nat_le_weightedOrder\", \"MvPowerSeries.weightedOrder_eq_nat\", \"MvPowerSeries.weightedOrder_le\", \"MvPowerSeries.weightedOrder_monomial\", \"MvPowerSeries.weightedOrder\", \"MvPowerSeries.weightedOrder_monomial_of_ne_zero\", \"MvPowerSeries.ne_zero_iff_weightedOrder_finite\"], \"digest\": \"bbc612b85a491ccd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Generic MvPowerSeries weightedOrder declarations concern an already supplied power series, not the projective residue-field, coordinate or triangular normal-form comparison. Valuation completions and Weierstrass division do not state the item. Read Mathlib/RingTheory/MvPowerSeries/Order.lean and RegularLocalRing/Polynomial.lean."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPowerSeries.weightedOrder\"",
+   "results": "{\"t\": \"2026-10-23T22:19:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPowerSeries.weightedOrder\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"MvPowerSeries.weightedOrder\", \"MvPowerSeries.weightedOrder_zero\", \"MvPowerSeries.weightedOrder_one\", \"MvPowerSeries.weightedOrder_eq_top_iff\", \"MvPowerSeries.weightedOrder_neg\", \"MvPowerSeries.weightedOrder_mul_ge\", \"MvPowerSeries.weightedOrder_add_of_weightedOrder_ne\", \"MvPowerSeries.weightedOrder_monomial_of_ne_zero\"], \"digest\": \"398dae4f9fe72b5a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Generic MvPowerSeries weightedOrder declarations concern an already supplied power series, not the projective residue-field, coordinate or triangular normal-form comparison. Valuation completions and Weierstrass division do not state the item. Read Mathlib/RingTheory/MvPowerSeries/Order.lean and RegularLocalRing/Polynomial.lean."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-projective-order-homogeneous-approximation",
+  "date": "2026-10-24",
+  "group": "Q51"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Smooth-stable Hilbert--Samuel head and component-dimension correction. Refinement here: Component-dimension rigidity at a Hilbert--Samuel near point of a blowup. Supporting refinement: Normal-flat normal cone and linear vertex at a Hilbert--Samuel near point. Lower input here: Theorem 2.10(2), printed pp.32--33, and the characteristic-independent additive-subgroup argument in the proof of Theorem 2.14, printed p.36, before its linearity argument: Hironaka [H4], Certain numerical characters of singularities, Theorem IV, and [H5], Additive groups associated with points of a projective space, Theorem 2. The normal-cone quotient used there is Theorem 2.2(2)(ii), printed p.28. Refinement in Q87: Numerical near-point input: normal-cone equations have generators in the projective-point order algebra. Q103 refinement: Proposition 21(i),(ii), p.181, using the order algebra of section 13, p.168, and the chart convention on p.169; the case of equal degree sequences satisfies its non-strict lexicographic hypothesis. The proposition follows from Lemma 20, pp.175–181; Q63 refinement: the inductive correction of a single index in Hironaka Lemma 20, pp.176–181, used to assemble Proposition 21, p.181. Q33 refinement: Hironaka (1970), Lemma 18, pp.174–175, including its two particular consequences. Q51 refinement: Lemma 14 and (14.1)-(14.2), p.169; Remarks (16.1)-(16.2), pp.171-172.",
+   "via": [
+    "lem-trf-projective-order-homogeneous-approximation",
+    "lem-trf-permissible-standard-basis-one-step",
+    "lem-trf-permissible-adapted-standard-basis",
+    "lem-trf-near-blowup-order-generators",
+    "lem-trf-near-point-additive-symmetry",
+    "lem-trf-hilbert-samuel-near-normal-cone",
+    "lem-trf-hilbert-samuel-equality-component-rigidity",
+    "lem-trf-hilbert-samuel-smooth-dimension-profile",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-projective-order-completed-normal-form",
+  "worker": "stage1",
+  "summary": "Q83: kept the statement; proved suffix residue equality by polynomial-local order reflection and a one-variable degree bound, constructed compatible coefficient coordinates, established the weighted expansion by finite homogeneous triangular matrices and successive-degree lifting, and proved the coefficient discrepancy. One generic statement-only node exposes the order-reflection input. No Lean attachment. Reviewer FIX: Step 4's residue section now comes from the generic Cohen coefficient-ring node instead of a node of the route dropped on 2026-10-19.",
+  "blueprint": "Historical alteration-resolution subbranch of lem-trf-local-term-locality recorded in blueprint.from; this split realizes Hironaka Lemma 14, (14.1)-(14.2) and Remarks (16.1)-(16.2) used by the parent homogeneous approximation. The latest blueprint locality node has no separate statement of this local algebra.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-completion-regular-local",
+    "why": "Generic commutative-algebra input lem-weil-pbc-completion-regular-local: used for polynomial local regularity, completions or coefficient sections; no node of this unit supplies that general assertion."
+   },
+   {
+    "node": "lem-weil-pbc-completion-dimension",
+    "why": "Generic commutative-algebra input lem-weil-pbc-completion-dimension: used for polynomial local regularity, completions or coefficient sections; no node of this unit supplies that general assertion."
+   },
+   {
+    "node": "lem-weil-pbc-completion-noetherian-quotient-noetherian",
+    "why": "Generic commutative-algebra input lem-weil-pbc-completion-noetherian-quotient-noetherian: completeness of the maximal-ideal completion of L_0; no node of this unit supplies that general assertion."
+   },
+   {
+    "node": "lem-weil-pbc-cohen-coefficient-ring-exists",
+    "why": "Generic commutative-algebra input lem-weil-pbc-cohen-coefficient-ring-exists: a Cohen coefficient ring, a field in equal characteristic, giving the residue section c; no node of this unit supplies that general assertion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-completion-regular-local",
+  "lem-weil-pbc-completion-dimension",
+  "lem-weil-pbc-completion-noetherian-quotient-noetherian",
+  "lem-weil-pbc-cohen-coefficient-ring-exists"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q83-f66a8fc74",
+  "group": "Q83",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-f66a8fc74 (reviewer sub-agent of L); spot-checked: Read the item, all 9 steps, the new node and every cited statement in full; this is a first split of an item still unsplit in live/side-live, with no repair note and the statement and stmt_deps unchanged. Hironaka 1970 is not in literature/ (WANTED, proof_origin agent), so I checked each step on its own mathematics. Mechanical finding: lem-per-prime-field-complete-coordinate-model is on coord/route-pivot-dropped.txt (2026-10-19 artin-gabber section), and a reachable node may not cite it. It was the only dropped id in the item's 237-node closure, and Step 4 used it only for a residue section. FIX: Step 4 now gets the section from lem-weil-pbc-completion-noetherian-quotient-noetherian (05GH: L_0-hat is complete) and lem-weil-pbc-cohen-coefficient-ring-exists (032A: the coefficient ring is a field in equal characteristic since k is in L_0). Both are generic sk-thm-p1 nodes with no dropped ids in their closures and are declared in tool_uses; proof_deps and the step source are updated, and no node is dropped. Steps checked: (1) the localization identification, then N^a∩R_j=M_j^a, so rho_j is in M_j^{q_j}; (2) PID plus Bezout gives f^q dividing g, hence deg f=1 and the residue fields agree; (3) the prime equals (N_0,z); (4) parameter-chart node with J empty, all hypotheses hold; (5) mod-power kernel plus Krull; (6) Frobenius additivity, b_i in (omega)^{q_i}, initial forms with eps0 coefficients; (7) lex unitriangular basis via D_i=q_iA_i+beta_i; (8) degree-by-degree lifting, uniqueness and the order formula; (9) a-eps0(a) in (omega), giving the m^{d+1} bound. New node lem-trf-polynomial-localization-order-reflection is true (flat local with regular fibre, base parameters extend, gr injective because the residue extension is injective, Krull for infinite order), statement-only, self-contained, a generic lemma smaller than the item, and not a duplicate of local-polynomial-tangent-extension, simple-residue-extension-hilbert-comparison, smooth-local-tangent-cone-extension or the normal-flat nodes. Edge cases checked: e=0, q=1, r=e=h=0, zero element, and the inseparable F_p(s) example. No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ProjectiveOrderCompletedNormalForm",
+  "declaration": "Hironaka.projective_order_completed_normal_form",
+  "declarations": [
+   "Hironaka.ProjectiveOrderCompletion.AffinePolynomial",
+   "Hironaka.ProjectiveOrderCompletion.suffixPolynomial",
+   "Hironaka.ProjectiveOrderCompletion.Local",
+   "Hironaka.ProjectiveOrderCompletion.SuffixLocal",
+   "Hironaka.ProjectiveOrderCompletion.suffixInclusion",
+   "Hironaka.ProjectiveOrderCompletion.Completed",
+   "Hironaka.ProjectiveOrderCompletion.SuffixCompleted",
+   "Hironaka.ProjectiveOrderCompletion.completedIdeal",
+   "Hironaka.ProjectiveOrderCompletion.suffixCompletedIdeal",
+   "Hironaka.ProjectiveOrderCompletion.delta",
+   "Hironaka.ProjectiveOrderCompletion.translated",
+   "Hironaka.ProjectiveOrderCompletion.expansionWeight",
+   "Hironaka.ProjectiveOrderCompletion.expansionTruncation",
+   "Hironaka.projective_order_completed_normal_form"
+  ],
+  "file": "lean/Sheaf/RingTheory/ProjectiveOrderCompletedNormalForm.lean",
+  "statement": "theorem projective_order_completed_normal_form {k : Type u} [Field k] (r e : ℕ) (he : e ≤ r) (p : PrimeSpectrum (AffinePolynomial k r)) (q : Fin e → ℕ) (hq : ∀ i : Fin e, 1 ≤ q i) (hmono : Monotone q) (hchar : ∀ i : Fin e, if ringChar k = 0 then q i = 1 else ∃ n : ℕ, q i = ringChar k ^ n) (c : Fin e → Fin (r + 1) → k) (σ : Fin e → MvPolynomial (Fin (r + 1)) k) (hσ : ∀ i : Fin e, σ i = MvPolynomial.X ⟨i.val + 1, by omega⟩ ^ q i + ∑ l ∈ Finset.univ.filter (fun l : Fin (r + 1) ↦ i.val + 1 < l.val ∨ l = 0), MvPolynomial.C (c i l) * MvPolynomial.X l ^ q i) (hU : Algebra.adjoin k {f : MvPolynomial (Fin (r + 1)) k | ∃ d : ℕ, InOrderSpace r p d f} = Algebra.adjoin k (Set.range σ)) : ∃ (a : Fin e → SuffixLocal k r e p) (h : ℕ) (ω : Fin h → SuffixLocal k r e p), (∀ i : Fin e, translated k r e p he a i ∈ IsLocalRing.maximalIdeal (Local k r p)) ∧ (∀ j : Fin h, ω j ∈ IsLocalRing.maximalIdeal (SuffixLocal k r e p)) ∧ ∃ (F : Subring (SuffixCompleted k r e p)), IsField F ∧ ∃ (ε : F ≃+* IsLocalRing.ResidueField (SuffixLocal k r e p)) (j : SuffixCompleted k r e p →+* Completed k r p) (E₀ : MvPowerSeries (Fin h) F ≃+* SuffixCompleted k r e p) (E : MvPowerSeries (Fin h ⊕ Fin e) F ≃+* Completed k r p), (∀ b : F, ε b = AdicCompletion.evalOneₐ (IsLocalRing.maximalIdeal (SuffixLocal k r e p)) b.val) ∧ Function.Bijective (IsLocalRing.ResidueField.map (suffixInclusion k r e p)) ∧ Function.Injective (suffixInclusion k r e p) ∧ Function.Injective j ∧ (∀ b : SuffixLocal k r e p, j (algebraMap _ (SuffixCompleted k r e p) b) = algebraMap _ (Completed k r p) (suffixInclusion k r e p b)) ∧ (∀ b : F, E₀ (MvPowerSeries.C b) = b.val) ∧ (∀ b : F, E (MvPowerSeries.C b) = j b.val) ∧ (∀ i : Fin h, E₀ (MvPowerSeries.X i) = algebraMap _ (SuffixCompleted k r e p) (ω i)) ∧ (∀ i : Fin h, E (MvPowerSeries.X (Sum.inl i)) = j (algebraMap _ (SuffixCompleted k r e p) (ω i))) ∧ (∀ i : Fin e, E (MvPowerSeries.X (Sum.inr i)) = algebraMap _ (Completed k r p) (translated k r e p he a i)) ∧ (∀ f : MvPowerSeries (Fin h) F, j (E₀ f) = E (MvPowerSeries.rename Sum.inl f)) ∧ (∀ n : ℕ, Ideal.comap E₀.toRingHom (suffixCompletedIdeal k r e p ^ n) = Ideal.span (Set.range (MvPowerSeries.X : Fin h → MvPowerSeries (Fin h) F)) ^ n) ∧ (∀ n : ℕ, Ideal.comap E.toRingHom (completedIdeal k r p ^ n) = Ideal.span (Set.range (MvPowerSeries.X : Fin h ⊕ Fin e → MvPowerSeries (Fin h ⊕ Fin e) F)) ^ n) ∧ Function.Injective (algebraMap (Local k r p) (Completed k r p)) ∧ (∀ b : Local k r p, adicOrder (IsLocalRing.maximalIdeal (Local k r p)) b = adicOrder (completedIdeal k r p) (algebraMap _ (Completed k r p) b)) ∧ (∀ v : Completed k r p, ∃ coeff : (Fin e → ℕ) → (∀ i : Fin e, Fin (q i)) → (Fin h → ℕ) → F, (∀ n : ℕ, v - expansionTruncation q (j.comp F.subtype) (fun i ↦ algebraMap _ (Completed k r p) (delta k r p (σ i))) (fun i ↦ algebraMap _ (Completed k r p) (translated k r e p he a i)) (fun i ↦ j (algebraMap _ (SuffixCompleted k r e p) (ω i))) coeff n ∈ completedIdeal k r p ^ n) ∧ (∀ coeff' : (Fin e → ℕ) → (∀ i : Fin e, Fin (q i)) → (Fin h → ℕ) → F, (∀ n : ℕ, v - expansionTruncation q (j.comp F.subtype) (fun i ↦ algebraMap _ (Completed k r p) (delta k r p (σ i))) (fun i ↦ algebraMap _ (Completed k r p) (translated k r e p he a i)) (fun i ↦ j (algebraMap _ (SuffixCompleted k r e p) (ω i))) coeff' n ∈ completedIdeal k r p ^ n) → coeff' = coeff) ∧ adicOrder (completedIdeal k r p) v = ⨅ A : Fin e → ℕ, ⨅ β : (∀ i : Fin e, Fin (q i)), ⨅ γ : Fin h → ℕ, ⨅ (_ : coeff A β γ ≠ 0), (expansionWeight q A β γ : ℕ∞)) ∧ (∀ (d : ℕ) (P : MvPolynomial (Fin e) k), P.IsWeightedHomogeneous q d → algebraMap _ (Completed k r p) (MvPolynomial.eval₂ (algebraMap k (Local k r p)) (delta k r p ∘ σ) P) - MvPolynomial.eval₂ ((j.comp F.subtype).comp (ε.symm.toRingHom.comp ((IsLocalRing.residue (SuffixLocal k r e p)).comp (algebraMap k (SuffixLocal k r e p))))) (fun i ↦ algebraMap _ (Completed k r p) (delta k r p (σ i))) P ∈ completedIdeal k r p ^ (d + 1))",
+  "branch": "sheaf-dag",
+  "by": "Q19",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Reuses Hironaka.InOrderSpace and Hironaka.adicOrder from the two added landed definition dependencies. Helpers name only the explicit suffix rings, canonical maps, and finite expansion sums of this node. Ideal-power pullback identities express continuous coordinate isomorphisms; convergence is agreement modulo every ideal power."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fa729a9c5",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Node changed only in lean and in stmt_deps, which gained the landed def-trf-permissible-basis-chart-data (InOrderSpace) and def-trf-local-standard-basis-invariants (adicOrder), as allowed by brief-stage2 l.177. Checked clause by clause: InOrderSpace = U_d with the same dehomogenization δ; hU adjoin of the union = direct sum = k[σ]; hσ indexing including l=0 for X_{r+1}; suffix ring and comap prime; translated z_i; F a Subring with IsField and ε pinned to evalOneₐ; residue map bijective; E₀ and E pinned on C and X and continuous both ways by the ideal-power comap identities, which with the rename compatibility force j to be the induced map; injectivity and order preservation; expansion truncation complete because q_i ≥ 1, uniqueness, iInf order formula; ε₀ congruence mod (NL̂)^{d+1}. Edge cases e=0, e=r, r=0, h=0, n=0, v=0, P=0, d=0 and characteristic p checked. Imports match the proof_dep records. Docstrings, line width and verbatim statement OK; only the theorem's proof is sorry. Not recompiled because no file changed (worker compile clean). Advisory: the GradedAlgebra.Standard public import is unused in the signature."
+ }
+}

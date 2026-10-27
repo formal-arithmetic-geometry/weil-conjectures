@@ -1,0 +1,233 @@
+{
+ "id": "lem-sfb-fibred-site-functor-continuity",
+ "kind": "statement",
+ "title": "Functoriality of the inherited sites of fibred groupoids",
+ "statement": "Fix the universes of [def-weil-size-convention]. Let $\\mathcal B$ be a site [def-weil-pbc-sites-and-cohomology], small relative to its sheaves. Let $p:\\mathcal X\\to\\mathcal B$ and $r:\\mathcal Y\\to\\mathcal B$ be categories fibred in groupoids: every base arrow admits a cartesian lift, and every arrow in either total category is cartesian. Here an arrow $a:x'\\to x$ over $u:b'\\to b$ is cartesian when, for every arrow $z\\to x$ over a composite $uv$, there is a unique arrow $z\\to x'$ over $v$ whose composite with $a$ is the given arrow. Assume the total categories are also small relative to the sheaf universe. Give $\\mathcal X$ and $\\mathcal Y$ the covering families consisting of the families whose images in $\\mathcal B$ are covering families. These families define sites. Let $F:\\mathcal X\\to\\mathcal Y$ be a functor over $\\mathcal B$, compatible with cartesian pullback. Then $F$ preserves covering families and their pullbacks and is continuous and cocontinuous in the sense of [def-weil-pbc-special-cocontinuous-functor]. Explicitly, precomposition with $F^{\\mathrm{op}}$ sends sheaves of sets on $\\mathcal Y$ to sheaves of sets on $\\mathcal X$, and for every covering family $\\{y_i\\to F(x)\\}$ there is a covering family $\\{x_i\\to x\\}$ and isomorphisms $F(x_i)\\cong y_i$ over $F(x)$.",
+ "source": {
+  "document": "literature/stacks-project/stacks.tex",
+  "place": "Tags 06NU (lemma-topology-inherited), including its fibred-groupoid specialization immediately following the proof, and 06NW (lemma-topology-inherited-functorial)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-special-cocontinuous-functor"
+ ],
+ "proof": [
+  {
+   "text": "For either $p$ or $r$, the isomorphism and composition axioms of a site follow directly from the base-site axioms [def-weil-pbc-sites-and-cohomology](1): the image of an isomorphism is an isomorphism, and the image of a composite family is the composite of its image families. Reindexing is inherited from the base. Smallness of the total categories in the stated universe ensures that the collection of such families can be taken to be a set, with index sets bounded in that universe.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 06NU, lemma-topology-inherited, proof (1)-(2) and following fibred-groupoid specialization."
+   }
+  },
+  {
+   "text": "Let $\\{x_i\\to x\\}$ be a covering in $\\mathcal X$ and let $t\\to x$ be any arrow. The base-site axiom gives $P_i=p(x_i)\\times_{p(x)}p(t)$ and the covering $\\{P_i\\to p(t)\\}$. Choose a cartesian lift $w_i\\to t$ of each second projection. All arrows of $\\mathcal X$ are strongly cartesian in the explicit sense of the statement. Thus [lem-sfb-cartesian-lift-pullback-square], with $f=(x_i\\to x)$, $g=(t\\to x)$ and $a=(w_i\\to t)$, makes $w_i$ the pullback $x_i\\times_x t$ over $P_i$. The family $\\{w_i\\to t\\}$ is a covering by its base images. This proves the remaining site axiom. Apply the identical argument to $r$ to obtain the site on $\\mathcal Y$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-sfb-cartesian-lift-pullback-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 06NU, lemma-topology-inherited, proof (3); Categories Tag 06N4, lemma-strongly-cartesian-fibre-product."
+   }
+  },
+  {
+   "text": "Since $rF=p$, the image under $F$ of any covering family has exactly the same base covering and hence is a covering. For the pullback square chosen in step 2, $F(w_i)\\to F(t)$ is strongly cartesian (every arrow of $\\mathcal Y$ is), and lies over $P_i\\to p(t)$, while $F(x_i)\\to F(x)$ is strongly cartesian over $p(x_i)\\to p(x)$. Apply [lem-sfb-cartesian-lift-pullback-square] to these arrows. Its unique upper arrow is $F(w_i\\to x_i)$ by the functorial commutativity and its base image. Therefore the actual image square is a pullback, so its canonical comparison with $F(x_i)\\times_{F(x)}F(t)$ is an isomorphism. The two defining conditions of continuity [def-weil-pbc-sites-and-cohomology](3) now hold.",
+   "uses": [
+    "lem-sfb-cartesian-lift-pullback-square",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 06NW, lemma-topology-inherited-functorial, first paragraph of proof; Categories Tag 06N4."
+   }
+  },
+  {
+   "text": "For a covering $\\{y_i\\xrightarrow{d_i}F(x)\\}$ put $U_i=r(y_i)$ and $U=p(x)$. Choose cartesian lifts $a_i:x_i\\to x$ of the covering arrows $U_i\\to U$. The family $\\{a_i\\}$ covers $x$. The arrows $F(a_i)$ and $d_i$ are cartesian lifts of the same base arrow with the same target. The cartesian universal properties give $\\alpha_i:F(x_i)\\to y_i$ and $\\beta_i:y_i\\to F(x_i)$ over $\\mathrm{id}_{U_i}$, with $d_i\\alpha_i=F(a_i)$ and $F(a_i)\\beta_i=d_i$. Uniqueness in those same universal properties gives $\\alpha_i\\beta_i=\\mathrm{id}$ and $\\beta_i\\alpha_i=\\mathrm{id}$. These are the asserted isomorphisms over $F(x)$, and in particular the image family refines the given covering, which is cocontinuity [def-weil-pbc-special-cocontinuous-functor](1).",
+   "uses": [
+    "def-weil-pbc-special-cocontinuous-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 06NW, lemma-topology-inherited-functorial, second paragraph of proof; Sites Tag 00XJ, definition-cocontinuous."
+   }
+  },
+  {
+   "text": "Finally let $G$ be a sheaf of sets on $\\mathcal Y$. For any covering $\\{x_i\\to x\\}$, the sheaf equalizer diagram of $G$ for $\\{F(x_i)\\to F(x)\\}$ identifies with the equalizer diagram of $G\\circ F^{\\mathrm{op}}$ for $\\{x_i\\to x\\}$, using the canonical pullback isomorphisms of step 3. Their projection maps agree because they come from the image squares. The sheaf condition in [def-weil-pbc-sites-and-cohomology](1) proves the asserted precomposition statement, including empty covering families.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 06NW, lemma-topology-inherited-functorial, first paragraph and final assertion; Sites Tag 00WW, lemma-pushforward-sheaf (equalizer argument)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-sfb-cartesian-lift-pullback-square",
+  "def-weil-pbc-special-cocontinuous-functor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks.tex",
+  "place": "Tags 06NU (lemma-topology-inherited) and 06NW (lemma-topology-inherited-functorial), using Categories 06N4 for covering pullbacks."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A functor of categories fibred in groupoids over a site is continuous and cocontinuous for the inherited topologies",
+   "results": "8 hits; CategoryTheory.Functor.inducedTopology_isCocontinuous; CategoryTheory.GrothendieckTopology.instIsContinuousOverMapOver; CategoryTheory.GrothendieckTopology.instIsContinuousOverForgetOver; CategoryTheory.GrothendieckTopology.instIsCocontinuousOverForgetOver; CategoryTheory.Functor.IsContinuous; CategoryTheory.Functor.IsCocontinuous; CategoryTheory.Functor.IsDenseSubsite.instIsContinuous; CategoryTheory.Functor.IsCoverDense.isContinuous",
+   "date": "2026-10-23",
+   "verdict": "no match: the continuity and cover-lifting APIs assume the site properties; FiberedCategory has cartesian lifts but no theorem constructing the inherited sites or their functoriality"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor\", \"IsContinuous\"",
+   "results": "12 hits; CategoryTheory.Functor.isContinuous_id; CategoryTheory.Functor.IsContinuous; CategoryTheory.Functor.instIsContinuousOfPreservesOneHypercovers; CategoryTheory.Functor.isContinuous_of_preservesOneHypercovers; CategoryTheory.Functor.instIsContinuousCompId; CategoryTheory.Functor.instIsContinuousCompId_1; CategoryTheory.Functor.isContinuous_of_iso; CategoryTheory.Functor.isContinuous_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: the continuity and cover-lifting APIs assume the site properties; FiberedCategory has cartesian lifts but no theorem constructing the inherited sites or their functoriality"
+  },
+  {
+   "tool": "grep",
+   "query": "Fibred|Fibered|Fibration|IsContinuous",
+   "results": "22 hits; Mathlib/CategoryTheory/FiberedCategory/Fibered.lean; Mathlib/CategoryTheory/FiberedCategory/Fibered.lean; Mathlib/CategoryTheory/FiberedCategory/Fibered.lean; Mathlib/CategoryTheory/FiberedCategory/Fibered.lean; Mathlib/CategoryTheory/FiberedCategory/Fibered.lean; Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean; Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean; Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the continuity and cover-lifting APIs assume the site properties; FiberedCategory has cartesian lifts but no theorem constructing the inherited sites or their functoriality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A functor of fibred groupoids preserves covering families and covering pullbacks and is continuous and cocontinuous",
+   "results": "8 hits; CategoryTheory.Functor.IsCocontinuous; CategoryTheory.CoverPreserving; CategoryTheory.Functor.IsCocontinuous.mk; CategoryTheory.Functor.cover_lift; CategoryTheory.instIsCartesianCompOfIsFibered; CategoryTheory.Functor.IsCocontinuous.cover_lift; CategoryTheory.Functor.IsContinuous; CategoryTheory.CoverPreserving.mk",
+   "date": "2026-10-23",
+   "verdict": "no match: the continuity and cover-lifting APIs assume the site properties; FiberedCategory has cartesian lifts but no theorem constructing the inherited sites or their functoriality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor of fibred categories preserves the topology inherited from the base site",
+   "results": "8 hits; CategoryTheory.GrothendieckTopology.over_map_compatiblePreserving; CategoryTheory.GrothendieckTopology.over_map_coverPreserving; CategoryTheory.CoverPreserving; CategoryTheory.GrothendieckTopology.instIsContinuousOverMapOver; CategoryTheory.GrothendieckTopology.over_forget_compatiblePreserving; CategoryTheory.Functor.inducedTopology_coverPreserving; CategoryTheory.Functor.inducedTopology; CategoryTheory.CompatiblePreserving",
+   "date": "2026-10-23",
+   "verdict": "no match: the continuity and cover-lifting APIs assume the site properties; FiberedCategory has cartesian lifts but no theorem constructing the inherited sites or their functoriality"
+  },
+  {
+   "tool": "grep",
+   "query": "continuous|cocontinuous|GrothendieckTopology",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the continuity and cover-lifting APIs assume the site properties; FiberedCategory has cartesian lifts but no theorem constructing the inherited sites or their functoriality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Any functor between groupoid fibrations over a site is continuous and cocontinuous for the covering families inherited from the base",
+   "results": "8 hits; CategoryTheory.GrothendieckTopology.instIsContinuousOverMapOver, CategoryTheory.GrothendieckTopology.instIsContinuousOverForgetOver, CategoryTheory.GrothendieckTopology.instIsCocontinuousOverForgetOver, CategoryTheory.Functor.IsContinuous, CategoryTheory.Functor.IsCocontinuous, CategoryTheory.Functor.inducedTopology_isCocontinuous, CategoryTheory.Functor.isContinuous_of_coverPreserving, CategoryTheory.Functor.IsCoverDense.isContinuous",
+   "date": "2026-10-24",
+   "verdict": "no match: continuity/cocontinuity interfaces assume the site properties, inducedTopology requires local fullness and faithfulness, and over-site results concern slice categories; none gives the arbitrary fibred-groupoid assertion or constructs its inherited sites."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor\", \"IsContinuous\"",
+   "results": "12 hits; CategoryTheory.Functor.isContinuous_id, CategoryTheory.Functor.IsContinuous, CategoryTheory.Functor.instIsContinuousOfPreservesOneHypercovers, CategoryTheory.Functor.isContinuous_of_preservesOneHypercovers, CategoryTheory.Functor.instIsContinuousCompId, CategoryTheory.Functor.instIsContinuousCompId_1, CategoryTheory.Functor.isContinuous_of_iso, CategoryTheory.Functor.isContinuous_comp",
+   "date": "2026-10-24",
+   "verdict": "no match: continuity/cocontinuity interfaces assume the site properties, inducedTopology requires local fullness and faithfulness, and over-site results concern slice categories; none gives the arbitrary fibred-groupoid assertion or constructs its inherited sites."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A functor of categories fibred in groupoids over a site preserves covering families and their pullbacks and is continuous and cocontinuous",
+   "results": "8 hits; CategoryTheory.Functor.IsCocontinuous, CategoryTheory.Functor.cover_lift, CategoryTheory.Functor.IsCocontinuous.mk, CategoryTheory.Functor.IsCocontinuous.cover_lift, CategoryTheory.CoverPreserving, CategoryTheory.Functor.isContinuous_of_coverPreserving, CategoryTheory.Functor.IsContinuous, CategoryTheory.Functor.IsCocontinuous.casesOn",
+   "date": "2026-10-24",
+   "verdict": "no match: continuity/cocontinuity interfaces assume the site properties, inducedTopology requires local fullness and faithfulness, and over-site results concern slice categories; none gives the arbitrary fibred-groupoid assertion or constructs its inherited sites."
+  },
+  {
+   "tool": "grep",
+   "query": "inherited|fibered|fibred",
+   "results": "1 hit: Mathlib/CategoryTheory/Sites/Descent/IsPrestack.lean:28, comment that similar notions can be phrased using fibered categories.",
+   "date": "2026-10-24",
+   "verdict": "no match: comment only; no inherited-site theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stackification-module-equivalence",
+  "date": "2026-10-23",
+  "group": "Q62"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: The flat affine-presentation dictionary used before taking the norm of a lift of an invariant section. Supporting module theorem: descent on the fppf quotient groupoid, tensor products and cokernels, before descending multiplication and unit. Supporting input: Stackification preserves module sheaves and quasi-coherence. Functoriality of the inherited fppf sites before applying the comparison lemma (Stacks 06WQ).",
+   "via": [
+    "lem-sfb-stackification-module-equivalence",
+    "lem-sfb-groupoid-module-descent-tensor-cokernel",
+    "lem-sfb-affine-groupoid-quasicoherent-algebra-descent",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-fibred-site-functor-continuity",
+  "worker": "stage1",
+  "summary": "Proved the inherited-site axioms, preservation of covering pullbacks, continuity, cover lifting up to isomorphism and precomposition on sheaves following Stacks 06NU and 06NW. Isolated the genuinely categorical pullback-square input 06N4 as one statement-only node; cartesian lift uniqueness is written out. No statement change. No exact project attachment or Mathlib match was found.",
+  "blueprint": "Latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md, (3), supporting the inherited chain through alteration and stackification recorded in blueprint.from.place. The current blueprint ancestor command returns None; retained that established from.node and via chain. The new categorical node serves the covering-pullback axiom and functoriality in Stacks 06NU/06NW."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-2b1c19c92",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-2b1c19c92 (reviewer sub-agent of L); spot-checked: I read the item, all 5 steps, the new node, the three cited definition nodes, and Stacks 06NU/06NW (stacks.tex l.1975-2105) and 06N4/06N5 (categories.tex l.6314, 6648). The item's statement is byte-identical to the unsplit Q62 base, so nothing changed there. It matches the fibred-groupoid remark after 06NU and the continuity/cocontinuity part of 06NW, and claims nothing more. New node lem-sfb-cartesian-lift-pullback-square = 06N4 with the upper arrow b named explicitly. I checked its proof myself (b unique by strong cartesianness of f; l over (p h,p k) via a; bl=h by uniqueness for f) and tested it on three small cases: p=id, a point base and identity f. Its form passes B1-B7: statement only, three search kinds recorded, strictly smaller than the item. Step 2 applies it in X to the lift of pr_2, as in the 06NU(3) argument. Step 3 applies it in Y to the image square: F(w_i→x_i) is the unique b, so the 00WV(b) comparison is an isomorphism. Step 4's α/β inverse check by uniqueness gives 00XJ refinement and is legitimately elementary. Step 5 is the 00WW equalizer argument. The rg -L duplicate search over dag/nodes (06N4, 06N5, strongly cartesian, 06NU/06NW) and the blueprint search found no duplicate. There is no cycle and no SGA citation; the cited nodes are definitions plus the new same-unit node, so no tool_uses are needed. Maintainer note: blueprint.from.node is null on both nodes. This comes from the base record of the Q62 chain, not from this delivery."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FibredSiteFunctorContinuity",
+  "declaration": "CategoryTheory.fibredSiteFunctor_continuity",
+  "declarations": [
+   "CategoryTheory.IsSiteForCoveringFamilies",
+   "CategoryTheory.coveringFamiliesPrecoverage",
+   "CategoryTheory.inheritedCoveringFamilies",
+   "CategoryTheory.fibredSiteFunctor_continuity"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FibredSiteFunctorContinuity.lean",
+  "statement": "theorem fibredSiteFunctor_continuity {B : Type ub} [Category.{vb} B] {X : Type ux} [Category.{vx} X] {Y : Type uy} [Category.{vy} Y] (Cov : ∀ b : B, Set (PreZeroHypercover.{max w ub vb ux vx uy vy} b)) (hCov : IsSiteForCoveringFamilies Cov) (p : X ⥤ B) (r : Y ⥤ B) [p.IsPreFibered] [r.IsPreFibered] (hp : ∀ (x' x : X) (a : x' ⟶ x), p.IsStronglyCartesian (p.map a) a) (hr : ∀ (y' y : Y) (a : y' ⟶ y), r.IsStronglyCartesian (r.map a) a) (F : X ⥤ Y) (hF : F ⋙ r = p) : IsSiteForCoveringFamilies (inheritedCoveringFamilies Cov p) ∧ IsSiteForCoveringFamilies (inheritedCoveringFamilies Cov r) ∧ (∀ (x : X) (E : PreZeroHypercover.{max w ub vb ux vx uy vy} x), inheritedCoveringFamilies Cov p x E → inheritedCoveringFamilies Cov r (F.obj x) (E.map F)) ∧ (∀ (x : X) (E : PreZeroHypercover.{max w ub vb ux vx uy vy} x), inheritedCoveringFamilies Cov p x E → ∀ (i : E.I₀) (t : X) (g : t ⟶ x), PreservesLimit (cospan (E.f i) g) F) ∧ F.IsContinuous (coveringFamiliesPrecoverage (inheritedCoveringFamilies Cov p)).toGrothendieck (coveringFamiliesPrecoverage (inheritedCoveringFamilies Cov r)).toGrothendieck ∧ F.IsCocontinuous (coveringFamiliesPrecoverage (inheritedCoveringFamilies Cov p)).toGrothendieck (coveringFamiliesPrecoverage (inheritedCoveringFamilies Cov r)).toGrothendieck ∧ (∀ G : Sheaf (coveringFamiliesPrecoverage (inheritedCoveringFamilies Cov r)).toGrothendieck (Type (max w ub vb ux vx uy vy)), Presheaf.IsSheaf (coveringFamiliesPrecoverage (inheritedCoveringFamilies Cov p)).toGrothendieck (F.op ⋙ G.obj)) ∧ (∀ (x : X) (E : PreZeroHypercover.{max w ub vb ux vx uy vy} (F.obj x)), inheritedCoveringFamilies Cov r (F.obj x) E → ∃ (U : E.I₀ → X) (a : ∀ i, U i ⟶ x) (e : ∀ i, F.obj (U i) ≅ E.X i), inheritedCoveringFamilies Cov p x ⟨E.I₀, U, a⟩ ∧ ∀ i, (e i).hom ≫ E.f i = F.map (a i))",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8e30e337a",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Re-delivery after H13 RETURN (5cccc5bd79d0) implements option (a): IsSiteForCoveringFamilies/coveringFamiliesPrecoverage/inheritedCoveringFamilies in the item module, listed in lean.declarations with 00VH/06NU/06NW + blueprint docstrings; dependency records (sites-and-cohomology incl. reviewed_lean, size-convention, special-cocontinuous) identical to live; item node differs only in lean. Clause check: independent universes under max bound; indexed 00VH site with covering-pullback existence only + dependency's reindexing convention; IsPreFibered + all arrows IsStronglyCartesian = fibred in groupoids; hF : F ⋙ r = p; conjuncts (sites, cover preservation, PreservesLimit of covering cospans, IsContinuous, IsCocontinuous via family-containing sieves + conj 8 lift, precomposition sheaves, same-index lift with isos over F(x)) all true by 06N4/06NW/00WW. Edge cases (empty cover, point base, repeated indices, non-faithful F) ok. No name clash live; sorry only; statement verbatim; report has Worker report and genuine Second reading. No compile (no file changed). Advisory: proof dep lem-sfb-cartesian-lift-pullback-square has no Lean record (not needed for the statement)."
+ }
+}

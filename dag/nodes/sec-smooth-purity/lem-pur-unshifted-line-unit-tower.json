@@ -1,0 +1,306 @@
+{
+ "id": "lem-pur-unshifted-line-unit-tower",
+ "kind": "statement",
+ "title": "Unshifted coefficient-unit and Tate-line multiplication in a tower",
+ "statement": "Fix the finite-field datum of [def-pur-conventions], a prime $\\ell\\ne p$, and a separated finite-type $k$-scheme $S$. On the small pro-etale site [def-weil-pbc-proetale-site], for each finite extension $L/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_L$ and uniformizer $\\varpi_L$ [def-weil-l-adic-coefficient-extension], put $R_L=\\widehat{\\mathcal O}_{L,S}$ [def-weil-completed-integral-coefficients] and $U_L=R_L[0]$. Use the unbounded derived categories of module sheaves [def-weil-abstract-derived-category, def-weil-sheaf-of-modules-category].\nLet $L_0\\subseteq L_1\\subseteq L_2$ be finite coefficient extensions, allowing repeated fields, let $m\\ge0$, and put $J_i=\\mathcal O_{L_i}(m)$ and $V_i=U_{L_i}(m)$. Write $C_{ji}=-\\otimes^L_{R_{L_i}}R_{L_j}$ [lem-pur-derived-change-of-rings], $\\iota_{ji}:R_{L_i}\\to R_{L_j}$ for inclusion, and $\\alpha:C_{21}C_{10}\\xrightarrow{\\sim}C_{20}$ for ordinary derived tensor associativity, identified with completed extensions by the specified $\\chi$ [lem-weil-finite-free-completed-scalar-comparison]. Define $u_{ji}:C_{ji}U_{L_i}\\xrightarrow{\\sim}U_{L_j}$ by the canonical K-flat resolving comparison followed by coefficient multiplication $x\\otimes b\\mapsto\\iota_{ji}(x)b$. Let $\\beta_{ji}$ be the specified twist/scalar comparison [lem-weil-integral-twist-derived-scalar], in ordinary coordinates via $\\chi$, and put $w_{ji}=u_{ji}(m)\\circ\\beta_{ji,U_{L_i}}:C_{ji}V_i\\xrightarrow{\\sim}V_j$. Let $b_{ji}:J_i\\otimes_{R_{L_i}}R_{L_j}\\xrightarrow{\\sim}J_j$ be the canonical twist-line map [lem-weil-integral-twist-base-change].\nThe maps $u_{ji}$ and $w_{ji}$ are represented on the degree-zero models by\n$$x\\otimes b\\longmapsto\\iota_{ji}(x)b,\\qquad (x\\otimes z)\\otimes b\\longmapsto\\iota_{ji}(x)b\\,b_{ji}(z\\otimes1),$$\nand the inverse coefficient-unit map is $b\\mapsto1\\otimes b$. They satisfy\n$$u_{20}\\circ\\alpha_{U_{L_0}}=u_{21}\\circ C_{21}(u_{10}),\\qquad w_{20}\\circ\\alpha_{V_0}=w_{21}\\circ C_{21}(w_{10}).$$\nOn $((x\\otimes b)\\otimes c)$ both unit paths have value $\\iota_{20}(x)\\iota_{21}(b)c$. On $(((x\\otimes z)\\otimes b)\\otimes c)$ the direct line path has value $\\iota_{20}(x)\\iota_{21}(b)c\\,b_{20}(z\\otimes1)$ and the successive path has value $\\iota_{20}(x)\\iota_{21}(b)c\\,b_{21}(b_{10}(z\\otimes1)\\otimes1)$; these expressions define equal sheaf morphisms and equal derived morphisms. For $j=i$, $u_{ii}$ is the tensor multiplication unitor and $w_{ii}$ is the line multiplication unitor. Under $\\chi$, these identity comparisons use the natural derived-completeness map, not a strict identification of the completed identity extension with the identity functor. All assertions include $m=0$ and repeated fields.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.md",
+  "place": "Agent auxiliary to coefficient transport, sk-thm-purity-transport Step 3; Old Steps 4-5 and identity part of Step 7: specified coefficient multiplication and unshifted Tate-line tower maps."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-pbc-proetale-site",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-coefficient-twists-detailed",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-integral-twist-derived-scalar",
+  "lem-weil-integral-twist-base-change",
+  "lem-pur-completed-line-tensor-coherence",
+  "lem-weil-constant-coefficient-objects-constructible"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-pur-tate-unit-flat-model-domains] at each $L_i$, with the given $m$ and $n=0$. It supplies flat-term K-flat degree-zero models $R_i[0]$ and $(R_i\\otimes_{R_i}J_i)[0]$ for $U_i,V_i$, their completeness and integral constructible membership, and the specified $\\chi$. Thus the domain condition for $\\beta_{ji,U_i}$ is met. By [lem-pur-derived-change-of-rings], their identity resolutions compute $C_{ji}$; by [lem-pur-kflat-change-of-rings], the resulting scalar-extended models are again flat-term K-flat, so a second extension is computed on the same models. No replacement between the two extensions changes their degree-zero tensor formulas.",
+   "uses": [
+    "lem-pur-tate-unit-flat-model-domains",
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-kflat-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY (lemma-derived-base-change) and 0G7E (lemma-pullback-K-flat); application to the existing Tate-unit models"
+   }
+  },
+  {
+   "text": "On sections the balanced map $R_i\\times R_j\\to R_j$, $(x,b)\\mapsto\\iota_{ji}(x)b$, defines a sheaf map $\\mu_{ji}:R_i\\otimes_{R_i}R_j\\to R_j$ by [lem-pc-sites-sheaf-tensor-bilinear-universal]. Its inverse is $b\\mapsto1\\otimes b$: multiplication gives $b$ in one direction, and in the other $1\\otimes\\iota_{ji}(x)b=x\\otimes b$ by the balancing relation. The formulas commute with restrictions. Step 1 and the definition of $u_{ji}$ therefore identify $u_{ji}$ with $\\mu_{ji}[0]$ through the specified resolving comparison. This proves the asserted unit formula and its inverse, without choosing a basis.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), bilinear universal property following Tag 0GMW (lemma-sheafification-tensor)"
+   }
+  },
+  {
+   "text": "Use the actual termwise comparison in [lem-weil-integral-twist-derived-scalar] with the identity resolution of $U_i$ from step 1. In ordinary coordinates it sends $(x\\otimes z)\\otimes b$ to $(x\\otimes b)\\otimes b_{ji}(z\\otimes1)$. Tensoring the multiplication from step 2 with $J_j$ consequently sends this to $\\iota_{ji}(x)b\\,b_{ji}(z\\otimes1)$. This is exactly $u_{ji}(m)\\circ\\beta_{ji,U_i}=w_{ji}$. The cited comparison is a chain isomorphism conjugated by the specified $\\chi$, so this computation refers to the stated comparison, rather than an arbitrary isomorphism between the same objects.",
+   "uses": [
+    "lem-weil-integral-twist-derived-scalar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.md",
+    "place": "Coefficient transport auxiliary: specified twist/scalar map; supporting blueprint prop-weil-twist-preserves, final paragraph"
+   }
+  },
+  {
+   "text": "For either degree-zero model $M=R_0$ or $M=R_0\\otimes_{R_0}J_0$, the ordinary scalar associator is $((a\\otimes b)\\otimes c)\\mapsto a\\otimes\\iota_{21}(b)c$. Its inverse is $a\\otimes c\\mapsto(a\\otimes1)\\otimes c$. These are balanced over $R_0$ and $R_1$; their two composites are identities since $(a\\otimes1)\\otimes\\iota_{21}(b)c=(a\\otimes b)\\otimes c$. Applying [lem-pc-sites-sheaf-tensor-bilinear-universal] successively makes these formulas sheaf maps and proves their equalities on sheaf tensors. By step 1 their degree-zero chain maps represent the specified ordinary derived $\\alpha$, with no total-complex signs.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), associativity and scalar-extension formulas, with bilinear universal property after Tag 0GMW"
+   }
+  },
+  {
+   "text": "Using steps 2 and 4, the direct unit path sends $((x\\otimes b)\\otimes c)$ to $\\iota_{20}(x)\\iota_{21}(b)c$. The successive unit path sends it to $\\iota_{21}(\\iota_{10}(x)b)c$, the same expression because the coefficient inclusions compose and preserve multiplication. These are equal sheaf maps by the iterated bilinear universal property [lem-pc-sites-sheaf-tensor-bilinear-universal]. Applying the derived localization [def-weil-abstract-derived-category] to this equality of the representing degree-zero chain maps gives $u_{20}\\alpha_{U_0}=u_{21}C_{21}(u_{10})$.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product): balanced multiplication and sheaf tensor universal property"
+   }
+  },
+  {
+   "text": "By steps 3 and 4, the direct line path on $(((x\\otimes z)\\otimes b)\\otimes c)$ has value $\\iota_{20}(x)\\iota_{21}(b)c\\,b_{20}(z\\otimes1)$. The successive path has value $\\iota_{20}(x)\\iota_{21}(b)c\\,b_{21}(b_{10}(z\\otimes1)\\otimes1)$: in the second application of step 3, the scalar $\\iota_{10}(x)b$ passes through $\\iota_{21}$. The tower clause of [lem-weil-integral-twist-base-change] says precisely that the two remaining line factors agree. Repeated application of [lem-pc-sites-sheaf-tensor-bilinear-universal] gives equality of the sheaf maps, and hence equality of their degree-zero chain maps and their images under derived localization. This proves $w_{20}\\alpha_{V_0}=w_{21}C_{21}(w_{10})$ with the two requested representative formulas.",
+   "uses": [
+    "lem-weil-integral-twist-base-change",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.md",
+    "place": "Coefficient transport auxiliary: ordinary line multiplication in a tower; supporting prop-weil-twist-preserves, integral coefficient paragraph"
+   }
+  },
+  {
+   "text": "For the identity inclusion, step 2 is $x\\otimes b\\mapsto xb$, the multiplication unitor. For $m\\geq0$, [lem-weil-integral-twist-base-change] defines $b_{ii}$ by tensor associativity on the tensor powers (the coefficient unit for $m=0$); for the identity ring map this is $z\\otimes b\\mapsto bz$. Step 3 therefore becomes $(x\\otimes z)\\otimes b\\mapsto xb z$, the line multiplication unitor. The tower computations used neither strict inclusion nor $m>0$, so they include repeated fields and $m=0$; they also hold on the empty site. Finally [lem-weil-finite-free-completed-scalar-comparison] explicitly identifies $\\chi_{L_i/L_i,K}$, after the ordinary multiplication unitor, with the natural map from $K$ to its derived completion. Thus the completed identity comparison is this map, as asserted, and was never treated as a strict identity functor.",
+   "uses": [
+    "lem-weil-integral-twist-base-change",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.md",
+    "place": "Coefficient transport auxiliary: identity extensions; completed normalization from Bhatt–Scholze comparison as stated in lem-weil-finite-free-completed-scalar-comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-tate-unit-flat-model-domains",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-kflat-change-of-rings",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-weil-integral-twist-derived-scalar",
+  "def-weil-abstract-derived-category",
+  "lem-weil-integral-twist-base-change",
+  "lem-weil-finite-free-completed-scalar-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.md",
+  "place": "Explicit degree-zero multiplication proof of the coefficient-transport auxiliary; Stacks Tags 03EK, 06YY and 0G7E support the sheaf and derived computations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "extendScalarsComp|extendScalars_assoc",
+   "results": "{\"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\", \"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: general module, completion or shift infrastructure does not state the specified derived sheaf comparisons and domains",
+   "directory": "Mathlib/Algebra/Category/ModuleCat"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalarsComp",
+   "results": "{\"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"ModuleCat.extendScalarsComp\", \"ModuleCat.extendScalars_comp_id\", \"ModuleCat.extendScalars_id_comp\", \"ModuleCat.extendScalars_comp_id_assoc\", \"ModuleCat.extendScalars_id_comp_assoc\", \"ModuleCat.extendScalarsComp_hom_app_one_tmul\", \"ModuleCat.extendScalars_assoc\", \"ModuleCat.extendScalars_assoc_assoc\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: general module, completion or shift infrastructure does not state the specified derived sheaf comparisons and domains"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar multiplication on ring sheaf units and compatible invertible lines is transitive in a tower of coefficient extensions",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsScalarTower.Invertible.algebraTower\", \"ModuleCat.Tilde.instIsScalarTowerCarrierObjOppositeOpensCarrierTopCommRingCatValStructureSheafLocalizationsValMemUnop\", \"CommRing.Pic.mapAlgebra_mapAlgebra\", \"KaehlerDifferential.isScalarTower_of_tower\", \"Algebra.Extension.instIsScalarTowerH1CotangentOfCotangent\", \"CommRing.Pic.mapAlgebra_comp_mapAlgebra\", \"Algebra.Extension.instIsScalarTowerRing_2\", \"Algebra.Extension.instIsScalarTowerRing_1\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: general module, completion or shift infrastructure does not state the specified derived sheaf comparisons and domains"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical multiplication units and rank one sheaf scalar maps are coherent with composition of derived change of rings",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.Cochain.units_smul_comp\", \"PresheafOfModules.Sheafify.one_smul\", \"TensorProduct.CompatibleSMul.unit\", \"ModuleCat.restrictScalarsComp'App\", \"CochainComplex.HomComplex.Cochain.comp_units_smul\", \"LinearMap.CompatibleSMul.units\", \"Unitary.coe_smul\", \"PresheafOfModules.map_smul\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: general module, completion or shift infrastructure does not state the specified derived sheaf comparisons and domains"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical coefficient multiplication after derived extension of scalars agrees with base change of a rank one module and satisfies tower and identity laws",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsBaseChange.linearMap\", \"LinearMap.transvection.baseChange\", \"IsBaseChange.map_id_lsmul_eq_lsmul_algebraMap\", \"LinearEquiv.transvection.baseChange\", \"LinearEquiv.dilatransvection.baseChange\", \"IsBaseChange.end\", \"KaehlerDifferential.map_liftBaseChange_smul\", \"KaehlerDifferential.moduleBaseChange'\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: general module, completion or shift infrastructure does not state the specified derived sheaf comparisons and domains"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived coefficient extension on sheaves of rings sends the ring unit and its Tate twists to the new unit and twists, compatibly with a tower",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"PresheafOfModules.Derivation'\", \"PresheafOfModules.Derivation.d_map\", \"PresheafOfModules.Derivation\", \"PresheafOfModules.DifferentialsConstruction.instHasDifferentials\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"PresheafOfModules.Derivation'.Universal.mk\", \"PresheafOfModules.Derivation.Universal.desc\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules or unrelated presheaf/cohomology infrastructure, not the specified Tate-line and derived sheaf coefficient maps; ModuleCat.ChangeOfRings.lean:984-1032 read"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalarsComp|extendScalars_assoc|extendScalars.*[Uu]nit",
+   "results": "{\"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\", \"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules or unrelated presheaf/cohomology infrastructure, not the specified Tate-line and derived sheaf coefficient maps; ModuleCat.ChangeOfRings.lean:984-1032 read",
+   "directory": "Algebra/Category/ModuleCat"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change of the coefficient ring unit and a Tate line in derived sheaf categories respects composition and identity coefficient extensions",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsBaseChange.of_comp\", \"LinearMap.baseChange_comp\", \"IsBaseChange.comp_iff\", \"LinearMap.liftBaseChange_comp\", \"IsBaseChange.linearMapLeftRightHom_comp\", \"IsBaseChange.linearMapLeftRightHom_comp_apply\", \"LinearEquiv.baseChange_trans\", \"IsBaseChange.comp\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules or unrelated presheaf/cohomology infrastructure, not the specified Tate-line and derived sheaf coefficient maps; ModuleCat.ChangeOfRings.lean:984-1032 read"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalarsComp, ModuleCat.extendScalars",
+   "results": "{\"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"ModuleCat.extendScalarsComp\", \"ModuleCat.extendScalars_comp_id\", \"ModuleCat.extendScalars_id_comp\", \"ModuleCat.extendScalars_comp_id_assoc\", \"ModuleCat.extendScalars_id_comp_assoc\", \"ModuleCat.extendScalarsComp_hom_app_one_tmul\", \"ModuleCat.extendScalars_assoc\", \"ModuleCat.extendScalars_assoc_assoc\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules or unrelated presheaf/cohomology infrastructure, not the specified Tate-line and derived sheaf coefficient maps; ModuleCat.ChangeOfRings.lean:984-1032 read"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars sends a rank one module to its base changed line; multiplication of tensors is associative in towers of sheaves of rings",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.extendScalarsComp_hom_app_one_tmul\", \"KaehlerDifferential.map_liftBaseChange_smul\", \"TensorProduct.isBaseChange\", \"IsBaseChange.tensorEquiv\", \"Module.rankAtStalk_baseChange\", \"IsBaseChange\", \"ModuleCat.extendScalarsId_hom_app_one_tmul\", \"Module.rankAtStalk_tensorProduct_of_isScalarTower\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules or unrelated presheaf/cohomology infrastructure, not the specified Tate-line and derived sheaf coefficient maps; ModuleCat.ChangeOfRings.lean:984-1032 read"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-shifted-tate-unit-scalar-coherence",
+  "date": "2026-10-22",
+  "group": "Q95"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Old Steps 4-5 and identity part of Step 7: specified coefficient multiplication and unshifted Tate-line tower maps. Coefficient transport realizing sk-thm-purity-transport Step 3.",
+   "via": [
+    "lem-pur-shifted-tate-unit-scalar-coherence",
+    "lem-pur-adic-scalar-trace-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-unshifted-line-unit-tower",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Reused existing K-flat Tate-unit domains and twist/scalar and twist-line comparisons; wrote balanced multiplication, its inverse, the ordinary associator, both tower calculations, and the completed identity normalization explicitly. No new nodes. Checked project Lean, all cited statements, source tensor formulas and Mathlib hits.",
+  "blueprint": "Realizes coefficient transport of thm-pur-rational-and-qbar-purity (sk-thm-purity-transport Step 3), old Steps 4-5 and identity part of old Step 7 of lem-pur-shifted-tate-unit-scalar-coherence; these are unit sk-thm-sf-compatibility clause (7) coefficient comparisons.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Computes ordinary sheaf change of rings on the K-flat models; generic derived-construction tool, not a replacement of the coefficient coherence route."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "Keeps the first scalar-extended representative K-flat for the second extension; generic ringed-topos tool."
+   },
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Determines sheaf tensor maps from balanced section formulas; generic ringed-site tool used for equality checks."
+   },
+   {
+    "node": "lem-weil-integral-twist-derived-scalar",
+    "why": "Identifies the specifically chosen beta on the coefficient unit with its actual termwise map."
+   },
+   {
+    "node": "lem-weil-integral-twist-base-change",
+    "why": "Provides the coefficient-line isomorphisms and their tower compatibility used in the line calculation."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Provides the prescribed natural ordinary/completed comparison and its identity-extension normalization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-kflat-change-of-rings",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-weil-integral-twist-derived-scalar",
+  "lem-weil-integral-twist-base-change",
+  "lem-weil-finite-free-completed-scalar-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-1072b8e65",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-1072b8e65 (reviewer sub-agent of L); spot-checked: S1 split of lem-pur-unshifted-line-unit-tower with 0 new nodes; the statement is unchanged and no re-split note applies (the base item was an unsplit Q95 child with no proof). No changes or FIX files were made. I read in full the item and all 8 nodes it cites (7 cited by the proof, plus def-coefficient-twists-detailed). Step 1: flat-model-domains with n=0 gives K-flat flat-term models R[0] and (R⊗J)[0], completeness, D^b_ctf membership and chi. kflat-change-of-rings keeps the first extension K-flat with flat terms, so C21C10 is computed termwise. Step 2: (x,b)->iota(x)b is balanced, with inverse b->1⊗b by the balancing relation. Step 3: twist-derived-scalar's hypotheses hold (ell invertible on S, U_i complete in D^b_c, identity resolution), and its chain map then u(m) gives iota(x)b·b_ji(z⊗1). Step 4: the degree-zero associator and its inverse compose to identities, with no signs. Steps 5-6: I recomputed both paths. The unit paths agree because iota20=iota21·iota10 is a ring map, and the line paths agree by the tower clause of twist-base-change. Equality on pure tensors gives equal sheaf maps by the bilinear universal property, then equal derived maps after localization. Step 7: for E=F tensor associativity is the unitor, and the L=E clause of finite-free-completed-scalar-comparison gives the derived-completeness map. Edge cases checked: repeated fields (the cited nodes use non-strict inclusion), m=0, S empty; no m<0 is needed. No SGA; Stacks labels 06YY, 0G7E, 03EK and 0GMW checked in the local tex files. No cycle; the route matches the transitivity sentence of sk-thm-purity-transport Step 3 via the parent. tool_uses accepted as generic tools."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.UnshiftedLineUnitTower",
+  "declaration": "WeilConjectures.PurityFiniteSetting.unshifted_line_unit_tower",
+  "declarations": [
+   "WeilConjectures.PurUnshiftedTate.regular",
+   "WeilConjectures.PurUnshiftedTate.multiplication_existsUnique",
+   "WeilConjectures.PurUnshiftedTate.multiplication",
+   "WeilConjectures.PurUnshiftedTate.multiplicationComplex",
+   "WeilConjectures.PurUnshiftedTate.unitMap",
+   "WeilConjectures.PurUnshiftedTate.unitMap_isIso",
+   "WeilConjectures.PurUnshiftedTate.unitIso",
+   "WeilConjectures.PurUnshiftedTate.lineModel",
+   "WeilConjectures.PurUnshiftedTate.lineUnit",
+   "WeilConjectures.PurUnshiftedTate.lineCoordinate",
+   "WeilConjectures.PurUnshiftedTate.lineMultiplication_existsUnique",
+   "WeilConjectures.PurUnshiftedTate.lineMultiplication",
+   "WeilConjectures.PurUnshiftedTate.lineMultiplicationComplex",
+   "WeilConjectures.PurUnshiftedTate.lineIso",
+   "WeilConjectures.PurUnshiftedTate.lineIso_model",
+   "WeilConjectures.PurityFiniteSetting.unshiftedLineUnitTowerAssertions",
+   "WeilConjectures.PurityFiniteSetting.unshifted_line_unit_tower"
+  ],
+  "file": "lean/Sheaf/Paper/UnshiftedLineUnitTower.lean",
+  "statement": "theorem unshifted_line_unit_tower [LocallyOfFiniteType (S ↘ Spec (.of P.field.k))] [QuasiCompact (S ↘ Spec (.of P.field.k))] [IsSeparated (S ↘ Spec (.of P.field.k))] (m : ℕ) : P.unshiftedLineUnitTowerAssertions E F G ι κ S m",
+  "branch": "newtargets-dag",
+  "by": "Q112",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4699d0ee6",
+  "group": "Q112",
+  "result": "pass",
+  "note": "Read item, all 13 stmt_deps and the delivered module against dependency sources in side-live. u = completedScalarCounit then Q(multiplication), pinned by ∃! (x⊗b↦ι(x)b, inverse b↦1⊗b); w = integralTwistOrdinaryBeta at constantWeilIntegralObject then twist(u), exactly u(m)∘β; line formula ι(x)b•θ(z) after the left unitor, θ=twistScalarMaps per integral_twist_base_change; tower equations at sheaf and derived level with recorded associatorData (pinned by IsAssociatorNormalized), orientation checked; sectionwise values of both paths; identity cases = ordinaryUnit / completedScalarIdentityMultiplication; χ identity normalization on both models. Edge cases m=0, repeated fields, empty S, one shared universe (no loss). Mechanical finding: associatorData/ordinaryUnit are .choose of theorems in lem-pur-completed-line-tensor-coherence, and β needs U∈D^b_c via integralConstantCoefficient_constructible from lem-weil-constant-coefficient-objects-constructible: genuine dependence → PASS on that point. No hollow defs, sorry-only, docstrings and verbatim statement OK, stmt_deps gain only landed nodes. Advisory: non-stmt_dep owner decls (def-weil-constant-weil-structure, def-pur-integral-operation-complex-models, lem-sp-scalar-extension-binary-coherence), redundant public imports. No file changed, no compile."
+ }
+}

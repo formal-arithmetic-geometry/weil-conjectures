@@ -11,6 +11,10 @@ public import Sheaf.AlgebraicGeometry.OrdinaryKunnethFiniteRing
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
+import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjection
+import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
+import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekBaseChange
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Comp
 
 /-! # Compact exterior-product arrows
 
@@ -74,7 +78,7 @@ Proof: this is the first projection identity of the pullback lift defining the m
 theorem compactProductOpenMap_fst {B X Y : Scheme.{u}}
     {f : X ⟶ B} {g : Y ⟶ B} (c : Compactification f) (d : Compactification g) :
     compactProductOpenMap c d ≫ pullback.fst c.g d.g = pullback.fst f g ≫ c.i := by
-  sorry
+  simp [compactProductOpenMap, pullback.map]
 
 /-- Second projection of the product open map.
 Source: blueprint Step 1, product compactification
@@ -83,7 +87,7 @@ Proof: this is the second projection identity of the pullback lift defining the 
 theorem compactProductOpenMap_snd {B X Y : Scheme.{u}}
     {f : X ⟶ B} {g : Y ⟶ B} (c : Compactification f) (d : Compactification g) :
     compactProductOpenMap c d ≫ pullback.snd c.g d.g = pullback.snd f g ≫ d.i := by
-  sorry
+  simp [compactProductOpenMap, pullback.map]
 
 /-- The product of the two compactifying open immersions is open.
 Source: blueprint Step 1, product compactification
@@ -94,7 +98,8 @@ Open immersions are stable under base change and composition. -/
 theorem compactProductOpen {B X Y : Scheme.{u}} {f : X ⟶ B} {g : Y ⟶ B}
     (c : Compactification f) (d : Compactification g) :
     IsOpenImmersion (compactProductOpenMap c d) := by
-  sorry
+  unfold compactProductOpenMap
+  infer_instance
 
 /-- The actual product compactification, with its literal fibre-product middle scheme.
 Source: blueprint Step 1, product compactification
@@ -207,6 +212,8 @@ structure CompactProductRestrictionFamilyData where
             (pullback.fst c.g d.g) (pullback.snd c.g d.g) (compactProductOpenMap c d)
             (compactProductOpenMap_fst c d) (compactProductOpenMap_snd c d) K L
 
+-- Retain the existing coefficient-instance binder in the public theorem signature.
+set_option linter.unusedSectionVars false in
 /-- The normalized comparison data exist and determine their map by equality
 with every displayed canonical component. Source: blueprint Step 1, compact arrows
 (blueprint: def-pur-compact-product-arrows).
@@ -214,7 +221,13 @@ Proof: assemble the explicit canonical components, whose equalities are reflexiv
 Every possible choice has those same components, so its map is uniquely determined. -/
 theorem compactProductRestriction_exists_normalized :
     Nonempty (CompactProductRestrictionFamilyData C) := by
-  sorry
+  refine ⟨⟨?_, ?_⟩⟩
+  · intro B X Y f g c d K L
+    exact compactProductRestrictionCore C c.i d.i (pullback.fst f g) (pullback.snd f g)
+      (pullback.fst c.g d.g) (pullback.snd c.g d.g) (compactProductOpenMap c d)
+      (compactProductOpenMap_fst c d) (compactProductOpenMap_snd c d) K L
+  · intros
+    rfl
 
 /-- The unique canonical zero-extension restriction family, determined by the
 explicit pullback-tensor comparison. Source: blueprint Step 1, exterior comparison
@@ -234,6 +247,77 @@ def compactProductExtension {B X Y : Scheme.{u}} {f : X ⟶ B} {g : Y ⟶ B}
     (compactProductOpenMap c d)).homEquiv _ _).symm
       (compactProductRestriction C c d K L).inv
 
+-- The abstract open--closed conservativity theorem removes the concrete-coefficient
+-- assumptions from the upstream projection-formula proof.
+omit [HasSmallSiteSheafify C] in
+private theorem compactProductProjection_isIso {U X : Scheme.{u}} (j : U ⟶ X)
+    [IsOpenImmersion j] : IsIso (derivedOpenImmersionLowerShriekProjectionMap C j) := by
+  have key (K : DerivedCategory (Sheaf U.smallEtaleTopology C)) :
+      IsIso ((derivedOpenImmersionLowerShriekProjectionMap C j).app K) := by
+    rw [NatTrans.isIso_iff_isIso_app]
+    intro M
+    apply (jointlyReflectIsomorphisms_mapDerivedCategoryUpperStar' C j j.closedComplement
+      j.range_closedComplement).isIso_of_pairFunctor
+    · exact Adjunction.isIso_map_projectionMap_app_app _ _ _ _ _ K M
+    · rw [← NatIso.isIso_map_iff (leftDerivedUpperStarIsoMapDerivedCategory
+        C j.closedComplement)]
+      exact isIso_of_source_target_iso_zero _
+        (isZero_leftDerivedUpperStar_closedComplement_obj_openImmersionLowerShriek C j
+          (((derivedTensor C U).obj K).obj ((upperStar C j).leftDerivedFunctor.obj M))).isoZero
+        ((isZero_derivedTensor_obj_obj_of_isZero_left
+          (isZero_leftDerivedUpperStar_closedComplement_obj_openImmersionLowerShriek C j K)
+          ((upperStar C j.closedComplement).leftDerivedFunctor.obj M)).of_iso
+            (leftDerivedUpperStarTensorIso C j.closedComplement _ M)).isoZero
+  exact NatIso.isIso_of_isIso_app _
+
+-- Two base changes and the two projection formulas identify the tensor with an
+-- extension by zero. No assertion about a particular comparison map is needed here.
+private theorem compactProductTensorIso
+    {X Y Xb Yb V W Wb : Scheme.{u}} (jX : X ⟶ Xb) (jY : Y ⟶ Yb)
+    [IsOpenImmersion jX] [IsOpenImmersion jY]
+    (q₁ : Wb ⟶ Xb) (q₂ : Wb ⟶ Yb) (r : V ⟶ X) (J₁ : V ⟶ Wb)
+    [IsOpenImmersion J₁] (hV : IsPullback r J₁ jX q₁)
+    (p₁ : W ⟶ X) (p₂ : W ⟶ Y) (J' : W ⟶ V) [IsOpenImmersion J']
+    (hW : IsPullback p₂ J' jY (J₁ ≫ q₂)) (hJ'r : J' ≫ r = p₁)
+    (J : W ⟶ Wb) [IsOpenImmersion J] (hJ : J' ≫ J₁ = J)
+    (E : DerivedCategory (Sheaf X.smallEtaleTopology C))
+    (K : DerivedCategory (Sheaf Y.smallEtaleTopology C)) :
+    Nonempty (((derivedTensor C Wb).obj
+        ((upperStar C q₁).leftDerivedFunctor.obj
+          ((openImmersionLowerShriek C jX).mapDerivedCategory.obj E))).obj
+        ((upperStar C q₂).leftDerivedFunctor.obj
+          ((openImmersionLowerShriek C jY).mapDerivedCategory.obj K)) ≅
+      (openImmersionLowerShriek C J).mapDerivedCategory.obj
+        (((derivedTensor C W).obj ((upperStar C p₁).leftDerivedFunctor.obj E)).obj
+          ((upperStar C p₂).leftDerivedFunctor.obj K))) := by
+  subst J
+  have := compactProductProjection_isIso C J₁
+  have := compactProductProjection_isIso C J'
+  obtain ⟨β⟩ := nonempty_iso_derivedTensor_flip C V
+  obtain ⟨γ⟩ := nonempty_iso_derivedTensor_flip C W
+  let F := (upperStar C r).leftDerivedFunctor.obj E
+  let G := (upperStar C p₂).leftDerivedFunctor.obj K
+  let pf₁ := asIso (((derivedOpenImmersionLowerShriekProjectionMap C J₁).app F).app
+    ((upperStar C q₂).leftDerivedFunctor.obj
+      ((openImmersionLowerShriek C jY).mapDerivedCategory.obj K)))
+  let pf₂ := asIso (((derivedOpenImmersionLowerShriekProjectionMap C J').app G).app F)
+  let e₂ := (leftDerivedUpperStarComp C J₁ q₂).symm.app
+      ((openImmersionLowerShriek C jY).mapDerivedCategory.obj K) ≪≫
+    (derivedOpenImmersionLowerShriekBaseChangeIso C hW).symm.app K
+  let e₁ := (leftDerivedUpperStarComp C J' r p₁ hJ'r.symm).symm.app E
+  let ecomp := Functor.mapDerivedCategoryNatIso
+      (openImmersionLowerShriekComp C J' J₁) ≪≫
+    Functor.mapDerivedCategoryCompIso _ _
+  exact ⟨((derivedTensor C Wb).mapIso
+      ((derivedOpenImmersionLowerShriekBaseChangeIso C hV).symm.app E)).app _ ≪≫
+    pf₁.symm ≪≫
+    (openImmersionLowerShriek C J₁).mapDerivedCategory.mapIso
+      (((derivedTensor C V).obj F).mapIso e₂ ≪≫
+        (β.app F).app _ ≪≫ pf₂.symm ≪≫
+        (openImmersionLowerShriek C J').mapDerivedCategory.mapIso
+          ((γ.app G).app _ ≪≫ ((derivedTensor C W).mapIso e₁).app _)) ≪≫
+    ecomp.symm.app _⟩
+
 /-- The canonical zero-extension exterior comparison is invertible.
 Source: blueprint Step 1, extension-by-zero exterior comparison
 (blueprint: def-pur-compact-product-arrows).
@@ -247,7 +331,39 @@ theorem compactProductExtension_isIso {B X Y : Scheme.{u}} {f : X ⟶ B} {g : Y 
     (K : DerivedCategory (Sheaf X.smallEtaleTopology C))
     (L : DerivedCategory (Sheaf Y.smallEtaleTopology C)) :
     IsIso (compactProductExtension C c d K L) := by
-  sorry
+  let q₁ := pullback.fst c.g d.g
+  let q₂ := pullback.snd c.g d.g
+  let J := compactProductOpenMap c d
+  let p₁ := pullback.fst f g
+  let p₂ := pullback.snd f g
+  have h₁ : J ≫ q₁ = p₁ ≫ c.i := compactProductOpenMap_fst c d
+  have h₂ : J ≫ q₂ = p₂ ≫ d.i := compactProductOpenMap_snd c d
+  have hV := IsPullback.of_hasPullback c.i q₁
+  let J' := pullback.lift p₁ J h₁.symm
+  have hJ'r : J' ≫ pullback.fst c.i q₁ = p₁ := pullback.lift_fst _ _ _
+  have hJ'J₁ : J' ≫ pullback.snd c.i q₁ = J := pullback.lift_snd _ _ _
+  have hprod : IsPullback p₁ p₂ (c.i ≫ c.g) (d.i ≫ d.g) := by
+    simpa only [c.comm, d.comm] using IsPullback.of_hasPullback f g
+  have hW : IsPullback p₂ J' d.i (pullback.snd c.i q₁ ≫ q₂) :=
+    IsPullback.of_bot (by rw [hJ'r]; exact hprod.flip)
+      (by rw [reassoc_of% hJ'J₁, h₂])
+      (hV.paste_vert (IsPullback.of_hasPullback c.g d.g)).flip
+  have : IsOpenImmersion J' :=
+    MorphismProperty.of_isPullback (P := @IsOpenImmersion) hW inferInstance
+  obtain ⟨e⟩ := compactProductTensorIso C c.i d.i q₁ q₂ _ _ hV
+    p₁ p₂ J' hW hJ'r J hJ'J₁ K L
+  let adj := derivedOpenImmersionLowerShriekUpperStarAdjunction C J
+  let ff := adj.fullyFaithfulLOfIsIsoUnit
+  have : (openImmersionLowerShriek C J).mapDerivedCategory.Full := ff.full
+  have : (openImmersionLowerShriek C J).mapDerivedCategory.Faithful := ff.faithful
+  have hε : IsIso (adj.counit.app
+      (externalProduct C c.g d.g
+        ((openImmersionLowerShriek C c.i).mapDerivedCategory.obj K)
+        ((openImmersionLowerShriek C d.i).mapDerivedCategory.obj L))) :=
+    adj.isIso_counit_app_of_iso e
+  dsimp only [compactProductExtension]
+  rw [Adjunction.homEquiv_counit]
+  exact IsIso.comp_isIso' inferInstance hε
 
 /-- Compose the global exterior-product arrow with the inverse of the specified
 zero-extension comparison, keeping its middle schemes abstract.
@@ -307,7 +423,15 @@ with every displayed canonical component. Source: blueprint Step 1, compact arro
 Proof: assemble the explicit canonical components, whose equalities are reflexive.
 Every possible choice has those same components, so its map is uniquely determined. -/
 theorem compactProductMap_exists_normalized : Nonempty (CompactProductMapFamilyData C) := by
-  sorry
+  refine ⟨⟨?_, ?_⟩⟩
+  · intro B X Y f g c d _ _ K L
+    exact compactProductMapCore C (pullback.fst c.g d.g) (pullback.snd c.g d.g)
+      (compactProductOpenMap c d)
+      ((openImmersionLowerShriek C c.i).mapDerivedCategory.obj K)
+      ((openImmersionLowerShriek C d.i).mapDerivedCategory.obj L)
+      (externalProduct C f g K L) (compactProductExtension C c d K L)
+  · intros
+    rfl
 
 /-- The compact exterior arrow with its uniquely specified ordinary-arrow
 normalization. Source: blueprint Step 1, compact Kunneth construction

@@ -1,0 +1,149 @@
+{
+ "id": "lem-sfb-quotient-tensor-right-flat-computation",
+ "kind": "statement",
+ "title": "Localization computation of the right quotient tensor path",
+ "statement": "Let R,S be commutative condensed rings, a:R→S a monoid morphism, and f:X→Y an arbitrary scheme morphism. Use internal module derived categories and the actual D,L, scalar and pullback counits of [def-sfb-internal-derived-scalar-comparisons], and the scalar tensor normalization of [lem-sfb-quotient-section-tensor-normalization]. Assume the section module categories for R and S admit the recorded derived categories on every scheme. Let lam:D_Y then L_S ≅ L_R then D_X satisfy PullNormalized, and let bY be a scalar tensor isomorphism at Y satisfying TensorNormalized. Let P,Q be flat-term K-flat integer-indexed internal R_Y-module complexes [def-pc-kflat-complex, def-pc-flat-sheaf-modules]. Assume the targetLocalization map defined in [lem-sfb-quotient-tensor-flat-model-maps] is invertible. Write U=Q(P), V=Q(Q). The path L_S(bY(U,V)) then t_S(D_Y U,D_Y V) then lam_U tensor lam_V then targetCompute(P,Q) equals sourceCompute(P,Q) then Q(ordinaryRight(P,Q)) then targetTensor(P,Q). Only normalization at Y is assumed; no bX and no equality with the left path occurs.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat); ordinary balancing from sites-modules.tex Tag 03EL (lemma-tensor-product-pullback)."
+ },
+ "stmt_deps": [
+  "def-sfb-internal-derived-scalar-comparisons",
+  "lem-sfb-quotient-section-tensor-normalization",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "lem-sfb-quotient-tensor-flat-model-maps"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate PullNormalized on the homotopy classes of P and Q and transport its identity comparison maps to cochains. This proves factor_normalized: lam followed by factorCompute is geometric pullback of the scalar computation, then computePull, then Q(totalBalance).",
+   "uses": [
+    "def-sfb-internal-derived-scalar-comparisons",
+    "lem-sfb-quotient-tensor-flat-model-maps"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Identify the native geometric tensor comparison with leftDerivedTensorComparison. Evaluate its proved tensor/counit equation on the homotopy classes of the scalar-extended complexes. The cochain localization tensorator is the transported homotopy tensorator, giving pull_tensor_computation. No flatness or exactness of scalar extension is used.",
+   "uses": [
+    "new-proetale-derived-module-pullback-monoidal",
+    "lem-sfb-quotient-tensor-flat-model-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use naturality of the geometric tensor comparison to move the scalar computation maps to its input. Use naturality of the localization tensorator to move totalBalance on both factors to the output. Substitute the tensor/counit equation from the preceding step and TensorNormalized at Y. Naturality of the cochain geometric counit at totalScalar identifies the remaining source with sourceCompute followed by Q(ordinaryRight). The private paste_right lemma proves this categorical pasting calculation.",
+   "uses": [
+    "lem-sfb-quotient-section-tensor-normalization",
+    "def-sfb-internal-derived-scalar-comparisons",
+    "lem-sfb-quotient-tensor-flat-model-maps",
+    "new-proetale-derived-module-pullback-monoidal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Postcompose the desired equality by targetLocalization. The preceding calculation proves that equality, while targetTensor followed by targetLocalization is the identity. Cancel the invertible targetLocalization.",
+   "uses": [
+    "lem-sfb-quotient-tensor-flat-model-maps"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-quotient-tensor-flat-model-maps",
+  "lem-sfb-quotient-section-tensor-normalization",
+  "def-sfb-internal-derived-scalar-comparisons",
+  "new-proetale-derived-module-pullback-monoidal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY, 07A4 and 0G7E; cochain naturality calculation by E9, using ordinary balancing from sites-modules.tex Tag 03EL."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The two composites of scalar extension and pullback tensorators on complexes agree after a monoidal natural isomorphism",
+   "results": "Eight hits, including ModuleCat.extendScalars_assoc, ModuleCat.extendScalarsComp_hom_app_one_tmul and PresheafOfModules.pullbackComp. They do not state the normalized internal-module cochain computation.",
+   "date": "2026-10-27",
+   "verdict": "No exact match. Reuse the repository monoidal naturality and composition lemmas."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapHomologicalComplexδNatTrans_naturality\"",
+   "results": "0 hits. Repository search finds the proved Functor.mapHomologicalComplexδNatTrans_naturality and mapHomologicalComplexδNatTrans_comp.",
+   "date": "2026-10-27",
+   "verdict": "No Mathlib match; the adopted source library supplies the ordinary complex calculus."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologicalComplexδNatTrans|isIso_leftDerivedFunctorCounit_app_of_kFlat",
+   "results": "msearch grep: 0 hits. Local repository search finds the derived-counit and ordinary cochain comparison lemmas used in the maps module.",
+   "date": "2026-10-27",
+   "verdict": "No Mathlib exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization counit equations compute tensor comparison for a derived functor on K flat cochain complexes with flat terms",
+   "results": "Eight hits, including CategoryTheory.Functor.totalLeftDerivedCounit and CategoryTheory.Adjunction.derived_counit; no tensor computation with the specified scalar and geometric normalizations.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QuotientPullbackTensorFlatModel",
+  "date": "2026-10-27",
+  "group": "T2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-integral",
+   "place": "Paragraph (3), normalized coefficient quotient tensor calculation: Localization computation of the right quotient tensor path.",
+   "via": [
+    "lem-sfb-quotient-pullback-tensor-flat-model",
+    "lem-sfb-quotient-pullback-tensor-coherence",
+    "lem-sfb-integral-quotient-projection-comparison"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QuotientTensorRightFlatComputation",
+  "file": "lean/Sheaf/Paper/QuotientTensorRightFlatComputation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientTensorFlatModel.right_flat_computation",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.QuotientTensorFlatModel.right_flat_computation"
+  ],
+  "statement": "theorem right_flat_computation\n    [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules R T)]\n    [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules S T)]\n    (a : R ⟶ S) [IsMonHom a] {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (lam : D a Y ⋙ L S f ≅ L R f ⋙ D a X)\n    (hlam : PullNormalized a f lam)\n    (bY : TensorIso a Y) (hbY : QuotientSectionTensor.TensorNormalized a Y bY)\n    (P Q : CochainComplex (Modules R Y) ℤ)\n    (hP : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P)\n    (hQ : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat Q)\n    (hPflat : ∀ i : ℤ, ObjectProperty.flat (P.X i))\n    (hQflat : ∀ i : ℤ, ObjectProperty.flat (Q.X i))\n    [IsIso (targetLocalization a f P Q)] :\n    (L S f).map (bY.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q)) ≫\n        ((CondensedRing.leftDerivedUpperStarTensor S f).app\n          ((D a Y).obj (DerivedCategory.Q.obj P))).app\n            ((D a Y).obj (DerivedCategory.Q.obj Q)) ≫\n        (lam.hom.app (DerivedCategory.Q.obj P) ⊗ₘ\n          lam.hom.app (DerivedCategory.Q.obj Q)) ≫ targetCompute a f P Q =\n      sourceCompute a f P Q ≫ DerivedCategory.Q.map (ordinaryRight a f P Q) ≫\n        targetTensor a f P Q",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261027T094523-L-238743",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261027T112333-L-1572355",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,249 @@
+{
+ "id": "lem-trf-parameter-product-reduced-cartier",
+ "kind": "statement",
+ "title": "Parameter products define reduced Cartier divisors with dense complement",
+ "statement": "Let $Y$ be a locally Noetherian regular scheme [pqf-def-locnoeth, def-weil-regular-scheme] and let $t_1,\\ldots,t_r\\in\\Gamma(Y,\\mathcal O_Y)$, with $r\\ge0$. Assume that for every $y\\in Y$, in $B=\\mathcal O_{Y,y}$ the sublist of nonunit germs $(t_j)_{j\\in J_y}$, where $J_y=\\{j:t_j\\notin B^\\times\\}$, consists of members at distinct positions of a regular system of parameters [def-weil-pbc-regular-system-of-parameters]. Put $f=\\prod_{i=1}^r t_i$, and let $H=V(f)\\hookrightarrow Y$ be the closed subscheme cut out by the principal ideal sheaf $(f)$ [def-weil-closed-immersion]. Then $H$ is reduced [def-pc-reduced-scheme] and is an effective Cartier divisor [def-nagata-effective-cartier-ideal], and $D(f)=Y\\setminus|H|$ is open dense in $Y$. More precisely, at every $y$, $B$ is a nonzero domain, each nonunit $t_j$ is prime, distinct such parameters do not divide one another, and\n$$(f)B=\\left(\\prod_{j\\in J_y}t_j\\right)B=\\bigcap_{j\\in J_y}(t_j)B.$$\nThis ideal is radical and its generator is a non-zero-divisor. The empty intersection is $B$ and the empty product is $1$, so the conclusion includes empty $Y$ and empty $H$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI, 1.4 and 1.7, printed pp. 69--70, and VIII, 4.1.1--4.1.2, printed p. 117; commutative algebra of parameter equations, their reduced Cartier property and density, extracted from returned proof steps 9--11."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-regular-system-of-parameters",
+  "def-weil-closed-immersion",
+  "def-pc-reduced-scheme",
+  "def-nagata-effective-cartier-ideal"
+ ],
+ "proof": [
+  {
+   "text": "Fix y and put B = O_{Y,y}. Regularity [def-weil-regular-scheme] and [lem-sc-regular-local-domain] give a nonzero domain. Apply clause (b) of [lem-sfb-transverse-prime-ideal-parameters] to the entire supplied parameter system (r = d). Its product is nonzero, hence every parameter is nonzero, and its principal prime ideals yield prime parameter elements via Ideal.span_singleton_prime. Its incomparability clause gives nondivisibility for the selected germs, since their positions are injective. For a finite family of pairwise nondividing primes, prove that the product ideal equals their intersection: induct on a finite set of indices; writing x = a_i b, primality and nondivisibility imply that all remaining primes divide b, and induction gives their product divides b. The reverse implication is factor divisibility. The intersection is radical by Ideal.isRadical_iInf. Split the full family into nonunit and unit subtypes with Fintype.prod_subtype_mul_prod_subtype; the second product is a unit, so Ideal.span_singleton_mul_right_unit identifies the full and selected product ideals. Every factor is a unit or one of the prime parameters, hence is nonzero; map_prod and prod_ne_zero_iff give a nonzero full germ product and thus its nonzerodivisor property. The finite-product argument includes the empty family without a dimension or nonemptiness restriction.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "lem-sc-regular-local-domain",
+    "lem-sfb-transverse-prime-ideal-parameters"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00NP (lemma-regular-domain), 00NQ (lemma-regular-ring-CM); parameter-product calculation of etale.tex, Tag 0BIA (lemma-strict-normal-crossings)"
+   }
+  },
+  {
+   "text": "For f the global product, put I = ofIdealTop(span {f}). At a point z of I.subscheme, choose an affine neighborhood U of its image. The existing proved Scheme.Hom.ker_stalkMap from WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion identifies the kernel of the surjective stalk map of this closed immersion [def-weil-closed-immersion] with the extension of I(U). Rewrite with ker_subschemeι, ofIdealTop_ideal, Ideal.map_span, and germ_res_apply: the kernel is exactly span {f_y}. It is radical by step 1. Mathlib RingHom.ker_isRadical_iff_reduced_of_surjective gives reducedness of the target stalk. Apply isReduced_of_isReduced_stalk [def-pc-reduced-scheme] to obtain reducedness of the closed subscheme. This uses the existing stalk-kernel API directly rather than reconstructing the quotient-localization isomorphism.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CT (proposition-localize-quotient); morphisms.tex, Tag 01QO (lemma-closed-immersion); schemes.tex, Tag 01J0 (definition-reduced)"
+   }
+  },
+  {
+   "text": "Let I = ofIdealTop(span {f}). Its subscheme inclusion has kernel I by ker_subschemeι. At every y choose an affine neighborhood U. Rewrite ofIdealTop_ideal, Ideal.map_span and germ_res_apply to identify the extension of its ideal with span {f_y}. Step 1 gives f_y in nonZeroDivisors; applying this to the difference of two elements gives injectivity of multiplication by f_y. The scheme clause isInvertible_ker_of_stalk_nonzerodivisor of [lem-sfb-stalk-nonzerodivisor-cartier-spreading], using local Noetherianity from hY, proves that I is an effective Cartier ideal [def-nagata-effective-cartier-ideal]. The generator is allowed to be a unit and the argument is vacuous on an empty scheme.",
+   "uses": [
+    "lem-sfb-stalk-nonzerodivisor-cartier-spreading",
+    "def-nagata-effective-cartier-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0AG8 (lemma-effective-Cartier-in-points), clause (2)"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-cartier-divisor-nowhere-dense] to the invertibility just proved and take its topological-density clause. The identities coe_support_ofIdealTop, zeroLocus_span and zeroLocus_singleton identify the complement of the support with the basic open of f. This proves density. Empty Y and an empty factor family are included by the existing complement theorem and the finite-product conventions.",
+   "uses": [
+    "lem-pc-cartier-divisor-nowhere-dense"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 07ZU (lemma-complement-effective-Cartier-divisor)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-regular-scheme",
+  "lem-sc-regular-local-domain",
+  "lem-sfb-transverse-prime-ideal-parameters",
+  "def-weil-closed-immersion",
+  "def-pc-reduced-scheme",
+  "lem-sfb-stalk-nonzerodivisor-cartier-spreading",
+  "def-nagata-effective-cartier-ideal",
+  "lem-pc-cartier-divisor-nowhere-dense"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI 1.4,1.7 and VIII 4.1.1--4.1.2; complete Lean assembly (B5, 2026-10-26) from full-system parameter_product_ideal_properties, finite-prime-product induction, the existing closed-immersion stalk-kernel API, stalk Cartier spreading and complement density. Stacks Tags 00NP, 0BIA, 01QO, 01J0, 0AG8 and 07ZU."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a locally Noetherian regular scheme a function whose nonunit factors are distinct members of regular parameter systems defines a reduced effective Cartier divisor with dense open complement.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, if a section $ x $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ vanishes on the basic open set $ D(f) $ defined by a section $ f \\\\in \\\\Gamma(U,\"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsReduced X] [H : IrreducibleSpace ↥X],\\n  AlgebraicGeometry.IsIntegral X\", \"doc\": \"If a scheme $X$ is irreducible as a topological space and has no nonzero nilpotent elements in its structure sheaf (i.e., is reduced), then $X$ is an integral scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (U : X.Opens) [AlgebraicGeometry.IsReduced X], AlgebraicGeometry.IsReduced ↑U\", \"doc\": \"Every open subset of a reduced scheme is itself a reduced scheme. This follows because the local rings of the open subscheme are restrictions of the local rings of the ambient scheme, which by definit\"}\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isReduced_stalk\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [∀ (x : ↥X), IsReduced ↑(X.presheaf.stalk x)], AlgebraicGeometry.IsReduced X\", \"doc\": \"If for every point $ x $ in a scheme $ X $, the stalk of the structure sheaf at $ x $ is a reduced ring (i.e., contains no nonzero nilpotent elements), then the scheme $ X $ is reduced.\"}\n  {\"name\": \"AlgebraicGeometry.IsReduced.component_reduced\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsReduced X] (U : X.Opens),\\n  IsReduced ↑(X.presheaf.obj (Opposite.op U))\", \"doc\": \"For any reduced scheme $X$, every open subset $U$ of $X$ has a reduced ring in the structure sheaf, i.e., the ring $\\\\mathcal{O}_X(U)$ is reduced.\"}\n  {\"name\": \"AlgebraicGeometry.instIsReducedSpecOfIsReducedCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ {R : CommRingCat} [H : IsReduced ↑R], AlgebraicGeometry.IsReduced (AlgebraicGeometry.Spec R)\", \"doc\": \"If $ R $ is a reduced commutative ring (i.e., $ R $ has no nonzero nilpotent elements), then the scheme $ \\\\operatorname{Spec}(R) $ is reduced, meaning all its local rings have no nonzero nilpotent ele\"}\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isAffine_isReduced\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X] [IsReduced ↑(X.presheaf.obj (Opposite.op ⊤))],\\n  AlgebraicGeometry.IsReduced X\", \"doc\": \"If $X$ is an affine scheme and the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is reduced (i.e., contains no nonzero nilpotent elements), then the scheme $X$ itself is reduced (i.e., all its lo\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n\nInspected the returned types: none states this complete assertion. Monoid generation, ordinary regular-sequence dimension, basic-open and reduced-scheme results supply only individual ingredients, not a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularLocalRing, Ideal.IsRadical",
+   "results": "[loogle] OK 0 hit(s)\n\nInspected the returned types: none states this complete assertion. Monoid generation, ordinary regular-sequence dimension, basic-open and reduced-scheme results supply only individual ingredients, not a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "parameter.*radical|radical.*parameter|IsRegularLocalRing.*IsRadical|product.*Cartier",
+   "results": "[grep] OK 0 hit(s)\n\nInspected the returned types: none states this complete assertion. Monoid generation, ordinary regular-sequence dimension, basic-open and reduced-scheme results supply only individual ingredients, not a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The principal ideal of a product of distinct regular parameters is radical and its generator is a non zero divisor; the complement of this Cartier divisor is dense.",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a regular local ring the product of a subset of a regular system of parameters generates the intersection of their prime principal ideals and is a nonzerodivisor, including the empty product.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Ideal.exists_disjoint_powers_of_span_eq_top\", \"module\": \"Mathlib/RingTheory/Ideal/Maximal\", \"type\": \"∀ {α : Type u} [inst : CommSemiring α] (s : Set α),\\n  Ideal.span s = ⊤ → ∀ (I : Ideal α), I ≠ ⊤ → ∃ r ∈ s, Disjoint ↑I ↑(Submonoid.powers r)\", \"doc\": \"Let $ \\\\alpha $ be a semiring, let $ s \\\\subseteq \\\\alpha $ be a set whose ideal span equals the entire semiring, and let $ I $ be a proper ideal of $ \\\\alpha $. Then there exists an element $ r \\\\in s $ s\"}\n  {\"name\": \"PrimeSpectrum.exists_primeSpectrum_prod_le_and_ne_bot_of_domain\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Basic\", \"type\": \"∀ {A : Type u} [inst : CommRing A] [IsDomain A] [IsNoetherianRing A],\\n  ¬IsField A →\\n    ∀ {I : Ideal A},\\n      I ≠ ⊥ → ∃ Z, (Multiset.map PrimeSpectrum.asIdeal Z).prod ≤ I ∧ (Multiset.map PrimeSpectrum.asIdeal Z).prod ≠ ⊥\", \"doc\": \"In a commutative domain $ A $ that is not a field, for every non-zero ideal $ I $, there exists a finite multiset $ Z $ of prime ideals in the prime spectrum of $ A $ such that the product of the idea\"}\n  {\"name\": \"RingTheory.Sequence.IsRegular.top_ne_smul\", \"module\": \"Mathlib/RingTheory/Regular/RegularSequence\", \"type\": \"∀ {R : Type u_1} {M : Type u_3} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {rs : List R},\\n  RingTheory.Sequence.IsRegular M rs → ⊤ ≠ Ideal.ofList rs • ⊤\", \"doc\": \"For a commutative ring $ R $, an $ R $-module $ M $, and a list $ rs $ of elements in $ R $ that form a regular sequence on $ M $, the entire module $ M $ is not equal to the submodule generated by mu\"}\n  {\"name\": \"exists_multiset_prod_cons_le_and_prod_not_le\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Ideal/Basic\", \"type\": \"∀ {A : Type u_2} [inst : CommRing A] [IsDedekindDomain A],\\n  ¬IsField A →\\n    ∀ {I M : Ideal A},\\n      I ≠ ⊥ →\\n        I ≤ M →\\n          ∀ [hM : M.IsMaximal],\\n            ∃ Z,\\n              (M ::ₘ Multiset.map PrimeSpectrum.asIdeal Z).prod ≤ I ∧ ¬(Multiset.map PrimeSpectrum.asIdeal Z).prod ≤ I\", \"doc\": \"In a Dedekind domain $ A $ that is not a field, for any nonzero ideal $ I $ contained in a maximal ideal $ M $, there exists a multiset $ Z $ of prime ideals of $ A $ such that the product of $ M $ wi\"}\n  {\"name\": \"RingTheory.Sequence.isRegular_iff\", \"module\": \"Mathlib/RingTheory/Regular/RegularSequence\", \"type\": \"∀ {R : Type u_1} (M : Type u_3) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] (rs : List R),\\n  RingTheory.Sequence.IsRegular M rs ↔ RingTheory.Sequence.IsWeaklyRegular M rs ∧ ⊤ ≠ Ideal.ofList rs • ⊤\", \"doc\": \"For a commutative ring $ R $, an $ R $-module $ M $, and a list $ rs $ of elements in $ R $, the sequence $ rs $ is a regular sequence on $ M $ if and only if it is a weakly regular sequence and the i\"}\n  {\"name\": \"Associates.finprod_ne_zero\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Factorization\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDedekindDomain R] (I : Ideal R),\\n  Associates.mk (∏ᶠ (v : IsDedekindDomain.HeightOneSpectrum R), v.maxPowDividing I) ≠ 0\", \"doc\": \"For any non-zero ideal $ I $ in a Dedekind domain $ R $, the product of the maximal powers of each height one prime ideal dividing $ I $, when mapped to the associates of $ R $, is non-zero. This refl\"}\n  {\"name\": \"Ideal.nonempty_inter_nonZeroDivisors_of_faithfulSMul\", \"module\": \"Mathlib/RingTheory/Ideal/AssociatedPrime/Finiteness\", \"type\": \"∀ {A : Type u} [inst : CommRing A] [IsNoetherianRing A] {I : Ideal A} [FaithfulSMul A ↥I],\\n  (↑I ∩ ↑(nonZeroDivisors A)).Nonempty\", \"doc\": \"If $ I $ is an ideal of a commutative ring $ A $ equipped with a faithful scalar multiplication, then the intersection of $ I $ with the set of non-zero divisors of $ A $ is non-empty. In other words,\"}\n  {\"name\": \"IsDedekindDomain.exists_forall_sub_mem_ideal\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Ideal/Lemmas\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsDedekindDomain R] {ι : Type u_4} {s : Finset ι} (P : ι → Ideal R) (e : ι → ℕ),\\n  (∀ i ∈ s, Prime (P i)) →\\n    (∀ i ∈ s, ∀ j ∈ s, i ≠ j → P i ≠ P j) → ∀ (x : ↥s → R), ∃ y, ∀ (i : ι) (hi : i ∈ s), y - x ⟨i, hi⟩ ∈ P i ^ e i\", \"doc\": \"In a Dedekind domain $ R $, given a finite set of pairwise distinct prime ideals $ P_i $ and corresponding elements $ x_i \\\\in R $, there exists an element $ y \\\\in R $ such that $ y \\\\equiv x_i \\\\pmod{P_\"}\n\nInspected the returned types: none states this complete assertion. Monoid generation, ordinary regular-sequence dimension, basic-open and reduced-scheme results supply only individual ingredients, not a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a regular locally Noetherian scheme a product of distinct local parameters defines a reduced effective Cartier divisor with dense complement.",
+   "results": "8 hits; inspected returned types: AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.isReduced_of_isReduced_stalk, Function.FactorizedRational.divisor. No hit states the complete scheme assertion; the squarefree and radical-product results alone do not give the parameter or Cartier assertions.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "parameter.*radical|radical.*parameter|product.*Cartier|Cartier.*product",
+   "results": "0 hits; inspected returned types: . No hit states the complete scheme assertion; the squarefree and radical-product results alone do not give the parameter or Cartier assertions.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A squarefree product of distinct regular parameters on a regular scheme cuts out a reduced Cartier divisor.",
+   "results": "8 hits; inspected returned types: squarefree_mul_iff, Squarefree.of_mul_left, Nat.squarefree_mul, Squarefree, Squarefree.squarefree_of_dvd, Squarefree.of_mul_right, Finset.squarefree_prod_of_pairwise_isCoprime, Nat.squarefree_mul_iff. No hit states the complete scheme assertion; the squarefree and radical-product results alone do not give the parameter or Cartier assertions.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularLocalRing, Ideal.IsRadical",
+   "results": "0 hits; inspected returned types: . No hit states the complete scheme assertion; the squarefree and radical-product results alone do not give the parameter or Cartier assertions.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a regular local ring the product of distinct members of a regular system of parameters generates a radical ideal equal to the intersection of the parameter prime ideals.",
+   "results": "8 hits; inspected returned types: Ideal.isPrimary_decomposition_pairwise_ne_radical, Ideal.radical_mul, Ideal.isPrimary_finset_inf, Ideal.isPrimary_finsetInf, Ideal.IsMinimalPrimaryDecomposition.distinct, Ideal.exists_minimal_isPrimary_decomposition_of_isPrimary_decomposition, Ideal.isPrimary_inf, Ideal.isPrimary_iff. No hit states the complete scheme assertion; the squarefree and radical-product results alone do not give the parameter or Cartier assertions.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-free-characteristic-regular-boundary",
+  "date": "2026-10-22",
+  "group": "Q105"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), nearby-duality alteration reduction: the regular modification of each log regular nodal pair, used in Expose X, proof of Lemma 2.2, through the existing nearby-duality/alteration ancestry. Expose VI, 1.4 and 1.7, printed pp. 69--70; Expose VIII, 3.4.4, printed p. 110, and 4.1.1, printed p. 117. Normal crossings here is the etale-local parameter criterion, not strictness of global components. Auxiliary: Expose VI, 1.4 and 1.7, printed pp. 69--70, and VIII, 4.1.1--4.1.2, printed p. 117; commutative algebra of parameter equations, their reduced Cartier property and density, extracted from returned proof steps 9--11.",
+   "via": [
+    "lem-trf-free-characteristic-regular-boundary",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-parameter-product-reduced-cartier",
+  "worker": "stage1",
+  "summary": "Checked the parameter-boundary source and all cited statements. Reused the existing stronger local parameter-product theorem, regular-local domain theorem, quotient-localization leaf, stalkwise Cartier spreading theorem and Cartier density theorem. No statement change and no new nodes; all empty cases retained. No project declaration supplies an attachment. Repair of returned head bcb9e20fd8f: re-read every cited statement against the current DAG, revalidated the now-explicit ideal-sheaf/stalk formulation of the Cartier criterion, and rewrote step 3 and its exact citation quote. The hypotheses and conclusion used remain valid.",
+  "blueprint": "Proof (1)--(2), nearby-duality alteration reduction: the regular modification of each log regular nodal pair, used in Expose X, proof of Lemma 2.2, through the existing nearby-duality/alteration ancestry. Expose VI, 1.4 and 1.7, printed pp. 69--70; Expose VIII, 3.4.4, printed p. 110, and 4.1.1, printed p. 117. Normal crossings here is the etale-local parameter criterion, not strictness of global components. Auxiliary: Expose VI, 1.4 and 1.7, printed pp. 69--70, and VIII, 4.1.1--4.1.2, printed p. 117; commutative algebra of parameter equations, their reduced Cartier property and density, extracted from returned proof steps 9--11.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-regular-local-domain",
+    "why": "Step 1 uses the domain theorem for an arbitrary regular local ring; this unit supplies no replacement for this commutative algebra tool."
+   },
+   {
+    "node": "lem-sfb-transverse-prime-ideal-parameters",
+    "why": "Step 1 uses clause (b), the local parameter-product intersection and radicality theorem; this generic local algebra is needed for the existing parameter-boundary route."
+   },
+   {
+    "node": "lem-sfb-stalk-nonzerodivisor-cartier-spreading",
+    "why": "Step 3 uses the generic locally Noetherian stalk criterion for an effective Cartier ideal; no trace-formula unit lemma states it."
+   },
+   {
+    "node": "lem-pc-cartier-divisor-nowhere-dense",
+    "why": "Step 4 uses the generic density theorem for effective Cartier divisors on arbitrary schemes; no trace-formula unit result replaces it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-regular-local-domain",
+  "lem-sfb-transverse-prime-ideal-parameters",
+  "lem-sfb-stalk-nonzerodivisor-cartier-spreading",
+  "lem-pc-cartier-divisor-nowhere-dense"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q159-c82c2ee5a",
+  "group": "Q159",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q159-c82c2ee5a (reviewer sub-agent of L); spot-checked: Read the whole item and every cited statement. The delivery has one commit with the item and its report. It has no new nodes, and statement, stmt_deps and source are unchanged. It repairs the head that passed review as cd0189 and was then refused at landing because the dependency lem-sfb-stalk-nonzerodivisor-cartier-spreading changed. Diffed against the cd0189 snapshot: only step 3 (and the split_report summary) changed. All 11 cited statements in the snapshot match side-live, which holds the current reviewed wording of the spreading lemma: the ideal sheaf I with ideal stalk I_x. Step 1: B is regular local, hence a domain by lem-sc-regular-local-domain; a permuted RSP is still an RSP; clause (b) of transverse-prime-ideal-parameters gives T a nonzerodivisor, the (t_i) incomparable primes and (T)=∩(t_i) radical, including s=0; t_j≠0 because T is a nonzerodivisor; f_y=uT. Step 2: the 01QO affine form and the 00CT Mathlib leaf give O_{H,y}=B/(f_y), reduced by radicality, and reducedness is stalkwise. Step 3: Y is locally Noetherian, H is a closed subscheme, and I_y=(f_y) has a nonzerodivisor generator at every y, unit off H. Read Stacks 0AG8(2) at divisors.tex l.2939: it needs the condition only on D, which agrees. The lemma concludes I is an effective Cartier ideal. Step 4: lem-pc-cartier-divisor-nowhere-dense (07ZU) gives density, and the complement is D(f). Edge cases: field/generic point (t_j forced to be units), r=0, Y=∅, xy at the origin and on an axis; the hypothesis excludes (x,x) and (x,x+y²). Duplicate search (rg -L, about 40 RSP/Cartier/reduced nodes): snc-boundary-parameter-criterion needs Noetherian X and has no density; etale-coordinate-divisor-parameters is affine with no reducedness or density; strict-local-branches is about henselizations. None is a duplicate, and there is no cycle. The parent free-characteristic-regular-boundary step 3 uses exactly reducedness, the Cartier property and density. Accepted the tool_uses (four generic algebra/scheme lemmas). Tags 00NP/00NQ/00CT/01QO/01J0/0AG8/07ZU/0BIA resolve. No SGA citation; by=agent is correct. Advisory only: step 3 does not itself cite def-sbc-closed-immersion-ideal-sheaf, which the cited lemma carries."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ParameterProductReducedCartier",
+  "declaration": "AlgebraicGeometry.parameter_product_reduced_cartier",
+  "file": "lean/Sheaf/AlgebraicGeometry/ParameterProductReducedCartier.lean",
+  "statement": "theorem parameter_product_reduced_cartier (Y : Scheme.{u}) (hY : IsRegularScheme Y) (r : ℕ) (t : Fin r → Γ(Y, ⊤)) (hparams : ∀ y : Y, ∃ (d : ℕ) (p : Fin d → Y.presheaf.stalk y), @IsLocalRing.IsRegularSystemOfParameters _ _ _ (@IsRegular.isRegularLocalRing_stalk Y hY.2 y).toIsNoetherian (List.ofFn p) ∧ ∃ e : {j : Fin r // ¬ IsUnit (Y.presheaf.germ ⊤ y trivial (t j))} ↪ Fin d, ∀ j, Y.presheaf.germ ⊤ y trivial (t j.val) = p (e j)) : IsReduced (Y.zeroLocusSubscheme {∏ i, t i}) ∧ (Scheme.IdealSheafData.ofIdealTop (Ideal.span {∏ i, t i})).IsInvertible ∧ Dense (Y.basicOpen (∏ i, t i) : Set Y) ∧ ∀ y : Y, IsDomain (Y.presheaf.stalk y) ∧ (∀ j : Fin r, ¬ IsUnit (Y.presheaf.germ ⊤ y trivial (t j)) → Prime (Y.presheaf.germ ⊤ y trivial (t j))) ∧ (∀ i j : Fin r, i ≠ j → ¬ IsUnit (Y.presheaf.germ ⊤ y trivial (t i)) → ¬ IsUnit (Y.presheaf.germ ⊤ y trivial (t j)) → ¬ Y.presheaf.germ ⊤ y trivial (t i) ∣ Y.presheaf.germ ⊤ y trivial (t j)) ∧ Ideal.span {Y.presheaf.germ ⊤ y trivial (∏ i, t i)} = Ideal.span {∏ j : {j : Fin r // ¬ IsUnit (Y.presheaf.germ ⊤ y trivial (t j))}, Y.presheaf.germ ⊤ y trivial (t j.val)} ∧ Ideal.span {Y.presheaf.germ ⊤ y trivial (∏ i, t i)} = ⨅ j : {j : Fin r // ¬ IsUnit (Y.presheaf.germ ⊤ y trivial (t j))}, Ideal.span {Y.presheaf.germ ⊤ y trivial (t j.val)} ∧ (Ideal.span {Y.presheaf.germ ⊤ y trivial (∏ i, t i)}).IsRadical ∧ Y.presheaf.germ ⊤ y trivial (∏ i, t i) ∈ nonZeroDivisors (Y.presheaf.stalk y)",
+  "branch": "sheaf-dag",
+  "by": "Q32",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d7fe95223",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Q32 d7fe9522 lem-trf-parameter-product-reduced-cartier: only the lean record plus new module ParameterProductReducedCartier.lean and the report; node math unchanged vs side-live. Clause check: IsRegularScheme = IsLocallyNoetherian ∧ IsRegular; RSP hypothesis via ∃ d p, IsRegularSystemOfParameters (List.ofFn p) and J_y ↪ Fin d with germ equalities (distinct positions; Noetherian instance from hY.2, no extra assumption; RSP exists for empty J_y). Conclusions: IsReduced of principal zeroLocusSubscheme {∏ t}, ofIdealTop(span{f}).IsInvertible (def-nagata-effective-cartier-ideal owner), Dense basicOpen, stalk IsDomain, Prime nonunits, pairwise non-divisibility, span(f)=span(∏_{J_y})=⨅_{J_y} span, IsRadical, nonZeroDivisors: all present and true per node proof. Edge cases r=0, Y=∅, field stalks, repeats OK; single universe. stmt_deps all used, no theorem stmt_dep; zeroLocusSubscheme/ofIdealTop upstream helpers not owned by a DAG node. lean.statement verbatim; sorry only; docstrings with source + blueprint + 4-step plan; report has Worker report and Second reading by Q32. No compile (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261026T081032-L-1777485",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

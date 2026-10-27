@@ -1,0 +1,125 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 03CB and 09A5; exact localization Tag 05S7 and exchange mate transposition Tag 0E47. Step 7 of lem-sf-ringed-restriction-exchange-open-descent."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-strict-tower-operations",
+  "def-sf-ringed-restriction-open-cube"
+ ],
+ "proof_origin": {
+  "by": "worker J4",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Proved implementation of parent step 7, factored after optimizing concrete comparison expansion to meet the per-file compile limit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical inverse image comparison isomorphisms commute around a cube of schemes with sheaves of modules",
+   "results": "8 hits, including Scheme.Modules.pseudofunctor_associativity and SheafOfModules.pullback_assoc; these concern different pullback presentations, without the actual pro-etale coefficient comparisons.",
+   "date": "2026-10-27",
+   "verdict": "No direct match; the published pro-etale module compositors still need to be identified with this coherence."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateIsoEquiv, _ = _",
+   "results": "4 hom/inverse formulas for conjugateIsoEquiv; none states the ordinary inverse-image cube.",
+   "date": "2026-10-27",
+   "verdict": "Infrastructure only."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_hcomp|mateEquiv_vcomp|mapDerivedCategorySquareIso",
+   "results": "Mathlib has mate pasting. Local rg finds the proved ExchangeMateCube and DerivedExactCube, and ambientSquare_localization, but no ringed ordinary restriction cube.",
+   "date": "2026-10-27",
+   "verdict": "Reuse these proved categorical and localization theorems for the parent; isolate only the ordinary compositor coherence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RingedRestrictionExchangeOpenDescent",
+  "date": "2026-10-27",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-ringed-restriction-exchange-open-descent",
+   "place": "Step 7: exact localization of the ordinary cube followed by compatibility of the four exchange mates.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "id": "lem-sf-ringed-restriction-derived-cube",
+ "title": "The localized ringed cube commutes after taking exchange mates",
+ "statement": "For any ringed restriction cube C:OpenCube r j, the canonical derived exchange mates satisfy the restriction equation of step 7 of lem-sf-ringed-restriction-exchange-open-descent. This is valid for any scheme map j, with no openness assumption. The upper and base comparison factors are the inverses of the specified ambient derived inverse-image square comparisons.",
+ "proof": [
+  {
+   "text": "Apply the ordinary inverse-image cube equation on modules at every object.",
+   "uses": [
+    "lem-sf-ringed-restriction-pullback-cube"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact localization preserves the cube. Normalize all six localized square isomorphisms to the published ambient comparisons.",
+   "uses": [
+    "lem-fix-site-open-exchange-localization",
+    "lem-weil-pbc-ringed-square-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the four specified derived adjunctions and the four inverse side comparisons in exchangeMate_cube. The defining equations of the four exchange transformations give the stated equation. TypedDerivedCube packages the actual data; its abstract mate proof is specialized only after normalization, avoiding expansion of the concrete comparisons.",
+   "uses": [
+    "lem-weil-pbc-exchange-mate-cube",
+    "def-weil-pbc-strict-tower-operations",
+    "def-sf-ringed-restriction-open-cube"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ringed-restriction-pullback-cube",
+  "lem-fix-site-open-exchange-localization",
+  "lem-weil-pbc-ringed-square-localization",
+  "lem-weil-pbc-exchange-mate-cube",
+  "def-weil-pbc-strict-tower-operations",
+  "def-sf-ringed-restriction-open-cube"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RingedRestrictionDerivedCube",
+  "file": "lean/Sheaf/AlgebraicGeometry/RingedRestrictionDerivedCube.lean",
+  "declaration": "AlgebraicGeometry.Scheme.RingedRestrictionExchange.restriction_exchange_cube",
+  "statement": "theorem restriction_exchange_cube (r : StrictTowerRingedSquare sq)\n    (C : OpenCube r j)\n    (K : DerivedCategory (proEtaleRingModules X r.RX)) :\n    (basePull C.targetFace).mapDerivedCategory.map ((exchange r).app K) ≫\n        (exchange C.targetFace).app ((upperPull r).mapDerivedCategory.obj K) ≫\n        (targetPush C.localRings).rightDerivedFunctor.map\n          ((proEtaleAmbientRingedPullbackComparison C.upperSquare\n            C.upperFace.RX C.upperFace.RY C.upperFace.RX' C.upperFace.RY'\n            C.upperFace.cf C.upperFace.cg C.upperFace.cg' C.upperFace.cf'\n            C.upperFace.coherent).inv.app K) =\n      (proEtaleAmbientRingedPullbackComparison C.baseSquare\n            C.baseFace.RX C.baseFace.RY C.baseFace.RX' C.baseFace.RY'\n            C.baseFace.cf C.baseFace.cg C.baseFace.cg' C.baseFace.cf'\n            C.baseFace.coherent).inv.app ((verticalPush r).rightDerivedFunctor.obj K) ≫\n        (basePull C.localRings).mapDerivedCategory.map ((exchange C.sourceFace).app K) ≫\n        (exchange C.localRings).app ((upperPull C.sourceFace).mapDerivedCategory.obj K)",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261027T050611-L-243018",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261027T050611-L-243018",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

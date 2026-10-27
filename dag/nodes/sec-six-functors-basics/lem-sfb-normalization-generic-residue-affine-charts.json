@@ -1,0 +1,278 @@
+{
+ "id": "lem-sfb-normalization-generic-residue-affine-charts",
+ "kind": "statement",
+ "title": "Affine normalization in the product of generic residue fields",
+ "statement": "Let $T$ be a scheme [def-pc-scheme] such that every quasi-compact open has finitely many irreducible components [def-weil-irreducible-components]. Write $\\nu_T:T^\\nu\\to T$ for its componentwise normalization [def-weil-pbc-reduced-normalization]. For every affine open $U=\\operatorname{Spec}A\\subseteq T$ [def-weil-affine-spectrum], let $I_U$ be the finite set of generic points of its irreducible components [def-sc-generic-point], set $C_U=\\prod_{\\eta\\in I_U}\\kappa_T(\\eta)$ [def-weil-residue-field], and give $C_U$ the $A$-algebra structure obtained by taking germs and then residue classes. Let $D_U=\\{c\\in C_U:c\\text{ is integral over }A\\}$ [def-weil-pbc-integral-closure]. There is a canonical isomorphism of $U$-schemes $\\nu_T^{-1}(U)\\simeq\\operatorname{Spec}D_U$, under which the normalization map is induced by $A\\to D_U$. Moreover these identifications are compatible with affine open inclusions: for affine $W\\subseteq U$, the generic points in $I_W$ identify with those in $I_U$ lying in $W$, their residue fields are unchanged, the projection $C_U\\to C_W$ sends $D_U$ into $D_W$, and its restriction $D_U\\to D_W$ is the restriction map on the sections of $\\nu_{T,*}\\mathcal O_{T^\\nu}$. No reducedness, Noetherianity or finiteness of normalization is assumed. For $U=\\varnothing$, both $C_U$ and $D_U$ are the zero ring and the inverse image is empty.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 035P (lemma-description-normalization, parts (1)-(4)), 035O (lemma-normalization-reduced), 0CDV (lemma-normalization-in-terms-of-components); the restriction maps are those of the integral-closure sheaf in Definition 035H (definition-normalization-X-in-Y) and Lemma 035F (lemma-integral-closure)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-irreducible-components",
+  "def-weil-pbc-reduced-normalization",
+  "def-weil-affine-spectrum",
+  "def-sc-generic-point",
+  "def-weil-residue-field",
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof": [
+  {
+   "text": "For an open $V\\subseteq T$, the nonempty traces $Z\\cap V$ of irreducible components $Z$ of $T$ are distinct irreducible components of $V$ by [lem-sc-components-open-injection]. Conversely, a component $H$ of $V$, regarded as an irreducible subset of $T$, is contained in a component $Z$ of $T$ by [lem-sc-irreducible-components-cover]. Then $H\\subseteq Z\\cap V$, so maximality gives equality. Each $Z$ has a unique generic point $\\eta$ by [lem-sc-scheme-sober]. The equality $Z=\\overline{\\{\\eta\\}}$ shows that $Z\\cap V\\ne\\varnothing$ exactly when $\\eta\\in V$, and then $\\overline{\\{\\eta\\}}^{\\,V}=Z\\cap V$. Thus the generic points of components of $V$ are exactly the generic points of $T$ belonging to $V$. Apply this to $U$ and to $W\\subseteq U$ to obtain $I_W=I_U\\cap W$. The set $I_U$ is finite by the hypothesis on quasi-compact opens.",
+   "uses": [
+    "lem-sc-components-open-injection",
+    "lem-sc-irreducible-components-cover",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 004W (topology.tex, lemma-irreducible, (3)-(4)) and 01IS (schemes.tex, lemma-scheme-sober); applied to the components in Tag 0CDV."
+   }
+  },
+  {
+   "text": "For $\\eta\\in I_U$, let $Z_\\eta$ be the corresponding component of $T$ with its reduced induced structure. By [lem-weil-pbc-spec-irreducible-components-minimal-primes], its trace on $U=\\operatorname{Spec}A$ is $V(\\mathfrak p_\\eta)$ for a minimal prime $\\mathfrak p_\\eta$ of $A$. The point $\\mathfrak p_\\eta$ is its generic point, since its closure consists precisely of the primes containing $\\mathfrak p_\\eta$. By [lem-weil-pbc-reduced-induced-closed-subscheme], the open $Z_\\eta\\cap U$ is therefore canonically $\\operatorname{Spec}A_\\eta$, where $A_\\eta=A/\\mathfrak p_\\eta$, with structural map the quotient map from $A$. It is nonempty and integral. These identifications also apply to $Z_\\eta\\cap W$ whenever $\\eta\\in I_W$.",
+   "uses": [
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 00ES (algebra.tex, lemma-irreducible, (3)); Tag 01J3 (schemes.tex, lemma-reduced-closed-subscheme), affine construction in its proof; Tag 0CDV."
+   }
+  },
+  {
+   "text": "Put $K_\\eta=\\kappa_T(\\eta)$. The germ-compatible localization in [lem-weil-pbc-affine-open-stalk-localization] identifies $\\mathcal O_{T,\\eta}$ with $A_{\\mathfrak p_\\eta}$. Its maximal ideal is $\\mathfrak p_\\eta A_{\\mathfrak p_\\eta}$: a fraction is a unit exactly when its numerator is outside $\\mathfrak p_\\eta$. The residue quotient [def-weil-residue-field] has the canonical isomorphism\n$$A_{\\mathfrak p_\\eta}/\\mathfrak p_\\eta A_{\\mathfrak p_\\eta}\\ \\longrightarrow\\ \\operatorname{Frac}(A_\\eta),\\qquad [a/s]\\longmapsto (a\\bmod\\mathfrak p_\\eta)/(s\\bmod\\mathfrak p_\\eta).$$\nIts inverse sends a quotient of residue classes to $[a/s]$; cross multiplication proves both maps well-defined and inverse. By [lem-sc-integral-function-field-affine-fraction] for the integral scheme $Z_\\eta$ and its nonempty affine open $Z_\\eta\\cap U$, this is its function field. Thus we canonically identify $k(Z_\\eta)=K_\\eta$, and $A\\to A_\\eta\\to K_\\eta$ is exactly the germ-then-residue map. This identification uses the generic germ, so it is independent of the chosen affine neighbourhood. For an affine inclusion $W\\subseteq U$ containing $\\eta$, the germ of a restricted section equals its original germ at $\\eta$; taking the same residue quotient therefore makes these field identifications commute with restriction.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-residue-field",
+    "lem-sc-integral-function-field-affine-fraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01HV (schemes.tex, lemma-spec-sheaves, (6)); Tag 01RV (morphisms.tex, lemma-integral-scheme-rational-functions) and Definition 01RW (definition-function-field); explicit residue-quotient calculation."
+   }
+  },
+  {
+   "text": "Let $B_\\eta(U)\\subseteq K_\\eta$ be the integral closure of $A_\\eta$ in this function field. Apply the affine clause of [def-fin-normalization-extension] to $Z_\\eta$ and the degree-one extension $k(Z_\\eta)/k(Z_\\eta)$. It gives $\\nu_{Z_\\eta}^{-1}(Z_\\eta\\cap U)=\\operatorname{Spec}B_\\eta(U)$, with map to $\\operatorname{Spec}A_\\eta$ induced by inclusion of $A_\\eta$ in $B_\\eta(U)$. By [def-weil-pbc-reduced-normalization], $T^\\nu$ is the coproduct of these component normalizations. Its summands form a disjoint open cover by [lem-weil-pbc-scheme-coproduct-family]. Restricting that cover to $\\nu_T^{-1}U$ gives\n$$\\nu_T^{-1}U\\simeq\\coprod_{\\eta\\in I_U}\\operatorname{Spec}B_\\eta(U).$$\nComponents not meeting $U$ contribute the empty open. This argument uses neither reducedness of $T$ nor finiteness of any component normalization.",
+   "uses": [
+    "def-fin-normalization-extension",
+    "def-weil-pbc-reduced-normalization",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0CDV (lemma-normalization-in-terms-of-components); affine construction of Tags 035H and 035P, and the affine clause in blueprint def-fin-normalization-extension with L=K."
+   }
+  },
+  {
+   "text": "Assume $U\\ne\\varnothing$, so $I_U\\ne\\varnothing$ by step 1; the empty case is checked in step 7. We identify $D_U$ with $\\prod_{\\eta\\in I_U}B_\\eta(U)$ inside $C_U$. A tuple integral over $A$ projects to elements integral over $A_\\eta$, by projecting its monic equation and reducing the coefficients. Conversely, for a tuple $(b_\\eta)$ with $b_\\eta\\in B_\\eta(U)$, choose a monic equation over $A_\\eta$ for each $b_\\eta$. Lift its coefficients along the surjection $A\\to A_\\eta$, retaining leading coefficient $1$, to obtain a monic $P_\\eta\\in A[X]$ that kills $b_\\eta$ in $K_\\eta$. The finite product $P=\\prod_\\eta P_\\eta$ is monic and kills the entire tuple: in coordinate $\\eta$ its factor $P_\\eta(b_\\eta)$ vanishes. This proves equality using the monic-equation definition [def-weil-pbc-integral-closure]. Apply [lem-weil-pbc-finite-affine-coproduct-spectrum] to step 4 to obtain the canonical isomorphism with $\\operatorname{Spec}D_U$. Its structural map sends $a\\in A$ to its images in each $B_\\eta(U)\\subseteq K_\\eta$, hence is the specified $A\\to D_U$.",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "lem-weil-pbc-finite-affine-coproduct-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035P (lemma-description-normalization, (3)-(4)); its finite-product integral-closure argument written with lifted monic polynomials; Tag 0CDV."
+   }
+  },
+  {
+   "text": "Let $W\\subseteq U$ be affine. Step 1 gives $I_W\\subseteq I_U$; surviving points have the same ambient stalks and residue fields. On a surviving component, [def-sc-normalization] constructs the normalization algebra as a subsheaf of the constant sheaf $K_\\eta$. On any nonempty irreducible open its sections in that constant sheaf are $K_\\eta$: a locally constant function is constant since any two nonempty opens intersect. Restrictions in this ambient sheaf are identities. The affine charts of [def-fin-normalization-extension] are glued using these inclusions. Concretely, on a principal open $D(h)\\subseteq Z_\\eta\\cap U$ with $h\\ne0$, [lem-weil-pbc-integral-closure-commutes-localization] identifies its normalization ring with $B_\\eta(U)_h\\subseteq K_\\eta$; its map sends $b/h^m$ to that same quotient in $K_\\eta$. Thus the chart maps to the constant sheaf agree on a principal-open basis, hence on all opens by the sheaf axiom. Applying the affine chart description also to $Z_\\eta\\cap W$ identifies restriction with $B_\\eta(U)\\hookrightarrow B_\\eta(W)$ inside $K_\\eta$. Explicitly, if $c=(c_\\eta)\\in D_U$ satisfies $c^n+\\sum_{j<n}a_jc^j=0$, then for every surviving $\\eta\\in I_W$ its unchanged coordinate satisfies $c_\\eta^n+\\sum_{j<n}(a_j|_W)c_\\eta^j=0$ in $K_\\eta$, because restriction preserves generic germs by step 3. Thus the projected tuple lies in $D_W$ by [def-weil-pbc-integral-closure]. No localization description of the arbitrary affine inclusion $W\\subseteq U$ is needed.",
+   "uses": [
+    "def-sc-normalization",
+    "def-fin-normalization-extension",
+    "def-weil-pbc-integral-closure",
+    "lem-weil-pbc-integral-closure-commutes-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 035F (lemma-integral-closure), 035H (definition-normalization-X-in-Y), and 0307 (algebra.tex, lemma-integral-closure-localize): restrictions of the integral-closure algebra, first on principal opens and then by the sheaf axiom."
+   }
+  },
+  {
+   "text": "The summands in step 4 are disjoint open subsets. The sheaf gluing axiom therefore identifies sections on their union with the product of their section rings: tuples have no compatibility condition on disjoint intersections. Under these product identifications, restricting from $\\nu_T^{-1}U$ to $\\nu_T^{-1}W$ discards the summands not meeting $W$ and applies the maps of step 6 on the others. After the inclusions in the fields, this is exactly the projection $C_U\\to C_W$. Its restriction $D_U\\to D_W$ is therefore the restriction map of $\\nu_{T,*}\\mathcal O_{T^\\nu}$, and the Spec identifications commute with the affine open inclusions. All identifications were specified by germs, subrings and the canonical coproduct-to-product-spectrum map, so they are canonical. If $U=\\varnothing$, $I_U=\\varnothing$, the product is the zero ring, its integral-closure subring is the zero ring (its sole element satisfies the monic polynomial $X$), and the coproduct and inverse image are empty. The same argument covers $W=\\varnothing$.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-pc-scheme",
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 035F and 035H, restriction maps of the normalization algebra; Tag 0CDV, disjoint component normalizations; empty-product convention."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-fin-normalization-extension",
+  "def-pc-scheme",
+  "def-sc-normalization",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-reduced-normalization",
+  "def-weil-residue-field",
+  "lem-sc-components-open-injection",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-sc-irreducible-components-cover",
+  "lem-sc-scheme-sober",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 035P (lemma-description-normalization), 0CDV (lemma-normalization-in-terms-of-components), and 035F (lemma-integral-closure); componentwise construction, finite monic-polynomial argument, and restriction of the integral-closure subsheaves."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "normalizationObjIso|normalization.*[Cc]omponent|[Cc]omponent.*normalization",
+   "results": "{\"t\": \"2026-10-22T06:44:19Z\", \"tool\": \"grep\", \"query\": \"normalizationObjIso|normalization.*[Cc]omponent|[Cc]omponent.*normalization\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\"], \"digest\": \"7d45533b35be5d0b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: normalizationObjIso and normalizationDiagram describe relative normalization of a given qcqs map; no hit identifies the componentwise absolute normalization with these generic-residue charts. Read Mathlib/AlgebraicGeometry/Normalization.lean:48-67, 219-239, 365-458."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The componentwise normalization of Spec A is Spec of the integral closure of A in the product of the residue fields at minimal primes, without a Noetherian assumption",
+   "results": "{\"t\": \"2026-10-22T06:44:19Z\", \"tool\": \"leansearch\", \"query\": \"The componentwise normalization of Spec A is Spec of the integral closure of A in the product of the residue fields at minimal primes, without a Noetherian assumption\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"completeIntegralClosure_eq_integralClosure\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\"], \"digest\": \"31a729322ffb129a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: normalizationObjIso and normalizationDiagram describe relative normalization of a given qcqs map; no hit identifies the componentwise absolute normalization with these generic-residue charts. Read Mathlib/AlgebraicGeometry/Normalization.lean:48-67, 219-239, 365-458."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalizationObjIso\"",
+   "results": "{\"t\": \"2026-10-22T06:44:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"normalizationObjIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationObjIso\", \"AlgebraicGeometry.Scheme.Hom.normalizationObjIso_hom_val\"], \"digest\": \"d4b7cc76bc4f865e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: normalizationObjIso and normalizationDiagram describe relative normalization of a given qcqs map; no hit identifies the componentwise absolute normalization with these generic-residue charts. Read Mathlib/AlgebraicGeometry/Normalization.lean:48-67, 219-239, 365-458."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any scheme with locally finitely many irreducible components its normalization over an affine open is the spectrum of the integral closure in the product of generic residue fields",
+   "results": "{\"t\": \"2026-10-22T06:44:32Z\", \"tool\": \"leanfinder\", \"query\": \"For any scheme with locally finitely many irreducible components its normalization over an affine open is the spectrum of the integral closure in the product of generic residue fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\"], \"digest\": \"3a971a982a792070\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: normalizationObjIso and normalizationDiagram describe relative normalization of a given qcqs map; no hit identifies the componentwise absolute normalization with these generic-residue charts. Read Mathlib/AlgebraicGeometry/Normalization.lean:48-67, 219-239, 365-458."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine chart of absolute normalization of a possibly nonreduced scheme as integral closure in its total ring of fractions after reduction",
+   "results": "{\"t\": \"2026-10-22T06:44:33Z\", \"tool\": \"leanfinder\", \"query\": \"Affine chart of absolute normalization of a possibly nonreduced scheme as integral closure in its total ring of fractions after reduction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\"], \"digest\": \"f906c961287604b3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: normalizationObjIso and normalizationDiagram describe relative normalization of a given qcqs map; no hit identifies the componentwise absolute normalization with these generic-residue charts. Read Mathlib/AlgebraicGeometry/Normalization.lean:48-67, 219-239, 365-458."
+  },
+  {
+   "tool": "grep",
+   "query": "normalizationObjIso|normalizationDiagram|normalization.*residue|residue.*normalization",
+   "results": "{\"t\": \"2026-10-23T04:04:47Z\", \"tool\": \"grep\", \"query\": \"normalizationObjIso|normalizationDiagram|normalization.*residue|residue.*normalization\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\"], \"digest\": \"0b16e70a08ae69ce\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: normalizationDiagram and related definitions describe relative normalization of a specified morphism; this does not identify absolute componentwise normalization or its generic residue fields."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine charts and restriction maps of absolute normalization via integral closure in the product of residue fields of generic points",
+   "results": "{\"t\": \"2026-10-23T04:04:48Z\", \"tool\": \"leansearch\", \"query\": \"Affine charts and restriction maps of absolute normalization via integral closure in the product of residue fields of generic points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"galRestrict'\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\"], \"digest\": \"829b322d680e0e8f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: relative-normalization hits do not supply the identification with the absolute componentwise construction or the product of generic residue fields. Read Mathlib/AlgebraicGeometry/Normalization.lean:46-67, 219-239, 365-458; no one-line specialization proves all clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.normalizationObjIso",
+   "results": "{\"t\": \"2026-10-23T04:04:48Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Hom.normalizationObjIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationObjIso\", \"AlgebraicGeometry.Scheme.Hom.normalizationObjIso_hom_val\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization_app\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization_app_assoc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\"], \"digest\": \"c62127c1b73c019b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: relative-normalization hits do not supply the identification with the absolute componentwise construction or the product of generic residue fields. Read Mathlib/AlgebraicGeometry/Normalization.lean:46-67, 219-239, 365-458; no one-line specialization proves all clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Componentwise normalization of a scheme on an affine open is the spectrum of the integral closure in the finite product of generic residue fields, compatible with restriction to affine opens",
+   "results": "{\"t\": \"2026-10-23T04:04:49Z\", \"tool\": \"leanfinder\", \"query\": \"Componentwise normalization of a scheme on an affine open is the spectrum of the integral closure in the finite product of generic residue fields, compatible with restriction to affine opens\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.ι_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\"], \"digest\": \"f47efac007ca1475\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: relative-normalization hits do not supply the identification with the absolute componentwise construction or the product of generic residue fields. Read Mathlib/AlgebraicGeometry/Normalization.lean:46-67, 219-239, 365-458; no one-line specialization proves all clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "normalizationObjIso|normalizationDiagram|normalization.*[Cc]omponent|[Cc]omponent.*normalization",
+   "results": "{\"t\": \"2026-10-23T04:05:17Z\", \"tool\": \"grep\", \"query\": \"normalizationObjIso|normalizationDiagram|normalization.*[Cc]omponent|[Cc]omponent.*normalization\", \"sub\": \"AlgebraicGeometry/Normalization.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"46\", \"70\", \"79\", \"80\", \"87\"], \"digest\": \"39e1ec4f0a9e4b0a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: normalizationDiagram and related definitions describe relative normalization of a specified morphism; this does not identify absolute componentwise normalization or its generic residue fields. The search root was a single file; msearch printed shifted file/line columns. Its raw output is retained and no declaration location is inferred from those columns."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalization of a possibly nonreduced scheme is a disjoint union of normalizations of its irreducible components; affine coordinate rings are products of integral closures of the component domains in their fraction fields",
+   "results": "{\"t\": \"2026-10-23T04:05:23Z\", \"tool\": \"leanfinder\", \"query\": \"Normalization of a possibly nonreduced scheme is a disjoint union of normalizations of its irreducible components; affine coordinate rings are products of integral closures of the component domains in their fraction fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso_inv_coprodDesc_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_inr_normalizationCoprodIso_hom\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_inl_normalizationCoprodIso_hom\"], \"digest\": \"4978bb627b91b182\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: relative-normalization hits do not supply the identification with the absolute componentwise construction or the product of generic residue fields. Read Mathlib/AlgebraicGeometry/Normalization.lean:46-67, 219-239, 365-458; no one-line specialization proves all clauses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normalization-integral-birational-factor",
+  "date": "2026-10-22",
+  "group": "NQ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2; inherited common-nodal-model prerequisite: persistent-node normalization over a trait. absolute normalization on etale charts. Smooth pullback proof: identify the integral normal pullback with absolute normalization by its generic points, as in Stacks 07TD final sentence. Recognition proof: Normalization factorization through an integral locally birational scheme. Affine integral-closure realization of normalization used to compare the same generic residue fields. This split supplies the affine chart and affine-restriction comparison in that normalization factorization: reduce each component chart to its function field, combine finite monic equations, and compare the restriction maps inside those fields.",
+   "via": [
+    "lem-sfb-normalization-integral-birational-factor",
+    "lem-sfb-integral-normal-generic-recognition",
+    "lem-sfb-componentwise-normalization-smooth-pullback",
+    "lem-sfb-persistent-node-normalization",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-normalization-generic-residue-affine-charts",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved the affine chart and its full restriction clause using the existing component-normalization definitions and affine/fraction-field nodes. Wrote the component/open correspondence, residue-field quotient, finite monic-polynomial argument, and restriction calculation explicitly. No new nodes, no Noetherian assumption, no normalization-finiteness assumption, and no Lean written or compiled. Repair of the reader-approved head 821ed771819: refreshed untouched metadata from the current unsplit DAG, reread every cited statement and source, and made generic-germ compatibility and the restricted monic equation explicit. The statement and dependency sets are unchanged; the delivery tool reconstructs the commit on current origin/sheaf-dag.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2; inherited common-nodal-model prerequisite: persistent-node normalization over a trait. absolute normalization on etale charts. Smooth pullback proof: identify the integral normal pullback with absolute normalization by its generic points, as in Stacks 07TD final sentence. Recognition proof: Normalization factorization through an integral locally birational scheme. Affine integral-closure realization of normalization used to compare the same generic residue fields. This split supplies the affine chart and affine-restriction comparison in that normalization factorization: reduce each component chart to its function field, combine finite monic equations, and compare the restriction maps inside those fields.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "The affine construction of a reduced component as Spec(A/p) is a general scheme tool; the unit has no replacement for this construction."
+   },
+   {
+    "node": "lem-sc-integral-function-field-affine-fraction",
+    "why": "Identifies the function field of each integral component with the fraction field of its affine coordinate domain; used as a general scheme tool without changing the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-sc-integral-function-field-affine-fraction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q154-8396856c2",
+  "group": "Q154",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q154-8396856c2 (reviewer sub-agent of L); spot-checked: This re-delivers head 821ed771, which an earlier reader PASSed and which was returned only so the side completion could be promoted. 0 new nodes. A field-by-field diff shows the statement, stmt_deps, proof_deps, sources and steps 1, 2, 4, 5 and 7 are identical. Step 3 adds that germs at η commute with restriction to an affine W containing η, which is correct. Step 6 writes out the restricted monic equation coordinatewise for the surviving η in I_W, which is correct: A→K_η factors through O_T(W), so the projection lies in D_W. split_report gains only a repair sentence; tool_uses is unchanged and accepted (generic scheme tools). All 16 cited nodes are byte-identical to the PASSed snapshot, and I reread their statements. Stacks 0CDV (morphisms.tex l.14588) needs only finitely many components on quasi-compact opens; 0307 (algebra.tex l.7597) has no Noetherian hypothesis. I rechecked the empty open, k[ε]/ε², k[x,y]/(xy) restricted to D(x), and a nonnormal domain. I scanned the ~700 nodes added since the earlier base for duplicates: lem-trf-normalization-affine-stalk-closure is a reduced, finite-type special case and not a duplicate (advisory: it could cite this item); lem-per-componentwise-normalization-properties is the locally Noetherian case. No SGA source is cited. No fixes."
+ }
+}

@@ -1,0 +1,244 @@
+{
+ "id": "lem-sfb-field-kernel-relation-immersion-closed",
+ "kind": "statement",
+ "title": "Locally closed images of field groupoid morphisms are closed",
+ "statement": "Let $k$ be a field [def-weil-field], put $V=\\operatorname{Spec}k$ [def-weil-affine-spectrum], and let $(V,R_1,s_1,t_1,e_1,i_1,c_1)$ and $(V,R_2,s_2,t_2,e_2,i_2,c_2)$ be absolute groupoid schemes [def-a1-groupoid-scheme]. Suppose $a:R_1\\to R_2$ together with $\\mathrm{id}_V$ commutes with the source, target, unit, inverse and composition maps. If the image $a(|R_1|)$ is locally closed in $|R_2|$ (the intersection of an open and a closed subset), then it is closed. In particular, if $a$ is an immersion [def-weil-closed-immersion], then $a$ is a closed immersion.",
+ "source": {
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 04Q9 (lemma-locally-closed-image-is-closed), Situation 04Q5 (situation-morphism-groupoids-on-field); final assertion uses schemes.tex Tag 01IQ (lemma-immersion-when-closed)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "def-a1-groupoid-scheme",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Put $I=a(|R_1|)$. Apply [lem-sfb-field-groupoid-perfect-restriction], obtaining the perfect field $k^{\\prime}$, morphism $a^{\\prime}$ and homeomorphisms $q_1,q_2$. Commutativity and surjectivity of $q_1$ give $q_2(a^{\\prime}(|R_1^{\\prime}|))=I$. Since $q_2$ is bijective, $a^{\\prime}(|R_1^{\\prime}|)=q_2^{-1}(I)$. Thus this image is locally closed, and it is closed if and only if $I$ is closed, since a homeomorphism preserves open and closed sets. It suffices to prove the assertion over $k^{\\prime}$; rename it $k$, so henceforth $k$ is perfect.",
+   "uses": [
+    "lem-sfb-field-groupoid-perfect-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04Q9, first proof paragraph."
+   }
+  },
+  {
+   "text": "By [lem-sfb-perfect-field-groupoid-image-closure] let $j:Z\\hookrightarrow R_2$ be the reduced closure groupoid of $I$. Apply the same result to $\\mathrm{id}_{R_1}$, obtaining the groupoid $A=(R_1)_{\\mathrm{red}}$ and its inclusion $r:A\\hookrightarrow R_1$. The map $a\\circ r$ has image $I\\subseteq |Z|$, since reduction is the identity on underlying sets [def-weil-pbc-scheme-reduction]. Its source $A$ is reduced. Hence [lem-weil-pbc-reduced-source-factors-through-closed-subscheme] supplies $b:A\\to Z$ with $j\\circ b=a\\circ r$. Its image in $Z$ is exactly $I$.",
+   "uses": [
+    "lem-sfb-perfect-field-groupoid-image-closure",
+    "def-weil-pbc-scheme-reduction",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04Q9, second proof paragraph, correcting the printed R2-red to R1-red."
+   }
+  },
+  {
+   "text": "The map $(\\mathrm{id}_V,b)$ is a groupoid morphism. Indeed $j b=a r$ gives the source and target equations immediately. For unit, inverse and composition, composing the required equations with $j$ gives the corresponding equations for $a,r,j$, which are groupoid morphisms. Cancel $j$: a closed immersion is injective on morphisms from every test scheme, because on its affine quotient charts a ring map out of a quotient is determined by its composite with the surjective quotient map; the local equalities glue. This proves the three remaining operation equations, including on $A\\times_{s_A,V,t_A}A$. These are precisely the equations in [def-a1-groupoid-scheme].",
+   "uses": [
+    "def-a1-groupoid-scheme",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04Q9, second proof paragraph; explicit verification of the factorized groupoid morphism."
+   }
+  },
+  {
+   "text": "Write $I=O\\cap C$ with $O$ open and $C$ closed in $|R_2|$. Since $I\\subseteq C$, its closure $|Z|$ is contained in $C$; thus $I=O\\cap |Z|$ is open in $|Z|$. The morphism $b$ of step 3 has this open image. Apply [lem-sfb-field-groupoid-open-image-closed] to $b:A\\to Z$: its image $I$ is closed in $|Z|$. It is dense there by the definition $|Z|=\\overline I$. Hence $I=|Z|$, which is closed in $|R_2|$. Step 1 now gives the original assertion over the original field.",
+   "uses": [
+    "lem-sfb-field-groupoid-open-image-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04Q9, second proof paragraph, application of 04Q6 and density."
+   }
+  },
+  {
+   "text": "Finally assume $a$ is an immersion. By [def-weil-closed-immersion] it factors as a closed immersion into an open subscheme of $R_2$. Its image is therefore closed in that open subset, hence locally closed in $|R_2|$. The assertion just proved makes it closed in $|R_2|$. Apply [lem-weil-pbc-immersion-closed-image-closed-immersion] to conclude that $a$ is a closed immersion.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-immersion-closed-image-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04Q9, conclusion, followed by schemes.tex Tag 01IQ (lemma-immersion-when-closed)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-field-groupoid-perfect-restriction",
+  "lem-sfb-perfect-field-groupoid-image-closure",
+  "def-weil-pbc-scheme-reduction",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "def-a1-groupoid-scheme",
+  "def-weil-closed-immersion",
+  "lem-sfb-field-groupoid-open-image-closed",
+  "lem-weil-pbc-immersion-closed-image-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 04Q9 (lemma-locally-closed-image-is-closed), both proof paragraphs, correcting the evident R2-red/R1-red typo; final assertion: schemes.tex Tag 01IQ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism from a field spectrum to an algebraic space its self fibre relation is closed if it is an immersion",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isClosed_singleton_iff_isClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x : ↥X}, IsClosed {x} ↔ AlgebraicGeometry.IsClosedImmersion (X.fromSpecResidueField x)\", \"doc\": \"For a scheme $X$ and a point $x \\\\in X$, the singleton set $\\\\{x\\\\}$ is closed in the topological space of $X$ if and only if the canonical morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to X$ (where $\\\\kappa(\"}\n  {\"name\": \"AlgebraicGeometry.instIsClosedImmersionLiftCoborder\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsImmersion f],\\n  AlgebraicGeometry.IsClosedImmersion (AlgebraicGeometry.Scheme.Hom.liftCoborder f)\", \"doc\": \"If $ f: X \\to Y $ is an immersion of schemes, then the morphism $ f $ lifted to the cobord of the image of $ f $ is a closed immersion. The cobord is the open subset of $ Y $ obtained as the complement\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.SpecMap_residue\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X),\\n  AlgebraicGeometry.IsClosedImmersion (AlgebraicGeometry.Spec.map (X.residue x))\", \"doc\": \"For any scheme $X$ and any point $x \\\\in X$, the morphism of schemes $\\\\operatorname{Spec}(k(x)) \\\\to \\\\operatorname{Spec}(\\\\mathcal{O}_{X,x})$ induced by the residue map $\\\\mathcal{O}_{X,x} \\\\to k(x)$ is a \"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.Spec_map_residue\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X),\\n  AlgebraicGeometry.IsClosedImmersion (AlgebraicGeometry.Spec.map (X.residue x))\", \"doc\": \"For any scheme $X$ and point $x \\\\in X$, the morphism of schemes $\\\\operatorname{Spec}(k(x)) \\\\to \\\\operatorname{Spec}(\\\\mathcal{O}_{X,x})$ induced by the residue homomorphism $\\\\mathcal{O}_{X,x} \\\\to k(x)$ \"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.Spec_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {R : CommRingCat} {f : X ⟶ AlgebraicGeometry.Spec R},\\n  AlgebraicGeometry.IsClosedImmersion f ↔\\n    ∃ I e,\\n      f =\\n        CategoryTheory.CategoryStruct.comp e.hom (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))\", \"doc\": \"A morphism $ f: X \\\\to \\\\operatorname{Spec}(R) $ is a closed immersion if and only if there exists an ideal $ I \\\\subseteq R $ and an isomorphism $ X \\\\cong \\\\operatorname{Spec}(R/I) $ such that $ f $ equa\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is a closed immersion if it induces a homeomorphism of the underlying topological space of $ X $ onto a closed subset of $ Y $ and the induced map on structure she\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {R : CommRingCat} (I : Ideal ↑R),\\n  AlgebraicGeometry.IsClosedImmersion (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $ of $ R $, the morphism $ \\\\operatorname{Spec}(R/I) \\\\to \\\\operatorname{Spec}(R) $ induced by the quotient map $ R \\\\to R/I $ is a closed immersion. This foll\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.base_closed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.IsClosedImmersion f],\\n  Topology.IsClosedEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"For any closed immersion $ f: X \\to Y $ of schemes, the underlying continuous map between the topological spaces is a closed embedding, meaning it induces a homeomorphism of $ X $ onto a closed subset \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme, spectrum, or category-theoretic statements do not give this assertion; no exact match or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally closed subgroupoid on the spectrum of a field is closed",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [JacobsonSpace ↥X] {x : ↥X},\\n  IsClosed {x} ↔ AlgebraicGeometry.LocallyOfFiniteType (X.fromSpecResidueField x)\", \"doc\": \"For a Jacobson scheme $X$ and a point $x \\\\in X$, the singleton set $\\\\{x\\\\}$ is closed in $X$ if and only if the canonical morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to X$ (where $\\\\kappa(x)$ is the resid\"}\n  {\"name\": \"IsLocalRing.isClosed_singleton_closedPoint\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ (R : Type u) [inst : CommSemiring R] [inst_1 : IsLocalRing R], IsClosed {IsLocalRing.closedPoint R}\", \"doc\": \"In the prime spectrum of a local ring equipped with the Zariski topology, the singleton set containing the unique closed point (the maximal ideal) is a closed set. This follows because the maximal ide\"}\n  {\"name\": \"isClosed_singleton_of_isLocallyClosed_singleton\", \"module\": \"Mathlib/Topology/JacobsonSpace\", \"type\": \"∀ {X : Type u_1} [inst : TopologicalSpace X] [JacobsonSpace X] {x : X}, IsLocallyClosed {x} → IsClosed {x}\", \"doc\": \"In a Jacobson space $X$, if the singleton set $\\\\{x\\\\}$ is locally closed, then it is closed.\"}\n  {\"name\": \"AlgebraicGeometry.isClosed_singleton_iff_isClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x : ↥X}, IsClosed {x} ↔ AlgebraicGeometry.IsClosedImmersion (X.fromSpecResidueField x)\", \"doc\": \"For a scheme $X$ and a point $x \\\\in X$, the singleton set $\\\\{x\\\\}$ is closed in the topological space of $X$ if and only if the canonical morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to X$ (where $\\\\kappa(\"}\n  {\"name\": \"PrimeSpectrum.isClosed_of_stableUnderSpecialization_of_isConstructible\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet\", \"type\": \"∀ {R : Type u_4} [inst : CommRing R] {s : Set (PrimeSpectrum R)},\\n  StableUnderSpecialization s → Topology.IsConstructible s → IsClosed s\", \"doc\": \"In the Zariski topology on the prime spectrum of a commutative ring $ R $, any constructible set that is stable under specialization is closed.\"}\n  {\"name\": \"IsLocalRing.closed_point_mem_iff\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] [inst_1 : IsLocalRing R] {U : TopologicalSpace.Opens (PrimeSpectrum R)},\\n  IsLocalRing.closedPoint R ∈ U ↔ U = ⊤\", \"doc\": \"For a local ring $ R $, the closed point $ \\\\mathfrak{m} $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ is contained in an open set $ U $ if and only if $ U $ is the entire space $ \\\\operatorname{Sp\"}\n  {\"name\": \"IsLocalRing.closedPoint_mem_iff\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] [inst_1 : IsLocalRing R] (U : TopologicalSpace.Opens (PrimeSpectrum R)),\\n  IsLocalRing.closedPoint R ∈ U ↔ U = ⊤\", \"doc\": \"For a local ring $ R $, the closed point of $ R $ is contained in an open subset $ U $ of the prime spectrum $ \\\\operatorname{Spec}(R) $ if and only if $ U $ is the entire space $ \\\\operatorname{Spec}(R\"}\n  {\"name\": \"MaximalSpectrum.toPrimeSpectrum_range\", \"module\": \"Mathlib/RingTheory/Spectrum/Maximal/Topology\", \"type\": \"∀ {R : Type u} [inst : CommRing R], Set.range MaximalSpectrum.toPrimeSpectrum = {x | IsClosed {x}}\", \"doc\": \"The image of the maximal spectrum under the inclusion into the prime spectrum coincides with the set of closed points in the Zariski topology on the prime spectrum. In other words, a prime ideal belon\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme, spectrum, or category-theoretic statements do not give this assertion; no exact match or one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"IsClosed\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme, spectrum, or category-theoretic statements do not give this assertion; no exact match or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "[Gg]roupoid|[Ll]ocally[Cc]losed",
+   "results": "[grep] OK 12 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean\", \"line\": \"103\", \"text\": \"    (S : Set X) (hS : IsLocallyClosed S) (hS' : Dense S)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"line\": \"67\", \"text\": \"      refine (IsOpen.isLocallyClosed ?_).inter (IsClosed.isLocallyClosed ?_)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"line\": \"100\", \"text\": \"    ((fst G G).left ⁻¹ᵁ U).isOpen.isLocallyClosed\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"line\": \"111\", \"text\": \"        (hx.preimage (fst G G).left.continuous).isLocallyClosed ?_ γ.left.continuous\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"line\": \"47\", \"text\": \"    nonempty_inter_closedPoints H f.smoothLocus.2.isClosed_compl.isLocallyClosed\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"line\": \"49\", \"text\": \"    f.dense_smoothLocus_of_perfectField.nonempty f.smoothLocus.2.isLocallyClosed\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean\", \"line\": \"46\", \"text\": \"  isLocallyClosed_range : IsLocallyClosed (Set.range f)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean\", \"line\": \"48\", \"text\": \"lemma Scheme.Hom.isLocallyClosed_range (f : X ⟶ Y) [IsImmersion f] :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean\", \"line\": \"49\", \"text\": \"    IsLocallyClosed (Set.range f) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean\", \"line\": \"50\", \"text\": \"  IsImmersion.isLocallyClosed_range\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean\", \"line\": \"57\", \"text\": \"  ⟨coborder (Set.range f), f.isLocallyClosed_range.isOpen_coborder⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"445\", \"text\": \"  exact ⟨isClosed_singleton_of_isLocallyClosed_singleton this.isLocallyClosed, this⟩\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme, spectrum, or category-theoretic statements do not give this assertion; no exact match or one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The locally closed image of a morphism of groupoid schemes over a field is closed",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsImmersion.isLocallyClosed_range\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsImmersion f],\\n  IsLocallyClosed (Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base))\", \"doc\": \"For any immersion $ f : X \\to Y $ of schemes, the image of the underlying continuous map $ f : |X| \\to |Y| $ is a locally closed subset of the topological space $ |Y| $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isLocallyClosed_range\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Immersion\", \"type\": \"(f : X ⟶ Y) [IsImmersion f] : IsLocallyClosed (Set.range f)\", \"doc\": \"For any immersion $ f : X \\\\to Y $ of schemes, the image of $ f $ is a locally closed subset of $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.image\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \": Scheme.{u}\", \"doc\": \"For a morphism $ f $ of schemes, the image is defined as the closed subscheme associated to the kernel ideal sheaf of $ f $. This subscheme is constructed by gluing local affine models $ \\\\operatorname\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isClosedMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [UniversallyClosed f] : IsClosedMap f\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes that is universally closed is also a closed map, meaning the image of every closed subset of $ X $ under $ f $ is a closed subset of $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.iff_isPreimmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : Scheme} {f : X ⟶ Y} : IsClosedImmersion f ↔ IsPreimmersion f ∧ IsClosed (Set.range f)\", \"doc\": \"A morphism $ f : X \\to Y $ of schemes is a closed immersion if and only if it is a preimmersion and the image of $ f $ is a closed subset of $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [IsClosedImmersion f] : IsIso f.toImage\", \"doc\": \"For any closed immersion $ f: X \\to Y $ of schemes, the induced morphism from $ X $ to the image subscheme of $ f $ is an isomorphism. This means that a closed immersion factors as an isomorphism onto \"}\n  {\"name\": \"AlgebraicGeometry.isImmersion_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsImmersion f ↔\\n    AlgebraicGeometry.IsPreimmersion f ∧ IsLocallyClosed (Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base))\", \"doc\": \"A morphism $ f : X \\to Y $ of schemes is an immersion if and only if $ f $ is a preimmersion and the image of the underlying continuous map $ f : |X| \\to |Y| $ is a locally closed subset of $ |Y| $.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instOfIsIsoScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsIso f] : IsClosedImmersion f\", \"doc\": \"Every isomorphism of schemes is a closed immersion. Specifically, if $ f: X \\to Y $ is an isomorphism of schemes, then it induces a homeomorphism of the underlying topological space of $ X $ onto a clo\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme, spectrum, or category-theoretic statements do not give this assertion; no exact match or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The locally closed image of a morphism of groupoid schemes on the spectrum of a field is closed",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isLocallyClosed_range\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsImmersion f],\\n  IsLocallyClosed (Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base))\", \"doc\": \"For any immersion $ f : X \\\\to Y $ of schemes, the image of $ f $ is a locally closed subset of $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.isLocallyClosed_range\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsImmersion f],\\n  IsLocallyClosed (Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base))\", \"doc\": \"For any immersion $ f : X \\to Y $ of schemes, the image of the underlying continuous map $ f : |X| \\to |Y| $ is a locally closed subset of the topological space $ |Y| $.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.Spec_map_residue\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X),\\n  AlgebraicGeometry.IsClosedImmersion (AlgebraicGeometry.Spec.map (X.residue x))\", \"doc\": \"For any scheme $X$ and point $x \\\\in X$, the morphism of schemes $\\\\operatorname{Spec}(k(x)) \\\\to \\\\operatorname{Spec}(\\\\mathcal{O}_{X,x})$ induced by the residue homomorphism $\\\\mathcal{O}_{X,x} \\\\to k(x)$ \"}\n  {\"name\": \"AlgebraicGeometry.isClosed_singleton_iff_isClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x : ↥X}, IsClosed {x} ↔ AlgebraicGeometry.IsClosedImmersion (X.fromSpecResidueField x)\", \"doc\": \"For a scheme $X$ and a point $x \\\\in X$, the singleton set $\\\\{x\\\\}$ is closed in the topological space of $X$ if and only if the canonical morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to X$ (where $\\\\kappa(\"}\n  {\"name\": \"AlgebraicGeometry.isClosedMap_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget\\n  (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => IsClosedMap)\", \"doc\": \"The property that a scheme morphism is a closed map (in the topological sense) is Zariski local at the target.\"}\n  {\"name\": \"AlgebraicGeometry.isClosedEmbedding_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget\\n  (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => Topology.IsClosedEmbedding)\", \"doc\": \"The property of a scheme morphism being a closed embedding (in the topological sense) is Zariski local at the target. This means that if a morphism satisfies this property and there is a Zariski cover\"}\n  {\"name\": \"AlgebraicGeometry.isField_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f], IsField ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"If $X$ is an integral scheme and the morphism $f: X \\\\to \\\\operatorname{Spec}(K)$ is universally closed, then the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a field.\"}\n  {\"name\": \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [JacobsonSpace ↥X] {x : ↥X},\\n  IsClosed {x} ↔ AlgebraicGeometry.LocallyOfFiniteType (X.fromSpecResidueField x)\", \"doc\": \"For a Jacobson scheme $X$ and a point $x \\\\in X$, the singleton set $\\\\{x\\\\}$ is closed in $X$ if and only if the canonical morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to X$ (where $\\\\kappa(x)$ is the resid\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme immersion criteria, affine purely inseparable spectrum results, ordinary subgroupoids, or manifold structure groupoids do not state this internal scheme-groupoid assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally closed subgroupoids over a field have closed images",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.PreGaloisCategory.autEmbedding_range_isClosed\", \"module\": \"Mathlib/CategoryTheory/Galois/Topology\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat),\\n  IsClosed (Set.range ⇑(CategoryTheory.PreGaloisCategory.autEmbedding F))\", \"doc\": \"The image of the automorphism group embedding $\\\\text{Aut}(F) \\\\to \\\\prod_{X \\\\in \\\\mathcal{C}} \\\\text{Aut}(F(X))$ is a closed subset in the product topology, where each factor $\\\\text{Aut}(F(X))$ is equippe\"}\n  {\"name\": \"ModelWithCorners.isClosed_range\", \"module\": \"Mathlib/Geometry/Manifold/IsManifold/Basic\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {H : Type u_3} [inst_3 : TopologicalSpace H] (I : ModelWithCorners 𝕜 E H),\\n  IsClosed (Set.range ↑I)\", \"doc\": \"The image of the continuous injection from the topological space $ H $ to the normed vector space $ E $, associated with a model with corners, is a closed subset of $ E $.\"}\n  {\"name\": \"closedUnderRestriction_idRestrGroupoid\", \"module\": \"Mathlib/Geometry/Manifold/StructureGroupoid\", \"type\": \"∀ {H : Type u_1} [inst : TopologicalSpace H], ClosedUnderRestriction idRestrGroupoid\", \"doc\": \"The identity restriction groupoid on a topological space $ H $, consisting of open partial homeomorphisms equivalent to identity maps, is closed under restriction: for any homeomorphism in the groupoi\"}\n  {\"name\": \"ClosedUnderRestriction\", \"module\": \"Mathlib/Geometry/Manifold/StructureGroupoid\", \"type\": \"{H : Type u_1} → [inst : TopologicalSpace H] → StructureGroupoid H → Prop\", \"doc\": \"For a topological space $ H $, a structure groupoid on $ H $ is closed under restriction if, for every homeomorphism between open subsets of $ H $ in the groupoid and every open subset of the domain, \"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.autEmbedding_isClosedEmbedding\", \"module\": \"Mathlib/CategoryTheory/Galois/Topology\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat),\\n  Topology.IsClosedEmbedding ⇑(CategoryTheory.PreGaloisCategory.autEmbedding F)\", \"doc\": \"The embedding of the automorphism group $\\\\mathrm{Aut}(F)$ of a functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$ into the product $\\\\prod_{X \\\\in \\\\mathcal{C}} \\\\mathrm{Aut}(F(X))$ (equipped with the produc\"}\n  {\"name\": \"closedUnderRestriction_iff_id_le\", \"module\": \"Mathlib/Geometry/Manifold/StructureGroupoid\", \"type\": \"∀ {H : Type u_1} [inst : TopologicalSpace H] (G : StructureGroupoid H), ClosedUnderRestriction G ↔ idRestrGroupoid ≤ G\", \"doc\": \"For a topological space $ H $ and a structure groupoid $ G $ on $ H $, the groupoid $ G $ is closed under restriction of its homeomorphisms to open subsets if and only if the identity restriction grou\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.isClosedEmbedding_mapGLInt\", \"module\": \"Mathlib/NumberTheory/ModularForms/ArithmeticSubgroups\", \"type\": \"∀ {n : Type u_1} [inst : Fintype n] [inst_1 : DecidableEq n],\\n  Topology.IsClosedEmbedding ⇑(Matrix.SpecialLinearGroup.mapGL ℝ)\", \"doc\": \"The canonical group homomorphism from the special linear group $\\\\mathrm{SL}(n, \\\\mathbb{Z})$ to the general linear group $\\\\mathrm{GL}(n, \\\\mathbb{R})$ induced by the ring homomorphism $\\\\mathbb{Z} \\\\to \\\\m\"}\n  {\"name\": \"OpenNormalSubgroup.instIsClosedCoePathComponentOne\", \"module\": \"Mathlib/Topology/Connected/PathComponentOne\", \"type\": \"∀ (G : Type u_1) [inst : TopologicalSpace G] [inst_1 : Group G] [inst_2 : IsTopologicalGroup G]\\n  [inst_3 : LocPathConnectedSpace G], IsClosed ↑(OpenNormalSubgroup.pathComponentOne G)\", \"doc\": \"In a locally path-connected topological group $G$, the subgroup consisting of all elements path-connected to the identity element $1$ is a closed subset of $G$. This follows from the local path-connec\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme immersion criteria, affine purely inseparable spectrum results, ordinary subgroupoids, or manifold structure groupoids do not state this internal scheme-groupoid assertion or specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"IsClosed\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme immersion criteria, affine purely inseparable spectrum results, ordinary subgroupoids, or manifold structure groupoids do not state this internal scheme-groupoid assertion or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "GroupoidScheme|groupoid.*closed|closed.*groupoid",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme immersion criteria, affine purely inseparable spectrum results, ordinary subgroupoids, or manifold structure groupoids do not state this internal scheme-groupoid assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally closed image of a field groupoid morphism is closed",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isLocallyClosed_range\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Immersion\", \"type\": \"(f : X ⟶ Y) [IsImmersion f] : IsLocallyClosed (Set.range f)\", \"doc\": \"For any immersion $ f : X \\\\to Y $ of schemes, the image of $ f $ is a locally closed subset of $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.isLocallyClosed_range\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsImmersion f],\\n  IsLocallyClosed (Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base))\", \"doc\": \"For any immersion $ f : X \\to Y $ of schemes, the image of the underlying continuous map $ f : |X| \\to |Y| $ is a locally closed subset of the topological space $ |Y| $.\"}\n  {\"name\": \"IsLocallyClosed.image\", \"module\": \"Mathlib.Topology.LocallyClosed\", \"type\": \"{s : Set X} (hs : IsLocallyClosed s) {f : X → Y} (hf : IsInducing f) (hf' : IsLocallyClosed (range f)) :\\n  IsLocallyClosed (f '' s)\", \"doc\": \"If $ s $ is a locally closed set in a topological space $ X $, $ f : X \\to Y $ is an inducing map, and the range of $ f $ is locally closed in $ Y $, then the image $ f(s) $ is a locally closed set in \"}\n  {\"name\": \"AlgebraicGeometry.isImmersion_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsImmersion f ↔\\n    AlgebraicGeometry.IsPreimmersion f ∧ IsLocallyClosed (Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base))\", \"doc\": \"A morphism $ f : X \\to Y $ of schemes is an immersion if and only if $ f $ is a preimmersion and the image of the underlying continuous map $ f : |X| \\to |Y| $ is a locally closed subset of $ |Y| $.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.iff_isPreimmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : Scheme} {f : X ⟶ Y} : IsClosedImmersion f ↔ IsPreimmersion f ∧ IsClosed (Set.range f)\", \"doc\": \"A morphism $ f : X \\to Y $ of schemes is a closed immersion if and only if it is a preimmersion and the image of $ f $ is a closed subset of $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsPreimmersion f] (hf : IsClosed (Set.range f)) : IsClosedImmersion f\", \"doc\": \"If a morphism of schemes is a preimmersion and its image is a closed subset of the target scheme, then it is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Immersion\", \"type\": \"(f : X ⟶ Y) [IsClosedImmersion f] : IsImmersion f\", \"doc\": \"Any closed immersion between schemes is an immersion. Specifically, if $ f: X \\to Y $ is a closed immersion of schemes (i.e., it induces a homeomorphism of $ X $ onto a closed subset of $ Y $ with a su\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.image\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \": Scheme.{u}\", \"doc\": \"For a morphism $ f $ of schemes, the image is defined as the closed subscheme associated to the kernel ideal sheaf of $ f $. This subscheme is constructed by gluing local affine models $ \\\\operatorname\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme immersion criteria, affine purely inseparable spectrum results, ordinary subgroupoids, or manifold structure groupoids do not state this internal scheme-groupoid assertion or specialize to it in one line"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-locally-separated-space-decent",
+  "date": "2026-10-23",
+  "group": "Q31"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Adequate moduli spaces are universal for separated targets. Alper Theorem 7.2.1, locally separated case through Proposition 7.1.1: Proposition 7.1.1, proof, printed p.36: surjectivity of the diagonal pullback W from condition (a), expanded as its closure-equivalence input. Rational points of a locally separated space over an algebraically closed field have closed images; continuity gives the assertion. This is the geometric-points sublemma, not the universality conclusion. Supporting geometric input: rational sections after field base change are closed immersions. Supporting input: The absolute locally separated space has quasi-compact field-valued representatives. First paragraph of Tag 088J: apply 04Q9 to the kernel relation on the field spectrum and its pair groupoid.",
+   "via": [
+    "lem-sfb-locally-separated-space-decent",
+    "lem-sfb-locally-separated-rational-point-closed-immersion",
+    "lem-sfb-locally-separated-closure-equivalent-images",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-field-kernel-relation-immersion-closed",
+  "worker": "stage1",
+  "summary": "Q74 follows 04Q9 by perfect-field restriction, reduced image closure, a factorized groupoid morphism from R1-red, and the open-image-closed lemma; then applies the existing 01IQ Mathlib leaf. Three supporting groupoid statements are new unsplit nodes. All other inputs are existing nodes or explicit elementary arguments. The theorem statement is unchanged.",
+  "blueprint": "The current direct-images blueprint proof (3) leads, through the inherited alteration/moduli prerequisites named in blueprint.from.place, to the 088J first-paragraph input 04Q9. Steps 1--4 realize its perfect-closure and closure-groupoid proof, step 5 the immersion consequence used by 088J. The inherited created.item chain has a missing terminal DAG node, so blueprint_refs.py ancestor returns None; preserve that computed ancestor and the existing detailed place, rather than inventing a blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "why": "Tag 0356 gives factorization of the map from the reduced arrow scheme through its reduced closed image closure; this generic scheme tool is not supplied by the six-functors unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-2bff6b874",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-2bff6b874 (reviewer sub-agent of L); spot-checked: PASS, no fixes written. I read Stacks more-groupoids 04LQ, 04Q5, 04Q6, 04Q7, 04Q8 and both proof paragraphs of 04Q9. The item is 04Q9 with S=Spec Z plus the 01IQ consequence. Its statement and stmt_deps are unchanged, and it matches what the citer lem-sfb-locally-separated-space-decent needs: a kernel-relation groupoid mapping by an immersion into the pair groupoid. The source typo is confirmed: 04Q9 writes (R2)_red where it must be (R1)_red. The delivery corrects it in the proof and reports it; no statement changes. Steps checked one by one. Step 1: q2 a'=a q1, q1 surjective and q2 bijective give a'(R1')=q2^{-1}(I), so closedness transfers across the homeomorphism. Step 2: 04Q8 applied to a and to id_R1, then 0356 (A reduced, a r has image I in |Z|) gives b with j b=a r. Step 3: each operation equation for b checked after composing with j, then j cancelled as a monomorphism. This is elementary from the affine-quotient form of a closed immersion. Step 4: I=O∩C with cl(I)⊆C gives I open in |Z|; 04Q6 makes it closed, and density gives I=|Z|. Step 5: an immersion has locally closed image, then 01IQ (Mathlib leaf). New nodes: perfect-restriction is true via the perfect closure, since q_j are base changes of a universal homeomorphism. Image-closure is 04Q8 plus j being a groupoid morphism, with the a=id case stated. Open-image is exactly 04Q6. None restates the item (D1 fine), each is self-contained with notions defined inline or cited (B1-B7 fine), and none cites SGA. A duplicate search with rg -L for 04Q5-04Q9, 04LQ, 047X and labels, and a scan of groupoid and group-scheme statements, found nothing that duplicates the new nodes. Edge cases checked: {0} in G_a, a constant finite groupoid, alpha_p in G_a over F_p(t), and an empty R (impossible because the unit exists). Accepted tool_use: lem-weil-pbc-reduced-source-factors-through-closed-subscheme (sk-thm-p1, Stacks 0356, Lean-closed through an existing:true record), a generic lemma the unit's own route does not supply."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FieldGroupoidLocallyClosedImage",
+  "declaration": "AlgebraicGeometry.fieldGroupoid_locallyClosed_image",
+  "file": "lean/Sheaf/AlgebraicGeometry/FieldGroupoidLocallyClosedImage.lean",
+  "statement": "theorem fieldGroupoid_locallyClosed_image (k : Type u) [Field k] {R₁ R₂ : Scheme.{u}} (s₁ t₁ : R₁ ⟶ Spec (CommRingCat.of k)) (e₁ : Spec (CommRingCat.of k) ⟶ R₁) (i₁ : R₁ ⟶ R₁) (c₁ : pullback s₁ t₁ ⟶ R₁) (_h₁ : IsGroupoidScheme s₁ t₁ e₁ i₁ c₁) (s₂ t₂ : R₂ ⟶ Spec (CommRingCat.of k)) (e₂ : Spec (CommRingCat.of k) ⟶ R₂) (i₂ : R₂ ⟶ R₂) (c₂ : pullback s₂ t₂ ⟶ R₂) (_h₂ : IsGroupoidScheme s₂ t₂ e₂ i₂ c₂) (a : R₁ ⟶ R₂) (hs : a ≫ s₂ = s₁) (ht : a ≫ t₂ = t₁) (_he : e₁ ≫ a = e₂) (_hi : i₁ ≫ a = a ≫ i₂) (_hc : c₁ ≫ a = pullback.map s₁ t₁ s₂ t₂ a a (𝟙 (Spec (CommRingCat.of k))) ((Category.comp_id s₁).trans hs.symm) ((Category.comp_id t₁).trans ht.symm) ≫ c₂) : (IsLocallyClosed (Set.range a) → IsClosed (Set.range a)) ∧ (IsImmersion a → IsClosedImmersion a)",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-37c4eabf7",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Read node (unchanged except lean), Stacks 04Q5/04Q9 with proof, all 4 stmt_deps, recorded IsGroupoidScheme (c : pullback s t, c(a,b)=a∘b), delivered module and report (Worker report + Second reading by Q21 present). Clause match: field k : Type u, V = Spec (CommRingCat.of k), two IsGroupoidScheme septuples with independent s,t, compatibility hs/ht/he/hi/hc via canonical pullback.map with identity on V (side proofs correctly oriented); conclusions IsLocallyClosed(range a) → IsClosed(range a) and IsImmersion a → IsClosedImmersion a. No PerfectField/finiteness/reducedness binder; one universe u as in dependency; unit/inverse compatibility follows from s,t,c for groupoids and node lists them. lean.statement verbatim (script check). No defs, sorry-only theorem, source/blueprint docstrings, docstring carries proof steps 1-5; private proof imports exist in live tree; no duplicate found. No recompilation (no file changed). No findings."
+ }
+}

@@ -1,0 +1,239 @@
+{
+ "id": "lem-sfb-charzero-ad-nilpotence-group-criterion",
+ "kind": "statement",
+ "title": "Nilpotent adjoint operators detect nilpotent connected groups in characteristic zero",
+ "statement": "Let $k$ be a field [def-weil-field], with algebraic closure $\\bar k$ [def-weil-algebraic-closure]. Let $G$ be a smooth connected affine $k$-group scheme of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-finite-type-morphism]. Put $\\mathfrak g=T_{G/k,e}$ [def-sc-scheme-tangent-space], with commutator bracket [def-wf-lie-algebra]. The adjoint representation $\\operatorname{Ad}:G\\to\\operatorname{GL}(\\mathfrak g)$ is the differential of conjugation, and $\\operatorname{ad}(X)(Y)=[X,Y]$. Assume $\\operatorname{char}k=0$. If for every $X\\in\\mathfrak g$ there is an integer $m\\geq1$ with $\\operatorname{ad}(X)^m=0$, then $G$ is nilpotent: there are closed normal subgroup schemes [def-sc-group-scheme-subgroup] $G=G_0\\supseteq\\cdots\\supseteq G_c=1$ such that, for every commutative $k$-algebra $A$, $g\\in G(A)$, $h\\in G_i(A)$ and $0\\leq i<c$, one has $ghg^{-1}h^{-1}\\in G_{i+1}(A)$. The trivial group and $\\mathfrak g=0$ are allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 17.80 proof, printed p.378, characteristic-zero exclusion, read with additive Jordan decomposition (17.74, p.377), Proposition 10.15 (p.190), and descending central series (6.38, p.133). This is an agent-stated intermediate criterion implicit in the exclusion, not a separately numbered assertion in Milne. Springer 1998, 13.3.5, cited there for details, is WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-scheme-tangent-space",
+  "def-wf-lie-algebra",
+  "def-sc-group-scheme-subgroup",
+  "def-wf-lie-algebra-derivation"
+ ],
+ "proof": [
+  {
+   "text": "By the adjoint-differential lemma, $\\mathfrak g$ is finite-dimensional and $d\\operatorname{Ad}_e=\\operatorname{ad}$. Apply the Noetherian Engel criterion with $R=k$, $L=\\mathfrak g$: every subspace of a finite-dimensional vector space is finitely generated. The hypothesis gives $C^d\\mathfrak g=0$, where $C^0\\mathfrak g=\\mathfrak g$ and $C^{r+1}\\mathfrak g=[\\mathfrak g,C^r\\mathfrak g]$. Increase $d$ if necessary so $d\\geq1$.",
+   "uses": [
+    "lem-sfb-noetherian-lie-engel-criterion",
+    "lem-sfb-charzero-adjoint-differential-central-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "14.34(a), printed pp.289-290; Theorem 10.23, p.193."
+   }
+  },
+  {
+   "text": "Put $V=\\mathfrak g$ and $J=\\{u\\in\\operatorname{End}_k(V):u(C^rV)\\subseteq C^{r+1}V\\text{ for }0\\leq r<d\\}$. It is a linear subspace closed under composition: two lowering maps lower twice, and $C^{r+2}V\\subseteq C^{r+1}V$. A product of $d$ lowering maps kills $V$, so $J^d=0$. Here $J^i$ is the linear span of products of $i$ elements of $J$. For every $k$-algebra $A$ set $U_i(A)=1+(J^i\\otimes_k A)$ for $1\\leq i\\leq d$. These are closed subgroup schemes of $\\operatorname{GL}(V)$: the affine translates of the linear subspaces $J^i$ consist of units, with inverse $(1+u)^{-1}=1-u+\\cdots+(-u)^{d-1}$, and are closed in the open scheme $\\operatorname{GL}(V)\\subseteq\\operatorname{End}(V)$. Their multiplication and inverse are these polynomial formulas. Thus $U_1\\supseteq\\cdots\\supseteq U_d=1$, and the dual-number formula $1+\\epsilon u$ gives $\\operatorname{Lie}(U_1)=J$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent construction from the central-series definition, 14.34, and polynomial matrix multiplication."
+   }
+  },
+  {
+   "text": "For $X\\in\\mathfrak g$, the definition of $C^{r+1}V$ gives $\\operatorname{ad}(X)(C^rV)\\subseteq C^{r+1}V$. Hence $d\\operatorname{Ad}_e(\\mathfrak g)\\subseteq J=\\operatorname{Lie}(U_1)$. Apply Lie-detected factorization to $\\operatorname{Ad}:G\\to\\operatorname{GL}(V)$ and the closed subgroup $U_1$. Its source is smooth and connected by hypothesis, and the base field has characteristic zero. We obtain a group-scheme homomorphism $\\rho:G\\to U_1$ whose composite with the inclusion is $\\operatorname{Ad}$.",
+   "uses": [
+    "lem-sfb-charzero-adjoint-differential-central-kernel",
+    "lem-sfb-charzero-lie-detects-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "10.14-10.15 and Cartier 3.23; apply to the inverse image of U_1."
+   }
+  },
+  {
+   "text": "All following identities hold over any commutative $k$-algebra $A$. If $s=1+u\\in U_1(A)$ and $t=1+v\\in U_i(A)$, then $uv-vu\\in J^{i+1}\\otimes_k A$, and $sts^{-1}t^{-1}-1=(st-ts)s^{-1}t^{-1}=(uv-vu)s^{-1}t^{-1}$. Multiplication on either side by the finite inverse polynomials in $u,v$ preserves $J^{i+1}\\otimes_k A$, because $J^{i+1}$ is a two-sided ideal in the unital algebra $k\\cdot1+J$. Thus $[U_1(A),U_i(A)]\\subseteq U_{i+1}(A)$ for $i<d$. This also proves $U_i$ normal in $U_1$, and $U_d=1$ is normal as well.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent matrix calculation realizing the descending central series in 6.38, printed p.133."
+   }
+  },
+  {
+   "text": "Define $G_i=G\\times_{U_1}U_{i+1}$ for $0\\leq i<d$ and append $G_d=1$. Pulling back the closed normal inclusions gives closed normal subgroup schemes of $G$, and $G_0=G$. The calculation in the preceding step gives $[G(A),G_i(A)]\\subseteq G_{i+1}(A)$ for $i<d-1$. Finally $G_{d-1}=\\ker\\rho=\\ker\\operatorname{Ad}$, since $U_d=1$ and $U_1\\hookrightarrow\\operatorname{GL}(V)$ is a monomorphism. The adjoint-kernel lemma says that this subgroup commutes with $G(A)$ for every $A$, proving the last required inclusion into $G_d(A)=\\{1\\}$. These polynomial constructions work also for $V=0$ (then $J=0$ and $U_1=1$), and for the trivial group.",
+   "uses": [
+    "lem-sfb-charzero-adjoint-differential-central-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "6.38, printed p.133, assembled with the characteristic-zero adjoint-kernel corollary of 10.15 and 3.23."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-noetherian-lie-engel-criterion",
+  "lem-sfb-charzero-adjoint-differential-central-kernel",
+  "lem-sfb-charzero-lie-detects-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Explicit Engel/lowering-operator proof supplying the characteristic-zero exclusion implicit in Proposition 17.80; 14.34(a), 10.14-10.15, 10.23, 3.23, and 6.38. No use of Springer or SGA."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected affine algebraic group in characteristic zero with every adjoint Lie operator nilpotent is a nilpotent group",
+   "results": "{\"t\": \"2026-10-24T07:51:04Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth connected affine algebraic group in characteristic zero with every adjoint Lie operator nilpotent is a nilpotent group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.isNilpotent_iff_forall\", \"LieAlgebra.nilpotent_ad_of_nilpotent_algebra\", \"LieSubalgebra.IsCartanSubalgebra.nilpotent\", \"LieAlgebra.isNilpotent_range_ad_iff\", \"LieAlgebra.isSolvable_of_isNilpotent\", \"LieRing.IsNilpotent\", \"LieSubalgebra.instIsNilpotentSubtypeMemOfIsCartanSubalgebra\", \"LieAlgebra.top_isCartanSubalgebra_of_nilpotent\"], \"digest\": \"8ca755ab4cf88a76\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Engel and Lie nilpotence results concern abstract Lie algebras, and do not integrate the lower central series to a group-scheme central series. The AlgebraicGeometry grep has no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Characteristic zero connected algebraic group nilpotent if and only if its Lie algebra is nilpotent",
+   "results": "{\"t\": \"2026-10-24T07:51:05Z\", \"tool\": \"leanfinder\", \"query\": \"Characteristic zero connected algebraic group nilpotent if and only if its Lie algebra is nilpotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieEquiv.nilpotent_iff_equiv_nilpotent\", \"LieAlgebra.isNilpotent_range_ad_iff\", \"LieAlgebra.isNilpotent_iff_forall\", \"LieAlgebra.isSolvable_of_isNilpotent\", \"Function.Surjective.lieAlgebra_isNilpotent\", \"LieSubalgebra.IsCartanSubalgebra.nilpotent\", \"LieAlgebra.nilpotent_ad_of_nilpotent_algebra\", \"LieAlgebra.top_isCartanSubalgebra_of_nilpotent\"], \"digest\": \"11799595ec16fc73\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Engel and Lie nilpotence results concern abstract Lie algebras, and do not integrate the lower central series to a group-scheme central series. The AlgebraicGeometry grep has no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "LieRing.IsNilpotent",
+   "results": "{\"t\": \"2026-10-24T08:02:16Z\", \"tool\": \"loogle\", \"query\": \"LieRing.IsNilpotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"LieRing.IsNilpotent\", \"LieEquiv.nilpotent_iff_equiv_nilpotent\", \"Function.Injective.lieAlgebra_isNilpotent\", \"Function.Surjective.lieAlgebra_isNilpotent\", \"LieAlgebra.non_trivial_center_of_isNilpotent\", \"instIsNilpotentSubtypeMemLieSubalgebraTop\", \"LieAlgebra.maxNilpotentIdeal_eq_top_of_isNilpotent\", \"LieHom.isNilpotent_range\"], \"digest\": \"b851f47683643252\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Engel and Lie nilpotence results concern abstract Lie algebras, and do not integrate the lower central series to a group-scheme central series. The AlgebraicGeometry grep has no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "nilpotent.*[Ll]ie|[Ll]ie.*nilpotent",
+   "results": "{\"t\": \"2026-10-24T07:51:01Z\", \"tool\": \"grep\", \"query\": \"nilpotent.*[Ll]ie|[Ll]ie.*nilpotent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Engel and Lie nilpotence results concern abstract Lie algebras, and do not integrate the lower central series to a group-scheme central series. The AlgebraicGeometry grep has no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Nilpotence of a connected algebraic group detected by its Lie algebra characteristic zero",
+   "results": "{\"t\": \"2026-10-24T07:51:01Z\", \"tool\": \"leansearch\", \"query\": \"Nilpotence of a connected algebraic group detected by its Lie algebra characteristic zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieEquiv.nilpotent_iff_equiv_nilpotent\", \"LieModule.instLinearWeightsOfCharZero\", \"LieRing.IsNilpotent\", \"instIsNilpotentSubtypeMemLieSubalgebraTop\", \"LieAlgebra.nilpotent_of_nilpotent_quotient\", \"LieModule.IsNilpotent.mk_int\", \"LieAlgebra.IsEngelian\", \"LieModule.IsNilpotent.casesOn\"], \"digest\": \"86493d054a9d7568\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Engel and Lie nilpotence results concern abstract Lie algebras, and do not integrate the lower central series to a group-scheme central series. The AlgebraicGeometry grep has no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Connected smooth affine algebraic group characteristic zero nilpotent adjoint endomorphisms implies nilpotent group scheme",
+   "results": "{\"t\": \"2026-10-24T08:32:22Z\", \"tool\": \"leanfinder\", \"query\": \"Connected smooth affine algebraic group characteristic zero nilpotent adjoint endomorphisms implies nilpotent group scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.nilpotent_ad_of_nilpotent_algebra\", \"LieAlgebra.ad_nilpotent_of_nilpotent\", \"LieAlgebra.isNilpotent_iff_forall\", \"LieAlgebra.isNilpotent_range_ad_iff\", \"LieAlgebra.isNilpotent_ad_of_isNilpotent\", \"LieModule.isNilpotent_toEnd_of_isNilpotent\", \"LieModule.isNilpotent_iff_forall'\", \"LieModule.isNilpotent_iff_forall\"], \"digest\": \"4aafb13df59109d1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: all nilpotence hits concern abstract Lie algebras; no integration to a group-scheme central series. The new Engel leaf records the usable intrinsic Lie result."
+  },
+  {
+   "tool": "loogle",
+   "query": "LieRing.IsNilpotent",
+   "results": "{\"t\": \"2026-10-24T08:32:18Z\", \"tool\": \"loogle\", \"query\": \"LieRing.IsNilpotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"LieRing.IsNilpotent\", \"LieEquiv.nilpotent_iff_equiv_nilpotent\", \"Function.Injective.lieAlgebra_isNilpotent\", \"Function.Surjective.lieAlgebra_isNilpotent\", \"LieAlgebra.non_trivial_center_of_isNilpotent\", \"instIsNilpotentSubtypeMemLieSubalgebraTop\", \"LieAlgebra.maxNilpotentIdeal_eq_top_of_isNilpotent\", \"LieHom.isNilpotent_range\"], \"digest\": \"b851f47683643252\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: all nilpotence hits concern abstract Lie algebras; no integration to a group-scheme central series. The new Engel leaf records the usable intrinsic Lie result."
+  },
+  {
+   "tool": "grep",
+   "query": "nilpotent.*Lie|Lie.*nilpotent",
+   "results": "{\"t\": \"2026-10-24T08:32:17Z\", \"tool\": \"grep\", \"query\": \"nilpotent.*Lie|Lie.*nilpotent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: all nilpotence hits concern abstract Lie algebras; no integration to a group-scheme central series. The new Engel leaf records the usable intrinsic Lie result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Connected algebraic group is nilpotent if all adjoint Lie operators are nilpotent",
+   "results": "{\"t\": \"2026-10-24T08:32:17Z\", \"tool\": \"leansearch\", \"query\": \"Connected algebraic group is nilpotent if all adjoint Lie operators are nilpotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.ad_nilpotent_of_nilpotent\", \"LieAlgebra.isNilpotent_ad_of_isNilpotent\", \"LieAlgebra.isNilpotent_range_ad_iff\", \"LieAlgebra.isNilpotent_iff_forall\", \"LieAlgebra.nilpotent_ad_of_nilpotent_algebra\", \"LieSubalgebra.isNilpotent_ad_of_isNilpotent_ad\", \"LieModule.isNilpotent_iff_forall\", \"LieSubalgebra.isNilpotent_of_forall_le_engel\"], \"digest\": \"92f77de67f5f010f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: all nilpotence hits concern abstract Lie algebras; no integration to a group-scheme central series. The new Engel leaf records the usable intrinsic Lie result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-central-semisimple-restricted-subalgebra",
+  "date": "2026-10-24",
+  "group": "Q100"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118. Supporting prerequisite: Milne Theorem 17.82, printed p.379 (maximal torus if and only if its scalar extension is maximal); the theorem allows all group varieties, and is used here only for smooth connected affine groups. Supporting step in Milne Theorem 17.82: Proposition 17.81 and its proof, printed pp.378–379; Theorem 14.5, printed pp.281–282, for the unitriangular-immersion meaning of unipotence. The finite-field part of the proof invokes Proposition 17.99, printed pp.383–384. Supporting proof input for Proposition 17.81: Proposition 17.80(a),(b) and its proof, printed p.378: iterate the infinitesimal isogenies supplied by Theorem 11.38 (printed p.223); the resulting isogeny is finite faithfully flat and radicial. Isogenies have equal source and target dimensions. This is the reduction used in Proposition 17.81, p.379. Supporting input in Q77 split: Proposition 17.80 proof, printed p.378, first reduction paragraph; Corollary 17.77, p.377 (central semisimple vectors are fixed by the group). The scalar-extension formulation makes explicit the geometric subspace needed in that reduction. Supporting prerequisite: Proposition 17.80 proof, printed p.378, characteristic-zero exclusion, read with additive Jordan decomposition (17.74, p.377), Proposition 10.15 (p.190), and descending central series (6.38, p.133). This is an agent-stated intermediate criterion implicit in the exclusion, not a separately numbered assertion in Milne. Springer 1998, 13.3.5, cited there for details, is WANTED.",
+   "via": [
+    "lem-sfb-central-semisimple-restricted-subalgebra",
+    "lem-sfb-infinitesimal-isogeny-lie-reduction",
+    "lem-sfb-torus-free-implies-unipotent-arbitrary-field",
+    "lem-sfb-maximal-torus-field-extension",
+    "lem-sfb-split-reductive-characteristic-sequence",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-charzero-ad-nilpotence-group-criterion",
+  "worker": "stage1",
+  "summary": "Constructed the group central series as preimages of powers of a nilpotent associative algebra of lowering operators. Three prerequisites: Mathlib Noetherian Engel criterion, characteristic-zero Lie-detected factorization, and the adjoint differential with central kernel. No statement change, no scalar-extension gap, arbitrary nonreduced test algebras included.",
+  "blueprint": "The inherited blueprint chain has no imported ancestor (from.node null). This proof supplies the characteristic-zero exclusion in Milne 17.80 cited by the parent central-semisimple reduction, using 14.34(a), 10.14-10.15, 10.23, Cartier 3.23, and 6.38."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q141-1f14d170a",
+  "group": "Q141",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q141-1f14d170a (reviewer sub-agent of L); spot-checked: PASS: the split is correct and nothing needed fixing. Shape: one commit; the item's statement and stmt_deps are unchanged from the base dagsnap 9e7fa43, where the item was unsplit; there is no repair note, so this is an ordinary one-level split; the new ids do not collide with existing ones. Source: Milne iAG2017 17.80 (p.378) contains the implicit claim 'G not nilpotent and semisimple central ⇒ char p', which the item makes explicit; 10.14, 10.15, 10.23 and 10.33 were read at the cited places, and 10.33 only gives Z(G) ⊆ Ker Ad. Steps 1-5 checked: (1) Engel gives C^d g=0; (2) the lowering-operator algebra J has J^d=0, U_i=1+J^i are closed subgroups and Lie U_1=J; (3) ad(X) maps C^r into C^{r+1}, so dAd(g) ⊆ J, and the factorization node applies (all its hypotheses hold, with H=GL(g) and K=U_1); (4) the identity sts⁻¹t⁻¹−1=(st−ts)s⁻¹t⁻¹ holds and J^{i+1} is an ideal of k+J; (5) G_i=ρ⁻¹(U_{i+1}) and G_{d−1}=ker Ad, which the adjoint node makes central over every algebra A. Edge cases d=1, V=0, trivial G and Heisenberg work. New nodes: the Engel node is an exact Mathlib leaf (LieAlgebra.isNilpotent_iff_forall at Engel.lean:275 with LieModule.isNilpotent_iff at Nilpotent.lean:272, both read). The factorization node is true (proof via G×_H K, 10.14, Cartier, 10.15; Frobenius and μ_2 show characteristic 0 and connectedness are needed). The kernel=centre node is true (centralizers have Lie algebra all of g over the algebraic closure, then Cartier and 10.15, then descent). It strictly generalizes the imported lem-ag-lie-centre, which covers only matrix groups over Q̄_ℓ, so it is not a duplicate; the report omits that node from its 'not duplicates' list. Neither unsplit node restates a clause of the item. All nodes are in the item's unit, so there are no tool_uses. from.node is null, inherited from the item's created chain. No SGA."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CharZeroAdNilpotenceGroupCriterion",
+  "declaration": "AlgebraicGeometry.charZero_nilpotent_of_ad_nilpotent",
+  "file": "lean/Sheaf/AlgebraicGeometry/CharZeroAdNilpotenceGroupCriterion.lean",
+  "statement": "theorem charZero_nilpotent_of_ad_nilpotent (k : Type u) [Field k] [CharZero k] (kbar : Type v) [Field kbar] [Algebra k kbar] [IsAlgClosure k kbar] (G : Grp (Over (Spec (.of k)))) (haff : IsAffine G.X.left) (hsm : Smooth G.X.hom) (hconn : ConnectedSpace G.X.left) (hft : LocallyOfFiniteType G.X.hom) (hqc : QuasiCompact G.X.hom) (had : ∀ X : GrpObj.Lie G.X, ∃ m : ℕ, 1 ≤ m ∧ (LieAlgebra.ad k (GrpObj.Lie G.X) X) ^ m = 0) : ∃ (c : ℕ) (C : Fin (c + 1) → Grp (Over (Spec (.of k)))) (i : ∀ j : Fin (c + 1), C j ⟶ G), (∀ j : Fin (c + 1), IsClosedSubgroupScheme (i j).hom.hom ∧ IsNormalSubgroupScheme (i j).hom.hom) ∧ IsIso (i 0) ∧ Nonempty (C (Fin.last c) ≅ Grp.trivial _) ∧ (∀ j : Fin c, ∃ l : C j.succ ⟶ C j.castSucc, l ≫ i j.castSucc = i j.succ) ∧ ∀ (j : Fin c) (A : Type u) [CommRing A] [Algebra k A] (g : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k A))) ⟶ G.X) (h : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k A))) ⟶ (C j.castSucc).X), ∃ z : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k A))) ⟶ (C j.succ).X, z ≫ (i j.succ).hom.hom = g * (h ≫ (i j.castSucc).hom.hom) * g⁻¹ * (h ≫ (i j.castSucc).hom.hom)⁻¹",
+  "branch": "newtargets-dag",
+  "by": "Q155",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7121a58aa",
+  "group": "Q155",
+  "result": "pass",
+  "note": "Re-delivery after RETURN of 53c1a2da (H2). The H2 stmt_dep def-wf-lie-algebra-derivation, owner of GrpObj.Lie and its LieAlgebra k instance, is now in stmt_deps; the H9 unused imports (Lie.Engel, LieIdentityTangentEquiv) are removed. The node differs from live only in lean (live null, not landed elsewhere) and that stmt_dep. The module differs from the returned head only in imports and one docstring line. Clause match (field char 0, k̄ background, smooth/connected/affine/finite type, GrpObj.Lie ad nilpotence with per-X exponent, closed normal series with IsIso i0, trivial last term, inclusions, commutators for all A : Type u in the same order) is correct. Edge cases c=0, c=1, 𝔤=0 and nonreduced A are covered. One sorry, docstrings present, lean.statement verbatim. No files changed, so no compile; the worker reports a clean scompile."
+ }
+}

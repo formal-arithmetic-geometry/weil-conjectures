@@ -1,0 +1,223 @@
+{
+ "id": "lem-sfb-power-torsion-cokernel-length",
+ "kind": "statement",
+ "title": "A power-torsion module has cokernel length bounded by its scalar kernel length",
+ "statement": "Let $R$ be a commutative ring, $Q$ an $R$-module, and $f\\in R$. Suppose that every $q\\in Q$ is killed by some power $f^n$ with $n\\geq1$. Write $Q[f]=\\{q\\in Q:fq=0\\}$ and $fQ=\\{fq:q\\in Q\\}$. If $Q[f]$ has finite module length $l=\\mathrm{length}_R(Q[f])$ [def-weil-pbc-module-length], then $\\mathrm{length}_R(Q/fQ)\\leq l$; in particular $Q/fQ$ has finite length.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BCR, lemma-affine-punctured-spec, converse proof, the length calculation for Q[f^n] and Q/fQ, lines 3383–3399."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-length"
+ ],
+ "proof": [
+  {
+   "text": "Put $K_n=\\{q\\in Q:f^nq=0\\}$ for $n\\geq0$, so $K_0=0$, $K_1=Q[f]$ and $K_n\\subseteq K_{n+1}$. Set $T_n=f^nK_{n+1}\\subseteq K_1$. Scalar multiplication gives a short exact sequence $0\\to K_n\\to K_{n+1}\\xrightarrow{f^n}T_n\\to0$: its kernel is exactly $K_n$ and it is onto the stated image. Any strict chain in $T_n$ is a strict chain in $K_1$, so its length is at most $l$, by [def-weil-pbc-module-length]. Starting with $\\lambda_0=0$, additivity [lem-weil-pbc-length-additive-short-exact] gives inductively $\\lambda_{n+1}=\\lambda_n+\\mathrm{length}_R(T_n)<\\infty$, where $\\lambda_n=\\mathrm{length}_R(K_n)$. The inclusions $K_n\\subseteq K_{n+1}$ give $\\lambda_n\\leq\\lambda_{n+1}$ by the same chain argument.",
+   "uses": [
+    "def-weil-pbc-module-length",
+    "lem-weil-pbc-length-additive-short-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BCR, lemma-affine-punctured-spec, converse proof: the paragraph beginning Set l_n and the two scalar-kernel exact sequences (lines 3383–3399); length additivity is Algebra Tag 00IV, lemma-length-additive."
+   }
+  },
+  {
+   "text": "Write $C=Q/fQ$, let $\\pi:Q\\to C$ be the quotient map, and set $I_n=\\pi(K_n)$ and $J_n=fK_{n+1}\\subseteq K_n$. The restricted map $f:K_{n+1}\\to J_n$ is onto and has kernel $K_1$. Moreover $K_n\\cap fQ=J_n$: if $x=fy\\in K_n$, then $f^{n+1}y=f^nx=0$, so $y\\in K_{n+1}$; the reverse inclusion follows by multiplication. Thus the inclusion and quotient maps give short exact sequences $0\\to K_1\\to K_{n+1}\\xrightarrow{f}J_n\\to0$ and $0\\to J_n\\to K_n\\xrightarrow{\\pi}I_n\\to0$. Apply [lem-weil-pbc-length-additive-short-exact] to both. All lengths are finite, and, writing $j_n=\\mathrm{length}_R(J_n)$ and $i_n=\\mathrm{length}_R(I_n)$, we have $\\lambda_{n+1}=l+j_n$ and $\\lambda_n=j_n+i_n$. Since $\\lambda_n\\leq\\lambda_{n+1}$, cancellation of the finite integer $j_n$ gives $i_n\\leq l$.",
+   "uses": [
+    "lem-weil-pbc-length-additive-short-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BCR, lemma-affine-punctured-spec, converse proof: the paragraph beginning Set l_n and the two scalar-kernel exact sequences (lines 3383–3399); length additivity is Algebra Tag 00IV, lemma-length-additive."
+   }
+  },
+  {
+   "text": "The power-torsion hypothesis gives $Q=\\bigcup_{n\\geq0}K_n$, hence $C=\\bigcup_{n\\geq0}I_n$, an increasing union. For any finite strict chain $N_0\\subsetneq\\cdots\\subsetneq N_s$ of submodules of $C$, choose $x_j\\in N_j\\setminus N_{j-1}$ for $1\\leq j\\leq s$. The finitely many $x_j$ all lie in one $I_N$; intersecting the chain with $I_N$ remains strict, witnessed by these same $x_j$. Consequently $s\\leq\\mathrm{length}_R(I_N)\\leq l$. Taking the supremum of chain lengths, exactly as in [def-weil-pbc-module-length], proves $\\mathrm{length}_R(Q/fQ)\\leq l<\\infty$.",
+   "uses": [
+    "def-weil-pbc-module-length"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BCR, lemma-affine-punctured-spec, converse proof: Since Q is the union of Q[f^n]; expansion using Algebra Tag 02LY, definition-length."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-length",
+  "lem-weil-pbc-length-additive-short-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BCR, lemma-affine-punctured-spec, converse proof, length calculation for Q[f^n] and Q/fQ; final union inference expanded by the definition of length (Algebra Tag 02LY)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An f power torsion module whose submodule killed by f has finite length has quotient by f of length at most the length of its f torsion",
+   "results": "Read returned hits (8): Module.IsTorsionBy.quotient, Module.length_quotient, Module.isTorsionBy_quotient_element_smul, Module.supportDim_le_supportDim_quotSMulTop_succ, isFiniteLength_quotient_span_singleton, IsFiniteLength, Submodule.QuotientTorsion.torsion_eq_bot, Module.supportDim_le_supportDim_quotSMulTop_succ_of_mem_jacobson.  These are length additivity/monotonicity, finite-length definitions, scalar torsion, or dimension results; none states the power-torsion kernel/cokernel bound.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.length, Submodule.torsionBy",
+   "results": "Read returned hits (0): none.  These are length additivity/monotonicity, finite-length definitions, scalar torsion, or dimension results; none states the power-torsion kernel/cokernel bound.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "length.*torsionBy|torsionBy.*length|length.*quot.*smul|length.*quotSMul",
+   "results": "Read returned hits (0): none.  These are length additivity/monotonicity, finite-length definitions, scalar torsion, or dimension results; none states the power-torsion kernel/cokernel bound.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An f power torsion module whose submodule killed by f has finite length has quotient by f of length at most the length of its f torsion",
+   "results": "Read returned hits (8): IsFiniteLength.below.of_simple_quotient, IsFiniteLength.of_simple_quotient, Submodule.QuotientTorsion.torsion_eq_bot, Submodule.QuotientTorsion.instIsTorsionFree, Module.length_eq_add_of_exact, instModuleQuotientAddSubgroupTorsion, Submodule.instModuleQuotientIdealSpanSingletonSetSubtypeMemTorsionBy, rank_quotient_eq_of_le_torsion.  These are length additivity/monotonicity, finite-length definitions, scalar torsion, or dimension results; none states the power-torsion kernel/cokernel bound.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a locally nilpotent scalar endomorphism of a module, finite length of its kernel bounds the length of its cokernel",
+   "results": "Read returned hits (8): Module.length_le_of_surjective, Module.length_le_of_injective, Module.End.ker_pow_le_ker_pow_finrank, IsFiniteLength, IsFiniteLength.of_injective, Module.supportDim_le_supportDim_quotSMulTop_succ_of_mem_jacobson, Module.length_ne_top, Module.length_eq_add_of_exact.  These are length additivity/monotonicity, finite-length definitions, scalar torsion, or dimension results; none states the power-torsion kernel/cokernel bound.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "length.*(coker|ker)|(coker|ker).*length",
+   "results": "Read returned hits (1): Mathlib/RingTheory/Length.lean.  These are length additivity/monotonicity, finite-length definitions, scalar torsion, or dimension results; none states the power-torsion kernel/cokernel bound.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally nilpotent scalar on a module with finite length kernel has cokernel of length at most its kernel",
+   "results": "Read 8 returned hits: Module.length_le_of_surjective, Module.length_le_of_injective, Module.supportDim_le_supportDim_quotSMulTop_succ, Module.supportDim_le_supportDim_quotSMulTop_succ_of_mem_jacobson, IsFiniteLength, Module.supportDim_quotSMulTop_succ_eq_supportDim, Module.supportDim_quotSMulTop_succ_eq_supportDim_mem_jacobson, Module.length_eq_add_of_exact. Length additivity and monotonicity do not themselves state the locally nilpotent scalar bound. The nilpotence criterion requires a finitely generated module, which is not assumed here. Scalar torsion definitions and support-dimension results likewise do not prove this statement.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.length, LinearMap.ker",
+   "results": "Read 0 returned hits: none. Length additivity and monotonicity do not themselves state the locally nilpotent scalar bound. The nilpotence criterion requires a finitely generated module, which is not assumed here. Scalar torsion definitions and support-dimension results likewise do not prove this statement.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "length.*(coker|ker)|(coker|ker).*length",
+   "results": "Read 1 returned hits: Mathlib/RingTheory/Length.lean. Subdirectory searched: RingTheory. Length additivity and monotonicity do not themselves state the locally nilpotent scalar bound. The nilpotence criterion requires a finitely generated module, which is not assumed here. Scalar torsion definitions and support-dimension results likewise do not prove this statement.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an f power torsion module the length of Q modulo fQ is bounded by the length of the kernel of multiplication by f",
+   "results": "Read 8 returned hits: Submodule.torsionBy, Module.length_le_of_surjective, Module.length_eq_add_of_exact, Module.isTorsionBy_quotient_element_smul, Submodule.exists_isInternal_prime_power_torsion_of_pid, Submodule.instModuleQuotientTorsionBy, Submodule.isTorsion'_powers_iff, IdealFilter.isTorsion_def. Length additivity and monotonicity do not themselves state the locally nilpotent scalar bound. The nilpotence criterion requires a finitely generated module, which is not assumed here. Scalar torsion definitions and support-dimension results likewise do not prove this statement.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An endomorphism acting locally nilpotently with finite length kernel has bounded length cokernel",
+   "results": "Read 8 returned hits: Module.End.isNilpotent_iff_of_finite, IsFiniteLength, Module.length_le_of_surjective, Module.length_le_of_injective, Module.length_ne_top, IsFiniteLength.of_surjective, isFiniteLength_of_exists_compositionSeries, IsFiniteLength.of_injective. Length additivity and monotonicity do not themselves state the locally nilpotent scalar bound. The nilpotence criterion requires a finitely generated module, which is not assumed here. Scalar torsion definitions and support-dimension results likewise do not prove this statement.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "length.*torsion|torsion.*length",
+   "results": "Read 0 returned hits: none. Subdirectory searched: RingTheory/Length.lean. Length additivity and monotonicity do not themselves state the locally nilpotent scalar bound. The nilpotence criterion requires a finitely generated module, which is not assumed here. Scalar torsion definitions and support-dimension results likewise do not prove this statement.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-punctured-local-dimension",
+  "date": "2026-10-24",
+  "group": "O1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Local prolongation of a tensor power of a symmetric line; Moret-Bailly II 3.3.3, printed p.53, opening parenthesis: the generic line is a difference of two ample lines; Stacks supplies this for all finite-type algebraic groups, not only abelian varieties. Supporting input for the present split: existence of one ample invertible module on a finite-type group scheme, before choosing a high twist of the supplied line. Smooth irreducible geometric construction in Groupoids Tag 0BF7, before Picard rigidity. Supporting input: Affine-complement step: choose a nonempty affine open U of the smooth integral group; its boundary is an effective Cartier divisor D. Supporting input for this split: the codimension-one assertion for irreducible components of an affine-open complement, used before making those components Cartier. Local algebra input: Stacks Tag 0BCR (lemma-affine-punctured-spec), used after passing to the local spectrum of a boundary generic point. Module-theoretic input: the bounded-length argument in the converse proof of Stacks 0BCR.",
+   "via": [
+    "lem-sfb-affine-punctured-local-dimension",
+    "lem-sfb-affine-open-boundary-codimension-one",
+    "lem-sfb-smooth-affine-cartier-boundary",
+    "lem-sfb-translated-cartier-parameter-family",
+    "lem-sfb-finite-type-group-ample-line",
+    "lem-sfb-algebraic-group-ample-difference",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-power-torsion-cokernel-length",
+  "worker": "stage1",
+  "summary": "Q60 checked Stacks 0BCR directly and found no complete project attachment or exact Mathlib match. Reused the existing Mathlib length-additivity node; wrote the scalar-kernel induction, checked both maps and kernels in the image calculation, and expanded the union inference by finite strict-chain witnesses. No new nodes, strengthened hypotheses, or statement changes.",
+  "blueprint": "Latest blueprint det-thm-sf-ctf-stability-direct-images, proof (3), direct-image finiteness route recorded in the inherited from.place: local algebra prerequisite Stacks 0BCR, its two scalar-kernel length calculations and final union sentence. The inherited creation chain has no imported blueprint ancestor (blueprint_refs.py ancestor returns None); its existing null from.node and via chain are retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-3ae16b7eb",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-3ae16b7eb (reviewer sub-agent of L); spot-checked: I read the whole item. The delivery makes no new nodes and changes only the split fields against clones/live: status, proof, proof_deps, proof_origin, split_report and mathlib_searches. The statement and stmt_deps are unchanged. Source check: Stacks divisors.tex Tag 0BCR (lemma-affine-punctured-spec), converse proof, lines 3383-3399. The item states the module-level length bound from that proof for any commutative R, any R-module Q and any f. That is exactly what step 6 of the parent lem-sfb-affine-punctured-local-dimension uses. Cited nodes: def-weil-pbc-module-length (Module.length, supremum over strict chains) and lem-weil-pbc-length-additive-short-exact (Module.length_eq_add_of_exact, Stacks 00IV, algebra.tex 12394-12402). Both are generic Mathlib leaves, so there is no route problem and no cycle. Step 1: f^n maps K_{n+1} onto T_n with kernel K_n, and T_n lies in K_1, so length(T_n) <= l by the chain definition. By additivity and induction from lambda_0=0, every lambda_n is finite and the lambda_n increase. Step 2: J_n = fK_{n+1} lies in K_n, and K_n meets fQ exactly in J_n (if fy is in K_n then f^{n+1}y=0). Additivity on both exact sequences gives lambda_{n+1}=l+j_n and lambda_n=j_n+i_n, so i_n <= l with every term finite. Step 3 is correctly marked elementary: it picks a witness for each strict inclusion in one I_N, which writes out the source's union sentence. Small cases checked: Q=0; f=0; f a unit; k[t]/(t^a); and k[t,t^-1]/k[t] with f=t, where C=0 gives a strict inequality and Q has infinite length. Duplicate search: grep of dag/nodes for 0BCR and for power-torsion/length terms found no other node stating this. There is no SGA, no repair note, tool_uses is empty, and the inherited null blueprint from.node is kept. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PowerTorsionCokernelLength",
+  "declaration": "Module.length_quotSMulTop_le_of_power_torsion",
+  "file": "lean/Sheaf/RingTheory/PowerTorsionCokernelLength.lean",
+  "statement": "theorem length_quotSMulTop_le_of_power_torsion (R : Type u) [CommRing R] (Q : Type v) [AddCommGroup Q] [Module R Q] (f : R) (h_torsion : ∀ q : Q, ∃ n : ℕ, 1 ≤ n ∧ f ^ n • q = 0) (h_length : Module.length R (Submodule.torsionBy R Q f) < ⊤) : Module.length R (QuotSMulTop f Q) ≤ Module.length R (Submodule.torsionBy R Q f) ∧ Module.length R (QuotSMulTop f Q) < ⊤",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c6f04852a",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Statement verbatim-equal to the file; only the lean record changed vs side-live. Hypotheses (CommRing R, R-module Q in its own universe v, f, ∀q ∃n≥1 f^n•q=0, length(torsionBy f)<⊤) and both conclusion clauses (length(QuotSMulTop f Q) ≤ length(torsionBy f), and <⊤) match the node and Stacks 0BCR divisors.tex 3383-3399 exactly, with no extra assumptions. Uses Mathlib Module.length (the recorded match of def-weil-pbc-module-length), Submodule.torsionBy and QuotSMulTop. Edge cases Q=0, f=0, f unit and k[t,t^-1]/k[t] are fine. No duplicate in Mathlib or side-live Sheaf. Proof is sorry; docstrings carry the source place, blueprint tag and proof steps; report sections present. No file changed, so no compile run."
+ }
+}

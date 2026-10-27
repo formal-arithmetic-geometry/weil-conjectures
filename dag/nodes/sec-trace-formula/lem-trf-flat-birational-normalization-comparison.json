@@ -1,0 +1,275 @@
+{
+ "id": "lem-trf-flat-birational-normalization-comparison",
+ "kind": "statement",
+ "title": "Canonical total-fraction comparison for a flat finite birational algebra",
+ "statement": "Let $A$ and $R$ be reduced commutative rings (having no nonzero nilpotent elements), and let $f:A\\to R$ be flat [def-weil-pbc-flat-ring-map]. For a ring $T$, let $Q(T)=S_T^{-1}T$, where $S_T$ consists of all non-zero-divisors $s$ (elements satisfying $sx=0\\Rightarrow x=0$). Let $A\\subseteq B\\subseteq Q(A)$ be an $A$-subalgebra finite as an $A$-module [def-weil-finitely-generated-module], put $C=B\\otimes_A R$ [def-weil-module-base-change], and let $i:R\\to C$ send $r$ to $1\\otimes r$. Every $f(t)$ with $t\\in S_A$ belongs to $S_R$, so $f$ extends uniquely to $\\phi:Q(A)\\to Q(R)$ with $\\phi(a/t)=f(a)/f(t)$. The formula $$j(b\\otimes r)=\\phi(b)r$$ defines an injective $R$-algebra homomorphism $j:C\\hookrightarrow Q(R)$, and $i$ is injective. More explicitly, for any finite $A$-generating family $b_h=a_h/t_h$ of $B$, with $a_h\\in A$ and $t_h\\in S_A$, put $s=\\prod_ht_h$. Then $sB\\subseteq A$, and multiplication by $f(s)$ is injective on $R$ and on $C$. The $A$-linear map $b\\mapsto sb$ induces $d_R:C\\to R$ with $d_R(b\\otimes r)=f(sb)r$, satisfying $i(d_R(c))=f(s)c$ and $d_R(i(r))=f(s)r$. The image of $j$ lies in $R[1/f(s)]\\subseteq Q(R)$, and $j(c)=d_R(c)/f(s)$. Identifying $R\\subseteq C\\subseteq Q(R)$ by these maps, $Q(C)$ is canonically isomorphic to $Q(R)$, compatibly with the maps from $C$; a fraction $c/t\\in Q(C)$ maps to $(f(s)c)/(f(s)t)\\in Q(R)$, with numerator and denominator in $R$ and the denominator a non-zero-divisor. If $C$ is integrally closed in $Q(C)$ [def-weil-pbc-integral-closure], then $j$ identifies $C$ with the integral closure of $R$ in $Q(R)$.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0C3V (lemma-normalization-same-after-completion), proof: the finite integral normal algebra inside the localized base has to be its integral closure. Agent-explicit common-denominator and total-fraction calculation for arbitrary flat scalar extension, independent of completion."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-finitely-generated-module",
+  "def-weil-module-base-change",
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof": [
+  {
+   "text": "For any ring $T$, the map $T\\to Q(T)$ is injective: if $x/1=0$, the fraction equivalence gives $ux=0$ for some $u\\in S_T$, hence $x=0$. Fix $t\\in S_A$. The injective $A$-linear map $A\\xrightarrow{t}A$ stays injective after tensoring with the flat $A$-module $R$, by [lem-trf-flat-tensor-preserves-injection]. Under $A\\otimes_A R\\simeq R$, $a\\otimes r\\mapsto f(a)r$, with inverse $r\\mapsto1\\otimes r$, it is multiplication by $f(t)$. Thus $f(t)\\in S_R$. Apply [lem-weil-pbc-ring-localization-universal-property] to $A\\to R\\to Q(R)$ and $S_A$ to obtain the unique $\\phi$ with $\\phi(a/t)=f(a)/f(t)$.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map",
+    "lem-trf-flat-tensor-preserves-injection",
+    "def-weil-module-base-change",
+    "lem-weil-pbc-ring-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00HB (definition-flat), 00HD (lemma-flat), 00CP (proposition-universal-property-localization); fraction-kernel calculation preceding 00CP"
+   }
+  },
+  {
+   "text": "Choose the finite generating family in the statement. Products of regular elements are regular, since $uvx=0$ implies $vx=0$ and then $x=0$. Hence $s=\\prod_h t_h\\in S_A$. For each $h$, $sb_h=a_h\\prod_{k\\ne h}t_k\\in A$. If $b=\\sum_h e_hb_h$ with $e_h\\in A$, then $sb=\\sum_h e_h(sb_h)\\in A$. This proves $sB\\subseteq A$. Multiplication by $s$ on $B$ is injective because $s$ is a unit of $Q(A)$ and $B\\subseteq Q(A)$. Write $\\alpha=f(s)\\in S_R$.",
+   "uses": [
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0518 (definition-finite-module), and explicit common-denominator calculation for varieties Tag 0C3V (lemma-normalization-same-after-completion)"
+   }
+  },
+  {
+   "text": "The injective $A$-linear map $d:B\\to A$, $b\\mapsto sb$, gives an injective base-changed map $d_R:C\\to R$ by [lem-trf-flat-tensor-preserves-injection], with $d_R(b\\otimes r)=f(sb)r$. Applying the same leaf to the injective multiplication-by-$s$ map $B\\to B$ shows that multiplication by $\\alpha$ on $C$ is injective. On pure tensors, $i(d_R(b\\otimes r))=1\\otimes f(sb)r=(sb)\\otimes r=\\alpha(b\\otimes r)$ and $d_R(i(r))=\\alpha r$. Additivity gives both identities for all elements. If $i(r)=0$, the second identity and $\\alpha\\in S_R$ give $r=0$.",
+   "uses": [
+    "lem-trf-flat-tensor-preserves-injection",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HD (lemma-flat), injection clause; base-change maps of Section 05G3 (section-base-change)"
+   }
+  },
+  {
+   "text": "The map $(b,r)\\mapsto\\phi(b)r$ is $A$-bilinear: the balancing identity is $\\phi(ab)r=\\phi(b)f(a)r$. The universal property [def-weil-pbc-module-tensor-product] therefore defines $j:C\\to Q(R)$. It sends $1\\otimes1$ to $1$, is $R$-linear, and is multiplicative, since on two pure tensors both sides are $\\phi(bb')rr'$; distributivity extends this to their finite sums. Thus $j$ is an $R$-algebra map and $ji(r)=r/1$. For a pure tensor, $\\alpha j(b\\otimes r)=\\phi(sb)r=f(sb)r=d_R(b\\otimes r)$, hence $j(c)=d_R(c)/\\alpha$ for all $c$. This lies in $R[1/\\alpha]$. If $j(c)=0$, injectivity of $R\\to Q(R)$ gives $d_R(c)=0$, and injectivity of $d_R$ gives $c=0$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CX (lemma-tensor-product) and explicit multiplicativity/denominator calculation for varieties Tag 0C3V"
+   }
+  },
+  {
+   "text": "Identify $R\\subseteq C\\subseteq Q(R)$. Every $u\\in S_R$ is regular on $C$: if $uc=0$, its image in $Q(R)$ is zero and $u$ is a unit there, so injectivity of $j$ gives $c=0$. Conversely let $t\\in S_C$. The equality $\\alpha t=i(d_R(t))$ puts $\\alpha t$ in $R$. It is regular in $R$: if $(\\alpha t)r=0$ for $r\\in R$, the same equality in $C$ gives $t(\\alpha r)=0$, hence $\\alpha r=0$ by regularity of $t$ on $C$, and $r=0$ by regularity of $\\alpha$ on $R$. Thus $j(t)=(\\alpha t)/\\alpha$ is a unit of $Q(R)$, with inverse $\\alpha/(\\alpha t)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Explicit regular-denominator calculation underlying varieties Tag 0C3V (lemma-normalization-same-after-completion)"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-ring-localization-universal-property], $j$ extends to $J:Q(C)\\to Q(R)$, and $R\\to C\\to Q(C)$ extends to $H:Q(R)\\to Q(C)$, using the two regularity conclusions of step 5. Their formulas give $J(c/t)=j(c)j(t)^{-1}=(\\alpha c)/(\\alpha t)$; both entries belong to $R$ and the denominator is regular there. The composite $JH$ is the identity by agreement on $R$ and localization uniqueness. For $c\\in C$, $HJ(c/1)=H(d_R(c)/\\alpha)=i(d_R(c))/i(\\alpha)=\\alpha c/\\alpha=c/1$, because $\\alpha$ is regular on $C$. Localization uniqueness applied to $C\\to Q(C)$ then gives $HJ=1$. Thus $J$ is the canonical isomorphism, compatible with $C$, independently of the chosen generating family.",
+   "uses": [
+    "lem-weil-pbc-ring-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CP (proposition-universal-property-localization); explicit inverse and fraction formula for varieties Tag 0C3V"
+   }
+  },
+  {
+   "text": "The elements $b_h\\otimes1$ generate $C$ over $R$: for $b=\\sum_h e_hb_h$, $b\\otimes r=\\sum_h(b_h\\otimes1)f(e_h)r$, and pure tensors generate $C$. Hence $C$ is finite over $R$. Apply [lem-weil-pbc-finite-algebra-is-integral] to $i:R\\to C$: each $c\\in C$ satisfies a monic polynomial over $R$. Applying $j$ to that equation shows $j(C)$ lies in the integral closure of $R$ in $Q(R)$.",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-finite-algebra-is-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00GK (lemma-finite-is-integral), used in varieties Tag 0C3V (lemma-normalization-same-after-completion)"
+   }
+  },
+  {
+   "text": "Assume $C$ is integrally closed in $Q(C)$. If $x\\in Q(R)$ is integral over $R$, apply $H$ to its monic equation. The coefficients become elements of $i(R)\\subseteq C$, so $H(x)$ is integral over $C$. By [def-weil-pbc-integral-closure] and the assumed integral closedness, $H(x)=c/1$ for some $c\\in C$. Therefore $x=JH(x)=j(c)$. Together with step 7 this identifies $j(C)$ with the integral closure of $R$ in $Q(R)$, and all comparison, injectivity and denominator clauses have been proved.",
+   "uses": [
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00GI (definition-integral), 00GP (definition-integral-closure); varieties Tag 0C3V (lemma-normalization-same-after-completion), final integral-closure comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "lem-trf-flat-tensor-preserves-injection",
+  "def-weil-module-base-change",
+  "lem-weil-pbc-ring-localization-universal-property",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0C3V (lemma-normalization-same-after-completion), proof of the integral-closure identification; agent-explicit common-denominator proof for arbitrary flat scalar extension, using algebra.tex Tags 00HD, 00CP, 00CX and 00GK."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "([Ff]lat.*[Bb]irational|[Bb]irational.*[Ff]lat|[Tt]ensor.*[Ff]raction[Rr]ing|[Ff]raction[Rr]ing.*[Tt]ensor)",
+   "results": "{\"t\": \"2026-10-22T06:05:01Z\", \"tool\": \"grep\", \"query\": \"([Ff]lat.*[Bb]irational|[Bb]irational.*[Ff]lat|[Tt]ensor.*[Ff]raction[Rr]ing|[Ff]raction[Rr]ing.*[Tt]ensor)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/PicardGroup.lean\"], \"digest\": \"c6070dc7c41f5b09\"}; No match. Algebra.IsAlgebraic.isBaseChange_of_isFractionRing (Algebraic/Integral.lean:525) assumes a domain extension and localization to fraction rings. The Smooth/IntegralClosure.lean results concern integral closure in the tensor product of the ambient ring: injectivity under flatness (:51) and bijectivity under localization (:161) or smoothness (:380). They do not identify that ambient tensor product with Q(R) for arbitrary flat R. Localization/AsSubring gives localization images, and PicardGroup.lean:921 concerns inverse invertible ideals, not a finite birational algebra.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat base change of a finite birational extension is the integral closure if its scalar extension is integrally closed in total fractions",
+   "results": "{\"t\": \"2026-10-22T06:05:01Z\", \"tool\": \"leansearch\", \"query\": \"A flat base change of a finite birational extension is the integral closure if its scalar extension is integrally closed in total fractions\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, IsFractionRing",
+   "results": "{\"t\": \"2026-10-22T06:05:01Z\", \"tool\": \"loogle\", \"query\": \"TensorProduct, IsFractionRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Ideal.eq_top_of_mk_tensor_eq_one\"], \"digest\": \"3fa720b697bb9375\"}; No match. Algebra.IsAlgebraic.isBaseChange_of_isFractionRing (Algebraic/Integral.lean:525) assumes a domain extension and localization to fraction rings. The Smooth/IntegralClosure.lean results concern integral closure in the tensor product of the ambient ring: injectivity under flatness (:51) and bijectivity under localization (:161) or smoothness (:380). They do not identify that ambient tensor product with Q(R) for arbitrary flat R. Localization/AsSubring gives localization images, and PicardGroup.lean:921 concerns inverse invertible ideals, not a finite birational algebra.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat base change of a finite subalgebra of the total quotient ring embeds canonically into the new total quotient ring and has the same total fractions",
+   "results": "{\"t\": \"2026-10-22T06:05:13Z\", \"tool\": \"leanfinder\", \"query\": \"Flat base change of a finite subalgebra of the total quotient ring embeds canonically into the new total quotient ring and has the same total fractions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsAlgebraic.isBaseChange_of_isFractionRing\", \"IsLocalization.flat\", \"Localization.flat\", \"instFlatAtPrime\", \"RingHom.Flat.ofLocalizationSpanTarget\", \"RingHom.Flat.holdsForLocalizationAway\", \"Algebra.Extension.localization\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\"], \"digest\": \"b81e49a03478519f\"}; No match. Algebra.IsAlgebraic.isBaseChange_of_isFractionRing (Algebraic/Integral.lean:525) assumes a domain extension and localization to fraction rings. The Smooth/IntegralClosure.lean results concern integral closure in the tensor product of the ambient ring: injectivity under flatness (:51) and bijectivity under localization (:161) or smoothness (:380). They do not identify that ambient tensor product with Q(R) for arbitrary flat R. Localization/AsSubring gives localization images, and PicardGroup.lean:921 concerns inverse invertible ideals, not a finite birational algebra.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "toIntegralClosure_bijective|isBaseChange_of_isFractionRing",
+   "results": "{\"t\": \"2026-10-22T06:06:19Z\", \"tool\": \"grep\", \"query\": \"toIntegralClosure_bijective|isBaseChange_of_isFractionRing\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Algebraic/Integral.lean\", \"Mathlib/RingTheory/Algebraic/Integral.lean\"], \"digest\": \"a0c9629f6ff1c00b\"}; searched subdirectory Mathlib/RingTheory; No match. Algebra.IsAlgebraic.isBaseChange_of_isFractionRing (Algebraic/Integral.lean:525) assumes a domain extension and localization to fraction rings. The Smooth/IntegralClosure.lean results concern integral closure in the tensor product of the ambient ring: injectivity under flatness (:51) and bijectivity under localization (:161) or smoothness (:380). They do not identify that ambient tensor product with Q(R) for arbitrary flat R. Localization/AsSubring gives localization images, and PicardGroup.lean:921 concerns inverse invertible ideals, not a finite birational algebra.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Clearing a common regular denominator embeds the flat scalar extension of a finite birational algebra into total fractions and identifies its total quotient ring",
+   "results": "{\"t\": \"2026-10-22T06:06:31Z\", \"tool\": \"leanfinder\", \"query\": \"Clearing a common regular denominator embeds the flat scalar extension of a finite birational algebra into total fractions and identifies its total quotient ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsIntegralClosure.isLocalization\", \"IsIntegralClosure.isLocalization_of_isSeparable\", \"Localization.isLocalization_range_mapToFractionRing\", \"Localization.isFractionRing_range_mapToFractionRing\", \"IsFractionRing.liftAlgHom\", \"IsFractionRing.isFractionRing_of_isDomain_of_isLocalization\", \"FractionRing.algebraMap_liftAlgebra\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\"], \"digest\": \"1e647e005f00bd8c\"}; No match. Algebra.IsAlgebraic.isBaseChange_of_isFractionRing (Algebraic/Integral.lean:525) assumes a domain extension and localization to fraction rings. The Smooth/IntegralClosure.lean results concern integral closure in the tensor product of the ambient ring: injectivity under flatness (:51) and bijectivity under localization (:161) or smoothness (:380). They do not identify that ambient tensor product with Q(R) for arbitrary flat R. Localization/AsSubring gives localization images, and PicardGroup.lean:921 concerns inverse invertible ideals, not a finite birational algebra.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "([Ff]lat.*[Bb]irational|[Bb]irational.*[Ff]lat|[Tt]ensor.*[Ff]raction[Rr]ing|[Ff]raction[Rr]ing.*[Tt]ensor)",
+   "results": "{\"t\": \"2026-10-23T04:13:24Z\", \"tool\": \"grep\", \"query\": \"([Ff]lat.*[Bb]irational|[Bb]irational.*[Ff]lat|[Tt]ensor.*[Ff]raction[Rr]ing|[Ff]raction[Rr]ing.*[Tt]ensor)\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/PicardGroup.lean\"], \"digest\": \"c6070dc7c41f5b09\"}; No match for the whole statement. Read the returned signatures and the sources: Algebra.IsAlgebraic.isBaseChange_of_isFractionRing (RingTheory/Algebraic/Integral.lean:525) assumes an algebraic domain extension; TensorProduct.toIntegralClosure_injective_of_flat (Smooth/IntegralClosure.lean:51) has codomain the integral closure in an ambient tensor product, without identifying its total fractions with Q(R). IsLocalization.tensor/tensorRight (Localization/BaseChange.lean) describe localizations, not an arbitrary finite intermediate algebra. Localization.isFractionRing_range_mapToFractionRing (Localization/AsSubring.lean:72) concerns the range of a localization. IsFractionRing.trans composes two supplied fraction-ring structures. PicardGroup.lean:921 concerns invertible ideals. None supplies the item in one specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat base change of a finite birational algebra and its integral closure in the total quotient ring",
+   "results": "{\"t\": \"2026-10-23T04:13:24Z\", \"tool\": \"leansearch\", \"query\": \"Flat base change of a finite birational algebra and its integral closure in the total quotient ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.isBaseChange\", \"RingHom.Flat.isStableUnderBaseChange\", \"TensorProduct.toIntegralClosure_injective_of_flat\", \"IsSMulRegular.of_flat_of_isBaseChange\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"Module.FaithfullyFlat.instTensorProduct\", \"RingHom.FaithfullyFlat.isStableUnderBaseChange\"], \"digest\": \"e6cfc24d04a8cdde\"}; No match for the whole statement. Read the returned signatures and the sources: Algebra.IsAlgebraic.isBaseChange_of_isFractionRing (RingTheory/Algebraic/Integral.lean:525) assumes an algebraic domain extension; TensorProduct.toIntegralClosure_injective_of_flat (Smooth/IntegralClosure.lean:51) has codomain the integral closure in an ambient tensor product, without identifying its total fractions with Q(R). IsLocalization.tensor/tensorRight (Localization/BaseChange.lean) describe localizations, not an arbitrary finite intermediate algebra. Localization.isFractionRing_range_mapToFractionRing (Localization/AsSubring.lean:72) concerns the range of a localization. IsFractionRing.trans composes two supplied fraction-ring structures. PicardGroup.lean:921 concerns invertible ideals. None supplies the item in one specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, IsLocalization",
+   "results": "{\"t\": \"2026-10-23T04:13:25Z\", \"tool\": \"loogle\", \"query\": \"TensorProduct, IsLocalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsLocalization.tensorRight\", \"IsLocalization.tensor\", \"IsLocalization.algebraLid\", \"IsLocalization.algebraTensorEquiv\", \"IsLocalization.moduleLid\", \"IsLocalization.moduleTensorEquiv\", \"IsLocalization.mk'_tmul\", \"IsLocalization.tmul_mk'\"], \"digest\": \"de9de3ef9b2f9c16\"}; No match for the whole statement. Read the returned signatures and the sources: Algebra.IsAlgebraic.isBaseChange_of_isFractionRing (RingTheory/Algebraic/Integral.lean:525) assumes an algebraic domain extension; TensorProduct.toIntegralClosure_injective_of_flat (Smooth/IntegralClosure.lean:51) has codomain the integral closure in an ambient tensor product, without identifying its total fractions with Q(R). IsLocalization.tensor/tensorRight (Localization/BaseChange.lean) describe localizations, not an arbitrary finite intermediate algebra. Localization.isFractionRing_range_mapToFractionRing (Localization/AsSubring.lean:72) concerns the range of a localization. IsFractionRing.trans composes two supplied fraction-ring structures. PicardGroup.lean:921 concerns invertible ideals. None supplies the item in one specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat scalar extension of a module finite intermediate algebra in a total quotient ring embeds in the new total quotient ring and has the same total fractions",
+   "results": "{\"t\": \"2026-10-23T04:13:32Z\", \"tool\": \"leanfinder\", \"query\": \"Flat scalar extension of a module finite intermediate algebra in a total quotient ring embeds in the new total quotient ring and has the same total fractions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsFractionRing.trans\", \"instFiniteFractionRingLocalizationAlgebraMapSubmonoidNonZeroDivisors\", \"instIsScalarTowerAtPrimeFractionRing\", \"Module.flat_of_isLocalized_maximal\", \"IsFractionRing.isFractionRing_of_isDomain_of_isLocalization\", \"IsLocalization.flat\", \"Localization.flat\", \"Module.flat_of_isLocalized_span\"], \"digest\": \"e73dcc3c5d871ea0\"}; No match for the whole statement. Read the returned signatures and the sources: Algebra.IsAlgebraic.isBaseChange_of_isFractionRing (RingTheory/Algebraic/Integral.lean:525) assumes an algebraic domain extension; TensorProduct.toIntegralClosure_injective_of_flat (Smooth/IntegralClosure.lean:51) has codomain the integral closure in an ambient tensor product, without identifying its total fractions with Q(R). IsLocalization.tensor/tensorRight (Localization/BaseChange.lean) describe localizations, not an arbitrary finite intermediate algebra. Localization.isFractionRing_range_mapToFractionRing (Localization/AsSubring.lean:72) concerns the range of a localization. IsFractionRing.trans composes two supplied fraction-ring structures. PicardGroup.lean:921 concerns invertible ideals. None supplies the item in one specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isBaseChange_of_isFractionRing|toIntegralClosure_injective_of_flat|isFractionRing_range_mapToFractionRing",
+   "results": "{\"t\": \"2026-10-23T04:15:01Z\", \"tool\": \"grep\", \"query\": \"isBaseChange_of_isFractionRing|toIntegralClosure_injective_of_flat|isFractionRing_range_mapToFractionRing\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Localization/AsSubring.lean\", \"Mathlib/RingTheory/Algebraic/Integral.lean\", \"Mathlib/RingTheory/Algebraic/Integral.lean\"], \"digest\": \"3eedcf39cc31983d\"}; No match for the whole statement. Read the returned signatures and the sources: Algebra.IsAlgebraic.isBaseChange_of_isFractionRing (RingTheory/Algebraic/Integral.lean:525) assumes an algebraic domain extension; TensorProduct.toIntegralClosure_injective_of_flat (Smooth/IntegralClosure.lean:51) has codomain the integral closure in an ambient tensor product, without identifying its total fractions with Q(R). IsLocalization.tensor/tensorRight (Localization/BaseChange.lean) describe localizations, not an arbitrary finite intermediate algebra. Localization.isFractionRing_range_mapToFractionRing (Localization/AsSubring.lean:72) concerns the range of a localization. IsFractionRing.trans composes two supplied fraction-ring structures. PicardGroup.lean:921 concerns invertible ideals. None supplies the item in one specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Clearing a regular common denominator in a finite intermediate subalgebra identifies the total quotient rings after flat base change",
+   "results": "{\"t\": \"2026-10-23T04:15:10Z\", \"tool\": \"leanfinder\", \"query\": \"Clearing a regular common denominator in a finite intermediate subalgebra identifies the total quotient rings after flat base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsAlgebraic.isBaseChange_of_isFractionRing\", \"TensorProduct.toIntegralClosure_injective_of_flat\", \"Algebra.IsAlgebraic.instIsPushout\", \"instIsPushoutFractionRingPolynomial_1\", \"Subalgebra.LinearDisjoint.exists_field_of_isDomain_of_injective\", \"instFiniteFractionRingLocalizationAlgebraMapSubmonoidNonZeroDivisors\", \"RingHom.Flat.ofLocalizationSpanTarget\", \"Algebra.Smooth.exists_subalgebra_finiteType\"], \"digest\": \"569a9edf472b1efc\"}; No match for the whole statement. Read the returned signatures and the sources: Algebra.IsAlgebraic.isBaseChange_of_isFractionRing (RingTheory/Algebraic/Integral.lean:525) assumes an algebraic domain extension; TensorProduct.toIntegralClosure_injective_of_flat (Smooth/IntegralClosure.lean:51) has codomain the integral closure in an ambient tensor product, without identifying its total fractions with Q(R). IsLocalization.tensor/tensorRight (Localization/BaseChange.lean) describe localizations, not an arbitrary finite intermediate algebra. Localization.isFractionRing_range_mapToFractionRing (Localization/AsSubring.lean:72) concerns the range of a localization. IsFractionRing.trans composes two supplied fraction-ring structures. PicardGroup.lean:921 concerns invertible ideals. None supplies the item in one specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-curve-normalization-completion",
+  "date": "2026-10-22",
+  "group": "Q72"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Normalization and simple-pole branch calculation, prior to any numerical degree computation. Local input: Normalization of the completed local nodal branches, before the simple-pole calculation. Re-split argument: Canonical total-fraction comparison for a flat finite birational algebra.",
+   "via": [
+    "lem-trf-curve-normalization-completion",
+    "lem-trf-nodal-normalization-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-flat-birational-normalization-comparison",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Eight explicit proof steps reuse the existing flat-injection, tensor universal-property, ring-localization and finite-integrality Mathlib leaves; no new nodes. Checks include regular denominators on both rings, both inverse maps on total fractions, the zero ring, nonfaithful flat maps and rings with zero divisors. Fresh logged searches in two phrasings found no whole-item Mathlib match.",
+  "blueprint": "Realizes the inherited normalization/completion algebra subargument before the simple-pole branch calculation in the from/via ancestry of lem-trf-local-term-locality. Read the current main-20261015 ancestor proof and the parent: this is its historical auxiliary normalization input, and changes no contraction/local-term route. Whole-blueprint searches for birational, total quotient and total fraction found no identical blueprint statement."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-0d8525b46",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-0d8525b46 (reviewer sub-agent of L); spot-checked: PASS. I read the item, all eight steps and every cited node in full. The delivery has no new nodes, and the statement and stmt_deps are byte-identical to the version Q72 created on 2026-10-22. There is no repair note for this item, so the re-split rule does not apply. All 8 cited nodes are Mathlib leaves (flat ring map, flat tensor injection, module base change, ring localization universal property, finite module, tensor product, finite⇒integral, integral closure), so there is no route issue and no tool_uses are needed. Each step checks out. Step 1: flatness gives f(S_A)⊆S_R, then φ. Step 2: s=∏t_h gives sB⊆A. Step 3: d_R with i∘d_R=α and d_R∘i=α, so i is injective. Step 4: the balancing identity holds, j=d_R/α, and j is injective. Step 5: S_R⊆S_C, and for t∈S_C, d_R(t) is regular in R; rechecked, it uses i injective. Step 6: J and H are mutually inverse (HJ(c/1)=c/1, then uniqueness), and J(c/t)=d_R(c)/d_R(t). Step 7: b_h⊗1 generate, so C is finite and integral. Step 8: an integral x maps under H into C, so x=j(c). Source: Stacks varieties 0C3V, whose proof argues A'⊗A^h⊂(A^h)_f=Q(A^h) and finiteness; the item is an agent-written generalization to flat R, and proof_origin says agent. Minor: step 2 gives the label of 0518 as definition-finite-module, but it is definition-module-finite-type; the tag is correct and I did not repair it. Edge cases checked: A=0, R=0, B=A, the nodal k[x,y]/(xy) normalization inverted at x, and a non-faithful flat projection k×k→k. Parent lem-trf-curve-normalization-completion step 4 uses the statement as stated. Duplicate search over total-fraction and integral-closure base-change nodes found none: the weakly-étale, ind-étale and field-extension variants all have different hypotheses. No SGA source is used, and all three kinds of Mathlib search were recorded."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FlatBirationalNormalizationComparison",
+  "declaration": "RingTheory.flat_finite_birational_normalization_comparison",
+  "file": "lean/Sheaf/RingTheory/FlatBirationalNormalizationComparison.lean",
+  "statement": "theorem flat_finite_birational_normalization_comparison (A : Type u) (R : Type v) [CommRing A] [CommRing R] [IsReduced A] [IsReduced R] [Algebra A R] (hf : (algebraMap A R).Flat) (B : Subalgebra A (FractionRing A)) [Module.Finite A B] : ∃ hregular : nonZeroDivisors A ≤ (nonZeroDivisors R).comap (algebraMap A R), (∀ (a : A) (t : nonZeroDivisors A), IsLocalization.map (FractionRing R) (algebraMap A R) hregular (IsLocalization.mk' (FractionRing A) a t) = IsLocalization.mk' (FractionRing R) (algebraMap A R a) (⟨algebraMap A R t, hregular t.property⟩ : nonZeroDivisors R)) ∧ (∀ ψ : FractionRing A →+* FractionRing R, (∀ a : A, ψ (algebraMap A (FractionRing A) a) = algebraMap R (FractionRing R) (algebraMap A R a)) → ψ = IsLocalization.map (FractionRing R) (algebraMap A R) hregular) ∧ ∃ (j : R ⊗[A] B →ₐ[R] FractionRing R) (J : FractionRing (R ⊗[A] B) ≃+* FractionRing R), (∀ (b : B) (r : R), j (r ⊗ₜ[A] b) = IsLocalization.map (FractionRing R) (algebraMap A R) hregular (b : FractionRing A) * algebraMap R (FractionRing R) r) ∧ Function.Injective j ∧ Function.Injective (algebraMap R (R ⊗[A] B)) ∧ (∀ c : R ⊗[A] B, J (algebraMap (R ⊗[A] B) (FractionRing (R ⊗[A] B)) c) = j c) ∧ (IsIntegrallyClosedIn (R ⊗[A] B) (FractionRing (R ⊗[A] B)) → j.range = integralClosure R (FractionRing R)) ∧ (∀ (n : ℕ) (b : Fin n → B) (a : Fin n → A) (t : Fin n → nonZeroDivisors A), Submodule.span A (Set.range b) = ⊤ → (∀ h : Fin n, (b h : FractionRing A) = IsLocalization.mk' (FractionRing A) (a h) (t h)) → ∀ s : nonZeroDivisors A, s = ∏ h : Fin n, t h → Function.Injective (fun r : R => algebraMap A R s * r) ∧ Function.Injective (fun c : R ⊗[A] B => algebraMap A R s • c) ∧ ∃ (d : B →ₗ[A] A) (dR : R ⊗[A] B →ₗ[R] R), (∀ x : B, algebraMap A (FractionRing A) (d x) = algebraMap A (FractionRing A) s * (x : FractionRing A)) ∧ dR = (TensorProduct.AlgebraTensorModule.rid A R R).toLinearMap.comp (d.baseChange R) ∧ (∀ (x : B) (r : R), dR (r ⊗ₜ[A] x) = algebraMap A R (d x) * r) ∧ (∀ c : R ⊗[A] B, algebraMap R (R ⊗[A] B) (dR c) = algebraMap A R s • c) ∧ (∀ r : R, dR (algebraMap R (R ⊗[A] B) r) = algebraMap A R s * r) ∧ (∀ c : R ⊗[A] B, j c = IsLocalization.mk' (FractionRing R) (dR c) (⟨algebraMap A R s, hregular s.property⟩ : nonZeroDivisors R)) ∧ (∀ c : R ⊗[A] B, ∃ z : Localization.Away (algebraMap A R s), IsLocalization.map (M := Submonoid.powers (algebraMap A R s)) (T := nonZeroDivisors R) (FractionRing R) (RingHom.id R) (Submonoid.powers_le.mpr (hregular s.property)) z = j c) ∧ (∀ (c : R ⊗[A] B) (tC : nonZeroDivisors (R ⊗[A] B)), ∃ ht : dR tC ∈ nonZeroDivisors R, J (IsLocalization.mk' (FractionRing (R ⊗[A] B)) c tC) = IsLocalization.mk' (FractionRing R) (dR c) (⟨dR tC, ht⟩ : nonZeroDivisors R)))",
+  "branch": "newtargets-dag",
+  "by": "Q111",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-07b127215",
+  "group": "Q111",
+  "result": "fix",
+  "note": "The Lean statement matches the node and Stacks 0C3V clause by clause: reduced A and R, flat f (RingHom.Flat), B a finite subalgebra of FractionRing A; φ is the canonical IsLocalization.map with its fraction formula and uniqueness; j is an R-algebra map fixed on pure tensors, and j and i are injective; J ≃+* is determined by J∘(C→Q(C)) = j; IsIntegrallyClosedIn C Q(C) implies j.range = integralClosure; for every Fin-n generating family and s = ∏ t_h: f(s) injective on R and C, unique d giving sB⊆A, d_R = rid∘baseChange d with the i/d_R identities, j = d_R/f(s), image in R[1/f(s)] via the canonical Away map, J(c/t) = d_R c/d_R t with a regular denominator. Edge cases A=0, R=0, n=0, B=A and non-injective f are covered. The node equals side-live apart from its lean record, the statement field is verbatim, no citers, no new definitions, the proof is a single sorry, and the docstrings have the source, blueprint id and 8 steps. flat_integral_totalFractions (Q29) is a different theorem (integral B, prime-local normality). Only fault, H11: the Second reading section was the worker's self-check under the dispatcher wording. Fixed by fixes/lem-trf-flat-birational-normalization-comparison.report.md, which keeps the worker report verbatim and adds an independent clause-by-clause second reading. Nothing compiled because no Lean file changed."
+ }
+}

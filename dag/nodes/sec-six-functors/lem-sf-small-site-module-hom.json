@@ -1,0 +1,148 @@
+{
+ "id": "lem-sf-small-site-module-hom",
+ "kind": "statement",
+ "title": "Module equivalence and internal Hom for the lifted small site",
+ "statement": "Let C be a category with objects in universe u+1 and morphisms in universe u, let J be a Grothendieck topology [def-weil-pbc-sites-and-cohomology], and let R be a sheaf of commutative rings in universe u+1. Give AsSmall(C) the topology induced by its inverse lift and restrict R to a ring sheaf Rsmall. Restriction along the forward lift gives an additive equivalence Q from Rsmall-module sheaves [def-weil-sheaf-of-modules-category] to R-module sheaves. For every M,N there is a canonical isomorphism Q(Hom_Rsmall(M,N)) ≅ Hom_R(QM,QN) [def-pur-sheaf-hom], natural for precomposition and postcomposition. On a slice W→U it retains the component of the map on the lifted slice.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Internal-Hom comparison and naturality of evaluation paragraph; ordinary small-site restriction and Frobenius translation."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-hom"
+ ],
+ "proof": [
+  {
+   "text": "Transport the topology by AsSmall.down. Both directions are continuous. The pushforwardPushforwardEquivalence with identity coefficient maps gives Q and its inverse; the unit and counit equations reduce to restriction along identity arrows. Addition of maps is pointwise.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "At each U, send a map over its lifted slice to the same components at lifts of W→U. Conversely use the underlying arrows. Naturality follows from the same commuting triangles. Both composites are identity on each module section; scalar multiplication is the same restricted coefficient action.",
+   "uses": [
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "These linear slice isomorphisms commute with every restriction, so isoMk makes a sheaf isomorphism. Precomposition and postcomposition are componentwise composition, so the two-variable naturality equation is reflexivity on every slice and section.",
+   "uses": [
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Internal-Hom comparison and naturality of evaluation paragraph; ordinary small-site restriction and Frobenius translation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction along an equivalence of sites preserves the internal Hom of sheaves of modules",
+   "results": "sheafHom, restrictScalars, IsCoverDense.restrictHomEquivHom, sheafCongr component formulas, sheafifyHomEquiv, and PullbackConstruction.adjunction. None is the normalized module-slice Hom or native Frobenius comparison.",
+   "date": "2026-10-27",
+   "verdict": "Use existing pushforward equivalence and construct the module-slice comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence of sheaves of modules induced by a site equivalence intertwines the pullback by a site automorphism and internal Hom",
+   "results": "sheafCongr, transportIsoSheafToPresheaf, pullbackIso, pushforwardCongr, and conjugateEquiv_pullbackComp_inv. No native module comparison.",
+   "date": "2026-10-27",
+   "verdict": "No complete match; ordinary restriction is available."
+  },
+  {
+   "tool": "grep",
+   "query": "comparisonModuleFunctor|adicLowerStarCompIhomIso",
+   "results": "Remote grep returned zero hits. Local rg finds adicSectionModuleEquivalence, adicModuleHomComparisonCore and native adicLowerStarCompIhomIso; no Frobenius-compatible composite small model.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the explicit native comparison and construct only the missing transport."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeFrobeniusRingedModel",
+  "date": "2026-10-27",
+  "group": "F8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-coef-verdier-weil-equivariance",
+   "place": "Internal-Hom comparison and naturality of evaluation paragraph; ordinary small-site restriction and Frobenius translation.",
+   "via": [
+    "lem-sf-native-frobenius-ringed-model",
+    "lem-sf-native-weil-ringed-presentation",
+    "lem-sf-native-weil-hom-closed-structure",
+    "lem-sf-native-weil-hom-right-adjoint",
+    "lem-sf-native-weil-tensor-adjoints",
+    "lem-sf-native-weil-tensor-lift",
+    "lem-sf-weil-native-tensor-transport",
+    "lem-sf-weil-native-closed-forgetful"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SmallSiteModuleHom",
+  "file": "lean/Sheaf/CategoryTheory/SmallSiteModuleHom.lean",
+  "declaration": "SheafOfModules.SmallSite.homIso",
+  "statement": "def homIso (M N : SmallModules J R) :\n    (restriction J R).obj (homObj (R := coefficient J R) M N) ≅\n      homObj (R := R) ((restriction J R).obj M) ((restriction J R).obj N)",
+  "branch": "sheaf-dag",
+  "by": "F8",
+  "date": "2026-10-27",
+  "declarations": [
+   "SheafOfModules.SmallSite.topology",
+   "SheafOfModules.SmallSite.up_continuous",
+   "SheafOfModules.SmallSite.coefficient",
+   "SheafOfModules.SmallSite.restriction",
+   "SheafOfModules.SmallSite.equivalence",
+   "SheafOfModules.SmallSite.restriction_additive",
+   "SheafOfModules.SmallSite.SmallModules",
+   "SheafOfModules.SmallSite.unliftSliceMap",
+   "SheafOfModules.SmallSite.liftSliceMap",
+   "SheafOfModules.SmallSite.homApp",
+   "SheafOfModules.SmallSite.homIso",
+   "SheafOfModules.SmallSite.homIso_naturality",
+   "SheafOfModules.SmallSite.equivalence_functor"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261027T064449-L-2182596",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261027T064449-L-2182596",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

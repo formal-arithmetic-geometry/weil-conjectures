@@ -1,0 +1,241 @@
+{
+ "id": "lem-sfb-finite-curve-genus-monotonicity",
+ "kind": "statement",
+ "title": "Genus is nondecreasing under a nonconstant cover of smooth curves",
+ "statement": "Let $\\Omega$ be an algebraically closed field and let $C,D$ be smooth proper geometrically integral curves (integral finite-type schemes of dimension one) over $\\Omega$. For every nonconstant $\\Omega$-morphism $u:C\\to D$, one has $g(C)\\geq g(D)$. Here $g(C)=\\dim_\\Omega H^1(C,\\mathcal O_C)$ and similarly for $D$, as in [def-sc-genus]. Nonconstant means that $u$ does not factor through an $\\Omega$-rational point of $D$. The assertion includes inseparable morphisms and fields of positive characteristic; no separability of $k(C)/k(D)$ is assumed.\n\nThe notions used are [def-weil-field], [def-weil-algebraic-closure], [def-weil-proper-morphism], [def-sbc-smooth-morphisms], [def-pc-integral-scheme], [def-weil-finite-type-morphism], [def-weil-pure-dimension], [def-pc-geometrically-irreducible], [def-pc-genus], [def-pc-field-extension]. Normal means that every local ring is an integrally closed domain. A finite separable extension is a finite-dimensional field extension whose elements have separable minimal polynomials. Group actions on schemes and fields may be nonfaithful and semilinear on the ground field.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tags 0C1B (curves-section-riemann-hurewitz), 0CD2 (curves-proposition-unwind-morphism-smooth) and 0CD0 (curves-lemma-purely-inseparable-smooth-genus): Riemann--Hurwitz for the separable factor and preservation of genus for the Frobenius factor, curves.tex lines 2205--2253 and 2608--2695."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-pc-geometrically-irreducible",
+  "def-pc-genus",
+  "def-pc-field-extension",
+  "def-pc-integral-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pure-dimension",
+  "def-sc-genus"
+ ],
+ "proof": [
+  {
+   "text": "Geometric integrality over the field gives integrality of C and D, hence irreducibility. Their unique irreducible components are the whole spaces, so pure dimension one implies topologicalKrullDim C = topologicalKrullDim D = 1. Properness and smoothness supply the finite-type separated curve structures. For an irreducible smooth scheme over a field, dimension one gives smoothness of relative dimension one. Apply [lem-pc-genus-agrees-sc] to rewrite both arithmetic genera as Hom.genus. If the target genus is zero the inequality follows from nonnegativity; otherwise it is at least one and 2g(D)-2 is nonnegative.",
+   "uses": [
+    "def-sc-genus",
+    "lem-pc-genus-agrees-sc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Definition of genus; the genus-zero case and the reduction to positive target genus."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-curve-frobenius-separable-factorization] to $u:C\\to D$. Its hypotheses are exactly the smoothness, properness, geometric integrality, dimension one, algebraic closedness, and nonconstancy assumed here. We obtain $u=v\\circ F$ with $C'$ again a smooth proper geometrically integral curve and $v:C'\\to D$ nonconstant with finite separable function-field extension. In characteristic zero $C'=C$ and $F$ is the identity; in characteristic $p>0$, $C'=C^{(p^n)}$ is the specified base change of $C$ along $\\varphi_n:a\\mapsto a^{p^n}$.",
+   "uses": [
+    "lem-sfb-curve-frobenius-separable-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CD2 (curves-proposition-unwind-morphism-smooth), with its characteristic-zero identity case."
+   }
+  },
+  {
+   "text": "In characteristic zero the equality and heterogeneous equality of structure maps supplied by step 2 identify the genus of C-prime with that of C. In positive characteristic p, substitute the equality of C-prime with the pullback along the specified iterateFrobeniusOfPrime endomorphism and the equality of its structure map with the second projection. Install precisely the algebra structure induced by that endomorphism [def-pc-field-extension]. Smoothness of relative dimension one is preserved under this pullback. Rewrite both Hom.genus values as arithmeticGenus by [lem-pc-genus-agrees-sc], then apply Scheme.arithmeticGenus_pullback, the structure-sheaf degree-one consequence of [lem-sc-flat-base-change-coherent], also recorded in [lem-pc-genus-base-change]. This gives g(C-prime)=g(C) without identifying the Frobenius endomorphism with the identity.",
+   "uses": [
+    "def-pc-field-extension",
+    "lem-sc-flat-base-change-coherent",
+    "lem-pc-genus-agrees-sc",
+    "lem-pc-genus-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CD0 (curves-lemma-purely-inseparable-smooth-genus), proof using Tag 0BY9 (curves-lemma-genus-base-change); existing flat coherent base change supplies the explicit H^1 dimension equality."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-curve-riemann-hurwitz-numerical] to $v:C'\\to D$. Step 2 supplies every geometric hypothesis and the finite separable function-field extension. Thus, for the positive integer $d=[k(C'):k(D)]$, there is an integer $r\\geq0$ with $2g(C')-2=d(2g(D)-2)+r$. The lemma uses the effective different, so this application includes wildly ramified separable maps in positive characteristic.",
+   "uses": [
+    "lem-sfb-curve-riemann-hurwitz-numerical"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C1B (curves-section-riemann-hurewitz), displayed genus-degree formula."
+   }
+  },
+  {
+   "text": "Since $d\\geq1$ and $2g(D)-2\\geq0$, we have $d(2g(D)-2)\\geq2g(D)-2$. Adding $r\\geq0$ to this and using step 4 gives $2g(C')-2\\geq2g(D)-2$, hence $g(C')\\geq g(D)$ by adding $2$ and dividing by the positive integer $2$. Substitute $g(C')=g(C)$ from step 3 to obtain $g(C)\\geq g(D)$. Together with the case $g(D)=0$ in step 1 this proves the assertion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Elementary integer arithmetic following the Riemann--Hurwitz formula; the separate zero-genus case is essential."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-genus",
+  "lem-pc-genus-agrees-sc",
+  "lem-sfb-curve-frobenius-separable-factorization",
+  "def-pc-field-extension",
+  "lem-sc-flat-base-change-coherent",
+  "lem-pc-genus-base-change",
+  "lem-sfb-curve-riemann-hurwitz-numerical"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tags 0C1B, 0CD2 and the proof of 0CD0: separate the relative Frobenius part, preserve genus by field base change, and use the nonnegative different term for the separable part. The zero-genus case and the final inequality are written out. Lean implementation C5, 2026-10-23: the original factorization/Riemann--Hurwitz route; the existing genus comparison and arithmeticGenus_pullback declarations supply the interface to the two genus conventions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a nonconstant morphism between smooth projective connected curves over an algebraically closed field the genus of the target is at most the genus of the source even for inseparable maps",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Affine.Point.map_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} {S : Type s} {F : Type u} {K : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Field F]\\n  [inst_3 : Field K] {W' : WeierstrassCurve.Affine R} [inst_4 : DecidableEq F] [inst_5 : DecidableEq K]\\n  [inst_6 : Algebra R S] [inst_7 : Algebra R F] [inst_8 : Algebra S F] [inst_9 : \", \"doc\": \"Given an algebra homomorphism $ f : F → K $ between fields extending a commutative ring $ R $, and an affine Weierstrass curve $ W' $ over $ R $, the map function sends a nonsingular point $ (x, y) $ \"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.map_map\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} {S : Type s} {F : Type u} {K : Type v} {L : Type w} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Field F] [inst_3 : Field K] [inst_4 : Field L] {W' : WeierstrassCurve.Affine R} [inst_5 : DecidableEq F]\\n  [inst_6 : DecidableEq K] [inst_7 : DecidableEq L] [inst_8 : Algebra R S]\", \"doc\": \"For any algebra homomorphisms $ f : F → K $ and $ g : K → L $ between fields extending a commutative ring $ R $, and for any point $ P $ on an affine Weierstrass curve $ W' $ over $ F $, the compositi\"}\n  {\"name\": \"WeierstrassCurve.Projective.map_nonsingular\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"∀ {R : Type r} {S : Type s} [inst : CommRing R] [inst_1 : CommRing S] {W' : WeierstrassCurve.Projective R} {f : R →+* S}\\n  (P : Fin 3 → R),\\n  Function.Injective ⇑f → ((WeierstrassCurve.map W' f).toProjective.Nonsingular (⇑f ∘ P) ↔ W'.Nonsingular P)\", \"doc\": \"Let $ f : A \\\\to B $ be an injective ring homomorphism, and let $ W' $ be a Weierstrass curve over $ A $. For a point $ P $ on $ W' $, the point $ f \\\\circ P $ is nonsingular on the projective Weierstra\"}\n  {\"name\": \"WeierstrassCurve.Projective.baseChange_nonsingular\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"∀ {R : Type r} {S : Type s} {A : Type u} {B : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing A]\\n  [inst_3 : CommRing B] {W' : WeierstrassCurve.Projective R} [inst_4 : Algebra R S] [inst_5 : Algebra R A]\\n  [inst_6 : Algebra S A] [IsScalarTower R S A] [inst_8 : Algebra R B] [inst\", \"doc\": \"Let $ f : A \\\\to B $ be an injective ring homomorphism. For a projective Weierstrass curve $ W' $ over $ A $, a point $ P $ on $ W' $ is nonsingular if and only if the base-changed point $ f \\\\circ P $ \"}\n  {\"name\": \"WeierstrassCurve.Projective.comp_equiv_comp\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"∀ {F : Type u} {K : Type v} [inst : Field F] [inst_1 : Field K] {W : WeierstrassCurve.Projective F} (f : F →+* K)\\n  {P Q : Fin 3 → F}, W.Nonsingular P → W.Nonsingular Q → (⇑f ∘ P ≈ ⇑f ∘ Q ↔ P ≈ Q)\", \"doc\": \"For a ring homomorphism $ f : F \\\\to K $ between fields and nonsingular points $ P, Q $ on a projective Weierstrass curve over $ F $, the images $ f \\\\circ P $ and $ f \\\\circ Q $ are projectively equival\"}\n  {\"name\": \"WeierstrassCurve.Affine.map_nonsingular\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Basic\", \"type\": \"∀ {R : Type r} {S : Type s} [inst : CommRing R] [inst_1 : CommRing S] {W : WeierstrassCurve.Affine R} {f : R →+* S}\\n  (x y : R), Function.Injective ⇑f → ((WeierstrassCurve.map W f).toAffine.Nonsingular (f x) (f y) ↔ W.Nonsingular x y)\", \"doc\": \"Let $ f : A \\\\to B $ be an injective ring homomorphism and $ W $ an affine Weierstrass curve over $ A $. A point $ (x, y) $ on $ W $ is nonsingular if and only if the corresponding point $ (f(x), f(y))\"}\n  {\"name\": \"WeierstrassCurve.instIsEllipticMap\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (W : WeierstrassCurve R) [W.IsElliptic] {A : Type v} [inst_2 : CommRing A]\\n  (f : R →+* A), (W.map f).IsElliptic\", \"doc\": \"If a Weierstrass curve $ W $ over a commutative ring $ A $ is elliptic and $ f : A \\to B $ is a ring homomorphism, then the Weierstrass curve obtained by applying $ f $ to the coefficients of $ W $ is \"}\n  {\"name\": \"WeierstrassCurve.Projective.map_equation\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"∀ {R : Type r} {S : Type s} [inst : CommRing R] [inst_1 : CommRing S] {W' : WeierstrassCurve.Projective R} {f : R →+* S}\\n  (P : Fin 3 → R), Function.Injective ⇑f → ((WeierstrassCurve.map W' f).toProjective.Equation (⇑f ∘ P) ↔ W'.Equation P)\", \"doc\": \"For an injective ring homomorphism $ f : A \\\\to B $, a point $ P = [X:Y:Z] $ in projective space satisfies the equation of the projective Weierstrass curve $ W' $ over $ B $ (obtained by applying $ f $\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the hits; none states this geometric assertion or specializes to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"genus\", \"AlgebraicGeometry\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the hits; none states this geometric assertion or specializes to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "genus.*(le|monoton|morphism)|RiemannHurwitz|riemann_hurwitz",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the hits; none states this geometric assertion or specializes to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Genus inequality for finite maps of smooth proper curves using Riemann Hurwitz and Frobenius factorization",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsFinite f] : IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsFinite f] : IsProper f\", \"doc\": \"Every finite morphism of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) [IsFinite f] : Finite (f.fiber y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"FiniteField.Extension.frob\", \"module\": \"Mathlib.FieldTheory.Finite.Extension\", \"type\": \": Gal(Extension k p n/k)\", \"doc\": \"The Frobenius automorphism of the finite field extension $ L/k $, defined by raising elements to the power of the characteristic $ p $ of the base field $ k $, viewed as an element of the Galois group\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.finite_preimage_singleton\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) [IsFinite f] (y : Y) : (f ⁻¹' { y }).Finite\", \"doc\": \"Let $f: X \\\\to Y$ be a finite morphism of schemes. For any point $y \\\\in Y$, the fiber $f^{-1}(\\\\{y\\\\})$ is a finite set.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"[IsFinite f] : LocallyQuasiFinite f\", \"doc\": \"Every finite morphism of schemes is quasi-finite. That is, if $ f: X \\to Y $ is a finite morphism of schemes, then $ f $ satisfies the conditions of being quasi-finite, which typically requires it to b\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \": IsFinite f ↔ IsIntegralHom f ∧ LocallyOfFiniteType f\", \"doc\": \"For a morphism $ f: X \\\\to Y $ of schemes, $ f $ is finite if and only if $ f $ is integral and locally of finite type.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the hits; none states this geometric assertion or specializes to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The genus of a smooth proper curve over an algebraically closed field cannot decrease under a nonconstant map to another smooth proper curve",
+   "results": "[leanfinder] OK 8 hit(s); WeierstrassCurve.Affine.Point.map_some, WeierstrassCurve.instIsEllipticMap, WeierstrassCurve.Projective.map_nonsingular, WeierstrassCurve.Projective.baseChange_nonsingular, WeierstrassCurve.Affine.map_nonsingular, WeierstrassCurve.Jacobian.baseChange_nonsingular, WeierstrassCurve.Jacobian.map_nonsingular, WeierstrassCurve.map_injective",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned hits; none states the genus inequality for arbitrary smooth proper curves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"genus\"",
+   "results": "[loogle] OK 0 hit(s); ",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned hits; none states the genus inequality for arbitrary smooth proper curves"
+  },
+  {
+   "tool": "grep",
+   "query": "genus.*(le|mono)|Riemann.Hurwitz|riemann_hurwitz",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned hits; none states the genus inequality for arbitrary smooth proper curves"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-high-genus-equivariant-cover",
+  "date": "2026-10-22",
+  "group": "NF"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary Tags 0C1B (curves-section-riemann-hurewitz), 0CD2 (curves-proposition-unwind-morphism-smooth) and 0CD0 (curves-lemma-purely-inseparable-smooth-genus): Riemann--Hurwitz for the separable factor and preservation of genus for the Frobenius factor, curves.tex lines 2205--2253 and 2608--2695.",
+   "via": [
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-finite-curve-genus-monotonicity",
+  "worker": "stage1",
+  "summary": "Proved the genus comparison by separating the zero-genus target, factoring any nonconstant map into relative Frobenius and a separable map, reusing the explicit H^1 dimension clause of flat coherent base change for the Frobenius twist, and extracting the inequality from numerical Riemann--Hurwitz. Two genuine geometric input lemmas are stated and searched, not split; the original item statement is unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), auxiliary high-genus-cover argument in the alteration reduction: the finite-curve genus comparison used to exclude rational curves. This item supplies the finite-cover genus comparison in the high-genus auxiliary cover; steps 2--4 resolve the inseparability issue without changing the alteration route. The inherited created.item chain has no imported blueprint ancestor, as blueprint_refs.py ancestor reports; from.node therefore remains null and the exact source place and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-flat-base-change-coherent",
+    "why": "The explicit H^1 dimension equality under algebraically closed field extension handles the Frobenius self-embedding. This is a generic coherent-cohomology base-change tool; the alteration unit does not replace it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-flat-base-change-coherent"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NI-461d1d9ca",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-461d1d9ca (reviewer sub-agent of L); spot-checked: I read all of it and made no changes. Sources checked in Stacks curves.tex: 0CD2 proposition-unwind-morphism-smooth (l.2671), 0CD0 lemma-purely-inseparable-smooth-genus (l.2624), 0BY9 lemma-genus-base-change (l.1507) and 0C1B section-riemann-hurewitz (l.2207-2253). No SGA is cited. Steps: (1) uses def-sc-genus; when g(D)=0 the claim is immediate, otherwise 2g(D)-2>=0. (2) The new factorization node applies with exactly the item's hypotheses, and the step uses only what that node states. (3) The final clause of lem-sc-flat-base-change-coherent applies to phi_n: k->k, a->a^{p^n}, which counts as a field extension (a ring hom) of algebraically closed fields. The base change with the second-projection structure is exactly C', so g(C')=g(C). This follows the 0CD0/0BY9 route, and I accept the declared tool use (a generic coherent base-change lemma from sk-thm-picard-rr). (4) Numerical Riemann-Hurwitz applies to the separable factor v. (5) The integer arithmetic is written out, and the sign split in step 1 is essential. New nodes: both are true, self-contained, state no proof, cite their tags and record searches. The factorization node is 0CD2 plus the identity case in characteristic 0; I checked that the relative Frobenius ring map is well defined and tested n=0 and the purely inseparable case. The Riemann-Hurwitz node uses r = deg of the different; I tested a separable P1->P1 map of degree d (r=2d-2), a wild Artin-Schreier cover (r=2p-2), the identity (d=1, r=0) and an etale cover. Neither node restates the item. Duplicate search with rg -L over the DAG (0C1B, 0CD2, 0CD0, 0BY9, Hurwitz, relative Frobenius, every genus node) found no node with either statement: lem-trf-relative-frobenius-finite, lem-sc-canonical-degree and lem-sc-genus-invariant are different statements. There is no cycle, blueprint.from.node=null matches the computed ancestry, and the item statement is unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteCurveGenusMonotonicity",
+  "declaration": "AlgebraicGeometry.genus_le_of_nonconstant_smooth_proper_curve",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteCurveGenusMonotonicity.lean",
+  "statement": "theorem genus_le_of_nonconstant_smooth_proper_curve (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (C D : Scheme.{u}) [C.Over (Spec (.of Ω))] [D.Over (Spec (.of Ω))] [Smooth (C ↘ Spec (.of Ω))] [Smooth (D ↘ Spec (.of Ω))] [IsProper (C ↘ Spec (.of Ω))] [IsProper (D ↘ Spec (.of Ω))] [GeometricallyIntegral (C ↘ Spec (.of Ω))] [GeometricallyIntegral (D ↘ Spec (.of Ω))] (hC : C.IsPureDimension 1) (hD : D.IsPureDimension 1) (f : C ⟶ D) (hf : f ≫ (D ↘ Spec (.of Ω)) = C ↘ Spec (.of Ω)) (hnonconstant : ¬ ∃ p : Spec (.of Ω) ⟶ D, p ≫ (D ↘ Spec (.of Ω)) = 𝟙 (Spec (.of Ω)) ∧ (C ↘ Spec (.of Ω)) ≫ p = f) : Scheme.arithmeticGenus Ω D ≤ Scheme.arithmeticGenus Ω C",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-46994e264",
+  "group": "NE",
+  "result": "pass",
+  "note": "Every clause matches the node. Omega is an algebraically closed field of any characteristic. C and D are Scheme.{u} over Spec Omega with Smooth, IsProper and GeometricallyIntegral on the structure maps and IsPureDimension 1; finite type follows from IsProper. The map is an Omega-morphism (hf), and hnonconstant excludes exactly factoring through an Omega-rational section, as the node defines it. The conclusion arithmeticGenus Omega D <= arithmeticGenus Omega C is dim H^1(O) (def-pc-genus record, EulerChar.lean:79), the node's genus. The def-sc-genus Lean record Hom.genus is the Omega^1 form and agrees only through sorry'd Serre duality, so using arithmeticGenus is correct and adds no second definition. No separability, finiteness or char hypothesis. Edge cases genus 0, char p, Frobenius, isomorphisms and empty scheme checked; single universe u. lean.statement is verbatim in the file. The node equals the live node except for lean, and no live module exists. Docstrings carry Stacks 0C1B/0CD2/0CD0 (curves.tex labels at l.2207/2624/2671), the blueprint id and the five proof steps; the proof is sorry only. Not recompiled (no change). Advisory: importing Cohomology.EulerChar would be narrower than Curve; the two proof prerequisites have no Lean record yet (stage 3)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C5",
+  "result": "pass",
+  "landing": "20261023T123406-L-1181392",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

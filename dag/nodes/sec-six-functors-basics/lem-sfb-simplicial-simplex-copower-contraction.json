@@ -1,0 +1,225 @@
+{
+ "id": "lem-sfb-simplicial-simplex-copower-contraction",
+ "kind": "statement",
+ "title": "A standard-simplex copower does not change a simplicial abelian group in the derived category",
+ "statement": "Let $A_\\bullet:\\Delta^{\\mathrm{op}}\\to\\mathrm{Ab}$ be a simplicial abelian group and let $m\\geq0$ [def-weil-pbc-simplicial-object]. Define the simplicial abelian group $P_m(A)$ by\n$$P_m(A)_n=\\bigoplus_{\\alpha:[n]\\to[m]\\text{ in }\\Delta}A_n.$$\nWrite $e_\\alpha(a)$ for $a$ in the indicated summand. For $\\varphi:[k]\\to[n]$ its operator sends $e_\\alpha(a)$ to $e_{\\alpha\\varphi}(A(\\varphi)(a))$. Let $\\varepsilon:P_m(A)\\to A$ send every $e_\\alpha(a)$ to $a$. For any simplicial abelian group $B$, let $s(B)$ be the cochain complex with $s(B)^{-n}=B_n$ for $n\\geq0$, zero in positive degrees, and differential $\\sum_{i=0}^n(-1)^id_i$ in degree $-n$ for $n\\geq1$. The morphism\n$$s(\\varepsilon):s(P_m(A))\\longrightarrow s(A)$$\nis an isomorphism in $D(\\mathrm{Ab})$ [def-weil-abstract-derived-category], natural in morphisms of simplicial abelian groups $A\\to A'$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08RX (lemma-O-homology-qis), proof, the augmentations X_bullet to P_bullet and X_prime_bullet to P_prime_bullet, for S_bullet=Delta[m]; its contraction is simplicial.tex Tag 08Q3 (example-simplex-contractible), followed by Tag 019S (lemma-homotopy-s-N). The assertion is formulated for an arbitrary simplicial abelian coefficient group."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-object",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Let $c_{m,n}:[n]\\to[m]$ be constant with value $m$, and define $i_n:A_n\\to P_m(A)_n$ by $i_n(a)=e_{c_{m,n}}(a)$. Since $c_{m,n}\\varphi=c_{m,k}$ for every $\\varphi:[k]\\to[n]$, these maps commute with every simplicial operator. The summation maps $\\varepsilon_n$ also commute with the operators, as both composites send $e_\\alpha(a)$ to $A(\\varphi)(a)$. Thus $i$ and $\\varepsilon$ are simplicial morphisms and $\\varepsilon i=\\mathrm{id}_A$.",
+   "uses": [
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08Q3 (example-simplex-contractible); the coefficient-copower argument of sites-cohomology.tex Tag 08RX (lemma-O-homology-qis), proof"
+   }
+  },
+  {
+   "text": "Construct a homotopy on underlying simplicial sets explicitly. For $\\beta:[n]\\to[1]$ and $x=\\sum_\\alpha e_\\alpha(a_\\alpha)$, put $H_n(x,\\beta)=\\sum_\\alpha e_{\\gamma_{\\alpha,\\beta}}(a_\\alpha)$, where $\\gamma_{\\alpha,\\beta}(j)=\\alpha(j)$ if $\\beta(j)=0$, and $m$ otherwise. This is order-preserving: on the zero part use monotonicity of $\\alpha$, on the one part it is constant, and across the cut use $\\alpha(j)\\le m$. All sums are finite. For $\\varphi:[k]\\to[n]$, the equality $\\gamma_{\\alpha,\\beta}\\varphi=\\gamma_{\\alpha\\varphi,\\beta\\varphi}$ and additivity of $A(\\varphi)$ show, term by term, that applying the simplicial operator to $H_n(x,\\beta)$ gives $H_k(P_m(A)(\\varphi)x,\\beta\\varphi)$; coinciding summands simply add. Hence $H:UP_m(A)\\times\\Delta[1]\\to UP_m(A)$ is a simplicial map. At the constant parameter $0$ it is $x$, and at the constant parameter $1$ it is $e_{c_{m,n}}(\\sum_\\alpha a_\\alpha)=i_n\\varepsilon_n(x)$. Together with $\\varepsilon i=\\mathrm{id}$ this is an underlying simplicial-set homotopy inverse for $\\varepsilon$, with inverse $Ui$.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08Q3 (example-simplex-contractible); the coefficient-copower argument of sites-cohomology.tex Tag 08RX (lemma-O-homology-qis), proof"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-simplicial-abelian-set-homotopy-quasi-iso] with $X=P_m(A)$, $Y=A$, $f=\\varepsilon$ and $g=Ui$. Its hypotheses hold by the explicit homotopy and the identity in the preceding steps (the identity supplies the other constant homotopy). Its alternating nonpositive cochain complexes are exactly the complexes $s(P_m(A))$ and $s(A)$ in the statement, so $s(\\varepsilon)$ is a quasi-isomorphism. By the localization defining $D(\\mathrm{Ab})$ in [def-weil-abstract-derived-category], its image is invertible.",
+   "uses": [
+    "lem-trf-simplicial-abelian-set-homotopy-quasi-iso",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08P2 (lemma-homotopy-equivalence); derived.tex Tag 05RU (definition-derived-category)"
+   }
+  },
+  {
+   "text": "For a simplicial morphism $u:A\\to A^{\\prime}$ define $P_m(u)_n(e_\\alpha(a))=e_\\alpha(u_n(a))$. It commutes with every operator because $u_kA(\\varphi)=A^{\\prime}(\\varphi)u_n$. On each summand, $\\varepsilon_{A^{\\prime}}P_m(u)=u\\varepsilon_A$ sends $e_\\alpha(a)$ to $u_n(a)$; likewise $P_m(u)i_A=i_{A^{\\prime}}u$. Thus the augmentation square commutes degreewise, then as cochain maps and after localization. The already invertible augmentations therefore constitute the asserted natural isomorphism (their inverses are natural by multiplying this square by the inverses).",
+   "uses": [
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08Q3 (example-simplex-contractible); the coefficient-copower argument of sites-cohomology.tex Tag 08RX (lemma-O-homology-qis), proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-object",
+  "def-weil-pbc-simplicial-set",
+  "lem-trf-simplicial-abelian-set-homotopy-quasi-iso",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08RX (lemma-O-homology-qis), proof, coefficient-copower homotopy argument; explicit last-vertex formula from simplicial.tex Tag 08Q3 (example-simplex-contractible), and the existing general Tag 08P2 implication"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "homotopy|contract|copower [sub=AlgebraicTopology/SimplicialObject]",
+   "results": "{\"t\": \"2026-10-22T06:48:44Z\", \"tool\": \"grep\", \"query\": \"homotopy|contract|copower\", \"sub\": \"AlgebraicTopology/SimplicialObject\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Homotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Homotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Homotopy.lean\"], \"digest\": \"04d29fd96176a895\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: alternatingConst and extra-degeneracy results have a constant augmentation target; Dold-Kan compares normalized and unnormalized complexes; Homotopy.toChainHomotopy requires the simplex-copower homotopy to be constructed, and does not state this augmentation is invertible"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The augmentation from the diagonal direct sum of a simplicial abelian group indexed by a standard simplex to the original group is a chain homotopy equivalence",
+   "results": "{\"t\": \"2026-10-22T06:48:44Z\", \"tool\": \"leansearch\", \"query\": \"The augmentation from the diagonal direct sum of a simplicial abelian group indexed by a standard simplex to the original group is a chain homotopy equivalence\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialObject\", \"Homotopy\"",
+   "results": "{\"t\": \"2026-10-22T06:48:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialObject\\\", \\\"Homotopy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Homotopy.refl\", \"CategoryTheory.SimplicialObject.Homotopy\", \"CategoryTheory.SimplicialObject.Homotopy.h\", \"CategoryTheory.SimplicialObject.Homotopy.postcomp\", \"CategoryTheory.SimplicialObject.Homotopy.precomp\", \"CategoryTheory.SimplicialObject.Homotopy.ext\", \"CategoryTheory.SimplicialObject.Homotopy.ext_iff\", \"CategoryTheory.SimplicialObject.Homotopy.h_last_comp_δ_last\"], \"digest\": \"4e297e1fefc201b6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: alternatingConst and extra-degeneracy results have a constant augmentation target; Dold-Kan compares normalized and unnormalized complexes; Homotopy.toChainHomotopy requires the simplex-copower homotopy to be constructed, and does not state this augmentation is invertible"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a simplicial abelian group A the diagonal copower A times the standard simplex Delta m has alternating chain complex chain homotopy equivalent to that of A",
+   "results": "{\"t\": \"2026-10-22T06:48:55Z\", \"tool\": \"leanfinder\", \"query\": \"For a simplicial abelian group A the diagonal copower A times the standard simplex Delta m has alternating chain complex chain homotopy equivalent to that of A\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ChainComplex.alternatingConstHomotopyEquiv\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_hom\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_inv\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyHomInvId\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyInvHomId\", \"AlgebraicTopology.alternatingFaceMapComplexConst\"], \"digest\": \"99c83ac3ae4ab1c0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: alternatingConst and extra-degeneracy results have a constant augmentation target; Dold-Kan compares normalized and unnormalized complexes; Homotopy.toChainHomotopy requires the simplex-copower homotopy to be constructed, and does not state this augmentation is invertible"
+  },
+  {
+   "tool": "grep",
+   "query": "contract|homotopyEquiv|homotopy_equiv|homotopy.*tensor|tensor.*homotopy [sub=AlgebraicTopology]",
+   "results": "{\"t\": \"2026-10-22T06:49:12Z\", \"tool\": \"grep\", \"query\": \"contract|homotopyEquiv|homotopy_equiv|homotopy.*tensor|tensor.*homotopy\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/FundamentalGroupoid/SimplyConnected.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/SimplyConnected.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/SimplyConnected.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/SimplyConnected.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/SimplyConnected.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/InducedMaps.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/InducedMaps.lean\", \"Mathlib/AlgebraicTopology/DoldKan/SplitSimplicialObject.lean\"], \"digest\": \"d2b1be0af23443e2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: alternatingConst and extra-degeneracy results have a constant augmentation target; Dold-Kan compares normalized and unnormalized complexes; Homotopy.toChainHomotopy requires the simplex-copower homotopy to be constructed, and does not state this augmentation is invertible"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The tensor of a simplicial abelian group with a contractible simplicial set is chain homotopy equivalent to that simplicial abelian group",
+   "results": "{\"t\": \"2026-10-22T06:49:24Z\", \"tool\": \"leanfinder\", \"query\": \"The tensor of a simplicial abelian group with a contractible simplicial set is chain homotopy equivalent to that simplicial abelian group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ChainComplex.alternatingConstHomotopyEquiv\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyHomInvId\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyInvHomId\", \"Rep.standardComplex.forget₂ToModuleCatHomotopyEquiv\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_hom\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_inv\"], \"digest\": \"c620cc441a578a83\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: alternatingConst and extra-degeneracy results have a constant augmentation target; Dold-Kan compares normalized and unnormalized complexes; Homotopy.toChainHomotopy requires the simplex-copower homotopy to be constructed, and does not state this augmentation is invertible"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor|copower|simplex [sub=AlgebraicTopology/SimplicialObject]",
+   "results": "{\"t\": \"2026-10-22T06:50:13Z\", \"tool\": \"grep\", \"query\": \"tensor|copower|simplex\", \"sub\": \"AlgebraicTopology/SimplicialObject\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/DeltaZeroIter.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/DeltaZeroIter.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/DeltaZeroIter.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/DeltaZeroIter.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/DeltaZeroIter.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Homotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Homotopy.lean\"], \"digest\": \"1e73f9291b86c10f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: alternatingConst and extra-degeneracy results have a constant augmentation target; Dold-Kan compares normalized and unnormalized complexes; Homotopy.toChainHomotopy requires the simplex-copower homotopy to be constructed, and does not state this augmentation is invertible"
+  },
+  {
+   "tool": "grep",
+   "query": "copower|simplex|contract [sub=AlgebraicTopology/SimplicialObject]",
+   "results": "{\"t\": \"2026-10-23T14:43:26Z\", \"tool\": \"grep\", \"query\": \"copower|simplex|contract\", \"sub\": \"AlgebraicTopology/SimplicialObject\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Coskeletal.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Coskeletal.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Coskeletal.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Op.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Op.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Op.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Op.lean\"], \"digest\": \"3ca1e0caf86137e8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: representation standard resolutions have a degree-zero constant target; Dold-Kan compares normalization with alternating complexes; ExtraDegeneracy has a constant augmentation target; Homotopy.toChainHomotopy requires the explicit homotopy constructed here. None states the variable-coefficient simplex-copower augmentation or specializes to it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A simplicial abelian group tensored degreewise with the free abelian group on a standard simplex is quasi-isomorphic to itself",
+   "results": "{\"t\": \"2026-10-23T14:43:26Z\", \"tool\": \"leansearch\", \"query\": \"A simplicial abelian group tensored degreewise with the free abelian group on a standard simplex is quasi-isomorphic to itself\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.DoldKan.Γ\", \"Rep.standardComplex.instQuasiIsoNatεToSingle₀\", \"SSet.toTop\", \"Rep.standardComplex.quasiIso_forget₂_εToSingle₀\", \"SSet.instFiniteObjOppositeSimplexCategoryTensorObj\", \"SSet.stdSimplex\", \"SSet.instCartesianMonoidalCategory\", \"SSet.stdSimplex.isoOfRepresentableBy\"], \"digest\": \"06a1595d4a5fef1f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: representation standard resolutions have a degree-zero constant target; Dold-Kan compares normalization with alternating complexes; ExtraDegeneracy has a constant augmentation target; Homotopy.toChainHomotopy requires the explicit homotopy constructed here. None states the variable-coefficient simplex-copower augmentation or specializes to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialObject\", \"Homotopy\"",
+   "results": "{\"t\": \"2026-10-23T14:43:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialObject\\\", \\\"Homotopy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Homotopy.refl\", \"CategoryTheory.SimplicialObject.Homotopy\", \"CategoryTheory.SimplicialObject.Homotopy.h\", \"CategoryTheory.SimplicialObject.Homotopy.postcomp\", \"CategoryTheory.SimplicialObject.Homotopy.precomp\", \"CategoryTheory.SimplicialObject.Homotopy.ext\", \"CategoryTheory.SimplicialObject.Homotopy.ext_iff\", \"CategoryTheory.SimplicialObject.Homotopy.h_last_comp_δ_last\"], \"digest\": \"4e297e1fefc201b6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: representation standard resolutions have a degree-zero constant target; Dold-Kan compares normalization with alternating complexes; ExtraDegeneracy has a constant augmentation target; Homotopy.toChainHomotopy requires the explicit homotopy constructed here. None states the variable-coefficient simplex-copower augmentation or specializes to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any simplicial abelian group A the augmentation from the degreewise direct sum indexed by maps to a standard simplex to A is a quasi-isomorphism",
+   "results": "{\"t\": \"2026-10-23T14:43:28Z\", \"tool\": \"leanfinder\", \"query\": \"For any simplicial abelian group A the augmentation from the degreewise direct sum indexed by maps to a standard simplex to A is a quasi-isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.standardComplex.instQuasiIsoNatεToSingle₀\", \"Rep.standardComplex.quasiIso_forget₂_εToSingle₀\", \"AlgebraicTopology.DoldKan.instIsIsoFunctorSimplicialObjectKaroubiNatTrans\", \"AlgebraicTopology.DoldKan.Γ₀NondegComplexIso\", \"AlgebraicTopology.DoldKan.instIsIsoFunctorKaroubiSimplicialObjectNatTrans\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_hom\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_inv\", \"AlgebraicTopology.DoldKan.N₁_iso_normalizedMooreComplex_comp_toKaroubi\"], \"digest\": \"147f7736f755954a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: representation standard resolutions have a degree-zero constant target; Dold-Kan compares normalization with alternating complexes; ExtraDegeneracy has a constant augmentation target; Homotopy.toChainHomotopy requires the explicit homotopy constructed here. None states the variable-coefficient simplex-copower augmentation or specializes to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "toChainHomotopy|homotopyEquiv|ExtraDegeneracy [sub=AlgebraicTopology/SimplicialObject]",
+   "results": "{\"t\": \"2026-10-23T14:46:14Z\", \"tool\": \"grep\", \"query\": \"toChainHomotopy|homotopyEquiv|ExtraDegeneracy\", \"sub\": \"AlgebraicTopology/SimplicialObject\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\"], \"digest\": \"2cb7ca726a88c132\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: representation standard resolutions have a degree-zero constant target; Dold-Kan compares normalization with alternating complexes; ExtraDegeneracy has a constant augmentation target; Homotopy.toChainHomotopy requires the explicit homotopy constructed here. None states the variable-coefficient simplex-copower augmentation or specializes to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring a simplicial abelian group with a contractible simplicial set by direct sums preserves its alternating face map complex up to homotopy",
+   "results": "{\"t\": \"2026-10-23T14:46:20Z\", \"tool\": \"leanfinder\", \"query\": \"Tensoring a simplicial abelian group with a contractible simplicial set by direct sums preserves its alternating face map complex up to homotopy\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_hom\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_inv\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv\", \"AlgebraicTopology.DoldKan.N₁_obj_X\", \"CategoryTheory.Abelian.DoldKan.N\", \"ChainComplex.alternatingConstHomotopyEquiv\", \"AlgebraicTopology.DoldKan.Γ₀'\"], \"digest\": \"ca3e6dea4325ca2b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: representation standard resolutions have a degree-zero constant target; Dold-Kan compares normalization with alternating complexes; ExtraDegeneracy has a constant augmentation target; Homotopy.toChainHomotopy requires the explicit homotopy constructed here. None states the variable-coefficient simplex-copower augmentation or specializes to it in one line."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-simplicial-flat-base-change-quasi-iso",
+  "date": "2026-10-22",
+  "group": "O1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Regular pullback of the logarithmic dualizing line along a nodal modification; etale source locality of the adjunction line used in the codimension-one differential calculation of the regular-pullback input; general scheme cotangent transitivity supporting the source-etale determinant comparison; supporting standard-resolution calculation in Stacks 08SD: the quotient Q tensor_P B is a polynomial resolution, before the differential exact sequence is formed; homological input: apply Stacks 08RX in the simplicial-module interpretation 08QD to a degreewise flat module along a quasi-isomorphism of simplicial rings; free representable case of Stacks 08RX: the augmentation from copies indexed by the standard simplex to the coefficient simplicial abelian group.",
+   "via": [
+    "lem-sfb-simplicial-flat-base-change-quasi-iso",
+    "lem-sfb-injective-standard-resolution-quotients",
+    "lem-sfb-scheme-cotangent-transitivity",
+    "lem-sfb-etale-source-adjunction-line",
+    "lem-sfb-nodal-log-dualizing-pullback",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-simplicial-simplex-copower-contraction",
+  "worker": "stage1",
+  "summary": "Kept the exact statement and wrote the last-vertex section and the explicit underlying simplicial-set contraction of the varying-coefficient copower. Reused the existing general Stacks 08P2 quasi-isomorphism lemma, then used the derived-category localization and proved naturality on summands. Searched the project, full DAG and blueprint and ran logged Mathlib searches with two semantic phrasings. No new nodes are needed: the contraction checks are elementary on the displayed formulas; the non-elementary passage to a quasi-isomorphism is a cited existing theorem.",
+  "blueprint": "Latest blueprint det-thm-sf-ctf-stability-direct-images, proof (3), ordinary-direct-image preservation. This is the inherited homological prerequisite beneath its alteration/cotangent branch: the free representable input to 08RX used in the 08SD quotient resolution. Current blueprint uses proper image, the open case and compactification, and is not quoted as stating this simplicial lemma. The computed ancestor is null (created.item of lem-sfb-admissible-direct-image is a Lean module name); retained the inherited from.node null, via and exact provenance place, as in the reviewed parent. same_as searches found no blueprint statement of the copower assertion.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-simplicial-abelian-set-homotopy-quasi-iso",
+    "why": "Generic Stacks 08P2 implication from an underlying simplicial-set homotopy equivalence of simplicial abelian groups to a quasi-isomorphism of alternating cochain complexes; no geometric unit step is replaced and no input in this unit states this general implication."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-simplicial-abelian-set-homotopy-quasi-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-c46869932",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-c46869932 (reviewer sub-agent of L); spot-checked: Read the item, its 4 steps, every cited statement, and Stacks 08RX, 08Q3 and 08P2 at the cited places. The statement is unchanged against clones/live and clones/side-live (item still unsplit there). No new nodes, no repair note, no SGA, and proof_deps equals the union of the step uses. Step 1: the last-vertex map i and the summation map ε are simplicial and εi=id. Step 2: γ_{α,β} is exactly the 08Q3 formula. It is monotone across the cut because α≤m, natural because γ_{α,β}φ=γ_{αφ,βφ} (colliding summands add, since A(φ) is additive), and its endpoints are c_0→id and c_1→iε. The elementary flag is acceptable. Step 3: every hypothesis of lem-trf-simplicial-abelian-set-homotopy-quasi-iso holds: f=ε additive, g=Ui, a one-step homotopy id→gf, and fg=id. Its s(·) convention matches the item's, and the localization in def-weil-abstract-derived-category makes Q(s(ε)) invertible. Step 4: the naturality square for P_m(u) commutes on each summand e_α(a). Edge cases m=0, A=0, degree 0 and non-injective φ are all fine. Duplicate scan found nothing: the standard-simplex realization and 𝔊[Δ^r] mapping-space nodes, the fixed-coefficient free chain homotopy lemma and the poset prism nodes all differ. The citer lem-sfb-simplicial-flat-base-change-quasi-iso uses the statement as written. Batch-5 citation of the sec-trace-formula node: it is Stacks 08P2, and its whole closure is generic simplicial homological algebra (definitions, the cbc normalized-alternating lemma, the free chain-homotopy lemma, the trf-free normalized-homology transfer lemmas). It contains no trace-formula or Poincaré-duality content, so it lies genuinely outside both assumptions. I also accept it as the declared generic tool_use."
+ }
+}

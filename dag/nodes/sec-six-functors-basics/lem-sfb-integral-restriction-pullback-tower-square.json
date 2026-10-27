@@ -1,0 +1,135 @@
+{
+ "id": "lem-sfb-integral-restriction-pullback-tower-square",
+ "kind": "statement",
+ "title": "Pullback coherence for consecutive integral quotient restrictions",
+ "statement": "For every prime l, field E finite dimensional over Q_l, scheme morphism j : U → X, index n : ℕ and object M of the unbounded derived category over the canonical level-(n+1) coefficient ring on X, use the canonical coefficient functors of [sk-def-pe-derived-completion] and [sk-def-sfb-coefficient-change], the two paths around the restriction/pullback square for consecutive positive quotient exponents agree, including the quotient-factor compositor. Precisely:\ntheorem integral_restriction_pullback_tower_square (n : ℕ)\n    (M : AdicCompletion.FiniteDerived l E X n) :\n    (CondensedRing.upperStar (DerivedNakayama.integerRing l E) j).mapDerivedCategory.map\n        ((AdicCompletion.restrictComp l E X n).inv.app M) ≫\n      (CondensedRing.derivedComapUpperStarIso\n        (DerivedNakayama.reductionRing l E (n + 2)) j).inv.app\n          ((AdicCompletion.finiteRestrict l E X n).obj M) ≫\n      (AdicCompletion.restrict l E U (n + 1)).map\n        ((CondensedRing.derivedComapUpperStarIso\n          (AdicCompletion.transitionRing l E n) j).inv.app M) =\n      (CondensedRing.derivedComapUpperStarIso\n        (DerivedNakayama.reductionRing l E (n + 1)) j).inv.app M ≫\n      (AdicCompletion.restrictComp l E U n).inv.app\n        ((CondensedRing.upperStar\n          (DerivedNakayama.quotientRing l E (n + 1)) j).mapDerivedCategory.obj M)",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
+  "place": "Completeness paragraph: commute direct image with each finite quotient and retain transitions and units",
+  "external": [
+   {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "lemma-derived-base-change (06YY), lemma-adjoint (07A6), lemma-projection-formula (0944)"
+   },
+   {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "lemma-pushforward-Noetherian-case (099N)"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "sk-def-pe-derived-completion",
+  "sk-def-sfb-coefficient-change"
+ ],
+ "proof": [
+  {
+   "text": "Bundle the integral ring and the two consecutive quotient rings as commutative condensed ring objects, with the specified reduction and transition maps. First generalize the proved scalarSixDerivedRestrictionTowerSquare to an explicit composite c and a factorization a ≫ b = c, by equality induction. This keeps the composite coefficient functor abstract before specializing. The canonical quotient maps have this factorization by their defining quotient maps. The ordinary restriction compositor is comapCongr of that factorization followed by comapComp. It equals the inverse canonical ordinary compositor, using reversal of comapCongr under equality symmetry and proof irrelevance. Exact derived localization preserves inverse isomorphisms, so the resulting derived compositor is restrictComp.symm. Substitute the compositor equalities in an abstract categorical component lemma, then evaluate the hom at M to obtain precisely the displayed equation. This applies to every n including zero and to arbitrary unbounded M.",
+   "uses": [
+    "lem-sfb-scalar-six-derived-pullback-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
+    "place": "Completeness paragraph: commute direct image with each finite quotient and retain transitions and units",
+    "external": [
+     {
+      "document": "literature/stacks-project/sites-cohomology.tex",
+      "place": "lemma-derived-base-change (06YY), lemma-adjoint (07A6), lemma-projection-formula (0944)"
+     },
+     {
+      "document": "literature/stacks-project/proetale.tex",
+      "place": "lemma-pushforward-Noetherian-case (099N)"
+     }
+    ]
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-scalar-six-derived-pullback-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
+  "place": "Completeness paragraph; B6 specialization of scalarSixDerivedRestrictionTowerSquare through an explicit factorization of quotient maps, 2026-10-26.",
+  "external": [
+   {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "lemma-derived-base-change (06YY), lemma-adjoint (07A6), lemma-projection-formula (0944)"
+   },
+   {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "lemma-pushforward-Noetherian-case (099N)"
+   }
+  ]
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pullback commutes with two consecutive restrictions of scalars and their composition isomorphism in derived categories of sheaf modules",
+   "results": "Eight ordinary sheaf-module pullback composition results; no exact internal derived restriction compositor equation.",
+   "date": "2026-10-26",
+   "verdict": "no matching theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "derivedComapUpperStarIso",
+   "results": "No hits; identifier not indexed.",
+   "date": "2026-10-26",
+   "verdict": "no matching theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "scalarSixDerivedRestrictionTowerSquare|restrictComp",
+   "results": "Four unrelated Galois-group restriction hits in Mathlib. Local search found the proved generic scalar-six restriction square, but specialization to quotient_transition remains.",
+   "date": "2026-10-26",
+   "verdict": "generic library theorem found; concrete specialization remains"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProEtale.IntegralDirectImageReductionTower",
+  "date": "2026-10-26",
+  "group": "B6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-integral-direct-image-reduction-tower",
+   "place": "Pasting of consecutive scalar-restriction pullback squares"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-pf-adic",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProEtale.IntegralRestrictionPullbackTowerSquare",
+  "file": "lean/Sheaf/SixFunctors/ProEtale/IntegralRestrictionPullbackTowerSquare.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.integral_restriction_pullback_tower_square",
+  "statement": "theorem integral_restriction_pullback_tower_square (n : ℕ)\n    (M : AdicCompletion.FiniteDerived l E X n) :\n    (CondensedRing.upperStar (DerivedNakayama.integerRing l E) j).mapDerivedCategory.map\n        ((AdicCompletion.restrictComp l E X n).inv.app M) ≫\n      (CondensedRing.derivedComapUpperStarIso\n        (DerivedNakayama.reductionRing l E (n + 2)) j).inv.app\n          ((AdicCompletion.finiteRestrict l E X n).obj M) ≫\n      (AdicCompletion.restrict l E U (n + 1)).map\n        ((CondensedRing.derivedComapUpperStarIso\n          (AdicCompletion.transitionRing l E n) j).inv.app M) =\n      (CondensedRing.derivedComapUpperStarIso\n        (DerivedNakayama.reductionRing l E (n + 1)) j).inv.app M ≫\n      (AdicCompletion.restrictComp l E U n).inv.app\n        ((CondensedRing.upperStar\n          (DerivedNakayama.quotientRing l E (n + 1)) j).mapDerivedCategory.obj M)",
+  "branch": "sheaf-dag",
+  "by": "B6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261026T001007-L-4161119",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261026T001007-L-4161119",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

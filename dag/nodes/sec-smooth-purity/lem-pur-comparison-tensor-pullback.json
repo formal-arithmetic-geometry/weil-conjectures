@@ -1,0 +1,113 @@
+{
+ "id": "lem-pur-comparison-tensor-pullback",
+ "kind": "statement",
+ "title": "Tensor coherence for the specified ordinary/pro-etale pullback comparison",
+ "statement": "Fix the finite purity coefficients $\\Lambda$ of [def-pur-conventions]. For any scheme morphism $b:X\\to Y$ and any objects $K,L$ of the unbounded ordinary etale derived category, let $F_Y,F_X$ be the exact termwise derived comparison inverse images to the pro-etale sites, and let $m_T:F_T(K\\otimes^L L)\\overset\\sim\\longrightarrow F_TK\\otimes^L F_TL$ be the canonical comparison tensor isomorphism. Let $\\eta_K:Lb_p^*F_YK\\overset\\sim\\longrightarrow F_XLb_e^*K$ be exactly Dnc.pullComparison from [thm-pur-dnc-invariance], where $e,p$ distinguish the sites. Let $\\tau_e,\\tau_p$ be the derived inverse-image tensor constraints [def-weil-derived-pullback-tensor-hom]. Then $F_X(\\tau_e)\\circ\\eta_{K\\otimes^L L}\\circ Lb_p^*(m_Y^{-1})=m_X^{-1}\\circ(\\eta_K\\otimes^L\\eta_L)\\circ\\tau_p$, where $m_X$ is evaluated at $Lb_e^*K,Lb_e^*L$. This is an equality of the specified isomorphisms, with no smoothness, affineness, boundedness, constructibility or orientation hypothesis.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+  "place": "Step 1: canonical tensor and base-change comparisons in the compatibility assertion; the general exact-comparison calculation already proved in ComparisonOpenTensorCoherence"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "thm-pur-dnc-invariance",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "proof": [
+  {
+   "text": "Use the public comparison_tensor_compatible declaration recorded in [lem-sf-comparison-open-tensor-coherence]. Despite its surrounding module title, this declaration assumes an arbitrary scheme morphism, so it applies to b. Its comparisonTensorNatIso components equal the published comparison tensor maps by comparison_tensor_app. Expand comparisonOpenDerivedPullbackIso, replace the support comparison by the inverse inverse-image comparison using supportComparison_eq, and commute localization with inversion. Componentwise the resulting isomorphism is precisely the inverse of Dnc.pullComparison.",
+   "uses": [
+    "lem-sf-comparison-open-tensor-coherence",
+    "thm-pur-dnc-invariance"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The existing tensor compatibility equality has the comparison tensor maps in the forward direction. Precompose with the image under pro-etale pullback of the forward tensor comparison at K,L, and postcompose with the target tensor comparison. Cancel the image of each inverse pair, and cancel the pair eta followed by its inverse. Functoriality and associativity give the stated equality with the inverse tensor comparisons. All these operations are on actual isomorphisms, for arbitrary unbounded objects.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-comparison-open-tensor-coherence",
+  "thm-pur-dnc-invariance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/SixFunctors/ComparisonOpenTensorCoherence.lean",
+  "place": "comparison_tensor_compatible, comparison_tensor_app and supportComparison_eq; formal cancellation of invertible maps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A monoidal natural isomorphism between composite exact functors intertwines the derived tensor comparison maps",
+   "results": "8 hits on monoidal functor isomorphisms and curried tensor functors; none supplies the two-site derived square.",
+   "date": "2026-10-26",
+   "verdict": "no Mathlib match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The natural isomorphism commuting etale to proetale comparison with inverse image is compatible with derived tensor products",
+   "results": "8 differential/etale base-change hits; no two-site derived tensor square.",
+   "date": "2026-10-26",
+   "verdict": "no Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "ComparisonCompatible|comparisonUpperStarCompUpperStarIso",
+   "results": "No Mathlib hits. Project search found the proved comparison_tensor_compatible, comparison_tensor_app and supportComparison_eq in ComparisonOpenTensorCoherence.",
+   "date": "2026-10-26",
+   "verdict": "use existing proved project theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurityCompositionCompatibleDncCharts",
+  "date": "2026-10-26",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Step 1, coherence of the derived tensor and base-change comparisons",
+   "via": [
+    "lem-pur-composition-compatible-dnc-charts"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ComparisonTensorPullback",
+  "file": "lean/Sheaf/Paper/ComparisonTensorPullback.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.comparisonTensorPullback",
+  "statement": "theorem comparisonTensorPullback (P : PurityFiniteSetting.{u})\n    {X Y : Scheme.{u}} (b : X ⟶ Y)\n    (K L : _root_.DerivedCategory\n      (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient))) :\n    let A := ModuleCat.{u + 1} P.Coefficient\n    let F := (ProEtale.comparisonUpperStar A Y).mapDerivedCategory\n    let F' := (ProEtale.comparisonUpperStar A X).mapDerivedCategory\n    let G := (Etale.upperStar A b).leftDerivedFunctor\n    let H := (ProEtale.upperStar A b).leftDerivedFunctor\n    let m := fun (B : Scheme.{u})\n      (K L : _root_.DerivedCategory (Sheaf B.smallEtaleTopology A)) ↦\n      (ProEtale.derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso A K).app L\n    H.mapIso (m Y K L).symm ≪≫\n        Dnc.pullComparison P b (((Etale.derivedTensor A Y).obj K).obj L) ≪≫\n        F'.mapIso (Etale.leftDerivedUpperStarTensorIso A b K L) =\n      ProEtale.leftDerivedUpperStarTensorIso A b (F.obj K) (F.obj L) ≪≫\n        ((ProEtale.derivedTensor A X).mapIso (Dnc.pullComparison P b K)).app _ ≪≫\n        ((ProEtale.derivedTensor A X).obj (F'.obj (G.obj K))).mapIso\n          (Dnc.pullComparison P b L) ≪≫\n        (m X (G.obj K) (G.obj L)).symm",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261026T001730-L-25724",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261026T001730-L-25724",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

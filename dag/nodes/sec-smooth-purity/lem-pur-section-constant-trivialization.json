@@ -1,0 +1,145 @@
+{
+ "id": "lem-pur-section-constant-trivialization",
+ "kind": "statement",
+ "title": "Constant model and zero reading of the actual section deformation",
+ "statement": "Fix a finite purity datum $P$ [def-pur-conventions], a separated finite-type scheme $B$ over its ground field, and a smooth closed section pair $X$ of rank $d$ [def-pur-section-restriction-data]. Let $a:\\mathbf A^1_B\\to B$ be the line projection and $i_1,i_0$ its unit and zero sections. Let $F$ be the actual pro-etale section invariant of the Rees family, $C$ the source invariant, and $\\theta_1,\\theta_0$ its canonical endpoint maps. Write $\\epsilon_j:i_j^*a^*\\simeq1$ for the canonical composition, equality, and identity constraints. There exists $\\kappa:F\\simeq a^*C$ with $i_1^*\\kappa\\,\\epsilon_1=\\theta_1$ and $\\delta_X=(i_0^*\\kappa\\,\\epsilon_0)^{-1}\\theta_0$, where $\\delta_X$ is the fixed map of [thm-pur-dnc-invariance]. In addition, for every pro-etale derived object $D$ on $B$ and any two isomorphisms $\\alpha,\\beta:F\\simeq a^*D$, the equality $i_1^*\\alpha=i_1^*\\beta$ implies $\\alpha=\\beta$.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+  "place": "Local construction, normalization at one; Gluing, uniqueness and final restriction to zero"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-section-restriction-data",
+  "thm-pur-dnc-invariance"
+ ],
+ "proof": [
+  {
+   "text": "Construct the actual extended-Rees deformation datum with the published projection, augmentation, endpoint squares, punctured trivialization, and etale coordinates. Apply existsUnique_familyObject_iso to the canonical fibreOne comparison. This gives the ordinary-etale model normalized at one, and isInvertible_familyObject gives invertibility of its source.",
+   "uses": [
+    "prop-pur-dnc-family-constancy",
+    "lem-pur-dnc-section-geometry"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Derive the identity law for pullComparison from its composition law, the left unit laws for both derived inverse images, and naturality. Transport this identity and composition along the section equation to obtain compatibility with the line counit. Transport the etale model using sourceComparison, nu*, the inverse projection pullComparison, and the inverse sourceComparison. Naturality and the section comparison give the readings of this single isomorphism at both endpoints.",
+   "uses": [
+    "lem-pur-comparison-pullback-derived-coherence",
+    "def-pur-finite-section-comparison",
+    "def-pur-section-pullback-site-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Specialize the normalization predicate of existsUnique_dncInvariance to the identity base map and the etale model preceded by the identity-pullback constraint. The left and right unit laws simplify sectionRestrictionIso to the identity constraint followed by the inverse fibre comparison and the model reading. The normalized one reading cancels. Naturality of pullComparison and faithfulness of identity pullback then identify delta with the transported inverse zero reading followed by fibreZero. The endpointZero definition cancels the family presentation maps, giving the asserted equation.",
+   "uses": [
+    "thm-pur-dnc-invariance",
+    "lem-pur-comparison-pullback-derived-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For arbitrary target C, conjugate the ratio alpha beta-inverse by sourceComparison to an endomorphism of nu* of the etale family. The etale family is bounded below because exceptional inverse image preserves bounded-below objects over the finite-type Noetherian base and exact section pullback preserves this property. Full faithfulness of nu* with bounded-below target lifts the endomorphism. Naturality of pullComparison and its faithfulness at the pulled-back bounded-below family show that this lift is the identity at one. The existing invertible-object identity-detection theorem applies: every geometric affine-line fibre is preconnected and meets one. Map back and cancel the isomorphisms to obtain alpha=beta. No faithfulness on arbitrary pro-etale derived Hom is used.",
+   "uses": [
+    "prop-pur-dnc-family-constancy",
+    "lem-weil-pbc-fixed-module-derived-hom-bijection",
+    "def-pur-section-pullback-site-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "prop-pur-dnc-family-constancy",
+  "lem-pur-dnc-section-geometry",
+  "lem-pur-comparison-pullback-derived-coherence",
+  "def-pur-finite-section-comparison",
+  "def-pur-section-pullback-site-comparisons",
+  "thm-pur-dnc-invariance",
+  "lem-weil-pbc-fixed-module-derived-hom-bijection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+  "place": "Local construction and Gluing; complete Lean transport, identity-base normalization, and arbitrary-target automorphism argument by M5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse image composition is coherent with sections and change of base",
+   "results": "8 hits, including AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl and CategoryTheory.GrothendieckTopology.overMapPullbackComp_inv_app_val_app; none states the required derived pro-etale endpoint equations.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; use the source library derived pullback constraints."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftDerivedUpperStarComp\"",
+   "results": "0 hits.",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib declaration of the source-library comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "lineCounit|section_constant_trivialization|rank_zero_family_readings",
+   "results": "0 hits.",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PuritySectionNormalizedSpecialization",
+  "date": "2026-10-26",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Step 1, canonicality of DNC under restriction; constant-family normalization and standard rank-zero case",
+   "via": [
+    "lem-pur-section-normalized-specialization",
+    "lem-pur-section-etale-restriction-coherence",
+    "lem-pur-diagonal-dnc-chart-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PuritySectionConstantTrivialization",
+  "file": "lean/Sheaf/Paper/PuritySectionConstantTrivialization.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.SectionRestriction.section_constant_trivialization",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.SectionRestriction.lineCounit",
+   "WeilConjectures.PurityFiniteSetting.SectionRestriction.section_constant_trivialization"
+  ],
+  "statement": "theorem section_constant_trivialization (P : PurityFiniteSetting.{u})\n    {B : Scheme.{u}} (aB : B ⟶ Spec (.of P.field.k)) [IsSeparated aB]\n    [LocallyOfFiniteType aB] [QuasiCompact aB] {d : ℕ} (X : Pair B d) :\n    let A := (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient)\n      (AffineSpace (ULift.{u} (Fin 1)) B ↘ B)).leftDerivedFunctor\n    let E₁ := (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient)\n      (AffineSpace.oneSection (ULift.{u} (Fin 1)) B)).leftDerivedFunctor\n    let E₀ := (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient)\n      (AffineSpace.zeroSection (ULift.{u} (Fin 1)) B)).leftDerivedFunctor\n    let F := invariant P ((AffineSpace (ULift.{u} (Fin 1)) B ↘ B) ≫ aB) (familyPair X)\n    let ε₁ := lineCounit P B _ (AffineSpace.oneSection_comp_over _ B)\n    let ε₀ := lineCounit P B _ (AffineSpace.zeroSection_comp_over _ B)\n    (∃ κ : F ≅ A.obj (invariant P aB X),\n      E₁.mapIso κ ≪≫ ε₁.app _ = endpointOne P aB X ∧\n      delta P aB X = (E₀.mapIso κ ≪≫ ε₀.app _).symm ≪≫ endpointZero P aB X) ∧\n    (∀ (C : _root_.DerivedCategory\n        (Sheaf (Scheme.ProEt.topology B) (ModuleCat.{u + 1} P.Coefficient)))\n      (α β : F ≅ A.obj C), E₁.mapIso α = E₁.mapIso β → α = β)",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261026T200728-L-3337844",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M5",
+  "result": "pass",
+  "landing": "20261026T235920-L-1468385",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

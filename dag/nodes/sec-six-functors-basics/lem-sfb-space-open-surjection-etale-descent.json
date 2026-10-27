@@ -1,0 +1,341 @@
+{
+ "id": "lem-sfb-space-open-surjection-etale-descent",
+ "kind": "statement",
+ "title": "Universally open surjections give effective descent for etale algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with universes as in [def-weil-size-convention], and work with algebraic spaces over $S$ [def-trf-algebraic-space] and sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. A space is quasi-separated if its absolute diagonal over $\\operatorname{Spec}\\mathbf Z$ is quasi-compact on scheme tests; a scheme morphism is quasi-compact if inverse images of quasi-compact opens are quasi-compact. For a quasi-separated space $H$, let $\\operatorname{Et}(H)$ have as objects chartwise etale maps $V\\to H$ with $V$ quasi-separated, and all morphisms over $H$. Here chartwise etale has the meaning of [lem-trf-space-chartwise-etale-permanence]: composing with any representable etale scheme chart of $V$ gives a representable etale map to $H$, with scheme etaleness [def-weil-etale-morphism]. Let $p:H'\\to H$ be a morphism between quasi-separated spaces such that after every algebraic-space base change its point map, in the atlas topology [def-a1-space-point-topology], is open and surjective. Put $H_2=H'\\times_HH'$ and $H_3=H'\\times_HH'\\times_HH'$. Define $\\operatorname{Desc}(p)$ to have objects $(V',\\theta)$ with $V'\\in\\operatorname{Et}(H')$ and an $H_2$-isomorphism $\\theta:p_1^*V'\\xrightarrow{\\sim}p_2^*V'$ whose pullback by the diagonal is the identity and which satisfies $p_{23}^*\\theta\\circ p_{12}^*\\theta=p_{13}^*\\theta$ over $H_3$. Arrows $a:(V',\\theta)\\to(W',\\eta)$ are $H'$-morphisms satisfying $p_2^*a\\circ\\theta=\\eta\\circ p_1^*a$. Then the canonical pullback functor $\\operatorname{Et}(H)\\to\\operatorname{Desc}(p)$ is an equivalence. Explicitly, every such datum has a realization by a quasi-separated chartwise etale space over $H$, and pullback gives a bijection on morphisms onto the arrows respecting the displayed data. No flatness, quasi-compactness, finite-presentation or representability assumption on $p$ is imposed.",
+ "source": {
+  "document": "literature/rydh-submersions-effective-descent.pdf",
+  "place": "Rydh, Submersions and effective descent of etale morphisms, author version 2010-03-03, Theorem (5.19)(i), printed p.23; Remark (5.2), printed p.18, extends the base category from schemes to algebraic spaces; Notation (5.1) and quasi-separated convention on printed p.4. Author PDF read online; local copy WANTED.",
+  "url": "https://davidrydh.se/papers/submersion20100305.pdf"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence",
+  "def-weil-etale-morphism",
+  "def-a1-space-point-topology"
+ ],
+ "proof": [
+  {
+   "text": "First establish a fact also valid for spaces without quasi-separatedness. If $q:B'\\to B$ is universally open and surjective, and $Y\\to B$ is chartwise etale, every datum-compatible map $a':X_{B'}\\to Y_{B'}$ has an open graph in $(X\\times_BY)_{B'}$ by [lem-sfb-space-etale-open-graph]. Compatibility says that the two inverse-image opens on the double overlap coincide. The point-fibre-product surjectivity in [lem-a1-space-point-open-calculus] therefore makes the graph a saturated subset for $(X\\times_BY)_{B'}\\to X\\times_BY$. An open surjection is a quotient map, so it is the inverse image of a unique open subset downstairs, hence of a unique open subspace by [lem-a1-space-etale-open-image]. The descended projection to $X$ is universally bijective on points: after any base change, lift a point, or a pair with the same image, to $B'$ and use the universally bijective projection of the graph upstairs. The graph criterion gives a unique $B$-map $a:X\\to Y$ pulling back to $a'$. Equal maps have equal graphs, and equality of downstairs opens is detected by surjective inverse image. Thus pullback is fully faithful on etale objects, and in fact on maps from any $X$ into etale $Y$. Descending inverse maps shows that compatible isomorphisms descend to isomorphisms.",
+   "uses": [
+    "lem-sfb-space-etale-open-graph",
+    "lem-a1-space-point-open-calculus",
+    "lem-a1-space-etale-open-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/rydh-submersions-effective-descent.pdf",
+    "place": "Proposition (5.3), graph argument using Corollary (A.3), and Remark (5.2); Stacks spaces-properties.tex Tags 03H4, 03BZ."
+   }
+  },
+  {
+   "text": "The topology and open-subspace correspondence give a basis of quasi-compact open subspaces: the open cover of [lem-a1-space-affine-atlas-open-cover] consists of images of affine etale charts, hence its members are quasi-compact by [lem-a1-space-etale-open-image]; apply the same construction inside any prescribed open subspace. An open subspace of a quasi-separated space is quasi-separated: its affine-test fibre products are the same as in the ambient space, so [def-sfb-space-absolute-quasi-separated] applies. Cover $H$ by a small family of quasi-compact opens $H_a$. Fix $a$ for steps 3--8 and write $H=H_a$, replacing $H'$ and $V'$ by their inverse images. They remain quasi-separated open subspaces and $p$ remains universally open and surjective. This introduces no global quasi-compactness assumption on the original $p$.",
+   "uses": [
+    "lem-a1-space-affine-atlas-open-cover",
+    "lem-a1-space-etale-open-image",
+    "def-sfb-space-absolute-quasi-separated"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/rydh-submersions-effective-descent.pdf",
+    "place": "Theorem (5.19)(i), affine-local reduction; locally quasi-compact topology from Stacks spaces-properties.tex Tag 03FY."
+   }
+  },
+  {
+   "text": "Images under $p$ of the quasi-compact open basis of $H'$ cover the quasi-compact space $|H|$. Select finitely many such opens whose images cover and let $U$ be their union. Then $U$ is a quasi-compact quasi-separated open subspace of $H'$, and $q=p|_U:U\\to H$ is surjective. It is universally open: after any base change an open of $U_T$ is an open of $H'_T$, whose image is open. By [lem-sfb-space-qcqs-permanence], $q$ is quasi-compact, since $U$ is quasi-compact and $H$ is quasi-separated. Restrict $(V',\\theta)$ to $U$, obtaining $E'=V'\\times_{H'}U$ and its datum for $q$. The space $E'$ is an open subspace of $V'$ and is quasi-separated by step 2. We will first descend this restricted datum, and then recover the full datum in step 8.",
+   "uses": [
+    "lem-sfb-space-qcqs-permanence",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/rydh-submersions-effective-descent.pdf",
+    "place": "Theorem (5.19)(i), choice of a quasi-compact surjective source open."
+   }
+  },
+  {
+   "text": "Put $R=E'\\times_HU$, with $s:R\\to E'$ the first projection and $t:R\\to E'$ obtained by applying $\\theta$ and projecting to its target copy of $E'$. Both $s,t$ are base changes of $q$ up to the displayed isomorphism, so are open; they are quasi-compact by [lem-sfb-space-qcqs-permanence] on quasi-compact tests (equivalently, by the fibre-product criterion in [lem-sfb-qcqs-space-fibre-product]). The diagonal identity gives the unit, and the cocycle gives composition and inverse of this relation on test sections. For each quasi-compact open basis member $W\\subset E'$, set $\\widetilde W=t(s^{-1}W)$. It is open and quasi-compact: $s^{-1}W=W\\times_HU$ is qcqs by [lem-sfb-qcqs-space-fibre-product], and its continuous image under $t$ is quasi-compact. The unit gives $W\\subseteq\\widetilde W$. Composition gives $t(s^{-1}\\widetilde W)\\subseteq\\widetilde W$, while the unit gives the reverse inclusion. Inverses then give $s^{-1}\\widetilde W=t^{-1}\\widetilde W$. Equality of point opens is equality of open subspaces by [lem-a1-space-point-open-calculus], so $\\theta$ restricts to a descent datum on $\\widetilde W$. These saturated opens cover $E'$.",
+   "uses": [
+    "lem-sfb-space-qcqs-permanence",
+    "lem-sfb-qcqs-space-fibre-product",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/rydh-submersions-effective-descent.pdf",
+    "place": "Theorem (5.19)(i), saturation R(W) of a quasi-compact open; Stacks Tag 073B for the quasi-compact fibre products."
+   }
+  },
+  {
+   "text": "Each $\\widetilde W\\to U$ is quasi-compact by [lem-sfb-space-qcqs-permanence], and chartwise etale by restriction. Its source is quasi-separated by step 2. Apply [lem-sfb-space-qc-subtrusive-etale-descent] to $q:U\\to H$ and its restricted datum: the lemma explicitly includes universally open surjections, so no flatness or finite-presentation assertion is being inferred. Obtain a quasi-compact chartwise etale $F_W\\to H$ with quasi-separated source and a specified compatible isomorphism $F_W\\times_HU\\simeq\\widetilde W$. As $H$ is quasi-compact, $F_W$ is quasi-compact. The structural maps, fibre products and restricted etaleness have the meanings in [lem-trf-space-chartwise-etale-permanence].",
+   "uses": [
+    "lem-sfb-space-qc-subtrusive-etale-descent",
+    "lem-sfb-space-qcqs-permanence",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/rydh-submersions-effective-descent.pdf",
+    "place": "Theorem (5.19)(i), application of Theorem (5.17) to each saturated open."
+   }
+  },
+  {
+   "text": "For $W,Z$, the intersection $\\widetilde W\\cap\\widetilde Z$ is invariant under the restricted datum. The projection $F_W\\times_HU\\to F_W$ is open and surjective; its invariant intersection open descends to an open subspace $D_{WZ}\\subset F_W$ by the quotient-topology argument of step 1 and [lem-a1-space-etale-open-image]. Similarly obtain $D_{ZW}\\subset F_Z$. Over $U$ both are the same intersection in $E'$. Step 1 descends that identity and its inverse to an isomorphism $D_{WZ}\\simeq D_{ZW}$. Their diagonal and triple-overlap equations hold after pullback to $U$, and hence hold by step 1. Form the quotient presheaf identifying sections of the $F_W$ on these overlap opens, then its associated fppf sheaf [def-weil-pbc-sheafification]. For a scheme test with a local representative in $F_Z$, its pullback to $F_W$ is the specified overlap open pulled back to that test. The cocycle identifies these opens on overlaps; they descend as opens (their point images are open and have equal inverse images) and glue uniquely. Thus $F_W$ embeds as a representable open subsheaf, with the specified pairwise intersections. Local representatives show that these subsheaves cover. Choose their scheme atlases in the common enlarged universe; [lem-trf-algebraic-space-coproduct] makes their coproduct algebraic, and [lem-trf-algebraic-space-open-gluing] makes the glued sheaf an algebraic space $F$. Its base change to $U$ is $E'$ because the same open gluing there is exactly the cover by $\\widetilde W$. The map $F\\to H$ is chartwise etale: a scheme etale chart of $F$ is locally a chart of some $F_W$, and scheme etaleness is local on the source.",
+   "uses": [
+    "lem-a1-space-etale-open-image",
+    "lem-trf-algebraic-space-coproduct",
+    "lem-trf-algebraic-space-open-gluing",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-weil-pbc-etale-local-on-source",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/rydh-submersions-effective-descent.pdf",
+    "place": "Theorem (5.19)(i), last paragraph; spaces.tex Tags 02WQ (coproduct) and 02WR (open gluing)."
+   }
+  },
+  {
+   "text": "Check quasi-separatedness, rather than assuming it from open gluing. The intersection $D_{WZ}$ is quasi-compact: its surjective inverse image $\\widetilde W\\cap\\widetilde Z=\\widetilde W\\times_{E'}\\widetilde Z$ is quasi-compact by [lem-sfb-space-qcqs-permanence] applied to $\\widetilde W\\to E'$ and a finite affine atlas of $\\widetilde Z$, and continuous images preserve quasi-compactness. Thus the qcqs opens $F_W$ have quasi-compact pairwise intersections. For an affine scheme $T\\to F$, choose finitely many affine opens of $T$ mapping into members $F_W$. For fixed $Z$, each inverse image of $F_Z$ in one such affine is quasi-compact: it is a pullback of $D_{WZ}\\to F_W$, which is quasi-compact by [lem-sfb-space-qcqs-permanence]. Therefore $T\\times_FF_Z$ is quasi-compact. Given two affine tests $T,T'\\to F$, choose finite affine covers subordinate to these $F_W$. Their cross fibre products are quasi-compact: first restrict each affine to the relevant intersection $D_{WZ}$, obtaining quasi-compact open schemes, and then use the affine-test quasi-separatedness of $D_{WZ}$, with finite affine covers of those restrictions. The finite union is $T\\times_FT'$. By [def-sfb-space-absolute-quasi-separated], $F$ is quasi-separated. The same reasoning applies to any open gluing of qcqs pieces with quasi-compact overlaps.",
+   "uses": [
+    "lem-sfb-space-qcqs-permanence",
+    "def-sfb-space-absolute-quasi-separated",
+    "lem-trf-space-qc-finite-affine-atlas-refinement"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/rydh-submersions-effective-descent.pdf",
+    "place": "Theorem (5.19) gluing with the standing quasi-separated convention; spaces-properties.tex Tag 0AHR (affine-test criterion) and spaces-morphisms.tex Tag 073B."
+   }
+  },
+  {
+   "text": "Recover the original datum over $H'$ on this quasi-compact base. The map $U\\times_HH'\\to H'$ is a base change of $q$, hence universally open and surjective. On this cover, the isomorphism $F_U\\simeq V'_U$, followed by $\\theta$ between the $U$ and $H'$ coordinates, identifies $F_{H'}$ with $V'$. On the double cover these isomorphisms agree: the equality is precisely $\\theta_{23}\\theta_{12}=\\theta_{13}$, together with compatibility of $F_U\\simeq V'_U$ with its $q$-datum. Step 1 descends the isomorphism and its inverse to $F\\times_HH'\\simeq V'$. Compatibility with the full $p$-datum is checked after the universally open surjective cover obtained by adjoining a $U$ coordinate; there it is again that displayed cocycle. Step 1 detects the equality downstairs. This is why restricting to $U$ in step 3 loses no part of the original datum, even though $U\\to H'$ need not be surjective.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/rydh-submersions-effective-descent.pdf",
+    "place": "Theorem (5.19)(i), replacing the source by a surjective open refinement; explicit form of Proposition (5.6)."
+   }
+  },
+  {
+   "text": "Now use the quasi-compact open cover $H=\\bigcup_aH_a$ of the original base. Steps 3--8 give qs etale spaces $F_a\\to H_a$ realizing the full restricted data, each covered by qcqs opens $F_{a,W}$. Over $H_a\\cap H_b$, step 1 for $p$ descends the identity of the two realizations upstairs to an isomorphism $(F_a)_{H_a\\cap H_b}\\simeq(F_b)_{H_a\\cap H_b}$. These isomorphisms satisfy the cocycle because their pullbacks do, and step 1 is faithful. Glue using the same sheaf construction, [lem-trf-algebraic-space-coproduct] and [lem-trf-algebraic-space-open-gluing] as in step 6. This gives an etale space $V\\to H$ and an isomorphism $V_{H'}\\simeq V'$ respecting the datum. Indeed on each $H'_a$ it is the isomorphism of step 8, and those maps agree on intersections by their construction from the original datum. Etaleness is checked on scheme-source open covers as in step 6. Quasi-separatedness across different $a$ is checked next.",
+   "uses": [
+    "lem-trf-algebraic-space-coproduct",
+    "lem-trf-algebraic-space-open-gluing",
+    "lem-weil-pbc-etale-local-on-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/rydh-submersions-effective-descent.pdf",
+    "place": "Theorem (5.19)(i), base-local reduction, with the gluing descent expanded; spaces.tex Tag 02WR."
+   }
+  },
+  {
+   "text": "For qc pieces $F_{a,W}$ and $F_{b,Z}$ put $C=U_a\\times_HU_b$, where $U_a\\subset H'_a$ and $U_b\\subset H'_b$ are the chosen source opens. The intersection $H_{ab}=H_a\\cap H_b$ is qcqs: it is the pullback of $H_a\\to H$, a quasi-compact morphism by [lem-sfb-space-qcqs-permanence], to $H_b$. First restrict $U_a,U_b$ to $H_{ab}$; these restrictions are qcqs, since $H_{ab}\\to H_a,H_b$ are quasi-compact open immersions by [lem-sfb-space-qcqs-permanence]. Their fibre product is $C$, which is therefore qcqs by [lem-sfb-qcqs-space-fibre-product]. Its projection to $H_{ab}$ is universally open and surjective. Pull the two pieces to $C$. They are quasi-compact opens of the same realization of $V'$ over $C$: quasi-compactness follows from [lem-sfb-space-qcqs-permanence] and [lem-sfb-qcqs-space-fibre-product]; the identification is the original $\\theta$. Their ambient space is quasi-separated, since it is a fibre product of quasi-separated spaces (pulling back the relative diagonals verifies this directly). Their intersection is consequently quasi-compact by the same quasi-compact-morphism argument as in step 7. It maps continuously and surjectively onto $F_{a,W}\\cap F_{b,Z}$, so that overlap is quasi-compact too. The affine-test argument of step 7 now shows that $V$ is quasi-separated globally. Finally step 1 gives the required bijection on all morphisms, while $V_{H'}\\simeq V'$ proves essential surjectivity. Hence the specified pullback functor is an equivalence.",
+   "uses": [
+    "lem-sfb-space-qcqs-permanence",
+    "lem-sfb-qcqs-space-fibre-product",
+    "def-sfb-space-absolute-quasi-separated",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/rydh-submersions-effective-descent.pdf",
+    "place": "Theorem (5.19)(i), standing quasi-separatedness checked on the glued object; Remark (5.2) for algebraic-space bases."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-space-absolute-quasi-separated",
+  "def-weil-pbc-sheafification",
+  "lem-a1-space-affine-atlas-open-cover",
+  "lem-a1-space-etale-open-image",
+  "lem-a1-space-point-open-calculus",
+  "lem-sfb-qcqs-space-fibre-product",
+  "lem-sfb-space-etale-open-graph",
+  "lem-sfb-space-qc-subtrusive-etale-descent",
+  "lem-sfb-space-qcqs-permanence",
+  "lem-trf-algebraic-space-coproduct",
+  "lem-trf-algebraic-space-open-gluing",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-qc-finite-affine-atlas-refinement",
+  "lem-weil-pbc-etale-local-on-source"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/rydh-submersions-effective-descent.pdf",
+  "place": "Agent-expanded assembly following Rydh Theorem (5.19)(i), printed p.23, and Proposition (5.3), read online at the author URL. Local PDF WANTED; all topological, graph, quasi-compact descent and gluing inputs are cited nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Ee]tale.*[Dd]escent|[Dd]escent.*[Ee]tale",
+   "results": "{\"t\": \"2026-10-23T13:53:03Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|[Ee]tale.*[Dd]escent|[Dd]escent.*[Ee]tale\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\"], \"digest\": \"9768c84a3b8914bc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give scheme morphism-property descent under flatness, scheme etale categories, or ring-algebra descent; none gives effective descent of chartwise etale algebraic spaces along arbitrary universally open surjections."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale algebraic spaces descend effectively along universally open surjections",
+   "results": "{\"t\": \"2026-10-23T13:53:03Z\", \"tool\": \"leansearch\", \"query\": \"Etale algebraic spaces descend effectively along universally open surjections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.exists_subalgebra_fg\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"Algebra.etaleLocus_eq_univ_iff\", \"AlgebraicGeometry.universallyOpen_iff\"], \"digest\": \"d605ddac5c47fcfa\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give scheme morphism-property descent under flatness, scheme etale categories, or ring-algebra descent; none gives effective descent of chartwise etale algebraic spaces along arbitrary universally open surjections."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"Descent\"",
+   "results": "{\"t\": \"2026-10-23T13:53:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"Etale\\\", \\\"Descent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give scheme morphism-property descent under flatness, scheme etale categories, or ring-algebra descent; none gives effective descent of chartwise etale algebraic spaces along arbitrary universally open surjections."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A universally open surjective morphism of quasi-separated algebraic spaces is effective descent for chartwise etale algebraic spaces with descent data",
+   "results": "{\"t\": \"2026-10-23T13:53:08Z\", \"tool\": \"leanfinder\", \"query\": \"A universally open surjective morphism of quasi-separated algebraic spaces is effective descent for chartwise etale algebraic spaces with descent data\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.HasRingHomProperty.descendsAlong\"], \"digest\": \"03efd16b89f7a4b1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give scheme morphism-property descent under flatness, scheme etale categories, or ring-algebra descent; none gives effective descent of chartwise etale algebraic spaces along arbitrary universally open surjections."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universally open surjections are effective descent morphisms for the fibered category of etale algebraic spaces",
+   "results": "{\"t\": \"2026-10-23T13:55:05Z\", \"tool\": \"leanfinder\", \"query\": \"Universally open surjections are effective descent morphisms for the fibered category of etale algebraic spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.UniversallyOpen\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Scheme.etaleTopology\"], \"digest\": \"1bebab45e1c40dcf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give scheme morphism-property descent under flatness, scheme etale categories, or ring-algebra descent; none gives effective descent of chartwise etale algebraic spaces along arbitrary universally open surjections."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universally open surjections give effective descent for all etale algebraic spaces without quasi compactness or flatness",
+   "results": "{\"t\": \"2026-10-23T19:47:49Z\", \"tool\": \"leanfinder\", \"query\": \"Universally open surjections give effective descent for all etale algebraic spaces without quasi compactness or flatness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.UniversallyOpen\", \"AlgebraicGeometry.UniversallyOpen.eq\"], \"digest\": \"a584892546f01a84\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme etale/open-immersion declarations and scheme morphism-property descent under flatness do not state this algebraic-space result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"Descent\"",
+   "results": "{\"t\": \"2026-10-23T19:47:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"Etale\\\", \\\"Descent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme etale/open-immersion declarations and scheme morphism-property descent under flatness do not state this algebraic-space result."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Ee]tale.*[Dd]escent|[Dd]escent.*[Ee]tale",
+   "results": "{\"t\": \"2026-10-23T19:47:42Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|[Ee]tale.*[Dd]escent|[Dd]escent.*[Ee]tale\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\"], \"digest\": \"9768c84a3b8914bc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme etale/open-immersion declarations and scheme morphism-property descent under flatness do not state this algebraic-space result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback is an equivalence from etale algebraic spaces to descent data along universally open surjections",
+   "results": "{\"t\": \"2026-10-23T19:47:43Z\", \"tool\": \"leansearch\", \"query\": \"Pullback is an equivalence from etale algebraic spaces to descent data along universally open surjections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsOpenImmersion.hasPullback_of_right\", \"AlgebraicGeometry.Scheme.Pullback.v\", \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.pullbackToBaseIsOpenImmersion\", \"AlgebraicGeometry.IsOpenImmersion.hasPullback_of_left\", \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.hasPullback_of_right\", \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.pullbackFstOfRight\", \"TopCat.Presheaf.pullbackObjObjOfImageOpen\", \"AlgebraicGeometry.UniversallyOpen.fst\"], \"digest\": \"f36522ca02231768\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme etale/open-immersion declarations and scheme morphism-property descent under flatness do not state this algebraic-space result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An arbitrary universally open surjective morphism is effective descent for the fibered category of etale algebraic spaces",
+   "results": "{\"t\": \"2026-10-23T19:47:48Z\", \"tool\": \"leanfinder\", \"query\": \"An arbitrary universally open surjective morphism is effective descent for the fibered category of etale algebraic spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\"], \"digest\": \"ef3e774354d345ad\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme etale/open-immersion declarations and scheme morphism-property descent under flatness do not state this algebraic-space result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-homeomorphism-separated-etale-equivalence",
+  "date": "2026-10-23",
+  "group": "Q16"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Alper Proposition 7.1.1 proof, Hom exactness; expanded Rydh Theorem (7.4) graph construction, printed p.29, as a prerequisite of the inherited det-thm-sf-ctf-stability-direct-images alteration/moduli route. Supporting input: Separated universal homeomorphisms of algebraic spaces are affine. Rydh Corollary (5.22), proof: descend the separated etale scheme presentation using Theorem (5.21). Supporting general input: Rydh Theorem (5.19)(i), effective descent with specified cocycles, applied in the proof of (5.21).",
+   "via": [
+    "lem-sfb-homeomorphism-separated-etale-equivalence",
+    "lem-sfb-separated-space-homeomorphism-affine",
+    "lem-sfb-stein-submersive-reduced-descent",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-open-surjection-etale-descent",
+  "worker": "stage1",
+  "summary": "Split the actual arbitrary-open-surjection proof into graph descent, quasi-compact source refinement, saturation of quasi-compact opens, the deeper quasi-compact subtrusive effectivity theorem, descent of open overlap data and gluing, refinement recovery and explicit global quasi-separatedness. Two smaller source inputs are statement-only nodes; all other inputs reuse existing nodes. No statement or route change.",
+  "blueprint": "Alper Proposition 7.1.1 proof, Hom exactness; expanded Rydh Theorem (7.4) graph construction, printed p.29, as a prerequisite of the inherited det-thm-sf-ctf-stability-direct-images alteration/moduli route. Supporting input: Separated universal homeomorphisms of algebraic spaces are affine. Rydh Corollary (5.22), proof: descend the separated etale scheme presentation using Theorem (5.21). Supporting general input: Rydh Theorem (5.19)(i), effective descent with specified cocycles, applied in the proof of (5.21). Theorem (5.19)(i) is now expanded, retaining the inherited alteration/moduli route; latest blueprint direct-images proof and unit were read. The ancestor command returns None for this inherited created-node chain, retained literally.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-affine-atlas-open-cover",
+    "why": "Generic algebraic-space topology, fibre-product or open-gluing input for the existing Rydh descent subargument; no theorem of the present unit replaces it."
+   },
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "Generic algebraic-space topology, fibre-product or open-gluing input for the existing Rydh descent subargument; no theorem of the present unit replaces it."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic algebraic-space topology, fibre-product or open-gluing input for the existing Rydh descent subargument; no theorem of the present unit replaces it."
+   },
+   {
+    "node": "lem-trf-algebraic-space-coproduct",
+    "why": "Generic algebraic-space topology, fibre-product or open-gluing input for the existing Rydh descent subargument; no theorem of the present unit replaces it."
+   },
+   {
+    "node": "lem-trf-algebraic-space-open-gluing",
+    "why": "Generic algebraic-space topology, fibre-product or open-gluing input for the existing Rydh descent subargument; no theorem of the present unit replaces it."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic algebraic-space topology, fibre-product or open-gluing input for the existing Rydh descent subargument; no theorem of the present unit replaces it."
+   },
+   {
+    "node": "lem-trf-space-qc-finite-affine-atlas-refinement",
+    "why": "Generic algebraic-space topology, fibre-product or open-gluing input for the existing Rydh descent subargument; no theorem of the present unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-etale-local-on-source",
+    "why": "Generic algebraic-space topology, fibre-product or open-gluing input for the existing Rydh descent subargument; no theorem of the present unit replaces it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-affine-atlas-open-cover",
+  "lem-a1-space-etale-open-image",
+  "lem-a1-space-point-open-calculus",
+  "lem-trf-algebraic-space-coproduct",
+  "lem-trf-algebraic-space-open-gluing",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-qc-finite-affine-atlas-refinement",
+  "lem-weil-pbc-etale-local-on-source"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-8f099f4b4",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-8f099f4b4 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full. Rydh's paper is not in literature/, so I fetched the author PDF from the URL in the node and read p.4 (standing assumption that spaces are quasi-separated), (1.6), (1.8), (2.1), (2.2), (2.4), (2.5)(2c), (5.1)-(5.3), (5.17) with its proof, (5.19) with its full proof, and (A.1)-(A.4). I also read Stacks 05W5, which is stated for arbitrary algebraic spaces. Item: the statement is byte-identical to the base and matches Rydh (5.19)(i) with Remark (5.2). Steps: 1 is graph descent: the open graph is saturated through point fibre-product surjectivity, so it descends along an open quotient map, and I checked universal bijectivity of the descended projection. 2-3 use quasi-compact images of affine charts and a finite quasi-compact source U with q quasi-compact by the permanence node. 4 is Rydh's saturation t(s^-1 W), quasi-compact because W, U and H are qcqs. 5: I checked every hypothesis of (5.17). 6 descends the overlaps through step 1 and glues with the coproduct and open-gluing nodes, whose hypotheses I checked. 7 and 10: I re-derived the global quasi-separatedness argument; overlaps are quasi-compact through C=U_a|H_ab x U_b|H_ab. 8 recovers the full datum by the cocycle along U x_H H' -> H'. 9 glues over the H_a. There is no gap. New nodes: the graph node is Rydh (A.3) and is valid without quasi-separatedness by 05W5. It is not a duplicate of the etale-monomorphism-open or separated-etale-diagonal-complement nodes. The qc-subtrusive node is Rydh (5.17), a deeper theorem over a different class of covers, not a restated clause. FIX (statement precision, qc-subtrusive node): universal subtrusiveness is now tested on base changes by affine schemes T->H instead of arbitrary algebraic-space base changes. The project's spaces need not be quasi-separated, and the universally-open special case is only justified on Rydh's tests (Remark (1.8) and Prop. (2.4)(ii)). This weakens the hypothesis only, so it is still Rydh's theorem and step 5 is unaffected. The constructible topology on |X| is now the quotient topology from etale affine charts, as in (1.8). Batch 5: every listed sec-trace-formula citation, direct or through closure, is a generic algebraic-space foundation (definition, fibre products, etale calculus, 02WQ coproduct, 02WR open gluing, finite affine atlas, point topology). None is a step of the trace formula or Poincare duality, so all are accepted. The off-unit tool_uses for the a1/trf/pbc nodes are accepted as generic tools. There is no SGA citation and no cycle.; 1 file(s) fixed by the reviewer"
+ }
+}

@@ -10,6 +10,10 @@ public import Sheaf.AlgebraicGeometry.EtaleDegreeZeroHom
 import Sheaf.AlgebraicGeometry.AffineSpaceLinearTraceInvariance
 import Sheaf.AlgebraicGeometry.OrdinaryFiniteTwistTransportUniqueness
 import Sheaf.AlgebraicGeometry.OrdinaryFiniteP1DatumUniqueness
+import Sheaf.AlgebraicGeometry.OrdinaryFiniteUnitPullbackComp
+import Sheaf.AlgebraicGeometry.EtaleDegreeZeroHomRestriction
+import Sheaf.AlgebraicGeometry.VectorIntegrationOverlapChartPrefix
+import Sheaf.AlgebraicGeometry.AffineTraceTowerCounitBaseChange
 
 /-! # Compatibility of vector-bundle local traces on overlaps
 
@@ -25,6 +29,123 @@ set_option backward.isDefEq.respectTransparency.types true
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
+
+attribute [local irreducible] _root_.DerivedCategory.singleFunctors
+  Functor.leftDerivedFunctor upperStar
+
+-- The constant unit and the Hom correspondence use the same degree-zero embedding.
+attribute [local implicit_reducible] ordinaryFiniteDegreeZero ordinaryFiniteSingleFunctor
+
+private theorem four_assoc {C : Type*} [Category C] {W X Y Z R : C}
+    (a : W ⟶ X) (b : X ⟶ Y) (c : Y ⟶ Z) (d : Z ⟶ R) :
+    a ≫ b ≫ c ≫ d = (a ≫ b ≫ c) ≫ d := by
+  simp only [Category.assoc]
+
+private theorem map_comp_tail {C D : Type*} [Category C] [Category D]
+    (P : C ⥤ D) {X Y Z : C} {K R : D}
+    (a : K ⟶ P.obj X) (f : X ⟶ Y) (g : Y ⟶ Z) (b : P.obj Z ⟶ R) :
+    a ≫ P.map f ≫ P.map g ≫ b = a ≫ P.map (f ≫ g) ≫ b := by
+  rw [P.map_comp]
+  simp only [Category.assoc]
+
+private theorem map_iso_cancel {C D : Type*} [Category C] [Category D]
+    (P : C ⥤ D) {X Y Z : C} {K R : D}
+    (a : K ⟶ P.obj X) (f : X ⟶ Y) (β : Z ≅ Y) (b : P.obj Y ⟶ R) :
+    a ≫ P.map (f ≫ β.inv) ≫ P.map β.hom ≫ b = a ≫ P.map f ≫ b := by
+  rw [← P.map_comp_assoc]
+  simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+
+private theorem restricted_normalization (A : Type (u + 1)) [CommRing A]
+    {T U S : Scheme.{u}} (p : T ⟶ U) (v : U ⟶ S) (w : T ⟶ S)
+    [Etale p] [Etale v] [Etale w] (hw : w = p ≫ v)
+    {K : DerivedCategoryModule A S}
+    {M : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} A)}
+    (α : K ≅ (_root_.DerivedCategory.singleFunctor _ 0).obj M)
+    (τ : (ordinaryFinitePullback A v).obj K ⟶ ordinaryFiniteUnit A U) :
+    (etaleDegreeZeroHomEquiv A w α).symm
+        (compRestriction v p w hw
+          (etaleDegreeZeroHomEquiv A v α (τ ≫ (ordinaryFiniteUnitPullback A v).inv))) ≫
+        (ordinaryFiniteUnitPullback A w).hom =
+      (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) p v w hw).hom.app K ≫
+        (ordinaryFinitePullback A p).map τ ≫ (ordinaryFiniteUnitPullback A p).hom := by
+  rw [etaleDegreeZeroHomEquiv_symm_compRestriction, Equiv.symm_apply_apply]
+  rw [← ordinaryFiniteUnitPullback_comp A p v w hw]
+  simp only [(ordinaryFinitePullback A p).map_comp, Category.assoc]
+  erw [Iso.inv_hom_id_app_assoc]
+  simpa only [Functor.map_comp, Category.assoc] using
+    map_iso_cancel (ordinaryFinitePullback A p)
+      ((leftDerivedUpperStarComp (ModuleCat.{u + 1} A) p v w hw).hom.app K) τ
+      (ordinaryFiniteUnitPullback A v) (ordinaryFiniteUnitPullback A p).hom
+
+private theorem tower_unit_counit (N : ℕ) (hN : 0 < N)
+    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
+    (t : OrdinaryFiniteTwistTransport A N hA)
+    (D : ∀ (X : Scheme.{u}) [IsNoetherian X] (hX : IsUnit (N : Γ(X, ⊤))),
+      OrdinaryFiniteP1Datum A N hA t X hX)
+    (hD : OrdinaryFiniteP1BaseChange A N hA t D)
+    {T U : Scheme.{u}} [IsNoetherian T] [IsNoetherian U]
+    (p : T ⟶ U) (hU : IsUnit (N : Γ(U, ⊤))) (d : ℕ) :
+    affineTraceUnitBaseChange A N hA t p hU d ≫
+        affineTraceCounit A N hA t D T (affineTracePullbackInvertible N p hU) d =
+      (ordinaryFinitePullback A p).map (affineTraceCounit A N hA t D U hU d) ≫
+        (ordinaryFiniteUnitPullback A p).hom := by
+  have hn := (affineTraceAdjunction A N hA t D T
+    (affineTracePullbackInvertible N p hU) d).counit.naturality
+      (ordinaryFiniteUnitPullback A p).hom
+  simp only [Functor.comp_map, Functor.id_map] at hn
+  unfold affineTraceUnitBaseChange affineTraceCounit
+  simp only [Category.assoc]
+  rw [hn]
+  simpa only [Category.assoc] using congrArg
+    (fun f ↦ f ≫ (ordinaryFiniteUnitPullback A p).hom)
+    (affineTraceTowerCounit_baseChange A N hN hA t D hD p hU d (ordinaryFiniteUnit A U))
+
+private theorem chart_trace_eq_prefix (N : ℕ) (hN : 0 < N)
+    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
+    (t : OrdinaryFiniteTwistTransport A N hA)
+    (D : ∀ (X : Scheme.{u}) [IsNoetherian X] (hX : IsUnit (N : Γ(X, ⊤))),
+      OrdinaryFiniteP1Datum A N hA t X hX)
+    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)
+    (F : SheafOfModules.{u} S.ringCatSheaf) [F.IsFiniteLocallyFreeOfRank d]
+    (V : S.Opens) [IsNoetherian V.toScheme]
+    (e : VectorBundleZeroSection.Trivialization S d F V) :
+    vectorIntegrationLocalTrace N hN A hA t D S hS d F V e =
+      vectorIntegrationChartPrefix N hN A hA t S hS d F V e ≫
+        affineTraceCounit A N hA t D V.toScheme
+          (affineTracePullbackInvertible N V.ι hS) d := by
+  unfold vectorIntegrationLocalTrace vectorIntegrationChartPrefix
+  exact four_assoc _ _ _ _
+
+private theorem overlap_prefix_counit (N : ℕ) (hN : 0 < N)
+    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
+    (t : OrdinaryFiniteTwistTransport A N hA)
+    (D : ∀ (X : Scheme.{u}) [IsNoetherian X] (hX : IsUnit (N : Γ(X, ⊤))),
+      OrdinaryFiniteP1Datum A N hA t X hX)
+    (hD : OrdinaryFiniteP1BaseChange A N hA t D)
+    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)
+    (F : SheafOfModules.{u} S.ringCatSheaf) [F.IsFiniteLocallyFreeOfRank d]
+    (U V : S.Opens) [IsNoetherian U.toScheme] (hUV : U ≤ V)
+    (e : VectorBundleZeroSection.Trivialization S d F V) :
+    vectorIntegrationOverlapPrefix N hN A hA t S hS d F U V hUV e ≫
+        affineTraceCounit A N hA t D U.toScheme (affineTracePullbackInvertible N U.ι hS) d =
+      (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) (S.homOfLE hUV) V.ι U.ι
+        (S.homOfLE_ι hUV).symm).hom.app (vectorIntegrationSource A N hA S d F) ≫
+        (ordinaryFinitePullback A (S.homOfLE hUV)).map
+          (vectorIntegrationLocalTrace N hN A hA t D S hS d F V e) ≫
+        (ordinaryFiniteUnitPullback A (S.homOfLE hUV)).hom := by
+  let : TopologicalSpace.NoetherianSpace V.toScheme :=
+    V.ι.isOpenEmbedding.isInducing.noetherianSpace
+  let : IsNoetherian V.toScheme :=
+    { toIsLocallyNoetherian := inferInstance
+      isCompact_univ := TopologicalSpace.NoetherianSpace.isCompact _ }
+  unfold vectorIntegrationOverlapPrefix
+  simp only [Category.assoc]
+  rw [tower_unit_counit N hN A hA t D hD]
+  rw [chart_trace_eq_prefix N hN A hA t D S hS d F V e]
+  exact map_comp_tail (ordinaryFinitePullback A (S.homOfLE hUV)) _
+    (vectorIntegrationChartPrefix N hN A hA t S hS d F V e)
+    (affineTraceCounit A N hA t D V.toScheme (affineTracePullbackInvertible N V.ι hS) d)
+    (ordinaryFiniteUnitPullback A (S.homOfLE hUV)).hom
 
 /-- The sheaf map corresponding to the prescribed derived trace on a frame open.
 The identification of the source with a single sheaf is supplied explicitly; it is
@@ -116,7 +237,48 @@ theorem vectorIntegrationLocalSheafTrace_compatible_of_baseChange (N : ℕ) (hN 
         (vectorIntegrationLocalSheafTrace N hN A hA t D S hS d F α V e) q =
       descentComponent V'.ι
         (vectorIntegrationLocalSheafTrace N hN A hA t D S hS d F α V' e') q' := by
-  sorry
+  let U : S.Opens := V ⊓ V'
+  let p : U.toScheme ⟶ V.toScheme := S.homOfLE inf_le_left
+  let p' : U.toScheme ⟶ V'.toScheme := S.homOfLE inf_le_right
+  have hp : U.ι = p ≫ V.ι := (S.homOfLE_ι inf_le_left).symm
+  have hp' : U.ι = p' ≫ V'.ι := (S.homOfLE_ι inf_le_right).symm
+  let : TopologicalSpace.NoetherianSpace U.toScheme :=
+    U.ι.isOpenEmbedding.isInducing.noetherianSpace
+  let : IsNoetherian U.toScheme :=
+    { toIsLocallyNoetherian := inferInstance
+      isCompact_univ := TopologicalSpace.NoetherianSpace.isCompact _ }
+  obtain ⟨g, hg⟩ := vectorIntegration_overlap_chart_prefix N hN A hA t S hS d F
+    U V V' inf_le_left inf_le_right e e'
+  obtain ⟨sq, hi⟩ := affineSpaceLinearTraceInvariance N hN A hA t D U.toScheme
+    (affineTracePullbackInvertible N U.ι hS) d g
+  have heq : sq = affineTraceLinearMap_isPullback U.toScheme d g := Subsingleton.elim _ _
+  subst sq
+  have hψ :
+      compRestriction V.ι p U.ι hp
+          (vectorIntegrationLocalSheafTrace N hN A hA t D S hS d F α V e) =
+        compRestriction V'.ι p' U.ι hp'
+          (vectorIntegrationLocalSheafTrace N hN A hA t D S hS d F α V' e') := by
+    apply (etaleDegreeZeroHomEquiv A U.ι α).symm.injective
+    apply (cancel_mono (ordinaryFiniteUnitPullback A U.ι).hom).mp
+    simp only [vectorIntegrationLocalSheafTrace]
+    rw [restricted_normalization A p V.ι U.ι hp α,
+      restricted_normalization A p' V'.ι U.ι hp' α]
+    rw [← overlap_prefix_counit N hN A hA t D hD S hS d F U V inf_le_left e,
+      ← overlap_prefix_counit N hN A hA t D hD S hS d F U V' inf_le_right e']
+    rw [hg, Category.assoc, hi]
+  let square := isPullback_opens_inf V V'
+  have hq : q.left ≫ V.ι = W.hom := MorphismProperty.Over.w q
+  have hq' : q'.left ≫ V'.ι = W.hom := MorphismProperty.Over.w q'
+  let a : W.left ⟶ U.toScheme := square.lift q.left q'.left (hq.trans hq'.symm)
+  have ha : a ≫ p = q.left := square.lift_fst _ _ _
+  have ha' : a ≫ p' = q'.left := square.lift_snd _ _ _
+  have haw : a ≫ U.ι = W.hom := by
+    rw [hp, ← Category.assoc, ha]
+    exact hq
+  have : Etale (a ≫ U.ι) := by rw [haw]; exact W.prop
+  have : Etale a := Etale.of_comp a U.ι
+  rw [descentComponent_eq_compRestriction V.ι p U.ι hp _ q a ha haw,
+    descentComponent_eq_compRestriction V'.ι p' U.ι hp' _ q' a ha' haw, hψ]
 
 /-- The overlap equality also holds for separately supplied normalized Tate transports,
 since the normalization determines both the Tate transport and the projective-line data.

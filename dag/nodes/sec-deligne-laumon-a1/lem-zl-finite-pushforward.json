@@ -163,7 +163,108 @@
   "def-weil-pbc-scheme-conventions"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.WeilComplex.IsMixedOfWeightsAtMost.derivedLowerStar_of_isClosedImmersion"
+   ]
+  },
+  "slopmaster2": {
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.WeilComplex.IsMixedOfWeightsAtMost.derivedLowerStar_of_isClosedImmersion",
+     "module": "WeilConjectures.DeligneLaumon.Reduction.FormalSteps",
+     "lines": [
+      316,
+      328
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilComplex.IsMixedOfWeightsAtMost.derivedLowerStar_of_isFinite",
+     "module": "WeilConjectures.DeligneLaumon.Reduction.FormalSteps",
+     "lines": [
+      267,
+      314
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.finiteLowerStar_singleFunctor_of_isAffine",
+     "module": "WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar",
+     "lines": [
+      405,
+      415
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sf-adic-affine-direct-image-finiteness"
+     ],
+     "below": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_comp_iso",
+     "module": "WeilConjectures.WeilSheaf.LowerShriekFunctoriality",
+     "lines": [
+      184,
+      200
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sf-native-weil-shriek-composition",
+      "prop-functor-package"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_toComplex_iso_of_isOpenImmersion",
+     "module": "WeilConjectures.WeilSheaf.LowerShriekFunctoriality",
+     "lines": [
+      149,
+      161
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sf-weil-open-immersion-compact-image-extension-by-zero"
+     ],
+     "below": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilComplex.nonempty_upperStar_derivedLowerShriek_iso",
+     "module": "WeilConjectures.WeilSheaf.LowerShriekFunctoriality",
+     "lines": [
+      218,
+      243
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "prop-functor-package",
+      "lem-zl-morphism-open-closed-reduction"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.WeilComplex.sum_trace_compactlySupportedCohomology_eq_sum_traceFunction",
+     "module": "WeilConjectures.WeilSheaf.LowerShriekOperations",
+     "lines": [
+      95,
+      114
+     ],
+     "kind": "theorem",
+     "nodes": [],
+     "below": false
+    }
+   ]
+  }
+ },
  "chapter": "sec-deligne-laumon-a1",
  "unit": "sk-thm-dl-a1-upper",
  "lean": {
@@ -205,5 +306,39 @@
   "group": "Q116",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q116-d30257f00 (reviewer sub-agent of L); spot-checked: Reviewed all five steps and the sole new node against the blueprint, Stacks 03QP, Bhatt–Scholze 6.8.14–15 and Deligne’s Frobenius conventions. Repaired geometric base-change hypothesis justification and the finite fibre’s ordinary/compact-support comparison. Statements unchanged; no duplicate or dependency cycle found. Details and corrected JSON are in review.md and fixes/.; 1 file(s) fixed by the reviewer"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "If $g:Z_0\\to Y_0$ is finite and\n$K\\in D_{\\le w}(Z_0)$ is a Weil complex with underlying object in\n$\\Dbc(Z,\\Qlb)$ ([det-def-sfb-bounded-constructible], [sk-def-sf-weil-complexes],\n[def-weil-complex-weights]), then $Rg_*K=Rg_!K$ belongs to\n$D_{\\le w}(Y_0)$.",
+  "proof": [
+   {
+    "text": "A finite morphism is proper, so $Rg_!=Rg_*$ by the properness law of\n[prop-functor-package].",
+    "uses": [
+     "prop-functor-package"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Exactness and stalks.* The schemes are of finite type over a field, so the\nfinite morphism $g$ is of finite presentation. By\n[lem-fd-proetale-finite-pushforward-exact] (2), $g_*$ is exact on\n$\\QbarX$-modules and $Rg_*\\simeq g_*$ term by term; in particular\n$R^ig_*\\mathcal F=0$ for $i>0$. Since $g_*$ preserves constructibility\n([sk-thm-sf-ctf-stability]), it restricts to an exact functor\n$\\Cons(Z,\\Qlb)\\to\\Cons(Y,\\Qlb)$ ([sk-lem-coefficient-heart]), and\n$\\mathcal H^j(Rg_*K)=g_*\\mathcal H^j(K)$. Let\n$\\mathcal F\\in\\Cons(Z,\\Qlb)$ and let $\\bar y$ be a geometric point of $Y$. By proper\nbase change ([sk-thm-sfb-proper-base-change])\n$(g_*\\mathcal F)_{\\bar y}\\simeq R\\Gamma(Z_{\\bar y},\\mathcal F|_{Z_{\\bar y}})$. The\nfibre $Z_{\\bar y}$ is finite over the separably closed field $\\kappa(\\bar y)$, so\nits reduction is a finite disjoint union of geometric points $\\bar x$ over\n$\\bar y$; on each of them sections are exact ([sk-prop-pe-condensed-point],\n[sk-cor-pe-wc-sections]). Hence\n\n$$\n(g_*\\mathcal F)_{\\bar y}\\simeq\\bigoplus_{\\bar x\\mapsto\\bar y}\\mathcal F_{\\bar x}.\n$$",
+    "uses": [
+     "lem-fd-proetale-finite-pushforward-exact",
+     "sk-lem-coefficient-heart"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The stalk isomorphism is natural, so it\nintertwines the Weil structures. Fix $j$ and choose a\nfinite Weil filtration of $\\mathcal H^j(K)$ whose nonzero quotients\n$\\mathcal Q_i$ are punctually pure in the sense of\n[def-weil-punctual-weights], of weights $u_i\\le w+j$, as\nprovided by [def-weil-complex-weights]. Exactness pushes this\nfiltration forward. It remains to check that $g_*\\mathcal Q_i$ is\npunctually pure of weight $u_i$. Let $y$ be closed and use the stalk formula above. The geometric\nFrobenius permutes the finitely many points $x$ over $y$; on an orbit\nof length $f$, its $f$-th power on the corresponding summand is the\nlocal Frobenius $F_x$. If $\\mu$ is an eigenvalue on that orbit, then\n$\\mu^f$ is an eigenvalue of $F_x$. Since $\\mathcal Q_i$ is pure,\n\n$$\n|\\iota(\\mu)|^f=|\\iota(\\mu^f)|\n=q_x^{u_i/2}=(q_y^f)^{u_i/2},\n$$\n\nso $|\\iota(\\mu)|=q_y^{u_i/2}$. Thus each $g_*\\mathcal Q_i$ is\npunctually pure of weight $u_i$, and the pushed-forward filtration makes\n$g_*\\mathcal H^j(K)$ mixed of weights at most $w+j$. This holds for\nevery $j$, hence $Rg_*K\\in D_{\\le w}(Y_0)$ by\n[def-weil-complex-weights].",
+    "uses": [
+     "def-weil-punctual-weights",
+     "def-weil-complex-weights"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

@@ -1,0 +1,250 @@
+{
+ "id": "lem-trf-adic-evaluation-homogeneous-preimages",
+ "kind": "statement",
+ "title": "Homogeneous polynomial approximations and preimages for adic evaluation",
+ "statement": "Let $C,R$ be commutative rings, $I\\subseteq R$ an ideal, and assume that $R$ is $I$-adically complete [def-weil-pbc-adically-complete-ring]. Let $f:C\\to R$ be a ring homomorphism, $s\\ge0$, and $b_1,\\ldots,b_s\\in I$. Set $J=(b_1,\\ldots,b_s)$ and assume that the composite $C\\xrightarrow{f}R\\to R/J$ is surjective. Let $E:C[[y_1,\\ldots,y_s]]\\to R$ be a ring homomorphism [def-weil-pbc-multivariate-power-series] satisfying, for every $F=\\sum_\\nu a_\\nu y^\\nu$ and $N\\ge1$,\n$$E(F)\\equiv\\sum_{|\\nu|<N}f(a_\\nu)b^\\nu\\pmod{I^N},\\qquad |\\nu|=\\sum_j\\nu_j,\\quad b^\\nu=\\prod_jb_j^{\\nu_j}.$$\nFor every $z\\in R$ there exist polynomials $H_N\\in C[y_1,\\ldots,y_s]$ for $N\\ge0$, all of whose nonzero monomials have total degree $N$, and a series $S\\in C[[y_1,\\ldots,y_s]]$ such that, writing $S_N=\\sum_{k<N}H_k$, one has\n$$S_0=0,\\qquad z-E(S_N)\\in J^N,\\qquad S_{N+1}-S_N=H_N\\quad(N\\ge0),$$\n$$S_{<N}=S_N,\\qquad E(S)-E(S_N)\\in I^N\\quad(N\\ge1),\\qquad E(S)=z.$$\nHere polynomials are regarded as series when applying $E$, and $S_{<N}$ denotes the finite sum of the monomials of $S$ of total degree less than $N$. In particular $E$ is surjective. Zero polynomials are allowed; when $s=0$ one can take $H_N=0$ for every $N>0$.",
+ "source": {
+  "document": "literature/stacks-project/dpa.tex",
+  "place": "Tag 09PZ (lemma-ci-well-defined), proof, third paragraph: the omitted details that adjoining variables mapping to kernel generators makes the power-series map surjective, with the homogeneous approximation and formal-series limit made explicit."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof": [
+  {
+   "text": "First $J\\subseteq I$ since every $b_j\\in I$. For a polynomial $P=\\sum_\\nu c_\\nu y^\\nu$ write $P(f,b)=\\sum_\\nu f(c_\\nu)b^\\nu$. For any $M\\ge1$, choose $L\\ge M$ larger than every degree in the finite support of $P$. The assumed reduction formula gives $E(P)-P(f,b)\\in I^L\\subseteq I^M$. The separatedness in [def-weil-pbc-adically-complete-ring] makes this difference zero. This includes $P=0$ and constants. Thus evaluation of every polynomial is exactly its finite substitution, rather than merely congruent to it.",
+   "uses": [
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PZ (lemma-ci-well-defined), proof, third paragraph, omitted surjectivity details; explicit agent-supplied homogeneous approximation argument."
+   }
+  },
+  {
+   "text": "Fix $N\\ge0$ and $r\\in J^N$. The first clause of [lem-trf-finite-support-monomial-ideal-power], applied with its coefficient ring $A=R$, ideal $J=(b_1,\\ldots,b_s)$ and exponent $k=N$, expresses $r$ as a finite sum of $R$-multiples of length-$N$ products of the $b_j$. Its irrelevant auxiliary data may be taken as $B=R$, $C=\\mathrm{id}$, $P=\\{0\\}$ and $z^0=1$. Group the finite sum by exponent vector to obtain $r=\\sum_{|\\nu|=N}r_\\nu b^\\nu$. For each nonzero coefficient choose $c_\\nu\\in C$ with $r_\\nu-f(c_\\nu)\\in J$, using the given surjection $C\\to R/J$. Set $H=\\sum c_\\nu y^\\nu$. Step 1 shows $r-E(H)=\\sum(r_\\nu-f(c_\\nu))b^\\nu\\in JJ^N=J^{N+1}$. This $H$ is homogeneous of degree $N$. For $N=0$ the sole monomial is $1$, so the same argument is precisely lifting $r\\bmod J$.",
+   "uses": [
+    "lem-trf-finite-support-monomial-ideal-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PZ (lemma-ci-well-defined), proof, third paragraph, omitted surjectivity details; explicit agent-supplied homogeneous approximation argument."
+   }
+  },
+  {
+   "text": "Choose such corrections recursively: start with $S_0=0$, for which $z-E(S_0)=z\\in J^0=R$. Given $S_N$ with $r_N=z-E(S_N)\\in J^N$, apply step 2 to $r_N$ to choose $H_N$ and put $S_{N+1}=S_N+H_N$. Additivity of the ring map $E$ gives $z-E(S_{N+1})=r_N-E(H_N)\\in J^{N+1}$. Induction gives every required residual and increment identity and $S_N=\\sum_{k<N}H_k$. Each sum is a polynomial of degree less than $N$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PZ (lemma-ci-well-defined), proof, third paragraph, omitted surjectivity details; explicit agent-supplied homogeneous approximation argument."
+   }
+  },
+  {
+   "text": "Using the coefficient-family definition [def-weil-pbc-multivariate-power-series], define the series $S$ by $[y^\\nu]S=[y^\\nu]H_{|\\nu|}$. For each $N$, the set of exponent vectors of total degree less than $N$ is finite: for $N>0$ each of its $s$ coordinates is less than $N$, and for $N=0$ the set is empty. Homogeneity means $[y^\\nu]H_k=0$ unless $|\\nu|=k$. Thus the coefficient of $y^\\nu$ in $\\sum_{k<N}H_k$ equals that in $S$ when $|\\nu|<N$, and is zero otherwise. This proves $S_{<N}=S_N$ coefficient by coefficient, including $N=0$.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PZ (lemma-ci-well-defined), proof, third paragraph, omitted surjectivity details; explicit agent-supplied homogeneous approximation argument."
+   }
+  },
+  {
+   "text": "For $N\\ge1$ apply the assumed reduction formula to $S$. By step 4 its finite substitution sum is $S_N(f,b)$, and by step 1 this equals $E(S_N)$. Consequently $E(S)-E(S_N)\\in I^N$. Step 3 gives $z-E(S_N)\\in J^N\\subseteq I^N$, where the inclusion follows by multiplying $J\\subseteq I$ repeatedly. Subtraction gives $z-E(S)\\in I^N$ for every positive $N$. Separatedness [def-weil-pbc-adically-complete-ring] now yields $z=E(S)$. Since $z$ was arbitrary, $E$ is surjective.",
+   "uses": [
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PZ (lemma-ci-well-defined), proof, third paragraph, omitted surjectivity details; explicit agent-supplied homogeneous approximation argument."
+   }
+  },
+  {
+   "text": "If $s=0$, the empty generated ideal $J$ is zero and the only exponent vector is the empty vector, of degree zero. The given surjection $C\\to R/J=R$ supplies $H_0=c$ with $f(c)=z$, while for $N>0$ the residual is zero and one chooses $H_N=0$. Then $S=c$ and every preceding identity still holds. Zero corrections are allowed also for arbitrary $s$, so the argument covers $J=0$, nilpotent ideals, and the zero ring.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PZ (lemma-ci-well-defined), proof, third paragraph, omitted surjectivity details; explicit agent-supplied homogeneous approximation argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adically-complete-ring",
+  "lem-trf-finite-support-monomial-ideal-power",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dpa.tex",
+  "place": "Tag 09PZ (lemma-ci-well-defined), proof, third paragraph, omitted surjectivity details; explicit agent-supplied homogeneous approximation argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(surject|Surject).*([Aa]eval|[Ee]val)|([Aa]eval|[Ee]val).*(surject|Surject)",
+   "results": "{\"t\": \"2026-10-22T07:06:48Z\", \"tool\": \"grep\", \"query\": \"(surject|Surject).*([Aa]eval|[Ee]val)|([Aa]eval|[Ee]val).*(surject|Surject)\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/RingHom.lean\", \"Mathlib/RingTheory/Localization/Pi.lean\", \"Mathlib/RingTheory/Localization/Pi.lean\", \"Mathlib/RingTheory/Localization/Pi.lean\", \"Mathlib/RingTheory/Extension/Generators.lean\", \"Mathlib/RingTheory/Extension/Generators.lean\", \"Mathlib/RingTheory/Extension/Generators.lean\", \"Mathlib/RingTheory/Extension/Generators.lean\"], \"digest\": \"e5d2fe9b37766b15\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for homogeneous polynomial approximations with compatible total-degree truncations: surjective_of_mk_map_comp_surjective gives only surjectivity; module congruence improvement and homogeneous ideal-power representations are ingredients, not this combined assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Power series substitution is surjective if the coefficient map is surjective modulo the ideal generated by the substituted variables",
+   "results": "{\"t\": \"2026-10-22T07:06:49Z\", \"tool\": \"leansearch\", \"query\": \"Power series substitution is surjective if the coefficient map is surjective modulo the ideal generated by the substituted variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPowerSeries.subst\", \"PowerSeries.map_surjective\", \"PowerSeries.subst\", \"MvPowerSeries.substAlgHom\", \"MvPowerSeries.coeff_subst\", \"MvPowerSeries.subst_X\", \"MvPowerSeries.subst_monomial\", \"PowerSeries.substAlgHom\"], \"digest\": \"e6a426396b2def9b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for homogeneous polynomial approximations with compatible total-degree truncations: surjective_of_mk_map_comp_surjective gives only surjectivity; module congruence improvement and homogeneous ideal-power representations are ingredients, not this combined assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, Function.Surjective",
+   "results": "{\"t\": \"2026-10-22T07:06:49Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries, Function.Surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"MvPowerSeries.C_surjective\"], \"digest\": \"7ec2fd5cc6ef8166\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for homogeneous polynomial approximations with compatible total-degree truncations: surjective_of_mk_map_comp_surjective gives only surjectivity; module congruence improvement and homogeneous ideal-power representations are ingredients, not this combined assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A power series evaluation map C[[X1,...,Xn]] to an I-adically complete ring R is surjective if the variables generate an ideal J contained in I and C surjects onto R/J",
+   "results": "{\"t\": \"2026-10-22T07:07:01Z\", \"tool\": \"leanfinder\", \"query\": \"A power series evaluation map C[[X1,...,Xn]] to an I-adically complete ring R is surjective if the variables generate an ideal J contained in I and C surjects onto R/J\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.surjective_evalₐ\", \"AdicCompletion.evalOneₐ_surjective\", \"AdicCompletion.eval_surjective\", \"surjective_of_mk_map_comp_surjective\", \"AdicCompletion.of_surjective\", \"AdicCompletion.map_surjective\", \"AdicCompletion.mk_surjective\", \"AdicCompletion.kerProj_surjective\"], \"digest\": \"d2d2f09712c84a16\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for homogeneous polynomial approximations with compatible total-degree truncations: surjective_of_mk_map_comp_surjective gives only surjectivity; module congruence improvement and homogeneous ideal-power representations are ingredients, not this combined assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "surject|Surject|truncTotal",
+   "results": "{\"t\": \"2026-10-22T07:12:32Z\", \"tool\": \"grep\", \"query\": \"surject|Surject|truncTotal\", \"sub\": \"RingTheory/MvPowerSeries\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Trunc.lean\", \"Mathlib/RingTheory/MvPowerSeries/Trunc.lean\", \"Mathlib/RingTheory/MvPowerSeries/Trunc.lean\"], \"digest\": \"1c27c23d3109dcda\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for homogeneous polynomial approximations with compatible total-degree truncations: surjective_of_mk_map_comp_surjective gives only surjectivity; module congruence improvement and homogeneous ideal-power representations are ingredients, not this combined assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a power series evaluation onto a complete ring, construct homogeneous corrections P_N with residual in J^N and a formal series preimage",
+   "results": "{\"t\": \"2026-10-22T07:12:32Z\", \"tool\": \"leansearch\", \"query\": \"For a power series evaluation onto a complete ring, construct homogeneous corrections P_N with residual in J^N and a formal series preimage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.aeval_eq_sum\", \"PowerSeries.heval\", \"PowerSeries.eval₂\", \"PowerSeries.aeval\", \"PowerSeries.eval₂_eq_tsum\", \"PowerSeries.hasSum_aeval\", \"PowerSeries.hasSum_eval₂\", \"PowerSeries.comp_aeval\"], \"digest\": \"c4c17f18d313f839\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for homogeneous polynomial approximations with compatible total-degree truncations: surjective_of_mk_map_comp_surjective gives only surjectivity; module congruence improvement and homogeneous ideal-power representations are ingredients, not this combined assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries.truncTotal, RingHom",
+   "results": "{\"t\": \"2026-10-22T07:12:33Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries.truncTotal, RingHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"MvPowerSeries.constantCoeff_truncTotal_eq_ite\", \"MvPowerSeries.truncTotal_subst_eq_truncTotal_subst_sum\", \"MvPowerSeries.truncTotal_subst_eq_truncTotal_sum_subst\", \"MvPowerSeries.truncTotal_subst_eq_truncTotal_truncTotal_subst\", \"MvPowerSeries.truncTotal_subst_eq_truncTotal_sum_subst_truncTotal\", \"MvPowerSeries.truncTotal_subst\", \"MvPowerSeries.truncTotal_subst_eq_truncTotal_sum_subst_truncTotal_of_le\", \"MvPowerSeries.truncTotal_subst_of_le\"], \"digest\": \"79f5c60d32e820c0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for homogeneous polynomial approximations with compatible total-degree truncations: surjective_of_mk_map_comp_surjective gives only surjectivity; module congruence improvement and homogeneous ideal-power representations are ingredients, not this combined assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local lifting of a fixed Cohen power series quotient through a complete local surjection, adjoining variables for its kernel, with a commuting square",
+   "results": "{\"t\": \"2026-10-22T07:12:42Z\", \"tool\": \"leanfinder\", \"query\": \"Local lifting of a fixed Cohen power series quotient through a complete local surjection, adjoining variables for its kernel, with a commuting square\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"Algebra.FormallySmooth.exists_kerProj_comp_eq_id\", \"IsAdicComplete.henselianRing\", \"IsAdicComplete.liftRingHom\", \"IsAdicComplete.mk_liftRingHom\", \"PowerSeries.exists_isWeierstrassDivision\", \"Algebra.FormallySmooth.liftOfSurjective_apply\"], \"digest\": \"3b8b12f9ca975fb4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for homogeneous polynomial approximations with compatible total-degree truncations: surjective_of_mk_map_comp_surjective gives only surjectivity; module congruence improvement and homogeneous ideal-power representations are ingredients, not this combined assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If C maps onto R/J and J is generated by finitely many b_i in an ideal of completeness, every z in R has homogeneous polynomial approximations S_N with z-eval(S_N) in J^N and S_(N+1)-S_N homogeneous of degree N",
+   "results": "{\"t\": \"2026-10-22T07:12:43Z\", \"tool\": \"leanfinder\", \"query\": \"If C maps onto R/J and J is generated by finitely many b_i in an ideal of completeness, every z in R has homogeneous polynomial approximations S_N with z-eval(S_N) in J^N and S_(N+1)-S_N homogeneous of degree N\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.exists_smodEq_pow_add_one_smul\", \"AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top\", \"IsAdicComplete.henselianRing\", \"AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq\", \"PowerSeries.IsWeierstrassDivisorAt.mod'\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_div_sub_seq_mem\", \"PowerSeries.IsWeierstrassDivisorAt.mk_mod'_eq_self\", \"PowerSeries.IsWeierstrassDivisorAt.divCoeff\"], \"digest\": \"1e735a483ddff351\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for homogeneous polynomial approximations with compatible total-degree truncations: surjective_of_mk_map_comp_surjective gives only surjectivity; module congruence improvement and homogeneous ideal-power representations are ingredients, not this combined assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "surject|Surject|truncTotal",
+   "results": "{\"t\": \"2026-10-23T09:56:07Z\", \"tool\": \"grep\", \"query\": \"surject|Surject|truncTotal\", \"sub\": \"RingTheory/MvPowerSeries\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Trunc.lean\", \"Mathlib/RingTheory/MvPowerSeries/Trunc.lean\", \"Mathlib/RingTheory/MvPowerSeries/Trunc.lean\"], \"digest\": \"1c27c23d3109dcda\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern evaluation, Weierstrass division, ideal-power representation, or abstract surjectivity; none states this item with its homogeneous corrections and compatible truncations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct homogeneous polynomial approximations to a preimage of evaluation of multivariate power series in a complete ring",
+   "results": "{\"t\": \"2026-10-23T09:56:08Z\", \"tool\": \"leansearch\", \"query\": \"Construct homogeneous polynomial approximations to a preimage of evaluation of multivariate power series in a complete ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPowerSeries.eval₂\", \"MvPowerSeries.eval₂_coe\", \"MvPowerSeries.aeval_coe\", \"PowerSeries.aeval_coe\", \"MvPowerSeries.aeval_eq_sum\", \"MvPowerSeries.aeval\", \"PowerSeries.aeval\", \"MvPowerSeries.homogeneousComponent\"], \"digest\": \"f7fa319543ec9e4a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern evaluation, Weierstrass division, ideal-power representation, or abstract surjectivity; none states this item with its homogeneous corrections and compatible truncations."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, Function.Surjective",
+   "results": "{\"t\": \"2026-10-23T09:56:08Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries, Function.Surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"MvPowerSeries.C_surjective\"], \"digest\": \"7ec2fd5cc6ef8166\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern evaluation, Weierstrass division, ideal-power representation, or abstract surjectivity; none states this item with its homogeneous corrections and compatible truncations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A power series evaluation map from C to an adically complete ring R admits homogeneous degree N corrections with residual in J to the N if C surjects onto R modulo J",
+   "results": "{\"t\": \"2026-10-23T09:56:13Z\", \"tool\": \"leanfinder\", \"query\": \"A power series evaluation map from C to an adically complete ring R admits homogeneous degree N corrections with residual in J to the N if C surjects onto R modulo J\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.surjective_evalₐ\", \"IsAdicComplete.henselianRing\", \"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.IsWeierstrassDivisorAt.divCoeff\", \"AdicCompletion.factor_eval_eq_evalₐ\", \"AdicCompletion.evalₐ_of\", \"PowerSeries.IsWeierstrassDivisorAt.mod'\", \"AdicCompletion.evalₐ_mk\"], \"digest\": \"7235201ace0c97ab\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern evaluation, Weierstrass division, ideal-power representation, or abstract surjectivity; none states this item with its homogeneous corrections and compatible truncations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Surjective coefficient map modulo a finitely generated ideal gives recursive homogeneous corrections and compatible total degree truncations of a formal power series preimage",
+   "results": "{\"t\": \"2026-10-23T09:58:23Z\", \"tool\": \"leanfinder\", \"query\": \"Surjective coefficient map modulo a finitely generated ideal gives recursive homogeneous corrections and compatible total degree truncations of a formal power series preimage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivisorAt.divCoeff\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_seq_mem\", \"PowerSeries.IsWeierstrassDivisorAt.seq\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_seq_succ_sub_seq_mem\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_div_sub_seq_mem\", \"PowerSeries.IsWeierstrassDivisorAt.mod\", \"PowerSeries.IsWeierstrassDivisorAt.mod'\", \"PowerSeries.IsWeierstrassDivisionAt.coeff_f_sub_r_mem\"], \"digest\": \"584550a63a8acbf6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern evaluation, Weierstrass division, ideal-power representation, or abstract surjectivity; none states this item with its homogeneous corrections and compatible truncations."
+  },
+  {
+   "tool": "grep",
+   "query": "surjective_of_mk_map_comp_surjective|exists_smodEq_pow_add_one_smul|mem_span_pow_iff_exists_isHomogeneous",
+   "results": "{\"t\": \"2026-10-23T09:58:57Z\", \"tool\": \"grep\", \"query\": \"surjective_of_mk_map_comp_surjective|exists_smodEq_pow_add_one_smul|mem_span_pow_iff_exists_isHomogeneous\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/NoetherianDescent.lean\", \"Mathlib/RingTheory/Smooth/NoetherianDescent.lean\", \"Mathlib/RingTheory/MvPolynomial/Homogeneous.lean\", \"Mathlib/RingTheory/AdicCompletion/Functoriality.lean\", \"Mathlib/RingTheory/AdicCompletion/Functoriality.lean\", \"Mathlib/RingTheory/AdicCompletion/Functoriality.lean\", \"Mathlib/RingTheory/Perfectoid/FontaineTheta.lean\"], \"digest\": \"77b0131cf454e2c4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern evaluation, Weierstrass division, ideal-power representation, or abstract surjectivity; none states this item with its homogeneous corrections and compatible truncations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-complete-local-ci-presentation-independence",
+  "date": "2026-10-22",
+  "group": "Q46"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Retained proof steps 5–6 of the complete-local presentation comparison used below lem-trf-local-term-locality: recursive homogeneous corrections and their separated formal-series limit, supplying the omitted surjectivity.",
+   "via": [
+    "lem-trf-complete-local-ci-presentation-independence",
+    "lem-trf-regular-quotient-completion-kernel-test"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-adic-evaluation-homogeneous-preimages",
+  "worker": "stage1",
+  "summary": "Expanded the omitted surjectivity argument into exact polynomial evaluation, homogeneous coefficient lifting modulo J, explicit recursion, coefficientwise series assembly, and the separated limit. Reused the existing finite ideal-power expansion; no new nodes or changed statements. Checked the empty variable family and degree zero.",
+  "blueprint": "Retained homogeneous approximation and formal-series limit from the complete-local presentation comparison beneath lem-trf-local-term-locality (the item blueprint.from.place); this fills the Tag 09PZ omitted surjectivity detail without changing the local-term route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q126-83476b855",
+  "group": "Q126",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q126-83476b855 (reviewer sub-agent of L); spot-checked: I read the item and every step in full. The delivery is a one-level S1 split of lem-trf-adic-evaluation-homogeneous-preimages: statement unchanged, no new nodes, six proof steps. Step 1: polynomial evaluation equals finite substitution, using the reduction congruence at large L and the separatedness clause of def-weil-pbc-adically-complete-ring. Step 2: write r in J^N as a combination of degree-N monomials in the b_j via the first clause of lem-trf-finite-support-monomial-ideal-power (unsplit, same unit, proof_deps empty so no cycle; trivial auxiliary data B=R, C=id, P={0} is valid), lift the coefficients mod J, and the error lands in J^{N+1}. Step 3 is the recursion. Step 4 assembles the series coefficientwise from def-weil-pbc-multivariate-power-series, giving S_{<N}=S_N. Step 5: E(S)-E(S_N) is in I^N, z-E(S_N) is in J^N, which is inside I^N, so separatedness gives E(S)=z. Step 6: s=0, N=0, J=0, nilpotent ideal and zero ring all checked and correct. Source: Stacks dpa.tex Tag 09PZ (lemma-ci-well-defined, line 1687), third proof paragraph, 'some details omitted', so the agent-origin mark is correct. No SGA is cited. Not a duplicate of lem-weil-pbc-power-series-onto-completion or lem-weil-pbc-power-series-adic-evaluation (different coefficient setup; existence of E is a hypothesis here). Not a Mathlib leaf (surjective_of_mk_map_comp_surjective gives surjectivity only). The route stays inside unit sk-i-curve-zero. review_split.py reported 'no such node' for the def-weil-pbc nodes; this is a symlink artifact of the tool, and both nodes exist. Minor: the report mentions a citations.json that is not in the commit."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.AdicEvaluationHomogeneousPreimages",
+  "declaration": "MvPowerSeries.exists_homogeneous_preimages_of_adic_evaluation",
+  "file": "lean/Sheaf/RingTheory/AdicEvaluationHomogeneousPreimages.lean",
+  "statement": "theorem exists_homogeneous_preimages_of_adic_evaluation {C : Type u} {R : Type v} [CommRing C] [CommRing R] (I : Ideal R) [IsAdicComplete I R] (f : C →+* R) (s : ℕ) (b : Fin s → R) (hb : ∀ j : Fin s, b j ∈ I) (hf : Function.Surjective ((Ideal.Quotient.mk (Ideal.span (Set.range b))).comp f)) (E : MvPowerSeries (Fin s) C →+* R) (hE : ∀ (F : MvPowerSeries (Fin s) C) (N : ℕ), 1 ≤ N → E F - MvPolynomial.eval₂ f b (F.truncTotal N) ∈ I ^ N) : (∀ z : R, ∃ (H : ℕ → MvPolynomial (Fin s) C) (S : MvPowerSeries (Fin s) C), (∀ N : ℕ, (H N).IsHomogeneous N) ∧ (∑ k ∈ Finset.range 0, H k) = 0 ∧ (∀ N : ℕ, z - E (MvPolynomial.toMvPowerSeries (∑ k ∈ Finset.range N, H k)) ∈ (Ideal.span (Set.range b)) ^ N) ∧ (∀ N : ℕ, (∑ k ∈ Finset.range (N + 1), H k) - (∑ k ∈ Finset.range N, H k) = H N) ∧ (∀ N : ℕ, S.truncTotal N = ∑ k ∈ Finset.range N, H k) ∧ (∀ N : ℕ, 1 ≤ N → E S - E (MvPolynomial.toMvPowerSeries (∑ k ∈ Finset.range N, H k)) ∈ I ^ N) ∧ E S = z ∧ (s = 0 → ∀ N : ℕ, 0 < N → H N = 0)) ∧ Function.Surjective E",
+  "branch": "newtargets-dag",
+  "by": "Q130",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-783dd72a3",
+  "group": "Q130",
+  "result": "pass",
+  "note": "Q130 lem-trf-adic-evaluation-homogeneous-preimages 783dd72a: every hypothesis and conclusion clause matches the node, none weaker or stronger. hE uses truncTotal N, which keeps degree < N (coeff_truncTotal_eq_ite) = the node's sum over |ν|<N. The S_0=0 and increment clauses are true by definition but faithful to the node. The s=0 clause is automatic since IsHomogeneous N in Fin 0 forces 0. Surjective E is the outer conjunct. Universes u, v independent; no extra instances. The theorem is true via separatedness plus the J^N ⊆ I^N recursion; edge cases N=0, s=0, J=0 and the zero ring checked. stmt_deps IsAdicComplete and MvPowerSeries are the recorded owners. lean.statement matches the file verbatim; the node differs from side-live only in the lean field; not landed by another group. No duplicate in side-live lean/Sheaf or Mathlib (AdicSurjectivityFromPrincipalGenerators is a different statement). Only sorry, no definitions, docstrings carry the source place, blueprint id and six proof steps. Report has both required sections. Nothing compiled because no file changed."
+ }
+}

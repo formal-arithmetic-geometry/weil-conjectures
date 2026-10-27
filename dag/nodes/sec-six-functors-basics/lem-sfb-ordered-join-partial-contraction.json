@@ -14,85 +14,59 @@
   {
    "text": "All maps are defined first on the specified bases, then extended by finite integer linear combination. This gives well-defined homomorphisms: for $d$ there are $q+1$ terms, for $c_i$ at most one, and for $R_i$ at most two. By [def-weil-pbc-free-module], uniqueness of the finite basis expansion shows that two such homomorphisms agree once they agree on every basis symbol. Hence the following calculations on symbols prove identities on the groups; all maps on zero groups are zero.",
    "uses": [
-    "def-weil-pbc-free-module"
+    "def-weil-pbc-free-module",
+    "def-sfb-ordered-join-chains"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent-written ordered-join expansion below local continuous-cocycle descent, calculation 1; not a claim made by the blueprint."
+    "place": "Paragraph (3), agent ordered-join expansion; repair assembly step 1, covering original calculations 1."
    }
   },
   {
-   "text": "Write $\\sigma=[z_0,\\ldots,z_q]$ and let $D_a\\sigma$ denote deletion of position $a$, numbered from zero. For $a<b$, the term deleting original positions $a,b$ occurs in $d^2\\sigma$ with coefficients $(-1)^{a+b-1}$ (delete $a$, then position $b-1$) and $(-1)^{a+b}$ (delete $b$, then position $a$). These sum to zero, and every term belongs to exactly one such pair. This also covers $q=1$, where both final symbols are $[\\varnothing]$. For $q=0,-1$ the second boundary is zero by definition. Thus $d^2=0$ in all degrees.",
-   "uses": [],
-   "elementary": true,
+   "text": "Apply [lem-sfb-ordered-join-single-color-identities] to the specified sets and vertices. Its differential and insertion/remainder formulas are exactly those of the item, so it gives $d^2=0$ and $dc_i+c_id=1-R_i$ in every integer degree, including the augmented and top degrees.",
+   "uses": [
+    "lem-sfb-ordered-join-single-color-identities"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent-written ordered-join expansion below local continuous-cocycle descent, calculation 2; not a claim made by the blueprint."
+    "place": "Paragraph (3), agent ordered-join expansion; repair assembly step 2, covering original calculations 2-4."
    }
   },
   {
-   "text": "Fix $i$ and suppose $\\sigma$ misses color $i$; let $k$ be the number of its colors less than $i$. In $dc_i\\sigma$, deletion of the inserted vertex has coefficient $(-1)^k(-1)^k=1$ and gives $\\sigma$. For an original vertex in position $a<k$, its deletion has coefficient $(-1)^{k+a}$, whereas its term in $c_id\\sigma$ has coefficient $(-1)^{a+k-1}$. For $a\\geq k$ these coefficients are respectively $(-1)^{k+a+1}$ and $(-1)^{a+k}$. Each pair cancels, so $(dc_i+c_id)\\sigma=\\sigma=(1-R_i)\\sigma$. For $\\sigma=[\\varnothing]$ this calculation reads $dc_i[\\varnothing]=d[(i,v_i)]=[\\varnothing]$, with $c_id[\\varnothing]=0$.",
-   "uses": [],
-   "elementary": true,
+   "text": "Prove the ordered-prefix algebra directly for the existing integer-linear maps. From the single-color identities and d squared zero, expand both dR_i and R_i d as d-dc_id. Induct on prefix length using P_(n+1)=P_nR_n to get dP_n=P_nd. Distribute the sum defining S and substitute dc_i+c_id=1-R_i. Its terms are P_i-P_(i+1), whose finite sum is 1-P_r. On a face missing j, induct on n>j: the final factor either kills the face or produces a difference with the same color set, so P_n kills it by induction. In degree q≤r-2 each symbol has fewer than r colors, so choose a missing color and apply this argument; linearity gives P_r=0. Degree -2 has no symbols, so its contraction is zero. This direct calculation avoids constructing a ChainComplex and transporting its integer-indexed components.",
+   "uses": [
+    "lem-sfb-ordered-join-single-color-identities"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent-written ordered-join expansion below local continuous-cocycle descent, calculation 3; not a claim made by the blueprint."
+    "place": "Paragraph (3), agent ordered-join expansion; repair assembly step 3, covering original calculations 5-6."
    }
   },
   {
-   "text": "If instead $\\sigma$ contains color $i$ in position $k$, then $c_i\\sigma=0$. Among the faces of $\\sigma$, only $D_k\\sigma$ misses color $i$, so $c_id\\sigma=(-1)^k(-1)^kT_i\\sigma=T_i\\sigma$, where $T_i\\sigma$ is obtained by replacing that vertex by $(i,v_i)$. Since $R_i\\sigma=\\sigma-T_i\\sigma$, again $dc_i+c_id=1-R_i$. Together with the preceding step this identity holds on every nonzero degree, including the top degree (there every symbol contains $i$ and $c_i=0$); on the remaining zero groups it holds trivially. No equality between the original vertex and the chosen vertex was assumed.",
-   "uses": [],
-   "elementary": true,
+   "text": "By [lem-sfb-ordered-join-functorial-expansion], $J(u)$ commutes with each $c_i$ and $R_i$. Substituting these identities successively into the ordered composite gives $J(u)P_i^v c_i^v=P_i^w c_i^wJ(u)$; adding over $i$ gives the required naturality of $S$. The same lemma gives every individual summand as either zero or the signed subset list $(-1)^{k_i+|A|}\\sigma_{i,A}$. Concatenate these finitely many lists over $i$; their sum is $S\\sigma$, and their coefficients and replacement/insertion choices depend only on $r,C$, even when output symbols coincide. For the empty symbol only $i=0$ contributes, so $S_{-1}[\\varnothing]=[(0,v_0)]$, consistently with the augmented identity.",
+   "uses": [
+    "lem-sfb-ordered-join-functorial-expansion"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent-written ordered-join expansion below local continuous-cocycle descent, calculation 4; not a claim made by the blueprint."
-   }
-  },
-  {
-   "text": "Multiplying $R_i=1-dc_i-c_id$ on the left and right by $d$, and using $d^2=0$, gives $dR_i=d-dc_id=R_id$. Set $P_0=1$ and $P_i=R_0\\circ\\cdots\\circ R_{i-1}$ for $1\\leq i\\leq r$. Each $P_i$ commutes with $d$ by repeated substitution of $dR_j=R_jd$. Hence the stated sum $S=\\sum_{i=0}^{r-1}P_ic_i$ satisfies\n$$dS+Sd=\\sum_{i=0}^{r-1}P_i(dc_i+c_id)=\\sum_{i=0}^{r-1}(P_i-P_{i+1})=1-P_r.$$\nThe middle equality uses $P_iR_i=P_{i+1}$ with precisely the composition order in the statement, and requires no permutation of the factors.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent-written ordered-join expansion below local continuous-cocycle descent, calculation 5; not a claim made by the blueprint."
-   }
-  },
-  {
-   "text": "On a symbol of degree $-1\\leq q\\leq r-2$, at least one of the $r$ colors, say $j$, is missing. Every $R_i$ either kills a symbol or produces a difference of symbols with the same color list. Thus, when $P_r=R_0\\circ\\cdots\\circ R_{r-1}$ is applied from right to left, every term reaching $R_j$ still misses $j$, and $R_j$ kills it. Therefore $P_r=0$ in the specified degrees, and the preceding identity gives $dS_q+S_{q-1}d=1$. In degree $-1$ only $i=0$ contributes to $S[\\varnothing]$: for $i>0$, the factor $R_0$ kills $c_i[\\varnothing]$. Consequently $S_{-1}[\\varnothing]=[(0,v_0)]$ and $dS_{-1}=1$, consistently with $S_{-2}=0$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent-written ordered-join expansion below local continuous-cocycle descent, calculation 6; not a claim made by the blueprint."
-   }
-  },
-  {
-   "text": "For a family $u_i:X_i\\to Y_i$ with $u_i(v_i)=w_i$, applying $u$ to a symbol preserves its color list and hence every insertion position. If color $i$ is absent, $J(u)c_i^v\\sigma$ and $c_i^wJ(u)\\sigma$ are the identical signed symbol with inserted vertex $(i,w_i)$; if present both are zero. If color $i$ is present, both $J(u)R_i^v\\sigma$ and $R_i^wJ(u)\\sigma$ equal $J(u)\\sigma-T_i^wJ(u)\\sigma$; if absent both are zero. Thus $J(u)c_i^v=c_i^wJ(u)$ and $J(u)R_i^v=R_i^wJ(u)$ on the bases, including the empty symbol. Composing these equalities in the specified order and summing over $i$ proves $J_{q+1}(u)S_q^v=S_q^wJ_q(u)$. Injectivity of $u_i$ is unnecessary, since the calculation permits cancellation of coincident output symbols.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent-written ordered-join expansion below local continuous-cocycle descent, calculation 7; not a claim made by the blueprint."
-   }
-  },
-  {
-   "text": "For completeness an unreduced expansion gives the coefficient-list assertion explicitly. Let $C$ be the colors of $\\sigma$. The $i$-th summand $P_ic_i\\sigma$ is zero if $i\\in C$. It is also zero if some $j<i$ is missing from $C$: after inserting color $i$, every preceding replacement preserves the color list, and $R_j$ kills every term. Otherwise let $k=\\#\\{j\\in C:j<i\\}$ and, for $A\\subseteq\\{0,\\ldots,i-1\\}$, let $\\sigma_{i,A}$ be $\\sigma$ with $(i,v_i)$ inserted and the vertices of colors in $A$ replaced by their chosen vertices. Distributing the two terms of each $R_j$ gives\n$$P_ic_i\\sigma=\\sum_{A\\subseteq\\{0,\\ldots,i-1\\}}(-1)^{k+|A|}\\sigma_{i,A}.$$\nIndeed each subset records exactly the factors in which the negative replacement term was selected; replacements at different colors affect different positions and do not change any color. This list has $2^i$ terms, with repetitions and zero cancellation left uncollected. The list of indices, replacement choices and signs depends only on $r,C$. It never tests whether $x_j=v_j$, even when some terms coincide. Summing these lists proves the final assertion.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent-written ordered-join expansion below local continuous-cocycle descent, calculation 8; not a claim made by the blueprint."
+    "place": "Paragraph (3), agent ordered-join expansion; repair assembly step 4, covering original calculations 7-8."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-free-module"
+  "def-sfb-ordered-join-chains",
+  "def-weil-pbc-free-module",
+  "lem-sfb-ordered-join-single-color-identities",
+  "lem-sfb-ordered-join-functorial-expansion"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-  "place": "Paragraph (3), direct-image stability: elementary ordered-join calculation supplying the filling operator in the downstream arithmetic cocycle-descent expansion; the formula and this proof are agent-written, not present in the blueprint."
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent ordered-join calculations 1-8; direct linear-map prefix telescope, support vanishing, naturality and concatenation of subset expansions."
  },
  "mathlib_searches": [
   {
@@ -419,38 +393,22 @@
   "date": "2026-10-22",
   "item": "lem-sfb-ordered-join-partial-contraction",
   "worker": "stage1",
-  "summary": "Proved all clauses by eight elementary basis calculations: paired deletion signs, signed insertion with missing and present colors, boundary commutation, telescoping prefixes, annihilation below top degree, naturality and a subset-indexed expansion. Statement unchanged; no new nodes. Preserved inherited searches and added five logged searches.",
-  "blueprint": "Realizes the ordered-join filling-operator subproblem of paragraph (3) in the arithmetic continuous-cocycle-descent expansion below det-thm-sf-ctf-stability-direct-images. The blueprint itself has no ordered-join argument. The ancestor command returns None, since the inherited created.item chain stops at a Lean-module item; the inherited null ancestor and full via chain are retained.",
+  "summary": "Q136 repair of the 5223-character proof: statement unchanged; three comparable statement-only unsplit tasks separate single-color boundary identities, ordered-prefix telescoping with support annihilation, and functorial signed expansion. All original calculations are retained verbatim and assigned in report.md. Parent proof is a short assembly; no Lean changed. Landing-return repair: compared the retained split with the current shared DAG, re-read every cited statement, retained current statement/metadata and all logged searches, and normalized doubled TeX escapes in assembly steps 3-4. The authorized delivery tool rebases these owned proof fields onto current server state. Fresh retry against the current DAG: all three child ids remain absent and every saved citation remains verbatim; assembly step 3 now introduces I explicitly and checks the degree-q+1 prefix and the empty-face support.",
+  "blueprint": "Paragraph (3), arithmetic continuous-cocycle descent below direct-image stability, same agent-written ordered-join expansion as before. Original calculations 1-4, 5-6 and 7-8 are assigned to three independent new nodes. The ancestor command still returns None; inherited null ancestor and via chain are retained, prefixed by this item on new nodes.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-NN-9149bef5a",
-  "group": "NN",
+  "reviewer": "NT-cc-Q136-0382ee7ad",
+  "group": "Q136",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-9149bef5a (reviewer sub-agent of L); spot-checked: Shape: one commit, only the item node and the report, no new nodes. No repair note exists, so this is an ordinary one-level split. The statement is identical to the live and side-live versions (live is still unsplit). No SGA is cited. The null blueprint.from.node is inherited from a chain that ends at a Lean-module item, not a delivery fault. Statement: the citer lem-sfb-homogeneous-cocycle-rectangle-detection uses every clause with X_i=Ha_i, which may be infinite. Math: I checked all 8 steps. Step 1 correctly cites def-weil-pbc-free-module (Stacks 00AQ/00C2) for basis extension. Steps 2-4: deletion sign pairs, and dc_i+c_id=1-R_i for a missing colour (positions a<k and a>=k) and for a present colour (only D_k misses i). Steps 5-6: dR_i=R_id, telescoping to 1-P_r with P_iR_i=P_{i+1}, P_r=0 when q<=r-2, top degree correctly excluded, S_{-1}[∅]=[(0,v_0)]. Step 7: naturality without injectivity. Step 8: subset expansion with sign (-1)^{k+|A|}. My own brute-force script checked the identities for r=1..5 and naturality under all maps {0,1}->{0,1} for r<=3; all passed. Duplicates: none. poset-augmented-chain-prism needs finite posets; power-set-complex uses unrestricted tuples; lem-coef-extra-degeneracy-contraction is a simplicial extra degeneracy; lem-pc-s3 insertion homotopy is about sheaf Čech complexes; the lem-coef joins are infinity-categorical. No fixes, no tool_uses."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q136-0382ee7ad (reviewer sub-agent of L); spot-checked: PASS, no fixes. Re-split under the released stage-1 note of 2026-10-22 (keep_plan). The item statement and stmt_deps are byte-identical to the NN base. All 8 old step texts occur verbatim in the report. Old step 1 stays as item step 1 (elementary, cites def-weil-pbc-free-module, unique finite expansion). Old 2-4 go to lem-sfb-ordered-join-single-color-identities (d^2=0; dc_i+c_id=1-R_i in every degree, including the augmented, top and zero degrees). Old 5-6 go to lem-sfb-ordered-join-prefix-telescope (abstract graded groups: dR=Rd, dH+Hd=1-P_r with P_{i+1}=P_iR_i and no commutation, and P_r=0 when proper-support subgroups generate and R_i preserves them and kills where i is not in C). Old 7-8 go to lem-sfb-ordered-join-functorial-expansion (J(u) commutes with c_i and R_i with no injectivity; P_ic_i sigma is 0 or the uncollected sum over A of (-1)^{k_i+|A|} sigma_{i,A}). The three nodes carry comparable work, about 1.7k/1.2k/1.9k characters. None restates the item, there is no cycle, and the assembly is 2139 characters (steps 483/277/698/681). I checked every identity by hand. Step 3: for -1<=q<=r-2 symbols have q+1<r colors, so the color set is proper; T_i preserves color sets; H_q=S_q in the same order; S_{-2}=0 because J_{-2}=0. Step 4: composing in order and summing gives naturality of S, and only i=0 survives on the empty symbol, so S_{-1}[empty]=[(0,v_0)]. My own brute force (/tmp/q136chk) covered all basis symbols for r=1..4 with X_i={0,1,2}, and naturality for every family of maps drawn from four test maps on {0,1} (constants, identity, swap) for r<=3; all passed. Source: main-20261015 direct-images proof paragraph (3), read; it is the compactification argument, and all nodes honestly label the calculation an agent expansion. No SGA. The new nodes are statement-only and unsplit, with created.item = item, same_as [], searches recorded and LeanSearch honestly marked unavailable, and no doubled backslashes. Duplicates: rg -L over the DAG for ordered join, telescop and the identity patterns; the cochain rectangle nodes, the coef join nodes, the poset prism and extra-degeneracy contraction all differ, and the live Q129 sibling ordered-join-coset-comparison is a different statement. No tool_uses. Advisory: the new nodes lack lean_audit fields (preflight accepted them). Maintainer note: this is the third head, after bd7044/9d1705 both PASSed; it changes only the wording of step 3 and the summary. The earlier landings were refused only because the side completion was not promoted; please promote and land rather than re-dispatch."
  },
  "lean": {
   "module": "Sheaf.AlgebraicTopology.OrderedJoinPartialContraction",
   "declaration": "AlgebraicTopology.OrderedJoin.partialContraction",
   "declarations": [
-   "AlgebraicTopology.OrderedJoin.Face",
-   "AlgebraicTopology.OrderedJoin.Symbol",
-   "AlgebraicTopology.OrderedJoin.Chain",
-   "AlgebraicTopology.OrderedJoin.symbolTerm",
-   "AlgebraicTopology.OrderedJoin.erase",
-   "AlgebraicTopology.OrderedJoin.replaceColors",
-   "AlgebraicTopology.OrderedJoin.insert",
-   "AlgebraicTopology.OrderedJoin.positionSign",
-   "AlgebraicTopology.OrderedJoin.boundary",
-   "AlgebraicTopology.OrderedJoin.insertion",
-   "AlgebraicTopology.OrderedJoin.remainder",
-   "AlgebraicTopology.OrderedJoin.remainderPrefix",
-   "AlgebraicTopology.OrderedJoin.contraction",
-   "AlgebraicTopology.OrderedJoin.mapFace",
-   "AlgebraicTopology.OrderedJoin.chainMap",
-   "AlgebraicTopology.OrderedJoin.expansionRecipe",
    "AlgebraicTopology.OrderedJoin.partialContraction"
   ],
   "file": "lean/Sheaf/AlgebraicTopology/OrderedJoinPartialContraction.lean",
@@ -459,7 +417,7 @@
   "by": "NP",
   "date": "2026-10-21",
   "existing": false,
-  "note": "Face, Symbol, Chain and the explicit boundary, insertion, remainder, ordered prefix, contraction, vertex map and color-only expansion are the constructions specified in this node itself. Chain has the existing specified integer basis Finsupp.basisSingleOne; no additional notion or dependency interface is introduced. The two degree arguments select matrix components and avoid arithmetic type transports."
+  "note": "The theorem statement is unchanged. Its chain constructions have moved verbatim to Sheaf.AlgebraicTopology.OrderedJoinChains and are publicly reexported by this module; their attachment is def-sfb-ordered-join-chains. The theorem is proved from the complete single-color and functorial-expansion lemmas with direct ordered-prefix algebra."
  },
  "reviewed_lean": {
   "date": "2026-10-21",
@@ -468,5 +426,27 @@
   "group": "NP",
   "result": "pass",
   "note": "Only the lean field changed and its statement matches the file verbatim; stmt_dep def-weil-pbc-free-module is rendered by the free module Symbol →₀ ℤ with its single-element basis. Face/Symbol give the right J_q (empty face in degree -1, zero groups outside the range); boundary signs = zero-based colour position; insertion c_i, remainder R_i and the R_0∘…∘R_{i-1} prefix (rightmost first) match the node exactly. All five clauses present: d²=0 for all q, dS+Sd=id for -1≤q≤r-2, S_{-2}=0, naturality for arbitrary f into Y : Type v, and the expansion clause via expansionRecipe r C, checked against proof step 8 (sign (-1)^(k+|A|); replace and insert commute since i∉A). Edge cases r=1, top degree, infinite or non-injective cases fine. No hollow defs, only the theorem is sorry, docstrings have source place, blueprint tag and 8 steps; no duplicate in Mathlib or project. Advisory: FreeModule.Basic import unused. No compile run (no changes)."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-93fb1",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261025T071219-L-148254",
+  "kind": "interface",
+  "note": "independent cc review: the clone's item definitions vs the new OrderedJoinChains (byte-identical); partialContraction statement vs the clone (identical); the two prerequisite modules vs the clone (only the line-8 import changed); node proof fields vs the Lean proof; sandbox compile of the 4 delivered modules plus importers CosetComparison and FiniteIndexRectanglePrimitiveOperator (all OK); axioms clean"
  }
 }

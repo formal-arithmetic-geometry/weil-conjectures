@@ -1,0 +1,169 @@
+{
+ "id": "lem-pe-successive-reduction-constructibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-integral-criterion-reductions",
+   "place": "Second paragraph: one induction step, using the quotient-linear triangle and the unchanged cohomological interval.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Constructibility and a fixed interval in one successor reduction",
+ "statement": "Let $X$ be Noetherian, $E/\\mathbf Q_\\ell$ finite, and $K\\in D(X_{\\mathrm{proet}},\\mathcal O_E)$ with the continuous coefficients and derived reductions of [sk-def-sfb-pulled-back-coefficients, sk-def-pe-derived-completion]. Put $L_j=K\\otimes^{\\mathbf L}\\mathcal O_E/\\pi_E^{j+1}$ for $j\\ge0$. For any $n\\ge0$ and integers $a,b$, suppose $L_0$ and $L_n$ are bounded constructible in the finite-constant-model sense [sk-def-sfb-constructible], and both have zero cohomology in every degree $q<a$ or $q>b$. Then $L_{n+1}$ is bounded constructible and has zero cohomology in all those same degrees. There is no completeness or Tor-amplitude hypothesis on $K$, and no assumption $a\\le b$ is needed. Use the unbounded module-sheaf derived categories [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-prop-integral-criterion-reductions.proof.md",
+  "place": "Second paragraph: one induction step, using the quotient-linear triangle and the unchanged cohomological interval."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-pe-derived-completion",
+  "sk-def-sfb-constructible",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Pass to the completed integral ordinary presentation using the normalized finite reduction comparisons. Reuse finiteEncoding_constructible from Sheaf.Paper.IntegralCriterionReductions, rather than duplicating its arbitrary-encoding comparison: this is the existing finite coefficient model comparison for the selected encoding. It identifies constructibility at each finite level; derived_intervals preserves every specified vanishing degree.",
+   "uses": [
+    "lem-pe-integral-completion-presentation",
+    "lem-pe-finite-coefficient-model-comparison",
+    "def-weil-l-adic-coefficient-extension",
+    "det-pe-derived-nakayama-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-prop-integral-criterion-reductions.proof.md",
+    "place": "Second paragraph: one induction step, using the quotient-linear triangle and the unchanged cohomological interval."
+   }
+  },
+  {
+   "text": "Choose the simultaneous flat-term K-flat representative from the strict DVR reduction theorem. Its residue-kernel sequence has first term the residue reduction, middle term the successor reduction, and last term the preceding reduction. The completed projection is surjective on sections: lift a finite quotient section to a constant integral section and then to the completion. Full faithful scalar restriction therefore lifts this short exact sequence to complexes over the successor quotient. Restriction composition identifies the outer complexes with the appropriate restricted finite reductions.",
+   "uses": [
+    "lem-sf-strict-dvr-reduction-triangles",
+    "lem-sp-completed-integral-finite-quotient-hom-ext",
+    "lem-pe-successive-quotient-flat-tensor-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-prop-integral-criterion-reductions.proof.md",
+    "place": "Second paragraph: one induction step, using the quotient-linear triangle and the unchanged cohomological interval."
+   }
+  },
+  {
+   "text": "Localize the short exact sequence to a distinguished triangle over the successor coefficient ring. Finite scalar restriction preserves bounded constructibility and degreewise homology vanishing of both outer objects. Extension closure then gives bounded constructibility of the middle object.",
+   "uses": [
+    "lem-pe-finite-scalar-restriction-constructible",
+    "lem-weil-proetale-dbc-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-prop-integral-criterion-reductions.proof.md",
+    "place": "Second paragraph: one induction step, using the quotient-linear triangle and the unchanged cohomological interval."
+   }
+  },
+  {
+   "text": "At every degree outside the given interval, exactness of the triangle homology sequence and vanishing of both outer terms force the middle term to vanish. Transport constructibility and all these vanishings back through the normalized finite coefficient encodings. This also covers reversed intervals and the index-zero case.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact",
+    "lem-pe-finite-coefficient-model-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-prop-integral-criterion-reductions.proof.md",
+    "place": "Second paragraph: one induction step, using the quotient-linear triangle and the unchanged cohomological interval."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pe-integral-completion-presentation",
+  "lem-pe-finite-coefficient-model-comparison",
+  "def-weil-l-adic-coefficient-extension",
+  "det-pe-derived-nakayama-resolution",
+  "lem-sf-strict-dvr-reduction-triangles",
+  "lem-sp-completed-integral-finite-quotient-hom-ext",
+  "lem-pe-successive-quotient-flat-tensor-sequence",
+  "lem-pe-finite-scalar-restriction-constructible",
+  "lem-weil-proetale-dbc-triangulated",
+  "lem-sf-derived-homology-long-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-prop-integral-criterion-reductions.proof.md",
+  "place": "Second paragraph: one induction step, using the quotient-linear triangle and the unchanged cohomological interval. F8: residue-kernel orientation and lifting along fully faithful quotient restriction; returned duplicate comparison removed in favor of the existing finiteEncoding_constructible theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A quotient linear distinguished triangle shows a successor derived reduction has constructible cohomology in the same interval as the preceding reduction and the first reduction",
+   "results": "DerivedCategory.triangleOfSES and triangleOfSES_distinguished; ShortComplex.ShortExact.singleTriangle; general triangle machinery only.",
+   "date": "2026-10-23",
+   "verdict": "No exact match: no continuous finite-coefficient constructibility or interval assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Successive derived reductions modulo powers of a uniformizer preserve bounded constructible cohomology in the same interval",
+   "results": "PreTilt.exists_smodEq_untiltAux; AdicCompletion.transitionMap_comp_reduceModIdeal; unrelated completion identities.",
+   "date": "2026-10-23",
+   "verdict": "No exact match or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "triangleOfSES|HomologySequence.exact",
+   "results": "Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean and Mathlib/Algebra/Homology/DerivedCategory/SingleTriangle.lean; generic homology exactness and short-exact-sequence triangles.",
+   "date": "2026-10-23",
+   "verdict": "Reuse those general inputs for the coefficient-normalization and constructibility step; no duplicate successor lemma found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SuccessiveReductionConstructibility",
+  "date": "2026-10-24",
+  "group": "F8"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-integral-criterion",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SuccessiveReductionConstructibility",
+  "file": "lean/Sheaf/Paper/SuccessiveReductionConstructibility.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.successiveReduction_constructible_interval",
+  "statement": "theorem successiveReduction_constructible_interval (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (X : Scheme.{u}) [IsNoetherian X] (K : DerivedCategory (AdicCompletion.Modules l E X))\n    (n : ℕ) (a b : ℤ)\n    (hfirst : constantModelBoundedConstructible (DerivedNakayama.quotientRing l E 1) X\n      ((AdicCompletion.derivedReduction l E X 0).obj K))\n    (hprev : constantModelBoundedConstructible (DerivedNakayama.quotientRing l E (n + 1)) X\n      ((AdicCompletion.derivedReduction l E X n).obj K))\n    (hfirstBounds : ∀ q : ℤ, q < a ∨ b < q →\n      IsZero ((DerivedCategory.homologyFunctor _ q).obj\n        ((AdicCompletion.derivedReduction l E X 0).obj K)))\n    (hprevBounds : ∀ q : ℤ, q < a ∨ b < q →\n      IsZero ((DerivedCategory.homologyFunctor _ q).obj\n        ((AdicCompletion.derivedReduction l E X n).obj K))) :\n    constantModelBoundedConstructible (DerivedNakayama.quotientRing l E (n + 1 + 1)) X\n        ((AdicCompletion.derivedReduction l E X (n + 1)).obj K) ∧\n      ∀ q : ℤ, q < a ∨ b < q →\n        IsZero ((DerivedCategory.homologyFunctor _ q).obj\n          ((AdicCompletion.derivedReduction l E X (n + 1)).obj K))",
+  "branch": "sheaf-dag",
+  "by": "G7",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261024T185307-L-3500913",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261024T185307-L-3500913",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

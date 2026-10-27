@@ -1,0 +1,281 @@
+{
+ "id": "lem-trf-smooth-rational-point-completion",
+ "kind": "statement",
+ "title": "Completion at a rational point of an essentially smooth local map",
+ "statement": "Let $(R,\\mathfrak m,L)$ and $(S,\\mathfrak n,L)$ be nonzero Noetherian commutative local rings [def-weil-pbc-noetherian-ring], and let $R\\to S$ be a local homomorphism inducing the specified identity of residue fields $R/\\mathfrak m=S/\\mathfrak n=L$. Assume it is essentially smooth, that is, $S$ is a localization of a smooth $R$-algebra [def-weil-pbc-essentially-smooth-ring-map]. Set $s=\\dim_L(\\Omega_{S/R}\\otimes_SL)$, with Kähler differentials as in [def-weil-pbc-kahler-differentials]. Then $s$ is finite and there is an isomorphism of complete local $\\widehat R$-algebras\n$$\\widehat S\\simeq\\widehat R[[Z_1,\\ldots,Z_s]],$$\nwhere completions are at the maximal ideals [def-weil-pbc-adic-completion], power series use [def-weil-pbc-multivariate-power-series], and the maximal ideal on the right is $(\\mathfrak m\\widehat R,Z_1,\\ldots,Z_s)$. This isomorphism induces the identity on $L$ and is compatible with the given map $\\widehat R\\to\\widehat S$. In particular there is an isomorphism of graded $L$-algebras\n$$\\operatorname{gr}_{\\mathfrak n}S\\simeq(\\operatorname{gr}_{\\mathfrak m}R)[Z_1,\\ldots,Z_s],$$\ncompatible with the base graded map, with the variables of degree one and $\\operatorname{gr}_{\\mathfrak m}R=\\bigoplus_{q\\geq0}\\mathfrak m^q/\\mathfrak m^{q+1}$ [def-weil-pbc-associated-graded-ring].",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 054L (lemma-smooth-etale-over-affine-space), followed by More on Algebra, Tag 0AGX (more-algebra.tex, lemma-flat-unramified). The displayed completion and graded formulas are the rational-residue-point consequence of these lemmas, not the verbatim statement of either tag."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-essentially-smooth-ring-map",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-associated-graded-ring",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Choose a smooth algebra P whose localization is S. Contract the maximal ideal of S to a prime p of P and identify S as localization at p: elements outside p are units, and the original denominator submonoid is contained in that complement. Mathlib Algebra.IsSmoothAt.exists_isStandardEtale_mvPolynomial provides a polynomial chart on P[1/g] with g∉p. The localization map P[1/g]→S is formally etale, so composition gives an R-algebra map f:R[X_1,…,X_d]→S which is formally etale. This is the ring-level version of the normal-form step, with no scheme conversion needed.",
+   "uses": [
+    "def-weil-pbc-essentially-smooth-ring-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each chart coordinate choose a lift in R of its residue in L, using surjectivity R→R/m and the specified residue-field comparison. Precompose f with the polynomial translation X_i↦X_i−a_i, an explicitly invertible R-algebra map. The translated chart is still formally etale and sends every variable into n. Polynomial homomorphism extensionality and hres give rS(residue(f(p)))=rR(residue(constantCoeff(p))). Using the polynomial coefficient criterion at exponent one, its contracted ideal is Q=(m,X). The same residue surjectivity shows R[X]→S/n is onto.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-trf-polynomial-combined-ideal-coefficients"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Base-change the polynomial differential basis to S and transport it through the formally-etale differential equivalence. Base-change once more to the residue field of S. This supplies a basis indexed by Fin d, proving Module.Finite and finrank=d.",
+   "uses": [
+    "lem-trf-formally-etale-differentials-base-change",
+    "lem-weil-pbc-polynomial-ring-kahler-basis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the formally-etale infinitesimal-neighbourhood theorem to f and J=n. Its source ideal is Q by construction; its surjectivity hypothesis is the residue surjectivity just proved. It gives bijectivity of every positive power quotient map and the canonical associated-graded ring equivalence gS:gr_Q(R[X])→gr_n S. At exponent zero both quotients are the zero ring, hence their map is also bijective. Take inverse limits of these actual quotient maps and their inverses using AdicCompletion.liftRingHom. Compatibility with reductions is verified on polynomial representatives; coordinatewise extensionality proves that the two inverse-limit maps are inverse. This constructs eS:completion_Q(R[X])≃completion_n(S), with its evaluation formula at every n. Reuse AdicCompletion.equiv_of_powerQuotient_bijective from the shared completion-comparison module; no separate inverse-limit helper is declared here.",
+   "uses": [
+    "lem-sfb-augmented-etale-associated-graded",
+    "def-weil-pbc-adic-completion",
+    "lem-trf-completion-equiv-power-quotients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the polynomial-model completion theorem to obtain eP:completion_Q(R[X])≃completion_m(R)[[X]]. Set e=eS⁻¹ followed by eP. The evaluation formula for eS and the constants formula for eP prove the full base-completion compatibility. At level one choose a polynomial representative for eS⁻¹(x); the residue formula for eP and the centered-chart residue equality prove that e induces the specified identity on L.",
+   "uses": [
+    "lem-trf-polynomial-combined-completion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Mathlib AdicCompletion.LocalRing gives localness and maximal-ideal completeness of both maximal-ideal completions. The unit-constant-coefficient criterion for formal series gives localness of the power-series ring. Apply the combined series coefficient criterion at exponent one to identify its maximal ideal as (m completion_m(R),X); use AdicCompletion.maximalIdeal_eq_map. Every ring equivalence of local rings maps maximal ideal to maximal ideal, giving the required ideal equality for e. Transfer maximal-ideal completeness through e with IsAdicComplete.congr_ringEquiv. This also proves maximality of the displayed ideal.",
+   "uses": [
+    "lem-weil-pbc-power-series-combined-ideal-coefficients",
+    "lem-weil-pbc-local-completion-local-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the polynomial-model associated-graded equivalence gP:(gr_m R)[X]≃gr_Q(R[X]) and compose with gS. The gP formula on homogeneous constant representatives and the specified equality of gS with the canonical direct-sum map prove the exact base compatibility. The gP variable formula followed by the degree-one piece map of gS gives the required degree-one classes.",
+   "uses": [
+    "lem-trf-polynomial-combined-associated-graded",
+    "lem-sfb-augmented-etale-associated-graded"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-essentially-smooth-ring-map",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-trf-polynomial-combined-ideal-coefficients",
+  "lem-trf-formally-etale-differentials-base-change",
+  "lem-weil-pbc-polynomial-ring-kahler-basis",
+  "lem-sfb-augmented-etale-associated-graded",
+  "def-weil-pbc-adic-completion",
+  "lem-trf-polynomial-combined-completion",
+  "lem-weil-pbc-power-series-combined-ideal-coefficients",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-trf-polynomial-combined-associated-graded",
+  "lem-trf-completion-equiv-power-quotients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 054L ring-level normal form; Algebra Tag 0H1D for formally etale quotient comparison; explicit coefficient calculations from original Steps 6–9, proved in M6 polynomial-model modules. The shared inverse-limit comparison is proved once in Sheaf.RingTheory.CompletionEquivPowerQuotients and imported by both consumers (repair of cac493bc5a5)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "essentiallySmooth|smooth.*completion|completion.*smooth|smooth.*powerSeries",
+   "results": "{\"t\": \"2026-10-22T04:40:00Z\", \"tool\": \"grep\", \"query\": \"essentiallySmooth|smooth.*completion|completion.*smooth|smooth.*powerSeries\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/AdicCompletion.lean\", \"Mathlib/RingTheory/Smooth/AdicCompletion.lean\", \"Mathlib/RingTheory/Smooth/AdicCompletion.lean\", \"Mathlib/RingTheory/Smooth/Flat.lean\", \"Mathlib/RingTheory/Smooth/Flat.lean\"], \"digest\": \"d388376a17694089\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth-local standard presentations and formally smooth lifting into adic completions do not identify a smooth local completion with a power series algebra over the completed base. Read Smooth/AdicCompletion.lean lines 27--109; its lifting and section lemmas have no such conclusion. Second semantic phrasing also returned only smoothness definitions and local standard presentations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-smooth-rational-point-completion: completion of smooth local algebra at a rational residue point is a power series algebra over completed base",
+   "results": "{\"t\": \"2026-10-22T04:40:01Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-smooth-rational-point-completion: completion of smooth local algebra at a rational residue point is a power series algebra over completed base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.of_isLocalization_Away\", \"Algebra.FormallySmooth.exists_kerProj_comp_eq_id\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"Algebra.IsStandardSmoothOfRelativeDimension.localization_away\", \"RingHom.IsStandardSmoothOfRelativeDimension.algebraMap_isLocalizationAway\", \"Algebra.Smooth.formallySmooth\", \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"LaurentSeries.powerSeriesRingEquiv\"], \"digest\": \"737d4b1273bb215c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth-local standard presentations and formally smooth lifting into adic completions do not identify a smooth local completion with a power series algebra over the completed base. Read Smooth/AdicCompletion.lean lines 27--109; its lifting and section lemmas have no such conclusion. Second semantic phrasing also returned only smoothness definitions and local standard presentations."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Smooth, \"AdicCompletion\"",
+   "results": "{\"t\": \"2026-10-22T04:40:01Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Smooth, \\\"AdicCompletion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth-local standard presentations and formally smooth lifting into adic completions do not identify a smooth local completion with a power series algebra over the completed base. Read Smooth/AdicCompletion.lean lines 27--109; its lifting and section lemmas have no such conclusion. Second semantic phrasing also returned only smoothness definitions and local standard presentations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-smooth-rational-point-completion: an essentially smooth local homomorphism of Noetherian local rings inducing identical residue fields has completion a formal power series algebra",
+   "results": "{\"t\": \"2026-10-22T04:40:02Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-smooth-rational-point-completion: an essentially smooth local homomorphism of Noetherian local rings inducing identical residue fields has completion a formal power series algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsSmoothAt\", \"Algebra.IsStandardSmooth\", \"RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway\", \"RingHom.isStandardSmooth_holdsForLocalizationAway\", \"Algebra.Smooth\", \"Algebra.instSmoothOfIsStandardSmooth\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"RingHom.Smooth.locally_isStandardSmooth\"], \"digest\": \"c4f9df9232fc6d59\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth-local standard presentations and formally smooth lifting into adic completions do not identify a smooth local completion with a power series algebra over the completed base. Read Smooth/AdicCompletion.lean lines 27--109; its lifting and section lemmas have no such conclusion. Second semantic phrasing also returned only smoothness definitions and local standard presentations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-smooth-rational-point-completion: associated graded of smooth local ring map with equal residue fields is polynomial over tangent cone of base",
+   "results": "{\"t\": \"2026-10-22T04:40:03Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-smooth-rational-point-completion: associated graded of smooth local ring map with equal residue fields is polynomial over tangent cone of base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.IsStandardSmooth\", \"RingHom.Smooth.locally_isStandardSmooth\", \"RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway\", \"RingHom.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmooth\", \"Algebra.IsSmoothAt\", \"RingHom.IsStandardSmooth.toAlgebra\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\"], \"digest\": \"60094862b5e46fea\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth-local standard presentations and formally smooth lifting into adic completions do not identify a smooth local completion with a power series algebra over the completed base. Read Smooth/AdicCompletion.lean lines 27--109; its lifting and section lemmas have no such conclusion. Second semantic phrasing also returned only smoothness definitions and local standard presentations."
+  },
+  {
+   "tool": "grep",
+   "query": "(completion.*powerSeries|powerSeries.*completion|etale.*completion|completion.*etale)",
+   "results": "{\"t\": \"2026-10-22T05:24:30Z\", \"tool\": \"grep\", \"query\": \"(completion.*powerSeries|powerSeries.*completion|etale.*completion|completion.*etale)\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\"], \"digest\": \"6ae04c0072ec2e87\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth standard presentations and formally smooth lifts do not give this completion/graded assertion; MvPowerSeries.toAdicCompletionAlgEquiv concerns only the variable ideal, and LaurentSeries.powerSeriesRingEquiv concerns a one-variable field valuation completion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-smooth-rational-point-completion: smooth local algebra completion at a rational point is a power series ring and its associated graded is polynomial",
+   "results": "{\"t\": \"2026-10-22T05:24:31Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-smooth-rational-point-completion: smooth local algebra completion at a rational point is a power series ring and its associated graded is polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.of_isLocalization_Away\", \"Algebra.Smooth.finitePresentation\", \"RingHom.IsStandardSmoothOfRelativeDimension.algebraMap_isLocalizationAway\", \"LaurentSeries.powerSeriesRingEquiv\", \"Algebra.IsStandardSmoothOfRelativeDimension.localization_away\", \"LaurentSeries.powerSeries_ext_subring\", \"Algebra.FormallySmooth.exists_kerProj_comp_eq_id\", \"LaurentSeries.powerSeriesAlgEquiv\"], \"digest\": \"579acdb571b61af7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth standard presentations and formally smooth lifts do not give this completion/graded assertion; MvPowerSeries.toAdicCompletionAlgEquiv concerns only the variable ideal, and LaurentSeries.powerSeriesRingEquiv concerns a one-variable field valuation completion."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Smooth, \"AdicCompletion\"",
+   "results": "{\"t\": \"2026-10-22T05:24:31Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Smooth, \\\"AdicCompletion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth standard presentations and formally smooth lifts do not give this completion/graded assertion; MvPowerSeries.toAdicCompletionAlgEquiv concerns only the variable ideal, and LaurentSeries.powerSeriesRingEquiv concerns a one-variable field valuation completion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-smooth-rational-point-completion: tangent cone of a smooth local morphism with equal residue fields is polynomial over the tangent cone of the base",
+   "results": "{\"t\": \"2026-10-22T05:24:34Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-smooth-rational-point-completion: tangent cone of a smooth local morphism with equal residue fields is polynomial over the tangent cone of the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"RingHom.Smooth.locally_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"Algebra.smoothLocus\", \"Algebra.IsSmoothAt\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\"], \"digest\": \"330e7895a5178cb2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth standard presentations and formally smooth lifts do not give this completion/graded assertion; MvPowerSeries.toAdicCompletionAlgEquiv concerns only the variable ideal, and LaurentSeries.powerSeriesRingEquiv concerns a one-variable field valuation completion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-smooth-rational-point-completion: completion of an essentially smooth local map inducing an isomorphism of residue fields is a formal power series ring over the completed base",
+   "results": "{\"t\": \"2026-10-22T05:24:35Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-smooth-rational-point-completion: completion of an essentially smooth local map inducing an isomorphism of residue fields is a formal power series ring over the completed base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"RingHom.Smooth.locally_isStandardSmooth\", \"RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway\", \"RingHom.Smooth.ofLocalizationSpanTarget\", \"RingHom.isStandardSmooth_holdsForLocalizationAway\", \"PowerSeries.residueFieldOfPowerSeries\", \"Algebra.IsSmoothAt\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\"], \"digest\": \"bf42a7d27462c36e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth standard presentations and formally smooth lifts do not give this completion/graded assertion; MvPowerSeries.toAdicCompletionAlgEquiv concerns only the variable ideal, and LaurentSeries.powerSeriesRingEquiv concerns a one-variable field valuation completion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-jet-diagram-hilbert-control",
+  "date": "2026-10-22",
+  "group": "Q71"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Local Hilbert--Samuel presentations and their admissible transforms. Lower input in this split: Taylor modules, initial diagrams and finite local variation; Bierstone--Milman, Invent. Math. 128 (1997), 207--302, Theorem 3.17, Corollaries 3.19--3.20, Remarks 9.1, Lemma 9.3; Bierstone--Milman--Temkin, arXiv:0905.3580, sections 6.1 and 6.5. No Stacks tag states this package. Further input for Taylor modules and diagrams: Completion at a rational point of an essentially smooth local map.",
+   "via": [
+    "lem-trf-jet-diagram-hilbert-control",
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-smooth-rational-point-completion",
+  "worker": "stage1",
+  "summary": "Verified the statement without added hypotheses. Factor through an etale polynomial chart, centre its rational residue point, compute the differential rank, apply the existing flat-local completion isomorphism, and compute the polynomial quotient tower coefficientwise. The graded consequence and all base/residue compatibilities are explicit. Reused existing nodes only.",
+  "blueprint": "Supporting commutative algebra input on the inherited historical lem-trf-local-term-locality branch: completion at a rational residue point needed by lem-trf-jet-diagram-hilbert-control, retaining its inherited ancestor and via list. No change to the curve-zero unit route.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-essentially-smooth-ring-map",
+    "why": "Generic commutative-algebra/affine-geometry input for the etale polynomial chart and its completions; the curve-zero unit has no corresponding algebra statement and its local-term argument is not replaced."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Generic commutative-algebra/affine-geometry input for the etale polynomial chart and its completions; the curve-zero unit has no corresponding algebra statement and its local-term argument is not replaced."
+   },
+   {
+    "node": "sbc-thm-etale-local-normal-form",
+    "why": "Generic commutative-algebra/affine-geometry input for the etale polynomial chart and its completions; the curve-zero unit has no corresponding algebra statement and its local-term argument is not replaced."
+   },
+   {
+    "node": "pqf-def-locnoeth",
+    "why": "Generic commutative-algebra/affine-geometry input for the etale polynomial chart and its completions; the curve-zero unit has no corresponding algebra statement and its local-term argument is not replaced."
+   },
+   {
+    "node": "lem-weil-pbc-flat-local-completion-iso",
+    "why": "Generic commutative-algebra/affine-geometry input for the etale polynomial chart and its completions; the curve-zero unit has no corresponding algebra statement and its local-term argument is not replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-essentially-smooth-ring-map"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-8c641a6f4",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-8c641a6f4 (reviewer sub-agent of L); spot-checked: I read all nine steps of the item and every cited statement. The statement is byte-identical to the base (unsplit) version; the only stmt_dep change is the added mv-polynomial def, needed for (gr R)[Z]. There are no new nodes. Step 1 uses the 054L node at p=n∩A; the base neighbourhood is all of Spec R because the map is local. Step 2 centers coordinates with lifts and uses the specified residue identity, so b∩C=Q=(m,Z). Step 3 uses 02GJ to get the 0H93 hypotheses, then 00RX and 00RT to get Ω_{S/R}=S^d, so s=d. Step 4 gets T Noetherian from 01T6, the locnoeth def and 00FN; flatness of T→S from 00HT(2); and QS=n from 00U4(1). Step 5 applies 0AGX with every hypothesis checked; its specified coordinatewise φ^ gives the R̂-compatibility. In step 6 I rechecked that the Z^α-coefficient ideal of Q^N is m^{max(N-|α|,0)}, and the geometric-series inverse shows that localizing at Q does not change C/Q^N. In step 7 the reindexed inverse limit is R̂[[Z]] and convolution is compatible. Step 8 shows the maximal ideal is (mR̂,Z) using 05GG, including d=0. In step 9 I recomputed Q^r/Q^{r+1}=⊕_{|α|≤r} gr^{r-|α|}R·Z^α. I tested s=0 (exactly 0AGX), R=L, nonreduced R and mixed characteristic. Only Stacks is cited, never SGA. Neither the item nor any cited node is in route-pivot-dropped or HUMAN.md. The DAG search found no duplicate: lem-trf-smooth-local-tangent-cone-extension is Q-only and graded-only, and the separable-closed-point presentation nodes are over a field. The 5 off-unit tool_uses are generic algebra and I accept them."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SmoothRationalPointCompletion",
+  "declaration": "Algebra.essentiallySmooth_rationalPoint_completion",
+  "file": "lean/Sheaf/RingTheory/SmoothRationalPointCompletion.lean",
+  "statement": "theorem essentiallySmooth_rationalPoint_completion (R : Type u) (S : Type v) (L : Type w) [CommRing R] [CommRing S] [Field L] [IsLocalRing R] [IsLocalRing S] [IsNoetherianRing R] [IsNoetherianRing S] [Algebra R S] [IsLocalHom (algebraMap R S)] (rR : ResidueField R ≃+* L) (rS : ResidueField S ≃+* L) (hres : ∀ a : R, rS (residue S (algebraMap R S a)) = rR (residue R a)) (hsmooth : EssentiallySmooth R S) : Module.Finite (ResidueField S) ((ResidueField S) ⊗[S] KaehlerDifferential R S) ∧ ∃ s : ℕ, Module.finrank (ResidueField S) ((ResidueField S) ⊗[S] KaehlerDifferential R S) = s ∧ ∃ e : AdicCompletion (maximalIdeal S) S ≃+* MvPowerSeries (Fin s) (AdicCompletion (maximalIdeal R) R), (∀ (n : ℕ) (x : AdicCompletion (maximalIdeal R) R) (a : R), AdicCompletion.evalₐ (maximalIdeal R) n x = Ideal.Quotient.mk (maximalIdeal R ^ n) a → AdicCompletion.evalₐ (maximalIdeal S) n (e.symm (MvPowerSeries.C x)) = Ideal.Quotient.mk (maximalIdeal S ^ n) (algebraMap R S a)) ∧ (∀ x : AdicCompletion (maximalIdeal S) S, rR (AdicCompletion.evalOneₐ (maximalIdeal R) (MvPowerSeries.constantCoeff (e x))) = rS (AdicCompletion.evalOneₐ (maximalIdeal S) x)) ∧ IsLocalRing (AdicCompletion (maximalIdeal S) S) ∧ IsLocalRing (MvPowerSeries (Fin s) (AdicCompletion (maximalIdeal R) R)) ∧ IsAdicComplete ((maximalIdeal S).map (algebraMap S (AdicCompletion (maximalIdeal S) S))) (AdicCompletion (maximalIdeal S) S) ∧ IsAdicComplete ((maximalIdeal R).map ((MvPowerSeries.C (σ := Fin s)).comp (algebraMap R (AdicCompletion (maximalIdeal R) R))) ⊔ Ideal.span (Set.range (MvPowerSeries.X (σ := Fin s) (R := AdicCompletion (maximalIdeal R) R)))) (MvPowerSeries (Fin s) (AdicCompletion (maximalIdeal R) R)) ∧ ((maximalIdeal R).map ((MvPowerSeries.C (σ := Fin s)).comp (algebraMap R (AdicCompletion (maximalIdeal R) R))) ⊔ Ideal.span (Set.range (MvPowerSeries.X (σ := Fin s) (R := AdicCompletion (maximalIdeal R) R)))).IsMaximal ∧ Ideal.map e.toRingHom ((maximalIdeal S).map (algebraMap S (AdicCompletion (maximalIdeal S) S))) = (maximalIdeal R).map ((MvPowerSeries.C (σ := Fin s)).comp (algebraMap R (AdicCompletion (maximalIdeal R) R))) ⊔ Ideal.span (Set.range (MvPowerSeries.X (σ := Fin s) (R := AdicCompletion (maximalIdeal R) R))) ∧ ∃ g : MvPolynomial (Fin s) (Ideal.associatedGraded (maximalIdeal R)) ≃+* Ideal.associatedGraded (maximalIdeal S), (∀ (n : ℕ) (a : R) (ha : a ∈ maximalIdeal R ^ n) (hb : algebraMap R S a ∈ maximalIdeal S ^ n), g (MvPolynomial.C (DirectSum.of (Ideal.associatedGradedPiece (maximalIdeal R)) n (Submodule.Quotient.mk (⟨a, ha⟩ : (maximalIdeal R ^ n : Ideal R))))) = DirectSum.of (Ideal.associatedGradedPiece (maximalIdeal S)) n (Submodule.Quotient.mk (⟨algebraMap R S a, hb⟩ : (maximalIdeal S ^ n : Ideal S)))) ∧ ∀ i : Fin s, ∃ z : Ideal.associatedGradedPiece (maximalIdeal S) 1, g (MvPolynomial.X i) = DirectSum.of (Ideal.associatedGradedPiece (maximalIdeal S)) 1 z",
+  "branch": "sheaf-dag",
+  "by": "Q16",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-34696f075",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Re-delivery after the RETURN of ba22da405e3e (H2/§1(A): theorem node lem-sfb-augmented-etale-associated-graded cited only for the plain def Ideal.associatedGradedMap). Follows that review's permitted alternative: the import and that stmt_dep are dropped, and base graded compatibility is stated on representatives: for all n, a, ha : a ∈ 𝔪^n, hb, g (C (of n [a])) = of n [algebraMap R S a]. Representatives generate gr additively, so this pins g∘C to the canonical map. hb is always inhabited because the map is local; degree 0 with hres gives the identity on L. Module diff vs the prior head is only the import, a docstring sentence and this clause. stmt_deps are the 7 def nodes, equal to the live node; non-lean fields byte-identical to live; no live lean record or module. lean.statement verbatim; universes u v w bound; only sorry; source/blueprint docstrings and all 9 proof steps; all 15 imports exist; edge cases s=0, field base, nonreduced base, mixed characteristic, n=0 covered. All other clauses re-checked against the dep records. Advisory: the Second reading section still claims no independent reading. No compile, since no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261023T231843-L-3652173",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

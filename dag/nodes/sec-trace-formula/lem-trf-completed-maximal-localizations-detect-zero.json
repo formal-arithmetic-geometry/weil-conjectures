@@ -1,0 +1,293 @@
+{
+ "id": "lem-trf-completed-maximal-localizations-detect-zero",
+ "kind": "statement",
+ "title": "Completed maximal localizations are complete local flat tests for zero derived objects",
+ "statement": "Let $R$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], and work in its ordinary module derived category $D(R)$ [def-weil-abstract-derived-category]. For each maximal ideal $\\mathfrak m\\subset R$, put $R_{\\mathfrak m}=(R\\setminus\\mathfrak m)^{-1}R$ [def-weil-pbc-module-localization] and\n$$B_{\\mathfrak m}=\\varprojlim_{n\\geq1} R_{\\mathfrak m}/(\\mathfrak mR_{\\mathfrak m})^n,$$\nthe maximal-ideal-adic completion [def-weil-pbc-adic-completion] of $R_{\\mathfrak m}$. Then $R_{\\mathfrak m}$ is a Noetherian local ring with maximal ideal $\\mathfrak mR_{\\mathfrak m}$; $B_{\\mathfrak m}$ is a nonzero Noetherian local ring with maximal ideal $(\\mathfrak mR_{\\mathfrak m})B_{\\mathfrak m}$, complete for that ideal. The canonical map $R_{\\mathfrak m}\\to B_{\\mathfrak m}$ is faithfully flat [def-weil-pbc-faithfully-flat-ring-map], and both $R\\to R_{\\mathfrak m}$ and $R\\to B_{\\mathfrak m}$ are flat [def-weil-pbc-flat-ring-map]. Using derived extension of scalars [lem-pur-derived-change-of-rings], for every $K\\in D(R)$ one has\n$$K=0\\quad\\Longleftrightarrow\\quad K\\otimes_R^{\\mathbf L}B_{\\mathfrak m}=0\\text{ for every maximal ideal }\\mathfrak m\\subset R.$$\nNo boundedness or finite-generation assumption on $K$ is imposed; the assertion includes the zero ring, for which there are no maximal ideals.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent derived-category corollary of Tag 00MC, lemma-completion-faithfully-flat, and Tag 00HN, lemma-characterize-zero-local, parts (2) and (6), with the Noetherian local completion properties. The complete localization and completion argument is preserved in report.md (returned proof steps 5--7)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-weil-pbc-flat-ring-map",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof": [
+  {
+   "text": "Fix a maximal ideal $\\mathfrak m$ and write $A=R_{\\mathfrak m}$ and $\\mathfrak n=\\mathfrak mA$. A maximal ideal is prime: if $ab\\in\\mathfrak m$ and $a\\notin\\mathfrak m$, write $1=u+ra$ with $u\\in\\mathfrak m$ and deduce $b\\in\\mathfrak m$. Thus [def-weil-pbc-localization-at-prime] identifies $A$ as a local ring with maximal ideal $\\mathfrak n$. The complement of $\\mathfrak m$ is multiplicative. Apply [lem-weil-pbc-localization-noetherian] and [lem-weil-pbc-localization-flat] to this localization: $A$ is Noetherian and $R\\to A$ is flat. Since $\\mathfrak n$ is a proper maximal ideal, $A/\\mathfrak n$ is a nonzero field.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-localization-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00FN (lemma-Noetherian-permanence), 00HT (lemma-flat-localization), and 07BH (section-local-rings)."
+   }
+  },
+  {
+   "text": "Put $B=\\varprojlim_n A/\\mathfrak n^n$. By [lem-weil-pbc-adic-completion-noetherian], $B$ is Noetherian. By [def-weil-pbc-noetherian-ring], $\\mathfrak n$ is finitely generated, so [lem-weil-pbc-adic-completion-mod-ideal] says $B$ is $\\mathfrak nB$-adically complete. By [lem-weil-pbc-local-completion-local-ring], $B$ is local with maximal ideal $\\mathfrak nB$ and $B/\\mathfrak nB\\cong A/\\mathfrak n$. This last ring is nonzero, hence $B$ is nonzero. These statements give all the requested completion properties, with exactly the extended maximal ideal appearing in the item.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-noetherian",
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-local-completion-local-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 0316 (lemma-completion-Noetherian-Noetherian), 05GG (lemma-hathat-finitely-generated) and 05GI (lemma-radical-completion)."
+   }
+  },
+  {
+   "text": "The ring $A$ is Noetherian and local, so [lem-weil-pbc-local-completion-faithfully-flat] gives faithful flatness of the canonical $A\\to B$, and in particular flatness. Applying [lem-pc-module-flat-transitive] to the flat $R$-algebra $A$ and the flat $A$-module $B$ proves that $R\\to B$ is flat. This does not assert that $R\\to B$ is faithfully flat for one chosen maximal ideal.",
+   "uses": [
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "lem-pc-module-flat-transitive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00MC (lemma-completion-faithfully-flat) and 00HC (lemma-composition-flat)."
+   }
+  },
+  {
+   "text": "For any flat $R$-algebra $S$, [lem-weil-pbc-flat-tensor-exact] makes $F_S=(-)\\otimes_R S$ an exact additive functor on modules. By [lem-weil-pbc-exact-functor-derived-factorization] its termwise functor descends to derived categories; by [lem-weil-pbc-exact-functor-derived-functor] this descent is also its total left derived functor. The extension of scalars specified by [lem-pur-derived-change-of-rings] is that left derived functor (ordinary modules are sheaves on the one-object site with only the maximal covering sieve), so it is computed termwise on any representative complex $C$ of $K$. Apply [lem-weil-pbc-exact-functor-complex-cohomology] to $F_S$ to obtain $H^q(K\\otimes_R^{\\mathbf L}S)\\cong H^q(K)\\otimes_R S$ for every integer $q$. No boundedness enters either cited exact-functor result.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor), with Homology Tag 010N (lemma-exact-functor) and Algebra Tag 00HD (lemma-flat)."
+   }
+  },
+  {
+   "text": "If $K=0$, its derived scalar extensions are zero: the derived extension functor is additive by [lem-pur-derived-change-of-rings], hence carries a zero object to a zero object. Conversely assume all the displayed extensions are zero, and fix $q$. Put $M=H^q(K)$. Step 4 with $S=B$ gives $M\\otimes_R B=0$ for each maximal ideal. Put $N=M\\otimes_R A$. There is an isomorphism $N\\otimes_A B\\cong M\\otimes_R B$, given by $(x\\otimes a)\\otimes b\\mapsto x\\otimes ab$, with inverse $x\\otimes b\\mapsto(x\\otimes1)\\otimes b$; the balancing relations verify both composites on pure tensors. Commute the two factors over $A$ and apply [lem-sc-faithfully-flat-tensor-zero] to the faithfully flat $A$-module $B$ from step 3. It follows that $M\\otimes_R A=0$ for every maximal ideal.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-sc-faithfully-flat-tensor-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00MC (lemma-completion-faithfully-flat) and 00HP (lemma-ff), followed by the elementary tensor balancing identifications."
+   }
+  },
+  {
+   "text": "Write $S=R\\setminus\\mathfrak m$. Identify $M\\otimes_R S^{-1}R$ with $S^{-1}M$ by $x\\otimes(r/s)\\mapsto rx/s$, inverse $x/s\\mapsto x\\otimes(1/s)$. The fraction relation and tensor balancing verify these inverse maps: a relation $t(s\\prime x-sy)=0$ becomes zero after multiplication by the unit $tss\\prime$, and the two composites send a fraction or pure tensor to itself. Thus step 5 gives $M_{\\mathfrak m}=0$ for every maximal ideal. If $0\\ne x\\in M$, its annihilator $I=\\{r\\in R:rx=0\\}$ is proper, so [lem-weil-pbc-proper-ideal-contained-in-maximal] supplies a maximal $\\mathfrak m$ containing $I$. But $x/1=0$ in $M_{\\mathfrak m}$ implies $sx=0$ for some $s\\notin\\mathfrak m$ by [def-weil-pbc-module-localization], contradicting $s\\in I$. Hence $M=0$. This is the elementwise argument of Tag 00HN(1)--(2), with no finite-generation hypothesis on $M$.",
+   "uses": [
+    "lem-weil-pbc-proper-ideal-contained-in-maximal",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HN (lemma-characterize-zero-local), proof of (1)--(2), using Tag 00E0 (lemma-Zariski-topology)."
+   }
+  },
+  {
+   "text": "Step 6 holds for every $q$, so all $H^q(K)$ vanish. By [def-weil-abstract-derived-category], a representative $C$ then has the quasi-isomorphism $0\\to C$, which becomes an isomorphism after localization; thus $K=0$. The reverse implication on cohomology also follows because each $H^q$ is a functor factoring through this localization. If $R=0$, every unital $R$-module is zero since $x=1x=0x=0$; consequently every complex and derived object is zero. There are no proper maximal ideals, so the right-hand condition is vacuous and the equivalence still holds.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RU (definition-derived-category), using the definition of quasi-isomorphism; zero-ring case checked directly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-pc-module-flat-transitive",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-sc-faithfully-flat-tensor-zero",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
+  "def-weil-pbc-module-localization",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Derived-category assembly of Tags 00MC and 00HN(1)--(2), with completion properties 0316, 05GG, 05GI and exact scalar extension via derived.tex Tag 015F."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A complex of modules over a Noetherian ring is zero if its derived tensor product with every completed maximal localization is zero",
+   "results": "8 hits; top=['AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian', 'AdicCompletion.tensor_map_id_left_injective_of_injective', 'Module.free_of_lTensor_residueField_injective', 'AdicCompletion.ofTensorProductEquivOfFiniteNoetherian', 'AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply', 'AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian', 'TensorProduct.forall_vanishesTrivially_iff_forall_fg_rTensor_injective', 'AdicCompletion.map_exact']; note=; digest=ac06016f7b1794d2; directory=Mathlib/",
+   "date": "2026-10-22",
+   "verdict": "no match: these are ordinary module completion/localization/flatness results, not the joint derived zero-detection assertion with complete-local test rings"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed local rings at all maximal ideals jointly detect acyclic complexes over a Noetherian ring",
+   "results": "0 hits; top=[]; note=service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; digest=4f53cda18c2baa0c; directory=Mathlib/",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FaithfullyFlat",
+   "results": "12 hits; top=['Module.FaithfullyFlat', 'Module.FaithfullyFlat.self', 'Module.FaithfullyFlat.toFlat', 'Module.FaithfullyFlat.instOfNontrivialOfFree', 'Module.FaithfullyFlat.finsupp', 'Module.FaithfullyFlat.lTensor_nontrivial', 'Module.FaithfullyFlat.lTensor_reflects_triviality', 'Module.FaithfullyFlat.rTensor_nontrivial']; note=; digest=098c1c75a9a357fe; directory=Mathlib/",
+   "date": "2026-10-22",
+   "verdict": "no match: these are ordinary module completion/localization/flatness results, not the joint derived zero-detection assertion with complete-local test rings"
+  },
+  {
+   "tool": "grep",
+   "query": "(AdicCompletion|adicCompletion).*(FaithfullyFlat|faithfullyFlat|IsLocalRing)|localization.*(isZero|subsingleton)",
+   "results": "25 hits; top=['Mathlib/RingTheory/Spectrum/Prime/Topology.lean', 'Mathlib/RingTheory/LocalProperties/Submodule.lean', 'Mathlib/RingTheory/Localization/FractionRing.lean', 'Mathlib/RingTheory/Localization/AtPrime/Basic.lean', 'Mathlib/RingTheory/Localization/AtPrime/Basic.lean', 'Mathlib/RingTheory/AdicCompletion/LocalRing.lean', 'Mathlib/RingTheory/AdicCompletion/LocalRing.lean', 'Mathlib/RingTheory/AdicCompletion/LocalRing.lean']; note=; digest=36682d8d4fe3c01c; directory=Mathlib/",
+   "date": "2026-10-22",
+   "verdict": "no match: these are ordinary module completion/localization/flatness results, not the joint derived zero-detection assertion with complete-local test rings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Zero cohomology is detected after localizing at maximal ideals and faithfully flat adic completion",
+   "results": "8 hits; top=['Module.flat_of_isLocalized_maximal', 'Module.flat_of_localized_maximal', 'Module.FaithfullyFlat.of_flat_of_isLocalHom', 'Module.faithfullyFlat_iff', 'Algebra.Extension.cotangentComplex_injective_iff', 'Algebra.FormallySmooth.iff_injective_lTensor_residueField', 'Algebra.FormallySmooth.kerCotangentToTensor_injective_iff', 'AdicCompletion.flat_of_isNoetherian']; note=; digest=ac974a2cbf601430; directory=Mathlib/",
+   "date": "2026-10-22",
+   "verdict": "no match: these are ordinary module completion/localization/flatness results, not the joint derived zero-detection assertion with complete-local test rings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex of modules over a Noetherian ring is zero if its derived tensor product with every completed maximal localization is zero",
+   "results": "8 hits; top=['exact_of_isLocalized_maximal', 'AdicCompletion.tensor_map_id_left_injective_of_injective', 'AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian', 'exact_of_localized_maximal', 'AdicCompletion.map_exact', 'AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian', 'AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply', 'Module.free_of_lTensor_residueField_injective']; note=; digest=0fbcad21065f9a3a; directory=Mathlib/",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern ordinary module localization, exactness or completion; none states all the complete-local test-ring properties together with joint zero detection for arbitrary unbounded derived objects"
+  },
+  {
+   "tool": "grep",
+   "query": "(AdicCompletion|adicCompletion).*(FaithfullyFlat|faithfullyFlat|IsLocalRing)|localization.*(isZero|subsingleton)",
+   "results": "25 hits; top=['Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean', 'Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean', 'Mathlib/AlgebraicGeometry/Properties.lean', 'Mathlib/RingTheory/LocalProperties/Submodule.lean', 'Mathlib/RingTheory/Spectrum/Prime/Topology.lean', 'Mathlib/RingTheory/Localization/FractionRing.lean', 'Mathlib/RingTheory/Localization/AtPrime/Basic.lean', 'Mathlib/RingTheory/Localization/AtPrime/Basic.lean']; note=; digest=670f26cea98feeac; directory=Mathlib/",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern ordinary module localization, exactness or completion; none states all the complete-local test-ring properties together with joint zero detection for arbitrary unbounded derived objects"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed local rings at all maximal ideals jointly detect acyclic complexes over a Noetherian ring",
+   "results": "8 hits; top=['exact_of_isLocalized_maximal', 'Submodule.fg_of_localized_maximal', 'IsNoetherianRing.of_isLocalization_maximal', 'isLocalRing_of_isAdicComplete_maximal', 'OfLocalizationMaximal', 'Module.Finite.of_localized_maximal', 'HomologicalComplex.acyclic_iff', 'HomologicalComplex.Acyclic']; note=; digest=da654e26080d673f; directory=Mathlib/",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern ordinary module localization, exactness or completion; none states all the complete-local test-ring properties together with joint zero detection for arbitrary unbounded derived objects"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FaithfullyFlat",
+   "results": "12 hits; top=['Module.FaithfullyFlat', 'Module.FaithfullyFlat.self', 'Module.FaithfullyFlat.toFlat', 'Module.FaithfullyFlat.instOfNontrivialOfFree', 'Module.FaithfullyFlat.finsupp', 'Module.FaithfullyFlat.lTensor_nontrivial', 'Module.FaithfullyFlat.lTensor_reflects_triviality', 'Module.FaithfullyFlat.rTensor_nontrivial']; note=; digest=098c1c75a9a357fe; directory=Mathlib/",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern ordinary module localization, exactness or completion; none states all the complete-local test-ring properties together with joint zero detection for arbitrary unbounded derived objects"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Zero cohomology is detected after localizing at maximal ideals and faithfully flat adic completion",
+   "results": "8 hits; top=['Module.flat_of_isLocalized_maximal', 'exact_of_isLocalized_maximal', 'injective_of_isLocalized_maximal', 'injective_of_localized_maximal', 'AdicCompletion.flat_of_isNoetherian', 'Module.flat_of_localized_maximal', 'Module.faithfullyFlat_iff', 'Algebra.Extension.cotangentComplex_injective_iff']; note=; digest=bb48102cfc756f19; directory=Mathlib/",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern ordinary module localization, exactness or completion; none states all the complete-local test-ring properties together with joint zero detection for arbitrary unbounded derived objects"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-semidualizing-rhom-conservative",
+  "date": "2026-10-22",
+  "group": "Q38"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Derived Hom from a semidualizing complex detects bounded coherent isomorphisms. Re-split component: Completed maximal localizations are complete local flat tests for zero derived objects.",
+   "via": [
+    "lem-trf-semidualizing-rhom-conservative",
+    "lem-trf-algebraic-relative-dualizing-isomorphism",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-completed-maximal-localizations-detect-zero",
+  "worker": "stage1",
+  "summary": "NB checked the complete-local flat test rings and unbounded derived zero detection. Reused existing localization, completion, faithful-flatness and exact-functor nodes; wrote tensor identifications, maximal-annihilator detection and the zero-ring case explicitly. Statement retained; no new nodes. Sources and exact citation quotations are audited in report.md and citations.json.",
+  "blueprint": "The inherited ancestor lem-trf-local-term-locality, via the semidualizing-RHom-conservativity auxiliary branch recorded in blueprint.from, needs these completed-local tests. Steps 1--3 construct those tests and steps 4--7 prove their joint detection. The current latest blueprint node was read; it has no separate statement of this commutative-algebra auxiliary.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Generic commutative-algebra or exact-derived-functor input used with its stated hypotheses; this unit supplies no replacement for this black box. It supports the existing semidualizing-detection auxiliary branch and does not replace a geometric step of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic commutative-algebra or exact-derived-functor input used with its stated hypotheses; this unit supplies no replacement for this black box. It supports the existing semidualizing-detection auxiliary branch and does not replace a geometric step of the unit."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic commutative-algebra or exact-derived-functor input used with its stated hypotheses; this unit supplies no replacement for this black box. It supports the existing semidualizing-detection auxiliary branch and does not replace a geometric step of the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NB-9e4c14d1f",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-9e4c14d1f (reviewer sub-agent of L); spot-checked: S1 split with no new nodes; statement and stmt_deps unchanged. Checked all 7 steps against the cited statements and Stacks sources: 00HN(1)-(2) proof at algebra.tex l.4051, 00MC l.22977, 05GI, derived 015F; tags 0316/05GG/00HC/00HP/00HT/00FN map to the labels the steps name. Step 1: m is prime, so R_m is local (def-localization-at-prime), Noetherian (00FN node) and flat over R (00HT node). Step 2: completion is Noetherian; n is finitely generated, so B is nB-adically complete; B is local with B/nB=A/n nonzero. Step 3: A->B faithfully flat by the local-completion leaf, and R->B flat by Module.Flat.trans; no faithful flatness of R->B is claimed. Step 4: S=B is flat, so -⊗S is exact; the factorization and derived-functor nodes agree with lem-pur-derived-change-of-rings on the one-object site (also directly via K-flat resolutions); exact-functor cohomology gives H^q(K⊗^L B)=H^q(K)⊗B with no boundedness. Step 5: the associativity iso is written inline, then lem-sc-faithfully-flat-tensor-zero over A gives M⊗A=0. Step 6: elementary 00HN annihilator argument with proper-ideal-in-maximal; acceptable as elementary. Step 7: 0->C is a quasi-isomorphism, so K=0; zero ring handled. Edge cases R=0, a field, Z with Q and Q/Z, a single prime (not detecting, as expected), unbounded K: all consistent. No duplicate found in dag/nodes. Tool_uses adic-completion-noetherian, exact-functor-derived-functor and pur-derived-change-of-rings are generic black boxes, accepted. Maintainer note: the item's inherited source.place still names 00HN parts (2),(6) and points to another delivery's report.md; proof_origin and the step sources are correct."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CompletedMaximalLocalizationsDetectZero",
+  "declaration": "ModuleCat.completedMaximalLocalizations_detect_zero",
+  "file": "lean/Sheaf/RingTheory/CompletedMaximalLocalizationsDetectZero.lean",
+  "statement": "theorem completedMaximalLocalizations_detect_zero (R : Type u) [CommRing R] [IsNoetherianRing R] : (∀ (m : Ideal R) [m.IsMaximal], IsNoetherianRing (Localization.AtPrime m) ∧ IsLocalRing (Localization.AtPrime m) ∧ (m.map (algebraMap R (Localization.AtPrime m))).IsMaximal ∧ Nontrivial (AdicCompletion (m.map (algebraMap R (Localization.AtPrime m))) (Localization.AtPrime m)) ∧ IsNoetherianRing (AdicCompletion (m.map (algebraMap R (Localization.AtPrime m))) (Localization.AtPrime m)) ∧ IsLocalRing (AdicCompletion (m.map (algebraMap R (Localization.AtPrime m))) (Localization.AtPrime m)) ∧ ((m.map (algebraMap R (Localization.AtPrime m))).map (algebraMap (Localization.AtPrime m) (AdicCompletion (m.map (algebraMap R (Localization.AtPrime m))) (Localization.AtPrime m)))).IsMaximal ∧ IsAdicComplete ((m.map (algebraMap R (Localization.AtPrime m))).map (algebraMap (Localization.AtPrime m) (AdicCompletion (m.map (algebraMap R (Localization.AtPrime m))) (Localization.AtPrime m)))) (AdicCompletion (m.map (algebraMap R (Localization.AtPrime m))) (Localization.AtPrime m)) ∧ Module.FaithfullyFlat (Localization.AtPrime m) (AdicCompletion (m.map (algebraMap R (Localization.AtPrime m))) (Localization.AtPrime m)) ∧ Module.Flat R (Localization.AtPrime m) ∧ Module.Flat R (AdicCompletion (m.map (algebraMap R (Localization.AtPrime m))) (Localization.AtPrime m))) ∧ (∀ K : DerivedCategory (ModuleCat.{u} R), IsZero K ↔ ∀ (m : Ideal R) [m.IsMaximal], IsZero ((ordinaryDerivedExtendScalars (algebraMap R (AdicCompletion (m.map (algebraMap R (Localization.AtPrime m))) (Localization.AtPrime m)))).obj K))",
+  "branch": "sheaf-dag",
+  "by": "NF",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1cd9181e2",
+  "group": "NF",
+  "result": "pass",
+  "note": "Only the lean field is added; lean.statement matches the file signature exactly; proof is sorry; no new definitions. Clause check: R CommRing+IsNoetherianRing with no Nontrivial; Rₘ=Localization.AtPrime m (same OreLocalization type as the recorded LocalizedModule); Rₘ Noetherian, local, mRₘ maximal; Bₘ=AdicCompletion(mRₘ)Rₘ nonzero, Noetherian, local, (mRₘ)Bₘ maximal, IsAdicComplete for it; FaithfullyFlat Rₘ Bₘ; Flat R Rₘ and Flat R Bₘ through the canonical algebra instances; ∀K, IsZero K ↔ ∀ maximal m, IsZero(ordinaryDerivedExtendScalars(algebraMap R Bₘ) K), where the chosen functor is unique up to isomorphism and IsZero does not depend on the choice. Edge cases zero ring, field, ℤ and universe u are fine. No duplicate and no other delivery of this item; the report has Worker report and Second reading by NF. Not recompiled since no file changed; the worker reports a clean compile. Maintainer note: the inherited source.place 00HN (2),(6) wording was already flagged at the stage-1 landing."
+ }
+}

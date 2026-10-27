@@ -1,0 +1,278 @@
+{
+ "id": "lem-pe-partition-restriction-ind-zariski",
+ "kind": "statement",
+ "title": "Coherent partition restriction diagram and its ind-Zariski presentation",
+ "statement": "Let $R$ be a commutative ring, $P,S$ profinite spaces (compact Hausdorff and totally disconnected), and $g:\\operatorname{Spec}R\\to P$ and $f:S\\to P$ continuous maps [def-weil-affine-spectrum]. For each closed $Z\\subseteq P$ let $R_Z$ be the canonical clopen-neighborhood colimit and use its canonical restriction maps as in [lem-pe-clopen-restriction-canonical-localization]. A finite clopen partition of $S$ is a finite set $\\mathcal Q$ of nonempty pairwise disjoint clopen subsets with union $S$; for empty $S$ its partition is empty. Order the set $I$ of these partitions by refinement, $\\mathcal Q\\leq\\mathcal Q'$ if every part of $\\mathcal Q'$ lies in a part of $\\mathcal Q$. Put\n$$E_{\\mathcal Q}=\\prod_{A\\in\\mathcal Q}R_{f(A)}.$$\nEach $f(A)$ is closed, $I$ is a small nonempty directed poset, and the maps whose $A'$-coordinate is projection to the containing $A$ followed by $R_{f(A)}\\to R_{f(A')}$ form a diagram of commutative $R$-algebras on $I$. For fixed $\\mathcal Q$, let $J_{\\mathcal Q}$ be the product of the reverse-inclusion posets of clopen neighborhoods $U_A\\supseteq f(A)$ in $P$. It is small nonempty directed, and the canonical comparison\n$$\\varinjlim_{(U_A)\\in J_{\\mathcal Q}}\\prod_{A\\in\\mathcal Q}R[1/e_{U_A}]\\ \\longrightarrow\\ E_{\\mathcal Q}$$\nis an $R$-algebra isomorphism, compatible with the coordinate localization maps; here $D(e_U)=g^{-1}(U)$ [def-weil-ring-localization-away, lem-weil-pbc-spec-clopen-idempotent]. Consequently $R\\to E_{\\mathcal Q}$ and $R\\to\\varinjlim_{\\mathcal Q\\in I}E_{\\mathcal Q}$ are ind-Zariski: filtered colimits of finite products of principal localizations of $R$ [def-weil-pbc-ind-etale-algebra, def-weil-pbc-category-colimit].",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 097D, lemma-construct-profinite, proof: finite quotient stages and their refinement maps; blueprint proof Preliminaries and *1.* give the explicit products of canonical restrictions."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "lem-pe-clopen-restriction-canonical-localization",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-spec-clopen-idempotent",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "First verify that each $f(A)$ is closed, without requiring $f$ to be open. Any open cover of the closed subset $A\\subseteq S$, augmented by $S\\setminus A$, covers compact $S$, so $A$ is compact. For $p\\notin f(A)$ choose, for each $a\\in A$, disjoint neighborhoods $O_a$ of $f(a)$ and $V_a$ of $p$ in Hausdorff $P$. The sets $A\\cap f^{-1}(O_a)$ cover $A$; choose finitely many of them. The intersection of the corresponding $V_a$ is a neighborhood of $p$ missing $f(A)$. Thus $P\\setminus f(A)$ is open.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-wc-cover/det-pe-wc-cover-second-stage.proof.md",
+    "place": "Preliminaries: each f(A) is compact, hence closed; explicit finite-subcover argument."
+   }
+  },
+  {
+   "text": "The partitions form a set, being finite subsets of the power set of $S$, and their refinement relation is a partial order. In fact, if two partitions refine each other, a part $A$ of the first is contained in a part $B$ of the second and then in a part $A_1$ of the first; nonemptiness and disjointness force $A=A_1$, hence $A=B$. For $S\\ne\\varnothing$ the partition $\\{S\\}$ exists, and for $S=\\varnothing$ the empty partition exists. The nonempty intersections $A\\cap B$ of parts of two partitions give a finite clopen partition refining both. Thus $I$ is small, nonempty and directed, and therefore filtered.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-wc-cover/det-pe-wc-cover-second-stage.proof.md",
+    "place": "Preliminaries: common refinements by intersections."
+   }
+  },
+  {
+   "text": "For a refinement $\\mathcal Q\\leq\\mathcal Q'$, every $A'\\in\\mathcal Q'$ lies in a unique $A\\in\\mathcal Q$. Since $f(A')\\subseteq f(A)$ are closed, the canonical restriction lemma supplies the $R$-algebra map $r_{A,A'}:R_{f(A)}\\to R_{f(A')}$. Define $t_{\\mathcal Q,\\mathcal Q'}$ by $\\operatorname{pr}_{A'}t_{\\mathcal Q,\\mathcal Q'}=r_{A,A'}\\operatorname{pr}_A$. The product ring operations make this an $R$-algebra map. Identity restrictions are identities, since their neighborhood-diagram inclusions are identities. For a further refinement with $A''\\subseteq A'\\subseteq A$, the restriction lemma gives $r_{A',A''}r_{A,A'}=r_{A,A''}$. Hence the refinement maps satisfy identity and composition in every coordinate and define the claimed diagram.",
+   "uses": [
+    "lem-pe-clopen-restriction-canonical-localization",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097D, lemma-construct-profinite: transition maps; blueprint Preliminaries made canonical using Tag 097C."
+   }
+  },
+  {
+   "text": "Fix $\\mathcal Q$. In each coordinate the clopen neighborhoods of $f(A)$ form the small nonempty directed poset supplied by the canonical restriction lemma. More explicitly, $P$ is a neighborhood and intersection is an upper bound in reverse inclusion. The finite product $J_{\\mathcal Q}$ is a set, has the tuple $(P)_A$, and two tuples have the coordinatewise-intersection upper bound. Its transition maps on $B_{\\mathbf U}:=\\prod_A R[1/e_{U_A}]$ are the coordinate localization maps from that lemma. They compose coordinatewise. The coordinate colimit coprojections $\\iota_{A,U}:R[1/e_U]\\to R_{f(A)}$ give compatible product maps $b_{\\mathbf U}:B_{\\mathbf U}\\to E_{\\mathcal Q}$. The small-colimit existence theorem gives $L_{\\mathcal Q}=\\varinjlim_{\\mathbf U\\in J_{\\mathcal Q}}B_{\\mathbf U}$, and the colimit universal property gives the unique $R$-algebra comparison $c:L_{\\mathcal Q}\\to E_{\\mathcal Q}$ with $c\\lambda_{\\mathbf U}=b_{\\mathbf U}$.",
+   "uses": [
+    "lem-pe-clopen-restriction-canonical-localization",
+    "lem-weil-pbc-commutative-algebras-colimits-exist",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-wc-cover/det-pe-wc-cover-second-stage.proof.md",
+    "place": "Step 1: simultaneous neighborhood stages, with small colimits and their canonical maps."
+   }
+  },
+  {
+   "text": "Apply the source-library instance IsIPC for CommAlgCat R. It transfers the IPC property of Type along the forgetful functor, which preserves products and filtered colimits and reflects isomorphisms. The canonical colimitPointwiseProductToProductColimit is therefore an isomorphism, including for the empty product. Its coordinate equation is Mathlib ι_colimitPointwiseProductToProductColimit_π. No new representative or eventual-equality proof is required.",
+   "uses": [
+    "lem-pe-clopen-restriction-canonical-localization",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each neighbourhood tuple, identify its categorical product with the type-theoretic product using CommAlgCat.isLimitPiFan and enumerate its finite quotient-point index by Fin n. Each factor is literally Localization.Away at the pulled-back clopen idempotent. This gives a principal-block filtered presentation of the colimit of the neighbourhood diagram. Transport it across the specified comparison isomorphism by ObjectProperty.ind.prop_of_iso to obtain the partition-stage assertion. Fin 0 handles the empty partition.",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-commutative-algebras-colimits-exist"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define D on the prescribed products with each new coordinate equal to projection to its parent followed by refinementRestriction. Prove its laws by Pi.hom_ext and quotient induction: on a representative s all parent points are the quotient class of s, so restriction_naturality supplies identity and composition. The displayed coordinate equation is Pi.lift_π. This retains the prescribed coherent refinement diagram.",
+   "uses": [
+    "lem-pe-clopen-restriction-canonical-localization",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let blocks be the property of being algebra-isomorphic to a finite product of principal localizations. Such products are etale and hence finitely presented. CommRingCat.isFinitelyPresentable_under proves finite presentability in Under R; isCardinalPresentable_iff_of_isEquivalence transfers it to CommAlgCat R. Apply ObjectProperty.ind_ind to blocks. The colimit presentation of D with its already proved ind-block objects exhibits its colimit in blocks.ind.ind, and idempotence gives blocks.ind, precisely IsIndPrincipalZariski. This is a direct proof of the fixed-base filtered-colimit clause, without the general arrow-category stability theorem.",
+   "uses": [
+    "def-weil-pbc-ind-etale-algebra",
+    "def-weil-pbc-category-colimit",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-ring-localization-away",
+  "lem-pe-clopen-restriction-canonical-localization",
+  "lem-weil-pbc-commutative-algebras-colimits-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-thm-pe-wc-cover/det-pe-wc-cover-second-stage.proof.md",
+  "place": "Preliminaries and Step 1; implemented with existing CommAlgCat IPC and ObjectProperty.ind_ind instead of repeating representatives and general varying-base stability."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite products of filtered colimits of principal idempotent localizations indexed by clopen partitions form an ind Zariski algebra under refinement",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PrimeSpectrum.exists_idempotent_basicOpen_eq_of_isClopen\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {s : Set (PrimeSpectrum R)},\\n  IsClopen s → ∃ e, IsIdempotentElem e ∧ s = ↑(PrimeSpectrum.basicOpen e)\", \"doc\": \"In the Zariski topology on the prime spectrum of a commutative semiring $ R $, every clopen set $ s $ is equal to the basic open set $ D(e) $ for some idempotent element $ e \\\\in R $.\"}\n  {\"name\": \"PrimeSpectrum.exists_mul_eq_zero_add_eq_one_basicOpen_eq_of_isClopen\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {s : Set (PrimeSpectrum R)},\\n  IsClopen s → ∃ e f, e * f = 0 ∧ e + f = 1 ∧ s = ↑(PrimeSpectrum.basicOpen e) ∧ sᶜ = ↑(PrimeSpectrum.basicOpen f)\", \"doc\": \"For any clopen set $ s $ in the Zariski topology on the prime spectrum $ \\\\operatorname{Spec}(R) $ of a commutative semiring $ R $, there exist elements $ e, f \\\\in R $ such that $ e \\\\cdot f = 0 $, $ e \"}\n  {\"name\": \"PrimeSpectrum.existsUnique_idempotent_basicOpen_eq_of_isClopen\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {s : Set (PrimeSpectrum R)},\\n  IsClopen s → ∃! e, IsIdempotentElem e ∧ s = ↑(PrimeSpectrum.basicOpen e)\", \"doc\": \"For any clopen set $ s $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ of a commutative semiring $ R $, there exists a unique idempotent element $ e \\\\in R $ (satisfying $ e^2 = e $) such that $ s $\"}\n  {\"name\": \"PrimeSpectrum.isIdempotentElemEquivClopens_symm_sup\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (s₁ s₂ : TopologicalSpace.Clopens (PrimeSpectrum R)),\\n  PrimeSpectrum.isIdempotentElemEquivClopens.symm (s₁ ⊔ s₂) =\\n    ⟨↑(PrimeSpectrum.isIdempotentElemEquivClopens.symm s₁) + ↑(PrimeSpectrum.isIdempotentElemEquivClopens.symm s₂) -\\n        ↑(PrimeSpectrum.isIdempo\", \"doc\": \"Under the inverse order isomorphism between idempotent elements of a commutative semiring $ R $ and clopen subsets of its prime spectrum $ \\\\operatorname{Spec}(R) $, the supremum (union) of two clopen \"}\n  {\"name\": \"PrimeSpectrum.isClopen_iff_mul_add\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {s : Set (PrimeSpectrum R)},\\n  IsClopen s ↔ ∃ e f, e * f = 0 ∧ e + f = 1 ∧ s = ↑(PrimeSpectrum.basicOpen e)\", \"doc\": \"A subset $ s $ of the prime spectrum $ \\\\operatorname{Spec}(R) $ of a commutative semiring $ R $ is clopen in the Zariski topology if and only if there exist elements $ e, f \\\\in R $ such that $ e \\\\cdot\"}\n  {\"name\": \"PrimeSpectrum.isClopen_iff\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {s : Set (PrimeSpectrum R)},\\n  IsClopen s ↔ ∃ e, IsIdempotentElem e ∧ s = ↑(PrimeSpectrum.basicOpen e)\", \"doc\": \"A subset of the prime spectrum $\\\\operatorname{Spec}(R)$ equipped with the Zariski topology is clopen if and only if it is the basic open set $D(e)$ for some idempotent element $e \\\\in R$, where $e$ sat\"}\n  {\"name\": \"PrimeSpectrum.mulZeroAddOneEquivClopens\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"{R : Type u} →\\n  [inst : CommSemiring R] → { e // e.1 * e.2 = 0 ∧ e.1 + e.2 = 1 } ≃o TopologicalSpace.Clopens (PrimeSpectrum R)\", \"doc\": \"There is a bijective correspondence between clopen subsets of the prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative semiring $R$ and pairs of elements $e, f \\\\in R$ satisfying $e \\\\cdot f = 0$ an\"}\n  {\"name\": \"PrimeSpectrum.isIdempotentElemEquivClopens_mul\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (e₁ e₂ : ↑{e | IsIdempotentElem e}),\\n  PrimeSpectrum.isIdempotentElemEquivClopens ⟨↑e₁ * ↑e₂, ⋯⟩ =\\n    PrimeSpectrum.isIdempotentElemEquivClopens e₁ ⊓ PrimeSpectrum.isIdempotentElemEquivClopens e₂\", \"doc\": \"For any idempotent elements $ e_1 $ and $ e_2 $ in a commutative semiring $ R $, the order isomorphism between the set of idempotent elements of $ R $ and the clopen subsets of the prime spectrum $ \\\\o\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic filtered-colimit/product comparison is available, but the coherent refinement diagram of prescribed restriction algebras and its normalized principal-localization presentation are not a one-line specialization. Neither IndZariski nor the partition-restriction construction occurs in the Mathlib grep."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A partition refinement diagram of products of closed component restriction rings is a filtered colimit of finite products of principal localizations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"localCohomology.hasColimitDiagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"∀ {R : Type (max u v)} [inst : CommRing R] {D : Type v} [inst_1 : CategoryTheory.SmallCategory D]\\n  (I : CategoryTheory.Functor D (Ideal R)) (i : ℕ), CategoryTheory.Limits.HasColimit (localCohomology.diagram I i)\", \"doc\": \"For a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, the diagram constructed via the $ i $-th extension functor $ \\\\text{Ext}^i_R $ app\"}\n  {\"name\": \"PrimeSpectrum.PiLocalization\", \"module\": \"Mathlib/RingTheory/Spectrum/Maximal/Localization\", \"type\": \"(R : Type u_1) → [CommSemiring R] → Type u_1\", \"doc\": \"For a commutative semiring $ R $, this is the product over all prime ideals $ P $ in the prime spectrum of $ R $ of the localization of $ R $ at the submonoid consisting of elements not in $ P $. Each\"}\n  {\"name\": \"RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit\", \"module\": \"Mathlib/Algebra/Category/Ring/FinitePresentation\", \"type\": \"∀ {J : Type uJ} [inst : CategoryTheory.Category.{vJ, uJ} J] [CategoryTheory.IsFiltered J] (R : CommRingCat)\\n  (F : CategoryTheory.Functor J CommRingCat) (α : (CategoryTheory.Functor.const J).obj R ⟶ F) {S : CommRingCat}\\n  (f : R ⟶ S) (c : CategoryTheory.Limits.Cocone F) (hc : CategoryTheory.Limits.I\", \"doc\": \"Given a filtered category $\\\\mathcal{J}$, a diagram $F : \\\\mathcal{J} \\\\to \\\\mathcal{C}$, a colimit cocone $c$ for $F$, and a ring homomorphism $f : R \\\\to S$ of essential finite type, if morphisms $a : S \"}\n  {\"name\": \"IsLocalization.iff_map_piEvalRingHom\", \"module\": \"Mathlib/RingTheory/Localization/Pi\", \"type\": \"∀ {ι : Type u_1} (R : ι → Type u_2) [inst : (i : ι) → CommSemiring (R i)] (S' : Type u_4) [inst_1 : CommSemiring S']\\n  [inst_2 : Algebra ((i : ι) → R i) S'] (M : Submonoid ((i : ι) → R i)) [Finite ι],\\n  IsLocalization M S' ↔ IsLocalization (Submonoid.pi Set.univ fun i => Submonoid.map (Pi.evalRingHo\", \"doc\": \"For a finite index set $\\\\iota$, a commutative semiring $S'$ is the localization of $R$ at the submonoid $M$ if and only if $S'$ is the localization of the product of the images of $M$ under the evalua\"}\n  {\"name\": \"CommRingCat.FilteredColimits.colimit\", \"module\": \"Mathlib/Algebra/Category/Ring/FilteredColimits\", \"type\": \"{J : Type v} →\\n  [inst : CategoryTheory.SmallCategory J] →\\n    [CategoryTheory.IsFiltered J] → CategoryTheory.Functor J CommRingCat → CommRingCat\", \"doc\": \"The filtered colimit of a diagram of commutative rings in the category of commutative rings, constructed by first forming the colimit in the category of additive groups via the forgetful functor and t\"}\n  {\"name\": \"CommRingCat.FilteredColimits.R\", \"module\": \"Mathlib/Algebra/Category/Ring/FilteredColimits\", \"type\": \"{J : Type v} →\\n  [inst : CategoryTheory.SmallCategory J] →\\n    [CategoryTheory.IsFiltered J] → CategoryTheory.Functor J CommRingCat → RingCat\", \"doc\": \"The filtered colimit $ R $ is constructed by taking a diagram $ F : \\\\mathcal{J} \\\\to \\\\text{CommRingCat} $, applying the forgetful functor from commutative rings to rings, and forming the colimit in the\"}\n  {\"name\": \"MaximalSpectrum.PiLocalization\", \"module\": \"Mathlib/RingTheory/Spectrum/Maximal/Localization\", \"type\": \"(R : Type u_1) → [CommSemiring R] → Type u_1\", \"doc\": \"The product of localizations of a commutative semiring $ R $ at each maximal ideal in its maximal spectrum, where each localization inverts all elements outside the corresponding maximal ideal.\"}\n  {\"name\": \"CommRingCat.FilteredColimits.colimitCocone\", \"module\": \"Mathlib/Algebra/Category/Ring/FilteredColimits\", \"type\": \"{J : Type v} →\\n  [inst : CategoryTheory.SmallCategory J] →\\n    [CategoryTheory.IsFiltered J] → (F : CategoryTheory.Functor J CommRingCat) → CategoryTheory.Limits.Cocone F\", \"doc\": \"For a filtered diagram $ F : \\\\mathcal{J} \\\\to \\\\text{CommRingCat} $, this constructs a cocone with apex given by the filtered colimit of $ F $ in the category of commutative rings. The construction firs\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic filtered-colimit/product comparison is available, but the coherent refinement diagram of prescribed restriction algebras and its normalized principal-localization presentation are not a one-line specialization. Neither IndZariski nor the partition-restriction construction occurs in the Mathlib grep."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IndZariski\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: generic filtered-colimit/product comparison is available, but the coherent refinement diagram of prescribed restriction algebras and its normalized principal-localization presentation are not a one-line specialization. Neither IndZariski nor the partition-restriction construction occurs in the Mathlib grep."
+  },
+  {
+   "tool": "grep",
+   "query": "IndZariski|IsIndPrincipalZariski|stoneanPartition|partition.*localiz",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: generic filtered-colimit/product comparison is available, but the coherent refinement diagram of prescribed restriction algebras and its normalized principal-localization presentation are not a one-line specialization. Neither IndZariski nor the partition-restriction construction occurs in the Mathlib grep."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Filtered colimit over clopen partitions of finite products of idempotent restriction algebras is ind Zariski",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Limits.IsIPC.isIso\", \"module\": \"Mathlib.CategoryTheory.Limits.FilteredColimitCommutesProduct\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} {inst_1 : CategoryTheory.Limits.HasProducts C}\\n  {inst_2 : CategoryTheory.Limits.HasFilteredColimitsOfSize.{w, w, v, u} C} [self : CategoryTheory.Limits.IsIPC C]\\n  (α : Type w) (I : α → Type w) [inst_3 : (i : α) → CategoryTheory.SmallCategory \", \"doc\": \"In a category with all finite products and filtered colimits, the canonical morphism from the colimit of the pointwise product of a filtered diagram to the product of the colimits of each component is\"}\n  {\"name\": \"CategoryTheory.instIsClosedUnderColimitsOfShapeFunctorOppositeTypeIsIndObjectOfIsFiltered\", \"module\": \"Mathlib.CategoryTheory.Limits.Indization.Category\", \"type\": \"{J : Type v} [SmallCategory J] [IsFiltered J] : ObjectProperty.IsClosedUnderColimitsOfShape (IsIndObject (C := C)) J\", \"doc\": \"In a category $\\\\mathcal{C}$, the property of being an ind-object is closed under colimits of shape $J$ whenever $J$ is a small filtered category. Specifically, if $J$ is a small filtered category and \"}\n  {\"name\": \"CategoryTheory.Limits.ι_colimitPointwiseProductToProductColimit_π_assoc\", \"module\": \"Mathlib.CategoryTheory.Limits.FilteredColimitCommutesProduct\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {α : Type w} {I : α → Type u₁}\\n  [inst_1 : (i : α) → CategoryTheory.Category.{v₁, u₁} (I i)]\\n  [inst_2 : CategoryTheory.Limits.HasLimitsOfShape (CategoryTheory.Discrete α) C]\\n  (F : (i : α) → CategoryTheory.Functor (I i) C) [inst_3 : ∀ (i : α)\", \"doc\": \"In a category with filtered colimits and finite products, the canonical morphism from the filtered colimit of a pointwise product diagram to the product of filtered colimits of each component diagram \"}\n  {\"name\": \"CommRingCat.FilteredColimits.colimit\", \"module\": \"Mathlib.Algebra.Category.Ring.FilteredColimits\", \"type\": \": CommRingCat.{max v u}\", \"doc\": \"The filtered colimit of a diagram of commutative rings in the category of commutative rings, constructed by first forming the colimit in the category of additive groups via the forgetful functor and t\"}\n  {\"name\": \"CommRingCat.FilteredColimits.colimitCoconeIsColimit\", \"module\": \"Mathlib.Algebra.Category.Ring.FilteredColimits\", \"type\": \": IsColimit <| colimitCocone.{v, u} F\", \"doc\": \"The forgetful functor from the category of commutative rings to the category of rings reflects colimits for filtered diagrams. Specifically, if a diagram in the category of commutative rings has a col\"}\n  {\"name\": \"PrimeSpectrum.mulZeroAddOneEquivClopens\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \": { e : R × R // e.1 * e.2 = 0 ∧ e.1 + e.2 = 1 } ≃o Clopens (PrimeSpectrum R)\", \"doc\": \"There is a bijective correspondence between clopen subsets of the prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative semiring $R$ and pairs of elements $e, f \\\\in R$ satisfying $e \\\\cdot f = 0$ an\"}\n  {\"name\": \"PrimeSpectrum.exists_idempotent_basicOpen_eq_of_isClopen\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \"{s : Set (PrimeSpectrum R)} (hs : IsClopen s) : ∃ e : R, IsIdempotentElem e ∧ s = basicOpen e\", \"doc\": \"In the Zariski topology on the prime spectrum of a commutative semiring $ R $, every clopen set $ s $ is equal to the basic open set $ D(e) $ for some idempotent element $ e \\\\in R $.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.instHasColimitsOfShapeDiscrete\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace.HasColimits\", \"type\": \": HasColimitsOfShape (Discrete ι) LocallyRingedSpace.{u}\", \"doc\": \"For any discrete category $ J $ (where $ J $ has objects indexed by a type $ \\\\iota $ and only identity morphisms), the category of locally ringed spaces admits all colimits of diagrams $ F: J \\\\to \\\\tex\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic filtered-colimit/product comparison is available, but the coherent refinement diagram of prescribed restriction algebras and its normalized principal-localization presentation are not a one-line specialization. Neither IndZariski nor the partition-restriction construction occurs in the Mathlib grep."
+  },
+  {
+   "tool": "loogle",
+   "query": "CommRingCat, PreservesFilteredColimits",
+   "results": "0 hits;  ; loogle: unknown identifier 'PreservesFilteredColimits'",
+   "date": "2026-10-22",
+   "verdict": "no match: Loogle rejected the unqualified identifier; corrected qualified query also run."
+  },
+  {
+   "tool": "grep",
+   "query": "IndZariski|IsIndPrincipalZariski|partition.*localization",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: no hits in Mathlib."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Clopen partitions of a profinite space with canonical closed restriction algebras form an ind Zariski filtered diagram of finite products of idempotent localizations",
+   "results": "8 hits; Profinite.exists_isClopen_of_cofiltered, LightCondensed.isColimitLocallyConstantPresheaf, Condensed.isColimitLocallyConstantPresheaf, Profinite.exists_locallyConstant_finite_aux, Profinite.indexFunctor, Profinite.NobelingProof.spanFunctor, Profinite.exists_locallyConstant_finite_nonempty, LightCondensed.isColimitLocallyConstantPresheafDiagram",
+   "date": "2026-10-22",
+   "verdict": "no match: profinite and locally constant presheaf results do not state this ring diagram and its comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A diagram indexed by refinements of finite clopen partitions, whose terms are products of idempotent localizations, is ind Zariski",
+   "results": "8 hits; AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.Scheme.zariskiPretopology, PrimeSpectrum.isClopen_iff_zeroLocus, PrimeSpectrum.discreteTopology_iff_toPiLocalization_surjective, PrimeSpectrum.mulZeroAddOneEquivClopens, AlgebraicGeometry.Scheme.AffineZariskiSite.instLocallyDirectedIsOpenImmersionDirectedCover, PrimeSpectrum.discreteTopology_iff_toPiLocalization_bijective, AlgebraicGeometry.LocallyRingedSpace.instHasColimitsOfShapeDiscrete",
+   "date": "2026-10-22",
+   "verdict": "no match: clopen-spectrum and Zariski topology results cover only ingredients."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesFilteredColimits",
+   "results": "12 hits; CategoryTheory.Limits.PreservesFilteredColimits, AddMonCat.FilteredColimits.forget_preservesFilteredColimits, MonCat.FilteredColimits.forget_preservesFilteredColimits, AddCommMonCat.FilteredColimits.forget_preservesFilteredColimits, CommMonCat.FilteredColimits.forget_preservesFilteredColimits, AddCommMonCat.FilteredColimits.forget₂AddMonPreservesFilteredColimits, CommMonCat.FilteredColimits.forget₂Mon_preservesFilteredColimits, AddGrpCat.FilteredColimits.forget_preservesFilteredColimits",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: preservation class and monoid/group forgetful instances only."
+  },
+  {
+   "tool": "grep",
+   "query": "forget_preservesFilteredColimits|hasColimits",
+   "results": "1 hits; Mathlib/Algebra/Category/CommAlgCat/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: CommAlgCat HasColimits instance at Mathlib/Algebra/Category/CommAlgCat/Basic.lean:213; already represented by lem-weil-pbc-commutative-algebras-colimits-exist."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite products of filtered colimits of commutative algebras are the filtered colimit over the product of the indexing posets of finite products of the algebras",
+   "results": "8 hits; CommRingCat.FilteredColimits.colimit, CommRingCat.FilteredColimits.colimitCoconeIsColimit, CommRingCat.FilteredColimits.colimitCommRing, CategoryTheory.Limits.IsIPC.isIso, CategoryTheory.Limits.colimitPointwiseProductToProductColimit, CommRingCat.FilteredColimits.R, CategoryTheory.Limits.Types.isIso_colimitPointwiseProductToProductColimit, CommRingCat.FilteredColimits.colimitCocone",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: ring colimit constructions and general product comparison are ingredients; neither the canonical closed-restriction diagram nor its ind-Zariski conclusion is stated."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-pe-wc-cover-second-stage",
+  "date": "2026-10-22",
+  "group": "Q96"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-thm-pe-wc-cover",
+ "blueprint": {
+  "from": {
+   "node": "det-pe-wc-cover-second-stage",
+   "place": "Preliminaries, partition diagram and refinement maps; *1.*, finite products of principal localizations (old split steps 4–5).",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pe-partition-restriction-ind-zariski",
+  "worker": "stage1",
+  "group": "Q72",
+  "summary": "Kept the statement. Proved closed images and filtered partition indices explicitly, constructed coherent refinement maps from canonical restrictions, and proved the finite-product colimit comparison by representatives and coordinate eventual equality. Handled the empty partition and declared the generic ind-Zariski stability tool. No new nodes. Repair after the side-completion promotion return: rechecked all citations against the current live DAG and replaced the refinement compatibility passage with an explicit index functor and its coprojection calculation. Current-base repair retry: retained the earlier explicit refinement functor and added its identity/composition calculation on coprojections; all current dependency statements and verbatim quotes rechecked.",
+  "blueprint": "det-pe-wc-cover-second-stage.proof.md, Preliminaries (closed f(A), common refinements, restriction maps) and Step 1 (finite products of restrictions and ind-Zariski filtered colimit).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Only its generic filtered-colimit closure of ind-Zariski maps is used, with the finite-principal-product definition already stated. This is the tool explicitly cited in the blueprint Step 1, not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q72-a99ef919c",
+  "group": "Q72",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-a99ef919c (reviewer sub-agent of L); spot-checked: Read the item in full: the statement and 8 steps, no new nodes. Read every cited statement, the blueprint main-20261015 det-pe-wc-cover-second-stage proof (Preliminaries and *1.*), and the parent step that cites this item with g=π. This head re-delivers the FIXed head 3fee99ec. The statement, stmt_deps, proof_deps and steps 1-6 and 8 are byte-identical to that head. The prior FIX was lost because the re-delivery was built on the pre-fix head. The only change is step 7, which now has an explicit index functor h(U)_{A'}=U_{parent(A')} and stage projections p_U giving an induced d, the square c_{Q'}d=t c_Q checked coordinatewise via r_{A,A'}ι_{A,U_A}=ι_{A',U_A}, and identity/composition of d (the parent of a parent is the parent). That step is correct. Rechecked the other steps. (1) f(A) is closed by compactness and the Hausdorff property. (2) I is small, antisymmetric, nonempty ({S}, or ∅ when S=∅) and directed by intersections. (3) Restrictions and their composition come from lem-pe-clopen-restriction-canonical-localization. (4) The comparison c comes from the universal property. (5) Surjectivity uses per-coordinate representatives. (6) Injectivity uses lem-pc-filtered-colimit-commrings-elementwise(2) with W_A⊆U_A∩V_A, and Q=∅ gives the zero ring. (8) E_Q is ind-Zariski by definition, R[1/0]=0, and the colimit over I uses the filtered clause of lem-weil-pbc-ind-etale-stability. I accept that tool use because the blueprint parent cites the same node. Edge cases tested: S=∅, P=∅, f constant with R=Z, R=Z×Z over two points, overlapping images. An rg -L search found no duplicate (nearest: det-pe-wcb-clopen-partition, det-pe-wc-rings-w-local-refinement). No SGA anywhere, the item is not dropped, and there is no repair note. FIX: re-applied the lost prior fix by adding def-weil-pbc-category-colimit to the uses of step 3 (uniqueness of the canonical map gives identity restrictions) and step 5 (directed⇒filtered is needed by lem-weil-pbc-filtered-colimit-algebras-elementwise). It is already in proof_deps, and no text changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PartitionRestrictionIndZariski",
+  "declaration": "WContractification.PartitionRestriction.partition_restriction_ind_zariski",
+  "declarations": [
+   "WContractification.PartitionRestriction.Index",
+   "WContractification.PartitionRestriction.part",
+   "WContractification.PartitionRestriction.stage",
+   "WContractification.PartitionRestriction.NeighborhoodIndex",
+   "WContractification.PartitionRestriction.neighborhoodDiagram",
+   "WContractification.PartitionRestriction.comparison",
+   "WContractification.PartitionRestriction.refinementRestriction",
+   "WContractification.PartitionRestriction.partition_restriction_ind_zariski"
+  ],
+  "file": "lean/Sheaf/RingTheory/PartitionRestrictionIndZariski.lean",
+  "statement": "theorem partition_restriction_ind_zariski [CompactSpace P] [T2Space P] [TotallyDisconnectedSpace P] [CompactSpace S] [T2Space S] [TotallyDisconnectedSpace S] (g : C(PrimeSpectrum R, P)) (f : C(S, P)) : (∀ (Q : Index S) (a : Q.unop), IsClosed (f '' part Q a)) ∧ Nonempty (Index S) ∧ IsFiltered (Index S) ∧ (∀ Q : Index S, Nonempty (NeighborhoodIndex f Q) ∧ IsFiltered (NeighborhoodIndex f Q) ∧ IsIso (comparison g f Q) ∧ (∀ (U : NeighborhoodIndex f Q) (a : Q.unop), colimit.ι (neighborhoodDiagram g f Q) U ≫ comparison g f Q ≫ Pi.π (fun b : Q.unop ↦ ClopenRestriction.algebra g (f '' part Q b)) a = Pi.π (fun b : Q.unop ↦ (ClopenRestriction.diagram g (f '' part Q b)).obj (U b)) a ≫ colimit.ι (ClopenRestriction.diagram g (f '' part Q a)) (U a)) ∧ Algebra.IsIndPrincipalZariski R (stage g f Q)) ∧ (∃ (D : Index S ⥤ CommAlgCat R) (hD : ∀ Q : Index S, D.obj Q = stage g f Q), (∀ (Q Q' : Index S) (h : Q ⟶ Q') (a' : Q'.unop), D.map h ≫ eqToHom (hD Q') ≫ Pi.π (fun b : Q'.unop ↦ ClopenRestriction.algebra g (f '' part Q' b)) a' = eqToHom (hD Q) ≫ Pi.π (fun b : Q.unop ↦ ClopenRestriction.algebra g (f '' part Q b)) (DiscreteQuotient.ofLE h.unop.le a') ≫ refinementRestriction g f h a') ∧ Algebra.IsIndPrincipalZariski R (colimit D : CommAlgCat R))",
+  "branch": "sheaf-dag",
+  "by": "NZ",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses Mathlib DiscreteQuotient for finite nonempty-part clopen partitions, including the empty partition. The existential functor has literal prescribed product objects (hD) and all transition coordinates fixed to canonical restrictions; it is not an unspecified diagram. The comparison is the existing canonical colimitPointwiseProductToProductColimit, not a chosen isomorphism."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-90f92a686",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Read node, 6 stmt_deps, ClopenRestriction and IndPrincipalZariski sources, Mathlib DiscreteQuotient and FilteredColimitCommutesProduct. Every clause matches: DiscreteQuotient-op = finite nonempty-part clopen partitions with refinement order (empty S gives the empty partition); stage = ∏ of the dependency's algebra; closedness; Nonempty/IsFiltered for I and J_Q; canonical colimitPointwiseProductToProductColimit with IsIso and the coordinate formula; ind-Zariski for E_Q and for colim D, where D is fully fixed by literal object equalities and every map coordinate set to the canonical restriction. No extra hypotheses; single universe as the dependency forces. Edge cases S=∅, P=∅, constant f checked. lean.statement verbatim; declarations complete; docstrings ok; only the theorem proof is sorry. Advisory: theorem stmt_dep for plain defs dates from stage 1 (not added); IsIndPrincipalZariski not listed in the ind-etale record. No fixes; no compile needed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261023T105148-L-3517515",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

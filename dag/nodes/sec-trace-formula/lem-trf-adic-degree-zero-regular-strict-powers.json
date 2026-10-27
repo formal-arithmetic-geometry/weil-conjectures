@@ -1,0 +1,223 @@
+{
+ "id": "lem-trf-adic-degree-zero-regular-strict-powers",
+ "kind": "statement",
+ "title": "Strict powers of degree-zero regular parameters in an adic filtration",
+ "statement": "Let $(R,\\mathfrak m)$ be a commutative Noetherian local ring [def-weil-pbc-noetherian-ring], $M$ a finite $R$-module [def-weil-finitely-generated-module], and $I\\subseteq\\mathfrak m$ an ideal. For $p\\geq0$ put $E_p=I^pM/I^{p+1}M$, with scalar multiplication induced from $M$. Fix $s\\geq0$ and $y_1,\\ldots,y_s\\in\\mathfrak m$, and put $J=(y_1,\\ldots,y_s)$. Assume that for every $p\\geq0$ and $1\\leq i\\leq s$, multiplication by $y_i$ is injective on $E_p/(y_1,\\ldots,y_{i-1})E_p$; this is the injectivity condition in [def-weil-pbc-regular-sequence], allowing $E_p=0$. Then for every $p,q\\geq0$ one has the equality of submodules of $M$\n$$I^pM\\cap J^qM=J^q I^pM.$$\nThe empty parameter list, $I=0$, and $M=0$ are allowed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent-written filtered-module synthesis; supporting Tags 0F1T (lemma-regular-sequence-short-exact-sequence), 00LN (lemma-regular-quasi-regular, module version), and 00IP (lemma-intersect-powers-ideal-module-zero). None of these tags alone states this strictness theorem."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-regular-sequence"
+ ],
+ "proof": [
+  {
+   "text": "Put $Q_a=M/I^aM$ for $a\\geq0$. The list $y_1,\\ldots,y_s$ satisfies the injectivity condition on every $Q_a$, by induction on $a$. The base is $Q_0=0$, on which every scalar is injective. For the induction step use the canonical short exact row $0\\to E_{a-1}\\to Q_a\\to Q_{a-1}\\to0$ for $a\\geq1$. Part (a) of [lem-weil-pbc-regular-sequence-short-exact-sequence] applies: its left-term injectivity is the hypothesis on $E_{a-1}$, and its right-term injectivity is the induction hypothesis. Its middle-term assertion gives the required condition on $Q_a$, even when a term is zero.",
+   "uses": [
+    "lem-weil-pbc-regular-sequence-short-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent-written assembly using Tags 0F1T (lemma-regular-sequence-short-exact-sequence), 00LN(2) (lemma-regular-quasi-regular), and 00IQ(2) (lemma-intersection-powers-ideal-module)."
+   }
+  },
+  {
+   "text": "Fix $p,q\\geq0$ and set $N=I^pM$, $Q=M/N$. For any $r\\geq q$ and $z\\in N\\cap J^rM$, expand $z=\\sum_{|\\alpha|=r}y^\\alpha m_\\alpha$ with $m_\\alpha\\in M$; the monomials generate $J^r$ by expanding products of the generators of $J$. The image of this sum in $Q$ is zero. Apply [lem-trf-weak-regular-module-homogeneous-coefficients] to $Q$ with the injectivity proved in step 1: zero belongs to $J^{r+1}Q$, so every $\\bar m_\\alpha$ lies in $JQ$. Hence choose $a_{\\alpha i}\\in M$ and $n_\\alpha\\in N$ with $m_\\alpha=n_\\alpha+\\sum_i y_i a_{\\alpha i}$. Substitution gives $z=b+w$, where $b=\\sum y^\\alpha n_\\alpha\\in J^rN$ and $w=\\sum_{\\alpha,i}y^\\alpha y_i a_{\\alpha i}\\in J^{r+1}M$. Since $z,b\\in N$, also $w\\in N$. Thus $N\\cap J^rM\\subseteq J^rN+(N\\cap J^{r+1}M)$.",
+   "uses": [
+    "lem-trf-weak-regular-module-homogeneous-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent-written assembly using Tags 0F1T (lemma-regular-sequence-short-exact-sequence), 00LN(2) (lemma-regular-quasi-regular), and 00IQ(2) (lemma-intersection-powers-ideal-module)."
+   }
+  },
+  {
+   "text": "For $x\\in N\\cap J^qM$ prove by induction on $r\\geq q$ that $x=b_r+z_r$ with $b_r\\in J^qN$ and $z_r\\in N\\cap J^rM$. Start with $b_q=0$, $z_q=x$. Step 2 writes $z_r=c_r+z_{r+1}$ with $c_r\\in J^rN\\subseteq J^qN$ and $z_{r+1}\\in N\\cap J^{r+1}M$; take $b_{r+1}=b_r+c_r$. Consequently $x\\in J^qN+J^rM$ for every $r\\geq q$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent-written assembly using Tags 0F1T (lemma-regular-sequence-short-exact-sequence), 00LN(2) (lemma-regular-quasi-regular), and 00IQ(2) (lemma-intersection-powers-ideal-module)."
+   }
+  },
+  {
+   "text": "Let $P=M/J^qN$. It is finite: the images of a finite generating list of $M$ generate $P$. Step 3 puts the class of $x$ in $J^rP$ for every $r\\geq q$; for $r<q$ use $J^qP\\subseteq J^rP$. Since $R$ is Noetherian and local and $J\\subseteq\\mathfrak m=\\operatorname{Jac}(R)$, [lem-weil-pbc-krull-intersection-jacobson] gives $\\bigcap_{r\\geq0}J^rP=0$. The class of $x$ is therefore zero, so $x\\in J^qN$. Conversely, every summand $a n$ with $a\\in J^q$ and $n\\in N$ lies in both $N$ and $J^qM$, proving the reverse inclusion and the claimed equality. This also covers $p=0$, $q=0$, $I=0$, $M=0$ and the empty list ($J=0$).",
+   "uses": [
+    "lem-weil-pbc-krull-intersection-jacobson"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent-written assembly using Tags 0F1T (lemma-regular-sequence-short-exact-sequence), 00LN(2) (lemma-regular-quasi-regular), and 00IQ(2) (lemma-intersection-powers-ideal-module)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-regular-sequence-short-exact-sequence",
+  "lem-trf-weak-regular-module-homogeneous-coefficients",
+  "lem-weil-pbc-krull-intersection-jacobson"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent-written assembly using Tags 0F1T (lemma-regular-sequence-short-exact-sequence), 00LN(2) (lemma-regular-quasi-regular), and 00IQ(2) (lemma-intersection-powers-ideal-module)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Valabrega|bifiltrat|regular.*(inter|inf|pow)|((inter|inf|pow).*regular)|[Ss]trict.*[Ff]iltrat",
+   "results": "{\"t\": \"2026-10-23T20:11:43Z\", \"tool\": \"grep\", \"query\": \"Valabrega|bifiltrat|regular.*(inter|inf|pow)|((inter|inf|pow).*regular)|[Ss]trict.*[Ff]iltrat\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Regular/IsSMulRegular.lean\", \"Mathlib/RingTheory/Regular/IsSMulRegular.lean\", \"Mathlib/RingTheory/Regular/IsSMulRegular.lean\", \"Mathlib/RingTheory/Regular/RegularSequence.lean\", \"Mathlib/RingTheory/Regular/RegularSequence.lean\", \"Mathlib/RingTheory/Regular/RegularSequence.lean\", \"Mathlib/RingTheory/Regular/RegularSequence.lean\"], \"digest\": \"6a6811e31069abbb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Artin-Rees is eventual with a shift; the scalar quotient intersection criterion assumes regularity on the entire quotient and does not give this simultaneous all-powers comparison. Regular powers and adic topology definitions do not state the filtered-module assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-adic-degree-zero-regular-strict-powers: regular sequence on associated graded module implies powers of its ideal intersect filtration strictly",
+   "results": "{\"t\": \"2026-10-23T20:11:44Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-adic-degree-zero-regular-strict-powers: regular sequence on associated graded module implies powers of its ideal intersect filtration strictly\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.stableFiltration_stable\", \"Ideal.Filtration.pow_smul_le\", \"Ideal.Filtration.pow_smul_le_pow_smul\", \"Ideal.Filtration.mono\", \"IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal\", \"Ideal.Filtration.Stable\", \"RingTheory.Sequence.IsRegular\", \"IsHausdorff.iInf_pow_smul\"], \"digest\": \"6bd014c11d154257\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Artin-Rees is eventual with a shift; the scalar quotient intersection criterion assumes regularity on the entire quotient and does not give this simultaneous all-powers comparison. Regular powers and adic topology definitions do not state the filtered-module assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegular\", \"pow\"",
+   "results": "{\"t\": \"2026-10-23T20:11:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsRegular\\\", \\\"pow\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"IsRegular.pow\", \"IsRegular.pow_iff\", \"MvPolynomial.isRegular_X_pow\", \"Polynomial.isRegular_X_pow\"], \"digest\": \"92835f11368dda9f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Artin-Rees is eventual with a shift; the scalar quotient intersection criterion assumes regularity on the entire quotient and does not give this simultaneous all-powers comparison. Regular powers and adic topology definitions do not state the filtered-module assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-adic-degree-zero-regular-strict-powers: finite module ideal adic associated graded degree zero regular sequence powers intersection J^q M intersect I^p M equals J^q I^p M",
+   "results": "{\"t\": \"2026-10-23T20:11:45Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-adic-degree-zero-regular-strict-powers: finite module ideal adic associated graded degree zero regular sequence powers intersection J^q M intersect I^p M equals J^q I^p M\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.exists_pow_inf_eq_pow_smul\", \"Ideal.adic_module_basis\", \"Ideal.adic_basis\", \"localCohomology.ideal_powers_initial\", \"is_ideal_adic_pow\", \"Ideal.stableFiltration_N\", \"Ideal.iInf_pow_smul_eq_bot_of_isLocalRing\", \"IsHausdorff.of_isTorsionFree\"], \"digest\": \"90a374dfec48d0be\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Artin-Rees is eventual with a shift; the scalar quotient intersection criterion assumes regularity on the entire quotient and does not give this simultaneous all-powers comparison. Regular powers and adic topology definitions do not state the filtered-module assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "associated.?[Gg]raded|[Gg]raded.*[Rr]egular|[Rr]egular.*[Gg]raded|exists_pow_inf_eq_pow_smul|isSMulRegular_on_quot_iff_smul_top_inf_eq_smul",
+   "results": "{\"t\": \"2026-10-23T20:12:15Z\", \"tool\": \"grep\", \"query\": \"associated.?[Gg]raded|[Gg]raded.*[Rr]egular|[Rr]egular.*[Gg]raded|exists_pow_inf_eq_pow_smul|isSMulRegular_on_quot_iff_smul_top_inf_eq_smul\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Regular/IsSMulRegular.lean\", \"Mathlib/RingTheory/Regular/RegularSequence.lean\", \"Mathlib/RingTheory/Regular/RegularSequence.lean\", \"Mathlib/RingTheory/Filtration.lean\", \"Mathlib/RingTheory/Filtration.lean\", \"Mathlib/RingTheory/AdicCompletion/Exactness.lean\", \"Mathlib/RingTheory/AdicCompletion/Exactness.lean\"], \"digest\": \"1fde11a89f19dd8a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Artin-Rees is eventual with a shift; the scalar quotient intersection criterion assumes regularity on the entire quotient and does not give this simultaneous all-powers comparison. Regular powers and adic topology definitions do not state the filtered-module assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-adic-degree-zero-regular-strict-powers: two ideals transverse regular sequence in degree zero associated graded module implies strict induced adic filtration on powers of parameter ideal",
+   "results": "{\"t\": \"2026-10-23T20:12:16Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-adic-degree-zero-regular-strict-powers: two ideals transverse regular sequence in degree zero associated graded module implies strict induced adic filtration on powers of parameter ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"is_ideal_adic_pow\", \"Ideal.adic_basis\", \"Ideal.adic_module_basis\", \"localCohomology.ideal_powers_initial\", \"Ideal.Filtration\", \"Ideal.Filtration.Stable.exists_pow_smul_eq_of_ge\", \"Ideal.Filtration.Stable.exists_pow_smul_eq\", \"Ideal.stableFiltration\"], \"digest\": \"e6a24dc25c206e87\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Artin-Rees is eventual with a shift; the scalar quotient intersection criterion assumes regularity on the entire quotient and does not give this simultaneous all-powers comparison. Regular powers and adic topology definitions do not state the filtered-module assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "Valabrega|strict.*filtrat|filtrat.*strict|regular.*(inter|inf)|isSMulRegular_on_quot_iff",
+   "results": "{\"t\": \"2026-10-23T21:17:45Z\", \"tool\": \"grep\", \"query\": \"Valabrega|strict.*filtrat|filtrat.*strict|regular.*(inter|inf)|isSMulRegular_on_quot_iff\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Regular/IsSMulRegular.lean\", \"Mathlib/RingTheory/Regular/IsSMulRegular.lean\", \"Mathlib/RingTheory/Regular/IsSMulRegular.lean\", \"Mathlib/RingTheory/Regular/IsSMulRegular.lean\", \"Mathlib/RingTheory/Regular/IsSMulRegular.lean\", \"Mathlib/RingTheory/Regular/RegularSequence.lean\", \"Mathlib/RingTheory/Regular/RegularSequence.lean\", \"Mathlib/RingTheory/Regular/RegularSequence.lean\"], \"digest\": \"e33f06c16205edd7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Artin-Rees in Mathlib/RingTheory/Filtration.lean:389 is eventual and shifted; scalar regular quotient intersection criteria in Regular/IsSMulRegular.lean:141-167 concern one scalar. None states simultaneous strictness for all powers under regularity on adic layers."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-adic-degree-zero-regular-strict-powers: regular sequence on the associated graded module makes every power of its parameter ideal strict for the filtration",
+   "results": "{\"t\": \"2026-10-23T21:17:46Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-adic-degree-zero-regular-strict-powers: regular sequence on the associated graded module makes every power of its parameter ideal strict for the filtration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal\", \"Ideal.stableFiltration_stable\", \"Ideal.Filtration.mono\", \"RingTheory.Sequence.IsRegular\", \"RingTheory.Sequence.isRegular_cons_iff\", \"RingTheory.Sequence.IsRegular.cons\", \"Ideal.stableFiltration\", \"RingTheory.Sequence.IsRegular.toIsWeaklyRegular\"], \"digest\": \"f2ecd0938f86cc97\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Artin-Rees in Mathlib/RingTheory/Filtration.lean:389 is eventual and shifted; scalar regular quotient intersection criteria in Regular/IsSMulRegular.lean:141-167 concern one scalar. None states simultaneous strictness for all powers under regularity on adic layers."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsWeaklyRegular\", \"inf\"",
+   "results": "{\"t\": \"2026-10-23T21:17:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsWeaklyRegular\\\", \\\"inf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Artin-Rees in Mathlib/RingTheory/Filtration.lean:389 is eventual and shifted; scalar regular quotient intersection criteria in Regular/IsSMulRegular.lean:141-167 concern one scalar. None states simultaneous strictness for all powers under regularity on adic layers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-adic-degree-zero-regular-strict-powers: regular sequence acting in degree zero on an ideal adic associated graded module implies I^p M intersection J^q M equals J^q I^p M",
+   "results": "{\"t\": \"2026-10-23T21:17:47Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-adic-degree-zero-regular-strict-powers: regular sequence acting in degree zero on an ideal adic associated graded module implies I^p M intersection J^q M equals J^q I^p M\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.adic_module_basis\", \"Ideal.adic_basis\", \"Ideal.exists_pow_inf_eq_pow_smul\", \"localCohomology.ideal_powers_initial\", \"Ideal.stableFiltration_N\", \"IsHausdorff.iInf_pow_smul\", \"is_ideal_adic_pow\", \"Ideal.Filtration.Stable.exists_pow_smul_eq\"], \"digest\": \"31ee64545e49ec9d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Artin-Rees in Mathlib/RingTheory/Filtration.lean:389 is eventual and shifted; scalar regular quotient intersection criteria in Regular/IsSMulRegular.lean:141-167 concern one scalar. None states simultaneous strictness for all powers under regularity on adic layers."
+  },
+  {
+   "tool": "grep",
+   "query": "associated.?graded|IsSMulRegular.*(inf|quot)|exists_pow_inf_eq_pow_smul",
+   "results": "{\"t\": \"2026-10-23T21:18:31Z\", \"tool\": \"grep\", \"query\": \"associated.?graded|IsSMulRegular.*(inf|quot)|exists_pow_inf_eq_pow_smul\", \"sub\": \"RingTheory/Filtration.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"32\", \"389\"], \"digest\": \"1e5240074ddee5b3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Artin-Rees in Mathlib/RingTheory/Filtration.lean:389 is eventual and shifted; scalar regular quotient intersection criteria in Regular/IsSMulRegular.lean:141-167 concern one scalar. None states simultaneous strictness for all powers under regularity on adic layers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-adic-degree-zero-regular-strict-powers: two ideals act transversely on a finite module when parameters are nonzerodivisors on all layers of the adic filtration",
+   "results": "{\"t\": \"2026-10-23T21:18:32Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-adic-degree-zero-regular-strict-powers: two ideals act transversely on a finite module when parameters are nonzerodivisors on all layers of the adic filtration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.adic_basis\", \"Ideal.adic_module_basis\", \"Ideal.exists_pow_inf_eq_pow_smul\", \"RingTheory.Sequence.isWeaklyRegular_iff_Fin\", \"RingTheory.Sequence.IsWeaklyRegular.regular_mod_prev\", \"IsHausdorff.of_isTorsionFree\", \"Ideal.iInf_pow_smul_eq_bot_of_noZeroSMulDivisors\", \"RingTheory.Sequence.isWeaklyRegular_iff\"], \"digest\": \"814d496e22ceb94c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Artin-Rees in Mathlib/RingTheory/Filtration.lean:389 is eventual and shifted; scalar regular quotient intersection criteria in Regular/IsSMulRegular.lean:141-167 concern one scalar. None states simultaneous strictness for all powers under regularity on adic layers."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-normal-flat-hilbert-convolution",
+  "date": "2026-10-24",
+  "group": "Q28"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Smooth-stable Hilbert--Samuel head and component-dimension correction. Refinement here: Component-dimension rigidity at a Hilbert--Samuel near point of a blowup. Supporting refinement: Normal-flat normal cone and linear vertex at a Hilbert--Samuel near point. Lower input here: Theorem 2.10(2), printed pp.32--33, and the characteristic-independent additive-subgroup argument in the proof of Theorem 2.14, printed p.36, before its linearity argument: Hironaka [H4], Certain numerical characters of singularities, Theorem IV, and [H5], Additive groups associated with points of a projective space, Theorem 2. The normal-cone quotient used there is Theorem 2.2(2)(ii), printed p.28. Refinement in Q87: Numerical near-point input: normal-cone equations have generators in the projective-point order algebra. Q103 refinement: section 2, p.153, normal-flat tangent/normal-cone comparison, and the paragraph after Example (4.2), p.157; the cited underlying result is Resolution of singularities (1964), Chapter II, Theorem 2; numerical input: the Hilbert function of a normally flat local ring is the convolution of the normal-cone fibre Hilbert function with the Hilbert function of its regular centre. Q28 refinement: algebraic strictness of powers of lifted centre parameters on the I-adic module filtration, used before taking finite-length factors.",
+   "via": [
+    "lem-trf-normal-flat-hilbert-convolution",
+    "lem-trf-normal-flat-double-initial-ideal",
+    "lem-trf-near-blowup-order-generators",
+    "lem-trf-near-point-additive-symmetry",
+    "lem-trf-hilbert-samuel-near-normal-cone",
+    "lem-trf-hilbert-samuel-equality-component-rigidity",
+    "lem-trf-hilbert-samuel-smooth-dimension-profile",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-adic-degree-zero-regular-strict-powers",
+  "worker": "stage1",
+  "summary": "Kept the statement. Inducted through the finite I-adic quotient rows using the existing weak-regular short exact sequence theorem; extracted the genuine module homogeneous coefficient theorem as one statement-only input; wrote the coefficient lifting and finite remainder induction explicitly; applied existing Jacobson-radical Krull intersection to M/J^q I^pM. Checked zero layers and empty parameters. No completion or nonvanishing assumption is added.",
+  "blueprint": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality (1)--(2), via normal-flat Hilbert convolution: the adic algebra input is realized by the four steps; current latest ancestor is the contracting-correspondence theorem, and this is a supporting algebraic refinement of the inherited branch, not a replacement of its route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-regular-sequence-short-exact-sequence",
+    "why": "Generic weak-regularity extension tool for the finite I-adic quotient rows; the local-term unit does not contain this module exact-sequence lemma."
+   },
+   {
+    "node": "lem-weil-pbc-krull-intersection-jacobson",
+    "why": "Generic separation theorem on the finite module M/J^q I^pM; no local-term unit node supplies Jacobson-radical Krull intersection."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-regular-sequence-short-exact-sequence",
+  "lem-weil-pbc-krull-intersection-jacobson"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-0581d124c",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-0581d124c (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-trf-weak-regular-module-homogeneous-coefficients and the cited 0F1T/00IQ nodes in full, and checked the Stacks sources: 00LN(2) with its proof, 061N, 0F1T, 00IQ(2); tags verified in tags/tags. The item's statement, stmt_deps and source equal the live node, which is still unsplit live and side-live; there is no repair note and no SGA. Steps: (1) the exact row 0→E_{a-1}→Q_a→Q_{a-1}→0 with part (a) of the short-exact-sequence lemma (injectivity only, zero terms allowed) gives weak regularity on M/I^pM by induction; (2) coefficient lifting via the new node applied to M/I^pM writes N∩J^rM ⊆ J^rN + N∩J^{r+1}M, every membership checked; (3) a finite induction that is genuinely elementary; (4) Krull intersection with J ⊆ m = Jac(R) applied to the finite module M/J^qI^pM; all hypotheses hold. Item tested on k[[x]] with I=J=(x) (hypothesis fails, conclusion fails), on k[[x,y]] with I=(x), J=(y), and on I=0, p=0, q=0, M=0. The new node is degree-n injectivity of the M-quasi-regular map. The weak form is true: a vanishing intermediate quotient forces N/JN=0, so the claim becomes vacuous. Tested on s=0, N=0, s=1 and a unit parameter; it is not a clause of the item. Duplicate search over all 00LN/061N/quasi-regular nodes and J^{n+1}N/M statements found only ring versions (pur higher-homogeneous-relations, graded-polynomial, per h1-koszul, sfb h1 intersection) or unrelated nodes; Lean QuasiRegular.lean:126 is ring-only. The two tool_uses are accepted as generic commutative-algebra tools (short exact regular sequence, Krull–Jacobson intersection). No changes."
+ }
+}

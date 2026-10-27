@@ -1,0 +1,134 @@
+{
+ "id": "def-sfb-proetale-tensor-model",
+ "kind": "definition",
+ "title": "Signed-total tensor models on flat K-flat small pro-etale representatives",
+ "statement": "Let $X$ be a scheme and $X_{\\mathrm{pro\\acute et}}$ its small pro-etale site [def-weil-pbc-proetale-site]. Let $R$ be a sheaf of commutative rings on this site and write $\\mathcal M_R$ for its category of module sheaves [def-weil-sheaf-of-modules-category] and $D(R)$ for its ordinary unbounded derived category with localization $Q$ [def-weil-abstract-derived-category]. The ordinary tensor $M\\otimes_R N$ is the sheafification of the sectionwise balanced tensor product [def-pur-sheaf-tensor-product]; the section $m\\otimes n$ means its canonical sheafification image over every site object. Let $\\mathcal P_R$ be the full subcategory of cochain complexes $P$ which are K-flat [def-pc-kflat-complex] and whose terms are flat module sheaves [def-pc-flat-sheaf-modules]. A signed-total tensor model consists of a bifunctor $\\tau:D(R)\\times D(R)\\to D(R)$ together with a natural isomorphism on $\\mathcal P_R\\times\\mathcal P_R$,\n$$Q\\operatorname{Tot}(P\\otimes_R Q')\\xrightarrow{\\sim}\\tau(QP,QQ'),$$\nwhere the total tensor is the direct-sum total cochain complex with differential $d_P\\otimes1+(-1)^p1\\otimes d_{Q'}$ on bidegree $(p,q)$ [def-pc-tensor-complex-sheaves]. This defines the presentation data, not a choice of arbitrary unnormalized comparison. No boundedness, completion, flatness of $R$, or equality of site object and morphism universes is imposed. For $X:\\mathrm{Scheme}_u$ the site has object universe $u+1$, morphism universe $u$, and the coefficient and module sections have universe $u+1$.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product, proof: total tensor of K-flat resolutions with flat terms; Tag 03EL, lemma-tensor-product-pullback, and preceding section-tensor-product: sheafified ordinary tensor."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ProEtaleTensorModel|proEtaleFlatRepresentatives|proEtaleTensorPair|proEtaleOrdinaryTensor",
+   "results": "0 hits: none",
+   "date": "2026-10-22",
+   "verdict": "No Mathlib presentation of this precise pro-etale flat K-flat tensor model; reuse the existing project declarations without redefinition."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor on sheaves of modules presented by signed total tensor of flat K-flat complexes",
+   "results": "8 hits: Module.Flat.lTensor_shortComplex_exact; Module.Flat.rTensor_shortComplex_exact; HomologicalComplex.ιTensorObj; ComplexShape.TensorSigns; Derivation.tensorProductTo_tmul; HomologicalComplex.tensorObj; ComplexShape.TensorSigns.ctorIdx; HomologicalComplex.tensorHom",
+   "date": "2026-10-22",
+   "verdict": "No Mathlib presentation of this precise pro-etale flat K-flat tensor model; reuse the existing project declarations without redefinition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A presentation of derived tensor by signed total tensor on flat K-flat complexes on a ringed site",
+   "results": "8 hits: HomologicalComplex.ιTensorObj; HomologicalComplex.HasTensor; HomologicalComplex.tensorObj; HomologicalComplex.HasGoodTensor₁₂; HomologicalComplex.HasGoodTensor₂₃; HomologicalComplex.unit_tensor_d₁; HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X; HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX",
+   "date": "2026-10-22",
+   "verdict": "No Mathlib presentation of this precise pro-etale flat K-flat tensor model; reuse the existing project declarations without redefinition."
+  },
+  {
+   "tool": "rg",
+   "query": "ProEtaleTensorModel|proEtaleFlatRepresentatives|proEtaleTensorPair|proEtaleOrdinaryTensor in lean/WeilConjectures and declaration signatures in lean/Sheaf",
+   "results": "No hits in WeilConjectures; all four definitions are in Sheaf.Paper.ProEtaleCanonicalTensorPullback.",
+   "date": "2026-10-22",
+   "verdict": "Exact existing definitions: record existing:true, write no module."
+  },
+  {
+   "tool": "grep / blueprint_refs.py search",
+   "query": "ProEtaleTensorModel in dag/nodes; blueprint_refs.py search ProEtaleTensorModel; blueprint_refs.py search flat K-flat",
+   "results": "No definition node owning the four declarations. The tensor-pullback theorem record lists two as helpers; other mentions are consumer signatures/review notes. Zero blueprint nodes for ProEtaleTensorModel; flat K-flat finds only lem-kun-flat-resolution-existence.",
+   "date": "2026-10-22",
+   "verdict": "A definition node is needed for the existing presentation; no duplicate construction."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-derived-scalar-mate-thick-locus",
+  "date": "2026-10-22",
+  "group": "Q12"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, paragraph (3), all-continuous comparison obligation; Returned proof steps 1 and 2: restriction to the projection arrow, connecting-map compatibility and thick closure; signed-total tensor presentations in the projection normalization.",
+   "via": [
+    "lem-sfb-derived-scalar-mate-thick-locus",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.Paper.ProEtaleTensorPullbackModels",
+  "declaration": "AlgebraicGeometry.Scheme.ProEtaleTensorModel",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ProEtaleTensorModel",
+   "AlgebraicGeometry.Scheme.proEtaleFlatRepresentatives",
+   "AlgebraicGeometry.Scheme.proEtaleOrdinaryTensor",
+   "AlgebraicGeometry.Scheme.proEtaleTensorPair"
+  ],
+  "statement": "structure ProEtaleTensorModel (X : Scheme.{u})\n    (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1})",
+  "branch": "sheaf-dag",
+  "by": "Q12",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Existing plain definitions in the published module, recorded without copying or changing Lean. The model is a derived bifunctor together with its natural signed-total comparison on the full subcategory of flat-term K-flat representatives; the other three declarations give that subcategory, ordinary tensor, and pure tensor sections. The tensor-pullback theorem remains a proof dependency, rather than the statement owner of these definitions. E4, 2026-10-27: declarations moved verbatim to the supporting model module, publicly re-exported from ProEtaleCanonicalTensorPullback; types and definitional data unchanged.",
+  "file": "lean/Sheaf/Paper/ProEtaleTensorPullbackModels.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5c0e7f5a3",
+  "group": "Q12",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5c0e7f5a3",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Re-delivery repairs the 937176943b4f H2/H13 RETURN. stmt_dep lemma-weil-pbc-projection-formula-base-change-naturality -> def-weil-pbc-projection-formula-map (owns proEtaleProjectionFormulaMate); lem-weil-pbc-ringed-topoi-derived-tensor-pullback -> new existing:true def-sfb-proetale-tensor-model over Sheaf.Paper.ProEtaleCanonicalTensorPullback (ProEtaleTensorModel, proEtaleFlatRepresentatives, proEtaleOrdinaryTensor, proEtaleTensorPair; read source l.35-85: real data; statement matches; no other owner; 7 deps exist; Stacks 07A4/03EL). Citation-only statement_change: old_statement and old_stmt_deps equal live; sole citer lem-sfb-continuous-algcl-open-scalar-comparison holds. Lean byte-identical to the reviewed module except one public import; statement verbatim. Only item and new node differ from side-live. Math re-read: beta = mateEquiv of lambda with adjunct conjunct, projection equality, pinned shifts, triangle morphisms, thick locus, Fin n sums, retract inverse; no extra hypotheses or universe restriction; edge cases covered. Advisory: CanonicalTensorShifts uses MateCanonicalShiftData (theorem lem-weil-pbc-ringed-projection-mate-exact, not a stmt_dep) via base theorem stmt_dep lem-sfb-ringed-projection-first-shift (maintainer: def node for it); first-shift dep now uncited in text; two-file source.document. No compile run (no file changed); worker reports clean scompile and dry run OK at c96bf7a4b67."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-67945",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261026T235852-L-1462983",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement vs clone (byte-identical); Models module vs clone item prefix (verbatim modulo renamed private helpers); delivered set + all 37 direct importers compiled against it; slow importers timed against published originals; axioms of the 4 main theorems; node lean records/proof_deps vs Lean"
+ }
+}

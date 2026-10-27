@@ -1,0 +1,249 @@
+{
+ "id": "lem-sfb-space-module-flat-chart-test",
+ "kind": "statement",
+ "title": "Geometric relative module flatness is detected on any etale scheme atlas",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $X$ be an algebraic space over $S$ [def-trf-algebraic-space], and let $f:X\\to T$ be an $S$-morphism to an $S$-scheme $T$, in the universes of [def-weil-size-convention]. Let $M$ be a quasi-coherent $\\mathcal O_X$-module on the small etale site [def-trf-space-quasi-coherent-module], and let $p:U\\to X$ be any representable surjective etale morphism from a scheme. Use the canonical tensor pullback [def-trf-space-etale-module-functors], and let $F$ be the quasi-coherent Zariski $\\mathcal O_U$-module corresponding to $p^*M$ under [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence]. For a geometric point $\\bar x:\\operatorname{Spec}\\Omega\\to X$ with $\\Omega$ algebraically closed, put $\\bar t=f\\bar x$; write $M_{\\bar x}$ and $\\mathcal O_{T,\\bar t}$ for the stalks of the small etale module and structure sheaves, namely the colimits of their sections over pointed etale scheme neighbourhoods. The following conditions are equivalent: (i) for every geometric point $\\bar x$ of $X$, the module $M_{\\bar x}$ is flat over $\\mathcal O_{T,\\bar t}$ through the map induced by $f$; (ii) for every $u\\in U$, with $t=fp(u)$, the ordinary Zariski stalk $F_u$ is flat over $\\mathcal O_{T,t}$ through $\\mathcal O_{T,t}\\to\\mathcal O_{U,u}$ [def-pc-scheme-module-flat-over]. Module flatness means [def-weil-pbc-flat-ring-map]. This equivalence holds for every such atlas; no finiteness, separation, Noetherian or flatness hypothesis on $f$ or $M$ is required.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 05VU (lemma-flat-at-point), equivalence of (1) and (2), with the proof for an arbitrary pair of charts and with target chart the identity of the scheme T; applied at all points."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "def-pc-scheme-module-flat-over",
+  "def-weil-pbc-flat-ring-map",
+  "def-trf-scheme-algebraic-space",
+  "def-trf-space-module-scheme-restriction",
+  "def-sfb-space-geometric-stalk-models",
+  "def-pc-module-stalk-functor"
+ ],
+ "proof": [
+  {
+   "text": "Fix a geometric point $\\bar u:\\operatorname{Spec}\\Omega\\to U$, and put $\\bar x=p\\bar u$, $\\bar t=f\\bar x$, $u=|\\bar u|$, $t=fp(u)$, $B=\\mathcal O_{U,u}$ and $R=\\mathcal O_{T,t}$. By [lem-sfb-space-strict-local-flatness], applied to $p$ and to the identity chart of $T$, the natural germ maps identify $\\mathcal O_{X,\\bar x}$ with $B^{\\mathrm{sh}}$ and $\\mathcal O_{T,\\bar t}$ with $R^{\\mathrm{sh}}$, using the residue embeddings specified by these geometric points. By [lem-sfb-space-quasicoherent-geometric-stalk-tensor], there is a canonical $B^{\\mathrm{sh}}$-linear isomorphism $F_u\\otimes_B B^{\\mathrm{sh}}\\simeq M_{\\bar x}$. In particular it respects the $R$-action through $fp$: the two actions send each local function germ on $T$ to its pullback germ on the same pointed neighbourhood. Thus both are the restriction of the given $R^{\\mathrm{sh}}$-action.",
+   "uses": [
+    "lem-sfb-space-strict-local-flatness",
+    "lem-sfb-space-quasicoherent-geometric-stalk-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 05VU (lemma-flat-at-point), proof, with target chart V=T and source chart U."
+   }
+  },
+  {
+   "text": "The map $B\\to B^{\\mathrm{sh}}$ is faithfully flat by [lem-sc-strict-henselization-faithfully-flat]. Apply [lem-trf-flatness-faithfully-flat-extension] to $R\\to B\\to B^{\\mathrm{sh}}$ and the $B$-module $F_u$. Using step 1 (and the tensor symmetry $b\\otimes m\\mapsto m\\otimes b$, with inverse of the same form), it gives $F_u$ flat over $R$ if and only if $M_{\\bar x}$ is flat over $R$. Apply [lem-sfb-strict-henselization-module-flatness] to the $R^{\\mathrm{sh}}$-module $M_{\\bar x}$. This is equivalent to flatness over $R^{\\mathrm{sh}}=\\mathcal O_{T,\\bar t}$. This proves the desired equivalence for every chosen geometric lift $\\bar u$, without a flatness assumption on $R\\to B$.",
+   "uses": [
+    "lem-sc-strict-henselization-faithfully-flat",
+    "lem-trf-flatness-faithfully-flat-extension",
+    "lem-sfb-strict-henselization-module-flatness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 05VU (lemma-flat-at-point), final paragraph; algebra.tex Tag 0584 (lemma-flatness-descends-more-general), part (2); flat.tex Tag 05VL (lemma-flat-up-down-henselization), (1) iff (3); more-algebra.tex Tag 07QM (lemma-dumb-properties-henselization), (1)."
+   }
+  },
+  {
+   "text": "Assume (ii), and fix any $\\bar x:\\operatorname{Spec}\\Omega\\to X$. Surjectivity of the atlas gives a point $u\\in|U|$ over its image $x$; this is also the scheme-test meaning of surjectivity in [def-trf-algebraic-space]. By [lem-sfb-etale-geometric-point-specified-lift], the etale map $p$ admits a lift $\\bar u:\\operatorname{Spec}\\Omega\\to U$ over this specified $u$, with $p\\bar u=\\bar x$. Condition (ii) supplies flatness of $F_u$ over $R$. The equivalence of step 2 gives flatness of $M_{\\bar x}$ over $\\mathcal O_{T,f\\bar x}$. Since $\\bar x$ was arbitrary, (i) follows.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-etale-geometric-point-specified-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 05VU (lemma-flat-at-point), proof; spaces-properties.tex Tag 05VN (lemma-geometric-lift-to-usual)."
+   }
+  },
+  {
+   "text": "Assume (i), and let $u\\in U$. Choose an algebraic closure $\\Omega$ of $\\kappa(u)$, which exists by [def-weil-algebraic-closure]. The residue-field embedding defines a geometric point $\\bar u:\\operatorname{Spec}\\Omega\\to U$ over $u$ by [def-weil-geometric-point]. Apply (i) to $\\bar x=p\\bar u$ and then step 2 to obtain that $F_u$ is flat over $\\mathcal O_{T,fp(u)}$. This holds for every $u$, proving (ii). The same argument works for every given atlas. If $U$ is empty then surjectivity forces $X$ empty and both conditions are vacuous; the zero module and identity atlas also satisfy the argument unchanged.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "def-weil-geometric-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 05VU (lemma-flat-at-point), proof, with target chart V=T and source chart U."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-strict-local-flatness",
+  "lem-sfb-space-quasicoherent-geometric-stalk-tensor",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-trf-flatness-faithfully-flat-extension",
+  "lem-sfb-strict-henselization-module-flatness",
+  "def-trf-algebraic-space",
+  "lem-sfb-etale-geometric-point-specified-lift",
+  "def-weil-algebraic-closure",
+  "def-weil-geometric-point"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 05VU (lemma-flat-at-point), proof for the arbitrary source chart p and identity target chart; global quantification over points."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Flatness of a quasi coherent module on an algebraic space is equivalent to relative flatness on a surjective etale scheme atlas using geometric stalks",
+   "results": "{\"t\": \"2026-10-23T15:05:10Z\", \"tool\": \"leanfinder\", \"query\": \"Flatness of a quasi coherent module on an algebraic space is equivalent to relative flatness on a surjective etale scheme atlas using geometric stalks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\"], \"digest\": \"0383e36a4541b803\"}; Read the returned signatures. Hits are flat scheme morphisms, algebraic module flatness, or smooth algebras; none states flatness of an arbitrary quasi-coherent module on an algebraic space tested on an etale atlas.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"stalk\"",
+   "results": "{\"t\": \"2026-10-23T15:05:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"Flat\\\", \\\"stalk\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Module.rankAtStalk_eq_of_le_of_finite_of_flat\", \"Module.rankAtStalk_eq_of_le_of_finite_of_flat'\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"Module.Free.away_of_finite_of_flat_of_rankAtStalk_constant\"], \"digest\": \"47e1de3079a14b58\"}; Read the returned signatures. Hits are flat scheme morphisms, algebraic module flatness, or smooth algebras; none states flatness of an arbitrary quasi-coherent module on an algebraic space tested on an etale atlas.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|flat.*geometric.*stalk|geometric.*stalk.*flat",
+   "results": "{\"t\": \"2026-10-23T15:05:11Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|flat.*geometric.*stalk|geometric.*stalk.*flat\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures. Hits are flat scheme morphisms, algebraic module flatness, or smooth algebras; none states flatness of an arbitrary quasi-coherent module on an algebraic space tested on an etale atlas.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative flatness of a quasi coherent module on an algebraic space can be tested on any surjective etale scheme chart by geometric stalks",
+   "results": "{\"t\": \"2026-10-23T15:19:30Z\", \"tool\": \"leansearch\", \"query\": \"Relative flatness of a quasi coherent module on an algebraic space can be tested on any surjective etale scheme chart by geometric stalks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"Module.flat_of_isLocalized_span\", \"AlgebraicGeometry.Flat.casesOn\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\"], \"digest\": \"88ddb8ccb7fe1d19\"}; Read the returned signatures. Hits are flat scheme morphisms, algebraic module flatness, or smooth algebras; none states flatness of an arbitrary quasi-coherent module on an algebraic space tested on an etale atlas.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A module on the small etale site of an algebraic space is flat over a scheme if and only if its restriction to a surjective etale atlas is relatively flat",
+   "results": "{\"t\": \"2026-10-23T15:19:33Z\", \"tool\": \"leanfinder\", \"query\": \"A module on the small etale site of an algebraic space is flat over a scheme if and only if its restriction to a surjective etale atlas is relatively flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"Algebra.Smooth.flat\", \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"AlgebraicGeometry.Flat.flat_appLE\"], \"digest\": \"927cfee1d13941e8\"}; Read the returned signatures. Hits are flat scheme morphisms, algebraic module flatness, or smooth algebras; none states flatness of an arbitrary quasi-coherent module on an algebraic space tested on an etale atlas.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|flat.*geometric.*stalk|geometric.*stalk.*flat",
+   "results": "{\"t\": \"2026-10-23T18:35:48Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|flat.*geometric.*stalk|geometric.*stalk.*flat\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned signatures. Scheme-morphism flatness/stalk criteria and quasi-coherent module definitions do not assert relative module flatness on algebraic spaces or the arbitrary-atlas criterion. Read Flat.lean lines 99-107 for the closest flat scheme-morphism candidates.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"stalk\"",
+   "results": "{\"t\": \"2026-10-23T18:35:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"Flat\\\", \\\"stalk\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Module.rankAtStalk_eq_of_le_of_finite_of_flat\", \"Module.rankAtStalk_eq_of_le_of_finite_of_flat'\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"Module.Free.away_of_finite_of_flat_of_rankAtStalk_constant\"], \"digest\": \"47e1de3079a14b58\"}; Read returned signatures. Scheme-morphism flatness/stalk criteria and quasi-coherent module definitions do not assert relative module flatness on algebraic spaces or the arbitrary-atlas criterion. Read Flat.lean lines 99-107 for the closest flat scheme-morphism candidates.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat quasi coherent structure sheaf modules on algebraic spaces tested on etale scheme charts",
+   "results": "{\"t\": \"2026-10-23T18:35:49Z\", \"tool\": \"leansearch\", \"query\": \"Flat quasi coherent structure sheaf modules on algebraic spaces tested on etale scheme charts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules\", \"SheafOfModules.IsQuasicoherent.mk\", \"SheafOfModules.QuasicoherentData.ctorIdx\", \"SheafOfModules.isQuasicoherent\", \"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.IsQuasicoherent\", \"SheafOfModules.QuasicoherentData.presentation\", \"SheafOfModules.IsQuasicoherent.casesOn\"], \"digest\": \"071d286cf405a7e2\"}; Read returned signatures. Scheme-morphism flatness/stalk criteria and quasi-coherent module definitions do not assert relative module flatness on algebraic spaces or the arbitrary-atlas criterion. Read Flat.lean lines 99-107 for the closest flat scheme-morphism candidates.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative flatness of a quasi coherent module on an algebraic space is detected on any surjective etale atlas by geometric stalks",
+   "results": "{\"t\": \"2026-10-23T18:35:49Z\", \"tool\": \"leanfinder\", \"query\": \"Relative flatness of a quasi coherent module on an algebraic space is detected on any surjective etale atlas by geometric stalks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\"], \"digest\": \"b5b790cfaa4ef24f\"}; Read returned signatures. Scheme-morphism flatness/stalk criteria and quasi-coherent module definitions do not assert relative module flatness on algebraic spaces or the arbitrary-atlas criterion. Read Flat.lean lines 99-107 for the closest flat scheme-morphism candidates.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasicoherent module relative flatness over a scheme is equivalent to flatness of geometric stalks over etale local rings",
+   "results": "{\"t\": \"2026-10-23T18:38:26Z\", \"tool\": \"leanfinder\", \"query\": \"Quasicoherent module relative flatness over a scheme is equivalent to flatness of geometric stalks over etale local rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\"], \"digest\": \"6ebff5bfabc33751\"}; Read returned signatures. Scheme-morphism flatness/stalk criteria and quasi-coherent module definitions do not assert relative module flatness on algebraic spaces or the arbitrary-atlas criterion. Read Flat.lean lines 99-107 for the closest flat scheme-morphism candidates.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-module-eventually-flat",
+  "date": "2026-10-23",
+  "group": "NQ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 0A1P (lemma-base-change-tensor-perfect), perfectness assertion; perfect means sites-cohomology.tex Tag 08G5 (definition-perfect). Supporting input: Tag 0A1P (lemma-base-change-tensor-perfect), Noetherian-approximation paragraph, only the data preceding K_i. Inputs: spaces-limits.tex Tags 07SK (lemma-descend-finite-presentation), 07V7 (lemma-descend-modules-finite-presentation), 08K0 (lemma-descend-flat), 08K2 (lemma-eventually-proper-support); spaces-perfect.tex Tag 09RJ (lemma-perfect-on-limit); spaces-cohomology.tex Tag 07UB (lemma-coherent-Noetherian). Supporting limit input: Tag 08K0 (lemma-descend-flat), module assertion in Situation 084W (situation-descent-property), specialized to affine bases and finite-presentation source; persistence under base change is spaces-morphisms.tex Tag 05VW (lemma-base-change-module-flat). Supporting input: Tag 08K0 proof, sentence testing module flatness on surjective etale charts; the module criterion itself is Tag 05VU (lemma-flat-at-point).",
+   "via": [
+    "lem-sfb-space-module-eventually-flat",
+    "lem-sfb-space-perfect-flat-proper-model",
+    "lem-sfb-proper-support-tensor-perfect",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-module-flat-chart-test",
+  "worker": "stage1",
+  "summary": "Checked the arbitrary-atlas assertion against Stacks 05VU and its cited 0584/05VL algebra. Reused the existing geometric module-stalk tensor formula, strict-local ring comparison, specified-point lift, relative faithful-flat extension and strict-henselization flatness nodes. The original statement and statement dependencies are unchanged. No new nodes or Mathlib leaves are needed.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images proof (3) through the inherited eventual-flatness/Noetherian-approximation chain: the chartwise test used in spaces-limits.tex 08K0. Read the latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, clause (3). The inherited nearest blueprint ancestor is null (blueprint_refs.py ancestor agrees), so its existing from/via chain is preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-strict-henselization-faithfully-flat",
+    "why": "Generic local-ring faithful flatness of B to its strict henselization, needed by 05VU; no replacement of the unit route."
+   },
+   {
+    "node": "lem-trf-flatness-faithfully-flat-extension",
+    "why": "Generic relative module-flatness equivalence under faithful-flat extension of the source ring (0584); the unit has no separate node for this algebraic fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-trf-flatness-faithfully-flat-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-5e43e976a",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-5e43e976a (reviewer sub-agent of L); spot-checked: Read Stacks 05VU (lemma-flat-at-point) statement and proof, plus 0584(2), 05VL (1)<=>(3), 05VN and 07QM(1). The item is 05VU (1)<=>(2) with target chart id_T, quantified over all points. The proof never uses 'some' against 'every' for the source chart, so the every-atlas claim holds. Statement and stmt_deps are byte-identical to live, and live is still unsplit with no repair note, so the delivery is not superseded and no re-split rule applies. Step 1: the 04KF node, applied to p and to id_T, gives O_{X,xbar}=B^sh and O_{T,tbar}=R^sh; the 05VP node (M quasi-coherent, p etale from a scheme) gives F_u⊗B^sh≅M_xbar; the R-actions agree by germ pullback. The pair and triple strict-henselization definitions give the same colimit for a local ring. Step 2: 07QM gives B->B^sh faithfully flat; 0584 with A=R, B, C=B^sh, N=F_u; then 05VL on the R^sh-module M_xbar. All hypotheses hold, and no flatness of f or finiteness is needed. Step 3: surjectivity via def-trf-algebraic-space gives u over x, then the 05VN node gives the same-Omega lift. Step 4: algebraic closure and geometric point leaves; the elementary mark is justified. proof_deps equals the union of uses, and there is no cycle. Tested U empty, M=0, identity atlas, non-flat f and non-Noetherian R. No duplicate: rg -L 05VU/lemma-flat-at-point finds only morphism-flatness and other distinct nodes. No new nodes. Accepted tool_uses: 07QM (sk-thm-br) and 0584 (sk-i-curve-zero), generic algebra that 05VU itself cites. Batch-5: the closure contains only foundational trf nodes (def-trf-algebraic-space, lem-trf-etale-local-ring-flatness, 0584 algebra) and no trace-formula or Poincaré-duality statement or proof step, so all five flagged citations are outside the assumptions. No SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceModuleFlatChartTest",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.module_flat_iff_chart_stalk",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceModuleFlatChartTest.lean",
+  "statement": "theorem module_flat_iff_chart_stalk {S : Scheme.{u}} (X : AlgebraicSpace S) (T : Over S) (f : X ⟶ schemeSpace T) (M : X.Modules) [M.IsQuasicoherent] (U : X.EtaleSite) (_hU : IsSurjective U.obj.hom) : (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (x : yoneda.obj (Over.mk s) ⟶ X.obj.obj), Module.Flat (stalkRing s (x ≫ f.hom.hom)) ((ModuleCat.restrictScalars (stalkMap f s x)).obj ((stalkModel s x).modules.obj M))) ↔ ∀ u : X.etaleForget.obj U, Module.Flat (T.left.presheaf.stalk ((yoneda.preimage (U.obj.hom ≫ f.hom.hom)).left u)) ((ModuleCat.restrictScalars (((yoneda.preimage (U.obj.hom ≫ f.hom.hom)).left).stalkMap u).hom).obj ((RingedSpace.moduleStalkFunctor (X.etaleForget.obj U).toRingedSpace u).obj ((X.schemeRestriction U).obj M)))",
+  "branch": "sheaf-dag",
+  "by": "Q97",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Geometric stalks and their scalar map use the existing normalized section-colimit model. The atlas is an arbitrary small-etale object with scheme-test surjectivity; its Zariski module is canonical restriction to opens, the inverse Zariski/etale comparison of its tensor pullback. The conclusion explicitly quantifies ordinary stalks and their canonical scalar restrictions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-68532315b",
+  "group": "Q97",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 05VU (1)<=>(2) clause by clause: S/X/T/f via schemeSpace; M with IsQuasicoherent; arbitrary U : X.EtaleSite with scheme-test IsSurjective; F = schemeRestriction U M (canonical Zariski form of p^*M, flatness iso-invariant); (i) all geometric points Ω : Type u, IsAlgClosed, stalkModel/stalkRing with restrictScalars along canonical stalkMap; (ii) ∀ u ordinary stalk via moduleStalkFunctor over T.stalk(fp u) along the stalkMap of fp = yoneda.preimage; ↔ with no extra hypotheses. Added stmt_deps are landed owners of the declarations used. Sorry-only theorem, no defs; source and blueprint docstrings and 4-step proof present; lean.statement verbatim; snapshot changes only item node + new module; both report sections present. Edge cases: empty U, M=0, identity atlas, non-flat f, non-Noetherian T, char p, universe u. No findings; no compile (no changes)."
+ }
+}

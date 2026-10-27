@@ -1,0 +1,210 @@
+{
+ "id": "lem-sfb-quotient-stack-invariant-base-change",
+ "kind": "statement",
+ "title": "Quotient stacks commute with invariant base change",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention]. Stacks, Deligne--Mumford stacks, representability by algebraic spaces and 2-fibre products have the meanings of [def-sfb-stable-pointed-moduli-groupoids]; algebraic spaces mean [def-trf-algebraic-space]. Let $(U,R,s,t,e,i,c)$ be a groupoid in algebraic spaces over $S$, meaning that functorially on test schemes its objects and arrows form a groupoid, with the laws of [def-a1-scheme-groupoid-laws]. Let $a:U\\to X$ be a map to an algebraic space with $as=at$. For any algebraic-space map $X_1\\to X$, put $U_1=U\\times_XX_1$ and $R_1=R\\times_XX_1$ with all groupoid maps obtained by base change. If $[U/R]$ and $[U_1/R_1]$ denote the fppf stackifications of their groupoid prestacks [def-pc-fppf-site], the canonical square with top row $[U_1/R_1]\\to[U/R]$ and bottom row $X_1\\to X$ is 2-cartesian. The vertical maps are induced by $a$ and its base change.",
+ "source": {
+  "document": "literature/stacks-project/groupoids-quotients.tex",
+  "place": "Tag 0DTG, lemma-base-change-quotient-stack."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-a1-scheme-groupoid-laws",
+  "def-pc-fppf-site"
+ ],
+ "proof": [
+  {
+   "text": "Write $A=[U/R]$, $A_1=[U_1/R_1]$, $g:X_1\\to X$, and let $\\iota,\\iota_1$ be the maps from the two groupoid prestacks to their stackifications. An algebraic space is an fppf sheaf; regarded as a discrete fibred groupoid it is a stack, since objects glue by the sheaf axiom and all arrows are identities. The invariant map $a$ sends every arrow of the groupoid prestack to an identity in $X$. The stackification extension property therefore gives $f:A\\to X$ and likewise $f_1:A_1\\to X_1$. Put $B=X_1\\times_X A$. By the definition of the 2-fibre product, $B(T)$ consists of pairs $(x_1,y)$ with $g x_1=f(y)$, and arrows are arrows in $A(T)$ with the same $x_1$. This fibred groupoid is a stack: for covering descent data, glue the $x_1$ components in the sheaf $X_1$ and the $y$ components in the stack $A$; their equality in $X$ holds locally and hence globally. Arrows glue uniquely by the isomorphism-sheaf axiom for $A$. The maps on the groupoid prestack $(u,x_1)\\mapsto(x_1,\\iota(u))$ and $(r,x_1)\\mapsto \\iota(r)$ preserve composition and pullback. Extending this functor to the stack $B$ gives $F:A_1\\to B$ whose composite with $\\iota_1$ is isomorphic to it. Its first component equals $f_1$: both send $\\iota_1(u,x_1)$ to $x_1$, since $X_1$ has only identity arrows and the base change $U_1\\to X_1$ of $a$ is the projection; every object of $A_1$ is locally of this form, and $X_1$ is a sheaf. Its second component $h$ satisfies $h\\iota_1\\cong\\iota p$ for the projection $p:(u,x_1)\\mapsto u$, $(r,x_1)\\mapsto r$ of groupoid prestacks, so $h$ is an extension of $\\iota p$ as given by the extension property; it is the top map $[U_1/R_1]\\to[U/R]$, and $fh=gf_1$ because $F$ lands in $B$. Thus $F=(f_1,h)$ is the canonical comparison of the square with the 2-fibre product.",
+   "uses": [
+    "lem-sfb-groupoid-stackification-local-description",
+    "def-trf-algebraic-space",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-a1-scheme-groupoid-laws"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids-quotients.tex",
+    "place": "Tag 0DTG, lemma-base-change-quotient-stack, proof; explicit morphism verification using stacks.tex Tags 02ZP/0436 and spaces-groupoids.tex Tag 044X."
+   }
+  },
+  {
+   "text": "For $u,v\\in U(T)$, the presheaf of arrows from $u$ to $v$ is $V\\mapsto\\{r\\in R(V):s(r)=u|_V,\\ t(r)=v|_V\\}$. It is an fppf sheaf: local arrows glue uniquely in the sheaf $R$, and their endpoint equations hold after gluing since $U$ is a sheaf. The same argument applies to $U_1,R_1$, whose sections are compatible pairs of sections. Sheafification fixes a sheaf: its universal property applied to its own identity gives an inverse to the unit, and uniqueness gives both inverse identities. Thus the isomorphism-sheaf clause of stackification identifies arrows between chart objects in $A$ and $A_1$ with these original arrow sheaves. For $u_1=(u,x_1)$ and $v_1=(v,z_1)$, an arrow between their images in $B$ requires $x_1=z_1$ and an $r$ with endpoints $u,v$. If $x_1=z_1$, invariance gives $a s(r)=a(u)=g x_1$, so the unique compatible pair $(r,x_1)$ is an $R_1$-arrow with endpoints $u_1,v_1$. Conversely every such $R_1$-arrow projects to this $r$ and forces $x_1=z_1$. These inverse rules commute with restriction, composition, identities and inverses because the operations on $R_1$ are the base-changed operations, with unchanged $X_1$ component. Hence $F$ induces bijections on all arrow sheaves between chart objects.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-groupoid-stackification-local-description",
+    "def-weil-pbc-sheafification",
+    "def-a1-scheme-groupoid-laws"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids-quotients.tex",
+    "place": "Tag 0DTG, lemma-base-change-quotient-stack, proof; explicit morphism verification using stacks.tex Tags 02ZP/0436 and spaces-groupoids.tex Tag 044X."
+   }
+  },
+  {
+   "text": "Let $z,w\\in A_1(T)$. The local-object clause of stackification supplies an fppf cover on which both are isomorphic to chart objects; take the common refinement of the two covers. Conjugating by these isomorphisms identifies the map of isomorphism sheaves induced by $F$ with the bijections of step 2 on this cover. Given a target arrow over $T$, the local inverse arrows agree on overlaps by local injectivity, and glue uniquely because $A_1$ is a stack. Their image equals the given arrow since this holds on the cover and $B$ is a stack. Likewise two arrows with the same image coincide locally and hence globally. Thus every fibre functor $F_T$ is fully faithful.",
+   "uses": [
+    "lem-sfb-groupoid-stackification-local-description",
+    "def-pc-fppf-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids-quotients.tex",
+    "place": "Tag 0DTG, lemma-base-change-quotient-stack, proof; explicit morphism verification using stacks.tex Tags 02ZP/0436 and spaces-groupoids.tex Tag 044X."
+   }
+  },
+  {
+   "text": "For an object $(x_1,y)\\in B(T)$ choose an fppf cover $T_i\\to T$ and isomorphisms $\\iota(u_i)\\cong y|_{T_i}$ using the local-object clause for $A$. Applying $f$ to these isomorphisms gives $a(u_i)=g(x_1|_{T_i})$, since $X$ has only identity arrows. Hence $u_{1,i}=(u_i,x_1|_{T_i})$ is a section of $U_1$. Its image under $F$ is isomorphic to $(x_1,y)|_{T_i}$, with isomorphism given by the chosen one in $A$ and the identity on $x_1|_{T_i}$. Thus $F$ is locally essentially surjective. In the descent-data notation of 0DTG these are precisely the lifts $u_i\\mapsto(u_i,x_1)$ and $r_{ij}\\mapsto(r_{ij},x_1)$; step 2 also verifies their arrow compatibility, which the source leaves implicit.",
+   "uses": [
+    "lem-sfb-groupoid-stackification-local-description",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids-quotients.tex",
+    "place": "Tag 0DTG, lemma-base-change-quotient-stack, proof; explicit morphism verification using stacks.tex Tags 02ZP/0436 and spaces-groupoids.tex Tag 044X."
+   }
+  },
+  {
+   "text": "Both $A_1$ and $B$ are stacks on the same big fppf site in the stipulated universes. Step 3 gives fibrewise full faithfulness and step 4 gives covering-local essential surjectivity. Apply the fully faithful local-equivalence criterion to obtain an equivalence $A_1\\simeq B$ over that site. Since $F$ is the comparison to the 2-fibre product of step 1, this says exactly that the displayed canonical square is 2-cartesian, with the indicated vertical maps.",
+   "uses": [
+    "lem-sfb-stack-fully-faithful-local-equivalence",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-pc-fppf-site",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids-quotients.tex",
+    "place": "Tag 0DTG, lemma-base-change-quotient-stack, proof; explicit morphism verification using stacks.tex Tags 02ZP/0436 and spaces-groupoids.tex Tag 044X."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-groupoid-stackification-local-description",
+  "def-trf-algebraic-space",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-a1-scheme-groupoid-laws",
+  "def-weil-pbc-sheafification",
+  "def-pc-fppf-site",
+  "lem-sfb-stack-fully-faithful-local-equivalence",
+  "def-weil-size-convention"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids-quotients.tex",
+  "place": "Tag 0DTG, lemma-base-change-quotient-stack; morphisms expanded using the stackification local-isomorphism-sheaf description."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Quotient stack of a groupoid commutes with base change along an invariant morphism to an algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {a b c : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (x : a ⟶ b) (x_1 : b ⟶ c),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.mapComp x x_1).hom.τl =\\n    CategoryTheory.NatTrans.toCatHom₂ (AlgebraicGeometry.Scheme.Modules.pullbackComp x_1.as.unop x.as.unop).inv\", \"doc\": \"For any composable morphisms $ f: X \\to Y $ and $ g: Y \\to Z $ of schemes, the left component of the homomorphism associated to the pseudofunctor's composition of pullback-pushforward adjunctions equals\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z T : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ T),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Scheme.Modules.pullbackComp f (CategoryTheory.CategoryStruct.comp g h)).inv\\n      (CategoryTheory.CategoryStruct.comp\\n        (CategoryTheory.Functor.whiskerRight\", \"doc\": \"For any schemes $X, Y, Z, T$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, $h : Z \\\\to T$, the pullback functors associated to the compositions $f \\\\circ (g \\\\circ h)$ and $(f \\\\circ g) \\\\circ h$ are equal. \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {a b c : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (x : a ⟶ b) (x_1 : b ⟶ c),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.mapComp x x_1).inv.τl =\\n    CategoryTheory.NatTrans.toCatHom₂ (AlgebraicGeometry.Scheme.Modules.pullbackComp x_1.as.unop x.as.unop).hom\", \"doc\": \"For any composable morphisms $ f: X \\to Y $ and $ g: Y \\to Z $ of schemes, the left component of the inverse of the pseudofunctor's composition map on the opposite category is equal to the natural trans\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z T : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ T)\\n  {Z_1 : CategoryTheory.Functor T.Modules X.Modules}\\n  (h_1 :\\n    AlgebraicGeometry.Scheme.Modules.pullback\\n        (CategoryTheory.CategoryStruct.comp (CategoryTheory.CategoryStruct.comp f g) h) ⟶\\n      Z_1),\\n  CategoryTheor\", \"doc\": \"Let $X, Y, Z, T$ be schemes with morphisms $f: X \\\\to Y$, $g: Y \\\\to Z$, and $h: Z \\\\to T$. The assignment $X \\\\mapsto \\\\mathrm{Mod}(X)$ (the category of sheaves of $\\\\mathcal{O}_X$-modules) and $(f: X \\\\to \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {a b c : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (x : a ⟶ b) (x_1 : b ⟶ c),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.mapComp x x_1).hom.τr =\\n    CategoryTheory.NatTrans.toCatHom₂ (AlgebraicGeometry.Scheme.Modules.pushforwardComp x_1.as.unop x.as.unop).hom\", \"doc\": \"For morphisms $f: X \\\\to Y$ and $g: Y \\\\to Z$ of schemes, the counit component of the pseudofunctor's composition map $\\\\tau_{g \\\\circ f}$ is naturally isomorphic to the composition of counits $\\\\tau_g \\\\ci\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      (AlgebraicGeometry.Scheme.Modules.pullback g).comp (AlgebraicGeometry.Scheme.Modules.pullback f) ≅\\n        AlgebraicGeometry.Scheme.Modules.pullback (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"For any schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the composition of the pullback functors along $g$ and $f$ is naturally isomorphic to the pullback functor along the composition $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {a b c : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (x : a ⟶ b) (x_1 : b ⟶ c),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.mapComp x x_1).inv.τr =\\n    CategoryTheory.NatTrans.toCatHom₂ (AlgebraicGeometry.Scheme.Modules.pushforwardComp x_1.as.unop x.as.unop).inv\", \"doc\": \"For any morphisms of schemes $ f: X \\to Y $ and $ g: Y \\to Z $, the inverse of the coherence isomorphism for the pseudofunctor's composition of $ f $ and $ g $ corresponds to the inverse of the natural \"}\n  {\"name\": \"TopCat.Presheaf.stalkPushforward.comp\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X Y Z : TopCat}\\n  (ℱ : TopCat.Presheaf C X) (f : X ⟶ Y) (g : Y ⟶ Z) (x : ↑X),\\n  TopCat.Presheaf.stalkPushforward C (CategoryTheory.CategoryStruct.comp f g) ℱ x =\\n    CategoryTheory.CategoryStruct\", \"doc\": \"For a presheaf $\\\\mathcal{F}$ on a topological space $X$, and continuous maps $f : X \\\\to Y$ and $g : Y \\\\to Z$, the stalk pushforward of $\\\\mathcal{F}$ along the composition $g \\\\circ f$ at a point $x \\\\in\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism properties, ordinary categorical groupoids or unrelated affine results; no declaration gives the stated geometric assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"pullback\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism properties, ordinary categorical groupoids or unrelated affine results; no declaration gives the stated geometric assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "quotientStack|quotient_stack|stackification.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*stackification",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism properties, ordinary categorical groupoids or unrelated affine results; no declaration gives the stated geometric assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The fppf quotient stack of the base changed groupoid is the two fibre product of the original quotient stack",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.relativelyRepresentable.isStableUnderBaseChange\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Representable\", \"type\": \": IsStableUnderBaseChange F.relativelyRepresentable\", \"doc\": \"The property of being relatively representable with respect to a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is stable under base change. That is, if a morphism $ f : X \\\\to Y $ in $ \\\\mathcal{D} $ is r\"}\n  {\"name\": \"CategoryTheory.isGroupoidProd\", \"module\": \"Mathlib.CategoryTheory.Groupoid\", \"type\": \"{α : Type u} {β : Type u₂} [Category.{v} α] [Category.{v₂} β] [IsGroupoid α] [IsGroupoid β] : IsGroupoid (α × β)\", \"doc\": \"Given two categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ that are groupoids (i.e., every morphism is an isomorphism), their product category $\\\\mathcal{C} \\\\times \\\\mathcal{D}$ is also a groupoid. This means\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.Grothendieck.Hom.mk.injEq\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Grothendieck\", \"type\": \"∀ {𝒮 : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} 𝒮]\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete 𝒮) CategoryTheory.Cat} {X Y : F.Grothendieck}\\n  (base : X.base ⟶ Y.base) (fiber : (F.map base.toLoc).toFunctor.obj X.fiber ⟶ Y.fiber) (base_1 : X.base ⟶ Y.base)\\n  (fiber_1 \", \"doc\": \"Two morphisms $(f, g)$ and $(f', g')$ in the Grothendieck category $\\\\int F$ are equal if and only if their base morphisms $f = f'$ in $\\\\mathcal{S}$ and their fiber morphisms $g \\\\cong g'$ in the target\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @QuasiSeparated\", \"doc\": \"The property of being quasi-separated for morphisms of schemes is stable under base change. That is, if a morphism $ f: X \\to Y $ of schemes is quasi-separated, then any base change (pullback) of $ f $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeJointlySurjectivePrecoverage\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Pretopology\", \"type\": \": jointlySurjectivePrecoverage.IsStableUnderBaseChange\", \"doc\": \"The jointly surjective precoverage on the category of schemes is stable under base change. Specifically, if a family of morphisms of schemes has images that jointly cover the target scheme, then the p\"}\n  {\"name\": \"CategoryTheory.Quotient.inv\", \"module\": \"Mathlib.CategoryTheory.Quotient\", \"type\": \"{X Y : Quotient r} (f : X ⟶ Y) : Y ⟶ X\", \"doc\": \"Given a quotient groupoid formed by a hom-set relation $ R $, this function assigns to each morphism $ f: X \\to Y $ in the quotient its inverse $ f^{-1}: Y \\to X $, defined as the equivalence class of t\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsProper\", \"doc\": \"Properness of morphisms of schemes is stable under base change. That is, if $ f: X \\to Y $ is a proper morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ f': X \\times_Y Y' \\to Y'\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @LocallyQuasiFinite\", \"doc\": \"The property of being a locally quasi-finite morphism of schemes is stable under base change. That is, if a morphism $ f: X \\\\to Y $ is locally quasi-finite, then any base change (pullback) of $ f $ is\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism properties, ordinary categorical groupoids or unrelated affine results; no declaration gives the stated geometric assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "quotientStack|quotient_stack|stackification.*[Pp]ullback|stackification.*[Bb]ase[Cc]hange",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: descent-data equivalences assume an existing stack and do not identify stackification of the base-changed geometric groupoid; module-sheaf pullback comparisons concern different objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stackification\", \"pullback\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: descent-data equivalences assume an existing stack and do not identify stackification of the base-changed geometric groupoid; module-sheaf pullback comparisons concern different objects."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The stack of descent data of a groupoid over a sheaf commutes with base change of the sheaf",
+   "results": "8 hits: CategoryTheory.Pseudofunctor.DescentData.ofObj, CategoryTheory.Pseudofunctor.DescentData, CategoryTheory.Pseudofunctor.DescentData.toDescentDataCompPullFunctorIso, CategoryTheory.Pseudofunctor.DescentData.Hom.comm, CategoryTheory.Pseudofunctor.DescentData.pullHom_hom, CategoryTheory.Pseudofunctor.isEquivalence_toDescentData, CategoryTheory.Pseudofunctor.toDescentData_obj, CategoryTheory.Pseudofunctor.DescentData.pullFunctorEquivalence",
+   "date": "2026-10-23",
+   "verdict": "no match: descent-data equivalences assume an existing stack and do not identify stackification of the base-changed geometric groupoid; module-sheaf pullback comparisons concern different objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stackification of a groupoid in algebraic spaces commutes with pullback along an invariant map to a sheaf",
+   "results": "8 hits: SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackComp, CategoryTheory.GrothendieckTopology.overMapPullback_comp_id_assoc, CategoryTheory.GrothendieckTopology.overMapPullback_id_comp_assoc, TopCat.Sheaf.pullbackIso, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl",
+   "date": "2026-10-23",
+   "verdict": "no match: descent-data equivalences assume an existing stack and do not identify stackification of the base-changed geometric groupoid; module-sheaf pullback comparisons concern different objects."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-stack-stabilizer-etale-comparison",
+  "date": "2026-10-23",
+  "group": "NW"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), Rj_* preservation: inherited alteration/moduli prerequisite, Keel--Mori local comparison; Tag 0DTG, lemma-base-change-quotient-stack.",
+   "via": [
+    "lem-sfb-affine-stack-stabilizer-etale-comparison",
+    "lem-sfb-keel-mori-finite-inertia-quotient",
+    "lem-sfb-dm-coarse-proper-locally-quasifinite",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-quotient-stack-invariant-base-change",
+  "worker": "stage1",
+  "summary": "Checked Stacks 0DTG and its explicit-descent proof, retained the unrestricted algebraic-space groupoid statement, reused the existing general stackification and local-equivalence nodes, and supplied the omitted morphism calculation and its descent. No new nodes or Lean attachments.",
+  "blueprint": "Inherited supporting prerequisite of det-thm-sf-ctf-stability-direct-images, paragraph (3), Rj_* preservation via the alteration/moduli and Keel--Mori comparison chain. Current latest blueprint places the enclosing route in sk-thm-sf-ctf-stability-direct-images.proof.md (3); this node realizes invariant base change in the affine stabilizer comparison. The inherited creation chain has no blueprint-id ancestor (blueprint_refs.py ancestor returns None); retained its from record and exact place."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-93688b497",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-93688b497 (reviewer sub-agent of L); spot-checked: Read the item in full: 5 steps, 0 new nodes, first proof of a base item that had a statement only and no re-split note. Sources read: Stacks 0DTG (groupoids-quotients.tex, lemma-base-change-quotient-stack, statement and proof), stacks.tex 02ZP(1),(2) and 0436, and 046N. Statement: it is the B=S case of 0DTG and keeps every hypothesis. Nothing is added (no flatness or lfp on s,t or g) and nothing is dropped. Checks: proof_deps equal the union of the step uses. There is no cycle (closure of 9727 nodes). Both theorem deps are in the item's own unit and were reviewed PASS. No SGA is cited and no tool_uses are needed. No duplicate: rg over 0DTG and quotient stack finds only the finite-locally-free special case presentation-calculus, which cites this item, and consumers. Step 2's R_1-arrow bijection was recomputed: (r,x_1) exists iff x_1=z_1. Steps 3 and 4 are correct sheaf and descent arguments, and step 5 meets every hypothesis of 046N. Edge cases: g=id, X_1 empty, R=U, BG over k'→k, nonflat g. FIX (E5, step 1 only): the last sentence did not prove that the components of the extended F are f_1 and the top map, and it said X where X_1 was meant. It is replaced by: pr_1F=f_1, checked on chart objects plus the sheaf property of X_1; h=pr_2F extends ιp, so it is the top map; fh=gf_1, so F=(f_1,h) is the canonical comparison. Whole item at fixes/dag/nodes/sec-six-functors-basics/lem-sfb-quotient-stack-invariant-base-change.json. Advisory: blueprint.from.node=null is inherited from the base creation chain, and the statement points to the étale-stack convention of def-sfb-stable-pointed-moduli-groupoids, which is harmless.; 1 file(s) fixed by the reviewer"
+ }
+}

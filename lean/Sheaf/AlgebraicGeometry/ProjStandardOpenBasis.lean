@@ -42,6 +42,8 @@ theorem isBasis_positiveDegree_basicOpen_and_isAffineOpen
     TopologicalSpace.Opens.IsBasis
         {U : (Proj 𝒮).Opens | ∃ (f : S) (d : ℕ), 0 < d ∧ f ∈ 𝒮 d ∧ U = basicOpen 𝒮 f} ∧
       (∀ (f : S) (d : ℕ), 0 < d → f ∈ 𝒮 d → IsAffineOpen (basicOpen 𝒮 f)) := by
-  sorry
+  refine ⟨(standardOpenProperties.{u, v, 0} 𝒮).1, ?_⟩
+  intro f d hd hf
+  exact isAffineOpen_basicOpen 𝒮 f hf hd
 
 end AlgebraicGeometry.Proj

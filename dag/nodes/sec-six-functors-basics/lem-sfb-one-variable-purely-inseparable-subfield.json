@@ -1,0 +1,233 @@
+{
+ "id": "lem-sfb-one-variable-purely-inseparable-subfield",
+ "kind": "statement",
+ "title": "Purely inseparable subfields of a one-variable function field are power subfields",
+ "statement": "Let $k$ be an algebraically closed field of characteristic $p>0$ [def-weil-field], [def-weil-algebraic-closure], [def-pc-field-characteristic], and let $k\\subseteq E\\subseteq L$ be fields [def-pc-field-extension]. Assume that $E/k$ and $L/k$ are finitely generated as fields (each is generated over $k$ by finitely many elements) and have transcendence degree one [def-kun-transcendence-degree], and that $L/E$ is finite purely inseparable [def-weil-pbc-finite-purely-inseparable-extension]. Then there exists an integer $r\\geq0$ such that\n$$[L:E]=p^r\\qquad\\text{and}\\qquad E=L^{p^r}:=\\{x^{p^r}:x\\in L\\},$$\nwhere degree means vector-space dimension [def-pc-field-tower] and the equality is an equality of subfields of $L$, with their given inclusions.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tags 0CCX (lemma-purely-inseparable) and 0CCY (lemma-inseparable-deg-p-smooth), field-theoretic content of their proofs, specialized to algebraically closed k: degree-p tower and equality with the power subfield."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-pc-field-characteristic",
+  "def-pc-field-extension",
+  "def-kun-transcendence-degree",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-pc-field-tower"
+ ],
+ "proof": [
+  {
+   "text": "The positive characteristic $p$ is prime: a factorization $p=ab$ with $1<a,b<p$ would give nonzero elements $a\\cdot1,b\\cdot1$ with zero product in $k$. Apply [lem-weil-pbc-purely-inseparable-pth-root-tower] to $L/E$. Write its tower as $E=F_0\\subset F_1\\subset\\cdots\\subset F_r=L$, where $F_i=F_{i-1}(\\alpha_i)$, $\\alpha_i^p\\in F_{i-1}$ and $[F_i:F_{i-1}]=p$. Every $F_i/k$ is finitely generated: append $\\alpha_1,\\ldots,\\alpha_i$ to the given finite generators of $E/k$. Each $F_i/E$ is algebraic directly from pure inseparability of $L/E$: for $x\\in F_i\\subseteq L$ some $x^{p^m}$ belongs to $E$, so $x$ satisfies the nonzero polynomial $X^{p^m}-x^{p^m}\\in E[X]$ [def-weil-pbc-finite-purely-inseparable-extension]. By [lem-kun-transcendence-degree-tower], $\\operatorname{trdeg}_k F_i=\\operatorname{trdeg}_k E=1$.",
+   "uses": [
+    "lem-weil-pbc-purely-inseparable-pth-root-tower",
+    "lem-kun-transcendence-degree-tower",
+    "def-weil-pbc-finite-purely-inseparable-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CCX (lemma-purely-inseparable), reduction to the degree-p tower of fields.tex Tag 09HI (lemma-finite-purely-inseparable); fields.tex Tags 09G9 and 030H for degrees and transcendence degrees."
+   }
+  },
+  {
+   "text": "For each $i$, [lem-trf-algclosed-curve-model] applies to the finitely generated extension $F_i/k$ of transcendence degree one, since $k$ is algebraically closed. Choose its smooth proper integral curve $C_i$ and $k$-isomorphism $k(C_i)\\cong F_i$. Apply [lem-sfb-smooth-curve-function-field-p-basis] to $C_i$. Its conclusion $[k(C_i):k(C_i)^p]=p$ gives $[F_i:F_i^p]=p$: if $\\theta:k(C_i)\\to F_i$ is the chosen isomorphism, then $\\theta(x^p)=\\theta(x)^p$, so it maps the power subfields onto one another and sends the stated basis to a basis. Indeed applying $\\theta$ or $\\theta^{-1}$ to a linear combination proves respectively spanning and linear independence over these subfields.",
+   "uses": [
+    "lem-trf-algclosed-curve-model",
+    "lem-sfb-smooth-curve-function-field-p-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BY1 (theorem-curves-rational-maps), existence of curve models, and Tag 0BY3 (lemma-nonsingular-model-smooth); Tag 0CCY (lemma-inseparable-deg-p-smooth), second proof paragraph, p-basis computation (more-algebra.tex Tag 07P2)."
+   }
+  },
+  {
+   "text": "For $1\\leq i\\leq r$, write any $x\\in F_i=F_{i-1}(\\alpha_i)$ as $P(\\alpha_i)/Q(\\alpha_i)$ with $P,Q\\in F_{i-1}[X]$ and $Q(\\alpha_i)\\ne0$. In characteristic $p$, taking $p$th powers raises each coefficient to its $p$th power and replaces $\\alpha_i$ by $\\alpha_i^p\\in F_{i-1}$. Thus $x^p\\in F_{i-1}$, proving $F_i^p\\subseteq F_{i-1}$. The set $F_i^p$ is a subfield, since $p$th powers commute with sums, products and inverses in characteristic $p$. The space $F_{i-1}$ over $F_i^p$ is finite-dimensional: any linearly independent family in it is also independent in $F_i$, so has at most $p$ elements by Step 2. The other degree $[F_i:F_{i-1}]=p$ is supplied by Step 1. Apply [lem-weil-pbc-field-degree-multiplicativity] to $F_i/F_{i-1}/F_i^p$. Steps 1 and 2 give $p=p[F_{i-1}:F_i^p]$, so $[F_{i-1}:F_i^p]=1$. A one-dimensional field extension equals its base field since the nonzero vector $1$ spans it. Hence $F_{i-1}=F_i^p$ as actual subfields of $L$.",
+   "uses": [
+    "lem-weil-pbc-field-degree-multiplicativity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CCY (lemma-inseparable-deg-p-smooth), final reasons-of-degree comparison, with containment written using the degree-p root presentation of fields.tex Tag 09HI; degree multiplication is fields.tex Tag 09G9."
+   }
+  },
+  {
+   "text": "Starting with $F_r=L$, induction down the tower now gives $F_{r-j}=L^{p^j}$ for $0\\leq j\\leq r$: the base is $F_r=L=L^{p^0}$ and the step uses $F_{r-j-1}=F_{r-j}^p$ and $(L^{p^j})^p=L^{p^{j+1}}$, the equality of the sets of powers. Thus $E=F_0=L^{p^r}$. Repeated application of [lem-weil-pbc-field-degree-multiplicativity] to the tower of Step 1 gives $[L:E]=\\prod_{i=1}^r[F_i:F_{i-1}]=p^r$. For $r=0$ the tower is empty, $E=L$, and the formula is $[L:L]=1=p^0$.",
+   "uses": [
+    "lem-weil-pbc-field-degree-multiplicativity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0CCX and 0CCY (lemma-purely-inseparable and lemma-inseparable-deg-p-smooth), iterating the degree-p calculation as in Tag 0CCZ (lemma-purely-inseparable-smooth); fields.tex Tag 09G9."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-purely-inseparable-pth-root-tower",
+  "lem-kun-transcendence-degree-tower",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "lem-trf-algclosed-curve-model",
+  "lem-sfb-smooth-curve-function-field-p-basis",
+  "lem-weil-pbc-field-degree-multiplicativity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Field-theoretic assembly of Tags 0CCX and 0CCY, using the existing curve-model and p-basis nodes; elementary root-presentation computation replaces the differential-kernel comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite purely inseparable subextension E of a function field L of transcendence degree one over an algebraically closed field of characteristic p satisfies E = L raised to p^n and degree L over E is p^n",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"finInsepDegree_eq_pow\", \"module\": \"Mathlib/FieldTheory/PurelyInseparable/Basic\", \"type\": \"∀ (F : Type u) (E : Type v) [inst : Field F] [inst_1 : Field E] [inst_2 : Algebra F E] (q : ℕ) [ExpChar F q]\\n  [FiniteDimensional F E], ∃ n, Field.finInsepDegree F E = q ^ n\", \"doc\": \"Let $ F $ and $ E $ be fields with $ F $ having exponential characteristic $ q $. If $ E $ is a finite-dimensional field extension of $ F $, then there exists a non-negative integer $ n $ such that th\"}\n  {\"name\": \"IsPurelyInseparable.finrank_eq_pow\", \"module\": \"Mathlib/FieldTheory/PurelyInseparable/Basic\", \"type\": \"∀ (F : Type u) (E : Type v) [inst : Field F] [inst_1 : Field E] [inst_2 : Algebra F E] (q : ℕ) [ExpChar F q]\\n  [IsPurelyInseparable F E] [FiniteDimensional F E], ∃ n, Module.finrank F E = q ^ n\", \"doc\": \"Let $ F $ be a field with exponential characteristic $ q $, and let $ E $ be a purely inseparable field extension of $ F $ that is finite-dimensional as a vector space over $ F $. Then there exists a \"}\n  {\"name\": \"IsPurelyInseparable.hasExponent_of_finiteDimensional\", \"module\": \"Mathlib/FieldTheory/PurelyInseparable/Exponent\", \"type\": \"∀ {K : Type u_2} {L : Type u_3} [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] [IsPurelyInseparable K L]\\n  [FiniteDimensional K L], IsPurelyInseparable.HasExponent K L\", \"doc\": \"If $ L $ is a finite-dimensional purely inseparable field extension of $ K $, then $ L $ has a purely inseparable exponent. That is, there exists an integer $ n $ such that for every element $ \\\\alpha \"}\n  {\"name\": \"IsPurelyInseparable.finInsepDegree_eq\", \"module\": \"Mathlib/FieldTheory/PurelyInseparable/Basic\", \"type\": \"∀ (F : Type u) (E : Type v) [inst : Field F] [inst_1 : Field E] [inst_2 : Algebra F E] [IsPurelyInseparable F E],\\n  Field.finInsepDegree F E = Module.finrank F E\", \"doc\": \"For a purely inseparable field extension $ E $ over $ F $, the finite inseparable degree of $ E $ over $ F $ is equal to the finite rank (dimension) of $ E $ as a vector space over $ F $.\"}\n  {\"name\": \"isPurelyInseparable_iff_fd_isPurelyInseparable\", \"module\": \"Mathlib/FieldTheory/PurelyInseparable/Basic\", \"type\": \"∀ {F : Type u} {E : Type v} [inst : Field F] [inst_1 : Field E] [inst_2 : Algebra F E] [Algebra.IsAlgebraic F E],\\n  IsPurelyInseparable F E ↔ ∀ (L : IntermediateField F E), FiniteDimensional F ↥L → IsPurelyInseparable F ↥L\", \"doc\": \"For an algebraic field extension $ E/F $, the extension is purely inseparable if and only if every finite-dimensional intermediate field $ L $ between $ F $ and $ E $ is purely inseparable over $ F $.\"}\n  {\"name\": \"IsPurelyInseparable.finSepDegree_eq_one\", \"module\": \"Mathlib/FieldTheory/PurelyInseparable/Basic\", \"type\": \"∀ (F : Type u) (E : Type v) [inst : Field F] [inst_1 : Field E] [inst_2 : Algebra F E] [IsPurelyInseparable F E],\\n  Field.finSepDegree F E = 1\", \"doc\": \"If the field extension $ E $ over $ F $ is purely inseparable, then its separable degree $[E:F]_s$ is equal to 1.\"}\n  {\"name\": \"isPurelyInseparable_iff_finSepDegree_eq_one\", \"module\": \"Mathlib/FieldTheory/PurelyInseparable/Basic\", \"type\": \"∀ (F : Type u) (E : Type v) [inst : Field F] [inst_1 : Field E] [inst_2 : Algebra F E],\\n  IsPurelyInseparable F E ↔ Field.finSepDegree F E = 1\", \"doc\": \"A field extension $ E $ over $ F $ is purely inseparable if and only if its separable degree $[E:F]_s$ equals 1.\"}\n  {\"name\": \"Field.instNeZeroFinInsepDegree\", \"module\": \"Mathlib/FieldTheory/SeparableClosure\", \"type\": \"∀ (F : Type u) (E : Type v) [inst : Field F] [inst_1 : Field E] [inst_2 : Algebra F E] [FiniteDimensional F E],\\n  NeZero (Field.finInsepDegree F E)\", \"doc\": \"For any finite-dimensional field extension $ E $ over $ F $, the finite inseparable degree $ \\\\text{finInsepDegree}(F, E) $ is non-zero.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finrank_eq_pow gives only the degree; finite exponent and intermediate-field results do not identify E with the entire power subfield using transcendence degree one"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPurelyInseparable, IntermediateField",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"IntermediateField.isPurelyInseparable_tower_top\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \" (F : Type u) [Field F] (K : Type w) [Field K] [Algebra F K] (M : IntermediateField F K) [IsPurelyInseparable F K] : IsPurelyInseparable (↥M) K\", \"doc\": \"\"}\n  {\"name\": \"separableClosure.isPurelyInseparable\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \" (F : Type u) (E : Type v) [Field F] [Field E] [Algebra F E] [Algebra.IsAlgebraic F E] : IsPurelyInseparable (↥(separableClosure F E)) E\", \"doc\": \"If `E / F` is algebraic, then `E` is purely inseparable over the\\nseparable closure of `F` in `E`.\"}\n  {\"name\": \"separableClosure_le\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \" (F : Type u) (E : Type v) [Field F] [Field E] [Algebra F E] (L : IntermediateField F E) [h : IsPurelyInseparable (↥L) E] : separableClosure F E ≤ L\", \"doc\": \"An intermediate field of `E / F` contains the separable closure of `F` in `E`\\nif `E` is purely inseparable over it.\"}\n  {\"name\": \"separableClosure.eq_bot_of_isPurelyInseparable\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \" (F : Type u) (E : Type v) [Field F] [Field E] [Algebra F E] [IsPurelyInseparable F E] : separableClosure F E = ⊥\", \"doc\": \"If `E / F` is purely inseparable, then the separable closure of `F` in `E` is\\nequal to `F`.\"}\n  {\"name\": \"separableClosure_le_iff\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \" (F : Type u) (E : Type v) [Field F] [Field E] [Algebra F E] [Algebra.IsAlgebraic F E] (L : IntermediateField F E) : separableClosure F E ≤ L ↔ IsPurelyInseparable (↥L) E\", \"doc\": \"If `E / F` is algebraic, then an intermediate field of `E / F` contains the\\nseparable closure of `F` in `E` if and only if `E` is purely inseparable over it.\"}\n  {\"name\": \"separableClosure.eq_bot_iff\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \" {F : Type u} {E : Type v} [Field F] [Field E] [Algebra F E] [Algebra.IsAlgebraic F E] : separableClosure F E = ⊥ ↔ IsPurelyInseparable F E\", \"doc\": \"If `E / F` is an algebraic extension, then the separable closure of `F` in `E` is\\nequal to `F` if and only if `E / F` is purely inseparable.\"}\n  {\"name\": \"IntermediateField.isPurelyInseparable_tower_bot\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \" (F : Type u) [Field F] (K : Type w) [Field K] [Algebra F K] (M : IntermediateField F K) [IsPurelyInseparable F K] : IsPurelyInseparable F ↥M\", \"doc\": \"\"}\n  {\"name\": \"eq_separableClosure\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \" (F : Type u) (E : Type v) [Field F] [Field E] [Algebra F E] (L : IntermediateField F E) [Algebra.IsSeparable F ↥L] [IsPurelyInseparable (↥L) E] : L = separableClosure F E\", \"doc\": \"If an intermediate field of `E / F` is separable over `F`, and `E` is purely inseparable\\nover it, then it is equal to the separable closure of `F` in `E`.\"}\n  {\"name\": \"eq_separableClosure_iff\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \" (F : Type u) (E : Type v) [Field F] [Field E] [Algebra F E] [Algebra.IsAlgebraic F E] (L : IntermediateField F E) : L = separableClosure F E ↔ Algebra.IsSeparable F ↥L ∧ IsPurelyInseparable (↥L) E\", \"doc\": \"If `E / F` is algebraic, then an intermediate field of `E / F` is equal to the separable closure\\nof `F` in `E` if and only if it is separable over `F`, and `E` is purely inseparable\\nover it.\"}\n  {\"name\": \"isPurelyInseparable_iff_fd_isPurelyInseparable\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \" {F : Type u} {E : Type v} [Field F] [Field E] [Algebra F E] [Algebra.IsAlgebraic F E] : IsPurelyInseparable F E ↔ ∀ (L : IntermediateField F E), FiniteDimensional F ↥L → IsPurelyInseparable F ↥L\", \"doc\": \"An algebraic extension is purely inseparable if and only if all of its finite-dimensional\\nsubextensions are purely inseparable.\"}\n  {\"name\": \"IntermediateField.eq_bot_of_isPurelyInseparable_of_isSeparable\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \" {F : Type u} {E : Type v} [Field F] [Field E] [Algebra F E] (L : IntermediateField F E) [IsPurelyInseparable F ↥L] [Algebra.IsSeparable F ↥L] : L = ⊥\", \"doc\": \"If an intermediate field of `E / F` is both purely inseparable and separable, then it is equal\\nto `F`.\"}\n  {\"name\": \"IntermediateField.isPurelyInseparable_bot\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \" (F : Type u) (E : Type v) [Field F] [Field E] [Algebra F E] : IsPurelyInseparable F ↥⊥\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finrank_eq_pow gives only the degree; finite exponent and intermediate-field results do not identify E with the entire power subfield using transcendence degree one"
+  },
+  {
+   "tool": "grep",
+   "query": "(finrank|degree|rank).*(pow|frobenius)|frobenius.*(finrank|degree|rank)",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/FieldTheory/PurelyInseparable/Exponent.lean\", \"line\": \"151\", \"text\": \"  rw [minpoly_eq K a, natDegree_sub_C, natDegree_pow, natDegree_X, mul_one]\"}\n  {\"file\": \"Mathlib/FieldTheory/PurelyInseparable/Exponent.lean\", \"line\": \"188\", \"text\": \"      rw [natDegree_sub_C, natDegree_pow, natDegree_X, mul_one]\"}\n  {\"file\": \"Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean\", \"line\": \"81\", \"text\": \"  rw [mem_perfectClosure_iff, minpoly.natSepDegree_eq_one_iff_pow_mem (ringExpChar F)]\"}\n  {\"file\": \"Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean\", \"line\": \"396\", \"text\": \"  · rw [(minpoly F a).natDegree_map_eq_of_injective (iterateFrobenius F q n).injective,\"}\n  {\"file\": \"Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean\", \"line\": \"399\", \"text\": \"      ← IntermediateField.adjoin.finrank hapi, iterateFrobenius_def]\"}\n  {\"file\": \"Mathlib/FieldTheory/PurelyInseparable/Basic.lean\", \"line\": \"218\", \"text\": \"  have hdeg := (minpoly.natSepDegree_eq_one_iff_pow_mem q).2 (h x)\"}\n  {\"file\": \"Mathlib/FieldTheory/PurelyInseparable/Basic.lean\", \"line\": \"290\", \"text\": \"  simp_rw [isPurelyInseparable_iff_pow_mem F q, minpoly.natSepDegree_eq_one_iff_pow_mem q]\"}\n  {\"file\": \"Mathlib/FieldTheory/PurelyInseparable/Basic.lean\", \"line\": \"302\", \"text\": \"    minpoly.natSepDegree_eq_one_iff_eq_X_pow_sub_C q]\"}\n  {\"file\": \"Mathlib/FieldTheory/PurelyInseparable/Basic.lean\", \"line\": \"315\", \"text\": \"    minpoly.natSepDegree_eq_one_iff_eq_X_sub_C_pow q]\"}\n  {\"file\": \"Mathlib/FieldTheory/PurelyInseparable/Basic.lean\", \"line\": \"322\", \"text\": \"lemma IsPurelyInseparable.finrank_eq_pow\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finrank_eq_pow gives only the degree; finite exponent and intermediate-field results do not identify E with the entire power subfield using transcendence degree one"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Purely inseparable subfields of a one variable function field over a perfect field are iterated power subfields",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"isPurelyInseparable_iff\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \": IsPurelyInseparable F E ↔ ∀ x : E, IsIntegral F x ∧ (IsSeparable F x → x ∈ (algebraMap F E).range)\", \"doc\": \"A field extension $ E $ over $ F $ is purely inseparable if and only if every element of $ E $ is integral over $ F $, and every element of $ E $ that is separable over $ F $ must belong to the image \"}\n  {\"name\": \"IsPurelyInseparable\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \"(F : Type u_1) → (E : Type u_2) → [inst : CommRing F] → [inst_1 : Ring E] → [Algebra F E] → Prop\", \"doc\": \"The property that the field extension $ E $ over $ F $ is purely inseparable, meaning every element of $ E $ has a minimal polynomial over $ F $ of the form $ x^{p^n} - a $ for some $ a \\\\in F $ and pr\"}\n  {\"name\": \"IsPurelyInseparable.instOfHasExponent\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Exponent\", \"type\": \"[HasExponent K L] : IsPurelyInseparable K L\", \"doc\": \"If an algebra $ L $ over a commutative ring $ K $ has a purely inseparable exponent $ n $, meaning that for every element $ \\\\alpha \\\\in L $, $ \\\\alpha^{p^n} $ lies in $ K $, where $ p $ is the character\"}\n  {\"name\": \"isPurelyInseparable_iff_pow_mem\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \": IsPurelyInseparable F E ↔ ∀ x : E, ∃ n : ℕ, x ^ q ^ n ∈ (algebraMap F E).range\", \"doc\": \"A field extension $ E $ over $ F $ is purely inseparable if and only if for every element $ x \\\\in E $, there exists a natural number $ n $ such that $ x^{q^n} $ lies in $ F $, where $ q $ denotes the \"}\n  {\"name\": \"le_perfectClosure_iff\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.PerfectClosure\", \"type\": \"(L : IntermediateField F E) : L ≤ perfectClosure F E ↔ IsPurelyInseparable F L\", \"doc\": \"For any intermediate field $ L $ between $ F $ and $ E $, $ L $ is contained in the perfect closure of $ F $ in $ E $ if and only if the field extension $ L/F $ is purely inseparable.\"}\n  {\"name\": \"separableClosure.isPurelyInseparable\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \"[Algebra.IsAlgebraic F E] : IsPurelyInseparable (separableClosure F E) E\", \"doc\": \"If $ E $ is an algebraic extension of $ F $, then the field extension from the separable closure of $ F $ in $ E $ to $ E $ is purely inseparable. Every element in $ E $ not in the separable closure h\"}\n  {\"name\": \"IntermediateField.isPurelyInseparable_adjoin_simple_iff_pow_mem\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.PerfectClosure\", \"type\": \"(q : ℕ) [hF : ExpChar F q] {x : E} : IsPurelyInseparable F F⟮x⟯ ↔ ∃ n : ℕ, x ^ q ^ n ∈ (algebraMap F E).range\", \"doc\": \"Let $ F $ be a field of exponential characteristic $ q $. For any element $ x $ in an extension field $ E $, the simple field extension $ F(x) $ is purely inseparable over $ F $ if and only if there e\"}\n  {\"name\": \"isPurelyInseparable_iff_fd_isPurelyInseparable\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \"[Algebra.IsAlgebraic F E] :\\n  IsPurelyInseparable F E ↔ ∀ L : IntermediateField F E, FiniteDimensional F L → IsPurelyInseparable F L\", \"doc\": \"For an algebraic field extension $ E/F $, the extension is purely inseparable if and only if every finite-dimensional intermediate field $ L $ between $ F $ and $ E $ is purely inseparable over $ F $.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finrank_eq_pow gives only the degree; finite exponent and intermediate-field results do not identify E with the entire power subfield using transcendence degree one"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A function field in one variable over a perfect field has p rank one and its finite purely inseparable subfields are p power subfields",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsPurelyInseparable.finrank_eq_pow\", \"module\": \"Mathlib/FieldTheory/PurelyInseparable/Basic\", \"type\": \"∀ (F : Type u) (E : Type v) [inst : Field F] [inst_1 : Field E] [inst_2 : Algebra F E] (q : ℕ) [ExpChar F q]\\n  [IsPurelyInseparable F E] [FiniteDimensional F E], ∃ n, Module.finrank F E = q ^ n\", \"doc\": \"Let $ F $ be a field with exponential characteristic $ q $, and let $ E $ be a purely inseparable field extension of $ F $ that is finite-dimensional as a vector space over $ F $. Then there exists a \"}\n  {\"name\": \"finInsepDegree_eq_pow\", \"module\": \"Mathlib/FieldTheory/PurelyInseparable/Basic\", \"type\": \"∀ (F : Type u) (E : Type v) [inst : Field F] [inst_1 : Field E] [inst_2 : Algebra F E] (q : ℕ) [ExpChar F q]\\n  [FiniteDimensional F E], ∃ n, Field.finInsepDegree F E = q ^ n\", \"doc\": \"Let $ F $ and $ E $ be fields with $ F $ having exponential characteristic $ q $. If $ E $ is a finite-dimensional field extension of $ F $, then there exists a non-negative integer $ n $ such that th\"}\n  {\"name\": \"Field.finInsepDegree_self\", \"module\": \"Mathlib/FieldTheory/SeparableClosure\", \"type\": \"∀ (F : Type u) [inst : Field F], Field.finInsepDegree F F = 1\", \"doc\": \"For any field $ F $, the finite inseparable degree of the field extension $ F $ over itself is equal to 1, i.e., $[F : F]_i = 1$.\"}\n  {\"name\": \"IntermediateField.finInsepDegree_bot\", \"module\": \"Mathlib/FieldTheory/SeparableClosure\", \"type\": \"∀ (F : Type u) (E : Type v) [inst : Field F] [inst_1 : Field E] [inst_2 : Algebra F E], Field.finInsepDegree F ↥⊥ = 1\", \"doc\": \"The finite inseparable degree of the base field $ F $ (represented as the bottom element $ \\\\bot $ in the lattice of intermediate fields between $ F $ and $ E $) is equal to 1, i.e., $ \\\\operatorname{fi\"}\n  {\"name\": \"RatFunc.rank_ratFunc_ratFunc\", \"module\": \"Mathlib/FieldTheory/RatFunc/Basic\", \"type\": \"∀ (k : Type u_3) (K : Type u_4) [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K] [Algebra.IsAlgebraic k K],\\n  Module.rank (RatFunc k) (RatFunc K) = Module.rank k K\", \"doc\": \"The rank of the rational function field $\\\\text{RatFunc}(K)$ as a module over $\\\\text{RatFunc}(k)$ is equal to the rank of $K$ as a module over $k$.\"}\n  {\"name\": \"functionField_iff\", \"module\": \"Mathlib/NumberTheory/FunctionField\", \"type\": \"∀ (Fq : Type u_1) (F : Type u_2) [inst : Field Fq] [inst_1 : Field F] (Fqt : Type u_3) [inst_2 : Field Fqt]\\n  [inst_3 : Algebra (Polynomial Fq) Fqt] [IsFractionRing (Polynomial Fq) Fqt] [inst_5 : Algebra (RatFunc Fq) F]\\n  [inst_6 : Algebra Fqt F] [inst_7 : Algebra (Polynomial Fq) F] [IsScalarTower (\", \"doc\": \"A field $ F $ is a function field over $ F_q $ if and only if it is a finite-dimensional algebra over the rational function field $ \\\\text{RatFunc}(F_q) $.\"}\n  {\"name\": \"IsPurelyInseparable.finInsepDegree_eq\", \"module\": \"Mathlib/FieldTheory/PurelyInseparable/Basic\", \"type\": \"∀ (F : Type u) (E : Type v) [inst : Field F] [inst_1 : Field E] [inst_2 : Algebra F E] [IsPurelyInseparable F E],\\n  Field.finInsepDegree F E = Module.finrank F E\", \"doc\": \"For a purely inseparable field extension $ E $ over $ F $, the finite inseparable degree of $ E $ over $ F $ is equal to the finite rank (dimension) of $ E $ as a vector space over $ F $.\"}\n  {\"name\": \"IntermediateField.subsingleton_of_rank_adjoin_eq_one\", \"module\": \"Mathlib/FieldTheory/IntermediateField/Adjoin/Basic\", \"type\": \"∀ {F : Type u_1} [inst : Field F] {E : Type u_2} [inst_1 : Field E] [inst_2 : Algebra F E],\\n  (∀ (x : E), Module.rank F ↥F⟮x⟯ = 1) → Subsingleton (IntermediateField F E)\", \"doc\": \"If for every element $x$ in the field extension $E$, the rank of the simple extension $F(x)$ as an $F$-module equals 1, then the type of intermediate fields between $F$ and $E$ is a subsingleton (i.e.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finrank_eq_pow gives only the degree; finite exponent and intermediate-field results do not identify E with the entire power subfield using transcendence degree one"
+  },
+  {
+   "tool": "grep",
+   "query": "(finrank|degree|rank).*(pow|frobenius)|frobenius.*(finrank|degree|rank)",
+   "results": "25 hits; Mathlib/FieldTheory/IsAlgClosed/Spectrum.lean, Mathlib/FieldTheory/IsSepClosed.lean, Mathlib/FieldTheory/Finite/GaloisField.lean, Mathlib/FieldTheory/Finite/GaloisField.lean, Mathlib/FieldTheory/Finite/Extension.lean, Mathlib/FieldTheory/Finite/Extension.lean, Mathlib/FieldTheory/Finite/Extension.lean, Mathlib/FieldTheory/Finite/Extension.lean; Mathlib/FieldTheory. Source read: PurelyInseparable/Basic.lean:322-345, PerfectClosure.lean:350-405.",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give finite purely inseparable degree, exponent or separable-closure facts, not equality with the full power subfield of a one-variable function field"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Purely inseparable subfields of a one variable function field over a perfect field are iterated power subfields",
+   "results": "8 hits; isPurelyInseparable_iff, IsPurelyInseparable, IsPurelyInseparable.instOfHasExponent, isPurelyInseparable_iff_pow_mem, le_perfectClosure_iff, separableClosure.isPurelyInseparable, IntermediateField.isPurelyInseparable_adjoin_simple_iff_pow_mem, isPurelyInseparable_iff_fd_isPurelyInseparable. Source read: PurelyInseparable/Basic.lean:322-345, PerfectClosure.lean:350-405.",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give finite purely inseparable degree, exponent or separable-closure facts, not equality with the full power subfield of a one-variable function field"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPurelyInseparable, IntermediateField",
+   "results": "12 hits; IntermediateField.isPurelyInseparable_tower_top, separableClosure.isPurelyInseparable, separableClosure_le, separableClosure.eq_bot_of_isPurelyInseparable, separableClosure_le_iff, separableClosure.eq_bot_iff, IntermediateField.isPurelyInseparable_tower_bot, eq_separableClosure. Source read: PurelyInseparable/Basic.lean:322-345, PerfectClosure.lean:350-405.",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give finite purely inseparable degree, exponent or separable-closure facts, not equality with the full power subfield of a one-variable function field"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite purely inseparable subextension E of a function field L of transcendence degree one over an algebraically closed field of characteristic p satisfies E = L raised to p^n and degree L over E is p^n",
+   "results": "8 hits; finInsepDegree_eq_pow, IsPurelyInseparable.finrank_eq_pow, IsPurelyInseparable.hasExponent_of_finiteDimensional, IsPurelyInseparable.finInsepDegree_eq, isPurelyInseparable_iff_fd_isPurelyInseparable, IsPurelyInseparable.finSepDegree_eq_one, isPurelyInseparable_iff_finSepDegree_eq_one, Field.instNeZeroFinInsepDegree. Source read: PurelyInseparable/Basic.lean:322-345, PerfectClosure.lean:350-405.",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give finite purely inseparable degree, exponent or separable-closure facts, not equality with the full power subfield of a one-variable function field"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A function field in one variable over a perfect field has p rank one and its finite purely inseparable subfields are p power subfields",
+   "results": "8 hits; IsPurelyInseparable.finrank_eq_pow, finInsepDegree_eq_pow, IsPurelyInseparable.insepDegree_eq, IsPurelyInseparable.finInsepDegree_eq, RatFunc.finrank_ratFunc_ratFunc, Field.finInsepDegree_self, Field.rank_mul_insepDegree_of_isPurelyInseparable, Field.lift_rank_mul_lift_insepDegree_of_isPurelyInseparable. Source read: PurelyInseparable/Basic.lean:322-345, PerfectClosure.lean:350-405.",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give finite purely inseparable degree, exponent or separable-closure facts, not equality with the full power subfield of a one-variable function field"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-purely-inseparable-curve-frobenius",
+  "date": "2026-10-22",
+  "group": "Q126"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), auxiliary high-genus-cover argument in the alteration reduction: the finite-curve genus comparison used to exclude rational curves. Separation of the inseparable part before applying Riemann--Hurwitz (Stacks 0CD2). Within this auxiliary argument, Stacks 0CD2 proof, final sentence: identify the purely inseparable curve map with iterated relative Frobenius using 0CCZ. Field-theoretic part of Stacks 0CCZ via 0CCX/0CCY: the degree-p tower, models of intermediate fields, their p-rank one, and collapse of each step to its pth-power subfield (returned item steps 1, 2, 4 and final sentence of step 3).",
+   "via": [
+    "lem-sfb-purely-inseparable-curve-frobenius",
+    "lem-sfb-curve-frobenius-separable-factorization",
+    "lem-sfb-finite-curve-genus-monotonicity",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-one-variable-purely-inseparable-subfield",
+  "worker": "stage1",
+  "summary": "Q139 split the field statement through the existing degree-p root tower, curve model, p-basis and degree-multiplication nodes. Every intermediate field is explicitly checked finitely generated of transcendence degree one. The root presentation gives power-field containment, and equal degrees give equality. No statement change or new nodes. Repair of the returned head ba64588c949: compared the retained delivery with the current unsplit live item; re-read every cited statement and verified the saved quotations against it. Expanded the intermediate-field finiteness argument in Step 3. The delivery tool rebuilds this repair on current sheaf-dag for promotion into the live DAG.",
+  "blueprint": "The inherited alteration/high-genus auxiliary argument under det-thm-sf-ctf-stability-direct-images (3): separation of the purely inseparable part by Stacks 0CCX/0CCY before the Riemann-Hurwitz comparison. Steps 1-4 spell out that field-theoretic content. The current blueprint proof is in main-20261015/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md; no claim that this auxiliary field theorem is itself a blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-algclosed-curve-model",
+    "why": "Only its existence of a smooth proper curve model for any finitely generated one-variable extension of algebraically closed k is used, to apply the same-unit smooth-curve p-basis lemma; the same-unit intermediate-field realization assumes curves already supplied."
+   },
+   {
+    "node": "lem-weil-pbc-purely-inseparable-pth-root-tower",
+    "why": "Generic field-theoretic degree-p root tower, precisely the Fields 09HI fact invoked by the unit auxiliary argument through Curves 0CCX; no same-unit node states this tower."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-algclosed-curve-model",
+  "lem-weil-pbc-purely-inseparable-pth-root-tower"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q139-0160ac18a",
+  "group": "Q139",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q139-0160ac18a (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's statement and all 4 steps, every cited statement, and Stacks 0CCX/0CCY/0CCZ. This re-pushes ba64588c, which an earlier reader passed and which was returned only because the side completion was never promoted. Diffing against that snapshot, the only changes are the Step 3 text and the split_report summary. Step 3 now states that F_i^p is a subfield and proves F_{i-1} is finite over F_i^p (an independent family stays independent in the p-dimensional F_i); I checked both and they are correct. The statement is unchanged, there are no new nodes, and proof_deps equals the union of the step uses. Step checks: the root tower (09HI) gives the degree-p tower. trdeg_k F_i = 1 via the trdeg tower and algebraicity. The curve-model existence plus the p-basis node give [F_i:F_i^p] = p; a proper model is separated, so it is a curve under def-sc-curves. Multiplicativity then forces F_{i-1} = F_i^p, and downward induction gives E = L^{p^r} and [L:E] = p^r. Small cases r = 0, 1, 2 all hold. Batch-5 flag on lem-trf-algclosed-curve-model: it is generic curve-model existence (0BY1/0BY3). Its full 315-node closure contains only the generic trf nodes lem-trf-reduced-scheme-image and def-trf-valuation-ring, and no Poincaré-duality, trace-transport or nt- target node, so it is outside both assumptions and I accept it. No SGA source is cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.OneVariablePurelyInseparableSubfield",
+  "declaration": "IntermediateField.exists_pow_eq_of_purelyInseparable_of_trdeg_one",
+  "file": "lean/Sheaf/FieldTheory/OneVariablePurelyInseparableSubfield.lean",
+  "statement": "theorem exists_pow_eq_of_purelyInseparable_of_trdeg_one (k : Type u) (L : Type v) [Field k] [IsAlgClosed k] [Field L] [Algebra k L] (p : ℕ) [CharP k p] (hp : 0 < p) (E : IntermediateField k L) (hfgE : (⊤ : IntermediateField k E).FG) (hfgL : (⊤ : IntermediateField k L).FG) (htrdegE : Algebra.trdeg k E = 1) (htrdegL : Algebra.trdeg k L = 1) [Module.Finite E L] [IsPurelyInseparable E L] : ∃ r : ℕ, FieldExtension.degree E L = ((p ^ r : ℕ) : WithTop ℕ) ∧ (E : Set L) = Set.range (fun x : L ↦ x ^ (p ^ r))",
+  "branch": "sheaf-dag",
+  "by": "Q25",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5781315c2",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Clause-by-clause match with the node: k field, IsAlgClosed, CharP k p with 0<p; E : IntermediateField k L (given inclusions); field-FG of E/k and L/k via (⊤ : IntermediateField).FG; Algebra.trdeg = 1 for both; Module.Finite E L and IsPurelyInseparable E L; one shared ∃ r : ℕ with FieldExtension.degree E L = p^r and (E : Set L) = Set.range (x ↦ x^(p^r)). No extra hypotheses; universes u, v independent and bound; autoImplicit off; lean.statement verbatim. Only the lean field differs from the live node. All 7 stmt-dep records checked; FieldExtension.degree is a real definition (finrank or ⊤). The imported proof-dep modules exist in side-live. r=0, p=1 and E=k cases checked. No Mathlib duplicate (finrank_eq_pow gives only the degree). Proof is sorry only; docstrings carry the Stacks place, the blueprint tag and the 4-step plan. Report has Worker report and Second reading by Q25 sections; the second reading is by the same worker (noted). No file changed, so not recompiled; the worker reports a clean compile."
+ }
+}

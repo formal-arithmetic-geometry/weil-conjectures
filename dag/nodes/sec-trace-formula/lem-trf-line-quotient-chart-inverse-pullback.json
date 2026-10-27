@@ -1,0 +1,250 @@
+{
+ "id": "lem-trf-line-quotient-chart-inverse-pullback",
+ "kind": "statement",
+ "title": "Inverse identities and arbitrary pullback for line-quotient charts",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $\\mathcal E$ an arbitrary quasi-coherent $\\mathcal O_S$-module [pqf-def-coherent], and $p:P=\\operatorname{Proj}_S A_S(\\mathcal E)\\to S$, where $A_S(\\mathcal E)$ is the canonical symmetric graded algebra [def-trf-canonical-symmetric-graded-algebra] and relative Proj is [def-nagata-relative-proj]. No finite-type or local-freeness hypothesis is imposed on $\\mathcal E$. Let $D=(Q,q_P)$ be any normalized tautological quotient datum on $P$ [def-per-projective-bundle-quotient-data]. For every scheme $T$, morphism $h:T\\to S$, invertible $\\mathcal O_T$-module $L$ [def-sc-invertible-module] and surjection $q:h^*\\mathcal E\\twoheadrightarrow L$, denote by $F_h(L,q)$ the morphism characterized by the homogeneous-fraction formulas of [lem-trf-line-quotient-homogeneous-fraction-map]. For any $S$-morphism $a:T\\to P$, its pulled map $q_a:h^*\\mathcal E\\to a^*Q$, formed using $(p\\circ a)^*\\simeq a^*p^*$ [def-pc-module-pullback], is surjective and $a^*Q$ is invertible. There is a quotient-compatible isomorphism\n$$\\theta_q:F_h(L,q)^*Q\\xrightarrow{\\sim}L,\\qquad \\theta_q\\circ F_h(L,q)^*q_P=q.$$\nIts chart normalization is as follows: for $U=\\operatorname{Spec}R\\subset S$, $M=\\mathcal E(U)$, $W=\\operatorname{Spec}B\\subset h^{-1}U$ with a frame $l$ of $L$, $q(v\\otimes1)=b_v l$ for every $v\\in M$, and $e=\\iota(m)$ for $m\\in M$, on $W_m=D(b_m)$ it sends the pulled frame $e$ to $b_m l$. It carries the pulled quotient of $v\\in M$ to $(b_v/b_m)b_m l=b_vl$. These isomorphisms agree on every overlap, with $e/f$ pulling back to $b_m/b_n$ for $n\\in M$, $f=\\iota(n)$, and with changes of frame and base. Conversely,\n$$F_h(a^*Q,q_a)=a.$$\nOn the inverse image of $D_+(e)$ the frame is $a^*e$, the coefficient of $e$ is $1$, and the recovered ring map sends every $c/e^d$ to $a^*(c/e^d)$ for $c\\in\\operatorname{Sym}^d_R M$. If $v:L\\xrightarrow{\\sim}L'$ satisfies $vq=q'$, then $F_h(L,q)=F_h(L',q')$; under frames $l,v(l)$ the coefficient maps coincide. For every scheme morphism $u:T'\\to T$, put $q'=u^*q:(h\\circ u)^*\\mathcal E\\twoheadrightarrow u^*L$ using the canonical composite-pullback identification. Then\n$$F_{h\\circ u}(u^*L,q')=F_h(L,q)\\circ u,\\qquad \\theta_{q'}=u^*\\theta_q$$\nunder the canonical pullback identifications. For $z\\in\\operatorname{Sym}^d_R M$, let $b(z)$ be its coefficient in the induced graded map into $L^{\\otimes d}$ in the frame $l^{\\otimes d}$. On the pulled-back charts the coefficient map sends $b(z)/b_m^d$ to $u^*b(z)/(u^*b_m)^d$ and the frame isomorphism sends $e$ to $u^*q(m)$. No flatness of $u$ or finite generation of $\\mathcal E$ is required.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01OA (section-projective-bundle) and 01O4 (lemma-apply-relative); inverse quotient constructions and their arbitrary-pullback compatibility, with the explicit degree-one chart calculations."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-trf-canonical-symmetric-graded-algebra",
+  "def-nagata-relative-proj",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-per-projective-bundle-quotient-data",
+  "lem-trf-line-quotient-homogeneous-fraction-map"
+ ],
+ "proof": [
+  {
+   "text": "Use the invertibility clause of the existing public theorem invertible_pullback_tensor [lem-weil-pbc-invertible-pullback-tensor] directly, without restating preservation of invertibility and left adjointness preserves epimorphisms as in [lem-weil-pbc-module-pullback-epi-direct-sum]. The composite comparison is [lem-pc-module-pullback-identity-composition]. Its normalized unit equation computes the pulled quotient on every original section. The inverse scalar function of a frame then gives coefficient one for its own pulled tautological generator.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-weil-pbc-module-pullback-epi-direct-sum",
+    "lem-pc-module-pullback-identity-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-trf-line-quotient-recovered-charts] to the quotient pulled along a. It supplies the fraction charts at a and every recovered coefficient. Uniqueness of the chart morphism in [lem-trf-line-quotient-homogeneous-fraction-map] identifies any supplied F with a.",
+   "uses": [
+    "lem-trf-line-quotient-recovered-charts",
+    "lem-trf-line-quotient-homogeneous-fraction-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "By [lem-trf-line-quotient-fraction-kernel], the pulled quotient and q annihilate exactly the same morphisms. Each epimorphism in the abelian category of module sheaves is a normal epimorphism, hence a cokernel of some map. That defining map is killed by the first quotient and therefore by the second. The cokernel universal property factors each quotient through the other. Cancellation of each epimorphism proves that the two factorizations are inverse. Package this construction as an existence theorem over an arbitrary category with zero morphisms in which all epimorphisms are normal and eliminate that theorem in the scheme-module application; thus downstream normalization uses an abstract compatible isomorphism. Evaluating their quotient equality on sections proves theta(e_m)=b_m l. When b_m is a unit, transport the unit multiple of the frame through theta inverse; scalar associativity gives both ratio equations.",
+   "uses": [
+    "lem-trf-line-quotient-fraction-kernel"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-trf-line-quotient-iso-charts] for coefficient equality and fraction charts at the same F in the new quotient line. Use chart-morphism uniqueness from [lem-trf-line-quotient-homogeneous-fraction-map] to identify F prime with F.",
+   "uses": [
+    "lem-trf-line-quotient-iso-charts",
+    "lem-trf-line-quotient-homogeneous-fraction-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-trf-line-quotient-pullback-charts] to obtain fraction charts at u;F and all homogeneous and generator coefficient equations. Construct Localization.awayMap of u.appLE; its scalar equation and value on each homogeneous fraction follow from the localization map equations. Uniqueness from [lem-trf-line-quotient-homogeneous-fraction-map] gives F prime=u;F. The normalized adjunction unit and naturality compute the composite pulled quotient followed by the pulled theta as exactly the pulled q. Transport along the morphism equality and cancel the epimorphic pulled tautological quotient. This identifies every compatible theta prime with the prescribed comparison followed by u^*theta. Its normalization follows again from its quotient equality.",
+   "uses": [
+    "lem-trf-line-quotient-pullback-charts",
+    "lem-trf-line-quotient-homogeneous-fraction-map",
+    "lem-pc-module-pullback-identity-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-pullback-identity-composition",
+  "lem-trf-line-quotient-fraction-kernel",
+  "lem-trf-line-quotient-homogeneous-fraction-map",
+  "lem-trf-line-quotient-iso-charts",
+  "lem-trf-line-quotient-pullback-charts",
+  "lem-trf-line-quotient-recovered-charts",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-module-pullback-epi-direct-sum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01OA and 01O4; kernel factorization and normalized adjunction section proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tautological|projective.?bundle|[Pp]roj.*[Tt]wist|[Tt]wist.*[Pp]roj|fromOfGlobalSections_morphismRestrict",
+   "results": "2 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean; searched Mathlib/AlgebraicGeometry; inspected hits: absolute Proj/localization or unrelated statements; none states this relative sheaf assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse identities for morphisms to Proj symmetric algebra and quotient line bundles natural under base change",
+   "results": "8 hits: SymAlg.instInv, SymAlg.sym_symm, SymAlg.unsym_inv, AlgebraicGeometry.Scheme.inv_app, LinearEquiv.baseChange_inv, AlgebraicGeometry.Scheme.Modules.pushforwardId_inv_app_app, AlgebraicGeometry.Proj.toSpecZero, CategoryTheory.ProjectiveResolution.iso_inv_naturality; inspected hits: absolute Proj/localization or unrelated statements; none states this relative sheaf assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict",
+   "results": "1 hits: AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict; inspected hits: absolute Proj/localization or unrelated statements; none states this relative sheaf assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The line bundle isomorphism sends pulled back degree one frame e to q m and recovers the quotient while equal quotient coefficients recover the morphism to Proj",
+   "results": "8 hits: Projectivization.nonZeroEquivProjectivizationProdUnits, Projectivization.mk_rep, AlgebraicGeometry.Proj.basicOpenIsoAway_hom, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι, Projectivization.mk'_eq_mk, AlgebraicGeometry.Proj.pullbackAwayιIso; inspected hits: absolute Proj/localization or unrelated statements; none states this relative sheaf assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pulling back the tautological quotient on a projective bundle recovers an invertible quotient and the homogeneous fraction morphism recovers the original scheme map naturally under arbitrary pullback",
+   "results": "8 hits: AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd_assoc, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst_assoc, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right; inspected hits: absolute Proj/localization or unrelated statements; none states this relative sheaf assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pulling back the tautological quotient on relative Proj of a symmetric algebra recovers a line bundle quotient naturally under arbitrary pullback",
+   "results": "8 hits: AlgebraicGeometry.Proj.pullbackAwayιIso, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd_assoc, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst_assoc, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right. Absolute Proj chart maps or unrelated categorical inverse identities; no relative line-quotient inverse or arbitrary-pullback classification statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tautological|projective.?bundle|fromOfGlobalSections_morphismRestrict",
+   "results": "2 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean. Searched Mathlib/AlgebraicGeometry; read Basic.lean lines 440-515 and 250-305. Absolute Proj chart maps or unrelated categorical inverse identities; no relative line-quotient inverse or arbitrary-pullback classification statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse identities for the projective bundle functor classifying invertible quotient sheaves and naturality under pullback",
+   "results": "8 hits: CategoryTheory.Quotient.lift.isLift_inv, CategoryTheory.Limits.CategoricalPullback.functorEquiv_counitIso_inv_app_fst_app, CategoryTheory.GrothendieckTopology.overMapPullbackId_inv_app_val_app, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapId_inv_τl, AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality, CategoryTheory.Limits.CategoricalPullback.mkNatIso_inv_app_fst, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality, AlgebraicGeometry.Scheme.Modules.pushforwardId_inv_app_app. Absolute Proj chart maps or unrelated categorical inverse identities; no relative line-quotient inverse or arbitrary-pullback classification statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A line quotient gives a scheme morphism to projective space inverse to pullback of the universal quotient with explicit homogeneous fraction coordinates",
+   "results": "8 hits: AlgebraicGeometry.Proj.pullbackAwayιIso, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst_assoc, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd_assoc, AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right_assoc, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left. Absolute Proj chart maps or unrelated categorical inverse identities; no relative line-quotient inverse or arbitrary-pullback classification statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-projective-bundle-quotient-geometry",
+  "date": "2026-10-22",
+  "group": "NM"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical ancestor lem-trf-local-term-locality, proof (1)--(2), specialization-to-the-normal-cone route: the fibrewise-ampleness/projectivity tool in lem-trf-proper-fibrewise-ample-projective, Step 4. This prerequisite supplies the projective-bundle quotient geometry used to construct the canonical evaluation immersion in the proof of 01VR, not a new claim about local terms. Re-split of lem-trf-projective-bundle-quotient-geometry, old steps 7--8 and arbitrary-pullback part of step 9.",
+   "via": [
+    "lem-trf-projective-bundle-quotient-geometry",
+    "lem-trf-relative-ample-very-ample",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-line-quotient-chart-inverse-pullback",
+  "worker": "stage1",
+  "summary": "Expanded both inverse identities and arbitrary pullback into eight steps using existing generic pullback, standard-open, affine-section and module-map gluing nodes. The statement and stmt_deps are unchanged; no new nodes are needed. Checked arbitrary normalized data, unrestricted quasi-coherent modules, non-flat maps, and empty cases. Mathlib searches retain inherited records and append actual logged searches.",
+  "blueprint": "Historical ancestor lem-trf-local-term-locality, proof (1)--(2), specialization-to-the-normal-cone route: the fibrewise-ampleness/projectivity tool in lem-trf-proper-fibrewise-ample-projective, Step 4. This prerequisite supplies the projective-bundle quotient geometry used to construct the canonical evaluation immersion in the proof of 01VR, not a new claim about local terms. Re-split of lem-trf-projective-bundle-quotient-geometry, old steps 7--8 and arbitrary-pullback part of step 9. Steps 1-6 realize the inverse operations; Steps 7-8 realize arbitrary pullback. Whole-blueprint searches for projective bundle, invertible quotient, pullback invertible, and homogeneous fraction found no equivalent imported node.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-module-pullback-identity-composition",
+    "why": "Canonical natural composite-pullback identifications for sheaves of modules; a generic sheaf tool absent from this unit."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-pullback-invertible",
+    "why": "Pullback preserves invertibility for arbitrary scheme maps; generic module geometry, not a replacement of the trace/local-term route."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-epi-direct-sum",
+    "why": "Only clause (1), preservation of epimorphisms under arbitrary module pullback, is used."
+   },
+   {
+    "node": "prop-nagata-proj-standard-open",
+    "why": "The affine descriptions and covering criterion for standard opens of arbitrary Proj are used as chart tools."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "Natural tensor-to-section isomorphism on affine charts supplies the coefficient formula for any scheme map."
+   },
+   {
+    "node": "lem-pur-sheaf-hom-cover-gluing",
+    "why": "Unique gluing of compatible module maps on the Zariski open cover; generic sheaf descent, independent of purity."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-module-pullback-identity-composition",
+  "lem-weil-pbc-module-pullback-epi-direct-sum"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-f74b927bf",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-f74b927bf (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit, zero new nodes, and the item's statement and stmt_deps are byte-equal to side-live. The item is still unsplit there, so another group has not already done it, and there is no repair note for it. Source check: Stacks constructions.tex 01OA (lines 4656-4754) allows an arbitrary quasi-coherent E, and its two inverse constructions match the item. 01O4 (lemma-apply-relative, line 4116) also matches. The tag table confirms 01M4 is lemma-standard-open. No SGA source is used. Steps checked: 1 (Q and q_P pull back to an invertible module and a surjection); 2 (the D_+(iota(m)) charts cover even for infinite M, and e is a frame for ANY normalized datum through the twist's (A_e)_1); 3 (affine-sections naturality gives the coefficient b_v/b_m, and theta sends F^*e to b_m l); 4 (overlap ratio b_m/b_n; cancellation by the surjection, which stays a surjection on opens; hom-cover gluing glues theta and its inverse); 6 (uniqueness of psi, with frames l and v(l)); 8 (both maps send the frame e to u^*q(m), so hom gluing makes them equal). Edge cases tested: E=0 (P and T empty), rank one, nilpotent b_m, and non-flat Z -> F_2. All are fine. Comparing with the parent's old steps 7-9 in the NM report, the delivery keeps every argument. FIX (C1/C3): Steps 5 and 7 relied on the fraction-map node's uniqueness clause. That clause covers morphisms satisfying the formulas for every U, W, l, m, but the steps checked only special charts (W inside a^{-1}C_e with frame a^*e, and W' inside u^{-1}W with frame u^*l). The old parent step cited def-weil-affine-spectrum and lem-weil-pbc-scheme-morphism-gluing to close this gap, and the delivery dropped both. I rewrote the last sentences of Steps 5 and 7: equal ring maps into the affine chart give equal morphisms on each chart, the charts cover the source, and morphism gluing then gives equality. I added both nodes (Mathlib leaves) to the two steps' uses and to proof_deps. Accepted tool_uses: the six generic pullback, standard-open, affine-section and hom-gluing nodes in split_report.tool_uses. No duplicates were found; the NM siblings chart-gluing and fraction-map state different facts.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LineQuotientChartInversePullback",
+  "declaration": "AlgebraicGeometry.ProjectiveBundleQuotientGeometry.line_quotient_chart_inverse_pullback",
+  "declarations": [
+   "AlgebraicGeometry.ProjectiveBundleQuotientGeometry.line_quotient_chart_inverse_pullback"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/LineQuotientChartInversePullback.lean",
+  "statement": "theorem line_quotient_chart_inverse_pullback {S : Scheme.{u}} (E : S.Modules) [E.IsQuasicoherent] (D : TautologicalQuotient E) : (∀ (T : Scheme.{u}) (h : T ⟶ S) (a : T ⟶ (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj) (ha : a ≫ (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom = h), ((tensorPullback a).obj D.line).IsInvertible ∧ Epi (pulledQuotient D h a ha) ∧ RecoveredQuotientFrame D h a ha ∧ ∀ (ψ : RelativeGradedLineMap h (SymmetricAlgebraSheaf.gradedAlgebraData E) ((tensorPullback a).obj D.line)) (F : T ⟶ (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj), ψ.ExtendsLineQuotient h E _ (pulledQuotient D h a ha) → ψ.HasQuotientFractionCharts h E _ (pulledQuotient D h a ha) F → F = a ∧ RecoveredFractionCoefficients D h a ψ) ∧ ∀ (T : Scheme.{u}) (h : T ⟶ S) (L : T.Modules), L.IsInvertible → ∀ (q : (tensorPullback h).obj E ⟶ L), Epi q → ∀ (ψ : RelativeGradedLineMap h (SymmetricAlgebraSheaf.gradedAlgebraData E) L) (F : T ⟶ (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj), ψ.ExtendsLineQuotient h E L q → ψ.HasQuotientFractionCharts h E L q F → ∃ (hF : F ≫ (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom = h) (θ : (tensorPullback F).obj D.line ≅ L), pulledQuotient D h F hF ≫ θ.hom = q ∧ InverseLineChartNormalization D h L q F θ ∧ (∀ (L' : T.Modules) (v : L ≅ L') (q' : (tensorPullback h).obj E ⟶ L'), q ≫ v.hom = q' → ∀ (ψ' : RelativeGradedLineMap h (SymmetricAlgebraSheaf.gradedAlgebraData E) L') (F' : T ⟶ (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj), ψ'.ExtendsLineQuotient h E L' q' → ψ'.HasQuotientFractionCharts h E L' q' F' → F' = F ∧ ∀ (U : S.affineOpens) (W : T.affineOpens) (hWU : W.1 ≤ h ⁻¹ᵁ U.1) (l : Γ(L, W.1)), IsFreeGenerator l → ∀ (d : ℕ) (c : (SymmetricAlgebraSheaf.gradedAlgebraData E).grading U d), ψ'.quotientCoefficient U W hWU (v.hom.app W.1 l) d c = ψ.quotientCoefficient U W hWU l d c) ∧ ∀ (T' : Scheme.{u}) (u : T' ⟶ T), ((tensorPullback u).obj L).IsInvertible ∧ Epi (lineQuotientPullback h u E L q) ∧ ∀ (ψ' : RelativeGradedLineMap (u ≫ h) (SymmetricAlgebraSheaf.gradedAlgebraData E) ((tensorPullback u).obj L)) (F' : T' ⟶ (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj), ψ'.ExtendsLineQuotient (u ≫ h) E _ (lineQuotientPullback h u E L q) → ψ'.HasQuotientFractionCharts (u ≫ h) E _ (lineQuotientPullback h u E L q) F' → ∃ hFF : F' = u ≫ F, (∀ (hF' : F' ≫ (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom = u ≫ h) (θ' : (tensorPullback F').obj D.line ≅ (tensorPullback u).obj L), pulledQuotient D (u ≫ h) F' hF' ≫ θ'.hom = lineQuotientPullback h u E L q → θ'.hom = (eqToIso (congrArg (fun f ↦ (tensorPullback f).obj D.line) hFF)).hom ≫ (tensorPullbackSectionComp u F).hom.app D.line ≫ (tensorPullback u).map θ.hom ∧ InverseLineChartNormalization D (u ≫ h) ((tensorPullback u).obj L) (lineQuotientPullback h u E L q) F' θ') ∧ QuotientFractionNaturality h u E L q ψ ψ'",
+  "branch": "sheaf-dag",
+  "by": "Q106",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8ec0a7fbc",
+  "group": "Q106",
+  "result": "pass",
+  "note": "Read node, all 8 stmt_dep records, the fraction-map module (existence plus uniqueness of psi and F, so quantifying over characterized (psi,F) is the graph of F_h, not an arbitrary map), TautologicalQuotient/pulledQuotient, tensorPullbackSectionComp (leftAdjointUniq; directions match) and IsFreeGenerator. All clauses match the node: q_a epi and a^*Q invertible; theta_q with pulledQuotient≫θ=q; chart normalization θ(e)=b_m l on every V⊆W, unit-guarded b_v and e/f=b_m/b_n clauses; converse F=a with coefficient 1 and c/e^d↦a^*(c/e^d) via the unique factorization k; iso-invariance F'=F with equal coefficients; arbitrary u: F'=u≫F, θ'=eqToIso≫comp≫u^*θ, b'(z)=u^*b(z), b'_m=u^*b_m. lean.statement verbatim; node differs from live only in lean; no new nodes or collisions; docstrings carry source, blueprint and 8 proof steps; sorry only. Edge cases E=0, empty T, nilpotent b_m, infinite M, d=0, non-flat u are fine. Universes single u as in deps. No compile (no change). Advisories: RelativeGradedLineMap/IsFreeGenerator owners not in stmt_deps (via fraction-map interface); ∃β clause in QuotientFractionNaturality is redundant; proof imports are non-public."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-c58e7",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261024T185801-L-3673567",
+  "kind": "interface",
+  "note": "independent cc review: c58e7f70 vs prior af9d4180 files (diff -r: only helper removal → invertible_pullback_tensor, node cite lem-weil-pbc-invertible-pullback-tensor, report text) and vs live clone (7 defs verbatim, theorem statement identical); 3 sorry halves checked against HasQuotientFractionCharts/ExtendsLineQuotient/pulledQuotient; 6 delivered modules + importers ProjectiveBundleQuotientGeometry, ProjectiveBundleRelativeAmple compiled rc 0; #print axioms item (sorryAx from declared halves) and iso_charts (clean)"
+ }
+}

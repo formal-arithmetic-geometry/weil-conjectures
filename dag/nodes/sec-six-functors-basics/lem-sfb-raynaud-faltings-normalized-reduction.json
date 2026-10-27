@@ -1,0 +1,362 @@
+{
+ "id": "lem-sfb-raynaud-faltings-normalized-reduction",
+ "kind": "statement",
+ "title": "Raynaud--Faltings reduced fibres for normalized affine base change",
+ "statement": "Let $D$ be a complete discrete valuation ring [def-sc-discrete-valuation-ring, def-weil-pbc-adically-complete-ring] with fraction field $F$. Let $E$ be a finitely generated commutative $D$-algebra, flat as a $D$-module [def-weil-pbc-flat-ring-map]. Suppose $E_F=E\\otimes_D F$ is geometrically normal: for every field extension $F_1/F$, every localization at a prime of $E_F\\otimes_F F_1$ is an integrally closed domain [def-weil-pbc-normal-ring]. Then there is a finite field extension $L/F$ [def-pc-field-extension], with no separability requirement, such that the following holds. Let $R\\subset L$ be the integral closure of $D$ in $L$, namely the elements satisfying monic polynomials over $D$, and put $E_R=E\\otimes_D R$. Regard $E_R$ as a subring of $E_F\\otimes_F L$, and let $C$ be its integral closure inside that ring. Then $C$ is a finite $E_R$-module, is a finitely generated flat $R$-algebra, and is a normal ring. The natural map $C\\otimes_R L\\to E_F\\otimes_F L$ is an isomorphism. For every maximal ideal $\\mathfrak n$ of $R$ and every field extension $\\Omega/(R/\\mathfrak n)$, the ring $(C/\\mathfrak nC)\\otimes_{R/\\mathfrak n}\\Omega$ is reduced, meaning it has no nonzero nilpotent elements. The zero algebra is allowed.",
+ "source": {
+  "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+  "place": "WANTED locally; read https://arxiv.org/pdf/math/0405381, Appendix Theorem A.2 and Remark A.3, printed pp.27-28; geometrically normal generic fibre specialization. Theorem A.6 supplies finite normalization even without excellence; here the base is complete."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-normal-ring",
+  "def-pc-field-extension"
+ ],
+ "proof": [
+  {
+   "text": "Fix a uniformizer $\\pi$ of $D$. Flatness makes $E\\to E[1/\\pi]=E_F$ injective: tensor $D\\xrightarrow{\\pi}D$ with $E$ and iterate. The normal ring $E_F$ is reduced, so $E$ is reduced. If $E=0$, take $L=F$ and $C=0$; all clauses hold. In the remaining steps zero factors and components with empty special fibre are allowed.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map",
+    "def-sc-discrete-valuation-ring",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Setup before Tag 09IL; injectivity written out from flatness"
+   }
+  },
+  {
+   "text": "We record the normalization construction for any complete DVR $V$ with fraction field $K$ and flat finite type $V$-algebra $A$ with normal $A_K$. The ring $A$ is Noetherian and reduced. Its total fraction ring is the finite product $\\prod_j\\operatorname{Frac}(A/\\mathfrak a_j)$ over its minimal primes. Completeness makes $V$ Nagata; universal Japaneseness makes each finite type domain $A/\\mathfrak a_j$ N-2. Consequently its integral closure in its own fraction field is finite. Integral closure in the finite product is the product of these closures: projection of a monic equation gives one inclusion, and the product of the finitely many monic equations gives the other. This product is finite over $A$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+    "lem-weil-pbc-complete-local-nagata",
+    "lem-weil-pbc-nagata-universally-japanese"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Setup before Tag 09IL; Algebra Tags 032W and 0331; componentwise finite normalization from N-2"
+   }
+  },
+  {
+   "text": "Write $A^\\nu$ for the closure just constructed. Since $\\pi_V$ is a nonzerodivisor, $Q(A)=Q(A_K)$. Every element of $A^\\nu$ is integral over $A_K$ after localization, hence lies in $A_K$ because a normal ring is integrally closed in its total fraction ring. Thus $A^\\nu$ is precisely the integral closure of $A$ inside $A_K$. The finite product decomposition of the Noetherian normal ring $A_K$ and the integral-closure normality lemma show that $A^\\nu$ is normal. It is Noetherian and finite type because it is finite over $A$. Its embedding in $A_K$ is torsion free over the PID $V$, hence flat. Finally $A\\subseteq A^\\nu\\subseteq A_K$ gives $A^\\nu[1/\\pi_V]=A_K$. Apply this construction to $(V,A)=(D,E)$, and call the result $N$.",
+   "uses": [
+    "lem-weil-pbc-normal-ring-integrally-closed-total",
+    "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
+    "lem-sbc-integral-closure-finite-normal-product",
+    "lem-weil-pbc-finite-algebra-noetherian",
+    "lem-weil-pbc-pid-torsion-free-module-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Setup before Tag 09IL; normality and generic identification of normalized base change"
+   }
+  },
+  {
+   "text": "Decompose the Noetherian normal ring $N=\\prod_jN_j$ into finitely many normal domains. On each factor take all primes minimal over $(\\pi)$; there are finitely many. Each such prime $\\mathfrak p_i$ has height one: the principal ideal height bound gives height at most one, and $0\\ne\\pi\\in\\mathfrak p_i$ gives height at least one. Thus $T_i=(N_j)_{\\mathfrak p_i}$ is a DVR by the one-dimensional normal-local criterion. The map $D\\to T_i$ is injective and local, and $T_i$ is a localization at a prime of a finite type $D$-algebra. Apply the Epp input to obtain $F_i/F$.",
+   "uses": [
+    "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
+    "lem-sc-finite-minimal-primes-over-ideal",
+    "lem-sfb-krull-principal-ideal-height-bound",
+    "lem-sc-normal-dim1-dvr",
+    "lem-sfb-epp-essentially-finite-type-traits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09IL proof, vertical generic points and Tag 09II"
+   }
+  },
+  {
+   "text": "Let $R_i$ be the integral closure of $D$ in $F_i$. Each $R_i$ is a finite complete DVR by the complete-DVR normalization theorem. The common-extension theorem supplies one complete DVR $R$ finite over $D$ with compatible local embeddings $R_i\\hookrightarrow R$. Put $L=\\operatorname{Frac}(R)$. Then $L/F$ is finite and each $L/F_i$ is finite. The uniqueness clause of the complete-DVR normalization theorem identifies this $R$ with the integral closure of $D$ in $L$. If the family is empty take $R=D$ and $L=F$. The Epp conclusion holds for every $T_i$ with this $L$, because its statement allows every further finite extension.",
+   "uses": [
+    "lem-per-complete-dvr-finite-normalization",
+    "lem-per-epp-common-finite-trait-extension",
+    "lem-sfb-epp-essentially-finite-type-traits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09IL proof, common finite extension; Tag 0GLR"
+   }
+  },
+  {
+   "text": "Apply Steps 2–3 to $(V,A)=(R,E_R)$. For an injection of $R$-modules, its tensor with $E_R$ identifies with its tensor over $D$ with $E$; therefore $E_R$ is flat, it is finite type, and its generic fibre $E_F\\otimes_F L$ is normal by the given geometric normality. The resulting finite normal flat algebra is exactly $C$ of the statement, with $C\\otimes_RL=E_F\\otimes_FL$. The integral algebra $N\\otimes_D R$ embeds in that same generic ring and is integral over $E_R$. Transitivity of integrality shows that taking its integral closure gives the same $C$: an element integral over the larger algebra is integral over $E_R$, and a monic equation over $E_R$ is also one over the larger algebra. In particular $C$ is finite over $N$ as well, since $R/D$ and $C/E_R$ are finite.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-transitive"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09IL proof, normalized base change; generic normality is a hypothesis"
+   }
+  },
+  {
+   "text": "Fix a normal domain factor $C_b$ of $C$ and a height-one prime $\\mathfrak q$ containing a uniformizer $\\rho$ of $R$. Its map from $N$ factors through a domain factor $N_j$ and is injective on $N_j$: after inverting $\\pi$, the minimal component of $E_F\\otimes_FL$ dominates a component of $E_F$, since scalar extension is flat and a minimal prime contracts to a minimal prime by flat going down. Put $\\mathfrak p=\\mathfrak q\\cap N_j$. The extension $N_j\\subset C_b$ is integral. Going down over the normal domain $N_j$ shows $\\operatorname{ht}(\\mathfrak p)\\le1$. It contains $\\pi$, since $\\pi$ is a unit times a positive power of $\\rho$ in $R$, so $\\mathfrak p$ is one of the $\\mathfrak p_i$ of Step 4.",
+   "uses": [
+    "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
+    "lem-sc-flat-going-down",
+    "lem-weil-pbc-going-down-normal-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09IL proof, locating the image of a vertical generic point; componentwise going down"
+   }
+  },
+  {
+   "text": "Localize $N\\otimes_D R$ at $S=N_j\\setminus\\mathfrak p_i$, selecting the factor $N_j$. Its ring is $T_i\\otimes_D R$. Integral closure commutes with this localization, so $S^{-1}C$ is its integral closure inside $H_i\\otimes_F L$, where $H_i=\\operatorname{Frac}(T_i)$: indeed $T_i[1/\\pi]=H_i$. This generic tensor is reduced since it is a localization of the normal ring $E_F\\otimes_FL$. Also $T_i\\otimes_D R$ is integral over $T_i$, so transitivity identifies the closure with the ring $B_L$ in the Epp input. Localizing further at the image of $\\mathfrak q$ identifies $C_{\\mathfrak q}$ with $(B_L)_{\\mathfrak q'}$. This is a maximal localization over the maximal ideal of $T_i$, since $B_L$ is integral over $T_i$. Epp now gives $\\rho C_{\\mathfrak q}=\\mathfrak qC_{\\mathfrak q}$ and geometric reducedness over $k=R/(\\rho)$ of the field $C_{\\mathfrak q}/\\rho C_{\\mathfrak q}$.",
+   "uses": [
+    "lem-weil-pbc-integral-closure-commutes-localization",
+    "lem-weil-pbc-integral-transitive",
+    "lem-sfb-epp-essentially-finite-type-traits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09IL proof, omitted localization identification written out; Tags 0307, 09EM, 09E7"
+   }
+  },
+  {
+   "text": "For each domain factor $C_b$, every associated prime of $M_b=C_b/\\rho C_b$ has height one by the normal principal-quotient lemma. Such primes are minimal over $(\\rho)$, hence form a finite set. The associated-prime injection embeds $M_b$ into the finite product of its localizations at these primes. Step 8 identifies every factor with a field geometrically reduced over $k$. Tensor this injection over $k$ with an arbitrary field extension $\\Omega/k$; fields are flat, so it remains injective. Tensor commutes with this finite product, whose resulting factors are reduced by Step 8. A nilpotent in $M_b\\otimes_k\\Omega$ therefore maps to zero in every factor and is zero. Taking the finite product over $b$ proves $(C/\\rho C)\\otimes_k\\Omega$ reduced. Since $R$ is a DVR it has only one maximal ideal; this proves the last clause and finishes all assertions, including empty special fibres.",
+   "uses": [
+    "lem-weil-pbc-normal-domain-principal-quotient-associated-height",
+    "lem-sc-finite-minimal-primes-over-ideal",
+    "lem-weil-pbc-module-injects-localizations-associated-primes",
+    "lem-trf-flat-tensor-preserves-injection",
+    "lem-weil-pbc-module-over-field-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Algebra Tags 031T and 0311; reduced-fibre conclusion of Tag 09IL, with the geometric tensor argument written out"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-normal-ring",
+  "lem-per-complete-dvr-finite-normalization",
+  "lem-per-epp-common-finite-trait-extension",
+  "lem-sbc-integral-closure-finite-normal-product",
+  "lem-sc-finite-minimal-primes-over-ideal",
+  "lem-sc-flat-going-down",
+  "lem-sc-normal-dim1-dvr",
+  "lem-sfb-epp-essentially-finite-type-traits",
+  "lem-sfb-krull-principal-ideal-height-bound",
+  "lem-trf-flat-tensor-preserves-injection",
+  "lem-weil-pbc-complete-local-nagata",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-going-down-normal-integral",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "lem-weil-pbc-integral-transitive",
+  "lem-weil-pbc-module-injects-localizations-associated-primes",
+  "lem-weil-pbc-module-over-field-flat",
+  "lem-weil-pbc-nagata-universally-japanese",
+  "lem-weil-pbc-normal-domain-principal-quotient-associated-height",
+  "lem-weil-pbc-normal-ring-integrally-closed-total",
+  "lem-weil-pbc-pid-torsion-free-module-flat",
+  "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+  "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 09IL, theorem-normalized-base-change-with-reduced-fibre: Epp proof specialized to a complete DVR and geometrically normal generic fibre; associated-prime proof of geometric reducedness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a flat finite type scheme over a complete DVR with geometrically normal generic fibre, after a finite fraction field extension the finite normalization has geometrically reduced special fibre",
+   "results": "{\"t\": \"2026-10-24T02:53:32Z\", \"tool\": \"leanfinder\", \"query\": \"For a flat finite type scheme over a complete DVR with geometrically normal generic fibre, after a finite fraction field extension the finite normalization has geometrically reduced special fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"Algebra.IsGeometricallyReduced\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\"], \"digest\": \"da56228a98cc384c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: relative normalization gives an integral map and preserves reducedness of the total scheme, not geometrically reduced special fibres after a finite base extension. GeometricallyReduced and Weierstrass good-reduction hits do not assert this theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"normalization\"",
+   "results": "{\"t\": \"2026-10-24T02:53:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"normalization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\"], \"digest\": \"d48a5d2f8710c873\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: relative normalization gives an integral map and preserves reducedness of the total scheme, not geometrically reduced special fibres after a finite base extension. GeometricallyReduced and Weierstrass good-reduction hits do not assert this theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "reduced.*fib|fib.*reduced|normalization",
+   "results": "{\"t\": \"2026-10-24T02:53:30Z\", \"tool\": \"grep\", \"query\": \"reduced.*fib|fib.*reduced|normalization\", \"sub\": \"AlgebraicGeometry/Normalization.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"15\", \"17\", \"19\", \"20\", \"24\"], \"digest\": \"e2f17bf45c1b6886\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: relative normalization gives an integral map and preserves reducedness of the total scheme, not geometrically reduced special fibres after a finite base extension. GeometricallyReduced and Weierstrass good-reduction hits do not assert this theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Raynaud Faltings reduced fibre theorem after finite extension of a discrete valuation field",
+   "results": "{\"t\": \"2026-10-24T02:53:30Z\", \"tool\": \"leansearch\", \"query\": \"Raynaud Faltings reduced fibre theorem after finite extension of a discrete valuation field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsGeometricallyReduced\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.reduction\", \"WeierstrassCurve.isGoodReduction_iff\", \"Algebra.instFiniteResidueFieldOfQuasiFiniteAt\", \"Algebra.FormallyUnramified.isReduced_of_field\", \"WeierstrassCurve.IsGoodReduction.mk\", \"WeierstrassCurve.IsGoodReduction.congr_simp\"], \"digest\": \"f0eb042984ce8815\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: relative normalization gives an integral map and preserves reducedness of the total scheme, not geometrically reduced special fibres after a finite base extension. GeometricallyReduced and Weierstrass good-reduction hits do not assert this theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite extension of the base fraction field makes normalized base change of a flat model have geometrically reduced fibres",
+   "results": "{\"t\": \"2026-10-24T02:53:31Z\", \"tool\": \"leanfinder\", \"query\": \"A finite extension of the base fraction field makes normalized base change of a flat model have geometrically reduced fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsGeometricallyReduced\", \"Algebra.isGeometricallyReduced_iff\", \"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\", \"Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct\", \"RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange\", \"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"WeierstrassCurve.Affine.baseChange_nonsingular\", \"Algebra.isReduced_of_isGeometricallyReduced\"], \"digest\": \"f147f5bf069a1a09\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: relative normalization gives an integral map and preserves reducedness of the total scheme, not geometrically reduced special fibres after a finite base extension. GeometricallyReduced and Weierstrass good-reduction hits do not assert this theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-group-model-potential-smooth-normalization",
+  "date": "2026-10-24",
+  "group": "Q20"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Section 3.3, Proposition 3.4 and Corollary A.4, with Theorem A.6; local-extension reductions at the beginning of Section 5 and following Lemma A.9, printed pp.5-6,9,27-30; supporting input: Raynaud--Faltings reduced fibres for normalized affine base change.",
+   "via": [
+    "lem-sfb-group-model-potential-smooth-normalization",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-raynaud-faltings-normalized-reduction",
+  "worker": "stage1",
+  "summary": "Proved the normalized reduction assertion using local Epp solutions at finitely many vertical height-one primes, common finite extension, explicit localization of integral closure, and the associated-prime tensor argument. Preserved the statement including arbitrary residue field, inseparable extensions and zero algebra. One new unsplit local Epp input, no restatement of the global conclusion.",
+  "blueprint": "Historical supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), via the creation chain recorded on the item: reduced fibres for the normalized group model. Current latest blueprint proof (3) uses proper and open direct-image preservation, and does not itself state this auxiliary algebra theorem. Local input: eliminate ramification at the generic points of the special fibre before the associated-prime argument.",
+  "tool_uses": [
+   {
+    "node": "lem-per-complete-dvr-finite-normalization",
+    "why": "Generic commutative algebra tool: Finite normalization of a complete discrete valuation ring. Used only with the hypotheses checked in the proof and report; the item unit has no replacement for this algebraic input."
+   },
+   {
+    "node": "lem-per-epp-common-finite-trait-extension",
+    "why": "Generic commutative algebra tool: Common finite extension of finitely many complete traits. Used only with the hypotheses checked in the proof and report; the item unit has no replacement for this algebraic input."
+   },
+   {
+    "node": "lem-sbc-integral-closure-finite-normal-product",
+    "why": "Generic commutative algebra tool: Integral closure in a finite product of normal domains has normal localizations. Used only with the hypotheses checked in the proof and report; the item unit has no replacement for this algebraic input."
+   },
+   {
+    "node": "lem-sc-normal-dim1-dvr",
+    "why": "Generic commutative algebra tool: One-dimensional normal local rings. Used only with the hypotheses checked in the proof and report; the item unit has no replacement for this algebraic input."
+   },
+   {
+    "node": "lem-weil-pbc-complete-local-nagata",
+    "why": "Generic commutative algebra tool: A Noetherian complete local ring is a Nagata ring. Used only with the hypotheses checked in the proof and report; the item unit has no replacement for this algebraic input."
+   },
+   {
+    "node": "lem-weil-pbc-module-injects-localizations-associated-primes",
+    "why": "Generic commutative algebra tool: A module over a Noetherian ring embeds in the product of its localizations at its associated primes. Used only with the hypotheses checked in the proof and report; the item unit has no replacement for this algebraic input."
+   },
+   {
+    "node": "lem-weil-pbc-nagata-universally-japanese",
+    "why": "Generic commutative algebra tool: A Nagata ring is universally Japanese (Nagata). Used only with the hypotheses checked in the proof and report; the item unit has no replacement for this algebraic input."
+   },
+   {
+    "node": "lem-weil-pbc-normal-domain-principal-quotient-associated-height",
+    "why": "Generic commutative algebra tool: Associated primes of a nonzero principal quotient of a normal Noetherian domain. Used only with the hypotheses checked in the proof and report; the item unit has no replacement for this algebraic input."
+   },
+   {
+    "node": "lem-weil-pbc-normal-ring-integrally-closed-total",
+    "why": "Generic commutative algebra tool: A normal ring is integrally closed in its total ring of fractions. Used only with the hypotheses checked in the proof and report; the item unit has no replacement for this algebraic input."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+    "why": "Generic commutative algebra tool: The total ring of fractions of a reduced Noetherian ring is a finite product of fields. Used only with the hypotheses checked in the proof and report; the item unit has no replacement for this algebraic input."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
+    "why": "Generic commutative algebra tool: A reduced ring with finitely many minimal primes is normal iff integrally closed in its total ring of fractions. Used only with the hypotheses checked in the proof and report; the item unit has no replacement for this algebraic input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-per-complete-dvr-finite-normalization",
+  "lem-per-epp-common-finite-trait-extension",
+  "lem-sbc-integral-closure-finite-normal-product",
+  "lem-sc-normal-dim1-dvr",
+  "lem-weil-pbc-complete-local-nagata",
+  "lem-weil-pbc-module-injects-localizations-associated-primes",
+  "lem-weil-pbc-nagata-universally-japanese",
+  "lem-weil-pbc-normal-domain-principal-quotient-associated-height",
+  "lem-weil-pbc-normal-ring-integrally-closed-total",
+  "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+  "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q147-51c1023ac",
+  "group": "Q147",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q147-51c1023ac (reviewer sub-agent of L); spot-checked: Read the item's 9 steps, the new statement-only node lem-sfb-epp-essentially-finite-type-traits, all 27 cited statements, and Stacks 09IL, 09II, 0GLR, 09EM, 09E7, definition-solution and 030U. New node: it equals Stacks 09II (a solution exists) plus 0GLR (a solution stays one after any further finite extension), with formal smoothness rewritten by 09E7 as weakly unramified plus a geometrically reduced residue field. The DVR and maximal-ideal clauses follow from 09EM(1) and (4), using that D is complete. The statement is true and not weakened. It holds in the cases T=D and inseparable T=D[pi^{1/p}]. It is strictly smaller than the item and duplicates no node: the existing Epp nodes are the dropped mixed-characteristic, perfect-residue ones; the lem-sbc nodes are tame cases; the lem-trf valuation node assumes a separably closed generic field. Item: the statement is unchanged and true. The proof is 09IL specialized to a complete DVR. Steps 7-9 replace density of the smooth locus with an associated-prime argument, and Step 8 writes out the local identification that 09IL leaves as 'details omitted'. I checked every hypothesis: Nagata from completeness; normality of the closure; flatness via torsion-free over a PID; height-one primes over pi; injectivity and locality of D->T_i; flat going down to find the domain factor; going down for an integral extension of a normal domain; S=N_j minus p_i containing the idempotent e_j; H_i(x)L reduced; q' maximal; injectivity of the associated-prime map after tensoring with Omega. Tested E=0, E=D, xy=pi^e, D[x]/(x^2-pi) and components with empty special fibre. Batch-5: lem-trf-flat-tensor-preserves-injection is a status-mathlib flatness fact (Module.Flat), outside both assumed statements and their proofs, so it is accepted. AG route: lem-per-complete-dvr-finite-normalization and lem-per-epp-common-finite-trait-extension are justified at Step 5. They are on the 2026-10-19 dropped list only because nothing reached them after the AG node went back to finite coefficients. Both are pure DVR algebra (finite normalization of a complete DVR; common finite extension of finitely many complete traits), with split proofs on weil-pbc leaves. Neither is any of the forbidden inputs (Qbar_l/adic restatement, duality/biduality, middle t-structure, Gabber, alterations, stable reduction), and the AG node's own route is untouched. No non-dropped node states these facts. Tool_uses are generic algebra and accepted. No SGA. Only a minor report inaccuracy: the citations.json it mentions is not in the commit. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RaynaudFaltingsNormalizedReduction",
+  "declaration": "Algebra.exists_raynaudFaltings_normalized_reduction",
+  "declarations": [
+   "Algebra.normalizedReductionBase",
+   "Algebra.normalizedReductionGeneric",
+   "Algebra.normalizedReductionClosure",
+   "Algebra.normalizedReductionGenericMap",
+   "Algebra.exists_raynaudFaltings_normalized_reduction"
+  ],
+  "file": "lean/Sheaf/RingTheory/RaynaudFaltingsNormalizedReduction.lean",
+  "statement": "theorem exists_raynaudFaltings_normalized_reduction (D : Type u) [CommRing D] [IsDomain D] [IsDiscreteValuationRing D] [IsAdicComplete (IsLocalRing.maximalIdeal D) D] (F : Type v) [Field F] [Algebra D F] [IsFractionRing D F] (E : Type w) [CommRing E] [Algebra D E] [FiniteType D E] [Module.Flat D E] (hgeneric : ∀ (K : Type (max u v w)) [Field K] [Algebra F K], ∀ (p : Ideal (K ⊗[F] (F ⊗[D] E))) [p.IsPrime], IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)) : ∃ (L : Type (max u v w)) (_ : Field L) (_ : Algebra F L) (_ : Algebra D L) (_ : IsScalarTower D F L), FiniteDimensional F L ∧ Module.Finite (normalizedReductionBase D E L) (normalizedReductionClosure D E L) ∧ FiniteType (integralClosure D L) (normalizedReductionClosure D E L) ∧ Module.Flat (integralClosure D L) (normalizedReductionClosure D E L) ∧ (∀ (p : Ideal (normalizedReductionClosure D E L)) [p.IsPrime], IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)) ∧ Function.Bijective (normalizedReductionGenericMap D E L) ∧ (∀ (n : Ideal (integralClosure D L)) [n.IsMaximal], ∀ (Ω : Type (max u v w)) [Field Ω] [Algebra ((integralClosure D L) ⧸ n) Ω], IsReduced (Ω ⊗[(integralClosure D L) ⧸ n] (((integralClosure D L) ⧸ n) ⊗[integralClosure D L] (normalizedReductionClosure D E L))))",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The three abbreviations are the literal tensor and integral-closure constructions of this node; the generic map is the canonical tensor product map from the inclusion. Generic and special fibres use the standard tensor cancellation and quotient-tensor identifications; no notion is duplicated."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-949e6697c",
+  "group": "NO",
+  "result": "pass",
+  "note": "Read the node, the 5 stmt_deps, the module and the report. lean.statement is verbatim and all 5 declarations exist; no other group has landed a binding (side-live split with lean null, live unsplit). Hypotheses match: complete DVR via IsDiscreteValuationRing+IsAdicComplete(maxIdeal), IsFractionRing F, FiniteType+Module.Flat E with no nontriviality (zero algebra allowed), geometric normality in the recorded inline normal-ring form over every field K/F. Conclusions match: ∃ finite L/F with no separability and the D-structure pinned by IsScalarTower; R = integralClosure D L; E_R = R⊗_D E; C = integralClosure E_R (E_R⊗_R L), the canonical ambient ring ≅ E_F⊗_F L; Module.Finite E_R C, FiniteType/Flat over R, normal C; Bijective canonical productMap c⊗l↦c·(1⊗l); IsReduced(Ω⊗_{R/n}((R/n)⊗_R C)) for every maximal n and field Ω. Universes: K, Ω, L in max u v w, at the residue field's own universe, equivalent to all fields, so no silent restriction. No hollow defs (literal tensor/integral-closure abbrevs, canonical map); only the theorem is sorry; source and blueprint docstrings present; all 9 proof steps in the docstring; proof-dep imports exist. Advisories only: the second reading was written by the worker under the dispatcher policy (H11), and a possibly redundant public import of TensorProduct.Quotient. Compile not reproduced per the instructions; no files changed."
+ }
+}

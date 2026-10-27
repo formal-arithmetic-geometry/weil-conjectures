@@ -1,0 +1,408 @@
+{
+ "id": "lem-sfb-projective-smooth-divisor-parameter",
+ "kind": "statement",
+ "title": "Finite-type parameter scheme for fixed-degree divisors in a smooth open curve",
+ "statement": "Let $S$ be a Noetherian scheme, meaning quasi-compact and locally Noetherian [pqf-def-locnoeth], and let $C\\hookrightarrow\\mathbf P^n_S$ be a closed immersion [def-kun-projective], [def-weil-closed-immersion]. Suppose $C\\to S$ is flat and finitely presented [def-weil-flat-morphism], [def-sbc-locally-finite-presentation], with geometric fibres of pure dimension one [def-weil-pure-dimension]. Let $U\\subset C$ be an open subscheme [def-weil-open-immersion] such that $U\\to S$ is smooth of relative dimension one [def-sbc-smooth-morphisms]. Fix an integer $d\\geq0$. The functor on $S$-schemes $T$ of closed subschemes $E\\subset U_T=U\\times_ST$ [def-pc-fibre-product] finite locally free of rank $d$ over $T$ is represented by a scheme $V_d$ of finite type over $S$ [def-weil-finite-type-morphism]. Here finite locally free of rank $d$ means finite with pushforward of its structure sheaf locally isomorphic to $\\mathcal O_T^{\\oplus d}$. The universal $E_{\\mathrm{univ}}\\subset U\\times_SV_d$ is also closed in $C\\times_SV_d$ and is a relative effective Cartier divisor on $C_{V_d}/V_d$ [def-pc-relative-effective-cartier]. Its divisor line $\\mathcal O(E_{\\mathrm{univ}})$ [def-pc-divisor-line-bundle] and this representing property commute with arbitrary base change of $S$. The scheme $V_d$ is an open subscheme of the projective Hilbert scheme of $C/S$ with constant Hilbert polynomial $d$ [def-sfb-projective-fibre-hilbert-polynomial].",
+ "source": {
+  "document": "literature/stacks-project/moduli.tex",
+  "place": "Tag 0DPE, lemma-hilb-open; Tag 0DPI, lemma-hilb-qc-over-base, with the constant Hilbert polynomial d. Scheme representation and universal family: pic.tex Tag 0B9A (proposition-hilb-d-representable) and Tag 0B9B (remark-when-proposition-applies); Cartier property: Tag 0B9D (lemma-divisors-on-curves) on the smooth open, extended by the empty divisor outside the support. The projective Hilbert scheme is the existing lem-sfb-projective-hilbert-polynomial-representability input."
+ },
+ "stmt_deps": [
+  "def-kun-projective",
+  "def-pc-divisor-line-bundle",
+  "def-pc-fibre-product",
+  "def-pc-finite-locally-free",
+  "def-pc-hilb-functor",
+  "def-pc-relative-effective-cartier",
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-smooth-morphisms",
+  "def-sfb-projective-fibre-hilbert-polynomial",
+  "def-sfb-proper-hilbert-presheaf",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-open-immersion",
+  "def-weil-pure-dimension",
+  "pqf-def-locnoeth"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-projective-hilbert-polynomial-representability] to the specified embedding of $C$ over the Noetherian base $S$. Let $H=H_d$ and $q:Z\\to H$ be its universal closed family in $C_H$. Thus $H$ is projective, separated and of finite type over $S$, and $Z/H$ is flat and finitely presented with fibre polynomial $d$. Base-changing the embedding of $C$ gives a closed embedding of $C_H$ in $\\mathbf P^n_H$ by [lem-weil-pbc-closed-immersion-base-change], and composing it with $Z\\hookrightarrow C_H$ is closed by [lem-weil-pbc-closed-immersion-products]. Apply [lem-sfb-constant-hilbert-finite-locally-free] to this composite: $q$ is finite locally free of degree $d$. The theorem permits arbitrary bases, so its application does not require proving that $H$ is Noetherian.",
+   "uses": [
+    "lem-sfb-projective-hilbert-polynomial-representability",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-products",
+    "lem-sfb-constant-hilbert-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli.tex",
+    "place": "Tag 0DPE (lemma-hilb-open), fixed-polynomial restriction; projective representation supplied by the cited existing node; numerical bridge as in the new node source"
+   }
+  },
+  {
+   "text": "Let $B=|Z|\\setminus|Z\\cap U_H|$, a closed subset of $Z$, and set $V=H\\setminus q(B)$. The image $q(B)$ is closed by [lem-weil-pbc-finite-closed-map-finite-fibres], so $V$ is open. To check its exact functorial meaning, take $h:T\\to H$. For $t\\in T$ a boundary point above $h(t)$ survives in $Z_T$ by [lem-weil-pbc-surjective-base-change]: the nonempty fibre over $h(t)$ maps surjectively to $\\operatorname{Spec}\\kappa(h(t))$, and its base change to $\\kappa(t)$ remains nonempty, also after restricting to any boundary point and its residue field. Conversely any boundary point of $Z_T$ projects to one above $h(t)$. Consequently $Z_T\\subset U_T$ if and only if every $h(t)$ belongs to $V$, which is precisely factorization through the open subscheme $V$. This checks the support condition on arbitrary test schemes, including nonreduced ones; factorization through an open is determined by its underlying image.",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-weil-pbc-surjective-base-change",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli.tex",
+    "place": "Tag 0DPE (lemma-hilb-open), proof hint filled in by the closed-image complement and field-base-change argument; morphisms.tex Tag 01S1 (lemma-base-change-surjective)"
+   }
+  },
+  {
+   "text": "For a test scheme $T/S$ and a closed $E\\subset U_T$ finite locally free of rank $d$ in the statement's pushforward convention, [def-pc-finite-locally-free] and [lem-pc-flf-properties] identify this with finite locally free degree $d$. In the reverse conversion, on an affine base the algebra is finite free, so [lem-weil-pbc-finite-free-algebra-spectrum] supplies flatness and local finite presentation; the fibre dimensions are the ranks. The finite map $E\\to T$ is proper by [lem-weil-pbc-finite-closed-map-finite-fibres]. The target $C_T$ is separated over $T$: use projective-space properness [lemma-nagata-projective-space-base-change-proper] and properness of a closed subscheme [lem-weil-pbc-closed-immersion-proper], after base-changing the specified embedding. Hence $E\\to C_T$ is proper by [lemma-nagata-proper-to-separated-target]. It is also the given closed immersion into $U_T$ followed by an open immersion, so [lem-weil-pbc-proper-immersion-closed] makes it a closed immersion into $C_T$. Compose with $C_T\\hookrightarrow\\mathbf P^n_T$. The numerical bridge gives fibre polynomial $d$, and the representing property of $H_d$ gives a unique $h:T\\to H$. Its family is supported in $U_T$, so Step 2 gives a unique factorization through $V$.",
+   "uses": [
+    "def-pc-finite-locally-free",
+    "lem-pc-flf-properties",
+    "lem-weil-pbc-finite-free-algebra-spectrum",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lemma-nagata-projective-space-base-change-proper",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-products",
+    "lemma-nagata-proper-to-separated-target",
+    "lem-weil-pbc-proper-immersion-closed",
+    "lem-sfb-constant-hilbert-finite-locally-free",
+    "lem-sfb-projective-hilbert-polynomial-representability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli.tex",
+    "place": "Tag 0DPE (lemma-hilb-open), first sentence of the proof hint; pic.tex Tag 0B9A (proposition-hilb-d-representable), functor of points"
+   }
+  },
+  {
+   "text": "Conversely a map $T\\to V$ pulls back $Z$ to a closed subscheme of $U_T$ by Step 2, and [lem-pc-hilb-functorial] preserves finite locally free degree $d$. These constructions are inverse: both retain the very same ideal-defined closed subscheme, and uniqueness of the classifying map is part of the representing property of $H$. They are natural under pullback. Thus set $V_d=V$ and $E_{\\mathrm{univ}}=Z_V$; in particular this universal family is already closed in $C_V$. For finite type, $H$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. The open immersion $V\\to H$ is of finite presentation, hence finite type, by [lem-sfb-noetherian-open-closed-finite-presentation] (use the identity closed immersion of $V$). Composing with $H\\to S$ gives finite type by [lem-sfb-finite-type-composition-base-change].",
+   "uses": [
+    "lem-pc-hilb-functorial",
+    "lem-sfb-projective-hilbert-polynomial-representability",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-noetherian-open-closed-finite-presentation",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli.tex",
+    "place": "Tag 0DPE (lemma-hilb-open), natural transformation and open locus; Tag 0DPI (lemma-hilb-qc-over-base), fixed-polynomial boundedness, here supplied by Noetherianity of the projective H_d"
+   }
+  },
+  {
+   "text": "The base change $U_V\\to V$ is smooth of relative dimension one by [lem-sbc-smooth-relative-dimension-permanence]. Apply the implication $(1)\\Rightarrow(2)$ of [lem-pc-cartier-criterion] to $E_{\\mathrm{univ}}\\subset U_V$. Its ideal is locally generated by a non-zero-divisor there. On $C_V\\setminus|E_{\\mathrm{univ}}|$ its ideal is the unit ideal, generated by the non-zero-divisor $1$. These two opens cover $C_V$, since the support is contained in $U_V$. Therefore the ideal is effective Cartier everywhere on $C_V$. The map $E_{\\mathrm{univ}}\\to V$ is flat, so [def-pc-relative-effective-cartier] gives the relative assertion. Its ideal is invertible by [lemma-nagata-effective-cartier-is-invertible], and its dual is the line $\\mathcal O(E_{\\mathrm{univ}})$ by [def-pc-divisor-line-bundle]. No smoothness of $C_V$ away from $U_V$ is used.",
+   "uses": [
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-pc-cartier-criterion",
+    "def-pc-relative-effective-cartier",
+    "lemma-nagata-effective-cartier-is-invertible",
+    "def-pc-divisor-line-bundle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Tag 0B9D (lemma-divisors-on-curves), (1) implies (2); divisors.tex definition of effective Cartier ideal and its local nature"
+   }
+  },
+  {
+   "text": "For any $S'\\to S$, the base change $V_d\\times_SS'$ represents the same functor on $S'$-schemes: the fibre-product identities identify $U_T$ and $C_T$ with their original versions, and [lem-pc-hilb-functorial] preserves the degree condition. The open Hilbert embedding and universal family are the pullbacks of those already constructed by the base-change assertion of [lem-sfb-projective-hilbert-polynomial-representability] and the factorization criterion of Step 2. This argument does not assume $S'$ Noetherian. Finally $C_V/V$ and $E_{\\mathrm{univ}}/V$ are finitely presented: the former is a base change of the given finitely presented $C/S$ by [lem-weil-pbc-qcqs-morphism-permanence], and the latter is the universal Hilbert family. The latter is flat. Thus [lem-sfb-flat-closed-family-ideal-base-change] identifies the pulled-back ideal with the ideal of the pulled-back divisor. Dualizing commutes with pullback for an invertible ideal: on a trivializing open, a basis $e$ pulls back to $1\\otimes e$, and its dual basis maps to the functional $1\\otimes e\\mapsto1$; on overlaps a unit transition $u$ changes both dual bases by $u^{-1}$. These local maps glue, proving the asserted base-change identification of $\\mathcal O(E)$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-pc-hilb-functorial",
+    "lem-sfb-projective-hilbert-polynomial-representability",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-sfb-flat-closed-family-ideal-base-change",
+    "def-pc-divisor-line-bundle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Tag 0B9J (remark-universal-object-hilb-d), universal divisor and its line; arbitrary-base relative argument with flat ideal sequence, as cited"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-divisor-line-bundle",
+  "def-pc-fibre-product",
+  "def-pc-finite-locally-free",
+  "def-pc-relative-effective-cartier",
+  "def-weil-open-immersion",
+  "lem-pc-cartier-criterion",
+  "lem-pc-flf-properties",
+  "lem-pc-hilb-functorial",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sfb-constant-hilbert-finite-locally-free",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sfb-flat-closed-family-ideal-base-change",
+  "lem-sfb-noetherian-open-closed-finite-presentation",
+  "lem-sfb-projective-hilbert-polynomial-representability",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-products",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-finite-free-algebra-spectrum",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-proper-immersion-closed",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-surjective-base-change",
+  "lemma-nagata-effective-cartier-is-invertible",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lemma-nagata-proper-to-separated-target"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/moduli.tex",
+  "place": "Tag 0DPE (lemma-hilb-open), omitted-proof hint expanded using the existing projective Hilbert representation and the cited Cartier and base-change inputs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a projective family of curves over a Noetherian base the effective divisors of fixed degree supported in the smooth locus are represented by a scheme of finite type",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.LocallyOfFiniteType (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finitely generated algebra over a base ring $A$, the canonical morphism from the projective spectrum $\\\\operatorname{P\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.UniversallyClosed (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finite type algebra over a base ring $A$, the canonical morphism $\\\\operatorname{Proj}(\\\\mathcal{A}) \\\\to \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read all hits; none concerns line-bundle degrees or a relative curve Hilbert/divisor functor, and none specializes in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Hilbert scheme of length d subschemes contained in an open smooth relative curve is an open subscheme of the projective Hilbert scheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {R : CommRingCat} [inst : IsLocalRing ↑R] (f : AlgebraicGeometry.Spec R ⟶ X)\\n  (U : X.Opens) (hU : (CategoryTheory.ConcreteCategory.hom f.base) (IsLocalRing.closedPoint ↑R) ∈ U) {Z : CommRingCat}\\n  (h : R ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp\\n      (X.presheaf.g\", \"doc\": \"For a scheme $ X $, the type of open subsets of its underlying topological space.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.toScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"{X : Scheme.{u}} (U : X.Opens) : Scheme.{u}\", \"doc\": \"Given a scheme $X$ and an open subset $U$ of its underlying topological space, this function constructs the scheme structure on $U$ by restricting $X$ through the canonical open embedding $U \\to X$. Th\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_of_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{Y : Scheme} (f : X ⟶ Y) [IsOpenImmersion f] [IsLocallyNoetherian Y] : IsLocallyNoetherian X\", \"doc\": \"If $ X $ is an open subscheme of a locally Noetherian scheme $ Y $, then $ X $ is locally Noetherian. This follows because an open immersion $ f: X \\\\to Y $ ensures $ X $ inherits the local Noetherian \"}\n  {\"name\": \"AlgebraicGeometry.Flat.instResLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"(f : X ⟶ Y) (U : X.Opens) (V : Y.Opens) (e) [Flat f] : Flat (f.resLE V U e)\", \"doc\": \"If $f: X \\\\to Y$ is a flat morphism of schemes, then for any open subset $U \\\\subseteq X$ and $V \\\\subseteq Y$ such that $f(U) \\\\subseteq V$, the restricted morphism from the open subscheme $U$ to the ope\"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[IsOpenImmersion f] : IsSmoothOfRelativeDimension 0 f\", \"doc\": \"Every open immersion of schemes is smooth of relative dimension 0. That is, if $ f: X \\to Y $ is an open immersion (a morphism that is a topological open embedding with isomorphic stalks on its image),\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"(U : X.Opens) [IsReduced X] : IsReduced U\", \"doc\": \"Every open subset of a reduced scheme is itself a reduced scheme. This follows because the local rings of the open subscheme are restrictions of the local rings of the ambient scheme, which by definit\"}\n  {\"name\": \"AlgebraicGeometry.instIsIntegralToSchemeOfNonemptyCarrierCarrierCommRingCat\", \"module\": \"Mathlib.AlgebraicGeometry.FunctionField\", \"type\": \"{X : Scheme} [IsIntegral X] {U : X.Opens} [Nonempty U] : IsIntegral U\", \"doc\": \"Every non-empty open subset $ U $ of an integral scheme $ X $ is itself an integral scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.stalkIso\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"{X : Scheme.{u}} (U : X.Opens) (x : U) : U.toScheme.presheaf.stalk x ≅ X.presheaf.stalk x.1\", \"doc\": \"Given a scheme $X$ and an open subset $U$ of its underlying topological space, this function constructs the scheme structure on $U$ by restricting $X$ through the canonical open embedding $U \\to X$. Th\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read all hits; none concerns line-bundle degrees or a relative curve Hilbert/divisor functor, and none specializes in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hilbert\", \"IsOpenImmersion\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read all hits; none concerns line-bundle degrees or a relative curve Hilbert/divisor functor, and none specializes in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "HilbertScheme|hilbertScheme|HilbertFunctor|hilbertFunctor|relativeEffectiveCartier|relative_effective_cartier",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read all hits; none concerns line-bundle degrees or a relative curve Hilbert/divisor functor, and none specializes in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat finitely presented closed subscheme of projective space has constant geometric fibre Hilbert polynomial d if and only if it is finite locally free of rank d",
+   "results": "[leanfinder] OK 8 hit(s); Module.Flat.projective_of_finitePresentation, AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj, Module.free_of_flat_of_finrank_eq, AlgebraicGeometry.Flat, AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.valuativeCriterion_existence",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned signatures; none identifies constant geometric-fibre Hilbert polynomial with finite locally free rank. Polynomial.hilbertPoly is a polynomial construction, and module-flatness or Proj permanence results do not state this geometric equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "hilbertPolynomial|hilbert_polynomial|HilbertScheme|hilbertScheme|hilbertFunctor",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned signatures; none identifies constant geometric-fibre Hilbert polynomial with finite locally free rank. Polynomial.hilbertPoly is a polynomial construction, and module-flatness or Proj permanence results do not state this geometric equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A projective flat family with constant Hilbert polynomial d is finite locally free of degree d",
+   "results": "[leansearch] OK 8 hit(s); Polynomial.hilbertPoly, Module.Flat.of_projective, Module.free_of_flat_of_finrank_eq, AlgebraicGeometry.Flat.mk, Module.isLocallyConstant_rankAtStalk, Module.free_of_flat_of_isLocalRing, Module.Flat.projective_of_finitePresentation, AlgebraicGeometry.Flat",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned signatures; none identifies constant geometric-fibre Hilbert polynomial with finite locally free rank. Polynomial.hilbertPoly is a polynomial construction, and module-flatness or Proj permanence results do not state this geometric equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hilbert\", \"IsFinite\"",
+   "results": "[loogle] OK 0 hit(s); ",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned signatures; none identifies constant geometric-fibre Hilbert polynomial with finite locally free rank. Polynomial.hilbertPoly is a polynomial construction, and module-flatness or Proj permanence results do not state this geometric equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Hilbert functor of finite length subschemes supported in an open smooth curve is an open subscheme of the projective Hilbert scheme",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.Proj.instIsOpenImmersionAwayι, AlgebraicGeometry.AffineSpace.isOpenMap_over, AlgebraicGeometry.instIsOpenImmersionSigmaSpec, AlgebraicGeometry.Proj, AlgebraicGeometry.Polynomial.isOpen_imageOfDf, AlgebraicGeometry.Scheme.IdealSheafData.isOpenImmersion_glueDataObjMap, AlgebraicGeometry.instIsOpenImmersionMapOfHomForallEvalRingHom, AlgebraicGeometry.Scheme.Cover.fromGlued_isOpenEmbedding",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned signatures; none identifies constant geometric-fibre Hilbert polynomial with finite locally free rank. Polynomial.hilbertPoly is a polynomial construction, and module-flatness or Proj permanence results do not state this geometric equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "Hilbert.*(polynomial|finite|rank)|(polynomial|finite|rank).*Hilbert",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned signatures; none identifies constant geometric-fibre Hilbert polynomial with finite locally free rank. Polynomial.hilbertPoly is a polynomial construction, and module-flatness or Proj permanence results do not state this geometric equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A closed flat family in projective space with constant Hilbert polynomial is finite flat of that rank",
+   "results": "[leansearch] OK 8 hit(s); Polynomial.hilbertPoly, AlgebraicGeometry.IsFinite.instOfIsClosedImmersion, AlgebraicGeometry.Flat.mk, RingHom.Flat, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.comp, AlgebraicGeometry.Flat.casesOn, AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned signatures; none identifies constant geometric-fibre Hilbert polynomial with finite locally free rank. Polynomial.hilbertPoly is a polynomial construction, and module-flatness or Proj permanence results do not state this geometric equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hilbert\", \"Flat\"",
+   "results": "[loogle] OK 0 hit(s); ",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned signatures; none identifies constant geometric-fibre Hilbert polynomial with finite locally free rank. Polynomial.hilbertPoly is a polynomial construction, and module-flatness or Proj permanence results do not state this geometric equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat finitely presented projective morphism the geometric fibres have constant Hilbert polynomial d exactly when the morphism is finite locally free of degree d",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.Flat, Module.Flat.projective_of_finitePresentation, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned signatures; none identifies constant geometric-fibre Hilbert polynomial with finite locally free rank. Polynomial.hilbertPoly is a polynomial construction, and module-flatness or Proj permanence results do not state this geometric equivalence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-multidegree-zero-locus",
+  "date": "2026-10-23",
+  "group": "Q01"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: Openness, boundedness and separation of the multidegree-zero locus. Finite-type parameter scheme for fixed-degree divisors in a smooth open curve.",
+   "via": [
+    "lem-sfb-nodal-multidegree-zero-locus",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-projective-smooth-divisor-parameter",
+  "worker": "stage1",
+  "summary": "Constructed the smooth-support open in the existing projective fixed-polynomial Hilbert scheme, checked its functor on arbitrary tests, extended the smooth-open Cartier ideal across the empty complement, and checked line-bundle base change. Created only the strictly smaller numerical equivalence between constant Hilbert polynomial and finite locally free rank; statement unchanged.",
+  "blueprint": "Realizes the inherited supporting input for det-thm-sf-ctf-stability-direct-images proof (3): fixed-degree divisors used in the multidegree-zero Picard locus. The current latest sk-thm-sf-ctf-stability and its chapter were read; no chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-cartier-criterion",
+    "why": "Generic scheme/Hilbert/Cartier permanence input: The Cartier criterion on smooth one-dimensional fibres. Used only for its quoted statement in this construction; the unit contains no replacement for this generic tool."
+   },
+   {
+    "node": "lem-pc-flf-properties",
+    "why": "Generic scheme/Hilbert/Cartier permanence input: The module $f_*\\mathcal{O}_X$ of a finite locally free morphism. Used only for its quoted statement in this construction; the unit contains no replacement for this generic tool."
+   },
+   {
+    "node": "lem-pc-hilb-functorial",
+    "why": "Generic scheme/Hilbert/Cartier permanence input: The Hilbert functor is a functor. Used only for its quoted statement in this construction; the unit contains no replacement for this generic tool."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Generic scheme/Hilbert/Cartier permanence input: Base change and composition of smooth morphisms of fixed relative dimension. Used only for its quoted statement in this construction; the unit contains no replacement for this generic tool."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic scheme/Hilbert/Cartier permanence input: Finite-type morphisms are stable under composition and base change. Used only for its quoted statement in this construction; the unit contains no replacement for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic scheme/Hilbert/Cartier permanence input: Base change of a closed immersion is a closed immersion. Used only for its quoted statement in this construction; the unit contains no replacement for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-products",
+    "why": "Generic scheme/Hilbert/Cartier permanence input: Closure of the closed-immersion and finite-type properties. Used only for its quoted statement in this construction; the unit contains no replacement for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Generic scheme/Hilbert/Cartier permanence input: Closed immersions are proper. Used only for its quoted statement in this construction; the unit contains no replacement for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "why": "Generic scheme/Hilbert/Cartier permanence input: A finite morphism is separated, universally closed and has finite fibres. Used only for its quoted statement in this construction; the unit contains no replacement for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-free-algebra-spectrum",
+    "why": "Generic scheme/Hilbert/Cartier permanence input: The spectrum of a finite free algebra is finite locally free. Used only for its quoted statement in this construction; the unit contains no replacement for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic scheme/Hilbert/Cartier permanence input: A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6). Used only for its quoted statement in this construction; the unit contains no replacement for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-proper-immersion-closed",
+    "why": "Generic scheme/Hilbert/Cartier permanence input: Proper immersions are closed immersions. Used only for its quoted statement in this construction; the unit contains no replacement for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic scheme/Hilbert/Cartier permanence input: Quasi-compactness and quasi-separatedness of morphisms between qcqs schemes; finite presentation is stable under base change. Used only for its quoted statement in this construction; the unit contains no replacement for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-base-change",
+    "why": "Generic scheme/Hilbert/Cartier permanence input: Base change of a surjective morphism is surjective. Used only for its quoted statement in this construction; the unit contains no replacement for this generic tool."
+   },
+   {
+    "node": "lemma-nagata-effective-cartier-is-invertible",
+    "why": "Generic scheme/Hilbert/Cartier permanence input: An effective Cartier ideal is invertible. Used only for its quoted statement in this construction; the unit contains no replacement for this generic tool."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Generic scheme/Hilbert/Cartier permanence input: Projective space is proper over its base. Used only for its quoted statement in this construction; the unit contains no replacement for this generic tool."
+   },
+   {
+    "node": "lemma-nagata-proper-to-separated-target",
+    "why": "Generic scheme/Hilbert/Cartier permanence input: [stacks-project]. Used only for its quoted statement in this construction; the unit contains no replacement for this generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-cartier-criterion",
+  "lem-pc-flf-properties",
+  "lem-pc-hilb-functorial",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-products",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-finite-free-algebra-spectrum",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-proper-immersion-closed",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-surjective-base-change",
+  "lemma-nagata-effective-cartier-is-invertible",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lemma-nagata-proper-to-separated-target"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q121-cfd8551ff",
+  "group": "Q121",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q121-cfd8551ff (reviewer sub-agent of L); spot-checked: I read the item and the new node in full, and the statement of every cited node. I checked moduli 0DPE (lemma-hilb-open and its proof hint), pic 0B9D lines 408-425 (implication (1)=>(2) needs no Noetherian or proper hypothesis) and more-morphisms 02LS (proper with finite fibres implies finite, over any base). Step 1: the projective Hilbert scheme H_d and the new bridge make q finite locally free over H without H being Noetherian. One unstated detail: the bridge needs Z->H quasi-compact and quasi-separated; this holds because Z is closed in the proper P^n_H. Step 2: I checked the open V = H minus q(B) on every test scheme. The image of Z_T in Z equals the preimage of h(T) because surjectivity survives base change, and the open-immersion definition then covers nonreduced T. Step 3: the two finite-locally-free conventions convert into each other. E is closed in C_T because a proper map to a separated target is proper and a proper immersion is closed. Step 4: the two maps are inverse; V->H is finitely presented because H is Noetherian, so V is of finite type over S. Step 5: E_univ is Cartier on U_V by 0B9D, its ideal is the unit ideal off its support, and the two opens cover C_V. Step 6: base change in S needs no Noetherian S'; the pulled-back ideal is the ideal of the pulled-back divisor because C_V/V is finitely presented and E/V is flat and finitely presented; the dual line is computed explicitly. New node lem-sfb-constant-hilbert-finite-locally-free: true (zero-dimensional fibres, 02LS, then 02KB, then h^0 = d; d=0 gives Z empty), statement-only, its objects introduced, strictly smaller than the item. No duplicate: I ran my own search of DAG statements and blueprint_refs, and lem-pc-hilb-representable (0B9A) gives neither the open-in-H_d clause nor finite type. Batch 5: lem-trf-structural-fibrewise-open-locality is a generic Zariski-locality lemma for flatness, finite presentation and closed immersions, and is no part of the trace-formula or Poincare-duality assumptions or their proofs, so it is not a RETURN. The declared tool_uses are generic scheme lemmas and are accepted. No SGA citation. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveSmoothDivisorParameter",
+  "declaration": "AlgebraicGeometry.exists_projective_smooth_divisor_parameter",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveSmoothDivisorParameter.lean",
+  "statement": "theorem exists_projective_smooth_divisor_parameter (S : Scheme.{u}) [IsLocallyNoetherian S] [CompactSpace S] (C : Over S) (n : ℕ) (i : C.left ⟶ ℙ(ULift.{u} (Fin (n + 1)); S)) [IsClosedImmersion i] (hi : i ≫ (ℙ(ULift.{u} (Fin (n + 1)); S) ↘ S) = C.hom) [Flat C.hom] [LocallyOfFinitePresentation C.hom] [QuasiCompact C.hom] [QuasiSeparated C.hom] (hpure : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S), (pullback C.hom s).IsPureDimension 1) (U : C.left.Opens) [SmoothOfRelativeDimension 1 (U.ι ≫ C.hom)] (d : ℕ) : ∃ (H : Over S) (JH : (pullback C.hom H.hom).IdealSheafData) (V : Over S) (e : (hilbertPresheaf (U.ι ≫ C.hom) d).RepresentableBy V) (v : V ⟶ H) (J : (pullback C.hom V.hom).IdealSheafData) (j : pullback (U.ι ≫ C.hom) V.hom ⟶ pullback C.hom V.hom), IsHProjective H.hom ∧ IsProperHilbertFamily C.hom H JH ∧ HasProjectiveFibreHilbertPolynomial C.hom i H JH (Polynomial.C (d : ℚ)) ∧ (∀ (T : Over S) (I : (pullback C.hom T.hom).IdealSheafData), (IsProperHilbertFamily C.hom T I ∧ HasProjectiveFibreHilbertPolynomial C.hom i T I (Polynomial.C (d : ℚ))) ↔ ∃! k : T ⟶ H, I = JH.comap (baseChangeMap C.hom k)) ∧ LocallyOfFiniteType V.hom ∧ QuasiCompact V.hom ∧ IsOpenImmersion v.left ∧ j ≫ pullback.fst C.hom V.hom = pullback.fst (U.ι ≫ C.hom) V.hom ≫ U.ι ∧ j ≫ pullback.snd C.hom V.hom = pullback.snd (U.ι ≫ C.hom) V.hom ∧ J = JH.comap (baseChangeMap C.hom v) ∧ IsClosedImmersion ((e.homEquiv (𝟙 V)).1.subschemeι ≫ j) ∧ J = ((e.homEquiv (𝟙 V)).1.subschemeι ≫ j).ker ∧ J.comap j = (e.homEquiv (𝟙 V)).1 ∧ J.IsRelativeEffectiveCartier (pullback.snd C.hom V.hom) ∧ J.toModulesᵛ.IsInvertible ∧ (∀ (T : Over S) (k : T ⟶ V), (e.homEquiv k).1 = (e.homEquiv (𝟙 V)).1.comap (baseChangeMap (U.ι ≫ C.hom) k) ∧ (J.comap (baseChangeMap C.hom k)).IsRelativeEffectiveCartier (pullback.snd C.hom T.hom) ∧ Nonempty ((J.comap (baseChangeMap C.hom k)).toModulesᵛ ≅ (Scheme.Modules.pullback (baseChangeMap C.hom k)).obj J.toModulesᵛ)) ∧ (∀ (B : Scheme.{u}) (g : B ⟶ S), ∃ (VB : Over B) (b : (Over.map g).obj VB ⟶ V) (eB : ((Over.map g).op ⋙ hilbertPresheaf (U.ι ≫ C.hom) d).RepresentableBy VB), IsPullback b.left VB.hom V.hom g ∧ ∀ (T : Over B) (k : T ⟶ VB), eB.homEquiv k = e.homEquiv ((Over.map g).map k ≫ b))",
+  "branch": "sheaf-dag",
+  "by": "Q03",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0dca46075",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Matched every hypothesis and conclusion of the node. Hypotheses: Noetherian S = IsLocallyNoetherian+CompactSpace; finite presentation = LFP+QC+QS; hpure over Ω:Type u only weakens the hypothesis. Conclusions: V represents hilbertPresheaf (U.ι≫C.hom) d (finite flat LFP with finrank d = node's flf rank d); finite type = LocallyOfFiniteType∧QuasiCompact; H fixed up to iso by IsHProjective, proper family with polynomial C d and the ∃!-equation universal property; v open immersion with J=JH.comap v; j fixed by its two projection equations; universal divisor closed in C_V with J its kernel; relative effective Cartier; line toModulesᵛ invertible; k-clause for pullback to any T; B-clause gives IsPullback base change with eB pinned to e, no Noetherian B. Line base change is Nonempty iso, accepted: node does not say canonical and all three citers (nodal-multidegree-zero-locus, nodal-picard-etale-schematic, relative-abel-nonspecial-chart) only use the Picard class. Edge cases d=0, empty S/U, singular C off U, non-Noetherian bases OK. No defs introduced, no duplicate (upstream Hilbert/Curve only covers proper smooth curves), 16 def-only stmt_deps, docstrings with source, blueprint and 6 proof steps, sorry only, statement verbatim, report has both sections. No files changed, not compiled; worker reports clean compile."
+ }
+}

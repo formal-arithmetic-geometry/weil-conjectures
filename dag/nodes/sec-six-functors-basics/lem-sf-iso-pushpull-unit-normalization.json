@@ -1,0 +1,377 @@
+{
+ "id": "lem-sf-iso-pushpull-unit-normalization",
+ "kind": "statement",
+ "title": "Normalization of the geometric isomorphism cancellation against the derived adjunction unit",
+ "statement": "Let $A$ be a finite commutative ring, $S$ an arbitrary scheme, $P=\\mathbf P^1_S$, and $i:X\\xrightarrow{\\sim}P$ a specified isomorphism of schemes. In ordinary unbounded small-etale $A$-module derived categories write $F_i=Li^*$, $R_i=Ri_*$. Let $\\rho_i:F_i\\text{ followed by }R_i\\xrightarrow{\\sim}\\mathrm{Id}_{D(P_{\\mathrm{et}},A)}$ be the concrete isomorphism called pushPull in [def-sf-p1-integral-transport-data]: identify $Ri_*$ with $L(i^{-1})^*$ by the exact/right-derived comparison and the derived image of upperStarInvIsoLowerStarHom, then use the inverse pullback compositor for $i^{-1}$ followed by $i$, the identity pullback comparison and the exact/left-derived comparison. Here upperStarInvIsoLowerStarHom is the unique isomorphism between the two left adjoints of $(i^{-1})_*$, namely $(i^{-1})^*$ and $i_*$, where $i_*\\dashv(i^{-1})_*$ comes from the geometric direct-image equivalence. Let $\\eta_i:\\mathrm{Id}\\to R_iF_i$ be the unit of the canonical derived inverse-image/direct-image adjunction [def-kun-unbounded-exchange]. For every $K\\in D(P_{\\mathrm{et}},A)$,\n$$\\eta_i(K);\\rho_i(K)=\\mathrm{id}_K.$$\nThus $\\rho_i(K)$ is precisely the inverse of this unit, rather than an unspecified equivalence cancellation. There is no twist, exponent, trace, splitting, proper morphism $X\\to S$, or base-change hypothesis.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "First triangle: canonical direct-image composition and the same pullback counits; normalization of cancellation of the presentation isomorphism before applying the arbitrary trace."
+ },
+ "stmt_deps": [
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-sf-p1-integral-transport-data",
+  "def-kun-unbounded-exchange"
+ ],
+ "proof": [
+  {
+   "text": "On sheaves with values in ModuleCat A, write L=i*, R=i_*, V=(i^-1)* and U=(i^-1)_*. The geometric direct-image equivalence e has counit d given by lowerStarComp followed by lowerStarId. The inverse of gamma=upperStarInvIsoLowerStarHom is the left-adjoint uniqueness map from e to the V adjunction. The defining Hom-equivalence equation therefore gives gamma.inv at LM = R(eta_b at LM);d at VLM. This uses Mathlib homEquiv_leftAdjointUniq_hom_app, without changing the specified equivalence.",
+   "uses": [
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D7, lemma-adjoint-pullback-pushforward-modules; uniqueness of the specified left adjoint."
+   }
+  },
+  {
+   "text": "Set c=(upperStarComp for i^-1 followed by i).inv;upperStarId. Naturality of d and of lowerStarComp rewrites eta_a;gamma.inv_L;c as the composite-adjunction unit followed by the direct-image compositor and the image of c. Apply upperStarComp_hom_app_unit_app to replace the composite unit and compositor by the identity-map unit and the image of upperStarComp.hom. Cancel upperStarComp.hom with its inverse. Then upperStarId_hom_app_unit_app and lowerStarId.inv_hom_id give eta_a;gamma.inv_L;c=id. All these source lemmas apply directly to ModuleCat-valued sheaves.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D8, lemma-push-pull-composition-modules; unit-normalized identity and composition comparisons."
+   }
+  },
+  {
+   "text": "R is exact because it is naturally isomorphic to the exact functor V. For the exact levelwise derived adjunction, prove unit;D(gamma.inv)_D(L);(D-compositor).inv;D(c);D(identity)=id. Check equality of natural transformations after precomposition with Qh, using Localization.natTrans_ext. The existing source equations mapDerivedCategoryAdjunction_unit_app_fac, mapDerivedCategoryNatIso_fach, mapDerivedCategoryCompIso_fach and mapDerivedCategoryIdIso_factorsh rewrite the entire composite as Qh of the ordinary homotopy unit, gamma.inv, compositor, c, and identity comparison. Represent a homotopy complex by a cochain complex; the composition and identity comparisons are their canonical identities, and in each degree Step 2 proves that the composite is identity. Functoriality of Qh finishes the calculation.",
+   "uses": [
+    "def-kun-unbounded-exchange",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 015F and 09T5. Source-library normalization: CategoryTheory/DerivedCategory/Adjunction.lean, mapDerivedCategoryAdjunction_unit_app_fac; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, canonical transformation/composition/identity equations."
+   }
+  },
+  {
+   "text": "Expand the exact levelwise adjunction as the actual derived adjunction transported along leftDerivedFunctorIsoMapDerivedCategory and rightDerivedFunctorIsoMapDerivedCategory. Naturality of the right-derived comparison and of D(gamma.inv) puts its unit formula in the same factor order as pushPull. Expand pushPull, leftDerivedUpperStarComp, leftDerivedFunctorNatIso and leftDerivedFunctorCompIso. Adjacent inverse exact/left-derived comparisons cancel. Functoriality of mapDerivedCategoryNatIso splits D(c) into the inverse ordinary compositor and ordinary identity comparison. The remaining equation is precisely Step 3 at K, proving the requested equation for the specified unit and specified pushPull.",
+   "uses": [
+    "def-sf-p1-integral-transport-data",
+    "def-kun-unbounded-exchange"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+    "place": "First triangle, canonical comparisons; native pushPull factors in SfP1IntegralTransportData.lean."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-conjugate",
+  "lem-weil-pbc-inverse-image-composition",
+  "def-kun-unbounded-exchange",
+  "def-sf-p1-integral-transport-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "First-triangle canonical-comparison normalization, Stacks Tags 03D7, 03D8, 015F and 09T5; direct calculation from the proved native unit, composition and identity factorization equations, with no new intermediate statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an isomorphism of schemes the canonical derived pullback pushforward cancellation equals the counit of the reverse pullback pushforward adjunction",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv",
+     "AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackId_hom",
+     "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+     "AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-26",
+   "verdict": "no match: ordinary sheaf or generic categorical ingredients do not identify these specified unbounded etale derived comparison maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback pushforward cancellation along an isomorphism of etale sites agrees with inverse adjunction unit",
+   "results": {
+    "hits": 8,
+    "top": [
+     "SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal",
+     "CategoryTheory.ChosenPullbacksAlong.isoInv_mapPullbackAdj_unit_app_left",
+     "CategoryTheory.ChosenPullbacksAlong.isoInv_mapPullbackAdj_counit_app_left",
+     "CategoryTheory.ChosenPullbacksAlong.iso",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+     "CategoryTheory.ChosenPullbacksAlong.iso_mapPullbackAdj_counit_app",
+     "CategoryTheory.Functor.sheafPushforwardContinuousIso_inv",
+     "CategoryTheory.Adjunction.toEquivalence_unitIso_inv_app"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-26",
+   "verdict": "no match: ordinary sheaf or generic categorical ingredients do not identify these specified unbounded etale derived comparison maps"
+  },
+  {
+   "tool": "grep",
+   "query": "upperStarInv|pushPull|derived.*unit.*inv",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-26",
+   "verdict": "no match: ordinary sheaf or generic categorical ingredients do not identify these specified unbounded etale derived comparison maps",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse image along a scheme isomorphism canonical inverse direct image isomorphism equals inverse adjunction unit",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.Scheme.inv_appTop",
+     "AlgebraicGeometry.Scheme.Hom.inv_appTop",
+     "AlgebraicGeometry.Scheme.Hom.preimageIso_inv_ι",
+     "AlgebraicGeometry.Scheme.inv_app",
+     "AlgebraicGeometry.Scheme.Hom.preimageIso_inv_ι_assoc",
+     "AlgebraicGeometry.Scheme.Hom.inv_app",
+     "AlgebraicGeometry.Scheme.Hom.preimageIso_hom_ι",
+     "AlgebraicGeometry.Scheme.inv_base_hom_base"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-26",
+   "verdict": "no match: ordinary sheaf or generic categorical ingredients do not identify these specified unbounded etale derived comparison maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftAdjointUniq\"",
+   "results": {
+    "hits": 12,
+    "top": [
+     "CategoryTheory.Adjunction.leftAdjointUniq",
+     "CategoryTheory.Adjunction.leftAdjointUniq_refl",
+     "CategoryTheory.Adjunction.leftAdjointUniq_inv_app",
+     "CategoryTheory.Adjunction.leftAdjointUniq_hom_counit",
+     "CategoryTheory.Adjunction.unit_leftAdjointUniq_hom",
+     "CategoryTheory.Adjunction.leftAdjointUniq_trans",
+     "CategoryTheory.Adjunction.leftAdjointUniq_trans_app",
+     "CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-26",
+   "verdict": "no match: ordinary sheaf or generic categorical ingredients do not identify these specified unbounded etale derived comparison maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an isomorphism of schemes the concrete derived pushforward after pullback cancellation is inverse to the canonical derived adjunction unit",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackId_hom",
+     "AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app",
+     "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+     "AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+     "AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-26",
+   "verdict": "no match: the hits give ordinary module-pullback conjugacy or generic uniqueness, not equality for the specified unbounded small-etale derived pushPull and canonical unit"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an isomorphism of schemes the concrete derived pushforward after pullback cancellation is inverse to the canonical derived adjunction unit",
+   "results": {
+    "hits": 8,
+    "top": [
+     "SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal",
+     "CategoryTheory.Functor.sheafPushforwardContinuousIso_inv",
+     "CategoryTheory.MonoOver.pullbackMapSelf",
+     "TopCat.Presheaf.pullbackHomIsoPushforwardInv",
+     "AlgebraicGeometry.instIsIsoSchemeAppUnitOppositeCommRingCatAdjunctionOfIsAffine",
+     "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+     "AlgebraicGeometry.Scheme.stalkMap_hom_inv",
+     "SheafOfModules.pullbackObjUnitToUnit"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-26",
+   "verdict": "no match: the hits give ordinary module-pullback conjugacy or generic uniqueness, not equality for the specified unbounded small-etale derived pushPull and canonical unit"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftAdjointUniq\"",
+   "results": {
+    "hits": 12,
+    "top": [
+     "CategoryTheory.Adjunction.leftAdjointUniq",
+     "CategoryTheory.Adjunction.leftAdjointUniq_refl",
+     "CategoryTheory.Adjunction.leftAdjointUniq_inv_app",
+     "CategoryTheory.Adjunction.leftAdjointUniq_hom_counit",
+     "CategoryTheory.Adjunction.unit_leftAdjointUniq_hom",
+     "CategoryTheory.Adjunction.leftAdjointUniq_trans",
+     "CategoryTheory.Adjunction.leftAdjointUniq_trans_app",
+     "CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-26",
+   "verdict": "no match: the hits give ordinary module-pullback conjugacy or generic uniqueness, not equality for the specified unbounded small-etale derived pushPull and canonical unit"
+  },
+  {
+   "tool": "grep",
+   "query": "upperStarInvIsoLowerStarHom|pushPull|derived_unit",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-26",
+   "verdict": "no match: the hits give ordinary module-pullback conjugacy or generic uniqueness, not equality for the specified unbounded small-etale derived pushPull and canonical unit",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "grep",
+   "query": "unit_leftAdjointUniq|homEquiv_leftAdjointUniq|conjugateEquiv_pullback",
+   "results": {
+    "hits": 14,
+    "top": [
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+     "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+     "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+     "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+     "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+     "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-26",
+   "verdict": "no match: the hits give ordinary module-pullback conjugacy or generic uniqueness, not equality for the specified unbounded small-etale derived pushPull and canonical unit"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact localization of the unit of a pullback pushforward adjunction along an isomorphism agrees with inverse geometric pullback cancellation",
+   "results": {
+    "hits": 8,
+    "top": [
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+     "CategoryTheory.ExponentiableMorphism.unit_pushforwardId_hom",
+     "SheafOfModules.pullbackObjUnitToUnit",
+     "AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackId_hom",
+     "AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv",
+     "SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal",
+     "SheafOfModules.conjugateEquiv_pullbackComp_inv"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-26",
+   "verdict": "no match: the hits give ordinary module-pullback conjugacy or generic uniqueness, not equality for the specified unbounded small-etale derived pushPull and canonical unit"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-p1-projection-trace-transport-false-tail",
+  "date": "2026-10-27",
+  "group": "NB"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "First triangle: canonical direct-image composition and the same pullback counits; normalization of cancellation of the presentation isomorphism before applying the arbitrary trace.",
+   "via": [
+    "lem-sf-p1-projection-trace-transport-false-tail"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-sf-iso-pushpull-unit-normalization",
+  "worker": "stage1",
+  "summary": "Calculated the underived canonical cancellation by two adjunction transposes, then localized the actual geometric and adjunction maps using existing exact-derived pasting and normalized derived adjunction nodes. Preserved the statement and its hypotheses. No new nodes are needed: the only extra calculation is the explicit elementary transpose algebra.",
+  "blueprint": "Latest thm-amb-p1-adjunction.proof.md, first triangle: canonical direct-image composition and the same pullback counits. This proves normalization of presentation-isomorphism cancellation required by the false-projection trace tail. The inherited ancestor chain ends at a module-created node, so blueprint_refs ancestor returns None; the existing null ancestor and precise source place are retained.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Exact constant-coefficient inverse images and the underlying sheaf adjunction units, for arbitrary schemes; a generic tool, with no purity or trace content."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition-module-linear",
+    "why": "The unit-normalized module pullback compositor, needed for the inverse presentation maps; no node of this unit supplies that generic sheaf-composition statement."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition",
+    "why": "Its identity-adjunction clause fixes the normalization of upperStarId; module units have the same underlying abelian-sheaf units."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Universal left/right-derived comparisons for exact functors, needed to identify the actual pushPull factors."
+   },
+   {
+    "node": "lem-sp-exact-derived-transformation-pasting",
+    "why": "Exact localization preserves the finite cell-pasting calculation with the specified compositors; this is a generic localization tool."
+   },
+   {
+    "node": "lem-sfb-resolving-derived-adjunction-normalization",
+    "why": "The normalized derived Hom transpose identifies the actual derived unit, rather than an unspecified adjunction on equivalent functors."
+   },
+   {
+    "node": "lem-sfb-derived-adjunction-cochain-unit",
+    "why": "The explicit unit equation for the canonical source-library unbounded derived adjunction, fixing the actual unit rather than an existentially normalized adjunction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-cc-NA-905757000",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-905757000 (reviewer sub-agent of L); spot-checked: I read the item, its sources and every cited node in full; the statement is true and the split is complete, with no new nodes and nothing changed. Statement: ρ_i is the specific pushPull map of def-sf-p1-integral-transport-data (Lean SfP1IntegralTransportData.lean:135-152), and the prose matches its factor order. upperStarInvIsoLowerStarHom (Coherence.lean:324) is the leftAdjointUniq map from the inverse-pullback adjunction to lowerStarEquivalenceOfIso, which Equivalence.mk builds keeping the geometric counit d. The claim η_i;ρ_i = id holds and is exactly what the parent false-tail step uses. Edge cases checked: i = id, automorphisms of P1 (γ is pinned by its unit equation, so no scalar can slip in), empty S, the zero ring, unbounded K. Hypotheses: only the iso i is used; the coefficient category is ordinary unbounded étale A-module derived categories, the same as def-kun and def-asd. Step 1: with u=i and v=i^-1, clauses (2) and (3) of the composition lemma plus naturality of d_X give η^a;Rη^b_L;RU(c)=d^-1. Step 2: γ is the conjugate of id_U, so η^b;Uγ=η^e and w=R(t);d. Step 3 is correct algebra. Step 4: the expansion matches the Lean leftDerivedUpperStarComp under the exact comparisons, via the exact-functor and pasting nodes. Step 5: the hypotheses of the cochain-unit node hold (Grothendieck abelian target, exact L), and with naturality of r it gives η_i;r;D(R)(ℓ)=D(η^a). Advisory: reading def-kun's derived unit as the source-library unit is the DAG's standing convention. Duplicate search (rg -L over dag/nodes) found no node stating this equation. There is no cycle (BFS over all cited deps), proof_deps equals the union of uses, three kinds of Mathlib search are recorded, and no SGA is cited. I accept the seven declared tool_uses as generic black-box tools."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SfIsoPushPullUnitNormalization",
+  "declaration": "AlgebraicGeometry.Etale.SfP1Transport.unit_comp_pushPull",
+  "file": "lean/Sheaf/AlgebraicGeometry/SfIsoPushPullUnitNormalization.lean",
+  "statement": "theorem unit_comp_pushPull (A : Type (u + 1)) [CommRing A] [Finite A] {S X : Scheme.{u}} (i : X ≅ ProjectiveLine S) (K : DerivedCategoryModule A (ProjectiveLine S)) : (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) i.hom).unit.app K ≫ (pushPull A i).hom.app K = 𝟙 K",
+  "branch": "sheaf-dag",
+  "by": "NA",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7fd99ae66",
+  "group": "NA",
+  "result": "pass",
+  "note": "unit_comp_pushPull: Lean matches the node (finite A at the u+1 convention, arbitrary S, i : X ≅ P1_S, unbounded K). rho = pushPull, whose body (SfP1IntegralTransportData:135-149) has the node's factor order. eta = unit of derivedUpperStarLowerStarAdjunction = canonical Adjunction.derivedAdjunction, the same adjunction as def-kun's mapDerivedCategoryAdjunction moved along the exact comparisons. Equation unit ≫ pushPull.hom = 𝟙 K, nothing stronger or weaker. Maths true: gamma = leftAdjointUniq is fixed by its unit equation, so no scalar freedom. Edge cases: empty S, i = id, automorphisms, zero ring, unbounded K. Only node.lean changed; lean.statement verbatim; one sorry, no definitions; docstrings give source and blueprint tag; all imports exist; no duplicate declaration. No compile (no changes). Advisory: the second-reading section is brief and by the same worker."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X6",
+  "result": "pass",
+  "landing": "20261027T013006-L-2356810",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

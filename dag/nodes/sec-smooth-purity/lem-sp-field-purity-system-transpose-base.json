@@ -1,0 +1,144 @@
+{
+ "id": "lem-sp-field-purity-system-transpose-base",
+ "kind": "statement",
+ "title": "Base tensor and finite-level field purity transpose package",
+ "statement": "Under the hypotheses of lem-sp-field-purity-system-transpose, there exist projection comparisons and coordinates satisfying the finite tensor identification, coefficient-unit normalization, and finite purity identification clauses of that theorem.",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-field-extension",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "(2), tensor-map transpose; returned step 7 second and final paragraphs"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-l-adic-coefficient-extension",
+  "def-sbc-smooth-morphisms",
+  "def-sf-setting",
+  "sk-def-sp-coefficient-towers",
+  "det-sp-coefficient-towers-abelian",
+  "sk-def-sp-normalized-towers",
+  "lem-coef-semilinear-derived-sections",
+  "def-coefficient-twists-detailed",
+  "det-sp-tower-gluing",
+  "det-sp-tower-shriek-levels",
+  "lem-sp-field-shriek-system-comparison",
+  "lem-sp-field-exceptional-system-comparison",
+  "def-exchange-projection",
+  "def-pur-co-smoothness",
+  "det-sp-tower-gamma",
+  "def-pur-smooth-purity-map",
+  "def-sp-field-purity-transpose-level-words"
+ ],
+ "proof": [
+  {
+   "text": "Construct the signed tensor comparisons and normalized coefficient coordinates. Invert the projection square on the finite-Tor etale-origin pairs and compare the actual counit transpose with the finite theta word level by level. The coefficient-unit case is the adjunction triangle identity; tower-gamma finite equations provide the orientation and purity clauses.",
+   "uses": [
+    "lem-sp-field-scalar-normalized-systems",
+    "det-sp-tower-gamma",
+    "lem-coef-semilinear-derived-sections",
+    "det-sp-tower-shriek-levels",
+    "lem-sp-field-projection-system-square",
+    "lem-sp-field-exceptional-system-comparison",
+    "det-sp-tower-gluing",
+    "def-exchange-projection",
+    "lem-sf-open-tensor-normalization",
+    "def-pur-smooth-purity-map",
+    "def-pur-co-smoothness"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-field-scalar-normalized-systems",
+  "det-sp-tower-gamma",
+  "lem-coef-semilinear-derived-sections",
+  "det-sp-tower-shriek-levels",
+  "lem-sp-field-projection-system-square",
+  "lem-sp-field-exceptional-system-comparison",
+  "det-sp-tower-gluing",
+  "def-exchange-projection",
+  "lem-sf-open-tensor-normalization",
+  "def-pur-smooth-purity-map",
+  "def-pur-co-smoothness"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-field-extension-towers.proof.md",
+  "place": "(2), tensor-map transpose; base finite-level package"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FieldPuritySystemTranspose",
+  "date": "2026-10-26",
+  "group": "C1"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-sp-field-purity-system-transpose",
+   "place": "base tensor and finite-level conjuncts",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-field-purity-system-transpose",
+  "worker": "stage1",
+  "summary": "Proved coefficient compatibility in the ordinary derived category of whole systems by inverting the existing projection square and comparing counit transposes. Checked unit normalization and assembled diagonal orientations; reused every needed lemma, creating no nodes.",
+  "blueprint": "Realizes det-sp-field-extension-towers proof (2), tensor-map transpose and purity compatibility, before inverse limit.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic open-adjunction characterization on arbitrary ringed diagram topoi proves tensor-unit normalization; it does not replace any step of the field-extension route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-open-tensor-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261026T001045-L-4165898",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FieldPuritySystemTransposeBase",
+  "declaration": "AlgebraicGeometry.ProEtale.FieldPuritySystem.field_purity_system_transpose_base",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FieldPuritySystem.field_purity_system_transpose_base"
+  ],
+  "file": "lean/Sheaf/Paper/FieldPuritySystemTransposeBase.lean",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-26",
+  "statement": "theorem field_purity_system_transpose_base [IsNoetherian X] [IsNoetherian Y] [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))] [QuasiCompact (X ↘ Spec (.of P.field.k))] [IsSeparated (X ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))] [QuasiCompact (Y ↘ Spec (.of P.field.k))] [IsSeparated (Y ↘ Spec (.of P.field.k))] [f.IsOver (Spec (.of P.field.k))] (d : ℕ) [SmoothOfRelativeDimension d f] [IsSeparated f] [QuasiCompact f] [HasCompactification f] (exceptionalLaws : FieldExceptionalSystem.Laws P D c b a A) : ∃ (t : ProjectionTensorComparisons P D) (q : Coordinates P D (f := f)), FiniteTensorIdentification P D c b a A t q ∧ (∀ E : Index P, ∃ hU : IsIso (leftProjection P D t E c (unit P D q E).obj (omega P D c b a A q E).obj), (tau P D c b a A t q E (unit P D q E) hU).hom = (unitConstraint P D c b a A q E).hom) ∧ (∀ (E : Index P) (w : SpChartAdmissibility.Twists P.coefficients.l E.val X) (orientation : SpTowerGamma.orderedLine P.coefficients.l E.val (D.base E) X w d ≅ (omega P D c b a A q E).obj), DiagonalOrientation P D c b a A q E d w orientation → ∀ (K : N P D E Y) (hpf : IsIso (leftProjection P D t E c K.obj (omega P D c b a A q E).obj)), FinitePurityIdentification P D c b a A t q E d w orientation K hpf)"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b366575e3",
+  "group": "NR",
+  "result": "fix",
+  "note": "Report-only FIX (H11): the delivery's '## Second reading by NR' was the worker's self-audit; fixes/lem-sp-field-purity-system-transpose.report.md keeps the worker report and New nodes verbatim and replaces it with a clause-by-clause reading, original text kept at the end. Lean read against the node, all stmt_deps and blueprint (2): all 17 clauses match; tau is (A.adj E).homEquiv of (inv leftProjection ≫ 1⊗ε_J ≫ right unitor); TensorCompatibility is the first displayed equality with the canonical projectionTarget, under the three PairDomain pairs, IsIso proofs asserted; the unit clause τ(J)=unitConstraint matches; FiniteTensorIdentification identifies τ with smoothPurityEtaleTheta (def-pur-co-smoothness map) via rightAdjointUniq for the same c; FinitePurityIdentification and DiagonalOrientation follow the tower-gamma FiniteLevels pattern, α fixed by OrientationNormalized; DiagonalPurityCompatibility is the second equality for any line satisfying the orientation equation (true; the third projection is invertible via the projection square). The existentials t and q are pinned (signed K-flat symmetry, ScalarTensorComparisonModel, TensorData unit_model, CoefficientPullback normalization, ScalarUnit sections/model); tensor_mem and unit_mem are true. Extra instances (IsNoetherian, QuasiCompact f, HasCompactification f) are implied. Edge cases E=F, d=0, K=0, empty X, ramified, universe u pass. Statements verbatim; one sorry; no hollow defs; docstrings ok; no lines over 100 chars. The snapshot omitted the arrows node json, read at the head. Advisories: the arrows node cites lemma nodes rather than def-sp-field-exceptional-system-* owners; inputWord/targetWord/finiteRightComparison restate the SpTowerGamma ones for a general Compactification c. No compile, since no Lean was changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261026T001045-L-4165898",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

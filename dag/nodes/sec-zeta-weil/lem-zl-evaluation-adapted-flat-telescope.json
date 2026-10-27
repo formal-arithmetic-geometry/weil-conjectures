@@ -1,0 +1,257 @@
+{
+ "id": "lem-zl-evaluation-adapted-flat-telescope",
+ "kind": "statement",
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "title": "Simultaneous K-flat telescope resolutions for an exact evaluation functor",
+ "statement": "Let $\\mathcal C$ be a site small relative to its module universe [def-weil-size-convention, def-weil-pbc-sites-and-cohomology], $\\mathcal O$ a sheaf of commutative rings, $W$ an object, and $A=\\mathcal O(W)$. Suppose evaluation $E:\\operatorname{Mod}(\\mathcal O)\\to\\operatorname{Mod}(A)$ on module sheaves [def-weil-sheaf-of-modules-category] is exact, preserves all small colimits, and sends every flat sheaf [def-pc-flat-sheaf-modules] to a flat $A$-module. For every unbounded cochain complex $K$ [def-pc-cochain-complex-modules] there exist bounded-above termwise-flat complexes $E_n$, transitions $t_n:E_n\\to E_{n+1}$ and termwise epimorphic quasi-isomorphisms $q_n:E_n\\to\\tau_{\\le n}K$, $n\\in\\mathbf N$, strictly compatible after the good truncation inclusions $\\iota_n:\\tau_{\\le n}K\\to K$. Put $B=\\bigoplus_n E_n$ and $P=\\operatorname{Cone}(1-s:B\\to B)$ [def-weil-abstract-derived-category], with $s$ induced by the transitions into the next summand. The map $p:P\\to K$ with unshifted component $\\sum_n q_n\\iota_n$ and shifted component zero is a chain map and a quasi-isomorphism. In fact the canonical map $P\\to\\operatorname{colim}_nE_n$ and the induced map $\\operatorname{colim}_nE_n\\to\\operatorname{colim}_n\\tau_{\\le n}K=K$ are quasi-isomorphisms; the last equality holds degree by degree. The terms of $P$ are flat and $P$ is K-flat [def-pc-kflat-complex]. Evaluation identifies $E(P)$ with $\\operatorname{Cone}(1-E(s):\\bigoplus_n E(E_n)\\to\\bigoplus_n E(E_n))$ as complexes. Each $E(E_n)$ is bounded above with flat $A$-module terms, so this evaluated telescope is K-flat over $A$ (view modules as sheaves on the one-object site with trivial topology). Also $E(p):E(P)\\to E(K)$ is a quasi-isomorphism. No functorial choice of the tower and no preservation of all K-flat complexes by $E$ is asserted.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 4.1(1), unbounded computation expanded by the compatible flat tower and telescope; Stacks Tags 077J (sites-cohomology.tex, lemma-resolution-by-direct-sums-extensions-by-zero) and 06YS (lemma-K-flat-resolution), together with the same construction after evaluation"
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-cochain-complex-modules",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "Use the independent-universe functorial flat-cover datum [lem-trf-site-functorial-flat-resolution]. Reduce its left resolution to preserve zero morphisms. Apply the bounded-above totalization functor to all bounded-above complexes at once. Its augmentation is quasi-isomorphic and its terms are flat; it is termwise epic because the summand in bidegree (i,0) maps onto the original degree-i term. The composite of this inclusion with the augmentation is the flat cover, preceded by the degree-zero resolution isomorphism. Take its composition with the good truncation diagram indexed by natural numbers. Naturality gives strict compatibility, including at n=0. Transport categorical flatness through the tensor comparison [lem-weil-pbc-independent-sheaf-tensor-colimits]. All these constructions are performed at the independent universes of the statement, without applying the single-universe flat-truncation-tower interface.",
+   "uses": [
+    "lem-trf-site-functorial-flat-resolution",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 077J; bounded-above resolution construction, using FromJoel LeftResolution.CochainComplexMinus"
+   }
+  },
+  {
+   "text": "Construct B as the countable coproduct of the stages, and u by its legs j_n-t_n j_(n+1). For each finite subcoproduct, a retraction of its composite with u is the sum of the projections onto a stage j given on stage k by the transition k→j for k≤j and zero otherwise. Consecutive terms cancel. Thus u is monic by exactness of the filtered colimit of finite subcoproducts. The map a from B to colim D is the sum of the colimit injections and satisfies ua=0. A cofork of u gives compatible legs of a D-cocone by induction on the natural-number interval; this explicitly proves that a is a cokernel. Hence (u,a) is short exact. The canonical mapping-cone map r to its cokernel is a quasi-isomorphism, and the cone desc equations give its prescribed unshifted component and zero shifted component. This proves the general categorical telescope comparison inline, rather than invoking the single-universe sheaf specialization.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 093W and 0949, lemma-compute-colimit and lemma-colim-hocolim"
+   }
+  },
+  {
+   "text": "Let T be the good truncation diagram and α the natural augmentation of the resolution functor on T. Its canonical cocone ι into K is colimiting in every degree: after n=i.toNat+1 every truncation inclusion in degree i is an isomorphism. The eventually constant colimit criterion and HomologicalComplex.isColimitOfEval give this cocone its colimit structure. Let g:colim T≅K be the uniquely normalized colimit isomorphism. Filtered colimits of module sheaves are exact, by the exactness-reflecting forgetful functor to abelian sheaves and exact filtered colimits of abelian groups. Thus the Mathlib colimMap criterion makes colim α a quasi-isomorphism. Define b=(colim α)g and p=rb. The colimit and cone equations give all normalized component formulas and p has zero shifted component. Composition of quasi-isomorphisms gives quasi-isomorphy of b and p.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 077J, final assertion and proof; good truncations and exact filtered colimits"
+   }
+  },
+  {
+   "text": "Tensor preserves small colimits by [lem-weil-pbc-independent-sheaf-tensor-colimits]. Flat objects are therefore closed under the required coproducts, since exact coproducts of exact tensor functors are exact, and under binary biproducts. Evaluating the coproduct cocone degree by degree and using the cone term isomorphism proves termwise flatness of the telescope. The stages are K-flat by [lem-weil-pbc-independent-bounded-flat-kflat]. Tensoring an acyclic complex with the coproduct remains acyclic: use the functor-category short-complex equivalence and exactness of coproducts. Tensor commutes with the cone by [lem-pc-tensor-mapping-cone-iso]; its two inputs are acyclic, so the cone is acyclic by the distinguished triangle. This proves the required independent-coefficient K-flatness.",
+   "uses": [
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-weil-pbc-independent-bounded-flat-kflat",
+    "lem-pc-tensor-mapping-cone-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YQ, 06YR and 07A3"
+   }
+  },
+  {
+   "text": "Set BA=E(B), jA=E(j), tA=E(t), and uA=E(u), with c the identity. Preservation of coproducts makes the evaluated cocone colimiting, and additivity gives its displayed shift identity. Use Mathlib mappingCone.mapHomologicalComplexIso for eP. Its map_inr equation gives the unshifted normalization; the explicit comparison matrix and the inl-fst and inl-snd identities give the shifted normalization. Evaluation preserves zero objects, so every evaluated stage is bounded above; the given flat-to-flat hypothesis gives flat terms. For ordinary modules the bounded-above categorical K-flat criterion follows from module flatness, exact filtered colimits and the total tensor API. Apply the same exact-coproduct and tensor-cone arguments to obtain acyclic total tensors for the evaluated telescope.",
+   "uses": [
+    "lem-pc-tensor-mapping-cone-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YQ and 07A3; explicit additive cone comparison"
+   }
+  },
+  {
+   "text": "Evaluation preserves finite limits by the module-sheaf evaluation instance and finite colimits by hypothesis. Apply the exact-functor homology comparison [lem-sp-exact-functor-preserves-homology], in its Mathlib quasiIso_map_of_preservesHomology form, to p. This gives QuasiIso E(p); no preservation of arbitrary K-flat complexes is used.",
+   "uses": [
+    "lem-sp-exact-functor-preserves-homology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010N"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-site-functorial-flat-resolution",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-pc-tensor-mapping-cone-iso",
+  "lem-sp-exact-functor-preserves-homology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 077J, 06YS, 06YQ and 07A3; derived.tex Tags 093W and 0949. Independent-universe implementation through the proved functorial flat-cover API and generic categorical telescope construction; H1, 2026-10-24."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact cocontinuous evaluation functor taking flat sheaves to flat modules admits adapted unbounded K-flat resolutions by the telescope of bounded above flat resolutions",
+   "results": "8 hits; CategoryTheory.lan_flat_of_flat, CategoryTheory.compatiblePreservingOfFlat, Module.Flat.iff_rTensor_exact, Module.Flat.iff_rTensor_exact', Module.Flat.iff_lTensor_exact, Module.Flat.iff_lTensor_exact', Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact",
+   "date": "2026-10-22",
+   "verdict": "No match: representably flat functors, module flatness and the left-resolution framework do not construct the simultaneous K-flat telescope."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, \"flat\"",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "No match: representably flat functors, module flatness and the left-resolution framework do not construct the simultaneous K-flat telescope."
+  },
+  {
+   "tool": "grep",
+   "query": "[Kk]Flat|[Kk].flat|[Ff]lat.*[Rr]esolution",
+   "results": "1 hits; Mathlib/Algebra/Homology/LeftResolution/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "No match: representably flat functors, module flatness and the left-resolution framework do not construct the simultaneous K-flat telescope."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Mapping telescope K-flat resolution whose evaluation is also K-flat",
+   "results": "8 hits; CategoryTheory.flat_iff_lan_flat, Module.Flat.tfae_equational_criterion, Module.Flat.of_projective, AlgebraicGeometry.Flat.stalkMap, RingHom.Flat, AlgebraicGeometry.Flat.comp, AlgebraicGeometry.Flat.iff_flat_stalkMap, Module.Flat.of_forall_exists_factorization",
+   "date": "2026-10-22",
+   "verdict": "No match: representably flat functors, module flatness and the left-resolution framework do not construct the simultaneous K-flat telescope."
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|K_flat|flat.*telescope|flat.*resolution",
+   "results": "1 hits: Mathlib/Algebra/Homology/LeftResolution/Basic.lean; directory Algebra/Homology",
+   "date": "2026-10-22",
+   "verdict": "No match: these give truncations, ordinary flatness or resolution ingredients, not the simultaneous evaluated telescope."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible bounded above flat resolutions of truncations of an unbounded complex and mapping telescope",
+   "results": "8 hits: ComplexShape.Embedding.truncLEFunctor, HomologicalComplex.truncLE'Map, CochainComplex.quasiIso_truncLEMap_iff, HomologicalComplex.stupidTrunc, HomologicalComplex.stupidTruncMap, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, ComplexShape.Embedding.truncGEFunctor, Module.Flat.rTensor_shortComplex_exact",
+   "date": "2026-10-22",
+   "verdict": "No match: these give truncations, ordinary flatness or resolution ingredients, not the simultaneous evaluated telescope."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, \"flat\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "No match: these give truncations, ordinary flatness or resolution ingredients, not the simultaneous evaluated telescope."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact colimit preserving evaluation functor has simultaneous K-flat resolutions by telescopes of bounded above flat complexes",
+   "results": "8 hits: CategoryTheory.lan_flat_of_flat, CategoryTheory.Abelian.LeftResolution.exactAt_map_chainComplex_succ, HomologicalComplex.hasExactColimitsOfShape, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, CategoryTheory.RepresentablyCoflat, Module.Flat.iff_rTensor_exact', Module.Flat.iff_lTensor_exact'",
+   "date": "2026-10-22",
+   "verdict": "No match: these give truncations, ordinary flatness or resolution ingredients, not the simultaneous evaluated telescope."
+  },
+  {
+   "tool": "grep",
+   "query": "IsKFlat|KFlat|kflat|telescope",
+   "results": "0 hits: ; directory Algebra/Homology",
+   "date": "2026-10-22",
+   "verdict": "No match: these give truncations, ordinary flatness or resolution ingredients, not the simultaneous evaluated telescope."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mapping telescope of a compatible sequence of flat resolutions of good truncations remains K-flat after applying an exact additive functor preserving coproducts",
+   "results": "8 hits: Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, CategoryTheory.lan_flat_of_flat, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, CategoryTheory.Abelian.LeftResolution.exactAt_map_chainComplex_succ, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, Module.FaithfullyFlat.lTensor_reflects_exact",
+   "date": "2026-10-22",
+   "verdict": "No match: these give truncations, ordinary flatness or resolution ingredients, not the simultaneous evaluated telescope."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-contractible-derived-sections-tensor",
+  "date": "2026-10-22",
+  "group": "Q27"
+ },
+ "blueprint": {
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Proof Step 3, paragraph beginning “The field-stage projection formula”: continuous-coefficient realization in lem-zl-adic-hom-tensor-lisse-criterion uses the dualizable truncation and heart theorem. This lemma supplies Section 3 equations (3.1)-(3.2), Remark 3.2; Lemma 4.1(1)-(2) and Proposition 4.3(3). Specifically: Lemma 4.1(1): tensor compatibility and exact termwise evaluation used to compare dualizable objects, before the perfect/lisse equivalence. Re-split of lem-zl-contractible-derived-sections-tensor: old steps 6-7.",
+   "via": [
+    "lem-zl-contractible-derived-sections-tensor",
+    "lem-zl-condensed-wcontractible-lisse-evaluation",
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-zl-evaluation-adapted-flat-telescope",
+  "worker": "stage1",
+  "summary": "Constructed the simultaneous evaluation-adapted resolution using existing compatible tower, telescope comparison, filtered quasi-isomorphism stability and K-flat closure nodes; checked canonical maps and evaluation differential explicitly. Statement unchanged; no new nodes.",
+  "blueprint": "Expands the ancestor purity proof Step 3 field-stage projection formula, via the unbounded tensor computation of lem-zl-contractible-derived-sections-tensor old steps 6–7 and Hemo–Richarz–Scholbach Lemma 4.1(1).",
+  "tool_uses": [
+   {
+    "node": "lem-pc-flat-truncation-tower",
+    "why": "Generic ringed-site compatible resolution tower; this unit has no separate flat resolution construction."
+   },
+   {
+    "node": "lem-pc-complex-hocolim-colimit",
+    "why": "Generic canonical cone-to-colimit quasi-isomorphism, used without changing the purity route."
+   },
+   {
+    "node": "lem-pc-kflat-hocolim-truncations",
+    "why": "Generic stability of quasi-isomorphisms under filtered colimits; this unit has no such independent homological tool."
+   },
+   {
+    "node": "lem-pc-kflat-closure",
+    "why": "Generic bounded-flat, sum and cone closure, applied to the ringed site and to the one-object module site."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-bb22d09cc",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-bb22d09cc (reviewer sub-agent of L); spot-checked: PASS with no changes: the item is one commit, creates no new nodes and keeps its statement; proof_deps equals the union of step uses. Not a re-split order: this is the first split of a node created by the Q27 re-split (its old steps 6-7), so nothing was shortened. Every step was checked against the cited statement. Step 1: lem-pc-flat-truncation-tower gives the tower and the compatibility a_{n+1}t_n=a_n. Step 2: recomputed by hand; with u=1-s, au=0, d_P^2=0, and p(b,c)=a(b) is a chain map in the cone convention of def-weil-abstract-derived-category (target summand B^i). Step 3: the canonical cone-to-colimit map r(b,c)=pi(b), with p=b∘r (lem-pc-complex-hocolim-colimit, Tag 0949). Step 4: monicity of iota_{n+1} makes (q_n) a map of sequences; the filtered-colimit clause of lem-pc-kflat-hocolim-truncations applies; (tau<=n K)^i=K^i for n>=max(0,i+1), so the colimit is K degreewise. Step 5: lem-pc-kflat-closure gives K-flatness of B and P and flatness of the countable sums B^i ⊕ B^{i+1}. Step 6: evaluation preserves the sum and the cone matrix, so E(P)≅Cone(1-E(s)); K-flatness then follows from the closure node on the one-object site with ring A, where module sheaves and tensor are ordinary A-module ones. Step 7: clause (c) of lem-sp-exact-functor-preserves-homology. All four hypotheses on E are used. Edge cases checked: K=0, a complex in one negative degree, non-injective t_n, A=0, identity evaluation. Sources read: HRS Lemma 4.1(1) and proof; Stacks 077J, 06YS, 06YQ, 06YR, 07A3, 0949, 010N. Duplicate search: lem-pc-flat-truncation-telescope-comparison already gives that p is a quasi-isomorphism, but the item proves the stronger factorisation through colim E_n, so this is not a fault; no node states the item's evaluation claim. The only citer is parent step 4, which uses exactly the item's conclusion. Accepted tool_uses: lem-pc-flat-truncation-tower, lem-pc-complex-hocolim-colimit, lem-pc-kflat-hocolim-truncations, lem-pc-kflat-closure (generic picard-framework homology). Note for the maintainer: step 2 gives Tag 05RU the label definition-derived-category instead of definition-unbounded-derived-category (cosmetic); the item has no lean_audit field, inherited from Q27."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.EvaluationAdaptedFlatTelescope",
+  "declaration": "CochainComplex.exists_evaluation_adapted_flat_telescope",
+  "file": "lean/Sheaf/Algebra/Homology/EvaluationAdaptedFlatTelescope.lean",
+  "statement": "theorem exists_evaluation_adapted_flat_telescope {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C] {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{w}) (W : C) [PreservesFiniteColimits (SheafOfModules.evaluation.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R) (op W))] [PreservesColimitsOfSize.{w, w} (SheafOfModules.evaluation.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R) (op W))] (hflat : ∀ F : SheafOfModules.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R), SheafOfModules.IsFlatOnSite (C := C) (J := J) (R := R) F → Module.Flat (R.obj.obj (op W)) (F.val.obj (op W))) (K : CochainComplex (SheafOfModules.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ) : ∃ (D : ℕ ⥤ CochainComplex (SheafOfModules.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ) (q : ∀ n : ℕ, D.obj n ⟶ K.truncLE (n : ℤ)), (∀ n : ℕ, ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero ((D.obj n).X i)) ∧ (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlatOnSite (C := C) (J := J) (R := R) ((D.obj n).X i)) ∧ (∀ n : ℕ, QuasiIso (q n)) ∧ (∀ (n : ℕ) (i : ℤ), Epi ((q n).f i)) ∧ (∀ n : ℕ, D.map (homOfLE (Nat.le_succ n)) ≫ q (n + 1) ≫ K.ιTruncLE ((n + 1 : ℕ) : ℤ) = q n ≫ K.ιTruncLE (n : ℤ)) ∧ ∃ (B : CochainComplex (SheafOfModules.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ) (j : ∀ n : ℕ, D.obj n ⟶ B) (u : B ⟶ B), Nonempty (IsColimit (Cofan.mk B j)) ∧ (∀ n : ℕ, j n ≫ u = j n - D.map (homOfLE (Nat.le_succ n)) ≫ j (n + 1)) ∧ ∃ (p : mappingCone u ⟶ K) (r : mappingCone u ⟶ colimit D) (b : colimit D ⟶ K), (∀ n : ℕ, j n ≫ mappingCone.inr u ≫ p = q n ≫ K.ιTruncLE (n : ℤ)) ∧ (mappingCone.inl u).comp (HomComplex.Cochain.ofHom p) (add_zero _) = 0 ∧ QuasiIso p ∧ (∀ n : ℕ, j n ≫ mappingCone.inr u ≫ r = colimit.ι D n) ∧ (mappingCone.inl u).comp (HomComplex.Cochain.ofHom r) (add_zero _) = 0 ∧ QuasiIso r ∧ (∀ n : ℕ, colimit.ι D n ≫ b = q n ≫ K.ιTruncLE (n : ℤ)) ∧ QuasiIso b ∧ r ≫ b = p ∧ (∃ (T : ℕ ⥤ CochainComplex (SheafOfModules.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ) (e : ∀ n : ℕ, T.obj n ≅ K.truncLE (n : ℤ)) (ι : T ⟶ (Functor.const ℕ).obj K) (α : D ⟶ T), (∀ n : ℕ, ι.app n = (e n).hom ≫ K.ιTruncLE (n : ℤ)) ∧ (∀ n : ℕ, α.app n ≫ (e n).hom = q n) ∧ Nonempty (IsColimit (Cocone.mk K ι)) ∧ (∀ i : ℤ, Nonempty (IsColimit ((HomologicalComplex.eval _ (.up ℤ) i).mapCocone (Cocone.mk K ι)))) ∧ ∃ g : colimit T ≅ K, (∀ n : ℕ, colimit.ι T n ≫ g.hom = ι.app n) ∧ colim.map α ≫ g.hom = b ∧ QuasiIso (colim.map α)) ∧ (∀ i : ℤ, SheafOfModules.IsFlatOnSite (C := C) (J := J) (R := R) ((mappingCone u).X i)) ∧ IsKFlatIndependentCoefficients (C := C) (J := J) (R := R) (mappingCone u) ∧ ∃ (BA : CochainComplex (ModuleCat.{w} (R.obj.obj (op W))) ℤ) (jA : ∀ n : ℕ, ((SheafOfModules.evaluation _ (op W)).mapHomologicalComplex (.up ℤ)).obj (D.obj n) ⟶ BA) (tA : ∀ n : ℕ, ((SheafOfModules.evaluation _ (op W)).mapHomologicalComplex (.up ℤ)).obj (D.obj n) ⟶ ((SheafOfModules.evaluation _ (op W)).mapHomologicalComplex (.up ℤ)).obj (D.obj (n + 1))) (uA : BA ⟶ BA) (c : ((SheafOfModules.evaluation _ (op W)).mapHomologicalComplex (.up ℤ)).obj B ≅ BA) (eP : ((SheafOfModules.evaluation _ (op W)).mapHomologicalComplex (.up ℤ)).obj (mappingCone u) ≅ mappingCone uA), (∀ n : ℕ, tA n = ((SheafOfModules.evaluation _ (op W)).mapHomologicalComplex (.up ℤ)).map (D.map (homOfLE (Nat.le_succ n)))) ∧ Nonempty (IsColimit (Cofan.mk BA jA)) ∧ (∀ n : ℕ, jA n ≫ uA = jA n - tA n ≫ jA (n + 1)) ∧ (∀ n : ℕ, ((SheafOfModules.evaluation _ (op W)).mapHomologicalComplex (.up ℤ)).map (j n) ≫ c.hom = jA n) ∧ (∀ i : ℤ, (SheafOfModules.evaluation _ (op W)).map ((mappingCone.inr u).f i) ≫ eP.hom.f i = c.hom.f i ≫ (mappingCone.inr uA).f i) ∧ (∀ (i k : ℤ) (h : i + (-1) = k), (SheafOfModules.evaluation _ (op W)).map ((mappingCone.inl u).v i k h) ≫ eP.hom.f k = c.hom.f i ≫ (mappingCone.inl uA).v i k h) ∧ (∀ n : ℕ, ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (((SheafOfModules.evaluation _ (op W)).mapHomologicalComplex (.up ℤ)).obj (D.obj n) |>.X i)) ∧ (∀ (n : ℕ) (i : ℤ), Module.Flat (R.obj.obj (op W)) (((SheafOfModules.evaluation _ (op W)).mapHomologicalComplex (.up ℤ)).obj (D.obj n) |>.X i)) ∧ (∀ F : CochainComplex (ModuleCat.{w} (R.obj.obj (op W))) ℤ, F.Acyclic → (mapBifunctor F (mappingCone uA) (MonoidalCategory.curriedTensor _)).Acyclic) ∧ QuasiIso (((SheafOfModules.evaluation _ (op W)).mapHomologicalComplex (.up ℤ)).map p)",
+  "branch": "newtargets-dag",
+  "by": "Q02",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-59da63596",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Only the item lean field and the new module EvaluationAdaptedFlatTelescope are changed; the 7 stmt_dep records are identical to side-live and the statement is verbatim. Clause-by-clause match: independent universes u v w with EssentiallySmall.{w}; actual SheafOfModules.evaluation, exact via the PreservesFiniteColimits binder plus Mathlib's evaluationPreservesFiniteLimits; PreservesColimitsOfSize.{w,w}; flat-to-flat via IsFlatOnSite and Module.Flat; tower D/q into Mathlib truncLE with bounded-above, flat, QuasiIso, termwise Epi and strict compatibility; colimiting cofan B and u = 1-s; mappingCone u with p, r, b pinned by inr legs and zero inl cochain composite, r≫b=p, all quasi-isos; truncation colimit T/e/ι/α with degreewise colimit and g normalised; P termwise flat and IsKFlatIndependentCoefficients; evaluated cofan BA, tA = E(t_n), uA, c and eP normalised on inr and inl; evaluated stages bounded above and Module.Flat; inline acyclic total-tensor K-flatness over A (same clause as def-pc-kflat-complex, advisory only); QuasiIso E(p). Edge cases: K=0, negative degrees, n=0, A=0, independent universes. Docstrings carry source and blueprint id and the 7 steps; imports are stmt_dep and proof_dep modules, all present live. No file changed, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261023T231324-L-3576711",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

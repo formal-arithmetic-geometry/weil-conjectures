@@ -1,0 +1,135 @@
+{
+ "id": "def-sf-kflat-tensor-presentation",
+ "kind": "definition",
+ "title": "Chosen K-flat presentation of an abstract derived tensor",
+ "statement": "Let $\\mathcal A$ be an abelian monoidal category with tensor additive in each variable and countable coproducts, using its signed direct-sum total tensor and two-sided K-flatness [def-sfb-preserves-kflat-quasi-iso]. Choose its ordinary unbounded derived category $Q:\\mathrm{CoCh}(\\mathcal A)\\to D(\\mathcal A)$ [def-weil-abstract-derived-category] and a monoidal structure on it. A K-flat tensor presentation consists of: for each unbounded complex $X$, existence of a K-flat complex $P$ and quasi-isomorphism $P\\to X$; and a natural transformation $Q(X)\\otimes^L Q(Y)\\to Q(\\operatorname{Tot}^{\\oplus}(X\\otimes Y))$ on pairs of complexes, whose component is invertible whenever both inputs are K-flat. Thus any pair of K-flat resolutions computes the specified derived tensor. This packages the chosen tensor computation; it does not assume projective resolutions or boundedness.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-open-ctf/sk-prop-proper-image-localizing-open.proof.md",
+  "place": "Finite Tor amplitude paragraph: returned step 4, comparison Lj^*(N[0]) with (j^*N)[0] and transfer of the fixed interval through the canonical projection map."
+ },
+ "stmt_deps": [
+  "def-sfb-preserves-kflat-quasi-iso",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "KFlatTensorPresentation|IsAcyclicTotalTensorKFlat|KFlat.*Model",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": []
+   },
+   "date": "2026-10-23",
+   "verdict": "No exact match: Mathlib supplies total tensor and localization ingredients; project native monoidal constructions require stronger hypotheses, and ringed TensorModel is specialized. No abstract chosen binary K-flat presentation with these hypotheses exists."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Chosen monoidal structure on an unbounded derived category with K-flat resolutions and a natural comparison with the direct sum total tensor complex",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ModuleCat.MonoidalCategory.instMonoidalCategoryStruct",
+     "HomologicalComplex.tensorObj",
+     "HomologicalComplex.monoidalCategoryStruct",
+     "HomologicalComplex.HasTensor",
+     "CategoryTheory.Localization.Monoidal.instMonoidalCategoryLocalizedMonoidal",
+     "HomologicalComplex.instHasTensorTensorUnit_1",
+     "CategoryTheory.Tor'",
+     "CategoryTheory.MonoidalCategory.InducedLawfulDayConvolutionMonoidalCategoryStructCore.ofHasDayConvolutions"
+    ]
+   },
+   "date": "2026-10-23",
+   "verdict": "No exact match: Mathlib supplies total tensor and localization ingredients; project native monoidal constructions require stronger hypotheses, and ringed TensorModel is specialized. No abstract chosen binary K-flat presentation with these hypotheses exists."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An abstract derived tensor monoidal structure computed by acyclic-test K-flat resolutions with natural total tensor comparison",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Tor'_obj_obj",
+     "CategoryTheory.Tor'",
+     "HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX",
+     "CategoryTheory.Tor",
+     "CategoryTheory.Tor_obj",
+     "HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X",
+     "HomologicalComplex.HasGoodTensor₁₂",
+     "HomologicalComplex.HasGoodTensor₂₃"
+    ]
+   },
+   "date": "2026-10-23",
+   "verdict": "No exact match: Mathlib supplies total tensor and localization ingredients; project native monoidal constructions require stronger hypotheses, and ringed TensorModel is specialized. No abstract chosen binary K-flat presentation with these hypotheses exists."
+  },
+  {
+   "tool": "grep",
+   "query": "KFlatTensorPresentation|structure.*KFlat.*Tensor|IsKFlatForTotalTensor; blueprint_refs.py search K-flat tensor presentation; rg on dag/nodes, lean/WeilConjectures and lean/Sheaf",
+   "results": "The DAG search returns sk-def-sfb-derived-categories, a broader unit. Existing IsKFlatForTotalTensor is reused through its owning node. RingedEquivalenceTensorDescent.TensorModel requires countable tensor preservation and full monoidal coherence on complexes, while native derived monoidal interfaces require extra graded tensor hypotheses; neither is this binary presentation. No exact existing node or declaration.",
+   "date": "2026-10-23",
+   "verdict": "new packaging needed; reuse existing total tensor and K-flat definitions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-exact-adjoint-derived-tor-tests",
+  "date": "2026-10-23",
+  "group": "Q91"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-proper-image-localizing-open",
+   "place": "Finite Tor amplitude paragraph: returned step 4, comparison Lj^*(N[0]) with (j^*N)[0] and transfer of the fixed interval through the canonical projection map.",
+   "via": [
+    "lem-sf-exact-adjoint-derived-tor-tests"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-lem-sf-open-ctf",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedCategory.KFlatTensorPresentation",
+  "declaration": "DerivedCategory.KFlatTensorPresentation",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/KFlatTensorPresentation.lean",
+  "statement": "structure KFlatTensorPresentation (A : Type u) [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A] [MonoidalCategory A] [MonoidalPreadditive A] [HasCountableCoproducts A] [MonoidalCategory (DerivedCategory A)]",
+  "branch": "newtargets-dag",
+  "by": "Q91",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cd5f16f44",
+  "group": "Q91",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cd5f16f44",
+  "group": "Q91",
+  "result": "pass",
+  "note": "Re-delivery after d906 H13+H4 RETURN, repaired by option (a): the def-weil-exact-derived-adjunction record is identical to live (Q22 module/declaration, existing:true). exactDerivedOfUniverses is now owned by the item module with a blueprint docstring; its body is identical to live OpenTensorNormalizationData.lean:535-548 with independent universes; no name clash in side-live. The item node differs from live only by stmt_dep def-sf-kflat-tensor-presentation (new def node, unchanged from d906, not hollow) and the lean record. Theorem signature byte-identical to d906 (q in unit/μ/counit order, τ = inv q then J(K◁(α≫σ)), counit-compatibility orientation, joint naturality, same interval incl. a>b); bound ℤ `a` shadows the adjunction harmlessly. New live EtaleKFlatTensorPresentation is étale-specific, not a duplicate. Statements verbatim, max line 92, sorry only in theorem, docstrings present. No compile needed (no changes); worker reports 5.9 s/13.3 s clean."
+ }
+}

@@ -1,0 +1,129 @@
+{
+ "id": "lem-a1-finite-reduction-scalar-normalization",
+ "kind": "statement",
+ "title": "The quotient total-tensor tower has its canonical scalar-extension normalization",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ [def-weil-l-adic-coefficient-extension] and a scheme $Y$. Write $R_Y$ for the actual completed coefficient sheaf and $S_n$ for its specified quotient of exponent $n+1$ [def-weil-completed-integral-coefficients]. For every good complex $P$ of $R_Y$-module sheaves, meaning K-flat with flat terms [def-a1-flat-term-kflat-complex], the strict total-tensor quotient tower $(P\\otimes_{R_Y}S_n[0])_n$ [def-a1-principal-completed-koszul-towers] is isomorphic to the actual ordinary scalar-reduction tower underlying $\\operatorname{reductionComplex}(P)$ [def-a1-integral-completed-tower-pullback-universes]. At each level $n$ and degree $i$ the isomorphism sends the total-tensor generator $p\\otimes s$ to the specified scalar-extension generator $s\\otimes p$. These isomorphisms are natural for every chain map of good complexes. They are isomorphisms of entire strict towers with the actual transitions, before localization.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK, tensor product and scalar extension; sites-cohomology.tex Tags 06YT and 06YU"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-a1-integral-completed-tower-pullback-universes",
+  "def-a1-flat-term-kflat-complex",
+  "def-a1-principal-completed-koszul-towers"
+ ],
+ "proof": [
+  {
+   "text": "Use the proved tensorScalarLevelIso comparisons of the quotient-tensor scalar-tower comparison. Their none-slice levels are the specified unrestricted scalar-extension levels. Identify the two adjacent transition maps by their unique pure-generator characterization, then use NatTrans.ofOpSequence and NatIso.ofComponents to construct an isomorphism to the actual tower underlying reductionComplex. This avoids converting an entire recursively defined tower by definitional equality.",
+   "uses": [
+    "lem-a1-quotient-tensor-scalar-tower-comparison",
+    "def-a1-integral-completed-tower-pullback-universes",
+    "def-pur-integral-derived-operations",
+    "def-weil-integral-reduction-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The inverse pure-generator equation sends s tensor p to the single-factor totalization inclusion of p tensor s. The single-factor inverse is the tensor of the identity with singleObjXSelf.inv followed by that inclusion. Apply the forward isomorphism and cancel the inverse to obtain the required generator equation. Naturality is the naturality of the proved level comparisons, checked at every level. This also covers zero complexes, empty sites, and arbitrary unbounded complexes.",
+   "uses": [
+    "lem-a1-quotient-tensor-scalar-tower-comparison",
+    "def-coef-ringed-tensor-hom-model",
+    "lem-pur-module-tensor-generator-calculus"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-quotient-tensor-scalar-tower-comparison",
+  "def-a1-integral-completed-tower-pullback-universes",
+  "def-pur-integral-derived-operations",
+  "def-weil-integral-reduction-tower",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-pur-module-tensor-generator-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Step 6 of lem-a1-finite-reduction-tower-resolving-model; canonical single-factor totalization and balanced scalar extension"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensoring a cochain complex with a module concentrated in degree zero is naturally isomorphic to the termwise tensor product",
+   "results": "HomologicalComplex.rightUnitor; HomologicalComplex.rightUnitor′; CochainComplex.fromSingle₀Equiv; CochainComplex.exists_iso_single; Functor.mapCochainComplexSingleFunctor.",
+   "date": "2026-10-26",
+   "verdict": "No exact scalar-normalized strict tower comparison. Reuse the existing source-library mapBifunctorSingle₂Iso and the proved quotient/scalar tower comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The total tensor complex with a module in degree zero is naturally isomorphic to termwise tensor product and scalar extension to a quotient ring",
+   "results": "Generic tensor totalization and tensor-unit isomorphisms.",
+   "date": "2026-10-26",
+   "verdict": "No exact scalar-normalized strict tower theorem in Mathlib."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mapBifunctorSingle₂Iso",
+   "results": "Unknown identifier in Mathlib search; the adopted source library contains this proved API.",
+   "date": "2026-10-26",
+   "verdict": "Use the source-library totalization API."
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctorSingle|restrictScalars.*[Tt]ensor",
+   "results": "Mathlib tensor and scalar-restriction declarations; no exact sheaf-tower identification.",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib match. A separate rg search in lean/Sheaf located the proved QuotientTensorScalarTowerComparison and its private pure-generator API."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteReductionTowerResolvingModel",
+  "date": "2026-10-26",
+  "group": "Q4"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-a1-finite-map-purity",
+   "place": "First paragraph invoking lemma-weil-pbc-finite-stalk-formula; the supporting finite-reduction resolving model, step 6 (scalar-normalized derived reduction) of lem-a1-finite-reduction-tower-resolving-model."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteReductionScalarNormalization",
+  "file": "lean/Sheaf/Paper/FiniteReductionScalarNormalization.lean",
+  "declaration": "WeilConjectures.FiniteReductionTower.finite_reduction_scalar_normalization",
+  "statement": "theorem finite_reduction_scalar_normalization :\n    ∃ e : ∀ (P : CochainComplex (Modules l E Y) ℤ),\n    integralOperationsGoodComplex l E Y P →\n      (targetTower l E Y P ≅ ((reductionComplex l E Y).obj P).asFunctor),\n      (∀ (P : CochainComplex (Modules l E Y) ℤ)\n      (hP : integralOperationsGoodComplex l E Y P)\n      (n : ℕ) (i : ℤ) (U : Y.ProEtᵒᵖ) (x : (P.X i).val.obj U)\n      (s : (integralCoefficientSheaf l E Y n).obj.obj U),\n    (((e P hP).hom.app (op n)).f i).val.app U\n      (coefficientTensorGenerator.{u, t + 1, t} (Scheme.ProEt.topology Y)\n        (completedIntegralCommRingSheafUnrestricted l E Y) P\n        ((CochainComplex.singleFunctor (Modules l E Y) 0).obj (residue l E Y n))\n        i 0 i (add_zero i) U x\n        ((HomologicalComplex.singleObjXSelf (.up ℤ) 0 (residue l E Y n)).inv.val.app U s)) =\n      unrestrictedIntegralTensorSection l E Y n (P.X i) U s x) ∧\n      ∀ {P P' : CochainComplex (Modules l E Y) ℤ} (f : P ⟶ P')\n          (hP : integralOperationsGoodComplex l E Y P)\n          (hP' : integralOperationsGoodComplex l E Y P'),\n        targetTowerMap l E Y f ≫ (e P' hP').hom =\n          (e P hP).hom ≫\n            (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map\n              ((reductionComplex l E Y).map f))",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261026T070617-L-3627537",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261026T070617-L-3627537",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

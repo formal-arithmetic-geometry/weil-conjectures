@@ -1,0 +1,292 @@
+{
+ "id": "lem-sfb-solvable-normal-image-geometry",
+ "kind": "statement",
+ "title": "Images of smooth connected solvable normal subgroups under quotient homomorphisms",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $G,H$ be affine $F$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], and let $f:G\\to H$ be a faithfully flat homomorphism, meaning that $F[G]$ is a faithfully flat module over $F[H]$ via $f^*$. Let $N\\subseteq G$ be a smooth connected solvable normal closed subgroup scheme [def-sc-group-scheme-subgroup, def-sbc-smooth-morphisms, def-weil-connected-scheme]. Solvable means that iterating the derived subgroup eventually gives the trivial group scheme, where the derived subgroup is the smallest closed subgroup through which the commutator morphism $(x,y)\\mapsto xyx^{-1}y^{-1}$ factors. Suppose $f|_N=j\\circ q$ with $I$ an affine $F$-group scheme of finite type, $j:I\\hookrightarrow H$ a closed immersion [def-weil-closed-immersion], and $q:N\\to I$ a faithfully flat homomorphism, meaning that $F[N]$ is faithfully flat over $F[I]$. Then $I$ is smooth, connected and solvable, and $j$ identifies $I$ with a normal closed subgroup scheme of $H$. No finiteness or smoothness of $\\ker f$ or $\\ker q$ is assumed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 5.39 and Remark 5.42, printed p.108 (image); Proposition 1.62(b), printed p.24 (smooth quotients); Proposition 6.27 and Proposition 6.30, printed pp.131--132 (solvable quotients and derived series); normality by conjugation and faithfully flat local lifting, as used in the proof of Lemma 19.14, printed p.400."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-closed-immersion",
+  "def-sfb-semisimple-group-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=F[I]$ and $B=F[N]$. By [lem-weil-pbc-faithfully-flat-universally-injective] with the module $A$, the map $q^*:A\\to B$ is injective. An injective map of $F$-vector spaces has an $F$-linear left inverse: extend a basis of its image to a basis of its target and project. Tensoring this left inverse with an identity, or with another left inverse, proves that tensor products of these injections over $F$ are injective. We use affine coordinates [def-weil-affine-spectrum], the identification $\\operatorname{Spec}A'\\times_F\\operatorname{Spec}B'\\cong\\operatorname{Spec}(A'\\otimes_FB')$ of [lem-weil-pbc-fibre-product-affine-spectra], and the algebra tensor universal property [lem-weil-pbc-algebra-tensor-pushout-universal-property]: the product of affine schemes has tensor coordinate ring, and maps to it are pairs of algebra maps. A map to $\\operatorname{Spec}C$ factors through $\\operatorname{Spec}(C/J)$ exactly when its pullback kills $J$, by [def-weil-closed-immersion] and the universal property of a quotient ring. Consequently an affine map with injective pullback detects both equality of morphisms to an affine target and factorization through a closed subscheme. Although the statement does not separately call $j$ a homomorphism, it is one: the two maps $I\\times I\\to H$ expressing preservation of multiplication agree after $q\\times q$, whose pullback is injective; the identity follows by evaluating $f|_N=j q$ at $e_N$, and inverse compatibility follows after $q$.",
+   "uses": [
+    "lem-weil-pbc-faithfully-flat-universally-injective",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.62(b), printed p.24: injectivity; Remark 5.40, printed p.108: detection through the quotient map. Coordinate details expanded here; Stacks Tag 05CK (lemma-faithfully-flat-universally-injective)."
+   }
+  },
+  {
+   "text": "The following argument applies to any faithfully flat homomorphism $X\\to Y$ of affine finite-type $F$-group schemes with $X$ smooth. By [sbc-lem-smooth-geometrically-reduced], every $X_L$ is reduced for every field extension $L/F$. The injection $F[Y]\\hookrightarrow F[X]$ from step 1 remains injective after tensoring over $F$ with $L$, by its $F$-linear left inverse. If $a\\in F[Y]\\otimes_F L$ is nilpotent, its image in the reduced ring $F[X]\\otimes_F L$ is zero, hence $a=0$. Thus $Y_L$ is reduced, using [def-pc-reduced-scheme], and $Y$ is geometrically reduced. Now [lem-sfb-geometrically-reduced-group-smooth] applies to the finite-type group scheme $Y$ and gives smoothness. Apply this to $q:N\\to I$ to obtain that $I$ is smooth.",
+   "uses": [
+    "sbc-lem-smooth-geometrically-reduced",
+    "def-pc-reduced-scheme",
+    "lem-sfb-geometrically-reduced-group-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.62(b), printed p.24, and Proposition 1.28, printed p.14; Stacks Tag 056T (lemma-smooth-geometrically-normal) and Tags 047N, 047P."
+   }
+  },
+  {
+   "text": "For any faithfully flat homomorphism $X\\to Y$ as above, [lem-weil-pbc-faithfully-flat-surjective-spectrum] makes the underlying map surjective. If $X$ is connected and $Y$ had a decomposition into two nonempty clopen subsets, their inverse images would be two nonempty clopen subsets partitioning $X$, contrary to [def-weil-connected-scheme]. The target is nonempty because it contains its identity. Thus connectedness also passes from $X$ to $Y$. In particular $I$ is connected. Neither this argument nor step 2 assumes that the kernel is smooth or finite.",
+   "uses": [
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.59(b), printed p.114, with the elementary topological argument; Stacks Tag 00HQ (lemma-ff-rings)."
+   }
+  },
+  {
+   "text": "Write $N_0=N$, $N_{r+1}=D(N_r)$. Repeated use of [lem-sfb-smooth-connected-derived-subgroup] shows that each $N_r$ is smooth connected affine of finite type and is the smallest closed subgroup containing the commutator morphism of $N_r$. The solvability hypothesis supplies an integer $t\\geq0$ with $N_t=e$. For every $0\\leq r\\leq t$, apply [lem-sfb-affine-homomorphism-flat-image] to $N_r\\hookrightarrow N\\xrightarrow{q}I$, giving $u_r:N_r\\to J_r$ faithfully flat and $v_r:J_r\\hookrightarrow I$ closed, with their composite equal to that map. Steps 2--3 also show that every $J_r$ is smooth connected. For $r=0$ take $J_0=I$, $u_0=q$, $v_0=1_I$. For $r=t$ take $J_t=e$ with its identity inclusion in $I$ and $u_t=1_e$; this inclusion is closed because on affine coordinates the counit $F[I]\\to F$ is surjective. These choices include the case $t=0$.",
+   "uses": [
+    "lem-sfb-smooth-connected-derived-subgroup",
+    "lem-sfb-affine-homomorphism-flat-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 6.30 and the paragraph preceding it, printed p.132; Corollary 6.19(b), printed p.129; Theorem 5.39 and Remark 5.42, printed p.108."
+   }
+  },
+  {
+   "text": "The commutator map $J_r\\times J_r\\to I$ (using $v_r$) factors through $J_{r+1}$. Indeed, pull it back along $u_r\\times u_r$. For every algebra $R$ and $x,y\\in N_r(R)$ its value becomes $q(xyx^{-1}y^{-1})$. The commutator of $N_r$ factors through $N_{r+1}$ by [lem-sfb-smooth-connected-derived-subgroup], and the composite $N_{r+1}\\to I$ factors through $J_{r+1}$ by its chosen image factorization. Therefore the pullback of the ideal of $J_{r+1}$ vanishes after $u_r\\times u_r$. This latter map has injective coordinate pullback by [lem-weil-pbc-faithfully-flat-universally-injective] applied to $u_r$, and the tensor argument of step 1. The ideal already vanishes before pullback, proving the asserted factorization as a morphism of schemes, including on nonreduced test algebras.",
+   "uses": [
+    "lem-sfb-smooth-connected-derived-subgroup",
+    "lem-weil-pbc-faithfully-flat-universally-injective"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 6.27 proof, printed p.131 (image of a solvable series), and Proposition 6.18, printed p.129 (commutator characterization); Stacks Tag 05CK."
+   }
+  },
+  {
+   "text": "Inductively $D^r(I)\\subseteq J_r$ for $0\\leq r\\leq t$. The base is $D^0(I)=I=J_0$. Suppose the inclusion holds at $r$. The commutator of $D^r(I)$, viewed in $I$, factors through $J_{r+1}$ by restriction of the factorization proved in step 5. Its image lies also in $D^r(I)$, so it factors through the intersection $D^r(I)\\cap J_{r+1}$. This intersection is a closed subgroup: in affine coordinates it is the quotient by the sum of the two defining ideals, and on every test algebra its points are the intersection of the two subgroups. The smallest-closed-subgroup characterization of the derived subgroup in [lem-sfb-smooth-connected-derived-subgroup], applied within $D^r(I)$, gives $D^{r+1}(I)\\subseteq D^r(I)\\cap J_{r+1}\\subseteq J_{r+1}$. That node applies successively because $I$ and all its derived subgroups are smooth connected affine of finite type. At $r=t$ we obtain $D^t(I)\\subseteq J_t=e$, hence $D^t(I)=e$. This is solvability in the precise derived-series sense of the statement.",
+   "uses": [
+    "lem-sfb-smooth-connected-derived-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 6.30 proof, printed p.132, with the image-series argument of Proposition 6.27, printed p.131."
+   }
+  },
+  {
+   "text": "It remains to prove normality in $H$. Put $C=F[H]$, $D=F[G]$ and let $K=\\ker(j^*:C\\to A)$ be the defining ideal of $I\\subseteq H$. Let $c:H\\times I\\to H$ send $(h,i)$ to $h j(i)h^{-1}$. Its composite with $f\\times q:G\\times N\\to H\\times I$ sends $(g,n)$ to $f(gng^{-1})$. Normality of $N$ in $G$, in the pointwise sense of [def-sc-group-scheme-subgroup], means that conjugation $G\\times N\\to G$ factors through $N$: evaluate at the universal pair over $F[G]\\otimes_F F[N]$ and use the affine quotient criterion of step 1. Thus this composite factors through $j:I\\hookrightarrow H$, and $(f\\times q)^*c^*(K)=0$. Both $f^*:C\\to D$ and $q^*:A\\to B$ are injective by [lem-weil-pbc-faithfully-flat-universally-injective]. Their tensor product $C\\otimes_F A\\to D\\otimes_F B$ is injective by step 1. Consequently $c^*(K)=0$, so $c$ itself factors through $I$. For every $F$-algebra $R$ this says $h j(I(R))h^{-1}\\subseteq j(I(R))$; applying it to $h^{-1}$ gives equality. Hence $j(I(R))$ is normal for every $R$, exactly the required scheme-theoretic normality. Together with the given closed immersion and steps 2, 3 and 6 this proves every clause.",
+   "uses": [
+    "def-sc-group-scheme-subgroup",
+    "lem-weil-pbc-faithfully-flat-universally-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 19.14 proof, printed p.400 (normality because the ambient map is surjective), expanded by the affine ideal test; Stacks Tag 05CK (lemma-faithfully-flat-universally-injective)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-faithfully-flat-universally-injective",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-closed-immersion",
+  "sbc-lem-smooth-geometrically-reduced",
+  "def-pc-reduced-scheme",
+  "lem-sfb-geometrically-reduced-group-smooth",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "def-weil-connected-scheme",
+  "lem-sfb-smooth-connected-derived-subgroup",
+  "lem-sfb-affine-homomorphism-flat-image",
+  "def-sc-group-scheme-subgroup"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 1.62(b), p.24; Theorem 5.39 and Remark 5.42, p.108; Proposition 5.59(b), p.114; Propositions 6.18, 6.27, 6.30, pp.129--132; Lemma 19.14 proof, p.400. Affine coordinate and ideal arguments spell out the descent and image-series details."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "solvable.*(image|quotient)|image.*solvable|normal.*[Ii]mage",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Algebra/Group/Subgroup/Basic.lean\", \"line\": \"400\", \"text\": \"theorem mem_normalizer_iff_conj_image_eq {s : Set G} {g : G} :\"}\n  {\"file\": \"Mathlib/Algebra/Group/Subgroup/Basic.lean\", \"line\": \"402\", \"text\": \"  simp_rw [mem_set_normalizer_iff'', Set.ext_iff, Set.mem_image, MulAut.conj_apply]\"}\n  {\"file\": \"Mathlib/Algebra/Group/Subgroup/Basic.lean\", \"line\": \"409\", \"text\": \"  .trans mem_normalizer_iff_conj_image_eq (.symm SetLike.ext'_iff)\"}\n  {\"file\": \"Mathlib/Algebra/Group/Subgroup/Basic.lean\", \"line\": \"412\", \"text\": \"alias _root_.AddSubgroup.mem_normalizer_iff_conj_image_eq :=\"}\n  {\"file\": \"Mathlib/Algebra/Group/Subgroup/Basic.lean\", \"line\": \"413\", \"text\": \"  AddSubgroup.mem_normalizer_iff_addConj_image_eq\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/Haar/Quotient.lean\", \"line\": \"219\", \"text\": \"normal subgroup `Γ` having fundamental domain, satisfies `AddQuotientMeasureEqMeasurePreimage`\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/Haar/Quotient.lean\", \"line\": \"257\", \"text\": \"  properly normalized, satisfies `QuotientMeasureEqMeasurePreimage`. -/\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/Haar/Quotient.lean\", \"line\": \"261\", \"text\": \"properly normalized, satisfies `AddQuotientMeasureEqMeasurePreimage`. -/]\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/Haar/Quotient.lean\", \"line\": \"286\", \"text\": \"  properly normalized, satisfies `QuotientMeasureEqMeasurePreimage`. -/\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/Haar/Quotient.lean\", \"line\": \"290\", \"text\": \"properly normalized, satisfies `AddQuotientMeasureEqMeasurePreimage`. -/]\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/Lebesgue/VolumeOfBalls.lean\", \"line\": \"350\", \"text\": \"  rw [← ((stdOrthonormalBasis ℝ E).measurePreserving_repr_symm).measure_preimage\"}\n  {\"file\": \"Mathlib/GroupTheory/Solvable.lean\", \"line\": \"176\", \"text\": \"  isSolvable_of_surjective (QuotientGroup.mk'_surjective H)\"}\n  {\"file\": \"Mathlib/GroupTheory/Solvable.lean\", \"line\": \"178\", \"text\": \"theorem isSolvable_iff_subgroup_quotient (H : Subgroup G) [H.Normal] :\"}\n  {\"file\": \"Mathlib/GroupTheory/Solvable.lean\", \"line\": \"181\", \"text\": \"    isSolvable_of_ker_le_range H.subtype (QuotientGroup.mk' H) (by simp)⟩\"}\n  {\"file\": \"Mathlib/Data/Finset/Preimage.lean\", \"line\": \"81\", \"text\": \"-- Not `@[simp]` since `simp` can't figure out `hf`; `simp`-normal form is `preimage_compl'`.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean\", \"line\": \"23\", \"text\": \"* the notion of normality of subgroupoids and its stability under intersection and preimage;\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Cartesian/Normal.lean\", \"line\": \"24\", \"text\": \"  is normal if and only if for every `X`, the image of `H(X)` in `G(X)` is a normal subgroup.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Cartesian/Normal.lean\", \"line\": \"79\", \"text\": \"/-- If `φ` is mono, it is a normal group homomorphism if and only if for all `X` the image of\"}\n  {\"file\": \"Mathlib/Topology/Separation/Regular.lean\", \"line\": \"718\", \"text\": \"    apply completely_normal <;> rw [← preimage_mk_closure]\"}\n  {\"file\": \"Mathlib/Topology/Separation/PerfectlyNormal.lean\", \"line\": \"30\", \"text\": \"theorem perfectlyNormalSpace_iff_forall_isClosed_preimage_zero :\"}\n  {\"file\": \"Mathlib/GroupTheory/PresentedGroup.lean\", \"line\": \"67\", \"text\": \"    ((comap_normalClosure_image_ge s f).trans\"}\n  {\"file\": \"Mathlib/GroupTheory/PresentedGroup.lean\", \"line\": \"68\", \"text\": \"    (comap_mono (normalClosure_mono hst.image_subset)))\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/PiL2.lean\", \"line\": \"725\", \"text\": \"    OrthonormalBasis s 𝕜 (span 𝕜 (s.image v' : Set E)) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"262\", \"text\": \"        (Scheme.homOfLE _ (f.toNormalization.preimage_mono hrV)).opensRange := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"272\", \"text\": \"        f.toNormalization.preimage_mono, hrV, H]\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme image definitions, abstract-group solvability and normality, flatness, semisimple rings/modules and endomorphisms do not state the asserted geometry of affine group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The scheme theoretic image of a smooth connected solvable normal subgroup under a faithfully flat homomorphism of affine algebraic groups is smooth connected solvable and normal",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.image\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \": Scheme.{u}\", \"doc\": \"For a morphism $ f $ of schemes, the image is defined as the closed subscheme associated to the kernel ideal sheaf of $ f $. This subscheme is constructed by gluing local affine models $ \\\\operatorname\"}\n  {\"name\": \"AlgebraicGeometry.specTargetImageIdeal\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"(f : X ⟶ Spec A) : Ideal A\", \"doc\": \"Given a morphism of schemes $f: X \\\\to \\\\operatorname{Spec}(A)$, this function defines an ideal of the commutative ring $A$. This ideal is the kernel of the ring homomorphism $\\\\phi: A \\\\to \\\\Gamma(X, \\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"Subgroup.Normal.map\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Basic\", \"type\": \"{H : Subgroup G} (h : H.Normal) (f : G →* N) (hf : Function.Surjective f) : (H.map f).Normal\", \"doc\": \"If $ H $ is a normal subgroup of a group $ G $ and $ f : G \\\\to N $ is a surjective group homomorphism, then the image $ f(H) $ is a normal subgroup of $ N $.\"}\n  {\"name\": \"Subgroup.map\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Map\", \"type\": \"(f : G →* N) (H : Subgroup G) : Subgroup N\", \"doc\": \"The image of a subgroup $ H $ of a group $ G $ under a group homomorphism $ f : G → N $, forming a subgroup of $ N $ by taking the image of $ H $ under $ f $ and verifying closure under the group oper\"}\n  {\"name\": \"AlgebraicGeometry.specTargetImageFactorization\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"(f : X ⟶ Spec A) : X ⟶ Spec (specTargetImage f)\", \"doc\": \"For a morphism of schemes $f: X \\\\to \\\\operatorname{Spec}(A)$, this defines the canonical morphism from $X$ to the scheme-theoretic image of $f$. The scheme-theoretic image is the affine scheme $\\\\operat\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.imageι\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \": f.image ⟶ Y\", \"doc\": \"The canonical morphism from the closed subscheme defined by the kernel ideal sheaf of a morphism $ f $ to the target scheme $ Y $, constructed via gluing local affine models $ \\\\operatorname{Spec}(\\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme image definitions, abstract-group solvability and normality, flatness, semisimple rings/modules and endomorphisms do not state the asserted geometry of affine group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"image\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme image definitions, abstract-group solvability and normality, flatness, semisimple rings/modules and endomorphisms do not state the asserted geometry of affine group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The scheme theoretic image of a smooth connected solvable normal subgroup under a faithfully flat homomorphism of affine algebraic groups is smooth connected solvable and normal",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffine X] [AlgebraicGeometry.IsAffine Y],\\n  AlgebraicGeometry.Flat f ∧ AlgebraicGeometry.Surjective f ↔\\n    (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).FaithfullyFlat\", \"doc\": \"For affine schemes $X$ and $Y$, a morphism $f : X \\to Y$ is flat and surjective if and only if the induced ring homomorphism on global sections $f_{\\text{appTop}}$ is faithfully flat.\"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsSmoothOfRelativeDimension 0 f] [AlgebraicGeometry.IsSmoothOfRelativeDimension 0 g],\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension 0 (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two morphisms of schemes that are smooth of relative dimension 0 is also smooth of relative dimension 0.\"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.Smooth R A],\\n  Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.flat_and_surjective_SpecMap_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {R S : CommRingCat} (f : R ⟶ S),\\n  AlgebraicGeometry.Flat (AlgebraicGeometry.Spec.map f) ∧ AlgebraicGeometry.Surjective (AlgebraicGeometry.Spec.map f) ↔\\n    (CommRingCat.Hom.hom f).FaithfullyFlat\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R → S $ induces a morphism of schemes $ \\\\operatorname{Spec}(S) → \\\\operatorname{Spec}(R) $ via $ \\\\operatorname{Spec}.\\\\text{map} $. This \"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme image definitions, abstract-group solvability and normality, flatness, semisimple rings/modules and endomorphisms do not state the asserted geometry of affine group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Images of connected solvable normal algebraic subgroups under quotient homomorphisms of group schemes are connected solvable normal closed subgroups",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Field.absoluteGaloisGroup.commutator_closure_isNormal\", \"module\": \"Mathlib/FieldTheory/AbsoluteGaloisGroup\", \"type\": \"∀ (K : Type u_1) [inst : Field K], (commutator (Field.absoluteGaloisGroup K)).topologicalClosure.Normal\", \"doc\": \"The topological closure of the commutator subgroup of the absolute Galois group $\\\\text{Gal}(\\\\overline{K}/K)$ is a normal subgroup under the Krull topology. This means that for any field $K$, the closu\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"module\": \"Mathlib/CategoryTheory/Galois/EssSurj\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] {F : CategoryTheory.Functor C FintypeCat}\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  (V : OpenSubgroup (CategoryTheory.Aut F)),\\n  ∃ X,\\n    Nonempty\\n      ((CategoryTheory.PreGaloisCatego\", \"doc\": \"For any open subgroup $V$ of the automorphism group $\\\\mathrm{Aut}(F)$ of a functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, there exists an object $X \\\\in \\\\mathcal{C}$ such that the action of $\\\\mathrm{\"}\n  {\"name\": \"solvable_quotient_of_solvable\", \"module\": \"Mathlib/GroupTheory/Solvable\", \"type\": \"∀ {G : Type u_1} [inst : Group G] (H : Subgroup G) [inst_1 : H.Normal] [IsSolvable G], IsSolvable (G ⧸ H)\", \"doc\": \"If $ G $ is a solvable group and $ H $ is a normal subgroup of $ G $, then the quotient group $ G/H $ is solvable.\"}\n  {\"name\": \"solvable_of_ker_le_range\", \"module\": \"Mathlib/GroupTheory/Solvable\", \"type\": \"∀ {G : Type u_1} [inst : Group G] {G' : Type u_3} {G'' : Type u_4} [inst_1 : Group G'] [inst_2 : Group G'']\\n  (f : G' →* G) (g : G →* G''), g.ker ≤ f.range → ∀ [hG' : IsSolvable G'] [hG'' : IsSolvable G''], IsSolvable G\", \"doc\": \"If $G'$ and $G''$ are solvable groups, and there exist group homomorphisms $f : G' \\\\to G$ and $g : G \\\\to G''$ such that the kernel of $g$ is contained in the image of $f$, then the group $G$ is solvab\"}\n  {\"name\": \"nilpotent_quotient_of_nilpotent\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"∀ {G : Type u_1} [inst : Group G] (H : Subgroup G) [inst_1 : H.Normal] [_h : Group.IsNilpotent G],\\n  Group.IsNilpotent (G ⧸ H)\", \"doc\": \"If $ G $ is a nilpotent group and $ H $ is a normal subgroup of $ G $, then the quotient group $ G/H $ is also nilpotent.\"}\n  {\"name\": \"solvable_of_surjective\", \"module\": \"Mathlib/GroupTheory/Solvable\", \"type\": \"∀ {G : Type u_1} {G' : Type u_2} [inst : Group G] [inst_1 : Group G'] {f : G →* G'},\\n  Function.Surjective ⇑f → ∀ [IsSolvable G], IsSolvable G'\", \"doc\": \"If $ G $ is a solvable group and there exists a surjective group homomorphism $ f : G \\to G' $, then the group $ G' $ is also solvable.\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"module\": \"Mathlib/CategoryTheory/Galois/EssSurj\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [inst_1 : TopologicalSpace G] [inst_2 : IsTopologicalGroup G]\\n  [inst_3 : CompactSpace G] (X : Action FintypeCat G) [inst_4 : TopologicalSpace X.V.carrier]\\n  [DiscreteTopology X.V.carrier] [ContinuousSMul G X.V.carrier],\\n  ∃ ι,\\n    ∃ (x : Finite ι),\\n      ∃ f,\\n     \", \"doc\": \"For a compact topological group $G$ and an open subgroup $H$, the quotient group $G/H$ is finite.\"}\n  {\"name\": \"of_quotient_center_nilpotent\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"∀ {G : Type u_1} [inst : Group G], Group.IsNilpotent (G ⧸ Subgroup.center G) → Group.IsNilpotent G\", \"doc\": \"If the quotient group $ G / Z(G) $, where $ Z(G) $ is the center of $ G $, is nilpotent, then the group $ G $ itself is nilpotent.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme image definitions, abstract-group solvability and normality, flatness, semisimple rings/modules and endomorphisms do not state the asserted geometry of affine group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "solvable.*(image|quotient)|normal.*image|geometricallyReduced.*smooth",
+   "results": "{\"t\": \"2026-10-23T15:00:09Z\", \"tool\": \"grep\", \"query\": \"solvable.*(image|quotient)|normal.*image|geometricallyReduced.*smooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/MeasureTheory/Measure/Haar/Quotient.lean\", \"Mathlib/MeasureTheory/Measure/Haar/Quotient.lean\", \"Mathlib/MeasureTheory/Measure/Haar/Quotient.lean\", \"Mathlib/MeasureTheory/Measure/Haar/Quotient.lean\", \"Mathlib/MeasureTheory/Measure/Haar/Quotient.lean\", \"Mathlib/MeasureTheory/Measure/Lebesgue/VolumeOfBalls.lean\", \"Mathlib/Algebra/Group/Subgroup/Basic.lean\", \"Mathlib/Algebra/Group/Subgroup/Basic.lean\"], \"digest\": \"9ae4640a8ca0d551\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned abstract groups, Lie algebras, or general flat/smooth morphisms, not all clauses for affine group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The image of a smooth connected solvable normal subgroup under a faithfully flat quotient homomorphism of algebraic groups is smooth connected solvable normal",
+   "results": "{\"t\": \"2026-10-23T15:00:09Z\", \"tool\": \"leansearch\", \"query\": \"The image of a smooth connected solvable normal subgroup under a faithfully flat quotient homomorphism of algebraic groups is smooth connected solvable normal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.map\", \"solvable_quotient_of_solvable\", \"solvable_of_solvable_injective\", \"Subgroup.Normal.map\", \"subgroup_solvable_of_solvable\", \"QuotientGroup.map_mk'_self\", \"QuotientAddGroup.quotientQuotientEquivQuotientAux_mk\", \"solvable_of_surjective\"], \"digest\": \"f9afed041afb2b11\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned abstract groups, Lie algebras, or general flat/smooth morphisms, not all clauses for affine group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"solvable\"",
+   "results": "{\"t\": \"2026-10-23T15:00:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"solvable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned abstract groups, Lie algebras, or general flat/smooth morphisms, not all clauses for affine group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The faithfully flat image of a smooth connected solvable normal affine subgroup is smooth connected solvable and normal",
+   "results": "{\"t\": \"2026-10-23T15:00:11Z\", \"tool\": \"leanfinder\", \"query\": \"The faithfully flat image of a smooth connected solvable normal affine subgroup is smooth connected solvable and normal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"solvable_quotient_of_solvable\", \"subgroup_solvable_of_solvable\", \"solvable_of_surjective\", \"IsSolvable\", \"LieAlgebra.isSolvable_tensorProduct_iff\", \"Subgroup.SchurZassenhausInduction.step7\", \"solvable_of_ker_le_range\", \"solvable_of_solvable_injective\"], \"digest\": \"4277fbed6d9c3dc8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned abstract groups, Lie algebras, or general flat/smooth morphisms, not all clauses for affine group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Faithfully flat homomorphisms of affine algebraic groups preserve smoothness connectedness solvability and normality of image subgroups",
+   "results": "{\"t\": \"2026-10-23T15:00:12Z\", \"tool\": \"leanfinder\", \"query\": \"Faithfully flat homomorphisms of affine algebraic groups preserve smoothness connectedness solvability and normality of image subgroups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"RingHom.Smooth.isStableUnderBaseChange\", \"Algebra.Smooth.flat\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.flat_and_surjective_SpecMap_iff\", \"RingHom.Smooth.stableUnderComposition\", \"Algebra.Smooth.exists_finiteType\"], \"digest\": \"33ce02c5c2220c46\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned abstract groups, Lie algebras, or general flat/smooth morphisms, not all clauses for affine group schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semisimple-isogeny-invariance",
+  "date": "2026-10-23",
+  "group": "Q61"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplicative simply connected covering of a semisimple algebraic group. Supporting Milne construction: Lemma 19.14, printed p.400, source-semisimple direction proved in its proof: a smooth connected solvable normal subgroup of the source has trivial image and is finite, hence trivial. The displayed lemma (for an isogeny G-prime to G, semisimplicity of G implies that of G-prime) and its proof agree. Image prerequisite in the Milne 19.14 argument: the image of a smooth connected solvable normal subgroup is smooth connected solvable and normal.",
+   "via": [
+    "lem-sfb-semisimple-isogeny-invariance",
+    "lem-sfb-semisimple-multiplicative-universal-cover",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-solvable-normal-image-geometry",
+  "worker": "stage1",
+  "summary": "Read Milne and reused existing faithful-flat injectivity/spectrum, smoothness, derived-subgroup and image-factorization nodes. Expanded normality by a tensor-injective ideal test, and solvability by images of the source derived series and the smallest-closed-subgroup property. No new nodes, no hypothesis or statement changes, no assumption on either kernel. Checked every cited statement and all test-algebra arguments.",
+  "blueprint": "Supporting image prerequisite of the Milne Lemma 19.14 argument in the inherited blueprint.from.place, below det-thm-sf-ctf-stability-direct-images (3). The current latest blueprint direct-images proof is recorded in report.md; the inherited null ancestor and via chain are preserved.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic geometric reducedness of smooth fibres; applied over the field F in the Milne quotient-smoothness argument."
+   },
+   {
+    "node": "lem-weil-pbc-faithfully-flat-universally-injective",
+    "why": "Generic module injection under a faithfully flat ring map, used on affine coordinate rings in the image and normality arguments."
+   },
+   {
+    "node": "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "why": "Generic algebraic surjectivity on spectra needed for connectedness of the quotient."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-weil-pbc-faithfully-flat-universally-injective",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q64-8242a989f",
+  "group": "Q64",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-8242a989f (reviewer sub-agent of L); spot-checked: Read the item's seven proof steps in full; it has no new nodes and its statement is unchanged against base 32b342c. Sources checked in Milne iAG 2017: Prop 1.62(b) p.24, Props 6.27 and 6.30 pp.131-132, Lemma 19.14 proof p.400 (image is normal because the map is surjective). No re-split note applies and no SGA is cited. Step checks: (1) q^* is injective by 05CK, and a linear left inverse gives tensor injectivity; j is a homomorphism by injectivity of (q×q)^*. (2) Milne 1.62(b) through sbc-lem-smooth-geometrically-reduced and the Mathlib leaf lem-sfb-geometrically-reduced-group-smooth; no kernel smoothness is used. (3) Connectedness by 00HQ spectral surjectivity. (4)-(6) The images J_r of the source derived series (derived-subgroup node; flat-image node over a field) and the induction D^r(I)⊆J_r through the scheme-theoretic intersection and minimality; base, step and terminal case are explicit. (7) Normality: conjugation c∘(f×q) factors through I via the universal point, then (f^*⊗q^*) is injective; faithful flatness of f is used exactly here. Small cases checked: N=e, f or q an isomorphism, Frobenius on G_a and G_m with nonsmooth kernels. If f is not surjective the image need not be normal, so that hypothesis is needed. Duplicate search (rg -L for solvable and for image normal/smooth group nodes): affine-normal-quotient-geometry, frobenius-smooth-image and smooth-ambient-normality are different statements. tool_uses: 056T and the two pbc Mathlib leaves are generic, accepted. Batch-5: lem-sfb-smooth-connected-derived-subgroup reaches lem-trf-connected-point-geometrically-connected, which is Stacks 04KV, a general geometric-connectedness lemma and not part of the trace formula or Poincaré duality, so the citation is acceptable. FIX (C1-type missing citation): step 1 treated the products G×N, H×I and I×I as Spec of tensor algebras while citing only the ring-level tensor property. I added the Mathlib leaf lem-weil-pbc-fibre-product-affine-spectra to step 1's text, its uses and proof_deps in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-solvable-normal-image-geometry.json; nothing else is changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SolvableNormalImageGeometry",
+  "declaration": "AlgebraicGeometry.solvableNormalImage_geometry",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SolvableNormalImageGeometry.lean",
+  "statement": "theorem solvableNormalImage_geometry {F : Type u} [Field F] [IsAlgClosed F] (G H N I : Over (Spec (.of F))) [GrpObj G] [GrpObj H] [GrpObj N] [GrpObj I] [IsAffine G.left] [IsAffine H.left] [IsAffine I.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [LocallyOfFiniteType H.hom] [QuasiCompact H.hom] [LocallyOfFiniteType I.hom] [QuasiCompact I.hom] (f : G ⟶ H) [IsMonHom f] (hf : @Module.FaithfullyFlat Γ(H.left, ⊤) Γ(G.left, ⊤) _ _ f.left.appTop.hom.toAlgebra.toModule) (i : N ⟶ G) [IsClosedSubgroupScheme i] [IsNormalSubgroupScheme i] [Smooth N.hom] [ConnectedSpace N.left] (hN : IsSolvableGroupScheme N) (q : N ⟶ I) [IsMonHom q] (hq : @Module.FaithfullyFlat Γ(I.left, ⊤) Γ(N.left, ⊤) _ _ q.left.appTop.hom.toAlgebra.toModule) (j : I ⟶ H) [IsClosedImmersion j.left] (hfactor : i ≫ f = q ≫ j) : Smooth I.hom ∧ ConnectedSpace I.left ∧ IsSolvableGroupScheme I ∧ IsNormalSubgroupScheme j",
+  "branch": "sheaf-dag",
+  "by": "Q25",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-447751104",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Read item node, all 9 stmt_dep records (identical to live; def-sfb-semisimple-group-scheme landed on base), delivered module, report, and the reused Semisimple/GroupScheme.Defs declarations. Clause-by-clause: IsAlgClosed F; G,H affine + LOFT+QC; f IsMonHom + Module.FaithfullyFlat via f.left.appTop; N via IsClosedSubgroupScheme+IsNormalSubgroupScheme i, Smooth, ConnectedSpace, IsSolvableGroupScheme (= node's inline derived-series definition: closed subgroup, commutator factorization, minimality, terminal at length 0); I affine finite type; q IsMonHom + faithfully flat; j only IsClosedImmersion (no IsMonHom, as in node); hfactor i≫f=q≫j; conclusion Smooth∧Connected∧Solvable∧IsNormalSubgroupScheme j. No extra hypotheses, no kernel assumptions, standard universe u. Edge cases: trivial N/length 0, Frobenius nonreduced kernels, empty scheme excluded by GrpObj/ConnectedSpace. Records: only lean + added def stmt_dep differ from live; lean.statement verbatim; single sorry; docstrings with Milne places, blueprint tag and 7 proof steps; report has Worker report and Second reading sections. No duplicate in lean/Sheaf or Mathlib. No compile rerun (2026-10-21 rule); no fixes."
+ }
+}

@@ -1,0 +1,242 @@
+{
+ "id": "lem-sf-integral-direct-image-shift-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-cor-verdier-exchange",
+   "place": "Step 3: 'Naturality in $M$ and the compatibility with finite reduction, scalar extension, and shifts' (shift compatibility of the second arrow $Rf_*R\\mathcal Hom_X(M,-)$ of Step 2 at integral coefficients)",
+   "via": [
+    "lem-sf-admissible-hom-substitution"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Natural shift comparison for the integral ordinary direct image",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and put $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Let $f:X\\to Y$ be a morphism of schemes on which $\\ell$ is invertible [def-weil-scheme-morphism-properties], with small pro-etale sites [def-weil-pbc-proetale-site], completed coefficient sheaves $\\widehat{\\mathcal O}_{E,X},\\widehat{\\mathcal O}_{E,Y}$ and ambient derived categories $D(X_{\\mathrm{proet}},\\mathcal O_E)$, $D(Y_{\\mathrm{proet}},\\mathcal O_E)$ of modules over them [def-weil-completed-integral-coefficients], with the cochain shift $[r]$, $P[r]^i=P^{i+r}$, $d_{P[r]}=(-1)^rd_P$ [def-weil-triangulated-category]. Let $Rf_*$ be the integral derived direct image of [def-weil-derived-direct-image], $Rf_*K=R\\varprojlim_n\\operatorname{Res}_nRf_{*,n}(K\\otimes^L_{\\mathcal O_E}A_{E,n})$, formed from the derived reductions [def-weil-integral-derived-reduction] and the derived limit [def-weil-derived-limit], regarded as a functor $D(X_{\\mathrm{proet}},\\mathcal O_E)\\to D(Y_{\\mathrm{proet}},\\mathcal O_E)$ in its ambient realization. Then for every $r\\in\\mathbf Z$ and every $K$ there is an isomorphism\n$$\\theta_{K,r}:Rf_*(K[r])\\xrightarrow{\\sim}(Rf_*K)[r]$$\nin $D(Y_{\\mathrm{proet}},\\mathcal O_E)$, natural in all morphisms $K\\to K'$ of $D(X_{\\mathrm{proet}},\\mathcal O_E)$ (including inverses of quasi-isomorphisms), with $\\theta_{K,0}=\\mathrm{id}$. No constructibility, boundedness or derived completeness of $K$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-cor-verdier-exchange.proof.md",
+  "place": "Step 3, compatibility with shifts of the second arrow of Step 2 at integral coefficients; derived limits as in Stacks derived.tex Tag 08TC (definition-derived-limit)"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-triangulated-category",
+  "def-weil-derived-direct-image",
+  "def-weil-integral-derived-reduction",
+  "def-weil-derived-limit",
+  "def-sf-ambient-integral-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "The actual coefficientSequenceLimit is coefficientSequenceDerivedRestriction followed by coefficientConstantTowerLimit. The former is the derived functor of exact scalar restriction; the latter is the unbounded right-derived additive inverse-limit functor on the strict completed-coefficient tower category. Their existing CommShift structures compose. Simultaneous K-injective resolutions and additivity of the ordinary limit are supplied by the ringed sequence-site interface, without boundedness or coefficient-universe restrictions.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-pc-right-derived-functor-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/fix-cor-verdier-exchange.proof.md",
+    "place": "Step 3, integral shift compatibility; Stacks 0941 and 07A6; adjunction-mate shift construction in Mathlib CategoryTheory/Shift/Adjunction.lean."
+   }
+  },
+  {
+   "text": "Let S be the chosen coefficientDerivedSystemEvaluationCalculus on X. Its recorded adjunction is S.reduction left adjoint to coefficientSequenceLimit. Apply Mathlib Adjunction.leftAdjointCommShift to transfer the right adjoint shift structure from step 1 to exactly S.reduction. This is a mate construction on natural isomorphisms and therefore applies to all derived arrows and preserves the recorded strict reduction functor and its quotient transitions. It avoids reconstructing reduction as a ringed-topos pullback.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/fix-cor-verdier-exchange.proof.md",
+    "place": "Step 3, integral shift compatibility; Stacks 0941 and 07A6; adjunction-mate shift construction in Mathlib CategoryTheory/Shift/Adjunction.lean."
+   }
+  },
+  {
+   "text": "Unfold sfAmbientIntegralDirectImage as reduction, exact derived scalar restriction, sfAmbientDerivedTowerPush, and coefficientConstantTowerLimit. The tower direct image is the unbounded right-derived functor of the additive sfAmbientTowerPush. Compose its standard CommShift structure with the other three. Take theta(r) to be the resulting commShiftIso(r). These are natural isomorphisms on the entire ambient derived category, and Functor.commShiftIso_zero gives exactly the stipulated theta(0) equality. No assumptions on boundedness, constructibility, or completeness enter this construction.",
+   "uses": [
+    "def-sf-ambient-integral-direct-image",
+    "def-coef-ringed-sequence-site",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-pc-right-derived-functor-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/fix-cor-verdier-exchange.proof.md",
+    "place": "Step 3, integral shift compatibility; Stacks 0941 and 07A6; adjunction-mate shift construction in Mathlib CategoryTheory/Shift/Adjunction.lean."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-sequence-site",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-sf-ambient-integral-direct-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/fix-cor-verdier-exchange.proof.md",
+  "place": "Step 3, integral shift compatibility; Stacks 0941 and 07A6; adjunction-mate shift construction in Mathlib CategoryTheory/Shift/Adjunction.lean. T3: compose the existing functor structures and transfer reduction shifts through its recorded adjunction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'instance.*CommShift' Mathlib/CategoryTheory/Functor/Derived/*.lean; grep -rln CommShift Mathlib/CategoryTheory/Functor/Derived Mathlib/Algebra/Homology/DerivedCategory",
+   "results": "no CommShift instance in CategoryTheory/Functor/Derived (Adjunction, LeftDerived, RightDerived, Pointwise*); CommShift appears only in Algebra/Homology/DerivedCategory/{Basic,Plus,ExactFunctor}.lean (exact functors induced from exact functors of abelian categories). Nothing about pro-etale completed coefficients or derived limits of direct-image towers.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The functor on unbounded derived categories given by derived reduction to quotient coefficient systems, derived direct image on the sequence site, and total derived inverse limit commutes naturally with every integer shift",
+   "results": "CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, DerivedCategory.instCommShiftHomologicalComplexIntUpHomFunctorQuotientCompQhIso, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, DerivedCategory.singleFunctorIsoCompQ",
+   "date": "2026-10-23",
+   "verdict": "no match: generic exact-functor/shift formalism does not construct the integral reduction/direct-image/limit realization"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.CommShift, Functor.rightDerivedFunctor",
+   "results": "No hits; loogle: unknown identifier 'Functor.CommShift'",
+   "date": "2026-10-23",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "integralDirectImage|integral_direct_image|rightDerivedFunctor.*[Cc]ommShift",
+   "results": "No hits",
+   "date": "2026-10-23",
+   "verdict": "no match: generic exact-functor/shift formalism does not construct the integral reduction/direct-image/limit realization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse limit of finite coefficient derived direct images commutes with shifts on unbounded complexes",
+   "results": "CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CochainComplex.shiftFunctorZero_inv_app_f, CategoryTheory.Functor.mapCochainComplexShiftIso_inv_app_f, CochainComplex.HomComplex.Cochain.leftShiftLinearEquiv_symm_apply, CategoryTheory.Equivalence.commShiftInverse, CochainComplex.HomComplex.Cochain.rightShiftLinearEquiv_symm_apply, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory",
+   "date": "2026-10-23",
+   "verdict": "no match: generic exact-functor/shift formalism does not construct the integral reduction/direct-image/limit realization"
+  },
+  {
+   "tool": "grep",
+   "query": "CommShift|commShiftIso",
+   "results": "80, 81, 86, 87, 94",
+   "date": "2026-10-23",
+   "verdict": "no match: generic exact-functor/shift formalism does not construct the integral reduction/direct-image/limit realization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A composite of total right derived inverse limit and unbounded derived direct image of strict coefficient systems has a natural isomorphism F(K[r]) = F(K)[r]",
+   "results": "CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc, DerivedCategory.singleFunctorIsoCompQ, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors",
+   "date": "2026-10-23",
+   "verdict": "no match: generic exact-functor/shift formalism does not construct the integral reduction/direct-image/limit realization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CommShift, CategoryTheory.Functor.comp",
+   "results": "CategoryTheory.Functor.CommShift.comp, CategoryTheory.Functor.CommShift.commShiftIso, CategoryTheory.Functor.CommShift.ofHasShiftOfFullyFaithful, CategoryTheory.Functor.CommShift.ofComp, CategoryTheory.NatTrans.CommShift.leftUnitor, CategoryTheory.NatTrans.CommShift.rightUnitor, CategoryTheory.Functor.commShiftIso_zero', CategoryTheory.Functor.CommShift.commShiftIso_zero",
+   "date": "2026-10-23",
+   "verdict": "no match: generic exact-functor/shift formalism does not construct the integral reduction/direct-image/limit realization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "reviewer",
+  "item": "lem-sf-admissible-hom-substitution",
+  "date": "2026-10-22",
+  "group": "Q154"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sf-integral-direct-image-shift-comparison",
+  "worker": "stage1",
+  "summary": "Constructed the comparison through actual derived coefficient systems: reduction as ringed-sequence pullback, unbounded system direct image, exact scalar restriction, and functorial total derived inverse limit. All ingredients reuse existing general nodes, with no new nodes. Kept every hypothesis and the ambient arbitrary-input conclusion. Distinguished the functorial strict-tower realization from the nonfunctorial Roos-triangle property. Checked cited statements and negative/zero shifts.",
+  "blueprint": "fix-cor-verdier-exchange.proof.md Step 3, compatibility with shifts of the second arrow of Step 2; the via chain is lem-sf-admissible-hom-substitution. Latest blueprint read at literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/fix-cor-verdier-exchange.proof.md.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-system-ringed-sequence-site",
+    "why": "Generic module interpretation of the sequence site; no operation preservation or geometric conclusion is taken from it. No node of the biduality unit supplies this general construction."
+   },
+   {
+    "node": "lem-coef-derived-system-evaluation-calculus",
+    "why": "Only the arbitrary-input actual reduction functor and its simultaneous K-flat model are used, not reconstruction or enriched Hom. No node of the biduality unit supplies this general construction."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "why": "Generic unbounded derived pullback with canonical K-flat comparison and exactness, applied to the ringed sequence projection. No node of the biduality unit supplies this general construction."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "General tool for actual derived-system construction, not a replacement for the unit route. No node of the biduality unit supplies this general construction."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Generic arbitrary-ring-sequence unbounded system direct image with its actual evaluation and quotient-transition comparison, applied to arbitrary pro-etale f. No node of the biduality unit supplies this general construction."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Resolution existence on the small ringed sequence sites, for the preceding unbounded total right-derived shift theorem. No node of the biduality unit supplies this general construction."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic unbounded right-derived integer-shift theorem applied to system direct image and inverse limit. No node of the biduality unit supplies this general construction."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Generic strict-tower total derived inverse-limit functor, rather than an arbitrary cone chosen in the triangulated category. No node of the biduality unit supplies this general construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pc-right-derived-functor-triangulated"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q124-b63590099",
+  "group": "Q124",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-b63590099 (reviewer sub-agent of L); spot-checked: PASS, no fixes. One commit; it changes only the item and the report and adds no new nodes. The statement and stmt_deps are unchanged, so no hypothesis is added and nothing is weakened. This is not a re-split item: it was unsplit and had no proof, and the blueprint fix-cor-verdier-exchange Step 3 (main-20261015, line 34) only states the shift compatibility, so proof_origin=agent is correct. I read every cited statement in full. Step 1: lem-coef-derived-system-evaluation-calculus gives R_X as a functor on the derived category, represented by (P⊗B_n)_n. The projection to the sequence site has the constant system as inverse image and lim as direct image, which is a two-line check. So p^*P is that same system, and lem-weil-pbc-ringed-topoi-derived-pullback (small sites, flat-term K-flat) gives R_X≅Lp^* naturally. Step 2: exactness of Lp^* gives the [1] comparison; iterates and inverses cover all r, and r=0 is the identity. Step 3: lem-coef-semilinear-derived-sections is applied to f_proet with B_n=(A_{E,n})_Y. lem-pe-constant-left-module-inverse-image identifies the inverse-image rings with (A_{E,n})_X and preserves scalars, so the level images match Rf_{*,n} of def-weil-derived-direct-image (ring map ρ^f_A). The shift for G_f comes from lem-pc-right-derived-functor-triangulated, with K-injectives from prop-pur-kinjective-resolutions-exist. Step 4: U is exact by def-coef-ringed-sequence-site and lem-sf-exact-functor-derived-triangulated. lem-weil-pbc-ringed-strict-tower-homotopy-limit gives an exact Rlim with a natural Roos triangle, so FK is a derived limit (def-weil-derived-limit) of the tower Res_n Rf_{*,n}(K⊗^L A_n). That is the item's stipulated ambient realization; the step does not take a canonical map from the property-only definition. Step 5: the four-factor composite, pasted naturality (including inverses), θ_0=id, and the transport to an isomorphic realization are all correct. Edge cases checked: K=0, r=0 and ±1 (sign only through the cochain shift convention), f=id (completion commutes with shift; completion is not claimed to be the identity), and unbounded, non-complete K. tool_uses accepted: the off-unit generic tools, namely system site, ringed-topos Lu^*, constant inverse image, K-injectives, right-derived shift and strict-tower Rlim. No SGA is cited. Duplicate grep: none of the def-coef-semilinear-geometry-*, def-weil-system-operation-exchange-realization or lem-pur-integral-geometric-comparison-realization nodes states this comparison. Minor: the report mentions a citations.json that is not among the delivered files; this is report wording only."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SfIntegralDirectImageShiftComparison",
+  "declaration": "WeilConjectures.sfIntegralDirectImageShiftComparison",
+  "file": "lean/Sheaf/Paper/SfIntegralDirectImageShiftComparison.lean",
+  "statement": "theorem sfIntegralDirectImageShiftComparison (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] {X Y : AlgebraicGeometry.Scheme.{t}} (f : X ⟶ Y) (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (_hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) : ∃ θ : ∀ r : ℤ, shiftFunctor (DerivedCategory (scalarReductionSource l E X)) r ⋙ sfAmbientIntegralDirectImage l E f ≅ sfAmbientIntegralDirectImage l E f ⋙ shiftFunctor (DerivedCategory (scalarReductionSource l E Y)) r, θ 0 = Functor.CommShift.isoZero (sfAmbientIntegralDirectImage l E f) ℤ",
+  "branch": "newtargets-dag",
+  "by": "Q36",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4eb8f0908",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Re-delivery after H13 RETURN ea572efb. def-weil-derived-direct-image record is byte-identical to side-live, so Q29's record and 15 declarations are untouched. Repair option (b): new def-sf-ambient-integral-direct-image owns SfAmbientIntegralDirectImage and the 10 sfAmbient* declarations; bodies unchanged, only docstrings and imports changed. Its stmt_deps cover every owner, including lem-coef-derived-system-evaluation-calculus for the .choose reduction; all landed by 10-17, before the base. Item module byte-identical to the prior head; only stmt_deps gains the new node. Clauses re-checked: l invertible on X and Y, independent universes t/u, NatIso for every shift r, theta 0 = CommShift.isoZero, no boundedness or completeness assumption; statement invariant under natural isomorphism of the functor (reduction is a left adjoint of a fixed functor). lean.statement verbatim for both records; no hollow defs; only 2 true helper sorries. Duplicate search: Q29 copies force t=u; CompletedTowerIndependent.push and IntegralAmbient.push act on the RingCat-limit presentation, not scalarReductionSource (advisory only). Report sections present. No compile: no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261024T191222-L-274693",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

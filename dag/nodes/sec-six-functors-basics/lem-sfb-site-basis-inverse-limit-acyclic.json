@@ -1,0 +1,317 @@
+{
+ "id": "lem-sfb-site-basis-inverse-limit-acyclic",
+ "kind": "statement",
+ "title": "A covering collection of acyclic objects detects derived inverse limits",
+ "statement": "Work in the universes and small-site convention of [def-weil-size-convention]. Let $\\mathcal C$ be a small site [def-weil-pbc-sites-and-cohomology], $\\mathcal O$ a sheaf of commutative rings, and $(\\mathcal F_n,t_n)_{n\\ge1}$ an inverse sequence of sheaves of $\\mathcal O$-modules [def-weil-sheaf-of-modules-category], with $t_n:\\mathcal F_{n+1}\\to\\mathcal F_n$. Let $\\mathcal B\\subset\\operatorname{Ob}(\\mathcal C)$ be a set such that every object of $\\mathcal C$ has a covering with all members in $\\mathcal B$. Suppose that, for every $U\\in\\mathcal B$, $n\\ge1$ and $p>0$, $H^p(U,\\mathcal F_n)=0$ and $R^1\\varprojlim_n\\mathcal F_n(U)=0$. Here $H^p(U,-)$ is right derived evaluation in sheaves of $\\mathcal O$-modules, with values in abelian groups, and $R^1\\varprojlim$ on section groups is the right derived functor on abelian-group towers of [lem-pc-derived-limit-roos-abelian-groups]. Put $\\mathcal F=\\varprojlim_n\\mathcal F_n$, computed sectionwise [def-pur-sheaf-inverse-limit]. In $D(\\operatorname{Mod}(\\mathcal O))$ [def-weil-abstract-derived-category], the natural comparison $\\mathcal F[0]\\to R\\varprojlim_n\\mathcal F_n[0]$ is an isomorphism, and $H^p(U,\\mathcal F)=0$ for every $U\\in\\mathcal B$ and $p>0$. The right side is computed by the right derived inverse-limit functor on the strict tower and is a derived limit in the sense of [def-weil-derived-limit]; the comparison is the one induced by the ordinary limit into that derived functor.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0BKY (lemma-inverse-limit-is-derived-limit), statement and proof."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-derived-limit-roos-abelian-groups",
+  "def-pur-sheaf-inverse-limit",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-limit",
+  "def-sfb-site-module-derived-sections"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\mathcal A=\\operatorname{Mod}(\\mathcal O)$ and $K=R\\varprojlim_n\\mathcal F_n[0]$. Apply [lem-weil-pbc-ringed-strict-tower-homotopy-limit] to this strict degree-zero tower: $K$ exists and has the derived-limit triangle with projections $p_n:K\\to\\mathcal F_n[0]$. Let $c:\\mathcal F[0]\\to K$ be the specified right-derived comparison. Its composites with $p_n$ are the ordinary limit projections $\\pi_n[0]$. Indeed, on a K-injective tower resolution $q:\\mathcal F_\\bullet[0]\\to I_\\bullet$, $K$ is represented by $\\lim I_n$ and $c$ by $\\lim q_n$; its $n$th projection is $q_n\\pi_n$. Localizing and identifying $QI_n$ with $\\mathcal F_n[0]$ gives the asserted equality. Here the ordinary sectionwise limit and its coordinate projections are those of [def-pur-sheaf-inverse-limit].",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0BKY (lemma-inverse-limit-is-derived-limit), proof; with Tag 0D6K (lemma-RGamma-commutes-with-Rlim) and Tag 0BKV (lemma-sheafification-cohomology)."
+   }
+  },
+  {
+   "text": "For any module sheaf $M$, choose its injective resolution in degrees $\\geq0$. Such resolutions are available: [prop-pur-kinjective-resolutions-exist] makes $\\mathcal A$ Grothendieck, and [lem-sp-grothendieck-enough-injectives] supplies injective embeddings; successively embed the cokernel of $M\\hookrightarrow J^0$, then the next cokernel, to construct $J^\\bullet$. It is K-injective by [lem-weil-pbc-bounded-below-injectives-kinjective]. Thus $H^m(U,M[0])$ is computed by $J^\\bullet(U)$, vanishes for $m<0$, and for $m=0$ is $M(U)$: $M=\\ker(J^0\\to J^1)$ and kernels are sectionwise by [def-weil-sheaf-of-modules-category]. This identification is the canonical augmentation and is natural in $M$. For $M=\\mathcal F_n$ and $U\\in\\mathcal B$, the assumed positive-degree vanishing therefore gives $H^m(U,\\mathcal F_n[0])=0$ for $m\\ne0$ and $H^0(U,\\mathcal F_n[0])=\\mathcal F_n(U)$.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0BKY (lemma-inverse-limit-is-derived-limit), proof; with Tag 0D6K (lemma-RGamma-commutes-with-Rlim) and Tag 0BKV (lemma-sheafification-cohomology)."
+   }
+  },
+  {
+   "text": "For each $U\\in\\mathcal B$, [lem-kun-site-rgamma-derived-limit] identifies $R\\Gamma(U,K)$, with its actual projections, as a derived limit of $R\\Gamma(U,\\mathcal F_n[0])$. Apply [lem-pc-derived-limit-milnor-sequence] in $D(\\operatorname{Ab})$ to obtain, for every integer $m$, $0\\to R^1\\lim_n H^{m-1}(U,\\mathcal F_n[0])\\to H^m(U,K)\\xrightarrow{e_U^m}\\lim_n H^m(U,\\mathcal F_n[0])\\to0$. Reindex $n\\geq1$ by $n-1\\geq0$ if necessary. Step 2 makes both outer terms zero for $m\\notin\\{0,1\\}$, gives $H^1(U,K)=R^1\\lim_n\\mathcal F_n(U)=0$ by hypothesis, and makes $e_U^0:H^0(U,K)\\xrightarrow{\\sim}\\lim_n\\mathcal F_n(U)$ an isomorphism. Its coordinates are induced by $p_n$. Consequently $e_U^0\\circ H^0(U,c)$ is the coordinate identification $\\mathcal F(U)=\\lim_n\\mathcal F_n(U)$, by Step 1 and the natural degree-zero identification in Step 2. Thus $H^0(U,c)$ is an isomorphism, and $H^m(U,K)=0$ for every $m\\ne0$.",
+   "uses": [
+    "lem-kun-site-rgamma-derived-limit",
+    "lem-pc-derived-limit-milnor-sequence",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0BKY (lemma-inverse-limit-is-derived-limit), proof; with Tag 0D6K (lemma-RGamma-commutes-with-Rlim) and Tag 0BKV (lemma-sheafification-cohomology)."
+   }
+  },
+  {
+   "text": "For any $E\\in D(\\mathcal A)$ choose a K-injective representative $J$ using [prop-pur-kinjective-resolutions-exist], and put $P_E^m(U)=H^m(J(U))=H^m(U,E)$. This is a presheaf of $\\mathcal O$-modules. Its sheafification is $\\mathcal H^m(E)$, naturally in $E$: in presheaves write $P_E^m=\\ker(d_J^m)/\\operatorname{im}(d_J^{m-1})$; exact module sheafification [lem-weil-pbc-ringed-site-module-sheafification-exact] carries this kernel/image quotient to the same quotient in sheaves, namely $\\mathcal H^m(E)$ by [def-weil-abstract-derived-category]. Each term of $J$ is already a sheaf, so its sheafification is itself. The identifications commute with maps because the kernel and quotient factorizations are functorial. This proves the needed ringed-site sheafification calculation directly from exactness.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-ringed-site-module-sheafification-exact",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0BKY (lemma-inverse-limit-is-derived-limit), proof; with Tag 0D6K (lemma-RGamma-commutes-with-Rlim) and Tag 0BKV (lemma-sheafification-cohomology)."
+   }
+  },
+  {
+   "text": "For $m\\ne0$ the map $0\\to P_K^m$ is locally bijective: every object has a covering by $U\\in\\mathcal B$, and on those members $P_K^m(U)=0$ by Step 3. For $m=0$ the natural map $\\mathcal F\\to P_K^0$ induced by $c$ and Step 2 is bijective on every $U\\in\\mathcal B$ by Step 3. It is locally injective and locally surjective on every object by restricting an equality, or a target section, to such a covering. Apply [lem-weil-pbc-site-sheafification-iso-locally-bijective] to both maps. By [def-weil-presheaf-modules-sheafification] the module sheafification of a presheaf of $\\mathcal O$-modules has as underlying abelian sheaf its abelian sheafification, with the same unit map, so these abelian isomorphisms are the underlying maps of the module sheafifications. Step 4 identifies their sheafifications with $0\\to\\mathcal H^m(K)$ for $m\\ne0$ and with $\\mathcal H^0(c):\\mathcal F\\to\\mathcal H^0(K)$ for $m=0$. Thus the former cohomology sheaves vanish and the latter morphism is an isomorphism. These are module-sheaf isomorphisms: the inverse of a bijective linear morphism is linear, since applying the morphism to $a f^{-1}(y)$ gives $ay$.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-iso-locally-bijective",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0BKY (lemma-inverse-limit-is-derived-limit), proof; with Tag 0D6K (lemma-RGamma-commutes-with-Rlim) and Tag 0BKV (lemma-sheafification-cohomology)."
+   }
+  },
+  {
+   "text": "The complex $\\mathcal F[0]$ has cohomology $\\mathcal F$ in degree zero and zero otherwise, directly from its differential. Step 5 therefore proves that every $\\mathcal H^m(c)$ is an isomorphism. By [lem-weil-pbc-unbounded-derived-iso-cohomology], $c$ itself is an isomorphism in $D(\\mathcal A)$. For $U\\in\\mathcal B$ applying the functor $H^p(U,-)$ to $c$ now identifies $H^p(U,\\mathcal F)$ with $H^p(U,K)$, which is zero for $p>0$ by Step 3. This is the asserted higher-cohomology vanishing as well as the comparison for the specified strict-tower derived limit.",
+   "uses": [
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0BKY (lemma-inverse-limit-is-derived-limit), proof; with Tag 0D6K (lemma-RGamma-commutes-with-Rlim) and Tag 0BKV (lemma-sheafification-cohomology)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-pur-sheaf-inverse-limit",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "def-weil-sheaf-of-modules-category",
+  "lem-kun-site-rgamma-derived-limit",
+  "lem-pc-derived-limit-milnor-sequence",
+  "lem-weil-pbc-ringed-site-module-sheafification-exact",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-site-sheafification-iso-locally-bijective",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0BKY, lemma-inverse-limit-is-derived-limit, proof, with its dependencies Tags 0D6K and 0BKV; the latter calculation is expanded using exact module sheafification."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a ringed site a countable inverse tower of module sheaves acyclic on a covering basis with vanishing first derived limit on sections has ordinary limit equal to derived limit",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.createsLimit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {D : Type u₂} →\\n        [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n          {R : CategoryTheory.Sheaf J RingCat} →\\n            (F : CategoryTheory.Functor D (SheafOfModules R\", \"doc\": \"Let $\\\\mathcal{C}$ be a category with a Grothendieck topology $J$ and $R$ a sheaf of rings on $\\\\mathcal{C}$. The forgetful functor from the category of sheaves of modules over $R$ to the category of pr\"}\n  {\"name\": \"SheafOfModules.hasLimit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {D : Type u₂}\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] {R : CategoryTheory.Sheaf J RingCat}\\n  (F : CategoryTheory.Functor D (SheafOfModules R))\\n  [∀ (X : Cᵒᵖ),\\n      Small.{v, max u₂ v}\\n   \", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ has all limits. This means that for any diagram (\"}\n  {\"name\": \"SheafOfModules.hasLimitsOfSize\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C}\\n  (R : CategoryTheory.Sheaf J RingCat),\\n  CategoryTheory.Limits.HasLimitsOfSize.{v₂, v, max u₁ v, max (max (max (v + 1) u) u₁) v₁} (SheafOfModules R)\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ has all limits for diagrams indexed by categories\"}\n  {\"name\": \"PresheafOfModules.isLimitLimitCone\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Limits\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {R : CategoryTheory.Functor Cᵒᵖ RingCat} →\\n      {J : Type u₂} →\\n        [inst_1 : CategoryTheory.Category.{v₂, u₂} J] →\\n          (F : CategoryTheory.Functor J (PresheafOfModules R)) →\\n            [inst_2 :\\n                ∀ (X : C\", \"doc\": \"The limit cone for a diagram in the category of presheaves of modules over a presheaf of rings is a limit, as each evaluation at an object in the base category is a limit in the corresponding module c\"}\n  {\"name\": \"SheafOfModules.evaluationPreservesLimit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {D : Type u₂}\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] {R : CategoryTheory.Sheaf J RingCat}\\n  (F : CategoryTheory.Functor D (SheafOfModules R))\\n  [∀ (X : Cᵒᵖ),\\n      Small.{v, max u₂ v}\\n   \", \"doc\": \"For any object $X$ in the opposite category $\\\\mathcal{C}^{\\\\text{op}}$, the evaluation functor at $X$ preserves limits of diagrams in the category of sheaves of modules over a sheaf of rings $R$. This \"}\n  {\"name\": \"PresheafOfModules.isSheaf_of_isLimit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {D : Type u₂}\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] {R : CategoryTheory.Functor Cᵒᵖ RingCat}\\n  {F : CategoryTheory.Functor D (PresheafOfModules R)}\\n  [∀ (X : Cᵒᵖ),\\n      Small.{v, max u₂\", \"doc\": \"If $\\\\mathcal{C}$ is a category equipped with a Grothendieck topology $J$, and $F: \\\\mathcal{J} \\\\to \\\\text{PresheafOfModules}(R)$ is a diagram of presheaves of modules such that each $F(j)$ is a sheaf wi\"}\n  {\"name\": \"SheafOfModules.hasLimitsOfShape\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} (D : Type u₂)\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] (R : CategoryTheory.Sheaf J RingCat) [Small.{v, u₂} D],\\n  CategoryTheory.Limits.HasLimitsOfShape D (SheafOfModules R)\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ has all limits of shape $D$. This means that give\"}\n  {\"name\": \"PresheafOfModules.evaluationJointlyReflectsLimits\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Limits\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {R : CategoryTheory.Functor Cᵒᵖ RingCat} →\\n      {J : Type u₂} →\\n        [inst_1 : CategoryTheory.Category.{v₂, u₂} J] →\\n          (F : CategoryTheory.Functor J (PresheafOfModules R)) →\\n            [∀ (X : Cᵒᵖ),\\n                  Sm\", \"doc\": \"Given a presheaf of rings $ R $ on a category $ \\\\mathcal{C} $, a cone $ c $ over a functor $ F: \\\\mathcal{J} \\\\to \\\\text{PresheafOfModules}(R) $ is a limit if and only if its evaluation at every object $\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary limits, quasi-coherence definitions, scheme limits or special coherent/condensed topology results do not assert this ringed-site derived-limit criterion or the algebraic-space assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Acyclicity of inverse limits of sheaves using a basis and Mittag Leffler sections",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PresheafOfModules.isSheaf_of_isLimit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {D : Type u₂}\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] {R : CategoryTheory.Functor Cᵒᵖ RingCat}\\n  {F : CategoryTheory.Functor D (PresheafOfModules R)}\\n  [∀ (X : Cᵒᵖ),\\n      Small.{v, max u₂\", \"doc\": \"If $\\\\mathcal{C}$ is a category equipped with a Grothendieck topology $J$, and $F: \\\\mathcal{J} \\\\to \\\\text{PresheafOfModules}(R)$ is a diagram of presheaves of modules such that each $F(j)$ is a sheaf wi\"}\n  {\"name\": \"LightCondAb.ofSheafLightProfinite\", \"module\": \"Mathlib/Condensed/Light/Explicit\", \"type\": \"(F : CategoryTheory.Functor LightProfiniteᵒᵖ (ModuleCat ℤ)) →\\n  [CategoryTheory.Limits.PreservesFiniteProducts F] → CategoryTheory.regularTopology.EqualizerCondition F → LightCondAb\", \"doc\": \"Given a functor $ F: \\\\mathbf{LightProfinite}^{\\\\text{op}} \\\\to \\\\text{ModuleCat}\\\\, \\\\mathbb{Z} $ that preserves finite products and satisfies the Equalizer Condition for the regular topology, this constru\"}\n  {\"name\": \"Condensed.hasExactLimitsOfShape\", \"module\": \"Mathlib/Condensed/AB\", \"type\": \"∀ (A : Type u_1) (J : Type u_2) [inst : CategoryTheory.Category.{v_1, u_1} A]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} J] [CategoryTheory.Preadditive A]\\n  [∀ (X : CompHausᵒᵖ),\\n      CategoryTheory.Limits.HasLimitsOfShape (CategoryTheory.StructuredArrow X Stonean.toCompHaus.op) A]\\n  [CategoryTh\", \"doc\": \"If a category $\\\\mathcal{A}$ has all limits of shape $\\\\mathcal{J}$ satisfying exactness conditions (e.g., Grothendieck axioms) and finite colimits, then the category of condensed objects over $\\\\mathcal\"}\n  {\"name\": \"CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf\", \"type\": \"∀ {C : Type u₂} [inst : CategoryTheory.Category.{v, u₂} C] [inst_1 : CategoryTheory.EssentiallySmall.{v, v, u₂} C]\\n  (J : CategoryTheory.GrothendieckTopology C) (A : Type u₁) [inst_2 : CategoryTheory.Category.{v, u₁} A]\\n  [inst_3 : CategoryTheory.Abelian A] [CategoryTheory.IsGrothendieckAbelian.{v, \", \"doc\": \"Let $\\\\mathcal{C}$ be an essentially small category equipped with a Grothendieck topology $J$, and let $\\\\mathcal{A}$ be a Grothendieck abelian category. If there exists a sheafification functor for pre\"}\n  {\"name\": \"CategoryTheory.Sheaf.ab5ofSize\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf\", \"type\": \"∀ {C : Type u} {A : Type u₁} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Category.{v₁, u₁} A]\\n  (J : CategoryTheory.GrothendieckTopology C) [CategoryTheory.Limits.HasFiniteLimits A]\\n  [inst_3 : CategoryTheory.HasSheafify J A]\\n  [inst_4 : CategoryTheory.Limits.HasFilteredColimi\", \"doc\": \"Given a category $\\\\mathcal{A}$ with finite limits, a sheafification functor, filtered colimits of size $(v₂, u₂)$, and satisfying the AB5 axiom, the category of sheaves on a site $(\\\\mathcal{C}, J)$ wi\"}\n  {\"name\": \"TopCat.Presheaf.IsSheafPreservesLimitPairwiseIntersections\", \"module\": \"Mathlib/Topology/Sheaves/SheafCondition/PairwiseIntersections\", \"type\": \"{C : Type u_1} → [inst : CategoryTheory.Category.{v_1, u_1} C] → {X : TopCat} → TopCat.Presheaf C X → Prop\", \"doc\": \"A presheaf $ F $ satisfies the sheaf condition if, for every family of open subsets $ U_i $ of a topological space $ X $, the presheaf $ F $ preserves the limit of the diagram constructed from the pai\"}\n  {\"name\": \"TopCat.Presheaf.isLimitOpensLeEquivGenerate₂\", \"module\": \"Mathlib/Topology/Sheaves/SheafCondition/OpensLeCover\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {X : TopCat} →\\n      (F : TopCat.Presheaf C X) →\\n        {Y : TopologicalSpace.Opens ↑X} →\\n          (R : CategoryTheory.Presieve Y) →\\n            CategoryTheory.Sieve.generate R ∈ (Opens.grothendieckTopology ↑X) Y →\\n            \", \"doc\": \"Given a presieve $ R $ on an open set $ Y $ in a topological space $ X $, if the sieve generated by $ R $ belongs to the Grothendieck topology of $ X $, then the condition that a presheaf $ F $ satisf\"}\n  {\"name\": \"TopCat.Presheaf.isLimitOpensLeEquivGenerate₁\", \"module\": \"Mathlib/Topology/Sheaves/SheafCondition/OpensLeCover\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {X : TopCat} →\\n      (F : TopCat.Presheaf C X) →\\n        {ι : Type u_2} →\\n          (U : ι → TopologicalSpace.Opens ↑X) →\\n            {Y : TopologicalSpace.Opens ↑X} →\\n              Y = iSup U →\\n                CategoryTheory.Lim\", \"doc\": \"Given an open cover $\\\\{U_i\\\\}$ of a topological space $X$, this cocone has as its apex the union $\\\\bigcup_{i \\\\in I} U_i$ (viewed as an open set in $X$) and as its legs the canonical inclusion morphisms\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary limits, quasi-coherence definitions, scheme limits or special coherent/condensed topology results do not assert this ringed-site derived-limit criterion or the algebraic-space assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CategoryTheory.Limits.limit",
+   "sub": "",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary limits, quasi-coherence definitions, scheme limits or special coherent/condensed topology results do not assert this ringed-site derived-limit criterion or the algebraic-space assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedLimit|derived_limit|Rlim|inverse.limit.is.derived.limit",
+   "sub": "",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Algebra/Category/Ring/Under/Property.lean\", \"line\": \"38\", \"text\": \"lemma RingHom.HasFiniteProducts.isClosedUnderLimitsOfShape (hQi : RespectsIso Q)\"}\n  {\"file\": \"Mathlib/Algebra/Category/Ring/Under/Property.lean\", \"line\": \"41\", \"text\": \"  refine .of_isClosedUnderLimitsOfShape fun (J : Type u) _ ↦ ⟨fun A ⟨pres, hpres⟩ ↦ ?_⟩\"}\n  {\"file\": \"Mathlib/Algebra/Category/Ring/Under/Property.lean\", \"line\": \"52\", \"text\": \"lemma RingHom.HasEqualizers.isClosedUnderLimitsOfShape (hQi : RespectsIso Q)\"}\n  {\"file\": \"Mathlib/Algebra/Category/Ring/Under/Property.lean\", \"line\": \"54\", \"text\": \"    (toMorphismProperty Q).underObj (X := R).IsClosedUnderLimitsOfShape WalkingParallelPair := by\"}\n  {\"file\": \"Mathlib/Algebra/Category/Ring/Under/Property.lean\", \"line\": \"78\", \"text\": \"  have := hQp.isClosedUnderLimitsOfShape hQi R\"}\n  {\"file\": \"Mathlib/CategoryTheory/Preadditive/Injective/InjectiveObject.lean\", \"line\": \"33\", \"text\": \"    ObjectProperty.IsClosedUnderLimitsOfShape (isInjective C) (Discrete J) where\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/Local.lean\", \"line\": \"82\", \"text\": \"    W.isLocal.IsClosedUnderLimitsOfShape J where\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean\", \"line\": \"30\", \"text\": \"`P.IsClosedUnderLimitsOfShape J`.\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean\", \"line\": \"191\", \"text\": \"/-- A property of objects satisfies `P.IsClosedUnderLimitsOfShape J` if it\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean\", \"line\": \"194\", \"text\": \"class IsClosedUnderLimitsOfShape (P : ObjectProperty C) (J : Type u') [Category.{v'} J] where\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean\", \"line\": \"198\", \"text\": \"lemma IsClosedUnderLimitsOfShape.mk' [P.IsClosedUnderIsomorphisms]\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean\", \"line\": \"200\", \"text\": \"    P.IsClosedUnderLimitsOfShape J where\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/Ind.lean\", \"line\": \"135\", \"text\": \"private lemma ind_pi_of_ind {ι : Type w} [P.IsClosedUnderLimitsOfShape (Discrete ι)]\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/Ind.lean\", \"line\": \"143\", \"text\": \"instance isClosedUnderLimitsOfShape_ind_discrete {ι : Type*} [Small.{w} ι]\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/Ind.lean\", \"line\": \"144\", \"text\": \"    [P.IsClosedUnderLimitsOfShape (Discrete ι)] [HasProductsOfShape ι C] [IsIPCOfShape.{w} ι C] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/Ind.lean\", \"line\": \"145\", \"text\": \"    (ind.{w} P).IsClosedUnderLimitsOfShape (Discrete ι) := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/Ind.lean\", \"line\": \"151\", \"text\": \"  have : P.IsClosedUnderLimitsOfShape (Discrete (Shrink.{w} ι)) :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean\", \"line\": \"22\", \"text\": \"`P.IsClosedUnderLimitsOfShape (Discrete.{0} PEmpty)` and that `C`\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean\", \"line\": \"39\", \"text\": \"  P.IsClosedUnderLimitsOfShape (Discrete WalkingPair)\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean\", \"line\": \"51\", \"text\": \"lemma prop_of_isTerminal [P.IsClosedUnderLimitsOfShape (Discrete.{0} PEmpty)]\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean\", \"line\": \"56\", \"text\": \"lemma prop_terminal [P.IsClosedUnderLimitsOfShape (Discrete.{0} PEmpty)] [HasTerminal C] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean\", \"line\": \"61\", \"text\": \"instance (priority := 100) [P.IsClosedUnderLimitsOfShape (Discrete.{0} PEmpty)] [HasTerminal C] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/LimitsClosure.lean\", \"line\": \"51\", \"text\": \"instance (a : α) : (P.limitsClosure J).IsClosedUnderLimitsOfShape (J a) where\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/LimitsClosure.lean\", \"line\": \"58\", \"text\": \"    [∀ (a : α), Q.IsClosedUnderLimitsOfShape (J a)] (h : P ≤ Q) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/LimitsClosure.lean\", \"line\": \"72\", \"text\": \"    [∀ (a : α), P.IsClosedUnderLimitsOfShape (J a)] : P.limitsClosure J = P :=\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary limits, quasi-coherence definitions, scheme limits or special coherent/condensed topology results do not assert this ringed-site derived-limit criterion or the algebraic-space assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse limit of sheaves on a ringed site with acyclic sections on a covering basis",
+   "sub": "",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.hasLimit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \": HasLimit F\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ has all limits. This means that for any diagram (\"}\n  {\"name\": \"CategoryTheory.Sheaf.ΓNatIsoLim\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"[HasLimitsOfShape Cᵒᵖ A] : Γ J A ≅ sheafToPresheaf J A ⋙ lim\", \"doc\": \"Given that the opposite category $\\\\mathcal{C}^{\\\\text{op}}$ has all limits of shape $J$, there exists a natural isomorphism between the global sections functor $\\\\Gamma_{J,A}$ and the composition of the\"}\n  {\"name\": \"SheafOfModules.hasLimitsOfSize\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \": HasLimitsOfSize.{v₂, v} (SheafOfModules.{v} R)\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ has all limits for diagrams indexed by categories\"}\n  {\"name\": \"SheafOfModules.hasLimitsOfShape\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \": HasLimitsOfShape D (SheafOfModules.{v} R)\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ has all limits of shape $D$. This means that give\"}\n  {\"name\": \"CategoryTheory.Sheaf.instHasLimitsOfShape\", \"module\": \"Mathlib.CategoryTheory.Sites.Limits\", \"type\": \": HasLimitsOfShape K (Sheaf J D)\", \"doc\": \"Given a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a category $\\\\mathcal{D}$, the category of sheaves on $\\\\mathcal{C}$ with values in $\\\\mathcal{D}$ has all limits of shape $K$\"}\n  {\"name\": \"TopCat.instHasLimitsOfShapeSheaf\", \"module\": \"Mathlib.Topology.Sheaves.Limits\", \"type\": \"[HasLimitsOfShape J C] (X : TopCat.{t}) : HasLimitsOfShape J (Sheaf C X)\", \"doc\": \"For any category $\\\\mathcal{C}$ and topological space $X$, if $\\\\mathcal{C}$ has all limits of shape $J$, then the category of sheaves on $X$ with values in $\\\\mathcal{C}$ also has all limits of shape $J\"}\n  {\"name\": \"TopCat.Presheaf.isLimitOpensLeEquivGenerate₂\", \"module\": \"Mathlib.Topology.Sheaves.SheafCondition.OpensLeCover\", \"type\": \"(R : Presieve Y) (hR : Sieve.generate R ∈ Opens.grothendieckTopology X Y) :\\n  IsLimit (F.mapCone (opensLeCoverCocone (coveringOfPresieve Y R)).op) ≃\\n    IsLimit (F.mapCone (Sieve.generate R).arrows.cocone.op)\", \"doc\": \"Given a presieve $ R $ on an open set $ Y $ in a topological space $ X $, if the sieve generated by $ R $ belongs to the Grothendieck topology of $ X $, then the condition that a presheaf $ F $ satisf\"}\n  {\"name\": \"CategoryTheory.Sheaf.isColimitSheafifyCocone\", \"module\": \"Mathlib.CategoryTheory.Sites.Limits\", \"type\": \"{F : K ⥤ Sheaf J D} (E : Cocone (F ⋙ sheafToPresheaf J D)) (hE : IsColimit E) : IsColimit (sheafifyCocone E)\", \"doc\": \"Let $F : \\\\mathcal{K} \\\\to \\\\text{Sh}(J, \\\\mathcal{D})$ be a functor representing a diagram of sheaves on a site $(\\\\mathcal{C}, J)$ with values in a category $\\\\mathcal{D}$. Let $E$ be a cocone for the dia\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary limits, quasi-coherence definitions, scheme limits or special coherent/condensed topology results do not assert this ringed-site derived-limit criterion or the algebraic-space assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bRlim\\b|derivedLimit|derived_limit|Mittag.Leffler",
+   "sub": "CategoryTheory",
+   "results": "Mathlib/CategoryTheory/CofilteredSystem.lean lines 21, 26, 36, 37, 46: Mittag-Leffler definitions and eventual-range systems of sets; no ringed-site cohomology or derived-limit criterion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Rlim|derivedLimit|derived_limit|inverse.limit.is.derived.limit",
+   "sub": "",
+   "results": "25 hits; top declarations/files: Mathlib/Algebra/Category/Ring/Under/Property.lean, Mathlib/Algebra/Category/Ring/Under/Property.lean, Mathlib/Algebra/Category/Ring/Under/Property.lean, Mathlib/Algebra/Category/Ring/Under/Property.lean, Mathlib/Algebra/Category/Ring/Under/Property.lean, Mathlib/CategoryTheory/ObjectProperty/Local.lean, Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean, Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary sheaf limits, Grothendieck properties or special condensed topology results; none states the general ringed-site acyclic-tower criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A covering collection of acyclic objects detects derived inverse limits of sheaves",
+   "sub": "",
+   "results": "8 hits; top declarations/files: CategoryTheory.Presheaf.isSheaf_iff_isLimit, TopCat.instHasLimitsOfShapeSheaf, CategoryTheory.Presheaf.isSheaf_iff_isLimit_pretopology, CategoryTheory.Sheaf.instHasLimitsOfShape, TopCat.Presheaf.IsSheafOpensLeCover, SheafOfModules.hasLimit, TopCat.Presheaf.IsSheaf.isSheafOpensLeCover, CategoryTheory.Presheaf.isSheaf_iff_isLimit_coverage",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary sheaf limits, Grothendieck properties or special condensed topology results; none states the general ringed-site acyclic-tower criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CategoryTheory.Limits.limit",
+   "sub": "",
+   "results": "0 hits; top declarations/files: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary sheaf limits, Grothendieck properties or special condensed topology results; none states the general ringed-site acyclic-tower criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mittag Leffler inverse limits of sheaves with vanishing cohomology on a covering basis compute derived inverse limits",
+   "sub": "",
+   "results": "8 hits; top declarations/files: PresheafOfModules.isSheaf_of_isLimit, TopCat.Presheaf.isLimitOpensLeCoverEquivPairwise, LightCondensed.isColimitLocallyConstantPresheaf, TopCat.Presheaf.isLimitOpensLeEquivGenerate₂, Condensed.isColimitLocallyConstantPresheaf, Condensed.isColimitLocallyConstantPresheaf_desc_apply, CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map, TopCat.Presheaf.SheafConditionPairwiseIntersections.isLimitMapConeOfIsLimitSheafConditionFork",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary sheaf limits, Grothendieck properties or special condensed topology results; none states the general ringed-site acyclic-tower criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On any ringed site, an inverse sequence of module sheaves acyclic on a covering collection with vanishing first derived limit of sections has acyclic ordinary limit equal to its derived limit",
+   "sub": "",
+   "results": "8 hits; top declarations/files: CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, LightCondensed.instIsGrothendieckAbelianLightCondMod, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic, HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_exactAt, PresheafOfModules.isSheaf_of_isLimit, SheafOfModules.instAbelian",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary sheaf limits, Grothendieck properties or special condensed topology results; none states the general ringed-site acyclic-tower criterion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-surjective-qcoh-limit",
+  "date": "2026-10-23",
+  "group": "Q44"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0D3X (lemma-spaces-defo-thy), proof, paragraphs beginning Let (R_n) be an inverse system and Let I_n = Ker(R_n to R_1), through the final deform-property argument. Supporting input: Tag 0D3E (lemma-Rlim-quasi-coherent), (2), (3), and its proof for affine etale objects (surjectivity on sections and affine acyclicity). General ringed-site input: Tag 0BKY, verifying affine-basis conditions in the proof of Tag 0D3E.",
+   "via": [
+    "lem-sfb-space-surjective-qcoh-limit",
+    "lem-sfb-proper-space-square-zero-effectivity",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-site-basis-inverse-limit-acyclic",
+  "worker": "stage1",
+  "summary": "Checked Stacks 0BKY against all hypotheses and followed its Milnor-sequence/sheafification proof in six steps. Reused existing strict-tower, derived-sections, Milnor, exact-sheafification, local-bijectivity and cohomology-detection nodes. Expanded the ringed-site sheafification calculation as an elementary kernel/image calculation rather than creating a duplicate or elementary lemma. Verified the specified comparison using its actual projections. No statement change and no new nodes.",
+  "blueprint": "The existing from.place traces this supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through the alteration/effectivity chain and Tag 0D3E. Read the latest unit and direct-images proof. This split implements only the named Tag 0BKY ringed-site prerequisite, preserving the given route and existing blueprint.from provenance (ancestor tool returns None). No blueprint node states this general criterion.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Strict total derived inverse limit and its projection triangle on an arbitrary small ringed site; no exact-product hypothesis is imposed. This is a generic cohomological tool, not a replacement of a geometric step of this unit."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Grothendieck module-sheaf category and K-injective representatives on the given small ringed site. This is a generic cohomological tool, not a replacement of a geometric step of this unit."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Injective embeddings in the Grothendieck module-sheaf category, for the ordinary nonnegative resolution. This is a generic cohomological tool, not a replacement of a geometric step of this unit."
+   },
+   {
+    "node": "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "why": "The nonnegative injective resolution computes unbounded derived evaluation. This is a generic cohomological tool, not a replacement of a geometric step of this unit."
+   },
+   {
+    "node": "lem-kun-site-rgamma-derived-limit",
+    "why": "Derived sections at any site object preserve the derived-limit triangle and its projections. This is a generic cohomological tool, not a replacement of a geometric step of this unit."
+   },
+   {
+    "node": "lem-pc-derived-limit-milnor-sequence",
+    "why": "The integer-degree Milnor exact sequence for the resulting abelian-group derived limit. This is a generic cohomological tool, not a replacement of a geometric step of this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-kun-site-rgamma-derived-limit",
+  "lem-pc-derived-limit-milnor-sequence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N9-1acbb5064",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-1acbb5064 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 19 cited statements, and the Stacks source sites-cohomology.tex at Tag 0BKY (l. 5246–5283), its Remark remark-discuss-derived-limit, and Tags 0D6K and 0BKV. The statement agrees with 0BKY hypothesis by hypothesis. It is unchanged from base and from live, where the item is unsplit with no proof. This is the first delivery, there is no repair note, and no new nodes are created. Steps: (1) the strict-tower R lim model gives p_n∘c=π_n[0]. (2) A nonnegative injective resolution is K-injective, which gives H^m(U,M[0]) for m≤0 and reconciles the hypothesis's H^p. (3) The RΓ-derived-limit node plus the integer-degree Milnor sequence, checked separately for m<0, m=0, m=1 and m≥2, give H^m(U,K)=0 for m≠0 and H^0(U,c) iso. (4) The site form of 0BKV through exact module sheafification is a genuinely three-line elementary step, and the existing nodes for ringed spaces and for qcqs schemes are not duplicates. (5) Local bijectivity on the basis B is used without assuming B is closed under fibre products. (6) Cohomology detection, then the H^p vanishing. Edge cases checked: B empty, a one-object site, a constant acyclic tower. Defect fixed (C4): Step 5 applies the abelian locally-bijective sheafification criterion to the module sheafification from Step 4 without citing def-weil-presheaf-modules-sheafification, which is the node saying the underlying abelian sheaf is the abelian sheafification. I added one sentence and the citation to Step 5's uses and to proof_deps in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-site-basis-inverse-limit-acyclic.json. Advisory: the strict-tower and Milnor nodes call the projection map only 'natural', and Steps 1 and 3 read it as the map induced by the limit projections, which is the evident meaning; a later stage-2 statement should pin it. Accepted tool_uses: the strict-tower homotopy limit, kun-site-rgamma-derived-limit and pc-derived-limit-milnor-sequence, all generic homological black boxes. prop-pur-kinjective-resolutions-exist is on the unit's route, and the two Mathlib leaves need no declaration. No SGA cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.BasisInverseLimitAcyclic",
+  "declaration": "CategoryTheory.site_basis_inverseLimit_acyclic",
+  "declarations": [
+   "CategoryTheory.basisTowerFirstDerivedLimit",
+   "CategoryTheory.basisModuleCohomology",
+   "CategoryTheory.basisInverseLimitComparison",
+   "CategoryTheory.site_basis_inverseLimit_acyclic"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Sites/BasisInverseLimitAcyclic.lean",
+  "statement": "theorem site_basis_inverseLimit_acyclic {C : Type c} [Category.{v} C] (J : GrothendieckTopology C) (O : Sheaf J CommRingCat.{max c v r}) [HasDerivedCategory.{w} (ringedSiteModules.{max c v r, max c v r, v, c} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj O))] [HasDerivedCategory.{wT} (ℕᵒᵖ ⥤ ringedSiteModules.{max c v r, max c v r, v, c} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj O))] [HasDerivedCategory.{wA} AddCommGrpCat.{max c v r}] (F : ℕᵒᵖ ⥤ ringedSiteModules.{max c v r, max c v r, v, c} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj O)) (B : Set C) (_hcover : ∀ X : C, ∃ (I : Type (max c v)) (U : I → C) (a : ∀ i, U i ⟶ X), Sieve.generate (Presieve.ofArrows U a) ∈ J X ∧ ∀ i, U i ∈ B) (_hacyclic : ∀ U ∈ B, ∀ (n p : ℕ), 0 < p → IsZero (basisModuleCohomology.{c, v, r, w, wA} J O U p (F.obj (op n)))) (_hlim : ∀ U ∈ B, IsZero (basisTowerFirstDerivedLimit (F ⋙ siteModuleSections.{c, v, r} J O U))) (RF : DerivedCategory.{wT} (ℕᵒᵖ ⥤ ringedSiteModules.{max c v r, max c v r, v, c} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj O)) ⥤ DerivedCategory.{w} (ringedSiteModules.{max c v r, max c v r, v, c} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj O))) (η : (lim : (ℕᵒᵖ ⥤ ringedSiteModules.{max c v r, max c v r, v, c} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj O)) ⥤ _).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RF) [RF.IsRightDerivedFunctor η (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ ringedSiteModules.{max c v r, max c v r, v, c} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj O)) (ComplexShape.up ℤ))] : ∃ (_hproduct : HasProduct (fun n : ℕ ↦ (DerivedCategory.singleFunctor _ 0).obj (F.obj (op n)))), IsIso (basisInverseLimitComparison F RF η) ∧ IsDerivedLimit (K := fun n : ℕ ↦ (DerivedCategory.singleFunctor (ringedSiteModules.{max c v r, max c v r, v, c} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj O)) 0).obj (F.obj (op n))) (fun n : ℕ ↦ (DerivedCategory.singleFunctor _ 0).map (F.map (homOfLE (Nat.le_succ n)).op)) (RF.obj ((DerivedCategory.singleFunctor _ 0).obj F)) ∧ (∀ U ∈ B, ∀ p : ℕ, 0 < p → IsZero (basisModuleCohomology.{c, v, r, w, wA} J O U p (limit F)))",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The comparison has literal source (lim F)[0], using Mathlib singleMapHomologicalComplex and the total-right-derived unit. The new definition node def-sfb-site-module-derived-sections owns the existing siteModuleSections and siteModuleDerivedSections abbreviations used by the cohomology wrappers. The RΓ/derived-limit theorem remains a proof dependency only; no theorem node is added to stmt_deps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2f9b1cfdb",
+  "group": "NC",
+  "result": "pass",
+  "note": "Re-delivery after RETURN of 90a09f1d5fc9 (H2). Lean module byte-identical to that head, whose mathematics the earlier review accepted clause by clause: module-sheaf H^p via RΓ(U,M[0]), R¹lim via lim.rightDerived 1, (lim F)[0]→RF(F[0]) comparison through singleMapHomologicalComplex and the IsRightDerivedFunctor unit, IsDerivedLimit, vanishing on B. stmt_deps now equal live plus only the new definition node def-sfb-site-module-derived-sections; the theorem dependency is removed. Statement verbatim equal to live. New node: Γ(U,-)/RΓ(U,-) per Stacks section-unbounded ex.(2); existing:true on RGammaDerivedLimit siteModuleDerivedSections and siteModuleSections; signature verbatim; cited ids = stmt_deps; the prop-pur-kinjective dependency is genuine (supplies the resolution instance); no other owner on live; landed module untouched. Report has Worker report and Second reading by NC. No file changed, so no compile."
+ }
+}

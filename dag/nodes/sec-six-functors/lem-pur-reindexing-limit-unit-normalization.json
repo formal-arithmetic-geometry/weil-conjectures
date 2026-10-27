@@ -1,0 +1,132 @@
+{
+ "id": "lem-pur-reindexing-limit-unit-normalization",
+ "kind": "statement",
+ "title": "Projection and quotient-unit normalization of strict-limit reindexing",
+ "statement": "For d,A,T,T prime,u as in lem-pur-completed-module-section-reindexing, let P be the ordinary completed-ring pullback and H its strict termwise action. There is an isomorphism beta: lim_T followed by P -> H followed by lim_Tprime whose component composed with every target projection equals P of the source projection. There is an isomorphism b: Rlim_T followed by d.pull u -> d.towerPull u followed by Rlim_Tprime. On a K-injective strict tower complex I it satisfies the comparison-unit equation: Pderived(eta_lim(I)); b(QI); Rlim_Tprime(factor_H(I)) equals factor_P(lim I); Q(beta_I); eta_lim(HI). For every derived K, ordinaryToCompleted(u,K) equals d.pull u applied to completionUnit(K), followed by b on the strict reduction tower of K. No completeness hypothesis is imposed here; invertibility of the completion unit is not asserted. The coefficient datum and the concrete canonical maps are those of [def-weil-pbc-adic-coefficient-datum] and [def-pur-completed-reindexing-data].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/derived.tex; literature/stacks-project/proetale.tex",
+  "place": "Stacks Tags 0A07 and 099N; extracted argument steps 3 and 5"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-strict-tower-operations",
+  "def-weil-pbc-cartesian-square",
+  "def-pur-completed-reindexing-data"
+ ],
+ "proof": [
+  {
+   "text": "The ordinary module equivalence and its strict termwise equivalence have exact reverse functors as left adjoints. Apply the exact-adjoint tower model construction (using a small model of the site when needed) and the strict derived-limit computation. The ordinary comparison is uniquely fixed by the projections; its image on K-injective resolutions defines the derived comparison and its inverse. The derived-pair unit formula is precisely the displayed equation.",
+   "uses": [
+    "lem-pur-completed-module-section-reindexing",
+    "lem-weil-pbc-exact-adjoint-tower-models",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On a constant tower, the ordinary limit comparison carries the constant-tower unit to the target constant-tower unit: at a tower resolution the two maps factor the identical compatible family of reindexed component maps through the target limit. Projection uniqueness proves their equality. Apply naturality of b to the strict quotient augmentation. By the definition of ordinaryToCompleted as constant-tower unit followed by the pulled augmentation, the resulting equality is the last asserted equation.",
+   "uses": [
+    "lem-pur-completed-module-section-reindexing",
+    "lem-weil-pbc-exact-adjoint-tower-models",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-completed-module-section-reindexing",
+  "lem-weil-pbc-exact-adjoint-tower-models",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-weil-pbc-completed-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/derived.tex",
+  "place": "agent-written specialization of the cited Stacks argument and extracted parent proof; preserves actual canonical normalization maps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "For an isomorphism of schemes, completed coefficient module pullback agrees with section reindexing and preserves derived inverse limits, quotient augmentation and adjunction base change mates",
+   "results": "Eight results give ordinary scheme module pullback and generic sheaf pullback constructions; none concerns the project completed pro-etale coefficient operations or their specified normalizations.",
+   "date": "2026-10-25",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "LeanFinder",
+   "query": "Inverse image of module sheaves under a site equivalence, preservation of derived inverse limit and compatibility of base change mates with derived functors",
+   "results": "ExactFunctor derived descent APIs are available; no theorem identifies these published completed-ring operations and their specified normalization maps in one specialization.",
+   "date": "2026-10-25",
+   "verdict": "not a one-line Mathlib specialization"
+  },
+  {
+   "tool": "Loogle",
+   "query": "CategoryTheory.Equivalence, CategoryTheory.Functor",
+   "results": "General equivalence infrastructure does not state the completed coefficient section and derived-unit normalization equations.",
+   "date": "2026-10-25",
+   "verdict": "not in Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*mate|pushforwardPushforwardEquivalence|limit\\.post",
+   "results": "Sheaf.PushforwardContinuous supplies the action-transport equivalence, and limit.post supplies the ordinary limit map. Neither states the comparison with the project tensor pullback, completed quotient augmentation or specified derived mates.",
+   "date": "2026-10-25",
+   "verdict": "generic ingredients only"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurCompletedReductionReindexing",
+  "group": "W2",
+  "date": "2026-10-25"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-weil-equivariance-compatibilities",
+   "place": "Stacks Tags 0A07 and 099N; extracted argument steps 3 and 5; constituent scheme-isomorphism normalization",
+   "via": [
+    "lem-pur-isomorphism-completed-reduction-reindexing",
+    "lem-pur-weil-semilinear-exchange-reindexing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurReindexingLimitNormalization",
+  "file": "lean/Sheaf/Paper/PurReindexingLimitNormalization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.purReindexingLimitNormalization",
+  "statement": "theorem purReindexingLimitNormalization {T' T : Scheme.{t}} (u : T' ⟶ T) [IsIso u] : (∃ beta : completedTowerLimit T (d.completedRing T) ⋙ proEtaleRingModulePullback u (d.completedRing T) (d.completedRing T') (d.integralRingIso u) ≅ d.towerModulePull u ⋙ completedTowerLimit T' (d.completedRing T'), (∀ (C : d.towers T) (n : ℕᵒᵖ), beta.hom.app C ≫ limit.π ((d.towerModulePull u).obj C) n = (proEtaleRingModulePullback u (d.completedRing T) (d.completedRing T') (d.integralRingIso u)).map (limit.π C n)) ∧ ∃ b : completedRlim T (d.completedRing T) ⋙ d.pull u ≅ d.towerPull u ⋙ completedRlim T' (d.completedRing T'), (∀ I : CochainComplex (d.towers T) ℤ, I.IsKInjective → (d.pull u).map ((completedTowerLimit T (d.completedRing T)).rightDerivedFunctorUnitQ I) ≫ b.hom.app (DerivedCategory.Q.obj I) ≫ (completedRlim T' (d.completedRing T')).map ((d.towerModulePull u).mapDerivedCategoryFactors.hom.app I) = (proEtaleRingModulePullback u (d.completedRing T) (d.completedRing T') (d.integralRingIso u)).mapDerivedCategoryFactors.hom.app (((completedTowerLimit T (d.completedRing T)).mapHomologicalComplex (.up ℤ)).obj I) ≫ DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex beta.hom (.up ℤ)).app I) ≫ (completedTowerLimit T' (d.completedRing T')).rightDerivedFunctorUnitQ (((d.towerModulePull u).mapHomologicalComplex (.up ℤ)).obj I)) ∧ (∀ K : d.derived T, d.ordinaryToCompleted u K = (d.pull u).map (d.completionUnit T K) ≫ b.hom.app ((completedReductionTower T d).obj K)))",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6471a",
+  "group": "W2",
+  "result": "fix",
+  "landing": "20261025T203551-L-2828711",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6471a",
+  "group": "W2",
+  "result": "fix",
+  "landing": "20261025T203551-L-2828711",
+  "kind": "interface",
+  "note": "independent cc review: delivered item proof + 4 split statements + relocated Data defs against the clone's old item module, the CompletedPullback/CompletedPullbackInterface definitions, the node JSONs and the 3 direct importers (all compiled against the delivered modules)"
+ }
+}

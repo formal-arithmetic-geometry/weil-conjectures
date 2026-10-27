@@ -1,0 +1,297 @@
+{
+ "id": "lem-sfb-dm-finite-inertia-affine-relation",
+ "kind": "statement",
+ "title": "Separated scheme self-relations of affine charts of finite-inertia DM stacks",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention]. Stacks in groupoids, Deligne--Mumford stacks, representability by algebraic spaces and $2$-fibre products use [def-sfb-stable-pointed-moduli-groupoids, def-trf-algebraic-space]. Properties of representable maps are tested after scheme base change on etale scheme charts. For a groupoid in schemes, use the laws of [def-a1-groupoid-scheme]; for algebraic spaces use the same laws on all test-scheme points. Write $[V/R]$ for the fppf stackification of the groupoid of $V(T)$-objects and $R(T)$-arrows [def-pc-fppf-site, lem-sfb-groupoid-stackification-local-description]. Let $\\mathcal X/S$ be Deligne--Mumford. Its inertia has objects $(x,\\alpha)$ with $x\\in\\mathcal X(T)$ and $\\alpha\\in\\operatorname{Aut}(x)$, arrows given by conjugation, and projection $(x,\\alpha)\\mapsto x$. Suppose this projection is finite: every scheme base change is represented by a finite scheme morphism [def-weil-finite-integral-morphism]. Let $V$ be an affine $S$-scheme and $a:V\\to\\mathcal X$ a representable etale morphism, not necessarily surjective [def-weil-etale-morphism]. Then $R=V\\times_{\\mathcal X}V$ is represented by a scheme, and the source and target projections $s,t:R\\to V$ are separated and etale, hence flat, locally of finite presentation and locally quasi-finite [def-weil-flat-morphism, def-sbc-locally-finite-presentation, pqf-def-quasifinite]. Separated here means closed-immersion diagonal on scheme tests [def-weil-closed-immersion]. The isomorphism triples $(v,w,\\alpha:a(v)\\xrightarrow{\\sim}a(w))$ give its scheme groupoid structure. The stabilizer scheme $G=R\\times_{V\\times_S V,\\Delta_V}V$ is finite over $V$; for every point $v\\in V$, $G_v$ represents the automorphisms of the object $a(v)$ over its residue field. The image of $|V|\\to|\\mathcal X|$ is the point space of an open substack $\\mathcal W\\subseteq\\mathcal X$, and the canonical functor $[V/R]\\to\\mathcal X$ identifies $[V/R]$ with $\\mathcal W$. In particular $[V/R]$ is Deligne--Mumford and this functor is a representable open immersion, hence etale. Here $|\\mathcal X|$ means field-valued objects modulo isomorphism after common field extension, with topology detected by a scheme atlas. An open substack is a strictly full substack whose scheme base changes are open subschemes; affine means isomorphic to the spectrum of a commutative ring. A stabilizer fibre is the scheme fibre over $\\operatorname{Spec}\\kappa(v)$ [def-weil-residue-field, def-pc-fibre-product].",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 0CL0 (lemma-diagonal-diagonal), part (1); Tag 0DU4 (lemma-etale-local-quasi-DM-at-x), first paragraph, referring to the first part of 0DU3 (lemma-etale-local-quasi-DM), specialized to an etale chart; spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme); algebraic.tex Tags 04T4 (lemma-map-space-into-stack), 04WY (remark-flat-fp-presentation). Stabilizers are the pullback of inertia."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-a1-groupoid-scheme",
+  "def-pc-fppf-site",
+  "lem-sfb-groupoid-stackification-local-description",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "pqf-def-quasifinite",
+  "def-weil-closed-immersion",
+  "def-weil-residue-field",
+  "def-pc-fibre-product",
+  "def-sfb-moduli-inertia",
+  "def-sfb-finite-stack-scheme-tests",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-sfb-open-moduli-substack",
+  "def-sfb-scheme-groupoid-quotient-presentation"
+ ],
+ "proof": [
+  {
+   "text": "The DM stack $\\mathcal X$ has diagonal representable by algebraic spaces and a surjective etale scheme atlas; etale representable maps are smooth by [lem-sfb-stack-chartwise-smooth-etale-calculus], so [lem-sfb-etale-smooth-atlas-fppf-descent] makes $\\mathcal X$ an fppf stack, hence an algebraic stack. Apply [lem-sfb-self-relation-quotient-embedding] to $a:V\\to\\mathcal X$. It gives the algebraic space $R$, its groupoid operations on isomorphism triples, and the canonical fully faithful functor $i:[V/R]\\to\\mathcal X$. Both projections are base changes of $a$, hence etale by [lem-sfb-dm-etale-atlas-calculus]. Here $V$ is a scheme, thus a DM stack via its identity atlas; no surjectivity of $a$ is used.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-etale-smooth-atlas-fppf-descent",
+    "lem-sfb-self-relation-quotient-embedding",
+    "lem-sfb-dm-etale-atlas-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04T4 (lemma-map-space-into-stack); stacks-morphisms.tex Tag 0CIN (lemma-base-change-etale); criteria.tex Tag 076V (lemma-stacks-etale)."
+   }
+  },
+  {
+   "text": "The absolute structure map $V\\to\\operatorname{Spec}\\mathbf Z$ is separated by [lem-weil-pbc-affine-source-morphism-separated], so its diagonal is a closed immersion. By [lem-weil-pbc-closed-immersion-proper] that diagonal is proper. Thus $V$ is absolutely separated in the stack sense. Apply [lem-sfb-stack-separated-source-separated-inertia-target] to $a$, with source $V$ and target $\\mathcal X$: the source hypothesis was just verified and finite inertia is assumed. It follows that $\\Delta_a$ is proper. The criterion [lem-sfb-representable-stack-diagonal-criterion] applies because $a$ is representable and converts this into closed-immersion scheme tests of $\\Delta_a$.",
+   "uses": [
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-sfb-stack-separated-source-separated-inertia-target",
+    "lem-sfb-representable-stack-diagonal-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 050M (lemma-compose-after-separated), part (3), with Tag 0CL0 (lemma-diagonal-diagonal), part (1), and Tag 04YS (lemma-representable-separated-diagonal-closed); scheme inputs Tags 01KN, 01KV, 01W5."
+   }
+  },
+  {
+   "text": "For either projection $r:R\\to V$, [lem-sfb-groupoid-diagonal-two-pullback-identities](1) identifies its diagonal with the base change of $\\Delta_a$. Every scheme test of that diagonal is consequently a scheme test of $\\Delta_a$ and is a closed immersion by step 2. Thus $s,t$ are separated algebraic-space maps. Apply [lem-a1-separated-etale-space-scheme] to $s:R\\to V$, whose separatedness and etaleness are now proved: $R$ is a scheme and $s$ is etale. The other projection remains etale on its scheme charts, including the identity chart of $R$, so is etale as a scheme map. Etaleness includes flatness and local finite presentation by [def-weil-etale-morphism]. Finally [lem-a1-etale-space-locally-quasi-finite] applied to each projection, and the identity chart of $R$, gives scheme local quasi-finiteness.",
+   "uses": [
+    "lem-sfb-groupoid-diagonal-two-pullback-identities",
+    "lem-a1-separated-etale-space-scheme",
+    "def-weil-etale-morphism",
+    "lem-a1-etale-space-locally-quasi-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DU3 (lemma-etale-local-quasi-DM), first paragraph; spaces-morphisms.tex Tags 03XU and 03XX."
+   }
+  },
+  {
+   "text": "On a test scheme $T\\to V$, a section of $G=R\\times_{V\\times_SV,\\Delta_V}V$ is precisely an arrow $(v,v,\\alpha)$, namely an automorphism $\\alpha$ of $a(v)$. Likewise $V\\times_{\\mathcal X}I_{\\mathcal X}$ has triples $(v,(x,\\beta),\\theta:a(v)\\simeq x)$; conjugation sends this to $(v,\\theta^{-1}\\beta\\theta)$, with inverse $(v,\\alpha)\\mapsto(v,(a(v),\\alpha),1)$. Arrows between such triples are uniquely the comparisons required by this formula. These inverse equivalences commute with pullback, identifying $G\\to V$ with the scheme base change of inertia. It is finite by the hypothesis itself. Base changing this same description by $\\operatorname{Spec}\\kappa(v)\\to V$ shows that $G_v$ represents automorphisms of the residue-field object $a(v)$, on all schemes over $\\kappa(v)$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 050Q (lemma-inertia), and the inertia pullback in the proof of Tag 0CL0."
+   }
+  },
+  {
+   "text": "By [lem-sfb-stack-chartwise-smooth-etale-calculus], $a$ is flat and locally of finite presentation. Therefore [lem-sfb-stack-point-topology-flat-lfp-open] makes $|a|$ open. Its image $O$ is open, and [lem-sfb-stack-topology-open-substacks] supplies the strictly full open substack $\\mathcal W$ with point space $O$. The map $a$ factors through $\\mathcal W$: its pullback open in $V$ corresponds to the full subset $|V|$, so is all of $V$. The factored map is representable etale by base change, using [lem-sfb-dm-etale-atlas-calculus]. It is surjective in the field-extension sense: every field object of $\\mathcal W$ has point in $O$, hence becomes isomorphic to an image from $V$ over a common field extension. The definition [def-sfb-stable-pointed-moduli-groupoids] now gives $\\mathcal W$ a surjective etale scheme atlas $V$; its diagonal is representable since it is a full substack of $\\mathcal X$. Thus $\\mathcal W$ is DM. In particular it is algebraic: etale maps are smooth by the chartwise calculus, and [lem-sfb-etale-smooth-atlas-fppf-descent] makes $\\mathcal W$ an fppf stack.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-stack-point-topology-flat-lfp-open",
+    "lem-sfb-stack-topology-open-substacks",
+    "lem-sfb-dm-etale-atlas-calculus",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-etale-smooth-atlas-fppf-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tags 04XL (lemma-topology-points), 06FJ (lemma-open-substacks); stacks-morphisms.tex Tag 0DU3, open-image reduction."
+   }
+  },
+  {
+   "text": "Since $\\mathcal W\\subseteq\\mathcal X$ is strictly full, the self-relation $V\\times_{\\mathcal W}V$ has exactly the same isomorphism triples and operations as $R=V\\times_{\\mathcal X}V$. The representable surjective etale map $V\\to\\mathcal W$ is flat and locally of finite presentation, so [lem-sfb-fppf-groupoid-stack-presentations](2) gives the canonical equivalence $[V/R]\\simeq\\mathcal W$, compatible with the map from $V$. Its composite with the inclusion is the canonical $i$ of step 1: both functors send a local arrow triple to its specified isomorphism in $\\mathcal X$, and stack descent glues these identifications. Consequently $[V/R]$ is DM and $i$ is a representable open immersion. Each scheme base change of $i$ is an open immersion, hence etale by [lem-weil-pbc-open-immersion-etale].",
+   "uses": [
+    "lem-sfb-fppf-groupoid-stack-presentations",
+    "lem-weil-pbc-open-immersion-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04WY (remark-flat-fp-presentation), Tag 04T4 (lemma-map-space-into-stack); morphisms.tex Tag 02GP (lemma-open-immersion-etale)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-etale-smooth-atlas-fppf-descent",
+  "lem-sfb-self-relation-quotient-embedding",
+  "lem-sfb-dm-etale-atlas-calculus",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-sfb-stack-separated-source-separated-inertia-target",
+  "lem-sfb-representable-stack-diagonal-criterion",
+  "lem-sfb-groupoid-diagonal-two-pullback-identities",
+  "lem-a1-separated-etale-space-scheme",
+  "def-weil-etale-morphism",
+  "lem-a1-etale-space-locally-quasi-finite",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-stack-point-topology-flat-lfp-open",
+  "lem-sfb-stack-topology-open-substacks",
+  "lem-sfb-fppf-groupoid-stack-presentations",
+  "lem-weil-pbc-open-immersion-etale"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 0DU3 (lemma-etale-local-quasi-DM), first paragraph, and Tag 0DU4 (lemma-etale-local-quasi-DM-at-x), reducing an affine chart to a separated scheme self-relation; scheme-chart separatedness via Tag 050M (3)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a Deligne Mumford stack with finite inertia and an affine etale chart U the relation U times X U is a separated scheme with etale projections and finite stabilizers",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsSeparated fun X x x_1 x_2 => X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsFinite @AlgebraicGeometry.IsSeparated\", \"doc\": \"The composition of a finite morphism with a separated morphism is finite.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X], X.IsSeparated\", \"doc\": \"Every affine scheme is separated.\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsAffineHomIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsAffineHom @AlgebraicGeometry.IsSeparated\", \"doc\": \"If $ f: Y \\\\to Z $ is an affine morphism of schemes and $ g: X \\\\to Y $ is a separated morphism of schemes, then the composition $ f \\\\circ g: X \\\\to Z $ is also an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is separated.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etaleness/separation, ordinary subgroupoids, ring etale loci and topological stabilizers do not assert this algebraic-stack or scheme-groupoid result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite inertia implies separated diagonal and separated etale scheme relation of an affine chart of a Deligne Mumford stack",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsSeparated fun X x x_1 x_2 => X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X], X.IsSeparated\", \"doc\": \"Every affine scheme is separated.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is separated.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.isSeparated_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSeparated f ↔\\n    autoParam (AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal._autoParam\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, $ f $ is separated if and only if the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.of_isAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [h : AlgebraicGeometry.IsAffineHom f], AlgebraicGeometry.IsSeparated f\", \"doc\": \"Any affine morphism $ f: X \\\\to Y $ of schemes is automatically a separated morphism.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etaleness/separation, ordinary subgroupoids, ring etale loci and topological stabilizers do not assert this algebraic-stack or scheme-groupoid result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\", \"IsSeparated\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etaleness/separation, ordinary subgroupoids, ring etale loci and topological stabilizers do not assert this algebraic-stack or scheme-groupoid result"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.inertia|separated.*diagonal.*stack|stack.*etale.*relation",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etaleness/separation, ordinary subgroupoids, ring etale loci and topological stabilizers do not assert this algebraic-stack or scheme-groupoid result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine etale chart of a finite inertia Deligne Mumford stack has a separated scheme self relation",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.of_isAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[h : IsAffineHom f] : IsSeparated f\", \"doc\": \"Any affine morphism $ f: X \\\\to Y $ of schemes is automatically a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{X : Scheme.{u}} : X.IsSeparated ↔ IsClosedImmersion (prod.lift (𝟙 X) (𝟙 X))\", \"doc\": \"For any scheme $X$, $X$ is separated if and only if the diagonal morphism $\\\\Delta: X \\\\to X \\\\times X$ defined by $\\\\Delta = \\\\text{prod.lift}(\\\\text{id}_X, \\\\text{id}_X)$ is a closed immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{X : Scheme.{u}} [IsAffine X] : X.IsSeparated\", \"doc\": \"Every affine scheme is separated.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is separated.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": HasAffineProperty @IsSeparated fun X _ _ _ ↦ X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.isSeparated_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSeparated f ↔\\n    autoParam (AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal._autoParam\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, $ f $ is separated if and only if the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[X.IsSeparated] : IsSeparated f\", \"doc\": \"A scheme $ X $ is separated if it satisfies the condition $ X.\\\\text{IsSeparated} $, which asserts that the diagonal morphism $ X \\\\to X \\\\times X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": @IsSeparated = MorphismProperty.diagonal @IsClosedImmersion\", \"doc\": \"A morphism of schemes is separated if and only if its diagonal morphism is a closed immersion.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etaleness/separation, ordinary subgroupoids, ring etale loci and topological stabilizers do not assert this algebraic-stack or scheme-groupoid result"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.inertia|Deligne.Mumford|self.relation.*stack",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits concern scheme maps or unrelated ordinary categories, not algebraic-stack self-relations or their quotient open images"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The quotient stack of an affine etale chart by its self relation is its open image in an algebraic stack",
+   "results": "OK 8 hits: AlgebraicGeometry.IsOpenImmersion.affineOpensEquiv_apply_coe_coe, AlgebraicGeometry.IsOpenImmersion.affineOpensEquiv, AlgebraicGeometry.isOpenImmersion_eq_inf, AlgebraicGeometry.Scheme.RationalMap, instTopologicalSpaceQuotient, AlgebraicGeometry.affineOpensRestrict, AlgebraicGeometry.IsAffineOpen, AlgebraicGeometry.IsOpenImmersion.iff_stalk_iso",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits concern scheme maps or unrelated ordinary categories, not algebraic-stack self-relations or their quotient open images"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\", \"IsSeparated\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits concern scheme maps or unrelated ordinary categories, not algebraic-stack self-relations or their quotient open images"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Deligne Mumford stack with finite inertia has a scheme self relation for an affine etale chart",
+   "results": "OK 8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.instFullEtaleOverForget, AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits concern scheme maps or unrelated ordinary categories, not algebraic-stack self-relations or their quotient open images"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a representable etale map from an affine scheme to a stack with finite automorphism inertia the Cech groupoid is a scheme and its quotient is an open substack",
+   "results": "OK 8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.smallEtalePretopology",
+   "date": "2026-10-23",
+   "verdict": "no match: affine transition-limit constructions and scheme etale-site definitions do not assert the stack relation or quotient theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dm-pointed-finite-groupoid-neighbourhood",
+  "date": "2026-10-23",
+  "group": "NC"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Coarse-morphism input to the finite inertia-free cover argument, before composing with the finite cover. Finite-inertia categorical quotient used before deriving finite type and discrete fibres. Keel--Mori construction: Stabilizer-preserving etale local finite flat affine covers. Supporting input: Pointed finite-groupoid etale neighbourhoods of finite-inertia DM stacks. Substep: The initial affine etale chart and its separated scheme self-relation, before applying the groupoid splitting theorem in Tag 0DU4.",
+   "via": [
+    "lem-sfb-dm-pointed-finite-groupoid-neighbourhood",
+    "lem-sfb-finite-inertia-local-affine-covers",
+    "lem-sfb-keel-mori-finite-inertia-quotient",
+    "lem-sfb-dm-coarse-proper-locally-quasifinite",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-dm-finite-inertia-affine-relation",
+  "worker": "stage1",
+  "summary": "Six-step source-based assembly using existing DAG nodes only. Verified the nonsurjective chart, arbitrary base, absolute separatedness, inertia pullback and open-image quotient. No statement change and no Lean attachment.",
+  "blueprint": "Nearest ancestor is null as reported by blueprint_refs.py. The inherited from.place locates the alteration/moduli prerequisite of det-thm-sf-ctf-stability-direct-images (3); this split realizes the initial affine etale chart/self-relation substep of 0DU3/0DU4 before groupoid splitting.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-separated-etale-space-scheme",
+    "why": "Separated etale algebraic spaces over a scheme are schemes, with no quasi-compactness; this generic schemehood tool supplies the 03XX step of the prescribed local-groupoid argument."
+   },
+   {
+    "node": "lem-a1-etale-space-locally-quasi-finite",
+    "why": "Etale algebraic spaces over schemes are locally quasi-finite on charts; this generic morphism-property input supplies the projection clause of the same local-groupoid argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-separated-etale-space-scheme",
+  "lem-a1-etale-space-locally-quasi-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q140-015326638",
+  "group": "Q140",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q140-015326638 (reviewer sub-agent of L); spot-checked: I read all six proof steps and every cited node statement, and checked them against Stacks 0DU3/0DU4 (stacks-morphisms.tex l.7145-7240). The statement and stmt_deps are unchanged from side-live, where the item is unsplit with an empty proof; there are no new nodes and no re-split note. Route: R = V x_X V by 04T4. Delta_a is proper via the existing 050M(3)/0CL0 node, using that V is absolutely separated and X has finite inertia (no hypothesis on S), and 04YS turns this into a closed immersion. The diagonal of s is a base change of Delta_a (two-pullback identity (1)), so 03XX makes R a scheme. Stabilizer G = V x_X I_X is checked by an explicit test-object computation. The open image W comes from 04XL/06FJ, then [V/R] = W by 04WY(2). Edge cases checked: empty V, open-immersion chart, finite etale chart of BG, nonseparated S. One C1-type fault, fixed: a DM stack here is only an etale stack, but steps 1 and 5 used it as an algebraic (fppf) stack without a node. This is needed for the 04T4 node and the stackification universal property. Fix: steps 1 and 5 now cite the existing lem-sfb-etale-smooth-atlas-fppf-descent (076V) together with the chartwise smooth-etale calculus, and proof_deps is updated. Duplicate search found nothing that states the item: finite-inertia-flat-quasifinite-presentation is over a field and is an existence statement. Accepted tool_uses: a1 separated-etale-space-scheme (03XX) and etale-space-lqf (03XU). Batch-5: all ten flagged citations reach sec-trace-formula only through def-trf-algebraic-space, def-trf-projective-bundle-morphism and generic lem-trf algebraic-space/descent lemmas. The full closure contains no trace-formula or Poincare-duality theorem, so this is accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DmFiniteInertiaAffineRelation",
+  "declaration": "CategoryTheory.dm_finite_inertia_affine_relation",
+  "file": "lean/Sheaf/AlgebraicGeometry/DmFiniteInertiaAffineRelation.lean",
+  "statement": "theorem dm_finite_inertia_affine_relation {S : Scheme.{u}} (X : BasedCategory.{v, w} (Over S)) (hX : IsDeligneMumfordModuliStack X) (hfinite : IsRepresentableFiniteModuliMap (moduliInertiaProjection X)) (V : Over S) [IsAffine V.left] (a : BasedFunctor (discreteModuli (yoneda.obj V)) X) (ha : IsRepresentableByAlgebraicSpaces a) (het : IsEtaleModuliMap a) : ∃ (R : Over S) (s t : R ⟶ V) (e : V.left ⟶ R.left) (i : R.left ⟶ R.left) (c : pullback s.left t.left ⟶ R.left), IsGroupoidScheme s.left t.left e i c ∧ (IsSeparated s.left ∧ Etale s.left ∧ Flat s.left ∧ LocallyOfFinitePresentation s.left ∧ Scheme.Hom.IsLocallyQuasiFinite s.left) ∧ (IsSeparated t.left ∧ Etale t.left ∧ Flat t.left ∧ LocallyOfFinitePresentation t.left ∧ Scheme.Hom.IsLocallyQuasiFinite t.left) ∧ (∃ E : BasedFunctor (discreteModuli (yoneda.obj R)) (moduliTwoFiberProduct a a), E.toFunctor.IsEquivalence ∧ Nonempty (ModuliTwoIso (E.comp (moduliTwoFiberFst a a)) (discreteModuliMap (yoneda.map s))) ∧ Nonempty (ModuliTwoIso (E.comp (moduliTwoFiberSnd a a)) (discreteModuliMap (yoneda.map t)))) ∧ IsFinite (pullback.snd (prod.lift s t) (prod.lift (𝟙 V) (𝟙 V))).left ∧ (∀ v₀ : V.left, ∀ r : Over.mk (V.left.fromSpecResidueField v₀ ≫ V.hom) ⟶ V, r.left = V.left.fromSpecResidueField v₀ → ∃ E : BasedFunctor (discreteModuli (yoneda.obj (pullback (pullback.snd (prod.lift s t) (prod.lift (𝟙 V) (𝟙 V))) r))) (moduliTwoFiberProduct ((discreteModuliMap (yoneda.map r)).comp a) (moduliInertiaProjection X)), IsSchemeModuliBaseChange E (pullback.snd (pullback.snd (prod.lift s t) (prod.lift (𝟙 V) (𝟙 V))) r)) ∧ ∃ (W : OpenModuliSubstack X) (b : BasedFunctor (discreteModuli (yoneda.obj V)) W.category), b.comp (fullModuliInclusion X W.property) = a ∧ Nonempty (SchemeGroupoidQuotientPresentation s t e i c W.category b) ∧ Set.range (moduliPointMap (fullModuliInclusion X W.property)) = Set.range (moduliPointMap a) ∧ ModuliPointIsClosed X (Set.range (moduliPointMap a))ᶜ ∧ IsDeligneMumfordModuliStack W.category ∧ ModuliSchemeTest @IsOpenImmersion (fullModuliInclusion X W.property) ∧ IsEtaleModuliMap (fullModuliInclusion X W.property)",
+  "branch": "sheaf-dag",
+  "by": "Q37",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The open image W has the existing SchemeGroupoidQuotientPresentation, characterizing the fppf stackification including original arrows and composition; its full inclusion is the canonical quotient map. Stabilizers and residue-field fibres are actual scheme pullbacks in Over S. Added only landed definition dependencies. Reviewer FIX (stage-2 second reader): the point-image clauses now use only definition-node declarations: Set.range (moduliPointMap (fullModuliInclusion X W.property)) = Set.range (moduliPointMap a) and ModuliPointIsClosed X (Set.range (moduliPointMap a))ᶜ (def-sfb-dm-stack-morphism-properties), replacing OpenModuliSubstack.pointImage, moduliSchemePointMap and the moduliPointTopologicalSpace instance, which are owned by the theorem nodes lem-sfb-stack-topology-open-substacks and lem-sfb-stack-point-topology-flat-lfp-open; those modules are now plain proof imports and OpenModuliSubstack is publicly imported from its def node.",
+  "fixed_by": "NT-stage2-cc-a355ca510"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a355ca510",
+  "group": "Q37",
+  "result": "fix",
+  "note": "All node clauses rendered faithfully: arbitrary S; DM stack X; finite inertia via IsRepresentableFiniteModuliMap; affine representable etale chart, not surjective; R a scheme with both projections fixed and separated/etale/flat/lfp/lqf; groupoid tied to isomorphism triples via SchemeGroupoidQuotientPresentation (composition conventions agree with IsGroupoidScheme); G->V finite; residue-field fibre represents Aut(a(v)); open W with [V/R]=W, DM, open immersion, etale. Edge cases (empty V/X, nontrivial stabilizers, non-separated S) covered. Fault fixed: the point-image clauses used theorem-node-owned OpenModuliSubstack.pointImage, moduliSchemePointMap and the moduliPointTopologicalSpace instance (lem-sfb-stack-topology-open-substacks, lem-sfb-stack-point-topology-flat-lfp-open), which are not stmt_deps. Restated with def-node moduliPointMap ranges and ModuliPointIsClosed of the complement; theorem modules demoted to plain imports; public import of OpenModuliSubstack added. Fixed module compiled clean with nt_compile --json (10.4 s); lean-record fix holds the verbatim new statement and passes refit_record."
+ }
+}

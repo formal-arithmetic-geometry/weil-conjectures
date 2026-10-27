@@ -1,0 +1,125 @@
+{
+ "id": "lem-pur-coordinate-tower-compact-transpose",
+ "kind": "statement",
+ "title": "Compact transpose of an arbitrary zero-section arrow",
+ "statement": "Fix $P,n,B$ as in [def-pur-coordinate-tower-normalization-data], $r\\geq0$, and any morphism $t:A_B\\to Rz_r^!W_r$. Let $C(t):z_{r*}A_B\\to W_r$ be its closed adjunct using the canonical proper comparison, $a_r:Rp_{r!}W_r\\to A_B$ the adjunct of the actual projection comparison, and $\\sigma_r:Rp_{r!}z_{r*}A_B\\simeq A_B$ the identity-normalized compact source identification. For the actual ordered normalization $b_r$ one has $$a_r\\,Rp_{r!}(C(t))=(b_rt)\\,\\sigma_r.$$ No local evaluation identity, orientation, or invertibility of $t$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+  "place": "Final paragraph: the specified composite affine-line adjunction and exceptional pullback of its comparison; normalization-induction proof Steps 2--8."
+ },
+ "stmt_deps": [
+  "def-pur-coordinate-tower-normalization-data",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-adjunction-conjugate",
+  "thm-sf-comp-composition"
+ ],
+ "proof": [
+  {
+   "text": "expand augmentation and the inverse exceptional Hom equivalence as the\ncompact direct image of the arrow followed by the exceptional counit. Replace\nthe proper direct-image identification by its canonical inverse. Naturality of\nthe closed counit moves the supplied arrow to the right. The composite counit\nformula and the defining transpose of compositionInverse then replace the two\ncounits by the counit of p_r z_r. Equality transport p_r z_r=id and the canonical\ncompact identity comparison give sourceIdentification. What remains on the\nright is the supplied arrow followed by normalization. At r=0 unfold the\nidentity versions projectionGammaRaw and normalizationRaw; their identityUnit\nfactors cancel. No evaluation identity or orientation is used, and the arrow\nneed not be invertible. This also covers the empty base.",
+   "uses": [
+    "def-pur-coordinate-tower-normalization-data",
+    "def-weil-pbc-composite-adjunction",
+    "def-weil-pbc-adjunction-conjugate",
+    "thm-sf-comp-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "Final paragraph: the specified composite affine-line adjunction and exceptional pullback of its comparison; normalization-induction proof Steps 2--8."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-coordinate-tower-normalization-data",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-adjunction-conjugate",
+  "thm-sf-comp-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+  "place": "Final paragraph: the specified composite affine-line adjunction and exceptional pullback of its comparison; normalization-induction proof Steps 2--8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Transposing a pair of morphisms under composite adjunctions relates their composite to the pasted counit",
+   "results": "CategoryTheory.Adjunction.comp_counit_app and comp_unit_app; generic formulas.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; generic categorical tools are used in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composite adjunction counit and naturality transpose a section class followed by a projection comparison",
+   "results": "CategoryTheory.Adjunction.comp_counit_app and conjugateEquiv_counit; generic formulas.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; generic categorical tools are used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv|comp_counit_app|mateEquiv_hcomp",
+   "results": "Generic mate-pasting and composite-counit formulas; no proper section comparison.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; generic categorical tools are used in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoordinateTowerNormalizationInduction",
+  "group": "K6",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-affine-space-zero-section-purity",
+   "place": "Final paragraph: the specified composite affine-line adjunction and exceptional pullback of its comparison; normalization-induction proof Steps 2--8.",
+   "via": [
+    "lem-pur-coordinate-tower-normalization-induction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoordinateTowerCompactTranspose",
+  "file": "lean/Sheaf/Paper/CoordinateTowerCompactTranspose.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CoordinateTowerNormalization.compact_transpose",
+  "statement": "theorem compact_transpose\n    (P : PurityFiniteSetting.{u}) (n : ℕ) (B : Scheme.{u})\n    (aB : B ⟶ Spec (.of P.field.k))\n    [LocallyOfFiniteType aB] [QuasiCompact aB] [IsSeparated aB] (r : ℕ)\n    (t : ThetaHom P n B r) :\n    letI : IsNoetherian (iteratedAffineLine B r) :=\n      tower_noetherian (setting P n) B aB r\n    (rightDerivedLowerShriek (ModuleCat.{u + 1} (setting P n).Coefficient)\n      (iteratedAffineLineProj B r)).map\n        ((rightDerivedLowerShriekIsoRightDerivedFunctorLowerStar\n          (ModuleCat.{u + 1} (setting P n).Coefficient) (zero B r)).inv.app\n            (coefficientUnit P n B) ≫\n          (rightDerivedUpperShriekHomEquiv (zero B r) (unit_origin P n B)\n            (target_plus P n _ (towerBase aB r) r)).symm t) ≫\n      augmentation P n B aB r =\n        (sourceIdentification P n B aB r).hom ≫ (t ≫ normalization P n B aB r)",
+  "branch": "sheaf-dag",
+  "by": "K6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-9e440",
+  "group": "K6",
+  "result": "fix",
+  "landing": "20261026T001939-L-44426",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-9e440",
+  "group": "K6",
+  "result": "fix",
+  "landing": "20261026T001939-L-44426",
+  "kind": "interface",
+  "note": "independent cc review: delivered Lean/node files vs reviewed head 728195 (byte-identical) and clone 509a6c5b (item untouched since af5def4); Data module vs published item (verbatim move); item theorem signature (identical); importer CoordinateSectionArrows compiled against published and against the delivery (same 4 pre-existing errors)"
+ }
+}

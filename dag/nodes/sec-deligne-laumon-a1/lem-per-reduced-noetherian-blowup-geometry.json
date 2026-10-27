@@ -1,0 +1,279 @@
+{
+ "id": "lem-per-reduced-noetherian-blowup-geometry",
+ "kind": "statement",
+ "title": "Reducedness and finite type of a Noetherian blowup",
+ "statement": "Let $X$ be a reduced Noetherian scheme [def-pc-reduced-scheme, pqf-def-locnoeth], where Noetherian means that $X$ admits a finite affine cover by spectra of Noetherian rings [def-weil-pbc-noetherian-ring]. Let $J\\subseteq\\mathcal O_X$ be a coherent quasi-coherent ideal [pqf-def-coherent]. The ordinary blowup $b:W=\\operatorname{Bl}_J(X)\\to X$ [def-nagata-global-blowup] is of finite type [def-weil-finite-type-morphism], and $W$ is reduced and Noetherian in the same convention. No integrality, nowhere-density, excellence, dimension bound or ground field is assumed. The zero ideal, unit ideal, and empty scheme are allowed.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tags 0808, lemma-blow-up-reduced-scheme, and 02NS, lemma-blowing-up-projective; the finite-type and Noetherian consequences are included, using finite standard affine blowup charts."
+ },
+ "stmt_deps": [
+  "def-pc-reduced-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-noetherian-ring",
+  "pqf-def-coherent",
+  "def-nagata-global-blowup",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Coherence of $J$ implies that it is of finite type, by the definition of coherence. Apply the properness theorem for the blowup of a finite-type quasi-coherent ideal to $J$. It gives that $b$ is proper; since being of finite type is one of the defining conditions of properness, $b$ is of finite type. No condition on the support of $J$ occurs in that theorem.",
+   "uses": [
+    "pqf-def-coherent",
+    "lemma-nagata-blowup-proper",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02NS, lemma-blowing-up-projective; properness supplied by the cited blowup node"
+   }
+  },
+  {
+   "text": "The given finite affine cover by spectra of Noetherian rings makes $X$ locally Noetherian. Each member is quasi-compact by the affine-scheme quasi-compactness theorem; restricting an open cover to these finitely many members and taking the union of their finite subcovers shows that $X$ is quasi-compact. Thus the Noetherian convention in the finite-type permanence theorem applies. With $f=b$, that theorem makes $W$ locally Noetherian and quasi-compact. Take its affine open cover by spectra of Noetherian rings and use quasi-compactness to choose a finite subcover. This is precisely the Noetherian convention required in the item.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian; properties.tex Tag 01OV, definition-noetherian"
+   }
+  },
+  {
+   "text": "Use the given finite affine cover $V_i=\\operatorname{Spec}A_i$ with $A_i$ Noetherian in the gluing presentation of the global blowup. The global-blowup and gluing-datum definitions specify the pieces $\\mathsf B_{V_i}(J)=\\operatorname{Bl}_{I_i}(\\operatorname{Spec}A_i)$, where $I_i=\\Gamma(V_i,J)$; the scheme-gluing theorem gives open embeddings of these pieces whose images cover the glued scheme. The cover-independence isomorphism lets us use this presentation for $W$. Each $I_i$ has finitely many generators because $A_i$ is Noetherian. Choose a list $(a_{ij})_j$, using the one-element list $(0)$ when $I_i=0$. The finite affine chart-cover theorem gives charts $\\operatorname{Spec}C_{ij}$ with $C_{ij}=A_i[I_i/a_{ij}]$ covering each piece, hence covering $W$.",
+   "uses": [
+    "def-nagata-global-blowup",
+    "def-nagata-global-blowup-glue-data",
+    "def-nagata-global-blowup-local-model",
+    "lem-weil-pbc-glue-schemes",
+    "prop-nagata-global-blowup-cover-independent",
+    "def-weil-pbc-noetherian-ring",
+    "prop-nagata-affine-blowup-chart-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0804, lemma-blowing-up-affine; schemes.tex Tag 01JC, lemma-glue-schemes"
+   }
+  },
+  {
+   "text": "Every $A_i=\\mathcal O_X(V_i)$ is reduced by the sectionwise characterization of reduced schemes. Here is the fraction calculation for a chart, including zero divisors. Write $A=A_i$, $a=a_{ij}$ and $C=A[I_i/a]\\subseteq A_a$. If $c=x/a^n\\in C$ and $c^m=0$ with $m\\geq1$, the definition of localization gives $a^N x^m=0$ for some $N\\geq0$. Choose $e$ with $em\\geq N$. Then $(a^e x)^m=a^{em-N}a^Nx^m=0$, so $a^e x=0$ because $A$ is reduced. The same localization equality criterion now gives $c=0$. Thus $C$ is reduced; this uses neither injectivity of $A\\to A_a$ nor cancellation of $a$.",
+   "uses": [
+    "def-pc-reduced-scheme",
+    "def-nagata-blowup-chart-ring",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 052S, lemma-blowup-reduced, explicit nilpotent-fraction calculation"
+   }
+  },
+  {
+   "text": "The affine reducedness criterion makes each $\\operatorname{Spec}C_{ij}$ reduced. For every $w\\in W$, choose one of the open charts containing $w$. Its local ring at $w$ is the local ring $\\mathcal O_{W,w}$, because the chart is an open subscheme. That local ring is reduced. The stalkwise definition of a reduced scheme therefore says that $W$ is reduced.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-reduced-iff",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0808, lemma-blow-up-reduced-scheme; schemes.tex Tag 01J2, lemma-affine-reduced"
+   }
+  },
+  {
+   "text": "For $J=0$, the chart list $(0)$ has coordinate ring $A[0/0]\\subseteq A_0=0$, so all its spectra are empty and $W$ is empty. For $J=\\mathcal O_X$, take the chart list $(1)$: its ring is $A[A/1]=A$, and the structure maps are identities. If $X$ is empty the gluing has no nonempty pieces, so again $W$ is empty. The same arguments apply to the zero ring and to reduced rings with several components. Thus no edge case requires integrality or a nonempty complement to the center.",
+   "uses": [
+    "def-nagata-blowup-chart-ring",
+    "def-weil-ring-localization-away",
+    "prop-nagata-affine-blowup-chart-cover"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0804, lemma-blowing-up-affine, with the zero and unit ideals"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-coherent",
+  "lemma-nagata-blowup-proper",
+  "def-weil-proper-morphism",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-nagata-global-blowup",
+  "def-nagata-global-blowup-glue-data",
+  "def-nagata-global-blowup-local-model",
+  "lem-weil-pbc-glue-schemes",
+  "prop-nagata-global-blowup-cover-independent",
+  "def-weil-pbc-noetherian-ring",
+  "prop-nagata-affine-blowup-chart-cover",
+  "def-pc-reduced-scheme",
+  "def-nagata-blowup-chart-ring",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-affine-scheme-reduced-iff"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tags 0808 (lemma-blow-up-reduced-scheme), 0804 (lemma-blowing-up-affine), 02NS (lemma-blowing-up-projective); algebra.tex Tag 052S; morphisms.tex Tag 01T6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-reduced-noetherian-blowup-geometry: Blowup of a coherent ideal on a reduced Noetherian scheme is reduced and finite type and blowup of the unit ideal is identity",
+   "results": "{\"t\": \"2026-10-24T02:14:30Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-reduced-noetherian-blowup-geometry: Blowup of a coherent ideal on a reduced Noetherian scheme is reduced and finite type and blowup of the unit ideal is identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsReduced\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.isReduced_of_isIntegral\", \"AlgebraicGeometry.instIsReducedSpecOfIsReducedCarrier\", \"AlgebraicGeometry.isReduced_of_isAffine_isReduced\", \"AlgebraicGeometry.IsLocallyNoetherian\", \"AlgebraicGeometry.isReduced_of_isOpenImmersion\", \"AlgebraicGeometry.affine_isReduced_iff\"], \"digest\": \"224299a1640aca5f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Rees algebra and Proj facts do not state reducedness and finite type of the glued scheme blowup"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-reduced-noetherian-blowup-geometry: Rees blowup of a finite type ideal on a reduced locally noetherian scheme is reduced quasi compact and locally finite type",
+   "results": "{\"t\": \"2026-10-24T02:14:31Z\", \"tool\": \"leansearch\", \"query\": \"lem-per-reduced-noetherian-blowup-geometry: Rees blowup of a finite type ideal on a reduced locally noetherian scheme is reduced quasi compact and locally finite type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"reesAlgebra.fg\", \"AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian\", \"AlgebraicGeometry.isReduced_of_isReduced_stalk\", \"instIsNoetherianRingSubtypePolynomialMemSubalgebraReesAlgebra\", \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"AlgebraicGeometry.isNoetherian_iff\", \"AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace\", \"isReduced_localizationPreserves\"], \"digest\": \"4d8ae34b132db00d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Rees algebra and Proj facts do not state reducedness and finite type of the glued scheme blowup"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-reduced-noetherian-blowup-geometry: The Proj of the Rees algebra of an ideal in a reduced ring is reduced and of finite type for finitely generated ideal",
+   "results": "{\"t\": \"2026-10-24T02:14:33Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-reduced-noetherian-blowup-geometry: The Proj of the Rees algebra of an ideal in a reduced ring is reduced and of finite type for finitely generated ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instFiniteTypeSubtypePolynomialMemSubalgebraReesAlgebraOfIsNoetherianRing\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"reesAlgebra.fg\", \"AlgebraicGeometry.instIsReducedSpecOfIsReducedCarrier\", \"instIsNoetherianRingSubtypePolynomialMemSubalgebraReesAlgebra\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\"], \"digest\": \"4e9542ce04134890\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Rees algebra and Proj facts do not state reducedness and finite type of the glued scheme blowup"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\", \"IsReduced\"",
+   "results": "{\"t\": \"2026-10-24T02:14:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"blowup\\\", \\\"IsReduced\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: zero hits for scheme blowup reducedness or finite type; grep restricted to AlgebraicGeometry"
+  },
+  {
+   "tool": "grep",
+   "query": "(blowup|Blowup|blowUp).*(IsReduced|FiniteType|top)|IsReduced.*(blowup|Blowup)",
+   "results": "{\"t\": \"2026-10-24T02:14:31Z\", \"tool\": \"grep\", \"query\": \"(blowup|Blowup|blowUp).*(IsReduced|FiniteType|top)|IsReduced.*(blowup|Blowup)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: zero hits for scheme blowup reducedness or finite type; grep restricted to AlgebraicGeometry"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-reduced-noetherian-blowup-geometry: Blowup of a coherent ideal of a reduced Noetherian scheme is reduced Noetherian and finite type",
+   "results": "{\"t\": \"2026-10-24T03:09:55Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-reduced-noetherian-blowup-geometry: Blowup of a coherent ideal of a reduced Noetherian scheme is reduced Noetherian and finite type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsLocallyNoetherian\", \"AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier\", \"AlgebraicGeometry.instIsNoetherianSpecOfIsNoetherianRingCarrier\", \"instFiniteTypeSubtypePolynomialMemSubalgebraReesAlgebraOfIsNoetherianRing\", \"AlgebraicGeometry.instIsNoetherianSpecOfOfIsNoetherianRing\", \"AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.isLocallyNoetherian_Spec\"], \"digest\": \"79cb5d5346f581b7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Rees algebras, affine reducedness or Noetherian schemes, not the full glued blowup statement"
+  },
+  {
+   "tool": "grep",
+   "query": "(blowup|blowUp|Blowup).*(IsReduced|FiniteType|IsNoetherian)",
+   "results": "{\"t\": \"2026-10-24T03:10:13Z\", \"tool\": \"grep\", \"query\": \"(blowup|blowUp|Blowup).*(IsReduced|FiniteType|IsNoetherian)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Rees algebras, affine reducedness or Noetherian schemes, not the full glued blowup statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-reduced-noetherian-blowup-geometry: Proj of a Rees algebra over a reduced Noetherian ring is reduced and finite type",
+   "results": "{\"t\": \"2026-10-24T03:10:14Z\", \"tool\": \"leansearch\", \"query\": \"lem-per-reduced-noetherian-blowup-geometry: Proj of a Rees algebra over a reduced Noetherian ring is reduced and finite type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"reesAlgebra\", \"reesAlgebra.fg\", \"instIsNoetherianRingSubtypePolynomialMemSubalgebraReesAlgebra\", \"AlgebraicGeometry.isReduced_of_isAffine_isReduced\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"instFiniteTypeSubtypePolynomialMemSubalgebraReesAlgebraOfIsNoetherianRing\", \"AlgebraicGeometry.instIsNoetherianSpecOfOfIsNoetherianRing\"], \"digest\": \"c43e7bffc35e45db\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Rees algebras, affine reducedness or Noetherian schemes, not the full glued blowup statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\", \"IsReduced\"",
+   "results": "{\"t\": \"2026-10-24T03:10:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"blowup\\\", \\\"IsReduced\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Rees algebras, affine reducedness or Noetherian schemes, not the full glued blowup statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-qe-conductor-normalized-resolution-extension",
+  "date": "2026-10-24",
+  "group": "Q19"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, regular purity model through the Gabber modification branch; supporting ILO VIII 2.2.1--2.2.9 and 2.3.12(i). Tags 0808, lemma-blow-up-reduced-scheme, and 02NS, lemma-blowing-up-projective; finite type follows on the finite standard affine blowup charts. Noetherianity is morphisms.tex Tag 01T6, lemma-finite-type-noetherian.",
+   "via": [
+    "lem-per-qe-conductor-normalized-resolution-extension",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-reduced-noetherian-blowup-geometry",
+  "worker": "stage1",
+  "summary": "Q117: proved finite type through existing properness, translated Noetherian conventions, used the existing gluing and finite affine chart interfaces, and wrote the nilpotent-fraction calculation with all degenerate cases. No new nodes and no statement change.",
+  "blueprint": "Supports ancestor lem-per-artin-gabber-affine-curve, Step 3, through the recorded regular-purity/Gabber-modification branch and the conductor-normalized-resolution extension. This is ordinary blowup geometry only; it introduces no alternate purity route.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-blowup-proper",
+    "why": "Generic properness of a coherent-center blowup supplies finite type; no Fourier/perverse node supplies this scheme geometry."
+   },
+   {
+    "node": "lem-weil-pbc-glue-schemes",
+    "why": "Generic scheme gluing supplies open covering embeddings of the defining blowup pieces."
+   },
+   {
+    "node": "prop-nagata-global-blowup-cover-independent",
+    "why": "Generic comparison of blowup presentations permits the given finite Noetherian affine cover."
+   },
+   {
+    "node": "prop-nagata-affine-blowup-chart-cover",
+    "why": "Generic standard affine blowup charts reduce nilpotents to fractions; this is independent of the perverse unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-blowup-proper",
+  "lem-weil-pbc-glue-schemes",
+  "prop-nagata-global-blowup-cover-independent",
+  "prop-nagata-affine-blowup-chart-cover"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q117-f00b2f4de",
+  "group": "Q117",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-f00b2f4de (reviewer sub-agent of L); spot-checked: Read the item's full six-step proof and the statement of every one of the 17 cited nodes, including the blueprint_update versions of the global-blowup, glue-data, local-model, cover-independent, chart-cover and chart-ring nodes. Sources read: Stacks divisors 0808 lemma-blow-up-reduced-scheme (line 8517) and algebra 052S lemma-blowup-reduced (line 17306). Step 4 reproduces the 052S fraction argument exactly (a^N x^m=0, take em>=N, then a^e x=0) and needs no injectivity of A->A_a. Finite type: coherent includes finite type, the blowup is proper by lemma-nagata-blowup-proper, and finite type is part of properness. Noetherian: the finite cover gives locally Noetherian plus quasi-compact, lem-weil-pbc-finite-type-over-noetherian applies, and a finite subcover converts back to the item's convention. Charts: gluing open immersions plus prop-nagata-affine-blowup-chart-cover; I_i is finitely generated because A_i is Noetherian; the generator list (0) for I=0 is valid. Cover-independent is used only for the comparison isomorphism its live statement gives, and its main-20261015 statement gives the needed open immersions directly. Reducedness is local on stalks via affine_isReduced_iff. Edge cases checked: J=0 gives an empty blowup, matching Proj(A+0+...); J=O_X gives the charts A; my own test X=Spec(kxk), J=((1,0)) shows nothing assumes surjectivity or density. Statement unchanged and not weakened; its added hypotheses serve only the added true conclusions; the parent uses exactly these clauses. No new nodes. No duplicate: lem-trf-reduced-blowup-generic-geometry is a different, special statement (finite type over Q, dense complement). The 4 declared tool_uses are generic Nagata/Mathlib blowup geometry and are accepted. No SGA source. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ReducedNoetherianBlowupGeometry",
+  "declaration": "AlgebraicGeometry.Scheme.IdealSheafData.reducedNoetherian_blowup_geometry",
+  "file": "lean/Sheaf/AlgebraicGeometry/ReducedNoetherianBlowupGeometry.lean",
+  "statement": "theorem reducedNoetherian_blowup_geometry (X : Scheme.{u}) [IsReduced X] [IsNoetherian X] (J : X.IdealSheafData) (hJ : RingedSpace.IsCoherent X.toRingedSpace J.toModules) : (LocallyOfFiniteType J.blowupMap ∧ QuasiCompact J.blowupMap) ∧ IsReduced J.blowup ∧ IsNoetherian J.blowup",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c48bbe7b0",
+  "group": "NR",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: X : Scheme.{u} with [IsReduced X] [IsNoetherian X] (Mathlib class = node's finite Noetherian affine cover convention); J : IdealSheafData with RingedSpace.IsCoherent of J.toModules (full 01BV predicate, in the pqf-def-coherent record); recorded J.blowup/J.blowupMap (glued Proj of the Rees algebra, no extra hypotheses); finite type = LocallyOfFiniteType ∧ QuasiCompact per def-weil-finite-type-morphism; IsReduced and IsNoetherian of J.blowup. Zero/unit ideal, empty X, zero divisors and universes covered; no stronger assumptions. Stacks 0808/02NS read. No public duplicate (NormalizedBlowupCalculus reduced_blowup is private; ReducedBlowupGenericGeometry assumes more). Node otherwise unchanged vs live and not superseded; statement field verbatim; docstrings carry sources, blueprint id and the 6 proof steps; only sorry; report has Worker report + Second reading by NR. No changes, so no compile; worker compile clean. Advisory: redundant direct public import of WeilConjectures.AlgebraicGeometry.Coherent."
+ }
+}

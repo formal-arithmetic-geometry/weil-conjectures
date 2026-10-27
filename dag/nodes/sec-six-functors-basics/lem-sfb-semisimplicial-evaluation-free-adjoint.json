@@ -1,0 +1,277 @@
+{
+ "id": "lem-sfb-semisimplicial-evaluation-free-adjoint",
+ "kind": "statement",
+ "title": "Exact free extension from a semisimplicial component",
+ "statement": "Let $\\Delta_{\\mathrm{inj}}$, the small ringed sites $(\\mathcal C_n,\\mathcal O_n)$, the total module category $\\mathscr M$, and the evaluations $e_n$ be as in [lem-sfb-semisimplicial-ringed-total-category], with all its size and coherence hypotheses. Assume every transition module pullback $f_\\alpha^*$ is exact. For an object $E$ of $\\mathscr M$ write $\\theta^E_\\alpha:f_\\alpha^*E_m\\to E_n$ for its transition along $\\alpha:[m]\\hookrightarrow[n]$, and for $E\\in D(\\mathscr M)$ write $\\theta^E_\\alpha:Lf_\\alpha^*e_mE\\to e_nE$ for the derived transition of [lem-sfb-semisimplicial-ringed-total-category]. For $p\\ge0$ and an $\\mathcal O_p$-module sheaf $G$, define a system $\\ell_pG$ by\n$$(\\ell_pG)_m=\\bigoplus_{\\alpha:[p]\\hookrightarrow[m]}f_\\alpha^*G.$$\nThe empty sum is zero. The transition for $\\beta:[m]\\hookrightarrow[k]$ carries the $\\alpha$ summand to the $\\beta\\alpha$ summand through the specified pullback composition isomorphism. These formulas define an exact additive functor $\\ell_p:\\operatorname{Mod}(\\mathcal O_p)\\to\\mathscr M$ left adjoint to $e_p$. Restriction to the identity-labelled summand in component $p$ gives its adjunction bijection; the inverse of $u:G\\to E_p$ sends the $\\alpha$ summand to $\\theta^E_\\alpha f_\\alpha^*u$.\nThe termwise functors on unbounded cochain complexes induce an adjunction on the unbounded derived categories, with natural bijections, for $G\\in D(\\mathcal O_p)$ and $E\\in D(\\mathscr M)$,\n$$\\operatorname{Hom}_{D(\\mathscr M)}(\\ell_pG,E)\\cong\\operatorname{Hom}_{D(\\mathcal O_p)}(G,e_pE).$$\nThe component formula and the inverse-adjunct formula above hold in these derived categories with $f_\\alpha^*=Lf_\\alpha^*$, and $e_p\\ell_p\\cong\\mathrm{id}$ is the identity-summand identification. For $E\\in D(\\mathscr M)$, the counit $\\ell_pe_pE\\to E$ has components the derived transition maps on the labelled summands.",
+ "source": {
+  "document": "literature/stacks-project/spaces-simplicial.tex",
+  "place": "Tag 0D72 (lemma-restriction-module-to-components-site), exactness discussion following it and the derived use in Tag 0D9E (lemma-derived-cartesian-shriek). Agent-supplied injective-order-map adaptation, not a claim that Stacks states the face-only version verbatim."
+ },
+ "stmt_deps": [
+  "lem-sfb-semisimplicial-ringed-total-category"
+ ],
+ "proof": [
+  {
+   "text": "Put $I_{p,m}=\\operatorname{Hom}_{\\Delta_{\\mathrm{inj}}}([p],[m])$; this set is finite, and empty for $m<p$. The module categories are abelian by [def-weil-sheaf-of-modules-category], so the finite sums in the statement exist. Denote the summand inclusions by $i_\\alpha$ and the coherent composition comparison by $c_{\\beta,\\alpha}:f_\\beta^*f_\\alpha^*\\xrightarrow{\\sim}f_{\\beta\\alpha}^*$. Pullback is additive by the exactness assumption; it preserves finite biproducts, since it preserves their inclusion/projection identities. Define $t_\\beta$ by $t_\\beta f_\\beta^*(i_\\alpha)=i_{\\beta\\alpha}c_{\\beta,\\alpha}$. On the $\\alpha$ summand the two composites for $\\beta$ followed by $\\gamma$ agree by the associativity coherence equation for $c$; identity coherence gives the identity transition. The systems description in [lem-sfb-semisimplicial-ringed-total-category] therefore makes this an object of $\\mathscr M$. For $v:G\\to H$ define $(\\ell_pv)_m$ on the $\\alpha$ summand by $i_\\alpha f_\\alpha^*v$. Naturality of $c$ gives compatibility with $t_\\beta$. Identities, composition and addition hold on each summand, proving additive functoriality.",
+   "uses": [
+    "lem-sfb-semisimplicial-ringed-total-category",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D72, lemma-restriction-module-to-components-site, construction; agent injective-order-map adaptation"
+   }
+  },
+  {
+   "text": "Write $\\Phi(h)=h_p i_{\\mathrm{id}}:G\\to E_p$, using $f_{\\mathrm{id}}^*G\\cong G$. Given $u:G\\to E_p$, define $\\Psi(u)_m i_\\alpha=\\theta^E_\\alpha f_\\alpha^*u$. For $\\beta:[m]\\hookrightarrow[k]$, compatibility of the transitions of $E$ says $\\theta^E_\\beta f_\\beta^*(\\theta^E_\\alpha)=\\theta^E_{\\beta\\alpha}c_{\\beta,\\alpha}$. Naturality of $c$ then proves the required morphism-of-systems equation for $\\Psi(u)$ on every summand. Identity compatibility gives $\\Phi\\Psi(u)=u$. Conversely, compatibility of any $h:\\ell_pG\\to E$ along $\\alpha:[p]\\hookrightarrow[m]$, applied to the identity summand, gives $h_mi_\\alpha=\\theta^E_\\alpha f_\\alpha^*(h_pi_{\\mathrm{id}})$, hence $\\Psi\\Phi(h)=h$. These formulas commute with precomposition in $G$ and postcomposition in $E$, giving the asserted natural adjunction.",
+   "uses": [
+    "lem-sfb-semisimplicial-ringed-total-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D72, lemma-restriction-module-to-components-site, direct adjunction verification; agent adaptation"
+   }
+  },
+  {
+   "text": "An injective order-preserving self-map of the finite ordinal $[p]$ is bijective and must send its successive elements to themselves. Thus $I_{p,p}=\\{\\mathrm{id}\\}$ and $e_p\\ell_pG\\cong f_{\\mathrm{id}}^*G\\cong G$. In the bijection just constructed the unit is the inverse of this identification. Taking $u=\\mathrm{id}_{E_p}$ shows that the counit has restriction $\\theta^E_\\alpha$ to the $\\alpha$ summand. This also specifies the unit and counit, rather than merely choosing an abstract adjunction with the same functors.",
+   "uses": [
+    "lem-sfb-semisimplicial-ringed-total-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D72, lemma-restriction-module-to-components-site; identity-only summand is special to injective order maps"
+   }
+  },
+  {
+   "text": "For a short exact sequence of modules on $\\mathcal C_p$, applying $f_\\alpha^*$ gives a short exact sequence for each $\\alpha$, by hypothesis. Their finite sum is short exact: its kernel and cokernel are the sums of the respective kernels and cokernels, as follows by taking each projection and then assembling the factorizations with the inclusions. This includes the empty sum, the zero sequence. Hence each $e_m\\ell_p$ is exact. To detect exactness in $\\mathscr M$, take the three-term complex associated to the image sequence. Its cohomology evaluates to zero in every component, because the evaluations in [lem-sfb-semisimplicial-ringed-total-category] are exact. Joint conservativity applied to each map $0\\to H^q$ makes every such cohomology object zero. Thus $\\ell_p$ is exact.",
+   "uses": [
+    "lem-sfb-semisimplicial-ringed-total-category",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D74, lemma-exactness-g-shriek-modules; finite-biproduct argument for the injective-order-map adaptation"
+   }
+  },
+  {
+   "text": "Apply part (a) of [lem-weil-pbc-termwise-adjunction-homotopy] to the additive adjunction $\\ell_p\\dashv e_p$. This gives the adjunction on all cochain complexes, with the termwise unit and counit from the preceding steps. Both functors are exact: $\\ell_p$ by the previous step and $e_p$ by [lem-sfb-semisimplicial-ringed-total-category]. Consequently [lem-weil-pbc-exact-functor-derived-factorization] supplies their functors on the unbounded derived categories and the natural comparison isomorphisms with termwise application. By [def-weil-abstract-derived-category] the two functors from complexes are localizations at quasi-isomorphisms. Apply [lem-sfb-adjunction-localization] to this adjunction on complexes and these comparison isomorphisms. It gives the derived adjunction, both triangle identities, and unit and counit induced from the original ones, hence the displayed natural Hom bijection. No boundedness or injective replacement is used.",
+   "uses": [
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-sfb-semisimplicial-ringed-total-category",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-abstract-derived-category",
+    "lem-sfb-adjunction-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D9E, lemma-derived-cartesian-shriek, proof (2), first sentence; generic termwise/localization facts supplied by the cited nodes"
+   }
+  },
+  {
+   "text": "For a complex $K$ on $\\mathcal C_p$, evaluation of the termwise extension is literally the complex $\\bigoplus_{\\alpha\\in I_{p,m}} f_\\alpha^*K$. Localize this equality using [lem-weil-pbc-exact-functor-derived-factorization] for the exact pullbacks, evaluations and finite-sum functor. Finite biproducts pass to derived categories: their inclusions and projections satisfy $\\pi_\\alpha i_\\delta=\\delta_{\\alpha\\delta}$ and $\\sum i_\\alpha\\pi_\\alpha=1$, which still hold after the additive localization. These equations also show that an additive functor preserves the same biproduct. The resulting component formula is therefore $e_m\\ell_pG\\cong\\bigoplus_\\alpha Lf_\\alpha^*G$, naturally in arbitrary derived $G$, with the transition comparisons obtained by localizing $c$. Exactness makes $Lf_\\alpha^*$ the termwise pullback functor: by [lem-weil-pbc-exact-functor-derived-functor] the localized termwise pullback is a left derived functor of $Q\\circ C(f_\\alpha^*)$, so it is $Lf_\\alpha^*$ compatibly with the maps to $Q(f_\\alpha^*K)$. So for $E$ represented by a complex $K$, the derived transition $\\theta^E_\\alpha$ of [lem-sfb-semisimplicial-ringed-total-category] is the localized chain transition $f_\\alpha^*K_m\\to K_n$. The unit and counit formulas of [lem-sfb-adjunction-localization] identify the localized unit with the identity-summand inclusion and the localized counit on the $\\alpha$ summand with the derived transition $\\theta^E_\\alpha$ from [lem-sfb-semisimplicial-ringed-total-category]. In particular the unit remains the inverse of $e_p\\ell_p\\cong\\mathrm{id}$. Finally for an arbitrary derived morphism $u:G\\to e_pE$, its inverse adjunct is $\\varepsilon_E\\circ\\ell_pu$, whose $\\alpha$ summand is $\\theta^E_\\alpha Lf_\\alpha^*u$. This proves the claimed formulas for all derived morphisms, including those not represented by a map between the original complexes.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-abstract-derived-category",
+    "lem-sfb-adjunction-localization",
+    "lem-sfb-semisimplicial-ringed-total-category",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tags 0D72 and 0D9E, lemma-restriction-module-to-components-site and lemma-derived-cartesian-shriek, proof (2); agent normalization of the derived formulas"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-semisimplicial-ringed-total-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sfb-adjunction-localization",
+  "lem-weil-pbc-exact-functor-derived-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-simplicial.tex",
+  "place": "Tags 0D72, 0D74, 0D9E; explicit injective-order-map adaptation and localization normalization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact left adjoints to evaluation in systems of modules on a semisimplicial ringed topos diagram are sums of exact transition pullbacks and induce unbounded derived adjunctions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CondensedMod.LocallyConstant.adjunction\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CondensedMod.LocallyConstant.functor R ⊣ Condensed.underlying (ModuleCat R)\", \"doc\": \"For any ring $ R $, there is an adjunction where the left adjoint assigns to each $ R $-module $ M $ the condensed $ R $-module of locally constant functions from discrete spaces to $ M $, and the rig\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"{C₁ : Type u_1} →\\n  {C₂ : Type u_2} →\\n    {D₁ : Type u_3} →\\n      {D₂ : Type u_4} →\\n        [inst : CategoryTheory.Category.{v_1, u_1} C₁] →\\n          [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] →\\n            [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁] →\\n              [inst_3 : CategoryThe\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"LightCondMod.LocallyConstant.adjunction\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type u) → [inst : Ring R] → LightCondMod.LocallyConstant.functor R ⊣ LightCondensed.underlying (ModuleCat R)\", \"doc\": \"For any ring $ R $, there is an adjunction between the locally constant module functor and the underlying functor in the category of light condensed $ R $-modules. This adjunction is constructed using\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived'\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"{C₁ : Type u_1} →\\n  {C₂ : Type u_2} →\\n    {D₁ : Type u_3} →\\n      {D₂ : Type u_4} →\\n        [inst : CategoryTheory.Category.{v_1, u_1} C₁] →\\n          [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] →\\n            [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁] →\\n              [inst_3 : CategoryThe\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived'_counit\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived_counit\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, localization functors $L_1: \\\\mathcal{C}_1 \\\\to\"}\n  {\"name\": \"CategoryTheory.Adjunction.hasExactColimitsOfShape\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u''} [inst_1 : CategoryTheory.Category.{v'', u''} D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [G.Full] [G.Faithful] (J : Type u')\\n  [inst_4 : CategoryTheory.Category.{v', u'} J] [inst_5 : Cate\", \"doc\": \"Let $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{C} $ be functors forming an adjunction $ F \\\\dashv G $, with $ G $ fully faithful. Suppose that $ \\\\mathcal{C} $ admits colimit\"}\n  {\"name\": \"CategoryTheory.Adjunction.hasExactLimitsOfShape\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u''} [inst_1 : CategoryTheory.Category.{v'', u''} D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [F.Full] [F.Faithful] (J : Type u')\\n  [inst_4 : CategoryTheory.Category.{v', u'} J] [inst_5 : Cate\", \"doc\": \"Let $ F : C \\to D $ and $ G : D \\to C $ be adjoint functors with $ F $ fully faithful. If $ D $ has exact limits of shape $ J $, and $ C $ has finite colimits with $ G $ preserving finite colimits, then\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pullback, free module and localization adjunctions do not supply this varying-ring component extension with its exactness and derived component formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Free extension from a component of a diagram of sheaves of modules is left adjoint to evaluation and exact when every transition pullback is exact",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": SheafOfModules.{v} S ⥤ SheafOfModules.{v} R\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": pullback f ⊣ pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"SheafOfModules.ιFree\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Free\", \"type\": \"{I : Type u} (i : I) : unit R ⟶ free I\", \"doc\": \"Given a sheaf $ R $ of rings on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $ and an index type $ I $, this constructs the free sheaf of $ R $-modules as the coproduct (direct sum) of $ \"}\n  {\"name\": \"SheafOfModules.free\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Free\", \"type\": \"(I : Type u) : SheafOfModules.{u} R\", \"doc\": \"Given a sheaf $ R $ of rings on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $ and an index type $ I $, this constructs the free sheaf of $ R $-modules as the coproduct (direct sum) of $ \"}\n  {\"name\": \"PresheafOfModules.free\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Free\", \"type\": \": (Cᵒᵖ ⥤ Type u) ⥤ PresheafOfModules.{u} R\", \"doc\": \"The functor from the category of type-valued presheaves on $\\\\mathcal{C}^\\\\mathrm{op}$ to the category of presheaves of modules over a ring presheaf $R: \\\\mathcal{C}^\\\\mathrm{op} \\\\to \\\\mathbf{Ring}$. For a\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": pullback.{v} φ ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (forget S ⋙ PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)) ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pullback f).IsLeftAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pullback, free module and localization adjunctions do not supply this varying-ring component extension with its exactness and derived component formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Adjunction\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"PresheafOfModules.freeAdjunctionUnit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (R : CategoryTheory.Functor Cᵒᵖ RingCat) (F : CategoryTheory.Functor Cᵒᵖ (Type u)) : F ⟶ (PresheafOfModules.freeObj F).presheaf.comp (CategoryTheory.forget Ab)\", \"doc\": \"The unit of `PresheafOfModules.freeAdjunction`.\"}\n  {\"name\": \"PresheafOfModules.freeAdjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (R : CategoryTheory.Functor Cᵒᵖ RingCat) : PresheafOfModules.free R ⊣ (PresheafOfModules.toPresheaf R).comp ((CategoryTheory.Functor.whiskeringRight Cᵒᵖ Ab (Type u)).obj (CategoryTheory.forget Ab))\", \"doc\": \"The free presheaf of modules functor is left adjoint to the forget functor\\n`PresheafOfModules.{u} R ⥤ Cᵒᵖ ⥤ Type u`.\"}\n  {\"name\": \"PresheafOfModules.freeAdjunctionUnit_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (R : CategoryTheory.Functor Cᵒᵖ RingCat) (F : CategoryTheory.Functor Cᵒᵖ (Type u)) (X : Cᵒᵖ) : (PresheafOfModules.freeAdjunctionUnit R F).app X = TypeCat.ofHom fun x => ModuleCat.freeMk x\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.freeAdjunction_homEquiv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} (F : CategoryTheory.Functor Cᵒᵖ (Type u)) (G : PresheafOfModules R) : (PresheafOfModules.freeAdjunction R).homEquiv F G = PresheafOfModules.freeHomEquiv\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.freeAdjunction_unit_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (R : CategoryTheory.Functor Cᵒᵖ RingCat) (F : CategoryTheory.Functor Cᵒᵖ (Type u)) : (PresheafOfModules.freeAdjunction R).unit.app F = PresheafOfModules.freeAdjunctionUnit R F\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {R : CategoryTheory.Functor Dᵒᵖ RingCat} {S : CategoryTheory.Functor Cᵒᵖ RingCat} (φ : S ⟶ F.op.comp R) [(PresheafOfModules.pushforward φ).IsRightAdjoint] : Preshea\", \"doc\": \"Given a morphism of presheaves of rings `S ⟶ F.op ⋙ R`, this is the adjunction\\nbetween associated pullback and pushforward functors on the categories\\nof presheaves of modules.\"}\n  {\"name\": \"PresheafOfModulesOfCommRing.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.OfCommRing\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {R : CategoryTheory.Functor Dᵒᵖ CommRingCat} {S : CategoryTheory.Functor Cᵒᵖ CommRingCat} (φ : S ⟶ F.op.comp R) [(PresheafOfModulesOfCommRing.pushforward φ).IsRight\", \"doc\": \"The adjunction between pullback and pushforward for modules over presheaves of\\ncommutative rings.\"}\n  {\"name\": \"PresheafOfModules.colimitAdjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ColimitFunctor\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.LocallySmall.{w, v, u} C] [CategoryTheory.IsCofiltered C] [CategoryTheory.InitiallySmall C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {cR : CategoryTheory.Limits.Cocone R} (hcR : CategoryTheory.Limits.IsColimit cR) : PresheafOfModules.c\", \"doc\": \"Given a presheaf of rings `R` on a cofiltered category, this is the\\nadjunction between `colimitFunctor : PresheafOfModules R ⥤ ModuleCat cR.pt`\\nand the constant functor.\"}\n  {\"name\": \"PresheafOfModules.colimitAdjunction_homEquiv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ColimitFunctor\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.LocallySmall.{w, v, u} C] [CategoryTheory.IsCofiltered C] [CategoryTheory.InitiallySmall C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {cR : CategoryTheory.Limits.Cocone R} (hcR : CategoryTheory.Limits.IsColimit cR) (F : PresheafOfModule\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.colimitAdjunction_homEquiv_symm_apply\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ColimitFunctor\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.LocallySmall.{w, v, u} C] [CategoryTheory.IsCofiltered C] [CategoryTheory.InitiallySmall C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {cR : CategoryTheory.Limits.Cocone R} (hcR : CategoryTheory.Limits.IsColimit cR) {F : PresheafOfModule\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.sheafificationAdjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification\", \"type\": \" {C : Type u'} [CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C} {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.obj) [CategoryTheory.Presheaf.IsLocallyInjective J α] [CategoryTheory.Presheaf.IsLocallySurjective J α] [J.WEqual\", \"doc\": \"Given a locally bijective morphism `α : R₀ ⟶ R.val` where `R₀` is a presheaf of rings\\nand `R` a sheaf of rings, this is the adjunction\\n`sheafification.{v} α ⊣ SheafOfModules.forget R ⋙ restrictScalars\"}\n  {\"name\": \"PresheafOfModules.instIsIsoFunctorSheafOfModulesCounitSheafificationAdjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification\", \"type\": \" {C : Type u'} [CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C} {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.obj) [CategoryTheory.Presheaf.IsLocallyInjective J α] [CategoryTheory.Presheaf.IsLocallySurjective J α] [J.WEqual\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pullback, free module and localization adjunctions do not supply this varying-ring component extension with its exactness and derived component formula"
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*[Aa]dj|[Aa]dj.*evaluation|semisimplicial",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean\", \"line\": \"22\", \"text\": \"  into an adjunction between `freeFunctor` and the evaluation functor at `X`.\"}\nDirectory: Mathlib/Algebra/Category/ModuleCat",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pullback, free module and localization adjunctions do not supply this varying-ring component extension with its exactness and derived component formula"
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*[Aa]dj|[Aa]dj.*evaluation|semisimplicial",
+   "results": "1 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean; directory Mathlib/Algebra/Category/ModuleCat",
+   "date": "2026-10-23",
+   "verdict": "no match: fixed-target functor-category evaluation, free module or Dold-Kan adjunctions do not give coherent module systems on varying ringed sites. Generic exact/localization ingredients are cited through existing DAG nodes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Free extension from a component of a semisimplicial ringed site diagram is an exact left adjoint to evaluation",
+   "results": "8 hits: PresheafOfModules.freeAdjunction, SheafOfModules.freeFunctor_obj, CommRingCat.adj, PresheafOfModules.freeHomEquiv, PresheafOfModules.free, ModuleCat.adj, PresheafOfModules.freeAdjunctionUnit, AlgCat.adj",
+   "date": "2026-10-23",
+   "verdict": "no match: fixed-target functor-category evaluation, free module or Dold-Kan adjunctions do not give coherent module systems on varying ringed sites. Generic exact/localization ingredients are cited through existing DAG nodes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Adjunction\"",
+   "results": "12 hits: PresheafOfModules.freeAdjunctionUnit, PresheafOfModules.freeAdjunction, PresheafOfModules.freeAdjunctionUnit_app, PresheafOfModules.freeAdjunction_homEquiv, PresheafOfModules.freeAdjunction_unit_app, PresheafOfModules.pullbackPushforwardAdjunction, PresheafOfModulesOfCommRing.pullbackPushforwardAdjunction, PresheafOfModules.colimitAdjunction",
+   "date": "2026-10-23",
+   "verdict": "no match: fixed-target functor-category evaluation, free module or Dold-Kan adjunctions do not give coherent module systems on varying ringed sites. Generic exact/localization ingredients are cited through existing DAG nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Left adjoint to evaluation of semisimplicial module systems given by sums of transition pullbacks",
+   "results": "8 hits: AlgebraicTopology.DoldKan.Γ₀', AlgebraicTopology.DoldKan.Γ₀, AlgebraicTopology.DoldKan.Γ₀.Obj.obj₂, AlgebraicTopology.DoldKan.Γ₀.Obj.map, CategoryTheory.Preadditive.DoldKan.Γ, AlgebraicTopology.DoldKan.Γ₀_obj_obj, AlgebraicTopology.DoldKan.Γ₀.obj, AlgebraicTopology.DoldKan.Γ₀.obj_obj",
+   "date": "2026-10-23",
+   "verdict": "no match: fixed-target functor-category evaluation, free module or Dold-Kan adjunctions do not give coherent module systems on varying ringed sites. Generic exact/localization ingredients are cited through existing DAG nodes."
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjoint|leftKanExtension|evaluation",
+   "results": "4 hits: Mathlib/CategoryTheory/Abelian/GrothendieckCategory/EnoughInjectives.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean; directory Mathlib/CategoryTheory/Abelian/GrothendieckCategory",
+   "date": "2026-10-23",
+   "verdict": "no match: fixed-target functor-category evaluation, free module or Dold-Kan adjunctions do not give coherent module systems on varying ringed sites. Generic exact/localization ingredients are cited through existing DAG nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation at an object of a diagram of module categories has a left adjoint constructed as the finite coproduct over outgoing arrows",
+   "results": "8 hits: CategoryTheory.evaluationLeftAdjoint_obj_obj, CategoryTheory.evaluationAdjunctionRight, CategoryTheory.evaluationIsRightAdjoint, CategoryTheory.evaluationLeftAdjoint_obj_map, CategoryTheory.IsGrothendieckAbelian.GabrielPopescuAux.d, PresheafOfModules.freeAdjunction, CategoryTheory.IsGrothendieckAbelian.instIsRightAdjointModuleCatMulOppositeEndPreadditiveCoyonedaObj, CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj",
+   "date": "2026-10-23",
+   "verdict": "no match: fixed-target functor-category evaluation, free module or Dold-Kan adjunctions do not give coherent module systems on varying ringed sites. Generic exact/localization ingredients are cited through existing DAG nodes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-semisimplicial-derived-hom",
+  "date": "2026-10-23",
+  "group": "Q13"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Derived quasi-coherent hyperdescent with negative Ext vanishing. Supporting input for the face-only repair: Morphisms of flat semisimplicial cartesian derived objects. Supporting input: Exact free extension from a semisimplicial component.",
+   "via": [
+    "lem-sfb-flat-semisimplicial-derived-hom",
+    "lem-sfb-space-negative-ext-hyperdescent",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-semisimplicial-evaluation-free-adjoint",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Six proof steps construct the coherent labelled extension, verify both inverse adjunction maps, identify the identity-only unit and transition counit, prove finite-sum exactness, and localize the adjunction and its formulas. Existing nodes supply all non-elementary tools; no new nodes.",
+  "blueprint": "Preserves the inherited from.place chain to det-thm-sf-ctf-stability-direct-images proof (3); the current blueprint has no semisimplicial evaluation node (whole-blueprint searches). This item supplies the exact free-extension input to lem-sfb-flat-semisimplicial-derived-hom. The ancestor tool returns None, so inherited null from.node and via are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic part (a) lifts an additive adjunction to all complexes; no unit-specific replacement."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic exact-functor localization with termwise comparisons, needed on unbounded derived categories."
+   },
+   {
+    "node": "lem-sfb-adjunction-localization",
+    "why": "Generic localization adjunction and its specified unit and counit formulas."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic: the localized termwise functor of an exact functor is its left derived functor; identifies Lf_alpha^* with termwise pullback (added on review)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sfb-adjunction-localization",
+  "lem-weil-pbc-exact-functor-derived-functor"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-f794b9880",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-f794b9880 (reviewer sub-agent of L); spot-checked: Read in full: the item and its six steps (no new nodes), the statements of all cited nodes, and the citers flat-semisimplicial-derived-hom, cartesian-simplex-filtration, derived-realization and fppf-face-total-qcoh. Also read Stacks spaces-simplicial.tex 0D72 (l.1242-1300) and 0D74 (l.1316-1343). The statement and stmt_deps are byte-identical to the base and live versions; this is a first split of an unsplit node, with no repair note. The adaptation to injective order maps is correct, and e_p l_p = id holds because End([p]) = {id} in Delta_inj (false for the full Delta, which the item avoids). Steps 1-4 are elementary and correct: the coherent sum construction, the two inverse adjunction maps, the unit and counit, and finite-sum exactness reflected through exact, jointly conservative evaluations. Step 5 checks every hypothesis of the termwise adjunction (a), the exact-functor factorization and the adjunction-localization lemma. Edge cases tested: m<p, m=p, p=0/m=1, zero input, unbounded complexes. Duplicate check: lem-trf-total-site-component-restriction is full Delta, abelian sheaves and f^{-1}, with no ringed modules, derived adjunction or counit formula, so it is not a duplicate. FIX (C1/C4): step 6 identified the localized termwise pullback with Lf_alpha^*, and the localized transition with the total-category derived transition theta, citing only exact-functor-derived-factorization, which does not say F_D is the derived functor. Added lem-weil-pbc-exact-functor-derived-functor, the generic node from sk-def-exchange that the total-category node's own step 5 uses for this. It is added with two sentences to step 6 (now 1874 chars), to proof_deps, and declared in split_report.tool_uses. Tool uses accepted: termwise-adjunction-homotopy, exact-functor-derived-factorization, adjunction-localization, exact-functor-derived-functor. No SGA is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SemisimplicialEvaluationFreeAdjoint",
+  "declaration": "CategoryTheory.SemisimplicialRingedTotal.semisimplicial_evaluation_free_adjoint",
+  "declarations": [
+   "CategoryTheory.SemisimplicialRingedTotal.EvaluationFreeExtension",
+   "CategoryTheory.SemisimplicialRingedTotal.semisimplicial_evaluation_free_adjoint"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SemisimplicialEvaluationFreeAdjoint.lean",
+  "statement": "theorem semisimplicial_evaluation_free_adjoint (P : Presentation R h) (exact : ∀ {m n : SemiSimplexCategoryᵒᵖ} (a : m ⟶ n), PreservesFiniteLimits (P.pullback a).ordinary ∧ PreservesFiniteColimits (P.pullback a).ordinary) (p : SemiSimplexCategoryᵒᵖ) : Nonempty (EvaluationFreeExtension P p)",
+  "branch": "sheaf-dag",
+  "by": "Q83",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The certificate characterizes the labelled coproduct construction by IsColimit, natural inclusions and the transition equation. It includes exactness, both normalized adjunctions, identity-summand units, transition counits and termwise representative equations; no arbitrary map or object is chosen."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2a921dd20",
+  "group": "Q83",
+  "result": "pass",
+  "note": "I read the full statement of lem-sfb-semisimplicial-evaluation-free-adjoint against the dependency SemisimplicialRingedTotalCategory (Pullback, alpha, Composition, Identity, Presentation). Every clause has a pinned field: coproduct cofans of the actual pullbacks (empty case gives zero), the transition through composition.inv (orientation checked), homEquiv, inverse_homEquiv, unit, unit_isIso, counit, and the derived analogues. Derived inclusions are pinned on every complex by inclusion_representative; derived unit and counit are the localized termwise ones; exactPullback is true for exact pullbacks. The exact hypothesis says exactly what the node says; no extra boundedness, flatness or universe assumptions. Not hollow: no arbitrary maps, no Classical.choose. The statement is verbatim; only the node's lean field changed; no duplicate notion found in Mathlib or the project. Edge cases m<p, m=p, p=0 and unbounded complexes are covered. Advisory: Adjunction.mapHomologicalComplex comes from proof dependency lem-weil-pbc-termwise-adjunction-homotopy, not a stmt_dep; the RingedSiteModules import is probably redundant. Not recompiled (no change); worker reports a clean compile."
+ }
+}

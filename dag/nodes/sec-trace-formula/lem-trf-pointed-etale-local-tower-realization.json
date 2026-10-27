@@ -1,0 +1,254 @@
+{
+ "id": "lem-trf-pointed-etale-local-tower-realization",
+ "kind": "statement",
+ "title": "Realize a finite tower of elementary etale local bases by one pointed neighbourhood",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $s\\in S$, and $A_0=\\mathcal O_{S,s}$. Fix an integer $d\\geq0$. For $1\\leq j\\leq d$, let $U_j\\to\\operatorname{Spec}A_{j-1}$ be an affine etale morphism of finite presentation, let $u_j\\in U_j$ lie over the closed point and induce an isomorphism of residue fields, and put $A_j=\\mathcal O_{U_j,u_j}$. Here etale means [def-weil-etale-morphism], finite presentation means [def-sbc-locally-finite-presentation] together with quasi-compactness and quasi-separatedness, and local rings and residue fields are [def-weil-pbc-localization-at-prime, def-weil-residue-field]. There exist a scheme $S'$, a point $s'\\in S'$, and an etale morphism $e:S'\\to S$ with $e(s')=s$ and $\\kappa(s)\\cong\\kappa(s')$, together with an isomorphism $A_d\\cong\\mathcal O_{S',s'}$ of $\\mathcal O_{S,s}$-algebras whose structural map is the composite of the given local-ring maps. The induced residue-field isomorphism agrees with their composite. When $d=0$ one may take $(S',s')=(S,s)$. For every morphism $f:X\\to S$ and $x\\in X$ with $f(x)=s$, the fibre of $X\\times_S\\operatorname{Spec}A_d\\to X$ over $x$ is canonically $\\operatorname{Spec}\\kappa(x)$, and its unique point maps to the closed point of $\\operatorname{Spec}A_d$. Equivalently the canonical maps identify $\\kappa(x)\\otimes_{\\mathcal O_{S,s}}A_d$ with $\\kappa(x)\\otimes_{\\kappa(s)}\\kappa(s')\\cong\\kappa(x)$. Spectra and fibre products are [def-weil-affine-spectrum, def-pc-fibre-product]; tensor products are [def-weil-pbc-module-tensor-product].",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05I5, proposition-finite-type-flat-at-point, first paragraph (local-base replacements) and the unique-point clause of the statement; returned proof steps 2 and 11, final residue-field calculation"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-etale-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-residue-field",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Induct on $j\\in\\{0,\\ldots,d\\}$ with invariant: there is a pointed scheme $(T_j,t_j)$ etale over $(S,s)$ and an isomorphism $\\theta_j:\\mathcal O_{T_j,t_j}\\cong A_j$ whose map from $A_0$ is precisely the first $j$ given local maps. Its residue map is their composite. For $j=0$, take $(T_0,t_0)=(S,s)$ and the identity. The identity is an open immersion and hence etale by (1) of the cited permanence lemma.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05I5, proposition-finite-type-flat-at-point, first proof, first paragraph: finitely many elementary etale replacements"
+   }
+  },
+  {
+   "text": "Assume the invariant at $j<d$. Choose an affine open $W=\\operatorname{Spec}R\\subset T_j$ containing $t_j$, with corresponding prime $p$. The affine-open stalk lemma identifies $R_p$ with $\\mathcal O_{T_j,t_j}$ compatibly with germs. Through $\\theta_j$ regard $U_{j+1}=\\operatorname{Spec}B$ as etale over $\\operatorname{Spec}R_p$; write $r\\subset B$ for $u_{j+1}$. The unpointed etale model lemma gives an etale $R$-algebra $C$, a map $i:C\\to B$, and a multiplicative subset $M\\subset C$ such that $B=M^{-1}C$, with $R\\to C\\to B$ exactly $R\\to R_p\\cong A_j\\to B$. This applies to the given affine etale morphism, with no Noetherian hypothesis.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "new-lem-sbc-prime-localization-etale-algebra-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00U2, lemma-etale, (9),(10); Tag 00CR, lemma-localization-colimit; Tag 00CP, proposition-universal-property-localization"
+   }
+  },
+  {
+   "text": "Put $q=i^{-1}(r)$. It is prime, avoids $M$ because elements of $M$ become units in $B$, and contracts to $p$ in $R$ because the given point lies over the closed point of $\\operatorname{Spec}R_p$. There is a canonical isomorphism $C_q\\cong B_r$: send $c/t$ to $i(c)/i(t)$. Conversely $C\\to C_q$ inverts $M$, so it extends to $B=M^{-1}C\\to C_q$ by $i(c)/i(m)\\mapsto c/m$. For $b=i(c)/i(m)\\notin r$, necessarily $c\\notin q$, so its image $c/m$ is a unit; thus this extends to $B_r\\to C_q$. Both composites fix every numerator from $C$ and every inverted denominator, so are identities by the fraction definition. The maps preserve the specified structural map from $R_p$, not merely the abstract local rings. This is the elementary fraction argument for the localization supplied in the preceding step.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CP, proposition-universal-property-localization; Tag 00CO, definition-localization"
+   }
+  },
+  {
+   "text": "Take $T_{j+1}=\\operatorname{Spec}C$, $t_{j+1}=q$, and use $T_{j+1}\\to W\\hookrightarrow T_j\\to S$. The first arrow is etale by the model, the middle is an open immersion, and etale maps compose. The affine stalk and Spec-map stalk lemmas identify its local map with the fraction map $R_p\\to C_q$. Composing $C_q\\cong B_r=\\mathcal O_{U_{j+1},u_{j+1}}=A_{j+1}$ with these identifications proves the invariant. Passing to the quotients by maximal ideals gives exactly the given residue-field map, an isomorphism by hypothesis. Hence $\\theta_{j+1}$ and its residue map compose with the preceding ones as required. Induction ends with $(S^{\\prime},s^{\\prime})=(T_d,t_d)$; invert $\\theta_d$ for the isomorphism in the statement. At $d=0$ retain $S$ itself.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-spec-map-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV, lemma-spec-sheaves, (6); Tag 01I1, lemma-morphism-into-affine; Morphisms Tags 02GP, 02GN"
+   }
+  },
+  {
+   "text": "For each $1\\le j\\le d$, let $\\mathfrak m_{j-1}$ be the maximal ideal of $A_{j-1}$, write $U_j=\\operatorname{Spec}B_j$, and let $r_j$ be its marked prime. Base change and the etale-over-field lemma give $B_j/\\mathfrak m_{j-1}B_j\\cong\\prod_{a=1}^n L_a$ with each $L_a/\\kappa(A_{j-1})$ finite separable. The quotient-localization lemma identifies $A_j/\\mathfrak m_{j-1}A_j$ with the localization of that product at the prime induced by $r_j$ (which contains $\\mathfrak m_{j-1}B_j$). This is one field factor: the prime is the kernel of one projection by the finite-product spectrum lemma; the idempotent of that factor is outside the prime, and inverting it kills all other factors. Thus the quotient is a field, so $\\mathfrak m_{j-1}A_j=\\mathfrak m_j$. Its structural map from $\\kappa(A_{j-1})$ is the given residue-field isomorphism, not an arbitrary field isomorphism. In particular the nonempty marked fibre ensures $n\\ge1$.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-base-change",
+    "lem-weil-pbc-etale-algebra-over-field-product",
+    "lem-weil-pbc-localization-at-prime-of-quotient",
+    "lem-weil-pbc-spec-finite-product-fields"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00U2, lemma-etale, (2); Tag 00U3, lemma-etale-over-field; Tag 00CT, proposition-localize-quotient; Tag 00ED, lemma-spec-product"
+   }
+  },
+  {
+   "text": "Extension of ideals is associative: the ideal generated in $A_j$ by $\\mathfrak m_0$ equals the extension of the ideal it generates in $A_{j-1}$, since both consist of finite sums of images of elements of $\\mathfrak m_0$ times elements of $A_j$. Induction using the previous step gives $\\mathfrak m_0 A_d=\\mathfrak m_d$ and identifies $A_d/\\mathfrak m_0A_d=\\kappa(A_d)$ with $\\kappa(s)$ via the composite residue map. Consequently for any field $K$ over $\\kappa(s)$ the map $K\\otimes_{A_0}A_d\\to K$, $b\\otimes a\\mapsto b\\,\\overline a$, is an isomorphism, inverse $b\\mapsto b\\otimes1$. Here $\\overline a\\in\\kappa(s)$ is defined by the inverse composite residue isomorphism. To check the inverse on $b\\otimes a$, lift $\\overline a$ to $a_0\\in A_0$; then $a-a_0\\in\\mathfrak m_0 A_d$ vanishes in the tensor product and balancing gives $b\\otimes a=b\\overline a\\otimes1$. This also proves canonically $K\\otimes_{A_0}A_d\\cong K\\otimes_{\\kappa(s)}\\kappa(s^{\\prime})$ using step 4.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-residue-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05I5, proposition-finite-type-flat-at-point, unique-point clause; explicit residue-field calculation"
+   }
+  },
+  {
+   "text": "For $f:X\\to S$ and $x$ over $s$, put $K=\\kappa(x)$ with its induced $\\kappa(s)$-algebra structure. By the fibre-product universal property (pasting of the two cartesian squares) the fibre over $x$ is $\\operatorname{Spec}K\\times_S\\operatorname{Spec}A_d$, where $\\operatorname{Spec}K\\to S$ is $f\\circ j_x$ with $j_x:\\operatorname{Spec}K\\to X$ the canonical residue-field morphism. By residue-field naturality $f\\circ j_x=j_s\\circ\\operatorname{Spec}(\\kappa(s)\\to K)$, and $j_s$ is $\\operatorname{Spec}$ of the residue map $A_0\\to\\kappa(s)$ followed by the canonical $g_s:\\operatorname{Spec}A_0\\to S$; the second map is $g_s\\circ\\operatorname{Spec}(A_0\\to A_d)$. Choose an affine open $W=\\operatorname{Spec}R\\ni s$ with prime $p$ and open immersion $\\iota_W$. By the affine-open stalk lemma $R_p\\cong A_0$ compatibly with germs, and $\\iota_W\\circ\\operatorname{Spec}(R\\to R_p)$ and $g_s$ both send the closed point to $s$ with the identity stalk map $A_0\\to A_0$, so they are equal by the classification of morphisms from the spectrum of a local ring. Thus both maps factor through $\\iota_W$, and since $\\iota_W$ is a monomorphism a cone over $S$ of the two factored maps is the same as a cone over $\\operatorname{Spec}R$: the fibre is $\\operatorname{Spec}K\\times_{\\operatorname{Spec}R}\\operatorname{Spec}A_d$. The affine fibre-product lemma identifies it with $\\operatorname{Spec}(K\\otimes_RA_d)$ compatibly with both projections, and $K\\otimes_RA_d=K\\otimes_{A_0}A_d$ because the elements of $R\\setminus p$ already act invertibly on both factors. By step 6 this is $\\operatorname{Spec}K$. The map $A_d\\to K$ is the residue map followed by the field embedding $\\kappa(s)\\to K$, so its kernel is exactly $\\mathfrak m_d$. Its unique point consequently maps to the closed point of $\\operatorname{Spec}A_d$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-residue-field-point-naturality",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-morphism-from-spec-local-ring",
+    "lem-weil-pbc-open-immersion-monomorphism",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I4, lemma-fibre-product-affine-schemes; flat.tex Tag 05I5, proposition-finite-type-flat-at-point, unique-point clause"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "new-lem-sbc-prime-localization-etale-algebra-model",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-spec-map-stalk-localization",
+  "lem-weil-pbc-etale-ring-base-change",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-spec-finite-product-fields",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-residue-field",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-residue-field-point-naturality",
+  "lem-weil-pbc-morphism-from-spec-local-ring",
+  "lem-weil-pbc-open-immersion-monomorphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05I5, proposition-finite-type-flat-at-point, first proof, first paragraph and unique-point clause; explicit induction and residue calculation using Tags 00U2, 00U3, 00CP, 00CT and 01I4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "elementary etale neighborhoods over a scheme local ring descend and finite towers of local etale neighborhoods come from one etale neighborhood",
+   "results": "[leanfinder] OK 8 hit(s). AlgebraicGeometry.Scheme.Etale; Algebra.exists_etale_of_isEtaleAt; RingHom.Etale.propertyIsLocal; RingHom.Etale.ofLocalizationSpan; RingHom.Etale.ofLocalizationSpanTarget; Algebra.mem_etaleLocus_iff; Algebra.isOpen_etaleLocus; Algebra.basicOpen_subset_etaleLocus_iff_etale. The hits concern etale loci, localization of a finitely presented algebra and the category of etale schemes. None realizes a finite tower over scheme local rings with its structural map and residue-field and unique-point assertions.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, IsLocalRing",
+   "results": "[loogle] OK 0 hit(s). 0 hits. The hits concern etale loci, localization of a finitely presented algebra and the category of etale schemes. None realizes a finite tower over scheme local rings with its structural map and residue-field and unique-point assertions.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*(neighbo|stalk|localRing)|local.*etale",
+   "results": "[grep] OK 4 hit(s). Mathlib/AlgebraicGeometry/Sites/Proetale.lean:145; Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean:80; Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean:85; Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:57. The hits concern etale loci, localization of a finitely presented algebra and the category of etale schemes. None realizes a finite tower over scheme local rings with its structural map and residue-field and unique-point assertions.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite sequence of elementary etale local extensions realized by one etale neighborhood of a scheme point",
+   "results": "[leansearch] OK 8 hit(s). AlgebraicGeometry.IsEtale; Algebra.exists_etale_of_isEtaleAt; AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.Scheme.Etale; RingHom.Etale.propertyIsLocal; Algebra.FormallyEtale.iff_exists_algEquiv_prod; Algebra.FormallyEtale.of_isSeparable_aux; AlgebraicGeometry.Scheme.etaleTopology. The hits concern etale loci, localization of a finitely presented algebra and the category of etale schemes. None realizes a finite tower over scheme local rings with its structural map and residue-field and unique-point assertions.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "an etale neighborhood of Spec of the local ring at a scheme point descends to an open neighborhood with the same marked local ring",
+   "results": "[leanfinder] OK 8 hit(s). AlgebraicGeometry.instIsPreimmersionFromSpecStalk; AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.Scheme.Etale.forget; Algebra.exists_etale_of_isEtaleAt; AlgebraicGeometry.IsSmooth.exists_isStandardSmooth; AlgebraicGeometry.IsEtale; Algebra.mem_etaleLocus_iff; Algebra.isOpen_etaleLocus. The hits concern etale loci, localization of a finitely presented algebra and the category of etale schemes. None realizes a finite tower over scheme local rings with its structural map and residue-field and unique-point assertions.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite tower of local rings of etale rational neighborhoods is realized by a single etale scheme neighborhood",
+   "results": "8 hits: Algebra.exists_etale_of_isEtaleAt, Algebra.mem_etaleLocus_iff, Algebra.basicOpen_subset_etaleLocus_iff_etale, Algebra.basicOpen_subset_etaleLocus_iff, Algebra.etaleLocus, Algebra.Etale.exists_subalgebra_fg, Algebra.etaleLocus_eq_univ_iff_etale, Algebra.isOpen_etaleLocus. Read results: etale locus, principal localization, etale field products and topology declarations do not give the tower realization with compatible local maps and fibre clause.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, IsLocalization",
+   "results": "0 hits: . Read results: etale locus, principal localization, etale field products and topology declarations do not give the tower realization with compatible local maps and fibre clause.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*(neighbo|localRing|tower)|local.*etale",
+   "results": "4 hits: Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean. Read results: etale locus, principal localization, etale field products and topology declarations do not give the tower realization with compatible local maps and fibre clause.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite sequence of elementary etale local extensions realized by a single etale neighborhood of a scheme point",
+   "results": "8 hits: Algebra.exists_etale_of_isEtaleAt, AlgebraicGeometry.IsEtale, RingHom.Etale.propertyIsLocal, Algebra.FormallyEtale.of_isLocalization, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.etaleTopology, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.Etale.iff_exists_algEquiv_prod. Read results: etale locus, principal localization, etale field products and topology declarations do not give the tower realization with compatible local maps and fibre clause.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "etale algebra over localization at prime descends to neighborhood with same local ring and residue field",
+   "results": "8 hits: Algebra.exists_etale_of_isEtaleAt, RingHom.Etale.ofLocalizationSpan, RingHom.Etale.ofLocalizationSpanTarget, Algebra.IsEtaleAt, Algebra.mem_etaleLocus_iff, Algebra.Etale.of_isLocalizationAway, Algebra.Etale.of_isLocalization_Away, Algebra.etaleLocus. Read results: etale locus, principal localization, etale field products and topology declarations do not give the tower realization with compatible local maps and fibre clause.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-finite-type-flat-etale-neighborhood",
+  "date": "2026-10-22",
+  "group": "Q11"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Supporting Tag 05I7 -> Proposition 05I5 algebra branch: first paragraph (local-base replacements) and the unique-point clause of the statement; returned proof steps 2 and 11, final residue-field calculation",
+   "via": [
+    "lem-trf-finite-type-flat-etale-neighborhood",
+    "lem-trf-flat-finite-type-flat-point-local"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-pointed-etale-local-tower-realization",
+  "worker": "stage1",
+  "summary": "Realize the tower inductively using the existing unpointed prime-localization etale model. Recover the marked point and compatible stalk isomorphism by explicit inverse fraction maps, then compute successive closed fibres and the final tensor fibre. No new nodes, no statement change, no Lean edits.",
+  "blueprint": "Supporting Tag 05I7 -> Tag 05I5 branch below lem-trf-local-term-locality, through lem-trf-flat-finite-type-flat-point-local and lem-trf-finite-type-flat-etale-neighborhood: finite local-base replacements and retention of the unique point over x. The latest ancestor proof itself contains no tower assertion.",
+  "tool_uses": [
+   {
+    "node": "new-lem-sbc-prime-localization-etale-algebra-model",
+    "why": "Generic affine etale algebra model at a prime supplies the unpointed localization used at each induction step; no node of sk-i-curve-zero states this descent theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "new-lem-sbc-prime-localization-etale-algebra-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q90-8b5e9eff8",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-8b5e9eff8 (reviewer sub-agent of L); spot-checked: Read the whole item, its 14 cited node statements, the Lean record of the model node and Stacks flat.tex Tag 05I5 (l.2477, first proof, first paragraph and the unique-point clause). The delivery is a first split: there is no repair note, the item is still unsplit in both clones, there are no new nodes and the statement is unchanged. The statement is true; I tested d=0, d=1 over a field with a split factor, a non-reduced base and a non-trivial residue extension (excluded by the hypothesis). It is not a duplicate: the etale-triples-prime-localization family is pointed over a separable-closure K. Steps 1-6 are correct. Step 2: the model node gives C, a, i and M with a then i equal to R to R_p to B and B a localization of C at M. Step 3: the fraction argument C_q = B_r is elementary. Step 4: the stalk map follows from the affine-open stalk lemma and the Spec-map stalk lemma. Step 5: etale base change plus the field-product lemma, with the quotient-localization lemma applied to I = m_{j-1}B_j inside r_j, gives m_{j-1}A_j = m_j. Step 6: an explicit balanced-tensor inverse. C1 fault in step 7, repaired: three facts it used had no node. These are (a) f composed with j_x factors through Spec kappa(s), lem-weil-pbc-residue-field-point-naturality; (b) Spec O_{S,s} to S factors through the affine chart, lem-weil-pbc-morphism-from-spec-local-ring with the affine-open stalk lemma; (c) the fibre product over S becomes one over Spec R because an open immersion is a monomorphism, lem-weil-pbc-open-immersion-monomorphism. The fix rewrites step 7 and adds these to its uses and to proof_deps; all three are Mathlib leaves and no cycle arises. Accepted tool uses: new-lem-sbc-prime-localization-etale-algebra-model and lem-weil-pbc-spec-finite-product-fields, both generic and carrying Lean records. Advisory: 'affine morphism' has no definition node in the base-era statement.; 1 file(s) fixed by the reviewer"
+ }
+}

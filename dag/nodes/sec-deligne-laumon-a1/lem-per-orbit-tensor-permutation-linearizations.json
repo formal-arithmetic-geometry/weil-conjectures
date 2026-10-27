@@ -1,0 +1,136 @@
+{
+ "id": "lem-per-orbit-tensor-permutation-linearizations",
+ "kind": "statement",
+ "title": "Permutation linearizations and normalization of orbit tensor powers",
+ "statement": "Let $H$ be a finite group, $X,Y$ schemes [def-pc-scheme], and $a:H\\to\\operatorname{Aut}(X)$ satisfy $a_1=1$ and $a_{gh}=a_h;a_g$. Let $q:X\\to Y$ satisfy $a_h;q=q$ and let $L$ be any module sheaf. For $N=\\bigotimes_h a_h^*L$ [def-sfb-pencil-orbit-bundle-norm], there exist isomorphisms $\\lambda_g:a_g^*N\\simeq N$ and $\\lambda_{d,g}:a_g^*(N^{\\otimes d})\\simeq N^{\\otimes d}$ for all $d\\geq0$. Both obey the unit and cocycle laws relative to the normalized identity and composition comparisons [def-per-orbit-tensor-section-comparisons]: $\\lambda_{gh}=\\lambda_h\\circ a_h^*\\lambda_g\\circ c_{g,h}$. For every open $T\\subseteq Y$ and every $s\\in\\Gamma(q^{-1}T,L)$, $\\lambda_g$ fixes the pullback of the orbit frame $\\bigotimes_h a_h^*s$, and $\\lambda_{d,g}$ fixes its pure $d$th power, including $d=0$. No finite-morphism, invariant-ring or invertibility hypothesis is imposed.",
+ "stmt_deps": [
+  "def-per-orbit-tensor-section-comparisons",
+  "def-pc-scheme",
+  "def-sfb-pencil-orbit-bundle-norm"
+ ],
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tags 01CA (section-tensor-product) and 01CD (lemma-tensor-product-pullback); parent proof Step 2, the explicit finite-permutation and cocycle calculation of Q10, and its tensor-power version in Step 6. The norm argument of Rydh Proposition 4.7 is provenance, not an invoked descent theorem."
+ },
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-module-pullback-tensor] to distribute pullback over the iterated tensor, including the unit. The normalized composition comparison identifies the pulled-back factor indexed by h with the one indexed by hg. Right multiplication by g permutes the finite enumeration of H. Use the symmetry and associativity of [lem-weil-pbc-module-tensor-symmetric-monoidal] to reorder those factors and obtain lambda_g.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-tensor",
+    "lem-weil-pbc-module-tensor-symmetric-monoidal",
+    "def-per-orbit-tensor-section-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the identity, the factor permutation is the identity. For two elements the composite permutations h -> hg -> hgk give the permutation for gk. The symmetric monoidal coherence identities and the uniqueness of the unit-compatible pullback comparisons identify the resulting maps. This proves the normalized unit and cocycle laws.",
+   "uses": [
+    "lem-weil-pbc-module-tensor-symmetric-monoidal",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Iterate the tensor pullback comparison to define the tensor-power maps. At degree zero take its unit map. The tensor-section and symmetry formulas show that each orbit section, and each of its powers, is fixed. The same permutation and composition calculation proves the power unit and cocycle laws.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-tensor",
+    "lem-weil-pbc-module-tensor-symmetric-monoidal",
+    "def-per-orbit-tensor-section-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-pullback-tensor",
+  "lem-weil-pbc-module-tensor-symmetric-monoidal",
+  "def-per-orbit-tensor-section-comparisons",
+  "def-pc-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tags 01CA (section-tensor-product) and 01CD (lemma-tensor-product-pullback); parent proof Step 2, the explicit finite-permutation and cocycle calculation of Q10, and its tensor-power version in Step 6. The norm argument of Rydh Proposition 4.7 is provenance, not an invoked descent theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite group orbit tensor of a sheaf of modules has canonical permutation linearizations satisfying the cocycle law",
+   "results": "{\"t\": \"2026-10-26T08:10:47Z\", \"tool\": \"leansearch\", \"query\": \"A finite group orbit tensor of a sheaf of modules has canonical permutation linearizations satisfying the cocycle law\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.linearization\", \"groupCohomology.cocyclesOfIsCocycle₁\", \"groupCohomology.cocyclesOfIsCocycle₂\", \"groupCohomology.cocycles\", \"MulAction.toPerm\", \"groupCohomology.cocyclesOfIsMulCocycle₁\", \"MulAction.instElemOrbit_1\", \"MulAction.orbitRel.Quotient.orbit.coe_smul\"], \"digest\": \"db3ef4a4a108395d\"}",
+   "date": "2026-10-26",
+   "verdict": "Representation linearization and ordinary group cohomology do not state the scheme sheaf construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Symmetric monoidal pullback carries the finite orbit tensor to its permutation reindexing with coherent group action",
+   "results": "{\"t\": \"2026-10-26T08:13:30Z\", \"tool\": \"leanfinder\", \"query\": \"Symmetric monoidal pullback carries the finite orbit tensor to its permutation reindexing with coherent group action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Action.leftRegularTensorIso_hom_hom\", \"Action.diagonalSuccIsoTensorTrivial_hom_hom_apply\", \"Action.diagonalSuccIsoTensorTrivial_inv_hom_apply\", \"Rep.diagonalSuccIsoTensorTrivial_inv_hom_single_left\", \"Rep.diagonalSuccIsoTensorTrivial_inv_hom_single_right\", \"Action.diagonalSuccIsoTensorDiagonal_inv_hom\", \"Action.diagonalSuccIsoTensorDiagonal_hom_hom\", \"Rep.diagonalSuccIsoTensorTrivial_inv_hom_single_single\"], \"digest\": \"a2706cf2c9399300\"}",
+   "date": "2026-10-26",
+   "verdict": "Action tensor equivalences do not give the required normalized scheme-module orbit tensor."
+  },
+  {
+   "tool": "grep",
+   "query": "orbitTensor|orbit_tensor|invariant_frame_line|tensorPullbackSection",
+   "results": "{\"t\": \"2026-10-26T08:13:27Z\", \"tool\": \"grep\", \"query\": \"orbitTensor|orbit_tensor|invariant_frame_line|tensorPullbackSection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "No matching Mathlib declarations; the named section constructions are project definitions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrbitTensorLineDescent",
+  "date": "2026-10-26",
+  "group": "A4"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Expose XVI, section 3.7, printed pp.254--255: the scheme quotient X double-prime/H is projective over X. This lemma supplies descent of the orbit tensor of a line bundle through an already constructed finite quotient; it asserts neither existence of that quotient nor ampleness. Substep: Permutation linearizations and normalization of orbit tensor powers.",
+   "via": [
+    "lem-per-orbit-tensor-line-descent",
+    "lem-per-projective-finite-group-quotient",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrbitTensorPermutationLinearizations",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrbitTensorPermutationLinearizations.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_orbit_tensor_linearizations",
+  "statement": "theorem exists_orbit_tensor_linearizations {H : Type v} [Group H] [Finite H]\n    {X Y : Scheme.{u}} (a : H → (X ≅ X))\n    (a_one : (a 1).hom = 𝟙 X)\n    (a_mul : ∀ g h : H, (a (g * h)).hom = (a h).hom ≫ (a g).hom)\n    (q : X ⟶ Y) (aq : ∀ h : H, (a h).hom ≫ q = q) (L : X.Modules) :\n    ∃ (lin : ∀ g : H,\n        (tensorPullback (a g).hom).obj (pencilOrbitBundle a L) ≅ pencilOrbitBundle a L)\n      (linPow : ∀ (d : ℕ) (g : H),\n        (tensorPullback (a g).hom).obj ((pencilOrbitBundle a L).tensorPow d) ≅\n          (pencilOrbitBundle a L).tensorPow d),\n      (lin 1).hom = (orbitLinearizationUnit a a_one (pencilOrbitBundle a L)).hom ∧\n      (∀ g h : H, (lin (g * h)).hom =\n        (orbitLinearizationComp a a_mul (pencilOrbitBundle a L) g h).hom ≫\n          (tensorPullback (a h).hom).map (lin g).hom ≫ (lin h).hom) ∧\n      (∀ d : ℕ, (linPow d 1).hom =\n        (orbitLinearizationUnit a a_one ((pencilOrbitBundle a L).tensorPow d)).hom) ∧\n      (∀ (d : ℕ) (g h : H), (linPow d (g * h)).hom =\n        (orbitLinearizationComp a a_mul ((pencilOrbitBundle a L).tensorPow d) g h).hom ≫\n          (tensorPullback (a h).hom).map (linPow d g).hom ≫ (linPow d h).hom) ∧\n      (∀ (T : Y.Opens) (s : Γ(L, q ⁻¹ᵁ T)) (g : H),\n        (lin g).hom.app (q ⁻¹ᵁ T)\n          (orbitInvariantPullback (a g).hom (pencilOrbitBundle a L) (q ⁻¹ᵁ T)\n            (congrArg (fun k : X ⟶ Y ↦ k ⁻¹ᵁ T) (aq g))\n            (orbitTensorFrame a L (q ⁻¹ᵁ T)\n              (fun h ↦ congrArg (fun k : X ⟶ Y ↦ k ⁻¹ᵁ T) (aq h)) s)) =\n          orbitTensorFrame a L (q ⁻¹ᵁ T)\n            (fun h ↦ congrArg (fun k : X ⟶ Y ↦ k ⁻¹ᵁ T) (aq h)) s) ∧\n      (∀ (d : ℕ) (T : Y.Opens) (s : Γ(L, q ⁻¹ᵁ T)) (g : H),\n        (linPow d g).hom.app (q ⁻¹ᵁ T)\n          (orbitInvariantPullback (a g).hom ((pencilOrbitBundle a L).tensorPow d)\n            (q ⁻¹ᵁ T) (congrArg (fun k : X ⟶ Y ↦ k ⁻¹ᵁ T) (aq g))\n            (orbitPowerSection (pencilOrbitBundle a L) (q ⁻¹ᵁ T) d\n              (fun _ ↦ orbitTensorFrame a L (q ⁻¹ᵁ T)\n                (fun h ↦ congrArg (fun k : X ⟶ Y ↦ k ⁻¹ᵁ T) (aq h)) s))) =\n          orbitPowerSection (pencilOrbitBundle a L) (q ⁻¹ᵁ T) d\n            (fun _ ↦ orbitTensorFrame a L (q ⁻¹ᵁ T)\n              (fun h ↦ congrArg (fun k : X ⟶ Y ↦ k ⁻¹ᵁ T) (aq h)) s))",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-23da1",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261026T091041-L-3301973",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-23da1",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261026T091041-L-3301973",
+  "kind": "interface",
+  "note": "independent cc review: orbit_tensor_line_descent signature vs clone (identical); 7 moved defs vs clone bodies (verbatim); new sorry statements vs their nodes and the item's needs; #print axioms of the item and local-frames theorem in a /tmp sandbox"
+ }
+}

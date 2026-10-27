@@ -1,0 +1,306 @@
+{
+ "id": "lem-sfb-perfect-coefficient-arrow-finite-realization",
+ "kind": "statement",
+ "title": "Finite coherent factorization of a cohomological epimorphism from a perfect coefficient module",
+ "statement": "Let $D$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], let $D\\to A$ be a homomorphism of commutative rings, and let $Y\\to\\operatorname{Spec}D$ be separated and of finite type [def-pc-scheme, def-pc-morphism-conventions]. For a commutative $D$-algebra $E$ with a specified map $E\\to A$, put $Y_E=Y\\times_D\\operatorname{Spec}E$ and let $\\pi_E:Y_A\\to Y_E$ be the projection [def-pc-fibre-product]. Use $\\mathcal B$, $D_{\\mathrm{QCoh}}(\\mathcal B)$, $\\Phi_E$, $\\widehat K$, $U$, perfection over $\\mathcal B$, and the specified action arrow $\\nu_E$ of [def-sfb-dg-coefficient-realization]. Let $H$ be perfect over $\\mathcal B$, let $K\\in D_{\\mathrm{QCoh}}(\\mathcal O_{Y_A})$ [def-pc-derived-category], let $u:H\\to\\widehat K$ be a morphism in $D_{\\mathrm{QCoh}}(\\mathcal B)$, and let $m\\in\\mathbf Z$. Suppose that the morphism of sheaves $H^i(Uu):H^i(UH)\\to H^i(U\\widehat K)$ is surjective for every $i\\ge m$.\n\nThere exist a commutative finite type $D$-algebra $E$ with a factorization $D\\to E\\to A$, an object $G\\in D(\\mathcal O_{Y_E})$ with bounded coherent cohomology [pqf-def-coherent], a morphism $\\gamma:G\\to R\\pi_{E*}K$ in the ordinary scheme module-derived category [def-pc-derived-direct-image], and a morphism $\\sigma:H\\to\\Phi_E(G)$ in $D_{\\mathrm{QCoh}}(\\mathcal B)$ such that\n$$\\nu_E(\\gamma)\\circ\\sigma=u,$$\nand $H^i(U\\sigma):H^i(UH)\\to H^i(U\\Phi_E(G))$ is surjective for every $i\\ge m$. No injectivity of $H^i(Uu)$ is assumed, and no flatness of the coefficient maps or relative pseudo-coherence of $K$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Agent-formulated cohomological-epimorphism finite-factorization prerequisite for the unnumbered Kiehl assertion following Tag 0CSD (lemma-flat-proper-pseudo-coherent-direct-image-general). This statement is NOT asserted in that paragraph. WANTED: Kiehl (1972), Ein Descente-Lemma und Grothendiecks Projektionssatz fuer nichtnoethersche Schemata, Math. Ann. 198, pp.287--316, finite coherent factorization in the direction H to coefficient model to ordinary target, retaining surjectivity above a cutoff. Replaces the false reverse-arrow approximation in the returned delivery."
+ },
+ "stmt_deps": [
+  "def-sfb-dg-coefficient-realization",
+  "def-weil-pbc-noetherian-ring",
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-pc-fibre-product",
+  "def-pc-derived-category",
+  "pqf-def-coherent",
+  "def-pc-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "For the empty open and every choice of $H,K,u,m$, take $E=D$, $G=0$, $\\gamma=0$, and $\\sigma=0$. All sheaves on that open and its coefficient base changes are zero, so the factorization equation and all surjectivity requirements hold. Thus the uniform assertion used below also holds on the empty open.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 08DR (lemma-induction-principle), separated-open induction; agent assembly with the separately stated affine and two-open factorization inputs."
+   }
+  },
+  {
+   "text": "The scheme $Y$ is quasi-compact and quasi-separated because it is separated and finite type over an affine scheme; it is also separated as a scheme. For each quasi-compact open $W\\subseteq Y$, its inclusion is quasi-compact: its inverse image of any affine open $T\\subseteq Y$ is $W\\cap T$, which is quasi-compact by the intersection lemma. Thus $W\\hookrightarrow Y$ is of finite type, and composition makes $W\\to\\operatorname{Spec}D$ finite type. Its separatedness follows directly by restricting the diagonal of $Y/\\operatorname{Spec}D$. The same facts apply to finite unions and intersections of quasi-compact opens.",
+   "uses": [
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-sc-separated-over-affine-scheme-separated",
+    "pqf-lem-qs-intersection-qc",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-sfb-finite-type-composition-base-change",
+    "def-pc-morphism-conventions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 08DR (lemma-induction-principle), separated-open induction; agent assembly with the separately stated affine and two-open factorization inputs."
+   }
+  },
+  {
+   "text": "For a quasi-compact open $W$, let $P(W)$ be the uniform assertion $\\mathscr P(W)$ of the locality lemma: for every perfect source $H'$, every ordinary target $K'$, every integer $r$, and every $u':H'\\to\\widehat {K'}$ surjective on underlying cohomology in all degrees $i\\ge r$, there is the displayed finite coherent factorization with first factor surjective in those degrees. These objects are arbitrary on $W$, not restrictions of the original $H,K,u$. The coefficient construction on $W$ is $\\mathcal B_W=\\mathcal O_W\\otimes_D R_A$ with its specified action arrow. If $W$ is affine, write $W=\\operatorname{Spec}S$. Step 2 and the affine-pair criterion show that $S$ is a finite type $D$-algebra. For each such $H',K',u',r$ the affine factorization lemma applies, including its surjectivity hypothesis. It gives $P(W)$ after universal generalization.",
+   "uses": [
+    "def-sfb-dg-coefficient-realization",
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-sfb-affine-perfect-arrow-coherent-factorization",
+    "lem-sfb-perfect-arrow-coherent-factorization-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 08DR (lemma-induction-principle), separated-open induction; agent assembly with the separately stated affine and two-open factorization inputs."
+   }
+  },
+  {
+   "text": "Let $O$ be quasi-compact open and $V$ affine open in $Y$, and assume $P(O)$, $P(V)$ and $P(O\\cap V)$. The intersection is quasi-compact by quasi-separatedness. These are exactly the three UNIFORM premises of the two-open locality lemma, so its conclusion is $P(O\\cup V)$. In particular, the premises apply to every admissible auxiliary perfect source, ordinary target and surjective arrow on the smaller opens, not only to restrictions of the original arrow. This invokes the uniform locality assertion, rather than combining three unrelated witnesses for fixed data.",
+   "uses": [
+    "pqf-lem-qs-intersection-qc",
+    "lem-sfb-perfect-arrow-coherent-factorization-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 08DR (lemma-induction-principle), separated-open induction; agent assembly with the separately stated affine and two-open factorization inputs."
+   }
+  },
+  {
+   "text": "Apply the separated-open induction principle to this uniform property $P$ on the qcqs scheme $Y$. Step 3 supplies every affine case and step 4 supplies its union implication with the intersection premise. Since $Y$ is separated and quasi-compact, it gives $P(Y)$. Now specialize its universal quantifiers to the originally supplied $H,K,m,u$; their required surjectivity is precisely the hypothesis of the item. The resulting $E,G,\\gamma,\\sigma$ satisfy the ordinary scheme-derived type of $\\gamma$, the equation $\\nu_E(\\gamma)\\circ\\sigma=u$, and surjectivity of $H^i(U\\sigma)$ for every $i\\ge m$, as required.",
+   "uses": [
+    "lem-sc-invert-s-cohomology-separated-induction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 08DR (lemma-induction-principle), separated-open induction; agent assembly with the separately stated affine and two-open factorization inputs."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-sc-separated-over-affine-scheme-separated",
+  "pqf-lem-qs-intersection-qc",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-sfb-finite-type-composition-base-change",
+  "def-pc-morphism-conventions",
+  "def-sfb-dg-coefficient-realization",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-sfb-affine-perfect-arrow-coherent-factorization",
+  "lem-sfb-perfect-arrow-coherent-factorization-locality",
+  "lem-sc-invert-s-cohomology-separated-induction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 08DR (lemma-induction-principle): affine case plus conditional two-open matching. The two coefficient-factorization inputs are agent-formulated statement-only obligations, not asserted consequences of the Stacks Kiehl paragraph."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from a perfect dg module on a derived coefficient base change factors up to any cohomological cutoff through a bounded coherent model over a finite type coefficient algebra",
+   "results": "{\"t\": \"2026-10-24T01:39:34Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism from a perfect dg module on a derived coefficient base change factors up to any cohomological cutoff through a bounded coherent model over a finite type coefficient algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.right_fac_of_isStrictlyLE\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\", \"CochainComplex.cm5b\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"CochainComplex.IsKProjective\", \"DerivedCategory.right_fac\"], \"digest\": \"325e2bcc3717eec1\"}",
+   "date": "2026-10-24",
+   "verdict": "Historical search for superseded reverse-arrow statement; no match: DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, CochainComplex.cm5b, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CochainComplex.IsKProjective, DerivedCategory.right_fac; these concern ordinary modules, ordinary scheme pullbacks, fractions, differentials or smooth algebra descent, not the stated sheaf dg coefficient model or finite-stage arrow realization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Perfect\", \"DerivedCategory\"",
+   "results": "{\"t\": \"2026-10-24T01:39:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"Perfect\\\", \\\"DerivedCategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "Historical search for superseded reverse-arrow statement; no match: ; these concern ordinary modules, ordinary scheme pullbacks, fractions, differentials or smooth algebra descent, not the stated sheaf dg coefficient model or finite-stage arrow realization"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*coefficient.*(desc|realiz)|perfect.*dg|pseudo.?coher",
+   "results": "{\"t\": \"2026-10-24T01:39:31Z\", \"tool\": \"grep\", \"query\": \"finite.*coefficient.*(desc|realiz)|perfect.*dg|pseudo.?coher\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "Historical search for superseded reverse-arrow statement; no match: ; these concern ordinary modules, ordinary scheme pullbacks, fractions, differentials or smooth algebra descent, not the stated sheaf dg coefficient model or finite-stage arrow realization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite coefficient realization of maps from perfect modules over a derived fibre product using a Noetherian base",
+   "results": "{\"t\": \"2026-10-24T01:39:31Z\", \"tool\": \"leansearch\", \"query\": \"Finite coefficient realization of maps from perfect modules over a derived fibre product using a Noetherian base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isNoetherian_linearMap_pi\", \"isNoetherian_linearMap\", \"Module.Finite.linearMap\", \"ContinuousLinearMap.instModuleFinite\", \"Perfection.coeff_map\", \"Perfection.map_apply_coe\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"FGModuleCat.instAbelian\"], \"digest\": \"9765eb6043d429ee\"}",
+   "date": "2026-10-24",
+   "verdict": "Historical search for superseded reverse-arrow statement; no match: isNoetherian_linearMap_pi, isNoetherian_linearMap, Module.Finite.linearMap, ContinuousLinearMap.instModuleFinite, Perfection.coeff_map, Perfection.map_apply_coe, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, FGModuleCat.instAbelian; these concern ordinary modules, ordinary scheme pullbacks, fractions, differentials or smooth algebra descent, not the stated sheaf dg coefficient model or finite-stage arrow realization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compact perfect source arrow over a derived scalar extension admits a finite degree coherent factorization after adjoining finitely many ring coefficients",
+   "results": "{\"t\": \"2026-10-24T01:39:59Z\", \"tool\": \"leanfinder\", \"query\": \"A compact perfect source arrow over a derived scalar extension admits a finite degree coherent factorization after adjoining finitely many ring coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.finite_universalFactorizationMap\", \"Algebra.Smooth.exists_finiteType\", \"MvPolynomial.finitePresentation_universalFactorizationMap\", \"Algebra.Smooth.exists_subalgebra_finiteType\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg\", \"Algebra.Smooth.exists_subalgebra_fg\"], \"digest\": \"ea9521f476083d3a\"}",
+   "date": "2026-10-24",
+   "verdict": "Historical search for superseded reverse-arrow statement; no match: MvPolynomial.finite_universalFactorizationMap, Algebra.Smooth.exists_finiteType, MvPolynomial.finitePresentation_universalFactorizationMap, Algebra.Smooth.exists_subalgebra_finiteType, Algebra.IsStandardSmoothOfRelativeDimension.out, AlgebraicGeometry.finite_appTop_of_universallyClosed, Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg, Algebra.Smooth.exists_subalgebra_fg; these concern ordinary modules, ordinary scheme pullbacks, fractions, differentials or smooth algebra descent, not the stated sheaf dg coefficient model or finite-stage arrow realization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cohomologically surjective morphism from a perfect derived coefficient dg module to an ordinary scheme complex factors through a bounded coherent finite coefficient stage with the first map still surjective on cohomology above a cutoff",
+   "results": "{\"t\": \"2026-10-24T02:30:12Z\", \"tool\": \"leanfinder\", \"query\": \"A cohomologically surjective morphism from a perfect derived coefficient dg module to an ordinary scheme complex factors through a bounded coherent finite coefficient stage with the first map still surjective on cohomology above a cutoff\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cm5b\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.right_fac_of_isStrictlyLE\", \"CochainComplex.HomComplex.Cochain.toSingleMk_surjective\", \"CochainComplex.HomComplex.Cochain.fromSingleMk_surjective\", \"CochainComplex.HomComplex.Cocycle.fromSingleMk_surjective\"], \"digest\": \"6371b238f001bfd9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: CochainComplex.cm5b, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE, CochainComplex.HomComplex.Cochain.toSingleMk_surjective, CochainComplex.HomComplex.Cochain.fromSingleMk_surjective, CochainComplex.HomComplex.Cocycle.fromSingleMk_surjective; ordinary derived fractions, homology-sequence epimorphism criteria, cochain factorizations, cotangent modules or group-cohomology maps do not give a finite coherent coefficient-stage factorization of a perfect sheaf dg arrow"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomolog.*surject.*factor|perfect.*coefficient.*factor|finite.*coherent.*factor",
+   "results": "{\"t\": \"2026-10-24T02:30:55Z\", \"tool\": \"grep\", \"query\": \"cohomolog.*surject.*factor|perfect.*coefficient.*factor|finite.*coherent.*factor\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ; ordinary derived fractions, homology-sequence epimorphism criteria, cochain factorizations, cotangent modules or group-cohomology maps do not give a finite coherent coefficient-stage factorization of a perfect sheaf dg arrow"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Factor a cohomological epimorphism from a perfect dg coefficient module through a bounded coherent complex over a finite type coefficient algebra while retaining surjectivity on high cohomology",
+   "results": "{\"t\": \"2026-10-24T02:30:56Z\", \"tool\": \"leansearch\", \"query\": \"Factor a cohomological epimorphism from a perfect dg coefficient module through a bounded coherent complex over a finite type coefficient algebra while retaining surjectivity on high cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cm5b\", \"CochainComplex.isSplitEpi_to_singleFunctor_obj_of_projective\", \"CategoryTheory.Abelian.epi_factorThruCoimage\", \"Condensed.epi_iff_locallySurjective_on_compHaus\", \"HomologicalComplex.instIsNormalEpiCategory\", \"groupHomology.chainsMap_f_map_epi\", \"CategoryTheory.Abelian.coimageStrongEpiMonoFactorisation\", \"groupCohomology.cochainsMap_f_map_epi\"], \"digest\": \"274e6e92249bc02b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: CochainComplex.cm5b, CochainComplex.isSplitEpi_to_singleFunctor_obj_of_projective, CategoryTheory.Abelian.epi_factorThruCoimage, Condensed.epi_iff_locallySurjective_on_compHaus, HomologicalComplex.instIsNormalEpiCategory, groupHomology.chainsMap_f_map_epi, CategoryTheory.Abelian.coimageStrongEpiMonoFactorisation, groupCohomology.cochainsMap_f_map_epi; ordinary derived fractions, homology-sequence epimorphism criteria, cochain factorizations, cotangent modules or group-cohomology maps do not give a finite coherent coefficient-stage factorization of a perfect sheaf dg arrow"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"epi\"",
+   "results": "{\"t\": \"2026-10-24T02:30:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"DerivedCategory\\\", \\\"epi\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"DerivedCategory.HomologySequence.epi_homologyMap_mor₂_iff\", \"DerivedCategory.HomologySequence.epi_homologyMap_mor₁_iff\"], \"digest\": \"ac29f354d919771c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: DerivedCategory.HomologySequence.epi_homologyMap_mor₂_iff, DerivedCategory.HomologySequence.epi_homologyMap_mor₁_iff; ordinary derived fractions, homology-sequence epimorphism criteria, cochain factorizations, cotangent modules or group-cohomology maps do not give a finite coherent coefficient-stage factorization of a perfect sheaf dg arrow"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite Noetherian coefficient factorization of a cohomology epimorphism out of a perfect module over a derived fibre product, in the direction perfect source to coherent model to ordinary target",
+   "results": "{\"t\": \"2026-10-24T02:31:45Z\", \"tool\": \"leanfinder\", \"query\": \"Finite Noetherian coefficient factorization of a cohomology epimorphism out of a perfect module over a derived fibre product, in the direction perfect source to coherent model to ordinary target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.cochainsMap_f_map_epi\", \"groupCohomology.cochainsMap_id_f_map_epi\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"CochainComplex.cm5b\", \"LightCondMod.epi_iff_locallySurjective_on_lightProfinite\", \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"LightCondensed.epi_π_app_zero_of_epi\", \"Algebra.Extension.tensorH1Cotangent\"], \"digest\": \"45a45acd4315dc8b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: groupCohomology.cochainsMap_f_map_epi, groupCohomology.cochainsMap_id_f_map_epi, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange, CochainComplex.cm5b, LightCondMod.epi_iff_locallySurjective_on_lightProfinite, Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential, LightCondensed.epi_π_app_zero_of_epi, Algebra.Extension.tensorH1Cotangent; ordinary derived fractions, homology-sequence epimorphism criteria, cochain factorizations, cotangent modules or group-cohomology maps do not give a finite coherent coefficient-stage factorization of a perfect sheaf dg arrow"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"epi\"",
+   "results": "{\"t\": \"2026-10-24T03:14:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"DerivedCategory\\\", \\\"epi\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"DerivedCategory.HomologySequence.epi_homologyMap_mor₂_iff\", \"DerivedCategory.HomologySequence.epi_homologyMap_mor₁_iff\"], \"digest\": \"ac29f354d919771c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Ordinary derived fractions, sheaf finite-presentation predicates, and underived scalar adjunctions do not state this dg finite coefficient factorization."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficient.*(factor|realiz)|perfect.*dg|pseudo.?coher",
+   "results": "{\"t\": \"2026-10-24T03:14:28Z\", \"tool\": \"grep\", \"query\": \"coefficient.*(factor|realiz)|perfect.*dg|pseudo.?coher\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Ordinary derived fractions, sheaf finite-presentation predicates, and underived scalar adjunctions do not state this dg finite coefficient factorization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite coherent factorization of a cohomological epimorphism from a perfect sheaf dg coefficient module over a Noetherian ring retaining surjectivity above a cutoff",
+   "results": "{\"t\": \"2026-10-24T03:14:29Z\", \"tool\": \"leanfinder\", \"query\": \"Finite coherent factorization of a cohomological epimorphism from a perfect sheaf dg coefficient module over a Noetherian ring retaining surjectivity above a cutoff\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"CochainComplex.cm5b\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\", \"LightCondensed.epi_π_app_zero_of_epi\", \"DerivedCategory.right_fac_of_isStrictlyLE\", \"CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p\", \"CochainComplex.degreewiseEpiWithInjectiveKernel\"], \"digest\": \"a94f609838618ed0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Ordinary derived fractions, sheaf finite-presentation predicates, and underived scalar adjunctions do not state this dg finite coefficient factorization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect modules over derived scalar extension factor through bounded coherent ordinary scheme complexes over finite type coefficient rings",
+   "results": "{\"t\": \"2026-10-24T03:16:02Z\", \"tool\": \"leansearch\", \"query\": \"Perfect modules over derived scalar extension factor through bounded coherent ordinary scheme complexes over finite type coefficient rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.extendRestrictScalarsAdj\", \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"Algebra.FormallyUnramified.projective_of_restrictScalars\", \"Module.FinitePresentation.isLocalizedModule_mapExtendScalars\", \"LinearMap.IsPerfPair.restrictScalars_of_field\", \"comonadicExtendScalars\", \"LinearMap.IsPerfPair.restrictScalars\", \"RestrictScalars.moduleOrig\"], \"digest\": \"56407167cded83fc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Ordinary derived fractions, sheaf finite-presentation predicates, and underived scalar adjunctions do not state this dg finite coefficient factorization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map from a compact sheaf differential graded module to a complex on an ordinary base change has a finite Noetherian coefficient model",
+   "results": "{\"t\": \"2026-10-24T03:16:03Z\", \"tool\": \"leanfinder\", \"query\": \"A map from a compact sheaf differential graded module to a complex on an ordinary base change has a finite Noetherian coefficient model\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.isFinitePresentation\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.IsFiniteType\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"SheafOfModules.Presentation.IsFinite\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType\", \"CondensedMod.ofSheafCompHaus\"], \"digest\": \"224f85ac3afe43a6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Ordinary derived fractions, sheaf finite-presentation predicates, and underived scalar adjunctions do not state this dg finite coefficient factorization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-global-witness-one-degree-binary-patching",
+  "date": "2026-10-24",
+  "group": "NU"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Independent prerequisite: Pseudo-coherent perfect direct images between flat finitely presented families. Kiehl finiteness input: the unnumbered general relative-pseudo-coherence assertion following Stacks lemma-flat-proper-pseudo-coherent-direct-image-general. Finite-degree Noetherian descente input for the Kiehl finiteness assertion. Independent prerequisite: Relative sheaf descente on a prescribed Noetherian envelope. Two-open gluing prerequisite, conditional on approximation on both opens and their intersection, uniform in a supplied finite coefficient stage. Single-degree induction step: cancel finite polynomial-chart top obstructions globally while retaining the prescribed scalar-action normalization. Mayer--Vietoris subproblem for one degree: given a global coherent witness at cutoff n+1 and witnesses on two opens at cutoff n, obtain a global witness at cutoff n. The supplied global witness is part of the hypothesis. Independent input: finite coherent factorization of a cohomologically surjective perfect dg arrow to an ordinary scheme complex, with cohomologically surjective first factor.",
+   "via": [
+    "lem-sfb-global-witness-one-degree-binary-patching",
+    "lem-sfb-sheaf-single-degree-coefficient-cancellation",
+    "lem-sfb-relative-coefficient-window-two-open-locality",
+    "lem-sfb-prescribed-envelope-relative-sheaf-descente",
+    "lem-sfb-relative-complex-noetherian-cohomology-approximation",
+    "lem-sfb-kiehl-relative-pseudocoherent-direct-image",
+    "lem-sfb-flat-family-perfect-direct-image-pseudocoherent",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-perfect-coefficient-arrow-finite-realization",
+  "worker": "stage1",
+  "summary": "Repair of returned Q70 split: replace fixed-arrow two-open existence by a uniform predicate covering all perfect sources, ordinary targets, cutoffs and arrows surjective on high cohomology. Establish the uniform affine case and conditional union step, apply Stacks 08DR, then specialize to the supplied arrow. The item statement and the smaller affine node are unchanged; both new inputs remain statement-only.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Independent prerequisite: Pseudo-coherent perfect direct images between flat finitely presented families. Kiehl finiteness input: the unnumbered general relative-pseudo-coherence assertion following Stacks lemma-flat-proper-pseudo-coherent-direct-image-general. Finite-degree Noetherian descente input for the Kiehl finiteness assertion. Independent prerequisite: Relative sheaf descente on a prescribed Noetherian envelope. Two-open gluing prerequisite, conditional on approximation on both opens and their intersection, uniform in a supplied finite coefficient stage. Single-degree induction step: cancel finite polynomial-chart top obstructions globally while retaining the prescribed scalar-action normalization. Mayer--Vietoris subproblem for one degree: given a global coherent witness at cutoff n+1 and witnesses on two opens at cutoff n, obtain a global witness at cutoff n. The supplied global witness is part of the hypothesis. Independent input: finite coherent factorization of a cohomologically surjective perfect dg arrow to an ordinary scheme complex, with cohomologically surjective first factor. This split realizes the finite-factorization prerequisite by its affine case and an independent UNIFORM conditional two-open locality statement covering all admissible arrows, assembled by Zariski induction. The current blueprint proof (3) itself only calls the direct-image finiteness route; no chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-qcqs-over-affine",
+    "why": "Generic geometric finite-type permanence or affine coordinate criterion; no coefficient approximation is inferred from this tool."
+   },
+   {
+    "node": "lem-sc-separated-over-affine-scheme-separated",
+    "why": "Generic separatedness-over-an-affine implication checks the separated-open conclusion of the induction principle."
+   },
+   {
+    "node": "pqf-lem-qs-intersection-qc",
+    "why": "Generic quasi-compactness of intersections is needed to apply the locality input and the open-induction principle."
+   },
+   {
+    "node": "lem-weil-pbc-qc-open-immersion-finite-type",
+    "why": "Generic geometric permanence ensures every qc open remains finite type over the prescribed base."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic geometric finite-type permanence or affine coordinate criterion; no coefficient approximation is inferred from this tool."
+   },
+   {
+    "node": "lem-weil-pbc-lft-affine-pairs",
+    "why": "Generic geometric finite-type permanence or affine coordinate criterion; no coefficient approximation is inferred from this tool."
+   },
+   {
+    "node": "lem-sc-invert-s-cohomology-separated-induction",
+    "why": "Generic finite-affine-cover induction for properties of qc opens, used only after both required premises have been established."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-sc-separated-over-affine-scheme-separated",
+  "pqf-lem-qs-intersection-qc",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-sc-invert-s-cohomology-separated-induction"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-3ec5ad1b7",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-3ec5ad1b7 (reviewer sub-agent of L); spot-checked: Re-delivery after the 3b6d0574 RETURN (D1/D2/E2). By statement hash, the item statement is byte-identical to the NU 6b8c and Q70 3b6d snapshots, and the affine node is byte-identical to the version accepted at 3b6d. Only the locality node changed. The locality predicate P(W) now quantifies over every perfect H on B_W, every K in D_QCoh(O_{W_A}), every m, and every u with H^i(U_W u) onto for i>=m, and the witnesses may depend on these inputs. That is the uniform repair the return allowed, and it has the same shape as the accepted grandparent lem-sfb-relative-coefficient-window-two-open-locality. The surjectivity hypothesis is restored, which fixes E2. The node is true: O∪V is a quasi-compact open of a scheme separated and of finite type over D, so it is itself separated and of finite type, and the item applied to O∪V gives P(O∪V). It is not a restatement of the item, because it gives neither the affine case nor the induction. Steps: 1 (empty open) is elementary and redundant but harmless. Step 2 is checked against the cited statements: qcqs over affine, separated over affine, qs-intersection-qc, qc open immersion of finite type, finite-type composition. Step 3: lft-affine-pairs shows the coordinate ring S of an affine open is of finite type over D, and the affine node applied to every admissible (H',K',u',r) gives P(W). Step 4: O∩V is quasi-compact, then the locality node applies. Step 5: the 08DR DAG node (Stacks coherent.tex l.557) applies on the qcqs Y, which is separated, so P(Y) holds; specializing to the item's H,K,m,u gives exactly the item. The item's proof is a pure assembly of cited nodes. No duplicates: the nu_E users in the DAG are only the def, comparison, parent and item nodes. No SGA source is cited. Batch-5: def-sfb-dg-coefficient-realization reaches def-trf-cotangent-resolution-data, which is a general definition of standard polynomial resolutions and is not a step of the proof of the trace formula or of Poincare duality. It was already cited by the item on the base, so it is accepted for both new citations. No fixes written."
+ }
+}

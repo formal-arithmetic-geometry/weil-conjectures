@@ -1,0 +1,274 @@
+{
+ "id": "lem-sfb-exact-unit-derived-total-square",
+ "kind": "statement",
+ "title": "Exact natural transformations through derived finite totals and exact postcomposition",
+ "statement": "Let $\\mathcal A,\\mathcal B,\\mathcal C$ be Grothendieck abelian categories [def-sp-grothendieck-abelian] in fixed universes [def-weil-size-convention], using ordinary derived categories and K-injective right derived functors [sk-def-sfb-derived-categories]. Let $G:\\mathcal A\\to\\mathcal B$ be additive and left exact [def-sp-left-exact-additive], $H:\\mathcal A\\to\\mathcal A$ and $P:\\mathcal B\\to\\mathcal C$ additive exact functors, and $\\theta:\\mathrm{id}_{\\mathcal A}\\to H$ a specified natural transformation. Let $K:\\Delta\\to\\operatorname{Ch}^{\\ge0}(\\mathcal A)$ be a strict cosimplicial complex, where $\\Delta$ has finite nonempty ordered sets and monotone maps. Put $T(K)^r=\\bigoplus_{n+q=r}K^{n,q}$ with differential $\\delta+(-1)^nd$ [def-sp-double-complex-total], and let $Q$ denote localization at quasi-isomorphisms. Let $M\\in D(\\mathcal A)$ and $a:M\\xrightarrow{\\sim}QT(K)$. Denote termwise exact descent by $H_D,P_D$ and the descended transformation by $\\theta_D$.\nThe termwise maps $e^{n,q}=\\theta_{K^{n,q}}$ form a strict cosimplicial chain map $e:K\\to HK$. The canonical finite-biproduct identification $E:H(TK)\\xrightarrow{\\sim}T(HK)$ satisfies $E\\theta_{TK}=T(e)$ and, after localization,\n$$Q(E)\\,H_D(a)\\,\\theta_{D,M}=QT(e)\\,a.$$\nThere are compatible nonnegative resolutions of $K,HK,e$ giving natural isomorphisms in $D(\\mathcal C)$\n$$u:P_DRG(M)\\xrightarrow{\\sim}\\operatorname{Tot}_n P_DRG(QK^n),\\qquad w:P_DRG(H_DM)\\xrightarrow{\\sim}\\operatorname{Tot}_n P_DRG(H_DQK^n)$$\nfor which\n$$w\\,P_DRG(\\theta_{D,M})=\\operatorname{Tot}_nP_DRG(\\theta_{D,QK^n})\\,u.$$\nThe comparisons $u,w$ are respectively $P_D(\\chi_{G,K})\\circ P_DRG(a)$ and $P_D(\\chi_{G,HK})\\circ P_DRG(Q(E)H_D(a))$, where $\\chi$ is the canonical derived finite-total comparison of [lem-sfb-nonnegative-derived-totalization] and $P_D$ is moved inside the total by the canonical finite-biproduct identifications. They are independent of compatible resolution choices and natural in maps of $K,M,a$. They preserve specified augmentations and their actual maps; for a strict augmentation by a nonnegative complex, their composite with its derived augmentation is its totalized columnwise derived augmentation. Every total has finite diagonals: with an added resolution index $s$, its terms have $n,q,s\\ge0$ and $n+q+s=r$. For any further exact additive functor $S:\\mathcal C\\to\\mathcal D$ to a Grothendieck abelian category with its ordinary derived category, the corresponding comparisons for $SP$ are the images under $S_D$ of this entire square, using the canonical finite-biproduct identifications, including augmentations. In particular this applies to exact module restriction to a slice site with its pulled-back ring. Neither $H$ nor $P$ nor $S$ is required to preserve injectives; no unbounded product totalization occurs.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015F, label lemma-right-derived-exact-functor; agent-formulated natural-transformation and finite-total comparison, extracted from returned item steps 3, 4, the comparison-naturality part of step 5 and the exact-postcomposition part of step 6. The nonnegative derived-total input is documented in report.md."
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-weil-size-convention",
+  "sk-def-sfb-derived-categories",
+  "def-sp-left-exact-additive",
+  "def-sp-double-complex-total",
+  "def-pur-localized-ringed-site",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sfb-nonnegative-derived-totalization"
+ ],
+ "proof": [
+  {
+   "text": "Use Mathlib Localization.liftNatTrans to descend the chain-level unit, with the identity lift given by the right unitor and the H lift by mapDerivedCategoryFactors. Its component equation gives thetaD_unbounded. On extension by zero, check the mapExtendIso square in degrees in the embedding image; the other source objects vanish. This gives thetaD_normalized.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, label lemma-right-derived-exact-functor; agent-formulated natural-transformation and finite-total comparison, extracted from returned item steps 3, 4, the comparison-naturality part of step 5 and the exact-postcomposition part of step 6. The nonnegative derived-total input is documented in report.md."
+   }
+  },
+  {
+   "text": "Choose the existing normalized nonnegative derived-totalization comparisons for G, H and P. The inverse of beta converts mapped-total extensionality into total.hom_ext. Check beta naturality and E theta = T(e) on every finite summand using beta_summand and naturality of theta. Naturality of the descended theta at a and the nonnegative normalization give localized_unit.",
+   "uses": [
+    "lem-sfb-nonnegative-derived-totalization",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, label lemma-right-derived-exact-functor; agent-formulated natural-transformation and finite-total comparison, extracted from returned item steps 3, 4, the comparison-naturality part of step 5 and the exact-postcomposition part of step 6. The nonnegative derived-total input is documented in report.md."
+   }
+  },
+  {
+   "text": "Use comparisonG.mapReplacement for the strict unit. For compatible augmented replacements, apply one functorial nonnegative resolution I with unit eta from cosimplicial-injective-total-replacement to K, HK, X, HX and every map. All compatibility equations are naturality of eta and theta.",
+   "uses": [
+    "lem-sfb-nonnegative-derived-totalization",
+    "lem-sfb-cosimplicial-injective-total-replacement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, label lemma-right-derived-exact-functor; agent-formulated natural-transformation and finite-total comparison, extracted from returned item steps 3, 4, the comparison-naturality part of step 5 and the exact-postcomposition part of step 6. The nonnegative derived-total input is documented in report.md."
+   }
+  },
+  {
+   "text": "Naturality of exactNonnegativeLocalizationIso follows from mapDerivedCategoryFactors and mapExtendIso. Combine it with summandwise beta naturality to obtain naturality of exactFiniteTotalLocalizationIso. Apply P_D to comparisonG.naturality and precompose by the given model isomorphisms. This proves the general postcomparison naturality equation. Substitute localized_unit to obtain the unit square.",
+   "uses": [
+    "lem-sfb-nonnegative-derived-totalization",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, label lemma-right-derived-exact-functor; agent-formulated natural-transformation and finite-total comparison, extracted from returned item steps 3, 4, the comparison-naturality part of step 5 and the exact-postcomposition part of step 6. The nonnegative derived-total input is documented in report.md."
+   }
+  },
+  {
+   "text": "The nonnegative derived unit is natural by extension-by-zero naturality and rightDerivedFunctorUnitQ_naturality. On a termwise injective nonnegative complex it is invertible, since the extension is bounded below injective, hence K-injective. Cancel this unit against comparisonG.column_normalized to obtain the column square. Apply P_D and the exact localization naturality. Apply P_D also to comparisonG.augmentation and move P through the finite total by beta; this yields the specified actual augmentation maps.",
+   "uses": [
+    "lem-sfb-nonnegative-derived-totalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, label lemma-right-derived-exact-functor; agent-formulated natural-transformation and finite-total comparison, extracted from returned item steps 3, 4, the comparison-naturality part of step 5 and the exact-postcomposition part of step 6. The nonnegative derived-total input is documented in report.md."
+   }
+  },
+  {
+   "text": "For S, choose the existing comparisons for S and P followed by S. Check beta composition on every finite summand. Check the composition law for mapExtendIso in each degree, then combine it with mapDerivedCategoryCompIso_fac to prove the nonnegative exact localization composition law. These identities give exactFiniteTotalLocalizationIso composition. Naturality of the derived composition isomorphism identifies the composite and iterated postcomparisons. Apply S_D to the already proved unit square and use finite-total naturality for the further square. All totals retain their original finite nonnegative diagonals.",
+   "uses": [
+    "lem-sfb-nonnegative-derived-totalization",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, label lemma-right-derived-exact-functor; agent-formulated natural-transformation and finite-total comparison, extracted from returned item steps 3, 4, the comparison-naturality part of step 5 and the exact-postcomposition part of step 6. The nonnegative derived-total input is documented in report.md."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-double-complex-total",
+  "lem-sfb-cosimplicial-injective-total-replacement",
+  "lem-sfb-nonnegative-derived-totalization",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015F and the original seven-step finite-total argument, implemented by group A7 using Mathlib localization and the existing comparison interface."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact endofunctor natural transformation from the identity commutes with first quadrant totalization and a left exact right derived functor after exact postcomposition",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {D : Type u'}\\n  [inst_2 : CategoryTheory.Category.{v', u'} D] [inst_3 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D)\\n  [inst_4 : F.Additive] [inst_5 : CategoryTheory.Limits.PreservesFiniteLimit\", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and an element $ e \\\\in \\\\text{Ext}^n(X, Y) $, the induced map $ \\\\text{Ext}^n(X, Y) \\\\to \\\\text{Ext}^n(F(X), F(Y)) $ corr\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories, the hom-component of the natural isomorphism asserting that composing the homotopy category functor with the\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.guitartExact_of_isLeftDerivabilityStructure\", \"module\": \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic\", \"type\": \"∀ {C₁ : Type u₁} {C₂ : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} C₁]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} C₂] {W₁ : CategoryTheory.MorphismProperty C₁}\\n  {W₂ : CategoryTheory.MorphismProperty C₂} (Φ : CategoryTheory.LocalizerMorphism W₁ W₂) {D₁ : Type u_1} {D₂ : Type u_2}\\n  [inst_2 :\", \"doc\": \"If a morphism of localizers $\\\\Phi : C_1 \\\\to C_2$ satisfies the left derivability structure condition, then the associated two-square diagram formed by $\\\\Phi$ and the localization functors $L_1 : C_1 \\\\\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.guitartExact_of_isLeftDerivabilityStructure'\", \"module\": \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic\", \"type\": \"∀ {C₁ : Type u₁} {C₂ : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} C₁]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} C₂] {W₁ : CategoryTheory.MorphismProperty C₁}\\n  {W₂ : CategoryTheory.MorphismProperty C₂} (Φ : CategoryTheory.LocalizerMorphism W₁ W₂) {D₁ : Type u_1} {D₂ : Type u_2}\\n  [inst_2 :\", \"doc\": \"For a localizer morphism $\\\\Phi$ equipped with a left derivability structure and an isomorphism $e : \\\\Phi.functor \\\\circ L_2 \\\\cong L_1 \\\\circ F$, the inverse of $e$ satisfies the Guitart exactness condit\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure\", \"module\": \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic\", \"type\": \"∀ {C₁ : Type u₁} {C₂ : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} C₁]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} C₂] {W₁ : CategoryTheory.MorphismProperty C₁}\\n  {W₂ : CategoryTheory.MorphismProperty C₂} (Φ : CategoryTheory.LocalizerMorphism W₁ W₂) {D₁ : Type u_1} {D₂ : Type u_2}\\n  [inst_2 :\", \"doc\": \"If a localizer morphism $\\\\Phi$ satisfies the right derivability structure condition, then the two-square diagram formed by the localization functors $L_1$, $L_2$, the morphism $\\\\Phi$, and its localize\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure'\", \"module\": \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic\", \"type\": \"∀ {C₁ : Type u₁} {C₂ : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} C₁]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} C₂] {W₁ : CategoryTheory.MorphismProperty C₁}\\n  {W₂ : CategoryTheory.MorphismProperty C₂} (Φ : CategoryTheory.LocalizerMorphism W₁ W₂) {D₁ : Type u_1} {D₂ : Type u_2}\\n  [inst_2 :\", \"doc\": \"For a morphism between localizers (functors preserving specified morphism properties), if it satisfies the conditions of a right derivability structure (compatibility with localization or derived func\"}\n  {\"name\": \"CategoryTheory.NatTrans.leftDerived_comp_assoc\", \"module\": \"Mathlib/CategoryTheory/Abelian/LeftDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasProjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {F G H : CategoryTheory.Functor C D} [inst_5 : F.Ad\", \"doc\": \"Given additive functors $ F, G, H : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories with enough projective objects and natural transformations $ \\\\alpha : F \\\\Rightarrow G $, $ \\\\beta : G \\\\Right\"}\n  {\"name\": \"CategoryTheory.NatTrans.leftDerived_comp\", \"module\": \"Mathlib/CategoryTheory/Abelian/LeftDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasProjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {F G H : CategoryTheory.Functor C D} [inst_5 : F.Ad\", \"doc\": \"Given additive functors $ F, G, H : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between preadditive categories and natural transformations $ \\\\alpha : F \\\\Rightarrow G $, $ \\\\beta : G \\\\Rightarrow H $, the n-th left-de\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not identify the natural transformation on a finite-diagonal derived total with the total of its column transformations after arbitrary exact postcomposition."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The naturality square for an exact functor unit under derived totalization of a nonnegative cosimplicial complex is compatible with exact functors and augmentations",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapBicomplex\", \"total\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not identify the natural transformation on a finite-diagonal derived total with the total of its column transformations after arbitrary exact postcomposition."
+  },
+  {
+   "tool": "grep",
+   "query": "(rightDerived|derived).*(total|bicomplex)|(total|bicomplex).*(rightDerived|derived)",
+   "results": "[grep] OK 19 hit(s)\n  {\"file\": \"Mathlib/Algebra/Homology/Factorizations/Basic.lean\", \"line\": \"33\", \"text\": \"of total derived functors (and a refactor of the sequence of derived functors).\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean\", \"line\": \"404\", \"text\": \"    IsIso ((F.totalRightDerivedUnit DerivedCategory.Plus.Qh\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"line\": \"38\", \"text\": \"  (F.mapHomotopyCategoryPlus ⋙ DerivedCategory.Plus.Qh).totalRightDerived DerivedCategory.Plus.Qh\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"line\": \"48\", \"text\": \"  (F.mapHomotopyCategoryPlus ⋙ DerivedCategory.Plus.Qh).totalRightDerivedUnit\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean\", \"line\": \"83\", \"text\": \"  have := h.isIso_of_isRightDerivedFunctor (F.totalRightDerivedUnit L₂ W₂)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean\", \"line\": \"85\", \"text\": \"  let φ := (F.totalRightDerived L₂ W₂).rightDerivedDesc (F.totalRightDerivedUnit L₂ W₂) W₂ RF α\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean\", \"line\": \"86\", \"text\": \"  have hφ : F.totalRightDerivedUnit L₂ W₂ ≫ Functor.whiskerLeft L₂ φ = α :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean\", \"line\": \"87\", \"text\": \"    (F.totalRightDerived L₂ W₂).rightDerived_fac (F.totalRightDerivedUnit L₂ W₂) W₂ RF α\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean\", \"line\": \"95\", \"text\": \"  rw [← Functor.isRightDerivedFunctor_iff_of_iso (F.totalRightDerivedUnit L₂ W₂) α W₂\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"line\": \"16\", \"text\": \"`F.totalRightDerived L W : D ⥤ H` as the left Kan extension of `F`\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"line\": \"19\", \"text\": \"(The name `totalRightDerived` is to avoid name-collision with\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"line\": \"196\", \"text\": \"noncomputable def totalRightDerived : D ⥤ H :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"line\": \"200\", \"text\": \"/-- The canonical natural transformation `F ⟶ L ⋙ F.totalRightDerived L W`. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"line\": \"201\", \"text\": \"noncomputable def totalRightDerivedUnit : F ⟶ L ⋙ F.totalRightDerived L W :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"line\": \"16\", \"text\": \"`F.totalLeftDerived L W : D ⥤ H` as the right Kan extension of `F`\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"line\": \"19\", \"text\": \"(The name `totalLeftDerived` is to avoid name-collision with\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"line\": \"193\", \"text\": \"noncomputable def totalLeftDerived : D ⥤ H :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"line\": \"197\", \"text\": \"/-- The canonical natural transformation `L ⋙ F.totalLeftDerived L W ⟶ F`. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"line\": \"198\", \"text\": \"noncomputable def totalLeftDerivedCounit : L ⋙ F.totalLeftDerived L W ⟶ F :=\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not identify the natural transformation on a finite-diagonal derived total with the total of its column transformations after arbitrary exact postcomposition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a natural map identity to an exact additive functor, the finite biproduct total unit equals the total of column units, compatibly with derived direct image and exact slice restriction",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Mat_.embeddingLiftIso_hom_app\", \"module\": \"Mathlib/CategoryTheory/Preadditive/Mat\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.Preadditive C] {D : Type u₁}\\n  [inst_2 : CategoryTheory.Category.{v₁, u₁} D] [inst_3 : CategoryTheory.Preadditive D]\\n  [inst_4 : CategoryTheory.Limits.HasFiniteBiproducts D] (F : CategoryTheory.Functor C D) [inst_5 \", \"doc\": \"For a preadditive category $\\\\mathcal{C}$ and an additive functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ to a preadditive category $\\\\mathcal{D}$ with finite biproducts, the hom-component of the natural isom\"}\n  {\"name\": \"CategoryTheory.Mat_.ι_additiveObjIsoBiproduct_inv\", \"module\": \"Mathlib/CategoryTheory/Preadditive/Mat\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.Preadditive C] {D : Type u₁}\\n  [inst_2 : CategoryTheory.Category.{v₁, u₁} D] [inst_3 : CategoryTheory.Preadditive D]\\n  (F : CategoryTheory.Functor (CategoryTheory.Mat_ C) D) [inst_4 : F.Additive] (M : CategoryTheory\", \"doc\": \"For an additive functor $ F : \\\\text{Mat}_\\\\mathcal{C} \\\\to \\\\mathcal{D} $ and an object $ M $ in $ \\\\text{Mat}_\\\\mathcal{C} $, the inverse of the isomorphism $ F(M) \\\\cong \\\\bigoplus_i F(\\\\iota_\\\\mathcal{C}(M.\"}\n  {\"name\": \"CategoryTheory.Mat_.additiveObjIsoBiproduct_hom_π\", \"module\": \"Mathlib/CategoryTheory/Preadditive/Mat\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.Preadditive C] {D : Type u₁}\\n  [inst_2 : CategoryTheory.Category.{v₁, u₁} D] [inst_3 : CategoryTheory.Preadditive D]\\n  (F : CategoryTheory.Functor (CategoryTheory.Mat_ C) D) [inst_4 : F.Additive] (M : CategoryTheory\", \"doc\": \"For any additive functor $ F : \\\\text{Mat}_\\\\mathcal{C} \\\\to \\\\mathcal{D} $ from the Mat category of a preadditive category $ \\\\mathcal{C} $ to a preadditive category $ \\\\mathcal{D} $, and for any object $ \"}\n  {\"name\": \"CategoryTheory.Mat_.additiveObjIsoBiproduct_hom_π_assoc\", \"module\": \"Mathlib/CategoryTheory/Preadditive/Mat\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.Preadditive C] {D : Type u₁}\\n  [inst_2 : CategoryTheory.Category.{v₁, u₁} D] [inst_3 : CategoryTheory.Preadditive D]\\n  (F : CategoryTheory.Functor (CategoryTheory.Mat_ C) D) [inst_4 : F.Additive] (M : CategoryTheory\", \"doc\": \"For any additive functor $ F : \\\\text{Mat}_\\\\mathcal{C} \\\\to \\\\mathcal{D} $ from the Mat category of a preadditive category $ \\\\mathcal{C} $ to a preadditive category $ \\\\mathcal{D} $, and for any object $ \"}\n  {\"name\": \"CategoryTheory.Mat_.ι_additiveObjIsoBiproduct_inv_assoc\", \"module\": \"Mathlib/CategoryTheory/Preadditive/Mat\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.Preadditive C] {D : Type u₁}\\n  [inst_2 : CategoryTheory.Category.{v₁, u₁} D] [inst_3 : CategoryTheory.Preadditive D]\\n  (F : CategoryTheory.Functor (CategoryTheory.Mat_ C) D) [inst_4 : F.Additive] (M : CategoryTheory\", \"doc\": \"For an additive functor $ F : \\\\text{Mat}_\\\\mathcal{C} \\\\to \\\\mathcal{D} $ from the Mat category of a preadditive category $ \\\\mathcal{C} $ to a preadditive category $ \\\\mathcal{D} $, and for any object $ M\"}\n  {\"name\": \"CategoryTheory.Mat_.additiveObjIsoBiproduct_naturality'_assoc\", \"module\": \"Mathlib/CategoryTheory/Preadditive/Mat\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.Preadditive C] {D : Type u₁}\\n  [inst_2 : CategoryTheory.Category.{v₁, u₁} D] [inst_3 : CategoryTheory.Preadditive D]\\n  [inst_4 : CategoryTheory.Limits.HasFiniteBiproducts D] (F : CategoryTheory.Functor (CategoryTheo\", \"doc\": \"For any additive functor $ F : \\\\text{Mat}_\\\\mathcal{C} \\\\to \\\\mathcal{D} $ between the Mat category of a preadditive category $ \\\\mathcal{C} $ and a preadditive category $ \\\\mathcal{D} $, and for any morph\"}\n  {\"name\": \"CategoryTheory.Mat_.additiveObjIsoBiproduct_naturality\", \"module\": \"Mathlib/CategoryTheory/Preadditive/Mat\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.Preadditive C] {D : Type u₁}\\n  [inst_2 : CategoryTheory.Category.{v₁, u₁} D] [inst_3 : CategoryTheory.Preadditive D]\\n  [inst_4 : CategoryTheory.Limits.HasFiniteBiproducts D] (F : CategoryTheory.Functor (CategoryTheo\", \"doc\": \"For any additive functor $ F : \\\\text{Mat}_\\\\mathcal{C} \\\\to \\\\mathcal{D} $ between preadditive categories and any morphism $ f : M \\\\to N $ in $ \\\\text{Mat}_\\\\mathcal{C} $, the naturality square commutes: a\"}\n  {\"name\": \"CategoryTheory.Mat_.additiveObjIsoBiproduct_naturality'\", \"module\": \"Mathlib/CategoryTheory/Preadditive/Mat\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.Preadditive C] {D : Type u₁}\\n  [inst_2 : CategoryTheory.Category.{v₁, u₁} D] [inst_3 : CategoryTheory.Preadditive D]\\n  [inst_4 : CategoryTheory.Limits.HasFiniteBiproducts D] (F : CategoryTheory.Functor (CategoryTheo\", \"doc\": \"For an additive functor $ F : \\\\text{Mat}_\\\\mathcal{C} \\\\to \\\\mathcal{D} $ between the Mat category of a preadditive category $ \\\\mathcal{C} $ and a category $ \\\\mathcal{D} $, and for any morphism $ f : M \\\\\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not identify the natural transformation on a finite-diagonal derived total with the total of its column transformations after arbitrary exact postcomposition."
+  },
+  {
+   "tool": "grep",
+   "query": "(mapBicomplex|mapHomologicalComplex).*total|total.*(mapBicomplex|mapHomologicalComplex)",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: returned results cover exact descent, ordinary derived natural transformations or alternating complexes, but not this resolved cosimplicial finite-total square with arbitrary exact postcomposition and augmentations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact additive functors commute with first quadrant total complexes and their natural transformations",
+   "results": "HomologicalComplex₂.totalFunctor_map; HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory; HomologicalComplex₂.totalFunctor; CategoryTheory.Functor.mapExtAddHom; CategoryTheory.Functor.map_homogical_complex_additive; CategoryTheory.AdditiveFunctor.ofLeftExact_map; CategoryTheory.AdditiveFunctor.ofExact; CategoryTheory.NatTrans.mapHomotopyCategory",
+   "date": "2026-10-22",
+   "verdict": "no match: returned results cover exact descent, ordinary derived natural transformations or alternating complexes, but not this resolved cosimplicial finite-total square with arbitrary exact postcomposition and augmentations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategory\", \"NatTrans\"",
+   "results": "CategoryTheory.NatTrans.instCommShiftDerivedCategoryMapDerivedCategoryInt; CategoryTheory.NatTrans.mapDerivedCategory; CategoryTheory.NatTrans.mapDerivedCategory_app_singleFunctor_obj; CategoryTheory.NatTrans.mapDerivedCategory_app_singleFunctor_obj_assoc; CategoryTheory.NatTrans.mapDerivedCategory_app_Q_obj; CategoryTheory.NatTrans.mapDerivedCategory_app_Q_obj_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: returned results cover exact descent, ordinary derived natural transformations or alternating complexes, but not this resolved cosimplicial finite-total square with arbitrary exact postcomposition and augmentations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the derived finite diagonal totalization comparison for a strict cosimplicial chain map after an exact additive functor",
+   "results": "AlgebraicTopology.map_alternatingFaceMapComplex; AlgebraicTopology.DoldKan.compatibility_Γ₂N₁_Γ₂N₂_natTrans; AlgebraicTopology.DoldKan.N₂Γ₂_compatible_with_N₁Γ₀; AlgebraicTopology.DoldKan.Q_f_naturality_assoc; AlgebraicTopology.DoldKan.P_f_naturality_assoc; AlgebraicTopology.DoldKan.QInfty_f_naturality_assoc; AlgebraicTopology.DoldKan.PInftyToNormalizedMooreComplex_naturality_assoc; AlgebraicTopology.DoldKan.PInfty_f_naturality_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: returned results cover exact descent, ordinary derived natural transformations or alternating complexes, but not this resolved cosimplicial finite-total square with arbitrary exact postcomposition and augmentations."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory_app_Q_obj|map_alternatingFaceMapComplex|totalFunctor_map",
+   "results": "Mathlib/RepresentationTheory/Homological/Resolution.lean; Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean; Mathlib/AlgebraicTopology/DoldKan/Homotopies.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: returned results cover exact descent, ordinary derived natural transformations or alternating complexes, but not this resolved cosimplicial finite-total square with arbitrary exact postcomposition and augmentations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation between exact endofunctors commutes with right derived functor totalization of a first quadrant cosimplicial complex",
+   "results": "CategoryTheory.NatTrans.rightDerived_comp_assoc; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app; CategoryTheory.NatTrans.rightDerived_comp; CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp_assoc; CategoryTheory.NatTrans.rightDerived; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: returned results cover exact descent, ordinary derived natural transformations or alternating complexes, but not this resolved cosimplicial finite-total square with arbitrary exact postcomposition and augmentations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-cech-localization-unit-totalization",
+  "date": "2026-10-22",
+  "group": "NY"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Tag 015F, label lemma-right-derived-exact-functor; agent-formulated natural-transformation and finite-total comparison, extracted from returned item steps 3, 4, the comparison-naturality part of step 5 and the exact-postcomposition part of step 6. The nonnegative derived-total input is documented in report.md. Serves main-20261015 direct-images.proof.md paragraph (3), the formal descent input before the partial Kummer boundary-unit calculation.",
+   "via": [
+    "lem-sfb-cech-localization-unit-totalization",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-exact-unit-derived-total-square",
+  "worker": "stage1",
+  "summary": "Q157: wrote the summandwise chain identity, localized the natural transformation, and assembled the square from existing nonnegative-totalization and exact-factorization statements. All resolutions, choice comparisons and augmentation maps are accounted for; zero new nodes. The statement is unchanged.",
+  "blueprint": "Serves main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3), the formal Cech descent compatibility used by the partial Kummer boundary-unit calculation. Whole-blueprint searches for derived total, natural transformation and exact functor found no duplicate of this combined statement. The inherited nearest blueprint ancestor is null, as blueprint_refs.py ancestor reports.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic exactness of module restriction to a localized ringed site, used only to instantiate the arbitrary exact postcomposition S. This unit has no other statement of that site-theoretic exactness."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q157-cb688617a",
+  "group": "Q157",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q157-cb688617a (reviewer sub-agent of L); spot-checked: Read the item and all 7 steps in full. The statement is identical to the live unsplit node. There are 0 new nodes, and the item has no re-split note of its own (the 10-22 note is on the parent lem-sfb-cech-localization-unit-totalization). Source checked: Stacks 015F lemma-right-derived-exact-functor (derived.tex:5884), plus blueprint main-20261015 direct-images paragraph (3) via the inherited chain. No SGA is cited. Each cited statement was checked against its use: nonnegative-derived-totalization gives χ with naturality in strict maps, choice independence, the n,q,s≥0 diagonal clause and the degree-zero augmentation clause (steps 4 and 6). Cosimplicial-injective-total-replacement gives the same I and η for K, HK, e and the augmentations. Exact-factorization gives φ and preservation of quasi-isomorphisms. Clause (2) of the localization universal property, with F1=Q and F2=QH, gives θ_D with θ_{D,QX}=φ^{-1}Qθ_X (step 3). site-restriction-exact gives exactness of j_U^*. Step 2's β is a chain isomorphism by additivity on summands, and Eθ_{TK}=T(e) holds on each ι. The step 5 chain wP_DRG(θ_D)=…=Tot(θ_{D,QK^n})u is valid. In step 7, β_{SP}=β_S∘S(β_P) holds on summands. Edge cases tested: θ=0, H=id, G=0, a constant cosimplicial K, and unbounded n (finite diagonals). No preservation of injectives is used. Duplicate search found no duplicate: the nearest candidates are exact-square-right-derived-unit, exact-postcomposition-kinjective-descent, derived-cech-image-totalization and resolved-total-augmentation-square. No cycle. proof_deps equals the union of the step uses. The declared tool use of lem-pur-site-restriction-module-adjunction-exact is actually on route, since the unit cites sk-def-sf-operations; accepted. Advisory: the statement text does not bracket-cite def-weil-sheaf-of-modules-category or def-pur-localized-ringed-site, which are in stmt_deps. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ExactUnitDerivedTotalSquare",
+  "declaration": "CategoryTheory.exact_unit_derived_total_square",
+  "declarations": [
+   "CategoryTheory.exactNonnegativeLocalizationIso",
+   "CategoryTheory.exactUnitCosimplicialMap",
+   "CategoryTheory.exactFiniteTotalLocalizationIso",
+   "CategoryTheory.exactPostDerivedTotalComparison",
+   "CategoryTheory.exactPostResolvedTotalMap",
+   "CategoryTheory.exactFurtherPostDerivedTotalComparison",
+   "CategoryTheory.exactFurtherResolvedTotalMap",
+   "CategoryTheory.exactCompositePostDerivedTotalComparison",
+   "CategoryTheory.ExactUnitDerivedTotalSquare",
+   "CategoryTheory.exact_unit_derived_total_square"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ExactUnitDerivedTotalSquare.lean",
+  "statement": "theorem exact_unit_derived_total_square [IsGrothendieckAbelian.{vA} A] [IsGrothendieckAbelian.{vB} B] [IsGrothendieckAbelian.{vC} C] (G : A ⥤ B) [G.Additive] [PreservesFiniteLimits G] (H : A ⥤ A) [H.Additive] [PreservesFiniteLimits H] [PreservesFiniteColimits H] (P : B ⥤ C) [P.Additive] [PreservesFiniteLimits P] [PreservesFiniteColimits P] (θ : 𝟭 A ⟶ H) : Nonempty (ExactUnitDerivedTotalSquare.{uA, vA, wA, uB, vB, wB, uC, vC, wC, uD, vD, wD} G H P θ)",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The auxiliary structure packages every clause using the recorded NonnegativeDerivedTotalizationComparison, with canonical formulas for u,w, the specified strict unit, normalized descent on all unbounded complexes, column normalization, compatible replacements, augmentation maps and exact postcomposition. No statement or dependency change; all helper definitions contain actual data."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-679fd9f68",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Read the item module in full, the NonnegativeDerivedTotalization dependency structure, and node vs live (only `lean` changed, no other node record changed). Every clause matches: e/strict_components, E θ=T(e) (total_unit, β pinned by beta_summand), localized_unit = Q(E)H_D(a)θ_D=QT(e)a, θ_D pinned by thetaD_unbounded (unique by localization), u/w = P_D(χ)∘P_DRG(a) and P_D(χ_HK)∘P_DRG(Q(E)H_D a) with the canonical descent and β_P, square plus column_square (bottom = Tot P_DRG θ_D,QK^n), naturality/independence, augmentation (a, aI, eX pinned), postcomposition over arbitrary Grothendieck D with independent universes (cS, cPS pinned by summand/unique equations). The Nonempty structure is not hollow: all data fields are pinned. Hypotheses match exactly (G left exact; H, P exact; no injective preservation; HasKInjectiveResolutions is a Prop). lean.statement verbatim; 10 declarations listed; no name clashes in live. Note: the slice-restriction 'in particular' is an instance of postcomposition with no separate corollary; accepted. No compile (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261025T070832-L-4109555",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,272 @@
+{
+ "id": "lem-sfb-dilating-weight-nakayama",
+ "kind": "statement",
+ "title": "Generation modulo a weight-dilating semilinear operator",
+ "statement": "Let $k$ be a field [def-weil-field], $\\sigma:k\\to k$ a unital ring homomorphism, $p\\geq2$ an integer, and $s\\geq0$. Let $V$ be a $k$-vector space with an internal direct-sum decomposition $V=\\bigoplus_{\\nu\\in\\mathbf Z^s}V_\\nu$ into $k$-subspaces, meaning every vector has a unique finite homogeneous decomposition, and assume $V_0=0$. Let $T:V\\to V$ be additive, satisfy $T(av)=\\sigma(a)T(v)$ for every $a\\in k,v\\in V$, and satisfy $T(V_\\nu)\\subseteq V_{p\\nu}$. Put $J=\\operatorname{span}_k\\{T(v):v\\in V\\}$, the set of finite $k$-linear combinations of these vectors. Let $b_1,\\ldots,b_m$ be a finite family with each $b_j$ in some $V_{\\nu_j}$, and suppose their cosets span the quotient vector space $V/J$. Then $V=\\operatorname{span}_k\\{T^r(b_j):r\\geq0,1\\leq j\\leq m\\}$, where $T^0$ is the identity and $T^{r+1}=T\\circ T^r$. No finite-dimensionality, finite-generation or injectivity assumption on $V,T$ is imposed. The empty family and the zero space are allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Agent algebraic refinement supporting Proposition 14.50, printed p.296, and the homogeneous Frobenius-module prerequisite in the vector-group argument. This refinement is not stated in Milne; its independent argument is recorded in the delivery report. No Stacks tag is asserted. Generation argument: induction on the finite p-divisibility height of a nonzero integral lattice weight; excludes the zero-weight summand."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "Put $W=\\operatorname{span}_k\\{T^r(b_j):r\\geq0,1\\leq j\\leq m\\}$. It contains every $b_j$. For a finite expansion $w=\\sum_{r,j}a_{rj}T^r(b_j)$, additivity and semilinearity give $T(w)=\\sum_{r,j}\\sigma(a_{rj})T^{r+1}(b_j)\\in W$. Thus $T(W)\\subseteq W$; this calculation does not require $\\sigma$ to be onto.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Independent agent argument for the supporting graded refinement, not stated in Milne Proposition 14.50; step 1: stability of the iterate span"
+   }
+  },
+  {
+   "text": "Write $\\pi_\\nu(v)$ for the weight-$\\nu$ component of the given finite decomposition of $v$. Uniqueness of decomposition implies $\\pi_\\nu(v+w)=\\pi_\\nu(v)+\\pi_\\nu(w)$ and $\\pi_\\nu(av)=a\\pi_\\nu(v)$. Since multiplication by $p\\geq2$ is injective on $\\mathbf Z^s$, the expansion $T(v)=\\sum_\\mu T(\\pi_\\mu(v))$ has distinct weights $p\\mu$. Hence $\\pi_\\nu T(v)=T(\\pi_\\mu(v))$ if $\\nu=p\\mu$, and $\\pi_\\nu T(v)=0$ if no such $\\mu$ exists.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Independent agent argument for the supporting graded refinement, not stated in Milne Proposition 14.50; step 2: component formula from unique finite decomposition"
+   }
+  },
+  {
+   "text": "For $x\\in V_\\nu$, the spanning hypothesis on $V/J$ gives scalars $c_j$ and a finite expression $x=\\sum_j c_jb_j+\\sum_i a_iT(v_i)$. Apply $\\pi_\\nu$ and step 2. If $\\nu\\notin p\\mathbf Z^s$, this yields $x=\\sum_{j:\\nu_j=\\nu}c_jb_j$. If $\\nu=p\\mu$, it yields $x=\\sum_{j:\\nu_j=\\nu}c_jb_j+\\sum_i a_iT(\\pi_\\mu(v_i))$. These are finite sums with arbitrary coefficients in $k$, so no inverse of $\\sigma$ is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Independent agent argument for the supporting graded refinement, not stated in Milne Proposition 14.50; step 3: homogeneous part of a quotient-spanning expression"
+   }
+  },
+  {
+   "text": "For $\\nu\\in\\mathbf Z^s$ set $d(\\nu)=\\sum_{a=1}^s|\\nu_a|\\in\\mathbf N$. Then $d(\\nu)=0$ exactly when $\\nu=0$. If $\\nu=p\\mu\\ne0$, the coordinate identities $|p\\mu_a|=p|\\mu_a|$ give $d(\\nu)=p\\,d(\\mu)>d(\\mu)$, since $d(\\mu)\\geq1$ and $p\\geq2$. Thus the predecessor weight in step 3 always has smaller natural-number size when $\\nu\\ne0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Independent agent argument for the supporting graded refinement, not stated in Milne Proposition 14.50; step 4: decreasing integral weight size"
+   }
+  },
+  {
+   "text": "Prove $V_\\nu\\subseteq W$ for every $\\nu$ by strong induction on $d(\\nu)$. At size zero, $\\nu=0$ and $V_0=0\\subseteq W$. For size $n>0$ assume the assertion for all weights of size less than $n$, and take $x\\in V_\\nu$ of size $n$. If $\\nu\\notin p\\mathbf Z^s$, the first expression in step 3 puts $x$ in $W$. Otherwise write $\\nu=p\\mu$. Step 4 gives $d(\\mu)<n$, so each $\\pi_\\mu(v_i)$ in the second expression of step 3 lies in $W$ by the induction hypothesis. Its $T$-image lies in $W$ by step 1. Every $b_j$ also lies in $W$, and the displayed finite sum therefore puts $x$ in $W$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Independent agent argument for the supporting graded refinement, not stated in Milne Proposition 14.50; step 5: strong induction on weight size"
+   }
+  },
+  {
+   "text": "Every vector is a finite sum of its homogeneous components. Step 5 puts each component in the subspace $W$, so $V\\subseteq W$ and consequently $V=W$, as asserted. If $s=0$, the only weight is zero and the assumption already gives $V=0$. If $m=0$, the same induction has empty $b_j$-sums and proves $V=0$. The case $V=0$ is also included.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Independent agent argument for the supporting graded refinement, not stated in Milne Proposition 14.50; step 6: finite-sum assembly and degenerate cases"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Independent elementary graded refinement supporting Proposition 14.50, printed p.296. Milne states ungraded skew-module freeness, not this lemma; see report.md for the source comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A semilinear operator multiplying nonzero lattice weights by p has the graded Nakayama property: homogeneous lifts spanning its cokernel generate by operator iterates",
+   "results": "{\"t\": \"2026-10-24T09:41:44Z\", \"tool\": \"leanfinder\", \"query\": \"A semilinear operator multiplying nonzero lattice weights by p has the graded Nakayama property: homogeneous lifts spanning its cokernel generate by operator iterates\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousLocalization.Away.span_mk_prod_pow_eq_top\", \"HomogeneousLocalization.Away.eventually_smul_mem\", \"LieModule.exists_genWeightSpace_smul_add_eq_bot\", \"LieModule.eventually_genWeightSpace_smul_add_eq_bot\", \"Submodule.nat_power_gradedMonoid\", \"IsModuleFiltration.toGradedSMul\", \"Ideal.span_pow_eq_map_homogeneousSubmodule\", \"Module.exists_smul_eq_zero_and_mk_eq\"], \"digest\": \"b56ef5ec67d477db\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: commutative graded-algebra generation and Lie-algebra weight chains do not state generation for a semilinear operator which dilates lattice weights."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If a vector space graded by nonzero integer lattice vectors has Frobenius multiplying weights by p, homogeneous generators modulo the span of Frobenius generate under its iterates",
+   "results": "{\"t\": \"2026-10-24T09:41:45Z\", \"tool\": \"leansearch\", \"query\": \"If a vector space graded by nonzero integer lattice vectors has Frobenius multiplying weights by p, homogeneous generators modulo the span of Frobenius generate under its iterates\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.iterateFrobenius\", \"iterateFrobenius\", \"WittVector.iterate_frobenius_coeff\", \"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous\", \"WittVector.frobenius_verschiebung\", \"MvPowerSeries.map_iterateFrobenius_expand\", \"Ideal.homogeneous_span\", \"WittVector.frobenius\"], \"digest\": \"fddc158eb20bc537\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: commutative graded-algebra generation and Lie-algebra weight chains do not state generation for a semilinear operator which dilates lattice weights."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"nakayama\"",
+   "results": "{\"t\": \"2026-10-24T09:41:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"nakayama\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: commutative graded-algebra generation and Lie-algebra weight chains do not state generation for a semilinear operator which dilates lattice weights."
+  },
+  {
+   "tool": "grep",
+   "query": "Nakayama|nakayama",
+   "results": "{\"t\": \"2026-10-24T09:41:45Z\", \"tool\": \"grep\", \"query\": \"Nakayama|nakayama\", \"sub\": \"RingTheory/GradedAlgebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: commutative graded-algebra generation and Lie-algebra weight chains do not state generation for a semilinear operator which dilates lattice weights."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Graded Nakayama lemma for a Frobenius semilinear map on a lattice graded vector space with no zero weight, using induction on p divisibility of the weight",
+   "results": "{\"t\": \"2026-10-24T09:41:48Z\", \"tool\": \"leanfinder\", \"query\": \"Graded Nakayama lemma for a Frobenius semilinear map on a lattice graded vector space with no zero weight, using induction on p divisibility of the weight\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieModule.exists₂_genWeightSpace_smul_add_eq_bot\", \"LieModule.exists_genWeightSpace_smul_add_eq_bot\", \"LieModule.genWeightSpace_nsmul_add_ne_bot_of_le\", \"LieModule.genWeightSpace_chainTopCoeff_add_one_zsmul_add\", \"LieModule.genWeightSpace_zsmul_add_ne_bot\", \"IsModuleFiltration.toGradedSMul\", \"LieModule.genWeightSpace_chainBotCoeff_sub_one_zsmul_sub\", \"LieModule.genWeightSpace_chainTopCoeff_add_one_nsmul_add\"], \"digest\": \"26dedde2e80ab210\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: commutative graded-algebra generation and Lie-algebra weight chains do not state generation for a semilinear operator which dilates lattice weights."
+  },
+  {
+   "tool": "loogle",
+   "query": "DirectSum, LinearMap.span",
+   "results": "{\"t\": \"2026-10-24T10:00:02Z\", \"tool\": \"loogle\", \"query\": \"DirectSum, LinearMap.span\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'LinearMap.span'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "query rejected: loogle: unknown identifier 'LinearMap.span'; not evidence of absence; corrected by the later quoted-name Loogle query."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A semilinear operator dilating nonzero integer lattice weights by p has the property that homogeneous generators modulo the span of its image generate the vector space by iterates",
+   "results": "{\"t\": \"2026-10-24T10:00:05Z\", \"tool\": \"leanfinder\", \"query\": \"A semilinear operator dilating nonzero integer lattice weights by p has the property that homogeneous generators modulo the span of its image generate the vector space by iterates\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.spanFinBasis.span\", \"Profinite.NobelingProof.GoodProducts.spanFin\", \"RootPairing.GeckConstruction.span_range_h'_eq_top\", \"Profinite.NobelingProof.Products.span_nil_eq_top\", \"Profinite.NobelingProof.GoodProducts.span\", \"ZSpan.smul\", \"ZLattice.comap_span_top\", \"Profinite.NobelingProof.GoodProducts.span_iff_products\"], \"digest\": \"d7495a64d15aedb4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: none of the returned declarations states generation by iterates of a weight-dilating semilinear map."
+  },
+  {
+   "tool": "grep",
+   "query": "nakayama|Nakayama|span.*iterate|iterate.*span",
+   "results": "{\"t\": \"2026-10-24T10:00:47Z\", \"tool\": \"grep\", \"query\": \"nakayama|Nakayama|span.*iterate|iterate.*span\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: none of the returned declarations states generation by iterates of a weight-dilating semilinear map."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homogeneous lifts of generators modulo the linear span of the image of a semilinear weight expanding map generate by repeated application of the map",
+   "results": "{\"t\": \"2026-10-24T10:00:47Z\", \"tool\": \"leansearch\", \"query\": \"Homogeneous lifts of generators modulo the linear span of the image of a semilinear weight expanding map generate by repeated application of the map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.homogenizeLM\", \"LinearMap.map_span\", \"Unitization.lift_range\", \"LinearMap.codLift_apply\", \"PowerBasis.liftEquiv_apply_coe\", \"Set.MapsTo.submoduleSpan\", \"LieModule.comap_genWeightSpace_eq_of_injective\", \"IsSymmetricAlgebra.lift_eq\"], \"digest\": \"2b9d4cf1083ebadd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: none of the returned declarations states generation by iterates of a weight-dilating semilinear map."
+  },
+  {
+   "tool": "grep",
+   "query": "nakayama|Nakayama|semilinear|Semilinear",
+   "results": "{\"t\": \"2026-10-24T10:01:39Z\", \"tool\": \"grep\", \"query\": \"nakayama|Nakayama|semilinear|Semilinear\", \"sub\": \"RingTheory/GradedAlgebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: none of the returned declarations states generation by iterates of a weight-dilating semilinear map."
+  },
+  {
+   "tool": "loogle",
+   "query": "Submodule.span, Function.iterate",
+   "results": "{\"t\": \"2026-10-24T10:01:39Z\", \"tool\": \"loogle\", \"query\": \"Submodule.span, Function.iterate\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Function.iterate'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "query rejected: loogle: unknown identifier 'Function.iterate'; not evidence of absence; corrected by the later quoted-name Loogle query."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Graded Nakayama generation for a semilinear endomorphism that strictly increases a well founded degree on homogeneous components",
+   "results": "{\"t\": \"2026-10-24T10:01:40Z\", \"tool\": \"leanfinder\", \"query\": \"Graded Nakayama generation for a semilinear endomorphism that strictly increases a well founded degree on homogeneous components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousSubmodule.is_homogeneous'\", \"HomogeneousSubmodule.isHomogeneous\", \"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous_ne_zero\", \"HomogeneousSubmodule.mem_toSubmodule_iff\", \"HomogeneousSubmodule\", \"HomogeneousLocalization.Away.span_mk_prod_pow_eq_top\", \"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous\", \"HomogeneousSubmodule.ext'\"], \"digest\": \"ac232a7c99962389\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: none of the returned declarations states generation by iterates of a weight-dilating semilinear map."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"span\", \"iterate\"",
+   "results": "{\"t\": \"2026-10-24T10:02:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"span\\\", \\\"iterate\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Polynomial.Chebyshev.T_iterate_derivative_mem_span_T\"], \"digest\": \"a5a8d63eb9366070\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: none of the returned declarations states generation by iterates of a weight-dilating semilinear map."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem map_span|theorem submoduleSpan|lemma submoduleSpan|def submoduleSpan",
+   "results": "{\"t\": \"2026-10-24T10:02:39Z\", \"tool\": \"grep\", \"query\": \"theorem map_span|theorem submoduleSpan|lemma submoduleSpan|def submoduleSpan\", \"sub\": \"LinearAlgebra/Span/Basic.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"73\", \"79\"], \"digest\": \"9928f7f3f58ebb70\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Span/Basic.lean:64-99; map_span requires RingHomSurjective, and mapsTo_span only proves stability of a span, not generation."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_finset_adjoin_eq_top_and_homogeneous|is_homogeneous",
+   "results": "{\"t\": \"2026-10-24T10:02:39Z\", \"tool\": \"grep\", \"query\": \"exists_finset_adjoin_eq_top_and_homogeneous|is_homogeneous\", \"sub\": \"RingTheory/GradedAlgebra\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/GradedAlgebra/FiniteType.lean\", \"Mathlib/RingTheory/GradedAlgebra/FiniteType.lean\", \"Mathlib/RingTheory/GradedAlgebra/FiniteType.lean\", \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean\", \"Mathlib/RingTheory/GradedAlgebra/Homogeneous/Maps.lean\", \"Mathlib/RingTheory/GradedAlgebra/Homogeneous/Maps.lean\", \"Mathlib/RingTheory/GradedAlgebra/Homogeneous/Subsemiring.lean\", \"Mathlib/RingTheory/GradedAlgebra/Homogeneous/Subsemiring.lean\"], \"digest\": \"8d15aac6eb7f352b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: FiniteType.lean:30,43 concerns algebra generators; Homogeneous/Submodule.lean:69,94 assumes rather than establishes homogeneity. Neither gives the item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-torus-equivariant-frobenius-module-basis",
+  "date": "2026-10-24",
+  "group": "Q44"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Remark 3.5, forward implication, printed p.5: integral conjugation into a fixed maximal split torus. Only the complete-DVR case is needed here; the statement is the conjugacy input, not a Cartan factorization. Supporting input: Residue-field base case: rational conjugacy of split tori, before lifting a fixed conjugator. This is over a field and contains no complete-DVR lifting assertion. Supporting field argument, conjugacy step: Milne Theorem 25.10, rational conjugacy of the maximal containing split torus with the prescribed one. Supporting rational-conjugacy argument: Milne 25.10, compare centralizers after putting both maximal split tori in a minimal parabolic; corrected 25.6(b),(c). Supporting input in this split: Proposition 16.54 and its proof, printed p.344: maximal split tori of a split solvable group are images of sections of its split-torus quotient and are conjugate under the unipotent kernel. An arbitrary split torus lies in a maximal one by bounded dimension. Applied to H=U semidirect D; the torus D is a maximal split torus because the kernel is unipotent. This is the split-solvable assertion, not reductive-group rational conjugacy. Supporting structural input: replace the given split series by a torus-stable series with linear one-dimensional quotients before successively removing the crossed homomorphism. Supporting prerequisite in the induction: Linearization of split-torus actions on vector groups. Present split: Agent-formulated graded algebra input for the vector-group paragraph of Conrad--Lichtenstein, Linear Algebraic Groups I, Appendix D.3, proof of Theorem D.3.2, printed p.86 (the paragraph invoking CGP B.4.3). The ungraded freeness input is Milne Proposition 14.50, printed p.296; the homogeneous refinement is not asserted to be that proposition. WANTED locally: Conrad notes and CGP, Appendix B.4. No Stacks tag is asserted. Supporting algebra in this split: Generation argument: induction on the finite p-divisibility height of a nonzero integral lattice weight; excludes the zero-weight summand.",
+   "via": [
+    "lem-sfb-torus-equivariant-frobenius-module-basis",
+    "lem-sfb-torus-vector-group-linearization",
+    "lem-sfb-split-unipotent-torus-stable-series",
+    "lem-sfb-split-unipotent-torus-absorption",
+    "lem-sfb-minimal-parabolic-split-centralizers",
+    "lem-sfb-field-maximal-split-tori-conjugacy",
+    "lem-sfb-field-split-torus-rational-containment",
+    "lem-sfb-complete-dvr-torus-cocharacter-conjugacy",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dilating-weight-nakayama",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Gave a direct six-step elementary argument: the iterate span is T-stable, unique finite homogeneous decompositions give the component formula, and strong induction on the sum of absolute lattice coordinates terminates each projected quotient expression. No new nodes: the auxiliary calculations are two or three lines from the stated definitions. Checked the empty family, s=0, noninjective T and nonsurjective coefficient endomorphisms; no perfectness or finite-generation input is used.",
+  "blueprint": "Read latest sk-thm-sf-ctf-stability/_section.md and sk-thm-sf-ctf-stability-direct-images.proof.md, clause (3). This is the inherited vector-group homogeneous-basis prerequisite far below that clause. Kept the full inherited supporting-input place and null blueprint ancestor (blueprint_refs ancestor prints None); whole-blueprint searches for Nakayama, semilinear and homogeneous found no equivalent imported statement."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NB-f3b5d18cd",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-f3b5d18cd (reviewer sub-agent of L); spot-checked: I read the item and all six steps in full, and the parent lem-sfb-torus-equivariant-frobenius-module-basis. Its step 3 applies the item with V=N=⊕_{ν≠0}M_ν, T=F and σ=Frobenius, and every hypothesis matches. The statement is unchanged and true. No new nodes; every step is elementary and the marking is justified. Step 1: the span W of the iterates is T-stable without σ being onto. Step 2: the projections are linear and the T-images have distinct weights pμ because p≥2. Step 3: projecting x=Σc_j b_j+Σa_i T(v_i) is correct. Step 4: d(pμ)=p·d(μ)>d(μ). Step 5: strong induction on d with the base case from V_0=0. Step 6: the components assemble to V=W. Small cases checked: T=0; s=0, m=0 and V=0; an infinite-dimensional example over F_2(t). Counterexamples show that both V_0=0 and p≥2 are needed. Milne iAG2017 printed p.296 (PDF p.308), Prop 14.50, states only the ungraded freeness, and the node honestly records proof_origin agent. def-weil-field is the only stmt_dep and suffices. The DAG search found no duplicate: the graded-Nakayama nodes require finite generation over a commutative ring. Blueprint from.node is the inherited null. No SGA, no fixes, no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.DilatingWeightNakayama",
+  "declaration": "LinearMap.span_iterates_eq_top_of_dilating_weights",
+  "file": "lean/Sheaf/LinearAlgebra/DilatingWeightNakayama.lean",
+  "statement": "theorem span_iterates_eq_top_of_dilating_weights {k : Type u} [Field k] {V : Type v} [AddCommGroup V] [Module k V] (σ : k →+* k) (p : ℤ) (hp : 2 ≤ p) (s : ℕ) (A : (Fin s → ℤ) → Submodule k V) (hA : DirectSum.IsInternal A) (hzero : A 0 = ⊥) (T : V →ₛₗ[σ] V) (hT : ∀ (ν : Fin s → ℤ) (x : V), x ∈ A ν → T x ∈ A (p • ν)) (m : ℕ) (b : Fin m → V) (νb : Fin m → (Fin s → ℤ)) (hb : ∀ j : Fin m, b j ∈ A (νb j)) (hspan : Submodule.span k (Set.range fun j : Fin m ↦ (Submodule.span k (Set.range T)).mkQ (b j)) = ⊤) : Submodule.span k (Set.range fun rj : ℕ × Fin m ↦ (T : V → V)^[rj.1] (b rj.2)) = ⊤",
+  "branch": "newtargets-dag",
+  "by": "Q84",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-611e0105d",
+  "group": "Q84",
+  "result": "pass",
+  "note": "Clause-by-clause match: Field k (def-weil-field), σ : k →+* k (not onto), p : ℤ with 2 ≤ p, s : ℕ, DirectSum.IsInternal A over Fin s → ℤ, A 0 = ⊥, T : V →ₛₗ[σ] V, hT T(A ν) ⊆ A (p•ν), J = span k (range T), homogeneous b with witnesses νb, cosets span V/J via mkQ, conclusion span of (⇑T)^[r] (b j) = ⊤. No extra assumptions; universes u,v bound; lean.statement verbatim; node identical to live except lean. Theorem true (V_0=0 and p≥2 both necessary). Edge cases s=0, m=0, V=0, T=0, non-onto σ covered. Citer lem-sfb-torus-equivariant-frobenius-module-basis step 3 matches. Docstrings carry the source place, the blueprint id and the 6 proof steps; proof is sorry only; Mathlib-only imports; no duplicate found. Report has Worker report + Second reading by Q84 (self re-read). No findings."
+ }
+}

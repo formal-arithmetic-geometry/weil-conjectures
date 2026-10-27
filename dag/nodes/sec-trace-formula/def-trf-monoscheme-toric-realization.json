@@ -15,9 +15,38 @@
   "def-weil-regular-scheme",
   "def-trf-normalized-blowup"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For existsUnique_componentGenericPoint, the empty prime generalizes every point of each ordinary affine chart. The basic opens separate primes, so the spectrum is T0; the affine cover transports this to the monoscheme. A chart generic point is maximal among all generalizations, because every ambient generalization stays in that chart. Every point consequently has a unique maximal generalization. This function is constant on each affine chart and hence locally constant, so it is constant on connected components. Take a representative of the indicated component. Its maximal generalization lies in that component and, by this constancy, belongs to every affine chart of the component.",
+   "uses": [
+    "def-trf-fine-fan-blowup"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For uniqueness of the point just constructed, take one affine chart in the component and shrink it at its generic point to an ordinary affine singleton using lem-trf-monoid-generic-singleton-affine. This singleton is also a component affine open. Any point in every component affine open must lie in this singleton, and therefore equals the constructed point. This local localization assertion is the single new unfinished obligation.",
+   "uses": [
+    "lem-trf-monoid-generic-singleton-affine"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For existsUnique_torusEmbedding, the same singleton lemma supplies an affine component chart W whose only point is C.genericPoint. Hence W is contained in every component affine chart U. The germ naturality equation gives degree_U = degree_W composed with restriction. Functoriality of MonoidAlgebra and contravariance of Spec identify the corresponding torus maps. The colimit cocone relation, followed by cancellation of the component open immersion, identifies the component chart maps under this inclusion. Thus the morphism defined using W has the prescribed formula on every U. Any other morphism with all these formulas equals it by the formula for W. The other five existing unfinished theorems retain their source proofs in their docstrings.",
+   "uses": [
+    "lem-trf-monoid-generic-singleton-affine"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-trf-fine-fan-blowup",
+  "lem-trf-monoid-generic-singleton-affine"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VIII 3.1.4 and 3.1.10(ii), pp.98--100, for component generic points; 3.2.4, pp.102--103, for the torus map. B6 formalizes the topological argument and colimit compatibility, isolating generic singleton affineness."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -206,18 +235,39 @@
   "file": "lean/Sheaf/AlgebraicGeometry/MonoschemeToricRealization.lean",
   "statement": "structure Fine",
   "branch": "newtargets-dag",
-  "by": "NN",
-  "date": "2026-10-18",
+  "by": "Q152",
+  "date": "2026-10-23",
   "existing": false,
-  "note": "Interface repair under brief-stage2 §1(B): the recorded module provided only nonempty coherent ideals, and no induced realization map or dense torus embedding. Preserve every existing declaration and append coherence allowing zero generators, the empty subsheaf ideal, the section homomorphism on incident charts, the realization map pinned by its unique monomial chart formulas, and the torus embedding pinned by the degree/localization map on every component chart. Only uniquely determined objects use a postponed existence/uniqueness theorem; no bare existence choice supplies data."
+  "note": "Interface repair under brief-stage2 §1(B): current server source read with scompile.py --source is still legacy non-module despite the existing lean.note recording a module-mode repair. A required module-mode consumer fails before elaboration (cannot import non-module FineFanBlowup). This delivery supplies the current full server source with only module, public import, and exposed public section added. Every mathematical declaration, signature, body and proof is preserved. Both repaired modules compile separately against the published library via scompile.py."
  },
  "reviewed_lean": {
-  "date": "2026-10-19",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-stage2-cc-5b848c2d6",
-  "group": "NN",
+  "reviewer": "NT-stage2-cc-c20803443",
+  "group": "Q152",
   "result": "pass",
-  "note": "Item lem-trf-toric-monoid-comparison matches the node clause by clause. (i): bijection (forward, unique inverse, injective), empty→⊥, ⊤↔wholeIdeal, component nonvanishing via comap componentι, arbitrary pullback using IdealSheafData.comap = extended ideal. (ii): existence, torsion-free, ∃! iso over k[M] to normalizedBlowup, IsToricComparison pins lifted actions, equivariance and the unchanged torus embedding, smooth-pullback IsPullback square with naturality. (iii): smooth realization, converse for torsion-free M, ULift ℚ regular ⇒ N^r×Z^t stalks. No extra hypotheses. Dependency §1(B) repair is a pure append of 8 declarations; realizationMap and torusEmbedding are chosen from chart-pinned ∃!; no competing repair live or in runs. Records: lean-only diffs, statement verbatim, all proof_dep modules imported. nt_compile --json clean (10.8 s / 8.6 s, load ~100); broken control fails. Advisory: the dependency's new lean.note drops Q25's legacy-import explanation."
+  "note": "First S2 delivery of lem-trf-affine-toric-equivariant-ideals. Checked clause by clause against the node and ILO VIII 3.2.2, 3.2.14 and 3.2.15: field; IsFine (FG + injective GrothendieckGroup.of) and IsMulTorsionFree are the node's hypotheses, nothing stronger; affineToricCoaction is e^p ⊗ e^[p]; equivariance is J.map coaction = J.map includeLeft (= image of J⊗k[G] over a field); toricIdeal/toricExponents mutually inverse, FG both ways, ⊥/⊤ iff (SemigroupIdeal ⊥ = ∅), support clause; the canonical awayLift fraction map is Bijective with the p-na formula; extended ideal = k[I-ℕa] with membership characterization; extension along any h : P →* Q gives h(I)+Q; compatibilities for composite homs, double fractions in both orders, localization transitions and the localized hom. All clauses are true by node steps 1-8. Universes u, v, w, z independent; edge cases (empty I, a=1, n=0, a=b, finite k, non-injective h) covered. Helpers have real data, the only sorry is the main theorem, docstrings carry source and blueprint, the statement is verbatim. The dep modules equal live except for where the module keyword sits: Q66 landed the identical module-mode repair at 21:23Z, after the base, so a landing revert or overwrite is harmless, though the Q152 note is now stale. Advisories: faceLocalization is owned by theorem lem-trf-face-localization-fs and reached via def-trf-fine-fan-blowup; the local coaction and ideal parallel theorem-owned ToricBlowupChartNormalization copies, with no def node owning them, so not H4; possibly redundant TensorProduct.Maps import. No file changed, nothing compiled."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261026T091157-L-3318145",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

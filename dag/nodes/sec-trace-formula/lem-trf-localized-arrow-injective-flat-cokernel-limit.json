@@ -1,0 +1,222 @@
+{
+ "id": "lem-trf-localized-arrow-injective-flat-cokernel-limit",
+ "kind": "statement",
+ "title": "Injectivity and flat cokernels at the limit of localized module-arrow diagrams",
+ "statement": "Let $I$ be a small nonempty directed set and let $R_i\\to S_i$ be homomorphisms of commutative rings with transition ring maps $r_{ji},s_{ji}$ for $i\\le j$, respecting identity and composition and commuting with $R_i\\to S_i$. Let $R\\to S$ be their ring colimit with compatible ring cocones $r_i:R_i\\to R$, $s_i:S_i\\to S$ [def-weil-pbc-category-colimit]. Let $M_i,N_i$ be $S_i$-modules, $u_i:M_i\\to N_i$ be $S_i$-linear, and let their additive transitions $m_{ji},n_{ji}$ be semilinear over $s_{ji}$, respect identities and composition, and satisfy $n_{ji}u_i=u_jm_{ji}$. Let $M,N$ be $S$-modules, with compatible additive cocones $\\mu_i,\\nu_i$ semilinear over $s_i$, and let $u:M\\to N$ be $S$-linear with $\\nu_i u_i=u\\mu_i$. Suppose these cocones exhibit $M,N$ as algebraic colimits of the underlying abelian groups: every element comes from a stage and equality of two representatives is detected at a common later stage. Suppose for every $i$ the canonical maps $M_i\\otimes_{S_i}S\\to M$ and $N_i\\otimes_{S_i}S\\to N$, $x\\otimes s\\mapsto s\\mu_i(x)$ and $y\\otimes s\\mapsto s\\nu_i(y)$, are isomorphisms carrying $u_i\\otimes1$ to $u$ [def-weil-pbc-module-tensor-product]. Suppose also that $S_i\\otimes_{R_i}R\\to S$, $a\\otimes r\\mapsto s_i(a)\\varphi(r)$, where $\\varphi:R\\to S$ is the colimit ring map, is a localization at a multiplicative subset for every $i$ (denominators become units, every target element is a fraction, and every source element mapping to zero is killed by a denominator). Put $C_i=N_i/u_i(M_i)$ and $C=N/u(M)$. Assume that for some $i_0$, every $u_j$ with $j\\ge i_0$ is injective and every $C_j$ with $j\\ge i_0$ is flat over $R_j$ [def-weil-pbc-flat-ring-map]. Then $u$ is injective and $C$ is flat over $R$. For every $i$ the canonical map $C_i\\otimes_{S_i}S\\to C$, $[y]\\otimes s\\mapsto s[\\nu_i(y)]$, is an isomorphism. No locality, Noetherianity, or finite generation is assumed. All sets and objects may be placed in one common sufficiently large universe.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 046Y (lemma-mod-injective-general), final sentence (passage of stage injectivity and flat cokernel to the limit), expanded using Tag 00D7 (lemma-zero-directed-limit), Tag 00DF (lemma-tensor-product-exact), and the first proof paragraph of Tag 00MO (lemma-another-variant-local-criterion-flatness); old steps 8--9."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Let $x\\in\\ker u$. Choose $i$ and $x_i\\in M_i$ with $x=\\mu_i(x_i)$. Then $\\nu_i(u_i(x_i))=0$. The assumed detection of equality in the additive colimit $N$, applied to $u_i(x_i)$ and $0\\in N_i$, gives $j\\ge i$ with $n_{ji}(u_i(x_i))=0$. Choose $k\\ge j,i_0$. Commutation with the arrows gives $u_k(m_{ki}(x_i))=n_{kj}n_{ji}(u_i(x_i))=0$. Since $u_k$ is injective, $m_{ki}(x_i)=0$, so $x=\\mu_k(m_{ki}(x_i))=0$. Applying this to a difference proves injectivity of $u$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 046Y (lemma-mod-injective-general), final sentence; Tag 00D7 (lemma-zero-directed-limit), here used directly as a hypothesis of the item"
+   }
+  },
+  {
+   "text": "Fix any $i$, not necessarily on the eventual tail. Write $p_i:N_i\\to C_i$ and $p:N\\to C$ for quotient maps. The sequence $M_i\\xrightarrow{u_i}N_i\\xrightarrow{p_i}C_i\\to0$ is right exact by the definition of $C_i$. Tensor right exactness gives a surjection $q_i=p_i\\otimes1:N_i\\otimes_{S_i}S\\to C_i\\otimes_{S_i}S$ with kernel $\\operatorname{im}(u_i\\otimes1)$. The assumed scalar-extension isomorphisms identify this image with $u(M)$ inside $N$. Thus $p$ induces an isomorphism $h_i:C_i\\otimes_{S_i}S\\to C$: its inverse sends $[n]$ to $q_i(\\beta_i^{-1}(n))$, where $\\beta_i:N_i\\otimes_{S_i}S\\simeq N$ is the given isomorphism. This is well defined because changing $n$ by $u(m)$ changes $\\beta_i^{-1}(n)$ by an element of $\\operatorname{im}(u_i\\otimes1)$. The two composites are identities after precomposing with the surjective quotient maps. The formula is $h_i([y]\\otimes s)=s[\\nu_i(y)]$, as asserted.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DF (lemma-tensor-product-exact); cokernel identification in the final passage of Tag 046Y"
+   }
+  },
+  {
+   "text": "Use the existing localized-base-change quotient-flatness lemma with its rings $(R,S,R\\prime,S\\prime)=(R_{i_0},S_{i_0},R,S)$, module $C_{i_0}$, and ideal $I=(0)$. The scalar towers commute by the ring cocones, and its localization map is exactly the map $S_{i_0}\\otimes_{R_{i_0}}R\\to S$ assumed here. Its input $(R_{i_0}/0)\\otimes_{R_{i_0}}C_{i_0}\\simeq C_{i_0}$ is flat by the tail hypothesis. Since $0R=0$, its conclusion says $S\\otimes_{S_{i_0}}C_{i_0}$ is flat over $R$. The identifications $R/0\\simeq R$ and $(R/0)\\otimes_RP\\simeq P$ send $[r]\\otimes p$ to $rp$, with inverse $p\\mapsto[1]\\otimes p$. Tensor symmetry $s\\otimes c\\mapsto c\\otimes s$ (inverse $c\\otimes s\\mapsto s\\otimes c$), followed by $h_{i_0}$ from step 2, identifies this module $R$-linearly with $C$. Flatness is invariant under this isomorphism: for an injective map of $R$-modules, the two tensor maps are conjugate via the isomorphism and its inverse. Hence $C$ is $R$-flat.",
+   "uses": [
+    "lem-weil-pbc-localized-base-change-quotient-flat",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00MO (lemma-another-variant-local-criterion-flatness), first proof paragraph with zero ideal; Tag 046Y final sentence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-weil-pbc-localized-base-change-quotient-flat",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 046Y final sentence expanded by Tag 00D7, Tag 00DF and Tag 00MO first proof paragraph (zero ideal specialization)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A filtered colimit of injective semilinear maps of modules is injective; if stage cokernels are flat over varying base rings and the limit algebra is localized base change, then the limit cokernel is flat",
+   "results": "8 hits: RingHom.FaithfullyFlat.codescendsAlong_injective; Module.Flat.of_forall_exists_factorization; ModuleCat.FilteredColimits.colimitCoconeIsColimit; Module.DirectLimit.lift_injective; CategoryTheory.Limits.Concrete.colimit_no_zero_smul_divisor; Module.Flat.iff_lift_lsmul_comp_subtype_injective; LinearMap.lTensor_injective_of_exact_of_flat; Module.Flat.iff_rTensor_preserves_injective_linearMap'",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern completions, fixed-ring colimits, localization detection or elementary flatness; none gives this varying-ring approximation statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pass injectivity of a directed system of module arrows to the limit using eventual vanishing of elements, and identify the limit quotient with scalar extension of a flat stage cokernel under localization of tensor product rings",
+   "results": "8 hits: ModuleCat.directLimitIsColimit; Module.DirectLimit.lift_injective; ModuleCat.directLimitCocone; Module.DirectLimit.exists_of₂; DirectLimit.Module.of_f; ModuleCat.directLimitIsColimit_desc; Submodule.FG.rTensor.directLimit_apply; Module.DirectLimit.lift_unique",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern completions, fixed-ring colimits, localization detection or elementary flatness; none gives this varying-ring approximation statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, LinearMap.range, TensorProduct",
+   "results": "2 hits: Module.Flat.ker_lTensor_eq; Module.Flat.eqLocus_lTensor_eq",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not assert this simultaneous varying-ring stage/limit statement."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]olimit.*[Ii]nject|[Ii]nject.*[Cc]olimit|[Ff]lat.*[Cc]oker|[Cc]oker.*[Ff]lat",
+   "results": "25 hits: Mathlib/CategoryTheory/Presentable/Limits.lean:150   · exact isColimitMapCocone.injective c hc κ hK cX hF; Mathlib/CategoryTheory/Types/Monomorphisms.lean:78     obtain rfl := h _ (Cofan.inj_injective_of_isColimit (coproductIsCoproduct X₂) i₁ hx); Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean:1356     · rw [Functor.CoconeTypes.descColimitType_injective_iff_of_isFiltered']; Mathlib/CategoryTheory/Limits/Types/Colimits.lean:176   apply (colimitEquivColimitType F).symm.injective; Mathlib/AlgebraicGeometry/Gluing.lean:838     (colimit.isColimit F)).inv.isOpenEmbedding.injective.eq_iff]; Mathlib/AlgebraicGeometry/Gluing.lean:860   apply ((isColimit F).coconePointUniqueUpToIso (colimit.isColimit F)).inv.isOpenEmbedding.injective; Mathlib/CategoryTheory/Limits/Types/ColimitTypeFiltered.lean:18 `Functor.CoconeTypes.injective_descColimitType_iff_of_isFiltered` which gives; Mathlib/CategoryTheory/Limits/Types/ColimitTypeFiltered.lean:20 `F.descColimitType c : F.ColimitType → c.pt` is injective, which is an; Mathlib/CategoryTheory/Limits/Types/ColimitTypeFiltered.lean:88 lemma descColimitType_injective_iff_of_isFiltered :; Mathlib/CategoryTheory/Limits/Types/ColimitTypeFiltered.lean:89     Function.Injective (F.descColimitType c) ↔; Mathlib/CategoryTheory/Limits/Types/ColimitTypeFiltered.lean:103 /-- Variant of `descColimitType_injective_iff_of_isFiltered` where we; Mathlib/CategoryTheory/Limits/Types/Coproducts.lean:119   (equivOfIsColimit hc).injective (by simp); Mathlib/CategoryTheory/Limits/Types/Coproducts.lean:126 lemma inj_injective_of_isColimit (i : C) :; Mathlib/CategoryTheory/Limits/Types/Coproducts.lean:129   simpa using (equivOfIsColimit hc).injective (a₁ := ⟨i, y₁⟩) (a₂ := ⟨i, y₂⟩) h; Mathlib/CategoryTheory/Limits/Types/Coproducts.lean:134   congr_arg Sigma.fst ((equivOfIsColimit hc).injective (a₁ := ⟨i₁, y₁⟩) (a₂ := ⟨i₂, y₂⟩) h); Mathlib/CategoryTheory/Limits/Types/Coproducts.lean:141   exact ⟨rfl, (inj_injective_of_isColimit hc i₁ h).symm⟩; Mathlib/CategoryTheory/Limits/Types/Pushouts.lean:243 lemma pushoutCocone_inr_injective_of_isColimit {c : PushoutCocone f g} (hc : IsColimit c); Mathlib/CategoryTheory/Limits/Types/Filtered.lean:96 /-- Recognizing filtered colimits of types. The injectivity condition here is; Mathlib/CategoryTheory/Limits/Types/Filtered.lean:145   rw [← (IsColimit.coconePointUniqueUpToIso ht (colimitCoconeIsColimit F)).toEquiv.injective.eq_iff]; Mathlib/CategoryTheory/Abelian/Injective/Basic.lean:40 /-- The preadditive Yoneda functor on `J` preserves colimits if `J` is injective. -/; Mathlib/CategoryTheory/Abelian/Injective/Basic.lean:41 instance preservesFiniteColimits_preadditiveYonedaObj_of_injective (J : C) [hP : Injective J] :; Mathlib/CategoryTheory/Abelian/Injective/Basic.lean:45 /-- An object is injective if its preadditive Yoneda functor preserves finite colimits. -/; Mathlib/CategoryTheory/Abelian/Injective/Basic.lean:46 theorem injective_of_preservesFiniteColimits_preadditiveYonedaObj (J : C); Mathlib/CategoryTheory/Abelian/Injective/Basic.lean:47     [hP : PreservesFiniteColimits (preadditiveYonedaObj J)] : Injective J := by; Mathlib/CategoryTheory/Limits/Final/Type.lean:106     refine Function.RightInverse.injective (g := (P.descColimitType c)) (fun x ↦ ?_)",
+   "date": "2026-10-22",
+   "verdict": "no match: no declaration found for this stage/limit statement; the related matches supply only individual ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Injectivity and flat cokernel pass from eventual stages to a directed limit of module arrows with module base change and localized base change rings",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]olimit.*[Ii]nject|[Ii]nject.*[Cc]olimit|[Ff]lat.*[Cc]oker|[Cc]oker.*[Ff]lat",
+   "results": "Hits: Mathlib/CategoryTheory/Presentable/Limits.lean, Mathlib/CategoryTheory/Limits/Types/Colimits.lean, Mathlib/CategoryTheory/Limits/Types/ColimitTypeFiltered.lean, Mathlib/CategoryTheory/Limits/Types/ColimitTypeFiltered.lean, Mathlib/CategoryTheory/Limits/Types/ColimitTypeFiltered.lean, Mathlib/CategoryTheory/Limits/Types/ColimitTypeFiltered.lean, Mathlib/CategoryTheory/Limits/Types/ColimitTypeFiltered.lean, Mathlib/CategoryTheory/Triangulated/TStructure/AbelianSubcategory.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the results provide individual fixed-ring colimit or flatness ingredients, not the full varying-ring arrow and cokernel statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Injectivity and flat cokernel for a directed limit of module arrows over varying rings with localized tensor product base change",
+   "results": "Hits: Module.DirectLimit.lift_injective, IsTensorProduct.map_injective_of_flat_right_left, Ring.DirectLimit.lift_injective, DirectLimit.lift_injective, Module.Flat.lTensor_preserves_injective_linearMap, Module.Flat.iff_lTensor_preserves_injective_linearMap, LinearMap.lTensor_injective_of_exact_of_flat, TensorProduct.map_injective_of_flat_flat'",
+   "date": "2026-10-22",
+   "verdict": "no match: the results provide individual fixed-ring colimit or flatness ingredients, not the full varying-ring arrow and cokernel statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A directed colimit of semilinear module arrows with eventually injective maps and flat cokernels has injective limit and flat cokernel when the ring maps are localized base change",
+   "results": "Hits: Module.DirectLimit.lift_injective, Module.flat_of_isLocalized_span, Module.Flat.of_forall_exists_factorization, RingHom.FaithfullyFlat.codescendsAlong_injective, Module.FaithfullyFlat, Module.Flat.iff_lift_lsmul_comp_subtype_injective, Module.Flat.iff_forall_exists_factorization, LinearMap.lTensor_injective_of_exact_of_flat",
+   "date": "2026-10-22",
+   "verdict": "no match: the results provide individual fixed-ring colimit or flatness ingredients, not the full varying-ring arrow and cokernel statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, TensorProduct",
+   "results": "Hits: Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_flat_left, Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_flat_right, LinearIndependent.tmul_of_flat_left, LinearIndependent.tmul_of_flat_right, TensorProduct.LinearIndepOn.tmul_of_flat_left, TensorProduct.LinearIndepOn.tmul_of_flat_right, TensorProduct.nontrivial_of_linearMap_injective_of_flat_left, TensorProduct.nontrivial_of_linearMap_injective_of_flat_right",
+   "date": "2026-10-22",
+   "verdict": "no match: the results provide individual fixed-ring colimit or flatness ingredients, not the full varying-ring arrow and cokernel statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For modules over a directed system of commutative rings, eventual monomorphisms induce a monomorphism on additive colimits, and localized extension of scalars preserves flatness of their cokernels",
+   "results": "Hits: Module.DirectLimit.lift_injective, Module.flat_of_isLocalized_span, Module.flat_of_isLocalized_maximal, Module.Flat.of_isLocalizedModule, Module.Flat.localizedModule, ModuleCat.directLimitIsColimit, Module.DirectLimit.of.zero_exact, ModuleCat.directLimitCocone",
+   "date": "2026-10-22",
+   "verdict": "no match: the results provide individual fixed-ring colimit or flatness ingredients, not the full varying-ring arrow and cokernel statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-valuation-general-mod-injective",
+  "date": "2026-10-22",
+  "group": "Q32"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The 046Y helper reached through the Tag 0GSG valuation-ring argument on the local-term-locality branch: Tag 046Y (lemma-mod-injective-general), final sentence (passage of stage injectivity and flat cokernel to the limit), expanded using Tag 00D7 (lemma-zero-directed-limit), Tag 00DF (lemma-tensor-product-exact), and the first proof paragraph of Tag 00MO (lemma-another-variant-local-criterion-flatness); old steps 8--9.",
+   "via": [
+    "lem-trf-valuation-general-mod-injective",
+    "lem-trf-valuation-finite-module-injectivity",
+    "lem-trf-flat-relative-associated-specialization",
+    "lem-trf-flat-associated-equidimensional",
+    "lem-trf-flat-fibre-component-closure-dimension",
+    "lem-trf-flat-dense-generic-fibre-pure-dimension",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-localized-arrow-injective-flat-cokernel-limit",
+  "worker": "stage1",
+  "summary": "Preserved the statement; gave the elementwise eventual-kernel argument, identified every stage cokernel by tensor right exactness with an explicit inverse, and specialized the existing localized-base-change quotient-flatness theorem to the zero ideal. No new nodes. All citations checked against their statements.",
+  "blueprint": "The 046Y final limit passage on the 0GSG valuation branch underlying lem-trf-local-term-locality; realizes the former steps 8--9 of lem-trf-valuation-general-mod-injective.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-localized-base-change-quotient-flat",
+    "why": "Generic localized scalar-extension flatness, used at zero ideal in step 3. It supplies a base-ring flatness tool, not a replacement of the contracting-local-term unit route; no statement in the item unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-localized-base-change-quotient-flat"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q152-48245322a",
+  "group": "Q152",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q152-48245322a (reviewer sub-agent of L); spot-checked: First split of an unsplit node; there is no repair note, so the re-split rule does not apply. No new nodes. The statement and stmt_deps are byte-identical to the Q32 snapshot, and the citer lem-trf-valuation-general-mod-injective uses all three conclusions. Source checked: Stacks algebra.tex Tag 046Y lemma-mod-injective-general (l.32770), whose final sentence 'The lemma follows' is the limit passage; Tag 00MO's first proof paragraph is the origin of the cited localized-base-change node. No SGA. Step 1 (elementary): from nu_i(u_i x_i)=0, detection gives j>=i with n_ji(u_i x_i)=0; take k>=j,i_0; then u_k m_ki x_i = n_kj n_ji u_i x_i = 0, so m_ki x_i = 0 and x = 0. Only directedness and the tail are used. Step 2: lem-weil-pbc-tensor-right-exact over S_i with module S gives q_i with ker = im(u_i⊗1). beta_i maps that image onto u(M) because alpha_i is onto, so h_i is induced and [y]⊗s ↦ s[nu_i(y)]; this holds at every index. Step 3: lem-weil-pbc-localized-base-change-quotient-flat with (R_i0,S_i0,R,S), M=C_i0, I=0. The scalar towers commute through the colimit ring map phi. The node's q is the assumed localization. The node imposes no locality or Noetherian condition and allows I=0. Its input is the tail flatness at i_0; its output S⊗C_i0 is R-flat and is carried to C by symmetry and h_i0 (an S-linear map, so R-linear). Flatness transports along that isomorphism by the definition node. No cycle: the closures of all 5 cited nodes avoid the item. rg found no duplicate. Accepted tool_use: lem-weil-pbc-localized-base-change-quotient-flat (sk-thm-p1, generic algebra, route unchanged). Minor: the worker wrote tool_uses themselves, contrary to C8; the entry is accurate, so it is not a return. Edge cases checked: singleton index set, zero rings and modules, non-injective early arrows."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LocalizedArrowInjectiveFlatCokernelLimit",
+  "declaration": "Module.injective_flat_cokernel_of_localized_directed_limit",
+  "file": "lean/Sheaf/RingTheory/LocalizedArrowInjectiveFlatCokernelLimit.lean",
+  "statement": "theorem injective_flat_cokernel_of_localized_directed_limit {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (Ri Si : I ⥤ CommRingCat.{u}) (cR : Cocone Ri) (cS : Cocone Si) (hcR : IsColimit cR) (hcS : IsColimit cS) [Algebra cR.pt cS.pt] [∀ i : I, Algebra (Ri.obj i) (Si.obj i)] [∀ i : I, Algebra (Ri.obj i) cR.pt] [∀ i : I, Algebra (Si.obj i) cS.pt] [∀ i : I, Algebra (Ri.obj i) cS.pt] [∀ i : I, IsScalarTower (Ri.obj i) (Si.obj i) cS.pt] [∀ i : I, IsScalarTower (Ri.obj i) cR.pt cS.pt] (hR : ∀ (i : I), algebraMap (Ri.obj i) cR.pt = (cR.ι.app i).hom) (hS : ∀ (i : I), algebraMap (Si.obj i) cS.pt = (cS.ι.app i).hom) (h_ring_arrow : ∀ (i j : I) (h : i ≤ j) (r : Ri.obj i), (Si.map (homOfLE h)).hom (algebraMap (Ri.obj i) (Si.obj i) r) = algebraMap (Ri.obj j) (Si.obj j) ((Ri.map (homOfLE h)).hom r)) (Mi Ni : I → Type u) [∀ i : I, AddCommGroup (Mi i)] [∀ i : I, AddCommGroup (Ni i)] [∀ i : I, Module (Si.obj i) (Mi i)] [∀ i : I, Module (Si.obj i) (Ni i)] [∀ i : I, Module (Ri.obj i) (Ni i)] [∀ i : I, IsScalarTower (Ri.obj i) (Si.obj i) (Ni i)] (ui : ∀ i : I, Mi i →ₗ[Si.obj i] Ni i) (m : ∀ (i j : I), i ≤ j → Mi i →+ Mi j) (n : ∀ (i j : I), i ≤ j → Ni i →+ Ni j) (hm_smul : ∀ (i j : I) (h : i ≤ j) (s : Si.obj i) (x : Mi i), m i j h (s • x) = (Si.map (homOfLE h)).hom s • m i j h x) (hn_smul : ∀ (i j : I) (h : i ≤ j) (s : Si.obj i) (y : Ni i), n i j h (s • y) = (Si.map (homOfLE h)).hom s • n i j h y) (hm_id : ∀ (i : I) (x : Mi i), m i i le_rfl x = x) (hn_id : ∀ (i : I) (y : Ni i), n i i le_rfl y = y) (hm_comp : ∀ (i j k : I) (hij : i ≤ j) (hjk : j ≤ k) (x : Mi i), m j k hjk (m i j hij x) = m i k (hij.trans hjk) x) (hn_comp : ∀ (i j k : I) (hij : i ≤ j) (hjk : j ≤ k) (y : Ni i), n j k hjk (n i j hij y) = n i k (hij.trans hjk) y) (h_stage_arrow : ∀ (i j : I) (h : i ≤ j) (x : Mi i), n i j h (ui i x) = ui j (m i j h x)) (M N : Type u) [AddCommGroup M] [AddCommGroup N] [Module cS.pt M] [Module cS.pt N] [Module cR.pt N] [IsScalarTower cR.pt cS.pt N] (mu : ∀ i : I, Mi i →+ M) (nu : ∀ i : I, Ni i →+ N) (hmu_smul : ∀ (i : I) (s : Si.obj i) (x : Mi i), mu i (s • x) = algebraMap (Si.obj i) cS.pt s • mu i x) (hnu_smul : ∀ (i : I) (s : Si.obj i) (y : Ni i), nu i (s • y) = algebraMap (Si.obj i) cS.pt s • nu i y) (hmu_comp : ∀ (i j : I) (h : i ≤ j) (x : Mi i), mu j (m i j h x) = mu i x) (hnu_comp : ∀ (i j : I) (h : i ≤ j) (y : Ni i), nu j (n i j h y) = nu i y) (u : M →ₗ[cS.pt] N) (h_limit_arrow : ∀ (i : I) (x : Mi i), nu i (ui i x) = u (mu i x)) (hM_represent : ∀ x : M, ∃ (i : I) (xi : Mi i), mu i xi = x) (hN_represent : ∀ y : N, ∃ (i : I) (yi : Ni i), nu i yi = y) (hM_equal : ∀ (i j : I) (x : Mi i) (y : Mi j), mu i x = mu j y → ∃ (k : I) (hik : i ≤ k) (hjk : j ≤ k), m i k hik x = m j k hjk y) (hN_equal : ∀ (i j : I) (x : Ni i) (y : Ni j), nu i x = nu j y → ∃ (k : I) (hik : i ≤ k) (hjk : j ≤ k), n i k hik x = n j k hjk y) (alpha : ∀ i : I, (cS.pt ⊗[Si.obj i] Mi i) ≃ₗ[cS.pt] M) (beta : ∀ i : I, (cS.pt ⊗[Si.obj i] Ni i) ≃ₗ[cS.pt] N) (h_alpha : ∀ (i : I) (x : Mi i) (s : cS.pt), alpha i (s ⊗ₜ[Si.obj i] x) = s • mu i x) (h_beta : ∀ (i : I) (y : Ni i) (s : cS.pt), beta i (s ⊗ₜ[Si.obj i] y) = s • nu i y) (h_arrow : ∀ (i : I) (t : cS.pt ⊗[Si.obj i] Mi i), beta i ((ui i).lTensor cS.pt t) = u (alpha i t)) (h_localization : ∀ i : I, ∃ (q : Si.obj i ⊗[Ri.obj i] cR.pt →+* cS.pt) (W : Submonoid (Si.obj i ⊗[Ri.obj i] cR.pt)), (∀ (a : Si.obj i) (r : cR.pt), q (a ⊗ₜ[Ri.obj i] r) = algebraMap (Si.obj i) cS.pt a * algebraMap cR.pt cS.pt r) ∧ (∀ w : W, IsUnit (q w)) ∧ (∀ s : cS.pt, ∃ (a : Si.obj i ⊗[Ri.obj i] cR.pt) (w : W), s * q w = q a) ∧ (∀ a : Si.obj i ⊗[Ri.obj i] cR.pt, q a = 0 → ∃ w : W, (w : Si.obj i ⊗[Ri.obj i] cR.pt) * a = 0)) (i₀ : I) (h_tail : ∀ j : I, i₀ ≤ j → Function.Injective (ui j) ∧ Module.Flat (Ri.obj j) (Ni j ⧸ LinearMap.range (ui j))) : Function.Injective u ∧ Module.Flat cR.pt (N ⧸ LinearMap.range u) ∧ ∀ i : I, ∃ e : (cS.pt ⊗[Si.obj i] (Ni i ⧸ LinearMap.range (ui i))) ≃ₗ[cS.pt] (N ⧸ LinearMap.range u), ∀ (y : Ni i) (s : cS.pt), e (s ⊗ₜ[Si.obj i] (LinearMap.range (ui i)).mkQ y) = s • (LinearMap.range u).mkQ (nu i y)",
+  "branch": "sheaf-dag",
+  "by": "NO",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-da10d9a96",
+  "group": "NO",
+  "result": "pass",
+  "note": "Faithful rendering checked clause by clause: directed nonempty I:Type u; ring functors to CommRingCat; φ pinned as the colimit map by scalar towers; semilinear transitions and cocones with identity/composition; elementwise colimit conditions; canonical scalar-extension isos fixed by pure-tensor formulas plus h_arrow; explicit localization; i₀ tail of injectivity and R_j-flat cokernels; conclusions injective u, R-flat C, canonical C_i⊗S≅C for every i. Extra R-module instances are the restricted actions. No locality, finiteness or Nontrivial; one universe, as the node allows. Mathematics true per Stacks 046Y limit passage, 00D7, 00DF, 00MO; edge cases (singleton I, zero rings/modules, indices before i₀) covered. Only the item's lean field changed; statement verbatim; docstrings with source, blueprint and proof steps; sorry only; lines ≤100. Advisory: proof-only imports unused by the statement; def-weil-pbc-module-tensor-product has no lean record (mathlib_match TensorProduct is what the item uses). Not recompiled per 2026-10-21 rule."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "U6",
+  "result": "pass",
+  "landing": "20261023T124525-L-1415813",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "Module.injective_flat_cokernel_of_localized_directed_limit"
+  ],
+  "sorry_after": []
+ }
+}

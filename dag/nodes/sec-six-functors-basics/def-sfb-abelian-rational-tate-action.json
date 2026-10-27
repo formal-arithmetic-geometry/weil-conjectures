@@ -1,0 +1,126 @@
+{
+ "id": "def-sfb-abelian-rational-tate-action",
+ "kind": "definition",
+ "title": "Composition and Tate action on rational homomorphisms",
+ "status": "split",
+ "statement": "Let $k$ be a field [def-weil-field], and $A,B,C$ abelian varieties over $k$ [def-sc-abelian-variety]. Write $H(A,B)$ for the abelian group of group-scheme homomorphisms $A\\to B$ [def-sc-group-scheme], with pointwise addition, and use the rational homomorphisms [def-sfb-abelian-rational-hom] $H^0(A,B)=\\mathbf Q\\otimes_{\\mathbf Z}H(A,B)$ [def-weil-pbc-module-tensor-product], canonically identified with $H(A,B)\\otimes_{\\mathbf Z}\\mathbf Q$ by interchanging the factors. The integral inclusion sends $f$ to $1\\otimes f$. Precomposition and postcomposition by integral homomorphisms are extended by scalar extension to $H^0$. For a prime $\\ell$ [def-weil-l-adic-numbers], the componentwise Tate action [sk-def-av-tate] extends to $H^0(A,B)$ by $q\\otimes f\\mapsto qV_\\ell(f)$, with $q$ acting through the canonical embedding $\\mathbf Q\\to\\mathbf Q_\\ell$. Thus this construction specifies actual maps between the rational Tate modules, rather than arbitrary actions.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-abelian-variety",
+  "def-sc-group-scheme",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-l-adic-numbers",
+  "sk-def-av-tate",
+  "def-sfb-abelian-rational-hom"
+ ],
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I §10, pp.45–46 (Hom and rational Hom; componentwise Tate action), and §14, printed p.61 (rational inverse in Hom(A dual,A) tensor Q)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Rational homomorphisms of abelian varieties Hom tensor Q and their induced rational Tate module action",
+   "results": "{\"t\": \"2026-10-24T04:11:22Z\", \"tool\": \"leansearch\", \"query\": \"Rational homomorphisms of abelian varieties Hom tensor Q and their induced rational Tate module action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"subsingleton_rat_module\", \"RingHom.toRatAlgHom\", \"rTensorHomEquivHomRTensor\", \"lTensorHomEquivHomLTensor\", \"RingHom.toRatAlgHom_apply\", \"map_rat_smul\", \"AlgHom.toRingHom_toRatAlgHom\", \"map_ratCast_smul\"], \"digest\": \"3a70d28e1e1b0c78\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic tensor and rational-linear-map APIs exist, but no rational group-scheme Hom with its Tate action"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rational homomorphisms of abelian varieties Hom tensor Q and their induced rational Tate module action",
+   "results": "{\"t\": \"2026-10-24T04:11:24Z\", \"tool\": \"leanfinder\", \"query\": \"Rational homomorphisms of abelian varieties Hom tensor Q and their induced rational Tate module action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddMonoidHom.toRatLinearMap\", \"CharacterModule.homEquiv_symm_apply_apply_apply\", \"CharacterModule.homEquiv_apply_apply\", \"CharacterModule.instLinearMapClassIntAddCircleRatOfNat\", \"CharacterModule.dual_rTensor_conj_homEquiv\", \"CharacterModule.homEquiv\", \"CharacterModule.uncurry_apply\", \"WeierstrassCurve.Affine.Point.map\"], \"digest\": \"26ab18e50e39f378\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic tensor and rational-linear-map APIs exist, but no rational group-scheme Hom with its Tate action"
+  },
+  {
+   "tool": "grep",
+   "query": "rationalHom|RationalHom|rationalTateModuleMap",
+   "results": "{\"t\": \"2026-10-24T04:11:24Z\", \"tool\": \"grep\", \"query\": \"rationalHom|RationalHom|rationalTateModuleMap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic tensor and rational-linear-map APIs exist, but no rational group-scheme Hom with its Tate action"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-trace-intersection",
+  "date": "2026-10-24",
+  "group": "Q155"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Proposition 14.4(a), printed p.62; polarization convention in I §11, printed p.53. Supporting fact for Proposition 14.4(a): Chapter I §14, printed p.61 (Rosati formula and involution), Theorem 14.3, printed p.62 (positive trace form); §11 p.53 (polarization isogeny); Proposition 10.20, printed pp.50–52 (trace on Tate modules). Supporting input: Chapter I, Theorem 14.3, printed p.62, displayed trace/intersection identity; Proposition 10.20, p.50, identifies its trace with Tate trace. The displayed identity is stated for alpha alpha-dagger; cyclicity of ordinary trace gives the order used here. The calculation is omitted by these notes (reference there: Milne 1986 §17). Rational inverse and its Q-linear Tate action in the trace/intersection formula.",
+   "via": [
+    "lem-sfb-abelian-trace-intersection",
+    "lem-sfb-rosati-trace-positive",
+    "lem-sfb-polarized-abelian-automorphisms-finite",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianVariety.RationalHomTateAction",
+  "declaration": "AlgebraicGeometry.IsAbelianVariety.rationalHomTateMap",
+  "declarations": [
+   "AlgebraicGeometry.IsAbelianVariety.abelianHomPrecomp",
+   "AlgebraicGeometry.IsAbelianVariety.abelianHomPostcomp",
+   "AlgebraicGeometry.IsAbelianVariety.rationalHomPrecomp",
+   "AlgebraicGeometry.IsAbelianVariety.rationalHomPostcomp",
+   "AlgebraicGeometry.IsAbelianVariety.abelianHomTateMap",
+   "AlgebraicGeometry.IsAbelianVariety.abelianHomRationalTateMap",
+   "AlgebraicGeometry.IsAbelianVariety.rationalHomTateMap"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianVariety/RationalHomTateAction.lean",
+  "statement": "def rationalHomTateMap (ℓ : ℕ) [Fact ℓ.Prime] : abelianRationalHom A B →ₗ[ℤ] (rationalTateModule ℓ A →ₗ[ℚ_[ℓ]] rationalTateModule ℓ B)",
+  "branch": "newtargets-dag",
+  "by": "Q155",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d96f94040",
+  "group": "Q155",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d96f94040",
+  "group": "Q155",
+  "result": "pass",
+  "note": "Every clause matches the Lean (Milne AV I Thm 14.3 / Prop 10.20). Dimension is g+1, which covers all positive dimensions including g=0. λ is fixed by ClassifiesAbelianDifference with the landed AbelianDualPoincareDatum, and fDual by the Poincaré-pullback iso, the same characterization as the aDual clause of exists_dual_polarization_calculus, so neither is arbitrary. mu : ℚ⊗Hom(A^∨,A), with precomp/postcomp inverse equations in the correct directions. The endomorphism is rationalHomPrecomp (f≫λ≫fDual) mu = μ f^∨ λ f. The selfIntersectionNumber≠0 conjunct and algebraMap ℚ ℚ_ℓ of the whole ratio are present. New node def-sfb-abelian-rational-tate-action has real bodies (Yoneda precomposition, IsMonHom.monoidHom postcomposition, baseChange ℚ, tateModuleMap with additivity proved, TensorProduct.lift q⊗h↦q·V_ℓ h) and reuses N9's landed RationalHom; grep of live and side-live found no duplicate. lean.statement is verbatim in both files. Dependency records are unchanged vs side-live; only the item's stmt_deps/lean and the new node are added. The only sorry is the item theorem, whose docstring has the 4-step plan and source. No SGA source, no pro-étale substitute. Not recompiled per instructions."
+ }
+}

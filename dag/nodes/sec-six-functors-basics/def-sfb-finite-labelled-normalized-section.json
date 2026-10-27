@@ -1,0 +1,124 @@
+{
+ "id": "def-sfb-finite-labelled-normalized-section",
+ "kind": "definition",
+ "title": "Finite labelled copies and fibre-normalized universal sections",
+ "status": "split",
+ "statement": "Let $U$ be a scheme and $W\\to U$ an object of its small pro-etale site [def-weil-pbc-proetale-site]. For each profinite set $P$, let $W[P]$ be the profinite-copy object of $W$, retained over $U$, functorially in $P$ [def-sfb-profinite-test-objects]. Fix an algebraically closed field $\\Omega$, a geometric point $y:\\operatorname{Spec}\\Omega\\to U$, and a lift $w:\\operatorname{Spec}\\Omega\\to W$ [def-weil-geometric-point]. For $q\\in P$, its labelled neighbourhood is $W[P]$ with geometric point the composite of $w$ and the constant-$q$ section $W\\to W[P]$. For a set sheaf $F$ on $U_{\\mathrm{proet}}$, a finite set $A$, and a universal section $s\\in F(W[A])$, its labelled germ at $q\\in A$ is the image of $s$ under the coprojection from that labelled neighbourhood into the geometric stalk $F_y$ [def-weil-proetale-geometric-stalk]. Given a bijection $e:A\\cong F_y$, call $s$ fibre-normalized if (i) for every pro-etale object $V\\to W$, the map $\\operatorname{Hom}_{W}(V,W[A])\\to F(V)$ sending $f$ to $f^*s$ is bijective, and (ii) for every $q\\in A$ its labelled germ is $e(q)$. Finally, $F$ is finite constant at $W$ if there is a finite set $A$ and an isomorphism $F|_W\\cong\\underline A_W$, using the actual inverse-image functor [def-weil-proetale-inverse-image] and constant sheaf [def-weil-pbc-constant-sheaf]. Empty finite label sets are allowed. The Lean label set is lifted by $\\mathrm{ULift}$ to the stalk's universe.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-sfb-profinite-test-objects",
+  "def-weil-geometric-point",
+  "def-weil-proetale-geometric-stalk",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 4.2.12 and Section 5.1, Lemmas 5.1.2--5.1.4, Corollary 5.1.5; finite labelled copies and normalization at a geometric fibre; geometric germs as Stacks 0F6B."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "abelianTowerLabels|abelianTowerLabelNeighbourhood|IsAbelianTowerNormalizedSection|abelianTowerConstantAt",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no exact Mathlib match; reuse the existing project definitions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite labelled copies of a pro-etale object and universal sections normalized by geometric stalk germs",
+   "results": "[leansearch] OK 8 hit(s)\nTopCat.Presheaf.Sheafify.isGerm\nTopCat.Presheaf.germ\nTopCat.Presheaf.germToPullbackStalk\nTopCat.Presheaf.section_ext\nTopCat.Presheaf.germ_exist\nTopCat.Presheaf.Γgerm\nAlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_inv_eq_germ_apply\nTopCat.stalkToFiber_germ",
+   "date": "2026-10-22",
+   "verdict": "no exact Mathlib match; reuse the existing project definitions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite constant sheaf trivialization represented by a universal labelled section bijective on all local test objects with prescribed geometric stalk germs",
+   "results": "[leanfinder] OK 8 hit(s)\nCategoryTheory.Sheaf.IsConstant\nCategoryTheory.evalEquiv\nCategoryTheory.Sheaf.isConstant_iff_forget\nCategoryTheory.Sheaf.mem_essImage_of_isConstant\nCategoryTheory.Sheaf.isConstant_of_forget\nTopCat.sheafInhabited\nCategoryTheory.Sheaf.isConstant_of_iso\nTopCat.Presheaf.app_bijective_of_stalkFunctor_map_bijective",
+   "date": "2026-10-22",
+   "verdict": "no exact Mathlib match; reuse the existing project definitions"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normalized-finite-splitting-operations",
+  "date": "2026-10-22",
+  "group": "NI"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The finite labelled test objects and fibre-normalized splitting hypotheses used for finite operations and pointed refinements.",
+   "via": [
+    "lem-sfb-normalized-finite-splitting-operations",
+    "lem-sfb-snc-tame-finite-fibre-classification",
+    "lem-sfb-tame-root-tower-extension",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConnectedAbelianTowerNormalizedData",
+  "declaration": "AlgebraicGeometry.ProEtale.IsAbelianTowerNormalizedSection",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.abelianTowerLabels",
+   "AlgebraicGeometry.ProEtale.abelianTowerLabelNeighbourhood",
+   "AlgebraicGeometry.ProEtale.abelianTowerLabelGerm",
+   "AlgebraicGeometry.ProEtale.IsAbelianTowerNormalizedSection",
+   "AlgebraicGeometry.ProEtale.abelianTowerConstantAt"
+  ],
+  "statement": "def IsAbelianTowerNormalizedSection {U : Scheme.{u}} {Ω : Type u}\n    [Field Ω] [IsAlgClosed Ω] {y : Spec (.of Ω) ⟶ U} (W : U.ProEt)\n    (w : Over.mk y ⟶ (Scheme.ProEt.forget U).obj W)\n    (F : Sheaf (Scheme.ProEt.topology U) (Type (u + 1))) (A : FintypeCat.{u})\n    (e : ULift.{u + 1, u} A ≃ Scheme.proEtaleGeometricSetStalk y F)\n    (s : F.obj.obj (op ((abelianTowerLabels W).obj (FintypeCat.toProfinite.obj A)))) :\n    Prop",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "The definitions are moved verbatim into NormalizedData to let the separate object, Hom and finite-frame lemmas import their common interfaces without an import cycle. NormalizedDescent publicly re-exports the data module; existing statements and elaborated definition bodies are unchanged.",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConnectedAbelianTowerNormalizedData.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a1eb86329",
+  "group": "NI",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a1eb86329",
+  "group": "NI",
+  "result": "pass",
+  "note": "Re-delivery after the 0def2d02 RETURN; both findings repaired. (1) H2/H13: the new def node def-sfb-finite-labelled-normalized-section is existing:true on the unchanged ConnectedAbelianTowerNormalizedDescent and owns abelianTowerLabels, LabelNeighbourhood, LabelGerm, IsAbelianTowerNormalizedSection and ConstantAt. Its statement matches each definition, its lean.statement is verbatim, its 6 stmt_deps are each cited, it does not depend on the tower, and no other node owns these definitions. The item cites it instead of the theorem node. (2) The last conjunct of Identifies now pulls F's actual descentLabel section through g and an overlap map o, fixed by both pullback projections ((v, θ, id) and the structural map), and equates it with the refined descent section relabelled by a. It is correct on points and not tautological. finiteSplittingRefinedParameters is real data with docstrings and is listed. The module diff against 0def touches only these lines. The rest was re-checked: clauses, universes (site u+1/u, set sheaves and rings in Type (u+1)), edge cases, 8 sorry only in the 8 theorems, statement verbatim, 22 declarations present, no pro-étale substitute, report sections present. Advisories: profiniteProduct* is owned by the landed def-sfb-profinite-product-maps, which the item does not cite (same as the reviewed 0def head; S2 cannot change stmt_deps); the reused definitions keep the theorem node's blueprint docstrings. No compile reproduced; no fixes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-51165",
+  "group": "Z6",
+  "result": "pass",
+  "landing": "20261023T152151-L-457777",
+  "kind": "interface",
+  "note": "independent cc review: Item and 3 new sorried lemmas (descent-object, descent-hom, finite-frame) read against BS 5.1.2–5.1.5 and the ConnectedAbelianCoverTower conventions; 8 definitions verbatim-moved to NormalizedData (diff vs clones/live); importer NormalizedFiniteSplittingOperations compiled against the delivered modules (exit 0); axioms of the item theorem are the standard three plus sorryAx from the new lemmas"
+ }
+}

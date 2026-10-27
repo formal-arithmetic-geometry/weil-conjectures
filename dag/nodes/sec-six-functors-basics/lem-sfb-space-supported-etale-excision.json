@@ -1,0 +1,425 @@
+{
+ "id": "lem-sfb-space-supported-etale-excision",
+ "kind": "statement",
+ "title": "Supported complexes on an elementary etale neighbourhood: shriek and direct image",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and let $X,V$ be algebraic spaces over $S$ with their small etale structure sheaves [def-trf-algebraic-space]. Use module sheaves [def-weil-sheaf-of-modules-category] and unbounded derived categories [def-weil-abstract-derived-category]. Let $i:U\\hookrightarrow X$ be an open subspace [def-a1-space-open-subspace] and $p:V\\to X$ representable etale. Let $Z$ be the reduced closed subspace of $X$ with underlying set $|X|\\setminus|U|$ [lem-sfb-space-reduced-closed-support], and suppose $V\\times_XZ\\to Z$ is an isomorphism. Put $T=U\\times_XV$. Use exact etale restriction $p^*$ and its exact module extension-by-zero left adjoint $p_!$ [lem-sfb-space-elementary-shriek-exact], also denoting its termwise derived functor by $p_!$, and the canonical derived direct image $Rp_*$ [lem-sfb-space-derived-etale-chart-calculus]. For every $F\\in D(\\mathcal O_V)$ with $F|_T=0$, there is a canonical isomorphism $c_F:p_!F\\xrightarrow{\\sim}Rp_*F$. It is the morphism whose transpose under $p^*\\dashv Rp_*$ is the inverse of the unit $F\\to p^*p_!F$, which is itself an isomorphism. The counit $p^*Rp_*F\\to F$ is an isomorphism, and $i^*Rp_*F=0$. In particular for every $M\\in D(\\mathcal O_X)$ and every integer $n$, the comparison $c_F$ and the adjunction $p_!\\dashv p^*$ induce a natural bijection\n$$\\operatorname{Hom}_{D(\\mathcal O_X)}(Rp_*F,M[n])\\cong\\operatorname{Hom}_{D(\\mathcal O_V)}(F,p^*M[n]).$$\nNo quasi-compactness, perfectness, quasi-coherence, or boundedness assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08GG, lemma-pushforward-with-support-in-open, part (2) and its proof; exact extension by zero and its adjunction as in lemma-exact-sequence-lower-shriek."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-a1-space-open-subspace",
+  "lem-sfb-space-reduced-closed-support",
+  "lem-sfb-space-elementary-shriek-exact",
+  "lem-sfb-space-derived-etale-chart-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Write $P=p^*$, $L=p_!$, and $R=Rp_*$. By [lem-sfb-space-elementary-shriek-exact], $L$ and $P$ are exact additive functors on module sheaves with their specified adjunction. Apply [lem-weil-pbc-exact-functor-derived-factorization] to obtain their termwise functors on unbounded derived categories, with the canonical shift comparisons. Use the localized degreewise adjunction of [def-weil-exact-derived-adjunction], whose unit and counit are the original ones applied termwise. Thus $L\\dashv P$ on these derived categories. Also $P\\dashv R$ by [lem-sfb-space-derived-etale-chart-calculus], since etale pullback is exact restriction. Denote the left adjunction's unit by $\\alpha:\\mathrm{id}\\to PL$, and the right adjunction's unit and counit by $\\eta:\\mathrm{id}\\to RP$ and $\\varepsilon:PR\\to\\mathrm{id}$.",
+   "uses": [
+    "lem-sfb-space-elementary-shriek-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-exact-derived-adjunction",
+    "lem-sfb-space-derived-etale-chart-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08GG(2); sites-cohomology.tex Tag 08FJ (lemma-adjoint-lower-shriek-restrict)"
+   }
+  },
+  {
+   "text": "We will check cohomology sheaves on geometric stalks. The forgetful functor from module sheaves to abelian sheaves preserves kernels and cokernels by [lem-weil-pbc-module-sheaves-colimits-forgetful]. The geometric stalk functors preserve finite limits and all small colimits and detect isomorphisms by [lem-sfb-space-etale-conservative-geometric-points]. Therefore their induced module stalks preserve kernels (finite limits) and cokernels (quotients, computed as coequalizers), hence images and cohomology. A complex is zero, or a morphism is an isomorphism in its derived category, precisely when its cohomology sheaves are zero, or the induced cohomology maps are isomorphisms. Thus these tests may be made on every geometric stalk. Exact $L$ and $P$ similarly commute with cohomology: applying an exact functor to $\\ker d/\\operatorname{im}d$ gives $\\ker F(d)/\\operatorname{im}F(d)$.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-sfb-space-etale-conservative-geometric-points",
+    "def-weil-abstract-derived-category",
+    "lem-sfb-space-elementary-shriek-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08GG(2), stalk test; spaces-properties.tex Tag 04K5 (theorem-exactness-stalks)"
+   }
+  },
+  {
+   "text": "Put $E=LF$. For a geometric point $\\bar x$ of $U$, every lift $\\bar v$ to $V$ lies in $T$. Since $F|_T=0$, the stalks $H^q(F)_{\\bar v}$ are zero for every $q$. The stalk formula of [lem-sfb-space-etale-sum-stalks] and exactness give $H^q(E)_{\\bar x}=\\bigoplus_{p\\bar v=\\bar x}H^q(F)_{\\bar v}=0$. Hence $E|_U=0$ by step 2 (restriction has these stalks by [lem-sfb-space-geometric-points-conservative], with the etale stalk-ring identifications in the sum-stalk lemma). For a geometric point $\\bar x$ outside $U$, [lem-sfb-space-reduced-closed-support] says $Z\\times_X\\operatorname{Spec}\\Omega$ is a closed subscheme with nonempty support. Its ideal in the field $\\Omega$ is proper, hence zero. Thus $\\bar x$ factors through $Z$. The hypothesis $V\\times_XZ\\cong Z$ then says that there is exactly one lift $\\bar v$ of $\\bar x$ to $V$. This argument uses the actual base-changed closed subscheme, without asserting that an arbitrary base change of $Z$ is reduced.",
+   "uses": [
+    "lem-sfb-space-etale-sum-stalks",
+    "lem-sfb-space-geometric-points-conservative",
+    "lem-sfb-space-reduced-closed-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08GG(2), support assertion; stalk formula preceding Tag 08GV and sites-modules.tex Tag 0710 (lemma-stalk-j-shriek)"
+   }
+  },
+  {
+   "text": "The unit $G\\to PLG$ on module sheaves sends a section $s$ over $(W\\xrightarrow{a}V)$ to the sheafification of $s$ in the $a$-summand of the extension presheaf [def-weil-extension-by-zero-presheaf, lem-pur-site-restriction-module-adjunction-exact]. Indeed evaluation of a map out of that sum on its $a$-summand is its adjoint at $(W,a)$; for the identity of $LG$ this is exactly the displayed inclusion. On a geometric stalk at $\\bar v$, the explicit germ formula of [lem-sfb-space-etale-sum-stalks] identifies this unit with the inclusion into the $\\bar v$-summand of $\\bigoplus_{p\\bar w=p\\bar v}G_{\\bar w}$. Apply this degreewise to a representative of $F$, using the localized-unit normalization in step 1 and the cohomology calculation in step 2. If $p\\bar v$ lies outside $U$, step 3 makes the sum a singleton and the unit is the identity. If $p\\bar v$ lies in $U$, every summand and the source are zero since all lifts lie in $T$. Thus $\\alpha_F:F\\to PE$ induces an isomorphism on every cohomology stalk and is an isomorphism. No stalks outside these two cases exist.",
+   "uses": [
+    "def-weil-extension-by-zero-presheaf",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sfb-space-etale-sum-stalks"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08GG(2)(a); sites-modules.tex Tag 03DI (lemma-extension-by-zero), adjunction construction"
+   }
+  },
+  {
+   "text": "Let $q:T\\to U$ and $t:T\\to V$ be the projections. The canonical etale base-change isomorphism in [lem-sfb-space-derived-etale-chart-calculus], applied to $p$ and $i$, gives $i^*RF\\cong Rq_*t^*F=Rq_*0=0$. The last equality holds because an additive functor sends a zero object to a zero object. This is the required vanishing for the canonical derived direct image, with no boundedness or quasi-compactness assumption.",
+   "uses": [
+    "lem-sfb-space-derived-etale-chart-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08GG(2), first sentence; Tag 08GE (lemma-restrict-direct-image-open)"
+   }
+  },
+  {
+   "text": "For any $B\\in D(\\mathcal O_X)$ with $B|_U=0$ and any $A\\in D(\\mathcal O_X)$, apply [lem-sfb-space-derived-hom-mayer-vietoris] to $(A,B)$ at degree zero. Its $U$ term and its two adjacent overlap terms vanish: $B|_U=0$ implies $B|_T=0$, so these are Hom groups into zero objects, including the shifted overlap term. Exactness therefore says that the actual restriction map $\\operatorname{Hom}(A,B)\\to\\operatorname{Hom}(PA,PB)$ is bijective. Under $P\\dashv R$, this is postcomposition with $\\eta_B:B\\to RPB$: the transpose of $\\eta_B f$ is $\\varepsilon_{PB}P(\\eta_B)P(f)=P(f)$ by the triangle identity. Consequently $\\operatorname{Hom}(A,\\eta_B)$ is bijective for every $A$. To see invertibility explicitly, take $A=RPB$ to get $r:RPB\\to B$ with $\\eta_Br=1$. Injectivity for $A=B$ and $\\eta_B(r\\eta_B)=\\eta_B$ give $r\\eta_B=1$. Thus $\\eta_B$ is an isomorphism. In particular, step 3 permits $B=E$.",
+   "uses": [
+    "lem-sfb-space-derived-hom-mayer-vietoris",
+    "lem-sfb-space-derived-etale-chart-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08H9 (lemma-mayer-vietoris-hom), applied with supported second argument; Tag 08GG(1)(a)"
+   }
+  },
+  {
+   "text": "Define $c_F=R(\\alpha_F^{-1})\\circ\\eta_E:E\\to RF$. Both factors are isomorphisms by steps 4 and 6. Its transpose under $P\\dashv R$ is\n$$\\varepsilon_F\\circ P(c_F)=\\varepsilon_F\\circ PR(\\alpha_F^{-1})\\circ P(\\eta_E)=\\alpha_F^{-1}\\circ\\varepsilon_{PE}\\circ P(\\eta_E)=\\alpha_F^{-1}.$$\nThe middle equality is naturality of $\\varepsilon$, and the last is its triangle identity. Hence this is precisely the comparison specified in the statement, not just an unspecified isomorphism between the same objects. The displayed equality also gives $\\varepsilon_F=\\alpha_F^{-1}\\circ(P(c_F))^{-1}$, so the canonical counit $PRF\\to F$ is an isomorphism. Units, counits, functor application and the inverse of a natural isomorphism are natural, so $c_F$ is natural on the full subcategory $F|_T=0$.",
+   "uses": [
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "def-weil-exact-derived-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08GG(2)(a)-(c), canonical adjunction identification"
+   }
+  },
+  {
+   "text": "For $M\\in D(\\mathcal O_X)$ and $n\\in\\mathbf Z$, precompose with $c_F$ and apply $L\\dashv P$ to obtain\n$$\\operatorname{Hom}(RF,M[n])\\xrightarrow{h\\mapsto h c_F}\\operatorname{Hom}(LF,M[n])\\xrightarrow{g\\mapsto P(g)\\alpha_F}\\operatorname{Hom}(F,P(M[n])).$$\nBoth arrows are bijections. The canonical exact-functor shift comparison of [lem-weil-pbc-exact-functor-derived-factorization] identifies $P(M[n])$ with $(PM)[n]$. Thus the result is exactly the claimed natural bijection, for every integer $n$. Naturality follows from the two displayed formulas and from naturality of the shift comparison.",
+   "uses": [
+    "def-weil-exact-derived-adjunction",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08GG(2)(c) and sites-cohomology.tex Tag 08FJ (lemma-adjoint-lower-shriek-restrict)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-exact-derived-adjunction",
+  "def-weil-extension-by-zero-presheaf",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sfb-space-derived-etale-chart-calculus",
+  "lem-sfb-space-derived-hom-mayer-vietoris",
+  "lem-sfb-space-elementary-shriek-exact",
+  "lem-sfb-space-etale-conservative-geometric-points",
+  "lem-sfb-space-etale-sum-stalks",
+  "lem-sfb-space-geometric-points-conservative",
+  "lem-sfb-space-reduced-closed-support",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08GG; same support/exact-extension route, using Tag 08H9 to prove the supported right-adjunction unit directly rather than the section reduction in the printed proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero equals derived pushforward for complexes supported on an etale neighborhood of a closed complement",
+   "results": {
+    "hits": 8,
+    "top": [
+     "HomologicalComplex.instIsStrictlySupportedExtend",
+     "HomologicalComplex.isZero_extend_X",
+     "HomologicalComplex.isZero_extend_X'",
+     "HomologicalComplex.IsStrictlySupportedOutside.isSupportedOutside",
+     "HomologicalComplex.IsSupportedOutside",
+     "HomologicalComplex.extend.rightHomologyData_Q",
+     "HomologicalComplex.IsStrictlySupportedOutside",
+     "HomologicalComplex.extendMap_f_eq_zero"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern complex-shape support, generic truncations, or ring etale loci, not the stated geometric derived assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale excision identifies derived direct image of a complex zero outside a closed subset with exact extension by zero",
+   "results": {
+    "hits": 8,
+    "top": [
+     "HomologicalComplex.isSupported_iff",
+     "HomologicalComplex.IsSupportedOutside.exactAt",
+     "HomologicalComplex.extend_exactAt",
+     "HomologicalComplex.exactAt_of_isSupported",
+     "HomologicalComplex.isZero_extend_X'",
+     "HomologicalComplex.isZero_extend_X",
+     "HomologicalComplex.IsSupportedOutside",
+     "HomologicalComplex.IsSupported.exactAt"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern complex-shape support, generic truncations, or ring etale loci, not the stated geometric derived assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"extensionByZero\"",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern complex-shape support, generic truncations, or ring etale loci, not the stated geometric derived assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "([Ss]upport.*(etale|Etale)|[Ee]xtensionByZero.*[Pp]ushforward)",
+   "results": {
+    "hits": 2,
+    "top": [
+     "Mathlib/RingTheory/Etale/Locus.lean",
+     "Mathlib/RingTheory/Etale/Locus.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern complex-shape support, generic truncations, or ring etale loci, not the stated geometric derived assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Complexes supported on the complement of an open are equivalent under restriction to an etale neighborhood and extension by zero",
+   "results": {
+    "hits": 8,
+    "top": [
+     "Finsupp.restrictSupportEquiv_symm_apply_coe",
+     "ComplexShape.Embedding.homRestrict_liftExtend",
+     "ComplexShape.Embedding.AreComplementary.isSupportedOutside₂_iff",
+     "ComplexShape.Embedding.AreComplementary.isStrictlySupportedOutside₂_iff",
+     "ComplexShape.Embedding.AreComplementary.isSupportedOutside₁_iff",
+     "HomologicalComplex.IsStrictlySupportedOutside.isSupportedOutside",
+     "HomologicalComplex.IsStrictlySupportedOutside.mk",
+     "ComplexShape.Embedding.AreComplementary.isStrictlySupportedOutside₁_iff"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern complex-shape support, generic truncations, or ring etale loci, not the stated geometric derived assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(excision|extensionByZero|lowerShriek)",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: complex-shape support and Zariski scheme-module open restriction do not state supported etale excision for structure-sheaf modules on algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale excision for supported complexes identifies extension by zero and derived direct image on algebraic spaces",
+   "results": {
+    "hits": 8,
+    "top": [
+     "HomologicalComplex.isSupported_iff",
+     "HomologicalComplex.acyclic_truncLE_iff_isSupportedOutside",
+     "HomologicalComplex.IsSupported.casesOn",
+     "AlgebraicGeometry.IsEtale",
+     "ComplexShape.Embedding.AreComplementary.hom_ext'",
+     "AlgebraicGeometry.Scheme.Etale",
+     "HomologicalComplex.isZero_stupidTrunc_iff",
+     "AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: complex-shape support and Zariski scheme-module open restriction do not state supported etale excision for structure-sheaf modules on algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"extensionByZero\"",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: complex-shape support and Zariski scheme-module open restriction do not state supported etale excision for structure-sheaf modules on algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero equals derived pushforward for unbounded complexes of structure sheaf modules supported on an etale neighborhood of a closed complement",
+   "results": {
+    "hits": 8,
+    "top": [
+     "HomologicalComplex.instIsStrictlySupportedExtend",
+     "localCohomology.diagram",
+     "AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom_aux",
+     "HomologicalComplex.isZero_extend_X'",
+     "HomologicalComplex.isZero_extend_X",
+     "HomologicalComplex.IsSupportedOutside",
+     "HomologicalComplex.extend.leftHomologyData_K",
+     "HomologicalComplex.IsStrictlySupportedOutside"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: complex-shape support and Zariski scheme-module open restriction do not state supported etale excision for structure-sheaf modules on algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an etale morphism isomorphic over a closed subset, restriction on the derived category of modules with support is an equivalence and its left and right adjoints agree",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction",
+     "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor",
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso",
+     "AlgebraicGeometry.Scheme.Modules.restrictAdjunction",
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback",
+     "AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app",
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctorId",
+     "AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: complex-shape support and Zariski scheme-module open restriction do not state supported etale excision for structure-sheaf modules on algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "instIsIsoFunctorCounitRestrictAdjunction|restrictAdjunction_unit_app_app",
+   "results": {
+    "hits": 1,
+    "top": [
+     "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: complex-shape support and Zariski scheme-module open restriction do not state supported etale excision for structure-sheaf modules on algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-supported-koszul-low-localization",
+  "date": "2026-10-24",
+  "group": "Q114"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect generators detect lower cohomological bounds on algebraic spaces. 0GFI proof, paragraphs Say V=Spec(A) through Then tau_le_a E = tau_le_a R(U to X)_*(E|U). Supporting input: Tag 08GG, lemma-pushforward-with-support-in-open, part (2) and its proof; exact extension by zero and its adjunction as in lemma-exact-sequence-lower-shriek.",
+   "via": [
+    "lem-sfb-space-supported-koszul-low-localization",
+    "lem-sfb-space-generator-detects-lower-bound",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-supported-etale-excision",
+  "worker": "stage1",
+  "summary": "Kept the statement and all its hypotheses unchanged. Split via existing exact sum-extension, geometric stalk, etale chart calculus and unbounded Hom Mayer-Vietoris nodes. Wrote the unit on stalks, the supported right-unit argument and the canonical comparison/counit equations explicitly. No new nodes or Mathlib leaves.",
+  "blueprint": "The existing from.place traces the supported-excision input of Stacks 08GG through supported Koszul localization and 0GFI/0GFL to det-thm-sf-ctf-stability-direct-images proof (3). Latest blueprint direct-images proof (3) was read; this split treats only that existing foundational input. The ancestor tool currently returns None, so the existing null from.node and via chain are retained. Whole-blueprint searches for etale excision, supported, 08GG and extension by zero found no node stating this entire assertion.",
+  "tool_uses": [
+   {
+    "node": "def-weil-exact-derived-adjunction",
+    "why": "Generic localization of a specified exact adjunction supplies the normalization of the sum-extension unit; the unit has no replacement for this category-theory definition."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic exactness of forgetting module structures is used to transfer geometric-stalk exactness to structure-sheaf modules; no node of this unit supplies this ringed-site fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-exact-derived-adjunction",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-98e566b3f",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-98e566b3f (reviewer sub-agent of L); spot-checked: I read the full proof (8 steps, no new nodes) against Stacks 08GG (spaces-perfect.tex l.1918), 08H9, 0710, 04K5 and 03DI, and against the statement of every cited node. The statement and stmt_deps are unchanged, and proof_deps equals the union of the step uses (13). No SGA is cited and the citations form no cycle. The route is the agent's own, not the printed one. Step 3: a geometric point outside U factors through Z because a nonempty closed subscheme of Spec Omega has zero ideal; the hypothesis on V over Z then gives exactly one lift. Step 4: the module unit is the inclusion into the a-summand, matching the adjunction normalization in the sum-stalks node; on stalks it is the identity off U and 0 to 0 on U, so alpha_F is an isomorphism. Step 5: with u=p and a=i, chart base change gives i^*Rp_*F = Rq_*(F|_T) = 0. Step 6: 08H9 at n=0 with B|_U=0 makes restriction Hom(A,B) to Hom(PA,PB) bijective; by the triangle identity this is postcomposition with eta_B, so eta_B is an isomorphism. Step 7: the transpose of c_F = R(alpha^-1) eta_E is alpha^-1, by naturality of the counit and the triangle identity, which also gives the counit isomorphism. Step 8: the Hom bijection holds for all n through the shift comparison. Edge cases checked: U=X, U empty, infinitely many lifts over U, empty spaces. Duplicate grep for 08GG found only consumers. Batch-5 finding: the closure of the new proof_deps adds only 6 nodes to the closure of the base stmt_deps (10734 to 10740), none in sec-trace-formula or sec-poincare-duality. All trf/pod nodes reached (def-trf-algebraic-space and other algebraic-space foundations, no thm/cor) are already reached through the unchanged stmt_deps. So mayer-vietoris (08H9), etale-conservative-geometric-points (04K5), etale-sum-stalks (0710) and geometric-points-conservative (04K0/04K2) are general foundations and not steps of the trace formula or Poincare proofs. Accepted tool_uses: def-weil-exact-derived-adjunction and lem-weil-pbc-module-sheaves-colimits-forgetful, both generic. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SupportedEtaleExcision",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.supported_etale_excision",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.smallEtaleModuleShriek",
+   "AlgebraicGeometry.AlgebraicSpace.smallEtaleModuleShriekAdjunction",
+   "AlgebraicGeometry.AlgebraicSpace.smallEtaleModuleShriek_exact",
+   "AlgebraicGeometry.AlgebraicSpace.smallEtaleModuleShriek_additive",
+   "AlgebraicGeometry.AlgebraicSpace.smallEtaleModuleShriek_limits",
+   "AlgebraicGeometry.AlgebraicSpace.smallEtaleModuleShriek_colimits",
+   "AlgebraicGeometry.AlgebraicSpace.spaceEtaleDerivedShriek",
+   "AlgebraicGeometry.AlgebraicSpace.spaceEtaleShriekAdjunction",
+   "AlgebraicGeometry.AlgebraicSpace.spaceEtalePullbackShift",
+   "AlgebraicGeometry.AlgebraicSpace.supported_etale_excision"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedEtaleExcision.lean",
+  "statement": "theorem supported_etale_excision {U T : AlgebraicSpace S} [HasDerivedCategory.{w} U.SmallModules] [HasDerivedCategory.{w} T.SmallModules] (i : U ⟶ X) (p : V ⟶ X) (hi : IsRepresentableWith (fun _ _ f ↦ IsOpenImmersion f.left) i.hom.hom) (hp : IsEtale p.hom.hom) (Z : ClosedSubspace X) (hZ : IsReduced (Z.val : AlgebraicSpace S)) (hSupport : pointImage Z.val.arrow.hom.hom = (pointImage i.hom.hom)ᶜ) (hIso : IsIso (Limits.pullback.snd p.hom Z.val.arrow.hom)) (q : T ⟶ U) (t : T ⟶ V) (sq : IsPullback q t i p) : ∃ c : (ObjectProperty.ι (fun F : V.DerivedModules ↦ IsZero ((spaceDerivedPullback t).obj F))) ⋙ spaceEtaleDerivedShriek p hp ≅ (ObjectProperty.ι (fun F : V.DerivedModules ↦ IsZero ((spaceDerivedPullback t).obj F))) ⋙ derivedDirectImage p, ∀ F : ObjectProperty.FullSubcategory (fun F : V.DerivedModules ↦ IsZero ((spaceDerivedPullback t).obj F)), IsIso ((spaceEtaleShriekAdjunction p hp).unit.app F.obj) ∧ (spaceEtaleShriekAdjunction p hp).unit.app F.obj ≫ ((spaceDerivedAdjunction p).homEquiv _ _).symm (c.hom.app F) = 𝟙 F.obj ∧ IsIso ((spaceDerivedAdjunction p).counit.app F.obj) ∧ IsZero ((spaceDerivedPullback i).obj ((derivedDirectImage p).obj F.obj)) ∧ ∀ (M : X.DerivedModules) (n : ℤ), Function.Bijective (fun h : (derivedDirectImage p).obj F.obj ⟶ M⟦n⟧ ↦ (spaceEtaleShriekAdjunction p hp).homEquiv F.obj (M⟦n⟧) (c.hom.app F ≫ h) ≫ (spaceEtalePullbackShift p hp n).hom.app M)",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "States supported excision on the existing small affine ringed model, equivalent to the original small etale module topos. Transports the recorded shriek adjunction along basis equivalences and the normalized tensor/restriction comparison, then localizes the actual exact adjunction. Includes a natural isomorphism on the full supported subcategory, its inverse-unit transpose, canonical counit, open vanishing, and the specified shifted Hom bijection."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0126cd695",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Read item, 9 stmt_deps, live Lean of ElementaryEtaleShriekExact, SpaceDerivedEtaleChartCalculus, SpaceAffineHomComparison, small ringed model, ExactDerivedAdjunction. Every hypothesis matches the node and Stacks 08GG(2): open-immersion predicate, IsEtale with no qc/separation, reduced ClosedSubspace with complementary pointImage, IsIso pullback.snd, any IsPullback presentation of T, support as IsZero of the derived pullback to T. Every conclusion matches: natural iso c on the full supported subcategory; unit invertible; unit ≫ homEquiv.symm c_F = 𝟙 (types checked), which pins c; counit invertible; i^*Rp_*F = 0; explicit shifted Hom bijection for all M and n. Helpers have real data: transports of the recorded etaleModuleShriek and its adjunction, mapExactDerivedCategory moved along the ∃!-pinned comparison, and the exact functor's commShiftIso. Both Classical.choose calls are of normalized predicates. Only the lean field changed; lean.statement is verbatim; no duplicate or parallel landing; docstrings with source and blueprint; 8-step proof docstring; lines ≤100; both report sections present; edge cases F=0, U=X, U=∅, empty spaces, infinite fibres and all n covered. No compile: no file changed. Advisory: moduleTensorPullback_etale_restriction (theorem node lem-trf-space-etale-module-pushforward-restriction) is used without being in the stmt_deps closure. It is reached via the cited chart-calculus node, whose statement and docstring designate it as the étale restriction identification. It is canonical, so this is a note only."
+ }
+}

@@ -1,0 +1,293 @@
+{
+ "id": "lem-trf-quotient-diagonal-fppf-local-models",
+ "kind": "statement",
+ "title": "Fppf local models for the diagonal of an etale quotient sheaf",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $U,R$ be $S$-schemes, and let $j=(s,t):R\\to U\\times_SU$ [def-pc-fibre-product] be a monomorphism identifying $R(W)$ with an equivalence relation on $U(W)$ for every $S$-scheme $W$. Suppose $s,t$ are etale [def-weil-etale-morphism]. On the big fppf site $(\\mathit{Sch}/S)_{fppf}$ [def-pc-fppf-site], let $F$ be the sheafification [def-weil-pbc-sheafification] of $W\\mapsto U(W)/R(W)$, and let $q:h_U\\to F$ be the canonical map, where $h_Z(W)=\\operatorname{Mor}_S(W,Z)$. Work in the universes of [def-weil-size-convention]. Assume $j$ is separated [def-weil-proper-morphism] and locally quasi-finite [pqf-def-quasifinite]. For every $S$-scheme $T$ and two maps $a_1,a_2:h_T\\to F$, let $H=h_T\\times_{(a_1,a_2),F\\times F,\\Delta}F$, viewed as a presheaf on $(\\mathit{Sch}/T)_{fppf}$. This is a sheaf of sets [def-weil-pbc-sites-and-cohomology]; on a test scheme $W\\to T$ its set of sections is a singleton if $a_1|_W=a_2|_W$ and empty otherwise. There exist a common fppf covering $\\{T_i\\to T\\}$ and maps $u_i,v_i:T_i\\to U$ with $q(u_i)=a_1|_{T_i}$ and $q(v_i)=a_2|_{T_i}$, together with natural identifications $H|_{T_i}\\simeq h_{Y_i}$, where $Y_i=T_i\\times_{(u_i,v_i),U\\times_SU,j}R$. Every $Y_i\\to T_i$ is separated and locally quasi-finite.",
+ "source": {
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 0265, lemma-presentation-quasi-compact, third representability step, cartesian square and local model; simultaneous local lifts are obtained directly from sheafification on a common fppf refinement."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-etale-morphism",
+  "def-pc-fppf-site",
+  "def-weil-pbc-sheafification",
+  "def-weil-size-convention",
+  "def-weil-proper-morphism",
+  "pqf-def-quasifinite",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "For a test scheme $W\\to T$, an element of the displayed presheaf fibre product is an $x\\in F(W)$ satisfying $x=a_1|_W=a_2|_W$. Thus $H(W)$ is a singleton exactly when the two sections agree, and empty otherwise. This presheaf is a sheaf: a matching family on a covering exists exactly when the two sections agree on every covering member; the uniqueness part of the sheaf condition for $F$ then makes them agree on $W$. The resulting unique element of $H(W)$ glues the family. This also handles an empty covering, since a sheaf has exactly one section on any object admitting an empty cover.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 0265, lemma-presentation-quasi-compact, third step, definition of the diagonal fibre; sectionwise sheaf-condition verification."
+   }
+  },
+  {
+   "text": "Let P be the presheaf coequalizer, π:h_U→P, and q=π≫η. The universal property hη implies that η is locally surjective, without constructing sheafification in a larger universe: the locally generated image R=(range η).sheafify is a subsheaf of F; factor η through R by hη, and use uniqueness to show that the resulting F→R splits its inclusion. Thus every F-section is locally in the image of η. The components of π are epimorphisms of types, hence surjective, so q is locally surjective. For the two sections corresponding by Yoneda to a₁ and a₂, intersect their covering image sieves. The precoverage criterion supplies one fppf covering presieve inside this intersection. Present it as an indexed family, choose the two preimages on every member, and translate their section equalities into equalities of natural transformations by Yoneda. The forgetful slice functor identifies this with the required fppf covering of the underlying scheme.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00WB and 00WK, local generation of sheafification; the image-subsheaf proof of local surjectivity works directly with the given universal property. Tag 00VH and the covering-sieve criterion give the common refinement."
+   }
+  },
+  {
+   "text": "The hypotheses of [lem-trf-etale-relation-kernel-pair] apply to the given monomorphism $j$ and the sectionwise equivalence relation. Consequently, for every $W$ and $b,c:W\\to U$, equality $q(b)=q(c)$ is equivalent to the existence of a unique $r:W\\to R$ with $s r=b$ and $t r=c$: evaluate its canonical isomorphism $h_R\\simeq h_U\\times_Fh_U$ on $W$. This uses the isomorphism clause, not just local existence of relation witnesses.",
+   "uses": [
+    "lem-trf-etale-relation-kernel-pair"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 045Y, lemma-quotient-pre-equivalence, with the monomorphic equivalence-relation kernel-pair statement; Tag 0265 cartesian square."
+   }
+  },
+  {
+   "text": "Form $Y_i=T_i\\times_{(u_i,v_i),U\\times_SU,j}R$ by [def-pc-fibre-product]. On a test map $w:W\\to T_i$, its relative functor of points consists of $r:W\\to R$ with $s r=u_iw$ and $t r=v_iw$, by the fibre-product universal property. Step 3 identifies this set with the singleton witnessing $q(u_iw)=q(v_iw)$, or with the empty set if equality fails. By the lifting equalities of step 2 this is exactly $H(W)$ from step 1. Send a relation witness to this equality; conversely recover the unique witness from step 3. These assignments are inverse. Precomposition sends $r$ to its composite with the test morphism, so uniqueness proves that the inverse also commutes with restriction. Hence this is the required natural identification $H|_{T_i}\\simeq h_{Y_i}$ on the big fppf site over $T_i$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-trf-etale-relation-kernel-pair"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 0265, lemma-presentation-quasi-compact, third step, cartesian square and cube, evaluated on test schemes."
+   }
+  },
+  {
+   "text": "The structure morphism Y_i→T_i is the first projection of the specified pullback of j. Separatedness is supplied by Mathlib's base-change instance. For local quasi-finiteness, use the proved Scheme.Hom.isLocallyQuasiFinite_iff comparison API for [pqf-def-quasifinite] to convert the Stacks predicate on j into Mathlib LocallyQuasiFinite and LocallyOfFiniteType. Both properties are stable under base change by Mathlib instances, including for the first projection. Convert their conjunction back by the same comparison. This avoids transporting the second-projection interface of lem-weil-pbc-separated-lqf-base-change across the pullback symmetry. No extra hypotheses are introduced.",
+   "uses": [
+    "pqf-def-quasifinite",
+    "def-weil-proper-morphism",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 0265, lemma-presentation-quasi-compact, final local-model paragraph; Schemes Tag 01KU (lemma-separated-permanence), (3), and Morphisms Tag 01TM (lemma-base-change-quasi-finite), (2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-sheafification",
+  "lem-trf-etale-relation-kernel-pair",
+  "def-pc-fibre-product",
+  "pqf-def-quasifinite",
+  "def-weil-proper-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 0265, lemma-presentation-quasi-compact, third step; Tags 00WB and 00WK via the locally generated image subsheaf; Tag 045Y kernel-pair criterion; base-change instances through the proved comparison with Mathlib quasi-finiteness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "quotient.*sheaf|equivalenceRelation|kernelPair",
+   "results": "4 hits: Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean, Mathlib/AlgebraicGeometry/OpenImmersion.lean; no statement of the local scheme models for a quotient sheaf.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The diagonal of an fppf quotient sheaf by a scheme equivalence relation has local models given by pulling back the relation monomorphism",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsRepresentable, CategoryTheory.Limits.pullback",
+   "results": "0 hits: ; no statement of the local scheme models for a quotient sheaf.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafify|sheafification|[Ee]quivalence[Rr]elation",
+   "results": "9 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/Affine.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; no statement of the local scheme models for a quotient sheaf.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local lifts of a section of a sheafified quotient of schemes represent the pullback of its quotient map",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.liftQuotient, CategoryTheory.sheafifyLift, AlgebraicGeometry.Scheme.Hom.liftQuotient_comp, AlgebraicGeometry.Scheme.Hom.liftQuotient.congr_simp, CategoryTheory.Subfunctor.sheafifyLift, AlgebraicGeometry.exists_lift_of_germInjective_aux, CategoryTheory.GrothendieckTopology.sheafifyLift, AlgebraicGeometry.IsOpenImmersion.lift_app; no statement of the local scheme models for a quotient sheaf.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, CategoryTheory.Limits.pullback",
+   "results": "12 hits: AlgebraicGeometry.IsOpenImmersion.instFstScheme, AlgebraicGeometry.IsOpenImmersion.instSndScheme, AlgebraicGeometry.Scheme.Hom.opensRange_pullbackFst, AlgebraicGeometry.Scheme.Hom.opensRange_pullbackSnd, AlgebraicGeometry.IsOpenImmersion.range_pullbackFst, AlgebraicGeometry.IsOpenImmersion.range_pullbackSnd, AlgebraicGeometry.IsOpenImmersion.range_pullback_to_base_of_left, AlgebraicGeometry.IsOpenImmersion.range_pullback_to_base_of_right; no statement of the local scheme models for a quotient sheaf.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an etale equivalence relation of schemes the fppf quotient map has local pullbacks represented by base changes of the relation projection",
+   "results": "8 hits: AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; no statement of the local scheme models for a quotient sheaf.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local fppf lifts of two sections of a quotient of schemes identify the diagonal fibre with the pullback of the equivalence relation",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.diagonalRestrictIsoDiagonal, AlgebraicGeometry.Scheme.Pullback.diagonalCover_map, AlgebraicGeometry.ExistsHomHomCompEqCompAux.g, AlgebraicGeometry.diagonal_SpecMap, AlgebraicGeometry.Scheme.Pullback.Triplet.hy, AlgebraicGeometry.Scheme.Pullback.Triplet.hx, AlgebraicGeometry.diagonal_Spec_map, AlgebraicGeometry.Scheme.Pullback.Triplet.ofPoint_s; no statement of the local scheme models for a quotient sheaf.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*sheaf|equivalenceRelation|kernelPair",
+   "results": "4 hits: Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/OpenImmersion.lean; no statement of the fppf quotient diagonal local models.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local fppf lifts of sections of a sheafified quotient identify the diagonal fibre with the pullback of the equivalence relation",
+   "results": "8 hits: CategoryTheory.sheafifyLift.congr_simp, AlgebraicGeometry.Scheme.Hom.liftQuotient.congr_simp, Quotient.lift_mk, CategoryTheory.Subfunctor.sheafifyLift, SeparationQuotient.lift.congr_simp, CategoryTheory.sheafifyLift, CategoryTheory.Quotient.natTransLift_app, CategoryTheory.Subpresheaf.sheafifyLift; no statement of the fppf quotient diagonal local models.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsRepresentable, CategoryTheory.Limits.pullback",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.IsRepresentable'; no statement of the fppf quotient diagonal local models.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The diagonal fibre of a sheafified quotient of schemes is locally the pullback of the equivalence relation along two local lifts",
+   "results": "8 hits: AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t', AlgebraicGeometry.Scheme.LocalRepresentability.glueData_V, AlgebraicGeometry.Scheme.Pullback.diagonalRestrictIsoDiagonal, AlgebraicGeometry.Scheme.Pullback.gluing_t', AlgebraicGeometry.Scheme.Pullback.gluing_f, AlgebraicGeometry.Scheme.Pullback.gluing_t, AlgebraicGeometry.Scheme.Pullback.diagonalCover_map, AlgebraicGeometry.Scheme.Pullback.pullbackFstιToV; no statement of the fppf quotient diagonal local models.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Qq]uotient|[Ee]quivalence[Rr]elation",
+   "results": "4 hits: Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean; no statement of the fppf quotient diagonal local models.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, CategoryTheory.Limits.pullback",
+   "results": "12 hits: AlgebraicGeometry.IsOpenImmersion.instFstScheme, AlgebraicGeometry.IsOpenImmersion.instSndScheme, AlgebraicGeometry.Scheme.Hom.opensRange_pullbackFst, AlgebraicGeometry.Scheme.Hom.opensRange_pullbackSnd, AlgebraicGeometry.IsOpenImmersion.range_pullbackFst, AlgebraicGeometry.IsOpenImmersion.range_pullbackSnd, AlgebraicGeometry.IsOpenImmersion.range_pullback_to_base_of_left, AlgebraicGeometry.IsOpenImmersion.range_pullback_to_base_of_right; no statement of the fppf quotient diagonal local models.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monomorphic equivalence relation of schemes is the kernel pair of the fppf quotient sheaf, whose diagonal pullbacks are locally represented by base changes of the relation",
+   "results": "8 hits: AlgebraicGeometry.instUniversallyInjectiveOfMonoScheme, AlgebraicGeometry.IsSeparated.isSeparated_of_mono, AlgebraicGeometry.Scheme.kerFunctor_obj, AlgebraicGeometry.instIsZariskiLocalAtTargetMonomorphismsScheme, AlgebraicGeometry.IsImmersion.instιScheme, AlgebraicGeometry.IsSeparated, AlgebraicGeometry.instMonoObjWalkingSpanCompOverSchemeTopMorphismPropertySpanOverForgetForgetForgetNoneWalkingPairSomeMapInitOfIsOpenImmersionLeftDiscretePUnit, AlgebraicGeometry.Scheme.GlueData.Rel; no statement of the fppf quotient diagonal local models.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-etale-affine-quotient-representable",
+  "date": "2026-10-22",
+  "group": "Q151"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Quotient-presentation subargument below lem-trf-local-term-locality, via lem-trf-etale-relation-quotient: Tag 0265, lemma-presentation-quasi-compact, third representability step, cartesian square of j and the diagonal and local pullback calculation (old steps 5-6), including the equality-sheaf observation of old step 7.",
+   "via": [
+    "lem-trf-etale-affine-quotient-representable",
+    "lem-trf-etale-relation-quotient",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-quotient-diagonal-fppf-local-models",
+  "worker": "stage1",
+  "summary": "Proved the diagonal equality presheaf is a sheaf directly, obtained simultaneous lifts by successive sheafification covers, evaluated the existing kernel-pair isomorphism, and identified local models on test schemes. Reused all substantive existing lemmas; no new nodes. Statement unchanged.",
+  "blueprint": "Realizes the quotient-presentation subargument below lem-trf-local-term-locality through lem-trf-etale-relation-quotient and lem-trf-etale-affine-quotient-representable: Tag 0265 third step, cartesian square/cube and separated locally quasi-finite local models.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Generic sectionwise local-lifting property of sheafification on a site, used twice; no geometric quotient representability is assumed."
+   },
+   {
+    "node": "lem-weil-pbc-separated-lqf-base-change",
+    "why": "Generic scheme base-change permanence for the two assumed properties of j; the unit has no replacement for this tool."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q71-7dc3e6bac",
+  "group": "Q71",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-7dc3e6bac (reviewer sub-agent of L); spot-checked: Read the whole item, every cited node's statement and Stacks spaces.tex 1466-1604 (Tag 0265, third step: square, cube, base change of j). The statement is unchanged and there are no new nodes. The proof keeps the Stacks local model (u_i,v_i)^*j but uses a common fppf cover of simultaneous lifts instead of the étale cover T', which avoids depending on the parent's parallel representability step. Step 1: H(W) is a singleton or empty, and the sheaf property follows from F's equalizer condition (empty cover checked). Step 2: two applications of the sheafification local-sections lemma plus the site composition axiom (ii); def-pc-fppf-site is a site in that sense. Step 3: the hypotheses of lem-trf-etale-relation-kernel-pair are exactly the item's, and evaluating the isomorphism on W gives unique witnesses. No cycle: that node's proof_deps do not reach the item or its parent. Step 4: Y_i(W) = {r : jr = (u_i w, v_i w)} equals H(W); both are subsingleton presheaves, so the identification is automatically natural. Step 5: base change of j; 'separated' in the cited node goes through def-weil-pbc-scheme-conventions to the same def-weil-proper-morphism the item uses. Small cases checked: diagonal R, u=v, empty T. Two tool uses are declared, both sk-thm-p1 generic tools (sheafification sections-local, separated/lqf base change); both are already accepted tool_uses on other sk-i-curve-zero nodes, and I accept them. No duplicate: the sibling quotient-map-fppf-local-models models h_T x_F h_U, a different object. No SGA is cited. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuotientDiagonalFppfLocalModels",
+  "declaration": "AlgebraicGeometry.Scheme.quotient_diagonal_fppf_local_models",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.quotientDiagonalFibre",
+   "AlgebraicGeometry.Scheme.quotient_diagonal_fppf_local_models"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/QuotientDiagonalFppfLocalModels.lean",
+  "statement": "theorem quotient_diagonal_fppf_local_models {S : Scheme.{u}} {R U : Over S} (s t : R ⟶ U) [Mono (prod.lift s t)] (hrel : ∀ W : Over S, Equivalence (fun b c : W ⟶ U ↦ ∃ r : W ⟶ R, r ≫ s = b ∧ r ≫ t = c)) [Etale s.left] [Etale t.left] (F : Sheaf (Scheme.fppfTopology.over S) (Type u)) (η : coequalizer (yoneda.map s) (yoneda.map t) ⟶ F.obj) (hη : ∀ G : Sheaf (Scheme.fppfTopology.over S) (Type u), Function.Bijective (fun g : F.obj ⟶ G.obj ↦ η ≫ g)) [IsSeparated (prod.lift s t).left] (hj : Scheme.Hom.IsLocallyQuasiFinite (prod.lift s t).left) (T : Over S) (a₁ a₂ : yoneda.obj T ⟶ F.obj) : Presheaf.IsSheaf (Scheme.fppfTopology.over T.left) (quotientDiagonalFibre T F a₁ a₂) ∧ (∀ W : Over T.left, Subsingleton ((quotientDiagonalFibre T F a₁ a₂).obj (op W)) ∧ (Nonempty ((quotientDiagonalFibre T F a₁ a₂).obj (op W)) ↔ a₁.app (op ((Over.map T.hom).obj W)) (Over.homMk W.hom) = a₂.app (op ((Over.map T.hom).obj W)) (Over.homMk W.hom))) ∧ ∃ (I : Type (u + 1)) (Tᵢ : I → Over S) (f : ∀ i, Tᵢ i ⟶ T) (uᵢ vᵢ : ∀ i, Tᵢ i ⟶ U), Presieve.ofArrows (fun i ↦ (Tᵢ i).left) (fun i ↦ (f i).left) ∈ Scheme.fppfPrecoverage T.left ∧ (∀ i, yoneda.map (uᵢ i) ≫ (coequalizer.π (yoneda.map s) (yoneda.map t) ≫ η) = yoneda.map (f i) ≫ a₁) ∧ (∀ i, yoneda.map (vᵢ i) ≫ (coequalizer.π (yoneda.map s) (yoneda.map t) ≫ η) = yoneda.map (f i) ≫ a₂) ∧ (∀ i, Nonempty ((Over.map (f i).left).op ⋙ quotientDiagonalFibre T F a₁ a₂ ≅ yoneda.obj (Over.mk (pullback.fst (prod.lift (uᵢ i) (vᵢ i)).left (prod.lift s t).left)))) ∧ (∀ i, IsSeparated (pullback.fst (prod.lift (uᵢ i) (vᵢ i)).left (prod.lift s t).left) ∧ Scheme.Hom.IsLocallyQuasiFinite (pullback.fst (prod.lift (uᵢ i) (vᵢ i)).left (prod.lift s t).left))",
+  "branch": "sheaf-dag",
+  "by": "Q99",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The canonical relative diagonal fibre is constructed as the equality subtype of PUnit on the big fppf site over T. The quotient sheaf is specified by its sheafification universal property, using the recorded kernel-pair interface. The natural identifications use exactly the prescribed base changes of j."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5f84d4b09",
+  "group": "Q99",
+  "result": "pass",
+  "note": "Read node, 9 stmt_dep records, Stacks spaces.tex Tag 0265 third step, module and report. Every clause matches the node: Over-S product j=prod.lift s t mono + hrel equivalence, etale s/t, F/eta/heta sheafification interface identical to landed etale_relation_kernel_pair, q = coequalizer.pi ≫ eta, IsSeparated/IsLocallyQuasiFinite (Stacks 01TD with finite type) on j. quotientDiagonalFibre is a real subterminal equality-witness presheaf on Over T (= H over the structure map). Sheaf clause, singleton/empty clause, common fppf cover (index Type (u+1), permissive), lifting equalities, Nonempty iso of restricted H with yoneda of Over.mk(pullback.fst (u_i,v_i) j) (unique iso since H is subterminal), sep+lqf of the base change. No extra hypotheses, universes bound, statement verbatim, only sorry is the proof, 5-step proof docstring with citations, source/blueprint docstrings, no duplicate helper, node otherwise identical to live and live has no lean record. No changes, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U6",
+  "result": "pass",
+  "landing": "20261023T131947-L-2176745",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

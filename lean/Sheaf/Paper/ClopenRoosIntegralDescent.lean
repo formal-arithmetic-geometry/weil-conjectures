@@ -5,10 +5,15 @@ Authors: SHEAF group Q54
 -/
 module
 
+public import Sheaf.Paper.ClopenIntegralRestriction
 public import Sheaf.Paper.FiniteClopenDerivedDecomposition
 public import Sheaf.Paper.DerivedCompleteOnSlices
 public import Sheaf.Paper.IntegralReductionTowerCanonical
 public import Sheaf.CategoryTheory.StrictRoosModel
+import all Sheaf.Paper.ClopenIntegralRestriction
+import all Sheaf.AlgebraicGeometry.ClopenStrictTowerRoosEquivalence
+import all Sheaf.Paper.AugmentedIntegralDescent
+import Sheaf.Paper.SfIntegralConstructibleTriangulated
 import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 
@@ -35,7 +40,10 @@ It does not complete an arbitrary unbounded complex after restricting it.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option Elab.async false
+set_option linter.unusedSectionVars false
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
+  AlgebraicGeometry.Scheme.ProEt.ClopenRoos.modulesAbelian
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
@@ -45,138 +53,70 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Opposite
 namespace WeilConjectures
 namespace PurityFiniteSetting
 
-/-- The scheme site has its native small model.
-Source: the definition of the small pro-étale site
-(blueprint: lem-pur-clopen-roos-integral-descent). -/
-instance (priority := 4000) clopenIntegralSiteSmall (Y : Scheme.{u}) :
-    EssentiallySmall.{u + 1} Y.ProEt := essentiallySmallSelf.{u} _
-
-/-- Restriction of a constant ring is normalized by the constant presheaf unit.
-Source: Stacks 00XZ and 03CO (blueprint: lem-pur-clopen-roos-integral-descent). -/
-def clopenConstantMap {Y X : Scheme.{u}} (j : Y ⟶ X) [IsOpenImmersion j]
-    (A : CommRingCat.{u + 1}) :
-    (constantSheaf (Scheme.ProEt.topology Y) CommRingCat.{u + 1}).obj A ⟶
-      clopenRingRestriction j
-        ((constantSheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}).obj A) :=
-  ((sheafificationAdjunction (Scheme.ProEt.topology Y)
-    CommRingCat.{u + 1}).homEquiv _ _).symm
-      (Functor.whiskerLeft (clopenSiteInclusion j).op
-        (toSheafify (Scheme.ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).obj A)))
-
-variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
-  [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
-
-/-- The completed coefficient comparison is uniquely fixed by every quotient projection.
-Source: Stacks 03CO, 08TC; Bhatt--Scholze 3.5.2
-(blueprint: lem-pur-clopen-roos-integral-descent).
-Proof: restriction is precomposition, hence preserves sectionwise inverse limits.
-The constant-sheaf unit maps are isomorphisms after localization at the open.
-Their naturality in quotient reduction gives a cone; its unique limit lift is f.
-The inverse limit of the inverse finite comparisons is its inverse. Jointly monic
-limit projections give uniqueness, including on the empty scheme. -/
-theorem clopenCompletionMap_existsUnique {Y X : Scheme.{u}} (j : Y ⟶ X)
+private theorem clopenIntegralRestriction_countable
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] {Y X : Scheme.{u}} (j : Y ⟶ X)
     [IsOpenImmersion j] :
-    ∃! f : completedIntegralCommRingSheafUnrestricted l E Y ⟶
-        clopenRingRestriction j (completedIntegralCommRingSheafUnrestricted l E X),
-      IsIso f ∧ ∀ n : ℕ,
-        f ≫ ((clopenSiteInclusion j).sheafPushforwardContinuous CommRingCat.{u + 1}
-          (Scheme.ProEt.topology Y) (Scheme.ProEt.topology X)).map
-            (completedIntegralCommRingProjectionUnrestricted l E X n) =
-          completedIntegralCommRingProjectionUnrestricted l E Y n ≫
-            clopenConstantMap j (CommRingCat.of
-              (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))) := by
-  sorry
+    PreservesLimitsOfShape (Discrete ℕ) (clopenIntegralModuleRestriction l E j) := by
+  let c := (sheafCompose (Scheme.ProEt.topology Y)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).mapIso
+      (asIso (clopenCompletionMap l E j))
+  have : (SheafOfModules.restrictScalars.{u + 1} c.hom).IsEquivalence :=
+    restriction_isEquivalence c
+  have : PreservesLimitsOfShape (Discrete ℕ)
+      (clopenRestriction j (completedIntegralCommRingSheafUnrestricted.{u, u} l E X)) :=
+    Scheme.ProEt.ClopenRoos.pushforward_countable_limits (𝟙 _)
+  change PreservesLimitsOfShape (Discrete ℕ)
+    (clopenRestriction j (completedIntegralCommRingSheafUnrestricted.{u, u} l E X) ⋙
+      SheafOfModules.restrictScalars c.hom)
+  infer_instance
 
-/-- The limit lift of the normalized finite coefficient comparisons.
-Source: Stacks 03CO (blueprint: lem-pur-clopen-roos-integral-descent). -/
-def clopenCompletionMap {Y X : Scheme.{u}} (j : Y ⟶ X) [IsOpenImmersion j] :=
-  (clopenCompletionMap_existsUnique l E j).exists.choose
+private theorem fullSubcategoryPiEquivalence
+    {C : Type*} [Category C] {J : Type*} {B : J → Type*} [∀ i, Category (B i)]
+    (e : C ≌ ∀ i, B i) (A : ObjectProperty C) (D : ∀ i, ObjectProperty (B i))
+    [∀ i, (D i).IsClosedUnderIsomorphisms]
+    (h : ∀ K, A K ↔ ∀ i, D i (e.functor.obj K i)) :
+    ∃ E : A.FullSubcategory ≌ ∀ i, (D i).FullSubcategory,
+      ∀ i, Nonempty (E.functor ⋙ Pi.eval (fun i ↦ (D i).FullSubcategory) i ⋙
+        (D i).ι ≅ A.ι ⋙ e.functor ⋙ Pi.eval B i) := by
+  let F : A.FullSubcategory ⥤ ∀ i, (D i).FullSubcategory :=
+    { obj K i := ⟨e.functor.obj K.obj i, (h K.obj).mp K.property i⟩
+      map f i := ObjectProperty.homMk (e.functor.map f.hom i)
+      map_id K := by
+        funext i
+        apply ObjectProperty.hom_ext
+        exact congrFun (e.functor.map_id K.obj) i
+      map_comp f g := by
+        funext i
+        apply ObjectProperty.hom_ext
+        exact congrFun (e.functor.map_comp f.hom g.hom) i }
+  let G : (∀ i, (D i).FullSubcategory) ⥤ A.FullSubcategory :=
+    { obj K := ⟨e.inverse.obj (fun i ↦ (K i).obj), (h _).mpr (fun i ↦
+        (D i).prop_of_iso (Pi.isoApp (e.counitIso.app (fun i ↦ (K i).obj)) i).symm
+          (K i).property)⟩
+      map f := ObjectProperty.homMk (e.inverse.map (fun i ↦ (f i).hom))
+      map_id K := by
+        apply ObjectProperty.hom_ext
+        exact e.inverse.map_id (fun i ↦ (K i).obj)
+      map_comp f g := by
+        apply ObjectProperty.hom_ext
+        exact e.inverse.map_comp (fun i ↦ (f i).hom) (fun i ↦ (g i).hom) }
+  let η : 𝟭 _ ≅ F ⋙ G := NatIso.ofComponents
+    (fun K ↦ A.isoMk (e.unitIso.app K.obj)) (by
+      intro K L f
+      apply ObjectProperty.hom_ext
+      exact e.unitIso.hom.naturality f.hom)
+  let ε : G ⋙ F ≅ 𝟭 _ := NatIso.ofComponents
+    (fun K ↦ Pi.isoMk (fun i ↦ (D i).isoMk
+      (Pi.isoApp (e.counitIso.app (fun i ↦ (K i).obj)) i))) (by
+      intro K L f
+      funext i
+      apply ObjectProperty.hom_ext
+      exact congrFun (e.counitIso.hom.naturality (fun i ↦ (f i).hom)) i)
+  exact ⟨CategoryTheory.Equivalence.mk F G η ε, fun i ↦ ⟨Iso.refl _⟩⟩
 
-/-- Invertibility follows from the uniquely specified limit comparison.
-Source: Stacks 03CO (blueprint: lem-pur-clopen-roos-integral-descent). -/
-instance clopenCompletionMapIsIso {Y X : Scheme.{u}} (j : Y ⟶ X) [IsOpenImmersion j] :
-    IsIso (clopenCompletionMap l E j) :=
-  (clopenCompletionMap_existsUnique l E j).exists.choose_spec.1
-
-/-- Ordinary module restriction with the canonical completed coefficient transport.
-Source: Stacks 04TS and 03CO (blueprint: lem-pur-clopen-roos-integral-descent). -/
-def clopenIntegralRestriction {Y X : Scheme.{u}} (j : Y ⟶ X) [IsOpenImmersion j] :
-    scalarReductionSource l E X ⥤ scalarReductionSource l E Y :=
-  clopenRestriction j (completedIntegralCommRingSheafUnrestricted l E X) ⋙
-    SheafOfModules.restrictScalars
-      ((sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
-        (clopenCompletionMap l E j))
-
-/-- Restriction and the isomorphic scalar transport are additive and exact.
-Source: Stacks 04TS (blueprint: lem-pur-clopen-roos-integral-descent).
-Proof: restriction is exact on the localized pro-etale site, and scalar transport
-along a ring isomorphism is an additive equivalence. Compose these exact functors. -/
-theorem clopenIntegralRestriction_exact {Y X : Scheme.{u}} (j : Y ⟶ X)
-    [IsOpenImmersion j] :
-    (clopenIntegralRestriction l E j).Additive ∧
-      PreservesFiniteLimits (clopenIntegralRestriction l E j) ∧
-      PreservesFiniteColimits (clopenIntegralRestriction l E j) := by
-  sorry
-
-/-- Additivity extracted from exactness. Source: Stacks 04TS
-(blueprint: lem-pur-clopen-roos-integral-descent). -/
-instance clopenIntegralRestrictionAdditive {Y X : Scheme.{u}} (j : Y ⟶ X)
-    [IsOpenImmersion j] : (clopenIntegralRestriction l E j).Additive :=
-  (clopenIntegralRestriction_exact l E j).1
-
-/-- Left exactness extracted from exactness. Source: Stacks 04TS
-(blueprint: lem-pur-clopen-roos-integral-descent). -/
-instance clopenIntegralRestrictionLimits {Y X : Scheme.{u}} (j : Y ⟶ X)
-    [IsOpenImmersion j] : PreservesFiniteLimits (clopenIntegralRestriction l E j) :=
-  (clopenIntegralRestriction_exact l E j).2.1
-
-/-- Right exactness extracted from exactness. Source: Stacks 04TS
-(blueprint: lem-pur-clopen-roos-integral-descent). -/
-instance clopenIntegralRestrictionColimits {Y X : Scheme.{u}} (j : Y ⟶ X)
-    [IsOpenImmersion j] : PreservesFiniteColimits (clopenIntegralRestriction l E j) :=
-  (clopenIntegralRestriction_exact l E j).2.2
-
-/-- Unbounded ordinary restriction, descended degreewise through quasi-isomorphisms.
-Source: Stacks 015F (blueprint: lem-pur-clopen-roos-integral-descent). -/
-def clopenIntegralDerivedRestriction {Y X : Scheme.{u}} (j : Y ⟶ X)
-    [IsOpenImmersion j] := (clopenIntegralRestriction l E j).mapDerivedCategory
-
-/-- The canonical shift comparison of exact derived restriction. Source: Stacks 015F
-(blueprint: lem-pur-clopen-roos-integral-descent). -/
-instance clopenIntegralDerivedRestrictionShift {Y X : Scheme.{u}} (j : Y ⟶ X)
-    [IsOpenImmersion j] : (clopenIntegralDerivedRestriction l E j).CommShift ℤ :=
-  inferInstanceAs ((clopenIntegralRestriction l E j).mapDerivedCategory.CommShift ℤ)
-
-/-- Degreewise exact restriction on ordinary cochain complexes. Source: Stacks 015F
-(blueprint: lem-pur-clopen-roos-integral-descent). -/
-abbrev clopenIntegralComplexRestriction {Y X : Scheme.{u}} (j : Y ⟶ X)
-    [IsOpenImmersion j] :=
-  (clopenIntegralRestriction l E j).mapHomologicalComplex (ComplexShape.up ℤ)
-
-/-- Restrict strict towers degreewise, including their transition maps and strict maps.
-Source: Stacks 08TC (blueprint: lem-pur-clopen-roos-integral-descent). -/
-def clopenIntegralStrictRestriction {Y X : Scheme.{u}} (j : Y ⟶ X)
-    [IsOpenImmersion j] :=
-  ((Functor.whiskeringRight ℕᵒᵖ _ _).obj (clopenIntegralRestriction l E j)).mapHomologicalComplex
-    (ComplexShape.up ℤ)
-
-/-- Restriction on the other standard encoding of strict towers of complexes.
-Source: Stacks 08TC (blueprint: lem-pur-clopen-roos-integral-descent). -/
-abbrev clopenIntegralComplexTowers {Y X : Scheme.{u}} (j : Y ⟶ X)
-    [IsOpenImmersion j] :=
-  (Functor.whiskeringRight ℕᵒᵖ _ _).obj (clopenIntegralComplexRestriction l E j)
-
-/-- The actual strict reduction tower, functorial in its input complex.
-Source: Bhatt--Scholze 3.5.2 (blueprint: lem-pur-clopen-roos-integral-descent). -/
-def clopenStrictReductionFunctor (X : Scheme.{u}) :=
-  (Functor.ofOpSequence (X := fun n ↦ unrestrictedIntegralComplexFunctor l E X n)
-    (unrestrictedIntegralTransition l E X)).flip
-
-/-- The actual derived reduction tower, functorial in all derived morphisms.
-Source: Bhatt--Scholze 3.5.2 (blueprint: lem-pur-clopen-roos-integral-descent). -/
-def clopenDerivedReductionFunctor (X : Scheme.{u}) :=
-  (Functor.ofOpSequence (X := fun n ↦ sfDerivedReductionRestricted l E X n)
-    (sfDerivedReductionTransition l E X)).flip
+attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted clopenCompletionMap
+  Functor.mapDerivedCategory Functor.mapDerivedCategoryFactors
 
 variable (P : PurityFiniteSetting.{u})
   (X : Over (Spec (CommRingCat.of P.field.k)))
@@ -254,8 +194,8 @@ comparison. Strict maps are diagonal product maps, so naturality follows on both
 coordinates. The second cone projection followed by pr_n gives the last equation. -/
 theorem finiteClopen_strict_roos_comparison (i : I) :
     ∃ θ : roosF ⋙
-        (clopenIntegralRestriction P.coefficients.l P.extension (j i).left).mapHomologicalComplex
-          (ComplexShape.up ℤ) ≅
+        (clopenIntegralModuleRestriction P.coefficients.l P.extension
+          (j i).left).mapHomologicalComplex (ComplexShape.up ℤ) ≅
       clopenIntegralStrictRestriction P.coefficients.l P.extension (j i).left ⋙ roosF,
       ∀ T : CochainComplex (ℕᵒᵖ ⥤
           scalarReductionSource P.coefficients.l P.extension X.left) ℤ,
@@ -275,10 +215,10 @@ theorem finiteClopen_strict_roos_comparison (i : I) :
           (θ.hom.app T).f (p + 1) ≫
               (roosχ ((clopenIntegralStrictRestriction P.coefficients.l P.extension
                 (j i).left).obj T) p).hom =
-            (clopenIntegralRestriction P.coefficients.l P.extension (j i).left).map
+            (clopenIntegralModuleRestriction P.coefficients.l P.extension (j i).left).map
                 (roosχ T p).hom ≫
               Functor.biprodComparison
-                (clopenIntegralRestriction P.coefficients.l P.extension (j i).left)
+                (clopenIntegralModuleRestriction P.coefficients.l P.extension (j i).left)
                 ((roosP T).X p) ((roosP T).X (p + 1)) ≫
               biprod.map
                 ((piComparison
@@ -293,7 +233,23 @@ theorem finiteClopen_strict_roos_comparison (i : I) :
             θ.hom.app T ≫ roosEval
               ((clopenIntegralStrictRestriction P.coefficients.l P.extension (j i).left).obj T)
               n) := by
-  sorry
+  have := clopenIntegralRestriction_countable P.coefficients.l P.extension (j i).left
+  let F := clopenIntegralModuleRestriction P.coefficients.l P.extension (j i).left
+  have : PreservesLimitsOfShape (Discrete ℕ) (F.mapHomologicalComplex (.up ℤ)) := by
+    apply HomologicalComplex.preservesLimitsOfShape_of_eval
+    intro p
+    change PreservesLimitsOfShape (Discrete ℕ)
+      (HomologicalComplex.eval _ (.up ℤ) p ⋙ F)
+    infer_instance
+  set_option backward.isDefEq.respectTransparency true in
+  set_option backward.isDefEq.respectTransparency.types true in
+    refine ⟨Scheme.ProEt.ClopenRoos.comparison_iso F, ?_⟩
+  intro T
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · infer_instance
+  · exact Scheme.ProEt.ClopenRoos.comparison_transition_generic F T
+  · exact Scheme.ProEt.ClopenRoos.comparison_iso_coordinates F T
+  · exact Scheme.ProEt.ClopenRoos.comparison_iso_evaluation F T
 
 /-- Unbounded restriction is an equivalence and transports the specified Roos triangle.
 Source: Stacks 08TC/07KC (blueprint: lem-pur-clopen-roos-integral-descent).
@@ -335,7 +291,7 @@ theorem finiteClopen_derived_roos_descent :
                 (clopenIntegralDerivedRestriction P.coefficients.l P.extension (j i).left).map δ ≫
                 ((clopenIntegralDerivedRestriction P.coefficients.l P.extension
                   (j i).left).commShiftIso (1 : ℤ)).hom.app M) := by
-  sorry
+  exact integralRoosCalculus P X Xi j hdisjoint hcover
 
 /-- The actual reduction units and transitions restrict, rather than only the objects.
 Source: Bhatt--Scholze 3.5.2 and Stacks 06YY
@@ -360,7 +316,7 @@ theorem finiteClopen_augmented_reduction (i : I) :
             (sfDerivedReductionUnit P.coefficients.l P.extension (Xi i).left n).app
               ((clopenIntegralDerivedRestriction P.coefficients.l P.extension (j i).left).obj K)
     := by
-  sorry
+  exact (augmentedIntegralReductionComparison P X Xi j hdisjoint hcover i).2.1
 
 /-- On chosen resolutions the same comparison preserves the recorded c_n=[q]⁻¹γ_n.
 Source: Bhatt--Scholze 3.5.2; Stacks 06YY
@@ -392,7 +348,7 @@ theorem finiteClopen_resolution_reduction (i : I)
                 P.coefficients.l P.extension X.left (P := T) (K := K) q hq n) ≫
             β.hom.app (op n) =
           (Functor.mapDerivedCategoryFactors
-            (clopenIntegralRestriction P.coefficients.l P.extension (j i).left)).hom.app K ≫
+            (clopenIntegralModuleRestriction P.coefficients.l P.extension (j i).left)).hom.app K ≫
             canonicalIntegralReductionTowerMap.{u, u} P.coefficients.l P.extension (Xi i).left
               (P :=
                 (clopenIntegralComplexRestriction P.coefficients.l P.extension (j i).left).obj T)
@@ -443,7 +399,8 @@ theorem finiteClopen_integral_membership
           ((scalarReductionDerivedExtension P.coefficients.l P.extension (Xi i).left n).obj
             ((clopenIntegralDerivedRestriction P.coefficients.l P.extension (j i).left).obj K))
           a b)) := by
-  sorry
+  have h := augmentedIntegralMembershipBounds P X Xi j hdisjoint hcover K
+  exact ⟨h.1, h.2.1, h.2.2.1, h.2.2.2.1, h.2.2.2.2.1⟩
 
 /-- Both full-subcategory equivalences are restrictions of ordinary unbounded restriction.
 Source: Stacks 04TS; Bhatt--Scholze 3.5.2
@@ -471,7 +428,28 @@ theorem finiteClopen_integral_subcategories :
           (finiteTorConstructibleIntegral P.coefficients.l P.extension (Xi i).left).ι ≅
         (finiteTorConstructibleIntegral P.coefficients.l P.extension X.left).ι ⋙
           clopenIntegralDerivedRestriction P.coefficients.l P.extension (j i).left)) := by
-  sorry
+  let r := fun i ↦ clopenIntegralDerivedRestriction P.coefficients.l P.extension (j i).left
+  have : (Functor.pi' r).IsEquivalence :=
+    (finiteClopen_derived_roos_descent P X Xi j hdisjoint hcover).2.2.1
+  let e := (Functor.pi' r).asEquivalence
+  have hmem := finiteClopen_integral_membership P X Xi j hdisjoint hcover
+  have hctf (Y : Scheme.{u}) :
+      (finiteTorConstructibleIntegral P.coefficients.l P.extension Y).IsClosedUnderIsomorphisms :=
+    by
+    constructor
+    intro K L α hK
+    refine ⟨ObjectProperty.prop_of_iso _ α hK.1, ?_⟩
+    obtain ⟨a, b, hab, h⟩ := hK.2
+    refine ⟨a, b, hab, fun n ↦ ?_⟩
+    refine ⟨(h n).1, ?_⟩
+    intro T Q hT f hf hQ M q hq
+    obtain ⟨γ⟩ := hT
+    exact (h n).2 T Q
+      ⟨γ ≪≫ (scalarReductionDerivedExtension P.coefficients.l P.extension Y n).mapIso α.symm⟩
+      f hf hQ M q hq
+  have (i : I) := hctf (Xi i).left
+  exact ⟨fullSubcategoryPiEquivalence e _ _ (fun K ↦ (hmem K).2.1),
+    fullSubcategoryPiEquivalence e _ _ (fun K ↦ (hmem K).2.2.1)⟩
 
 /-- Completed tensor and its coefficient unit are preserved by ordinary restriction.
 Source: Bhatt--Scholze 3.4.10; Stacks 08TC
@@ -528,7 +506,7 @@ theorem finiteClopen_strict_tensor_reductions (i : I) :
               (ULift.{u + 1} (Padic.coefficientExtensionRing P.coefficients.l P.extension
                 (n + 1))))).hom.app U s) x) =
           unrestrictedIntegralTensorSection P.coefficients.l P.extension (Xi i).left n
-            ((clopenIntegralRestriction P.coefficients.l P.extension (j i).left).obj (T.X p))
+            ((clopenIntegralModuleRestriction P.coefficients.l P.extension (j i).left).obj (T.X p))
             U s x) ∧
       (∀ (T Q : CochainComplex (scalarReductionSource P.coefficients.l P.extension X.left) ℤ)
         (n : ℕ) (p q : ℤ) (U : (Xi i).left.ProEtᵒᵖ)
@@ -569,10 +547,10 @@ theorem finiteClopen_integral_scalar_extension (i : I)
         integralScalarExtensionOfUniverses P.coefficients.l P.extension L ι (Xi i).left) ∧
     ∃ β : integralScalarTowerFunctor P.coefficients.l P.extension L ι X.left ⋙
         (Functor.whiskeringRight ℕᵒᵖ _ _).obj
-          ((clopenIntegralRestriction P.coefficients.l L (j i).left).mapHomologicalComplex
+          ((clopenIntegralModuleRestriction P.coefficients.l L (j i).left).mapHomologicalComplex
             (ComplexShape.up ℤ)) ≅
-      (clopenIntegralRestriction P.coefficients.l P.extension (j i).left).mapHomologicalComplex
-          (ComplexShape.up ℤ) ⋙
+      (clopenIntegralModuleRestriction P.coefficients.l P.extension
+          (j i).left).mapHomologicalComplex (ComplexShape.up ℤ) ⋙
         integralScalarTowerFunctor P.coefficients.l P.extension L ι (Xi i).left,
       ∀ (T : CochainComplex (scalarReductionSource P.coefficients.l P.extension X.left) ℤ)
         (n : ℕ) (p : ℤ) (U : (Xi i).left.ProEtᵒᵖ)
@@ -585,7 +563,7 @@ theorem finiteClopen_integral_scalar_extension (i : I)
               (ULift.{u + 1} (Padic.coefficientExtensionRing P.coefficients.l L
                 (n + 1))))).hom.app U s) x) =
           integralScalarTensorSection P.coefficients.l P.extension L ι (Xi i).left n
-            ((clopenIntegralRestriction P.coefficients.l P.extension (j i).left).obj (T.X p))
+            ((clopenIntegralModuleRestriction P.coefficients.l P.extension (j i).left).obj (T.X p))
             U s x := by
   sorry
 

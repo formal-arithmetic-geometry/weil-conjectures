@@ -1,0 +1,254 @@
+{
+ "id": "lem-trf-chart-face-localization-logification",
+ "kind": "statement",
+ "title": "Face-localized chart presentation and logification of a split sharpening",
+ "statement": "Let $(X,M,\\alpha)$ be a locally Noetherian fs log scheme [def-trf-fs-log-blowup, pqf-def-locnoeth] and let $\\bar x$ be a geometric point [def-weil-geometric-point]. Suppose a chart $c:Q\\to M$ is given on a pointed etale neighbourhood of $\\bar x$ [def-weil-pbc-geometric-stalks, def-weil-etale-morphism], where $Q$ is a fine saturated commutative monoid, written additively. Put $A=\\mathcal O_{X,\\bar x}$ and $L=M_{\\bar x}$ [def-weil-pbc-geometric-stalks], and let $\\beta:Q\\to(A,\\cdot)$ be the composite of the chart germ with the structural map. Define $F=\\beta^{-1}(A^\\times)$, $R=\\{q-f:q\\in Q,\\ f\\in F\\}\\subseteq Q^{\\rm gp}$, and $U=F^{\\rm gp}\\subseteq Q^{\\rm gp}$. Then $F$ is a face (a submonoid such that $a+b\\in F$ implies $a,b\\in F$). The chart germ extends uniquely to $\\lambda:R\\to L$, and the induced maps give isomorphisms\n$$R\\oplus_U A^\\times\\xrightarrow{\\sim}L,\\quad [r,u]\\longmapsto\\lambda(r)u,\\qquad P:=R/U\\xrightarrow{\\iota\\,\\sim}L/A^\\times=\\overline M_{\\bar x}.$$\nHere $R/U$ identifies elements differing by addition of an element of $U$, and the pushout identifies $v\\in U$ with $\\beta(v)\\in A^\\times$, where $\\beta$ is extended by inverting $F$. Suppose $s:P\\to R$ is a monoid section of the quotient $\\pi:R\\to P$ and $(p,v)\\mapsto s(p)+v$ is an isomorphism $P\\oplus U\\xrightarrow{\\sim}R$ restricting to the inclusion on $U$. Then $h=\\lambda s$ satisfies\n$$(\\alpha h)^{-1}(A^\\times)=\\{0\\},\\qquad P\\oplus A^\\times\\xrightarrow{\\sim}L,\\quad (p,u)\\longmapsto h(p)u.$$\nIn particular $P\\oplus_{(\\alpha h)^{-1}(A^\\times)}A^\\times\\to L$ is the associated-log-stalk isomorphism, and the map on the characteristic induced by $h$ is precisely $\\iota$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI, 1.1, 1.6 and 3.7(a), printed pp. 69, 70 and 75; Expose VIII, 3.1.1--3.1.2, printed p. 98. Agent extraction of the localized chart pushout and its pushout along a specified splitting, from old sharp-chart steps 1 and 4."
+ },
+ "stmt_deps": [
+  "def-trf-fs-log-blowup",
+  "pqf-def-locnoeth",
+  "def-weil-geometric-point",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-etale-morphism",
+  "def-trf-face-localization"
+ ],
+ "proof": [
+  {
+   "text": "The stalk chart hypothesis hc evaluated at the given pointed neighbourhood is already surjectivity of g.coprod j together with its exact divisorialChartCongruence kernel, where g is the chart germ and j is unitsIn. Thus no associated-log sheafification theorem is needed. The log axiom gives uniqueness of a log element whose structural image is a specified ring unit, using reflectsUnits and unitsBijective. Products mapping to units have both factors mapping to units, so F is a face.",
+   "uses": [
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.1, printed p.69: etale chart conventions; associated-log stalk formula supplied by the cited existing node."
+   }
+  },
+  {
+   "text": "Construct the canonical map i:Q -> R inside Qgp and make it an F.LocalizationMap. Its units are represented by f and f^-1, its surjectivity is the defining fraction representation of R, and injectivity of Q -> Qgp gives its equality condition. The log axiom makes g(F) units. Mathlib Submonoid.LocalizationMap.lift gives ell:R -> L extending g, and epic_of_localizationMap proves uniqueness. By subgroup closure induction every element of U is a fraction of two face elements, giving the inclusion U -> R.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "def-trf-face-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII 3.1.1--3.1.2, printed p.98: localization and sharpening definitions; agent calculation."
+   }
+  },
+  {
+   "text": "Let D be the original chart congruence, B its quotient, C the localized pushout congruence, and T its quotient. The original chart kernel and surjectivity give eB:B equiv L by the monoid first isomorphism theorem. The map Q times A-units -> T sends each D-generator to a C-generator, so descends to k:B -> T. Set d=k composed with eB inverse. On Q and ring units d has the prescribed pair formulas. By the localization epimorphism property d composed with ell sends r to [r,1]. Hence d(ell(r)j(a))=[r,a]. Conversely C is contained in the kernel of ell.coprod j because the log axiom identifies each generator with its unit image. These facts prove equality of the kernel with C; surjectivity follows from the original chart. The first isomorphism theorem yields the pinned eT:T equiv L.",
+   "uses": [
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII 3.1.1--3.1.2, printed p.98: localization and sharpening definitions; agent calculation."
+   }
+  },
+  {
+   "text": "Write P=R/U with quotient pi. The map Q -> P kills F. It and the trivial map on ring units descend through B to d:L -> P. On Q it is pi composed with i; on ring units it is 1. Localization uniqueness gives d composed with ell = pi. Every log unit comes from a ring unit, so d kills all log units. If ell(r) and ell(r prime) are associated, applying d proves pi(r)=pi(r prime). Conversely equality in R/U gives v in U with rv=r prime in Qgp, hence in R; ell(v) is a unit since U is a group. Thus ell(r) and ell(r prime) are associated. Surjectivity onto Associates L follows from the original chart. The monoid first isomorphism theorem yields the specified iota:P equiv Associates L.",
+   "uses": [
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII 3.1.1--3.1.2, printed p.98: localization and sharpening definitions; agent calculation."
+   }
+  },
+  {
+   "text": "For a section s, the characteristic formula gives Associates.mk(ell(s(p)))=iota(p). If its structural image is a unit then reflectsUnits makes ell(s(p)) a unit, so iota(p)=1 and injectivity gives p=1. Conversely p=1 maps to 1 under every monoid homomorphism.",
+   "uses": [
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII 3.1.1--3.1.2, printed p.98: localization and sharpening definitions; agent calculation."
+   }
+  },
+  {
+   "text": "Let bU:U -> A-units be the unit-valued lift of alpha composed with ell on U. For the given splitting eSplit, define H(r,a)=(p,bU(v)a), where (p,v)=eSplit inverse r. The pinned splitting gives eSplit inverse(s(p))=(p,1) and eSplit inverse(v)=(1,v). Each C-generator therefore has equal H-images, so H descends to J:T -> P times A-units. The map I(p,a)=[s(p),a] satisfies JI=id by the first formula. For IJ=id, decompose r=s(p)v and use the C-relation [v,1]=[1,bU(v)]. Thus I is an isomorphism. Composing with eT gives exactly (p,a) -> ell(s(p))j(a).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII 3.1.1--3.1.2, printed p.98: localization and sharpening definitions; agent calculation."
+   }
+  },
+  {
+   "text": "For h=ell composed with s, step 5 implies that every generator (p,1)~(1,a) of its associated-log congruence has p=1; its structural equation then gives a=1. The product map of step 6 is bijective, so its kernel equals that congruence, and the first isomorphism theorem gives the pinned associated-log quotient isomorphism. Finally Associates.mk(h(p))=iota(pi(s(p)))=iota(p), as already established in step 5.",
+   "uses": [
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.1, printed p.69, and Expose VIII 3.1.1, printed p.98; agent calculation of the associated-log map and characteristic compatibility."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-fs-log-blowup",
+  "def-trf-face-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VI 1.1, 1.6 and 3.7(a), printed pp. 69, 70, 75; VIII 3.1.1--3.1.2, printed p. 98. Explicit quotient and localization calculations formalized by U6, using the stalk-chart kernel already present in the definition, rather than the associated-log universal-stalk theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "LogStructure|LogScheme|logification|characteristicMonoid",
+   "results": "{\"t\": \"2026-10-22T06:06:15Z\", \"tool\": \"grep\", \"query\": \"LogStructure|LogScheme|logification|characteristicMonoid\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the hits: ordinary ring stalk/localization maps, manifold stalks, number-field logarithmic embeddings and the generic monoid-localization equivalence do not compute an associated log stalk or its characteristic, nor its sharp-chart logification.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-chart-face-localization-logification: Localize a logarithmic chart at the face of elements mapping to ring units, compute its characteristic monoid, and push out a monoid section to obtain the associated log stalk.",
+   "results": "{\"t\": \"2026-10-22T06:06:15Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-chart-face-localization-logification: Localize a logarithmic chart at the face of elements mapping to ring units, compute its characteristic monoid, and push out a monoid section to obtain the associated log stalk.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.IsLocalization.to_stalk\", \"IsLocalization.toLocalizationMap_sec\", \"smoothSheafCommRing.instLocalRing_stalk\", \"AlgebraicGeometry.StructureSheaf.localizationToStalk\", \"TopCat.Presheaf.submonoidPresheafOfStalk\", \"ModuleCat.Tilde.localizationToStalk\", \"AlgebraicGeometry.LocallyRingedSpace.instIsLocalRingCarrierStalkCommRingCatPresheaf\", \"TopCat.Presheaf.submonoidPresheafOfStalk_obj\"], \"digest\": \"10285fb0a1375504\"}; Read the hits: ordinary ring stalk/localization maps, manifold stalks, number-field logarithmic embeddings and the generic monoid-localization equivalence do not compute an associated log stalk or its characteristic, nor its sharp-chart logification.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogStructure\", \"chart\"",
+   "results": "{\"t\": \"2026-10-22T06:06:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogStructure\\\", \\\"chart\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the hits: ordinary ring stalk/localization maps, manifold stalks, number-field logarithmic embeddings and the generic monoid-localization equivalence do not compute an associated log stalk or its characteristic, nor its sharp-chart logification.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-chart-face-localization-logification: For an fs log chart Q and a geometric stalk A, localizing Q at the face mapping to units identifies the log stalk with Q_F pushed out along Fgp to A units and its characteristic with Q_F/Fgp; a section of this quotient yields a prescribed sharp stalk chart.",
+   "results": "{\"t\": \"2026-10-22T06:06:27Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-chart-face-localization-logification: For an fs log chart Q and a geometric stalk A, localizing Q at the face mapping to units identifies the log stalk with Q_F pushed out along Fgp to A units and its characteristic with Q_F/Fgp; a section of this quotient yields a prescribed sharp stalk chart.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.localRingHom_comp_stalkIso_apply\", \"AlgebraicGeometry.Scheme.localRingHom_comp_stalkIso_apply\", \"AlgebraicGeometry.localRingHom_comp_stalkIso_apply'\", \"AlgebraicGeometry.localRingHom_comp_stalkIso\", \"AlgebraicGeometry.Scheme.localRingHom_comp_stalkIso\", \"AlgebraicGeometry.StructureSheaf.stalkToFiberRingHom_localizationToStalk_assoc\", \"AlgebraicGeometry.LocallyRingedSpace.toStalk_stalkMap_toΓSpec\", \"ModuleCat.Tilde.localizationToStalk_mk\"], \"digest\": \"897ab4341381ad5f\"}; Read the hits: ordinary ring stalk/localization maps, manifold stalks, number-field logarithmic embeddings and the generic monoid-localization equivalence do not compute an associated log stalk or its characteristic, nor its sharp-chart logification.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-chart-face-localization-logification: The associated log monoid of a prelog map is unchanged by inverting elements mapping to units, and a splitting of the localized characteristic quotient gives a sharp logification isomorphism.",
+   "results": "{\"t\": \"2026-10-22T06:06:28Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-chart-face-localization-logification: The associated log monoid of a prelog map is unchanged by inverting elements mapping to units, and a splitting of the localized characteristic quotient gives a sharp logification isomorphism.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NumberField.Units.logEmbeddingQuot_apply\", \"NumberField.mixedEmbedding.logMap_eq_logEmbedding\", \"NumberField.Units.logEmbeddingEquiv_apply\", \"NumberField.Units.logEmbeddingQuot\", \"NumberField.Units.logEmbedding\", \"NumberField.mixedEmbedding.fundamentalCone.realSpaceToLogSpace_expMap_symm\", \"Localization.mulEquivOfQuotient_monoidOf\", \"NumberField.Units.dirichletUnitTheorem.logEmbedding_component\"], \"digest\": \"a6b8e0f8e591a874\"}; Read the hits: ordinary ring stalk/localization maps, manifold stalks, number-field logarithmic embeddings and the generic monoid-localization equivalence do not compute an associated log stalk or its characteristic, nor its sharp-chart logification.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LogStructure|LogScheme|logification|characteristicMonoid",
+   "results": "{\"t\": \"2026-10-23T04:22:53Z\", \"tool\": \"grep\", \"query\": \"LogStructure|LogScheme|logification|characteristicMonoid\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned types: ordinary ring localization/stalk maps, monoid localization universal properties, product units and number-field logarithmic embeddings do not state this log-chart pushout, its characteristic identification, and the section compatibility.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The associated log monoid of a prelog chart is unchanged by inverting elements mapping to units, and a splitting gives a product of its characteristic with the ring units.",
+   "results": "{\"t\": \"2026-10-23T04:22:53Z\", \"tool\": \"leansearch\", \"query\": \"The associated log monoid of a prelog chart is unchanged by inverting elements mapping to units, and a splitting gives a product of its characteristic with the ring units.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.submonoid_map_le_is_unit\", \"IsUnit.val_inv_unit'\", \"MulEquiv.prodUnits\", \"Prod.instSubsingletonUnits\", \"Units.val_inv_eq_inv_val\", \"IsLocalization.invertible_mk'_one\", \"Submonoid.LocalizationMap.AwayMap.invSelf\", \"MonCat.units\"], \"digest\": \"afc8277e499978a1\"}; Read returned types: ordinary ring localization/stalk maps, monoid localization universal properties, product units and number-field logarithmic embeddings do not state this log-chart pushout, its characteristic identification, and the section compatibility.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogStructure\", \"chart\"",
+   "results": "{\"t\": \"2026-10-23T04:22:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogStructure\\\", \\\"chart\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned types: ordinary ring localization/stalk maps, monoid localization universal properties, product units and number-field logarithmic embeddings do not state this log-chart pushout, its characteristic identification, and the section compatibility.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a monoid chart of a log structure, localize at the face mapping to ring units and identify its pushout by the unit group with the log stalk and its quotient with the characteristic monoid.",
+   "results": "{\"t\": \"2026-10-23T04:22:55Z\", \"tool\": \"leanfinder\", \"query\": \"For a monoid chart of a log structure, localize at the face mapping to ring units and identify its pushout by the unit group with the log stalk and its quotient with the characteristic monoid.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom_aux\", \"AlgebraicGeometry.StructureSheaf.stalkToFiberRingHom_localizationToStalk\", \"AlgebraicGeometry.StructureSheaf.stalkToFiberRingHom_localizationToStalk_assoc\", \"AlgebraicGeometry.StructureSheaf.localizationToStalk_mk'\", \"AlgebraicGeometry.localRingHom_comp_stalkIso\", \"AlgebraicGeometry.localRingHom_comp_stalkIso_apply\", \"AlgebraicGeometry.StructureSheaf.toStalk_comp_stalkToFiberRingHom\", \"AlgebraicGeometry.LocallyRingedSpace.toStalk_stalkMap_toΓSpec\"], \"digest\": \"134587287f6ed689\"}; Read returned types: ordinary ring localization/stalk maps, monoid localization universal properties, product units and number-field logarithmic embeddings do not state this log-chart pushout, its characteristic identification, and the section compatibility.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Logification of a commutative prelog monoid is a pushout with ring units; localizing the unit face and choosing a section of the sharp quotient yields an isomorphism with the product of characteristic and units.",
+   "results": "{\"t\": \"2026-10-23T04:23:36Z\", \"tool\": \"leanfinder\", \"query\": \"Logification of a commutative prelog monoid is a pushout with ring units; localizing the unit face and choosing a section of the sharp quotient yields an isomorphism with the product of characteristic and units.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NumberField.Units.logEmbeddingQuot_apply\", \"Algebra.GrothendieckGroup.lift_apply\", \"NumberField.Units.logEmbeddingQuot\", \"NumberField.Units.logEmbeddingEquiv_apply\", \"Localization.mulEquivOfQuotient_apply\", \"Submonoid.LocalizationMap.lift_spec\", \"CommRingCat.isPushout_of_isLocalization\", \"Localization.mulEquivOfQuotient_monoidOf\"], \"digest\": \"5da0697ce4e1fdb2\"}; Read returned types: ordinary ring localization/stalk maps, monoid localization universal properties, product units and number-field logarithmic embeddings do not state this log-chart pushout, its characteristic identification, and the section compatibility.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-log-regular-sharp-chart",
+  "date": "2026-10-22",
+  "group": "NU"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2) of lem-trf-local-term-locality, nearby-duality alteration ancestry: sharp local charts needed to turn monoidal regularity into ordinary regularity in Expose VI, 1.7; via Expose VIII, 3.4.4 and 4.1.1. Sharp-chart subargument: Expose VI, 1.1, 1.6 and 3.7(a), printed pp. 69, 70 and 75; Expose VIII, 3.1.1--3.1.2, printed p. 98. Agent extraction of the localized chart pushout and its pushout along a specified splitting, from old sharp-chart steps 1 and 4.",
+   "via": [
+    "lem-trf-log-regular-sharp-chart",
+    "lem-trf-free-characteristic-regular-boundary",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-chart-face-localization-logification",
+  "worker": "stage1",
+  "summary": "Explicitly computed the face, unique localized chart map, inverse maps between the two chart pushouts, the characteristic quotient and the product/logification maps for the specified section. Reused the associated-log stalk theorem and the log/chart definition; no new nodes or statement changes. Read ILO VI 1.1,1.6,3.7(a) and VIII 3.1.1--3.1.2; the algebraic expansion is agent-written. Recorded fresh Mathlib queries with two semantic phrasings, with no exact match.",
+  "blueprint": "Proof (1)--(2) of lem-trf-local-term-locality, nearby-duality alteration ancestry: sharp local charts needed to turn monoidal regularity into ordinary regularity in Expose VI, 1.7; via Expose VIII, 3.4.4 and 4.1.1. Sharp-chart subargument: Expose VI, 1.1, 1.6 and 3.7(a), printed pp. 69, 70 and 75; Expose VIII, 3.1.1--3.1.2, printed p. 98. Agent extraction of the localized chart pushout and its pushout along a specified splitting, from old sharp-chart steps 1 and 4. Steps 1--4 realize the localized chart and sharpening calculation; steps 5--7 realize the given splitting and its prescribed characteristic map.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q142-7080e92d4",
+  "group": "Q142",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q142-7080e92d4 (reviewer sub-agent of L); spot-checked: I read the item and its 7-step agent proof in full, with no new nodes; the item is still unsplit in live and side-live. I recomputed each step. Step 1: F is a face because β(b)(β(a)β(b))^-1 inverts β(a); B=Q⊕_F A^×≅L comes from the chart condition of def-trf-fs-log-blowup and the stalk and étale-restriction clauses of lem-trf-associated-log-universal-stalks. Step 2: λ(q−f)=c(q)j(β(f)^-1) is well-defined because Q is integral and only units are cancelled; uniqueness is forced. Steps 3–7: I checked t/D/C, J/I and ι on every representative, including D respecting the relation [r+v,u]=[r,β_R(v)u], and found β_R^-1(G)=U, (αh)^-1(A^×)={0}, and [h p]=ι(p). Edge cases checked by hand: Q=ℕ with a nonunit; all of Q mapping to units with torsion units, giving P=0; ℕ² with a unit twist d in the section. proof_deps equals the union of the steps' uses, and there is no cycle because the associated-log node's deps avoid the item. Source: ILO VI 1.1 and 1.6 (pp.69–70), VI 3.7(a) (p.75) and VIII 3.1.1–3.1.2 (p.98) give the conventions, not the computation, so proof_origin=agent is correct. No SGA source is used. Advisory: (1) the splitting hypothesis follows automatically from s being a section; keeping it is harmless and weakens nothing. (2) W being locally Noetherian is implicit in the chart hypothesis. (3) Maintainer note: the existing unsplit lem-trf-chart-face-split-coordinates overlaps this item's first isomorphisms but needs extra data, and both nodes predate this delivery; it could cite this item when it is split. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ChartFaceLocalizationLogification",
+  "declaration": "AlgebraicGeometry.chart_face_localization_logification",
+  "declarations": [
+   "AlgebraicGeometry.chartFaceQuotientCon",
+   "AlgebraicGeometry.chartFacePushoutCon",
+   "AlgebraicGeometry.chart_face_localization_logification"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ChartFaceLocalizationLogification.lean",
+  "statement": "theorem chart_face_localization_logification (X : FineSaturatedLogScheme.{u}) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ X.scheme) (W : X.scheme.Etale) (w : (Scheme.pointSmallEtale t).fiber.obj W) (Q : Type u) [CommMonoid Q] (hQ : IsFineSaturatedMonoid Q) (c : Q →* X.logStructure.monoidSheaf.obj.obj (op W)) (hc : X.logStructure.IsChart W c) (β : Q →* strictLocalRing X.scheme t) (hβ : β = (X.logStructure.toEtalePrelogStructure.stalkAlpha t).comp ((X.logStructure.toEtalePrelogStructure.germ t W w).hom.comp c)) (F : Submonoid Q) (hF : F = (IsUnit.submonoid (strictLocalRing X.scheme t)).comap β) : (∀ a b : Q, a * b ∈ F → a ∈ F ∧ b ∈ F) ∧ ∃ ell : Algebra.faceLocalization Q F →* X.logStructure.toEtalePrelogStructure.stalk t, (∀ (q : Q) (r : Algebra.faceLocalization Q F), r.val = Algebra.GrothendieckGroup.of q → ell r = X.logStructure.toEtalePrelogStructure.germ t W w (c q)) ∧ (∀ μ : Algebra.faceLocalization Q F →* X.logStructure.toEtalePrelogStructure.stalk t, (∀ (q : Q) (r : Algebra.faceLocalization Q F), r.val = Algebra.GrothendieckGroup.of q → μ r = X.logStructure.toEtalePrelogStructure.germ t W w (c q)) → μ = ell) ∧ (∃ e : (chartFacePushoutCon F ((X.logStructure.toEtalePrelogStructure.stalkAlpha t).comp ell)).Quotient ≃* X.logStructure.toEtalePrelogStructure.stalk t, ∀ (r : Algebra.faceLocalization Q F) (a : (strictLocalRing X.scheme t)ˣ), e ((chartFacePushoutCon F ((X.logStructure.toEtalePrelogStructure.stalkAlpha t).comp ell)).mk' (r, a)) = ell r * X.logStructure.unitsIn t a) ∧ ∃ ι : (chartFaceQuotientCon F).Quotient ≃* X.logStructure.characteristic t, (∀ r : Algebra.faceLocalization Q F, ι ((chartFaceQuotientCon F).mk' r) = Associates.mk (ell r)) ∧ ∀ (s : (chartFaceQuotientCon F).Quotient →* Algebra.faceLocalization Q F), (∀ p, (chartFaceQuotientCon F).mk' (s p) = p) → ∀ eSplit : ((chartFaceQuotientCon F).Quotient × Subgroup.closure (Algebra.GrothendieckGroup.of '' (F : Set Q))) ≃* Algebra.faceLocalization Q F, (∀ p v, (eSplit (p, v)).val = (s p).val * v.val) → (∀ p, IsUnit (X.logStructure.toEtalePrelogStructure.stalkAlpha t (ell (s p))) ↔ p = 1) ∧ (∃ e : ((chartFaceQuotientCon F).Quotient × (strictLocalRing X.scheme t)ˣ) ≃* X.logStructure.toEtalePrelogStructure.stalk t, ∀ p a, e (p, a) = ell (s p) * X.logStructure.unitsIn t a) ∧ (∃ e : divisorialChartPushout ((X.logStructure.toEtalePrelogStructure.stalkAlpha t).comp (ell.comp s)).mrangeRestrict ≅ X.logStructure.toEtalePrelogStructure.stalk t, ∀ p a, e.hom ((divisorialChartCongruence ((X.logStructure.toEtalePrelogStructure.stalkAlpha t).comp (ell.comp s)).mrangeRestrict).mk' (p, a)) = ell (s p) * X.logStructure.unitsIn t a) ∧ ∀ p, Associates.mk (ell (s p)) = ι p",
+  "branch": "newtargets-dag",
+  "by": "Q02",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ab8b0b01e",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Re-delivery of the 17d4 H2 return. The Lean is byte-identical; the item changes only lean and stmt_deps (theorem lem-trf-face-localization-fs replaced by new def node def-trf-face-localization, existing:true on the unchanged FaceLocalizationFs/Algebra.faceLocalization). check_new_node and check_existing report no failures; no def-node owner exists in side-live or the recent snapshots. Rechecked every clause: face; λ existence, extension and uniqueness; R⊕_U Aˣ via conGen over U with the pinned formula; R/U = Con.ker to Q^gp/U with pinned ι; section and splitting; IsUnit(α h p)↔p=1; P×Aˣ≅L; divisorialChartPushout≅L pinned; Associates.mk(h p)=ι p. Edge cases F={1}, F=Q with torsion, trivial Q, empty X. Advisories: H11 second reading empty by dispatcher policy; log-regular-pair decls reached only transitively via def-trf-fs-log-blowup; P vs Associates(Q_F) transport needed downstream; hQ unused. No compile, since nothing was changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U6",
+  "result": "pass",
+  "landing": "20261026T092809-L-3467483",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

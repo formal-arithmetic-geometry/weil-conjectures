@@ -1,0 +1,120 @@
+{
+ "id": "lem-sf-strict-reduction-presentation-map",
+ "kind": "statement",
+ "title": "Maps between strict quotient presentations",
+ "statement": "Let Q,R be integral cochain complexes on W and C,D cochain complexes of strict coefficient systems. Give finite chain isomorphisms kappaC_n:evaluation_n(C)≅scalarExtension_n(Q) and kappaD_n:evaluation_n(D)≅scalarExtension_n(R), commuting with the actual horizontal quotient transitions. For every integral chain map h:Q→R there exists a strict chain map f:C→D whose finite component satisfies evaluation_n(f_i) followed by (kappaD_n)_i = (kappaC_n)_i followed by scalarExtension_n(h_i), for every n and i.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Scalar-extension adjunction and ordinary open extension (Tags 03CZ and 03DJ), with sites-cohomology.tex Tags 06YY and 0941; ordinary and augmentation steps of lem-sf-open-restriction-counit-on-good-complexes."
+ },
+ "stmt_deps": [
+  "def-coef-ringed-sequence-site",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Conjugate scalar extension of h by the finite presentation isomorphisms in each degree. Their horizontal equations and quotient-transformation naturality show these maps commute with horizontal restrictions.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the public continuity instance for the vertical inclusion. Over an arbitrary ringed sequence site, undo the identity scalar restriction in finite evaluation to obtain actual linear component maps. The section formula for the quotient transitions converts horizontal compatibility to naturality; vertical naturality and the factorization of a product-site arrow construct a module-sheaf morphism. Specialize this proved construction to the coefficient ring, without unfolding its sheafification.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Ordinary evaluations are jointly faithful. Evaluate the differential equations to obtain those of the finite conjugate chain maps; this assembles a strict chain map with the required finite components.",
+   "uses": [
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-sequence-site",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-coef-semilinear-system-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "B8: explicit ordinary-system assembly, scalar-unit naturality and equivalence counit algebra for the existing restriction-counit argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Localization of an exact adjunction counit on chain complexes; counit naturality and adjunction mate compatibility",
+   "results": "Found localization_counit_app and derived counit APIs. They provide formal localization but no coefficient-presentation statement.",
+   "date": "2026-10-27",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left; CategoryTheory.Equivalence.functor_unitIso_comp",
+   "results": "Found both standard categorical identities; used in the proof. No strict quotient-presentation assembly theorem.",
+   "date": "2026-10-27",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "AugmentedPresentation|localization_counit_app|counit_evaluation; systemIsoOfEvaluation_exists",
+   "results": "Existing semilinear system isomorphism assembly supplies an ordinary model for the construction; scalar-unit augmented naturality and transported coefficient counit require the explicit calculations here.",
+   "date": "2026-10-27",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.OpenRestrictionCounitOnGoodComplexes",
+  "date": "2026-10-27",
+  "group": "B8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-open-restriction-counit-on-good-complexes",
+   "place": "The ordinary counit and strict augmentation calculation in proof steps 1–3."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictReductionPresentationMap",
+  "file": "lean/Sheaf/Paper/StrictReductionPresentationMap.lean",
+  "declaration": "WeilConjectures.CanonicalOpenRestriction.strictReductionPresentationMap",
+  "statement": "theorem strictReductionPresentationMap\n    (Q R : CochainComplex (scalarReductionSource l E W) ℤ)\n    (C D : CochainComplex (coefficientSequenceModules l E W) ℤ)\n    (κC : ∀ n : ℕ,\n      ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj C ≅\n        ((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).obj Q)\n    (κD : ∀ n : ℕ,\n      ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj D ≅\n        ((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).obj R)\n    (hC : ∀ (m n : ℕ) (h : n ≤ m),\n      (NatTrans.mapHomologicalComplex (coefficientSequenceTransition l E W h)\n        (.up ℤ)).app C ≫\n        ((normalizedDVRModuleRes l E W h).mapHomologicalComplex (.up ℤ)).map (κC n).hom =\n      (κC m).hom ≫\n        (NatTrans.mapHomologicalComplex (coefficientOrdinaryQuotient l E W h)\n          (.up ℤ)).app Q)\n    (hD : ∀ (m n : ℕ) (h : n ≤ m),\n      (NatTrans.mapHomologicalComplex (coefficientSequenceTransition l E W h)\n        (.up ℤ)).app D ≫\n        ((normalizedDVRModuleRes l E W h).mapHomologicalComplex (.up ℤ)).map (κD n).hom =\n      (κD m).hom ≫\n        (NatTrans.mapHomologicalComplex (coefficientOrdinaryQuotient l E W h)\n          (.up ℤ)).app R)\n    (h : Q ⟶ R) :\n    ∃ f : C ⟶ D, ∀ (n : ℕ) (i : ℤ),\n      (coefficientSequenceEvaluation l E W n).map (f.f i) ≫ (κD n).hom.f i =\n        (κC n).hom.f i ≫ (scalarReductionExtension l E W n).map (h.f i)",
+  "branch": "sheaf-dag",
+  "by": "B8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261027T021257-L-2752118",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261027T021257-L-2752118",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,369 @@
+{
+ "id": "lem-sfb-henselian-local-g-ring-colimit",
+ "kind": "statement",
+ "title": "A henselian local ring as a directed colimit of henselian local G-rings",
+ "statement": "Let $(C,\\mathfrak m_C)$ be a commutative henselian local ring [def-weil-pbc-henselian-terminology]. There exist a small nonempty directed set $I$ (a preordered set in which any two indices have a common upper bound), commutative henselian local Noetherian G-rings $(A_i,\\mathfrak m_i)$ [def-weil-pbc-g-ring], ring maps $u_{ji}:A_i\\to A_j$ for $i\\le j$, and compatible ring maps $u_i:A_i\\to C$, with identity and composition laws $u_{ii}=1$, $u_{ki}=u_{kj}u_{ji}$ and $u_j u_{ji}=u_i$, such that every map is local: $u_{ji}^{-1}(\\mathfrak m_j)=\\mathfrak m_i$ and $u_i^{-1}(\\mathfrak m_C)=\\mathfrak m_i$. The cocone $(C,(u_i))$ is a colimit of the $A_i$ in commutative rings [def-weil-pbc-category-colimit]. Neither the transition maps nor the maps to $C$ are required to be injective.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A41, label lemma-henselian-local-limit-G-rings, statement and proof; G-ring includes Noetherianity. The construction localizes finitely generated integer subalgebras at the contracted maximal ideal and takes ordinary henselizations; local cocone maps follow their local universal property."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-g-ring",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-local-ring-colimit-essentially-finite-type-over-z] to the local ring $C$. Obtain a nonempty directed set $I$, local rings $(R_i,\\mathfrak n_i)$ essentially of finite type over $\\mathbf Z$, local transition maps $r_{ji}$, and local maps $\\pi_i:R_i\\to C$, exhibiting $C$ as their colimit in commutative rings. The indices form a set, not a proper class, so this is a small diagram. Here and below use the colimit universal property of [def-weil-pbc-category-colimit].",
+   "uses": [
+    "lem-weil-pbc-local-ring-colimit-essentially-finite-type-over-z",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A41, lemma-henselian-local-limit-G-rings, first three sentences of the proof; the localized base system is the one supplied by Algebra Tag 00QU, lemma-limit-essentially-finite-type, proof"
+   }
+  },
+  {
+   "text": "For each $i$, the meaning of essentially finite type in [def-weil-pbc-essentially-finite-type-algebra] supplies a finitely generated integer algebra $B_i$, a multiplicative subset $W_i\\subset B_i$, and an isomorphism $R_i\\cong L_i:=W_i^{-1}B_i$. By [lem-weil-pbc-finite-type-z-g-ring], $B_i$ is a G-ring and hence Noetherian by [def-weil-pbc-g-ring]. By [lem-weil-pbc-localization-noetherian], $L_i$ is Noetherian. We next check its G-ring condition directly, rather than taking the essentially-finite-type case from a node that only states the finite-type case.",
+   "uses": [
+    "def-weil-pbc-essentially-finite-type-algebra",
+    "lem-weil-pbc-finite-type-z-g-ring",
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A41, proof: the localized rings are Noetherian G-rings; Proposition Tag 07PX, proposition-ubiquity-G-ring, and Proposition Tag 07PV, proposition-finite-type-over-G-ring, opening localization argument"
+   }
+  },
+  {
+   "text": "Fix a prime $\\mathfrak q\\subset L_i$ and let $\\mathfrak p$ be its inverse image in $B_i$. No element of $W_i$ lies in $\\mathfrak p$, because its image is a unit. For a fraction $b/w$, membership in $\\mathfrak q$ is equivalent to $b\\in\\mathfrak p$, since $w/1$ is a unit. Thus the maps on fractions give inverse local ring isomorphisms $(L_i)_{\\mathfrak q}\\cong(B_i)_{\\mathfrak p}$: send $(b/w)/(c/v)$ to $bv/(wc)$, where $c\\notin\\mathfrak p$, and send $b/c$ back to $(b/1)/(c/1)$. They are well defined by the localization universal property [lem-weil-pbc-ring-localization-universal-property], since exactly the required denominators become units; their composites fix all numerators and inverted denominators. They identify maximal ideals, as the displayed membership criterion shows. This is just iterated localization at a prime, with prime localizations as in [def-weil-pbc-localization-at-prime].",
+   "uses": [
+    "lem-weil-pbc-ring-localization-universal-property",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Proposition Tag 07PV, proposition-finite-type-over-G-ring, first sentence of proof; elementary fraction verification of the prime-localization identification"
+   }
+  },
+  {
+   "text": "The G-ring condition on $B_i$ says that $(B_i)_{\\mathfrak p}\\to\\widehat{(B_i)_{\\mathfrak p}}$ is regular. The local ring isomorphism in step 3 identifies the maximal ideals. Apply [lem-weil-pbc-adic-completion-ring-equiv] to obtain the corresponding isomorphism of completions, commuting with the completion maps. Then [lem-weil-pbc-regular-ring-map-ring-equiv] makes $(L_i)_{\\mathfrak q}\\to\\widehat{(L_i)_{\\mathfrak q}}$ regular. This holds for every prime $\\mathfrak q$; together with Noetherianity from step 2, [def-weil-pbc-g-ring] proves that $L_i$ is a G-ring. Transport along $L_i\\cong R_i$ using [lem-weil-pbc-g-ring-ring-equiv]. Thus every $R_i$ is a Noetherian local G-ring.",
+   "uses": [
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-adic-completion-ring-equiv",
+    "lem-weil-pbc-regular-ring-map-ring-equiv",
+    "lem-weil-pbc-g-ring-ring-equiv"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Proposition Tag 07PV, proposition-finite-type-over-G-ring, opening localization argument; Definition Tag 07GH, definition-G-ring"
+   }
+  },
+  {
+   "text": "The maps $r_{ji}$ carry $\\mathfrak n_i$ into $\\mathfrak n_j$ by their localness. In fact $\\pi_i^{-1}(\\mathfrak m_C)=\\mathfrak n_i$: the forward inclusion for $\\mathfrak n_i$ is given, and an element outside $\\mathfrak n_i$ is a unit by [lem-weil-pbc-local-ring-unit-criterion], hence maps to a unit and lies outside $\\mathfrak m_C$. By [lem-pc-filtered-colimit-commrings-elementwise](1), every $c\\in C$ is $\\pi_i(x)$ for some $i,x$. If $c\\in\\mathfrak m_C$, the preceding equality puts $x\\in\\mathfrak n_i$. Conversely all $\\pi_i(\\mathfrak n_i)$ lie in $\\mathfrak m_C$. Therefore $\\mathfrak m_C=\\bigcup_i\\pi_i(\\mathfrak n_i)$, and $(C,\\mathfrak m_C)$ is exactly the directed colimit pair to which the henselization-colimit theorem applies.",
+   "uses": [
+    "lem-weil-pbc-local-ring-unit-criterion",
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A41, proof, application of Tag 0A04, lemma-henselization-colimit; verification of its colimit-ideal hypothesis"
+   }
+  },
+  {
+   "text": "Let $(A_i,\\mathfrak a_i)$ be the henselization of $(R_i,\\mathfrak n_i)$ from [lem-weil-pbc-pair-henselization], with structure map $\\eta_i$ and $\\mathfrak a_i=\\mathfrak n_iA_i$. This node states both that the pair is henselian and that $A_i/\\mathfrak a_i\\cong R_i/\\mathfrak n_i$. The latter is a nonzero field. By [lem-weil-pbc-henselian-factorization-criterion], $\\mathfrak a_i$ is in every maximal ideal of $A_i$. Since it is itself maximal (the quotient is a field), it is the unique maximal ideal. Thus put $\\mathfrak m_i=\\mathfrak a_i$; $A_i$ is henselian local in the terminology of [def-weil-pbc-henselian-terminology]. Apply [lem-weil-pbc-henselization-pair-g-ring] to the G-ring $R_i$ and ideal $\\mathfrak n_i$ to see that $A_i$ is a G-ring, in particular Noetherian. This uses pair henselization throughout, so no unstated comparison with a second construction of ordinary henselization is needed.",
+   "uses": [
+    "lem-weil-pbc-pair-henselization",
+    "lem-weil-pbc-henselian-factorization-criterion",
+    "def-weil-pbc-henselian-terminology",
+    "lem-weil-pbc-henselization-pair-g-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A41, final sentence of proof; Tag 0AH3, lemma-henselization-pair-G-ring, together with Tag 0A02, lemma-henselization, quotient and henselian-pair clauses, and Tags 09XE/09XI for the Jacobson-radical clause"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-henselization-colimit] to the directed system $(R_i,\\mathfrak n_i)$, the ring colimit $C$, and the ideal equality of step 5. Its clause (1) gives maps $u_{ji}:A_i\\to A_j$ extending $r_{ji}$, preserving the extended ideals, and satisfying the identity and composition laws. Its henselian specialization applies because $(C,\\mathfrak m_C)$ is henselian by hypothesis. It supplies compatible maps $u_i:A_i\\to C$ extending $\\pi_i$, preserving the extended ideals, and inducing an isomorphism $\\varinjlim_i A_i\\cong C$. Since this isomorphism is induced by these very $u_i$, it exhibits $(C,(u_i))$ as a colimit cocone in commutative rings, by [def-weil-pbc-category-colimit].",
+   "uses": [
+    "lem-weil-pbc-henselization-colimit",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A41, proof: A = colim A_i^h by Tag 0A04, lemma-henselization-colimit; henselian specialization of its pair form"
+   }
+  },
+  {
+   "text": "It remains to verify the stated inverse-image equalities. Step 7 gives $u_{ji}(\\mathfrak m_i)\\subseteq\\mathfrak m_j$ and $u_i(\\mathfrak m_i)\\subseteq\\mathfrak m_C$. If $a\\notin\\mathfrak m_i$, it is a unit by [lem-weil-pbc-local-ring-unit-criterion]. Its image under either ring map is a unit, hence outside the target maximal ideal by the same criterion. This proves $u_{ji}^{-1}(\\mathfrak m_j)=\\mathfrak m_i$ and $u_i^{-1}(\\mathfrak m_C)=\\mathfrak m_i$. All identity, composition, compatibility and colimit assertions were proved in step 7, and step 6 gives all the asserted properties of the rings. At no point was injectivity of the henselized maps used or asserted.",
+   "uses": [
+    "lem-weil-pbc-local-ring-unit-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A41, local-transition assertion; explicit unit check also gives localness of the cocone maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-local-ring-colimit-essentially-finite-type-over-z",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "lem-weil-pbc-finite-type-z-g-ring",
+  "def-weil-pbc-g-ring",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-ring-localization-universal-property",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-adic-completion-ring-equiv",
+  "lem-weil-pbc-regular-ring-map-ring-equiv",
+  "lem-weil-pbc-g-ring-ring-equiv",
+  "lem-weil-pbc-local-ring-unit-criterion",
+  "lem-pc-filtered-colimit-commrings-elementwise",
+  "lem-weil-pbc-pair-henselization",
+  "lem-weil-pbc-henselian-factorization-criterion",
+  "def-weil-pbc-henselian-terminology",
+  "lem-weil-pbc-henselization-pair-g-ring",
+  "lem-weil-pbc-henselization-colimit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A41, lemma-henselian-local-limit-G-rings, proof, with localized base system from Algebra Tag 00QU and existing pair henselization results 0A02, 0A04 and 0AH3. The localization and localness checks are written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every henselian local ring is a filtered colimit of Noetherian henselian local G-rings with local transition maps and local maps to the colimit",
+   "results": "{\"t\": \"2026-10-24T13:26:06Z\", \"tool\": \"leanfinder\", \"query\": \"Every henselian local ring is a filtered colimit of Noetherian henselian local G-rings with local transition maps and local maps to the colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing\", \"HenselianLocalRing.toIsLocalRing\", \"instHenselianRingMaximalIdeal\", \"HenselianLocalRing.TFAE\", \"IsAdicComplete.henselianRing\", \"HenselianRing\", \"HenselianLocalRing.is_henselian\", \"Field.henselian\"], \"digest\": \"df00e41be4c31c8c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: HenselianLocalRing; HenselianLocalRing.toIsLocalRing; instHenselianRingMaximalIdeal; HenselianLocalRing.TFAE; IsAdicComplete.henselianRing; HenselianRing; HenselianLocalRing.is_henselian; Field.henselian; no filtered henselian Noetherian G-ring approximation or group model theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A henselian local ring is a filtered colimit of henselian Noetherian G-rings with local homomorphisms",
+   "results": "{\"t\": \"2026-10-24T13:27:21Z\", \"tool\": \"leansearch\", \"query\": \"A henselian local ring is a filtered colimit of henselian Noetherian G-rings with local homomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing\", \"instHenselianRingMaximalIdeal\", \"HenselianRing\", \"HenselianLocalRing.toIsLocalRing\", \"HenselianLocalRing.TFAE\", \"HenselianLocalRing.mk\", \"Field.henselian\", \"HenselianLocalRing.casesOn\"], \"digest\": \"52e39010432d6fd2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: HenselianLocalRing; instHenselianRingMaximalIdeal; HenselianRing; HenselianLocalRing.toIsLocalRing; HenselianLocalRing.TFAE; HenselianLocalRing.mk; Field.henselian; HenselianLocalRing.casesOn; no filtered henselian Noetherian G-ring approximation or group model theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HenselianLocalRing\", \"IsNoetherianRing\"",
+   "results": "{\"t\": \"2026-10-24T13:27:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"HenselianLocalRing\\\", \\\"IsNoetherianRing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits; no filtered henselian Noetherian G-ring approximation or group model theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Express a henselian local commutative ring as the directed union limit of henselizations of local rings essentially of finite type over integers",
+   "results": "{\"t\": \"2026-10-24T13:28:05Z\", \"tool\": \"leanfinder\", \"query\": \"Express a henselian local commutative ring as the directed union limit of henselizations of local rings essentially of finite type over integers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing\", \"HenselianLocalRing.toIsLocalRing\", \"instHenselianRingMaximalIdeal\", \"HenselianLocalRing.TFAE\", \"HenselianRing\", \"Field.henselian\", \"IsAdicComplete.henselianRing\", \"HenselianLocalRing.is_henselian\"], \"digest\": \"e7ed0f20193ff1ca\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: HenselianLocalRing; HenselianLocalRing.toIsLocalRing; instHenselianRingMaximalIdeal; HenselianLocalRing.TFAE; HenselianRing; Field.henselian; IsAdicComplete.henselianRing; HenselianLocalRing.is_henselian; no filtered henselian Noetherian G-ring approximation or group model theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "hensel.*colimit|colimit.*hensel|hensel.*G.?ring",
+   "results": "{\"t\": \"2026-10-24T13:29:12Z\", \"tool\": \"grep\", \"query\": \"hensel.*colimit|colimit.*hensel|hensel.*G.?ring\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits; no filtered henselian Noetherian G-ring approximation or group model theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every henselian local ring is a directed colimit of Noetherian henselian local G-rings with local ring maps",
+   "results": "{\"t\": \"2026-10-24T13:53:44Z\", \"tool\": \"leanfinder\", \"query\": \"Every henselian local ring is a directed colimit of Noetherian henselian local G-rings with local ring maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing\", \"HenselianLocalRing.toIsLocalRing\", \"instHenselianRingMaximalIdeal\", \"HenselianLocalRing.TFAE\", \"IsAdicComplete.henselianRing\", \"HenselianRing\", \"HenselianLocalRing.is_henselian\", \"Field.henselian\"], \"digest\": \"df00e41be4c31c8c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: only henselian definitions, instances and root-lifting characterizations, no G-ring approximation theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HenselianLocalRing\", \"IsNoetherianRing\"",
+   "results": "{\"t\": \"2026-10-24T13:54:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"HenselianLocalRing\\\", \\\"IsNoetherianRing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "hensel.*colimit|colimit.*hensel|hensel.*G.?ring",
+   "results": "{\"t\": \"2026-10-24T13:54:10Z\", \"tool\": \"grep\", \"query\": \"hensel.*colimit|colimit.*hensel|hensel.*G.?ring\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A henselian local ring is a filtered colimit of henselian Noetherian G-rings with local homomorphisms",
+   "results": "{\"t\": \"2026-10-24T13:54:10Z\", \"tool\": \"leansearch\", \"query\": \"A henselian local ring is a filtered colimit of henselian Noetherian G-rings with local homomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing\", \"instHenselianRingMaximalIdeal\", \"HenselianRing\", \"HenselianLocalRing.toIsLocalRing\", \"HenselianLocalRing.TFAE\", \"HenselianLocalRing.mk\", \"Field.henselian\", \"HenselianLocalRing.casesOn\"], \"digest\": \"52e39010432d6fd2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: only henselian definitions, instances and root-lifting characterizations, no G-ring approximation theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local henselian ring is obtained by henselizing the directed system of localizations at its maximal ideal of finite type integer subrings",
+   "results": "{\"t\": \"2026-10-24T13:54:27Z\", \"tool\": \"leanfinder\", \"query\": \"A local henselian ring is obtained by henselizing the directed system of localizations at its maximal ideal of finite type integer subrings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing\", \"HenselianLocalRing.toIsLocalRing\", \"instHenselianRingMaximalIdeal\", \"HenselianRing\", \"Field.henselian\", \"IsAdicComplete.henselianRing\", \"HenselianLocalRing.TFAE\", \"HenselianLocalRing.is_henselian\"], \"digest\": \"6f832ad05a0d47fa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: only henselian definitions, instances and root-lifting characterizations, no G-ring approximation theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-henselian-flat-group-split-fibre-model",
+  "date": "2026-10-24",
+  "group": "Q32"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting arithmetic approximation for the strict-local diagonalizable clopen lift, ultimately latest blueprint det-thm-sf-ctf-stability-direct-images, proof (3). Specific input: Stacks 0A41 henselian local G-ring colimit. No imported blueprint ancestor exists (blueprint_refs.py ancestor returns None).",
+   "via": [
+    "lem-sfb-henselian-flat-group-split-fibre-model",
+    "lem-sfb-strict-local-diagonalizable-clopen-lift",
+    "lem-sfb-multiplicative-type-fibral-criterion",
+    "lem-sfb-multiplicative-type-fpqc-descent",
+    "lem-sfb-relative-commutative-multiplicative-extension",
+    "lem-sfb-relative-central-multiplicative-preimage",
+    "lem-sfb-relative-central-multiplicative-quotient",
+    "lem-sfb-relative-rank-one-central-quotient",
+    "lem-sfb-relative-rank-one-local-matrix-model",
+    "lem-sfb-relative-opposite-root-reflection-map",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-henselian-local-g-ring-colimit",
+  "worker": "stage1",
+  "summary": "Eight proof steps following Stacks 0A41. Reuse the existing local essentially-finite-type integer approximation and all existing henselization and G-ring nodes. Write out localization at a prime, verify the colimit ideal, show pair henselizations are local using the Jacobson-radical and field-quotient properties, and verify localness by units. No new nodes; no statement change.",
+  "blueprint": "No imported blueprint ancestor exists (blueprint_refs.py ancestor returns None). This is the arithmetic approximation input for the clopen-lifting branch below latest blueprint det-thm-sf-ctf-stability-direct-images, proof (3). Steps 1-5 realize the localized integer-algebra system in Stacks 0A41; steps 6-8 realize its henselization and local-map passage.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-local-ring-colimit-essentially-finite-type-over-z",
+    "why": "Arithmetic base-system existence used as a generic tool; the six-functor unit has no replacement for this commutative-algebra approximation."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-z-g-ring",
+    "why": "Arithmetic G-ring input for each finite type integer algebra; no six-functor-specific substitute."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-ring-equiv",
+    "why": "Generic completion-isomorphism comparison for the elementary localization identification."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-map-ring-equiv",
+    "why": "Generic transport of regularity across the explicitly identified local rings and completions."
+   },
+   {
+    "node": "lem-weil-pbc-g-ring-ring-equiv",
+    "why": "Generic transport back from a localization presentation to the given stage ring."
+   },
+   {
+    "node": "lem-weil-pbc-local-ring-unit-criterion",
+    "why": "Generic local-ring unit criterion, needed for reflected localness."
+   },
+   {
+    "node": "lem-pc-filtered-colimit-commrings-elementwise",
+    "why": "Generic stage-representative theorem to identify the maximal-ideal colimit, independent of six-functor routes."
+   },
+   {
+    "node": "lem-weil-pbc-pair-henselization",
+    "why": "Generic existence, henselian-pair and quotient-isomorphism theorem used to construct each stage."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-factorization-criterion",
+    "why": "Only its Jacobson-radical consequence is used to prove the henselization is local; no definition-only shortcut."
+   },
+   {
+    "node": "lem-weil-pbc-henselization-pair-g-ring",
+    "why": "Generic G-ring preservation under henselization, exactly the arithmetic permanence input."
+   },
+   {
+    "node": "lem-weil-pbc-henselization-colimit",
+    "why": "Generic commutation of pair henselization with directed colimits, exactly the assembly used in Stacks 0A41."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-local-ring-colimit-essentially-finite-type-over-z",
+  "lem-weil-pbc-finite-type-z-g-ring",
+  "lem-weil-pbc-adic-completion-ring-equiv",
+  "lem-weil-pbc-regular-ring-map-ring-equiv",
+  "lem-weil-pbc-g-ring-ring-equiv",
+  "lem-weil-pbc-local-ring-unit-criterion",
+  "lem-pc-filtered-colimit-commrings-elementwise",
+  "lem-weil-pbc-pair-henselization",
+  "lem-weil-pbc-henselian-factorization-criterion",
+  "lem-weil-pbc-henselization-pair-g-ring",
+  "lem-weil-pbc-henselization-colimit"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NU-7296e5652",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-7296e5652 (reviewer sub-agent of L); spot-checked: I read the whole delivery. It has one commit: the item plus its report, which includes the '## Review by NU' section. Against the base item in side-live, the statement, stmt_deps, source and blueprint are unchanged. The base was unsplit with no proof, so this is not a re-split. The 8 steps follow Stacks more-algebra 0A41 (lemma-henselian-local-limit-G-rings, l.12674-12691). Step 1 cites 00QU and supplies the local essentially-finite-type system, with local transitions and local maps to C. Step 2 checks Noetherianity from the essentially-finite-type definition, 07PX for finite-type Z-algebras and the localization-Noetherian lemma; it does not use the finite-type-only node for the localized case. Step 3: I checked that the iterated-localization isomorphism (W^{-1}B)_q = B_p is well defined; it rests on 00CP's existence and uniqueness. Step 4 moves the G-ring property along this isomorphism with the completion-iso and regular-map-iso nodes. Step 5 shows m_C = union of pi_i(n_i) using the unit criterion and the elementwise filtered-colimit lemma, which is exactly the ideal I that the 0A04 node needs. Step 6 shows the pair henselization of (R_i, n_i) is henselian local: its quotient is a field and 09XI(i) puts that ideal in the Jacobson radical. 0AH3 then makes it a G-ring. Step 7: the henselian part of the 0A04 node gives the unique compatible beta_i and an isomorphism from the colimit, so (C, beta_i) is a colimit cocone. Step 8 gets the inverse-image equalities from the unit criterion. Small cases: C a field, C non-Noetherian, and non-injective maps are all fine. There is no cycle (DFS over 908 ancestors) and no duplicate of 0A41. Every step's citations match its uses. I accept the 11 declared tool uses as generic commutative-algebra black boxes. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.HenselianLocalGRingColimit",
+  "declaration": "CommRingCat.exists_henselianLocal_isGRing_colimit",
+  "file": "lean/Sheaf/RingTheory/HenselianLocalGRingColimit.lean",
+  "statement": "theorem exists_henselianLocal_isGRing_colimit (C : Type u) [CommRing C] [HenselianLocalRing C] : ∃ (I : Type u) (_ : Preorder I) (_ : Nonempty I) (_ : IsDirected I (· ≤ ·)) (F : I ⥤ CommRingCat.{u}) (π : F ⟶ (Functor.const I).obj (CommRingCat.of C)), (∀ i : I, HenselianLocalRing (F.obj i)) ∧ (∀ i : I, IsNoetherianRing (F.obj i)) ∧ (∀ i : I, IsGRing (F.obj i)) ∧ (∀ (i j : I) (f : i ⟶ j), IsLocalHom (F.map f).hom) ∧ (∀ i : I, IsLocalHom (π.app i).hom) ∧ Nonempty (IsColimit (Cocone.mk (CommRingCat.of C) π))",
+  "branch": "newtargets-dag",
+  "by": "Q67",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c543d2e99",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Clause-by-clause check of CommRingCat.exists_henselianLocal_isGRing_colimit against the node and Stacks 0A41 (more-algebra.tex l.12674-12691): C is only [CommRing][HenselianLocalRing]; index set is a Type u preorder with explicit Nonempty and IsDirected; F : I ⥤ CommRingCat.{u} gives the identity/composition laws; π natural gives compatibility; stage clauses HenselianLocalRing, IsNoetherianRing, IsGRing; IsLocalHom on transitions and cocone maps is equivalent to the inverse-image equalities (local_hom_TFAE); Nonempty IsColimit with vertex C; no injectivity. Node differs from side-live only in lean; lean.statement verbatim; stmt_deps records (HenselianLocalRing, IsGRing, Cocone/IsColimit) match. Gates OK: no definitions, sorry only, source and blueprint docstrings, 8-step proof docstring, imports per brief l.114 (all modules present in side-live), report has Worker report and Second reading by Q67. Edge cases (field, non-Noetherian C, non-injective maps) fine. Not recompiled: no file changed. No findings."
+ }
+}

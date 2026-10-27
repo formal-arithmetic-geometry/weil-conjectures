@@ -1,0 +1,310 @@
+{
+ "id": "lem-sfb-strict-birational-law-realization",
+ "kind": "statement",
+ "title": "Realization and uniqueness for a strict birational group law",
+ "statement": "Let $B$ be a field or a discrete valuation ring [def-weil-field, def-sc-discrete-valuation-ring], and put $S=\\operatorname{Spec}B$ [def-weil-affine-spectrum]. Products and fibres are scheme-theoretic base changes [def-pc-base-change]. Let $X$ be a smooth separated finite-type $S$-scheme with nonempty fibres [def-sbc-smooth-morphisms, def-weil-finite-type-morphism]. Separated means that the diagonal is a closed immersion [def-weil-closed-immersion]. An open in an $S$-scheme is $S$-dense if its intersection with each fibre is dense. An $S$-rational map is a morphism on an $S$-dense open, up to equality on an $S$-dense common open; an $S$-birational map is represented by an isomorphism between $S$-dense opens. Let $m:X\\times_SX\\dashrightarrow X$ be $S$-rational, associative wherever both composites are defined, such that $\\Phi(x,y)=(x,m(x,y))$ and $\\Psi(x,y)=(m(x,y),y)$ are $S$-birational. The law is called strict if there is an open $D\\subseteq X\\times_SX$ on which $m$ is defined and $\\Phi,\\Psi$ induce isomorphisms $D\\simeq V$, $D\\simeq W$ onto open subschemes, with $D,V,W$ dense in every fibre of each projection $X\\times_SX\\to X$. Assume the law is strict. There are a smooth separated finite-type $S$-group scheme $H$ and an open immersion $i:X\\hookrightarrow H$ with $S$-dense image such that multiplication on $H$ restricts to $m$. Here an $S$-group scheme means a scheme over $S$ with multiplication $H\\times_SH\\to H$, inverse $H\\to H$, and identity $S\\to H$ satisfying the associativity, unit, and inverse diagrams. If $(H_1,i_1)$ and $(H_2,i_2)$ are two such pairs, there is a unique $S$-group isomorphism $a:H_1\\simeq H_2$ with $a\\circ i_1=i_2$.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 5.2 Theorem 3 and the explicit translate construction of 5.3, printed pp.117-128 (PDF pp.123-134); descent to an arbitrary field or DVR in 6.5 Corollary 2, printed pp.157-158 (PDF pp.163-164); uniqueness in 5.1 Proposition 3; primary scan https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local literature copy WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-pc-base-change",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-sfb-strict-birational-group-law"
+ ],
+ "proof": [
+  {
+   "text": "Choose a strict henselization $B'$ of $B$ at its closed point and put $S'=\\operatorname{Spec}B'$. The strict-henselization triples give a strictly henselian local ring, and faithful flatness makes $S'\\to S$ an fpqc cover (it is affine). If $B$ is a DVR, the triples/colimit comparison identifies $B'$ with the geometric-point strict henselization, so $B'$ is a DVR by the strict-henselization DVR lemma. If $B$ is a field, the triples' maximal-ideal and residue assertions make $B'$ its separable closure. Thus $B'$ is Noetherian and normal; for a DVR, a fraction of negative valuation satisfies no monic equation. Base change of strict laws gives the same hypotheses for $X'=X\\times_SS'$ and $m'$.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-sc-strict-henselization-faithfully-flat",
+    "lem-sc-strict-henselization-dvr",
+    "lem-wf-geometric-triples-colimit-comparison",
+    "lem-sfb-strict-law-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "6.5 Corollary 2, first paragraph; Stacks 04GP, 07QM (lemma-dumb-properties-henselization), 0AP3 (lemma-henselization-dvr); Stacks 04GP/04GR comparison of the two constructions"
+   }
+  },
+  {
+   "text": "Apply the finite translate enlargement to $(X',m')$ over the Noetherian normal strictly henselian ring $B'$. Obtain $j':X'\\hookrightarrow Z'$ with $S'$-dense image, a strict law $n'$ on $Z'$ and a representative defined on all of $j'(X')\\times_{S'}j'(X')$. The same lemma gives an $S'$-section of $X'$, hence of $Z'$. Apply completion of the dense open square, with $U=j'(X')$, to give $Z'$ its group structure; write $H'=Z'$. It is smooth, separated and finite type, and its multiplication restricts to $m'$.",
+   "uses": [
+    "lem-sfb-strict-law-finite-translate-envelope",
+    "lem-sfb-strict-law-complete-square-group"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "5.3 Lemmas 5-8, especially the paragraph preceding Lemma 8"
+   }
+  },
+  {
+   "text": "On $S''=S'\\times_SS'$, the two pullbacks of $H'$ contain the two pullbacks of $X'$ as fibrewise dense opens by base change. The canonical identification of these copies of $X'$ preserves the rational law (both laws come from $m$). It therefore induces a birational map compatible with multiplication. Rational-homomorphism extension gives a unique group isomorphism $\\theta:p_1^*H'\\simeq p_2^*H'$ extending it. On $S'''=S'\\times_SS'\\times_SS'$, the maps $\\theta_{23}\\theta_{12}$ and $\\theta_{13}$ restrict to the same canonical identification on $X_{S'''}$; uniqueness in the extension lemma makes them equal. Thus $\\theta$ is a descent datum compatible with the group law. The extension lemma allows arbitrary bases, so neither overlap is assumed to be a field, a DVR or strictly henselian.",
+   "uses": [
+    "lem-sfb-strict-law-base-change",
+    "lem-sfb-rational-group-hom-extension",
+    "def-pd-descent-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "6.5 Corollary 2, overlap and cocycle paragraph; 5.1 Proposition 3 proof"
+   }
+  },
+  {
+   "text": "Apply effective descent for smooth groups to the faithfully flat extension $B\\to B'$ and the datum just constructed. It gives a smooth separated finite-type $S$-group $H$ with $H_{S'}\\simeq H'$. The open $j'(X')\\subset H'$ is invariant under its datum by construction of $\\theta$. Invariant-open image descent applied to $H'\\to H$ yields an open $O\\subset H$ with $O_{S'}=j'(X')$, carrying exactly its induced datum. The canonical map $X'\\simeq O_{S'}$ intertwines the canonical data of $X$ and $O$. Morphism descent applied to it and its inverse gives inverse isomorphisms $X\\simeq O$. Their composites descend identity morphisms and hence are identities by uniqueness. Compose with $O\\hookrightarrow H$ to obtain $i:X\\hookrightarrow H$.",
+   "uses": [
+    "lem-sfb-smooth-group-field-trait-descent",
+    "lem-trf-invariant-open-image-pullback",
+    "lem-pd-morphisms-descend"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "6.5 Theorem 1 and Corollary 2; invariant-open descent and morphism descent"
+   }
+  },
+  {
+   "text": "For each $s\\in S$ choose $s'\\in S'$ over it. A nonempty open of $H_s$ pulls back to a nonempty open of $H_{s'}$ by surjectivity of field-extension base change, and hence meets $i(X)_{s'}$, which is dense by construction. Thus $i(X)_s$ is dense. On the domain $D$ in the strictness hypothesis, the morphisms $i\\circ m$ and $\\mu_H\\circ(i\\times i)$ have equal pullbacks to $S'$ by step 2. Morphism descent is faithful, so they agree on $D$. This identifies the rational laws and proves existence with the stated finite-type and density properties.",
+   "uses": [
+    "lem-weil-pbc-surjective-base-change",
+    "lem-pd-morphisms-descend"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "6.5 Corollary 2, descent of the dense chart and its law"
+   }
+  },
+  {
+   "text": "For two pairs $(H_1,i_1)$ and $(H_2,i_2)$, the identification $i_2\\circ i_1^{-1}:i_1(X)\\simeq i_2(X)$ is an $S$-birational map and respects multiplication on the dense domain representing $m$. Rational-homomorphism extension therefore gives a unique group isomorphism $a:H_1\\simeq H_2$ extending it. In particular $a\\circ i_1=i_2$ on all of $X$, as required.",
+   "uses": [
+    "lem-sfb-rational-group-hom-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "5.1 Proposition 3 and its proof; 6.5 Corollary 2 uniqueness"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-sc-strict-henselization-dvr",
+  "lem-wf-geometric-triples-colimit-comparison",
+  "lem-sfb-strict-law-base-change",
+  "lem-sfb-strict-law-finite-translate-envelope",
+  "lem-sfb-strict-law-complete-square-group",
+  "lem-sfb-rational-group-hom-extension",
+  "def-pd-descent-datum",
+  "lem-sfb-smooth-group-field-trait-descent",
+  "lem-trf-invariant-open-image-pullback",
+  "lem-pd-morphisms-descend",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "5.3 Lemmas 5-8 and 6.5 Corollary 2; 5.1 Proposition 3",
+  "note": "Primary BLR scan read online; local literature PDF absent, WANTED in report. Agent-extracted assembly following these proofs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A strict birational group law on a smooth separated scheme over a field or discrete valuation ring is realized by an open immersion into a unique smooth finite type group scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every open immersion of schemes is a smooth morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension 0 f\", \"doc\": \"Every open immersion of schemes is smooth of relative dimension 0. That is, if $ f: X \\to Y $ is an open immersion (a morphism that is a topological open embedding with isomorphic stalks on its image),\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative (@AlgebraicGeometry.IsSmoothOfRelativeDimension 0)\", \"doc\": \"The property of being a smooth morphism of relative dimension zero is multiplicative. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are smooth morphisms of relative dimension zero, then their composit\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; rational-map representatives, smoothness and open-immersion definitions, Weierstrass point groups, valuation and scheme constructors do not state this relative birational-law or codimension-one immersion result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construction of a group scheme from a strict rational group law over a discrete valuation ring",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{P : Sort u} →\\n  {toLocallyRingedSpace : AlgebraicGeometry.LocallyRingedSpace} →\\n    {local_affine :\\n        ∀ (x : ↑toLocallyRingedSpace.toTopCat),\\n          ∃ U R,\\n            Nonempty\\n              (toLocallyRingedSpace.restrict ⋯ ≅ AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op R))\", \"doc\": \"A scheme is a locally ringed space such that every point has an open neighborhood isomorphic to the affine scheme associated to some commutative ring, constructed via the Spec functor applied to the o\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"(toLocallyRingedSpace : AlgebraicGeometry.LocallyRingedSpace) →\\n  (∀ (x : ↑toLocallyRingedSpace.toTopCat),\\n      ∃ U R,\\n        Nonempty (toLocallyRingedSpace.restrict ⋯ ≅ AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op R))) →\\n    AlgebraicGeometry.Scheme\", \"doc\": \"A scheme is a locally ringed space such that every point has an open neighborhood for which the restriction is isomorphic to the affine scheme associated to some commutative ring. This isomorphism is \"}\n  {\"name\": \"ValuationSubring.pointwise_smul_toSubring\", \"module\": \"Mathlib.RingTheory.Valuation.ValuationSubring\", \"type\": \"(g : G) (S : ValuationSubring K) : (g • S).toSubring = g • S.toSubring\", \"doc\": \"For any group element $g$ and valuation subring $S$ of a field $K$, the underlying subring structure of the group action $g \\bullet S$ is equal to the group action applied to the underlying subring str\"}\n  {\"name\": \"IsDiscreteValuationRing.isRankOneDiscrete\", \"module\": \"Mathlib.RingTheory.Valuation.Discrete.Basic\", \"type\": \": IsRankOneDiscrete ((maximalIdeal A).valuation K)\", \"doc\": \"For a discrete valuation ring $ A $ with fraction field $ K $, the valuation associated to the maximal ideal of $ A $ is a rank one discrete valuation. This means its value group is a linearly ordered\"}\n  {\"name\": \"WeierstrassCurve.VariableChange.instGroup\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.VariableChange\", \"type\": \": Group (VariableChange R)\", \"doc\": \"For any commutative ring $ R $, the set of variable changes for a Weierstrass curve over $ R $ is equipped with a canonical group structure. The group operation combines variable changes via multiplic\"}\n  {\"name\": \"IsNonarchimedeanLocalField.instIsDiscreteValuationRingSubtypeMemSubringIntegerValueGroupWithZeroValuation\", \"module\": \"Mathlib.NumberTheory.LocalField.Basic\", \"type\": \": IsDiscreteValuationRing 𝒪[K]\", \"doc\": \"For any non-Archimedean local field $ K $ equipped with a valuative relation and topological structure, the subring $ \\\\mathcal{O}_K $ consisting of elements with valuation $ \\\\leq 1 $ forms a discrete \"}\n  {\"name\": \"Valuation.Uniformizer.mk'\", \"module\": \"Mathlib.RingTheory.Valuation.Discrete.Basic\", \"type\": \"{x : A} (hx : v.IsUniformizer x) : v.Uniformizer\", \"doc\": \"Given an element $ x $ in the ring $ A $ and a proof that $ x $ is a uniformizer for the valuation $ v $, this function constructs the corresponding uniformizer structure for $ v $. An element $ \\\\pi $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GrpObjAsOverPullback\", \"module\": \"Mathlib.AlgebraicGeometry.Pullbacks\", \"type\": \"[GrpObj (asOver M S)] : GrpObj (asOver (pullback (M ↘ S) f) T)\", \"doc\": \"Given a group object in the over category of schemes over a base scheme $ S $ and a morphism $ f : T \\to S $, the pullback of this group object along $ f $ forms a group object in the over category of \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; rational-map representatives, smoothness and open-immersion definitions, Weierstrass point groups, valuation and scheme constructors do not state this relative birational-law or codimension-one immersion result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"Group\", \"IsOpenImmersion\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; rational-map representatives, smoothness and open-immersion definitions, Weierstrass point groups, valuation and scheme constructors do not state this relative birational-law or codimension-one immersion result."
+  },
+  {
+   "tool": "grep",
+   "query": "birational.*law|strict.*group.*law|group.*envelope",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; rational-map representatives, smoothness and open-immersion definitions, Weierstrass point groups, valuation and scheme constructors do not state this relative birational-law or codimension-one immersion result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weil group chunk theorem a scheme with partially defined associative multiplication embeds in an algebraic group",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj i)] [inst_2 : CategoryTheory.IsCofiltered I]\\n  \", \"doc\": \"The image of the morphism $ g $ is contained within the diagonal open subsets of the pullback of $ f $ with itself, specifically within the diagonal cover's diagonal range constructed from the open co\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"AlgebraicGeometry.Scheme → Type u_1\", \"doc\": \"For a scheme $X$, the type of open subsets of its underlying topological space.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (x : ↑X.toTopCat), X.affineOpenCover.X x = Classical.choose ⋯\", \"doc\": \"For any scheme $X$ and any point $x$ in its underlying topological space, the $X$-component of the affine open cover at $x$ is the affine open neighborhood selected by the classical choice function, e\"}\n  {\"name\": \"Field.absoluteGaloisGroupAbelianization\", \"module\": \"Mathlib/FieldTheory/AbsoluteGaloisGroup\", \"type\": \"(K : Type u_1) → [Field K] → Type u_1\", \"doc\": \"The topological abelianization of the absolute Galois group $\\\\text{Gal}(\\\\overline{K}/K)$ is the quotient of the group by the closure of its commutator subgroup, equipped with the quotient topology ind\"}\n  {\"name\": \"InfiniteGalois.profiniteGalGrp\", \"module\": \"Mathlib/FieldTheory/Galois/Profinite\", \"type\": \"(k : Type u_3) →\\n  (K : Type u_4) → [inst : Field k] → [inst_1 : Field K] → [inst_2 : Algebra k K] → [IsGalois k K] → ProfiniteGrp.{u_4}\", \"doc\": \"The Galois group $\\\\text{Gal}(K/k)$ of an infinite Galois extension $K/k$, equipped with the Krull topology, is constructed as an object in the category of profinite groups. This topology ensures the g\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCover_idx\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (x : ↥X), X.affineOpenCover.idx x = ⋯.choose\", \"doc\": \"For any scheme $X$ and any point $x \\\\in X$, the index function of the affine open cover assigns to $x$ an index in the indexing set corresponding to an affine open subscheme containing $x$. This ensur\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; rational-map representatives, smoothness and open-immersion definitions, Weierstrass point groups, valuation and scheme constructors do not state this relative birational-law or codimension-one immersion result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Realization of strict birational group laws by smooth finite type group schemes over fields or discrete valuation rings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.IsGoodReduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [inst_2 : IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] →\\n            [inst_4 : Algebra R K] →\\n              [inst_5 : IsFractionRing R K] → (W : WeierstrassCurve K) → [WeierstrassCurve.Is\", \"doc\": \"A property of a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, asserting that $ W $ has good reduction. This means $ W $ satisfies minimality conditions with\"}\n  {\"name\": \"WeierstrassCurve.minimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → WeierstrassCurve K\", \"doc\": \"Given a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, this function returns the minimal Weierstrass curve equivalent to $ W $ under a variable change. The r\"}\n  {\"name\": \"WeierstrassCurve.IsMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} → [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → Prop\", \"doc\": \"A property of a Weierstrass curve over the fraction field $ K $ of a discrete valuation ring $ R $, indicating that the curve satisfies minimality conditions with respect to the valuation induced by $\"}\n  {\"name\": \"WeierstrassCurve.instIsMinimalMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] {W : WeierstrassCurve K},\\n  WeierstrassCurve.IsMinimal R (WeierstrassCurve.minimal R W)\", \"doc\": \"For any Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, the minimal Weierstrass curve obtained by applying the minimal transformation to $ W $ satisfies the m\"}\n  {\"name\": \"WeierstrassCurve.exists_isMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K),\\n  ∃ C, WeierstrassCurve.IsMinimal R (C • W)\", \"doc\": \"For any Weierstrass curve $ W $ defined over the fraction field $ K $ of a discrete valuation ring $ R $, there exists a variable change $ C $ such that the transformed curve $ C \\\\cdot W $ is a minima\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative (@AlgebraicGeometry.IsSmoothOfRelativeDimension 0)\", \"doc\": \"The property of being a smooth morphism of relative dimension zero is multiplicative. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are smooth morphisms of relative dimension zero, then their composit\"}\n  {\"name\": \"WeierstrassCurve.Jacobian.NonsingularLift\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic\", \"type\": \"{R : Type r} → [inst : CommRing R] → WeierstrassCurve.Jacobian R → WeierstrassCurve.Jacobian.PointClass R → Prop\", \"doc\": \"The property that a point class $ [P] $ in the Jacobian of a Weierstrass curve is nonsingular if any representative $ P $ of the class satisfies the nonsingularity condition. This is well-defined beca\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: smoothness and open-immersion facts, Weierstrass reduction, rational-map constructors and Lie-group instances do not realize a relative strict birational scheme law."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"Group\", \"IsOpenImmersion\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: smoothness and open-immersion facts, Weierstrass reduction, rational-map constructors and Lie-group instances do not realize a relative strict birational scheme law."
+  },
+  {
+   "tool": "grep",
+   "query": "birational.*law|strict.*group.*law|group.*envelope",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: smoothness and open-immersion facts, Weierstrass reduction, rational-map constructors and Lie-group instances do not realize a relative strict birational scheme law."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weil theorem embedding a strict rational group chunk as an open subscheme of a group scheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.ι\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \": ↑U ⟶ X\", \"doc\": \"For a scheme $X$ and an open subset $U$ of its underlying topological space, this is the canonical morphism from the restricted scheme $X|_U$ to $X$. It is constructed using the open immersion $U \\to X\"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_of_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsOpenImmersion f] [IsIntegral Y] [Nonempty X] : IsIntegral X\", \"doc\": \"If $X$ is a non-empty scheme equipped with an open immersion into an integral scheme $Y$, then $X$ is also an integral scheme.\"}\n  {\"name\": \"AlgebraicGeometry.isOpenImmersion_eq_inf\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion\", \"type\": \": @IsOpenImmersion = (topologically IsOpenEmbedding) ⊓ stalkwise (Function.Bijective ·)\", \"doc\": \"A morphism of schemes is an open immersion if and only if it is a topological open embedding and induces bijective maps on all stalks.\"}\n  {\"name\": \"AlgebraicGeometry.IsPreimmersion.instOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Preimmersion\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsOpenImmersion f] : IsPreimmersion f\", \"doc\": \"Every open immersion between schemes is a preimmersion. Specifically, if $ f: X \\to Y $ is an open immersion of schemes (i.e., a morphism whose underlying continuous map is a topological open embedding\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.ι_base_apply\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (U : X.Opens) (x : ↥U), (CategoryTheory.ConcreteCategory.hom U.ι.base) x = ↑x\", \"doc\": \"For any scheme $X$ and open subset $U$ of $X$, the underlying continuous map of the canonical inclusion morphism $U \\\\to X$ is the canonical embedding that maps each point $x \\\\in U$ to itself in $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isOpenEmbedding\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": IsOpenEmbedding f\", \"doc\": \"A morphism $ f: X \\\\to Y $ between schemes is an open immersion if its underlying continuous map is a topological open embedding and the induced sheaf morphism yields isomorphisms of local rings on sta\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.instIsOverι\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"(U : X.Opens) : U.ι.IsOver X\", \"doc\": \"For a scheme $X$ and an open subset $U$ of its underlying topological space, the canonical inclusion morphism from the restricted scheme $U$ to $X$ is over $X$, meaning the triangle formed by the incl\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.isOpenImmersion_fromSpec\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \": IsOpenImmersion hU.fromSpec\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, the morphism from $ \\\\operatorname{Spec}(\\\\Gamma(U)) $ to $ X $ constructed by composing the canonical isomorphism $ \\\\operatorname{Spec}(\\\\Gamma(U)) \\\\co\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: smoothness and open-immersion facts, Weierstrass reduction, rational-map constructors and Lie-group instances do not realize a relative strict birational scheme law."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth scheme with a strict partially defined associative multiplication embeds in a unique algebraic group",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative (@AlgebraicGeometry.IsSmoothOfRelativeDimension 0)\", \"doc\": \"The property of being a smooth morphism of relative dimension zero is multiplicative. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are smooth morphisms of relative dimension zero, then their composit\"}\n  {\"name\": \"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"module\": \"Mathlib/Geometry/Manifold/Algebra/Monoid\", \"type\": \"Batteries.Util.LibraryNote\", \"doc\": \"A note outlining the design decisions made regarding the implementation of smooth algebraic structures in the library.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"LieGroup\", \"module\": \"Mathlib/Geometry/Manifold/Algebra/LieGroup\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {H : Type u_2} →\\n      [inst_1 : TopologicalSpace H] →\\n        {E : Type u_3} →\\n          [inst_2 : NormedAddCommGroup E] →\\n            [inst_3 : NormedSpace 𝕜 E] →\\n              ModelWithCorners 𝕜 E H →\\n                WithTop ℕ∞ → (G : Ty\", \"doc\": \"A Lie group is a group $G$ equipped with a topological space structure and a charted space structure modeled on $H$, such that the group operations (multiplication and inversion) are smooth maps compa\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.mk.inj\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {toLocallyRingedSpace : AlgebraicGeometry.LocallyRingedSpace}\\n  {local_affine :\\n    ∀ (x : ↑toLocallyRingedSpace.toTopCat),\\n      ∃ U R,\\n        Nonempty (toLocallyRingedSpace.restrict ⋯ ≅ AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op R))}\\n  {toLocallyRingedSpace_1 : AlgebraicGeomet\", \"doc\": \"Two schemes are equal if they have the same underlying locally ringed space and satisfy the same local affine conditions, i.e., for every point, there exists an open neighborhood isomorphic to an affi\"}\n  {\"name\": \"LieGroup.of_le\", \"module\": \"Mathlib/Geometry/Manifold/Algebra/LieGroup\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {H : Type u_2} [inst_1 : TopologicalSpace H] {E : Type u_3}\\n  [inst_2 : NormedAddCommGroup E] [inst_3 : NormedSpace 𝕜 E] {I : ModelWithCorners 𝕜 E H} {G : Type u_4}\\n  [inst_4 : TopologicalSpace G] [inst_5 : ChartedSpace H G] [inst_6 : Group G] {m n\", \"doc\": \"If $ G $ is a Lie group with model space $ n $ in the extended natural numbers $ \\\\mathbb{N}^\\\\top $, and $ m \\\\leq n $, then $ G $ is also a Lie group with model space $ m $. This follows from the compa\"}\n  {\"name\": \"Units.instLieGroupModelWithCornersSelf\", \"module\": \"Mathlib/Geometry/Manifold/Instances/UnitsOfNormedAlgebra\", \"type\": \"∀ {R : Type u_1} [inst : NormedRing R] [inst_1 : CompleteSpace R] {n : WithTop ℕ∞} {𝕜 : Type u_2}\\n  [inst_2 : NontriviallyNormedField 𝕜] [inst_3 : NormedAlgebra 𝕜 R], LieGroup (modelWithCornersSelf 𝕜 R) n Rˣ\", \"doc\": \"For a complete normed ring $ R $ over a nontrivially normed field $ \\\\mathbb{K} $, the group of units $ R^\\times $ is equipped with a Lie group structure modeled on $ R $ itself. This structure uses the\"}\n  {\"name\": \"instLieGroupOfTopWithTopENat\", \"module\": \"Mathlib/Geometry/Manifold/Algebra/LieGroup\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {H : Type u_2} [inst_1 : TopologicalSpace H] {E : Type u_3}\\n  [inst_2 : NormedAddCommGroup E] [inst_3 : NormedSpace 𝕜 E] {I : ModelWithCorners 𝕜 E H} {G : Type u_4}\\n  [inst_4 : TopologicalSpace G] [inst_5 : ChartedSpace H G] [inst_6 : Group G] {a :\", \"doc\": \"If $ G $ is a Lie group modeled on a structure $ I $ with model space $ \\\\omega $, then $ G $ also admits a Lie group structure when the model space is extended to include a top element $ \\\\top $, formi\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: smoothness and open-immersion facts, Weierstrass reduction, rational-map constructors and Lie-group instances do not realize a relative strict birational scheme law."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-trait-birational-group-envelope",
+  "date": "2026-10-24",
+  "group": "N9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "BLR 1.1 Definition 2 (printed pp.8-9) and 1.3 Theorem 1, if direction (printed p.16, PDF p.22); local-existence input of 1.4 Theorem 3; supporting construction: BLR 4.3 Theorem 6, printed p.108 (PDF p.114), equivalently 5.1 Theorem 5 including the no-shrinking clause, printed p.114 (PDF p.120). Supporting sublemma: BLR 5.2 Theorem 3 and the explicit translate construction of 5.3, printed pp.117-128 (PDF pp.123-134); descent to an arbitrary field or DVR in 6.5 Corollary 2, printed pp.157-158 (PDF pp.163-164); uniqueness in 5.1 Proposition 3",
+   "via": [
+    "lem-sfb-trait-birational-group-envelope",
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-strict-birational-law-realization",
+  "worker": "stage1",
+  "summary": "Unchanged statement, split along BLR strict-henselian finite translate construction, completion of group operations, and effective descent; uniqueness via general extension of rational group homomorphisms. Five statement-only inputs, no Mathlib leaf. All overlap and cocycle bases are permitted explicitly.",
+  "blueprint": "Read latest six-functors-basics chapter and sk-thm-sf-ctf-stability unit; this is a below-unit BLR prerequisite. blueprint_refs.py ancestor returns None; preserved inherited null ancestor and via chain. Steps realize BLR 5.3 finite translate construction, 6.5/2 descent, and 5.1/3 uniqueness named in from.place.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "Provides the strict henselian colimit, maximal ideal and field case, a generic algebraic tool."
+   },
+   {
+    "node": "lem-sc-strict-henselization-faithfully-flat",
+    "why": "Provides faithful flatness of the covering ring map, a generic algebraic tool."
+   },
+   {
+    "node": "lem-sc-strict-henselization-dvr",
+    "why": "Provides preservation of DVRs under strict henselization, a generic algebraic tool."
+   },
+   {
+    "node": "lem-wf-geometric-triples-colimit-comparison",
+    "why": "Identifies the triples colimit used for B' with the geometric-point strict henselization of which the DVR lemma is stated; a generic algebraic comparison (added by the maintainer reader)."
+   },
+   {
+    "node": "lem-trf-invariant-open-image-pullback",
+    "why": "Descends the invariant open chart after effective descent of the group; generic open descent, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-pd-morphisms-descend",
+    "why": "Provides full faithfulness of morphism descent for the already effective objects, including inverse chart maps and equality of laws."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-base-change",
+    "why": "Provides surjectivity of the fibre scalar projection used to reflect density."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-sc-strict-henselization-dvr",
+  "lem-wf-geometric-triples-colimit-comparison",
+  "lem-trf-invariant-open-image-pullback",
+  "lem-pd-morphisms-descend",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q90-238d9ce61",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-238d9ce61 (reviewer sub-agent of L); spot-checked: Read in full against the BLR Néron Models scan, which is not in literature/ (WANTED is justified); I read PDF pp.119-135 and 163-166 = printed 112-128 and 156-159: 5.1 Defs 1-2, Prop 3 with proof, Lemma 4, Thm 5; 5.2 Def 1, Prop 2, Thm 3, Lemma 4; 5.3 Lemmas 1-8; 6.5 Thm 1, Cor 2 with proof. The item statement is unchanged and agrees with 5.2/3 + 6.5/2 + 5.1/3: nonempty fibres = faithfully flat, the strict law is X-dense for both projections, and all of X is immersed. Step 2: the envelope node (2.3/5 section, 5.3 Lemmas 5-7) gives exactly the hypotheses of the completion node (Lemma 8). Step 3: base-change density on S''; the hom-extension node holds over any base, so it covers S'' and S'''; its uniqueness gives the cocycle; no circularity. Step 4: the descent node is 6.5/1 with the torsor X'=G'. The invariant-open descent node applies since H'->H is flat, affine and surjective. Morphism descent applies in the blueprint_update fpqc form, which S'->S satisfies. Step 5: density via surjective base change; the law agrees on D by uniqueness in morphism descent. Step 6: a=i2 i1^-1 respects the law on (i1xi1)(D); extension and uniqueness follow. All five new nodes are true, statement-only and strictly smaller than the item. I checked the hom-extension node over arbitrary S by descent along the fpqc map UxU->G (5.1/4) plus schematic density, and edge cases (X already a group, empty T, field base). The base-change node partly overlaps the existing lem-sfb-smooth-fibrewise-dense-open-base-change but generalizes it to strict laws; kept, noted for the maintainer. Batch-5 flag: lem-trf-invariant-open-image-pullback is generic fpqc descent of an invariant open (Stacks 0247/02JY), neither part of the trace-formula or Poincaré-duality proofs nor given by them; accepted. The declared tool_uses are generic; accepted. FIX (C4): step 1 applied lem-sc-strict-henselization-dvr, which is stated for the geometric-point limit construction, to the triples colimit B'. I added the existing lem-wf-geometric-triples-colimit-comparison to step 1 uses, proof_deps and split_report.tool_uses and reworded the step (698 chars). File: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-strict-birational-law-realization.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StrictBirationalLawRealization",
+  "declaration": "AlgebraicGeometry.strictBirationalGroupLaw_realization",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictBirationalLawRealization.lean",
+  "statement": "theorem strictBirationalGroupLaw_realization (B : Type u) [CommRing B] [IsDomain B] (hB : IsField B ∨ IsDiscreteValuationRing B) (X : Over (Spec (CommRingCat.of B))) [Smooth X.hom] [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] (hne : ∀ s : Spec (CommRingCat.of B), Nonempty (X.hom.fiber s)) (m : StrictBirationalGroupLaw X) : (∃ (H : Grp (Over (Spec (CommRingCat.of B)))) (i : X ⟶ H.X), m.Realizes H i) ∧ (∀ (H₁ H₂ : Grp (Over (Spec (CommRingCat.of B)))) (i₁ : X ⟶ H₁.X) (i₂ : X ⟶ H₂.X), m.Realizes H₁ i₁ → m.Realizes H₂ i₂ → ∃! a : H₁ ≅ H₂, i₁ ≫ a.hom.hom.hom = i₂)",
+  "branch": "newtargets-dag",
+  "by": "O3",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c0a10ea9b",
+  "group": "O3",
+  "result": "pass",
+  "note": "Clauses match the node: field/DVR base (IsField ∨ DVR, IsDomain implied); X Smooth/IsSeparated/LOFT+QC with nonempty scheme fibres; S-density = topological density in fiberι preimages; strict chart: open domain D, Φ=lift(incl≫fst, mul), Ψ=lift(mul, incl≫snd) open immersions, six density fields; assoc tested on all T-points (equality of morphisms on the common domain); Realizes = smooth, separated, finite type, open immersion with fibrewise dense image, i∘m = μ∘(i⊗i) on all of D; uniqueness ∃! a : H₁ ≅ H₂ in Grp(Over S) with i₁≫a=i₂. Chart-vs-rational-class equivalent (D reduced and dense, H separated). Records verbatim; item diff vs side-live = lean + stmt_dep on new def node only; no hollow defs; docstrings with source, blueprint and 6 proof steps; only sorry; proof imports exist. Advisory H4 race: competing strict-law/IsFibrewiseDense defs (Q42, NZ, Q15, Q17, Q131, Q117, Q04) all returned/superseded and unlanded per svc.log, so this delivery may own the notion; if another lands first, rebind. No compile (no file changed)."
+ }
+}

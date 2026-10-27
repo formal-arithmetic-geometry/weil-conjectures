@@ -1,0 +1,335 @@
+{
+ "id": "lem-sfb-finite-schemes-etale-stack-descent",
+ "kind": "statement",
+ "title": "Effective descent of finite schemes on an etale stack presentation",
+ "statement": "Let $\\mathcal X$ be a Deligne--Mumford stack over a scheme $S$, in the stack and 2-fibre-product conventions of [def-sfb-stable-pointed-moduli-groupoids], and let $a:T\\to\\mathcal X$ be a surjective etale scheme atlas. Put $T_2=T\\times_{\\mathcal X}T$ and $T_3=T\\times_{\\mathcal X}T\\times_{\\mathcal X}T$, with their projections. A finite scheme over $T$ means a scheme $Z$ with a finite morphism $Z\\to T$ [def-weil-finite-integral-morphism]. Give such a $Z$ an isomorphism $\\theta:p_1^*Z\\simeq p_2^*Z$ over $T_2$ satisfying $p_{23}^*\\theta\\circ p_{12}^*\\theta=p_{13}^*\\theta$ over $T_3$. Pullback induces an equivalence between the category of morphisms $\\mathcal Y\\to\\mathcal X$ representable by finite schemes and the category of these finite schemes with descent datum, including all compatible morphisms. Here representable by finite schemes means that every base change by a scheme is a finite scheme over that scheme. The resulting $\\mathcal Y$ is Deligne--Mumford. If $Z$ is normal, meaning that every local ring is an integrally closed domain [def-weil-pbc-normal-ring], then $\\mathcal Y$ is normal in the sense that it admits a normal etale scheme atlas. No normality, smoothness or normalization hypothesis is imposed on $\\mathcal X$.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tags 0245 (lemma-affine) and 02LA (lemma-descending-property-finite); stack-presentation extension via stacks-sheaves.tex Tag 06WV (lemma-quasi-coherent-algebraic-stack), part (1). Agent-formulated finite-algebra consequence, not a verbatim assertion about stacks in 0245."
+ },
+ "stmt_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-normal-ring",
+  "def-sfb-finite-stack-descent-data"
+ ],
+ "proof": [
+  {
+   "text": "Write $b:Z\\to T$. By the definition of finite, $b$ is affine. Let $M=b_*\\mathcal O_Z$, a quasi-coherent $\\mathcal O_T$-algebra by the affine-algebra anti-equivalence. On a scheme chart $V\\to T_2$, its two pullbacks are the structure algebras of the two pullbacks of $Z$, by relative-spectrum base change. Thus $\\theta$ induces an algebra isomorphism $\\theta^\\sharp:p_2^*M\\to p_1^*M$, compatible on all charts. Set $\\delta=(\\theta^\\sharp)^{-1}$. Applying the contravariant structure-algebra functor to the given cocycle gives $\\theta_{13}^\\sharp=\\theta_{12}^\\sharp\\circ\\theta_{23}^\\sharp$, hence $\\delta_{23}\\circ\\delta_{12}=\\delta_{13}$. This is a module descent datum on $M$, including its algebra operations; no assertion that $T_2$ is a scheme is used.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "lem-weil-pbc-relative-spec-base-change",
+    "lem-sfb-qcoh-presentation-tensor-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01SA (lemma-affine-equivalence-algebras), with Constructions Tag 01LX (lemma-spec-properties)(2); apply on scheme charts of the presentation."
+   }
+  },
+  {
+   "text": "Apply quasi-coherent module descent to $(M,\\delta)$. Obtain a cartesian quasi-coherent module $\\mathcal A$ on $\\mathcal X$ and an isomorphism $\\lambda:a^*\\mathcal A\\simeq M$ respecting the given datum. The tensor and unit compatibilities of this equivalence identify the descent data of $\\mathcal A\\otimes\\mathcal A$ and $\\mathcal O_{\\mathcal X}$ with those of $M\\otimes M$ and $\\mathcal O_T$.",
+   "uses": [
+    "lem-sfb-qcoh-presentation-tensor-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WV (lemma-quasi-coherent-algebraic-stack)(1),(5); Tag 06WT (proposition-quasi-coherent)."
+   }
+  },
+  {
+   "text": "Multiplication $M\\otimes M\\to M$ and the unit $\\mathcal O_T\\to M$ commute with $\\delta$, since the overlap maps are algebra isomorphisms. Fullness in module descent therefore gives maps $\\mu:\\mathcal A\\otimes\\mathcal A\\to\\mathcal A$ and $e:\\mathcal O_{\\mathcal X}\\to\\mathcal A$. The two associativity maps from $\\mathcal A^{\\otimes3}$ have equal restrictions, namely $m(m\\otimes1)=m(1\\otimes m)$ on $M$; faithfulness makes them equal. The left-unit, right-unit and commutativity equations follow by the same equality test, using the stated unit and symmetry comparisons. Thus each $\\mathcal A_x$ is a commutative unital quasi-coherent algebra, with cartesian algebra pullbacks, and $\\lambda$ is an algebra isomorphism.",
+   "uses": [
+    "lem-sfb-qcoh-presentation-tensor-equivalence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WV (lemma-quasi-coherent-algebraic-stack)(1),(5), elementary transport of algebra operations through the tensor-compatible equivalence."
+   }
+  },
+  {
+   "text": "For every $x\\in\\mathcal X(U)$ put $P_x=\\underline{\\operatorname{Spec}}_U(\\mathcal A_x)$. For an arrow $\\alpha:y\\to x$ over $u:V\\to U$, the cartesian algebra comparison and canonical relative-spectrum base change give an isomorphism $c_\\alpha:P_y\\simeq V\\times_U P_x$. Define $\\mathcal Y(U)$ to have objects $(x,s)$, where $s:U\\to P_x$ is a section. An arrow $(y,t)\\to(x,s)$ over $u$ is an arrow $\\alpha:y\\to x$ of $\\mathcal X$ for which $c_\\alpha\\circ t=(1_V,s\\circ u)$. Identities and composites are those of $\\mathcal X$: the corresponding comparisons agree because both induce the same composite pullback algebra map under the affine-algebra anti-equivalence. Pulling back $s$ using $c_\\alpha^{-1}$ supplies cartesian lifts. Consequently this is a category fibred in groupoids with a projection $q:\\mathcal Y\\to\\mathcal X$. This constructs the data, without choosing them from an existence theorem.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "lem-weil-pbc-relative-spec-base-change",
+    "lem-sfb-qcoh-presentation-tensor-equivalence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01LS (lemma-spec-base-change) and 01LX (lemma-spec-properties)(2); explicit Grothendieck construction of the relative section groupoids."
+   }
+  },
+  {
+   "text": "Fix $x\\in\\mathcal X(U)$. For a test scheme $v:V\\to U$, an object of $U\\times_{\\mathcal X}\\mathcal Y$ is $(y,t,\\alpha:y\\simeq v^*x)$. Its section $t$ transports to a section of $V\\times_U P_x$, hence to a $U$-map $V\\to P_x$. Conversely such a map gives the section over $v^*x$ and the identity comparison. An arrow in this relative fibre must preserve the specified comparison $\\alpha$, so it is unique when the maps $V\\to P_x$ agree, and nonexistent otherwise. These mutually inverse descriptions commute with pullback. Thus $U\\times_{\\mathcal X}\\mathcal Y\\simeq h_{P_x}$ over $U$ and its projection is the affine scheme morphism $P_x\\to U$. Since $\\mathcal X$ is an etale stack, the representable-fibred-category stack lemma now proves that $\\mathcal Y$ is an etale stack.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "lem-weil-pbc-relative-spec-base-change",
+    "lem-sfb-representable-fibred-category-stack"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 05UN (lemma-open-fibred-category-is-algebraic), stack assertion, after the explicit scheme-base-change identification from Constructions Tag 01LX."
+   }
+  },
+  {
+   "text": "For the atlas object $a\\in\\mathcal X(T)$, $\\lambda$ gives $P_a\\simeq Z$ by the affine-algebra anti-equivalence. The comparison of step 5 therefore identifies $T\\times_{\\mathcal X}\\mathcal Y$ with $Z$. On $T_2$ the induced transport on algebras is $\\delta$, so transport on spectra has pullback map $\\delta^{-1}=\\theta^\\sharp$; the affine-algebra functor is faithful, hence the transport is exactly the specified $\\theta$. Thus the datum has been recovered, rather than just its underlying finite scheme.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "lem-weil-pbc-relative-spec-base-change",
+    "lem-sfb-qcoh-presentation-tensor-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01SA (lemma-affine-equivalence-algebras), faithfulness and base-change compatibility, with stacks-sheaves.tex Tag 06WV(1)."
+   }
+  },
+  {
+   "text": "Fix $x\\in\\mathcal X(U)$ with $U$ a scheme. The 2-fibre product $E=U\\times_{\\mathcal X}T$ is an algebraic space by the DM diagonal convention. Choose jointly surjective etale scheme charts $U_i\\to E$. The atlas test in the stack conventions says that their composites $U_i\\to U$ form a jointly surjective etale family. Each chart includes a map $t_i:U_i\\to T$ and the 2-comparison $x|_{U_i}\\simeq a\\circ t_i$. Thus steps 5--6 identify the scheme $P_x\\times_UU_i$ with $Z\\times_TU_i$ over $U_i$. The latter is finite by the finite-morphism clause of the base-change lemma. Apply the finer-topology lemma with base scheme $T=U$ and final object $U$ of $U_{\\mathrm{et}}$: its covering-family hypothesis is exactly the family just obtained, so this family is an fpqc covering. The finiteness-descent lemma now applies to the scheme morphism $P_x\\to U$ and these finite scheme base changes, proving it finite. This proves finite scheme representability for every $x$. Neither scheme representability of $E$ nor quasi-compactness of the given atlas is required.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-trf-algebraic-space",
+    "lem-trf-finite-radicial-basechange",
+    "lem-weil-pbc-fpqc-finer-than-etale",
+    "lem-weil-pbc-fpqc-descend-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02LA (lemma-descending-property-finite); Topologies Tag 022C (lemma-zariski-etale-smooth-syntomic-fppf-fpqc); scheme base-change stability of finiteness."
+   }
+  },
+  {
+   "text": "Given a compatible map $Z\\to Z'$ of the input data, the affine-algebra anti-equivalence gives $M'\\to M$ commuting with descent. Fullness of module descent supplies a unique map $\\mathcal A'\\to\\mathcal A$. It is an algebra map because its unit and multiplication equations can be tested after restriction to $T$, where they hold. For every $x\\in\\mathcal X(U)$, relative spectrum gives $P_x\\to P'_x$; these maps commute with cartesian pullback by base-change compatibility, and hence define $(x,s)\\mapsto(x,h_xs)$ on the constructed groupoids. Faithfulness of the two equivalences gives uniqueness up to the unique 2-isomorphism over $\\mathcal X$. Conversely a map over $\\mathcal X$ pulls back to scheme maps $P_x\\to P'_x$; their algebra maps are cartesian and are determined by restriction to $T$. Therefore pullback is fully faithful, including non-invertible morphisms. Hom sets in the representable slice are taken up to 2-isomorphism; their relative fibres are discrete, as checked in step 5.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "lem-weil-pbc-relative-spec-base-change",
+    "lem-sfb-qcoh-presentation-tensor-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01SA (lemma-affine-equivalence-algebras), all morphisms; stacks-sheaves.tex Tag 06WV(1), fullness and faithfulness on module maps."
+   }
+  },
+  {
+   "text": "To check recovery for an arbitrary representable finite $q_0:\\mathcal Y_0\\to\\mathcal X$, form its finite scheme base change $P^0_x\\to U$ for every $x\\in\\mathcal X(U)$. The algebras $(P^0_x\\to U)_*\\mathcal O_{P^0_x}$ are quasi-coherent, and the canonical affine base-change isomorphisms make them a cartesian algebra assignment. Restriction to $T$ is exactly the algebra of the pulled-back finite scheme with its canonical descent datum. Module descent and its faithfulness identify the algebra reconstructed in steps 2--3 with this assignment. Step 5 then identifies the constructed fibre over every $x$ with $P^0_x$, naturally. Explicitly, an object $y\\in\\mathcal Y_0(U)$ determines $x=q_0(y)$ and the section of $P^0_x$ represented by $(y,\\operatorname{id}_x)$. Conversely a section is a relative-fibre object $(y,\\alpha:q_0(y)\\simeq x)$, so gives an object of $\\mathcal Y_0(U)$ with its comparison to $x$. Arrows are precisely arrows of $\\mathcal Y_0$ preserving these comparisons, by the definition of the 2-fibre product. The two constructions are inverse up to the specified comparison, and commute with base pullbacks. Thus $\\mathcal Y_0\\simeq\\mathcal Y$ over $\\mathcal X$. Together with steps 6 and 8 this proves the asserted categorical equivalence.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "lem-weil-pbc-relative-spec-base-change",
+    "lem-sfb-qcoh-presentation-tensor-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01SA (lemma-affine-equivalence-algebras) and Constructions Tag 01LX(2),(3), applied to the scheme fibres; stacks-sheaves.tex Tag 06WV(1)."
+   }
+  },
+  {
+   "text": "The hypotheses of the existing representable-finite stack lemma now hold: $\\mathcal X$ is DM, $\\mathcal Y$ is a stack by step 5, and $q$ is representable finite by step 7. Its DM conclusion applies. Moreover $Z\\simeq T\\times_{\\mathcal X}\\mathcal Y\\to\\mathcal Y$ is a surjective etale scheme atlas: for every $U\\to\\mathcal Y$ its base change is $U\\times_{\\mathcal X}T\\to U$, the test already required of the original atlas $a$. If $Z$ has normal local rings, this very atlas is a normal etale atlas of $\\mathcal Y$, which is precisely the asserted meaning of normality. This last inference is definitional; it does not require normality of $\\mathcal X$ or a theorem about normalization.",
+   "uses": [
+    "lem-sfb-representable-finite-stack-properties",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 05UM (lemma-representable-morphism-to-algebraic), DM consequence as stated by lem-sfb-representable-finite-stack-properties; normality is the atlas definition in the item."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-weil-pbc-relative-spec-base-change",
+  "lem-sfb-qcoh-presentation-tensor-equivalence",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-representable-fibred-category-stack",
+  "def-trf-algebraic-space",
+  "lem-trf-finite-radicial-basechange",
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-weil-pbc-fpqc-descend-finite",
+  "lem-sfb-representable-finite-stack-properties",
+  "def-weil-pbc-normal-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Finite-algebra consequence of Tag 06WV(1),(5), with scheme relative spectrum (Morphisms 01SA, Constructions 01LX), representable category stack descent (Algebraic Stacks 05UN), and finiteness descent (Descent 02LA). Explicit section-groupoid construction by Q82."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite schemes over etale charts of a Deligne Mumford stack with cocycle descent data descend to a representable finite morphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, this constructs an open cover of the object $D(i')\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val},\\n  (∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n    ∀\\n      [CategoryTheory.Presheaf.IsLocallySu\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"{F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} →\\n  {ι : Type u} →\\n    {X : ι → AlgebraicGeometry.Scheme} →\\n      {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val} →\\n        (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n          [CategoryThe\", \"doc\": \"The functor $ F $ is representable by the scheme constructed from Zariski gluing data $ \\\\text{glueData} $ and condition $ hf $, establishing a natural isomorphism between $ F $ and the Yoneda embeddin\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, abstract descent, unrelated group quotients or completion ingredients; none states this assertion or a one-line generalization",
+   "digest": "4c13a75434a3e275"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DescentData\", \"Finite\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, abstract descent, unrelated group quotients or completion ingredients; none states this assertion or a one-line generalization",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "grep",
+   "query": "(finite|Finite).*(descent|Descent)|(descent|Descent).*(finite|Finite)",
+   "results": "[grep] OK 9 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/FLT/Polynomial.lean\", \"line\": \"30\", \"text\": \"The proof uses the Mason-Stothers theorem (Polynomial ABC theorem) and infinite descent\"}\n  {\"file\": \"Mathlib/NumberTheory/FLT/Polynomial.lean\", \"line\": \"168\", \"text\": \"    -- set up infinite descent\"}\n  {\"file\": \"Mathlib/RingTheory/Finiteness/Descent.lean\", \"line\": \"14\", \"text\": \"# Descent of finiteness conditions under faithfully flat maps\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Descent.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.RingTheory.Finiteness.Descent\"}\n  {\"file\": \"Mathlib/GroupTheory/Descent.lean\", \"line\": \"36\", \"text\": \"then `G` is finitely generated. See `Group.fg_of_descent` / `AddGroup.fg_of_descent`.\"}\n  {\"file\": \"Mathlib/GroupTheory/Descent.lean\", \"line\": \"129\", \"text\": \"  refine Group.fg_of_descent (fun U u hu ↦ ?_) ha H₀ s.toFinite H₁' (fun g' hg' x ↦ ?_) H₃'\"}\n  {\"file\": \"Mathlib/GroupTheory/Descent.lean\", \"line\": \"171\", \"text\": \"theorem Monoid.finite_set_isOfFiniteOrder_of_descent {M : Type*} [Monoid M] {n : ℕ} {h : M → ℝ}\"}\n  {\"file\": \"Mathlib/GroupTheory/Descent.lean\", \"line\": \"196\", \"text\": \"theorem CommGroup.finite_torsion_of_descent {G : Type*} [CommGroup G] {n : ℕ} {h : G → ℝ}\"}\n  {\"file\": \"Mathlib/GroupTheory/Descent.lean\", \"line\": \"199\", \"text\": \"  Monoid.finite_set_isOfFiniteOrder_of_descent hb H\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, abstract descent, unrelated group quotients or completion ingredients; none states this assertion or a one-line generalization",
+   "digest": "5c4b83b1084c1d14"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Effective descent of finite algebras on an etale presentation of an algebraic stack",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Etale.finitePresentation\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FinitePresentation R A\", \"doc\": \"Let $ R $ and $ A $ be commutative rings with an $ R $-algebra structure on $ A $. If $ A $ is étale over $ R $, then $ A $ is finitely presented as an $ R $-algebra.\"}\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib.RingTheory.Smooth.NoetherianDescent\", \"type\": \"[Etale A B] :\\n  ∃ (A₀ : Subalgebra R A) (B₀ : Type u) (_ : CommRing B₀) (_ : Algebra A₀ B₀),\\n    A₀.FG ∧ Etale A₀ B₀ ∧ Nonempty (B ≃ₐ[A] A ⊗[A₀] B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib.RingTheory.Etale.Field\", \"type\": \"[EssFiniteType K A] :\\n  FormallyEtale K A ↔\\n    ∃ (I : Type u) (_ : Finite I) (Ai : I → Type u) (_ : ∀ i, Field (Ai i)) (_ : ∀ i, Algebra K (Ai i)) (_ :\\n      A ≃ₐ[K] Π i, Ai i), ∀ i, Algebra.IsSeparable K (Ai i)\", \"doc\": \"A finitely generated algebra $ A $ over a field $ K $ is formally étale if and only if there exists a finite index set $ I $ and a family of field extensions $ \\\\{A_i\\\\}_{i \\\\in I} $, each separable over\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"RingHom.Etale\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \"{R S : Type*} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative rings is étale if the induced algebra structure on $ S $ over $ R $ via $ f $ satisfies the étale property, meaning $ S $ is finitely presented \"}\n  {\"name\": \"Algebra.FormallyEtale.comp\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyEtale R A] [FormallyEtale A B] : FormallyEtale R B\", \"doc\": \"If $ A $ is a formally étale algebra over a commutative ring $ R $, and $ B $ is a formally étale algebra over $ A $, then $ B $ is a formally étale algebra over $ R $.\"}\n  {\"name\": \"StandardEtalePresentation\", \"module\": \"Mathlib.RingTheory.Etale.StandardEtale\", \"type\": \"(R : Type u_4) → (S : Type u_5) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type (max u_4 u_5)\", \"doc\": \"A standard étale presentation of an algebra $ S $ over a commutative ring $ R $, providing a way to express $ S $ as a localization of a polynomial ring over $ R $ modulo an ideal, satisfying the nece\"}\n  {\"name\": \"Algebra.Etale.recOn\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          {motive : Algebra.Etale R A → Sort u_1} →\\n            (t : Algebra.Etale R A) →\\n              ((formallyEtale : Algebra.FormallyEtale R A) →\\n                  (finitePre\", \"doc\": \"Given commutative rings $ R $ and $ A $ with an $ R $-algebra structure on $ A $, this recursor allows defining functions on the property that $ A $ is étale over $ R $ by specifying their behavior on\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, abstract descent, unrelated group quotients or completion ingredients; none states this assertion or a one-line generalization",
+   "digest": "5f38b46a32db4310"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent finite algebras on an algebraic stack and affine representable relative spectrum",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsFinite fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n  {\"name\": \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyQuasiFinite f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is locally quasi-finite if and only if for every pair of affine open subsets $U \\\\subseteq Y$ and $V \\\\subseteq X$ such that $f(V) \\\\subseteq U$, the induced ring homom\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.LocallyQuasiFinite f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"For a locally quasi-finite morphism $ f: X \\\\to Y $ of schemes, if $ U \\\\subseteq Y $ is an affine open subset and $ V \\\\subseteq X $ is an affine open subset contained in $ f^{-1}(U) $, then the induced\"}\n  {\"name\": \"AlgebraicGeometry.isFinite_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsFinite f ↔\\n    AlgebraicGeometry.IsAffineHom f ∧\\n      ∀ (U : Y.Opens),\\n        AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).Finite\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Then $f$ is a finite morphism if and only if $f$ is an affine morphism and for every affine open subset $U$ of $Y$, the ring of sections $\\\\mathcal{O}_X(f^{-1\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.finite_app\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.IsFinite f] (U : Y.Opens),\\n  AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).Finite\", \"doc\": \"For any finite morphism $ f : X \\\\to Y $ of schemes and any affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\mathcal{O}_Y(U) \\\\to \\\\mathcal{O}_X(f^{-1}(U)) $ is finite, meaning that\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyOfFiniteType f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n         \", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite type if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ with $ f(V) \\\\subseteq U $, t\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.finite_app\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.IsFinite f] (U : Y.Opens),\\n  AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).Finite\", \"doc\": \"For any finite morphism $ f: X \\\\to Y $ of schemes and any affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\Gamma(Y, U) \\\\to \\\\Gamma(X, f^{-1}(U)) $ is finite, meaning that $ \\\\Gamma\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.finiteType_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFiniteType f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.\", \"doc\": \"For a morphism $ f: X \\to Y $ of schemes that is locally of finite type, if $ U $ is an affine open subset of $ Y $ and $ V $ is an affine open subset of $ X $ contained in $ f^{-1}(U) $, then the indu\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, abstract descent, unrelated group quotients or completion ingredients; none states this assertion or a one-line generalization",
+   "digest": "840e2526623379f3"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite schemes with descent datum over an etale scheme atlas of a Deligne Mumford stack descend to finite representable morphisms, with morphism descent",
+   "results": "Hits read: AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.Scheme.instFullEtaleOverForget, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.instCategoryEtale; ",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract stack descent assumes an IsStack instance and does not construct quasi-coherent module descent on an algebraic-stack atlas or its tensor comparison; scheme affine results do not apply to arbitrary stacks",
+   "digest": "59767de23026c5ff"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DescentData\", \"Finite\"",
+   "results": "Hits read: ; ",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract stack descent assumes an IsStack instance and does not construct quasi-coherent module descent on an algebraic-stack atlas or its tensor comparison; scheme affine results do not apply to arbitrary stacks",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "grep",
+   "query": "(finite|Finite).*(descent|Descent)|(descent|Descent).*(finite|Finite)",
+   "results": "Hits read: Mathlib/NumberTheory/FLT/Polynomial.lean, Mathlib/NumberTheory/FLT/Polynomial.lean, Mathlib/GroupTheory/Descent.lean, Mathlib/GroupTheory/Descent.lean, Mathlib/GroupTheory/Descent.lean, Mathlib/GroupTheory/Descent.lean, Mathlib/GroupTheory/Descent.lean, Mathlib/RingTheory/Finiteness/Descent.lean; ",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract stack descent assumes an IsStack instance and does not construct quasi-coherent module descent on an algebraic-stack atlas or its tensor comparison; scheme affine results do not apply to arbitrary stacks",
+   "digest": "74c8f4f53db77538"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Effective descent of finite algebras on an etale presentation of an algebraic stack",
+   "results": "Hits read: Algebra.Etale.finitePresentation, Algebra.Etale.exists_subalgebra_fg, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.Etale.formallyEtale, RingHom.Etale, Algebra.FormallyEtale.comp, StandardEtalePresentation, Algebra.Etale.recOn; ",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract stack descent assumes an IsStack instance and does not construct quasi-coherent module descent on an algebraic-stack atlas or its tensor comparison; scheme affine results do not apply to arbitrary stacks",
+   "digest": "5f38b46a32db4310"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dm-finite-normalization-charts",
+  "date": "2026-10-22",
+  "group": "Q61"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: finite normalization and its etale/formal charts. Prerequisite: Effective descent of finite schemes on an etale stack presentation.",
+   "via": [
+    "lem-sfb-dm-finite-normalization-charts",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-schemes-etale-stack-descent",
+  "worker": "stage1",
+  "summary": "Replaced the empty proof by module descent, explicit descent of multiplication and unit, a real section-groupoid construction, the scheme-fibre calculation, finite-property descent, all-morphism descent and the DM/normal-atlas conclusions. One statement-only module descent node; scheme spectrum and stack representability results are reused. No statement change. Repair of the returned side-completion delivery: rechecked all twelve cited statements on the current DAG, preserving the statement, ancestry, proof route, searches and module-descent node; made the small-etale-site specialization in step 7 explicit. Rebased packaging is performed by deliver.py against current origin/sheaf-dag. Continued repair against the current DAG after the interrupted delivery: step 7 now specifies the algebraic space E, its scheme charts and their 2-comparisons, so the identification with the finite scheme base changes is explicit before applying family-wise fpqc descent. Revalidated all 31 quotations and all six statement dependencies of the new node; no cited statement changed. Repair of returned head d19a8119b99: reread current cited statements and retained source/search evidence; no statement changed. Step 9 now gives both directions and the arrow condition of the recovery equivalence explicitly, rather than leaving its naturality implicit. Rebased dry run and push use the current server DAG.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images proof (3) through the recorded stable-level normalization/DM finite-normalization chart chain. The inherited created.item chain ends in a Lean module string, so blueprint_refs ancestor prints None; retain that computed ancestry while recording the actual textual place.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-morphism-relative-spec",
+    "why": "Generic scheme algebra/descent input used to construct and test the finite stack over the given atlas; the stable-curve unit has no statement giving this scheme tool, and its alteration/moduli route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-relative-spec-base-change",
+    "why": "Generic scheme algebra/descent input used to construct and test the finite stack over the given atlas; the stable-curve unit has no statement giving this scheme tool, and its alteration/moduli route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-finer-than-etale",
+    "why": "Generic scheme algebra/descent input used to construct and test the finite stack over the given atlas; the stable-curve unit has no statement giving this scheme tool, and its alteration/moduli route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-finite",
+    "why": "Generic scheme algebra/descent input used to construct and test the finite stack over the given atlas; the stable-curve unit has no statement giving this scheme tool, and its alteration/moduli route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-weil-pbc-relative-spec-base-change",
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-weil-pbc-fpqc-descend-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q82-39b9ba69a",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-39b9ba69a (reviewer sub-agent of L); spot-checked: This is the 4th push of a split already PASSed with no fixes at b4ffa197, 98ac640c and d19a8119. Each time, landing refused it only because the side completion had not been promoted. There is no repair note. In clones/live and clones/side-live the item is still unsplit with an empty proof and the new node is absent. Statement, stmt_deps, source and blueprint fields match live, so no other group has superseded the item. Field-by-field diff against d19a: the new node lem-sfb-qcoh-presentation-tensor-equivalence is byte-identical (sha256 8a33cba8). In the item only split_report and the text of step 9 changed; step uses and all other steps are identical. The new step 9 spells out the inverse: y in Y0(U) goes to x=q0(y) with the section (y,id_x), and a section (y, alpha: q0 y ~ x) goes back to y. Arrows are those that preserve the comparisons, and both directions commute with pullback. I checked that this is a correct equivalence over X, because the relative fibres h_{P^0_x} are discrete. I re-read every step against the current statements of the cited nodes. Step 1: delta=(theta^sharp)^-1 satisfies d23 d12 = d13. Step 5: the representable-fibred-category stack lemma assumes no stackhood of the source. Step 7: the charts of the algebraic space U x_X T give an etale family, which is an fpqc covering by fpqc-finer-than-etale with T=U; fpqc-descend-finite accepts families, so no quasi-compactness is needed; lem-trf-finite-radicial-basechange is used only for its finite clause. Step 10: representable-finite-stack-properties gives DM, and the normal atlas Z is definitional. Small cases checked: Spec k, BG, empty Z, a cusp. Sources: stacks-sheaves.tex 06WV (1),(5) at line 2384; descent.tex 02LA at 6102 and 0245 at 9148; algebraic.tex 05UM at 1955 and 05UN at 1984. No SGA. Batch-5 flags: def-trf-algebraic-space and def-sfb-stable-pointed-moduli-groupoids (whose closure reaches the projective-bundle definition) are general definitions. lem-sfb-representable-finite-stack-properties reaches trf only through that definition and is generic stack permanence. None of these is part of the trace formula or Poincare duality, so all are accepted. The generic scheme tool uses are accepted as before. Maintainer note: the remaining blocker is live promotion of the side completion, not the mathematics."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteSchemesEtaleStackDescent",
+  "declaration": "CategoryTheory.finiteSchemes_etale_stack_descent",
+  "declarations": [
+   "CategoryTheory.finiteSchemes_etale_stack_descent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteSchemesEtaleStackDescent.lean",
+  "statement": "theorem finiteSchemes_etale_stack_descent (S : Scheme.{u}) (X : BasedCategory.{v, w} (Over S)) (hX : IsDeligneMumfordModuliStack X) (T : Over S) (a : BasedFunctor (discreteModuli (yoneda.obj T)) X) (ha : IsEtaleModuliAtlas a) : (finiteStackRestriction a).IsEquivalence ∧ (∀ P : FiniteStackSections X, IsDeligneMumfordModuliStack (stackSectionTotal P.obj) ∧ IsRepresentableFiniteModuliMap (stackSectionProjection P.obj) ∧ (∀ (Z : Over S) (p : Z ⟶ T), IsFinite p.left → Nonempty (a.toFunctor.op ⋙ P.obj ≅ finiteSchemeSections p) → (∀ z : Z.left, IsDomain (Z.left.presheaf.stalk z) ∧ IsIntegrallyClosed (Z.left.presheaf.stalk z)) → ∃ (U : Over S) (b : BasedFunctor (discreteModuli (yoneda.obj U)) (stackSectionTotal P.obj)), IsEtaleModuliAtlas b ∧ ∀ z : U.left, IsDomain (U.left.presheaf.stalk z) ∧ IsIntegrallyClosed (U.left.presheaf.stalk z))) ∧ (∀ (Y : BasedCategory.{v', w'} (Over S)) (q : BasedFunctor Y X), IsFibredInGroupoids Y → IsRepresentableFiniteModuliMap q → ∃ (P : FiniteStackSections X) (e : BasedFunctor Y (stackSectionTotal P.obj)), e.toFunctor.IsEquivalence ∧ Nonempty (ModuliTwoIso (e.comp (stackSectionProjection P.obj)) q)) ∧ (∀ (P Q : FiniteStackSections X) (f : BasedFunctor (stackSectionTotal P.obj) (stackSectionTotal Q.obj)) (β : ModuliTwoIso (f.comp (stackSectionProjection Q.obj)) (stackSectionProjection P.obj)), ∃! η : P.obj ⟶ Q.obj, ∃ γ : ModuliTwoIso f (stackSectionMap η), ∀ z : (stackSectionTotal P.obj).obj, (stackSectionProjection Q.obj).map (γ.val.hom.app z) = β.val.hom.app z)",
+  "branch": "sheaf-dag",
+  "by": "Q39",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7293ba579",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Checked the item node, new node def-sfb-finite-stack-descent-data, unchanged dep records (equal to side-live), both modules and the used defs (IsDeligneMumfordModuliStack, IsEtaleModuliAtlas, IsRepresentableFiniteModuliMap, ModuliTwoIso, discreteModuli). The descent-data presheaf on C_a encodes theta, the cocycle and all compatible maps without assuming T2 is a scheme. The IsEquivalence of the canonical restriction plus the DM/representable-finite, CFG-representation and maps-mod-2-iso clauses give the node's equivalence; the conj.4 existence and uniqueness check out. The normal clause matches the node's 'normal etale atlas' meaning and the inline normal-ring form, with no hypotheses on X. Universes are independent; nothing hollow; proof is sorry only; docstrings and verbatim statements OK. Notes: IsNormalModuliStack (all charts normal) is equivalent for DM stacks but is a different formulation; IsEtaleModuliAtlas/IsRepresentableFiniteModuliMap nodes are reached only through the new node's stmt_deps; the second reading is the worker's own second pass. Nothing compiled, since no file changed."
+ }
+}

@@ -1,0 +1,234 @@
+{
+ "id": "lem-trf-affine-test-algebra-chart-refinement",
+ "kind": "statement",
+ "title": "Affine test algebras admit finite type charts over a prescribed affine cover",
+ "statement": "Let $X$ be a locally Noetherian scheme with an affine open covering $X=\\bigcup_{i\\in I}U_i$ [def-pc-scheme, pqf-def-locnoeth]. Let $V\\subseteq X$ be an affine open, put $R=\\mathcal O_X(V)$, and let $R\\to B$ be a finite type homomorphism of commutative rings [def-weil-pbc-finite-type-algebra]. Under the canonical identification $V\\cong\\operatorname{Spec}R$, write $h:Y=\\operatorname{Spec}B\\to V$ for its spectrum morphism and $f:Y\\to X$ for its composite with the open inclusion [def-weil-affine-spectrum]. Then $R$ is Noetherian [def-weil-pbc-noetherian-ring], both $h$ and $f$ are locally of finite type [def-weil-finite-type-morphism], and $Y$ is locally Noetherian. There exist a function $i:|Y|\\to I$ and affine opens $W_y\\subseteq Y$, one for each $y\\in Y$, such that $y\\in W_y\\subseteq f^{-1}(U_{i(y)})$, $Y=\\bigcup_{y\\in Y}W_y$, and every induced map $\\mathcal O_X(U_{i(y)})\\to\\mathcal O_Y(W_y)$ is of finite type. No finiteness of $I$ or nonemptiness of $Y$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 07R4 (lemma-J), proof, first paragraph (open immersion and composition), second paragraph (finite type test algebra over an affine open), and last paragraph (affine refinement over the given charts). This is the full geometric preparation of returned steps 1--3, without a J-2 hypothesis or conclusion."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Apply [pqf-lem-affine-open-locnoeth] to the affine open $V$ of the locally Noetherian scheme $X$: its ring $R$ is Noetherian. Since $B$ is a finite type $R$-algebra, [lem-weil-pbc-finite-type-algebra-noetherian] gives that $B$ is Noetherian. By [def-weil-affine-spectrum], $Y=\\operatorname{Spec}B$ is affine and its global section ring is $B$. The affine cover indexed by a singleton whose sole member is all of $Y$ therefore satisfies [pqf-def-locnoeth], so $Y$ is locally Noetherian. This singleton cover is valid even when $B$ is the zero ring and $Y$ is empty.",
+   "uses": [
+    "pqf-lem-affine-open-locnoeth",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "def-weil-affine-spectrum",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian; algebra.tex Tag 00FN, lemma-Noetherian-permanence; properties.tex Tags 01OW and 01OV"
+   }
+  },
+  {
+   "text": "For every $y\\in Y$, apply the reverse implication of [lem-weil-pbc-lft-pointwise-criterion] using the source affine open $Y\\subseteq Y$ and target affine open $V\\subseteq V$. The source open contains $y$ and its image lies in the target open because $h$ has codomain $V$. Under the canonical identification $V\\cong\\operatorname{Spec}R$ in the statement and the spectrum construction [def-weil-affine-spectrum], the resulting global-section map is the given finite type homomorphism $R\\to B$. These witnesses establish that $h$ is locally of finite type; for empty $Y$ the pointwise criterion is vacuous.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-lft-pointwise-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T1 and 01T2, definition-finite-type and lemma-locally-finite-type-characterize; Tag 07R4, lemma-J, finite type test algebra paragraph"
+   }
+  },
+  {
+   "text": "Let $j:V\\hookrightarrow X$ be the open inclusion. It is an immersion: it factors as the identity closed immersion $V\\to V$ followed by the open immersion $j$. Clause (2) of [lem-weil-pbc-immersion-base-change-lft] makes $j$ locally of finite type. In clause (e) of [lem-weil-pbc-proper-fp-permanence], substitute $h:Y\\to V$ for its first morphism and $j:V\\to X$ for its second, and take the locally-of-finite-type alternative. Step 2 supplies the hypothesis on $h$, and the preceding sentence supplies the hypothesis on $j$, so their composite $f=j\\circ h$ is locally of finite type.",
+   "uses": [
+    "lem-weil-pbc-immersion-base-change-lft",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 07R4, lemma-J, first paragraph; Tags 01T5 and 01T3, lemma-immersion-locally-finite-type and lemma-composition-finite-type"
+   }
+  },
+  {
+   "text": "Fix $y\\in Y$. Since the $U_i$ cover $X$, there exists $a\\in I$ with $f(y)\\in U_a$. Continuity of the scheme morphism $f$ makes $f^{-1}(U_a)$ an open neighbourhood of $y$. The statement of [lem-weil-pbc-affine-opens-basis], applied to this open neighbourhood, gives an affine open $W$ with $y\\in W\\subseteq f^{-1}(U_a)$. Thus for every $y$ the set of pairs $(a,W)$ satisfying these conditions is nonempty. Choose one such pair for each $y$, and denote its components by $i(y)$ and $W_y$. This gives one function and one family with the required simultaneous containment; it makes no assertion that an inverse image or an intersection is affine.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01IT, lemma-basis-affine-opens; morphisms.tex Tag 07R4, lemma-J, last paragraph"
+   }
+  },
+  {
+   "text": "For each $y$, the chosen opens $U_{i(y)}\\subseteq X$ and $W_y\\subseteq Y$ are affine. If $z\\in W_y$, step 4 gives $z\\in f^{-1}(U_{i(y)})$, hence $f(z)\\in U_{i(y)}$; therefore $f(W_y)\\subseteq U_{i(y)}$. Apply the forward implication of [lem-weil-pbc-lft-affine-pairs] to the morphism $f$, locally of finite type by step 3, and this affine pair. It asserts directly that the map $\\mathcal O_X(U_{i(y)})\\to\\mathcal O_Y(W_y)$ induced by $f$ is of finite type, which is the map in the conclusion.",
+   "uses": [
+    "lem-weil-pbc-lft-affine-pairs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T2, lemma-locally-finite-type-characterize, (1) implies (2); Tag 07R4, lemma-J, last paragraph"
+   }
+  },
+  {
+   "text": "Every $y\\in Y$ lies in its own $W_y$, so $Y=\\bigcup_{y\\in Y}W_y$. Only a pointwise choice was used; the index set $I$ need not be finite. If $Y=\\varnothing$, take the empty function $|Y|\\to I$ and the empty family of opens. Their union is empty and all pointwise conditions are vacuous, including when $I=\\varnothing$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 07R4, lemma-J, affine refinement argument; explicit empty-case verification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-affine-open-locnoeth",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "def-weil-affine-spectrum",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-lft-pointwise-criterion",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-lft-affine-pairs"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 07R4, lemma-J, first paragraph and last paragraph; its affine finite-type input expanded using Tags 01T1, 01T2, 01T3, 01T5, 01T6, 01IT, 01OW and 00FN."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Given a locally Noetherian scheme X with an affine open cover U_i and a finite type algebra B over the ring of an affine open V, Spec B has an affine open cover W_j mapping into U_i with finite type coordinate ring maps",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {𝒰 : X.OpenCover} [Finite 𝒰.I₀] [∀ (i : 𝒰.I₀), AlgebraicGeometry.IsAffine (𝒰.X i)],\\n  AlgebraicGeometry.IsNoetherian X ↔ ∀ (i : 𝒰.I₀), IsNoetherianRing ↑((𝒰.X i).presheaf.obj (Opposite.op ⊤))\", \"doc\": \"For a scheme $X$ with a finite affine open cover $\\\\{U_i\\\\}$, $X$ is Noetherian if and only if the ring of global sections $\\\\Gamma(U_i, \\\\mathcal{O}_X)$ is a Noetherian ring for every $i$.\"}\n  {\"name\": \"AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {ι : Sort u_1} [Finite ι] {S : ι → ↑X.affineOpens},\\n  ⨆ i, ↑(S i) = ⊤ →\\n    (AlgebraicGeometry.IsNoetherian X ↔ ∀ (i : ι), IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑(S i))))\", \"doc\": \"For a scheme $X$ and a finite family of affine open subsets $\\\\{S_i\\\\}$ whose union is $X$, $X$ is Noetherian if and only if the ring of sections $\\\\Gamma(X, S_i)$ is a Noetherian ring for every $i$.\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_iff_of_affine_openCover\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) [∀ (i : 𝒰.I₀), AlgebraicGeometry.IsAffine (𝒰.X i)],\\n  AlgebraicGeometry.IsLocallyNoetherian X ↔ ∀ (i : 𝒰.I₀), IsNoetherianRing ↑((𝒰.X i).presheaf.obj (Opposite.op ⊤))\", \"doc\": \"A scheme $X$ is locally Noetherian if and only if, for every affine open cover $\\\\{U_i\\\\}$ of $X$, the ring of global sections $\\\\Gamma(U_i, \\\\mathcal{O}_X)$ is a Noetherian ring for each index $i$.\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_of_affine_cover\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {ι : Sort u_1} {S : ι → ↑X.affineOpens},\\n  ⨆ i, ↑(S i) = ⊤ →\\n    (∀ (i : ι), IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑(S i)))) → AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"If a scheme $ X $ admits an affine open cover $ \\\\{S_i\\\\} $ such that the union of all $ S_i $ is $ X $ and each ring of global sections $ \\\\Gamma(S_i) $ is Noetherian, then $ X $ is a locally Noetherian\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_iff_of_iSup_eq_top\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {ι : Sort u_1} {S : ι → ↑X.affineOpens},\\n  ⨆ i, ↑(S i) = ⊤ →\\n    (AlgebraicGeometry.IsLocallyNoetherian X ↔ ∀ (i : ι), IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑(S i))))\", \"doc\": \"For a scheme $X$, if a family of affine open subsets $\\\\{S_i\\\\}$ covers $X$ (i.e., $\\\\bigcup_i S_i = X$), then $X$ is locally Noetherian if and only if the ring of global sections $\\\\Gamma(X, S_i)$ is a N\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [inst : CompactSpace ↥X] (𝒰 : X.OpenCover)\\n  [∀ (i : 𝒰.I₀), AlgebraicGeometry.IsAffine (𝒰.X i)] (i : 𝒰.finiteSubcover.I₀),\\n  AlgebraicGeometry.IsAffine (𝒰.finiteSubcover.X i)\", \"doc\": \"For any compact scheme $X$ and an open cover $\\\\mathcal{U}$ of $X$ consisting of affine open subschemes, every finite subcover of $\\\\mathcal{U}$ also consists of affine open subschemes. Specifically, if\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsFinite fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.finiteType_of_affine_subset\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFiniteType f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is locally of finite type, $ U $ is an affine open subset of $ Y $, and $ V $ is an affine open subset of $ X $ contained in the preimage of $ U $ under $ f $, \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: affine refinements and finite type coordinate-map lemmas supply parts, but no hit constructs this affine test morphism, proves its local Noetherianity, and supplies the compatible point-indexed charts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Refine a scheme affine open cover along a locally finite type morphism with finitely generated algebras on each chart",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.affineRefinement\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"{X : AlgebraicGeometry.Scheme} → X.OpenCover → X.AffineOpenCover\", \"doc\": \"Given a scheme $X$ and an open cover $\\\\mathcal{U}$ of $X$, this function constructs an affine open cover by refining $\\\\mathcal{U}$ with affine open covers of its components. Specifically, it binds the\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [inst : CompactSpace ↥X] (𝒰 : X.OpenCover)\\n  [∀ (i : 𝒰.I₀), AlgebraicGeometry.IsAffine (𝒰.X i)] (i : 𝒰.finiteSubcover.I₀),\\n  AlgebraicGeometry.IsAffine (𝒰.finiteSubcover.X i)\", \"doc\": \"For any compact scheme $X$ and an open cover $\\\\mathcal{U}$ of $X$ consisting of affine open subschemes, every finite subcover of $\\\\mathcal{U}$ also consists of affine open subschemes. Specifically, if\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"(X : AlgebraicGeometry.Scheme) → X.OpenCover\", \"doc\": \"For a scheme $X$, this constructs an open cover consisting of affine open immersions $\\\\{\\\\operatorname{Spec}(R_x) \\\\to X\\\\}_{x \\\\in X}$ whose images form a jointly surjective family, ensuring every point \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme → Type (max (u + 1) (v + 1))\", \"doc\": \"A predicate on morphisms between schemes that assigns to each morphism $ f : X \\to Y $ the proposition that it is an affine cover, i.e., an affine morphism forming a cover in the Zariski topology.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"AlgebraicGeometry.Scheme → Type (max (v + 1) (u + 1))\", \"doc\": \"The type of affine open covers of a scheme $X$, which consists of collections of affine open immersions into $X$ whose images form a covering of $X$ in the Zariski topology. This is defined as the abb\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"(X : AlgebraicGeometry.Scheme) → X.AffineOpenCover\", \"doc\": \"For a scheme $X$, this constructs an open cover consisting of affine open immersions $\\\\{\\\\operatorname{Spec}(R_x) \\\\to X\\\\}_{x \\\\in X}$ whose images form a jointly surjective family, ensuring every point \"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineXSchemeAffineCover\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (x : ↥X), AlgebraicGeometry.IsAffine (X.affineCover.X x)\", \"doc\": \"Each element of the affine open cover of a scheme is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineBasisCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"(X : AlgebraicGeometry.Scheme) → X.OpenCover\", \"doc\": \"For any scheme $X$, this constructs an open cover by affine open immersions obtained by taking the standard affine open subsets (localizations at elements) of each affine open subscheme in $X$'s affin\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: affine refinements and finite type coordinate-map lemmas supply parts, but no hit constructs this affine test morphism, proves its local Noetherianity, and supplies the compatible point-indexed charts."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.Scheme.OpenCover",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: affine refinements and finite type coordinate-map lemmas supply parts, but no hit constructs this affine test morphism, proves its local Noetherianity, and supplies the compatible point-indexed charts."
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*(refin|cover)|locallyOfFiniteType.*(comp|Spec)|IsLocallyNoetherian",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"line\": \"92\", \"text\": \"  let 𝒰 := Y.openCoverOfIsOpenCover _ <| Y.isBasis_affineOpens.isOpenCover_mem_and_le\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"line\": \"93\", \"text\": \"    (S.isBasis_affineOpens.isOpenCover.comap b.hom)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"line\": \"202\", \"text\": \"an affine open cover of `Proj ℬ` consisting of `D(f(s))` for `s ∈ A` positive degree. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"line\": \"203\", \"text\": \"@[simps! I₀ f] noncomputable def mapAffineOpenCover : (Proj ℬ).AffineOpenCover :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"line\": \"204\", \"text\": \"  affineOpenCoverOfIrrelevantLESpan _ (fun s : (affineOpenCover 𝒜).I₀ ↦ f s.2) (fun s ↦ f.2 s.2.2)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"line\": \"211\", \"text\": \"  refine (mapAffineOpenCover _ <| irrelevant_le_map_comp hf hg).openCover.hom_ext _ _ fun s ↦ ?_\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"line\": \"212\", \"text\": \"  simp only [Scheme.AffineOpenCover.openCover_f, mapAffineOpenCover_f,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Properties.lean\", \"line\": \"39\", \"text\": \"  T0Space.of_open_cover fun x => ⟨_, X.affineCover.covers x,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Properties.lean\", \"line\": \"40\", \"text\": \"    (X.affineCover.f _).opensRange.2, IsEmbedding.t0Space (Y := PrimeSpectrum _)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Properties.lean\", \"line\": \"41\", \"text\": \"    (isAffineOpen_opensRange (X.affineCover.f _)).isoSpec.schemeIsoToHomeo.isEmbedding⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Properties.lean\", \"line\": \"45\", \"text\": \"    quasiSober_of_open_cover (Set.range fun x => Set.range <| (X.affineCover.f x))\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Properties.lean\", \"line\": \"46\", \"text\": \"  · rintro ⟨_, i, rfl⟩; exact (X.affineCover.f i).isOpenEmbedding.isOpen_range\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"line\": \"33\", \"text\": \"equipped with this structure sheaf is a scheme. We achieve this by using an affine cover by basic\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"26\", \"text\": \"- `AlgebraicGeometry.Proj.affineOpenCover`: The open cover of `Proj A` by `Spec (A_f)₀` for all\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"319\", \"text\": \"`Spec (A_f)₀ ⟶ Proj A` forms an affine open cover of `Proj A`. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"321\", \"text\": \"def affineOpenCoverOfIrrelevantLESpan {ι : Type*} (f : ι → A) {m : ι → ℕ}\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"324\", \"text\": \"    (Proj 𝒜).AffineOpenCover where\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"336\", \"text\": \"def affineOpenCover : (Proj 𝒜).AffineOpenCover :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"line\": \"624\", \"text\": \"lemma Scheme.Modules.exists_affineOpenCover_presentation {X : Scheme.{u}} (M : X.Modules)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"line\": \"626\", \"text\": \"    ∃ (𝒰 : Scheme.AffineOpenCover.{u} X),\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"line\": \"629\", \"text\": \"  refine ⟨Scheme.AffineOpenCover.ofIsOpenCover _ hU hU', fun i ↦ ⟨?_⟩⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"line\": \"160\", \"text\": \"instance (x : X) : IsAffine (X.affineCover.X x) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"line\": \"165\", \"text\": \"  let U : X.Opens := (X.affineCover.f ((X.affineCover.idx x))).opensRange\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"line\": \"166\", \"text\": \"  have hU : IsAffineOpen U := isAffineOpen_opensRange (X.affineCover.f _)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"line\": \"167\", \"text\": \"  let x : U := ⟨x, X.affineCover.covers x⟩\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: affine refinements and finite type coordinate-map lemmas supply parts, but no hit constructs this affine test morphism, proves its local Noetherianity, and supplies the compatible point-indexed charts."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine scheme from a finite type algebra over an affine open of a locally noetherian scheme admits affine charts over any given affine cover with finite type coordinate ring maps",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_of_affine_cover\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{ι} {S : ι → X.affineOpens} (hS : (⨆ i, S i : X.Opens) = ⊤) (hS' : ∀ i, IsNoetherianRing Γ(X, S i)) :\\n  IsLocallyNoetherian X\", \"doc\": \"If a scheme $ X $ admits an affine open cover $ \\\\{S_i\\\\} $ such that the union of all $ S_i $ is $ X $ and each ring of global sections $ \\\\Gamma(S_i) $ is Noetherian, then $ X $ is a locally Noetherian\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.finiteType_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFiniteType f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.\", \"doc\": \"For a morphism $ f: X \\to Y $ of schemes that is locally of finite type, if $ U $ is an affine open subset of $ Y $ and $ V $ is an affine open subset of $ X $ contained in $ f^{-1}(U) $, then the indu\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian.component_noetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsLocallyNoetherian X] (U : ↑X.affineOpens),\\n  IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑U))\", \"doc\": \"For a locally Noetherian scheme $ X $, the ring of sections over every affine open subset $ U $ of $ X $ is a Noetherian ring, i.e., $ \\\\mathcal{O}_X(U) $ is Noetherian.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineCover\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"(X : Scheme.{u}) : OpenCover X\", \"doc\": \"For a scheme $X$, this constructs an open cover consisting of affine open immersions $\\\\{\\\\operatorname{Spec}(R_x) \\\\to X\\\\}_{x \\\\in X}$ whose images form a jointly surjective family, ensuring every point \"}\n  {\"name\": \"AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{𝒰 : Scheme.OpenCover.{v, u} X} [Finite 𝒰.I₀] [∀ i, IsAffine (𝒰.X i)] :\\n  IsNoetherian X ↔ ∀ (i : 𝒰.I₀), IsNoetherianRing Γ(𝒰.X i, ⊤)\", \"doc\": \"For a scheme $X$ with a finite affine open cover $\\\\{U_i\\\\}$, $X$ is Noetherian if and only if the ring of global sections $\\\\Gamma(U_i, \\\\mathcal{O}_X)$ is a Noetherian ring for every $i$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineCover.map\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.MorphismProperty\", \"type\": \"{P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n  {S : AlgebraicGeometry.Scheme} →\\n    (self : AlgebraicGeometry.Scheme.AffineCover P S) → (j : self.I₀) → AlgebraicGeometry.Spec (self.X j) ⟶ S\", \"doc\": \"For a scheme $ S $ and an affine cover satisfying property $ P $, this function assigns to each index $ j $ in the indexing type $ I₀ $ the morphism from the affine scheme $ \\\\operatorname{Spec}(R_j) $\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.finiteType_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFiniteType f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes that is locally of finite type. For any affine open subset $U \\\\subseteq Y$ and affine open subset $V \\\\subseteq X$ contained in $f^{-1}(U)$, the induced ring h\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCover\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"(X : Scheme.{u}) : X.AffineOpenCover\", \"doc\": \"For a scheme $X$, this constructs an open cover consisting of affine open immersions $\\\\{\\\\operatorname{Spec}(R_x) \\\\to X\\\\}_{x \\\\in X}$ whose images form a jointly surjective family, ensuring every point \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: affine refinements and finite type coordinate-map lemmas supply parts, but no hit constructs this affine test morphism, proves its local Noetherianity, and supplies the compatible point-indexed charts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine scheme of a finite type algebra over an affine open of a locally Noetherian scheme has affine charts over any prescribed affine open cover",
+   "results": "8 hits; AlgebraicGeometry.Scheme.isAffine_affineOpenCover; AlgebraicGeometry.isLocallyNoetherian_of_affine_cover; AlgebraicGeometry.instIsAffineXSchemeAffineCover; AlgebraicGeometry.Scheme.isAffine_affineCover; AlgebraicGeometry.isLocallyNoetherian_iff_of_affine_openCover; AlgebraicGeometry.Scheme.isAffine_affineBasisCover; AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover; AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give constituent facts, not the full affine test-algebra construction, local Noetherianity, and point-indexed chart family; use existing DAG leaves for the constituents."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteType_appLE|locallyOfFiniteType_comp|component_noetherian|affineRefinement",
+   "results": "25 hits; Mathlib/AlgebraicGeometry/SpreadingOut.lean; Mathlib/AlgebraicGeometry/Noetherian.lean; Mathlib/AlgebraicGeometry/Noetherian.lean; Mathlib/AlgebraicGeometry/Noetherian.lean; Mathlib/AlgebraicGeometry/Noetherian.lean; Mathlib/AlgebraicGeometry/Noetherian.lean; Mathlib/AlgebraicGeometry/Cover/Open.lean; Mathlib/AlgebraicGeometry/Cover/Open.lean. Source grep restricted to Mathlib/AlgebraicGeometry; read FiniteType.lean:37-70, Noetherian.lean:56-60 and Cover/Open.lean:151-161.",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give constituent facts, not the full affine test-algebra construction, local Noetherianity, and point-indexed chart family; use existing DAG leaves for the constituents."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine scheme of a finite type algebra over an affine open of a locally Noetherian scheme admits affine charts over any affine cover with finite type coordinate ring maps",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.finiteType_appLE; AlgebraicGeometry.isLocallyNoetherian_of_affine_cover; AlgebraicGeometry.LocallyOfFiniteType.finiteType_appLE; AlgebraicGeometry.LocallyOfFiniteType.finiteType_of_affine_subset; AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian; AlgebraicGeometry.IsLocallyNoetherian.component_noetherian; AlgebraicGeometry.LocallyOfFiniteType.mk; AlgebraicGeometry.Scheme.affineCover",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give constituent facts, not the full affine test-algebra construction, local Noetherianity, and point-indexed chart family; use existing DAG leaves for the constituents."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.Scheme.OpenCover",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give constituent facts, not the full affine test-algebra construction, local Noetherianity, and point-indexed chart family; use existing DAG leaves for the constituents."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Refine an affine cover along a locally finite type scheme morphism by point indexed affine open neighborhoods with finitely generated coordinate algebras",
+   "results": "8 hits; AlgebraicGeometry.Scheme.OpenCover.affineRefinement; AlgebraicGeometry.Scheme.OpenCover.fromAffineRefinement; AlgebraicGeometry.Scheme.affineCover; AlgebraicGeometry.Scheme.AffineCover; AlgebraicGeometry.Scheme.affineBasisCover; AlgebraicGeometry.Scheme.affineOpenCover; AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover; AlgebraicGeometry.Scheme.AffineCover.cover",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give constituent facts, not the full affine test-algebra construction, local Noetherianity, and point-indexed chart family; use existing DAG leaves for the constituents."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-j2-affine-cover",
+  "date": "2026-10-22",
+  "group": "Q91"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Expose X, proof of Theorem 3.5, Step 5 (as recorded on lem-trf-projective-inseparable-spread-normalization): the spread Y' and the replacement of X must again be excellent schemes; excellence is verified on an affine cover of the finite normalization charts and passed to every affine open. Component-locality fact used to pass excellence from normalization charts to arbitrary affine opens: The J-2 property passes from an affine open cover to every affine open. proof, first paragraph (open immersion and composition), second paragraph (finite type test algebra over an affine open), and last paragraph (affine refinement over the given charts). This is the full geometric preparation of returned steps 1--3, without a J-2 hypothesis or conclusion.",
+   "via": [
+    "lem-trf-j2-affine-cover",
+    "lem-trf-excellent-scheme-affine-cover",
+    "lem-trf-projective-inseparable-spread-normalization",
+    "lem-trf-generic-smooth-boundary-preparation"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-affine-test-algebra-chart-refinement",
+  "worker": "stage1",
+  "summary": "Expanded the geometric preparation of Stacks 07R4 into six proof steps using existing DAG nodes only. Verified the precise pointwise and all-affine-pairs finite type criteria, the locally finite type clause of composition, Noetherianity of affine section rings and finite type algebras, and affine neighbourhood refinement. Preserved the statement and checked empty schemes, empty cover indices and infinite covers. No new nodes or statement corrections. Repair of the 2026-10-22 return at 36d783ab79f: rebased onto the current live unsplit item, reread every live statement dependency and proof dependency, and checked all ten retained quotation witnesses. Expanded steps 4 and 5 to make the simultaneous point-indexed choice and its exact image-containment hypothesis explicit; the statement, route, node set and recorded searches are retained. Continued the retained repair against the latest return head 75425e0dc52 on 2026-10-23: rechecked the current live statements and all quotation witnesses, made the singleton-cover empty case explicit in step 1, supplied both affine-pair witnesses and the vacuous case in step 2, and specified both morphism substitutions and the precise composition alternative in step 3. Initial retained-split dry run passed at 1c48e107cde; the final revised split is checked again before pushing.",
+  "blueprint": "Expose X, proof of Theorem 3.5, Step 5 (as recorded on lem-trf-projective-inseparable-spread-normalization): the spread Y' and the replacement of X must again be excellent schemes; excellence is verified on an affine cover of the finite normalization charts and passed to every affine open. Component-locality fact used to pass excellence from normalization charts to arbitrary affine opens: The J-2 property passes from an affine open cover to every affine open. proof, first paragraph (open immersion and composition), second paragraph (finite type test algebra over an affine open), and last paragraph (affine refinement over the given charts). This is the full geometric preparation of returned steps 1--3, without a J-2 hypothesis or conclusion."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q108-16c9fd0e7",
+  "group": "Q108",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-16c9fd0e7 (reviewer sub-agent of L); spot-checked: I read the item, the report, all 13 cited node statements and Stacks morphisms.tex Tag 07R4 (lemma-J, line 3310). The delivery has 0 new nodes. The statement, stmt_deps, source and created fields are the same as at earlier heads 36d783ab79fc and 75425e0dc527. Only steps 1–3 are reworded relative to 75425e0dc527, and the 9 proof_deps are unchanged. The item is still unsplit in clones/live and clones/side-live, so no other group has superseded it. The statement is true. I tested it on X=Spec k with B=k[x], on B=0 (Y empty), on I empty (which forces X=V=Y empty) and on an infinite I. Step checks: (1) pqf-lem-affine-open-locnoeth gives R Noetherian, lem-weil-pbc-finite-type-algebra-noetherian gives B Noetherian, and a one-chart cover satisfies the definition pqf-def-locnoeth. (2) The reverse direction of the pointwise criterion with the pair (Y,V) and the map R→B makes h locally of finite type. (3) The open inclusion is an immersion (identity closed immersion followed by an open immersion), so clause (2) of the immersion node makes it locally of finite type, and clause (e) of the permanence node makes f=j∘h locally of finite type. (4) The affine-opens-basis node lets us choose the pair (i(y),W_y) jointly. (5) The forward all-affine-pairs criterion gives the finite type maps O(U_i)→O(W_y). (6) Covering and empty cases are elementary. This matches 07R4 proof paragraphs 1 and 3, without J-2. All dependencies are Mathlib-matched statements or definitions, so no tool_uses are needed, and there is no SGA citation. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineTestAlgebraChartRefinement",
+  "declaration": "AlgebraicGeometry.affine_test_algebra_chart_refinement",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineTestAlgebraChartRefinement.lean",
+  "statement": "theorem affine_test_algebra_chart_refinement (X : Scheme.{u}) [IsLocallyNoetherian X] {I : Type v} (U : I → X.affineOpens) (hcover : (⨆ a, (U a).1) = ⊤) (V : X.affineOpens) (B : Type u) [CommRing B] (φ : Γ(X, V.1) →+* B) (hφ : φ.FiniteType) : IsNoetherianRing Γ(X, V.1) ∧ LocallyOfFiniteType (Spec.map (CommRingCat.ofHom φ) ≫ V.2.isoSpec.inv) ∧ LocallyOfFiniteType (Spec.map (CommRingCat.ofHom φ) ≫ V.2.fromSpec) ∧ IsLocallyNoetherian (Spec (CommRingCat.of B)) ∧ ∃ (i : Spec (CommRingCat.of B) → I) (W : Spec (CommRingCat.of B) → (Spec (CommRingCat.of B)).affineOpens), (∀ y, y ∈ (W y).1) ∧ (⨆ y, (W y).1) = ⊤ ∧ ∃ e : ∀ y, (W y).1 ≤ (Spec.map (CommRingCat.ofHom φ) ≫ V.2.fromSpec) ⁻¹ᵁ (U (i y)).1, ∀ y, ((Spec.map (CommRingCat.ofHom φ) ≫ V.2.fromSpec).appLE (U (i y)).1 (W y).1 (e y)).hom.FiniteType",
+  "branch": "newtargets-dag",
+  "by": "Q30",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0927c9254",
+  "group": "Q30",
+  "result": "pass",
+  "note": "Lean-only delivery (node differs from side-live only in lean; statement verbatim in file). Every clause matches the node: X locally Noetherian, affine cover U : I → affineOpens with ⨆=⊤ (I : Type v, no finiteness), R = Γ(X,V.1), φ.FiniteType, h = Spec.map φ ≫ V.2.isoSpec.inv (isoSpec : V ≅ Spec Γ, AffineScheme.lean:388), f = … ≫ fromSpec (= isoSpec.inv ≫ ι, :427). Conclusions: IsNoetherianRing, LocallyOfFiniteType h and f, IsLocallyNoetherian Spec B, ∃ i, W with y ∈ W y, ⨆ W = ⊤, ∃ e containment, appLE FiniteType. All 6 stmt_deps are existing Mathlib records and are used exactly; no duplicate notion. Empty Y / empty I / infinite I covered; B in universe u is forced and loses no generality. Docstrings carry Stacks 07R4 + blueprint + 6 proof steps; proof is sorry only; both report sections present. No file changed, so no compile."
+ }
+}

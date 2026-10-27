@@ -18,12 +18,27 @@
  ],
  "proof": [
   {
-   "text": "For an object $V$ of $X_{\\mathrm{proét}}$, the structure map $V\\to X$ factors through\nthe monomorphism $j$ in at most one way. Hence $j^{\\Ab}_!N$, the sheafification of the\nleft Kan extension along the localization functor\n([sk-def-sfb-finite-lower-shriek]), is the sheafification of the presheaf\n\n$$\nV\\longmapsto\\begin{cases}N(V)&\\text{if }V\\to X\\text{ factors through }U,\\\\\n0&\\text{otherwise.}\\end{cases}\n$$\n\nThe tensor product of sheaves is the sheafification of the objectwise tensor product,\nand sheafification is monoidal, $a(P\\otimes Q)\\cong a(aP\\otimes aQ)$\n([sk-def-sfb-sheaf-tensor]); for $V\\to X$ factoring through $U$ one has\n$(j^*_{\\Ab}L)(V)=L(V)$. Therefore both\n$j^{\\Ab}_!(j^*_{\\Ab}L\\otimes M)$ and $L\\otimes j^{\\Ab}_!M$ are the sheafification of\nthe same presheaf\n\n$$\nV\\longmapsto\\begin{cases}L(V)\\otimes M(V)&\\text{if }V\\to X\\text{ factors through }U,\\\\\n0&\\text{otherwise,}\\end{cases}\n$$\n\nand unwinding the definition of the canonical map shows that it is the\nsheafification of the identity of this presheaf. So it is an isomorphism.",
+   "text": "Use the existing support isomorphism ProEtale.openImmersionLowerShriekTensorIso for abelian sheaves. It identifies j_! M tensor L with j_! of the sheafification of the presheaf M tensor the restriction of L. This is the sheafified localization Kan-extension and monoidal-sheafification argument of the source proof. Compose with the symmetry to put L tensor j_! M in the essential image of j_!.",
    "uses": [
     "sk-def-sfb-finite-lower-shriek",
     "sk-def-sfb-sheaf-tensor"
    ],
    "elementary": false
+  },
+  {
+   "text": "The left adjoint j_! is fully faithful, so its adjunction unit is invertible. By Adjunction.isIso_counit_app_of_iso, the counit at L tensor j_! M is invertible, because this target lies in the essential image established in the previous step.",
+   "uses": [
+    "sk-def-sfb-finite-lower-shriek"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Unfold Adjunction.projectionFormulaMap and homEquiv_counit. The canonical map is j_! applied to the composite of tensoring the invertible unit with the identity and the invertible strong-monoidal comparison, followed by the counit at L tensor j_! M. Each factor is invertible, so the map is invertible. This proves the original CondensedRing.hasProjectionFormula_openImmersion instance, not merely existence of an unrelated isomorphism.",
+   "uses": [
+    "sk-def-sfb-finite-lower-shriek",
+    "sk-def-sfb-sheaf-tensor"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -32,8 +47,8 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/lem-sfb-open-projection-formula.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/lem-sfb-open-projection-formula.proof.md",
+  "place": "Sheafified localization Kan-extension argument, using the existing proved support isomorphism in WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Projection; implemented by W2, 2026-10-23."
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -69,7 +84,43 @@
   "note": "Existing source declaration, proved upstream with the standard axioms only. Its map is Adjunction.projectionMap for openImmersionLowerShriekUpperStarAdjunction (j_! ⊣ j^*, j_! the sheafified localization Kan extension recorded by sk-def-sfb-finite-lower-shriek) and the strong monoidal structure μNatTrans of upperStar, i.e. the unit-adjoint canonical map of the node. The coefficient category A is generic (Category.{u+1}, abelian Grothendieck, closed symmetric monoidal); the node's abelian sheaves are A = Ab.{u+1} with the ⊗_ℤ structure AddCommGrpCat.monoidalCategory (WeilConjectures.CategoryTheory.RingObjects.Ab), for which the instance applies, and the sheaf tensor instance is rfl-equal to (sfbSheafTensorStructure J).monoidal of sk-def-sfb-sheaf-tensor. Variable correspondence: the declaration's K is the node's M and its M is the node's L; the source writes j_!(M ⊗ j^*L) → j_!M ⊗ L, the node's j_!(j^*L ⊗ M) → L ⊗ j_!M, the same canonical map conjugated by the symmetry of the sheaf tensor. Module path: the upstream sync bcf29a2028 moved LowerShriek.OpenImmersion.* to FiniteCoefficient.LowerShriek.Open.*; the old path survives only as a stale side copy whose import clashes with the live FiniteCoefficient modules recorded by sk-def-sfb-finite-lower-shriek (reviewer fix).",
   "fixed_by": "NT-stage2-cc-cbdced5e8"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.CondensedRing.hasProjectionFormula_openImmersion",
+    "AlgebraicGeometry.ProEtale.isIso_openImmersionLowerShriekProjectionMap_app_app"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.hasProjectionFormula_openImmersion",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs",
+     "lines": [
+      79,
+      84
+     ],
+     "kind": "theorem",
+     "sorry": true
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.isIso_openImmersionLowerShriekProjectionMap_app_app",
+     "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Projection",
+     "lines": [
+      238,
+      247
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-six-functors-basics",
  "unit": "sk-def-sfb-module-lower-shriek",
  "reviewed_lean": {
@@ -79,5 +130,35 @@
   "group": "Q21",
   "result": "fix",
   "note": "Mathematics correct: the existing proved upstream instance isIso_openImmersionLowerShriekProjectionMap_app_app states the node, with no stronger hypotheses. Its map is Adjunction.projectionMap of openImmersionLowerShriekUpperStarAdjunction (the same declarations sk-def-sfb-finite-lower-shriek records) with μNatTrans of upperStar. It specializes to Ab.{u+1} with the ⊗_ℤ structure (compiled, instance found); the sheaf tensor is rfl-equal to sfbSheafTensorStructure.monoidal of sk-def-sfb-sheaf-tensor (compiled). The tensor-order swap is symmetry conjugation only. Edge cases and universes are fine; the statement is verbatim (check_existing clean); axioms are standard; the report sections are present. F1 (H4/(d), mechanical): lean.module LowerShriek.OpenImmersion.Projection is stale after upstream sync bcf29a2028. The old side copy clashes on import with the live FiniteCoefficient modules recorded by the lower-shriek dependency (nt_compile: environment already contains fullyFaithfulOpenImmersionLowerShriek). Fix: fixes/lem-sfb-open-projection-formula.lean-record.json sets module to WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Projection with an updated note; declaration, statement, branch and existing are unchanged. The probe with the fixed imports compiles clean."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $j\\colon U\\to X$ be an open immersion, and $j^{\\Ab}_!\\dashv j^*_{\\Ab}$ the\nextension by zero and the pullback of abelian pro-étale sheaves\n([sk-def-sfb-finite-lower-shriek], [sk-def-sfb-finite-pushforward-pullback]). For\n$L\\in\\Sh(X_{\\mathrm{proét}},\\Ab)$ and $M\\in\\Sh(U_{\\mathrm{proét}},\\Ab)$ the canonical\nmap\n\n$$\nj^{\\Ab}_!(j^*_{\\Ab}L\\otimes M)\\longrightarrow L\\otimes j^{\\Ab}_!M,\n$$\n\nadjoint to $j^*_{\\Ab}L\\otimes M\\to j^*_{\\Ab}L\\otimes j^*_{\\Ab}j^{\\Ab}_!M\\cong\nj^*_{\\Ab}(L\\otimes j^{\\Ab}_!M)$ (unit of $j^{\\Ab}_!\\dashv j^*_{\\Ab}$ and strong\nmonoidality of $j^*_{\\Ab}$), is an isomorphism; here $\\otimes$ is the tensor product\nof [lem-weil-pbc-sheaf-tensor-closed].",
+  "proof": [
+   {
+    "text": "For an object $V$ of $X_{\\mathrm{proét}}$, the structure map $V\\to X$ factors through\nthe monomorphism $j$ in at most one way. Hence $j^{\\Ab}_!N$, the sheafification of the\nleft Kan extension along the localization functor\n([sk-def-sfb-finite-lower-shriek]), is the sheafification of the presheaf\n\n$$\nV\\longmapsto\\begin{cases}N(V)&\\text{if }V\\to X\\text{ factors through }U,\\\\\n0&\\text{otherwise.}\\end{cases}\n$$\n\nThe tensor product of sheaves is the sheafification of the objectwise tensor product,\nand sheafification is monoidal, $a(P\\otimes Q)\\cong a(aP\\otimes aQ)$\n([lem-weil-pbc-sheaf-tensor-closed]); for $V\\to X$ factoring through $U$ one has\n$(j^*_{\\Ab}L)(V)=L(V)$. Therefore both\n$j^{\\Ab}_!(j^*_{\\Ab}L\\otimes M)$ and $L\\otimes j^{\\Ab}_!M$ are the sheafification of\nthe same presheaf\n\n$$\nV\\longmapsto\\begin{cases}L(V)\\otimes M(V)&\\text{if }V\\to X\\text{ factors through }U,\\\\\n0&\\text{otherwise,}\\end{cases}\n$$\n\nand unwinding the definition of the canonical map shows that it is the\nsheafification of the identity of this presheaf. So it is an isomorphism.",
+    "uses": [
+     "sk-def-sfb-finite-lower-shriek",
+     "lem-weil-pbc-sheaf-tensor-closed"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261023T135725-L-2964826",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

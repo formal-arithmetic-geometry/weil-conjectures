@@ -1,0 +1,106 @@
+{
+ "id": "lem-zl-frobenius-power-composition-geometric",
+ "kind": "statement",
+ "title": "Geometric composition for the recursive Frobenius-power comparison",
+ "statement": "Let k be a finite field, l a prime, and X a k-scheme. On the geometric fibre write g for the geometric Galois Frobenius and F_n=((g^n).inv)_* and G=(g.inv)_*. Write q_n:F_n ≅ G.iterate n for the recursively defined power comparison and C_(m,n) for the ordered composition of these comparisons [lem-zl-frobenius-power-return-commutation]. For natural numbers m,n and any equality h:(g^m).inv ; (g^n).inv=(g^(m+n)).inv, one has C_(m,n)=adicLowerStarComp ; adicLowerStarCongr(h) ; q_(m+n). This includes zero exponents.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Power-composition coherence in step 2 of the geometric orbit argument and the single-return transport square."
+ },
+ "stmt_deps": [
+  "lem-zl-frobenius-power-return-commutation"
+ ],
+ "proof": [
+  {
+   "text": "Induct on n. At zero, naturality of q_0 and the right unit law for lowerStarFactor identify the two components. At a successor, naturality of the recursive powerStep gives the recursion for C_(m,n+1). Apply lowerStarFactor_assoc to the three inverse powers and cancel its two outer factorisation isomorphisms. The resulting equation is the same successor recursion for the geometric compositor. Apply the induction hypothesis and extensionality of natural isomorphisms. The factorisation identities lift from underlying sheaves to adic modules by Mod.hom_ext.",
+   "uses": [
+    "lem-zl-frobenius-power-return-commutation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-frobenius-power-return-commutation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Power-composition coherence in step 2 of the geometric orbit argument and the single-return transport square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coherence identifies the recursive comparison of inverse pushforwards along powers with the geometric pushforward composition isomorphism",
+   "results": "Scheme.Modules.pushforwardComp; Scheme.Modules.pseudofunctor_mapComp_inv_τr; Scheme.Modules.conjugateEquiv_pullbackComp_inv; Functor.sheafPushforwardContinuousComp'_inv_app_val_app.",
+   "date": "2026-10-27",
+   "verdict": "General composition coherence exists, but none identifies the project-specific recursive comparison. Use the source factorisation unit and associativity APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"iterate\", \"comp\"",
+   "results": "Function.comp_iterate_pred_of_pos; Function.iterate_pred_comp_of_pos; Function.Commute.comp_iterate; other results concern monotone functions, relations and polynomials.",
+   "date": "2026-10-27",
+   "verdict": "No natural-isomorphism comparison for Frobenius powers."
+  },
+  {
+   "tool": "grep",
+   "query": "frobeniusPowerCompositionIso|frobeniusPowPullbackIterateIso",
+   "results": "No Mathlib matches.",
+   "date": "2026-10-27",
+   "verdict": "The recursive comparison is specific to this project."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.DeligneLaumon.FrobeniusPowerTranslateStructure",
+  "date": "2026-10-27",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-frobenius-power-translate-structure",
+   "place": "The power-composition identification used to turn the formal commutor into its geometric square.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.DeligneLaumon.FrobeniusPowerCompositionGeometry",
+  "file": "lean/Sheaf/DeligneLaumon/FrobeniusPowerCompositionGeometry.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.frobeniusPowerCompositionIso_geometric",
+  "declarations": [
+   "AlgebraicGeometry.ProEtaleWeilSheaf.frobeniusPowerCompositionIso_geometric"
+  ],
+  "statement": "theorem frobeniusPowerCompositionIso_geometric (m n : ℕ)\n    (h : ((X ↘ Spec (.of k₀)).geometricGaloisFrobenius ^ m).inv ≫\n      ((X ↘ Spec (.of k₀)).geometricGaloisFrobenius ^ n).inv =\n      ((X ↘ Spec (.of k₀)).geometricGaloisFrobenius ^ (m + n)).inv) :\n    frobeniusPowerCompositionIso (k₀ := k₀) (l := l) (X := X) m n =\n      adicLowerStarComp l _ _ ≪≫ adicLowerStarCongr l h ≪≫\n        frobeniusPowPullbackIterateIso (m + n)",
+  "context": "variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]\n  {X : Scheme.{u}} [X.Over (Spec (.of k₀))]",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261027T034758-L-3685980",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261027T034758-L-3685980",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

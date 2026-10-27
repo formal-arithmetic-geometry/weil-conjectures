@@ -1,0 +1,196 @@
+{
+ "id": "lem-sf-completed-projection-exchange-domains",
+ "kind": "lemma",
+ "title": "Uniform domains for the four projection diamond words",
+ "statement": "Fix D, l != D.p, E/Q_l finite, the strict-system operations o and a compactified Cartesian square Q of separated finite-type maps [def-sf-completed-projection-exchange-data]. For integral bounded constructible K on X and integral finite-Tor bounded constructible L on Y, all four words word(Q,i) are geometric and their input family (K,L) lies in their actual recursive domain, including every hidden open intermediate. Moreover the completed source word and completed target word are bounded constructible. No Tor condition on K is added.",
+ "stmt_deps": [
+  "def-sf-completed-projection-exchange-data",
+  "def-sf-integral-system-realization-data",
+  "def-sf-integral-system-expression-domain",
+  "def-fix-six-functor-datum",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-tor-amplitude"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Projection diamonds sentence, expanded in the parent node steps 2--11; Stacks 0941, 0GL1 and 0E48."
+ },
+ "proof": [
+  {
+   "text": "Choose a cohomological interval $[a,b]$ for $K_1$; [lem-coef-integral-residue-tor] gives this same Tor interval for every $K_n$. Choose $[c,d]$ for all $L_n$ from the hypothesis on $L$. For every finite-level word use the following interval rules. Each separated finite-type pullback preserves bounded constructibility and its Tor interval by [lem-sf-pullback-tor-amplitude]; tensor adds the two intervals and preserves bounded constructibility by [lem-sf-tensor-ctf]. A quasi-compact open extension preserves bounded constructibility and the cohomological interval by [lem-sf-open-finite-constructibility-interval]; its Tor interval is unchanged because [lem-sf-open-tensor-normalization] identifies $(j_!B)\\otimes^LV$ with $j_!(B\\otimes^Lj^*V)$ for every degree-zero test sheaf $V$, and both restriction and extension are exact. Thus these rules apply uniformly in $n$ to $FN,UFN,K_0\\otimes UFN,M,Q$ and their primed and pulled-back versions. All schemes involved are finite type, hence Noetherian, so the open-extension theorem applies. Neither a Tor assumption on $K$ nor a flatness assumption on its cohomology has been added.",
+   "uses": [
+    "lem-coef-integral-residue-tor",
+    "lem-sf-pullback-tor-amplitude",
+    "lem-sf-tensor-ctf",
+    "lem-sf-open-finite-constructibility-interval",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Finite-level constructibility and Tor intervals for pullback, tensor, and open extension."
+   }
+  },
+  {
+   "text": "For a proper letter $r:Z\\to B$, choose a finite nonnegative bound $d_Z$ on $\\dim Z$ using [lem-cbc-compactification-geometry-fibre-bound], applied first to the finite-type structure maps over $\\operatorname{Spec}k$ (dimension zero and a Noetherian field). This also supplies finite affine Noetherian covers; for an empty source take $d_Z=0$. Before each proper letter, [lem-sf-proetale-constructible-origin] supplies bounded constructible etale origins of its levels, and [lem-sf-comparison-tor-amplitude](ii) gives those origins the same Tor interval. Apply [cor-sf-direct-image-ctf-etale-origin], in the setting explicitly given by [cor-sf-direct-image-ctf-nonproper]: a proper letter sends $[u,v]$ to $[u,v+2d_Z]$ and preserves bounded constructibility. This applies to $SM,SQ,SJ(K_0\\otimes UFN)$ and the corresponding primed outputs. Reapply the pullback and tensor rules of step 2 to these outputs. This is induction on the actual finite expression trees: the input case is step 2 and each constructor uses only its already treated children. Each tree has finitely many constructors; its endpoints involve only input endpoints, sums, and finitely many $2d_Z$, so are independent of $n$. In particular this proves bounds for all four vertices and for the extra pullback/tensor words in their adjunction transposes.",
+   "uses": [
+    "lem-cbc-compactification-geometry-fibre-bound",
+    "lem-sf-proetale-constructible-origin",
+    "lem-sf-comparison-tor-amplitude",
+    "cor-sf-direct-image-ctf-etale-origin",
+    "cor-sf-direct-image-ctf-nonproper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Proper-image finite-level bounds: origins reflected to the etale site and coefficient-independent dimension bound."
+   }
+  },
+  {
+   "text": "Check normalization for these actual systems, not for a chosen family of evaluated objects. Input reductions are normalized by [lem-pur-normalized-actual-reconstruction-maps]. [lem-pur-system-normalized-tensor-closure] gives normalization of pullbacks and tensors, with the actual transition-adjoints and their quotient cocycles. For an open letter, [lem-sf-open-tensor-normalization] applied also to scalar quotient tensors identifies its transition-adjoint with $j_!\\alpha_{m,n}$, hence an isomorphism. For a proper letter $r$, [lem-pur-coefficient-system-derived-comparison] identifies its evaluated transitions and adjunctions with the levelwise ones. Its transition-adjoint is\n$$(Rr_{*,m}B_m)\\otimes^L_{A_m}A_n\\xrightarrow{\\chi_{r,B_m}}Rr_{*,n}(B_m\\otimes^L_{A_m}A_n)\\xrightarrow{Rr_{*,n}(\\alpha_{m,n})}Rr_{*,n}B_n.$$\nThe first arrow is exactly the counit-defined scalar mate by [lem-fix-proetale-scalar-mate-normalization]; [lem-fix-proper-etale-origin-scalar-isomorphism] makes it invertible. Its hypotheses hold: the origin of $B_m$ has the finite Tor interval of step 3, so its tensor with the degree-zero $A_n$ is bounded below. The second arrow is invertible by induction. Thus $S_r$ preserves normalization on these inputs. The formula is the scalar-adjunction transpose of the actual transition, using the stated counit equation, so no detection of equality of system maps by evaluation occurs. Induction treats every intermediate, including $J_jK_0$ and $S_pJ_jK_0$.",
+   "uses": [
+    "lem-pur-normalized-actual-reconstruction-maps",
+    "lem-pur-system-normalized-tensor-closure",
+    "lem-sf-open-tensor-normalization",
+    "lem-pur-coefficient-system-derived-comparison",
+    "lem-fix-proetale-scalar-mate-normalization",
+    "lem-fix-proper-etale-origin-scalar-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Actual normalization maps under the four constructors; proper scalar mate: Tag 0F0G, lemma-projection-formula-proper-mod-n."
+   }
+  },
+  {
+   "text": "For each intermediate normalized system $B$, choose bounded constructible origins $E_n$ with $\\alpha_n:\\nu^*E_n\\cong B_n$ by [lem-sf-proetale-constructible-origin]. [lem-weil-pbc-normalized-etale-origin-witnesses] supplies the unique quotient isomorphisms $\\beta_{m,n}$ satisfying\n$$\\alpha_n\\nu^*\\beta_{m,n}=\\rho^B_{m,n}(\\alpha_m\\otimes A_n),$$\nand their identity/tower cocycles. These are witnesses compatible with the actual transitions, rather than presumed extra input data. By [lem-pur-normalized-actual-reconstruction-maps], $\\mathcal LB$ is complete and its actual counit $\\mathcal R\\mathcal LB\\to B$ is invertible; the constructibility and common cohomological interval already proved therefore put $\\mathcal LB$ in $D^b_c$ by [def-weil-derived-complete-integral-detailed]. In particular this constructs complete integral inputs when a compact-support word is applied to a pulled-back or tensored input. [lem-coef-compact-support-normalized-realization] specifies the normalized quotient transitions of these compact-support outputs, and [lem-sf-integral-compact-support-constructible] puts their specified total limits in $D^b_c$. This is consistent with the normalization just proved for the actual $S_pJ_j$ system; it is not an identification of system maps from their finite evaluations.",
+   "uses": [
+    "lem-sf-proetale-constructible-origin",
+    "lem-weil-pbc-normalized-etale-origin-witnesses",
+    "lem-pur-normalized-actual-reconstruction-maps",
+    "def-weil-derived-complete-integral-detailed",
+    "lem-coef-compact-support-normalized-realization",
+    "lem-sf-integral-compact-support-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Construct compatible witnessed origins and complete integral intermediates before invoking expression realization."
+   }
+  },
+  {
+   "text": "Restrict the preceding bounds to any chosen finite affine target cover and its inverse images. Repeating the same constructor rules there gives local intervals independent of $n$. For the finite set of chart/word intervals $[a_i,b_i]$, take $a=\\min_i a_i$, $b=\\max_i b_i$. [lem-sf-finite-cover-ctf-locality] gives global constructibility and Tor amplitude $[a,b]$ on each scheme: for every degree-zero test module the forbidden-degree cohomology restricts to zero on the cover and hence is zero. For an empty scheme the zero object has interval $[0,0]$. Origins are obtained by step 5 for the global constructible objects, not by gluing independently chosen arrows. Consequently every intermediate in the four words satisfies the actual domain proviso, and we may now apply [lem-sf-integral-compactification-system-realization]. It supplies the simultaneous ringed-diagram-site models, canonical system adjunctions, and natural realizations $c_V$ intertwining generators also inside the outer expressions. No absolute separatedness over $k$, affine-intersection assertion, or restriction on $K$ beyond the original statement was used.",
+   "uses": [
+    "lem-sf-finite-cover-ctf-locality",
+    "lem-sf-integral-compactification-system-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Finite-cover globalization, then the now-discharged domain of integral expression realization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "cor-sf-direct-image-ctf-etale-origin",
+  "cor-sf-direct-image-ctf-nonproper",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-cbc-compactification-geometry-fibre-bound",
+  "lem-coef-compact-support-normalized-realization",
+  "lem-coef-integral-residue-tor",
+  "lem-fix-proetale-scalar-mate-normalization",
+  "lem-fix-proper-etale-origin-scalar-isomorphism",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-pur-normalized-actual-reconstruction-maps",
+  "lem-pur-system-normalized-tensor-closure",
+  "lem-sf-comparison-tor-amplitude",
+  "lem-sf-finite-cover-ctf-locality",
+  "lem-sf-integral-compact-support-constructible",
+  "lem-sf-integral-compactification-system-realization",
+  "lem-sf-open-finite-constructibility-interval",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-pullback-tor-amplitude",
+  "lem-sf-tensor-ctf",
+  "lem-weil-pbc-normalized-etale-origin-witnesses"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Projection diamonds sentence, expanded in the parent node steps 2--11; Stacks 0941, 0GL1 and 0E48."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "normalized derived inverse systems uniform constructible Tor bounds compact support finite expressions",
+   "results": "8 hits: InverseSystem.limit, InverseSystem.mk, InverseSystem.invLimEquiv_symm_apply_coe, InverseSystem.isNatEquiv_piEquivLim, InverseSystem.invLimEquiv.congr_simp, DerivedCategory.TStructure.t, Condensed.instAB4StarCondensedMod, InverseSystem.globalEquiv",
+   "date": "2026-10-25",
+   "verdict": "No exact Mathlib theorem. The matches do not state the strict-system expression/domain and canonical generator-path assertions. Existing project structures are reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical integral realization of generator paths projection exchange diamond",
+   "results": "8 hits: GenLoop.toLoop_apply, GenLoop.fromLoop_apply, SSet.Path.interval, GenLoop.toLoop, GenLoop.transAt, SSet.Path.arrow_interval, CategoryTheory.SimplicialThickening.Path.I, SSet.Truncated.Path.interval",
+   "date": "2026-10-25",
+   "verdict": "No exact Mathlib theorem. The matches do not state the strict-system expression/domain and canonical generator-path assertions. Existing project structures are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "CanonicalPair|IsNormalizedCoefficientSequence|compactificationProjection",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "No exact Mathlib theorem. The matches do not state the strict-system expression/domain and canonical generator-path assertions. Existing project structures are reused."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CompletedProjectionExchangeRealization",
+  "date": "2026-10-25",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Projection diamonds sentence, expanded in the parent node steps 2--11; Stacks 0941, 0GL1 and 0E48.",
+   "via": [
+    "lem-sf-completed-projection-exchange-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CompletedProjectionExchangeDomains",
+  "file": "lean/Sheaf/SixFunctors/CompletedProjectionExchangeDomains.lean",
+  "declaration": "WeilConjectures.CompletedProjectionExchange.completedProjectionExchangeDomains",
+  "statement": "theorem completedProjectionExchangeDomains (_hl : l ≠ D.p)\n    [IsSeparated Q.f.hom.left] [LocallyOfFiniteType Q.f.hom.left] [QuasiCompact Q.f.hom.left]\n    [IsSeparated Q.g.hom.left] [LocallyOfFiniteType Q.g.hom.left] [QuasiCompact Q.g.hom.left]\n    [IsSeparated Q.f'.hom.left] [LocallyOfFiniteType Q.f'.hom.left]\n    [QuasiCompact Q.f'.hom.left]\n    [IsSeparated Q.g'.hom.left] [LocallyOfFiniteType Q.g'.hom.left]\n    [QuasiCompact Q.g'.hom.left]\n    (K : Integral l E Q.X.obj.left) (L : Integral l E Q.Y.obj.left)\n    (_hK : sfIntegralConstructible l E Q.X.obj.left K)\n    (_hL : finiteTorConstructibleIntegral l E Q.Y.obj.left L) :\n    (∀ i : Fin 4, (word Q i).geometric ∧\n      (word Q i).domain l E o (inputs l E Q K L)) ∧\n    sfIntegralConstructible l E Q.Y'.obj.left (integralSource l E Q K L) ∧\n    sfIntegralConstructible l E Q.Y'.obj.left (integralTarget l E Q K L)",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e559a",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261025T163949-L-919939",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e559a",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261025T163949-L-919939",
+  "kind": "interface",
+  "note": "independent cc review: Moved data block diffed byte-identical with the clone's original; item proof checked against ρ.coherence and the Realizations/OpenComparisons/Compositors fields; Domains/System/Paths statements read against Statement's conjuncts, the CanonicalPair/BasicPair constructors and Expression.domain/admissible; node lean records checked against signatures"
+ }
+}

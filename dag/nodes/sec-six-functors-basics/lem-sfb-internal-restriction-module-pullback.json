@@ -1,0 +1,189 @@
+{
+ "id": "lem-sfb-internal-restriction-module-pullback",
+ "kind": "statement",
+ "title": "Normalized exact pullback for internal action restriction",
+ "statement": "Use a small finite-limit site, group sheaves K and L, a group-sheaf map θ : L → K, and a commutative coefficient ring sheaf R, with the action and inflation functors of [def-sfb-internal-action-inflation]. Fix presentations PK and PL [lem-sfb-internal-action-site-presentation], a functor Fθ pinned on objects and arrows by substitution of θ, the coefficient-sheaf equality for that functor, and geometric precomposition morphisms p and q with identity structural maps. In the specifications of [def-sfb-internal-restriction-module-tensor-data], there exist module pullback cores cp and cq satisfying all InternalModulePullbackLaws, together with natural isomorphisms from their pullbacks to trivial inflation through PK and to restriction through PK inverse and PL (with coefficient transport). Under PK.sections, PL.sections and PK.inverseSections these isomorphisms are the identity on the sections identified by the multiplication unitors. This asserts the exact, section-normalized non-tensor pullback only; no diagonal tensor, tensor comparison or monoidal coherence is asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D7, 03CY, 03DA and Section 03EK; internal-action application of steps 1--6 of lem-sfb-internal-restriction-module-tensor."
+ },
+ "stmt_deps": [
+  "def-sfb-internal-restriction-module-tensor-data",
+  "def-sfb-internal-action-inflation",
+  "lem-sfb-internal-action-site-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Write F for trivial inflation or restriction along θ. The supplied p and q already identify the geometric inverse images, on objects and maps, with projection and θ-substitution precomposition on the small action sites. No separate set-action topos equivalence is required. The action-site equivalence [lem-sfb-internal-action-site-presentation] identifies modules over the trivially acted-on ring with $R$-module sheaves carrying linear group actions: addition, zero and scalar multiplication are equivariant precisely when the group acts linearly. On these operations $F$ just equips them with trivial action or substitutes $\\theta(a)$ for $a$. Thus the module structure of $f^{-1}M$ is the same underlying $R$-module structure with the required action. The identity structural ring map makes the pullback formula of [lem-weil-pbc-ringed-topoi-module-adjunction] exactly $f^*M=R\\otimes_R F(M)$ on the destination action site (on $C_K$ for inflation and $C_L$ for restriction).",
+   "uses": [
+    "lem-sfb-internal-action-site-presentation",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D7, 03CY, 03DA and Section 03EK; internal-action application of steps 1--6 of lem-sfb-internal-restriction-module-tensor."
+   }
+  },
+  {
+   "text": "For every module sheaf $H$ on either destination site, multiplication gives $u_H:R\\otimes_R H\\to H$, $r\\otimes h\\mapsto rh$. This is well defined by bilinearity [def-weil-pbc-module-tensor-product], and descends by module sheafification [def-weil-presheaf-modules-sheafification]. Its inverse $v_H$ sends $h$ to the sheafification image of $1\\otimes h$. The equations $u_Hv_H(h)=h$ and $v_Hu_H(r\\otimes h)=1\\otimes rh=r\\otimes h$ prove the two inverse identities; the second equality is the balancing relation. They hold on the entire sheaf tensor by [lem-pc-sites-sheaf-tensor-bilinear-universal]. For an $R$-linear map $b$, $b(rh)=r b(h)$ gives naturality. Taking $H=F(M)$ identifies $f^*$ with $F$ and its map on module morphisms with the unchanged underlying map. In particular the unit object $R$ is identified by multiplication with $R$ itself.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D7, 03CY, 03DA and Section 03EK; internal-action application of steps 1--6 of lem-sfb-internal-restriction-module-tensor."
+   }
+  },
+  {
+   "text": "Kernels and addition are sectionwise, and cokernels are the sheafified sectionwise quotients. The action-site presentation and its unit-compatible sheafification comparisons show that trivial action and restriction along θ preserve these constructions. They are additive and preserve finite limits and finite colimits. The section maps for the forward presentations and inverse presentation are natural on module morphisms; applying the prescribed projection and θ-substitution restriction formulas assembles the two inflation isomorphisms. Their component formulas give precisely the displayed section equations, including the object equality cast.",
+   "uses": [
+    "lem-sfb-internal-action-site-presentation",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D7, 03CY, 03DA and Section 03EK; internal-action application of steps 1--6 of lem-sfb-internal-restriction-module-tensor."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-internal-action-site-presentation",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D7, 03CY, 03DA and Section 03EK; internal-action application of steps 1--6 of lem-sfb-internal-restriction-module-tensor."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of sheaves of modules along precomposition with the identity scalar map has multiplication unitor and preserves kernels and cokernels",
+   "results": "SheafOfModules.pullbackId; pullback_id_comp; pullback_comp_id; PresheafOfModules.Sheafify.one_smul.",
+   "date": "2026-10-26",
+   "verdict": "no exact match; use the existing constructions as indicated, with this action-site normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of sheaves of modules along precomposition with identity ring map is exact and strong monoidal",
+   "results": "SheafOfModules.pullbackId; pullback_comp_id; pullback_id_comp; pullbackObjUnitToUnit; pullbackComp.",
+   "date": "2026-10-26",
+   "verdict": "no exact match; use the existing constructions as indicated, with this action-site normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "ActionForgetExact|createsKernels|PreservesFiniteLimits.*forgetSheaf in lean/Sheaf/CategoryTheory; changeOfRings in Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "results": "The existing sheaf_action_grothendieck_inflation supplies forgetful exactness and is used separately; module_pullback_pushforward_adjunction supplies the general adjunction, but neither states the section-pinned restriction identification and identity scalar unitor.",
+   "date": "2026-10-26",
+   "verdict": "no exact match; use the existing constructions as indicated, with this action-site normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.InternalRestrictionModuleTensor",
+  "date": "2026-10-26",
+  "group": "G3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Tags 03D7, 03CY, 03DA and Section 03EK; internal-action application of steps 1--6 of lem-sfb-internal-restriction-module-tensor. Normalized exact pullback for internal action restriction.",
+   "via": [
+    "lem-sfb-internal-restriction-module-tensor",
+    "lem-sfb-action-topos-geometric-restriction",
+    "lem-sfb-condensed-derived-restriction-calculus",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.InternalRestrictionModulePullback",
+  "file": "lean/Sheaf/CategoryTheory/InternalRestrictionModulePullback.lean",
+  "declaration": "CategoryTheory.InternalActionSite.internalRestrictionModulePullback",
+  "statement": "theorem internalRestrictionModulePullback [HasFiniteLimits C] (J : Precoverage C) (hJ : J.IsSiteForCoverings) (K L : Cᵒᵖ ⥤ GrpCat.{u}) (hK : Presheaf.IsSheaf J.toGrothendieck (K ⋙ forget GrpCat.{u})) (hL : Presheaf.IsSheaf J.toGrothendieck (L ⋙ forget GrpCat.{u})) (θ : L ⟶ K) (R : Sheaf J.toGrothendieck CommRingCat.{u}) (Fθ : Object L ⥤ Object K) (hθobj : ∀ X : Object L, Fθ.obj X = Object.mk X.base) (hθmap : ∀ (X Y : Object L) (a : X ⟶ Y), HEq (Fθ.map a) (Arrow.mk a.base (θ.app (op X.base) a.label) : Object.mk (K := K) X.base ⟶ Object.mk (K := K) Y.base)) : ∀ (PK : Presentation K J hJ R) (PL : Presentation L J hJ R) (hp : Presheaf.IsSheaf (topology K J) ((projection K).op ⋙ R.obj)) (hq : Presheaf.IsSheaf (topology L J) (Fθ.op ⋙ (coefficientSheaf K J hJ R).obj)) (p : InternalPrecompositionMorphism J.toGrothendieck (topology K J) (projection K) R hp) (hqR : (⟨Fθ.op ⋙ (coefficientSheaf K J hJ R).obj, hq⟩ : Sheaf (topology L J) CommRingCat.{u}) = coefficientSheaf L J hJ R) (q : InternalPrecompositionMorphism (topology K J) (topology L J) Fθ (coefficientSheaf K J hJ R) hq), ∃ (P : InternalModulePullback p) (Q : InternalModulePullback q), ∃ (ep : P.pullback ≅ trivialSheafAction (baseRing J.toGrothendieck R) K ⋙ PK.sheafEquivalence.functor) (eq : Q.pullback ≅ PK.sheafEquivalence.inverse ⋙ inflateSheaf J.toGrothendieck (baseRing J.toGrothendieck R) θ ⋙ PL.sheafEquivalence.functor ⋙ SheafOfModules.restrictScalars ((sheafCompose (topology L J) (forget₂ CommRingCat RingCat)).map (eqToIso hqR).hom)), InternalModulePullbackLaws P ∧ InternalModulePullbackLaws Q ∧ (∀ (M : ringedSiteModules.{u} (baseRing J.toGrothendieck R)) (X : C) (m : (P.pullback.obj M).val.obj (op (Object.mk (K := K) X))), internalPresentationSection PK ((trivialSheafAction (baseRing J.toGrothendieck R) K).obj M) X ((ep.hom.app M).val.app (op (Object.mk X)) m) = P.sections M (op (Object.mk X)) ((P.unitor.hom.app M).val.app (op (Object.mk X)) m)) ∧ (∀ (M : ringedSiteModules.{u} (twistedRing K J hJ R)) (X : C) (m : (Q.pullback.obj M).val.obj (op (Object.mk (K := L) X))), PK.inverseSections M X (internalPresentationSection PL ((inflateSheaf J.toGrothendieck (baseRing J.toGrothendieck R) θ).obj (PK.sheafEquivalence.inverse.obj M)) X ((eq.hom.app M).val.app (op (Object.mk X)) m)) = cast (congrArg (fun Z : Object K ↦ ↥(M.val.obj (op Z))) (hθobj (Object.mk (K := L) X))) (Q.sections M (op (Object.mk X)) ((Q.unitor.hom.app M).val.app (op (Object.mk X)) m)))",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-26"
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "lem-sfb-internal-restriction-module-pullback",
+  "worker": "stage3",
+  "summary": "Strict subargument extracted from the assigned six-step proof, with a matching standalone Lean theorem and complete source proof.",
+  "blueprint": "Agent-written internal-action infrastructure for direct-image paragraph (3), as recorded by lem-sfb-internal-restriction-module-tensor.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Existing generic algebraic/module-sheafification universal property used for this strict part of the original accepted proof; it does not replace the unit route."
+   },
+   {
+    "node": "def-weil-pbc-module-tensor-product",
+    "why": "Existing generic algebraic/module-sheafification universal property used for this strict part of the original accepted proof; it does not replace the unit route."
+   },
+   {
+    "node": "def-weil-presheaf-modules-sheafification",
+    "why": "Existing generic algebraic/module-sheafification universal property used for this strict part of the original accepted proof; it does not replace the unit route."
+   },
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Existing generic algebraic/module-sheafification universal property used for this strict part of the original accepted proof; it does not replace the unit route."
+   },
+   {
+    "node": "def-weil-sheaf-of-modules-category",
+    "why": "Existing generic algebraic/module-sheafification universal property used for this strict part of the original accepted proof; it does not replace the unit route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-cd0c6",
+  "group": "G3",
+  "result": "fix",
+  "landing": "20261026T081855-L-2094745",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-cd0c6",
+  "group": "G3",
+  "result": "fix",
+  "landing": "20261026T081855-L-2094745",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone (identical); 7 extracted defs vs clone item (verbatim); 3 sorry statements vs their nodes and the item plan steps 1-6; Presentation.inverse_morphisms vs node lem-sfb-internal-action-site-presentation and its importers"
+ }
+}

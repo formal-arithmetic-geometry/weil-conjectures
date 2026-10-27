@@ -1,0 +1,221 @@
+{
+ "id": "lem-sfb-finite-free-universal-containment-loci",
+ "kind": "statement",
+ "title": "Universal open containment locus for a finite locally free family",
+ "statement": "Let $p:E\\to B$ be a finite locally free morphism of schemes [def-pc-scheme, def-pc-finite-locally-free], and let $Y\\hookrightarrow E$ be an open immersion [def-weil-open-immersion]. Then $p(|E|\\setminus|Y|)$ is closed in $B$, and the open subscheme $O_Y=B\\setminus p(|E|\\setminus|Y|)$ has the following property: a morphism of schemes $a:T\\to B$ factors (necessarily uniquely) through $O_Y$ if and only if the projection $E\\times_BT\\to E$ [def-pc-fibre-product] factors through $Y$. This locus commutes with arbitrary base change on $B$. The rank may vary or be zero.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 7.6 Proposition 2(ii), printed pp.192–194 (PDF pp.198–200), finite locally free case: the open scheme representing whole-family containment in an open subscheme. Local PDF WANTED; primary-source scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-finite-locally-free",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Write $j:Y\\hookrightarrow E$ and $C=|E|\\setminus j(|Y|)$. The open-immersion definition makes $j(|Y|)$ open, hence $C$ closed. By the finite-locally-free definition $p$ is finite. Apply the closed-map clause of [lem-weil-pbc-finite-closed-map-finite-fibres] to $C$: $p(C)$ is closed. Thus its complement defines the open subscheme $O_Y$ of $B$.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-pc-finite-locally-free",
+    "lem-weil-pbc-finite-closed-map-finite-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Stacks Tag 01WN (lemma-finite-proper), together with the open-subscheme construction of schemes.tex, Tag 01HH (lemma-open-immersion); BLR 7.6 Proposition 2(i) uses this closed image."
+   }
+  },
+  {
+   "text": "For an open immersion $i:V\\hookrightarrow X$ and any $h:Z\\to X$, a factorization of $h$ through $i$ exists exactly when $h(|Z|)\\subseteq i(|V|)$, and is then unique. Indeed by [def-weil-open-immersion] $i$ induces an isomorphism $V\\cong(U,\\mathcal O_X|_U)$ onto the open subscheme on $U=i(|V|)$, compatible with the inclusion $j_U$. If $h(|Z|)\\subseteq U$, [lem-weil-pbc-morphism-factors-through-open-subscheme] gives a unique $h':Z\\to U$ with $j_U\\circ h'=h$; composing $h'$ with $U\\cong V$ gives a lift through $i$, and any lift through $i$ composed with $V\\cong U$ is a lift through $j_U$, hence equals $h'$ by that uniqueness. Conversely a lift $g$ with $i\\circ g=h$ forces $h(|Z|)=i(g(|Z|))\\subseteq i(|V|)$.",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Stacks Tag 01HH (lemma-open-immersion) and the open-subscheme restriction preceding it; Mathlib IsOpenImmersion.lift / lift_fac / lift_uniq (OpenImmersion.lean:701-708)."
+   }
+  },
+  {
+   "text": "Let $a:T\\to B$, $P=E\\times_BT$, and let $r:P\\to E$, $q:P\\to T$ be the projections of [def-pc-fibre-product]. The arbitrary-subset formula in [lem-weil-pbc-base-change-image], with $f=p$, $g=a$ and subset $C$, gives $q(r^{-1}(C))=a^{-1}(p(C))$. Thus $r^{-1}(C)=\\varnothing$ if and only if $a^{-1}(p(C))=\\varnothing$: a set has empty image exactly when it is empty. These are respectively $r(|P|)\\subseteq j(|Y|)$ and $a(|T|)\\subseteq |O_Y|$. Apply step 2 to $j$ and $O_Y\\hookrightarrow B$ to obtain exactly the claimed equivalence and uniqueness.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-base-change-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Stacks Tag 01S1 (lemma-base-change-surjective), proof: image/preimage identity for an arbitrary subset, using Tag 0495 (lemma-when-point-maps-to-pair)."
+   }
+  },
+  {
+   "text": "For any $b:B^{\\prime}\\to B$, put $E^{\\prime}=E\\times_BB^{\\prime}$ with projections $r^{\\prime},p^{\\prime}$ and $Y^{\\prime}=Y\\times_BB^{\\prime}$. The open restriction of $E^{\\prime}$ to $(r^{\\prime})^{-1}(j(|Y|))$ is $Y^{\\prime}$: a map into that restriction is a map into $E^{\\prime}$ whose composite into $E$ lifts to $Y$ by step 2, which is precisely a map into the displayed fibre product. Consequently its complement is $C^{\\prime}=(r^{\\prime})^{-1}(C)$. Apply [lem-weil-pbc-base-change-image] again to obtain $p^{\\prime}(C^{\\prime})=b^{-1}(p(C))$. This is closed by continuity of $b$, and taking complements gives $|O_{Y^{\\prime}}|=b^{-1}(|O_Y|)$. The same restriction and fibre-product argument identifies the corresponding open subschemes: $O_{Y^{\\prime}}\\cong O_Y\\times_BB^{\\prime}$ over $B^{\\prime}$. Nothing used a positive or constant rank. In particular if $E$ is empty then $C=\\varnothing$, $O_Y=B$, and both factorization conditions always hold.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-base-change-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Stacks Tag 01S1 (lemma-base-change-surjective), arbitrary-subset identity in its proof; open restrictions as in schemes.tex Tag 01HH (lemma-open-immersion)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-open-immersion",
+  "def-pc-finite-locally-free",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-base-change-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Assembly of the existing finite closed-map and base-change-image nodes, following the open-complement construction of BLR 7.6 Proposition 2(i) (online scan, local PDF wanted); open restriction is written out from schemes.tex Tag 01HH."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite locally free scheme over a base the condition that its entire base change lies in a closed subscheme is represented by a closed subscheme of the base",
+   "results": "{\"t\": \"2026-10-24T07:57:07Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite locally free scheme over a base the condition that its entire base change lies in a closed subscheme is represented by a closed subscheme of the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.instIsClosedImmersionLiftCoborder\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsFinite.instOfIsClosedImmersion\", \"AlgebraicGeometry.isClosedImmersion_diagonal_restrict_diagonalCoverDiagonalRange\", \"AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion\"], \"digest\": \"8e53d2ff2293cb0a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary closed-immersion base change, flat open maps, and norm/image lemmas do not represent the whole-family containment functor; Loogle reported unknown FiniteLocallyFree."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.FiniteLocallyFree",
+   "results": "{\"t\": \"2026-10-24T07:57:04Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.FiniteLocallyFree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.FiniteLocallyFree'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary closed-immersion base change, flat open maps, and norm/image lemmas do not represent the whole-family containment functor; Loogle reported unknown FiniteLocallyFree."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]ontainment|[Cc]ontained.*[Ll]ocus|[Ww]eil.?[Rr]estriction",
+   "results": "{\"t\": \"2026-10-24T07:57:04Z\", \"tool\": \"grep\", \"query\": \"[Cc]ontainment|[Cc]ontained.*[Ll]ocus|[Ww]eil.?[Rr]estriction\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary closed-immersion base change, flat open maps, and norm/image lemmas do not represent the whole-family containment functor; Loogle reported unknown FiniteLocallyFree."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite flat family open and closed subscheme universal locus where whole family factors through subscheme",
+   "results": "{\"t\": \"2026-10-24T07:57:04Z\", \"tool\": \"leansearch\", \"query\": \"Finite flat family open and closed subscheme universal locus where whole family factors through subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Flat.mk\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\"], \"digest\": \"e273e338a1adac9b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary closed-immersion base change, flat open maps, and norm/image lemmas do not represent the whole-family containment functor; Loogle reported unknown FiniteLocallyFree."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weil restriction preserves open immersions and closed immersions by taking coefficients of ideals in a finite free module basis",
+   "results": "{\"t\": \"2026-10-24T07:57:09Z\", \"tool\": \"leanfinder\", \"query\": \"Weil restriction preserves open immersions and closed immersions by taking coefficients of ideals in a finite free module basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul\", \"PrimeSpectrum.exists_image_comap_of_finite_of_free\", \"Algebra.ZariskisMainProperty.restrictScalars\", \"Ideal.exists_comap_galRestrict_eq\", \"Algebra.SubmersivePresentation.baseChange\", \"Ideal.coe_smul_primesOver_mk_eq_map_galRestrict\", \"RingHom.finite_isStableUnderBaseChange\", \"Algebra.ZariskisMainProperty\"], \"digest\": \"6fe5bc0fdc09e045\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary closed-immersion base change, flat open maps, and norm/image lemmas do not represent the whole-family containment functor; Loogle reported unknown FiniteLocallyFree."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite morphism of schemes the open locus where the entire fibre lies in a given open subscheme represents universal containment and commutes with arbitrary base change",
+   "results": "{\"t\": \"2026-10-24T08:35:03Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite morphism of schemes the open locus where the entire fibre lies in a given open subscheme represents universal containment and commutes with arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instMorphismRestrict\", \"AlgebraicGeometry.Scheme.Hom.finite_preimage\", \"AlgebraicGeometry.instLocallyOfFiniteTypeResLE\", \"AlgebraicGeometry.instLocallyOfFiniteTypeMorphismRestrict\", \"AlgebraicGeometry.IsFinite.finite_preimage_singleton\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.instLocallyOfFinitePresentationResLE\", \"AlgebraicGeometry.instLocallyQuasiFiniteResLE\"], \"digest\": \"17c30c64968ccd08\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits provide finite-map restrictions, open-immersion pullbacks, or coborder constructions, not the universal whole-family open-containment locus with its base-change clause"
+  },
+  {
+   "tool": "grep",
+   "query": "forall.*[Oo]pen|[Cc]ontainment|[Cc]ontained.*[Ll]ocus|[Ww]eil.?[Rr]estriction",
+   "results": "{\"t\": \"2026-10-24T08:36:09Z\", \"tool\": \"grep\", \"query\": \"forall.*[Oo]pen|[Cc]ontainment|[Cc]ontained.*[Ll]ocus|[Ww]eil.?[Rr]estriction\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/Gluing.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean\", \"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\"], \"digest\": \"e385c5813abea46c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits provide finite-map restrictions, open-immersion pullbacks, or coborder constructions, not the universal whole-family open-containment locus with its base-change clause"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An open subscheme of a finite scheme over a base contains the entire pulled back family precisely over the complement of the image of its closed complement",
+   "results": "{\"t\": \"2026-10-24T08:36:09Z\", \"tool\": \"leansearch\", \"query\": \"An open subscheme of a finite scheme over a base contains the entire pulled back family precisely over the complement of the image of its closed complement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.preimage_opensRange\", \"AlgebraicGeometry.IsOpenImmersion.hasPullback_of_right\", \"AlgebraicGeometry.Scheme.Opens.ι_preimage_self\", \"AlgebraicGeometry.IsOpenImmersion.hasPullback_of_left\", \"AlgebraicGeometry.IsOpenImmersion.range_pullback_snd_of_left\", \"AlgebraicGeometry.pullbackRestrictIsoRestrict\", \"AlgebraicGeometry.IsOpenImmersion.range_pullback_to_base_of_right\", \"AlgebraicGeometry.IsOpenImmersion.opensEquiv\"], \"digest\": \"50c7cb3ad3310770\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits provide finite-map restrictions, open-immersion pullbacks, or coborder constructions, not the universal whole-family open-containment locus with its base-change clause"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsOpenImmersion",
+   "results": "{\"t\": \"2026-10-24T08:36:09Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsOpenImmersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits provide finite-map restrictions, open-immersion pullbacks, or coborder constructions, not the universal whole-family open-containment locus with its base-change clause"
+  },
+  {
+   "tool": "grep",
+   "query": "lift|range_subset",
+   "results": "{\"t\": \"2026-10-24T08:36:27Z\", \"tool\": \"grep\", \"query\": \"lift|range_subset\", \"sub\": \"AlgebraicGeometry/OpenImmersion.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"362\", \"392\", \"393\", \"394\", \"395\"], \"digest\": \"1918c2aafba718eb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits provide finite-map restrictions, open-immersion pullbacks, or coborder constructions, not the universal whole-family open-containment locus with its base-change clause"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Complement of the image of the closed complement under a proper scheme morphism is the universal open where the entire family lies in an open subscheme",
+   "results": "{\"t\": \"2026-10-24T08:36:31Z\", \"tool\": \"leanfinder\", \"query\": \"Complement of the image of the closed complement under a proper scheme morphism is the universal open where the entire family lies in an open subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.coborderRange\", \"AlgebraicGeometry.isCompl_opensRange_inl_inr\", \"AlgebraicGeometry.Scheme.Hom.liftCoborder\", \"AlgebraicGeometry.Scheme.zeroLocus_univ\", \"AlgebraicGeometry.Scheme.Hom.liftCoborder_preimage\", \"AlgebraicGeometry.isCompl_range_inl_inr\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset\", \"AlgebraicGeometry.instIsClosedImmersionLiftCoborder\"], \"digest\": \"dfd6d02ed4536fb4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits provide finite-map restrictions, open-immersion pullbacks, or coborder constructions, not the universal whole-family open-containment locus with its base-change clause"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-weil-restriction-geometric-properties",
+  "date": "2026-10-24",
+  "group": "Q101"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), open direct image via sk-prop-open-coefficients; inherited Néron-lft-model descent refinement, BLR 7.6 Proposition 5; the open-chart argument for Proposition 5(a); supporting Proposition 2",
+   "via": [
+    "lem-sfb-weil-restriction-geometric-properties",
+    "lem-sfb-neron-lft-weil-restriction-geometry",
+    "lem-sfb-finite-flat-neron-lft-descent",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-free-universal-containment-loci",
+  "worker": "stage1",
+  "summary": "Preserved the statement and four statement dependencies. Proved the open-complement construction using two existing Mathlib leaves (finite closed maps and images of arbitrary subsets under scheme base change), with open restriction written out as an elementary step. No new nodes. Corrected the BLR part-number reference from Proposition 2(ii) to 2(i); checked zero rank, varying rank and arbitrary non-flat base change. Maintainer reader (Q126 S1 review): step 2 now cites the existing Mathlib leaf lem-weil-pbc-morphism-factors-through-open-subscheme (IsOpenImmersion.lift) instead of re-deriving the open-restriction factorization.",
+  "blueprint": "Inherited refinement of det-thm-sf-ctf-stability-direct-images, proof (3), via the chain recorded in blueprint.from.via: the open-chart step of the BLR Weil-restriction argument. The current latest blueprint still uses open direct image via sk-prop-open-coefficients. The created.item chain has a pre-existing break at lem-sfb-admissible-direct-image (created for a Lean module string), so blueprint_refs.py ancestor prints None; retained that computed null rather than inventing ancestry."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q126-4d5021309",
+  "group": "Q126",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q126-4d5021309 (reviewer sub-agent of L); spot-checked: Read the item in full; it has no new nodes and the statement and stmt_deps are unchanged. Step 1: def-pc-finite-locally-free gives finite, and clause (1) of lem-weil-pbc-finite-closed-map-finite-fibres (Mathlib Scheme.Hom.isClosedMap, UniversallyClosed.lean:49) makes p(C) closed for the closed set C = |E| minus j(|Y|). Steps 3 and 4: lem-weil-pbc-base-change-image (image_preimage_eq_of_isPullback, PullbackCarrier.lean:420, any subset, any pullback square) gives q(r^{-1}C) = a^{-1}(pC) and p'(C') = b^{-1}(pC). From these, a:T->B factors through O_Y exactly when E x_B T -> E factors through Y, and the locus is stable under any base change b, with no flatness assumption on b. Edge cases tested: E empty, Y empty over Spec k, the finite non-flat closed point of A^1, a nonreduced base. All agree, so the statement is true. No duplicate node for this locus exists in the DAG, and the off-unit citations are all Mathlib leaves, so no tool_uses are needed. FIX (C5): step 2 re-derived the factorization through an open immersion and was marked elementary, although the existing Mathlib leaf lem-weil-pbc-morphism-factors-through-open-subscheme (IsOpenImmersion.lift / lift_fac / lift_uniq, OpenImmersion.lean:701-708) states exactly this. Step 2 now cites that leaf together with def-weil-open-immersion, is marked elementary=false, and proof_deps is recomputed. Note for the maintainer: source.place cites BLR 7.6 Prop. 2(ii), but the open case is 2(i), as the worker reported. The BLR PDF is not in the literature, so the citation stays WANTED. The blueprint ancestor is null because of the existing created.item break at lem-sfb-admissible-direct-image.; 1 file(s) fixed by the reviewer"
+ }
+}

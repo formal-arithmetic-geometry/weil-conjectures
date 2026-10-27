@@ -1,0 +1,274 @@
+{
+ "id": "lem-per-filtered-pseudocone-representative-transport",
+ "kind": "statement",
+ "title": "Canonical transport between equal representatives of a filtered category colimit",
+ "statement": "Let $J$ be a small filtered category, $D:J\\to\\mathsf{Cat}$ a strict functor with small values, and $C$ its object-and-arrow set colimit with structure functors $v_i:D(i)\\to C$ [def-nagata-category], [def-weil-size-convention], [def-weil-pbc-category-colimit], [lem-weil-pbc-filtered-colimit-categories]. Let $\\mathcal A$ be a category in the containing universe. Suppose given functors $A_i:D(i)\\to\\mathcal A$ and natural isomorphisms $\\theta_a:A_kD(a)\\to A_i$ for $a:i\\to k$, with $\\theta_1=1$ and $\\theta_{ba}=\\theta_a\\circ(\\theta_bD(a))$. A representative is a pair $p=(i,x)$ with $x\\in D(i)$, and $|p|=v_i(x)$. If $p=(i,x)$ and $q=(j,y)$ have $|p|=|q|$, choose $a:i\\to k$, $b:j\\to k$ with $D(a)x=D(b)y$. The isomorphism\n$$T^A_{pq}:=\\theta_{b,y}\\circ\\theta_{a,x}^{-1}:A_i(x)\\xrightarrow{\\sim}A_j(y)$$\n(where the middle objects are identified by the displayed equality) is independent of $k,a,b$ and the equality witness. For any three representatives of the same object, $T^A_{pp}=1$ and $T^A_{qr}T^A_{pq}=T^A_{pr}$. If $q=(k,D(a)x)$, then $T^A_{pq}=\\theta_{a,x}^{-1}$.\n\nIf $f:x\\to y$ in $D(i)$ and $g:x'\\to y'$ in $D(j)$ have equal images as complete arrows in $C$, then\n$$T^A_{(i,y),(j,y')}\\circ A_i(f)=A_j(g)\\circ T^A_{(i,x),(j,x')}.$$\nFor any second family $(B_i,\\eta_a)$ satisfying the same coherence conditions and natural transformations $\\rho_i:A_i\\to B_i$ with $\\rho_i\\theta_a=\\eta_a(\\rho_kD(a))$, transport satisfies\n$$\\rho_j(y)\\circ T^A_{pq}=T^B_{pq}\\circ\\rho_i(x).$$\nPostcomposition by any functor $H:\\mathcal A\\to\\mathcal B$ sends $T^A_{pq}$ to $T^{HA}_{pq}$.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 04AX (section-directed-colimits), eventual equality of representatives. The conjugation and modification identities below are an agent formulation extending that representative calculus; they are not asserted verbatim by this tag."
+ },
+ "stmt_deps": [
+  "def-nagata-category",
+  "def-weil-size-convention",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-filtered-colimit-categories"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-filtered-colimit-sets-elementwise] to the object-set diagram $D\\mathbin{\\circ}\\mathsf{Cat.objects}$ (Mathlib Types.FilteredColimit.colimit_eq_iff). It gives a common-stage witness $a:i\\to k,b:j\\to k$ for equal representatives $x,y$. The actual definition evaluates $\\theta_{a,x}^{-1}$, the equality isomorphism of the two middle objects, and $\\theta_{b,y}$ at a witness chosen from this proved equality criterion.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04AX (section-directed-colimits), eventual equality of set representatives; Tag 002V (definition-directed), common targets and equalization of parallel arrows. The coherence calculations are an agent argument, not a theorem asserted by these tags."
+   }
+  },
+  {
+   "text": "First check invariance under one further transition $c:k\\to l$. The coherence hypotheses give $\\theta_{ca,x}=\\theta_{a,x}\\theta_{c,D(a)x}$ and $\\theta_{cb,y}=\\theta_{b,y}\\theta_{c,D(b)y}$. Since both middle objects equal $z$, direct cancellation gives\n$$T(ca,cb)=\\theta_{b,y}\\theta_{c,z}(\\theta_{a,x}\\theta_{c,z})^{-1}=\\theta_{b,y}\\theta_{a,x}^{-1}=T(a,b).$$\nThese expressions use the identifications induced by the displayed object equalities; applying a functor to an object equality and composing those identifications respects reflexivity and transitivity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04AX (section-directed-colimits), eventual equality of set representatives; Tag 002V (definition-directed), common targets and equalization of parallel arrows. The coherence calculations are an agent argument, not a theorem asserted by these tags."
+   }
+  },
+  {
+   "text": "Compare witnesses $(k,a,b)$ and $(l,a',b')$ for the same $p,q$. By the filteredness axioms in [def-weil-pbc-category-colimit], choose $c:k\\to m$ and $d:l\\to m$. Equalize the parallel arrows $ca,da':i\\to m$ by postcomposing with one arrow; next equalize the resulting parallel arrows from $j$ obtained from $cb,db'$. The second postcomposition preserves the first equality. Thus, renaming the composites $c,d$, we have $ca=da'$ and $cb=db'$. Step 2 gives\n$$T(a,b)=T(ca,cb)=T(da',db')=T(a',b').$$\nStrictness of $D$ identifies the common middle objects in this calculation. Equality of objects is a proposition, so two proofs of that equality give the same identification (in Lean, proof irrelevance). This proves all the required choice independence and defines $T^A_{pq}$. In Lean, IsFiltered.bowtie packages the common-target and two-equalizer construction; witness_refine then compares both formulas at that common refinement.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04AX (section-directed-colimits), eventual equality of set representatives; Tag 002V (definition-directed), common targets and equalization of parallel arrows. The coherence calculations are an agent argument, not a theorem asserted by these tags."
+   }
+  },
+  {
+   "text": "For $p=q$, compute with $k=i$ and $a=b=1_i$ to obtain $T^A_{pp}=1$. If $q=(k,D(a)x)$, use the witness consisting of $a:i\\to k$ and $1_k:k\\to k$. The normalization $\\theta_1=1$ gives $T^A_{pq}=\\theta_{a,x}^{-1}$. Independence proved in Step 3 makes these computations valid for the canonical transports.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04AX (section-directed-colimits), eventual equality of set representatives; Tag 002V (definition-directed), common targets and equalization of parallel arrows. The coherence calculations are an agent argument, not a theorem asserted by these tags."
+   }
+  },
+  {
+   "text": "For $p=(i,x),q=(j,y),r=(h,z)$ representing the same object, take witnesses $(a:i\\to k,b:j\\to k)$ for $p,q$ and $(c:j\\to l,d:h\\to l)$ for $q,r$, as in Step 1. Choose $u:k\\to m,v:l\\to m$ and then equalize $ub,vc:j\\to m$, using [def-weil-pbc-category-colimit]. After this postcomposition there are maps $\\alpha:i\\to n$, $\\beta:j\\to n$, $\\gamma:h\\to n$ with $D(\\alpha)x=D(\\beta)y=D(\\gamma)z$. By Step 3 all three transports can be computed using these witnesses. Hence\n$$T^A_{qr}T^A_{pq}=(\\theta_{\\gamma,z}\\theta_{\\beta,y}^{-1})(\\theta_{\\beta,y}\\theta_{\\alpha,x}^{-1})=\\theta_{\\gamma,z}\\theta_{\\alpha,x}^{-1}=T^A_{pr}.$$\nThe common-target choice and one equalization are precisely the two filteredness axioms, rather than an assumption that $J$ is a poset. In Lean, IsFiltered.span packages the common-target and middle-arrow equalization, and witness_comp cancels the common middle comparison and composes the equality isomorphisms.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04AX (section-directed-colimits), eventual equality of set representatives; Tag 002V (definition-directed), common targets and equalization of parallel arrows. The coherence calculations are an agent argument, not a theorem asserted by these tags."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-filtered-colimit-sets-elementwise] directly to $D\\mathbin{\\circ}\\mathsf{Cat.arrows}$. The resulting equality is an equality of complete stage arrows. Arrow.mk_eq_mk_iff extracts endpoint equalities $e_x,e_y$ and the equation $D(a)f=\\mathrm{eqToHom}(e_x)D(b)g\\mathrm{eqToHom}(e_y^{-1})$. Applying $F_k$ gives a commuting square. Naturality of $\\theta_a^{-1}$ and $\\theta_b$ composes this square into the desired transport square. Independence computes both endpoint transports at the same witness. No category structure on the colimit is needed.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04AX (section-directed-colimits), eventual equality of set representatives; Tag 002V (definition-directed), common targets and equalization of parallel arrows. The coherence calculations are an agent argument, not a theorem asserted by these tags."
+   }
+  },
+  {
+   "text": "For a compatible family $\\rho$ and any witness $a:i\\to k,b:j\\to k$ with middle object $z$, its two compatibility equations read $\\rho_i(x)\\theta^A_{a,x}=\\eta_{a,x}\\rho_k(z)$ and $\\rho_j(y)\\theta^A_{b,y}=\\eta_{b,y}\\rho_k(z)$. Since $\\eta_{a,x}$ and $\\theta^A_{a,x}$ are invertible, the first gives $\\rho_k(z)(\\theta^A_{a,x})^{-1}=\\eta_{a,x}^{-1}\\rho_i(x)$. Substituting into the second gives\n$$\\rho_j(y)T^A_{pq}=\\eta_{b,y}\\rho_k(z)(\\theta^A_{a,x})^{-1}=\\eta_{b,y}\\eta_{a,x}^{-1}\\rho_i(x)=T^B_{pq}\\rho_i(x).$$\nThis does not invert $\\rho_i$ or $\\rho_k$; the transformations $\\rho_i$ need not be isomorphisms.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04AX (section-directed-colimits), eventual equality of set representatives; Tag 002V (definition-directed), common targets and equalization of parallel arrows. The coherence calculations are an agent argument, not a theorem asserted by these tags."
+   }
+  },
+  {
+   "text": "For any functor $H:\\mathcal A\\to\\mathcal B$, postcomposition has comparisons $H\\theta_a$ satisfying the same coherence by preservation of composition and identities. Compute its transport with the same $a,b$ used for $T^A_{pq}$. A functor sends an inverse isomorphism to the inverse of its image, since applying it to the two inverse equations gives the two inverse equations in $\\mathcal B$. Therefore\n$$H(T^A_{pq})=H(\\theta_{b,y})H(\\theta_{a,x})^{-1}=T^{HA}_{pq}.$$\nThe equality identifications of the middle objects are also preserved by $H$, as is checked by substituting the object equality with reflexivity. Step 3 removes the choice of witness in this calculation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04AX (section-directed-colimits), eventual equality of set representatives; Tag 002V (definition-directed), common targets and equalization of parallel arrows. The coherence calculations are an agent argument, not a theorem asserted by these tags."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 04AX (section-directed-colimits), eventual equality of set representatives; Tag 002V (definition-directed), common targets and equalization of parallel arrows. The coherence calculations are an agent argument, not a theorem asserted by these tags. Lean proof by G8 (2026-10-26): apply the Mathlib filtered set-colimit equality criterion directly to the object and arrow diagrams; use IsFiltered.bowtie and IsFiltered.span for refinements and prove all comparison calculations privately in the item module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pseudococone|pseudocolimit|coherent.*cocone|cocone.*coherent",
+   "results": "{\"t\": \"2026-10-24T11:22:59Z\", \"tool\": \"grep\", \"query\": \"pseudococone|pseudocolimit|coherent.*cocone|cocone.*coherent\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern set representatives, ordinary colimits, or site descent, not canonical transport for arbitrary filtered category diagrams with invertible comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso, CategoryTheory.IsFiltered",
+   "results": "{\"t\": \"2026-10-24T11:23:00Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.NatIso, CategoryTheory.IsFiltered\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.NatIso'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match (invalid identifier in this Loogle query; the corrected NatTrans query was also run)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent functors from a filtered diagram of categories descend morphisms by conjugating with the transition natural isomorphisms",
+   "results": "{\"t\": \"2026-10-24T11:23:00Z\", \"tool\": \"leansearch\", \"query\": \"Coherent functors from a filtered diagram of categories descend morphisms by conjugating with the transition natural isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.DescentData.ofObj\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorIso\", \"CategoryTheory.Functor.functorialityCompPostcompose\", \"CategoryTheory.Functor.IsEventuallyConstantFrom.isColimitCocone\", \"CategoryTheory.Limits.PreservesFiniteLimitsOfIsFilteredCostructuredArrowYonedaAux.iso\", \"CategoryTheory.Functor.IsEventuallyConstantFrom.cocone\", \"CategoryTheory.Pseudofunctor.DescentData.isoMk\", \"CategoryTheory.Limits.IsColimit.mkCoconeMorphism_desc\"], \"digest\": \"f912e881dd79bdb9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern set representatives, ordinary colimits, or site descent, not canonical transport for arbitrary filtered category diagrams with invertible comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent functors on a filtered diagram of categories assign the same conjugated morphism to any two representatives of a colimit arrow",
+   "results": "{\"t\": \"2026-10-24T11:23:02Z\", \"tool\": \"leanfinder\", \"query\": \"Coherent functors on a filtered diagram of categories assign the same conjugated morphism to any two representatives of a colimit arrow\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.ιColimitType_eq_iff_of_isFiltered\", \"CategoryTheory.Limits.Concrete.colimit_exists_of_rep_eq\", \"CategoryTheory.Functor.ιColimitType_eq_iff_of_isFiltered'\", \"CategoryTheory.Limits.Concrete.isColimit_exists_of_rep_eq\", \"CategoryTheory.Limits.Concrete.colimit_rep_eq_iff_exists\", \"CategoryTheory.Limits.Concrete.isColimit_rep_eq_iff_exists\", \"MonCat.FilteredColimits.M.mk_eq\", \"MonCat.FilteredColimits.M.map_mk\"], \"digest\": \"390d2d5d91a3697e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern set representatives, ordinary colimits, or site descent, not canonical transport for arbitrary filtered category diagrams with invertible comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Independence of common stage and composition for maps of a filtered colimit of categories with invertible transition comparisons",
+   "results": "{\"t\": \"2026-10-24T11:23:03Z\", \"tool\": \"leanfinder\", \"query\": \"Independence of common stage and composition for maps of a filtered colimit of categories with invertible transition comparisons\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.ColimitPresentation.bind_diag_map\", \"CategoryTheory.Functor.ιColimitType_eq_iff_of_isFiltered\", \"CategoryTheory.Limits.ColimitPresentation.bind\", \"CategoryTheory.Functor.IsEventuallyConstantFrom.coconeιApp_eq\", \"CategoryTheory.Limits.ColimitPresentation.bind_ι_app\", \"CategoryTheory.IsFiltered.toSup_commutes\", \"CategoryTheory.Functor.ιColimitType_eq_iff_of_isFiltered'\", \"CategoryTheory.Ind.exists_nonempty_arrow_mk_iso_ind_lim\"], \"digest\": \"5fc1a5f1afb0484e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern set representatives, ordinary colimits, or site descent, not canonical transport for arbitrary filtered category diagrams with invertible comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsFiltered, CategoryTheory.NatTrans",
+   "results": "{\"t\": \"2026-10-24T11:23:23Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.IsFiltered, CategoryTheory.NatTrans\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern set representatives, ordinary colimits, or site descent, not canonical transport for arbitrary filtered category diagrams with invertible comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudococone|pseudocolimit|representative.*transport|transport.*representative",
+   "results": "{\"t\": \"2026-10-24T11:44:08Z\", \"tool\": \"grep\", \"query\": \"pseudococone|pseudocolimit|representative.*transport|transport.*representative\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: representative equality for sets, eventual-constant ordinary diagrams, finite cocones, and site descent do not state the transport identities for the given coherent family of functors"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent natural isomorphisms on a filtered diagram of categories define choice independent transport between equal object representatives",
+   "results": "{\"t\": \"2026-10-24T11:44:09Z\", \"tool\": \"leansearch\", \"query\": \"Coherent natural isomorphisms on a filtered diagram of categories define choice independent transport between equal object representatives\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Over.mapCongr\", \"CategoryTheory.Limits.colimitLimitIso\", \"CategoryTheory.MorphismProperty.instIsStableUnderFilteredColimitsIsomorphisms\", \"CategoryTheory.Comma.mapRightEq\", \"CategoryTheory.Limits.Types.FilteredColimit.isColimitOf\", \"CategoryTheory.Limits.Types.FilteredColimit.isColimitOf'\", \"CategoryTheory.Functor.Monoidal.coreMonoidalTransport\", \"CategoryTheory.NatIso.isIso_app_of_isIso\"], \"digest\": \"ff3bbd544d07ebae\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: representative equality for sets, eventual-constant ordinary diagrams, finite cocones, and site descent do not state the transport identities for the given coherent family of functors"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsFiltered, CategoryTheory.NatTrans",
+   "results": "{\"t\": \"2026-10-24T11:44:09Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.IsFiltered, CategoryTheory.NatTrans\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: representative equality for sets, eventual-constant ordinary diagrams, finite cocones, and site descent do not state the transport identities for the given coherent family of functors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical isomorphism between equal representatives in a filtered colimit of categories from coherent functors with invertible transition maps",
+   "results": "{\"t\": \"2026-10-24T11:44:10Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical isomorphism between equal representatives in a filtered colimit of categories from coherent functors with invertible transition maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Concrete.colimit_exists_of_rep_eq\", \"CategoryTheory.Functor.ιColimitType_eq_iff_of_isFiltered'\", \"CategoryTheory.Functor.ιColimitType_eq_iff_of_isFiltered\", \"MonCat.FilteredColimits.M.mk_eq\", \"CategoryTheory.Limits.Concrete.colimit_rep_eq_iff_exists\", \"CategoryTheory.Limits.Concrete.isColimit_exists_of_rep_eq\", \"CategoryTheory.Limits.Concrete.isColimit_rep_eq_iff_exists\", \"CategoryTheory.Functor.IsEventuallyConstantFrom.coconeιApp_eq\"], \"digest\": \"51ad9d468d53ad0f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: representative equality for sets, eventual-constant ordinary diagrams, finite cocones, and site descent do not state the transport identities for the given coherent family of functors"
+  },
+  {
+   "tool": "grep",
+   "query": "DescentData|ιColimitType_eq_iff_of_isFiltered|toSup_commutes",
+   "results": "{\"t\": \"2026-10-24T11:44:37Z\", \"tool\": \"grep\", \"query\": \"DescentData|ιColimitType_eq_iff_of_isFiltered|toSup_commutes\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/IsStack.lean\", \"Mathlib/CategoryTheory/Sites/Descent/IsStack.lean\", \"Mathlib/CategoryTheory/Sites/Descent/IsStack.lean\"], \"digest\": \"9bc113b65741e505\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: representative equality for sets, eventual-constant ordinary diagrams, finite cocones, and site descent do not state the transport identities for the given coherent family of functors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pseudococone over a filtered diagram of small categories gives coherent isomorphisms between representatives of each object, natural for equal arrows and modifications",
+   "results": "{\"t\": \"2026-10-24T11:44:44Z\", \"tool\": \"leanfinder\", \"query\": \"A pseudococone over a filtered diagram of small categories gives coherent isomorphisms between representatives of each object, natural for equal arrows and modifications\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsEventuallyConstantFrom.coconeιApp_eq\", \"CategoryTheory.IsFiltered.cocone\", \"CategoryTheory.Functor.IsEventuallyConstantFrom.cocone\", \"CategoryTheory.Functor.IsEventuallyConstantFrom.coconeιApp\", \"CategoryTheory.Functor.IsEventuallyConstantFrom.cocone_ι_app\", \"CategoryTheory.Limits.IndObjectPresentation.ofCocone_ℐ\", \"CategoryTheory.Limits.IndObjectPresentation.ofCocone_I\", \"CategoryTheory.Functor.IsEventuallyConstantFrom.isColimitCocone\"], \"digest\": \"2791c91ae3144fea\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: representative equality for sets, eventual-constant ordinary diagrams, finite cocones, and site descent do not state the transport identities for the given coherent family of functors"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-filtered-category-pseudococones",
+  "date": "2026-10-24",
+  "group": "N9"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Completion argument behind the ancestor proof Step 3: the projective-limit etale topos in ILO XX 4.4, printed p.373. Coherent compatibility and cofinal independence. Equal representatives and coherent transport needed to make the category-valued colimit comparison well defined.",
+   "via": [
+    "lem-per-filtered-category-pseudococones",
+    "lem-per-qcqs-etale-topos-inverse-limit",
+    "lem-per-admissible-modification-cohomology-presentation",
+    "lem-per-henselian-completion-open-rigidity",
+    "lem-per-punctual-strict-completion-test",
+    "lem-per-punctual-purity-trait-test",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-filtered-pseudocone-representative-transport",
+  "worker": "stage1",
+  "summary": "Proved representative transport by eventual equality, explicit postcomposition cancellation and successive equalization of parallel index arrows; verified the cocycle, transition formula, equal-arrow square, arbitrary modifications and postcomposition. No new nodes: each coherence calculation is elementary once the existing filtered-colimit representative theorem is cited. Statement unchanged.",
+  "blueprint": "Completion-continuity detail below Step 3 of lem-per-artin-gabber-affine-curve, through the recorded ancestry and the pseudococone descent argument of lem-per-filtered-category-pseudococones. The latest blueprint does not state this auxiliary transport lemma. No chapter or unit route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q54-3982bcf7e",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-3982bcf7e (reviewer sub-agent of L); spot-checked: I read all 8 proof steps in full and found no fault. Shape: one commit; item plus a report with a Review section; no new nodes. Compared with clones/live, statement, stmt_deps, source, blueprint and created are unchanged; only status, proof, proof_deps, proof_origin, split_report and the appended searches changed. This is not a re-split: the base proof was empty and there was no repair note. Cited nodes checked against their statements: def-weil-pbc-category-colimit contains the 002V filteredness axioms used in Steps 3 and 5. lem-weil-pbc-filtered-colimit-categories clause (2) gives eventual equality of lifts, used in Step 1 with a one-object list and in Step 6 with a one-arrow list; that node is Lean-closed in slopmaster2 (exists_filteredColimit_category, no sorry), so it is a tool, not a route statement, and is already a stmt_dep of the item. Steps checked under the convention θ_{ba,x}=θ_{a,x}θ_{b,D(a)x}: Step 2 cancels the common middle comparison; Step 3 uses a common target and then two successive equalizations, the second preserving the first; Step 4 uses the witnesses (1,1) and (a,1); Step 5 builds the cocycle from a common target plus one equalization; Step 6 is the naturality chain with both endpoints matched; Step 7 inverts only θ and η, never ρ; Step 8 holds because a functor preserves inverses. Small cases tested: terminal J; a single transition; parallel arrows, where an equalizing arrow forces θ_{a,x}=θ_{a',x}, so there is no holonomy; empty stages. Stacks 04AX/002V is cited honestly as background with an agent-written proof. No SGA source is cited. No fixes were needed. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FilteredPseudoconeRepresentativeTransport",
+  "declaration": "CategoryTheory.filteredPseudoconeTransport_spec",
+  "declarations": [
+   "CategoryTheory.FilteredPseudoconeCoherent",
+   "CategoryTheory.filteredPseudoconeWitnessTransport",
+   "CategoryTheory.filteredPseudoconeTransport",
+   "CategoryTheory.filteredPseudoconeTransport_spec"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FilteredPseudoconeRepresentativeTransport.lean",
+  "statement": "theorem filteredPseudoconeTransport_spec (F : ∀ i, D.obj i ⥤ A) (θ : ∀ {i k} (a : i ⟶ k), (D.map a).toFunctor ⋙ F k ≅ F i) (hθ : FilteredPseudoconeCoherent D F θ) : (∀ (i j k : J) (x : D.obj i) (y : D.obj j) (h : colimit.ι (D ⋙ Cat.objects) i x = colimit.ι (D ⋙ Cat.objects) j y) (a : i ⟶ k) (b : j ⟶ k) (e : (D.map a).toFunctor.obj x = (D.map b).toFunctor.obj y), filteredPseudoconeTransport D F θ x y h = filteredPseudoconeWitnessTransport D F θ x y a b e) ∧ (∀ (i : J) (x : D.obj i), filteredPseudoconeTransport D F θ x x rfl = Iso.refl ((F i).obj x)) ∧ (∀ (i j k : J) (x : D.obj i) (y : D.obj j) (w : D.obj k) (h : colimit.ι (D ⋙ Cat.objects) i x = colimit.ι (D ⋙ Cat.objects) j y) (h' : colimit.ι (D ⋙ Cat.objects) j y = colimit.ι (D ⋙ Cat.objects) k w), filteredPseudoconeTransport D F θ x y h ≪≫ filteredPseudoconeTransport D F θ y w h' = filteredPseudoconeTransport D F θ x w (h.trans h')) ∧ (∀ (i k : J) (a : i ⟶ k) (x : D.obj i), ∃ h : colimit.ι (D ⋙ Cat.objects) i x = colimit.ι (D ⋙ Cat.objects) k ((D.map a).toFunctor.obj x), filteredPseudoconeTransport D F θ x ((D.map a).toFunctor.obj x) h = ((θ a).app x).symm) ∧ (∀ (i j : J) (x y : D.obj i) (x' y' : D.obj j) (f : x ⟶ y) (g : x' ⟶ y'), colimit.ι (D ⋙ Cat.arrows) i (Arrow.mk f) = colimit.ι (D ⋙ Cat.arrows) j (Arrow.mk g) → ∃ (hx : colimit.ι (D ⋙ Cat.objects) i x = colimit.ι (D ⋙ Cat.objects) j x') (hy : colimit.ι (D ⋙ Cat.objects) i y = colimit.ι (D ⋙ Cat.objects) j y'), (F i).map f ≫ (filteredPseudoconeTransport D F θ y y' hy).hom = (filteredPseudoconeTransport D F θ x x' hx).hom ≫ (F j).map g) ∧ (∀ (G : ∀ i, D.obj i ⥤ A) (η : ∀ {i k} (a : i ⟶ k), (D.map a).toFunctor ⋙ G k ≅ G i), FilteredPseudoconeCoherent D G η → ∀ (ρ : ∀ i, F i ⟶ G i), (∀ (i k : J) (a : i ⟶ k) (x : D.obj i), (θ a).hom.app x ≫ (ρ i).app x = (ρ k).app ((D.map a).toFunctor.obj x) ≫ (η a).hom.app x) → ∀ (i j : J) (x : D.obj i) (y : D.obj j) (h : colimit.ι (D ⋙ Cat.objects) i x = colimit.ι (D ⋙ Cat.objects) j y), (filteredPseudoconeTransport D F θ x y h).hom ≫ (ρ j).app y = (ρ i).app x ≫ (filteredPseudoconeTransport D G η x y h).hom) ∧ (∀ (B : Type u') [Category.{v'} B] (H : A ⥤ B), FilteredPseudoconeCoherent D (fun i ↦ F i ⋙ H) (fun {_ _} a ↦ Functor.isoWhiskerRight (θ a) H) ∧ ∀ (i j : J) (x : D.obj i) (y : D.obj j) (h : colimit.ι (D ⋙ Cat.objects) i x = colimit.ι (D ⋙ Cat.objects) j y), H.mapIso (filteredPseudoconeTransport D F θ x y h) = filteredPseudoconeTransport D (fun i ↦ F i ⋙ H) (fun {_ _} a ↦ Functor.isoWhiskerRight (θ a) H) x y h)",
+  "branch": "newtargets-dag",
+  "by": "Q53",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-870ec5438",
+  "group": "Q53",
+  "result": "pass",
+  "note": "Read node, 4 stmt_deps (Mathlib Category/colimit/IsFiltered, size convention, exists_filteredColimit_category with D : J ⥤ Cat.{z,z} and colimit (D ⋙ Cat.objects)/Cat.arrows), module, report (Worker report + Second reading by Q53). Coherence Prop matches θ_1=1, θ_{ba}=θ_a∘θ_bD(a) with correct eqToHom directions; witness transport = θ_b∘eqToIso∘θ_a^{-1}; canonical transport chooses a real witness from Mathlib Types.FilteredColimit.colimit_eq_iff, and conjunct 1 gives independence for all (k,a,b,e). Unit, cocycle (≪≫ order), transition (∃ over a Prop, equivalent to ∀), complete-arrow square via colimit (D ⋙ Cat.arrows), noninvertible modification, and arbitrary-universe postcomposition with isoWhiskerRight all match the node. lean.statement is verbatim in the file. Docstrings give source and blueprint plus the 8-step proof; the only sorry is the theorem's proof. CoherentPairFunctorDescent/StageSystemFunctorDescent are a different, poset-indexed notion, not duplicates. No findings; not recompiled (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G8",
+  "result": "pass",
+  "landing": "20261026T082009-L-2114839",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -98,7 +98,18 @@
   "lem-sc-sylow-module-filtration"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-curve-estimates",
  "unit": "sk-prop-h2",
  "split_report": {
@@ -116,5 +127,36 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gc2 (reviewer sub-agent of L); spot-checked: Re-review of the repaired re-push after the 14:52 return (head 67e5bb2e5 -> 089a94fa4). Compared every node field of the branch with 67e5bb2e5: the only changes are the ones the return asked for. Point 1 (B5) repaired: source of lem-sc-group-h2-transfer / -cohomology-filtered-union / -coinduced-acyclic now literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-group-cd-one.md '## Proof, paragraph 1/2/3'; I read that file and each paragraph states the node's fact (coset-sum res-cores = [G:H], prime to ell; finite orbits and finite image of continuous cochains on compact G^q; coinduced embedding, right translation, contracting homotopy). Point 2 (B5) repaired: steps 1-3 of the item cite the same file, paragraphs 1-3. Point 3 (F1) repaired: report file list names only the delivered files, no dimension-shift node, no WANTED lines, review names the blueprint file and Stacks 0DVG section read. Point 4 (B2) repaired: steps 1 and 2 end 'H^2(G,M)=0$.'. Statements, uses, proof_deps unchanged from the version whose mathematics the 14:52 review checked; item statement equal to sheaf-dag up to whitespace; I rechecked equivariance (g.iota(m))(x)=iota(m)(xg)=xgm=iota(gm)(x), the shift H^{q+1}(M)=H^q(Q) for q>=1, and lem-sc-sylow-module-filtration's statement (open H of index prime to ell, filtration with trivial F_ell quotients) for step 1. New nodes not on sheaf-dag, created.item is the item. Times: start Sat Oct 10 03:04:33 PM UTC 2026, end Sat Oct 10 03:05:07 PM UTC 2026."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $G$ be a compact topological group (for instance a profinite\ngroup) and $\\ell$ prime. Suppose that\n$H^2(H,\\mathbf F_\\ell)=0$ for every open subgroup $H\\subset G$,\nwith trivial coefficients. Then\n$H^q(G,M)=0$ for $q\\geq2$ and every discrete continuous\n$\\ell$-primary module $M$, with cohomology as in\n[def-exc-continuous-cohomology].",
+  "proof": [
+   {
+    "text": "For finite $M$, apply [lem-sc-sylow-module-filtration]: there is an\nopen subgroup $H$ of index prime to $\\ell$ acting on $M$ through an\n$\\ell$-group, so that $M|_H$ is an iterated extension of trivial modules\n$\\mathbf F_\\ell$. The long exact cohomology sequence, one filtration\nstep at a time, gives $H^2(H,M)=0$. Restriction to $H$ followed by\ncorestriction is multiplication by the index $[G:H]$ on $H^2(G,M)$.\nAs the index is prime to $\\ell$ and $H^2(G,M)$ is killed by a power of\n$\\ell$ (since $M$ is), multiplication by it is invertible there. Hence\n$H^2(G,M)=0$.",
+    "uses": [
+     "lem-sc-sylow-module-filtration"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "An arbitrary discrete $\\ell$-primary module $M$ is the directed union\nof its finite $G$-stable submodules. Indeed the orbit of each element\nis finite, $G$ being compact and the stabilizer open, and a finite set\nof finite-order elements generates a finite abelian group. Embed $M$\nequivariantly in the coinduced module $C(G,M)$ of locally constant\nfunctions $G\\to M$ by $m\\mapsto(g\\mapsto gm)$, with $G$ acting by right\ntranslation. In the abelian category of\n[def-exc-continuous-cohomology] the coinduction functor from abelian\ngroups is right adjoint to the exact forgetful functor, so coinduced\nmodules of injective abelian groups are injective, and a short\ncomputation shows that every coinduced module is acyclic. Hence\n$H^2(G,M)=0$ can be expressed through the invariants of the iterated\ncokernels $C(G,M)/M$ and $C(G,C(G,M)/M)/(C(G,M)/M)$. A locally\nconstant function on the compact space $G$ has finite image, so it\ntakes values in a finite $G$-stable submodule; these cokernels, and\ntheir invariants, are therefore the directed unions of the\ncorresponding objects for the finite $G$-stable submodules. The\nvanishing for finite modules therefore gives $H^2(G,M)=0$ without a\nfiniteness assumption.",
+    "uses": [
+     "def-exc-continuous-cohomology"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Finally the cokernel of $M\\to C(G,M)$ is again discrete\n$\\ell$-primary, and $C(G,M)$ is acyclic, so the long exact sequence\nidentifies $H^{q+1}(G,M)$ with $H^q(G,C(G,M)/M)$ for $q\\geq1$.\nRepeated dimension shifting reduces every degree at least two to the\nvanishing of $H^2$ just proved.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

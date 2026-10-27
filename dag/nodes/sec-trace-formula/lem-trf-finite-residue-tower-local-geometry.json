@@ -1,0 +1,285 @@
+{
+ "id": "lem-trf-finite-residue-tower-local-geometry",
+ "kind": "statement",
+ "title": "Closed points and Noetherian local models in a finite-residue tower",
+ "statement": "Let $k$ be a field [def-weil-field]. Let $p:C\\to\\operatorname{Spec}k$ and $e:D\\to C$ be morphisms of schemes [def-pc-scheme, def-weil-affine-spectrum], both locally of finite type [def-weil-finite-type-morphism]. Let $y\\in D$ and $x=e(y)$. Assume that the actual residue-field extensions $k\\to\\kappa(x)$ induced by $p$ and $\\kappa(x)\\to\\kappa(y)$ induced by $e$ are finite-dimensional [def-weil-residue-field, def-pc-field-extension]. Then $x$ is closed in $C$ and $y$ is closed in $D$ [def-weil-closed-points]. Moreover, $C$ and $D$ are locally Noetherian [pqf-def-locnoeth]. There exist affine open neighbourhoods $U\\subseteq C$ of $x$ and $V\\subseteq D$ of $y$ such that $R=\\Gamma(U,\\mathcal O_C)$ and $S=\\Gamma(V,\\mathcal O_D)$ are Noetherian rings [def-weil-pbc-noetherian-ring]. Writing $\\mathfrak p_x\\subset R$ and $\\mathfrak q_y\\subset S$ for the primes corresponding to $x,y$, the germ maps induce isomorphisms $R_{\\mathfrak p_x}\\xrightarrow{\\sim}\\mathcal O_{C,x}$ and $S_{\\mathfrak q_y}\\xrightarrow{\\sim}\\mathcal O_{D,y}$ [def-weil-pbc-localization-at-prime], and both stalks are Noetherian local rings. No quasi-compactness, separatedness, algebraic closedness of $k$, or etaleness of $e$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex; literature/stacks-project/schemes.tex; literature/stacks-project/algebra.tex",
+  "place": "Morphisms Tag 01TE (lemma-algebraic-residue-field-extension-closed-point-fibre), closedness in the fibre and ascent over a closed base point; Morphisms Tag 01T6 (lemma-finite-type-noetherian), twice. For the affine-local presentations: Schemes Tag 01HV (lemma-spec-sheaves), clause (6), and Algebra Tag 00FN (lemma-Noetherian-permanence), localization clause. This isolates old Steps 4--6 of lem-trf-etale-completed-local-ring-iso."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "def-weil-residue-field",
+  "def-pc-field-extension",
+  "def-weil-closed-points",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "Every ideal $I$ of the field $k$ is either $(0)$ or $(1)$: if $0\\ne a\\in I$, then $a^{-1}a=1\\in I$. Thus every ideal is finitely generated, so $k$ is Noetherian. The single affine open $\\operatorname{Spec}k$ covers itself and has ring of sections $k$. By the definition of locally Noetherian this makes $\\operatorname{Spec}k$ locally Noetherian.",
+   "uses": [
+    "def-weil-field",
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-affine-spectrum",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01OV (definition-noetherian), affine neighbourhood definition; Algebra Tag 00FM (section-Noetherian), first paragraph"
+   }
+  },
+  {
+   "text": "Apply [pqf-lem-locnoeth-lft] to $p:C\\to\\operatorname{Spec}k$, using Step 1 and the assumed local finite type of $p$. It gives local Noetherianity of $C$. Apply the same lemma to $e:D\\to C$, whose target is now locally Noetherian and which is locally of finite type by hypothesis. It gives local Noetherianity of $D$. Both applications use the local conclusion; no quasi-compactness is needed.",
+   "uses": [
+    "pqf-lem-locnoeth-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6 (lemma-finite-type-noetherian), locally Noetherian case, applied twice"
+   }
+  },
+  {
+   "text": "Let $s$ be the unique point of $\\operatorname{Spec}k$. By [def-weil-residue-field], its residue field is canonically $k$ and the residue map $\\kappa(s)\\to\\kappa(x)$ of $p$ is the structural extension assumed finite in the statement. Apply [lem-trf-finite-residue-point-closed-in-fibre] to $p$ and $x$: the local finite type and finite residue extension hypotheses both hold, so the induced point of $C_s$ is closed. By [def-pc-scheme-fibre], $C_s\\to C$ is a homeomorphism onto $p^{-1}(s)$. Since the base has just one point, $p^{-1}(s)=C$, and therefore $\\{x\\}$ is closed in $C$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-residue-field",
+    "lem-trf-finite-residue-point-closed-in-fibre",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TE (lemma-algebraic-residue-field-extension-closed-point-fibre); Schemes Tag 01K1 (lemma-fibre-topological)"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-finite-residue-point-closed-in-fibre] to $e$ and $y$, using $x=e(y)$, the assumed local finite type of $e$, and the assumed finiteness of the actual residue map $\\kappa(x)\\to\\kappa(y)$. The point of $D_x$ induced by $y$ is closed. The homeomorphism of [def-pc-scheme-fibre] identifies this with closedness of $\\{y\\}$ in the subspace $e^{-1}(x)$. Since $\\{x\\}$ is closed by Step 3 and $e$ is continuous, $e^{-1}(x)$ is closed in $D$. A subset closed in a closed subspace is closed in the ambient space: writing $\\{y\\}=F\\cap e^{-1}(x)$ with $F$ closed in $D$ proves $\\{y\\}$ closed in $D$.",
+   "uses": [
+    "lem-trf-finite-residue-point-closed-in-fibre",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TE (lemma-algebraic-residue-field-extension-closed-point-fibre), closedness ascends over a closed base point by elementary topology; Schemes Tag 01K1"
+   }
+  },
+  {
+   "text": "By [pqf-def-locnoeth], each scheme in Step 2 has an affine open cover with Noetherian section rings. Choose a member $U$ of such a cover of $C$ containing $x$, and a member $V$ of such a cover of $D$ containing $y$. Then $R=\\Gamma(U,\\mathcal O_C)$ and $S=\\Gamma(V,\\mathcal O_D)$ are Noetherian by the choice of the covers. Only these two members are chosen; the covers need not be finite and no assertion about intersections of affine opens is used.",
+   "uses": [
+    "pqf-def-locnoeth"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01OV (definition-noetherian), choosing the affine neighbourhoods in its definition"
+   }
+  },
+  {
+   "text": "Apply clause (c) of [lem-weil-pbc-affine-open-stalk-localization] first to $(C,U,x)$ and then to $(D,V,y)$. The opens are affine and contain the indicated points by Step 5. It gives exactly the germ-induced isomorphisms $R_{\\mathfrak p_x}\\xrightarrow{\\sim}\\mathcal O_{C,x}$, $r/s\\mapsto r_xs_x^{-1}$, and $S_{\\mathfrak q_y}\\xrightarrow{\\sim}\\mathcal O_{D,y}$ with the analogous formula. In particular these are presentations of the actual structure-sheaf stalks through the chosen section rings.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV (lemma-spec-sheaves), clause (6), and the open-subspace stalk identification of Tag 01HF"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-localization-noetherian] for each germ localization in Step 6. Its source rings $R,S$ are Noetherian by Step 5 and the required localization conditions are precisely those supplied in Step 6, so the actual stalk rings $\\mathcal O_{C,x}$ and $\\mathcal O_{D,y}$ are Noetherian. By [def-weil-pbc-localization-at-prime], localization at a prime is a local ring; the isomorphisms of Step 6 therefore also make these stalks local rings. This supplies both Noetherian local rings and the asserted germ-localization presentations.",
+   "uses": [
+    "lem-weil-pbc-localization-noetherian",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FN (lemma-Noetherian-permanence), localization clause; Tag 07BH (section-local-rings), localizations at primes"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-field",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum",
+  "pqf-def-locnoeth",
+  "pqf-lem-locnoeth-lft",
+  "def-weil-residue-field",
+  "lem-trf-finite-residue-point-closed-in-fibre",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-localization-noetherian",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 01TE (lemma-algebraic-residue-field-extension-closed-point-fibre) and 01T6 (lemma-finite-type-noetherian), with Schemes Tags 01K1, 01HV, Properties Tag 01OV, and Algebra Tag 00FN for the affine-local presentations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isNoetherianRing_stalk|isNoetherian.*[Ss]talk|stalk.*[Nn]oetherian",
+   "results": "{\"t\": \"2026-10-22T06:43:10Z\", \"tool\": \"grep\", \"query\": \"isNoetherianRing_stalk|isNoetherian.*[Ss]talk|stalk.*[Nn]oetherian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Noetherian.lean\"], \"digest\": \"25177df7917edb83\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local Noetherianity and Noetherian stalks are already in Mathlib, but the hits do not jointly give closedness from the two supplied finite residue extensions and the affine-local presentations; this needs the fibre and affine-neighbourhood arguments"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The stalks of the sources in a tower of locally finite type scheme morphisms over a field are Noetherian local rings",
+   "results": "{\"t\": \"2026-10-22T06:43:11Z\", \"tool\": \"leansearch\", \"query\": \"The stalks of the sources in a tower of locally finite type scheme morphisms over a field are Noetherian local rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\", \"AlgebraicGeometry.LocallyRingedSpace.isLocalRing\", \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"AlgebraicGeometry.LocallyRingedSpace.isLocalHomStalkMap'\", \"AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian\", \"AlgebraicGeometry.localRingHom_comp_stalkIso\", \"AlgebraicGeometry.LocallyOfFiniteType.stalkMap\", \"AlgebraicGeometry.isLocallyNoetherian_of_affine_cover\"], \"digest\": \"0d466bbc85184d5e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local Noetherianity and Noetherian stalks are already in Mathlib, but the hits do not jointly give closedness from the two supplied finite residue extensions and the affine-local presentations; this needs the fibre and affine-neighbourhood arguments"
+  },
+  {
+   "tool": "grep",
+   "query": "residue.*(closed|finite)|closed.*residue",
+   "results": "{\"t\": \"2026-10-22T06:43:30Z\", \"tool\": \"grep\", \"query\": \"residue.*(closed|finite)|closed.*residue\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean\", \"Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean\", \"Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean\", \"Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\"], \"digest\": \"3deba2a1542c01ad\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local Noetherianity and Noetherian stalks are already in Mathlib, but the hits do not jointly give closedness from the two supplied finite residue extensions and the affine-local presentations; this needs the fibre and affine-neighbourhood arguments"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFiniteType, IsLocallyNoetherian",
+   "results": "{\"t\": \"2026-10-22T06:43:31Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.LocallyOfFiniteType, IsLocallyNoetherian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'IsLocallyNoetherian'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local Noetherianity and Noetherian stalks are already in Mathlib, but the hits do not jointly give closedness from the two supplied finite residue extensions and the affine-local presentations; this needs the fibre and affine-neighbourhood arguments"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For locally finite type morphisms D to C to Spec k with k a field and finite residue extensions at y and x, x and y are closed and have affine Noetherian neighbourhoods whose germ maps are localizations at the corresponding primes",
+   "results": "{\"t\": \"2026-10-22T06:43:41Z\", \"tool\": \"leanfinder\", \"query\": \"For locally finite type morphisms D to C to Spec k with k a field and finite residue extensions at y and x, x and y are closed and have affine Noetherian neighbourhoods whose germ maps are localizations at the corresponding primes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.LocallyOfFiniteType.stalkMap\", \"AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue\", \"AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.Scheme.isLocalHom_stalkClosedPointTo\", \"AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField\"], \"digest\": \"695df6df94c9572a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local Noetherianity and Noetherian stalks are already in Mathlib, but the hits do not jointly give closedness from the two supplied finite residue extensions and the affine-local presentations; this needs the fibre and affine-neighbourhood arguments"
+  },
+  {
+   "tool": "grep",
+   "query": "isLocallyNoetherian|isNoetherianRing|localization|affineCover",
+   "results": "{\"t\": \"2026-10-22T06:44:01Z\", \"tool\": \"grep\", \"query\": \"isLocallyNoetherian|isNoetherianRing|localization|affineCover\", \"sub\": \"AlgebraicGeometry/Noetherian.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"10\", \"21\", \"29\", \"32\", \"52\"], \"digest\": \"9d88861d8af81ff9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local Noetherianity and Noetherian stalks are already in Mathlib, but the hits do not jointly give closedness from the two supplied finite residue extensions and the affine-local presentations; this needs the fibre and affine-neighbourhood arguments"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite residue fields in a locally finite type scheme tower over a field give closed points with affine Noetherian neighborhoods and stalks given by localization",
+   "results": "{\"t\": \"2026-10-22T06:44:02Z\", \"tool\": \"leansearch\", \"query\": \"Finite residue fields in a locally finite type scheme tower over a field give closed points with affine Noetherian neighborhoods and stalks given by localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.ResidueField.finite_of_finite\", \"IsLocalRing.finite_residueField_of_compactSpace\", \"AlgebraicGeometry.LocallyRingedSpace.residueField\", \"AlgebraicGeometry.LocallyRingedSpace.Γevaluation\", \"AlgebraicGeometry.Scheme.residueField\", \"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\", \"AlgebraicGeometry.LocallyRingedSpace.instFieldCarrierResidueField\", \"IsLocalRing.ResidueField\"], \"digest\": \"8227718ac5077d4b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local Noetherianity and Noetherian stalks are already in Mathlib, but the hits do not jointly give closedness from the two supplied finite residue extensions and the affine-local presentations; this needs the fibre and affine-neighbourhood arguments"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.IsLocallyNoetherian",
+   "results": "{\"t\": \"2026-10-22T06:44:02Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.IsLocallyNoetherian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsLocallyNoetherianOfLocallyOfFiniteType\", \"AlgebraicGeometry.LocallyOfFinitePresentation.iff_locallyOfFiniteType\", \"AlgebraicGeometry.instIsLocallyNoetherianPullbackSchemeOfLocallyOfFiniteType\", \"AlgebraicGeometry.instIsLocallyNoetherianPullbackSchemeOfLocallyOfFiniteType_1\"], \"digest\": \"3d5a3bb8cdc10b25\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local Noetherianity and Noetherian stalks are already in Mathlib, but the hits do not jointly give closedness from the two supplied finite residue extensions and the affine-local presentations; this needs the fibre and affine-neighbourhood arguments"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed points in a locally finite type tower over a field with finite residue field extensions admit affine Noetherian neighborhoods and local stalk localization presentations",
+   "results": "{\"t\": \"2026-10-22T06:44:13Z\", \"tool\": \"leanfinder\", \"query\": \"Closed points in a locally finite type tower over a field with finite residue field extensions admit affine Noetherian neighborhoods and local stalk localization presentations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.LocallyOfFiniteType.stalkMap\", \"Algebra.quasiFinite_iff\", \"AlgebraicGeometry.IsLocallyNoetherian.component_noetherian\", \"AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier\", \"Algebra.QuasiFiniteAt\", \"AlgebraicGeometry.isLocallyNoetherian_Spec\"], \"digest\": \"95928b2e26744c8e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local Noetherianity and Noetherian stalks are already in Mathlib, but the hits do not jointly give closedness from the two supplied finite residue extensions and the affine-local presentations; this needs the fibre and affine-neighbourhood arguments"
+  },
+  {
+   "tool": "grep",
+   "query": "isClosed_singleton_iff_locallyOfFiniteType|isLocallyNoetherian|isNoetherianRing.*[Ss]talk|isLocalization.*[Ss]talk",
+   "results": "{\"t\": \"2026-10-23T04:51:04Z\", \"tool\": \"grep\", \"query\": \"isClosed_singleton_iff_locallyOfFiniteType|isLocallyNoetherian|isNoetherianRing.*[Ss]talk|isLocalization.*[Ss]talk\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\"], \"digest\": \"ba36f62f9b767e27\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give separate local Noetherian, affine-localization or closed-point criteria; none directly states the finite-residue tower and its actual germ models. Finite.lean:221 requires local finite type of the residue-point morphism, which is a further argument from the given hypotheses; the existing fibre-closedness node supplies that argument on the Stacks route."
+  },
+  {
+   "tool": "grep",
+   "query": "isClosed_singleton_iff_locallyOfFiniteType|isClosed.*[Rr]esidue|[Rr]esidue.*isClosed",
+   "results": "{\"t\": \"2026-10-23T04:54:02Z\", \"tool\": \"grep\", \"query\": \"isClosed_singleton_iff_locallyOfFiniteType|isClosed.*[Rr]esidue|[Rr]esidue.*isClosed\", \"sub\": \"AlgebraicGeometry/Morphisms\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\"], \"digest\": \"cf7f75e399c7e9d7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give separate local Noetherian, affine-localization or closed-point criteria; none directly states the finite-residue tower and its actual germ models. Finite.lean:221 requires local finite type of the residue-point morphism, which is a further argument from the given hypotheses; the existing fibre-closedness node supplies that argument on the Stacks route."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A point of a scheme locally of finite type over a field with finite dimensional residue field is closed, and the scheme is locally Noetherian with Noetherian affine sections and stalks",
+   "results": "{\"t\": \"2026-10-23T04:54:03Z\", \"tool\": \"leanfinder\", \"query\": \"A point of a scheme locally of finite type over a field with finite dimensional residue field is closed, and the scheme is locally Noetherian with Noetherian affine sections and stalks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.IsLocallyNoetherian\", \"AlgebraicGeometry.IsNoetherian\", \"AlgebraicGeometry.IsLocallyArtinian\", \"AlgebraicGeometry.isClosed_singleton_iff_isClosedImmersion\", \"AlgebraicGeometry.IsArtinianScheme\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.IsLocallyArtinian.isLocallyNoetherian\"], \"digest\": \"facaeab0d260991b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give separate local Noetherian, affine-localization or closed-point criteria; none directly states the finite-residue tower and its actual germ models. Finite.lean:221 requires local finite type of the residue-point morphism, which is a further argument from the given hypotheses; the existing fibre-closedness node supplies that argument on the Stacks route."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.IsLocallyNoetherian",
+   "results": "{\"t\": \"2026-10-23T04:55:13Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.IsLocallyNoetherian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsLocallyNoetherianOfLocallyOfFiniteType\", \"AlgebraicGeometry.LocallyOfFinitePresentation.iff_locallyOfFiniteType\", \"AlgebraicGeometry.instIsLocallyNoetherianPullbackSchemeOfLocallyOfFiniteType\", \"AlgebraicGeometry.instIsLocallyNoetherianPullbackSchemeOfLocallyOfFiniteType_1\"], \"digest\": \"3d5a3bb8cdc10b25\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give separate local Noetherian, affine-localization or closed-point criteria; none directly states the finite-residue tower and its actual germ models. Finite.lean:221 requires local finite type of the residue-point morphism, which is a further argument from the given hypotheses; the existing fibre-closedness node supplies that argument on the Stacks route."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme locally of finite type over a field has Noetherian affine neighborhoods and Noetherian local stalks; finite residue field extensions give closed points",
+   "results": "{\"t\": \"2026-10-23T04:55:13Z\", \"tool\": \"leansearch\", \"query\": \"A scheme locally of finite type over a field has Noetherian affine neighborhoods and Noetherian local stalks; finite residue field extensions give closed points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isLocallyNoetherian_of_affine_cover\", \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian\", \"AlgebraicGeometry.IsLocallyNoetherian.component_noetherian\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.isLocallyNoetherian_iff_of_affine_openCover\", \"AlgebraicGeometry.IsLocallyNoetherian\", \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\"], \"digest\": \"d3cee569cf8a73b8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give separate local Noetherian, affine-localization or closed-point criteria; none directly states the finite-residue tower and its actual germ models. Finite.lean:221 requires local finite type of the residue-point morphism, which is a further argument from the given hypotheses; the existing fibre-closedness node supplies that argument on the Stacks route."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a tower D to C to Spec k of locally finite type morphisms, finite dimensional actual residue extensions imply the two points are closed, both schemes locally Noetherian, with affine Noetherian localization models for their local rings",
+   "results": "{\"t\": \"2026-10-23T04:56:49Z\", \"tool\": \"leanfinder\", \"query\": \"In a tower D to C to Spec k of locally finite type morphisms, finite dimensional actual residue extensions imply the two points are closed, both schemes locally Noetherian, with affine Noetherian localization models for their local rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.IsClosedImmersion.SpecMap_residue\", \"AlgebraicGeometry.IsClosedImmersion.Spec_map_residue\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue\", \"AlgebraicGeometry.isClosed_singleton_iff_isClosedImmersion\", \"AlgebraicGeometry.Scheme.Spec_map_residue_apply\", \"AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField\"], \"digest\": \"6f41b394b0660673\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give separate local Noetherian, affine-localization or closed-point criteria; none directly states the finite-residue tower and its actual germ models. Finite.lean:221 requires local finite type of the residue-point morphism, which is a further argument from the given hypotheses; the existing fibre-closedness node supplies that argument on the Stacks route."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-etale-completed-local-ring-iso",
+  "date": "2026-10-22",
+  "group": "Q07"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical semistable auxiliary branch of lem-trf-local-term-locality, Proof (1)--(2), via Stacks Tags 0478 and 039M: an étale map over an algebraically closed residue field preserves the point and completed local ring. Subargument extracted from lem-trf-etale-completed-local-ring-iso: old Steps 4--6: closedness through the two fibres, the closed-subspace argument, two locally Noetherian ascents, and Noetherian affine stalk localizations",
+   "via": [
+    "lem-trf-etale-completed-local-ring-iso",
+    "lem-trf-nodal-point-etale-locality",
+    "lem-trf-nodal-family-etale-source-locality",
+    "lem-trf-valuation-symmetric-nodal-blowup",
+    "lem-trf-valuation-marked-strictification",
+    "lem-trf-valuation-common-strict-semistable-refinement",
+    "lem-trf-valuation-semistable-dominates-stable",
+    "lem-trf-stable-modification-uniqueness-normal",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-finite-residue-tower-local-geometry",
+  "worker": "stage1",
+  "summary": "Kept the full statement and split its proof using only existing DAG nodes: field Noetherianity, two local finite-type ascents, fibre closedness followed by explicit ambient topology, choice of Noetherian affine cover members, actual germ localizations, and Noetherian localization permanence. Checked the Stacks sources, each cited statement and all hypotheses. No new nodes, no Lean attachment, no statement change.",
+  "blueprint": "Realizes the historical auxiliary branch of lem-trf-local-term-locality Proof (1)--(2) recorded in blueprint.from, through lem-trf-etale-completed-local-ring-iso old Steps 4--6. Current main-20261015 replaces the old main trace-locality proof; this split only supplies the already-extracted local-geometry tool, without changing the chapter or unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q84-af07a5931",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-af07a5931 (reviewer sub-agent of L); spot-checked: Read the item and every cited node in full; no new nodes are created, and the live item is still unsplit with the same statement. The statement is true and unchanged. Stacks sources checked: 01TE (Morphisms, morphisms.tex:3565) for closedness in the fibre, with part (2) closing over a closed base point by elementary topology as Steps 3-4 write out; 01T6 (Morphisms, morphisms.tex:2765); 01OV (Properties, properties.tex:421). Step 1 (elementary): a field is Noetherian, and Spec k is a one-member Noetherian affine cover, so it is locally Noetherian. Step 2 applies pqf-lem-locnoeth-lft (Mathlib leaf) to p and then to e. Steps 3-4 use the same-unit lem-trf-finite-residue-point-closed-in-fibre and the homeomorphism onto the preimage in def-pc-scheme-fibre: p^{-1}(s)=C makes x closed, then e^{-1}(x) is closed and y is closed in it. Step 5 (elementary) picks a cover member through each point from pqf-def-locnoeth. Step 6 is clause (c) of lem-weil-pbc-affine-open-stalk-localization (localization at the prime via the germs). Step 7 uses lem-weil-pbc-localization-noetherian with S = R minus p_x, and locality from def-weil-pbc-localization-at-prime. proof_deps equal the union of the step uses. No SGA is cited, no off-unit statement needs a tool_use, and there is no cycle. Duplicate search (01TE/01TF/01T6 and stalk-Noetherian nodes) found none: lem-kun-closed-point-field needs finite type, and lem-sbc-composite-fibre-local-models is about fibre stalks. The sole citer, lem-trf-etale-completed-local-ring-iso at its Step 4, satisfies the hypotheses. Edge cases: identity of Spec k, purely inseparable k'/k, k[eps], infinite disjoint unions, the generic point of A^1 (excluded by the hypothesis), and empty schemes."
+ }
+}

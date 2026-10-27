@@ -1,0 +1,171 @@
+{
+ "id": "def-sfb-condensed-point-modules-geometric-base-change",
+ "kind": "definition",
+ "title": "Condensed point module categories and geometric base change",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix a universe $u$. Condensed rings mean ring objects in abelian sheaves on the coherent site of profinite sets [sk-def-sfb-condensed-ring]. Write $\\mathrm{Coefficients}$ for the category of commutative such ring objects, with their ring-object morphisms. For a scheme $X$ [def-pc-scheme] and a condensed ring $R$, let $R_X=p_X^*R$ be its pulled-back ring [sk-def-sfb-pulled-back-coefficients] and define\n$$\\mathrm{Modules}(R,X)=\\operatorname{Mod}_{R_X}(\\operatorname{Sh}(X_{\\mathrm{proet}},\\operatorname{Ab})),$$\nusing internal module objects [sk-def-sfb-module-objects]. Let $p_X^*\\dashv p_{X*}$ be the composite point adjunction of [sk-def-sfb-pullback-from-point]. Define the point module direct image\n$$\\mathrm{pointModules}(R,X)=\\operatorname{Res}_{\\eta_R}\\circ p_{X*}^{\\mathrm{Mod}}:\\mathrm{Modules}(R,X)\\longrightarrow\\operatorname{Mod}_{R}(\\operatorname{Sh}(*_{\\mathrm{proet}},\\operatorname{Ab})),$$\nwhere $p_{X*}^{\\mathrm{Mod}}$ uses the lax monoidal direct image and $\\eta_R:R\\to p_{X*}p_X^*R$ is the unit of that actual composite adjunction; restriction uses its actual scalar action. For fields $k,k^s$ with a specified $k$-algebra structure and $k^s$ a separable closure of $k$ [def-pd-separable-closure], and a morphism $a:X\\to\\operatorname{Spec}k$, define\n$$\\mathrm{geometricScheme}(k,k^s,X,a)=X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k^s,\\qquad\n\\mathrm{geometricProjection}(k,k^s,X,a)=\\operatorname{pr}_1.$$\nSchemes and fields are in universe $u$ and abelian coefficient groups in universe $u+1$. These are definitions of the categories, point functor and pullback scheme, with no Galois-descent conclusion.",
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-pc-scheme",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-pullback-from-point",
+  "def-pd-separable-closure"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics",
+  "place": "sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3), geometric base change and point cohomology before arithmetic descent"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "internal condensed coefficient modules point direct image and geometric base change",
+   "results": {
+    "t": "2026-10-24T16:07:28Z",
+    "tool": "leansearch",
+    "query": "internal condensed coefficient modules point direct image and geometric base change",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CondensedMod.isDiscrete_tfae",
+     "CondensedMod.hom_naturality_apply",
+     "Condensed.profiniteSolidIsPointwiseRightKanExtension",
+     "CondensedMod",
+     "Condensed.free",
+     "IsBaseChange.directSum",
+     "Condensed.forget",
+     "Condensed.freeForgetAdjunction"
+    ],
+    "digest": "87b9c038929df096"
+   },
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; reuse the existing project definitions rather than defining another object."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "module objects over a pulled back condensed ring and direct image to the condensed point",
+   "results": {
+    "t": "2026-10-24T16:07:32Z",
+    "tool": "leanfinder",
+    "query": "module objects over a pulled back condensed ring and direct image to the condensed point",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CondensedMod",
+     "CondensedMod.LocallyConstant.functor",
+     "CondensedMod.LocallyConstant.adjunction",
+     "CondensedMod.LocallyConstant.functorToPresheaves",
+     "CondensedMod.ofSheafCompHaus",
+     "LightCondMod.LocallyConstant.functor",
+     "LightCondensed.forget_obj_val_map",
+     "CompHausLike.LocallyConstantModule.functorToPresheaves"
+    ],
+    "digest": "6c6111b14bddfc7f"
+   },
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; reuse the existing project definitions rather than defining another object."
+  },
+  {
+   "tool": "grep",
+   "query": "pointModules|geometricScheme|supportedRationalizedLattice|supportedLatticeIntegralRing",
+   "results": {
+    "t": "2026-10-24T16:07:28Z",
+    "tool": "grep",
+    "query": "pointModules|geometricScheme|supportedRationalizedLattice|supportedLatticeIntegralRing",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; reuse the existing project definitions rather than defining another object."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"pointModules|geometricScheme|supportedRationalizedLattice|supportedLatticeIntegralRing\" lean/WeilConjectures lean/Sheaf; scan definition-node lean declarations; blueprint_refs.py search",
+   "results": "No upstream WeilConjectures declaration and no definition-node owner of the requested exact helpers. Existing helpers occur in CondensedGaloisGlobalDescent and SupportedLatticeNormProjection; blueprint searches geometric sections, supported lattice, condensed point, integral generators gave no matching definition unit.",
+   "date": "2026-10-24",
+   "verdict": "Attach the existing plain definitions to new definition nodes as requested by the immutable-head review; do not use the enclosing theorem as the owner."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-geometric-generator-projection-devissage",
+  "date": "2026-10-24",
+  "group": "Q159"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3), geometric base change and point cohomology before arithmetic descent",
+   "via": [
+    "lem-sfb-geometric-generator-projection-devissage",
+    "lem-sfb-geometric-condensed-finite-scalar-model",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CondensedGaloisGlobalDescent",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedGalois.pointModules",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedGalois.Modules",
+   "AlgebraicGeometry.ProEtale.CondensedGalois.pointAdjunction",
+   "AlgebraicGeometry.ProEtale.CondensedGalois.pointModules",
+   "AlgebraicGeometry.ProEtale.CondensedGalois.Coefficients",
+   "AlgebraicGeometry.ProEtale.CondensedGalois.geometricScheme",
+   "AlgebraicGeometry.ProEtale.CondensedGalois.geometricProjection"
+  ],
+  "statement": "def pointModules (R : Profinite.CondensedRing.{u}) (X : Scheme.{u}) :\n    Modules R X ⥤ Profinite.CondensedAction.Modules R",
+  "branch": "newtargets-dag",
+  "by": "Q159",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Owns only the existing plain helper definitions, not the enclosing condensed Galois global-descent theorem or its conclusion. The actual composite adjunction fixes the scalar action of pointModules. No Lean source is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-502b56fbe",
+  "group": "Q159",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-502b56fbe",
+  "group": "Q159",
+  "result": "fix",
+  "note": "Re-delivery after the 121e H2 RETURN. The item Lean is byte-identical to the reviewed head (sha a24e…122a), and the clause-by-clause match was re-confirmed: primes, CharP, IsSepClosure, separated finite type, incomplete normed algebraic closure Ω, finite E, all-continuous A and B, constant-model Dbc; conclusions are Dbc on T, finite cone/shift generation by constructible supported lisse lattices, IsIso of the canonical pointProjection, and π pinned componentwise with CommShift and triangle morphisms. Edge cases covered (empty X, V=0, rank 0, no completeness, no flatness). The two new existing-binding definition nodes (def-sfb-condensed-point-modules-geometric-base-change, def-sfb-supported-lattice-norm-coefficients) were read against the CondensedGaloisGlobalDescent and SupportedLatticeNormProjection source; signatures are verbatim and check_new_node returns [] for both. The item's stmt_deps are the 11 base nodes plus the 2 new nodes, with no theorem citations. F1 (H2): canonicalPointScalar, used in the IsIso clause and in pinning π, is owned only by the landed def-sfb-canonical-point-scalar-comparison, which the re-delivery dropped and left unreached. FIX: fixes/def-sfb-supported-lattice-norm-coefficients.json adds it to stmt_deps, with a TeX sentence and a note line. The fixed node passes check_new_node; the owner is reached via item→new node→owner, with no cycle. No Lean change, so no compile. Advisory: pointUnit_isMonHom is owned by the global-descent theorem node, and two live def nodes still cite that theorem."
+ }
+}

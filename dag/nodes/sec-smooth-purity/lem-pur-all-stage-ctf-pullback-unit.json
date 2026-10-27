@@ -1,0 +1,340 @@
+{
+ "id": "lem-pur-all-stage-ctf-pullback-unit",
+ "kind": "statement",
+ "title": "All-stage finite-Tor pullback and the completed coefficient unit",
+ "statement": "Fix the purity coefficient datum [def-pur-conventions]: $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}(k)$, a finite extension $E/\\mathbf Q_\\ell$ inside $\\overline{\\mathbf Q}_\\ell$, its valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and $A_{E,j}=\\mathcal O_E/\\varpi_E^j$ for $j\\geq1$. Work on the small pro-etale sites [def-weil-pbc-proetale-site], with the derived operations [def-weil-derived-pullback-tensor-hom] and finite-Tor constructible categories [def-weil-finite-tor-amplitude]. For a scheme $T$, the coefficient unit $\\Lambda_T$ is $(A_{E,n})_T[0]$ at $\\Lambda=A_{E,n}$, $n\\geq1$, the completed sheaf $\\widehat{\\mathcal O}_{E,T}[0]$ at $\\Lambda=\\mathcal O_E$ [def-weil-completed-integral-coefficients], and its rationalized or common-stage image at $\\Lambda=E,\\overline{\\mathbf Q}_\\ell$.\n\nLet $f:X\\to Y$ be a separated finite-type morphism between finite-type $k$-schemes [def-weil-proper-morphism, def-weil-finite-type-morphism]; the schemes themselves need not be separated over $k$. For every $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$, derived pullback restricts to\n$$\n Lf^*:D^b_{ctf}(Y,\\Lambda)\\longrightarrow D^b_{ctf}(X,\\Lambda).\n$$\nAt finite coefficients, if $K\\in D^b_c(Y,A_{E,n})$ has Tor amplitude in $[a,b]$, then $Lf_n^*K$ is bounded constructible and has Tor amplitude in the same interval $[a,b]$. At integral coefficients, if $K\\in D^b_c(Y,\\mathcal O_E)$ has every reduction $K_j=K\\otimes^L_{\\mathcal O_E}A_{E,j}$ of Tor amplitude in one interval $[a,b]$ independent of $j$, then $Lf^*K$ is derived complete and bounded constructible, its canonical reduction is $(Lf^*K)_j\\simeq Lf_j^*K_j$, and every reduction has Tor amplitude in that same interval. At the rational stage the restricted functor is integral pullback on representatives, and at the algebraically closed stage it is pullback on a common finite coefficient-field representative; at these two stages $D^b_{ctf}=D^b_c$.\n\nThere are canonical derived unit isomorphisms\n$$\n u_{f,\\Lambda}:Lf^*\\Lambda_Y\\xrightarrow{\\sim}\\Lambda_X.\n$$\nAt finite level this is the exact inverse-image identification $f^{-1}(A_{E,n})_Y\\simeq(A_{E,n})_X$. At integral level it is the map obtained by applying the specified derived inverse-limit construction of pullback to these compatible finite identifications:\n$$\n Lf^*\\widehat{\\mathcal O}_{E,Y}\\simeq R\\varprojlim_j\\operatorname{Res}_j(A_{E,j})_X\\simeq\\widehat{\\mathcal O}_{E,X}.\n$$\nHere $\\operatorname{Res}_j$ means restriction of coefficient scalars along $\\mathcal O_E\\to A_{E,j}$, and the last isomorphism uses the finite reductions and derived completeness of the completed unit. At field stages $u_{f,\\Lambda}$ is the rationalized or common-stage image of this integral unit isomorphism. These statements concern the actual completed coefficient sheaf, not the discrete constant integral sheaf, and include empty schemes.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+  "place": "Formula Ls* Rg! Lambda_B and final Picard assertion: returned proof steps 4-6, fixed-interval finite pullback, uniform integral reductions, field representatives and completed-unit pullback"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-pbc-proetale-site",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-integral-derived-reduction",
+  "def-weil-derived-limit",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-zl-constant-geometric-stalk-unit"
+ ],
+ "proof": [
+  {
+   "text": "At every positive exponent n+1 apply sf_pullback_torAmplitude [lem-sf-pullback-tor-amplitude] to the given f, K and interval [a,b]. Its finite tensor-pullback presentation is identified with finiteDerivedPullback by openSquareDerivedPullbackModel [def-trf-finite-pullback-coordinate-comparison]. Bounded constructibility transports along this isomorphism by [lem-weil-proetale-dbc-triangulated]. Tor amplitude transports directly: a representative of the target, composed with the inverse isomorphism, is a representative of the source, so the same tensor-vanishing assertion applies. Unpack finiteTorConstructible and use the same interval to obtain the second finite-stage clause.",
+   "uses": [
+    "lem-sf-pullback-tor-amplitude",
+    "def-trf-finite-pullback-coordinate-comparison",
+    "lem-weil-proetale-dbc-triangulated",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-finite-tor-comparison/lem-sf-pullback-tor-amplitude.proof.md",
+    "place": "entire finite-stage proof"
+   }
+  },
+  {
+   "text": "Derive invertibility of ell in residue fields from the purity base datum. Clause 1 of integralOperations_preserve_constructible [lem-pur-integral-operations-preserve-constructible] gives bounded constructibility of integral pullback and invertibility of integralPullbackFiniteComparison for every good representative. Choose a cochain representative by essential surjectivity of derived localization and resolve it by a flat-term K-flat complex [lem-pc-kflat-resolution]. Transport categorical termwise flatness to site flatness with siteSheafTensorRightIso [lem-weil-pbc-independent-sheaf-tensor-colimits]. At level n compose the inverse-image reduction isomorphism as follows: asIso of integralPullbackFiniteComparison, localization of integralFinitePullbackModel [lem-weil-pbc-proetale-derived-pullback-composition], the exact-functor derived factorization, finite reduction on the K-flat representative [def-sf-finite-reduction-computation], and openSquareDerivedPullbackModel [def-trf-finite-pullback-coordinate-comparison]. This identifies the actual reduction of integral pullback with finiteDerivedPullback of the actual reduction of K. Constructibility of that input reduction comes from sfIntegralConstructible. Step 1 preserves its supplied Tor interval [a,b]; transport back along the composed isomorphism. Do this for all n with the same a,b. Retain the all-representatives IsIso assertion supplied by integralOperations_preserve_constructible. Finally unpack finiteTorConstructibleIntegral and reuse the same ordered interval to obtain its preservation.",
+   "uses": [
+    "lem-pur-integral-operations-preserve-constructible",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "def-sf-finite-reduction-computation",
+    "def-trf-finite-pullback-coordinate-comparison",
+    "lem-sf-pullback-tor-amplitude",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemmas 6.5.3, 6.5.4 and 6.5.9(5), pp. 49-51; fixed interval from Step 1"
+   }
+  },
+  {
+   "text": "Use the existing finiteUnit and finiteUnit_reduction declarations [lem-zl-constant-geometric-stalk-unit]. They are the exact constant-ring inverse-image unit and its quotient-transition compatibility. Their module is publicly imported; no second unit or proof of this compatibility is constructed here.",
+   "uses": [
+    "lem-zl-constant-geometric-stalk-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099N, lemma-pushforward-Noetherian-case (5), finite coefficient identification; explicit quotient compatibility"
+   }
+  },
+  {
+   "text": "Use the existing integralChainUnit_existsUnique, integralChainUnit_isIso and integralUnit declarations [lem-zl-constant-geometric-stalk-unit]. These concern the regular completed coefficient sheaf and the actual strict Roos comparison, with zero shifted coordinate. Their published construction already includes the regular finite reductions, completeness and quotient augmentation, so this item reuses it instead of reconstructing it.",
+   "uses": [
+    "lem-zl-constant-geometric-stalk-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 3.5.2 and Section 6.5; regular-module specialization and actual quotient augmentation"
+   }
+  },
+  {
+   "text": "The rationalUnit definition first uses the unchanged-object equation of rationalDerivedPullback [def-weil-derived-pullback-tensor-hom], then applies sfRationalConstructibleLocalization to the integralUnit of [lem-zl-constant-geometric-stalk-unit] in the full integral constructible category. The commonUnit definition first uses the unchanged-stage equation of commonStageDerivedPullback and then applies the same-stage inclusion to rationalUnit. Thus both field comparisons are the prescribed images of the actual integral arrow. No new coefficient objects are chosen.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-zl-constant-geometric-stalk-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099N, lemma-pushforward-Noetherian-case (5); specified strict-cone construction, agent assembly"
+   }
+  },
+  {
+   "text": "At field coefficients finiteTorFieldCoefficientCategory is the full constructible category by definition [def-weil-finite-tor-amplitude]. The rational and common-stage derived pullback functors of [def-weil-derived-pullback-tensor-hom] already have these domains and codomains. All constructions above apply without a nonemptiness assumption; exponent one is n=0, and identity morphisms, zero complexes and empty schemes need no separate cases.",
+   "uses": [
+    "def-weil-finite-tor-amplitude",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+    "place": "Rationalization and common-stage clauses; agent assembly of the unit images"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-pullback-tor-amplitude",
+  "def-trf-finite-pullback-coordinate-comparison",
+  "lem-weil-proetale-dbc-triangulated",
+  "def-weil-finite-tor-amplitude",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "def-sf-finite-reduction-computation",
+  "lem-zl-constant-geometric-stalk-unit",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+  "place": "G4 stage 3: fixed finite interval via the proved pullback theorem and its coordinate isomorphism; integral preservation via the actual reduction comparison on a flat-term K-flat representative; reuse the published completed-unit construction and its rational/common-stage images."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse image for finite torsion and completed adic coefficient sheaves preserves bounded constructibility uniform finite Tor amplitude and the tensor unit",
+   "results": "8 hits; localCohomology.diagram, CondensedMod.IsSolid, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, localCohomology, LightCondensed.instIsGrothendieckAbelianLightCondMod, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-22",
+   "verdict": "no match: local cohomology, solid modules and ordinary adic module completion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torAmplitudeIn\"",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteTor|torAmplitude|completed.*[Pp]ullback|[Pp]ullback.*[Uu]nit",
+   "results": "25 hits; Mathlib/CategoryTheory/Subobject/Classifier/Defs.lean, Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/Shift/Pullback.lean, Mathlib/CategoryTheory/Shift/Pullback.lean, Mathlib/Algebra/Ring/InjSurj.lean, Mathlib/Algebra/Ring/InjSurj.lean, Mathlib/Algebra/Ring/InjSurj.lean, Mathlib/Algebra/Ring/InjSurj.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: unrelated categorical pullback/unit occurrences"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed integral derived pullback preserves uniform Tor bounds and carries the completed coefficient unit to the coefficient unit",
+   "results": "8 hits; UniformSpace.Completion.isUniformInducing_extension, UniformSpace.Completion.mapRingHom, IsUltraUniformity.completion_iff, AbstractCompletion.isUniformInducing_extend, UniformSpace.Completion.one, UniformSpace.Completion.coeRingHom, UniformSpace.Completion.coe_one, UniformSpace.Completion.commRing",
+   "date": "2026-10-22",
+   "verdict": "no match: uniform-space completions, not adic sheaf complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a separated finite type map of finite type schemes derived inverse image preserves a fixed finite Tor interval, a uniform interval on all adic reductions, and the completed coefficient tensor unit",
+   "results": "8 hits; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype, AdicCompletion.ofTensorProduct_surjective_of_finite, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary algebraic adic completion, not derived constructible sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback preserves bounded constructible finite Tor complexes of l-adic sheaves and takes the integral completed coefficient unit to itself",
+   "results": "8 hits; SheafOfModules.pullback, TopCat.Sheaf.pullback, CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits, SheafOfModules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.instIsLeftAdjointPullback, TopCat.Sheaf.instIsLeftAdjointPullback",
+   "date": "2026-10-22",
+   "verdict": "no match: SheafOfModules.pullback and its adjunction are underived; no uniform Tor preservation or completed coefficient units"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Monoidal\", \"IsUnit\"",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Pp]ullback|[Pp]ullback.*[Dd]erived|torAmplitude|finiteTor",
+   "results": "1 hits; Mathlib/CategoryTheory/Limits/Constructions/Over/Products.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: one unrelated comment on deriving products from wide pullbacks"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|finiteTor|completedIntegral",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: no occurrences of the requested derived coefficient notions"
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]ullback.*[Cc]omplet|[Cc]omplet.*[Pp]ullback",
+   "results": "8 hits; Mathlib/Topology/Algebra/UniformField.lean, Mathlib/Geometry/Manifold/VectorField/LieBracket.lean, Mathlib/Order/CompleteLattice/Basic.lean, Mathlib/Order/CompleteBooleanAlgebra.lean, Mathlib/Order/CompleteBooleanAlgebra.lean, Mathlib/Order/CompleteBooleanAlgebra.lean, Mathlib/Order/CompleteBooleanAlgebra.lean, Mathlib/Order/CompleteBooleanAlgebra.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary algebraic completion, profinite limits, condensed abelian categories, or etale scheme maps; none states the constructible derived pullback and completed unit assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed integral coefficient unit derived pullback is the inverse limit of finite constant coefficient units",
+   "results": "8 hits; ProfiniteGrp.isIso_toLimit, ProfiniteGrp.isoLimittoFiniteQuotientFunctor, AdicCompletion, Profinite.lim, MvPowerSeries.constantCoeff_invOfUnit, CommRingCat.pullbackConeIsLimit, Profinite.asLimit, UniformSpace.Completion.hatInv",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary algebraic completion, profinite limits, condensed abelian categories, or etale scheme maps; none states the constructible derived pullback and completed unit assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torAmplitudeIn\"",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: no occurrences of the requested derived coefficient notions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image of module sheaves preserves bounded constructibility and uniform finite Tor bounds on all adic reductions",
+   "results": "8 hits; CondensedMod.IsSolid, LightCondensed.instIsGrothendieckAbelianLightCondMod, Condensed.instAB5CondensedMod, Condensed.instAB4StarCondensedMod, Condensed.instAB4CondensedMod, AdicCompletion.map_exact, LightCondensed.instCountableAB4StarLightCondMod, instAbelianCondensedMod",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary algebraic completion, profinite limits, condensed abelian categories, or etale scheme maps; none states the constructible derived pullback and completed unit assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback on pro-etale constructible complexes preserves a fixed Tor amplitude interval and carries the completed integral coefficient sheaf to itself",
+   "results": "8 hits; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, Algebra.FormallyEtale.comp, Algebra.FormallyEtale.of_restrictScalars, Algebra.etaleLocus_eq_compl_support",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary algebraic completion, profinite limits, condensed abelian categories, or etale scheme maps; none states the constructible derived pullback and completed unit assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "def-pur-section-invariant",
+  "date": "2026-10-22",
+  "group": "Q115"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "from": {
+   "node": "def-pur-section-invariant",
+   "place": "Formula Ls* Rg! Lambda_B and final Picard assertion: returned proof steps 4-6, fixed-interval finite pullback, uniform integral reductions, field representatives and completed-unit pullback",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-all-stage-ctf-pullback-unit",
+  "worker": "stage1",
+  "summary": "Assembled all coefficient stages from existing nodes; computed canonical completed-unit pullback on strict quotient towers without imposing separatedness of the schemes. No new nodes, no statement change.",
+  "blueprint": "def-pur-section-invariant: formula Ls* Rg! Lambda_B and Picard assertion; steps 1-2 supply the ctf pullback, steps 3-5 the actual coefficient unit, step 6 the two field stages.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-pullback-tor-amplitude",
+    "why": "Fixed-interval finite pullback, the existing blueprint ingredient for the finite part; no purity-conventions node states this interval theorem."
+   },
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "Canonical finite reductions and constructible completeness for integral pullback on arbitrary schemes; the section-invariant unit presupposes the operations unit."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Generic canonical finite constant ring identification preserving constant sections, including the empty scheme."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Exactness of the same finite constant-coefficient module inverse image, used to compute its derived unit."
+   },
+   {
+    "node": "lem-weil-constant-scalar-strict-unit",
+    "why": "Regular completed module K-flatness and simultaneous quotient multiplication identifying the actual augmentations; equal-field specialization only."
+   },
+   {
+    "node": "lem-sf-completed-coefficient-free-resolution",
+    "why": "Completeness of the actual rank-one regular completed module with its quotient projections on arbitrary schemes."
+   },
+   {
+    "node": "lem-pur-integral-operations-well-defined",
+    "why": "Specified functorial strict cone model for integral pullback, avoiding a noncanonical choice of a Roos-triangle map."
+   },
+   {
+    "node": "lem-pur-integral-operations-scalar-extension",
+    "why": "Natural tower-compatible scalar comparisons already specified by the common-stage pullback definition."
+   },
+   {
+    "node": "lem-weil-constant-coefficient-objects-constructible",
+    "why": "Membership of the completed unit and of its rationalized and common-stage images in the constructible categories, so that the unit pullbacks are defined there; no purity-conventions node states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-pullback-tor-amplitude",
+  "lem-pur-integral-operations-preserve-constructible"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q55-d65b16909",
+  "group": "Q55",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-d65b16909 (reviewer sub-agent of L); spot-checked: First split of the Q115 node; the statement is byte-identical, and stmt_deps only gain the rational and common-stage definitions that the statement uses. There are no new nodes. I read all six steps against the full statements of the cited nodes, the blueprint def-pur-section-invariant (main-20261015) and Bhatt-Scholze 6.5.9(4)(5). Step 1: lem-sf-pullback-tor-amplitude has exactly the hypotheses here (separated finite-type map, finite-type schemes, which need not be separated over k). Step 2: preserve-constructible (1) needs only that ell is invertible; it gives (Lf^*K)_j = f^{-1}K_j = Lf_j^*K_j, and the interval [a,b] is uniform in j. Step 3: the constant ring map plus exactness give the finite units; they commute with the transitions because maps out of a sheafified constant sheaf are determined on constant sections. Step 4: with the strict unit at L=E and free-cell completeness, the augmentation is an isomorphism, and any lift of the projections is unique since Ext^{-1}=0. Step 5: the explicit cone of 1-s is mapped isomorphically by the tower isomorphism. Step 6: rational and Qbar images under the operations definition. Fault (C1/C4), repaired: membership of the completed unit O^_W[0] in D^b_c(W,O_E), and of E_W and (Qbar)_W in their categories, was asserted without a citation; it is needed for integral Lf^* to be defined on the unit. Fix: cite lem-weil-constant-coefficient-objects-constructible (1)(2) in step 4 and (3) in step 6, add it to proof_deps and to tool_uses, and touch nothing else. Edge cases checked: f=id, empty schemes, K=0, n=1, a non-separated X. lem-pur-completed-unit-pullback-tower is correctly not cited because it assumes separated schemes. Batch-5 flag: lem-pod-completed-integral-scalar-regular is a general fact (multiplication by varpi^m is injective on sections of the completed sheaf). It is not part of the trace formula or of Poincare duality, and it was already in the closure of the item's stmt_deps, so I accept it. No SGA is cited and there is no cycle.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AllStageCtfPullbackUnit",
+  "declaration": "WeilConjectures.AllStageCtfPullback.preserves_ctf_and_unit",
+  "declarations": [
+   "WeilConjectures.AllStageCtfPullback.residueInvertible",
+   "WeilConjectures.AllStageCtfPullback.rationalUnit",
+   "WeilConjectures.AllStageCtfPullback.commonUnit",
+   "WeilConjectures.AllStageCtfPullback.preserves_ctf_and_unit",
+   "WeilConjectures.ConstantGeometricStalkUnit.finiteUnit",
+   "WeilConjectures.ConstantGeometricStalkUnit.integralChainUnit_existsUnique",
+   "WeilConjectures.ConstantGeometricStalkUnit.integralChainUnit",
+   "WeilConjectures.ConstantGeometricStalkUnit.integralChainUnit_isIso",
+   "WeilConjectures.ConstantGeometricStalkUnit.integralUnit"
+  ],
+  "file": "lean/Sheaf/Paper/AllStageCtfPullbackUnit.lean",
+  "statement": "theorem preserves_ctf_and_unit (P : PurityFiniteSetting.{u}) (X Y : Over (Spec (.of P.field.k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] (f : X ⟶ Y) [IsSeparated f.left] [LocallyOfFiniteType f.left] [QuasiCompact f.left] : (∀ (n : ℕ) (K : proEtaleDerivedCategory Y.left (Padic.coefficientExtensionRing P.coefficients.l P.extension (n + 1))), intrinsicFiniteTorsionConstructible P.coefficients.l P.extension (n + 1) (Nat.succ_le_succ (Nat.zero_le n)) Y.left K → ∀ a b : ℤ, HasProEtaleTorAmplitude Y.left (Padic.coefficientExtensionRing P.coefficients.l P.extension (n + 1)) K a b → intrinsicFiniteTorsionConstructible P.coefficients.l P.extension (n + 1) (Nat.succ_le_succ (Nat.zero_le n)) X.left ((finiteDerivedPullback P.coefficients.l P.extension n f.left).obj K) ∧ HasProEtaleTorAmplitude X.left (Padic.coefficientExtensionRing P.coefficients.l P.extension (n + 1)) ((finiteDerivedPullback P.coefficients.l P.extension n f.left).obj K) a b) ∧ (∀ (n : ℕ) (K : proEtaleDerivedCategory Y.left (Padic.coefficientExtensionRing P.coefficients.l P.extension (n + 1))), finiteTorConstructible P.coefficients.l P.extension (n + 1) (Nat.succ_le_succ (Nat.zero_le n)) Y.left K → finiteTorConstructible P.coefficients.l P.extension (n + 1) (Nat.succ_le_succ (Nat.zero_le n)) X.left ((finiteDerivedPullback P.coefficients.l P.extension n f.left).obj K)) ∧ (∀ (K : DerivedCategory (scalarReductionSource P.coefficients.l P.extension Y.left)), sfIntegralConstructible P.coefficients.l P.extension Y.left K → ∀ a b : ℤ, (∀ n : ℕ, HasProEtaleTorAmplitude Y.left (Padic.coefficientExtensionRing P.coefficients.l P.extension (n + 1)) ((scalarReductionDerivedExtension P.coefficients.l P.extension Y.left n).obj K) a b) → sfIntegralConstructible P.coefficients.l P.extension X.left ((integralDerivedPullback P.coefficients.l P.extension f.left).obj K) ∧ (∀ n : ℕ, HasProEtaleTorAmplitude X.left (Padic.coefficientExtensionRing P.coefficients.l P.extension (n + 1)) ((scalarReductionDerivedExtension P.coefficients.l P.extension X.left n).obj ((integralDerivedPullback P.coefficients.l P.extension f.left).obj K)) a b ∧ Nonempty (((scalarReductionDerivedExtension P.coefficients.l P.extension X.left n).obj ((integralDerivedPullback P.coefficients.l P.extension f.left).obj K)) ≅ (finiteDerivedPullback P.coefficients.l P.extension n f.left).obj ((scalarReductionDerivedExtension P.coefficients.l P.extension Y.left n).obj K))) ∧ (∀ (R : (integralOperationsGoodComplex P.coefficients.l P.extension Y.left).FullSubcategory) (e : DerivedCategory.Q.obj R.obj ≅ K) (n : ℕ), IsIso (integralPullbackFiniteComparison P.coefficients.l P.extension f.left K R e n))) ∧ (∀ K : DerivedCategory (scalarReductionSource P.coefficients.l P.extension Y.left), finiteTorConstructibleIntegral P.coefficients.l P.extension Y.left K → finiteTorConstructibleIntegral P.coefficients.l P.extension X.left ((integralDerivedPullback P.coefficients.l P.extension f.left).obj K))",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the already landed normalized finite and completed integral units of lem-zl-constant-geometric-stalk-unit; the public record includes those reexported declarations. The field units are actual localization and same-stage inclusion of that integral arrow. The theorem states preservation, fixed Tor bounds, uniform reduction bounds, and invertibility of the specified representative-normalized comparison. No separatedness of the schemes over the base is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-22781cf1c",
+  "group": "NG",
+  "result": "pass",
+  "note": "Only the item node changed, in lean and stmt_deps; the added stmt_dep lem-zl-constant-geometric-stalk-unit is landed (brief l.177); statement verbatim. All 4 conjuncts match the node: separated finite-type f, X and Y finite type with no separatedness required; finite [a,b] preserved; integral uniform-interval hypothesis with a,b before n; output sfIntegralConstructible; reduction iso given as Nonempty plus IsIso of the specified integralPullbackFiniteComparison; Dctf restrictions; field stages hold by the rationalDerivedPullback/commonStage existence-and-uniqueness specs and finiteTorFieldCoefficientCategory := C. Units: finiteUnit and integralUnit reused (chain unit fixed by generators 1⊗1 and zero shifted coordinate = inverse of augmentation-after-tower-iso, checked); rationalUnit/commonUnit are real localization and inclusion images; residueInvertible derived from P, not an added hypothesis. Mechanical finding: the lem-zl units are constructed by theorems (.choose of integralChainUnit_existsUnique, asIso with integralChainUnit_isIso and finiteUnitHom_isIso), so the stmt_dep is genuine: PASS. Edge cases (empty schemes, n=0, a>b, non-separated schemes, universes) ok. Docstrings, line widths, sorry-only proof and proof imports ok. Advisory: downstream ConstantPurityFrobeniusSquare repeats the unit helpers (cannot be imported: its proof_deps lead back to this item); lean.declarations lists 5 reexported lem-zl names. No compile: no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261025T041201-L-1060387",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

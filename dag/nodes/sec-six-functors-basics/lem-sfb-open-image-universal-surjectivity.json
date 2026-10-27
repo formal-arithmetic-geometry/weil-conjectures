@@ -1,0 +1,200 @@
+{
+ "id": "lem-sfb-open-image-universal-surjectivity",
+ "kind": "statement",
+ "title": "Open-image criterion for the universal surjectivity locus",
+ "statement": "Let $S,X,Y$ be schemes [def-pc-scheme], let $p:X\\to S$, $q:Y\\to S$ and $f:X\\to Y$ be morphisms with $q\\circ f=p$. Suppose the topological image $I=f(|X|)\\subseteq |Y|$ is open, and suppose $q$ is a closed map on underlying topological spaces, meaning that $q(D)$ is closed in $|S|$ whenever $D$ is closed in $|Y|$. Put $V=|S|\\setminus q(|Y|\\setminus I)$. Then $V$ is open and defines an open subscheme $V\\hookrightarrow S$ with the restricted structure sheaf [def-weil-open-immersion]. For every scheme $T$ and morphism $h:T\\to S$, the induced map $f_T:X\\times_ST\\to Y\\times_ST$ [def-pc-fibre-product] is surjective [def-weil-surjective-morphism] if and only if $h$ factors through $V\\hookrightarrow S$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 05XC, spaces-more-morphisms-lemma-where-surjective-flat, proof from the displayed complement formula through the final point-lifting argument, specialized to schemes. This isolates the open-image argument: its hypotheses are openness of the image and closedness of q, without the earlier flatness hypotheses."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product",
+  "def-weil-surjective-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Put $D=|Y|\\setminus I$. Since $I$ is open, $D$ is closed, so the hypothesis on $q$ makes $q(D)$ closed. Its complement $V$ is open. Give $V$ the restricted structure sheaf. For every $v\\in V$, [lem-weil-pbc-affine-opens-basis] supplies an affine open neighbourhood $v\\in U\\subseteq V$ in $S$. On this neighbourhood the restricted sheaf is $\\mathcal O_S|_U$, so $V$ is locally affine and hence a scheme [def-pc-scheme]. Its inclusion $j:V\\hookrightarrow S$ is an open immersion by [def-weil-open-immersion].",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "def-pc-scheme",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05XC, spaces-more-morphisms-lemma-where-surjective-flat, proof from the displayed complement formula through the final point-lifting argument, specialized to schemes. This isolates the open-image argument: its hypotheses are openness of the image and closedness of q, without the earlier flatness hypotheses.; open-scheme construction: Tag 01IK (schemes-lemma-open-subspace-scheme), using Tag 01IT (schemes-lemma-basis-affine-opens)."
+   }
+  },
+  {
+   "text": "Fix any scheme $T$ and $h:T\\to S$. Write $a:X_T\\to X$, $b:X_T\\to T$, $r:Y_T\\to Y$ and $s:Y_T\\to T$ for the fibre-product projections. The induced $f_T$ satisfies $r f_T=f a$ and $s f_T=b$. The square with edges $a,f_T,f,r$ is cartesian: a test pair $u:W\\to X$, $v:W\\to Y_T$ with $fu=rv$ satisfies $pu=qfu=qrv=hsv$, so the pair $(u,sv)$ gives a unique $w:W\\to X_T$. The maps $f_Tw$ and $v$ have equal projections $fu=rv$ and $sv$, hence agree. Uniqueness follows from the projections $a,b$. This proves the square's universal property using only [def-pc-fibre-product].",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05XC, spaces-more-morphisms-lemma-where-surjective-flat, proof from the displayed complement formula through the final point-lifting argument, specialized to schemes. This isolates the open-image argument: its hypotheses are openness of the image and closedness of q, without the earlier flatness hypotheses.; cartesian square: Tag 01S1 (morphisms-lemma-base-change-surjective), first paragraph of proof."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-base-change-image] to the cartesian square of Step 2, with the subset equal to all of $|X|$. It gives $f_T(|X_T|)=r^{-1}(I)$. Thus $f_T$ is surjective [def-weil-surjective-morphism] exactly when $r^{-1}(D)=\\varnothing$. Apply the same node to the defining square $Y_T=Y\\times_ST$ and the subset $D\\subseteq|Y|$; it gives $s(r^{-1}(D))=h^{-1}(q(D))$. A set has empty image under a function if and only if it is empty: a member of a nonempty set supplies a member of its image. Consequently $f_T$ is surjective if and only if $h^{-1}(q(D))=\\varnothing$, equivalently $h(|T|)\\subseteq V$.",
+   "uses": [
+    "lem-weil-pbc-base-change-image",
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05XC, spaces-more-morphisms-lemma-where-surjective-flat, proof from the displayed complement formula through the final point-lifting argument, specialized to schemes. This isolates the open-image argument: its hypotheses are openness of the image and closedness of q, without the earlier flatness hypotheses.; image identity: Tag 01S1 (morphisms-lemma-base-change-surjective), via Tag 0495 (morphisms-lemma-when-point-maps-to-pair)."
+   }
+  },
+  {
+   "text": "If $h(|T|)\\subseteq V$, apply [lem-weil-pbc-morphism-factors-through-open-subscheme] to $h:T\\to S$ and the open subscheme from Step 1. It supplies $h':T\\to V$ with $j h'=h$. Conversely any such factorization has image in $V$ because $j$ is its inclusion. Combine this equivalence with Step 3 to obtain the asserted universal property for every $T$ and $h$.",
+   "uses": [
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05XC, spaces-more-morphisms-lemma-where-surjective-flat, proof from the displayed complement formula through the final point-lifting argument, specialized to schemes. This isolates the open-image argument: its hypotheses are openness of the image and closedness of q, without the earlier flatness hypotheses.; scheme factorization: Tag 01HI (schemes-lemma-restrict-map-to-opens)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-opens-basis",
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-base-change-image",
+  "def-weil-surjective-morphism",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 05XC, spaces-more-morphisms-lemma-where-surjective-flat, proof from the displayed complement formula through the final point-lifting argument, specialized to schemes. This isolates the open-image argument: its hypotheses are openness of the image and closedness of q, without the earlier flatness hypotheses."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "surjectiv.*(range|image)|range.*surjectiv|image_preimage_eq_of_isPullback",
+   "results": "{\"t\": \"2026-10-22T06:09:44Z\", \"tool\": \"grep\", \"query\": \"surjectiv.*(range|image)|range.*surjectiv|image_preimage_eq_of_isPullback\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean\", \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean\", \"Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean\"], \"digest\": \"51ecd5f893ffa03a\"}; Surjectivity stable under base change, equality of images under a surjective map, closed dominant maps, and scheme pullback point-lifting do not construct this parameter open or its universal property. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal surjectivity locus of a scheme morphism with open image and closed target family is the complement of the image of its missed points",
+   "results": "{\"t\": \"2026-10-22T06:09:44Z\", \"tool\": \"leansearch\", \"query\": \"Universal surjectivity locus of a scheme morphism with open image and closed target family is the complement of the image of its missed points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.surjective_of_isDominant_of_isClosed_range\", \"AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant\", \"AlgebraicGeometry.range_eq_univ\", \"AlgebraicGeometry.UniversallyClosed\", \"AlgebraicGeometry.SurjectiveOnStalks.mk\", \"AlgebraicGeometry.Surjective\", \"AlgebraicGeometry.Scheme.Hom.app_surjective\", \"AlgebraicGeometry.Scheme.zeroLocus_univ\"], \"digest\": \"1ab9a6ff432494b8\"}; Surjectivity stable under base change, equality of images under a surjective map, closed dominant maps, and scheme pullback point-lifting do not construct this parameter open or its universal property. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"Surjective\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-22T06:09:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"Scheme\\\", \\\"Surjective\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.pullbackComparison_forget_surjective\", \"AlgebraicGeometry.instFaithfulOverSchemePullbackOfSurjectiveOfFlatOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.instFaithfulOverSchemePullbackOfSurjectiveOfFlatOfQuasiCompact\"], \"digest\": \"1692e3919711d7a5\"}; Surjectivity stable under base change, equality of images under a surjective map, closed dominant maps, and scheme pullback point-lifting do not construct this parameter open or its universal property. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Let f X to Y be a morphism over S with open image and let q Y to S be a closed map. Surjectivity of the base change f T is equivalent to T landing in S minus q of the complement of image f",
+   "results": "{\"t\": \"2026-10-22T06:09:55Z\", \"tool\": \"leanfinder\", \"query\": \"Let f X to Y be a morphism over S with open image and let q Y to S be a closed map. Surjectivity of the base change f T is equivalent to T landing in S minus q of the complement of image f\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.mem_range_iff_of_surjective\", \"AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant\", \"AlgebraicGeometry.range_eq_range_of_surjective\", \"AlgebraicGeometry.UniversallyClosed.of_comp_surjective\", \"AlgebraicGeometry.Scheme.instIsJointlySurjectivePreservingIsOpenImmersion\", \"AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange\", \"AlgebraicGeometry.surjective_of_isDominant_of_isClosed_range\"], \"digest\": \"266dd0d848669427\"}; Surjectivity stable under base change, equality of images under a surjective map, closed dominant maps, and scheme pullback point-lifting do not construct this parameter open or its universal property. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An S morphism of schemes with open image has an open locus of universally surjective fibres if its target is closed over S, detected after every base change T to S",
+   "results": "{\"t\": \"2026-10-22T06:10:24Z\", \"tool\": \"leanfinder\", \"query\": \"An S morphism of schemes with open image has an open locus of universally surjective fibres if its target is closed over S, detected after every base change T to S\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.universallyClosed_isZariskiLocalAtTarget\", \"AlgebraicGeometry.UniversallyOpen.instIsZariskiLocalAtTarget\", \"AlgebraicGeometry.universallyOpen_iff\", \"AlgebraicGeometry.Scheme.Hom.isOpenMap\", \"AlgebraicGeometry.UniversallyOpen.instIsZariskiLocalAtSource\", \"AlgebraicGeometry.UniversallyOpen.out\", \"AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant\", \"AlgebraicGeometry.UniversallyOpen\"], \"digest\": \"902d19d93efdd847\"}; Surjectivity stable under base change, equality of images under a surjective map, closed dominant maps, and scheme pullback point-lifting do not construct this parameter open or its universal property. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "surjectiv.*[Ll]ocus|[Ll]ocus.*surjectiv|where.*[Ss]urject|image_preimage_eq_of_isPullback",
+   "results": "{\"t\": \"2026-10-23T04:24:38Z\", \"tool\": \"grep\", \"query\": \"surjectiv.*[Ll]ocus|[Ll]ocus.*surjectiv|where.*[Ss]urject|image_preimage_eq_of_isPullback\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\"], \"digest\": \"613dfd0a77db9571\"}; The returned permanence, range and open-immersion results do not state the parameter-open construction and its universal property. The image identity is reused through the existing Mathlib leaf lem-weil-pbc-base-change-image.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An open subscheme represents the universal surjectivity locus of a morphism with open image whose target is closed over the base",
+   "results": "{\"t\": \"2026-10-23T04:24:39Z\", \"tool\": \"leansearch\", \"query\": \"An open subscheme represents the universal surjectivity locus of a morphism with open image whose target is closed over the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant\", \"AlgebraicGeometry.UniversallyOpen.instOfIsOpenImmersion\", \"AlgebraicGeometry.Scheme.Hom.isoOpensRange\", \"AlgebraicGeometry.Scheme.Hom.isOpenMap\", \"AlgebraicGeometry.UniversallyOpen\", \"AlgebraicGeometry.Scheme.Opens\", \"AlgebraicGeometry.Scheme.Hom.image_le_opensRange\", \"AlgebraicGeometry.SurjectiveOnStalks.instOfIsOpenImmersion\"], \"digest\": \"fcd7cc53a339a833\"}; The returned permanence, range and open-immersion results do not state the parameter-open construction and its universal property. The image identity is reused through the existing Mathlib leaf lem-weil-pbc-base-change-image.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"Surjective\", \"IsOpen\"",
+   "results": "{\"t\": \"2026-10-23T04:24:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"Scheme\\\", \\\"Surjective\\\", \\\"IsOpen\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instIsJointlySurjectivePreservingIsOpenImmersion\", \"AlgebraicGeometry.instGeometricallyIrreducibleCompSchemeOfIsOpenImmersionOfSurjective\"], \"digest\": \"3fd8f263707fcf51\"}; The returned permanence, range and open-immersion results do not state the parameter-open construction and its universal property. The image identity is reused through the existing Mathlib leaf lem-weil-pbc-base-change-image.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an S morphism of schemes f X to Y with open image and a closed map Y to S, base changes of f are surjective exactly over the open complement of the image of the missed points",
+   "results": "{\"t\": \"2026-10-23T04:24:42Z\", \"tool\": \"leanfinder\", \"query\": \"For an S morphism of schemes f X to Y with open image and a closed map Y to S, base changes of f are surjective exactly over the open complement of the image of the missed points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.Hom.app_surjective\", \"AlgebraicGeometry.mem_range_iff_of_surjective\", \"AlgebraicGeometry.surjective_isZariskiLocalAtTarget\", \"AlgebraicGeometry.surjective_of_isDominant_of_isClosed_range\", \"AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant\", \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving\", \"AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange\"], \"digest\": \"56161e17938f8219\"}; The returned permanence, range and open-immersion results do not state the parameter-open construction and its universal property. The image identity is reused through the existing Mathlib leaf lem-weil-pbc-base-change-image.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The non-surjectivity locus in the base of a family map is the image of the complement of its topological image, and surjectivity after arbitrary base change is equivalent to avoiding this closed subset",
+   "results": "{\"t\": \"2026-10-23T04:26:03Z\", \"tool\": \"leanfinder\", \"query\": \"The non-surjectivity locus in the base of a family map is the image of the complement of its topological image, and surjectivity after arbitrary base change is equivalent to avoiding this closed subset\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.mem_range_iff_of_surjective\", \"AlgebraicGeometry.surjective_isZariskiLocalAtTarget\", \"AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.surjective_of_isDominant_of_isClosed_range\", \"AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant\", \"AlgebraicGeometry.range_eq_range_of_surjective\", \"AlgebraicGeometry.instIsDominantOfSurjective\", \"AlgebraicGeometry.UniversallyClosed.of_comp_surjective\"], \"digest\": \"77fed04bd24ff7e3\"}; The returned permanence, range and open-immersion results do not state the parameter-open construction and its universal property. The image identity is reused through the existing Mathlib leaf lem-weil-pbc-base-change-image.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-universal-surjective-flat-open",
+  "date": "2026-10-22",
+  "group": "Q132"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, passage from Hilbert schemes to the morphism scheme and its evaluation; quot.tex Tag 0D1B, applying spaces-more-morphisms-lemma-where-isomorphism to the first projection of the universal closed family; Stacks Tag 05XD proof: first sentence, applying Tag 05XC to construct W_1; 05XC displayed complement and both surjectivity directions; original item Steps 5--7 (closed-image complement, cartesian squares and lifting points).",
+   "via": [
+    "lem-sfb-universal-surjective-flat-open",
+    "lem-sfb-universal-isomorphism-open",
+    "lem-sfb-graphs-open-in-hilbert",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-open-image-universal-surjectivity",
+  "worker": "stage1",
+  "summary": "Q140: kept the statement and inherited blueprint chain. Expanded the open-complement construction, proved the required cartesian-square identification from the fibre-product universal property, applied the existing base-change-image leaf twice, and used the existing factorization-through-open leaf. The affine-open-basis leaf justifies the restricted open scheme. All non-elementary facts are existing nodes; no new nodes. Checked arbitrary base changes and empty/nonreduced cases.",
+  "blueprint": "The inherited ancestor is null, as blueprint_refs.py ancestor confirms. The inherited from.place identifies 05XC displayed complement and the final point-lifting argument (original parent Steps 5--7): these are carried respectively by Steps 1, 2--3 and 4. No change to the unit route. Whole-blueprint searches for universal surjectivity, where-surjective-flat and open-image found no equivalent blueprint statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q140-3cbd93003",
+  "group": "Q140",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q140-3cbd93003 (reviewer sub-agent of L); spot-checked: I read the item in full against Stacks 05XC (spaces-more-morphisms l.11728-11790) and checked tags 01S1/0495/01HI/01IK/01IT. The delivery creates no new nodes and leaves the statement, stmt_deps, source and inherited blueprint chain unchanged. Live and side-live still have the item unsplit with an empty proof, and there is no repair note, so this is not a re-split. Step 1: V = S \\ q(D) is open because q is closed on D = Y \\ I. The affine-opens-basis leaf makes (V, O_S|_V) a scheme, and def-weil-open-immersion makes its inclusion an open immersion. Step 2: I checked the cartesian-square proof line by line from the universal property of def-pc-fibre-product (test pair, p u = h s v, f_T w = v, uniqueness); it is elementary. Step 3: lem-weil-pbc-base-change-image holds for any pullback and any subset. Applied to (a, f_T; f, r) with C = X it gives f_T(X_T) = r^-1(I). Applied to (r, s; q, h) with C = D it gives s(r^-1 D) = h^-1(q D). Together, f_T is surjective iff h(T) is contained in V, and the role orientations are correct. Step 4: the factors-through-open leaf gives the factorization; the converse is trivial. proof_deps equals the union of uses, all cited nodes are definitions or Mathlib leaves (so there is no route or tool_uses question), and there is no SGA citation. Edge cases checked: f surjective, X empty, T empty, nonreduced T, A1 in P1 over a point. A duplicate search with rg -L (05XC, surjectivity locus, universally surjective) found only the parent and its sibling flat/isomorphism-open nodes, none of which states this item. No changes made."
+ }
+}

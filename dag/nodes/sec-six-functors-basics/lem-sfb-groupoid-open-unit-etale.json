@@ -1,0 +1,252 @@
+{
+ "id": "lem-sfb-groupoid-open-unit-etale",
+ "kind": "statement",
+ "title": "Open unit forces etale projections in a flat groupoid",
+ "statement": "Let $S$ be a scheme and $(U,R,s,t,e,i,c)$ a groupoid scheme over $S$ [def-a1-groupoid-scheme]. Assume $s,t:R\\to U$ are flat and locally of finite presentation [def-weil-flat-morphism], [def-sbc-locally-finite-presentation]. If the unit $e:U\\to R$ is an open immersion [def-weil-open-immersion], both $s$ and $t$ are etale [def-weil-etale-morphism]. No Noetherian, reducedness, field or separatedness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 04R9 (lemma-sheaf-differentials), together with morphisms.tex Tags 02G5 (lemma-unramified-omega-zero) and 02GV (lemma-flat-unramified-etale); applied in the final paragraph of stacks-morphisms.tex Tag 06N0."
+ },
+ "stmt_deps": [
+  "def-a1-groupoid-scheme",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-etale-morphism",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Put $P=R\\times_{s,U,t}R$ and $Q=R\\times_{t,U,t}R$. Define $\\phi:P\\to Q$ by $(a,b)\\mapsto(i(a),b)$. This is a scheme map by the fibre-product universal property since $t(i(a))=s(a)=t(b)$. Its inverse $Q\\to P$ is given by the same formula, since $s(i(a))=t(a)=t(b)$. The two composites are the identities because inversion in a groupoid satisfies $i^2=1$. Thus $\\phi$ is an isomorphism.",
+   "uses": [
+    "def-a1-groupoid-scheme",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04R9 (lemma-sheaf-differentials), proof diagram, with inversion on the first factor instead of the second."
+   }
+  },
+  {
+   "text": "Define $j:R\\to P$ by $j(a)=(i(a),a)$; this lands in $P$ since $s(i(a))=t(a)$. The square with top $j$, left $s:R\\to U$, right $c:P\\to R$, and bottom $e:U\\to R$ commutes, since $c(i(a),a)=e(s(a))$, and it is cartesian. For maps $a,b:T\\to R$ and $u:T\\to U$ with $s(a)=t(b)$ and $c(a,b)=e(u)$, applying $s$ and $t$ gives $s(b)=sc(a,b)=se(u)=u$ and $t(a)=tc(a,b)=te(u)=u$. By associativity and the unit and inverse axioms, $b=c(e(s(a)),b)=c(c(i(a),a),b)=c(i(a),c(a,b))=c(i(a),e(u))=i(a)$, the last equality because $s(i(a))=t(a)=u$. Hence $a=i(b)$, so $(a,b)=j(b)$ and $u=s(b)$: the map $b:T\\to R$ is a lift, and it is the only one because the second projection of $j$ is the identity of $R$. This verifies the universal property on arbitrary test schemes, not only points.",
+   "uses": [
+    "def-a1-groupoid-scheme",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04R9 (lemma-sheaf-differentials), cartesian square in the proof, with the two factors inverted/swapped in the displayed parametrization."
+   }
+  },
+  {
+   "text": "Since $e$ is an open immersion, the projection $U\\times_{e,R,c}P\\to P$ is an open immersion by [lem-weil-pbc-open-immersion-base-change]. By step 2 and the uniqueness of fibre products [def-pc-fibre-product], $j$ is this projection composed with an isomorphism $R\\cong U\\times_{e,R,c}P$ of its source, so $j$ is an open immersion. Under the isomorphism $\\phi$ of step 1, $\\phi j(a)=(i(i(a)),a)=(a,a)$, hence $\\phi j=\\Delta_t:R\\to Q$. The definition of open immersion is invariant under composing with isomorphisms of source and target: the image open subset and the structure-sheaf isomorphism are carried across them. Therefore $\\Delta_t$ is an open immersion.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-base-change",
+    "def-pc-fibre-product",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04R9 (lemma-sheaf-differentials), proof diagram; schemes.tex Tag 01JY (lemma-base-change-immersion)."
+   }
+  },
+  {
+   "text": "The involution $i:R\\to R$ exchanges $s$ and $t$. Thus $I:R\\times_{s,U,s}R\\to R\\times_{t,U,t}R$, $(a,b)\\mapsto(i(a),i(b))$, is an isomorphism with inverse the same formula, and $I\\Delta_s=\\Delta_t i$. Consequently $\\Delta_s=I^{-1}\\Delta_t i$ is also an open immersion, by the same invariance of the defining homeomorphism and sheaf isomorphism under isomorphisms.",
+   "uses": [
+    "def-a1-groupoid-scheme",
+    "def-pc-fibre-product",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04R9 (lemma-sheaf-differentials), symmetric use with source and target exchanged."
+   }
+  },
+  {
+   "text": "Each projection is locally of finite type: apply [lem-a1-map-over-base-finite-presentation] with base $U$, source $R$ with structure map $s$ (resp. $t$), which is locally of finite presentation by hypothesis, target $U$ with structure map $\\mathrm{id}_U$, and $h=s$ (resp. $t$). The identity is locally of finite type [def-weil-finite-type-morphism], since every affine open $\\operatorname{Spec}A$ of $U$ is covered by itself and $A$ is generated by $1$ over $A$. The lemma gives that $s$ and $t$ are locally of finite type. Together with the open diagonals in steps 3 and 4, this is unramifiedness by [def-weil-unramified-morphism]. Finally, each projection is flat [def-weil-flat-morphism] and locally of finite presentation [def-sbc-locally-finite-presentation] by hypothesis; these properties and unramifiedness are precisely the three clauses of [def-weil-etale-morphism]. Both projections are therefore etale.",
+   "uses": [
+    "lem-a1-map-over-base-finite-presentation",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism",
+    "def-weil-unramified-morphism",
+    "def-weil-flat-morphism",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06N0 (lemma-DM-residual-gerbe), final paragraph; morphisms.tex Tag 01TW (lemma-finite-presentation-finite-type), Tag 02GE (lemma-unramified-diagonal) and Tag 02GV (lemma-flat-unramified-etale), using the open-diagonal characterization already recorded in the definition nodes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-a1-groupoid-scheme",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-open-immersion-base-change",
+  "def-weil-open-immersion",
+  "lem-a1-map-over-base-finite-presentation",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "def-weil-unramified-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-etale-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 04R9 (lemma-sheaf-differentials), proof diagram: explicit cartesian-square and diagonal argument; assembled directly using the open-diagonal definition of unramifiedness, as an alternative to taking conormal sheaves."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A groupoid scheme whose source and target are flat and locally of finite presentation and whose identity section is an open immersion has etale source and target",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.Pretopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or ordinary groupoids and stack descent; none states this internal algebraic-space/groupoid or stack assertion, nor gives it by a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The relative differentials of a flat groupoid are pulled back from the conormal of its unit, so an open unit makes the projections etale",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"StandardEtalePair.instFormallyEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.FormallyEtale R P.Ring\", \"doc\": \"For any commutative ring $ R $ and standard étale pair $ P $ over $ R $, the ring $ P.\\\\text{Ring} $ is a formally étale $ R $-algebra. This instance asserts that the standard étale ring extension, con\"}\n  {\"name\": \"Algebra.basicOpen_subset_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.etaleLocus R A ↔ Algebra.FormallyEtale R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in the Zariski topology on $ \\\\operatorname{Spec}(A) $ is contained in the étale locus of $ A $ over $ R $ if and on\"}\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n  {\"name\": \"Algebra.etaleLocus_eq_univ_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = Set.univ ↔ Algebra.FormallyEtale R A\", \"doc\": \"The étale locus of an algebra $ A $ over a commutative ring $ R $ is equal to the universal set of prime ideals in $ \\\\operatorname{Spec}(A) $ if and only if $ A $ is formally étale over $ R $.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or ordinary groupoids and stack descent; none states this internal algebraic-space/groupoid or stack assertion, nor gives it by a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The relative differentials of a flat groupoid are pulled back from the conormal of its unit, so an open unit makes the projections etale",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Differentials.Presheaf\", \"type\": \": PresheafOfModules.{u} (R ⋙ forget₂ _ _)\", \"doc\": \"A presheaf of modules constructed by assigning to each object $X$ in the opposite category the module of Kähler differentials $\\\\Omega_{\\\\phi'(X)/R(X)}$, and to each morphism $f: X \\\\to Y$ the $R(Y)$-lin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"PresheafOfModules.DifferentialsConstruction.isUniversal'\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Differentials.Presheaf\", \"type\": \": (derivation' φ').Universal\", \"doc\": \"The relative Kähler differentials presheaf $\\\\Omega_{\\\\phi'}$ satisfies the universal property: for any derivation $d': S' \\\\to M'$ (where $M'$ is an $R$-module presheaf), there exists a unique $R$-linea\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"[IsEtale f] : IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"PresheafOfModules.DifferentialsConstruction.derivation'\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Differentials.Presheaf\", \"type\": \": (relativeDifferentials' φ').Derivation' φ'\", \"doc\": \"A derivation constructed for the relative differentials presheaf, defined by assigning to each object the Kähler differential derivation $d$ satisfying the Leibniz rule and annihilating the images of \"}\n  {\"name\": \"Algebra.FormallyEtale.subsingleton_kaehlerDifferential\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallyEtale R A], Subsingleton Ω[A⁄R]\", \"doc\": \"If $ A $ is a formally étale $ R $-algebra, then the module of Kähler differentials $ \\\\Omega_{A/R} $ is trivial (i.e., contains at most one element).\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or ordinary groupoids and stack descent; none states this internal algebraic-space/groupoid or stack assertion, nor gives it by a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"Scheme\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or ordinary groupoids and stack descent; none states this internal algebraic-space/groupoid or stack assertion, nor gives it by a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "GroupoidScheme|groupoid.*[Dd]ifferential|groupoid.*[Ee]tale",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Geometry/Manifold/Sheaf/Basic.lean\", \"line\": \"21\", \"text\": \"`StructureGroupoid.LocalInvariantProp`: that is, showing that a differential-geometric \\\"locally\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or ordinary groupoids and stack descent; none states this internal algebraic-space/groupoid or stack assertion, nor gives it by a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A groupoid scheme with open identity section has unramified source and target if its projections are locally of finite type",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.FormallyUnramified\", \"doc\": \"The property of being formally unramified is multiplicative; that is, the composition of two formally unramified morphisms of schemes is again formally unramified.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.FormallyUnramified f]\\n  [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"If a morphism of schemes is formally unramified and locally of finite type, then its diagonal morphism in the pullback is an open immersion.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y)\\n  [AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)],\\n  AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If the diagonal morphism of a morphism $ f $ of schemes is an open immersion, then $ f $ is formally unramified. This instance asserts that the condition of the diagonal being an open immersion suffic\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderCompositionScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.FormallyUnramified\", \"doc\": \"The composition of two formally unramified morphisms of schemes is also formally unramified.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no internal groupoid scheme theorem; ordinary groupoid identities and general diagonal/unramified facts do not by themselves specialize to the item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an internal groupoid in schemes the diagonal of the target morphism is the pullback of the unit along composition with inverse",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Limits.pullback_lift_diagonal_isPullback\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Diagonal\", \"type\": \"(g : Y ⟶ X) (f : X ⟶ S) :\\n  IsPullback g (pullback.lift (𝟙 Y) g (by simp)) (diagonal f)\\n    (pullback.map (g ≫ f) f f f g (𝟙 X) (𝟙 S) (by simp) (by simp))\", \"doc\": \"Given morphisms $g: Y \\to X$ and $f: X \\to S$ in a category, the square formed by the diagonal morphism $\\\\Delta_f: X \\to \\text{diagonalObj}(f)$ and the lifted morphism from $Y$ to the pullback of $f$ with\"}\n  {\"name\": \"CategoryTheory.Limits.pullback.diagonal\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Diagonal\", \"type\": \": X ⟶ diagonalObj f\", \"doc\": \"The morphism from $ X $ to the pullback object $ \\\\text{diagonalObj} f $, constructed by lifting the identity morphism on $ X $ against itself, ensuring the universal property of the pullback is satisf\"}\n  {\"name\": \"CategoryTheory.Limits.pullback.diagonal_comp\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Diagonal\", \"type\": \"(f : X ⟶ Y) (g : Y ⟶ Z) : diagonal (f ≫ g) = diagonal f ≫ (pullbackDiagonalMapIdIso f f g).inv ≫ pullback.snd _ _\", \"doc\": \"The diagonal morphism of the composition $ f \\\\circ g $ is equal to the composition of the diagonal morphism of $ f $, the inverse of the isomorphism from the pullbackDiagonalMapIdIso for $ f $, and th\"}\n  {\"name\": \"CategoryTheory.Limits.diagonalObjPullbackFstIso_inv_fst_snd\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Diagonal\", \"type\": \"{X Y Z : C} (f : X ⟶ Z) (g : Y ⟶ Z) :\\n  (diagonalObjPullbackFstIso f g).inv ≫ pullback.fst _ _ ≫ pullback.snd _ _ = pullback.fst _ _ ≫ pullback.fst _ _\", \"doc\": \"For morphisms $f : X \\to Z$ and $g : Y \\to Z$ in a category $\\\\mathcal{C}$, the composition of the inverse of the diagonal object isomorphism $\\\\text{diagonalObjPullbackFstIso}(f,g)$ with the first and se\"}\n  {\"name\": \"CategoryTheory.GrpObj.one_inv\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Cartesian.Grp_\", \"type\": \": η[G] ≫ ι = η\", \"doc\": \"For a group object $X$ in a Cartesian monoidal category, the unit morphism $\\\\eta : I \\\\to X$ satisfies $\\\\eta \\\\circ \\\\iota = \\\\eta$, where $\\\\iota : X \\\\to X$ denotes the inverse morphism of the group objec\"}\n  {\"name\": \"CategoryTheory.GrpObj.inv_comp_inv_assoc\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Grp_\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.CartesianMonoidalCategory C]\\n  (A : C) [inst_2 : CategoryTheory.GrpObj A] {Z : C} (h : A ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp CategoryTheory.GrpObj.inv\\n      (CategoryTheory.CategoryStruct.comp CategoryTheory.\", \"doc\": \"For any group object $X$ in a Cartesian monoidal category, the composition of the inverse morphism with itself equals the identity morphism on $X$, i.e., $\\\\text{inv} \\\\circ \\\\text{inv} = \\\\text{id}_X$.\"}\n  {\"name\": \"CategoryTheory.Groupoid.comp_inv\", \"module\": \"Mathlib.CategoryTheory.Groupoid\", \"type\": \"∀ {obj : Type u} [self : CategoryTheory.Groupoid obj] {X Y : obj} (f : X ⟶ Y),\\n  CategoryTheory.CategoryStruct.comp f (CategoryTheory.Groupoid.inv f) = CategoryTheory.CategoryStruct.id X\", \"doc\": \"In a groupoid, for any morphism $ f : X \\\\to Y $, the composition of $ f $ with its inverse $ f^{-1} $ is equal to the identity morphism on $ X $, i.e., $ f \\\\circ f^{-1} = \\\\text{id}_X $.\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instDiagonalScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Immersion\", \"type\": \": IsImmersion (pullback.diagonal f)\", \"doc\": \"For any morphism $ f $ of schemes, the diagonal morphism from $ X $ to the pullback of $ f $ against itself is an immersion. This asserts that the canonical diagonal map associated to a morphism of sc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no internal groupoid scheme theorem; ordinary groupoid identities and general diagonal/unramified facts do not by themselves specialize to the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"Scheme\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: no internal groupoid scheme theorem; ordinary groupoid identities and general diagonal/unramified facts do not by themselves specialize to the item"
+  },
+  {
+   "tool": "grep",
+   "query": "GroupoidScheme|groupoid.*[Dd]iagonal|groupoid.*[Ee]tale",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: no internal groupoid scheme theorem; ordinary groupoid identities and general diagonal/unramified facts do not by themselves specialize to the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat locally finitely presented internal groupoid of schemes with an open unit has etale structure maps",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale, Scheme.instCategoryEtale, IsEtale, Scheme.etalePretopology, Scheme.smallEtalePretopology, Scheme.etaleTopology, IsEtale.instHasOfPostcompPropertyScheme, Scheme.smallEtaleTopology. None states the internal-groupoid assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match: the second phrasing returns only general etale morphism and site definitions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-unramified-diagonal-singleton-field-cover",
+  "date": "2026-10-23",
+  "group": "Q59"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas. Proof of the unramified-diagonal/etale-atlas criterion: Finite-type points admit field representatives with etale self-relation. Supporting input: Etale field cover of a reduced locally Noetherian singleton stack. Input for the field-cover construction: Open unit forces etale projections in a flat groupoid.",
+   "via": [
+    "lem-sfb-unramified-diagonal-singleton-field-cover",
+    "lem-sfb-finite-type-point-etale-self-relation",
+    "lem-sfb-unramified-diagonal-etale-atlas",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-groupoid-open-unit-etale",
+  "worker": "stage1",
+  "summary": "Verified the statement against Stacks 06N0 and the diagram in 04R9. Wrote the cartesian-square verification, explicit inversion isomorphisms and final finiteness/unramified/etale assembly. Reused the existing Mathlib leaf for base change of open immersions; no new nodes and no statement change. No additional finiteness or separation hypothesis is used.",
+  "blueprint": "Current latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, (3), the inherited alteration/plurinodal prerequisite chain recorded in blueprint.from.place. The ancestor tool returns null because the inherited created.item chain has no imported blueprint ancestor. These five steps realize its terminal supporting input: open unit forces etale projections, used in the field-cover construction.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-map-over-base-finite-presentation",
+    "why": "Generic finite-presentation cancellation (lfp source over lft target), used with target id_U only to get that the lfp projections are locally of finite type (Stacks 01TW); no node of sk-thm-sf-ctf-stability states it, and sibling nodes of this unit already cite it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-map-over-base-finite-presentation"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q92-4470d7d69",
+  "group": "Q92",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-4470d7d69 (reviewer sub-agent of L); spot-checked: Read in full: the item (5 steps), all 9 cited statements, Stacks 04R9 (proof diagram) and 06N0 (final paragraphs), and the parent's step 5. The statement matches the source: flat lfp projections plus an open-immersion unit give etale s and t, with no hypothesis weakened. There are no new nodes. The item is not superseded: live and side-live still have it unsplit with no steps. No repair note. No SGA. Steps 1 and 4 (the inversion isomorphisms and I Delta_s = Delta_t i) are correct under def-a1-groupoid-scheme's conventions. Step 2's cartesian square is correct. Fault C1/C2 in step 5: it was marked elementary and claimed that lfp charts are finite-type charts, but def-weil-finite-type-morphism needs finite-type covers over every affine of the target (the Stacks 01T2/01TW locality argument). FIX: step 5 now cites the existing node lem-a1-map-over-base-finite-presentation with q = id_U and h = s (resp. t), and is marked non-elementary with 01TW added to its source. That node is in another unit, so it is declared and accepted in split_report.tool_uses as a generic cancellation tool; two sibling nodes of this unit already cite it. Also tightened: step 2 now spells out t(a)=u (needed for c(i(a),e(u))=i(a)) and why the lift is unique (pr_1 j = id); step 3 now identifies j with the base-change projection via fibre-product uniqueness (def-pc-fibre-product added to uses). proof_deps is updated to the union of uses. Statement, stmt_deps and blueprint fields are unchanged. The corrected file is fixes/dag/nodes/sec-six-functors-basics/lem-sfb-groupoid-open-unit-etale.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupoidOpenUnitEtale",
+  "declaration": "AlgebraicGeometry.IsGroupoidScheme.etale_of_isOpenImmersion_unit",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupoidOpenUnitEtale.lean",
+  "statement": "theorem IsGroupoidScheme.etale_of_isOpenImmersion_unit {S : Scheme.{u}} {U R : Over S} (s t : R ⟶ U) (e : U ⟶ R) (i : R ⟶ R) (c : pullback s.left t.left ⟶ R.left) (_hG : IsGroupoidScheme s.left t.left e.left i.left c) [Flat s.left] [Flat t.left] [LocallyOfFinitePresentation s.left] [LocallyOfFinitePresentation t.left] [IsOpenImmersion e.left] : Etale s.left ∧ Etale t.left",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-77e8d2446",
+  "group": "Q08",
+  "result": "pass",
+  "note": "First S2 delivery (S1 merged Q92 12:41; live/side-live have no lean record or module). Only the lean field changed; lean.statement verbatim in file; record complete. Clause check: Over S data + recorded IsGroupoidScheme (0231 laws, c on pullback s t = R x_{s,U,t} R); the over-S condition on c follows from composition_source+s.w, so no extra hypothesis; [Flat]/[LocallyOfFinitePresentation] on s.left,t.left; [IsOpenImmersion e.left]; conclusion Etale s.left ∧ Etale t.left (recorded Mathlib Etale). No Noetherian/reduced/field/separated/nonempty assumptions; single universe u, autoImplicit false. Edge cases (empty, trivial groupoid, group schemes, any char) covered. No duplicate in side-live lean (checked IsGroupoidScheme users mentioning Etale) or Mathlib. No defs, sorry-only proof, source+blueprint docstrings, 5-step proof docstring incl. S1 step-5 FIX; report has Worker report and Second reading by Q08. No changes, so no compile."
+ }
+}

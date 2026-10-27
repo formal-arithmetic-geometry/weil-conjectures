@@ -1,0 +1,278 @@
+{
+ "id": "lem-sfb-hopf-bilinear-image-dimension",
+ "kind": "statement",
+ "title": "Hopf dimension inequality for a bilinear map without zero divisors",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field] [def-weil-algebraic-closure], and let $V,W,T$ be finite-dimensional $k$-vector spaces [def-weil-finite-dimensional-subspace] [def-weil-vector-space-dimension] with $V\\ne0$ and $W\\ne0$. Let $b:V\\times W\\to T$ be $k$-bilinear, meaning linear in each argument. Suppose $b(v,w)\\ne0$ whenever $v\\ne0$ and $w\\ne0$. Let $P\\subseteq T$ be the linear span of all $b(v,w)$, namely their finite $k$-linear combinations. Then\n$$\\dim_kP\\geq\\dim_kV+\\dim_kW-1.$$\nIn particular $\\dim_kT\\geq\\dim_kV+\\dim_kW-1$.",
+ "source": {
+  "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+  "place": "Agent auxiliary for the Clifford argument underlying Section 3.2, step (7), printed p.14 (Morrison only lists that step, rather than proving this linear algebra lemma). Hopf inequality reconstructed via the Segre variety and linear sections; complete argument retained in report.md. Local Morrison PDF WANTED; read online at https://arxiv.org/pdf/0810.2340."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-vector-space-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Put $m=\\dim_kV\\geq1$, $n=\\dim_kW\\geq1$, $p=\\dim_kP$ and choose bases $v_i,w_j$. The coordinate space $E=k^{m n}$ has its coordinate basis $e_{ij}$. Define $B:E\\to P$ by $B(e_{ij})=b(v_i,w_j)$. Bilinearity gives $b(\\sum_i a_iv_i,\\sum_j c_jw_j)=\\sum_{ij}a_ic_jb(v_i,w_j)$, so the image of $B$ is precisely $P$. For $K=\\ker B$ and $d=\\dim_kK$, [lem-weil-pbc-idempotent-charpoly-rank-nullity] gives $p+d=mn$. The finite-dimensional hypotheses hold for $E$ by its coordinate basis and for $P$ because the $mn$ vectors $b(v_i,w_j)$ span it.",
+   "uses": [
+    "lem-weil-pbc-idempotent-charpoly-rank-nullity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Agent coordinate linearization and rank-nullity, preparatory to the application of Tag 0B2R."
+   }
+  },
+  {
+   "text": "In $\\mathbf P(E)=\\mathbf P^{mn-1}_k$, use [def-chow-segre] and [lem-chow-segre] to form the nonempty closed Segre image $X$ of $\\mathbf P^{m-1}_k\\times_k\\mathbf P^{n-1}_k$, with coordinates $z_{ij}=a_ic_j$. If $d>0$, let $L$ be the common zero locus of the homogeneous linear coordinate functions of $B$. Choose a basis of $K$ and extend it to a basis of $E$. In these coordinates the equations of $L$ set the last $mn-d$ coordinates to zero, so $L$ is a closed copy of $\\mathbf P^{d-1}_k$. The coordinate change is an isomorphism: an invertible matrix and its inverse act on homogeneous coordinates; on an open where a transformed coordinate is nonzero, the ratios of the transformed linear forms are regular, and the inverse ratios give the inverse map. The description of a closed immersion in [def-weil-closed-immersion] identifies $X$ homeomorphically with its source.",
+   "uses": [
+    "def-chow-segre",
+    "lem-chow-segre",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Agent Segre/kernel construction using Constructions Tag 01WD (constructions-lemma-segre-embedding), read in constructions.tex:2926-2986."
+   }
+  },
+  {
+   "text": "Here are the dimensions, including projective spaces of dimension zero. By [lem-weil-pbc-projective-space-standard-charts], $\\mathbf P^r_k$ has a cover by $r+1$ copies of $\\operatorname{Spec}k[t_1,\\ldots,t_r]$. By [lem-weil-pbc-fibre-product-affine-spectra], products of such charts have coordinate ring $k[t_1,\\ldots,t_r]\\otimes_k k[u_1,\\ldots,u_s]\\cong k[t_1,\\ldots,t_r,u_1,\\ldots,u_s]$: send the two sets of variables to the corresponding tensor factors; the inverse sends a pure tensor $f\\otimes g$ to $fg$. These maps are inverse on variables and pure tensors. Since a field has just two ideals, it is Noetherian of ring dimension zero. Thus [lem-sf-noetherian-polynomial-dimension] and [lem-weil-pbc-spec-topological-krull-dimension-ring] give dimension $r$ for each single chart and $r+s$ for each product chart.",
+   "uses": [
+    "lem-weil-pbc-projective-space-standard-charts",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sf-noetherian-polynomial-dimension",
+    "lem-weil-pbc-spec-topological-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions Tag 01NG (constructions-lemma-standard-covering-projective-space); agent polynomial-chart computation of the dimensions used in Tag 0B2R."
+   }
+  },
+  {
+   "text": "The scheme spaces in step 3 are sober by [lem-sc-scheme-sober], hence quasi-sober and $T_0$: if two points had the same closure, uniqueness of its generic point would make them equal. Apply [lem-weil-pbc-dimension-bound-open-cover] to those chart covers for the upper bounds, and [lem-weil-pbc-open-subspace-dimension-monotone] to any nonempty chart for the reverse bounds. Isomorphisms preserve chains of irreducible closed subsets and their lengths. Consequently $\\dim X=m+n-2$, and if $d>0$, $\\dim L=d-1$.",
+   "uses": [
+    "lem-sc-scheme-sober",
+    "lem-weil-pbc-dimension-bound-open-cover",
+    "lem-weil-pbc-open-subspace-dimension-monotone"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Agent assembly of the chart dimensions; the dimensions inserted in varieties-lemma-intersection-in-projective-space (Tag 0B2R)."
+   }
+  },
+  {
+   "text": "Assume $d>0$. The closed subsets $X$ and $L$ are disjoint. Otherwise [lem-sc-lft-over-field-jacobson-space], applied to the ambient $\\mathbf P^{mn-1}_k$, supplies a closed point $x\\in X\\cap L$: closed points in this nonempty closed subset are dense. The ambient scheme is locally of finite type, since its standard affine charts in step 3 are finite-variable polynomial algebras. By [lem-weil-pbc-closed-point-residue-field-base], $\\kappa(x)=k$ as a $k$-algebra. The closed immersion onto $X$ lifts this rational point to the Segre source: on affine rings it is a quotient, and a point killing that quotient ideal factors through it, with the same residue field [def-weil-closed-immersion]. The two projections are $k$-points of the factors, so the chart coordinates give nonzero vectors $a\\in k^m$ and $c\\in k^n$ representing them. By [def-chow-segre], their Segre coordinates are $(a_ic_j)$. Membership in $L$ says $B((a_ic_j))=0$, hence $b(\\sum_i a_iv_i,\\sum_j c_jw_j)=0$. Both arguments are nonzero by basis independence, contradicting the hypothesis.",
+   "uses": [
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "def-weil-closed-immersion",
+    "def-chow-segre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0478 (varieties-lemma-locally-finite-type-Jacobson) and the algebraically closed residue-field consequence; agent disjointness argument."
+   }
+  },
+  {
+   "text": "If $d>0$, both $X,L$ are nonempty. The contrapositive of [lem-sfb-projective-closed-intersection-dimension], with ambient dimension $mn-1$, now gives $(m+n-2)+(d-1)<mn-1$. Since these are integers, $m+n+d\\leq mn+1$, and $p=mn-d\\geq m+n-1$. If $d=0$, step 1 gives $p=mn$; the same bound follows from $mn-(m+n-1)=(m-1)(n-1)\\geq0$. This case avoids assigning an ordinary nonnegative dimension to the empty projectivization of the zero space.",
+   "uses": [
+    "lem-sfb-projective-closed-intersection-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2R (varieties-lemma-intersection-in-projective-space), contrapositive and integer rearrangement; separate zero-kernel case."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-vector-space-quotient-dimension] to $P\\subseteq T$: $\\dim_k(T/P)+\\dim_kP=\\dim_kT$. Since the quotient dimension is nonnegative, $\\dim_kT\\geq\\dim_kP$. Combine with step 6 to obtain the second asserted bound.",
+   "uses": [
+    "lem-trf-vector-space-quotient-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Elementary consequence of the dimension formula for the subspace P of T."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-idempotent-charpoly-rank-nullity",
+  "def-chow-segre",
+  "lem-chow-segre",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-sf-noetherian-polynomial-dimension",
+  "lem-weil-pbc-spec-topological-krull-dimension-ring",
+  "lem-sc-scheme-sober",
+  "lem-weil-pbc-dimension-bound-open-cover",
+  "lem-weil-pbc-open-subspace-dimension-monotone",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-sfb-projective-closed-intersection-dimension",
+  "lem-trf-vector-space-quotient-dimension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Agent Hopf proof from the Segre closed immersion (Constructions Tag 01WD), polynomial standard charts (01NG), closed rational points (0478), and projective intersection theorem (0B2R). Morrison Section 3.2 supplies the Clifford application, not this proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A nonsingular bilinear map over an algebraically closed field into a vector space Z implies dim Z at least dim V plus dim W minus one",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LinearMap.finrank_eq_of_isPerfPair\", \"module\": \"Mathlib/LinearAlgebra/PerfectPairing/Restrict\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L]\\n  [inst_3 : AddCommGroup M] [inst_4 : AddCommGroup N] [inst_5 : Module L M] [inst_6 : Module L N] [inst_7 : Module K M]\\n  [inst_8 : Module K N] [IsScalarTower K L M] (p : M →ₗ[L] \", \"doc\": \"Let $ K \\\\subseteq L $ be field extensions, and let $ M, N $ be $ K $-modules equipped with a perfect pairing $ p: M \\\\times N \\\\to K $. For submodules $ M' \\\\subseteq M $ and $ N' \\\\subseteq N $, if $ M' \"}\n  {\"name\": \"LinearMap.IsPerfPair.of_injective\", \"module\": \"Mathlib/LinearAlgebra/PerfectPairing/Basic\", \"type\": \"∀ {K : Type u_2} {M : Type u_3} {N : Type u_5} [inst : AddCommGroup M] [inst_1 : AddCommGroup N] [inst_2 : Field K]\\n  [inst_3 : Module K M] [inst_4 : Module K N] {p : M →ₗ[K] N →ₗ[K] K} [FiniteDimensional K M],\\n  Function.Injective ⇑p → Function.Injective ⇑p.flip → p.IsPerfPair\", \"doc\": \"Let $ K $ be a field and $ M $ a finite-dimensional vector space over $ K $. If a bilinear pairing $ p : M \\\\times N \\\\to K $ is injective and its flipped version $ p.\\\\text{flip} : N \\\\times M \\\\to K $ is\"}\n  {\"name\": \"LinearMap.IsPerfPair.of_injective'\", \"module\": \"Mathlib/LinearAlgebra/PerfectPairing/Basic\", \"type\": \"∀ {K : Type u_2} {M : Type u_3} {N : Type u_5} [inst : AddCommGroup M] [inst_1 : AddCommGroup N] [inst_2 : Field K]\\n  [inst_3 : Module K M] [inst_4 : Module K N] {p : M →ₗ[K] N →ₗ[K] K} [FiniteDimensional K N],\\n  Function.Injective ⇑p → Function.Injective ⇑p.flip → p.IsPerfPair\", \"doc\": \"If a linear map $ p: M \\to N^* $ is injective and its flipped version $ p^{\\text{flip}}: N \\to M^* $ is also injective, and $ N $ is finite-dimensional over the field $ K $, then $ p $ is a perfect pairi\"}\n  {\"name\": \"RootPairing.finrank_range_polarization_eq_finrank_span_coroot\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Finite/Nondegenerate\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Fintype ι] [inst_1 : AddCommGroup M]\\n  [inst_2 : AddCommGroup N] [inst_3 : CommRing R] [inst_4 : Module R M] [inst_5 : Module R N] (P : RootPairing ι R M N)\\n  (S : Type u_5) [inst_6 : CommRing S] [IsDomain R] [IsDomain S] [inst_9 \", \"doc\": \"Under the anisotropicity condition of the root pairing $ P $, the finite rank of the image of the polarization map $ P.\\\\text{PolarizationIn}(S) $ equals the finite rank of the coroot span $ P.\\\\text{co\"}\n  {\"name\": \"RootPairing.finrank_corootSpan_eq\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Finite/Nondegenerate\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Fintype ι] [inst_1 : AddCommGroup M]\\n  [inst_2 : AddCommGroup N] [inst_3 : CommRing R] [inst_4 : Module R M] [inst_5 : Module R N] (P : RootPairing ι R M N)\\n  (S : Type u_5) [inst_6 : CommRing S] [IsDomain R] [IsDomain S] [inst_9 \", \"doc\": \"For an anisotropic root pairing $ P $ between $ R $-modules $ M $ and $ N $, the finite rank of the coroot span $ P.\\text{corootSpan}(S) $ as an $ S $-module equals the finite rank of the root span $ P\"}\n  {\"name\": \"RootPairing.finrank_rootSpanIn\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/IsValuedIn\", \"type\": \"∀ {ι : Type u_1} {M : Type u_4} {N : Type u_5} [inst : AddCommGroup M] [inst_1 : AddCommGroup N] (K : Type u_7)\\n  {L : Type u_8} [inst_2 : Field K] [inst_3 : Field L] [inst_4 : Algebra K L] [inst_5 : Module L M]\\n  [inst_6 : Module L N] [inst_7 : Module K M] [inst_8 : Module K N] [IsScalarTower K L M\", \"doc\": \"Given a commutative ring $ R $, $ R $-modules $ M $ and $ N $, and a commutative ring $ S $ equipped with an $ S $-algebra structure on $ R $, this proposition asserts that the root pairing between $ \"}\n  {\"name\": \"RootPairing.finrank_corootSpanIn\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/IsValuedIn\", \"type\": \"∀ {ι : Type u_1} {M : Type u_4} {N : Type u_5} [inst : AddCommGroup M] [inst_1 : AddCommGroup N] (K : Type u_7)\\n  {L : Type u_8} [inst_2 : Field K] [inst_3 : Field L] [inst_4 : Algebra K L] [inst_5 : Module L M]\\n  [inst_6 : Module L N] [inst_7 : Module K M] [inst_8 : Module K N] [IsScalarTower K L M\", \"doc\": \"Given a commutative ring $ R $, $ R $-modules $ M $ and $ N $, and a commutative ring $ S $ equipped with an $ S $-algebra structure on $ R $, this proposition asserts that any root pairing between $ \"}\n  {\"name\": \"Module.finrank_of_isPerfPair\", \"module\": \"Mathlib/LinearAlgebra/PerfectPairing/Basic\", \"type\": \"∀ {R : Type u_1} {M : Type u_3} {N : Type u_5} [inst : AddCommGroup M] [inst_1 : AddCommGroup N] [inst_2 : CommRing R]\\n  [inst_3 : Module R M] [inst_4 : Module R N] (p : M →ₗ[R] N →ₗ[R] R) [p.IsPerfPair] [Module.Finite R M]\\n  [Module.Free R M], Module.finrank R M = Module.finrank R N\", \"doc\": \"If $ M $ and $ N $ are modules over a commutative ring $ R $ equipped with a perfect pairing, and $ M $ is finitely generated and free, then the finite rank of $ M $ over $ R $ equals the finite rank \"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: perfect-pairing finrank equalities and nondegenerate bilinear-form declarations do not give the Hopf image-dimension bound; nondegeneracy is a weaker condition than having no zero products."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"finrank\", \"IsAlgClosed\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"IsAlgClosed.nonempty_algEquiv_or_of_finrank_eq_two\", \"module\": \"Mathlib.FieldTheory.IsAlgClosed.Basic\", \"type\": \" {F : Type u_1} {F' : Type u_2} (E : Type u_3) [Field F] [Field F'] [Field E] [Algebra F F'] [Algebra F E] [Algebra.IsAlgebraic F E] [IsAlgClosed F'] (h : Module.finrank F F' = 2) : Nonempty (E ≃ₐ[F] F) ∨ Nonempty (E ≃ₐ[F] F')\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: perfect-pairing finrank equalities and nondegenerate bilinear-form declarations do not give the Hopf image-dimension bound; nondegeneracy is a weaker condition than having no zero products."
+  },
+  {
+   "tool": "grep",
+   "query": "Hopf|nonsingular|noZeroDivisors",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/SesquilinearForm.lean\", \"line\": \"12\", \"text\": \"public import Mathlib.LinearAlgebra.Matrix.NonsingularInverse\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Defs.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.LinearAlgebra.Matrix.NonsingularInverse\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/ZPow.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.LinearAlgebra.Matrix.NonsingularInverse\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/ZPow.lean\", \"line\": \"15\", \"text\": \"the nonsingular inverse definition for negative powers.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/NonsingularInverse.lean\", \"line\": \"17\", \"text\": \"# Nonsingular inverses\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/NonsingularInverse.lean\", \"line\": \"181\", \"text\": \"/-- The nonsingular inverse is the same as `invOf` when `A` is invertible. -/\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/NonsingularInverse.lean\", \"line\": \"188\", \"text\": \"nonsingular inverse. -/\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/NonsingularInverse.lean\", \"line\": \"194\", \"text\": \"/-- The nonsingular inverse is the same as the general `Ring.inverse`. -/\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/NonsingularInverse.lean\", \"line\": \"215\", \"text\": \"/-- The nonsingular inverse of `A` is a left inverse. -/\"}\n  {\"file\": \"Mathlib/LinearAlgebra/StdBasis.lean\", \"line\": \"159\", \"text\": \"lemma AlgHom.eq_piEvalAlgHom {k G : Type*} [CommSemiring k] [NoZeroDivisors k] [Nontrivial k]\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/Invertible.lean\", \"line\": \"16\", \"text\": \"in `Mathlib/LinearAlgebra/Matrix/NonsingularInverse.lean`.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/SemiringInverse.lean\", \"line\": \"18\", \"text\": \"# Nonsingular inverses over semirings\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/SemiringInverse.lean\", \"line\": \"145\", \"text\": \"/-- A square matrix `A` over a commutative semiring `R` is called nonsingular if it is\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/SemiringInverse.lean\", \"line\": \"149\", \"text\": \"def Nonsingular : Prop := ∀ a b : R, A.IsDetpBalanced a b → a = b\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/SemiringInverse.lean\", \"line\": \"151\", \"text\": \"lemma Nonsingular.eq_of_IsDetpBalanced (hA : A.Nonsingular) (hAd : A.IsDetpBalanced a b) :\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/SemiringInverse.lean\", \"line\": \"154\", \"text\": \"lemma IsDetpBalanced.eq_of_nonsingular (hA : A.IsDetpBalanced a b) (hAn : A.Nonsingular) :\"}\n  {\"file\": \"Mathlib/LinearAlgebra/TensorAlgebra/Basis.lean\", \"line\": \"73\", \"text\": \"instance instNoZeroDivisors [NoZeroDivisors R] [Module.Free R M] :\"}\n  {\"file\": \"Mathlib/LinearAlgebra/TensorAlgebra/Basis.lean\", \"line\": \"74\", \"text\": \"    NoZeroDivisors (TensorAlgebra R M) :=\"}\n  {\"file\": \"Mathlib/LinearAlgebra/TensorAlgebra/Basis.lean\", \"line\": \"76\", \"text\": \"  (equivFreeAlgebra b).toMulEquiv.noZeroDivisors\"}\n  {\"file\": \"Mathlib/LinearAlgebra/TensorAlgebra/Basis.lean\", \"line\": \"85\", \"text\": \"  NoZeroDivisors.to_isDomain _\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/Nondegenerate.lean\", \"line\": \"43\", \"text\": \"See also `Matrix.Nonsingular`. -/\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/Nondegenerate.lean\", \"line\": \"165\", \"text\": \"theorem nondegenerate_of_det_ne_zero [NoZeroDivisors R] (hM : M.det ≠ 0) : M.Nondegenerate :=\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/Nondegenerate.lean\", \"line\": \"172\", \"text\": \"theorem eq_zero_of_vecMul_eq_zero [NoZeroDivisors R] (hM : M.det ≠ 0) {v : m → R}\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/Nondegenerate.lean\", \"line\": \"180\", \"text\": \"theorem eq_zero_of_mulVec_eq_zero [NoZeroDivisors R] (hM : M.det ≠ 0) {v : m → R}\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/Nondegenerate.lean\", \"line\": \"190\", \"text\": \"theorem mulVec_injective_of_det_ne_zero [NoZeroDivisors R] (hM : M.det ≠ 0) :\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: perfect-pairing finrank equalities and nondegenerate bilinear-form declarations do not give the Hopf image-dimension bound; nondegeneracy is a weaker condition than having no zero products."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hopf lemma dimension bound for bilinear map without zero divisors over algebraically closed field",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LinearMap.Nondegenerate\", \"module\": \"Mathlib.LinearAlgebra.SesquilinearForm.Basic\", \"type\": \"(B : M₁ →ₛₗ[I₁] M₂ →ₛₗ[I₂] M) : Prop\", \"doc\": \"A bilinear map $ B: M₁ × M₂ → M $ is non-degenerate if it is both left non-degenerate (for every $ x ∈ M₁ $, $ B(x, y) = 0 $ for all $ y ∈ M₂ $ implies $ x = 0 $) and right-separating (for every $ y ∈\"}\n  {\"name\": \"LinearMap.IsOrtho\", \"module\": \"Mathlib.LinearAlgebra.SesquilinearForm.Basic\", \"type\": \"(B : M₁ →ₛₗ[I₁] M₂ →ₛₗ[I₂] M) (x : M₁) (y : M₂) : Prop\", \"doc\": \"Given a bilinear map $ B: M₁ \\\\times M₂ \\\\to M $, the proposition that $ B(x, y) = 0 $ for elements $ x \\\\in M₁ $ and $ y \\\\in M₂ $.\"}\n  {\"name\": \"LinearMap.BilinForm.nondegenerate_iff_det_ne_zero\", \"module\": \"Mathlib.LinearAlgebra.Matrix.BilinearForm\", \"type\": \"{B : BilinForm A M₂} (b : Basis ι A M₂) : B.Nondegenerate ↔ (BilinForm.toMatrix b B).det ≠ 0\", \"doc\": \"A bilinear form $ B $ on a module $ M $ over a commutative ring $ R $ is non-degenerate if and only if the determinant of its matrix representation with respect to a basis $ b $ is non-zero.\"}\n  {\"name\": \"LinearMap.BilinMap.toQuadraticMap_eq_zero\", \"module\": \"Mathlib.LinearAlgebra.QuadraticForm.Basic\", \"type\": \"{B : BilinMap R M N} : B.toQuadraticMap = 0 ↔ B.IsAlt\", \"doc\": \"The quadratic form associated to a bilinear map $ B : M \\\\times M \\\\to N $ over a commutative semiring $ R $ is the zero map if and only if $ B $ is an alternating bilinear map (i.e., $ B(x, x) = 0 $ fo\"}\n  {\"name\": \"LinearMap.BilinForm.separatingLeft_of_anisotropic\", \"module\": \"Mathlib.LinearAlgebra.QuadraticForm.Basic\", \"type\": \"{B : BilinForm R M} (hB : B.toQuadraticMap.Anisotropic) : B.SeparatingLeft\", \"doc\": \"Let $ R $ be a commutative semiring and $ M $ an $ R $-module. If a bilinear form $ B : M \\\\times M \\\\to R $ has an associated quadratic form $ Q(x) = B(x, x) $ that is anisotropic (i.e., $ Q(x) = 0 $ i\"}\n  {\"name\": \"LinearMap.BilinForm.Nondegenerate.ne_zero\", \"module\": \"Mathlib.LinearAlgebra.BilinearForm.Properties\", \"type\": \"[Nontrivial M] {B : BilinForm R M} (h : B.Nondegenerate) : B ≠ 0\", \"doc\": \"If $ B $ is a non-degenerate bilinear form on a non-trivial module $ M $ over a semiring $ R $, then $ B $ is not the zero bilinear form.\"}\n  {\"name\": \"LinearMap.BilinForm.nondegenerate_toBilin'_iff_det_ne_zero\", \"module\": \"Mathlib.LinearAlgebra.Matrix.BilinearForm\", \"type\": \"{M : Matrix ι ι A} : M.toBilin'.Nondegenerate ↔ M.det ≠ 0\", \"doc\": \"A bilinear form on $ R_1^n $ represented by a square matrix $ M $ is non-degenerate if and only if the determinant of $ M $ is non-zero.\"}\n  {\"name\": \"LinearMap.IsReflective.of_dvd_two\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.OfBilinear\", \"type\": \"[IsCancelMulZero R] [NeZero (2 : R)] (hx : B x x ∣ 2) : IsReflective B x\", \"doc\": \"In a cancellative monoid with zero where $2 \\\\neq 0$, if the value of the bilinear map $B$ at $(x, x)$ divides $2$, then $B$ is reflective at $x$.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: perfect-pairing finrank equalities and nondegenerate bilinear-form declarations do not give the Hopf image-dimension bound; nondegeneracy is a weaker condition than having no zero products."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hopf lemma a bilinear map of nonzero finite dimensional vector spaces over an algebraically closed field with no zero divisors has image dimension at least sum of dimensions minus one",
+   "results": "{\"t\": \"2026-10-23T09:41:56Z\", \"tool\": \"leanfinder\", \"query\": \"Hopf lemma a bilinear map of nonzero finite dimensional vector spaces over an algebraically closed field with no zero divisors has image dimension at least sum of dimensions minus one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.finrank_eq_of_isPerfPair\", \"RootPairing.finrank_range_polarization_eq_finrank_span_coroot\", \"LinearMap.ker_ne_bot_of_finrank_lt\", \"Module.Dual.finrank_ker_add_one_of_ne_zero\", \"LinearMap.exists_isNilRegular_of_finrank_le_card\", \"FiniteDimensional.exists_relation_sum_zero_pos_coefficient_of_finrank_succ_lt_card\", \"Module.exists_dual_forall_apply_ne_zero\", \"RootPairing.finrank_rootSpan_map_polarization_eq_finrank_corootSpan\"], \"digest\": \"fc33bab71e1a327e\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: dimension of a perfect pairing, ordinary rank-nullity and orthogonal-complement identities do not bound the span of products of two spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "finrank.*(add.*sub|sub.*one)|Hopf.*lemma|nonsingular.*bilinear",
+   "results": "{\"t\": \"2026-10-23T09:50:25Z\", \"tool\": \"grep\", \"query\": \"finrank.*(add.*sub|sub.*one)|Hopf.*lemma|nonsingular.*bilinear\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 23, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/BilinearForm/Orthogonal.lean\", \"Mathlib/LinearAlgebra/BilinearForm/Orthogonal.lean\", \"Mathlib/LinearAlgebra/AffineSpace/FiniteDimensional.lean\", \"Mathlib/LinearAlgebra/AffineSpace/FiniteDimensional.lean\", \"Mathlib/LinearAlgebra/AffineSpace/FiniteDimensional.lean\", \"Mathlib/LinearAlgebra/RootSystem/Finite/Nondegenerate.lean\", \"Mathlib/LinearAlgebra/FiniteDimensional/Lemmas.lean\", \"Mathlib/LinearAlgebra/FiniteDimensional/Lemmas.lean\"], \"digest\": \"07b3f8528d77d7c5\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: dimension of a perfect pairing, ordinary rank-nullity and orthogonal-complement identities do not bound the span of products of two spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hopf lemma bilinear map no zero products image span dimension sum dimensions minus one",
+   "results": "{\"t\": \"2026-10-23T11:19:34Z\", \"tool\": \"leanfinder\", \"query\": \"Hopf lemma bilinear map no zero products image span dimension sum dimensions minus one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.finrank_eq_of_isPerfPair\", \"RootPairing.finrank_range_polarization_eq_finrank_span_coroot\", \"RootPairing.finrank_corootSpan_eq\", \"LinearMap.BilinForm.finrank_add_finrank_orthogonal\", \"RootPairing.finrank_rootSpan_map_polarization_eq_finrank_corootSpan\", \"Module.finrank_of_isPerfPair\", \"RootPairing.finrank_corootSpan_eq'\", \"rank_add_rank_split\"], \"digest\": \"98018b035febf4c7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: perfect-pairing dimension identities, rank-nullity, and bilinear-form or matrix rank results do not give the Hopf bound under the no-zero-products hypothesis."
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap, \"finrank\", \"IsAlgClosed\"",
+   "results": "{\"t\": \"2026-10-23T11:19:34Z\", \"tool\": \"loogle\", \"query\": \"LinearMap, \\\"finrank\\\", \\\"IsAlgClosed\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: perfect-pairing dimension identities, rank-nullity, and bilinear-form or matrix rank results do not give the Hopf bound under the no-zero-products hypothesis."
+  },
+  {
+   "tool": "grep",
+   "query": "Hopf|nonsingular.*bilinear|bilinear.*dimension",
+   "results": "{\"t\": \"2026-10-23T11:19:34Z\", \"tool\": \"grep\", \"query\": \"Hopf|nonsingular.*bilinear|bilinear.*dimension\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/BilinearForm/Properties.lean\"], \"digest\": \"53bd22d3e5cc98be\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: perfect-pairing dimension identities, rank-nullity, and bilinear-form or matrix rank results do not give the Hopf bound under the no-zero-products hypothesis."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hopf dimension inequality for bilinear maps over algebraically closed fields",
+   "results": "{\"t\": \"2026-10-23T11:19:35Z\", \"tool\": \"leansearch\", \"query\": \"Hopf dimension inequality for bilinear maps over algebraically closed fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContinuousLinearMap.norm_holder_apply_apply_le\", \"ContinuousLinearMap.memLp_of_bilin\", \"ContinuousLinearMap.norm_iteratedFDeriv_le_of_bilinear\", \"IsBoundedBilinearMap.mk\", \"LinearMap.BilinForm.apply_sq_lt_iff_linearIndependent_of_symm\", \"LinearMap.IsAlt\", \"LinearMap.BilinForm.finrank_add_finrank_orthogonal\", \"LinearMap.BilinForm.tensorDistribEquiv\"], \"digest\": \"a7d98e1ea6c409a7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: perfect-pairing dimension identities, rank-nullity, and bilinear-form or matrix rank results do not give the Hopf bound under the no-zero-products hypothesis."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A linear subspace of matrices over an algebraically closed field avoiding all nonzero rank one matrices has codimension at least m plus n minus one",
+   "results": "{\"t\": \"2026-10-23T11:46:03Z\", \"tool\": \"leanfinder\", \"query\": \"A linear subspace of matrices over an algebraically closed field avoiding all nonzero rank one matrices has codimension at least m plus n minus one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"rankCondition_iff_matrix\", \"RankCondition\", \"HasRankNullity\", \"rankCondition_of_nontrivial_of_commSemiring\", \"LinearMap.rank_diagonal\", \"strongRankCondition_iff_forall_zero_lt_finrank\", \"AmpleSet.of_one_lt_codim\", \"nontrivial_of_hasRankNullity\"], \"digest\": \"72d91708be859aef\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: perfect-pairing dimension identities, rank-nullity, and bilinear-form or matrix rank results do not give the Hopf bound under the no-zero-products hypothesis."
+  },
+  {
+   "tool": "grep",
+   "query": "finrank_range_add_finrank_ker|finrank.*ker.*range",
+   "results": "{\"t\": \"2026-10-23T11:46:03Z\", \"tool\": \"grep\", \"query\": \"finrank_range_add_finrank_ker|finrank.*ker.*range\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Eigenspace/Triangularizable.lean\", \"Mathlib/LinearAlgebra/Matrix/Rank.lean\", \"Mathlib/LinearAlgebra/Matrix/Rank.lean\", \"Mathlib/LinearAlgebra/Matrix/Rank.lean\", \"Mathlib/LinearAlgebra/BilinearForm/Orthogonal.lean\", \"Mathlib/LinearAlgebra/FiniteDimensional/Lemmas.lean\", \"Mathlib/LinearAlgebra/FiniteDimensional/Lemmas.lean\", \"Mathlib/LinearAlgebra/FiniteDimensional/Lemmas.lean\"], \"digest\": \"94dba06a7b6066d8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: perfect-pairing dimension identities, rank-nullity, and bilinear-form or matrix rank results do not give the Hopf bound under the no-zero-products hypothesis."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-special-clifford-subcurve",
+  "date": "2026-10-23",
+  "group": "Q04"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.2, Definition 7 and Theorem 8, printed pp.13--15, and equation (6) in Section 3.3. Local PDF WANTED; read online. Supporting estimate: Section 3.2 proof step (7), printed p.14; support-of-dualizing-section argument and Clifford inequality, as in Gieseker Proposition 1.0.8, printed pp.61--62, referring to Theorem 0.2.3. Agent statement of the precise auxiliary support claim; not an assertion of nonspeciality. Local PDFs WANTED. Auxiliary: Hopf dimension inequality for a bilinear map without zero divisors.",
+   "via": [
+    "lem-sfb-nodal-special-clifford-subcurve",
+    "lem-sfb-gieseker-potential-stability",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-hopf-bilinear-image-dimension",
+  "worker": "stage1",
+  "group": "Q70",
+  "summary": "Statement unchanged. Coordinate linearization and rank-nullity reduce Hopf to disjointness of the Segre image and the kernel linear space. Dimensions are computed using existing polynomial-chart lemmas; algebraic closedness converts any intersection to a forbidden zero product. One new statement-only geometric tool, Stacks 0B2R, searched in Mathlib and the whole DAG/blueprint. Zero kernel and one-dimensional factors included. No attachment.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.2, Definition 7 and Theorem 8, printed pp.13--15, and equation (6) in Section 3.3. Local PDF WANTED; read online. Supporting estimate: Section 3.2 proof step (7), printed p.14; support-of-dualizing-section argument and Clifford inequality, as in Gieseker Proposition 1.0.8, printed pp.61--62, referring to Theorem 0.2.3. Agent statement of the precise auxiliary support claim; not an assertion of nonspeciality. Local PDFs WANTED. Auxiliary: Hopf dimension inequality for a bilinear map without zero divisors. Realizes the auxiliary Hopf estimate through Segre and linear sections. Current latest unit and direct-image proof read; no chapter/unit route replaced. The current created.item chain has no imported blueprint ancestor, so ancestor returns None and inherited from.node remains null.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-projective-space-standard-charts",
+    "why": "Standard affine coordinate charts used to compute the dimension of projective spaces and their product; generic projective-geometry tool, no alteration/unit route is replaced."
+   },
+   {
+    "node": "lem-sc-lft-over-field-jacobson-space",
+    "why": "Density of closed points converts a nonempty closed projective intersection into a rational point over the algebraically closed field; generic finite-type geometry tool, not a replacement for the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-sc-lft-over-field-jacobson-space"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-882619ed8",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-882619ed8 (reviewer sub-agent of L); spot-checked: Read the item and the new node in full, every cited statement, and the sources Stacks 0B2R (varieties.tex 6365-6412), 01WD and 0478. Item statement is unchanged and still unsplit on live, so this is a first split with no parallel duplicate and no SGA source. Step 1: rank-nullity applied to B: k^{mn} -> P gives p+d=mn, and the image of B is exactly the span P. Step 2: lem-chow-segre gives the closed Segre image X; L=P(K) becomes a coordinate-linear subspace after an explicit elementary change of coordinates. Steps 3-4: chart, tensor and polynomial-dimension nodes plus the open-cover upper bound and monotone lower bound (sober scheme spaces) give dim X=m+n-2 and dim L=d-1. Step 5: Jacobson density gives a closed point of X∩L with residue field k (algebraic closedness used here); lifting through the closed immersion gives a zero product b(a·v,c·w)=0, a contradiction. Step 6: the contrapositive of the new 0B2R node gives m+n+d-3<mn-1, which is equivalent to p>=m+n-1; the d=0 case is handled separately. New node matches 0B2R hypothesis by hypothesis over any field, is statement-only, and is not a clause of the item; rg -L over snapshot, live and side-live found no duplicate. Small cases checked: m=n=1, m=1, the polynomial product (sharp bound), C×C->C over R (closedness needed), N=0, and skew lines in P^3. Batch-5: lem-trf-vector-space-quotient-dimension is a Mathlib leaf (Submodule.finrank_quotient_add_finrank) with no proof_deps; it is generic linear algebra outside both assumptions, so accepted. tool_uses for the projective charts and Jacobson density are accepted as generic tools."
+ }
+}

@@ -1,0 +1,432 @@
+{
+ "id": "lem-sfb-general-section-cluster-strict-bound",
+ "kind": "statement",
+ "title": "Strict cohomology bound for subclusters of a general section",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-algebraic-closure], and let $C$ be a nonempty connected projective reduced $k$-scheme of pure dimension one [def-kun-projective, def-pc-reduced-scheme, def-weil-connected-scheme, def-kun-topological-krull-dimension]. Assume $C$ is smooth except at ordinary nodes with completed local rings $k[[u,v]]/(uv)$ [def-sbc-smooth-morphisms, def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series]. Let $L$ be an invertible $\\mathcal O_C$-module [def-sc-invertible-module]. Write $h^i(C,F)=\\dim_k H^i(C,F)$ for Zariski module-sheaf cohomology [def-sc-ringed-space-module-cohomology]. Suppose that $\\deg_k(L|_B)\\geq 2p_a(B)+1$ for every nonempty reduced union $B$ of irreducible components, including disconnected unions and $B=C$, where $p_a(B)=1-\\chi(B,\\mathcal O_B)$ [def-pc-degree-line-bundle, def-pc-euler-characteristic, def-pc-module-pullback]. Then there exists $s\\in H^0(C,L)$ such that its zero scheme $S=Z(s)$ [def-pc-zero-scheme] is finite, reduced, and supported in the smooth locus, and $s$ is nonzero at the generic point of every irreducible component. For every nonempty closed subscheme $T\\subseteq S$, with ideal sheaf $I_T\\subseteq\\mathcal O_C$ [def-sbc-closed-immersion-ideal-sheaf], one has\n$$h^0(C,I_T\\otimes_{\\mathcal O_C}L)+h^1(C,I_T\\otimes_{\\mathcal O_C}L)<h^0(C,L).$$\nTensor products use [def-pur-sheaf-tensor-product]. A finite reduced subscheme here is a finite disjoint union of reduced closed $k$-points; no assertion is made for $T=\\varnothing$.",
+ "source": {
+  "document": "literature/franciosi-tenni-canonical-ring-3-connected-2014.pdf",
+  "place": "Section 4, Proposition 4.1, printed pp.47--49, with the empty-cluster correction; Section 4 Theorem 4.2 proof, general hyperplane section. Nodal specialization. Local PDF WANTED; primary text read online.",
+  "url": "https://pagine.dm.unipi.it/franciosi/lavori/franciosi-tenni2.pdf"
+ },
+ "stmt_deps": [
+  "def-kun-projective",
+  "def-kun-topological-krull-dimension",
+  "def-pc-degree-line-bundle",
+  "def-pc-euler-characteristic",
+  "def-pc-module-pullback",
+  "def-pc-reduced-scheme",
+  "def-pc-zero-scheme",
+  "def-pur-sheaf-tensor-product",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-smooth-morphisms",
+  "def-sc-invertible-module",
+  "def-sc-ringed-space-module-cohomology",
+  "def-weil-algebraic-closure",
+  "def-weil-connected-scheme",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof": [
+  {
+   "text": "Projectivity gives properness by [lem-kun-projective-implies-proper], and properness includes finite type [def-weil-proper-morphism]. Thus the curve is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], and has finitely many components [lem-weil-pbc-noetherian-finitely-many-components]. Invertible modules are finite locally free, hence coherent by [pqf-lem-coherent-ft-locnoeth]; their cohomology is finite-dimensional by [lem-pc-coherent-hi]. Every reduced component union is again projective and nodal by [lem-sfb-nodal-subcurve-dualizing-annihilator], and the same facts apply on each connected component. The functorial long exact cohomology sequence is available by [lem-weil-pbc-derived-functor-long-exact], since module sheaves have enough injectives and global sections is left exact [lem-weil-pbc-scheme-modules-enough-injectives, lem-sc-global-sections-left-exact].",
+   "uses": [
+    "lem-kun-projective-implies-proper",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-pc-coherent-hi",
+    "lem-sfb-nodal-subcurve-dualizing-annihilator",
+    "lem-weil-pbc-derived-functor-long-exact",
+    "lem-weil-pbc-scheme-modules-enough-injectives",
+    "lem-sc-global-sections-left-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/franciosi-tenni-canonical-ring-3-connected-2014.pdf",
+    "place": "Section 4, Proposition 4.1 proof, printed pp.47--49; nodal reconstruction. Local PDF WANTED; primary text read online.",
+    "url": "https://pagine.dm.unipi.it/franciosi/lavori/franciosi-tenni2.pdf"
+   }
+  },
+  {
+   "text": "Let $D$ be any nonempty connected projective reduced curve, nodal as in the item, and $A$ any invertible module on $D$ with $\\deg(A|_B)\\geq2p_a(B)+1$ for every nonempty reduced union $B$ of components of $D$; for instance $D\\subseteq C$ a connected reduced subcurve and $A=L|_D$. For every connected reduced subcurve $B$ of $D$, proper reduced global functions are $k$ by [lem-weil-pbc-proper-reduced-algclosed-global-sections-product]. Together with vanishing above dimension one [lem-sc-noetherian-cohomology-above-dimension], this gives $p_a(B)=h^1(B,\\mathcal O_B)\\geq0$. Apply [lem-sfb-curve-ideal-h1-subcurve-obstruction] to $D$, $A$ and the empty cluster: if $H^1(D,A)$ were nonzero, a connected reduced subcurve $B\\subseteq D$ would have $\\deg(A|_B)\\leq2p_a(B)-2$, contradicting the numerical hypothesis. Hence $H^1(D,A)=0$; this is the vanishing used for empty clusters in steps 4, 5 and 7. In particular, writing $d=\\deg L$ and $g=p_a(C)$, [lem-sfb-nodal-line-serre-riemann-roch] gives $h^0(C,L)=d+1-g$.",
+   "uses": [
+    "lem-weil-pbc-proper-reduced-algclosed-global-sections-product",
+    "lem-sc-noetherian-cohomology-above-dimension",
+    "lem-sfb-curve-ideal-h1-subcurve-obstruction",
+    "lem-sfb-nodal-line-serre-riemann-roch"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/franciosi-tenni-canonical-ring-3-connected-2014.pdf",
+    "place": "Section 4, Proposition 4.1 proof, printed pp.47--49; nodal reconstruction. Local PDF WANTED; primary text read online.",
+    "url": "https://pagine.dm.unipi.it/franciosi/lavori/franciosi-tenni2.pdf"
+   }
+  },
+  {
+   "text": "By [lem-sfb-nodal-numerical-very-ample], the complete linear system embeds $C$. Apply [lem-zl-bertini-smooth-member] on its smooth locus, using the restriction of the full section space; the induced morphism is the restriction of this closed immersion. This gives a nonempty open of section coefficients whose zero scheme on the smooth locus is smooth. There are finitely many nodes: [lem-trf-reduced-curve-normalization-genus] gives a finite normalization quotient support. Off this support the finite normalization map is an isomorphism: on affine opens its algebra equals the structure algebra. Its source is a disjoint union of smooth curves by the same node, so this open is smooth, so every node lies in that finite support. Remove the hyperplanes of sections vanishing at those nodes and at one smooth closed point on each component. Each hyperplane is proper by generation. Intersecting these opens with the Bertini open remains nonempty; over infinite algebraically closed $k$ it has a $k$-point (a nonzero polynomial cannot vanish on all $k^r$, by induction on $r$). Choose $s$ there. Its zero scheme $S$ is closed, contains no component and avoids the nodes; it is therefore zero-dimensional, and [lem-pc-zero-dimensional-closed-subscheme-finite] makes it finite. By [lem-weil-pbc-smooth-scheme-over-field-regular] its zero-dimensional local rings are regular, hence fields: dimension zero means their maximal ideals need zero generators. Their residue fields are $k$ by [lem-weil-pbc-closed-point-residue-field-base]. Thus $S$ is reduced, smooth-supported, and $s$ is nonzero at every component generic point.",
+   "uses": [
+    "lem-sfb-nodal-numerical-very-ample",
+    "lem-zl-bertini-smooth-member",
+    "lem-trf-reduced-curve-normalization-genus",
+    "lem-pc-zero-dimensional-closed-subscheme-finite",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/franciosi-tenni-canonical-ring-3-connected-2014.pdf",
+    "place": "Section 4, Proposition 4.1 proof, printed pp.47--49; nodal reconstruction. Local PDF WANTED; primary text read online.",
+    "url": "https://pagine.dm.unipi.it/franciosi/lavori/franciosi-tenni2.pdf"
+   }
+  },
+  {
+   "text": "We prove the stronger inductive assertion: for every connected projective nodal $D$ with fewer than or equal to the given number of components, every line $A$ satisfying the numerical bounds, every section $a$ whose zero divisor is finite reduced and avoids all nodes, and every nonempty subset $T$ of that divisor, one has $h^1(D,A(-T))<|T|/2$. For the empty subset use $h^1(D,A)=0$ from step 2. Since a subscheme of a finite disjoint union of copies of $\\operatorname{Spec}k$ is a subset, this covers all clusters in the item. Locally at $T$ the ideal is generated by a uniformizer of a smooth curve; elsewhere it is the unit ideal. Hence $A(-T)=I_T\\otimes A$ is invertible and the section $a$ gives a section of it nonzero at every generic point. The zero-scheme ideal convention is [def-pc-zero-scheme]. Strong induction starts with one component; the cases below either use fewer components or close the argument directly.",
+   "uses": [
+    "def-pc-zero-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/franciosi-tenni-canonical-ring-3-connected-2014.pdf",
+    "place": "Section 4, Proposition 4.1 proof, printed pp.47--49; nodal reconstruction. Local PDF WANTED; primary text read online.",
+    "url": "https://pagine.dm.unipi.it/franciosi/lavori/franciosi-tenni2.pdf"
+   }
+  },
+  {
+   "text": "Put $M=A(-T)$, $t=|T|>0$. If $h^1(D,M)=0$, the inductive assertion holds. Otherwise apply [lem-sfb-nodal-dual-support-dichotomy]. In alternative (2), decompose the proper subcurve $Y$ into connected components $Y_j$. Each has fewer components, and the restricted section has zero scheme $S\\cap Y_j$, still reduced and smooth-supported. The degree hypothesis on every subcurve of $Y_j$ is inherited from $D$. Set $t_j=|T\\cap Y_j|$. Induction gives $h^1(Y_j,M|_{Y_j})<t_j/2$ for $t_j>0$, and step 2 gives zero for $t_j=0$. Cohomology on this finite disjoint union is the direct sum: sheaves and injective resolutions decompose componentwise. If all $t_j=0$, the equality in alternative (2) contradicts $h^1(D,M)>0$. Otherwise summing gives $h^1(D,M)<\\sum_jt_j/2\\leq t/2$.",
+   "uses": [
+    "lem-sfb-nodal-dual-support-dichotomy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/franciosi-tenni-canonical-ring-3-connected-2014.pdf",
+    "place": "Section 4, Proposition 4.1 proof, printed pp.47--49; nodal reconstruction. Local PDF WANTED; primary text read online.",
+    "url": "https://pagine.dm.unipi.it/franciosi/lavori/franciosi-tenni2.pdf"
+   }
+  },
+  {
+   "text": "In the remaining case there is a map $M\\to\\omega_D$ generically nonzero on every component. If every nontrivial component partition meets in at least two nodes, [lem-sfb-nodal-two-connected-clifford] applies: $M$ has the generically nonzero section from step 4 as well as this map. It gives $h^0(D,M)\\leq\\deg M/2+1$. The sequence $0\\to M\\to A\\to A|_T\\to0$ and [lem-pc-euler-additive, lem-pc-chi-zero-dim-support] show $\\deg M=d_D-t$, where $d_D=\\deg A$. Riemann--Roch [lem-sfb-nodal-line-serre-riemann-roch] now gives\n$$h^1(D,M)\\leq g_D-d_D/2+t/2<t/2,$$\nbecause $d_D\\geq2g_D+1$. This includes the one-component base case.",
+   "uses": [
+    "lem-sfb-nodal-two-connected-clifford",
+    "lem-pc-euler-additive",
+    "lem-pc-chi-zero-dim-support",
+    "lem-sfb-nodal-line-serre-riemann-roch"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/franciosi-tenni-canonical-ring-3-connected-2014.pdf",
+    "place": "Section 4, Proposition 4.1 proof, printed pp.47--49; nodal reconstruction. Local PDF WANTED; primary text read online.",
+    "url": "https://pagine.dm.unipi.it/franciosi/lavori/franciosi-tenni2.pdf"
+   }
+  },
+  {
+   "text": "Otherwise a component partition meets in exactly one node $p$: the curve is connected, so it cannot meet in zero nodes. Write its two sides $D_1,D_2$. By [lem-trf-stacks-nodal-closed-subcurve] the intersection is reduced and the point is smooth on each side. Both sides are connected; a disconnected side would have a component disjoint from the other side and from its own remaining components. Each has fewer irreducible components and inherits the numerical hypothesis. The closed-union identity of [lem-trf-closed-union-pushout], tensored locally with a frame of $M$, gives\n$$0\\to M\\to (i_1)_*(M|_{D_1})\\oplus(i_2)_*(M|_{D_2})\\to M|_p\\to0,$$\nwhere the last arrow is the difference of the two fibre values. Since $p$ is a node and $T$ avoids nodes, the section $a$ is nonzero at $p$; its restriction to $D_1$ makes this last arrow surjective on global sections. The long exact sequence (step 1), and vanishing of positive cohomology of the skyscraper [lem-pc-chi-zero-dim-support], give\n$$h^1(D,M)=h^1(D_1,M|_{D_1})+h^1(D_2,M|_{D_2}).$$\n[lem-pc-closed-immersion-coherent-cohomology] identifies cohomology of each closed pushforward with that on its subcurve. Induction on each nonempty $T\\cap D_i$ and step 2 for an empty one give the strict bound, since $t_1+t_2=t>0$. This completes strong induction.",
+   "uses": [
+    "lem-trf-closed-union-pushout",
+    "lem-pc-chi-zero-dim-support",
+    "lem-weil-pbc-derived-functor-long-exact",
+    "lem-trf-stacks-nodal-closed-subcurve",
+    "lem-pc-closed-immersion-coherent-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/franciosi-tenni-canonical-ring-3-connected-2014.pdf",
+    "place": "Section 4, Proposition 4.1 proof, printed pp.47--49; nodal reconstruction. Local PDF WANTED; primary text read online.",
+    "url": "https://pagine.dm.unipi.it/franciosi/lavori/franciosi-tenni2.pdf"
+   }
+  },
+  {
+   "text": "Apply the inductive assertion with $D=C$, $A=L$, $a=s$. For nonempty $T\\subseteq S$, let $t=|T|$ and $M=I_T\\otimes L$. The exact ideal quotient sequence and Euler additivity, with the zero-dimensional quotient of Euler characteristic $t$, give\n$$\\chi(M)=\\chi(L)-t=h^0(C,L)-t,$$\nusing $H^1(C,L)=0$ from step 2. By nodal Riemann--Roch,\n$$h^0(C,M)+h^1(C,M)=h^0(C,L)-t+2h^1(C,M)<h^0(C,L).$$\nThe section chosen in step 3 has every required geometric property. The argument makes no claim for $t=0$, where strictness would be false.",
+   "uses": [
+    "lem-pc-euler-additive",
+    "lem-pc-chi-zero-dim-support",
+    "lem-sfb-nodal-line-serre-riemann-roch"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/franciosi-tenni-canonical-ring-3-connected-2014.pdf",
+    "place": "Section 4, Proposition 4.1 proof, printed pp.47--49; nodal reconstruction. Local PDF WANTED; primary text read online.",
+    "url": "https://pagine.dm.unipi.it/franciosi/lavori/franciosi-tenni2.pdf"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-zero-scheme",
+  "def-weil-proper-morphism",
+  "lem-kun-projective-implies-proper",
+  "lem-pc-chi-zero-dim-support",
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-pc-coherent-hi",
+  "lem-pc-euler-additive",
+  "lem-pc-zero-dimensional-closed-subscheme-finite",
+  "lem-sc-global-sections-left-exact",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-sfb-curve-ideal-h1-subcurve-obstruction",
+  "lem-sfb-nodal-dual-support-dichotomy",
+  "lem-sfb-nodal-line-serre-riemann-roch",
+  "lem-sfb-nodal-numerical-very-ample",
+  "lem-sfb-nodal-subcurve-dualizing-annihilator",
+  "lem-sfb-nodal-two-connected-clifford",
+  "lem-trf-closed-union-pushout",
+  "lem-trf-reduced-curve-normalization-genus",
+  "lem-trf-stacks-nodal-closed-subcurve",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-weil-pbc-proper-reduced-algclosed-global-sections-product",
+  "lem-weil-pbc-scheme-modules-enough-injectives",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-zl-bertini-smooth-member",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/franciosi-tenni-canonical-ring-3-connected-2014.pdf",
+  "place": "Section 4, Proposition 4.1 proof, printed pp.47--49; nodal reconstruction. Local PDF WANTED; primary text read online.",
+  "url": "https://pagine.dm.unipi.it/franciosi/lavori/franciosi-tenni2.pdf"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a reduced nodal projective curve a line bundle of subcurve degree at least 2pa+1 has a general smooth hyperplane divisor such that every nonempty subcluster T satisfies h0(I_T L)+h1(I_T L)<h0(L)",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Projective.NonsingularLift\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"{R : Type r} → [inst : CommRing R] → WeierstrassCurve.Projective R → WeierstrassCurve.Projective.PointClass R → Prop\", \"doc\": \"A property of a projective point $[X:Y:Z]$ on a Weierstrass curve over a commutative ring $R$, asserting that the point satisfies the curve's homogeneous cubic equation and at least one partial deriva\"}\n  {\"name\": \"WeierstrassCurve.Projective.Nonsingular\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"{R : Type r} → [CommRing R] → WeierstrassCurve.Projective R → (Fin 3 → R) → Prop\", \"doc\": \"A point $ P = [X:Y:Z] $ in projective space over a ring $ R $ is nonsingular if it satisfies the homogeneous cubic equation defining the projective Weierstrass curve $ Y^2Z + a_1XYZ + a_3YZ^2 - X^3 - \"}\n  {\"name\": \"WeierstrassCurve.Projective.Point.nonsingular\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Projective R} (self : W'.Point), W'.NonsingularLift self.point\", \"doc\": \"Every point on a projective Weierstrass curve over a commutative ring $ R $ is nonsingular, meaning it satisfies the curve's homogeneous cubic equation $ Y^2Z = X^3 + aXZ^2 + bZ^3 $ and at least one p\"}\n  {\"name\": \"WeierstrassCurve.Projective.nonsingularLift_addMap\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Projective F} {P Q : WeierstrassCurve.Projective.PointClass F},\\n  W.NonsingularLift P → W.NonsingularLift Q → W.NonsingularLift (W.addMap P Q)\", \"doc\": \"For any two projective points $[P]$ and $[Q]$ on a Weierstrass curve $W$ over a field $F$, if both $[P]$ and $[Q]$ satisfy the nonsingularity condition (i.e., they lie on the curve $Y^2Z = X^3 + aXZ^2\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x₁ x₂ y₁ y₂ : F}\\n  (h₁ : W.Nonsingular x₁ y₁) (h₂ : W.Nonsingular x₂ y₂) (hxy : ¬(x₁ = x₂ ∧ y₁ = W.negY x₂ y₂)),\\n  ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h₁) *\\n      ClassGroup.mk (Weier\", \"doc\": \"For an affine Weierstrass curve $ W $ over a field $ F $, if $ (x_1, y_1) $ and $ (x_2, y_2) $ are nonsingular points on $ W $ that are not inverses (i.e., $ x_1 \\neq x_2 $ or $ y_1 \\neq -y_2 - a_1 x_2 \"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_eq₂\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x₁ x₂ y₁ y₂ : F},\\n  W.Equation x₁ y₁ →\\n    W.Equation x₂ y₂ →\\n      ¬(x₁ = x₂ ∧ y₁ = W.negY x₂ y₂) →\\n        WeierstrassCurve.Affine.CoordinateRing.XYIdeal W x₂ (Polynomial.C y₂) =\\n          WeierstrassCurve.Af\", \"doc\": \"For two distinct points $(x_1, y_1)$ and $(x_2, y_2)$ on an affine Weierstrass curve $W$ over a field $F$ that are not symmetric with respect to the curve's group law (i.e., $y_1 \\neq -y_2 - a_1 x_2 - \"}\n  {\"name\": \"WeierstrassCurve.Projective.nonsingularLift_iff\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Projective R} (P : Fin 3 → R),\\n  W'.NonsingularLift ⟦P⟧ ↔ W'.Nonsingular P\", \"doc\": \"A projective point $[X:Y:Z]$ on a Weierstrass curve over a commutative ring $R$ is nonsingular if and only if any of its affine lifts (representatives) satisfies the curve's homogeneous cubic equation\"}\n  {\"name\": \"WeierstrassCurve.Affine.nonsingular_negAdd_of_eval_derivative_ne_zero\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} {x₁ x₂ y₁ ℓ : R},\\n  W'.Equation (W'.addX x₁ x₂ ℓ) (W'.negAddY x₁ x₂ y₁ ℓ) →\\n    Polynomial.eval (W'.addX x₁ x₂ ℓ) (Polynomial.derivative (W'.addPolynomial x₁ y₁ ℓ)) ≠ 0 →\\n      W'.Nonsingular (W'.addX x₁ x₂ ℓ) (W'.negAddY x₁ x₂ y₁ ℓ\", \"doc\": \"Let $ W $ be an affine Weierstrass curve over a ring $ R $. If the point $ (x_3, y_3) = (\\\\ell^2 + a_1 \\\\ell - a_2 - x_1 - x_2, \\\\ell(x_3 - x_1) - y_1) $ satisfies the Weierstrass equation and the deriva\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern elliptic-curve coordinates, Clifford algebras, general sheaf constructions or extensionality, not the stated cluster cohomology theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Cohomology\"",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.EllAdicCohomology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.ElladicCohomology\", \"type\": \" (X : AlgebraicGeometry.Scheme) (ℓ : ℕ) [Fact (Nat.Prime ℓ)] (n : ℕ) : Type (u + 1)\", \"doc\": \"`ℓ`-adic cohomology of a scheme in degree `n`.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instAddCommGroupEllAdicCohomology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.ElladicCohomology\", \"type\": \" (X : AlgebraicGeometry.Scheme) (ℓ : ℕ) [Fact (Nat.Prime ℓ)] (n : ℕ) : AddCommGroup (X.EllAdicCohomology ℓ n)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instSubsingletonEllAdicCohomologyOfIsEmptyCarrierCarrierCommRingCat\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.ElladicCohomology\", \"type\": \" (X : AlgebraicGeometry.Scheme) (ℓ : ℕ) [Fact (Nat.Prime ℓ)] [IsEmpty ↥X] (n : ℕ) : Subsingleton (X.EllAdicCohomology ℓ n)\", \"doc\": \"`ℓ`-adic cohomology is trivial for the empty scheme.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern elliptic-curve coordinates, Clifford algebras, general sheaf constructions or extensionality, not the stated cluster cohomology theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "subcluster|subcurve|Franciosi|Clifford",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/LinearAlgebra/ExteriorAlgebra/OfAlternating.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.LinearAlgebra.CliffordAlgebra.Fold\"}\n  {\"file\": \"Mathlib/LinearAlgebra/ExteriorAlgebra/OfAlternating.lean\", \"line\": \"41\", \"text\": \"open CliffordAlgebra hiding ι\"}\n  {\"file\": \"Mathlib/LinearAlgebra/ExteriorAlgebra/OfAlternating.lean\", \"line\": \"52\", \"text\": \"  refine CliffordAlgebra.foldl _ ?_ ?_\"}\n  {\"file\": \"Mathlib/LinearAlgebra/ExteriorAlgebra/OfAlternating.lean\", \"line\": \"117\", \"text\": \"  induction v using CliffordAlgebra.left_induction generalizing f with\"}\n  {\"file\": \"Mathlib/LinearAlgebra/ExteriorAlgebra/OfAlternating.lean\", \"line\": \"132\", \"text\": \"  induction v using CliffordAlgebra.left_induction with\"}\n  {\"file\": \"Mathlib/LinearAlgebra/ExteriorAlgebra/Basic.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.LinearAlgebra.CliffordAlgebra.Basic\"}\n  {\"file\": \"Mathlib/LinearAlgebra/ExteriorAlgebra/Basic.lean\", \"line\": \"46\", \"text\": \"The exterior algebra of `M` is constructed as simply `CliffordAlgebra (0 : QuadraticForm R M)`,\"}\n  {\"file\": \"Mathlib/LinearAlgebra/ExteriorAlgebra/Basic.lean\", \"line\": \"61\", \"text\": \"  CliffordAlgebra (0 : QuadraticForm R M)\"}\n  {\"file\": \"Mathlib/LinearAlgebra/ExteriorAlgebra/Basic.lean\", \"line\": \"70\", \"text\": \"  CliffordAlgebra.ι _\"}\n  {\"file\": \"Mathlib/LinearAlgebra/ExteriorAlgebra/Basic.lean\", \"line\": \"91\", \"text\": \"  (CliffordAlgebra.ι_sq_scalar _ m).trans <| map_zero _\"}\n  {\"file\": \"Mathlib/LinearAlgebra/CliffordAlgebra/Contraction.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.LinearAlgebra.CliffordAlgebra.Conjugation\"}\n  {\"file\": \"Mathlib/LinearAlgebra/CliffordAlgebra/Contraction.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.LinearAlgebra.CliffordAlgebra.Fold\"}\n  {\"file\": \"Mathlib/LinearAlgebra/CliffordAlgebra/Contraction.lean\", \"line\": \"14\", \"text\": \"# Contraction in Clifford Algebras\"}\n  {\"file\": \"Mathlib/LinearAlgebra/CliffordAlgebra/Contraction.lean\", \"line\": \"16\", \"text\": \"This file contains some of the results from [grinberg_clifford_2016].\"}\n  {\"file\": \"Mathlib/LinearAlgebra/CliffordAlgebra/Contraction.lean\", \"line\": \"17\", \"text\": \"The key result is `CliffordAlgebra.equivExterior`.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/CliffordAlgebra/EvenEquiv.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.LinearAlgebra.CliffordAlgebra.Conjugation\"}\n  {\"file\": \"Mathlib/LinearAlgebra/CliffordAlgebra/EvenEquiv.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.LinearAlgebra.CliffordAlgebra.Even\"}\n  {\"file\": \"Mathlib/LinearAlgebra/CliffordAlgebra/EvenEquiv.lean\", \"line\": \"13\", \"text\": \"# Isomorphisms with the even subalgebra of a Clifford algebra\"}\n  {\"file\": \"Mathlib/LinearAlgebra/CliffordAlgebra/EvenEquiv.lean\", \"line\": \"15\", \"text\": \"This file provides some notable isomorphisms regarding the even subalgebra, `CliffordAlgebra.even`.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/CliffordAlgebra/EvenEquiv.lean\", \"line\": \"19\", \"text\": \"* `CliffordAlgebra.equivEven`: Every Clifford algebra is isomorphic as an algebra to the even\"}\n  {\"file\": \"Mathlib/LinearAlgebra/CliffordAlgebra/Prod.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.LinearAlgebra.CliffordAlgebra.Grading\"}\n  {\"file\": \"Mathlib/LinearAlgebra/CliffordAlgebra/Prod.lean\", \"line\": \"13\", \"text\": \"# Clifford algebras of a direct sum of two vector spaces\"}\n  {\"file\": \"Mathlib/LinearAlgebra/CliffordAlgebra/Prod.lean\", \"line\": \"15\", \"text\": \"We show that the Clifford algebra of a direct sum is the graded tensor product of the Clifford\"}\n  {\"file\": \"Mathlib/LinearAlgebra/CliffordAlgebra/Prod.lean\", \"line\": \"16\", \"text\": \"algebras, as `CliffordAlgebra.equivProd`.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/CliffordAlgebra/Prod.lean\", \"line\": \"20\", \"text\": \"* `CliffordAlgebra.equivProd : CliffordAlgebra (Q₁.prod Q₂) ≃ₐ[R] (evenOdd Q₁ ᵍ⊗[R] evenOdd Q₂)`\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern elliptic-curve coordinates, Clifford algebras, general sheaf constructions or extensionality, not the stated cluster cohomology theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict Clifford inequality for the sum of h0 and h1 of a high degree line bundle vanishing at points in a general hyperplane section of a nodal curve",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CliffordAlgebra.one_le_evenOdd_zero\", \"module\": \"Mathlib.LinearAlgebra.CliffordAlgebra.Grading\", \"type\": \": 1 ≤ evenOdd Q 0\", \"doc\": \"The multiplicative identity element $1$ is contained in the even grading component of the Clifford algebra, i.e., $1 \\\\leq \\\\text{evenOdd}_Q(0)$ in the lattice of submodules.\"}\n  {\"name\": \"Mathlib.Ineq.WithStrictness.le\", \"module\": \"Mathlib.Tactic.LinearCombination.Lemmas\", \"type\": \"Mathlib.Ineq.WithStrictness\", \"doc\": \"This constructor creates an instance of an inequality with strictness parameter indicating a non-strict inequality (≤).\"}\n  {\"name\": \"Mathlib.Ineq.WithStrictness.ctorIdx\", \"module\": \"Mathlib.Tactic.LinearCombination.Lemmas\", \"type\": \"Mathlib.Ineq.WithStrictness → ℕ\", \"doc\": \"The function maps each term of the inductive type representing inequalities with strictness to a natural number indicating its constructor: 0 for equality (=), 1 for non-strict inequality (≤), and 2 f\"}\n  {\"name\": \"StrictConcaveOn.add_concaveOn\", \"module\": \"Mathlib.Analysis.Convex.Function\", \"type\": \"(hf : StrictConcaveOn 𝕜 s f) (hg : ConcaveOn 𝕜 s g) : StrictConcaveOn 𝕜 s (f + g)\", \"doc\": \"For a convex set $ s $ in a module $ E $ over an ordered semiring $ \\\\mathbb{K} $, if $ f $ is strictly concave on $ s $ and $ g $ is concave on $ s $, then the pointwise sum $ f + g $ is strictly conc\"}\n  {\"name\": \"Mathlib.Ineq.WithStrictness.eq\", \"module\": \"Mathlib.Tactic.LinearCombination.Lemmas\", \"type\": \"Mathlib.Ineq.WithStrictness\", \"doc\": \"This constructor creates an instance of the WithStrictness type representing a non-strict inequality (≤).\"}\n  {\"name\": \"CliffordAlgebra.evenOdd_mul_le\", \"module\": \"Mathlib.LinearAlgebra.CliffordAlgebra.Grading\", \"type\": \"(i j : ZMod 2) : evenOdd Q i * evenOdd Q j ≤ evenOdd Q (i + j)\", \"doc\": \"In a Clifford algebra $\\\\mathrm{Cl}(R, M, Q)$ over a commutative ring $R$ with quadratic form $Q$ on an $R$-module $M$, the product of elements from the $i$-th and $j$-th graded submodules (indexed by \"}\n  {\"name\": \"StrictConcaveOn.add\", \"module\": \"Mathlib.Analysis.Convex.Function\", \"type\": \"(hf : StrictConcaveOn 𝕜 s f) (hg : StrictConcaveOn 𝕜 s g) : StrictConcaveOn 𝕜 s (f + g)\", \"doc\": \"If $ f $ and $ g $ are strictly concave functions on a convex set $ s $, then their sum $ f + g $ is also strictly concave on $ s $.\"}\n  {\"name\": \"CliffordAlgebra.EvenHom.mk.sizeOf_spec\", \"module\": \"Mathlib.LinearAlgebra.CliffordAlgebra.Even\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {Q : QuadraticForm R M} {A : Type u_3} [inst_3 : Ring A] [inst_4 : Algebra R A] [inst_5 : SizeOf R]\\n  [inst_6 : SizeOf M] [inst_7 : SizeOf A] (bilin : M →ₗ[R] M →ₗ[R] A)\\n  (contract : ∀ (m : M), (bi\", \"doc\": \"For a commutative ring $ R $, an $ R $-module $ M $ with quadratic form $ Q $, and an $ R $-algebra $ A $, the size of the even Clifford algebra homomorphism constructed from a bilinear map $ \\text{bil\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern elliptic-curve coordinates, Clifford algebras, general sheaf constructions or extensionality, not the stated cluster cohomology theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "General hyperplane clusters impose strict cohomological bounds h0(L(-T))+h1(L(-T)) less than h0(L) for sufficiently positive line bundles on singular curves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ChevalleyThm.degBound\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"ℕ → (m : ℕ) → ℕ → Multiset (Fin m) → ℕ\", \"doc\": \"The function computes a degree bound for Chevalley's theorem by taking $k + n$ and a function that adds 1 to the count of each natural number obtained from mapping $\\\\text{Fin.val}$ over the multiset $\"}\n  {\"name\": \"WeierstrassCurve.natDegree_preΨ'_le\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (W : WeierstrassCurve R) (n : ℕ),\\n  (W.preΨ' n).natDegree ≤ (n ^ 2 - if Even n then 4 else 1) / 2\", \"doc\": \"For any natural number $ n $, the natural degree of the $ n $-th pre-normalized division polynomial $ \\\\Psi'_n $ associated with a Weierstrass curve satisfies $ \\\\deg(\\\\Psi'_n) \\\\leq \\\\frac{n^2 - 4}{2} $ i\"}\n  {\"name\": \"WeierstrassCurve.natDegree_preΨ_le\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (W : WeierstrassCurve R) (n : ℤ),\\n  (W.preΨ n).natDegree ≤ (n.natAbs ^ 2 - if Even n then 4 else 1) / 2\", \"doc\": \"For any integer $ n $, the natural degree of the pre-division polynomial $ \\\\Psi_n $ for a Weierstrass curve satisfies $ \\\\deg(\\\\Psi_n) \\\\leq \\\\frac{|n|^2 - 4}{2} $ if $ n $ is even, and $ \\\\deg(\\\\Psi_n) \\\\le\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x₁ x₂ y₁ y₂ : F}\\n  (h₁ : W.Nonsingular x₁ y₁) (h₂ : W.Nonsingular x₂ y₂) (hxy : ¬(x₁ = x₂ ∧ y₁ = W.negY x₂ y₂)),\\n  ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h₁) *\\n      ClassGroup.mk (Weier\", \"doc\": \"For an affine Weierstrass curve $ W $ over a field $ F $, if $ (x_1, y_1) $ and $ (x_2, y_2) $ are nonsingular points on $ W $ that are not inverses (i.e., $ x_1 \\neq x_2 $ or $ y_1 \\neq -y_2 - a_1 x_2 \"}\n  {\"name\": \"ChevalleyThm.MvPolynomialC.degBound_pos\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"∀ (k : ℕ) (D : ℕ → ℕ) (n : ℕ), 0 < ChevalleyThm.MvPolynomialC.degBound k D n\", \"doc\": \"For any natural number $k$ and function $D : \\\\mathbb{N} \\\\to \\\\mathbb{N}$, the degree bound $\\\\text{degBound}\\\\,k\\\\,D\\\\,n$ satisfies $0 < \\\\text{degBound}\\\\,k\\\\,D\\\\,n$ for all $n \\\\in \\\\mathbb{N}$.\"}\n  {\"name\": \"ChevalleyThm.MvPolynomialC.numBound_succ\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"∀ (k : ℕ) (D : ℕ → ℕ) (n : ℕ),\\n  ChevalleyThm.MvPolynomialC.numBound k D (n + 1) =\\n    ChevalleyThm.MvPolynomialC.numBound k D n * ChevalleyThm.MvPolynomialC.degBound k D n * D n\", \"doc\": \"For natural numbers $k, n$ and function $D : \\\\mathbb{N} \\\\to \\\\mathbb{N}$, the numerical bound at $n+1$ satisfies $\\\\text{numBound}(k, D, n+1) = \\\\text{numBound}(k, D, n) \\\\cdot \\\\text{degBound}(k, D, n) \\\\c\"}\n  {\"name\": \"ChevalleyThm.MvPolynomialC.degBound_succ\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"∀ (k : ℕ) (D : ℕ → ℕ) (n : ℕ),\\n  ChevalleyThm.MvPolynomialC.degBound k D (n + 1) =\\n    ChevalleyThm.MvPolynomialC.numBound k D (n + 1) ^ ChevalleyThm.MvPolynomialC.numBound k D (n + 1) *\\n      ChevalleyThm.MvPolynomialC.degBound k D n\", \"doc\": \"For natural numbers $k$, $D$, and $n$, the degree bound $\\\\operatorname{degBound}(k, D, n+1)$ satisfies the recursive relation $\\\\operatorname{degBound}(k, D, n+1) = \\\\operatorname{numBound}(k, D, n+1)^{\"}\n  {\"name\": \"ChevalleyThm.numBound\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"ℕ → (m : ℕ) → ℕ → Multiset (Fin m) → ℕ\", \"doc\": \"A function that computes a numerical bound used in the context of Chevalley's theorem for multivariate polynomials. It takes natural numbers $k$, $m$, $n$ and a multiset $d$ of elements of type $\\\\text\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern elliptic-curve coordinates, Clifford algebras, general sheaf constructions or extensionality, not the stated cluster cohomology theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "subcluster|subcurve|Clifford.*theorem|Franciosi|Tenni",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no hits in AlgebraicGeometry"
+  },
+  {
+   "tool": "grep",
+   "query": "subcluster|generalSection|hyperplane.*cohomology",
+   "results": "{\"t\": \"2026-10-23T11:34:02Z\", \"tool\": \"grep\", \"query\": \"subcluster|generalSection|hyperplane.*cohomology\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern elliptic curves, abstract cochain bounds and ell-adic cohomology, not hyperplane subclusters"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict cohomology bound for subclusters of general divisors on nodal projective curves",
+   "results": "{\"t\": \"2026-10-23T11:34:03Z\", \"tool\": \"leansearch\", \"query\": \"Strict cohomology bound for subclusters of general divisors on nodal projective curves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.IsStrictlyGE\", \"CochainComplex.isStrictlyGE_of_ge\", \"CochainComplex.isStrictlyGE_iff\", \"CochainComplex.isStrictlyGE_of_iso\", \"CochainComplex.instIsStrictlyGEObjHomologicalComplexIntUpSingle\", \"groupCohomology.coboundaries₁_le_cocycles₁\", \"CochainComplex.isStrictlyLE_of_le\", \"CochainComplex.isStrictlyLE_iff\"], \"digest\": \"2b362de18a48bbdc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern elliptic curves, abstract cochain bounds and ell-adic cohomology, not hyperplane subclusters"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Cohomology\"",
+   "results": "{\"t\": \"2026-10-23T11:34:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"Cohomology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.EllAdicCohomology\", \"AlgebraicGeometry.Scheme.instAddCommGroupEllAdicCohomology\", \"AlgebraicGeometry.Scheme.instSubsingletonEllAdicCohomologyOfIsEmptyCarrierCarrierCommRingCat\"], \"digest\": \"89918880a003c010\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern elliptic curves, abstract cochain bounds and ell-adic cohomology, not hyperplane subclusters"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every nonempty subcluster of a general smooth hyperplane section on a positive nodal curve satisfies h0(L(-T))+h1(L(-T)) less than h0(L)",
+   "results": "{\"t\": \"2026-10-23T11:34:03Z\", \"tool\": \"leanfinder\", \"query\": \"Every nonempty subcluster of a general smooth hyperplane section on a positive nodal curve satisfies h0(L(-T))+h1(L(-T)) less than h0(L)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ChevalleyThm.degBound\", \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"ChevalleyThm.numBound\", \"AmpleSet.of_one_lt_codim\", \"ChevalleyThm.MvPolynomialC.degBound_pos\", \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_ne_one\", \"ChevalleyThm.MvPolynomialC.numBound_succ\", \"WeierstrassCurve.Affine.CoordinateRing.natDegree_norm_ne_one\"], \"digest\": \"b97b21c577e72036\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern elliptic curves, abstract cochain bounds and ell-adic cohomology, not hyperplane subclusters"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a sufficiently positive line bundle on a reducible curve nonempty subsets of its general zero divisor have h1(L(-T)) strictly less than half the number of points",
+   "results": "{\"t\": \"2026-10-23T11:34:05Z\", \"tool\": \"leanfinder\", \"query\": \"For a sufficiently positive line bundle on a reducible curve nonempty subsets of its general zero divisor have h1(L(-T)) strictly less than half the number of points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ChevalleyThm.degBound\", \"ChevalleyThm.numBound\", \"WeierstrassCurve.natDegree_preΨ'_le\", \"WeierstrassCurve.natDegree_preΨ_le\", \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"char_dvd_card_solutions_of_add_lt\", \"char_dvd_card_solutions_of_sum_lt\", \"char_dvd_card_solutions_of_fintype_sum_lt\"], \"digest\": \"975300f3ea7bac8b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern elliptic curves, abstract cochain bounds and ell-adic cohomology, not hyperplane subclusters"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-numerical-section-multiplication",
+  "date": "2026-10-23",
+  "group": "Q03"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Log-canonical linear series on stable pointed curves over a field. Supporting input: normal generation: a numerical multiplication theorem for an arbitrary line bundle, independent of logarithmic canonical powers or stability; Theorem 4.2 proof: Proposition 4.1 strict inequality on nonempty subclusters of a general hyperplane section",
+   "via": [
+    "lem-sfb-nodal-numerical-section-multiplication",
+    "lem-sfb-stable-pointed-field-linear-series",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-general-section-cluster-strict-bound",
+  "worker": "stage1",
+  "summary": "Read Proposition 4.1 and audited every cited statement. Normalize doubled TeX escapes; retain all hypotheses and conclusions. Isolate numerical very ampleness, the proper dual-support alternative, and the two-connected Clifford input. Supply strong induction, with the empty-cluster convention and a direct separating-node cohomology calculation.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Log-canonical linear series on stable pointed curves over a field. Supporting input: normal generation: a numerical multiplication theorem for an arbitrary line bundle, independent of logarithmic canonical powers or stability; Theorem 4.2 proof: Proposition 4.1 strict inequality on nonempty subclusters of a general hyperplane section; realizes the strict-cluster input through Proposition 4.1, not the multiplication theorem itself.",
+  "tool_uses": [
+   {
+    "node": "def-pc-zero-scheme",
+    "why": "Generic curve, coherent-cohomology or scheme-theory input for the Proposition 4.1 induction; no result of this six-functor unit supplies this fact."
+   },
+   {
+    "node": "def-weil-proper-morphism",
+    "why": "Generic curve, coherent-cohomology or scheme-theory input for the Proposition 4.1 induction; no result of this six-functor unit supplies this fact."
+   },
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Generic curve, coherent-cohomology or scheme-theory input for the Proposition 4.1 induction; no result of this six-functor unit supplies this fact."
+   },
+   {
+    "node": "lem-pc-chi-zero-dim-support",
+    "why": "Generic curve, coherent-cohomology or scheme-theory input for the Proposition 4.1 induction; no result of this six-functor unit supplies this fact."
+   },
+   {
+    "node": "lem-pc-closed-immersion-coherent-cohomology",
+    "why": "Generic curve, coherent-cohomology or scheme-theory input for the Proposition 4.1 induction; no result of this six-functor unit supplies this fact."
+   },
+   {
+    "node": "lem-pc-coherent-hi",
+    "why": "Generic curve, coherent-cohomology or scheme-theory input for the Proposition 4.1 induction; no result of this six-functor unit supplies this fact."
+   },
+   {
+    "node": "lem-pc-euler-additive",
+    "why": "Generic curve, coherent-cohomology or scheme-theory input for the Proposition 4.1 induction; no result of this six-functor unit supplies this fact."
+   },
+   {
+    "node": "lem-pc-zero-dimensional-closed-subscheme-finite",
+    "why": "Generic curve, coherent-cohomology or scheme-theory input for the Proposition 4.1 induction; no result of this six-functor unit supplies this fact."
+   },
+   {
+    "node": "lem-sc-global-sections-left-exact",
+    "why": "Generic curve, coherent-cohomology or scheme-theory input for the Proposition 4.1 induction; no result of this six-functor unit supplies this fact."
+   },
+   {
+    "node": "lem-sc-noetherian-cohomology-above-dimension",
+    "why": "Generic curve, coherent-cohomology or scheme-theory input for the Proposition 4.1 induction; no result of this six-functor unit supplies this fact."
+   },
+   {
+    "node": "lem-trf-closed-union-pushout",
+    "why": "Generic curve, coherent-cohomology or scheme-theory input for the Proposition 4.1 induction; no result of this six-functor unit supplies this fact."
+   },
+   {
+    "node": "lem-trf-reduced-curve-normalization-genus",
+    "why": "Generic curve, coherent-cohomology or scheme-theory input for the Proposition 4.1 induction; no result of this six-functor unit supplies this fact."
+   },
+   {
+    "node": "lem-trf-stacks-nodal-closed-subcurve",
+    "why": "Generic curve, coherent-cohomology or scheme-theory input for the Proposition 4.1 induction; no result of this six-functor unit supplies this fact."
+   },
+   {
+    "node": "lem-weil-pbc-closed-point-residue-field-base",
+    "why": "Generic curve, coherent-cohomology or scheme-theory input for the Proposition 4.1 induction; no result of this six-functor unit supplies this fact."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-long-exact",
+    "why": "Generic curve, coherent-cohomology or scheme-theory input for the Proposition 4.1 induction; no result of this six-functor unit supplies this fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic curve, coherent-cohomology or scheme-theory input for the Proposition 4.1 induction; no result of this six-functor unit supplies this fact."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-finitely-many-components",
+    "why": "Generic curve, coherent-cohomology or scheme-theory input for the Proposition 4.1 induction; no result of this six-functor unit supplies this fact."
+   },
+   {
+    "node": "lem-weil-pbc-proper-reduced-algclosed-global-sections-product",
+    "why": "Generic curve, coherent-cohomology or scheme-theory input for the Proposition 4.1 induction; no result of this six-functor unit supplies this fact."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-modules-enough-injectives",
+    "why": "Generic curve, coherent-cohomology or scheme-theory input for the Proposition 4.1 induction; no result of this six-functor unit supplies this fact."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Generic curve, coherent-cohomology or scheme-theory input for the Proposition 4.1 induction; no result of this six-functor unit supplies this fact."
+   },
+   {
+    "node": "lem-zl-bertini-smooth-member",
+    "why": "Generic curve, coherent-cohomology or scheme-theory input for the Proposition 4.1 induction; no result of this six-functor unit supplies this fact."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Generic curve, coherent-cohomology or scheme-theory input for the Proposition 4.1 induction; no result of this six-functor unit supplies this fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pc-zero-scheme",
+  "def-weil-proper-morphism",
+  "lem-kun-projective-implies-proper",
+  "lem-pc-chi-zero-dim-support",
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-pc-coherent-hi",
+  "lem-pc-euler-additive",
+  "lem-pc-zero-dimensional-closed-subscheme-finite",
+  "lem-sc-global-sections-left-exact",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-trf-closed-union-pushout",
+  "lem-trf-reduced-curve-normalization-genus",
+  "lem-trf-stacks-nodal-closed-subcurve",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-weil-pbc-proper-reduced-algclosed-global-sections-product",
+  "lem-weil-pbc-scheme-modules-enough-injectives",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-zl-bertini-smooth-member",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-2ed6a1f75",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-2ed6a1f75 (reviewer sub-agent of L); spot-checked: Read the author PDF of Franciosi–Tenni (local copy WANTED): Prop 2.4, Prop 2.5(iii), Def 2.2/2.6, Thm 2.7/Rem 2.8, Prop 4.1 with its full proof, and Thm 4.2. The item is FT 4.1 for nodal curves, with the T=∅ case correctly excluded; the statement is unchanged. Steps 1-8 checked. Bertini is applied on the smooth locus, and its immersion and generation hypotheses hold. The node count is finite via the normalization support. The strong induction is set up correctly. The dichotomy case uses induction on the connected components of Y. The Clifford case gives h1<=g-d/2+t/2<t/2. The separating-node case uses the ring fibre-product sequence, a(p)≠0 and H1 additivity. Step 8 is the χ computation. New nodes: numerical-very-ample = FT 2.5(iii)/CFHR, true. Dual-support dichotomy proved independently: if no map has full support, V=∪V_i over infinite k gives V=V_i, and I_Y·I_{C_i}=0 plus the annihilator node and duality give h1(X)=h1(Y). The two-connected Clifford node is exactly Thm 2.7 for Cartier subcanonical Z with M=I_Zω, since nodal length equals A·B. All three were tested on small cases; none is a duplicate or a restated clause, and all have B1-B7 form. Batch-5: all 8 flagged citations (pc-coherent-hi, euler-additive, 0E3E obstruction, nodal annihilator, trf closed-union pushout, trf normalization genus, trf nodal closed subcurve, H0 product) are generic coherent/curve facts, not steps of the trace formula or Poincaré duality, so accepted. No SGA citation. Tools from other units (zl Bertini, trf curve nodes) are for the maintainer to record in tool_uses. FIX: step 2 proved H1(D,L|_D)=0 only for subcurves of C, but steps 4/5/7 use it for an arbitrary (D,A) in the induction. I rewrote step 2's text for any nodal connected D and A satisfying the bounds; the citations are unchanged.; 1 file(s) fixed by the reviewer"
+ }
+}

@@ -6,11 +6,8 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMaps
 public import Mathlib.AlgebraicGeometry.OpenImmersion
-import Sheaf.AlgebraicGeometry.Etale.OpenImmersionLowerShriekCoherence
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseChangeSquare
-import Sheaf.AlgebraicGeometry.ProperUnboundedBaseChange
+import Sheaf.SixFunctors.OpenRestrictionCompactSupportCube
+import WeilConjectures.SixFunctors.Etale.Derived.ClopenTransfer
 
 /-! # Restriction of the canonical exceptional base-change mate
 
@@ -23,6 +20,10 @@ universe u
 open CategoryTheory Limits
 open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
+
+attribute [local irreducible] openRestrictionGraphIso openRestrictionCompactSupportIso
+
+set_option maxRecDepth 100000
 
 /-- Restriction to an open of the original base preserves the canonical base-change square.
 Source: blueprint `prop-asd-smooth-base-change`, proof, coherences (i) and (iii).
@@ -79,6 +80,50 @@ theorem isIso_leftDerivedUpperStar_map_baseChange_of_open_restriction
     (h : IsIso ((rightDerivedUpperShriekBaseChangeMap Λ sq').app
       ((L((j)^*[ModuleCat.{u + 1} Λ])).obj K))) :
     IsIso ((L((a')^*[ModuleCat.{u + 1} Λ])).map
-      ((rightDerivedUpperShriekBaseChangeMap Λ sq).app K)) := by sorry
+      ((rightDerivedUpperShriekBaseChangeMap Λ sq).app K)) := by
+  have : IsOpenImmersion a := MorphismProperty.of_isPullback sqU.flip inferInstance
+  have : IsOpenImmersion j' := MorphismProperty.of_isPullback sqj inferInstance
+  have : IsOpenImmersion a' := MorphismProperty.of_isPullback sqV.flip inferInstance
+  have sqA : IsPullback b a' a g' := by
+    apply IsPullback.of_bot (t := sq) _ w
+    have outer := sq'.paste_vert sqj
+    simpa only [← sqU.w, ← sqV.w] using outer
+  let A := ModuleCat.{u + 1} Λ
+  let af := rightDerivedUpperShriekAdjunction A f
+  let ap := rightDerivedUpperShriekAdjunction A p
+  let af' := rightDerivedUpperShriekAdjunction A f'
+  let ap' := rightDerivedUpperShriekAdjunction A p'
+  let aj := derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ j
+  let aa := derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ a
+  let aj' := derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ j'
+  let aa' := derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ a'
+  have hc := mateEquiv_whiskerTop_conjugateEquiv
+    (aa.comp af) (ap.comp aj) (aa'.comp af') (ap'.comp aj')
+    (openRestrictionCompactSupportIso Λ sqU).hom
+    (openRestrictionCompactSupportIso Λ sqV).hom _ _
+    (openRestrictionCompactSupport_cube Λ sq sqU sqj sq' sqV sqA)
+  rw [mateEquiv_hcomp, mateEquiv_hcomp] at hc
+  dsimp only [aa, aa', aj, aj'] at hc
+  rw [mateEquiv_derivedOpenImmersionLowerShriekBaseChangeIso,
+    mateEquiv_derivedOpenImmersionLowerShriekBaseChangeIso] at hc
+  have hk := congrArg (fun t ↦ t.natTrans.app K) hc
+  dsimp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom, TwoSquare.hComp,
+    TwoSquare.natTrans, TwoSquare.mk, NatTrans.comp_app, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app, Functor.associator_hom_app,
+    Functor.associator_inv_app, Functor.comp_obj] at hk
+  simp only [Category.id_comp, Category.comp_id, Category.assoc] at hk
+  change (L((b)^*[A])).map ((openRestrictionExceptionalIso Λ sqU).hom.app K) ≫
+      (rightDerivedUpperShriekBaseChangeMap Λ sq').app ((L((j)^*[A])).obj K) ≫
+      (R(p')^![A]).map ((derivedSquareUpperStarIso A sqj.toCommSq).inv.app K) =
+    (derivedSquareUpperStarIso A sqA.toCommSq).inv.app ((R(f)^![A]).obj K) ≫
+      (L((a')^*[A])).map ((rightDerivedUpperShriekBaseChangeMap Λ sq).app K) ≫
+      (openRestrictionExceptionalIso Λ sqV).hom.app ((L((g)^*[A])).obj K) at hk
+  have hiso : IsIso ((derivedSquareUpperStarIso A sqA.toCommSq).inv.app
+      ((R(f)^![A]).obj K) ≫
+      (L((a')^*[A])).map ((rightDerivedUpperShriekBaseChangeMap Λ sq).app K) ≫
+      (openRestrictionExceptionalIso Λ sqV).hom.app ((L((g)^*[A])).obj K)) := by
+    rw [← hk]
+    infer_instance
+  exact (isIso_comp_right_iff _ _).mp ((isIso_comp_left_iff _ _).mp hiso)
 
 end AlgebraicGeometry.Etale

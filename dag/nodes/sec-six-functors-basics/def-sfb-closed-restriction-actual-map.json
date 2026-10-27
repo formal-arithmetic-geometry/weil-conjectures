@@ -1,0 +1,159 @@
+{
+ "id": "def-sfb-closed-restriction-actual-map",
+ "kind": "definition",
+ "title": "Actual ordinary derived restriction for pulled-back condensed coefficients",
+ "status": "split",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring], and let $t:T_0\\to T$ be a morphism of schemes [def-pc-scheme], in particular a closed immersion when applying the construction to a closed pair. Use the small pro-étale sites [def-weil-pbc-proetale-site] and the size convention [def-weil-size-convention]. Write $\\Lambda_V=p_V^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients], $\\mathcal A_V=\\operatorname{Mod}_{\\Lambda_V}$ [sk-def-sfb-module-objects], and let $t^*\\dashv t_*$ be the canonical module pullback/pushforward adjunction [sk-def-sfb-module-pushforward-pullback]. Write $\\Gamma_V:\\mathcal A_V\\to\\mathbf{Ab}$ for module global sections with the coefficient action forgotten [def-sfb-condensed-module-sections]. Define the underived natural section restriction $s_t:\\Gamma_T\\Rightarrow\\Gamma_{T_0}\\circ t^*$ by the adjunction unit $M\\to t_*t^*M$, followed by the canonical restriction from sections of the pushforward over the terminal object of $T_{\\mathrm{pro\\acute et}}$ to sections over the terminal object of $(T_0)_{\\mathrm{pro\\acute et}}$. In the ordinary uncompleted derived categories [def-weil-abstract-derived-category], with derived functors as in [sk-def-sfb-module-derived-pushpull], define $\\Phi_\\Lambda(V)=R\\Gamma_V$ and $\\Psi_\\Lambda(t)=R\\Gamma_{T_0}\\circ D(t^*)$, where the exact pullback acts termwise. Define $\\rho_{\\Lambda,t}:\\Phi_\\Lambda(T)\\Rightarrow\\Psi_\\Lambda(t)$ to be the canonical universal right-derived descent of $s_t$ (the construction $\\operatorname{rightDerivedPullback}(t^*,s_t)$). Thus its component at $K$ is the actual restriction $R\\Gamma(T,K)\\to R\\Gamma(T_0,t^*K)$. This construction does not assume pullback preserves K-injectives: one resolves again after pullback. No product preservation, filtered continuity, or compatibility theorem is part of this definition.",
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-pushforward-pullback",
+  "def-sfb-condensed-module-sections",
+  "def-weil-abstract-derived-category",
+  "sk-def-sfb-module-derived-pushpull"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "(2), closed-fibre comparison; the actual ordinary derived restriction used by the supported finite-model comparisons. Canonical construction assembled from Stacks Tag 09AA and Tag 015F, as documented by the existing ClosedRestrictionDerivedOperations declarations; no new theorem is asserted."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Actual natural restriction from ordinary derived global sections to derived sections after exact module pullback on pro etale sites",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.ΓRes\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"[HasGlobalSectionsFunctor J A] (F : Sheaf J A) (U : Cᵒᵖ) : (Γ J A).obj F ⟶ F.val.obj U\", \"doc\": \"For a sheaf $ F $ on a category $\\\\mathcal{C}$ with values in $\\\\mathcal{A}$, this is the morphism from the global sections $\\\\Gamma(F)$ to the sections $F(U)$ over an object $U$ in $\\\\mathcal{C}^\\\\text{op\"}\n  {\"name\": \"CategoryTheory.Sheaf.natTransΓRes\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"[HasGlobalSectionsFunctor J A] (U : Cᵒᵖ) : Γ J A ⟶ (sheafSections J A).obj U\", \"doc\": \"For a fixed object $U$ in the opposite category $\\\\mathcal{C}^{\\\\text{op}}$, this defines a natural transformation $\\\\Gamma \\\\Rightarrow (\\\\text{sheafSections}\\\\, J\\\\, \\\\mathcal{A}).\\\\text{obj}\\\\, U$ whose comp\"}\n  {\"name\": \"CategoryTheory.Sheaf.ΓRes_naturality\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"[HasGlobalSectionsFunctor J A] {F G : Sheaf J A} (f : F ⟶ G) (U : Cᵒᵖ) :\\n  (Γ J A).map f ≫ ΓRes G U = ΓRes F U ≫ f.val.app U\", \"doc\": \"For any morphism $ f : F \\to G $ of sheaves on a category $\\\\mathcal{C}$ with values in $\\\\mathcal{A}$, and for any object $ U $ in $\\\\mathcal{C}^\\\\text{op}$, the diagram involving the global sections func\"}\n  {\"name\": \"CategoryTheory.Sheaf.ΓRes_map\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"[HasGlobalSectionsFunctor J A] (F : Sheaf J A) {V U : Cᵒᵖ} (f : U ⟶ V) : F.ΓRes U ≫ F.val.map f = F.ΓRes V\", \"doc\": \"For a sheaf $ F $ on a category $\\\\mathcal{C}$ with values in $\\\\mathcal{A}$, given objects $U, V$ in $\\\\mathcal{C}^{\\\\text{op}}$ and a morphism $f: U \\\\to V$ in $\\\\mathcal{C}^{\\\\text{op}}$ (corresponding to\"}\n  {\"name\": \"CategoryTheory.Sheaf.natTransΓRes_app\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) (A : Type u₂)\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} A] [inst_2 : CategoryTheory.HasWeakSheafify J A]\\n  [inst_3 : CategoryTheory.HasGlobalSectionsFunctor J A] (U : Cᵒᵖ) (F : CategoryTheory.Shea\", \"doc\": \"For any sheaf $F$ on a category $\\\\mathcal{C}$ with values in $\\\\mathcal{A}$ with respect to a Grothendieck topology $J$, and for any object $U$ in $\\\\mathcal{C}^\\\\text{op}$, the component of the natural \"}\n  {\"name\": \"SheafOfModules.pullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": SheafOfModules.{v} S ⥤ SheafOfModules.{v} R\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": restrictFunctor f ≅ pullback f\", \"doc\": \"Given an open immersion $ f : X \\\\to Y $ of schemes, the restriction functor from the category of sheaves of modules over $ Y $'s structure sheaf to those over $ X $'s structure sheaf is naturally isom\"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (forget S ⋙ PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)) ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n",
+   "date": "2026-10-24",
+   "verdict": "Existing specialized declaration found in Sheaf.Paper.ClosedRestrictionDerivedOperations by source grep; these Mathlib hits do not supply the specialized map. Use the existing declaration, not a copy."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical right derived restriction natural transformation obtained from adjunction unit and exact inverse image",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.derivedε\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"{C₁ : Type u_1} →\\n  {C₂ : Type u_2} →\\n    {D₁ : Type u_3} →\\n      {D₂ : Type u_4} →\\n        [inst : CategoryTheory.Category.{v_1, u_1} C₁] →\\n          [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] →\\n            [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁] →\\n              [inst_3 : CategoryThe\", \"doc\": \"The natural transformation $\\\\varepsilon': F' \\\\circ G' \\\\Rightarrow \\\\text{id}_{\\\\mathcal{D}_2}$ constructed as the right derived functor description, combining whiskered natural transformations $\\\\beta$, \"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedη\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"{C₁ : Type u_1} →\\n  {C₂ : Type u_2} →\\n    {D₁ : Type u_3} →\\n      {D₂ : Type u_4} →\\n        [inst : CategoryTheory.Category.{v_1, u_1} C₁] →\\n          [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] →\\n            [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁] →\\n              [inst_3 : CategoryThe\", \"doc\": \"The natural transformation from the identity functor on $\\\\mathcal{D}_1$ to the composition $G' \\\\circ F'$, constructed via the left-derived lift involving associators, whiskering operations, and the un\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived_unit\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived'_unit\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedη_fac_app\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"For any object $X_1$ in category $\\\\mathcal{C}_1$, the composition of the derived unit transformation $\\\\eta'$ evaluated at $L_1(X_1)$ followed by $F'$ applied to $\\\\alpha_{X_1}$ equals the composition o\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedε_fac_app\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"For any object $X_2$ in category $\\\\mathcal{C}_2$, the composition of $G'$ applied to $\\\\beta_{X_2}$ with the derived counit $\\\\varepsilon'$ evaluated at $L_2(X_2)$ equals the composition of $\\\\alpha_{F(X\"}\n  {\"name\": \"CategoryTheory.Functor.totalRightDerivedUnit\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/RightDerived\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    {H : Type u_3} →\\n      [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n        [inst_1 : CategoryTheory.Category.{v_3, u_2} D] →\\n          [inst_2 : CategoryTheory.Category.{v_5, u_3} H] →\\n            (F : CategoryTheory.Functor C H) →\\n              (L : Categ\", \"doc\": \"The natural transformation from $ F $ to the composition of $ L $ with the total right derived functor of $ F $, defined as the unit of the left Kan extension. This transformation satisfies the univer\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"{C₁ : Type u_1} →\\n  {C₂ : Type u_2} →\\n    {D₁ : Type u_3} →\\n      {D₂ : Type u_4} →\\n        [inst : CategoryTheory.Category.{v_1, u_1} C₁] →\\n          [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] →\\n            [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁] →\\n              [inst_3 : CategoryThe\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n",
+   "date": "2026-10-24",
+   "verdict": "Existing specialized declaration found in Sheaf.Paper.ClosedRestrictionDerivedOperations by source grep; these Mathlib hits do not supply the specialized map. Use the existing declaration, not a copy."
+  },
+  {
+   "tool": "grep",
+   "query": "closedRestriction(Sections|Phi|Psi|Rho)|rightDerivedPullback [CategoryTheory]",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "Existing specialized declaration found in Sheaf.Paper.ClosedRestrictionDerivedOperations by source grep; these Mathlib hits do not supply the specialized map. Use the existing declaration, not a copy."
+  },
+  {
+   "tool": "grep",
+   "query": "grep Mathlib: closedRestriction(Sections|Phi|Psi|Rho)",
+   "results": "No matches.",
+   "date": "2026-10-24",
+   "verdict": "The specialized definitions already exist in Sheaf.Paper.ClosedRestrictionDerivedOperations; only a theorem node records these companions. No definition node owns them. The general upstream rightDerivedPullback is used by their existing construction."
+  },
+  {
+   "tool": "grep",
+   "query": "grep upstream: closedRestriction(Sections|Phi|Psi|Rho)|def rightDerivedPullback",
+   "results": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/ShortExactPullback.lean:76:noncomputable def rightDerivedPullbackAux (α : F ⟶ P ⋙ F') :\nlean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/ShortExactPullback.lean:87:noncomputable def rightDerivedPullback (α : F ⟶ P ⋙ F') :\n",
+   "date": "2026-10-24",
+   "verdict": "The specialized definitions already exist in Sheaf.Paper.ClosedRestrictionDerivedOperations; only a theorem node records these companions. No definition node owns them. The general upstream rightDerivedPullback is used by their existing construction."
+  },
+  {
+   "tool": "grep",
+   "query": "grep Sheaf: closedRestriction(Sections|Phi|Psi|Rho)",
+   "results": "lean/Sheaf/Paper/ClosedRestrictionDerivedOperations.lean:52:def closedRestrictionSections :\nlean/Sheaf/Paper/ClosedRestrictionDerivedOperations.lean:67:abbrev closedRestrictionPhi (V : Scheme.{u}) :=\nlean/Sheaf/Paper/ClosedRestrictionDerivedOperations.lean:74:abbrev closedRestrictionPsi :=\nlean/Sheaf/Paper/ClosedRestrictionDerivedOperations.lean:75:  (upperStar Λ t).mapDerivedCategory ⋙ closedRestrictionPhi Λ T₀\nlean/Sheaf/Paper/ClosedRestrictionDerivedOperations.lean:81:def closedRestrictionRho : closedRestrictionPhi Λ T ⟶ closedRestrictionPsi Λ t :=\nlean/Sheaf/Paper/ClosedRestrictionDerivedOperations.lean:82:  Functor.rightDerivedPullback (upperStar Λ t) (closedRestrictionSections Λ t)\nlean/Sheaf/Paper/ClosedRestrictionDerivedOperations.lean:93:      Nonempty (IsLimit ((closedRestrictionPhi Λ T).mapCone c)) ∧\nlean/Sheaf/Paper/ClosedRestrictionDerivedOperations.lean:94:      Nonempty (IsLimit ((closedRestrictionPsi Λ t).mapCone c)) ∧\nlean/Sheaf/Paper/ClosedRestrictionDerivedOperations.lean:95:      ∀ (cF : Cone (Discrete.functor K ⋙ closedRestrictionPhi Λ T))\nlean/Sheaf/Paper/ClosedRestrictionDerivedOperations.lean:97:        (cG : Cone (Discrete.functor K ⋙ closedRestrictionPsi Λ t))\nlean/Sheaf/Paper/ClosedRestrictionDerivedOperations.lean:99:        hF.lift ((closedRestrictionPhi Λ T).mapCone c) ≫\nlean/Sheaf/Paper/ClosedRestrictionDerivedOperations.lean:101:              (Functor.whiskerLeft (Discrete.functor K) (closedRestrictionRho Λ t))).obj cF) =\nlean/Sheaf/Paper/ClosedRestrictionDerivedOperations.lean:102:          (closedRestrictionRho Λ t).app c.pt ≫\nlean/Sheaf/Paper/ClosedRestrictionDerivedOperations.lean:103:            hG.lift ((closedRestrictionPsi Λ t).mapCone c)\nlean/Sheaf/Paper/ClosedRestrictionDerivedOperations.lean:117:    (eF : D ⋙ DerivedCategory.Q ⋙ closedRestrictionPhi Λ T ≅ P ⋙ DerivedCategory.Q)\nlean/Sheaf/Paper/ClosedRestrictionDerivedOperations.lean:118:    (eG : D ⋙ DerivedCategory.Q ⋙ closedRestrictionPsi Λ t ≅ R ⋙ DerivedCategory.Q)\nlean/Sheaf/Paper/ClosedRestrictionDerivedOperations.lean:119:    (εF : (closedRestrictionPhi Λ T).obj (DerivedCategory.Q.obj (colimit D)) ≅\nlean/Sheaf/Paper/ClosedRestrictionDerivedOperations.lean:121:    (εG : (closedRestrictionPsi Λ t).obj (DerivedCategory.Q.obj (colimit D)) ≅\nlean/Sheaf/Paper/ClosedRestrictionDerivedOperations.lean:128:      (closedRestrictionPhi Λ T).map (DerivedCategory.Q.map (colimit.ι D i)) ≫ εF.hom) ∧\nlean/Sheaf/Paper/ClosedRestrictionDerivedOperations.lean:130:      (closedRestrictionPsi Λ t).map (DerivedCategory.Q.map (colimit.ι D i)) ≫ εG.hom) ∧\nlean/Sheaf/Paper/ClosedRestrictionDerivedOperations.lean:132:      (closedRestrictionRho Λ t).app (DerivedCategory.Q.obj (D.obj i)) ≫ eG.hom.app i) ∧\nlean/Sheaf/Paper/ClosedRestrictionDerivedOperations.lean:134:      (closedRestrictionRho Λ t).app (DerivedCategory.Q.obj (colimit D)) ≫ εG.hom) ∧\nlean/Sheaf/Paper/ClosedRestrictionDerivedOperations.lean:157:      (eF : D ⋙ DerivedCategory.Q ⋙ closedRestrictionPhi Λ T ≅ P ⋙ DerivedCategory.Q)\nlean/Sheaf/Paper/ClosedRestrictionDerivedOperations.lean:158:      (eG : D ⋙ DerivedCategory.Q ⋙ closedRestrictionPsi Λ t ≅ R ⋙ DerivedCategory.Q)\nlean/Sheaf/Paper/ClosedRestrictionDerivedOperations.lean:159:      (εF : (closedRestrictionPhi Λ T).obj (DerivedCategory.Q.obj (colimit D)) ≅\nlean/Sheaf/Paper/ClosedRestrictionDerivedOperations.lean:161:      (εG : (closedRestrictionPsi Λ t).obj (DerivedCategory.Q.obj (colimit D)) ≅\nlean/Sheaf/Paper/ClosedRestrictionDerivedOperations.lean:165:        (closedRestrictionPhi Λ T).map (DerivedCategory.Q.map (colimit.ι D i)) ≫ εF.hom) →\nlean/Sheaf/Paper/ClosedRestrictionDerivedOperations.lean:167:        (closedRestrictionPsi Λ t).map (DerivedCategory.Q.map (colimit.ι D i)) ≫ εG.hom) →\nlean/Sheaf/Paper/ClosedRestrictionDerivedOperations.lean:221:    (closedRestrictionPhi Λ T).Additive ∧ (closedRestrictionPsi Λ t).Additive ∧\nlean/Sheaf/Paper/ClosedRestrictionDerivedOperations.lean:222:    (closedRestrictionPhi Λ T).IsTriangulated ∧ (closedRestrictionPsi Λ t).IsTriangulated ∧\nlean/Sheaf/Paper/ClosedRestrictionDerivedOperations.lean:223:    NatTrans.CommShift (closedRestrictionRho Λ t) ℤ ∧\nlean/Sheaf/Paper/ClosedRestrictionDerivedOperations.lean:232:      (closedRestrictionRho Λ t).app (DerivedCategory.Q.obj K) ≫\nlean/Sheaf/Paper/ClosedRestrictionDerivedOperations.lean:233:          (closedRestrictionPhi Λ T₀).map\nlean/Sheaf/Paper/ClosedRestrictionDerivedOperations.lean:238:        (closedRestrictionPhi Λ T).map (DerivedCategory.Q.map s) ≫\nlean/Sheaf/Paper/ClosedRestrictionDerivedOperations.lean:241:            ((NatTrans.mapHomologicalComplex (closedRestrictionSections Λ t)\nlean/Sheaf/Paper/ClosedRestrictionDerivedOperations.lean:248:      ∃ r : (closedRestrictionPhi Λ T).mapTriangle.obj Δ ⟶\nlean/Sheaf/Paper/ClosedRestrictionDerivedOperations.lean:249:          (closedRestrictionPsi Λ t).mapTriangle.obj Δ,\nlean/Sheaf/Paper/ClosedRestrictionDerivedOperations.lean:250:        r.hom₁ = (closedRestrictionRho Λ t).app Δ.obj₁ ∧\nlean/Sheaf/Paper/ClosedRestrictionDerivedOperations.lean:251:        r.hom₂ = (closedRestrictionRho Λ t).app Δ.obj₂ ∧\nlean/Sheaf/Paper/ClosedRestrictionDerivedOperations.lean:252:        r.hom₃ = (closedRestrictionRho Λ t).app Δ.obj₃) ∧\n",
+   "date": "2026-10-24",
+   "verdict": "The specialized definitions already exist in Sheaf.Paper.ClosedRestrictionDerivedOperations; only a theorem node records these companions. No definition node owns them. The general upstream rightDerivedPullback is used by their existing construction."
+  },
+  {
+   "tool": "grep",
+   "query": "grep DAG: closedRestriction(Sections|Phi|Psi|Rho)",
+   "results": "dag/nodes/sec-six-functors-basics/lem-sfb-closed-restriction-derived-operations.json:299:   \"AlgebraicGeometry.ProEtale.CondensedRing.closedRestrictionSections\",\ndag/nodes/sec-six-functors-basics/lem-sfb-closed-restriction-derived-operations.json:300:   \"AlgebraicGeometry.ProEtale.CondensedRing.closedRestrictionPhi\",\ndag/nodes/sec-six-functors-basics/lem-sfb-closed-restriction-derived-operations.json:301:   \"AlgebraicGeometry.ProEtale.CondensedRing.closedRestrictionPsi\",\ndag/nodes/sec-six-functors-basics/lem-sfb-closed-restriction-derived-operations.json:302:   \"AlgebraicGeometry.ProEtale.CondensedRing.closedRestrictionRho\",\ndag/nodes/sec-six-functors-basics/lem-sfb-closed-restriction-derived-operations.json:309:  \"statement\": \"theorem closed_restriction_derived_operations [IsClosedImmersion t] [CompactSpace T] [QuasiSeparatedSpace T] [CompactSpace T₀] [QuasiSeparatedSpace T₀] : (closedRestrictionPhi Λ T).Additive ∧ (closedRestrictionPsi Λ t).Additive ∧ (closedRestrictionPhi Λ T).IsTriangulated ∧ (closedRestrictionPsi Λ t).IsTriangulated ∧ NatTrans.CommShift (closedRestrictionRho Λ t) ℤ ∧ (∀ (K I : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)) ℤ) [I.IsKInjective] (s : K ⟶ I) [QuasiIso s] (H : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology T₀) Ab.{u + 1}) (condensedRingObj Λ T₀)) ℤ) [H.IsKInjective] (j : ((upperStar Λ t).mapHomologicalComplex (ComplexShape.up ℤ)).obj I ⟶ H) [QuasiIso j], (closedRestrictionRho Λ t).app (DerivedCategory.Q.obj K) ≫ (closedRestrictionPhi Λ T₀).map ((upperStar Λ t).mapDerivedCategoryFactors.hom.app K ≫ DerivedCategory.Q.map (((upperStar Λ t).mapHomologicalComplex (ComplexShape.up ℤ)).map s ≫ j)) ≫ ((condensedModuleSections Λ T₀).rightDerivedFunctorObjQIso H).hom = (closedRestrictionPhi Λ T).map (DerivedCategory.Q.map s) ≫ ((condensedModuleSections Λ T).rightDerivedFunctorObjQIso I).hom ≫ DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex (closedRestrictionSections Λ t) (ComplexShape.up ℤ)).app I ≫ ((condensedModuleSections Λ T₀).mapHomologicalComplex (ComplexShape.up ℤ)).map j)) ∧ (∀ Δ : Triangle (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))), Δ ∈ distTriang _ → ∃ r : (closedRestrictionPhi Λ T).mapTriangle.obj Δ ⟶ (closedRestrictionPsi Λ t).mapTriangle.obj Δ, r.hom₁ = (closedRestrictionRho Λ t).app Δ.obj₁ ∧ r.hom₂ = (closedRestrictionRho Λ t).app Δ.obj₂ ∧ r.hom₃ = (closedRestrictionRho Λ t).app Δ.obj₃) ∧ ClosedRestrictionProducts Λ t ∧ ClosedRestrictionFilteredRepresentatives Λ t\",\n",
+   "date": "2026-10-24",
+   "verdict": "The specialized definitions already exist in Sheaf.Paper.ClosedRestrictionDerivedOperations; only a theorem node records these companions. No definition node owns them. The general upstream rightDerivedPullback is used by their existing construction."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-supported-norm-algcl-model-rigidity-transfer",
+  "date": "2026-10-24",
+  "group": "Q03"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Actual ordinary module-derived closed restriction in the closed-fibre comparison, via det-sf-comp-coherence-refinement (2).",
+   "via": [
+    "lem-sfb-supported-norm-algcl-model-rigidity-transfer",
+    "lem-sfb-supported-three-term-scalar-rigidity",
+    "lem-sfb-closed-torsion-rigidity-serre-transfer",
+    "lem-sfb-proper-wcontractible-closed-fibre-rigidity",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "lean": {
+  "module": "Sheaf.Paper.ClosedRestrictionDerivedOperations",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.closedRestrictionRho",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.closedRestrictionSections",
+   "AlgebraicGeometry.ProEtale.CondensedRing.closedRestrictionPhi",
+   "AlgebraicGeometry.ProEtale.CondensedRing.closedRestrictionPsi",
+   "AlgebraicGeometry.ProEtale.CondensedRing.closedRestrictionRho"
+  ],
+  "statement": "def closedRestrictionRho : closedRestrictionPhi Λ T ⟶ closedRestrictionPsi Λ t",
+  "branch": "sheaf-dag",
+  "by": "Q03",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Owns the four existing actual-restriction definitions in the unchanged published module. closedRestrictionSections is built from the module adjunction unit and terminal-object restriction; Phi/Psi are transparent abbreviations; Rho is Functor.rightDerivedPullback (upperStar Λ t) (closedRestrictionSections Λ t). None selects data from closed_restriction_derived_operations. That compatibility theorem remains a proof dependency of the consumer, not a statement prerequisite."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4950d70a6",
+  "group": "Q03",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4950d70a6",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Re-delivery of 263ef528 RETURN (finding R1, H2: theorem stmt_dep for plain def closedRestrictionRho). Item Lean byte-identical (sha 6dbc4b5f), and the earlier clause-by-clause check stands. New def node def-sfb-closed-restriction-actual-map is existing:true on the unchanged Sheaf.Paper.ClosedRestrictionDerivedOperations and owns closedRestrictionSections/Phi/Psi/Rho. Its NL statement matches the defs (unit + terminal restriction, RΓ, RΓ∘D(t^*), rightDerivedPullback), its lean.statement is verbatim l.81, its 10 stmt_deps are all live definition nodes, and side-live has no duplicate owner. Item stmt_deps now carry the def node, with the theorem kept in proof_deps. Only stmt_deps and lean differ from the live item. No compile needed (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261024T190219-L-3990682",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.closed_restriction_derived_operations"
+  ],
+  "sorry_after": []
+ }
+}

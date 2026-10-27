@@ -1,0 +1,154 @@
+{
+ "id": "lem-zl-sheet-return-local-spectra",
+ "kind": "statement",
+ "title": "Common-stage spectra and residue degrees of sheet return",
+ "statement": "Fix D, m≥1, X₀ separated finite type over k₀, ℓ≠p and an algebraic closure Ω/Q_ℓ. Let R be any functor between the two actual common-stage Weil hearts satisfying the specified sheet-return carrier and structure formula [def-zl-constant-extension-sheet-pullback-data]. Assume the rational intertwining and scalar-compatibility predicates of [def-zl-sheet-return-data] for every finite coefficient field E. At each closed point z of X₀×k₀ k_m the two punctual eigenvalue predicates [def-weil-punctual-weights] agree for each α∈Ω; the degree over k₀ is m times the degree over k_m and #κ(z)=q^(m deg_km(z)); and the two degree-zero local operators are conjugate as required by ConstantExtensionLocalConjugacy [def-zl-constant-extension-restriction-local-data], for every finite presentation and residue embedding. The lemma has no assertion about pure weights or finite filtrations.",
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "(1.1.7)--(1.1.10), pp. 150--152, and (1.2.6), p. 154; ordered block and finite-filtration consequences."
+ },
+ "stmt_deps": [
+  "def-zl-sheet-return-data",
+  "def-zl-constant-extension-sheet-pullback-data",
+  "def-zl-constant-extension-restriction-local-data",
+  "def-weil-punctual-weights",
+  "def-weil-finite-field-fiber",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-local-frobenius-trace",
+  "def-dl-a1-constant-extension-data"
+ ],
+ "proof": [
+  {
+   "text": "Fix a closed point $z$ and choose compatible geometric points $x:s\\to X$ and $y=j_0x:s\\to Y$ arising from a residue embedding extending $k_m\\subset k$. The closed-point field lemma applies because $X_{0,m}$ is finite type over $k_m$, so $r=[\\kappa(z):k_m]$ is finite and positive. An $r$-element basis gives a bijection of sets $\\kappa(z)\\simeq k_m^r$; hence $\\#\\kappa(z)=(q^m)^r=q^{mr}$. Multiplying a basis of $k_m/k_0$ by this basis gives $[\\kappa(z):k_0]=mr$. The local-operator definition therefore uses $mr$ transitions in the $k_0$ interpretation and $r$ transitions in the $k_m$ interpretation. Write $h=g_s$; the two point returns are $H^{mr}y=yh^{mr}$ and $(g_X^m)^rx=x(h^m)^r$. They are the same square after composing with $j_0$, since $H^mj_0=j_0g_X^m$.",
+   "uses": [
+    "lem-kun-closed-point-field",
+    "def-weil-finite-field-fiber",
+    "def-weil-local-frobenius-trace",
+    "lem-zl-constant-extension-sheet-heart-coordinates"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.7)--(1.1.10), pp. 150--152, and (1.2.6), p. 154; ordered block and finite-filtration consequences."
+   }
+  },
+  {
+   "text": "Descend the object, its structure map and comparison to a common finite coefficient field. Apply the assumed rational intertwining and its scalar compatibility there; take degree-zero fibre cohomology and extend scalars. For arbitrary residue embeddings use the following conjugacy comparison. The inverse linear isomorphism carries eigenvectors back, proving equality of the existential common-stage spectra.",
+   "uses": [
+    "def-zl-sheet-return-data",
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-punctual-weights"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.7)--(1.1.10), pp. 150--152, and (1.2.6), p. 154; ordered block and finite-filtration consequences."
+   }
+  },
+  {
+   "text": "For any other residue embedding and its associated geometric point, apply the local-conjugacy statement at a common finite rational stage to $N$ over $k_0$, and to $R(N)$ over $k_m$. Both models are finite type over their stated finite fields. It gives intertwining isomorphisms $a$ and $b$ from the previously chosen stalks to the new ones. The new comparison $a c b^{-1}$ then intertwines the new local operators, since $(a c b^{-1})F'_R=a c F_R b^{-1}=a F_N c b^{-1}=F'_N(a c b^{-1})$. Scalar compatibility from step 7 passes this to $\\Qlb$. Thus the operator assertion is independent up to conjugacy of the choices of residue embedding and associated geometric point; it does not presume those points to be literally fixed by Frobenius.",
+   "uses": [
+    "lem-weil-local-frobenius-conjugacy-class",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.7)--(1.1.10), pp. 150--152, and (1.2.6), p. 154; ordered block and finite-filtration consequences."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-finite-field-fiber",
+  "def-weil-local-frobenius-trace",
+  "def-weil-punctual-weights",
+  "def-zl-sheet-return-data",
+  "lem-kun-closed-point-field",
+  "lem-weil-local-frobenius-conjugacy-class",
+  "lem-zl-constant-extension-sheet-heart-coordinates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "(1.1.7)--(1.1.10), pp. 150--152, and (1.2.6), p. 154; ordered block and finite-filtration consequences."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A Weil sheaf over a finite constant extension has the same eigenvalues at a closed point when viewed over the smaller finite field via the sheet return equivalence",
+   "results": "FiniteField.algEquivExtension; CategoryTheory.Sheaf.isConstant_of_iso; CategoryTheory.Sheaf.isConstant_iff_mem_essImage; CategoryTheory.Sheaf.isConstant_congr; AlgebraicGeometry.StructureSheaf.res_const'; CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app; AlgebraicGeometry.StructureSheaf.const_congr; CategoryTheory.Sheaf.isConstant_iff_of_equivalence",
+   "date": "2026-10-25",
+   "verdict": "no match: no result states this specific normalized sheet-return comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.End.HasEigenvalue",
+   "results": "Module.End.HasEigenvalue; Module.End.hasEigenvalue_of_hasEigenvector; Module.End.hasEigenvalue_of_hasGenEigenvalue; Module.End.HasEigenvalue.exists_hasEigenvector; Module.End.hasGenEigenvalue_of_hasEigenvalue; Module.End.hasGenEigenvalue_iff_hasEigenvalue; Module.End.Eigenvalues.val_mk; Module.End.hasEigenvalue_iff",
+   "date": "2026-10-25",
+   "verdict": "no match: no result states this specific normalized sheet-return comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "(Frobenius|frobenius).*(eigen|spectr)|HasEigenvalue",
+   "results": "No hits",
+   "date": "2026-10-25",
+   "verdict": "no match: no result states this specific normalized sheet-return comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstantExtensionReturnLocalOperators",
+  "date": "2026-10-25",
+  "group": "A9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Proof paragraphs 1 and 5: constant-extension interpretation of Weil filtrations; Common-stage spectra and residue degrees of sheet return",
+   "via": [
+    "lem-zl-constant-extension-return-local-operators",
+    "lem-zl-constant-extension-weil-heart-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "module": "Sheaf.Paper.ConstantExtensionReturnLocalSpectra",
+  "file": "lean/Sheaf/Paper/ConstantExtensionReturnLocalSpectra.lean",
+  "declaration": "WeilConjectures.sheetReturnLocalSpectra",
+  "declarations": [
+   "WeilConjectures.sheetReturnLocalSpectra"
+  ],
+  "statement": "theorem sheetReturnLocalSpectra (R : sfCommonStageWeilSheaf D l hl (constantExtensionOriginalModel D m hm X₀) Ω ⥤ sfCommonStageWeilSheaf (constantExtensionDatum D m hm) l hl (constantExtensionModel D m hm X₀) Ω) (hR : ConstantExtensionSheetSpec D m hm X₀ l hl Ω R) (hops : ∀ (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E], SheetReturnRationalOperators D m hm X₀ l hl E ∧ SheetReturnScalarCompatibility D m hm X₀ l hl E) : (∀ (N : sfCommonStageWeilSheaf D l hl (constantExtensionOriginalModel D m hm X₀) Ω) (z : {z : (constantExtensionModel D m hm X₀).left // z ∈ closedPoints (constantExtensionModel D m hm X₀).left}) (α : Ω), SfPunctualEigenvalue D l hl Ω (constantExtensionOriginalModel D m hm X₀) N z α ↔ SfPunctualEigenvalue (constantExtensionDatum D m hm) l hl Ω (constantExtensionModel D m hm X₀) (R.obj N) z α) ∧ (∀ (z : {z : (constantExtensionModel D m hm X₀).left // z ∈ closedPoints (constantExtensionModel D m hm X₀).left}), localClosedPointDegree D (constantExtensionOriginalModel D m hm X₀) z = m * localClosedPointDegree (constantExtensionDatum D m hm) (constantExtensionModel D m hm X₀) z ∧ Nat.card ((constantExtensionModel D m hm X₀).left.residueField z.val) = D.q ^ (m * localClosedPointDegree (constantExtensionDatum D m hm) (constantExtensionModel D m hm X₀) z)) ∧ (∀ (N : sfCommonStageWeilSheaf D l hl (constantExtensionOriginalModel D m hm X₀) Ω) (z : {z : (constantExtensionModel D m hm X₀).left // z ∈ closedPoints (constantExtensionModel D m hm X₀).left}), ConstantExtensionLocalConjugacy D m hm X₀ l hl Ω (constantExtensionOriginalModel D m hm X₀) N (R.obj N) z z 1)",
+  "branch": "sheaf-dag",
+  "by": "A9",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-483c7",
+  "group": "A9",
+  "result": "fix",
+  "landing": "20261025T161911-L-141922",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-483c7",
+  "group": "A9",
+  "result": "fix",
+  "landing": "20261025T161911-L-141922",
+  "kind": "interface",
+  "note": "independent cc review: item theorem byte-identical to clone; 17 moved decls diffed verbatim vs clone item block (only blueprint tags + Prop proof); 3 new sorry statements read against item conjuncts/Deligne 1.1.10; new-node stmt_deps vs owners of Lean statement decls"
+ }
+}

@@ -1,0 +1,135 @@
+{
+ "id": "lem-pur-diagonal-affine-map-agreement",
+ "kind": "statement",
+ "title": "Actual diagonal purity and trace in comparison coordinates",
+ "statement": "Fix the finite-field data F,C,E, the coefficient level n+1 and P=projectionSetting F C E n. Let S be separated and finite type over F.k, let K be intrinsic finite-Tor constructible and d any natural rank. For every ordinary finite-Tor constructible Ke, every isomorphism comparison(Ke)≈ES.inverse(K), and every annihilator ell^(r+1) of P.Coefficient, the two arrows actualMaps(P,S,K,d) and transportedMaps(P,S,K,Ke,eK,r,d) agree in the endpoint-retaining sense SameMaps. This is exactly MapAgreement of [def-pur-diagonal-affine-trace-site-data]. It asserts neither TraceSquare, ProjectiveNormalization nor RankZeroActual.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/cor-pur-dualizing-object-purity.md",
+  "place": "Kummer normalization sentence, expanded by the affine-model comparison proof steps 1--4 in lem-pur-diagonal-affine-trace-site-comparison."
+ },
+ "stmt_deps": [
+  "def-pur-diagonal-affine-trace-site-data"
+ ],
+ "proof": [
+  {
+   "text": "projection_purity_agreement identifies the actual diagonal map with the\nordered affine comparison. Evaluate projectionAffineIntrinsic's unique specification\nat the given ordinary presentation. ordered_integration_transposes identifies that\ncomparison with the transpose of the ordered integration. The coefficient root-power\ntransition from the diagonal exponent to r is exponentIso; its tensor, pullback and\nshift identifications give exactly sourceCoordinates. The finite-level site comparison\nidentifies the ordinary transpose with the pro-etale one through boundedSiteRho.\nApply the inverse exceptional Hom bijection, u ↦ Rp_!(u) followed by the counit,\nto obtain the trace identity. The support realization comparison and the realization\ncounit yield precisely the second component of transportedMaps. Naturality transports\nboth equations through eK and applies to every presentation, including zero objects.\nThe root-power comparisons are natural for either order of the two exponents, so the\nargument also applies at ramified levels and at every annihilating exponent.",
+   "uses": [
+    "lem-pur-projection-purity-agreement",
+    "lem-pur-affine-ordered-integration-transposes",
+    "lem-pur-vector-integration-site-comparison",
+    "def-weil-exceptional-inverse-image",
+    "def-pur-smooth-trace",
+    "lem-sf-comparison-tor-amplitude",
+    "def-pur-diagonal-affine-trace-site-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/cor-pur-dualizing-object-purity.md",
+    "place": "Kummer normalization sentence, expanded by the affine-model comparison proof steps 1--4 in lem-pur-diagonal-affine-trace-site-comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-projection-purity-agreement",
+  "lem-pur-affine-ordered-integration-transposes",
+  "lem-pur-vector-integration-site-comparison",
+  "def-weil-exceptional-inverse-image",
+  "def-pur-smooth-trace",
+  "lem-sf-comparison-tor-amplitude",
+  "def-pur-diagonal-affine-trace-site-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/cor-pur-dualizing-object-purity.md",
+  "place": "Kummer normalization sentence, expanded by the affine-model comparison proof steps 1--4 in lem-pur-diagonal-affine-trace-site-comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Affine space smooth purity agrees with ordered integration on etale and proetale sites and its rank zero identity",
+   "results": "Eight results: Algebra.IsStandardSmoothOfRelativeDimension.id, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero, AlgebraicGeometry.IsEtale.instIsSmooth and related scheme smoothness statements. None concerns derived purity, Kummer traces or site comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The exceptional transpose of affine space Kummer integration agrees with smooth purity trace",
+   "results": "Eight results about number-field volume integrals, integral affine-space morphisms, and submersive presentations. These do not compare derived exceptional transposes or etale/proetale integration.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_symm_apply",
+   "results": "CategoryTheory.Adjunction.homEquiv_symm_apply in Mathlib.CategoryTheory.Adjunction.Basic identifies the inverse transpose with functor map followed by counit. It supplies abstract cancellation, but no geometric comparison or normalization.",
+   "date": "2026-10-25",
+   "verdict": "abstract tool only"
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*[Tt]race|smoothPurity|Kummer.*integration in Mathlib/AlgebraicGeometry; MapAgreement|TraceSquare|RankZeroActual|transportedMaps|rankZeroMaps in lean/Sheaf and dag/nodes",
+   "results": "No Mathlib match. Library matches are the definitions in the item and its coordinate owner; no independent theorem states their specialized equations. Blueprint search for affine trace returns zero matches; existing projection-purity, ordered-transpose and vector-site statements use different coordinate presentations.",
+   "date": "2026-10-25",
+   "verdict": "no duplicate independent assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalAffineTraceSiteComparison",
+  "date": "2026-10-25",
+  "group": "P5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-dualizing-object-purity",
+   "place": "Kummer normalization sentence, expanded by the affine-model comparison proof steps 1--4 in lem-pur-diagonal-affine-trace-site-comparison.",
+   "via": [
+    "lem-pur-diagonal-affine-trace-site-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalAffineTraceMapAgreement",
+  "file": "lean/Sheaf/Paper/DiagonalAffineTraceMapAgreement.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.DiagonalAffineTrace.diagonalAffineTraceMapAgreement",
+  "statement": "theorem diagonalAffineTraceMapAgreement\n    (F : FiniteFieldDatum.{u}) (C : F.CoefficientDatum)\n    (E : IntermediateField (Padic C.l) C.Qbar) [FiniteDimensional (Padic C.l) E]\n    (n : ℕ) (S : Scheme.{u}) (aS : S ⟶ Spec (.of F.k))\n    [LocallyOfFiniteType aS] [QuasiCompact aS] [IsSeparated aS]\n    (K : Scheme.proEtaleDerivedCategory S (projectionSetting F C E n).Ring)\n    (hK : finiteTorConstructible C.l E (n + 1) (Nat.succ_pos n) S K) (d : ℕ)\n    (Ke : Etale.DerivedCategoryModule (projectionSetting F C E n).Coefficient S)\n    (hKe : finiteTorConstructibleEtale C.l E (n + 1) (Nat.succ_pos n) S Ke)\n    (eK : (comparison (projectionSetting F C E n).Coefficient S).obj Ke ≅\n      (Scheme.sfIntrinsicDerivedEquivalence S (projectionSetting F C E n).Ring).inverse.obj K)\n    (r : ℕ) (hA : ((C.l ^ (r + 1) : ℕ) : (projectionSetting F C E n).Coefficient) = 0) :\n    MapAgreement F C E n S aS K hK d Ke hKe eK r hA",
+  "branch": "sheaf-dag",
+  "by": "P5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-bce7a",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261025T164021-L-937086",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-bce7a",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261025T164021-L-937086",
+  "kind": "interface",
+  "note": "independent cc review: data module vs clone item module (verbatim move, re-exported); item proof vs the four Conclusion conjuncts; three new sorry theorems vs old conjuncts and their node lean.statements; item node vs clone (only lean/proof/proof_deps/proof_origin changed)"
+ }
+}

@@ -1,0 +1,114 @@
+{
+ "id": "def-sfb-stack-separated-morphism",
+ "kind": "definition",
+ "title": "Separated morphisms of arbitrary algebraic stacks",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Use categories fibred in groupoids, functors over $\\mathit{Sch}/S$, their $2$-fibre products, representability by algebraic spaces and scheme base-change presentations as in [def-sfb-stable-pointed-moduli-groupoids]. Let $f:\\mathcal F\\to\\mathcal G$ be such a functor and let $\\Delta_f:\\mathcal F\\to\\mathcal F\\times_{\\mathcal G}\\mathcal F$ be its relative diagonal [def-sfb-dm-stack-morphism-properties]. Define $f$ to be separated if every scheme $T$ and map $h_T\\to\\mathcal F\\times_{\\mathcal G}\\mathcal F$ admit an algebraic-space presentation $Z$ of the $2$-base change of $\\Delta_f$, with its specified projection $p:Z\\to h_T$, such that $p$ is separated, quasi-compact, locally of finite type on every etale scheme chart, and universally closed. These four algebraic-space-to-scheme predicates are those of [def-sfb-proper-curve-moduli]; universally closed means that every further scheme base change has a closed map on field-valued point spaces. Thus the relative diagonal is proper, with algebraic-space fibres allowed to be nonschematic. No presentation or atlas is chosen by this predicate.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex; literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 04YW, definition-separated; spaces-morphisms definition-proper."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A morphism of algebraic stacks is separated when its relative diagonal is proper",
+   "results": "{\"t\": \"2026-10-24T10:08:02Z\", \"tool\": \"leansearch\", \"query\": \"A morphism of algebraic stacks is separated when its relative diagonal is proper\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"AlgebraicGeometry.IsSeparated.mk\", \"AlgebraicGeometry.IsProper.toIsSeparated\", \"AlgebraicGeometry.IsSeparated\", \"AlgebraicGeometry.isSeparated_iff\", \"AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace\", \"AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift\", \"AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion\"], \"digest\": \"27f60371ce7193d7\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match: scheme separatedness only; no arbitrary algebraic-stack separatedness predicate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Definition separated algebraic stack morphism proper relative diagonal algebraic space tests",
+   "results": "{\"t\": \"2026-10-24T10:08:12Z\", \"tool\": \"leanfinder\", \"query\": \"Definition separated algebraic stack morphism proper relative diagonal algebraic space tests\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"AlgebraicGeometry.IsSeparated\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated\", \"AlgebraicGeometry.IsProper.toIsSeparated\", \"AlgebraicGeometry.isSeparated_iff\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsSeparatedTopMorphismProperty\", \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"AlgebraicGeometry.IsSeparated.instIsMultiplicativeScheme\"], \"digest\": \"4b28b2e50c3dac90\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match: scheme separatedness only; no arbitrary algebraic-stack separatedness predicate"
+  },
+  {
+   "tool": "grep",
+   "query": "IsSeparatedAlgebraicModuliMap|ModuliProperSpaceTest|moduliRelativeDiagonal",
+   "results": "{\"t\": \"2026-10-24T10:08:12Z\", \"tool\": \"grep\", \"query\": \"IsSeparatedAlgebraicModuliMap|ModuliProperSpaceTest|moduliRelativeDiagonal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match: scheme separatedness only; no arbitrary algebraic-stack separatedness predicate"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-separation-compactness-permanence",
+  "date": "2026-10-24",
+  "group": "Q26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Descent of each overlap of the chosen affine groupoid charts, with cartesian squares and their uniform categorical properties. Supporting input to Tag 0DUS: Tags 050F (lemma-base-change-separated), 050K (lemma-composition-separated), 04YS (lemma-representable-separated-diagonal-closed). Proper-relative-diagonal predicate needed to state the three separation assertions.",
+   "via": [
+    "lem-sfb-stack-separation-compactness-permanence",
+    "lem-sfb-etale-stabilizer-preserving-affine-moduli",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SeparatedAlgebraicModuliMap",
+  "declaration": "CategoryTheory.IsSeparatedAlgebraicModuliMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/SeparatedAlgebraicModuliMap.lean",
+  "statement": "def IsSeparatedAlgebraicModuliMap {S : Scheme.{u}} {F : BasedCategory.{v₁, w₁} (Over S)} {G : BasedCategory.{v₂, w₂} (Over S)} (f : BasedFunctor F G) : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q26",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3d57eeac2",
+  "group": "Q26",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3d57eeac2",
+  "group": "Q26",
+  "result": "pass",
+  "note": "Item differs from live only in lean + stmt_deps (adds new (A) def-sfb-stack-separated-morphism and landed def-sfb-dm-stack-morphism-properties); statements verbatim, 3 declarations = file. IsSeparatedAlgebraicModuliMap = ∀ scheme test of moduliRelativeDiagonal, ∃ HasSpaceBaseChange presentation (Z,p) with p separated/qc/LFT-on-charts/universally closed (Stacks 04YW + spaces definition-proper), same pattern as landed IsQuasiSeparatedAlgebraicModuliMap, not hollow. Base change uses moduliTwoFiberFst b f : B'×_B A→B' for arbitrary algebraic B' and arbitrary b (050F); composition uses f.comp g = g∘f (050K); iff with ModuliSchemeTest @IsClosedImmersion under IsRepresentableByAlgebraicSpaces (04YS (1)⇔(2), sources read). No DM/finiteness/universe restriction; edge cases empty/identity/BE/schemes ok. Docstrings with source+blueprint+proof steps, only theorem sorries, report sections present. No clashing def in live or parallel Q42/Q08 deliveries. Advisories: SpaceMapIsProper packages the same properness (reuse of landed components, not a copy); new node reaches def-trf-algebraic-space only transitively. No compile (no file changed)."
+ }
+}

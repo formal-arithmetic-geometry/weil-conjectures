@@ -1,0 +1,211 @@
+{
+ "id": "lem-sfb-sheaf-dg-small-acyclic-subobjects",
+ "kind": "statement",
+ "title": "A set of nonzero acyclic dg submodules",
+ "statement": "Let $X$ be a topological space with a sheaf of commutative rings $\\mathcal O$, in the universes of [def-weil-size-convention], and let $\\mathcal A$ be a sheaf dg $\\mathcal O$-algebra. Use left sheaf dg modules and signed shifts as in [def-sfb-sheaf-dg-module-localization]. There are a set $S$ and nonzero acyclic sheaf dg $\\mathcal A$-modules $N_s$ for $s\\in S$ such that every nonzero acyclic sheaf dg $\\mathcal A$-module $M$ admits a monomorphism $N_s\\hookrightarrow M$ for some $s\\in S$. Here acyclic means that all underlying cohomology sheaves are zero; nonzero means that some graded component sheaf is nonzero.",
+ "source": {
+  "document": "literature/stacks-project/sdga.tex",
+  "place": "Tag 0FST (lemma-small-acyclics), including the nonzero conclusion explicitly established in its proof, final paragraph. Left modules by the graded opposite algebra."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sfb-sheaf-dg-module-localization"
+ ],
+ "proof": [
+  {
+   "text": "On the open site, choose an infinite cardinal $\\lambda$ bounding the number of opens and $\\|\\mathcal A\\|$, and put $\\mu=2^\\lambda$. Here $\\|E\\|=|\\coprod_{U,q}E^q(U)|$. These choices lie in the universe of [def-weil-size-convention]. The bijection between functions $\\lambda\\to\\mathcal P(\\lambda)$ and subsets of $\\lambda\\times\\lambda$ gives $\\mu^\\lambda=\\mu$. Fix a nonzero acyclic $M$ and choose $q,U$ and $0\\ne x\\in M^q(U)$, which exist by the stated meaning of nonzero. The zero subsheaf has size at most $\\lambda$. Apply [lem-sfb-generated-sheaf-dg-submodule-size] with $F=0$ and the one section $x$ to obtain a dg subsheaf $F_0\\subseteq M$ containing $x$ and of size at most $\\mu$.",
+   "uses": [
+    "def-weil-size-convention",
+    "lem-sfb-generated-sheaf-dg-submodule-size"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FST (lemma-small-acyclics), proof, cardinal choice and nonzero seed paragraphs; use the corrected exponentiation-closed cardinal bound. "
+   }
+  },
+  {
+   "text": "Suppose $F_r\\subseteq M$ is constructed with $\\|F_r\\|\\leq\\mu$. Its cycle triples $(V,j,z)$, $z\\in F_r^j(V)$ and $dz=0$, form a set $L_r$ of size at most $\\mu$. Apply [lem-weil-pbc-sheaf-cokernel-local-image] to the morphism of $\\mathcal O$-module sheaves $d:M^{j-1}\\to Z^j(M)=\\ker(d:M^j\\to M^{j+1})$. Its cokernel is $H^j(M)=0$, so its cokernel map is zero and its kernel is all of $Z^j(M)$. The cited statement therefore says precisely that every such $z$ is locally in the image of $d$: choose an open cover of $V$ and sections $w\\in M^{j-1}$ on its members with $dw=z$ restricted there. Discard repeated opens, choosing one lift for each retained open. Each cover then has at most $\\lambda$ members. Thus all chosen primitive triples form a set $K_r$ with $|K_r|\\leq\\mu\\lambda=\\mu$.",
+   "uses": [
+    "lem-weil-pbc-sheaf-cokernel-local-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FST (lemma-small-acyclics), proof, successor paragraph, choosing local primitives of every cycle; local-image criterion made explicit."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-generated-sheaf-dg-submodule-size] to $F_r\\subseteq M$ and the primitive sections indexed by $K_r$. It gives $F_{r+1}\\subseteq M$ containing $F_r$ and those primitives, with $\\|F_{r+1}\\|\\leq\\mu$. Every cycle section of $F_r$ is now a boundary locally in $F_{r+1}$. Recursion on $r\\in\\mathbf N$, starting with step 1 and repeating steps 2--3, supplies an increasing sequence with both these properties. All stages contain the original nonzero section $x$.",
+   "uses": [
+    "lem-sfb-generated-sheaf-dg-submodule-size"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FST (lemma-small-acyclics), proof, successor construction and size induction."
+   }
+  },
+  {
+   "text": "Let $K$ index all section triples of all $F_r$. Its cardinal is at most $\\aleph_0\\mu=\\mu$. Apply [lem-sfb-generated-sheaf-dg-submodule-size] with $F=0$ and these sections to obtain $F_\\infty\\subseteq M$ of size at most $\\mu$. The lemma's local formula shows that every section of $F_\\infty$ locally belongs to some $F_r$: on each covering open only finitely many generators occur, so choose the largest of their finitely many stage indices; $F_r$ is closed under the action, differential and addition. Conversely every $F_r$ lies in $F_\\infty$. If $z$ is a cycle section of $F_\\infty$, these local representatives are cycles in $F_r$, because the inclusions into $M$ are sectionwise injective. Step 2 then supplies a further open cover on which each has a primitive in $F_{r+1}\\subseteq F_\\infty$. By [lem-weil-pbc-sheaf-cokernel-local-image], applied to $d:F_\\infty^{j-1}\\to Z^j(F_\\infty)$, its cokernel map is zero: its kernel contains every local cycle section. That map is also an epimorphism by the cited statement, so the cokernel $H^j(F_\\infty)$ is zero. This holds for every $j$. Finally $x\\in F_\\infty^q(U)$ remains nonzero. This argument uses the sheaf generated by the union, not a possibly nonsheaf sectionwise union.",
+   "uses": [
+    "lem-sfb-generated-sheaf-dg-submodule-size",
+    "lem-weil-pbc-sheaf-cokernel-local-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FST (lemma-small-acyclics), proof, final paragraph: sheaf union, nonzeroness, acyclicity and retained size bound, with local representatives written out."
+   }
+  },
+  {
+   "text": "Here is the set assertion in the final paragraph, using the explicit dg data of [def-sfb-sheaf-dg-module-localization]. Fix a set $B$ of cardinality $\\mu$. For each $(U,j)$ allow a carrier subset $C_{U,j}\\subseteq B$. The tuples of these subsets form a set. For each tuple, the possible group operations, $\\mathcal O(U)$-actions, restriction functions, differential functions and $\\mathcal A^p(U)$-action functions form sets of functions between the indicated sets. Their products over all opens, inclusions and integer degrees are sets. Retain exactly the codes satisfying the sheaf, module, chain and dg identities, and then retain those defining nonzero acyclic objects. Call the resulting set $S$, and let $N_s$ be the coded sheaf dg module. Every dg module $E$ with $\\|E\\|\\leq\\mu$ has such a code: inject each section set into $B$ and transfer all functions along these bijections onto their images. The sheaf and dg equations are preserved, giving an isomorphism to a coded object. In particular steps 1--4 give, for any nonzero acyclic $M$, an isomorphism $N_s\\cong F_\\infty$ for some $s\\in S$. Compose it with $F_\\infty\\hookrightarrow M$; the resulting dg map is sectionwise injective and therefore monic (cancellation is checked on sections). If there are no nonzero acyclic objects, $S$ may be empty and the assertion is vacuous.",
+   "uses": [
+    "def-sfb-sheaf-dg-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FST (lemma-small-acyclics), proof, final sentence: explicit coding of bounded structures and the required monomorphism."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention",
+  "lem-sfb-generated-sheaf-dg-submodule-size",
+  "lem-weil-pbc-sheaf-cokernel-local-image",
+  "def-sfb-sheaf-dg-module-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sdga.tex",
+  "place": "Tag 0FST (lemma-small-acyclics), proof on the open site, with its cardinal estimate repaired and its sheaf-union argument expanded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A set of nonzero acyclic sheaf differential graded modules embeds into every nonzero acyclic differential graded module",
+   "results": "{\"t\": \"2026-10-24T08:07:47Z\", \"tool\": \"leanfinder\", \"query\": \"A set of nonzero acyclic sheaf differential graded modules embeds into every nonzero acyclic differential graded module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.IsKProjective.leftOrthogonal\", \"CochainComplex.IsKInjective.rightOrthogonal\", \"CochainComplex.IsKInjective\", \"CochainComplex.isKInjective_iff_rightOrthogonal\", \"CochainComplex.isKProjective_iff_leftOrthogonal\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"CochainComplex.cm5b.instInjectiveXIntI\", \"CochainComplex.IsKProjective\"], \"digest\": \"d9578ba04a93fda2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: KInjective and subcategoryAcyclic concern ordinary complexes; they supply no bounded-cardinality nonzero acyclic dg subobjects. Read Algebra/Homology/HomotopyCategory/Acyclic.lean:30-65 and KInjective.lean:34-51. The grep found no small-acyclic cardinality lemma."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Small acyclic differential graded sheaves form a set of subobjects detecting nonzero acyclic modules",
+   "results": "{\"t\": \"2026-10-24T08:09:50Z\", \"tool\": \"leanfinder\", \"query\": \"Small acyclic differential graded sheaves form a set of subobjects detecting nonzero acyclic modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopyCategory.subcategoryAcyclic\", \"DerivedCategory.isGE_iff\", \"DerivedCategory.isLE_iff\", \"HomotopyCategory.mem_subcategoryAcyclic_iff\", \"HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic\", \"CategoryTheory.hasExt_iff\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"CochainComplex.IsKInjective\"], \"digest\": \"d44ecb409c5ed971\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: KInjective and subcategoryAcyclic concern ordinary complexes; they supply no bounded-cardinality nonzero acyclic dg subobjects. Read Algebra/Homology/HomotopyCategory/Acyclic.lean:30-65 and KInjective.lean:34-51. The grep found no small-acyclic cardinality lemma."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Acyclic\", \"Subobject\"",
+   "results": "{\"t\": \"2026-10-24T08:10:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"Acyclic\\\", \\\"Subobject\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: KInjective and subcategoryAcyclic concern ordinary complexes; they supply no bounded-cardinality nonzero acyclic dg subobjects. Read Algebra/Homology/HomotopyCategory/Acyclic.lean:30-65 and KInjective.lean:34-51. The grep found no small-acyclic cardinality lemma."
+  },
+  {
+   "tool": "grep",
+   "query": "small.*acyclic|acyclic.*small|acyclic.*cardinal",
+   "results": "{\"t\": \"2026-10-24T08:10:44Z\", \"tool\": \"grep\", \"query\": \"small.*acyclic|acyclic.*small|acyclic.*cardinal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: KInjective and subcategoryAcyclic concern ordinary complexes; they supply no bounded-cardinality nonzero acyclic dg subobjects. Read Algebra/Homology/HomotopyCategory/Acyclic.lean:30-65 and KInjective.lean:34-51. The grep found no small-acyclic cardinality lemma."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Set of nonzero acyclic differential graded sheaf modules embedding into every nonzero acyclic module",
+   "results": "{\"t\": \"2026-10-24T08:10:45Z\", \"tool\": \"leansearch\", \"query\": \"Set of nonzero acyclic differential graded sheaf modules embedding into every nonzero acyclic module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instEnoughInjectivesModuleCatInt\", \"HomotopyCategory.mem_subcategoryAcyclic_iff\", \"HomologicalComplex.Acyclic\", \"SimpleGraph.IsAcyclic.embedding\", \"HomologicalComplex.acyclic_truncLE_iff_isSupportedOutside\", \"CategoryTheory.Abelian.IsGrothendieckAbelian.OppositeModuleEmbedding.full_embedding\", \"HomologicalComplex.acyclic_truncGE_iff_isSupportedOutside\", \"HomologicalComplex.acyclic_of_isZero\"], \"digest\": \"afaa17c06cdf56be\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: KInjective and subcategoryAcyclic concern ordinary complexes; they supply no bounded-cardinality nonzero acyclic dg subobjects. Read Algebra/Homology/HomotopyCategory/Acyclic.lean:30-65 and KInjective.lean:34-51. The grep found no small-acyclic cardinality lemma."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-sheaf-dg-injectivity-tests",
+  "date": "2026-10-24",
+  "group": "Q37"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Independent prerequisite: Pseudo-coherent perfect direct images between flat finitely presented families. Kiehl finiteness input: the unnumbered general relative-pseudo-coherence assertion following Stacks lemma-flat-proper-pseudo-coherent-direct-image-general. Finite-degree Noetherian descente input for the Kiehl finiteness assertion. Independent prerequisite: Relative sheaf descente on a prescribed Noetherian envelope. Two-open gluing prerequisite, conditional on approximation on both opens and their intersection, uniform in a supplied finite coefficient stage. Single-degree induction step: cancel finite polynomial-chart top obstructions globally while retaining the prescribed scalar-action normalization. Mayer--Vietoris subproblem for one degree: given a global coherent witness at cutoff n+1 and witnesses on two opens at cutoff n, obtain a global witness at cutoff n. The supplied global witness is part of the hypothesis. Independent input: finite coherent factorization of a cohomologically surjective perfect dg arrow to an ordinary scheme complex, with cohomologically surjective first factor. Affine case: finite coherent factorization for Y=Spec S; no Zariski assembly is asserted. Affine passage to dg global modules, including the local-to-finite-cell perfectness theorem and the actual coefficient adjunction comparisons. Independent tool: Affine equivalence: construct the dg adjunction before checking its unit and counit by the ordinary affine equivalence. Resolution prerequisite: set of acyclic extension tests before the pushout construction of 0FT0. Independent prerequisite in the injectivity-test proof: nonzero small acyclic submodule in each nonzero quotient, used to make the transfinite filtration strictly increase.",
+   "via": [
+    "lem-sfb-sheaf-dg-injectivity-tests",
+    "lem-sfb-flat-ringed-dg-pushpull",
+    "lem-sfb-affine-dg-coefficient-module-comparison",
+    "lem-sfb-affine-perfect-arrow-coherent-factorization",
+    "lem-sfb-perfect-coefficient-arrow-finite-realization",
+    "lem-sfb-global-witness-one-degree-binary-patching",
+    "lem-sfb-sheaf-single-degree-coefficient-cancellation",
+    "lem-sfb-relative-coefficient-window-two-open-locality",
+    "lem-sfb-prescribed-envelope-relative-sheaf-descente",
+    "lem-sfb-relative-complex-noetherian-cohomology-approximation",
+    "lem-sfb-kiehl-relative-pseudocoherent-direct-image",
+    "lem-sfb-flat-family-perfect-direct-image-pseudocoherent",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-sheaf-dg-small-acyclic-subobjects",
+  "worker": "stage1",
+  "summary": "Kept the statement and its nonzero conclusion. Split the omitted generated-dg-subsheaf description/size argument into one independent statement-only prerequisite. Repaired the source auxiliary size estimate by choosing mu=2^lambda, wrote the primitive-adjunction induction, used the generated sheaf union rather than a sectionwise union, and explicitly coded bounded structures. Reused the existing sheaf-cokernel local-image theorem. No Lean written or compiled.",
+  "blueprint": "Read the latest sk-thm-sf-ctf-stability unit and det-thm-sf-ctf-stability-direct-images proof (3). This is the small-acyclic prerequisite of the inherited sheaf-dg injectivity-test/resolution chain, below that unit route. The ancestor command returns None; retained the inherited null ancestor and via list. Whole-blueprint generated/acyclic/cardinality/0FST searches found no matching statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sheaf-cokernel-local-image",
+    "why": "Generic local-image criterion for a cokernel of module sheaves; gives local primitives and detects their local surjectivity. This is an independent tool, not a replacement for any step of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sheaf-cokernel-local-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q107-37f6bd5ee",
+  "group": "Q107",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-37f6bd5ee (reviewer sub-agent of L); spot-checked: Read Stacks 0FST (sdga.tex 3634-3732) in full, the item, the new node lem-sfb-generated-sheaf-dg-submodule-size and every cited statement (def-weil-size-convention, def-sfb-sheaf-dg-module-localization, lem-weil-pbc-sheaf-cokernel-local-image, and the sheaf-of-modules and abstract-derived defs that define H^j as the sheafified cokernel). The item statement is unchanged from base, and its nonzero N_s is what 0FST's last paragraph constructs. The consumer injectivity-tests needs that. New node is true. I checked its closure under d (Leibniz signs, degrees q-q_k and q-q_k-1, d^2=0), under the A- and O-actions, restriction and the unit. I checked minimality and the sheaf condition inside M, and the size bound (covers <=2^lambda, families <=mu^lambda=mu). Source error E7 confirmed: with M a product of kappa-dimensional fibres on a countable discrete X and cf kappa=omega, kappa global sections generate M but |M(X)|=kappa^aleph0>kappa. The fix (mu=2^lambda) is put only into the new node's hypotheses. Steps 1-4: hypotheses checked at each stage. Step 2 applies the local-image node to d:M^{j-1}->Z^j with H^j=0. Step 4 uses the generated sheaf, not the sectionwise union: stage indices are local, and the local-image node gives H^j(F_inf)=0. Step 5 is set coding and is genuinely elementary. Edge cases: X empty, A=0, K empty, one point, non-quasi-compact X. Not a restatement and no duplicate: rg over the DAG for 0FST, generated dg subsheaf and cardinal+subsheaf; nearest is lem-coef-small-flat-subsheaf, the ordinary flat analogue with no citable statement. Blueprint fields consistent. Accepted tool_use: lem-weil-pbc-sheaf-cokernel-local-image, a generic tool. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SheafDgSmallAcyclicSubobjects",
+  "declaration": "CategoryTheory.SheafDg.exists_small_acyclic_subobjects",
+  "file": "lean/Sheaf/CategoryTheory/SheafDgSmallAcyclicSubobjects.lean",
+  "statement": "theorem exists_small_acyclic_subobjects (X : Type u) [TopologicalSpace X] (S : Sheaf (Opens.grothendieckTopology X) CommRingCat.{max u v}) (A : Algebra S) : ∃ (I : Type (max u v)) (N : I → LeftModule A), (∀ i : I, (∃ n : ℤ, ¬ IsZero ((N i).X.X n)) ∧ ∀ n : ℤ, IsZero ((cohomology A n).obj ((q A).obj (N i)))) ∧ ∀ M : LeftModule A, (∃ n : ℤ, ¬ IsZero (M.X.X n)) → (∀ n : ℤ, IsZero ((cohomology A n).obj ((q A).obj M))) → ∃ (i : I) (f : N i ⟶ M), Mono f",
+  "branch": "newtargets-dag",
+  "by": "Q83",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6fcdbd4e7",
+  "group": "Q83",
+  "result": "pass",
+  "note": "Read node, stmt_deps (size convention; def-sfb-sheaf-dg-module-localization Lean lines 31-125: Algebra=Mon, LeftModule=Mod, q, cohomology=Quotient.lift of homology in ringedSiteModules), Stacks sdga.tex 0FST statement+proof, consumer injectivity-tests. Node json differs from side-live only in lean; statement verbatim in file. H3: X:Type u topological, S in CommRingCat.{max u v} (w>=u per size convention, EssentiallySmall inferred, no extra hypotheses), I:Type (max u v) may be empty, nonzero = ∃ n ¬IsZero component (pre-localization, as node), acyclic = all cohomology A n zero, Mono f in LeftModule A (equivalent to an injective map in Mod(A,d)); quantifier order matches. Edge cases: empty I, zero module excluded, empty X/zero algebra, universes. H4: only CochainComplex.isKInjective_of_small_acyclic (ordinary-complex criterion, not this); no name clash. Single theorem sorry only, source/blueprint docstrings carry proof steps 1-5, autoImplicit off, public import of stmt_dep, plain proof-only import of SheafCokernelLocalImage (advisory, harmless). Report has Worker report and Second reading by Q83. No recompile (no FIX); worker reports clean sandbox and library compiles."
+ }
+}

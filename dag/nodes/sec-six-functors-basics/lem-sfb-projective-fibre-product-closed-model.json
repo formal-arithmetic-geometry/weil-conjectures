@@ -1,0 +1,359 @@
+{
+ "id": "lem-sfb-projective-fibre-product-closed-model",
+ "kind": "statement",
+ "title": "Finite projective-space embeddings of a fibre product and its closed models",
+ "statement": "Let $k$ be a field [def-weil-field], $S=\\operatorname{Spec}k$ [def-weil-affine-spectrum], and $f:X\\to S$ a separated morphism of schemes, meaning that its diagonal is a closed immersion [def-pc-scheme, def-weil-proper-morphism, def-weil-closed-immersion]. Let $I$ be a finite nonempty set, $n\\geq0$, and for each $i\\in I$ let $q_i:Y_i\\to X$ be a morphism with a closed immersion $e_i:Y_i\\hookrightarrow\\mathbf P^n_S$ over $S$ for the structure map $fq_i$ [def-kun-projective]. Form $P=\\prod_{i\\in I,X}Y_i$ with structure map $r:P\\to X$ [def-pc-fibre-product], and put $N=(n+1)^{|I|}-1$. The canonical map $P\\to\\prod_{i\\in I,S}Y_i$, specified by its projections, is a closed immersion. There is a closed immersion $e_P:P\\hookrightarrow\\mathbf P^N_S$ over $S$. For every closed immersion $c:T\\hookrightarrow P$, put $q=rc:T\\to X$. There exist closed immersions $e_T:T\\hookrightarrow\\mathbf P^N_S$ over $S$ and $d_T:T\\hookrightarrow\\mathbf P^N_X$ over $X$, with structural projections equal to $fq$ and $q$, respectively. Thus $P\\to S$, $T\\to S$ and $q$ are projective in the finite-projective-space convention [def-kun-projective], are proper [def-weil-proper-morphism], and are of finite type [def-weil-finite-type-morphism]. The schemes $P$ and $T$ are Noetherian, meaning locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-quasi-compact-scheme]. If there is a dense open $V\\subset X$ such that $q^{-1}(V)\\to V$ is an isomorphism [def-weil-open-immersion], then $q$ is surjective [def-weil-surjective-morphism]. No integrality or group action is assumed; $T$ may be empty when the last extra hypothesis is absent.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01WD, lemma-segre-embedding; schemes.tex Tag 01KR, lemma-fibre-product-after-map; morphisms.tex Tag 0C4Q, lemma-projective-permanence (closed-graph proof in the finite-space convention), Tag 01WC, lemma-locally-projective-proper, and Tag 01T6, lemma-finite-type-noetherian. Returned proof steps 3 and 8 and the projective ambient Noetherianity part of step 6."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-closed-immersion",
+  "def-kun-projective",
+  "def-pc-fibre-product",
+  "def-weil-finite-type-morphism",
+  "pqf-def-locnoeth",
+  "def-weil-open-immersion",
+  "def-weil-surjective-morphism",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-quasi-compact-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Enumerate $I=\\{1,\\ldots,m\\}$, where $m\\geq1$. For $1\\leq j\\leq m$ put $A_j=\\prod_{i\\leq j,X}Y_i$ and $B_j=\\prod_{i\\leq j,S}Y_i$, using [def-pc-fibre-product], with $r_j:A_j\\to X$ the common composite of their projections with the $q_i$. Their $S$-structure maps are $fr_j$ and the common composite on $B_j$. We prove inductively that the map $h_j:A_j\\to B_j$ with the given projections is a closed immersion. For $j=1$ it is the identity, which is a closed immersion directly from [def-weil-closed-immersion]. For the induction step factor $h_{j+1}$ as\n$$A_j\\times_XY_{j+1}\\longrightarrow A_j\\times_SY_{j+1}\\xrightarrow{h_j\\times\\mathrm{id}}B_j\\times_SY_{j+1}.$$\nThe first arrow is a closed immersion by [lem-weil-pbc-fibre-product-change-of-base-closed-immersion], applied to $A_j\\to X$, $q_{j+1}$ and the separated map $f:X\\to S$. The second is a base change of $h_j$ along $B_j\\times_SY_{j+1}\\to B_j$, hence is closed by [lem-weil-pbc-closed-immersion-base-change]. Compose by [lem-weil-pbc-closed-immersion-comp]. Both arrows have the prescribed projections, so their composite is $h_{j+1}$ by the fibre-product universal property. The same universal property identifies $A_m$ and $B_m$ with the stated finite products, preserving every projection; hence the map at $j=m$ is the stated canonical map $P\\to\\prod_{i\\in I,S}Y_i$ over $S$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-fibre-product-change-of-base-closed-immersion",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01KR, lemma-fibre-product-after-map; finite induction using morphisms.tex Tags 01QR and 01QS, lemma-base-change-closed-immersion and lemma-composition-closed-immersion."
+   }
+  },
+  {
+   "text": "Construct by induction a closed immersion $b_j:B_j\\hookrightarrow\\mathbf P^{M_j}_S$ over $S$, where $M_j=(n+1)^j-1$. Start with $b_1=e_1$. Given $b_j$, the map\n$$B_j\\times_SY_{j+1}\\longrightarrow\\mathbf P^{M_j}_S\\times_SY_{j+1}\\longrightarrow\\mathbf P^{M_j}_S\\times_S\\mathbf P^n_S$$\nhas first arrow the base change of $b_j$ along $\\mathbf P^{M_j}_S\\times_SY_{j+1}\\to\\mathbf P^{M_j}_S$, and second arrow the base change of $e_{j+1}$ along $\\mathbf P^{M_j}_S\\times_S\\mathbf P^n_S\\to\\mathbf P^n_S$. It is closed by [lem-weil-pbc-closed-immersion-base-change, lem-weil-pbc-closed-immersion-comp]. Compose with the binary Segre closed immersion of [lem-chow-segre]. Its target dimension is $(M_j+1)(n+1)-1=(n+1)^{j+1}-1$. All arrows are over $S$; the base-change identifications are the isomorphisms with identical projections supplied by [def-pc-fibre-product]. Thus $b_m$ has target $\\mathbf P^N_S$. Compose $h_m$ with $b_m$, using [lem-weil-pbc-closed-immersion-comp], to obtain $e_P$ over $S$ with projection $fr$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-comp",
+    "lem-chow-segre",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01WD, lemma-segre-embedding, iterated binary embedding; morphisms.tex Tags 01QR and 01QS for the product of the given embeddings."
+   }
+  },
+  {
+   "text": "For the arbitrary closed immersion $c:T\\hookrightarrow P$, set $e_T=e_Pc$. It is closed by [lem-weil-pbc-closed-immersion-comp], and its structural projection is $(fr)c=fq$. Hence $P\\to S$ and $T\\to S$ are projective by [def-kun-projective]. For $d_T$, apply [lem-weil-pbc-fibre-product-change-of-base-closed-immersion] to $q:T\\to X$, $\\mathrm{id}_X$ and the separated map $f$: the map $T\\times_XX\\to T\\times_SX$ is a closed immersion. The projection $T\\times_XX\\to T$ is an isomorphism with inverse $(\\mathrm{id}_T,q)$ by [def-pc-fibre-product], so the graph $\\gamma=(\\mathrm{id}_T,q):T\\to T\\times_SX$ is a closed immersion. The map $k=e_T\\times_S\\mathrm{id}_X:T\\times_SX\\to\\mathbf P^N_S\\times_SX$ is the base change of $e_T$ along the first projection $\\mathbf P^N_S\\times_SX\\to\\mathbf P^N_S$ (the two fibre products are identified by maps with the same projections [def-pc-fibre-product]), hence a closed immersion by [lem-weil-pbc-closed-immersion-base-change]. Then $k\\gamma=(e_T,q)$ is a closed immersion by [lem-weil-pbc-closed-immersion-comp], with second projection $q$. By [lemma-nagata-projective-space-base-change-pullback] for $f$ and the coordinate set $\\{0,\\ldots,N\\}$, together with the interchange of factors [def-pc-fibre-product], $\\mathbf P^N_S\\times_SX\\cong\\mathbf P^N_X$ over $X$, and these are the projective spaces of [def-kun-projective]. A closed immersion followed by an isomorphism is a closed immersion [def-weil-closed-immersion]. This gives $d_T:T\\hookrightarrow\\mathbf P^N_X$ over $X$ with the same $N$ and structural projection $q$, i.e. projectivity of $q$ in the finite-space convention. No flatness or finite-type hypothesis on $X$ is used.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-comp",
+    "def-kun-projective",
+    "lem-weil-pbc-fibre-product-change-of-base-closed-immersion",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lemma-nagata-projective-space-base-change-pullback",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0C4Q, lemma-projective-permanence, closed-graph proof (X -> X x_S Y -> P x_S Y) written out for the finite projective-space embedding; schemes.tex Tag 01KR, lemma-fibre-product-after-map; morphisms.tex Tags 01QR, 01QS."
+   }
+  },
+  {
+   "text": "Apply [lem-kun-projective-implies-proper] to each of $P\\to S$, $T\\to S$, and $q:T\\to X$. They are proper. Each is therefore of finite type, since finite type is part of the definition [def-weil-proper-morphism]. No finite-type or Noetherian hypothesis on $X$ was used.",
+   "uses": [
+    "lem-kun-projective-implies-proper",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WC, lemma-locally-projective-proper, and the definition of properness."
+   }
+  },
+  {
+   "text": "The only ideals of the field $k$ are $(0)$ and $(1)$: an ideal containing $a\\ne0$ contains $a^{-1}a=1$ [def-weil-field]. They are finitely generated, so $k$ is Noetherian [def-weil-pbc-noetherian-ring]. The one-chart affine cover of $S=\\operatorname{Spec}k$, with coordinate ring $k$, proves that $S$ is locally Noetherian [def-weil-affine-spectrum, pqf-def-locnoeth]. Its underlying space has one point [def-weil-affine-spectrum], and every open cover contains a member containing that point, so it is quasi-compact [def-weil-pbc-quasi-compact-scheme]. Thus $S$ is Noetherian in the stated convention.",
+   "uses": [
+    "def-weil-field",
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-affine-spectrum",
+    "pqf-def-locnoeth",
+    "def-weil-pbc-quasi-compact-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian, base hypothesis; field case from the definitions, and Properties Tag 01OV for Noetherian schemes."
+   }
+  },
+  {
+   "text": "Both $P\\to S$ and $T\\to S$ are of finite type by step 4, and $S$ is Noetherian by step 5. Apply [lem-weil-pbc-finite-type-over-noetherian] to each. This proves that $P$ and $T$ are locally Noetherian and quasi-compact, exactly the required Noetherianity. This argument also applies when $T$ is empty.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian."
+   }
+  },
+  {
+   "text": "Finally suppose $V\\subset X$ is dense open and $q^{-1}(V)\\to V$ is an isomorphism. Then $V\\subset q(T)$. Properness of $q$ means it is universally closed [def-weil-proper-morphism]; taking the identity base change shows that $q$ is closed. In particular $q(T)$ is closed in $X$, since $T$ is closed in itself. As it contains $V$, it contains its closure $X$. Thus every point of $X$ is the image of a point of $T$, which is surjectivity [def-weil-surjective-morphism].",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Definition of properness and universally closed morphisms; elementary dense-image argument after Tag 01WC."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-fibre-product-change-of-base-closed-immersion",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-comp",
+  "lem-chow-segre",
+  "def-kun-projective",
+  "lemma-nagata-projective-space-base-change-pullback",
+  "lem-kun-projective-implies-proper",
+  "def-weil-proper-morphism",
+  "def-weil-field",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-weil-surjective-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01WD, lemma-segre-embedding, with schemes.tex Tag 01KR and morphisms.tex Tags 01QR, 01QS, 0C4Q, 01WC, 01T6; finite inductions and field/dense-image arguments written explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite fibre product over a separated scheme of schemes projective over a field embeds in finite projective space, as does each closed subscheme both absolutely and relatively",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, where $\\\\mathcal{A}_0$ i\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.UniversallyClosed (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finite type algebra over a base ring $A$, the canonical morphism $\\\\operatorname{Proj}(\\\\mathcal{A}) \\\\to \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.IsProper (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If the zero-graded component $ \\\\mathcal{A}_0 $ of a graded ring $ \\\\mathcal{A} $ is a finitely generated $ A $-algebra, then the canonical morphism from the projective spectrum $ \\\\operatorname{Proj}(\\\\m\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], (AlgebraicGeometry.Proj 𝒜).IsSeparated\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is a separated scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.QuasiCompact (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If a graded ring $\\\\mathcal{A}$ is finitely generated as an algebra over its zero-graded component $\\\\mathcal{A}_0$, then the canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathca\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.LocallyOfFiniteType (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finitely generated algebra over a base ring $A$, the canonical morphism from the projective spectrum $\\\\operatorname{P\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give properness/separatedness of Proj and closed diagonal maps, not finite projective-space embeddings of the fibre product and its closed subschemes over both bases"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsProjective\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give properness/separatedness of Proj and closed diagonal maps, not finite projective-space embeddings of the fibre product and its closed subschemes over both bases"
+  },
+  {
+   "tool": "grep",
+   "query": "projective.*(prod|pullback)|[Ii]sProjective|segre",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give properness/separatedness of Proj and closed diagonal maps, not finite projective-space embeddings of the fibre product and its closed subschemes over both bases"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite product of projective schemes over a separated base and every closed subscheme are projective over the field and the base",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.isSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Proper\", \"type\": \": IsSeparated (toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, where $\\\\mathcal{A}_0$ i\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSeparated\", \"doc\": \"The property of being a separated morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a separated morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ \"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instCompScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[IsSeparated f] [IsSeparated g] : IsSeparated (f ≫ g)\", \"doc\": \"The composition of two separated morphisms of schemes is itself a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsFinite f] : IsProper f\", \"doc\": \"Every finite morphism of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsFinite f] : IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f], AlgebraicGeometry.IsSeparated f\", \"doc\": \"Every proper morphism of schemes is separated, i.e., if $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is separated.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Proper\", \"type\": \": Scheme.IsSeparated (Proj 𝒜)\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is a separated scheme.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give properness/separatedness of Proj and closed diagonal maps, not finite projective-space embeddings of the fibre product and its closed subschemes over both bases"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Use the separated diagonal and Segre embedding to embed a finite fibre product in projective space and a closed graph to obtain a relative embedding",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, where $\\\\mathcal{A}_0$ i\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], (AlgebraicGeometry.Proj 𝒜).IsSeparated\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is a separated scheme.\"}\n  {\"name\": \"AlgebraicGeometry.isClosedImmersion_diagonal_restrict_diagonalCoverDiagonalRange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (𝒰 : Y.OpenCover)\\n  (𝒱 : (i : 𝒰.I₀) → (CategoryTheory.Limits.pullback f (𝒰.f i)).OpenCover)\\n  [∀ (i : 𝒰.I₀), AlgebraicGeometry.IsAffine (𝒰.X i)]\\n  [∀ (i : 𝒰.I₀) (j : (𝒱 i).I₀), AlgebraicGeometry.IsAffine ((𝒱 i).X j)],\\n  AlgebraicGeometry.IsClosedImmersi\", \"doc\": \"Given a morphism $ f $ of schemes and affine open covers $ \\\\mathcal{U} $ and $ \\\\mathcal{V} $, the diagonal morphism $ \\\\Delta_f $ restricted to the diagonal cover's diagonal range (constructed from the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsClosedImmersionLiftIdOfIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [X.IsSeparated],\\n  AlgebraicGeometry.IsClosedImmersion\\n    (CategoryTheory.Limits.prod.lift (CategoryTheory.CategoryStruct.id X) (CategoryTheory.CategoryStruct.id X))\", \"doc\": \"For any separated scheme $X$, the diagonal morphism $X \\to X \\times X$ given by the product of identity maps is a closed immersion. This follows from the definition of separatedness, which requires the \"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instLiftSchemeId\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme},\\n  AlgebraicGeometry.IsImmersion\\n    (CategoryTheory.Limits.prod.lift (CategoryTheory.CategoryStruct.id X) (CategoryTheory.CategoryStruct.id X))\", \"doc\": \"For any scheme $X$, the diagonal morphism $X \\to X \\times X$ defined by lifting the identity morphism on $X$ to the product is an immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme},\\n  X.IsSeparated ↔\\n    AlgebraicGeometry.IsClosedImmersion\\n      (CategoryTheory.Limits.prod.lift (CategoryTheory.CategoryStruct.id X) (CategoryTheory.CategoryStruct.id X))\", \"doc\": \"For any scheme $X$, $X$ is separated if and only if the diagonal morphism $\\\\Delta: X \\\\to X \\\\times X$ defined by $\\\\Delta = \\\\text{prod.lift}(\\\\text{id}_X, \\\\text{id}_X)$ is a closed immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks.isEmbedding_pullback\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.SurjectiveOnStalks g],\\n  Topology.IsEmbedding fun x =>\\n    ((CategoryTheory.ConcreteCategory.hom (CategoryTheory.Limits.pullback.fst f g).base) x,\\n      (CategoryTheory.ConcreteCategory.hom (CategoryTheory.Limits.pullbac\", \"doc\": \"Given schemes $X$, $Y$, and $S$ with morphisms $f : X \\to S$ and $g : Y \\to S$, if $g$ is surjective on stalks, then the natural morphism from the fiber product $X \\times_S Y$ to the product $X \\times Y$ \"}\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {f : A} →\\n                {m : ℕ} →\\n                  (f_deg : f ∈ 𝒜 m) →\\n                 \", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees, the pullback of the inclusion morphisms $\\\\operatorname{Spec}(\\\\mathcal{A}\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give properness/separatedness of Proj and closed diagonal maps, not finite projective-space embeddings of the fibre product and its closed subschemes over both bases"
+  },
+  {
+   "tool": "grep",
+   "query": "IsProjective|segre|projective.*(product|pullback)",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "top": [],
+    "note": "",
+    "sub": "AlgebraicGeometry"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: related Proj properness, closed-immersion stability and separatedness results do not give the finite-projective-space embeddings with specified dimension and both bases"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite product of projective schemes over a separated base admits a closed embedding in projective space, as do all its closed subschemes",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "AlgebraicGeometry.IsClosedImmersion.isClosedEmbedding",
+     "AlgebraicGeometry.IsClosedImmersion.mk",
+     "AlgebraicGeometry.IsFinite.instOfIsClosedImmersion",
+     "AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated",
+     "AlgebraicGeometry.IsClosedImmersion.instIsAffineHom",
+     "AlgebraicGeometry.IsClosedImmersion.of_comp",
+     "AlgebraicGeometry.IsClosedImmersion",
+     "AlgebraicGeometry.IsClosedImmersion.instIsMultiplicativeScheme"
+    ],
+    "note": "",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: related Proj properness, closed-immersion stability and separatedness results do not give the finite-projective-space embeddings with specified dimension and both bases"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProjective, AlgebraicGeometry.IsClosedImmersion",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "top": [],
+    "note": "loogle: unknown identifier 'AlgebraicGeometry.IsProjective'",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: related Proj properness, closed-immersion stability and separatedness results do not give the finite-projective-space embeddings with specified dimension and both bases"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite fibre product over a separated scheme of schemes embedded in projective n-space over a field embeds in projective space of dimension (n+1)^m-1; closed subschemes are projective over both bases",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "AlgebraicGeometry.Proj.isSeparated",
+     "AlgebraicGeometry.Proj.instIsSeparated",
+     "AlgebraicGeometry.Proj.pullbackAwayιIso",
+     "AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat",
+     "AlgebraicGeometry.IsFinite.instFstScheme",
+     "AlgebraicGeometry.IsFinite.instSndScheme",
+     "AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat",
+     "AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc"
+    ],
+    "note": "",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: related Proj properness, closed-immersion stability and separatedness results do not give the finite-projective-space embeddings with specified dimension and both bases"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Use a separated diagonal and iterated Segre embeddings to embed a finite fiber product in projective space; the closed graph gives a projective embedding over the intermediate base",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "AlgebraicGeometry.Proj.pullbackAwayιIso",
+     "AlgebraicGeometry.Proj.isSeparated",
+     "AlgebraicGeometry.Proj.instIsSeparated",
+     "AlgebraicGeometry.Scheme.instIsClosedImmersionLiftIdOfIsSeparated",
+     "AlgebraicGeometry.isClosedImmersion_diagonal_restrict_diagonalCoverDiagonalRange",
+     "AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat",
+     "AlgebraicGeometry.IsImmersion.instDiagonalScheme",
+     "AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat"
+    ],
+    "note": "",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: related Proj properness, closed-immersion stability and separatedness results do not give the finite-projective-space embeddings with specified dimension and both bases"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semilinear-equivariant-chow-modification",
+  "date": "2026-10-22",
+  "group": "NK"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; prerequisite: de Jong, Families of curves and alterations (1997), §§2.7--2.10, printed pp.603--605: invariant purely inseparable generic normalization, equivariant Chow preparation and simultaneous flattening. The marking flattening is also ILO X Theorem 3.4 Step 2, p.160.; equivariant Chow preparation in de Jong §2.10, before simultaneous flattening; re-split of lem-sfb-semilinear-equivariant-chow-modification, returned proof steps 3, projective ambient part of 6, 8",
+   "via": [
+    "lem-sfb-semilinear-equivariant-chow-modification",
+    "lem-sfb-equivariant-flat-curve-preparation",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-projective-fibre-product-closed-model",
+  "worker": "stage1",
+  "group": "NH",
+  "summary": "Repaired the returned delivery against the current live unsplit item: re-read all cited statements and sources, checked the returned-head comparison, and made the finite-product structure maps and both product-embedding base-change squares explicit. Retained the two inductions, exact dimension, same-N relative embedding, properness, finite type, Noetherianity and dense-open surjectivity. No new nodes or statement change.",
+  "blueprint": "Realizes the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration route, specifically the projective ambient, closed model and surjectivity inputs extracted from lem-sfb-semilinear-equivariant-chow-modification steps 3, 6 and 8. The ancestor command currently returns None; the inherited from.node=null and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-chow-segre",
+    "why": "Binary Segre closed immersion over any scheme gives the projective ambient; it is a generic geometry tool for the inherited Chow preparation route."
+   },
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Generic implication from an explicit finite projective-space embedding to properness, needed for all three constructed morphisms."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-chow-segre",
+  "lem-kun-projective-implies-proper"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NH-d9bdf3e8f",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-d9bdf3e8f (reviewer sub-agent of L); spot-checked: The mathematics of all 7 steps was read in full. No new nodes; the statement and stmt_deps are unchanged and correct. Edge cases checked: |I|=1, n=0, empty Y_i, empty T, empty X. The nonempty-I hypothesis is needed. Step 1 applies Stacks 01KR (schemes.tex l.4238) with the separated intermediate base f, then a base change of h_j. Step 2 uses the binary Segre map lem-chow-segre (01WD) to get (M+1)(n+1)-1=(n+1)^{j+1}-1. Step 4 uses lem-kun-projective-implies-proper (01WC). Steps 5 and 6 get Noetherianity from finite type over Spec k. Step 7 is surjectivity from closedness and density. Mechanical finding confirmed and repaired: lem-per-h-projective-permanence is on coord/route-pivot-dropped.txt line 1626, in the 2026-10-19 artin-gabber section (created by Q75 for lem-per-normal-projective-compactification on the alteration chain), and no retain note covers it. Generic tool_use wording does not undo the drop. FIX: step 3 now writes out the Stacks 0C4Q closed-graph proof (morphisms.tex l.10824) using only nodes that are not dropped: graph (id_T,q) closed via lem-weil-pbc-fibre-product-change-of-base-closed-immersion with id_X and separated f; e_T x id_X closed via lem-weil-pbc-closed-immersion-base-change; composition via lem-weil-pbc-closed-immersion-comp; P^N_S x_S X = P^N_X via lemma-nagata-projective-space-base-change-pullback; then def-pc-fibre-product and def-weil-closed-immersion. The result has the same N and projection q, in 1676 chars. proof_deps and split_report.tool_uses are updated, and the dropped id no longer appears anywhere in the item. All 20 other cited ids were checked against every section of the dropped list. No SGA source and no Qbar/adic/Gabber/alteration input is used. Maintainer note: sibling nodes lem-sfb-gabber-global-snc-alteration, -normal-alteration-constant-regularization, -equivariant-flat-curve-preparation and -semilinear-equivariant-chow-modification still cite the dropped node.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveFibreProductClosedModel",
+  "declaration": "AlgebraicGeometry.projectiveFibreProductClosedModel",
+  "declarations": [
+   "AlgebraicGeometry.projectiveFibreProductComparison",
+   "AlgebraicGeometry.projectiveFibreProductClosedModel"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveFibreProductClosedModel.lean",
+  "statement": "theorem projectiveFibreProductClosedModel (k : Type u) [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsSeparated f] (I : Type u) [Fintype I] [Nonempty I] (n : ℕ) (Y : I → Scheme.{u}) (q : ∀ i : I, Y i ⟶ X) (e : ∀ i : I, Y i ⟶ ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k))) (he : ∀ i : I, IsClosedImmersion (e i)) (he_over : ∀ i : I, e i ≫ ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k)) ↘ Spec (.of k) = q i ≫ f) : IsClosedImmersion (projectiveFibreProductComparison f Y q) ∧ (∃ eP : widePullback X Y q ⟶ ℙ(ULift.{u} (Fin ((n + 1) ^ Nat.card I - 1 + 1)); Spec (.of k)), IsClosedImmersion eP ∧ eP ≫ ℙ(ULift.{u} (Fin ((n + 1) ^ Nat.card I - 1 + 1)); Spec (.of k)) ↘ Spec (.of k) = WidePullback.base q ≫ f) ∧ IsHProjective (WidePullback.base q ≫ f) ∧ IsProper (WidePullback.base q ≫ f) ∧ LocallyOfFiniteType (WidePullback.base q ≫ f) ∧ QuasiCompact (WidePullback.base q ≫ f) ∧ IsLocallyNoetherian (widePullback X Y q) ∧ CompactSpace (widePullback X Y q : Scheme.{u}) ∧ (∀ {T : Scheme.{u}} (c : T ⟶ widePullback X Y q), IsClosedImmersion c → (∃ eT : T ⟶ ℙ(ULift.{u} (Fin ((n + 1) ^ Nat.card I - 1 + 1)); Spec (.of k)), IsClosedImmersion eT ∧ eT ≫ ℙ(ULift.{u} (Fin ((n + 1) ^ Nat.card I - 1 + 1)); Spec (.of k)) ↘ Spec (.of k) = (c ≫ WidePullback.base q) ≫ f) ∧ (∃ dT : T ⟶ ℙ(ULift.{u} (Fin ((n + 1) ^ Nat.card I - 1 + 1)); X), IsClosedImmersion dT ∧ dT ≫ ℙ(ULift.{u} (Fin ((n + 1) ^ Nat.card I - 1 + 1)); X) ↘ X = c ≫ WidePullback.base q) ∧ IsHProjective ((c ≫ WidePullback.base q) ≫ f) ∧ IsHProjective (c ≫ WidePullback.base q) ∧ IsProper ((c ≫ WidePullback.base q) ≫ f) ∧ IsProper (c ≫ WidePullback.base q) ∧ LocallyOfFiniteType ((c ≫ WidePullback.base q) ≫ f) ∧ QuasiCompact ((c ≫ WidePullback.base q) ≫ f) ∧ LocallyOfFiniteType (c ≫ WidePullback.base q) ∧ QuasiCompact (c ≫ WidePullback.base q) ∧ IsLocallyNoetherian T ∧ CompactSpace T ∧ ((∃ V : X.Opens, Dense (V : Set X) ∧ IsIso (pullback.snd (c ≫ WidePullback.base q) V.ι)) → Surjective (c ≫ WidePullback.base q)))",
+  "branch": "newtargets-dag",
+  "by": "Q124",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The auxiliary comparison is constructed by WidePullback.lift with the original projections, not chosen from an existence theorem. Fintype I supplies enumeration data for the finite set; every finite set admits it. The homogeneous-coordinate type is ULift (Fin (N + 1)), with exactly N = (n + 1)^Nat.card I - 1."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e482bd105",
+  "group": "Q124",
+  "result": "pass",
+  "note": "Read node (7 steps, Stacks 01KR/01WD/0C4Q/01WC/01T6), all 12 stmt_dep records and upstream IsHProjective (∃ finite coord type closed immersion over S). Every clause matches: [IsSeparated f]; Fintype+Nonempty I in Type u (finite, no loss); he_over = e_i≫π = q_i≫f; P = widePullback X Y q with base r; comparison = WidePullback.lift with base r≫f and components π_i (real data, no base-change comparison in Mathlib or upstream); N via (n+1)^Nat.card I - 1 + 1 coordinates, exact since I nonempty; eP over S; IsHProjective/IsProper/LFT∧QC for r≫f, c≫r and (c≫r)≫f; IsLocallyNoetherian ∧ CompactSpace for P and T; eT/dT with projections (c≫r)≫f and c≫r, same N; dense V with IsIso (pullback.snd (c≫r) V.ι) → Surjective. No extra hypotheses. Edge cases |I|=1, n=0, empty Y_i/P/T/X fine, empty I excluded per node. lean.statement verbatim (checked programmatically); node differs from live only in lean; docstrings carry source, blueprint tag and all 7 steps; report has both sections; proof only sorry. Not recompiled (no file changed); worker's clean compile accepted. No findings."
+ }
+}

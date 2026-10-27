@@ -7,9 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.IsFlasqueHomObjOfInjective
 public import WeilConjectures.Topology.RingedSpaceModuleCohomology
-import WeilConjectures.AlgebraicGeometry.ModuleAbelianZariskiCohomology
 import WeilConjectures.Topology.FlasqueZariskiAcyclic
-import Sheaf.Paper.ZariskiModuleAbelianCohomologyNatural
 import WeilConjectures.AlgebraicGeometry.ZariskiModuleAbelianCohomologyNatural
 
 /-! # Acyclicity of internal Hom into an injective module
@@ -48,6 +46,27 @@ theorem coherent_hom_injective_acyclic (X : Scheme.{u}) [IsNoetherian X]
     ∀ p : ℕ, 0 < p →
       IsZero ((RingedSpace.moduleCohomology X.toRingedSpace p).obj
         (SheafOfModules.homObj (R := X.sheaf) F I)) := by
-  sorry
+  intro p hp
+  let M := SheafOfModules.homObj (R := X.sheaf) F I
+  let : TopCat.Sheaf.IsFlasque
+      ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj M) :=
+    isFlasque_homObj_of_coherent_injective X F I hF
+  let : EnoughInjectives (Sheaf (Opens.grothendieckTopology X.carrier)
+      AddCommGrpCat.{u}) :=
+    @IsGrothendieckAbelian.enoughInjectives _ _ _
+      (Sheaf.isGrothendieckAbelian_of_essentiallySmall'.{u}
+        (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u})
+  let : HasExt.{u}
+      (Sheaf (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u}) :=
+    hasExt_of_enoughInjectives _
+  obtain ⟨e⟩ := zariskiModuleAbelianCohomologyNatural X p
+  let : Subsingleton
+      (((SheafOfModules.toSheaf (moduleRings X.toRingedSpace) ⋙
+        Sheaf.cohomologyPresheafFunctor (Opens.grothendieckTopology X.carrier) p ⋙
+        (evaluation (TopologicalSpace.Opens X.carrier)ᵒᵖ AddCommGrpCat).obj
+          (Opposite.op ⊤)).obj M)) :=
+    TopCat.Sheaf.IsFlasque.subsingleton_H'_top _ p hp
+  apply ModuleCat.isZero_iff_subsingleton.mpr
+  exact (e.app M).addCommGroupIsoToAddEquiv.injective.subsingleton
 
 end AlgebraicGeometry

@@ -13,9 +13,41 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
   "place": "Paragraph (3), dense-lattice input: agent-formulated formal restriction and cup-product infrastructure. Bhatt-Scholze section 4.3 and the Stacks right-derived construction provide context, not this entire internal-ring statement; exact reference WANTED."
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Construct character restriction by composing on every profinite test object, and coefficient change by applying the given additive section maps. The character laws are inherited; equality of the app fields proves uniqueness.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the linear maps on sections supplied by the internal-to-sectionwise module functor. The biproduct total identity makes the two coordinate projections jointly injective. Define the shear z -> z + inl(a(g) * snd(z)). Its coordinates, the character multiplication law, and ring-map naturality prove the monoid action and restriction laws. The coordinates imply uniqueness.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The coordinate identities prove equivariance of the first inclusion and second projection; their composite vanishes by biprod.inl_snd. Forgetting the action gives Mathlib ShortComplex.Splitting.ofHasBinaryBiproduct. Use forgetExact to reflect exactness and faithfulness to reflect the endpoint mono and epi.",
+   "uses": [
+    "def-sfb-condensed-derived-invariants"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the two coordinate maps to g(0,1)-(0,1). The first is a(g) and the second is zero, so joint injectivity gives the positive normalization. The unchanged connecting-arrow and shift definitions then define the stated class.",
+   "uses": [
+    "def-sfb-condensed-derived-cup"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-condensed-derived-invariants",
+  "def-sfb-condensed-derived-cup"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "The existing theorem docstrings at def-sfb-condensed-unipotent-class; direct sectionwise shear construction and Mathlib split biproduct exactness, formalized by Y2 on 2026-10-25."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -229,10 +261,14 @@
  },
  "lean_audit": {
   "master": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
   "slopmaster2": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   }
  },
  "chapter": "sec-six-functors-basics",
@@ -287,5 +323,15 @@
   "group": "NI",
   "result": "fix",
   "note": "Read the item, 11 stmt_deps, 5 new def nodes and all 6 modules against the node. Every clause is rendered faithfully: exact forget/inflation/restriction/scalar, Grothendieck structure, b_u = rightDerivedPullback of the unique invariant inclusion with unit normalization, CommShift, degree zero, identity case, c_J via a unique unit-normalized scalarComparison (no flatness), coefficientSquare, the unital cup algebra as the mate of the K-flat-pinned strong trivial tensor, the unique UnipotentAction on R⊞R, and the class/product formulas for restriction and coefficient change. Mathlib's cone differential makes singleδ = +snake δ, so [a] has cocycle +a as required. All choices are pinned; no hollow defs; records match; item statement unchanged; stmt_deps only gained new def nodes. Only fault, H8: 5 of 6 modules had no module docstring. FIX adds docstrings only (the item's includes the 12-step proof outline) plus an item lean-record override keeping the statement verbatim. nt_compile --json twice timed out at 60 s on the unchanged sibling CondensedDerivedInvariants at load 153-162; changes are comment-only; the worker compiled all six clean (46.0 s). Notes: overlap with Q02's profinite-only def-sfb-condensed-derived-inflation-arrows (not a duplicate); the new cup def node cites theorem lem-derived-right-exact-tensor-comparison for a plain Prop predicate (advisory); proof-dep imports are not in the item module."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261025T043415-L-1736686",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

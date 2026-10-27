@@ -1,0 +1,222 @@
+{
+ "id": "lem-sfb-dg-adjunction-compact-unit",
+ "kind": "statement",
+ "title": "Compact regular-module image propagates an adjunction unit",
+ "statement": "Work in the universes of [def-weil-size-convention]. A differential graded $\\mathbf Z$-algebra is an associative unital graded ring with a degree-one additive differential $d$, $d^2=0$ and $d(ab)=d(a)b+(-1)^{|a|}a\\,d(b)$ for homogeneous $a,b$. A right dg module has $d(ma)=d(m)a+(-1)^{|m|}m\\,d(a)$ and $d^2=0$. Its derived category $D(A,d)$ is the homotopy category of right dg modules localized at cohomology isomorphisms, with the mapping-cone triangles and integer shifts. Let $(A,d)$ be such a dg algebra. Let $\\mathcal T$ be a triangulated category with all small coproducts [def-weil-triangulated-category]. Give exact functors $T:D(A,d)\\to\\mathcal T$ and $R:\\mathcal T\\to D(A,d)$ and a specified shift-compatible adjunction $T\\dashv R$ with unit $\\eta:\\mathrm{id}\\to RT$. Suppose that $T$ preserves all small coproducts, that $T(A)$ is compact in $\\mathcal T$ [def-pc-compact-object], and that $\\eta_A:A\\to RT(A)$ is an isomorphism. Then $\\eta_M:M\\to RT(M)$ is an isomorphism for every $M\\in D(A,d)$, and $T$ is fully faithful, meaning it induces a bijection on every morphism set. No generation assumption on $T(A)$ in $\\mathcal T$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09LZ (lemma-fully-faithful-in-compact-case), proof by property-(P) resolutions and coproducts, stated in its relative form: only compactness in the actual target category of the tensor functor is used, not compactness in a larger ambient category."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-triangulated-category",
+  "def-pc-compact-object",
+  "def-sfb-dg-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\mathcal D=D(A,d)$. Coproducts are dg-module direct sums by [lem-sfb-dg-sequential-colimit-triangle]. By [lem-sfb-dg-free-shift-derived-hom], $f\\mapsto[f(1)]$ gives a bijection $\\operatorname{Hom}_{\\mathcal D}(A[n],M)\\cong H^{-n}(M)$, natural in dg-module maps $M\\to M'$. Applied to the coprojections $M_i\\to\\bigoplus_iM_i$, it turns the canonical map $\\bigoplus_i\\operatorname{Hom}_{\\mathcal D}(A[n],M_i)\\to\\operatorname{Hom}_{\\mathcal D}(A[n],\\bigoplus_iM_i)$ into $\\bigoplus_iH^{-n}(M_i)\\to H^{-n}(\\bigoplus_iM_i)$. Cycles and boundaries in a direct sum are componentwise with finite support, so this map is bijective and every $A[n]$ is compact by [def-pc-compact-object]. Also $T(A[n])\\simeq T(A)[n]$ is compact: apply the inverse shift to the target coproduct and use compactness of $T(A)$; shifts, being equivalences, preserve coproducts.",
+   "uses": [
+    "lem-sfb-dg-sequential-colimit-triangle",
+    "lem-sfb-dg-free-shift-derived-hom",
+    "def-pc-compact-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LZ, lemma-fully-faithful-in-compact-case, property-(P) and compactness argument, in the stated abstract adjunction form; Tag 0FQE, remark-P-resolution."
+   }
+  },
+  {
+   "text": "Let $\\mathcal S=\\{A[n]\\mid n\\in\\mathbf Z\\}$. Its localizing closure, meaning the smallest full replete triangulated subcategory closed under all small coproducts and containing $\\mathcal S$, is all of $\\mathcal D$: its object property satisfies the hypotheses of [lem-sfb-dg-property-p-devissage]. Therefore [lem-sf-localizing-hom-test] applies to every morphism of $\\mathcal D$ and makes $\\mathcal S$ an isomorphism-testing family. All indices and Hom sets are taken in the fixed common universe of the statement.",
+   "uses": [
+    "lem-sfb-dg-property-p-devissage",
+    "lem-sf-localizing-hom-test"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LZ, lemma-fully-faithful-in-compact-case, property-(P) and compactness argument, in the stated abstract adjunction form; Tag 0FQE, remark-P-resolution."
+   }
+  },
+  {
+   "text": "Apply [lem-sc-compact-tests-right-adjoint-coproducts] with $C=\\mathcal D$, $D=\\mathcal T$, left adjoint $T$, right adjoint $R$, and the small family $G_n=A[n]$. Step 1 gives compactness of $G_n$ and $T(G_n)$, and step 2 gives the required detection of isomorphisms in the source. Both categories have the specified coproducts and Hom sets in the chosen universe. Hence $R$ preserves all small coproducts. Explicitly the comparison $\\bigoplus_i RY_i\\to R(\\bigoplus_iY_i)$ is tested by $\\operatorname{Hom}(A[n],-)$; adjunction and compactness identify both sides with $\\bigoplus_i\\operatorname{Hom}(T(A[n]),Y_i)$, with the comparison becoming the identity by naturality on each coprojection.",
+   "uses": [
+    "lem-sc-compact-tests-right-adjoint-coproducts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LZ, lemma-fully-faithful-in-compact-case, property-(P) and compactness argument, in the stated abstract adjunction form; Tag 0FQE, remark-P-resolution."
+   }
+  },
+  {
+   "text": "Consider $Q(M):\\Leftrightarrow\\eta_{M[n]}$ is an isomorphism for every integer $n$. The identity and $RT$ are exact and preserve small coproducts (for $RT$, use the hypothesis on $T$ and step 3). Thus [lem-sc-shift-saturated-iso-locus] makes $Q$ invariant under isomorphisms and closed under shifts, coproducts and distinguished triangles. Shift compatibility of the specified adjunction identifies $\\eta_{A[k]}$ with the shift of $\\eta_A$ conjugated by the structural shift isomorphism, so $Q(A[k])$ holds for every $k$. Apply [lem-sfb-dg-property-p-devissage] to $Q$. It holds on every object, and its $n=0$ clause says that every $\\eta_M$ is invertible.",
+   "uses": [
+    "lem-sc-shift-saturated-iso-locus",
+    "lem-sfb-dg-property-p-devissage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LZ, lemma-fully-faithful-in-compact-case, property-(P) and compactness argument, in the stated abstract adjunction form; Tag 0FQE, remark-P-resolution."
+   }
+  },
+  {
+   "text": "For $M,N\\in\\mathcal D$, adjunction identifies $\\operatorname{Hom}_{\\mathcal T}(TM,TN)$ with $\\operatorname{Hom}_{\\mathcal D}(M,RTN)$. Postcompose with $\\eta_N^{-1}$ to obtain a bijection to $\\operatorname{Hom}_{\\mathcal D}(M,N)$. Naturality of the adjunction says that $T(f)$ maps first to $\\eta_N\\circ f$, and hence to $f$. Thus this bijection is inverse to the map induced by $T$ on every Hom set, proving full faithfulness. The only target compactness used was that of the shifts of $T(A)$; no target-generation hypothesis entered.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LZ, lemma-fully-faithful-in-compact-case, property-(P) and compactness argument, in the stated abstract adjunction form; Tag 0FQE, remark-P-resolution."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-dg-sequential-colimit-triangle",
+  "lem-sfb-dg-free-shift-derived-hom",
+  "def-pc-compact-object",
+  "lem-sfb-dg-property-p-devissage",
+  "lem-sf-localizing-hom-test",
+  "lem-sc-compact-tests-right-adjoint-coproducts",
+  "lem-sc-shift-saturated-iso-locus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09LZ proof generalized from its dg tensor-Hom adjunction to the specified exact adjunction, with Tag 0FQE."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact coproduct preserving functor from the derived category of a differential graded algebra is fully faithful if its right adjunction unit is an isomorphism on the free module and its image is compact",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory (Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor); DerivedCategory.instFullSingleFunctor (Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful); CategoryTheory.Functor.mapDerivedCategoryFactorsh (Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor); CategoryTheory.Abelian.Ext.mapExactFunctor_hom (Mathlib/Algebra/Homology/DerivedCategory/Ext/Map); CategoryTheory.Functor.mapDerivedCategoryFactors (Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor); CategoryTheory.Functor.mapDerivedCategorySingleFunctor (Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor); CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory (Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor); CategoryTheory.Functor.mapDerivedCategory (Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor)",
+   "date": "2026-10-24",
+   "verdict": "no match: fullyFaithfulLOfIsIsoUnit requires the unit invertible on every object; it does not propagate a unit isomorphism from the regular dg module by compactness. Compactly generated topological-space hits are unrelated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Full faithfulness of derived tensor from a dg algebra when endomorphism cohomology is correct and the tensor image is compact",
+   "results": "[leanfinder] OK 8 hit(s); DerivedCategory.instFullSingleFunctor (Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful); DerivedCategory.instFullFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh (Mathlib/Algebra/Homology/DerivedCategory/Basic); CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory (Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor); DerivedCategory.instFaithfulFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh (Mathlib/Algebra/Homology/DerivedCategory/Basic); CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory (Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor); DerivedCategory.instEssSurjCochainComplexIntQ (Mathlib/Algebra/Homology/DerivedCategory/Basic); CategoryTheory.Tor'_obj_obj (Mathlib/CategoryTheory/Monoidal/Tor); CategoryTheory.Tor_obj (Mathlib/CategoryTheory/Monoidal/Tor)",
+   "date": "2026-10-24",
+   "verdict": "no match: fullyFaithfulLOfIsIsoUnit requires the unit invertible on every object; it does not propagate a unit isomorphism from the regular dg module by compactness. Compactly generated topological-space hits are unrelated."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCompactObject\", \"FullyFaithful\"",
+   "results": "[loogle] OK 0 hit(s); none",
+   "date": "2026-10-24",
+   "verdict": "no match: fullyFaithfulLOfIsIsoUnit requires the unit invertible on every object; it does not propagate a unit isomorphism from the regular dg module by compactness. Compactly generated topological-space hits are unrelated."
+  },
+  {
+   "tool": "grep",
+   "query": "(compact|Compact).*(fullyFaithful|FullyFaithful)|(fullyFaithful|FullyFaithful).*(compact|Compact)|DGModule",
+   "results": "[grep] OK 8 hit(s); Mathlib/Topology/Category/CompactlyGenerated.lean:77: def fullyFaithfulCompactlyGeneratedToTop : compactlyGeneratedToTop.{u, w}.FullyFaithful :=; Mathlib/Topology/Category/CompactlyGenerated.lean:80: instance : compactlyGeneratedToTop.{u, w}.Full := fullyFaithfulCompactlyGeneratedToTop.full; Mathlib/Topology/Category/CompactlyGenerated.lean:82: instance : compactlyGeneratedToTop.{u, w}.Faithful := fullyFaithfulCompactlyGeneratedToTop.faithful; Mathlib/Condensed/TopCatAdjunction.lean:184:   topCatAdjunction.restrictFullyFaithful (iC := 𝟭 _) (iD := compactlyGeneratedToTop); Mathlib/Condensed/TopCatAdjunction.lean:185:     (Functor.FullyFaithful.id _) fullyFaithfulCompactlyGeneratedToTop; Mathlib/Condensed/TopCatAdjunction.lean:217: noncomputable def fullyFaithfulCompactlyGeneratedToCondensedSet :; Mathlib/Condensed/TopCatAdjunction.lean:218:     compactlyGeneratedToCondensedSet.FullyFaithful :=; Mathlib/Condensed/TopCatAdjunction.lean:219:   compactlyGeneratedAdjunction.fullyFaithfulROfIsIsoCounit",
+   "date": "2026-10-24",
+   "verdict": "no match: fullyFaithfulLOfIsIsoUnit requires the unit invertible on every object; it does not propagate a unit isomorphism from the regular dg module by compactness. Compactly generated topological-space hits are unrelated."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact adjunction from dg modules with compact image of the regular module and invertible unit on the regular module has fully faithful left adjoint",
+   "results": "[leansearch] OK 8 hit(s); CategoryTheory.Adjunction.full_L_of_isSplitEpi_unit_app (Mathlib.CategoryTheory.Adjunction.FullyFaithful); CategoryTheory.Adjunction.fullyFaithfulROfIsIsoCounit (Mathlib.CategoryTheory.Adjunction.FullyFaithful); CategoryTheory.Adjunction.fullyFaithfulLOfIsIsoUnit (Mathlib.CategoryTheory.Adjunction.FullyFaithful); CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app (Mathlib.CategoryTheory.Adjunction.Restrict); CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc (Mathlib.CategoryTheory.Adjunction.Restrict); CategoryTheory.Adjunction.instIsIsoAppUnitOfFullOfFaithful (Mathlib.CategoryTheory.Adjunction.FullyFaithful); CategoryTheory.Adjunction.ofIsRightAdjoint (Mathlib.CategoryTheory.Adjunction.Basic); CategoryTheory.Adjunction.isIso_unit_app_of_iso (Mathlib.CategoryTheory.Adjunction.FullyFaithful)",
+   "date": "2026-10-24",
+   "verdict": "no match: fullyFaithfulLOfIsIsoUnit requires the unit invertible on every object; it does not propagate a unit isomorphism from the regular dg module by compactness. Compactly generated topological-space hits are unrelated."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-generator-dg-equivalence",
+  "date": "2026-10-24",
+  "group": "Q37"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 09MC, theorem-DQCoh-is-Ddga and its proof, with an arbitrary chosen perfect generator and its K-injective representative; the displayed derived tensor/Hom adjunction and equation-E-is-OK. Supporting subargument: Tag 09MC proof: full faithfulness by 09LZ, with compactness in D_QCoh and the unit at the regular dg module.",
+   "via": [
+    "lem-sfb-space-generator-dg-equivalence",
+    "lem-sfb-space-countable-telescope",
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dg-adjunction-compact-unit",
+  "worker": "stage1",
+  "summary": "Preserved the statement and supplied the compact-generator/unit-locus argument. One statement-only dg input is isolated: property-(P) devissage. The derived Hom from A[n] is the existing same-unit node lem-sfb-dg-free-shift-derived-hom (maintainer fix: replaces the dropped lem-coef dg-machinery citations). Reused the existing dg coproduct theorem and generic localizing Hom, compact-test adjoint and shift-saturated isomorphism-locus lemmas. Checked the new statement against Stacks and Mathlib, every cited statement, empty sums, unbounded dg algebras and the absence of target generation.",
+  "blueprint": "Latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md (3), inherited supporting path recorded in blueprint.from.place: the Tag 09MC generator equivalence uses the compactness/unit argument of Tag 09LZ. Steps 1-4 make the reduction to shifts of the regular dg module precise; step 5 is the adjunction assembly.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-localizing-hom-test",
+    "why": "Generic Hom detection on the localizing closure; applies to D(A,d), without replacing a geometric unit step."
+   },
+   {
+    "node": "lem-sc-compact-tests-right-adjoint-coproducts",
+    "why": "Generic adjunction coproduct criterion; only compact regular dg-module images are needed."
+   },
+   {
+    "node": "lem-sc-shift-saturated-iso-locus",
+    "why": "Generic exact-functor isomorphism locus; supplies triangle and coproduct closure for the fixed unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-localizing-hom-test",
+  "lem-sc-compact-tests-right-adjoint-coproducts",
+  "lem-sc-shift-saturated-iso-locus"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q122-139e2f807",
+  "group": "Q122",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-139e2f807 (reviewer sub-agent of L); spot-checked: I read the item, its 5 steps and the new node lem-sfb-dg-property-p-devissage in full, and checked them against Stacks dga.tex Tag 09LZ (line 6122) and Tag 0FQE (line 2736). The item statement is correct and unchanged; it is the abstract adjunction form of 09LZ, with T left adjoint to R. The new node matches 0FQE exactly: all three hypotheses including the empty family, no countability. It is true and is not a restatement of the item. I found no duplicate after reading pc-derived-module-free-generation, the sfb dg countable/telescope nodes, pur-coefficient-action-adjoint-generation and coef semi-free-replacement. Route-pivot check: step 1 cited the dropped machinery nodes lem-coef-dg-module-projective-resolution (which states an enhanced localization) and lem-coef-dg-semi-free-homotopically-projective, only to get Hom_D(A[n],M)=H^{-n}(M). The existing same-unit node lem-sfb-dg-free-shift-derived-hom (Stacks 09K1/09KY) states exactly this bijection, natural in M. FIX 1: step 1 now cites it instead of both lem-coef nodes; proof_deps and split_report.tool_uses are updated. The phrase 'one-object dg category' is gone, and the remaining dg vocabulary is part of the item's fixed statement, which is 1-categorical Stacks dg algebra. FIX 2: the new node lacked merged_into and lean_audit; I added null and none/none. Steps checked: step 1 compactness via componentwise cycles and boundaries plus naturality on coprojections, with the A[k] sign checked; step 2 localizing closure equals D by the devissage and two-out-of-three by rotation, then the localizing Hom test; step 3 compact-test adjoint criterion. Its cited node assumes the target is locally small, which the item does not state for its target, but the step's explicit coprojection computation does without it (advisory). Step 4 is the shift-saturated iso locus for id and RT, with the unit invertible on A[k] by shift compatibility; step 5 is unit cancellation. The three generic tool_uses are accepted. No SGA is cited. Maintainer note: free-shift-derived-hom (Q40) and free-module-hom-cohomology (Q89) are near-duplicates outside this delivery.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DgAdjunctionCompactUnit",
+  "declaration": "CategoryTheory.DgAlgebra.adjunction_unit_isIso_of_compact_regular",
+  "file": "lean/Sheaf/CategoryTheory/DgAdjunctionCompactUnit.lean",
+  "statement": "theorem adjunction_unit_isIso_of_compact_regular (A : Algebra.{u}) [DerivedStructure A] {C : Type v} [Category.{w} C] [Preadditive C] [HasZeroObject C] [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] [IsTriangulated C] [HasCoproducts.{u} C] (T : Derived A ⥤ C) (R : C ⥤ Derived A) [T.CommShift ℤ] [R.CommShift ℤ] [T.IsTriangulated] [R.IsTriangulated] (adj : T ⊣ R) [adj.CommShift ℤ] (hcoproducts : ∀ I : Type u, PreservesColimitsOfShape (Discrete I) T) (hcompact : IsCompactObject.{u} (T.obj ((Q A).obj (regular A)))) (hunit : IsIso (adj.unit.app ((Q A).obj (regular A)))) : (∀ M : Derived A, IsIso (adj.unit.app M)) ∧ ∀ M N : Derived A, Function.Bijective (T.map : (M ⟶ N) → (T.obj M ⟶ T.obj N))",
+  "branch": "sheaf-dag",
+  "by": "Q16",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b510e349a",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Item adjunction_unit_isIso_of_compact_regular matches every clause of lem-sfb-dg-adjunction-compact-unit and Stacks 09LZ: exact T,R (CommShift+IsTriangulated), adj.CommShift, T preserves Discrete-I colimits for I:Type u (empty included), IsCompactObject.{u} at T(Q regular), unit iso at Q regular => unit iso everywhere and T.map bijective; no extra hypotheses; statement verbatim; docstring has source, blueprint tag and 5 steps; sorry only. New def-sfb-dg-derived-category: real Mon/Mod/localization defs; ShiftComparison has an unchanged right action (Stacks definition-shift-graded-module, Leibniz sign checked); ConeComparison fixes componentwise action, inr and mor3; DerivedStructure class pins additive structure, shift on all morphisms and distinguished triangles via distinguished_iff; inhabited by the standard structure and the item holds for every instance. No duplicate (SmallDgCategory/DgAbc are dg categories; no DgAlgebra namespace live, in Mathlib or in other runs). Advisories: shiftIso fixed only up to a global central/sign twist; possibly unused public imports in the def module. No file changed, no compile run."
+ }
+}

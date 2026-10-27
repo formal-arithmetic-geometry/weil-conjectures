@@ -1,0 +1,168 @@
+{
+ "id": "lem-sfb-integral-affine-purity-induction",
+ "kind": "statement",
+ "title": "Affine purity by the standard chart and coordinate induction",
+ "statement": "Fix ell, E and k as in [sk-def-sfb-dc-setting], a separated finite-type k-scheme Y, and a natural d. Let p:A^d_Y -> Y. Given preservation hp for the specified p^*(-)(d)[2d], a boundary compactification c of p, and preservation h for its compact-support image, the exact restricted lowerShriek(c,h) is left adjoint to restrictedPull(p,d,hp) from [def-sfb-integral-restriction-functors]. The assertion supplies neither the preservation proofs nor a Brown comparison. It follows from the projective-line adjunction by the standard chart and coordinate induction.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md",
+  "place": "Paragraph (2), the standard affine chart, dimension-zero case and coordinate induction"
+ },
+ "stmt_deps": [
+  "def-sfb-integral-restriction-functors",
+  "sk-def-sfb-dc-setting",
+  "sk-def-localizing-closure"
+ ],
+ "proof": [
+  {
+   "text": "Uniformly over every standing base, use signed Tate-line constructibility, integral tensor and pullback stability, and shift stability to preserve Dbc under every specified twist-shift pullback. The preimage argument for the minimal replete localizing closure extends preservation to Loc(Dbc): the unshifted functors are triangulated left adjoints, so their preimages are triangulated and closed under sums. Untwisted open pullback has the same property.",
+   "uses": [
+    "lem-sfb-integral-tate-line-constructible",
+    "sk-lem-int-tensor",
+    "lem-sfb-adic-constructibility-predicate-comparison",
+    "det-def-localizing-closure-existence",
+    "def-sfb-module-derived-pushpull-adjunction",
+    "det-proper-base-change-unbounded-pullback",
+    "lem-sfb-dc-ell-adic-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For A1_T use its standard open chart j into P1_T. The source is quasi-compact and the target is quasi-separated, so the chart is quasi-compact. Apply compact-support preservation to the open compactification (j, identity), and identify the identity proper pushforward with the identity functor using the right-derived identity comparison. Thus extension by zero preserves Loc(Dbc), so the open adjunction restricts by fullness. Apply the projective-line adjunction at T with the preservation just proved. Composing the two adjunctions gives R(qj)_! left adjoint to j^*q^*(-)(1)[2]. Cartesian coefficients and pullback composition identify this with u^*(-)(1)[2]. Compactification independence identifies the left functor with every chosen compact-support functor.",
+   "uses": [
+    "def-amb-affine-trace-tower",
+    "def-sfb-dc-open-lower-shriek-adjunction",
+    "lem-sfb-integral-projective-line-adjunction",
+    "def-weil-pbc-composite-adjunction",
+    "sk-def-sfb-module-pushforward-pullback",
+    "sk-prop-sfb-cartesian-coefficients",
+    "det-prop-int-brown-construction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on d with the claim that the specified compact-support projection is left adjoint to p_d^*(-)(d)[2d]. For zero, A^0_Y is canonically Y; the zero tensor power and shift are units. Transport the identity adjunction through that scheme isomorphism and the identity compactification. For the successor identify A^(d+1)_Y with A1_(A^d_Y), and compose the affine-line adjunction with the induction adjunction. Pullbacks compose, Cartesian twists pull back to the same twists, tensor powers add and shifts add. All shifts are even. Compact-support composition and compactification independence transport the resulting adjunction to the precise lowerShriek(c,h). Fullness and proof irrelevance identify the codomain restrictions with restrictedPull(p_d,d,hp). Work first with affineTraceTower. For the zero case and final coordinate isomorphism, view the scheme isomorphism as an open immersion, restrict its open extension/pullback adjunction, and compare its open compactification with the chosen compactification. The identity proper pushforward is identified using the right-derived identity comparison. The section-module tensor comparison identifies zero and positive Tate powers. The two opposite signed-power tensor comparisons make tensor by the degree-one line an equivalence, hence exact and flat; a K-flat single-complex model identifies the derived tensor of successive degree-zero powers with their ordinary tensor. Strong monoidality of derived pullback and its shift comparison give the successor functor isomorphism. Compactifications over the field supply the two factors.",
+   "uses": [
+    "def-amb-affine-trace-tower",
+    "def-weil-pbc-composite-adjunction",
+    "det-prop-int-brown-construction",
+    "sk-def-sfb-module-pushforward-pullback",
+    "sk-prop-sfb-cartesian-coefficients",
+    "sk-def-sp-tate-twist",
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-weil-signed-line-tensor-equivalence",
+    "lem-sfb-derived-pullback-strong-monoidal",
+    "def-sfb-compactification-over-field",
+    "lem-weil-pbc-source-kflat-tensor-single-model",
+    "lem-c2-internal-section-module-flatness"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-integral-tate-line-constructible",
+  "sk-lem-int-tensor",
+  "lem-sfb-adic-constructibility-predicate-comparison",
+  "det-def-localizing-closure-existence",
+  "def-sfb-module-derived-pushpull-adjunction",
+  "det-proper-base-change-unbounded-pullback",
+  "lem-sfb-dc-ell-adic-triangulated",
+  "def-amb-affine-trace-tower",
+  "def-sfb-dc-open-lower-shriek-adjunction",
+  "lem-sfb-integral-projective-line-adjunction",
+  "def-weil-pbc-composite-adjunction",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-prop-sfb-cartesian-coefficients",
+  "det-prop-int-brown-construction",
+  "sk-def-sp-tate-twist",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-weil-signed-line-tensor-equivalence",
+  "lem-sfb-derived-pullback-strong-monoidal",
+  "def-sfb-compactification-over-field",
+  "lem-weil-pbc-source-kflat-tensor-single-model",
+  "lem-c2-internal-section-module-flatness",
+  "lem-route-sp-twists-locally-free"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md",
+  "place": "Paragraph (2); J9 formal coordinate-tower induction and explicit functor comparisons"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Purity adjunction for affine space obtained by composing open extension by zero and projective line adjunction",
+   "results": "8 hits; Topology.IsInducing.adjunction, IsOpenMap.adjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, IsOpenMap.adjunctionNhds, AlgebraicGeometry.IsAffineOpen.fromSpec_toSpecΓ, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly_assoc, Topology.IsInducing.adjunctionNhds",
+   "date": "2026-10-24",
+   "verdict": "No exact match: the hits supply general categorical or sheaf tools, but not this integral condensed-module assertion.",
+   "subdirectory": ""
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compactly supported pushforward for affine space is left adjoint to Tate twisted pullback shifted by twice the dimension",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, SheafOfModules.pushforwardPushforwardAdj, TopCat.Sheaf.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous",
+   "date": "2026-10-24",
+   "verdict": "No exact match: the hits supply general categorical or sheaf tools, but not this integral condensed-module assertion.",
+   "subdirectory": ""
+  },
+  {
+   "tool": "grep",
+   "query": "\\bTate\\b|purity|exceptionalInverse|compactSupportAdjunction",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "No exact match: the hits supply general categorical or sheaf tools, but not this integral condensed-module assertion.",
+   "subdirectory": "--sub"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralRestrictionLine",
+  "date": "2026-10-24",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-int-restriction-line",
+   "place": "Paragraph (2), the standard affine chart, dimension-zero case and coordinate induction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-int-restriction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralAffinePurityInduction",
+  "file": "lean/Sheaf/SixFunctors/IntegralAffinePurityInduction.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.IntegralRestriction.integralAffinePurity_induction",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralRestriction.integralAffinePurity_induction"
+  ],
+  "statement": "theorem integralAffinePurity_induction\n    (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]\n    (Y : Scheme.{u}) [Y.Over (Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    [IsSeparated (Y ↘ Spec (.of k))]\n    (d : ℕ)\n    (hp : ∀ K, IntegralCompactSupport.localizing\n        (Profinite.padicIntegersRingObj ℓ E.val) Y K →\n      IntegralCompactSupport.localizing (Profinite.padicIntegersRingObj ℓ E.val)\n        (AffineSpace (ULift.{u} (Fin d)) Y)\n        ((pullTwistShift ℓ E (AffineSpace (ULift.{u} (Fin d)) Y ↘ Y) d).obj K))\n    (c : Compactification.BoundaryCompactification\n      (AffineSpace (ULift.{u} (Fin d)) Y ↘ Y))\n    (h : ∀ K, IntegralCompactSupport.localizing (Profinite.padicIntegersRingObj ℓ E.val)\n        (AffineSpace (ULift.{u} (Fin d)) Y) K →\n      IntegralCompactSupport.localizing (Profinite.padicIntegersRingObj ℓ E.val) Y\n        ((IntegralCompactSupport.image (Profinite.padicIntegersRingObj ℓ E.val)\n          c.obj.obj).obj K)) :\n    Nonempty (IntegralCompactSupport.lowerShriek\n      (Profinite.padicIntegersRingObj ℓ E.val) c.obj.obj h ⊣\n        restrictedPull ℓ E (AffineSpace (ULift.{u} (Fin d)) Y ↘ Y) d hp)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-d6edb",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261024T204607-L-3799780",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261025T123209-L-1842385",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

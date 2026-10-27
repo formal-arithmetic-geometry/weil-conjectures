@@ -1,0 +1,307 @@
+{
+ "id": "lem-sfb-commutative-torsor-positive-weight",
+ "kind": "statement",
+ "title": "Positive-weight morphism from a commutative algebraic-group torsor",
+ "statement": "Let $k$ be a field [def-weil-field], and let $H$ be a smooth separated commutative $k$-group scheme of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-pbc-scheme-conventions], geometrically integral in the sense that it remains nonempty and integral [def-pc-integral-scheme] after every field extension. Let $V$ be a $k$-scheme of finite type with a right $H$-action $a:V\\times_kH\\to V$ (associative and unital). Assume that $V\\to\\operatorname{Spec}k$ is flat and surjective and that $(\\operatorname{pr}_1,a):V\\times_kH\\to V\\times_kV$ is an isomorphism [def-pc-fibre-product]. Thus $V$ is a torsor under $H$; no $k$-point of $V$ is assumed. There exist a positive integer $n$ and a $k$-scheme morphism $\\phi:V\\to H$ such that, as morphisms $V\\times_kH\\to H$,\n$$\\phi\\circ a=m_H\\circ(\\phi\\circ\\operatorname{pr}_1,[n]_H\\circ\\operatorname{pr}_2).$$\nHere $m_H$ is the group law and $[n]_H$ is its $n$-fold sum map. Equivalently, for every $k$-scheme $T$ and every $v\\in V(T)$ and $h\\in H(T)$, $\\phi(v+h)=\\phi(v)+nh$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 8.22, printed p.152, including its proof: n is 1 for a rational point and otherwise the positive degree of a finite separable residue extension. The equality is an equality of morphisms, not only of rational points."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-integral-scheme",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Write $S=\\operatorname{Spec}k$ and $f:V\\to S$. It is flat and surjective by hypothesis and quasi-compact because it is of finite type. Base change of $H\\to S$ along $f$ is smooth by [lem-pc-proper-base-change](2). The given isomorphism $(\\operatorname{pr}_1,a)$ identifies that projection $V\\times_kH\\to V$ with $V\\times_kV\\to V$. Thus the base change of $f$ along itself is smooth. Apply [lem-trf-smooth-fpqc-base-descent] with $X=Y'=V$, $Y=S$ and $g=f$ to conclude that $V\\to S$ is smooth. Smoothness is unchanged by the displayed isomorphism: its local finite presentation and infinitesimal lifting conditions are transported by the inverse, as in [def-sbc-smooth-morphisms]. Since $f$ is surjective, $V$ is nonempty.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-trf-smooth-fpqc-base-descent",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 8.22, printed p.152, proof (torsor trivialization, finite separable point and Galois sum); expanded fpqc descent details."
+   }
+  },
+  {
+   "text": "By [lem-pc-dense-separable-points], the nonempty smooth $V$ has a closed point $P$ with finite separable residue field $K/k$. Apply [lem-weil-pbc-finite-galois-receiving-separable-extensions] to the one extension $K/k$ to obtain a finite Galois extension $L/k$ and a $k$-embedding $K\\to L$. Composing $\\operatorname{Spec}L\\to\\operatorname{Spec}K$ with the residue-field point gives $p\\in V(L)$. Here finite Galois means finite-dimensional, separable and normal; no perfectness assumption on $k$ is used.",
+   "uses": [
+    "lem-pc-dense-separable-points",
+    "lem-weil-pbc-finite-galois-receiving-separable-extensions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 8.22, printed p.152, proof (torsor trivialization, finite separable point and Galois sum); expanded fpqc descent details."
+   }
+  },
+  {
+   "text": "Over any field extension $E/k$ and any $b\\in V(E)$, pull the torsor isomorphism back along $b$ in the first $V$ coordinate. This gives the isomorphism $t_b:H_E\\to V_E$, $h\\mapsto b+h$. Its inverse $d_b:V_E\\to H_E$ is a scheme morphism, with $b+d_b(v)=v$ for every $E$-scheme $T$ and $v\\in V_E(T)$. Associativity and the uniqueness of this difference give $d_b(v+h)=d_b(v)+h$ on every such $T$. These equations are equations of morphisms: evaluate the formulas on the identity of their source, using the fibre-product universal property [def-pc-fibre-product] and the group diagrams [def-sc-group-scheme].",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-sc-group-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 8.22, printed p.152, proof (torsor trivialization, finite separable point and Galois sum); expanded fpqc descent details."
+   }
+  },
+  {
+   "text": "Put $\\Gamma=\\operatorname{Aut}_k(L)$. The finite Galois tensor decomposition [lem-exc-finite-galois-tensor-decomposition](1), followed by [lem-exc-finite-galois-algebra-tensor-decomposition], gives $\\operatorname{Spec}(L\\otimes_kL)\\simeq\\coprod_{\\sigma\\in\\Gamma}\\operatorname{Spec}L$; on its $\\sigma$ component the projections are the identity and $\\operatorname{Spec}\\sigma$. In particular the indexing group is finite; it is nonempty because it contains the identity. Set $n=|\\Gamma|>0$. Define the $L$-morphism $F:V_L\\to H_L$ by $F=\\sum_{\\sigma\\in\\Gamma}d_{\\sigma p}$. Here $\\sigma p=p\\circ\\operatorname{Spec}\\sigma$, viewed as an $L$-point of $V_L$, and the finite sum uses the multiplication of the commutative group scheme $H_L$. Repeated points in this indexed family are retained. For each $\\tau\\in\\Gamma$, transport along the canonical semilinear $\\tau$-actions on $V_L,H_L$ carries $d_b$ to $d_{\\tau b}$: apply $\\tau$ to $b+d_b(v)=v$ and use uniqueness in the torsor isomorphism. Since $\\tau$ permutes the family $(\\sigma p)_\\sigma$, and addition is commutative, it fixes $F$.",
+   "uses": [
+    "lem-exc-finite-galois-tensor-decomposition",
+    "lem-exc-finite-galois-algebra-tensor-decomposition",
+    "def-sc-group-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 8.22, printed p.152, proof (torsor trivialization, finite separable point and Galois sum); expanded fpqc descent details."
+   }
+  },
+  {
+   "text": "The singleton $\\operatorname{Spec}L\\to S$ is an fpqc covering [def-weil-pbc-fpqc-covering]: flatness is [lem-weil-pbc-field-extension-base-change-faithfully-flat] with $D=k$, both spectra have one point, and the source is affine. On the component labelled by $\\tau$ of its double overlap, the compatibility of $F$ with the canonical descent data is precisely its $\\tau$-invariance from step 4, because the two projections are the identity and $\\operatorname{Spec}\\tau$. Hence that compatibility holds on the whole disjoint union. The surjectivity onto compatible morphisms in [lem-galois-fpqc-morphisms-descend], with $U=V$ and $W=H$, gives a $k$-morphism $\\phi:V\\to H$ whose scalar extension is $F$.",
+   "uses": [
+    "def-weil-pbc-fpqc-covering",
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "lem-galois-fpqc-morphisms-descend"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 8.22, printed p.152, proof (torsor trivialization, finite separable point and Galois sum); expanded fpqc descent details."
+   }
+  },
+  {
+   "text": "Step 3 gives, for every $L$-scheme $T$ and $(v,h)\\in(V_L\\times_LH_L)(T)$, the equality $F(v+h)=\\sum_{\\sigma}(d_{\\sigma p}(v)+h)=F(v)+nh$. The middle equality is finite distributivity in the abelian group $H_L(T)$: by induction, adding the next term adds one more $h$. Thus this is the required equality of $L$-morphisms, by evaluating at the identity of $V_L\\times_LH_L$. The map $[n]$ is the repeated-sum group-scheme morphism from [def-sc-group-scheme], and this construction commutes with scalar extension because its structure maps do.",
+   "uses": [
+    "def-sc-group-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 8.22, printed p.152, proof (torsor trivialization, finite separable point and Galois sum); expanded fpqc descent details."
+   }
+  },
+  {
+   "text": "Apply the injectivity in [lem-galois-fpqc-morphisms-descend] for the same cover, now with $U=V\\times_kH$ and $W=H$, to the two $k$-morphisms $\\phi\\circ a$ and $m_H\\circ(\\phi\\circ\\operatorname{pr}_1,[n]_H\\circ\\operatorname{pr}_2)$. Their base changes agree by step 6, so they agree over $k$. Together with $n>0$ this proves the statement. If $V(k)$ already contains $b$, step 3 itself gives $\\phi=d_b$ with $n=1$; the general construction needs no rational point over $k$ and no division by $n$.",
+   "uses": [
+    "lem-galois-fpqc-morphisms-descend"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 8.22, printed p.152, proof (torsor trivialization, finite separable point and Galois sum); expanded fpqc descent details."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-proper-base-change",
+  "lem-trf-smooth-fpqc-base-descent",
+  "def-sbc-smooth-morphisms",
+  "lem-pc-dense-separable-points",
+  "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+  "def-pc-fibre-product",
+  "def-sc-group-scheme",
+  "lem-exc-finite-galois-tensor-decomposition",
+  "lem-exc-finite-galois-algebra-tensor-decomposition",
+  "def-weil-pbc-fpqc-covering",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "lem-galois-fpqc-morphisms-descend"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 8.22, printed p.152, proof (torsor trivialization, finite separable point and Galois sum); expanded fpqc descent details."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a torsor V under a smooth connected commutative algebraic group G over a field there exists a morphism V to G with phi(v plus g) equals phi(v) plus n times g for some positive integer n",
+   "results": "8 hits; ; logged top results: AffineEquiv.constVAddHom, Equiv.vaddConst, AffineEquiv.constVAdd_nsmul, AddTorsor.connectedSpace, AffineEquiv.constVAddHom_apply, ContinuousAffineEquiv.constVAdd, Homeomorph.vaddConst_apply, addInvariantVectorField_eq_mpullback",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract AddTorsor differences and affine equivalences do not construct or descend a scheme morphism; Representation.averageMap requires a linear representation and invertible cardinality, neither assumed here"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Averaging the differences from a finite separable closed point of an algebraic group torsor gives an equivariant map of positive weight",
+   "results": "8 hits; ; logged top results: Representation.averageMap, Finset.centerMass, Representation.averageMap_invariant, Representation.isProj_averageMap, Finset.weightedVSubOfPoint_smul, Finset.sum_smul_vsub_const_eq_weightedVSubOfPoint_sub, Finset.sum_smul_vsub_eq_weightedVSubOfPoint_sub, Equiv.vaddConst",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract AddTorsor differences and affine equivalences do not construct or descend a scheme morphism; Representation.averageMap requires a linear representation and invertible cardinality, neither assumed here"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"torsor\"",
+   "results": "0 hits; ; logged top results: ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract AddTorsor differences and affine equivalences do not construct or descend a scheme morphism; Representation.averageMap requires a linear representation and invertible cardinality, neither assumed here"
+  },
+  {
+   "tool": "grep",
+   "query": "torsor|Torsor",
+   "results": "0 hits; ; logged top results: ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract AddTorsor differences and affine equivalences do not construct or descend a scheme morphism; Representation.averageMap requires a linear representation and invertible cardinality, neither assumed here"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A principal homogeneous space under a commutative algebraic group admits a morphism to the group equivariant for a positive integer multiplication",
+   "results": "8 hits; ; logged top results: CategoryTheory.PreGaloisCategory.IsFundamentalGroup.toIsNaturalSMul, GrpCat.SurjectiveOfEpiAuxs.one_smul, CategoryTheory.PreGaloisCategory.toAut_surjective_of_isPretransitive, Projectivization.smul_def, AddAction.IsMultiplyPretransitive, GrpCat.SurjectiveOfEpiAuxs.instSMulCarrierXWithInfinity, NumberField.mixedEmbedding.fundamentalCone.instMulActionSubtypeUnitsRingOfIntegersMemSubgroupTorsionElemMixedSpaceIntegerSet, Projectivization.instMulAction",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract AddTorsor differences and affine equivalences do not construct or descend a scheme morphism; Representation.averageMap requires a linear representation and invertible cardinality, neither assumed here"
+  },
+  {
+   "tool": "grep",
+   "query": "torsor|Torsor",
+   "results": "0 hits; top: ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract additive torsors, affine-space maps or scheme-smoothness definitions do not state existence of this positive-weight scheme morphism."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Summing differences from conjugate points on a commutative algebraic group torsor descends to a morphism of schemes",
+   "results": "8 hits; top: LinearMap.sumOfConjugates_apply, LinearMap.sumOfConjugates, Equiv.vaddConst, AlgebraicGeometry.Scheme.Modules.Hom.sub_app, AddTorsor.toVSub, AddTorsor.mk, AlgebraicGeometry.Proj.sub_apply, AlgebraicGeometry.Scheme.Hom; ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract additive torsors, affine-space maps or scheme-smoothness definitions do not state existence of this positive-weight scheme morphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"torsor\"",
+   "results": "0 hits; top: ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract additive torsors, affine-space maps or scheme-smoothness definitions do not state existence of this positive-weight scheme morphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A torsor under a smooth commutative algebraic group over a field admits a morphism to the group equivariant for multiplication by a positive integer",
+   "results": "8 hits; top: AffineEquiv.constVAdd_nsmul, AffineEquiv.constVAddHom, AffineEquiv.constVAdd_zsmul, AddTorsor.toVSub, AffineEquiv.constVAddHom_apply, Equiv.vaddConst, Equiv.constVAddHom, addGroupIsAddTorsor; ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract additive torsors, affine-space maps or scheme-smoothness definitions do not state existence of this positive-weight scheme morphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A principal homogeneous scheme for a commutative group over a field has a regular map to that group of nonzero positive weight, by finite Galois descent",
+   "results": "8 hits; top: AlgebraicGeometry.AffineSpace, AlgebraicGeometry.AffineSpace.over, AlgebraicGeometry.AffineSpace.instIsOverHomOfVectorOverSchemeInferInstanceOverClass, AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass, AlgebraicGeometry.AffineSpace.homOfVector, AlgebraicGeometry.AffineSpace.map, AlgebraicGeometry.AffineSpace.homOverEquiv_apply, AlgebraicGeometry.AffineSpace.homOfVector_over; ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract additive torsors, affine-space maps or scheme-smoothness definitions do not state existence of this positive-weight scheme morphism."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A faithfully flat finite type torsor under a smooth group scheme is smooth over the field",
+   "results": "8 hits; top: AlgebraicGeometry.IsSmooth.casesOn, Module.FaithfullyFlat.toFlat, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.IsSmooth, Algebra.Smooth.flat, AlgebraicGeometry.IsSmooth.mk, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth; ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract additive torsors, affine-space maps or scheme-smoothness definitions do not state existence of this positive-weight scheme morphism."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-inclusion-multiple-retraction",
+  "date": "2026-10-23",
+  "group": "Q103"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Theorem 10.15, printed p.49 (finite free Hom conclusion); §10 endomorphism-ring convention, printed pp.42–43. Supporting argument: Chapter I, Proposition 10.1 and the simple-factor discussion following Remark 10.2, printed pp.42–43; Remark 8.6, printed p.36 (quasi-inverse isogenies). Auxiliary for this split: An abelian inclusion retracts up to a positive integer. Supporting input: Lemma 8.22, printed p.152, including its proof: n is 1 for a rational point and otherwise the positive degree of a finite separable residue extension. The equality is an equality of morphisms, not only of rational points.",
+   "via": [
+    "lem-sfb-abelian-inclusion-multiple-retraction",
+    "lem-sfb-simple-isogeny-decomposition",
+    "lem-sfb-abelian-hom-finite-free",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-commutative-torsor-positive-weight",
+  "worker": "stage1",
+  "summary": "Followed Milne Lemma 8.22, expanded smoothness, difference morphisms and fpqc descent; reused all prerequisite nodes, with no new nodes. Sum over all Galois conjugates with multiplicity, so n is the positive cardinality of the finite Galois group; a rational point permits n=1.",
+  "blueprint": "The inherited from.place records det-thm-sf-ctf-stability-direct-images proof (3), alteration prerequisite chain, ending in Milne Lemma 8.22. The current latest proof (3) is read; the present auxiliary group argument retains the inherited route and introduces no replacement of a chapter or unit. blueprint_refs.py ancestor returns None, retained as inherited.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Smooth base change for the torsor projection; no same-unit node covers arbitrary smooth schemes."
+   },
+   {
+    "node": "lem-pc-dense-separable-points",
+    "why": "Finite separable closed point on the smooth torsor; this is a general smooth-scheme tool, not a different torsor route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+    "why": "Embed the residue extension into a finite Galois extension, exactly Milne 8.22 normal-closure step."
+   },
+   {
+    "node": "lem-exc-finite-galois-tensor-decomposition",
+    "why": "Algebra tensor decomposition on the finite Galois double overlap; no coefficient/sheaf theorem is being substituted."
+   },
+   {
+    "node": "lem-exc-finite-galois-algebra-tensor-decomposition",
+    "why": "Identify the overlap projections to check the actual descent equation."
+   },
+   {
+    "node": "lem-galois-fpqc-morphisms-descend",
+    "why": "Full faithfulness for arbitrary scheme morphisms, used for existence of phi and reflection of its equivariance equation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "lem-pc-dense-separable-points",
+  "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+  "lem-exc-finite-galois-tensor-decomposition",
+  "lem-exc-finite-galois-algebra-tensor-decomposition",
+  "lem-galois-fpqc-morphisms-descend"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q69-9e38f0d17",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-9e38f0d17 (reviewer sub-agent of L); spot-checked: Read Milne Algebraic Groups (2017) Lemma 8.22, printed p.152, and its proof in the local PDF. The item's statement and stmt_deps are byte-identical to clones/live and clones/side-live, where the item is unsplit with no proof, so nothing was weakened. 'Flat', 'surjective', 'finite type' and 'separated' are covered by the cited def-weil-pbc-scheme-conventions. There are no new nodes. Step 1: lem-pc-proper-base-change(2) is smoothness of morphisms stable under base change (Stacks 01VB), not the cohomological smooth base change theorem; the torsor isomorphism identifies V×H→V with V×V→V; the trf descent leaf applies with X=Y'=V, g=f (flat, surjective, quasi-compact from finite type); V is nonempty by surjectivity. Step 2: 056U density gives a closed point with finite separable residue field K; the Galois-receiving lemma with n=1 gives p∈V(L). Step 3: the difference morphism d_b and d_b(v+h)=d_b(v)+h follow from uniqueness and associativity of the action; elementary. Step 4: I checked the tensor decomposition and the projections on each component (identity and Spec σ). n=|Γ|>0 because the identity is in Γ. τ-invariance of F=Σd_{σp} holds because Γ permutes the family and H is commutative; the 'transport' is spelled out in the step. Step 5: Spec L→Spec k is an fpqc covering by faithful flatness with D=k. On each component of the double overlap the descent equation is exactly τ-invariance, so lem-galois-fpqc-morphisms-descend (02W0), stated for arbitrary U and W, gives φ. Step 6: F(v+h)=F(v)+nh with no division, so it holds for n=1 and when char k divides n. Step 7: the injective half of the same descent bijection with U=V×H descends the equation. proof_deps equal the union of the step uses, there is no cycle, and rg -L found no duplicate node. Batch-5 flag on lem-trf-smooth-fpqc-base-descent: it is a Mathlib leaf (of_pullback_snd_of_descendsAlong with the Smooth DescendsAlong instance in LocalFlatDescent.lean:41-42), i.e. Stacks 02VL 'smoothness is fpqc local on the base', with no proof_deps. That is a generic descent fact, not part of the trace formula or Poincaré duality, so it is accepted. The tool_uses for the generic Galois, descent and smoothness lemmas are accepted. No SGA is cited. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CommutativeTorsorPositiveWeight",
+  "declaration": "AlgebraicGeometry.commutative_torsor_positive_weight",
+  "file": "lean/Sheaf/AlgebraicGeometry/CommutativeTorsorPositiveWeight.lean",
+  "statement": "theorem commutative_torsor_positive_weight (k : Type u) [Field k] (H V : Over (Spec (.of k))) [GrpObj H] [IsCommMonObj H] [Smooth H.hom] [IsSeparated H.hom] [LocallyOfFiniteType H.hom] [QuasiCompact H.hom] [GeometricallyIntegral H.hom] [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [Flat V.hom] [Surjective V.hom] (a : V ⊗ H ⟶ V) (hunit : ∀ (T : Over (Spec (.of k))) (v : T ⟶ V), lift v 1 ≫ a = v) (hassoc : ∀ (T : Over (Spec (.of k))) (v : T ⟶ V) (g h : T ⟶ H), lift (lift v g ≫ a) h ≫ a = lift v (g * h) ≫ a) [IsIso (lift (fst V H) a)] : ∃ (n : ℕ), 0 < n ∧ ∃ (φ : V ⟶ H), a ≫ φ = lift (fst V H ≫ φ) (snd V H ≫ (𝟙 H ^ n)) ≫ μ[H]",
+  "branch": "newtargets-dag",
+  "by": "Q69",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d3a78f3e6",
+  "group": "Q69",
+  "result": "pass",
+  "note": "Only the item's lean field changed vs side-live; the 6 stmt_dep records are byte-identical; no new nodes or dep modules. Clause by clause: Field k; H : Over (Spec k) with GrpObj, IsCommMonObj, Smooth, IsSeparated, LocallyOfFiniteType+QuasiCompact (finite type) and GeometricallyIntegral (Mathlib geometrically IsIntegral over all Type-u fields, nonempty included); V of finite type, Flat, Surjective; a : V⊗H⟶V in Over (fibre product over k); hunit/hassoc are the right-action laws on all test schemes (Yoneda); IsIso (lift fst a) is the torsor condition; no k-point assumed. Conclusion ∃ n>0 ∃ φ, a≫φ = lift (fst≫φ) (snd≫𝟙^n) ≫ μ is an equality of morphisms with [n] = 𝟙^n, quantifiers in node order. Nothing stronger is assumed; char p | n allowed; single universe u. Statement verbatim; source-place, blueprint and 7-step docstrings present; sorry only, no definitions; imported proof-dep modules exist in side-live; no duplicate in the project or Mathlib. Not compiled (no changes); worker reports a clean scompile. No findings."
+ }
+}

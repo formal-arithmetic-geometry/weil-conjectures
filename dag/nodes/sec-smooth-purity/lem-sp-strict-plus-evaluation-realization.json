@@ -1,0 +1,108 @@
+{
+ "id": "lem-sp-strict-plus-evaluation-realization",
+ "kind": "statement",
+ "title": "Bounded-below evaluation comparison for strict operations",
+ "statement": "For each strict base and operation with enough injectives on coefficient towers and levels, the canonical evaluation comparison satisfies StrictPlusEvaluation. The comparison interfaces and all normalized maps are those of [def-sp-strict-compactification-comparison-interfaces].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "the bounded-below evaluation comparison in operations proof (2)"
+ },
+ "stmt_deps": [
+  "def-sp-strict-compactification-comparison-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the canonical right-derived adjunction along the fully faithful bounded-below inclusion. Use uniqueness of right derived functors and naturality of the canonical comparison isomorphisms; for evaluation, conjugate the ordinary evaluation square and cancel the fully faithful inclusion.",
+   "uses": [
+    "def-sp-strict-compactification-comparison-interfaces",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-strict-compactification-comparison-interfaces",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-right-derived-plus-injective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "the bounded-below evaluation comparison in operations proof (2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "restrict right derived adjunction bounded below canonical inclusion evaluation comparison",
+   "results": "8 hits including Adjunction.derivedη_fac_app, derivedε_fac_app and rightDerivedFunctorComparison.",
+   "date": "2026-10-25",
+   "verdict": "Use the fully faithful restriction construction and canonical inclusion comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.restrictFullyFaithful",
+   "results": "6 hits, including restrictFullyFaithful and map_restrictFullyFaithful_unit_app/counit_app.",
+   "date": "2026-10-25",
+   "verdict": "Used for the canonical unit and counit equations."
+  },
+  {
+   "tool": "grep",
+   "query": "fullyFaithfulCancelRight|map_restrictFullyFaithful_unit_app",
+   "results": "14 hits, including Mathlib.CategoryTheory.Functor.FullyFaithful and Adjunction.Restrict.",
+   "date": "2026-10-25",
+   "verdict": "Used for the lift through the fully faithful derived inclusion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothPurityStrictCompactificationComparisonRealization",
+  "date": "2026-10-25",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-shriek-levels",
+   "place": "(2), bounded-below derived comparisons",
+   "via": [
+    "lem-sp-strict-compactification-comparison-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-tower-bound",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SmoothPurityStrictPlusEvaluationRealization",
+  "file": "lean/Sheaf/Paper/SmoothPurityStrictPlusEvaluationRealization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerShriek.strictPlusEvaluationRealization",
+  "statement": "theorem strictPlusEvaluationRealization (b : Base l E) (o : Operations l E b)\n    [∀ T : Scheme.{u}, EnoughInjectives (S l E T)]\n    [∀ (T : Scheme.{u}) (n : ℕ),\n      EnoughInjectives (proEtaleRingModules T (proEtaleConstantRing T (R l E n)))] :\n    StrictPlusEvaluation l E b o",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-44687",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261025T143221-L-967072",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-44687",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261025T143221-L-967072",
+  "kind": "interface",
+  "note": "independent cc review: Data module vs clone's item module (diff: only blueprint tag, removed proof imports and removed theorem); item theorem signature byte-identical; 3 new sorried statements vs their nodes and the pinned Base/Operations/ComparisonLevels fields; delivered modules plus importer TowerAdjointCompositorRealization compiled in sandbox (exit 0); #print axioms sorryAx traced to published proEtaleCanonicalPullbackComposition inside the Operations type and to the 3 residual statements"
+ }
+}

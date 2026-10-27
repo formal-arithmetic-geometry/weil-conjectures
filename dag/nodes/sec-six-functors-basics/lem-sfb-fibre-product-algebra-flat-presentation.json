@@ -1,0 +1,252 @@
+{
+ "id": "lem-sfb-fibre-product-algebra-flat-presentation",
+ "kind": "statement",
+ "title": "Flatness and finite presentation of algebras over a ring fibre product",
+ "statement": "Let $A',A,B$ be commutative rings with identity, let $q:A'\\twoheadrightarrow A$ be surjective, and let $B\\to A$ be a ring map. Put $I=\\ker q$ and $R=B\\times_A A'=\\{(b,a'):b|_A=q(a')\\}$, with coordinatewise ring operations. Let $D$ be a commutative $B$-algebra, $C'$ a commutative $A'$-algebra, and $\\varphi:D\\otimes_B A\\xrightarrow{\\sim}C'/IC'$ an $A$-algebra isomorphism. Put $C=C'/IC'$ and $E=D\\times_C C'$, where $D\\to C$ is $d\\mapsto\\varphi(d\\otimes1)$. The canonical maps give $E$ its $R$-algebra structure. Then $R\\to E$ is flat if and only if $B\\to D$ and $A'\\to C'$ are flat [def-weil-pbc-flat-ring-map]. Moreover $R\\to E$ is flat and of finite presentation if and only if both $B\\to D$ and $A'\\to C'$ are flat and of finite presentation [def-weil-pbc-finitely-presented-algebra]. For every flat commutative $R$-algebra $L$, the canonical ring homomorphism\n$$L\\longrightarrow(L\\otimes_R B)\\times_{L\\otimes_R A}(L\\otimes_R A')$$\nis an isomorphism. Zero rings are allowed, and no nilpotence, finite generation or Noetherian hypothesis is imposed on $I$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 08KQ, lemma-properties-algebras-over-fibre-product, parts (2), (3) and the final assertion, in Situation 08KH (situation-module-over-fibre-product)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-finitely-presented-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-patched-module-base-change] to the underlying compatible modules $D,C'$. It gives the canonical isomorphisms $E\\otimes_R B\\simeq D$ and $E\\otimes_R A'\\simeq C'$. These are algebra isomorphisms: the maps send $(d,c')\\otimes b$ to $bd$ and $(d,c')\\otimes a'$ to $a'c'$, respectively, so preserve products and units. Thus they identify the actual structural ring maps, without a flatness assumption.",
+   "uses": [
+    "lem-sfb-patched-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 08KQ, proof opening paragraph; Tag 07RU, canonical base-change maps"
+   }
+  },
+  {
+   "text": "If $E$ is flat over $R$, the two scalar extensions in step 1 are flat by [lem-weil-pbc-flat-module-base-change]. If $E$ is also finitely presented as an $R$-algebra, they are finitely presented by [lem-weil-pbc-finite-presentation-base-change-composition](1). This proves the forward directions of both equivalences.",
+   "uses": [
+    "lem-weil-pbc-flat-module-base-change",
+    "lem-weil-pbc-finite-presentation-base-change-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 08KQ, proof opening paragraph, forward implications"
+   }
+  },
+  {
+   "text": "Conversely, if $D$ is flat over $B$ and $C'$ over $A'$, apply [lem-sfb-flat-module-fibre-product-patching] to their underlying modules. It makes $E$ flat over $R$. For a flat $R$-algebra $L$, the second assertion of that same module lemma makes the displayed canonical map for $L$ bijective. This map preserves multiplication and the unit since its two components are $l\\mapsto l\\otimes1$; a bijective ring homomorphism is a ring isomorphism. This proves the flatness equivalence and the final assertion for arbitrary flat $L$.",
+   "uses": [
+    "lem-sfb-flat-module-fibre-product-patching"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 08KQ, proof Ad (2) and final assertion; Tag 0D2I, parts (1), (2)"
+   }
+  },
+  {
+   "text": "Assume now that $D/B$ and $C'/A'$ are flat and finitely presented. Their finite polynomial presentations supply finite algebra generators $x_i$ of $D$ and $y_j$ of $C'$ [def-weil-pbc-finitely-presented-algebra]. The projection $E\\to D$ is surjective because $C'\\to C$ is, so choose lifts $u_i\\in E$ of $x_i$. The canonical surjection $E\\otimes_R A'\\to C'$ in step 1 expresses the finitely many $y_j$ as finite sums $\\sum_k a'_{jk}\\overline v_k$ for a finite list $v_k\\in E$. Consequently the images of this list generate $C'$ as an $A'$-algebra. Combining the $u_i,v_k$ gives a list $e_1,\\ldots,e_n\\in E$ whose images generate $D/B$ and $C'/A'$. Put $P=R[t_1,\\ldots,t_n]$ and evaluate $t_i\\mapsto e_i$.",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 08KQ, proof Ad (1), generator choices"
+   }
+  },
+  {
+   "text": "Write $P_B=B[t_1,\\ldots,t_n]$, $P_{A'}=A'[t_1,\\ldots,t_n]$, $P_A=A[t_1,\\ldots,t_n]$. Coefficientwise, $P=P_B\\times_{P_A}P_{A'}$ and $P_{A'}\\to P_A$ is surjective. Evaluation gives surjections $P_B\\to D$ and $P_{A'}\\to C'$, so these are cyclic, hence finite, modules over the indicated polynomial rings. Their reductions over $P_A$ identify with $C$: in $D\\otimes_{P_B}P_A$ each variable acts as the prescribed image of $e_i$, leaving precisely $D\\otimes_B A$, and likewise $C'\\otimes_{P_{A'}}P_A=C'/IC'$. The given $\\varphi$ respects these variable actions because $e_i\\in E$. Apply [lem-sfb-finite-module-fibre-product-patching] to this polynomial-ring square and these modules. It says that $E$ is finite as a $P$-module. If $w_1,\\ldots,w_m$ generate that module, then $e_1,\\ldots,e_n,w_1,\\ldots,w_m$ generate $E$ as an $R$-algebra: every element is a sum $\\sum_j f_j(e_1,\\ldots,e_n)w_j$. Enlarge the list $e_i$ by these $w_j$ and reset $P=R[t_1,\\ldots,t_n]$. Evaluation $P\\twoheadrightarrow E$ is now surjective, and both evaluated scalar extensions remain surjective.",
+   "uses": [
+    "lem-sfb-finite-module-fibre-product-patching"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 08KQ, proof Ad (1), polynomial cube and finite-module patching"
+   }
+  },
+  {
+   "text": "For the enlarged list, the kernels of $P_B\\twoheadrightarrow D$ and $P_{A'}\\twoheadrightarrow C'$ are finitely generated ideals by [lem-weil-pbc-finite-presentation-surjection-kernel-fg]. A finite generating list for such an ideal is a finite relation list for the corresponding cyclic module. Hence $D$ is finitely presented as a $P_B$-module and $C'$ as a $P_{A'}$-module [def-sc-finitely-presented-module]. Also $P$ is flat over $R$: as an $R$-module it is the direct sum of copies of $R$ indexed by monomials, and tensoring an injection with this module is the direct sum of that injection, which is injective coefficientwise [def-weil-pbc-flat-ring-map]. The identifications and compatible module comparison from step 5 hold for the enlarged list as well.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-surjection-kernel-fg",
+    "def-sc-finitely-presented-module",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 08KQ, proof Ad (3), polynomial presentation; Tag 00R2, presentation independence"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-relative-fp-module-fibre-product] with ambient algebra $S=P$ and modules $N=D$, $M'=C'$. Step 6 gives the two finite module presentations and flatness of $P/R$; their relative flatness is exactly the assumed flatness of $D/B$ and $C'/A'$. Thus $E=D\\times_C C'$ is finitely presented as a $P$-module. Apply [lem-trf-finite-presentation-surjective-module-kernel] to the surjective $P$-linear evaluation $P\\twoheadrightarrow E$. Its source is generated by $1$, so its kernel is finitely generated as a $P$-module, equivalently as an ideal of $P$. This yields a finite polynomial algebra presentation of $E/R$ [def-weil-pbc-finitely-presented-algebra]. Combined with the flatness established in step 3, this proves the reverse direction of the second equivalence.",
+   "uses": [
+    "lem-sfb-relative-fp-module-fibre-product",
+    "lem-trf-finite-presentation-surjective-module-kernel",
+    "def-weil-pbc-finitely-presented-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 08KQ, proof Ad (3); Tag 08KP, flat ambient algebra case"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-patched-module-base-change",
+  "lem-weil-pbc-flat-module-base-change",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-sfb-flat-module-fibre-product-patching",
+  "def-weil-pbc-finitely-presented-algebra",
+  "lem-sfb-finite-module-fibre-product-patching",
+  "lem-weil-pbc-finite-presentation-surjection-kernel-fg",
+  "def-sc-finitely-presented-module",
+  "def-weil-pbc-flat-ring-map",
+  "lem-sfb-relative-fp-module-fibre-product",
+  "lem-trf-finite-presentation-surjective-module-kernel"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 08KQ, proof opening paragraph, Ad (1)--(3) and final assertion; module inputs 07RU, 0D2H, 0D2I, 08KP."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Flat modules over a pullback of rings along a surjection are equivalent to compatible flat modules over the two rings",
+   "results": "Module.Flat.trans, RingHom.Flat.isStableUnderBaseChange, Module.Flat.iff_flat_tensorProduct, and faithfully flat descent; none treats compatible modules over a ring pullback.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebras over a fibre product B times A prime over A preserve flat finite presentation and recover both algebras by tensor base change",
+   "results": "Algebra.FinitePresentation.baseChange and Algebra.IsPushout describe tensor pushouts and scalar extension, not algebras over a ring pullback.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, CategoryTheory.Limits.pullback",
+   "results": "0 hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.Flat, RingHom.FinitePresentation",
+   "results": "RingHom.Etale.iff_flat_and_formallyUnramified concerns etale maps, not fibre-product algebras.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat algebras over a fibre product of rings along a surjective ring homomorphism",
+   "results": "Module.Flat.of_flat_tensorProduct requires a faithfully flat extension; other hits are definitions, flat base change and locality. None gives patching.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Patching compatible algebras over a Milnor square preserves flatness and finite presentation",
+   "results": "RingHom.Flat.isStableUnderBaseChange, Algebra.FinitePresentation.baseChange, Algebra.Smooth.baseChange, localization flatness; no ring-pullback patching theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Milnor|patching|fibre.product|fiber.product",
+   "results": "0 hits in Mathlib/RingTheory.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*[Ff]lat|[Ff]lat.*pullback|fibre.product|fiber.product",
+   "results": "Mathlib/RingTheory/Flat/Tensor.lean:14 and Flat/Basic.lean:27 say tensor preserves finite limits; they do not give the patching criterion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-scheme-pushout-flat-patching",
+  "date": "2026-10-23",
+  "group": "Q13"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D56 (lemma-curves-RS-star). Underlying flat locally finitely presented gluing used by Tag 0D56 through Tag 0D1J, first paragraph of its proof; Tag 07W3. Supporting input: Tag 07W3, reduction of (3) and of the flat counit to the scheme lemma 07RX. Supporting input: Tag 07RX reduces to the ring-algebra lemma Tag 08KQ, parts (2), (3) and final assertion.",
+   "via": [
+    "lem-sfb-scheme-pushout-flat-patching",
+    "lem-sfb-flat-lfp-space-pushout-gluing",
+    "lem-sfb-curve-infinitesimal-pushout",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-fibre-product-algebra-flat-presentation",
+  "worker": "stage1",
+  "summary": "Checked Stacks 08KQ with unrestricted surjection, retained the statement, and split the algebra proof into canonical base-change recovery, flat module patching, polynomial-generator finiteness and relative finite-presentation patching. Reused the existing module base-change and presentation-kernel leaves; three new module statements remain unsplit. Searches and review are recorded in report.md.",
+  "blueprint": "Supporting commutative-algebra input to det-thm-sf-ctf-stability-direct-images proof (3), through the inherited stable-curve / infinitesimal-pushout chain, specifically 07RX reduction to 08KQ. No chapter or unit route is changed. The inherited blueprint ancestor is null, as blueprint_refs.py ancestor reports.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q145-ed2b36d07",
+  "group": "Q145",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q145-ed2b36d07 (reviewer sub-agent of L); spot-checked: PASS, no fixes. The item is still unsplit in live and side-live. Its statement and stmt_deps are byte-identical to the base and match Stacks 08KQ (2), (3) and the 'Moreover' clause: A'->A is any surjection, B->A is any ring map, the final clause holds for every flat L, and nothing is weakened. The seven steps follow the 08KQ proof in more-algebra.tex l.1159ff. Step 1: lem-sfb-patched-module-base-change (07RU) gives the two base-change isomorphisms; the step itself shows they are multiplicative. Step 2: the forward directions come from the Mathlib leaves flat-module-base-change and finite-presentation-base-change-composition(1). Step 3: new node 0D2I(1),(2) gives the reverse flatness direction and the final clause, and a bijective ring map is a ring isomorphism. Step 4: elementary generator lifts; E->D is onto because C'->C is. Step 5: the absolute 0D2H node is applied to the square R[t] = B[t] x_{A[t]} A'[t]. The source uses the relative 08KM here, but 08KM's proof is exactly this application since E = D x_C C'. I checked that A'[t]->A[t] is onto, that D (x)_{B[t]} A[t] = D (x)_B A, and that phi is A[t]-linear because each e_i lies in E. Step 6: the 00R2 leaf (ker_fg_of_mvPolynomial) makes D and C' finitely presented cyclic modules, and R[t] is free over R. Step 7: the new node 08KP is applied with S = R[t]; its hypotheses are checked, and R[t] (x) B = B[t] is an elementary identification. Module.FinitePresentation.fg_ker then gives a finitely generated kernel, hence a finite algebra presentation. proof_deps equals the union of uses. The three new nodes state 0D2H, 0D2I(1)+(2) and 08KP with D''=D'=S flat. All are true by the source proofs and were tested on I=0, B=A, A=0, S=R, S=0 and zero modules. They are statement-only and self-contained, cite their definitions, record five logged searches each, and carry the inherited null-ancestor blueprint with correct via, same_as []. None restates a clause of the item. rg -L over the DAG for 0D2H, 0D2I, 08KP, 08KM, 08KN, 07RU, Milnor and B\\times_A A' finds no duplicate: patched-module-base-change and finite-projective-patching are different statements, and the other hits are about spectra or scheme pushouts. Route: every cited statement outside the unit is a Mathlib leaf or a definition, no tool_uses are needed, and there is no SGA. Batch-5 flag on lem-trf-finite-presentation-surjective-module-kernel: accepted. It is the Mathlib leaf Module.FinitePresentation.fg_ker (Stacks 0519), generic module algebra with no proof closure, and not a step of the trace-formula or Poincare-duality proofs."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FibreProductAlgebraFlatPresentation",
+  "declaration": "CommRingCat.FibreProductAlgebra.flat_and_finitePresentation_iff",
+  "declarations": [
+   "CommRingCat.FibreProductAlgebra.structureMap",
+   "CommRingCat.FibreProductAlgebra.baseChangeLeft",
+   "CommRingCat.FibreProductAlgebra.baseChangeRight",
+   "CommRingCat.FibreProductAlgebra.reconstruction",
+   "CommRingCat.FibreProductAlgebra.flat_and_finitePresentation_iff"
+  ],
+  "file": "lean/Sheaf/RingTheory/FibreProductAlgebraFlatPresentation.lean",
+  "statement": "theorem flat_and_finitePresentation_iff {A A' B D C' : CommRingCat.{u}} (b : B ⟶ A) (q : A' ⟶ A) (hq : Function.Surjective q) (d : B ⟶ D) (c : A' ⟶ C') (φ : pushout b d ≅ pushout q c) (hφ : pushout.inl b d ≫ φ.hom = pushout.inl q c) : ((structureMap b q d c φ hφ).hom.Flat ↔ d.hom.Flat ∧ c.hom.Flat) ∧ (((structureMap b q d c φ hφ).hom.Flat ∧ (structureMap b q d c φ hφ).hom.FinitePresentation) ↔ (d.hom.Flat ∧ d.hom.FinitePresentation) ∧ (c.hom.Flat ∧ c.hom.FinitePresentation)) ∧ (∀ (L : CommRingCat.{u}) (ℓ : pullback b q ⟶ L), ℓ.hom.Flat → IsIso (reconstruction b q ℓ))",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Canonical categorical ring pullbacks and pushouts represent precisely the coordinatewise fibre products and tensor products of the node. The A-algebra isomorphism is a ring isomorphism with its A-structure compatibility equation. The quotient C prime / I C prime is represented canonically by its pushout along the surjection q."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a35b87ec8",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 08KQ (2),(3),Moreover: CommRingCat.{u} rings with no extra binders; q surjective via hq; C'/IC' = pushout q c; φ ring iso with hφ = A-algebra compatibility; E = pullback(inr≫φ.hom, inr); structureMap = pullback.map with d,c (squares checked); reconstruction = pullback.lift inl inl over pushout.map base changes (canonical l↦(l⊗1,l⊗1)); flat L generalisation is true (stage-1 accepted). stmt_deps RingHom.Flat / Algebra.FinitePresentation existing records match. lean.statement verbatim. No duplicate in Mathlib/project, no name clash. Helpers real with docstrings, single sorry, 7-step proof docstring, both report sections. Advisory: unused plain proof imports; four proof-only deps lack Lean modules (fine at S2). No compile (no file changed)."
+ }
+}

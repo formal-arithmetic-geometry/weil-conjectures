@@ -1,0 +1,109 @@
+{
+ "id": "lem-right-derived-exact-restriction-normalization",
+ "kind": "statement",
+ "title": "Full cochain-unit normalization of the canonical exact restriction square",
+ "statement": "Let F:C→D and G:C′→D′ be additive functors between abelian categories with chosen derived categories. Let R:C→C′ and S:D→D′ be exact additive functors, with R preserving K-injectives and with K-injective resolutions in the two source categories. For an ordinary natural isomorphism e:F⋙S≅R⋙G, form the canonical right-derived square by the exact/right-derived composition comparison, right derivation of e, the R/G composition comparison and identification of the right derived functor of R with its exact derived functor. On every cochain complex, this square intertwines the full canonical cochain units: S applied to the F-unit, followed by the square and the G-image of the R-factor, equals the S-factor followed by Q applied to the degreewise e and then the G-unit. No K-injectivity is assumed of this complex.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (2), the bounded filtered-colimit comparison on a single shifted rational line"
+ },
+ "proof": [
+  {
+   "text": "Expand the exact/right-derived composition comparison and the right-derived natural isomorphism. Cancel the inverse exact-functor comparison and use their defining factorization equations to obtain the normalized square on the homotopy category.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Evaluate on the quotient of the cochain complex. The quotient comparison components are identities. The exact-functor factor comparison gives the cochain factor on the nose, and the corresponding inverse components agree by uniqueness of inverses. Thus replace both homotopy units by the full cochain units.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Postcompose by the image of the direct exact-functor factor. Functoriality and the inverse/direct factor identity cancel the last factors, giving exactly the displayed cochain-unit equation for every complex.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (2), the named step of the closure-line comparison; fully proved helper"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The derived restriction square of exact functors commutes with canonical units on every cochain complex",
+   "results": "Eight hits including mapDerivedCategoryFactorsh_hom_app, mapDerivedCategoryFactorsh and exact-functor Ext comparisons. The factor comparison is used; there is no full right-derived square normalization.",
+   "date": "2026-10-27",
+   "verdict": "Assemble the canonical composition unit equations and the exact-functor factor comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app",
+   "results": "One exact Mathlib hit for the homotopy/cochain factor comparison; used in the proof.",
+   "date": "2026-10-27",
+   "verdict": "Useful component, not the full square equation."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorCompMapDerivedCategoryIso|rightDerivedFunctorUnitQ",
+   "results": "Search service zero hits. Local source search finds the canonical composition maps and their unit equations, and the cochain right-derived unit definition. ProperIntegralRationalScalarComparison contains a private homotopy-square calculation, reused here with the cochain bridge.",
+   "date": "2026-10-27",
+   "verdict": "No existing public cochain-square normalization theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalClosureLineComparison",
+  "date": "2026-10-27",
+  "group": "D7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "paragraph (2), deriving the coefficient restriction square with its full-unit normalization",
+   "via": [
+    "lem-diagonal-closure-line-comparison",
+    "lem-sfb-diagonal-finite-coefficient-closure"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RightDerivedExactRestrictionNormalization",
+  "file": "lean/Sheaf/CategoryTheory/RightDerivedExactRestrictionNormalization.lean",
+  "declaration": "CategoryTheory.rightDerivedExactRestriction_normalization",
+  "statement": "theorem rightDerivedExactRestriction_normalization (F : C ⥤ D) (G : C' ⥤ D')\n    (R : C ⥤ C') (S : D ⥤ D') [F.Additive] [G.Additive] [R.Additive] [S.Additive]\n    [PreservesFiniteLimits R] [PreservesFiniteColimits R]\n    [PreservesFiniteLimits S] [PreservesFiniteColimits S]\n    [R.PreservesKInjectiveComplexes] (e : F ⋙ S ≅ R ⋙ G)\n    (P : CochainComplex C ℤ) :\n    S.mapDerivedCategory.map (F.rightDerivedFunctorUnitQ P) ≫\n        ((Functor.rightDerivedFunctorCompMapDerivedCategoryIso F S).symm ≪≫\n          Functor.rightDerivedFunctorNatIso e ≪≫ Functor.rightDerivedFunctorCompIso R G ≪≫\n          Functor.isoWhiskerRight R.rightDerivedFunctorIsoMapDerivedCategory\n            G.rightDerivedFunctor).hom.app (DerivedCategory.Q.obj P) ≫\n        G.rightDerivedFunctor.map (R.mapDerivedCategoryFactors.hom.app P) =\n      S.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj P) ≫\n        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex e.hom (.up ℤ)).app P) ≫\n        G.rightDerivedFunctorUnitQ ((R.mapHomologicalComplex (.up ℤ)).obj P)",
+  "branch": "sheaf-dag",
+  "by": "D7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261027T034629-L-3667501",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261027T034629-L-3667501",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,143 @@
+{
+ "id": "lem-sf-point-sections-tor-amplitude",
+ "kind": "statement",
+ "title": "Tor amplitude of exact sections on the geometric point",
+ "statement": "Let F be the finite-field datum of [def-weil-finite-field-fiber], k its algebraically closed field, and A a finite commutative ring. Let K be any object of the recorded pro-etale derived category of A-modules on Spec(k) [def-weil-abstract-derived-category]. If K has intrinsic pro-etale Tor amplitude in [a,b] [def-weil-finite-tor-amplitude], then the derived final-object sections, with coefficient ring ULift A and the canonical constant-section scalar map [def-weil-point-section-scalar-functors], have ordinary module Tor amplitude in [a,b]. No constructibility or finite-generation hypothesis on K or on the tensor test modules is imposed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-point-perfectness.proof.md",
+  "place": "Step 1: geometric-point passage, finite free models, and reversed-degree duals"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-abstract-derived-category",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-point-section-scalar-functors"
+ ],
+ "proof": [
+  {
+   "text": "Transport the Tor predicate to the fixed-scalar module-sheaf category through the exact intrinsic realization equivalence, using [lem-exc-intrinsic-tor-amplitude-transport] and [def-sp-finite-coefficient-intrinsic-derived-comparison]. The bounded flat-model theorem [lem-trf-source-bounded-flat-tor-amplitude] gives a flat-term representative supported in [a,b].",
+   "uses": [
+    "lem-exc-intrinsic-tor-amplitude-transport",
+    "def-sp-finite-coefficient-intrinsic-derived-comparison",
+    "lem-trf-source-bounded-flat-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-point-perfectness.proof.md",
+    "place": "Step 1: geometric-point passage, finite free models, and reversed-degree duals"
+   }
+  },
+  {
+   "text": "After intrinsic realization, restriction along the constant-scalar map recovers each original sheaf term via the sheafification counit and fully faithful realization. This is the concrete encoding of [def-pur-proetale-module-scalar-restriction]. At the identity geometric point, the pointed final neighbourhood is initial (the structured arrow of the identity). Its opposite is terminal, so its colimit injection is an isomorphism. Use the geometric-point/stalk comparison constructed in [lem-weil-pbc-proetale-finite-model-stalks] to identify this final-object evaluation with the sheaf fibre. The proved source-library Point.flat_sheafFiber_obj preserves flatness. Therefore each section term is flat. The scalar action agrees by the concrete definitions of restriction and [def-weil-point-section-scalar-functors].",
+   "uses": [
+    "def-pur-proetale-module-scalar-restriction",
+    "lem-weil-pbc-proetale-finite-model-stalks",
+    "def-weil-point-section-scalar-functors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-point-perfectness.proof.md",
+    "place": "Step 1: geometric-point passage, finite free models, and reversed-degree duals"
+   }
+  },
+  {
+   "text": "The additive sections functor sends the zero terms outside [a,b] to zero. Its exact derived localization comparison identifies this section complex with derived sections of K. Apply [lem-trf-source-bounded-flat-tor-amplitude] to this bounded flat complex and transfer the Tor predicate along that comparison.",
+   "uses": [
+    "lem-trf-source-bounded-flat-tor-amplitude",
+    "def-weil-point-section-scalar-functors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-point-perfectness.proof.md",
+    "place": "Step 1: geometric-point passage, finite free models, and reversed-degree duals"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-proetale-module-scalar-restriction",
+  "def-sp-finite-coefficient-intrinsic-derived-comparison",
+  "def-weil-point-section-scalar-functors",
+  "lem-exc-intrinsic-tor-amplitude-transport",
+  "lem-trf-source-bounded-flat-tor-amplitude",
+  "lem-weil-pbc-proetale-finite-model-stalks"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-point-perfectness.proof.md",
+  "place": "Step 1: geometric-point passage, finite free models, and reversed-degree duals"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact global sections on an algebraically closed pro etale point preserve the Tor amplitude interval",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Γ_def, AlgebraicGeometry.LocallyRingedSpace.Γ_obj, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec, Algebra.FormallyEtale.instTensorProduct, AlgebraicGeometry.Scheme.Γevaluation, AlgebraicGeometry.preservesLimit_rightOp_Γ, AlgebraicGeometry.Scheme.ΓSpecIso_inv, AlgebraicGeometry.StructureSheaf.globalSectionsIso_hom. No result states Tor amplitude preservation by final-object sections on the pro-etale geometric point.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafFiber\"",
+   "results": "12 hits: CategoryTheory.GrothendieckTopology.Point.presheafFiber, CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeFunctorOppositePresheafFiber, CategoryTheory.GrothendieckTopology.Point.sheafFiber, CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsFunctorOppositePresheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize, CategoryTheory.GrothendieckTopology.Point.shrinkYonedaCompPresheafFiberIso, CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsSheafSheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber, CategoryTheory.GrothendieckTopology.Point.W_isInvertedBy_presheafFiber'. No result states Tor amplitude preservation by final-object sections on the pro-etale geometric point.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafFiber.*flat|flat.*sheafFiber",
+   "results": "0 hits: . No result states Tor amplitude preservation by final-object sections on the pro-etale geometric point.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointTorAmplitudeRealization",
+  "date": "2026-10-25",
+  "group": "D7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pod-point-perfectness",
+   "place": "Proof Step 1: transfer of Tor bounds to ordinary modules at the geometric point",
+   "via": [
+    "lem-sf-point-tor-amplitude-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointSectionsTorAmplitude",
+  "file": "lean/Sheaf/Paper/PointSectionsTorAmplitude.lean",
+  "declaration": "WeilConjectures.point_sections_torAmplitude",
+  "statement": "theorem point_sections_torAmplitude (F : FiniteFieldDatum.{u})\n    (A : Type u) [CommRing A] [Finite A] (K : proEtaleDerivedCategory (Spec (.of F.k)) A)\n    (a b : ℤ) (hTor : HasProEtaleTorAmplitude (Spec (.of F.k)) A K a b) :\n    DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) a b\n      ((pointFiniteSections F.k A).mapDerivedCategory.obj K) ",
+  "branch": "sheaf-dag",
+  "by": "D7",
+  "date": "2026-10-25"
+ },
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261025T180606-L-4008002",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261025T180606-L-4008002",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

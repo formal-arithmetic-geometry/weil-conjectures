@@ -4,14 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group D7
 -/
 module
-public import Sheaf.Paper.CompletedAdicIntrinsicCompletion
-public import Sheaf.CategoryTheory.RingedSiteDerivedRestrictionUniverses
-public import Mathlib.Algebra.Category.ModuleCat.Ulift
-public import Mathlib.AlgebraicGeometry.Sites.Etale
-public import Mathlib.AlgebraicGeometry.Noetherian
+public import Sheaf.Paper.FinitePerfectQuotientModelData
 
 import Sheaf.CategoryTheory.RingedDerivedRestrictionGeneral
 import Mathlib.CategoryTheory.Abelian.ShortExact
+import Sheaf.Paper.FiniteQuotientFiniteModuleModels
+import Sheaf.Paper.FiniteQuotientModelTorAmplitude
+import Sheaf.CategoryTheory.DerivedCategory.BoundedFiniteTorPerfect
+import Sheaf.CategoryTheory.CommutativeSiteDerivedConstantModuleFunctor
 
 /-! # Uniform perfect models of finite quotients
 
@@ -30,129 +30,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open AlgebraicGeometry.ProEtale
 namespace AlgebraicGeometry.Scheme
 
-/-- The locally bijective characterization at the actual coefficient universe.
-Source: Stacks Tag 03DA
-(blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models).
-Proof: the small pro-etale site is essentially small in universe t+1. -/
-theorem finitePerfectModelsAbLocallyBijective (X : Scheme.{t}) :
-    (ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{t + 1} := by
-  let : EssentiallySmall.{t + 1} X.ProEt := essentiallySmallSelf.{0, t, t + 1} _
-  exact GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall.{t, t + 1, t + 1,
-    t + 2, t + 1, t + 1, t + 1} _
 attribute [local instance] finitePerfectModelsAbLocallyBijective
-
-/-- Standard algebraic derived localization.
-Source: Stacks Tag 05RU
-(blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models). -/
-instance finitePerfectModelsAlgebraHasDerived (A : Type t) [CommRing A] :
-    HasDerivedCategory (ModuleCat.{t} A) := HasDerivedCategory.standard _
-/-- Standard derived localization for the actual coefficient sheaves.
-Source: Stacks Tag 05RU
-(blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models). -/
-instance finitePerfectModelsRingHasDerived (X : Scheme.{t})
-    (R : Sheaf (ProEt.topology X) RingCat.{t + 1}) :
-    HasDerivedCategory (SheafOfModules.{t + 1} R) := HasDerivedCategory.standard _
-/-- Sheafification on the concrete localized site.
-Source: Stacks Tag 03DA
-(blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models). -/
-instance finitePerfectModelsSliceAbSheafify (X : Scheme.{t}) (U : X.ProEt) :
-    HasSheafify ((ProEt.topology X).over U) AddCommGrpCat.{t + 1} :=
-  letI : EssentiallySmall.{t + 1} (Over U) := essentiallySmallSelf.{0, t, t + 1} _
-  hasSheafifyEssentiallySmallSite.{t, t + 1, t + 1, t + 2, t + 1} _ _
-/-- Local bijectivity on the concrete localized site.
-Source: Stacks Tag 03DA
-(blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models). -/
-instance finitePerfectModelsSliceAbLocallyBijective (X : Scheme.{t}) (U : X.ProEt) :
-    ((ProEt.topology X).over U).WEqualsLocallyBijective AddCommGrpCat.{t + 1} :=
-  letI : EssentiallySmall.{t + 1} (Over U) := essentiallySmallSelf.{0, t, t + 1} _
-  GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall.{t, t + 1, t + 1,
-    t + 2, t + 1, t + 1, t + 1} _
-/-- Standard derived localization on each slice.
-Source: Stacks Tag 05RU
-(blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models). -/
-instance finitePerfectModelsSliceHasDerived (X : Scheme.{t})
-    (R : Sheaf (ProEt.topology X) RingCat.{t + 1}) (U : X.ProEt) :
-    HasDerivedCategory (SheafOfModules.{t + 1} (R.over U)) :=
-  HasDerivedCategory.standard _
-
-/-- Apply the actual constant module functor termwise, with its universe lift.
-Source: Stacks Tags 03CY and 05RU
-(blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models). -/
-def finiteModelConstantComplex (X : Scheme.{t}) (B : Type t) [CommRing B]
-    [(koszulConstantFunctor X B).PreservesZeroMorphisms]
-    (P : CochainComplex (ModuleCat.{t} B) ℤ) :=
-  ((ModuleCat.uliftFunctor.{t + 1, t} B ⋙
-    ModuleCat.restrictScalars.{t + 1}
-      (ULift.ringEquiv : ULift.{t + 1} B ≃+* B).toRingHom ⋙
-    koszulConstantFunctor X B).mapHomologicalComplex (.up ℤ)).obj P
-
-/-- A finite quotient admits perfect constant models in a specified interval on a chart.
-Source: Stacks Tags 094I and 09C2
-(blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models). -/
-def FinitePerfectModelsOn (X : Scheme.{t}) {A : Type t} [CommRing A]
-    (d : AdicCoefficientDatum A)
-    [∀ n : ℕ, (koszulConstantFunctor X (A ⧸ d.ideal ^ (n + 1))).PreservesZeroMorphisms]
-    (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶
-      completedAdicFiniteCommRing X d n)
-    (M : DerivedCategory (CompletedAdicModules X d)) (n : ℕ) (V : X.Etale)
-    (a b : ℤ) : Prop :=
-  ∃ T : Sieve V, T ∈ X.smallEtaleTopology V ∧
-    ∀ (W : X.Etale) (g : W ⟶ V), T g →
-      ∃ P : CochainComplex (ModuleCat.{t} (A ⧸ d.ideal ^ (n + 1))) ℤ,
-        P.IsStrictlyGE a ∧ P.IsStrictlyLE b ∧
-        (∀ i : ℤ, Module.Projective (A ⧸ d.ideal ^ (n + 1)) (P.X i) ∧
-          Module.Finite (A ⧸ d.ideal ^ (n + 1)) (P.X i)) ∧
-        Nonempty
-          (ringedSiteDerivedRestrictionOfUniverses (completedAdicFiniteRing X d n)
-              ((toProEt X).obj W) ((completedAdicQuotientReduction X d n).obj M) ≅
-            ringedSiteDerivedRestrictionOfUniverses (completedAdicFiniteRing X d n)
-              ((toProEt X).obj W) ((completedAdicDerivedChange X (φ n)).obj
-                (DerivedCategory.Q.obj (finiteModelConstantComplex X _ P))))
-
-/-- Etale local finite-projective quotient models with one interval on each chart.
-The covering and the model at a finite level may depend on that level. This property
-asserts no compatible choice of trivializations and no completed realization.
-Source: Stacks Tags 09C2 and 094I
-(blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models). -/
-def HasUniformFinitePerfectModels (X : Scheme.{t}) {A : Type t} [CommRing A]
-    (d : AdicCoefficientDatum A)
-    [∀ n : ℕ, (koszulConstantFunctor X (A ⧸ d.ideal ^ (n + 1))).PreservesZeroMorphisms]
-    (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶
-      completedAdicFiniteCommRing X d n)
-    (M : DerivedCategory (CompletedAdicModules X d)) : Prop :=
-  ∃ S : Sieve (⊤_ X.Etale), S ∈ X.smallEtaleTopology (⊤_ X.Etale) ∧
-    ∀ (V : X.Etale) (f : V ⟶ ⊤_ X.Etale), S f →
-      ∃ a b : ℤ, a ≤ b ∧ ∀ n : ℕ,
-        FinitePerfectModelsOn X d φ M n V a b
-
-/-- Normalization of the finite coefficient identifications on constant sections.
-This fixes their compatibility with the quotient homomorphisms, rather than permitting
-independent identifications at different levels.
-Source: Stacks Tags 093M and 09C2
-(blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models). -/
-def FinitePerfectModelsNormalized (X : Scheme.{t}) {A : Type t} [CommRing A]
-    (d : AdicCoefficientDatum A)
-    (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶
-      completedAdicFiniteCommRing X d n) : Prop :=
-  ∀ (n : ℕ) (U : X.ProEtᵒᵖ) (a : completedAdicQuotient d n),
-    (φ n).hom.app U ((koszulConstantUnit X (A ⧸ d.ideal ^ (n + 1))).app U a) =
-      (AlgebraicGeometry.ProEtale.finiteCoefficientScalarMap X
-        (completedAdicQuotient d n)).app U a
-
-/-- The finite comparisons preserve both quotient transitions and the scalar map.
-Source: Stacks Tags 093M and 09C6
-(blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models). -/
-def FinitePerfectModelsCompatible (X : Scheme.{t}) {A : Type t} [CommRing A]
-    (d : AdicCoefficientDatum A)
-    (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶
-      completedAdicFiniteCommRing X d n) : Prop :=
-  (∀ n : ℕ,
-    adicConstantMap X (adicQuotientMap d.ideal (n + 2) (n + 1) (Nat.le_succ _)) ≫
-        φ n = φ (n + 1) ≫
-      completedAdicQuotientCommMap X d (n + 1) n (Nat.le_succ n)) ∧
-  (∀ n : ℕ,
-    completedAdicScalar X d ≫ completedAdicCommProjection X d n =
-      adicConstantMap X (Ideal.Quotient.mk (d.ideal ^ (n + 1))) ≫ φ n)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -376,7 +254,72 @@ theorem residuePerfect_quotient_models_succ
     (_hresidue : FinitePerfectModelsOn X d φ M 0 V a b) (n : ℕ)
     (_hprevious : FinitePerfectModelsOn X d φ M n V a b) :
     FinitePerfectModelsOn X d φ M (n + 1) V a b := by
-  sorry
+  obtain ⟨T, hT, hlocal⟩ := finiteQuotient_finiteModule_models_succ X d φ _hφ
+    _hcompat M V a b _hab _hresidue n _hprevious
+  refine ⟨T, hT, ?_⟩
+  intro W g hg
+  obtain ⟨P, hPa, hPb, hfinite, ⟨e⟩, hchart⟩ := hlocal W g hg
+  have hTor := finiteQuotient_model_torAmplitude X d φ _hφ _hcompat M V a b
+    _hresidue (n + 1) W g P hchart ⟨e⟩
+  let B := A ⧸ d.ideal ^ (n + 1 + 1)
+  let : Finite B := d.quotientFinite (n + 1)
+  obtain ⟨⟨E, hEzero, hE, ⟨eE⟩⟩, _, _⟩ :=
+    DerivedCategory.exists_bounded_finite_projective_model_of_torAmplitudeIn B P
+      ⟨a, b, hPa, hPb, hfinite⟩ a b _hab hTor
+  refine ⟨E, (E.isStrictlyGE_iff a).2 (fun i hi ↦ hEzero i (Or.inl hi)),
+    (E.isStrictlyLE_iff b).2 (fun i hi ↦ hEzero i (Or.inr hi)), hE, ?_⟩
+  have hconstant : (koszulConstantFunctor X B).Additive ∧
+      PreservesFiniteLimits (koszulConstantFunctor X B) ∧
+      PreservesFiniteColimits (koszulConstantFunctor X B) :=
+    commutativeSiteConstantModuleFunctor_exact (ProEt.topology X) (ULift.{t + 1} B)
+  have := hconstant.1
+  have := hconstant.2.1
+  have := hconstant.2.2
+  have : (ModuleCat.restrictScalars.{t + 1}
+      (ULift.ringEquiv : ULift.{t + 1} B ≃+* B).toRingHom).IsEquivalence :=
+    (ModuleCat.restrictScalarsEquivalenceOfRingEquiv.{t + 1}
+      (ULift.ringEquiv : ULift.{t + 1} B ≃+* B)).isEquivalence_functor
+  have : PreservesLimits (ModuleCat.restrictScalars.{t + 1}
+      (ULift.ringEquiv : ULift.{t + 1} B ≃+* B).toRingHom) :=
+    Adjunction.isEquivalencePreservesLimits _
+  have : PreservesColimits (ModuleCat.restrictScalars.{t + 1}
+      (ULift.ringEquiv : ULift.{t + 1} B ≃+* B).toRingHom) :=
+    Adjunction.isEquivalence_preservesColimits _
+  let F := ModuleCat.uliftFunctor.{t + 1, t} B ⋙
+    ModuleCat.restrictScalars.{t + 1}
+      (ULift.ringEquiv : ULift.{t + 1} B ≃+* B).toRingHom ⋙
+    koszulConstantFunctor X B
+  have c : DerivedCategory.Q.obj (finiteModelConstantComplex X B P) ≅
+      DerivedCategory.Q.obj (finiteModelConstantComplex X B E) :=
+    (F.mapDerivedCategoryFactors.app P).symm ≪≫
+      F.mapDerivedCategory.mapIso eE.symm ≪≫ F.mapDerivedCategoryFactors.app E
+  let R := completedAdicFiniteRing X d (n + 1)
+  let U := (toProEt X).obj W
+  exact ⟨e ≪≫ (finitePerfectModelsRestrictionComparison X R U _).symm ≪≫
+    (ringedDerivedRestrictionGeneral R U).mapIso
+      ((completedAdicDerivedChange X (φ (n + 1))).mapIso c) ≪≫
+    finitePerfectModelsRestrictionComparison X R U _⟩
+
+/-- Widening the fixed interval preserves a finite perfect local model.
+Source: the interval monotonicity in the definition of `FinitePerfectModelsOn`.
+(blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models).
+This is proved by reusing the same covering, complexes, and restriction
+isomorphisms; only the two degree bounds are weakened. -/
+private theorem finitePerfectModelsOn_mono (X : Scheme.{t}) {A : Type t} [CommRing A]
+    (d : AdicCoefficientDatum A)
+    [∀ n : ℕ, (koszulConstantFunctor X (A ⧸ d.ideal ^ (n + 1))).PreservesZeroMorphisms]
+    (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶
+      completedAdicFiniteCommRing X d n)
+    (M : DerivedCategory (CompletedAdicModules X d)) (n : ℕ) (V : X.Etale)
+    {a b a' b' : ℤ} (ha : a' ≤ a) (hb : b ≤ b')
+    (h : FinitePerfectModelsOn X d φ M n V a b) :
+    FinitePerfectModelsOn X d φ M n V a' b' := by
+  obtain ⟨T, hT, hlocal⟩ := h
+  refine ⟨T, hT, ?_⟩
+  intro W g hg
+  obtain ⟨P, hPa, hPb, hP, e⟩ := hlocal W g hg
+  exact ⟨P, P.isStrictlyGE_of_ge a' a ha,
+    P.isStrictlyLE_of_le b b' hb, hP, e⟩
 
 /-- A perfect constant residue model gives uniformly bounded perfect constant models
 at all finite levels, on etale refinements. Completeness of M is not assumed.
@@ -413,12 +356,14 @@ theorem residuePerfect_finite_quotient_models
   intro V f hf
   obtain ⟨P, a, b, ha, hb, hP, ⟨e⟩⟩ := hlocal V f hf
   have : P.IsStrictlyGE a := ha
-  have hzero : FinitePerfectModelsOn X d φ M 0 V (min a b) b := by
+  have hzero' : FinitePerfectModelsOn X d φ M 0 V a b := by
     refine ⟨⊤, X.smallEtaleTopology.top_mem V, ?_⟩
     intro W g _
-    refine ⟨P, P.isStrictlyGE_of_ge (min a b) a (min_le_left _ _), hb, hP, ?_⟩
+    refine ⟨P, ha, hb, hP, ?_⟩
     exact finitePerfectModelsRestrictIso_further X (completedAdicFiniteRing X d 0)
       ((toProEt X).map g) _ _ e
+  have hzero := finitePerfectModelsOn_mono X d φ M 0 V
+    (min_le_left a b) (le_refl b) hzero'
   refine ⟨min a b, b, min_le_right _ _, ?_⟩
   intro n
   induction n with

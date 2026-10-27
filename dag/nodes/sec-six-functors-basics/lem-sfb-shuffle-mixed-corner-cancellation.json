@@ -1,0 +1,266 @@
+{
+ "id": "lem-sfb-shuffle-mixed-corner-cancellation",
+ "kind": "statement",
+ "title": "Mixed-corner sign-reversing involution for evaluated shuffle paths",
+ "statement": "For any set $S$, let $\\mathbf Z[S]$ be the free $\\mathbf Z$-module with basis $S$ [def-weil-pbc-free-module]; evaluated strings below can equivalently be read as basis symbols in the free module on strings of their length. Let $a,b\\geq0$, $n=a+b$, and let $W_{a,b}$ be the finite set of words $w_0\\cdots w_{n-1}$ with $a$ letters $H$ and $b$ letters $V$. Put $A_k(w)=\\#\\{r<k:w_r=H\\}$ and $B_k(w)=\\#\\{r<k:w_r=V\\}$ for $0\\leq k\\leq n$. Let $I(w)=\\#\\{(r,s):r<s,\\ w_r=V,\\ w_s=H\\}$ and $s(w)=(-1)^{I(w)}\\in\\mathbf Z$. For any sets $X,Y$ and sequences $u=(u_0,\\ldots,u_a)$ in $X$, $v=(v_0,\\ldots,v_b)$ in $Y$, write $z_{u,v}(w)=((u_{A_k(w)},v_{B_k(w)}))_{k=0}^n$ and let $d_k$ denote deletion of entry $k$ of a sequence. No distinctness of sequence entries is assumed.\n\nLet $\\pi_w$ be the permutation of $\\{0,\\ldots,n-1\\}$ whose list consists first of the $H$ positions, increasingly, then of the $V$ positions, increasingly. Its inversion count is exactly $I(w)$, and its permutation sign is $s(w)$. Suppose $n>0$ and set $M_{a,b}=\\{(w,k):w\\in W_{a,b},\\ 0<k<n,\\ w_{k-1}\\ne w_k\\}$. On this set, swapping letters $k-1,k$ and leaving $k$ fixed defines a fixed-point-free involution $\\tau(w,k)=(w',k)$. The coordinate paths $(A_\\ell,B_\\ell)$ for $w,w'$ agree at every $\\ell\\ne k$, and their inversion counts differ by $1$. In particular\n$$d_kz_{u,v}(w')=d_kz_{u,v}(w),\\qquad s(w')(-1)^k=-s(w)(-1)^k.$$\nConsequently, in the free abelian group on length-$n$ sequences in $X\\times Y$,\n$$\\sum_{(w,k)\\in M_{a,b}}s(w)(-1)^k[d_kz_{u,v}(w)]=0.$$\nIf $a=0$ or $b=0$, $M_{a,b}$ is empty.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-formulated combinatorial input, returned proof steps 2–3: permutation inversion encoding and mixed adjacent-letter cancellation. Blueprint gives the application, not this combinatorial lemma. WANTED: Weibel, An Introduction to Homological Algebra, §8.5 (not available locally)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module",
+  "def-sfb-shuffle-word-combinatorics"
+ ],
+ "proof": [
+  {
+   "text": "The increasing lists of H positions and V positions partition the n positions, so their concatenation defines the bijection $\\pi_w$. Within either list there are no inversions. A cross-list inversion has values $h>v$ with $w_h=H,w_v=V$; sending it to $(v,h)$ is a bijection onto the pairs counted by $I(w)$. Thus the inversion count of $\\pi_w$ is $I(w)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written universal shuffle input: permutation encoding, expanded by Q158."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-permutation-sign-inversion-product] to $\\pi_w$. Its product has a factor $-1$ exactly for each inversion counted in step 1; every other factor is $1$. Removing the factors $1$ leaves $I(w)$ identical factors $-1$, whose product is $(-1)^{I(w)}=s(w)$. This also gives sign $1$ for the empty permutation.",
+   "uses": [
+    "lem-sfb-permutation-sign-inversion-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written universal shuffle input: identify the shuffle sign."
+   }
+  },
+  {
+   "text": "Fix $(w,k)\\in M_{a,b}$ and put $p=k-1$. The two letters at $p,k$ are H,V in some order. Interchanging them preserves the counts a,b and leaves the pair mixed, so $(w\\prime,k)$ lies in $M_{a,b}$. A second interchange restores every letter. The letter at p changes, so $w\\prime\\ne w$ and $\\tau$ has no fixed point. If $a=0$ or $b=0$, every letter is the same, so no such mixed pair exists and $M_{a,b}$ is empty.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written universal shuffle input: define the labeled mixed-corner involution."
+   }
+  },
+  {
+   "text": "For $\\ell\\leq p$, the prefixes of length $\\ell$ contain neither swapped position and agree. For $\\ell\\geq k+1$, they contain both, with one H and one V in either order, and hence have the same two counts. These ranges are exactly $\\ell\\ne k$. Thus every retained vertex has the same coordinate indices for $w,w\\prime$. At position t after deleting entry k, the original index is t if $t<k$ and $t+1$ if $t\\geq k$; both avoid k. Evaluating u,v therefore gives $d_kz_{u,v}(w\\prime)=d_kz_{u,v}(w)$ without requiring either sequence to be injective.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written universal shuffle input: equality of the deleted evaluated strings."
+   }
+  },
+  {
+   "text": "For inversions under this swap, pairs disjoint from $\\{p,k\\}$ are unchanged. For each position $r<p$, the sum of its contributions with p and k is unchanged: if $w_r=V$ it is one, and if $w_r=H$ it is zero. For each $s>k$, the contributions from p and k to s likewise sum to one when $w_s=H$ and zero when $w_s=V$. No position lies strictly between p and k. The sole remaining pair $(p,k)$ contributes zero for HV and one for VH. Consequently $I(w\\prime)=I(w)+1$ in the HV case and $I(w)=I(w\\prime)+1$ in the VH case. In either case $(-1)^{m+1}=-(-1)^m$ gives $s(w\\prime)=-s(w)$, and multiplication by $(-1)^k$ gives the asserted coefficient identity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written universal shuffle input: explicit inversion-pair count at a mixed corner."
+   }
+  },
+  {
+   "text": "The set $M_{a,b}$ is finite: it is a subset of the finite set of binary words of length n times the n+1 possible vertex indices. In the free module [def-weil-pbc-free-module] on length-n strings define $f(w,k)=s(w)(-1)^k[d_kz_{u,v}(w)]$. Steps 4–5 give $f(w,k)+f(\\tau(w,k))=c[e]+(-c)[e]=0$ by distributivity of scalar multiplication. Step 3 gives all the involution and no-fixed-point hypotheses of [lem-sfb-finite-involution-sum-zero], which now gives the displayed sum equal to zero. Here the monoid is the underlying additive commutative group of that free module; coincident evaluated basis symbols do not change the labeled index set.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "lem-sfb-finite-involution-sum-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written universal shuffle input: cancellation of the finite mixed-corner boundary sum."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-permutation-sign-inversion-product",
+  "def-weil-pbc-free-module",
+  "lem-sfb-finite-involution-sum-zero"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-formulated universal shuffle prerequisite. The current blueprint gives the open/proper direct-image application, not this combinatorial calculation. Q158 supplies the calculation using two verified Mathlib tools; Weibel §8.5 is unavailable."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For words in H and V the sign of the horizontal then vertical position permutation is minus one to the vertical before horizontal inversion count; swapping a mixed adjacent pair cancels the deleted lattice path vertex term",
+   "results": "{\"t\": \"2026-10-22T06:09:15Z\", \"tool\": \"leanfinder\", \"query\": \"For words in H and V the sign of the horizontal then vertical position permutation is minus one to the vertical before horizontal inversion count; swapping a mixed adjacent pair cancels the deleted lattice path vertex term\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ComplexShape.σ_def\", \"ComplexShape.σ_ε₁\", \"Equiv.Perm.sign_eq_prod_prod_Ioi\", \"TotalComplexShapeSymmetry.σ_ε₂\", \"ComplexShape.σ_ε₂\", \"TotalComplexShapeSymmetry.σ_ε₁\", \"Equiv.Perm.prod_Ioi_comp_eq_sign_mul_prod\", \"Equiv.Perm.sign_eq_prod_prod_Iio\"], \"digest\": \"d5d46401c52b5487\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: permutation sign formulas and sign_swap give only the sign subcalculation, not the fixed-point-free involution on labeled mixed corners, the evaluated-string equality, and cancellation for arbitrary repeated entries."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sign\", \"swap\"",
+   "results": "{\"t\": \"2026-10-22T06:09:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"sign\\\", \\\"swap\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Equiv.Perm.signAux_swap\", \"Equiv.Perm.IsSwap.sign_eq\", \"Equiv.Perm.sign_swap\", \"Equiv.Perm.signAux3_mul_and_swap\", \"Equiv.Perm.sign_swap'\", \"Equiv.Perm.sign_prod_list_swap\", \"Mathlib.Tactic.Echelon.intCast_sign_permOfSwaps\", \"Orientation.oangle_sign_sub_left_swap\"], \"digest\": \"ecc564b882b5a5b9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: permutation sign formulas and sign_swap give only the sign subcalculation, not the fixed-point-free involution on labeled mixed corners, the evaluated-string equality, and cancellation for arbitrary repeated entries."
+  },
+  {
+   "tool": "grep",
+   "query": "shuffle|lattice.path|mixed.corner",
+   "results": "{\"t\": \"2026-10-22T06:09:05Z\", \"tool\": \"grep\", \"query\": \"shuffle|lattice.path|mixed.corner\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: permutation sign formulas and sign_swap give only the sign subcalculation, not the fixed-point-free involution on labeled mixed corners, the evaluated-string equality, and cancellation for arbitrary repeated entries."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Opposite signed adjacent mixed corners cancel after deleting the intermediate vertex of a shuffle lattice path",
+   "results": "{\"t\": \"2026-10-22T06:09:05Z\", \"tool\": \"leansearch\", \"query\": \"Opposite signed adjacent mixed corners cancel after deleting the intermediate vertex of a shuffle lattice path\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FreeAddGroup.Red.Step.not\", \"SimpleGraph.Walk.concat_dropLast\", \"FreeAddGroup.Red.Step.cons_not\", \"MulOpposite.instIsCancelMulZero\", \"SimpleGraph.Walk.toDeleteEdge\", \"SimpleGraph.Walk.toDeleteEdges\", \"FreeAddGroup.Red.Step\", \"MulOpposite.instIsLeftCancelMul\"], \"digest\": \"36d6f20fba6f64a4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: permutation sign formulas and sign_swap give only the sign subcalculation, not the fixed-point-free involution on labeled mixed corners, the evaluated-string equality, and cancellation for arbitrary repeated entries."
+  },
+  {
+   "tool": "grep",
+   "query": "sum_involution|sign.*inversion|inversion.*sign",
+   "results": "{\"t\": \"2026-10-23T09:54:05Z\", \"tool\": \"grep\", \"query\": \"sum_involution|sign.*inversion|inversion.*sign\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean\", \"Mathlib/LinearAlgebra/Alternating/Basic.lean\", \"Mathlib/LinearAlgebra/Alternating/DomCoprod.lean\", \"Mathlib/Algebra/BigOperators/Group/Finset/Basic.lean\", \"Mathlib/RingTheory/MvPolynomial/Symmetric/NewtonIdentities.lean\", \"Mathlib/RingTheory/MvPolynomial/Symmetric/NewtonIdentities.lean\", \"Mathlib/RingTheory/MvPolynomial/Symmetric/NewtonIdentities.lean\", \"Mathlib/Data/EReal/Inv.lean\"], \"digest\": \"3c42b757d8fae634\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: generic permutation-sign and involution-sum results are isolated as two Mathlib leaves; Dyck/Coxeter hits do not state this binary-word path and evaluated-deletion lemma."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite sum in an additive commutative group vanishes under a fixed point free involution taking each summand to its negative",
+   "results": "{\"t\": \"2026-10-23T09:54:06Z\", \"tool\": \"leansearch\", \"query\": \"A finite sum in an additive commutative group vanishes under a fixed point free involution taking each summand to its negative\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Finset.sum_ninvolution\", \"Finset.sum_involution\", \"Function.Odd.sum_eq_zero\", \"Finset.sum_neg_index\", \"Finsupp.sum_neg\", \"Finset.prod_involution\", \"finsum_mem_neg_distrib\", \"Finset.sum_neg_distrib\"], \"digest\": \"aa8921ac330b248a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: generic permutation-sign and involution-sum results are isolated as two Mathlib leaves; Dyck/Coxeter hits do not state this binary-word path and evaluated-deletion lemma."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sign\", \"inversions\"",
+   "results": "{\"t\": \"2026-10-23T09:54:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"sign\\\", \\\"inversions\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: generic permutation-sign and involution-sum results are isolated as two Mathlib leaves; Dyck/Coxeter hits do not state this binary-word path and evaluated-deletion lemma."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The sign of a permutation of Fin n equals minus one raised to the number of its inversions",
+   "results": "{\"t\": \"2026-10-23T09:54:11Z\", \"tool\": \"leanfinder\", \"query\": \"The sign of a permutation of Fin n equals minus one raised to the number of its inversions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Equiv.Perm.signAux\", \"Equiv.Perm.sign_eq_prod_prod_Ioi\", \"Equiv.Perm.sign_eq_prod_prod_Iio\", \"Fin.sign_cycleRange\", \"Equiv.Perm.decomposeFin.symm_sign\", \"Equiv.Perm.signAux_inv\", \"Fin.sign_cycleIcc_of_le\", \"Equiv.Perm.sign\"], \"digest\": \"436448435cf4be4e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: generic permutation-sign and involution-sum results are isolated as two Mathlib leaves; Dyck/Coxeter hits do not state this binary-word path and evaluated-deletion lemma."
+  },
+  {
+   "tool": "grep",
+   "query": "sign_eq|inversions",
+   "results": "{\"t\": \"2026-10-23T09:54:50Z\", \"tool\": \"grep\", \"query\": \"sign_eq|inversions\", \"sub\": \"GroupTheory/Perm\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/Perm/Fin.lean\", \"Mathlib/GroupTheory/Perm/Fin.lean\", \"Mathlib/GroupTheory/Perm/Fin.lean\", \"Mathlib/GroupTheory/Perm/Fin.lean\", \"Mathlib/GroupTheory/Perm/Sign.lean\", \"Mathlib/GroupTheory/Perm/Sign.lean\", \"Mathlib/GroupTheory/Perm/Sign.lean\", \"Mathlib/GroupTheory/Perm/Sign.lean\"], \"digest\": \"e9c5675a6a206215\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: generic permutation-sign and involution-sum results are isolated as two Mathlib leaves; Dyck/Coxeter hits do not state this binary-word path and evaluated-deletion lemma."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Swapping neighboring horizontal and vertical letters in a lattice path reverses its inversion parity and cancels the deleted middle vertex in the shuffle boundary",
+   "results": "{\"t\": \"2026-10-23T09:54:59Z\", \"tool\": \"leanfinder\", \"query\": \"Swapping neighboring horizontal and vertical letters in a lattice path reverses its inversion parity and cancels the deleted middle vertex in the shuffle boundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DyckWord.denest_nest\", \"CoxeterSystem.getElem_alternatingWord_swapIndices\", \"CoxeterSystem.getElem_leftInvSeq_alternatingWord\", \"DyckWord.cons_tail_dropLast_concat\", \"DyckWord.nest_denest\", \"CoxeterSystem.getD_leftInvSeq_mul_wordProd\", \"CoxeterSystem.getElem_succ_leftInvSeq_alternatingWord\", \"CoxeterSystem.prod_alternatingWord_eq_prod_alternatingWord_sub\"], \"digest\": \"e909f44b9d190d5e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: generic permutation-sign and involution-sum results are isolated as two Mathlib leaves; Dyck/Coxeter hits do not state this binary-word path and evaluated-deletion lemma."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The sign of a permutation of Fin n is the product over pairs i less than j of one when sigma i is less than sigma j and minus one otherwise",
+   "results": "{\"t\": \"2026-10-23T09:55:39Z\", \"tool\": \"leansearch\", \"query\": \"The sign of a permutation of Fin n is the product over pairs i less than j of one when sigma i is less than sigma j and minus one otherwise\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Equiv.Perm.signAux\", \"Equiv.Perm.sign_eq_prod_prod_Iio\", \"Equiv.Perm.sign_eq_prod_prod_Ioi\", \"Equiv.Perm.prod_Iio_comp_eq_sign_mul_prod\", \"Equiv.Perm.sign\", \"Equiv.Perm.sign_of_cycleType'\", \"Equiv.Perm.prod_Ioi_comp_eq_sign_mul_prod\", \"Equiv.Perm.sign_swap'\"], \"digest\": \"f4388d3a1b27580f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: generic permutation-sign and involution-sum results are isolated as two Mathlib leaves; Dyck/Coxeter hits do not state this binary-word path and evaluated-deletion lemma."
+  },
+  {
+   "tool": "loogle",
+   "query": "Finset.sum_involution",
+   "results": "{\"t\": \"2026-10-23T09:55:39Z\", \"tool\": \"loogle\", \"query\": \"Finset.sum_involution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Finset.sum_involution\"], \"digest\": \"387c3a3d942294d8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: generic permutation-sign and involution-sum results are isolated as two Mathlib leaves; Dyck/Coxeter hits do not state this binary-word path and evaluated-deletion lemma."
+  },
+  {
+   "tool": "loogle",
+   "query": "Equiv.Perm.sign_eq_prod_prod_Ioi",
+   "results": "{\"t\": \"2026-10-23T09:55:39Z\", \"tool\": \"loogle\", \"query\": \"Equiv.Perm.sign_eq_prod_prod_Ioi\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Equiv.Perm.sign_eq_prod_prod_Ioi\"], \"digest\": \"078e1e48d52d8de6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: generic permutation-sign and involution-sum results are isolated as two Mathlib leaves; Dyck/Coxeter hits do not state this binary-word path and evaluated-deletion lemma."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite sum of elements of an additive commutative monoid is zero if an involution on its index set has no fixed points and pairs summands with sum zero",
+   "results": "{\"t\": \"2026-10-23T09:55:48Z\", \"tool\": \"leanfinder\", \"query\": \"A finite sum of elements of an additive commutative monoid is zero if an involution on its index set has no fixed points and pairs summands with sum zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Finset.sum_ninvolution\", \"Finset.sum_involution\", \"Function.Odd.sum_eq_zero\", \"Fintype.sum_balance\", \"Finset.sum_neg_index\", \"Finset.sum_inv_index\", \"Finset.sum_cancels_of_partition_cancels\", \"Finset.even_sum\"], \"digest\": \"303233da6a761e7d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: generic permutation-sign and involution-sum results are isolated as two Mathlib leaves; Dyck/Coxeter hits do not state this binary-word path and evaluated-deletion lemma."
+  },
+  {
+   "tool": "grep",
+   "query": "sign_eq_prod_prod_Ioi",
+   "results": "{\"t\": \"2026-10-23T09:57:46Z\", \"tool\": \"grep\", \"query\": \"sign_eq_prod_prod_Ioi\", \"sub\": \"GroupTheory/Perm/Fin.lean\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"508\"], \"digest\": \"968b245720453824\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: generic permutation-sign and involution-sum results are isolated as two Mathlib leaves; Dyck/Coxeter hits do not state this binary-word path and evaluated-deletion lemma."
+  },
+  {
+   "tool": "grep",
+   "query": "sum_involution|prod_involution",
+   "results": "{\"t\": \"2026-10-23T09:57:46Z\", \"tool\": \"grep\", \"query\": \"sum_involution|prod_involution\", \"sub\": \"Algebra/BigOperators/Group/Finset/Basic.lean\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"665\", \"684\", \"686\", \"690\"], \"digest\": \"0034a0878e4d7837\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: generic permutation-sign and involution-sum results are isolated as two Mathlib leaves; Dyck/Coxeter hits do not state this binary-word path and evaluated-deletion lemma."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-simplex-lattice-shuffle-boundary",
+  "date": "2026-10-22",
+  "group": "Q102"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), universal shuffle input to the open-image argument: permutation inversion encoding and the cancellation of mixed adjacent-letter boundary terms in lem-sfb-simplex-lattice-shuffle-boundary. The nearest imported ancestor is null as reported by blueprint_refs.py; the inherited created.item chain terminates in a Lean module name.",
+   "via": [
+    "lem-sfb-simplex-lattice-shuffle-boundary",
+    "lem-sfb-bicosimplicial-shuffle-totalization",
+    "lem-sfb-condensed-product-bar-comparison",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-shuffle-mixed-corner-cancellation",
+  "worker": "stage1",
+  "summary": "Q158 proves the binary-word adjacent-swap, prefix and inversion calculations explicitly and cites two exact Mathlib leaves for the permutation-sign product and finite-sum cancellation. The statement is unchanged; no new unsplit obligations and no Lean writing or builds.",
+  "blueprint": "Current blueprint direct-image proof (3) supplies the application only. Steps 1–2 realize the auxiliary shuffle-sign encoding, steps 3–5 the mixed-corner pair identity, and step 6 its finite sum. The inherited null ancestor and via chain are retained, as required by blueprint_refs.py ancestor."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q158-71e64697b",
+  "group": "Q158",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q158-71e64697b (reviewer sub-agent of L); spot-checked: Ordinary first split: base item unsplit in live and side-live, no repair note, statement and stmt_deps unchanged. The citer lem-sfb-simplex-lattice-shuffle-boundary step 2 uses only the sign clause and the mixed-sum clause, both unchanged. Steps 1, 3, 4 and 5 are elementary and correct. Step 1: π_w inversions biject to the VH pairs (v,h). Step 3: swapping letters k-1,k is a fixed-point-free involution on M, and M is empty if a=0 or b=0. Step 4: the prefix counts agree for every ℓ≠k, and d_k removes exactly index k. Step 5: the inversion count was checked for r<p, s>k and the pair (p,k); HV→VH adds 1. Step 2 cites lem-sfb-permutation-sign-inversion-product. I read Mathlib GroupTheory/Perm/Fin.lean:508-511, sign_eq_prod_prod_Ioi with if σi<σj then 1 else -1; the leaf's statement is exactly this, with the 0-indexed relabelling of def-weil-pbc-matrix-determinant. Step 6 cites def-weil-pbc-free-module and lem-sfb-finite-involution-sum-zero. I read Algebra/BigOperators/Group/Finset/Basic.lean:663-682, prod_involution, which to_additive turns into sum_involution over an AddCommMonoid; the unconditional τx≠x implies its hypothesis f x≠0→g x≠x, so this is an exact one-line specialisation. Both new nodes are statement-only and self-contained, cite their definition nodes and record three kinds of search. Neither is a duplicate after rg -L over the snapshot, live and side-live. lem-trf-ordered-block-permutation-sign is a different block-sign statement, and def-sc-principal-open-alternating-total uses sum_involution only in its proof. Neither new node restates an item clause. My own enumeration for a,b≤4 with repeated entries in u,v∈{0,1} gives π_w inversions = I(w) and a vanishing mixed-corner sum in every case. Advisory: the item statement says 'permutation sign' without a cited definition, though it is pinned through the leaf; the step sources point at the moving symlink literature/blueprint/latest, whose file is identical to main-20261015. No SGA, no tool_uses, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.ShuffleMixedCornerCancellation",
+  "declaration": "AlgebraicTopology.ShuffleMixedCorner.mixed_corner_cancellation",
+  "declarations": [
+   "AlgebraicTopology.ShuffleMixedCorner.MixedCorner",
+   "AlgebraicTopology.ShuffleMixedCorner.mixed_corner_cancellation"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/ShuffleMixedCornerCancellation.lean",
+  "statement": "theorem mixed_corner_cancellation (a b : ℕ) : (∀ w : Word a b, ∃ π : Equiv.Perm (Fin (a + b)), List.ofFn π = ((List.finRange (a + b)).filter (fun i ↦ w.val[i.val]? = some false)) ++ ((List.finRange (a + b)).filter (fun i ↦ w.val[i.val]? = some true)) ∧ ((Finset.univ : Finset (Fin (a + b) × Fin (a + b))).filter (fun ij ↦ ij.1 < ij.2 ∧ π ij.2 < π ij.1)).card = inversions w ∧ (π.sign : ℤ) = sign w) ∧ IsEmpty (MixedCorner 0 b) ∧ IsEmpty (MixedCorner a 0) ∧ (0 < a + b → ∃ τ : MixedCorner a b → MixedCorner a b, (∀ p : MixedCorner a b, (τ p).val.2 = p.val.2 ∧ (τ p).val.1.val = (p.val.1.val.set (p.val.2 - 1) (p.val.1.val[p.val.2]?.getD false)).set p.val.2 (p.val.1.val[p.val.2 - 1]?.getD false)) ∧ Function.Involutive τ ∧ (∀ p : MixedCorner a b, τ p ≠ p) ∧ (∀ (p : MixedCorner a b) (ℓ : ℕ), ℓ ≤ a + b → ℓ ≠ p.val.2 → horizontalCount (τ p).val.1 ℓ = horizontalCount p.val.1 ℓ ∧ verticalCount (τ p).val.1 ℓ = verticalCount p.val.1 ℓ) ∧ (∀ p : MixedCorner a b, (inversions (τ p).val.1 = inversions p.val.1 + 1 ∨ inversions p.val.1 = inversions (τ p).val.1 + 1) ∧ sign (τ p).val.1 * (-1 : ℤ) ^ p.val.2 = -(sign p.val.1 * (-1 : ℤ) ^ p.val.2)) ∧ (∀ (X : Type u) (Y : Type v) (x : Fin (a + 1) → X) (y : Fin (b + 1) → Y) (p : MixedCorner a b), (evaluate (τ p).val.1 x y).eraseIdx p.val.2 = (evaluate p.val.1 x y).eraseIdx p.val.2) ∧ ∃ hM : (Set.univ : Set (MixedCorner a b)).Finite, ∀ (X : Type u) (Y : Type v) (x : Fin (a + 1) → X) (y : Fin (b + 1) → Y), (∑ p ∈ hM.toFinset, (sign p.val.1 * (-1 : ℤ) ^ p.val.2) • Finsupp.single ((evaluate p.val.1 x y).eraseIdx p.val.2) (1 : ℤ)) = (0 : List (X × Y) →₀ ℤ))",
+  "branch": "sheaf-dag",
+  "by": "Q73",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Reuses the already landed horizontal-face module for Word, horizontalCount, verticalCount, inversions, sign and evaluate; the existing definitions are owned by def-sfb-shuffle-word-combinatorics in stmt_deps. The horizontal-face theorem is neither a statement nor a proof dependency. MixedCorner is the literal labeled set introduced by this node. The theorem specifies the horizontal-then-vertical permutation by its complete value list and the swap by two list updates, and includes every prefix, inversion, sign, evaluation, sum and empty-axis clause. Finiteness is an existential conclusion, not an added hypothesis. The ambient free module on lists contains exactly the length-n strings occurring in the sum."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a9b822216",
+  "group": "Q73",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 43c3a85 (H2 theorem stmt_dep). Lean module byte-identical (sha256 75486a90…), so prior clause-by-clause acceptance stands and was re-read. Only node change: stmt_deps lem-sfb-shuffle-horizontal-face-reindexing → new def-sfb-shuffle-word-combinatorics (existing:true on unchanged ShuffleHorizontalFaceReindexing; Word/horizontalCount/verticalCount/inversions/sign/evaluate; statement matches the six defs exactly; real data, no choice from the sorried theorem; no duplicate in live/side-live); lean.note updated, statement verbatim. Item still split without lean in live and side-live (not superseded). Report sections present. No file changed, no compile. Advisory: landed citer simplex-lattice-shuffle-boundary uses a separate LatticePath encoding; its stage-3 proof needs a transport."
+ }
+}

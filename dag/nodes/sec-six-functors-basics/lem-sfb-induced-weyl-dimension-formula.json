@@ -1,0 +1,233 @@
+{
+ "id": "lem-sfb-induced-weyl-dimension-formula",
+ "kind": "statement",
+ "title": "Weyl dimension formula for dominant induced modules",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $S$ be a semisimple simply connected $F$-group scheme [def-sc-group-scheme]: it is smooth, connected, affine and of finite type, has no nontrivial smooth connected solvable normal subgroup, and every surjective homomorphism from a semisimple group with finite central kernel is an isomorphism. Solvable means that successive commutator subgroup schemes become trivial; finite central means finite-dimensional coordinate algebra and commuting after every scalar extension. Fix a split maximal torus $T\\subseteq S$ and a Borel subgroup $B\\supseteq T$ with unipotent radical $U$, with these notions as in [lem-sfb-rho-section-modules]. Use the character lattice $X=X^*(T)$, roots $\\Phi$, positive roots $\\Phi^+$ in $\\operatorname{Lie}(B)$, simple roots $\\Delta$, coroots and integer pairing of [lem-sfb-reductive-borel-pair-structure]. Put $\\rho=\\tfrac12\\sum_{\\alpha\\in\\Phi^+}\\alpha\\in X$ as in [lem-sfb-rho-section-modules]. A rational $S$-module is an $F$-vector space $V$ with coaction $c_V:V\\to V\\otimes_F F[S]$ satisfying coassociativity and the counit identity. A submodule is a linear subspace stable under this coaction, and simple means nonzero with only zero and itself as submodules. Write $V^U$ for the vectors whose restricted coaction is $v\\mapsto v\\otimes1$. A finite-dimensional simple module has highest weight $\\eta\\in X$ if $V^U$ is one-dimensional and $t v=\\eta(t)v$ on this line after every commutative $F$-algebra extension. Write $\\dim_F$ for ordinary vector-space dimension, an integer rather than its image in $F$. Let $\\lambda\\in X$ be dominant, meaning $\\langle\\lambda,\\alpha^\\vee\\rangle\\ge0$ for every $\\alpha\\in\\Delta$, and extend it to $\\widetilde\\lambda:B\\to\\mathbf G_m$ by the projection $B\\to T$ of [lem-sfb-reductive-borel-pair-structure]. Define the actual left-translation module\n$$E_B(-\\widetilde\\lambda)=\\{f\\in F[S]: f(gb)=\\widetilde\\lambda(b)f(g)\\text{ after every commutative }F\\text{-algebra extension}\\},\\qquad (s f)(g)=f(s^{-1}g).$$\nThis module is finite-dimensional and\n$$\\dim_F E_B(-\\widetilde\\lambda)=\\prod_{\\alpha\\in\\Phi^+}\\frac{\\langle\\lambda+\\rho,\\alpha^\\vee\\rangle}{\\langle\\rho,\\alpha^\\vee\\rangle}.$$\nThe product and fractions are computed in $\\mathbf Q$, each denominator is a positive integer, and the formula holds in every characteristic. For $\\Phi=\\varnothing$ the product is $1$. The convention uses the roots in $\\operatorname{Lie}(B)$; it does not assert simplicity of this induced module.",
+ "source": {
+  "document": "literature/jantzen-representations-of-algebraic-groups-2003.pdf",
+  "place": "Part II, 5.10--5.12: Weyl character/dimension formula for induced modules, together with Kempf vanishing; WANTED: this book is not local. Online corroboration read: Williamson, Algebraic representations and constructible sheaves, arXiv:1610.06261v1, sections 1.2--1.3, equation (1.4), pp.4--6, https://arxiv.org/pdf/1610.06261. Our Borel is opposite to his convention; opposition -w_0 preserves the dimension product."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "lem-sfb-rho-section-modules",
+  "lem-sfb-reductive-borel-pair-structure"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-reductive-borel-pair-structure], $S$ is reductive and $Q=S/B$ is proper of finite type over $F$. Apply [lem-sfb-homogeneous-line-bundle-sections] with $\\chi=-\\widetilde\\lambda$: its inverse-character equation becomes $f(gb)=\\widetilde\\lambda(b)f(g)$, and its left action is exactly $(sf)(g)=f(s^{-1}g)$. Thus $E_B(-\\widetilde\\lambda)\\simeq H^0(Q,\\mathcal L_{-\\widetilde\\lambda})$ equivariantly, including over all $F$-algebras. The sheaf is coherent. Apply [lem-pc-coherent-hi] to $Q\\to\\operatorname{Spec}F$: a field is Noetherian, so the indicated $H^0$ is finite over $F$. This proves finite dimensionality without any simplicity assertion.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-homogeneous-line-bundle-sections",
+    "lem-pc-coherent-hi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 22d, pp.479--480, Theorems 22.50--22.51, with signs corrected to the line-bundle definition in 18c and 22.48; Jantzen 2003 II.4.5 and II.5.10--5.12 are WANTED."
+   }
+  },
+  {
+   "text": "The weight $\\lambda$ is dominant for the roots in $\\operatorname{Lie}(B)$, and the line bundle has fibre character $-\\widetilde\\lambda$. These are precisely the hypotheses and sign of [lem-sfb-dominant-flag-line-kempf-vanishing]. Hence all its positive-degree cohomology vanishes, over the given field in any characteristic.",
+   "uses": [
+    "lem-sfb-dominant-flag-line-kempf-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 22d, pp.479--480, Theorems 22.50--22.51, with signs corrected to the line-bundle definition in 18c and 22.48; Jantzen 2003 II.4.5 and II.5.10--5.12 are WANTED."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-flag-line-euler-alternant] to the same $S,T,B,\\lambda$. By step 2 its polynomial $q_\\lambda$ is the integral formal character of $H^0$ alone and satisfies $q_\\lambda A(-\\rho)=A(-\\lambda-\\rho)$. The direct-sum decomposition stated there gives $\\epsilon(q_\\lambda)=\\sum_\\eta\\dim_F H^0_\\eta=\\dim_F H^0$. This equality is in $\\mathbf Z$, so it retains the dimension in positive characteristic.",
+   "uses": [
+    "lem-sfb-flag-line-euler-alternant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 22d, pp.479--480, Theorems 22.50--22.51, with signs corrected to the line-bundle definition in 18c and 22.48; Jantzen 2003 II.4.5 and II.5.10--5.12 are WANTED."
+   }
+  },
+  {
+   "text": "By [lem-sfb-simply-connected-character-lattice], the simple roots are a rational basis of $X\\otimes\\mathbf Q$, and the simple coroots form a basis of the dual root system. Together with the root datum in [lem-sfb-reductive-borel-pair-structure], this verifies the spanning and perfect-pairing hypotheses of [lem-sfb-weyl-alternant-augmentation]; $\\rho\\in X$ is one of the stated hypotheses. That lemma makes every $\\langle\\rho,\\alpha^\\vee\\rangle$ a positive integer. Apply it to $q=q_\\lambda$, $\\sigma=-\\rho$ and $\\nu=-\\lambda-\\rho$, using the polynomial identity of step 3 after extension to $\\mathbf Q[X]$. Each numerator and denominator has a minus sign, which cancels in its fraction. Consequently $\\dim_F E_B(-\\widetilde\\lambda)=\\prod_{\\alpha\\in\\Phi^+}\\langle\\lambda+\\rho,\\alpha^\\vee\\rangle/\\langle\\rho,\\alpha^\\vee\\rangle$. This computation takes place in $\\mathbf Q$. For no roots the same lemma gives the empty product $1$, so the argument includes the trivial group. All inputs hold in every characteristic.",
+   "uses": [
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-weyl-alternant-augmentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 22d, p.480; agent augmentation argument explained in report.md."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-homogeneous-line-bundle-sections",
+  "lem-pc-coherent-hi",
+  "lem-sfb-dominant-flag-line-kempf-vanishing",
+  "lem-sfb-flag-line-euler-alternant",
+  "lem-sfb-simply-connected-character-lattice",
+  "lem-sfb-weyl-alternant-augmentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "22d, Theorems 22.48, 22.50--22.51, pp.479--480, with corrected fibre-character signs; explicit augmentation argument. The source errors and missing Jantzen reference are recorded in report.md."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Weyl dimension formula for the rational induced module of a dominant weight over an algebraically closed field in any characteristic",
+   "results": "8 hits: LieModule.zero_lt_finrank_genWeightSpace, LieModule.rank, LieModule.traceForm_genWeightSpace_eq, LieModule.trace_toEnd_genWeightSpace, LieModule.rank_eq_natTrailingDegree, LieAlgebra.IsKilling.finrank_rootSpace_eq_one, LieAlgebra.IsKilling.chainBotCoeff_add_chainTopCoeff, LieModule.traceForm_eq_sum_finrank_nsmul'. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern abstract-group representations or Lie-algebra weight spaces, not dimensions of rational algebraic-group highest-weight modules"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The dimension of the induced rational representation is the Weyl dimension product over positive coroots",
+   "results": "8 hits: Representation.IndV, RootPairing.weylGroupCorootRep, RootPairing.weylGroupRootRep, RootPairing.isSimpleModule_weylGroupRootRep_iff, RootPairing.weylGroup_apply_root, LieAlgebra.IsKilling.finrank_rootSpace_eq_one, RootPairing.isSimpleModule_weylGroupRootRep, RootPairing.span_orbit_eq_top. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern abstract-group representations or Lie-algebra weight spaces, not dimensions of rational algebraic-group highest-weight modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"weyl\", \"finrank\"",
+   "results": "0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern abstract-group representations or Lie-algebra weight spaces, not dimensions of rational algebraic-group highest-weight modules"
+  },
+  {
+   "tool": "grep",
+   "query": "Steinberg|steinberg|Weyl.*dim|weyl.*dim|Frobenius.*[Tt]wist|frobenius.*[Tt]wist",
+   "results": "0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern abstract-group representations or Lie-algebra weight spaces, not dimensions of rational algebraic-group highest-weight modules"
+  },
+  {
+   "tool": "grep",
+   "query": "isSimpleModule_weylGroupRootRep|simple_iff_end_is_rank_one|def IndV|def IsIrreducible",
+   "results": "9 hits: Mathlib/LinearAlgebra/RootSystem/Irreducible.lean, Mathlib/LinearAlgebra/RootSystem/Irreducible.lean, Mathlib/LinearAlgebra/RootSystem/Irreducible.lean, Mathlib/LinearAlgebra/RootSystem/Irreducible.lean, Mathlib/RepresentationTheory/FinGroupCharZero.lean, Mathlib/RepresentationTheory/FinGroupCharZero.lean, Mathlib/RepresentationTheory/FinGroupCharZero.lean, Mathlib/Topology/Sober.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern abstract-group representations or Lie-algebra weight spaces, not dimensions of rational algebraic-group highest-weight modules"
+  },
+  {
+   "tool": "grep",
+   "query": "Weyl.*dimension|Weyl.*character|Kempf|Borel.Weil",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned types; ordinary-group trace characters, Lie-algebra weights and root bilinear forms do not state the algebraic-group line-bundle or Weyl-alternant assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dimension of global sections of a dominant line bundle on a flag variety is the Weyl dimension product",
+   "results": "8 hits: AlgebraicGeometry.isDominant_of_of_appTop_injective, AlgebraicGeometry.instIsMultiplicativeSchemeIsDominant, RootPairing.InvariantForm.apply_weylGroup_smul, AlgebraicGeometry.IsDominant, RootPairing.span_orbit_eq_top, FDRep.scalar_product_char_eq_finrank_equivariant, RootPairing.weylGroupCorootRep, LieModule.Weight.mk.sizeOf_spec",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned types; ordinary-group trace characters, Lie-algebra weights and root bilinear forms do not state the algebraic-group line-bundle or Weyl-alternant assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"weyl\", \"finrank\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned types; ordinary-group trace characters, Lie-algebra weights and root bilinear forms do not state the algebraic-group line-bundle or Weyl-alternant assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weyl dimension formula for a dominant rational induced algebraic group representation over an algebraically closed field in any characteristic",
+   "results": "8 hits: FDRep.char_one, FDRep.simple_iff_char_is_norm_one, FDRep.char_orthonormal, LieModule.zero_lt_finrank_genWeightSpace, FDRep.scalar_product_char_eq_finrank_equivariant, LieModule.traceForm_genWeightSpace_eq, FDRep.average_char_eq_finrank_invariants, LieModule.trace_toEnd_genWeightSpace",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned types; ordinary-group trace characters, Lie-algebra weights and root bilinear forms do not state the algebraic-group line-bundle or Weyl-alternant assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The dimension of the costandard module H zero lambda of a semisimple algebraic group is independent of characteristic and given by Weyls product formula",
+   "results": "8 hits: FDRep.finrank_hom_simple_simple, FDRep.simple_iff_end_is_rank_one, FDRep.char_one, FDRep.simple_iff_char_is_norm_one, LieModule.rank, RootPairing.isSimpleModule_weylGroupRootRep, LieModule.zero_lt_finrank_genWeightSpace, LieAlgebra.IsKilling.chainLength",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned types; ordinary-group trace characters, Lie-algebra weights and root bilinear forms do not state the algebraic-group line-bundle or Weyl-alternant assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-steinberg-induced-module-irreducible",
+  "date": "2026-10-23",
+  "group": "Q86"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module.",
+   "via": [
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-induced-weyl-dimension-formula",
+  "worker": "stage1",
+  "summary": "Identify the actual function module with flag-line sections, use Kempf vanishing and the integral Euler alternant identity, and compute augmentation in the rational group algebra. Three genuinely independent statement-only inputs created; local Milne sign and positive-characteristic errors reported. The item statement is unchanged.",
+  "blueprint": "Read latest sk-thm-sf-ctf-stability/_section.md and direct-images.proof.md, clause (3). This is the inherited Haboush/Steinberg numerical prerequisite below its alteration input, not a change of unit route. blueprint_refs.py ancestor returns None; retain null ancestor and the inherited exact place/via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-coherent-hi",
+    "why": "Generic proper coherent H^0 finiteness over a field (Stacks Tags 02O5 and 02O6), used only to establish that the actual section module is finite dimensional; no theorem of this unit replaces it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-coherent-hi"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-038afd4e6",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-038afd4e6 (reviewer sub-agent of L); spot-checked: I read the item, its 4 steps and all 3 new nodes in full, plus the statements of every cited node (homogeneous-line-bundle-sections, reductive-borel-pair-structure, simply-connected-character-lattice, rho-section-modules, crystallographic-positive-base, lem-pc-coherent-hi). Source: Milne iAG2017 §22d, pp.479-480 (22.48, 22.50-22.52), where L(chi) is defined through chi(b)^{-1}; the report's sign corrections and its counterexample to 22.52 in characteristic p are right, and Jantzen is WANTED with the proof marked agent-origin. Step 1: chi=-lambda~ gives E_B(-lambda~)=H^0(L_{-lambda~}) with matching action; coherent-hi applies over Spec F, which is Noetherian. Steps 2 and 3: the hypotheses match. Kempf sign checked on SL2: dominant lambda gives O(n), dimension n+1. The Euler identity q A(-rho)=A(-lambda-rho) follows from Jantzen's A(mu+rho)/A(rho) by w0-conjugation; lambda=-2omega gives -1=chi(O(-2)). Step 4: the spanning and perfect-pairing hypotheses come from the cited nodes. The augmentation lemma is true: A(sigma)/A(rho) is in Z[X] and has nonzero augmentation, Q[X] is a domain, and the singular-nu, negative-sigma and rank-0 cases hold. The new nodes are statement-only and self-contained, of comparable size and not clauses of the item; rg over the DAG and the blueprint found no duplicates. The tool_use lem-pc-coherent-hi (Stacks 02O5/02O6 finiteness) is accepted. Batch-5: all listed closure endpoints are generic foundations (torus smoothness, fppf base change, invertible sheaves coherent on proper schemes over a field, schematically dense open), not the trace formula, Poincare duality or steps of their proofs, so no RETURN. The parent Steinberg node uses the item exactly as stated."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.InducedWeylDimensionFormula",
+  "declaration": "AlgebraicGeometry.induced_weyl_dimension_formula",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/InducedWeylDimensionFormula.lean",
+  "statement": "theorem induced_weyl_dimension_formula {F : Type u} [Field F] [IsAlgClosed F] (G : Grp (Over (Spec (.of F)))) (hG : IsSemisimpleGroupScheme G.X) (hsc : ∀ (G' : Over (Spec (.of F))) [GrpObj G'], IsSemisimpleGroupScheme G' → ∀ (f : G' ⟶ G.X) [IsMonHom f], Surjective f.left → IsFinite (GrpObj.ker f).hom → (∀ (A : Type u) [CommRing A] [Algebra F A] (x : StandardGroupSchemes.affine F A ⟶ GrpObj.ker f) (g : StandardGroupSchemes.affine F A ⟶ G'), (x ≫ GrpObj.kerι f) * g = g * (x ≫ GrpObj.kerι f)) → IsIso f) (T B : Grp (Over (Spec (.of F)))) (iT : T ⟶ G) (iB : B ⟶ G) (j : T ⟶ B) (hT : ReductiveTorusCentralizer.IsMaximalTorus iT) (hsplit : ∃ r : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus F r)) (hB : IsBorelGroupScheme iB.hom.hom) (hj : j ≫ iB = iT) [IsCommMonObj T.X] [IsCommMonObj (StandardGroupSchemes.multiplicative F)] (aG : ModObj T.X G.X) (aB : ModObj T.X B.X) (haG : aG.smul = (iT.hom.hom ⊗ₘ 𝟙 G.X) ≫ CategoryTheory.GrpObj.conj G.X) (haB : aB.smul = (j.hom.hom ⊗ₘ 𝟙 B.X) ≫ CategoryTheory.GrpObj.conj B.X) (Φ : Finset (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)))) (P : RootDatum Φ (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T))) (b : P.Base) (hroot : ∀ α : Φ, P.root α = α.val) (hpair : ∀ (χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (ν : Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T)), ν.toMul.hom.hom ≫ χ.toMul.hom.hom = (𝟙 (StandardGroupSchemes.multiplicative F)) ^ (P.toLinearMap χ ν)) (hweights : ∀ χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)), χ ∈ Φ ↔ χ ≠ 0 ∧ @TorusCharacterTangent.weightSpace F _ T G aG χ.toMul ≠ ⊥) (hpositive : ∀ α : Φ, b.IsPos α ↔ @TorusCharacterTangent.weightSpace F _ T B aB α.val.toMul ≠ ⊥) (p : B ⟶ T) (hp : j ≫ p = 𝟙 T) (ρ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (hρ : 2 • ρ = ∑ α : Φ with b.IsPos α, P.root α) (lam : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (hlam : ∀ α : b.support, 0 ≤ P.toLinearMap lam (P.coroot α)) : Module.Finite F (RhoSection.sectionModule G B iB (p ≫ lam.toMul) 1) ∧ RhoSection.HasRationalLeftTranslation G (RhoSection.sectionModule G B iB (p ≫ lam.toMul) 1) ∧ (∀ α : Φ, b.IsPos α → 0 < P.toLinearMap ρ (P.coroot α)) ∧ (Module.finrank F (RhoSection.sectionModule G B iB (p ≫ lam.toMul) 1) : ℚ) = ∏ α : Φ with b.IsPos α, (P.toLinearMap (lam + ρ) (P.coroot α) : ℚ) / (P.toLinearMap ρ (P.coroot α) : ℚ)",
+  "branch": "newtargets-dag",
+  "by": "Q48",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-37b53ca97",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Matched every node clause to the Lean: alg. closed F, semisimple + simply-connected (verbatim exists_rho_section_modules interface), torus/Borel/root datum/base pins verbatim from reductive_borel_pair_structure, retraction p canonical (kills U), 2•ρ = Σ positive roots, dominance on b.support; sectionModule (p≫lam) 1 is exactly {f(gb)=λ̃(b)f(g)} over all Type-u F-algebras (SL2 sign check: n+1); conclusions Module.Finite, rational left translation f(s⁻¹g), positive integer ρ-pairings, finrank in ℚ equals the Weyl product. Edge cases Φ=∅, char p/2, λ=0, universes OK. Statement verbatim, sole sorry, docstrings with source and blueprint, no duplicate notion, no new nodes. Not recompiled (no changes)."
+ }
+}

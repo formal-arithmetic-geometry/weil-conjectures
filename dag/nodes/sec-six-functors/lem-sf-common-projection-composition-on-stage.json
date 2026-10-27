@@ -1,0 +1,127 @@
+{
+ "id": "lem-sf-common-projection-composition-on-stage",
+ "kind": "statement",
+ "title": "The common-stage projection composition equation on finite models",
+ "statement": "Fix finite-field datum $D$, coefficient datum $C$, and $H:\\mathrm{SixFunctorCommonStages}(D,C)$ [def-sf-operation-stages]. Write $S=H.\\mathrm{commonStage}$, $T_X=H.\\mathrm{commonStageTensor}(X)$, $\\pi_{f,c}(K,L)$ for the specified compact-support projection [def-sf-constructible-projection-mates], and $\\iota_{E,X}$ for the common-stage inclusion [def-weil-algebraically-closed-coefficients]. Fix one finite coefficient field $E$ and suppose its rational stage satisfies CompactSupportProjectionCoherence on every second input [def-sf-projection-comparison-equations]. Let $f:X\\to Y$ and $g:Y\\to Z$ be separated, locally of finite type and quasi-compact, with compactifications $c_f,c_g,c_{fg}$ of $f,g,fg$. For $K_E\\in\\mathrm{Stage}_E(X)$ and $L_E\\in\\mathrm{Stage}_E(Z)$, set $K=\\iota_{E,X}K_E$ and $L=\\iota_{E,Z}L_E$. Write $m$ for the hom component of $S.\\mathrm{composition}_{f,g,c_f,c_g,c_{fg}}$ and $r$ for the hom component of $S.\\mathrm{pullComposition}_{f,g}$. Then\n$$T_Z(m_K,1_L);\\pi_{g,c_g}(S_{f,c_f}K,L);S_{g,c_g}(\\pi_{f,c_f}(K,S.\\mathrm{pull}_gL))=\\pi_{fg,c_{fg}}(K,L);m_{T_X(K,S.\\mathrm{pull}_{fg}L)};S_{g,c_g}S_{f,c_f}(T_X(1_K,r_L)).$$\nHere $S_{f,c}=S.\\mathrm{support}(f,c)$, and semicolon denotes composition in displayed order. This asserts only this binary equation on the included models, with no refinement, pentagon or proper conclusion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+  "place": "Compatibility and finite/common coefficient-field paragraphs, together with the coherence sentence of fix-prop-projection-formula"
+ },
+ "stmt_deps": [
+  "def-sf-operation-stages",
+  "def-sf-projection-comparison-equations",
+  "def-weil-algebraically-closed-coefficients",
+  "def-sf-constructible-projection-mates"
+ ],
+ "proof": [
+  {
+   "text": "Obtain one tensor natural isomorphism for each space and its single-arrow projection compatibility square from lem-sf-common-projection-tensor-compatibility. Apply the already proved generic ProjectionCoefficientTransport.composition_transfer from RationalProjectionComparisonEquations to H.commonStageComparison E, this tensorator, and these squares. That calculation uses tensor and projection naturality, support-compositor preservation and pullComposition preservation, and cancels the source comparison isomorphism. Supply hH.composition at the two original rational models. The result is exactly the required composition equation on their included common-stage models; no equation is reflected through inclusion. The generic calculation is reused via a proof-only import all, without using compactSupportProjectionCoherence_rational or rationalProjectionTensorCompatibility.",
+   "uses": [
+    "lem-sf-common-projection-tensor-compatibility",
+    "lem-sf-rational-projection-comparison-equations",
+    "def-sf-projection-comparison-equations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-common-projection-tensor-compatibility",
+  "lem-sf-rational-projection-comparison-equations",
+  "def-sf-projection-comparison-equations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+  "place": "Compatibility and common coefficient-field paragraphs; J1 reuses the proved generic composition-transfer calculation and isolates the individual projection-arrow comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Transport a natural transformation equation along a coefficient functor preserving tensor products and adjunction units and counits",
+   "results": "NatTrans.tensor_naturality, NatTrans.IsMonoidal.tensor, Functor.Monoidal.transport_δ, transport_μ, natTransIsMonoidal_of_transport, transport_ε, transport_η and NatTrans.mk.",
+   "date": "2026-10-26",
+   "verdict": "These provide generic tensor naturality and monoidal transport, but do not identify this specified compact-support projection mate under coefficient inclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport natural transformation commutative diagrams through essentially surjective functor and natural isomorphisms",
+   "results": "CategoryTheory.Functor.objObjPreimageIso, essSurj_of_iso, and comma-category essential-surjectivity results.",
+   "date": "2026-10-26",
+   "verdict": "These transport input objects, but do not identify the canonical projection mate with its coefficient image."
+  },
+  {
+   "tool": "loogle",
+   "query": "NatTrans.naturality",
+   "results": "msearch returned no hits, reporting unknown identifier NatTrans.naturality; local Mathlib and the existing projection_natural proof supply naturality.",
+   "date": "2026-10-26",
+   "verdict": "Naturality is proved in the parent module; the missing step is the finite-model comparison calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupportProjectionCoherence|SixFunctorCoefficientComparison",
+   "results": "msearch returned zero hits. Local rg found CompactSupportProjectionFieldStages, RationalProjectionComparisonEquations, CompactSupportProjectionCoherence and SixFunctorOperationDatumStages. The field-stage consumer imports the parent theorem, so cannot supply it.",
+   "date": "2026-10-26",
+   "verdict": "No existing theorem gives this finite-model composition equation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CommonProjectionComparisonEquations",
+  "group": "P3",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Finite-model composition comparison in coefficient transport of the projection equations",
+   "via": [
+    "lem-sf-common-projection-comparison-equations",
+    "lem-sf-projection-field-stage-laws"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CommonProjectionCompositionOnStage",
+  "file": "lean/Sheaf/Paper/CommonProjectionCompositionOnStage.lean",
+  "declaration": "WeilConjectures.commonProjectionComposition_onStage",
+  "statement": "theorem commonProjectionComposition_onStage\n    {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}\n    (H : SixFunctorCommonStages D C)\n    (E₀ : Padic.FiniteCoefficientFields C.l C.Qbar)\n    (hH : CompactSupportProjectionCoherence (H.coefficientStages E₀).rational\n      (H.coefficientStages E₀).rationalTensor (H.coefficientStages E₀).rationalExchange\n      (fun _ _ ↦ True))\n    {X Y Z : SixFunctorSpace D} (f : X ⟶ Y) (g : Y ⟶ Z)\n    [IsSeparated f.hom.left] [LocallyOfFiniteType f.hom.left] [QuasiCompact f.hom.left]\n    [IsSeparated g.hom.left] [LocallyOfFiniteType g.hom.left] [QuasiCompact g.hom.left]\n    (cf : Compactification f.hom.left) (cg : Compactification g.hom.left)\n    (cfg : Compactification (f ≫ g).hom.left)\n    (K₀ : GeneralAlgebraicallyClosedCoefficients.Stage C.l C.Qbar X.obj.left E₀)\n    (L₀ : GeneralAlgebraicallyClosedCoefficients.Stage C.l C.Qbar Z.obj.left E₀) :\n    let K := (GeneralAlgebraicallyClosedCoefficients.inclusion\n      (l := C.l) (Ω := C.Qbar) (Y := X.obj.left) E₀).obj K₀;\n    let L := (GeneralAlgebraicallyClosedCoefficients.inclusion\n      (l := C.l) (Ω := C.Qbar) (Y := Z.obj.left) E₀).obj L₀;\n      ((H.commonStageTensor Z).map ((H.commonStage.composition f g cf cg cfg).hom.app K)).app L ≫\n          compactSupportProjectionComponent H.commonStageExchange g cg\n            ((H.commonStage.support f cf).obj K) L ≫\n          (H.commonStage.support g cg).map\n            (compactSupportProjectionComponent H.commonStageExchange f cf K\n              ((H.commonStage.pull g).obj L)) =\n        compactSupportProjectionComponent H.commonStageExchange (f ≫ g) cfg K L ≫\n          (H.commonStage.composition f g cf cg cfg).hom.app\n            (((H.commonStageTensor X).obj K).obj ((H.commonStage.pull (f ≫ g)).obj L)) ≫\n          (H.commonStage.support g cg).map ((H.commonStage.support f cf).map\n            (((H.commonStageTensor X).obj K).map\n              ((H.commonStage.pullComposition f g).hom.app L)))",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261026T070434-L-3588485",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261027T012850-L-2341893",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

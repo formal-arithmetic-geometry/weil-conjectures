@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleObjectInverseImageRestriction
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Mathlib.Algebra.Category.Grp.ForgetCorepresentable
 public import Mathlib.CategoryTheory.Sites.CoverLifting

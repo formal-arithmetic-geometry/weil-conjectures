@@ -1,0 +1,162 @@
+{
+ "id": "def-sfb-group-scheme-infinitesimal-points",
+ "kind": "definition",
+ "title": "Infinitesimal points and their canonical Lie equivalence over an arbitrary base",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $S$ be an arbitrary scheme [def-pc-scheme], and let $G,H$ be group objects in schemes over $S$, with multiplication, identity and inverse satisfying the group-scheme diagrams of [def-sc-group-scheme], now over $S$. Write $e_G:S\\to G$ for the identity section. Let $S[\\epsilon]\\to S$ be the dual-number thickening: it has underlying space $|S|$ and structure sheaf $\\mathcal O_S[\\epsilon]/(\\epsilon^2)$, using the dual numbers of [def-sc-dual-numbers], with projection $p$ and zero section $i:S\\to S[\\epsilon]$. Regard this projection as an object of schemes over $S$ (\\texttt{dualNumbersOver}). Define the subgroup of infinitesimal points by $\\operatorname{Inf}_S(G)=\\ker(G(S[\\epsilon])\\xrightarrow{i^*}G(S))$ (\\texttt{infPoints}); thus its elements are morphisms $v:S[\\epsilon]\\to G$ over $S$ with $v\\circ i=e_G$. With $\\Omega^1_{G/S}$ as in [def-sc-relative-differential-sheaf], the identity-cotangent realization of the Lie construction [def-wf-lie-algebra-derivation] is $\\operatorname{Lie}_S(G)=\\operatorname{Hom}_{\\mathcal O_S}(e_G^*\\Omega^1_{G/S},\\mathcal O_S)$. Define its canonical equivalence $\\operatorname{Inf}_S(G)\\simeq\\operatorname{Lie}_S(G)$ (\\texttt{lieEquiv}) by taking the $\\epsilon$-coefficient: locally $v^\\sharp(a)=e_G^\\sharp(a)+\\epsilon D_v(a)$ and $v$ is sent to the morphism corresponding to the relative derivation $D_v$. For every group-scheme homomorphism $f:G\\to H$ over $S$, define $\\operatorname{Inf}_S(f):\\operatorname{Inf}_S(G)\\to\\operatorname{Inf}_S(H)$ (\\texttt{infPointsMap}) as the group homomorphism $v\\mapsto f\\circ v$. No smoothness, affineness, finite-presentation, reducedness, connectedness or characteristic hypothesis is imposed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-group-scheme",
+  "def-sc-dual-numbers",
+  "def-sc-relative-differential-sheaf",
+  "def-wf-lie-algebra-derivation"
+ ],
+ "source": {
+  "document": "literature/conrad-reductive-group-schemes.pdf",
+  "place": "Definition 2.2.1 and Lemma 2.2.4, printed pp.64–66: relative identity tangent module and its dual-number interpretation (read online in the original delivery at https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf; WANTED locally). Existing construction: WeilConjectures/AlgebraicGeometry/GroupScheme/Lie/{InfPoints,InfPointsEquiv,Functoriality}.lean and AlgebraicGeometry/DualNumbers.lean, blueprint sk-d-tangent."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "infPoints|lieEquiv|infPointsMap|dualNumbersOver AlgebraicGeometry",
+   "results": "{\"t\": \"2026-10-24T11:35:22Z\", \"tool\": \"grep\", \"query\": \"infPoints|lieEquiv|infPointsMap|dualNumbersOver\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib declaration supplies this scheme-theoretic interface. Reuse the existing upstream definitions, without creating Lean copies."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Infinitesimal points of a group scheme over an arbitrary base are the kernel of reduction from dual numbers and canonically equivalent to its Lie algebra",
+   "results": "{\"t\": \"2026-10-24T11:35:23Z\", \"tool\": \"leansearch\", \"query\": \"Infinitesimal points of a group scheme over an arbitrary base are the kernel of reduction from dual numbers and canonically equivalent to its Lie algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.infinitesimal\", \"GroupLieAlgebra\", \"LieHom.ker\", \"DualNumber.lift\", \"Algebra.Extension.ker_infinitesimal\", \"LieAlgebra.IsExtension.kerEquivRange\", \"Algebra.Extension.toInfinitesimal\", \"LieAlgebra.lieCharacterEquivLinearDual\"], \"digest\": \"d3fccca1ef4d0bb6\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib declaration supplies this scheme-theoretic interface. Reuse the existing upstream definitions, without creating Lean copies."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Group scheme infinitesimal points dual numbers Lie algebra canonical equivalence functorial map",
+   "results": "{\"t\": \"2026-10-24T11:35:24Z\", \"tool\": \"leanfinder\", \"query\": \"Group scheme infinitesimal points dual numbers Lie algebra canonical equivalence functorial map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.toInfinitesimal\", \"Algebra.Extension.CotangentSpace.map_toInfinitesimal_bijective\", \"Algebra.Extension.H1Cotangent.map_toInfinitesimal_bijective\", \"Algebra.Extension.Cotangent.map_toInfinitesimal_bijective\", \"Algebra.Extension.homInfinitesimal\", \"Algebra.Extension.infinitesimal\", \"Algebra.Extension.ker_infinitesimal\", \"derivationToSquareZeroEquivLift_symm_apply_apply_coe\"], \"digest\": \"3c10f1ceadbc96fe\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib declaration supplies this scheme-theoretic interface. Reuse the existing upstream definitions, without creating Lean copies."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l infPoints|lieEquiv|infPointsMap|dualNumbersOver /home/ubuntu/weil-conjectures-sheaf-shared/lean/WeilConjectures",
+   "results": "/home/ubuntu/weil-conjectures-sheaf-shared/lean/WeilConjectures/AlgebraicGeometry/DualNumbersDiagonal.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/WeilConjectures/AlgebraicGeometry/GroupScheme/DiagonalTangentAddition.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/WeilConjectures/AlgebraicGeometry/GroupScheme/MixedTranslationCoefficients.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/WeilConjectures/AlgebraicGeometry/GroupScheme/InvariantCoefficients.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/WeilConjectures/AlgebraicGeometry/GroupScheme/TwoParameterTranslationAction.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/WeilConjectures/AlgebraicGeometry/GroupScheme/GeneralLinear/ClosedSubgroup/Product.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/WeilConjectures/AlgebraicGeometry/GroupScheme/IdentityTangentAddition.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/WeilConjectures/AlgebraicGeometry/GroupScheme/GeneralLinear/Lie.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/WeilConjectures/AlgebraicGeometry/GroupScheme/DiagonalDerivationCoefficients.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/WeilConjectures/AlgebraicGeometry/GroupScheme/Lie.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/WeilConjectures/AlgebraicGeometry/GroupScheme/Lie/Functoriality.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/WeilConjectures/AlgebraicGeometry/GroupScheme/LieIdentityTangentEquiv.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/WeilConjectures/AlgebraicGeometry/GroupScheme/Lie/Ring.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/WeilConjectures/AlgebraicGeometry/GroupScheme/IdentityTangentOperations.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/WeilConjectures/AlgebraicGeometry/GroupScheme/Lie/Field.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/WeilConjectures/AlgebraicGeometry/GroupScheme/Lie/InfPoints.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/WeilConjectures/AlgebraicGeometry/GroupScheme/GeneralLinear/ClosedSubgroup/Lie.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/WeilConjectures/AlgebraicGeometry/GroupScheme/Lie/Differential.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/WeilConjectures/AlgebraicGeometry/GroupScheme/Lie/PointOfDerivation.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/WeilConjectures/AlgebraicGeometry/GroupScheme/IdentityTangentTransport.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/WeilConjectures/AlgebraicGeometry/GroupScheme/Lie/InfPointsEquiv.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/WeilConjectures/AlgebraicGeometry/GroupScheme/Lie/Bracket.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/WeilConjectures/AlgebraicGeometry/Picard/Jacobian.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/WeilConjectures/AlgebraicGeometry/DualNumbers.lean\n",
+   "date": "2026-10-24",
+   "verdict": "Upstream supplies the four definitions; their full signatures and docstrings were read."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l infPoints|lieEquiv|infPointsMap|dualNumbersOver /home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf",
+   "results": "/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/RepresentationTheory/CharZeroDifferentiationHom.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/AbelDifferentialBoundary.lean\n",
+   "date": "2026-10-24",
+   "verdict": "Existing uses and theorem records do not own the four definitions. No duplicate definition node found."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l infPoints|lieEquiv|infPointsMap|dualNumbersOver /home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes",
+   "results": "/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-algebraic-groups-lie-algebras/lem-ag-identity-tangent-transport.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-algebraic-groups-lie-algebras/lem-ag-dual-numbers-diagonal.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-algebraic-groups-lie-algebras/lem-ag-inf-points-commutative.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-algebraic-groups-lie-algebras/lem-ag-lie-equivalence-multiplication.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-algebraic-groups-lie-algebras/lem-ag-lie-identity-tangent-equiv.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-algebraic-groups-lie-algebras/sk-d-tangent.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-algebraic-groups-lie-algebras/lem-ag-dual-numbers-diagonal-tangent-addition.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-algebraic-groups-lie-algebras/lem-ag-two-parameter-translation-action.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-algebraic-groups-lie-algebras/lem-ag-identity-tangent-addition.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-algebraic-groups-lie-algebras/lem-ag-lie-bracket-add-right.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-algebraic-groups-lie-algebras/lem-ag-mixed-translation-coefficients.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-algebraic-groups-lie-algebras/lem-ag-dual-numbers-diagonal-coefficients.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-algebraic-groups-lie-algebras/lem-ag-lie-bracket-self.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-algebraic-groups-lie-algebras/lem-ag-cartier-reduced.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-algebraic-groups-lie-algebras/lem-ag-identity-tangent-operations.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-algebraic-groups-lie-algebras/lem-ag-lie-bracket-add.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-algebraic-groups-lie-algebras/lem-ag-invariant-coefficient-add.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-algebraic-groups-lie-algebras/lem-ag-lie-bracket-leibniz.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-algebraic-groups-lie-algebras/def-wf-lie-algebra-derivation.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-picard-framework/lem-sc-tangent-space-vector-space.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/def-sfb-curve-vector-fields-fixing-points.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-group-space-square-zero-difference-additive.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/def-sfb-marked-infinitesimal-automorphisms.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-abel-differential-boundary.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/def-sfb-affine-coordinate-hopf-algebra.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-affine-group-dual-number-calculus.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-char-zero-differentiation-hom.json\n",
+   "date": "2026-10-24",
+   "verdict": "Existing uses and theorem records do not own the four definitions. No duplicate definition node found."
+  },
+  {
+   "tool": "grep",
+   "query": "python3 tools/blueprint_refs.py search 'infinitesimal points'",
+   "results": "0 blueprint nodes match 'infinitesimal points'",
+   "date": "2026-10-24",
+   "verdict": "No existing definition node; this node supplies DAG ownership only."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-torus-centralizer-normalizer",
+  "date": "2026-10-24",
+  "group": "NL"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Relative identity tangent vectors in the Lie-invariant clause of Lemma 2.2.4; canonical tangent map by composition of dual-number points.",
+   "via": [
+    "lem-sfb-relative-torus-centralizer-normalizer",
+    "lem-sfb-reductive-torus-fibre-openness",
+    "lem-sfb-smooth-model-reductive-neutral-lift",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Functoriality",
+  "declaration": "AlgebraicGeometry.GrpObj.infPointsMap",
+  "declarations": [
+   "AlgebraicGeometry.GrpObj.infPoints",
+   "AlgebraicGeometry.GrpObj.lieEquiv",
+   "AlgebraicGeometry.GrpObj.infPointsMap",
+   "AlgebraicGeometry.Scheme.dualNumbersOver"
+  ],
+  "statement": "noncomputable def infPointsMap (f : G ⟶ H) [IsMonHom f] : infPoints G →* infPoints H",
+  "branch": "slopmaster2",
+  "by": "NL",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "DAG ownership of existing definitions, as requested by the independent H2 return. Functoriality defines infPointsMap and publicly imports InfPointsEquiv (lieEquiv), InfPoints (infPoints), and DualNumbers (dualNumbersOver). Source parameters are universe u, {S : Scheme.{u}}, (G : Over S) [GrpObj G]; infPointsMap additionally has {H : Over S} [GrpObj H] and (f : G ⟶ H) [IsMonHom f]. lieEquiv is Equiv.ofBijective of the canonical epsilon-coefficient map; no multiplication theorem is used to supply data. No Lean declaration or construction is duplicated. The primary declaration is infPointsMap, declared directly in Functoriality; the other three are available through its public imports."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-49287280d",
+  "group": "NL",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-49287280d",
+  "group": "NL",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of f9bf51eebeb2. Lean byte-identical (sha cfbcac0d...6909). The only node change is the stmt_dep lem-ag-lie-equivalence-multiplication -> new def node def-sfb-group-scheme-infinitesimal-points (existing:true, Lie.Functoriality, infPointsMap primary + infPoints/lieEquiv/dualNumbersOver). All four verified in upstream source and match the node statement; arbitrary base; no other DAG owner (sk-d-tangent is an imported, unreachable field sketch with no lean record). Mechanical finding lem-sfb-relative-split-torus-matrix-sheaf: PASS on this point. The statement uses the theorem's conclusion (coordinates = Classical.choose matrix_sheaf_classification, uniquely pinned by its first clause), and model is introduced in that node's own statement. Clause table re-checked: hypotheses, universal C/N with equality for N, representation and base change, full-coaction Lie invariants with canonical base change, clopen N_sigma cover and base change, r=0. No hollow defs, only the main theorem is sorry, docstrings ok, report sections present. No compile (no file changed)."
+ }
+}

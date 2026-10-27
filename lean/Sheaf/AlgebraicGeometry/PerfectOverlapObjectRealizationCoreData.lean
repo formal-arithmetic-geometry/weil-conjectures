@@ -73,7 +73,7 @@ theorem perfect_overlap_object_realization_core_data
     U V hcover hU hV A B hA hB E φU φV
   have hcore := perfect_overlap_object_realization_core_of_data R c hc i Z t j hij hstage
   unfold perfectOverlapCoreOfDataStatement at hcore
-  exact ⟨⟨data, Classical.choice
-    (hcore U V hcover hU hV A B hA hB E φU φV data rfl)⟩⟩
+  obtain ⟨core⟩ := hcore U V hcover hU hV A B hA hB E φU φV data rfl
+  exact ⟨⟨data, core⟩⟩
 
 end AlgebraicGeometry

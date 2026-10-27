@@ -1,0 +1,156 @@
+{
+ "id": "lem-sp-tower-open-hom-comparison",
+ "kind": "statement",
+ "title": "The outer Hom comparison for a tower binary open cover",
+ "statement": "Use [sk-def-sfb-dc-setting], [def-weil-l-adic-coefficient-extension], [sk-def-sp-coefficient-towers], [det-sp-coefficient-towers-abelian], [sk-def-sp-normalized-towers], [def-weil-proetale-constructible-sheaf], [def-weil-proetale-tor-amplitude], [det-sp-tower-shriek-levels], [lem-sp-coefficient-tower-shriek-calculus], [lem-sp-tower-binary-ctf-fibre], the open-counit data of [def-sp-tower-binary-open-counit-data], and the exactness predicates of [def-sp-tower-binary-counit-predicates]. Fix h:Z→Y and c, a binary cover U,V, good K,P,Q, local representing counits eU,eV and preservation of good objects by compact support. Let G be good and aU:G|U≅P, aV:G|V≅Q, and fix e:F_ZG→K satisfying LiftEquations. Then the OpenThetaEquation identities hold on U,V,W, with the W counit restricted from U and its specified restrictionComp isomorphism. For every good M there exists delta making the canonical signed cover triangle distinguished; its A,B,A[1],B[1] are good; both HomFiveExact and ImageHomFiveExact hold; and the four OuterBijective comparison maps are bijective. The central map is deliberately not asserted bijective.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+  "place": "Gluing paragraph: restriction pairs, compatible counit lift and five-term Hom comparison"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sp-coefficient-towers",
+  "det-sp-coefficient-towers-abelian",
+  "sk-def-sp-normalized-towers",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-proetale-tor-amplitude",
+  "det-sp-tower-shriek-levels",
+  "lem-sp-coefficient-tower-shriek-calculus",
+  "lem-sp-tower-binary-ctf-fibre",
+  "def-sp-tower-binary-open-counit-data",
+  "def-sp-tower-binary-counit-predicates"
+ ],
+ "proof": [
+  {
+   "text": "For a tower complex $M$ put $A_M=j_{W!}(M|_W)$, $B_M=j_{U!}(M|_U)\\oplus j_{V!}(M|_V)$. The sequence-topos localization of [lem-pur-sequence-site-open-extension], with coefficient rings $A_n$, identifies these with the slice-topos operations. The constant subterminals $U,V$ cover the terminal sequence, as their union is terminal at every level, and their intersection is $W$. Clause (2) of [lem-sp-ringed-topos-binary-descent] therefore gives\n$$A_M\\xrightarrow{s_M=(1,-1)}B_M\\xrightarrow{t_M=(1,1)}M\\xrightarrow{\\delta_M}A_M[1].$$\nAll these objects are in $\\mathcal C_Z$ when $M$ is, by exact open extension from [lem-sp-coefficient-tower-shriek-calculus]; finite sums and shifts preserve the defining uniform intervals (take the union of the two intervals). The calculus makes $F_Z$ exact and identifies $F_Zj_{D!}$ with $F_D$, including the nested-open maps and counits.",
+   "uses": [
+    "lem-pur-sequence-site-open-extension",
+    "lem-sp-ringed-topos-binary-descent",
+    "lem-sp-coefficient-tower-shriek-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+    "place": "Gluing paragraph: restriction pairs, compatible counit lift and five-term Hom comparison"
+   }
+  },
+  {
+   "text": "Fix any such lift $\\epsilon$, and set $\\theta_T(b)=\\epsilon F_Z(b)$. For $D=U,V,W$ and any $N\\in\\mathcal C_D$, the open adjunction identifies a map $b:j_{D!}N\\to G$ with $b_D:N\\to G|_D$. Under $F_Zj_{D!}=F_D$, the lift equation identifies $\\theta_{j_{D!}N}(b)$ with $\\epsilon_D F_D(a_D b_D)$ for $D=U,V$. On $W$ the identical formula uses $a_U|_W$ and $e_P$, by precomposing the $U$ equation with the nested-open map. These are bijections by step 1, the assumed local representability, and the isomorphisms $a_D$. This applies also to $N=(M|_D)[1]$: exact open extension commutes with shifts, so it proves that $\\theta$ is bijective on $A_M,B_M,A_M[1],B_M[1]$. For $B_M$ use the product decomposition of the Hom group of a finite direct sum.",
+   "uses": [
+    "lem-sp-tower-restricted-representing-pair",
+    "lem-sp-coefficient-tower-shriek-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+    "place": "Gluing paragraph: restriction pairs, compatible counit lift and five-term Hom comparison"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-hom-out-of-triangle-exact] to the triangle of step 3 and its rotations. Clause (i) gives exactness at $\\operatorname{Hom}(B_M,G)$, clause (ii) gives exactness at $\\operatorname{Hom}(M,G)$, and clause (ii) for the rotated triangle $B_M\\to M\\to A_M[1]\\xrightarrow{-s_M[1]}B_M[1]$ (whose $X[1]$ is $B_M[1]$) gives exactness at $\\operatorname{Hom}(A_M[1],G)$. The reverse inclusions hold because consecutive composites in a distinguished triangle vanish. The resulting window is\n$$\\operatorname{Hom}(B_M[1],G)\\to\\operatorname{Hom}(A_M[1],G)\\to\\operatorname{Hom}(M,G)\\to\\operatorname{Hom}(B_M,G)\\to\\operatorname{Hom}(A_M,G).$$\nApply the same cited clauses to the image triangle under exact $F_Z$, with target $K$, for the lower window. Both rows are exact at their three interior terms; the shift isomorphism of the exact functor identifies $F_Z(A_M[1])$ with $(F_ZA_M)[1]$.",
+   "uses": [
+    "lem-weil-pbc-hom-out-of-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+    "place": "Gluing paragraph: restriction pairs, compatible counit lift and five-term Hom comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-sequence-site-open-extension",
+  "lem-sp-ringed-topos-binary-descent",
+  "lem-sp-coefficient-tower-shriek-calculus",
+  "lem-sp-tower-restricted-representing-pair",
+  "lem-weil-pbc-hom-out-of-triangle-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+  "place": "Gluing paragraph: restriction pairs, compatible counit lift and five-term Hom comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A representing counit remains representing after restriction to a smaller open using the open extension adjunction; compatible local counits factor through a signed Mayer Vietoris triangle; exact five term contravariant Hom rows with outer maps bijective by open adjunction",
+   "results": "Ordinary sheaf restriction and scalar adjunctions, Opens.mayerVietorisSquare, and homological-functor exact-row APIs found. None states the strict coefficient-tower restriction, lift, or local outer comparison.",
+   "date": "2026-10-25",
+   "verdict": "No exact statement; retain the geometric steps as separate named theorems."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of representing counits on derived sheaves through exact open extension adjunction; compatible local representing counits on a binary open cover lift across the signed open cover distinguished triangle; bijective middle comparison in exact additive-group rows",
+   "results": "Sheaf adjunction formulas and ordinary sheaf gluing found. The additive five lemma is AddMonoidHom.bijective_of_surjective_of_bijective_of_bijective_of_injective in Mathlib.Algebra.FiveLemma; it is used directly to close the central bijection. No tower-specific match.",
+   "date": "2026-10-25",
+   "verdict": "Use Mathlib for the five lemma and leave only geometric steps."
+  },
+  {
+   "tool": "grep",
+   "query": "counit.*represent|represent.*counit|five_lemma|bijective.*exact|exact.*bijective; HomFiveExact|ImageHomFiveExact|OuterBijective in Mathlib, Sheaf, WeilConjectures, and DAG; blueprint_refs.py search representing and counit",
+   "results": "Existing main item is the only binary tower theorem. EvaluatedRepresentability is a downstream finite-level theorem and cannot be imported. Mathlib.Algebra.FiveLemma has the additive group result. No distinct existing DAG node realizes the three extracted steps; the old node proof explicitly contains each.",
+   "date": "2026-10-25",
+   "verdict": "Reuse all existing definitions unchanged; extract the three actual proof steps, not a renamed main statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothPurityTowerBinaryCounitRepresentability",
+  "date": "2026-10-25",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-gluing",
+   "place": "Gluing paragraph: restriction pairs, compatible counit lift and five-term Hom comparison",
+   "via": [
+    "lem-sp-tower-binary-counit-representability"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "module": "Sheaf.Paper.SmoothPurityTowerOpenHomComparison",
+  "file": "lean/Sheaf/Paper/SmoothPurityTowerOpenHomComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerBinaryCounit.open_hom_comparison",
+  "statement": "theorem open_hom_comparison\n    (p : ℕ) (hp : 0 < p) (hlp : l ≠ p)\n    (k : Type u) [Field k] [CharP k p]\n    (Z Y : Over (Spec (CommRingCat.of k)))\n    [IsSeparated Z.hom] [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom]\n    [IsSeparated Y.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]\n    (h : Z ⟶ Y) (c₀ : Compactification h.left)\n    (U V : Z.left.Opens) (hcover : U ⊔ V = ⊤)\n    (_hF : ∀ M : D l E Z.left, good l E b q Z.left M →\n      good l E b q Y.left ((F l E b o c₀).obj M))\n    (_hFD : ∀ (D₀ : Z.left.Opens) (N : D l E D₀.toScheme),\n      good l E b q D₀.toScheme N →\n      good l E b q Y.left ((support l E b o c₀ D₀).obj N))\n    (K : D l E Y.left) (_hK : good l E b q Y.left K)\n    (P : D l E U.toScheme) (_hP : good l E b q U.toScheme P)\n    (Q : D l E V.toScheme) (_hQ : good l E b q V.toScheme Q)\n    (eU : (support l E b o c₀ U).obj P ⟶ K)\n    (eV : (support l E b o c₀ V).obj Q ⟶ K)\n    (hU : Represents l E b q (support l E b o c₀ U) P K eU)\n    (hV : Represents l E b q (support l E b o c₀ V) Q K eV)\n    (G : D l E Z.left) (hG : good l E b q Z.left G)\n    (aU : (restriction l E b o U).obj G ≅ P)\n    (aV : (restriction l E b o V).obj G ≅ Q)\n    (e : (F l E b o c₀).obj G ⟶ K)\n    (he : LiftEquations l E b o c₀ U V eU eV aU aV e) :\n          OpenThetaEquation l E b o q c₀ U eU aU e ∧\n          OpenThetaEquation l E b o q c₀ V eV aV e ∧\n          OpenThetaEquation l E b o q c₀ (U ⊓ V)\n            (restrictedCounit l E b o c₀ (inf_le_left : U ⊓ V ≤ U) P K eU)\n            ((restrictionComp l E b o (inf_le_left : U ⊓ V ≤ U)).app G ≪≫\n              (restrictionBetween l E b o (inf_le_left : U ⊓ V ≤ U)).mapIso aU) e ∧\n          ∀ M : D l E Z.left, good l E b q Z.left M →\n            ∃ δ : M ⟶ (shiftFunctor _ (1 : ℤ)).obj (coverA l E b o U V M),\n              Triangle.mk (coverS l E b o U V M) (coverT l E b o U V M) δ ∈\n                distTriang _ ∧\n              good l E b q Z.left (coverA l E b o U V M) ∧\n              good l E b q Z.left (coverB l E b o U V M) ∧\n              good l E b q Z.left\n                ((shiftFunctor _ (1 : ℤ)).obj (coverA l E b o U V M)) ∧\n              good l E b q Z.left\n                ((shiftFunctor _ (1 : ℤ)).obj (coverB l E b o U V M)) ∧\n              HomFiveExact (coverS l E b o U V M) (coverT l E b o U V M) δ G ∧\n              ImageHomFiveExact (F l E b o c₀)\n                (coverS l E b o U V M) (coverT l E b o U V M) δ K ∧\n              OuterBijective (A := coverA l E b o U V M) (B := coverB l E b o U V M)\n                (F l E b o c₀) e",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-728da",
+  "group": "H4",
+  "result": "fix",
+  "landing": "20261025T163655-L-767613",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-728da",
+  "group": "H4",
+  "result": "fix",
+  "landing": "20261025T163655-L-767613",
+  "kind": "interface",
+  "note": "independent cc review: item stmt + 17 relocated defs byte-identical vs clone; 3 new sorry lemmas vs item clauses (restricted pair = conjunct 1; lift & open comparison checked, no hidden need for dropped hyps); importer EvaluatedRepresentability compiled against delivered modules; axioms propext/sorryAx/choice/Quot.sound"
+ }
+}

@@ -60,7 +60,118 @@
   "item": "lem-weil-pbc-sheaf-flat-separator",
   "date": "2026-10-09"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "CategoryTheory.GrothendieckTopology.isGrothendieckAbelian_sheaf_of_essentiallySmall",
+     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf",
+     "lines": [
+      37,
+      47
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.GrothendieckTopology.monoidalCategory_sheaf_of_essentiallySmall",
+     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs",
+     "lines": [
+      93,
+      98
+     ],
+     "kind": "instance",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.GrothendieckTopology.braidedCategory_sheaf_of_essentiallySmall",
+     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs",
+     "lines": [
+      100,
+      104
+     ],
+     "kind": "instance",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.GrothendieckTopology.monoidalClosed_sheaf_of_essentiallySmall",
+     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits",
+     "lines": [
+      92,
+      101
+     ],
+     "kind": "instance",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": [
+    {
+     "name": "CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall",
+     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify",
+     "lines": [
+      39,
+      49
+     ],
+     "kind": "theorem",
+     "nodes": [],
+     "below": false
+    }
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed_part",
+   "decls": [
+    {
+     "name": "CategoryTheory.GrothendieckTopology.isGrothendieckAbelian_sheaf_of_essentiallySmall",
+     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf",
+     "lines": [
+      40,
+      50
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.GrothendieckTopology.monoidalCategory_sheaf_of_essentiallySmall",
+     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs",
+     "lines": [
+      93,
+      98
+     ],
+     "kind": "instance",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.GrothendieckTopology.braidedCategory_sheaf_of_essentiallySmall",
+     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs",
+     "lines": [
+      108,
+      112
+     ],
+     "kind": "instance",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.GrothendieckTopology.monoidalClosed_sheaf_of_essentiallySmall",
+     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits",
+     "lines": [
+      92,
+      101
+     ],
+     "kind": "instance",
+     "sorry": false
+    }
+   ],
+   "missing": [
+    "branch",
+    "declarations",
+    "note"
+   ],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-def-exchange",
  "lean": {
@@ -76,5 +187,37 @@
   ],
   "sorry_free": true,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\mathcal C$ be an essentially small category with a Grothendieck topology $J$, and let $\\mathcal A$ be a Grothendieck abelian category with a symmetric monoidal closed structure $(\\otimes,\\mathbf 1)$ whose tensor product is additive in each variable. Examples are $\\mathcal A=\\Mod_R$ for a commutative ring $R$, and $\\mathcal A=\\Ab$ with the tensor product $M\\otimes N=M\\otimes_{\\mathbf Z}N$, unit $\\mathbf Z$ and internal hom the group $\\Hom(M,N)$; for $\\Ab$ this is the monoidal structure used throughout, *not* the cartesian one. Examples of sites are the small pro-étale site $X_{\\mathrm{proét}}$ of a scheme $X$ ([def-weil-pbc-proetale-site]) and the category of profinite sets with the coherent topology. Let $a:\\mathrm{PSh}(\\mathcal C;\\mathcal A)\\to\\mathrm{Sh}(\\mathcal C,J;\\mathcal A)$ be sheafification, left adjoint to the inclusion $\\iota$, and equip presheaves with the objectwise tensor product $(F\\otimes_pG)(V)=F(V)\\otimes G(V)$. Then:\n\n1. $\\mathrm{Sh}(\\mathcal C,J;\\mathcal A)$ is a Grothendieck abelian category, and $a$ is exact;\n2. the morphisms inverted by $a$ are stable under $\\otimes_p$ with any presheaf, so the *tensor product* $F\\otimes G:=a(\\iota F\\otimes_p\\iota G)$ with unit $a(\\underline{\\mathbf 1})$ is a symmetric monoidal structure on $\\mathrm{Sh}(\\mathcal C,J;\\mathcal A)$, additive in each variable, for which $a$ is strong symmetric monoidal: $a(P\\otimes_pQ)\\cong aP\\otimes aQ$ naturally in presheaves $P,Q$;\n3. this monoidal structure is closed, so for every sheaf $Q$ the functors $Q\\otimes-$ and $-\\otimes Q$ are left adjoints and preserve all colimits; in particular they are right exact.\n\nFor $\\mathcal A=\\Ab$, the tensor product of abelian sheaves is the sheafified objectwise $\\otimes_{\\mathbf Z}$, with unit the constant sheaf $\\underline{\\mathbf Z}$.",
+  "proof": [
+   {
+    "text": "**1.** Sheafification is a left adjoint, so it is right exact. It is left exact:\nit is computed by applying the plus construction twice, and each plus\nconstruction is a filtered colimit, over covering sieves, of limits of the values\nof the presheaf; finite limits commute with these limits, and with filtered\ncolimits because $\\mathcal A$ is Grothendieck abelian. Colimits of sheaves are\nthe sheafified colimits of presheaves, and colimits of presheaves are computed\nobjectwise in $\\mathcal A$; since $a$ is exact, filtered colimits of sheaves are\nexact. If $G$ is a generator of $\\mathcal A$, the presheaves\n$V\\mapsto\\bigoplus_{\\Hom(V,U)}G$, for $U$ in a small skeleton of $\\mathcal C$,\ngenerate $\\mathrm{PSh}(\\mathcal C;\\mathcal A)$, and their sheafifications generate\n$\\mathrm{Sh}(\\mathcal C,J;\\mathcal A)$ because $\\Hom(aP,F)=\\Hom(P,\\iota F)$. So\n$\\mathrm{Sh}(\\mathcal C,J;\\mathcal A)$ is Grothendieck abelian.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "**2.** The stability of the morphisms inverted by $a$ under $\\otimes_p$ is\n[det-def-sfb-sheaf-tensor-local-iso], and the resulting symmetric monoidal\nstructure, with $a$ strong symmetric monoidal, is\n[det-def-sfb-sheaf-tensor-structure]. Additivity in each variable follows from 3,\nsince a functor preserving colimits is additive.",
+    "uses": [
+     "det-def-sfb-sheaf-tensor-local-iso",
+     "det-def-sfb-sheaf-tensor-structure"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "**3.** This is [det-def-sfb-sheaf-tensor-closed].\n\nFor $\\mathcal A=\\Ab$: the tensor product of abelian groups is the tensor product\nof $\\mathbf Z$-modules, associative, unital with unit $\\mathbf Z$, symmetric and\nadditive in each variable, and the tensor–hom adjunction\n$\\Hom(M\\otimes_{\\mathbf Z}N,P)\\cong\\Hom(N,\\Hom(M,P))$ makes it closed; $\\Ab$ is\nGrothendieck abelian. So 1–3 apply, and the unit $a(\\underline{\\mathbf Z})$ is the\nconstant sheaf $\\underline{\\mathbf Z}$.",
+    "uses": [
+     "det-def-sfb-sheaf-tensor-closed"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

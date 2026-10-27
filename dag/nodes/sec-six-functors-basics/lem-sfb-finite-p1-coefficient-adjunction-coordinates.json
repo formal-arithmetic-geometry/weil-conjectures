@@ -1,0 +1,146 @@
+{
+ "id": "lem-sfb-finite-p1-coefficient-adjunction-coordinates",
+ "kind": "statement",
+ "title": "Finite coefficient coordinates and adjunction transport over an isomorphic projective line",
+ "statement": "Let l be prime, E a finite extension of Q_l, n a nonnegative level with finite coefficient quotient A=ULift(O_E/l^(n+1)), and X,S Noetherian schemes. Fix the actual tower base and geometry g for f:X→S, its coefficient pullback cp, and an isomorphism e:X≅P¹_S over S. Assume l is invertible on S. Use the constant- and root-section normalized CoefficientCoordinates [def-sp-p1-coefficient-coordinates] and the fixed-scalar realization [def-sp-finite-intrinsic-direct-adjunction]. There are such coordinates cS,cX, an exponent-unit witness on X, and natural isomorphisms p:F_S L_fin≅p_P¹* H and q:H R_fin≅Rp_P¹* F_S, where H=e* F_X and p_P¹ is the projection. They satisfy the adjunction unit equation for every ordinary derived object. Moreover the evaluated coefficient pullback, followed by the coordinate of the coefficient unit on X, equals L_fin of the coefficient coordinate on S followed by p and the ordinary unit pullback. Coefficient pullbacks and their section normalization are those of [def-sp-tower-class-diagonal]. No Chern data, class, or projective-line splitting is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), finite coefficient comparison before the system splitting"
+ },
+ "stmt_deps": [
+  "def-sp-tower-class-diagonal",
+  "def-sp-p1-coefficient-coordinates",
+  "def-sp-finite-intrinsic-direct-adjunction",
+  "sk-lem-geo-p1-cohomology",
+  "def-sp-tower-class-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Construct the normalized constant and Tate-line coordinates on X and S from the constant-sheaf universal property and the root-to-tensor map. On every etale chart and pro-etale refinement they send the scalar a and tensor a⊗z to the identical scalar and tensor; these generators determine the isomorphisms. Pullback from S and the isomorphism e give the exponent-unit witness on X.",
+   "uses": [
+    "def-sp-p1-coefficient-coordinates",
+    "def-sp-tower-class-diagonal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the section-normalized derived direct-image realization comparison. Transport along e using its inverse-image equivalence and he to identify the geometric projection. Take inverse-image mates to obtain p and q. The adjunction mate unit identity gives the first equation for every derived object.",
+   "uses": [
+    "def-sp-finite-intrinsic-direct-adjunction",
+    "sk-lem-geo-p1-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On coefficient single complexes, the ordinary adjoint of cp.iso has the constant-ring restriction formula by cp.normalization. Every coordinate has that same section formula, so the maps agree on all constants and hence on the sheaf. Exact single-complex localization gives the second equation, with the inverse pullEvaluation on its source.",
+   "uses": [
+    "def-sp-tower-class-diagonal",
+    "def-sp-p1-coefficient-coordinates"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-p1-coefficient-coordinates",
+  "def-sp-tower-class-diagonal",
+  "def-sp-finite-intrinsic-direct-adjunction",
+  "sk-lem-geo-p1-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), separate coefficient-adjunction and scalar Kummer parts; expanded by F7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Section normalized realization of finite constant coefficient module sheaves commutes with inverse image direct image adjunction and coefficient units",
+   "results": "SheafOfModules.PullbackConstruction.adjunction; pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; pushforwardPushforwardAdj_unit_app_val_app. These are generic underived adjunction and unit ingredients, not this normalized finite comparison.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact realization of first Chern class under evaluation of coefficient towers and the inverse image direct image adjunction",
+   "results": "Eight unrelated cotangent-module, Picard-group and base-change results; one generic sheaf module pullback free-generator lemma.",
+   "date": "2026-10-27",
+   "verdict": "No exact finite coefficient-tower realization theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluatedChern|finite_chern_comparison|geoP1TwistedMap; CoefficientCoordinates.*exists; finite Kummer realization",
+   "results": "msearch grep returned no Mathlib hit. Local searches found TowerClassFinite normalization, TowerP1CoefficientCoordinates definitions, SfIntrinsicRealizationTransport comparisons, and GeoP1Cohomology definitions. No existence theorem for CoefficientCoordinates or comparison of evaluated c1 with the ordinary Kummer class was found. Blueprint-wide searches for finite Kummer class realization and coefficient adjunction coordinates returned zero matching blueprint nodes.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing definitions; state only the missing comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceFiniteChernComparison",
+  "date": "2026-10-27",
+  "group": "F7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (1), finite realization of the section class",
+   "via": [
+    "lem-sfb-diagonal-trace-finite-chern-comparison",
+    "lem-sfb-diagonal-trace-finite-chern-cohomology",
+    "lem-sfb-diagonal-trace-finite-splitting",
+    "lem-sfb-diagonal-trace-twisted-splitting-components",
+    "lem-sfb-diagonal-trace-presentation-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteP1CoefficientAdjunctionCoordinates",
+  "file": "lean/Sheaf/Paper/FiniteP1CoefficientAdjunctionCoordinates.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.finiteP1_coefficient_adjunction_coordinates",
+  "statement": "theorem finiteP1_coefficient_adjunction_coordinates\n    {X S : Scheme.{u}} [IsNoetherian X] [IsNoetherian S]\n    (b : SpTowerShriek.Base l E) {f : X ⟶ S}\n    (e : X ≅ ProjectiveLine S) (he : e.hom ≫ (ProjectiveLine S ↘ S) = f)\n    (g : SpTowerShriek.Geometry l E b f) (cp : CoefficientPullback l E b f g)\n    (hS : IsUnit (l : Γ(S, ⊤))) (n : ℕ) [Finite (SpTowerShriek.R l E n)] :\n    let A := FiniteRing l E n\n    let F := (Scheme.sfIntrinsicModuleEquivalence S\n      (SpTowerShriek.R l E n)).functor.mapDerivedCategory\n    let H := finiteOverRealization l E n e\n    let L := Scheme.proEtaleConstantRingDerivedPullback (SpTowerShriek.R l E n) f\n    let R := (Scheme.proEtaleConstantRingPushforward\n      (SpTowerShriek.R l E n) f).rightDerivedFunctor\n    let ad := (Scheme.proEtaleConstantRingAdjunction\n      (SpTowerShriek.R l E n) f).mapDerivedCategoryRightDerivedAdjunction\n    let ap := derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) (ProjectiveLine S ↘ S)\n    ∃ (hX : IsUnit ((l ^ (n + 1) : ℕ) : Γ(X, ⊤)))\n      (cX : SpTowerP1.CoefficientCoordinates l E n X hX)\n      (cS : SpTowerP1.CoefficientCoordinates l E n S\n        (by simpa only [Nat.cast_pow] using hS.pow (n + 1)))\n      (p : F ⋙ L ≅ geoP1Pullback A (ProjectiveLine S ↘ S) ⋙ H)\n      (q : H ⋙ R ≅ geoP1Pushforward A (ProjectiveLine S ↘ S) ⋙ F),\n      (∀ M, ad.unit.app (F.obj M) ≫ R.map (p.hom.app M) ≫\n        q.hom.app ((geoP1Pullback A (ProjectiveLine S ↘ S)).obj M) = F.map (ap.unit.app M)) ∧\n      ((g.pullEvaluation n).inv.app (unit S (Arings l E S)) ≫\n        (SpTowerShriek.Ev l E X n).map (cp.derivedIso l E).hom ≫\n        (finiteOverUnitCoordinate l E n e cX).hom =\n      L.map (finiteUnitCoordinate l E n S cS).hom ≫ p.hom.app (geoP1Unit A S) ≫\n        H.map (geoP1UnitPullback A (ProjectiveLine S ↘ S)).hom)",
+  "branch": "sheaf-dag",
+  "by": "F7",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalTrace.finiteUnitCoordinate",
+   "AlgebraicGeometry.ProEtale.DiagonalTrace.finiteOverRealization",
+   "AlgebraicGeometry.ProEtale.DiagonalTrace.finiteOverUnitCoordinate",
+   "AlgebraicGeometry.ProEtale.DiagonalTrace.finiteP1_coefficient_adjunction_coordinates"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F7",
+  "result": "pass",
+  "landing": "20261027T034641-L-3670441",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F7",
+  "result": "pass",
+  "landing": "20261027T034641-L-3670441",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

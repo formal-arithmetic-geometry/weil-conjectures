@@ -1,0 +1,309 @@
+{
+ "id": "lem-sfb-pointed-torsor-line-character-descent",
+ "kind": "statement",
+ "title": "Pointed torsor descent identifies trivialized lines with characters",
+ "statement": "Let $k$ be a field [def-weil-field], let $G$ be a finite commutative $k$-group scheme [def-sc-group-scheme], and let $X,Y$ be $k$-schemes [def-pc-scheme]. Let $q:X\\to Y$ be a finite flat surjective morphism [def-weil-finite-integral-morphism, def-weil-flat-morphism, def-weil-surjective-morphism] with a right $G$-action for which\n$$X\\times_kG\\longrightarrow X\\times_YX,\\qquad (x,g)\\longmapsto(x,xg)$$\nis an isomorphism [def-pc-fibre-product]. Fix $x_0\\in X(k)$ and put $y_0=q(x_0)$. Assume that for every $k$-scheme $S$ the structure map induces an isomorphism $\\Gamma(S,\\mathcal O_S)\\xrightarrow{\\sim}\\Gamma(X\\times_kS,\\mathcal O)$. For every $k$-scheme $T$, let $K_q(T)$ be the set of isomorphism classes of pairs $(L,r)$, where $L$ is an invertible module on $Y_T$ [def-sc-invertible-module], $r:y_{0,T}^*L\\xrightarrow{\\sim}\\mathcal O_T$ is a specified rigidification, and $q_T^*L$ is isomorphic to $\\mathcal O_{X_T}$ by an isomorphism restricting to $r$ along $x_{0,T}$. All pullbacks are tensor inverse images [def-pc-module-pullback]. Tensor product gives $K_q(T)$ a group [def-pur-sheaf-tensor-product]. There are bijections of groups, natural in $T$,\n$$K_q(T)\\simeq\\operatorname{Hom}_{T\\text{-grp}}(G_T,\\mathbf G_{m,T}),$$\nwith $\\mathbf G_m$ as in [def-sc-gm-ga]. The normalized trivialization of $q_T^*L$ is unique. Under the displayed torsor isomorphism, its descent isomorphism on $X_T\\times_{Y_T}X_T$ is multiplication by the pullback of the corresponding character along $X_T\\times_TG_T\\to G_T$. Conversely, descent of the trivial line with this multiplier produces $(L,r)$. Fix throughout the convention that this multiplier is the character rather than its inverse. These descriptions commute with arbitrary base change in $T$, including nonreduced $T$.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 023T, proposition-fpqc-descent-quasi-coherent, and lemma-finite-locally-free-descends. Pointed character classification is an agent-derived torsor specialization: the descent multiplier is independent of X by the universal global-functions hypothesis; the cocycle identity is the character law."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-sc-gm-ga",
+  "def-weil-finite-integral-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-surjective-morphism"
+ ],
+ "proof": [
+  {
+   "text": "The singleton $\\{q:X\\to Y\\}$ is an fpqc covering. Indeed, $q$ is flat by hypothesis; over an affine open $V\\subseteq Y$, finiteness says that $q^{-1}(V)$ is affine, and surjectivity says its image is all of $V$. This is exactly the affine-open condition in [def-weil-pbc-fpqc-covering], using [def-weil-finite-integral-morphism]. Apply [lem-galois-fpqc-covering-base-change] to $Y_T\\to Y$: $\\{q_T:X_T\\to Y_T\\}$ is fpqc for every $T$, with no reducedness or finiteness assumption on $T$.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-weil-pbc-fpqc-covering",
+    "lem-galois-fpqc-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 022D, lemma-fpqc; definition of an fpqc covering; affine-preimage criterion for a finite morphism"
+   }
+  },
+  {
+   "text": "Fix $(L,r)\\in K_q(T)$ and an allowed trivialization $\\tau:q_T^*L\\xrightarrow{\\sim}\\mathcal O_{X_T}$. Any two such trivializations differ by an $\\mathcal O_{X_T}$-linear automorphism of $\\mathcal O_{X_T}$. Such an automorphism is multiplication by the global unit which is its value on $1$: on an open $U$, linearity sends $f$ to $f\\,a|_U$, and its inverse gives $a^{-1}$. The hypothesis with $S=T$ says that $a$ is the pullback of a unique unit $v\\in\\Gamma(T,\\mathcal O_T)^\\times$. Since both trivializations restrict to $r$ along $x_{0,T}$, $v=1$. Thus $\\tau$ is unique. Here the pullback identifications along $q_Tx_{0,T}=y_{0,T}$ are those of [def-pc-module-pullback].",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023T, proposition-fpqc-descent-quasi-coherent; Tag 05B2, lemma-finite-locally-free-descends; agent-derived pointed torsor calculation"
+   }
+  },
+  {
+   "text": "Let $p_1,p_2:X_T\\times_{Y_T}X_T\\to X_T$ be the projections. The equality $q_Tp_1=q_Tp_2$ gives the canonical isomorphism $c:p_1^*q_T^*L\\to p_2^*q_T^*L$, with its cocycle identity by composition of these identifications [def-pc-module-pullback]. In the frames $p_i^*\\tau$, put $d=(p_2^*\\tau)c(p_1^*\\tau)^{-1}$. As in step 2, this is multiplication by a global unit. Pull it through the assumed torsor isomorphism $(x,g)\\mapsto(x,xg)$ to a unit $a$ on $X_T\\times_TG_T=X\\times_kG_T$. Apply the universal global-functions hypothesis with the $k$-scheme $S=G_T$: there is a unique $b\\in\\Gamma(G_T,\\mathcal O_{G_T})^\\times$ with $a=\\operatorname{pr}_{G_T}^*b$. Explicitly $b=(x_0,\\mathrm{id})^*a$. This establishes independence of $X$ as a scheme-theoretic equality, not just on geometric points.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023T, proposition-fpqc-descent-quasi-coherent; Tag 05B2, lemma-finite-locally-free-descends; agent-derived pointed torsor calculation"
+   }
+  },
+  {
+   "text": "The torsor isomorphism identifies the triple overlap with $X_T\\times_TG_T\\times_TG_T$, by $(x,g,h)\\mapsto(x,xg,xgh)$. Thus the cocycle identity is\n$$a(x,gh)=a(xg,h)a(x,g).$$\nSubstitution of $a=\\operatorname{pr}_{G_T}^*b$ and restriction along the section $x_0$ give $m^*b=\\operatorname{pr}_2^*b\\,\\operatorname{pr}_1^*b$ on $G_T\\times_TG_T$. On the identity section this gives $e^*b=(e^*b)^2$, so $e^*b=1$ since it is a unit; applying the inverse gives $i^*b=b^{-1}$. The unit $b$ defines a $T$-morphism $\\chi:G_T\\to\\mathbf G_{m,T}$ [def-sc-gm-ga]: on affine opens the coordinate map sends $t$ to $b$ and $t^{-1}$ to $b^{-1}$, and the maps agree on overlaps [def-weil-affine-spectrum]. The displayed identities say exactly that this morphism respects the group operations [def-sc-group-scheme]. This fixes the convention $d=\\chi$, with no inverse inserted.",
+   "uses": [
+    "def-sc-gm-ga",
+    "def-weil-affine-spectrum",
+    "def-sc-group-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023T, proposition-fpqc-descent-quasi-coherent; Tag 05B2, lemma-finite-locally-free-descends; agent-derived pointed torsor calculation"
+   }
+  },
+  {
+   "text": "Conversely, for a $T$-group homomorphism $\\chi:G_T\\to\\mathbf G_{m,T}$, give $\\mathcal O_{X_T}$ the overlap isomorphism which, under $(x,g)\\mapsto(x,xg)$, multiplies by $\\chi(g)$. The character law yields $\\chi(gh)=\\chi(h)\\chi(g)$, precisely the cocycle equation of step 4; $\\chi(e)=1$ gives the diagonal identity. Apply the effective descent and rank-one assertions of [lem-pc-fpqc-descent] to the fpqc covering in step 1. They give an invertible module $L$ on $Y_T$ and a compatible isomorphism $\\tau:q_T^*L\\xrightarrow{\\sim}\\mathcal O_{X_T}$. Pulling $\\tau$ back along $x_{0,T}$ defines $r:y_{0,T}^*L\\xrightarrow{\\sim}\\mathcal O_T$. Thus $(L,r)\\in K_q(T)$, and step 2 makes this $\\tau$ the normalized trivialization. The descended line is invertible because the descent datum is rank one, exactly the case expressly included in the cited statement.",
+   "uses": [
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023T, proposition-fpqc-descent-quasi-coherent; Tag 05B2, lemma-finite-locally-free-descends; agent-derived pointed torsor calculation"
+   }
+  },
+  {
+   "text": "These constructions give inverse maps on isomorphism classes. Starting with a character, step 5 uses its very multiplier, so steps 3--4 recover that character. Starting with $(L,r)$, its normalized frame identifies its canonical descent datum with the one constructed from its character. Full faithfulness in [lem-pc-fpqc-descent] descends the identity of these framed data to a unique isomorphism of the descended lines; restricting its compatibility with the frames along $x_{0,T}$ proves that it respects $r$. Also, an isomorphism of rigidified lines carries their normalized frames to one another by step 2, so it gives the same multiplier. Different choices of an effective descent in step 5 are related by the same uniquely descended frame-compatible isomorphism. This proves well-definedness and bijectivity without choosing preferred representatives.",
+   "uses": [
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023T, proposition-fpqc-descent-quasi-coherent; Tag 05B2, lemma-finite-locally-free-descends; agent-derived pointed torsor calculation"
+   }
+  },
+  {
+   "text": "Tensor product gives the asserted groups. Let $(L_1,r_1),(L_2,r_2)\\in K_q(T)$ with normalized frames $\\tau_1,\\tau_2$ and characters $\\chi_1,\\chi_2$. By [lem-weil-pbc-invertible-pullback-tensor] (1), $L_1\\otimes L_2$ is invertible [def-sc-invertible-module, def-pur-sheaf-tensor-product], and by its clause (2) the pullback isomorphisms $q_T^*(L_1\\otimes L_2)\\cong q_T^*L_1\\otimes q_T^*L_2$ and $y_{0,T}^*(L_1\\otimes L_2)\\cong y_{0,T}^*L_1\\otimes y_{0,T}^*L_2$ send $f^*(s\\otimes t)$ to $f^*s\\otimes f^*t$ and are compatible with the composition isomorphisms $x_{0,T}^*q_T^*\\cong y_{0,T}^*$ and $p_i^*q_T^*\\cong(q_Tp_i)^*$. Hence $\\tau_1\\otimes\\tau_2$ is a trivialization of $q_T^*(L_1\\otimes L_2)$ restricting to $r_1\\otimes r_2$, so $(L_1\\otimes L_2,r_1\\otimes r_2)\\in K_q(T)$ and, by step 2, $\\tau_1\\otimes\\tau_2$ is its normalized frame. Computing on local generators, the canonical descent isomorphism of $q_T^*(L_1\\otimes L_2)$ is the tensor product of those of $q_T^*L_1$ and $q_T^*L_2$, so in the frame $\\tau_1\\otimes\\tau_2$ its scalar is $\\chi_1(g)\\chi_2(g)$, since $(u e_1)\\otimes(v e_2)=uv(e_1\\otimes e_2)$. The class of $(\\mathcal O_{Y_T},\\mathrm{id})$, with frame the canonical $q_T^*\\mathcal O_{Y_T}\\cong\\mathcal O_{X_T}$, has scalar $1$. Tensor associativity and the symmetry of clause (2) are isomorphisms that act on pure tensors by reassociation and swap, so they respect the tensored rigidifications; thus tensor product is an associative commutative operation with unit on $K_q(T)$, and the map to characters of step 6 is multiplicative. Inverses: by step 6 there is a class $(L',r')$ with character $\\chi^{-1}$; then $(L\\otimes L',r\\otimes r')$ has character $1$, which is also the character of $(\\mathcal O_{Y_T},\\mathrm{id})$, so the two are isomorphic by the injectivity in step 6. Hence $K_q(T)$ is a group and the bijection of step 6 is a group isomorphism.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023T, proposition-fpqc-descent-quasi-coherent; Tag 05B2, lemma-finite-locally-free-descends; agent-derived pointed torsor calculation"
+   }
+  },
+  {
+   "text": "For any $f:T'\\to T$, pull back a rigidified line along $Y_{T'}\\to Y_T$, together with its rigidification and its normalized frame; the pullback is invertible by [lem-weil-pbc-invertible-pullback-tensor] (1). Composition of tensor inverse images [def-pc-module-pullback] shows that the resulting frame restricts to the pulled-back rigidification, hence it is the unique normalized frame over $T'$. Pullback of multiplication by $b$ is multiplication by its pulled-back unit, so its character is $\\chi_{T'}$. Conversely, pulling back the compatible descent isomorphism of step 5 gives the datum with multiplier $\\chi_{T'}$. Full faithfulness in [lem-pc-fpqc-descent], applied to the fpqc covering over $T'$ of step 1, identifies it with the descent constructed over $T'$, preserving the frames and therefore the rigidifications. All equalities used were identities of sections or tensor pullbacks on the full schemes; they remain valid for arbitrary, including nonreduced and empty, $T'$ without any flatness assumption on $f$.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-pc-fpqc-descent",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023T, proposition-fpqc-descent-quasi-coherent; Tag 05B2, lemma-finite-locally-free-descends; agent-derived pointed torsor calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-fpqc-covering",
+  "lem-galois-fpqc-covering-base-change",
+  "def-pc-module-pullback",
+  "def-sc-gm-ga",
+  "def-weil-affine-spectrum",
+  "def-sc-group-scheme",
+  "lem-pc-fpqc-descent",
+  "def-sc-invertible-module",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-invertible-pullback-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tags 023T and 05B2: pointed torsor specialization, with normalized-frame and character calculations written out by Q88; base change from Tag 022D in topologies.tex"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Line bundles trivialized on a faithfully flat torsor correspond to characters of its finite commutative group when the total space has only constant functions",
+   "results": "8 hits: hom_trivializationAt, hom_trivializationAt_baseSet, hom_trivializationAt_apply, Trivialization.IsLinear, Trivialization.linearEquivAt, trivialization_linear, VectorBundle.trivialization_linear', Module.Flat.iff_characterModule_injective. The hits concern topological vector bundle frames, module character duality and arithmetic multiplicative characters, not fpqc descent of invertible modules on schemes.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rigidified invertible sheaves killed by pullback along a group scheme torsor are classified by multiplicative characters of the kernel",
+   "results": "8 hits: MulChar.ofUnitHom, MulChar, MulCharClass.recOn, MulChar.mk, MulChar.instMulCharClass, MulChar.casesOn, MulCharClass.mk, MulChar.ext. The hits concern topological vector bundle frames, module character duality and arithmetic multiplicative characters, not fpqc descent of invertible modules on schemes.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsTorsor\", \"Invertible\"",
+   "results": "0 hits: none. The hits concern topological vector bundle frames, module character duality and arithmetic multiplicative characters, not fpqc descent of invertible modules on schemes.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "torsor.*(line|invertible|character)|character.*descent|rigidif.*descent",
+   "results": "4 hits: Mathlib/LinearAlgebra/AffineSpace/MidpointZero.lean, Mathlib/LinearAlgebra/AffineSpace/MidpointZero.lean, Mathlib/Geometry/Convex/ConvexSpace/AffineSpace.lean, Mathlib/Analysis/Normed/Module/FiniteDimension.lean. The hits concern topological vector bundle frames, module character duality and arithmetic multiplicative characters, not fpqc descent of invertible modules on schemes.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized trivializations of invertible sheaves along a faithfully flat group scheme torsor correspond to characters of the group",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.AffineSpace.homOverEquiv, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply, AlgebraicGeometry.AffineSpace.homOverEquiv_symm_apply_coe, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization, SheafOfModules.unitHomEquiv. The normalization and affine-space hits concern scheme morphisms and global sections; unitHomEquiv concerns maps from the unit module. None supplies pointed torsor line descent.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Line bundles killed by pullback to a finite flat group scheme torsor are classified by characters when global functions on the total space are universally constant",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instAdditivePullback, CharacterModule.congr, CharacterModule.instAddCommGroup, CharacterModule.dual_apply, MulChar.ext, Trivialization.pullback_linear, CharacterModule.ext_iff, MulCharClass.recOn. Additivity of module pullback, abstract CharacterModule, arithmetic MulChar and topological bundle trivializations do not state the fpqc scheme classification.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"descent\"",
+   "results": "0 hits: . No declarations returned.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fpqc descent of trivial rank one modules with a group cocycle multiplier gives an equivalence with group scheme characters",
+   "results": "8 hits: groupCohomology.cocycles₁IsoOfIsTrivial, groupCohomology.cocycles₁IsoOfIsTrivial_hom_hom_apply_apply, groupCohomology.isoCocycles₁, groupCohomology.H1IsoOfIsTrivial, groupCohomology.H1π_comp_H1IsoOfIsTrivial_hom_apply, groupCohomology.H1π_comp_H1IsoOfIsTrivial_hom, groupCohomology.H1IsoOfIsTrivial_H1π_apply_apply, groupCohomology.cochainsIso₁. The groupCohomology results concern abstract groups and modules with trivial action; they neither descend scheme line bundles nor construct morphisms of group schemes.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cocycles₁IsoOfIsTrivial|H1IsoOfIsTrivial",
+   "results": "5 hits: 45, 338, 1014, 1019, 1023. These declarations identify abstract group cocycles with homomorphisms, not scheme-theoretic fpqc descent or characters of a group scheme.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dual-isogeny-degree",
+  "date": "2026-10-24",
+  "group": "NH"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Auxiliary for the symmetric ample endomorphism-span input below det-thm-sf-ctf-stability-direct-images, proof (3): Milne AV I §14, the double-dual identification behind the Rosati involution. Biduality proof: apply Milne I Theorem 9.1 to the ample polarization before cancelling its degree. Auxiliary below dual-isogeny-degree: Pointed torsor descent identifies trivialized lines with characters.",
+   "via": [
+    "lem-sfb-dual-isogeny-degree",
+    "lem-sfb-abelian-poincare-biduality",
+    "lem-sfb-polarization-calculus-over-field",
+    "lem-sfb-abelian-symmetric-ample-endomorphism-span",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-pointed-torsor-line-character-descent",
+  "worker": "stage1",
+  "summary": "Q88 checked Stacks 023T, 05B2 and 022D and wrote eight complete steps: fpqc cover, unique normalized frame, descent multiplier independent of X, character law, effective inverse descent, class-level inverse, tensor law, and arbitrary base change. All non-elementary inputs already have nodes; no new node is needed. Statement unchanged.",
+  "blueprint": "Auxiliary below lem-sfb-dual-isogeny-degree, for the character-kernel calculation in Milne AV I Theorem 9.1; serves det-thm-sf-ctf-stability-direct-images proof (3) through the recorded abelian-geometry chain. The inherited ancestor command returns None; retained that provenance without editing other nodes.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-fpqc-descent",
+    "why": "General fpqc descent of rank-one quasi-coherent modules and full faithfulness; a generic descent tool, with no replacement of the unit direct-image route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-fpqc-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q88-c142396a9",
+  "group": "Q88",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-c142396a9 (reviewer sub-agent of L); spot-checked: Read the item in full: statement byte-identical to base (NH snapshot); stmt_deps gained def-weil-surjective-morphism, which the statement cites; all 12 cited statements read. Sources checked: Stacks 023T descent.tex l.1584 (effective descent + full faithfulness), 05B2 l.2005, 022D topologies.tex l.3105 (3); proof_origin by:agent; no SGA. Math correct throughout. Step 1: finite gives affine preimages, surjective gives full image, so {q} is an fpqc cover; base change via lem-galois-fpqc-covering-base-change. Step 2: normalized frame unique (hypothesis with S=T). Step 3: hypothesis with S=G_T gives a=pr^*b. Step 4: cocycle under (x,g,h)->(x,xg,xgh) gives m^*b=pr1^*b pr2^*b, matching m^*t=t(x)t; character into G_m. Steps 5-6: lem-pc-fpqc-descent clauses (1) and (3) for effectivity, invertibility and full faithfulness; this tool use is declared and accepted. Edge cases T empty, G trivial and T=Spec k[eps] (alpha_p characters 1+eps u) all check. No duplicate (cartier-representability and the parent dual-isogeny-degree are different statements); no new nodes. FIX (C1/C4): step 7 tensored rigidifications and frames, and used the dual for inverses, citing only definitions; it needed pullback-tensor compatibility and invertibility of the pullback. Now cites the Lean-closed lem-weil-pbc-invertible-pullback-tensor clauses (1)-(2), and inverses come from the bijection (character chi^{-1} exists by step 6, then injectivity), so no uncited pullback-dual compatibility is needed; marked elementary:false. Step 8 also cites clause (1) for invertibility of f^*L. proof_deps updated to the union of uses. Inherited blueprint.from.node=null (ancestor None along the via chain) comes from the base, not this delivery: maintainer note.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PointedTorsorLineCharacterDescent",
+  "declaration": "AlgebraicGeometry.PointedTorsor.classification",
+  "declarations": [
+   "AlgebraicGeometry.PointedTorsor.unitComparison",
+   "AlgebraicGeometry.PointedTorsor.axis",
+   "AlgebraicGeometry.PointedTorsor.frameAt",
+   "AlgebraicGeometry.PointedTorsor.Pair",
+   "AlgebraicGeometry.PointedTorsor.Pair.Isomorphic",
+   "AlgebraicGeometry.PointedTorsor.Classes",
+   "AlgebraicGeometry.PointedTorsor.classOf",
+   "AlgebraicGeometry.PointedTorsor.IsTensor",
+   "AlgebraicGeometry.PointedTorsor.IsUnit",
+   "AlgebraicGeometry.PointedTorsor.restrictRigidification",
+   "AlgebraicGeometry.PointedTorsor.IsPullback",
+   "AlgebraicGeometry.PointedTorsor.Characters",
+   "AlgebraicGeometry.PointedTorsor.value",
+   "AlgebraicGeometry.PointedTorsor.translate",
+   "AlgebraicGeometry.PointedTorsor.HasMultiplier",
+   "AlgebraicGeometry.PointedTorsor.K",
+   "AlgebraicGeometry.PointedTorsor.Classification",
+   "AlgebraicGeometry.PointedTorsor.classification"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PointedTorsorLineCharacterDescent.lean",
+  "statement": "theorem classification {X Y G : Over (Spec (.of k))} [GrpObj G] [IsCommMonObj G] (hfinite : IsFinite G.hom) (q : X ⟶ Y) (hqfinite : IsFinite q.left) (hqflat : Flat q.left) (hqsurj : Surjective q.left) (a : X ⊗ G ⟶ X) (hunit : ∀ (S : Over (Spec (.of k))) (x : S ⟶ X), lift x 1 ≫ a = x) (hassoc : ∀ (S : Over (Spec (.of k))) (x : S ⟶ X) (g h : S ⟶ G), lift (lift x g ≫ a) h ≫ a = lift x (g * h) ≫ a) (hquot : a ≫ q = fst X G ≫ q) (htorsor : ∀ (S : Over (Spec (.of k))) (x x' : S ⟶ X), x ≫ q = x' ≫ q → ∃! g : S ⟶ G, lift x g ≫ a = x') (x₀ : 𝟙_ (Over (Spec (.of k))) ⟶ X) (hfunctions : ∀ S : Over (Spec (.of k)), Function.Bijective (snd X S).left.appTop) : Nonempty (Classification q a x₀)",
+  "branch": "newtargets-dag",
+  "by": "Q46",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7fbdca1b7",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Each hypothesis matches the node exactly. Right-action laws and unique-g torsor test on all k-scheme points (equals the displayed isomorphism by Yoneda, not stronger); global-functions condition is bijectivity of the second projection's appTop. Pair holds L, IsInvertible, r and only existence of a trivialization restricting to r; classes are a Quot by rigidification-preserving isomorphisms. Classification is fully pinned: K group by the tensor/unit iffs, character group pointwise by the Laurent coordinate, MulEquiv by multiplier plus unique_frame. Multiplier is the character, not its inverse ((p2*tau) c (p1*tau)^-1 = chi). Base change (pullback_exists, frame_naturality, naturality) holds for arbitrary T' -> T. Dependency canonical maps are fixed by uniquely normalized adjunctions; tensor is the def-pur-sheaf-tensor-product one; G_m is StandardGroupSchemes.multiplicative. Node differs from side-live only in lean; no new nodes or dependency modules; all 18 declarations listed; lean.statement verbatim; no name clash; docstrings complete; single sorry. Empty, nonreduced, infinitesimal and trivial-G cases and all characteristics covered; one universe u. Worker report and Second reading by Q46 present. Nothing compiled because nothing changed; compile evidence is the worker's clean scompile."
+ }
+}

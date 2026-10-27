@@ -1,0 +1,349 @@
+{
+ "id": "lem-trf-gauss-rational-function-stability",
+ "kind": "statement",
+ "title": "Stability of a Gauss-valued rational function field",
+ "statement": "Let $k$ be a field [def-weil-field], complete for a nontrivial real-valued multiplicative nonarchimedean absolute value, and stable [def-trf-stable-nonarchimedean-field]. Let $n\\ge1$ and let $P=k[X_1,\\ldots,X_n]$ be the ring of finite sums $\\sum_{\\nu\\in\\mathbf N^n}a_\\nu X^\\nu$, with coefficientwise addition and Cauchy multiplication. Put $R=\\operatorname{Frac}(P)$ and equip it with the Gauss absolute value $$\\left|\\frac{f}{g}\\right|_R=\\frac{\\max_\\nu|f_\\nu|}{\\max_\\nu|g_\\nu|}\\qquad(f,g\\in P,\\ g\\ne0).$$ Then $R$ is stable [def-trf-stable-nonarchimedean-field]: every finite extension $E/R$, endowed with its minimal-polynomial spectral norm $s_{E/R}$, has an $R$-basis $v_1,\\ldots,v_m$ satisfying $$s_{E/R}\\left(\\sum_i a_iv_i\\right)=\\max_i |a_i|_R s_{E/R}(v_i)\\qquad(a_i\\in R).$$ Neither completeness of $R$ nor separability of $E/R$ is assumed.",
+ "source": {
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Sections 5.3.3–5.3.4, especially Proposition 5.3.3/3 and the conclusion of Section 5.3.4, printed pp.215 and 218–220 (scan PDF pp.221 and 224–226); Section 5.3.4 removes the divisible-value-group restriction. Primary scan read online 2026-10-24; local archival copy WANTED.",
+  "url": "https://math.arizona.edu/~cais/scans/BGR-Non_Archimedean_Analysis.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-stable-nonarchimedean-field"
+ ],
+ "proof": [
+  {
+   "text": "First verify the Gauss absolute value. For nonzero polynomials $f,g$, divide each by a coefficient of maximum absolute value. Both normalized polynomials have coefficients of norm at most $1$ and nonzero reductions over $\\widetilde k$. Their product reduction is nonzero: lexicographically largest monomials in their finite supports multiply to a unique largest monomial with nonzero coefficient. Thus the normalized product has Gauss norm $1$, proving $G(fg)=G(f)G(g)$. The coefficient inequalities give definiteness, $G(1)=1$, $G(-f)=G(f)$ and $G(f+g)\\le\\max(G(f),G(g))$. For fractions, $ad=bc$ implies $G(a)G(d)=G(b)G(c)$, so the displayed quotient is independent of representatives. Multiplication follows by taking products of numerators and denominators; for addition use $G(ad+bc)\\le\\max(G(a)G(d),G(b)G(c))$ and divide by $G(b)G(d)$. Constants have their original absolute values, so the extension is nontrivial.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Sections 5.1.2 and 5.3.3; finite coefficient/reduction calculation written out here."
+   }
+  },
+  {
+   "text": "We first prove the claim under the extra assumption that $\\Gamma=|k^\\times|$ is divisible, meaning $r^{1/j}\\in\\Gamma$ for $r\\in\\Gamma$ and $j\\ge1$. Let $E/R$ be any finite extension, $s=s_{E/R}$ and $d=[E:R]$. A nonzero Gauss value on $R$ belongs to $\\Gamma$. In the minimal-polynomial formula for $s(z)$ at $z\\ne0$, the finite maximum is a nonzero $|a_i|_R^{1/i}$, hence also belongs to $\\Gamma$. Write $D=\\widetilde E=\\{s\\le1\\}/\\{s<1\\}$ and $F=\\widetilde k$. By [lem-trf-spectral-reduction-dimension-criterion], $D$ is a nonzero finite reduced algebra over $\\widetilde R$ and $\\dim_{\\widetilde R}D\\le d$. Coefficient reduction identifies $\\widetilde R$ with $F(X)$: normalize a denominator to Gauss norm $1$, reduce numerator and denominator, and note that the reduction vanishes precisely when the numerator has norm less than $1$; conversely lift the finitely many coefficients of any fraction in $F(X)$.",
+   "uses": [
+    "lem-trf-spectral-reduction-dimension-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proposition 5.3.3/3, printed pp.215–216: divisible-value-group case and equations (1)–(2)."
+   }
+  },
+  {
+   "text": "Give $R$ also the independent total-degree absolute value $|f/g|_t=\\exp(\\deg f-\\deg g)$. Let $B$ be the integral closure of $k[X]$ in $E$ and $B(\\nu)=\\{z\\in B:s_t(z)\\le\\exp(\\nu)\\}$. Let $C$ be the integral closure of $F[X]$ in $D$ and define $C(\\nu)$ with its total-degree spectral norm. By [lem-trf-degree-filtration-rank-asymptotic], both filtrations have finite-dimensional pieces and $$d=n!\\lim\\nu^{-n}\\dim_k B(\\nu),\\qquad \\dim_{F(X)}D=n!\\lim\\nu^{-n}\\dim_F C(\\nu).$$ Apply [lem-trf-gauss-spectral-coefficient-cartesian] to the finite $k$-subspace $B(\\nu)\\subset E$. Its restricted Gauss spectral norm admits an orthogonal $k$-basis. Step 2 gives its nonzero norm values in $\\Gamma$, so [lem-trf-spectral-reduction-dimension-criterion] yields $\\dim_F\\widetilde{B(\\nu)}=\\dim_kB(\\nu)$. The injective map of [lem-trf-gauss-degree-filtration-reduction] gives $\\dim_kB(\\nu)\\le\\dim_FC(\\nu)$. Multiplying by $n!\\nu^{-n}$ and passing to the displayed limits gives $d\\le\\dim_{F(X)}D$. With Step 2 this is equality. The last clause of [lem-trf-spectral-reduction-dimension-criterion] supplies an orthonormal $R$-basis of $E$. This proves stability when $\\Gamma$ is divisible, without imposing separability.",
+   "uses": [
+    "lem-trf-degree-filtration-rank-asymptotic",
+    "lem-trf-gauss-spectral-coefficient-cartesian",
+    "lem-trf-spectral-reduction-dimension-criterion",
+    "lem-trf-gauss-degree-filtration-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proposition 5.3.3/3, equations (1)–(4), printed pp.216–217; Lemma 5.3.3/4, printed pp.216–218."
+   }
+  },
+  {
+   "text": "Return to arbitrary $|k^\\times|$. By [lem-trf-completed-algebraic-closure-cartesian], choose the completed algebraic closure $k'$ with its extending absolute value; it is complete, algebraically closed and every finite $k$-subspace of it has an orthogonal $k$-basis. Algebraic closedness implies stability: every finite extension equals $k'$ and the basis $(1)$ has the equality in [def-trf-stable-nonarchimedean-field]. It also implies divisibility of $|k'^\\times|$, by taking roots of each nonzero element. Therefore Steps 2–3, applied with coefficient field $k'$, prove that $R'=k'(X)$ with its Gauss absolute value is stable. The inclusion $R\\subset R'$ is isometric by the coefficient formula of Step 1.",
+   "uses": [
+    "lem-trf-completed-algebraic-closure-cartesian",
+    "def-trf-stable-nonarchimedean-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Section 5.3.4, opening paragraph, printed p.218 (scan PDF p.224)."
+   }
+  },
+  {
+   "text": "Every finite-dimensional $R$-subspace $U\\subset R'$ is contained, after multiplication by a single nonzero polynomial $h\\in k'[X]$, in the $R$-span of finitely many polynomials $u_j\\in k'[X]$. Their coefficients span a finite $k$-subspace $V\\subset k'$. Step 4 supplies an orthogonal $k$-basis $v_1,\\ldots,v_r$ of $V$. For polynomials $f_i=\\sum_\\nu a_{i\\nu}X^\\nu\\in k[X]$, coefficientwise orthogonality gives $$G(\\sum_i f_iv_i)=\\max_\\nu|\\sum_i a_{i\\nu}v_i|=\\max_{i,\\nu}|a_{i\\nu}||v_i|=\\max_iG(f_i)|v_i|.$$ A common denominator in $k[X]$ and multiplicativity of the Gauss absolute value give the same equality for $f_i\\in R$. Hence $W=\\sum_i Rv_i$ has that finite orthogonal $R$-basis and contains $hU$. By [lem-trf-cartesian-subspace-scalar-tower](1), $hU$ has an orthogonal basis. Dividing its vectors by $h$ gives one for $U$, because $|h^{-1}z|=|h|^{-1}|z|$. Thus every finite $R$-subspace of $R'$ is orthogonally based. This proves the constant-extension comparison explicitly; it is not an assumption that $R'$ is finite over $R$.",
+   "uses": [
+    "lem-trf-cartesian-subspace-scalar-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Lemma 5.3.4/1, printed p.219 (scan PDF p.225): common denominator and coefficient-maximum computation."
+   }
+  },
+  {
+   "text": "Fix a finite extension $E/R$. Choose an algebraic closure $\\Omega$ of $R'$ using [def-weil-algebraic-closure]. By [lem-weil-pbc-algebraic-extension-embeds-algebraically-closed], embed $E$ over $R$ into $\\Omega$. Choose an $R$-basis $e_1,\\ldots,e_d$ of its image and put $A=\\sum_iR'e_i\\subset\\Omega$. This is a finite-dimensional unital $R'$-subalgebra, since products $e_ie_j$ have their $R$-coordinates in the same basis. For $0\\ne a\\in A$, multiplication by $a$ is injective on the finite-dimensional space $A$, hence surjective; its image contains $1$, so $a^{-1}\\in A$. Thus $E'=A$ is a finite field extension of $R'$ containing the image of $E$. By Step 4, its spectral norm $N=s_{E'/R'}$ has an orthogonal $R'$-basis. Step 5 and [lem-trf-cartesian-subspace-scalar-tower](2) imply that every finite $R$-subspace of $E'$, in particular $E$, has an orthogonal $R$-basis for the restricted norm $N|_E$.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+    "lem-trf-cartesian-subspace-scalar-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Section 5.3.4, printed pp.218 and 220 (scan PDF pp.224 and 226): compositum and cartesian scalar restriction."
+   }
+  },
+  {
+   "text": "By [lem-trf-incomplete-spectral-algebra-norm], $N|_E$ is an $R$-algebra norm (the Gauss inclusion is isometric). By [lem-trf-spectral-reduction-dimension-criterion], $N$ and its restriction are power-multiplicative. If $w_i$ is the orthogonal $R$-basis just obtained, set $c=\\min_iN(w_i)>0$ and $C=\\max_iN(w_i)>0$. Its equality implies $$c\\max_i|a_i|_R\\le N(\\sum_i a_iw_i)\\le C\\max_i|a_i|_R.$$ Thus [lem-trf-product-topology-spectral-uniqueness] applies over $R$, despite its possible incompleteness, and gives $N|_E=s_{E/R}$. The same basis is therefore orthogonal for the required spectral norm. Since $E/R$ was arbitrary this is precisely stability in [def-trf-stable-nonarchimedean-field].",
+   "uses": [
+    "lem-trf-incomplete-spectral-algebra-norm",
+    "lem-trf-spectral-reduction-dimension-criterion",
+    "lem-trf-product-topology-spectral-uniqueness",
+    "def-trf-stable-nonarchimedean-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Conclusion of Section 5.3.4, printed p.220 (scan PDF p.226), especially its application of Lemma 3.5.1/1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-spectral-reduction-dimension-criterion",
+  "lem-trf-degree-filtration-rank-asymptotic",
+  "lem-trf-gauss-spectral-coefficient-cartesian",
+  "lem-trf-gauss-degree-filtration-reduction",
+  "lem-trf-completed-algebraic-closure-cartesian",
+  "def-trf-stable-nonarchimedean-field",
+  "lem-trf-cartesian-subspace-scalar-tower",
+  "def-weil-algebraic-closure",
+  "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+  "lem-trf-incomplete-spectral-algebra-norm",
+  "lem-trf-product-topology-spectral-uniqueness"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Agent-expanded assembly following the online primary scan, Sections 5.3.3–5.3.4, printed pp.214–220; archival copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite field extensions of a Gauss valued rational function field over a stable complete field have an orthogonal basis for the spectral norm",
+   "results": {
+    "t": "2026-10-24T15:01:30Z",
+    "tool": "leansearch",
+    "query": "Finite field extensions of a Gauss valued rational function field over a stable complete field have an orthogonal basis for the spectral norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm",
+     "spectralNorm.normedSpace",
+     "spectralAlgNorm",
+     "spectralNorm_extends",
+     "InnerProductSpace.gramSchmidtBasis",
+     "spectralAlgNorm_mul",
+     "isNonarchimedean_spectralNorm_of_finiteDimensional_normal",
+     "spectralNorm.seminormedAddCommGroup"
+    ],
+    "digest": "63920cc9b153be76"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: FunctionField completions use the degree or adic valuation, not the Gauss valuation; spectralAlgNorm defines the norm but gives no exact orthogonal basis. GramSchmidt is for inner product spaces. No stable-field or corresponding rational-Gauss theorem was found."
+  },
+  {
+   "tool": "grep",
+   "query": "stableField|isStableField|weaklyStable|weakly_stable|cartesian.*spectral",
+   "results": {
+    "t": "2026-10-24T15:01:31Z",
+    "tool": "grep",
+    "query": "stableField|isStableField|weaklyStable|weakly_stable|cartesian.*spectral",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: FunctionField completions use the degree or adic valuation, not the Gauss valuation; spectralAlgNorm defines the norm but gives no exact orthogonal basis. GramSchmidt is for inner product spaces. No stable-field or corresponding rational-Gauss theorem was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Gauss valued rational function field in finitely many variables over a complete stable nonarchimedean field is stable",
+   "results": {
+    "t": "2026-10-24T15:01:31Z",
+    "tool": "leanfinder",
+    "query": "The Gauss valued rational function field in finitely many variables over a complete stable nonarchimedean field is stable",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "FunctionField.valuedFqtInfty",
+     "FunctionField.FqtInfty",
+     "FunctionField.valuedFqtInfty.def",
+     "FunctionField.instFieldFqtInfty",
+     "FunctionField.instInhabitedFqtInfty",
+     "FunctionField.inftyValuedFqt",
+     "LaurentSeries.ratfuncAdicComplPkg",
+     "FunctionField"
+    ],
+    "digest": "ae6a0c4b9feff768"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: FunctionField completions use the degree or adic valuation, not the Gauss valuation; spectralAlgNorm defines the norm but gives no exact orthogonal basis. GramSchmidt is for inner product spaces. No stable-field or corresponding rational-Gauss theorem was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RatFunc\", \"spectralNorm\"",
+   "results": {
+    "t": "2026-10-24T15:01:34Z",
+    "tool": "loogle",
+    "query": "\"RatFunc\", \"spectralNorm\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: FunctionField completions use the degree or adic valuation, not the Gauss valuation; spectralAlgNorm defines the norm but gives no exact orthogonal basis. GramSchmidt is for inner product spaces. No stable-field or corresponding rational-Gauss theorem was found."
+  },
+  {
+   "tool": "grep",
+   "query": "stableField|isStableField|weaklyStable|weakly_stable|cartesian.*spectral",
+   "results": {
+    "t": "2026-10-24T15:35:50Z",
+    "tool": "grep",
+    "query": "stableField|isStableField|weaklyStable|weakly_stable|cartesian.*spectral",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralNorm and invariantExtension provide norms but no exact orthogonal basis over a Gauss rational function field; inner-product and ordinary algebraic bases are different statements."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Orthogonal bases for finite spectral extensions of a Gauss normed rational function field",
+   "results": {
+    "t": "2026-10-24T15:35:51Z",
+    "tool": "leansearch",
+    "query": "Orthogonal bases for finite spectral extensions of a Gauss normed rational function field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "InnerProductSpace.gramSchmidtBasis",
+     "spectralNorm",
+     "Orthonormal.exists_orthonormalBasis_extension_of_card_eq",
+     "Orthonormal.exists_orthonormalBasis_extension",
+     "spectralNorm.normedField",
+     "OrthonormalBasis.recOn",
+     "IsGalois.normalBasis",
+     "spectralNorm_extends_of_finiteDimensional"
+    ],
+    "digest": "4ec9d3ec558f13d2"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralNorm and invariantExtension provide norms but no exact orthogonal basis over a Gauss rational function field; inner-product and ordinary algebraic bases are different statements."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RatFunc\", \"spectralNorm\"",
+   "results": {
+    "t": "2026-10-24T15:35:51Z",
+    "tool": "loogle",
+    "query": "\"RatFunc\", \"spectralNorm\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralNorm and invariantExtension provide norms but no exact orthogonal basis over a Gauss rational function field; inner-product and ordinary algebraic bases are different statements."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite extensions of Gauss normed rational function fields over stable nonarchimedean fields admit exact orthogonal bases",
+   "results": {
+    "t": "2026-10-24T15:35:55Z",
+    "tool": "leanfinder",
+    "query": "Finite extensions of Gauss normed rational function fields over stable nonarchimedean fields admit exact orthogonal bases",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ClassGroup.fintypeOfAdmissibleOfFinite",
+     "exists_nonarchimedean_pow_mul_seminorm_of_finiteDimensional",
+     "isNonarchimedean_spectralNorm_of_finiteDimensional_normal",
+     "IsUltrametricDist.isNonarchimedean_invariantExtension",
+     "spectralAlgNorm_of_finiteDimensional_normal",
+     "IsUltrametricDist.invariantExtension",
+     "spectralNorm.completeSpace",
+     "Module.Basis.norm_isNonarchimedean"
+    ],
+    "digest": "80f86b46ab772a59"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralNorm and invariantExtension provide norms but no exact orthogonal basis over a Gauss rational function field; inner-product and ordinary algebraic bases are different statements."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-tate-gauss-fraction-stability",
+  "date": "2026-10-24",
+  "group": "Q29"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: Norm-preserving lifts for a Tate epimorphism surjective on canonical reductions. Independent analytic input: Finite affinoid maps are finite on spectral unit balls over an algebraically closed field. Proof input: Orthogonal spectral norm on the fraction field of a finite affinoid domain. Supporting input: Stability of the Gauss fraction field of a Tate algebra. BGR stability proof input: Sections 5.3.3–5.3.4, especially Proposition 5.3.3/3 and the conclusion of Section 5.3.4, printed pp.215 and 218–220 (scan PDF pp.221 and 224–226); Section 5.3.4 removes the divisible-value-group restriction.",
+   "via": [
+    "lem-trf-tate-gauss-fraction-stability",
+    "lem-trf-tate-fraction-orthogonal-spectral-norm",
+    "lem-trf-finite-affinoid-unit-ball-finiteness",
+    "lem-trf-tate-reduction-norm-lifting",
+    "lem-trf-affinoid-distinguished-presentation",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-gauss-rational-function-stability",
+  "worker": "stage1",
+  "summary": "Q58 checked the online BGR scan, separated the divisible-value-group dimension argument from scalar-extension descent, retained the full statement and exposed seven strictly smaller norm/filtration inputs. No Lean attachment or Mathlib match for these inputs.",
+  "blueprint": "Historical analytic support below lem-trf-local-term-locality via the recorded normalization chain. Current latest contracting-correspondence proof is unchanged; Steps 1–7 realize BGR 5.3.3–5.3.4 within this existing node-level supporting branch."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-513ddb00a",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-513ddb00a (reviewer sub-agent of L); spot-checked: I read the item, all seven new nodes and every cited statement in full. The BGR book is not in the local literature; the delivery cites the WANTED path, as 27 existing nodes do. I checked each new statement mathematically instead. (1) Hyperplane construction: subspaces of cartesian spaces are cartesian without completeness. The tower clause follows by expanding coordinates. (2) Perturbation argument: the completed algebraic closure is k-cartesian. (3) Degree asymptotic tested on Q, Q(sqrt X) and Q×Q; it is h^0 growth on the normalization of P^n. (4) The filtration reduction is an injection via the minimal polynomial over normal k[X] and divisor spectral bounds. (5) Spectral uniqueness via the reduced L⊗K̂, with the bounds hypothesis shown to be essential. (6) The reduction criterion via places, Σe_jf_j≤[L:K]. (7) The coefficient-cartesian node concerns k-subspaces only. Steps 1–7: Gauss multiplicativity is elementary; values in Γ under divisibility; the dimension sandwich stays in the item; k' algebraically closed gives stability and divisibility; step 5's common-denominator orthogonality calculation is correct; step 6's finite compositum and tower clause (2) are correct; step 7's power-multiplicative bounds give N|_E=s_{E/R} without completeness of R. Route: all cited statements are in unit sk-i-curve-zero or are Mathlib leaves or definitions, so no tool_uses. No cycle with the parent lem-trf-tate-gauss-fraction-stability. rg -L duplicate searches (cartesian, orthogonal basis, power-multiplicative, Gauss norm, completed closure) found no duplicate. No fixes."
+ }
+}

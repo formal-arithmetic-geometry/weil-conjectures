@@ -1,0 +1,121 @@
+{
+ "id": "lem-pbc-coefficient-restriction-tensor-representative-square",
+ "kind": "statement",
+ "title": "Coefficient tensor square on flat K-flat representatives",
+ "statement": "Let f:X→Y, R,S,c be the pro-etale coefficient data [def-weil-pbc-proetale-operations], and aY,aX,z the specified tensor models [def-sfb-proetale-tensor-model]. Fix ring-isomorphism tensor transport o [lem-sfb-ring-isomorphism-tensor-transport] and its chain tensor comparison sigma [lem-pbc-coefficient-restriction-tensor-chain-square]. Suppose restriction preserves flat K-flat representatives and gamma:aX.tensor;DU ≅ (DU×DU);z.tensor has the representative normalization equation DU(rX(P,Q));gamma(QP,QQ);z.tensor(epsU(P),epsU(Q)) = epsU(total(P,Q));Q(sigma(P,Q));rz(UP,UQ). For every flat K-flat pair P,Q on Y, the canonical coefficient pullback comparison b [lem-pbc-coefficient-pullback-factorization] and geometric tensor comparisons alpha_c,alpha_i [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] satisfy b(aY(QP,QQ));alpha_i(QP,QQ)=DU(alpha_c(QP,QQ));gamma(DC(QP),DC(QQ));z.tensor(b(QP),b(QQ)). No existence of gamma or assertion about arbitrary derived pairs is made.",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "status": "split",
+ "mathlib_match": null,
+ "stmt_deps": [
+  "def-weil-pbc-proetale-operations",
+  "def-sfb-proetale-tensor-model",
+  "lem-sfb-ring-isomorphism-tensor-transport",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pbc-coefficient-pullback-factorization",
+  "lem-pbc-coefficient-restriction-tensor-chain-square",
+  "def-pbc-coefficient-restriction-tensor-iso"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03EL, 07A4 and 07A6; normalized representative calculation in the coefficient tensor square."
+ },
+ "proof": [
+  {
+   "text": "Use the proved canonical comparison and representative naturality normalization APIs to avoid unfolding their selected data. Normalize the two geometric tensor maps on flat K-flat representatives and use the assumed normalization of gamma. Naturality of the exact restriction factorization and of the target tensor representative moves these maps to their chain representatives. The product pullback factorization computes b on each input. Apply the localized chain square and cancel the invertible tensor representative and pullback factors.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pbc-coefficient-pullback-factorization",
+    "lem-pbc-coefficient-restriction-tensor-chain-square",
+    "lem-pbc-canonical-tensor-representative-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pbc-coefficient-pullback-factorization",
+  "lem-pbc-coefficient-restriction-tensor-chain-square",
+  "lem-pbc-canonical-tensor-representative-normalization"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03EL, 07A4 and 07A6; normalized representative calculation in the coefficient tensor square.",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An isomorphism of sheaves of commutative rings induces a tensor equivalence on module sheaves compatible with inverse image and signed total complexes",
+   "results": "Eight hits including HomologicalComplex₂.total.mapIso, sheaf pullback on free modules, and PresheafOfModules.isoMk. No coefficient restriction tensor coherence theorem.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equality of natural transformations can be checked on a fully faithful resolving subcategory of flat K-flat complexes",
+   "results": "Found Localization.natTrans_ext and derived-functor extensionality. Use the already proved project representative descent theorem for the derived step. No ordinary coefficient tensor square.",
+   "date": "2026-10-27",
+   "verdict": "generic extensionality only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategoryCompIso",
+   "results": "Found exact-derived composition comparisons. The source library supplies their factorization normalization, used in the proved pullback_factors helper.",
+   "date": "2026-10-27",
+   "verdict": "used existing exact-derived comparison API"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*restrictScalars|restrictScalars.*tensor",
+   "results": "Mathlib hits on ordinary scalar tensor algebra, no sheaf chain restriction/pullback square. Project searches found FlatScalarRestrictionKFlat and the canonical geometric tensor comparison; no duplicate of the chain square.",
+   "date": "2026-10-27",
+   "verdict": "reuse canonical maps and flat scalar restriction"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProEtaleCoefficientTensorCompatibility",
+  "date": "2026-10-27",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pbc-coefficient-restriction-tensor-comparison-compatibility",
+   "place": "The representative-pair calculation, split as a proved module to meet the per-file kernel-check limit.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleCoefficientTensorRepresentativeSquare",
+  "file": "lean/Sheaf/Paper/ProEtaleCoefficientTensorRepresentativeSquare.lean",
+  "declaration": "AlgebraicGeometry.Scheme.CoefficientTensorTransport.representative_square",
+  "statement": "theorem representative_square {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})\n    (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S)\n    (aY : ProEtaleTensorModel Y R)\n    (z : ProEtaleTensorModel X\n      ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R))\n    (aX : ProEtaleTensorModel X S)\n    (o : SheafOfModules.RingIsoTensorTransport (J := ProEt.topology X)\n      (R := (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R) (S := S) c)\n    (hU : ∀ P : CochainComplex (proEtaleRingModules X S) ℤ,\n      proEtaleFlatRepresentatives X S P →\n        proEtaleFlatRepresentatives X\n          ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R)\n          (((pbcRestrict c.hom).mapHomologicalComplex (.up ℤ)).obj P))\n    (gamma : aX.tensor ⋙ pbcDerivedRestrict c.hom ≅\n      ((pbcDerivedRestrict c.hom).prod (pbcDerivedRestrict c.hom)) ⋙ z.tensor)\n    (hgamma : ∀ (P Q : CochainComplex (proEtaleRingModules X S) ℤ)\n      (hp : proEtaleFlatRepresentatives X S P) (hq : proEtaleFlatRepresentatives X S Q),\n      (pbcDerivedRestrict c.hom).map (aX.representative.hom.app (⟨P, hp⟩, ⟨Q, hq⟩)) ≫\n        gamma.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫\n        z.tensor.map (Prod.mkHom ((pbcRestrict c.hom).mapDerivedCategoryFactors.hom.app P)\n          ((pbcRestrict c.hom).mapDerivedCategoryFactors.hom.app Q)) =\n      (pbcRestrict c.hom).mapDerivedCategoryFactors.hom.app\n        ((CoefficientTensorChain.total X S).obj (P, Q)) ≫\n      DerivedCategory.Q.map ((CoefficientTensorChain.tensorIso f R S c o).hom.app (P, Q)) ≫\n      z.representative.hom.app\n        (⟨((pbcRestrict c.hom).mapHomologicalComplex (.up ℤ)).obj P, hU P hp⟩,\n          ⟨((pbcRestrict c.hom).mapHomologicalComplex (.up ℤ)).obj Q, hU Q hq⟩))\n    (P Q : CochainComplex (proEtaleRingModules Y R) ℤ)\n    (hp : proEtaleFlatRepresentatives Y R P) (hq : proEtaleFlatRepresentatives Y R Q) :\n        (pullback f R S c).hom.app\n          (aY.tensor.obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q)) ≫\n            (proEtaleCanonicalTensorComparison f R\n              ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R)\n              (Iso.refl _) aY z).hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) =\n          (pbcDerivedRestrict c.hom).map\n              ((proEtaleCanonicalTensorComparison f R S c aY aX).hom.app\n                (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q)) ≫\n            gamma.hom.app ((proEtaleRingDerivedPullback f R S c).obj (DerivedCategory.Q.obj P),\n              (proEtaleRingDerivedPullback f R S c).obj (DerivedCategory.Q.obj Q)) ≫\n            z.tensor.map (Prod.mkHom\n              ((pullback f R S c).hom.app (DerivedCategory.Q.obj P))\n              ((pullback f R S c).hom.app (DerivedCategory.Q.obj Q)))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-dade8",
+  "group": "J1",
+  "result": "fix",
+  "landing": "20261027T072146-L-2804008",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-34357",
+  "group": "C1",
+  "result": "fix",
+  "landing": "20261027T123423-L-2295156",
+  "kind": "interface",
+  "note": "independent cc review: restriction_tensor_chain_square proof (ordinary_square + tensorTotalComparisonSquare + tensorIso_summand) against item node and RingIsoTensorTransport fields; relocated tensorIso/tensorIso_naturality diffed verbatim vs clone and publicly re-exported; adapted RepresentativeSquare proof-only (unclaimed); 3b importer Compatibility OK"
+ }
+}

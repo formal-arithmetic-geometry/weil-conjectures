@@ -1,0 +1,83 @@
+{
+ "id": "new-sp-proper-adjunction-counit",
+ "kind": "statement",
+ "title": "Counit component of the fixed-scalar proper adjunction comparison",
+ "statement": "The counit component equation in the proper adjunction comparison for the fixed-scalar section-action equivalence.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+  "place": "Paragraph (3), proper adjunction comparison, respectively the unit/counit mate equation."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-sf-module-object-ordinary-coefficient-equivalence"
+ ],
+ "proof": [
+  {
+   "text": "Localize the underived identity-on-sections comparison and its adjoint mate on the exact section-action equivalence; the derived unit or counit equation follows by the K-injective and K-flat comparison construction described in the parent proof.",
+   "uses": [
+    "lem-pd-module-ringed-topos-derived-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pd-module-ringed-topos-derived-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+  "place": "Paragraph (3), proper adjunction comparison."
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteLevelProjectionFactors",
+  "date": "2026-10-26",
+  "group": "C2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-finite-level-projection-factors",
+   "place": "Proper adjunction comparison split into two conjuncts",
+   "via": [
+    "new-sp-proper-adjunction-counit"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteLevelProjectionFactors",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteLevelComparison.proper_adjunction_comparison_counit",
+  "file": "lean/Sheaf/Paper/FiniteLevelProjectionFactors.lean",
+  "statement": "theorem proper_adjunction_comparison_counit {X Y : Scheme.{u}} (f : X ⟶ Y) :\n(∀ K : DerivedCategory (Internal A X),\n      (derivedEncoding A X).functor.map\n          ((CondensedRing.derivedUpperStarLowerStarAdjunction (coefficient A) f).counit.app K) =\n        (derivedPullIso A f).hom.app\n          ((CondensedRing.lowerStar (coefficient A) f).rightDerivedFunctor.obj K) ≫\n        (upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor.map\n          ((derivedPushIso A f).hom.app K) ≫\n        (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f).counit.app\n          ((derivedEncoding A X).functor.obj K))",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261026T022920-L-503999",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261026T022920-L-503999",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

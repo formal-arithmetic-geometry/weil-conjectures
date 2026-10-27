@@ -1,0 +1,122 @@
+{
+ "id": "lem-coef-etale-lisse-hom-finite-free-cover",
+ "kind": "statement",
+ "title": "Finite projective lisse covers refine to finite-free covers",
+ "statement": "Fix a prime l, a finite extension E/Q_l and n≥0, and let A be the lifted coefficient ring O_E/(ϖ_E^(n+1)) [def-weil-l-adic-coefficient-extension]. Let S be a scheme and L a sheaf of A-modules on S_et. Suppose an etale covering {U_i→S} is given such that each pullback of L to U_i is isomorphic to the constant sheaf [def-sf-finite-free-hom-evaluation-coordinates] with value a finite projective A-module V_i. Then on the same covering each pullback of L is isomorphic to the constant sheaf with value A^(t_i) for some t_i≥0.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-sf-finite-free-hom-evaluation-coordinates"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Paragraphs 2–3, lisse degree-zero specialization of the site-perfect stratum argument"
+ },
+ "proof": [
+  {
+   "text": "The valuation ring O_E is a local ring [lem-weil-l-adic-extension-integers-dvr]; A is a quotient of it, hence local or zero. A finite projective module over A is flat [lem-weil-pbc-projective-module-flat], and a finite flat module over a local ring is free [lem-weil-pbc-finite-flat-local-free]; over the zero ring every module is free. A finite basis gives V_i≅A^(t_i).",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-pbc-projective-module-flat",
+    "lem-weil-pbc-finite-flat-local-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+    "place": "Paragraphs 2–3, lisse degree-zero specialization of the site-perfect stratum argument"
+   }
+  },
+  {
+   "text": "Apply the constant-sheaf functor to V_i≅A^(t_i) and compose with the given isomorphism on U_i; the covering is unchanged, and t_i=0 is allowed.",
+   "uses": [
+    "def-sf-finite-free-hom-evaluation-coordinates"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+    "place": "Paragraphs 2–3, lisse degree-zero specialization of the site-perfect stratum argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-projective-module-flat",
+  "lem-weil-pbc-finite-flat-local-free",
+  "def-sf-finite-free-hom-evaluation-coordinates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Paragraphs 2–3, lisse degree-zero specialization of the site-perfect stratum argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "etaleLisseHomFiniteFreeCover",
+   "results": "No direct theorem.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "derived category coefficient Hom",
+   "results": "No direct theorem.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "etaleLisseHomFiniteFreeCover",
+   "results": "Only this local declaration.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleLisseHomReduction",
+  "date": "2026-10-26",
+  "group": "E8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-etale-lisse-hom-reduction",
+   "place": "Lisse Hom reduction proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleLisseHomReduction",
+  "file": "lean/Sheaf/Paper/EtaleLisseHomReduction.lean",
+  "declaration": "WeilConjectures.etaleLisseHomFiniteFreeCover",
+  "statement": "theorem etaleLisseHomFiniteFreeCover (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (S : Scheme.{u}) (L : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))))) (_hL : ∃ U : Scheme.Cover.{u} Scheme.etalePrecoverage S, ∀ i : U.I₀, ∃ V : ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))), Module.Finite (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) V ∧ Module.Projective (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) V ∧ Nonempty ((Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))) (U.f i)).obj L ≅ (lisseHomConstantFunctor (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) (U.X i)).obj V)) : ∃ U : Scheme.Cover.{u} Scheme.etalePrecoverage S, ∀ i : U.I₀, ∃ t : ℕ, Nonempty ((Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))) (U.f i)).obj L ≅ (lisseHomConstantFunctor (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) (U.X i)).obj (ModuleCat.of (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) (Fin t → ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))))",
+  "branch": "sheaf-dag",
+  "by": "E8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-aed7c",
+  "group": "E8",
+  "result": "fix",
+  "landing": "20261026T065553-L-3086827",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-aed7c",
+  "group": "E8",
+  "result": "fix",
+  "landing": "20261026T065553-L-3086827",
+  "kind": "interface",
+  "note": "independent cc review: 6 new item-module theorems + 3 new modules + FFHEC abbrev adaptation + 10 nodes vs packet/clone (item and target statements unchanged, FFHLC importer compiled against adapted FFHEC); private helpers vs public sorry statements; EndpointBounds vs counterexample dS=-1"
+ }
+}

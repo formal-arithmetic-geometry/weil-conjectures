@@ -32,7 +32,94 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-nagata-compactification",
  "unit": "sk-def-nagata-admissible",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "closed_part",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.IsAdmissible",
+     "module": "WeilConjectures.Blowup.AdmissibleBlowup",
+     "lines": [
+      124,
+      136
+     ],
+     "kind": "structure",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.IdealSheafData.blowup",
+     "module": "WeilConjectures.Blowup.Gluing",
+     "lines": [
+      253,
+      256
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.IdealSheafData.blowupMap",
+     "module": "WeilConjectures.Blowup.Gluing",
+     "lines": [
+      258,
+      261
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [
+    "AlgebraicGeometry.Scheme.IdealSheafData.disjoint_support_iff_comap_ι_eq_top"
+   ],
+   "open": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.IsAdmissible",
+     "module": "WeilConjectures.Blowup.AdmissibleBlowup",
+     "lines": [
+      133,
+      143
+     ],
+     "kind": "structure",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.IdealSheafData.disjoint_support_iff_comap_ι_eq_top",
+     "module": "WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial",
+     "lines": [
+      89,
+      94
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.IdealSheafData.blowup",
+     "module": "WeilConjectures.Blowup.Gluing",
+     "lines": [
+      253,
+      256
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.IdealSheafData.blowupMap",
+     "module": "WeilConjectures.Blowup.Gluing",
+     "lines": [
+      258,
+      261
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "lean": {
   "module": "WeilConjectures.Blowup.AdmissibleBlowup",
   "declaration": "AlgebraicGeometry.IsAdmissible",
@@ -56,5 +143,15 @@
   "group": "Q77",
   "result": "pass",
   "note": "Existing attachment AlgebraicGeometry.IsAdmissible (WeilConjectures.Blowup.AdmissibleBlowup) is the blueprint's own lean target for the source def-nagata-admissible-blowup. Its fields: I : X.IdealSheafData (quasi-coherent ideal), finiteType : I.ofFiniteType (real FG-on-affines predicate), and disjoint_support, which is equivalent to I|_U = O_U by the proved disjoint_support_iff_comap_ι_eq_top. I.blowup/I.blowupMap glue Proj of the Rees algebra over affine opens. Dropping the node's qcqs ambient context only generalises the definition; there is no stronger assumption and no universe restriction (Type u). lean.statement 'structure IsAdmissible where' matches the source line verbatim. The commit touches only the report and the node's lean field, which completes a partial attach.py record with all required fields; stmt_deps is empty as in the blueprint. Worker report and Second reading by Q77 are present. nt_compile --json check file: clean in 5.3 s, #print shows the recorded signature and fields, and the upstream axioms are only propext/choice/Quot.sound. Edge cases (empty scheme, U=⊤/⊥, unit/zero ideal) agree with the node."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $T$ be a scheme and $U\\subseteq T$ an open subscheme. For a\nfinite-type quasi-coherent ideal $\\mathcal I\\subseteq\\mathcal O_T$ with\n$\\mathcal I|_U=\\mathcal O_U$, the blow-up\n\n$$\nb:\\operatorname{Bl}_{\\mathcal I}(T)\\longrightarrow T,\\qquad\nb^{-1}(V)=\\operatorname{Proj}\\Bigl(\\bigoplus_{m\\geq0}\\mathcal I(V)^m\\Bigr)\n\\quad(V\\subseteq T\\text{ affine}),\n$$\n\nglued from these affine pieces, is called *$U$-admissible*. Its center is\ndisjoint from $U$.",
+  "proof": [],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

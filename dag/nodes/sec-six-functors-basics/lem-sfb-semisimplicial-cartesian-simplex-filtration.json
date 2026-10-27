@@ -1,0 +1,265 @@
+{
+ "id": "lem-sfb-semisimplicial-cartesian-simplex-filtration",
+ "kind": "statement",
+ "title": "Simplex filtration of a cartesian semisimplicial derived object",
+ "statement": "Use the small semisimplicial ringed total module category $\\mathscr M$ of [lem-sfb-semisimplicial-ringed-total-category] and the exact functors $\\ell_p\\dashv e_p$ of [lem-sfb-semisimplicial-evaluation-free-adjoint]. Assume every transition $f_\\alpha^*$ is exact. Let $B\\in D(\\mathscr M)$ be cartesian, with derived transitions $\\theta^B_\\alpha:Lf_\\alpha^*B_m\\xrightarrow{\\sim}B_n$ for $\\alpha:[m]\\hookrightarrow[n]$, put $B_p=e_pB$, and write $X_p=\\ell_pB_p$. There is a sequence of derived objects $F_N$, $N\\ge0$, with maps $u_N:F_N\\to F_{N+1}$ and $j_N:F_N\\to B$ such that $j_{N+1}u_N=j_N$, together with the following structure in $D(\\mathscr M)$:\n$F_0=X_0$, $j_0$ is the counit, and for every $N\\ge0$ there is a distinguished triangle\n$$F_N\\xrightarrow{u_N}F_{N+1}\\longrightarrow X_{N+1}[N+1]\\longrightarrow F_N[1].$$\nLet $\\delta_i:[0]\\hookrightarrow[1]$ omit $i$, for $i=0,1$. Define $q_i:X_1\\to X_0$ by its adjunct\n$$B_1\\xrightarrow{(\\theta^B_{\\delta_i})^{-1}}Lf_{\\delta_i}^*B_0\\longrightarrow e_1\\ell_0B_0,$$\nwhere the second arrow includes the $\\delta_i$ summand. The first-stage rotated triangle is\n$$X_1\\xrightarrow{q_0-q_1}F_0\\xrightarrow{u_0}F_1\\longrightarrow X_1[1].$$\nThere is a coproduct $S=\\bigoplus_{N\\ge0}F_N$ with coprojections $\\iota_N$ and a distinguished triangle\n$$S\\xrightarrow{1-s}S\\xrightarrow{p}B\\xrightarrow{\\partial}S[1],\\qquad s\\iota_N=\\iota_{N+1}u_N,\\quad p\\iota_N=j_N.$$\nThe shifted coprojections $\\iota_N[1]$ exhibit $S[1]$ as the coproduct of the $F_N[1]$. All statements are in the unbounded derived category; no boundedness or negative Hom hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-simplicial.tex",
+  "place": "Tags 0D9B (lemma-simplicial-resolution-ringed), 0D9E (lemma-derived-cartesian-shriek), and 0D9Q (lemma-modules-postnikov). Agent-supplied injective-order-map adaptation: replace the full simplex chain complex by the finite normalized simplex complex in each component. The statement supplies derived objects and a distinguished telescope triangle, not only cohomology identifications."
+ },
+ "stmt_deps": [
+  "lem-sfb-semisimplicial-ringed-total-category",
+  "lem-sfb-semisimplicial-evaluation-free-adjoint"
+ ],
+ "proof": [
+  {
+   "text": "Choose an actual unbounded complex $C^\\bullet$ representing $B$, using [def-weil-abstract-derived-category]. Use the systems description of [lem-sfb-semisimplicial-ringed-total-category]. For $p\\geq0$ define a complex of total modules $A_p$ by\n$$(A_p^q)_m=\\bigoplus_{\\alpha:[p]\\hookrightarrow[m]}C_m^q.$$\nFor $\\beta:[m]\\hookrightarrow[k]$, its transition sends the $\\alpha$ summand by the transition of $C^q$ to the $\\beta\\alpha$ summand. These are finite sums, empty for $p>m$; coherence follows from that of $C^q$. For $p>0$ define $d_i:A_p\\to A_{p-1}$ by sending label $\\alpha$ identically to $\\alpha\\delta_i$, and put $b_p=\\sum_{i=0}^p(-1)^id_i$. All these maps commute with transitions and the vertical differential $d_C$. In $b_{p-1}b_p$ each two-vertex deletion occurs twice with opposite signs, so it is zero. The fold $\\epsilon:A_0\\to C$ satisfies $\\epsilon b_1=0$, since the two deletions of an edge contribute $+1$ and $-1$.",
+   "uses": [
+    "lem-sfb-semisimplicial-ringed-total-category",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D9B (lemma-simplicial-resolution-ringed), construction of the labelled face complex; agent adaptation to injections with coefficients in the actual complex C."
+   }
+  },
+  {
+   "text": "The component formula and counit formula of [lem-sfb-semisimplicial-evaluation-free-adjoint] give a chain map\n$$\\rho_p:\\ell_p C_p^\\bullet\\longrightarrow A_p$$\nwhose $\\alpha$ component is $f_\\alpha^*C_p^\\bullet\\to C_m^\\bullet$, the transition of $C$. It respects all transitions by the composition law. Since $f_\\alpha^*$ is exact, this component represents $\\theta^B_\\alpha$; cartesianness makes it a quasi-isomorphism. Finite direct sums give a quasi-isomorphism in each component, and exact jointly conservative evaluation from [lem-sfb-semisimplicial-ringed-total-category] detects that $\\rho_p$ is a quasi-isomorphism of total complexes. Thus its derived image is an isomorphism\n$$r_p:X_p=\\ell_pB_p\\xrightarrow{\\sim}Q(A_p).$$\nFor $p=0$, the composite $Q(\\epsilon)r_0$ is the counit: on label $\\alpha$ it is exactly $\\theta^B_\\alpha$, as that node requires.",
+   "uses": [
+    "lem-sfb-semisimplicial-evaluation-free-adjoint",
+    "lem-sfb-semisimplicial-ringed-total-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D9E (lemma-derived-cartesian-shriek), proof (2), componentwise projection comparison; agent injection-only coefficient-complex version."
+   }
+  },
+  {
+   "text": "For $N\\geq0$ form the finite horizontal total complex\n$$T_N^r=\\bigoplus_{p=0}^N A_p^{r+p},\\qquad D|_{A_p}=b_p+(-1)^p d_C,$$\nwhere $b_0=0$. Its differential squares to zero: $b^2=0$, $d_C^2=0$, and the mixed terms cancel since their signs are $(-1)^p$ and $(-1)^{p-1}$. Define a total complex $T$ componentwise by the same formula with $0\\leq p\\leq m$ in component $m$, and transitions as in Step 1. The inclusions $T_N\\to T_{N+1}\\to T$ are chain maps. In component $m$ they stabilize to $T_m$ for $N\\geq m$. Consequently $T$ is their colimit as complexes of total modules: compatible maps out of the $T_N$ define the map in component $m$ using any $N\\geq m$; compatibility with a transition $[m]\\hookrightarrow[k]$ is checked at $N\\geq k$. The fold on $p=0$ and zero on $p>0$ defines compatible augmentations $t_N:T_N\\to C$ and $t:T\\to C$ because $\\epsilon b_1=0$.",
+   "uses": [
+    "lem-sfb-semisimplicial-ringed-total-category",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D9Q (lemma-modules-postnikov), finite brutal truncations of the simplex complex; agent direct coefficient-complex construction."
+   }
+  },
+  {
+   "text": "The map $t$ is a quasi-isomorphism. Here is the contraction, performed separately on each component $m$. Write a label as a strictly increasing tuple $v=[v_0,\\ldots,v_p]$ in $[m]$. Let $e:C_m\\to(T)_m$ select vertex $[0]$ in horizontal degree zero. Define $h$ on a labelled copy of $C_m^q$ by the identity to label $[0,v_0,\\ldots,v_p]$ if $v_0>0$, and by zero if $v_0=0$. This raises $p$ by one and lowers total cochain degree by one. When $v_0>0$,\n$$b h(v)=v+\\sum_{i=0}^p(-1)^{i+1}[0,v_0,\\ldots,\\widehat v_i,\\ldots,v_p],$$\nand the displayed sum cancels $h b(v)$ for $p>0$. When $v_0=0$ and $p>0$, only deletion of the initial vertex has nonzero image under $h$, and it returns $v$. For $p=0$, $b h([v])=[v]-[0]$. Thus on the unaugmented horizontal complex $bh+hb=1-e\\epsilon$. Since $h$ commutes with $d_C$ and changes $p$ by one, the vertical terms in $Dh+hD$ cancel as well. Hence\n$$Dh+hD=1-et_m,\\qquad t_m e=1.$$\nThese identities of finite-sum sheaf maps show $t_m$ is a homotopy equivalence for every $m$. Exact jointly conservative evaluations of [lem-sfb-semisimplicial-ringed-total-category] imply $t$ is a quasi-isomorphism. The contractions need not respect transitions; only the augmentation must do so, and Step 3 checked that. This computation uses no bound on $C$.",
+   "uses": [
+    "lem-sfb-semisimplicial-ringed-total-category",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D9B (lemma-simplicial-resolution-ringed), component simplex contraction; explicit minimum-vertex contraction for the normalized injection complex, extended to the unbounded coefficient complex."
+   }
+  },
+  {
+   "text": "The inclusions and coordinate projections give a degreewise split short exact sequence\n$$0\\longrightarrow T_N\\longrightarrow T_{N+1}\\longrightarrow A_{N+1}[N+1]\\longrightarrow0.$$\nThe quotient differential is $(-1)^{N+1}d_C$, precisely the indicated shifted differential; the horizontal boundary lands in $T_N$. Apply [lem-weil-pbc-degreewise-split-derived-triangle] to obtain the triangle with those first three objects and maps. Put $F_N=Q(T_N)$ for $N\\geq1$, and set $F_0=X_0$, identified with $Q(T_0)=Q(A_0)$ by $r_0$ of Step 2. Define $u_0=Q(T_0\\to T_1)r_0$, and use the inclusions for the remaining $u_N$. Transport the quotient terms by $r_{N+1}[N+1]$ to get the required triangles with third vertex $X_{N+1}[N+1]$. Set $j_0=Q(t_0)r_0$ and $j_N=Q(t_N)$ for $N\\geq1$. Step 3 gives $j_{N+1}u_N=j_N$; Step 2 identifies $j_0$ with the counit.",
+   "uses": [
+    "lem-weil-pbc-degreewise-split-derived-triangle",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tags 014I (definition-split-ses) and 014Q (definition-distinguished-triangle); the termwise split sequence of consecutive horizontal truncations, as used in Tag 0D9Q."
+   }
+  },
+  {
+   "text": "For the first differential, $T_1$ is literally the cone of $b_1:A_1\\to A_0$: its differential on $A_0^r\\oplus A_1^{r+1}$ is $\\left(\\begin{smallmatrix}d_C&b_1\\\\0&-d_C\\end{smallmatrix}\\right)$. The cone convention of [def-weil-abstract-derived-category] therefore gives a distinguished triangle $Q(A_1)\\xrightarrow{Q(b_1)}Q(A_0)\\to Q(T_1)\\to Q(A_1)[1]$. Under $r_1$ and $r_0$ its first map is $q_0-q_1$. Indeed the adjunct of $Q(d_i)r_1:X_1\\to Q(A_0)$ sends $B_1$ identically to the $\\delta_i$-labelled copy of $B_1$. In component $1$, $e_1r_0$ on that label is $\\theta^B_{\\delta_i}$. Thus the adjunct of $r_0^{-1}Q(d_i)r_1$ is $(\\theta^B_{\\delta_i})^{-1}$ followed by inclusion into the $\\delta_i$ summand of $e_1\\ell_0B_0$, using the derived adjunction in [lem-sfb-semisimplicial-evaluation-free-adjoint]. This is exactly the specified $q_i$. Since $b_1=d_0-d_1$, transport gives the requested first-stage triangle with its stated first two maps.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-sfb-semisimplicial-evaluation-free-adjoint"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tags 0D9B (lemma-simplicial-resolution-ringed), signed first boundary, and 0D9E (lemma-derived-cartesian-shriek), identity-summand comparison; cone definition in derived.tex (definition-cone)."
+   }
+  },
+  {
+   "text": "Apply [lem-kun-complex-colimit-hocolim] to $T_0\\to T_1\\to\\cdots$ in $\\mathscr M=\\operatorname{Mod}(\\mathcal O)$ on the small total site supplied by [lem-sfb-semisimplicial-ringed-total-category]. It applies to arbitrary unbounded complexes of module sheaves on a site. Step 3 supplies its degreewise colimit $T$. The cited statement gives the derived coproduct $S'=\\bigoplus_NQ(T_N)$ and a distinguished telescope triangle\n$$S'\\xrightarrow{1-s'}S'\\xrightarrow{p'}Q(T)\\longrightarrow S'[1],$$\nwhere $s'\\iota'_N=\\iota'_{N+1}Q(T_N\\to T_{N+1})$ and $p'\\iota'_N=Q(T_N\\to T)$. Replace its third vertex by $B$ through the isomorphism $Q(t):Q(T)\\to B$ of Step 4. Replace the zeroth summand by $F_0=X_0$ through $r_0$, keeping the other summands as in Step 5. Transport along the induced coproduct isomorphism. This gives $S=\\bigoplus_NF_N$, $s\\iota_N=\\iota_{N+1}u_N$, and $p\\iota_N=j_N$, with the required distinguished triangle. No tensor-product preservation or boundedness assertion is needed here.",
+   "uses": [
+    "lem-kun-complex-colimit-hocolim",
+    "lem-sfb-semisimplicial-ringed-total-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0949 (lemma-colim-hocolim), together with Tag 0A5L (lemma-direct-sums), as packaged by lem-kun-complex-colimit-hocolim; componentwise finite construction from Tag 0D9Q."
+   }
+  },
+  {
+   "text": "Finally the shift equivalence of [def-weil-abstract-derived-category] preserves this coproduct. Explicitly, for any $Y$, its shift adjunction and the coproduct property from Step 7 give natural bijections\n$$\\operatorname{Hom}(S[1],Y)\\cong\\operatorname{Hom}(S,Y[-1])\\cong\\prod_N\\operatorname{Hom}(F_N,Y[-1])\\cong\\prod_N\\operatorname{Hom}(F_N[1],Y).$$\nThese are restriction along the shifted coprojections $\\iota_N[1]$, so those maps exhibit exactly the asserted coproduct $S[1]$. All complexes and localizations above are unbounded; the only finiteness used was the absence of injections $[p]\\hookrightarrow[m]$ for $p>m$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D9Q (lemma-modules-postnikov), final telescope structure; shift and coproduct universal-property argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-semisimplicial-ringed-total-category",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-semisimplicial-evaluation-free-adjoint",
+  "lem-weil-pbc-degreewise-split-derived-triangle",
+  "lem-kun-complex-colimit-hocolim"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-simplicial.tex",
+  "place": "Tags 0D9B, 0D9E and 0D9Q; explicit injection-only adaptation using the actual coefficient complex, with a componentwise finite normalized simplex contraction. Generic derived triangles and telescope are cited as existing nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A cartesian complex on a flat semisimplicial ringed total site is the homotopy colimit of its finite simplex resolution with graded terms free extension of degree n shifted by n",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicTopology.DoldKan.Γ₀.Obj.obj₂\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/FunctorGamma\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      ChainComplex C ℕ → SimplexCategoryᵒᵖ → [CategoryTheory.Limits.HasFiniteCoproducts C] → C\", \"doc\": \"For a chain complex $K$ in a preadditive category $\\\\mathcal{C}$ with finite coproducts and an object $\\\\Delta$ in the opposite simplex category, this constructs the Γ₀ functor's object by taking the co\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.Γ₀.obj_obj\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/FunctorGamma\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  [inst_2 : CategoryTheory.Limits.HasFiniteCoproducts C] (K : ChainComplex C ℕ) (Δ : SimplexCategoryᵒᵖ),\\n  (AlgebraicTopology.DoldKan.Γ₀.obj K).obj Δ = AlgebraicTopology.DoldKan.Γ₀.Obj.obj₂ K Δ\", \"doc\": \"For a chain complex $K$ in a preadditive category $\\\\mathcal{C}$ with finite coproducts and an object $\\\\Delta$ in the opposite simplex category $\\\\Delta^\\\\text{op}$, the Γ₀ functor's object mapping is de\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.Γ₀_obj_obj\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/FunctorGamma\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  [inst_2 : CategoryTheory.Limits.HasFiniteCoproducts C] (X : ChainComplex C ℕ) (Δ : SimplexCategoryᵒᵖ),\\n  (AlgebraicTopology.DoldKan.Γ₀.obj X).obj Δ = AlgebraicTopology.DoldKan.Γ₀.Obj.obj₂ X Δ\", \"doc\": \"For a chain complex $X$ in a preadditive category $\\\\mathcal{C}$ with finite coproducts and an object $\\\\Delta$ in the opposite simplex category $\\\\Delta^\\\\text{op}$, the $\\\\Gamma_0$ functor's object mappi\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.Γ₀.obj\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/FunctorGamma\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      [CategoryTheory.Limits.HasFiniteCoproducts C] → ChainComplex C ℕ → CategoryTheory.SimplicialObject C\", \"doc\": \"The Γ₀ functor maps a chain complex $ K $ in a preadditive category $ \\\\mathcal{C} $ with finite coproducts to a simplicial object. For each object $ \\\\Delta $ in the opposite simplex category $ \\\\Delta^\"}\n  {\"name\": \"CategoryTheory.Idempotents.DoldKan.Γ_obj_obj\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/EquivalencePseudoabelian\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  [inst_2 : CategoryTheory.IsIdempotentComplete C] [inst_3 : CategoryTheory.Limits.HasFiniteCoproducts C]\\n  (X : ChainComplex C ℕ) (Δ : SimplexCategoryᵒᵖ),\\n  (CategoryTheory.Idempotents.DoldKan.Γ.o\", \"doc\": \"In a preadditive, idempotent-complete category $\\\\mathcal{C}$ with finite coproducts, the Γ functor mapping chain complexes to simplicial objects is defined such that for any chain complex $X$ and obje\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.Γ₀'\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/FunctorGamma\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      [CategoryTheory.Limits.HasFiniteCoproducts C] →\\n        CategoryTheory.Functor (ChainComplex C ℕ) (SimplicialObject.Split C)\", \"doc\": \"The Γ₀' functor maps chain complexes over a preadditive category $\\\\mathcal{C}$ with finite coproducts to split simplicial objects in $\\\\mathcal{C}$. It is constructed by equipping each chain complex $K\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.Γ₀\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/FunctorGamma\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      [CategoryTheory.Limits.HasFiniteCoproducts C] →\\n        CategoryTheory.Functor (ChainComplex C ℕ) (CategoryTheory.SimplicialObject C)\", \"doc\": \"The Γ₀ functor maps chain complexes over a preadditive category $\\\\mathcal{C}$ with finite coproducts to simplicial objects in $\\\\mathcal{C}$. It is constructed as the composition of the Γ₀' functor (wh\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.Γ₀'_obj\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/FunctorGamma\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  [inst_2 : CategoryTheory.Limits.HasFiniteCoproducts C] (K : ChainComplex C ℕ),\\n  AlgebraicTopology.DoldKan.Γ₀'.obj K = SimplicialObject.Split.mk' (AlgebraicTopology.DoldKan.Γ₀.splitting K)\", \"doc\": \"The Γ₀' functor maps a chain complex $ K $ in a preadditive category $ \\\\mathcal{C} $ with finite coproducts to a split simplicial object by equipping $ K $ with a canonical splitting structure. This c\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: Dold-Kan functors and extra degeneracies of ordinary simplicial sets do not give this varying-ring semisimplicial cartesian filtration and its telescope triangle"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Postnikov filtration of the augmented simplex resolution computes an unbounded cartesian derived diagram using finite sums over injective order maps",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SSet.Augmented.stdSimplex\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StdSimplex\", \"type\": \": SimplexCategory ⥤ SSet.Augmented.{u}\", \"doc\": \"The functor from the simplex category to augmented simplicial sets that sends each finite ordinal $[n]$ to the augmented simplicial set consisting of the standard $n$-simplex and the terminal simplici\"}\n  {\"name\": \"SummationFilter\", \"module\": \"Mathlib.Topology.Algebra.InfiniteSum.SummationFilter\", \"type\": \"Type u_4 → Type u_4\", \"doc\": \"A type constructor for filters used in the summation of infinite series in topology and algebra.\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.PInfty\", \"module\": \"Mathlib.AlgebraicTopology.DoldKan.PInfty\", \"type\": \": K[X] ⟶ K[X]\", \"doc\": \"Let $X$ be a simplicial object in a preadditive category, and let $K[X]$ be its associated alternating face map complex. Let $(P_n)_{n \\\\in \\\\mathbb{N}}$ be the recursively defined sequence of chain map\"}\n  {\"name\": \"SimplicialObject.Splitting.πSummand_comp_cofan_inj_id_comp_PInfty_eq_PInfty_assoc\", \"module\": \"Mathlib.AlgebraicTopology.DoldKan.SplitSimplicialObject\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {X : CategoryTheory.SimplicialObject C}\\n  (s : SimplicialObject.Splitting X) [inst_1 : CategoryTheory.Preadditive C] (n : ℕ) {Z : C}\\n  (h : (AlgebraicTopology.AlternatingFaceMapComplex.obj X).X n ⟶ Z),\\n  CategoryTheory.CategoryStruct.com\", \"doc\": \"In a preadditive category $\\\\mathcal{C}$, for a simplicial object $X$ with a splitting $s$ and a natural number $n$, the composition of the projection summand morphism $\\\\pi_{\\\\text{Summand}}$ associated\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.MorphComponents.φ\", \"module\": \"Mathlib.AlgebraicTopology.DoldKan.Decomposition\", \"type\": \"{Z : C} (f : MorphComponents X n Z) : X _⦋n + 1⦌ ⟶ Z\", \"doc\": \"For a simplicial object $X$ in a category $\\\\mathcal{C}$, a natural number $n$, and an object $Z$, this function maps a morphism $f: X_n \\\\to Z$ to a morphism $X_{n+1} \\\\to Z$ by combining two components\"}\n  {\"name\": \"AugmentedSimplexCategory\", \"module\": \"Mathlib.AlgebraicTopology.SimplexCategory.Augmented.Basic\", \"type\": \"Type\", \"doc\": \"The category obtained by adjoining an initial object to the simplex category $\\\\Delta$, typically denoted as $[-1]$. This category is used in algebraic topology to model augmented simplicial objects.\"}\n  {\"name\": \"SSet.Augmented.StandardSimplex.extraDegeneracy\", \"module\": \"Mathlib.AlgebraicTopology.ExtraDegeneracy\", \"type\": \"(Δ : SimplexCategory) : SimplicialObject.Augmented.ExtraDegeneracy (stdSimplex.obj Δ)\", \"doc\": \"The standard augmented simplex in the category of simplicial sets is equipped with an extra degeneracy structure, defined by a morphism from the terminal object to its 0-simplices and a family of shif\"}\n  {\"name\": \"AugmentedSimplexCategory.inclusion\", \"module\": \"Mathlib.AlgebraicTopology.SimplexCategory.Augmented.Basic\", \"type\": \": SimplexCategory ⥤ AugmentedSimplexCategory\", \"doc\": \"The inclusion functor embedding the simplex category $\\\\Delta$ into the augmented simplex category $\\\\Delta_+$, which adds an initial object $[-1]$. This functor maps each object and morphism in $\\\\Delta\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: Dold-Kan functors and extra degeneracies of ordinary simplicial sets do not give this varying-ring semisimplicial cartesian filtration and its telescope triangle"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Postnikov\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: Dold-Kan functors and extra degeneracies of ordinary simplicial sets do not give this varying-ring semisimplicial cartesian filtration and its telescope triangle"
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]ostnikov|semisimplicial|simplex.*resolution",
+   "results": "[grep] OK 0 hit(s)\nDirectory: Mathlib/Algebra/Homology",
+   "date": "2026-10-23",
+   "verdict": "no match: Dold-Kan functors and extra degeneracies of ordinary simplicial sets do not give this varying-ring semisimplicial cartesian filtration and its telescope triangle"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cartesian complex on a semisimplicial ringed total site is the homotopy colimit of finite simplex resolutions with free extension graded terms",
+   "results": "[leanfinder] OK 8 hit(s). Top results as logged: AlgebraicTopology.DoldKan.Γ₀.Obj.obj₂, CategoryTheory.Idempotents.DoldKan.Γ_obj_obj, AlgebraicTopology.DoldKan.Γ₀.obj_obj, AlgebraicTopology.DoldKan.Γ₀_obj_obj, AlgebraicTopology.DoldKan.Γ₀.obj, AlgebraicTopology.DoldKan.Γ₂_obj_X_obj, AlgebraicTopology.DoldKan.Γ₀', AlgebraicTopology.DoldKan.Γ₀",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Dold-Kan, ordinary simplicial splitting and simplicial-set cell filtrations do not supply the varying-ring cartesian semisimplicial derived filtration and its telescope triangle"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Postnikov filtration of a cartesian derived object on a semisimplicial ringed site with injective simplex maps",
+   "results": "[leansearch] OK 8 hit(s). Top results as logged: Ideal.Filtration, SimplicialObject.Splitting.cofan_inj_eq, AlgebraicTopology.DoldKan.karoubi_PInfty_f, AlgebraicTopology.DoldKan.PInfty, SimplicialObject.Splitting.comp_PInfty_eq_zero_iff, SimplicialObject.Splitting.cofan_inj_epi_naturality, IsRingFiltration, CommRingCat.FilteredColimits.colimit",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Dold-Kan, ordinary simplicial splitting and simplicial-set cell filtrations do not supply the varying-ring cartesian semisimplicial derived filtration and its telescope triangle"
+  },
+  {
+   "tool": "grep",
+   "query": "semisimplicial|[Pp]ostnikov|[Ss]implex.*[Ff]iltration",
+   "results": "[grep] OK 3 hit(s). Top results as logged: Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/RelativeCellComplex.lean, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/RelativeCellComplex.lean, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/RelativeCellComplex.lean. Search directory: Mathlib/AlgebraicTopology",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Dold-Kan, ordinary simplicial splitting and simplicial-set cell filtrations do not supply the varying-ring cartesian semisimplicial derived filtration and its telescope triangle"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mapping telescope of brutal truncations of the normalized simplex resolution for cartesian complexes of sheaves on varying ringed topoi",
+   "results": "[leanfinder] OK 8 hit(s). Top results as logged: AlgebraicTopology.DoldKan.Γ₀.Obj.map, AlgebraicTopology.DoldKan.Γ₀.Obj.obj₂, AlgebraicTopology.normalizedMooreComplex, CategoryTheory.Idempotents.DoldKan.Γ_map_app, AlgebraicTopology.DoldKan.Γ₀.obj_obj, AlgebraicTopology.DoldKan.Γ₀.obj, AlgebraicTopology.DoldKan.Γ₀.obj_map, AlgebraicTopology.DoldKan.Γ₀_obj_obj",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Dold-Kan, ordinary simplicial splitting and simplicial-set cell filtrations do not supply the varying-ring cartesian semisimplicial derived filtration and its telescope triangle"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-semisimplicial-derived-hom",
+  "date": "2026-10-23",
+  "group": "Q13"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Derived quasi-coherent hyperdescent with negative Ext vanishing. Supporting input for the face-only repair: Morphisms of flat semisimplicial cartesian derived objects. Supporting input: Simplex filtration of a cartesian semisimplicial derived object.",
+   "via": [
+    "lem-sfb-flat-semisimplicial-derived-hom",
+    "lem-sfb-space-negative-ext-hyperdescent",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-semisimplicial-cartesian-simplex-filtration",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Eight-step injection-only simplex construction on an arbitrary representative of B; the canonical labelled transition comparison, pointwise finite contraction, split truncation sequences, and first boundary are explicit. Existing general derived-triangle and module-sheaf telescope nodes suffice; no new nodes. No strict inverse of a derived transition or convergence hypothesis is used.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Derived quasi-coherent hyperdescent with negative Ext vanishing. Supporting input for the face-only repair: Morphisms of flat semisimplicial cartesian derived objects. Supporting input: Simplex filtration of a cartesian semisimplicial derived object. Steps 1-4 give the normalized simplex resolution; Steps 5-6 give its finite-stage and first-boundary structure; Steps 7-8 give the telescope and shifted coproduct. The latest blueprint direct-image route is unchanged; ancestor_for_item returns null, so the inherited null ancestor and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-complex-colimit-hocolim",
+    "why": "Generic unbounded module-sheaf telescope theorem on any small ringed site; the semisimplicial unit has no replacement for this general derived-category tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-complex-colimit-hocolim"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NI-4ab883e92",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-4ab883e92 (reviewer sub-agent of L); spot-checked: PASS. The proof is complete: I rechecked every step and its signs by hand, there are no new nodes, and no changes were made.\n\nWhat the delivery is: the item was statement-only on the base and had no re-split note, so the re-split rule does not apply. The statement is unchanged.\n\nSource: Stacks spaces-simplicial 0D9Q (lemma-modules-postnikov, l.3231), with 0D9B and 0D9E. The item adapts it to injective maps only, as declared in source.place.\n\nStep checks:\n- Step 1: b squared is 0, and the fold satisfies eps b_1 = 0.\n- Step 2: the labelled comparison rho_p is compatible with transitions by coherence of C. It represents theta^B_alpha because f_alpha^* is exact, and conservative evaluation makes r_p an isomorphism. Q(eps) r_0 is the counit, matching evaluation-free-adjoint.\n- Step 3: D squared is 0, T_N stabilizes in each component, and t is a chain map.\n- Step 4: I recomputed bh+hb = 1 - e eps in all cases: v_0 > 0, v_0 = 0 with p > 0, p = 0, and the top tuple [0..m]. The vertical terms cancel, so Dh+hD = 1 - e t_m and t_m e = 1 hold with no bound on C.\n- Step 5: the quotient differential (-1)^{N+1} d_C matches the shift convention, and the degreewise split leaf gives the triangles.\n- Step 6: T_1 is the cone C(b_1) under the def-weil cone convention. I checked that the adjunct of r_0^{-1} Q(d_i) r_1 is (theta_{delta_i})^{-1} followed by inclusion of the delta_i summand, which is q_i; hence the first map is q_0 - q_1.\n- Step 7: lem-kun-complex-colimit-hocolim gives the telescope with u = 1 - s on Mod(O) of the total site, transported through Q(t) and r_0.\n- Step 8: the shift preserves the coproduct, which is elementary.\n\nEdge cases: m = 0, m = 1, p > m, and the zero ring or zero complex all behave correctly.\n\nDuplicates: grep for 0D9Q, 0D9E and simplex-filtration found no duplicate. lem-trf-total-site-simplex-free-resolution is the all-maps, constant-coefficient resolution and is not used.\n\nAccepted tool_uses: lem-kun-complex-colimit-hocolim, a generic telescope result. No SGA source is used."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SemisimplicialCartesianSimplexFiltration",
+  "declaration": "CategoryTheory.SemisimplicialRingedTotal.semisimplicial_cartesian_simplex_filtration",
+  "declarations": [
+   "CategoryTheory.SemisimplicialRingedTotal.cartesianSimplexTerm",
+   "CategoryTheory.SemisimplicialRingedTotal.cartesianSimplexFace",
+   "CategoryTheory.SemisimplicialRingedTotal.semisimplicial_cartesian_simplex_filtration"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SemisimplicialCartesianSimplexFiltration.lean",
+  "statement": "theorem semisimplicial_cartesian_simplex_filtration (P : Presentation R h) (exact : ∀ {m n : SemiSimplexCategoryᵒᵖ} (a : m ⟶ n), PreservesFiniteLimits (P.pullback a).ordinary ∧ PreservesFiniteColimits (P.pullback a).ordinary) (L : ∀ n : ℕ, EvaluationFreeExtension P (op (SemiSimplexCategory.mk n))) (B : (R.total h).D) (hB : P.IsCartesian B) : ∃ (K : ℕ → (R.total h).D) (u : ∀ N : ℕ, K N ⟶ K (N + 1)) (j : ∀ N : ℕ, K N ⟶ B), (∀ N : ℕ, u N ≫ j (N + 1) = j N) ∧ ∃ hK : K 0 = cartesianSimplexTerm P L B 0, j 0 = eqToHom hK ≫ (L 0).derivedAdjunction.counit.app B ∧ (∀ N : ℕ, ∃ (v : K (N + 1) ⟶ (cartesianSimplexTerm P L B (N + 1))⟦(N + 1 : ℤ)⟧) (w : (cartesianSimplexTerm P L B (N + 1))⟦(N + 1 : ℤ)⟧ ⟶ K N⟦(1 : ℤ)⟧), Triangle.mk (u N) v w ∈ distTriang (R.total h).D) ∧ (∃ w : K 1 ⟶ (cartesianSimplexTerm P L B 1)⟦(1 : ℤ)⟧, Triangle.mk ((cartesianSimplexFace P L B hB (SemiSimplexCategory.homOfMono (SimplexCategory.δ (0 : Fin 2))).op - cartesianSimplexFace P L B hB (SemiSimplexCategory.homOfMono (SimplexCategory.δ (1 : Fin 2))).op) ≫ eqToHom hK.symm) (u 0) w ∈ distTriang (R.total h).D) ∧ ∃ (S : (R.total h).D) (ι : ∀ N : ℕ, K N ⟶ S) (s : S ⟶ S) (p : S ⟶ B) (boundary : B ⟶ S⟦(1 : ℤ)⟧), Nonempty (IsColimit (Cofan.mk S ι)) ∧ (∀ N : ℕ, ι N ≫ s = u N ≫ ι (N + 1)) ∧ (∀ N : ℕ, ι N ≫ p = j N) ∧ Triangle.mk (𝟙 S - s) p boundary ∈ distTriang (R.total h).D ∧ Nonempty (IsColimit (Cofan.mk (S⟦(1 : ℤ)⟧) (fun N : ℕ ↦ (shiftFunctor (R.total h).D (1 : ℤ)).map (ι N))))",
+  "branch": "sheaf-dag",
+  "by": "Q25",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d565aeea4",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Snapshot node differs from the side-live copy only by the added lean field; lean.statement matches the file exactly. Hypotheses match the dependencies' declarations: Presentation, IsCartesian (all derived transitions iso), the fully specified EvaluationFreeExtension L, and the same exact hypothesis as semisimplicial_evaluation_free_adjoint. No extra instances, bounds or universe restriction (single u). Conclusion: K/u/j with u N ≫ j (N+1) = j N; hK : K 0 = X_0 with j 0 = eqToHom ≫ derived counit; triangles K N → K (N+1) → X_{N+1}[N+1]; first-stage triangle with first map (q0 − q1) ≫ eqToHom and second map u 0, where q_i = homEquiv.symm(inv θ_{δ_i} ≫ derivedInclusion δ_i) (types and δ i omit-i convention checked); S as Cofan IsColimit, ι≫s = u≫ι, ι≫p = j, telescope triangle with 𝟙−s, shifted cofan IsColimit. Helpers are real constructions with source/blueprint docstrings; only the theorem is sorry, and its docstring has the 8-step proof. Proof imports exist in live. Edge cases N=0, p>m empty sums, B=0 fine. No duplicate declaration found. Report has Worker report and Second reading by Q25 (a self-reading). No findings; no compile needed."
+ }
+}

@@ -1,0 +1,250 @@
+{
+ "id": "lem-sfb-finite-locally-free-deformation",
+ "kind": "statement",
+ "title": "Finite locally free degree survives flat first-order deformation",
+ "statement": "Let $S_0\\hookrightarrow S'$ be a first-order thickening of schemes [def-pc-scheme, def-sbc-first-order-thickening]. Let $q':V'\\to S'$ be a flat morphism of schemes [def-weil-flat-morphism], and put $q_0:V_0=S_0\\times_{S'}V'\\to S_0$ [def-pc-fibre-product]. For every integer $d\\geq0$, if $q_0$ is finite locally free of degree $d$ [def-pc-finite-locally-free], then $q'$ is finite locally free of degree $d$. No finite-presentation, quasi-compactness, Noetherian hypothesis, or finiteness assumption on the square-zero ideal is imposed in advance.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 06AG (lemma-deform-property), part item-finite-locally-free (23), with Y prime = S prime and Y = S; fixed degree follows from the identical residue-field fibres."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-first-order-thickening",
+  "def-weil-flat-morphism",
+  "def-pc-fibre-product",
+  "def-pc-finite-locally-free"
+ ],
+ "proof": [
+  {
+   "text": "By [def-pc-finite-locally-free], $q_0$ is finite and locally of finite presentation. The first-order hypothesis means $\\mathcal I^2=0$, hence is a finite-order thickening with $n=1$ [def-sbc-first-order-thickening]. Apply [lem-weil-pbc-thickening-finite-cartesian] to $S_0\\subset S'$ and $V_0=S_0\\times_{S'}V'$: it gives that $q'$ is finite. Its flatness is already a hypothesis.",
+   "uses": [
+    "def-pc-finite-locally-free",
+    "def-sbc-first-order-thickening",
+    "lem-weil-pbc-thickening-finite-cartesian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 06AG, lemma-deform-property, Ad (23), using Ad (22); Tag 09ZW, lemma-thicken-property-morphisms-cartesian (8)"
+   }
+  },
+  {
+   "text": "Fix an affine open $U'=\\operatorname{Spec}A\\subset S'$. By [lem-weil-pbc-closed-immersion-affine-cover-criterion](1), $U_0=S_0\\times_{S'}U'$ is $\\operatorname{Spec}(A/I)$, with $I$ the defining ideal; $I^2=0$ by [def-sbc-first-order-thickening]. Put $W'=V'\\times_{S'}U'$. Its map to $U'$ is flat by [lem-weil-pbc-flat-morphism-base-change]. Its reduction is $W_0=V_0\\times_{S_0}U_0$: indeed a map to either iterated fibre product consists of maps to $V'$, $S_0$ and $U'$ with the same image in $S'$, so the universal property [def-pc-fibre-product] gives mutually inverse maps. The map $W_0\\to U_0$ is locally of finite presentation: every affine open of $W_0$, viewed as an open of $V_0$, lies over the affine open $U_0$ of $S_0$, so [lem-weil-pbc-lfp-affine-opens-finite-presentation] for $q_0$ supplies its finite presentation over $A/I$, and [def-sbc-locally-finite-presentation] applies. Now [lem-sfb-flat-deformation-lfp] with $Y=W'$, base ring $A$ and exponent $N=2$ shows that $W'\\to U'$ is locally of finite presentation.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "def-sbc-first-order-thickening",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "def-sbc-locally-finite-presentation",
+    "lem-sfb-flat-deformation-lfp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 06AG, lemma-deform-property, general remark (I) and Ad (13), applied on affine opens of the base"
+   }
+  },
+  {
+   "text": "Every $v'\\in V'$ maps into an affine open $U'$ of $S'$. The local finite presentation from step 2 supplies affine neighbourhoods of $v'$ and $q'(v')$ with a finitely presented coordinate-ring map. These are also open neighbourhoods in $V'$ and $S'$, so [def-sbc-locally-finite-presentation] proves that $q'$ is locally of finite presentation. Step 1 and the assumed flatness now give all three conditions defining finite locally free in [def-pc-finite-locally-free].",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 06AG, lemma-deform-property, Ad (23); Tag 02KB, morphisms-lemma-finite-flat, using the project definition of finite locally free"
+   }
+  },
+  {
+   "text": "It remains to check degree. Given $s'\\in S'$, the homeomorphism in [def-sbc-first-order-thickening] gives its unique preimage $s_0\\in S_0$. By [lem-weil-pbc-closed-immersion-residue-field-iso], the induced map $\\kappa(s')\\to\\kappa(s_0)$ is an isomorphism. The universal property [def-pc-fibre-product] identifies $V_0\\times_{S_0}\\operatorname{Spec}\\kappa(s_0)$ with $V'\\times_{S'}\\operatorname{Spec}\\kappa(s_0)$: maps to either side are precisely compatible maps to $V'$ and $\\operatorname{Spec}\\kappa(s_0)$. Using the residue-field isomorphism, this is the fibre of $q'$ at $s'$. These isomorphisms respect the structure maps to the residue-field spectra, hence identify their global-section algebras over the identified fields. A vector-space basis transfers along these inverse isomorphisms, so their dimensions agree. The fibre of $q_0$ has dimension $d$ by hypothesis and [def-pc-finite-locally-free]. Therefore every fibre of $q'$ has dimension $d$, proving the asserted degree. This also covers $d=0$; if $S'$ is empty the fibre condition is vacuous.",
+   "uses": [
+    "def-sbc-first-order-thickening",
+    "lem-weil-pbc-closed-immersion-residue-field-iso",
+    "def-pc-fibre-product",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 06AG, lemma-deform-property, general remark (II) and rank clause (23); the fibre-product and basis comparisons are written out"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-finite-locally-free",
+  "def-sbc-first-order-thickening",
+  "lem-weil-pbc-thickening-finite-cartesian",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "def-sbc-locally-finite-presentation",
+  "lem-sfb-flat-deformation-lfp",
+  "lem-weil-pbc-closed-immersion-residue-field-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 06AG, lemma-deform-property, general remarks (I),(II), Ad (13), Ad (22), Ad (23); finiteness via Tag 09ZW(8), and the fixed-degree fibre comparison expanded from the universal property."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite locally free morphisms of schemes of fixed rank are invariant under flat nilpotent deformation",
+   "results": "8 hits; AlgebraicGeometry.Flat, AlgebraicGeometry.IsEtale, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified",
+   "date": "2026-10-23",
+   "verdict": "no match: flatness, finiteness and smoothness declarations do not assert finite locally free rank preservation for a nilpotent deformation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat morphism whose reduction modulo a nilpotent ideal is finite flat of degree d is finite locally free of degree d",
+   "results": "8 hits; AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, RingHom.Flat.propertyIsLocal, Algebra.Smooth.flat, Algebra.Smooth.flat_of_isNoetherianRing, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, AlgebraicGeometry.UniversallyOpen.of_flat, Algebra.FormallyUnramified.flat_of_restrictScalars, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth",
+   "date": "2026-10-23",
+   "verdict": "no match: flatness, finiteness and smoothness declarations do not assert finite locally free rank preservation for a nilpotent deformation."
+  },
+  {
+   "tool": "grep",
+   "query": "(finiteLocallyFree|IsFiniteLocallyFree).*(thicken|nilpotent)|(thicken|nilpotent).*(finiteLocallyFree|IsFiniteLocallyFree)",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: flatness, finiteness and smoothness declarations do not assert finite locally free rank preservation for a nilpotent deformation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsFinite\"",
+   "results": "12 hits; AlgebraicGeometry.IsFinite.instContainsIdentitiesScheme, AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme, AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated, AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsFinite.instIsIntegralHom, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType",
+   "date": "2026-10-23",
+   "verdict": "no match: flatness, finiteness and smoothness declarations do not assert finite locally free rank preservation for a nilpotent deformation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat morphism of schemes is finite locally free of constant degree d if its reduction along a square zero base thickening is finite locally free of degree d",
+   "results": "8 hits; AlgebraicGeometry.Flat.mk, AlgebraicGeometry.FormallyUnramified.recOn, AlgebraicGeometry.FormallyUnramified.casesOn, AlgebraicGeometry.flat_iff, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Flat, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.FormallyUnramified",
+   "date": "2026-10-23",
+   "verdict": "no match: flatness, finiteness and smoothness declarations do not assert finite locally free rank preservation for a nilpotent deformation."
+  },
+  {
+   "tool": "grep",
+   "query": "(finiteLocallyFree|IsFiniteLocallyFree|finite locally free).*(thicken|nilpotent)|(thicken|nilpotent).*(finiteLocallyFree|IsFiniteLocallyFree|finite locally free)",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned flatness, finiteness, base-change and local-finite-presentation declarations do not reflect fixed-degree finite local freeness across a nilpotent base reduction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat morphism of schemes whose square zero base reduction is finite locally free of rank d is finite locally free of rank d",
+   "results": "8 hits; AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.mk, AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Flat.casesOn, AlgebraicGeometry.flat_iff, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth",
+   "date": "2026-10-23",
+   "verdict": "no match: returned flatness, finiteness, base-change and local-finite-presentation declarations do not reflect fixed-degree finite local freeness across a nilpotent base reduction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsFinite\"",
+   "results": "12 hits; AlgebraicGeometry.IsFinite.instContainsIdentitiesScheme, AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme, AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated, AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsFinite.instIsIntegralHom, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType",
+   "date": "2026-10-23",
+   "verdict": "no match: returned flatness, finiteness, base-change and local-finite-presentation declarations do not reflect fixed-degree finite local freeness across a nilpotent base reduction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finiteness and local finite presentation lift through nilpotent base thickenings for flat scheme morphisms",
+   "results": "8 hits; AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE, AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE, AlgebraicGeometry.locallyOfFinitePresentation_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: returned flatness, finiteness, base-change and local-finite-presentation declarations do not reflect fixed-degree finite local freeness across a nilpotent base reduction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat morphism of schemes is finite locally free of degree d if its base change modulo a square zero ideal is finite locally free of degree d",
+   "results": "8 hits; AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat.instIsMultiplicativeScheme, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat.instOfIsOpenImmersion, AlgebraicGeometry.Flat.iff_flat_stalkMap",
+   "date": "2026-10-23",
+   "verdict": "no match: returned flatness, finiteness, base-change and local-finite-presentation declarations do not reflect fixed-degree finite local freeness across a nilpotent base reduction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-finite-hilbert-lci-lift",
+  "date": "2026-10-23",
+  "group": "Q21"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Power lifting implies universal submersiveness of an affine invariant quotient. Fppf presentation used after the affine invariant quotient construction. Supporting input: Apply the flat-groupoid algebraicity theorem to the action groupoid; unlike the smooth-groupoid theorem this does not require H smooth. Algebraicity step: criteria.tex Tag 06FI applies the general bootstrap theorem Tag 06DC to the flat locally finitely presented quotient presentation. Supporting input: Tag 06D9 (lemma-lci-formally-smooth), using the unramified lci deformation of Tag 06D8 (lemma-lci-unobstructed). Supporting input in criteria.tex lemma-lci-unobstructed, final sentence: finite locally free of the same degree after proving flatness and the cartesian square.",
+   "via": [
+    "lem-sfb-relative-finite-hilbert-lci-lift",
+    "lem-sfb-fppf-stack-algebraicity-bootstrap",
+    "lem-sfb-flat-groupoid-algebraic-quotient",
+    "lem-sfb-flat-affine-action-stack-presentation",
+    "lem-sfb-power-lifting-quotient-submersive",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-locally-free-deformation",
+  "worker": "stage1",
+  "summary": "Followed Stacks 06AG(23): reuse the existing finite-thickening theorem and the existing flat-deformation local-finite-presentation theorem, apply the latter on affine base opens, assemble by the pointwise definition, and check degree by the closed-immersion residue-field isomorphism and the explicit fibre-product comparison. No statement changes, new nodes, Mathlib leaves or Lean attachments. No Noetherian, finite-presentation or quasi-compactness assumptions were added.",
+  "blueprint": "The inherited from.place traces this algebraic tool to det-thm-sf-ctf-stability-direct-images proof (3), through criteria.tex Tag 06D8, final finite-locally-free sentence. The nearest imported ancestor is null, confirmed by blueprint_refs.py ancestor. Read the latest sk-thm-sf-ctf-stability unit and direct-images proof; no change of its route is proposed. Whole imported-blueprint searches for finite locally free and thickening found no same statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-thickening-finite-cartesian",
+    "why": "Generic finiteness reflection under a nilpotent base thickening, exactly the Tag 06AG(22) input; no same-unit scheme theorem supplies finiteness reflection."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-residue-field-iso",
+    "why": "Generic residue-field isomorphism for a closed immersion, needed to compare fibre degrees; no same-unit node gives this statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-thickening-finite-cartesian",
+  "lem-weil-pbc-closed-immersion-residue-field-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-506c3123c",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-506c3123c (reviewer sub-agent of L); spot-checked: Read Stacks 06AG (lemma-deform-property) hypotheses, remarks (I)-(III), Ad (13) l.2480, Ad (22) l.2548 and Ad (23) l.2555. The item is the ⇐ direction of (23) with Y'=S', Y=S. Its statement is faithful and unchanged versus live (only split fields changed). There are no new nodes, no SGA and no cycle, and the delivery is not superseded (live and side-live are still unsplit). Step 1: q' is finite via lem-weil-pbc-thickening-finite-cartesian; the hypotheses hold for a first-order (n=1) thickening. Step 2: on affine U'=Spec A, the affine-cover criterion (1) gives U_0=Spec(A/I) with I^2=0; flatness follows from base change; W'x_{U'}U_0 ≅ V_0x_{S_0}U_0 by the universal property; W_0→U_0 is lfp via 01TQ. lem-sfb-flat-deformation-lfp then applies with N=2, and it needs no Noetherian or finite-type hypothesis. Step 3 is an elementary pointwise assembly of the lfp witnesses, which together with step 1 and flatness gives all three defining conditions. Step 4: the residue-field iso of the closed immersion plus an explicit fibre-product identification over Spec κ(s_0) gives equal fibre dimensions. Tested d=0, empty S', I=0 and k[ε][x]/(x^2) (rank 2). Spec k→Spec k[ε] shows flatness is needed. No duplicate found in the DAG (rg -L for 06AG(23) and for finite locally free plus thickening). Accepted tool_uses: lem-weil-pbc-thickening-finite-cartesian and lem-weil-pbc-closed-immersion-residue-field-iso, both generic sk-thm-p1 tools. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteLocallyFreeDeformation",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.isFiniteLocallyFreeOfDegree_of_firstOrderThickening",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteLocallyFreeDeformation.lean",
+  "statement": "theorem Scheme.Hom.isFiniteLocallyFreeOfDegree_of_firstOrderThickening {S₀ S' V' : Scheme.{u}} (i : S₀ ⟶ S') (q' : V' ⟶ S') (hi : IsFirstOrderThickening i) [Flat q'] (d : ℕ) (h₀ : (pullback.fst i q').IsFiniteLocallyFreeOfDegree d) : q'.IsFiniteLocallyFreeOfDegree d",
+  "branch": "newtargets-dag",
+  "by": "Q124",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bbae4d1d7",
+  "group": "Q124",
+  "result": "pass",
+  "note": "Clause-by-clause match of the theorem against the node and Stacks 06AG(23) (more-morphisms.tex l.2267/2329/2555): IsFirstOrderThickening i = closed immersion with ker^2 = ⊥; [Flat q']; q0 = pullback.fst i q' : pullback i q' ⟶ S₀; d : ℕ; IsFiniteLocallyFreeOfDegree (FiberDegree.lean:899/907; fiberDegree = finrank κ(s) Γ(fiber), l.332) matches the node's dim Γ(X_s) = d. No extra hypotheses, single universe u. Edge cases d=0, empty base, identity thickening and non-finitely-generated ideal covered. lean.statement is verbatim the file signature; node differs from live only in lean. Proof is sorry only, nothing hollow; docstrings give source, blueprint tag and the four proof steps; report has Worker report and Second reading by Q124. Imports exist live; lem-sfb-flat-deformation-lfp is an unrecorded proof dep and correctly not imported. No file changed, no compile run. No findings."
+ }
+}

@@ -33,6 +33,7 @@ import Sheaf.Algebra.Homology.RingedTensorComplexConstraints
 import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+public import Mathlib.CategoryTheory.Sites.LocalSite
 
 /-! # Hom localization for stratified dualizable condensed sheaves
 

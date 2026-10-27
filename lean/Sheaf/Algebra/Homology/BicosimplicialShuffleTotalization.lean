@@ -4,29 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Mathlib.AlgebraicTopology.AlternatingFaceMapComplex
-public import Mathlib.CategoryTheory.Functor.Currying
-public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
-public import Mathlib.Algebra.Homology.Embedding.Extend
-public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
-public import WeilConjectures.CategoryTheory.DoubleComplexTotal
-import Mathlib.CategoryTheory.Abelian.Injective.Resolution
-import Sheaf.Algebra.Homology.AugmentedResolutionLiftHomotopy
+public import Sheaf.Algebra.Homology.BicosimplicialShuffleObjects
+import Mathlib.Algebra.Homology.Embedding.ExtendHomotopy
+import Sheaf.Algebra.Homology.UniversalShuffleEvaluation
 
-/-! # Bicosimplicial shuffle and finite cochain totalizations
+/-! # Assembly of the augmentation-preserving bicosimplicial shuffle equivalence
 
-Source: the current blueprint, sec-six-functors-basics,
-sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3), formal homological-algebra
-input (blueprint: lem-sfb-bicosimplicial-shuffle-totalization).
-
-All totals below are Mathlib's total complexes with the published nonnegative sign
-and finite-coproduct instances. The inner total first combines the two cosimplicial
-indices; the remaining total combines their sum with the internal cochain degree.
+Source: the current blueprint, sec-six-functors-basics, direct-images proof (3).
+(blueprint: lem-sfb-bicosimplicial-shuffle-totalization).
 -/
 
 @[expose] public section
-
 set_option autoImplicit false
 
 universe w v u
@@ -38,114 +26,232 @@ namespace AlgebraicTopology.BicosimplicialShuffle
 
 variable {C : Type u} [Category.{v} C] [Abelian C]
 
-/-- The diagonal alternating-coface bicomplex, before totalization.
-Source: current blueprint, direct-images proof (3), diagonal differential.
-(blueprint: lem-sfb-bicosimplicial-shuffle-totalization). -/
-def diagonalBicomplex (X : SimplexCategory × SimplexCategory ⥤ CochainComplex C ℕ) :
-    HomologicalComplex₂ C (ComplexShape.up ℕ) (ComplexShape.up ℕ) :=
-  AlternatingCofaceMapComplex.obj (CategoryTheory.Functor.diag SimplexCategory ⋙ X)
-
-/-- The three nonnegative cochain indices, ordered first cosimplicial, second
-cosimplicial, internal. Source: current blueprint, direct-images proof (3).
-(blueprint: lem-sfb-bicosimplicial-shuffle-totalization). -/
-def tripleComplex (X : SimplexCategory × SimplexCategory ⥤ CochainComplex C ℕ) :
-    HomologicalComplex₂ (CochainComplex C ℕ) (ComplexShape.up ℕ) (ComplexShape.up ℕ) :=
-  AlternatingCofaceMapComplex.obj
-    (curry.obj X ⋙ alternatingCofaceMapComplex (CochainComplex C ℕ))
-
-/-- First totalize the two cosimplicial indices in the category of internal complexes.
-Source: current blueprint, direct-images proof (3); differential δ₁ + (-1)^a δ₂.
-(blueprint: lem-sfb-bicosimplicial-shuffle-totalization). -/
-noncomputable def cosimplicialTotal
-    (X : SimplexCategory × SimplexCategory ⥤ CochainComplex C ℕ) :
-    HomologicalComplex₂ C (ComplexShape.up ℕ) (ComplexShape.up ℕ) :=
-  (tripleComplex X).total (ComplexShape.up ℕ)
-
-/-- The diagonal total D(X), with differential δ_diag + (-1)^n d_internal.
-Source: current blueprint, direct-images proof (3).
-(blueprint: lem-sfb-bicosimplicial-shuffle-totalization). -/
-noncomputable def diagonalTotal
-    (X : SimplexCategory × SimplexCategory ⥤ CochainComplex C ℕ) : CochainComplex C ℕ :=
-  (diagonalBicomplex X).total (ComplexShape.up ℕ)
-
-/-- The successive total T(X), with differential
-δ₁ + (-1)^a δ₂ + (-1)^(a+b) d_internal.
-Source: current blueprint, direct-images proof (3).
-(blueprint: lem-sfb-bicosimplicial-shuffle-totalization). -/
-noncomputable def successiveTotal
-    (X : SimplexCategory × SimplexCategory ⥤ CochainComplex C ℕ) : CochainComplex C ℕ :=
-  (cosimplicialTotal X).total (ComplexShape.up ℕ)
-
-/-- Functoriality of D(X), using the existing alternating-coface and total map.
-Source: current blueprint, direct-images proof (3), naturality in X.
-(blueprint: lem-sfb-bicosimplicial-shuffle-totalization). -/
-noncomputable def diagonalMap
-    {X Y : SimplexCategory × SimplexCategory ⥤ CochainComplex C ℕ} (f : X ⟶ Y) :
-    diagonalTotal X ⟶ diagonalTotal Y :=
-  HomologicalComplex₂.total.map
-    (AlternatingCofaceMapComplex.map
-      (whiskerLeft (CategoryTheory.Functor.diag SimplexCategory) f)) (ComplexShape.up ℕ)
-
-/-- Functoriality of T(X), totaling first the two cosimplicial indices and then the
-internal index. Source: current blueprint, direct-images proof (3), naturality in X.
-(blueprint: lem-sfb-bicosimplicial-shuffle-totalization). -/
-noncomputable def successiveMap
-    {X Y : SimplexCategory × SimplexCategory ⥤ CochainComplex C ℕ} (f : X ⟶ Y) :
-    successiveTotal X ⟶ successiveTotal Y :=
-  HomologicalComplex₂.total.map
-    (HomologicalComplex₂.total.map
-      (AlternatingCofaceMapComplex.map
-        (whiskerRight (curry.map f) (alternatingCofaceMapComplex (CochainComplex C ℕ))))
-      (ComplexShape.up ℕ)) (ComplexShape.up ℕ)
-
-/-- The canonical inclusion X^(n,n,r) into D(X)^(n+r).
-Source: current blueprint, direct-images proof (3), finite diagonal sum.
-(blueprint: lem-sfb-bicosimplicial-shuffle-totalization). -/
-noncomputable def diagonalInclusion
-    (X : SimplexCategory × SimplexCategory ⥤ CochainComplex C ℕ)
+set_option backward.isDefEq.respectTransparency false in
+private lemma diagonalInclusion_map
+    {X Y : SimplexCategory × SimplexCategory ⥤ CochainComplex C ℕ} (f : X ⟶ Y)
     (n r m : ℕ) (h : n + r = m) :
-    (X.obj (⦋n⦌, ⦋n⦌)).X r ⟶ (diagonalTotal X).X m :=
-  (diagonalBicomplex X).ιTotal (ComplexShape.up ℕ) n r m h
+    diagonalInclusion X n r m h ≫ (diagonalMap f).f m =
+      (f.app (⦋n⦌, ⦋n⦌)).f r ≫ diagonalInclusion Y n r m h := by
+  simp [diagonalInclusion, diagonalMap, diagonalBicomplex,
+    HomologicalComplex₂.ιTotal_map]
 
-/-- The canonical inclusion X^(a,b,r) into T(X)^(a+b+r), with the first direction
-first. Source: current blueprint, direct-images proof (3), finite triple sum.
-(blueprint: lem-sfb-bicosimplicial-shuffle-totalization). -/
-noncomputable def successiveInclusion
-    (X : SimplexCategory × SimplexCategory ⥤ CochainComplex C ℕ)
+set_option backward.isDefEq.respectTransparency false in
+private lemma successiveInclusion_map
+    {X Y : SimplexCategory × SimplexCategory ⥤ CochainComplex C ℕ} (f : X ⟶ Y)
     (a b r m : ℕ) (h : a + b + r = m) :
-    (X.obj (⦋a⦌, ⦋b⦌)).X r ⟶ (successiveTotal X).X m :=
-  ((tripleComplex X).ιTotal (ComplexShape.up ℕ) a b (a + b) rfl).f r ≫
-    (cosimplicialTotal X).ιTotal (ComplexShape.up ℕ) (a + b) r m h
+    successiveInclusion X a b r m h ≫ (successiveMap f).f m =
+      (f.app (⦋a⦌, ⦋b⦌)).f r ≫ successiveInclusion Y a b r m h := by
+  simp only [successiveInclusion, successiveMap, Category.assoc,
+    HomologicalComplex₂.ιTotal_map]
+  rw [← Category.assoc, ← HomologicalComplex.comp_f, HomologicalComplex₂.ιTotal_map]
+  simp [tripleComplex, cosimplicialTotal, HomologicalComplex.comp_f, Category.assoc]
 
-/-- The monotone surjection α_μ(i) = #{j ∈ μ | j < i}. Taking the complement
-produces α_ν. Source: current blueprint, direct-images proof (3), shuffle formula.
-(blueprint: lem-sfb-bicosimplicial-shuffle-totalization). -/
-def shuffleSurjection (n : ℕ) (μ : Finset (Fin n)) : ⦋n⦌ ⟶ ⦋μ.card⦌ :=
-  SimplexCategory.mkHom
-    { toFun := fun i ↦ ⟨(μ.filter (fun j ↦ j.val < i.val)).card,
-        Nat.lt_succ_of_le (Finset.card_filter_le μ _)⟩
-      monotone' := fun _i _j hij ↦ Finset.card_le_card
-        (Finset.monotone_filter_right μ (fun _k _ hk ↦ lt_of_lt_of_le hk hij)) }
-
-/-- The sign of the permutation with increasing μ followed by increasing μᶜ:
-its inversions are pairs (i,j) ∈ μ × μᶜ with j < i.
-Source: current blueprint, direct-images proof (3), ε(μ,ν).
-(blueprint: lem-sfb-bicosimplicial-shuffle-totalization). -/
-def shuffleSign (n : ℕ) (μ : Finset (Fin n)) : ℤ :=
-  (-1) ^ ((μ.product μᶜ).filter (fun ij ↦ ij.2 < ij.1)).card
-
-/-- A shuffle summand with its target inclusion. Every subset μ of Fin n gives
-exactly one partition (μ,μᶜ); its two cardinalities sum to n.
-Source: current blueprint, direct-images proof (3), specified shuffle component.
-(blueprint: lem-sfb-bicosimplicial-shuffle-totalization). -/
-noncomputable def shuffleTerm
-    (X : SimplexCategory × SimplexCategory ⥤ CochainComplex C ℕ)
+set_option backward.isDefEq.respectTransparency false in
+private lemma shuffleTerm_natural
+    {X Y : SimplexCategory × SimplexCategory ⥤ CochainComplex C ℕ} (f : X ⟶ Y)
     (n r m : ℕ) (h : n + r = m) (μ : Finset (Fin n)) :
-    (X.obj (⦋n⦌, ⦋n⦌)).X r ⟶ (successiveTotal X).X m :=
-  shuffleSign n μ • ((X.map (shuffleSurjection n μ, shuffleSurjection n μᶜ)).f r ≫
-    successiveInclusion X μ.card μᶜ.card r m
-      ((congrArg (fun k ↦ k + r)
-        ((Finset.card_add_card_compl μ).trans (Fintype.card_fin n))).trans h))
+    (f.app (⦋n⦌, ⦋n⦌)).f r ≫ shuffleTerm Y n r m h μ =
+      shuffleTerm X n r m h μ ≫ (successiveMap f).f m := by
+  simp only [shuffleTerm, Preadditive.comp_zsmul, Preadditive.zsmul_comp,
+    Category.assoc, successiveInclusion_map]
+  congr 1
+  rw [← Category.assoc, ← Category.assoc]
+  congr 1
+  exact (congrArg (fun g ↦ g.f r)
+    (f.naturality ((shuffleSurjection n μ, shuffleSurjection n μᶜ) :
+      (⦋n⦌, ⦋n⦌) ⟶ (⦋μ.card⦌, ⦋μᶜ.card⦌)))).symm
+
+set_option backward.isDefEq.respectTransparency false in
+private lemma shuffle_natural
+    (S : ∀ X : SimplexCategory × SimplexCategory ⥤ CochainComplex C ℕ,
+      diagonalTotal X ⟶ successiveTotal X)
+    (hS : ∀ (X : SimplexCategory × SimplexCategory ⥤ CochainComplex C ℕ)
+      (n r m : ℕ) (h : n + r = m),
+      diagonalInclusion X n r m h ≫ (S X).f m =
+        ∑ μ : Finset (Fin n), shuffleTerm X n r m h μ)
+    {X Y : SimplexCategory × SimplexCategory ⥤ CochainComplex C ℕ} (f : X ⟶ Y) :
+    diagonalMap f ≫ S Y = S X ≫ successiveMap f := by
+  classical
+  apply HomologicalComplex.Hom.ext
+  funext m
+  apply HomologicalComplex₂.total.hom_ext
+  intro n r h
+  change diagonalInclusion X n r m h ≫ ((diagonalMap f).f m ≫ (S Y).f m) =
+    diagonalInclusion X n r m h ≫ ((S X).f m ≫ (successiveMap f).f m)
+  rw [← Category.assoc, diagonalInclusion_map, Category.assoc, hS,
+    ← Category.assoc, hS, Preadditive.comp_sum, Preadditive.sum_comp]
+  apply Finset.sum_congr rfl
+  intro μ _
+  exact shuffleTerm_natural f n r m h μ
+
+set_option backward.isDefEq.respectTransparency false in
+private lemma total_zero_map
+    (K : HomologicalComplex₂ C (ComplexShape.up ℕ) (ComplexShape.up ℕ))
+    (M : CochainComplex C ℕ) (i : M ⟶ K.X 0) (hi : i ≫ K.d 0 1 = 0) :
+    ∃ j : M ⟶ K.total (ComplexShape.up ℕ),
+      ∀ m, j.f m = i.f m ≫ K.ιTotal (ComplexShape.up ℕ) 0 m m (Nat.zero_add m) := by
+  refine ⟨CochainComplex.ofHom
+    (fun m ↦ i.f m ≫ K.ιTotal (ComplexShape.up ℕ) 0 m m (Nat.zero_add m)) ?_,
+    fun _ ↦ rfl⟩
+  intro m
+  have hz := congrArg (fun f : M ⟶ K.X 1 ↦ f.f m) hi
+  dsimp at hz
+  change _ ≫ (K.D₁ _ m (m + 1) + K.D₂ _ m (m + 1)) = _
+  simp only [Preadditive.comp_add, Category.assoc, HomologicalComplex₂.ι_D₁,
+    HomologicalComplex₂.ι_D₂]
+  rw [K.d₁_eq (ComplexShape.up ℕ) (show (ComplexShape.up ℕ).Rel 0 1 from rfl)
+      m (m + 1) (by dsimp; omega),
+    K.d₂_eq (ComplexShape.up ℕ) 0 (show (ComplexShape.up ℕ).Rel m (m + 1) from rfl)
+      (m + 1) (by dsimp; omega)]
+  have hε₁ : ComplexShape.ε₁ (ComplexShape.up ℕ) (ComplexShape.up ℕ)
+      (ComplexShape.up ℕ) (0, m) = 1 := rfl
+  have hε₂ : ComplexShape.ε₂ (ComplexShape.up ℕ) (ComplexShape.up ℕ)
+      (ComplexShape.up ℕ) (0, m) = 1 := rfl
+  rw [hε₁, hε₂, one_smul, one_smul]
+  rw [← Category.assoc, hz, zero_comp, zero_add, i.comm_assoc]
+
+set_option backward.isDefEq.respectTransparency false in
+private lemma derived_iso_of_homotopy_equiv [HasDerivedCategory.{w} C]
+    {K L : CochainComplex C ℕ} (e : HomotopyEquiv K L) :
+    ∃ eD : DerivedCategory.Q.obj (K.extend ComplexShape.embeddingUpNat) ≅
+      DerivedCategory.Q.obj (L.extend ComplexShape.embeddingUpNat),
+      eD.hom = DerivedCategory.Q.map
+        ((ComplexShape.embeddingUpNat.extendFunctor C).map e.hom) := by
+  have he : HomologicalComplex.homotopyEquivalences C (ComplexShape.up ℤ)
+      ((ComplexShape.embeddingUpNat.extendFunctor C).map e.hom) :=
+    (HomologicalComplex.homotopyEquivalences_extendMap_iff _ _).mpr
+      e.homotopyEquivalences_hom
+  have hq := homotopyEquivalences_le_quasiIso
+    C (ComplexShape.up ℤ) _ he
+  have : QuasiIso ((ComplexShape.embeddingUpNat.extendFunctor C).map e.hom) := hq
+  exact ⟨asIso (DerivedCategory.Q.map
+    ((ComplexShape.embeddingUpNat.extendFunctor C).map e.hom)), rfl⟩
+
+set_option backward.isDefEq.respectTransparency false in
+private lemma shuffle_zero
+    (X : SimplexCategory × SimplexCategory ⥤ CochainComplex C ℕ) (r : ℕ) :
+    (∑ μ : Finset (Fin 0), shuffleTerm X 0 r r (Nat.zero_add r) μ) =
+      successiveInclusion X 0 0 r r (Nat.zero_add r) := by
+  classical
+  rw [Fintype.sum_unique]
+  have hd : (default : Finset (Fin 0)) = ∅ := Subsingleton.elim _ _
+  rw [hd]
+  have hα : shuffleSurjection 0 ∅ = 𝟙 ⦋0⦌ := by
+    apply SimplexCategory.Hom.ext
+    apply OrderHom.ext
+    funext i
+    apply Fin.ext
+    simp [shuffleSurjection]
+  have aux (ν : Finset (Fin 0)) (h : 0 + ν.card + r = r) :
+      (X.map (shuffleSurjection 0 ∅, shuffleSurjection 0 ν)).f r ≫
+        successiveInclusion X 0 ν.card r r h =
+      successiveInclusion X 0 0 r r (Nat.zero_add r) := by
+    have hν : ν = ∅ := Subsingleton.elim _ _
+    subst ν
+    rw [hα]
+    change (X.map (𝟙 (⦋0⦌, ⦋0⦌))).f r ≫ _ = _
+    simp only [X.map_id, HomologicalComplex.id_f, Category.id_comp, Finset.card_empty]
+  have hsign : shuffleSign 0 ∅ = 1 := by simp [shuffleSign]
+  simpa only [shuffleTerm, hsign, one_smul, Finset.card_empty] using aux (∅ : Finset (Fin 0))ᶜ _
+
+set_option backward.isDefEq.respectTransparency false in
+private lemma total_corner_zero
+    {A : Type*} [Category A] [Preadditive A] [HasFiniteCoproducts A]
+    (K : HomologicalComplex₂ A (ComplexShape.up ℕ) (ComplexShape.up ℕ))
+    {M : A} (i : M ⟶ (K.X 0).X 0)
+    (h₁ : i ≫ (K.d 0 1).f 0 = 0) (h₂ : i ≫ (K.X 0).d 0 1 = 0) :
+    (i ≫ K.ιTotal (ComplexShape.up ℕ) 0 0 0 rfl) ≫
+      (K.total (ComplexShape.up ℕ)).d 0 1 = 0 := by
+  change _ ≫ (K.D₁ _ 0 1 + K.D₂ _ 0 1) = 0
+  simp only [Preadditive.comp_add, Category.assoc, HomologicalComplex₂.ι_D₁,
+    HomologicalComplex₂.ι_D₂]
+  rw [K.d₁_eq (ComplexShape.up ℕ) (show (ComplexShape.up ℕ).Rel 0 1 from rfl) 0 1 rfl,
+    K.d₂_eq (ComplexShape.up ℕ) 0 (show (ComplexShape.up ℕ).Rel 0 1 from rfl) 1 rfl]
+  simp [← Category.assoc, h₁, h₂]
+
+set_option backward.isDefEq.respectTransparency false in
+private lemma diagonal_coface_zero
+    (X : SimplexCategory × SimplexCategory ⥤ CochainComplex C ℕ)
+    (M : CochainComplex C ℕ) (i : M ⟶ X.obj (⦋0⦌, ⦋0⦌))
+    (h₁ : i ≫ (X.map ((SimplexCategory.δ (0 : Fin 2), 𝟙 ⦋0⦌) :
+        (⦋0⦌, ⦋0⦌) ⟶ (⦋1⦌, ⦋0⦌)) -
+      X.map ((SimplexCategory.δ (1 : Fin 2), 𝟙 ⦋0⦌) :
+        (⦋0⦌, ⦋0⦌) ⟶ (⦋1⦌, ⦋0⦌))) = 0)
+    (h₂ : i ≫ (X.map ((𝟙 ⦋0⦌, SimplexCategory.δ (0 : Fin 2)) :
+        (⦋0⦌, ⦋0⦌) ⟶ (⦋0⦌, ⦋1⦌)) -
+      X.map ((𝟙 ⦋0⦌, SimplexCategory.δ (1 : Fin 2)) :
+        (⦋0⦌, ⦋0⦌) ⟶ (⦋0⦌, ⦋1⦌))) = 0) :
+    i ≫ (diagonalBicomplex X).d 0 1 = 0 := by
+  rw [Preadditive.comp_sub, sub_eq_zero] at h₁ h₂
+  have he : i ≫ X.map ((SimplexCategory.δ (0 : Fin 2),
+        SimplexCategory.δ (0 : Fin 2)) : (⦋0⦌, ⦋0⦌) ⟶ (⦋1⦌, ⦋1⦌)) =
+      i ≫ X.map ((SimplexCategory.δ (1 : Fin 2),
+        SimplexCategory.δ (1 : Fin 2)) : (⦋0⦌, ⦋0⦌) ⟶ (⦋1⦌, ⦋1⦌)) := by
+    calc
+      _ = i ≫ X.map ((SimplexCategory.δ (0 : Fin 2), 𝟙 ⦋0⦌) : (⦋0⦌, ⦋0⦌) ⟶ (⦋1⦌, ⦋0⦌)) ≫
+          X.map ((𝟙 ⦋1⦌, SimplexCategory.δ (0 : Fin 2)) : (⦋1⦌, ⦋0⦌) ⟶ (⦋1⦌, ⦋1⦌)) := by
+        simp only [← X.map_comp]; congr 2
+      _ = i ≫ X.map ((SimplexCategory.δ (1 : Fin 2), 𝟙 ⦋0⦌) : (⦋0⦌, ⦋0⦌) ⟶ (⦋1⦌, ⦋0⦌)) ≫
+          X.map ((𝟙 ⦋1⦌, SimplexCategory.δ (0 : Fin 2)) : (⦋1⦌, ⦋0⦌) ⟶ (⦋1⦌, ⦋1⦌)) := by
+        rw [← Category.assoc, h₁, Category.assoc]
+      _ = i ≫ X.map ((𝟙 ⦋0⦌, SimplexCategory.δ (0 : Fin 2)) : (⦋0⦌, ⦋0⦌) ⟶ (⦋0⦌, ⦋1⦌)) ≫
+          X.map ((SimplexCategory.δ (1 : Fin 2), 𝟙 ⦋1⦌) : (⦋0⦌, ⦋1⦌) ⟶ (⦋1⦌, ⦋1⦌)) := by
+        simp only [← X.map_comp]; congr 2
+      _ = i ≫ X.map ((𝟙 ⦋0⦌, SimplexCategory.δ (1 : Fin 2)) : (⦋0⦌, ⦋0⦌) ⟶ (⦋0⦌, ⦋1⦌)) ≫
+          X.map ((SimplexCategory.δ (1 : Fin 2), 𝟙 ⦋1⦌) : (⦋0⦌, ⦋1⦌) ⟶ (⦋1⦌, ⦋1⦌)) := by
+        rw [← Category.assoc, h₂, Category.assoc]
+      _ = _ := by simp only [← X.map_comp]; congr 2
+  simpa [diagonalBicomplex, AlternatingCofaceMapComplex.obj,
+    AlternatingCofaceMapComplex.objD, CochainComplex.of.d, Fin.sum_univ_two, Preadditive.comp_sub,
+    CosimplicialObject.δ, sub_eq_zero, ← sub_eq_add_neg] using he
+
+set_option backward.isDefEq.respectTransparency false in
+private lemma augmentation_maps
+    (S : ∀ X : SimplexCategory × SimplexCategory ⥤ CochainComplex C ℕ,
+      diagonalTotal X ⟶ successiveTotal X)
+    (hS : ∀ (X : SimplexCategory × SimplexCategory ⥤ CochainComplex C ℕ)
+      (n r m : ℕ) (h : n + r = m),
+      diagonalInclusion X n r m h ≫ (S X).f m =
+        ∑ μ : Finset (Fin n), shuffleTerm X n r m h μ)
+    (X : SimplexCategory × SimplexCategory ⥤ CochainComplex C ℕ)
+    (M : CochainComplex C ℕ) (i : M ⟶ X.obj (⦋0⦌, ⦋0⦌))
+    (h₁ : i ≫ (X.map ((SimplexCategory.δ (0 : Fin 2), 𝟙 ⦋0⦌) :
+        (⦋0⦌, ⦋0⦌) ⟶ (⦋1⦌, ⦋0⦌)) -
+      X.map ((SimplexCategory.δ (1 : Fin 2), 𝟙 ⦋0⦌) :
+        (⦋0⦌, ⦋0⦌) ⟶ (⦋1⦌, ⦋0⦌))) = 0)
+    (h₂ : i ≫ (X.map ((𝟙 ⦋0⦌, SimplexCategory.δ (0 : Fin 2)) :
+        (⦋0⦌, ⦋0⦌) ⟶ (⦋0⦌, ⦋1⦌)) -
+      X.map ((𝟙 ⦋0⦌, SimplexCategory.δ (1 : Fin 2)) :
+        (⦋0⦌, ⦋0⦌) ⟶ (⦋0⦌, ⦋1⦌))) = 0) :
+    ∃ (jD : M ⟶ diagonalTotal X) (jT : M ⟶ successiveTotal X),
+      (∀ m : ℕ, jD.f m = i.f m ≫ diagonalInclusion X 0 m m (Nat.zero_add m)) ∧
+      (∀ m : ℕ, jT.f m = i.f m ≫ successiveInclusion X 0 0 m m
+        (Nat.zero_add m)) ∧ jD ≫ S X = jT := by
+  obtain ⟨jD, hjD⟩ := total_zero_map (diagonalBicomplex X) M i
+    (diagonal_coface_zero X M i h₁ h₂)
+  have ht : (i ≫ (tripleComplex X).ιTotal (ComplexShape.up ℕ) 0 0 0 rfl) ≫
+      (cosimplicialTotal X).d 0 1 = 0 := by
+    apply total_corner_zero
+    · simpa [tripleComplex, AlternatingCofaceMapComplex.obj,
+        AlternatingCofaceMapComplex.objD, CochainComplex.of.d, Fin.sum_univ_two,
+        alternatingCofaceMapComplex, AlternatingCofaceMapComplex.map,
+        CosimplicialObject.δ, ← sub_eq_add_neg] using h₁
+    · simpa [tripleComplex, AlternatingCofaceMapComplex.obj,
+        AlternatingCofaceMapComplex.objD, CochainComplex.of.d, Fin.sum_univ_two,
+        alternatingCofaceMapComplex, CosimplicialObject.δ, ← sub_eq_add_neg] using h₂
+  obtain ⟨jT, hjT⟩ := total_zero_map (cosimplicialTotal X) M
+    (i ≫ (tripleComplex X).ιTotal (ComplexShape.up ℕ) 0 0 0 rfl) ht
+  refine ⟨jD, jT, hjD, ?_, ?_⟩
+  · intro m
+    simpa [successiveInclusion, Category.assoc] using hjT m
+  · ext m
+    change jD.f m ≫ (S X).f m = jT.f m
+    calc
+      _ = i.f m ≫ (diagonalInclusion X 0 m m (Nat.zero_add m) ≫ (S X).f m) := by
+        rw [hjD m, Category.assoc]; rfl
+      _ = i.f m ≫ successiveInclusion X 0 0 m m (Nat.zero_add m) := by
+        rw [hS, shuffle_zero]
+      _ = _ := by simpa [successiveInclusion, Category.assoc] using (hjT m).symm
 
 /-- The specified shuffle defines natural homotopy equivalences, natural derived
 isomorphisms, and strictly preserves augmentations supported in cosimplicial degree zero.
@@ -229,6 +335,29 @@ theorem exists_shuffle [HasDerivedCategory.{w} C] :
           (∀ m : ℕ, jT.f m = i.f m ≫ successiveInclusion X 0 0 m m
             (Nat.zero_add m)) ∧
           jD ≫ S X = jT) := by
-  sorry
+  classical
+  obtain ⟨P, Q, p, q, εP, εQ, zP, zQ, _hproj, hP, hQ, hε, _hexact⟩ :=
+    FreeBisimplex.projective_resolutions.{0}
+  let := HasDerivedCategory.standard
+    (SimplexCategory × SimplexCategory ⥤ AddCommGrpCat.{0})
+  obtain ⟨e, _eD, hσ, _haug⟩ :=
+    FreeBisimplex.universal_shuffle_homotopy_inverse P Q p q εP εQ hP hQ hε
+  obtain ⟨F, hS⟩ := evaluate_universal_shuffle (C := C) P Q p q hP hQ e hσ
+  let S := fun X ↦ (F X).hom
+  have hN := fun X Y f ↦ shuffle_natural S hS (X := X) (Y := Y) f
+  refine ⟨S, hS, hN, (fun X ↦ ⟨F X, rfl⟩), ?_, augmentation_maps S hS⟩
+  have hd := fun X ↦ derived_iso_of_homotopy_equiv (F X)
+  choose d hd using hd
+  have hd' : ∀ X, (d X).hom = DerivedCategory.Q.map
+      ((ComplexShape.embeddingUpNat.extendFunctor C).map (S X)) := by
+    intro X
+    exact hd X
+  refine ⟨d, hd', ?_⟩
+  intro X Y f
+  rw [hd', hd']
+  simpa only [Functor.map_comp] using congrArg
+    (fun g ↦ DerivedCategory.Q.map
+      ((ComplexShape.embeddingUpNat.extendFunctor C).map g)) (hN X Y f)
+
 
 end AlgebraicTopology.BicosimplicialShuffle

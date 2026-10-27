@@ -1,0 +1,209 @@
+{
+ "id": "lem-trf-free-normalized-homology-injectivity-transfer",
+ "kind": "statement",
+ "title": "Normalized homology injectivity descends by lifting the target boundary",
+ "statement": "Let $X,Y$ be simplicial abelian groups and $f:X\\to Y$ an additive simplicial morphism [def-weil-pbc-simplicial-object]. For a simplicial set $S$, let $F(S)_m=\\mathbb Z[S_m]$, the free abelian group with basis vectors $[s]$ indexed by $s\\in S_m$; every simplicial operator acts by $[s]\\mapsto[S(\\varphi)(s)]$. For a simplicial-set map $a:S\\to T$ put $F(a)_m([s])=[a_m(s)]$. Write $UZ$ for the underlying simplicial set of a simplicial abelian group $Z$ [def-weil-pbc-simplicial-set]. Let $\\epsilon_Z:F(UZ)\\to Z$ be evaluation, given degreewise by $\\sum_j a_j[z_j]\\mapsto\\sum_j a_jz_j$. For a simplicial abelian group $Z$ [def-weil-pbc-simplicial-object], set $N(Z)_0=Z_0$ and $N(Z)_m=\\bigcap_{i=1}^m\\ker(d_i:Z_m\\to Z_{m-1})$ for $m>0$, with differential $\\partial_m=d_0$ for $m>0$ and $\\partial_0=0$. Write $H_m(N(Z))=\\ker\\partial_m/\\operatorname{im}\\partial_{m+1}$; a simplicial morphism $a$ induces the chain map $N(a)$ by restriction in every degree. For every $n\\geq0$, cycle $x\\in N(X)_n$, and $y\\in N(Y)_{n+1}$ with $d_0y=f_n(x)$, the elements $\\widetilde x=[x]-[0_n]$ and $\\widetilde y=[y]-[0_{n+1}]$ satisfy $\\widetilde x\\in N(F(UX))_n$ and $\\partial_n\\widetilde x=0$, $\\widetilde y\\in N(F(UY))_{n+1}$, $\\partial_{n+1}\\widetilde y=F(Uf)_n(\\widetilde x)$, and $\\epsilon_X(\\widetilde x)=x$; when $n=0$ the cycle condition means the kernel of the zero differential, with no term in degree $-1$. Here $0_m$ is the zero simplex in degree $m$. Consequently, for every fixed $n\\geq0$, if $H_n(N(F(Uf)))$ is injective then $H_n(N(f))$ is injective.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 08P2 (lemma-homotopy-equivalence), third proof paragraph, lines 5935-5958: lifting a kernel cycle and its target boundary, and injectivity transfer, in the higher-face normalization with differential d_0."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-object",
+  "def-weil-pbc-simplicial-set"
+ ],
+ "proof": [
+  {
+   "text": "First check the maps used below directly. For every simplicial operator $\\varphi$ and generator $[z]$, both $Z(\\varphi)\\epsilon_Z([z])$ and $\\epsilon_ZF(UZ)(\\varphi)([z])$ equal $Z(\\varphi)(z)$; additivity extends this equality to every finite sum. Thus evaluation commutes with faces. Likewise $F(Uf)$ commutes with faces since $f$ does [def-weil-pbc-simplicial-object], and $f\\epsilon_X([z])=f(z)=\\epsilon_YF(Uf)([z])$. Every such additive map preserves the intersections of face kernels and commutes with $d_0$, hence restricts to the indicated normalized chain map. The normalization itself is a complex: for $z\\in N(Z)_m$ and $1\\leq i\\leq m-1$, the simplicial face identity gives $d_i d_0z=d_0d_{i+1}z=0$, and for $m\\geq2$, $d_0d_0z=d_0d_1z=0$. These identities follow by composing the injections omitting the indicated vertices in $\\Delta$ [def-weil-pbc-simplicial-set]. In degree one the next differential is zero by definition.",
+   "uses": [
+    "def-weil-pbc-simplicial-object",
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08P2, lemma-homotopy-equivalence, injectivity paragraph (lines 5935–5958); generator argument written with higher-face normalization and differential d_0."
+   }
+  },
+  {
+   "text": "For the specified cycle $x$, if $n>0$ then every face of $x$ is zero: the higher ones vanish by membership in $N(X)_n$ and $d_0x=0$ by the cycle condition. Since each face is additive, $d_i0_n=0_{n-1}$, so $d_i([x]-[0_n])=[d_ix]-[0_{n-1}]=0$ for every $0\\leq i\\leq n$. Thus $\\widetilde x$ is normalized and is a cycle. If $n=0$, normalization imposes no equations and $\\partial_0=0$, giving the same conclusion without a face to degree $-1$. Evaluation gives $\\epsilon_X(\\widetilde x)=x-0_n=x$. For $1\\leq i\\leq n+1$, similarly $d_i\\widetilde y=[0_n]-[0_n]=0$. Finally $d_0\\widetilde y=[d_0y]-[0_n]=[f_n(x)]-[0_n]=F(Uf)_n(\\widetilde x)$, since $f_n(0_n)=0_n$. This proves every asserted lift formula.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08P2, lemma-homotopy-equivalence, injectivity paragraph (lines 5935–5958); generator argument written with higher-face normalization and differential d_0."
+   }
+  },
+  {
+   "text": "Now fix $n$ and assume $H_n(N(F(Uf)))$ injective. Let $\\xi$ lie in the kernel of $H_n(N(f))$. By the stated quotient definition write $\\xi$ as the class of a cycle $x\\in N(X)_n$. That its image is zero means exactly $f_n(x)\\in\\operatorname{im}\\partial_{n+1}$, so choose $y\\in N(Y)_{n+1}$ with $d_0y=f_n(x)$. Step 2 supplies the cycle $\\widetilde x$ and the normalized element $\\widetilde y$ with $F(Uf)_n(\\widetilde x)=\\partial_{n+1}\\widetilde y$. Therefore the class of $\\widetilde x$ maps to zero. Injectivity makes its class zero, which by the same quotient definition supplies $u\\in N(F(UX))_{n+1}$ with $\\partial_{n+1}u=\\widetilde x$. These statements use only membership in the image subgroup, not any exactness theorem.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08P2, lemma-homotopy-equivalence, injectivity paragraph (lines 5935–5958); generator argument written with higher-face normalization and differential d_0."
+   }
+  },
+  {
+   "text": "Put $v=\\epsilon_{X,n+1}(u)$. To see explicitly that $v$ is normalized, write $u=\\sum_j a_j[z_j]$. For each $1\\leq i\\leq n+1$, $d_iv=\\sum_j a_jd_iz_j=\\epsilon_{X,n}(d_iu)=0$ because $u$ is normalized. The same finite-sum calculation for $i=0$ yields $d_0v=\\epsilon_{X,n}(d_0u)=\\epsilon_{X,n}(\\widetilde x)=x$. Thus $x$ is a boundary and $\\xi=0$. This also works for $n=0$: only faces out of degree one occur. Hence the kernel of $H_n(N(f))$ is zero. If two homology classes have the same image, their difference lies in that kernel, so they are equal; this is the claimed injectivity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08P2, lemma-homotopy-equivalence, injectivity paragraph (lines 5935–5958); generator argument written with higher-face normalization and differential d_0."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-object",
+  "def-weil-pbc-simplicial-set"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 08P2, lemma-homotopy-equivalence, injectivity paragraph (lines 5935–5958); generator argument written with higher-face normalization and differential d_0."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Injectivity on homology after free abelianization of a simplicial abelian group map implies injectivity on the original normalized homology using lifts of cycles and boundaries",
+   "results": "{\"t\": \"2026-10-22T06:41:38Z\", \"tool\": \"leanfinder\", \"query\": \"Injectivity on homology after free abelianization of a simplicial abelian group map implies injectivity on the original normalized homology using lifts of cycles and boundaries\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupHomology.chainsMap_f_map_mono\", \"AlgebraicTopology.DoldKan.instMonoChainComplexNatInclusionOfMooreComplexMap\", \"groupHomology.chainsMap_id_f_map_mono\", \"groupCohomology.instMonoModuleCatFShortComplexH0\", \"CategoryTheory.ShortComplex.ShortExact.injective_f\", \"groupCohomology.instMonoModuleCatFH1InfRes\", \"HomologicalComplex.instMonoHomologyι\", \"HomologicalComplex.instMonoICycles\"], \"digest\": \"99675b5b1d5874c7\"}; full output retained in search-10.txt and read.",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern monomorphisms of normalized-chain inclusions, generic cycles, and homology maps for group representations. None lifts both a normalized kernel cycle and its target boundary through free evaluation or descends injectivity from F(Uf). Read MooreComplex.lean:64-136 and ShortComplex/HomologicalComplex.lean:186-191; generic boundary vanishing is not this lift."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NormalizedMooreComplex\", \"injective\"",
+   "results": "{\"t\": \"2026-10-22T06:41:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"NormalizedMooreComplex\\\", \\\"injective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; full output retained in search-11.txt and read.",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern monomorphisms of normalized-chain inclusions, generic cycles, and homology maps for group representations. None lifts both a normalized kernel cycle and its target boundary through free evaluation or descends injectivity from F(Uf). Read MooreComplex.lean:64-136 and ShortComplex/HomologicalComplex.lean:186-191; generic boundary vanishing is not this lift."
+  },
+  {
+   "tool": "grep",
+   "query": "(free|FreeAbelianGroup).*(inject|boundary)|(inject|boundary).*(free|FreeAbelianGroup)",
+   "results": "{\"t\": \"2026-10-22T06:41:26Z\", \"tool\": \"grep\", \"query\": \"(free|FreeAbelianGroup).*(inject|boundary)|(inject|boundary).*(free|FreeAbelianGroup)\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; full output retained in search-12.txt and read.",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern monomorphisms of normalized-chain inclusions, generic cycles, and homology maps for group representations. None lifts both a normalized kernel cycle and its target boundary through free evaluation or descends injectivity from F(Uf). Read MooreComplex.lean:64-136 and ShortComplex/HomologicalComplex.lean:186-191; generic boundary vanishing is not this lift."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normalized kernel cycle and its target boundary lift by subtracting the zero generator in free abelian groups",
+   "results": "{\"t\": \"2026-10-22T06:41:27Z\", \"tool\": \"leansearch\", \"query\": \"A normalized kernel cycle and its target boundary lift by subtracting the zero generator in free abelian groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.liftCycles_leftHomologyπ_eq_zero_of_boundary\", \"HomologicalComplex.cyclesIsKernel\", \"CategoryTheory.ShortComplex.cyclesIsKernel\", \"groupHomology.boundaries₁_le_cycles₁\", \"HomologicalComplex.liftCycles_homologyπ_eq_zero_of_boundary\", \"HomologicalComplex.liftCycles_homologyπ_eq_zero_of_boundary_assoc\", \"CategoryTheory.ShortComplex.LeftHomologyData.canonical_K\", \"CategoryTheory.ShortComplex.abCyclesIso\"], \"digest\": \"9c454f39de5fec1c\"}; full output retained in search-13.txt and read.",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern monomorphisms of normalized-chain inclusions, generic cycles, and homology maps for group representations. None lifts both a normalized kernel cycle and its target boundary through free evaluation or descends injectivity from F(Uf). Read MooreComplex.lean:64-136 and ShortComplex/HomologicalComplex.lean:186-191; generic boundary vanishing is not this lift."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descend injectivity on homology from the free simplicial abelian group map by lifting a normalized nullhomology witness",
+   "results": "{\"t\": \"2026-10-22T06:41:37Z\", \"tool\": \"leanfinder\", \"query\": \"Descend injectivity on homology from the free simplicial abelian group map by lifting a normalized nullhomology witness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.instMonoChainComplexNatInclusionOfMooreComplexMap\", \"AlgebraicTopology.DoldKan.factors_normalizedMooreComplex_PInfty\", \"AlgebraicTopology.DoldKan.PInftyToNormalizedMooreComplex_f\", \"AlgebraicTopology.DoldKan.PInftyToNormalizedMooreComplex\", \"AlgebraicTopology.NormalizedMooreComplex.map\", \"AlgebraicTopology.inclusionOfMooreComplexMap\", \"AlgebraicTopology.inclusionOfMooreComplexMap_f\", \"AlgebraicTopology.DoldKan.PInftyToNormalizedMooreComplex_comp_inclusionOfMooreComplexMap\"], \"digest\": \"86c512102b602926\"}; full output retained in search-14.txt and read.",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern monomorphisms of normalized-chain inclusions, generic cycles, and homology maps for group representations. None lifts both a normalized kernel cycle and its target boundary through free evaluation or descends injectivity from F(Uf). Read MooreComplex.lean:64-136 and ShortComplex/HomologicalComplex.lean:186-191; generic boundary vanishing is not this lift."
+  },
+  {
+   "tool": "grep",
+   "query": "(free|FreeAbelianGroup).*(inject|boundary)|(inject|boundary).*(free|FreeAbelianGroup)",
+   "results": "{\"t\": \"2026-10-23T12:14:28Z\", \"tool\": \"grep\", \"query\": \"(free|FreeAbelianGroup).*(inject|boundary)|(inject|boundary).*(free|FreeAbelianGroup)\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned statements. NormalizedMooreComplex.map and its inclusion monomorphism concern the normalized construction, generic boundary lemmas only say boundaries vanish in homology, and groupHomology chainsMap lemmas concern representation chains. None states injectivity transfer from the free simplicial abelian map to the original map. The generator lift is proved directly here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift normalized cycles and boundaries by subtracting the zero generator in free abelian groups to descend injectivity on homology",
+   "results": "{\"t\": \"2026-10-23T12:14:29Z\", \"tool\": \"leansearch\", \"query\": \"Lift normalized cycles and boundaries by subtracting the zero generator in free abelian groups to descend injectivity on homology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupHomology.boundaries₁_le_cycles₁\", \"CategoryTheory.ShortComplex.LeftHomologyData.liftK_π_eq_zero_of_boundary\", \"CategoryTheory.ShortComplex.liftCycles_leftHomologyπ_eq_zero_of_boundary\", \"CategoryTheory.ShortComplex.liftCycles_homologyπ_eq_zero_of_boundary\", \"HomologicalComplex.liftCycles_homologyπ_eq_zero_of_boundary\", \"groupHomology.boundariesToCycles₁_apply\", \"HomologicalComplex.liftCycles_homologyπ_eq_zero_of_boundary_assoc\", \"CategoryTheory.ShortComplex.liftCycles_leftHomologyπ_eq_zero_of_boundary_assoc\"], \"digest\": \"cb10482d16d0c6ed\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned statements. NormalizedMooreComplex.map and its inclusion monomorphism concern the normalized construction, generic boundary lemmas only say boundaries vanish in homology, and groupHomology chainsMap lemmas concern representation chains. None states injectivity transfer from the free simplicial abelian map to the original map. The generator lift is proved directly here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NormalizedMooreComplex\", \"injective\"",
+   "results": "{\"t\": \"2026-10-23T12:14:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"NormalizedMooreComplex\\\", \\\"injective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned statements. NormalizedMooreComplex.map and its inclusion monomorphism concern the normalized construction, generic boundary lemmas only say boundaries vanish in homology, and groupHomology chainsMap lemmas concern representation chains. None states injectivity transfer from the free simplicial abelian map to the original map. The generator lift is proved directly here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Injectivity on normalized homology descends from free abelianization of a simplicial abelian group map by lifting cycles and boundaries",
+   "results": "{\"t\": \"2026-10-23T12:14:33Z\", \"tool\": \"leanfinder\", \"query\": \"Injectivity on normalized homology descends from free abelianization of a simplicial abelian group map by lifting cycles and boundaries\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.instMonoChainComplexNatInclusionOfMooreComplexMap\", \"AlgebraicTopology.DoldKan.factors_normalizedMooreComplex_PInfty\", \"AlgebraicTopology.NormalizedMooreComplex.map\", \"AlgebraicTopology.normalizedMooreComplex_map\", \"AlgebraicTopology.DoldKan.PInftyToNormalizedMooreComplex\", \"AlgebraicTopology.DoldKan.PInftyToNormalizedMooreComplex_f\", \"groupHomology.chainsMap_f_map_mono\", \"AlgebraicTopology.inclusionOfMooreComplexMap_f\"], \"digest\": \"be24292360182fed\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned statements. NormalizedMooreComplex.map and its inclusion monomorphism concern the normalized construction, generic boundary lemmas only say boundaries vanish in homology, and groupHomology chainsMap lemmas concern representation chains. None states injectivity transfer from the free simplicial abelian map to the original map. The generator lift is proved directly here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If homology of the degreewise free abelian group on an underlying simplicial map is injective then homology of the original simplicial abelian group map is injective",
+   "results": "{\"t\": \"2026-10-23T12:15:07Z\", \"tool\": \"leanfinder\", \"query\": \"If homology of the degreewise free abelian group on an underlying simplicial map is injective then homology of the original simplicial abelian group map is injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.instMonoChainComplexNatInclusionOfMooreComplexMap\", \"groupHomology.chainsMap_f_map_mono\", \"HomologicalComplex.instMonoCyclesMapOfF\", \"HomologicalComplex.instMonoHomologyι\", \"HomologicalComplex.HomologySequence.mono_homologyMap_τ₃\", \"HomologicalComplex.mono_homologyMap_of_mono_of_not_rel\", \"groupHomology.chainsMap_id_f_map_mono\", \"CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p\"], \"digest\": \"b2e70005ff331759\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned statements. NormalizedMooreComplex.map and its inclusion monomorphism concern the normalized construction, generic boundary lemmas only say boundaries vanish in homology, and groupHomology chainsMap lemmas concern representation chains. None states injectivity transfer from the free simplicial abelian map to the original map. The generator lift is proved directly here."
+  },
+  {
+   "tool": "grep",
+   "query": "def objX|def objD|def map|liftCycles_homologyπ_eq_zero_of_boundary",
+   "results": "{\"t\": \"2026-10-23T12:15:22Z\", \"tool\": \"grep\", \"query\": \"def objX|def objD|def map|liftCycles_homologyπ_eq_zero_of_boundary\", \"sub\": \"AlgebraicTopology/MooreComplex.lean\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"64\", \"79\", \"128\"], \"digest\": \"716e0c10c1421d23\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned statements. NormalizedMooreComplex.map and its inclusion monomorphism concern the normalized construction, generic boundary lemmas only say boundaries vanish in homology, and groupHomology chainsMap lemmas concern representation chains. None states injectivity transfer from the free simplicial abelian map to the original map. The generator lift is proved directly here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-simplicial-abelian-set-homotopy-quasi-iso",
+  "date": "2026-10-22",
+  "group": "NF"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: direct simplicial abelian-group input, namely the Tag 08P2 statement that an underlying simplicial-set homotopy equivalence induces a quasi-isomorphism on associated alternating-face complexes. Subargument of Stacks 08P2: Tag 08P2 (lemma-homotopy-equivalence), third proof paragraph, lines 5935-5958: lifting a kernel cycle and its target boundary, and injectivity transfer, in the higher-face normalization with differential d_0.",
+   "via": [
+    "lem-trf-simplicial-abelian-set-homotopy-quasi-iso",
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-free-normalized-homology-injectivity-transfer",
+  "worker": "stage1",
+  "summary": "Q160 checked Stacks Tag 08P2 against the higher-face normalization, wrote the generator lift and finite-sum evaluation arguments, and descended injectivity by the explicit quotient definition. All four steps are elementary calculations from the definitions; no additional lemma or new node is needed. Degree zero and zero simplices were checked. The statement and existing dependencies are unchanged.",
+  "blueprint": "Realizes the inherited nearby-cycle branch of lem-trf-local-term-locality, proof (1)–(2), through the ancestor lem-trf-simplicial-abelian-set-homotopy-quasi-iso: precisely the injectivity paragraph of Stacks Tag 08P2. The current locality blueprint does not itself state this auxiliary simplicial result; same_as search found no match."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q160-17ffd87fb",
+  "group": "Q160",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q160-17ffd87fb (reviewer sub-agent of L); spot-checked: I read the item and its four steps in full. The source is Stacks simplicial.tex lines 5884-5958: Tag 08P2 (lemma-homotopy-equivalence, confirmed in tags line 11010), injectivity paragraph. Stacks normalizes with the lower faces and boundary d_n; the item uses the mirror convention (higher-face kernels, d_0) and writes every step in it. The delivery has 0 new nodes. Statement, stmt_deps, source and blueprint are unchanged from live and side-live, which are both still unsplit. The base searches are kept and six real ones are appended. proof_deps equals the union of the uses (the two definition nodes, which do say what is used: face maps and morphisms as natural transformations, and Delta with delta_i). Step 1: evaluation and F(Uf) commute with faces on generators. I checked the complex identities d_i d_0 = d_0 d_{i+1} and d_0 d_0 = d_0 d_1. Step 2: the lift formulas are correct. d_i([x]-[0]) = 0 for all i; d_0 of [y]-[0] is [f x]-[0] = F(Uf)(x~), using f(0)=0; eps(x~) = x. Step 3: choosing y and then u is just the quotient definition plus the injectivity hypothesis. Step 4: eps(u) is normalized with d_0 = x, which is the step Stacks leaves implicit and the delivery writes out. Edge cases checked: n=0, zero simplices, the non-additive map z -> [z]-[0], and f = 0 (const Z -> 0, where the hypothesis fails as it should). All steps are genuinely elementary. No off-unit statements, so no tool_uses, and no SGA. The 08P2 grep finds only the parent (which cites this item), the surjectivity sibling and other inputs: no duplicate and no cycle. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.FreeNormalizedHomologyInjectivityTransfer",
+  "declaration": "AlgebraicTopology.freeNormalizedHomologyInjectivityTransfer",
+  "file": "lean/Sheaf/AlgebraicTopology/FreeNormalizedHomologyInjectivityTransfer.lean",
+  "statement": "theorem freeNormalizedHomologyInjectivityTransfer {X Y : SimplicialObject AddCommGrpCat.{u}} (f : X ⟶ Y) (n : ℕ) : (∀ (x : (obj X).X n) (y : (obj Y).X (n + 1)), (obj X).d n (n - 1) x = 0 → objD Y n y = (NormalizedMooreComplex.map f).f n x → ∃ (xt : (obj (X ⋙ forget AddCommGrpCat ⋙ AddCommGrpCat.free)).X n) (yt : (obj (Y ⋙ forget AddCommGrpCat ⋙ AddCommGrpCat.free)).X (n + 1)), (objX (X ⋙ forget AddCommGrpCat ⋙ AddCommGrpCat.free) n).arrow xt = FreeAbelianGroup.of ((objX X n).arrow x) - FreeAbelianGroup.of 0 ∧ (obj (X ⋙ forget AddCommGrpCat ⋙ AddCommGrpCat.free)).d n (n - 1) xt = 0 ∧ (objX (Y ⋙ forget AddCommGrpCat ⋙ AddCommGrpCat.free) (n + 1)).arrow yt = FreeAbelianGroup.of ((objX Y (n + 1)).arrow y) - FreeAbelianGroup.of 0 ∧ objD (Y ⋙ forget AddCommGrpCat ⋙ AddCommGrpCat.free) n yt = (NormalizedMooreComplex.map (Functor.whiskerRight f (forget AddCommGrpCat ⋙ AddCommGrpCat.free))).f n xt ∧ (AddCommGrpCat.adj.counit.app (X _⦋n⦌)) ((objX (X ⋙ forget AddCommGrpCat ⋙ AddCommGrpCat.free) n).arrow xt) = (objX X n).arrow x) ∧ (Function.Injective ((HomologicalComplex.homologyFunctor AddCommGrpCat (ComplexShape.down ℕ) n).map (NormalizedMooreComplex.map (Functor.whiskerRight f (forget AddCommGrpCat ⋙ AddCommGrpCat.free)))) → Function.Injective ((HomologicalComplex.homologyFunctor AddCommGrpCat (ComplexShape.down ℕ) n).map (NormalizedMooreComplex.map f)))",
+  "branch": "sheaf-dag",
+  "by": "Q50",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9ca96fde4",
+  "group": "Q50",
+  "result": "pass",
+  "note": "Lean matches the node clause by clause, using Mathlib's free functor, adjunction counit, normalized complex (objX, objD, obj, map) and homology functor. The lifts are pinned by equations in the free group, the cycle and boundary hypotheses are correct, including n=0 (d 0 0 = 0 for ComplexShape.down ℕ), and the injectivity implication sits outside the x,y binder. Edge cases checked: n=0, zero elements, zero map, single universe u. lean.statement matches the file signature exactly; the node differs from side-live only in its lean field; stmt_deps are unchanged and are the Mathlib-backed simplicial object and simplicial set nodes. No hollow defs, the proof is only sorry, docstrings carry the Tag 08P2 source place, blueprint tag and proof plan. Report has a Worker report and the standard Second reading note. No duplicate construction found in lean/Sheaf. Not recompiled because no file changed."
+ }
+}

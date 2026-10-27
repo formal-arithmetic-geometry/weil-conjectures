@@ -1,0 +1,114 @@
+{
+ "id": "def-pur-completed-coefficient-strict-image-data",
+ "kind": "definition",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sf-mate",
+ "title": "System part of the completed-coefficient direct-image comparison",
+ "statement": "For prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, and $f:X\\to Y$, fix a CoefficientComparisonData record $C$ and a normalized RightImage $T$ of the levelwise completed-module tower direct image, in the conventions of [def-pur-completed-pushforward-models]. Define StrictImageData f C T to retain only an additive direct image on the category of strict semilinear coefficient systems; its finite evaluation isomorphisms with identity sections; its normalized total right derived image; the Square comparing system restriction before and after the given tower image T; and the sectionwise identity of this ordinary square in every tower degree. This record contains neither tower evaluation comparisons nor any limit data.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E, lemma-derived-pushforward-composition (line 4011); Tag 0A07, lemma-Rf-commutes-with-Rlim (line 5150), first proof"
+ },
+ "stmt_deps": [
+  "def-pur-completed-pushforward-models"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image preserves inverse limits of strict module towers and commutes with scalar restriction",
+   "results": "Eight hits: ModuleCat.preservesLimit_restrictScalars, ModuleCat.preservesColimit_restrictScalars, PresheafOfModules.pushforward_obj_map_apply′, restrictScalarsObj, pushforward, ModuleCat.RestrictScalars.obj′, PresheafOfModules.restrictScalars and SheafOfModules.restrictScalars. These supply ordinary functors, not the normalized independent-universe package.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image commutes with restriction of scalars and inverse limits on strict module towers with normalized comparison",
+   "results": "Eight hits, including ModuleCat.restrictScalarsComp′App_inv_naturality, localCohomology.diagram, localCohomology.ofDiagram and ModuleCat.preservesLimit_restrictScalars; no normalized sheaf direct-image package.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.rightDerivedUnique",
+   "results": "Search service reports unknown identifier 'Functor.rightDerivedUnique'. Local Mathlib has this declaration and rightDerived_ext.",
+   "date": "2026-10-26",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived_ext|preservesLimitNatIso_hom_app",
+   "results": "Five Mathlib hits: rightDerived_ext and its uses in Functor/Derived/RightDerived.lean and Adjunction.lean, and preservesLimitNatIso_hom_app in GrothendieckAxioms/Basic.lean. Local searches of WeilConjectures and Sheaf find the general small-site comparison and acyclicity theorems, but not their transport to the supplied completed-coefficient models.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedCoefficientDirectImageDiagrams",
+  "date": "2026-10-26",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "fix-prop-adjunctions",
+   "place": "Proof Step 1: integral derived adjunction; completed coefficient transport, strict finite-reduction towers and direct image.",
+   "via": [
+    "lem-pur-completed-coefficient-direct-image-diagrams",
+    "lem-pur-completed-coefficient-pushforward-comparison"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedCoefficientStrictImage",
+  "file": "lean/Sheaf/Paper/CompletedCoefficientStrictImage.lean",
+  "declaration": "WeilConjectures.CompletedCoefficientPushforward.StrictImageData",
+  "statement": "structure StrictImageData {X Y : Scheme.{t}} (f : X ⟶ Y)\n    (C : CoefficientComparisonData l E f)\n    (towerImage : RightImage\n      ((Functor.whiskeringRight ℕᵒᵖ _ _).obj (push f C.structureMap)))",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261026T092539-L-3442285",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261026T222747-L-692634",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.CompletedCoefficientPushforward.strictImage_exists"
+  ],
+  "sorry_after": []
+ }
+}

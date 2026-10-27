@@ -16,99 +16,48 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-weil-pbc-finite-locally-free-degree-locally-constant] to $s:R\\to U$. Write $d(u)=\\dim_{\\kappa(u)}\\Gamma(R\\times_{s,U}\\operatorname{Spec}\\kappa(u),\\mathcal O)$. It gives pairwise disjoint open-and-closed subschemes $U_r=d^{-1}(r)$, for $r\\geq0$, covering $U$, with $s:s^{-1}(U_r)\\to U_r$ finite locally free of degree $r$.",
+   "text": "Apply [lem-a1-affine-split-morphism-positive-rank-pieces] to $f=s$ and its section $e$. Obtain $d$, the clopen affine strata $U_r=d^{-1}(r)$, $U_0=\\varnothing$, and the finite set $I=\\{r\\geq1:U_r\\ne\\varnothing\\}$. Their inverse images $V_r=s^{-1}(U_r)$ are affine and $s_r:V_r\\to U_r$ has degree $r$. The strata indexed by $I$ are nonempty, pairwise disjoint and cover $U$; if $U$ is empty, $I$ is empty.",
    "uses": [
-    "lem-weil-pbc-finite-locally-free-degree-locally-constant"
+    "lem-a1-affine-split-morphism-positive-rank-pieces"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/groupoids.tex",
-    "place": "Tag 03BI, lemma-finite-locally-free-disjoint-free, first sentence of proof; Morphisms Tag 04MH (lemma-finite-locally-free)."
+    "place": "Tag 03BI (groupoids-lemma-finite-locally-free-disjoint-free), positive-degree argument, and Tag 03BJ (groupoids-lemma-integral-over-invariants), first proof paragraph, abstracted to an affine finite locally free morphism admitting a section; rank strata: Morphisms Tag 04MH (morphisms-lemma-finite-locally-free); clopen affine pieces: Algebra Tags 00E8 (algebra-lemma-quasi-compact) and 00EE (algebra-lemma-disjoint-decomposition), Schemes Tag 01I3 (schemes-lemma-standard-open-affine)."
    }
   },
   {
-   "text": "The identity satisfies $s\\circ e=\\mathrm{id}_U$. Thus each fibre of $s$ has a $\\kappa(u)$-point: $e$ base-changes to a section of that fibre over $\\operatorname{Spec}\\kappa(u)$. Evaluation at this point gives a unital algebra map from its coordinate algebra to $\\kappa(u)$, whose composite with the scalar inclusion is the identity. Its coordinate algebra therefore contains a one-dimensional copy of $\\kappa(u)$, so its dimension is at least one. Consequently $U_0=\\varnothing$. This uses precisely the fibre-algebra meaning of degree in [def-pc-finite-locally-free].",
+   "text": "Apply [lem-a1-groupoid-source-pullback-translation] to the given groupoid and finite locally free $s$. Its rank consequence gives $d(t(z))=d(s(z))$ for every $z\\in R$. Since $U_r=d^{-1}(r)$ from step 1, membership in $s^{-1}(U_r)$ is equivalent to membership in $t^{-1}(U_r)$. Thus $V_r=s^{-1}(U_r)=t^{-1}(U_r)$ as open subschemes.",
    "uses": [
-    "def-pc-finite-locally-free"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/groupoids.tex",
-    "place": "Tag 03BI, lemma-finite-locally-free-disjoint-free, proof: s is surjective, hence U_0 is empty."
-   }
-  },
-  {
-   "text": "Write $P=R\\times_{s,U,t}R$ and $Q=R\\times_{s,U,s}R$, with second projections to $R$. Here $c(a,b)=a\\circ b$. The maps $F:P\\to Q$, $(a,b)\\mapsto(c(a,b),b)$, and $G:Q\\to P$, $(d,b)\\mapsto(c(d,i(b)),b)$, are scheme morphisms by [def-pc-fibre-product]: the required equalities are $s(c(a,b))=s(b)$ for $F$, and for $G$ first $s(d)=s(b)=t(i(b))$, so that $c(d,i(b))$ is defined, and then $s(c(d,i(b)))=s(i(b))=t(b)$, so that $(c(d,i(b)),b)$ lies in $P$. The groupoid identities give $G F(a,b)=((a\\circ b)\\circ b^{-1},b)=(a,b)$ and $F G(d,b)=((d\\circ b^{-1})\\circ b,b)=(d,b)$. These are identities of morphisms, since they follow from the associativity, inverse and identity identities of the given structure maps. Thus $P\\cong Q$ over $R$. This is the two lower cartesian squares of the source, with their comparison map and inverse written out.",
-   "uses": [
-    "def-pc-fibre-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/groupoids.tex",
-    "place": "Tag 02YE (lemma-diagram), the two lower squares; the direct groupoid-axiom verification omitted in that source."
-   }
-  },
-  {
-   "text": "The projection $P\\to R$ is the base change of $s$ along $t$, whereas $Q\\to R$ is the base change of $s$ along $s$. Clause (2) of [lem-weil-pbc-finite-flat-rank-iso] therefore gives their ranks at $z\\in R$ as $d(t(z))$ and $d(s(z))$. The isomorphism over $R$ in step 3 identifies their fibres and hence their coordinate algebras, so these dimensions are equal. Thus $s^{-1}(U_r)=t^{-1}(U_r)$ as open subsets, hence as open subschemes. Set this common open subscheme equal to $R_r$. The restriction $s_r:R_r\\to U_r$ already has degree $r$ by step 1.",
-   "uses": [
-    "lem-weil-pbc-finite-flat-rank-iso"
+    "lem-a1-groupoid-source-pullback-translation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/groupoids.tex",
-    "place": "Tag 03BI, lemma-finite-locally-free-disjoint-free, comparison of the two base changes over Spec(kappa(z)); Tag 02YE (lemma-diagram)."
+    "place": "Tag 03BI (groupoids-lemma-finite-locally-free-disjoint-free), comparison of the two source fibres using Tag 02YE."
    }
   },
   {
-   "text": "By [lem-weil-pbc-affine-scheme-qcqs], $U$ is quasi-compact. Its open cover by the $U_r$ has a finite subcover. Since the $U_r$ are pairwise disjoint, every stratum outside that subcover is empty. The set $I=\\{r\\geq1:U_r\\ne\\varnothing\\}$ is therefore finite, and $U=\\coprod_{r\\in I}U_r$. If $U=\\varnothing$, this definition gives $I=\\varnothing$.",
+   "text": "Apply [lem-a1-groupoid-invariant-open-restriction-degree] with $W=U_r$ and $V=V_r$ for each $r\\in I$. The invariant-open equality proved in step 2 is its hypothesis. It gives all restricted groupoid structure maps, compatible with the inclusions, and transports the degree $r$ of $s_r$ from step 1 to $t_r$. Set $R_r=V_r$. Together with the finite affine clopen decomposition in step 1 these are every claimed clause.",
    "uses": [
-    "lem-weil-pbc-affine-scheme-qcqs"
+    "lem-a1-groupoid-invariant-open-restriction-degree"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/groupoids.tex",
-    "place": "Tag 03BI (lemma-integral-over-invariants), first paragraph, quasi-compactness reduction; Algebra Tag 00E8 (lemma-quasi-compact)."
-   }
-  },
-  {
-   "text": "For each $r\\in I$, [lem-weil-pbc-spec-clopen-idempotent] applied to $U_r\\subseteq\\operatorname{Spec}A$ gives an idempotent $a_r\\in A$ with $U_r=D(a_r)$. Clause (0) of [lem-weil-pbc-affine-ideals-closed-subscheme] says that this principal open is an affine open subscheme, proving the required affineness of $U_r$. The subset $R_r=s^{-1}(U_r)$ is open and closed in $R=\\operatorname{Spec}B$, since $s$ is continuous; applying the same two cited statements to $B$ shows that $R_r$ is affine as well.",
-   "uses": [
-    "lem-weil-pbc-spec-clopen-idempotent",
-    "lem-weil-pbc-affine-ideals-closed-subscheme"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Tag 01I3 (lemma-standard-open-affine), with Algebra Tag 00EE (lemma-disjoint-decomposition); affine specialization of groupoids Tag 03BI."
-   }
-  },
-  {
-   "text": "The maps restrict to the indicated open subschemes: $s\\circ e=\\mathrm{id}$ puts $e(U_r)$ in $R_r$; $s\\circ i=t$ and the equality of the two inverse images put $i(R_r)$ in $R_r$; and $s(c(a,b))=s(b)$, the source of the second factor $b$ (step 3), puts the image of $R_r\\times_{s_r,U_r,t_r}R_r$ under $c$ in $R_r$. Factoring through these open subschemes is restriction of the continuous map and its structure-sheaf map, as in [def-weil-open-immersion]. All groupoid identities restrict because the open inclusions are injective on morphisms. The restricted inverse is involutive and satisfies $s_r\\circ i_r=t_r$, so it is an isomorphism from $t_r$ to $s_r$ over $U_r$. Its fibre algebra isomorphisms preserve dimensions, and its isomorphism of morphisms preserves the finite, flat and locally finitely presented conditions defining [def-pc-finite-locally-free]. Hence $t_r$ too is finite locally free of degree $r$.",
-   "uses": [
-    "def-weil-open-immersion",
-    "def-pc-finite-locally-free"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/groupoids.tex",
-    "place": "Tag 03BI, lemma-finite-locally-free-disjoint-free, last two sentences; restriction of the groupoid structure to the invariant opens."
+    "place": "Tag 02VB (groupoids-lemma-restrict-groupoid), Tag 03BC (groupoids-definition-invariant-open) and its following paragraph; degree transport in the last two sentences of Tag 03BI (groupoids-lemma-finite-locally-free-disjoint-free)."
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-locally-free-degree-locally-constant",
-  "def-pc-finite-locally-free",
-  "def-pc-fibre-product",
-  "lem-weil-pbc-finite-flat-rank-iso",
-  "lem-weil-pbc-affine-scheme-qcqs",
-  "lem-weil-pbc-spec-clopen-idempotent",
-  "lem-weil-pbc-affine-ideals-closed-subscheme",
-  "def-weil-open-immersion"
+  "lem-a1-affine-split-morphism-positive-rank-pieces",
+  "lem-a1-groupoid-source-pullback-translation",
+  "lem-a1-groupoid-invariant-open-restriction-degree"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/groupoids.tex",
-  "place": "Tag 03BI (lemma-finite-locally-free-disjoint-free), with the affine quasi-compact reduction at the start of lemma-integral-over-invariants; the elementary comparison from Tag 02YE is written explicitly."
+  "place": "Tag 03BI (groupoids-lemma-finite-locally-free-disjoint-free), using the source-pullback translation of Tag 02YE and the finite affine reduction in the first paragraph of Tag 03BJ (groupoids-lemma-integral-over-invariants)."
  },
  "mathlib_searches": [
   {
@@ -193,28 +142,23 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-a1-affine-groupoid-invariant-rank-strata",
   "worker": "stage1",
-  "summary": "Followed Stacks 03BI: used existing rank strata and base-change rank lemmas, wrote the composition/inverse comparison of the two pullbacks explicitly, excluded rank zero by the identity section, and checked finite support, affineness and all restricted groupoid maps. No new nodes or statement changes.",
-  "blueprint": "Supporting invariant-rank reduction in the ancestor lem-a1-affine-hc0 fourth-paragraph affine-quotient route, through lem-a1-affine-groupoid-integral-invariants. Steps 1-4 and 7 realize groupoids lemma-finite-locally-free-disjoint-free; steps 5-6 justify its affine quasi-compact use in lemma-integral-over-invariants.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-finite-locally-free-degree-locally-constant",
-    "why": "Generic rank-stratification theorem for a finite locally free morphism, used exactly as in Stacks 03BI; no corresponding theorem is stated by this unit."
-   }
-  ]
+  "summary": "Q11 repair of the 2026-10-22 human re-split order: preserved the item statement and statement dependencies, extracted all seven old arguments into three independently stated unsplit nodes (translation, positive finite affine rank pieces for a split morphism, and invariant-open restriction/degree transport), and included the rank base-change comparison in the translation node, leaving short assembly. All three new nodes were searched through logged LeanFinder, Loogle, grep and LeanSearch plus a second semantic phrasing. The original argument is preserved verbatim and assigned to the new work items in report.md. Landing-return repair: reconciled the retained split with the current DAG, reread all cited statements, and distinguished the newly present 02YE coordinate-identities node from the translation/rank lemma; retained current metadata and all three searched child statements. Further current-DAG reconciliation on 2026-10-23: read rankwise-monic-gluing and affine-relation-local-basis-reduction, distinguished their stronger groupoid/local-basis hypotheses and conclusions from all three child statements, and checked their existing dependency on this item excludes using them in the assembly.",
+  "blueprint": "Same ancestor lem-a1-affine-hc0 fourth-paragraph affine-quotient route. The new nodes realize the supporting 02YE comparison, 03BI positive rank/restriction argument, and 03BJ finite affine constant-rank reduction. No chapter or unit route changes.",
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-weil-pbc-finite-locally-free-degree-locally-constant"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-Q60-902cdaf14",
-  "group": "Q60",
+  "reviewer": "NT-cc-Q11-b3c43c576",
+  "group": "Q11",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-902cdaf14 (reviewer sub-agent of L); spot-checked: I read the whole item against Stacks groupoids.tex: definition-groupoid, 02YE lemma-diagram, 03BI lemma-finite-locally-free-disjoint-free with its proof, and the first paragraph of 03BJ lemma-integral-over-invariants. I also read the statement of every cited node. The statement is 03BI specialised to affine U and R. No hypothesis is dropped and groupoids are not reduced to equivalence relations. The added clauses (I finite, nonempty affine strata, affine R_r, the groupoid restricting to each stratum, I empty when U is empty) are all proved and are what the parent's step 1 uses. Step by step: step 1 uses the degree-locally-constant node exactly as stated. Step 2 rules out rank 0 through the identity section. Step 3 is the 02YE comparison P≅Q over R, written out and checked with Stacks' convention. Step 4 applies clause (2) of finite-flat-rank-iso to the base changes of s along t and along s, giving d∘t=d∘s. Steps 5 and 6 use qcqs and then the clopen-idempotent node with clause (0) of affine-ideals-closed-subscheme, over A and over B. Step 7 restricts the structure maps and gets t_r≅s_r through the inverse. Small cases checked: A=0; the trivial groupoid; Z/2⊔Z/3, giving I={2,3}; nonreduced mu_p; isotropy. There are no new nodes. The DAG search found no duplicate (the parent, grandparent and invariant-norm nodes say different things). The route is fine. I accept the declared tool use of lem-weil-pbc-finite-locally-free-degree-locally-constant (Morphisms 04MH, Lean-closed). Two text fixes, both in the item file: (a) step 3 now also checks that G lands in P, s(c(d,i(b)))=s(i(b))=t(b). (b) Step 7 wrote 's∘c=s∘pr_1' without saying which projection pr_1 is; in the item's own 1-indexed language this reads as false. It now says s(c(a,b))=s(b), the source of the second factor. No other field changed.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-b3c43c576 (reviewer sub-agent of L); spot-checked: I read the item, its three new nodes, every cited definition and the Stacks sources in full. No fixes and no dropped nodes. Third push of this re-split; b1c90ad0 and cd65cc64 were PASSed and came back from landing. Against cd65cc64, the three new nodes are byte-identical. The item changed only in split_report.date and summary. The report now also separates the newly landed lem-a1-affine-groupoid-rankwise-monic-gluing (NL) and lem-a1-affine-relation-local-basis-reduction (Q131). Both have different hypotheses and conclusions, and both proofs cite this item, so neither duplicates a new node. The push is a real rebase, not an A6 re-push. On live and side-live the item is still split with the old 7-step proof. The re-split note released 2026-10-22 is still open and the new ids are absent, so the delivery is not superseded. The statement and stmt_deps match live. Each old step is now a new-node statement: steps 1, 2, 5 and 6 in positive-rank-pieces; steps 3 and 4 in source-pullback-translation; step 7 in invariant-open-restriction-degree. The new statements are 1058 to 1185 characters, all unsplit with empty proofs, in the same unit, and none restates the item. The assembly is 3 steps and 1152 characters and covers every clause, with the same fibre-degree d in all three nodes. Mathematical checks: with c(a,b)=a after b and s(a)=t(b) (def-a1-groupoid-scheme, sc = s pr_1), F(a,b)=(ab,b) lands in R x_{s,U,s} R because s(ab)=s(b). G(d,b)=(d b^-1,b) is defined because s(d)=t(b^-1), and lands in P because s(d b^-1)=t(b). This is 02YE (l.2526). The second projections are the base changes of s along t and along s, so their fibre ranks are d(t z) and d(s z), as in 03BI (l.4290). The section e gives each fibre a rational point, so its algebra is nonzero and d>=1. Clopen strata are D(idempotent) (00EE), principal opens are affine (01I3), and quasi-compactness (00E8) makes I finite (03BJ, first paragraph). e, i and c preserve V=s^-1 W=t^-1 W (02VB l.3475, 03BC l.3571). The factorisations are unique because open immersions are monomorphisms, and t_W = s_W i_W with i_W an involution carries the degree. Small cases: A=0, k[eps]/(eps^2), k x k with mixed ranks, mu_p, W empty and W=U. The rg -L duplicate sweep (02YE, 02VB, 03BC, 03BI, 03BJ, invariant-open and restrict-groupoid phrasings) and the main-20261015 blueprint grep found no duplicate. No SGA is used. Maintainer note: the item's tool_uses still lists lem-weil-pbc-finite-locally-free-degree-locally-constant. The new assembly no longer cites it, but the positive-pieces child will, so the stale entry is harmless; I left it unchanged."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.AffineGroupoidInvariantRankStrata",
@@ -234,5 +178,30 @@
   "result": "pass",
   "note": "Wrote review.md. Checked immutable files, source, dependencies, every statement clause, edge cases, universes, docstrings, and route-pivot exclusions. Exact statement field matches. scompile.py reproduced sandbox and library compiles with exit 0 and no diagnostics. No fixes needed; branch head unchanged."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261026T070910-L-3688945",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.affineGroupoid_exists_invariant_rank_strata"
+  ],
+  "sorry_after": []
+ }
 }

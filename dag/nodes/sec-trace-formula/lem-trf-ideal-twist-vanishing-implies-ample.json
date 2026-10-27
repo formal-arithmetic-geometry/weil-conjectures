@@ -30,72 +30,31 @@
    }
   },
   {
-   "text": "Fix a point x whose singleton is closed in X. Apply the common-free-generator lemma with M=N=L and W=X to choose an affine open U containing x and a generator e of L on U. Put Z=X minus U and Z' = Z union {x}. The reduced-induced-closed-subscheme lemma gives quasi-coherent ideal sheaves I=I_Z and J=I_{Z'}. Its explicit vanishing-ideal formula gives J contained in I, I restricted to U equal to O_U, and I restricted to X minus {x} equal to J restricted there. At x the inclusion J_x into I_x=O_{X,x} has image m_x, because vanishing at x means having zero image in its residue field. Both Z and Z' are closed; in particular J is among the ideal sheaves quantified in the hypothesis.",
+   "text": "Fix a closed point $x\\in X$. The common-free-generator lemma, with both modules equal to $\\mathcal L$ and $W=X$, gives an affine neighbourhood $U$ and a generator $e$. Apply the twisted-ideal-quotient lemma to obtain the reduced ideals $\\mathcal J\\subseteq\\mathcal I$, their quotient $\\mathcal Q$, the exact tensor sequences and injective maps for every positive power, and the quotient sections $q_n$ with nonzero residue at $x$. In particular $\\mathcal J$ is quasi-coherent.",
    "uses": [
     "lem-pc-invertible-common-free-generator",
-    "lem-weil-pbc-reduced-induced-closed-subscheme"
+    "lem-trf-closed-point-twisted-ideal-quotient"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 0B5P, proof, choice of x,U,Z,Z' and reduced ideals; Schemes lemma-reduced-closed-subscheme (Tag 01J3)."
+    "place": "Tag 0B5P, lemma-quasi-compact-h1-zero-invertible, proof, first paragraph."
    }
   },
   {
-   "text": "In the abelian category of module sheaves put Q=I/J, the sheafification of the sectionwise quotient. The inclusion and its cokernel give 0 -> J -> I -> Q -> 0. For each n>=1 put M_n=L^{tensor n}. Tensoring this sequence by M_n gives 0 -> J tensor M_n -> I tensor M_n -> Q tensor M_n -> 0, and I tensor M_n -> M_n is injective. Here is the local verification, so no flatness assertion is implicit: on any open V where M_n has generator a, each map F tensor M_n -> F is f tensor (r a) |-> r f, with inverse f |-> f tensor a. Under these identifications both the sequence and the inclusion into M_n are the original exact sequence and I -> O_X. These identifications commute with every map in the sequence. Exactness follows locally on this covering: kernels are sectionwise, and cokernels are sheafified sectionwise cokernels. Such a cover exists because powers of an invertible module are invertible.",
+   "text": "Apply the hypothesis to the quasi-coherent ideal $\\mathcal J$ of step 2, choosing $n\\ge1$ with $H^1(X,\\mathcal J\\otimes\\mathcal L^{\\otimes n})=0$. In the supported-section lifting lemma take $\\mathcal M=\\mathcal L^{\\otimes n}$, $a=e^{\\otimes n}$, $q=q_n$, and the same $\\mathcal I,\\mathcal J,\\mathcal Q$ and canonical maps as step 2. The ampleness-definition node gives invertibility of this tensor power; on $U$ its generator is $e^{\\otimes n}$. Step 2 gives $\\mathcal J_x=\\mathfrak m_x\\subseteq\\mathcal I_x=\\mathcal O_{X,x}$, the exact tensor sequence, injectivity into $\\mathcal M$, and the canonical nonzero quotient germ. The chosen vanishing is precisely the remaining lifting hypothesis. Its conclusion supplies $t$ and its image $s$ with $x\\in X_s=U_f$ affine. This construction applies to every closed point $x$.",
    "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "def-pur-sheaf-tensor-product",
     "def-weil-pbc-ample-invertible-module",
-    "def-sc-invertible-module"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 0B5P, proof, the two displayed short exact sequences; the tensor sequence is checked in local generators."
-   }
-  },
-  {
-   "text": "Choose n>=1 with H^1(X,J tensor M_n)=0, using the hypothesis for the quasi-coherent ideal J, and write M=M_n. Construct q_n in Gamma(X,Q tensor M) explicitly on the open cover {U, X minus {x}}. On U use the image of e^{tensor n} under M|_U=(I tensor M)|_U -> (Q tensor M)|_U, using I|_U=O_U. On X minus {x} use zero: there I=J, hence Q=0 and Q tensor M=0. The two sections agree on U minus {x}, since this quotient sheaf is zero there, and therefore glue by the sheaf axiom. At x their germ is the class of e^{tensor n} modulo m_x M_x. In its generator coordinate this class is 1 in kappa(x), which is nonzero.",
-   "uses": [
-    "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "def-weil-sheaf-of-modules-category",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 0B5P, proof, choice of n and the residue-one quotient section. Gluing on U and X minus {x} expands the source's identification of global quotient sections with A/m."
-   }
-  },
-  {
-   "text": "The category of O_X-module sheaves is abelian with enough injectives. Global sections is additive and left exact: an element lies in the sectionwise kernel exactly when its image is zero. Apply the right-derived universal delta-functor lemma to Gamma(X,-) and the short exact sequence of step 3 at the selected n. Its R^0 Gamma = Gamma identification and exactness give Gamma(X,I tensor M) -> Gamma(X,Q tensor M) -> H^1(X,J tensor M). The last group is zero by the chosen n, so the boundary of q_n is zero; exactness gives t in Gamma(X,I tensor M) mapping to q_n. Denote by s its image in Gamma(X,M) under the inclusion I tensor M -> M. This uses only H^1 vanishing for J at this one n, not eventual vanishing or vanishing for I.",
-   "uses": [
-    "lem-sc-ringed-space-module-sheaves-enough-injectives",
-    "lem-weil-pbc-right-derived-universal-delta-functor",
-    "pqf-def-cohomology"
+    "lem-trf-supported-section-h1-affine-lift"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 0B5P, proof, existence of the global lift s from the chosen H^1 vanishing; Cohomology of Sheaves, cohomology long exact sequence."
+    "place": "Tag 0B5P, lemma-quasi-compact-h1-zero-invertible, proof, first paragraph."
    }
   },
   {
-   "text": "The value of s at x is the nonzero class of e^{tensor n}, so x belongs to X_s. At any z in Z, trivialize M on a neighbourhood with generator a. Since s comes from I tensor M, its coordinate in this generator is a section of I, and the vanishing-ideal formula makes its residue at z zero. Thus s has zero value at every z in Z and X_s is contained in U. On U write s=f e^{tensor n}, with f in O_X(U). The definition of X_s says that for y in U, y belongs to X_s exactly when f has nonzero residue at y, equivalently its germ is a unit in the local ring O_{X,y}. Consequently X_s=U_f. The affine-principal-open lemma (0) says that U_f is affine. This completes the construction for every closed point x.",
-   "uses": [
-    "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "def-weil-pbc-ample-invertible-module",
-    "lem-weil-pbc-affine-ideals-closed-subscheme"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 0B5P, proof, x in X_s contained in U and X_s=D(f) affine."
-   }
-  },
-  {
-   "text": "Let W be the union of X_s over all positive powers and sections whose nonvanishing open is affine. Each X_s is open by the ampleness-definition node, and steps 2--6 show that W contains every closed point. The underlying space of X is Kolmogorov: if two points had the same closure, that irreducible closed subset would have two generic points, contrary to the scheme-sobriety lemma; distinct closures are distinguished by an open complement. Apply the quasi-compact Kolmogorov closed-point lemma to the closed subset X minus W of the quasi-compact space X. If nonempty, it contains a point closed in X, contradicting that all closed points lie in W. Hence W=X.",
+   "text": "Let W be the union of X_s over all positive powers and sections whose nonvanishing open is affine. Each X_s is open by the ampleness-definition node, and steps 2--3 show that W contains every closed point. The underlying space of X is Kolmogorov: if two points had the same closure, that irreducible closed subset would have two generic points, contrary to the scheme-sobriety lemma; distinct closures are distinguished by an open complement. Apply the quasi-compact Kolmogorov closed-point lemma to the closed subset X minus W of the quasi-compact space X. If nonempty, it contains a point closed in X, contradicting that all closed points lie in W. Hence W=X.",
    "uses": [
     "def-weil-pbc-ample-invertible-module",
     "lem-sc-scheme-sober",
@@ -120,18 +79,12 @@
   }
  ],
  "proof_deps": [
-  "def-pur-sheaf-tensor-product",
-  "def-sc-invertible-module",
   "def-weil-pbc-ample-invertible-module",
-  "def-weil-sheaf-of-modules-category",
   "lem-pc-invertible-common-free-generator",
   "lem-sc-quasi-compact-kolmogorov-closed-point",
-  "lem-sc-ringed-space-module-sheaves-enough-injectives",
   "lem-sc-scheme-sober",
-  "lem-weil-pbc-affine-ideals-closed-subscheme",
-  "lem-weil-pbc-reduced-induced-closed-subscheme",
-  "lem-weil-pbc-right-derived-universal-delta-functor",
-  "pqf-def-cohomology",
+  "lem-trf-closed-point-twisted-ideal-quotient",
+  "lem-trf-supported-section-h1-affine-lift",
   "pqf-lem-proper-basic"
  ],
  "proof_origin": {
@@ -236,11 +189,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-ideal-twist-vanishing-implies-ample",
   "worker": "stage1",
-  "summary": "Repair D1/D2 and F2/F5: the item now carries the reduced-ideal construction, local tensor-exactness check, explicit glued residue-one quotient section, H1 lift, affine principal nonvanishing neighbourhood and closed-point covering argument. No replacement criterion lemma is introduced; all inputs are existing nodes. Corrected the supporting Stacks tag to 0B5P and rewrote the report against these eight actual steps.",
-  "blueprint": "Expands the 0B5U criterion used by the 0B5X curve-degree argument in the inherited local-term-locality ancestry; follows the reduced-ideal and twisted H1 construction of 0B5P without changing any unit route.",
+  "summary": "Repairs the 2026-10-22 re-split return without changing the statement: two new statement-only nodes distribute the reduced-boundary/twisted-residue construction (old steps 2-4) and the H1 lift/support/affine-principal-open argument (old steps 5-6). Proper quasi-compactness and the closed-point covering argument remain in the parent. Every old argument is preserved verbatim in the report as a proof handoff, while the new statements expose its outputs. Rebased after the 2026-10-22 07:33 UTC landing return (returned delivery head 8fd6234c130): re-read all current cited statements and revalidated the verbatim citations; the current repository parent equals the saved pre-split parent, so the two intermediate statements and five-step assembly remain applicable. The delivery tool reconstructs this repair on current origin/sheaf-dag, retaining current maintainer-owned fields. Latest landing-return repair (2026-10-22 12:14 UTC, head b40588b071c): compared the retained delivery with the current parent (identical to returned-item.json), reread all directly cited statements and statement dependencies, and made the lifting specialization explicit in step 3. No changed hypothesis requires replacing either intermediate lemma; the supported delivery tool rebases the repaired assembly onto the current server DAG. Repair of the latest landing return (2026-10-22 16:24 UTC, returned head 82bdc784b6a): compared the saved parent against the current read clone (all fields equal), reread every assembly citation and both new nodes with their statement dependencies, retained the logged search results, and rewrote step 3 as an explicit substitution M=L^n, a=e^n, q=q_n with the canonical maps. The initial dry run passed at a3232daf7e8; the final delivery is rebuilt on current origin/sheaf-dag by the supported tool.",
+  "blueprint": "Preserves the inherited 0B5U implication through the full 0B5P proof in the local-term-locality ancestry, without changing chapter or unit route.",
   "tool_uses": [
    {
     "node": "pqf-lem-proper-basic",
@@ -249,18 +202,6 @@
    {
     "node": "lem-pc-invertible-common-free-generator",
     "why": "Only the affine local trivialization of an invertible module is used; no step of the curve local-term unit supplies this generic local tool."
-   },
-   {
-    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "why": "Supplies the explicit quasi-coherent reduced vanishing ideals of two closed subsets; this generic scheme construction is not an alternative local-term proof."
-   },
-   {
-    "node": "lem-sc-ringed-space-module-sheaves-enough-injectives",
-    "why": "Verifies the abelian/enough-injectives hypotheses for the global-sections long exact sequence, a generic homological tool."
-   },
-   {
-    "node": "lem-weil-pbc-right-derived-universal-delta-functor",
-    "why": "Gives long exactness and R^0 Gamma=Gamma for the residue-one lift; this is a generic homological tool absent from the curve local-term unit."
    }
   ]
  },
@@ -272,12 +213,12 @@
   "lem-weil-pbc-right-derived-universal-delta-functor"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-Codex-Q88-308199201",
-  "group": "Q88",
+  "reviewer": "NT-cc-Q76-593c6de83",
+  "group": "Q76",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q88-308199201 (reviewer sub-agent of L); spot-checked: Read the required guidance, packet, item, report, unit route, cited node statements, and Stacks sources 0B5U, 0B5P, and 01J3. The eight-step split correctly supplies the reduced-ideal construction, tensor exactness, quotient-section gluing, H¹ lift, affine principal open, and closed-point covering argument. Hypotheses and edge cases check; no duplicate, circular, long hidden lemma, route-pivot, or citation fault found. Review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-593c6de83 (reviewer sub-agent of L); spot-checked: 4th delivery of the same re-split; I read the mathematics in full. Repair note released 2026-10-22 under the human's 2026-10-21 decision. Live and side-live still hold the 8-step parent, and neither new id exists there, so nothing supersedes this delivery. Against 82bdc784b6a8 (approved, then refused at landing with 'side completion never promoted'), both new nodes are byte-identical. The parent changes only the step-3 wording (explicit M=L^n, a=e^n, q=q_n, invertibility from the def node) and the split_report. Statement, stmt_deps and source are unchanged. Mapping: base 1 = parent 1 (proper-basic, quasi-compact over an affine base). Base 2-4 = node A, closed-point-twisted-ideal-quotient: Z and Z' are closed; I and J are quasi-coherent by reduced-induced (1); I|_U=O_U; I=J off x; J_x=m_x because J|_U is the maximal ideal; L^n is locally free, so the sequence is exact and iota_n injective; q_n glues because Q is 0 off x; its germ is 1. Base 5-6 = node B, supported-section-h1-affine-lift: (I⊗M)_x≅M_x with (J⊗M)_x going to m_xM_x, so the germ identification is well defined; the H1 lift exists; s vanishes on X\\U because its local coordinate lies in I; X_s=U_f is affine by affine-ideals (0). Base 7-8 = parent 4-5 (sobriety gives Kolmogorov, then the closed-point lemma, then the ampleness definition). This matches Stacks coherent.tex 0B5P lines 441-483 and 0B5U. Nothing was dropped; A and B are of comparable size (about 2190 and 1430 characters of old argument), neither restates the item, and the parent is about 2300 characters. Small cases: Spec k, Spec k[eps] (J=m), P1 with U=A1, U=X, empty X. Duplicates: rg -L for 0B5P/0B5U finds only Serre-vanishing nodes, two citers of this item and the untwisted lem-pqf-h1-closed-point-* nodes, which do not apply since L is not globally trivial. No SGA source, no cycle. Accepted tool_uses: pqf-lem-proper-basic and lem-pc-invertible-common-free-generator. Maintainer note: if landing refuses again with 'side completion never promoted', the fault is in L's promotion, not in this delivery."
  },
  "lean": {
   "module": "Sheaf.TraceFormula.IdealTwistVanishingImpliesAmple",
@@ -297,5 +238,16 @@
   "result": "pass",
   "note": "Statement matches Stacks 0B5U (3)=>(1) and the node clause by clause: IsNoetherianRing R, f : X ⟶ Spec(.of R) [IsProper f], L.IsInvertible, ∀ I : IdealSheafData with toModules quasi-coherent (Mathlib SheafOfModules.IsQuasicoherent, as in pqf-def-coherent; the antecedent only weakens h), ∃ n>0 with Subsingleton of RingedSpace.moduleCohomology 1 of tensorObj I.toModules (L.tensorPow n), conclusion Scheme.Modules.IsAmple. IdealSheafData.toModules is a real kernel construction. Edge cases n=0, empty X, single universe u are fine. No new definitions, sorry-only proof, source and blueprint docstrings present, node changed only in lean, lean.statement verbatim. nt_compile clean in 3.7 s. Observation, no change needed: tensorPow and positiveTensorPower are canonically isomorphic, and tensorPow is consistent with IsAmple."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

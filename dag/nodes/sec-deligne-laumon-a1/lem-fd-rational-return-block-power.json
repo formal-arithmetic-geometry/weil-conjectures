@@ -1,0 +1,258 @@
+{
+ "id": "lem-fd-rational-return-block-power",
+ "kind": "statement",
+ "title": "Block composition and powers of rational Weil point returns",
+ "statement": "Fix $k_0=\\mathbf F_q$, an algebraic closure $k$, a prime $\\ell\\ne\\operatorname{char}k_0$, an algebraic closure $\\Qlb/\\mathbf Q_\\ell$, and a finite coefficient field $E\\subset\\Qlb$. Let $Y_0$ be a separated finite-type $k_0$-scheme, put $Y=Y_0\\times_{k_0}k$ and $s=\\operatorname{Spec}k$, and let $g_Y,g_s$ be geometric Frobenius [def-weil-frobenius-detailed]. Let $d\\geq1$ and $\\bar x:s\\to Y$ satisfy $g_Y^d\\bar x=\\bar xg_s^d$. Work in the framework rationalized constructible category with pullback [def-weil-derived-pullback-tensor-hom], point fibres [def-weil-finite-coefficient-point], and the specified rationalized associative composition comparisons [lem-trf-integral-pullback-comparison-realization]. Put $G=Lg_Y^*$ and $J=\\operatorname{Fib}_{s,E}L\\bar x^*$. For $r\\geq1$ write $t_{rd,N}:JN\\to JG^{rd}N$ for the $rd$ successive normalized point transports using the indicated return equality [lem-trf-local-frobenius-transport-normalization].\n\nFor every $N\\in D^b_c(Y,E)$ and $r\\geq1$, after the specified associative composition identifications,\n$$t_{(r+1)d,N}=t_{d,G^{rd}N}\\,t_{rd,N}.$$\nFor every $E$-Weil complex $(M,\\theta)$ [def-weil-weil-sheaf-complex], let $\\theta^{[j]}:G^jM\\xrightarrow{\\sim}M$ be its iterates and $R_j=J(\\theta^{[j]})t_{j,M}$ for positive multiples $j$ of $d$ [def-weil-local-frobenius-trace]. These endomorphisms in $D^b_{\\mathrm{fd}}(E)$ satisfy\n$$R_{(r+1)d}=R_dR_{rd}\\quad(r\\geq1),\\qquad R_{ed}=R_d^{\\,e}\\quad(e\\geq1).$$\nIf $\\bar x$ lies over a closed point $x\\in Y_0$ of degree $d=[\\kappa(x):k_0]$, then $R_d$ induces the specified geometric local Frobenius $F_x$ on every cohomology group.\nNo integral Weil-stable lattice or finite Tor-amplitude of finite reductions is required.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realified-kernel-real.proof.md",
+  "place": "Step 2, sentence on pullback and the residue-degree Frobenius power; extracted rational argument from lem-fd-weil-pullback-local-frobenius, returned proof steps 6 and repeated-return part of 7. Compare Deligne Weil II (1.1.7)-(1.1.10), pp. 150-151; construction is agent-written."
+ },
+ "stmt_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-coefficient-point",
+  "lem-trf-integral-pullback-comparison-realization",
+  "def-weil-frobenius-detailed",
+  "lem-trf-local-frobenius-transport-normalization",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-local-frobenius-trace"
+ ],
+ "proof": [
+  {
+   "text": "Write $P=L\\bar x^*$, $U=Lg_s^*$ and $H=\\operatorname{Fib}_{s,E}$, so $J=HP$. The return equality holds at every positive multiple of $d$: if it holds at $b=rd$, then $g_Y^{b+d}\\bar x=g_Y^d(\\bar xg_s^b)=\\bar xg_s^{d+b}$. For each such $j$ take the specified comparison $v_{j,N}:U^jPN\\xrightarrow{\\sim}PG^jN$. By [lem-trf-iterated-return-transport-scalar-calculus] at $\\Lambda=E$, the maps in the question are $t_{j,N}=H(v_{j,N})I^{(j)}_{PN}$, and $I^{(j)}$ and $t_j$ are natural in every morphism, including rational morphisms. This lemma assumes precisely a geometric point and the return equality; it does not require an integral Weil structure.",
+   "uses": [
+    "lem-trf-iterated-return-transport-scalar-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realified-kernel-real.proof.md",
+    "place": "Step 2: pullback raises local Frobenius to the residue-extension power; explicit rational return calculation."
+   }
+  },
+  {
+   "text": "Fix $a=d$ and $b=rd$. The specified associative, unital composition maps, respecting equality of scheme morphisms and arbitrary finite iterations [lem-trf-integral-pullback-comparison-realization], give\n$$v_{a+b,N}=v_{a,G^bN}\\circ U^a(v_{b,N}).$$\nIndeed the first return comparison replaces $U^aU^bP$ by $U^aPG^b$, and the second replaces this by $PG^aG^b$. Both this pasted comparison and $v_{a+b}$ are obtained by splitting the same equality $g_Y^{a+b}\\bar x=\\bar xg_s^{a+b}$ into the two displayed return equalities; associativity is exactly the equality of these composites. All displayed functor powers are identified using these specified maps. Separately, expanding the recursion $I^{(j+1)}_A=\\iota_{U^jA}I^{(j)}_A$ gives\n$$I^{(a+b)}_A=I^{(a)}_{U^bA}\\circ I^{(b)}_A:$$\nthe right side is the consecutive list of transports at $A,U A,\\ldots,U^{b-1}A,U^bA,\\ldots,U^{a+b-1}A$, with the same order as the left side. This is just reassociation of a finite composite, not an additional comparison theorem.",
+   "uses": [
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-trf-iterated-return-transport-scalar-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realified-kernel-real.proof.md",
+    "place": "Step 2: pullback raises local Frobenius to the residue-extension power; explicit rational return calculation."
+   }
+  },
+  {
+   "text": "Apply the naturality of $I^{(a)}$ in [lem-trf-iterated-return-transport-scalar-calculus] to the point-category isomorphism $v_{b,N}:U^bPN\\to PG^bN$. Substituting Step 2 and functoriality of $H$ gives\n$$\\begin{aligned}\nt_{a+b,N}&=H(v_{a,G^bN})H(U^a(v_{b,N}))I^{(a)}_{U^bPN}I^{(b)}_{PN}\\\\\n&=H(v_{a,G^bN})I^{(a)}_{PG^bN}H(v_{b,N})I^{(b)}_{PN}\\\\\n&=t_{a,G^bN}t_{b,N}.\n\\end{aligned}$$\nThis proves the first clause for every $N$; only naturality is substituted into the four-factor composite.",
+   "uses": [
+    "lem-trf-iterated-return-transport-scalar-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realified-kernel-real.proof.md",
+    "place": "Step 2: pullback raises local Frobenius to the residue-extension power; explicit rational return calculation."
+   }
+  },
+  {
+   "text": "Temporarily put $\\theta^{[0]}=1_M$. The recursion in [def-weil-local-frobenius-trace] implies $\\theta^{[a+b]}=\\theta^{[a]}G^a(\\theta^{[b]})$: for fixed $a$, the case $b=0$ is the identity law, and replacing $b$ by $b+1$ appends $G^{a+b}\\theta$ on both sides, since $G^a$ preserves composition. Use the naturality of $t_a$ from [lem-trf-iterated-return-transport-scalar-calculus] for the rational arrow $\\theta^{[b]}:G^bM\\to M$:\n$$t_{a,M}J(\\theta^{[b]})=J(G^a\\theta^{[b]})t_{a,G^bM}.$$\nThus, for $a=d,b=rd$, Step 3 gives\n$$\\begin{aligned}\nR_dR_{rd}&=J(\\theta^{[d]})t_{d,M}J(\\theta^{[rd]})t_{rd,M}\\\\\n&=J(\\theta^{[d]}G^d\\theta^{[rd]})t_{d,G^{rd}M}t_{rd,M}=R_{(r+1)d}.\n\\end{aligned}$$\nInduct on $e\\geq1$: the base is $R_d=R_d^1$; the recurrence gives $R_{(e+1)d}=R_dR_{ed}=R_dR_d^e=R_d^{e+1}$. These calculations take place in the endomorphism monoid of $JM$, with composition in the displayed order.",
+   "uses": [
+    "def-weil-local-frobenius-trace",
+    "lem-trf-iterated-return-transport-scalar-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realified-kernel-real.proof.md",
+    "place": "Step 2: pullback raises local Frobenius to the residue-extension power; explicit rational return calculation."
+   }
+  },
+  {
+   "text": "When $\\bar x$ lies above the closed point of degree $d$, the definition [def-weil-local-frobenius-trace] uses precisely $I^{(d)}_{PM}$, the return-square comparison $v_{d,M}$ and $J(\\theta^{[d]})$. Their composite is $R_d$ by Step 1, so its induced map on every $\\mathrm H^j(JM)$ is the specified $F_x$. The argument throughout is in the rationalized categories and uses the rational naturality and associative comparisons already asserted by the cited nodes. It never chooses a lattice stable under $\\theta$ and never applies a theorem requiring finite Tor-amplitude of reductions.",
+   "uses": [
+    "def-weil-local-frobenius-trace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realified-kernel-real.proof.md",
+    "place": "Step 2: pullback raises local Frobenius to the residue-extension power; explicit rational return calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-iterated-return-transport-scalar-calculus",
+  "lem-trf-integral-pullback-comparison-realization",
+  "def-weil-local-frobenius-trace"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realified-kernel-real.proof.md",
+  "place": "Step 2: pullback raises local Frobenius to the residue-extension power; explicit rational return calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The local geometric Frobenius return operator for a rational Weil complex over a finite field at a multiple of the point degree is a power",
+   "results": "WittVector.StandardOneDimIsocrystal.frobenius_apply; AlgHom.IsArithFrobAt.apply_of_pow_eq_one; IsPurelyInseparable.algebraMap_iterateFrobenius; PerfectClosure.iterate_frobenius_mk; WittVector.exists_frobenius_solution_fractionRing; IsPurelyInseparable.iterateFrobenius; Perfection.coeff_iterate_frobenius'; Perfection.coeff_iterate_frobenius",
+   "date": "2026-10-22",
+   "verdict": "no match: ring Frobenius powers, Witt vectors and isocrystals are not the specified geometric point return operators of rational constructible Weil complexes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Frobenius\", \"pow\"",
+   "results": "iterateFrobenius_eq_pow; powMulEquiv_eq_toMulEquiv_frobeniusEquiv; frobeniusEquiv_symm_pow; frobeniusEquiv_symm_pow_p; iterate_frobeniusEquiv_symm_pow_p_pow; Polynomial.roots_expand_pow_image_iterateFrobenius_subset; Polynomial.roots_expand_pow_map_iterateFrobenius_le; Polynomial.roots_expand_pow_map_iterateFrobenius",
+   "date": "2026-10-22",
+   "verdict": "no match: ring Frobenius powers, Witt vectors and isocrystals are not the specified geometric point return operators of rational constructible Weil complexes."
+  },
+  {
+   "tool": "grep",
+   "query": "return.*[Ff]robenius|[Ff]robenius.*return|frobenius.*pow",
+   "results": "Mathlib/Algebra/CharP/Reduced.lean; Mathlib/Algebra/CharP/Frobenius.lean; Mathlib/Algebra/CharP/Frobenius.lean; Mathlib/Algebra/CharP/Frobenius.lean; Mathlib/Algebra/CharP/Frobenius.lean; Mathlib/Algebra/CharP/Frobenius.lean; Mathlib/Algebra/Polynomial/Expand.lean; Mathlib/Analysis/Matrix/Normed.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: ring Frobenius powers, Witt vectors and isocrystals are not the specified geometric point return operators of rational constructible Weil complexes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Splitting repeated geometric point transports into blocks proves the return operator of a Weil complex equals a power of its first return",
+   "results": "WittVector.iterate_verschiebung_iterate_frobenius; WittVector.verschiebung_isPoly; WittVector.verschiebung; CategoryTheory.ShortComplex.Splitting.ofIso; CategoryTheory.ShortComplex.Splitting.f_r; CategoryTheory.ShortComplex.Splitting.f_r_assoc; CircleDeg1Lift.translationNumber_pow; WittVector.verschiebungFun_isPoly",
+   "date": "2026-10-22",
+   "verdict": "no match: ring Frobenius powers, Witt vectors and isocrystals are not the specified geometric point return operators of rational constructible Weil complexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a closed point of degree d the ed fold geometric Frobenius on the stalk of an ell adic Weil complex is the e th power of d fold Frobenius",
+   "results": "WittVector.StandardOneDimIsocrystal.frobenius_apply; WittVector.instIsocrystalStandardOneDimIsocrystal; WittVector.Isocrystal.frobenius; WittVector.Isocrystal.frob; WittVector.exists_frobenius_solution_fractionRing; WittVector.exists_frobenius_solution_fractionRing_aux; WittVector.FractionRing.frobeniusRingHom; PreTilt.untilt_iterate_frobeniusEquiv_symm_pow",
+   "date": "2026-10-22",
+   "verdict": "no match: ring Frobenius powers, Witt vectors and isocrystals are not the specified geometric point return operators of rational constructible Weil complexes."
+  },
+  {
+   "tool": "grep",
+   "query": "return.*[Ff]robenius|[Ff]robenius.*return|point.*transport",
+   "results": "Mathlib/LinearAlgebra/AffineSpace/Independent.lean; Mathlib/LinearAlgebra/AffineSpace/Combination.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ring Frobenius, perfectoid rings, slice categories or affine geometry, not rational derived Weil point-return operators."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local Frobenius on stalks of a rational Weil complex at a multiple of the residue degree is a power of its first return",
+   "results": "LinearMap.frobenius; AlgHom.IsArithFrobAt.isArithFrobAt_localize; LinearMap.iterateFrobenius; iterateFrobenius_eq_pow; AlgHom.IsArithFrobAt.localize; iterateFrobeniusEquiv_one; iterateFrobenius_one_apply; AlgHom.IsArithFrobAt",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ring Frobenius, perfectoid rings, slice categories or affine geometry, not rational derived Weil point-return operators."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor\", \"iterate\"",
+   "results": "CategoryTheory.Over.iteratedSliceEquiv_functor",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ring Frobenius, perfectoid rings, slice categories or affine geometry, not rational derived Weil point-return operators."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a rational constructible Weil complex, composing point Frobenius transports in blocks gives powers of the local return endomorphism",
+   "results": "iterateFrobeniusEquiv_add; IsPurelyInseparable.iterateFrobeniusₛₗ; iterateFrobeniusEquiv_symm_add; iterateFrobeniusEquiv_add_apply; PreTilt.coeff_iterate_frobeniusEquiv_symm; WittVector.StandardOneDimIsocrystal.frobenius_apply; iterateFrobeniusEquiv_symm_add_apply; PerfectClosure.iterate_frobenius_mk",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ring Frobenius, perfectoid rings, slice categories or affine geometry, not rational derived Weil point-return operators."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural point transport to pullback along Frobenius composed with an iterated Weil structure satisfies the cocycle power law in the rationalized derived category",
+   "results": "PreTilt.untilt_iterate_frobeniusEquiv_symm_pow; PreTilt.coeff_iterate_frobenius; PreTilt.coeff_iterate_frobenius'; PreTilt.coeff_iterate_frobeniusEquiv_symm; PreTilt.coeff_frobeniusEquiv_symm; Perfection.coeff_iterate_frobeniusEquiv_symm; WittVector.exists_frobenius_solution_fractionRing_aux; Perfection.coeff_iterate_frobenius'",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ring Frobenius, perfectoid rings, slice categories or affine geometry, not rational derived Weil point-return operators."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-fd-weil-pullback-local-frobenius",
+  "date": "2026-10-22",
+  "group": "Q60"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-some-weight",
+ "blueprint": {
+  "from": {
+   "node": "lem-fd-realified-kernel-real",
+   "place": "Proof Step 2, sentence pullback along p_1 raises the local Frobenius to the e-th power: identify a multiple return as a power of the one-circuit operator",
+   "via": [
+    "lem-fd-weil-pullback-local-frobenius"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-fd-rational-return-block-power",
+  "worker": "stage1",
+  "summary": "N9 writes the rational return calculation explicitly, reusing existing arbitrary-point transport naturality and specified rational composition coherence. Block transport, Weil recursion, recurrence and powers are expanded; no new nodes or statement changes.",
+  "blueprint": "Latest lem-fd-realified-kernel-real.proof.md Step 2, pullback along p_1 raises the local Frobenius to the e-th power: the multiple-return part of that assertion.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-integral-pullback-comparison-realization",
+    "why": "Generic specified rational composition coherence, including equality of scheme morphisms and arbitrary finite iterations, needed to paste the return squares; the weight unit does not supply it."
+   },
+   {
+    "node": "lem-trf-iterated-return-transport-scalar-calculus",
+    "why": "Generic naturality of iterated point transport for an arbitrary geometric point satisfying a return equality, at the rational coefficient stage; this is not a weight estimate or a substitute route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-trf-iterated-return-transport-scalar-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N9-6ae2a0ac4",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-6ae2a0ac4 (reviewer sub-agent of L); spot-checked: I read all five steps in full. The statement and stmt_deps are unchanged from base, and the delivery adds no new nodes. The coefficient category D^b_c(Y,E), the raw rationalization, is the same in the item, def-weil-weil-sheaf-complex, the calculus node and def-weil-local-frobenius-trace. The return hypothesis makes x̄ factor through F_{q^d}, so t from the normalization node is defined. Step 2: the composite v_{a,G^bN}∘U^a(v_b) equals v_{a+b} by the pseudofunctor coherence in lem-trf-integral-pullback-comparison-realization; I^{(a+b)}=I^{(a)}_{U^b}I^{(b)} by reassociation. Step 3: I^{(a)}-naturality applied to v_b gives t_{a+b}=t_{a,G^b}t_b, which I rechecked. Step 4: θ^{[a+b]}=θ^{[a]}G^aθ^{[b]} by induction from the definition's recursion; t-naturality applied to θ^{[b]}, in the right direction, gives R_dR_{rd}=R_{(r+1)d}, and induction on e≥1 gives R_d^e. Step 5: R_d is the definition's F_x composite up to compositor coherence. Batch-5 flag on lem-trf-iterated-return-transport-scalar-calculus: it is iterated point-transport naturality plus scalar bookkeeping. Its computed closure contains no trace-formula or Poincaré-duality theorem, only the generic sk-thm-trace-transport coherence nodes, which are already accepted. Neither assumption leaf provides it, so I accept it under the escape clause; both tool_uses are accepted. Not duplicated by lem-trf-iterated-weil-cocycle or lem-trf-point-transport-composition (both finite or strict-Weil), nor by lem-wf-common-stage-point-return (naturality only). The source, main-20261015 lem-fd-realified-kernel-real.proof.md Step 2 (lines 38-41), matches the route. No SGA citation."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RationalReturnBlockPower",
+  "declaration": "WeilConjectures.fdRationalReturnBlockPower",
+  "declarations": [
+   "WeilConjectures.fdRationalReturnIndex",
+   "WeilConjectures.fdRationalReturn_multiple",
+   "WeilConjectures.fdRationalReturn_blockPower",
+   "WeilConjectures.fdRationalReturnFibre",
+   "WeilConjectures.fdRationalReturnPullback",
+   "WeilConjectures.fdRationalReturnTransport",
+   "WeilConjectures.fdRationalReturnBlockComparison",
+   "WeilConjectures.fdRationalReturnOperator",
+   "WeilConjectures.fdRationalReturnBlockPower"
+  ],
+  "file": "lean/Sheaf/Paper/RationalReturnBlockPower.lean",
+  "statement": "theorem fdRationalReturnBlockPower (D : FiniteFieldDatum.{u}) (c : D.CoefficientDatum) (E : Padic.FiniteCoefficientFields c.l c.Qbar) (Y₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] [IsSeparated Y₀.hom] (C : IntegralComparisonSystem.{u} c.l) (_hC : IntegralComparisonRealizationCoherence c.l E.val E.val (AlgHom.id ℚ_[c.l] E.val) C) (d : ℕ) (z : Over.mk (𝟙 (Spec (.of D.k))) ⟶ D.geometricFiber Y₀) (w : localPositivePower (frobeniusPointIso D).hom d ≫ z.left = z.left ≫ localPositivePower (D.geometricFrobenius Y₀).hom d) : (∀ (N : sfRationalConstructibleCategory c.l E.val (D.geometricFiber Y₀).left) (r : ℕ), fdRationalReturnTransport D c.l c.different E.val Y₀ C d (r + 1) z.left w N = fdRationalReturnTransport D c.l c.different E.val Y₀ C d r z.left w N ≫ fdRationalReturnTransport D c.l c.different E.val Y₀ C d 0 z.left w ((fdRationalReturnPullback D c.l c.different E.val Y₀ (fdRationalReturnIndex d r)).obj N) ≫ (fdRationalReturnFibre D c.l c.different E.val Y₀ z.left).map (fdRationalReturnBlockComparison D c.l c.different E.val Y₀ C d r N).inv) ∧ (∀ (M : sfWeilComplex D c.l c.different Y₀ E.val) (r : ℕ), fdRationalReturnOperator D c.l c.different E.val Y₀ C d (r + 1) z.left w M = fdRationalReturnOperator D c.l c.different E.val Y₀ C d 0 z.left w M * fdRationalReturnOperator D c.l c.different E.val Y₀ C d r z.left w M) ∧ (∀ (M : sfWeilComplex D c.l c.different Y₀ E.val) (e : ℕ), fdRationalReturnOperator D c.l c.different E.val Y₀ C d e z.left w M = fdRationalReturnOperator D c.l c.different E.val Y₀ C d 0 z.left w M ^ (e + 1)) ∧ (∀ (M : sfWeilComplex D c.l c.different Y₀ E.val) (x : {x : Y₀.left // x ∈ closedPoints Y₀.left}) (ι : Y₀.left.residueField x.val →+* D.k) (hι : ι.comp (Y₀.hom.residueFieldAlgebraMap x.val) = algebraMap D.k₀ D.k), localClosedPointDegree D Y₀ x = d + 1 → z.left = localClosedPoint D Y₀ x ι hι → ∀ j : ℤ, HEq ((DerivedCategory.coefficientFdCohomology E.val j).map (fdRationalReturnOperator D c.l c.different E.val Y₀ C d 0 z.left w M)) (localClosedFrobeniusCohomology c.l E.val D c.different Y₀ M x ι hι j))",
+  "branch": "sheaf-dag",
+  "by": "Q13",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Successor period d+1 and block count r+1 cover precisely the positive indices. Helpers specialize the recorded normalized rational transport and point fibre, construct the specified block-composition comparison, and compose transport with the recorded Weil iterate. The main conjunction contains the transport block law, return recurrence, power law and every-degree closed-point Frobenius identification. No stable integral Weil lattice or finite Tor-amplitude hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-855e6db6a",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Snapshot node changes only lean; lean.statement is verbatim the file signature. Clauses match the node in positive indexing (periods d+1, blocks r+1/e+1): t_{r+2}=t_{r+1}≫t_1(G^{(r+1)}N)≫J(C-compositor.inv after the scheme-power eqToIso, direction (h≫k)^*≅h^*k^*); R_1*R_{r+1} is R_d∘R_{rd} under End mul; R_1^(e+1); closed point: ∀ x,ι,hι, degree=d+1, z.left=localClosedPoint ⇒ ∀ j:ℤ HEq with localClosedFrobeniusCohomology (degree-1=d, instances agree). Hypotheses match (separated, k-point z in the landed calculus-node convention, ∀C with hC); no lattice/Tor assumption; edge cases d=0, r=0, e=0, j<0, zero complex and empty Y₀ covered. Defs are real specialisations of recorded declarations; the two sorried scheme-power helpers are true; docstrings have source/blueprint tags; report sections present. No compile (no file changed); source file not in local clone, relied on node record and stage-1 quote. Advisory (dependency interface, not this delivery): rationalTransport/block comparison use C's compositor, while localWeilIterate and localFrobeniusOperator use integralPullbackComposition.choose; conjuncts 2-4 need a stage-3 agreement lemma, which the DAG prose (normalization node: 'are the choices of') and lim^1=0 support."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261025T161951-L-167636",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.fdRationalReturnBlockPower",
+   "WeilConjectures.fdRationalReturn_blockPower",
+   "WeilConjectures.fdRationalReturn_multiple"
+  ],
+  "sorry_after": [
+   "WeilConjectures.fdRationalReturnBlockPower"
+  ]
+ }
+}

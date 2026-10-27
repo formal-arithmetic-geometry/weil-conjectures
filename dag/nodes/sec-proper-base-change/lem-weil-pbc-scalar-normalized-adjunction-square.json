@@ -1,0 +1,226 @@
+{
+ "id": "lem-weil-pbc-scalar-normalized-adjunction-square",
+ "kind": "statement",
+ "title": "Scalar-unit normalized squares preserve horizontal adjunctions",
+ "statement": "Let $\\mathcal C,\\mathcal D,\\mathcal C',\\mathcal D'$ be categories. Specify adjunctions $P:\\mathcal C\\rightleftarrows\\mathcal D:Q$ and $P':\\mathcal C'\\rightleftarrows\\mathcal D':Q'$ with units $\\eta,\\eta'$ and counits $\\epsilon,\\epsilon'$. Let $F_C:\\mathcal C\\rightleftarrows\\mathcal C':r_C$ and $F_D:\\mathcal D\\rightleftarrows\\mathcal D':r_D$ be adjunctions with units $j_C,j_D$. Let $\\mathcal C_0\\subseteq\\mathcal C$ and $\\mathcal D_0\\subseteq\\mathcal D$ be full subcategories such that $P(\\mathcal C_0)\\subseteq\\mathcal D_0$ and $Q(\\mathcal D_0)\\subseteq\\mathcal C_0$. Specify ambient natural isomorphisms\n$$b:r_DP'\\xrightarrow{\\sim}Pr_C,\\qquad d:r_CQ'\\xrightarrow{\\sim}Qr_D,$$\nand a natural isomorphism $\\alpha:F_DP|_{\\mathcal C_0}\\cong P'F_C|_{\\mathcal C_0}$ and natural transformation $\\beta:F_CQ|_{\\mathcal D_0}\\to Q'F_D|_{\\mathcal D_0}$. Suppose that\n$$r_D(\\alpha_N)j_{D,PN}=b_{F_CN}^{-1}P(j_{C,N})\\quad(N\\in\\mathcal C_0),$$\n$$r_C(\\beta_M)j_{C,QM}=d_{F_DM}^{-1}Q(j_{D,M})\\quad(M\\in\\mathcal D_0),$$\n$$r_D(\\epsilon'_Z)b_{Q'Z}^{-1}=\\epsilon_{r_DZ}P(d_Z)\\quad(Z\\in\\mathcal D').$$\nThen for every $M\\in\\mathcal D_0$ both maps $F_D(PQM)\\to F_DM$ in the counit comparison have the same $F_D\\dashv r_D$ transpose, namely\n$$r_D\\bigl(\\epsilon'_{F_DM}P'(\\beta_M)\\alpha_{QM}\\bigr)j_{D,PQM}=j_{D,M}\\epsilon_M=r_D\\bigl(F_D(\\epsilon_M)\\bigr)j_{D,PQM}.$$\nConsequently\n$$F_D(\\epsilon_M)=\\epsilon'_{F_DM}P'(\\beta_M)\\alpha_{QM}.$$\nFor every $N\\in\\mathcal C_0$, the $P'\\dashv Q'$ transpose of $Q'(\\alpha_N)\\beta_{PN}F_C(\\eta_N)$ is $1_{P'F_CN}$; hence\n$$Q'(\\alpha_N)\\beta_{PN}F_C(\\eta_N)=\\eta'_{F_CN}.$$\nEquivalently $\\beta$ is the mate of $\\alpha^{-1}$ for the restricted horizontal adjunctions, in the convention of [def-weil-pbc-adjunction-mate]. No faithfulness of $F_D$, $r_D$, or the inclusion of realizable objects in $\\mathcal D'$ is assumed. Composition is right to left.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15 (ambient adjunction setting); agent extraction from the seven-step scalar-adjunction calculation of lem-weil-pbc-realization-adjoint-comparisons"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "stmt_deps": [
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof": [
+  {
+   "text": "For each specified adjunction $L\\dashv R$, use the Hom bijection $\\Phi_{X,Y}(f)=R(f)\\eta_X$ and its inverse $\\Phi^{-1}_{X,Y}(g)=\\epsilon_Y L(g)$ from [lem-weil-pbc-adjunction-of-natural-bijection]. Thus equality of these transposes implies equality of arrows. The containment assumptions on $P,Q$ allow restriction to the two full subcategories: the same Hom sets, units and counits give the restricted adjunction.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and the following paragraph (equivalent adjunct formulas); explicit normalized-square calculation by N9"
+   }
+  },
+  {
+   "text": "Fix $M\\in\\mathcal D_0$; then $QM\\in\\mathcal C_0$, so the first normalization applies at $QM$. Put $Z=F_DM$ and $c_M=\\epsilon'_Z P'(\\beta_M)\\alpha_{QM}$. Its vertical transpose is, by that normalization and naturality of $b$ at $\\beta_M:F_CQM\\to Q'Z$,\n$$\\begin{aligned}r_D(c_M)j_{D,PQM}&=r_D(\\epsilon'_Z)r_D(P'\\beta_M)b_{F_CQM}^{-1}P(j_{C,QM})\\\\&=r_D(\\epsilon'_Z)b_{Q'Z}^{-1}P(r_C\\beta_M)P(j_{C,QM}).\\end{aligned}$$",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and the following paragraph (equivalent adjunct formulas); explicit normalized-square calculation by N9"
+   }
+  },
+  {
+   "text": "Apply the third hypothesis at the ambient object $Z=F_DM$, and then the second at $M$. The last expression becomes\n$$\\epsilon_{r_DZ}P(d_Z)P(r_C\\beta_M)P(j_{C,QM})=\\epsilon_{r_DZ}P(Q(j_{D,M}))=j_{D,M}\\epsilon_M.$$\nThe last equality is naturality of $\\epsilon$ at $j_{D,M}:M\\to r_DF_DM$. Naturality of $j_D$ at $\\epsilon_M$ also gives $r_D(F_D\\epsilon_M)j_{D,PQM}=j_{D,M}\\epsilon_M$. These are exactly the asserted two transpose formulas; no membership of $r_DF_DM$ in $\\mathcal D_0$ was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and the following paragraph (equivalent adjunct formulas); explicit normalized-square calculation by N9"
+   }
+  },
+  {
+   "text": "Injectivity of the $F_D\\dashv r_D$ Hom bijection in [lem-weil-pbc-adjunction-of-natural-bijection] now gives $c_M=F_D(\\epsilon_M)$. Since $\\alpha_{QM}$ is invertible, equivalently\n$$\\epsilon'_{F_DM}P'(\\beta_M)=F_D(\\epsilon_M)\\alpha_{QM}^{-1}.$$",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and the following paragraph (equivalent adjunct formulas); explicit normalized-square calculation by N9"
+   }
+  },
+  {
+   "text": "First identify the mate, using step 4: let a be the restriction of the unprimed adjunction to the full subcategories. Mathlib's map_restrictFullyFaithful_counit_app identifies its counit after inclusion with the ambient counit. For each M, mateEquiv_counit says that the primed inverse transpose of the mate of alpha inverse is alpha inverse at QM followed by F_D(epsilon_M). Substitute step 4 and cancel alpha inverse followed by alpha. Injectivity of the primed inverse Hom bijection identifies each component with beta_M; natural-transformation extensionality gives the mate identity.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and the following paragraph (equivalent adjunct formulas); explicit normalized-square calculation by N9"
+   }
+  },
+  {
+   "text": "For N in C_0, map_restrictFullyFaithful_unit_app identifies the restricted unit after inclusion with eta_N. The unit_mateEquiv identity, substituting the mate equality just proved, gives F_C(eta_N) followed by beta_PN equal to eta' at F_CN followed by Q'(alpha inverse at N). Postcompose with Q'(alpha at N), use functoriality and cancel alpha inverse followed by alpha. This proves the asserted unit equality. Its primed inverse transpose is the identity by the left triangle identity (equivalently the inverse Hom bijection sends the unit to the identity).",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and the following paragraph (equivalent adjunct formulas); explicit normalized-square calculation by N9"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 0037, definition-adjoint and following paragraph; explicit square calculation, in the ambient setting of Bhatt–Scholze Remark 6.8.15; Lean implementation uses the equivalent Mathlib mate unit identity after the counit calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Given two scalar extension restriction adjunctions and a compatible pullback pushforward restriction square, scalar unit normalized comparisons preserve the horizontal adjunction unit and counit",
+   "results": "8 hits: ModuleCat.homEquiv_extendScalarsComp, ModuleCat.ExtendRestrictScalarsAdj.unit_app, ModuleCat.ExtendRestrictScalarsAdj.unit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, ModuleCat.homEquiv_extendScalarsId, ModuleCat.ExtendRestrictScalarsAdj.counit",
+   "date": "2026-10-22",
+   "verdict": "no match: the mate identities apply to a transformation already known to be the mate; they do not establish the required mate equality from the two scalar-unit normalization hypotheses and the ambient restricted-counit identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"mate\"",
+   "results": "12 hits: CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-22",
+   "verdict": "no match: the mate identities apply to a transformation already known to be the mate; they do not establish the required mate equality from the two scalar-unit normalization hypotheses and the ambient restricted-counit identity."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_counit|unit_mateEquiv|conjugateEquiv.*comp",
+   "results": "12 hits: Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the mate identities apply to a transformation already known to be the mate; they do not establish the required mate equality from the two scalar-unit normalization hypotheses and the ambient restricted-counit identity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjunction mate square with left adjoints scalar extension characterized by restriction transposes of the two comparison maps",
+   "results": "8 hits: ModuleCat.extendRestrictScalarsAdj, ModuleCat.ExtendRestrictScalarsAdj.homEquiv, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, ModuleCat.instIsLeftAdjointRestrictScalars, ModuleCat.restrictCoextendScalarsAdj, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: the mate identities apply to a transformation already known to be the mate; they do not establish the required mate equality from the two scalar-unit normalization hypotheses and the ambient restricted-counit identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two commuting adjunction squares whose scalar extension comparisons are normalized by the vertical units have equal horizontal counit transposes",
+   "results": "8 hits: CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.Adjunction.CommShift.compatibilityCounit_of_compatibilityUnit, CategoryTheory.Adjunction.CommShift.compatibilityCounit_left, CategoryTheory.Adjunction.Triple.leftToRight_eq_counits, CategoryTheory.CommSq.left_adjoint, CategoryTheory.CommSq.right_adjoint, CategoryTheory.conjugateEquiv_counit",
+   "date": "2026-10-22",
+   "verdict": "no match: the mate identities apply to a transformation already known to be the mate; they do not establish the required mate equality from the two scalar-unit normalization hypotheses and the ambient restricted-counit identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"mate\"",
+   "results": "CategoryTheory.mateEquiv; CategoryTheory.mateEquiv_counit; CategoryTheory.mateEquiv_counit_symm; CategoryTheory.unit_mateEquiv; CategoryTheory.unit_mateEquiv_symm; CategoryTheory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete normalized-square statement: general Hom bijections, mate identities, adjunction uniqueness or commuting individual arrows; reused the existing Hom-bijection leaf for the needed formulas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction squares with natural isomorphisms between right adjoint composites and scalar unit normalized left comparisons preserve horizontal units and counits",
+   "results": "CategoryTheory.CommSq.right_adjoint; CategoryTheory.Adjunction.leftAdjointCompIso_comp_id; CategoryTheory.Adjunction.leftAdjointCompIso_hom; CategoryTheory.Adjunction.leftAdjointCompIso_hom_app; CategoryTheory.Adjunction.leftAdjointCompIso_id_comp; CategoryTheory.CommSq.left_adjoint; CategoryTheory.Adjunction.Triple.rightToLeft_app_adj₂_unit_app; CategoryTheory.Adjunction.whiskerLeftLCounitIsoOfIsIsoUnit",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete normalized-square statement: general Hom bijections, mate identities, adjunction uniqueness or commuting individual arrows; reused the existing Hom-bijection leaf for the needed formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_counit|unit_mateEquiv|homEquiv_unit|left_triangle_components",
+   "results": "Mathlib/CategoryTheory/Adjunction/Comma.lean; Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Restrict.lean; Mathlib/CategoryTheory/Adjunction/Triple.lean; Mathlib/CategoryTheory/Adjunction/Triple.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean; subdirectory CategoryTheory/Adjunction",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete normalized-square statement: general Hom bijections, mate identities, adjunction uniqueness or commuting individual arrows; reused the existing Hom-bijection leaf for the needed formulas."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjunction hom bijection sends f to right adjoint map f composed with unit and inverse uses counit triangle identity",
+   "results": "CategoryTheory.Adjunction.homEquiv; CategoryTheory.Adjunction.homEquiv_apply_eq; CategoryTheory.Adjunction.CoreHomEquivUnitCounit.mk; CategoryTheory.Adjunction.adjunctionOfEquivRight_counit_app; CategoryTheory.Adjunction.CoreHomEquivUnitCounit.homEquiv_counit; CategoryTheory.Adjunction.mkOfHomEquiv_counit_app; CategoryTheory.Adjunction.rightAdjointOfEquiv; CategoryTheory.Adjunction.homEquiv_apply",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete normalized-square statement: general Hom bijections, mate identities, adjunction uniqueness or commuting individual arrows; reused the existing Hom-bijection leaf for the needed formulas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equality of natural transformations proved by taking adjoints using units and counits of two adjunctions",
+   "results": "CategoryTheory.Adjunction.ext_iff; CategoryTheory.Adjunction.ext; CategoryTheory.Adjunction.homEquiv_leftAdjointUniq_hom_app; CategoryTheory.Adjunction.leftAdjointUniq_trans_app_assoc; CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app_assoc; CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app; CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_assoc; CategoryTheory.Adjunction.leftAdjointUniq_trans_app",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete normalized-square statement: general Hom bijections, mate identities, adjunction uniqueness or commuting individual arrows; reused the existing Hom-bijection leaf for the needed formulas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-realization-adjoint-comparisons",
+  "date": "2026-10-22",
+  "group": "Q108"
+ },
+ "blueprint": {
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof paragraph: choose an integral lattice and rationalize; realization adjunction subargument, old steps 5–6: scalar-adjunction counit transpose calculation and horizontal unit triangle calculation",
+   "via": [
+    "lem-weil-pbc-realization-adjoint-comparisons",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-pbc-scalar-normalized-adjunction-square",
+  "worker": "stage1",
+  "summary": "Explicit counit transpose calculation using the two unit normalizations, naturality of b and the ambient counit equation. Derive the unit transpose by naturality of alpha and the unprimed triangle. Reuse the existing Hom-bijection and mate leaves; no new nodes, no statement change, no faithfulness or realizability assumption.",
+  "blueprint": "thm-weil-pbc-finite-extension proof paragraph: integral lattice followed by rationalization; this item supplies the formal scalar-adjunction compatibility subargument extracted through realization-adjoint-comparisons, old steps 5–6."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-N9-663a4c506",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-663a4c506 (reviewer sub-agent of L); spot-checked: I read the item in full and recomputed all six steps. Statement typing: b, d, α, β and the three hypotheses are all well-typed. Step 2 uses Hyp1 at QM∈C_0, then naturality of b⁻¹ at β_M. Step 3 uses Hyp3 at the ambient Z=F_DM, then Hyp2 and naturality of ε; the other side is naturality of j_D at ε_M. Step 4 is injectivity of the F_D⊣r_D transpose. Step 5 uses naturality of ε', step 4 at PN∈D_0, naturality of α at η_N (N and QPN in C_0) and the unprimed triangle identity, so t_N=1 and u_N=η'. Step 6 matches the def-weil-pbc-adjunction-mate convention with α̃=α⁻¹: P'F_C⇒F_DP and mate F_CQ⇒Q'F_D, whose transpose equation is step 4. The cited lem-weil-pbc-adjunction-of-natural-bijection (mathlib) states the transpose formulas and triangle identities, so C3 and C4 are fine. The parent realization-adjoint-comparisons step 3 applies the item with indices and directions that match the three equations of lem-weil-pbc-realization-restriction-normalizations exactly; that node's Hyp3 holds for every Z∈D(E_T). Small cases: identities; empty subcategories; one-object scalar case, where Hyp3 forces d=b⁻¹ and is needed. β is not assumed invertible. Sources: Stacks 0037 categories.tex lines 3343-3383 and BS Remark 6.8.15 (ambient setting only, proof correctly marked agent-written) both confirmed. No SGA. No new nodes. Nearest DAG candidates (reflected-adjunction-coefficient-squares, fix-proetale-scalar-mate-normalization) are not duplicates. Mathlib searches are real and their verdicts correct. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ScalarNormalizedAdjunctionSquare",
+  "declaration": "CategoryTheory.Adjunction.scalarNormalizedAdjunctionSquare",
+  "file": "lean/Sheaf/CategoryTheory/ScalarNormalizedAdjunctionSquare.lean",
+  "statement": "theorem scalarNormalizedAdjunctionSquare {C : Type u₁} {D : Type u₂} {C' : Type u₃} {D' : Type u₄} [Category.{v₁} C] [Category.{v₂} D] [Category.{v₃} C'] [Category.{v₄} D'] {P : C ⥤ D} {Q : D ⥤ C} {P' : C' ⥤ D'} {Q' : D' ⥤ C'} (adj : P ⊣ Q) (adj' : P' ⊣ Q') {FC : C ⥤ C'} {rC : C' ⥤ C} {FD : D ⥤ D'} {rD : D' ⥤ D} (scalarC : FC ⊣ rC) (scalarD : FD ⊣ rD) (C₀ : ObjectProperty C) (D₀ : ObjectProperty D) (hP : ∀ N : C₀.FullSubcategory, D₀ (P.obj N.obj)) (hQ : ∀ M : D₀.FullSubcategory, C₀ (Q.obj M.obj)) (b : P' ⋙ rD ≅ rC ⋙ P) (d : Q' ⋙ rC ≅ rD ⋙ Q) (α : C₀.ι ⋙ P ⋙ FD ≅ C₀.ι ⋙ FC ⋙ P') (β : D₀.ι ⋙ Q ⋙ FC ⟶ D₀.ι ⋙ FD ⋙ Q') (hα : ∀ N : C₀.FullSubcategory, scalarD.unit.app (P.obj N.obj) ≫ rD.map (α.hom.app N) = P.map (scalarC.unit.app N.obj) ≫ b.inv.app (FC.obj N.obj)) (hβ : ∀ M : D₀.FullSubcategory, scalarC.unit.app (Q.obj M.obj) ≫ rC.map (β.app M) = Q.map (scalarD.unit.app M.obj) ≫ d.inv.app (FD.obj M.obj)) (hε : ∀ Z : D', b.inv.app (Q'.obj Z) ≫ rD.map (adj'.counit.app Z) = P.map (d.hom.app Z) ≫ adj.counit.app (rD.obj Z)) : (∀ M : D₀.FullSubcategory, (scalarD.unit.app (P.obj (Q.obj M.obj)) ≫ rD.map (α.hom.app ⟨Q.obj M.obj, hQ M⟩ ≫ P'.map (β.app M) ≫ adj'.counit.app (FD.obj M.obj)) = adj.counit.app M.obj ≫ scalarD.unit.app M.obj) ∧ (adj.counit.app M.obj ≫ scalarD.unit.app M.obj = scalarD.unit.app (P.obj (Q.obj M.obj)) ≫ rD.map (FD.map (adj.counit.app M.obj))) ∧ (FD.map (adj.counit.app M.obj) = α.hom.app ⟨Q.obj M.obj, hQ M⟩ ≫ P'.map (β.app M) ≫ adj'.counit.app (FD.obj M.obj))) ∧ (∀ N : C₀.FullSubcategory, ((adj'.homEquiv (FC.obj N.obj) (P'.obj (FC.obj N.obj))).symm (FC.map (adj.unit.app N.obj) ≫ β.app ⟨P.obj N.obj, hP N⟩ ≫ Q'.map (α.hom.app N)) = 𝟙 (P'.obj (FC.obj N.obj))) ∧ (FC.map (adj.unit.app N.obj) ≫ β.app ⟨P.obj N.obj, hP N⟩ ≫ Q'.map (α.hom.app N) = adj'.unit.app (FC.obj N.obj))) ∧ (mateEquiv (G := C₀.ι ⋙ FC) (H := D₀.ι ⋙ FD) (adj.restrictFullyFaithful C₀.fullyFaithfulι D₀.fullyFaithfulι (L := D₀.lift (C₀.ι ⋙ P) hP) (R := C₀.lift (D₀.ι ⋙ Q) hQ) (Iso.refl _) (Iso.refl _)) adj' (TwoSquare.mk _ _ _ _ α.inv)).natTrans = β",
+  "branch": "newtargets-dag",
+  "by": "Q114",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8e2d8c3d1",
+  "group": "Q114",
+  "result": "pass",
+  "note": "Clause-by-clause check: hα, hβ and hε match the node's three normalizations under right-to-left vs ≫ order, with types verified. The counit conclusion has three conjuncts with QM=⟨Q.obj M.obj,hQ M⟩. The unit conclusion uses the homEquiv.symm transpose equal to 𝟙 and then η'. The mate clause is mateEquiv of α.inv over restrictFullyFaithful(Iso.refl,Iso.refl); by map_restrictFullyFaithful_counit_app the restricted counit is ε, and the convention matches def-weil-pbc-adjunction-mate (transpose F_D(ε_M)α⁻¹_QM = step 4). Steps 2-6 were recomputed and the theorem is true. Universes are independent, β is not assumed invertible, and there is no faithfulness or extra instances. Edge cases: empty subcategories, full subcategory = whole category, r_D F_D M ∉ D₀. NormalizedAdjunctionSquareTranspose is a different statement, not a duplicate. lean.statement is verbatim. The live node differs only by the lean field. stmt_deps are complete, docstrings carry the source places, blueprint id and six steps, the proof is sorry only, and the report sections are present. No files changed and no compile run."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261023T090706-L-693452",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

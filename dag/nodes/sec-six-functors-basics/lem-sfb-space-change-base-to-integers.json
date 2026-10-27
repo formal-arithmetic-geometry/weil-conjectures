@@ -1,0 +1,255 @@
+{
+ "id": "lem-sfb-space-change-base-to-integers",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D17 (lemma-deform-spaces), split thickening Y=Spec K in Y_M; trivial origin and linear operations as in quot.tex Tag 0D1K (lemma-spaces-tangent-space), and artin.tex sections tangent-spaces and inf. Supporting step of Tag 0D17: Tags 05ZS (lemma-thickening-equivalence), 05ZT (lemma-first-order-thickening), and 05ZN (lemma-first-order-thickening-maps). Change of base scheme in Tag 05ZT: 'We first handle the case B = S = Spec(Z)', the construction of X' as an algebraic space over Z, and its morphism to B; also implicit in 05ZN when Tag 04KL (stated over Spec(Z)) is applied to spaces over S.",
+   "via": [
+    "lem-sfb-space-square-zero-ringed-realization",
+    "lem-sfb-flat-space-split-deformation-ext",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "kind": "statement",
+ "title": "Algebraic spaces over S as algebraic spaces over a smaller base with a map to S",
+ "statement": "Let $g:S\\to S'$ be a morphism of schemes [def-pc-scheme], in the universes of [def-weil-size-convention]; the case used most is $S'=\\operatorname{Spec}\\mathbf Z$. For an algebraic space $X$ over $S$ [def-trf-algebraic-space] define the sheaf $j_!X$ on the big fppf site $(\\mathit{Sch}/S')_{fppf}$ [def-pc-fppf-site] by $j_!X(T)=\\coprod_{\\varphi:T\\to S}X(T\\xrightarrow{\\varphi}S)$ for $S'$-schemes $T$, with its evident map $j_!X\\to h_S$. Then the following hold. (1) $j_!X$ is an algebraic space over $S'$; if $U$ is a scheme over $S$ with a surjective etale map $h_U\\to X$, then $U$, viewed as a scheme over $S'$, has a surjective etale map to $j_!X$; and for every diagram $X\\to Z\\leftarrow Y$ of algebraic spaces over $S$ [lem-trf-space-fibre-products-etale-covers] the canonical map $j_!(X\\times_ZY)\\to j_!X\\times_{j_!Z}j_!Y$ is an isomorphism. (2) The functor $X\\mapsto(j_!X,\\,j_!X\\to S)$ is an equivalence from the category of algebraic spaces over $S$ to the category of pairs $(F,F\\to S)$ consisting of an algebraic space $F$ over $S'$ and a morphism $F\\to S$ of algebraic spaces over $S'$; morphisms of pairs are morphisms of algebraic spaces over $S'$ commuting with the maps to $S$. (3) Viewing schemes over $S$ as schemes over $S'$ identifies the small etale site of $X$ with that of $j_!X$ (objects, morphisms and coverings) and identifies their structure sheaves. For a morphism $h:X\\to Y$ of algebraic spaces over $S$, these identifications carry the functor $V\\mapsto V\\times_YX$ on etale scheme objects over $Y$ to the same functor for $j_!h$. No finiteness or separation hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 03I4 (lemma-change-base-scheme), parts (1)-(3); Tag 03I5 (definition-base-change), (2) and the paragraph after it; Tag 04SG (lemma-category-of-spaces-over-smaller-base-scheme). Identification of the small etale ringed sites: spaces-properties.tex Tag 04KK (lemma-2-morphism), first paragraph of the proof."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "def-pc-fppf-site",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof": [
+  {
+   "text": "Work in one common big fppf site containing both bases, with its small skeleton in the larger universe. The category of schemes over $S$ identifies with the slice of schemes over $S'$ at $S$: an object is a map $T\\to S$, and morphisms and coverings are unchanged. The localized-sheaf equivalence therefore applies. Here $h_S$ is already a sheaf, by the scheme-as-algebraic-space node. Moreover its extension presheaf is already a sheaf: on a covering $\\{T_i\\to T\\}$ a matching family $(\\varphi_i,x_i)$ first glues uniquely to $\\varphi:T\\to S$ because $h_S$ is a sheaf, and then the $x_i$ glue uniquely by the sheaf condition for $X$ on the covering of $(T,\\varphi)$. Thus the displayed formula in the statement is the extension sheaf itself. The cited equivalence identifies all sheaves over $S$ with pairs $(F,p:F\\to h_S)$; its inverse is $G(T,\\varphi)=\\{x\\in F(T):p(x)=\\varphi\\}$.",
+   "uses": [
+    "def-weil-size-convention",
+    "def-pc-fppf-site",
+    "def-trf-scheme-algebraic-space",
+    "lem-weil-pbc-localized-sheaves-over-representable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00Y1 (lemma-essential-image-j-shriek); Tag 03HT (lemma-describe-j-shriek-good-site), explicit gluing proof; spaces.tex Tag 03I4"
+   }
+  },
+  {
+   "text": "For a scheme $U/S$, the map $(\\varphi,a)\\mapsto a$ identifies $j_!h_U(T)$ with $\\operatorname{Mor}_{S'}(T,U)$: the inverse equips $a:T\\to U$ with the forced structure map $\\varphi=(U\\to S)\\circ a$. For a diagram of sheaves $A\\to C\\leftarrow B$ on $S$, an element of $j_!A(T)\\times_{j_!C(T)}j_!B(T)$ is exactly a pair $((\\varphi,a),(\\varphi,b))$ with equal images in $C(T,\\varphi)$. It corresponds to $(\\varphi,(a,b))$ in $j_!(A\\times_CB)(T)$. These inverse formulas commute with restrictions and projections. Sectionwise computation of sheaf limits makes this the asserted canonical fibre-product isomorphism. In particular it preserves the given diagram, not products over an unrelated terminal base.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03HU (lemma-describe-j-shriek-representable); Tag 04BB (lemma-j-shriek-commutes-equalizers-fibre-products), via the explicit formula; spaces.tex Tag 03I4"
+   }
+  },
+  {
+   "text": "We verify algebraicity directly from its definition. For two schemes $A,B$ with maps to $j_!X$, their composites with $j_!X\\to h_S$ equip them with $S$-structures and maps to $X$. Their fibre sheaf over $j_!X$ is represented by the same scheme $P=A\\times_X B$ as over $S$: on any $S'$-test scheme equality of the two images forces the induced maps to $S$ to agree, and the remaining equality is exactly equality in $X$. The scheme $P$ exists since it is the pullback of the representable diagonal of $X$ along $A\\times_S B\\to X\\times X$. To test the diagonal of $j_!X$ on an arbitrary $T\\to j_!X\\times j_!X$, use two copies $A,B$ of $T$ with their possibly different induced $S$-structures. Its pullback is $T\\times_{T\\times_{S'}T}P$, where $T$ maps diagonally to $T\\times_{S'}T$. Scheme fibre products show this is representable; no closedness of a diagonal is needed. Finally let $U\\to X$ be the given etale surjective scheme atlas. A map $T\\to j_!X$ determines a single $S$-structure on $T$, and $T\\times_{j_!X}U=T\\times_XU$ with the same projection to $T$. This is a scheme and its projection is etale and surjective by the atlas hypothesis. Thus $j_!X$ is algebraic and this particular $U$ remains an atlas. Together with step 2 this proves (1).",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 025Y (definition-algebraic-space); Tag 03I4 (lemma-change-base-scheme), part (3), with the representability tests written out"
+   }
+  },
+  {
+   "text": "Conversely let $F$ be an algebraic space over $S'$ with a map $p:F\\to h_S$, and take its inverse sheaf $G$ from step 1. For a scheme $T/S$ and two sections of $G(T)$, equality is exactly equality of their images in $F(T)$; consequently the scheme representing their equality subfunctor (the pullback of the diagonal of $F$) also represents the pullback of the diagonal of $G$. It inherits its map to $S$ from $T$. Hence the diagonal of $G$ is representable. Choose an etale surjective atlas $U\\to F$. The composite $h_U\\to F\\to h_S$ gives $U$ an $S$-structure and a map $h_{U/S}\\to G$ (evaluate the composite on the identity of $U$; naturality forces every other component). For each $T/S\\to G$, the sheaf $T\\times_GU$ is exactly the fibre product $T\\times_FU$ over $S'$: equality of the two sections in $F$ already forces equality of their maps to $S$. The latter is a scheme etale and surjective over $T$. Thus $G$ is algebraic. Steps 3 and 4 show that the equivalence of step 1 restricts to precisely the two full subcategories in (2); its inverse maps, unit and counit restrict as well. This proves all of (2).",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-trf-scheme-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 04SG (lemma-category-of-spaces-over-smaller-base-scheme), restriction of the sheaf equivalence; explicit diagonal and atlas verification"
+   }
+  },
+  {
+   "text": "If $V/S\\to X$ is a scheme object, its image $V/S'\\to j_!X$ is etale exactly when the original map is: for every scheme test $T\\to j_!X$, step 3 identifies its pullback projection with the original test on the uniquely induced $S$-scheme $T$. Conversely every $S$-test occurs this way. An arbitrary scheme object $V/S'\\to j_!X$ acquires its unique $S$-structure by composition with $h_S$ and hence comes from an object over $X$; the etale test just given works in both directions. Maps between these objects over $j_!X$ automatically commute with their maps to $S$, so they are precisely the maps over $X$. Both constructions act as the identity on the underlying scheme maps. Coverings in these small sites are jointly surjective etale families of those same scheme maps, so coverings agree. The formula $\\mathcal O(V)=\\Gamma(V,\\mathcal O_V)$ is identical, and on a scheme arrow its restriction is the very same pullback on regular functions. This identifies the sites with their structure sheaves, as asserted in (3).",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 04KK (lemma-2-morphism), first paragraph of proof; spaces.tex Tag 03I5 (definition-base-change) and the test calculation of Tag 03I6 (lemma-viewed-as-properties)"
+   }
+  },
+  {
+   "text": "For $h:X\\to Y$ over $S$ and an etale scheme $V\\to Y$, the object $V\\times_YX$ is the sheaf fibre product over $S$; it need not be a scheme (for $V=Y=S$ it is $X$ itself), so the comparison is made through its projection to $X$. This projection is representable and etale: for a scheme $T\\to X$ the fibre $T\\times_X(V\\times_YX)=T\\times_YV$ is a scheme etale over $T$, because $V\\to Y$ is representable etale [def-trf-algebraic-space]. Step 2 gives $j_!(V\\times_YX)\\simeq V\\times_{j_!Y}j_!X$, compatibly with both projections and natural in arrows of $V$, since the pair formulas commute with restriction. For a scheme test $T\\to j_!X$, with its uniquely induced $S$-structure, the fibre of $V\\times_{j_!Y}j_!X\\to j_!X$ is $T\\times_{j_!Y}V=T\\times_YV$: test sections are pairs with equal images in $j_!Y$, and that equality already includes equality of the maps to $S$. So both projections have the same scheme tests with the same projections to $T$. When $V\\times_YX$ is a scheme (an object of $X_{\\mathrm{et}}$), its image under step 5 is $V\\times_{j_!Y}j_!X$, by the representable formula of step 2. Thus the base-change functors agree on objects and on morphisms, and their maps on regular functions are the same scheme pullbacks. No assertion above used finiteness or separation, which proves the final clause.",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 04KK (lemma-2-morphism), first paragraph, with functoriality made explicit using spaces.tex Tag 03I4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention",
+  "def-pc-fppf-site",
+  "def-trf-scheme-algebraic-space",
+  "lem-weil-pbc-localized-sheaves-over-representable",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+  "def-trf-algebraic-space",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Explicit scheme-test elaboration of Tags 03I4, 04SG, and 03I6, using sites.tex Tag 00Y1 and spaces-properties.tex Tag 04KK; the direct diagonal checks replace the source presentation argument below the fixed unit route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rg -il \"algebraic.?space\" Mathlib",
+   "results": "none",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib has no algebraic spaces, hence no change of base scheme for them."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"def (overEquiv|iteratedSliceEquiv)\" Mathlib/CategoryTheory/Comma/Over/Basic.lean Mathlib/CategoryTheory/Sites/Over.lean; rg -ln \"j_!|changeBase|baseChangeScheme|Spaces\" Mathlib/AlgebraicGeometry",
+   "results": "Over/Basic.lean:382 CategoryTheory.Over.iteratedSliceEquiv (Over f ≌ Over f.left); Sites/Over.lean:60,95 overEquiv (presieves and sieves); AlgebraicGeometry/OpenImmersion.lean (locally ringed spaces only).",
+   "date": "2026-10-23",
+   "verdict": "no match: iteratedSliceEquiv is the categorical slice-of-slice equivalence only; it does not show that the j_! sheaf of an algebraic space is algebraic nor that the essential image consists of algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Over.iteratedSliceEquiv",
+   "results": "CategoryTheory.Over.iteratedSliceEquiv, CategoryTheory.Over.iteratedSliceEquiv_functor, CategoryTheory.Over.iteratedSliceEquiv_inverse, CategoryTheory.Over.iteratedSliceEquiv_counitIso, CategoryTheory.Over.iteratedSliceEquiv_unitIso, CategoryTheory.MonoOver.slice, CategoryTheory.instIsDenseSubsiteOverLeftOverInverseIteratedSliceEquiv, CategoryTheory.toOverIteratedSliceForwardIsoPullback_hom_app_left",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes, sieves, or general site equivalences, not algebraic-space base forgetting."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic.space|changeBaseScheme",
+   "results": "No hits",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes, sieves, or general site equivalences, not algebraic-space base forgetting."
+  },
+  {
+   "tool": "leansearch",
+   "query": "change of base scheme for algebraic spaces preserves the small etale ringed site",
+   "results": "AlgebraicGeometry.Scheme.smallEtaleTopology, Algebra.Etale.baseChange, RingHom.Etale.isStableUnderBaseChange, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.HasRingHomProperty.isStableUnderBaseChange, AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange, AlgebraicGeometry.isSmooth_isStableUnderBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes, sieves, or general site equivalences, not algebraic-space base forgetting."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space over a scheme S can be viewed over a smaller base S prime; localization of big fppf sheaves gives an equivalence with algebraic spaces equipped with a map to S",
+   "results": "AlgebraicGeometry.Scheme.CanonicallyOver, AlgebraicGeometry.Scheme.Over, AlgebraicGeometry.AffineSpace.over, AlgebraicGeometry.instIsLocallyDirectedCompSchemeOverOverTopMorphismPropertyForgetForgetForget, AlgebraicGeometry.ExistsHomHomCompEqCompAux.D', AlgebraicGeometry.AffineSpace.homOverEquiv, AlgebraicGeometry.instIsOpenImmersionMapSchemeCompOverOverTopMorphismPropertyForgetForget, AlgebraicGeometry.AffineScheme.ΓIsEquiv",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes, sieves, or general site equivalences, not algebraic-space base forgetting."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The functor extending a sheaf on a slice site to the base site is an equivalence with sheaves over the representable sheaf, and preserves algebraic spaces and etale atlases",
+   "results": "AlgebraicGeometry.Scheme.Etale.forget, CategoryTheory.Functor.IsDenseSubsite.sheafEquiv, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.instFullEtaleOverForget, CategoryTheory.Equivalence.sheafCongr, CategoryTheory.Equivalence.sheafCongr.functor, AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv, CategoryTheory.Functor.IsDenseSubsite.instIsEquivalenceSheafSheafPushforwardContinuous",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes, sieves, or general site equivalences, not algebraic-space base forgetting."
+  },
+  {
+   "tool": "grep",
+   "query": "overEquiv|iteratedSliceEquiv|sheafOver|overSheaf",
+   "results": "Mathlib/CategoryTheory/Sites/Point/Over.lean, Mathlib/CategoryTheory/Sites/Point/Over.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes, sieves, or general site equivalences, not algebraic-space base forgetting."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "reviewer",
+  "item": "lem-sfb-space-square-zero-ringed-realization",
+  "date": "2026-10-23",
+  "group": "Q159"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-change-base-to-integers",
+  "worker": "stage1",
+  "summary": "Identified the existing sheaf localization equivalence and used explicit scheme-test formulas to prove algebraicity in both directions, the specified atlas, fibre products, and equality of the small etale ringed sites including base-change functors. No new nodes. Clarified the fibre-product middle object, without assuming separation or finiteness.",
+  "blueprint": "Historical helper of det-thm-sf-ctf-stability-direct-images (3), through the inherited via chain: the 05ZT construction over Spec Z and its morphism back to the original base. Current latest blueprint direct-images proof (3) retains the proper/open compactification route; this only supplies change of base in the existing deformation-theoretic prerequisite. The ancestor tool returns None, as already recorded in the inherited from.node; no blueprint metadata outside the allowed fields is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-localized-sheaves-over-representable",
+    "why": "Generic localization equivalence for sheaves, applied on a common larger-universe small fppf site; does not replace a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+    "why": "Generic computation of finite sheaf limits on sections to verify the explicit fibre-product map; no unit-specific alternative is asserted."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-localized-sheaves-over-representable",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-ba26e61e6",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-ba26e61e6 (reviewer sub-agent of L); spot-checked: I read the whole item: the statement, all 6 steps and every cited node's statement. Sources checked: spaces.tex 03I4 with its proof, 03I5, 04SG, and the first paragraph of the proof of spaces-properties 04KK. Statement: the fibre-product clause was made explicit as the canonical iso j_!(X×_Z Y) ≅ j_!X×_{j_!Z} j_!Y. This is what 03I4 / sites 04BB give, and it is not a weakening. The counterexample to the other reading checks: S = Spec k ⊔ Spec k over Spec k gives 2 points against 4. Neither citer (lem-sfb-space-square-zero-ringed-realization, lem-sfb-finite-surjective-affine-space-target) uses the other reading. Steps 1–5 are correct. Step 1: the coproduct presheaf is already a sheaf. Step 2: fibre products are computed on sections. Step 3: the diagonal test via T×_{T×_{S'}T}(A×_X B) is correct for different S-structures, and the atlas fibre is T×_X U. Step 4: the converse, where equality in F forces equality in h_S. Step 5: the small sites and O are identified. Fault E3 in step 6: it claims that V×_Y X is a scheme ('the same scheme represents both fibre products'). This is false when h is not representable, e.g. Y=V=S and X a non-scheme space. FIX: step 6 is rewritten to use the step-2 iso natural in V, plus the fact that the projection to X is representable étale with scheme fibres T×_Y V, which are the same over j_!X. It still uses only def-trf-algebraic-space; no other field changed. Batch 5: the new citation def-trf-scheme-algebraic-space is a general definition (a scheme as an algebraic space). It is not part of the trace-formula or Poincaré-duality proofs, so it is accepted. Declared tool use: localized-sheaves equivalence, generic, accepted. No new nodes, no duplicates found, no SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceChangeBase",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_spaceChangeBase",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceChangeBase.lean",
+  "statement": "theorem exists_spaceChangeBase {S S' : Scheme.{u}} (g : S ⟶ S') : ∃ (J : AlgebraicSpace S ⥤ Over (schemeSpace (Over.mk g))) (e : ∀ (X : AlgebraicSpace S) (T : Over S'), (J.obj X).left.obj.obj.obj (op T) ≃ Σ a : T ⟶ Over.mk g, X.obj.obj.obj (op (Over.mk a.left))), (∀ (X : AlgebraicSpace S) (T : Over S') (z : (J.obj X).left.obj.obj.obj (op T)), (J.obj X).hom.hom.hom.app (op T) z = (e X T z).1) ∧ (∀ (X : AlgebraicSpace S) (T U : Over S') (b : U ⟶ T) (a : T ⟶ Over.mk g) (s : X.obj.obj.obj (op (Over.mk a.left))), e X U ((J.obj X).left.obj.obj.map b.op ((e X T).symm ⟨a, s⟩)) = ⟨b ≫ a, X.obj.obj.map (Over.homMk b.left rfl : Over.mk (b ≫ a).left ⟶ Over.mk a.left).op s⟩) ∧ (∀ (X Y : AlgebraicSpace S) (f : X ⟶ Y) (T : Over S') (a : T ⟶ Over.mk g) (s : X.obj.obj.obj (op (Over.mk a.left))), e Y T ((J.map f).left.hom.hom.app (op T) ((e X T).symm ⟨a, s⟩)) = ⟨a, f.hom.hom.app (op (Over.mk a.left)) s⟩) ∧ J.IsEquivalence ∧ (∀ (X : AlgebraicSpace S) (U : Over S) (a : yoneda.obj U ⟶ X.obj.obj), IsEtale a → IsSurjective a → ∃ b : yoneda.obj ((Over.map g).obj U) ⟶ (J.obj X).left.obj.obj, e X ((Over.map g).obj U) (b.app (op ((Over.map g).obj U)) (𝟙 _)) = ⟨Over.homMk U.hom rfl, X.obj.obj.map (Over.homMk (𝟙 U.left) (by simp) : Over.mk U.hom ⟶ U).op (a.app (op U) (𝟙 U))⟩ ∧ IsEtale b ∧ IsSurjective b) ∧ (∀ (P A B C : AlgebraicSpace S) (p : P ⟶ A) (q : P ⟶ B) (f : A ⟶ C) (h : B ⟶ C), IsPullback p.hom q.hom f.hom h.hom → IsPullback (J.map p).left.hom (J.map q).left.hom (J.map f).left.hom (J.map h).left.hom) ∧ (∀ X : AlgebraicSpace S, ∃ (E : X.EtaleSite ≌ (J.obj X).left.EtaleSite) (a : E.functor ⋙ ObjectProperty.ι _ ⋙ CostructuredArrow.proj yoneda (J.obj X).left.obj.obj ≅ ObjectProperty.ι _ ⋙ CostructuredArrow.proj yoneda X.obj.obj ⋙ Over.map g), (∀ T : X.EtaleSite, e X ((Over.map g).obj T.obj.left) ((E.functor.obj T).obj.hom.app (op ((Over.map g).obj T.obj.left)) (a.inv.app T)) = ⟨Over.homMk T.obj.left.hom rfl, X.obj.obj.map (Over.homMk (𝟙 T.obj.left.left) (by simp) : Over.mk T.obj.left.hom ⟶ T.obj.left).op (T.obj.hom.app (op T.obj.left) (𝟙 T.obj.left))⟩) ∧ (∀ (T : X.EtaleSite) (R : Presieve T), R ∈ X.etalePrecoverage T ↔ R.map E.functor ∈ (J.obj X).left.etalePrecoverage (E.functor.obj T)) ∧ ∃ r : X.structurePresheaf ≅ E.functor.op ⋙ (J.obj X).left.structurePresheaf, ∀ T : X.EtaleSite, r.hom.app (op T) = (forget₂ CommRingCat RingCat).map (Scheme.Γ.map (a.hom.app T).left.op))",
+  "branch": "newtargets-dag",
+  "by": "Q86",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The extension functor is specified by the exact sigma formula, the projection, restrictions and action on morphisms. The theorem also gives its equivalence with spaces mapping to S, retention of each given atlas, preservation of sheaf pullback squares, and a scheme-chart-normalized equivalence of small etale ringed sites. Preservation of all pullback squares, together with that chart normalization, expresses the canonical fibre-product comparison naturally in the etale scheme object, including when the fibre product is not itself a scheme."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f599f0740",
+  "group": "Q86",
+  "result": "pass",
+  "note": "exists_spaceChangeBase: J is fixed by the sigma formula plus the projection, restriction and morphism formulas; J.IsEquivalence into Over (schemeSpace (Over.mk g)) gives (1) algebraicity and (2); the given atlas is pinned on id_U; IsPullback preservation gives the canonical fibre-product iso over j_!Z; the EtaleSite equivalence is tied to scheme charts with coverings iff and structure presheaf iso = Γ of the scheme map. No extra hypotheses; framework universe u. lean.statement verbatim; node otherwise equal to live; no competing module. Docstrings carry source, blueprint and 6 steps; sorry only; no new defs or nodes. Advisory: base-change compatibility for h:X→Y in (3) has no own conjunct (no V×_Y X functor in def-trf-algebraic-space; V×_Y X need not be a scheme) but follows from the pinned formulas, pullback clause and chart normalization (node step 6). No compile run (no changes)."
+ }
+}

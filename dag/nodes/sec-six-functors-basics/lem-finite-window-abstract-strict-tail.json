@@ -1,0 +1,136 @@
+{
+ "id": "lem-finite-window-abstract-strict-tail",
+ "kind": "statement",
+ "title": "Abstract strict lower-tail vanishing from degreewise Hom bounds",
+ "statement": "Let $\\mathcal A$ be an abelian category with a derived category $D(\\mathcal A)$ [def-weil-abstract-derived-category], K-injective resolutions, and exact countable products. Let $P$ be a class of objects of $\\mathcal A$ containing every zero object and invariant under isomorphism. Fix $S\\in D(\\mathcal A)$ and $N\\in\\mathbf Z$. Assume that $\\operatorname{Hom}(S,B[-q])=0$ for every $B\\in P$ and every integer $q\\le N$, where $B[-q]$ means the complex concentrated in degree $q$. If $L\\in D(\\mathcal A)$ has $H^q(L)\\in P$ for every $q$ and $H^q(L)=0$ for every $q>N-1$, then every morphism $S\\to L$ is zero. There is no lower bound on $L$. The cohomological convention is that of [def-sbc-standard-tstructure-derived-category].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window-unbounded.proof.md",
+  "place": "Left completeness, Milnor sequence, and Right term; existing generic source-library devissage"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sbc-standard-tstructure-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "First prove the bounded assertion by induction on the number of supported cohomological degrees. The one-degree case is isomorphic to its sole cohomology sheaf placed in that degree. For the induction step, the standard truncation triangle separates the highest cohomology layer; representable Hom exactness factors a morphism through the lower truncation once its image in the highest layer is zero. Apply the induction hypothesis to this factorization. This is the existing proved DerivedCategory.eq_zero_of_isGE_of_isLE and its single-degree base case.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-sf-derived-truncation-triangle",
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact countable products and K-injective resolutions give the existing generic left-completeness theorem isHomotopyLimit_truncGECone: L, with its canonical quotient maps, is the homotopy limit of tau_ge(-n)L. Every truncation has homology in P, because P contains zero and is invariant under isomorphism.",
+   "uses": [
+    "lem-sfb-derived-left-complete-truncation-bound",
+    "def-kun-truncations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The bounded assertion applies both to each tau_ge(-n)L and to its shift by -1. Their upper bounds are N-1 and N, respectively; both have finite cohomology support and homology in P. Thus Hom from S to a tower term and from S[1] to that term vanish. The product universal property and exactness in the Milnor triangle force every map S to L to vanish. This is the fully proved existing DerivedCategory.eq_zero_of_isLE; the one-degree margin avoids an eventual-transition calculation.",
+   "uses": [
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "def-kun-truncations",
+    "lem-sfb-derived-left-complete-truncation-bound"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-sf-derived-truncation-triangle",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-sfb-derived-left-complete-truncation-bound",
+  "def-kun-truncations"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/CompactOfBoundedExt.lean",
+  "place": "eq_zero_of_isLE, and the proved bounded devissage lemmas immediately preceding it"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Vanishing of Hom to a bounded above complex in a derived category with exact countable products from vanishing on its cohomology layers",
+   "results": [
+    "DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective",
+    "DerivedCategory.isZero_of_isLE",
+    "DerivedCategory.isZero_of_isGE",
+    "DerivedCategory.isLE_iff",
+    "CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat",
+    "CochainComplex.isZero_of_isGE",
+    "CochainComplex.HomComplex.CohomologyClass.toHom_mk_eq_zero_iff",
+    "CategoryTheory.ShortComplex.Exact.hasHomology"
+   ],
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib match. Local source search found the already proved DerivedCategory.eq_zero_of_isLE in CompactOfBoundedExt."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, Subsingleton",
+   "results": [
+    "DerivedCategory.subsingleton_hom_of_isStrictlyLE_of_isStrictlyGE"
+   ],
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib match. Local source search found the already proved DerivedCategory.eq_zero_of_isLE in CompactOfBoundedExt."
+  },
+  {
+   "tool": "grep",
+   "query": "eq_zero_of_isLE|isHomotopyLimit_truncGECone",
+   "results": [],
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib match. Local source search found the already proved DerivedCategory.eq_zero_of_isLE in CompactOfBoundedExt."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteWindowUnbounded",
+  "date": "2026-10-27",
+  "group": "U8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-finite-window-unbounded",
+   "place": "Left completeness, Milnor sequence, and Right term, with an extra one-degree margin before attaching the boundary layer",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-finite-window",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.DerivedCategory.CompactOfBoundedExt",
+  "declaration": "DerivedCategory.eq_zero_of_isLE",
+  "statement": "lemma eq_zero_of_isLE {s : DerivedCategory C} (N : ℤ)\n    (hvan : ∀ B, P B → ∀ n ≤ N, ∀ f : s ⟶ (singleFunctor C n).obj B, f = 0)\n    (L : DerivedCategory C) (hL : homologyProperty P L) [L.IsLE (N - 1)] (f : s ⟶ L) :\n    f = 0",
+  "branch": "sheaf-dag",
+  "by": "U8",
+  "date": "2026-10-27",
+  "note": "Existing source theorem, not copied or modified. Its section variables supply the abelian, derived, K-injective, exact-countable-product, and object-property closure hypotheses. All its proofs are complete."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U8",
+  "result": "pass",
+  "landing": "20261026T202412-L-3455988",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U8",
+  "result": "pass",
+  "landing": "20261026T202412-L-3455988",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,123 @@
+{
+ "id": "def-pod-ctf-pairing-maps",
+ "kind": "definition",
+ "title": "Canonical finite-Tor projection and fixed-left internal Hom",
+ "status": "split",
+ "statement": "Use the finite-field datum, coefficient field $E/\\mathbf Q_\\ell$, integer $n\\geq1$, finite-type $k$-schemes and four coefficient stages of [def-fix-six-functor-datum]. Let $f:X\\to Y$ be a morphism with a chosen compactification $c$, and use the recorded operations at a fixed coefficient stage $s$. Supply the restricted functors and closed presentations $R$ of [det-thm-sf-ctf-stability-adjunctions]. Write $\\mathcal C_X,\\mathcal C_Y$ for their actual finite-Tor full subcategories, $i_X,i_Y$ for the full inclusions, and $T_X,T_Y$ for the recorded partial derived tensors [def-weil-derived-pullback-tensor-hom]. For $M\\in\\mathcal C_X$ and $T\\in\\mathcal C_Y$, let $P^{\\mathrm{raw}}_{M,T}$ be the specified compact-support projection component [def-exchange-projection], in the tensor coordinates $T_Y(i_Y Rf_!M,T)\\to Rf_!T_X(i_XM,Lf^*T)$. Let $\\alpha_M:(M\\otimes-);i_X\\cong T_X(i_XM,-)$ and $\\beta_{Rf_!M}:(Rf_!M\\otimes-);i_Y\\cong T_Y(i_Y Rf_!M,-)$ be R's tensor comparisons. The raw component is an isomorphism for separated finite-type $f$ by [fix-prop-projection-formula]. Define its restricted isomorphism by transporting it through the same tensor comparisons and full inclusion. Define the restricted forward projection $P_{M,T}:Rf_!M\\otimes T\\to Rf_!(M\\otimes Lf^*T)$ to be the full-inclusion preimage of $\\beta_{Rf_!M,T};P^{\\mathrm{raw}}_{M,T};Rf_!(\\alpha_{M,Lf^*T}^{-1})$. Define $H^X_M$ and $H^Y_K$ for $M\\in\\mathcal C_X$ and $K\\in\\mathcal C_Y$ by fixing the first input in the recorded restricted internal Hom: $H^X_M(V)=R\\mathcal Hom_X(M,V)$ and $H^Y_K(W)=R\\mathcal Hom_Y(K,W)$, on objects and arrows. These definitions use the actual recorded operations and comparisons; no new choice of adjunction or projection is supplied.",
+ "stmt_deps": [
+  "def-fix-six-functor-datum",
+  "det-thm-sf-ctf-stability-adjunctions",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-exchange-projection",
+  "fix-prop-projection-formula"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+  "place": "Step 1: target naturality of the counit/evaluation representative; creating item former step 6"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Transport a projection formula morphism through full subcategory inclusions and tensor comparison isomorphisms",
+   "results": "8 hits: CategoryTheory.CartesianMonoidalCategory.fullSubcategory_fst_hom, CategoryTheory.Limits.piComparison_comp_π_assoc, CategoryTheory.Limits.piComparison_comp_π, CategoryTheory.ObjectProperty.instMonoidalFullSubcategoryιOfLE, CategoryTheory.Grothendieck.toTransport, CategoryTheory.CostructuredArrow.ιCompGrothendieckProj, CategoryTheory.ObjectProperty.liftCompιIso, HasFibers.projMap",
+   "date": "2026-10-22",
+   "verdict": "Individual categorical constructions only; no combined four-stage restricted projection/Hom interface."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.preimage, CategoryTheory.Prod.sectR",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "Individual categorical constructions only; no combined four-stage restricted projection/Hom interface."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical forward compact support projection transported to finite Tor full subcategories and fixed left internal Hom functors",
+   "results": "8 hits: LightCondensed.ihomPoints, LightCondensed.ihomPoints_apply, Condensed.profiniteSolid, LightCondensed.instMonoidalClosedFunctorOppositeLightProfiniteModuleCat, instMonoidalClosedCondensedSet, LightCondensed.ihom_map_val_app, LightCondensed.ihomPoints_symm_comp, LightCondensed.ihomPoints_symm_apply",
+   "date": "2026-10-22",
+   "verdict": "Individual categorical constructions only; no combined four-stage restricted projection/Hom interface."
+  },
+  {
+   "tool": "grep",
+   "query": "preimageIso|def preimage",
+   "results": "9 hits: Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/FullyFaithful.lean, Mathlib/CategoryTheory/Functor/FullyFaithful.lean, Mathlib/CategoryTheory/Functor/FullyFaithful.lean, Mathlib/CategoryTheory/Functor/FullyFaithful.lean",
+   "date": "2026-10-22",
+   "verdict": "Individual categorical constructions only; no combined four-stage restricted projection/Hom interface."
+  },
+  {
+   "tool": "grep",
+   "query": "rg rawProjection|PodCtfPairing in lean/WeilConjectures and lean/Sheaf/Paper/PodCtfAdjunctions.lean,PodHomChainCounitFormula.lean; blueprint_refs.py search restricted pairing; rg def-pod-ctf-pairing-maps dag/nodes",
+   "results": "No upstream or DAG definition of this interface. The downstream PodHomChainCounitFormula has these helpers, but cannot be imported because its proof cites pairing_naturality. The return explicitly authorizes moving the shared constructions to a definition owner. Blueprint search returns only unrelated prop-trf-pairing-local-decomposition.",
+   "date": "2026-10-22",
+   "verdict": "New owner of the canonical helper constructions, as requested by the return; no replacement mathematical operations."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pod-hom-chain-pairing-naturality",
+  "date": "2026-10-22",
+  "group": "Q11"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pod-identification-of-the-comparison",
+   "place": "Third paragraph and fix-lem-tensor-adjunction.proof.md Step 1: the projection and internal Hom used in the counit/evaluation representative.",
+   "via": [
+    "lem-pod-hom-chain-pairing-naturality",
+    "lem-pod-hom-chain-counit-formula",
+    "lem-pod-global-duality-map-identification"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "module": "Sheaf.Paper.PodCtfPairingMaps",
+  "declaration": "WeilConjectures.PodCtfPairing.projection",
+  "declarations": [
+   "WeilConjectures.PodCtfPairing.rawProjection",
+   "WeilConjectures.PodCtfPairing.rawProjectionIso",
+   "WeilConjectures.PodCtfPairing.projectionIso",
+   "WeilConjectures.PodCtfPairing.projection",
+   "WeilConjectures.PodCtfPairing.homX",
+   "WeilConjectures.PodCtfPairing.homY"
+  ],
+  "file": "lean/Sheaf/Paper/PodCtfPairingMaps.lean",
+  "statement": "def projection [IsSeparated f.hom.left] [LocallyOfFiniteType f.hom.left] [QuasiCompact f.hom.left] (M : (PodCoefficientStage.domain S s X).FullSubcategory) (T : (PodCoefficientStage.domain S s Y).FullSubcategory)",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Shared owner authorized by return e6758ebc294d; canonical constructions formerly available only in downstream PodHomChainCounitFormula. The projection isomorphism uses the unique inverse of the specified raw forward component, from the recorded projection theorem. Forward projection and Hom agree definitionally with the landed consumer, checked in scratch ConsumerCheck."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c3cb40328",
+  "group": "Q11",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c3cb40328",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Repairs e6758ebc H3/H4: item now on R : PodCtfAdjunctionData over PodCoefficientStage.domain FullSubcategories, using R.pull/direct/support/exceptional, ordinary/exceptional counits, ev = (R.tensorAdjunctionX M).counit and closedX/closedY tensorLeft. The six conjuncts match the node in order and direction (projection forward, clause 5 is Rf_!(1⊗f^*a)∘P = P'∘(1⊗a)); statement field verbatim; item stmt_deps = base 7 + new def node only. New def node def-pod-ctf-pairing-maps: §5 fields OK, cites exactly its 5 stmt_deps, source fix-lem-tensor-adjunction Step 1. rawProjection = published stage components; rawProjectionIso = asIso via compactSupportProjectionFormula IsIso; projectionIso = full-inclusion preimageIso of tensorY ≫ raw ≫ support(tensorX⁻¹); homX/homY = sixFunctorDomainHom with the first input fixed. No sorry and nothing hollow in the def module; the item has one sorry theorem; docstrings carry source, blueprint tag and proof steps. Not compiled (no FIX); report gives clean compiles 21-45 s. Advisory: (1) the new defs duplicate PodHomChain.* in the landed PodHomChainCounitFormula; maintainer should re-point the sibling to PodCtfPairing.*; (2) uses def-sf-constructible-projection-mates decls without citing it (it is in fix-prop-projection-formula's stmt_deps; sibling has the same gap); (3) import Etale.Derived.Adjunctions looks unused; (4) second reading is a self-check, accepted."
+ }
+}

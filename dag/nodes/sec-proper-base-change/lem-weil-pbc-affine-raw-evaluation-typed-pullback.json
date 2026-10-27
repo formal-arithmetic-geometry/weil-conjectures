@@ -1,0 +1,128 @@
+{
+ "id": "lem-weil-pbc-affine-raw-evaluation-typed-pullback",
+ "kind": "statement",
+ "title": "Raw evaluation for the typed structural pullback map",
+ "statement": "For f:X→S, a quasi-coherent module G, etale charts V,V′, an arrow h:V′→V, and a sheaf morphism theta satisfying HasQcoherentPullbackSectionFormula for affineRealizationChartMap and affineRealizationCoefficientMap [def-weil-pbc-affine-pullback-coefficient-map] [def-weil-pbc-coherent-etale-pullback-data], raw evaluation [def-weil-pbc-coherent-higher-image-classes] carries restriction of every degree-q raw higher-direct-image class z to coherentEtalePullbackMap of its raw evaluation. No affine, compactness, quasi-compactness or separatedness hypothesis is required. This is the typed evaluation equation, with no ordinary coherent comparison.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/cohomology.tex; literature/stacks-project/descent.tex",
+  "place": "Tags 03Q8 and 03FD, raw higher-direct-image restriction and cohomology evaluation; Tag 03DR, the tensor coefficient section formula."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-higher-image-classes",
+  "def-weil-pbc-affine-pullback-coefficient-map",
+  "def-weil-pbc-coherent-etale-pullback-data"
+ ],
+ "proof": [
+  {
+   "text": "Substitute affineRealizationCoefficientMap_eq in the section-formula structure. On variable schemes, its app field and tensorCompositeCoefficientMap_eq give the premise of the proved generic restrictionComposition helper in CoherentEtaleRestrictionComposition. This identifies the adjunct coefficient map after the two coherent restriction isomorphisms. Keep this conversion generic before specializing to the actual fibre products. The induced chart map is etale by Etale.of_comp, since its composite with the etale projection is the other etale projection.",
+   "uses": [
+    "def-weil-pbc-affine-pullback-coefficient-map",
+    "def-weil-pbc-coherent-etale-pullback-data",
+    "lem-weil-pbc-coherent-etale-restriction-composition"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Naturality of rawRestrictedClassNormalization identifies raw restriction with normalizationCohomologyRestriction. Apply the inverse sheafHDerivedEquiv and its restriction equation. The normalizationChartMap equals the constructed chart map by their definitions. Transport the whole composition through this equality using a generic equality-substitution lemma, so dependent composition witnesses are handled by proof irrelevance.",
+   "uses": [
+    "lem-weil-pbc-raw-restricted-class-normalization",
+    "lem-weil-pbc-sheaf-h-derived-pullback",
+    "def-weil-pbc-affine-pullback-coefficient-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Rewrite both raw evaluations by unit_coherent_raw_evaluation_formula. Compose the derived restriction equation with Sheaf.H.map of the target restriction isomorphism. Functoriality of Sheaf.H.map and the coefficient-composition equation replace the two coefficient factors by the adjunct of theta. Naturality of cohomologyMap moves the source restriction isomorphism past pullback. Finally coherentEtalePullbackMap_apply identifies the resulting composite with the named map. No ordinary coherent comparison or additional geometric hypothesis is used, and all equations include empty charts, zero modules and degree zero.",
+   "uses": [
+    "new-unit-coherent-raw-evaluation-formula-aux",
+    "lem-weil-pbc-coherent-etale-restriction-composition",
+    "def-weil-pbc-coherent-etale-pullback-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-affine-pullback-coefficient-map",
+  "def-weil-pbc-coherent-etale-pullback-data",
+  "lem-weil-pbc-coherent-etale-restriction-composition",
+  "lem-weil-pbc-raw-restricted-class-normalization",
+  "lem-weil-pbc-sheaf-h-derived-pullback",
+  "new-unit-coherent-raw-evaluation-formula-aux"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/cohomology.tex; literature/stacks-project/descent.tex",
+  "place": "Tags 03Q8 and 03FD, raw higher-direct-image restriction and cohomology evaluation; Tag 03DR, the tensor coefficient section formula."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Raw etale higher direct image restriction evaluation equals cohomological pullback followed by the adjunct coefficient morphism",
+   "results": "8 scheme restriction and adjunction hits; none is this project-specific raw-evaluation equation. The local library already proves affineRealizationRawEvaluation_pullback in the expanded interface.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing raw-evaluation proof components directly in the typed interface; applying the expanded theorem requires prohibitively expensive implicit conversions."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H.map_comp_apply",
+   "results": "One standard coefficient-cohomology composition theorem; no raw-evaluation interface theorem.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing raw-evaluation proof components directly in the typed interface; applying the expanded theorem requires prohibitively expensive implicit conversions."
+  },
+  {
+   "tool": "grep",
+   "query": "affineRealizationRawEvaluation_typed_pullback",
+   "results": "0 Mathlib hits.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing raw-evaluation proof components directly in the typed interface; applying the expanded theorem requires prohibitively expensive implicit conversions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineComparisonPullback",
+  "date": "2026-10-26",
+  "group": "A4"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-affine-cohomology-raw-restriction",
+   "place": "Compose raw restriction evaluation with the normalized ordinary comparison square, retaining the constructed pullback map."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineRawEvaluationTypedPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineRawEvaluationTypedPullback.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affineRealizationRawEvaluation_typed_pullback",
+  "statement": "theorem affineRealizationRawEvaluation_typed_pullback {X S : Scheme.{u}} (f : X ⟶ S)\n    (G : X.Modules) [G.IsQuasicoherent] (V V' : S.Etale) (h : V' ⟶ V)\n    (θ : liftedCoherentEtaleSheaf (affineRealizationCoefficient f G V) ⟶\n      (Etale.lowerStar AddCommGrpCat.{u + 1} (affineRealizationChartMap f h)).obj\n        (liftedCoherentEtaleSheaf (affineRealizationCoefficient f G V')))\n    (hθ : HasQcoherentPullbackSectionFormula (affineRealizationChartMap f h)\n      (affineRealizationCoefficient f G V) (affineRealizationCoefficient f G V')\n      (affineRealizationCoefficientMap f G h) θ)\n    (q : ℕ)\n    (z : (Etale.abelianHigherDirectImageRawPresheaf f q\n      (liftedCoherentEtaleSheaf G)).obj (op V)) :\n    affineRealizationRawEvaluation f G q V'\n      ((Etale.abelianHigherDirectImageRawPresheaf f q\n        (liftedCoherentEtaleSheaf G)).map h.op z) =\n      coherentEtalePullbackMap (affineRealizationChartMap f h)\n        (affineRealizationCoefficient f G V) (affineRealizationCoefficient f G V') θ q\n        (affineRealizationRawEvaluation f G q V z)",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-1544d",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261026T152140-L-1081818",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-1544d",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261026T152140-L-1081818",
+  "kind": "interface",
+  "note": "independent cc review: typed affineRealizationComparison_pullback vs old expanded statement (chart map/coef map/section formula/pullback map equal by defn + proved eqs); adapted AffineCohomologyRawRestriction signatures vs clone; 6 new nodes vs Lean; scratch compile of all 8 files + #print axioms (sorryAx only via upstream qcoherentNormalizedComparison_pullback_square)"
+ }
+}

@@ -149,6 +149,7 @@ private theorem closedCompactificationComparison (k : Type u) [Field k]
     [LocallyOfFiniteType (Z ↘ Spec (.of k))]
     [QuasiCompact (Z ↘ Spec (.of k))] [IsSeparated (Z ↘ Spec (.of k))]
     (i : Z ⟶ X) [IsClosedImmersion i] [i.IsOver (Spec (.of k))]
+    [PreservesFiniteColimits (lowerStar (Profinite.padicIntegersRingObj ℓ E.val) i)]
     (c : Compactification.BoundaryCompactification i)
     (h : ∀ K, localizing (Profinite.padicIntegersRingObj ℓ E.val) Z K →
       localizing (Profinite.padicIntegersRingObj ℓ E.val) X

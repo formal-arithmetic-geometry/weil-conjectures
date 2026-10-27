@@ -13,6 +13,9 @@ public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import Sheaf.CategoryTheory.RingedSiteCechRefinementSquareAbelianExists
+import Sheaf.CategoryTheory.RingedSiteNormalizedCechEdge
+import Sheaf.CategoryTheory.RingedSiteResolutionRoof
+import Sheaf.CategoryTheory.RingedSiteCechRefinementPentagon
 
 /-!
 # Ringed-site Čech comparison and refinement
@@ -260,10 +263,6 @@ Uses: def-weil-sheaf-of-modules-category, def-weil-pbc-sites-and-cohomology,
   lem-weil-pbc-lift-along-injective-quasi-iso, lem-weil-pbc-lift-to-injective-unique-up-to-homotopy,
   lem-weil-pbc-site-pullback-abelian-exact.
 -/
--- STATEMENT-DISPUTED: γ is arbitrary here; the tuple formula relating γ to h is missing.
--- On the one-object identity site with a singleton identity cover and coefficients ℤ,
--- take h = 𝟙 and γ = 0. In degree zero the normalized edges and the roof are identities,
--- so the asserted square would give 𝟙 = 0. The abelian theorem below is independent of it.
 theorem ringedSite_cech_refinement_square_rest
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     [HasFiniteLimits C] [HasFiniteLimits D]
@@ -294,7 +293,10 @@ theorem ringedSite_cech_refinement_square_rest
       T.W p j ⟶ u.obj (S.W p (r ∘ j)))
     (haTuple : ∀ (p : ℕ) (j : Fin (p + 1) → I₁) (k : Fin (p + 1)),
       aTuple p j ≫ u.map (S.pr p (r ∘ j) k) = T.pr p j k ≫ a (j k))
-    (γ : S.complex M.val.presheaf ⟶ T.complex N.val.presheaf) :
+    (γ : S.complex M.val.presheaf ⟶ T.complex N.val.presheaf)
+    (hγ : ∀ (p : ℕ) (s : S.cochains M.val.presheaf p) (j : Fin (p + 1) → I₁),
+      (γ.f p s) j = N.val.presheaf.map (aTuple p j).op
+        ((h.val.app (op (S.W p (r ∘ j)))) (s (r ∘ j)))) :
       ∀ q : ℕ,
         ∃! eM : (S.cohomologyFunctor q).obj M.val.presheaf ⟶ (((SheafOfModules.forget R ⋙
           PresheafOfModules.toPresheaf R.obj) ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op
@@ -341,7 +343,107 @@ theorem ringedSite_cech_refinement_square_rest
                     PresheafOfModules.toPresheaf R.obj) ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op
                     X)).mapHomologicalComplex (ComplexShape.up ℕ)).map b) q) ∧
               eM ≫ hH = HomologicalComplex.homologyMap γ q ≫ eN := by
-  sorry
+  classical
+  intro q
+  obtain ⟨eM, heM, heM_unique⟩ :=
+    ringedSite_normalized_cech_edge J R M U v hU S q
+  obtain ⟨eN, heN, heN_unique⟩ :=
+    ringedSite_normalized_cech_edge K R' N V w hV T q
+  obtain ⟨hH, hex, hroof⟩ :=
+    ringedSite_resolution_roof J K u hcover R R' ρ M N h hX huX q
+  have hsquare : eM ≫ hH = HomologicalComplex.homologyMap γ q ≫ eN := by
+    let IM := injectiveResolution M
+    let IN := injectiveResolution N
+    let F := (SheafOfModules.forget R ⋙ PresheafOfModules.toPresheaf R.obj) ⋙
+      (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op X)
+    let F' := (SheafOfModules.forget R' ⋙ PresheafOfModules.toPresheaf R'.obj) ⋙
+      (evaluation Dᵒᵖ AddCommGrpCat.{u}).obj (op (u.obj X))
+    obtain ⟨L, lam, b, hL, hmono, hlam, hb⟩ := hex IM IN
+    obtain ⟨dM, hdM, hnM⟩ := heM IM
+    obtain ⟨dN, hdN, hnN⟩ := heN IN
+    obtain ⟨aL, aP, l, s, t, delta, haL, haP, hβM, hβN, hαM, hαP, hαN⟩ :=
+      ringedSite_cech_refinement_pentagon J K u hcover R R' ρ M N h hX huX
+        U v V w hU hV S T r a aTuple haTuple γ hγ IM IN L lam b hL hb dM dN
+    have hroof' := (hroof IM IN L lam b hL hmono hlam hb).2
+    have hlamIso := (hroof IM IN L lam b hL hmono hlam hb).1
+    have := hdM
+    have := hdN
+    have := haL
+    have := haP
+    have hβM' := congrArg (fun f ↦ HomologicalComplex.homologyMap f q) hβM
+    have hβN' := congrArg (fun f ↦ HomologicalComplex.homologyMap f q) hβN
+    have hαM' := congrArg (fun f ↦ HomologicalComplex.homologyMap f q) hαM
+    have hαP' := congrArg (fun f ↦ HomologicalComplex.homologyMap f q) hαP
+    have hαN' := congrArg (fun f ↦ HomologicalComplex.homologyMap f q) hαN
+    simp only [HomologicalComplex.homologyMap_comp] at hβM' hβN' hαM' hαP' hαN'
+    have hsIso : IsIso (HomologicalComplex.homologyMap aP q ≫
+        HomologicalComplex.homologyMap s q) := by
+      rw [hαP']
+      infer_instance
+    have : IsIso (HomologicalComplex.homologyMap s q) :=
+      IsIso.of_isIso_comp_left (HomologicalComplex.homologyMap aP q) _
+    have hz : eM ≫ hH ≫ (IN.isoRightDerivedObj F' q).hom ≫
+        HomologicalComplex.homologyMap aP q = HomologicalComplex.homologyMap delta q := by
+      apply (cancel_mono (HomologicalComplex.homologyMap s q)).mp
+      calc
+        (eM ≫ hH ≫ (IN.isoRightDerivedObj F' q).hom ≫
+            HomologicalComplex.homologyMap aP q) ≫ HomologicalComplex.homologyMap s q =
+          eM ≫ (hH ≫ (IN.isoRightDerivedObj F' q).hom ≫
+            HomologicalComplex.homologyMap
+              ((F.mapHomologicalComplex (.up ℕ)).map lam) q) ≫
+                HomologicalComplex.homologyMap aL q := by
+                  simp only [Category.assoc]
+                  rw [hαP']
+        _ = eM ≫ (IM.isoRightDerivedObj F q).hom ≫
+            HomologicalComplex.homologyMap dM.alpha q ≫
+              HomologicalComplex.homologyMap l q := by
+          rw [hroof']
+          simp only [Category.assoc]
+          rw [hαM']
+        _ = HomologicalComplex.homologyMap dM.beta q ≫
+            HomologicalComplex.homologyMap l q := by
+          simpa only [Category.assoc] using
+            congrArg (fun f ↦ f ≫ HomologicalComplex.homologyMap l q) hnM
+        _ = HomologicalComplex.homologyMap delta q ≫
+            HomologicalComplex.homologyMap s q := hβM'
+    apply (cancel_mono ((IN.isoRightDerivedObj F' q).hom ≫
+      HomologicalComplex.homologyMap dN.alpha q)).mp
+    calc
+      (eM ≫ hH) ≫ (IN.isoRightDerivedObj F' q).hom ≫
+          HomologicalComplex.homologyMap dN.alpha q =
+        (eM ≫ hH ≫ (IN.isoRightDerivedObj F' q).hom ≫
+          HomologicalComplex.homologyMap aP q) ≫ HomologicalComplex.homologyMap t q := by
+            rw [← hαN']
+            simp only [Category.assoc]
+      _ = HomologicalComplex.homologyMap delta q ≫
+          HomologicalComplex.homologyMap t q := by rw [hz]
+      _ = HomologicalComplex.homologyMap γ q ≫
+          HomologicalComplex.homologyMap dN.beta q := hβN'.symm
+      _ = (HomologicalComplex.homologyMap γ q ≫ eN) ≫
+          (IN.isoRightDerivedObj F' q).hom ≫
+            HomologicalComplex.homologyMap dN.alpha q := by
+        rw [← hnN]
+        simp only [Category.assoc]
+        rfl
+  refine ⟨eM, ⟨heM, ⟨eN, ⟨heN, ⟨hH, ⟨hex, hroof, hsquare⟩, ?_⟩⟩, ?_⟩⟩, ?_⟩
+  · intro hH' hh'
+    let IM := injectiveResolution M
+    let IN := injectiveResolution N
+    obtain ⟨L, lam, b, hL, hmono, hlam, hb⟩ := hex IM IN
+    have h₁ := (hh'.2.1 IM IN L lam b hL hmono hlam hb).2
+    have h₂ := (hroof IM IN L lam b hL hmono hlam hb).2
+    have := (hroof IM IN L lam b hL hmono hlam hb).1
+    exact (cancel_mono ((IN.isoRightDerivedObj
+      ((SheafOfModules.forget R' ⋙ PresheafOfModules.toPresheaf R'.obj) ⋙
+        (evaluation Dᵒᵖ AddCommGrpCat.{u}).obj (op (u.obj X))) q).hom ≫
+      HomologicalComplex.homologyMap
+        ((((SheafOfModules.forget R ⋙ PresheafOfModules.toPresheaf R.obj) ⋙
+          (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op X)).mapHomologicalComplex
+            (.up ℕ)).map lam) q)).mp (h₁.trans h₂.symm)
+  · intro eN' heN'
+    exact heN_unique eN' heN'.1
+  · intro eM' heM'
+    exact heM_unique eM' heM'.1
 
 theorem ringedSite_cech_refinement_square
     {C D : Type u} [SmallCategory C] [SmallCategory D]
@@ -428,7 +530,7 @@ theorem ringedSite_cech_refinement_square
     M.val.presheaf N.val.presheaf
     ((PresheafOfModules.toPresheaf R.obj).map h.val)
   have hr := ringedSite_cech_refinement_square_rest J K u hcover R R' ρ M N h hX huX U v V w
-    hU hV S T r a aTuple haTuple γ
+    hU hV S T r a aTuple haTuple γ hγ
   refine ⟨γ, ⟨hγ, hr⟩, ?_⟩
   intro γ' h'
   exact hγuniq γ' h'.1

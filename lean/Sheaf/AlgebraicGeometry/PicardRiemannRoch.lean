@@ -31,28 +31,13 @@ public import WeilConjectures.AlgebraicGeometry.Modules.VeryAmple
 public import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
-import Mathlib.AlgebraicGeometry.AlgClosed.Basic
-import Mathlib.LinearAlgebra.Dimension.Constructions
-import Sheaf.AlgebraicGeometry.Curve.ProperProjective
+import Sheaf.AlgebraicGeometry.Curve.PicardRRDuality
+import WeilConjectures.AlgebraicGeometry.Curve.RiemannRochCoherent
+import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologySeparated
+import Sheaf.AlgebraicGeometry.ExteriorSheafComparison
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.EulerCharZeroDimSupport
-import Sheaf.AlgebraicGeometry.GlobalSectionsGeomConnected
-import Sheaf.AlgebraicGeometry.Modules.DeterminantShortExact
-import Sheaf.AlgebraicGeometry.RegularCurveTorsionfreeFree
-import Sheaf.AlgebraicGeometry.TorsionSubsheafQuotient
-import Sheaf.AlgebraicGeometry.VectorBundleLineSubbundle
-import Sheaf.AlgebraicGeometry.VeryAmpleSeparationCriterion
-import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
-import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.AffineMorphism
-import WeilConjectures.AlgebraicGeometry.Cohomology.EulerCharProper
-import WeilConjectures.AlgebraicGeometry.Cohomology.LongExact
-import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
-import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
-import WeilConjectures.AlgebraicGeometry.ModuleSupportProperOverBase
-import WeilConjectures.AlgebraicGeometry.Modules.Ample
-import WeilConjectures.AlgebraicGeometry.Picard.Group
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-import WeilConjectures.AlgebraicGeometry.Regular
-import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 
 /-! # Riemann–Roch and coherent Serre duality
 
@@ -196,6 +181,140 @@ def picardRRConclusions (k : Type u) [Field k] (C : Scheme.{u})
     (J : X.IdealSheafData), J.IsInvertible →
     IsAmple (X ↘ Spec (.of k)) J.toModulesᵛ → IsAffine (Scheme.Opens.toScheme J.support.compl))
 
+open TopologicalSpace in
+private theorem picardRR_skyscraper_support (C : Scheme.{u}) (x : closedPoints C)
+    (V : ModuleCat.{u} (C.presheaf.stalk x.val)) :
+    let F : C.Modules := SheafOfModules.ringedModuleSkyscraper C.toRingedSpace x.val V
+    topologicalKrullDim {y : C | ¬ Subsingleton (F.presheaf.stalk y)} ≤ 0 := by
+  let F : C.Modules := SheafOfModules.ringedModuleSkyscraper C.toRingedSpace x.val V
+  have hz (y : C) (hy : y ≠ x.val) : Subsingleton (F.presheaf.stalk y) := by
+    let U : C.Opens := ⟨{x.val}ᶜ, x.property.isOpen_compl⟩
+    have hyU : y ∈ U := hy
+    have hzero (a : F.presheaf.stalk y) : a = 0 := by
+      obtain ⟨W, hyW, s, rfl⟩ := F.presheaf.exists_germ_eq a
+      have hs : F.presheaf.map (homOfLE inf_le_left : W ⊓ U ⟶ W).op s = 0 := by
+        funext h
+        exact False.elim (h.down.2 rfl)
+      rw [← F.presheaf.germ_res_apply (homOfLE inf_le_left : W ⊓ U ⟶ W)
+        y ⟨hyW, hyU⟩ s, hs, map_zero]
+    exact ⟨fun a b ↦ (hzero a).trans (hzero b).symm⟩
+  have : Subsingleton {y : C | ¬ Subsingleton (F.presheaf.stalk y)} := by
+    refine ⟨fun a b ↦ Subtype.ext ?_⟩
+    have ha : a.val = x.val := by_contra fun h ↦ a.property (hz a.val h)
+    have hb : b.val = x.val := by_contra fun h ↦ b.property (hz b.val h)
+    exact ha.trans hb.symm
+  exact topologicalKrullDim_zero_of_discreteTopology _
+
+private theorem picardRR_skyscraper_euler (k : Type u) [Field k] (C : Scheme.{u})
+    [C.Over (Spec (.of k))] [IsProper (C ↘ Spec (.of k))] (x : closedPoints C)
+    (hF : RingedSpace.IsCoherent C.toRingedSpace
+      (SheafOfModules.ringedModuleSkyscraper C.toRingedSpace x.val
+        ((ModuleCat.restrictScalars (C.residue x.val).hom).obj
+          (ModuleCat.of (C.residueField x.val) (C.residueField x.val))))) :
+    Modules.eulerChar k (show C.Modules from
+      SheafOfModules.ringedModuleSkyscraper C.toRingedSpace x.val
+        ((ModuleCat.restrictScalars (C.residue x.val).hom).obj
+          (ModuleCat.of (C.residueField x.val) (C.residueField x.val)))) =
+      ((C ↘ Spec (.of k)).degreeOver x.val : ℤ) := by
+  let V := (ModuleCat.restrictScalars (C.residue x.val).hom).obj
+    (ModuleCat.of (C.residueField x.val) (C.residueField x.val))
+  let F : C.Modules := SheafOfModules.ringedModuleSkyscraper C.toRingedSpace x.val V
+  have hχ := (Modules.eulerChar_zero_dim_support k C F hF
+    (picardRR_skyscraper_support C x V)).2.1
+  let := ((C ↘ Spec (.of k)).residueFieldAlgebraMap x.val).toAlgebra
+  let e : F.H 0 ≃ₗ[k] C.residueField x.val :=
+    { toFun := fun z ↦ (Modules.H.zeroLinearEquiv F z) ⟨trivial⟩
+      invFun := fun a ↦ (Modules.H.zeroLinearEquiv F).symm (fun _ ↦ a)
+      left_inv := by
+        intro z
+        apply (Modules.H.zeroLinearEquiv F).injective
+        simp only [LinearEquiv.apply_symm_apply]
+        funext h
+        rfl
+      right_inv := by intro a; simp
+      map_add' := by
+        intro a b
+        exact congrFun ((Modules.H.zeroLinearEquiv F).map_add a b) ⟨trivial⟩
+      map_smul' := by
+        intro c z
+        rw [Modules.smul_H_eq_globalSectionsRingHom_smul, LinearEquiv.map_smul]
+        change C.residue x.val (C.presheaf.germ ⊤ x.val trivial
+          (globalSectionsRingHom k c)) * _ =
+          (C ↘ Spec (.of k)).residueFieldAlgebraMap x.val c * _
+        rw [Hom.residueFieldAlgebraMap_apply] }
+  exact hχ.trans (congrArg (fun n : ℕ ↦ (n : ℤ)) e.finrank_eq)
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem picardRR_divisor_degree (k : Type u) [Field k] (C : Scheme.{u})
+    [C.Over (Spec (.of k))] [IsSmoothProjectiveCurve (C ↘ Spec (.of k))]
+    [GeometricallyConnected (C ↘ Spec (.of k))] [IsNoetherian C] [IsRegular C]
+    (D : C.Divisor) :
+    (D.associatedModule C).degree k =
+      D.sum (fun x n ↦ n * (C ↘ Spec (.of k)).degreeOver x.val) := by
+  classical
+  let : IsNoetherian C := isNoetherian_of_locallyOfFiniteType (C ↘ Spec (.of k))
+  let : IsRegular C := IsRegular.of_smooth (C ↘ Spec (.of k))
+  let : GeometricallyReduced (C ↘ Spec (.of k)) :=
+    GeometricallyReduced.of_smooth (C ↘ Spec (.of k))
+  let : GlobalSectionsBijective k C := inferInstance
+  obtain ⟨_, hinv, ⟨e0, _⟩, hmul, _, _, hmod⟩ := regular_curve_divisor_calculus C
+    ((C.dim_eq_topologicalKrullDim).trans
+      (IsIntegralCurve.topologicalKrullDim_eq_one (f := C ↘ Spec (.of k))))
+  let (E : C.Divisor) : (E.associatedModule C).IsInvertible := hinv E
+  let d : C.Divisor →+ ℤ :=
+    { toFun := fun E ↦ (E.associatedModule C).degree k
+      map_zero' := (Modules.degree_congr k e0).trans (Modules.degree_unit k)
+      map_add' := by
+        intro E F
+        obtain ⟨e, _⟩ := hmul E F
+        exact (Modules.degree_congr k e).symm.trans (Modules.degree_tensorObj _ _) }
+  let w : C.Divisor →+ ℤ :=
+    { toFun := fun E ↦ E.sum (fun x n ↦ n * (C ↘ Spec (.of k)).degreeOver x.val)
+      map_zero' := by simp
+      map_add' := by
+        intro E F
+        exact Finsupp.sum_add_index' (by intros; simp) (by intros; ring) }
+  have hs (x : closedPoints C) : d (Finsupp.single x 1) = w (Finsupp.single x 1) := by
+    obtain ⟨V, _, i, q, _, ⟨wzero, hex⟩, ⟨eV⟩⟩ := hmod (Finsupp.single x 1) x
+    have := Modules.IsInvertible.sheafOfModules_isInvertible
+      (Divisor.associatedModule C ((Finsupp.single x 1 : C.Divisor) - Finsupp.single x 1))
+    have := Modules.IsInvertible.sheafOfModules_isInvertible
+      (Divisor.associatedModule C (Finsupp.single x 1 : C.Divisor))
+    have : (cokernel i).IsFinitePresentation := Modules.isFinitePresentation_cokernel i
+    let eQ : cokernel i ≅ SheafOfModules.ringedModuleSkyscraper C.toRingedSpace x.val
+        ((ModuleCat.restrictScalars (C.residue x.val).hom).obj V) :=
+      (cokernelIsCokernel i).coconePointUniqueUpToIso hex.gIsCokernel
+    have : (SheafOfModules.ringedModuleSkyscraper C.toRingedSpace x.val
+        ((ModuleCat.restrictScalars (C.residue x.val).hom).obj V)).IsFinitePresentation :=
+      Modules.isFinitePresentation_of_iso eQ
+    have : (SheafOfModules.ringedModuleSkyscraper C.toRingedSpace x.val
+        ((ModuleCat.restrictScalars (C.residue x.val).hom).obj
+          (ModuleCat.of (C.residueField x.val) (C.residueField x.val)))).IsFinitePresentation :=
+      Modules.isFinitePresentation_of_iso eV
+    have hcoh := (Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType C
+      (SheafOfModules.ringedModuleSkyscraper C.toRingedSpace x.val
+        ((ModuleCat.restrictScalars (C.residue x.val).hom).obj
+          (ModuleCat.of (C.residueField x.val) (C.residueField x.val))))).mpr
+            ⟨inferInstance, inferInstance⟩
+    have hχ := Modules.eulerChar_eq_add_of_shortExact_of_isCoherent k hex
+    have hv := (Modules.eulerChar_congr k eV).trans (picardRR_skyscraper_euler k C x hcoh)
+    dsimp only at hχ
+    rw [hv, sub_self] at hχ
+    have hz := Modules.eulerChar_congr k e0
+    change (Divisor.associatedModule C (Finsupp.single x 1 : C.Divisor)).degree k = _
+    dsimp [Modules.degree, w]
+    rw [Finsupp.sum_single_index (by simp)]
+    linarith
+  have hdw : d = w := by
+    apply Finsupp.addHom_ext'
+    intro x
+    ext
+    exact hs x
+  exact DFunLike.congr_fun hdw D
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Riemann–Roch, coherent Serre duality, field extension and the ample complements.
 Source: blueprint sk-thm-picard-rr/_section.md and its duality detail
 (blueprint: sk-thm-picard-rr).
@@ -232,6 +351,111 @@ Proof, following the ten steps of the node:
 theorem picard_riemannRoch (k : Type u) [Field k] (C : Scheme.{u})
     [C.Over (Spec (.of k))] [IsSmoothProjectiveCurve (C ↘ Spec (.of k))]
     [GeometricallyConnected (C ↘ Spec (.of k))] : picardRRConclusions k C := by
-  sorry
+  let : IsNoetherian C := isNoetherian_of_locallyOfFiniteType (C ↘ Spec (.of k))
+  let : IsRegular C := IsRegular.of_smooth (C ↘ Spec (.of k))
+  let : GeometricallyReduced (C ↘ Spec (.of k)) :=
+    GeometricallyReduced.of_smooth (C ↘ Spec (.of k))
+  let : GlobalSectionsBijective k C := inferInstance
+  unfold picardRRConclusions
+  refine ⟨?_, ?_, ?_, ?_, ?_, ?_⟩
+  · intro L hL
+    have := Modules.IsInvertible.sheafOfModules_isInvertible L
+    refine ⟨Modules.eulerChar_eq_degree_add L,
+      Modules.eulerChar_eq_finrankH_zero_sub_finrankH_one L, ?_, ?_, ?_, ?_⟩
+    · let := functionFieldAlgebra k C
+      let := isFunctionFieldAlgebra_functionFieldAlgebra k C
+      exact (serreDuality_residueTrace k C L
+        (SheafOfModules.IsInvertible.isFiniteLocallyFree L)).1
+    · intro hd
+      have hdim := Modules.finrankH_one_eq_zero_of_degree (k := k) L (by omega)
+      have : FiniteDimensional k (L.H 1) := Modules.finiteDimensional_H_of_isProper L 1
+      exact ⟨Module.finrank_zero_iff.mp hdim, finrankH_zero_eq (k := k) L (by omega)⟩
+    · exact isAmple_of_degree_pos L
+    · intro D hD
+      obtain ⟨e⟩ := hD
+      exact (Modules.degree_congr k e).symm.trans (picardRR_divisor_degree k C D)
+  · intro f
+    obtain ⟨_, _, _, _, _, hprincipal, _⟩ := regular_curve_divisor_calculus C
+      ((C.dim_eq_topologicalKrullDim).trans
+        (IsIntegralCurve.topologicalKrullDim_eq_one (f := C ↘ Spec (.of k))))
+    obtain ⟨e, _⟩ := hprincipal f
+    exact (picardRR_divisor_degree k C _).symm.trans
+      ((Modules.degree_congr k e).trans (Modules.degree_unit k))
+  · exact degree_relativeDifferentials
+  · intro F hF
+    have := hF.1
+    have := hF.2
+    have : F.IsFinitePresentation := by
+      have hfin (U : C.affineOpens) : (F.over U.1).IsFinitePresentation := by
+        have : IsNoetherianRing Γ(C, U.1) := IsLocallyNoetherian.component_noetherian U
+        have : Module.Finite Γ(C, U.1) Γ(F, U.1) :=
+          Modules.finite_sections_of_finiteType F U.2
+        exact (((Modules.quasicoherent_finite_type_affine.{u, u} C).2 F
+          inferInstance).1 U.1 U.2).2.mpr
+          (Module.finitePresentation_of_finite Γ(C, U.1) Γ(F, U.1))
+      exact SheafOfModules.IsFinitePresentation.of_coversTop F
+        (fun U : C.affineOpens ↦ U.1) (by
+          rw [Opens.coversTop_iff]
+          exact iSup_affineOpens_eq_top C)
+    have h := Modules.eulerChar_eq_coherentDegree_add k F
+    unfold Modules.coherentDegree at h
+    rw [← Modules.degree_congr k
+      (Modules.exteriorSheafIsoExteriorPower (Modules.torsionQuotient F) F.rank)] at h
+    exact h
+  · intro K _ _
+    let : GeometricallyIntegral (C ↘ Spec (.of k)) :=
+      GeometricallyIntegral.of_smooth_of_geometricallyConnected (C ↘ Spec (.of k))
+    let : (Modules.baseChangedScheme (S := K) (C ↘ Spec (.of k))).Over
+        (Spec (.of K)) := ⟨Modules.baseChangeSnd (S := K) (C ↘ Spec (.of k))⟩
+    have := Hom.isInvertible_relativeDifferentials (C ↘ Spec (.of k))
+    have := Modules.IsInvertible.of_sheafOfModules (C ↘ Spec (.of k)).relativeDifferentials
+    obtain ⟨hC, hgeo, hg, _, e, he, _, ht⟩ :=
+      (picard_rr_duality k C (C ↘ Spec (.of k)).relativeDifferentials).2.2.2.2.2 K
+    let := hC
+    refine ⟨hC, hgeo, hg, ?_, e, he, ?_⟩
+    · intro L _
+      have := Modules.IsInvertible.sheafOfModules_isInvertible L
+      refine ⟨?_, ?_, ?_⟩
+      · exact (Modules.degree_congr K
+          ((picardRRPullbackIso _).app L)).trans (Modules.degree_pullback k K L)
+      · exact (Modules.eulerChar_congr K
+          ((picardRRPullbackIso _).app L)).trans (Modules.eulerChar_pullback K L)
+      · intro q
+        exact (Modules.H.mapLinearEquiv
+          ((picardRRPullbackIso _).symm.app L) q).bijective.comp
+            (Modules.H.baseChange_bijective_of_isSeparated (C ↘ Spec (.of k)) L q)
+    · intro z
+      let := functionFieldAlgebra k C
+      let := isFunctionFieldAlgebra_functionFieldAlgebra k C
+      let := functionFieldAlgebra K (C.baseChangeField k K)
+      let := isFunctionFieldAlgebra_functionFieldAlgebra K (C.baseChangeField k K)
+      have h := ht (𝟙 _) ((Modules.moduleCohomologyExtResolutionEquiv C _ 1).symm z) 1 1
+      simp only [one_smul, one_mul] at h
+      have hφ : (Modules.tensorPullback (Modules.baseChangeFst (S := K)
+          (C ↘ Spec (.of k)))).map (𝟙 (C ↘ Spec (.of k)).relativeDifferentials) ≫
+            e.hom = e.hom := by
+        rw [CategoryTheory.Functor.map_id, Category.id_comp]
+      have hid (a : Modules.scalarCohomology (C ↘ Spec (.of k))
+          (C ↘ Spec (.of k)).relativeDifferentials 1) :
+          Modules.scalarCohomologyMap (C ↘ Spec (.of k)) (𝟙 _) 1 a = a := by
+        change ((RingedSpace.moduleCohomology C.toRingedSpace 1).map (𝟙 _)).hom a = a
+        rw [CategoryTheory.Functor.map_id]
+        rfl
+      rw [hφ, hid] at h
+      unfold picardRRModuleTrace at h
+      change residueTrace K (C.baseChangeField k K)
+        (Modules.moduleCohomologyExtResolutionEquiv (C.baseChangeField k K) _ 1
+          (((RingedSpace.moduleCohomology (C.baseChangeField k K).toRingedSpace 1).map
+            e.hom).hom _)) = _ at h
+      rw [Modules.moduleCohomologyExtResolutionEquiv_naturality] at h
+      simp only [picardRRModuleBaseChangeValue] at h
+      simp only [AddEquiv.apply_symm_apply] at h
+      unfold picardRRResidueTrace picardRRBaseChange
+      rw [LinearMap.comp_apply]
+      erw [Modules.H.mapLinearMap_apply K]
+      exact h
+  · intro X _ _ J hJ hA
+    exact isAffine_compl_of_isAmple_dual_toModules (X ↘ Spec (.of k)) hJ hA
+      (Scheme.Opens.ι J.support.compl) (Scheme.Opens.range_ι _)
 
 end AlgebraicGeometry.Scheme

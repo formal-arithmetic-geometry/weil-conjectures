@@ -45,11 +45,15 @@ z tensor (s tensor p) mapped to sz tensor p. Restriction commutes with the
 coproducts in the total complex; naturality of cancellation respects both signed
 differentials. Exactness of restriction makes U(Z) acyclic; K-flatness of P
 makes its tensor acyclic. Reflection of exactness proves the assertion. -/
-theorem scalarExtension_preservesKFlat (s : ScalarDerivedPair a)
+private theorem kflatOfScalarExtensionIdentification
+    (E : scalarModules J R ⥤ scalarModules J S) [E.Additive]
+    (eo : ∀ M, E.obj M = changeOfRings a M)
+    (em : ∀ {M N : scalarModules J R} (f : M ⟶ N),
+      E.map f = eqToHom (eo M) ≫ changeOfRingsHom a M f ≫ eqToHom (eo N).symm)
     (P : CochainComplex (scalarModules J R) ℤ)
     (hP : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) P) :
     CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := S)
-      ((scalarComplex s.extension s.extension_additive).obj P) := by
+      ((scalarComplex E inferInstance).obj P) := by
   classical
   let := monoidalCategory R
   let := monoidalCategory S
@@ -68,19 +72,19 @@ theorem scalarExtension_preservesKFlat (s : ScalarDerivedPair a)
   have : PreservesColimitsOfSize.{0, 0} U := ⟨fun {D} instD ↦ @hcolim D instD⟩
   obtain ⟨e, he⟩ := ScalarHomCancellation.exists_changeOfRings_tensorCancellation a
   let e' (M : scalarModules J S) (N : scalarModules J R) :
-      U.obj (M ⊗ s.extension.obj N) ≅ U.obj M ⊗ N :=
-    U.mapIso (tensorIso (Iso.refl M) (eqToIso (s.extension_obj N))) ≪≫ e M N
+      U.obj (M ⊗ E.obj N) ≅ U.obj M ⊗ N :=
+    U.mapIso (tensorIso (Iso.refl M) (eqToIso (eo N))) ≪≫ e M N
   have he' {M M' : scalarModules J S} {N N' : scalarModules J R}
       (f : M ⟶ M') (g : N ⟶ N') :
-      U.map (f ⊗ₘ s.extension.map g) ≫ (e' M' N').hom =
+      U.map (f ⊗ₘ E.map g) ≫ (e' M' N').hom =
         (e' M N).hom ≫ (U.map f ⊗ₘ g) := by
-    change U.map (f ⊗ₘ s.extension.map g) ≫
-        U.map ((𝟙 M') ⊗ₘ eqToHom (s.extension_obj N')) ≫ (e M' N').hom =
-      (U.map ((𝟙 M) ⊗ₘ eqToHom (s.extension_obj N)) ≫ (e M N).hom) ≫
+    change U.map (f ⊗ₘ E.map g) ≫
+        U.map ((𝟙 M') ⊗ₘ eqToHom (eo N')) ≫ (e M' N').hom =
+      (U.map ((𝟙 M) ⊗ₘ eqToHom (eo N)) ≫ (e M N).hom) ≫
         (U.map f ⊗ₘ g)
-    have hn : s.extension.map g ≫ eqToHom (s.extension_obj N') =
-        eqToHom (s.extension_obj N) ≫ changeOfRingsHom a N g := by
-      rw [s.extension_map]
+    have hn : E.map g ≫ eqToHom (eo N') =
+        eqToHom (eo N) ≫ changeOfRingsHom a N g := by
+      rw [em]
       simp
     rw [← Category.assoc, ← U.map_comp, tensorHom_comp_tensorHom,
       Category.comp_id, hn]
@@ -89,7 +93,7 @@ theorem scalarExtension_preservesKFlat (s : ScalarDerivedPair a)
     simp only [Category.id_comp]
     rfl
   intro Z hZ
-  let EP := (scalarComplex s.extension s.extension_additive).obj P
+  let EP := (scalarComplex E inferInstance).obj P
   let T := (((curriedTensor _).mapBifunctorHomologicalComplex (.up ℤ) (.up ℤ)).obj Z).obj EP
   have : U.PreservesTotalComplex T (.up ℤ) := fun _ ↦ inferInstance
   let t := (HomologicalComplex₂.mapTotalIso U T (.up ℤ)).symm
@@ -101,7 +105,7 @@ theorem scalarExtension_preservesKFlat (s : ScalarDerivedPair a)
         (fun j ↦ e' (Z.X i) (P.X j)) (by
           intro j j' hj
           change (e' (Z.X i) (P.X j)).hom ≫ whiskerLeft (U.obj (Z.X i)) (P.d j j') =
-            U.map (whiskerLeft (Z.X i) (s.extension.map (P.d j j'))) ≫
+            U.map (whiskerLeft (Z.X i) (E.map (P.d j j'))) ≫
               (e' (Z.X i) (P.X j')).hom
           simpa only [U.map_id, id_tensorHom] using
             (he' (𝟙 (Z.X i)) (P.d j j')).symm))
@@ -110,9 +114,9 @@ theorem scalarExtension_preservesKFlat (s : ScalarDerivedPair a)
         apply HomologicalComplex.Hom.ext
         funext j
         change (e' (Z.X i) (P.X j)).hom ≫ whiskerRight (U.map (Z.d i i')) (P.X j) =
-          U.map (whiskerRight (Z.d i i') (s.extension.obj (P.X j))) ≫
+          U.map (whiskerRight (Z.d i i') (E.obj (P.X j))) ≫
             (e' (Z.X i') (P.X j)).hom
-        simpa only [s.extension.map_id, tensorHom_id]
+        simpa only [E.map_id, tensorHom_id]
           using (he' (Z.d i i') (𝟙 (P.X j))).symm)
   have hUZ : ((U.mapHomologicalComplex (.up ℤ)).obj Z).Acyclic := by
     intro i
@@ -126,5 +130,24 @@ theorem scalarExtension_preservesKFlat (s : ScalarDerivedPair a)
     (t ≪≫ HomologicalComplex₂.total.mapIso f (.up ℤ))
   exact ShortComplex.exact_of_iso
     ((HomologicalComplex.shortComplexFunctor _ _ i).mapIso hi.symm) hh
+
+/-- Scalar extension preserves K-flatness without any flat-term assumption.
+Source: Stacks 05V4 (tensor cancellation) and 0G7E (K-flat pullback)
+(blueprint: lem-sfb-scalar-extension-kflat).
+Proof: restriction is exact and reflects exactness on underlying abelian sheaves.
+For any acyclic S-complex Z, restriction of Tot(Z tensor_S E(P)) is naturally
+isomorphic to Tot(U(Z) tensor_R P), by the balanced tensor cancellation map
+z tensor (s tensor p) mapped to sz tensor p. Restriction commutes with the
+coproducts in the total complex; naturality of cancellation respects both signed
+differentials. Exactness of restriction makes U(Z) acyclic; K-flatness of P
+makes its tensor acyclic. Reflection of exactness proves the assertion. -/
+theorem scalarExtension_preservesKFlat (s : ScalarDerivedPair a)
+    (P : CochainComplex (scalarModules J R) ℤ)
+    (hP : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) P) :
+    CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := S)
+      ((scalarComplex s.extension s.extension_additive).obj P) := by
+  have := s.extension_additive
+  exact kflatOfScalarExtensionIdentification a s.extension
+    s.extension_obj s.extension_map P hP
 
 end SheafOfModules

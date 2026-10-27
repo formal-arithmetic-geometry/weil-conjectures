@@ -1,0 +1,163 @@
+{
+ "id": "lem-sfb-internal-section-tensor-localization",
+ "kind": "statement",
+ "title": "Normalized localization of internal-section tensors, globally and on slices",
+ "statement": "Let \\(X\\) be a scheme and \\(\\Lambda\\) a commutative condensed ring [sk-def-sfb-condensed-ring]. Let \\(B\\) be its pulled-back coefficient monoid on the pro-étale site \\(\\mathcal C=X_{\\mathrm{pro\\acute et}}\\), let \\(B_{\\mathrm{sec}}\\) be its reconstructed sheaf of section rings, and let \\(F:\\operatorname{Mod}(B)\\simeq\\operatorname{Mod}(B_{\\mathrm{sec}})\\) be the section-action equivalence [sk-def-sfb-pulled-back-coefficients, def-sfb-internal-section-total-comparison]. Write \\(H\\) for the unbounded ringed-site K-injective derived internal Hom. There exist a closed tensor structure \\(S\\) with internal Hom \\(H\\), K-flat representative tensor models \\(T\\) for \\(S\\), and a natural isomorphism \\[D(F)(K\\otimes^{\\mathbf L}_{B}L)\\simeq D(F)K\\otimes_S D(F)L.\\] Its representative square is the specified predicate \\(\\mathrm{tensorComparisonNormalized}\\), using the fixed signed sum-total comparison \\(\\mathrm{totalComparison}\\) [def-sfb-internal-section-derived-tensor-comparison, def-sfb-internal-section-total-comparison]. For every object \\(U\\in\\mathcal C\\), the same existence assertion holds on \\(\\mathcal C/U\\) for the actual restricted monoid \\(B|_U\\), the literal ring \\(B_{\\mathrm{sec}}|_U\\), its ringed-site derived internal Hom, and the derived section equivalence. Its representative square is \\(\\mathrm{sliceTensorComparisonNormalized}\\) for the fixed \\(\\mathrm{sliceTotalComparison}\\) [def-sfb-internal-slice-derived-hom-comparison]. The global and local structures need not be chosen compatibly under restriction; this statement asserts only these normalized tensor comparisons.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS (definition-derived-tor) and 08J9 (lemma-internal-hom); agent extraction of the tensor-localization part of the parent comparison, with ordinary section modules and tensor products from sites-modules.tex, sections section-sheaves-modules (03CV) and section-tensor-product (03EK)."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-sfb-internal-section-derived-tensor-comparison",
+  "def-sfb-internal-section-total-comparison",
+  "def-sfb-internal-slice-derived-hom-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Use the exact section-action equivalence and its pure-tensor-normalized ordinary tensor and unit isomorphisms. The ordinary coherence equations construct a strong monoidal structure. Extensionality on each total summand identifies the fixed total-complex comparison with the inverse native mapCochainComplex tensorator. The public totalComparison_heq equation supplies this identification for the fixed global map.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison",
+    "def-sfb-internal-section-total-comparison",
+    "def-sfb-internal-section-derived-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CV (section-sheaves-modules) and 03EK (section-tensor-product); exact section-action and pure tensors. Signed totalization is the construction in sites-cohomology.tex preceding definition-K-flat."
+   }
+  },
+  {
+   "text": "Apply the existing coherent derived-monoidal descent theorem for an exact monoidal equivalence. Use its left-hand monoidal structure and its monoidal factorization isomorphism. The tensor axiom for that factorization, composed with inverse tensorators, gives the representative localization square on all complexes.",
+   "uses": [
+    "new-lem-kun-exact-monoidal-equivalence-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YP (definition-K-flat) and 06YS (definition-derived-tor); transport of acyclic tensor tests through an exact monoidal equivalence."
+   }
+  },
+  {
+   "text": "Take the ringed closed structure and representative tensor models from the native tensor-Hom adjunction, retaining their equality with the native derived monoidal structure and comparison. For complexes whose section images are K-flat, cancel the invertible target localization tensorator; its inverse is the fixed representative comparison. This yields the prescribed normalization with the total map from Step 1.",
+   "uses": [
+    "lem-sf-ringed-derived-native-tensor",
+    "lem-sf-ringed-derived-tensor-hom-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (definition-derived-tor) and 08J9 (lemma-internal-hom); K-flat localization and the K-injective model."
+   }
+  },
+  {
+   "text": "Repeat the ordinary and derived tensor construction for the actual restricted coefficient ring on each slice. Transport the construction across the equality between its reconstructed section ring and the literal restriction. The explicit slice total map is heterogeneously equal to the shared generic total comparison, so the same normalized descent produces SliceTensorComparison with the prescribed square. Use sliceEquivalence_functor_heq and sliceTotalComparison_heq to retain both concrete transports without expanding their constructions. A private generic record stores the closed structure, tensor models, comparison iso and square; the iso depends only on the closed structure, while its normalization also depends on the models. Its generic elimination lemma produces the required existential packages.",
+   "uses": [
+    "def-sfb-internal-slice-derived-hom-comparison",
+    "lem-pe-internal-section-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DH (definition-localize-ringed-site), section-sheaves-modules and section-tensor-product; literal slice restriction followed by the derived construction of sites-cohomology.tex."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pe-internal-section-tensor-comparison",
+  "new-lem-kun-exact-monoidal-equivalence-derived",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-sf-ringed-derived-tensor-hom-adjunction",
+  "def-sfb-internal-slice-derived-hom-comparison",
+  "def-sfb-internal-section-total-comparison",
+  "def-sfb-internal-section-derived-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Ordinary pure-tensor coherence and coherent derived descent of an exact monoidal equivalence; cancel the K-flat localization tensorator, then transport the construction to literal slice rings. Tags 03CV, 03EK, 06YS and 08J9."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The exact equivalence between internal modules and sheaves of modules identifies derived tensor, with normalization on K-flat representatives and on slices",
+   "results": "LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; Module.Flat.iff_rTensor_exact'; Module.Flat.rTensor_shortComplex_exact; Module.Flat.iff_lTensor_exact'; Module.Flat.lTensor_shortComplex_exact; Module.FaithfullyFlat.iff_exact_iff_rTensor_exact; Module.Flat.iff_rTensor_exact",
+   "date": "2026-10-24",
+   "verdict": "No result identifies the native internal derived tensor with the fixed section-ring tensor and total normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapCochainComplexμIso\"",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "No direct Mathlib result for this concrete section comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "(section.*[Tt]ensor.*[Ll]ocal|[Tt]ensor.*[Cc]omparison.*[Ss]ection)",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib tensor-localization comparison for internal section modules."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact equivalence between internal module objects and sheaves of modules identifies their unbounded derived tensors with the fixed total tensor comparison on K-flat representatives, also on slice sites",
+   "results": "Module.Flat.iff_flat_tensorProduct; LinearMap.tensorEqLocusEquiv_apply; SheafOfModules.PullbackConstruction.adjunction; LinearMap.lTensor_eqLocus_subtype_tensoreqLocusEquiv_symm; LinearMap.tensorKerEquiv; Module.Flat.iff_rTensor_preserves_shortComplex_exact; Module.Flat.iff_lTensor_exact; Module.Flat.iff_rTensor_exact'",
+   "date": "2026-10-24",
+   "verdict": "None compares the native unbounded derived internal-module tensor to the fixed section-ring tensor with its specified total normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleObjectRingedSiteDerivedComparison",
+  "date": "2026-10-24",
+  "group": "K4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-hom-preserves",
+   "place": "Step 1: identify internal module-object derived tensor and ringed-site derived tensor before the sheaf-valued internal-Hom calculation.",
+   "via": [
+    "lem-sfb-constructible-internal-hom-continuity",
+    "lem-sfb-module-object-ringed-site-derived-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.InternalSectionTensorLocalization",
+  "file": "lean/Sheaf/Paper/InternalSectionTensorLocalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison.internalSection_tensorLocalization",
+  "statement": "theorem internalSection_tensorLocalization :\n    (∃ (S : CoefficientClosedStructure (hom Λ X))\n      (T : CoefficientTensorModels.{u, u + 1, u, u + 1}\n        (Scheme.ProEt.topology X) (ring Λ X) S),\n      Nonempty (TensorComparison Λ X S T)) ∧\n    (∀ U : X.ProEt,\n      ∃ (S : CoefficientClosedStructure\n          (derivedInternalHomOfUniverses.{u + 1, u, u, u + 1}\n            ((Scheme.ProEt.topology X).over U) ((ring Λ X).over U)))\n        (T : CoefficientTensorModels.{u, u + 1, u, u + 1}\n          ((Scheme.ProEt.topology X).over U) ((ring Λ X).over U) S),\n        Nonempty (SliceTensorComparison Λ X U S T))",
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261024T190229-L-3998935",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-1ce9b",
+  "group": "W7",
+  "result": "pass",
+  "landing": "20261026T105350-L-1169695",
+  "kind": "interface",
+  "note": "independent cc review: W7 item internalSection_tensorLocalization (unchanged statement, proof complete, axioms propext/choice/Quot.sound) and the 4 refactored + 3 adapted unclaimed modules against the published versions and the change record; 26 sandbox compiles (7 delivered modules + 21 consumers) all rc 0"
+ }
+}

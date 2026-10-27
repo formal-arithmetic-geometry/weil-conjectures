@@ -1,0 +1,103 @@
+{
+ "id": "lem-sf-coherent-integer-tensor-powers",
+ "kind": "statement",
+ "title": "Existing coherent integer tensor-power construction",
+ "statement": "In a monoidal category C, let L be an object with a chosen tensor inverse e: an object M and isomorphisms L tensor M to the unit and M tensor L to the unit. The integer tensor powers e.zpow admit a coherent family: their zero term is isomorphic to the unit, their a-th term tensored with their b-th term is isomorphic to the (a+b)-th term, and these comparison maps satisfy the left unit, right unit and associativity laws. The construction is the existing TensorInverse.intTensorFamily of the source library.",
+ "stmt_deps": [],
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/Monoidal/IntTensorFamily.lean",
+  "place": "Existing proved TensorInverse.intTensorFamily, lines 56-73; coherent product laws proved in TensorInverse.lean. This node attaches an existing construction, rather than introducing a new Lean statement."
+ },
+ "proof": [
+  {
+   "text": "Use the existing source-library construction verbatim. Its object family is e.zpow, zero comparison is the identity, product comparison is e.addIso. The named source-library addIso_zero_left, addIso_zero_right and addIso_assoc theorems prove the three coherent-family laws. No new Lean declaration is required.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Z6",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Original twisted-site steps 1, 2, and the coefficient part of step 4. Agent variant motivated by Tag 00W0 (proposition-sheaves-on-group), not a claim that that tag proves the twisted assertion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A chosen autoequivalence of a category induces a coherent action of integers or a shift by integers",
+   "results": "Eight related shift API hits; source-library IntTensorFamily and IntegerShiftFromOne provide the proved coherence constructions used here.",
+   "date": "2026-10-27",
+   "verdict": "reuse existing coherent shifts"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsCocontinuous",
+   "results": "Twelve hits for cover-lifting and related generic APIs; none constructs this twisted site.",
+   "date": "2026-10-27",
+   "verdict": "generic APIs only"
+  },
+  {
+   "tool": "grep",
+   "query": "ShiftedHom|shiftFunctorAdd|IsCocontinuous",
+   "results": "Twenty-five Mathlib hits; local searches also located the fully proved IntegerActionSliceEquivalence module, whose normalization is reused.",
+   "date": "2026-10-27",
+   "verdict": "reuse shifted morphisms and existing integer-action site"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.TwistedActionSiteCore",
+  "date": "2026-10-27",
+  "group": "Z6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The parent obligation has no created.item blueprint ancestor. Its recorded provenance is lem-a1-local-boundary-duality and the evaluation/biduality sentence of thm-coef-qbar-verdier. This site realization supplies the abelian-category foundation for the internal-Hom and evaluation argument of cor-coef-verdier-weil-equivariance, without replacing the native derived category by fixed pairs in a derived category. Original twisted-site proof steps 1--6; the topology and semilinear restriction calculation. Supporting step: Underlying twisted site with cocontinuous inclusion. The ancestor tool returns null for the parent; blueprint_refs search twisted action site and semidirect found no corresponding blueprint node.",
+   "via": [
+    "lem-sf-twisted-action-site-restriction",
+    "lem-sf-twisted-action-ringed-site",
+    "lem-sf-weil-native-closed-forgetful",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.Monoidal.IntTensorFamily",
+  "file": "lean/WeilConjectures/CategoryTheory/Monoidal/IntTensorFamily.lean",
+  "declaration": "CategoryTheory.MonoidalCategory.TensorInverse.intTensorFamily",
+  "statement": "noncomputable def intTensorFamily : IntTensorFamily C",
+  "branch": "sheaf-dag",
+  "by": "Z6",
+  "date": "2026-10-27",
+  "note": "Reused proved construction; no changes to the adopted source module. C is a category with a monoidal structure, L:C, and e:TensorInverse L."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-ef98d",
+  "group": "Z6",
+  "result": "pass",
+  "landing": "20261027T103529-L-1103929",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-ef98d",
+  "group": "Z6",
+  "result": "pass",
+  "landing": "20261027T103529-L-1103929",
+  "kind": "interface",
+  "note": "independent cc review: siteCore proof and 3 new Z6 modules against node lem-sf-twisted-action-site-core and the 5 new nodes; IntegerActionSliceEquivalence diff vs clone (additions only, unclaimed, 0 importers) against change record Z6-integer-action-topology-criterion"
+ }
+}

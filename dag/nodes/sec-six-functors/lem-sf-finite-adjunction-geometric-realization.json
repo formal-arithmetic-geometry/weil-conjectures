@@ -1,0 +1,304 @@
+{
+ "id": "lem-sf-finite-adjunction-geometric-realization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Geometric realization and absolute dualizing objects; first two proof paragraphs, parent finite-system refinement.",
+   "via": [
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+  "place": "Finite dual formula, enriched adjunction, and canonical coefficient transposes; concrete ordinary-system refinement in the parent node proof."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+  "place": "Finite dual formula, enriched adjunction, and canonical coefficient transposes; concrete ordinary-system refinement in the parent node proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Verdier dual pullback dual formula on normalized derived coefficient systems with structural counit trace and canonical finite evaluations",
+   "results": [
+    "CategoryTheory.Adjunction.derivedε",
+    "CategoryTheory.Functor.totalLeftDerivedCounit",
+    "CategoryTheory.Adjunction.derivedε.congr_simp",
+    "CategoryTheory.ExactPairing.coevaluation_evaluation'",
+    "CategoryTheory.ChosenPullbacksAlong.fst'",
+    "LinearEquiv.trans_dualMap_symm_flip",
+    "SheafOfModules.conjugateEquiv_pullbackId_hom",
+    "Module.symm_dualMap_evalEquiv"
+   ],
+   "date": "2026-10-25",
+   "verdict": "No exact match for the concrete coefficient-system interface; generic derived adjunction, monoidal or condensed-module results do not supply its normalized comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct proper open compact support and its right adjoint on normalized coefficient systems with absolute dualizing objects and integral support comparison",
+   "results": [
+    "CondensedSet.compactlyGeneratedAdjunction",
+    "CondensedMod.LocallyConstant.adjunction",
+    "Condensed.setAbAdjunction",
+    "Condensed.profiniteSolidification",
+    "LightCondMod.LocallyConstant.adjunction",
+    "Condensed.profiniteSolidCounit",
+    "Condensed.profiniteSolid",
+    "LightCondSet.LocallyConstant.adjunction"
+   ],
+   "date": "2026-10-25",
+   "verdict": "No exact match for the concrete coefficient-system interface; generic derived adjunction, monoidal or condensed-module results do not supply its normalized comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientUnit|CoefficientDerivedSystemCoherence|FiniteAdjunctionDiagram|SectionsPush|DualizingSpec|RingedDerivedTensorCoherence",
+   "results": "No matches",
+   "date": "2026-10-25",
+   "verdict": "No exact match for the concrete coefficient-system interface; generic derived adjunction, monoidal or condensed-module results do not supply its normalized comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.FiniteAdjunctionDiagramRealization",
+  "date": "2026-10-25",
+  "group": "H1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "title": "Geometric realization and absolute dualizing objects",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R$, uniformizer $\\varpi$, and positive quotients $A_{n+1}=R/\\varpi^{n+1}$ [def-weil-l-adic-coefficient-extension]. For a scheme $W$, use strict semilinear coefficient systems and their ordinary derived category and exact evaluations [lem-coef-derived-system-evaluation-calculus, def-coef-finite-adjunction-system-data]. Fix a finite-field datum $D$ with algebraically closed field $k$ of characteristic $p\\ne\\ell$ [def-weil-finite-field-fiber]. Let $X,Y$ be separated finite-type $k$-schemes, $f:X\\to Y$ a separated finite-type $k$-morphism and $c=(j,p)$ a compactification [def-weil-scheme-morphism-properties, def-nagata-compactification]. The domain is the full category of normalized systems whose every finite evaluation is finite-Tor constructible, with no common bound [def-coef-finite-adjunction-system-data]. Supply coherent calculus witnesses SX,SZ,SY,SS on X,c.Z,Y,Spec k and symmetric structures betaX,betaY with their canonical ringed tensor coherence [lem-coef-derived-system-evaluation-calculus, lem-sf-ringed-derived-closed-symmetric-monoidal]. There exist a Realization r for f, a Geometry g for f, its SectionsPush s, and DualizingOperations aX and aY using the supplied common base calculus SS [def-sf-finite-adjunction-diagram-data]. The same r has IntegralSupport. No dual-formula or enriched-adjunction structure is concluded here.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-coef-finite-adjunction-system-data",
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "def-nagata-compactification",
+  "def-sf-finite-adjunction-diagram-data",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "proof": [
+  {
+   "text": "For each $W=X,Y$, let $\\mathscr S_W^{\\mathrm{et}}$ be the Grothendieck abelian category of strict semilinear $((A_n)_W)_n$-module systems on the small étale site, and use its ordinary unbounded derived category. The coefficient-system theorem gives componentwise exact evaluations, joint detection of isomorphisms, normalized transitions, derived scalar extension, and the derived inverse-image/direct-image adjunctions on system categories. The open map $j$ acts by exact extension by zero on systems, while the proper map $p$ has a total derived direct image. The K-flat and right-derived-functor constructions make these actual triangulated functors and actual transformations on systems, so no family of unrelated finite-level maps is being lifted. The rings $A_n$ are finite by the DVR finite-quotient theorem, and $X,Y,\\overline X$ are Noetherian by finite type over the field $k$; these verify the hypotheses of the ambient finite-coefficient results below.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-pur-coefficient-system-derived-comparison",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-pur-system-level-left-extension",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-valued-dvr-finite-quotients",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+    "place": "Finite duality, coefficient-change compatibility, and enriched adjunction before total inverse limits."
+   }
+  },
+  {
+   "text": "Define $F_f^{\\mathrm{et}}=Rp_{*,\\bullet}j_{!,\\bullet}$ on $D(\\mathscr S_X^{\\mathrm{et}})$. It is exact and preserves arbitrary coproducts: $j_!$ is a left adjoint and hence preserves coproducts, the proper derived direct image preserves coproducts at every finite coefficient, and coproducts and evaluations of systems are componentwise. The coefficient-system comparison theorem transports these componentwise coproduct isomorphisms to an isomorphism of system maps. Thus $F_f^{\\mathrm{et}}$ is an exact coproduct-preserving functor between derived categories of Grothendieck abelian categories.",
+   "uses": [
+    "lem-pur-coefficient-system-derived-comparison",
+    "lem-etale-proper-derived-lower-star-coproducts-for-grothendieck",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-pur-system-level-left-extension",
+    "lem-pc-right-derived-functor-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+    "place": "Finite duality, coefficient-change compatibility, and enriched adjunction before total inverse limits."
+   }
+  },
+  {
+   "text": "Use [lem-pur-etale-coefficient-system-adjoint] for this same $A_n=R/\\varpi^n$, $f$ and compactification. It supplies the actual exact right adjoint $G_f^{\\mathrm{et}}$ of $F_f^{\\mathrm{et}}$ on the ordinary unbounded derived categories of strict systems, with its evaluated units, counits and transition mates. Its Brown construction is valid because the system categories are Grothendieck and Step 2 proves that $F_f^{\\mathrm{et}}$ is exact and preserves coproducts. We choose this right adjoint, rather than reconstructing a functor from finite adjoints. Its unit $\\eta$ and counit $\\epsilon$ are transformations of system functors and satisfy the triangle identities there.",
+   "uses": [
+    "lem-pur-etale-coefficient-system-adjoint",
+    "lem-grothendieck-derived-brown-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+    "place": "Finite duality, coefficient-change compatibility, and enriched adjunction before total inverse limits."
+   }
+  },
+  {
+   "text": "Here is the projection input for evaluation. For the derived left adjoint $L_n$ to $e_n$, its level $q\\le n$ is $-\\otimes^L_{A_n}A_q$ and its higher levels are zero. The canonical map $L_nF_{f,n}^{\\mathrm{et}}\\to F_f^{\\mathrm{et}}L_n$ is the proper projection map followed by the open tensor comparison. At $q\\le n$ these maps are isomorphisms by [lem-amb-proper-coproducts-projection] with the constant $A_n$-module $A_q$ and [lem-pur-etale-open-derived-tensor]; both results allow unbounded complexes and impose no finite Tor dimension on $A_q/A_n$. Above $n$ both sides vanish. The system calculus constructs this map and evaluations detect its invertibility. Thus $F_f^{\\mathrm{et}}L_n\\cong L_nF_{f,n}^{\\mathrm{et}}$. The adjunctions give $\\operatorname{Hom}(K,e_nG_f^{\\mathrm{et}}N)\\cong\\operatorname{Hom}(F_{f,n}^{\\mathrm{et}}K,e_nN)$. Yoneda and counit-compatible uniqueness identify $e_nG_f^{\\mathrm{et}}N$ with $f_n^\\times N_n$, as in the system-adjoint theorem, with the evaluated counits.",
+   "uses": [
+    "lem-pur-coefficient-evaluation-derived-left-adjoint",
+    "lem-amb-proper-coproducts-projection",
+    "lem-pur-etale-open-derived-tensor",
+    "lem-coef-semilinear-derived-sections",
+    "lem-pur-etale-coefficient-system-adjoint",
+    "thm-amb-etale-exceptional-adjoint",
+    "lem-galois-yoneda-hom-bijection",
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+    "place": "Finite duality, coefficient-change compatibility, and enriched adjunction before total inverse limits."
+   }
+  },
+  {
+   "text": "Write $V_W=\\nu_{W,\\bullet}^*$ and $U_W=R\\nu_{W,\\bullet,*}$ for the site-comparison adjunction on systems. The canonical unit $1\\to U_WV_W$ is an isomorphism: its evaluations are the units of the unbounded fully faithful comparison. For any system whose levels have etale origin, the counit $V_WU_WM\\to M$ is likewise invertible, by its evaluated counits and conservativity. This uses the unbounded comparison, not the bounded-below final clause of the coefficient-system theorem. Hence these are actual inverse equivalences on the full subcategory of systems with etale-origin levels. Unbounded direct-image comparison and open comparison give $V_YF_f^{\\mathrm{et}}\\cong Rp_{*,\\bullet}j_{!,\\bullet}V_X$ as actual maps. Transport the chosen adjunction through these equivalences. Every bounded constructible finite-coefficient level has etale origin, so this applies to the domains in the statement; no common lower bound in $n$ is used.",
+   "uses": [
+    "lem-sfb-unbounded-site-comparison",
+    "lem-sfb-unbounded-direct-image-comparison",
+    "lem-pur-coefficient-system-derived-comparison",
+    "lem-coef-semilinear-derived-sections",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sf-proetale-constructible-origin"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+    "place": "Finite duality, coefficient-change compatibility, and enriched adjunction before total inverse limits."
+   }
+  },
+  {
+   "text": "Restrict the transferred compact-support functor to $\\mathscr N_X$. At level $n$, extension by zero preserves constructibility and the proper direct-image bound preserves constructibility and finite Tor amplitude; a dimension bound for the compactification is supplied by finite type over $k$. The quotient transition is the composite of the finite compact-support coefficient comparison with the transition of the input system, and the restriction-of-scalars comparison composes for successive quotients. Hence $F_f:\\mathscr N_X\\to\\mathscr N_Y$ is defined by actual system maps and agrees under evaluation with $Rf_{!,n}$, with the stated transitions. Its total limit is therefore the specified integral compact-support construction whenever that construction is defined.",
+   "uses": [
+    "lem-trf-open-ctf",
+    "cor-sf-direct-image-ctf-proetale",
+    "lem-kun-dimension-finite-type",
+    "lem-fix-compact-support-coefficient-change",
+    "lem-sf-compact-support-restriction-of-scalars",
+    "def-weil-integral-rational-qbar-compact-support",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+    "place": "Finite duality, coefficient-change compatibility, and enriched adjunction before total inverse limits."
+   }
+  },
+  {
+   "text": "The transition identification uses the system-adjoint theorem, which explicitly identifies the transitions of $G_f^{\\mathrm{et}}$ with finite adjunction mates. To spell out that mate, write $T^W_{m,n}=-\\otimes^L_{A_m}A_n$ and $q:T^Y_{m,n}F_{f,m}\\cong F_{f,n}T^X_{m,n}$. If $t^N:T^Y_{m,n}N_m\\to N_n$ is the transition-adjoint of $N$, the transition-adjoint $s$ of $G_fN$ is the $F_{f,n}\\dashv G_{f,n}$ transpose of\n$$F_{f,n}T^X_{m,n}G_{f,m}N_m\\xrightarrow{q^{-1}}T^Y_{m,n}F_{f,m}G_{f,m}N_m\\xrightarrow{T^Y_{m,n}\\epsilon_{m,N_m}}T^Y_{m,n}N_m\\xrightarrow{t^N}N_n.$$\nThe evaluation-left-adjoint theorem describes transitions as precomposition with its actual $\\sigma_{m,n}$ maps, so this is the transition of the chosen system adjoint, not a newly assigned transition. The counit identity of [lem-coef-finite-exceptional] says that the transpose of $b_{m,n,N_m}$ is the first two arrows. Naturality of transposition therefore gives\n$$s=G_{f,n}(t^N)\\circ b_{m,n,N_m}.$$\nCounit-compatible uniqueness identifies the chosen finite adjoints with the specified $Rf_n^!$.",
+   "uses": [
+    "lem-pur-etale-coefficient-system-adjoint",
+    "lem-pur-coefficient-evaluation-derived-left-adjoint",
+    "def-weil-pbc-adjunction-mate",
+    "lem-coef-finite-exceptional",
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+    "place": "Finite duality, coefficient-change compatibility, and enriched adjunction before total inverse limits."
+   }
+  },
+  {
+   "text": "The finite exceptional theorem makes every $b_{m,n}$ invertible and gives its quotient cocycle together with the unit and counit compatibility equations. The finite preservation theorem keeps $G_{f,n}$ inside $D^b_{ctf}$. Consequently the Brown right adjoint restricts to a functor $\\mathcal E_f:\\mathscr N_Y\\to\\mathscr N_X$, whose evaluations are $Rf_n^!$ and whose transitions are exactly the displayed mate formula. The unit and counit of $F_f\\dashv\\mathcal E_f$ are the restrictions of the ambient system unit and counit, so their triangle identities hold as equations of system morphisms. This argument uses invertibility of each displayed transition, not the bounded-below normalization clause of the system-adjoint theorem, so it applies without uniform bounds in the index.",
+   "uses": [
+    "lem-coef-finite-exceptional",
+    "thm-sf-preservation-class",
+    "lem-grothendieck-derived-brown-right-adjoint",
+    "def-coef-normalized-dvr-tower",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+    "place": "Finite duality, coefficient-change compatibility, and enriched adjunction before total inverse limits."
+   }
+  },
+  {
+   "text": "For each structure map $a_W:W\\to\\operatorname{Spec}k$, apply the same construction to the normalized coefficient-unit system. Nagata compactification supplies the required compactification, and the evaluated level is $Ra_{W,n}^!A_n=\\omega_{W,n}$. Define $\\Omega_W=\\mathcal E_{a_W}((A_n)_{\\operatorname{Spec}k})_n$ with the actual mate transitions. The finite dualizing comparison identifies these transitions with the counit-defined coefficient comparisons, and the integral dualizing proposition identifies $\\mathcal L_W\\Omega_W$ with the prescribed total-limit dualizing object, with the same finite projections. Choose $d_W\\ge0$ with $\\dim W\\le d_W$ by finite-type dimension finiteness (take $d_W=0$ if empty), as required by the integral dualizing proposition.",
+   "uses": [
+    "lem-grothendieck-derived-brown-right-adjoint",
+    "det-sp-unique-right-adjoint",
+    "thm-nagata-compactification",
+    "lem-coef-finite-dualizing",
+    "prop-coef-integral-dualizing",
+    "lem-pur-etale-coefficient-system-adjoint",
+    "lem-kun-dimension-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+    "place": "Finite duality, coefficient-change compatibility, and enriched adjunction before total inverse limits."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-pur-system-level-left-extension",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-valued-dvr-finite-quotients",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-etale-proper-derived-lower-star-coproducts-for-grothendieck",
+  "lem-pur-etale-coefficient-system-adjoint",
+  "lem-grothendieck-derived-brown-right-adjoint",
+  "lem-pur-coefficient-evaluation-derived-left-adjoint",
+  "lem-amb-proper-coproducts-projection",
+  "lem-pur-etale-open-derived-tensor",
+  "thm-amb-etale-exceptional-adjoint",
+  "lem-galois-yoneda-hom-bijection",
+  "det-sp-unique-right-adjoint",
+  "lem-sfb-unbounded-site-comparison",
+  "lem-sfb-unbounded-direct-image-comparison",
+  "lem-sf-proetale-constructible-origin",
+  "lem-trf-open-ctf",
+  "cor-sf-direct-image-ctf-proetale",
+  "lem-kun-dimension-finite-type",
+  "lem-fix-compact-support-coefficient-change",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-pbc-adjunction-mate",
+  "lem-coef-finite-exceptional",
+  "thm-sf-preservation-class",
+  "def-coef-normalized-dvr-tower",
+  "thm-nagata-compactification",
+  "lem-coef-finite-dualizing",
+  "prop-coef-integral-dualizing"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.FiniteAdjunctionGeometricRealization",
+  "file": "lean/Sheaf/SixFunctors/FiniteAdjunctionGeometricRealization.lean",
+  "declaration": "WeilConjectures.FiniteAdjunctionDiagram.finiteAdjunctionGeometricRealization",
+  "declarations": [
+   "WeilConjectures.FiniteAdjunctionDiagram.finiteAdjunctionGeometricRealization"
+  ],
+  "statement": "theorem finiteAdjunctionGeometricRealization (hX : CoefficientDerivedSystemCoherence l E X SX) (hZ : CoefficientDerivedSystemCoherence l E c.Z SZ) (hY : CoefficientDerivedSystemCoherence l E Y SY) (hS : CoefficientDerivedSystemCoherence l E (Spec (.of D.k)) SS) (βX : @SymmetricCategory (coefficientSequenceDerived l E X) _ SX.systemClosed.monoidal) (βY : @SymmetricCategory (coefficientSequenceDerived l E Y) _ SY.systemClosed.monoidal) (tX : RingedDerivedTensorCoherence.{u + 1, u, u} (coefficientSequenceTopology (Scheme.ProEt.topology X)) (coefficientSequenceCommRingSheaf l E X) SX.systemClosed SX.systemTensorModel βX) (tY : RingedDerivedTensorCoherence.{u + 1, u, u} (coefficientSequenceTopology (Scheme.ProEt.topology Y)) (coefficientSequenceCommRingSheaf l E Y) SY.systemClosed SY.systemTensorModel βY) : ∃ (r : Realization l E D hl f c SX SZ SY) (g : Geometry l E f SX SY) (s : SectionsPush g) (aX : DualizingOperation (D := D) (hl := hl) X SX SS) (aY : DualizingOperation (D := D) (hl := hl) Y SY SS), Nonempty (IntegralSupport r)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-1f636",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261025T101124-L-3659846",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-1f636",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261025T101124-L-3659846",
+  "kind": "interface",
+  "note": "independent cc review: item stmt byte-identical to clone; moved decls diffed verbatim vs clone (only coefficientUnit_mem/structure_isOver proofs changed); 7 direct importers + 9 delivered modules compiled together (exit 0); axioms: sorryAx only via the 6 new sorry lemmas, structure_isOver clean; node records match Lean signatures"
+ }
+}

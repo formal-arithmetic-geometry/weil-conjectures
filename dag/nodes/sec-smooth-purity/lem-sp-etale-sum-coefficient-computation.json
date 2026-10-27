@@ -28,11 +28,12 @@
  ],
  "proof": [
   {
-   "text": "The compactification has $r$ proper, hence finite type, so $W$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. For either finite coefficient ring $R=A,B$ and any $R$-module sheaf $M$ on $U$, apply [lem-asd-etale-compact-support-normalization] to $M[0]$. It identifies $Rr_*j_!M[0]$ with $e_{\\Sigma!}M[0]$. Taking cohomology gives $R^ar_*j_!M=0$ for $a>0$ and the canonical degree-zero isomorphism $r_*j_!M\\cong e_{\\Sigma!}M$, with exactly the sheet components specified there. Apply this first to $M=P^n$ over $A$, then to $M=P^n\\otimes_A B$ over $B$. The second application requires no flatness of that sheaf over $A$. This proves both acyclicity assertions and gives natural degreewise sheet identifications.",
+   "text": "Apply [lem-sp-etale-compactification-bounded-models] with $(R,K)=(A,P)$ and $(B,P\\otimes_A B)$. The latter complex is bounded on the same interval because tensor sends zero to zero; flatness is not required for this application. This gives both families of higher-direct-image vanishings, the canonical acyclic and sheet identifications, and Noetherianity of $W$. Its flat clause for $(A,P)$ gives termwise flatness and K-flatness of $j_!P$, $r_*j_!P$ and $P$. For the independent-coefficient K-flat predicates, use the constant-module equivalence and its flatness comparison [lem-pur-etale-constant-module-flat] [lem-pur-etale-sum-tensor-test], then the bounded-above site-flat criterion [lem-weil-pbc-independent-bounded-flat-kflat]. The realization equivalence is additive, so it preserves the upper bound.",
    "uses": [
-    "def-weil-proper-morphism",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-asd-etale-compact-support-normalization"
+    "lem-sp-etale-compactification-bounded-models",
+    "lem-pur-etale-constant-module-flat",
+    "lem-pur-etale-sum-tensor-test",
+    "lem-weil-pbc-independent-bounded-flat-kflat"
    ],
    "elementary": false,
    "source": {
@@ -41,25 +42,13 @@
    }
   },
   {
-   "text": "By [lem-coef-etale-open-tensor], $j_!$ preserves flat sheaves; thus $C=j_!P$ is bounded with flat terms. By [lem-pur-etale-sum-flat-kflat], $e_{\\Sigma!}P^n$ is flat for every $n$. Transporting this property through the degree-zero isomorphism of step 1 makes every $r_*C^n$ flat. Degreewise direct image and extension by zero retain the finite interval on which $P$ is supported. Apply [lem-pc-bounded-above-flat-kflat-site] to $C$ and to $r_*C$: both are K-flat. The same lemma applies to $P$ itself. These verify all flatness and K-flatness claims without a condition on $B/A$.",
-   "uses": [
-    "lem-coef-etale-open-tensor",
-    "lem-pur-etale-sum-flat-kflat",
-    "lem-pc-bounded-above-flat-kflat-site"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GL6 (remark-Rf-lower-shriek-change-of-rings), expanded bounded-model calculation; Tag 0GKF (lemma-f-shriek-projection), pure-tensor rule."
-   }
-  },
-  {
-   "text": "Apply [lem-sp-acyclic-flat-proper-coefficient-model] to $r$ and $C=j_!P$. Properness is part of the compactification; $W,V$ are Noetherian by step 1; $A,B$ are finite; boundedness, both termwise flatness assumptions, and the two direct-image acyclicity assumptions were verified in steps 1-2. For the second acyclicity assumption use the ordinary tensor isomorphism $C\\otimes_A B\\cong j_!(P\\otimes_A B)$ of [lem-coef-etale-open-tensor]. The cited model theorem therefore identifies the actual proper $B$-adjoint transpose $q_r(C)$ with the chain map $\\pi_C:(r_*C)\\otimes_A B\\to r_*(C\\otimes_A B)$ whose degree-$n$ adjunct is the ordinary counit tensored with $1$. Compose with $r_*$ of the open tensor isomorphism. This is precisely the coefficient map in the statement, with its specified acyclic-complex identifications.",
+   "text": "Put $C=j_!P$. Apply [lem-sp-acyclic-flat-proper-coefficient-model]: $r$ is proper, $W,V$ are Noetherian, both rings are finite, and step 1 supplies boundedness, flatness and acyclicity. For its $B$-acyclicity hypothesis identify $C\\otimes_A B$ with $j_!(P\\otimes_A B)$ using [lem-coef-etale-open-tensor]. The theorem represents the actual proper $B$-counit transpose by $\\pi_C$, natural in chain maps. Compose with $r_*$ of the ordinary open tensor map. This represents the specified derived open map as well: both open comparisons restrict to the identity on $U$ and are maps between open extensions, so the fully faithful open adjunction identifies them [lem-coef-etale-open-tensor] [def-sp-open-coefficient-unit-iso]. The equality with the normalized derived open scalar map follows by applying the open adjunction hom-equivalence to the inverse maps and using its unit normalization [lem-pur-etale-open-scalar-exchange]. Its K-flat model equation is the q_normalized clause of [lem-coef-etale-open-scalar-coherence], also exposed by the open tensor comparisons.",
    "uses": [
     "lem-sp-acyclic-flat-proper-coefficient-model",
     "lem-coef-etale-open-tensor",
-    "lem-coef-etale-open-comparison-data",
-    "lem-sf-proper-open-coefficient-refinement"
+    "def-sp-open-coefficient-unit-iso",
+    "lem-pur-etale-open-scalar-exchange",
+    "lem-coef-etale-open-scalar-coherence"
    ],
    "elementary": false,
    "source": {
@@ -68,24 +57,21 @@
    }
   },
   {
-   "text": "Compute that ordinary map before passing to the derived category. For an etale test scheme $S\\to V$, direct image is evaluation on $W_S=W\\times_VS$ [def-weil-pbc-direct-image]. Thus the adjunct defining $\\pi_C^n$ sends a local pure tensor $z\\otimes b$ to the section $z\\otimes r^{-1}b$ on $W_S$: the ordinary counit evaluates the pulled-back section $z$. Here $b$ is a local section of the constant ring sheaf $B_V$, so the formula also covers locally constant, rather than globally constant, coefficients. The open tensor isomorphism is the identity on $U$ and zero on its complement [lem-coef-etale-open-tensor]. Under the degree-zero normalization of [lem-asd-etale-compact-support-normalization], $z$ is sent to its sheet components $(x_s)_s$. Taking the component of $z\\otimes r^{-1}b$ restricts to the same sheet and hence gives $x_s\\otimes b$; tensor restriction acts on each factor. Consequently the composite of step 3 is $(x_s)_s\\otimes b\\mapsto(x_s\\otimes b)_s$. This is a calculation on local generators: by [def-weil-pbc-etale-sum-extension], sum extension is the sheafification of a presheaf of direct sums, so its sections locally come from finite sums of sheet generators; ordinary sheaf tensor is likewise generated locally by pure tensors. The calculation is additive and balanced, since $(a x_s)\\otimes b=x_s\\otimes\\varphi(a)b$. It therefore proves equality of the sheaf morphisms, without assuming that a test scheme globally splits into sheets.",
+   "text": "For each degree apply [lem-sp-etale-compactification-sheaf-scalar-map] to $M=P^n$. It identifies the ordinary composite of step 2 under the degree-zero sheet comparisons with $(x_s)_s\\otimes b\\mapsto(x_s\\otimes b)_s$. Its equality of sheaf maps applies to locally constant $b$ and local finite-support generators, with no global splitting assumption. The sum isomorphism formed with the upper-star adjunction equals the one formed with literal localization restriction: compare their transposes, expand the transported units, use the scalar/restriction comparison and naturality, and cancel the restriction isomorphism. Apply the graph/scalar identity degreewise.",
    "uses": [
-    "def-weil-pbc-direct-image",
-    "lem-coef-etale-open-tensor",
-    "lem-asd-etale-compact-support-normalization",
-    "def-weil-pbc-etale-sum-extension"
+    "lem-sp-etale-compactification-sheaf-scalar-map"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
     "place": "Tag 0GL6 (remark-Rf-lower-shriek-change-of-rings), expanded bounded-model calculation; Tag 0GKF (lemma-f-shriek-projection), pure-tensor rule."
    }
   },
   {
-   "text": "The degreewise formula commutes with the cochain differential: both composites on a generator give $(d x_s\\otimes b)_s$. Naturality of the acyclic-model theorem and of the sheet normalization identifies the endpoints with the specified complexes, also after coefficient extension [lem-sp-acyclic-flat-proper-coefficient-model, lem-asd-etale-compact-support-normalization]. Hence the equality of chain maps just computed represents the named derived map. Finite sums remain finite after tensoring; for an empty sheet index the generator calculation is the unique map $0\\to0$. It also covers $P=0$, $A=B$ with the identity map, and the zero coefficient ring. No tensor step used exactness of $-\\otimes_A B$: K-flatness was established on the source models instead.",
+   "text": "The degreewise formula is a chain map: applying either differential composite to a generator gives $(d x_s\\otimes b)_s$. The canonical-model compatibility of step 1 and the natural representation of step 2 identify its localization with the named derived coefficient map [lem-sp-etale-compactification-bounded-models] [lem-sp-acyclic-flat-proper-coefficient-model]. Tensor preserves finite sums; empty sheets give $0\\to0$. The same computation covers $P=0$, $A=B$ with identity map, and $B=0$. K-flat source models compute derived tensor throughout; no exactness of $-\\otimes_A B$ was used. Expand the model boundary. Naturality of the proper coefficient map moves the open localization factor; the normalized open model equality, the proper model equality, scalar-representative naturality, acyclic-comparison naturality and the localized graph identity then give the displayed equation by associativity.",
    "uses": [
-    "lem-sp-acyclic-flat-proper-coefficient-model",
-    "lem-asd-etale-compact-support-normalization"
+    "lem-sp-etale-compactification-bounded-models",
+    "lem-sp-acyclic-flat-proper-coefficient-model"
    ],
    "elementary": true,
    "source": {
@@ -95,22 +81,21 @@
   }
  ],
  "proof_deps": [
-  "def-weil-proper-morphism",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-asd-etale-compact-support-normalization",
-  "lem-coef-etale-open-tensor",
-  "lem-pur-etale-sum-flat-kflat",
-  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-sp-etale-compactification-bounded-models",
   "lem-sp-acyclic-flat-proper-coefficient-model",
-  "def-weil-pbc-direct-image",
-  "def-weil-pbc-etale-sum-extension",
-  "lem-coef-etale-open-comparison-data",
-  "lem-sf-proper-open-coefficient-refinement"
+  "lem-coef-etale-open-tensor",
+  "def-sp-open-coefficient-unit-iso",
+  "lem-sp-etale-compactification-sheaf-scalar-map",
+  "lem-pur-etale-constant-module-flat",
+  "lem-pur-etale-sum-tensor-test",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-pur-etale-open-scalar-exchange",
+  "lem-coef-etale-open-scalar-coherence"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tag 0GL6 (remark-Rf-lower-shriek-change-of-rings), expanded bounded-model calculation; Tag 0GKF (lemma-f-shriek-projection), pure-tensor rule. The diagrammatic derived-map identification uses the existing bounded acyclic-flat model theorem; the blueprint Charts paragraph supplies the application."
+  "place": "Tag 0GL6 (remark-Rf-lower-shriek-change-of-rings), expanded bounded-model calculation; Tag 0GKF (lemma-f-shriek-projection), pure-tensor rule. The diagrammatic derived-map identification uses the existing bounded acyclic-flat model theorem; the blueprint Charts paragraph supplies the application. W8: Lean assembly of the existing bounded-model, proper-model and ordinary graph identities; independent-coefficient K-flatness transported through the constant-module realization."
  },
  "mathlib_searches": [
   {
@@ -208,27 +193,15 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-sp-etale-sum-coefficient-computation",
   "worker": "stage1",
-  "summary": "Kept the statement. Derived degreewise acyclicity from existing etale compact-support normalization on sheaves in degree zero, verified flatness and bounded K-flatness, applied the existing general proper acyclic-flat coefficient model, and computed the resulting actual counit-transpose map on local finite-support sheet generators. No new node.",
-  "blueprint": "det-sp-reduction-exceptional, Charts paragraph: summation over geometric etale fibres is integral and commutes with extension of coefficients; this split supplies the bounded-model computation used by lem-sp-et-proet-coefficient-compatibility step 4.",
+  "summary": "Repaired the 2026-10-22 re-split return without changing the statement: extracted two independent, similarly sized statement-only obligations, the bounded compactification models (old steps 1-2) and ordinary sheaf scalar-mate sheet calculation (old step 4). The short assembly retains the actual proper derived transpose application and differential/localization argument (old steps 3 and 5). Full old arguments and their new ownership are retained in the report.",
+  "blueprint": "det-sp-reduction-exceptional, Charts paragraph: integral summation over etale fibres commutes with coefficient extension. New nodes separately realize bounded-model preparation and ordinary sheet-generator normalization; the item assembles them through the existing proper acyclic-flat model theorem.",
   "tool_uses": [
    {
-    "node": "lem-asd-etale-compact-support-normalization",
-    "why": "Generic canonical identification of compactified etale pushforward with exact sum extension, including degree-zero sheet components; not a different coefficient-compatibility route."
-   },
-   {
-    "node": "lem-pc-bounded-above-flat-kflat-site",
-    "why": "General ringed-site K-flatness criterion applied to bounded flat complexes; not supplied by the unit geometric route."
-   },
-   {
-    "node": "lem-weil-pbc-finite-type-over-noetherian",
-    "why": "Generic Noetherian permanence needed for the compactification space W."
-   },
-   {
     "node": "lem-coef-etale-open-tensor",
-    "why": "Generic open-extension flatness and the ordinary/derived tensor comparison normalized to the identity on U."
+    "why": "General normalized ordinary/derived open tensor comparison; used to identify the proper model output with the prescribed open coefficient isomorphism."
    }
   ]
  },
@@ -239,14 +212,25 @@
   "lem-coef-etale-open-tensor"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q120-91e779983",
-  "group": "Q120",
+  "reviewer": "NT-cc-Q16-f092dc04a",
+  "group": "Q16",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-91e779983 (reviewer sub-agent of L); spot-checked: Read the item's 5 steps and every cited statement in full. The item was unsplit with no proof, and there is no repair note. Statement and stmt_deps are unchanged, and the delivery creates no new nodes. The cited statements and their hypotheses match each use. Step 1: applying lem-asd-etale-compact-support-normalization (finite, hence torsion, A and B; u separated, etale, finite type, Noetherian) to M[0] gives the vanishing of the higher direct images and the degree-0 sheet identification. W is Noetherian by the finite-type lemma, since r is proper. Step 2: flatness comes from lem-coef-etale-open-tensor and lem-pur-etale-sum-flat-kflat through the degree-0 isomorphism. K-flatness comes from lem-pc-bounded-above-flat-kflat-site. Step 3: every hypothesis of lem-sp-acyclic-flat-proper-coefficient-model holds. The B-side acyclicity uses the ordinary projection formula with T=B_W. The model identifies the named transpose q_r itself, not an arbitrary isomorphism. Step 4: the generator computation z⊗b -> z⊗r^{-1}b -> (x_s⊗b)_s is correct, and local generation via sheafification is justified. Step 5: the differential carries no Koszul sign. I checked the cases of empty sheets, P=0, B=0, A=B, and non-flat Z/4->Z/2. Minor unstated point, not a fault: the derived q_{j,P} equals the ordinary isomorphism on K-flat models because j_! is fully faithful and both restrict to the identity on U. Sources: Stacks more-etale 0GL6 and the main-20261015 sk-lem-sp-reduction-exceptional Charts paragraph (l.20-28) both match. No SGA. No cycle (the closure DFS does not reach the item), and no duplicate in the DAG. The parent's step 4 uses exactly this formula. Accepted tool_uses: lem-asd-etale-compact-support-normalization, lem-coef-etale-open-tensor, lem-pc-bounded-above-flat-kflat-site, and lem-weil-pbc-finite-type-over-noetherian (a Mathlib leaf)."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-f092dc04a (reviewer sub-agent of L); spot-checked: Re-split matches the 2026-10-22 note. The item statement and stmt_deps are byte-identical to live, and the live node is still split with the same 5-step base proof, so no other group has superseded it. Old steps 1-2 (normalization on M[0], giving acyclicity, the degree-0 sheet iso and W Noetherian, plus flat/K-flat models) become lem-sp-etale-compactification-bounded-models (2043 characters). That node also turns the old step-5 'naturality identifies endpoints' into an explicit c_K α_K = Q(ν_K). Old step 4 (counit z⊗b ↦ z⊗r^{-1}b ↦ (x_s⊗b)_s on local generators, locally constant b, balancing) becomes lem-sp-etale-compactification-sheaf-scalar-map (2336 characters). Its π_C is exactly the π_C of lem-sp-acyclic-flat-proper-coefficient-model. Old steps 3 and 5 stay as assembly steps that apply cited nodes, with every hypothesis check and edge case kept. The new proof is 2120 characters; both new nodes are unsplit with 5 searches each and do not cite each other. I checked all hypotheses: R finite hence torsion for the asd normalization; B-side acyclicity via the ordinary projection formula of lem-coef-etale-open-tensor with T=B_W; the flat clause is used only for (A,P), so the non-flat Z/4→Z/2 case is fine; the ordinary open tensor map is identified with properOpenCoefficientOpenIso by full faithfulness of j_!. Small cases checked: e=id, two sheets, U=∅, M=0, B=0, A=B. No duplicates among the graph-normalization, projection-map, varying-ring and counit-scalar nodes. Sources checked: Stacks 0GL6 l.3739, 0GKF l.1808, 03S5, 0F4L; no SGA. Batch-5 flag on both new nodes citing lem-asd-etale-compact-support-normalization: accepted. The item already has it in its base stmt_deps, so the closure does not grow, and it is a general compact-support identification, not a step of the trace formula or Poincaré duality."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.EtaleSumCoefficientComputation",
   "declaration": "AlgebraicGeometry.Etale.etaleSumCoefficientComputation",
@@ -276,5 +260,15 @@
   "group": "Q35",
   "result": "fix",
   "note": "Re-delivery after the H2 RETURN of faee664b82df. The Lean is byte-identical (sha 311836b0) and its substance was re-checked: hypotheses, every conclusion clause, edge cases, universes and docstrings are correct. Against live, the item differs only in lean and stmt_deps. stmt_deps adds only definition nodes (def-f7 graph map plus three new existing:true nodes); the three theorem nodes are in proof_deps only. The record statement is verbatim and the file has 1 sorry. nt_compile --json: exit 0, 45.7 s at load ~200, no errors or warnings. def-sp-proper-coefficient-model-maps and def-sp-etale-kflat-realization are correct: check_existing and check_record clean, TeX matches the Lean, no cycle. F1 (H4): def-sp-open-coefficient-unit-iso re-owned and re-defined properOpenCoefficientPullbackIso and properOpenCoefficientOpenInverse, already owned by the landed definition node def-pur-open-coefficient-normalizations. FIX: whole-node fixes/def-sp-open-coefficient-unit-iso.json. It now owns only properOpenCoefficientOpenIso and the proved properOpenCoefficientOpenInverse_isIso, cites def-pur-open-coefficient-normalizations for the inverse map, and its citations equal its stmt_deps; checks clean. The item and all Lean are unchanged. Advisory: scalarMate and etaleSumFlatComplexRealization are declared only by theorem nodes (base-era)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W8",
+  "result": "pass",
+  "landing": "20261025T041314-L-1146018",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

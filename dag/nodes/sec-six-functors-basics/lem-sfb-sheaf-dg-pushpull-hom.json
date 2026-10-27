@@ -1,0 +1,395 @@
+{
+ "id": "lem-sfb-sheaf-dg-pushpull-hom",
+ "kind": "statement",
+ "title": "Underived dg pullback pushforward adjunction on Hom complexes",
+ "statement": "Let $f:(X,\\mathcal O_X)\\to(Z,\\mathcal O_Z)$ be a morphism of ringed topological spaces, meaning a continuous map with a unital ring-sheaf map $f^{-1}\\mathcal O_Z\\to\\mathcal O_X$. Let $\\mathcal C$ and $\\mathcal B$ be sheaf dg algebras over $\\mathcal O_Z$ and $\\mathcal O_X$, and let $\\varphi:f^{-1}\\mathcal C\\to\\mathcal B$ be a dg algebra map over $f^{-1}\\mathcal O_Z\\to\\mathcal O_X$. Use left sheaf dg modules and homogeneous signed maps as in [def-sfb-sheaf-dg-module-localization]. Put $F(N)=\\mathcal B\\otimes_{f^{-1}\\mathcal C} f^{-1}N$, with direct-sum total tensor differential, and give the degreewise direct image $G(M)=f_*M$ its $\\mathcal C$-action through the adjoint of $\\varphi$. There is a natural isomorphism of complexes of abelian groups\n$$\\operatorname{Hom}_{\\mathcal B}^{\\bullet}(F(N),M)\\cong\\operatorname{Hom}_{\\mathcal C}^{\\bullet}(N,G(M)),$$\nwhere Hom denotes global homogeneous sheaf maps and $\\delta(h)=d h-(-1)^{|h|}h d$. In degree $r$, the isomorphism sends $h$ to the map adjoint to $n\\mapsto h(1\\otimes n)$; its inverse extends an adjoint $\\widetilde k:f^{-1}N\\to M$ by $b\\otimes n\\mapsto(-1)^{r|b|}b\\widetilde k(n)$. The degree-zero closed maps give an adjunction $F\\dashv G$ on dg modules and on their homotopy categories, with unit adjoint to $n\\mapsto1\\otimes n$ and counit induced by $b\\otimes m\\mapsto b\\,\\mathrm{ev}(m)$. Both functors preserve signed shifts and mapping cones. If $\\mathcal B=\\mathcal O_X\\otimes_{f^{-1}\\mathcal O_Z}f^{-1}\\mathcal C$, there is a natural chain isomorphism $F(N)\\cong\\mathcal O_X\\otimes_{f^{-1}\\mathcal O_Z}f^{-1}N$, induced by $(a\\otimes c)\\otimes n\\mapsto a\\otimes cn$ with inverse $a\\otimes n\\mapsto(a\\otimes1)\\otimes n$. Under this isomorphism the unit and counit have exactly their ordinary module-sheaf pullback/pushforward formulas after forgetting the action. For $f=\\mathrm{id}_X$ and $\\mathcal C=\\mathcal O_X$ in degree zero, this is the free/forgetful Hom-complex adjunction $\\operatorname{Hom}_{\\mathcal B}^{\\bullet}(\\mathcal B\\otimes_{\\mathcal O_X}L,I)\\cong\\operatorname{Hom}_{\\mathcal O_X}^{\\bullet}(L,UI)$. No exactness, flatness or boundedness assumption is made.",
+ "source": {
+  "document": "literature/stacks-project/sdga.tex",
+  "place": "Tag 0FRU (lemma-adjunction-push-pull-dg), its graded predecessor lemma-adjunction-push-pull-gr, and section-functoriality-dg. Explicit left-module signed formulas and the base-change tensor identification unpack these constructions."
+ },
+ "stmt_deps": [
+  "def-sfb-sheaf-dg-module-localization"
+ ],
+ "proof": [
+  {
+   "text": "Put $R=f^{-1}\\mathcal O_Z$ and $A=f^{-1}\\mathcal C$. Work on the sites of opens, with open covers, in the universes of the module definition. Preimage of opens carries a cover to a cover, so it is continuous. The set inverse image preserves finite limits by [lem-weil-pbc-sets-inverse-image-colimits-finite-products]. Thus [lem-sfb-site-inverse-image-multimap-universal] applies to every finite family of homogeneous components. It transports multiplication and module actions: define the transported operation by its value on tuples of unit images; associativity, the unit equation and the Leibniz equation hold because the two sides agree on those tuples, hence agree by uniqueness. This constructs $A$ and $f^{-1}N$ with their claimed dg structures. The ordinary module adjunction [lem-pc-module-inverse-image-adjunction], applied over $\\mathcal O_Z$ in each pair of degrees, transposes $R$-linear maps $f^{-1}N^i\\to M^{i+r}$ to $\\mathcal O_Z$-linear maps $N^i\\to f_*M^{i+r}$. Here $M$ is restricted along $R\\to\\mathcal O_X$. Direct image has the sectionwise action through $\\mathcal C\\to f_*\\mathcal B$; its Leibniz equation is the equation in $M$ evaluated on inverse images of opens.",
+   "uses": [
+    "def-sfb-sheaf-dg-module-localization",
+    "lem-weil-pbc-sets-inverse-image-colimits-finite-products",
+    "lem-sfb-site-inverse-image-multimap-universal",
+    "lem-pc-module-inverse-image-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tags 0FR7, 0FRT: construction of pull and push; sheaves.tex Tag 008Y"
+   }
+  },
+  {
+   "text": "First perform extension of scalars on $X$, without the inverse-image adjunction. For a signed $\\mathcal B$-linear homogeneous map $h:\\mathcal B\\otimes_A f^{-1}N\\to M$ of degree $r$, set $t(n)=h(1\\otimes n)$. For homogeneous $c\\in A^q$, balancing and signed linearity give $t(cn)=h(\\varphi(c)\\otimes n)=(-1)^{rq}\\varphi(c)t(n)$. Conversely such an $R$-linear $t$ defines $h(b\\otimes n)=(-1)^{r p}b\\,t(n)$ for $b\\in\\mathcal B^p$. Indeed the two representatives of the balancing relation have images $(-1)^{r(p+q)}b\\varphi(c)t(n)$ and $(-1)^{rp}b\\,t(cn)$, which coincide. The formula is additive in each input, $R$-balanced, and $\\mathcal O_X$-linear after multiplication by the first factor; it is signed $\\mathcal B$-linear since replacing $b$ by $ab$ adds $r|a|$ to the exponent. The tensor universal property [lem-pc-sites-sheaf-tensor-bilinear-universal], the direct-sum and balanced-quotient construction in [def-sfb-sheaf-dg-module-localization], and the universal property [def-weil-pbc-sheafification] extend these formulas uniquely to sheaf maps. Evaluation at $1$ and extension are inverse, since $h(b\\otimes n)=(-1)^{rp}b\\,h(1\\otimes n)$. This also explains why checking formulas on homogeneous tensor generators suffices below; it never asserts that all global sections are pure tensors.",
+   "uses": [
+    "def-sfb-sheaf-dg-module-localization",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FR8, lemma-adjunction-push-pull-gr: extension/restriction part of its hints, with explicit left-module signs"
+   }
+  },
+  {
+   "text": "Transpose $t$ degreewise by step 1 to $k:N\\to f_*M$. The signed $\\mathcal C$-linearity of $k$ is equivalent to signed $A$-linearity of $t$. In fact, for $c\\in\\mathcal C^q(V)$ and $n\\in N^i(V)$, the unit and action formulas give\n$k(cn)=t(\\eta(cn))=t(\\eta(c)\\eta(n))$ and $c\\,k(n)=\\varphi(\\eta(c))t(\\eta(n))$.\nThus signed linearity of $t$ implies that of $k$. Conversely, if $k$ is signed linear, the natural two-input maps $(a,x)\\mapsto t(ax)$ and $(a,x)\\mapsto(-1)^{rq}\\varphi(a)t(x)$, from $A^q\\times f^{-1}N^i$ to $M^{q+i+r}$, agree on all pairs of unit images. Uniqueness in [lem-sfb-site-inverse-image-multimap-universal] makes them equal everywhere. Together with step 2 this is an additive bijection in every degree, with precisely the forward and inverse formulas in the statement. Naturality in degree-zero module maps follows by substituting precomposition and postcomposition into these formulas and the natural module adjunction.",
+   "uses": [
+    "lem-pc-module-inverse-image-adjunction",
+    "lem-sfb-site-inverse-image-multimap-universal",
+    "def-sfb-sheaf-dg-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FR8, lemma-adjunction-push-pull-gr: inverse-image/direct-image part of its hints"
+   }
+  },
+  {
+   "text": "The signed homogeneous maps form Hom complexes: expanding the Leibniz rules gives $(\\delta h)(am)=(-1)^{(r+1)|a|}a(\\delta h)(m)$; the two terms involving $d(a)h(m)$ cancel. Expanding once more gives $\\delta^2h=d^2h-hd^2=0$. Since $d(1)=0$, the tensor differential gives $d(1\\otimes n)=1\\otimes d(n)$, and hence\n$(\\delta h)(1\\otimes n)=d_Mt(n)-(-1)^r t(dn)$.\nThe degreewise transpose commutes with differentials by naturality of the ordinary module adjunction. Therefore the additive bijections of step 3 commute with $\\delta$; their inverses do also. This proves the asserted natural chain isomorphism, without exchanging any infinite sum with $f_*$.",
+   "uses": [
+    "def-sfb-sheaf-dg-module-localization",
+    "lem-pc-module-inverse-image-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FRU, lemma-adjunction-push-pull-dg: the omitted differential calculation, using the Hom convention of Tag 0FRL"
+   }
+  },
+  {
+   "text": "The object constructions give dg functors. On a homogeneous degree-$r$ map $u$, use $F(u)(b\\otimes n)=(-1)^{r|b|}b\\otimes u(n)$ and $G(u)=f_*u$ degreewise. The balancing check is the one in step 2. Composition adds the exponents, so identities and compositions are preserved. For $p=|b|$, expansion gives\n$\\delta(Fu)(b\\otimes n)=(-1)^{rp+p}b\\otimes(d u-(-1)^r u d)(n)=F(\\delta u)(b\\otimes n)$;\nthe two $d(b)\\otimes u(n)$ terms cancel because $r+r(p+1)\\equiv rp$ modulo $2$. Sectionwise the same identity for $G$ is immediate. In particular $F,G$ take chain maps to chain maps. Their object differentials square to zero: the two mixed tensor terms cancel, and balancing is preserved since differentiating $b\\varphi(c)\\otimes n=b\\otimes cn$ gives the same terms using the Leibniz rules and $d\\varphi=\\varphi d$.",
+   "uses": [
+    "def-sfb-sheaf-dg-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FRT, section-functoriality-dg, enhancement to dg categories"
+   }
+  },
+  {
+   "text": "Restrict the chain isomorphism to degree-zero cycles; these are exactly the dg module morphisms. The identity of $F(N)$ transposes to the unit, namely the adjoint of $n\\mapsto1\\otimes n$. The inverse transpose of the identity of $G(M)$ is the counit $b\\otimes m\\mapsto b\\,\\mathrm{ev}(m)$, where $\\mathrm{ev}:f^{-1}f_*M\\to M$ is the ordinary inverse-image counit. The triangle identities can be checked explicitly: $F(N)\\to FG F(N)\\to F(N)$ sends $b\\otimes n$ to $b\\otimes\\eta_N(n)$ and then to $b\\otimes n$; $G(M)\\to GF G(M)\\to G(M)$ sends a section $m$ to $1\\otimes m$ and then to $m$, using the inverse-image triangle identity. Tensor and sheafification uniqueness from step 2 give equality on all sections. These natural Hom bijections, unit and counit give $F\\dashv G$.",
+   "uses": [
+    "def-sfb-sheaf-dg-module-localization",
+    "def-weil-pbc-topological-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FRU, degree-zero cycles; sheaves.tex Tag 008K, ordinary adjunction unit and counit"
+   }
+  },
+  {
+   "text": "A module homotopy is a signed degree-$-1$ map $s$ with difference $\\delta s=d s+s d$, exactly as in [def-sfb-sheaf-dg-module-localization]. Step 5 shows that both functors preserve this relation. Steps 3--4 send boundaries in degree zero bijectively to boundaries, so the Hom bijection descends to the quotients by homotopy and remains bijective and natural. The unit, counit and triangle identities descend as well. This proves the claimed adjunction of homotopy categories, with no appeal to a derived localization.",
+   "uses": [
+    "def-sfb-sheaf-dg-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FRZ, section-homotopy, applied to the explicit Hom chain isomorphism"
+   }
+  },
+  {
+   "text": "For any integer $k$, define $\\theta_k:F(N[k])\\to F(N)[k]$ by $b\\otimes n\\mapsto(-1)^{kp}b\\otimes n$, $p=|b|$. In the source balancing relation the shifted action of $c\\in A^q$ adds $kq$; the exponents $k(p+q)$ and $kp+kq$ coincide. For $a\\in\\mathcal B^q$, the target action adds $kq$, so $\\theta_k(a(b\\otimes n))=a\\cdot_{F(N)[k]}\\theta_k(b\\otimes n)$. On $d(b)\\otimes n$, the source-then-$\\theta$ exponent is $k(p+1)$ and the $\\theta$-then-target-differential exponent is $kp+k$; on $b\\otimes dn$ both are $kp+p+k$. Thus $\\theta_k$ is a chain map. Its inverse has the same sign, so it is an isomorphism. The signs add under consecutive shifts and the formula commutes with degree-zero maps. For $G$ the identity on each component gives $G(M[k])\\cong G(M)[k]$, since the differential and action acquire exactly the same signs on both sides.",
+   "uses": [
+    "def-sfb-sheaf-dg-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tags 0FRC and 0FRY, signed shift convention translated to left modules"
+   }
+  },
+  {
+   "text": "Let $u:N\\to N'$ be a degree-zero chain map. Tensor distributes over the two summands of $C(u)=N'\\oplus N[1]$: the forward map sends $b\\otimes(n',n)$ to $(b\\otimes n',b\\otimes n)$, and its inverse is the sum of the two maps induced by the inclusions. These are inverse by bilinearity and the balanced tensor universal property from step 2. Composing on the second summand with $\\theta_1$ of step 8 gives\n$F(C(u))\\longrightarrow C(Fu),\\quad b\\otimes(n',n)\\longmapsto(b\\otimes n',(-1)^p b\\otimes n)$.\nThe diagonal differential terms commute by step 8. The off-diagonal term on the source is $(-1)^p b\\otimes u(n)$; on the target it is $Fu((-1)^p b\\otimes n)$, the same element. The inverse again has the same sign. This intertwines the cone inclusion and projection with the shift comparison, hence also the specified $-p$ triangle arrow. Direct image preserves the two summands since sections of a finite direct sum are the finite product of sections; it preserves the displayed differential matrix entrywise. It therefore gives $G(C(v))\\cong C(Gv)$ with the identical inclusions and projections. Both functors preserve mapping cones with the stated signed conventions.",
+   "uses": [
+    "def-sfb-sheaf-dg-module-localization",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FS5, definition-cone; Tag 0FRT and the explicit shift comparison"
+   }
+  },
+  {
+   "text": "Now suppose $\\mathcal B=\\mathcal O_X\\otimes_R A$. Define $\\alpha((a\\otimes c)\\otimes n)=a\\otimes cn$ and $\\beta(a\\otimes n)=(a\\otimes1)\\otimes n$. The inner $R$-balancing moves a scalar between $a$ and $c$; the outer $A$-balancing moves $c$ to $n$. Both leave $a\\otimes cn$ unchanged, so $\\alpha$ is well defined; the same $R$-balancing proves that $\\beta$ is. They define sheaf maps by the tensor and sheafification universal properties, including arbitrary direct-sum degrees. The two composites are identities: $\\alpha\\beta(a\\otimes n)=a\\otimes n$, while $\\beta\\alpha((a\\otimes c)\\otimes n)=(a\\otimes1)\\otimes cn=(a\\otimes c)\\otimes n$. For $|c|=q$, both differentials after $\\alpha$ are $a\\otimes(d(c)n+(-1)^q c\\,dn)$; $a$ has degree zero and differential zero. The maps are natural in $N$ and linear for the transported $\\mathcal B$-action. Hence this is the asserted chain isomorphism.",
+   "uses": [
+    "def-sfb-sheaf-dg-module-localization",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FRT, definition of pullback; base-change tensor identification by its balanced presentation"
+   }
+  },
+  {
+   "text": "Under $\\alpha$, the unit of step 6 sends $n$ to $1\\otimes n$, and the counit sends $a\\otimes m$ to $a\\,\\mathrm{ev}(m)$. These are exactly ordinary module-sheaf pullback and pushforward formulas after forgetting the action. Finally take $f=\\mathrm{id}$ and $\\mathcal C=\\mathcal O_X$ in degree zero: inverse image and its adjunction are identities, $F(L)=\\mathcal B\\otimes_{\\mathcal O_X}L$ and $G(I)=UI$. The formula of steps 2--4 becomes the asserted free/forgetful Hom-complex adjunction. Every argument used direct-sum tensor constructions, finite products or Hom groups, never preservation of exact sequences, so no flatness, exactness or boundedness is required.",
+   "uses": [
+    "def-sfb-sheaf-dg-module-localization",
+    "def-weil-pbc-topological-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FRU and its identity-map specialization; ordinary unit/counit identified in step 6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-sheaf-dg-module-localization",
+  "lem-weil-pbc-sets-inverse-image-colimits-finite-products",
+  "lem-sfb-site-inverse-image-multimap-universal",
+  "lem-pc-module-inverse-image-adjunction",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-topological-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sdga.tex",
+  "place": "Tags 0FR8 and 0FRU (both proofs omitted with hints), expanded with left-module signed calculations, explicit shift/cone maps and scalar tensor contraction. Sheaf inputs are existing cited nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Enriched tensor pullback pushforward adjunction Hom complexes sheaves differential graded modules on ringed spaces",
+   "results": "{\"t\": \"2026-10-24T07:40:05Z\", \"tool\": \"leanfinder\", \"query\": \"Enriched tensor pullback pushforward adjunction Hom complexes sheaves differential graded modules on ringed spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"SheafOfModules.pushforwardPushforwardAdj\", \"PresheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.instIsLeftAdjointPullback\"], \"digest\": \"fd603b51644a4266\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: SheafOfModules.pullbackPushforwardAdjunction is an adjunction of ordinary sheaves (Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:36-61); it does not state the signed dg-linear Hom subcomplex isomorphism. The dg-linear differential and tensor identification need an argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.pullbackPushforwardAdjunction\"",
+   "results": "{\"t\": \"2026-10-24T07:40:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules.pullbackPushforwardAdjunction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"PresheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\"], \"digest\": \"0e70a9890ba8b3f0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: SheafOfModules.pullbackPushforwardAdjunction is an adjunction of ordinary sheaves (Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:36-61); it does not state the signed dg-linear Hom subcomplex isomorphism. The dg-linear differential and tensor identification need an argument."
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackPushforwardAdjunction|homEquiv",
+   "results": "{\"t\": \"2026-10-24T07:40:03Z\", \"tool\": \"grep\", \"query\": \"pullbackPushforwardAdjunction|homEquiv\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean\"], \"digest\": \"ebe34d7b5701dba5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: SheafOfModules.pullbackPushforwardAdjunction is an adjunction of ordinary sheaves (Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:36-61); it does not state the signed dg-linear Hom subcomplex isomorphism. The dg-linear differential and tensor identification need an argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Differential graded sheaf modules pullback pushforward adjunction of global Hom cochain complexes",
+   "results": "{\"t\": \"2026-10-24T07:40:03Z\", \"tool\": \"leansearch\", \"query\": \"Differential graded sheaf modules pullback pushforward adjunction of global Hom cochain complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.PullbackConstruction.adjunction\", \"TopCat.Sheaf.instIsLeftAdjointPullback\", \"SheafOfModules.pullback\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"TopCat.Presheaf.pushforwardPullbackAdjunction\", \"TopCat.Sheaf.pullback\", \"SheafOfModules.pushforwardPushforwardAdj\", \"CategoryTheory.Functor.sheafPullback\"], \"digest\": \"d57a7dc984397de7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: SheafOfModules.pullbackPushforwardAdjunction is an adjunction of ordinary sheaves (Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:36-61); it does not state the signed dg-linear Hom subcomplex isomorphism. The dg-linear differential and tensor identification need an argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Differential graded sheaf extension of scalars inverse image adjoint direct image compatible with differential",
+   "results": "{\"t\": \"2026-10-24T07:40:08Z\", \"tool\": \"leanfinder\", \"query\": \"Differential graded sheaf extension of scalars inverse image adjoint direct image compatible with differential\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.ιFree_mapFree_inv\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.unitToPushforwardObjUnit\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\"], \"digest\": \"3481bb11680e5b73\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: SheafOfModules.pullbackPushforwardAdjunction is an adjunction of ordinary sheaves (Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:36-61); it does not state the signed dg-linear Hom subcomplex isomorphism. The dg-linear differential and tensor identification need an argument."
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackPushforwardAdjunction|HomComplex",
+   "results": "{\"t\": \"2026-10-24T08:02:26Z\", \"tool\": \"grep\", \"query\": \"pullbackPushforwardAdjunction|HomComplex\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\"], \"digest\": \"6965178ce9e276f1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read SheafOfModules.pullbackPushforwardAdjunction, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:49-61 and PullbackConstruction.adjunction:80-100. These concern ordinary module sheaves, not signed dg-linear Hom subcomplexes; the second semantic phrasing also gives only ordinary extension-of-scalars and sheafification maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.pullbackPushforwardAdjunction\"",
+   "results": "{\"t\": \"2026-10-24T08:02:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules.pullbackPushforwardAdjunction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"PresheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\"], \"digest\": \"0e70a9890ba8b3f0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read SheafOfModules.pullbackPushforwardAdjunction, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:49-61 and PullbackConstruction.adjunction:80-100. These concern ordinary module sheaves, not signed dg-linear Hom subcomplexes; the second semantic phrasing also gives only ordinary extension-of-scalars and sheafification maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Differential graded sheaf modules tensor pullback direct image adjunction compatible with signed shifts",
+   "results": "{\"t\": \"2026-10-24T08:02:27Z\", \"tool\": \"leansearch\", \"query\": \"Differential graded sheaf modules tensor pullback direct image adjunction compatible with signed shifts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullback\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"TopCat.Sheaf.pullback\", \"SheafOfModules.pushforwardPushforwardAdj\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\", \"SheafOfModules.pullbackObjFreeIso.congr_simp\"], \"digest\": \"850f3290656633ef\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read SheafOfModules.pullbackPushforwardAdjunction, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:49-61 and PullbackConstruction.adjunction:80-100. These concern ordinary module sheaves, not signed dg-linear Hom subcomplexes; the second semantic phrasing also gives only ordinary extension-of-scalars and sheafification maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Enriched adjunction on homogeneous Hom complexes for pullback and pushforward of sheaves of differential graded modules",
+   "results": "{\"t\": \"2026-10-24T08:02:28Z\", \"tool\": \"leanfinder\", \"query\": \"Enriched adjunction on homogeneous Hom complexes for pullback and pushforward of sheaves of differential graded modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.instIsLeftAdjointPullback\", \"PresheafOfModules.pullbackPushforwardAdjunction\"], \"digest\": \"d5d16ae3ee975f1e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read SheafOfModules.pullbackPushforwardAdjunction, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:49-61 and PullbackConstruction.adjunction:80-100. These concern ordinary module sheaves, not signed dg-linear Hom subcomplexes; the second semantic phrasing also gives only ordinary extension-of-scalars and sheafification maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom complex isomorphism extension of scalars and restriction of scalars for left differential graded sheaf modules",
+   "results": "{\"t\": \"2026-10-24T08:02:29Z\", \"tool\": \"leanfinder\", \"query\": \"Hom complex isomorphism extension of scalars and restriction of scalars for left differential graded sheaf modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.map_ιFree_mapFree_hom\", \"PresheafOfModules.sheafifyHomEquiv'\", \"SheafOfModules.ιFree_mapFree_inv\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars\", \"SheafOfModules.freeHomEquiv_symm_comp\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp\", \"SheafOfModules.freeHomEquiv_comp_apply\", \"SheafOfModules.ιFree_mapFree_inv_assoc\"], \"digest\": \"34c226bf62d93b71\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read SheafOfModules.pullbackPushforwardAdjunction, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:49-61 and PullbackConstruction.adjunction:80-100. These concern ordinary module sheaves, not signed dg-linear Hom subcomplexes; the second semantic phrasing also gives only ordinary extension-of-scalars and sheafification maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-ringed-dg-pushpull",
+  "date": "2026-10-24",
+  "group": "Q138"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Independent prerequisite: Pseudo-coherent perfect direct images between flat finitely presented families. Kiehl finiteness input: the unnumbered general relative-pseudo-coherence assertion following Stacks lemma-flat-proper-pseudo-coherent-direct-image-general. Finite-degree Noetherian descente input for the Kiehl finiteness assertion. Independent prerequisite: Relative sheaf descente on a prescribed Noetherian envelope. Two-open gluing prerequisite, conditional on approximation on both opens and their intersection, uniform in a supplied finite coefficient stage. Single-degree induction step: cancel finite polynomial-chart top obstructions globally while retaining the prescribed scalar-action normalization. Mayer--Vietoris subproblem for one degree: given a global coherent witness at cutoff n+1 and witnesses on two opens at cutoff n, obtain a global witness at cutoff n. The supplied global witness is part of the hypothesis. Independent input: finite coherent factorization of a cohomologically surjective perfect dg arrow to an ordinary scheme complex, with cohomologically surjective first factor. Affine case: finite coherent factorization for Y=Spec S; no Zariski assembly is asserted. Affine passage to dg global modules, including the local-to-finite-cell perfectness theorem and the actual coefficient adjunction comparisons. Independent tool: Affine equivalence: construct the dg adjunction before checking its unit and counit by the ordinary affine equivalence. Adjunction prerequisite: underived enriched adjunction, before constructing the derived adjunction and comparing its unit and counit.",
+   "via": [
+    "lem-sfb-flat-ringed-dg-pushpull",
+    "lem-sfb-affine-dg-coefficient-module-comparison",
+    "lem-sfb-affine-perfect-arrow-coherent-factorization",
+    "lem-sfb-perfect-coefficient-arrow-finite-realization",
+    "lem-sfb-global-witness-one-degree-binary-patching",
+    "lem-sfb-sheaf-single-degree-coefficient-cancellation",
+    "lem-sfb-relative-coefficient-window-two-open-locality",
+    "lem-sfb-prescribed-envelope-relative-sheaf-descente",
+    "lem-sfb-relative-complex-noetherian-cohomology-approximation",
+    "lem-sfb-kiehl-relative-pseudocoherent-direct-image",
+    "lem-sfb-flat-family-perfect-direct-image-pseudocoherent",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-sheaf-dg-pushpull-hom",
+  "worker": "stage1",
+  "summary": "Expanded the omitted graded and differential calculations in Stacks 0FR8/0FRU, using existing sheaf module adjunction and finite-input inverse-image universality. Verified balancing, odd signs, homotopy descent, signed shifts, cones, tensor contraction and ordinary unit/counit normalization. No new nodes or statement changes.",
+  "blueprint": "Latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3), via the retained ancestry of the affine dg coefficient comparison: supplies the underived adjunction prerequisite before the parent derived adjunction. Whole-blueprint searches for graded adjunction, differential graded and pushforward adjunction gave no duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-module-inverse-image-adjunction",
+    "why": "Ordinary inverse-image/direct-image linear Hom bijection, used degreewise; no dg assertion is imported."
+   },
+   {
+    "node": "lem-weil-pbc-sets-inverse-image-colimits-finite-products",
+    "why": "Finite-limit preservation for the topological set inverse image verifies the finite-input theorem hypothesis."
+   },
+   {
+    "node": "lem-sfb-site-inverse-image-multimap-universal",
+    "why": "Uniqueness of natural two-input operations on inverse images verifies signed action compatibility; this is a generic sheaf tool."
+   },
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Universal property of ordinary sheaf tensors constructs componentwise maps before the balanced dg quotient."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-module-inverse-image-adjunction",
+  "lem-weil-pbc-sets-inverse-image-colimits-finite-products",
+  "lem-sfb-site-inverse-image-multimap-universal",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-8823c11cd",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-8823c11cd (reviewer sub-agent of L); spot-checked: I read the whole item, every cited node's statement, the parent lem-sfb-flat-ringed-dg-pushpull (steps 3, 5, 7-9, which use this item) and Stacks sdga.tex at 0FR8 (l.773) and 0FRU (l.2000), whose proofs are omitted with hints. The statement, stmt_deps and blueprint fields are byte-identical to the base copy in clones/side-live. The delivery only adds the 11-step proof, the split_report and 5 logged searches. Steps 1-3 follow the source's route: the module inverse-image adjunction (lem-pc-module-inverse-image-adjunction), finite-input inverse-image uniqueness (lem-sfb-site-inverse-image-multimap-universal, whose finite-limit hypothesis comes from lem-weil-pbc-sets-...(b)), and the tensor bilinear and sheafification universal properties. Step 4 is the omitted differential calculation. I rechecked every sign. Balancing: r(p+q) = rp+rq. In δh and in δ(Fu) the d(a)h(m) and db⊗u(n) terms cancel. For the shift θ_k the action exponent is k(q+p) and the differential exponents are k(p+1) and kp+p+k. For the cone, the (-1)^p map is compatible with both differential components, with the shifted action and with i and -p. The tensor contraction α/β is well defined under the R- and A-balancing, both composites are identities, and the differentials agree. The free/forgetful specialisation gives exactly the form the parent's steps 3 and 9 use. Edge cases tested: zero module, f = id with C = B = O in degree 0, odd k, r = -1, characteristic 2, unbounded complexes. No duplicate: rg for 0FRU/0FR8 finds only the parent, the affine comparison and lem-sfb-ringed-dg-scalar-adjunction, which is a different (derived, same-space, right-module) statement. No new nodes, no cycle. Tool uses accepted: module inverse-image adjunction, multimap universality and sheaf tensor bilinear universality, all generic sheaf tools; the sets finite-limit node is a Mathlib leaf. Maintainer note: the inherited blueprint.from (node null, unrelated plurinodal 'place' text) is untouched base data, not a delivery fault."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SheafDgPushpullHom",
+  "declaration": "CategoryTheory.SheafDg.Pushpull.existsUnique_homIso",
+  "declarations": [
+   "CategoryTheory.SheafDg.Pushpull.coefficientPush",
+   "CategoryTheory.SheafDg.Pushpull.coefficientPushRightAdjoint",
+   "CategoryTheory.SheafDg.Pushpull.coefficientPull",
+   "CategoryTheory.SheafDg.Pushpull.coefficientAdjunction",
+   "CategoryTheory.SheafDg.Pushpull.pullComplex",
+   "CategoryTheory.SheafDg.Pushpull.pushComplex",
+   "CategoryTheory.SheafDg.Pushpull.pullSection",
+   "CategoryTheory.SheafDg.Pushpull.mulSection",
+   "CategoryTheory.SheafDg.Pushpull.oneSection",
+   "CategoryTheory.SheafDg.Pushpull.totalTensorSection",
+   "CategoryTheory.SheafDg.Pushpull.IsTensorLift",
+   "CategoryTheory.SheafDg.Pushpull.existsUnique_tensorLift",
+   "CategoryTheory.SheafDg.Pushpull.tensorLift",
+   "CategoryTheory.SheafDg.Pushpull.leftBalance",
+   "CategoryTheory.SheafDg.Pushpull.rightBalance",
+   "CategoryTheory.SheafDg.Pushpull.pullObj",
+   "CategoryTheory.SheafDg.Pushpull.pullπ",
+   "CategoryTheory.SheafDg.Pushpull.pull",
+   "CategoryTheory.SheafDg.Pushpull.pureTensor",
+   "CategoryTheory.SheafDg.Pushpull.IsPushAction",
+   "CategoryTheory.SheafDg.Pushpull.existsUnique_pushAction",
+   "CategoryTheory.SheafDg.Pushpull.pushObj",
+   "CategoryTheory.SheafDg.Pushpull.existsUnique_pullMap",
+   "CategoryTheory.SheafDg.Pushpull.pullMap",
+   "CategoryTheory.SheafDg.Pushpull.pullMap_laws",
+   "CategoryTheory.SheafDg.Pushpull.pushMap_linear",
+   "CategoryTheory.SheafDg.Pushpull.push",
+   "CategoryTheory.SheafDg.Pushpull.gradedLinear_group",
+   "CategoryTheory.SheafDg.Pushpull.gradedSubgroup",
+   "CategoryTheory.SheafDg.Pushpull.gradedLinear_delta",
+   "CategoryTheory.SheafDg.Pushpull.homDifferential",
+   "CategoryTheory.SheafDg.Pushpull.homDifferential_laws",
+   "CategoryTheory.SheafDg.Pushpull.homComplex",
+   "CategoryTheory.SheafDg.Pushpull.gradedLinear_whisker",
+   "CategoryTheory.SheafDg.Pushpull.whiskerGraded",
+   "CategoryTheory.SheafDg.Pushpull.adjunctCochain",
+   "CategoryTheory.SheafDg.Pushpull.HomFormula",
+   "CategoryTheory.SheafDg.Pushpull.HomNaturality",
+   "CategoryTheory.SheafDg.Pushpull.existsUnique_homIso",
+   "CategoryTheory.SheafDg.Pushpull.homIso",
+   "CategoryTheory.SheafDg.Pushpull.AdjunctionFormula",
+   "CategoryTheory.SheafDg.Pushpull.existsUnique_adjunction",
+   "CategoryTheory.SheafDg.Pushpull.adjunction",
+   "CategoryTheory.SheafDg.Pushpull.homotopy_compatible",
+   "CategoryTheory.SheafDg.Pushpull.pullHomotopy",
+   "CategoryTheory.SheafDg.Pushpull.pushHomotopy",
+   "CategoryTheory.SheafDg.Pushpull.homotopy_adjunction",
+   "CategoryTheory.SheafDg.Pushpull.shifts_cones",
+   "CategoryTheory.SheafDg.Pushpull.baseChangeMap_comm",
+   "CategoryTheory.SheafDg.Pushpull.baseChangeMap",
+   "CategoryTheory.SheafDg.Pushpull.scalarBaseChange",
+   "CategoryTheory.SheafDg.Pushpull.existsUnique_freeHomIso"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SheafDgPushpullHom.lean",
+  "statement": "theorem existsUnique_homIso (φ : AlgebraMap f c A B) : ∃! e : ∀ (N : LeftModule A) (M : LeftModule B), homComplex B (pullObj φ N) M ≅ homComplex A N (pushObj φ M), HomFormula φ e ∧ HomNaturality φ e",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Canonical balanced-quotient pullback and degreewise pushforward; normalized signed Hom-complex isomorphism, dg and homotopy adjunctions, shift/cone compatibility, scalar base change and free/forgetful specialization. Reviewer fix: existence of the ordinary coefficient pullback now comes from Mathlib's SheafOfModules.instIsRightAdjointPushforward (presheaf pullback + sheafification) instead of the uncited theorem node lem-pur-ringed-site-module-pullback-exists-universes; declarations list deduplicated and pullπ added. Compiled clean with nt_compile.py (2026-10-24).",
+  "fixed_by": "NT-stage2-cc-93f442846"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-93f442846",
+  "group": "NF",
+  "result": "fix",
+  "note": "Mathematics correct clause by clause: AlgebraMap (adjoint φ), balanced coequalizer pullObj, ∃!-pinned push action, signed Hom complexes, existsUnique_homIso with both formulas (r·p sign) and naturality, adjunction unit/counit, homotopy adjunction, shifts/cones, scalarBaseChange via IsIso of the adjunct P(C)→B (equivalent), free specialization. Edge cases and universes OK, no hollow defs, docstrings complete. FIX H2: the instance coefficientPushRightAdjoint used module_pushforward_isRightAdjoint_of_universes, owned by lem-pur-ringed-site-module-pullback-exists-universes, which is not in stmt_deps; replaced by Mathlib's SheafOfModules.instIsRightAdjointPushforward (inferInstance, confirmed by trace) and dropped that import. Prop instance, so data unchanged. Record override: declarations deduplicated (pull twice) plus pullπ, stale compile-pending note replaced, statement verbatim; refit_record gives no notes and no refusals. nt_compile: delivered file clean 21.9 s (one earlier 60 s timeout at load ~70 was load); fixed file clean 30.8 s."
+ }
+}

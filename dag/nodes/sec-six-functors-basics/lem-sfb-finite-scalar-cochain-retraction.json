@@ -1,0 +1,422 @@
+{
+ "id": "lem-sfb-finite-scalar-cochain-retraction",
+ "kind": "statement",
+ "title": "Scalar retractions induce equivariant continuous cochain projections",
+ "statement": "Let $E\\subseteq F\\subseteq L$ be fields [def-weil-field], all with topologies making their field operations continuous, and assume the inclusions are continuous. Let $p:L\\to F$ be a continuous $E$-linear map with $p(a)=a$ for all $a\\in F$. Let $d\\geq0$, and let $G$ be a topological group (multiplication and inversion continuous) acting on $E^d$ by $E$-linear automorphisms with a jointly continuous action. On $V_L=L^d$ and $V_F=F^d$, with their product topologies, use the actions given by the same matrices with entries in $E$. Write $i:V_F\\hookrightarrow V_L$ for coordinate inclusion, and define\n$$P:V_L\\to V_F,\\quad P((x_j)_{j<d})=(p(x_j))_{j<d},\\qquad Q=1-iP:V_L\\to V_L.$$\nThen the two scalar-extended actions are jointly continuous, $i,P,Q$ are continuous $E$-linear $G$-equivariant maps, $Pi=1$, and $Qi=0$. For every $k\\geq0$, postcomposition defines $E$-linear maps $P_*,i_*,Q_*$ on both the homogeneous and the inhomogeneous continuous cochains $B^k(G,V)$ and $C^k(G,V)$ of [lem-sfb-topological-homogeneous-cochain-coordinates]. They satisfy\n$$P_*\\delta=\\delta P_*,\\quad P_*d=dP_*,\\quad P_*i_*=1,\\quad Q_*=1-i_*P_*,$$\nwith the analogous differential identities for $i_*$ and $Q_*$. These maps commute with restriction to every subgroup with its induced topology and with both coordinate maps $\\Phi,\\Psi$ of that node. In particular, if $f:G^{k+1}\\to V_L$ is a continuous diagonally equivariant homogeneous cocycle, then $P_*f$ is such a cocycle with values in $V_F$, and $Q_*f$ is one with values in $V_L$; on every subset where $f$ has values in $i(V_F)$, $Q_*f$ vanishes. These assertions include $d=0$ and cochain degree zero and require no multiplicativity of $p$ and no completeness of any field.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent arithmetic expansion; returned local-cocycle proof step 4 (coordinatewise scalar retraction and E-matrix equivariance) and step 5 (finite-field cochain continuity and differential compatibility). Cochain convention: Stacks Tag 0DVG, etale-cohomology.tex, section-continuous-group-cohomology. The scalar-projection assertion is agent-formulated, not stated in that section."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "lem-sfb-topological-homogeneous-cochain-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "Write $e_b$ for the standard basis vectors and $a_{ab}(g)=(g e_b)_a\\in E$. Each $a_{ab}:G\\to E$ is continuous: compose $g\\mapsto(g,e_b)$, the given jointly continuous action on $E^d$, and coordinate evaluation. For $K=F,L$, the extended action is $(gx)_a=\\sum_{b<d}a_{ab}(g)x_b$, with coefficients included in $K$. These coordinate functions on $G\\times K^d$ are continuous finite sums of products, by the continuous inclusion $E\\to K$ and the continuous field operations. The product topology therefore makes the action jointly continuous. The matrix identities $A(gh)=A(g)A(h)$ and $A(1)=I$, already valid over $E$, remain identities over $K$; hence these really are actions by $K$-linear automorphisms, and in particular by $E$-linear automorphisms. Addition and $E$-scalar multiplication on $K^d$ are continuous by the same coordinate test.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, section-continuous-group-cohomology, displayed continuous differential (lines 9007–9032); agent-written finite-coordinate scalar-retraction calculation supporting paragraph (3) of literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md."
+   }
+  },
+  {
+   "text": "Each coordinate of $i$ is the continuous inclusion $F\\to L$, and each coordinate of $P$ is $p$ after coordinate evaluation, so both maps are continuous and $E$-linear. Subtraction in $L^d$ then makes $Q=1-iP$ continuous and $E$-linear. For all $g,x,a$, $P(gx)_a=p(\\sum_b a_{ab}(g)x_b)=\\sum_b a_{ab}(g)p(x_b)=(gP(x))_a$, using only $E$-linearity of $p$. The same matrix formula gives $i(gy)=g i(y)$. Subtracting the equivariance identities for $1$ and $iP$ gives equivariance of $Q$. Since $p$ fixes $F$, $Pi(y)=y$ coordinatewise, and $Qi(y)=i(y)-iPi(y)=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, section-continuous-group-cohomology, displayed continuous differential (lines 9007–9032); agent-written finite-coordinate scalar-retraction calculation supporting paragraph (3) of literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-joint-continuous-coordinate-naturality] with $H=J=G$, $h=\\operatorname{id}$, and successively $(V,W,u)=(V_L,V_F,P),(V_F,V_L,i),(V_L,V_L,Q)$. The topological vector space and jointly continuous action hypotheses hold by step 1; the continuous $E$-linear intertwining hypothesis holds by step 2. Its formulas are precisely postcomposition, so they define the required linear maps on both cochain spaces, preserving continuity and homogeneous equivariance. Its two differential identities give $P_*\\delta=\\delta P_*$ and $P_*d=dP_*$ and the analogous identities for $i_*,Q_*$. Its last two identities give commutation with both $\\Phi$ and $\\Psi$. The cited statement includes degree zero, where the inhomogeneous map is $u$ itself and $d v(g)=gv-v$.",
+   "uses": [
+    "lem-sfb-joint-continuous-coordinate-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, section-continuous-group-cohomology, displayed continuous differential (lines 9007–9032); agent-written finite-coordinate scalar-retraction calculation supporting paragraph (3) of literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md."
+   }
+  },
+  {
+   "text": "For either kind of cochain $c$, evaluation at each tuple $t$ gives $(P_*i_*c)(t)=P(i(c(t)))=c(t)$. Likewise $(Q_*c)(t)=Q(c(t))=c(t)-i(P(c(t)))=((1-i_*P_*)c)(t)$. Equality of functions gives $P_*i_*=1$ and $Q_*=1-i_*P_*$ in every degree. In degree zero these are the same identities on vectors (or on equivariant functions $G\\to V$ in the homogeneous convention).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, section-continuous-group-cohomology, displayed continuous differential (lines 9007–9032); agent-written finite-coordinate scalar-retraction calculation supporting paragraph (3) of literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md."
+   }
+  },
+  {
+   "text": "Let $H\\subseteq G$ have the induced topology. Its inclusion $h:H\\to G$ is continuous, and its multiplication and inversion are restrictions of the continuous operations of $G$. The restricted action is jointly continuous by composing $H\\times V\\to G\\times V$ with the action; all three coefficient maps remain equivariant. Restriction means precomposition with $h$ in every argument: for any of $u=P,i,Q$, $u(c(h(t_0),\\ldots,h(t_k)))=(u\\circ c)(h(t_0),\\ldots,h(t_k))$, with $k$ arguments in the inhomogeneous case. This proves the asserted commutation with restriction. If $\\delta f=0$, step 3 gives $\\delta(P_*f)=P_*(0)=0$ and $\\delta(Q_*f)=Q_*(0)=0$; their continuity and equivariance were also established there. At any tuple where $f(t)=i(y)$, $Q_*f(t)=Qi(y)=0$ by step 2.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, section-continuous-group-cohomology, displayed continuous differential (lines 9007–9032); agent-written finite-coordinate scalar-retraction calculation supporting paragraph (3) of literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md."
+   }
+  },
+  {
+   "text": "When $d=0$, each coefficient vector space is the zero vector space; all coordinate assertions are vacuous and all cochain spaces are zero, so every displayed identity still holds. For degree zero, the formulas in steps 3–5 explicitly cover both conventions. The argument uses $p$ only through continuity, additivity, $E$-homogeneity and its identity on $F$; it uses no multiplicativity or completeness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, section-continuous-group-cohomology, displayed continuous differential (lines 9007–9032); agent-written finite-coordinate scalar-retraction calculation supporting paragraph (3) of literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-joint-continuous-coordinate-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0DVG, section-continuous-group-cohomology, displayed continuous differential (lines 9007–9032); agent-written finite-coordinate scalar-retraction calculation supporting paragraph (3) of literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(retract|projection).*(cochain|homogeneousCochains)|(cochain|homogeneousCochains).*(retract|projection)",
+   "results": {
+    "t": "2026-10-22T06:07:22Z",
+    "tool": "grep",
+    "query": "(retract|projection).*(cochain|homogeneousCochains)|(cochain|homogeneousCochains).*(retract|projection)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean"
+    ],
+    "digest": "d233bfefe1d0a781"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: continuous cochain functors and abstract tensor functoriality do not construct this coordinate scalar retraction with its matrix action and topology; discrete cohomology functoriality has different coefficient objects, and the analytic Hahn–Banach hit concerns real/complex scalars"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TensorProduct\", \"retraction\"",
+   "results": {
+    "t": "2026-10-22T06:07:23Z",
+    "tool": "loogle",
+    "query": "\"TensorProduct\", \"retraction\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: continuous cochain functors and abstract tensor functoriality do not construct this coordinate scalar retraction with its matrix action and topology; discrete cohomology functoriality has different coefficient objects, and the analytic Hahn–Banach hit concerns real/complex scalars"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An E linear continuous retraction from L to F extends coordinatewise to finite dimensional representations with E valued action matrices and commutes with continuous group cochain differentials",
+   "results": {
+    "t": "2026-10-22T06:07:23Z",
+    "tool": "leansearch",
+    "query": "An E linear continuous retraction from L to F extends coordinatewise to finite dimensional representations with E valued action matrices and commutes with continuous group cochain differentials",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousLinearMap.exist_extension_of_finiteDimensional_range",
+     "ContinuousLinearMap.extend_eq",
+     "ContinuousCohomology.MultiInd.complex",
+     "ContinuousLinearMap.inCoordinates_eq",
+     "LinearMap.canLiftContinuousLinearMap",
+     "ContinuousLinearMap.inCoordinates.congr_simp",
+     "ContinuousCohomology.MultiInd.d",
+     "continuousCohomology"
+    ],
+    "digest": "3f8e65a2571c1b0f"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: continuous cochain functors and abstract tensor functoriality do not construct this coordinate scalar retraction with its matrix action and topology; discrete cohomology functoriality has different coefficient objects, and the analytic Hahn–Banach hit concerns real/complex scalars"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous linear retraction of coefficient fields induces a continuous equivariant linear retraction on scalar extended finite dimensional representations and a split map of continuous homogeneous and inhomogeneous cochain complexes",
+   "results": {
+    "t": "2026-10-22T06:07:33Z",
+    "tool": "leanfinder",
+    "query": "A continuous linear retraction of coefficient fields induces a continuous equivariant linear retraction on scalar extended finite dimensional representations and a split map of continuous homogeneous and inhomogeneous cochain complexes",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousCohomology.homogeneousCochains",
+     "ContinuousCohomology.MultiInd.complex",
+     "ContinuousCohomology.continuousCohomologyZeroIso",
+     "groupCohomology.inhomogeneousCochainsIso",
+     "ContinuousCohomology.kerHomogeneousCochainsZeroEquiv",
+     "groupCohomology.inhomogeneousCochains",
+     "groupCohomology.cochainsIso₁",
+     "groupCohomology.cochainsMap_f_1_comp_cochainsIso₁_apply"
+    ],
+    "digest": "6f2226a38c696aa4"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: continuous cochain functors and abstract tensor functoriality do not construct this coordinate scalar retraction with its matrix action and topology; discrete cohomology functoriality has different coefficient objects, and the analytic Hahn–Banach hit concerns real/complex scalars"
+  },
+  {
+   "tool": "grep",
+   "query": "(map|congr|comp).*(homogeneousCochains|inhomogeneousCochains)|homogeneousCochains.*(map|congr|comp)",
+   "results": {
+    "t": "2026-10-22T06:07:52Z",
+    "tool": "grep",
+    "query": "(map|congr|comp).*(homogeneousCochains|inhomogeneousCochains)|homogeneousCochains.*(map|congr|comp)",
+    "sub": "Algebra/Category/ContinuousCohomology",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: continuous cochain functors and abstract tensor functoriality do not construct this coordinate scalar retraction with its matrix action and topology; discrete cohomology functoriality has different coefficient objects, and the analytic Hahn–Banach hit concerns real/complex scalars"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor a continuous E linear retraction between two topological field extensions with a finite dimensional E representation to obtain an equivariant continuous projection commuting with the group cohomology differential",
+   "results": {
+    "t": "2026-10-22T06:07:59Z",
+    "tool": "leanfinder",
+    "query": "Tensor a continuous E linear retraction between two topological field extensions with a finite dimensional E representation to obtain an equivariant continuous projection commuting with the group cohomology differential",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "groupCohomology.coindIso",
+     "groupCohomology.π_comp_H1Iso_hom",
+     "groupCohomology.H1InfRes",
+     "groupCohomology.π_comp_H1Iso_hom_apply",
+     "groupCohomology.π_comp_H0Iso_hom_apply",
+     "groupHomology.H1ToTensorOfIsTrivial",
+     "groupHomology.H1ToTensorOfIsTrivial_H1π_single",
+     "groupCohomology.π_comp_H0Iso_hom"
+    ],
+    "digest": "a57fd559df7081b9"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: continuous cochain functors and abstract tensor functoriality do not construct this coordinate scalar retraction with its matrix action and topology; discrete cohomology functoriality has different coefficient objects, and the analytic Hahn–Banach hit concerns real/complex scalars"
+  },
+  {
+   "tool": "grep",
+   "query": "(retract|projection).*(cochain|homogeneousCochains)|(cochain|homogeneousCochains).*(retract|projection)",
+   "results": {
+    "t": "2026-10-23T09:38:11Z",
+    "tool": "grep",
+    "query": "(retract|projection).*(cochain|homogeneousCochains)|(cochain|homogeneousCochains).*(retract|projection)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean"
+    ],
+    "digest": "d233bfefe1d0a781"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: abstract iterated homogeneous cochain functoriality does not give finite-coordinate scalar extension/retraction together with jointly continuous homogeneous and inhomogeneous coordinate formulas for arbitrary topological groups; finite-dimensional normed-space hits impose additional hypotheses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous linear equivariant maps on topological group representations induce split maps of continuous homogeneous and inhomogeneous cochains",
+   "results": {
+    "t": "2026-10-23T09:38:12Z",
+    "tool": "leansearch",
+    "query": "Continuous linear equivariant maps on topological group representations induce split maps of continuous homogeneous and inhomogeneous cochains",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousLinearEquiv.continuousAlternatingMapCongrRightEquiv",
+     "ContinuousLinearEquiv.coe_inj",
+     "ContinuousLinearEquiv.continuousAlternatingMapCongrLeftEquiv",
+     "ContinuousLinearEquiv.continuousAlternatingMapCongrRight",
+     "ContinuousLinearEquiv.continuousAlternatingMapCongr",
+     "ContinuousLinearMap.coe_inj",
+     "ContinuousLinearEquiv.arrowCongr",
+     "ContinuousCohomology.homogeneousCochains"
+    ],
+    "digest": "63f809ca280fd013"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: abstract iterated homogeneous cochain functoriality does not give finite-coordinate scalar extension/retraction together with jointly continuous homogeneous and inhomogeneous coordinate formulas for arbitrary topological groups; finite-dimensional normed-space hits impose additional hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homogeneousCochains\", \"map\"",
+   "results": {
+    "t": "2026-10-23T09:38:12Z",
+    "tool": "loogle",
+    "query": "\"homogeneousCochains\", \"map\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: abstract iterated homogeneous cochain functoriality does not give finite-coordinate scalar extension/retraction together with jointly continuous homogeneous and inhomogeneous coordinate formulas for arbitrary topological groups; finite-dimensional normed-space hits impose additional hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous E linear scalar retraction from L to F induces equivariant finite coordinate projections and split maps on continuous group cochains",
+   "results": {
+    "t": "2026-10-23T09:38:13Z",
+    "tool": "leanfinder",
+    "query": "A continuous E linear scalar retraction from L to F induces equivariant finite coordinate projections and split maps on continuous group cochains",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousCohomology.homogeneousCochains",
+     "ContinuousCohomology.MultiInd.complex",
+     "continuousCohomology",
+     "ContinuousCohomology.instLinearActionTopModuleCatI",
+     "ContinuousCohomology.I",
+     "ContinuousCohomology.instLinearActionTopModuleCatInvariants",
+     "ContinuousCohomology.const",
+     "ContinuousCohomology.kerHomogeneousCochainsZeroEquiv"
+    ],
+    "digest": "243020fc32342149"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: abstract iterated homogeneous cochain functoriality does not give finite-coordinate scalar extension/retraction together with jointly continuous homogeneous and inhomogeneous coordinate formulas for arbitrary topological groups; finite-dimensional normed-space hits impose additional hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "homogeneousCochains|map.*comp|map.*add",
+   "results": {
+    "t": "2026-10-23T09:41:03Z",
+    "tool": "grep",
+    "query": "homogeneousCochains|map.*comp|map.*add",
+    "sub": "RepresentationTheory/Homological/ContCohomology",
+    "ok": true,
+    "n_hits": 15,
+    "note": "",
+    "top": [
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean"
+    ],
+    "digest": "2d54c52839b77d38"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: abstract iterated homogeneous cochain functoriality does not give finite-coordinate scalar extension/retraction together with jointly continuous homogeneous and inhomogeneous coordinate formulas for arbitrary topological groups; finite-dimensional normed-space hits impose additional hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite dimensional representations with continuous matrix coefficients extend continuously over topological field inclusions and coordinatewise linear retractions commute with their group action",
+   "results": {
+    "t": "2026-10-23T09:41:05Z",
+    "tool": "leanfinder",
+    "query": "Finite dimensional representations with continuous matrix coefficients extend continuously over topological field inclusions and coordinatewise linear retractions commute with their group action",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousCohomology.Iobj_ρ_apply",
+     "ContinuousCohomology.I_obj_ρ_apply",
+     "ContinuousCohomology.I",
+     "FDRep.instFiniteDimensionalHom",
+     "TannakaDuality.FiniteGroup.ofRightFDRep",
+     "Module.Basis.continuous_toMatrix",
+     "ContinuousCohomology.I_map_hom",
+     "Module.Basis.continuous_coe_repr"
+    ],
+    "digest": "da2a1cbaf9a67ba6"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: abstract iterated homogeneous cochain functoriality does not give finite-coordinate scalar extension/retraction together with jointly continuous homogeneous and inhomogeneous coordinate formulas for arbitrary topological groups; finite-dimensional normed-space hits impose additional hypotheses"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-local-norm-algcl-cocycle-descent",
+  "date": "2026-10-22",
+  "group": "Q90"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), agent arithmetic expansion; returned local-cocycle proof step 4 (coordinatewise scalar retraction and E-matrix equivariance) and step 5 (finite-field cochain continuity and differential compatibility). Cochain convention: Stacks Tag 0DVG, etale-cohomology.tex, section-continuous-group-cohomology. The scalar-projection assertion is agent-formulated, not stated in that section.",
+   "via": [
+    "lem-sfb-local-norm-algcl-cocycle-descent",
+    "lem-sfb-profinite-algcl-derived-invariants-comparison",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-scalar-cochain-retraction",
+  "worker": "stage1",
+  "summary": "Q96: unchanged statement; expanded finite matrix continuity, coordinate retraction and pointwise identities, using the existing simultaneous continuous-cochain naturality statement for both differentials and coordinate maps. No new nodes or Mathlib leaves. Checked nonmultiplicative projections, arbitrary subgroup topologies, d=0 and degree zero.",
+  "blueprint": "Current latest blueprint, sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3): scalar-cochain tool in the existing arithmetic expansion below the open-coefficient direct-image route; the source paragraph does not itself assert the scalar-projection lemma. The ancestor command returns None, retained as inherited."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q96-330311be1",
+  "group": "Q96",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-330311be1 (reviewer sub-agent of L); spot-checked: Ordinary first split; there is no repair note, so the re-split rule does not apply. Statement and stmt_deps are unchanged from Q90. There are no new nodes. proof_deps = {lem-sfb-joint-continuous-coordinate-naturality}, a split and reviewed node of the same unit sk-thm-sf-ctf-stability, so no tool use is needed. Step 1: the matrix entries a_ab(g) are continuous through the jointly continuous action on E^d, and the extended actions on F^d and L^d are continuous through the continuous inclusions and field operations. This also gives the topological-vector-space hypothesis that the naturality node needs. Step 2: P is equivariant because a_ab(g) lies in E and p is E-linear; Pi=1 and Qi=0 follow coordinatewise; multiplicativity of p is never used. Step 3: the naturality node is applied with h=id and u=P, i, Q. Every hypothesis is discharged, including inversion continuity on E, which is covered by 'field operations continuous'. Its four conclusions give postcomposition on both cochain types, both differential identities and commutation with Phi and Psi, degree zero included. Steps 4-6: pointwise identities, restriction to a subgroup with the induced topology by precomposition, cocycles preserved, Q_*f=0 where f takes values in i(V_F), and the case d=0 (zero spaces). The differential agrees with Stacks 0DVG (etale-cohomology.tex lines 9007-9032), including d^0 v = gv - v. Blueprint main-20261015 direct-images proof paragraph (3) does not state the lemma, so proof_origin agent is correct. Edge cases checked: p=Re from C to R with E=F=R, F=L, the trivial group, d=0, and a non-normal subgroup. Both citers (local-norm-algcl-cocycle-descent steps 3-4, finite-subextension-cochain-quasi-isomorphism step 2) use only clauses of the item. Duplicate search over all node statements: the finite-subfield retraction, accelerated finite-field differences, retracted primitive summation and coset averaging nodes are all different. There is no SGA reference. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.FiniteScalarCochainRetraction",
+  "declaration": "ContinuousCohomology.exists_finiteScalarCochainRetraction",
+  "declarations": [
+   "ContinuousCohomology.ScalarCochainRetraction",
+   "ContinuousCohomology.exists_finiteScalarCochainRetraction"
+  ],
+  "file": "lean/Sheaf/RepresentationTheory/FiniteScalarCochainRetraction.lean",
+  "statement": "theorem exists_finiteScalarCochainRetraction (E : Type u) [Field E] [TopologicalSpace E] [IsTopologicalDivisionRing E] (F : Type w) [Field F] [TopologicalSpace F] [IsTopologicalDivisionRing F] (L : Type w') [Field L] [TopologicalSpace L] [IsTopologicalDivisionRing L] [Algebra E F] [Algebra F L] [Algebra E L] [IsScalarTower E F L] [ContinuousSMul E F] [ContinuousSMul E L] (hFL : Continuous (algebraMap F L)) (p : L →L[E] F) (hp : ∀ a : F, p (algebraMap F L a) = a) (d : ℕ) (G : Type v) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] (ρ : G →* (Fin d → E) ≃ₗ[E] (Fin d → E)) (hρ : Continuous (fun z : G × (Fin d → E) ↦ ρ z.1 z.2)) [HasDerivedCategory.{r} (ModuleCat.{max v w w' t} E)] : ∃ (ρF : G →* (Fin d → F) ≃ₗ[E] (Fin d → F)) (ρL : G →* (Fin d → L) ≃ₗ[E] (Fin d → L)) (i : (Fin d → F) →L[E] (Fin d → L)) (P : (Fin d → L) →L[E] (Fin d → F)) (Q : (Fin d → L) →L[E] (Fin d → L)), (∀ (g : G) (x : Fin d → F) (a : Fin d), ρF g x a = ∑ b : Fin d, algebraMap E F (ρ g (Pi.single b 1) a) * x b) ∧ (∀ (g : G) (x : Fin d → L) (a : Fin d), ρL g x a = ∑ b : Fin d, algebraMap E L (ρ g (Pi.single b 1) a) * x b) ∧ Continuous (fun z : G × (Fin d → F) ↦ ρF z.1 z.2) ∧ Continuous (fun z : G × (Fin d → L) ↦ ρL z.1 z.2) ∧ (∀ (x : Fin d → F) (a : Fin d), i x a = algebraMap F L (x a)) ∧ (∀ (x : Fin d → L) (a : Fin d), P x a = p (x a)) ∧ Q = ContinuousLinearMap.id E (Fin d → L) - i.comp P ∧ (∀ (g : G) (x : Fin d → F), i (ρF g x) = ρL g (i x)) ∧ (∀ (g : G) (x : Fin d → L), P (ρL g x) = ρF g (P x)) ∧ (∀ (g : G) (x : Fin d → L), Q (ρL g x) = ρL g (Q x)) ∧ P.comp i = ContinuousLinearMap.id E (Fin d → F) ∧ Q.comp i = 0 ∧ ∀ (BF CF BL CL : CochainComplex (ModuleCat.{max v w w' t} E) ℤ) (DF : JointContinuousCochainCoordinates E G (Fin d → F) ρF BF CF) (DL : JointContinuousCochainCoordinates E G (Fin d → L) ρL BL CL), ∃ R : ScalarCochainRetraction E G (Fin d → F) (Fin d → L) ρF ρL i P Q BF CF BL CL DF DL, ∀ (H : Subgroup G) (BF' CF' BL' CL' : CochainComplex (ModuleCat.{max v w w' t} E) ℤ) (DF' : JointContinuousCochainCoordinates E H (Fin d → F) (ρF.comp H.subtype) BF' CF') (DL' : JointContinuousCochainCoordinates E H (Fin d → L) (ρL.comp H.subtype) BL' CL'), Continuous (fun z : H × (Fin d → F) ↦ ρF (z.1 : G) z.2) ∧ Continuous (fun z : H × (Fin d → L) ↦ ρL (z.1 : G) z.2) ∧ ∃ (R' : ScalarCochainRetraction E H (Fin d → F) (Fin d → L) (ρF.comp H.subtype) (ρL.comp H.subtype) i P Q BF' CF' BL' CL' DF' DL') (bF : BF ⟶ BF') (cF : CF ⟶ CF') (bL : BL ⟶ BL') (cL : CL ⟶ CL'), (∀ (n : ℕ) (c : BF.X (n : ℤ)) (x : Fin (n + 1) → H), DF'.bEval n ((bF.f (n : ℤ)).hom c) x = DF.bEval n c (fun a ↦ (x a : G))) ∧ (∀ (n : ℕ) (c : BL.X (n : ℤ)) (x : Fin (n + 1) → H), DL'.bEval n ((bL.f (n : ℤ)).hom c) x = DL.bEval n c (fun a ↦ (x a : G))) ∧ (∀ (n : ℕ) (c : CF.X (n : ℤ)) (x : Fin (n) → H), DF'.cEval n ((cF.f (n : ℤ)).hom c) x = DF.cEval n c (fun a ↦ (x a : G))) ∧ (∀ (n : ℕ) (c : CL.X (n : ℤ)) (x : Fin (n) → H), DL'.cEval n ((cL.f (n : ℤ)).hom c) x = DL.cEval n c (fun a ↦ (x a : G))) ∧ R.bP ≫ bF = bL ≫ R'.bP ∧ R.bI ≫ bL = bF ≫ R'.bI ∧ R.bQ ≫ bL = bL ≫ R'.bQ ∧ R.cP ≫ cF = cL ≫ R'.cP ∧ R.cI ≫ cL = cF ≫ R'.cI ∧ R.cQ ≫ cL = cL ≫ R'.cQ",
+  "branch": "sheaf-dag",
+  "by": "Q88",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the recorded JointContinuousCochainCoordinates evaluation interface. The helper structure specifies the six postcomposition cochain maps, their splitting and coordinate identities, and cocycle/vanishing consequences. The theorem specifies the scalar-extended actions and coefficient maps by their coordinate formulas, and simultaneous restriction compatibility for every subgroup. ContinuousSMul E F and E L are exactly continuity of the E-inclusions for topological fields, not an additional analytic assumption."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9cf0a21d3",
+  "group": "Q88",
+  "result": "pass",
+  "note": "First delivery (live node has no lean record; non-lean fields identical to live). Hypotheses match the node: IsTopologicalDivisionRing fields, Algebra tower + IsScalarTower, ContinuousSMul E F/E L equivalent to continuous inclusions (continuous_algebraMap_iff_smul), the E L one redundant given hFL; p : L →L[E] F with hp, no multiplicativity; d : ℕ; ρ jointly continuous. Conclusions: ρF/ρL pinned by E-matrix formulas (orientation (g e_b)_a correct), joint continuity, i/P/Q pinned coordinatewise with Q = id − i∘P, equivariance, Pi=1, Qi=0. For every JointContinuousCochainCoordinates realization, ∃ R with six cochain-complex maps pinned as postcomposition by injective evaluations (not hollow), retract/complement identities in correct diagrammatic order, Φ/Ψ squares; restriction to every Subgroup (induced topology) with precomposition-pinned restriction maps and six commutation squares; cocycle_P/Q and vanishing (stated for all cochains, harmless true generalization). Edge cases d=0, degree 0, F=E/F=L, every subgroup covered. lean.statement verbatim; stmt_deps unchanged; docstrings carry source, blueprint tag and steps 1–6; sorry only; no name clash. Not recompiled (no file changed); worker reports a clean per-file compile."
+ }
+}

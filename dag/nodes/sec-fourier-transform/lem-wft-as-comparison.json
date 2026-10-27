@@ -1,0 +1,66 @@
+{
+ "id": "lem-wft-as-comparison",
+ "kind": "statement",
+ "title": "The two Artin–Schreier models of $\\mathcal L_\\psi$",
+ "statement": "Let $k_0=\\mathbf F_q$ with $m=[k_0:\\mathbf F_p]$, let $\\Lambda$ be a\ncoefficient ring as in [def-fd-artin-schreier-sheaf], and let\n$\\Psi:\\mathbf F_p\\to\\Lambda^\\times$ be a nontrivial character.\n\n1. If $\\Lambda$ is a field (for instance $E\\supset\\mu_p$ or\n   $\\overline{\\mathbf Q}_\\ell$), every additive character\n   $\\psi:k_0\\to\\Lambda^\\times$ is of the form\n   $\\psi(z)=\\Psi(\\operatorname{Tr}_{k_0/\\mathbf F_p}(az))$ for a unique\n   $a\\in k_0$, and $\\psi$ is nontrivial exactly when $a\\neq0$.\n2. Let $\\psi(z)=\\Psi(\\operatorname{Tr}_{k_0/\\mathbf F_p}(az))$ with\n   $a\\in k_0^\\times$, let $X_0$ be a $k_0$-scheme and\n   $f\\in\\Gamma(X_0,\\mathcal O_{X_0})$. Let\n   $\\pi_q:Y_q=\\operatorname{Spec}\\mathcal O_{X_0}[y]/(y^q-y-f)\\to X_0$ be the\n   pullback along $f$ of $\\mathrm{AS}_q$, with the translations $\\sigma_c$,\n   $c\\in k_0$, and let $\\pi_p:Y_p\\to X_0$ be the Artin–Schreier covering of\n   [lem-fd-as-cover] for the function $af$, with the translations\n   $\\sigma_b$, $b\\in\\mathbf F_p$. The $X_0$-morphism\n   $h_a:Y_q\\to Y_p$, $u\\mapsto\\operatorname{Tr}(ay):=\\sum_{0\\le i<m}(ay)^{p^i}$,\n   satisfies $h_a\\circ\\sigma_c=\\sigma_{\\operatorname{Tr}(ac)}\\circ h_a$, and\n   pullback along it induces an isomorphism\n\n   $$\n   e_\\Psi\\,\\pi_{p*}\\Lambda\\xrightarrow{\\ \\sim\\ }e_\\psi\\,\\pi_{q*}\\Lambda=\\mathcal L_{\\psi,f}\n   $$\n\n   from the $\\Psi$-isotypic part of $\\pi_{p*}\\Lambda$ onto the Artin–Schreier\n   sheaf of [def-fd-artin-schreier-sheaf] (for $k=k_0$ and the character\n   $\\psi$).\n3. On $\\mathbf A^1_{k_0}$ with $f=x$, the morphism $h_a$ sends the root\n   $y=0$ over $x=0$ to the root $u=0$, so the trivializations of the stalks at\n   zero given by evaluation at these roots correspond under the isomorphism\n   of (2).\n\nFor $a=1$, i.e. $\\psi=\\Psi\\circ\\operatorname{Tr}_{k_0/\\mathbf F_p}$, this\nidentifies $\\mathcal L_{\\psi,f}$ with the summand $e_\\Psi\\pi_{p*}\\Lambda$ of\nthe $\\mathbf F_p$-covering of $f$ itself.",
+ "source": {
+  "document": "literature/blueprint/main-20261023-1620/blueprint/sec-fourier-transform/sk-lem-as-properties/lem-wft-as-comparison.md",
+  "place": "node lem-wft-as-comparison, order 3931"
+ },
+ "stmt_deps": [
+  "def-fd-artin-schreier-sheaf",
+  "lem-fd-as-cover",
+  "def-fd-additive-character"
+ ],
+ "proof": [
+  {
+   "text": "*(1).* The map $a\\mapsto\\Psi(\\operatorname{Tr}(a\\,\\cdot))$ is a homomorphism\nfrom $k_0$ to the group of characters of $k_0$. It is injective: if\n$\\Psi(\\operatorname{Tr}(az))=1$ for all $z$, then $\\operatorname{Tr}(az)=0$\nfor all $z$, because $\\Psi$ is a nontrivial character of the group\n$\\mathbf F_p$ of prime order and hence injective; the trace\n$k_0\\to\\mathbf F_p$ is surjective (the extension is separable), so $a=0$.\nA character of the elementary abelian group $k_0\\cong\\mathbf F_p^m$ takes\nvalues in the group $\\mu_p(\\Lambda)$, cyclic of order $p$ because $\\Lambda$\nis a field containing $\\mu_p$, so there are exactly $p^m=q$ characters, and\nthe injection is a bijection. The character attached to $a$ is trivial\nexactly when $a=0$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*(2).* Put $u=\\sum_{0\\le i<m}(ay)^{p^i}$ in $\\mathcal O(Y_q)$. Then\n\n$$\nu^p-u=(ay)^{p^m}-ay=a^qy^q-ay=a(y^q-y)=af,\n$$\n\nbecause $a^q=a$. Hence $u$ defines an $X_0$-morphism $h_a:Y_q\\to Y_p$. For\n$c\\in k_0$, $\\sigma_c^*u=\\sum_i(a(y+c))^{p^i}=u+\\operatorname{Tr}(ac)$, which\nis the relation $h_a\\circ\\sigma_c=\\sigma_{\\operatorname{Tr}(ac)}\\circ h_a$.\nPullback of functions along $h_a$ is a map\n$h_a^*:\\pi_{p*}\\Lambda\\to\\pi_{q*}\\Lambda$, and if\n$\\sigma_b^*\\varphi=\\Psi(b)\\varphi$ for all $b\\in\\mathbf F_p$, then\n$\\sigma_c^*h_a^*\\varphi=h_a^*\\sigma_{\\operatorname{Tr}(ac)}^*\\varphi\n=\\Psi(\\operatorname{Tr}(ac))\\,h_a^*\\varphi=\\psi(c)\\,h_a^*\\varphi$. So $h_a^*$\nmaps $e_\\Psi\\pi_{p*}\\Lambda$ into $e_\\psi\\pi_{q*}\\Lambda$. To see that this is\nan isomorphism, look at a geometric point $\\bar x$: the fibres $T_q$ and $T_p$\nare torsors under $k_0$ and $\\mathbf F_p$ ([lem-fd-as-cover] and the same\nargument for $\\mathrm{AS}_q$), and the stalks are the functions on them. Fix\n$y_0\\in T_q$ and $u_0=h_a(y_0)$. The $\\Psi$-isotypic functions on $T_p$ are\nthe multiples of $\\varphi_0(u_0+b)=\\Psi(b)$, and the $\\psi$-isotypic functions\non $T_q$ are the multiples of $\\varphi'_0(y_0+c)=\\psi(c)$; both are free of\nrank one. Since $(h_a^*\\varphi_0)(y_0+c)=\\varphi_0(u_0+\\operatorname{Tr}(ac))\n=\\psi(c)$, the map $h_a^*$ sends the generator to the generator, so it is an\nisomorphism on every stalk, hence an isomorphism of sheaves.",
+   "uses": [
+    "lem-fd-as-cover"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*(3).* For $x=0$ and $y=0$ one gets $u=0$. The trivialization at zero is\nevaluation of an isotypic function at the chosen root, and\n$(h_a^*\\varphi)(0)=\\varphi(h_a(0))=\\varphi(0)$.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "lem-fd-as-cover"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261023-1620/blueprint/sec-fourier-transform/sk-lem-as-properties/lem-wft-as-comparison.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 3931,
+ "blueprint_uses": [
+  "def-fd-additive-character",
+  "def-fd-artin-schreier-sheaf",
+  "lem-fd-as-cover"
+ ],
+ "uses_not_cited": [
+  "def-fd-additive-character"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_snapshot": "main-20261023-1620",
+ "blueprint": {
+  "is": "lem-wft-as-comparison",
+  "from": null,
+  "same_as": null
+ },
+ "chapter": "sec-fourier-transform",
+ "unit": "sk-lem-as-properties"
+}

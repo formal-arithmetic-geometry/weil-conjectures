@@ -63,5 +63,42 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-def-sfb-qlbar-condensed",
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "The presheaf of rings $\\underline{\\Qlb}$ of [det-def-sfb-qlbar-condensed-definition] is a sheaf on\n$*_{\\mathrm{proét}}$, i.e. a condensed ring ([det-def-sfb-condensed-ring]); no sheafification is\nneeded. Equivalently, its underlying presheaf of sets, a subpresheaf of the sheaf $C(-,\\Qlb)$, is\na sheaf. Its underlying abelian sheaf is a commutative ring object of $\\Sh(*_{\\mathrm{proét}},\\Ab)$\n([det-def-sfb-ring-object-sheaf]).",
+  "proof": [
+   {
+    "text": "**A criterion for subpresheaves.** Let $G\\subseteq F$ be a subpresheaf of a sheaf $F$ (of sets) on a\nsite. Suppose that for every object $S$, every covering sieve $R$ on $S$ and every $a\\in F(S)$ whose\nrestrictions $a|_{T}$ along all arrows $T\\to S$ of $R$ lie in $G(T)$, we have $a\\in G(S)$. Then $G$\nis a sheaf. Indeed, a compatible family $(a_T\\in G(T))_{T\\in R}$ is compatible in $F$, so it glues\nuniquely to $a\\in F(S)$ with $a|_T=a_T\\in G(T)$; by the hypothesis $a\\in G(S)$; and uniqueness in $G$\nfollows from uniqueness in $F$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "**Verification.** $F=C(-,\\Qlb)$ is a sheaf by [def-sfb-continuous-map-condensed-ring]. In the\ncoherent topology on profinite sets, a covering sieve $R$ on $S$ contains a finite family\n$\\pi_\\nu\\colon S_\\nu\\to S$, $\\nu=1,\\dots,n$, with $\\coprod_\\nu S_\\nu\\to S$ surjective. Let\n$a\\in C(S,\\Qlb)$ with $a\\circ\\pi_\\nu\\in\\underline{\\Qlb}(S_\\nu)$, say $a(\\pi_\\nu(S_\\nu))\\subseteq E_\\nu$.\nBy surjectivity,\n$$\na(S)=\\bigcup_\\nu a(\\pi_\\nu(S_\\nu))\\subseteq E_1\\cdots E_n,\n$$\nwhich is a finite subextension by [det-def-sfb-qlbar-condensed-subextensions]. So\n$a\\in\\underline{\\Qlb}(S)$, and $\\underline{\\Qlb}$ is a sheaf of sets; since its ring operations are\nthose of the subpresheaf of rings, it is a sheaf of commutative rings.\n\nBy [det-def-sfb-ring-object-sheaf], its underlying abelian sheaf is a ring object, commutative\nbecause all $\\underline{\\Qlb}(S)$ are commutative.",
+    "uses": [
+     "def-sfb-continuous-map-condensed-ring",
+     "det-def-sfb-qlbar-condensed-subextensions",
+     "det-def-sfb-ring-object-sheaf"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
+ }
 }

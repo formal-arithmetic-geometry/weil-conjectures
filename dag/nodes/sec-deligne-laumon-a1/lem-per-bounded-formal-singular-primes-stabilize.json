@@ -1,0 +1,361 @@
+{
+ "id": "lem-per-bounded-formal-singular-primes-stabilize",
+ "kind": "statement",
+ "title": "Bounded minimal singular formal primes are eventually extended",
+ "statement": "Let $A$ be a commutative Noetherian Nagata ring [def-weil-pbc-noetherian-ring, def-weil-pbc-nagata-ring], complete for the principal ideal $(x)$ [def-weil-pbc-adically-complete-ring], where $x\\ne0$, and assume $A/xA$ is a G-ring [def-weil-pbc-g-ring]. Fix a maximal ideal $\\mathfrak n$ of $A$. Let $\\Gamma$ be the finite subsets of $\\operatorname{Max}A$ containing $\\mathfrak n$, ordered by inclusion. For $\\gamma\\in\\Gamma$ put $S_\\gamma=A\\setminus\\bigcup_{\\mathfrak m\\in\\gamma}\\mathfrak m$, $A_\\gamma=S_\\gamma^{-1}A$ (fractions $a/s$), and $D_\\gamma=\\varprojlim_{j\\ge1}A_\\gamma/x^jA_\\gamma$ [def-weil-pbc-adic-completion]. Inclusion $\\gamma\\subseteq\\delta$ gives the canonical maps $D_\\delta\\to D_\\gamma$. Put $C=D_{\\{\\mathfrak n\\}}$. Let $\\mathfrak s\\subset C$ be a prime such that $C_{\\mathfrak s}$ is not regular local and $C_{\\mathfrak t}$ is regular local for every prime $\\mathfrak t\\subsetneq\\mathfrak s$ [def-weil-pbc-localization-at-prime, def-weil-regular-scheme]. Suppose $\\mathfrak s\\cap A=(0)$, and put $p_\\gamma=\\mathfrak s\\cap D_\\gamma$. Let $E_\\gamma$ be the integral closure of the domain $D_\\gamma/p_\\gamma$ in its fraction field [def-weil-pbc-integral-closure]. If the set $\\bigcup_{\\gamma\\in\\Gamma}\\{Q\\cap A:Q\\text{ is prime minimal over }xE_\\gamma\\}$ is finite, there exists $\\gamma_0\\in\\Gamma$ such that for every $\\gamma_0\\subseteq\\gamma\\subseteq\\delta$ one has $p_\\gamma=p_\\delta D_\\gamma$.",
+ "source": {
+  "document": "https://doi.org/10.1016/B978-0-12-348032-3.50006-2",
+  "place": "J. Nishimura and T. Nishimura, Ideal-adic Completion of Noetherian Rings II, Algebraic Geometry and Commutative Algebra II (1988), pp.453–467. Proposition 1.18, p.460, with P = regularity; Definitions 1.1, 1.2 and 1.4–1.5. The local lifting input for G-rings is the one recorded by lem-per-local-g-ring-adic-lifting."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-nagata-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-g-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-regular-scheme"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-adic-complete-jacobson-radical], every maximal ideal of $A$ contains $x$. Apply [lem-per-semilocal-completion-singular-components] to all the finite sets in $\\Gamma$: every $D_\\gamma$ is Noetherian, semilocal and a G-ring, and every transition is regular. By [lem-per-semilocal-g-ring-j2, lem-exc-quasi-excellent-nagata] it is quasi-excellent and Nagata. By [lem-weil-pbc-adic-completion-mod-ideal] it is $x$-adically complete, so the Jacobson-radical lemma also applies to it. By [lem-weil-pbc-adic-completion-mod-power] its quotients modulo $x^j$ are the indicated localizations of $A/x^jA$. The maps and the contractions $p_\\gamma$ are compatible by their construction. In particular $p_\\delta D_\\gamma\\subseteq p_\\gamma$ for $\\gamma\\subseteq\\delta$, and $x\\notin p_\\gamma$, since $x\\ne0$ and $\\mathfrak s\\cap A=0$.",
+   "uses": [
+    "lem-weil-pbc-adic-complete-jacobson-radical",
+    "lem-per-semilocal-completion-singular-components",
+    "lem-per-semilocal-g-ring-j2",
+    "lem-exc-quasi-excellent-nagata",
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-adic-completion-mod-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://gdz.sub.uni-goettingen.de/id/PPN235181684_0253?tify={%22pages%22:[227]}",
+    "place": "Rotthaus, Zur Komplettierung ausgezeichneter Ringe, Math. Ann. 253 (1980), printed p.223, final paragraph of Behauptung 1: select K_1 over the finite boundary set, retain all components, and stabilize the finite intersections of minimal singular primes. Agent reconstruction for the normalized boundary in Nishimura–Nishimura Proposition 1.18."
+   }
+  },
+  {
+   "text": "For any transition $R=D_\\delta\\to S=D_\\gamma$ and prime $q$ of $S$, write $p=q\\cap R$. By [lem-weil-pbc-regular-local-maximal] the induced local map $R_p\\to S_q$ is regular. Its closed fibre is regular. Therefore [lem-weil-pbc-flat-over-regular-with-regular-fibre] gives $R_p$ regular $\\Rightarrow S_q$ regular, and [lem-weil-pbc-flat-under-regular] gives the converse. Thus a prime upstairs is singular exactly when its contraction is singular. This also applies to $D_\\gamma\\to C$.",
+   "uses": [
+    "lem-weil-pbc-regular-local-maximal",
+    "lem-weil-pbc-flat-over-regular-with-regular-fibre",
+    "lem-weil-pbc-flat-under-regular"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://gdz.sub.uni-goettingen.de/id/PPN235181684_0253?tify={%22pages%22:[227]}",
+    "place": "Rotthaus, Zur Komplettierung ausgezeichneter Ringe, Math. Ann. 253 (1980), printed p.223, final paragraph of Behauptung 1: select K_1 over the finite boundary set, retain all components, and stabilize the finite intersections of minimal singular primes. Agent reconstruction for the normalized boundary in Nishimura–Nishimura Proposition 1.18."
+   }
+  },
+  {
+   "text": "Each $p_\\gamma$ is a minimal singular prime of $D_\\gamma$. It is singular by Step 2 applied to $\\mathfrak s$. If a smaller singular prime existed, flat going-down [lem-sc-flat-going-down] for $D_\\gamma\\to C$ would lift it to a strictly smaller prime below $\\mathfrak s$; Step 2 would make that prime singular, contradicting the choice of $\\mathfrak s$. More generally, let $R\\to S$ be one of the transitions and $p$ a minimal singular prime of $R$. Every prime $r$ minimal over $pS$ contracts to $p$: otherwise going-down would supply a strictly smaller prime containing $pS$. It is singular by Step 2. A smaller singular prime $r'$ would contract to a singular prime contained in $p$, hence to $p$; then $pS\\subseteq r'$, contradicting minimality of $r$. Thus every such $r$ is minimal singular in $S$.",
+   "uses": [
+    "lem-sc-flat-going-down"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://gdz.sub.uni-goettingen.de/id/PPN235181684_0253?tify={%22pages%22:[227]}",
+    "place": "Rotthaus, Zur Komplettierung ausgezeichneter Ringe, Math. Ann. 253 (1980), printed p.223, final paragraph of Behauptung 1: select K_1 over the finite boundary set, retain all components, and stabilize the finite intersections of minimal singular primes. Agent reconstruction for the normalized boundary in Nishimura–Nishimura Proposition 1.18."
+   }
+  },
+  {
+   "text": "For every transition $D_\\delta\\to D_\\gamma$, base change by the finite type quotient $D_\\delta\\to D_\\delta/p_\\delta$ is regular by [lem-weil-pbc-regular-base-change]. Since this quotient is a reduced Noetherian domain, [lem-exc-regular-map-reduced-target] makes $D_\\gamma/p_\\delta D_\\gamma$ reduced. Thus $p_\\delta D_\\gamma$ is radical. By [lem-weil-pbc-zero-locus-eq-iff-radical-eq] it is the intersection of all primes containing it; by [lem-weil-pbc-prime-contains-minimal-prime] the intersection can be restricted to its minimal primes. Step 3 says these are minimal singular primes of $D_\\gamma$. Finally, the singular locus of each $D_\\gamma$ is closed: apply J-2 in [def-exc-excellent-ring] to the ring itself. Its radical defining ideal has only finitely many minimal primes by [lem-sc-finite-minimal-primes-over-ideal], so there are finitely many minimal singular primes.",
+   "uses": [
+    "lem-weil-pbc-regular-base-change",
+    "lem-exc-regular-map-reduced-target",
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+    "lem-weil-pbc-prime-contains-minimal-prime",
+    "def-exc-excellent-ring",
+    "lem-sc-finite-minimal-primes-over-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://gdz.sub.uni-goettingen.de/id/PPN235181684_0253?tify={%22pages%22:[227]}",
+    "place": "Rotthaus, Zur Komplettierung ausgezeichneter Ringe, Math. Ann. 253 (1980), printed p.223, final paragraph of Behauptung 1: select K_1 over the finite boundary set, retain all components, and stabilize the finite intersections of minimal singular primes. Agent reconstruction for the normalized boundary in Nishimura–Nishimura Proposition 1.18."
+   }
+  },
+  {
+   "text": "Denote the finite set of boundary contractions in the hypothesis by $\\Delta$. By [lem-weil-pbc-proper-ideal-contained-in-maximal], for every $a\\in\\Delta$ choose a maximal ideal $m_a$ of $A$ containing $a$, and choose a finite $\\gamma_1\\in\\Gamma$ containing all these $m_a$. For $\\delta\\supseteq\\gamma_1$ put $I_\\delta=p_\\delta D_{\\gamma_1}$. Step 4 expresses $I_\\delta$ as an intersection of a subset of the fixed finite set of minimal singular primes of $D_{\\gamma_1}$, so only finitely many values occur. They decrease with $\\delta$: if $\\delta\\subseteq\\epsilon$, contraction compatibility gives $p_\\epsilon D_\\delta\\subseteq p_\\delta$, and hence $I_\\epsilon\\subseteq I_\\delta$. Choose an inclusion-minimal value, attained at $\\gamma_0\\supseteq\\gamma_1$. Then $I_\\delta=I_{\\gamma_0}$ for every $\\delta\\supseteq\\gamma_0$.",
+   "uses": [
+    "lem-weil-pbc-proper-ideal-contained-in-maximal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://gdz.sub.uni-goettingen.de/id/PPN235181684_0253?tify={%22pages%22:[227]}",
+    "place": "Rotthaus, Zur Komplettierung ausgezeichneter Ringe, Math. Ann. 253 (1980), printed p.223, final paragraph of Behauptung 1: select K_1 over the finite boundary set, retain all components, and stabilize the finite intersections of minimal singular primes. Agent reconstruction for the normalized boundary in Nishimura–Nishimura Proposition 1.18."
+   }
+  },
+  {
+   "text": "Fix $\\gamma_0\\subseteq\\gamma\\subseteq\\delta$ and a prime $r$ minimal over $I=p_\\delta D_\\gamma$. The normalization $E_\\delta$ is finite over $D_\\delta/p_\\delta$: use the Nagata property from Step 1 and [def-weil-pbc-nagata-ring, def-weil-pbc-japanese-domain], taking the fraction field as its own finite extension. Apply [lem-per-normalized-boundary-component-retention] to the regular map $D_\\delta/p_\\delta\\to D_\\gamma/I$ from Step 4 and its minimal prime $r/I$. All hypotheses hold: these rings are Noetherian, the source is a domain, $x$ is nonzero there by Step 1, and its image lies in every maximal ideal of the quotient. We obtain a prime $q\\supseteq r$ of $D_\\gamma$ containing $x$ and $Q\\in\\operatorname{Min}(xE_\\delta)$ such that $a=q\\cap A=Q\\cap A\\in\\Delta$.",
+   "uses": [
+    "def-weil-pbc-nagata-ring",
+    "def-weil-pbc-japanese-domain",
+    "lem-per-normalized-boundary-component-retention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://gdz.sub.uni-goettingen.de/id/PPN235181684_0253?tify={%22pages%22:[227]}",
+    "place": "Rotthaus, Zur Komplettierung ausgezeichneter Ringe, Math. Ann. 253 (1980), printed p.223, final paragraph of Behauptung 1: select K_1 over the finite boundary set, retain all components, and stabilize the finite intersections of minimal singular primes. Agent reconstruction for the normalized boundary in Nishimura–Nishimura Proposition 1.18."
+   }
+  },
+  {
+   "text": "The quotient identifications in Step 1 show that $q=aD_\\gamma$: primes containing $x$ correspond to primes in $S_\\gamma^{-1}(A/xA)$, and contraction followed by extension recovers such a prime. Since $a\\subseteq m_a\\in\\gamma_1$, $a$ is disjoint from $S_{\\gamma_1}$, so $q_1=aD_{\\gamma_1}$ is also prime, by the same quotient identification. Its contraction to $D_\\gamma$ is $q$, since the quotient transition is precisely the localization map and both primes contract to $a/xA$. By [lem-weil-pbc-regular-local-maximal], the regular transition induces a regular, hence flat, local map $(D_\\gamma)_q\\to(D_{\\gamma_1})_{q_1}$. It is local, and hence faithfully flat by [lem-pc-local-flat-faithful-flat-reflects-surjective].",
+   "uses": [
+    "lem-weil-pbc-regular-local-maximal",
+    "lem-pc-local-flat-faithful-flat-reflects-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://gdz.sub.uni-goettingen.de/id/PPN235181684_0253?tify={%22pages%22:[227]}",
+    "place": "Rotthaus, Zur Komplettierung ausgezeichneter Ringe, Math. Ann. 253 (1980), printed p.223, final paragraph of Behauptung 1: select K_1 over the finite boundary set, retain all components, and stabilize the finite intersections of minimal singular primes. Agent reconstruction for the normalized boundary in Nishimura–Nishimura Proposition 1.18."
+   }
+  },
+  {
+   "text": "Step 5 gives $p_\\delta D_{\\gamma_1}=p_\\gamma D_{\\gamma_1}$. Localize this equality at $q_1$ and contract through the faithfully flat local map of Step 7. By [lem-weil-pbc-faithfully-flat-ideal-contraction], $I(D_\\gamma)_q=p_\\gamma(D_\\gamma)_q$. For $h\\in p_\\gamma$ this says that some $u\\notin q$ has $uh\\in I\\subseteq r$. Since $r\\subseteq q$ is prime, $u\\notin r$, hence $h\\in r$. This holds for every minimal prime $r$ of $I$; by the radical-intersection description in Step 4 it gives $p_\\gamma\\subseteq I$. The reverse inclusion was proved in Step 1, so $p_\\gamma=p_\\delta D_\\gamma$, as required.",
+   "uses": [
+    "lem-weil-pbc-faithfully-flat-ideal-contraction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://gdz.sub.uni-goettingen.de/id/PPN235181684_0253?tify={%22pages%22:[227]}",
+    "place": "Rotthaus, Zur Komplettierung ausgezeichneter Ringe, Math. Ann. 253 (1980), printed p.223, final paragraph of Behauptung 1: select K_1 over the finite boundary set, retain all components, and stabilize the finite intersections of minimal singular primes. Agent reconstruction for the normalized boundary in Nishimura–Nishimura Proposition 1.18."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exc-excellent-ring",
+  "def-weil-pbc-japanese-domain",
+  "def-weil-pbc-nagata-ring",
+  "lem-exc-quasi-excellent-nagata",
+  "lem-exc-regular-map-reduced-target",
+  "lem-pc-local-flat-faithful-flat-reflects-surjective",
+  "lem-per-normalized-boundary-component-retention",
+  "lem-per-semilocal-completion-singular-components",
+  "lem-per-semilocal-g-ring-j2",
+  "lem-sc-finite-minimal-primes-over-ideal",
+  "lem-sc-flat-going-down",
+  "lem-weil-pbc-adic-complete-jacobson-radical",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-adic-completion-mod-power",
+  "lem-weil-pbc-faithfully-flat-ideal-contraction",
+  "lem-weil-pbc-flat-over-regular-with-regular-fibre",
+  "lem-weil-pbc-flat-under-regular",
+  "lem-weil-pbc-prime-contains-minimal-prime",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
+  "lem-weil-pbc-regular-base-change",
+  "lem-weil-pbc-regular-local-maximal",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://gdz.sub.uni-goettingen.de/id/PPN235181684_0253?tify={%22pages%22:[227]}",
+  "place": "Rotthaus, Zur Komplettierung ausgezeichneter Ringe, Math. Ann. 253 (1980), printed p.223, final paragraph of Behauptung 1: select K_1 over the finite boundary set, retain all components, and stabilize the finite intersections of minimal singular primes. Agent reconstruction for the normalized boundary in Nishimura–Nishimura Proposition 1.18."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-bounded-formal-singular-primes-stabilize: bounded contracted minimal singular primes in semilocal adic completions eventually are extended from a fixed stage when the quotient is a G ring",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdicComplete.henselianRing\", \"PreTilt.exists_smodEq_untiltAux\", \"AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq\", \"BDeRham\", \"BDeRhamPlus\", \"AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top\", \"PrimeSpectrum.exist_ltSeries_mem_one_of_mem_last\", \"AdicCompletion.exists_smodEq_pow_add_one_smul\"]}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern adic-completion constructions, finite prime sets, or unrelated good products; none gives eventual extension of these singular primes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-bounded-formal-singular-primes-stabilize: a bounded compatible family of primes in semilocal adic completions is eventually extended from one finite stage",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Padic.adicCompletionEquiv\", \"Rat.HeightOneSpectrum.adicCompletion.padicEquiv\", \"Rat.HeightOneSpectrum.adicCompletionIntegers.padicIntEquiv\", \"PadicInt.coe_adicCompletionIntegersEquiv_apply\", \"PadicInt.totallyBounded_univ\", \"PadicSeq.stationaryPoint.congr_simp\", \"AdicCompletion.piEquivOfFintype\", \"PadicInt.limNthHom.congr_simp\"]}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern adic-completion constructions, finite prime sets, or unrelated good products; none gives eventual extension of these singular primes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-bounded-formal-singular-primes-stabilize: a finite set of principal boundary primes makes a minimal singular formal prime family good in the sense of Nishimura",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.Products.isGood\", \"Profinite.NobelingProof.Products.limitOrdinal\", \"Profinite.NobelingProof.GoodProducts.maxTail_isGood\", \"Profinite.NobelingProof.P\", \"Profinite.NobelingProof.Products.prop_of_isGood_of_contained\", \"Profinite.NobelingProof.GoodProducts.linearIndependentAux\", \"Profinite.NobelingProof.GoodProducts.MaxToGood\", \"Profinite.NobelingProof.Products.isGood_mono\"]}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern adic-completion constructions, finite prime sets, or unrelated good products; none gives eventual extension of these singular primes."
+  },
+  {
+   "tool": "grep",
+   "query": "(singular|Singular).*(stabil|Stabil)|bounded.*prime",
+   "results": "{\"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Tactic/Simproc/Factors.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\"]}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern adic-completion constructions, finite prime sets, or unrelated good products; none gives eventual extension of these singular primes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAdicComplete\", \"Ideal.IsPrime\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern adic-completion constructions, finite prime sets, or unrelated good products; none gives eventual extension of these singular primes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compatible family of prime ideals in completions of semilocalizations stabilizes under finite boundary prime contractions",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomain.primesOverEquivPrimesOver\", \"IsLocalization.AtPrime.liesOver_map_of_liesOver\", \"Ideal.exists_ltSeries_of_hasGoingDown\", \"IsLocalization.AtPrime.liesOver_comap_of_liesOver\", \"Algebra.HasGoingDown.of_comap_localRingHom_surjective\", \"PrimeSpectrum.piLocalizationToMaximal\", \"Algebra.QuasiFiniteAt\", \"IsLocalization.liesOver_of_isPrime_of_disjoint\"]}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned results concern adic-completion constructions, ordinary localization, or finiteness of primes, and do not prove stabilization of singular formal primes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAdicComplete\", \"Ideal.IsPrime\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned results concern adic-completion constructions, ordinary localization, or finiteness of primes, and do not prove stabilization of singular formal primes."
+  },
+  {
+   "tool": "grep",
+   "query": "(singular|Singular).*(stabil|Stabil)|bounded.*prime",
+   "results": "{\"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Tactic/Simproc/Factors.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\"]}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned results concern adic-completion constructions, ordinary localization, or finiteness of primes, and do not prove stabilization of singular formal primes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Minimal singular primes of adic completions of semilocal rings are eventually extensions under a finite bound on normalized boundary primes",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdicComplete.henselianRing\", \"PreTilt.exists_smodEq_untiltAux\", \"PreTilt.untiltAux_smodEq_untiltFun\", \"IsDedekindDomain.HeightOneSpectrum.coe_mem_adicCompletionIntegers\", \"BDeRhamPlus\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletion\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletion.mul_nonZeroDivisor_mem_adicCompletionIntegers\", \"PrimeSpectrum.exist_ltSeries_mem_one_of_mem_last\"]}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned results concern adic-completion constructions, ordinary localization, or finiteness of primes, and do not prove stabilization of singular formal primes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite bound on contractions of primes over a principal ideal implies stabilization of primes in semilocal adic completions",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.card_primesOverFinset_le_finrank\", \"instFintypeElemIdealPrimesOver\", \"PrimeSpectrum.instLiesOverAsIdealComapAlgebraMap\", \"Algebra.QuasiFinite.finite_primesOver\", \"Ideal.primesOver.isPrime\", \"IsLocalRing.primesOverFinset_eq\", \"Module.associatedPrimes.comap_mem_associatedPrimes_of_mem_associatedPrimes_of_isLocalizedModule_of_fg\", \"RingOfIntegers.isPrincipalIdealRing_of_isPrincipal_of_norm_le_of_isPrime\"]}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned results concern adic-completion constructions, ordinary localization, or finiteness of primes, and do not prove stabilization of singular formal primes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-qe-rotthaus-finite-boundary",
+  "date": "2026-10-24",
+  "group": "Q29"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, regular local model and purity, through the small-singular-locus completion in Temkin Theorem 3.4.1: quasi-excellence of completed rational affine charts is supplied by Theorem 2.1.6. Auxiliary completion proof: Theorem 5.3 (Rotthaus Hilfssatz), printed p.11, citing Nishimura–Nishimura Theorem 1.9 and Proposition 1.18. Auxiliary: Proposition 1.18, p.460, with P = regularity; Definitions 1.1, 1.2 and 1.4–1.5. The local lifting input for G-rings is the one recorded by lem-per-local-g-ring-adic-lifting.",
+   "via": [
+    "lem-per-qe-rotthaus-finite-boundary",
+    "lem-per-qe-complete-pair-lifting",
+    "lem-per-small-divisor-formal-completion",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-bounded-formal-singular-primes-stabilize",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reconstructed the finite-boundary argument: regular transitions make extended primes radical intersections of minimal singular primes; finitely many intersections stabilize at a fixed semilocal stage; normalized boundary detection keeps every component visible there, and local faithful flatness descends equality. Two statement-only algebra inputs; no Mathlib leaves or attachments.",
+  "blueprint": "Ancestor proof Step 3, regular local model and purity, through the small-singular-locus completion in Temkin Theorem 3.4.1: quasi-excellence of completed rational affine charts is supplied by Theorem 2.1.6. Auxiliary completion proof: Theorem 5.3 (Rotthaus Hilfssatz), printed p.11, citing Nishimura–Nishimura Theorem 1.9 and Proposition 1.18. Auxiliary: Proposition 1.18, p.460, with P = regularity; Definitions 1.1, 1.2 and 1.4–1.5. The local lifting input for G-rings is the one recorded by lem-per-local-g-ring-adic-lifting.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-quasi-excellent-nagata",
+    "why": "Generic commutative-algebra tool: Quasi-excellent rings are Nagata; used with the hypotheses stated in the proof, not as a replacement for a perverse-sheaf argument."
+   },
+   {
+    "node": "lem-exc-regular-map-reduced-target",
+    "why": "Generic commutative-algebra tool: Reducedness ascends along a regular map of Noetherian rings; used with the hypotheses stated in the proof, not as a replacement for a perverse-sheaf argument."
+   },
+   {
+    "node": "lem-pc-local-flat-faithful-flat-reflects-surjective",
+    "why": "Generic commutative-algebra tool: Faithfully flat local stalk maps reflect surjectivity; used with the hypotheses stated in the proof, not as a replacement for a perverse-sheaf argument."
+   },
+   {
+    "node": "lem-sc-finite-minimal-primes-over-ideal",
+    "why": "Generic commutative-algebra tool: Finitely many minimal primes over an ideal in a Noetherian ring; used with the hypotheses stated in the proof, not as a replacement for a perverse-sheaf argument."
+   },
+   {
+    "node": "lem-sc-flat-going-down",
+    "why": "Generic commutative-algebra tool: Flat ring maps satisfy going down; used with the hypotheses stated in the proof, not as a replacement for a perverse-sheaf argument."
+   },
+   {
+    "node": "lem-weil-pbc-adic-complete-jacobson-radical",
+    "why": "Generic commutative-algebra tool: The ideal of a complete ring lies in the Jacobson radical; used with the hypotheses stated in the proof, not as a replacement for a perverse-sheaf argument."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-mod-ideal",
+    "why": "Generic commutative-algebra tool: The completion along a finitely generated ideal is complete with the same quotient; used with the hypotheses stated in the proof, not as a replacement for a perverse-sheaf argument."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-mod-power",
+    "why": "Generic commutative-algebra tool: The kernel of the completion modulo a power of the ideal; used with the hypotheses stated in the proof, not as a replacement for a perverse-sheaf argument."
+   },
+   {
+    "node": "lem-weil-pbc-faithfully-flat-ideal-contraction",
+    "why": "Generic commutative-algebra tool: Ideals are contracted from a faithfully flat extension; used with the hypotheses stated in the proof, not as a replacement for a perverse-sheaf argument."
+   },
+   {
+    "node": "lem-weil-pbc-flat-over-regular-with-regular-fibre",
+    "why": "Generic commutative-algebra tool: Flat local maps with regular source and fibre have regular target; used with the hypotheses stated in the proof, not as a replacement for a perverse-sheaf argument."
+   },
+   {
+    "node": "lem-weil-pbc-flat-under-regular",
+    "why": "Generic commutative-algebra tool: Regularity descends along flat local homomorphisms; used with the hypotheses stated in the proof, not as a replacement for a perverse-sheaf argument."
+   },
+   {
+    "node": "lem-weil-pbc-prime-contains-minimal-prime",
+    "why": "Generic commutative-algebra tool: A prime containing an ideal contains a minimal prime over that ideal; used with the hypotheses stated in the proof, not as a replacement for a perverse-sheaf argument."
+   },
+   {
+    "node": "lem-weil-pbc-proper-ideal-contained-in-maximal",
+    "why": "Generic commutative-algebra tool: Every proper ideal is contained in a maximal ideal; used with the hypotheses stated in the proof, not as a replacement for a perverse-sheaf argument."
+   },
+   {
+    "node": "lem-weil-pbc-regular-base-change",
+    "why": "Generic commutative-algebra tool: Regular ring maps are stable under finite type base change; used with the hypotheses stated in the proof, not as a replacement for a perverse-sheaf argument."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-maximal",
+    "why": "Generic commutative-algebra tool: Regularity of a ring map is local on the target; used with the hypotheses stated in the proof, not as a replacement for a perverse-sheaf argument."
+   },
+   {
+    "node": "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+    "why": "Generic commutative-algebra tool: Two ideals have the same zero locus iff they have the same radical; used with the hypotheses stated in the proof, not as a replacement for a perverse-sheaf argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-quasi-excellent-nagata",
+  "lem-exc-regular-map-reduced-target",
+  "lem-pc-local-flat-faithful-flat-reflects-surjective",
+  "lem-sc-finite-minimal-primes-over-ideal",
+  "lem-sc-flat-going-down",
+  "lem-weil-pbc-adic-complete-jacobson-radical",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-adic-completion-mod-power",
+  "lem-weil-pbc-faithfully-flat-ideal-contraction",
+  "lem-weil-pbc-flat-over-regular-with-regular-fibre",
+  "lem-weil-pbc-flat-under-regular",
+  "lem-weil-pbc-prime-contains-minimal-prime",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
+  "lem-weil-pbc-regular-base-change",
+  "lem-weil-pbc-regular-local-maximal",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NV-61dade40b",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-61dade40b (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and the parent lem-per-qe-rotthaus-finite-boundary. This is a first split of a statement-only node, not a 2026-10-21 re-split. The 8 steps match Rotthaus 1980 p.223 and Nishimura–Nishimura Prop 1.18. (1) Every maximal ideal contains x (Jacobson lemma); D_gamma is Noetherian, x-complete, a semilocal G-ring and quasi-excellent/Nagata. (2) Regular transitions preserve and reflect singularity, by the two flat local criteria. (3) Going-down gives the minimal-singular-prime arguments, which are correct. (4) The regular base change along the finite-type map D_delta -> D_delta/p_delta has a reduced target, so p_delta D_gamma is radical and is the intersection of finitely many minimal singular primes (J-2 makes Sing closed). (5) gamma_1 contains the m_a; the finite set of values decreases with delta, so an inclusion-minimal value stabilises without any DCC. (6) Nagata makes E_delta finite, and new node 2 applies with all hypotheses checked. (7) q = aD_gamma and q1 = aD_{gamma_1}, checked modulo x; the regular local map is flat and local, hence faithfully flat. (8) Faithfully flat contraction plus the u-trick gives p_gamma ⊆ I. Empty Delta is impossible, so it causes no problem. New node normalized-boundary-component-retention is true: I checked a full proof (H = E⊗S is normal by Stacks 0BFK, which I verified at more-algebra.tex:10553; then Krull plus flat going-down). Edge cases are fine, and it is not a duplicate of the smooth-normal-ascent nodes. New node semilocal-completion-singular-components is true: it is the semilocal G-ring lifting theorem (Rotthaus 1979, Kurano–Shimomoto App. A) plus g-ring-completion-regular for the transitions. It is not a duplicate of local-g-ring-adic-lifting, which is local only, and it does not cite the ancestor gabber-adic-quasi-excellence, so there is no circularity. Batch-5 flag: semilocal-g-ring-j2 reaches lem-trf-regular-ring-universally-catenary. That is generic commutative algebra (regular rings are Cohen–Macaulay, hence universally catenary), not trace formula or Poincaré duality content, so I accept it. MAINTAINER NOTES: (a) the cited live lem-per-semilocal-g-ring-j2 Step 1 still cites the dropped lem-per-complete-local-excellence, so the item's closure contains dropped nodes, but only indirectly; repoint that Step 1 to lem-per-complete-local-j2 plus lem-weil-pbc-complete-local-g-ring (07PS). (b) Without the drop list the item is unreached from every target; its only citer is lem-per-qe-rotthaus-finite-boundary on the dropped Gabber chain, and it has no twin. Consider dropping the whole Rotthaus/Gabber branch. No fixes."
+ }
+}

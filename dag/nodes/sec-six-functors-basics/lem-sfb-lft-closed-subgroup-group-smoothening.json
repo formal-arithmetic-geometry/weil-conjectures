@@ -1,0 +1,224 @@
+{
+ "id": "lem-sfb-lft-closed-subgroup-group-smoothening",
+ "kind": "statement",
+ "title": "Universal group smoothening of an lft closed subgroup",
+ "statement": "Let $D$ be a Dedekind domain, $E=\\operatorname{Frac}D$ and $S=\\operatorname{Spec}D$ [def-weil-affine-spectrum]. Let $M$ be a smooth separated commutative $S$-group scheme, locally of finite type [def-pc-scheme, def-sbc-smooth-morphisms]. Suppose that the union $M^0$ of the connected components containing the identity in the geometric fibres is an open subgroup scheme of finite type over $S$ [def-weil-connected-scheme, def-weil-geometric-fibre]. Let $C\\hookrightarrow M$ be a closed flat $S$-subgroup scheme [def-weil-closed-immersion, def-weil-flat-morphism] such that $C_E$ is a smooth finite-type $E$-group scheme, with generic fibre as in [def-pc-base-change]. There exist a smooth separated commutative $S$-group scheme $N$, locally of finite type, and an $S$-group homomorphism $u:N\\to C$ such that $u_E:N_E\\to C_E$ is an isomorphism and composition gives a bijection\n$$\\operatorname{Hom}_S(X,N)\\xrightarrow{\\sim}\\operatorname{Hom}_S(X,C)$$\nfor every smooth $S$-scheme $X$. No Néron mapping property of $M$ or $C$ is assumed, and $M$, $C$ and $N$ need not be quasi-compact. The morphism $u$ is called a group smoothening. A Dedekind domain means a Noetherian integrally closed domain of Krull dimension one. A commutative group scheme over the indicated base has multiplication, identity and inverse morphisms satisfying the commutative group diagrams, as in the field case [def-sc-group-scheme]; separated means that its diagonal is a closed immersion [def-weil-closed-immersion]. Locally of finite type means that affine coordinate algebras are locally finitely generated over those of the base [def-weil-finite-type-morphism].",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 7.1 Theorem 5, printed p.175 (PDF page 181), smooth-test-scheme universal property; 10.1 Proposition 4, proof, printed p.291 (PDF page 297), extension to lft closed subgroups using the finite-type intersection with the ambient identity component. Local PDF WANTED; primary-source scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-geometric-fibre",
+  "def-weil-closed-immersion",
+  "def-weil-flat-morphism",
+  "def-pc-base-change",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Set $G=C$. On an affine chart of $M$ the intersection with $C$ is defined by a quotient of the coordinate algebra, hence is still finitely generated over a base affine; thus $G$ is locally of finite type. Its diagonal is the pullback of the closed diagonal of $M$, hence it is separated. It is flat and commutative by hypothesis. Apply [lem-sfb-group-smoothness-identity-criterion] to obtain an open $U\\subset S$ with $G_U$ smooth and a finite complement $B$ of closed points. If $B$ is empty, take $N=C$ and $u=1_C$. The remaining construction treats these finitely many fibres without a finite-type assumption on $C$.",
+   "uses": [
+    "lem-sfb-group-smoothness-identity-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 7.1 Lemma 4 and Theorem 5 proof; 10.1 Proposition 4 proof, printed p.291; locally finite type refinement by N5."
+   }
+  },
+  {
+   "text": "Fix $s\\in B$. Starting with the current group $G_0$, form the canonical subgroup $F_n\\subset(G_n)_s$ from [lem-sfb-canonical-group-dilatation-defect-drop] and let $G_{n+1}\\to G_n$ be its global dilatation at $s$ from [lem-sfb-group-dilatation-universal-property]. All groups remain flat, separated, commutative and locally of finite type, and the generic fibre remains the original smooth one. The same strict henselization can be used throughout. Put $r=\\delta_s(G_0)$. The defect inequality gives, by induction, $\\delta_s(G_n)\\leq\\max(0,r-n)$: it holds at $n=0$, and applying $t\\mapsto\\max(0,t-1)$ gives the successor inequality. At $n=r$ the defect is zero, so the zero criterion gives smoothness at the identity over $s$; [lem-sfb-group-smoothness-identity-criterion] gives smoothness at every point of that fibre. This also covers $r=0$, when no modification is needed.",
+   "uses": [
+    "lem-sfb-canonical-group-dilatation-defect-drop",
+    "lem-sfb-group-dilatation-universal-property",
+    "lem-sfb-group-smoothness-identity-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 7.1 Lemma 4 and Theorem 5 proof; 10.1 Proposition 4 proof, printed p.291; locally finite type refinement by N5."
+   }
+  },
+  {
+   "text": "Perform step 2 successively for the finite set $B$, using the current group at each stage. A dilatation at $s$ is an isomorphism over $S\\setminus\\{s\\}$, so it preserves smoothness on $U$ and at all previously treated fibres. Thus the final group $N$ is smooth at the identity over every base point and hence smooth by [lem-sfb-group-smoothness-identity-criterion]. Compose the finitely many homomorphisms to obtain $u:N\\to C$. The construction in [lem-sfb-group-dilatation-universal-property] preserves separatedness, local finite type and commutativity, and each modification is an isomorphism on the generic fibre. Thus $u_E$ is an isomorphism and $N$ has all the asserted structural properties.",
+   "uses": [
+    "lem-sfb-group-dilatation-universal-property",
+    "lem-sfb-group-smoothness-identity-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 7.1 Lemma 4 and Theorem 5 proof; 10.1 Proposition 4 proof, printed p.291; locally finite type refinement by N5."
+   }
+  },
+  {
+   "text": "Let $X$ be any smooth $S$-scheme and $f:X\\to C$ any $S$-morphism. At the first modification the fibre map of $f$ factors through its canonical centre by [lem-sfb-canonical-group-dilatation-defect-drop], and [lem-sfb-group-dilatation-universal-property] therefore gives a unique lift to the first dilatation. Apply the same two statements to that lift and the next modification. Induction over the finite list gives a lift $X\\to N$. If two maps to $N$ have the same composite to $C$, uniqueness at the first stage makes their composites to the first dilatation equal, then uniqueness at the second stage makes the next composites equal, and so on until the two maps to $N$ are equal. Hence composition with $u$ is surjective and injective on the stated Hom sets. The argument applies to arbitrary smooth test schemes, without a quasi-compactness or group-structure hypothesis on $X$.",
+   "uses": [
+    "lem-sfb-canonical-group-dilatation-defect-drop",
+    "lem-sfb-group-dilatation-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 7.1 Lemma 4 and Theorem 5 proof; 10.1 Proposition 4 proof, printed p.291; locally finite type refinement by N5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-group-smoothness-identity-criterion",
+  "lem-sfb-canonical-group-dilatation-defect-drop",
+  "lem-sfb-group-dilatation-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "Primary-source scan of BLR 3.2, 3.3 Lemma 1, 7.1 Lemma 4/Theorem 5, and 10.1 Proposition 4 proof; local PDF WANTED. Explicit finite induction written by N5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"smoothening\"",
+   "results": "{\"t\": \"2026-10-24T05:03:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"smoothening\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Returned smooth algebras, standard-smooth presentations and smooth Lie-group sheaves, not dilatations or universal group smoothening."
+  },
+  {
+   "tool": "grep",
+   "query": "smoothening|smoothen|[Gg]roup[Ss]mooth",
+   "results": "{\"t\": \"2026-10-24T05:03:21Z\", \"tool\": \"grep\", \"query\": \"smoothening|smoothen|[Gg]roup[Ss]mooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Returned smooth algebras, standard-smooth presentations and smooth Lie-group sheaves, not dilatations or universal group smoothening."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal group smoothening by dilatations of a generically smooth flat group scheme over a discrete valuation ring",
+   "results": "{\"t\": \"2026-10-24T05:03:21Z\", \"tool\": \"leansearch\", \"query\": \"Universal group smoothening by dilatations of a generically smooth flat group scheme over a discrete valuation ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.flat\", \"instContMDiffMulOfTopWithTopENat\", \"smoothLeftMul\", \"smoothSheafGroup\", \"smoothSheafCommGroup\", \"smoothPresheafCommGroup\", \"IsUniformGroup\", \"instGroupObjOppositeOpensCarrierOfPresheafSmoothSheaf\"], \"digest\": \"18d72c04099f8fa4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Returned smooth algebras, standard-smooth presentations and smooth Lie-group sheaves, not dilatations or universal group smoothening."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat closed subgroup with smooth generic fibre in a smooth locally finite type group with finite type identity component over a Dedekind base admits universal group smoothening",
+   "results": "{\"t\": \"2026-10-24T05:03:24Z\", \"tool\": \"leanfinder\", \"query\": \"A flat closed subgroup with smooth generic fibre in a smooth locally finite type group with finite type identity component over a Dedekind base admits universal group smoothening\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.flat\", \"Algebra.Smooth.exists_finiteType\", \"Algebra.Smooth.exists_subalgebra_finiteType\", \"Algebra.Smooth.formallySmooth\", \"Algebra.instSmoothOfIsStandardSmooth\", \"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"RingHom.smooth_def\", \"Algebra.smooth_iff\"], \"digest\": \"169ea0d92de6309a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Returned smooth algebras, standard-smooth presentations and smooth Lie-group sheaves, not dilatations or universal group smoothening."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth group scheme mapping to a flat group lifts uniquely through the smoothening obtained by repeated blowups of special fibre subgroups",
+   "results": "{\"t\": \"2026-10-24T05:03:25Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth group scheme mapping to a flat group lifts uniquely through the smoothening obtained by repeated blowups of special fibre subgroups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"Algebra.Smooth.formallySmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmooth_iff\"], \"digest\": \"b9c50277b8cd8d25\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Returned smooth algebras, standard-smooth presentations and smooth Lie-group sheaves, not dilatations or universal group smoothening."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal smoothening of a flat locally finite type group scheme over a Dedekind domain by dilatations",
+   "results": "{\"t\": \"2026-10-24T06:58:53Z\", \"tool\": \"leanfinder\", \"query\": \"Universal smoothening of a flat locally finite type group scheme over a Dedekind domain by dilatations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"Algebra.Smooth.exists_finiteType\", \"Algebra.Smooth.flat\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"RingHom.Smooth.locally_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\"], \"digest\": \"1d4875e070f3246c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern smooth algebras, pointwise scheme smoothness, cotangent spaces or metric dilations; none states this group-scheme assertion or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dilatation\"",
+   "results": "{\"t\": \"2026-10-24T06:58:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"dilatation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern smooth algebras, pointwise scheme smoothness, cotangent spaces or metric dilations; none states this group-scheme assertion or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "smoothen|dilatation|Neron",
+   "results": "{\"t\": \"2026-10-24T06:58:54Z\", \"tool\": \"grep\", \"query\": \"smoothen|dilatation|Neron\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern smooth algebras, pointwise scheme smoothness, cotangent spaces or metric dilations; none states this group-scheme assertion or a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth group scheme maps uniquely through the group smoothening of a flat group scheme",
+   "results": "{\"t\": \"2026-10-24T06:58:54Z\", \"tool\": \"leansearch\", \"query\": \"A smooth group scheme maps uniquely through the group smoothening of a flat group scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"Algebra.Smooth.flat\", \"Algebra.Smooth.formallySmooth\", \"AlgebraicGeometry.IsSmooth.mk\", \"RingHom.Smooth\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\"], \"digest\": \"eeaf227ad5db7edf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern smooth algebras, pointwise scheme smoothness, cotangent spaces or metric dilations; none states this group-scheme assertion or a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-flat-neron-lft-descent",
+  "date": "2026-10-24",
+  "group": "Q58"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Trait-extension input: construct the ambient Néron lft-model, BLR 10.1 Proposition 4 proof: Universal group smoothening of an lft closed subgroup",
+   "via": [
+    "lem-sfb-finite-flat-neron-lft-descent",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-lft-closed-subgroup-group-smoothening",
+  "worker": "stage1",
+  "summary": "Retained the statement; exposed canonical dilatations, strict decrease of the finite identity defect, and the identity-section smoothness criterion as three genuine smaller lemmas. The proof carries the finite global iteration and smooth-test-scheme existence and uniqueness, without invoking a Néron mapping property or quasi-compactness. Verified all citations and searched DAG, latest blueprint, Lean and Mathlib.",
+  "blueprint": "No imported blueprint ancestor (blueprint_refs.py ancestor returns None). Preserves the inherited trait-extension route in BLR 10.1 Proposition 4 proof, refining its successive subgroup blowups with BLR 7.1 and making the finite iteration explicit."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N5-6a6e725da",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-6a6e725da (reviewer sub-agent of L); spot-checked: Read the item and all three new unsplit statement-only nodes in full. Their created.item is correct, they have no proofs, and every cited definition node exists and defines what it is cited for. Caveat: BLR is not in literature/ and this reviewer has no network access, so the mathematics was checked directly against the standard content of the cited places (BLR 3.2 Prop 1-2, 3.3 defect, 7.1 Lemma 4/Thm 5, 10.1 Prop 4 proof), not against page images. Dilatation node: the chart A[I/pi] is pi-torsion-free (flat), finitely generated (lft), affine and separated. I·A' lies in pi·A', so the special fibre maps into F. A smooth test scheme is flat with pi a non-zero-divisor, so the lift is unique; group structure and commutativity follow from the universal property. Defect-drop node: F is the reduced closure of a Galois-stable subgroup of separable points, hence smooth (regular rational point plus translation). Smooth X has dense R^sh-points in the special fibre, so f_s factors through F. delta=0 iff smooth at e(s), by semicontinuity of fibre dimension and dim Lie. The drop follows from BLR 3.3 with Y=F, where Omega is locally free by translation; tested on mu_p over W(kbar), p odd: delta goes from 1 to 0. Identity-criterion node: Stacks 01V9 plus translation on fibres; U = e^{-1}(smooth locus) is open, and over a Dedekind base with smooth generic fibre the complement is finitely many closed points. Item steps 1-4 use only statement clauses: closed-in-separated-lft gives lft and separated; the induction delta<=max(0,r-n) has an explicit base and step; each dilatation is an isomorphism away from its point, so smoothness elsewhere is preserved; existence and uniqueness of lifts go stage by stage. The edge cases B empty and r=0 are covered. The ambient-M hypotheses are unused, so the proof is more general than needed; the target is not weakened. No new node restates the item. rg over the DAG for dilatation/smoothening/identity-smoothness finds no duplicate (trait-group-finite-smooth-cover and trait-normalization-group-structure are different statements). No SGA, no cycle, no tool_uses. Minor: the identity-criterion node writes G_s and G_U without citing def-pc-base-change (standard notation, not fixed)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LftClosedSubgroupGroupSmoothening",
+  "declaration": "AlgebraicGeometry.lft_closed_subgroup_group_smoothening",
+  "file": "lean/Sheaf/AlgebraicGeometry/LftClosedSubgroupGroupSmoothening.lean",
+  "statement": "theorem lft_closed_subgroup_group_smoothening (D : Type u) [CommRing D] [IsDedekindDomain D] (hdim : ringKrullDim D = 1) (E : Type u) [Field E] [Algebra D E] [IsFractionRing D E] (M : Grp (Over (Spec (.of D)))) [IsCommMonObj M.X] [Smooth M.X.hom] [IsSeparated M.X.hom] [LocallyOfFiniteType M.X.hom] (M0 : Grp (Over (Spec (.of D)))) (i0 : M0 ⟶ M) [IsOpenImmersion i0.hom.hom.left] [LocallyOfFiniteType M0.X.hom] [QuasiCompact M0.X.hom] (hM0 : ∀ (k : Type u) [Field k] [IsAlgClosed k] (s : Spec (.of k) ⟶ Spec (.of D)), Set.range ((Over.pullback s).mapGrp.map i0).hom.hom.left = connectedComponent (GrpObj.onePoint ((Over.pullback s).mapGrp.obj M).X)) (C : Grp (Over (Spec (.of D)))) [IsCommMonObj C.X] (i : C ⟶ M) [IsClosedImmersion i.hom.hom.left] [Flat C.X.hom] [Smooth ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D E)))).obj C.X).hom] [LocallyOfFiniteType ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D E)))).obj C.X).hom] [QuasiCompact ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D E)))).obj C.X).hom] : ∃ (N : Grp (Over (Spec (.of D)))) (_ : IsCommMonObj N.X) (u : N ⟶ C), Smooth N.X.hom ∧ IsSeparated N.X.hom ∧ LocallyOfFiniteType N.X.hom ∧ IsIso ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D E)))).mapGrp.map u) ∧ ∀ (X : Over (Spec (.of D))), Smooth X.hom → Function.Bijective (fun f : X ⟶ N.X => f ≫ u.hom.hom)",
+  "branch": "newtargets-dag",
+  "by": "Q140",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5be82ff6d",
+  "group": "Q140",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: Dedekind domain with explicit ringKrullDim D = 1 (node's own convention); M smooth/separated/commutative/LFT Grp(Over S); M0 is an open-immersion Grp hom, LFT+QC, pinned by hM0 as the identity component on every geometric fibre (alg-closed k : Type u; GrpObj.onePoint is a real def); C is a closed-immersion Grp hom, flat and commutative (implied by M, not stronger); C_E smooth+LFT+QC via the canonical Over.pullback; conclusion gives N smooth/separated/LFT/commutative, u : N ⟶ C, IsIso of the base change of the same u, and a bijection f ↦ f ≫ u for every smooth X : Over S with no qc restriction. All 10 stmt_dep records checked; lean.statement verbatim; sorry only, no definitions, docstrings carry source place, blueprint tag and 4 proof steps; no duplicate smoothening/dilatation in lean/ or the DAG; report has Worker report and Second reading by Q140. No recompile (nothing changed). No findings."
+ }
+}

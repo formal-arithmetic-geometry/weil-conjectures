@@ -308,7 +308,18 @@
   "def-weil-pbc-derived-categories"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-existence",
  "split_report": {
@@ -406,5 +417,38 @@
   "lem-kun-dimension-finite-type",
   "lem-sf-comparison-pullback-exact",
   "lem-cbc-proetale-extension-zero-comparison"
- ]
+ ],
+ "blueprint_update": {
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $f:X\\to Y$ be proper, carrying the ambient exceptional right adjoint\ndatum of [def-weil-ambient-exceptional-adjoint], let\n$g:Y'\\hookrightarrow Y$ be an open immersion with closed complement\n$i:Z\\hookrightarrow Y$, and form the Cartesian squares with\n$X'=f^{-1}(Y')$, $g':X'\\hookrightarrow X$, $f'=f|_{X'}$ and\n$i':f^{-1}(Z)\\hookrightarrow X$. Then for every object $K$ the\nbase-change comparison\n\n$$\n\\beta:\\ Lg'^*Rf^{\\times}K\\xrightarrow{\\ \\sim\\ }Rf'^{\\times}Lg^*K\n$$\n\nis an isomorphism. On the blueprint's coefficient class\n[def-sf-fullcd-used-class], for finite-type schemes over\n$k=\\overline{\\mathbf F}_q$ and $A=A_{E,n}$, the ambient datum is not\nneeded: there $Rf^{\\times}$, $Rf'^{\\times}$ and $Rf_Z^{\\times}$ are the\nright adjoints relative to the bounded-below objects of étale origin of\n[thm-sf-ambient-adjoint-class], and the argument below is object-wise, so\nthe comparison is an isomorphism for every bounded-below $K$ of étale\norigin without hypothesis. The unrestricted ambient datum is false in\ngeneral and is retained only for the complexes outside that class,\n[rem-sf-class-adjoint-residue].",
+  "proof": [
+   {
+    "text": "Step 1: the target triangle. The closed-support triangle of\n[lem-exc-closed-support-triangle] for the pair $(i,g)$ on $Y$ is\n\n$$\ni_*Ri^!K\\longrightarrow K\\longrightarrow Rg_*Lg^*K\\xrightarrow{+1}.\n$$",
+    "uses": [
+     "lem-exc-closed-support-triangle"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Step 2: applying the exact right adjoint. The compact-support direct\nimage is exact by [lem-compact-support-direct-image-triangulated]; a right adjoint of an exact functor\nis exact, so $Rf^{\\times}$ carries the triangle into\n\n$$\nRf^{\\times}i_*Ri^!K\\longrightarrow Rf^{\\times}K\n\\longrightarrow Rf^{\\times}Rg_*Lg^*K\\xrightarrow{+1}.\n$$",
+    "uses": [
+     "lem-compact-support-direct-image-triangulated"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Step 3: dual base change in the two squares. The dual base-change\nisomorphism [prop-exc-ambient-dual-base-change], applied to the\nCartesian squares of $i$ and of $g$ along $f$, identifies the outer\nterms with\n\n$$\ni'_*Rf^{\\times}_{Z}Ri^!K,\n\\qquad\nRg'_*Rf'^{\\times}Lg^*K,\n$$\n\nwhere $f_Z:f^{-1}(Z)\\to Z$ is the restriction of $f$.\nStep 4: restriction to the open. Apply $Lg'^*$ to the resulting\ntriangle. By [lem-exc-open-fully-faithful] the first term is killed\n($Lg'^*i'_*=0$, the images of $g'$ and $i'$ being complementary)\nand the last term becomes $Rf'^{\\times}Lg^*K$\n($Lg'^*Rg'_*\\cong\\operatorname{id}$). A distinguished triangle whose\nfirst term vanishes exhibits its second-to-third map as an isomorphism;\nthat map is $Lg'^*Rf^{\\times}K\\to Rf'^{\\times}Lg^*K$, the pullback of the\nrestriction map of the triangle, which is the base-change comparison\n$\\beta$ (its adjoint under $Rf'_!\\dashv Rf'^{\\times}$ is the composite\nwith the counit). Hence $\\beta$ is an isomorphism.",
+    "uses": [
+     "prop-exc-ambient-dual-base-change",
+     "lem-exc-open-fully-faithful"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; a worker who touches the node follows it"
+ }
 }

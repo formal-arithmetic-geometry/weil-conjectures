@@ -1,0 +1,141 @@
+{
+ "id": "lem-sfb-completed-positive-koszul-pullback",
+ "kind": "statement",
+ "title": "Completed pullback of the augmented positive Koszul diagram",
+ "statement": "Let J,K,L,V,F,A,I,r and a_i be as in [lem-weil-pbc-constant-completion-equivalence], with A any commutative ring, I any ideal, and completedMap F A I invertible. Let P be degreewise ordinary module inverse image along that map and let X,Y be the positive ordered Koszul diagrams [def-weil-pbc-ringed-koszul-system] on the completed images of a_i on J,K. For every u:P(B_J[0])≅B_K[0], there is an isomorphism e:X followed by P≅Y, such that P of the projection X_m→B_J[0] followed by u equals e_m followed by the projection Y_m→B_K[0], for every m. This concerns positive complexes and projections only, with no duals or internal Hom.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0E, lemma-derived-completion-koszul, positive finite tensor calculation; sites-cohomology.tex Tag 07A4"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-weil-pbc-ringed-koszul-system"
+ ],
+ "proof": [
+  {
+   "text": "Transport sections through algebraic inverse image. Composing transported constant sections with F.constants gives a ring homomorphism natural in every coefficient ring. Apply constant-ring section rigidity (the universal polynomial element and evaluation argument) to identify this with the usual constant-section map. The defining limit projection equations give F.rings.map(coefficientMap) followed by completedMap = constantMap followed by coefficientMap, hence the analogous identity for completed algebra sections.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-sp-constant-inverse-image-section",
+    "lem-sf-constant-ring-section-rigidity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the module scalar-operation compatibility of algebraic inverse image and the scalar-extension calculation to show that pull sends multiplication by a section to multiplication by its transported image. Module-linearity then shows that every rank-one module comparison intertwines the completed scalar and all its powers.",
+   "uses": [
+    "lem-sp-constant-pullback-scalar",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "def-weil-pbc-ringed-koszul-system"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any supplied ring-complex comparison u, its degree-zero component identifies the rank-one modules. Define a comparison of each positive two-term factor using this identification in degrees zero and one and the unique zero-object comparison elsewhere. The power identity is the differential square. Componentwise checking gives compatibility with the forward maps (1,a_i) and projection to the ring complex followed by u.",
+   "uses": [
+    "def-weil-pbc-ringed-koszul-system"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on the number of factors, keeping u arbitrary. The empty diagram uses u. In the successor case compare the first factor using u and the tail using the canonical ring-complex comparison supplied by ordinary tensor pullback. Tensor these comparisons. Tensor naturality gives a natural isomorphism of diagrams. Tensor-pullback right-unit compatibility, naturality of the target right unitor, and equality of the two unitors on the unit object prove the augmented projection equation. This also covers empty lists, repeated or zero scalars, and zero rings, without a separate automorphism extension.",
+   "uses": [
+    "lem-sfb-ringed-complex-tensor-pullback",
+    "def-weil-pbc-ringed-koszul-system"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-sp-constant-inverse-image-section",
+  "lem-sf-constant-ring-section-rigidity",
+  "lem-sp-constant-pullback-scalar",
+  "def-weil-pbc-ringed-koszul-system",
+  "lem-sfb-ringed-complex-tensor-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0E, positive finite Koszul tensor calculation; sites-cohomology.tex Tag 07A4; constant-ring section rigidity; direct arbitrary-comparison induction and Lean assembly by F3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image preserves dual Koszul complexes of constant scalars and coaugmentations",
+   "results": "Eight homological-complex and shift hits, no Koszul or finite free dual pullback theorem.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Koszul\"",
+   "results": "Zero hits.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul.*pullback|pullback.*Koszul|homObj.*pullback|pullback.*homObj",
+   "results": "Zero Mathlib hits. Project grep finds fixed-site scalar restriction and ringed Hom-complex comparison, but no positive completed Koszul diagram comparison.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedKoszulDualTowerPullback",
+  "date": "2026-10-26",
+  "group": "H1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Finite augmented Koszul calculation in the complete-object restriction argument: Completed pullback of the augmented positive Koszul diagram.",
+   "via": [
+    "lem-sfb-completed-koszul-dual-tower-pullback",
+    "lem-sfb-strict-completed-koszul-tower-pullback",
+    "lem-sfb-exact-completed-koszul-pullback",
+    "lem-sfb-adic-stratum-completion-unit",
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedPositiveKoszulPullback",
+  "file": "lean/Sheaf/Paper/CompletedPositiveKoszulPullback.lean",
+  "declaration": "CategoryTheory.ConstantCompletion.completedPositiveKoszulPullback",
+  "statement": "theorem completedPositiveKoszulPullback\n    {C D : Type v} [SmallCategory C] [SmallCategory D]\n    {J : GrothendieckTopology C} {K : GrothendieckTopology D}\n    {L : Sheaf J (Type v) ⥤ Sheaf K (Type v)}\n    (F : InverseImageData L) (V : Sheaf K (Type v) ⥤ Sheaf J (Type v))\n    (adj : L ⊣ V) [PreservesFiniteLimits L]\n    (A : Type v) [CommRing A] (I : Ideal A) [IsIso (completedMap F A I)]\n    (r : ℕ) (a : Fin r → A)\n    (u : ((pull F (completedMap F A I)).mapHomologicalComplex (.up ℤ)).obj\n      (ringedSiteRingComplex (completed J A I)) ≅\n        ringedSiteRingComplex (completed K A I)) :\n    let P := (pull F (completedMap F A I)).mapHomologicalComplex (.up ℤ)\n    ∃ e : ringedKoszulDiagram (completed J A I) r\n          (fun i ↦ algebraSection (baseMap J A I true) (a i)) ⋙ P ≅\n        ringedKoszulDiagram (completed K A I) r\n          (fun i ↦ algebraSection (baseMap K A I true) (a i)),\n      ∀ m : ℕ,\n        P.map (ringedKoszulProjection (completed J A I) r\n            (fun i ↦ algebraSection (baseMap J A I true) (a i)) m) ≫ u.hom =\n          e.hom.app m ≫ ringedKoszulProjection (completed K A I) r\n            (fun i ↦ algebraSection (baseMap K A I true) (a i)) m",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261026T091703-L-3364804",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261026T104418-L-810831",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

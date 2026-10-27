@@ -1,0 +1,367 @@
+{
+ "id": "lem-sp-etale-pullback-line-flat-model",
+ "kind": "statement",
+ "title": "Termwise flat constructible pullback-and-line models with their Tor interval",
+ "statement": "Let $f:X\\to Y$ be a morphism of Noetherian schemes (schemes admitting finite affine covers by spectra of Noetherian rings) [def-pc-scheme], and let $R$ be a finite commutative ring. Work on small ordinary etale sites in the constant-ring module derived categories [def-weil-pbc-derived-categories], with exact constant-coefficient inverse image $f^{-1}=f_R^*$ [prop-weil-pbc-inverse-image-modules-exact]. Let $C^\\bullet$ be an integer-indexed cochain complex [def-pc-cochain-complex-modules] of flat constructible $R_Y$-modules, zero outside an interval $[a,b]$ of integers with $a\\le b$. Here flat means tensoring with the term is exact [def-pc-flat-sheaf-modules], and constructibility is the finite locally closed constructible-stratification condition with finite constant module models on etale covers [def-weil-pbc-etale-constructible-sheaf]. Let $K\\in D(Y_{et},R)$ and fix an isomorphism $[C^\\bullet]\\simeq K$ in that derived category. Let $E$ be an $R_X$-module sheaf which is etale locally isomorphic to $R_X$, and let $r\\in\\mathbf Z$. Form the termwise complex\n$$Q^\\bullet=(f^{-1}C^\\bullet\\otimes_{R_X}E)[r].$$\nThen $Q^\\bullet$ has flat constructible terms, is zero outside $[a-r,b-r]$, is K-flat [def-pc-kflat-complex], and the representative-defined derived comparison is an isomorphism\n$$[Q^\\bullet]\\xrightarrow{\\sim}f_R^*K\\otimes^L_{R_X}E[r]$$\nin $D(X_{et},R)$, with derived tensor as in [def-kun-derived-tensor]. Its cohomology sheaves are constructible, and its derived tensor with any $R_X$-module sheaf placed in degree zero has cohomology only in $[a-r,b-r]$.\nMore precisely, for every $j$, any stratification $(i_t:Z_t\\to Y)$ witnessing constructibility of $H^{j+r}(C^\\bullet)$ pulls back to the constructible locally closed strata $Z'_t=X\\times_YZ_t$ (empty strata may be discarded). With $i'_t:Z'_t\\to X$ and $f_t:Z'_t\\to Z_t$, the restriction of $H^j(Q^\\bullet)$ to $Z'_t$ is isomorphic to $f_t^{-1}i_t^{-1}H^{j+r}(C^\\bullet)\\otimes E|_{Z'_t}$. The pulled-back etale trivializing covers for the first factor, refined by covers trivializing $E$, exhibit finite locally constant module models on each stratum.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0963 (lemma-pullback-ctf), with explicit termwise flat line model and pulled-back trivializing data; agent-stated strengthening of the finite-complex argument in its proof."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-derived-categories",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-pc-cochain-complex-modules",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-pc-kflat-complex",
+  "def-kun-derived-tensor"
+ ],
+ "proof": [
+  {
+   "text": "Lift a geometric point through the prescribed etale cover V. The pullback/stalk and constant-sheaf/stalk isomorphisms identify the stalk of E with R, the flat tensor unit. The source geometric-fibre flatness criterion implies flatness of E. Constantness on V implies local constancy of E, and finiteness descends from the constant rank-one module on V. Thus E is finite locally constant and constructible.",
+   "uses": [
+    "lem-sfb-etale-flat-geometric-fibers",
+    "def-weil-pbc-etale-constructible-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 0963, 095G, 095I and 03RZ; sites-cohomology Tags 06YQ and 06YU; proved source-library fixed-coefficient implementation"
+   }
+  },
+  {
+   "text": "Convert finite-value constructibility to the source constructible-sheaf predicate. The proved source upperStarPreservesFlat_moduleCat instance sends every flat term of C to a flat term; it follows from the same geometric-fibre criterion. Source pullback stability and source tensor stability of constructibility give constructibility of Q^n = f^{-1}(C^{n+r}) tensor E. Tensor stability is the common-stratification argument with finite locally constant tensor factors. Exact pullback and tensor preserve zero objects, so elementary integer arithmetic gives the support interval [a-r,b-r].",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-sfb-etale-flat-geometric-fibers",
+    "prop-constructible-pullback",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "lem-weil-pbc-flc-tensor-locally-constant-part",
+    "lem-weil-pbc-flc-tensor-finite-part",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 0963, 095G, 095I and 03RZ; sites-cohomology Tags 06YQ and 06YU; proved source-library fixed-coefficient implementation"
+   }
+  },
+  {
+   "text": "Apply the proved generic CochainComplex.kFlat_of_isStrictlyLE_of_flat (or its bounded convenience lemma) to Q and to P=f^{-1}C. For the actual representative comparison, expand the lax tensor map of Q as the strong monoidal homotopy-quotient map followed by the lax map of Qh, transported by quotientCompQhIso. The latter is tensorLeftCounit at the K-flat P and is invertible. The single-complex tensor comparison, exact pullback localization comparison, the prescribed representative e, and the shift maps are isomorphisms. Their composite is precisely etaleLineRepresentativeComparison, hence is invertible; no arbitrary comparison is selected.",
+   "uses": [
+    "lem-sfb-bounded-above-flat-kflat",
+    "def-pc-kflat-complex",
+    "def-kun-derived-tensor",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 0963, 095G, 095I and 03RZ; sites-cohomology Tags 06YQ and 06YU; proved source-library fixed-coefficient implementation"
+   }
+  },
+  {
+   "text": "For every degree, the short complex defining homology of Q has constructible terms. Kernel closure gives constructible cycles, and cokernel closure gives constructible homology. Apply the already proved torAmplitudeIn_Q_obj_of_flat to Q supported in [a-r,b-r]; evaluating the t-structure inequalities in each outside degree gives the asserted Tor test against every degree-zero sheaf.",
+   "uses": [
+    "thm-constructible-serre",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "lem-kun-flat-bounded-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 0963, 095G, 095I and 03RZ; sites-cohomology Tags 06YQ and 06YU; proved source-library fixed-coefficient implementation"
+   }
+  },
+  {
+   "text": "The cochain homology shift isomorphism and the short-complex mapHomologyIso for exact tensor with E and exact pullback identify H^j(Q) with f^{-1}H^{j+r}(C) tensor E. Apply stratum pullback, its strong monoidal comparison, and upperStarComp on the two sides of the cartesian stratum square to obtain exactly the specified restriction formula for every j and every integer r.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-kun-derived-tensor",
+    "lemma-constructible-pullback-stratification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 0963, 095G, 095I and 03RZ; sites-cohomology Tags 06YQ and 06YU; proved source-library fixed-coefficient implementation"
+   }
+  },
+  {
+   "text": "For each prescribed finite-value trivialization, use overSheafEquivFunctorObjOverIso and constantSheafSheafCongrIso to transport it to pullback along the corresponding covering morphism. On the actual cover etalePullbackLineCover take the fibre-product projections to that cover and the prescribed line cover V. The pullback equations identify the resulting compositions. Applying upperStarComp and upperStarConstantSheafIso gives constant factors M and R on each member. Monoidality of pullback and of the constant sheaf functor, followed by the right unitor M tensor R = M, gives the required finite model with precisely the given value. All constructions allow empty strata and members, the zero ring, degenerate support intervals and negative shifts.",
+   "uses": [
+    "lemma-constructible-pullback-constant",
+    "lem-weil-pbc-etale-covering-base-change",
+    "def-weil-pbc-etale-constructible-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 0963, 095G, 095I and 03RZ; sites-cohomology Tags 06YQ and 06YU; proved source-library fixed-coefficient implementation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-etale-flat-geometric-fibers",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "prop-constructible-pullback",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "lem-weil-pbc-flc-tensor-locally-constant-part",
+  "lem-weil-pbc-flc-tensor-finite-part",
+  "def-pc-flat-sheaf-modules",
+  "lem-sfb-bounded-above-flat-kflat",
+  "def-pc-kflat-complex",
+  "def-kun-derived-tensor",
+  "thm-constructible-serre",
+  "lem-kun-flat-bounded-tor-amplitude",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lemma-constructible-pullback-stratification",
+  "lemma-constructible-pullback-constant",
+  "lem-weil-pbc-etale-covering-base-change"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0963 finite-complex argument and Tags 095G, 095I, 03RZ; direct termwise source-library proof, A6, 2026-10-24. Sites-cohomology Tags 06YQ and 06YU supply the bounded-flat and canonical localization tensor computation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constructible.*(pullback|inverseImage)|KFlat|K.flat|torAmplitude",
+   "results": "{\"t\": \"2026-10-22T05:56:50Z\", \"tool\": \"grep\", \"query\": \"constructible.*(pullback|inverseImage)|KFlat|K.flat|torAmplitude\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: only ordinary module flatness, abstract complexes or unrelated results; no etale constructible termwise model theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded flat constructible etale pullback line tensor cochain model finite Tor amplitude",
+   "results": "{\"t\": \"2026-10-22T05:56:50Z\", \"tool\": \"leansearch\", \"query\": \"Bounded flat constructible etale pullback line tensor cochain model finite Tor amplitude\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex, Functor.mapHomologicalComplex",
+   "results": "{\"t\": \"2026-10-22T05:56:50Z\", \"tool\": \"loogle\", \"query\": \"HomologicalComplex, Functor.mapHomologicalComplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Functor.mapHomologicalComplex'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: only ordinary module flatness, abstract complexes or unrelated results; no etale constructible termwise model theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image preserves constructible stratifications and flat complexes and tensoring by a lisse line preserves finite Tor amplitude",
+   "results": "{\"t\": \"2026-10-22T05:57:14Z\", \"tool\": \"leanfinder\", \"query\": \"Exact inverse image preserves constructible stratifications and flat complexes and tensoring by a lisse line preserves finite Tor amplitude\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.FaithfullyFlat.rTensor_reflects_exact\", \"Module.FaithfullyFlat.lTensor_reflects_exact\", \"Module.FaithfullyFlat.rTensor_exact_iff_exact\", \"Module.FaithfullyFlat.lTensor_exact_iff_exact\"], \"digest\": \"5cf86f5bfa76a9f2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: only ordinary module flatness, abstract complexes or unrelated results; no etale constructible termwise model theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pulling back a bounded complex of flat constructible etale sheaves and tensoring with a locally free rank one sheaf gives a bounded flat constructible K flat model with the shifted Tor interval",
+   "results": "{\"t\": \"2026-10-22T05:57:14Z\", \"tool\": \"leanfinder\", \"query\": \"Pulling back a bounded complex of flat constructible etale sheaves and tensoring with a locally free rank one sheaf gives a bounded flat constructible K flat model with the shifted Tor interval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_preservesFiniteLimits_tensorLeft\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat\"], \"digest\": \"a80464a6bd6b999c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: only ordinary module flatness, abstract complexes or unrelated results; no etale constructible termwise model theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|K.flat|constructible",
+   "results": "{\"t\": \"2026-10-22T05:57:55Z\", \"tool\": \"grep\", \"query\": \"KFlat|K.flat|constructible\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: only ordinary module flatness, abstract complexes or unrelated results; no etale constructible termwise model theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex",
+   "results": "{\"t\": \"2026-10-22T05:57:56Z\", \"tool\": \"loogle\", \"query\": \"HomologicalComplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"HomologicalComplex\", \"HomologicalComplex.instCategory\", \"HomologicalComplex.X\", \"HomologicalComplex.xNext\", \"HomologicalComplex.xPrev\", \"HomologicalComplex.zero\", \"HomologicalComplex.instInhabitedOfHasZeroObject\", \"HomologicalComplex.Hom\"], \"digest\": \"f59246bcae06d661\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: only ordinary module flatness, abstract complexes or unrelated results; no etale constructible termwise model theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex of flat constructible etale module sheaves pulled back and tensored with a locally free line is K-flat with the shifted Tor amplitude",
+   "results": "{\"t\": \"2026-10-22T06:55:07Z\", \"tool\": \"leanfinder\", \"query\": \"A bounded complex of flat constructible etale module sheaves pulled back and tensored with a locally free line is K-flat with the shifted Tor amplitude\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.iff_preservesFiniteLimits_tensorLeft\", \"Module.Flat.of_flat_tensorProduct\", \"Module.FaithfullyFlat.iff_exact_iff_lTensor_exact\", \"Module.Flat.iff_lTensor_exact'\"], \"digest\": \"838561d77097f10b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give module flatness, general sheaf pullback, abstract complexes or condensed local constancy; none states this etale bounded constructible line-model theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, Flat",
+   "results": "{\"t\": \"2026-10-22T06:55:29Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules, Flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Flat'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give module flatness, general sheaf pullback, abstract complexes or condensed local constancy; none states this etale bounded constructible line-model theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|KFlat|kFlat",
+   "results": "{\"t\": \"2026-10-22T06:55:29Z\", \"tool\": \"grep\", \"query\": \"constructible|KFlat|kFlat\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\"], \"digest\": \"c360eb7f048e36ff\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give module flatness, general sheaf pullback, abstract complexes or condensed local constancy; none states this etale bounded constructible line-model theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of a bounded flat constructible etale complex and tensor with an invertible sheaf computes derived tensor with unchanged Tor interval",
+   "results": "{\"t\": \"2026-10-22T06:55:29Z\", \"tool\": \"leansearch\", \"query\": \"Pullback of a bounded flat constructible etale complex and tensor with an invertible sheaf computes derived tensor with unchanged Tor interval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.rTensor_shortComplex_exact\", \"SheafOfModules.pullback\", \"SheafOfModules.instIsLeftAdjointPullback\", \"Module.Flat.lTensor_shortComplex_exact\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.instAdditivePullback\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.PullbackConstruction.adjunction\"], \"digest\": \"559ddd756f86c86e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give module flatness, general sheaf pullback, abstract complexes or condensed local constancy; none states this etale bounded constructible line-model theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image preserves finite locally constant module models and bounded complexes of flat sheaves compute derived tensor products",
+   "results": "{\"t\": \"2026-10-22T06:57:17Z\", \"tool\": \"leanfinder\", \"query\": \"Inverse image preserves finite locally constant module models and bounded complexes of flat sheaves compute derived tensor products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompHausLike.LocallyConstantModule.functor\", \"LightCondMod.LocallyConstant.functor\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"CondensedMod.LocallyConstant.functor\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"CompHausLike.LocallyConstantModule.functor_obj_val\"], \"digest\": \"9253d51f59955cfc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give module flatness, general sheaf pullback, abstract complexes or condensed local constancy; none states this etale bounded constructible line-model theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex",
+   "results": "{\"t\": \"2026-10-22T06:57:19Z\", \"tool\": \"loogle\", \"query\": \"HomologicalComplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"HomologicalComplex\", \"HomologicalComplex.instCategory\", \"HomologicalComplex.X\", \"HomologicalComplex.xNext\", \"HomologicalComplex.xPrev\", \"HomologicalComplex.zero\", \"HomologicalComplex.instInhabitedOfHasZeroObject\", \"HomologicalComplex.Hom\"], \"digest\": \"f59246bcae06d661\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give module flatness, general sheaf pullback, abstract complexes or condensed local constancy; none states this etale bounded constructible line-model theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-p1-counit-scalar",
+  "date": "2026-10-22",
+  "group": "Q06"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-reduction-exceptional",
+   "place": "Charts paragraph: right adjoint e^*p_d^*(-)(d)[2d] and canonical coefficient comparison; ordinary-etale bounded-flat line model needed for the projective-line chart counit domain.",
+   "via": [
+    "lem-sp-p1-counit-scalar"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-etale-pullback-line-flat-model",
+  "worker": "stage1",
+  "summary": "Eight-step split using existing generic sheaf, stratification and bounded-flat tensor results; preserves the complete statement and the actual representative comparison, and checks the pulled-back witnesses rather than only abstract constructibility. No new nodes or attachments.",
+  "blueprint": "Realizes the Charts paragraph of det-sp-reduction-exceptional below lem-sp-p1-counit-scalar: ordinary-etale domain model for e^*p_d^*(-)(d)[2d], including the Tor interval and cohomology witnesses.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "why": "Generic flat sheaf pullback, with arbitrary ringed topoi, supplies term flatness; the unit gives no separate sheaf-flatness theorem."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Generic exact-functor cohomology calculation, needed for the explicit cohomology formula."
+   },
+   {
+    "node": "lemma-constructible-pullback-stratification",
+    "why": "Generic base change of finite scheme stratifications, preserving the given witnesses."
+   },
+   {
+    "node": "lem-pur-scheme-constructible-preimage",
+    "why": "Generic constructible-subset inverse image, needed for pulled-back strata."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition-module-linear",
+    "why": "Generic module-linear inverse-image composition identifies restrictions to the specified strata."
+   },
+   {
+    "node": "lem-weil-pbc-etale-covering-base-change",
+    "why": "Generic base change of etale covering families supplies the specified covers and refinements."
+   },
+   {
+    "node": "lem-kun-pullback-constant",
+    "why": "Generic constant module inverse image preserves the actual finite module values on covers."
+   },
+   {
+    "node": "lem-pur-finite-locally-free-etale-flat",
+    "why": "Generic finite locally free coefficient sheaf flatness, applied to the arbitrary line E."
+   },
+   {
+    "node": "lem-sfb-finite-flat-constructible-total-tensor",
+    "why": "Generic bounded flat ordinary-etale tensor calculus on a Noetherian scheme; applied to P and the single shifted line, without replacing chart adjunction or purity steps."
+   },
+   {
+    "node": "lem-pur-total-tensor-signed-coherence",
+    "why": "Generic total cochain tensor sign formula identifies the shifted termwise model with the total tensor model."
+   },
+   {
+    "node": "lem-kun-kflat-criteria",
+    "why": "Generic bounded-above flat K-flat criterion, applied on the ordinary etale site to C."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "why": "Generic normalized K-flat derived pullback comparison supplies the actual representative comparison."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "why": "Generic ordinary module tensor pullback comparison for the final restriction formula."
+   },
+   {
+    "node": "thm-constructible-serre",
+    "why": "Generic kernel and cokernel closure of finite constructible ordinary-etale modules, for H(C)."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic exact constant-ring module inverse image, already a statement dependency; required for module coefficients and exactness."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lemma-constructible-pullback-stratification",
+  "lem-weil-pbc-etale-covering-base-change",
+  "thm-constructible-serre",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q152-20eec61d1",
+  "group": "Q152",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q152-20eec61d1 (reviewer sub-agent of L); spot-checked: I read the item in full. It has 8 steps, no new nodes, and its statement, stmt_deps, source and created fields are identical to the node Q06 created (only blueprint.place was filled). There is no repair note and no SGA source. I checked Stacks 0963 (lemma-pullback-ctf): it reduces to finite flat constructible complexes and uses exact f^{-1}. The item strengthens that argument with a line E, a shift r, the representative-defined comparison and pulled-back witnesses. The Noetherian hypothesis is in the statement and is used by Step 4. Steps: 1) f^{-1} is module pullback (prop-weil-pbc-inverse-image-modules-exact (2)-(3)), flat pullback with no flatness of c needed, exact-functor cohomology. 2) Base change of the stratification, constructible preimages, module-linear composition, covering base change and constant pullback give the definition's conditions (a) and (b). 3) lem-pur-finite-locally-free-etale-flat is about étale sheaves (its proof uses étale stalks only), so E is flat; the single stratum X with value R witnesses constructibility. 4) All hypotheses of lem-sfb-finite-flat-constructible-total-tensor hold with [a,b] and [-r,-r]; P is K-flat, so by def-kun-derived-tensor [P]⊗^L E[r] = [T]. 5) t^Ch_{0,r} carries sign (-1)^{rp}; K-flatness is preserved by a chain isomorphism. 6) C is K-flat by kflat-criteria (1); epsilon_C gives Lf^*[C] ≅ [P], and Lf^* agrees with the exact f_R^*; the composite is the stated arrow. 7) Serre closure is used only for kernels and cokernels; the shift changes the differential by a unit. 8) The ringed-topoi pullback-tensor isomorphism along i'_t, the refinement of the two covers, and M⊗R=M give the witnesses. Index and small cases checked: r<0, a=b, R=0, X empty, R=Z/4 with non-flat N, a nonconstant line, nonreduced X. I accept all 15 declared tool_uses as generic black boxes outside the sk-lem-sp-reduction route. No duplicate found. Maintainer note: the unsplit lem-sp-etale-pullback-twist-tor-window (Q03) is a special case and could cite this item."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtalePullbackLineFlatModel",
+  "declaration": "AlgebraicGeometry.Etale.etale_pullback_line_flat_model",
+  "declarations": [
+   "AlgebraicGeometry.Etale.etale_pullback_line_flat_model",
+   "etaleLineRepresentativeComparison",
+   "etaleLineRepresentativeComparisonOnSite",
+   "AlgebraicGeometry.Etale.etalePullbackLineModel",
+   "AlgebraicGeometry.Etale.etalePullbackLineTarget",
+   "AlgebraicGeometry.Etale.etalePullbackRepresentative",
+   "AlgebraicGeometry.Etale.etalePullbackLineComparison",
+   "AlgebraicGeometry.Etale.etalePullbackLineCover",
+   "AlgebraicGeometry.Etale.etalePullbackLineAssertions",
+   "etaleLineRepresentativeComparisonIsIsoOnSite"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtalePullbackLineFlatModel.lean",
+  "statement": "theorem etale_pullback_line_flat_model [Finite R] [IsNoetherian X] [IsNoetherian Y] (C : CochainComplex (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R)) ℤ) (a b : ℤ) (_hab : a ≤ b) (_hflat : ∀ n : ℤ, exactFunctor _ _ (@tensorRight _ _ (Sheaf.monoidalCategory Y.smallEtaleTopology (ModuleCat.{u + 1} R)) (C.X n))) (_hc : ∀ n : ℤ, Scheme.IsConstructibleEtaleModuleSheaf (C.X n)) (_hz : ∀ n : ℤ, (n < a ∨ b < n) → IsZero (C.X n)) (K : DerivedCategoryModule R Y) (e : _root_.DerivedCategory.Q.obj C ≅ K) (E : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)) (r : ℤ) (V : Scheme.Cover.{u} Scheme.etalePrecoverage X) (_hE : ∀ i : V.I₀, Nonempty ((upperStar (ModuleCat.{u + 1} R) (V.f i)).obj E ≅ (constantSheaf (V.X i).smallEtaleTopology (ModuleCat.{u + 1} R)).obj (ModuleCat.of R R))) : etalePullbackLineAssertions R f C K e E r a b V",
+  "branch": "sheaf-dag",
+  "by": "Q141",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c75850880",
+  "group": "Q141",
+  "result": "pass",
+  "note": "Only the item node's lean field and one new module change; statement verbatim, no statement_change. Every hypothesis matches its recorded dependency declaration (Scheme+IsNoetherian, finite R in Type (u+1), cochain complex C, exactFunctor tensorRight flatness, IsConstructibleEtaleModuleSheaf, zero outside [a,b], e : Q(C) ≅ K, E locally ≅ R via a cover with isos, unrestricted r). Conclusions: termwise model upperStar then tensorRight E then shift r; flat/constructible terms; zero outside [a-r,b-r]; MorphismProperty.kFlat; IsIso of a comparison built only from actual maps (e.inv, mapDerivedCategoryFactors, Q's lax tensor map, single-complex iso, commShiftIsos), opposite direction to the node's arrow; its tensor is the one derivedTensor is built from (curriedTensor), sheaf instance = Sheaf.monoidalCategory by rfl; constructible cohomology; hasTorAmplitudeIn (all degree-zero sheaves, derivedTensor); witness clause over every stratification and finite local model, using S.pullback f fibre-product strata, plus constant models on the common refinement. Edge cases (R=0, empty schemes, a=b, r<0, non-flat N) admitted; no extra assumptions. Imports exist, no name collisions, docstrings carry source, blueprint id and the 8 proof steps, only sorry. Not compiled (no files changed; worker reports clean compile, 8.1/8.4 s). Advisory only: etalePullbackLineTarget is unused; final cover clause uses upperStar rather than the .over form (equivalent)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261023T230342-L-3417649",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

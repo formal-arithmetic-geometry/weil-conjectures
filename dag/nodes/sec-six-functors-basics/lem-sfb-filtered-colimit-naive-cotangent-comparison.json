@@ -1,0 +1,227 @@
+{
+ "id": "lem-sfb-filtered-colimit-naive-cotangent-comparison",
+ "kind": "statement",
+ "title": "Canonical naive cotangent complexes commute with filtered algebra colimits",
+ "statement": "Let $R$ be a commutative ring, $J$ a small filtered category, $j\\mapsto S_j$ a diagram of commutative $R$-algebras, and $(S,(\\iota_j))$ a colimit cocone in commutative $R$-algebras [def-weil-pbc-category-colimit]. For each $R$-algebra $T$ form its canonical two-term naive cotangent complex $N(T)=\\mathrm{NL}_{T/R}=[I_T/I_T^2\\to\\bigoplus_{t\\in T}T\\,\\mathrm d[t]]$, $I_T=\\ker(R[T]\\to T)$, in degrees $-1,0$ [def-weil-pbc-smooth-ring-map], and regard it as a complex of $R$-modules by restriction of scalars. For an $R$-algebra map $u:T\\to T'$, let $u_\\sharp:R[T]\\to R[T']$ fix $R$ and send $[t]$ to $[u(t)]$; use the canonical chain map $N(u)$ given by $[f]\\mapsto[u_\\sharp(f)]$ in degree $-1$ and $a\\,\\mathrm d[t]\\mapsto u(a)\\,\\mathrm d[u(t)]$ in degree $0$. Let $K$ be the degreewise colimit in $R$-modules of the diagram of these two-term complexes, with its induced differential. Then the canonical comparison chain map $c:K\\to N(S)$ characterized by $c\\circ\\eta_j=N(\\iota_j)$, where $\\eta_j:N(S_j)\\to K$ are the colimit maps, is a quasi-isomorphism; thus $Q(c):Q(K)\\xrightarrow{\\sim}Q(N(S))$ is an isomorphism in $D(\\operatorname{Mod}(R))$ [def-weil-abstract-derived-category]. No transition map is assumed injective or flat, and no finite-presentation hypothesis on the algebras is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 07BQ (lemma-colimits-NL), constant-base specialization, expressed as the canonical derived comparison after restricting scalars to R; the same finite-data assertion for a small filtered category rather than a directed set."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-abstract-derived-category",
+  "def-sfb-canonical-naive-cotangent-functor"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-weil-pbc-filtered-colimit-algebras-elementwise] to regard $S$ as the colimit of the underlying rings. By [lem-pc-filtered-colimit-commrings-elementwise], elements have representatives and equality is witnessed at a common later object. In particular, for two elements at the same stage the two witnessing arrows can be made equal by filteredness, giving a single arrow witnessing their equality. We will make finitely many choices simultaneously: repeatedly choose common targets for the finitely many stages, and then equalize the finitely many parallel arrows that occur, using the definition in [def-weil-pbc-category-colimit]. Previously obtained equations persist under further maps. This proves the finite bookkeeping needed below without replacing $J$ by a directed set.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "lem-pc-filtered-colimit-commrings-elementwise",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07BQ (lemma-colimits-NL), proof; explicit constant-base filtered-category finite-data argument"
+   }
+  },
+  {
+   "text": "Put $P_j=R[S_j]$ and $P=R[S]$, with polynomial maps given by renaming variables. These maps exhibit $P$ as a colimit of the $P_j$ in commutative $R$-algebras. Indeed, for a compatible family $h_j:P_j\\to C$, assign to $s=\\iota_j(t)$ the value $h_j([t])$. If two representatives give the same $s$, the common-target equality from step 1 and compatibility of the $h_j$ show that the assigned values agree. The polynomial universal property [def-weil-pbc-mv-polynomial-ring] extends this assignment uniquely to $h:P\\to C$. Its composites with $P_j\\to P$ agree with $h_j$ on every variable and on $R$, hence agree everywhere. Uniqueness follows since every variable of $P$ has a representative. This is exactly the colimit universal property [def-weil-pbc-category-colimit].",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "lem-pc-filtered-colimit-commrings-elementwise",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07BQ (lemma-colimits-NL), proof; explicit constant-base filtered-category finite-data argument"
+   }
+  },
+  {
+   "text": "Write $I_j=\\ker(P_j\\to S_j)$ and $I=\\ker(P\\to S)$. Evaluation commutes with renaming, so each $I_j$ maps into $I$. Every $f\\in I$ comes from some $f_j\\in P_j$: apply [lem-weil-pbc-filtered-colimit-algebras-elementwise] to the polynomial colimit of step 2. The evaluation of $f_j$ maps to zero in $S$, so step 1, using [lem-pc-filtered-colimit-commrings-elementwise] for the $S_j$, gives one arrow $j\\to k$ where that evaluation becomes zero. The image $f_k$ therefore belongs to $I_k$ and still represents $f$. Thus every element of $I$ is the image of an element of one $I_k$, not merely a sum of such images. Apply [lem-sfb-filtered-colimit-conormal-modules] with this polynomial diagram and these ideals. Its hypotheses have just been verified, and it gives the colimit cocone $I/I^2$ with precisely the maps $[f_j]\\mapsto[(\\iota_j)_\\sharp(f_j)]$. By uniqueness of module colimits [def-weil-pbc-category-colimit], the component $c^{-1}:K^{-1}\\to I/I^2$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "lem-pc-filtered-colimit-commrings-elementwise",
+    "lem-sfb-filtered-colimit-conormal-modules",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07BQ (lemma-colimits-NL), proof; explicit constant-base filtered-category finite-data argument"
+   }
+  },
+  {
+   "text": "Put $F_j=\\bigoplus_{t\\in S_j}S_j\\,\\mathrm d[t]$ and $F=\\bigoplus_{s\\in S}S\\,\\mathrm d[s]$. The prescribed maps form an $R$-linear cocone. Every element of $F$ is a finite sum $\\sum a_r\\mathrm d[s_r]$; lift its coefficients and labels to one stage by step 1, proving surjectivity on representatives. Suppose $v=\\sum_{t\\in E}a_t\\mathrm d[t]\\in F_j$, with finite $E\\subset S_j$, maps to zero. Partition $E$ by equality of $\\iota_j(t)$. In each part choose a label. Step 1 makes all labels in that part equal at one later stage, simultaneously for the finitely many parts. For each part $B$, the coefficient sum $\\sum_{t\\in B}a_t$ has zero image in $S$, since it is the coefficient of its common label in the zero image of $v$. Step 1 kills all these sums at one further stage. There $v$ is zero, because its terms within each part have the same label and their coefficients sum to zero. The colimit criterion [lem-weil-pbc-filtered-colimit-modules-criterion] now applies to the $F_j$ and $F$, giving that $c^0:K^0\\to F$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "lem-pc-filtered-colimit-commrings-elementwise",
+    "lem-weil-pbc-filtered-colimit-modules-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07BQ (lemma-colimits-NL), proof; explicit constant-base filtered-category finite-data argument"
+   }
+  },
+  {
+   "text": "Check compatibility with the differentials, including variable collisions. For $u:T\\to T'$, define $D_u:R[T]\\to\\bigoplus_{t'\\in T'}T'\\,\\mathrm d[t']$ by applying $u$ to the coefficients of $\\delta_T$ and sending $\\mathrm d[t]$ to $\\mathrm d[u(t)]$. Both $D_u(f)$ and $\\delta_{T'}(u_\\sharp(f))$ vanish on $R$, send $[t]$ to $\\mathrm d[u(t)]$, and satisfy the Leibniz identity with coefficients evaluated by $u\\circ\\gamma_T$. Expanding a polynomial as a finite sum of monomials and applying the product rule factor by factor therefore makes them equal. If distinct labels have the same image, their terms add on both sides. This calculation is the explicit formula for the differential in [def-weil-pbc-smooth-ring-map]; it also shows that $I_T^2$ maps to zero and that the induced conormal and free-module maps commute with the differential. Renaming and coefficient maps preserve identities and compositions on representatives. Thus the two component colimit comparisons are the components of the canonical chain map $c$ specified in the statement.",
+   "uses": [
+    "def-weil-pbc-smooth-ring-map",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07BQ (lemma-colimits-NL), proof; explicit constant-base filtered-category finite-data argument"
+   }
+  },
+  {
+   "text": "The components in degrees $-1$ and $0$ are isomorphisms by steps 3 and 4, and all other components are maps between zero modules. Their inverses commute with the differentials: multiply $c^0d_K=d_Nc^{-1}$ by the two inverse component maps. Hence they give an inverse chain map to $c$. The induced maps on kernels, images and their quotients are then mutually inverse in every degree, so $c$ is a quasi-isomorphism by [def-weil-abstract-derived-category]. The localization $Q$ in that same definition inverts $c$, giving the asserted isomorphism in $D(\\operatorname{Mod}(R))$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07BQ (lemma-colimits-NL), proof; explicit constant-base filtered-category finite-data argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+  "lem-pc-filtered-colimit-commrings-elementwise",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-sfb-filtered-colimit-conormal-modules",
+  "lem-weil-pbc-filtered-colimit-modules-criterion",
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 07BQ (lemma-colimits-NL), expanded proof for a small filtered category and constant base: polynomial universal property, eventual vanishing, conormal colimit and finite-support free-module calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical naive cotangent complex commutes with filtered colimits of algebras",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HomologicalComplex.instHasFilteredColimitsOfSize\", \"module\": \"Mathlib.Algebra.Homology.GrothendieckAbelian\", \"type\": \"[HasFilteredColimitsOfSize.{w, w'} C] : HasFilteredColimitsOfSize.{w, w'} (HomologicalComplex C c)\", \"doc\": \"If a category $ \\\\mathcal{C} $ has filtered colimits of size $ \\\\kappa $, then the category of homological complexes over $ \\\\mathcal{C} $ with shape $ c $ also has filtered colimits of size $ \\\\kappa $.\"}\n  {\"name\": \"CategoryTheory.Limits.colimitLimitIso\", \"module\": \"Mathlib.CategoryTheory.Limits.FilteredColimitCommutesFiniteLimit\", \"type\": \"(F : J ⥤ K ⥤ C) : colimit (limit F) ≅ limit (colimit F.flip)\", \"doc\": \"In a category with all filtered colimits and finite limits, the canonical morphism from the colimit of a filtered diagram of finite limits to the finite limit of the corresponding colimits is an isomo\"}\n  {\"name\": \"CategoryTheory.Limits.ι_colimitLimitIso_limit_π_assoc\", \"module\": \"Mathlib.CategoryTheory.Limits.FilteredColimitCommutesFiniteLimit\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : Type u₁} [inst_1 : CategoryTheory.Category.{v₁, u₁} J]\\n  {K : Type u₂} [inst_2 : CategoryTheory.Category.{v₂, u₂} K] [inst_3 : CategoryTheory.Limits.HasLimitsOfShape J C]\\n  [inst_4 : CategoryTheory.Limits.HasColimitsOfShape K C]\\n  [inst_5\", \"doc\": \"In a category with all filtered colimits and finite limits, the canonical morphism from the colimit of a filtered diagram of finite limits to the finite limit of the corresponding colimits is an isomo\"}\n  {\"name\": \"CategoryTheory.Limits.ι_colimitLimitIso_limit_π\", \"module\": \"Mathlib.CategoryTheory.Limits.FilteredColimitCommutesFiniteLimit\", \"type\": \"(F : J ⥤ K ⥤ C) (a) (b) :\\n  colimit.ι (limit F) a ≫ (colimitLimitIso F).hom ≫ limit.π (colimit F.flip) b =\\n    (limit.π F b).app a ≫ (colimit.ι F.flip a).app b\", \"doc\": \"In a category with all filtered colimits and finite limits, the canonical morphism from the colimit of a filtered diagram of finite limits to the finite limit of the corresponding colimits is an isomo\"}\n  {\"name\": \"CommRingCat.FilteredColimits.colimit\", \"module\": \"Mathlib.Algebra.Category.Ring.FilteredColimits\", \"type\": \": CommRingCat.{max v u}\", \"doc\": \"The filtered colimit of a diagram of commutative rings in the category of commutative rings, constructed by first forming the colimit in the category of additive groups via the forgetful functor and t\"}\n  {\"name\": \"CategoryTheory.Limits.colimitLimitIso.congr_simp\", \"module\": \"Mathlib.CategoryTheory.Limits.FilteredColimitCommutesFiniteLimit\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : Type u₁} [inst_1 : CategoryTheory.Category.{v₁, u₁} J]\\n  {K : Type u₂} [inst_2 : CategoryTheory.Category.{v₂, u₂} K] [inst_3 : CategoryTheory.Limits.HasLimitsOfShape J C]\\n  [inst_4 : CategoryTheory.Limits.HasColimitsOfShape K C]\\n  [inst_5\", \"doc\": \"In a category with all filtered colimits and finite limits, the canonical morphism from the colimit of a filtered diagram of finite limits to the finite limit of the corresponding colimits is an isomo\"}\n  {\"name\": \"CommSemiRingCat.FilteredColimits.colimit\", \"module\": \"Mathlib.Algebra.Category.Ring.FilteredColimits\", \"type\": \": CommSemiRingCat.{max v u}\", \"doc\": \"The colimit of a filtered diagram in the category of commutative semirings, constructed by first forming the colimit in the category of semirings (via the forgetful functor to additive commutative mon\"}\n  {\"name\": \"ModuleCat.FilteredColimits.ι_colimitDesc\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.FilteredColimits\", \"type\": \"(t : Cocone F) (j : J) : (colimitCocone F).ι.app j ≫ colimitDesc F t = t.ι.app j\", \"doc\": \"For any cocone $ t $ over a filtered diagram $ F : \\\\mathcal{J} \\\\to \\\\text{ModuleCat}_R $ and object $ j \\\\in \\\\mathcal{J} $, the composition of the canonical cocone morphism $ \\\\iota_j : F(j) \\\\to \\\\varinjl\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: general filtered colimit constructions and cotangent functoriality do not identify the colimit of the canonical cotangent complexes with the complex of the colimit algebra. Flat base change requires a different diagram. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean, especially the presentation maps at lines 380-428; there is no filtered-colimit comparison there."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cotangentComplex\", \"colimit\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: general filtered colimit constructions and cotangent functoriality do not identify the colimit of the canonical cotangent complexes with the complex of the colimit algebra. Flat base change requires a different diagram. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean, especially the presentation maps at lines 380-428; there is no filtered-colimit comparison there."
+  },
+  {
+   "tool": "grep",
+   "query": "(cotangent|H1Cotangent).*(colimit|directLimit)|(colimit|directLimit).*(cotangent|H1Cotangent)",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: general filtered colimit constructions and cotangent functoriality do not identify the colimit of the canonical cotangent complexes with the complex of the colimit algebra. Flat base change requires a different diagram. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean, especially the presentation maps at lines 380-428; there is no filtered-colimit comparison there."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naive cotangent complexes preserve filtered direct limits of ring maps as complexes of modules",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit\", \"module\": \"Mathlib/Algebra/Category/Ring/FinitePresentation\", \"type\": \"∀ {J : Type uJ} [inst : CategoryTheory.Category.{vJ, uJ} J] [CategoryTheory.IsFiltered J] (R : CommRingCat)\\n  (F : CategoryTheory.Functor J CommRingCat) (α : (CategoryTheory.Functor.const J).obj R ⟶ F) {S : CommRingCat}\\n  (f : R ⟶ S) (c : CategoryTheory.Limits.Cocone F) (hc : CategoryTheory.Limits.I\", \"doc\": \"Let $ f : A \\\\to B $ be a finitely presented ring homomorphism between commutative rings, and let $ c $ be a colimit cocone for a diagram $ F : \\\\mathcal{J} \\\\to \\\\text{CommRing} $. If $ g : S \\\\to c.\\\\text\"}\n  {\"name\": \"Algebra.Extension.CotangentSpace.map_cotangentComplex\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {P : Algebra.Extension R S}\\n  {R' : Type u'} {S' : Type v'} [inst_3 : CommRing R'] [inst_4 : CommRing S'] [inst_5 : Algebra R' S']\\n  {P' : Algebra.Extension R' S'} [inst_6 : Algebra R R'] [inst_7 : Algebra S\", \"doc\": \"For any algebra extension homomorphism $ f : P \\\\to P' $, the induced linear map on cotangent spaces satisfies $ \\\\text{CotangentSpace.map}(f) \\\\circ \\\\text{cotangentComplex}_P = \\\\text{cotangentComplex}_{\"}\n  {\"name\": \"RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit\", \"module\": \"Mathlib/Algebra/Category/Ring/FinitePresentation\", \"type\": \"∀ {J : Type uJ} [inst : CategoryTheory.Category.{vJ, uJ} J] [CategoryTheory.IsFiltered J] (R : CommRingCat)\\n  (F : CategoryTheory.Functor J CommRingCat) (α : (CategoryTheory.Functor.const J).obj R ⟶ F) {S : CommRingCat}\\n  (f : R ⟶ S) (c : CategoryTheory.Limits.Cocone F) (hc : CategoryTheory.Limits.I\", \"doc\": \"Given a filtered category $\\\\mathcal{J}$, a diagram $F : \\\\mathcal{J} \\\\to \\\\mathcal{C}$, a colimit cocone $c$ for $F$, and a ring homomorphism $f : R \\\\to S$ of essential finite type, if morphisms $a : S \"}\n  {\"name\": \"Algebra.Extension.CotangentSpace.map_comp_cotangentComplex\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {P : Algebra.Extension R S}\\n  {R' : Type u'} {S' : Type v'} [inst_3 : CommRing R'] [inst_4 : CommRing S'] [inst_5 : Algebra R' S']\\n  {P' : Algebra.Extension R' S'} [inst_6 : Algebra R R'] [inst_7 : Algebra S\", \"doc\": \"For an algebra extension homomorphism $ f : P \\to P' $, the composition of the cotangent space map $ \\text{CotangentSpace.map}(f) $ with the cotangent complex $ P.\\text{cotangentComplex} $ equals the com\"}\n  {\"name\": \"CommRingCat.FilteredColimits.forget_preservesFilteredColimits\", \"module\": \"Mathlib/Algebra/Category/Ring/FilteredColimits\", \"type\": \"CategoryTheory.Limits.PreservesFilteredColimits (CategoryTheory.forget CommRingCat)\", \"doc\": \"The forgetful functor from the category of commutative rings to the category of types preserves filtered colimits. This means that applying the forgetful functor to a filtered colimit of commutative r\"}\n  {\"name\": \"ModuleCat.FilteredColimits.M\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/FilteredColimits\", \"type\": \"{R : Type u} →\\n  [inst : Ring R] →\\n    {J : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory J] →\\n        [CategoryTheory.IsFiltered J] → CategoryTheory.Functor J (ModuleCat R) → AddCommGrpCat\", \"doc\": \"Given a small filtered category $\\\\mathcal{J}$ and a functor $F : \\\\mathcal{J} \\\\to \\\\text{ModuleCat}_R$, this constructs the filtered colimit of $F$ in the category of left $R$-modules by first forming t\"}\n  {\"name\": \"Algebra.Extension.cotangentComplex\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → [inst_2 : Algebra R S] → (P : Algebra.Extension R S) → P.Cotangent →ₗ[S] P.CotangentSpace\", \"doc\": \"The linear map from the cotangent module $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2$ to the cotangent space $S \\\\otimes_R \\\\Omega_{S/R}$ of an $R$-algebra extension $S$, constructed by composing the canonical isomorphism\"}\n  {\"name\": \"CommRingCat.FilteredColimits.R\", \"module\": \"Mathlib/Algebra/Category/Ring/FilteredColimits\", \"type\": \"{J : Type v} →\\n  [inst : CategoryTheory.SmallCategory J] →\\n    [CategoryTheory.IsFiltered J] → CategoryTheory.Functor J CommRingCat → RingCat\", \"doc\": \"The filtered colimit $ R $ is constructed by taking a diagram $ F : \\\\mathcal{J} \\\\to \\\\text{CommRingCat} $, applying the forgetful functor from commutative rings to rings, and forming the colimit in the\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: general filtered colimit constructions and cotangent functoriality do not identify the colimit of the canonical cotangent complexes with the complex of the colimit algebra. Flat base change requires a different diagram. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean, especially the presentation maps at lines 380-428; there is no filtered-colimit comparison there."
+  },
+  {
+   "tool": "grep",
+   "query": "cotangentComplex|H1Cotangent",
+   "results": "[grep] OK 15 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Free.lean\", \"line\": \"60\", \"text\": \"    [Subsingleton (H1Cotangent R S)] :\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Free.lean\", \"line\": \"63\", \"text\": \"  set f : _ →ₗ[S] (ι →₀ S) := P.cotangentSpaceBasis.repr ∘ₗ P.toExtension.cotangentComplex\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Free.lean\", \"line\": \"67\", \"text\": \"    exact Extension.exact_cotangentComplex_toKaehler\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Free.lean\", \"line\": \"70\", \"text\": \"      (Extension.subsingleton_h1Cotangent P.toExtension).mp P.equivH1Cotangent.subsingleton\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Free.lean\", \"line\": \"96\", \"text\": \"    (hb : ∀ k, b k = (D R S) (P.val (v k))) [Subsingleton (H1Cotangent R S)] :\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean\", \"line\": \"25\", \"text\": \"- `Algebra.Extension.tensorH1CotangentOfFlat`: If `T` is flat over `R`, there is a `T`-linear\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean\", \"line\": \"26\", \"text\": \"  isomorphism `T ⊗[R] P.H1Cotangent ≃ₗ[T] (P.baseChange).H1Cotangent`.\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean\", \"line\": \"27\", \"text\": \"- `Algebra.tensorH1CotangentOfFlat`: Flat base change commutes with `H1Cotangent`.\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean\", \"line\": \"127\", \"text\": \"/-- The canonical map `T ⊗[R] P.H1Cotangent →ₗ[T] (P.baseChange).H1Cotangent`. -/\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean\", \"line\": \"130\", \"text\": \"def tensorToH1Cotangent : T ⊗[R] P.H1Cotangent →ₗ[T] (P.baseChange (T := T)).H1Cotangent :=\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"line\": \"23\", \"text\": \"- `Algebra.Extension.CotangentComplex`: The map `I/I² → ⨁ᵢ S dxᵢ`.\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"line\": \"26\", \"text\": \"- `Algebra.Extension.exact_cotangentComplex_toKaehler`: `I/I² → ⨁ᵢ S dxᵢ → Ω[S/R]` is exact.\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"line\": \"29\", \"text\": \"- `Algebra.Extension.H1Cotangent`: The first homology of the (naive) cotangent complex\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"line\": \"31\", \"text\": \"- `Algebra.H1Cotangent`: `H¹(L_{S/R})`,\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"line\": \"61\", \"text\": \"def cotangentComplex : P.Cotangent →ₗ[S] P.CotangentSpace :=\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: general filtered colimit constructions and cotangent functoriality do not identify the colimit of the canonical cotangent complexes with the complex of the colimit algebra. Flat base change requires a different diagram. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean, especially the presentation maps at lines 380-428; there is no filtered-colimit comparison there."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ind-etale-naive-cotangent-acyclic",
+  "date": "2026-10-24",
+  "group": "N8"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), supporting alteration chain recorded in the item: coherent naive cotangent cohomology via the scheme-to-space comparison, Stacks Tag 0D0X; the final local algebra input in the proof of Tag 0D0X. Supporting local algebra: Tag 0D08 proof, first paragraph, acyclicity of the relative naive cotangent complexes of the strict henselizations. The filtered-colimit comparison invoked through Algebra Tag 07BQ in the first paragraph of More on Algebra, lemma-henselization-NL.",
+   "via": [
+    "lem-sfb-ind-etale-naive-cotangent-acyclic",
+    "lem-sfb-strict-henselization-naive-cotangent",
+    "lem-sfb-scheme-naive-cotangent-etale-comparison",
+    "lem-sfb-affine-etale-naive-cotangent-presentation",
+    "lem-sfb-space-naive-cotangent-finite-local-model",
+    "lem-sfb-space-naive-cotangent-coherent",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-filtered-colimit-naive-cotangent-comparison",
+  "worker": "stage1",
+  "summary": "Read Tag 07BQ, checked the live Lean and existing DAG, retained the exact statement, and expanded the canonical comparison proof. One general ideal-square quotient lemma is isolated; polynomial colimit and free-module finite-support arguments are explicit, including noninjective transitions and parallel-arrow equalization.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), supporting alteration chain recorded in the item: coherent naive cotangent cohomology via the scheme-to-space comparison, Stacks Tag 0D0X; the final local algebra input in the proof of Tag 0D0X. Supporting local algebra: Tag 0D08 proof, first paragraph, acyclicity of the relative naive cotangent complexes of the strict henselizations. The filtered-colimit comparison invoked through Algebra Tag 07BQ in the first paragraph of More on Algebra, lemma-henselization-NL.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-1ac36ef4c",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-1ac36ef4c (reviewer sub-agent of L); spot-checked: Read Stacks algebra.tex:35557 Tag 07BQ (lemma-colimits-NL); its proof only says the details are 'clear', and the split writes them out (D5). The item is not superseded: live and side-live both have it unsplit, the new id is absent from both, and there is no re-split note. The statement, stmt_deps, source and blueprint match live, and the citer lem-sfb-ind-etale-naive-cotangent-acyclic uses exactly the stated K→NL_{S/R} quasi-isomorphism in R-modules. Steps checked against the statements they cite. Step 1: representatives and common-target equality, with the filtered equalizer making the two witnessing arrows into one. Step 2: polynomial colimit, with the assigned value well defined across representatives. Step 3: f∈I lifts to f_j and one arrow makes γ_k f_k=0, since evaluation commutes with renaming; all hypotheses of the new node hold and its maps are the degree −1 components of N(ι_j). Step 4: free-module colimit via the modules criterion, partitioning the support by image; tested with R[x]→R, where the labels x and 0 merge. Step 5: Leibniz comparison of D_u with δ∘u_♯, with no false claim that partial derivatives commute with renaming. Step 6: a degreewise iso is a quasi-isomorphism, inverted by Q. New node lem-sfb-filtered-colimit-conormal-modules is true: an element whose image lies in I² gets its finitely many factors lifted, and ring-colimit equality puts it in I_m² at a later stage. Tested on single-object J, zero ideals, unit ideals and Z[x]→Z, where the class of x dies. It is self-contained, statement-only, sourced to 07BQ and not a restatement of the item. The duplicate search (07BQ, conormal∧colimit, naive cotangent∧filtered; directed-union-cotangent-h1, locally-dense-cotangent-h1, colimit-etale/unramified, finite-stage relations) found none, and the four kinds of Mathlib search found no match. No tool_uses: every off-unit citation is a Mathlib leaf or a definition. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FilteredColimitNaiveCotangentComparison",
+  "declaration": "Algebra.CanonicalNaiveCotangent.filteredColimit_comparison",
+  "declarations": [
+   "Algebra.CanonicalNaiveCotangent.comparison",
+   "Algebra.CanonicalNaiveCotangent.filteredColimit_comparison"
+  ],
+  "file": "lean/Sheaf/RingTheory/FilteredColimitNaiveCotangentComparison.lean",
+  "statement": "theorem filteredColimit_comparison {R : Type u} [CommRing R] {J : Type (max u v)} [SmallCategory J] [IsFiltered J] (F : J ⥤ CommAlgCat.{max u v} R) (c : Cocone F) (hc : IsColimit c) (k : Cocone (F ⋙ functor R)) (hk : ∀ n : ℤ, IsColimit ((HomologicalComplex.eval (ModuleCat.{max u v} R) (.up ℤ) n).mapCocone k)) [HasDerivedCategory.{w} (ModuleCat.{max u v} R)] : QuasiIso (comparison F c k hk) ∧ IsIso (DerivedCategory.Q.map (comparison F c k hk))",
+  "branch": "sheaf-dag",
+  "by": "Q118",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The comparison is canonical IsColimit.desc from an arbitrary degreewise colimit cocone. Both QuasiIso(c) and IsIso(Q.map c) are stated. The fixed-base functor is supplied by the accompanying definition node. No flatness, injectivity or finite-presentation hypothesis occurs."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1ca199d64",
+  "group": "Q118",
+  "result": "pass",
+  "note": "Read item, new def node def-sfb-canonical-naive-cotangent-functor, all stmt_deps, both delivered modules, the report and the citer IndEtaleNaiveCotangentAcyclic. Lean matches Stacks 07BQ clause by clause: R:Type u; small filtered J:Type (max u v); arbitrary algebra colimit cocone c/hc; canonical complex built from Mathlib Generators.self ker.Cotangent -> (T→₀T) via cotangentComplex+cotangentSpaceBasis.repr, as the mappingCone of the degree-0 single map (same encoding as the landed citer); N(u) = Ideal.mapCotangent of rename and an lsum free map (collisions add); arbitrary degreewise colimit k with hk; comparison = isColimitOfEval.desc of the mapped cocone (fac = characterization); conclusion QuasiIso ∧ IsIso(Q.map). No extra hypotheses; HasDerivedCategory.{w} arbitrary. The postponed rename_mem, differential_naturality (chain rule), map_id and map_comp are true and sorry'd with docstrings; no hollow defs. H4: no existing fixed-base functor (the trf presentation complex, space and sheaf versions differ). Item vs live differs only in stmt_deps and lean; both lean.statement fields are verbatim in the files. The Second reading section is a self-review but present. No compile reproduced; no fixes."
+ }
+}

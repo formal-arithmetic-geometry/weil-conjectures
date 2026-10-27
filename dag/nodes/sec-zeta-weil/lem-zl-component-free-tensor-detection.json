@@ -1,0 +1,145 @@
+{
+ "id": "lem-zl-component-free-tensor-detection",
+ "kind": "statement",
+ "title": "Integral-function detection on free component tensors",
+ "statement": "Let T be an affine scheme and let F be its fixed relative component inverse image [def-zl-condensed-lisse-evaluation-model], constructed from the relative profinite test functor [lem-zl-component-relative-profinite-site]. For relative profinite tests E and E′, let A and B be the associated free abelian test sheaves (freeYoneda with coefficient the integral tensor unit). For any abelian sheaf Z on T_proet and morphisms f,g : Z -> F(A) tensor F(B), if f followed by (F(a) tensor F(b)) equals g followed by (F(a) tensor F(b)) for every a : A -> 1 and b : B -> 1, then f=g. This is a separation property of the underlying inverse-image functor, independent of any supplied monoidal or braided structure.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Construction (4.1), Proposition 4.3(3), Remark 3.2"
+ },
+ "stmt_deps": [
+  "def-zl-condensed-lisse-evaluation-model",
+  "lem-zl-component-relative-profinite-site"
+ ],
+ "proof": [
+  {
+   "text": "Identify the inverse image of a free relative-test sheaf with the free abelian sheaf on the corresponding pro-etale test, by composing its free-sheaf adjunction with the sheaf inverse-image adjunction. The tensor of two such free sheaves is free on the fiber product. Thus local sections are finite integral sums of pairs of test maps.",
+   "uses": [
+    "lem-zl-component-relative-profinite-site",
+    "def-zl-condensed-lisse-evaluation-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Construction (4.1), Proposition 4.3(3), Remark 3.2"
+   }
+  },
+  {
+   "text": "Characteristic functions of clopen subsets of each profinite test give maps to the integral unit. At any point of an affine testing scheme, finite clopen partitions separate the finitely many distinct profinite coordinates in a local free-sheaf section. The tensor evaluations therefore detect the coefficient sum of every class of coincident pairs.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Construction (4.1), Proposition 4.3(3), Remark 3.2"
+   }
+  },
+  {
+   "text": "For each partition of the finite summand index set with zero coefficient sum in each block, form the closed profinite locus of components on which all pairs in each block coincide. These finitely many loci cover the component space by the preceding pointwise calculation. Apply the relative component construction to the affine testing scheme and these closed profinite subsets. The resulting finite jointly surjective pro-etale cover makes the sum cancel formally on each member. Sheaf separatedness makes it zero. Apply this to f-g on every section. Empty tests and empty schemes give zero sheaves and satisfy the same argument.",
+   "uses": [
+    "lem-zl-component-relative-profinite-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Construction (4.1), Proposition 4.3(3), Remark 3.2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-component-relative-profinite-site",
+  "def-zl-condensed-lisse-evaluation-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "note": "D4 extraction of the finite-clopen separation step of the parent proof; the closed-locus cover argument is written by the worker from the relative mapping property.",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Construction (4.1), Proposition 4.3(3), Remark 3.2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The free abelian sheaf on a profinite set is detected by evaluation of locally constant integer functions",
+   "results": "LocallyConstant.freeOfProfinite, Condensed.lanSheafProfinite, and the locally constant sheaf functor. These do not give detection of the free abelian sheaf.",
+   "date": "2026-10-26",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The free abelian sheaf on a profinite set injects into its integral measures, detected by locally constant integer functions and finite clopen partitions",
+   "results": "Condensed.profiniteFree, Condensed.freeAb and LocallyConstant.freeOfProfinite; no injectivity of evaluation into integral functions or its component-pullback version.",
+   "date": "2026-10-25",
+   "verdict": "No matching detection theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.freeYoneda",
+   "results": "freeYonedaHomEquiv and Sheaf.isSeparating provide domain generators, not detection by maps out of their inverse images.",
+   "date": "2026-10-25",
+   "verdict": "Reuse domain separation to prove the parent; retain only codomain detection here."
+  },
+  {
+   "tool": "grep",
+   "query": "FreeAbelianGroup/Finsupp with clopen/DiscreteQuotient; injective free solid; isSeparating",
+   "results": "Mathlib.Condensed.Solid defines profiniteSolidification without the needed injectivity theorem. No matching declaration in WeilConjectures or Sheaf.",
+   "date": "2026-10-25",
+   "verdict": "A separate finite-clopen detection step is required."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ComponentTensorNormalization",
+  "date": "2026-10-25",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "The finite-clopen separation subargument of lem-zl-component-unit-normalized-tensor, step 2, before using monoidal unitality.",
+   "via": [
+    "lem-zl-component-unit-normalized-tensor",
+    "lem-zl-component-point-monoidal-factorization",
+    "lem-zl-condensed-component-pullback-compatibility",
+    "lem-zl-condensed-wcontractible-lisse-evaluation",
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ComponentFreeTensorDetection",
+  "file": "lean/Sheaf/AlgebraicGeometry/ComponentFreeTensorDetection.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.component_free_tensor_detection",
+  "statement": "theorem component_free_tensor_detection\n    (E E' : Over (affineComponentSpace T))\n    {Z : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}}\n    (f g : Z ⟶\n      (componentInverse T).obj\n          (Sheaf.freeYoneda\n            ((coherentTopology Profinite.{u}).over (affineComponentSpace T)) E\n            (𝟙_ Ab.{u + 1})) ⊗\n        (componentInverse T).obj\n          (Sheaf.freeYoneda\n            ((coherentTopology Profinite.{u}).over (affineComponentSpace T)) E'\n            (𝟙_ Ab.{u + 1})))\n    (h : ∀ (a : Sheaf.freeYoneda\n        ((coherentTopology Profinite.{u}).over (affineComponentSpace T)) E\n        (𝟙_ Ab.{u + 1}) ⟶ 𝟙_ _)\n      (b : Sheaf.freeYoneda\n        ((coherentTopology Profinite.{u}).over (affineComponentSpace T)) E'\n        (𝟙_ Ab.{u + 1}) ⟶ 𝟙_ _),\n      f ≫ ((componentInverse T).map a ⊗ₘ (componentInverse T).map b) =\n        g ≫ ((componentInverse T).map a ⊗ₘ (componentInverse T).map b)) :\n    f = g",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261025T180600-L-4007163",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261025T180600-L-4007163",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

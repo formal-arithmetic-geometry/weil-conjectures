@@ -1,32 +1,19 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group NP
+Authors: SHEAF group NP, SHEAF group V3
 -/
 module
 
-public import Mathlib.LinearAlgebra.Finsupp.VectorSpace
-public import Mathlib.LinearAlgebra.Finsupp.LinearCombination
-public import Mathlib.Data.Finset.Powerset
-public import Mathlib.Data.List.FinRange
-public import Mathlib.LinearAlgebra.FreeModule.Basic
+public import Sheaf.AlgebraicTopology.OrderedJoinChains
+import Sheaf.AlgebraicTopology.OrderedJoinSingleColorIdentities
+import Sheaf.AlgebraicTopology.OrderedJoinFunctorialExpansion
+import Mathlib.Tactic.Abel
 
 /-! # Partial contraction of ordered join chains
 
-Source: main-20261015 blueprint, six-functors direct-images proof, paragraph (3),
-agent arithmetic expansion below local continuous-cocycle descent. The explicit
-ordered-join calculation is agent-written, not asserted in the blueprint itself
-(blueprint: lem-sfb-ordered-join-partial-contraction).
-
-A face is a finite set of colors with one vertex of each color. Its order is the
-increasing order of colors, so no ordering or decidable equality of vertices is
-needed. Degree-q chains are finitely supported integer functions on faces with
-q+1 vertices; their specified basis is Mathlib's `Finsupp.basisSingleOne`.
-The empty face gives degree -1 and there are no faces in other excluded degrees.
-
-The two degree arguments of `boundary`, `insertion`, and `contraction` specify
-source and target. In the theorem they are always adjacent, as prescribed. This
-avoids type transports between equal integer expressions such as (q+1)-1 and q.
+The constructions are in `OrderedJoinChains`, allowing the single-color and
+functorial-expansion prerequisites to be imported without a cycle.
 -/
 
 @[expose] public section
@@ -39,140 +26,232 @@ open scoped BigOperators
 
 namespace AlgebraicTopology.OrderedJoin
 
-/-- A face, including the empty face, with its vertices indexed by its colors.
-Source: direct-images paragraph (3), agent ordered-join expansion
-(blueprint: lem-sfb-ordered-join-partial-contraction). -/
-structure Face {r : ℕ} (X : Fin r → Type u) where
-  colors : Finset (Fin r)
-  vertex : ∀ i : Fin r, i ∈ colors → X i
+private theorem prefix_list_comp {r : ℕ} {X : Fin r → Type u}
+    (v : ∀ i, X i) (q : ℤ) (L : List ℕ) (P : Chain X q →ₗ[ℤ] Chain X q) :
+    L.foldr (fun j Q ↦ if h : j < r then (remainder v ⟨j, h⟩ q).comp Q else Q) P =
+      (L.foldr (fun j Q ↦
+        if h : j < r then (remainder v ⟨j, h⟩ q).comp Q else Q) LinearMap.id).comp P := by
+  induction L with
+  | nil => simp
+  | cons j L ih =>
+    simp only [List.foldr_cons]
+    split_ifs with h
+    · rw [ih, LinearMap.comp_assoc]
+    · exact ih
 
-/-- Degree-q ordered symbols: the integer cardinality condition also includes
-q=-1 and excludes q<-1 and q>=r. Source: direct-images paragraph (3), agent
-ordered-join expansion (blueprint: lem-sfb-ordered-join-partial-contraction). -/
-def Symbol {r : ℕ} (X : Fin r → Type u) (q : ℤ) : Type u :=
-  {σ : Face X // (σ.colors.card : ℤ) = q + 1}
+private theorem prefix_succ {r : ℕ} {X : Fin r → Type u} (v : ∀ i, X i)
+    (n : ℕ) (hn : n < r) (q : ℤ) :
+    remainderPrefix v (n + 1) q =
+      (remainderPrefix v n q).comp (remainder v ⟨n, hn⟩ q) := by
+  simp only [remainderPrefix, List.range_succ, List.foldr_append,
+    List.foldr_cons, List.foldr_nil, dif_pos hn, LinearMap.comp_id]
+  exact prefix_list_comp v q (List.range n) _
 
-/-- The specified free integer module on the degree-q symbols, with specified
-basis `Finsupp.basisSingleOne`; this is the basis notion of
-`def-weil-pbc-free-module`. Source: direct-images paragraph (3), agent
-ordered-join expansion (blueprint: lem-sfb-ordered-join-partial-contraction). -/
-abbrev Chain {r : ℕ} (X : Fin r → Type u) (q : ℤ) : Type u :=
-  Symbol X q →₀ ℤ
+private theorem remainder_commutes {r : ℕ} (hr : 1 ≤ r) {X : Fin r → Type u}
+    (v : ∀ i, X i) (q : ℤ) (i : Fin r) :
+    (boundary X q (q - 1)).comp (remainder v i q) =
+      (remainder v i (q - 1)).comp (boundary X q (q - 1)) := by
+  obtain ⟨hdd, hc⟩ := singleColorIdentities r hr X v
+  have hR (p : ℤ) : remainder v i p = LinearMap.id -
+      ((boundary X (p + 1) p).comp (insertion v i p (p + 1)) +
+        (insertion v i (p - 1) p).comp (boundary X p (p - 1))) := by
+    rw [hc p i]
+    abel
+  have hd' := hdd (q + 1)
+  have he : q + 1 - 2 = q - 1 := by omega
+  have he0 : q + 1 - 1 = q := by omega
+  rw [he, he0] at hd'
+  rw [hR q, hR (q - 1)]
+  simp only [LinearMap.comp_sub, LinearMap.comp_add,
+    LinearMap.sub_comp, LinearMap.add_comp, LinearMap.id_comp, LinearMap.comp_id]
+  have heq : q - 1 + 1 = q := by omega
+  rw [heq]
+  rw [← LinearMap.comp_assoc, hd', LinearMap.zero_comp]
+  have he' : q - 1 - 1 = q - 2 := by omega
+  rw [he']
+  simp only [LinearMap.comp_assoc, hdd q, LinearMap.comp_zero, zero_add, add_zero]
 
-/-- Interpret a face as its basis vector in degree q, or zero if it has the wrong
-cardinality. The test concerns only colors. Source: direct-images paragraph (3),
-agent ordered-join expansion (blueprint: lem-sfb-ordered-join-partial-contraction). -/
-noncomputable def symbolTerm {r : ℕ} (X : Fin r → Type u) (q : ℤ)
-    (σ : Face X) : Chain X q := by
+private theorem prefix_commutes {r : ℕ} (hr : 1 ≤ r) {X : Fin r → Type u}
+    (v : ∀ i, X i) (n : ℕ) (hn : n ≤ r) (q : ℤ) :
+    (boundary X q (q - 1)).comp (remainderPrefix v n q) =
+      (remainderPrefix v n (q - 1)).comp (boundary X q (q - 1)) := by
+  induction n with
+  | zero => simp [remainderPrefix]
+  | succ n ih =>
+    have hn' : n < r := by omega
+    rw [prefix_succ v n hn' q, prefix_succ v n hn' (q - 1),
+      ← LinearMap.comp_assoc, ih (by omega), LinearMap.comp_assoc,
+      remainder_commutes hr v q ⟨n, hn'⟩, ← LinearMap.comp_assoc]
+
+private theorem contraction_telescope {r : ℕ} (hr : 1 ≤ r) {X : Fin r → Type u}
+    (v : ∀ i, X i) (q : ℤ) :
+    (boundary X (q + 1) q).comp (contraction v q (q + 1)) +
+      (contraction v (q - 1) q).comp (boundary X q (q - 1)) =
+        LinearMap.id - remainderPrefix v r q := by
+  have hp (i : Fin r) :
+      (boundary X (q + 1) q).comp
+          ((remainderPrefix v i.val (q + 1)).comp (insertion v i q (q + 1))) +
+        ((remainderPrefix v i.val q).comp (insertion v i (q - 1) q)).comp
+          (boundary X q (q - 1)) =
+        remainderPrefix v i.val q - remainderPrefix v (i.val + 1) q := by
+    have hd := prefix_commutes hr v i.val (Nat.le_of_lt i.isLt) (q + 1)
+    have heq : q + 1 - 1 = q := by omega
+    rw [heq] at hd
+    rw [← LinearMap.comp_assoc, hd, LinearMap.comp_assoc,
+      LinearMap.comp_assoc, ← LinearMap.comp_add,
+      (singleColorIdentities r hr X v).2 q i,
+      LinearMap.comp_sub, LinearMap.comp_id, prefix_succ v i.val i.isLt q]
+  have hsum : (∑ i : Fin r,
+      (remainderPrefix v i.val q - remainderPrefix v (i.val + 1) q)) =
+        LinearMap.id - remainderPrefix v r q := by
+    rw [← Finset.sum_range (fun n ↦
+      remainderPrefix v n q - remainderPrefix v (n + 1) q), Finset.sum_range_sub']
+    simp [remainderPrefix]
+  rw [← hsum]
+  apply LinearMap.ext
+  intro x
+  simpa only [contraction, LinearMap.comp_apply, LinearMap.sum_apply, map_sum,
+    LinearMap.add_apply, ← Finset.sum_add_distrib] using
+      Finset.sum_congr (s₁ := Finset.univ) rfl (fun i _ ↦ LinearMap.congr_fun (hp i) x)
+
+private theorem remainder_symbolTerm {r : ℕ} {X : Fin r → Type u}
+    (v : ∀ i, X i) (i : Fin r) (q : ℤ) (σ : Face X) :
+    remainder v i q (symbolTerm X q σ) =
+      if i ∈ σ.colors then symbolTerm X q σ - symbolTerm X q (replaceColors v {i} σ)
+      else 0 := by
   classical
-  exact if h : (σ.colors.card : ℤ) = q + 1 then Finsupp.single ⟨σ, h⟩ 1 else 0
+  by_cases h : (σ.colors.card : ℤ) = q + 1
+  · simp [symbolTerm, remainder, h, replaceColors, Finsupp.linearCombination_single]
+  · simp [symbolTerm, h, replaceColors]
 
-/-- Delete the vertex of color i. Source: direct-images paragraph (3), agent
-ordered-join expansion (blueprint: lem-sfb-ordered-join-partial-contraction). -/
-def erase {r : ℕ} {X : Fin r → Type u} (σ : Face X) (i : Fin r) : Face X where
-  colors := σ.colors.erase i
-  vertex j hj := σ.vertex j (Finset.mem_of_mem_erase hj)
+private theorem prefix_missing {r : ℕ} {X : Fin r → Type u}
+    (v : ∀ i, X i) (q : ℤ) (n : ℕ) (hn : n ≤ r)
+    (σ : Face X) (j : Fin r) (hj : j.val < n) (hm : j ∉ σ.colors) :
+    remainderPrefix v n q (symbolTerm X q σ) = 0 := by
+  classical
+  induction n generalizing σ with
+  | zero => omega
+  | succ n ih =>
+    have hn' : n < r := by omega
+    rw [prefix_succ v n hn' q, LinearMap.comp_apply, remainder_symbolTerm]
+    split_ifs with hi
+    · have hj' : j.val < n := by
+        have hne : j.val ≠ n := by
+          intro he
+          have hje : j = ⟨n, hn'⟩ := Fin.ext he
+          exact hm (hje ▸ hi)
+        omega
+      rw [map_sub, ih (by omega) σ hj' hm,
+        ih (by omega) (replaceColors v {⟨n, hn'⟩} σ) hj' hm, sub_self]
+    · exact map_zero _
 
-/-- Replace precisely the vertices with colors in A by their chosen vertices.
-The test uses only color membership. Source: direct-images paragraph (3), agent
-ordered-join expansion (blueprint: lem-sfb-ordered-join-partial-contraction). -/
-def replaceColors {r : ℕ} {X : Fin r → Type u} (v : ∀ i : Fin r, X i)
-    (A : Finset (Fin r)) (σ : Face X) : Face X where
-  colors := σ.colors
-  vertex j hj := if j ∈ A then v j else σ.vertex j hj
+private theorem prefix_zero {r : ℕ} {X : Fin r → Type u}
+    (v : ∀ i, X i) (q : ℤ) (hq : q ≤ (r : ℤ) - 2) :
+    remainderPrefix v r q = 0 := by
+  classical
+  apply Finsupp.lhom_ext
+  intro σ z
+  have hproper : σ.val.colors ≠ Finset.univ := by
+    intro he
+    have hh := σ.property
+    rw [he, Finset.card_univ, Fintype.card_fin] at hh
+    omega
+  obtain ⟨j, hj⟩ : ∃ j : Fin r, j ∉ σ.val.colors := by
+    by_contra! hall
+    exact hproper (Finset.eq_univ_of_forall hall)
+  have hz : Finsupp.single σ z = z • symbolTerm X q σ.val := by
+    simp [symbolTerm, σ.property]
+  rw [hz, map_smul, prefix_missing v q r le_rfl σ.val j j.isLt hj, smul_zero]
+  rfl
 
-/-- Insert the chosen vertex of color i, using increasing color order. The
-existing vertex is replaced if i was already present; `insertion` uses this
-only when i is missing. Source: direct-images paragraph (3), agent ordered-join
-expansion (blueprint: lem-sfb-ordered-join-partial-contraction). -/
-def insert {r : ℕ} {X : Fin r → Type u} (v : ∀ i : Fin r, X i)
-    (i : Fin r) (σ : Face X) : Face X where
-  colors := Insert.insert i σ.colors
-  vertex j hj := if h : j = i then h.symm ▸ v i
-    else σ.vertex j ((Finset.mem_insert.mp hj).resolve_left h)
+private theorem contraction_minus_two {r : ℕ} {X : Fin r → Type u}
+    (v : ∀ i, X i) : contraction v (-2) (-1) = 0 := by
+  apply Finsupp.lhom_ext
+  intro σ z
+  have hh := σ.property
+  have hc := σ.val.colors.card
+  omega
 
-/-- The sign of the position of color i: the number of earlier colors.
-Source: direct-images paragraph (3), agent ordered-join expansion
-(blueprint: lem-sfb-ordered-join-partial-contraction). -/
-def positionSign {r : ℕ} (C : Finset (Fin r)) (i : Fin r) : ℤ :=
-  (-1 : ℤ) ^ (C.filter (fun j ↦ j < i)).card
+private theorem prefix_natural {r : ℕ} (hr : 1 ≤ r) {X : Fin r → Type u}
+    (v : ∀ i, X i) (Y : Fin r → Type v) (f : ∀ i, X i → Y i)
+    (n : ℕ) (hn : n ≤ r) (q : ℤ) :
+    (chainMap f q).comp (remainderPrefix v n q) =
+      (remainderPrefix (fun i ↦ f i (v i)) n q).comp (chainMap f q) := by
+  induction n with
+  | zero => simp [remainderPrefix]
+  | succ n ih =>
+    have hn' : n < r := by omega
+    rw [prefix_succ v n hn' q, prefix_succ (fun i ↦ f i (v i)) n hn' q,
+      ← LinearMap.comp_assoc, ih (by omega), LinearMap.comp_assoc,
+      (functorialExpansion r hr X v).1 Y f q ⟨n, hn'⟩ |>.2,
+      ← LinearMap.comp_assoc]
 
-/-- Alternating deletion, extended from the specified basis. The component
-from q to q-1 is d; in particular a singleton maps to the empty face and the
-empty face maps to zero. Source: direct-images paragraph (3), agent ordered-join
-expansion (blueprint: lem-sfb-ordered-join-partial-contraction). -/
-noncomputable def boundary {r : ℕ} (X : Fin r → Type u) (q p : ℤ) :
-    Chain X q →ₗ[ℤ] Chain X p :=
-  Finsupp.linearCombination ℤ (fun σ : Symbol X q ↦
-    ∑ i ∈ σ.val.colors, positionSign σ.val.colors i • symbolTerm X p (erase σ.val i))
+private theorem contraction_natural {r : ℕ} (hr : 1 ≤ r) {X : Fin r → Type u}
+    (v : ∀ i, X i) (Y : Fin r → Type v) (f : ∀ i, X i → Y i) (q : ℤ) :
+    (chainMap f (q + 1)).comp (contraction v q (q + 1)) =
+      (contraction (fun i ↦ f i (v i)) q (q + 1)).comp (chainMap f q) := by
+  apply LinearMap.ext
+  intro x
+  simp only [contraction, LinearMap.comp_apply, LinearMap.sum_apply, map_sum]
+  apply Finset.sum_congr rfl
+  intro i _
+  change ((chainMap f (q + 1)).comp
+    ((remainderPrefix v i.val (q + 1)).comp (insertion v i q (q + 1)))) x =
+    (((remainderPrefix (fun i ↦ f i (v i)) i.val (q + 1)).comp
+      (insertion (fun i ↦ f i (v i)) i q (q + 1))).comp (chainMap f q)) x
+  rw [← LinearMap.comp_assoc, prefix_natural hr v Y f i.val (Nat.le_of_lt i.isLt),
+    LinearMap.comp_assoc, (functorialExpansion r hr X v).1 Y f q i |>.1,
+    ← LinearMap.comp_assoc]
 
-/-- The signed insertion c_i, zero on faces already containing i, extended
-linearly from the basis. Its degree-one component has p=q+1.
-Source: direct-images paragraph (3), agent ordered-join expansion
-(blueprint: lem-sfb-ordered-join-partial-contraction). -/
-noncomputable def insertion {r : ℕ} {X : Fin r → Type u} (v : ∀ i : Fin r, X i)
-    (i : Fin r) (q p : ℤ) : Chain X q →ₗ[ℤ] Chain X p :=
-  Finsupp.linearCombination ℤ (fun σ : Symbol X q ↦
-    if i ∈ σ.val.colors then 0
-    else positionSign σ.val.colors i • symbolTerm X p (insert v i σ.val))
+private theorem replace_insert {r : ℕ} {X : Fin r → Type u}
+    (v : ∀ i, X i) (A : Finset (Fin r)) (i : Fin r) (σ : Face X) :
+    replaceColors v A (insert v i σ) = insert v i (replaceColors v A σ) := by
+  unfold replaceColors insert
+  congr 1
+  funext j hj
+  by_cases hji : j = i
+  · subst j
+    simp
+  · simp [hji]
 
-/-- R_i is zero on missing-color symbols, and otherwise the original symbol
-minus the symbol with its color-i vertex replaced by v_i.
-Source: direct-images paragraph (3), agent ordered-join expansion
-(blueprint: lem-sfb-ordered-join-partial-contraction). -/
-noncomputable def remainder {r : ℕ} {X : Fin r → Type u} (v : ∀ i : Fin r, X i)
-    (i : Fin r) (q : ℤ) : Chain X q →ₗ[ℤ] Chain X q :=
-  Finsupp.linearCombination ℤ (fun σ : Symbol X q ↦
-    if i ∈ σ.val.colors then
-      symbolTerm X q σ.val - symbolTerm X q (replaceColors v {i} σ.val)
-    else 0)
+private theorem sum_flatMap {α M : Type*} [AddCommMonoid M]
+    (L : List α) (f : α → List M) :
+    (L.flatMap f).sum = (L.map (fun a ↦ (f a).sum)).sum := by
+  induction L with
+  | nil => simp
+  | cons a L ih => simp [ih]
 
-/-- The ordered prefix R_0 composed with ... composed with R_{n-1}; the rightmost
-factor acts first. The empty prefix is the identity. Only n<=r is used.
-Source: direct-images paragraph (3), agent ordered-join expansion
-(blueprint: lem-sfb-ordered-join-partial-contraction). -/
-noncomputable def remainderPrefix {r : ℕ} {X : Fin r → Type u} (v : ∀ i : Fin r, X i)
-    (n : ℕ) (q : ℤ) : Chain X q →ₗ[ℤ] Chain X q :=
-  (List.range n).foldr (fun j P ↦
-    if h : j < r then (remainder v ⟨j, h⟩ q).comp P else P) LinearMap.id
-
-/-- The displayed S=sum_i (R_0 composed with ... composed with R_{i-1}) c_i.
-Its degree-one component is `contraction v q (q+1)`.
-Source: direct-images paragraph (3), agent ordered-join expansion
-(blueprint: lem-sfb-ordered-join-partial-contraction). -/
-noncomputable def contraction {r : ℕ} {X : Fin r → Type u}
-    (v : ∀ i : Fin r, X i) (q p : ℤ) : Chain X q →ₗ[ℤ] Chain X p :=
-  ∑ i : Fin r, (remainderPrefix v i.val p).comp (insertion v i q p)
-
-/-- Apply the given maps to vertices, preserving colors.
-Source: direct-images paragraph (3), agent ordered-join expansion
-(blueprint: lem-sfb-ordered-join-partial-contraction). -/
-def mapFace {r : ℕ} {X : Fin r → Type u} {Y : Fin r → Type v}
-    (f : ∀ i : Fin r, X i → Y i) (σ : Face X) : Face Y where
-  colors := σ.colors
-  vertex i hi := f i (σ.vertex i hi)
-
-/-- The induced integer-linear map J_q(f), with no injectivity assumption.
-Source: direct-images paragraph (3), agent ordered-join expansion
-(blueprint: lem-sfb-ordered-join-partial-contraction). -/
-noncomputable def chainMap {r : ℕ} {X : Fin r → Type u} {Y : Fin r → Type v}
-    (f : ∀ i : Fin r, X i → Y i) (q : ℤ) : Chain X q →ₗ[ℤ] Chain Y q :=
-  Finsupp.linearCombination ℤ (fun σ : Symbol X q ↦ symbolTerm Y q (mapFace f σ.val))
-
-/-- The unreduced list of coefficients, insertion colors and replacement sets.
-For each absent color i whose predecessors are present, list all subsets A of
-its predecessors with sign (-1)^(position(i)+card A). This list depends only on
-r and the color set C, and never examines vertices or combines equal symbols.
-Source: direct-images paragraph (3), agent ordered-join expansion
-(blueprint: lem-sfb-ordered-join-partial-contraction). -/
-noncomputable def expansionRecipe (r : ℕ) (C : Finset (Fin r)) :
-    List (ℤ × (Fin r × Finset (Fin r))) :=
-  (List.finRange r).flatMap (fun i ↦
-    if i ∈ C then []
-    else if (Finset.univ.filter (fun j : Fin r ↦ j < i)) ⊆ C then
-      ((Finset.univ.filter (fun j : Fin r ↦ j < i)).powerset.toList.map
-        (fun A ↦ (positionSign C i * (-1 : ℤ) ^ A.card, (i, A))))
-    else [])
+private theorem contraction_expansion {r : ℕ} (hr : 1 ≤ r) {X : Fin r → Type u}
+    (v : ∀ i, X i) (q : ℤ) (σ : Symbol X q) :
+    contraction v q (q + 1) (Finsupp.single σ 1) =
+      ((expansionRecipe r σ.val.colors).map (fun t ↦
+        t.1 • symbolTerm X (q + 1) (insert v t.2.1 (replaceColors v t.2.2 σ.val)))).sum := by
+  classical
+  simp only [contraction, LinearMap.sum_apply, LinearMap.comp_apply,
+    expansionRecipe, List.map_flatMap, sum_flatMap]
+  rw [← List.ofFn_eq_map, List.sum_ofFn]
+  apply Finset.sum_congr rfl
+  intro i _
+  have hi := (functorialExpansion.{u, u} r hr X v).2.1 q σ i
+  by_cases hm : i ∈ σ.val.colors
+  · simp [hm, hi.1 (Or.inl hm)]
+  · simp only [hm, if_false]
+    by_cases hall : (Finset.univ.filter (fun j : Fin r ↦ j < i)) ⊆ σ.val.colors
+    · simp only [hall, if_true]
+      have ha : ∀ j : Fin r, j < i → j ∈ σ.val.colors := by
+        intro j hj
+        exact hall (by simp [hj])
+      rw [hi.2 hm ha]
+      simp only [summandRecipe, List.map_map]
+      apply congrArg List.sum
+      apply congrArg (fun f ↦ List.map f
+        (Finset.univ.filter (fun j : Fin r ↦ j < i)).powerset.toList)
+      funext A
+      simp [positionSign, pow_add, replace_insert]
+    · have hex : ∃ j : Fin r, j < i ∧ j ∉ σ.val.colors := by
+        obtain ⟨j, hj, hnot⟩ := Finset.not_subset.mp hall
+        exact ⟨j, (Finset.mem_filter.mp hj).2, hnot⟩
+      simp [hall, hi.1 (Or.inr hex)]
 
 /-- The boundary squares to zero, S contracts all degrees below the top,
 is natural for arbitrary maps of pointed families, and has the finite
@@ -224,6 +303,9 @@ theorem partialContraction (r : ℕ) (hr : 1 ≤ r) (X : Fin r → Type u)
       contraction v q (q + 1) (Finsupp.single σ 1) =
         ((expansionRecipe r σ.val.colors).map (fun t ↦
           t.1 • symbolTerm X (q + 1) (insert v t.2.1 (replaceColors v t.2.2 σ.val)))).sum) := by
-  sorry
+  refine ⟨(singleColorIdentities r hr X v).1, ?_, contraction_minus_two v,
+    contraction_natural hr v, contraction_expansion hr v⟩
+  intro q _ hq
+  rw [contraction_telescope hr v q, prefix_zero v q hq, sub_zero]
 
 end AlgebraicTopology.OrderedJoin

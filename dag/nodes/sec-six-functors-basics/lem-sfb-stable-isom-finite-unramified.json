@@ -1,0 +1,314 @@
+{
+ "id": "lem-sfb-stable-isom-finite-unramified",
+ "kind": "statement",
+ "title": "Finite unramified isomorphism schemes for stable curves",
+ "statement": "Let $k$ be a field and let $g\\geq2$. The stack $\\overline{\\mathcal M}_{g,0}$ of stable unpointed genus-$g$ curves, as defined in [def-sfb-stable-pointed-moduli-groupoids], is of finite type over $k$ and has finite unramified diagonal. Explicitly, for every $k$-scheme $T$ and two stable unpointed genus-$g$ families $C\\to T$ and $D\\to T$, the functor on $T$-schemes $T'$ sending $T'$ to the set of $T'$-isomorphisms $C_{T'}\\xrightarrow{\\sim}D_{T'}$ is represented by a finite unramified $T$-scheme. Unramified means locally of finite type with diagonal an open immersion. The finite diagonal assertion refers to the 2-fibre-product convention of that definition; in particular the inertia morphism, whose fibre at a curve is its automorphism group scheme, is finite. Fields, schemes, finite type and finite morphisms use [def-weil-field], [def-pc-scheme], [def-weil-finite-type-morphism] and [def-weil-finite-integral-morphism].",
+ "source": {
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Tags 0E7A (lemma-stable-curves-deligne-mumford), 0E9A (lemma-stable-separated), and 0E9C (theorem-stable-smooth-proper): unramified proper diagonal is finite, and properness gives finite type."
+ },
+ "stmt_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-weil-unramified-morphism",
+  "def-sfb-unordered-pointed-isom"
+ ],
+ "proof": [
+  {
+   "text": "Put $r=19(g-1)$ and $P(m)=20(g-1)m+1-g$. The ten-canonical parameter theorem gives a projective finite-type Hilbert scheme $Z$ and a locally closed subscheme $J$ parametrizing projectively framed stable curves. Write $J$ as a closed subscheme of an open $V\\subseteq Z$. A field is Noetherian (its only ideals are zero and the whole field), so the finite-type-over-Noetherian theorem makes $Z$ Noetherian. The open-subscheme theorem makes every open of $Z$ quasi-compact; in particular $V\\to Z$ is a quasi-compact open immersion, and hence of finite type by the cited open-immersion theorem. The closed immersion $J\\to V$ is of finite type directly from the definition: on an affine open its inverse image is $\\operatorname{Spec}(A/I)$, a cyclic $A$-module and a finitely generated $A$-algebra. Composition gives $J\\to\\operatorname{Spec}k$ of finite type. This uses the parameter theorem's locally closed locus only, not any claim that the whole stable stack is already of finite type.",
+   "uses": [
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-sfb-finite-type-composition-base-change",
+    "def-weil-finite-type-morphism",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0E9B (lemma-stable-quasi-compact), bounded pluricanonical parameter argument; reuse the existing ten-canonical parameter node instead of introducing a second tricanonical parameter."
+   }
+  },
+  {
+   "text": "Write $\\mathcal M=\\overline{\\mathcal M}_{g,0}$. The existing unpointed-coarse theorem states, in particular, that this very groupoid is an algebraic stack smooth over $k$. Thus a smooth scheme atlas has smooth composite to $\\operatorname{Spec}k$. Such a composite is locally finitely presented by the smooth-morphism definition, hence locally of finite type (a finitely presented algebra has finitely many generators). This is the atlas definition of local finite type for the stack. For quasi-compactness, let $B$ be any affine $k$-scheme. The scheme $J_B$ is of finite type over $B$ by finite-type base change, so is quasi-compact. Every geometric stable curve over $B$ admits a projective frame of its ten-canonical sections, so $J_B\\to\\mathcal M_B$ is surjective on geometric isomorphism classes by the parameter theorem. Pulling back any open cover of $|\\mathcal M_B|$ gives an open cover of $J_B$; a finite subcover covers $|\\mathcal M_B|$ by this surjectivity. Hence $\\mathcal M\\to\\operatorname{Spec}k$ is quasi-compact. Together with local finite type this proves finite type. Here finite type for a stack means locally of finite type, checked on smooth atlases, and quasi-compact. No inference from finite type of the coarse scheme alone is made.",
+   "uses": [
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "def-sbc-smooth-morphisms",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tags 0E9B and 0E9C (lemma-stable-quasi-compact, theorem-stable-smooth-proper); stacks-morphisms.tex definition-locally-finite-type, finite type = locally finite type and quasi-compact."
+   }
+  },
+  {
+   "text": "Set $S=J\\times_kJ$. It is a finite-type $k$-scheme: its first projection is a base change of $J\\to\\operatorname{Spec}k$, and compose with the other structure morphism. Pull back the universal framed curve from each factor to obtain $C_S,D_S$. The parameter theorem supplies their closed ten-canonical embeddings into $\\mathbf P^{r-1}_S$, so these are projective in the fixed-projective-space convention required by the existing pointed-Isom theorem. They are flat finitely presented stable genus-$g$ families by what $J$ represents. Apply that theorem with zero marked sections. Its hypothesis is precisely finite type of $S$ over the field, not normality: normality belongs only to its separate generic-extension conclusion. We obtain a finite unramified $S$-scheme $I_S$ representing every unpointed isomorphism between $C_S$ and $D_S$, naturally on all $S$-schemes. We retain these curve automorphisms; a choice of frame in this step parametrizes the curves, and imposes no frame-preservation condition on their isomorphisms.",
+   "uses": [
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-stable-pointed-isom-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tags 0E7A and 0E9A: finite unramified Isom; use the already split stronger pointed-Isom result, with empty markings, on the finite-type universal-pair base."
+   }
+  },
+  {
+   "text": "Now let $T$ be an arbitrary $k$-scheme and $C,D$ the two families in the question. By the parameter theorem, their ten-canonical pushforwards are finite-rank locally free, commute with base change, and have Zariski locally trivial projective-frame torsors. Choose a common Zariski open cover $T=\\bigcup_aT_a$ on which both have frames. Each framed family then gives a map $T_a\\to J$, and the pair gives $v_a:T_a\\to S$. Their underlying curves are the pullbacks of $C_S,D_S$. Form $I_a=T_a\\times_{S,v_a}I_S$. Associativity of scheme fibre products identifies its points over any $U\\to T_a$ with precisely $\\operatorname{Isom}_U(C_U,D_U)$; in particular it parametrizes all isomorphisms, not just those preserving the chosen frames. The finite-morphism base-change statement and the unramified base-change statement show $I_a\\to T_a$ is finite unramified. Neither statement requires $T_a$ to be Noetherian or of finite type.",
+   "uses": [
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-unramified-base-change-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tags 0E7A and 0E9A, extension from a framed universal pair by arbitrary base change; morphisms.tex Tags 01WJ and 02GA for the cited scheme base-change tools."
+   }
+  },
+  {
+   "text": "On $T_{ab}=T_a\\cap T_b$, both $I_a\\times_TT_{ab}$ and $I_b\\times_TT_{ab}$ represent the same isomorphism functor. Identify them by the unique map sending a curve isomorphism to that same curve isomorphism. In particular the identification for $a=b$ is the identity, reverse identifications are inverses, and on $T_a\\cap T_b\\cap T_c$ their composites agree because both send every isomorphism to itself. The domain $U_{ab}=I_a\\times_TT_{ab}$ is open in $I_a$; the overlap identifications take $U_{ab}\\cap U_{ac}$ to $U_{ba}\\cap U_{bc}$ since both are the inverse image of the same triple intersection. These are exactly the hypotheses of the scheme-gluing node. It gives a scheme $I$ covered by the $I_a$, with precisely these overlaps. The maps $I_a\\to T_a\\to T$ agree on them, so the morphism-gluing node gives $I\\to T$. The inverse image of $T_a$ is $I_a$: on every chart $I_b$ it is the specified overlap $I_b\\times_TT_a$, identified with the corresponding open of $I_a$.",
+   "uses": [
+    "lem-weil-pbc-glue-schemes",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JB and 01JC (lemma-glue, lemma-glue-schemes); canonical-overlap construction and gluing maps."
+   }
+  },
+  {
+   "text": "For any $U\\to T$, put $U_a=U\\times_TT_a$. A morphism $U\\to I$ over $T$ is the same as maps $U_a\\to I_a$ agreeing on overlaps, by morphism gluing. These maps are the local curve isomorphisms $C_{U_a}\\xrightarrow{\\sim}D_{U_a}$. Compatible local isomorphisms glue to an isomorphism $C_U\\xrightarrow{\\sim}D_U$: apply the same morphism-gluing theorem on the inverse images of the $U_a$ in $C_U$, and also to the inverse maps on $D_U$; the two composites are identities because this holds on the cover. The construction is unique and commutes with further pullback since every local representing bijection does. Thus $I$ represents exactly the functor in the question on all $T$-schemes.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JA (section-glueing-schemes), mapping property; the cited general morphism-gluing statement supplies both sheaf conditions."
+   }
+  },
+  {
+   "text": "Since $I\\times_TT_a=I_a$ and every $I_a\\to T_a$ is finite, the finite-local-on-target theorem makes $I\\to T$ finite. It is unramified directly from the stated definition. Local finite type is checked at a point in one of the open charts $I_a$, where it holds. The open subsets $I_a\\times_{T_a}I_a$ cover $I\\times_TI$: any point of this fibre product has a common image in some $T_a$. Above each such open the diagonal of $I/T$ is the open immersion diagonal of $I_a/T_a$. Its image is therefore open, and the inverse maps from these images to $I_a$ agree on overlaps, as inverses of the same diagonal; morphism gluing identifies the diagonal with that open subscheme. Hence the diagonal of $I/T$ is an open immersion and $I\\to T$ is unramified. This explicitly supplies the locality argument without assuming flatness.",
+   "uses": [
+    "lem-weil-pbc-finite-local-on-target",
+    "def-weil-unramified-morphism",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WI (lemma-finite-local); Tag 02G4 (definition-unramified), with the open-diagonal formulation in 02GE and its elementary open-local gluing argument."
+   }
+  },
+  {
+   "text": "By the 2-fibre-product convention, the base change of $\\Delta_{\\mathcal M/k}$ by the pair $(C,D):T\\to\\mathcal M\\times_k\\mathcal M$ has objects given by an isomorphism $C\\xrightarrow{\\sim}D$ after pullback. An arrow in that fibre which lies over the identity of $T$ is determined uniquely by the compatibility with the fixed $C,D$; thus this fibre groupoid is equivalent to the discrete groupoid of the just-represented isomorphism functor. The preceding construction for every $T,C,D$ therefore proves that the diagonal is represented by finite unramified schemes. For inertia specialize to $D=C$: its pullback to $T$ is $\\operatorname{Aut}_T(C)=\\operatorname{Isom}_T(C,C)$, so its projection is finite too. This includes the empty base and arbitrary nonreduced bases, and makes no claim that the automorphism groups themselves are trivial.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tags 0E7A and 0E9A, diagonal and inertia interpreted through the explicit 2-fibre-product definition."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-sbc-smooth-morphisms",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-unramified-morphism",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sfb-stable-pointed-isom-finite",
+  "lem-sfb-ten-canonical-hilbert-parameter",
+  "lem-sfb-unpointed-stable-coarse-projective",
+  "lem-weil-pbc-finite-local-on-target",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-glue-schemes",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-unramified-base-change-open"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Tags 0E7A, 0E9A, 0E9B, 0E9C. Agent assembly of existing stronger DAG inputs: ten-canonical bounded parameter, smoothness, and finite-type-base pointed Isom; arbitrary-base passage by Zariski projective frames and scheme gluing."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The isomorphism functor between two stable genus at least two curves is finite and unramified",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallyUnramified.iff_of_equiv\", \"module\": \"Mathlib.RingTheory.Unramified.Basic\", \"type\": \"(e : A ≃ₐ[R] B) : FormallyUnramified R A ↔ FormallyUnramified R B\", \"doc\": \"If there exists an $ R $-algebra isomorphism $ e : A \\\\simeq_R B $, then $ A $ is formally unramified over $ R $ if and only if $ B $ is formally unramified over $ R $.\"}\n  {\"name\": \"RingHom.FormallyUnramified.respectsIso\", \"module\": \"Mathlib.RingTheory.RingHom.Unramified\", \"type\": \": RespectsIso FormallyUnramified\", \"doc\": \"If a ring homomorphism $ f : R \\\\to S $ is formally unramified, then composing $ f $ with a ring isomorphism $ e : S \\\\cong T $ or $ e : R \\\\cong S $ preserves the formally unramified property. That is, \"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instOfIsIsoScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"[IsIso f] : IsFinite f\", \"doc\": \"Any isomorphism between schemes is a finite morphism. That is, if $ f : X \\\\to Y $ is an isomorphism of schemes, then $ f $ satisfies the definition of a finite morphism, meaning it is affine and the i\"}\n  {\"name\": \"FintypeCat.instFiniteIso\", \"module\": \"Mathlib.CategoryTheory.FintypeCat\", \"type\": \"(X Y : FintypeCat) : Finite (X ≅ Y)\", \"doc\": \"For any two finite types $X$ and $Y$ in the category of finite types, the set of isomorphisms between $X$ and $Y$ is finite.\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instReflectsIsomorphismsActionFintypeCatAutFunctorFunctorToAction\", \"module\": \"Mathlib.CategoryTheory.Galois.Action\", \"type\": \": Functor.ReflectsIsomorphisms (functorToAction F)\", \"doc\": \"The functor from a pre-Galois category $\\\\mathcal{C}$ to the category of actions of its automorphism group $\\\\mathrm{Aut}(F)$ on finite types reflects isomorphisms. Specifically, if a morphism $f$ in $\\\\\"}\n  {\"name\": \"CategoryTheory.Functor.mapIso\", \"module\": \"Mathlib.CategoryTheory.Iso\", \"type\": \"(F : C ⥤ D) {X Y : C} (i : X ≅ Y) : F.obj X ≅ F.obj Y\", \"doc\": \"Given a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and an isomorphism $ i : X \\\\cong Y $ in $ \\\\mathcal{C} $, this function constructs the isomorphism $ F(X) \\\\cong F(Y) $ in $ \\\\mathcal{D} $ by applying\"}\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.ofIso\", \"module\": \"Mathlib.CategoryTheory.Functor.FullyFaithful\", \"type\": \"{G : C ⥤ D} (e : F ≅ G) : G.FullyFaithful\", \"doc\": \"Given a fully faithful functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and an isomorphism $ e : F \\\\cong G $ between functors $ F, G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, the functor $ G $ is also fully faithfu\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderCompositionScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \": MorphismProperty.IsStableUnderComposition @FormallyUnramified\", \"doc\": \"The composition of two formally unramified morphisms of schemes is also formally unramified.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme normalization, scheme morphism, abstract group action or number-field inertia declarations do not state this stack/moduli assertion or a one-line generalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The diagonal of the Deligne Mumford moduli stack of stable curves is finite unramified",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.FormallyUnramified f]\\n  [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"If a morphism of schemes is formally unramified and locally of finite type, then its diagonal morphism in the pullback is an open immersion.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y)\\n  [AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)],\\n  AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If the diagonal morphism of a morphism $ f $ of schemes is an open immersion, then $ f $ is formally unramified. This instance asserts that the condition of the diagonal being an open immersion suffic\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instDiagonalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any morphism $ f $ of schemes, the diagonal morphism from $ X $ to the pullback of $ f $ against itself is an immersion. This asserts that the canonical diagonal map associated to a morphism of sc\"}\n  {\"name\": \"AlgebraicGeometry.universallyInjective_eq_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective\", \"type\": \"@AlgebraicGeometry.UniversallyInjective = CategoryTheory.MorphismProperty.diagonal @AlgebraicGeometry.Surjective\", \"doc\": \"A morphism of schemes is universally injective if and only if its diagonal morphism (obtained from the pullback of the morphism with itself) is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instLiftSchemeId\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme},\\n  AlgebraicGeometry.IsImmersion\\n    (CategoryTheory.Limits.prod.lift (CategoryTheory.CategoryStruct.id X) (CategoryTheory.CategoryStruct.id X))\", \"doc\": \"For any scheme $X$, the diagonal morphism $X \\to X \\times X$ defined by lifting the identity morphism on $X$ to the product is an immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ {Q : AlgebraicGeometry.AffineTargetMorphismProperty} [Q.IsLocal], Q.diagonal.IsLocal\", \"doc\": \"If a property $ Q $ of morphisms with affine targets is local on the target scheme, then the diagonal property $ Q $ (preserved under pullbacks along open immersions from affine schemes) is also local\"}\n  {\"name\": \"AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  AlgebraicGeometry.IsZariskiLocalAtTarget P.diagonal\", \"doc\": \"If a morphism property $P$ on schemes is Zariski local at the target, then the diagonal morphism property $P.diagonal$ (defined via pullbacks) is also Zariski local at the target. This asserts that th\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) {Q : AlgebraicGeometry.AffineTargetMorphismProperty}\\n  [AlgebraicGeometry.HasAffineProperty P Q], AlgebraicGeometry.HasAffineProperty P.diagonal Q.diagonal\", \"doc\": \"If a morphism property $P$ has the affine property with respect to another property $Q$ in the category of schemes, then the diagonal morphism property of $P$ also has the affine property with respect\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme normalization, scheme morphism, abstract group action or number-field inertia declarations do not state this stack/moduli assertion or a one-line generalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsUnramified\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme normalization, scheme morphism, abstract group action or number-field inertia declarations do not state this stack/moduli assertion or a one-line generalization"
+  },
+  {
+   "tool": "grep",
+   "query": "stableCurve|stable_curve|moduli.*diagonal|diagonal.*moduli",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme normalization, scheme morphism, abstract group action or number-field inertia declarations do not state this stack/moduli assertion or a one-line generalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Isom scheme of two stable curves over a scheme is finite unramified",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.FormallyUnramified\", \"doc\": \"The property of being formally unramified is stable under base change. That is, if $ f: X \\to Y $ is a formally unramified morphism of schemes, then any base change (pullback) of $ f $ also satisfies t\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instOfIsIsoScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [CategoryTheory.IsIso f], AlgebraicGeometry.IsFinite f\", \"doc\": \"Any isomorphism between schemes is a finite morphism. That is, if $ f : X \\\\to Y $ is an isomorphism of schemes, then $ f $ satisfies the definition of a finite morphism, meaning it is affine and the i\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.FormallyUnramified f]\\n  [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"If a morphism of schemes is formally unramified and locally of finite type, then its diagonal morphism in the pullback is an open immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"RingHom.FormallyUnramified.respectsIso\", \"module\": \"Mathlib/RingTheory/RingHom/Unramified\", \"type\": \"RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => RingHom.FormallyUnramified\", \"doc\": \"If a ring homomorphism $ f : R \\\\to S $ is formally unramified, then composing $ f $ with a ring isomorphism $ e : S \\\\cong T $ or $ e : R \\\\cong S $ preserves the formally unramified property. That is, \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y)\\n  [AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)],\\n  AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If the diagonal morphism of a morphism $ f $ of schemes is an open immersion, then $ f $ is formally unramified. This instance asserts that the condition of the diagonal being an open immersion suffic\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.FormallyUnramified (CategoryTheory.CategoryStruct.comp f g)],\\n  AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If the composition of morphisms $ f: X \\to Y $ and $ g: Y \\to Z $ of schemes is formally unramified, then $ f $ is formally unramified.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme normalization, scheme morphism, abstract group action or number-field inertia declarations do not state this stack/moduli assertion or a one-line generalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The moduli stack of stable genus at least two curves is of finite type and its isomorphism functors are finite unramified",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.LocallyOfFiniteType\", \"doc\": \"In the category of schemes, the property of being locally of finite type is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are morphisms of schemes that are locally of finite \"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instOfIsIsoScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [CategoryTheory.IsIso f], AlgebraicGeometry.IsFinite f\", \"doc\": \"Any isomorphism between schemes is a finite morphism. That is, if $ f : X \\\\to Y $ is an isomorphism of schemes, then $ f $ satisfies the definition of a finite morphism, meaning it is affine and the i\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsFinite\", \"doc\": \"The composition of two finite morphisms of schemes is again a finite morphism.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instContainsIdentitiesScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.ContainsIdentities @AlgebraicGeometry.IsFinite\", \"doc\": \"For any scheme $X$, the identity morphism $\\\\text{id}_X : X \\\\to X$ is a finite morphism. This instance asserts that the class of finite morphisms between schemes satisfies the property of containing id\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.LocallyOfFiniteType\", \"doc\": \"The property of being a morphism locally of finite type is multiplicative: if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are morphisms of schemes that are locally of finite type, then their composition $ g \\\\\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: all returned declarations concern ordinary scheme morphisms or formal unramifiedness; none states stable-curve moduli finite type or Isom representability."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsUnramified\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: all returned declarations concern ordinary scheme morphisms or formal unramifiedness; none states stable-curve moduli finite type or Isom representability."
+  },
+  {
+   "tool": "grep",
+   "query": "stableCurve|stable_curve|moduli.*diagonal|diagonal.*moduli",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: all returned declarations concern ordinary scheme morphisms or formal unramifiedness; none states stable-curve moduli finite type or Isom representability."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The isomorphism scheme of two stable curves over any base is finite and unramified",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.instOfIsIsoScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"[IsIso f] : IsFinite f\", \"doc\": \"Any isomorphism between schemes is a finite morphism. That is, if $ f : X \\\\to Y $ is an isomorphism of schemes, then $ f $ satisfies the definition of a finite morphism, meaning it is affine and the i\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instOfIsIsoScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsIso f] : IsClosedImmersion f\", \"doc\": \"Every isomorphism of schemes is a closed immersion. Specifically, if $ f: X \\to Y $ is an isomorphism of schemes, then it induces a homeomorphism of the underlying topological space of $ X $ onto a clo\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \": MorphismProperty.IsMultiplicative @FormallyUnramified\", \"doc\": \"The property of being formally unramified is multiplicative; that is, the composition of two formally unramified morphisms of schemes is again formally unramified.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"[IsOpenImmersion (pullback.diagonal f)] : FormallyUnramified f\", \"doc\": \"If the diagonal morphism of a morphism $ f $ of schemes is an open immersion, then $ f $ is formally unramified. This instance asserts that the condition of the diagonal being an open immersion suffic\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderCompositionScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \": MorphismProperty.IsStableUnderComposition @FormallyUnramified\", \"doc\": \"The composition of two formally unramified morphisms of schemes is also formally unramified.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: all returned declarations concern ordinary scheme morphisms or formal unramifiedness; none states stable-curve moduli finite type or Isom representability."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stable curve automorphism schemes and Isom schemes are finite unramified over the base scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.FormallyUnramified\", \"doc\": \"The property of being formally unramified is stable under base change. That is, if $ f: X \\to Y $ is a formally unramified morphism of schemes, then any base change (pullback) of $ f $ also satisfies t\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instOfIsIsoScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [CategoryTheory.IsIso f], AlgebraicGeometry.IsFinite f\", \"doc\": \"Any isomorphism between schemes is a finite morphism. That is, if $ f : X \\\\to Y $ is an isomorphism of schemes, then $ f $ satisfies the definition of a finite morphism, meaning it is affine and the i\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderCompositionScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.FormallyUnramified\", \"doc\": \"The composition of two formally unramified morphisms of schemes is also formally unramified.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.FormallyUnramified\", \"doc\": \"The property of being formally unramified is multiplicative; that is, the composition of two formally unramified morphisms of schemes is again formally unramified.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary scheme or ring morphism declarations, not stable-curve moduli."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stable-abelian-level-normalization",
+  "date": "2026-10-22",
+  "group": "Q23"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: finite diagonal of stable moduli.",
+   "via": [
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-stable-isom-finite-unramified",
+  "worker": "stage1",
+  "summary": "No new nodes. Reused the existing ten-canonical Hilbert parameter and finite-unramified pointed-Isom theorem on its finite-type universal-pair base. Extended to arbitrary bases by Zariski projective frames, canonical Isom gluing and scheme base-change/locality tools. Proved stack finite type from smoothness plus the bounded parameter, rather than confusing coarse-space finite type with stack finite type. Statement unchanged; named its existing unramified definition in stmt_deps.",
+  "blueprint": "The inherited from.place locates this supporting finite-diagonal input below paragraph (3) of det-thm-sf-ctf-stability-direct-images, the alteration/plurinodal route through de Jong 3.7 and 3.8. Steps 1-2 supply finite type; steps 3-7 the finite-unramified Isom schemes on arbitrary bases; step 8 the stack diagonal and inertia. Whole-blueprint searches stable curve, stable unpointed, and 0E9C found no imported duplicate. The inherited null ancestor and via list are retained, as generated by ancestor on the live DAG.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-unramified-base-change-open",
+    "why": "Generic scheme finiteness, finite-type, base-change or Zariski-gluing tool used on parameter schemes and Isom charts; it does not replace the alteration/moduli route of the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-unramified-base-change-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q66-54e5e795f",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-54e5e795f (reviewer sub-agent of L); spot-checked: I read the whole item. The statement is unchanged and matches the live side node; there are no new nodes. The item is not on route-pivot-dropped, has no re-split note, and cites no SGA. I checked the source, Stacks moduli-curves.tex: 0E7A (l.2568), 0E9A (l.3230), 0E9B (l.3287) and 0E9C (l.3343). Step by step: (1) J is of finite type through the chain finite-type-over-Noetherian, then open subscheme, then qc open immersion, then the affine-local closed immersion. (2) Only the smoothness clause of the coarse-projective node is used, so the stack is locally of finite type; J_B is quasi-compact and surjective on geometric points, so the stack is quasi-compact. Finite type is not inferred from the coarse space Q_g. (3) The pointed-Isom theorem needs a finite-type base, which S=J×J is; the universal curves embed in P^{r-1}_S, so its projectivity hypothesis holds; n=0 is allowed. (4) Zariski-local frames give maps to J, and finite and unramified pass to the charts by base-change permanence, which has no Noetherian hypothesis on T. Isom is not restricted to frame-preserving maps. (5)-(6) Scheme gluing has every hypothesis checked, the cocycle holds by Yoneda, no intersection is assumed affine, and local isomorphisms and their inverses glue to an isomorphism. (7) Finiteness is local on the target by clause (3); the diagonal is shown to be an open immersion by an explicit local argument. (8) The diagonal fibre is discrete by the 2-fibre-product convention, and inertia is the case D=C. Edge cases checked: empty T, characteristic dividing the automorphism order, non-Noetherian T. Recomputed closures: no node the item cites reaches the item, so there is no cycle. No existing node duplicates the item. The citer (stable abelian-level normalization) uses exactly finite type plus finite diagonal. Route: the sfb inputs are in the same unit, the pbc inputs are Mathlib leaves, and the one declared tool_use (unramified base change) is accepted. Batch-5 finding: the batch-5 closure of both targets is identical with and without the item's new edges (gain 0 nodes). Of the flagged nodes, def-trf-semistable-multipointed-pair is a general definition and lem-trf-nodal-curve-lci-criterion is a generic fact about nodal curves (nodal iff lci with unramified singular locus). Neither is a step of the trace formula or Poincare duality proofs, and neither assumption gives them, so I accept both. No fixes."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StableIsomFiniteUnramified",
+  "declaration": "AlgebraicGeometry.StablePointedModuli.finite_type_finite_unramified_isom",
+  "declarations": [
+   "AlgebraicGeometry.StablePointedModuli.fiberCurve",
+   "AlgebraicGeometry.StablePointedModuli.finite_type_finite_unramified_isom"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StableIsomFiniteUnramified.lean",
+  "statement": "theorem finite_type_finite_unramified_isom (k : Type u) [Field k] (g : ℕ) (hg : 2 ≤ g) : (∃ (U : Over (Spec (.of k))) (a : BasedFunctor (discreteModuli (yoneda.obj U)) (BasedCategory.ofFunctor (forget (Spec (.of k)) g 0))), LocallyOfFiniteType U.hom ∧ QuasiCompact U.hom ∧ ∀ (T : Over (Spec (.of k))) (t : BasedFunctor (discreteModuli (yoneda.obj T)) (BasedCategory.ofFunctor (forget (Spec (.of k)) g 0))), ∃ (Z : AlgebraicSpace (Spec (.of k))) (p : Z.obj.obj ⟶ yoneda.obj T), HasSpaceBaseChange a T t Z p ∧ SpaceMapIsEtale Z T p ∧ SpaceMapIsSurjective Z T p) ∧ (∀ (T : Over (Spec (.of k))) (C D : Fiber (Spec (.of k)) g 0 T), ∃ I : Over T.left, IsFinite I.hom ∧ IsUnramified I.hom ∧ ∃ e : (Over.pullback I.hom).obj (fiberCurve C) ≅ (Over.pullback I.hom).obj (fiberCurve D), ∀ (V : Over T.left) (eV : (Over.pullback V.hom).obj (fiberCurve C) ≅ (Over.pullback V.hom).obj (fiberCurve D)), ∃! b : V ⟶ I, eV.hom.left ≫ pullback.fst (fiberCurve D).hom V.hom = MultipointedPair.parameterMap (fiberCurve C) b ≫ e.hom.left ≫ pullback.fst (fiberCurve D).hom I.hom)",
+  "branch": "sheaf-dag",
+  "by": "NW",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Finite type via a finite-type surjective etale atlas of the known DM stack; finite unramified diagonal via universal Isom schemes on all bases. The same-family specialization is finite inertia. fiberCurve is the canonical curve over the specified fibre base, not a chosen isomorphism class. Uses the already landed parameterMap without redefining it."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8c312c02f",
+  "group": "NW",
+  "result": "pass",
+  "note": "I read the node, all 7 statement-dependency records (identical to live), the StablePointedModuliGroupoids, UnorderedPointedIsom and UnramifiedMorphism sources, and the Stacks 0E7A/0E9A/0E9B/0E9C source place. The one added stmt_dep, def-sfb-unordered-pointed-isom, owns parameterMap; it is a definition, so there is no cycle. lean.statement is verbatim. Finite type is stated as a finite-type, quasi-compact, étale surjective atlas represented by algebraic spaces; this is equivalent for the DM stack given by lem-sfb-unpointed-stable-coarse-projective, and the def node offers only étale atlas vocabulary. The Isom clause is fully representable on every T-scheme: the ∃! b equation is eV = b^*e (same pattern as IsUniversalUnorderedIsom), with IsFinite and the recorded IsUnramified; fiberCurve is a canonical eqToHom transport, and D = C gives inertia. No extra hypotheses or universe restriction. Edge cases empty T/V, empty Isom, Aut, g = 2 and every characteristic are covered. The docstrings carry the source, the blueprint tag and the 8 proof steps; only sorry; no hollow data. The released S1 re-split note keeps the statement, so the Lean is unaffected. Advisories: possible reuse of IsUniversalUnorderedIsom; proof-only imports. No compile (no change)."
+ }
+}

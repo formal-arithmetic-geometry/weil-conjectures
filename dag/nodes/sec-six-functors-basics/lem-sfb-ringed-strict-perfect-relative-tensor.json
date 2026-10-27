@@ -1,0 +1,355 @@
+{
+ "id": "lem-sfb-ringed-strict-perfect-relative-tensor",
+ "kind": "statement",
+ "title": "Strict-perfect local tensor model and relative Tor bounds on a ringed site",
+ "statement": "Let $\\mathcal C$ be a site small in the module universe [def-weil-size-convention, def-weil-pbc-sites-and-cohomology], with a conservative family of points (their stalk functors preserve finite limits and all small colimits and jointly detect isomorphisms). Let $R\\to A$ be a morphism of sheaves of commutative rings on $\\mathcal C$. Use module sheaves [def-weil-sheaf-of-modules-category], cochain complexes [def-pc-cochain-complex-modules], and unbounded module derived categories with cochain localization $Q$ [def-weil-abstract-derived-category]. Derived tensor is computed using K-flat resolutions with flat terms [def-pc-kflat-complex, def-pc-flat-sheaf-modules]. Let $M^\\bullet$ be a complex of $A$-modules with $M^q=0$ outside $[c,d]$, where $c\\le d$ are integers, and assume its stalks are flat over the corresponding stalks of $R$ in every degree. Let $P\\in D(A)$, let $U\\in\\mathcal C$, and suppose $P|_U\\simeq Q(L^\\bullet)$ on the slice site $\\mathcal C/U$, where $L^p=0$ outside $[a,b]$, $a\\le b$, and each $L^p$ is a direct summand of a finite free $A|_U$-module. Put $H=P\\otimes_A^{\\mathbf L}Q(M^\\bullet)$. There is an isomorphism in $D(A|_U)$ $$H|_U\\simeq Q(T^\\bullet),\\qquad T^\\bullet=\\operatorname{Tot}(L^\\bullet\\otimes_{A|_U}M^\\bullet|_U),$$ with signed direct-sum total tensor [def-pc-tensor-complex-sheaves]. Each $T^n$ is a finite direct sum of direct summands of finite direct sums of the $M^q|_U$, and $T^n=0$ for $n\\notin[a+c,b+d]$. The scalar restriction of $T^\\bullet$ is termwise flat and K-flat over $R|_U$. Scalar restriction identifies $H|_U$ with $Q(T^\\bullet)$ also in $D(R|_U)$. For every $R$-module sheaf $F$, there is an isomorphism in $D(R|_U)$ $$(H\\otimes_R^{\\mathbf L}F[0])|_U\\simeq Q(T^\\bullet\\otimes_{R|_U}F|_U[0]),$$ whose cohomology vanishes outside $[a+c,b+d]$. No coherence, Noetherian, compactness, geometric morphism, or proper-support hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YQ (lemma-bounded-flat-K-flat), 06YU (definition-derived-tor), 0E8K (lemma-restriction-K-flat), 0DEN (lemma-check-K-flat-stalks); the local model calculation in spaces-perfect.tex Tag 0DKJ (lemma-tensor-perfect)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-cochain-complex-modules",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-localized-ringed-site",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-sfb-ringed-site-point",
+  "def-weil-pbc-ringed-site-derived-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Write $R_U=R|_U$, $A_U=A|_U$, and $M_U=M^\\bullet|_U$. Apply the conservative-point flatness criterion to the underlying $R$-module of each $M^q$: its stalks are flat by hypothesis, so this is a flat $R$-module sheaf. Restriction of a flat sheaf to the slice is flat. Scalar restriction commutes with slice restriction because both retain the same underlying sections and compose their scalar actions with $R(V)\\to A(V)$. Consequently each $M_U^q$, viewed over $R_U$, is flat.",
+   "uses": [
+    "lem-sfb-ringed-site-conservative-flatness",
+    "lem-weil-pbc-slice-restriction-flat",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 05VC (lemma-check-flat-stalks), 0E8J (lemma-restriction-flat); change of rings section."
+   }
+  },
+  {
+   "text": "Each $L^p$ is flat over $A_U$: tensoring with $A_U^{r_p}$ is the finite sum of $r_p$ identity functors, and tensoring with its direct summand $L^p$ is a direct summand of that exact functor. Exactness passes to a direct summand, since its kernels and images are the corresponding summands of the original kernels and images. Thus the definition of flatness applies. Since $L^p=0$ for $p>b$, the bounded-above flat-complex lemma makes $L^\\bullet$ K-flat over $A_U$.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "lem-pc-bounded-above-flat-kflat-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ (lemma-bounded-flat-K-flat); finite free local tensor calculation of spaces-perfect.tex Tag 0DKJ (lemma-tensor-perfect)."
+   }
+  },
+  {
+   "text": "Choose a flat-term K-flat complex $K$ with $Q_AK\\simeq P$, using the essential surjectivity in the K-flat localization equivalence. The one-sided tensor comparison gives $H\\simeq Q_A\\operatorname{Tot}(K\\otimes_A M)$. Exact slice restriction preserves quasi-isomorphisms, finite sums, and the cohomology of complexes. In any fixed total degree only the finitely many indices $c\\le q\\le d$ occur. Thus the ordinary sheaf tensor restriction isomorphisms, on the $(p,q)$ summands, give a chain isomorphism $\\operatorname{Tot}(K\\otimes_A M)|_U\\simeq\\operatorname{Tot}(K|_U\\otimes_{A_U}M_U)$: naturality handles $d_K\\otimes1$, $1\\otimes d_M$, and the unchanged sign $(-1)^p$. The complex $K|_U$ remains K-flat and has flat terms by the two restriction lemmas. The one-sided comparison on the slice therefore identifies this localization with $P|_U\\otimes_{A_U}^{\\mathbf L}Q_{A_U}M_U$. This proves the restriction comparison needed here without requiring an unbounded direct sum to commute with restriction.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-trf-site-one-sided-tensor-normalization",
+    "lem-sfb-ringed-site-restriction-kflat",
+    "lem-weil-pbc-slice-restriction-flat",
+    "lem-sfb-localized-site-tensor-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YU (definition-derived-tor), 0E8K (lemma-restriction-K-flat); sites-modules.tex Tags 0E8J and 03EL (lemma-tensor-product-pullback), localized-site case."
+   }
+  },
+  {
+   "text": "Apply $-\\otimes_{A_U}^{\\mathbf L}Q_{A_U}M_U$ to the supplied isomorphism $P|_U\\simeq Q_{A_U}L^\\bullet$. Step 3 and the one-sided tensor comparison, now with the flat-term K-flat first factor $L^\\bullet$ from step 2 and the arbitrary second factor $M_U$, give $H|_U\\simeq Q_{A_U}L^\\bullet\\otimes_{A_U}^{\\mathbf L}Q_{A_U}M_U\\simeq Q_{A_U}\\operatorname{Tot}(L^\\bullet\\otimes_{A_U}M_U)$. This is the asserted $D(A_U)$ isomorphism and defines the specified complex $T$. No $A_U$-flatness of $M_U$ is used.",
+   "uses": [
+    "lem-trf-site-one-sided-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor), including the preceding construction; spaces-perfect.tex Tag 0DKJ (lemma-tensor-perfect), local tensor model."
+   }
+  },
+  {
+   "text": "The definition of signed total tensor gives $T^n=\\bigoplus_{p+q=n}L^p\\otimes_{A_U}M_U^q$. Only pairs with $a\\le p\\le b$ and $c\\le q\\le d$ contribute, hence only finitely many. For a splitting $L^p\\xrightarrow{i_p}A_U^{r_p}\\xrightarrow{\\pi_p}L^p$ with $\\pi_pi_p=1$, tensoring the two maps with $M_U^q$ still has composite identity. The elementary finite-free tensor isomorphism $A_U^{r_p}\\otimes_{A_U}M_U^q\\simeq(M_U^q)^{r_p}$ sends $(z_j)\\otimes m$ to $(z_jm)_j$, with inverse $(m_j)\\mapsto\\sum_j e_j\\otimes m_j$ on sheafified generators. Thus each summand is a direct summand of a finite sum of $M_U^q$. If $n<a+c$ or $n>b+d$ there is no contributing pair and $T^n=0$.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0DKJ (lemma-tensor-perfect), displayed local terms; sites-cohomology.tex tensor totalization construction before Tag 06YL."
+   }
+  },
+  {
+   "text": "Regard step 5 over $R_U$. A finite sum of flat module sheaves is flat because tensoring an exact sequence with that sum gives the finite sum of its exact tensor sequences. A direct summand is flat: tensoring with its split inclusion and retraction makes the resulting sequence a direct summand of an exact sequence, and kernels and images split as in step 2. Step 1 says all $M_U^q$ are $R_U$-flat. Applying these two observations to the finite sum of summands in step 5 proves every scalar-restricted $T^n$ flat over $R_U$. This argument requires no flatness of $A_U$ over $R_U$.",
+   "uses": [
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0DKJ (lemma-tensor-perfect), last sentence on the relative Tor hypothesis; sites-modules.tex definition of flatness and finite direct-summand calculation."
+   }
+  },
+  {
+   "text": "The scalar-restricted $T$ vanishes above $b+d$ and has flat $R_U$-terms by steps 5 and 6, so it is K-flat over $R_U$. The general scalar-restriction comparison says that termwise scalar restriction preserves quasi-isomorphisms and induces $Q_{R_U}\\operatorname{Res}(T)\\simeq\\operatorname{Res}(Q_{A_U}T)$. Apply that clause with its $B=A=R_U$, $S=A_U$, first ring map the identity and second ring map $R_U\\to A_U$. Applying this functor to the $D(A_U)$ isomorphism of step 4 proves the asserted $D(R_U)$ identification. The termwise scalar and slice restrictions commute by their sectionwise definitions, so its left side is precisely the scalar restriction of $H|_U$.",
+   "uses": [
+    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-pe-restricted-kflat-tensor-identification",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ (lemma-bounded-flat-K-flat); sites-modules.tex change of rings section, restriction retains the underlying abelian sheaf."
+   }
+  },
+  {
+   "text": "For an arbitrary $R$-module sheaf $F$, repeat the restriction calculation of step 3 over $R$, with the first derived object the scalar restriction of $H$ and the bounded second complex $F[0]$. Choose its first-factor representative from the K-flat localization equivalence; restriction preserves its flat terms and K-flatness, and now exactly one tensor summand occurs in each degree. This gives $(H\\otimes_R^{\\mathbf L}F[0])|_U\\simeq H|_U\\otimes_{R_U}^{\\mathbf L}F|_U[0]$. Substitute the $D(R_U)$ identification in step 7 and use the one-sided comparison with the flat-term K-flat complex $\\operatorname{Res}(T)$. The result is $Q_{R_U}(T\\otimes_{R_U}F|_U[0])$, with term $T^n\\otimes_{R_U}F|_U$ and differential $d_T^n\\otimes1$.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-trf-site-one-sided-tensor-normalization",
+    "lem-sfb-ringed-site-restriction-kflat",
+    "lem-weil-pbc-slice-restriction-flat",
+    "lem-sfb-localized-site-tensor-restriction",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YU (definition-derived-tor), 0E8K (lemma-restriction-K-flat); sites-modules.tex Tag 0E8J (lemma-restriction-flat)."
+   }
+  },
+  {
+   "text": "The complex in step 8 is zero in degree $n$ whenever $n<a+c$ or $n>b+d$, by step 5 and $0\\otimes F|_U=0$. Its cohomology in such a degree is the quotient of a subobject of the zero degree-$n$ term, hence is zero. The derived isomorphism in step 8 carries this cohomology vanishing to the left side. All constructions also apply to zero complexes, rank-zero summands, a degenerate one-degree interval, and an empty slice.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor), and the degree bounds in spaces-perfect.tex Tag 0DKJ (lemma-tensor-perfect)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-ringed-site-conservative-flatness",
+  "lem-weil-pbc-slice-restriction-flat",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pc-flat-sheaf-modules",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-trf-site-one-sided-tensor-normalization",
+  "lem-sfb-ringed-site-restriction-kflat",
+  "lem-sfb-localized-site-tensor-restriction",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-sheaf-tensor-product",
+  "lem-pe-restricted-kflat-tensor-identification",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0DKJ (lemma-tensor-perfect), local model and relative Tor calculation, with sites-cohomology.tex Tags 06YQ, 06YU, 0E8K and sites-modules.tex Tags 05VC, 0E8J."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "KFlat|kFlat|StrictlyPerfect|strictlyPerfect|torAmplitude",
+   "results": "Read 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module flatness, Tor functors and the construction of complex tensor do not supply restriction, scalar restriction and relative K-flat local models for sheaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor with a bounded complex of finite projective sheaves is computed by ordinary tensor and has relative flat amplitude",
+   "results": "Read 8 hits: Module.Flat.rTensor_shortComplex_exact, CategoryTheory.Tor', Module.Flat.iff_flat_tensorProduct, Module.Flat.of_projective, Module.Flat.lTensor_shortComplex_exact, HomologicalComplex.tensorObj, CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier, Module.Flat.iff_rTensor_exact. ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module flatness, Tor functors and the construction of complex tensor do not supply restriction, scalar restriction and relative K-flat local models for sheaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"Complex\"",
+   "results": "Read 12 hits: Module.Flat.lTensor_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, ComplexShape.TensorSigns, ComplexShape.TensorSigns.ε', ComplexShape.TensorSigns.add_rel, ComplexShape.TensorSigns.rel_add. ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module flatness, Tor functors and the construction of complex tensor do not supply restriction, scalar restriction and relative K-flat local models for sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded finite projective complex tensored with a bounded complex of relatively flat sheaves is computed by the ordinary total tensor complex and has relative Tor amplitude the sum of the two degree intervals",
+   "results": "Read 8 hits: HomologicalComplex.HasGoodTensor₁₂, HomologicalComplex.HasGoodTensor₂₃, HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX, HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X, HomologicalComplex.HasTensor, CategoryTheory.isZero_Tor'_succ_of_projective, CategoryTheory.Tor', CategoryTheory.Tor. ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module flatness, Tor functors and the construction of complex tensor do not supply restriction, scalar restriction and relative K-flat local models for sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of ring sheaves R to A on a site with enough points, tensor a bounded finite free retract A complex with a bounded R flat A complex; the ordinary tensor represents derived tensor and has summed Tor amplitude over R",
+   "results": "Read 8 hits: Module.Flat.rTensor_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.iff_rTensor_exact', Module.Flat.iff_rTensor_exact, Module.Flat.lTensor_exact, Module.FaithfullyFlat.rTensor_reflects_exact. ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module flatness, Tor functors and the construction of complex tensor do not supply restriction, scalar restriction and relative K-flat local models for sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a ringed site a bounded finite projective complex tensored with a bounded relatively flat complex is a local derived tensor model with Tor amplitude the sum of their intervals",
+   "results": "{\"t\": \"2026-10-23T15:28:16Z\", \"tool\": \"leanfinder\", \"query\": \"On a ringed site a bounded finite projective complex tensored with a bounded relatively flat complex is a local derived tensor model with Tor amplitude the sum of their intervals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.HasGoodTensor₁₂\", \"HomologicalComplex.HasGoodTensor₂₃\", \"HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X\", \"HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX\", \"CategoryTheory.Tor'_obj_obj\", \"CategoryTheory.Tor_obj\", \"CategoryTheory.Tor'\", \"CategoryTheory.Tor\"], \"digest\": \"575b87b0826c2a6a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary module flatness, complex tensor constructions and Tor functors do not state this ringed-site local relative tensor model."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"Complex\"",
+   "results": "{\"t\": \"2026-10-23T15:28:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"tensor\\\", \\\"Complex\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"ComplexShape.TensorSigns\", \"ComplexShape.TensorSigns.ε'\", \"ComplexShape.TensorSigns.add_rel\", \"ComplexShape.TensorSigns.rel_add\"], \"digest\": \"192c46be6eeb8fc1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary module flatness, complex tensor constructions and Tor functors do not state this ringed-site local relative tensor model."
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|kFlat|StrictlyPerfect|strictlyPerfect|torAmplitude",
+   "results": "{\"t\": \"2026-10-23T15:28:45Z\", \"tool\": \"grep\", \"query\": \"KFlat|kFlat|StrictlyPerfect|strictlyPerfect|torAmplitude\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary module flatness, complex tensor constructions and Tor functors do not state this ringed-site local relative tensor model."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor of a bounded finite projective sheaf complex with a bounded relatively flat complex has the sum of the Tor amplitude intervals",
+   "results": "{\"t\": \"2026-10-23T15:29:12Z\", \"tool\": \"leansearch\", \"query\": \"Derived tensor of a bounded finite projective sheaf complex with a bounded relatively flat complex has the sum of the Tor amplitude intervals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Tor'\", \"CategoryTheory.Tor\", \"Module.Flat.rTensor_shortComplex_exact\", \"HomologicalComplex.tensorObj\", \"CategoryTheory.Tor'_obj_obj\", \"HomologicalComplex.tensorHom\", \"CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier\", \"Module.Flat.lTensor_shortComplex_exact\"], \"digest\": \"46c5241ea34053f7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary module flatness, complex tensor constructions and Tor functors do not state this ringed-site local relative tensor model."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over sheaves of rings R to A, a bounded complex of finite free retract A modules tensored with a bounded complex flat over R is K-flat over R and computes derived tensor after localization to a site object",
+   "results": "{\"t\": \"2026-10-23T15:29:13Z\", \"tool\": \"leanfinder\", \"query\": \"Over sheaves of rings R to A, a bounded complex of finite free retract A modules tensored with a bounded complex flat over R is K-flat over R and computes derived tensor after localization to a site object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.iff_rTensor_exact'\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.iff_lTensor_exact'\", \"Module.Flat.iff_rTensor_exact\", \"Module.Flat.of_flat_tensorProduct\", \"Module.Flat.iff_lTensor_exact\", \"Module.FaithfullyFlat.rTensor_reflects_exact\", \"Module.Flat.lTensor_shortComplex_exact\"], \"digest\": \"febccafbada5d81d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary module flatness, complex tensor constructions and Tor functors do not state this ringed-site local relative tensor model."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-noetherian-tensor-perfect",
+  "date": "2026-10-23",
+  "group": "Q37"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 0A1P (lemma-base-change-tensor-perfect), perfectness assertion; perfect means sites-cohomology.tex Tag 08G5 (definition-perfect). Supporting input: Tag 0DKJ (lemma-tensor-perfect), based on Tag 08IS (lemma-perfect-direct-image). Supporting input: general ringed-site local model and relative Tor calculation used in 0DKJ; no direct image or support assertion.",
+   "via": [
+    "lem-sfb-space-noetherian-tensor-perfect",
+    "lem-sfb-proper-support-tensor-perfect",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-ringed-strict-perfect-relative-tensor",
+  "worker": "stage1",
+  "summary": "NF checked the general ringed-site statement against the Stacks local tensor calculation, reused conservative flatness and site restriction nodes, and wrote the finite-total-degree derived comparison, retract flatness and precise interval calculation. No new nodes and no statement change.",
+  "blueprint": "Current latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md (3), through the existing alteration/direct-image prerequisite chain recorded in blueprint.from: local strict-perfect relative Tor model of spaces-perfect.tex 0DKJ. The generic tensor calculation also realizes the explicit total-tensor operation of (1),(2). The imported created.item chain has no blueprint ancestor (blueprint_refs.py ancestor prints None); retained that existing null ancestor and its complete place/via provenance.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-slice-restriction-flat",
+    "why": "Generic ringed-site tensor/flatness/localization ingredient used at its stated generality; the unit supplies the six-functor finiteness route, not a replacement for this module-theoretic tool."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Generic ringed-site tensor/flatness/localization ingredient used at its stated generality; the unit supplies the six-functor finiteness route, not a replacement for this module-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic ringed-site tensor/flatness/localization ingredient used at its stated generality; the unit supplies the six-functor finiteness route, not a replacement for this module-theoretic tool."
+   },
+   {
+    "node": "lem-trf-site-one-sided-tensor-normalization",
+    "why": "Generic ringed-site tensor/flatness/localization ingredient used at its stated generality; the unit supplies the six-functor finiteness route, not a replacement for this module-theoretic tool."
+   },
+   {
+    "node": "lem-sfb-ringed-site-restriction-kflat",
+    "why": "Generic ringed-site tensor/flatness/localization ingredient used at its stated generality; the unit supplies the six-functor finiteness route, not a replacement for this module-theoretic tool."
+   },
+   {
+    "node": "lem-sfb-localized-site-tensor-restriction",
+    "why": "Generic ringed-site tensor/flatness/localization ingredient used at its stated generality; the unit supplies the six-functor finiteness route, not a replacement for this module-theoretic tool."
+   },
+   {
+    "node": "lem-pe-restricted-kflat-tensor-identification",
+    "why": "Generic ringed-site tensor/flatness/localization ingredient used at its stated generality; the unit supplies the six-functor finiteness route, not a replacement for this module-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-slice-restriction-flat",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-trf-site-one-sided-tensor-normalization",
+  "lem-sfb-ringed-site-restriction-kflat",
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-pe-restricted-kflat-tensor-identification"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NF-934b26053",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-934b26053 (reviewer sub-agent of L); spot-checked: S1 delivery with 0 new nodes; the statement is byte-identical to base/live (it was unsplit with an empty proof). The added stmt_deps (localized ringed site, scalar restriction, derived-tensor-descent for ⊗^L) follow the existing convention. Read all 9 steps and every cited statement. Steps 1 and 6: stalk flatness gives R-flatness via 05VC (lem-sfb-ringed-site-conservative-flatness, same unit) and slice restriction preserves it via 0E8J; finite sums and retracts keep R_U-flatness, with no flatness of R→A used. Step 2: retracts of finite free modules are flat; L is bounded above, so K-flat via 06YQ. Steps 3, 4 and 8: K-flat flat-term representatives come from descent essential surjectivity and are restricted using 0E8K/0E8J and the sheafified tensor restriction; only finitely many q∈[c,d] occur in each degree. The one-sided normalization handles the non-flat second factors M_U and F[0]. Step 7: λ clause of lem-pe-restricted-kflat-tensor-identification with B=A=R_U, S=A_U, plus K-flatness of Res T bounded above by b+d. Steps 5 and 9: T^n=0 outside [a+c,b+d], so cohomology vanishes there. Sources read: 0DKJ spaces-perfect l.5577 (the local finite-free model and Tor from flatness of G^i), 05VC, 0E8J, 0E8K, 06YQ; tag numbers verified in tags/tags. Edge cases tested: zero complexes, rank 0, single degrees (interval {a+c}), R=A, the ℤ→ℤ/2 hypothesis check, empty slice. Scheme-site analogues (lem-pc-strict-perfect-relative-tensor-model and the tor-bound node) are specialisations, not duplicates. Accepted 7 generic tool_uses. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingedSiteStrictPerfectRelativeTensor",
+  "declaration": "SheafOfModules.ringedSite_strictPerfect_relativeTensor",
+  "declarations": [
+   "SheafOfModules.strictPerfectModules",
+   "SheafOfModules.strictPerfectRestrictScalars",
+   "SheafOfModules.strictPerfectRestrictScalarsPreservesFiniteLimits",
+   "SheafOfModules.strictPerfectRestrictScalarsPreservesFiniteColimits",
+   "SheafOfModules.strictPerfectTotalTensor",
+   "SheafOfModules.strictPerfectSliceSmall",
+   "SheafOfModules.strictPerfectSliceComplex",
+   "SheafOfModules.strictPerfectDerivedSlice",
+   "SheafOfModules.ringedSite_strictPerfect_relativeTensor"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/RingedSiteStrictPerfectRelativeTensor.lean",
+  "statement": "theorem ringedSite_strictPerfect_relativeTensor {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C] {J : GrothendieckTopology C} (R A : Sheaf J CommRingCat.{r}) (φ : R ⟶ A) (U : C) [HasDerivedCategory.{wA} (strictPerfectModules A)] [HasDerivedCategory.{wR} (strictPerfectModules R)] [HasDerivedCategory.{wAU} (strictPerfectModules (A.over U))] [HasDerivedCategory.{wRU} (strictPerfectModules (R.over U))] (I : Type i) (points : I → GeometricMorphism (Type r) (Sheaf J (Type r))) (hpoints : JointlyReflectIsomorphisms (fun j : I ↦ (points j).inverse)) (stalks : ∀ j : I, RingedSitePoint R (points j)) (M : CochainComplex (strictPerfectModules A) ℤ) (P : DerivedCategory (strictPerfectModules A)) (L : CochainComplex (strictPerfectModules (A.over U)) ℤ) (a b c d : ℤ) (hab : a ≤ b) (hcd : c ≤ d) (hM : ∀ q : ℤ, q < c ∨ d < q → IsZero (M.X q)) (hflat : ∀ (j : I) (q : ℤ), Module.Flat (stalks j).ring ((stalks j).modules.obj ((strictPerfectRestrictScalars φ).obj (M.X q)))) (hL : ∀ p : ℤ, p < a ∨ b < p → IsZero (L.X p)) (hfree : ∀ p : ℤ, ∃ (k : ℕ) (ι : L.X p ⟶ free (R := (sheafCompose (J.over U) (forget₂ CommRingCat.{r} RingCat.{r})).obj (A.over U)) (ULift.{r} (Fin k))) (π : free (R := (sheafCompose (J.over U) (forget₂ CommRingCat.{r} RingCat.{r})).obj (A.over U)) (ULift.{r} (Fin k)) ⟶ L.X p), ι ≫ π = 𝟙 (L.X p)) (eL : strictPerfectDerivedSlice A U P ≅ DerivedCategory.Q.obj L) : ∃ T : CochainComplex (strictPerfectModules (A.over U)) ℤ, T = strictPerfectTotalTensor (A.over U) L (strictPerfectSliceComplex ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj A) U M) ∧ Nonempty (strictPerfectDerivedSlice A U ((siteDerivedTensorIndependentCoefficients J A).obj (P, DerivedCategory.Q.obj M)) ≅ DerivedCategory.Q.obj T) ∧ (∀ n : ℤ, ∃ (k : ℕ) (q : Fin k → ℤ) (s : Fin k → ℕ) (N : Fin k → strictPerfectModules (A.over U)), Nonempty (T.X n ≅ ∐ N) ∧ ∀ j : Fin k, ∃ (ι : N j ⟶ ∐ (fun _ : Fin (s j) ↦ (M.X (q j)).over U)) (π : (∐ (fun _ : Fin (s j) ↦ (M.X (q j)).over U)) ⟶ N j), ι ≫ π = 𝟙 (N j)) ∧ (∀ n : ℤ, n < a + c ∨ b + d < n → IsZero (T.X n)) ∧ (∀ n : ℤ, IsFlatOnSite (J := J.over U) (R := R.over U) ((strictPerfectRestrictScalars ((J.overPullback CommRingCat.{r} U).map φ)).obj (T.X n))) ∧ CochainComplex.IsKFlatIndependentCoefficients (R := R.over U) (((strictPerfectRestrictScalars ((J.overPullback CommRingCat.{r} U).map φ)).mapHomologicalComplex (.up ℤ)).obj T) ∧ Nonempty (((strictPerfectRestrictScalars ((J.overPullback CommRingCat.{r} U).map φ)).mapDerivedCategory).obj (strictPerfectDerivedSlice A U ((siteDerivedTensorIndependentCoefficients J A).obj (P, DerivedCategory.Q.obj M))) ≅ DerivedCategory.Q.obj (((strictPerfectRestrictScalars ((J.overPullback CommRingCat.{r} U).map φ)).mapHomologicalComplex (.up ℤ)).obj T)) ∧ (∀ F : strictPerfectModules R, Nonempty (strictPerfectDerivedSlice R U ((siteDerivedTensorIndependentCoefficients J R).obj ((strictPerfectRestrictScalars φ).mapDerivedCategory.obj ((siteDerivedTensorIndependentCoefficients J A).obj (P, DerivedCategory.Q.obj M)), DerivedCategory.Q.obj ((HomologicalComplex.single (strictPerfectModules R) (.up ℤ) 0).obj F))) ≅ DerivedCategory.Q.obj (strictPerfectTotalTensor (R.over U) (((strictPerfectRestrictScalars ((J.overPullback CommRingCat.{r} U).map φ)).mapHomologicalComplex (.up ℤ)).obj T) ((HomologicalComplex.single (strictPerfectModules (R.over U)) (.up ℤ) 0).obj (F.over U)))) ∧ ∀ n : ℤ, n < a + c ∨ b + d < n → IsZero ((DerivedCategory.homologyFunctor (strictPerfectModules (R.over U)) n).obj (strictPerfectDerivedSlice R U ((siteDerivedTensorIndependentCoefficients J R).obj ((strictPerfectRestrictScalars φ).mapDerivedCategory.obj ((siteDerivedTensorIndependentCoefficients J A).obj (P, DerivedCategory.Q.obj M)), DerivedCategory.Q.obj ((HomologicalComplex.single (strictPerfectModules R) (.up ℤ) 0).obj F))))))",
+  "branch": "sheaf-dag",
+  "by": "Q62",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "H2 repair: module category, signed total tensor and scalar restriction are transparent item helpers of ringedSiteModules, CochainComplex.mapBifunctor/curriedTensor, and SheafOfModules.restrictScalars, owned by their existing definition nodes. The two unnecessary theorem stmt_deps are removed. RestrictedKFlatTensorIdentification is only a plain proof import for exactness instances. Every mathematical clause is unchanged, with independent coefficient and localization universes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cc75b015c",
+  "group": "Q62",
+  "result": "pass",
+  "note": "Re-delivery after H2 return at 692466c22615. The two theorem stmt_deps (kflat-fixed-tensor-triangulated, restricted-kflat-tensor-identification) are removed and replaced by transparent item helpers strictPerfectModules/strictPerfectRestrictScalars/strictPerfectTotalTensor, which equal the old Modules/restrictedTensorScalars/totalTensor (mapBifunctor of curriedTensor) and cite their owning def nodes. Two Prop instance aliases re-expose the existing finite-limit/colimit preservation needed by mapDerivedCategory; their module is a plain proof import. Diff against the returned head: renaming only. Statement, proof and proof_deps unchanged; lean.statement verbatim in the file. Re-checked every hypothesis and conclusion against the node and Stacks 0DKJ/06YQ/06YU/0E8K/05VC: stalk flatness via RingedSitePoint, conservative points, split finite free L, bounds, D(A|U) and D(R|U) isos, finite-sum-of-summands, flat and K-flat Res T, test-module Tor bound. Edge cases covered. The remaining theorem stmt_dep site-derived-tensor-descent legitimately owns the derived tensor. Only sorry is the main theorem; docstrings carry sources and the blueprint id. No compile run (no file changed). No findings."
+ }
+}

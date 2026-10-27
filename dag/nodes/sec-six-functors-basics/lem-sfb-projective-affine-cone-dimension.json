@@ -1,0 +1,410 @@
+{
+ "id": "lem-sfb-projective-affine-cone-dimension",
+ "kind": "statement",
+ "title": "Closed affine cones: dimension and irreducibility",
+ "statement": "Let $k$ be a field [def-weil-field] and $N\\in\\mathbf N$. Write $P=\\mathbf P(\\{0,\\ldots,N\\};\\operatorname{Spec}k)$ [def-nagata-projective-space-base-change] and $A=\\mathbf A^{N+1}_k$ [def-sbc-affine-space], with coordinates $x_0,\\ldots,x_N$ and origin $o=V(x_0,\\ldots,x_N)$. For $i\\in\\{0,\\ldots,N\\}$ let $D_+(T_i)_k\\subseteq P$ be the standard open and $u_{j/i}\\in\\Gamma(D_+(T_i)_k,\\mathcal O_P)$ its coordinate functions as in [lem-weil-pbc-projective-space-standard-charts], so that $D_+(T_i)_k$ is affine with coordinate ring the polynomial ring $k[u_{j/i}:j\\ne i]$, and let $D(x_i)\\subseteq A$ be the open set where $x_i$ does not vanish, $D(x_i)=\\operatorname{Spec}k[x_0,\\ldots,x_N,x_i^{-1}]$. Then there is a unique morphism $\\pi:A\\setminus\\{o\\}\\to P$ such that, for every $i$, $\\pi^{-1}(D_+(T_i)_k)=D(x_i)$ and the restriction $D(x_i)\\to D_+(T_i)_k$ is the spectrum of the $k$-algebra map $k[u_{j/i}:j\\ne i]\\to k[x_0,\\ldots,x_N,x_i^{-1}]$, $u_{j/i}\\mapsto x_j/x_i$. For each closed subset $Z\\subseteq|P|$ define the subset $C(Z)=\\{o\\}\\cup\\pi^{-1}(Z)$ of $|A|$, where all subsets have their induced topologies. Then $C(Z)$ is closed. If $Z$ is nonempty and $\\dim Z=d\\in\\mathbf Z_{\\geq0}$, then $\\dim C(Z)=d+1$, where dimension is topological Krull dimension [def-kun-topological-krull-dimension]. If in addition $Z$ is irreducible [def-weil-irreducible-components], then $C(Z)$ is irreducible. The convention for the empty set is $C(\\varnothing)=\\{o\\}$.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0B2R, varieties-lemma-intersection-in-projective-space, proof, lines 6374-6404: the punctured affine-space projection, its standard charts and the closures of its inverse images."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-nagata-projective-space-base-change",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "def-sbc-affine-space",
+  "def-kun-topological-krull-dimension",
+  "def-weil-irreducible-components"
+ ],
+ "proof": [
+  {
+   "text": "Put $U=A\\setminus\\{o\\}$, $U_i=D(x_i)$ and $P_i=D_+(T_i)_k$. These opens cover $U$ and $P$. On $U_i$ the displayed ring map defines $q_i:U_i\\to P_i$. On $U_i\\cap U_j$ its image lies in $P_i\\cap P_j$: the coordinate $u_{j/i}$ pulls back to the unit $x_j/x_i$. Indeed the standard-chart statement identifies $T_j=u_{j/i}T_i$, with $T_i$ a free generator, so $P_i\\cap P_j$ is exactly the nonvanishing locus of $u_{j/i}$. On this overlap the pullbacks of the coordinates on $P_j$ are $(x_l/x_i)/(x_j/x_i)=x_l/x_j$, including $u_{i/j}=x_i/x_j$. Affine morphism extensionality therefore gives agreement with $q_j$. The morphism-gluing lemma gives $\\pi:U\\to P$ and its uniqueness. For a point in $U_j$, the same unit calculation gives $\\pi(u)\\in P_i$ if and only if $x_i(u)\\ne0$. Thus $\\pi^{-1}(P_i)=U_i$, proving all the required chart clauses.",
+   "uses": [
+    "lem-weil-pbc-projective-space-standard-charts",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2R, lemma-intersection-in-projective-space, proof: punctured projection and its displayed chart maps; omitted details supplied explicitly."
+   }
+  },
+  {
+   "text": "Write $B_i=k[u_{j/i}:j\\ne i]$. The local map is a Laurent-polynomial projection: $B_i[t,t^{-1}]\\cong k[x_0,\\ldots,x_N,x_i^{-1}]$ by $t\\mapsto x_i$ and $u_{j/i}\\mapsto x_j/x_i$. Its inverse sends $x_i$ to $t$, $x_j$ to $u_{j/i}t$ for $j\\ne i$, and $x_i^{-1}$ to $t^{-1}$; both composites fix every algebra generator. The affine fibre-product formula, with the tensor-ring identification $B_i\\otimes_k k[t,t^{-1}]\\cong B_i[t,t^{-1}]$, therefore identifies $q_i$ with the first projection $P_i\\times_k G\\to P_i$, where $G=\\operatorname{Spec}k[t,t^{-1}]=D(t)\\subset\\operatorname{Spec}k[t]$. In the tensor identification $b\\otimes t^m\\mapsto bt^m$ and $bt^m\\mapsto b\\otimes t^m$ are inverse maps.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2R, lemma-intersection-in-projective-space, proof: punctured projection and its displayed chart maps; omitted details supplied explicitly."
+   }
+  },
+  {
+   "text": "Let $Z$ be nonempty, put $Y=\\pi^{-1}(Z)\\subset U$, and choose $z\\in Z\\cap P_i$. Set $L=\\kappa(z)$ and $a_j=u_{j/i}(z)\\in L$ for $j\\ne i$. The ring map $k[x_0,\\ldots,x_N]\\to L[t]$, $x_i\\mapsto t$, $x_j\\mapsto a_jt$, gives $h:\\operatorname{Spec}L[t]\\to A$. At the generic point $(0)$, $t$ is nonzero, and the composite with $\\pi$ has chart homomorphism $B_i\\to L\\hookrightarrow L(t)$ given by evaluation at $z$. Its kernel is the prime of $z$, so $h((0))\\in Y$. At the prime $(t)$, every $x_j$ maps to zero and the contracted prime is $(x_0,\\ldots,x_N)$, so $h((t))=o$. Since $(t)\\in V(0)=\\overline{\\{(0)\\}}$, continuity gives $o\\in\\overline Y$. This uses a residue field, not a rational point of $Z$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2R, lemma-intersection-in-projective-space, proof: the origin is in the closure of every fibre; scalar-line argument."
+   }
+  },
+  {
+   "text": "The subset $Y$ is closed in $U$, since $Z$ is closed and $\\pi$ is continuous. Any point of $U\\setminus Y$ has an open neighbourhood in $A$ contained in $U$ and disjoint from $Y$. Consequently $\\overline Y\\subset Y\\cup\\{o\\}$; the reverse inclusion follows from the previous step. Thus $C(Z)=\\overline Y$ is closed and $Y$ is a dense open subset of $C(Z)$. If $Z=\\varnothing$, the definition instead gives $C(Z)=\\{o\\}=V(x_0,\\ldots,x_N)$, which is closed. This proves the asserted empty-set convention without applying a nonempty-set dimension formula.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2R, lemma-intersection-in-projective-space, proof: punctured projection and its displayed chart maps; omitted details supplied explicitly."
+   }
+  },
+  {
+   "text": "For the dimension calculation give $Z$ its reduced induced closed subscheme structure $Z_r\\hookrightarrow P$. Its chart $Z_i=Z_r\\cap P_i$ is $\\operatorname{Spec}R_i$ for a quotient $R_i=B_i/K_i$ by a radical ideal. Form $Y_r=U\\times_P Z_r$. Closed-immersion base change embeds $Y_r$ as a closed subscheme of $U$. On $U_i$ the affine fibre-product formula and step 2 give $\\operatorname{Spec}(B_i[t,t^{-1}]\\otimes_{B_i}R_i)=\\operatorname{Spec}R_i[t,t^{-1}]\\cong Z_i\\times_kG$; the tensor isomorphism sends $b t^m\\otimes r$ to $\\bar b r t^m$. The primes in this quotient are exactly the primes of $U_i$ whose contractions to $B_i$ contain $K_i$, so its image is $\\pi^{-1}(|Z_i|)$. Hence $|Y_r|=Y$, with the induced topology, and its opens $Y_i=\\pi^{-1}(|Z_i|)$ have these product descriptions. Each nonempty $Z_i$ and $Y_i$ is finite type over $k$: its ring is generated by the finitely many coordinate images and, for $Y_i$, $t,t^{-1}$. The finitely many charts cover, giving finite type globally.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01J3 (lemma-reduced-closed-subscheme) and 01I4 (lemma-fibre-product-affine-schemes); Morphisms Tag 01QR (lemma-base-change-closed-immersion)."
+   }
+  },
+  {
+   "text": "The ring $k[t]$ is a domain: the highest nonzero coefficient of a product of nonzero polynomials is the product of the highest nonzero coefficients. Its nilradical is therefore zero and prime, so its spectrum is irreducible. The ring dimension computation and the spectrum-dimension comparison give $\\dim\\operatorname{Spec}k[t]=1$. The open $G=D(t)$ is nonempty (it contains the zero prime), and the irreducible locally-algebraic open-dimension lemma gives $\\dim G=1$. For every nonempty $Z_i$, the product-dimension lemma now gives $\\dim Y_i=\\dim Z_i+1$. Both factors are nonempty finite-type $k$-schemes, as required. The local-ring dimension comparison identifies the scheme dimensions used by that lemma with the topological dimensions here; isomorphisms of schemes induce homeomorphisms and hence preserve these dimensions.",
+   "uses": [
+    "lem-zl-spectrum-irreducible-nilradical-prime",
+    "lem-sc-p1-polynomial-dimension-one",
+    "lem-weil-pbc-spec-topological-krull-dimension-ring",
+    "lem-sc-dimension-locally-algebraic",
+    "lem-sfb-scheme-product-dimension",
+    "lem-pc-scheme-dimension-local-rings",
+    "lem-weil-pbc-homeomorphism-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0A21 (lemma-dimension-locally-algebraic), (3), and Tag 0B2M (lemma-dimension-product-locally-algebraic), (2); Algebra Tags 00ES, 00OQ and 00KE; Properties Tag 04MU."
+   }
+  },
+  {
+   "text": "Suppose $\\dim Z=d\\geq0$. Open-subspace monotonicity bounds each $\\dim Z_i$ by $d$. The open-cover bound gives the reverse inequality against the maximum of the dimensions of the nonempty $Z_i$. There are finitely many such opens and at least one; their dimensions are nonnegative integers bounded by $d$, so $d=\\max_{Z_i\\ne\\varnothing}\\dim Z_i$. Likewise the opens $Y_i$ cover $Y$, so monotonicity and the open-cover bound give $\\dim Y=\\max_{Y_i\\ne\\varnothing}\\dim Y_i$. Each $Y_i$ is nonempty exactly when $Z_i$ is: a point of $Z_i$ lifts by $t=1$ over its residue field. Step 6 now yields $\\dim Y=d+1$. The spaces to which the cover bound is applied are scheme spaces. The scheme-sobriety lemma gives a unique generic point for each irreducible closed subset, hence quasi-sobriety; it also gives $T_0$, since points with equal closures would be two generic points of the same irreducible closed subset. They have the required induced open-subspace topologies.",
+   "uses": [
+    "lem-weil-pbc-open-subspace-dimension-monotone",
+    "lem-weil-pbc-dimension-bound-open-cover",
+    "lem-weil-pbc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0055 (definition-Krull), open-subspace monotonicity, and Tag 0B7I (lemma-dimension-supremum-local-dimensions), chain argument."
+   }
+  },
+  {
+   "text": "Give the closed subset $C(Z)\\subset A$ its reduced induced closed subscheme structure $C_r$. It is affine, the spectrum of $k[x_0,\\ldots,x_N]/J$ for a radical ideal $J$, and is finite type over $k$ since this quotient is generated by the coordinate images. Step 4 shows that $Y=C(Z)\\setminus\\{o\\}$ is a dense open of $C_r$. The dense-open dimension comparison, which requires finite type but does not require irreducibility, gives $\\dim C(Z)\\leq\\dim Y$. The reverse inequality is open-subspace monotonicity. Therefore $\\dim C(Z)=\\dim Y=d+1$, including $d=0$.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-dense-open-dimension-comparison",
+    "lem-weil-pbc-open-subspace-dimension-monotone"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0A21 (lemma-dimension-locally-algebraic), componentwise dense-open consequence used in Tag 0BXV (lemma-dim-1-projective-completion); Schemes Tag 01J3."
+   }
+  },
+  {
+   "text": "Finally suppose $Z$ is irreducible. Every nonempty $Z_i$ is irreducible: two nonempty relative opens in it are nonempty opens in $Z$ and hence meet. Its ring $R_i$ is reduced by the choice of $Z_r$, and its nilradical is prime by the spectrum irreducibility criterion; thus $R_i$ is a nonzero domain. The ring $R_i[t,t^{-1}]$ is also a domain: the highest nonzero Laurent coefficients of two nonzero finite sums multiply to a nonzero highest coefficient. Its spectrum $Y_i$ is therefore irreducible by the same criterion. For any two nonempty $Z_i,Z_j$, their intersection is nonempty by irreducibility of $Z$; a point there lifts to $Y$ by setting the scalar coordinate equal to $1$ over its residue field. Thus the irreducible opens $Y_i,Y_j$ meet. Fix one nonempty $Y_i$. In every nonempty $Y_j$, the intersection $Y_i\\cap Y_j$ is a nonempty open and hence dense, so $Y_j\\subset\\overline{Y_i}$ and $Y=\\overline{Y_i}$ in $Y$. A closure of an irreducible subset is irreducible: a decomposition into two closed subsets pulls back to such a decomposition on the dense subset. Thus $Y$ is irreducible, and the same observation applied to $C(Z)=\\overline Y$ from step 4 shows that $C(Z)$ is irreducible.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-zl-spectrum-irreducible-nilradical-prime",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00ES (lemma-irreducible), (2); Schemes Tag 01J3; Topology Tag 004W (lemma-irreducible), closure argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-weil-finite-type-morphism",
+  "lem-zl-spectrum-irreducible-nilradical-prime",
+  "lem-sc-p1-polynomial-dimension-one",
+  "lem-weil-pbc-spec-topological-krull-dimension-ring",
+  "lem-sc-dimension-locally-algebraic",
+  "lem-sfb-scheme-product-dimension",
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-weil-pbc-homeomorphism-krull-dimension",
+  "lem-weil-pbc-open-subspace-dimension-monotone",
+  "lem-weil-pbc-dimension-bound-open-cover",
+  "lem-weil-pbc-scheme-sober",
+  "lem-weil-pbc-dense-open-dimension-comparison",
+  "def-weil-irreducible-components"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0B2R, lemma-intersection-in-projective-space, punctured-projection paragraph: explicit chart gluing, Laurent coordinate inverses and scalar specialization supply the omitted details; existing DAG lemmas give product and dense-open dimensions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cone.*dim|dim.*cone|intersection.*dimension|dimension.*intersection",
+   "results": "{\"t\": \"2026-10-23T13:03:06Z\", \"tool\": \"grep\", \"query\": \"cone.*dim|dim.*cone|intersection.*dimension|dimension.*intersection\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\"], \"digest\": \"4dd64de1f8b0b97a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Proj zero-locus closedness and affine chart APIs do not give the punctured-cone morphism, cone dimension shift, and irreducibility; no one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"topologicalKrullDim\", \"ProjectiveSpectrum\"",
+   "results": "{\"t\": \"2026-10-23T13:03:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"topologicalKrullDim\\\", \\\"ProjectiveSpectrum\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Proj zero-locus closedness and affine chart APIs do not give the punctured-cone morphism, cone dimension shift, and irreducibility; no one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine cone of a closed projective algebraic set is closed, has dimension one more, and is irreducible if the projective set is irreducible",
+   "results": "{\"t\": \"2026-10-23T13:03:07Z\", \"tool\": \"leanfinder\", \"query\": \"Affine cone of a closed projective algebraic set is closed, has dimension one more, and is irreducible if the projective set is irreducible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ProjectiveSpectrum.isClosed_zeroLocus\", \"ProjectiveSpectrum.isClosed_iff_zeroLocus\", \"AlgebraicGeometry.Proj.isAffineOpen_basicOpen\", \"ProjectiveSpectrum.zariskiTopology\", \"ProjectiveSpectrum.zeroLocus_vanishingIdeal_eq_closure\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"ProjectiveSpectrum.zeroLocus\"], \"digest\": \"7a035ea22b4db815\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Proj zero-locus closedness and affine chart APIs do not give the punctured-cone morphism, cone dimension shift, and irreducibility; no one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "Projective.*[Kk]rull|[Kk]rull.*[Pp]rojective|cone.*[Kk]rull|[Kk]rull.*cone",
+   "results": "{\"t\": \"2026-10-23T13:09:05Z\", \"tool\": \"grep\", \"query\": \"Projective.*[Kk]rull|[Kk]rull.*[Pp]rojective|cone.*[Kk]rull|[Kk]rull.*cone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Proj zero-locus closedness and affine chart APIs do not give the punctured-cone morphism, cone dimension shift, and irreducibility; no one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For the projection from punctured affine n plus one space to projective n space, adjoining the origin to the inverse image of a nonempty closed subset increases its dimension by one",
+   "results": "{\"t\": \"2026-10-23T13:09:05Z\", \"tool\": \"leansearch\", \"query\": \"For the projection from punctured affine n plus one space to projective n space, adjoining the origin to the inverse image of a nonempty closed subset increases its dimension by one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.isOpenMap_over\", \"AlgebraicGeometry.Proj.basicOpenIsoSpec_inv_ι\", \"Projectivization.Subspace.recOn\", \"AlgebraicGeometry.Proj.instIsOpenImmersionAwayι\", \"Projectivization.Subspace.casesOn\", \"Projectivization.Subspace.spanCarrier.below.mem_add\", \"EuclideanGeometry.orthogonalProjection_apply'\", \"Projectivization.Subspace.spanCarrier.mem_add\"], \"digest\": \"8af60a5cf68b1504\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Proj zero-locus closedness and affine chart APIs do not give the punctured-cone morphism, cone dimension shift, and irreducibility; no one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProjectiveSpectrum\", \"Irreducible\"",
+   "results": "{\"t\": \"2026-10-23T13:12:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"ProjectiveSpectrum\\\", \\\"Irreducible\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Proj zero-locus closedness and affine chart APIs do not give the punctured-cone morphism, cone dimension shift, and irreducibility; no one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse image of a closed projective subset under punctured affine space projection, with the origin added, is closed and has dimension one more",
+   "results": "{\"t\": \"2026-10-23T13:57:22Z\", \"tool\": \"leanfinder\", \"query\": \"The inverse image of a closed projective subset under punctured affine space projection, with the origin added, is closed and has dimension one more\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ProjectiveSpectrum.isClosed_zeroLocus\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_preimage_basicOpen\", \"ProjectiveSpectrum.top\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.fromSpec\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.opensRange_awayι\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.awayι_preimage_basicOpen\"], \"digest\": \"c26c417516c21f8b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give Proj definitions, zero loci or unrelated affine dimension statements, not the punctured cone, dimension shift and irreducibility; not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "cone.*dim|dim.*cone",
+   "results": "{\"t\": \"2026-10-23T13:58:37Z\", \"tool\": \"grep\", \"query\": \"cone.*dim|dim.*cone\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\"], \"digest\": \"4dd64de1f8b0b97a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give Proj definitions, zero loci or unrelated affine dimension statements, not the punctured cone, dimension shift and irreducibility; not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine cones over projective closed sets have dimension one more than the projective set",
+   "results": "{\"t\": \"2026-10-23T13:58:37Z\", \"tool\": \"leansearch\", \"query\": \"Affine cones over projective closed sets have dimension one more than the projective set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.isAffineOpen_basicOpen\", \"AffineIndependent.vectorSpan_eq_of_le_of_card_eq_finrank_add_one\", \"AffineBasis.card_eq_finrank_add_one\", \"AffineIndependent.affineSpan_eq_of_le_of_card_eq_finrank_add_one\", \"affineSpan_intrinsicClosure\", \"AlgebraicGeometry.IsClosedImmersion.instIsAffineHom\", \"AffineIndependent.affineSpan_eq_top_iff_card_eq_finrank_add_one\", \"ProjectiveSpectrum.isClosed_iff_zeroLocus\"], \"digest\": \"d893caaf7cc68ef3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give Proj definitions, zero loci or unrelated affine dimension statements, not the punctured cone, dimension shift and irreducibility; not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProjectiveSpectrum\", \"topologicalKrullDim\"",
+   "results": "{\"t\": \"2026-10-23T13:58:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"ProjectiveSpectrum\\\", \\\"topologicalKrullDim\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give Proj definitions, zero loci or unrelated affine dimension statements, not the punctured cone, dimension shift and irreducibility; not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a closed subset Z of projective n space over a field the closed affine cone is irreducible when Z is irreducible and has Krull dimension dim Z plus one",
+   "results": "{\"t\": \"2026-10-23T14:11:30Z\", \"tool\": \"leanfinder\", \"query\": \"For a closed subset Z of projective n space over a field the closed affine cone is irreducible when Z is irreducible and has Krull dimension dim Z plus one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\", \"ProjectiveSpectrum.isClosed_iff_zeroLocus\", \"ProjectiveSpectrum.isClosed_zeroLocus\", \"ProjectiveSpectrum.isPrime\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"ProjectiveSpectrum.zariskiTopology\", \"ProjectiveSpectrum.mk.inj\"], \"digest\": \"c35bff681ea82b8b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give Proj definitions, zero loci or unrelated affine dimension statements, not the punctured cone, dimension shift and irreducibility; not a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-closed-intersection-dimension",
+  "date": "2026-10-23",
+  "group": "NL"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.2, Definition 7 and Theorem 8, printed pp.13--15, and equation (6) in Section 3.3. Local PDF WANTED; read online. Supporting estimate: Section 3.2 proof step (7), printed p.14; support-of-dualizing-section argument and Clifford inequality, as in Gieseker Proposition 1.0.8, printed pp.61--62, referring to Theorem 0.2.3. Agent statement of the precise auxiliary support claim; not an assertion of nonspeciality. Local PDFs WANTED. Auxiliary: Hopf dimension inequality for a bilinear map without zero divisors. Geometric input: projective intersection dimension theorem applied to the Segre image and the projectivized kernel. Supporting input: Cone construction and dimension shift in the proof of Stacks 0B2R.",
+   "via": [
+    "lem-sfb-projective-closed-intersection-dimension",
+    "lem-sfb-hopf-bilinear-image-dimension",
+    "lem-sfb-nodal-special-clifford-subcurve",
+    "lem-sfb-gieseker-potential-stability",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-projective-affine-cone-dimension",
+  "worker": "stage1",
+  "summary": "All clauses retained. Constructed the chart morphisms and their inverse-image equalities, exhibited local Laurent products, proved C(Z) is the closure by a scalar line over a residue field, computed dimension by existing product/open-cover/dense-open lemmas, and proved irreducibility by reduced affine charts. No new nodes: every non-elementary tool already exists. Mathlib and source searches give no attachment or whole-item leaf.",
+  "blueprint": "Supporting dimension input on the inherited alteration/Gieseker/Hopf/projective-intersection branch of the direct-image stability proof; all steps realize the affine-cone paragraph of Stacks 0B2R. Current latest blueprint has sk-thm-sf-ctf-stability-direct-images.proof.md, (3), proper/open direct-image route; this auxiliary remains below the existing imported branch, not a change to the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-projective-space-standard-charts",
+    "why": "Generic scheme/topology/dimension tool used exactly as stated in the indicated proof step; this unit has no substitute statement. It supports the existing affine-cone auxiliary without replacing a unit-level route."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-into-affine-scheme",
+    "why": "Generic scheme/topology/dimension tool used exactly as stated in the indicated proof step; this unit has no substitute statement. It supports the existing affine-cone auxiliary without replacing a unit-level route."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-morphism-gluing",
+    "why": "Generic scheme/topology/dimension tool used exactly as stated in the indicated proof step; this unit has no substitute statement. It supports the existing affine-cone auxiliary without replacing a unit-level route."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic scheme/topology/dimension tool used exactly as stated in the indicated proof step; this unit has no substitute statement. It supports the existing affine-cone auxiliary without replacing a unit-level route."
+   },
+   {
+    "node": "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+    "why": "Generic scheme/topology/dimension tool used exactly as stated in the indicated proof step; this unit has no substitute statement. It supports the existing affine-cone auxiliary without replacing a unit-level route."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic scheme/topology/dimension tool used exactly as stated in the indicated proof step; this unit has no substitute statement. It supports the existing affine-cone auxiliary without replacing a unit-level route."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic scheme/topology/dimension tool used exactly as stated in the indicated proof step; this unit has no substitute statement. It supports the existing affine-cone auxiliary without replacing a unit-level route."
+   },
+   {
+    "node": "lem-zl-spectrum-irreducible-nilradical-prime",
+    "why": "Generic scheme/topology/dimension tool used exactly as stated in the indicated proof step; this unit has no substitute statement. It supports the existing affine-cone auxiliary without replacing a unit-level route."
+   },
+   {
+    "node": "lem-sc-p1-polynomial-dimension-one",
+    "why": "Generic scheme/topology/dimension tool used exactly as stated in the indicated proof step; this unit has no substitute statement. It supports the existing affine-cone auxiliary without replacing a unit-level route."
+   },
+   {
+    "node": "lem-weil-pbc-spec-topological-krull-dimension-ring",
+    "why": "Generic scheme/topology/dimension tool used exactly as stated in the indicated proof step; this unit has no substitute statement. It supports the existing affine-cone auxiliary without replacing a unit-level route."
+   },
+   {
+    "node": "lem-sc-dimension-locally-algebraic",
+    "why": "Generic scheme/topology/dimension tool used exactly as stated in the indicated proof step; this unit has no substitute statement. It supports the existing affine-cone auxiliary without replacing a unit-level route."
+   },
+   {
+    "node": "lem-pc-scheme-dimension-local-rings",
+    "why": "Generic scheme/topology/dimension tool used exactly as stated in the indicated proof step; this unit has no substitute statement. It supports the existing affine-cone auxiliary without replacing a unit-level route."
+   },
+   {
+    "node": "lem-weil-pbc-homeomorphism-krull-dimension",
+    "why": "Generic scheme/topology/dimension tool used exactly as stated in the indicated proof step; this unit has no substitute statement. It supports the existing affine-cone auxiliary without replacing a unit-level route."
+   },
+   {
+    "node": "lem-weil-pbc-open-subspace-dimension-monotone",
+    "why": "Generic scheme/topology/dimension tool used exactly as stated in the indicated proof step; this unit has no substitute statement. It supports the existing affine-cone auxiliary without replacing a unit-level route."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-bound-open-cover",
+    "why": "Generic scheme/topology/dimension tool used exactly as stated in the indicated proof step; this unit has no substitute statement. It supports the existing affine-cone auxiliary without replacing a unit-level route."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-sober",
+    "why": "Generic scheme/topology/dimension tool used exactly as stated in the indicated proof step; this unit has no substitute statement. It supports the existing affine-cone auxiliary without replacing a unit-level route."
+   },
+   {
+    "node": "lem-weil-pbc-dense-open-dimension-comparison",
+    "why": "Generic scheme/topology/dimension tool used exactly as stated in the indicated proof step; this unit has no substitute statement. It supports the existing affine-cone auxiliary without replacing a unit-level route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-zl-spectrum-irreducible-nilradical-prime",
+  "lem-sc-p1-polynomial-dimension-one",
+  "lem-weil-pbc-spec-topological-krull-dimension-ring",
+  "lem-sc-dimension-locally-algebraic",
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-weil-pbc-homeomorphism-krull-dimension",
+  "lem-weil-pbc-open-subspace-dimension-monotone",
+  "lem-weil-pbc-dimension-bound-open-cover",
+  "lem-weil-pbc-scheme-sober",
+  "lem-weil-pbc-dense-open-dimension-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q143-da1e0e85a",
+  "group": "Q143",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q143-da1e0e85a (reviewer sub-agent of L); spot-checked: I read the full item. The delivery adds no new nodes, so all nine steps cite existing DAG nodes. Source: Stacks varieties.tex 0B2R (lines 6364-6404), the punctured projection, its chart maps and 'the origin is in the closure of every fibre'. The item's statement is faithful to the source and true: no hypothesis added, no clause weakened. It supplies everything the parent lem-sfb-projective-closed-intersection-dimension takes from it. I checked every step against the actual statements of all 21 cited nodes. Step 1: overlap D(u_{j/i}) from the standard-charts lemma (b), agreement on overlaps via the affine-target bijection, then gluing with uniqueness; the identity pi^{-1}(P_i)=U_i holds. Step 2: both composites of the Laurent iso checked on generators. Step 3: the line over a residue field sends the generic point into Y and (t) to o, so it works without rational points. Step 4 (elementary): C(Z) is the closure of Y. Step 5: reduced induced structure plus closed-immersion base change give the chart rings R_i[t^{+-1}]. Step 6: dim G=1, then the same-unit product lemma, with the local-ring and topological dimension conventions correctly bridged by lem-pc-scheme-dimension-local-rings. Step 7: chart maximum, using the open-cover bound on spaces shown quasi-sober and T0 via scheme sobriety. Step 8: dense-open comparison, with no irreducibility needed. Step 9: domain argument for each chart, overlap and closure. Small cases tested: Z empty; P^0 giving A^1; a closed point of P^1 over R with residue field C, giving V(x^2+y^2), of dimension 1 and irreducible; two points giving two lines; P^N. No duplicate found in the DAG (searched 0B2R, punctured affine space, cone). No SGA citation. No cycle. proof_deps equals the union of the step uses. All 17 declared tool_uses are generic scheme/topology/dimension facts used exactly as stated; accepted. There is no repair note, so the re-split rules do not apply. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveAffineConeDimension",
+  "declaration": "AlgebraicGeometry.ProjectiveSpace.exists_unique_affineConeProjection",
+  "declarations": [
+   "AlgebraicGeometry.ProjectiveSpace.affineConePunctured",
+   "AlgebraicGeometry.ProjectiveSpace.HasAffineConeCharts",
+   "AlgebraicGeometry.ProjectiveSpace.affineConeSet",
+   "AlgebraicGeometry.ProjectiveSpace.exists_unique_affineConeProjection"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveAffineConeDimension.lean",
+  "statement": "theorem exists_unique_affineConeProjection (k : Type u) [Field k] (N : ℕ) : ∃ π : (affineConePunctured k N).toScheme ⟶ ℙ(ULift.{u} (Fin (N + 1)); Spec (CommRingCat.of k)), HasAffineConeCharts k N π ∧ (∀ π' : (affineConePunctured k N).toScheme ⟶ ℙ(ULift.{u} (Fin (N + 1)); Spec (CommRingCat.of k)), HasAffineConeCharts k N π' → π' = π) ∧ (∀ Z : Set ℙ(ULift.{u} (Fin (N + 1)); Spec (CommRingCat.of k)), IsClosed Z → IsClosed (affineConeSet k N π Z) ∧ ∀ d : ℕ, Z.Nonempty → topologicalKrullDim Z = (d : WithBot ℕ∞) → topologicalKrullDim (affineConeSet k N π Z) = ((d + 1 : ℕ) : WithBot ℕ∞) ∧ (IsIrreducible Z → IsIrreducible (affineConeSet k N π Z))) ∧ affineConeSet k N π ∅ = Set.range (AffineSpace.zeroSection (ULift.{u} (Fin (N + 1))) (Spec (CommRingCat.of k)))",
+  "branch": "sheaf-dag",
+  "by": "N8",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The three helper definitions are the explicitly introduced punctured open, prescribed chart predicate, and cone subset of this same node. Coordinates on standardOpenIso are the recorded chart ratios; multiplying by the invertible x_i states the prescribed pullback without choosing inverses. Uniqueness quantifies over all maps satisfying the chart predicate alone."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-607e4ca0f",
+  "group": "N8",
+  "result": "pass",
+  "note": "Read node, Stacks 0B2R source lines 6374-6404, all 6 stmt_dep records, delivered module and report. Lean matches every clause: unique π by chart predicate (over-k + π⁻¹P_i = D(x_i) + u_{j/i}·x_i = x_j, which determines π via AffineSpace.hom_ext on a cover); u_{j/i} = canonical standardOpenIso coordinate = T_j/T_i (Charts.lean:219, standardOpenIso_hom_toSpecMvPoly matches the lemma's awayXRatio); C(Z) = range zeroSection ∪ ι''π⁻¹Z; closedness unconditional; dim shift and irreducibility nested under the nonempty/dim=d hypotheses; C(∅) = {o}. Edge cases N=0, Z=∅, d=0 at non-rational point, universes OK. No H4 owner for standardOpenIso/zeroSection. Statement verbatim, single sorry, real defs, docstrings, imports exist; report has both sections; node differs from live only in lean. Not recompiled (no change)."
+ }
+}

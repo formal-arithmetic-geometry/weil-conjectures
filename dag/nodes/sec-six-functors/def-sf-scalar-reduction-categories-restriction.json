@@ -27,10 +27,14 @@
  },
  "lean_audit": {
   "master": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
   "slopmaster2": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   }
  },
  "chapter": "sec-six-functors",
@@ -91,14 +95,15 @@
    "WeilConjectures.scalarReductionTargetDerived",
    "WeilConjectures.scalarReductionSiteSmall",
    "WeilConjectures.scalarReductionRestriction",
-   "WeilConjectures.scalarReductionDerivedRestriction"
+   "WeilConjectures.scalarReductionDerivedRestriction",
+   "WeilConjectures.scalarReductionRestrictionAdditive"
   ],
-  "statement": "abbrev scalarReductionRestriction :\n    scalarReductionTarget l E Y n ⥤ scalarReductionSource l E Y",
+  "statement": "@[reducible]\nnoncomputable def scalarReductionRestriction :\n    scalarReductionTarget l E Y n ⥤ scalarReductionSource l E Y",
   "branch": "newtargets-dag",
   "by": "Q03",
   "date": "2026-10-21",
   "existing": true,
-  "note": "Ownership record requested by immutable return L/H2/C3 at df60101867dc. Reuses unchanged definitions and standard localization instances in the published module. The adjunction theorem conclusion does not select these data. scalarReductionDerivedExtension is separately owned by def-weil-integral-derived-reduction."
+  "note": "Ownership record requested by immutable return L/H2/C3 at df60101867dc. Reuses unchanged definitions and standard localization instances in the published module. The adjunction theorem conclusion does not select these data. scalarReductionDerivedExtension is separately owned by def-weil-integral-derived-reduction. W2 retains the original restriction construction as a reducible ordinary definition and exposes its existing additivity by a proved instance."
  },
  "reviewed": {
   "date": "2026-10-21",
@@ -115,5 +120,15 @@
   "group": "Q03",
   "result": "pass",
   "note": "Re-delivery after RETURN df60101867dc (H2/C3). The Lean module is byte-identical, and the earlier clause-by-clause pass still holds (index shift, u = ϖ^(n+1), pure-tensor-pinned i, degreewise ShortExact, single P/e/hP, canonical comparisons, actual transition as second arrow, no extra hypotheses, independent universes). Repairs (a)-(d) were done exactly: stmt_deps now cite def-weil-integral-derived-reduction and new existing:true definition nodes def-sf-scalar-reduction-categories-restriction (scalarReduction* categories, instances, restriction, derived restriction) and def-sf-unrestricted-reduction-complex-constructions (unrestrictedTower* complexes, pure-tensor section, counit resolution iso, transition = .app of the ∃!-characterized unrestrictedIntegralTransition). I read their definitions in the live modules: real constructions, independent of the theorem conclusions; record statements verbatim. Both theorems are in proof_deps only, and proof/proof_deps equal the live node. No live collisions, no supersession, report sections present, dry run OK 11066a9b4b9. Advisory: partial overlap with def-weil-integral-derived-restriction-of-scalars (ℓ≠p, no lean record); owned decls' docstrings name the theorem ids; unrestrictedIntegralTransition has no owner node. No compile: no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-43df8",
+  "group": "W2",
+  "result": "fix",
+  "landing": "20261026T102415-L-355579",
+  "kind": "interface",
+  "note": "independent cc review: lem-pur-integral-operation-roos-effectivity node (statement verbatim, new proof/proof_deps) with the delivered proof; 4 unclaimed adapted modules (abbrev→@[reducible] def, shared scalarReductionExistence witness) with their change records, compiled against delivered oleans: IRTWDU, IntegralOperationsWellDefined, IsomorphismReductionTower, IntegralScalarExtensionWellDefined, IntegralTensorTransitionCompatibility, IntegralTensorReductionTowerComparison, CompletedPerfectScalarPullback+AdicScalarFlatReductionModel, CoefDerivedSystemEvaluationCalculus, CoefficientSequenceRoosModel, IntegralOperationsPreserveConstructible, NormalizedDVREffectivity, NormalizedDVRKFlatTransition, SemilinearSystemModels all OK; item 54 s; axioms propext/sorryAx(cited library holes)/choice/Quot.sound"
  }
 }

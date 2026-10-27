@@ -1,0 +1,254 @@
+{
+ "id": "lem-sfb-stack-smooth-qcoh-exact",
+ "kind": "statement",
+ "title": "Exact smooth pullback of quasi-coherent modules on algebraic stacks",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme], and let $f:\\mathcal Z\\to\\mathcal X$ be a smooth morphism of algebraic stacks over $S$ [def-sfb-algebraic-moduli-stack], where smoothness is tested on smooth scheme charts using [def-sbc-smooth-morphisms]. Give their quasi-coherent module categories the big-fppf conventions of [def-sfb-stack-quasi-coherent-algebra] and their abelian structures [lem-sfb-stack-qcoh-abelian]. Then tensor pullback $f^*:\\operatorname{QCoh}(\\mathcal X)\\to\\operatorname{QCoh}(\\mathcal Z)$ is an exact functor: it carries each short exact sequence in the source abelian category to a short exact sequence in the target abelian category. If $\\mathcal Z=T$ is a scheme, the functor $F\\mapsto F_f$ to quasi-coherent Zariski $\\mathcal O_T$-modules from [lem-sfb-stack-quasi-coherent-scheme-restriction] is exact, including preservation of kernels, cokernels and monomorphisms in these categories. No quasi-compactness, finite-generation, representability or Noetherian assumption on $f$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-cohomology.tex",
+  "place": "Tag 076X (lemma-flat-pullback-quasi-coherent), smooth specialization by chartwise smooth-flatness; Tag 0GQF (lemma-quasi-coherent-check-exact), proof, faithful exact scheme-chart restrictions; stacks-morphisms.tex Tag 075U (definition-smooth)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-abelian",
+  "def-sbc-smooth-morphisms",
+  "lem-sfb-stack-qcoh-abelian",
+  "lem-sfb-stack-quasi-coherent-scheme-restriction"
+ ],
+ "proof": [
+  {
+   "text": "First fix any smooth surjective scheme atlas $a:U\\to\\mathcal Y$ of an algebraic stack. On etale scheme charts it is flat and locally of finite presentation by [sbc-lem-smooth-criterion]. By [lem-sfb-fppf-groupoid-stack-presentations](2), $R=U\\times_{\\mathcal Y}U$ is its flat groupoid relation and $[U/R]\\to\\mathcal Y$ is an equivalence commuting with $a$; precomposition with it and with a quasi-inverse is tensor pullback by [lem-sfb-stack-quasi-coherent-scheme-restriction], so it identifies the quasi-coherent categories, compatibly with restriction to $U$. Apply [lem-sfb-space-groupoid-module-descent] and then [lem-sfb-flat-space-groupoid-kernels-cokernels]: $\\Phi:F\\mapsto x^*F|_{U_{\\mathrm{et}}}$, for the canonical $x:U\\to[U/R]$ identified with $a$, is additive and faithful and carries kernels and cokernels to the small-etale module kernels and cokernels. By [lem-sfb-stack-quasi-coherent-scheme-restriction], $\\Phi(F)$ is $u\\mapsto\\Gamma(U',u^*F_a)$ on etale $u:U'\\to U$, naturally in $F$, i.e. $\\Phi=A_U\\circ\\Psi$ for $\\Psi:F\\mapsto F_a$ and the associated-sheaf functor $A_U$ of [def-sc-etale-qcoherent-module]. $A_U$ is exact into all etale module sheaves by [lem-sfb-scheme-etale-module-exact-finiteness-comparison], and its restriction to Zariski opens is the identity, so $A_U$ reflects isomorphisms. Hence $\\Psi$ is faithful, and for $h$ in $\\operatorname{QCoh}(\\mathcal Y)$ the comparison maps from $\\Psi(\\ker h)$ to the Zariski kernel of $\\Psi(h)$, and from the Zariski cokernel of $\\Psi(h)$ to $\\Psi(\\operatorname{coker}h)$, become isomorphisms after $A_U$, so are isomorphisms. Thus $F\\mapsto F_a$ computes kernels and cokernels and is faithful and exact. The abelian structure here is that of [lem-sfb-stack-qcoh-abelian], since kernels and cokernels are determined by their universal properties, which equivalences preserve.",
+   "uses": [
+    "sbc-lem-smooth-criterion",
+    "lem-sfb-fppf-groupoid-stack-presentations",
+    "lem-sfb-space-groupoid-module-descent",
+    "lem-sfb-flat-space-groupoid-kernels-cokernels",
+    "lem-sfb-stack-quasi-coherent-scheme-restriction",
+    "lem-sfb-stack-qcoh-abelian",
+    "def-sc-etale-qcoherent-module",
+    "lem-sfb-scheme-etale-module-exact-finiteness-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "076X (lemma-flat-pullback-quasi-coherent), faithful exact vertical functors; 06WV and 06VZ expanded"
+   }
+  },
+  {
+   "text": "Choose a smooth surjective scheme atlas $b:V\\to\\mathcal X$ using [def-sfb-algebraic-moduli-stack]. The stack $\\mathcal P=\\mathcal Z\\times_{\\mathcal X}V$ is algebraic by [lem-sfb-algebraic-stack-fibre-products], so choose a smooth surjective scheme atlas $u:U\\to\\mathcal P$. Base change and composition of representable smooth surjections in [lem-sfb-fibred-groupoid-representable-smooth-calculus] show that $a:U\\to\\mathcal Z$ is smooth surjective. Write $q:U\\to V$. The defining condition (A) of [lem-sfb-stack-smooth-presentation-criterion], applied to the smooth $f$ and the smooth map $U\\to\\mathcal Z\\times_{\\mathcal X}V$, shows that $q$ is a smooth scheme morphism. Therefore $q$ is flat by [sbc-lem-smooth-criterion]. This construction never assumes that $f$ is representable.",
+   "uses": [
+    "def-sfb-algebraic-moduli-stack",
+    "lem-sfb-algebraic-stack-fibre-products",
+    "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+    "lem-sfb-stack-smooth-presentation-criterion",
+    "sbc-lem-smooth-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "076X, construction of the commutative scheme-chart square; 075U and 06FM"
+   }
+  },
+  {
+   "text": "Let $0\\to F'\\to F\\to F''\\to0$ be short exact in $\\operatorname{QCoh}(\\mathcal X)$. Step 1 makes its restriction along $b$ short exact in quasi-coherent Zariski modules on $V$. The ordinary module-sheaf kernel and cokernel remain quasi-coherent by [lem-weil-pbc-quasi-coherent-module-kernel] and [lem-weil-pbc-quasi-coherent-module-cokernel-image]. Their universal properties also hold in the full quasi-coherent subcategory, so this is a short exact sequence of ordinary module sheaves. Flat scheme pullback $q^*$ is exact by [lem-weil-pbc-flat-module-pullback-exact-pushforward-injective]. The natural scheme-test comparisons of [lem-sfb-stack-quasi-coherent-scheme-restriction] identify $q^*F_b$ with $(f^*F)_a$, and likewise for $F',F''$ and their arrows: on a test over $U$, precomposition sends it to the same object over $\\mathcal X$ by the square's specified two-isomorphism. The cited identity and composition compatibilities identify both arrows of the sequence, not merely its three objects. Consequently the restriction along $a$ of the pulled-back sequence is short exact.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+    "lem-sfb-stack-quasi-coherent-scheme-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "076X, exactness of the top scheme pullback and the commuting pullback diagram"
+   }
+  },
+  {
+   "text": "Restriction along $a$ preserves kernels and cokernels and is faithful by step 1. A faithful additive functor detects zero objects: if it sends $H$ to zero, it sends $1_H$ to zero, hence $1_H=0$. Apply this to the kernel of the first arrow, the cokernel of the last arrow, and the middle homology $\\ker(v)/\\operatorname{im}(w)$ of the pulled-back sequence. Images are kernels of cokernels, so their formation also commutes with restriction. Step 3 makes these three restricted objects zero; hence they were zero before restriction. This proves short exactness in $\\operatorname{QCoh}(\\mathcal Z)$, and proves exactness of $f^*$. Additivity is also seen on the faithful atlas: its composite is the additive functor $q^*$ after the additive restriction along $b$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "076X, final sentence “Thus we win”, with faithful-exact reflection written out"
+   }
+  },
+  {
+   "text": "When $\\mathcal Z=T$ is a scheme, [lem-sfb-scheme-big-fppf-quasicoherent-equivalence] identifies $\\operatorname{QCoh}(T)$ on the big fppf site with quasi-coherent Zariski $\\mathcal O_T$-modules. Its inverse is restriction to opens. By [lem-sfb-stack-quasi-coherent-scheme-restriction], composing this inverse with $f^*$ is precisely $F\\mapsto F_f$. The equivalence and its inverse carry kernels and cokernels to kernels and cokernels, directly by the Hom universal properties; therefore this composite is exact. To spell out kernel preservation for an exact additive functor $E$, factor any arrow $h$ through its image and apply $E$ to $0\\to\\ker h\\to\\operatorname{dom}h\\to\\operatorname{im}h\\to0$ and $0\\to\\operatorname{im}h\\to\\operatorname{cod}h\\to\\operatorname{coker}h\\to0$. The second sequence makes $E(\\operatorname{im}h)\\to E(\\operatorname{cod}h)$ monic, and the first identifies its composite's kernel with $E(\\ker h)$; dually the cokernel is $E(\\operatorname{coker}h)$. A monomorphism has zero kernel, which is preserved, so monomorphisms are preserved as well. All constructions used arbitrary small atlases and arbitrary quasi-coherent modules.",
+   "uses": [
+    "lem-sfb-scheme-big-fppf-quasicoherent-equivalence",
+    "lem-sfb-stack-quasi-coherent-scheme-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "076X; scheme comparison descent.tex 03DX (proposition-equivalence-quasi-coherent)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sbc-lem-smooth-criterion",
+  "lem-sfb-fppf-groupoid-stack-presentations",
+  "lem-sfb-space-groupoid-module-descent",
+  "lem-sfb-flat-space-groupoid-kernels-cokernels",
+  "lem-sfb-scheme-big-fppf-quasicoherent-equivalence",
+  "lem-sfb-stack-quasi-coherent-scheme-restriction",
+  "lem-sfb-stack-qcoh-abelian",
+  "def-sfb-algebraic-moduli-stack",
+  "lem-sfb-algebraic-stack-fibre-products",
+  "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+  "lem-sfb-stack-smooth-presentation-criterion",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+  "def-sc-etale-qcoherent-module",
+  "lem-sfb-scheme-etale-module-exact-finiteness-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-cohomology.tex",
+  "place": "Tag 076X (lemma-flat-pullback-quasi-coherent), scheme-chart proof, with the vertical exactness justified from 06VZ and groupoid module descent; smoothness through 075U/06FM."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "quasi.?coherent.*[Ee]xact|[Ee]xact.*quasi.?coherent|algebraic.?[Ss]tack",
+   "results": "4 hits: Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean; inspected Tilde.lean:378,587,879,888: scheme tilde comparisons, no stack exactness.",
+   "date": "2026-10-23",
+   "verdict": "no match: ambient sheaf-module abelianity and scheme pullback/flat-module facts do not provide the quasi-coherent algebraic-stack assertion. Sources of the candidate declarations were read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth pullback preserves exact sequences of quasi coherent modules on algebraic stacks",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.pullback, SheafOfModules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, SheafOfModules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, SheafOfModules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+   "date": "2026-10-23",
+   "verdict": "no match: ambient sheaf-module abelianity and scheme pullback/flat-module facts do not provide the quasi-coherent algebraic-stack assertion. Sources of the candidate declarations were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicoherent\", \"Exact\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: ambient sheaf-module abelianity and scheme pullback/flat-module facts do not provide the quasi-coherent algebraic-stack assertion. Sources of the candidate declarations were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat pullback of quasicoherent modules on an Artin stack preserves short exact sequences",
+   "results": "8 hits: Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, AlgebraicGeometry.Flat.instFstScheme, Module.FaithfullyFlat.rTensor_reflects_exact, Module.FaithfullyFlat.lTensor_reflects_exact",
+   "date": "2026-10-23",
+   "verdict": "no match: ambient sheaf-module abelianity and scheme pullback/flat-module facts do not provide the quasi-coherent algebraic-stack assertion. Sources of the candidate declarations were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback along a smooth morphism of algebraic stacks is exact on quasi coherent modules and smooth scheme restriction preserves kernels",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instAdditivePullback, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.Scheme.ker_ideal_of_isPullback_of_isOpenImmersion, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion, AlgebraicGeometry.Scheme.IdealSheafData.map_ker",
+   "date": "2026-10-23",
+   "verdict": "no match: ambient sheaf-module abelianity and scheme pullback/flat-module facts do not provide the quasi-coherent algebraic-stack assertion. Sources of the candidate declarations were read."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-algebra-smooth-image",
+  "date": "2026-10-23",
+  "group": "Q20"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: the adequate moduli space for the product, before the finiteness criterion; Q44 product-affinization proof: composition of the product projections and the structural map; affine Y to Spec k; Proposition 4.2.1(1), proof first sentence: follows from Lemma 4.1.7, applied to g and the universally adequate map f_*A to f_*B; Quasi-coherent algebra image factorization on smooth tests; module prerequisite: Exact smooth pullback of quasi-coherent modules on algebraic stacks",
+   "via": [
+    "lem-sfb-stack-algebra-smooth-image",
+    "lem-sfb-adequate-algebra-pushforward",
+    "lem-sfb-adequately-affine-composition",
+    "lem-sfb-adequate-product-affinization",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-stack-smooth-qcoh-exact",
+  "worker": "stage1",
+  "summary": "Expanded 076X into faithful exact atlas restriction, a smooth scheme-chart square, scheme-flat pullback and reflection of short exactness; proved the scheme-test clause using the big-fppf/Zariski equivalence. One new statement-only input is 06VZ for flat algebraic-space groupoids, rather than the existing scheme-only groupoid result. Statement unchanged.",
+  "blueprint": "Retains the existing det-thm-sf-ctf-stability-direct-images proof (3) alteration/moduli prerequisite ancestry. This supporting module lemma realizes exactness needed for the smooth-test algebra image factorization; no chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-smooth-criterion",
+    "why": "Only the smooth-implies-flat-and-locally-finitely-presented scheme-chart input; no unit-specific replacement."
+   },
+   {
+    "node": "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+    "why": "Generic exact tensor pullback for flat scheme maps in the scheme-chart square."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-kernel",
+    "why": "Generic quasi-coherence of scheme module kernels."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "why": "Generic quasi-coherence of scheme module cokernels and images."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-smooth-criterion",
+  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-6edcc399d",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-6edcc399d (reviewer sub-agent of L); spot-checked: Read 076X, 06VZ and 0GQF/06WV in the snapshot literature, the item, the new node and every cited statement. The item statement is unchanged and true. The split follows the 076X proof: an exact, faithful restriction to the atlas (via 04WY(2), the 06WT descent node and the new 06VZ node), a smooth chart square through 06FM(A), and flat scheme pullback, with the scheme-test clause proved through 03DX. The new node is 06VZ for groupoids in algebraic spaces: it is true and states no proof. Small cases checked: the identity groupoid, empty U, and failure without flatness. It is not a duplicate: lem-sfb-groupoid-module-limits-colimits only covers schemes, while R=U×_Y U is an algebraic space. Two repairs were made. (1) C4/E5: step 1 passed from the small-étale module x*F|U_et to the Zariski module F_a citing two nodes that say nothing about the étale site. It now cites def-sc-etale-qcoherent-module and lem-sfb-scheme-etale-module-exact-finiteness-comparison: Φ=A_U∘Ψ, A_U is exact and reflects isomorphisms (it is the identity on Zariski opens), so Ψ is faithful and preserves kernels and cokernels. The transport along [U/R]≃Y is now made explicit, the big-fppf equivalence was removed from step 1's uses, and the cycle check is clean. (2) B3: the new node used def-pc-module-pullback for pullbacks along maps of algebraic spaces; it now also cites def-trf-space-etale-module-functors in its statement and stmt_deps. Batch 5: every flagged citation reaches only the general definitions def-trf-algebraic-space and def-trf-space-quasi-coherent-module, which are outside both assumptions, so they are accepted. The added proof_deps bring no new sec-trace-formula node into the closure. The four cross-unit generic scheme tools in split_report are accepted for tool_uses.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackSmoothQcohExact",
+  "declaration": "CategoryTheory.stack_smooth_qcoh_exact",
+  "declarations": [
+   "CategoryTheory.moduliQcohPullback",
+   "CategoryTheory.moduliQcohSchemeRestriction",
+   "CategoryTheory.stack_smooth_qcoh_exact",
+   "CategoryTheory.stack_smooth_scheme_qcoh_restriction_exact"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StackSmoothQcohExact.lean",
+  "statement": "theorem stack_smooth_qcoh_exact {S : Scheme.{u}} (Z X : BasedCategory.{v, w} (Over S)) (hZ : IsAlgebraicModuliStack Z) (hX : IsAlgebraicModuliStack X) (f : BasedFunctor Z X) (_hsmooth : ∃ (U V : Over S) (a : BasedFunctor (discreteModuli (yoneda.obj U)) Z) (b : BasedFunctor (discreteModuli (yoneda.obj V)) X) (q : U ⟶ V), IsSmoothModuliAtlas Z U a ∧ IsSmoothModuliAtlas X V b ∧ Smooth q.left ∧ Nonempty (a.comp f ≅ (discreteModuliMap (yoneda.map q)).comp b)) (P : ModuliQuasicoherentPrecomposition hZ.1.1 hX.1.1 f) : PreservesFiniteLimits (moduliQcohPullback P) ∧ PreservesFiniteColimits (moduliQcohPullback P)",
+  "branch": "newtargets-dag",
+  "by": "Q59",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The two theorem declarations state respectively the stack pullback and smooth scheme-test clauses. The two helper functors are ObjectProperty.lift of the recorded canonical precomposition and restriction, with no new objects or chosen arbitrary maps. Smoothness is expanded as its equivalent smooth-surjective scheme-chart square, including its 2-isomorphism; scheme-test smoothness is tested on every algebraic-space base change. Exactness is preservation of finite limits and colimits in the existing full quasi-coherent categories."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d8dddbfdd",
+  "group": "Q59",
+  "result": "pass",
+  "note": "Only the item's lean field changed, and lean.statement is verbatim the file's text. Stack clause: the smoothness hypothesis (smooth surjective scheme atlases a, b, smooth q, based 2-iso) is Stacks 06FM(2)/075U, neither stronger nor weaker, and needs no representability. moduliQcohPullback lifts the recorded precomposition and depends only on the Prop fields of P; P's comparison identifies it with tensor pullback. Exactness = PreservesFiniteLimits ∧ PreservesFiniteColimits on the stack_qcoh_abelian full subcategories. Scheme clause: the hypothesis is representable smoothness (the 06FM last sentence) and is the inlined body of IsSmoothModuliSchemeTest from def-sfb-adequately-affine-morphism, which the item does not cite (note only). F_f is R.restriction at f.obj(id), lifted to SchemeTestQCoh; R is fixed up to natural iso. Universes follow the dependency's shared (v,w). Plain imports are exactly the seven proof_deps with recorded modules. No hollow defs, sorry-only proofs, docstrings carry source/blueprint and node steps 1–5, no line over 100. Edge cases (empty, nonrepresentable, non-surjective tests, zero object) are covered. The second reading was by the same worker, which the report states. No compile: no file changed."
+ }
+}

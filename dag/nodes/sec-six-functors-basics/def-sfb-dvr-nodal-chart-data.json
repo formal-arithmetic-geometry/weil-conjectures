@@ -1,0 +1,133 @@
+{
+ "id": "def-sfb-dvr-nodal-chart-data",
+ "kind": "definition",
+ "title": "Arithmetic nodal chart data and origin",
+ "status": "split",
+ "import_flags": [],
+ "statement": "For a commutative ring $R$ and elements $a,c,\\pi\\in R$, let $A_{R,a}=R[x,y]/(xy-a)$ [def-trf-strict-semistable-curve], [def-weil-polynomial-ring]. The arithmetic nodal chart data consists of the classes $c,x,y\\in A_{R,a}$, the ideal $(x,y)+(\\pi)\\subset A_{R,a}$, the scheme $M_n=\\operatorname{Spec}A_{R,\\pi^n}$ and its structure morphism $M_n\\to\\operatorname{Spec}R$ [def-weil-affine-spectrum]. Its centre is the ideal sheaf obtained from $(x,y)+(\\pi)$ by the canonical global-sections identification, and a point $o\\in M_n$ is the origin when its prime ideal is $(x,y)+(\\pi)$.",
+ "source": {
+  "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+  "place": "Lemma 3.13 proof, printed p.609, local equation xy=pi^n and origin (pi,x,y); Stacks models.tex Tag 0CDC (example-blowup)."
+ },
+ "stmt_deps": [
+  "def-trf-strict-semistable-curve",
+  "def-weil-polynomial-ring",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Arithmetic nodal chart R[x,y]/(xy-pi^n), origin ideal and scheme projection",
+   "results": "8 hits: AlgebraicGeometry.Spec; Scheme.IdealSheafData.glueDataObj; specTargetImageRingHom; AffineSpace.toSpecMvPoly; Scheme.nilradical; AffineSpace.SpecIso; no exact chart-data owner.",
+   "date": "2026-10-24",
+   "verdict": "no exact match; existing project declaration identified below"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nodal chart model xy equals uniformizer power with reduced origin ideal",
+   "results": "8 PowerSeries/Weierstrass hits; no nodal-chart model or origin-ideal declaration.",
+   "date": "2026-10-24",
+   "verdict": "no exact match; existing project declaration identified below"
+  },
+  {
+   "tool": "grep",
+   "query": "DvrNodal|originIdeal|strictNodalRing in Mathlib/AlgebraicGeometry",
+   "results": "0 hits in Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-24",
+   "verdict": "no Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "DvrNodal|originIdeal|strictNodalRing in lean/WeilConjectures and lean/Sheaf",
+   "results": "Existing declarations in Sheaf/AlgebraicGeometry/DvrNodalChartBlowupCalculus.lean; no other owner node.",
+   "date": "2026-10-24",
+   "verdict": "exact existing project declaration found"
+  },
+  {
+   "tool": "grep",
+   "query": "DvrNodalChartBlowupCalculus|originIdeal in dag/nodes",
+   "results": "Theorem node mentions these declarations but has no definition-owner node.",
+   "date": "2026-10-24",
+   "verdict": "new ownership node required"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-point-blowup-local-descent",
+  "date": "2026-10-24",
+  "group": "Q43"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "de Jong Lemma 3.13, local nodal equation and origin data used by the one-point blowup route",
+   "via": [
+    "lem-sfb-nodal-point-blowup-local-descent",
+    "lem-sfb-nodal-trait-regularization",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DvrNodalChartBlowupCalculus",
+  "declaration": "AlgebraicGeometry.DvrNodal.constant",
+  "declarations": [
+   "AlgebraicGeometry.DvrNodal.constant",
+   "AlgebraicGeometry.DvrNodal.coordinate",
+   "AlgebraicGeometry.DvrNodal.originIdeal",
+   "AlgebraicGeometry.DvrNodal.model",
+   "AlgebraicGeometry.DvrNodal.projection",
+   "AlgebraicGeometry.DvrNodal.centre",
+   "AlgebraicGeometry.DvrNodal.IsOrigin"
+  ],
+  "statement": "def constant (R : CommRingCat.{u}) (a c : R) : strictNodalRing R a",
+  "branch": "newtargets-dag",
+  "by": "Q43",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Existing declarations in the published Sheaf.AlgebraicGeometry.DvrNodalChartBlowupCalculus module are the canonical chart data: constant, coordinate, originIdeal, model, projection, centre and IsOrigin. The theorem dependency supplied these plain definitions but did not own them; this node records their ownership without copying or moving them."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8079e0173",
+  "group": "Q43",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8079e0173",
+  "group": "Q43",
+  "result": "fix",
+  "note": "Re-delivery after the 2630cb4f RETURN. Both findings are fixed as prescribed: existing:true def-sfb-dvr-nodal-chart-data (constant/coordinate/originIdeal/model/projection/centre/IsOrigin in the unchanged DvrNodalChartBlowupCalculus) replaces the theorem stmt_dep; the source-locality stmt_dep, its module repair and the proof-only imports are dropped. The theorem signature is byte-identical, and statement/proof/proof_deps equal live; stmt_deps only add owners. Every clause checked against node and 0CDE/0CDC (comap = ideal of the scheme-theoretic preimage; n=2,3 regular; n>=4 unique closed residual point with M_{n-2} neighbourhood; canonical generic-fibre iso; iso off {x}). Edge cases n=2/3/4, κ(u)≠κ(x), empty/disconnected fibres, any characteristic; single universe u. The new node's TeX matches the bodies, and def-trf-strict-semistable-curve owns strictNodalRing/StrictSemistableModel. FIX (record only): split the citation bracket [def-trf-strict-semistable-curve, def-weil-polynomial-ring] (check_new_node (b) failures), and trim the trailing ':=' from lean.statement (check_existing note). check_new_node/check_existing are clean after the fix. No Lean changed, no compile; the worker's timings look carried over, but the imports resolve on reading."
+ }
+}

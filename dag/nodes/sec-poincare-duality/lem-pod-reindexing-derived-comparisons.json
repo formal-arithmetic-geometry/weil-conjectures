@@ -1,0 +1,108 @@
+{
+ "id": "lem-pod-reindexing-derived-comparisons",
+ "kind": "statement",
+ "title": "Localization of the normalized strict reindexing comparisons",
+ "statement": "Let l be prime, E a finite extension of Q_l, and g:X→Y a scheme isomorphism with l invertible in every residue field. Given strict reindexing comparisons with all coordinate, naturality, shift, and restricted-section laws; simultaneous quotient isomorphisms normalized on all tensor generators and commuting with quotient transitions; and comparisons from actual completion to the selected reduction/limit composites, there exist coherent derived reduction, limit, finite evaluation, finite restriction and finite extension comparisons, together with actual K-injective Roos models and a normalized pullback realization. They satisfy reduction/evaluation, limit/projection, whole-system unit, finite-representative, full Roos-limit, and prescribed pullback-normalization equations on all ambient derived objects. [def-pod-completion-reindex-models] [lem-pod-reindexing-strict-comparisons]",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; strict quotient and Roos comparison argument."
+ },
+ "stmt_deps": [
+  "def-pod-completion-reindex-models",
+  "lem-pod-reindexing-strict-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "derive the exact sectionwise equivalences on integral modules, finite\nmodules and whole coherent systems. The restriction projection squares give the\nfinite restriction and evaluation comparisons. Conjugating the scalar-extension\nadjunction by these equivalences gives the finite extension comparison; its\ncounit on K-flat representatives identifies it with the strict quotient map.\nThe quotient transitions make these maps a coherent reduction-system comparison.\nCompute total limit on K-injective systems by the normalized limit-to-Roos map.\nThe strict diagonal Roos comparison then descends to the limit comparison, with\nthe displayed equation on every system complex. Its product projections give\nthe limit-projection formula. Transport the ordinary system tensor/limit Hom\nbijection before deriving. The quotient generator formula identifies its unit,\nand the projection formula identifies its counit, as whole-system maps. Hence\nthe reduction and limit comparisons satisfy both stated adjunction equations.\nIdentify completion with the chosen reduction/limit composite using the unique\nleft-adjoint comparison and the primitive completion-unit normalization. The\nsame simultaneous quotient presentation and the target's normalized Roos model\nidentify the given completed pullback with reduction, system pullback and total\nlimit. This gives its representative normalization on every good complex and\ncoherent presentation. Universal localization gives naturality and independence\nof all representatives. No completeness or boundedness is used in these steps.",
+   "uses": [
+    "lem-pod-reindexing-strict-comparisons",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-cbc-exact-product-functor-strict-limit",
+    "lem-trf-primitive-quotient-realization-comparisons",
+    "lem-pur-normalized-completed-operation-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-reindexing-strict-comparisons",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "lem-trf-primitive-quotient-realization-comparisons",
+  "lem-pur-normalized-completed-operation-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; strict quotient and Roos comparison argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact equivalence commutes with derived inverse limits, with the natural comparison normalized on K-injective resolutions and all limit projections",
+   "results": "Eight matches: mapDerivedCategoryFactorsh and bounded injective/projective resolution comparisons; no simultaneous quotient/Roos normalization.",
+   "date": "2026-10-25",
+   "verdict": "Use project strict Roos maps and derive their prescribed normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "Twelve matches, including the unit and counit formulas for the unique left-adjoint comparison.",
+   "date": "2026-10-25",
+   "verdict": "Available for transporting selected reduction adjunctions."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctor.*(comp|Comp|Iso)|leftAdjointUniq",
+   "results": "Twenty-five matches including rightDerivedFunctorComparison and its factorization; no project-specific quotient normalization.",
+   "date": "2026-10-25",
+   "verdict": "Generic derived uniqueness supplies only the localization framework."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingCompletionUnitTensor",
+  "date": "2026-10-25",
+  "group": "Z5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-reindexing-completion-unit-tensor",
+   "place": "Ambient comparison, proof steps 1--5 and signed shifts in step 8."
+  }
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodReindexingDerivedComparisons",
+  "file": "lean/Sheaf/Paper/PodReindexingDerivedComparisons.lean",
+  "declaration": "WeilConjectures.podReindexingDerivedComparisons",
+  "statement": "theorem podReindexingDerivedComparisons\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (S : PodReindexingStrictData l E g) (hS : S.Laws l E g SY SX)\n    (β : ∀ (P : CochainComplex (scalarReductionSource l E Y) ℤ),\n      integralOperationsGoodComplex l E Y P → ∀ n : ℕ,\n      (isoReductionFiniteComplex l E g n).obj (unrestrictedTowerFiniteComplex l E Y n P) ≅\n        unrestrictedTowerFiniteComplex l E X n ((isoReductionIntegralComplex l E g).obj P))\n    (hβ : podReindexingQuotientGenerators l E g β)\n    (htransition : podReindexingQuotientTransition l E g β)\n    (CY : IntegralOnSlice.completion l E Y none ≅\n      (podReindexCalculus l E Y).reduction ⋙ coefficientSequenceLimit l E Y)\n    (CX : IntegralOnSlice.completion l E X none ≅\n      (podReindexCalculus l E X).reduction ⋙ coefficientSequenceLimit l E X) :\n    ∃ R : PodReindexingDerivedData l E g, R.Laws l E g SY SX S β CY CX",
+  "branch": "sheaf-dag",
+  "by": "Z5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261025T102029-L-3768661",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261025T102029-L-3768661",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

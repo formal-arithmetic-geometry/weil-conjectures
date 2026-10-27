@@ -1,0 +1,107 @@
+{
+ "id": "lem-sfb-rational-p1-tensor-shift-naturality",
+ "kind": "lemma",
+ "title": "Naturality of the fixed tensor-shift comparison",
+ "status": "split",
+ "statement": "For any commutative condensed ring Λ, scheme X, module L on X, and morphism f : A → B in the unbounded derived category of internal Λ_X-module objects, the fixed tensor-shift comparison of [def-sfb-tate-twisted-projection-comparison] satisfies (f ⊗ id) ≫ tensorShiftIso(B).hom = tensorShiftIso(A).hom ≫ twist(f). No boundedness or constructibility hypothesis is needed.",
+ "stmt_deps": [
+  "def-sfb-tate-twisted-projection-comparison",
+  "def-sfb-projective-diagonal-pullback",
+  "sk-def-sfb-derived-tensor-hom"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md",
+  "place": "clause (3), each constituent is a natural transformation"
+ },
+ "proof": [
+  {
+   "text": "Abstract the family of isomorphisms and its normalization predicate before unfolding the shared tensor bundle. Normalization makes each isomorphism equal to the native commutation isomorphism for tensorLeft and shift two. Apply NatTrans.shift_app_comm to the curried tensor natural transformation induced by f. The canonical CommShift structure of derived tensor gives exactly the stated square; transport back to the fixed normalized family.",
+   "uses": [
+    "def-sfb-tate-twisted-projection-comparison",
+    "def-sfb-projective-diagonal-pullback",
+    "sk-def-sfb-derived-tensor-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-tate-twisted-projection-comparison",
+  "def-sfb-projective-diagonal-pullback",
+  "sk-def-sfb-derived-tensor-hom"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md",
+  "place": "C1 formalization of constituent naturality in clause (3)"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the tensor shift isomorphism and of the left factor derived projection comparison",
+   "results": "8 hits, including Functor.commShiftIso_hom_naturality; none gives the normalized internal-module comparisons.",
+   "date": "2026-10-27",
+   "verdict": "Use the native naturality API and transfer along normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.shift_app_comm",
+   "results": "1 exact hit in Mathlib.CategoryTheory.Shift.CommShift.",
+   "date": "2026-10-27",
+   "verdict": "Native tensor-shift naturality ingredient; left projection uses the project mate API."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorShiftIso_naturality|projectionMap_naturality|trace_projection_naturality",
+   "results": "0 Mathlib hits. Project rg found a private native left-projection proof in RationalP1DiagonalTensor, which is reused here, but no public theorem for either fixed comparison. Blueprint clause (3) states constituent naturality.",
+   "date": "2026-10-27",
+   "verdict": "Prove the normalized comparison lemmas from the existing native interfaces."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalP1UnitCounit",
+  "date": "2026-10-27",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-p1-adjunction-rational-unit-counit",
+   "place": "proof clause (3), naturality of the canonical constituents",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalP1TensorShiftNaturality",
+  "file": "lean/Sheaf/Paper/RationalP1TensorShiftNaturality.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.tensorShiftIso_naturality",
+  "statement": "theorem tensorShiftIso_naturality (X : Scheme.{u}) (L : Modules Λ X)\n    {A B : DerivedCategory (Modules Λ X)} (f : A ⟶ B) :\n    tensorHom f (𝟙 _) ≫ (tensorShiftIso Λ X L B).hom =\n      (tensorShiftIso Λ X L A).hom ≫ (twist Λ X L).map f",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-12803",
+  "group": "C1",
+  "result": "fix",
+  "landing": "20261026T235837-L-1460279",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-12803",
+  "group": "C1",
+  "result": "fix",
+  "landing": "20261026T235837-L-1460279",
+  "kind": "interface",
+  "note": "independent cc review: UnitInversionCondition/CounitInversionCondition bodies vs the old unitInversions/counitInversion conclusions (verbatim); Assembly signature vs the clone (identical); new node stmt_deps vs the owners of the declarations their statements use; unit realized (empty) vs the dropped CartesianCoefficients import"
+ }
+}

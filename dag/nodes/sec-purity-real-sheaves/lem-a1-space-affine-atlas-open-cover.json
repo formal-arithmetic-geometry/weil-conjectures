@@ -16,70 +16,50 @@
  ],
  "proof": [
   {
-   "text": "Choose a scheme atlas $p:h_V\\to X$ that is representable, surjective and etale, using [def-trf-algebraic-space]. For each $v\\in V$, choose an affine open $W_v\\subseteq S$ containing its image, and then an affine open $U_v\\subseteq V$ containing $v$ and contained in the inverse image of $W_v$. Both choices follow from [lem-weil-pbc-affine-opens-basis]. Thus the $U_v$ cover $V$, and each structural map $U_v\\to S$ factors through the open subscheme $W_v$ by [lem-weil-pbc-morphism-factors-through-open-subscheme]. The index set $I=|V|$ is a set within [def-weil-size-convention]; if $V$ is empty, use the empty family. Write $U_i,W_i$ for these choices.",
+   "text": "Choose a representable surjective etale atlas $p:h_V\\to X$ by [def-trf-algebraic-space]. The final clause of [lem-a1-space-atlas-open-refinement-pullback], applied to this prescribed atlas, supplies affine opens $U_i\\subseteq V$ covering $V$ and affine opens $W_i\\subseteq S$ with structural factorizations $U_i\\to W_i\\to S$. For a scheme test $h_T\\to X$, the same node represents the chart pullback by $P_i=(T\\times_XV)\\times_VU_i$ and makes $P_i\\to T\\times_XV$ an open immersion. The second projection is etale by the scheme-test definition of $p$. Clauses (1) and (2) of [lem-weil-pbc-etale-composition-cancellation] therefore make $P_i\\to T$ etale. Thus each $f_i:h_{U_i}\\to X$ is representable etale.",
    "uses": [
     "def-trf-algebraic-space",
-    "lem-weil-pbc-affine-opens-basis",
-    "def-weil-size-convention",
-    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+    "lem-a1-space-atlas-open-refinement-pullback",
+    "lem-weil-pbc-etale-composition-cancellation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/spaces-properties.tex",
-    "place": "Tag 03FY, first proof sentence; expand Tag 03FX (lemma-cover-by-union-affines), proof lines 710-715, before forming the unnecessary coproduct."
+    "place": "Tag 03FX (lemma-cover-by-union-affines), proof: choosing the affine open pieces of a fixed atlas over affine base opens and verifying etaleness by scheme-test pullback, before forming the coproduct."
    }
   },
   {
-   "text": "For each $i$, the composite $f_i:h_{U_i}\\to h_V\\to X$ is representable and etale. Indeed, for a scheme test $h_T\\to X$, representability of $p$ gives the scheme $P=T\\times_XV$, with etale projection $P\\to T$ [def-trf-algebraic-space]. By pasting of fibre products, $T\\times_XU_i=P\\times_VU_i$, and its projection to $P$ is an open immersion by [lem-weil-pbc-open-immersion-base-change]: the inverse-image open subscheme of $P$ under $P\\to V$ [def-weil-open-immersion]. Its projection to $T$ is therefore an open immersion followed by an etale morphism; clauses (1) and (2) of [lem-weil-pbc-etale-composition-cancellation] make it etale. This verifies the required property on every scheme test.",
-   "uses": [
-    "def-trf-algebraic-space",
-    "def-weil-open-immersion",
-    "lem-weil-pbc-etale-composition-cancellation",
-    "lem-weil-pbc-open-immersion-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/spaces-properties.tex",
-    "place": "Tag 03FX, proof lines 715-722: etale composition, applied separately to each affine piece."
-   }
-  },
-  {
-   "text": "Apply [lem-a1-etale-scheme-map-open-image] to each $f_i$. It produces an open subspace $X_i\\subseteq X$ with $|X_i|=\\operatorname{im}(|U_i|\\to|X|)$ and a representable surjective etale map $h_{U_i}\\to X_i$. These open subspaces cover: given a field-valued point $x:\\operatorname{Spec}K\\to X$, the scheme $\\operatorname{Spec}K\\times_XV$ surjects onto $\\operatorname{Spec}K$ by [def-trf-algebraic-space]. Choose a point of this nonempty scheme and its residue field $L$. The resulting map $\\operatorname{Spec}L\\to V$ has its image in some $U_i$, so factors through that open subscheme by [lem-weil-pbc-morphism-factors-through-open-subscheme] [def-weil-open-immersion]. Its composite to $X$ is the extension of $x$ to $L$, and hence represents the same point class. That class belongs to $|X_i|$. Thus $|X|=\\bigcup_i|X_i|$, exactly the covering condition in the statement.",
+   "text": "Apply [lem-a1-etale-scheme-map-open-image] to each $f_i$. This gives an open subspace $X_i\\subseteq X$ and a representable surjective etale factor $a_i:h_{U_i}\\to X_i$, with $|X_i|=\\operatorname{im}(|U_i|\\to|X|)$. For the same prescribed atlas $p$ and the same family $(U_i)$, [lem-a1-space-atlas-open-refinement-pullback] also states that the composite $w:h_{\\coprod_iU_i}\\to X$ has $|w|$ surjective. Every point of $\\coprod_iU_i$ lies in one open component $\\iota_i(U_i)$ [lem-weil-pbc-scheme-coproduct-family], and $w$ restricted to that component is $f_i$; so the images of the $|U_i|$, that is the $|X_i|$, cover $|X|$. Thus the $X_i$ give the required Zariski covering with affine atlases.",
    "uses": [
     "lem-a1-etale-scheme-map-open-image",
-    "def-trf-algebraic-space",
-    "def-weil-open-immersion",
-    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+    "lem-a1-space-atlas-open-refinement-pullback",
+    "lem-weil-pbc-scheme-coproduct-family"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/spaces-properties.tex",
-    "place": "Tag 03FY, middle proof sentences, lines 738-742; Tag 06NF for the open-image factorization."
+    "place": "Tags 06NF (lemma-etale-image-open) and 03FY (lemma-union-of-quasi-compact), construction of the open images and covering assertion."
    }
   },
   {
-   "text": "Fix $i$ and a scheme test $h_T\\to X_i$. For each $t\\in T$, base change the surjective map $h_{U_i}\\to X_i$ along $\\operatorname{Spec}\\kappa(t)\\to X_i$. By the scheme-test definition of surjectivity [def-trf-algebraic-space] this is a nonempty scheme. A point and its residue field give an extension $L/\\kappa(t)$ and a lift $\\operatorname{Spec}L\\to U_i$. Since $U_i\\to S$ factors through $W_i$, the image of $t$ under $T\\to S$ lies in $W_i$. Consequently $T\\to S$ has image contained in $W_i$ and factors uniquely through the open subscheme $W_i$ by [lem-weil-pbc-morphism-factors-through-open-subscheme] [def-weil-open-immersion]. For varying $T\\to X_i$ these factorizations commute with pullback by uniqueness. They therefore define a natural transformation $X_i\\to h_{W_i}$ whose composite with $h_{W_i}\\to h_S$ is the structural map. This proves the affine-base clause for every $i$.",
+   "text": "For each $i$, apply [lem-a1-surjective-chart-base-open-factorization] with $Y=X_i$, $q=a_i$, $U=U_i$ and $W=W_i$. Its hypotheses hold because $a_i$ is representable surjective and the structural map of $U_i$ already factors through $W_i$. It supplies $X_i\\to h_{W_i}$ over $S$, proving the affine-base clause. The construction includes the empty-atlas case by the empty family.",
    "uses": [
-    "def-trf-algebraic-space",
-    "def-weil-open-immersion",
-    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+    "lem-a1-surjective-chart-base-open-factorization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/spaces-properties.tex",
-    "place": "Tag 03FY, last proof sentence, lines 743-744: explicit scheme-test verification of factorization through the affine base open."
+    "place": "Tag 03FY (lemma-union-of-quasi-compact), final proof sentence: descent of the factorization through an affine base open; the same scheme-test argument applies to any open W and representable surjection."
    }
   }
  ],
  "proof_deps": [
   "def-trf-algebraic-space",
-  "lem-weil-pbc-affine-opens-basis",
-  "def-weil-size-convention",
-  "lem-weil-pbc-morphism-factors-through-open-subscheme",
-  "def-weil-open-immersion",
+  "lem-a1-space-atlas-open-refinement-pullback",
   "lem-weil-pbc-etale-composition-cancellation",
-  "lem-weil-pbc-open-immersion-base-change",
-  "lem-a1-etale-scheme-map-open-image"
+  "lem-a1-etale-scheme-map-open-image",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-a1-surjective-chart-base-open-factorization"
  ],
  "proof_origin": {
   "by": "document",
@@ -174,19 +154,19 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-a1-space-affine-atlas-open-cover",
-  "worker": "stage1",
-  "summary": "Kept the statement and statement dependencies. Expanded 03FY into affine neighbourhood choices in an existing atlas, scheme-test etaleness of the restricted charts, open images and pointwise coverage, and scheme-test factorization through the affine base opens. Reused the affine-basis and etale-composition Mathlib leaves; only the general 06NF open-image theorem is a new statement-only node. No quasi-compactness, separation or Noetherian hypothesis is added.",
-  "blueprint": "Auxiliary 03XX schemehood reduction underlying the separated-etale-space input to the support argument: 03FY constructs open images of affine etale charts, using 06NF. This continues the existing 03XX/03FY auxiliary route; it does not replace any chapter or unit step."
+  "worker": "Q149",
+  "summary": "Rebased the returned delivery onto the current DAG. Reused the existing fixed-atlas refinement and scheme-test pullback statement lem-a1-space-atlas-open-refinement-pullback (03FX) for the affine charts, the chart pullbacks and, through its |w|-surjectivity clause, the covering of |X| by the images of the U_i; derived chartwise etaleness using the existing etale-composition leaf. One new statement-only node remains: the base-open factorization lemma lem-a1-surjective-chart-base-open-factorization. Reviewer FIX (Q149 cc reader, 2026-10-23): the proposed point-lifting node duplicated the |w|-surjectivity clause of the 03FX node for the same p and cover and was dropped; step 2 re-cites the 03FX node. Item statement, statement dependencies and route are unchanged.",
+  "blueprint": "Retains the auxiliary 03XX/03FY route already attached to lem-a1-affine-hc0. The existing 03FX node realizes the affine-chart refinement and the middle covering sentence of 03FY; the new node realizes its final base-open sentence. No chapter or unit route changes."
  },
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-N5-964945ca9",
-  "group": "N5",
+  "reviewer": "NT-cc-Q149-655ff94e7",
+  "group": "Q149",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-964945ca9 (reviewer sub-agent of L); spot-checked: Read in full: the item (03FY, lemma-union-of-quasi-compact, spaces-properties.tex lines 724-745), the 03FX construction (lines 700-722) and the new node checked against 06NF (lemma-etale-image-open, lines 536-558); also the statements of all cited nodes and unit sk-p-real-rankin. The item statement is unchanged and matches 03FY. The new node lem-a1-etale-scheme-map-open-image states 06NF's factorization part (surjective etale onto the open subspace with |X_f| = image), not the presentation clause. It is true (checked for U empty, f surjective and X a scheme), self-contained and statement-only, with correct blueprint from/via. It duplicates no existing node (rg over dag/nodes for 06NF/03FX/03FY and image-open phrasing; 03XW, 03M4, 02WW, 02WR and the chartwise-etale node differ). It does not restate a clause of the item. The steps are mathematically correct: atlas plus affine-basis choices; scheme-test etaleness by pasting, open immersion and composition; coverage via a residue-field point of Spec K x_X V; and the affine-base factorization via surjective lifts and uniqueness. FIX (C4): steps 1, 3 and 4 cited def-weil-open-immersion for factoring a map through an open subscheme, and step 2 cited it for base change of an open immersion. Both facts are existing Mathlib leaves: lem-weil-pbc-morphism-factors-through-open-subscheme and lem-weil-pbc-open-immersion-base-change. These citations are added in the corrected item JSON, with proof_deps recomputed and step 4 elementary set to false. Batch-5 check: def-trf-algebraic-space is the general definition of an algebraic space with definition-only deps. It is not a step of the trace formula or Poincare duality proofs, and the item and its parent already cite it, so it is outside the assumptions. No other trace/Poincare node is cited. Route: only definitions, Mathlib leaves and a same-unit node, so no tool_uses are needed. No SGA source is cited and no target is touched.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q149-655ff94e7 (reviewer sub-agent of L); spot-checked: Re-split of 2026-10-21 (released note, at least 2 new nodes); second head after the earlier head 1dad965c PASSed but did not land. The live item still has its base 4-step proof, so the delivery is not superseded. Read Stacks spaces-properties 03FX (lines 700-722) and 03FY (724-745), and every cited statement in full. Step 1: atlas from def-trf-algebraic-space; the final clause of the landed NY node lem-a1-space-atlas-open-refinement-pullback (03FX) gives affine U_i covering V and affine W_i with U_i->W_i->S; its P_i=P x_V U_i open-immersion clause plus etale-composition (1),(2) makes each f_i representable etale; the identification T x_X U_i = P_i is elementary pasting. Step 3: new node C (lem-a1-surjective-chart-base-open-factorization) applied to a_i, U_i, W_i gives X_i->h_W_i over S. C is true (residue-field fibre of q is nonempty, so t maps into W; factorization unique; natural by uniqueness). Edge cases checked: W empty, W=S, T empty. C is self-contained, statement-only, sourced at 03FY's final sentence, searched; it is not a duplicate (lem-trf-etale-open-chart-morphism-descent would give only the etale case, from another unit; advisory). FIX (C5): new node B (lem-a1-surjective-atlas-open-cover-point-lifting) is true, but the item uses only its covering clause, and the existing 03FX node already states that |w|:|coprod U_i|->|X| is surjective for the same p and the same family, with the residue-field argument in its source place. The report dismissed this on generality alone. I dropped B; step 2 now cites the 03FX node plus lem-weil-pbc-scheme-coproduct-family (each point of the coproduct lies in one component, and w restricted to that component is f_i), with proof_deps recomputed and split_report updated; assembly 1777 characters. Note for the maintainer: only 1 new node remains against the note's at least 2, because two of the three old arguments were landed meanwhile in the 03FX node; every old argument has a carrier, so I waive the count. Statement, stmt_deps and route are unchanged; no SGA source; no tool_uses needed.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -206,5 +186,16 @@
   "date": "2026-10-18",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

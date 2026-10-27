@@ -1,0 +1,296 @@
+{
+ "id": "lem-per-geometric-normality-finite-inseparable-test",
+ "kind": "statement",
+ "title": "Finite purely inseparable test for geometric normality of an algebra",
+ "statement": "Let $k$ be a field [def-weil-field] and $A$ a commutative $k$-algebra. The following conditions are equivalent: (1) for every finite purely inseparable field extension $L/k$ [def-weil-pbc-finite-purely-inseparable-extension], the commutative tensor-product algebra $L\\otimes_k A$ [def-weil-pbc-module-tensor-product] is a normal ring [def-weil-pbc-normal-ring]; (2) for every field extension $K/k$ [def-pc-field-extension], the ring $K\\otimes_k A$ is normal. Tensor products have multiplication $(x\\otimes a)(y\\otimes b)=xy\\otimes ab$ and unit $1\\otimes1$. No Noetherian, finite-type, domain or nonzero hypothesis is imposed on $A$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 037Z, label lemma-geometrically-normal, equivalence (3) and (1)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-normal-ring",
+  "def-pc-field-extension"
+ ],
+ "proof": [
+  {
+   "text": "Condition (2) implies (1) by restricting its quantifier to finite purely inseparable extensions. Assume (1) for the remainder.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037Z, label lemma-geometrically-normal, immediate implications"
+   }
+  },
+  {
+   "text": "Fix a finitely generated field extension $K/k$. The make-separable lemma supplies a commuting square $k\\to k_1\\to K_1$, $k\\to K\\to K_1$, with $k_1/k$ and $K_1/K$ finite purely inseparable and $K_1/k_1$ separable. If $a_1,\\ldots,a_n$ generate $K/k$ as a field and $e_1,\\ldots,e_m$ form a $K$-basis of $K_1$, then $K_1=k_1(a_1,\\ldots,a_n,e_1,\\ldots,e_m)$: this subfield contains $K$ and all its linear combinations of the $e_j$. Hence $K_1/k_1$ is finitely generated. The smooth-model lemma gives a smooth $k_1$-subalgebra $B\\subseteq K_1$ with fraction field $K_1$. By (1), $C=k_1\\otimes_k A$ is normal.",
+   "uses": [
+    "lem-weil-pbc-make-separable",
+    "lem-weil-pbc-separable-extension-fraction-field-of-smooth-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037Z, label lemma-geometrically-normal, proof of (3) implies (2), field diagram and smooth model"
+   }
+  },
+  {
+   "text": "Base change of the smooth map $k_1\\to B$ along $k_1\\to C$ is the smooth map $C\\to R=C\\otimes_{k_1}B$. Smooth ascent of normality gives normality of $R$. Both cited statements allow arbitrary commutative base rings, so $C$ need not be Noetherian or a domain.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "lem-weil-pbc-smooth-over-normal-ring-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037Z, label lemma-geometrically-normal, proof of (3) implies (2), Steps 1 and 2"
+   }
+  },
+  {
+   "text": "Put $S=B\\setminus\\{0\\}$. Apply localization base change to $B\\to K_1=S^{-1}B$ and $B\\to R$. It identifies $T=R\\otimes_BK_1$ with the localization of $R$ at the images of $S$. Tensor balancing gives inverse ring maps $T\\rightleftarrows C\\otimes_{k_1}K_1$, $(c\\otimes b)\\otimes z\\mapsto c\\otimes bz$ and $c\\otimes z\\mapsto(c\\otimes1)\\otimes z$. In turn the inverse maps $(x\\otimes a)\\otimes z\\mapsto zx\\otimes a$ and $z\\otimes a\\mapsto(1\\otimes a)\\otimes z$ identify this ring with $K_1\\otimes_k A$. Existence, multiplicativity and inverse identities follow from the tensor algebra universal property by checking pure tensors.",
+   "uses": [
+    "lem-weil-pbc-localization-base-change",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037Z, label lemma-geometrically-normal, proof of (3) implies (2), Step 3, tensor-localization identification"
+   }
+  },
+  {
+   "text": "A localization $T=S^{-1}R$ of a normal ring is normal directly from the definition. For a prime $\\mathfrak q\\subset T$, let $\\mathfrak r$ be its inverse image in $R$; it is prime and disjoint from $S$, since elements of $S$ map to units. The inverse maps $T_{\\mathfrak q}\\rightleftarrows R_{\\mathfrak r}$ are $(a/s)/(b/t)\\mapsto at/(sb)$ and $a/b\\mapsto(a/1)/(b/1)$. Here $b\\notin\\mathfrak r$, and all denominator conditions and fraction relations are preserved. Thus $T_{\\mathfrak q}$ is isomorphic to the normal domain $R_{\\mathfrak r}$. This proves normality of $T$, and Step 4 gives normality of $K_1\\otimes_k A$. Ring isomorphisms preserve this property by carrying primes and their localizations bijectively.",
+   "uses": [
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037Z, label lemma-geometrically-normal, proof of (3) implies (2), Step 3; Tag 037C, label lemma-localization-normal-ring, unpacked at primes"
+   }
+  },
+  {
+   "text": "Set $D=K\\otimes_k A$. The inverse ring maps $D\\otimes_KK_1\\rightleftarrows K_1\\otimes_k A$ send $(x\\otimes a)\\otimes z$ to $zx\\otimes a$ and $z\\otimes a$ to $(1\\otimes a)\\otimes z$; balancing and the tensor algebra universal property verify them. The right-hand ring is normal by Step 5. Apply normal-ring field-extension descent with base field $K$, extension $K_1/K$, and algebra $D$. It follows that $K\\otimes_k A$ is normal for every finitely generated $K/k$. The descent statement has no domain, finiteness or nonzero hypothesis on $D$.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-weil-pbc-normal-ring-field-extension-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037Z, label lemma-geometrically-normal, proof of (3) implies (2), Step 4"
+   }
+  },
+  {
+   "text": "Now let $E/k$ be any field extension. Let $I$ be the set of finitely generated intermediate fields $k\\subseteq F\\subseteq E$, ordered by inclusion. This is a small nonempty directed poset: $k$ belongs to it, the field generated by the union of two finite generating sets bounds both stages, and every $x\\in E$ belongs to $k(x)$. The inclusion maps $F\\otimes_k A\\to E\\otimes_k A$ exhibit the latter as their colimit in commutative rings. Indeed a compatible family of ring maps $h_F:F\\otimes_k A\\to H$ has a common restriction $v:A\\to H$ and restrictions $u_F:F\\to H$ agreeing on inclusions. Define $u(x)=u_F(x)$ at any stage containing $x$; a common upper stage proves independence and the ring laws. The maps $u:E\\to H$ and $v$ agree on $k$, and the tensor algebra universal property gives the unique ring map $E\\otimes_k A\\to H$, $x\\otimes a\\mapsto u(x)v(a)$, extending all the $h_F$. Equip $H$ with the $k$-algebra structure induced by $v$ to apply that property. This proves the required colimit without assuming any transition map injective.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037Z, label lemma-geometrically-normal, proof of (2) implies (1), directed tensor-colimit identification"
+   }
+  },
+  {
+   "text": "Every ring $F\\otimes_k A$ in this small filtered diagram is normal by Step 6. The filtered-colimit normality lemma therefore makes its colimit $E\\otimes_k A$ normal. Since $E/k$ was arbitrary, condition (2) follows. This also covers $A=0$: every tensor ring is zero, has no prime ideals, and is normal vacuously.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-normal-ring",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037Z, label lemma-geometrically-normal, proof of (2) implies (1), normality of the colimit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-make-separable",
+  "lem-weil-pbc-separable-extension-fraction-field-of-smooth-algebra",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-weil-pbc-smooth-over-normal-ring-normal",
+  "lem-weil-pbc-localization-base-change",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-pbc-normal-ring",
+  "lem-weil-pbc-normal-ring-field-extension-descent",
+  "lem-weil-pbc-filtered-colimit-normal-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 037Z, label lemma-geometrically-normal"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "geometrically.?normal|geometric.?normal|purelyInseparable.*[Nn]ormal",
+   "results": "{\"t\": \"2026-10-24T07:44:17Z\", \"tool\": \"grep\", \"query\": \"geometrically.?normal|geometric.?normal|purelyInseparable.*[Nn]ormal\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern geometrically reduced algebras, normal field extensions, quasi-finiteness or Noetherianity, not normality of all prime localizations after field base change"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normality after every finite purely inseparable field extension implies normality after every field extension",
+   "results": "{\"t\": \"2026-10-24T07:44:17Z\", \"tool\": \"leansearch\", \"query\": \"Normality after every finite purely inseparable field extension implies normality after every field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsPurelyInseparable.normal\", \"Normal\", \"IsGalois.to_normal\", \"Normal.casesOn\", \"normalClosure.normal\", \"IsPurelyInseparable.trans\", \"IsPurelyInseparable.casesOn\", \"isGalois_iff\"], \"digest\": \"3caee8fd3c39bb1f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern geometrically reduced algebras, normal field extensions, quasi-finiteness or Noetherianity, not normality of all prime localizations after field base change"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPurelyInseparable\", \"IsIntegrallyClosed\"",
+   "results": "{\"t\": \"2026-10-24T07:44:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsPurelyInseparable\\\", \\\"IsIntegrallyClosed\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern geometrically reduced algebras, normal field extensions, quasi-finiteness or Noetherianity, not normality of all prime localizations after field base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative algebra over a field is geometrically normal if and only if its base change to every finite purely inseparable field extension is normal",
+   "results": "{\"t\": \"2026-10-24T07:44:18Z\", \"tool\": \"leanfinder\", \"query\": \"A commutative algebra over a field is geometrically normal if and only if its base change to every finite purely inseparable field extension is normal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsGeometricallyReduced\", \"Algebra.isGeometricallyReduced_iff\", \"IsPurelyInseparable.normal\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct\", \"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\", \"Normal.tower_top_of_normal\", \"Algebra.IsGeometricallyReduced.of_injective\"], \"digest\": \"595260c483b4dd60\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern geometrically reduced algebras, normal field extensions, quasi-finiteness or Noetherianity, not normality of all prime localizations after field base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Testing geometric normality of an arbitrary algebra by finite purely inseparable extensions of its ground field",
+   "results": "{\"t\": \"2026-10-24T07:44:19Z\", \"tool\": \"leanfinder\", \"query\": \"Testing geometric normality of an arbitrary algebra by finite purely inseparable extensions of its ground field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsGeometricallyReduced\", \"IsPurelyInseparable.normal\", \"Algebra.isGeometricallyReduced_iff\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"Algebra.IsGeometricallyReduced.of_forall_fg\", \"Algebra.Unramified\", \"Algebra.FormallySmooth.of_perfectField\", \"Algebra.IsGeometricallyReduced.of_injective\"], \"digest\": \"389c0475d885a625\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern geometrically reduced algebras, normal field extensions, quasi-finiteness or Noetherianity, not normality of all prime localizations after field base change"
+  },
+  {
+   "tool": "grep",
+   "query": "geometrically.?normal|geometric.?normal|purelyInseparable.*[Nn]ormal",
+   "results": "{\"t\": \"2026-10-24T08:12:44Z\", \"tool\": \"grep\", \"query\": \"geometrically.?normal|geometric.?normal|purelyInseparable.*[Nn]ormal\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern normal field extensions or geometric reducedness, not normality of prime localizations after every scalar extension"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normality of arbitrary commutative algebras can be tested after finite purely inseparable extensions of the base field",
+   "results": "{\"t\": \"2026-10-24T08:12:44Z\", \"tool\": \"leansearch\", \"query\": \"Normality of arbitrary commutative algebras can be tested after finite purely inseparable extensions of the base field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsPurelyInseparable.normal\", \"IsPurelyInseparable\", \"AlgEquiv.transfer_normal\", \"Algebra.FormallyUnramified.range_eq_top_of_isPurelyInseparable\", \"IsPurelyInseparable.instOfHasExponent\", \"IsPurelyInseparable.inseparable'\", \"Normal.isIntegral\", \"Normal.mk\"], \"digest\": \"444fb756f2079a0e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern normal field extensions or geometric reducedness, not normality of prime localizations after every scalar extension"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPurelyInseparable\", \"IsIntegrallyClosed\"",
+   "results": "{\"t\": \"2026-10-24T08:12:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsPurelyInseparable\\\", \\\"IsIntegrallyClosed\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern normal field extensions or geometric reducedness, not normality of prime localizations after every scalar extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative algebra over a field is geometrically normal if all finite purely inseparable scalar extensions are normal",
+   "results": "{\"t\": \"2026-10-24T08:12:45Z\", \"tool\": \"leanfinder\", \"query\": \"A commutative algebra over a field is geometrically normal if all finite purely inseparable scalar extensions are normal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsGeometricallyReduced\", \"Algebra.isGeometricallyReduced_iff\", \"IsPurelyInseparable.normal\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct\", \"Algebra.IsGeometricallyReduced.of_forall_fg\", \"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\", \"Algebra.FormallyUnramified.isReduced_of_field\"], \"digest\": \"b5738f43c4a05e34\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern normal field extensions or geometric reducedness, not normality of prime localizations after every scalar extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normal rings remain normal after arbitrary field base change if they remain normal after finite inseparable extensions",
+   "results": "{\"t\": \"2026-10-24T08:13:08Z\", \"tool\": \"leanfinder\", \"query\": \"Normal rings remain normal after arbitrary field base change if they remain normal after finite inseparable extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Normal.tower_top_of_normal\", \"Normal.of_equiv_equiv\", \"IntermediateField.restrictScalars_normal\", \"AlgEquiv.transfer_normal\", \"Normal.of_algEquiv\", \"Algebra.IsGeometricallyReduced\", \"Algebra.Unramified.baseChange\", \"AlgHom.normal_bijective\"], \"digest\": \"0d833088febe3863\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern normal field extensions or geometric reducedness, not normality of prime localizations after every scalar extension"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-finite-algebra-normal-formal-fibres",
+  "date": "2026-10-24",
+  "group": "Q46"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor Step 3 completion subargument, Nishimura–Nishimura normal-formal-fibre lifting: convert the finite purely inseparable tests for a base formal fibre into normality after the residue-field extension of a finite algebra.",
+   "via": [
+    "lem-per-finite-algebra-normal-formal-fibres",
+    "lem-per-nagata-normal-formal-fibres-lifting",
+    "lem-per-adic-normal-completion-lifting",
+    "lem-per-qe-normal-counterexample-reduction",
+    "lem-per-qe-complete-pair-lifting",
+    "lem-per-small-divisor-formal-completion",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-geometric-normality-finite-inseparable-test",
+  "worker": "stage1",
+  "summary": "Follow Stacks 037Z (3) => (2) => (1) and the immediate converse. Reuse existing lemmas; give explicit tensor cancellations, prime-localization maps, finite-generation check and tensor-colimit universal property. No new nodes or statement changes.",
+  "blueprint": "Ancestor Step 3 completion subargument, Nishimura–Nishimura normal-formal-fibre lifting: convert the finite purely inseparable tests for a base formal fibre into normality after the residue-field extension of a finite algebra. Steps 1-8 resolve this normality-test subargument using the cited algebraic tools; the current ancestor proof contains no more specific algebraic argument.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-make-separable",
+    "why": "Generic field-theoretic refinement in Stacks 030R; already Lean-closed. No lemma in this unit supplies the commuting square."
+   },
+   {
+    "node": "lem-weil-pbc-separable-extension-fraction-field-of-smooth-algebra",
+    "why": "Generic smooth model of a finitely generated separable field extension (037X), required by the stated 037Z route."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "why": "Generic base change of smooth ring maps (00T4); Mathlib leaf."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "why": "Normality ascent along arbitrary smooth ring maps (033C), with no Noetherian hypothesis; required in 037Z."
+   },
+   {
+    "node": "lem-weil-pbc-localization-base-change",
+    "why": "Generic tensor localization (00DK); identifies the localization used in 037Z Step 3."
+   },
+   {
+    "node": "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "why": "Generic tensor algebra universal property; Mathlib leaf, used only for explicit ring maps and their identities."
+   },
+   {
+    "node": "lem-weil-pbc-normal-ring-field-extension-descent",
+    "why": "Normality descent along a field extension (033G), exactly the generic descent step of 037Z."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-normal-ring",
+    "why": "Generic preservation of normal rings by small filtered colimits (037D); the unit has no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-make-separable",
+  "lem-weil-pbc-separable-extension-fraction-field-of-smooth-algebra",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-weil-pbc-smooth-over-normal-ring-normal",
+  "lem-weil-pbc-localization-base-change",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-normal-ring-field-extension-descent",
+  "lem-weil-pbc-filtered-colimit-normal-ring"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q129-3c1e11c7b",
+  "group": "Q129",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q129-3c1e11c7b (reviewer sub-agent of L); spot-checked: The statement matches algebra.tex 46885-46951 (Tag 037Z): the item's (1) is Stacks (3) and its (2) is Stacks (1), and A has no hypotheses. The 8 steps follow 037Z's proof with the cited nodes' statements checked. Step 1 restricts the quantifier. Step 2 uses make-separable 030R and the smooth model 037X; finite generation of K1/k1 is shown from k1(a,e)=K1. Step 3 is base change 00T4(1) plus ascent 033C for an arbitrary normal base. Step 4 identifies R⊗_B K1 with a localization of R via localization base change (S=B∖0, B a domain) and cancels it to K1⊗_kA through the tensor universal property; the commuting square gives a consistent k-structure on K1. Step 5 proves 037C inline at primes with correct maps (s∉r, b∉r); no DAG node states 037C. Step 6 applies descent 033G with F=K, E=K1 and no hypothesis on D. Step 7 builds the colimit over finitely generated intermediate fields, a small directed poset, with a correct cocone and uniqueness argument. Step 8 applies 037D for filtered colimits. Edge cases checked: characteristic 0, A=0 and K=k. No duplicate: the perfect-closure criterion and its scheme version assume normality of P⊗A for a perfect closure P, a different hypothesis. The consumer lem-per-finite-algebra-normal-formal-fibres uses exactly (1)⇒(2). The item's dependency closure (582 nodes) does not reach the item, so there is no cycle. The seven generic proper-base-change algebra tool_uses are accepted. No new nodes, no fixes."
+ }
+}

@@ -63,7 +63,65 @@
   "def-wf-fundamental-representation"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Monodromy.DegreeDatum.lift_apply_of_mem_ker",
+    "AlgebraicGeometry.Monodromy.DegreeDatum.lift_degreeOneElement",
+    "AlgebraicGeometry.Monodromy.DegreeDatum.continuous_lift",
+    "AlgebraicGeometry.Monodromy.DegreeDatum.lift"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Monodromy.DegreeDatum.lift_apply_of_mem_ker",
+     "module": "WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Monodromy",
+     "lines": [
+      288,
+      294
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Monodromy.DegreeDatum.lift_degreeOneElement",
+     "module": "WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Monodromy",
+     "lines": [
+      300,
+      306
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Monodromy.DegreeDatum.continuous_lift",
+     "module": "WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Monodromy",
+     "lines": [
+      318,
+      332
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Monodromy.DegreeDatum.lift",
+     "module": "WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Monodromy",
+     "lines": [
+      255,
+      282
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-algebraic-groups-lie-algebras",
  "unit": "sk-d-monodromy",
  "lean": {
@@ -79,5 +137,34 @@
   ],
   "sorry_free": true,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $(W,\\deg,s)$ be a degree datum ([d-monodromy]) with $P=\\ker(\\deg)$,\nlet $f:P\\to M$ be a homomorphism to a group $M$, and let $T\\in M$\nsatisfy $Tf(u)T^{-1}=f(sus^{-1})$ for all $u\\in P$. Then\n\n$$\n\\tilde f(us^n):=f(u)T^n\n\\qquad(u\\in P,\\ n\\in\\mathbf Z)\n$$\n\nis a well-defined group homomorphism $\\tilde f:W\\to M$ with\n$\\tilde f|_P=f$ and $\\tilde f(s)=T$. If $W$ and $M$ are topological\ngroups, $P$ is open in $W$ and $f$ is continuous, then $\\tilde f$ is\ncontinuous.\n\nIn particular, in the situation of [def-wf-fundamental-representation],\nthe formula\n\n$$\n\\rho(\\gamma s^n):=\\rho_{\\mathrm{geom}}(\\gamma)T_s^n\n\\qquad(\\gamma\\in\\pi_1(X,\\bar x),\\ n\\in\\mathbf Z)\n$$\n\ndefines a continuous group homomorphism\n$\\rho:W(X_0,\\bar x)\\to\\operatorname{GL}(V)$ with\n$\\rho|_{\\pi_1(X,\\bar x)}=\\rho_{\\mathrm{geom}}$ and\n$\\rho(s)=T_s$.",
+  "proof": [
+   {
+    "text": "*The abstract extension.* By [d-monodromy] every $w\\in W$ has the form\n$us^n$ with $n=\\deg(w)$ and $u=ws^{-n}\\in P$, and this expression is\nunique because $n$ is determined by $w$. Hence $\\tilde f$ is a\nwell-defined map; it restricts to $f$ (case $n=0$) and takes $s$ to $T$\n(case $u=1$, $n=1$). Induction on $m$, in both directions, turns the\nhypothesis on $T$ into $T^mf(u)T^{-m}=f(s^mus^{-m})$ for all\n$m\\in\\mathbf Z$. Since\n$(us^n)(u's^{n'})=u(s^nu's^{-n})s^{n+n'}$ with\n$s^nu's^{-n}\\in P$ ($P$ is normal), we get\n\n$$\n\\tilde f\\bigl((us^n)(u's^{n'})\\bigr)\n=f(u)\\,T^nf(u')T^{-n}\\,T^{n+n'}\n=\\tilde f(us^n)\\,\\tilde f(u's^{n'}),\n$$\n\nso $\\tilde f$ is a homomorphism. If $P$ is open and $f$ is continuous,\nthen $\\tilde f$ agrees with the continuous map $f$ on the open\nneighbourhood $P$ of $1$, so it is continuous at $1$; a homomorphism of\ntopological groups that is continuous at $1$ is continuous.",
+    "uses": [
+     "d-monodromy"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*The Weil fundamental representation.* By\n[lem-wf-weil-group-exact-sequence], $\\deg:W(X_0,\\bar x)\\to\\mathbf Z$ is\nsurjective with kernel $\\pi_1(X,\\bar x)$, so $(W(X_0,\\bar x),\\deg,s)$ is a\ndegree datum with $P=\\pi_1(X,\\bar x)$. Take $M=\\operatorname{GL}(V)$,\n$f=\\rho_{\\mathrm{geom}}$, which is a continuous homomorphism by the lisse\nsheaf–representation equivalence of [thm-lisse-qlbar-representations],\nand $T=T_s$; the commutation relation displayed in\n[def-wf-fundamental-representation] is the hypothesis on $T$. The\nsubgroup $\\pi_1(X,\\bar x)$ is open in $W(X_0,\\bar x)$: it is the fibre\nover $0$ of the projection of the fibre product of\n[def-wf-fundamental-representation] to the discrete group\n$\\langle\\Phi_X\\rangle\\cong\\mathbf Z$ of [def-tw-frobenius-action]. The\nfirst part therefore applies, and $\\tilde f$ is the displayed $\\rho$.",
+    "uses": [
+     "lem-wf-weil-group-exact-sequence",
+     "thm-lisse-qlbar-representations",
+     "def-wf-fundamental-representation",
+     "def-tw-frobenius-action"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; the node is proved in Lean: recorded 2026-10-25, not reopened"
  }
 }

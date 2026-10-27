@@ -11,9 +11,65 @@
   "def-sp-abelian",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-trf-resolving-class-derived-descent] to the given $\\mathcal P,F$. It supplies one functor $\\widehat F:D^-(\\mathcal A)\\to D(\\mathcal B)$ and natural isomorphisms $\\rho_M:\\widehat F(Q_A M)\\simeq Q_B(F(M))$ for every bounded above $\\mathcal P$-complex. For each $i$, compose with derived cohomology [def-weil-abstract-derived-category], obtaining $\\widehat T_i=H^i\\widehat F$ and $\\rho_M^i:\\widehat T_i(Q_A M)\\simeq H^i(F(M))$. Its naturality is $\\rho_N^i\\widehat T_i(Q_A f)=H^i(F(f))\\rho_M^i$.",
+   "uses": [
+    "lem-trf-resolving-class-derived-descent",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0794, proposition-left-derived-exists, proof of the claim, paragraphs beginning “The problem is that” and “The exact same argument”; direction of the displayed arrow corrected to agree with the diagrams."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-good-truncation-stage-naturality] to the supplied augmentations, transitions and $\\alpha$. Its hypotheses are precisely the vanishing above $n$, isomorphisms through degree $n$ and the two augmentation identities. It gives derived isomorphisms $a_n:Q_AE_n\\simeq Q_AG_n$ with $a_{n+1}Q_A(u_n)=Q_A(v_n)a_n$ and $Q_A(g_n)a_n=Q_A(\\alpha)Q_A(e_n)$. The first equation is inside the full subcategory $D^-(\\mathcal A)$; the second holds in the ambient category even for unbounded $X,Y$.",
+   "uses": [
+    "lem-trf-good-truncation-stage-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0794, proposition-left-derived-exists, proof of the claim, paragraphs beginning “The problem is that” and “The exact same argument”; direction of the displayed arrow corrected to agree with the diagrams."
+   }
+  },
+  {
+   "text": "Define $\\theta_n^i=\\rho_{G_n}^i\\widehat T_i(a_n)(\\rho_{E_n}^i)^{-1}$. Its factors are invertible. Write $T=\\widehat T_i$ and $\\rho=\\rho^i$. Naturality from [lem-trf-resolving-class-derived-descent] and Step 2 give\n$$\\begin{aligned}\n\\theta_{n+1}^i H^i(F(u_n))\n&=\\rho_{G_{n+1}}T(a_{n+1})T(Q_Au_n)\\rho_{E_n}^{-1}\\\\\n&=\\rho_{G_{n+1}}T(Q_Av_n)T(a_n)\\rho_{E_n}^{-1}\n=H^i(F(v_n))\\theta_n^i.\n\\end{aligned}$$\nThe single functor and natural comparison from Step 1 fix these isomorphisms simultaneously for every stage and degree.",
+   "uses": [
+    "lem-trf-resolving-class-derived-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0794, proposition-left-derived-exists, proof of the claim, paragraphs beginning “The problem is that” and “The exact same argument”; direction of the displayed arrow corrected to agree with the diagrams."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-resolving-roof-ambient-compatibility] with $E=E_n$, $G=G_n$, $b=\\alpha e_n$, $c=g_n$, $a=a_n$, $S=\\widehat F$, and the isomorphisms $\\rho$. Step 2 supplies its ambient equality and Step 1 its naturality hypothesis. Its conclusion is $Q_B(F(g_n))\\rho_{G_n}\\widehat F(a_n)\\rho_{E_n}^{-1}=Q_B(F(\\alpha e_n))$. Apply $H^i$ and the canonical cohomology identifications [def-weil-abstract-derived-category]. Functoriality gives $H^i(F(g_n))\\theta_n^i=H^i(F(\\alpha))H^i(F(e_n))$. No exactness on arbitrary complexes or colimits is used.",
+   "uses": [
+    "lem-trf-resolving-roof-ambient-compatibility",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0794, proposition-left-derived-exists, proof of the claim, paragraphs beginning “The problem is that” and “The exact same argument”; direction of the displayed arrow corrected to agree with the diagrams."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-resolving-class-derived-descent",
+  "def-weil-abstract-derived-category",
+  "lem-trf-good-truncation-stage-naturality",
+  "lem-trf-resolving-roof-ambient-compatibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0794, proposition-left-derived-exists, bounded-stage roof argument before passage to colimits; explicit elaboration of roof independence, stage naturality and unbounded-target compatibility using the cited general fraction lemmas."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -157,10 +213,133 @@
    },
    "date": "2026-10-19",
    "verdict": "no match: the hits give ordinary derived fractions, truncation naturality, or derivability structures requiring supplied resolutions. Fractions.lean:72-88 gives a bounded roof for one derived morphism, but not the resolving-class refinement, independence of roofs, transition compatibility and square with maps into arbitrary unbounded targets asserted here."
+  },
+  {
+   "tool": "grep",
+   "query": "right_fac_of_isStrictlyLE|quasiIso_truncLEMap|resolvingClass|bounded.*roof",
+   "results": {
+    "t": "2026-10-22T04:23:15Z",
+    "tool": "grep",
+    "query": "right_fac_of_isStrictlyLE|quasiIso_truncLEMap|resolvingClass|bounded.*roof",
+    "sub": "Algebra/Homology",
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Homology/Embedding/CochainComplex.lean",
+     "Mathlib/Algebra/Homology/Embedding/CochainComplex.lean",
+     "Mathlib/Algebra/Homology/Embedding/TruncLEHomology.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean"
+    ],
+    "digest": "ca96ea0f6ccb5a06"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: truncation and bounded-roof hits are proper subarguments only; global functor-localization hits require preservation of homology on all complexes or exactness, stronger than the resolving-class hypothesis. No declaration gives both compatibility identities for arbitrary stages and unbounded targets."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.truncLEMap, QuasiIso",
+   "results": {
+    "t": "2026-10-22T04:23:16Z",
+    "tool": "loogle",
+    "query": "CochainComplex.truncLEMap, QuasiIso",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "CochainComplex.quasiIso_truncLEMap_iff"
+    ],
+    "digest": "3047030aade76f83"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: truncation and bounded-roof hits are proper subarguments only; global functor-localization hits require preservation of homology on all complexes or exactness, stronger than the resolving-class hypothesis. No declaration gives both compatibility identities for arbitrary stages and unbounded targets."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible cohomology isomorphisms for bounded above resolutions of canonical truncations of a quasi-isomorphism after an additive functor",
+   "results": {
+    "t": "2026-10-22T04:23:16Z",
+    "tool": "leansearch",
+    "query": "Compatible cohomology isomorphisms for bounded above resolutions of canonical truncations of a quasi-isomorphism after an additive functor",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HomologicalComplex.quasiIsoAt_map_of_preservesHomology",
+     "CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc",
+     "CochainComplex.mappingCone.mapTrianglehIso",
+     "CategoryTheory.InjectiveResolution.isoRightDerivedObj",
+     "CochainComplex.mappingCone.mapTriangleIso",
+     "CochainComplex.quasiIso_truncGEMap_iff",
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors",
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh"
+    ],
+    "digest": "d2944101b1c50e91"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: truncation and bounded-roof hits are proper subarguments only; global functor-localization hits require preservation of homology on all complexes or exactness, stronger than the resolving-class hypothesis. No declaration gives both compatibility identities for arbitrary stages and unbounded targets."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor preserving quasi-isomorphisms between bounded above resolving-class complexes gives natural cohomology comparisons for models of good truncations",
+   "results": {
+    "t": "2026-10-22T04:23:26Z",
+    "tool": "leanfinder",
+    "query": "An additive functor preserving quasi-isomorphisms between bounded above resolving-class complexes gives natural cohomology comparisons for models of good truncations",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors",
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app",
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh",
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso",
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoLocalizerMorphism",
+     "CategoryTheory.Functor.mapHomologicalComplex_upToQuasiIso_Q_inverts_quasiIso",
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app_assoc",
+     "CategoryTheory.Functor.instLiftingHomologicalComplexHomologicalComplexUpToQuasiIsoQQuasiIsoCompMapHomologicalComplexMapHomologicalComplexUpToQuasiIso"
+    ],
+    "digest": "542d3b84f879d91a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: truncation and bounded-roof hits are proper subarguments only; global functor-localization hits require preservation of homology on all complexes or exactness, stronger than the resolving-class hypothesis. No declaration gives both compatibility identities for arbitrary stages and unbounded targets."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Independence of bounded resolving class roofs and naturality of H i F on the bounded above derived category with augmentation into an unbounded complex",
+   "results": {
+    "t": "2026-10-22T04:23:46Z",
+    "tool": "leanfinder",
+    "query": "Independence of bounded resolving class roofs and naturality of H i F on the bounded above derived category with augmentation into an unbounded complex",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.mapDerivedCategoryFactorsh",
+     "CategoryTheory.Functor.mapDerivedCategoryFactors",
+     "CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory",
+     "CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app",
+     "CategoryTheory.Functor.rightDerived",
+     "CategoryTheory.Functor.toRightDerivedZero",
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app",
+     "CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality"
+    ],
+    "digest": "130286a1e499fd16"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: truncation and bounded-roof hits are proper subarguments only; global functor-localization hits require preservation of homology on all complexes or exactness, stronger than the resolving-class hypothesis. No declaration gives both compatibility identities for arbitrary stages and unbounded targets."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-unbounded-left-derived-criterion",
@@ -194,5 +373,66 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-bounded-stage-roof-comparison",
+  "worker": "stage1",
+  "summary": "Repair of the 7154-character returned proof: statement unchanged; three independent statement-only unsplit nodes distribute old steps 1--3 (localization and descent), 4--5 (coherent truncation comparison), and 7--8 (unbounded-target roof refinement and derived augmentation compatibility). The parent keeps only their assembly and the elementary conjugation of old step 6. The full original argument and its allocation are preserved in report.md. All three new nodes were searched by leanfinder, loogle, grep and a second natural-language phrasing with leansearch. Landing-return repair: compared the retained delivery with the current read-only DAG; the statement and all fields except proof/proof_deps/split_report agree. Re-read every current external statement dependency and parent proof citation, retained all three statement-only nodes and their logged searches, and expanded the citation excerpts to include the supplied functor and isomorphisms. The delivery tool rebases the permitted split fields onto current origin/sheaf-dag; report.md records the separate live-promotion responsibility. Rebase retry after dry-run head 9897522c111: rechecked the live eight-step proof and released keep_plan repair note; all inherited fields agree with current main. Expanded step-2 and step-4 citation evidence to include the actual derived comparison constructions as well as both equations. Retained the entire old argument, all supporting statements and authentic search logs. Current-DAG repair 2026-10-23: initial server preflight passed at c63253ab920. Reopened the external cited statements and the retained three supporting statements; no statement or hypothesis changed. Expanded the elementary parent step 3 into the explicit naturality computation so transition compatibility is directly reviewable after rebasing. Enlarged its verbatim citation evidence and recorded the current comparison and source checks in report.md.",
+  "blueprint": "Inherited lem-trf-local-term-locality proof (1)--(2), auxiliary Tag 0794 argument: first paragraph and resolving the common roof are assigned to derived-descent; the truncated-alpha diagram and “compatible as n varies” to stage-naturality; the resolving roof and displayed square to ambient-compatibility. No chapter or unit route change.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "lem-pc-right-fraction-representation",
+  "lem-pc-right-fraction-common-refinement",
+  "lem-weil-pbc-truncation-cohomology",
+  "lem-sfb-subcategory-left-resolution",
+  "lem-trf-right-fraction-dense-subcategory",
+  "lem-weil-pbc-homotopic-maps-equal-cohomology",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-truncation-descends"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-c3fbf3870",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-c3fbf3870 (reviewer sub-agent of L); spot-checked: PASS, no fixes. This is the 4th delivery of this re-split. Heads 4d361e4c, 1bbf4306 and e659aece passed review with no fixes, and all three landings were refused with 'not in the live DAG … L promotes it'. Diff against e659: the three new nodes are byte-identical (resolving-class-derived-descent, good-truncation-stage-naturality, resolving-roof-ambient-compatibility). The item changes only in step 3 and in split_report. Step 3 now writes out the conjugation: θ_{n+1}H^i(Fu_n) = ρ_{G_{n+1}}T(a_{n+1})T(Qu_n)ρ_{E_n}^{-1} = ρ_{G_{n+1}}T(Qv_n)T(a_n)ρ_{E_n}^{-1} = H^i(Fv_n)θ_n. I recomputed it from the ρ-naturality on R-maps that node A states and from a_{n+1}Q(u_n) = Q(v_n)a_n (node B). It is correct and genuinely elementary. Live and side-live still hold the old 8-step split (7154 characters). The released stage-1 keep_plan re-split note is unchanged, and none of the new ids exists live, so no other group has superseded this delivery. The statement and all non-proof fields are identical to live. All 8 old step texts are kept verbatim in the report: old steps 1-3 → A, 4-5 → B, 7-8 → C, and step 6 is the elementary parent step 3. The parent has 4 steps and 2058 characters; the new nodes have 1959, 1703 and 1889 characters. They are statement-only, record four kinds of search, carry correct created/blueprint fields, and none restates the item. I reread Stacks derived.tex Tag 0794: the first paragraph, the claim, and the 'The problem is that' roof diagram. I also reread def-weil-abstract-derived-category, localization-universal-property (1) and truncation-descends (a). I re-checked node B's identities without inverting Q(c^X) or Q(c^Y), node C's roof refinement and cancellation of Q_BF(p), and step 4 with b = αe_n and c = g_n. Edge cases: P = {0}, α = id, i < 0 and i > n, acyclic tails, unbounded X and Y, and F = ⊗Z/2. Duplicate search over live and side-live: rg for epimorphic image / resolving class / 0794. Distinguished candidates: sc-nattrans-from-resolving-class, sfb-subcategory-truncation-resolution-system, pur-resolving-class-essential-constancy, sfb-resolving-derived-adjunction-normalization and pur-cochain-homotopy-derived-comparison; none is a duplicate. No SGA is cited, and tool_uses is []. Maintainer note: the refusals are a promotion problem for L, not a fault of the delivery."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.BoundedStageRoofComparison",
+  "declaration": "CategoryTheory.Functor.bounded_stage_roof_comparison",
+  "declarations": [
+   "CategoryTheory.Functor.bounded_stage_roof_comparison",
+   "CategoryTheory.Functor.bounded_stage_roof_comparison_homology"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/BoundedStageRoofComparison.lean",
+  "statement": "theorem bounded_stage_roof_comparison {A : Type uA} [Category.{vA} A] [Abelian A] {B : Type uB} [Category.{vB} B] [Abelian B] [HasDerivedCategory.{wB} B] (P : A → Prop) (hzero : P (0 : A)) (hiso : ∀ (M N : A), (M ≅ N) → P M → P N) (hsum : ∀ (M N : A), P M → P N → P (M ⊞ N)) (hcover : ∀ M : A, ∃ (N : A) (p : N ⟶ M), P N ∧ Epi p) (F : A ⥤ B) [F.Additive] (hF : ∀ (K L : CochainComplex A ℤ) (f : K ⟶ L), (∃ b : ℤ, ∀ j : ℤ, b < j → IsZero (K.X j)) → (∀ j : ℤ, P (K.X j)) → (∃ b : ℤ, ∀ j : ℤ, b < j → IsZero (L.X j)) → (∀ j : ℤ, P (L.X j)) → QuasiIso f → QuasiIso ((F.mapHomologicalComplex (ComplexShape.up ℤ)).map f)) (E G : ℕ → CochainComplex A ℤ) (hEbound : ∀ k : ℕ, ∃ b : ℤ, ∀ j : ℤ, b < j → IsZero ((E k).X j)) (hGbound : ∀ k : ℕ, ∃ b : ℤ, ∀ j : ℤ, b < j → IsZero ((G k).X j)) (hEterms : ∀ (k : ℕ) (j : ℤ), P ((E k).X j)) (hGterms : ∀ (k : ℕ) (j : ℤ), P ((G k).X j)) (u : ∀ k : ℕ, E k ⟶ E (k + 1)) (v : ∀ k : ℕ, G k ⟶ G (k + 1)) (X Y : CochainComplex A ℤ) (e : ∀ k : ℕ, E k ⟶ X) (g : ∀ k : ℕ, G k ⟶ Y) (he : ∀ k : ℕ, u k ≫ e (k + 1) = e k) (hg : ∀ k : ℕ, v k ≫ g (k + 1) = g k) (hEvanish : ∀ (k : ℕ) (j : ℤ), (k : ℤ) + 1 < j → IsZero ((E k).homology j)) (hGvanish : ∀ (k : ℕ) (j : ℤ), (k : ℤ) + 1 < j → IsZero ((G k).homology j)) (heiso : ∀ (k : ℕ) (j : ℤ), j ≤ (k : ℤ) + 1 → IsIso (HomologicalComplex.homologyMap (e k) j)) (hgiso : ∀ (k : ℕ) (j : ℤ), j ≤ (k : ℤ) + 1 → IsIso (HomologicalComplex.homologyMap (g k) j)) (α : X ⟶ Y) (hα : QuasiIso α) : ∃ Θ : ∀ k : ℕ, DerivedCategory.Q.obj ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj (E k)) ≅ DerivedCategory.Q.obj ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj (G k)), (∀ k : ℕ, DerivedCategory.Q.map ((F.mapHomologicalComplex (ComplexShape.up ℤ)).map (u k)) ≫ (Θ (k + 1)).hom = (Θ k).hom ≫ DerivedCategory.Q.map ((F.mapHomologicalComplex (ComplexShape.up ℤ)).map (v k))) ∧ (∀ k : ℕ, (Θ k).hom ≫ DerivedCategory.Q.map ((F.mapHomologicalComplex (ComplexShape.up ℤ)).map (g k)) = DerivedCategory.Q.map ((F.mapHomologicalComplex (ComplexShape.up ℤ)).map (e k)) ≫ DerivedCategory.Q.map ((F.mapHomologicalComplex (ComplexShape.up ℤ)).map α))",
+  "branch": "sheaf-dag",
+  "by": "Q46",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Derived comparison is the main declaration under brief-stage2 §3 (2026-10-21 convention); bounded_stage_roof_comparison_homology states the node verbatim on cohomology. Natural index k represents the positive stage k+1. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8c654d976",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Every node hypothesis and conclusion clause is matched in Lean with no stronger assumption: P closure (zero, isomorphism, binary biproduct, epi cover), F additive, hF limited to bounded-above P-complexes, stages indexed k↦k+1, vanishing above n strictly and isomorphisms for j≤n inclusive, arbitrary quasi-isomorphism α, independent universes. bounded_stage_roof_comparison_homology states the node verbatim with correct composition order. The derived main declaration, required by the brief-stage2 §3 derived-form convention of 2026-10-21, was checked true by the node's roof argument, applying F then Q into D(B). lean.statement is verbatim the file signature. No definitions; both proofs are sorry only. Docstrings give the Tag 0794 source places and blueprint id, plus all 8 proof steps. Imported proof-dependency modules exist live. No duplicate found; first stage-2 delivery; no competing landing. No compile: no file changed."
+ }
 }

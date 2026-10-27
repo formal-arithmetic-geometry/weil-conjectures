@@ -1,0 +1,105 @@
+{
+ "id": "lem-amb-etale-single-restriction-factors",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-amb-vector-integration",
+   "place": "Restriction compatibility for the prescribed local trace",
+   "via": [
+    "lem-amb-vector-integration-local-trace-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The factors of the degree-zero restriction comparison",
+ "statement": "For a commutative ring A and an etale map f:U→X of schemes, the comparison etaleSingleRestrictionIso A f from [lem-amb-etale-degree-zero-hom] is exactly the composite of singleFunctorCompLeftDerivedUpperStarIso and the singleFunctor-whiskered comparison upperStarIsoLocalizationRestriction. The equation is an equation of natural isomorphisms, not an existence statement.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md",
+  "place": "Overlap calculation: inverse image and the degree-zero Hom correspondence commute with restriction"
+ },
+ "stmt_deps": [
+  "lem-amb-etale-degree-zero-hom"
+ ],
+ "proof": [
+  {
+   "text": "Unfold the specified etaleSingleRestrictionIso. Its defining body is exactly the two-factor composite. Reflexivity proves the equation without unfolding either factor. This separate checked equation allows composition calculations to avoid expensive unfolding of the derived-category definitions.",
+   "uses": [
+    "lem-amb-etale-degree-zero-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-etale-degree-zero-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md",
+  "place": "Categorical restriction subcalculation, implemented from the proved source APIs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback composition on a constant sheaf in degree zero agrees with the constant object pullback isomorphism",
+   "results": "No matching algebraic etale trace interface. Source LeftDerivedUpperStarSingle supplies the degree-zero compositor formula.",
+   "date": "2026-10-26",
+   "verdict": "reuse the source compositor and generic naturality"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"upperStarConstantSheafIso\"",
+   "results": "0 Mathlib hits; source UpperStarConstantSheafComp supplies constant-sheaf composition.",
+   "date": "2026-10-26",
+   "verdict": "use the source result"
+  },
+  {
+   "tool": "grep",
+   "query": "singleFunctorCompLeftDerived|upperStarConstantSheafIso|localizationRestrictionComp",
+   "results": "0 Mathlib hits. Repository search finds LeftDerivedUpperStarSingle, UpperStarConstantSheafComp, and EtaleMorphismDescent.",
+   "date": "2026-10-26",
+   "verdict": "reuse the proved source declarations; this module supplies only wrapper composition"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.VectorIntegrationLocalTraceCompatibility",
+  "date": "2026-10-26",
+  "group": "U2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSingleRestrictionFactors",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSingleRestrictionFactors.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleSingleRestrictionIso_eq",
+  "statement": "theorem etaleSingleRestrictionIso_eq (A : Type (u + 1)) [CommRing A]\n    {U X : Scheme.{u}} (f : U ⟶ X) [Etale f] :\n    etaleSingleRestrictionIso A f =\n      singleFunctorCompLeftDerivedUpperStarIso (ModuleCat.{u + 1} A) f ≪≫\n        Functor.isoWhiskerRight\n          (upperStarIsoLocalizationRestriction (ModuleCat.{u + 1} A) f inferInstance)\n          (_root_.DerivedCategory.singleFunctor _ 0)",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261026T100422-L-21726",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261026T100422-L-21726",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

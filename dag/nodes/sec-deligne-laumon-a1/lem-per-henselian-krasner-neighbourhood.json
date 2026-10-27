@@ -15,56 +15,56 @@
  ],
  "proof": [
   {
-   "text": "Put $G=\\operatorname{Aut}_F(N)$ and $\\mathcal O=\\{x\\in N:w(x)\\geq0\\}$. For $\\sigma\\in G$, $w\\circ\\sigma$ is another prolongation of the valuation on $F$, since $\\sigma$ fixes $F$. By [lem-per-henselian-finite-extension-topology], applied to the finite algebraic extension $N/F$, the two prolongations have the same valuation subring. Consequently $\\sigma^{-1}(\\mathcal O)=\\mathcal O$. Only uniqueness of the prolongation up to equality of valuation subrings is used; none of the topology-comparison clauses is used.",
+   "text": "Put $G=\\operatorname{Aut}_F(N)$ and $W=\\mathcal O_w$. For $\\sigma\\in G$, $w\\circ\\sigma$ is another prolongation of the given valuation on $F$. Apply the uniqueness clause of [lem-per-henselian-finite-extension-topology] with $E=N$: its hypotheses are exactly the nontrivial valuation, henselian valuation ring and finite algebraic extension assumed here. Thus $\\sigma^{-1}W=W$, so $\\sigma$ preserves $W$ and its units.",
    "uses": [
     "lem-per-henselian-finite-extension-topology"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "XX 4.4, printed p.374: forms of Krasner lemma; explicit agent-written finite-Galois argument"
+    "place": "XX 4.4, printed pp.373–374 (PDF pp.379–380), valued-field paragraph; agent reconstruction of the Krasner argument referred to there."
    }
   },
   {
-   "text": "By [lem-weil-pbc-finite-galois-fixed-field], $G$ is finite. Thus each $\\sigma\\in G$ has finite order: two powers agree in the finite list of powers, and cancellation gives $\\sigma^n=1$ for some $n>0$. For nonzero $a,b\\in N$, $w(a)\\geq w(b)$ is equivalent to $a/b\\in\\mathcal O$. Step 1 and $\\sigma(a/b)=\\sigma(a)/\\sigma(b)$ therefore give $w(\\sigma a)\\geq w(\\sigma b)$ if and only if $w(a)\\geq w(b)$, and likewise preserve strict comparisons. If $w(\\sigma x)>w(x)$ for nonzero $x$, iterating this comparison gives $w(x)<w(\\sigma x)<\\cdots<w(\\sigma^n x)=w(x)$, a contradiction; the reversed strict inequality gives the reversed contradiction. Totality now gives $w(\\sigma x)=w(x)$. This holds for $x=0$ as well, since $\\sigma0=0$.",
+   "text": "By [lem-weil-pbc-finite-galois-fixed-field], $G$ is finite. Hence each $\\sigma\\in G$ has finite order $r>0$: two powers coincide and cancellation gives $\\sigma^r=1$. For nonzero $a,b$, $w(a)>w(b)$ means $a/b\\in W\\setminus W^\\times$, which the preceding step shows is preserved by $\\sigma$. If $w(\\sigma x)>w(x)$, applying this observation repeatedly gives $w(x)<w(\\sigma x)<\\cdots<w(\\sigma^r x)=w(x)$, a contradiction; the reverse strict inequality gives a decreasing contradiction. Therefore $w(\\sigma x)=w(x)$ for every $x\\ne0$, and also for $x=0$.",
    "uses": [
     "lem-weil-pbc-finite-galois-fixed-field"
    ],
    "elementary": true,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "XX 4.4, printed p.374: forms of Krasner lemma; explicit agent-written finite-Galois argument"
+    "place": "XX 4.4, printed pp.373–374 (PDF pp.379–380), valued-field paragraph; agent reconstruction of the Krasner argument referred to there."
    }
   },
   {
-   "text": "Let $\\beta$ satisfy the stated inequalities. Take any $\\sigma\\in G$ fixing $\\beta$. If $\\sigma\\alpha\\ne\\alpha$, put $d=\\alpha-\\beta$. Step 2 gives $w(\\sigma\\alpha-\\beta)=w(\\sigma d)=w(d)$. The valuation inequality applied to $\\alpha-\\sigma\\alpha=d-\\sigma d$ yields $w(\\alpha-\\sigma\\alpha)\\geq\\min\\{w(d),w(\\sigma d)\\}=w(\\alpha-\\beta)$, contradicting the strict hypothesis for this $\\sigma$. Hence every automorphism in $G$ fixing $\\beta$ fixes $\\alpha$. This also covers $d=0$, when the same inequality has right side $\\infty$.",
+   "text": "Let $H\\subseteq G$ consist of the automorphisms fixing $F(\\beta)$ pointwise. For $\\tau\\in H$ we have $\\tau\\beta=\\beta$, so $\\alpha-\\tau\\alpha=(\\alpha-\\beta)-\\tau(\\alpha-\\beta)$. The valuation axioms and the preceding equality give $w(\\alpha-\\tau\\alpha)\\geq\\min\\{w(\\alpha-\\beta),w(\\tau(\\alpha-\\beta))\\}=w(\\alpha-\\beta)$. If $\\tau\\alpha\\ne\\alpha$, this contradicts the strict inequality in the hypothesis. Hence every element of $H$ fixes $\\alpha$. This calculation also covers $\\alpha=\\beta$, with $w(0)=\\infty$.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "XX 4.4, printed p.374: forms of Krasner lemma; explicit agent-written finite-Galois argument"
+    "place": "XX 4.4, printed pp.373–374 (PDF pp.379–380), valued-field paragraph; agent reconstruction of the Krasner argument referred to there."
    }
   },
   {
-   "text": "Let $L=F(\\beta)\\subseteq N$. An $F$-automorphism of $N$ fixes $\\beta$ if and only if it fixes $L$ pointwise: the elements it fixes form a subfield containing $F$ and $\\beta$, and $L$ is the smallest such subfield. The extension $N/F$ is Galois by hypothesis, so [lem-exc-etale-galois-fixed-field-subgroup] identifies the fixed field of this fixing subgroup with $L$. Step 3 says that $\\alpha$ belongs to that fixed field. Thus $\\alpha\\in F(\\beta)$.",
+   "text": "Apply the finite Galois fixed-field theorem IsGalois.fixedField_fixingSubgroup, the finite specialization of [lem-exc-etale-galois-fixed-field-subgroup], to N/F and F(beta). The ultrametric calculation proves that every member of its fixing subgroup fixes alpha, so alpha belongs to F(beta).",
    "uses": [
     "lem-exc-etale-galois-fixed-field-subgroup"
    ],
    "elementary": false,
    "source": {
-    "document": "Mathlib/FieldTheory/Galois/Infinite.lean",
-    "place": "InfiniteGalois.fixedField_fixingSubgroup, line 85; elementary description of the subgroup fixing a generated field"
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XX 4.4, printed pp.373–374 (PDF pp.379–380), valued-field paragraph; agent reconstruction of the Krasner argument referred to there."
    }
   },
   {
-   "text": "For the neighbourhood clause, let $S=\\{\\sigma\\in G:\\sigma\\alpha\\ne\\alpha\\}$. It is finite by [lem-weil-pbc-finite-galois-fixed-field]. If $S$ is nonempty, the finite nonempty subset $\\{w(\\alpha-\\sigma\\alpha):\\sigma\\in S\\}$ of the totally ordered value group has a largest element $r$ (take successive larger values). Set $U=\\{\\beta\\in N:w(\\alpha-\\beta)>r\\}$. This is a basic open ball and contains $\\alpha$, since $w(0)=\\infty>r$. Each $\\beta\\in U$ satisfies every required strict inequality, so Step 4 applies. If $S$ is empty, $\\alpha$ is fixed by all of $G$, hence $\\alpha\\in F$ by the fixed-field clause of [lem-weil-pbc-finite-galois-fixed-field]; take $U=N$, since $F\\subseteq F(\\beta)$ for all $\\beta$. In particular this is the specified choice when $\\alpha\\in F$. Only a finite maximum is taken; there is no completeness or rank assumption.",
+   "text": "By [lem-weil-pbc-finite-galois-fixed-field], the automorphism group G is finite. Let S be the subtype of automorphisms moving alpha. For each sigma in S, alpha - sigma(alpha) is nonzero, so its additive valuation is a finite value gamma_sigma in the ambient ordered group. Let U be the intersection over S of the basic open balls {beta : gamma_sigma < w(beta - alpha)}. This finite intersection is open and contains alpha, since w(0) is infinity. Symmetry w(beta-alpha)=w(alpha-beta) shows every beta in U satisfies all Krasner inequalities, so the preceding steps give alpha in F(beta). If alpha lies in the base field, [lem-weil-pbc-finite-galois-fixed-field] says that every automorphism fixes alpha; then S is empty and U=N. This avoids choosing a maximum or requiring a moving conjugate; it also handles N=F and alpha=beta without a separate case.",
    "uses": [
     "lem-weil-pbc-finite-galois-fixed-field"
    ],
    "elementary": true,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "XX 4.4, printed p.374: forms of Krasner lemma; explicit agent-written finite-Galois argument"
+    "place": "XX 4.4, printed pp.373–374 (PDF pp.379–380), valued-field paragraph; agent reconstruction of the Krasner argument referred to there."
    }
   }
  ],
@@ -76,7 +76,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-  "place": "XX 4.4, printed p.374 motivates the Krasner input but omits its proof; explicit finite-Galois proof from uniqueness of valuation prolongations and Galois fixed fields. Bourbaki AC VI section 8 exercises 12 and 14(a) unavailable locally."
+  "place": "XX 4.4, printed pp.373–374 (PDF pp.379–380), valued-field paragraph; agent reconstruction of the Krasner argument referred to there. ILO states the dense henselian-field comparison and refers to Bourbaki VI §8, exercises 12 and 14(a), whose text is not locally available; this proof is written out by Q142, not attributed to unread Bourbaki text. Stage-3 Lean implementation by S2 uses finite Galois fixed-field theory and a finite intersection of conjugate-distance balls instead of the maximum-radius construction."
  },
  "mathlib_searches": [
   {
@@ -155,6 +155,48 @@
    "results": "{\"t\": \"2026-10-18T23:52:16Z\", \"tool\": \"leanfinder\", \"query\": \"Krasner lemma automorphisms fixing beta fix alpha in arbitrary henselian valued fields without completeness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Field.henselian\", \"ValuationSubring.decompositionSubgroup\", \"ValuationSubring.inertiaSubgroup\", \"hensels_lemma\", \"HenselianLocalRing.TFAE\", \"HenselianLocalRing\", \"HenselianLocalRing.is_henselian\", \"HenselianRing.is_henselian\"], \"digest\": \"c5636b6f09f363a1\"}",
    "date": "2026-10-19",
    "verdict": "no match: inspected returned signatures. IsKrasner.krasner requires a normed field and an IsKrasner instance; available completeSpace instances add completeness and a real-valued norm. HenselianLocalRing and decompositionSubgroup definitions do not prove arbitrary-rank Krasner; finite Galois and subfield-closure results do not supply the valuation assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "Krasner|henselian.*valuation|valuation.*henselian",
+   "results": "{\"t\": \"2026-10-24T10:54:04Z\", \"tool\": \"grep\", \"query\": \"Krasner|henselian.*valuation|valuation.*henselian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Normed/Field/Dense.lean\", \"Mathlib/Analysis/Normed/Field/Dense.lean\", \"Mathlib/Analysis/Normed/Field/Dense.lean\", \"Mathlib/Analysis/Normed/Field/Krasner.lean\", \"Mathlib/Analysis/Normed/Field/Krasner.lean\", \"Mathlib/Analysis/Normed/Field/Krasner.lean\", \"Mathlib/Analysis/Normed/Field/Krasner.lean\", \"Mathlib/Analysis/Normed/Field/Krasner.lean\"], \"digest\": \"c377415666d1d560\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned valuation and henselian definitions do not state arbitrary-rank Krasner. IsKrasner requires a normed field and the available instances require a complete nontrivially normed base; inspected Mathlib/Analysis/Normed/Field/Krasner.lean, lines 48–75 and 117–129. Existing Galois fixed-field leaves are reused separately."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Krasner lemma for henselian valued fields with arbitrary ordered value group",
+   "results": "{\"t\": \"2026-10-24T10:54:04Z\", \"tool\": \"leansearch\", \"query\": \"Krasner lemma for henselian valued fields with arbitrary ordered value group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LocalSubring.exists_le_valuationSubring\", \"Valued.ResidueField\", \"Valuation.HasExtension.ofComapInteger\", \"IsNonarchimedeanLocalField.instCompleteSpace\", \"ValuationRing.le_total\", \"IsNonarchimedeanLocalField.toIsValuativeTopology\", \"ValuationSubring.monotone_mapOfLE\", \"ValuationSubring.le_top\"], \"digest\": \"7546783879f243d4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned valuation and henselian definitions do not state arbitrary-rank Krasner. IsKrasner requires a normed field and the available instances require a complete nontrivially normed base; inspected Mathlib/Analysis/Normed/Field/Krasner.lean, lines 48–75 and 117–129. Existing Galois fixed-field leaves are reused separately."
+  },
+  {
+   "tool": "loogle",
+   "query": "Valuation, HenselianLocalRing",
+   "results": "{\"t\": \"2026-10-24T10:54:05Z\", \"tool\": \"loogle\", \"query\": \"Valuation, HenselianLocalRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned valuation and henselian definitions do not state arbitrary-rank Krasner. IsKrasner requires a normed field and the available instances require a complete nontrivially normed base; inspected Mathlib/Analysis/Normed/Field/Krasner.lean, lines 48–75 and 117–129. Existing Galois fixed-field leaves are reused separately."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A henselian valuation ring has a unique extension to an algebraic field extension and Galois automorphisms preserve its valuation",
+   "results": "{\"t\": \"2026-10-24T10:54:06Z\", \"tool\": \"leanfinder\", \"query\": \"A henselian valuation ring has a unique extension to an algebraic field extension and Galois automorphisms preserve its valuation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ValuationSubring.decompositionSubgroup\", \"Field.henselian\", \"ValuationSubring.inertiaSubgroup\", \"Valued.extension_extends\", \"Valuation.HasExtension\", \"galLiftEquiv\", \"Valuation.HasExtension.algebraMap_residue_eq_residue_algebraMap\", \"NumberField.InfinitePlace.exists_smul_eq_of_comap_eq\"], \"digest\": \"71e79d3333f60752\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned valuation and henselian definitions do not state arbitrary-rank Krasner. IsKrasner requires a normed field and the available instances require a complete nontrivially normed base; inspected Mathlib/Analysis/Normed/Field/Krasner.lean, lines 48–75 and 117–129. Existing Galois fixed-field leaves are reused separately."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsKrasner",
+   "results": "{\"t\": \"2026-10-24T10:55:40Z\", \"tool\": \"loogle\", \"query\": \"IsKrasner\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"IsKrasner\", \"IsKrasner.of_completeSpace_of_normal\", \"IsKrasner.of_completeSpace\", \"IsKrasner.krasner'\", \"IsKrasner.mk\", \"IsKrasner.krasner\"], \"digest\": \"f6ae8d1e20030b23\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned valuation and henselian definitions do not state arbitrary-rank Krasner. IsKrasner requires a normed field and the available instances require a complete nontrivially normed base; inspected Mathlib/Analysis/Normed/Field/Krasner.lean, lines 48–75 and 117–129. Existing Galois fixed-field leaves are reused separately."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Krasner lemma for arbitrary rank henselian valued fields: sufficiently close beta has alpha in the intermediate field generated by beta",
+   "results": "{\"t\": \"2026-10-24T10:55:41Z\", \"tool\": \"leanfinder\", \"query\": \"Krasner lemma for arbitrary rank henselian valued fields: sufficiently close beta has alpha in the intermediate field generated by beta\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Field.henselian\", \"hensels_lemma\", \"IntermediateField.Lifts.IsExtendible\", \"Field.Emb.Cardinal.isLeast_leastExt\", \"IntermediateField.Lifts.exists_lift_of_splits\", \"IntermediateField.Lifts.exists_lift_of_splits'\", \"HenselianLocalRing.TFAE\", \"instIsLiouvilleSubtypeMemIntermediateField\"], \"digest\": \"cdb446b45d07c51f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned valuation and henselian definitions do not state arbitrary-rank Krasner. IsKrasner requires a normed field and the available instances require a complete nontrivially normed base; inspected Mathlib/Analysis/Normed/Field/Krasner.lean, lines 48–75 and 117–129. Existing Galois fixed-field leaves are reused separately."
   }
  ],
  "mathlib_match": null,
@@ -187,40 +229,67 @@
   "same_as": [],
   "is": null
  },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean_removed": {
+  "commit": "f6bf55e2b05",
+  "path": "lean/Sheaf/FieldTheory/HenselianKrasnerNeighbourhood.lean",
+  "module": "Sheaf.FieldTheory.HenselianKrasnerNeighbourhood",
+  "declaration": "FieldTheory.henselianKrasnerNeighbourhood",
+  "reason": "module deleted as dead (no target reaches it by imports; this node is not reached either); the declaration does not live on elsewhere, so the node has no Lean statement"
+ },
  "split_report": {
-  "date": "2026-10-19",
+  "date": "2026-10-24",
   "item": "lem-per-henselian-krasner-neighbourhood",
   "worker": "stage1",
-  "summary": "Explicit five-step finite-Galois proof, reusing the existing henselian prolongation theorem and two existing Mathlib Galois leaves. Equality of valuation subrings is converted into equality of values using finite order, with the argument written out. The ultrametric contradiction proves the stabilizer inclusion; fixed fields give membership and a finite maximum gives the open neighbourhood. No new nodes. Corrected twice-escaped TeX and made the valuation/topology conventions explicit without changing the hypotheses or conclusion.",
-  "blueprint": "Realizes the Krasner-neighbourhood input to the dense henselian valued-field comparison used by the completion-rigidity branch of lem-per-artin-gabber-affine-curve, proof Step 3. Keeps the inherited ancestor and via route.",
+  "summary": "Reconstructed after the Q112 release without restoring withdrawn proof edges or Lean attachment. Preserved statement and provenance. Reused the admitted finite-extension uniqueness clause, proved exact valuation invariance by finite-order strict-cycle contradiction, performed the ultrametric Krasner calculation, applied an existing intermediate fixed-field leaf, and constructed an explicit ball. No new nodes.",
+  "blueprint": "Preserved ancestor provenance: lem-per-artin-gabber-affine-curve, historical proof Step 3 strict-completion local-model input, specifically the ILO XX 4.4 dense henselian-field comparison. Latest blueprint text is statement-only here; this is the specifically re-admitted lower interface of coord/changes/20261024-Q112-strict-completion-inputs.md, not a restoration of excluded comparisons.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-19",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-cc-Q11-d74dd7598",
-  "group": "Q11",
+  "reviewer": "NT-cc-Q142-4bb2e58f4",
+  "group": "Q142",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-d74dd7598 (reviewer sub-agent of L); spot-checked: I read the mathematics in full and made no fixes. The delivery is one commit with the item and its report, and it adds no new nodes. The statement's hypotheses and conclusion are unchanged from the NQ snapshot that created the node; the delivery only adds a sentence spelling out the valuation, topology and valuation-ring conventions, and stmt_deps are unchanged. The citer lem-per-dense-henselian-field-etale-comparison (Steps 1, 3 and 4) gets exactly the open neighbourhood it uses. Source: ILO XX 4.4, printed p.374 (PDF p.380) only invokes forms of Krasner's lemma and refers to Bourbaki AC VI §8 exercises 12 and 14a, which is not available locally, so proof_origin agent is correct. No SGA is cited. Step 1 uses only the uniqueness clause of lem-per-henselian-finite-extension-topology (same unit, unsplit, no proof_deps, so no cycle). w∘σ is a prolongation, so σ⁻¹(O)=O. Henselianity is needed exactly here: for Q(i) over Q with p≡1 mod 4, σ swaps the two prolongations. Step 2: G is finite by the finite-Galois Mathlib leaf; ratio membership in O preserves weak and strict comparisons, and finite order gives w∘σ=w, with no rank-one assumption. Step 3: with d=α−β, the inequality w(d−σd) ≥ w(α−β) contradicts the hypothesis; the direction is correct and d=0 is covered. Step 4: InfiniteGalois.fixedField_fixingSubgroup (Infinite.lean:85, read) applies to any intermediate field, and the stabilizer of β equals the pointwise stabilizer of F(β). Step 5: a finite maximum r is taken in the value group and the ball around α is a basic open set. If S is empty, IsGalois.mem_range_algebraMap_iff_fixed (Basic.lean:340, read) gives α∈F and U=N. Small cases tested: Q_p(√p) with p odd, a rank-two valued field, and α∈F or β=α. Searches for Krasner and for valuation prolongation with automorphisms or isometries found no duplicate. The off-unit citations are Mathlib leaves only, so no tool_uses are needed."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q142-4bb2e58f4 (reviewer sub-agent of L); spot-checked: Read the full item and all five steps. The statement is unchanged and true, and I tested it on small cases: N=F, α=β, β∈F, and a rank-2 lexicographic value group. Step 1 cites the prolongation-uniqueness clause of lem-per-henselian-finite-extension-topology; its hypotheses (nontrivial valuation, henselian ring, E=N finite) are all in the item. Since w∘σ is again a prolongation, σ^{-1}W=W. Step 2 shows w∘σ=w exactly: G is finite by lem-weil-pbc-finite-galois-fixed-field, and w(a)>w(b) ⇔ a/b∈W∖W^×, so a strict inequality would give a strict cycle under the finite order of σ. This is correct for arbitrary rank. Step 3 is the ultrametric Krasner calculation and is correct, including w(0)=∞. Step 4 applies lem-exc-etale-galois-fixed-field-subgroup to exactly the subgroup fixing F(β). Step 5 takes the maximum over the finite set of moved conjugates to get a basic open ball, or U=N when α∈F. proof_deps equals the union of the uses. Source check: ILO XX 4.4, PDF p.380, refers to forms of Krasner's lemma (Bourbaki AC VI §8 ex. 12, 14a) without a proof, so proof_origin agent is honest. No SGA is cited. No new nodes. A DAG search for Krasner found no duplicate: lem-sfb-complete-normed-krasner is the complete rank-one normed version only. This is a re-admitted interface, not a 2026-10-21 re-split, and the proof is a short assembly of cited nodes. Delivery-errors A–F are clean. No fixes, no tool_uses."
  },
  "lean": {
   "module": "Sheaf.FieldTheory.HenselianKrasnerNeighbourhood",
-  "declaration": "FieldTheory.henselianKrasnerNeighbourhood",
+  "declaration": "FieldTheory.henselian_krasner_neighbourhood",
   "file": "lean/Sheaf/FieldTheory/HenselianKrasnerNeighbourhood.lean",
-  "statement": "theorem henselianKrasnerNeighbourhood (F : Type u) (N : Type v) [Field F] [Field N] [Algebra F N] (Γ : Type a) [LinearOrderedCommGroupWithZero Γ] [vF : Valued F Γ] [vN : Valued N Γ] [HenselianLocalRing vF.v.integer] [FiniteDimensional F N] [IsGalois F N] (h_nontrivial : ∃ x : F, x ≠ 0 ∧ vF.v x ≠ 1) (h_prolong : ∀ x : F, vN.v (algebraMap F N x) = vF.v x) : ∀ α : N, (∀ β : N, (∀ σ : N ≃ₐ[F] N, σ α ≠ α → vN.v (α - β) < vN.v (α - σ α)) → α ∈ IntermediateField.adjoin F ({β} : Set N)) ∧ ∃ U : Set N, IsOpen U ∧ α ∈ U ∧ (∀ β : N, β ∈ U → α ∈ IntermediateField.adjoin F ({β} : Set N)) ∧ (α ∈ Set.range (algebraMap F N) → U = Set.univ)",
+  "statement": "theorem henselian_krasner_neighbourhood {F : Type u} [Field F] {N : Type v} [Field N] [Algebra F N] [FiniteDimensional F N] [IsGalois F N] {Γ : Type w} [AddCommGroup Γ] [LinearOrder Γ] [IsOrderedAddMonoid Γ] (vF : AddValuation F (WithTop Γ)) [vF.toValuation.IsNontrivial] [HenselianLocalRing vF.toValuation.integer] (wN : AddValuation N (WithTop Γ)) (hw : wN.comap (algebraMap F N) = vF) (α : N) : (∀ β : N, (∀ σ : N ≃ₐ[F] N, σ α ≠ α → wN (α - σ α) < wN (α - β)) → α ∈ IntermediateField.adjoin F {β}) ∧ ∃ U : Set N, @IsOpen N (TopologicalSpace.generateFrom {B : Set N | ∃ a : N, ∃ γ : Γ, B = {x : N | (γ : WithTop Γ) < wN (x - a)}}) U ∧ α ∈ U ∧ (∀ β ∈ U, α ∈ IntermediateField.adjoin F {β}) ∧ (α ∈ Set.range (algebraMap F N) → U = Set.univ)",
   "branch": "newtargets-dag",
-  "by": "Q80",
-  "date": "2026-10-19",
-  "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.FieldTheory.HenselianKrasnerNeighbourhood deleted (dead: no target reaches it); this node is not reached either."
+  "by": "Q09",
+  "date": "2026-10-24",
+  "existing": false
  },
  "reviewed_lean": {
-  "date": "2026-10-19",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-65498dd5a",
-  "group": "Q80",
+  "reviewer": "NT-stage2-cc-d2454fa91",
+  "group": "Q09",
   "result": "pass",
-  "note": "Lean statement matches the node clause by clause. Field, Valued F/N Γ with h_prolong (a common Γ loses no generality), the nontriviality hypothesis (∃ x ≠ 0, v x ≠ 1), HenselianLocalRing on vF.v.integer (same ring as the sibling's valuationSubring), and FiniteDimensional + IsGalois (= Algebra.IsSeparable + Normal) render the hypotheses. The strict inequality is correctly reversed to the multiplicative vN.v(α−β) < vN.v(α−σα). The conclusions are α ∈ IntermediateField.adjoin F {β}, an open U in the valuation topology from Valued, and U = univ when α ∈ range algebraMap; quantifier order matches. Edge cases checked: α ∈ F, α = 0, N = F, β = α, rank-2 Γ, char p. No duplicate (Mathlib IsKrasner is normed). Docstrings carry the source, the blueprint and all 5 proof steps; only sorry; lean.statement is verbatim and only the lean field changed vs live. nt_compile --json clean (4.0 s, exit 0). Advisory: the non-public proof-dependency imports are unused by the statement."
+  "note": "Lean matches every node clause: F field; N/F FiniteDimensional+IsGalois (separable+normal); Γ ordered add comm group with values in WithTop Γ, no rank restriction; vF nontrivial (Valuation.IsNontrivial) with HenselianLocalRing on vF.toValuation.integer (= additive value ≥ 0); prolongation by wN.comap (algebraMap F N) = vF, no loss of generality; strict Krasner inequality over all σ : N ≃ₐ[F] N moving α implies α ∈ IntermediateField.adjoin F {β}; ∃ U open in generateFrom of exactly the node's balls (these form a basis by ultrametricity), α ∈ U, every β ∈ U gives α ∈ F(β), and U = univ when α ∈ F (true and satisfiable). Statement is true; edge cases N=F, α∈F, α=β, trivial Γ (excluded by IsNontrivial) and value group larger than the image all fine. Only the node's lean field changed (compared with side-live). lean.statement is verbatim in the file; one sorry; docstrings have source place, blueprint tag and the 5 proof steps. All 4 stmt_deps used through their records. No duplicate: Mathlib IsKrasner is normed/rank one, side-live has only a p-adic application. Mathlib names checked in source. No recompile, no changes."
  },
- "lean_audit": {}
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261026T092544-L-3442946",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

@@ -1,0 +1,152 @@
+{
+ "id": "lem-pur-normalized-integral-pullback-tower",
+ "kind": "lemma",
+ "title": "The unique normalized integral pullback tower comparison",
+ "statement": "Fix a prime l, a finite extension E of Q_l, and a scheme morphism f:X → Y, with independent site and coefficient universes. Let R_W be the completed integral coefficient sheaf [def-weil-completed-integral-coefficients], and let f* be the ordinary module pullback along the unique completed coefficient map compatible with every finite quotient [lem-tw-completed-coefficient-ringed-coherence]. There is a unique natural isomorphism of whole strict towers from the global quotient reduction tower of f*P to the recorded tower Res_n f_n*(P tensor_(R_Y) S_(Y,n)) [def-pur-integral-derived-operations, def-a1-integral-finite-pullback-tower, def-pur-integral-finite-pullback, def-weil-integral-reduction-tower]. It is natural in every unbounded cochain complex P. In degree i over the inverse-image object of V in Y.ProEt, its nth component sends a tensor unit_f(x) to a times unit_(f_n)(1 tensor x), for every finite coefficient section a and every section x of P^i over V. No invertibility of l on X or Y, completeness, boundedness or constructibility assumption is required.",
+ "stmt_deps": [
+  "def-weil-completed-integral-coefficients",
+  "lem-tw-completed-coefficient-ringed-coherence",
+  "def-pur-integral-derived-operations",
+  "def-a1-integral-finite-pullback-tower",
+  "def-pur-integral-finite-pullback",
+  "def-weil-integral-reduction-tower"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D7 and 03EL: pullback/pushforward and tensor/restriction adjunctions; lemma-epimorphism-modules: restriction along a ring epimorphism is fully faithful. See also sites-cohomology.tex Tag 06YY."
+ },
+ "proof": [
+  {
+   "text": "The completed coefficient map is the transpose of the projection-compatible map in lem-tw-completed-coefficient-ringed-coherence. Apply the ring-sheaf adjunction naturality equivalence to transport every projection equation and its uniqueness. This gives exactly the original ambient coefficient map, direct image and its ordinary left adjoint, with independent site and coefficient universes.",
+   "uses": [
+    "lem-tw-completed-coefficient-ringed-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each quotient n, the projection square gives a sectionwise identity isomorphism between restriction followed by completed direct image and finite direct image followed by restriction. The normalized scalar-reduction adjunction and the completed and finite pullback adjunctions show that pullback followed by reduction and reduction followed by finite pullback are left adjoints to this same functor. Adjunction.leftAdjointUniq gives their canonical isomorphism. Its unit equation is the claimed formula on unit-coefficient generators. Finite linearity and the scalar-extension generator smul formula give every coefficient.",
+   "uses": [
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "lem-pur-integral-operations-well-defined",
+    "lem-pur-integral-tensor-transition-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Completed coefficient projections are locally surjective. Hence a map between restrictions of finite modules is uniquely a finite-linear map, using IntegralScalarProof.liftMap. The composite pullback/reduction hom equivalence is injective: equality after the composite unit implies equality of the original maps. Apply this to degreewise maps and the recorded generator formulas for unrestricted reduction and finite pullback transitions. Both transition composites take the composite unit to the same finite pullback of the reduced section, so they agree.",
+   "uses": [
+    "lem-pur-integral-tensor-transition-compatibility",
+    "lem-pur-integral-operations-well-defined",
+    "def-weil-integral-reduction-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift the finite comparison to cochain complexes and restrict to completed coefficients. NatTrans.ofOpSequence assembles the compatible comparisons, and pointwise invertibility gives a natural isomorphism of the whole strict towers. Use the proved equality of the global slice tower and unrestricted tower. A normalized competing isomorphism agrees on the composite units; the preceding injectivity, followed by chain-map, tower-map and natural-transformation extensionality, proves uniqueness.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "def-weil-integral-reduction-tower"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-integral-derived-operations",
+  "def-weil-integral-reduction-tower",
+  "lem-pur-integral-operations-well-defined",
+  "lem-pur-integral-tensor-transition-compatibility",
+  "lem-tw-completed-coefficient-ringed-coherence",
+  "lem-weil-derived-scalar-extension-restriction-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D7 and 03EL: pullback/pushforward and tensor/restriction adjunctions; lemma-epimorphism-modules: restriction along a ring epimorphism is fully faithful. See also sites-cohomology.tex Tag 06YY.",
+  "note": "B4 proves the existing pullTowerModel statement, preserving every public signature and construction. This support module isolates its self-contained proof after profiling and abstracting the costly restricted-map extensionality argument; no new hole is introduced."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars commutes with pullback of sheaves of modules, normalized on tensor generators",
+   "date": "2026-10-26",
+   "results": "8 hits, including SheafOfModules.pullbackComp, pullbackIso, sheafificationCompPullback and freeFunctorCompPullbackIso.",
+   "verdict": "No whole strict quotient-tower comparison; ordinary adjunction uniqueness supplies the finite comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "date": "2026-10-26",
+   "results": "Mathlib leftAdjointUniq and unit_leftAdjointUniq_hom_app.",
+   "verdict": "Used directly for finite comparisons and normalization; quotient transitions and whole-tower uniqueness still need the proof here."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarReduction.*Adjunction|pushRestrictionIso|restricted_hom_ext",
+   "date": "2026-10-26",
+   "results": "msearch returned 0; local rg located scalarReductionExtension_adjunction, pushRestrictionIso and IntegralScalarProof.liftMap.",
+   "verdict": "Use the existing normalized scalar adjunction, right-adjoint comparison and finite-linear lift; prove the composite-unit extensionality and tower assembly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralAmbientOperationModels",
+  "date": "2026-10-26",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-integral-ambient-operation-models",
+   "place": "Pullback clause of proof Step 3, including its canonical coefficient map from Step 1."
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedIntegralPullbackTower",
+  "file": "lean/Sheaf/Paper/NormalizedIntegralPullbackTower.lean",
+  "declaration": "WeilConjectures.IntegralAmbient.pullTowerModel",
+  "declarations": [
+   "WeilConjectures.IntegralAmbient.coefficientMap_existsUnique",
+   "WeilConjectures.IntegralAmbient.coefficientMap",
+   "WeilConjectures.IntegralAmbient.push",
+   "WeilConjectures.IntegralAmbient.push_isRightAdjoint",
+   "WeilConjectures.IntegralAmbient.pull",
+   "WeilConjectures.IntegralAmbient.adjunction",
+   "WeilConjectures.IntegralAmbient.push_additive",
+   "WeilConjectures.IntegralAmbient.pull_additive",
+   "WeilConjectures.IntegralAmbient.pullComplex",
+   "WeilConjectures.IntegralAmbient.pullSection",
+   "WeilConjectures.IntegralAmbient.finitePullSection",
+   "WeilConjectures.IntegralAmbient.pullTower",
+   "WeilConjectures.IntegralAmbient.pullTowerModel"
+  ],
+  "statement": "theorem pullTowerModel {X Y : Scheme.{t}} (f : X ⟶ Y) :\n    ∃! b : pullTower l E f ≅ integralOperationsPullbackTowerFunctor l E f,\n      ∀ (P : CochainComplex (integralTowerModules l E Y) ℤ) (n : ℕ) (i : ℤ)\n        (V : Y.ProEt) (a : (integralCoefficientCommRingSheaf l E X n).obj.obj\n          (op ((Scheme.proEtaleBaseChange f).obj V))) (x : (P.X i).val.obj (op V)),\n        (((b.hom.app P).app (op n)).f i).val.app\n            (op ((Scheme.proEtaleBaseChange f).obj V))\n          (IntegralOnSlice.generator l E X none n ((pull l E f).obj (P.X i))\n            (op ((Scheme.proEtaleBaseChange f).obj V)) a (pullSection l E f (P.X i) V x)) =\n          finitePullSection l E f n P i V a x",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-bdbf9",
+  "group": "B4",
+  "result": "fix",
+  "landing": "20261026T130259-L-3445421",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-bdbf9",
+  "group": "B4",
+  "result": "fix",
+  "landing": "20261026T130259-L-3445421",
+  "kind": "interface",
+  "note": "independent cc review: delivered NormalizedIntegralPullbackTower + item against clone (moved block byte-identical except blueprint tags; pullTowerModel statement identical); 9 direct importers compiled against the delivered modules (all OK); #print axioms clean; node stmt_deps against the owners of the Lean statement's constants"
+ }
+}

@@ -1,0 +1,330 @@
+{
+ "id": "lem-sfb-relative-block-gauss-chart",
+ "kind": "statement",
+ "title": "Block Gauss open chart over an arbitrary base ring",
+ "statement": "Let $A$ be a commutative ring, let $s\\geq0$, and let $r_1,\\ldots,r_s$ be positive integers. Put $E=\\bigoplus_{i=1}^s A^{r_i}$, and let $\\operatorname{GL}_E$ be the affine $A$-scheme whose points on a commutative $A$-algebra $B$ are the invertible matrices on $E\\otimes_A B$. Its coordinate ring is the polynomial ring in the matrix entries with the determinant inverted [def-weil-affine-spectrum, def-weil-pbc-matrix-determinant]. Let $L,U\\subseteq\\operatorname{GL}_E$ be the closed subschemes of block lower and block upper unitriangular matrices, respectively: all diagonal blocks are identities and all blocks above, respectively below, the diagonal vanish. Let $D=\\prod_{i=1}^s\\operatorname{GL}_{r_i,A}$, embedded as block diagonal matrices. Write $\\Delta_j(g)$ for the determinant of the leading block of $g$ on $\\bigoplus_{i\\leq j}A^{r_i}$, and let $\\mathcal V\\subseteq\\operatorname{GL}_E$ be the principal open where $\\prod_{j=1}^s\\Delta_j$ is invertible. Then multiplication induces an isomorphism of $A$-schemes\n$$L\\times_A D\\times_A U\\xrightarrow{\\sim}\\mathcal V,\\qquad(l,d,u)\\longmapsto ldu,$$\nwith fibre products as in [def-pc-fibre-product]. Its inverse gives unique block Gauss factors functorially over every commutative $A$-algebra, including nonreduced algebras. The isomorphism commutes with change of the base ring and with conjugation by block diagonal invertible matrices. For $s=0$, all the displayed schemes are $\\operatorname{Spec}A$ and the product of minors is $1$. The zero ring is allowed. Open and closed subschemes have the meanings of [def-weil-open-immersion, def-weil-closed-immersion].",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Agent generalization to arbitrary base rings of the matrix Gauss chart used with (152)-(153), printed p.510. Algebraic inputs: Matrix.fromBlocks_eq_of_invertible₁₁ and Matrix.det_fromBlocks₁₁, Mathlib/LinearAlgebra/Matrix/SchurComplement.lean:50 and :370; the existing field-only chart is lem-sfb-block-gauss-scheme-chart."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-matrix-determinant",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "For $s=0$, the empty matrix has determinant $1$, there are no coordinates, and every displayed coordinate algebra is $A$. Thus all schemes and maps are the terminal $A$-scheme $\\operatorname{Spec}A$. Assume henceforth $s>0$. Write a lower unitriangular matrix as $I+N$. Each summand in an entry of $N^s$ requires $s+1$ strictly decreasing block indices, so $N^s=0$ and $\\sum_{k=0}^{s-1}(-N)^k$ is a two-sided inverse. Therefore its strictly lower block entries are independent coordinates; the polynomial universal property and affine-spectrum correspondence represent $L$ by their polynomial ring over $A$. The upper version gives $U$ by reversing the inequalities. These presentations agree with the closed subschemes in the statement: quotienting the general matrix coordinates by the prescribed zero and identity entries leaves exactly these coordinates, and its determinant is $1$ by the permutation formula: a nonzero permutation term has row block at least column block at every position; equality of the sums of these block indices forces equality at every position, and the identity diagonal blocks then force the identity permutation. For each block, $A[d_{i,ab},\\det(d_i)^{-1}]$ represents invertible matrices: a matrix inverse makes its determinant a unit by multiplicativity, and a unit determinant gives the inverse $\\det(d_i)^{-1}\\operatorname{adj}(d_i)$ by the adjugate identity. These are the coordinate presentations of the factors of $D$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-affine-spectrum",
+    "def-weil-closed-immersion",
+    "def-weil-pbc-matrix-determinant",
+    "lem-sfb-matrix-cramer-determinant-identities",
+    "lem-weil-pbc-matrix-adjugate-identity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent-written arbitrary-base matrix argument supporting §23h, (152)–(153), Theorem 23.72, printed pp.510–511; explicit coordinate presentations, using the determinant definition and adjugate identity."
+   }
+  },
+  {
+   "text": "By the affine fibre-product statement, $X=L\\times_A D\\times_A U$ is affine, and its ring $C$ is the tensor product over $A$ of the coordinate rings of all factors. The tensor-product universal property identifies maps $C\\to B$ with independent choices of all these factor coordinates in any commutative $A$-algebra $B$. Combining this with polynomial evaluation and localization, $C$ is the polynomial ring on the lower, diagonal and upper block entries with the diagonal-block determinants inverted. Put $H=A[g_{ab},\\det(g)^{-1}]$ and $f=\\prod_{j=1}^s\\Delta_j$. Clause (b) of the affine-open localization statement gives $\\mathcal V=\\operatorname{Spec}R$ with $R=H_f$ (Stacks 01I3, schemes-lemma-standard-open-affine). The localization universal property (Stacks 00CP, algebra-proposition-universal-property-localization) identifies $\\mathcal V(B)$ with invertible matrices for which $f(g)$ is a unit. This means every $\\Delta_j(g)$ is a unit: if $fv=1$, then $v\\prod_{k\\ne j}\\Delta_k$ is its inverse; conversely multiply the individual inverses. No reducedness or nonzero-ring assumption enters.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-ring-localization-universal-property",
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent-written arbitrary-base matrix argument supporting §23h, (152)–(153), Theorem 23.72, printed pp.510–511; affine products: Stacks 01I4 (schemes-lemma-fibre-product-affine-schemes); principal open and its points: 01I3 and 00CP."
+   }
+  },
+  {
+   "text": "For a triple $(l,d,u)$ over any commutative $A$-algebra $B$, its product restricted to the first $j$ blocks is $l_{\\le j}d_{\\le j}u_{\\le j}$. Indeed the intermediate block index in $l_{ik}d_ku_{kh}$ must satisfy $k\\le i$ and $k\\le h$, so $i,h\\le j$ forces $k\\le j$. Repeatedly split off the first block and use the Schur determinant identity with pivot $I$: every lower or upper unitriangular leading matrix has determinant $1$. Applied with zero off-diagonal blocks and invertible diagonal pivots, the same identity gives $\\det(d_{\\le j})=\\prod_{i\\le j}\\det(d_i)$. Multiplicativity now gives $\\Delta_j(ldu)=\\prod_{i\\le j}\\det(d_i)$, a unit. Here every nonempty leading size is at least $1$, as required by the determinant-multiplicativity node. Matrix multiplication is polynomial. Apply it to the universal triple over $C$; the just-proved units allow evaluation $H_f\\to C$ by localization. The affine-spectrum correspondence gives the desired multiplication morphism $m:X\\to\\mathcal V$.",
+   "uses": [
+    "lem-sfb-two-block-schur-identities",
+    "lem-sfb-matrix-cramer-determinant-identities",
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-ring-localization-universal-property",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent-written arbitrary-base matrix argument supporting §23h, (152)–(153), Theorem 23.72, printed pp.510–511; leading-minor image calculation and the multiplication morphism; algebraic inputs: the pinned Schur and determinant identities."
+   }
+  },
+  {
+   "text": "Induct on the number of blocks, uniformly for every commutative $A$-algebra $B$, to prove existence of factors for $g\\in\\mathcal V(B)$. The empty case is step 1; for one block take $(I,g,I)$. For $s\\ge2$, split off the first block and write $g=\\left(\\begin{smallmatrix}P&Q\\\\ T&W\\end{smallmatrix}\\right)$. Since $\\det P=\\Delta_1(g)$ is a unit, the adjugate identity gives $P^{-1}=(\\det P)^{-1}\\operatorname{adj}(P)$. Put $S=W-TP^{-1}Q$. For $1\\le k\\le s-1$, apply the Schur determinant identity to the first $k+1$ blocks of $g$ to obtain $\\Delta_{k+1}(g)=\\det(P)\\Delta_k(S)$. Hence all $\\Delta_k(S)$ are units, and the full one makes $S$ invertible by the adjugate identity. Induction gives $S=l'd'u'$. Set $L_0=\\left(\\begin{smallmatrix}I&0\\\\ TP^{-1}&I\\end{smallmatrix}\\right)$ and $U_0=\\left(\\begin{smallmatrix}I&P^{-1}Q\\\\ 0&I\\end{smallmatrix}\\right)$. The Schur factorization yields\n$$g=\\bigl(L_0\\operatorname{diag}(I,l')\\bigr)\\operatorname{diag}(P,d')\\bigl(\\operatorname{diag}(I,u')U_0\\bigr).$$\nThe first factor is lower unitriangular, the middle is block diagonal with invertible blocks, and the last is upper unitriangular. This completes the induction over arbitrary $B$.",
+   "uses": [
+    "lem-weil-pbc-matrix-adjugate-identity",
+    "lem-sfb-two-block-schur-identities"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent-written arbitrary-base matrix argument supporting §23h, (152)–(153), Theorem 23.72, printed pp.510–511; all-algebras existence induction, using Matrix.fromBlocks_eq_of_invertible₁₁ and Matrix.det_fromBlocks₁₁."
+   }
+  },
+  {
+   "text": "For uniqueness use induction on the same block count. Empty and one-block factorizations are forced. Write any factorization as\n$$l=\\begin{pmatrix}I&0\\\\ x&l'\\end{pmatrix},\\quad d=\\operatorname{diag}(p,d'),\\quad u=\\begin{pmatrix}I&y\\\\ 0&u'\\end{pmatrix}.$$\nComparing its product with $g=\\left(\\begin{smallmatrix}P&Q\\\\ T&W\\end{smallmatrix}\\right)$ gives $P=p$, $Q=py$, $T=xp$, and $W=xpy+l'd'u'$. Thus $p=P$, $y=P^{-1}Q$, $x=TP^{-1}$ and $l'd'u'=W-TP^{-1}Q=S$. Inductive uniqueness on $S$ determines all remaining blocks. A homomorphism of $A$-algebras preserves products, identities and inverses; applying it to factors therefore gives the unique factors of the image matrix. This proves functoriality, including maps to the zero algebra.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent-written arbitrary-base matrix argument supporting §23h, (152)–(153), Theorem 23.72, printed pp.510–511; uniqueness by comparing four blocks, and naturality by uniqueness."
+   }
+  },
+  {
+   "text": "Apply step 4 to the universal matrix $g_R$ over $R=H_f$. The resulting matrices $l_R,d_R,u_R$ have entries in $R$ and invertible diagonal blocks. Polynomial evaluation and localization give a unique map $C\\to R$ taking the universal factor coordinates to these entries and each inverted determinant to its inverse. This defines an $A$-morphism $v:\\mathcal V\\to X$ by the affine-spectrum correspondence. Existence gives $l_Rd_Ru_R=g_R$, so $m\\circ v$ is the identity on the entry coordinates of $H$ and hence on $H_f$ by localization uniqueness. Conversely apply step 5 over $C$ to the universal triple: the factors of its product computed by $v$ must be the original triple. Thus $v\\circ m$ fixes every entry coordinate in every factor and each inverse determinant; polynomial, localization and tensor-product uniqueness give the identity on $C$. The affine-spectrum correspondence now proves that $m$ and $v$ are inverse scheme isomorphisms. Evaluation under $R\\to B$ agrees with the unique pointwise factors by step 5. In particular the argument tests universal rings, not merely field-valued points.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-ring-localization-universal-property",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent-written arbitrary-base matrix argument supporting §23h, (152)–(153), Theorem 23.72, printed pp.510–511; construction of the scheme inverse on universal coordinate rings; Stacks 01I1 (schemes-lemma-morphism-into-affine) and 00CP."
+   }
+  },
+  {
+   "text": "For a ring map $A\\to A'$, base change of any displayed affine coordinate algebra $K$ is $A'\\otimes_A K$ by the affine fibre-product statement. Its maps to a commutative $A'$-algebra $B$ are exactly $A$-algebra maps $K\\to B$ by the tensor universal property. For polynomial and localized polynomial $K$ these are exactly the choices of the same entry coordinates in $B$ with the same determinant units, by evaluation and localization. These universal properties give the canonical identification with the coordinate algebra defined directly over $A'$: the two maps sending every entry and inverse determinant to its namesake compose to identities by the same uniqueness properties. This identifies the base changes of $L,D,U,\\mathcal V$ with their $A'$ versions. Under these identifications multiplication sends each matrix entry to the same sum of products, so its base change is the multiplication constructed over $A'$. The base-changed inverse is the inverse of that multiplication, hence equals the inverse over $A'$ by uniqueness of an inverse. This proves the claimed compatibility for every ring map, including nonflat maps and maps to the zero ring.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-ring-localization-universal-property",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent-written arbitrary-base matrix argument supporting §23h, (152)–(153), Theorem 23.72, printed pp.510–511; explicit coordinate base change using Stacks 01I4 and 00CP and uniqueness of the inverse."
+   }
+  },
+  {
+   "text": "Let $h=\\operatorname{diag}(h_i)$ be block diagonal invertible over $B$. Conjugation sends block $(i,j)$ to $h_i g_{ij}h_j^{-1}$, so it preserves zero blocks, identity blocks and invertibility of diagonal blocks. For the first $j$ blocks put $h_{\\le j}=\\operatorname{diag}(h_1,\\ldots,h_j)$. Their leading matrix is conjugated by $h_{\\le j}$, so determinant multiplicativity gives $\\Delta_j(hgh^{-1})=\\Delta_j(g)$, using $\\det(h_{\\le j})\\det(h_{\\le j}^{-1})=1$. Thus conjugation preserves $\\mathcal V$. Associativity gives $(hlh^{-1})(hdh^{-1})(huh^{-1})=h(ldu)h^{-1}$, and step 5 gives equivariance of the inverse. These are scheme identities: the products $D\\times_A X$ and $D\\times_A\\mathcal V$ are affine by the affine-product node; use their universal matrices in the calculation. Entries of $h_i^{-1}$ are regular there by the adjugate formula and the inverted diagonal determinants. Consequently the formulas define the action morphisms by polynomial evaluation and localization; the equalities on universal entries imply equal coordinate-ring maps and hence equal scheme morphisms. This proves conjugation equivariance over $A$ and after arbitrary base change. The $s=0$ case was already settled in step 1.",
+   "uses": [
+    "lem-sfb-matrix-cramer-determinant-identities",
+    "lem-weil-pbc-matrix-adjugate-identity",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-ring-localization-universal-property",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent-written arbitrary-base matrix argument supporting §23h, (152)–(153), Theorem 23.72, printed pp.510–511; block-diagonal conjugation, checked on universal rings to obtain scheme equivariance."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-matrix-determinant",
+  "lem-sfb-matrix-cramer-determinant-identities",
+  "lem-weil-pbc-matrix-adjugate-identity",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-ring-localization-universal-property",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-sfb-two-block-schur-identities"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Agent generalization over arbitrary commutative base rings of the matrix construction supporting §23h, (152)–(153), Theorem 23.72, printed pp.510–511 (details omitted in Milne). Explicit Schur identities from pinned Mathlib; scheme passage from Stacks 01I3 (schemes-lemma-standard-open-affine), 01I4 (schemes-lemma-fibre-product-affine-schemes), 01I1 (schemes-lemma-morphism-into-affine) and 00CP (algebra-proposition-universal-property-localization). No root-theoretic existence theorem is used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "schur|gauss|blockTriangular",
+   "results": "{\"t\": \"2026-10-24T01:13:41Z\", \"tool\": \"grep\", \"query\": \"schur|gauss|blockTriangular\", \"sub\": \"LinearAlgebra/Matrix\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Matrix/SchurComplement.lean\", \"Mathlib/LinearAlgebra/Matrix/SchurComplement.lean\", \"Mathlib/LinearAlgebra/Matrix/SchurComplement.lean\", \"Mathlib/LinearAlgebra/Matrix/SchurComplement.lean\", \"Mathlib/LinearAlgebra/Matrix/SchurComplement.lean\", \"Mathlib/LinearAlgebra/Matrix/Hermitian.lean\", \"Mathlib/LinearAlgebra/Matrix/Hermitian.lean\", \"Mathlib/LinearAlgebra/Matrix/Hermitian.lean\"], \"digest\": \"76a123f175e08f08\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: SchurComplement gives the two-block factorization and determinant identities (already lem-sfb-two-block-schur-identities); Block.lean treats triangular inverses. No hit gives the arbitrary-number-of-blocks scheme isomorphism over a base ring. Iteration, uniqueness and regularity on the principal open remain to be proved."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Matrix\", \"schur\"",
+   "results": "{\"t\": \"2026-10-24T01:13:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"Matrix\\\", \\\"schur\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Matrix.schur_complement_eq₁₁\", \"Matrix.schur_complement_eq₂₂\"], \"digest\": \"a9a38decad518390\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: SchurComplement gives the two-block factorization and determinant identities (already lem-sfb-two-block-schur-identities); Block.lean treats triangular inverses. No hit gives the arbitrary-number-of-blocks scheme isomorphism over a base ring. Iteration, uniqueness and regularity on the principal open remain to be proved."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Block Gaussian elimination is a scheme isomorphism over an arbitrary commutative ring after inverting leading principal block determinants",
+   "results": "{\"t\": \"2026-10-24T01:13:42Z\", \"tool\": \"leansearch\", \"query\": \"Block Gaussian elimination is a scheme isomorphism over an arbitrary commutative ring after inverting leading principal block determinants\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.det_fromBlocks₁₁\", \"Matrix.twoBlockTriangular_det\", \"Matrix.det_fromBlocks_one₁₁\", \"Matrix.invertibleEquivFromBlocks₁₁Invertible\", \"Matrix.twoBlockTriangular_det'\", \"Matrix.invOf_fromBlocks_zero₂₁_eq\", \"Matrix.det_fromBlocks₂₂\", \"Matrix.fromBlocks_eq_of_invertible₂₂\"], \"digest\": \"e16f11d831c8e5f5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: SchurComplement gives the two-block factorization and determinant identities (already lem-sfb-two-block-schur-identities); Block.lean treats triangular inverses. No hit gives the arbitrary-number-of-blocks scheme isomorphism over a base ring. Iteration, uniqueness and regularity on the principal open remain to be proved."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Block lower diagonal upper Gauss decomposition of invertible matrices over any commutative ring on the open where leading block determinants are units",
+   "results": "{\"t\": \"2026-10-24T01:13:43Z\", \"tool\": \"leanfinder\", \"query\": \"Block lower diagonal upper Gauss decomposition of invertible matrices over any commutative ring on the open where leading block determinants are units\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.BlockTriangular.invertibleToBlock\", \"Matrix.fromBlocks_eq_of_invertible₁₁\", \"Matrix.fromBlocks_eq_of_invertible₂₂\", \"Matrix.BlockTriangular.toBlock_inverse_mul_toBlock_eq_one\", \"Matrix.blockTriangular_inv_of_blockTriangular\", \"Matrix.BlockTriangular.inv_toBlock\", \"Matrix.toBlock_inverse_eq_zero\", \"Matrix.isUnit_fromBlocks_zero₁₂\"], \"digest\": \"c36148eb4e1e8b5a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: SchurComplement gives the two-block factorization and determinant identities (already lem-sfb-two-block-schur-identities); Block.lean treats triangular inverses. No hit gives the arbitrary-number-of-blocks scheme isomorphism over a base ring. Iteration, uniqueness and regularity on the principal open remain to be proved."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unique block LDU matrix factorization over arbitrary rings with invertible leading block minors",
+   "results": "{\"t\": \"2026-10-24T01:13:44Z\", \"tool\": \"leanfinder\", \"query\": \"Unique block LDU matrix factorization over arbitrary rings with invertible leading block minors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.fromBlocks_eq_of_invertible₁₁\", \"Matrix.fromBlocks_eq_of_invertible₂₂\", \"Matrix.isUnit_fromBlocks_iff_of_invertible₁₁\", \"Matrix.BlockTriangular.toBlock_inverse_mul_toBlock_eq_one\", \"Matrix.invertibleOfFromBlocksZero₂₁Invertible\", \"Matrix.fromBlocksZero₁₂InvertibleEquiv\", \"Matrix.isUnit_fromBlocks_iff_of_invertible₂₂\", \"Matrix.BlockTriangular.invertibleToBlock\"], \"digest\": \"393deb39231c4e75\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: SchurComplement gives the two-block factorization and determinant identities (already lem-sfb-two-block-schur-identities); Block.lean treats triangular inverses. No hit gives the arbitrary-number-of-blocks scheme isomorphism over a base ring. Iteration, uniqueness and regularity on the principal open remain to be proved."
+  },
+  {
+   "tool": "grep",
+   "query": "gauss|Schur|fromBlocks_eq_of_invertible",
+   "results": "{\"t\": \"2026-10-24T01:56:17Z\", \"tool\": \"grep\", \"query\": \"gauss|Schur|fromBlocks_eq_of_invertible\", \"sub\": \"LinearAlgebra/Matrix\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Matrix/SchurComplement.lean\", \"Mathlib/LinearAlgebra/Matrix/SchurComplement.lean\", \"Mathlib/LinearAlgebra/Matrix/SchurComplement.lean\", \"Mathlib/LinearAlgebra/Matrix/SchurComplement.lean\", \"Mathlib/LinearAlgebra/Matrix/SchurComplement.lean\", \"Mathlib/LinearAlgebra/Matrix/Transvection.lean\", \"Mathlib/LinearAlgebra/Matrix/Rank.lean\", \"Mathlib/LinearAlgebra/Matrix/PosDef.lean\"], \"digest\": \"b72463d766b2dd4e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide two-block Schur identities, block-triangular inverses or field transvection elimination, not the arbitrary-base scheme chart with uniqueness and compatibility. The two-block identities are already the existing Mathlib leaf lem-sfb-two-block-schur-identities. Read SchurComplement.lean:35–58, 363–375."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Matrix\", \"schur\"",
+   "results": "{\"t\": \"2026-10-24T01:56:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"Matrix\\\", \\\"schur\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Matrix.schur_complement_eq₁₁\", \"Matrix.schur_complement_eq₂₂\"], \"digest\": \"a9a38decad518390\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide two-block Schur identities, block-triangular inverses or field transvection elimination, not the arbitrary-base scheme chart with uniqueness and compatibility. The two-block identities are already the existing Mathlib leaf lem-sfb-two-block-schur-identities. Read SchurComplement.lean:35–58, 363–375."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unique block LDU factorization of matrices over commutative rings as a scheme isomorphism compatible with base change",
+   "results": "{\"t\": \"2026-10-24T01:56:17Z\", \"tool\": \"leansearch\", \"query\": \"Unique block LDU factorization of matrices over commutative rings as a scheme isomorphism compatible with base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.invertibleEquivFromBlocks₂₂Invertible\", \"Matrix.fromBlocks_eq_of_invertible₂₂\", \"Ideal.Factors.liesOver\", \"LDL.lower_conj_diag\", \"Matrix.fromBlocksZero₁₂Invertible\", \"Ideal.Factors.isScalarTower\", \"Matrix.isUnit_fromBlocks_zero₂₁\", \"Matrix.isUnit_fromBlocks_iff_of_invertible₂₂\"], \"digest\": \"238a10d53b4a1506\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide two-block Schur identities, block-triangular inverses or field transvection elimination, not the arbitrary-base scheme chart with uniqueness and compatibility. The two-block identities are already the existing Mathlib leaf lem-sfb-two-block-schur-identities. Read SchurComplement.lean:35–58, 363–375."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Block lower diagonal upper Gauss decomposition gives an isomorphism of schemes over any commutative base ring on the open of invertible leading block minors",
+   "results": "{\"t\": \"2026-10-24T01:56:22Z\", \"tool\": \"leanfinder\", \"query\": \"Block lower diagonal upper Gauss decomposition gives an isomorphism of schemes over any commutative base ring on the open of invertible leading block minors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Norm.Transitivity.auxMat_blockTriangular\", \"Algebra.Norm.Transitivity.auxMat_toSquareBlock_eq\", \"Matrix.BlockTriangular.toBlock_inverse_mul_toBlock_eq_one\", \"Matrix.BlockTriangular.invertibleToBlock\", \"Algebra.Norm.Transitivity.auxMat_toSquareBlock_ne\", \"Matrix.Pivot.exists_isTwoBlockDiagonal_of_ne_zero\", \"Matrix.BlockTriangular.inv_toBlock\", \"Matrix.toBlock_inverse_eq_zero\"], \"digest\": \"58501a5058f30c4d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide two-block Schur identities, block-triangular inverses or field transvection elimination, not the arbitrary-base scheme chart with uniqueness and compatibility. The two-block identities are already the existing Mathlib leaf lem-sfb-two-block-schur-identities. Read SchurComplement.lean:35–58, 363–375."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem (fromBlocks_eq_of_invertible₁₁|det_fromBlocks₁₁)",
+   "results": "{\"t\": \"2026-10-24T01:57:16Z\", \"tool\": \"grep\", \"query\": \"theorem (fromBlocks_eq_of_invertible₁₁|det_fromBlocks₁₁)\", \"sub\": \"LinearAlgebra/Matrix/SchurComplement.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"50\", \"370\"], \"digest\": \"273827ab34d1ec16\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide two-block Schur identities, block-triangular inverses or field transvection elimination, not the arbitrary-base scheme chart with uniqueness and compatibility. The two-block identities are already the existing Mathlib leaf lem-sfb-two-block-schur-identities. Read SchurComplement.lean:35–58, 363–375."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unique LDU decomposition for arbitrary block matrices with unit leading principal determinants over a commutative ring",
+   "results": "{\"t\": \"2026-10-24T01:57:19Z\", \"tool\": \"leanfinder\", \"query\": \"Unique LDU decomposition for arbitrary block matrices with unit leading principal determinants over a commutative ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.fromBlocks_eq_of_invertible₁₁\", \"Matrix.fromBlocks_eq_of_invertible₂₂\", \"Matrix.Pivot.exists_list_transvec_mul_mul_list_transvec_eq_diagonal_induction\", \"Matrix.Pivot.exists_isTwoBlockDiagonal_list_transvec_mul_mul_list_transvec\", \"Matrix.isUnit_fromBlocks_iff_of_invertible₁₁\", \"Matrix.Pivot.exists_isTwoBlockDiagonal_of_ne_zero\", \"Matrix.Pivot.exists_list_transvec_mul_diagonal_mul_list_transvec\", \"Matrix.isUnit_fromBlocks_zero₁₂\"], \"digest\": \"7d907738bce492c6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide two-block Schur identities, block-triangular inverses or field transvection elimination, not the arbitrary-base scheme chart with uniqueness and compatibility. The two-block identities are already the existing Mathlib leaf lem-sfb-two-block-schur-identities. Read SchurComplement.lean:35–58, 363–375."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-chevalley-weyl-atlas",
+  "date": "2026-10-24",
+  "group": "Q06"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Matrix-closure atlas, immersion of the integral root-product chart: block Gauss elimination over Z, before taking its scheme-theoretic image.",
+   "via": [
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-block-gauss-chart",
+  "worker": "stage1",
+  "summary": "Q24: retained the full arbitrary-base statement and all inherited provenance. Reused existing ring-general Schur, determinant/adjugate, affine-spectrum, polynomial, localization and affine-product nodes; no new nodes. Wrote the block-count existence and uniqueness inductions, universal-coordinate scheme inverse, explicit arbitrary base change and universal-point conjugation calculation. Tested empty and singleton block lists, zero rings, nilpotents and an invertible matrix outside the chart.",
+  "blueprint": "Realizes the inherited matrix-closure atlas prerequisite below det-thm-sf-ctf-stability-direct-images proof (3): block Gauss elimination over Z before the root-product immersion. Read the current latest unit and chapter and Milne §23h. blueprint_refs ancestor reports None; retain the inherited null ancestor and via chain. Whole-blueprint searches for Gauss, Schur and leading block find no matching blueprint statement; same_as remains []. No unit or chapter route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-12182e635",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-12182e635 (reviewer sub-agent of L); spot-checked: Read the full item proof, all 11 cited statements and the Milne §23h (152)-(153) context, which contains no block Gauss chart; the agent-generalization label is honest. The statement and stmt_deps are identical to the node Q06 created (checked against the Q06 b7ff snapshot), so no target is weakened. There is no re-split note and no new nodes, and no SGA source is used. Step 1: lower/upper unitriangular presentations via the permutation argument for det = 1, and GL_r presentations via adjugate and det_mul (r_i >= 1). Step 2: 𝒱 = D(f) has ring H_f by clause (b) of the affine-open node, and 'f a unit iff each Δ_j a unit' is written out. Step 3: the leading-block product identity and the Δ_j(ldu) formula via Schur with pivot I and with Q = T = 0 hold, and give m : X → 𝒱. Step 4: induction with Δ_{k+1}(g) = det P · Δ_k(S); I checked this block bookkeeping and the factor shapes. Step 5 is genuinely elementary; I recomputed the products. Step 6: both inverse composites are checked on universal coordinates. Step 7: base change via universal properties, with no flatness used. Step 8: equivariance at scheme level on the affine D × X and D × 𝒱. Edge cases checked: Z/4 [[1,2],[2,1]]; [[2,1],[1,1]] lies outside 𝒱 over Z and factors over Z[1/2]; s = 0, s = 1 and the zero ring. The only related existing nodes are the field-only lem-sfb-block-gauss-scheme-chart (a special case), the field-only unitriangular filtration (a different statement) and the cited Schur node; none duplicates this item. All proof deps are Mathlib leaves, so no tool_uses are needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeBlockGaussChart",
+  "declaration": "AlgebraicGeometry.RelativeBlockGauss.relative_block_gauss_chart",
+  "declarations": [
+   "AlgebraicGeometry.RelativeBlockGauss.Index",
+   "AlgebraicGeometry.RelativeBlockGauss.Coordinates",
+   "AlgebraicGeometry.RelativeBlockGauss.leadingMinor",
+   "AlgebraicGeometry.RelativeBlockGauss.minors",
+   "AlgebraicGeometry.RelativeBlockGauss.constrained",
+   "AlgebraicGeometry.RelativeBlockGauss.factorIdeal",
+   "AlgebraicGeometry.RelativeBlockGauss.factor",
+   "AlgebraicGeometry.RelativeBlockGauss.factorι",
+   "AlgebraicGeometry.RelativeBlockGauss.cell",
+   "AlgebraicGeometry.RelativeBlockGauss.cellι",
+   "AlgebraicGeometry.RelativeBlockGauss.factors",
+   "AlgebraicGeometry.RelativeBlockGauss.factorPoint",
+   "AlgebraicGeometry.RelativeBlockGauss.cellPoint",
+   "AlgebraicGeometry.RelativeBlockGauss.productPoint",
+   "AlgebraicGeometry.RelativeBlockGauss.IsMultiplication",
+   "AlgebraicGeometry.RelativeBlockGauss.inverseFactor",
+   "AlgebraicGeometry.RelativeBlockGauss.diagonalProduct",
+   "AlgebraicGeometry.RelativeBlockGauss.diagonalPoint",
+   "AlgebraicGeometry.RelativeBlockGauss.relative_block_gauss_chart"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeBlockGaussChart.lean",
+  "statement": "theorem relative_block_gauss_chart (hr : ∀ i : Fin s, 0 < r i) : (∀ t : Fin 3, IsClosedImmersion (factorι A r t).left) ∧ IsOpenImmersion (cellι A r).left ∧ Set.range (cellι A r).left = (PrimeSpectrum.basicOpen (minors A r) : Set (PrimeSpectrum (Coordinates A r))) ∧ (∃ d : factor A r 1 ≅ diagonalProduct A r, ∀ (B : Type u) [CommRing B] [Algebra A B] (x : (Spec (.of B)).asOver (Spec (.of A)) ⟶ factor A r 1), (factorPoint A r B 1 x).val = diagonalPoint A r B (x ≫ d.hom)) ∧ (∀ (B : Type u) [CommRing B] [Algebra A B] (g : Matrix.GeneralLinearGroup (Index.{u} r) B), (∃ y : (Spec (.of B)).asOver (Spec (.of A)) ⟶ cell A r, cellPoint A r B y = g) ↔ ∀ j : Fin s, IsUnit (leadingMinor r g.val j)) ∧ (∃ e : factors A r ≅ cell A r, IsMultiplication A r e ∧ (∀ (B : Type u) [CommRing B] [Algebra A B] (y : (Spec (.of B)).asOver (Spec (.of A)) ⟶ cell A r), ∃! x : (Spec (.of B)).asOver (Spec (.of A)) ⟶ factors A r, productPoint A r B x 0 * productPoint A r B x 1 * productPoint A r B x 2 = cellPoint A r B y) ∧ (∀ (B C : Type u) [CommRing B] [CommRing C] [Algebra A B] [Algebra A C] (ψ : B →ₐ[A] C) (y : (Spec (.of B)).asOver (Spec (.of A)) ⟶ cell A r) (t : Fin 3), inverseFactor A r e C ((Spec.map (CommRingCat.ofHom ψ.toRingHom)).asOver (Spec (.of A)) ≫ y) t = Matrix.GeneralLinearGroup.map ψ.toRingHom (inverseFactor A r e B y t)) ∧ (∀ (A' : Type u) [CommRing A'] (e' : factors A' r ≅ cell A' r), IsMultiplication A' r e' → ∀ (B : Type u) [CommRing B] [Algebra A B] [Algebra A' B] (y : (Spec (.of B)).asOver (Spec (.of A)) ⟶ cell A r) (z : (Spec (.of B)).asOver (Spec (.of A')) ⟶ cell A' r), cellPoint A r B y = cellPoint A' r B z → ∀ t : Fin 3, inverseFactor A r e B y t = inverseFactor A' r e' B z t) ∧ (∀ (B : Type u) [CommRing B] [Algebra A B] (h : (Spec (.of B)).asOver (Spec (.of A)) ⟶ factor A r 1) (y z : (Spec (.of B)).asOver (Spec (.of A)) ⟶ cell A r), cellPoint A r B z = factorPoint A r B 1 h * cellPoint A r B y * (factorPoint A r B 1 h)⁻¹ → ∀ t : Fin 3, inverseFactor A r e B z t = factorPoint A r B 1 h * inverseFactor A r e B y t * (factorPoint A r B 1 h)⁻¹)) ∧ (s = 0 → minors A r = 1 ∧ (∀ t : Fin 3, Nonempty (factor A r t ≅ Over.mk (𝟙 (Spec (.of A))))) ∧ Nonempty (cell A r ≅ Over.mk (𝟙 (Spec (.of A)))))",
+  "branch": "sheaf-dag",
+  "by": "NS",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reuses upstream GeneralLinearGroup over arbitrary commutative rings. Actual quotient coordinate ideals define L,D,U; actual localization defines the cell. The diagonal quotient is identified with the product of the block GL schemes. Products in Over are fibre products over Spec A. The scheme isomorphism is fixed by its multiplication formula on every algebra. Inverse naturality, arbitrary base-ring change and diagonal conjugation are expressed on all algebra-valued points, which determine these affine-scheme maps. Every helper belongs to this chart; only the main theorem is postponed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0970d7123",
+  "group": "NS",
+  "result": "pass",
+  "note": "Read node, 5 stmt_dep records, module, report, upstream GeneralLinearGroup/homMulEquiv/CoordinateRing/genericUnit and Mathlib algSpec. L/U/D are quotient closed subschemes with correct block constraints (t=0 row≤col, t=1 off-block, t=2 col≤row); 𝒱 = Spec Localization.Away(∏ leading minors), open immersion with range basicOpen, B-points ↔ all Δ_j units; L×D×U = ∏ᶜ in Over Spec A; e pinned by IsMultiplication on all Type-u algebras; d pinned by blockDiagonal' formula; ∃! factors, ψ-naturality, base change (equal matrices ⇒ equal factors across e' over A', true by uniqueness), diagonal conjugation, s=0 terminal clauses all present. No extra hypotheses, zero ring/nonreduced/s=0/s=1 covered, universes bound. Node changed only in lean; no live record or parallel landing; H4 reuses upstream GL; H5/H6/H8/H9 ok. Advisories: conjugation clause does not separately assert that 𝒱 is preserved (derivable); second reading was a self-reread by the worker, disclosed honestly. No fix, no compile."
+ }
+}

@@ -1,0 +1,90 @@
+{
+ "id": "lem-sfb-simple-algebra-scalar-endomorphisms",
+ "kind": "statement",
+ "title": "Scalar endomorphisms of a finite-dimensional simple algebra module",
+ "statement": "Let $K$ be an algebraically closed field [def-weil-field], meaning that every nonconstant polynomial over $K$ has a root in $K$. Let $A$ be a unital associative $K$-algebra: a unital associative ring with a unital homomorphism $K\\to Z(A)$ into its centre. Let $V$ be a nonzero finite-dimensional $K$-vector space [def-weil-finite-dimensional-subspace] with a unital left $A$-module structure whose action satisfies $(ca)v=c(av)$ for $c\\in K$, $a\\in A$, $v\\in V$, where the action of $K\\subseteq A$ agrees with the given scalar multiplication. Assume that the only $A$-stable $K$-subspaces of $V$ are $0$ and $V$. Write $\\operatorname{End}_A(V)$ for the ring of additive maps $f:V\\to V$ satisfying $f(av)=af(v)$ for all $a,v$, with pointwise addition and composition. Then the homomorphism $K\\to\\operatorname{End}_A(V)$, $c\\mapsto(v\\mapsto cv)$, is bijective; equivalently every such $f$ is multiplication by a unique scalar in $K$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 14.1, printed p.280, first sentence of the continuation of the proof: for a simple module over an algebraically closed field, End_A(V)=k (cf. Proposition 4.20)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-finite-dimensional-subspace"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Schur lemma a simple module over an algebra over an algebraically closed field finite dimensional over the field has only scalar endomorphisms",
+   "results": "8 hits: IsSimpleModule.algebraMap_end_bijective_of_isAlgClosed, CategoryTheory.endomorphism_simple_eq_smul_id, CategoryTheory.finrank_endomorphism_simple_eq_one, FDRep.simple_iff_end_is_rank_one, FDRep.finrank_hom_simple_simple, IsSimpleModule.finrank_eq_one_of_isMulCommutative, CategoryTheory.fieldEndOfFiniteDimensional, CategoryTheory.finrank_hom_simple_simple_le_one",
+   "date": "2026-10-23",
+   "verdict": "match: IsSimpleModule.algebraMap_end_bijective_of_isAlgClosed; source and hypotheses read at the lines in mathlib_match.how"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finite dimensional simple module over an algebraically closed field the algebraMap to its module endomorphisms is bijective",
+   "results": "8 hits: IsSimpleModule.algebraMap_end_bijective_of_isAlgClosed, AlgHom.bijective, bijective_algebraMap_of_linearMap, bijective_algebraMap_of_linearEquiv, IsAlgClosed.algebraMap_bijective_of_isIntegral, IsNoetherian.bijective_of_surjective_endomorphism, LinearMap.bijective_or_eq_zero, FDRep.finrank_hom_simple_simple",
+   "date": "2026-10-23",
+   "verdict": "match: IsSimpleModule.algebraMap_end_bijective_of_isAlgClosed; source and hypotheses read at the lines in mathlib_match.how"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSimpleModule.algebraMap_end_bijective_of_isAlgClosed",
+   "results": "1 hits: IsSimpleModule.algebraMap_end_bijective_of_isAlgClosed",
+   "date": "2026-10-23",
+   "verdict": "match: IsSimpleModule.algebraMap_end_bijective_of_isAlgClosed; source and hypotheses read at the lines in mathlib_match.how"
+  },
+  {
+   "tool": "grep",
+   "query": "algebraMap_end_bijective_of_isAlgClosed",
+   "results": "3 hits: Mathlib/RepresentationTheory/AlgebraRepresentation/Basic.lean, Mathlib/RepresentationTheory/AlgebraRepresentation/Basic.lean, Mathlib/RepresentationTheory/Irreducible.lean",
+   "date": "2026-10-23",
+   "verdict": "match: IsSimpleModule.algebraMap_end_bijective_of_isAlgClosed; source and hypotheses read at the lines in mathlib_match.how"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsSimpleModule.algebraMap_end_bijective_of_isAlgClosed",
+  "file": "Mathlib/RepresentationTheory/AlgebraRepresentation/Basic.lean",
+  "line": 28,
+  "how": "exact: theorem at lines 28–32, with all variables and hypotheses at lines 22–24. The compatible actions are Module K V, Module A V and IsScalarTower K A V; the nonzero simple action is IsSimpleModule A V, whose definition was read in Mathlib/RingTheory/SimpleModule/Basic.lean:60–61. No characteristic restriction."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-unipotent-matrix-group-fixed-vector",
+  "date": "2026-10-23",
+  "group": "Q43"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Example 19.19, printed p.401, with Corollary 19.18 and Lemma 19.16; Section 2.42, printed p.53 (connectedness). Fixed-vector input in Milne 19.16: a nonzero rational representation of a unipotent group has nonzero invariants; made precise using 14.3 and 14.12. Linear-algebra prerequisite for the fixed-vector input: Milne Proposition 14.1, applied after showing all matrices in the image of the requested representation are unipotent. Supporting input: Proposition 14.1, printed p.280, first sentence of the continuation of the proof: for a simple module over an algebraically closed field, End_A(V)=k (cf. Proposition 4.20).",
+   "via": [
+    "lem-sfb-unipotent-matrix-group-fixed-vector",
+    "lem-sfb-unipotent-rational-representation-fixed-vector",
+    "lem-sfb-general-linear-reductive",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

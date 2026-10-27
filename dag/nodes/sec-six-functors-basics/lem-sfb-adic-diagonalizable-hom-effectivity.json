@@ -1,0 +1,277 @@
+{
+ "id": "lem-sfb-adic-diagonalizable-hom-effectivity",
+ "kind": "statement",
+ "title": "Effectivity of formal homomorphisms from a split diagonalizable group",
+ "statement": "Let $(A,\\mathfrak m)$ be a commutative Noetherian local ring [def-weil-pbc-noetherian-ring] for which the canonical map $A\\to\\varprojlim_{n\\geq1}A/\\mathfrak m^n$ is an isomorphism [def-weil-pbc-adic-completion]. Put $S=\\operatorname{Spec}A$ [def-weil-affine-spectrum], $A_n=A/\\mathfrak m^n$ and $S_n=\\operatorname{Spec}A_n$. An $S$-group scheme is an $S$-scheme with multiplication, identity section and inverse satisfying the associativity, unit and inverse diagrams; a homomorphism preserves these three operations. For a finitely generated additive abelian group $M$, let $A[M]$ be the free $A$-module on symbols $e_m$, with $e_me_n=e_{m+n}$, unit $e_0$, comultiplication $e_m\\mapsto e_m\\otimes e_m$, counit $e_m\\mapsto1$ and antipode $e_m\\mapsto e_{-m}$. Write $D_A(M)=\\operatorname{Spec}A[M]$ with the resulting group operations. Let $G\\to S$ be an affine group scheme of finite type, meaning that $G=\\operatorname{Spec}B$ with $B$ a finitely generated commutative $A$-algebra. Set $G_n=G\\times_SS_n$ [def-pc-base-change]. The reduction map is a bijection\n$$\\operatorname{Hom}_{S\\text{-}\\mathrm{gp}}(D_A(M),G)\\ \\longrightarrow\\ \\varprojlim_{n\\geq1}\\operatorname{Hom}_{S_n\\text{-}\\mathrm{gp}}(D_{A_n}(M),G_n).$$\nThe set on the right consists of families $(u_n)_{n\\geq1}$ such that the base change of $u_{n+1}$ along $A_{n+1}\\twoheadrightarrow A_n$ is $u_n$; the displayed map takes a homomorphism to all its reductions. In particular every such compatible family is the reduction of a unique homomorphism defined over $A$. Smoothness of $G$ is not required.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Reductive group schemes (2014), Theorem B.3.2(1), formula (B.3.1), printed p.288: the split-source instance. Its proof explicitly isolates the non-module-finite completion/tensor-product calculation. WANTED local archive; online statement and surrounding proof read. This is retained as a statement-only prerequisite."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-pc-base-change",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "def-sfb-ring-diagonalizable-group"
+ ],
+ "proof": [
+  {
+   "text": "Write $C=A[M]$ and $C_n=A_n[M]$. The affine fibre-product formula gives $G_n=\\operatorname{Spec}(B\\otimes_AA_n)$. The map $C\\otimes_AA_n\\to C_n$, $e_m\\otimes a\\mapsto ae_m$, has inverse $ae_m\\mapsto e_m\\otimes a$, extended additively over finite sums: they respect the bilinearity relations, multiplication and each of the three displayed group operations. For $G$, apply affine duality and the fibre-product formula to multiplication, identity and inverse to obtain $A$-algebra maps $\\Delta_B:B\\to B\\otimes_AB$, $\\epsilon_B:B\\to A$ and $s_B:B\\to B$. Applying the same functor to the diagrams says exactly that an $S$-group homomorphism $D_A(M)\\to G$ corresponds to an $A$-algebra map $f:B\\to C$ with $\\Delta_C f=(f\\otimes f)\\Delta_B$, $\\epsilon_C f=\\epsilon_B$ and $s_C f=f s_B$. Tensor maps here are defined on pure tensors; the algebra tensor universal property constructs them. Thus the given family is equivalently a compatible family of $A$-algebra maps $f_n:B\\to C_n$ satisfying these identities after reduction. This uses affine duality over $A$, not a Hopf-algebra assertion restricted to fields.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Theorem B.3.2(1), formula (B.3.1), printed p.288; agent proof of its split-source completion calculation, using only affine duality and the Noetherian maximal condition."
+   }
+  },
+  {
+   "text": "For each $b\\in B$ and $m\\in M$, compatibility of $f_n$ makes the coefficient of $e_m$ in $f_n(b)$ a compatible sequence in $A_n$. Completeness gives a unique $a_m(b)\\in A$ with these residues. Also, an element of $A$ whose residues all vanish is zero, by injectivity of the canonical completion map. For any set $J$ this detects equality of finite sums in $\\bigoplus_{j\\in J}A$ coefficient by coefficient. At this point $(a_m(b))_{m\\in M}$ is merely a family of coefficients; finite support has not been assumed.",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Theorem B.3.2(1), formula (B.3.1), printed p.288; agent proof of its split-source completion calculation, using only affine duality and the Noetherian maximal condition."
+   }
+  },
+  {
+   "text": "Fix $b$. A tensor is a finite sum of pure tensors, so write $\\Delta_B(b)=\\sum_{i=1}^r x_i\\otimes y_i$. Set $\\alpha_m=(a_m(x_i))_{i=1}^r\\in A^r$ and define the linear form $\\lambda_t:A^r\\to A$ by $\\lambda_t(z)=\\sum_i z_i a_t(y_i)$. At level $n$ the comultiplication identity from Step 1 gives, by comparing the $(e_m\\otimes e_t)$ coefficient,\n$$\\delta_{m,t}\\,\\overline{a_m(b)}=\\sum_{i=1}^r\\overline{a_m(x_i)}\\,\\overline{a_t(y_i)}.$$\nHere $C_n\\otimes_{A_n}C_n$ is free on $(e_m\\otimes e_t)_{(m,t)\\in M^2}$: the coefficient map on this tensor product is induced by the bilinear map sending two finite sums to the products of their coefficients, inverse to the map sending the $(m,t)$ basis vector to $e_m\\otimes e_t$. All sums in this levelwise calculation are finite. As the displayed identity holds for every $n$, injectivity in Step 2 yields\n$$\\lambda_t(\\alpha_m)=\\delta_{m,t}a_m(b)\\quad(m,t\\in M).$$",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Theorem B.3.2(1), formula (B.3.1), printed p.288; agent proof of its split-source completion calculation, using only affine duality and the Noetherian maximal condition."
+   }
+  },
+  {
+   "text": "Apply the maximal condition for submodules of a finite module over a Noetherian ring to $A^r$, generated by its $r$ standard basis vectors. Consider its nonempty set of submodules $N_F=\\operatorname{span}_A\\{\\alpha_m:m\\in F\\}$ for finite subsets $F\\subset M$, including $F=\\varnothing$. There is a maximal such $N_F$. For each $m$, $N_F\\subseteq N_{F\\cup\\{m\\}}$, so maximality forces equality and $\\alpha_m\\in N_F$. If $t\\notin F$, Step 3 gives $\\lambda_t(\\alpha_m)=0$ for all $m\\in F$. Linearity then gives $a_t(b)=\\lambda_t(\\alpha_t)=0$. Hence $a_m(b)$ has finite support. This proves the required support bound for each $b$, using no finite-dimensional coalgebra assertion and no flatness hypothesis on $B$. The argument also works for $r=0$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-finite-module-acc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Agent finite-support argument for Conrad Theorem B.3.2(1), printed p.288; Stacks Tag 00IK, algebra.tex, lemma-Noetherian-basic, maximal/ascending-chain condition for submodules of a finite module."
+   }
+  },
+  {
+   "text": "Define $f(b)=\\sum_m a_m(b)e_m\\in C$, which is a finite sum by Step 4. Its reduction to $C_n$ is $f_n(b)$: both have the same coefficient at every $m$. For $b,b'\\in B$ and $a\\in A$, the differences $f(b+b')-f(b)-f(b')$, $f(bb')-f(b)f(b')$, $f(ab)-af(b)$ and $f(1)-1$ are finite sums in $C$ and reduce to zero in every $C_n$, since each $f_n$ is an $A$-algebra map. Step 2 makes each coefficient of each difference zero. Thus $f$ is an $A$-algebra map, with exactly the prescribed reductions.",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Theorem B.3.2(1), formula (B.3.1), printed p.288; agent proof of its split-source completion calculation, using only affine duality and the Noetherian maximal condition."
+   }
+  },
+  {
+   "text": "For each $b$, $\\Delta_C f(b)-(f\\otimes f)\\Delta_B(b)$ is an element of $C\\otimes_AC$, identified with the free $A$-module on $M^2$ by the two inverse coefficient maps of Step 3. It is a finite sum, and its reduction modulo every $\\mathfrak m^n$ vanishes by the comultiplication identity for $f_n$. Thus it is zero by Step 2. The element $\\epsilon_C f(b)-\\epsilon_B(b)\\in A$ and the finite sum $s_C f(b)-f(s_B(b))\\in C$ likewise reduce to zero for every $n$, so vanish. Consequently $f$ respects all three operations. The affine homomorphism bijection of Step 1 gives a group homomorphism $u:D_A(M)\\to G$. The explicit tensor identification there shows that the coordinate map of its reduction is $f_n$, so its reduction is the specified $u_n$, rather than just an isomorphic homomorphism.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Theorem B.3.2(1), formula (B.3.1), printed p.288; agent proof of its split-source completion calculation, using only affine duality and the Noetherian maximal condition."
+   }
+  },
+  {
+   "text": "If $u,v:D_A(M)\\to G$ have identical reductions, their coordinate maps send each $b\\in B$ to finite sums whose difference has every coefficient in $\\bigcap_{n\\geq1}\\mathfrak m^n=0$, by injectivity of the completion map. The coordinate maps coincide, and affine duality gives $u=v$. Conversely reductions of any group homomorphism form a compatible family by functoriality of affine base change. Steps 5--6 give a preimage of every such family, and this argument gives its uniqueness. This is the claimed bijection. In particular the proof does not impose smoothness; it allows torsion in $M$, including in the residue characteristic, and the trivial group $M=0$.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Theorem B.3.2(1), formula (B.3.1), printed p.288; agent proof of its split-source completion calculation, using only affine duality and the Noetherian maximal condition."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-noetherian-finite-module-acc"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Reductive group schemes, Theorem B.3.2(1), formula (B.3.1), printed p.288; agent proof of its split-source completion calculation, using only affine duality and the Noetherian maximal condition."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Homomorphisms from a diagonalizable group scheme to an affine finite type group over a complete local ring are the inverse limit of homomorphisms modulo powers of the maximal ideal",
+   "results": "{\"t\": \"2026-10-24T04:00:01Z\", \"tool\": \"leanfinder\", \"query\": \"Homomorphisms from a diagonalizable group scheme to an affine finite type group over a complete local ring are the inverse limit of homomorphisms modulo powers of the maximal ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRhamPlus\", \"IsAdicComplete.liftAlgHom\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"PreTilt.untilt\", \"AdicCompletion.liftAlgHom\", \"IsAdicComplete.mk_liftAlgHom\"], \"digest\": \"e07aaa13a9fce770\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: IsAdicComplete.liftAlgHom requires its target algebra to be complete, whereas R[M] is generally not m-adically complete. The Hopf group-algebra instances construct the group algebra but do not algebraize formal homomorphisms. Sources read: RingTheory/AdicCompletion/RingHom.lean:100-126 and Smooth/AdicCompletion.lean:82-100."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible Hopf algebra maps into completed group algebras algebraize over a complete Noetherian local ring",
+   "results": "{\"t\": \"2026-10-24T04:00:03Z\", \"tool\": \"leanfinder\", \"query\": \"Compatible Hopf algebra maps into completed group algebras algebraize over a complete Noetherian local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddMonoidAlgebra.instHopfAlgebra\", \"AdicCompletion.instAlgebra\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"IsAdicComplete.liftAlgHom\", \"MonoidAlgebra.instHopfAlgebra\", \"AdicCompletion.liftAlgHom\", \"HopfAlgebra.ofAlgHom\", \"AddMonoidAlgebra.instHopfAlgebraStruct\"], \"digest\": \"f0caacafaf1e9093\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: IsAdicComplete.liftAlgHom requires its target algebra to be complete, whereas R[M] is generally not m-adically complete. The Hopf group-algebra instances construct the group algebra but do not algebraize formal homomorphisms. Sources read: RingTheory/AdicCompletion/RingHom.lean:100-126 and Smooth/AdicCompletion.lean:82-100."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HopfAlgebra\", \"AdicCompletion\"",
+   "results": "{\"t\": \"2026-10-24T03:59:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"HopfAlgebra\\\", \\\"AdicCompletion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: IsAdicComplete.liftAlgHom requires its target algebra to be complete, whereas R[M] is generally not m-adically complete. The Hopf group-algebra instances construct the group algebra but do not algebraize formal homomorphisms. Sources read: RingTheory/AdicCompletion/RingHom.lean:100-126 and Smooth/AdicCompletion.lean:82-100."
+  },
+  {
+   "tool": "grep",
+   "query": "HopfAlgebra|liftAlgHom|liftRingHom",
+   "results": "{\"t\": \"2026-10-24T03:59:59Z\", \"tool\": \"grep\", \"query\": \"HopfAlgebra|liftAlgHom|liftRingHom\", \"sub\": \"RingTheory/AdicCompletion\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/AdicCompletion/Algebra.lean\", \"Mathlib/RingTheory/AdicCompletion/Algebra.lean\", \"Mathlib/RingTheory/AdicCompletion/Algebra.lean\", \"Mathlib/RingTheory/AdicCompletion/Algebra.lean\", \"Mathlib/RingTheory/AdicCompletion/Algebra.lean\", \"Mathlib/RingTheory/AdicCompletion/RingHom.lean\", \"Mathlib/RingTheory/AdicCompletion/RingHom.lean\", \"Mathlib/RingTheory/AdicCompletion/RingHom.lean\"], \"digest\": \"98de2889d62cfcd2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: IsAdicComplete.liftAlgHom requires its target algebra to be complete, whereas R[M] is generally not m-adically complete. The Hopf group-algebra instances construct the group algebra but do not algebraize formal homomorphisms. Sources read: RingTheory/AdicCompletion/RingHom.lean:100-126 and Smooth/AdicCompletion.lean:82-100."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Formal homomorphisms from a split diagonalizable group to an affine group scheme algebraize",
+   "results": "{\"t\": \"2026-10-24T03:59:59Z\", \"tool\": \"leansearch\", \"query\": \"Formal homomorphisms from a split diagonalizable group to an affine group scheme algebraize\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineScheme.ofHom\", \"AlgebraicGeometry.isAffineHom_of_isAffine\", \"RingHom.FormallyEtale\", \"Algebra.IsAlgebraic.algHomEquivAlgHomOfSplits\", \"Matrix.diagonalAlgHom_apply\", \"AddGroupExtension.Splitting.toAddMonoidHom\", \"IntermediateField.algHomEquivAlgHomOfSplits\", \"AffineEquiv.homothetyUnitsMulHom\"], \"digest\": \"a0eb9bf3edcd6cb8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: IsAdicComplete.liftAlgHom requires its target algebra to be complete, whereas R[M] is generally not m-adically complete. The Hopf group-algebra instances construct the group algebra but do not algebraize formal homomorphisms. Sources read: RingTheory/AdicCompletion/RingHom.lean:100-126 and Smooth/AdicCompletion.lean:82-100."
+  },
+  {
+   "tool": "grep",
+   "query": "HopfAlgebra|liftAlgHom|liftRingHom",
+   "results": "{\"t\": \"2026-10-24T04:40:50Z\", \"tool\": \"grep\", \"query\": \"HopfAlgebra|liftAlgHom|liftRingHom\", \"sub\": \"RingTheory/AdicCompletion\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/AdicCompletion/Algebra.lean\", \"Mathlib/RingTheory/AdicCompletion/Algebra.lean\", \"Mathlib/RingTheory/AdicCompletion/Algebra.lean\", \"Mathlib/RingTheory/AdicCompletion/Algebra.lean\", \"Mathlib/RingTheory/AdicCompletion/Algebra.lean\", \"Mathlib/RingTheory/AdicCompletion/RingHom.lean\", \"Mathlib/RingTheory/AdicCompletion/RingHom.lean\", \"Mathlib/RingTheory/AdicCompletion/RingHom.lean\"], \"digest\": \"98de2889d62cfcd2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-limit equality and affine-space extensionality do not prove formal effectivity; liftAlgHom into a completion does not prove finite support in A[M], and IsAdicComplete.liftAlgHom assumes the target algebra is complete. Read AdicCompletion/Algebra.lean:349-400 and RingHom.lean:100-134."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HopfAlgebra\", \"AdicCompletion\"",
+   "results": "{\"t\": \"2026-10-24T04:40:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"HopfAlgebra\\\", \\\"AdicCompletion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-limit equality and affine-space extensionality do not prove formal effectivity; liftAlgHom into a completion does not prove finite support in A[M], and IsAdicComplete.liftAlgHom assumes the target algebra is complete. Read AdicCompletion/Algebra.lean:349-400 and RingHom.lean:100-134."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible Hopf algebra maps to finite quotient group algebras over a complete Noetherian ring have a unique algebraic lift",
+   "results": "{\"t\": \"2026-10-24T04:40:51Z\", \"tool\": \"leansearch\", \"query\": \"Compatible Hopf algebra maps to finite quotient group algebras over a complete Noetherian ring have a unique algebraic lift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.Quotient.exists_algHom_fixedPoint_quotient_under\", \"RingQuot.liftAlgHom_unique\", \"IsAdicComplete.StrictMono.lift\", \"IsAdicComplete.mk_liftAlgHom\", \"Ideal.Quotient.liftₐ\", \"IsAdicComplete.StrictMono.mkQ_comp_lift\", \"AdicCompletion.liftAlgHom\", \"IsAdicComplete.lift\"], \"digest\": \"306c4a3a6b76ad2d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-limit equality and affine-space extensionality do not prove formal effectivity; liftAlgHom into a completion does not prove finite support in A[M], and IsAdicComplete.liftAlgHom assumes the target algebra is complete. Read AdicCompletion/Algebra.lean:349-400 and RingHom.lean:100-134."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homomorphisms from a split diagonalizable group over a complete Noetherian local ring to an affine group scheme are uniquely determined by compatible reductions and every compatible family algebraizes",
+   "results": "{\"t\": \"2026-10-24T04:40:52Z\", \"tool\": \"leanfinder\", \"query\": \"Homomorphisms from a split diagonalizable group over a complete Noetherian local ring to an affine group scheme are uniquely determined by compatible reductions and every compatible family algebraizes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq\", \"AlgebraicGeometry.AffineSpace.hom_ext\", \"AlgebraicGeometry.AffineSpace.hom_ext_iff\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.HasAffineProperty.diagonal_iff\", \"AlgebraicGeometry.ext_of_isAffine\"], \"digest\": \"b92e7d157ecbd43b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-limit equality and affine-space extensionality do not prove formal effectivity; liftAlgHom into a completion does not prove finite support in A[M], and IsAdicComplete.liftAlgHom assumes the target algebra is complete. Read AdicCompletion/Algebra.lean:349-400 and RingHom.lean:100-134."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Hopf algebra map into the adic completion of a group algebra has image in the ordinary group algebra when the coefficient ring is Noetherian and complete",
+   "results": "{\"t\": \"2026-10-24T04:41:27Z\", \"tool\": \"leanfinder\", \"query\": \"A Hopf algebra map into the adic completion of a group algebra has image in the ordinary group algebra when the coefficient ring is Noetherian and complete\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.subalgebra\", \"IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletion\", \"AdicCompletion.AdicCauchySequence.subalgebra\", \"AdicCompletion.subring\", \"AdicCompletion.evalₐ_of\", \"AdicCompletion.liftAlgHom\", \"IsAdicComplete.liftAlgHom\", \"AdicCompletion.evalₐ_mkₐ\"], \"digest\": \"6a37218f9f4d5496\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-limit equality and affine-space extensionality do not prove formal effectivity; liftAlgHom into a completion does not prove finite support in A[M], and IsAdicComplete.liftAlgHom assumes the target algebra is complete. Read AdicCompletion/Algebra.lean:349-400 and RingHom.lean:100-134."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-sfb-complete-local-split-torus-hom-lift",
+  "by": "worker",
+  "date": "2026-10-24"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.5 and Section 3.6, followed by Proposition 4.3, first paragraph of proof, printed pp.6-8: apply the neutral-component argument to the smooth model, after its special neutral fibre has been shown reductive Supporting Proposition 3.1.6, printed pp.83-84, and Proposition B.3.4, printed pp.290-292: etale lifting of the multiplicative type subgroup followed by etale splitting, at a point with algebraically closed residue field; completion step in the proof of Conrad Proposition 3.1.6, using Corollary B.3.5 for the fixed split source. Supporting input to the complete-local torus lifting proof: Theorem B.3.2(1), formula (B.3.1), printed p.288: the split-source instance. Its proof explicitly isolates the non-module-finite completion/tensor-product calculation.",
+   "via": [
+    "lem-sfb-complete-local-split-torus-hom-lift",
+    "lem-sfb-split-torus-etale-subgroup-lift",
+    "lem-sfb-smooth-model-reductive-neutral-lift",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-adic-diagonalizable-hom-effectivity",
+  "worker": "stage1",
+  "summary": "Proved formal effectivity directly using coefficient limits and a finite diagonal-matrix factorization through A^r. The existing Noetherian finite-module maximal-condition leaf supplies a finite set of rows spanning all rows, forcing finite support of each image. Verified algebra and group operations and uniqueness coefficientwise. Statement and statement dependencies unchanged; zero new nodes. No prohibited source is used.",
+  "blueprint": "Current latest blueprint sk-thm-sf-ctf-stability-direct-images, proof (3), the direct-image finiteness/alteration route recorded in the inherited from.place and via chain. This auxiliary discharges its complete-local split-torus lifting prerequisite via Conrad Theorem B.3.2(1). There is no blueprint node stating formal diagonalizable-source Hom effectivity; whole-blueprint searches for diagonalizable, group algebra, completion and formal homomorphism found no duplicate. The inherited nearest ancestor is null, as blueprint_refs.py ancestor reports.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q84-eba21df27",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-eba21df27 (reviewer sub-agent of L); spot-checked: I read the whole split; review.md is written and I made no fixes. Shape: one commit with the item and its report, no new nodes. Compared with clones/live, the item changed only in status, proof, proof_deps, proof_origin, split_report and five appended mathlib_searches. Statement, stmt_deps, source, created and blueprint are unchanged. There is no repair note for this item, so the re-split rule does not apply. Source: there is no local copy of Conrad Thm B.3.2(1) (p.288), so the WANTED entry stands. The inherited statement is its split-source local case, and the proof establishes it as written. The only citer, lem-sfb-complete-local-split-torus-hom-lift, uses it with M=Z^r, and its hypotheses match. I read all six proof_deps in full: affine-spectrum (the bijection with ring maps), fibre-product-affine-spectra (01I4), algebra-tensor-pushout (2)/(3), adic-completion (bijectivity), module-tensor-product (pure tensors generate) and noetherian-finite-module-acc (2) (00IK). Each says what its step takes from it. All are mathlib-status leaves, so there is no route issue and no tool_uses. Step 1: group homomorphisms correspond to A-algebra maps B->C that respect comultiplication, counit and antipode, and C(x)A_n=C_n with an explicit inverse. Step 2: coefficients a_m(b) come from completeness. Step 3: comparing coefficients at each level and applying injectivity gives lambda_t(alpha_m)=delta_{m,t}a_m(b); I re-derived this. Step 4: take a maximal span N_F of the alpha_m inside A^r; for t not in F, a_t(b)=lambda_t(alpha_t)=0. It is correct and uses no domain or flatness hypothesis; r=0 is fine. Steps 5-6: the algebra and Hopf identities hold because the differences are finite sums whose reductions vanish at every level. The reductions are exactly u_n, not merely isomorphic to them. Step 7: uniqueness and well-definedness. Edge cases tested: M=0; M=Z/p with G_m; G_a with M=Z over k[[t]], which gives zero at every level, consistent with Hom(G_m,G_a)=0; Artinian and field A; nilpotents. Duplicate search with rg -L for diagonalizable and B.3.2 found only the square-zero lift, the field rigidity node and the parent; none states this lemma. I agree with the Mathlib search verdicts (liftAlgHom needs a complete target)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AdicDiagonalizableHomEffectivity",
+  "declaration": "AlgebraicGeometry.adic_diagonalizable_hom_effectivity",
+  "declarations": [
+   "AlgebraicGeometry.AdicGroupHom.quotientBase",
+   "AlgebraicGeometry.AdicGroupHom.successorBase",
+   "AlgebraicGeometry.adic_diagonalizable_hom_effectivity"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AdicDiagonalizableHomEffectivity.lean",
+  "statement": "theorem adic_diagonalizable_hom_effectivity (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A] [IsAdicComplete (IsLocalRing.maximalIdeal A) A] (M : Type u) [AddCommGroup M] [AddGroup.FG M] (G : Grp (Over (Spec (.of A)))) [IsAffineHom G.X.hom] [LocallyOfFiniteType G.X.hom] (f : ∀ n : ℕ, (Over.pullback (AdicGroupHom.quotientBase A n).hom).mapGrp.obj (ringDiagonalizableGroup A M) ⟶ (Over.pullback (AdicGroupHom.quotientBase A n).hom).mapGrp.obj G) (hf : ∀ n : ℕ, baseChangeMap (ringDiagonalizableGroup A M).X.hom (AdicGroupHom.successorBase A n) ≫ (f (n + 1)).hom.hom.left = (f n).hom.hom.left ≫ baseChangeMap G.X.hom (AdicGroupHom.successorBase A n)) : ∃! g : ringDiagonalizableGroup A M ⟶ G, ∀ n : ℕ, (Over.pullback (AdicGroupHom.quotientBase A n).hom).mapGrp.map g = f n",
+  "branch": "sheaf-dag",
+  "by": "Q95",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-50881139b",
+  "group": "Q95",
+  "result": "pass",
+  "note": "Fresh delivery: the item changes only in lean plus the added stmt_dep def-sfb-ring-diagonalizable-group (landed owner, reviewed_lean pass). All 5 dep records byte-identical to live; lean.statement verbatim in the module. Clause match: Noetherian local IsAdicComplete A; M AddGroup.FG in Type u (harmless, matches the owner def); G Grp(Over Spec A) with IsAffineHom+LocallyOfFiniteType = Spec of a finitely generated A-algebra, no smoothness; D = ringDiagonalizableGroup (hopfSpec of AddMonoidAlgebra). quotientBase n = algSpec of A/m^(n+1) (index shift covers n>=1); successorBase = Spec factorₐ in the correct direction. hf commuting square with baseChangeMap (PicardFunctor:297) is equivalent to f_n being the base change of f_{n+1} (cartesian square, f_n over S_n). The conclusion ∃! g with mapGrp.map g = f n is the bijection. Edge cases M=0, torsion, field/Artinian/non-reduced A, non-smooth G all admitted. No hollow defs, no name clash (grep for AdicGroupHom and quotient towers), source+blueprint docstrings, 7-step proof docstring, sorry only, report has both sections. No file changed, so no compile."
+ }
+}

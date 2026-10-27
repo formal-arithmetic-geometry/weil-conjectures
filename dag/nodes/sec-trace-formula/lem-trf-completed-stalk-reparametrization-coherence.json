@@ -22,177 +22,99 @@
  ],
  "proof": [
   {
-   "text": "Write $R=\\mathcal O_E$. Choose a flat-term K-flat representative $P\\to M$ and its simultaneous quotient tower $P_n=P\\otimes_{\\widehat R_T}(A_n)_T$, with actual quotient transitions, by [lem-pc-kflat-resolution] and [def-pur-integral-derived-operations]. The reductions have cohomology in one interval $[a,b]$ by [def-weil-derived-complete-integral-detailed]. To apply the bounded-complex finite stalk theorem, use the functorial zigzag $P_\\bullet\\leftarrow\\tau_{\\le b}P_\\bullet\\to\\tau_{\\ge a}\\tau_{\\le b}P_\\bullet=:B_\\bullet$. Both arrows are levelwise quasi-isomorphisms: the first changes only cohomology above $b$, and the second only below $a$, all of which vanish. Here good truncation uses $\\ker d^b$ at the upper endpoint and the quotient by $\\operatorname{im}d^{a-1}$ at the lower endpoint (cohomology if $a=b$). These are simultaneous tower constructions because kernels and quotients are functorial. Finite pullback is exact by [prop-weil-pbc-proetale-constant-exact], so it preserves these truncations and quasi-isomorphisms. Thus finite comparisons on the bounded $B_n$ also specify them on $P_n$ through this zigzag. No boundedness of the terms of $P$ or finite Tor-amplitude of $M_n$ is assumed.",
+   "text": "For the local pointUnits obligation, the finite-field cardinality gives characteristic p on the base field and then on its algebraic closure. The distinct prime l is a unit in k; map it through global sections into each stalk and then into each residue field. For sectionsRoos_existsUnique, use the proved point-sections product comparison and the normalized Roos isomorphism of lem-trf-point-quotient-augmentation-diagram. Both coordinate identities are its coordinate equations. Convert the degreewise equations to the whole-map equations of scalarRoosMap_existsUnique in lem-pur-integral-operations-scalar-extension; its uniqueness implies equality of the underlying chain maps, hence of the isomorphisms.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "def-pur-integral-derived-operations",
-    "def-weil-derived-complete-integral-detailed",
-    "prop-weil-pbc-proetale-constant-exact"
+    "lem-trf-point-quotient-augmentation-diagram",
+    "lem-pur-integral-operations-scalar-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For sectionRestriction_existsUnique use the proved scalar_normalization calculation in the module of lem-weil-point-automorphism-restriction-natural. This calculation has no prime-to-characteristic hypothesis: finite constant sections are unchanged by the coefficient transport, and the completed identity follows by its finite projections. Apply the inverse coefficient map to obtain the scalar identity for restriction along the source automorphism. Module restriction is therefore linear for the transported action. Presheaf naturality makes these linear maps a natural transformation. The sourceArrow is the hom of the site isomorphism induced by sourceIso; the underlying restriction is consequently bijective. The forgetful functor on modules reflects isomorphisms, so the transformation is a natural isomorphism. Its formula on every section proves uniqueness by extensionality.",
+   "uses": [
+    "lem-weil-point-automorphism-restriction-natural"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Work first over $R=\\mathcal O_E$. By [lem-trf-bounded-quotient-stalk-realization], choose the simultaneous quotient tower and its bounded zigzag and identify $J_v(M)$ with $H(((P_n)_v)_n)$ on both cone coordinates. Use [lem-trf-stalk-compositor-tower-realization] to define $c=\\Gamma(s,\\chi^{-1})$ in these coordinates, and [lem-trf-germ-reparametrization-derived-descent] to define $r$ by the germ tower map. These are natural $R$-linear isomorphisms for arbitrary integral derived morphisms, independent of representatives.",
+   "uses": [
+    "lem-trf-bounded-quotient-stalk-realization",
+    "lem-trf-stalk-compositor-tower-realization",
+    "lem-trf-germ-reparametrization-derived-descent"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099N (lemma-pushforward-Noetherian-case), (5); simultaneous bounded representatives for its reduction formula"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
+    "place": "Step 1, Local powers, input (b); assembly step 1 from extracted strict-tower lemmas"
    }
   },
   {
-   "text": "For an $A_n$-complex $H$ on $s$, identify its identity geometric stalk with $\\Gamma(s,H)$: every pointed neighbourhood $(U,u)$ receives the unique pointed map $u:(s,\\mathrm{id})\\to(U,u)$, and $[U,u,a]\\mapsto u^*a$ is inverse to $a\\mapsto[s,\\mathrm{id},a]$ in the colimit of [def-weil-proetale-geometric-stalk]. Apply [lem-trf-proetale-pullback-stalk-coherence] to $v$ and the identity point to obtain $e_{v,n}:\\Gamma(s,v^*P_n)\\xrightarrow{\\sim}(P_n)_v$. These commute with quotient transitions: a reduction sends the representative section $a$ to its image $\\bar a$, and both orders give $[U,u,\\bar a]$. Exact point sections [lem-weil-point-proetale-sections-exact] commute with the cone model of [def-pur-integral-derived-operations]: sheaf products have sectionwise products, so evaluation carries $(x_n)\\mapsto(x_n-t_nx_{n+1})$ to the identical formula on sections and carries its cone and shift to their module versions. Consequently $J_v(M)$ is canonically the realization of the strict module tower $(P_n)_v$, through these $e_{v,n}$. This is an identification of whole cone complexes. The strict derived-limit functor [lem-weil-pbc-ringed-strict-tower-homotopy-limit] transports the tower quasi-isomorphisms of Step 1, so the bounded replacement does not change this identification.",
+   "text": "Realize the strict composition, unit and mixed tower equations of [lem-trf-stalk-compositor-tower-realization]. Its identification of the last factor with $J_w(\\chi_{h,f,M})$ gives exactly the asserted formula for $c_{fh,w,M}$, the identity formula and the mixed formula. The action and unit equations of [lem-trf-germ-reparametrization-derived-descent] give the asserted $r$ equations with the order $\\beta\\circ\\alpha$. These equalities concern specified whole-tower maps.",
    "uses": [
-    "def-weil-proetale-geometric-stalk",
-    "lem-trf-proetale-pullback-stalk-coherence",
+    "lem-trf-stalk-compositor-tower-realization",
+    "lem-trf-germ-reparametrization-derived-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
+    "place": "Step 1, Local powers, input (b); assembly step 2 from extracted strict-tower lemmas"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-source-section-stalk-cone-comparison] to $N$: its chain-map equality is $e_\\delta c_{\\delta,\\mathrm{id},N}j_{\\delta,N}\\Gamma(q)=H(R_{\\mathrm{id},\\alpha,\\bullet})e_{\\mathrm{id}}\\Gamma(q)$. Exact point sections [lem-weil-point-proetale-sections-exact] make $\\Gamma(q)$ invertible after localization. Cancel it and $e_\\delta$, and substitute the definition of $r$ from [lem-trf-germ-reparametrization-derived-descent]. This proves the section equation.",
+   "uses": [
+    "lem-trf-source-section-stalk-cone-comparison",
     "lem-weil-point-proetale-sections-exact",
-    "def-pur-integral-derived-operations",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+    "lem-trf-germ-reparametrization-derived-descent"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tags 05V1 (lemma-point-morphism-sites), 0F4F (lemma-point-functor); proetale.tex Tag 0993 (lemma-classical-point); exact sections applied to the quotient cone"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
+    "place": "Step 1, Local powers, input (b); assembly step 3 from extracted strict-tower lemmas"
    }
   },
   {
-   "text": "Let $\\chi_{v,f}:L(fv)^*\\to Lv^*Lf^*$ be the specified integral compositor of [lem-trf-integral-pullback-comparison-realization]. Define $c_{f,v,M}=\\Gamma(s,\\chi_{v,f,M}^{-1})$. The defining map $\\eta_{v,f,M}$ of that node identifies $Lv^*Lf^*M$ with realization of the simultaneous tower $v^*f^*P_n$, and identifies this $c$ with the inverse of the finite composition map. More explicitly, in the finite stalk coordinates of Step 2 its map is $e_{fv,n}^{-1}\\,c^{\\mathrm{fin}}_{f,v,P_n}\\,e_{v,f^*P_n}$. Indeed [lem-trf-proetale-pullback-stalk-coherence] applied to $v,f$ and the identity point gives $e_{fv,n}=c^{\\mathrm{fin}}_{f,v,P_n}\\,e_{v,f^*P_n}\\,\\Gamma(s,\\chi_{v,f,P_n})$. All coefficient transitions commute with this equation by their representative formulas. The integral realization node explicitly uses the counit of the entire reduction tower for $\\eta$, and gives independence and naturality of these identifications. Thus this is exactly the required specified comparison, represented on the simultaneous diagrams. All iterated pullbacks remain in $D^b_c$ by [lem-pur-integral-operations-preserve-constructible] (1), so every use of these integral identifications has its required domain.",
+   "text": "For compatibility at $v$ apply the section equation to $N=Lv^*M$, whose constructibility follows from [lem-pur-integral-operations-preserve-constructible] (1). At each appended source automorphism substitute $c_{\\delta,\\mathrm{id}}j_\\delta=r$, pass $r$ through $c$ by the mixed equation of Step 2, and combine adjacent $r$'s by its action law. Induction starting with the identity gives every finite succession and its compatibility with the comparisons for $v$.",
    "uses": [
-    "lem-trf-integral-pullback-comparison-realization",
-    "lem-trf-proetale-pullback-stalk-coherence",
     "lem-pur-integral-operations-preserve-constructible"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099N (lemma-pushforward-Noetherian-case), (2),(5); specified counit realization of pullback composition"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
+    "place": "Step 1, Local powers, input (b); assembly step 4 from extracted strict-tower lemmas"
    }
   },
   {
-   "text": "For $\\delta=\\operatorname{Spec}(\\alpha)$ define the tower map $R_{v,\\alpha,n}:(P_n)_v\\to(P_n)_{v\\delta}$ by $[U,u,a]\\mapsto[U,u\\delta,a]$. The finite comparison node [lem-trf-proetale-pullback-stalk-coherence] supplies this natural $A_n$-linear isomorphism on bounded complexes. It is also a strict tower map: reducing the section before or after this operation gives $[U,u\\delta,\\bar a]$. Its inverse is the same construction with $\\delta^{-1}$, and therefore is a strict inverse. Transport its realization through the Step 2 identifications to define $r_{v,\\alpha,M}$. Concretely a map $R_\\bullet$ of towers gives the cone map $(b,a)\\mapsto((\\prod R_n)b,(\\prod R_n)a)$; commuting with transitions makes this a chain map. Thus the construction specifies both coordinates of the cone, not just maps on reductions. Functoriality of strict derived limit [lem-weil-pbc-ringed-strict-tower-homotopy-limit] makes it an integral isomorphism.",
+   "text": "For $E$ use [def-weil-rationalization-karoubi] and [def-weil-finite-coefficient-point]: objects keep integral representatives, and $f\\otimes a$ acts on fibres by $a(\\Gamma(s,f)\\otimes E)$. Apply this functor to the integral comparisons, inverses and equations. Naturality for a simple tensor follows from integral naturality and $R$-linearity, and for every rational morphism by additivity over a finite sum of simple tensors. This proves all rational assertions without an integrality hypothesis on morphisms.",
    "uses": [
-    "lem-trf-proetale-pullback-stalk-coherence",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 05V1 (lemma-point-morphism-sites), point functor reindexing; sites-cohomology.tex Tag 0941 (lemma-derived-limit-is-ok)"
-   }
-  },
-  {
-   "text": "The constructions are natural for every integral derived morphism, including ones not represented by a single map between the initially chosen resolutions. On chain maps the representative formulas for $e$, $c^{\\mathrm{fin}}$ and $R$ are natural, and hence natural on the whole quotient diagram. The descent and resolution comparisons of [lem-pur-integral-operations-well-defined] identify the quotient-cone constructions from different K-flat representatives. Exact point sections preserve quasi-isomorphisms by [lem-weil-point-proetale-sections-exact]. Thus these chain functors invert the arrows used to represent derived morphisms. The localization universal property [lem-weil-pbc-localization-universal-property] (2) descends their natural transformations uniquely, preserving identities and composition; naturality for the inverse of a quasi-isomorphism follows by multiplying its naturality square by its inverses. This proves resolution independence of $r$ as well as naturality for roofs. For $c$ it agrees with the already natural, resolution-independent $\\eta$-construction of [lem-trf-integral-pullback-comparison-realization].",
-   "uses": [
-    "lem-pur-integral-operations-well-defined",
-    "lem-weil-point-proetale-sections-exact",
-    "lem-weil-pbc-localization-universal-property",
-    "lem-trf-integral-pullback-comparison-realization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941 (lemma-derived-limit-is-ok); descent from chain maps through derived localization"
-   }
-  },
-  {
-   "text": "For $w:s\\to Z$ use the same $P_\\bullet$ on $X$ for every factor. On each finite level [lem-trf-proetale-pullback-stalk-coherence] gives $c^{\\mathrm{fin}}_{fh,w}=c^{\\mathrm{fin}}_{f,hw}\\,c^{\\mathrm{fin}}_{h,w}\\,(\\chi^{\\mathrm{fin}}_{h,f})_w$. The quotient formulas make this an equation of tower maps, as in Step 3. The associativity clause and the entire-tower counit normalization in [lem-trf-integral-pullback-comparison-realization] identify all occurrences of the nested pullbacks with these simultaneous diagrams, including $J_w(\\chi_{h,f,M})$. Applying the strict derived-limit functor and exact sections therefore gives precisely $c_{fh,w,M}=c_{f,hw,M}\\circ c_{h,w,Lf^*M}\\circ J_w(\\chi_{h,f,M})$. At the identity morphism the finite comparison is the identity; the unit clause of the integral realization node gives $c_{\\mathrm{id},v,M}=1$ under its specified identity identification. This also supplies $J_{\\mathrm{id}}(N)=\\operatorname{Fib}_sN$.",
-   "uses": [
-    "lem-trf-proetale-pullback-stalk-coherence",
-    "lem-trf-integral-pullback-comparison-realization",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "def-weil-finite-coefficient-point"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tags 05V1 and 0F4F; composition and identity on the specified quotient diagrams"
-   }
-  },
-  {
-   "text": "The finite mixed equation is the one in [lem-trf-proetale-pullback-stalk-coherence]. Its representative calculation is explicit: the pullback germ given by $(U,u',V,\\theta,a)$ first maps to $[V,\\operatorname{pr}_V\\theta u',a]$; reparametrization then gives $[V,\\operatorname{pr}_V\\theta u'\\delta,a]$. Reparametrizing $u'$ first and then applying the comparison gives exactly the same representative. Quotient reduction changes only $a$, so the equation holds on the entire strict tower. Under the identifications of [lem-trf-integral-pullback-comparison-realization], these are the maps of Steps 3--4. Functoriality of strict realization therefore gives $r_{fv,\\alpha,M}\\circ c_{f,v,M}=c_{f,v\\delta,M}\\circ r_{v,\\alpha,Lf^*M}$, as equality of the specified integral maps.",
-   "uses": [
-    "lem-trf-proetale-pullback-stalk-coherence",
-    "lem-trf-integral-pullback-comparison-realization",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 0F4F (lemma-point-functor), representative calculation for composition with a source automorphism"
-   }
-  },
-  {
-   "text": "The action law is an equality on representatives in [def-weil-proetale-geometric-stalk]: successive reparametrizations send $[U,u,a]$ to $[U,u\\delta,a]$ and then $[U,u\\delta\\epsilon,a]$, while a single reparametrization by $\\delta\\epsilon$ gives that same representative. Also $\\operatorname{Spec}(\\alpha)\\circ\\operatorname{Spec}(\\beta)=\\operatorname{Spec}(\\beta\\circ\\alpha)$, because affine spectrum reverses ring-map composition. Identity reparametrization fixes every representative. These are strict tower equations, and the product maps on both cone coordinates obey the same composition law. Hence $r_{v\\delta,\\beta,M}\\circ r_{v,\\alpha,M}=r_{v,\\beta\\circ\\alpha,M}$ and $r_{v,1,M}=1$. Induction on the number of automorphisms proves the finite-succession assertion: appending one automorphism uses this two-factor identity, with the zero-length succession the identity.",
-   "uses": [
-    "def-weil-proetale-geometric-stalk"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 05V1 (lemma-point-morphism-sites), functoriality under reindexing the pointed-neighbourhood colimit"
-   }
-  },
-  {
-   "text": "For a complex $N$ on $s$, let $\\rho_{\\delta,N}:\\Gamma(s,N)\\to\\Gamma(s,\\delta^{-1}N)$ be restriction along $\\delta$, followed by inverse-image insertion. The site-equivalence formula of [lem-weil-proetale-isomorphism-inverse-image] identifies the target with sections of $N$ over $(s\\xrightarrow{\\delta}s)$; restriction along the isomorphism $\\delta$ has inverse restriction along $\\delta^{-1}$, so $\\rho$ is an isomorphism. The specified map of the question is $j_{\\delta,N}=\\Gamma(s,\\kappa^\\delta_N)\\rho_{\\delta,N}$. For integral constructible $N$, [lem-weil-isomorphism-derived-pullback-comparison-normalization] says this SPECIFIED $\\kappa$ is natural and invertible and is the quotient-cone map with zero shifted coordinate. Its hypothesis holds since $N\\in D^b_c(s,R)$ is derived complete. For a finite-coefficient sheaf, a section $a\\in N(s)$ under restriction, insertion and $\\kappa$ is the pullback-unit germ with source lift $\\mathrm{id}_s$ and target lift $\\delta$. The finite comparison formula sends it to $[s,\\delta,a]$. This is also $r^{\\mathrm{fin}}_{\\mathrm{id},\\alpha}([s,\\mathrm{id},a])$. This proves the section equation at finite level directly from the normalizations.",
-   "uses": [
-    "lem-weil-proetale-isomorphism-inverse-image",
-    "def-weil-inverse-image-pullback-comparison",
-    "lem-weil-isomorphism-derived-pullback-comparison-normalization",
-    "def-weil-derived-complete-integral-detailed",
-    "lem-trf-proetale-pullback-stalk-coherence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tags 05V1 and 0F4F; inverse-image insertion at the identity point; integral normalization by the specified quotient cone"
-   }
-  },
-  {
-   "text": "Use one flat-term K-flat $Q\\xrightarrow{q}N$ and $Q_n$ for all factors. Let $\\mathcal H_v=\\operatorname{Cone}(1-s:\\prod_n(Q_n)_v\\to\\prod_n(Q_n)_v)[-1]$, and let $e_v:J_v(N)\\xrightarrow{\\sim}\\mathcal H_v$ be the whole-cone identification of Step 2. For $v=\\mathrm{id}$ its source is $\\Gamma(s,N)$ via Step 6. The normalization theorem [lem-weil-isomorphism-derived-pullback-comparison-normalization], with $g=\\mathrm{id}$, identifies $e_{\\mathrm{id}}$ with sections of the actual completion unit, followed by the identity-stalk identifications; this unit is invertible on the derived-complete domain. Thus $e_{\\mathrm{id}}\\Gamma(q)$ sends $z$ to $(0,([s,\\mathrm{id},\\bar z_n])_n)$. By [def-weil-inverse-image-pullback-comparison], $j_{\\delta,N}\\Gamma(q)$ uses these same reductions, restricted along $\\delta$, with zero shifted coordinate. Step 9 and the specified compositor realization [lem-trf-integral-pullback-comparison-realization] therefore give\n$$e_\\delta c_{\\delta,\\mathrm{id},N}j_{\\delta,N}\\Gamma(q)(z)=(0,([s,\\delta,\\bar z_n])_n)=\\operatorname{Cone}(R_{\\mathrm{id},\\alpha,\\bullet})e_{\\mathrm{id}}\\Gamma(q)(z).$$\nThese are equal chain maps on $\\Gamma(s,Q)$, including the shifted coordinate. Exact sections [lem-weil-point-proetale-sections-exact] make $\\Gamma(q)$ an isomorphism after localization. Cancel it and $e_\\delta$; the definition of $r$ in Step 4 now gives $c_{\\delta,\\mathrm{id},N}j_{\\delta,N}=r_{\\mathrm{id},\\alpha,N}$. This proves equality of the specified maps without using detection by reduction projections.",
-   "uses": [
-    "lem-weil-isomorphism-derived-pullback-comparison-normalization",
-    "def-weil-inverse-image-pullback-comparison",
-    "lem-trf-integral-pullback-comparison-realization",
-    "lem-weil-point-proetale-sections-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941 (lemma-derived-limit-is-ok), comparison of the actual quotient-cone maps; proetale.tex Tag 099N (5)"
-   }
-  },
-  {
-   "text": "Apply Step 10 to $N=Lv^*M$, which is constructible by [lem-pur-integral-operations-preserve-constructible] (1). The mixed equation of Step 7 and the compositor identity of Step 6 allow each occurrence of a source automorphism to pass through $c_{f,v}$ with exactly the displayed reparametrized point. For successive automorphisms, replace each $c_{\\delta,\\mathrm{id}}j_\\delta$ by $r$ using Step 10, then combine adjacent $r$'s by Step 8. This proves compatibility with any finite succession and with the comparison for any $v$. All constructions are $R$-linear, since the finite maps preserve scalar multiplication and products, cones and sections carry the induced $R$-action. Finally use [def-weil-rationalization-karoubi] and [def-weil-finite-coefficient-point]: on objects rationalization uses the same integral representatives, and on morphisms $f\\otimes a$ the fiber map is $a(\\Gamma(s,f)\\otimes E)$. Send the integral comparison families and their equalities through these functors. Naturality for arbitrary rational morphisms follows by this formula and linearity, first for a simple tensor and then for a finite sum. Inverses remain inverses. This gives all assertions for $E$, with no Weil datum or integrality assumption on the morphisms.",
-   "uses": [
-    "lem-pur-integral-operations-preserve-constructible",
     "def-weil-rationalization-karoubi",
     "def-weil-finite-coefficient-point"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
-    "place": "Step 1, Local powers, input (b): integral comparisons and rationalization"
+    "place": "Step 1, Local powers, input (b); assembly step 5 from extracted strict-tower lemmas"
    }
   }
  ],
  "proof_deps": [
-  "lem-pc-kflat-resolution",
-  "def-pur-integral-derived-operations",
-  "def-weil-derived-complete-integral-detailed",
-  "prop-weil-pbc-proetale-constant-exact",
-  "def-weil-proetale-geometric-stalk",
-  "lem-trf-proetale-pullback-stalk-coherence",
+  "lem-trf-bounded-quotient-stalk-realization",
+  "lem-trf-stalk-compositor-tower-realization",
+  "lem-trf-germ-reparametrization-derived-descent",
+  "lem-trf-source-section-stalk-cone-comparison",
   "lem-weil-point-proetale-sections-exact",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-trf-integral-pullback-comparison-realization",
   "lem-pur-integral-operations-preserve-constructible",
-  "lem-pur-integral-operations-well-defined",
-  "lem-weil-pbc-localization-universal-property",
+  "def-weil-rationalization-karoubi",
   "def-weil-finite-coefficient-point",
-  "lem-weil-proetale-isomorphism-inverse-image",
-  "def-weil-inverse-image-pullback-comparison",
-  "lem-weil-isomorphism-derived-pullback-comparison-normalization",
-  "def-weil-rationalization-karoubi"
+  "lem-trf-point-quotient-augmentation-diagram",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-weil-point-automorphism-restriction-natural"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
-  "place": "Step 1, Local powers, input (b); extracted strict-quotient proof using Stacks 05V1, 0F4F, 0993, 099N and 0941"
+  "place": "Step 1, Local powers, input (b); extracted strict-quotient proof using Stacks 05V1, 0F4F, 0993, 099N and 0941; U2 fills pointUnits and sectionsRoos_existsUnique using the existing normalized point Roos comparison and scalar Roos uniqueness (2026-10-25); remaining assembly steps unchanged; S2 proves sectionRestriction_existsUnique from constant-scalar normalization, restriction along a site isomorphism and natural-transformation extensionality (2026-10-26)"
  },
  "mathlib_searches": [
   {
@@ -302,47 +224,19 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-completed-stalk-reparametrization-coherence",
   "worker": "stage1",
-  "summary": "Statement retained. Gave a strict quotient-tower construction of completed stalk comparisons, their naturality, composition and reparametrization laws; compared the specified section/inverse-image map using both cone coordinates. Used existing finite coherence, integral compositor realization and specified isomorphism-pullback normalization. No new nodes.",
+  "summary": "Q127 repair of the 2026-10-22 human re-split return: statement unchanged; four comparable independent statement-only arguments replace the 11-step proof. All 11 original arguments are retained verbatim in report.md, mapped to the four new nodes and the rational/finite-succession assembly. New nodes are unsplit, have no proof steps, and carry logged Mathlib searches.",
   "blueprint": "Step 1, Local powers, input (b) of thm-trf-l-function-euler-product: integral stalk identifications and fixed-point source transports, natural and compatible before rationalization.",
   "tool_uses": [
    {
-    "node": "lem-pc-kflat-resolution",
-    "why": "Generic existence of k-flat resolutions on a ringed site used for strict quotient realization and descent; no trace-transport unit node supplies this underlying tool."
-   },
-   {
-    "node": "prop-weil-pbc-proetale-constant-exact",
-    "why": "Generic exactness of the pro-etale inverse image for constant coefficients used for strict quotient realization and descent; no trace-transport unit node supplies this underlying tool."
-   },
-   {
-    "node": "lem-trf-proetale-pullback-stalk-coherence",
-    "why": "Finite-level germ-normalized stalk comparison used on quotient towers; the integral unit transports this generic input rather than replacing its proof route."
-   },
-   {
     "node": "lem-weil-point-proetale-sections-exact",
-    "why": "Generic sections over an algebraically closed point are exact on the pro-etale site used for strict quotient realization and descent; no trace-transport unit node supplies this underlying tool."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "why": "Generic strict tower homotopy limit used for strict quotient realization and descent; no trace-transport unit node supplies this underlying tool."
+    "why": "Exact point sections cancel the chosen-resolution quasi-isomorphism in the section equation."
    },
    {
     "node": "lem-pur-integral-operations-preserve-constructible",
-    "why": "Generic integral pullback and completed tensor product preserve constructibility used for strict quotient realization and descent; no trace-transport unit node supplies this underlying tool."
-   },
-   {
-    "node": "lem-pur-integral-operations-well-defined",
-    "why": "Generic the towers defining integral pullback and completed tensor product are invariant under change of k-flat resolution used for strict quotient realization and descent; no trace-transport unit node supplies this underlying tool."
-   },
-   {
-    "node": "lem-weil-pbc-localization-universal-property",
-    "why": "Generic universal property of a localization of categories: functors and natural transformations inverting w factor through it used for strict quotient realization and descent; no trace-transport unit node supplies this underlying tool."
-   },
-   {
-    "node": "lem-weil-proetale-isomorphism-inverse-image",
-    "why": "Generic inverse image along an isomorphism of schemes on the pro-etale site used for strict quotient realization and descent; no trace-transport unit node supplies this underlying tool."
+    "why": "Generic preservation of the constructible integral domain permits substituting N=Lv^*M."
    }
   ]
  },
@@ -358,12 +252,12 @@
   "lem-weil-proetale-isomorphism-inverse-image"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-NM-65f0a9768",
-  "group": "NM",
+  "reviewer": "NT-cc-Q127-39d46b4fd",
+  "group": "Q127",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-65f0a9768 (reviewer sub-agent of L); spot-checked: Read the whole item, all 11 steps and the full statement of every node they cite, plus unit sk-thm-trace-transport and blueprint main-20261015 thm-trf-l-function-euler-product.proof.md 'Local powers' input (b). Statement unchanged and not a target. Coefficients are the derived-complete D^b_c(-,O_E) and its raw rationalization. c=Γ(χ^{-1}) has the right direction, and κ^δ is defined because δ=Spec α is an isomorphism. Hand checks: Step 2, (s,id) is initial among pointed neighbourhoods, so the identity stalk is Γ(s,-). Step 3, the coordinate formula follows from the finite composition law with (v,f,id). Step 6 reduces to the stated associativity of the integral compositors. Step 8, Spec(α)Spec(β)=Spec(βα). Step 9, the finite germ computation with lift (id,δ) gives [s,δ,a]=r_{id,α}[s,id,a]. Step 10 compares actual chain maps with zero shifted coordinate; the derived-complete hypothesis is checked for N, and the argument does not use detection by reductions. Step 11, rational naturality follows from the f⊗a formula in def-weil-finite-coefficient-point item 3. Edge cases tested: f=id, α=1, the constant sheaf, two successive automorphisms, and non-integral rational morphisms. Duplicate sweep: the nearby nodes (lem-trf-completed-stalk-frobenius-reduction, lem-trf-fixed-point-stalk-transport-cocycle, lem-trf-point-transport-composition, prop-trf-rational-frobenius-integral-model) are Frobenius-specific, and the finite lem-trf-proetale-pullback-stalk-coherence is cited, not duplicated. No new nodes. Stacks 05V1, 0F4F, 0993, 099N and 0941 exist with the labels cited; no SGA. All 9 declared tool_uses accepted as generic black boxes. Observation, not a fault: Step 11 proves the rationalization by linearity rather than citing prop-weil-pbc-rational-transport, which the blueprint names, with the same content and no route departure. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q127-39d46b4fd (reviewer sub-agent of L); spot-checked: Read the item and all four new nodes in full, plus the statements of every cited node. Re-split note (human, 2026-10-21, released 2026-10-22) is satisfied: old steps 1-2 become A bounded-quotient-stalk-realization, 3/6/7 become B stalk-compositor-tower-realization, 4/5/8 become C germ-reparametrization-derived-descent, 9-10 become D source-section-stalk-cone-comparison, and step 11 stays as assembly steps 4-5 (2434 chars). The four nodes are comparable in size (work 2498/2926/2949/2724 chars). No old argument was shortened; the old texts are kept verbatim in the report. Item statement and stmt_deps are byte-identical to live. The item is not superseded and nothing is in the dropped list. Maths checked: (A) uniform [a,b] comes from def-weil-derived-complete-integral-detailed, the good-truncation zigzag is levelwise quasi-iso, J_v = H(Γ v*P_n) by exact sections, and the cone d^2=0 sign was checked by hand. (B) e_{fv,n} = c^fin e Γ(χ^fin) is exactly the finite composition law at Z=s, point id; η and unit/associativity come from lem-trf-integral-pullback-comparison-realization. (C) Spec(α)Spec(β) = Spec(β∘α) gives the action law; inverse, unit and empty succession hold. (D) κ^δ is invertible on derived-complete N; the pullback-unit lift (id,δ) maps to [s,δ,a] = R_{id,α}[s,id,a]; both sides have zero shifted coordinate. No cycles, no SGA. One fault, B5: the new nodes' source.document was the blueprint proof file while place named Stacks tags 0993/0F4F/05V1. Fixed by rewriting source to proetale.tex/sites.tex with tag, label and blueprint place (labels verified at proetale.tex:3650, sites.tex:8514, 8558); no other field changed. Advisory for the proof workers of A and D: lem-trf-point-sections-completion-cone (Q91) supplies the sectionwise cone c_X and the α_NΓ(q) = (0,(z̄_n)) normalization at s.; 4 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -428,5 +322,26 @@
   "existing": false,
   "note": "The completed pullback comparison is Fib of the inverse specified compositor. Reparametrization is uniquely normalized on whole strict quotient towers, with its realization fixed on both Roos coordinates for every good representative. The section map uses the recorded chosen-resolution inverse-image/pullback comparison. Integral and raw rational coherence, including the section equation and arbitrary-derived-morphism naturality, are stated without finite Tor-amplitude or Weil-structure assumptions. Rational fibres use the recorded faithful module-size lift and its canonical counit."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261026T070938-L-3709856",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

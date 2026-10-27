@@ -1,0 +1,249 @@
+{
+ "id": "lem-sfb-etale-nil-ideal-map-lift",
+ "kind": "statement",
+ "title": "Etale algebra maps lift across an arbitrary locally nilpotent ideal",
+ "statement": "Let $A$ be a commutative ring with identity, and let $C,T$ be commutative unital $A$-algebras, allowing zero rings. Suppose that $\\operatorname{Spec}C\\to\\operatorname{Spec}A$ is etale [def-weil-affine-spectrum], [def-weil-etale-morphism]. Let $J\\subseteq T$ be an ideal every element of which is nilpotent, meaning that for each $t\\in J$ there exists an integer $n\\geq1$ with $t^n=0$. For every unital $A$-algebra homomorphism $g:C\\to T/J$, there exists a unital $A$-algebra homomorphism $h:C\\to T$ such that $q\\circ h=g$, where $q:T\\to T/J$ is the quotient map. No uniform exponent annihilating $J$ and no Noetherian assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 07K4, label lemma-smooth-strong-lift, specialized to etale (hence smooth) ring maps; the affine translation is lem-weil-pbc-etale-ring-map-iff-etale-affine."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-etale-ring-map-iff-etale-affine], the given affine etale morphism implies that $C$ is finitely presented over $A$, $H_1(L_{C/A})=0$, and $\\Omega_{C/A}=0$. Thus $\\Omega_{C/A}$ is projective: the zero module is a direct summand of the free module of rank zero. Using the explicit meaning of finite presentation in [def-weil-pbc-smooth-ring-map], fix an $A$-algebra presentation $C=A[x_1,\\ldots,x_n]/(f_1,\\ldots,f_m)$ with $n,m\\geq0$. These are exactly the cotangent hypotheses needed for square-zero lifting below.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "def-weil-pbc-smooth-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00U1 and 00T2 (definition-smooth), as used to specialize Tag 07K4 to etale maps"
+   }
+  },
+  {
+   "text": "For each $i$ choose $t_i\\in T$ lifting $g(\\overline{x_i})$. Evaluate polynomials over $A$ at the $t_i$ using the fixed structure map $A\\to T$. Put $e_j=f_j(t_1,\\ldots,t_n)$. Reduction modulo $J$ gives $g(f_j(\\overline{x}))=0$, so $e_j\\in J$. Set $K=(e_1,\\ldots,e_m)\\subseteq J$. Evaluation modulo $K$ kills every relation and hence their generated ideal; it therefore induces a unital $A$-algebra map $g_1:C\\to T/K$. Its composite with $T/K\\to T/J$ agrees with $g$ on the generators and on $A$, hence on every polynomial class.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07K4 (lemma-smooth-strong-lift); agent finite-relations reduction in place of Noetherian descent"
+   }
+  },
+  {
+   "text": "Choose integers $d_j\\geq1$ with $e_j^{d_j}=0$, using $e_j\\in J$. Set $M=1+\\sum_{j=1}^m(d_j-1)$. Each element of $K^M$ is a finite sum of multiples of monomials $e_1^{a_1}\\cdots e_m^{a_m}$ with $\\sum a_j=M$; some $a_j\\geq d_j$ by the displayed formula for $M$, so every monomial is zero. Thus $K^M=0$. If $m=0$, then $K=0$ and $M=1$, and the same conclusion holds. Only the finitely many $e_j$ require exponents; no exponent for $J$ has been chosen.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07K4; elementary finite-relations replacement of the source reduction to a nilpotent ideal"
+   }
+  },
+  {
+   "text": "Inductively construct unital $A$-algebra maps $g_r:C\\to T/K^r$ for $1\\leq r\\leq M$, whose reductions to $T/K$ are $g_1$, starting with the map in step 2. For $r<M$, let $D=T/K^{r+1}$ and let $N$ be the image of $K^r$ in $D$. Products from $N$ vanish because $K^{2r}\\subseteq K^{r+1}$ for $r\\geq1$. The map $D\\to T/K^r$, $t\\bmod K^{r+1}\\mapsto t\\bmod K^r$, is surjective with kernel $N$; it gives an $A$-algebra isomorphism $D/N\\cong T/K^r$, since equality of classes on either side means difference in $K^r$. Regard $g_r$ as a map into $D/N$ through this isomorphism. Apply [lem-weil-pbc-smooth-ring-map-square-zero-lifting] with $B=C$ and the cotangent hypotheses of step 1. It yields $g_{r+1}:C\\to D$ whose reduction to $T/K^r$ is $g_r$. Its reduction to $T/K$ is consequently $g_1$, completing the induction.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-square-zero-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07K4, final successive-lifting paragraph; Tag 031J (proposition-characterize-formally-smooth), (6) implies (1), and Tag 00TI"
+   }
+  },
+  {
+   "text": "Since $K^M=0$, sending $t\\bmod K^M$ to $t$ is a unital $A$-algebra isomorphism $T/K^M\\cong T$. Compose $g_M$ with it to obtain $h:C\\to T$. The reduction of $g_M$ to $T/K$ is $g_1$ by the induction, and $g_1$ reduces to $g$ modulo $J$ by step 2. Hence $q\\circ h=g$. If $M=1$, the induction has no successor step and this same calculation applies directly to $g_1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07K4, last sentence; quotient-map compatibility written explicitly"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "def-weil-pbc-smooth-ring-map",
+  "lem-weil-pbc-smooth-ring-map-square-zero-lifting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 07K4 (lemma-smooth-strong-lift): finite relation errors replace the source Noetherian descent, followed by its successive square-zero lifting argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "exists_lift|IsNilpotent|IsNil",
+   "results": "{\"t\": \"2026-10-24T01:38:11Z\", \"tool\": \"grep\", \"query\": \"exists_lift|IsNilpotent|IsNil\", \"sub\": \"RingTheory/Smooth\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/Pi.lean\", \"Mathlib/RingTheory/Smooth/Pi.lean\", \"Mathlib/RingTheory/Smooth/Basic.lean\", \"Mathlib/RingTheory/Smooth/Basic.lean\", \"Mathlib/RingTheory/Smooth/Basic.lean\", \"Mathlib/RingTheory/Smooth/Basic.lean\", \"Mathlib/RingTheory/Smooth/Basic.lean\"], \"digest\": \"de08a928d6054ad5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: FormallySmooth.exists_lift requires a nilpotent IDEAL, not merely that every element is nilpotent; StandardEtalePair lifting requires a chosen standard presentation and root or a square-zero ideal. Neither gives the stated arbitrary etale algebra and arbitrary locally nilpotent ideal in one line. Read Smooth/Basic.lean:126-132 and Etale/Field.lean:98-120; no returned declaration supplies the stronger lifting property."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Smooth\", \"lift\"",
+   "results": "{\"t\": \"2026-10-24T01:38:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"Smooth\\\", \\\"lift\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.lift\", \"Algebra.FormallySmooth.comp_lift\", \"Algebra.FormallySmooth.exists_lift\", \"Algebra.FormallySmooth.liftOfSurjective\", \"Algebra.FormallySmooth.comp_liftOfSurjective\", \"Algebra.FormallySmooth.mk_lift\", \"Algebra.FormallySmooth.liftOfSurjective_apply\"], \"digest\": \"d052a4dca3f2acd4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: FormallySmooth.exists_lift requires a nilpotent IDEAL, not merely that every element is nilpotent; StandardEtalePair lifting requires a chosen standard presentation and root or a square-zero ideal. Neither gives the stated arbitrary etale algebra and arbitrary locally nilpotent ideal in one line. Read Smooth/Basic.lean:126-132 and Etale/Field.lean:98-120; no returned declaration supplies the stronger lifting property."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth algebra has the lifting property for locally nilpotent ideals",
+   "results": "{\"t\": \"2026-10-24T01:38:12Z\", \"tool\": \"leansearch\", \"query\": \"A smooth algebra has the lifting property for locally nilpotent ideals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.lift\", \"Algebra.FormallySmooth.exists_lift\", \"Algebra.Smooth.formallySmooth\", \"Algebra.FormallySmooth\", \"Algebra.FormallySmooth.lift.congr_simp\", \"Algebra.smoothLocus\", \"Algebra.FormallySmooth.mk_lift\", \"Algebra.FormallySmooth.comp_lift\"], \"digest\": \"f2410ac82a033e35\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: FormallySmooth.exists_lift requires a nilpotent IDEAL, not merely that every element is nilpotent; StandardEtalePair lifting requires a chosen standard presentation and root or a square-zero ideal. Neither gives the stated arbitrary etale algebra and arbitrary locally nilpotent ideal in one line. Read Smooth/Basic.lean:126-132 and Etale/Field.lean:98-120; no returned declaration supplies the stronger lifting property."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth finitely presented algebra lifts homomorphisms through a quotient by a nil ideal, with each element nilpotent",
+   "results": "{\"t\": \"2026-10-24T01:38:12Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth finitely presented algebra lifts homomorphisms through a quotient by a nil ideal, with each element nilpotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.exists_lift\", \"Algebra.FormallySmooth.lift\", \"Algebra.FormallySmooth.mk_lift\", \"Algebra.FormallySmooth.comp_lift\", \"Algebra.FormallySmooth.liftOfSurjective_apply\", \"Algebra.Smooth.formallySmooth\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"Algebra.FormallySmooth.comp_liftOfSurjective\"], \"digest\": \"9afa0d8da4f76b2d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: FormallySmooth.exists_lift requires a nilpotent IDEAL, not merely that every element is nilpotent; StandardEtalePair lifting requires a chosen standard presentation and root or a square-zero ideal. Neither gives the stated arbitrary etale algebra and arbitrary locally nilpotent ideal in one line. Read Smooth/Basic.lean:126-132 and Etale/Field.lean:98-120; no returned declaration supplies the stronger lifting property."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An etale finitely presented algebra lifts maps over a quotient by an ideal all of whose elements are nilpotent",
+   "results": "{\"t\": \"2026-10-24T01:38:56Z\", \"tool\": \"leansearch\", \"query\": \"An etale finitely presented algebra lifts maps over a quotient by an ideal all of whose elements are nilpotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.exists_lift\", \"Algebra.FormallySmooth.liftOfSurjective_apply\", \"Algebra.FormallySmooth.liftOfSurjective\", \"Algebra.FormallySmooth.lift\", \"Ideal.Quotient.liftₐ\", \"Algebra.Etale.finitePresentation\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"AlgebraicGeometry.Scheme.Hom.liftQuotient\"], \"digest\": \"0aaafed94df8c735\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: FormallySmooth.exists_lift requires a nilpotent IDEAL, not merely that every element is nilpotent; StandardEtalePair lifting requires a chosen standard presentation and root or a square-zero ideal. Neither gives the stated arbitrary etale algebra and arbitrary locally nilpotent ideal in one line. Read Smooth/Basic.lean:126-132 and Etale/Field.lean:98-120; no returned declaration supplies the stronger lifting property."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an etale algebra C over any commutative base ring, every base algebra map C to A modulo a nil ideal lifts to A",
+   "results": "{\"t\": \"2026-10-24T01:38:56Z\", \"tool\": \"leanfinder\", \"query\": \"For an etale algebra C over any commutative base ring, every base algebra map C to A modulo a nil ideal lifts to A\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.formallyEtale\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"Algebra.FormallySmooth.exists_lift\", \"Algebra.FormallyEtale.comp_bijective\", \"StandardEtalePair.lift\", \"Algebra.FormallyEtale.iff_comp_bijective\", \"Algebra.FormallyEtale.instFormallySmooth\", \"StandardEtalePair.instFormallyEtaleRing\"], \"digest\": \"76df7fda504549e0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: FormallySmooth.exists_lift requires a nilpotent IDEAL, not merely that every element is nilpotent; StandardEtalePair lifting requires a chosen standard presentation and root or a square-zero ideal. Neither gives the stated arbitrary etale algebra and arbitrary locally nilpotent ideal in one line. Read Smooth/Basic.lean:126-132 and Etale/Field.lean:98-120; no returned declaration supplies the stronger lifting property."
+  },
+  {
+   "tool": "grep",
+   "query": "lift.*[Ii]s[Nn]il|[Ii]s[Nn]il.*lift|[Nn]ilpotent.*lift|exists.*lift",
+   "results": "{\"t\": \"2026-10-24T01:38:56Z\", \"tool\": \"grep\", \"query\": \"lift.*[Ii]s[Nn]il|[Ii]s[Nn]il.*lift|[Nn]ilpotent.*lift|exists.*lift\", \"sub\": \"RingTheory/Etale\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Etale/QuasiFinite.lean\", \"Mathlib/RingTheory/Etale/Field.lean\"], \"digest\": \"831f928d37543848\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: FormallySmooth.exists_lift requires a nilpotent IDEAL, not merely that every element is nilpotent; StandardEtalePair lifting requires a chosen standard presentation and root or a square-zero ideal. Neither gives the stated arbitrary etale algebra and arbitrary locally nilpotent ideal in one line. Read Smooth/Basic.lean:126-132 and Etale/Field.lean:98-120; no returned declaration supplies the stronger lifting property."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"lift\"",
+   "results": "{\"t\": \"2026-10-24T01:41:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"Etale\\\", \\\"lift\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"StandardEtalePair.lift\", \"StandardEtalePair.lift_X_left\", \"StandardEtalePair.lift_X\", \"StandardEtalePresentation.lift_bijective\", \"Algebra.WeaklyEtale.ulift_iff\"], \"digest\": \"3a9c506760bf5543\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: FormallySmooth.exists_lift requires a nilpotent IDEAL, not merely that every element is nilpotent; StandardEtalePair lifting requires a chosen standard presentation and root or a square-zero ideal. Neither gives the stated arbitrary etale algebra and arbitrary locally nilpotent ideal in one line. Read Smooth/Basic.lean:126-132 and Etale/Field.lean:98-120; no returned declaration supplies the stronger lifting property."
+  },
+  {
+   "tool": "grep",
+   "query": "lift.*nilpotent|IsNilpotent.*lift",
+   "results": "{\"t\": \"2026-10-24T02:03:52Z\", \"tool\": \"grep\", \"query\": \"lift.*nilpotent|IsNilpotent.*lift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/Pi.lean\", \"Mathlib/RingTheory/Idempotents.lean\", \"Mathlib/RingTheory/Idempotents.lean\", \"Mathlib/RingTheory/Idempotents.lean\", \"Mathlib/RingTheory/Idempotents.lean\", \"Mathlib/RingTheory/Idempotents.lean\", \"Mathlib/RingTheory/Smooth/Basic.lean\", \"Mathlib/RingTheory/Smooth/Basic.lean\"], \"digest\": \"60d829b14e1d5436\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned square-zero or uniformly nilpotent lifting results, or formal etaleness, do not give arbitrary elementwise nilpotent ideals in one line; the finite-presentation reduction is proved in the item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An etale finitely presented ring map lifts a homomorphism through a quotient by a locally nilpotent ideal",
+   "results": "{\"t\": \"2026-10-24T02:03:52Z\", \"tool\": \"leansearch\", \"query\": \"An etale finitely presented ring map lifts a homomorphism through a quotient by a locally nilpotent ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.exists_lift\", \"Algebra.FormallySmooth.liftOfSurjective_apply\", \"Ideal.Quotient.liftₐ\", \"Algebra.FormallySmooth.lift\", \"Algebra.FormallySmooth.liftOfSurjective\", \"Ideal.ResidueField.liftₐ\", \"RingHom.FormallyEtale\", \"AlgebraicGeometry.Scheme.Hom.liftQuotient\"], \"digest\": \"a138d52aa36970a7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned square-zero or uniformly nilpotent lifting results, or formal etaleness, do not give arbitrary elementwise nilpotent ideals in one line; the finite-presentation reduction is proved in the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale, Algebra.FormallySmooth, Ideal.IsNilpotent",
+   "results": "{\"t\": \"2026-10-24T02:03:52Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Etale, Algebra.FormallySmooth, Ideal.IsNilpotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Ideal.IsNilpotent'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "unavailable: this Loogle query was rejected for an unknown identifier; no absence inference is drawn from it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale algebra map lifts across a locally nilpotent ideal",
+   "results": "{\"t\": \"2026-10-24T02:03:54Z\", \"tool\": \"leanfinder\", \"query\": \"An etale algebra map lifts across a locally nilpotent ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"StandardEtalePair.lift\", \"Algebra.Etale.formallyEtale\", \"StandardEtalePair.HasMap.map\", \"Algebra.IsEtaleAt\", \"StandardEtalePresentation.hasMap\", \"Algebra.FormallyEtale.iff_comp_bijective\", \"Algebra.FormallyEtale.localization_map\"], \"digest\": \"44003b24f074f97c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned square-zero or uniformly nilpotent lifting results, or formal etaleness, do not give arbitrary elementwise nilpotent ideals in one line; the finite-presentation reduction is proved in the item"
+  },
+  {
+   "tool": "grep",
+   "query": "lift.*nilpotent|IsNilpotent.*lift",
+   "results": "{\"t\": \"2026-10-24T02:15:34Z\", \"tool\": \"grep\", \"query\": \"lift.*nilpotent|IsNilpotent.*lift\", \"sub\": \"RingTheory/Smooth\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/Basic.lean\", \"Mathlib/RingTheory/Smooth/Basic.lean\", \"Mathlib/RingTheory/Smooth/Basic.lean\", \"Mathlib/RingTheory/Smooth/Basic.lean\", \"Mathlib/RingTheory/Smooth/Pi.lean\"], \"digest\": \"c87adee2904701e1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned square-zero or uniformly nilpotent lifting results, or formal etaleness, do not give arbitrary elementwise nilpotent ideals in one line; the finite-presentation reduction is proved in the item"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ind-etale-core-ring-operations",
+  "date": "2026-10-24",
+  "group": "Q79"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplication by a central torus with semisimple quotient and the derived group. Supporting input: Semisimple algebraic groups are perfect. Root-subgroup structure and the torus conjugation formula used to realize the rank-one commutator calculation in Milne Corollary 21.50. Supporting lemma: A one-dimensional smooth connected unipotent group is additive. Supporting structural ingredient for the one-dimensional classification: Milne Corollary 14.55 (positive characteristic) and the central-series argument preceding the induction in Proposition 14.32 (characteristic zero). Supporting lemma: Smooth connected commutative exponent-p groups over a perfect field are vector groups. Supporting Milne Corollary 14.53, used after the elementary-unipotent reduction in 14.54: the full product classification is Proposition 14.52. Present split: step 5, splitting the finite cyclic factors into their identity components and finite etale reduced subgroups over the given perfect field. Supporting general scheme-theoretic input: the universal finite etale scheme of connected components, before transporting the group operations. Supporting algebra for Milne Proposition 1.29 and the field-extension argument of Proposition 1.30(a): Maximal ind-etale subalgebra commutes with arbitrary field extension. Supporting ring operations in the reductions of Stacks Tag 0CKU: intersections, nilpotent reduction, finite products and connected factors. Supporting Stacks 0CKT (4): lifting a finite etale subalgebra of the reduction by the strong lifting property, Tag 07K4.",
+   "via": [
+    "lem-sfb-ind-etale-core-ring-operations",
+    "lem-sfb-maximal-ind-etale-field-base-change",
+    "lem-sfb-algebraic-scheme-etale-components",
+    "lem-sfb-perfect-finite-commutative-reduced-splitting",
+    "lem-sfb-additive-subgroup-perfect-decomposition",
+    "lem-sfb-perfect-exponent-p-vector-group",
+    "lem-sfb-unipotent-central-additive-subgroup",
+    "lem-sfb-one-dimensional-unipotent-additive",
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-semisimple-group-perfect",
+    "lem-sfb-central-torus-semisimple-derived-product",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-etale-nil-ideal-map-lift",
+  "worker": "stage1",
+  "summary": "Retained the statement and inherited provenance. Gave the finite-relations reduction to a finitely generated nilpotent subideal, with an explicit exponent and an induction using the existing square-zero Mathlib leaf. No new nodes are needed. Preserved prior searches and added the searches actually logged for this item.",
+  "blueprint": "Supports the inherited Tag 0CKT (4) application in lem-sfb-ind-etale-core-ring-operations: lift a finite etale subalgebra of a reduction. This is a supporting algebra input in the recorded chain from det-thm-sf-ctf-stability-direct-images, paragraph (3); the chapter and unit route are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NO-c40da9fe9",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-c40da9fe9 (reviewer sub-agent of L); spot-checked: PASS, no fixes. I read Stacks 07K4 (algebra.tex l.38291) and its proof. The split replaces the Noetherian descent with a finite-relation-errors subideal; this is correct and marked as an agent proof. Step 1 uses only the statements of lem-weil-pbc-etale-ring-map-iff-etale-affine (étale ⇒ finitely presented, H1=0, Ω=0) and of def-weil-pbc-smooth-ring-map (explicit finite presentation). Step 2: the relation errors e_j lie in J, and g_1 : C→T/K is well defined and lifts g. Step 3: with M=1+Σ(d_j−1), pigeonhole gives K^M=0. Step 4 is a properly stated induction: N=image of K^r has N²=0 since 2r≥r+1, and D/N≅T/K^r, so lem-weil-pbc-smooth-ring-map-square-zero-lifting applies (H1=0, Ω=0 projective). Step 5: T/K^M=T, so q∘h=g. Edge cases checked: J=0, C=0 (forces T=0), m=0, and a non-nilpotent nil ideal in F_2[x_i]/(x_i²). The statement and stmt_deps equal live; live still has the item unsplit; there is no re-split note. There are no new nodes. The rg searches found no duplicate. proof_deps is the union of the step uses. No SGA."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.EtaleNilIdealMapLift",
+  "declaration": "AlgebraicGeometry.exists_algHom_lift_of_etale_of_nil_ideal",
+  "file": "lean/Sheaf/RingTheory/EtaleNilIdealMapLift.lean",
+  "statement": "theorem exists_algHom_lift_of_etale_of_nil_ideal (A C : Type u) (T : Type v) [CommRing A] [CommRing C] [CommRing T] [Algebra A C] [Algebra A T] (hEtale : Etale (Spec.map (CommRingCat.ofHom (algebraMap A C)))) (J : Ideal T) (hJ : ∀ t : T, t ∈ J → ∃ n : ℕ, 1 ≤ n ∧ t ^ n = 0) (g : C →ₐ[A] T ⧸ J) : ∃ h : C →ₐ[A] T, (Ideal.Quotient.mkₐ A J).comp h = g",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3b868001b",
+  "group": "NF",
+  "result": "pass",
+  "note": "Clause-by-clause match: CommRing A,C,T (zero rings allowed); Etale (Spec.map (ofHom (algebraMap A C))) = Spec C→Spec A étale; hJ elementwise nilpotent (∃ n≥1), not IsNilpotent J; g : C →ₐ[A] T⧸J; ∃ h, mkₐ∘h = g. A,C share universe u as Spec.map requires; T in independent v. Edge cases J=0, T=0, C=0, A=0, non-uniformly nil ideal, m=0 covered. Source Stacks 07K4 (algebra.tex 38291) read. No Mathlib/project duplicate (FormallySmooth.exists_lift needs nilpotent ideal). Snapshot node = live except new lean; lean.statement verbatim in file. Docstrings carry source, blueprint tag and proof steps 1-5; sorry only; report has Worker report and Second reading by NF sections. No fixes; no compile needed."
+ }
+}

@@ -10,7 +10,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Braided
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ComparisonMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarProjection
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.FlatModuleCat
-import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braided
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MonoidalStructure
 import WeilConjectures.CategoryTheory.Monoidal.Braided.Adjunction
 
 /-! # Comparison of the untransposed boundary tensor composites
@@ -34,6 +34,9 @@ universe u v w
 
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 open CategoryTheory.Functor.LaxMonoidal CategoryTheory.Functor.OplaxMonoidal
+-- The canonical Koszul braiding is explicitly installed locally in the current API.
+attribute [local instance] DerivedCategory.braidedCategory'
+
 variable {C : Type v} [Category.{u + 1} C] [Abelian C]
   [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]
   [SymmetricCategory C] [MonoidalClosed C] [Abelian.HasFunctorialFlatResolution C]
@@ -45,96 +48,13 @@ variable {C : Type v} [Category.{u + 1} C] [Abelian C]
   (hF : ∀ X Y : C, F.map (β_ X Y).hom ≫ δ F Y X =
     δ F X Y ≫ (β_ (F.obj X) (F.obj Y)).hom)
 
-private theorem comparison_fac (P Q : HomotopyCategory C (.up ℤ)) :
-    ((F.leftDerivedTensorComparison.app (DerivedCategory.Qh.obj P)).app
-      (DerivedCategory.Qh.obj Q)) ≫
-      (F.leftDerivedFunctorCounit.app P ⊗ₘ F.leftDerivedFunctorCounit.app Q) ≫
-      μ DerivedCategory.Qh ((F.mapHomotopyCategory (.up ℤ)).obj P)
-        ((F.mapHomotopyCategory (.up ℤ)).obj Q) =
-    F.leftDerivedFunctor.map (μ DerivedCategory.Qh P Q) ≫
-      F.leftDerivedFunctorCounit.app (P ⊗ Q) ≫
-      DerivedCategory.Qh.map (δ (F.mapHomotopyCategory (.up ℤ)) P Q) := by
-  have h := F.leftDerivedTensorComparison_app_app_comp_counit P Q
-  have he : (F.derivedTensorLeftDerivedCounit.app P).app Q =
-      (F.leftDerivedFunctorCounit.app P ⊗ₘ F.leftDerivedFunctorCounit.app Q) ≫
-        μ DerivedCategory.Qh ((F.mapHomotopyCategory (.up ℤ)).obj P)
-          ((F.mapHomotopyCategory (.up ℤ)).obj Q) := by
-    rw [MonoidalCategory.tensorHom_def]
-    dsimp [CategoryTheory.Functor.derivedTensorLeftDerivedCounit]
-    rw [Category.assoc]
-    rfl
-  rw [he] at h
-  have he₂ : (F.leftDerivedDerivedTensorCounit.app P).app Q =
-      F.leftDerivedFunctor.map (μ DerivedCategory.Qh P Q) ≫
-        F.leftDerivedFunctorCounit.app (P ⊗ Q) := rfl
-  rw [he₂] at h
-  simpa only [CategoryTheory.Functor.mapHomotopyCategory_δ, Category.assoc] using h
-
-include hF in
-private theorem comparison_braiding_Qh (P Q : HomotopyCategory C (.up ℤ))
-    (hP : F.kFlatMap P) :
-    F.leftDerivedFunctor.map (β_ (DerivedCategory.Qh.obj P)
-      (DerivedCategory.Qh.obj Q)).hom ≫
-      (F.leftDerivedTensorComparison.app (DerivedCategory.Qh.obj Q)).app
-        (DerivedCategory.Qh.obj P) =
-    (F.leftDerivedTensorComparison.app (DerivedCategory.Qh.obj P)).app
-      (DerivedCategory.Qh.obj Q) ≫
-      (β_ (F.leftDerivedFunctor.obj (DerivedCategory.Qh.obj P))
-        (F.leftDerivedFunctor.obj (DerivedCategory.Qh.obj Q))).hom := by
-  have : IsIso (μ DerivedCategory.Qh ((F.mapHomotopyCategory (.up ℤ)).obj Q)
-      ((F.mapHomotopyCategory (.up ℤ)).obj P)) :=
-    CategoryTheory.Functor.isIso_μNatTrans_Qh_app_app_of_kFlat _ _ hP
-  rw [← cancel_mono ((F.leftDerivedFunctorCounit.app Q ⊗ₘ
-    F.leftDerivedFunctorCounit.app P) ≫
-    μ DerivedCategory.Qh ((F.mapHomotopyCategory (.up ℤ)).obj Q)
-      ((F.mapHomotopyCategory (.up ℤ)).obj P))]
-  simp only [Category.assoc]
-  rw [comparison_fac, ← BraidedCategory.braiding_naturality_assoc]
-  have hβ : (β_ (DerivedCategory.Qh.obj ((F.mapHomotopyCategory (.up ℤ)).obj P))
-      (DerivedCategory.Qh.obj ((F.mapHomotopyCategory (.up ℤ)).obj Q))).hom ≫
-      μ DerivedCategory.Qh ((F.mapHomotopyCategory (.up ℤ)).obj Q)
-        ((F.mapHomotopyCategory (.up ℤ)).obj P) =
-      μ DerivedCategory.Qh ((F.mapHomotopyCategory (.up ℤ)).obj P)
-        ((F.mapHomotopyCategory (.up ℤ)).obj Q) ≫
-        DerivedCategory.Qh.map (β_ ((F.mapHomotopyCategory (.up ℤ)).obj P)
-          ((F.mapHomotopyCategory (.up ℤ)).obj Q)).hom :=
-    DerivedCategory.braidedCategory_braiding_hom_μ_Qh D _ _
-  erw [hβ]
-  rw [reassoc_of% comparison_fac F P Q]
-  rw [← Functor.map_comp_assoc, DerivedCategory.braidedCategory_braiding_hom_μ_Qh,
-    Functor.map_comp_assoc]
-  erw [F.leftDerivedFunctorCounit.naturality_assoc]
-  simp only [Functor.comp_map]
-  rw [← DerivedCategory.Qh.map_comp, ← DerivedCategory.Qh.map_comp,
-    CategoryTheory.Functor.mapHomotopyCategory_map_braiding_hom_δ F hF P Q]
-
 include hF in
 private theorem comparison_braiding (K M : DerivedCategory C) :
     F.leftDerivedFunctor.map (β_ K M).hom ≫
       (F.leftDerivedTensorComparison.app M).app K =
     (F.leftDerivedTensorComparison.app K).app M ≫
       (β_ (F.leftDerivedFunctor.obj K) (F.leftDerivedFunctor.obj M)).hom := by
-  have he : ∀ X : DerivedCategory C, ∃ P, F.kFlatMap P ∧
-      Nonempty (DerivedCategory.Qh.obj P ≅ X) := by
-    intro X
-    have := Localization.essSurj (DerivedCategory.Qh (C := C))
-      (HomotopyCategory.quasiIso _ (.up ℤ))
-    obtain ⟨R⟩ := LocalizerMorphism.IsLeftDerivabilityStructure.hasLeftResolutions
-      (Φ := HomotopyCategory.quasiIsoLocalizerMorphism F.kFlatMap)
-      (DerivedCategory.Qh.objPreimage X)
-    have : IsIso (DerivedCategory.Qh.map R.w) :=
-      Localization.inverts DerivedCategory.Qh (HomotopyCategory.quasiIso _ _) _ R.hw
-    exact ⟨R.X₁.obj, R.X₁.property,
-      ⟨asIso (DerivedCategory.Qh.map R.w) ≪≫ DerivedCategory.Qh.objObjPreimageIso X⟩⟩
-  obtain ⟨P, hP, ⟨eP⟩⟩ := he K
-  obtain ⟨Q, _, ⟨eQ⟩⟩ := he M
-  rw [← cancel_epi (F.leftDerivedFunctor.map (eP.hom ⊗ₘ eQ.hom)),
-    ← F.leftDerivedFunctor.map_comp_assoc, BraidedCategory.braiding_naturality,
-    F.leftDerivedFunctor.map_comp_assoc,
-    CategoryTheory.Functor.leftDerivedTensorComparison_naturality_tensorHom,
-    reassoc_of% comparison_braiding_Qh F hF P Q hP,
-    ← BraidedCategory.braiding_naturality,
-    ← CategoryTheory.Functor.leftDerivedTensorComparison_naturality_tensorHom_assoc]
+  exact F.leftDerivedFunctor_map_braiding_hom_δ hF K M
 
 namespace AlgebraicGeometry.ProEtale
 open BoundaryComparison
@@ -424,12 +344,10 @@ Source: blueprint main-20261015, sec-six-functors/sk-thm-sf-pf-proetale,
 (blueprint: lem-weil-boundary-q-defining-composite-comparison).
 
 Proof:
-1. Compute the native tensor comparison on K-flat representatives using its derived
-   counit characterization. The native signed braiding formulas, the ordinary pullback
-   braiding identity from doctrinal adjunction, and cancellation of the tensor counit
-   prove compatibility with braiding. Naturality extends it to all derived objects.
-   Conjugating by the exact/left-derived identification gives the actual comparison
-   used here, with naturality in both inputs.
+1. Apply the native derived-functor braiding theorem to the ordinary pullback
+   braiding identity from doctrinal adjunction. Use the canonical Koszul braiding
+   installed locally. Conjugating by the exact/left-derived identification gives
+   the actual comparison used here, with naturality in both inputs.
 2. Put L = i_e^* M, D = L tensor B, E = B tensor L. Naturality of symmetry gives
    r C_Z(sigma_e) = sigma_p s. Set H = eta_E F_p(r inverse). Apply F_p and
    naturality of eta to obtain H F_p(sigma_p) F_p(s) = C_T(F_e(sigma_e)) eta_D.

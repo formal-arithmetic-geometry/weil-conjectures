@@ -1,0 +1,274 @@
+{
+ "id": "lem-sfb-borel-conjugation-cover",
+ "kind": "statement",
+ "title": "Conjugates of any Borel cover a connected affine algebraic group",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure] and let $G$ be a smooth connected affine group scheme of finite type over $k$ [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-finite-type-morphism]. Subgroups mean closed subgroup schemes [def-sc-group-scheme-subgroup]. A Borel subgroup is a maximal smooth connected solvable subgroup, where solvable means that successive scheme-theoretic commutator subgroups eventually become trivial. Borel subgroups of $G$ exist. For every Borel subgroup $B\\subseteq G$, the map on rational points\n$$G(k)\\times B(k)\\longrightarrow G(k),\\qquad (g,b)\\longmapsto gbg^{-1}$$\nis surjective. Thus every element of $G(k)$ is conjugate to an element of any prescribed Borel subgroup. No reductivity hypothesis is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Definition 17.6 and following sentence, printed pp.353–354 (existence); Theorem 17.33(b) and its proof, and Corollary 17.34, printed p.362 (conjugation covering)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sfb-borel-subgroup-scheme"
+ ],
+ "proof": [
+  {
+   "text": "The trivial subgroup is smooth, connected and solvable. Among smooth connected solvable subgroups containing it choose one of largest dimension: dimensions are bounded integers, and a strict inclusion of smooth connected subgroups strictly increases dimension, by [lem-sfb-solvable-normal-subgroup-products]. It is therefore maximal under inclusion, so is a Borel. The same argument shows that every given smooth connected solvable subgroup is contained in a Borel.",
+   "uses": [
+    "lem-sfb-solvable-normal-subgroup-products"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 17.6 and sentence immediately following it, pp.353--354"
+   }
+  },
+  {
+   "text": "Fix any prescribed Borel $B$. By [lem-sfb-borel-maximal-torus-conjugacy], choose a torus $T\\subseteq B$ maximal in $G$. Apply [lem-sfb-neutral-torus-centralizer-cartan-structure] to obtain the smooth connected solvable subgroup $C=C_G(T)^\\circ$, containing $T$, its product structure, and the finite set $N/C(k)$ of normalizing cosets.",
+   "uses": [
+    "lem-sfb-borel-maximal-torus-conjugacy",
+    "lem-sfb-neutral-torus-centralizer-cartan-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proof of Theorem 17.33(b), p.362; Proposition 17.28, p.360"
+   }
+  },
+  {
+   "text": "By step 1 extend $C$ to a Borel $B'$. Both $B'$ and $B$ contain the maximal torus $T$. By [lem-sfb-torus-normalizer-borel-transitivity] choose $n\\in G(k)$ normalizing $T$ and satisfying $nB'n^{-1}=B$. Conjugation by $n$ preserves the centralizer functor of $T$ and its identity component $C$; hence $C=nCn^{-1}\\subseteq nB'n^{-1}=B$. This proves the containment needed here without using connectedness of the full centralizer.",
+   "uses": [
+    "lem-sfb-torus-normalizer-borel-transitivity",
+    "lem-sfb-neutral-torus-centralizer-cartan-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.29 and its proof, p.360"
+   }
+  },
+  {
+   "text": "Choose the semisimple $t\\in T(k)$ of [lem-sfb-torus-regular-semisimple-element], so that $C_G(t)=C_G(T)$ on all algebras. Form $G/C$ using [lem-sfb-homogeneous-orbit-quotient-geometry]; every rational point is a coset $xC$ with $x\\in G(k)$. If $txC=xC$, then $x^{-1}tx\\in C(k)$. It is semisimple, because applying a representation conjugates the diagonalizable matrix representing $t$. By the structure statement in step 2 it lies in $T(k)$. Consequently $xTx^{-1}$ centralizes $t$ on every algebra: conjugating the commutation of $T$ with $x^{-1}tx$ proves this directly. Equality of centralizer functors puts $xTx^{-1}$ inside $C_G(T)$. Since this torus is connected and contains the identity, it lies in the open identity component $C$. Every torus in $C$ lies in $T$ by the structure statement, so $xTx^{-1}\\subseteq T$. Maximality of $xTx^{-1}$ as a torus of $G$ implies equality. Therefore $x$ normalizes $T$, hence also its centralizer and its identity component $C$. The fixed cosets thus inject into the finite set $N/C(k)$ of step 2, by the map sending $xC$ to the same right coset. Its injectivity is exactly equality of right cosets. The fixed-point set of $t$ on $(G/C)(k)$ is finite.",
+   "uses": [
+    "lem-sfb-torus-regular-semisimple-element",
+    "lem-sfb-homogeneous-orbit-quotient-geometry",
+    "lem-sfb-neutral-torus-centralizer-cartan-structure",
+    "lem-sfb-group-neutral-component-translates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proof of Theorem 17.33(a), p.362"
+   }
+  },
+  {
+   "text": "Apply the finite-fixed-coset clause of [lem-sfb-subgroup-conjugation-incidence-criterion] with $H=C$ and $h_0=t$. All groups are smooth and connected, and step 4 supplies its finiteness hypothesis. There is a nonempty open $V\\subseteq G$ with $V(k)\\subseteq S_C$. Since step 3 gives $C\\subseteq B$, each expression $gcg^{-1}$ with $c\\in C(k)$ is also of the form $gbg^{-1}$ with $b\\in B(k)$. Thus $V(k)\\subseteq S_B$.",
+   "uses": [
+    "lem-sfb-subgroup-conjugation-incidence-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.33(a),(b), p.362"
+   }
+  },
+  {
+   "text": "Form the quotient $G/B$ by [lem-sfb-homogeneous-orbit-quotient-geometry]. Its quotient projection meets the hypotheses of [lem-sfb-borel-quotient-proper-geometry], which gives properness of $G/B$ and integrality of $G$. Apply the proper-quotient clause of [lem-sfb-subgroup-conjugation-incidence-criterion] with $H=B$ to obtain a closed subset $Z\\subseteq |G|$ such that $Z(k)=S_B$. Suppose $Z\\ne |G|$. Integrality makes $G$ irreducible, so the nonempty open $V$ of step 5 meets the nonempty open $G\\setminus Z$. This intersection has a closed point of $G$, since closed points are dense by [lem-sc-lft-over-field-jacobson-space]. Its residue field is $k$ by [lem-weil-pbc-closed-point-residue-field-base], so it gives a rational point in $V(k)$ outside $Z(k)$, contrary to step 5. Hence $Z=|G|$ and $S_B=G(k)$. Unpacking $S_B$ gives, for every $a\\in G(k)$, elements $g\\in G(k)$ and $b\\in B(k)$ with $a=gbg^{-1}$, exactly the required surjectivity.",
+   "uses": [
+    "lem-sfb-homogeneous-orbit-quotient-geometry",
+    "lem-sfb-borel-quotient-proper-geometry",
+    "lem-sfb-subgroup-conjugation-incidence-criterion",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proof of Theorem 17.33(b) and Corollary 17.34, p.362"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-solvable-normal-subgroup-products",
+  "lem-sfb-borel-maximal-torus-conjugacy",
+  "lem-sfb-neutral-torus-centralizer-cartan-structure",
+  "lem-sfb-torus-normalizer-borel-transitivity",
+  "lem-sfb-torus-regular-semisimple-element",
+  "lem-sfb-homogeneous-orbit-quotient-geometry",
+  "lem-sfb-group-neutral-component-translates",
+  "lem-sfb-subgroup-conjugation-incidence-criterion",
+  "lem-sfb-borel-quotient-proper-geometry",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Definition 17.6, Corollary 17.29, Lemma 17.32, and Theorem 17.33(a),(b), pp.353--354,360--362"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "BorelSubgroup|borelSubgroup|conjugation.*surjective|surjective.*conjugation",
+   "results": "{\"t\": \"2026-10-23T21:18:47Z\", \"tool\": \"grep\", \"query\": \"BorelSubgroup|borelSubgroup|conjugation.*surjective|surjective.*conjugation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read returned signatures: abstract group conjugacy and centralizers, Galois-category actions, Lie-algebra Borel submodules and measure-theoretic Borel spaces do not assert the algebraic-group theorem. Source candidates inspected: Group.conjugatesOfSet and subset_conjugatesOfSet (Algebra/Group/Subgroup/Basic.lean:561,570) only define conjugation saturation and its inclusion; LieAlgebra.Basis.borelUpper/borelLower (Algebra/Lie/Basis/Basic.lean:147,154) are Lie submodules.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a smooth connected affine algebraic group over an algebraically closed field Borel subgroups exist and the conjugates of any Borel cover the group",
+   "results": "{\"t\": \"2026-10-23T21:18:48Z\", \"tool\": \"leansearch\", \"query\": \"In a smooth connected affine algebraic group over an algebraically closed field Borel subgroups exist and the conjugates of any Borel cover the group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Group.conjugatesOfSet\", \"Group.conjugatesOfSet_mono\", \"Group.subset_conjugatesOfSet\", \"ClosedSubgroup.ctorIdx\", \"ContinuousSub.measurableSub\", \"QuotientAddGroup.borelSpace\", \"ClosedSubgroup.recOn\", \"ClosedSubgroup.isClosed'\"], \"digest\": \"fabb23a24590fffb\"} Read returned signatures: abstract group conjugacy and centralizers, Galois-category actions, Lie-algebra Borel submodules and measure-theoretic Borel spaces do not assert the algebraic-group theorem. Source candidates inspected: Group.conjugatesOfSet and subset_conjugatesOfSet (Algebra/Group/Subgroup/Basic.lean:561,570) only define conjugation saturation and its inclusion; LieAlgebra.Basis.borelUpper/borelLower (Algebra/Lie/Basis/Basic.lean:147,154) are Lie submodules.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Borel\"",
+   "results": "{\"t\": \"2026-10-23T21:18:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"Borel\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"LieAlgebra.Basis.borelLower\", \"LieAlgebra.Basis.borelUpper\", \"LieAlgebra.Basis.iSup_cartan_borelLower_borelUpper_eq_top\", \"LieAlgebra.Basis.borelUpper_eq\", \"LieAlgebra.Basis.borelUpper_le_biSup\", \"LieAlgebra.Basis.borelLower_eq\", \"LieAlgebra.Basis.borelLower_le_biSup\", \"Mathlib.Tactic.Borelize.tacticBorelize___\"], \"digest\": \"f6a7c18a77802c4d\"} Read returned signatures: abstract group conjugacy and centralizers, Galois-category actions, Lie-algebra Borel submodules and measure-theoretic Borel spaces do not assert the algebraic-group theorem. Source candidates inspected: Group.conjugatesOfSet and subset_conjugatesOfSet (Algebra/Group/Subgroup/Basic.lean:561,570) only define conjugation saturation and its inclusion; LieAlgebra.Basis.borelUpper/borelLower (Algebra/Lie/Basis/Basic.lean:147,154) are Lie submodules.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every invertible matrix in a connected linear algebraic group is conjugate to an element of any fixed maximal connected solvable subgroup",
+   "results": "{\"t\": \"2026-10-23T21:18:51Z\", \"tool\": \"leanfinder\", \"query\": \"Every invertible matrix in a connected linear algebraic group is conjugate to an element of any fixed maximal connected solvable subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CongruenceSubgroup.isArithmetic_conj_SL2Z\", \"CongruenceSubgroup.conjGL\", \"CongruenceSubgroup.mem_conjGL'\", \"CongruenceSubgroup.mem_conjGL\", \"RootPairing.GeckConstruction.ωConj_mem_of_mem\", \"CongruenceSubgroup.conjGL_coe\", \"CongruenceSubgroup.IsCongruenceSubgroup.conjGL\", \"CongruenceSubgroup.exists_Gamma_le_conj'\"], \"digest\": \"bf7ebee9a66bebe7\"} Read returned signatures: abstract group conjugacy and centralizers, Galois-category actions, Lie-algebra Borel submodules and measure-theoretic Borel spaces do not assert the algebraic-group theorem. Source candidates inspected: Group.conjugatesOfSet and subset_conjugatesOfSet (Algebra/Group/Subgroup/Basic.lean:561,570) only define conjugation saturation and its inclusion; LieAlgebra.Basis.borelUpper/borelLower (Algebra/Lie/Basis/Basic.lean:147,154) are Lie submodules.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The conjugation morphism G times B to G is surjective for a Borel subgroup B of a connected algebraic group",
+   "results": "{\"t\": \"2026-10-23T21:18:52Z\", \"tool\": \"leanfinder\", \"query\": \"The conjugation morphism G times B to G is surjective for a Borel subgroup B of a connected algebraic group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ConjClasses.mk_surjective\", \"CategoryTheory.PreGaloisCategory.isPretransitive_of_surjective\", \"CategoryTheory.PreGaloisCategory.toAut_surjective_of_isPretransitive\", \"SemidirectProduct.rightHom_surjective\", \"surjective_cosetToCuspOrbit\", \"CategoryTheory.PreGaloisCategory.AutGalois.π_surjective\", \"SubMulAction.of_fixingSubgroupEmpty_mapScalars_surjective\", \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\"], \"digest\": \"62bbf76471a93819\"} Read returned signatures: abstract group conjugacy and centralizers, Galois-category actions, Lie-algebra Borel submodules and measure-theoretic Borel spaces do not assert the algebraic-group theorem. Source candidates inspected: Group.conjugatesOfSet and subset_conjugatesOfSet (Algebra/Group/Subgroup/Basic.lean:561,570) only define conjugation saturation and its inclusion; LieAlgebra.Basis.borelUpper/borelLower (Algebra/Lie/Basis/Basic.lean:147,154) are Lie submodules.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "BorelSubgroup|borelSubgroup|conjugation.*surjective|surjective.*conjugation",
+   "results": "{\"t\": \"2026-10-23T21:48:33Z\", \"tool\": \"grep\", \"query\": \"BorelSubgroup|borelSubgroup|conjugation.*surjective|surjective.*conjugation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} No algebraic-group Borel theorem found. The Borel hits are Lie submodules or measurable spaces; abstract topological connected components do not prove the statement. Source of Group.conjugatesOfSet read at Mathlib/Algebra/Group/Subgroup/Basic.lean:561-575.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every element of a connected linear algebraic group over an algebraically closed field is triangularizable into any chosen Borel subgroup",
+   "results": "{\"t\": \"2026-10-23T21:48:34Z\", \"tool\": \"leansearch\", \"query\": \"Every element of a connected linear algebraic group over an algebraically closed field is triangularizable into any chosen Borel subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieModule.instIsTriangularizableOfIsAlgClosed\", \"LieModule.IsTriangularizable\", \"LieModule.IsTriangularizable.mk\", \"LieModule.instIsTriangularizableSubtypeMemLieSubalgebra\", \"LieModule.instIsTriangularizableSubtypeMemLieSubmodule\", \"LieModule.IsTriangularizable.casesOn\", \"RootPairing.GeckConstruction.instIsTriangularizableSubtypeMatrixSumMemFinsetSupportLieSubalgebraLieAlgebraCartanSubalgebra'Forall\", \"LieModule.instIsTriangularizableSubtypeMemLieSubmodule_1\"], \"digest\": \"6171f730c88f831a\"} No algebraic-group Borel theorem found. The Borel hits are Lie submodules or measurable spaces; abstract topological connected components do not prove the statement. Source of Group.conjugatesOfSet read at Mathlib/Algebra/Group/Subgroup/Basic.lean:561-575.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Borel\"",
+   "results": "{\"t\": \"2026-10-23T21:48:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"Borel\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"LieAlgebra.Basis.borelLower\", \"LieAlgebra.Basis.borelUpper\", \"LieAlgebra.Basis.iSup_cartan_borelLower_borelUpper_eq_top\", \"LieAlgebra.Basis.borelUpper_eq\", \"LieAlgebra.Basis.borelUpper_le_biSup\", \"LieAlgebra.Basis.borelLower_eq\", \"LieAlgebra.Basis.borelLower_le_biSup\", \"Mathlib.Tactic.Borelize.tacticBorelize___\"], \"digest\": \"f6a7c18a77802c4d\"} No algebraic-group Borel theorem found. The Borel hits are Lie submodules or measurable spaces; abstract topological connected components do not prove the statement. Source of Group.conjugatesOfSet read at Mathlib/Algebra/Group/Subgroup/Basic.lean:561-575.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A subgroup whose action on its homogeneous quotient has an element with finite fixed points has dense union of conjugates",
+   "results": "{\"t\": \"2026-10-23T21:48:35Z\", \"tool\": \"leanfinder\", \"query\": \"A subgroup whose action on its homogeneous quotient has an element with finite fixed points has dense union of conjugates\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MulAction.IwasawaStructure.is_generator\", \"MulAction.IwasawaStructure.T\", \"MulAction.IsQuasiPreprimitive.isPretransitive_of_normal\", \"SubMulAction.ofFixingSubgroup.isMultiplyPretransitive'\", \"MulAction.ofFixingSubgroup.isMultiplyPreprimitive\", \"SubMulAction.ofFixingSubgroup.isMultiplyPretransitive\", \"finite_compl_fixedBy_closure_iff\", \"SubAddAction.ofFixingAddSubgroup.isMultiplyPretransitive'\"], \"digest\": \"db828adae30e946c\"} No algebraic-group Borel theorem found. The Borel hits are Lie submodules or measurable spaces; abstract topological connected components do not prove the statement. Source of Group.conjugatesOfSet read at Mathlib/Algebra/Group/Subgroup/Basic.lean:561-575.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Borel subgroups exist in a smooth connected affine algebraic group and every rational element is conjugate into a prescribed Borel subgroup",
+   "results": "{\"t\": \"2026-10-23T21:48:36Z\", \"tool\": \"leanfinder\", \"query\": \"Borel subgroups exist in a smooth connected affine algebraic group and every rational element is conjugate into a prescribed Borel subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.connectedComponentOfOne\", \"NonarchimedeanGroup.exists_openSubgroup_separating\", \"instDiscreteTopologySubtypeGeneralLinearGroupMemSubgroupAdjoinNegOneOfIsTopologicalRingOfT2Space\", \"Field.absoluteGaloisGroup.commutator_closure_isNormal\", \"Subgroup.Normal.pathComponentOne\", \"ProfiniteGrp.exist_openNormalSubgroup_sub_open_nhds_of_one\", \"krullTopology_mem_nhds_one_iff_of_normal\", \"krullTopology_mem_nhds_one_iff\"], \"digest\": \"1a976cf262b9414d\"} Read the returned signatures: abstract group action and topological group results, not a theorem on Borel subgroups or algebraic-group incidence geometry.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-torus-commuting-point-common-borel",
+  "date": "2026-10-24",
+  "group": "Q43"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: The scheme-theoretic centre of a reductive group is of multiplicative type. Supporting input for Corollary 17.62(a): Proposition 17.61(a), printed p.372; centralizer functor as in Proposition 1.92, printed pp.33--34. Only the self-centralizer assertion (a) is used, not the centre containment assertion (b). Supporting input in the proof of Proposition 17.61(a): Corollary 13.10, printed p.257 (smoothness); Theorem 17.38, printed p.363 (connectedness), applied after extension to an algebraic closure; Proposition 1.92 and following paragraph, printed pp.33--34 (centralizer functor). Supporting input for the centralizer proof: Lemma 17.37 and its proof, printed p.363: the assertion actually proved for each c is existence of a common Borel. The parenthetical finite-union assertion is not included (it fails for the trivial torus). Supporting input for Lemma 17.37: Theorem 17.33(b), printed p.362, supplies a c-fixed point on the quotient by any chosen Borel; existence of a Borel is Definition 17.6 and the following sentence, pp.353–354.",
+   "via": [
+    "lem-sfb-torus-commuting-point-common-borel",
+    "lem-sfb-torus-centralizer-smooth-connected",
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-reductive-centre-multiplicative-type",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-borel-conjugation-cover",
+  "worker": "stage1",
+  "summary": "Followed Milne 17.33 through neutral centralizer structure and the general 17.32 incidence criterion, creating two statement-only supporting nodes. Wrote out Borel existence, the neutral centralizer containment and the finite-fixed-coset argument. Avoided the full centralizer connectedness and normalizer nodes whose current proofs depend on this item. Kept the rational-point statement unchanged.",
+  "blueprint": "Current latest sk-thm-sf-ctf-stability-direct-images.proof.md, (3), and the inherited supporting chain for the alteration input. This is the algebraic-group prerequisite of that chain; no unit step is replaced. The created-item chain currently has blueprint ancestor None, as blueprint_refs.py ancestor reports.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-lft-over-field-jacobson-space",
+    "why": "Generic rational-point density and residue-field fact used in the final open/closed argument; the algebraic-group unit supplies no substitute."
+   },
+   {
+    "node": "lem-weil-pbc-closed-point-residue-field-base",
+    "why": "Generic rational-point density and residue-field fact used in the final open/closed argument; the algebraic-group unit supplies no substitute."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-ee274f0cd",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-ee274f0cd (reviewer sub-agent of L); spot-checked: I read the item and both new nodes in full. Source checked: Milne iAG2017 17.28, 17.29, 17.32 (with proof), 17.33(a),(b) and 17.34 on pp.360–362, and 16.47/16.48 on p.341. The item statement is byte-identical to live, where the item is still unsplit; no target is weakened. Steps 1–6 follow Milne line by line. Step 1: the dimension clause of solvable-normal-subgroup-products gives Borel existence. Step 3: normalizer transitivity gives C ⊆ B, as in 17.29. Step 4: the regular semisimple t, the semisimple-in-C ⊆ T clause and the torus-in-C ⊆ T clause give an injection of the fixed cosets into the finite N/C(k). Steps 5–6: density clause 17.32(b) with H=C and h₀=t, then the closed clause 17.32(a) for proper G/B, finished by irreducibility, Jacobson density and residue field k. The new structure node (17.28 + 16.47) is true in every characteristic without reductivity. I checked it on G_a, a torus, GL2 and the upper-triangular B2. It is not a duplicate: the full-centralizer nodes depend on torus-centralizer-smooth-connected, which reaches torus-commuting-point-common-borel and then this item, so citing them would create a cycle. The incidence node is the general Lemma 17.32 for any smooth connected H. I checked it with H=G and H=1; H=1 shows the finite-fixed-point hypothesis is needed. It is not a clause of the item. proof_deps equal the union of the step uses, and the cited closure contains no cycle. There is no SGA citation. The tool uses (the Jacobson-space and closed-point residue-field nodes) are generic and accepted. All six batch-5 flags reach generic trf nodes (fppf covering base change, smooth fpqc descent, the algebraic-space definition, vector-subspace complement), not trace-formula or Poincaré-duality steps, so they are accepted. Cosmetic only: 'right cosets' for xC; harmless because C(k) is normal in N."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.BorelConjugationCover",
+  "declaration": "AlgebraicGeometry.exists_borelGroupScheme_and_conjugation_surjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/BorelConjugationCover.lean",
+  "statement": "theorem exists_borelGroupScheme_and_conjugation_surjective {k : Type u} [Field k] [IsAlgClosed k] (G : Over (Spec (.of k))) [GrpObj G] [IsAffine G.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [Smooth G.hom] [ConnectedSpace G.left] : (∃ (B : Over (Spec (.of k))) (_ : GrpObj B) (i : B ⟶ G), IsBorelGroupScheme i) ∧ (∀ (B : Over (Spec (.of k))) [GrpObj B] (i : B ⟶ G), IsBorelGroupScheme i → Function.Surjective (fun p : (𝟙_ (Over (Spec (.of k))) ⟶ G) × (𝟙_ (Over (Spec (.of k))) ⟶ B) ↦ p.1 * (p.2 ≫ i) * p.1⁻¹))",
+  "branch": "sheaf-dag",
+  "by": "Q14",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-129b5c70e",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Item Lean exists_borelGroupScheme_and_conjugation_surjective matches node/Milne 17.6+17.33(b)/17.34: alg-closed k; G GrpObj over Spec k with IsAffine, LocallyOfFiniteType+QuasiCompact, Smooth, ConnectedSpace; conjunct 1 ∃ Borel; conjunct 2 ∀ B [GrpObj B] i, IsBorelGroupScheme i → surjective (g,b)↦g*(b≫i)*g⁻¹ on 𝟙_-points (rational points), so any prescribed Borel, not just the witness; no reductivity/char/extra universe. IsBorelGroupScheme (landed def-sfb-borel-subgroup-scheme) = closed subgroup + smooth + connected + scheme-theoretic solvable + maximality. Node vs live differs only in lean and added landed stmt_dep; statement verbatim; dep records identical to live; imports = proof_deps with Lean/Mathlib records; sorry only; docstrings with source/blueprint and 6 steps; report sections present. No file changed, no compile."
+ }
+}

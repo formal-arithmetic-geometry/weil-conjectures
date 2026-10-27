@@ -1,0 +1,323 @@
+{
+ "id": "lem-sfb-stack-proper-locally-quasifinite-composition",
+ "kind": "statement",
+ "title": "Composition and representable interpretation of proper locally quasi-finite stack morphisms",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $\\mathcal A\\xrightarrow{u}\\mathcal B\\xrightarrow{v}\\mathcal C$ be morphisms of Deligne--Mumford stacks over $S$. If $u$ and $v$ are both proper and locally quasi-finite, then $v\\circ u$ is proper and locally quasi-finite. For any morphism $f:E\\to F$ between algebraic spaces, viewed as discrete stacks, these two stack properties agree with ordinary properness and chartwise local quasi-finiteness. More explicitly, properness implies that the diagonal $E\\to E\\times_F E$ is a closed immersion after every scheme base change [def-weil-closed-immersion, def-pc-fibre-product]; local quasi-finiteness means that for every pair of etale scheme charts $U\\to E$ and $V\\to F$ and every compatible map $U\\to V$, that scheme map is locally quasi-finite [pqf-def-quasifinite]. In particular, when $F$ is a scheme, every etale scheme chart $U\\to E$ has locally quasi-finite composite $U\\to F$. These properties are preserved on replacing a stack or a morphism by an equivalent one. Stack, Deligne--Mumford stack, algebraic space and 2-fibre product have the conventions of [def-sfb-stable-pointed-moduli-groupoids, def-trf-algebraic-space]. For morphisms of these stacks, locally of finite type is tested on smooth scheme charts using [def-weil-finite-type-morphism], and finite type additionally requires quasi-compactness. Proper means finite type, universally closed, and having proper relative diagonal. Universally closed means that every base change induces a closed map of underlying point spaces. Locally quasi-finite means locally of finite type, with locally quasi-finite relative diagonal and discrete underlying point space of every field fibre. The point space of a stack consists of its field-valued objects up to isomorphism and common field extension, with the topology detected by a smooth scheme atlas. Properties of representable diagonals are tested on scheme charts; on schemes the proper and locally quasi-finite notions are [def-weil-proper-morphism, pqf-def-quasifinite].",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 0CL7 (lemma-composition-proper), Tag 06UD (lemma-composition-locally-quasi-finite). Representable compatibility: discussion after Tag 0CL5 (definition-proper), Tag 04YS (lemma-representable-separated-diagonal-closed), Tag 06UA (lemma-representable-by-spaces-quasi-finite); spaces-morphisms.tex Tag 03XJ (definition-locally-quasi-finite) and lemma-quasi-finite-local."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-weil-finite-type-morphism",
+  "pqf-def-quasifinite",
+  "def-weil-proper-morphism",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-a1-algebraic-space-point-classes",
+  "def-a1-space-point-topology",
+  "def-sfb-proper-curve-moduli",
+  "def-sfb-moduli-chart-normalization"
+ ],
+ "proof": [
+  {
+   "text": "We first record the scheme calculation used on presentations. For locally quasi-finite scheme maps $U\\xrightarrow{a}V\\xrightarrow{b}W$ and $x\\in U$, choose affine opens $C\\subset W$, $B\\subset b^{-1}(C)$, and $A\\subset a^{-1}(B)$ containing $ba(x)$, $a(x)$, and $x$. The affine criterion says that the two induced ring maps $\\mathcal O_W(C)\\to\\mathcal O_V(B)\\to\\mathcal O_U(A)$ are of finite type and quasi-finite at every target prime. The ring-composition lemma gives the same assertions for their composite, which is the ring map of $ba|_A$. These affine witnesses at every $x$ are exactly the definition of local quasi-finiteness. Thus $ba$ is locally quasi-finite. There is no global quasi-compactness requirement.",
+   "uses": [
+    "lem-a1-scheme-lqf-affine-criterion",
+    "lem-trf-quasi-finite-composition",
+    "pqf-def-quasifinite"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Scheme-chart calculation for Tag 06UD; morphisms.tex Tag 01TL (lemma-composition-quasi-finite), using the existing affine criterion and ring-composition node."
+   }
+  },
+  {
+   "text": "Properness of $u$ and $v$ supplies finite type and proper relative diagonals. Apply finite-type composition to get that $vu$ is of finite type. Apply composition of separated stack morphisms (separated means proper relative diagonal) to get that $\\Delta_{vu}$ is proper. These are the finite-type and separated clauses of properness, without any representability assumption on $u$ or $v$.",
+   "uses": [
+    "lem-sfb-stack-finite-type-calculus",
+    "lem-sfb-stack-separation-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0CL7 (lemma-composition-proper), through Tags 06FT and 050K."
+   }
+  },
+  {
+   "text": "For a base change $\\mathcal T\\to\\mathcal C$, put $\\mathcal B_{\\mathcal T}=\\mathcal B\\times_{\\mathcal C}\\mathcal T$ and $\\mathcal A_{\\mathcal T}=\\mathcal A\\times_{\\mathcal C}\\mathcal T$. Associativity of 2-fibre products identifies $\\mathcal A_{\\mathcal T}\\to\\mathcal B_{\\mathcal T}$ with the base change of $u$, and $\\mathcal B_{\\mathcal T}\\to\\mathcal T$ is the base change of $v$. Both maps on point spaces are closed by the two universal-closedness hypotheses. For any closed subset $D\\subset|\\mathcal A_{\\mathcal T}|$, its image in $|\\mathcal B_{\\mathcal T}|$ is closed and the image of that set in $|\\mathcal T|$ is closed. This proves universal closedness of $vu$. Together with step 2 it proves properness.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0515 (lemma-composition-universally-closed), the omitted argument expanded; Tag 0CL7 (lemma-composition-proper)."
+   }
+  },
+  {
+   "text": "Choose an etale scheme atlas $W\\to\\mathcal C$. The fibre-product atlas calculus supplies an etale scheme atlas $V\\to\\mathcal B\\times_{\\mathcal C}W$. The forward direction (a) implies (b) of the local-quasi-finiteness test for $v$ shows that $V\\to W$ is locally quasi-finite. Next choose an etale scheme atlas $U\\to\\mathcal A\\times_{\\mathcal B}V$. Applying the same forward test to $u$ and the scheme map $V\\to\\mathcal B$ shows that $U\\to V$ is locally quasi-finite. Every stack to which the atlas calculus is applied is a fibre product of the given DM stacks and schemes, hence is DM by that calculus.",
+   "uses": [
+    "lem-sfb-dm-etale-atlas-calculus",
+    "lem-sfb-dm-lqf-atlas-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06UF (lemma-characterize-locally-quasi-finite), DM-presentation specialization; the presentation argument for Tag 06UD (lemma-composition-locally-quasi-finite)."
+   }
+  },
+  {
+   "text": "By step 1 the scheme composite $U\\to W$ is locally quasi-finite. The canonical equivalence $\\mathcal A\\times_{\\mathcal B}(\\mathcal B\\times_{\\mathcal C}W)\\simeq\\mathcal A\\times_{\\mathcal C}W$ identifies $U\\to\\mathcal A\\times_{\\mathcal C}W$ with an etale surjective map: it is the composite of $U\\to\\mathcal A\\times_{\\mathcal B}V$ and the base change of the etale surjection $V\\to\\mathcal B\\times_{\\mathcal C}W$. Thus $W,U$ meet condition (c) of the atlas test for $vu$, whose reverse implication gives that $vu$ is intrinsically locally quasi-finite, including its diagonal and field-fibre clauses.",
+   "uses": [
+    "lem-sfb-dm-etale-atlas-calculus",
+    "lem-sfb-dm-lqf-atlas-test",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06UF (lemma-characterize-locally-quasi-finite), condition (4) implies (1), with an etale presentation; Tag 06UD."
+   }
+  },
+  {
+   "text": "Let $f:E\\to F$ be a map of algebraic spaces, regarded as discrete stacks. The algebraic-space fibre-product lemma shows that every scheme base change of $f$ is an algebraic space, so $f$ is representable by algebraic spaces. The finite-type compatibility lemma identifies its finite-type stack condition with ordinary finite type. The representable-diagonal criterion identifies its proper-diagonal condition with ordinary separatedness, and the representable universal-closedness test identifies its closedness after stack base changes with ordinary universal closedness. Consequently the conjunction defining properness agrees in the two settings. In particular properness implies that $\\Delta_f:E\\to E\\times_F E$ is a closed immersion after every scheme base change, exactly the claimed diagonal assertion.",
+   "uses": [
+    "lem-sfb-stack-finite-type-calculus",
+    "lem-sfb-representable-stack-diagonal-criterion",
+    "lem-sfb-representable-stack-universally-closed-test",
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Compatibility discussion following Tag 0CL5 (definition-proper); Tags 04YS and 0512."
+   }
+  },
+  {
+   "text": "For compatible etale scheme charts $U\\to E$, $V\\to F$, the atlas calculus says that $U\\to E\\times_F V$ is etale. If $f$ is intrinsically locally quasi-finite, condition (b) of the atlas test therefore gives that $U\\to V$ is locally quasi-finite. Conversely suppose all such compatible scheme-chart maps are locally quasi-finite. Choose an etale atlas $V\\to F$ and an etale atlas $U\\to E\\times_F V$. The composite $U\\to E$ is etale by the atlas calculus, so the assumed chart condition applies to $U\\to V$. These two atlases satisfy condition (c); hence $f$ is intrinsically locally quasi-finite. This proves agreement with ordinary chartwise local quasi-finiteness. If $F$ is a scheme, take its identity as the target chart; the forward argument applies to every etale chart $U\\to E$, including nonsurjective ones.",
+   "uses": [
+    "lem-sfb-dm-etale-atlas-calculus",
+    "lem-sfb-dm-lqf-atlas-test",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06UF (lemma-characterize-locally-quasi-finite), with spaces-morphisms.tex Tags 03XJ (definition-locally-quasi-finite) and 040Z (lemma-quasi-finite-local), condition (7)."
+   }
+  },
+  {
+   "text": "Finally, a 2-isomorphism of morphisms gives, on each base change, an equivalence of the fibre groupoids: it replaces the connecting isomorphism in a 2-fibre-product triple by its composite with that 2-isomorphism. An equivalence of source or target stacks has a quasi-inverse, so the same construction gives equivalences in both directions on all base changes, diagonals, and field fibres. On discrete algebraic spaces these are sheaf isomorphisms. Atlases correspond under these equivalences; using the transported atlas identifies the field-point sets and their atlas-detected topologies. Thus the chartwise finite-type conditions, quasi-compactness, closedness of point maps, properness of the diagonal, and discreteness of field fibres are identical. All asserted properties are invariant under these replacements.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Definitions of stack properties and point-space topology; 2-fibre-product triples of def-sfb-stable-pointed-moduli-groupoids; Tags 0CL5 and 06PU."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-scheme-lqf-affine-criterion",
+  "lem-trf-quasi-finite-composition",
+  "pqf-def-quasifinite",
+  "lem-sfb-stack-finite-type-calculus",
+  "lem-sfb-stack-separation-composition",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-dm-etale-atlas-calculus",
+  "lem-sfb-dm-lqf-atlas-test",
+  "lem-sfb-representable-stack-diagonal-criterion",
+  "lem-sfb-representable-stack-universally-closed-test",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 0CL7 and the DM etale-presentation proof of Tag 06UD through Tag 06UF, plus the compatibility discussion following 0CL5. Scheme affine calculation and 2-equivalence transport written out by Q100."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Proper and locally quasi finite properties of morphisms of Deligne Mumford stacks are stable under composition",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.LocallyQuasiFinite\", \"doc\": \"The property of being a locally quasi-finite morphism of schemes is stable under composition; that is, the composition of two locally quasi-finite morphisms is again locally quasi-finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.stableUnderComposition\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsProper\", \"doc\": \"The property of being a proper morphism of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are proper morphisms of schemes, then their composition $ g \\\\circ f: X \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.LocallyQuasiFinite\", \"doc\": \"The property of being locally quasi-finite is multiplicative, meaning that the composition of two locally quasi-finite morphisms of schemes is again locally quasi-finite.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteCompScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [AlgebraicGeometry.LocallyQuasiFinite f]\\n  [AlgebraicGeometry.LocallyQuasiFinite g],\\n  AlgebraicGeometry.LocallyQuasiFinite (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two locally quasi-finite morphisms of schemes is again a locally quasi-finite morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.LocallyOfFiniteType\", \"doc\": \"In the category of schemes, the property of being locally of finite type is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are morphisms of schemes that are locally of finite \"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.LocallyQuasiFinite (CategoryTheory.CategoryStruct.comp f g)],\\n  AlgebraicGeometry.LocallyQuasiFinite f\", \"doc\": \"If the composition of morphisms $ f: X \\to Y $ and $ g: Y \\to Z $ between schemes is locally quasi-finite, then the morphism $ f $ itself is locally quasi-finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsFinite\", \"doc\": \"The composition of two finite morphisms of schemes is again a finite morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsProper\", \"doc\": \"The property of being a proper morphism of schemes is multiplicative, meaning that the composition of two proper morphisms is again a proper morphism.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations are about schemes, scheme morphisms, or generic representable functors, not this assertion about Deligne--Mumford stacks; no one-line specialization applies"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|DeligneMumford|IsProper.comp|LocallyQuasiFinite.comp",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"107\", \"text\": \"theorem LocallyQuasiFinite.comp_iff {X Y Z : Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"391\", \"text\": \"  rw [← SpecMap_stalkMap_fromSpecStalk, LocallyQuasiFinite.comp_iff,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper.lean\", \"line\": \"127\", \"text\": \"lemma IsProper.comp_iff {f : X ⟶ Y} {g : Y ⟶ Z} [IsProper g] :\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations are about schemes, scheme morphisms, or generic representable functors, not this assertion about Deligne--Mumford stacks; no one-line specialization applies"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of proper morphisms and composition of locally quasi finite morphisms of algebraic stacks",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.stableUnderComposition\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsProper\", \"doc\": \"The property of being a proper morphism of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are proper morphisms of schemes, then their composition $ g \\\\circ f: X \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.LocallyQuasiFinite\", \"doc\": \"The property of being a locally quasi-finite morphism of schemes is stable under composition; that is, the composition of two locally quasi-finite morphisms is again locally quasi-finite.\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.LocallyQuasiFinite\", \"doc\": \"The property of being locally quasi-finite is multiplicative, meaning that the composition of two locally quasi-finite morphisms of schemes is again locally quasi-finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instCompScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [AlgebraicGeometry.IsProper f]\\n  [AlgebraicGeometry.IsProper g], AlgebraicGeometry.IsProper (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two proper morphisms of schemes is again a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteCompScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [AlgebraicGeometry.LocallyQuasiFinite f]\\n  [AlgebraicGeometry.LocallyQuasiFinite g],\\n  AlgebraicGeometry.LocallyQuasiFinite (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two locally quasi-finite morphisms of schemes is again a locally quasi-finite morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsProper\", \"doc\": \"The property of being a proper morphism of schemes is multiplicative, meaning that the composition of two proper morphisms is again a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.comp_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} {f : X ⟶ Y} {g : Y ⟶ Z} [AlgebraicGeometry.IsProper g],\\n  AlgebraicGeometry.IsProper (CategoryTheory.CategoryStruct.comp f g) ↔ AlgebraicGeometry.IsProper f\", \"doc\": \"If $ g: Y \\\\to Z $ is a proper morphism of schemes, then the composition $ f \\\\circ g: X \\\\to Z $ is proper if and only if $ f: X \\\\to Y $ is proper.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.LocallyQuasiFinite (CategoryTheory.CategoryStruct.comp f g)],\\n  AlgebraicGeometry.LocallyQuasiFinite f\", \"doc\": \"If the composition of morphisms $ f: X \\to Y $ and $ g: Y \\to Z $ between schemes is locally quasi-finite, then the morphism $ f $ itself is locally quasi-finite.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations are about schemes, scheme morphisms, or generic representable functors, not this assertion about Deligne--Mumford stacks; no one-line specialization applies"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A composite of proper locally quasi finite morphisms of algebraic stacks is proper locally quasi finite",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \": MorphismProperty.IsStableUnderComposition @LocallyQuasiFinite\", \"doc\": \"The property of being a locally quasi-finite morphism of schemes is stable under composition; that is, the composition of two locally quasi-finite morphisms is again locally quasi-finite.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteCompScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"{X Y Z : Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [LocallyQuasiFinite f] [LocallyQuasiFinite g] : LocallyQuasiFinite (f ≫ g)\", \"doc\": \"The composition of two locally quasi-finite morphisms of schemes is again a locally quasi-finite morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instCompScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsProper f] [IsProper g] : IsProper (f ≫ g)\", \"doc\": \"The composition of two proper morphisms of schemes is again a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"{X Y Z : Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [hf : LocallyOfFiniteType f] [hg : LocallyOfFiniteType g] :\\n  LocallyOfFiniteType (f ≫ g)\", \"doc\": \"The composition of two morphisms of schemes that are locally of finite type is again locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"[IsFinite f] : LocallyQuasiFinite f\", \"doc\": \"Every finite morphism of schemes is quasi-finite. That is, if $ f: X \\to Y $ is a finite morphism of schemes, then $ f $ satisfies the conditions of being quasi-finite, which typically requires it to b\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite.of_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"{X Y Z : Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [LocallyQuasiFinite (f ≫ g)] : LocallyQuasiFinite f\", \"doc\": \"If the composition of morphisms $ f: X \\to Y $ and $ g: Y \\to Z $ between schemes is locally quasi-finite, then the morphism $ f $ itself is locally quasi-finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.stableUnderComposition\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": MorphismProperty.IsStableUnderComposition @IsProper\", \"doc\": \"The property of being a proper morphism of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are proper morphisms of schemes, then their composition $ g \\\\circ f: X \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.comp_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"{f : X ⟶ Y} {g : Y ⟶ Z} [IsProper g] : IsProper (f ≫ g) ↔ IsProper f\", \"doc\": \"If $ g: Y \\\\to Z $ is a proper morphism of schemes, then the composition $ f \\\\circ g: X \\\\to Z $ is proper if and only if $ f: X \\\\to Y $ is proper.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations are about schemes, scheme morphisms, or generic representable functors, not this assertion about Deligne--Mumford stacks; no one-line specialization applies"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.IsProper\", \"comp\"",
+   "results": "[loogle] OK 4 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.stableUnderComposition\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsProper\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instCompScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [AlgebraicGeometry.IsProper f] [AlgebraicGeometry.IsProper g] : AlgebraicGeometry.IsProper (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.of_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [AlgebraicGeometry.IsProper (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.IsSeparated g] : AlgebraicGeometry.IsProper f\", \"doc\": \"[Stacks Tag 01W6](https://stacks.math.columbia.edu/tag/01W6) ((2))\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.comp_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y Z : AlgebraicGeometry.Scheme} {f : X ⟶ Y} {g : Y ⟶ Z} [AlgebraicGeometry.IsProper g] : AlgebraicGeometry.IsProper (CategoryTheory.CategoryStruct.comp f g) ↔ AlgebraicGeometry.IsProper f\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations are about schemes, scheme morphisms, or generic representable functors, not this assertion about Deligne--Mumford stacks; no one-line specialization applies"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition and algebraic space compatibility of proper locally quasi finite morphisms of Deligne Mumford stacks",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.stableUnderComposition\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsProper\", \"doc\": \"The property of being a proper morphism of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are proper morphisms of schemes, then their composition $ g \\\\circ f: X \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.LocallyQuasiFinite\", \"doc\": \"The property of being a locally quasi-finite morphism of schemes is stable under composition; that is, the composition of two locally quasi-finite morphisms is again locally quasi-finite.\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.LocallyQuasiFinite\", \"doc\": \"The property of being locally quasi-finite is multiplicative, meaning that the composition of two locally quasi-finite morphisms of schemes is again locally quasi-finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsProper\", \"doc\": \"The property of being a proper morphism of schemes is multiplicative, meaning that the composition of two proper morphisms is again a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsFinite\", \"doc\": \"The composition of two finite morphisms of schemes is again a finite morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteCompScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [AlgebraicGeometry.LocallyQuasiFinite f]\\n  [AlgebraicGeometry.LocallyQuasiFinite g],\\n  AlgebraicGeometry.LocallyQuasiFinite (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two locally quasi-finite morphisms of schemes is again a locally quasi-finite morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instCompScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [AlgebraicGeometry.IsProper f]\\n  [AlgebraicGeometry.IsProper g], AlgebraicGeometry.IsProper (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two proper morphisms of schemes is again a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.comp_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} {f : X ⟶ Y} {g : Y ⟶ Z} [AlgebraicGeometry.IsProper g],\\n  AlgebraicGeometry.IsProper (CategoryTheory.CategoryStruct.comp f g) ↔ AlgebraicGeometry.IsProper f\", \"doc\": \"If $ g: Y \\\\to Z $ is a proper morphism of schemes, then the composition $ f \\\\circ g: X \\\\to Z $ is proper if and only if $ f: X \\\\to Y $ is proper.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, rings, or generic morphism properties; none supplies these Deligne--Mumford stack assertions in one specialization. In particular an ordinary category diagonal theorem does not provide the 2-fibre-product stack geometry."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.IsProper\", \"comp\"",
+   "results": "[loogle] OK 4 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.stableUnderComposition\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsProper\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instCompScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [AlgebraicGeometry.IsProper f] [AlgebraicGeometry.IsProper g] : AlgebraicGeometry.IsProper (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.of_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [AlgebraicGeometry.IsProper (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.IsSeparated g] : AlgebraicGeometry.IsProper f\", \"doc\": \"[Stacks Tag 01W6](https://stacks.math.columbia.edu/tag/01W6) ((2))\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.comp_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y Z : AlgebraicGeometry.Scheme} {f : X ⟶ Y} {g : Y ⟶ Z} [AlgebraicGeometry.IsProper g] : AlgebraicGeometry.IsProper (CategoryTheory.CategoryStruct.comp f g) ↔ AlgebraicGeometry.IsProper f\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, rings, or generic morphism properties; none supplies these Deligne--Mumford stack assertions in one specialization. In particular an ordinary category diagonal theorem does not provide the 2-fibre-product stack geometry."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|DeligneMumford|proper.*stack|stack.*proper",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/Topology/Maps/Proper/Basic.lean\", \"line\": \"39\", \"text\": \"align with that of [Stacks: Characterizing proper maps](https://stacks.math.columbia.edu/tag/005M),\"}\n  {\"file\": \"Mathlib/Topology/Maps/Proper/Basic.lean\", \"line\": \"60\", \"text\": \"* [Stacks: Characterizing proper maps](https://stacks.math.columbia.edu/tag/005M)\"}\n  {\"file\": \"Mathlib/FieldTheory/KrullTopology.lean\", \"line\": \"138\", \"text\": \"@[stacks 0BMJ \\\"We define Krull topology directly without proving the universal property\\\"]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Descent/IsPrestack.lean\", \"line\": \"162\", \"text\": \"satisfies the descent property for morphisms, i.e. is a prestack.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Descent/IsPrestack.lean\", \"line\": \"178\", \"text\": \"  property := IsPrestack.isSheaf _ _ _\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, rings, or generic morphism properties; none supplies these Deligne--Mumford stack assertions in one specialization. In particular an ordinary category diagonal theorem does not provide the 2-fibre-product stack geometry."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper and locally quasi finite morphisms of stacks are stable under composition",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteCompScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"{X Y Z : Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [LocallyQuasiFinite f] [LocallyQuasiFinite g] : LocallyQuasiFinite (f ≫ g)\", \"doc\": \"The composition of two locally quasi-finite morphisms of schemes is again a locally quasi-finite morphism.\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition.mk\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Composition\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {P : CategoryTheory.MorphismProperty C},\\n  (∀ {X Y Z : C} (f : X ⟶ Y) (g : Y ⟶ Z), P f → P g → P (CategoryTheory.CategoryStruct.comp f g)) →\\n    P.IsStableUnderComposition\", \"doc\": \"If for any morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ in a category $ C $, the property $ P $ holds for $ f $ and $ g $, then it also holds for their composition $ g \\\\circ f $, then $ P $ is stable u\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.stableUnderComposition\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": MorphismProperty.IsStableUnderComposition @IsProper\", \"doc\": \"The property of being a proper morphism of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are proper morphisms of schemes, then their composition $ g \\\\circ f: X \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \": MorphismProperty.IsStableUnderComposition @LocallyQuasiFinite\", \"doc\": \"The property of being a locally quasi-finite morphism of schemes is stable under composition; that is, the composition of two locally quasi-finite morphisms is again locally quasi-finite.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite.of_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"{X Y Z : Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [LocallyQuasiFinite (f ≫ g)] : LocallyQuasiFinite f\", \"doc\": \"If the composition of morphisms $ f: X \\to Y $ and $ g: Y \\to Z $ between schemes is locally quasi-finite, then the morphism $ f $ itself is locally quasi-finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instCompScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{Z : Scheme.{u}} (g : Y ⟶ Z) [IsFinite f] [IsFinite g] : IsFinite (f ≫ g)\", \"doc\": \"The composition of two finite morphisms of schemes is again a finite morphism.\"}\n  {\"name\": \"RingHom.QuasiFinite.stableUnderComposition\", \"module\": \"Mathlib.RingTheory.RingHom.QuasiFinite\", \"type\": \": StableUnderComposition QuasiFinite\", \"doc\": \"The composition of two quasi-finite ring homomorphisms is again quasi-finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instCompScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsProper f] [IsProper g] : IsProper (f ≫ g)\", \"doc\": \"The composition of two proper morphisms of schemes is again a proper morphism.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, rings, or generic morphism properties; none supplies these Deligne--Mumford stack assertions in one specialization. In particular an ordinary category diagonal theorem does not provide the 2-fibre-product stack geometry."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Properness and local quasi finiteness for algebraic stacks and their discrete algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.LocallyQuasiFinite\", \"doc\": \"The property of being locally quasi-finite is multiplicative, meaning that the composition of two locally quasi-finite morphisms of schemes is again locally quasi-finite.\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyQuasiFinite fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.QuasiFinite\", \"doc\": \"A morphism of schemes is locally quasi-finite if and only if the corresponding ring homomorphism is quasi-finite, meaning the target ring is finitely generated as a module over the source ring.\"}\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsProper f\", \"doc\": \"Every finite morphism of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.LocallyQuasiFinite f\", \"doc\": \"Every finite morphism of schemes is quasi-finite. That is, if $ f: X \\to Y $ is a finite morphism of schemes, then $ f $ satisfies the conditions of being quasi-finite, which typically requires it to b\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"@AlgebraicGeometry.IsProper =\\n  @AlgebraicGeometry.IsSeparated ⊓ @AlgebraicGeometry.UniversallyClosed ⊓ @AlgebraicGeometry.LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, rings, or generic morphism properties; none supplies these Deligne--Mumford stack assertions in one specialization. In particular an ordinary category diagonal theorem does not provide the 2-fibre-product stack geometry."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-inertia-free-finite-cover-coarse",
+  "date": "2026-10-22",
+  "group": "Q63"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Composition of the coarse morphism with the finite cover, followed by interpretation on the inertia-free source as an algebraic space. The creation chain has no machine-resolvable blueprint ancestor, as blueprint_refs.py ancestor reports. The main-20261015 blueprint node explicitly named by this inherited place, paragraph (3), Rj_* preservation, records the intended alteration-moduli route.",
+   "via": [
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-stack-proper-locally-quasifinite-composition",
+  "worker": "stage1",
+  "summary": "Preserved every statement clause. Proved properness componentwise and local quasi-finiteness on compatible relative DM atlases, expanding the scheme composition calculation from existing nodes. Split out six strictly smaller stack inputs; checked algebraic-space compatibility and equivalence invariance. Preserved the computed null blueprint ancestor and documented the explicitly named main-blueprint provenance in from.place.",
+  "blueprint": "All steps serve the inherited alteration-moduli prerequisite below paragraph (3), Rj_* preserves Dctf, of det-thm-sf-ctf-stability-direct-images. They justify composition of the coarse morphism with a finite cover and interpretation after the inertia-free source becomes an algebraic space.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-scheme-lqf-affine-criterion",
+    "why": "Generic affine criterion for local quasi-finiteness, used only on scheme presentations; no stack-unit node gives this ring-to-scheme calculation."
+   },
+   {
+    "node": "lem-trf-quasi-finite-composition",
+    "why": "Generic finite-type ring-map composition at every prime, used only inside the elementary scheme-chart calculation."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic closure of algebraic spaces under sheaf fibre products, needed to verify representability in the discrete-space specialization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-scheme-lqf-affine-criterion",
+  "lem-trf-quasi-finite-composition",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q100-7153ac23f",
+  "group": "Q100",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-7153ac23f (reviewer sub-agent of L); spot-checked: The mathematics is sound. Step 2 (finite type and the diagonal for vu) uses composition from the new finite-type and separation nodes (Stacks 06FT, 050K). Step 3 (universal closedness) is elementary: A_T→B_T is a base change of u, and a composite of closed maps is closed. Steps 4–5 (local quasi-finiteness) go through the new DM atlas calculus and atlas test, both checked against Stacks 06UF (2)/(4); the scheme composition of step 1 uses the a1 affine criterion and lem-trf-quasi-finite-composition. Steps 6–7 (the algebraic-space reading) use the diagonal criterion (04YQ/04YS), the universal-closedness test (0512/0CL3) and the chart test. Step 8 (invariance under equivalence) is elementary. All six new nodes are true, are statements only, and none restates a clause of the item or duplicates an existing DM-stack node. The item is not superseded live and is not on the drop list; its statement is unchanged; the citer (inertia-free-finite-cover-coarse) gets every clause it needs. One fault (B2/B3): lem-sfb-stack-separation-composition defined a proper diagonal as 'properness after scheme charts of each algebraic-space base change'. Properness is not étale-local on the source, so on that reading the definition is wrong. FIX: the definition now says every scheme base change of the diagonal is a scheme proper over T, with a note on why this equals algebraic-space properness for DM stacks (proper and locally quasi-finite implies finite). Only the statement field changed. Batch-5 findings accepted: def-trf-algebraic-space and def-sfb-stable-pointed-moduli-groupoids are definitions (accepted in earlier reviews); lem-trf-quasi-finite-composition is ring-map algebra and lem-trf-space-fibre-products-etale-covers is a generic fact about algebraic spaces, so neither is part of the trace formula or Poincaré duality or their proofs. The three declared tool uses are generic and accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackProperLocallyQuasiFiniteComposition",
+  "declaration": "CategoryTheory.proper_locallyQuasiFinite_moduli_comp",
+  "declarations": [
+   "CategoryTheory.proper_locallyQuasiFinite_moduli_comp",
+   "CategoryTheory.proper_locallyQuasiFinite_discrete_space",
+   "CategoryTheory.locallyQuasiFinite_space_chart_to_scheme",
+   "CategoryTheory.proper_locallyQuasiFinite_discrete_scheme",
+   "CategoryTheory.proper_locallyQuasiFinite_moduli_equivalence"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StackProperLocallyQuasiFiniteComposition.lean",
+  "statement": "theorem proper_locallyQuasiFinite_moduli_comp {S : Scheme.{u}} {A : BasedCategory.{v₁, w₁} (Over S)} {B : BasedCategory.{v₂, w₂} (Over S)} {C : BasedCategory.{v₃, w₃} (Over S)} (hA : IsDeligneMumfordModuliStack A) (hB : IsDeligneMumfordModuliStack B) (hC : IsDeligneMumfordModuliStack C) (f : BasedFunctor A B) (g : BasedFunctor B C) (hf : IsProperModuliMap f) (hg : IsProperModuliMap g) (hfq : IsLocallyQuasiFiniteModuliMap f) (hgq : IsLocallyQuasiFiniteModuliMap g) : IsProperModuliMap (f.comp g) ∧ IsLocallyQuasiFiniteModuliMap (f.comp g)",
+  "branch": "sheaf-dag",
+  "by": "Q01",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2c3a0f0a8",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Repair of RETURN e1fc7593 (H12/H4+H3) is correct: SpaceMapIsProper (DmStackMorphismProperties.lean:228) is now independent ordinary properness: LocallyOfFiniteType on all compatible étale charts, AlgebraicSpace.MapIsQuasiCompact, IsClosedMap (mapPoint (pullback.snd f a)) for every scheme T, and an IsRepresentableWith closed-immersion presheaf diagonal (Stacks spaces-morphisms definition-proper), so discrete_space clause 1 now carries step 6. ModuliSchemeTest/IsEtaleModuliAtlas reuse the recorded IsSchemeModuliBaseChange/IsEtaleModuliMap (same substance); redundant hA'/hB' dropped. The item differs from live only in lean + stmt_deps; the added def-a1-algebraic-space-point-classes, def-a1-space-point-topology, def-sfb-proper-curve-moduli and def-sfb-moduli-chart-normalization are on the base with Lean records; statements verbatim; def node sentence updated; 18 declarations = file. Item is now reachable (1081 transitive citers), so the earlier reach refusal is gone. All 5 theorems by sorry; no sorry/axiom in defs; docstrings with source/blueprint/proof steps; lines ≤100; no name clashes live. Edge cases (empty, non-surjective charts, independent universes, stabilizers) covered. Advisory: unused ResidueField/Mathlib QuasiFinite imports; clause 3 follows from clause 1. No compile (no file changed)."
+ }
+}

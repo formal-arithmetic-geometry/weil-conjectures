@@ -1,0 +1,154 @@
+{
+ "id": "lem-sfb-connected-abelian-tower-finite-frame",
+ "kind": "statement",
+ "title": "Finite frames descend to an actual level of a connected abelian tower",
+ "statement": "Let $U$ be an affine scheme, $I$ a small nonempty directed preordered set, and $T$ a connected abelian cover tower over $U$ [def-sfb-connected-abelian-cover-tower], with levels $X_i$ and covering limit $X$. For every set sheaf $F$ on $U_{\\mathrm{proet}}$, there exists a level $i$ on which the specified inverse image of $F$ is a constant finite sheaf if and only if the specified inverse image of $F$ to $X$ is a constant finite sheaf. Finite constancy means existence of a finite set $A$ and an isomorphism to its constant sheaf, with empty $A$ allowed, as in [def-sfb-finite-labelled-normalized-section]. Pullback and constants use [def-weil-proetale-inverse-image] and [def-weil-pbc-constant-sheaf]. The implication from $X$ to a level has no prior finite-level triviality assumption. This result involves no chosen geometric point, monodromy action or morphism classification.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 4.2.12, 5.1.4 and the frame-descent method of Corollary 5.1.5; original normalized-tower proof steps 10--11."
+ },
+ "stmt_deps": [
+  "def-sfb-connected-abelian-cover-tower",
+  "def-sfb-finite-labelled-normalized-section",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "It remains to start with an arbitrary $F$ such that $F|_X\\simeq\\underline A_X$ for a finite set $A$. On $U_{\\mathrm{proet}}$ define $H(V)=\\operatorname{Isom}(\\underline A_V,F|_V)$, with restriction of isomorphisms. This is a sheaf: a matching family of isomorphisms glues as maps by morphism gluing, their inverses glue by the same result, and the two composite identities follow by uniqueness. On $X$, fix the supplied trivialization. Step 2, applied to every $W\\to X$, identifies $H(W)$ with the locally constant maps $|W|\\to\\operatorname{Sym}(A)$: for each source label the map is locally constant, and the finite intersection of its label partitions records the whole permutation; invertibility means exactly that every recorded function is a permutation. Thus $H|_X\\simeq\\underline{\\operatorname{Sym}(A)}_X$, including $A=\\varnothing$, whose symmetric group is a singleton.",
+   "uses": [
+    "lem-pe-set-sheaf-cover-descent",
+    "lem-weil-pbc-proetale-finite-constant-representable",
+    "lem-galois-yoneda-hom-bijection",
+    "lem-galois-coproduct-copies-morphisms-clopen"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemmas 4.2.12 and 5.1.4; Stacks 04TQ, agent finite-set frame sheaf construction"
+   }
+  },
+  {
+   "text": "A constant sheaf is classical: the comparison inverse image sends the etale constant sheaf to the pro-etale constant sheaf. Indeed a constant set sheaf is the coproduct of copies of the final sheaf, and inverse image preserves the final object and coproducts, by its left exact left adjoint construction. Equivalently this follows by the two adjunction universal properties of sheafification of a constant presheaf. Therefore $H|_X$ from Step 10 is classical. Apply the local-classical continuity statement to the covering $X\\to U$ and the given presentation $X=\\varprojlim_iX_i$: it is a small cofiltered affine ind-etale presentation by affine etale $U$-objects. It gives $H(X)=\\varinjlim_iH(X_i)$. The section of $H(X)$ supplied by the original trivialization is represented by some $s_i\\in H(X_i)$. By definition, $s_i$ is an actual isomorphism $\\underline A_{X_i}\\simeq F|_{X_i}$. Thus $F\\in\\mathcal L$. The reverse inclusion follows by restricting a finite-level trivialization and the labelled-copy description of constants. This proves the final equality of full categories without assuming finite-level triviality in its proof.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "def-weil-pbc-constant-sheaf",
+    "lem-weil-pbc-proetale-locally-classical-continuity",
+    "lem-weil-pbc-proetale-finite-constant-representable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 5.1.4 and the finite-frame version of the argument of Corollary 5.1.5"
+   }
+  },
+  {
+   "text": "In the other direction choose a finite-level trivialization and restrict it along the limit projection. Restriction is the specified inverse image by object-inverse-image restriction. Constant sheaves restrict to the same constants by the sheafification universal property and cocontinuity of localization, so the result is finite constant on the limit.",
+   "uses": [
+    "lem-sfb-proetale-object-inverse-image-restriction",
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pe-set-sheaf-cover-descent",
+  "lem-weil-pbc-proetale-finite-constant-representable",
+  "lem-galois-yoneda-hom-bijection",
+  "lem-galois-coproduct-copies-morphisms-clopen",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-constant-sheaf",
+  "lem-weil-pbc-proetale-locally-classical-continuity",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 4.2.12, 5.1.4 and the frame-descent method of Corollary 5.1.5; original normalized-tower proof steps 10--11."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite constant sheaf trivialization over an inverse limit of affine finite etale schemes descends to a finite stage by continuity",
+   "results": "ok=True; hits=8; CategoryTheory.Sheaf.isConstant_iff_mem_essImage, CategoryTheory.Sheaf.IsConstant.mk, Profinite.exists_locallyConstant_finite_nonempty, LightCondensed.IsDiscrete, CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app, CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits, instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology, CategoryTheory.Sheaf.isConstant_of_isIso_counit_app",
+   "date": "2026-10-23",
+   "verdict": "No exact match for normalized sheaf descent on the specified pro-etale tower; reuse the project restriction, finite-representability and descent results."
+  },
+  {
+   "tool": "grep",
+   "query": "normalized.*splitting|finite.*frame|abelian.*tower",
+   "results": "ok=True; hits=10; Mathlib/FieldTheory/Galois/Abelian.lean, Mathlib/FieldTheory/Galois/Abelian.lean, Mathlib/Topology/Bases.lean, Mathlib/Geometry/Manifold/VectorBundle/LocalFrame.lean, Mathlib/AlgebraicTopology/SimplicialSet/Homology/Nondegenerate.lean, Mathlib/Order/Partition/Basic.lean, Mathlib/Data/Set/Finite/Lattice.lean, Mathlib/Data/Set/Finite/Lattice.lean",
+   "date": "2026-10-23",
+   "verdict": "No exact match for normalized sheaf descent on the specified pro-etale tower; reuse the project restriction, finite-representability and descent results."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Action\", \"FullyFaithful\"",
+   "results": "ok=True; hits=0; ",
+   "date": "2026-10-23",
+   "verdict": "No exact match for normalized sheaf descent on the specified pro-etale tower; reuse the project restriction, finite-representability and descent results."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConnectedAbelianTowerNormalizedDescent",
+  "date": "2026-10-23",
+  "group": "Z6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: the tame-boundary Kummer calculation, specifically the equivariant lisse extension input. Finite tame sheaves over a universal residual SNC neighborhood; returned finite-fibre proof steps 7, 9, 10: Normalized finite sheaf descent on connected abelian cover towers; Lemmas 4.2.12, 5.1.4 and the frame-descent method of Corollary 5.1.5; original normalized-tower proof steps 10--11.",
+   "via": [
+    "lem-sfb-connected-abelian-tower-normalized-descent",
+    "lem-sfb-snc-tame-finite-fibre-classification",
+    "lem-sfb-tame-root-tower-extension",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConnectedAbelianTowerFiniteFrame",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConnectedAbelianTowerFiniteFrame.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.abelianTowerFiniteFrame",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.abelianTowerFiniteFrame"
+  ],
+  "statement": "theorem abelianTowerFiniteFrame {U : Scheme.{u}} [IsAffine U] {I : Type u}\n    [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]\n    (T : ConnectedAbelianCoverTower U I)\n    (F : Sheaf (Scheme.ProEt.topology U) (Type (u + 1))) :\n    T.finiteLevel F ↔ abelianTowerConstantAt F T.cone.pt",
+  "branch": "sheaf-dag",
+  "by": "Z6",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-51165",
+  "group": "Z6",
+  "result": "pass",
+  "landing": "20261023T152151-L-457777",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-51165",
+  "group": "Z6",
+  "result": "pass",
+  "landing": "20261023T152151-L-457777",
+  "kind": "interface",
+  "note": "independent cc review: Item and 3 new sorried lemmas (descent-object, descent-hom, finite-frame) read against BS 5.1.2–5.1.5 and the ConnectedAbelianCoverTower conventions; 8 definitions verbatim-moved to NormalizedData (diff vs clones/live); importer NormalizedFiniteSplittingOperations compiled against the delivered modules (exit 0); axioms of the item theorem are the standard three plus sorryAx from the new lemmas"
+ }
+}

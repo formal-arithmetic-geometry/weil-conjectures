@@ -1,0 +1,57 @@
+# Stage-1 report: lem-trf-formal-chart-geometric-regularity
+
+## Files written
+
+- dag/nodes/sec-trace-formula/lem-trf-formal-chart-geometric-regularity.json: existing statement, now split in eight steps; Mathlib verdict no match. No new nodes and no new Mathlib leaves.
+- citations.json: one entry for each of the 25 step/node citations, with the verbatim statement exposing the hypotheses and conclusions used.
+- report.md and the actual search log searches.jsonl are sandbox records. write_split.py is the sandbox-only serialization script.
+
+## Attachments
+
+None. Searched lean/WeilConjectures/ by the exact blueprint id and by formal-chart, logRegular, log_regular, and geometric-regularity terminology. No declaration proves this logarithmic formal-model and geometric-stalk statement. The existing ordinary regular-ring, completion and strict-henselization declarations are narrower inputs and not attachments for the item.
+
+## WANTED
+
+None for this split. The proof follows the already available ILO formal models and Stacks comparisons, and cites existing independent DAG inputs. ILO VI 1.8 refers to Kato's proof; this delivery does not attribute an unread Kato argument to ILO and does not use VI 1.8 itself to prove the item.
+
+## What was wrong or incomplete
+
+The item was statement-only. Its assertion is correct with its specified monomial compatibility and sharp-chart/unit-character data; no statement correction was needed. Its old source list does not itself prove the algebraic model or strict-localization comparison. The new steps cite the existing algebraic model, monoid dimension, chart-face, and ind-etale invariance statements instead of treating the source list as proof.
+
+The nearest blueprint ancestor is lem-trf-local-term-locality. Its latest proof now uses the contracting-correspondence route, not the historical alteration/nearby-duality chain recorded in this ancillary node's blueprint.from. I read literature/blueprint/latest/blueprint/sec-trace-formula/sk-i-curve-zero/lem-trf-local-term-locality.proof.md and the assigned chapter and unit records. I retained the assigned unit/chapter and existing ancestry, and explicitly described this historical situation in split_report.blueprint. No chapter or unit route was changed.
+
+## Unfinished work
+
+None in the authorized one-level split. The pre-existing cited statement-only nodes retain their own independent queue work. This item does not claim those inputs already have Lean proofs.
+
+## Not duplicates
+
+No nodes were created. In particular the existing lem-trf-formal-monoid-extension-model already gives the pair of completed toric models, and lem-trf-formal-monoid-ring-dimension already gives the dimension and parameter-quotient assertions. They are strictly smaller than this item's geometric regularity result and neither reaches this item through statement or proof dependencies. I searched the whole DAG, read those statements and their dependencies, and reused them. The chart-face residual-unit decomposition and ind-etale strict-local invariance also already exist. Blueprint searches for formal monoid, monoid extension, formal chart geometric, face localization, strict local comparison and log regular found no equivalent imported blueprint theorem; strict henselization searches found definitions and unrelated applications, not this theorem.
+
+## Mathlib searches
+
+The item had six recorded searches from its creation; I retained them verbatim. I ran six additional searches with msearch.py and read their actual output: two semantic phrasings of the logarithmic/completed chart question, a strict-henselization phrasing, Loogle for LogRegular, and two source regexes. LogRegular and log_regular searches had no hits. The ordinary monoid-algebra domain/coefficient equivalences returned by the second semantic search do not identify completed local monoid models. The strict-henselization search returned regular-element dimension-drop results and general henselian-ring facts, not the specified chart and canonical geometric comparison. The RingTheory regex returned only valued-field adic value-group occurrences. The actual tool/query text and results are recorded in the node and searches.jsonl. No new node requires a separate search.
+
+## Review by O1
+
+I read coord/delivery-errors.md B--E in both its main and merged copies against this split. I read ILO VI 1.1--1.2 and 1.6--1.9 (printed pp.69--71), and VIII 3.1.1--3.1.5 (printed pp.98--99): VI 1.6 supplies the two compatible formal models, whereas VI 1.8 only states the log-smoothness result and cites Kato. Accordingly proof_origin.by is agent: this is an assembly of existing statements, not a claim that ILO prints the expanded algebraic argument. There are no new-node sources to justify.
+
+For Step 1 I opened pqf-def-locnoeth, lem-weil-pbc-localization-noetherian, lem-weil-pbc-etale-local-ring-triples, lem-weil-pbc-strict-henselization-triples, lem-sc-strict-henselization-noetherian and lem-weil-pbc-finite-type-algebra-noetherian. Their statements give the Noetherian affine base, preservation under localization, the compatible pointed-neighbourhood/triple equivalence, the strict henselization of the ordinary local ring, Noetherianity of that strict henselization, and Noetherianity of its finite-type monoid algebra. I checked that the chosen lifted point really lies above the closed point of Spec A; this is why the prime contracts to m_A. The finite-type presentation is written explicitly using the finite monoid generators, rather than assuming flatness of the chart change.
+
+For Step 2 I read the full statement of lem-trf-chart-face-residual-unit-decomposition: it permits torsion in the original fs monoids, gives exactly the sharp fs S,T and finite free residual group K, and does not assume injectivity of S^gp to T^gp. It also supplies the explicit unit twist and identifies nonzero T-coordinates with chart nonunits. This avoids an incorrect free-group assertion for the original group completions and avoids ignoring epsilon. Its local-ring and prime-contraction hypotheses were checked in Step 1.
+
+For Step 3 I read lem-trf-formal-monoid-extension-model completely, including its two presentations, specified monomial compatibility, prime over m_A, pair isomorphism, residue field, completeness and mixed-characteristic cotangent condition. Those are exactly the input and output needed here. I checked its dependency graph has no path back to this item. The second citation, def-weil-regular-scheme, explicitly defines a regular local ring to be Noetherian, so no missing Noetherian hypothesis is imported into Step 4. This does not restate a clause as a new node: the independent algebraic model already exists, and the rest of this split proves the geometric and dimension conclusions.
+
+For Step 4 I read lem-trf-formal-monoid-ring-dimension. It applies to the nonzero complete regular Noetherian local coefficient ring D and sharp fs T produced above. Its second part assumes exactly bar(eta) in m_D minus m_D squared and concludes regularity and both dimension drops. I explicitly computed H/(L,eta)=D/(bar eta); an arbitrary nonzero eta would not have sufficed. No claim that H itself is regular is made.
+
+For Step 5 I read the complete statements of lem-weil-pbc-quotient-local-structure, lem-weil-pbc-finite-type-algebra-noetherian, lem-weil-pbc-local-completion-quotient, lem-weil-pbc-completion-regular-local and lem-weil-pbc-completion-dimension. The quotient is by J contained in m_B, so is nonzero local; it is finite type over B and therefore Noetherian. The completion-of-quotient statement gives the actual quotient by the extended ideal. Stacks algebra.tex Tag 00MA (lemma-completion-tensor) and more-algebra.tex Tags 07NY (lemma-completion-regular), 07NV (lemma-completion-dimension) support these comparisons. The regularity equivalence and dimension equalities apply separately to B and B/J; the subtraction is then elementary.
+
+For Step 6 I read lem-weil-pbc-small-strict-henselization-ind-etale and lem-trf-ind-etale-strict-local-invariance. The latter expressly applies after arbitrary scheme base change, with the same Omega at source and target; it does not require Z to be smooth or the chart base change to be etale. The map here is the base change of Spec A to W, so the conclusion is precisely the natural strict-localization isomorphism over Z. Being over Z proves compatibility with every chart monomial. I also read the two cited pointed-neighbourhood/triple statements: their compatibility with coprojections gives the ring identification with B^sh for the prime of the chosen point, not just an abstract ring isomorphism. Stacks etale-cohomology.tex Tag 04HX (lemma-describe-etale-local-ring), algebra.tex Tags 04GW, 04GP, 05WR and 0GIP are the source comparisons; I read the 04HX and 0GIP statements/proofs.
+
+For Step 7 I read lem-sc-strict-henselization-faithfully-flat and lem-trf-chart-face-localization-logification. The first explicitly gives a local faithfully flat map, so nonunits cannot become units. The second gives the log-stalk pushout and the quotient by its unit group, exactly the formula T=Q_F/F^gp. The same pushout says every stalk log element is represented by a chart element times a ring unit, which identifies its nonunit ideal with JB^sh. I wrote this argument, rather than citing only a definition for an unstated comparison.
+
+For Step 8 I read lem-sbc-strict-henselization-surjective-quotient-core, lem-sc-strict-henselization-regular, lem-sc-strict-henselization-dimension, and def-trf-fs-log-blowup. The quotient-core theorem supplies the action on the explicit quotient and works for the compatible separable residue closures; it is not an assertion for an arbitrary algebra action. Its surjectivity and kernel-in-maximal-ideal hypotheses are satisfied by B to B/J. Stacks algebra.tex Tag 05WS (lemma-quotient-strict-henselization), and more-algebra.tex Tags 06LN (lemma-henselization-regular) and 06LK (lemma-henselization-dimension) were checked directly. The definition of log regularity uses the geometric stalk, its nonunit ideal and the characteristic-group rank, all now identified with the objects in the proved equality.
+
+I tested the edge cases T={0}, n=0, the identity chart map, and nonclosed points of the toric coefficient stratum. For T={0} the model is D (or D/(bar eta)), the nonunit ideal is zero, and the rank equality reduces to identity. In the mixed case bar eta is a genuine parameter, so dim D is at least one and subtracting one is legitimate. The permitted theta=p-t_1 illustrates why the proof uses the existing parameter theorem rather than incorrectly claiming bar eta is p times a unit before eliminating the old t-parameters. Nonclosed coefficient primes are covered by the existing algebraic model, not restricted to closed rational points. Empty Z has no chosen geometric point, so it cannot be an unhandled counterexample.
+
+All 25 uses have verbatim statement quotations in citations.json. No proof step exceeds 2000 characters; each has a specific role, with no unnamed standard comparison hidden inline. I checked the cited dependencies have no path to this item. All off-unit statements are generic algebra or pointed-neighbourhood tools, declared in split_report.tool_uses for the maintainer's review; they do not replace a step of the unit route. I did not write Lean, run compilers or Lake, run local preflight scripts, use SGA sources, edit the shared repository, or start agents.

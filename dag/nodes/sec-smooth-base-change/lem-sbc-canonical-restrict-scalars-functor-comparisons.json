@@ -95,7 +95,9 @@
   "declaration": "AlgebraicGeometry.Etale.scalarRestrictionDirectImageMap",
   "declarations": [
    "AlgebraicGeometry.Etale.scalarRestrictionPullbackIso",
-   "AlgebraicGeometry.Etale.scalarRestrictionDirectImageMap"
+   "AlgebraicGeometry.Etale.scalarRestrictionDirectImageMap",
+   "CategoryTheory.Functor.exactDerivedComparisonSquare",
+   "CategoryTheory.Functor.exactDerivedRepresentative"
   ],
   "file": "lean/Sheaf/Paper/EtaleUnboundedRestrictionComparison.lean",
   "statement": "def scalarRestrictionDirectImageMap {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) {Z W : Scheme.{u}} (f : Z ⟶ W) : R(lowerStar (ModuleCat.{u + 1} B) f) ⋙ Sheaf.derivedRestrictScalars W.smallEtaleTopology φ ⟶ Sheaf.derivedRestrictScalars Z.smallEtaleTopology φ ⋙ R(lowerStar (ModuleCat.{u + 1} A) f)",
@@ -103,7 +105,7 @@
   "by": "Q158",
   "date": "2026-10-17",
   "existing": false,
-  "note": "Section 1(B): the original recorded interface is reexported unchanged, including its bounded-below canonical isomorphisms. The consumer states its equation in the ambient unbounded categories, so this module supplies the exact derived inverse-image square and its geometric counit mate. Its D+ restriction is the original comparison by the counit identities. The equivalent helpers in FiniteCoefficientDirectImage cannot be imported here: the prescribed compiler reports duplicate upperStarIsoLowerStarInv declarations from two of its upstream imports. This smaller interface imports neither competing pro-etale module and adds no isomorphism hypothesis."
+  "note": "Section 1(B): the original recorded interface is reexported unchanged, including its bounded-below canonical isomorphisms. The consumer states its equation in the ambient unbounded categories, so this module supplies the exact derived inverse-image square and its geometric counit mate. Its D+ restriction is the original comparison by the counit identities. The equivalent helpers in FiniteCoefficientDirectImage cannot be imported here: the prescribed compiler reports duplicate upperStarIsoLowerStarInv declarations from two of its upstream imports. This smaller interface imports neither competing pro-etale module and adds no isomorphism hypothesis. T7 adds exactDerivedComparisonSquare, the same displayed composite in generic form, and the exact geometric representative formula exactDerivedRepresentative. These are concrete categorical composites; scalarRestrictionPullbackIso keeps its published body (reviewer correction: its consumers unfold that body), which equals the generic square by rfl; the new proofs use the generic form to avoid costly kernel expansion at concrete sheaf specialization."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -116,16 +118,27 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "V1",
-  "result": "pass",
-  "landing": "20261012T070556-L-3479336",
+  "reviewer": "C-3d8a7",
+  "group": "T7",
+  "result": "fix",
+  "landing": "20261025T181149-L-4084036",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: re-delivery vs 9276d delivery+C-9276d fixes (7 of 8 Lean files byte-identical to uncorrected 9276d; Data module adds normalization lemmas + changed directImageComparisonAmbientPullbackIso body); fixed set vs published clone c84b68f; 70 downstream users compiled against fixed sandbox (70/70)"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "blueprint_parent": {
   "node": "sk-thm-sf-compatibility",
   "clause": 7,

@@ -1,0 +1,307 @@
+{
+ "id": "lem-sp-field-scalar-normalized-systems",
+ "kind": "statement",
+ "title": "Exact scalar extension of normalized quotient systems and integral reductions",
+ "statement": "Fix the global finite-field datum of [def-pur-conventions], with algebraic closure $k$ of characteristic $p$ and a prime $\\ell\\ne p$. Let $E\\subset F$ be finite extensions of $\\mathbf Q_\\ell$, with valuation rings $R=\\mathcal O_E\\subset S=\\mathcal O_F$ [def-weil-l-adic-coefficient-extension]. Let $X,Y$ be separated finite-type $k$-schemes and $f:X\\to Y$ smooth separated of pure relative dimension $d\\ge0$ [def-sbc-smooth-morphisms, def-sf-setting]. For $T=X,Y$, put $A_{n,T}=(R/\\ell^n)_T$, $B_{n,T}=(S/\\ell^n)_T$ on the small pro-etale site, and use the ordinary derived categories of strict varying-coefficient towers [sk-def-sp-coefficient-towers, det-sp-coefficient-towers-abelian]. Write $\\mathcal N_A(T),\\mathcal N_B(T)$ for their normalized constructible subcategories with uniform cohomological and Tor bounds [sk-def-sp-normalized-towers], and $C_T=-\\otimes^L_{A_{\\bullet,T}}B_{\\bullet,T}$ for scalar extension of whole systems [lem-coef-semilinear-derived-sections]. Twists mean [def-coefficient-twists-detailed]. Put $R_T=\\varprojlim_n A_{n,T}$ and $S_T=\\varprojlim_n B_{n,T}$, and $\\widehat C_T=-\\otimes^L_{R_T}S_T$. There are compatible finite bases $B_{n,T}\\cong A_{n,T}^{\\oplus[F:E]}$ obtained by reduction of one basis of $S_T$ over $R_T$. On abelian strict coefficient systems scalar extension is exact; on their ordinary derived categories it agrees with $C_T$, whose underlying restricted complex is a fixed finite sum, including all transitions. This functor preserves $\\mathcal N_A(T)$ and every common Tor-amplitude interval and cohomological bound. For every $K\\in D(R_T)$ there is a canonical natural isomorphism of entire derived $B_\\bullet$-systems\n$$\\operatorname{red}_{S,T}(\\widehat C_TK)\\simeq C_T(\\operatorname{red}_{R,T}K),$$\nwhose level $n$ is\n$$(K\\otimes^L_{R_T}S_T)\\otimes^L_{S_T}B_{n,T}\\simeq(K\\otimes^L_{R_T}A_{n,T})\\otimes^L_{A_{n,T}}B_{n,T}.$$\nHere reduction and its actual quotient transitions are [det-sp-reduction-tower-normalized]; on one flat-term K-flat representative the isomorphism is $(x\\otimes a)\\otimes b\\mapsto x\\otimes ab$, with insertion-of-one inverse. These maps respect every quotient transition, all morphisms, identity extensions and successive field extensions. Powers of $\\ell$ are interpreted as the cofinal powers $\\varpi_E^{h_En}$ and $\\varpi_F^{h_Fn}$ when $\\ell=u_E\\varpi_E^{h_E}=u_F\\varpi_F^{h_F}$; no unramifiedness is assumed.",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-field-extension",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "(1), reduction formula and constructibility; returned steps 1–3"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-l-adic-coefficient-extension",
+  "def-sbc-smooth-morphisms",
+  "def-sf-setting",
+  "sk-def-sp-coefficient-towers",
+  "det-sp-coefficient-towers-abelian",
+  "sk-def-sp-normalized-towers",
+  "lem-coef-semilinear-derived-sections",
+  "def-coefficient-twists-detailed",
+  "det-sp-reduction-tower-normalized",
+  "def-sp-field-scalar-system-data",
+  "def-sp-field-scalar-reduction-data"
+ ],
+ "proof": [
+  {
+   "text": "Finite type over the field scheme makes X and Y Noetherian. Transfer this structure to T using T=X or T=Y. Apply the single-inclusion construction independently for each finite coefficient embedding and choose its witness within this existence proof. These are normalized functors up to the prescribed canonical tensor comparisons; bases need not compose.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sp-field-scalar-single-inclusion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the identity-comparison theorem to the chosen identity datum, and the successive-comparison theorem to the three chosen data for any pair of composable field embeddings. These results hold for arbitrary supplied normalized data, so no compatibility of independently chosen bases is required. They supply exactly Family.identity and Family.successive.",
+   "uses": [
+    "lem-sp-field-scalar-identity-comparison",
+    "lem-sp-field-scalar-successive-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The DVR description of O_E factors nonzero ell as a unit times pi^h. Its extending absolute value is less than one, so ell is not a unit and h>0. Principal ideals ignore the unit factor and (I^h)^n=I^(hn), including n=0. Supply these equalities as Family.cofinal and assemble the record.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "def-sp-field-scalar-normalized-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-field-scalar-normalized-data",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-sp-field-scalar-identity-comparison",
+  "lem-sp-field-scalar-single-inclusion",
+  "lem-sp-field-scalar-successive-comparison",
+  "lem-weil-pbc-finite-type-over-noetherian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "paragraph (1); family assembly, explicit DVR ramification proof, and three strict subresults"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite extension of l adic valuation rings gives an exact functor on varying quotient coefficient towers preserving normalized constructible towers and uniform Tor amplitude",
+   "results": "[leanfinder] OK 8 hit(s); AdicCompletion.map_exact: ∀ {R : Type u} [inst : CommRing R] {I : Ideal R} {M : Type u} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\n; Profinite.NobelingProof.succ_exact: ∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o : Ordinal.{u}},\n  IsC; BDeRhamPlus: (R : Type u) →\n  [inst : CommRing R] →\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplet; localCohomology.diagram: {R : Type u} →\n  [inst : CommRing R] →\n    {D : Type v} →\n      [inst_1 : CategoryTheory.SmallCategory D] →\n  ; localCohomology: {R : Type u} → [inst : CommRing R] → Ideal R → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R); localCohomology.ofSelfLERadical: {R : Type u} → [inst : CommRing R] → Ideal R → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R); AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq: ∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R; AdicCompletion: {R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → T",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the ordinary derived coefficient-system assertion or a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible finite free bases of quotient ring systems give scalar extension of normalized derived coefficient systems with unchanged Tor bounds",
+   "results": "[leanfinder] OK 8 hit(s); Algebra.Generators.H1Cotangent.δAux_ofComp: ∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\n ; Algebra.Generators.CotangentSpace.compEquiv: {R : Type u₁} →\n  {S : Type u₂} →\n    [inst : CommRing R] →\n      [inst_1 : CommRing S] →\n        [inst_2 : Al; Module.Basis.ofIsCoprimeDifferentIdeal_apply: ∀ (A : Type u_1) (B : Type u_2) {K : Type u_3} {L : Type u_4} [inst : CommRing A] [inst_1 : Field K]\n  [inst_2; Algebra.Generators.Cotangent.exact: ∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\n ; Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange: ∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\n ; Algebra.Generators.CotangentSpace.exact: ∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\n ; Algebra.SubmersivePresentation.basisCotangent_apply: ∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\n  [ins; Algebra.PreSubmersivePresentation.cotangentComplexAux: {R : Type u_1} →\n  {S : Type u_2} →\n    {ι : Type u_3} →\n      {σ : Type u_4} →\n        [inst : CommRing R] →\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the ordinary derived coefficient-system assertion or a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Free, Module.Finite",
+   "results": "[loogle] OK 12 hit(s); Module.exists_finite_presentation:  (R : Type u) [CommRing R] [Small.{v, u} R] (M : Type v) [AddCommGroup M] [Module R M] [Module.Finite R M] : ∃; Module.finrank_eq_zero_iff_of_free:  (R : Type u) (M : Type v) [Semiring R] [AddCommMonoid M] [Module R M] [StrongRankCondition R] [Module.Free R ; Module.finrank_pos_iff_of_free:  (R : Type u) (M : Type v) [Semiring R] [AddCommMonoid M] [Module R M] [StrongRankCondition R] [Module.Free R ; Module.Free.ChooseBasisIndex.fintype:  (R : Type u) (M : Type v) [Semiring R] [AddCommMonoid M] [Module R M] [Module.Free R M] [Module.Finite R M] :; Module.Finite.matrix:  {R : Type u_1} {ι₁ : Type u_2} {ι₂ : Type u_3} {M : Type u_4} [Semiring R] [AddCommMonoid M] [Module R M] [Mo; Module.finite_of_finrank_eq_succ:  {R : Type u} {M : Type v} [Semiring R] [AddCommMonoid M] [Module R M] [Module.Free R M] [StrongRankCondition ; Module.finBasis:  (R : Type u) (M : Type v) [Semiring R] [AddCommMonoid M] [Module R M] [Module.Free R M] [StrongRankCondition ; Module.finite_of_finrank_pos:  {R : Type u} {M : Type v} [Semiring R] [AddCommMonoid M] [Module R M] [Module.Free R M] [StrongRankCondition ; Module.finrank_of_not_finite:  {R : Type u} {M : Type v} [Semiring R] [AddCommMonoid M] [Module R M] [Module.Free R M] [StrongRankCondition ; Module.rank_lt_aleph0_iff:  {R : Type u} {M : Type v} [Semiring R] [AddCommMonoid M] [Module R M] [Module.Free R M] [StrongRankCondition ; Module.finBasisOfFinrankEq:  (R : Type u) (M : Type v) [Semiring R] [AddCommMonoid M] [Module R M] [Module.Free R M] [StrongRankCondition ; Module.finrank_eq_card_chooseBasisIndex:  (R : Type u) (M : Type v) [Semiring R] [AddCommMonoid M] [Module R M] [Module.Free R M] [StrongRankCondition ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the ordinary derived coefficient-system assertion or a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "normalized|TorAmplitude|FinitePresentation",
+   "results": "[grep] OK 25 hit(s); Mathlib/NumberTheory/KummerDedekind.lean:29: * `normalizedFactorsMapEquivNormalizedFactorsMinPolyMk` : The bijection in the Kummer-Dedekind; Mathlib/NumberTheory/KummerDedekind.lean:35: * `normalizedFactors_ideal_map_eq_normalizedFactors_min_poly_mk_map` : The Kummer-Dedekind; Mathlib/NumberTheory/KummerDedekind.lean:40:   * `normalizedFactorsMapEquivNormalizedFactorsMinPolyMk_symm_apply_eq_span` : Let `Q` be a lift of; Mathlib/NumberTheory/KummerDedekind.lean:43:     `normalizedFactorsMapEquivNormalizedFactorsMinPolyMk` to; Mathlib/NumberTheory/KummerDedekind.lean:104: noncomputable def normalizedFactorsMapEquivNormalizedFactorsMinPolyMk (hI : IsMaximal I); Mathlib/NumberTheory/FLT/Basic.lean:216: /-- To prove Fermat Last Theorem in any semiring that is a `NormalizedGCDMonoid` one can assume; Mathlib/NumberTheory/FLT/Basic.lean:219:     [IsDomain R] [DecidableEq R] [NormalizedGCDMonoid R]; Mathlib/NumberTheory/NumberField/InfiniteAdeleRing.lean:110: /-- The norm on the infinite adele ring is given by the product of the normalized norms; Mathlib/NumberTheory/NumberField/InfiniteAdeleRing.lean:111: across infinite places. The normalized norm is the real norm at real places and the; Mathlib/NumberTheory/NumberField/ClassNumber.lean:122:     ← Ideal.prod_normalizedFactors_eq_self (nonZeroDivisors.coe_ne_zero I)]; Mathlib/NumberTheory/NumberField/ClassNumber.lean:127:   refine h (((mem_normalizedFactors_iff (nonZeroDivisors.coe_ne_zero I)).mp hJ).1) ?_; Mathlib/NumberTheory/NumberField/ClassNumber.lean:130:       UniqueFactorizationMonoid.dvd_of_mem_normalizedFactors hJ).trans hI; Mathlib/NumberTheory/ModularForms/Derivative.lean:14: This file defines normalized derivative $D = \\frac{1}{2\\pi i} \\frac{d}{dz}$; Mathlib/NumberTheory/ModularForms/Derivative.lean:19: - `normalizedDerivOfComplex`: $D = \\frac{1}{2\\pi i} \\frac{d}{dz}$; Mathlib/NumberTheory/ModularForms/Derivative.lean:38: Normalized derivative $D = \\frac{1}{2\\pi i} \\frac{d}{dz}$.; Mathlib/NumberTheory/ModularForms/Derivative.lean:40: def normalizedDerivOfComplex (F : ℍ → ℂ) (z : ℍ) : ℂ := (2 * π * I)⁻¹ * deriv (F ∘ ofComplex) z; Mathlib/NumberTheory/ModularForms/Derivative.lean:42: /-- We denote the normalized derivative by `D`. -/; Mathlib/NumberTheory/NumberField/ProductFormula.lean:16: values of `K`. The `|⬝|ᵥ` are normalized as follows:; Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal.lean:301:   rw [Multiset.mem_toFinset, Polynomial.mem_normalizedFactors_iff; Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal.lean:320:   rw [Multiset.mem_toFinset, Polynomial.mem_normalizedFactors_iff; Mathlib/NumberTheory/NumberField/InfinitePlace/Basic.lean:34:   `‖·‖_w` is the normalized absolute value for `w`.; Mathlib/NumberTheory/NumberField/InfinitePlace/Basic.lean:369: `‖·‖_w` is the normalized absolute value for `w`. -/; Mathlib/NumberTheory/RamificationInertia/Basic.lean:419:     count_normalizedFactors_eq a_mem a_notMem, min_eq_left i.le_succ]; Mathlib/NumberTheory/RamificationInertia/Ramification.lean:258: theorem ramificationIdx'_eq_normalizedFactors_count; Mathlib/NumberTheory/RamificationInertia/Ramification.lean:260:     (hP0 : P ≠ ⊥) : ramificationIdx' p P = (normalizedFactors (map f p)).count P := by",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the ordinary derived coefficient-system assertion or a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite extension of l adic valuation rings gives an exact functor on varying quotient coefficient towers preserving normalized constructible towers and uniform Tor amplitude",
+   "results": "[leansearch] OK 8 hit(s); Valuation.HasExtension.instIsScalarTower_valuationSubring': : IsScalarTower K₀ L₀ L; Valuation.HasExtension.ofComapInteger: (h : vA.integer.comap (algebraMap K A) = vK.integer) : vK.HasExtension vA; Valuation.HasExtension.instIsScalarTowerInteger: : IsScalarTower vR.integer vA.integer A; Valuation.HasExtension.mk: ∀ {R : Type u_1} {A : Type u_2} {ΓR : Type u_3} {ΓA : Type u_4} [inst : CommRing R] [inst_1 : Ring A]\n  [inst_; Valuation.HasExtension.instIsTorsionFreeInteger: [IsDomain R] [IsTorsionFree R A] : IsTorsionFree vR.integer vA.integer; Valuation.HasExtension: {R : Type u_1} →\n  {A : Type u_2} →\n    {ΓR : Type u_3} →\n      {ΓA : Type u_4} →\n        [inst : CommRing R] ; Valued.extension: : hat K → Γ₀; Valuation.HasExtension.val_isEquiv_comap: ∀ {R : Type u_1} {A : Type u_2} {ΓR : Type u_3} {ΓA : Type u_4} {inst : CommRing R} {inst_1 : Ring A}\n  {inst_",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the ordinary derived coefficient-system assertion or a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "normalized|TorAmplitude|constructible",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical/module facts or basic site definitions; no whole-system coefficient assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free scalar extension of strict varying coefficient towers preserves normalized constructible derived systems and uniform Tor amplitude",
+   "results": "8 hits: Algebra.FormallyUnramified.projective_of_restrictScalars, Algebra.FormallyUnramified.flat_of_restrictScalars, Algebra.Smooth.exists_finiteType, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange, Submodule.exists_fg_of_baseChange_eq_zero, Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg, Module.free_of_lTensor_residueField_injective",
+   "date": "2026-10-22",
+   "verdict": "no match: basic algebra, cotangent or flatness results do not state normalized strict coefficient systems or the whole-system reduction comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "NormalizedTower|StrictRingSystem|TorAmplitude",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: basic algebra, cotangent or flatness results do not state normalized strict coefficient systems or the whole-system reduction comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact finite free scalar extension preserves normalized constructible coefficient towers and commutes with derived reduction",
+   "results": "8 hits: Module.FinitePresentation.isLocalizedModule_mapExtendScalars, Module.RestrictScalars.normedSpaceOrig, LinearEquiv.extendScalarsOfIsLocalizationEquiv, instSeminormedAddCommGroupRestrictScalars, Algebra.TensorProduct.instFree, IntermediateField.extendScalars.orderIso, comonadicExtendScalars, AlgHom.extendScalarsOfSurjective",
+   "date": "2026-10-22",
+   "verdict": "no match: basic algebra, cotangent or flatness results do not state normalized strict coefficient systems or the whole-system reduction comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, TensorProduct",
+   "results": "12 hits: Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_flat_left, Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_flat_right, LinearIndependent.tmul_of_flat_left, LinearIndependent.tmul_of_flat_right, TensorProduct.LinearIndepOn.tmul_of_flat_left, TensorProduct.LinearIndepOn.tmul_of_flat_right, TensorProduct.nontrivial_of_linearMap_injective_of_flat_left, TensorProduct.nontrivial_of_linearMap_injective_of_flat_right",
+   "date": "2026-10-22",
+   "verdict": "no match: basic algebra, cotangent or flatness results do not state normalized strict coefficient systems or the whole-system reduction comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite free map of coefficient ring sequences gives an exact extension functor on modules over the sequence topos; derived reduction commutes with extension of scalars",
+   "results": "8 hits: Algebra.Generators.Cotangent.exact, Algebra.Generators.CotangentSpace.exact, Algebra.Generators.H1Cotangent.exact_map_δ', Profinite.NobelingProof.succ_exact, Algebra.Generators.H1Cotangent.exact_map_δ, RingTheory.Sequence.map_first_exact_on_four_term_right_exact_of_isSMulRegular_last, Algebra.Generators.H1Cotangent.exact_δ_map, Algebra.H1Cotangent.exact_map_δ",
+   "date": "2026-10-22",
+   "verdict": "no match: basic algebra, cotangent or flatness results do not state normalized strict coefficient systems or the whole-system reduction comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-field-extension-towers",
+  "date": "2026-10-22",
+  "group": "Q62"
+ },
+ "blueprint": {
+  "from": {
+   "node": "det-sp-field-extension-towers",
+   "place": "(1), reduction formula and constructibility; returned steps 1–3",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-field-scalar-normalized-systems",
+  "worker": "stage1",
+  "summary": "Q43: expanded the finite-free scalar and reduction paragraph into six steps; all supporting lemmas already exist; checked actual strict transitions and uniform bounds, no new nodes. Statement retained.",
+  "blueprint": "det-sp-field-extension-towers proof (1): finite integral basis, exact scalar functor, constructibility and Tor bounds, whole-system reduction formula.",
+  "tool_uses": [
+   {
+    "node": "det-prop-sfb-cartesian-coefficients-finite-free",
+    "why": "Generic $\\mathcal O_{F,X}$ is finite free over $\\mathcal O_{E,X}$ supplies the exact statement cited in the proof; this unit has no replacement for this foundational scalar, sheaf or derived-category tool."
+   },
+   {
+    "node": "det-sp-coefficient-towers-abelian",
+    "why": "Generic The abelian category of coefficient towers supplies the exact statement cited in the proof; this unit has no replacement for this foundational scalar, sheaf or derived-category tool."
+   },
+   {
+    "node": "det-sp-reduction-tower-normalized",
+    "why": "Generic The reduction tower of a complex is normalized supplies the exact statement cited in the proof; this unit has no replacement for this foundational scalar, sheaf or derived-category tool."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Generic Derived semilinear sections and coefficient-linear geometric operations supplies the exact statement cited in the proof; this unit has no replacement for this foundational scalar, sheaf or derived-category tool."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic Existence of K-flat resolutions on a ringed site supplies the exact statement cited in the proof; this unit has no replacement for this foundational scalar, sheaf or derived-category tool."
+   },
+   {
+    "node": "lem-pur-constant-specified-basis",
+    "why": "Generic A specified finite basis passes to constant ring sheaves supplies the exact statement cited in the proof; this unit has no replacement for this foundational scalar, sheaf or derived-category tool."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic Derived change of rings along a morphism of sheaves of rings, computed by K-flat resolutions supplies the exact statement cited in the proof; this unit has no replacement for this foundational scalar, sheaf or derived-category tool."
+   },
+   {
+    "node": "lem-pur-ideal-quotient-tower-scalar-associator",
+    "why": "Generic Balanced scalar associativity for ideal-quotient towers supplies the exact statement cited in the proof; this unit has no replacement for this foundational scalar, sheaf or derived-category tool."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Generic An exact functor of abelian categories induces a triangulated functor on derived categories supplies the exact statement cited in the proof; this unit has no replacement for this foundational scalar, sheaf or derived-category tool."
+   },
+   {
+    "node": "lem-sf-finite-free-derived-scalar-calculus",
+    "why": "Generic Exact finite-free scalar extension on the two finite-coefficient sites supplies the exact statement cited in the proof; this unit has no replacement for this foundational scalar, sheaf or derived-category tool."
+   },
+   {
+    "node": "lem-sfb-finite-free-scalar-coordinates",
+    "why": "Generic Natural coordinates for finite free internal scalar extension supplies the exact statement cited in the proof; this unit has no replacement for this foundational scalar, sheaf or derived-category tool."
+   },
+   {
+    "node": "lem-sfb-local-field-integral-basis",
+    "why": "Generic Existence of an integral basis for a finite extension of local coefficient fields supplies the exact statement cited in the proof; this unit has no replacement for this foundational scalar, sheaf or derived-category tool."
+   },
+   {
+    "node": "lem-sfb-successive-derived-quotient-normalization",
+    "why": "Generic Successive derived scalar extensions agree with direct quotient extension supplies the exact statement cited in the proof; this unit has no replacement for this foundational scalar, sheaf or derived-category tool."
+   },
+   {
+    "node": "lem-sp-strict-coefficient-tensor-descent",
+    "why": "Generic Strict coefficient tensor complexes descend through K-flat localization supplies the exact statement cited in the proof; this unit has no replacement for this foundational scalar, sheaf or derived-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Generic An exact functor commutes with cohomology of cochain complexes supplies the exact statement cited in the proof; this unit has no replacement for this foundational scalar, sheaf or derived-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6) supplies the exact statement cited in the proof; this unit has no replacement for this foundational scalar, sheaf or derived-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "Generic Ringed pullback kflat supplies the exact statement cited in the proof; this unit has no replacement for this foundational scalar, sheaf or derived-category tool."
+   },
+   {
+    "node": "sk-def-sp-coefficient-towers",
+    "why": "Generic Coefficient towers supplies the exact statement cited in the proof; this unit has no replacement for this foundational scalar, sheaf or derived-category tool."
+   },
+   {
+    "node": "sk-def-sp-normalized-towers",
+    "why": "Generic Constructible and normalized towers supplies the exact statement cited in the proof; this unit has no replacement for this foundational scalar, sheaf or derived-category tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-prop-sfb-cartesian-coefficients-finite-free",
+  "det-sp-coefficient-towers-abelian",
+  "det-sp-reduction-tower-normalized",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pc-kflat-resolution",
+  "lem-pur-constant-specified-basis",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-ideal-quotient-tower-scalar-associator",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sf-finite-free-derived-scalar-calculus",
+  "lem-sfb-finite-free-scalar-coordinates",
+  "lem-sfb-local-field-integral-basis",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-sp-strict-coefficient-tensor-descent",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "sk-def-sp-coefficient-towers",
+  "sk-def-sp-normalized-towers"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-026e63d26",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-026e63d26 (reviewer sub-agent of L); spot-checked: I read the item in full: statement and all six steps. There are no new nodes. I checked it against blueprint main-20261015 sk-lem-sp-field-extension-towers.proof.md paragraph (1) and against the unit step. It is not a duplicate of lem-weil-finite-free-completed-scalar-comparison, lem-weil-integral-scalar-extension-constructible, lem-sp-field-scalar-strict-limit or det-sp-reduction-tower-normalized. Steps 1-5 are correct. Step 1: integral basis, reduction mod ℓ^n by uniqueness of coordinates, then lem-pur-constant-specified-basis; ℓ=uϖ^h covers the ramified case, and S/ℓ^n is free where S/ϖ_F^n would not be. Step 2: exact levelwise extension through finite-free-scalar-coordinates, identified with the K-flat C_T. Step 3: T is Noetherian; the constructibility and Tor notions of finite-free-derived-scalar-calculus are the same as those of sk-def-sp-normalized-towers; cohomology bound from U T K≅K^r. Step 4: the reduction map is t⊗1 through successive-quotient-normalization. Step 5: flat K-flat P is kept by ringed pullback; generator calculation. Step 6: tensor descent; red_T is built from the same descent functor. Small cases tested: F=E, T=∅, m=n, E=Q_ℓ⊂Q_ℓ(√ℓ). Two repairs (fixes/dag/nodes/sec-smooth-purity/lem-sp-field-scalar-normalized-systems.json). (1) Step 6 used the quotient-tower scalar associator with I_n=ℓ^nR_T, but no cited node gives R_T/ℓ^nR_T≅A_{n,T} or S_T/ℓ^nS_T≅B_{n,T} through the actual quotient map. Added lem-sfb-integral-quotient-resolution-normalization (R_T/π^jR_T≅(A/π^j)_T); its closure does not contain this item, so no cycle. Off-unit generic tool, for the maintainer's tool_uses. (2) Step 1 cites det-prop-sfb-cartesian-coefficients-finite-free, which needs E⊂F inside Q̄_ℓ, but the item fixes only E⊂Q̄_ℓ. Added the E-embedding of F, citing def-pur-conventions. Statement unchanged, no nodes dropped, no SGA cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FieldScalarNormalizedSystems",
+  "declaration": "AlgebraicGeometry.ProEtale.FieldScalar.field_scalar_normalized_systems",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FieldScalar.field_scalar_normalized_systems"
+  ],
+  "file": "lean/Sheaf/Paper/FieldScalarNormalizedSystems.lean",
+  "statement": "theorem field_scalar_normalized_systems (P : WeilConjectures.PurityFiniteSetting.{u}) (X Y : Scheme.{u}) [X.Over (Spec (CommRingCat.of P.field.k))] [Y.Over (Spec (CommRingCat.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of P.field.k))] [QuasiCompact (X ↘ Spec (CommRingCat.of P.field.k))] [IsSeparated (X ↘ Spec (CommRingCat.of P.field.k))] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of P.field.k))] [QuasiCompact (Y ↘ Spec (CommRingCat.of P.field.k))] [IsSeparated (Y ↘ Spec (CommRingCat.of P.field.k))] (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of P.field.k))] (d : ℕ) [SmoothOfRelativeDimension d f] [IsSeparated f] : ∀ T : Scheme.{u}, (T = X ∨ T = Y) → Nonempty (Family P.coefficients.l T)",
+  "branch": "sheaf-dag",
+  "by": "Q117",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Existing record declarations moved verbatim to FieldScalarNormalizedData and publicly re-exported. The theorem signature is unchanged; its proof assembles three proper subresults and proves ramification directly."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-62e2e848f",
+  "group": "Q117",
+  "result": "pass",
+  "note": "Read the item, its 6 steps, the 3 delivered modules (SystemData, ReductionData, NormalizedSystems), the report and the dependency declarations (SpReductionTower, spIntegralSectionRing/EllProjection, SpCoefficientTowersAbelian, PurityFiniteSetting/FiniteFieldDatum). The clause table matches the node: bases with exists-unique coordinates of rank [F:E] and their reductions; exact ordinary extension with t(x)⊗q(b) transitions; restriction; coordinates pinned by columns; a left-derived functor invertible on all complexes; preservation of normalized towers and of literal support/Tor intervals; isoDerived of whole systems pinned on K-flat representatives by the forward/inverse generator formulas; Identity/Successive unitors and compositors pinned on generators and by counit equations; cofinal ℓ=aϖ^h clause. Generalizing to arbitrary finite extensions E,F is stronger and true. Hypotheses are not stronger than the node. Pinning: coefficients by quotient_mk/tower_app, integral by projections (completed ring is the limit), ordinary up to unique iso by levels+transitions, derived by its universal property. Item JSON differs from side-live only in lean and +2 stmt_deps on the new def nodes; proof_deps unchanged; statements verbatim. New def nodes have source/blueprint docstrings and real data; no FieldScalar namespace or duplicate found. No hollow definition; only the theorem is sorry. No compile, since no file changed. Advisory: derived_level and Coordinates.derived are existence-only isos."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-f7371",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261025T163741-L-815329",
+  "kind": "interface",
+  "note": "independent cc review: Moved records vs published FieldScalarNormalizedSystems (identical apart from blueprint tag); item theorem signature unchanged; #print axioms on the scratch build = propext, sorryAx (only from the 3 new sorry statements), Classical.choice, Quot.sound; identity/successive statements checked for truth with arbitrary ScalarData against the pinning fields of FieldScalarSystemData/ReductionData"
+ }
+}

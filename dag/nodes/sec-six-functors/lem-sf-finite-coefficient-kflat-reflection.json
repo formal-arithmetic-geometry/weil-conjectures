@@ -1,0 +1,151 @@
+{
+ "id": "lem-sf-finite-coefficient-kflat-reflection",
+ "kind": "statement",
+ "title": "Finite coefficient inverse image reflects K-flatness",
+ "status": "split",
+ "statement": "At each positive finite coefficient level for a prime l, finite extension E of Q_l and scheme X, let P be an etale cochain complex. If its intrinsic pro-etale inverse image is K-flat in the actual acyclic-total-tensor sense of [def-pc-kflat-complex], then P is categorical K-flat for quasi-isomorphisms. The inverse image and chain tensor maps are those of [def-sf-finite-coefficient-site-scalar-arrow] and [def-sf-finite-coefficient-site-chain-tensor].",
+ "stmt_deps": [
+  "def-pc-kflat-complex",
+  "def-sf-finite-coefficient-site-scalar-arrow",
+  "def-sf-finite-coefficient-site-chain-tensor"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Final site-transport paragraph; Stacks Project, Cohomology on Sites, Tags 06YN and 07A4."
+ },
+ "proof": [
+  {
+   "text": "Exact faithful inverse image reflects acyclicity: use the homology comparison and faithfulness to reflect a zero identity. Carry out the argument over an arbitrary finite commutative coefficient ring before specializing it to the finite coefficient-extension ring; this shares the inverse-image and totalization data.",
+   "uses": [
+    "def-weil-pbc-proetale-modules"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply intrinsic K-flatness to the inverse image of every acyclic etale complex. Transport the resulting acyclicity across the stated pointwise chain tensor comparison and reflect it back to the etale tensor.",
+   "uses": [
+    "def-sf-finite-coefficient-site-chain-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the homotopy quotient acyclicity criterion and symmetry to recover categorical K-flatness on both sides.",
+   "uses": [
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-kflat-complex",
+  "def-sf-finite-coefficient-site-chain-tensor",
+  "def-weil-pbc-proetale-modules"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Y7",
+  "date": "2026-10-22",
+  "note": "Proof preparation for the finite coefficient site tensor comparison. Server compile repair: the fully proved private finite-ring argument is specialized only after the K-flat reflection proof, avoiding repeated expansion of coefficient-extension data."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact faithful strong monoidal functor reflects K-flat complexes by reflecting acyclicity",
+   "results": [
+    "CategoryTheory.Functor.reflects_exact_of_faithful",
+    "Module.FaithfullyFlat.lTensor_reflects_exact",
+    "Module.FaithfullyFlat.rTensor_reflects_exact"
+   ],
+   "date": "2026-10-22",
+   "verdict": "General exactness-reflection APIs exist; combine faithful exactness with the already stated chain tensor comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_isZero",
+   "results": "1 hit: CategoryTheory.Functor.map_isZero.",
+   "date": "2026-10-22",
+   "verdict": "Use preservation of zero homology and faithfulness to reflect acyclicity."
+  },
+  {
+   "tool": "grep",
+   "query": "kFlat_iff_preserves_acyclic|kFlat.*Faithful|IsZero.*map",
+   "results": "25 hits, including generic zero-object and homology APIs; no specialized site comparison K-flat reflection.",
+   "date": "2026-10-22",
+   "verdict": "The adopted K-flat acyclicity criterion and the existing pointwise chain tensor comparison give the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact faithful strong monoidal functor reflects K-flat cochain complexes by reflecting acyclicity",
+   "results": {
+    "t": "2026-10-22T03:42:54Z",
+    "tool": "leansearch",
+    "query": "An exact faithful strong monoidal functor reflects K-flat cochain complexes by reflecting acyclicity",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.reflects_exact_of_faithful",
+     "CategoryTheory.ShortComplex.exact_map_iff_of_faithful",
+     "CategoryTheory.Mon.instReflectsIsomorphismsForget",
+     "CategoryTheory.Functor.mapHomologicalComplex_reflects_iso",
+     "CategoryTheory.Functor.reflectsMonomorphisms_of_faithful",
+     "CategoryTheory.Functor.reflectsEpimorphisms_of_faithful",
+     "CategoryTheory.Limits.fullyFaithful_reflectsColimits",
+     "CategoryTheory.Functor.reflectsMonomorphisms_comp"
+    ],
+    "digest": "21589ce3409ac030"
+   },
+   "date": "2026-10-22",
+   "verdict": "General exactness reflection exists, but no hit states this site comparison K-flat reflection. The proof uses the homology comparison, faithfulness and the existing chain tensor comparison."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteCoefficientSiteHomArrow",
+  "date": "2026-10-22",
+  "group": "Y7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-sf-finite-coefficient-site-hom-arrow",
+   "place": "Finite coefficient inverse image reflects K-flatness",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteCoefficientKFlatReflection",
+  "file": "lean/Sheaf/Paper/FiniteCoefficientKFlatReflection.lean",
+  "declaration": "WeilConjectures.finiteHomNuKFlatReflection",
+  "statement": "theorem finiteHomNuKFlatReflection (n : ℕ)\n    (P : CochainComplex (Sheaf X.smallEtaleTopology\n      (ModuleCat.{u + 1} (ULift.{u + 1, u}\n        (Padic.coefficientExtensionRing l E (n + 1))))) ℤ)\n    (hP : @CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}\n      X.ProEt inferInstance (essentiallySmallSelf.{0, u, u + 1} _)\n      (Scheme.ProEt.topology X) (integralCoefficientCommRingSheaf l E X n)\n      ((finiteHomNuComplex l E X n).obj P)) :\n    (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P",
+  "branch": "sheaf-dag",
+  "by": "Y7",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-91a91",
+  "group": "Y7",
+  "result": "fix",
+  "landing": "20261022T114256-L-598666",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-91a91",
+  "group": "Y7",
+  "result": "fix",
+  "landing": "20261022T114256-L-598666",
+  "kind": "interface",
+  "note": "independent cc review: re-delivery 91a912d9 vs prior FIXed head 4ada08f3 (cmp: all Lean/node files identical, only change record status + report differ) and live (CoefficientRingedTensorHomModel and importer IntegralTensorReductionTowerComparison unchanged); fixed set of 10 modules compiled with run_set, exit 0; checker rule stage3_delivery.py:602-606 (Status must start with open)"
+ }
+}

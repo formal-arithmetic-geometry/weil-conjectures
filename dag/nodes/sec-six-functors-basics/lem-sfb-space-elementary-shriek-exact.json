@@ -1,0 +1,297 @@
+{
+ "id": "lem-sfb-space-elementary-shriek-exact",
+ "kind": "statement",
+ "title": "The elementary-square sequence of exact etale sum functors",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$ with its small etale structure sheaf [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Let $j_U:U\\hookrightarrow X$ be an open subspace [def-a1-space-open-subspace], let $j_V:V\\to X$ be representable etale, and suppose $V\\times_XE\\to E$ is an isomorphism, where $E$ is the reduced closed subspace supported on $|X|\\setminus|U|$ [lem-sfb-space-reduced-closed-support, def-a1-space-point-topology]. Put $T=U\\times_XV$ and $j_T:T\\to X$. For $Z=U,V,T$, restriction $j_Z^*$ on structure-sheaf modules [def-weil-sheaf-of-modules-category, def-trf-space-etale-module-functors] is exact; write $j_{Z!}$ for its exact left adjoint, given by module sheafification of the presheaf of direct sums indexed by lifts to $Z$. Put $E_Z=j_{Z!}j_Z^*$. The counits and restriction between the slices give a natural short exact sequence of exact additive endofunctors on module sheaves:\n$$0\\longrightarrow E_T\\xrightarrow{(+,-)}E_U\\oplus E_V\\xrightarrow{(+,+)}\\mathrm{id}\\longrightarrow0.$$\nHere $(+,-)$ is the pair of the two extension-by-zero counits from the overlap (negative in the $V$ component), and $(+,+)$ is the sum of the evaluation counits. The same assertion holds for the base-changed square along every morphism $h:X_1\\to X$ of algebraic spaces, with no flatness hypothesis; its reduced complement is taken after base change. No quasi-compactness or separation condition on $V\\to X$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08GV (lemma-exact-sequence-lower-shriek), clause (1) and geometric-point proof; Tag 08GN (lemma-make-more-elementary-distinguished-squares); exact localized adjunction: sites-modules.tex Tags 03DI (lemma-extension-by-zero), 03DJ (lemma-extension-by-zero-exact)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-space-etale-module-functors",
+  "def-a1-space-open-subspace",
+  "lem-sfb-space-reduced-closed-support",
+  "def-a1-space-point-topology"
+ ],
+ "proof": [
+  {
+   "text": "Work on the enlarged etale ringed site of $X$. The equivalence with the small scheme site and its module categories, and the ringed localization identification for $j_U,j_V,j_T$, are supplied by [lem-trf-space-enlarged-etale-ringed-site-model]. Their restrictions are the module pullbacks in the statement. Apply [lem-pur-site-restriction-module-adjunction-exact] to each of these objects: $j_Z^*$ and the sheafified direct-sum functor $j_{Z!}$ are exact and $j_{Z!}\\dashv j_Z^*$. They are additive: restriction acts sectionwise, while the direct-sum presheaf and sheafification act linearly on module morphisms. Thus every $E_Z$ is exact additive. The finite sum $E_U\\oplus E_V$ is exact too: a pair belongs to the kernel of its outgoing map exactly when each component does, and lifts of the two components combine to a lift of the pair.",
+   "uses": [
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Mayer-Vietoris section before Tag 08GV; sites-modules.tex Tags 03DI and 03DJ"
+   }
+  },
+  {
+   "text": "For a module $F$, write the presheaf underlying $E_ZF$ as $P_Z(W)=\\bigoplus_{a:W\\to Z\\text{ over }X}F(W)$, using [def-weil-extension-by-zero-presheaf]. For a projection $q:T\\to Z$, send the $a$-summand of $P_T(W)$ identically into the $qa$-summand of $P_Z(W)$; define $P_Z(W)\\to F(W)$ by summing the components. Restrictions commute with these maps since both send an index to its composite with the test arrow. The maps are module-linear and natural in $F$, hence induce module-sheaf maps by [def-weil-presheaf-modules-sheafification]. These are the counit maps: a map from the sum presheaf to a sheaf is uniquely determined by its maps on summands, and the adjunction sends the identity of $j_Z^*F$ to this evaluation map. Subtract the overlap map in the $V$ component to obtain $d:E_TF\\to E_UF\\oplus E_VF$, and add the two evaluation maps to obtain $e:E_UF\\oplus E_VF\\to F$. On every summand of $P_T(W)$, $ed$ is $s-s=0$, so $ed=0$ after sheafification.",
+   "uses": [
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI (lemma-extension-by-zero), maps on the direct-sum presheaf in its proof"
+   }
+  },
+  {
+   "text": "Fix a geometric point $\\bar x:\\operatorname{Spec}\\Omega\\to X$ and put $M=F_{\\bar x}$. By [lem-sfb-space-etale-sum-stalks], the stalk of the constructed sequence is\n$$0\\to\\bigoplus_{A\\times B}M\\xrightarrow{d}\\bigoplus_A M\\oplus\\bigoplus_B M\\xrightarrow{e}M\\to0,$$\nwhere $A=L_{j_U}(\\bar x)$ and $B=L_{j_V}(\\bar x)$. The fibre-product universal property [lem-trf-space-fibre-products-etale-covers] identifies $L_{j_T}(\\bar x)$ with $A\\times B$. The formula in the stalk lemma identifies $d$ with the two summand-reindexing maps, negative on the second, and identifies $e$ with addition of all components. These formulas involve finite-support sums, even when $B$ is infinite.",
+   "uses": [
+    "lem-sfb-space-etale-sum-stalks",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08GV(1), first displayed stalk sequence, using Tag 08GU"
+   }
+  },
+  {
+   "text": "An open subspace pulls back to an open subscheme of $\\operatorname{Spec}\\Omega$ [def-a1-space-open-subspace]. Thus $A$ is either a singleton or empty. If $A$ is a singleton, identify $\\bigoplus_{A\\times B}M=\\bigoplus_BM$; the maps are $b\\mapsto(\\sum b,-b)$ and $(a,c)\\mapsto a+\\sum c$. The first is injective by its second component, the second is onto by $m\\mapsto(m,0)$, and if $a+\\sum c=0$ then $(a,c)=d(-c)$. If $A$ is empty, the point of $X$ lies in $|E|$. The pullback $E\\times_X\\operatorname{Spec}\\Omega$ is a closed subscheme with nonempty support by [lem-sfb-space-reduced-closed-support]; it equals $\\operatorname{Spec}\\Omega$, since a proper ideal in a field is zero. The hypothesis $V\\times_XE\\cong E$ now makes $B$ a singleton. The stalk sequence is $0\\to0\\to M\\xrightarrow{\\mathrm{id}}M\\to0$. This proves exactness in both cases, including $B=\\varnothing$ in the first case.",
+   "uses": [
+    "def-a1-space-open-subspace",
+    "lem-sfb-space-reduced-closed-support"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08GV(1), final sentence of the stalk proof, with its two elementary module calculations expanded"
+   }
+  },
+  {
+   "text": "Geometric stalks detect exactness here. Indeed [lem-weil-pbc-module-sheaves-colimits-forgetful] identifies module kernels and cokernels with those of the underlying abelian sheaves. The finite-limit and colimit preservation and injectivity/surjectivity tests of [lem-sfb-space-etale-conservative-geometric-points] pass to their induced abelian-group stalks: kernels are finite limits, and quotient by the image is the coequalizer of its equivalence relation. Thus stalkwise exactness and the already proved $ed=0$ give the short exact sequence of module sheaves. Since the maps in step 2 are natural in $F$, this is the claimed natural short exact sequence of exact additive endofunctors.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-sfb-space-etale-conservative-geometric-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08GV(1), reduction to geometric stalks by spaces-properties.tex Tag 04K5 (theorem-exactness-stalks)"
+   }
+  },
+  {
+   "text": "Let $h:X_1\\to X$ be arbitrary. Fibre products of spaces exist and etale maps remain etale after this base change [lem-trf-space-fibre-products-etale-covers, lem-trf-space-chartwise-etale-permanence]; $U_1$ is an open subspace directly by the scheme-test definition [def-a1-space-open-subspace]. Construct the functors and maps on $X_1$ exactly as in steps 1 and 2. For every $\\bar x_1:\\operatorname{Spec}\\Omega\\to X_1$, the fibre-product universal property identifies its lifts to $U_1,V_1,T_1$ with the lifts of $h\\bar x_1$ to $U,V,T$, respecting both projections. Consequently step 4 applies verbatim, now with $M=(F_1)_{\\bar x_1}$ for an arbitrary module $F_1$ on $X_1$; steps 3 and 5 on $X_1$ prove the claimed short exact sequence. Its reduced closed complement exists by [lem-sfb-space-reduced-closed-support] and is taken on $X_1$. This argument does not identify it with the possibly nonreduced $E\\times_XX_1$: the lift calculation suffices directly. In particular it uses no flatness of $h$, no exactness of $h^*$, and no finiteness of $B$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-chartwise-etale-permanence",
+    "def-a1-space-open-subspace",
+    "lem-sfb-space-reduced-closed-support",
+    "lem-sfb-space-etale-sum-stalks",
+    "lem-sfb-space-etale-conservative-geometric-points",
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08GN (lemma-make-more-elementary-distinguished-squares)(2) and Tag 08GV(1), direct geometric-fibre verification after arbitrary base change"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-a1-space-open-subspace",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sfb-space-etale-conservative-geometric-points",
+  "lem-sfb-space-etale-sum-stalks",
+  "lem-sfb-space-reduced-closed-support",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08GV(1), with the explicit summand/counit construction from sites-modules.tex Tag 03DI and stalk formula Tag 0710; Tag 08GN(2) is verified directly on geometric fibres for the final assertion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Short exact sequence of extension by zero restrictions for an elementary distinguished square of algebraic spaces with structure sheaf modules",
+   "results": "[leanfinder] OK 8 hit(s): CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁. Read: the short complex is free abelian sheaves on representables, not endofunctors of structure-sheaf module sheaves.",
+   "date": "2026-10-23",
+   "verdict": "no match: generic free-abelian MayerVietorisSquare statement does not give this exact module-endofunctor sequence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mayer Vietoris exact sequence of modules using etale extension by zero on a Nisnevich distinguished square",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare), S.shortComplex.Exact\", \"doc\": \"Given a Mayer-Vietoris square $ S $ in a category $ \\\\mathcal{C} $ equipped with a Grothendieck topology $ J $, the associated short complex in the category of sheaves on $ \\\\mathcal{C} $ with values in\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare), S.shortComplex.ShortExact\", \"doc\": \"Given a Mayer-Vietoris square $S$ in a category $\\\\mathcal{C}$ with Grothendieck topology $J$, the associated short complex in the category of sheaves on $\\\\mathcal{C}$ with values in additive commutati\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] →\\n        [CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          J.MayerVietorisSquare → CategoryTheory.ShortComplex (CategoryTh\", \"doc\": \"Given a Mayer-Vietoris square $S$ in a category $\\\\mathcal{C}$ with Grothendieck topology $J$, this constructs a short complex in the category of sheaves on $\\\\mathcal{C}$ with values in additive commut\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare),\\n  S.shortComplex.X₂ =\\n    ((CategoryTheory.presheafToSheaf \", \"doc\": \"In a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$, for a Mayer-Vietoris square $S$, the second object $X_2$ of the associated Mayer-Vietoris short complex in the category of sheave\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare),\\n  S.shortComplex.g =\\n    CategoryTheory.Limits.biprod.desc\\n\", \"doc\": \"For a Mayer-Vietoris square $S$ in a category $\\\\mathcal{C}$ with Grothendieck topology $J$, the second differential $g$ in the associated short complex of sheaves with additive commutative group coeff\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare),\\n  S.shortComplex.X₁ =\\n    (CategoryTheory.presheafToSheaf J\", \"doc\": \"For a Mayer-Vietoris square $ S $ in a category $ \\\\mathcal{C} $ equipped with a Grothendieck topology $ J $, the first object $ X_1 $ of the associated Mayer-Vietoris short complex is given by sheafif\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare),\\n  S.shortComplex.X₃ =\\n    (CategoryTheory.presheafToSheaf J\", \"doc\": \"The third object $X_3$ in the Mayer-Vietoris short complex associated to a Mayer-Vietoris square $S$ in a category $\\\\mathcal{C}$ with Grothendieck topology $J$ is given by sheafifying the Yoneda embed\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare),\\n  S.shortComplex.f =\\n    CategoryTheory.Limits.biprod.lift\\n\", \"doc\": \"For a Mayer-Vietoris square $ S $ in a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, the differential $ f $ of the associated short complex in the category of sheaves with values in addit\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the generic MayerVietorisSquare short complex is for free abelian sheaves of representables, not these endofunctors on all structure-sheaf modules of algebraic spaces; generic slice adjunctions do not prove this geometric exact sequence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Elementary distinguished square algebraic spaces extension by zero module short exact sequence",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.ShortComplex.ShortExact\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.ShortExact\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C] → CategoryTheory.ShortComplex C → Prop\", \"doc\": \"A short complex in a category with zero morphisms is exact if it satisfies the exactness conditions, meaning that the image of each differential equals the kernel of the subsequent differential.\"}\n  {\"name\": \"TrivSqZeroExt\", \"module\": \"Mathlib.Algebra.TrivSqZeroExt\", \"type\": \"(R : Type u) (M : Type v)\", \"doc\": \"The trivial square-zero extension of a ring $ R $ by an $ R $-module $ M $, defined as the direct product $ R \\times M $ equipped with component-wise addition and multiplication where the product of an\"}\n  {\"name\": \"TrivSqZeroExt.inr\", \"module\": \"Mathlib.Algebra.TrivSqZeroExt\", \"type\": \"[Zero R] (m : M) : tsze R M\", \"doc\": \"The function $ \\\\text{inr} $ maps an element $ m $ of the $ R $-module $ M $ to the pair $ (0, m) $ in the trivial square-zero extension $ R \\\\times M $. This constructs the canonical inclusion of $ M $\"}\n  {\"name\": \"TrivSqZeroExt.inl\", \"module\": \"Mathlib.Algebra.TrivSqZeroExt\", \"type\": \"[Zero M] (r : R) : tsze R M\", \"doc\": \"The function maps each element $ r $ of a ring $ R $ to the pair $ (r, 0) $ in the trivial square-zero extension $ R \\times M $, where $ M $ is an $ R $-module. This extension forms a ring structure wi\"}\n  {\"name\": \"TrivSqZeroExt.instNontrivial_of_right\", \"module\": \"Mathlib.Algebra.TrivSqZeroExt\", \"type\": \"{R M : Type*} [Nonempty R] [Nontrivial M] : Nontrivial (TrivSqZeroExt R M)\", \"doc\": \"If $ R $ is a nonempty type and $ M $ is a nontrivial $ R $-module, then the trivial square-zero extension $ R \\times M $ is a nontrivial type.\"}\n  {\"name\": \"TrivSqZeroExt.lift\", \"module\": \"Mathlib.Algebra.TrivSqZeroExt\", \"type\": \"(f : R →ₐ[S] A) (g : M →ₗ[S] A) (hg : ∀ x y, g x * g y = 0) (hfg : ∀ r x, g (r •> x) = f r * g x)\\n  (hgf : ∀ r x, g (x <• r) = g x * f r) : tsze R M →ₐ[S] A\", \"doc\": \"Given an $ S $-algebra homomorphism $ f: R → A $ and an $ S $-linear map $ g: M → A $ satisfying $ g(x)g(y) = 0 $ for all $ x,y ∈ M $, along with compatibility conditions $ g(r ⋅ x) = f(r)g(x) $ and $\"}\n  {\"name\": \"TrivSqZeroExt.snd_zero\", \"module\": \"Mathlib.Algebra.TrivSqZeroExt\", \"type\": \"[Zero R] [Zero M] : (0 : tsze R M).snd = 0\", \"doc\": \"The second component of the zero element in the trivial square-zero extension $ R \\\\times M $ is equal to the zero element of the module $ M $, i.e., $ (0_R, 0_M).\\\\text{snd} = 0_M $.\"}\n  {\"name\": \"TrivSqZeroExt.inrHom\", \"module\": \"Mathlib.Algebra.TrivSqZeroExt\", \"type\": \"[Semiring R] [AddCommMonoid M] [Module R M] : M →ₗ[R] tsze R M\", \"doc\": \"The linear map sending each element $ m $ of the $ R $-module $ M $ to the pair $ (0, m) $ in the trivial square-zero extension $ R \\\\times M $, embedding $ M $ as an ideal with zero multiplication in \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the generic MayerVietorisSquare short complex is for free abelian sheaves of representables, not these endofunctors on all structure-sheaf modules of algebraic spaces; generic slice adjunctions do not prove this geometric exact sequence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MayerVietorisSquare\", \"shortExact\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\", \"module\": \"Mathlib.CategoryTheory.Sites.MayerVietorisSquare\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} [CategoryTheory.HasWeakSheafify J (Type v)] [CategoryTheory.HasSheafify J AddCommGrpCat] (S : J.MayerVietorisSquare) : S.shortComplex.ShortExact\", \"doc\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the generic MayerVietorisSquare short complex is for free abelian sheaves of representables, not these endofunctors on all structure-sheaf modules of algebraic spaces; generic slice adjunctions do not prove this geometric exact sequence"
+  },
+  {
+   "tool": "grep",
+   "query": "mayer.?vietoris|elementary.*distinguished",
+   "results": "[grep] OK 15 hit(s)\n  {\"file\": \"Mathlib/Topology/Sheaves/MayerVietoris.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.CategoryTheory.Sites.MayerVietorisSquare\"}\n  {\"file\": \"Mathlib/Topology/Sheaves/MayerVietoris.lean\", \"line\": \"12\", \"text\": \"# Mayer-Vietoris squares\"}\n  {\"file\": \"Mathlib/Topology/Sheaves/MayerVietoris.lean\", \"line\": \"15\", \"text\": \"we construct the associated Mayer-Vietoris square:\"}\n  {\"file\": \"Mathlib/Topology/Sheaves/MayerVietoris.lean\", \"line\": \"36\", \"text\": \"a Mayer-Vietoris square. -/\"}\n  {\"file\": \"Mathlib/Topology/Sheaves/MayerVietoris.lean\", \"line\": \"38\", \"text\": \"noncomputable def mayerVietorisSquare' (sq : Square (Opens T))\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\", \"line\": \"19\", \"text\": \"# Mayer-Vietoris squares\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\", \"line\": \"22\", \"text\": \"Mayer-Vietoris sequences in sheaf cohomology. If `X₄` is an open subset\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\", \"line\": \"30\", \"text\": \"`GrothendieckTopology.MayerVietorisSquare` which extends `Square C`,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\", \"line\": \"32\", \"text\": \"exact Mayer-Vietoris sequences in sheaf cohomology (TODO).\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\", \"line\": \"46\", \"text\": \"Given a Mayer-Vietoris square `S` and a presheaf `P` on `C`,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.CategoryTheory.Sites.MayerVietorisSquare\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"line\": \"14\", \"text\": \"# The Mayer-Vietoris exact sequence in sheaf cohomology\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"line\": \"17\", \"text\": \"Let `S : J.MayerVietorisSquare` be a Mayer-Vietoris square for `J`.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"line\": \"20\", \"text\": \"In this file, we obtain a long exact Mayer-Vietoris sequence:\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"line\": \"38\", \"text\": \"namespace GrothendieckTopology.MayerVietorisSquare\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the generic MayerVietorisSquare short complex is for free abelian sheaves of representables, not these endofunctors on all structure-sheaf modules of algebraic spaces; generic slice adjunctions do not prove this geometric exact sequence"
+  },
+  {
+   "tool": "grep",
+   "query": "overPushforwardOver|overMapPushforward|extensionByZero|lowerShriek",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"line\": \"342\", \"text\": \"def overPushforwardOverAdj (x : C) :\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"line\": \"351\", \"text\": \"  exists_rightAdjoint := ⟨_, Nonempty.intro (overPushforwardOverAdj x)⟩\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"line\": \"357\", \"text\": \"def overMapPushforwardAdj [HasPullbacks C] {X Y : C} (f : X ⟶ Y) :\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"line\": \"366\", \"text\": \"  (overMapPushforwardAdj R f).isLeftAdjoint\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the generic MayerVietorisSquare short complex is for free abelian sheaves of representables, not these endofunctors on all structure-sheaf modules of algebraic spaces; generic slice adjunctions do not prove this geometric exact sequence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Elementary distinguished square algebraic spaces exact sequence of etale sum extension module sheaves",
+   "results": "Hits read: Algebra.Generators.CotangentSpace.exact, Algebra.Generators.H1Cotangent.exact_map_δ, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, Algebra.Generators.H1Cotangent.exact_map_δ', Algebra.H1Cotangent.exact_map_δ, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.Generators.H1Cotangent.exact_δ_map",
+   "date": "2026-10-23",
+   "verdict": "no match: MayerVietorisSquare.shortComplex_shortExact concerns sheafified free abelian representables (lines 231-265), not the asserted functors on all structure-sheaf modules of algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic space etale sum extension module short exact sequence elementary distinguished square",
+   "results": "Hits read: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, RingHom.Etale, AlgebraicGeometry.IsEtale, LieAlgebra.Extension.IsExtension, AlgebraicGeometry.Scheme.Etale, Algebra.FormallyEtale.iff_exists_algEquiv_prod, RingHom.Etale.ofLocalizationSpan, Algebra.Etale",
+   "date": "2026-10-23",
+   "verdict": "no match: MayerVietorisSquare.shortComplex_shortExact concerns sheafified free abelian representables (lines 231-265), not the asserted functors on all structure-sheaf modules of algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-relative-mv-exchange-triangles",
+  "date": "2026-10-23",
+  "group": "Q116"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 0A1K (lemma-base-change-tensor), statement and precise canonical map in the proof; sites-cohomology.tex Tags 07A6 (lemma-adjoint) and 07A7 (remark-base-change). Supporting input to 0A1K: Tag 0DKH (lemma-single-complex-base-change), with condition (1) of Tag 0DKG (lemma-single-complex-base-change-condition) and equation-bc immediately before it; the canonical exchange is the map specified there and explicitly defined in the statement. Supporting input: Tag 0DKH induction step: canonical commutative relative Mayer–Vietoris triangle diagram, before applying third-isomorphism-triangle. Supporting input: Tag 08JK resolution sequence, via the exact left-adjoint sequence of Tag 08GV.",
+   "via": [
+    "lem-sfb-space-relative-mv-exchange-triangles",
+    "lem-sfb-space-single-complex-base-change",
+    "lem-sfb-space-flat-complex-base-change",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-elementary-shriek-exact",
+  "worker": "stage1",
+  "summary": "Expanded the two geometric-stalk module calculations of 08GV(1), constructed the signed maps on sum presheaves, reused exact ringed localization and conservative space points, and isolated only the normalized structure-sheaf module sum-stalk formula. Arbitrary-base-change exactness is proved on the same geometric lift sets without assuming flatness or reducedness of the old complement after base change. Statement unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 0A1K (lemma-base-change-tensor), statement and precise canonical map in the proof; sites-cohomology.tex Tags 07A6 (lemma-adjoint) and 07A7 (remark-base-change). Supporting input to 0A1K: Tag 0DKH (lemma-single-complex-base-change), with condition (1) of Tag 0DKG (lemma-single-complex-base-change-condition) and equation-bc immediately before it; the canonical exchange is the map specified there and explicitly defined in the statement. Supporting input: Tag 0DKH induction step: canonical commutative relative Mayer–Vietoris triangle diagram, before applying third-isomorphism-triangle. Supporting input: Tag 08JK resolution sequence, via the exact left-adjoint sequence of Tag 08GV. The six steps realize the 08GV left-adjoint exact-sequence input to the 08JK/0DKH relative Mayer-Vietoris construction. No change to the unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic etale ringed-site/module localization or point-calculus input used in the source proof of 08GV; it does not replace the alteration or direct-image route, and no node of this unit states this general input."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic etale ringed-site/module localization or point-calculus input used in the source proof of 08GV; it does not replace the alteration or direct-image route, and no node of this unit states this general input."
+   },
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "Generic etale ringed-site/module localization or point-calculus input used in the source proof of 08GV; it does not replace the alteration or direct-image route, and no node of this unit states this general input."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic etale ringed-site/module localization or point-calculus input used in the source proof of 08GV; it does not replace the alteration or direct-image route, and no node of this unit states this general input."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic etale ringed-site/module localization or point-calculus input used in the source proof of 08GV; it does not replace the alteration or direct-image route, and no node of this unit states this general input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q69-eb87fe2c9",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-eb87fe2c9 (reviewer sub-agent of L); spot-checked: I read the item, its 6 steps and the new node lem-sfb-space-etale-sum-stalks in full, and checked the Stacks sources. Tag 08GV(1): statement and geometric-stalk proof (spaces-perfect.tex lines 1606-1640), with equations stalk-restriction and 08GU. Tag 08GN(2): base change; its source proof is omitted. Tag 0710: regrouping by lifts. Tag 04K5: stalk test; its final 'points of S' is a typo for X. Every cited statement says what the step takes from it. Step 1: the enlarged site gives the localization C_X/Z≅C_Z and the module equivalence; the adjunction node gives exact j^*, j_! and j_!⊣j^*. Step 2: the summand construction is correct, and ed=s−s=0. Step 3: the lifts to T are pairs (A×B) by the fibre-product property. Step 4: I checked the calculation by hand. d(c)=(Σc,−c) is injective, e is surjective, and if a+Σc=0 then (a,c)=d(−c); B=∅ also works. In the empty case the closed subscheme with full support in Spec Ω is all of it, so x̄ factors through E and V×E≅E gives exactly one lift. Small omission: step 4 does not cite the fibre-product node itself; that node is cited in steps 3 and 6 and the inference is one line. Step 5: kernels, cokernels and stalks are handled correctly. Step 6: lifts after base change equal the lifts of hx̄_1, so no flatness or reducedness is needed. The new node is not a clause of the item (D1). It is not a duplicate: lem-amb-etale-sum-stalks covers schemes with a constant ring, lem-weil-pbc-extension-by-zero-stalks covers open immersions, lem-trf-topos-complement-module-stalks is subterminal, and lem-sfb-space-etale-sum-pullback is a tensor base-change statement. Edge cases hold: empty or infinite fibres, j=id, G=0. Its searches are 8 queries over all three kinds. Accepted tool uses: pur restriction adjunction, pbc forgetful functor, trf fibre products, trf chartwise étale permanence, trf enlarged site. Batch-5 flags: I computed the closures of lem-trf-space-chartwise-etale-permanence, lem-trf-space-enlarged-etale-ringed-site-model, lem-trf-space-fibre-products-etale-covers, def-trf-algebraic-space and lem-sfb-space-geometric-points-conservative. They contain only algebraic-space foundations (atlas tests, descent, enlarged site), with no theorem, trace-transport, Poincaré-duality or batch-4 node. They are general foundations, not steps of the trace formula or Poincaré duality, so I accept them. Item small cases checked: U=X, U=∅, X=∅, nonflat h. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ElementaryEtaleShriekExact",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.elementary_etale_shriek_exact",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.etaleModuleRestriction_isRightAdjoint",
+   "AlgebraicGeometry.AlgebraicSpace.etaleModuleShriek",
+   "AlgebraicGeometry.AlgebraicSpace.etaleModuleShriekAdjunction",
+   "AlgebraicGeometry.AlgebraicSpace.etaleModuleSum",
+   "AlgebraicGeometry.AlgebraicSpace.etaleModuleSumCounit",
+   "AlgebraicGeometry.AlgebraicSpace.etaleModuleRestrictionComp",
+   "AlgebraicGeometry.AlgebraicSpace.etaleModuleSumMap",
+   "AlgebraicGeometry.AlgebraicSpace.etaleModules_binaryBiproducts",
+   "AlgebraicGeometry.AlgebraicSpace.etaleModuleEndofunctors_binaryBiproducts",
+   "AlgebraicGeometry.AlgebraicSpace.etaleModuleSumCongr",
+   "AlgebraicGeometry.AlgebraicSpace.etaleModuleSumMapOver",
+   "AlgebraicGeometry.AlgebraicSpace.elementaryEtaleSumDifferential",
+   "AlgebraicGeometry.AlgebraicSpace.elementaryEtaleSumEvaluation",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleModuleSumExact",
+   "AlgebraicGeometry.AlgebraicSpace.ElementaryEtaleSumExact",
+   "AlgebraicGeometry.AlgebraicSpace.elementary_etale_shriek_exact"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ElementaryEtaleShriekExact.lean",
+  "statement": "theorem elementary_etale_shriek_exact {U V : AlgebraicSpace S} (jU : U ⟶ X) (jV : V ⟶ X) (hU : IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) jU.hom.hom) (hV : IsEtale jV.hom.hom) (E : ClosedSubspace X) (hE : IsReduced (E.val : AlgebraicSpace S)) (hSupport : pointImage E.val.arrow.hom.hom = (pointImage jU.hom.hom)ᶜ) (hIso : IsIso (Limits.pullback.snd jV.hom E.val.arrow.hom)) : ElementaryEtaleSumExact jU jV hV ∧ ∀ (X₁ U₁ V₁ : AlgebraicSpace S) (h : X₁ ⟶ X) (jU₁ : U₁ ⟶ X₁) (jV₁ : V₁ ⟶ X₁) (pU : U₁ ⟶ U) (pV : V₁ ⟶ V), IsPullback pU jU₁ jU h → IsPullback pV jV₁ jV h → ∃ hV₁ : IsEtale jV₁.hom.hom, ElementaryEtaleSumExact jU₁ jV₁ hV₁ ∧ ∃ E₁ : ClosedSubspace X₁, IsReduced (E₁.val : AlgebraicSpace S) ∧ pointImage E₁.val.arrow.hom.hom = (pointImage jU₁.hom.hom)ᶜ ∧ IsIso (Limits.pullback.snd jV₁.hom E₁.val.arrow.hom)",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The main theorem states the exact additive endofunctor sequence and arbitrary base change. Helpers construct the actual small-site restriction adjoint, its counit, restriction-composition comparison, counit-induced overlap maps and signed differentials. Extension is selected by the adjunction universal property of the recorded restriction, which determines the object up to unique adjunction-compatible isomorphism; its construction is the existing localized direct-sum sheafification transported through the enlarged-site equivalence. No arbitrary maps, coefficient lifts, additional geometric assumptions or alternate module categories are supplied."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-441e992be",
+  "group": "NB",
+  "result": "pass",
+  "note": "Read item, 6 proof steps, 8 stmt_deps and the live Lean of AlgebraicSpace (IsEtale, pullback, Modules), OpenSubspace, ClosedSubspace, IsReduced, pointImage, exists_unique_reduced_closed_subspace, smallEnlargedModuleEquivalence. Hypotheses match: open immersion predicate = OpenSubspace's; IsEtale with no qc/separation; reduced E with support (pointImage jU)ᶜ; IsIso pullback.snd. Conclusion: ∀ pullback presentations T; exactness and additivity of j^*, j_!, E_Z for U,V,T and of E_U⊞E_V; d = biprod.lift(m_U, −m_V) with m the canonical transposed counit-induced reindexing map; e = biprod.desc of counits; ShortExact in the endofunctor category. Base change: ∀ h, both IsPullback squares, jV₁ étale, same sequence, ∃ E₁ reduced on X₁ with V₁×E₁≅E₁ (08GN(2); true via the support lemma plus reducedness; the citer derived-hom-MV relies on it). j_! from the universal property is allowed by AGENTS.md (No hollow definitions); no other hollow data. Edge cases ok. No duplicate in Mathlib or the project, no name clash. Docstrings, source and blueprint present; report sections present. Advisory: E₁ iso argument not spelled out in step 6; ClosedSubspace/IsReduced owners outside stmt_deps but used as in the cited support lemma; second reading is a self-audit. No compile: no file changed."
+ }
+}

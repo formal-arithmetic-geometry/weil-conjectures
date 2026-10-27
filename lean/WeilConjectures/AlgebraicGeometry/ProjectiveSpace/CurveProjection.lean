@@ -37,14 +37,19 @@ namespace AlgebraicGeometry
 
 /-- **The homogeneous coordinate model**: an integral closed subscheme `X` of `ℙ(n; Spec k)`
 is, over `k`, isomorphic to `Proj S` for a standard graded `k`-algebra `S` which is a domain,
-namely the quotient of the polynomial ring by the homogeneous ideal of `X`
-(blueprint: `lem-pc-projective-coordinate-model`). -/
+and `i` is the closed immersion `Proj S ⟶ ℙ(n; Spec k)` given by linear forms `l_j ∈ S₁`
+(`AlgebraicGeometry.Proj.linearProjection`) which generate `S`. Thus
+`k[x_j]_{j ∈ n} ⟶ S`, `x_j ↦ l_j`, is a surjection of graded `k`-algebras, `S ≅ k[x_j] / I` for
+its kernel `I`, a homogeneous prime ideal since `S` is a domain, and `i` identifies `X` with
+`Proj (k[x_j] / I)` (blueprint: `lem-pc-projective-coordinate-model`). -/
 theorem exists_isStandard_iso_proj {k : Type u} [Field k] {n : Type u} [Finite n]
     (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsIntegral X] (i : X ⟶ ℙ(n; Spec (.of k)))
     [IsClosedImmersion i] [i.IsOver (Spec (.of k))] :
     ∃ (S : Type u) (_ : CommRing S) (_ : Algebra k S) (𝒜 : ℕ → Submodule k S)
       (_ : GradedAlgebra 𝒜), GradedAlgebra.IsStandard 𝒜 ∧ IsDomain S ∧
-        ∃ e : X ≅ Proj 𝒜, e.hom ≫ Proj.toSpecBase 𝒜 = X ↘ Spec (.of k) := by
+        ∃ e : X ≅ Proj 𝒜, e.hom ≫ Proj.toSpecBase 𝒜 = X ↘ Spec (.of k) ∧
+          ∃ (l : n → S) (hl : ∀ j, l j ∈ 𝒜 1) (hcov : ⨆ j, Proj.basicOpen 𝒜 (l j) = ⊤),
+            Algebra.adjoin k (Set.range l) = ⊤ ∧ e.hom ≫ Proj.linearProjection 𝒜 l hl hcov = i := by
   classical
   -- A standard chart `U = D₊(T_{j₀})` containing the image of the generic point of `X`.
   obtain ⟨j₀, hj₀⟩ : ∃ j, i (genericPoint X) ∈ ProjectiveSpace.standardOpen n (Spec (.of k)) j :=
@@ -75,8 +80,8 @@ theorem exists_isStandard_iso_proj {k : Type u} [Field k] {n : Type u} [Finite n
     exact fun r ↦ surjective_of_isClosedImmersion_SpecMap
       (CommRingCat.ofHom (MvPolynomial.aeval (R := k) v).toRingHom) r
   -- The projective closure `p : Proj S ⟶ ℙ(n; Spec k)` of the chart.
-  obtain ⟨S, _, _, 𝒜, _, hstd, _, p, hp, hpover, ⟨x₀, hx₀, hsp⟩, ψ, hψ⟩ :=
-    Proj.exists_isClosedImmersion_chart j₀ v hv
+  obtain ⟨S, _, _, 𝒜, _, hstd, _, l, hl, hcov, hadj, p, hpl, hp, hpover, ⟨x₀, hx₀, hsp⟩, ψ,
+    hψ⟩ := Proj.exists_isClosedImmersion_chart j₀ v hv
   have : IsReduced (Proj 𝒜) := Proj.isReduced_of_isDomain 𝒜
   have key : W.toScheme.isoSpec.inv ≫ W.ι ≫ i = ψ.hom ≫ (p ⁻¹ᵁ U).ι ≫ p := by
     have k1 : W.toScheme.isoSpec.inv ≫ (i ∣_ U) = ψ.hom ≫ (p ∣_ U) := by
@@ -105,7 +110,8 @@ theorem exists_isStandard_iso_proj {k : Type u} [Field k] {n : Type u} [Finite n
       exact ((hsp x).map p.continuous).mem_closed hcl_i hpx₀
   -- Conclusion.
   obtain ⟨e, he⟩ := IsClosedImmersion.exists_iso_of_range_eq i p hrange
-  refine ⟨S, inferInstance, inferInstance, 𝒜, inferInstance, hstd, inferInstance, e, ?_⟩
+  refine ⟨S, inferInstance, inferInstance, 𝒜, inferInstance, hstd, inferInstance, e, ?_, l, hl,
+    hcov, hadj, hpl ▸ he⟩
   rw [← hpover, ← Category.assoc, he, comp_over]
 
 /-- **A projective curve admits a finite morphism to the projective line**: if `k` is an
@@ -120,7 +126,7 @@ theorem exists_isFinite_toProjectiveLine {k : Type u} [Field k] [Infinite k] {n 
     (hdim : topologicalKrullDim X = 1) :
     ∃ π : X ⟶ ProjectiveLine (Spec (.of k)),
       IsFinite π ∧ π ≫ ProjectiveLine (Spec (.of k)) ↘ Spec (.of k) = X ↘ Spec (.of k) := by
-  obtain ⟨S, _, _, 𝒜, _, hstd, _, e, he⟩ := exists_isStandard_iso_proj X i
+  obtain ⟨S, _, _, 𝒜, _, hstd, _, e, he, -⟩ := exists_isStandard_iso_proj X i
   have hdim' : topologicalKrullDim (ProjectiveSpectrum 𝒜) = 1 :=
     (IsHomeomorph.topologicalKrullDim_eq _ e.hom.homeomorph.isHomeomorph).symm.trans hdim
   obtain ⟨l₀, h₀, l₁, h₁, hcov⟩ := GradedAlgebra.IsStandard.exists_basicOpen_sup_eq_top hdim'

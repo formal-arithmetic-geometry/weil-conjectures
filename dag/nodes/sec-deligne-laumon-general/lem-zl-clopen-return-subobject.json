@@ -1,0 +1,143 @@
+{
+ "id": "lem-zl-clopen-return-subobject",
+ "kind": "statement",
+ "title": "Lifting subobjects from a distinguished clopen return sheet",
+ "statement": "Let k₁/k₀ be an extension of finite fields and ℓ invertible in both. Let X/k₀ be smooth and finite type and C/k₁ geometrically connected and finite type, with an open and closed immersion c:C→X commuting with structural maps [def-sbc-smooth-morphisms]. Let #k₁=(#k₀)^r. Let v:Cbar→Xbar have projection Cbar→C→X and closure projection given by the inverse fixed k₀-algebra isomorphism k₁bar≃k₀bar, and suppose Fr_C;v=v;Fr_X^r. Let P be the explicit powered pullback [def-zl-powered-geometric-pullback]. For every lisse source Weil sheaf V and every lisse Weil sheaf G on C with a monomorphism i:G→P(V), there are a lisse source Weil sheaf U, a monomorphism j:U→V, and an isomorphism e:P(U)≃G such that P(j)=e.hom;i [def-weil-weil-sheaf-complex] [def-pod-lisse-l-adic-sheaves]. No simplicity or nonzero-stalk assumption is made.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraphs 1--3 and 7: geometric constituents, two-point curve restriction and local Frobenius powers; geometric socle/Frobenius orbit step in sk-i-dl-general-real."
+ },
+ "stmt_deps": [
+  "def-weil-weil-sheaf-complex",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-sbc-smooth-morphisms",
+  "def-zl-powered-geometric-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Prove that v is an open and closed immersion from its two geometric projection equations. Form the explicit image of the free Frobenius algebra on v_! of the carrier of G. Its image inclusion is monic, and the canonical zero-th generator recovers the carrier map of i.",
+   "uses": [
+    "lem-zl-clopen-return-sheet-open",
+    "def-zl-frobenius-saturation",
+    "def-zl-powered-pullback-carrier"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraphs 1--3 and 7: geometric constituents, two-point curve restriction and local Frobenius powers; geometric socle/Frobenius orbit step in sk-i-dl-general-real."
+   }
+  },
+  {
+   "text": "The canonical generator is mono because its composite with the restricted image inclusion is the given mono. The cyclic return calculation proves it epi. Lift it through the equivariant monomorphism to a Weil isomorphism; equivariance follows by cancellation.",
+   "uses": [
+    "lem-zl-clopen-return-saturation-epi",
+    "def-zl-frobenius-saturation",
+    "def-zl-powered-pullback-carrier"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraphs 1--3 and 7: geometric constituents, two-point curve restriction and local Frobenius powers; geometric socle/Frobenius orbit step in sk-i-dl-general-real."
+   }
+  },
+  {
+   "text": "Lissity of the explicit saturation follows from finite-rank stabilization of the countable sum of lisse translates. Thus it is constructible and defines U. Restrict the inclusion to constructible Weil categories using the canonical comparison. The inverse of the canonical generator gives e, and its proved factorization gives P(j)=e.hom;i.",
+   "uses": [
+    "lem-zl-lisse-frobenius-saturation",
+    "def-zl-powered-pullback-carrier"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraphs 1--3 and 7: geometric constituents, two-point curve restriction and local Frobenius powers; geometric socle/Frobenius orbit step in sk-i-dl-general-real."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-clopen-return-sheet-open",
+  "def-zl-frobenius-saturation",
+  "def-zl-powered-pullback-carrier",
+  "lem-zl-clopen-return-saturation-epi",
+  "lem-zl-lisse-frobenius-saturation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraphs 1--3 and 7: geometric constituents, two-point curve restriction and local Frobenius powers; geometric socle/Frobenius orbit step in sk-i-dl-general-real.",
+  "note": "E3: explicit free-Frobenius image construction. Lissity and categorical assembly are proved; only surjectivity of the fixed canonical generator on the return sheet is split off."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A Frobenius-stable lisse subobject on one clopen geometric component extends by its cyclic Frobenius translates to a Weil subobject",
+   "results": "8 hits: finite field Frobenius and Witt-vector isocrystals; no Weil sheaf subobject lifting theorem.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map of geometric fibres intertwining Frobenius powers induces a Frobenius module equivalence on stalks",
+   "results": "8 hits: ring Frobenius equivalences, ModuleCat.Tilde.stalkIso_hom, and Witt-vector isocrystals; none for pro-etale Weil sheaves.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilSheaf|frobeniusPowStr|globalSectionsTransport",
+   "results": "0 Mathlib matches through msearch.py. Native library search found poweredGeometricPullback, its iterate square, and proved stalk transport helpers in ConstantFieldRestrictionStalk. No native clopen-return subobject lifting declaration.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.DeligneLaumon.ClopenReturnRestriction",
+  "date": "2026-10-27",
+  "group": "A8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-clopen-return-restriction",
+   "place": "Lifting subobjects from a distinguished clopen return sheet",
+   "via": [
+    "thm-zl-real-mixed-by-curves"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.DeligneLaumon.ClopenReturnSubobject",
+  "file": "lean/Sheaf/DeligneLaumon/ClopenReturnSubobject.lean",
+  "declaration": "AlgebraicGeometry.WeilSheaf.exists_lisse_subobject_clopen_return",
+  "statement": "theorem exists_lisse_subobject_clopen_return\n    {k₀ k₁ : Type u} [Field k₀] [Finite k₀] [Field k₁] [Finite k₁]\n    [Algebra k₀ k₁] {l : ℕ} [Fact l.Prime]\n    [Fact (ringChar k₀ ≠ l)] [Fact (ringChar k₁ ≠ l)]\n    {X C : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]\n    [C.Over (Spec (CommRingCat.of k₁))]\n    [Smooth (X ↘ Spec (CommRingCat.of k₀))]\n    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]\n    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]\n    [GeometricallyConnected (C ↘ Spec (CommRingCat.of k₁))]\n    [LocallyOfFiniteType (C ↘ Spec (CommRingCat.of k₁))]\n    [QuasiCompact (C ↘ Spec (CommRingCat.of k₁))]\n    (c : C ⟶ X) [IsOpenImmersion c] [IsClosedImmersion c]\n    (hc : c ≫ (X ↘ Spec (CommRingCat.of k₀)) =\n      (C ↘ Spec (CommRingCat.of k₁)) ≫\n        Spec.map (CommRingCat.ofHom (algebraMap k₀ k₁)))\n    (r : ℕ) (hr : Nat.card k₁ = Nat.card k₀ ^ r)\n    (v : (C ↘ Spec (.of k₁)).geometricFiber ⟶ (X ↘ Spec (.of k₀)).geometricFiber)\n    (hp : v ≫ (X ↘ Spec (.of k₀)).geometricFiberProj =\n      (C ↘ Spec (.of k₁)).geometricFiberProj ≫ c)\n    (hb : v ≫ (X ↘ Spec (.of k₀)).geometricFiberToAlgebraicClosure =\n      (C ↘ Spec (.of k₁)).geometricFiberToAlgebraicClosure ≫\n        Spec.map (CommRingCat.ofHom (algebraicClosureAlgEquiv k₀ k₁).symm.toRingHom))\n    (hv : (C ↘ Spec (.of k₁)).geometricGaloisFrobenius.hom ≫ v =\n      v ≫ ((X ↘ Spec (.of k₀)).geometricGaloisFrobenius ^ r).hom)\n    (V : WeilSheaf k₀ l X) (hV : V.IsLisse)\n    (G : WeilSheaf k₁ l C) (hG : G.IsLisse)\n    (i : G ⟶ (poweredGeometricPullback v r hv).obj V) [Mono i] :\n    ∃ (U : WeilSheaf k₀ l X) (j : U ⟶ V), Mono j ∧ U.IsLisse ∧\n      ∃ e : (poweredGeometricPullback v r hv).obj U ≅ G,\n        (poweredGeometricPullback v r hv).map j = e.hom ≫ i",
+  "branch": "sheaf-dag",
+  "by": "A8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261026T180551-L-3354355",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261026T222623-L-674798",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

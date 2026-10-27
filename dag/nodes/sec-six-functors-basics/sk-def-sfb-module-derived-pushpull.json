@@ -230,7 +230,91 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-16f410e67 (reviewer sub-agent of L); spot-checked: I read the delivery in full and wrote review.md; no fixes were needed. The item statement is byte-equal to main-20261015 sk-def-sfb-module-derived-pushpull/_section.md: arbitrary commutative condensed Λ and arbitrary f, the full composites Res_η∘mapMod(f_*^Ab) and Ext_α∘mapMod(f^*_Ab), unbounded D plus R^+, the K-flat formula and Lf^*⊣Rf_*, nothing weakened. The coefficient category is module objects in Sh(X_proét,Ab) with the sheafified ⊗_Z (layer B of sk-def-sfb-derived-categories). There are no new nodes. proof_deps equals the union of the step uses, and a transitive walk over all dependencies (358 nodes) never returns to the item, so there is no cycle. The six steps follow the blueprint route: Part 4 then Part 3 of the sk-prop-sfb-module-category proof, then the item's own paragraph. Step 1: Grothendieck property via the ring-sheaves lemma applied to constant Z on the V-small skeleton, closed tensor preserving colimits, additivity. Step 2: free-sheaf-flat with P=Z (Stacks 03EV), ⊕Z_U flat by coproduct preservation plus AB5, evaluation epi on sections. Step 3: Λ_T commutative; the hypotheses of modobj-grothendieck, symmetric-tensor, internal-hom and flat-resolutions are met, flatness means the same in both nodes, and ⊗_R is a left adjoint (Stacks 0038), so every structural hypothesis of the left-derived clause holds. Step 4: f_* is additive, K-injective resolutions give Rf_*, enough injectives plus rightDerivedFunctorPlus (Stacks 05TI/05TH) give R^+, and the compatibility node's hypotheses are checked. Step 5: the K-flat quasi-isomorphism lemma has exactly the arbitrary-Λ, arbitrary-f scope, and the termwise formula keeps Ext_α. Step 6: the derived-adjunction clause applies with C=Mod_ΛY and D=Mod_ΛX, which is the existing adjunction node. Edge cases checked: empty scheme, identity morphism, discrete field, M=0 (P_T(0)≠0 is harmless), complexes in degree 0. No SGA is cited. Accepted tool uses: lem-weil-pbc-ring-sheaves-grothendieck, lem-weil-pbc-free-sheaf-flat, src-right-derived-functor-plus-compatibility, lem-sfb-modobj-grothendieck, lem-sfb-modobj-flat-resolutions. The unit's realized fields are correct."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "closed_part",
+   "decls": [
+    {
+     "name": "CategoryTheory.Adjunction.derivedAdjunction",
+     "module": "WeilConjectures.CategoryTheory.DerivedCategory.Adjunction",
+     "lines": [
+      175,
+      188
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [
+    "CategoryTheory.Functor.rightDerivedFunctorPlus",
+    "AlgebraicGeometry.ProEtale.CondensedRing.preservesKFlatQuasiIso_upperStar",
+    "AlgebraicGeometry.ProEtale.CondensedRing.derivedUpperStarLowerStarAdjunction"
+   ],
+   "open": []
+  },
+  "slopmaster2": {
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.preservesKFlatQuasiIso_upperStar",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar",
+     "lines": [
+      179,
+      186
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Adjunction.derivedAdjunction",
+     "module": "WeilConjectures.CategoryTheory.DerivedCategory.Adjunction",
+     "lines": [
+      166,
+      179
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.derivedUpperStarLowerStarAdjunction",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar",
+     "lines": [
+      237,
+      243
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Functor.rightDerivedFunctorPlus",
+     "module": "Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus",
+     "lines": [
+      0,
+      0
+     ],
+     "kind": "def",
+     "sorry": false,
+     "library": true
+    }
+   ],
+   "missing": [],
+   "open": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.preservesKFlatComplexes_mapMod_upperStar",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar",
+     "lines": [
+      174,
+      177
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sfb-module-mapmod-pullback-kflat"
+     ],
+     "below": false
+    }
+   ]
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.CondensedModuleDerivedPushpull",
   "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.moduleObjectDerivedPushforward",
@@ -263,5 +347,26 @@
   "group": "Q102",
   "result": "pass",
   "note": "Re-delivery of the PASSed head c3c7068 (which failed to land on the 60 s compile limit); the mathematics is unchanged. The diff only replaces R(lowerStar Λ f)/L(upperStar Λ g)/⊗ with moduleObjectDerivedPushforward/moduleObjectDerivedPullback/derivedTensor. The new §1(B) module CondensedModuleDerivedPushpull defines these as exactly (lowerStar Λ f).rightDerivedFunctor and (upperStar Λ f).leftDerivedFunctor; R(F)/L(F)/(f)_*⟦Λ⟧ were checked to be notation for these. It covers arbitrary commutative Λ and arbitrary f in universes Scheme.{u}/Ab.{u+1}, with real data, no added assumption and a public upstream import. In the dependency record only lean changes, with a note, and the old declarations are retained. Both lean.statement fields are verbatim in their files; 3 sorry only; docstrings carry source and blueprint ids; report sections present. nt_compile --json at load ~113: dependency module 8-9 s clean; item 54.4 s and 39.9 s clean; the old c3c7068 file timed out at 60 s back to back, so the speed-up is real. Maintainer note: the item is still 40-54 s under load, so retry landing at lower load if needed."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\Lambda$ be a commutative condensed ring and $f\\colon X\\to Y$ a morphism of\nschemes, with the functors $f_*=\\operatorname{Res}_{\\eta_f}\\circ\n\\operatorname{mapMod}(f^{\\Ab}_*)$ and $f^*=\\operatorname{Ext}_{\\alpha_f}\\circ\n\\operatorname{mapMod}(f^*_{\\Ab})$ on module objects\n([det-def-sfb-module-pushforward-pullback]). The derived pushforward and pullback are\nthe *total derived functors of these composites* ([det-def-sfb-derived-categories]):\n\n$$\nRf_*:=R\\bigl(\\operatorname{Res}_{\\eta_f}\\circ\\operatorname{mapMod}(f^{\\Ab}_*)\\bigr)\n\\colon D(\\Mod_{\\Lambda_X})\\to D(\\Mod_{\\Lambda_Y}),\n$$\n\ncomputed on K-injective resolutions in $\\Mod_{\\Lambda_X}$, with bounded below version\n$R^+f_*\\colon D^+(\\Mod_{\\Lambda_X})\\to D^+(\\Mod_{\\Lambda_Y})$, and\n\n$$\nLf^*:=L\\bigl(\\operatorname{Ext}_{\\alpha_f}\\circ\\operatorname{mapMod}(f^*_{\\Ab})\\bigr)\n\\colon D(\\Mod_{\\Lambda_Y})\\to D(\\Mod_{\\Lambda_X}),\n$$\n\ncomputed on K-flat resolutions in $\\Mod_{\\Lambda_Y}$: for a K-flat resolution\n$P\\to M$ one has $Lf^*M\\cong\\Lambda_X\\otimes_{f^*\\Lambda_Y}f^*_{\\Ab}P$. They are the general\nderived functors applied to the underived functors, not separate constructions; in\nparticular they are not built from the derived functors of abelian sheaves. The\nadjunction $f^*\\dashv f_*$ derives to an adjunction\n\n$$\nLf^*\\dashv Rf_* .\n$$\n\nThe composite is derived, rather than the factors, because the derived adjunction is\nthen obtained directly from $f^*\\dashv f_*$ (a composite of derived functors would\nrequire composing two derived adjunctions through an intermediate category), and\nbecause the universal property of derived functors then applies to the functor one\ncares about. The factorizations of $Rf_*$ and $Lf^*$ through the factors are kept as\ntheorems, proved below.",
+  "proof": [
+   {
+    "text": "The category $\\Mod_{\\Lambda_X}$ is a closed symmetric monoidal Grothendieck abelian\ncategory with functorial flat resolutions ([det-prop-sfb-module-category]), so it has\nK-injective resolutions, enough injectives and K-flat resolutions, and the right\nderived functors $R(f_*)$, $R^+(f_*)$ of the additive functor $f_*$ exist\n([det-def-sfb-derived-categories]). The K-flat left derived functor $L(f^*)$ exists\nbecause $f^*$ sends quasi-isomorphisms between K-flat complexes to\nquasi-isomorphisms ([lem-sfb-module-upper-star-kflat-quasi-iso], which uses\n[det-prop-sfb-module-pullback-exact-main]). The derived adjunction is\n[def-sfb-module-derived-pushpull-adjunction].",
+    "uses": [
+     "det-def-sfb-derived-categories",
+     "lem-sfb-module-upper-star-kflat-quasi-iso",
+     "def-sfb-module-derived-pushpull-adjunction"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

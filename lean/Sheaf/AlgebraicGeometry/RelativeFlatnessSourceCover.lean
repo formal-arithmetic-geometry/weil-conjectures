@@ -12,10 +12,10 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackStalk
-import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 import WeilConjectures.AlgebraicGeometry.RelativeFlatModuleStalk
 import WeilConjectures.AlgebraicGeometry.RelativeFlatOfStalks
 import Sheaf.RingTheory.FlatnessFaithfullyFlatExtension
+import Sheaf.AlgebraicGeometry.TensorPullbackQuasiCoherent
 
 /-!
 # Relative flatness detected on a flat source cover
@@ -53,8 +53,9 @@ Proof:
 2. Apply lem-trf-flatness-faithfully-flat-extension to `A → B → C` and `N`.
    Flatness of `N` over `A` is equivalent to flatness of `C ⊗[B] N` over `A`.
    The stalk isomorphism of Step 1 gives the first conjunct.
-3. For the family, lem-weil-pbc-module-pullback-quasi-coherent gives quasi-coherence
-   of every pulled-back module. If `G.IsFlatOver f`, lem-pc-relative-flat-module-stalk
+3. For the family, def-weil-pbc-tensor-pullback-ordinary-comparison transports
+   lem-weil-pbc-module-pullback-quasi-coherent to every tensor pulled-back module.
+   If `G.IsFlatOver f`, lem-pc-relative-flat-module-stalk
    gives flatness at every point of `Y`; Step 2 gives flatness at every point of each
    `X i`, and lem-pc-relative-flat-of-stalks gives the required global flatness there.
    Conversely, apply lem-pc-relative-flat-module-stalk to each pulled-back module.
@@ -76,6 +77,58 @@ theorem relative_flatness_source_cover {Y S : Scheme.{u}} (f : Y ⟶ S)
       (∀ y : Y, ∃ (i : I) (x : X i), h i x = y) →
       (G.IsFlatOver f ↔
         ∀ i : I, ((Scheme.Modules.tensorPullback (h i)).obj G).IsFlatOver (h i ≫ f))) := by
-  sorry
+  classical
+  have pointwise (X : Scheme.{u}) (h : X ⟶ Y) (x : X)
+      (hx : (h.stalkMap x).hom.Flat) :
+      Module.Flat (S.presheaf.stalk (f (h x)))
+        ((ModuleCat.restrictScalars (f.stalkMap (h x)).hom).obj
+          ((RingedSpace.moduleStalkFunctor Y.toRingedSpace (h x)).obj G)) ↔
+      Module.Flat (S.presheaf.stalk ((h ≫ f) x))
+        ((ModuleCat.restrictScalars ((h ≫ f).stalkMap x).hom).obj
+          ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj
+            ((Scheme.Modules.tensorPullback h).obj G))) := by
+    let A := S.presheaf.stalk (f (h x))
+    let B := Y.presheaf.stalk (h x)
+    let C := X.presheaf.stalk x
+    let N := (RingedSpace.moduleStalkFunctor Y.toRingedSpace (h x)).obj G
+    let P := (RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj
+      ((Scheme.Modules.tensorPullback h).obj G)
+    let : Algebra A B := (f.stalkMap (h x)).hom.toAlgebra
+    let : Algebra B C := (h.stalkMap x).hom.toAlgebra
+    let : Algebra A C := ((h.stalkMap x).hom.comp (f.stalkMap (h x)).hom).toAlgebra
+    have : IsScalarTower A B C := IsScalarTower.of_algebraMap_eq' rfl
+    let : Module A N := Module.compHom N (algebraMap A B)
+    have : IsScalarTower A B N := IsScalarTower.of_compHom A B N
+    have : Module.Flat B C := hx
+    have : IsLocalHom (algebraMap B C) :=
+      (inferInstance : IsLocalHom (h.stalkMap x).hom)
+    have : Module.FaithfullyFlat B C := Module.FaithfullyFlat.of_flat_of_isLocalHom
+    let : Module A P := Module.compHom P (algebraMap A C)
+    have : IsScalarTower A C P := IsScalarTower.of_compHom A C P
+    obtain ⟨e, _⟩ := Scheme.Modules.exists_tensorPullback_stalk_iso h x
+    let E₀ : P ≃ₗ[C] (TensorProduct B C N) := (e.app G).toLinearEquiv
+    let E : P ≃ₗ[A] (TensorProduct B C N) := E₀.restrictScalars A
+    rw [Scheme.Hom.stalkMap_comp, CommRingCat.hom_comp]
+    change Module.Flat A N ↔ Module.Flat A P
+    exact Module.Flat.iff_flat_tensorProduct_of_faithfullyFlat_extension.trans
+      (Module.Flat.equiv_iff E).symm
+  refine ⟨pointwise, ?_⟩
+  intro I X h hh hsurj
+  constructor
+  · intro hG i
+    apply relative_flat_of_stalks
+    intro x
+    apply (pointwise (X i) (h i) x ((Flat.iff_flat_stalkMap (h i)).mp (hh i) x)).mp
+    let : Algebra (S.presheaf.stalk (f (h i x))) (Y.presheaf.stalk (h i x)) :=
+      (f.stalkMap (h i x)).hom.toAlgebra
+    exact relative_flat_module_stalk f G hG (h i x) rfl
+  · intro hG
+    apply relative_flat_of_stalks
+    intro y
+    obtain ⟨i, x, rfl⟩ := hsurj y
+    apply (pointwise (X i) (h i) x ((Flat.iff_flat_stalkMap (h i)).mp (hh i) x)).mpr
+    let : Algebra (S.presheaf.stalk ((h i ≫ f) x)) ((X i).presheaf.stalk x) :=
+      ((h i ≫ f).stalkMap x).hom.toAlgebra
+    exact relative_flat_module_stalk (h i ≫ f) _ (hG i) x rfl
 
 end AlgebraicGeometry

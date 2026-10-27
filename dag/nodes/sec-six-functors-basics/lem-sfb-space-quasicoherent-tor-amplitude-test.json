@@ -1,0 +1,318 @@
+{
+ "id": "lem-sfb-space-quasicoherent-tor-amplitude-test",
+ "kind": "statement",
+ "title": "Lower quasi-coherent tensor tests for an upper bounded algebraic-space complex",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme], and use algebraic spaces over $S$ with their small etale structure sheaves [def-trf-algebraic-space]. Use module sheaves [def-weil-sheaf-of-modules-category], the unbounded derived categories $D(\\mathcal O_Z)$ [def-weil-abstract-derived-category], quasi-coherent modules [def-trf-space-quasi-coherent-module], and canonical module functors [def-trf-space-etale-module-functors]. Derived tensor and pullback use K-flat resolutions with flat terms; derived direct image uses K-injective resolutions. Let $Y$ be quasi-separated, meaning that its diagonal is quasi-compact on scheme tests. Let $K\\in D(\\mathcal O_Y)$ have quasi-coherent cohomology, let $c\\in\\mathbf Z$, and assume $H^i(K)=0$ for $i>c$. For any integer $a\\le c$, the following are equivalent: (1) $K$ has Tor amplitude in $[a,c]$, meaning $H^i(K\\otimes^{\\mathbf L}_{\\mathcal O_Y}G[0])=0$ for every module sheaf $G$ and every $i\\notin[a,c]$; (2) for every quasi-coherent module sheaf $F$, one has $H^i(K\\otimes^{\\mathbf L}_{\\mathcal O_Y}F[0])=0$ for every $i<a$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08IL (lemma-tor-qc-qs), together with the elementary upper derived-tensor bound used in Tag 08IS (lemma-perfect-direct-image), proof sentence \"Bounded from above is clear as Rf_*(E) is bounded from above\"."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-absolute-quasi-separated",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof": [
+  {
+   "text": "First establish the upper bound for every module sheaf $G$, independently of condition (2). Represent $K$ by a complex $C^\\bullet$ and replace it by the good truncation $C'=\\tau_{\\le c}C$: its terms are $C^i$ for $i<c$, $\\ker(d^c)$ in degree $c$, and zero for $i>c$. Its inclusion into $C$ induces the same cohomology through degree $c$ and both cohomologies vanish above $c$, hence it represents $K$. The site flat-resolution theorem supplies a functorial flat cover of every module. Flat modules contain zero and are closed under isomorphisms, finite sums and direct summands: tensoring a finite sum is the sum of the tensor functors, and a summand of an exact functor remains exact. Apply the bounded-above class-resolution theorem to the flat class and $C'$, obtaining a quasi-isomorphism $P\\to C'$ with flat terms and $P^i=0$ for $i>c$. The bounded-above flat K-flatness theorem makes $P$ K-flat. Therefore $K\\otimes^{\\mathbf L}G[0]$ is represented by $P\\otimes G$, whose degree $i$ term is $P^i\\otimes G$ and is zero for $i>c$. Thus its cohomology vanishes for every $i>c$.",
+   "uses": [
+    "lem-trf-site-functorial-flat-resolution",
+    "lem-sfb-functorial-bounded-above-class-resolution",
+    "lem-pc-bounded-above-flat-kflat-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IS (lemma-perfect-direct-image), upper-bound sentence; bound-preserving flat replacement uses derived.tex Tag 05T7 (lemma-subcategory-left-resolution), and sites-cohomology.tex Tag 06YQ (lemma-bounded-flat-K-flat)."
+   }
+  },
+  {
+   "text": "Condition (1) immediately implies condition (2): every quasi-coherent module sheaf is a module sheaf, and $i<a$ implies $i\\notin[a,c]$. Conversely assume (2). Together with step 1 it says that $K\\otimes^{\\mathbf L}F[0]$ has cohomology only in $[a,c]$ for every quasi-coherent $F$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IL, (1) implies (2), and initialization of its converse."
+   }
+  },
+  {
+   "text": "Let $j:U\\to Y$ be any affine etale scheme chart and let $G$ be a quasi-coherent module on $U_{\\mathrm{et}}$. The affine-chart geometry lemma gives quasi-compactness and separatedness of $j$ from the quasi-separatedness of $Y$. The quasi-coherent pushforward theorem then gives that $j_*G$ is quasi-coherent. Applying step 2 to this particular test yields $H^i(K\\otimes^{\\mathbf L}j_*G[0])=0$ for $i\\notin[a,c]$.",
+   "uses": [
+    "lem-sfb-space-affine-source-qc-separated",
+    "lem-trf-space-qc-separated-quasi-coherent-pushforward"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IL, first paragraph of converse: apply quasi-coherent pushforward, spaces-morphisms.tex Tag 03M9 (lemma-pushforward)."
+   }
+  },
+  {
+   "text": "Etale pullback is exact restriction to the slice site, so it commutes with kernels and cokernels and hence with cohomology of any complex. The derived tensor-pullback comparison identifies the restriction of the tensor object in step 3 with $j^*K\\otimes^{\\mathbf L}j^*j_*G[0]$. Its cohomology therefore vanishes outside $[a,c]$. The split-counit lemma supplies $s:G\\to j^*j_*G$ and $r:j^*j_*G\\to G$ with $rs=1$. Apply the functor $H^i(j^*K\\otimes^{\\mathbf L}(-)[0])$: it preserves this equality of composites. Its value on $G$ is consequently a retract of zero, so its identity is zero and it vanishes. We have proved the full interval test for every quasi-coherent $G$ on $U_{\\mathrm{et}}$. Also $j^*K$ has quasi-coherent cohomology by the derived chart calculus.",
+   "uses": [
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sfb-space-etale-pull-push-retract"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IL, first paragraph of converse: flat pullback and direct-summand reduction; spaces-cohomology.tex Tag 0HAP (lemma-etale-pull-push-split)."
+   }
+  },
+  {
+   "text": "Use the Zariski-etale equivalence on the scheme $U$ to write $j^*K\\simeq\\epsilon_U^*K_0$ with $K_0\\in D_{\\mathrm{QCoh}}(\\mathcal O_{U,\\mathrm{Zar}})$. For every quasi-coherent Zariski module $F_0$, exactness of $\\epsilon_U^*$ and its $D_{\\mathrm{QCoh}}$ equivalence show that $\\epsilon_U^*F_0$ is quasi-coherent. The derived tensor-pullback comparison and exactness identify the pullback of $H^i(K_0\\otimes^{\\mathbf L}F_0[0])$ with $H^i(j^*K\\otimes^{\\mathbf L}\\epsilon_U^*F_0[0])$. The latter vanishes outside $[a,c]$ by step 4. Faithfulness of $\\epsilon_U^*$ on all module sheaves implies the former Zariski cohomology sheaf is zero: a faithful functor sending its identity to zero forces that identity to be zero.",
+   "uses": [
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IL, second paragraph; Tags 071Q (lemma-derived-quasi-coherent-small-etale-site) and 08H8 (lemma-epsilon-flat)."
+   }
+  },
+  {
+   "text": "The affine scheme $U$ is quasi-separated, and $a\\le c$ by hypothesis. Apply the scheme quasi-coherent Tor test to $K_0$ and the tests of step 5. It gives Tor amplitude $[a,c]$ for $K_0$ against every Zariski module. The Zariski-etale Tor-amplitude comparison then gives Tor amplitude $[a,c]$ for $\\epsilon_U^*K_0\\simeq j^*K$ against every etale module on $U$.",
+   "uses": [
+    "lem-pc-tor-amplitude-qcoh-test",
+    "lem-sfb-etale-tor-dimension-descent",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IL, last sentence, using perfect.tex Tag 08EA (lemma-tor-qc-qs); return to the etale site by Tag 08HF (lemma-descend-tor-amplitude)."
+   }
+  },
+  {
+   "text": "Fix an arbitrary module sheaf $G$ on $Y$ and $i\\notin[a,c]$. For each affine etale chart $j:U\\to Y$, exact restriction and the derived tensor comparison identify $j^*H^i(K\\otimes^{\\mathbf L}G[0])$ with $H^i(j^*K\\otimes^{\\mathbf L}j^*G[0])$, which is zero by step 6. Every etale scheme over $Y$ has an affine open covering; its members are affine etale charts of $Y$. A section of the cohomology sheaf restricts to zero on these members, so is zero by the uniqueness clause of the sheaf axiom. Thus the cohomology sheaf itself is zero. This holds for all $G$ and $i\\notin[a,c]$, which is condition (1).",
+   "uses": [
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IL, first paragraph: it suffices to prove the amplitude on every affine etale chart; explicit sheaf gluing."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-site-functorial-flat-resolution",
+  "lem-sfb-functorial-bounded-above-class-resolution",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-sfb-space-affine-source-qc-separated",
+  "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+  "lem-sfb-space-derived-etale-chart-calculus",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sfb-space-etale-pull-push-retract",
+  "lem-sfb-derived-etale-zariski-equivalence",
+  "lem-pc-tor-amplitude-qcoh-test",
+  "lem-sfb-etale-tor-dimension-descent",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-affine-opens-basis"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08IL (lemma-tor-qc-qs), both paragraphs, with the upper bound made explicit by bounded-above flat replacement as used in Tag 08IS."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a bounded above quasi coherent complex on a quasi separated algebraic space a lower bound on tensor products with all quasi coherent sheaves tests finite Tor amplitude",
+   "results": "{\"t\": \"2026-10-23T15:32:05Z\", \"tool\": \"leanfinder\", \"query\": \"For a bounded above quasi coherent complex on a quasi separated algebraic space a lower bound on tensor products with all quasi coherent sheaves tests finite Tor amplitude\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.IsFinitePresentation\", \"DerivedCategory.IsGE\"], \"digest\": \"b0cac9ddaca0a5fb\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern ordinary quasi-coherent presentations, quasi-separated schemes and abstract derived cohomological bounds, not a Tor-amplitude test on algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor amplitude of a quasi coherent derived complex can be tested on quasi coherent sheaves on a quasi separated algebraic space",
+   "results": "{\"t\": \"2026-10-23T15:31:59Z\", \"tool\": \"leansearch\", \"query\": \"Tor amplitude of a quasi coherent derived complex can be tested on quasi coherent sheaves on a quasi separated algebraic space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace\", \"AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated\", \"SheafOfModules.IsQuasicoherent.casesOn\", \"AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace\", \"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.IsQuasicoherent.recOn\", \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instIsMultiplicativeSchemeQuasiSeparated\"], \"digest\": \"64b508c8604ba005\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern ordinary quasi-coherent presentations, quasi-separated schemes and abstract derived cohomological bounds, not a Tor-amplitude test on algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TorAmplitude\"",
+   "results": "{\"t\": \"2026-10-23T15:31:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"TorAmplitude\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern ordinary quasi-coherent presentations, quasi-separated schemes and abstract derived cohomological bounds, not a Tor-amplitude test on algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "[Tt]or[Aa]mplitude|AlgebraicSpace|tensor.*[Uu]pper[Bb]ound",
+   "results": "{\"t\": \"2026-10-23T15:31:58Z\", \"tool\": \"grep\", \"query\": \"[Tt]or[Aa]mplitude|AlgebraicSpace|tensor.*[Uu]pper[Bb]ound\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern ordinary quasi-coherent presentations, quasi-separated schemes and abstract derived cohomological bounds, not a Tor-amplitude test on algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a quasi separated algebraic space a bounded above complex with quasi coherent cohomology has Tor amplitude detected by tensoring with all quasi coherent sheaves",
+   "results": "{\"t\": \"2026-10-23T18:44:53Z\", \"tool\": \"leanfinder\", \"query\": \"On a quasi separated algebraic space a bounded above complex with quasi coherent cohomology has Tor amplitude detected by tensoring with all quasi coherent sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.isGE_iff\", \"DerivedCategory.isLE_iff\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"DerivedCategory.isZero_of_isGE\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\"], \"digest\": \"ad06fc33b46853f9\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: ordinary quasi-coherence, abstract cohomological bounds, and classical Tor functors do not give the algebraic-space quasi-coherent tensor test."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TorAmplitude\"",
+   "results": "{\"t\": \"2026-10-23T18:44:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"TorAmplitude\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: ordinary quasi-coherence, abstract cohomological bounds, and classical Tor functors do not give the algebraic-space quasi-coherent tensor test."
+  },
+  {
+   "tool": "grep",
+   "query": "TorAmplitude|AlgebraicSpace|tor_amplitude",
+   "results": "{\"t\": \"2026-10-23T18:44:54Z\", \"tool\": \"grep\", \"query\": \"TorAmplitude|AlgebraicSpace|tor_amplitude\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: ordinary quasi-coherence, abstract cohomological bounds, and classical Tor functors do not give the algebraic-space quasi-coherent tensor test."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent test sheaves detect lower Tor amplitude on quasi separated algebraic spaces",
+   "results": "{\"t\": \"2026-10-23T18:44:54Z\", \"tool\": \"leansearch\", \"query\": \"Quasi coherent test sheaves detect lower Tor amplitude on quasi separated algebraic spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.IsQuasicoherent.mk\", \"SheafOfModules.isQuasicoherent\", \"SheafOfModules.IsQuasicoherent.casesOn\", \"SheafOfModules.IsQuasicoherent\", \"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.QuasicoherentData.presentation\", \"SheafOfModules.IsQuasicoherent.recOn\", \"SheafOfModules.QuasicoherentData.mk.inj\"], \"digest\": \"09de246b6df8229d\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: ordinary quasi-coherence, abstract cohomological bounds, and classical Tor functors do not give the algebraic-space quasi-coherent tensor test."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor product is right t exact and preserves upper cohomology bound when tensoring a complex with a sheaf in degree zero",
+   "results": "{\"t\": \"2026-10-23T18:45:11Z\", \"tool\": \"leanfinder\", \"query\": \"Derived tensor product is right t exact and preserves upper cohomology bound when tensoring a complex with a sheaf in degree zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Tor\", \"CategoryTheory.Tor'\", \"CategoryTheory.Tor'_obj_obj\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"Module.Flat.rTensor_shortComplex_exact\", \"CategoryTheory.Tor_obj\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"CategoryTheory.Tor'_map_app\"], \"digest\": \"71fe73dd14da9318\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: ordinary quasi-coherence, abstract cohomological bounds, and classical Tor functors do not give the algebraic-space quasi-coherent tensor test."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-bounded-coherent-finite-tor-image-perfect",
+  "date": "2026-10-23",
+  "group": "NJ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 0A1P (lemma-base-change-tensor-perfect), perfectness assertion; perfect means sites-cohomology.tex Tag 08G5 (definition-perfect). Supporting input: Tag 0DKJ (lemma-tensor-perfect), based on Tag 08IS (lemma-perfect-direct-image). Supporting input: Tag 08IS, applied to the tensor object only after verifying all three hypotheses. Supporting input: Tag 08IL (lemma-tor-qc-qs), together with the elementary upper derived-tensor bound used in Tag 08IS (lemma-perfect-direct-image), proof sentence \"Bounded from above is clear as Rf_*(E) is bounded from above\".",
+   "via": [
+    "lem-sfb-space-bounded-coherent-finite-tor-image-perfect",
+    "lem-sfb-space-noetherian-tensor-perfect",
+    "lem-sfb-proper-support-tensor-perfect",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-quasicoherent-tor-amplitude-test",
+  "worker": "stage1",
+  "summary": "Expanded the lower quasi-coherent tensor criterion via affine etale pushforward, a split counit, the Zariski-etale comparison and the existing scheme test. Wrote the independent upper tensor bound using bound-preserving flat replacement. Added two statement-only supporting lemmas; preserved the statement and all imported provenance. No exact project attachment or Mathlib match was found.",
+  "blueprint": "Supporting Tag 08IL input beneath the inherited direct-image finiteness chain for det-thm-sf-ctf-stability-direct-images (3); realizes the affine-chart, split pull-push and representable-scheme paragraphs of Tag 08IL. The current latest blueprint direct-image proof uses the compactification route; no change of unit or ancestor provenance is made.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-site-functorial-flat-resolution",
+    "why": "Generic supporting tool for the Tag 08IL argument: Functorial flat resolutions with independent site and coefficient universes. It supplies this input without replacing a step of the unit route."
+   },
+   {
+    "node": "lem-sfb-functorial-bounded-above-class-resolution",
+    "why": "Generic supporting tool for the Tag 08IL argument: Functorial resolutions on the entire bounded-above category. It supplies this input without replacing a step of the unit route."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Generic supporting tool for the Tag 08IL argument: Bounded-above flat complexes on a ringed site are K-flat. It supplies this input without replacing a step of the unit route."
+   },
+   {
+    "node": "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+    "why": "Generic supporting tool for the Tag 08IL argument: Quasi-compact separated direct image preserves quasi-coherence on spaces. It supplies this input without replacing a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic supporting tool for the Tag 08IL argument: Derived tensor comparison for arbitrary ringed topoi. It supplies this input without replacing a step of the unit route."
+   },
+   {
+    "node": "lem-pc-tor-amplitude-qcoh-test",
+    "why": "Generic supporting tool for the Tag 08IL argument: Tor amplitude of a quasi-coherent complex is tested on quasi-coherent modules. It supplies this input without replacing a step of the unit route."
+   },
+   {
+    "node": "def-weil-sheaf-of-modules-category",
+    "why": "Generic supporting tool for the Tag 08IL argument: Category of sheaves of modules over a sheaf of rings. It supplies this input without replacing a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic affine scheme geometry, needed to verify the scheme test hypothesis and to cover every etale site object by affine opens; this does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Generic affine scheme geometry, needed to verify the scheme test hypothesis and to cover every etale site object by affine opens; this does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-site-functorial-flat-resolution",
+  "lem-sfb-functorial-bounded-above-class-resolution",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pc-tor-amplitude-qcoh-test",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-affine-opens-basis"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NW-735401f53",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-735401f53 (reviewer sub-agent of L); spot-checked: FIX: the mathematics is sound and only one form fault needed repair. FAULT (B/A4 form): both new nodes, lem-sfb-space-affine-source-qc-separated and lem-sfb-space-etale-pull-push-retract, carry created={item} without by, date and group. The corrected files are in fixes/dag/nodes/sec-six-functors-basics/ and differ from the delivery only in created={by:worker,item,date:2026-10-24,group:NW}. STATEMENT: unchanged against clones/live and side-live, where the item is still unsplit, so it is not superseded. SOURCE: I read 08IL (spaces-perfect lemma-tor-qc-qs, both paragraphs) and the item's steps follow it. The item tests only i<a and assumes H^{>c}K=0; this is true because step 1 proves the upper bound through a flat resolution that keeps the bound c (lem-sfb-functorial-bounded-above-class-resolution, plus K-flatness of bounded-above flat complexes, 06YQ). STEPS: step 3 uses the new qc-separated node and then 03M9 pushforward. Step 4 uses exact étale restriction, the 07A4 tensor pullback and the 0HAP retract. Step 5 uses the 071Q/08H8 equivalence and ε^* exact and faithful on all modules. Step 6 uses 08EA on affine U and 08HF descent with the same interval. Step 7 concludes by affine-open cover and sheaf uniqueness. All uses are in proof_deps (the union matches) and no SGA source is cited. NEW NODES: the qc-separated node was checked independently. Quasi-separated means the absolute diagonal, as in Stacks' definition. Δ_{U/Y} is the base change of Δ_{U/Z} along the monomorphism U×_Y U→U×_Z U, so it is a closed immersion. The retract node is 0HAP verbatim in content. Both are true and strictly smaller than the item. There are no duplicates (rg over 0HAP, 08IL, 03KR and the key phrases; checked against lem-sfb-space-quasicompact-affine-tests, lem-trf-space-separated-affine-chart-overlap and lem-trf-etale-tensor-splitting). BATCH-5: every listed trf citation is a generic definition (algebraic space, module functors, quasi-coherence, qc/separated) or a generic tool (site flat resolutions, 03M9, the Zariski–étale comparison). None is a trace-formula or Poincaré-duality step, so all are accepted. All nine declared tool_uses are accepted as generic black boxes.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceQuasiCoherentTorAmplitudeTest",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.torAmplitude_iff_quasiCoherent_lower_tests",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceQuasiCoherentTorAmplitudeTest.lean",
+  "statement": "theorem torAmplitude_iff_quasiCoherent_lower_tests {S : Scheme.{u}} (Y : AlgebraicSpace S) [HasDerivedCategory.{w} Y.SmallModules] (hY : IsAbsolutelyQuasiSeparated Y) (K : Y.DerivedModules) (hK : Y.derivedQCohProperty K) (c : ℤ) (hupper : ∀ i : ℤ, c < i → IsZero ((DerivedCategory.homologyFunctor Y.SmallModules i).obj K)) (a : ℤ) (hac : a ≤ c) : (∀ (G : Y.SmallModules) (i : ℤ), i < a ∨ c < i → IsZero ((DerivedCategory.homologyFunctor Y.SmallModules i).obj ((SheafOfModules.siteDerivedTensorIndependentCoefficients.{u, u, u, w} Y.smallEtaleModelTopology Y.smallStructureSheaf).obj (K, (DerivedCategory.singleFunctor Y.SmallModules 0).obj G)))) ↔ (∀ (F : Y.SmallModules), ((Y.smallModuleEquivalence.inverse).obj F).IsQuasicoherent → ∀ i : ℤ, i < a → IsZero ((DerivedCategory.homologyFunctor Y.SmallModules i).obj ((SheafOfModules.siteDerivedTensorIndependentCoefficients.{u, u, u, w} Y.smallEtaleModelTopology Y.smallStructureSheaf).obj (K, (DerivedCategory.singleFunctor Y.SmallModules 0).obj F))))",
+  "branch": "sheaf-dag",
+  "by": "Q129",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing equivalent small affine ringed model, preserving the original section universe. Quasi-coherent tests are tested after the inverse specified module equivalence; all-module tests are unrestricted. Adds the four already-landed statement interfaces used explicitly, without changing the mathematical statement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9c271c888",
+  "group": "Q129",
+  "result": "pass",
+  "note": "Read item node, report (Worker report + Second reading by Q129), module, Tag 08IL/08IS, and side-live decls SmallModules/smallModuleEquivalence/DerivedModules/derivedQCohProperty/IsAbsolutelyQuasiSeparated/QCoh/siteDerivedTensorIndependentCoefficients. All clauses match: absolute qs hY, hK D_QCoh, hupper H^{>c}K=0 (needed for the one-sided test; right t-exactness gives upper bound), a<=c, (1) all modules i<a or c<i, (2) qcoh-after-inverse F with i<a, iff. Node diff vs side-live: only lean and 4 added landed stmt_deps, all used; lean.statement verbatim in file. Mechanical finding: tensor is .choose of siteDerivedTensorExistsIndependentCoefficients, built from site_derived_tensor_descent's existential, so the statement genuinely depends on the theorem's constructed object -> PASS on that point (same tensor as landed perfect_quasiCoherent_uniformTor). No hollow defs, sorry only, docstrings with source/blueprint, no universe leak, no extra assumptions. Advisory: inline Tor-amplitude matches HasRingedSiteTorAmplitudeOfUniverses (pro-etale def node, not cited); fine. No compile (no change); worker reports clean scompile."
+ }
+}

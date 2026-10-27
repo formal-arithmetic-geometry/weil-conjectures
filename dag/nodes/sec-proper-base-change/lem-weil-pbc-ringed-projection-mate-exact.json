@@ -29,16 +29,15 @@
  ],
  "proof": [
   {
-   "text": "The cited K-flat descent and resolutions construct derived tensor. The cited derived-pullback theorem constructs exact $L$; K-injective existence and the right-derived triangulated theorem construct exact $R$. The module adjunction and derived-adjoint theorem give $L\\dashv R$. Its unit/counit and adjunct formula are those of the natural-bijection adjunction lemma.",
+   "text": "Obtain the published canonical tensor shifts and normalized fixed-factor computation isomorphisms from pullback-tensor canonical shift and unit normalization. Use canonicalRepresentativeIso_naturality, the joint-naturality API proved by composing the two fixed-factor naturality squares, to construct the published representative model from its existing representativeIso components. Flatness on the site agrees with ordinary sheaf-module flatness by the canonical tensor-right isomorphism; independent K-flatness agrees with the existing same-universe predicate. K-flat resolutions and fully faithful whiskering on resolving representatives then extend the comparison uniquely from the supplied tensor model to the published independent-coefficient tensor.",
    "uses": [
-    "lem-weil-pbc-site-derived-tensor-descent",
     "lem-pc-kflat-resolution",
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "lem-weil-pbc-resolving-representative-whiskering",
     "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-pc-right-derived-functor-triangulated",
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "lem-pc-derived-adjoint-functors",
-    "lem-weil-pbc-adjunction-of-natural-bijection"
+    "def-pc-kflat-complex",
+    "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+    "def-pur-site-sheaf-tensor-presentation-data"
    ],
    "elementary": false,
    "source": {
@@ -47,51 +46,82 @@
    }
   },
   {
-   "text": "The fixed-K-flat tensor theorem and K-flat resolutions give exact derived tensor in both variables, with the localized signed shifts of the total-tensor integer-shift lemma. The pullback-tensor normalization theorem gives the canonical $\\mu$, its natural compatibility with both shifts, and $u:L(R_Y)\\cong R_X$ with both action-unit equations. Thus $F,G$ are composites of exact functors.",
+   "text": "Apply pullback-tensor canonical shift and unit normalization to the given derived pullback, after transporting its left-derived comparison from homotopy classes to complexes by the localization universal property. Convert the published comparison from uncurried curried tensors to the original tensor bifunctors using the currying counit, whose components are identities; functoriality identifies its map on a pair with the original product map. Transport both signed tensor shifts through the tensor isomorphisms of Step 1, using two-variable shift localization for identity localizations. The normalized representative equations and cochain right-unitor formula give exactly MateCanonicalShifts and MateCanonicalUnit. The existing canonical pullback-tensor comparison agrees with the transported comparison: fully faithful resolving whiskering reduces this equality to their common normalized square on flat-term K-flat representatives. Consequently its two shift equations and right-unit equation transport as well.",
    "uses": [
-    "lem-weil-pbc-kflat-fixed-tensor-triangulated",
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-total-tensor-integer-shifts",
-    "lem-weil-pbc-pullback-tensor-canonical-shift-unit"
+    "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-resolving-representative-whiskering",
+    "lem-weil-pbc-localization-universal-property"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4 (lemma-pullback-tensor-product), with more-algebra.tex Tag 0FNH (item-shift-tensor) and the cochain action-unit calculation of lem-pur-cochain-pullback-tensor-coherence; agent expansion to normalized shift/unit equations."
+    "place": "Tags 06YU (definition-derived-tor), 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), 0B56 (equation-projection-formula-map); exactness and shift structures with the signed total-complex convention."
    }
   },
   {
-   "text": "The canonical derived-adjunction shift theorem makes the adjunction of Step 1 shift-compatible. Apply the formal exact projection-mate theorem to these derived categories, the exact tensors of Step 2, and its normalized $\\mu,u$. Its $\\beta=(\\varepsilon_E\\otimes1)\\mu_{RE,-}$ has adjunct $\\alpha=R\\beta\\circ\\eta_F$, so it is exactly the stated canonical map. The theorem supplies simultaneous naturality, every integer-shift equation and the full connecting square on distinguished triangles. Its right-unit equation identifies $\\alpha_{R_Y}$ with $1_{RE}$ under the stipulated unitors.",
+   "text": "The fixed-K-flat tensor theorem gives exactness for localized resolving arguments. Its normalized fixed-factor computation isomorphisms equal those from Step 2: resolve an arbitrary complex and cancel the inverted resolution map. Uniqueness of a localization shift structure compatible with that computation isomorphism identifies the exact shifts with the shifts of Step 2. Resolve an arbitrary derived fixed argument and transport exactness along its resulting isomorphism. Finally transport exactness to both supplied tensor models.",
    "uses": [
-    "lem-weil-pbc-derived-adjunction-shift",
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YU (definition-derived-tor), 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), 0B56 (equation-projection-formula-map); exactness and shift structures with the signed total-complex convention."
+   }
+  },
+  {
+   "text": "The given pullback preserves quasi-isomorphisms between flat-term K-flat representatives by the derived-pullback theorem. Resolving-class essential constancy makes its triangulated left-derived functor defined everywhere. The source-distinguished-triangle Kan theorem, for the normalized epsilon of Step 2 and the saturated triangulated quasi-isomorphism system, proves exactness of the given left adjoint; descend from homotopy triangles through the derived localization. Give its specified right adjoint the Mathlib adjunction-compatible integer shift and use exactness of a right adjoint of an exact functor. This uses the specified adjunction, without reconstructing either adjoint or choosing K-injective resolutions.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-pc-kflat-resolution",
+    "lem-pur-resolving-class-essential-constancy",
+    "lem-pur-left-derived-kan-source-triangles",
+    "lem-pur-quasi-isos-saturated-triangulated",
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "lem-sf-triangulated-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YU (definition-derived-tor), 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), 0B56 (equation-projection-formula-map); exactness and shift structures with the signed total-complex convention."
+   }
+  },
+  {
+   "text": "Apply the formal exact projection-mate theorem to the exact functors, compatible shifts, normalized tensor comparison, and natural right unitors. Its adjunct R(beta) composed with the adjunction unit equals the existing derivedProjectionFormulaMate by the hom-equivalence unit formula. Functoriality and associativity identify the shift comparisons for the two parenthesizations of the composite functor. Construct the triangle morphism from the resulting natural transformation itself: the first two squares are naturality, and the connecting square is the shift equation followed by naturality. Assemble simultaneous naturality and the right-unit equation. Every requested structure and equation has the original statement.",
+   "uses": [
     "lem-weil-pbc-formal-exact-projection-mate"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0B56 (equation-projection-formula-map); formal categorical expansion of the adjunct calculation and derived.tex Tag 0A8D (lemma-adjoint-is-exact)."
+    "place": "Tags 06YU (definition-derived-tor), 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), 0B56 (equation-projection-formula-map); exactness and shift structures with the signed total-complex convention."
    }
   }
  ],
  "proof_deps": [
-  "lem-pc-derived-adjoint-functors",
   "lem-pc-kflat-resolution",
-  "lem-pc-right-derived-functor-triangulated",
-  "lem-weil-pbc-adjunction-of-natural-bijection",
-  "lem-weil-pbc-derived-adjunction-shift",
-  "lem-weil-pbc-formal-exact-projection-mate",
   "lem-weil-pbc-kflat-fixed-tensor-triangulated",
-  "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+  "lem-weil-pbc-resolving-representative-whiskering",
   "lem-weil-pbc-ringed-topoi-derived-pullback",
-  "lem-weil-pbc-ringed-topoi-module-adjunction",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-weil-pbc-total-tensor-integer-shifts",
-  "prop-pur-kinjective-resolutions-exist"
+  "def-pc-kflat-complex",
+  "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+  "def-pur-site-sheaf-tensor-presentation-data",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-pur-resolving-class-essential-constancy",
+  "lem-pur-left-derived-kan-source-triangles",
+  "lem-pur-quasi-isos-saturated-triangulated",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "lem-sf-triangulated-right-adjoint",
+  "lem-weil-pbc-formal-exact-projection-mate"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 06YU, 06YY, 07A4, 07A6, 0B56; agent expansion of the signed tensor, cone and adjunction shift calculations (derived.tex Tag 0A8D)"
+  "place": "Tags 06YU (definition-derived-tor), 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), 0B56 (equation-projection-formula-map); exactness and shift structures with the signed total-complex convention. C6: assembly from normalized published tensor and pullback comparisons; exactness and shift transport use the stated localization APIs. The public representative and normalization interfaces name definitionally identical constructions, avoiding repeated expansion of tensor and localization records. Resolution calls use the current exists_isKFlatResolutionIndependentCoefficients attachment of lem-pc-kflat-resolution, through a proved private specialization to the original predicate."
  },
  "mathlib_searches": [
   {
@@ -191,9 +221,6 @@
  },
  "tool_uses": [
   "lem-pc-kflat-resolution",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-pc-derived-adjoint-functors",
-  "lem-pc-right-derived-functor-triangulated",
   "lem-pur-cochain-pullback-tensor-coherence"
  ],
  "reviewed": {
@@ -204,7 +231,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-e44adc344 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and the sources. Stacks sites-cohomology 0B56 (l.13660-13679) defines the projection map as the adjoint of Lf^*Rf_*E⊗Lf^*K→E⊗Lf^*K. The item's alpha=R(beta)eta_F with beta=(eps_E⊗1)mu_{RE,P} has the same direction, and the coefficients agree: module sheaves over commutative rings, unbounded D. More on Algebra 0FNH gives the (-1)^{pb} sign. There is no SGA citation. Against the item's live version, only proof, proof_deps and split_report changed. The statement and stmt_deps are byte-identical, and proof_deps equals the union of the uses. Re-split note (reopened, 8001 chars, the Q19 cc248 FIX text): the parent is now 3 steps, 1339 chars, and the delivery adds 2 unsplit nodes. Mapping of old steps: old 1 was already a citation step and stays in parent Step 1. Old 2 is now lem-weil-pbc-pullback-tensor-canonical-shift-unit together with the landed total-tensor-integer-shifts leaf. Old 3 is the landed kflat-fixed-tensor-triangulated. Old 4-7 are lem-weil-pbc-formal-exact-projection-mate. Every argument therefore has a carrier node. Formal child: I recomputed each clause. Naturality comes from naturality of mu, eps and eta. The shift equation follows from parts (i)-(iii) of commshift-nattrans-comp-whisker, using fixed-input naturality for eps⊗1. The third square holds via the shift equation and naturality at w. The unit equation R(rho_E(1⊗u))alpha_{E,1}=rho_{RE} follows from interchange, naturality of rho, the u-hypothesis, naturality of eta and the triangle identity. It is true; I tested it on the identity adjunction. It is abstract (no ringed sites, no invertibility), so it does not restate the item. Normalization child: c_{u;P,Q} of lem-pur-cochain-pullback-tensor-coherence preserves bidegree, so it commutes with the unsigned first shift and the (-1)^{np} second shift. I checked n=0, n=±1, two odd shifts and characteristic 2. R_Y[0] is K-flat. The action-unitor clauses descend through site-derived-tensor-descent. No flatness of the ring map is used. Its L-shifts are the same ones that derived-adjunction-shift fixes. Duplicate candidates are not duplicates: lem-sc-* projection and pullback shift nodes (proper Noetherian schemes, supplied monoidal structure), lem-trf-adjoint-mate (no tensor), ringed-slice-comparisons-shift (slices only), and lem-sfb-ringed-projection-first-shift (cites the item, so it is downstream). There are no cycles, and both nodes have honest searches. Maintainer note: the formal child carries the largest share (old steps 4-7) and could later be cut into a shift/triangle node and a naturality/unit node. No fixes."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed_lean": {
   "date": "2026-10-15",
   "by": "L",
@@ -225,6 +263,12 @@
    "SheafOfModules.RingedTensorCorner.mateFlat",
    "SheafOfModules.RingedTensorModel.MateCanonicalShifts",
    "SheafOfModules.RingedTensorModel.MateCanonicalUnit",
+   "SheafOfModules.RingedTensorCorner.mateRepresentativeSource",
+   "SheafOfModules.RingedTensorCorner.mateRepresentativeTarget",
+   "SheafOfModules.RingedTensorModel.mateRepresentative",
+   "SheafOfModules.RingedTensorModel.mateRepresentative_eq",
+   "SheafOfModules.MateCanonicalShiftData",
+   "SheafOfModules.MateCanonicalUnitData",
    "SheafOfModules.ringedProjectionMateExact"
   ],
   "file": "lean/Sheaf/Paper/ProjectionMateExact.lean",
@@ -233,5 +277,15 @@
   "by": "ND",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261022T040151-L-2818727",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

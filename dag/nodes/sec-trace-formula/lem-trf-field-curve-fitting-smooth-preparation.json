@@ -1,0 +1,251 @@
+{
+ "id": "lem-trf-field-curve-fitting-smooth-preparation",
+ "kind": "statement",
+ "title": "First-Fitting preparation and affine lci charts on the smooth complement of a pure curve",
+ "statement": "Let $k$ be a field and let $f:C\\to\\operatorname{Spec}k$ be a scheme locally of finite type [def-weil-finite-type-morphism], equidimensional of dimension $1$ [def-weil-pure-dimension]. Let $i:Z\\hookrightarrow C$ be the first-Fitting singular subscheme [def-trf-first-fitting-singular-subscheme], and let $V$ be the locus of points of $C$ that have an open neighbourhood smooth over $k$ [def-sbc-smooth-morphisms]. Then $V=|C|\\setminus i(|Z|)$. Moreover, every $x\\in V$ has an affine open neighbourhood $U=\\operatorname{Spec}A\\subseteq V$ in $C$ with $A$ a finitely generated $k$-algebra that is a local complete intersection over $k$ [def-weil-pbc-complete-intersection-over-field]. No nodality or unramifiedness assumption on $Z$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C4E (lemma-nodal-lci), proof: the first-Fitting complement is smooth and is a local complete intersection; use Divisors Tag 0C3K (lemma-d-fitting-ideal-omega-smooth) with its flatness, finite-presentation and fibre-dimension hypotheses verified over a field."
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-pure-dimension",
+  "def-trf-first-fitting-singular-subscheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-complete-intersection-over-field"
+ ],
+ "proof": [
+  {
+   "text": "The only ideals of $k$ are $(0)$ and $(1)$: if an ideal contains $a\\ne0$, it contains $a^{-1}a=1$. Both ideals are finitely generated, so $k$ is Noetherian by [def-weil-pbc-noetherian-ring]. The single affine chart $\\operatorname{Spec}k$ therefore makes the base locally Noetherian by [pqf-def-locnoeth].",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FM (section-Noetherian), definition; properties.tex, Tag 01OV (definition-locally-Noetherian)."
+   }
+  },
+  {
+   "text": "Apply [lem-pc-flat-field] to $f:C\\to\\operatorname{Spec}k$ to obtain flatness. Since $f$ is locally of finite type and the base is locally Noetherian by Step 1, [pqf-lem-lft-fp-locnoeth] gives that $f$ is locally of finite presentation. These assertions do not require $C$ to be quasi-compact or separated.",
+   "uses": [
+    "lem-pc-flat-field",
+    "pqf-lem-lft-fp-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TX (lemma-noetherian-finite-type-finite-presentation), part (1); flatness over a field is the field specialization used in curves.tex, Tag 0C4E (lemma-nodal-lci)."
+   }
+  },
+  {
+   "text": "The base $S=\\operatorname{Spec}k$ is integral and its sole point $\\eta$ is generic, with residue field $k$. Thus the generic-fibre projection $C_\\eta=C\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k\\to C$ is the identity up to its canonical isomorphism. In particular its image is all of $C$ and hence dense, and each of its irreducible components has dimension $1$ by the hypothesis on $C$. Apply [lem-trf-flat-dense-generic-fibre-pure-dimension] with $X=C$, this $S$, and $d=1$, using Step 2 for flatness and the given local finite type. Its geometric-fibre clause shows that every nonempty geometric fibre of $f$ is equidimensional of dimension $1$. This also covers empty $C$ vacuously.",
+   "uses": [
+    "lem-trf-flat-dense-generic-fibre-pure-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GSK (remark-flat-equidimensional), second list specialized to a field; morphisms.tex, Tag 02NK (lemma-base-change-relative-dimension-d)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-dth-fitting-smooth-locus] to $f$ with $d=1$. Flatness and local finite presentation are Step 2, and the required pure geometric fibres are Step 3. Its smooth locus is exactly the set $V$ of the statement, defined by smooth open neighbourhoods, and is open. By [def-trf-first-fitting-singular-subscheme] its closed subscheme $Z_1$ is the given $Z$, since both are cut out by $\\operatorname{Fit}_1(\\Omega^1_{C/k})$. The conclusion $|Z_1|=|C|\\setminus V$ therefore gives $V=|C|\\setminus i(|Z|)$.",
+   "uses": [
+    "lem-trf-dth-fitting-smooth-locus",
+    "def-trf-first-fitting-singular-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0C3K (lemma-d-fitting-ideal-omega-smooth), with d=1; curves.tex, Tag 0C4E (lemma-nodal-lci), proof on the complement of Z."
+   }
+  },
+  {
+   "text": "Fix $x\\in V$. Choose a smooth open neighbourhood $W$ of $x$ as in the definition of $V$. The affine-local characterization included in [def-sbc-smooth-morphisms] says that smooth morphisms are given locally by smooth ring maps. Applied to $W\\to\\operatorname{Spec}k$ at $x$, it supplies an affine open $U=\\operatorname{Spec}A$ of $W$ containing $x$, with $k\\to A$ smooth. Here the nonempty affine target chart is all of $\\operatorname{Spec}k$. Every point of $W$ has the smooth open neighbourhood $W$, so $W\\subseteq V$; hence $U$ is an affine open of $C$ contained in $V$. By [def-weil-pbc-smooth-ring-map], $A$ has a presentation $k[t_1,\\ldots,t_n]/(g_1,\\ldots,g_m)$ and is therefore finitely generated over $k$. Apply [lem-weil-pbc-smooth-over-field-local-complete-intersection] to this smooth $k$-algebra $A$. It is a local complete intersection over $k$, as required. None of these arguments uses nodality or any condition on $Z\\to\\operatorname{Spec}k$.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "def-weil-pbc-smooth-ring-map",
+    "lem-weil-pbc-smooth-over-field-local-complete-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4E (lemma-nodal-lci), smooth-complement paragraph; morphisms.tex, Tag 01V5 (definition-smooth); more-morphisms.tex, Tag 02H6; algebra.tex, Tags 00T2 (definition-smooth) and 00T5 (lemma-smooth-over-field)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "pqf-def-locnoeth",
+  "lem-pc-flat-field",
+  "pqf-lem-lft-fp-locnoeth",
+  "lem-trf-flat-dense-generic-fibre-pure-dimension",
+  "lem-trf-dth-fitting-smooth-locus",
+  "def-trf-first-fitting-singular-subscheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-smooth-ring-map",
+  "lem-weil-pbc-smooth-over-field-local-complete-intersection"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C4E (lemma-nodal-lci), smooth-complement argument; Divisors Tag 0C3K, with field-base preparation and the geometric-fibre formulation supplied by More on Morphisms Tag 0GSK and Morphisms Tag 02NK."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a pure one dimensional scheme locally of finite type over a field, the first Fitting singular subscheme has smooth complement, and every point of the complement has an affine local complete intersection neighbourhood",
+   "results": "{\"t\": \"2026-10-22T06:00:42Z\", \"tool\": \"leanfinder\", \"query\": \"For a pure one dimensional scheme locally of finite type over a field, the first Fitting singular subscheme has smooth complement, and every point of the complement has an affine local complete intersection neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.smoothLocus\", \"Algebra.basicOpen_subset_smoothLocus_iff\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"Algebra.smoothLocus_eq_compl_support_inter\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"Algebra.basicOpen_subset_smoothLocus_iff_smooth\", \"Algebra.IsSmoothAt\"], \"digest\": \"4774fdc22d2a4b2a\"}; No match: algebraic smooth-locus criteria and standard-smooth presentations, Weierstrass-specific nonsingularity, and the unrelated Fitting decomposition do not give the first-Fitting support identification together with affine lci charts for an arbitrary pure curve.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Fitting\", \"Smooth\"",
+   "results": "{\"t\": \"2026-10-22T06:00:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"Fitting\\\", \\\"Smooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No match: algebraic smooth-locus criteria and standard-smooth presentations, Weierstrass-specific nonsingularity, and the unrelated Fitting decomposition do not give the first-Fitting support identification together with affine lci charts for an arbitrary pure curve.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fitting|Fitting|IsLocalCompleteIntersection",
+   "results": "{\"t\": \"2026-10-22T06:00:29Z\", \"tool\": \"grep\", \"query\": \"fitting|Fitting|IsLocalCompleteIntersection\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No match: algebraic smooth-locus criteria and standard-smooth presentations, Weierstrass-specific nonsingularity, and the unrelated Fitting decomposition do not give the first-Fitting support identification together with affine lci charts for an arbitrary pure curve.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The nonsmooth locus of a pure curve over a field is defined by the first Fitting ideal of its differentials and its complement is locally a complete intersection",
+   "results": "{\"t\": \"2026-10-22T06:00:30Z\", \"tool\": \"leansearch\", \"query\": \"The nonsmooth locus of a pure curve over a field is defined by the first Fitting ideal of its differentials and its complement is locally a complete intersection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.smoothLocus\", \"Algebra.unramifiedLocus_eq_compl_support\", \"Algebra.smoothLocus_eq_univ\", \"Algebra.smoothLocus_eq_univ_iff\", \"Algebra.isOpen_smoothLocus\", \"Algebra.basicOpen_subset_smoothLocus_iff_smooth\", \"Algebra.unramifiedLocus\", \"Algebra.smoothLocus_eq_compl_support_inter\"], \"digest\": \"70ec92f934920110\"}; No match: algebraic smooth-locus criteria and standard-smooth presentations, Weierstrass-specific nonsingularity, and the unrelated Fitting decomposition do not give the first-Fitting support identification together with affine lci charts for an arbitrary pure curve.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Jacobian minors of differentials cut out the singular locus of an equidimensional curve over an arbitrary field; smooth affine charts are local complete intersection algebras",
+   "results": "{\"t\": \"2026-10-22T06:01:21Z\", \"tool\": \"leanfinder\", \"query\": \"Jacobian minors of differentials cut out the singular locus of an equidimensional curve over an arbitrary field; smooth affine charts are local complete intersection algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'_eq\", \"WeierstrassCurve.Jacobian.Point.nonsingular\", \"Algebra.IsStandardSmooth\", \"WeierstrassCurve.Affine.CoordinateRing.instIsDomain\", \"Algebra.smoothLocus\", \"Algebra.SubmersivePresentation.isStandardSmooth\", \"WeierstrassCurve.Jacobian.nonsingularLift_iff\", \"WeierstrassCurve.Affine.CoordinateRing\"], \"digest\": \"72fb27a11043293b\"}; No match: algebraic smooth-locus criteria and standard-smooth presentations, Weierstrass-specific nonsingularity, and the unrelated Fitting decomposition do not give the first-Fitting support identification together with affine lci charts for an arbitrary pure curve.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Fitting|fittingIdeal|completeIntersection|complete_intersection",
+   "results": "{\"t\": \"2026-10-22T06:01:06Z\", \"tool\": \"grep\", \"query\": \"Fitting|fittingIdeal|completeIntersection|complete_intersection\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Artinian/Module.lean\", \"Mathlib/RingTheory/Artinian/Module.lean\"], \"digest\": \"39ce9b936c9e89e8\"}; No match: algebraic smooth-locus criteria and standard-smooth presentations, Weierstrass-specific nonsingularity, and the unrelated Fitting decomposition do not give the first-Fitting support identification together with affine lci charts for an arbitrary pure curve.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Fitting\", \"Smooth\"",
+   "results": "{\"t\": \"2026-10-23T04:15:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"Fitting\\\", \\\"Smooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No match: the hits concern cotangent/free-locus smoothness, Weierstrass nonsingularity, or the unrelated Artinian Fitting decomposition; they do not state the first-Fitting support criterion for an arbitrary pure curve together with its affine lci neighbourhoods.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Fitting|fittingIdeal|completeIntersection|complete_intersection",
+   "results": "{\"t\": \"2026-10-23T04:15:40Z\", \"tool\": \"grep\", \"query\": \"Fitting|fittingIdeal|completeIntersection|complete_intersection\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No match: the hits concern cotangent/free-locus smoothness, Weierstrass nonsingularity, or the unrelated Artinian Fitting decomposition; they do not state the first-Fitting support criterion for an arbitrary pure curve together with its affine lci neighbourhoods.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an equidimensional one dimensional scheme locally of finite type over a field, the first Fitting ideal of differentials defines the complement of the smooth locus, which has affine local complete intersection charts",
+   "results": "{\"t\": \"2026-10-23T04:15:43Z\", \"tool\": \"leanfinder\", \"query\": \"For an equidimensional one dimensional scheme locally of finite type over a field, the first Fitting ideal of differentials defines the complement of the smooth locus, which has affine local complete intersection charts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.smoothLocus_eq_compl_support_inter\", \"Algebra.smoothLocus\", \"Algebra.isOpen_smoothLocus\", \"Algebra.smoothLocus_eq_univ_iff\", \"Algebra.smoothLocus_eq_univ\", \"Algebra.basicOpen_subset_smoothLocus_iff\", \"Algebra.IsSmoothAt\", \"Algebra.etaleLocus_eq_compl_support\"], \"digest\": \"026ab6b189d9a2c6\"}; No match: the hits concern cotangent/free-locus smoothness, Weierstrass nonsingularity, or the unrelated Artinian Fitting decomposition; they do not state the first-Fitting support criterion for an arbitrary pure curve together with its affine lci neighbourhoods.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The nonsmooth locus of a pure curve over a field is cut out by the first Fitting ideal of its differential sheaf",
+   "results": "{\"t\": \"2026-10-23T04:15:51Z\", \"tool\": \"leansearch\", \"query\": \"The nonsmooth locus of a pure curve over a field is cut out by the first Fitting ideal of its differential sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.smoothLocus\", \"Algebra.unramifiedLocus_eq_compl_support\", \"Algebra.smoothLocus_eq_univ_iff\", \"Algebra.smoothLocus_eq_univ\", \"Algebra.smoothLocus_eq_compl_support_inter\", \"Algebra.basicOpen_subset_smoothLocus_iff_smooth\", \"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"Algebra.unramifiedLocus\"], \"digest\": \"87e4234979ed83de\"}; No match: the hits concern cotangent/free-locus smoothness, Weierstrass nonsingularity, or the unrelated Artinian Fitting decomposition; they do not state the first-Fitting support criterion for an arbitrary pure curve together with its affine lci neighbourhoods.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Fitting|fittingIdeal|IsLocalCompleteIntersection|isLocalCompleteIntersection",
+   "results": "{\"t\": \"2026-10-23T04:16:44Z\", \"tool\": \"grep\", \"query\": \"Fitting|fittingIdeal|IsLocalCompleteIntersection|isLocalCompleteIntersection\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Artinian/Module.lean\", \"Mathlib/RingTheory/Artinian/Module.lean\"], \"digest\": \"39ce9b936c9e89e8\"}; No match: the hits concern cotangent/free-locus smoothness, Weierstrass nonsingularity, or the unrelated Artinian Fitting decomposition; they do not state the first-Fitting support criterion for an arbitrary pure curve together with its affine lci neighbourhoods.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Jacobian minors of a pure curve over an arbitrary field cut out its nonsmooth locus and smooth algebras are local complete intersections",
+   "results": "{\"t\": \"2026-10-23T04:16:57Z\", \"tool\": \"leanfinder\", \"query\": \"The Jacobian minors of a pure curve over an arbitrary field cut out its nonsmooth locus and smooth algebras are local complete intersections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'_eq\", \"WeierstrassCurve.Jacobian.Point.nonsingular\", \"WeierstrassCurve.Affine.CoordinateRing.instIsDomain\", \"WeierstrassCurve.Jacobian.nonsingularLift_iff\", \"WeierstrassCurve.Affine.Nonsingular\", \"WeierstrassCurve.Jacobian.nonsingular_iff\", \"WeierstrassCurve.Jacobian.NonsingularLift\", \"WeierstrassCurve.Affine.nonsingular_iff\"], \"digest\": \"e12f5bf366b00438\"}; No match: the hits concern cotangent/free-locus smoothness, Weierstrass nonsingularity, or the unrelated Artinian Fitting decomposition; they do not state the first-Fitting support criterion for an arbitrary pure curve together with its affine lci neighbourhoods.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-nodal-curve-lci-criterion",
+  "date": "2026-10-22",
+  "group": "Q10"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The nodal-curve geometry used below the local-term proof, via nodal-family-fitting-singular: preparation in the 0C4E criterion, original step 1 (flatness, finite presentation and geometric pure dimension before the Fitting smooth-locus test) and original step 2 (smooth affine lci neighbourhoods outside the singular subscheme).",
+   "via": [
+    "lem-trf-nodal-curve-lci-criterion",
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-field-curve-fitting-smooth-preparation",
+  "worker": "stage1",
+  "summary": "Checked the field-base hypotheses of the existing dth Fitting smooth-locus theorem, supplying flatness, local finite presentation and pure geometric fibres explicitly. Then used the affine-local smoothness characterization and the existing smooth-algebra lci theorem. The statement is unchanged; no new nodes are necessary. Read the cited node statements and checked their uses against the Stacks sources, including empty and inseparable examples.",
+  "blueprint": "Realizes the nodal-curve geometric preparation below lem-trf-local-term-locality through the existing ancestor chain recorded in blueprint.from: the 0C4E smooth-complement argument, with the 0C3K field-base hypotheses made explicit. No unit or chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-over-field-local-complete-intersection",
+    "why": "Generic commutative-algebra theorem that a smooth algebra over any field is lci; used only on the affine smooth chart in Step 5, and not a replacement for a trace-formula unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-over-field-local-complete-intersection"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-589ce1f77",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-589ce1f77 (reviewer sub-agent of L); spot-checked: Pass. The delivery adds no new nodes and leaves the item's statement unchanged. I compared the statement with Stacks curves.tex 0C4E (lemma-nodal-lci, l.4483; the paragraph showing the complement of the first-Fitting subscheme is smooth, then lci) and divisors.tex 0C3K (l.1615): it agrees. Step 1 is genuinely elementary: a field is Noetherian, so Spec k is locally Noetherian. Step 2 cites two Mathlib-leaf nodes: lem-pc-flat-field gives flatness and pqf-lem-lft-fp-locnoeth gives local finite presentation. Step 3 applies lem-trf-flat-dense-generic-fibre-pure-dimension with S=Spec k. The generic fibre is C itself up to homeomorphism, so density and pure dimension 1 are hypotheses of the item, and the node's clause on geometric fibres over any algebraically closed field covers def-weil-geometric-fibre. Step 4 applies lem-trf-dth-fitting-smooth-locus with d=1. That node states explicitly that for d=1 its subscheme is def-trf-first-fitting-singular-subscheme, and it defines V the same way as the item. Step 5 takes a smooth affine chart from the affine-local identification stated in def-sbc-smooth-morphisms; that node is realized in Lean as Mathlib's AlgebraicGeometry.Smooth, which is defined affine-locally. Finite generation comes from def-weil-pbc-smooth-ring-map (i), and lem-weil-pbc-smooth-over-field-local-complete-intersection gives the D(g_i) lci notion. A transitive scan of the DAG finds no cycle. Searching the DAG for the first-Fitting subscheme and tags 01V5/02H6 finds no duplicate. No SGA source is cited. Small cases checked: empty C; the affine line A^1 (singular subscheme empty); Spec L[t] for a purely inseparable L/k (singular subscheme is all of C, V empty); the node uv=0. I accept the tool_uses entry for the generic smooth⇒lci theorem from the other unit (sk-thm-p1, Stacks 00T5), although the worker wrote it rather than leaving it to L."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FieldCurveFittingSmoothPreparation",
+  "declaration": "AlgebraicGeometry.field_curve_fitting_smooth_preparation",
+  "file": "lean/Sheaf/AlgebraicGeometry/FieldCurveFittingSmoothPreparation.lean",
+  "statement": "theorem field_curve_fitting_smooth_preparation (k : Type u) [Field k] (C : Scheme.{u}) (f : C ⟶ Spec (.of k)) [LocallyOfFiniteType f] (hpure : C.IsPureDimension 1) (V : Set C) (hV : ∀ x : C, x ∈ V ↔ ∃ W : C.Opens, x ∈ W ∧ Smooth (W.ι ≫ f)) : V = (Set.range (Scheme.firstFittingSingularSubscheme f))ᶜ ∧ ∀ (x : C), x ∈ V → ∃ U : C.Opens, x ∈ U ∧ (U : Set C) ⊆ V ∧ IsAffineOpen U ∧ ∃ ft : @Algebra.FiniteType k (Γ(C, U)) _ _ (((Scheme.ΓSpecIso (.of k)).inv ≫ f.appLE ⊤ U le_top).hom.toAlgebra), @Algebra.IsLocalCompleteIntersection k (Γ(C, U)) _ _ (((Scheme.ΓSpecIso (.of k)).inv ≫ f.appLE ⊤ U le_top).hom.toAlgebra) ft",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d18a4f8a8",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Checked the single theorem against the node clause by clause: field k, C : Scheme.{u} with f : C ⟶ Spec k, LocallyOfFiniteType f, IsPureDimension 1, the canonical firstFittingSingularSubscheme f, V characterized by smooth open neighbourhoods (same form as dthFitting_smoothLocus), V = complement of the range of the subscheme, and every x ∈ V has an affine open U ⊆ V with Γ(C,U) (algebra structure induced by f through ΓSpecIso and appLE) finitely generated (existential witness) and Algebra.IsLocalCompleteIntersection. No nodality assumption and no extra assumptions. All five stmt_dep lean records name the declarations used; no theorem-node declaration appears in the statement; proof-dep imports are private and exist in side-live. lean.statement is verbatim in the file. Only the node's lean field changed (diffed against live; live lean is null; no landed duplicate). Proof is sorry only; docstrings give Stacks 0C4E/0C3K, the blueprint id and the 5 proof steps; report.md has Worker report and Second reading sections. Edge cases: empty C, A^1, purely inseparable L[t], nonreduced k[x,y]/(y^2), non-quasi-compact and non-separated curves, any characteristic. No recompile since no file changed. No findings."
+ }
+}

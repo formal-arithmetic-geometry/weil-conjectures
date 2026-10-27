@@ -1,0 +1,120 @@
+{
+ "id": "lem-pur-unit-normalized-lift-composition",
+ "kind": "lemma",
+ "title": "Composition of unit-normalized adjunction lifts",
+ "status": "split",
+ "statement": "Let A, B, C, D be categories, with adjunctions P:B→A ⊣ R, Q:D→B ⊣ S and T:D→A ⊣ V. Let U:A→C, U':B→C, U'':D→C admit left adjoints J, J', J'', respectively. Let α:U'≅P⋙U, β:U''≅Q⋙U', γ:U''≅T⋙U and τ:T≅Q⋙P satisfy β_N followed by α_(QN) = γ_N followed by U(τ_N) for every N. For an object K of C, put Nr=α_(RJK) followed by U(εP_JK), Ns=β_(SJ'K) followed by U'(εQ_J'K), Nc=γ_(VJK) followed by U(εT_JK). Suppose u:J'K→RJK, v:J''K→SJ'K and w:J''K→VJK satisfy the original open-unit normalizations: the J' adjunct of u followed by Nr is ηJ_K, the J'' adjunct of v followed by Ns is ηJ'_K, and the J'' adjunct of w followed by Nc is ηJ_K. If the last normalization has a unique solution, then w = v followed by S(u) followed by the component at JK of the right-adjoint conjugate of τ. No isomorphism assumption on Nr, Ns, Nc is needed beyond the stated unique normalization.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Agent-written formal adjunction calculation in compact-support condensed realization, Steps 15–16; no geometric assertion from the paper is used."
+ },
+ "proof": [
+  {
+   "text": "For adjunctions P ⊣ R, Q ⊣ S, T ⊣ V, comparison isomorphisms U' ≅ P U, U'' ≅ Q U', U'' ≅ T U and T ≅ Q P satisfying their component triangle, the restriction of the mate compositor equals the two successive restricted counits. Rewrite comparison naturality, the conjugate counit identity and the composite counit formula. Formal category and adjunction identities: Mathlib.CategoryTheory.Adjunction.Mates; composed adjunction associativity in the proved source library.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For two arrows normalized by successive open-adjunction units, expand Hom equivalences as unit followed by the right adjoint. Functoriality, the restricted-counit equation, comparison naturality and counit naturality give the unit normalization of their composite followed by the mate compositor. Formal category and adjunction identities: Mathlib.CategoryTheory.Adjunction.Mates; composed adjunction associativity in the proved source library.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The assumed unique composite normalization identifies its specified arrow with that composite. Formal category and adjunction identities: Mathlib.CategoryTheory.Adjunction.Mates; composed adjunction associativity in the proved source library.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J3",
+  "date": "2026-10-27",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Formal calculation for Steps 15–16 of def-pur-condensed-compact-support-projection; fully proved in Lean."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Two uniquely unit normalized lifts compose to the uniquely normalized lift for composed adjunctions",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Bicategory.Adjunction.compUnit\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Adjunction.Basic\", \"type\": \"(adj₁ : f₁ ⊣ g₁) (adj₂ : f₂ ⊣ g₂) : 𝟙 a ⟶ (f₁ ≫ f₂) ≫ g₂ ≫ g₁\", \"doc\": \"Given a bicategory $\\\\mathcal{B}$ with objects $a, b$, 1-cells $f_1 : a \\\\to b$, $g_1 : b \\\\to a$ forming an adjunction $f_1 \\\\dashv g_1$, and 1-cells $f_2 : a \\\\to b$, $g_2 : b \\\\to a$ forming an adjunctio\"}\n  {\"name\": \"CategoryTheory.Adjunction.comp_unit_app\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \"(X : C) : (adj₁.comp adj₂).unit.app X = adj₁.unit.app X ≫ G.map (adj₂.unit.app (F.obj X))\", \"doc\": \"For any object $X$ in category $\\\\mathcal{C}$, the unit of the composed adjunction $\\\\text{adj}_1 \\\\circ \\\\text{adj}_2$ at $X$ is equal to the composition of $\\\\eta_1(X): X \\\\to G_1F_1(X)$ followed by $G_1$\"}\n  {\"name\": \"CategoryTheory.Bicategory.Adjunction.comp\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Adjunction.Basic\", \"type\": \"(adj₁ : f₁ ⊣ g₁) (adj₂ : f₂ ⊣ g₂) : f₁ ≫ f₂ ⊣ g₂ ≫ g₁\", \"doc\": \"Given a bicategory $\\\\mathcal{B}$ and adjunctions $f_1 \\\\dashv g_1$ and $f_2 \\\\dashv g_2$ between 1-cells $a \\\\to b$ and $b \\\\to c$ respectively, this constructs the composed adjunction $f_1 \\\\circ f_2 \\\\das\"}\n  {\"name\": \"CategoryTheory.Adjunction.comp\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \": F ⋙ H ⊣ I ⋙ G\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ and adjunctions $F \\\\dashv G$ between $\\\\mathcal{C}$ and $\\\\mathcal{D}$, $H \\\\dashv I$ between $\\\\mathcal{D}$ and $\\\\mathcal{E}$, the composite adjun\"}\n  {\"name\": \"CategoryTheory.Bicategory.Adjunction.comp_unit\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Adjunction.Basic\", \"type\": \"∀ {B : Type u} [inst : CategoryTheory.Bicategory B] {a b c : B} {f₁ : a ⟶ b} {g₁ : b ⟶ a} {f₂ : b ⟶ c} {g₂ : c ⟶ b}\\n  (adj₁ : CategoryTheory.Bicategory.Adjunction f₁ g₁) (adj₂ : CategoryTheory.Bicategory.Adjunction f₂ g₂),\\n  (adj₁.comp adj₂).unit = adj₁.compUnit adj₂\", \"doc\": \"In a bicategory $\\\\mathcal{B}$, given adjunctions $f_1 \\\\dashv g_1$ between objects $a$ and $b$, and $f_2 \\\\dashv g_2$ between objects $b$ and $c$, the unit of the composed adjunction $f_1 \\\\circ f_2 \\\\das\"}\n  {\"name\": \"Mathlib.Tactic.BicategoryCoherence.liftHomComp\", \"module\": \"Mathlib.Tactic.CategoryTheory.BicategoryCoherence\", \"type\": \"(f : a ⟶ b) (g : b ⟶ c) [LiftHom f] [LiftHom g] : LiftHom (f ≫ g)\", \"doc\": \"Given a bicategory $\\\\mathcal{B}$ and composable 1-cells $f : a \\\\to b$ and $g : b \\\\to c$, if both $f$ and $g$ admit lifts to the free bicategory generated by $\\\\mathcal{B}$, then their composition $f \\\\c\"}\n  {\"name\": \"CategoryTheory.Localization.comp_liftNatTrans\", \"module\": \"Mathlib.CategoryTheory.Localization.Predicate\", \"type\": \"(F₁ F₂ F₃ : C ⥤ E) (F₁' F₂' F₃' : D ⥤ E) [h₁ : Lifting L W F₁ F₁'] [h₂ : Lifting L W F₂ F₂'] [h₃ : Lifting L W F₃ F₃']\\n  (τ : F₁ ⟶ F₂) (τ' : F₂ ⟶ F₃) :\\n  liftNatTrans L W F₁ F₂ F₁' F₂' τ ≫ liftNatTrans L W F₂ F₃ F₂' F₃' τ' = liftNatTrans L W F₁ F₃ F₁' F₃' (τ ≫ τ')\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$, a localization functor $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ with respect to a morphism property $W$, and functors $F₁, F₂, F₃ : \\\\mathcal{C} \\\\to \\\\\"}\n  {\"name\": \"CategoryTheory.LiftRightAdjoint.otherMap\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Lifting.Right\", \"type\": \"(X : B) : U'.obj (F.obj X) ⟶ U'.obj (F.obj (U.obj (F.obj X)))\", \"doc\": \"For an object $X$ in category $\\\\mathcal{B}$, this morphism is defined as the composition of the unit of adjunction $\\\\text{adj}_2$ applied to $X$, followed by the action of functor $U'$ on the morphism\"}\n",
+   "date": "2026-10-27",
+   "verdict": "No exact combined statement; reuse the adjunction mate, naturality and Hom-equivalence identities in the complete Lean proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of uniquely unit normalized lifts under adjunction counits and compatible inverse image comparisons",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.LiftLeftAdjoint.otherMap\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Lifting/Left\", \"type\": \"{A : Type u₁} →\\n  {B : Type u₂} →\\n    {C : Type u₃} →\\n      [inst : CategoryTheory.Category.{v₁, u₁} A] →\\n        [inst_1 : CategoryTheory.Category.{v₂, u₂} B] →\\n          [inst_2 : CategoryTheory.Category.{v₃, u₃} C] →\\n            {U : CategoryTheory.Functor B C} →\\n              {F : CategoryTheory\", \"doc\": \"The morphism from $ F'(U(F(U(X)))) $ to $ F'(U(X)) $ constructed by applying $ F' $ to the composition of $ U $ applied to $ F $ acting on the unit of adjunction $\\\\adj_2$ and the counit of adjunction \"}\n  {\"name\": \"CategoryTheory.LiftRightAdjoint.otherMap\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Lifting/Right\", \"type\": \"{A : Type u₁} →\\n  {B : Type u₂} →\\n    {C : Type u₃} →\\n      [inst : CategoryTheory.Category.{v₁, u₁} A] →\\n        [inst_1 : CategoryTheory.Category.{v₂, u₂} B] →\\n          [inst_2 : CategoryTheory.Category.{v₃, u₃} C] →\\n            {U : CategoryTheory.Functor A B} →\\n              {F : CategoryTheory\", \"doc\": \"For an object $X$ in category $\\\\mathcal{B}$, this morphism is defined as the composition of the unit of adjunction $\\\\text{adj}_2$ applied to $X$, followed by the action of functor $U'$ on the morphism\"}\n  {\"name\": \"CategoryTheory.sheafComposeNatTrans_app_uniq\", \"module\": \"Mathlib/CategoryTheory/Sites/PreservesSheafification\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) {A : Type u_1}\\n  {B : Type u_2} [inst_1 : CategoryTheory.Category.{v_1, u_1} A] [inst_2 : CategoryTheory.Category.{v_2, u_2} B]\\n  (F : CategoryTheory.Functor A B)\\n  {G₁ : CategoryTheory.Functor (Cate\", \"doc\": \"Given presheaves and functors satisfying the sheaf composition condition, if a morphism $\\\\alpha$ satisfies the equation involving the adjunction unit and whiskering with $F$, then $\\\\alpha$ is uniquely\"}\n  {\"name\": \"CategoryTheory.Adjunction.functorCategory_inverseImage_isomorphisms_counit\", \"module\": \"Mathlib/CategoryTheory/Localization/CalculusOfFractions/OfAdjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] {G : CategoryTheory.Functor C₁ C₂} {F : CategoryTheory.Functor C₂ C₁}\\n  [F.Full] [F.Faithful] (adj : F ⊣ G),\\n  ((CategoryTheory.MorphismProperty.isomorphisms C₂).invers\", \"doc\": \"Given an adjunction between functors $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ and $ G : \\\\mathcal{C}_2 \\\\to \\\\mathcal{C}_1 $, the counit of the adjunction in the functor category $ \\\\mathcal{C}_1 \\\\to \\\\math\"}\n  {\"name\": \"CategoryTheory.unitCompPartialBijective_symm_natural\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Reflective\", \"type\": \"∀ {C : Type u₁} {D : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {i : CategoryTheory.Functor D C} [inst_2 : CategoryTheory.Reflective i] (A : C) {B B' : C} (h : B ⟶ B')\\n  (hB : i.essImage B) (hB' : i.essImage B') (f : i.obj ((CategoryTheory.re\", \"doc\": \"For categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with a reflective functor $i : \\\\mathcal{D} \\\\to \\\\mathcal{C}$, the inverse of the natural bijection between $\\\\text{Hom}_{\\\\mathcal{C}}(A, B)$ and $\\\\text{Hom\"}\n  {\"name\": \"CategoryTheory.sheafComposeNatTrans_fac\", \"module\": \"Mathlib/CategoryTheory/Sites/PreservesSheafification\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) {A : Type u_1}\\n  {B : Type u_2} [inst_1 : CategoryTheory.Category.{v_1, u_1} A] [inst_2 : CategoryTheory.Category.{v_2, u_2} B]\\n  (F : CategoryTheory.Functor A B)\\n  {G₁ : CategoryTheory.Functor (Cate\", \"doc\": \"For any presheaf $ P $ on the opposite category $ \\\\mathcal{C}^{\\\\text{op}} $ valued in $ \\\\mathcal{A} $, the composition of the adjunction unit $ \\\\eta_1 $ applied to $ P $ with the functor $ F: \\\\mathcal\"}\n  {\"name\": \"CategoryTheory.unitCompPartialBijective_natural\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Reflective\", \"type\": \"∀ {C : Type u₁} {D : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {i : CategoryTheory.Functor D C} [inst_2 : CategoryTheory.Reflective i] (A : C) {B B' : C} (h : B ⟶ B')\\n  (hB : i.essImage B) (hB' : i.essImage B') (f : A ⟶ B),\\n  (CategoryTheory\", \"doc\": \"For categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with a reflective functor $i : \\\\mathcal{D} \\\\to \\\\mathcal{C}$, the natural bijection between $\\\\text{Hom}_{\\\\mathcal{C}}(A, B)$ and $\\\\text{Hom}_{\\\\mathcal{C}}\"}\n  {\"name\": \"CategoryTheory.Adjunction.functorCategory_inverseImage_isomorphisms_unit\", \"module\": \"Mathlib/CategoryTheory/Localization/CalculusOfFractions/OfAdjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] {G : CategoryTheory.Functor C₁ C₂} {F : CategoryTheory.Functor C₂ C₁}\\n  [F.Full] [F.Faithful] (adj : G ⊣ F),\\n  ((CategoryTheory.MorphismProperty.isomorphisms C₂).invers\", \"doc\": \"Given an adjunction $ G \\\\dashv F $ between categories $ \\\\mathcal{C}_1 $ and $ \\\\mathcal{C}_2 $, the unit of the adjunction, when considered in the functor category $ \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ e\"}\n",
+   "date": "2026-10-27",
+   "verdict": "No exact combined statement; reuse the adjunction mate, naturality and Hom-equivalence identities in the complete Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.homEquiv_unit",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'Adjunction.homEquiv_unit'\n",
+   "date": "2026-10-27",
+   "verdict": "No exact combined statement; reuse the adjunction mate, naturality and Hom-equivalence identities in the complete Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv_counit|normalized.*[Ll]ift",
+   "results": "[grep] OK 7 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"40\", \"text\": \"  * `normalizedFactorsMapEquivNormalizedFactorsMinPolyMk_symm_apply_eq_span` : Let `Q` be a lift of\"}\n  {\"file\": \"Mathlib/FieldTheory/NormalizedTrace.lean\", \"line\": \"176\", \"text\": \"theorem normalizedTrace_algebraMap_of_lifts [CharZero E] [Algebra.IsIntegral E K] (a : K)\"}\n  {\"file\": \"Mathlib/FieldTheory/NormalizedTrace.lean\", \"line\": \"220\", \"text\": \"    congrArg (normalizedTrace F E) (normalizedTrace_algebraMap_of_lifts E₀ E K a hlifts)).symm\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"line\": \"285\", \"text\": \"theorem conjugateEquiv_counit (α : L₂ ⟶ L₁) (d : D) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"line\": \"291\", \"text\": \"theorem conjugateEquiv_counit_symm (α : R₁ ⟶ R₂) (d : D) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"line\": \"295\", \"text\": \"    exact (conjugateEquiv_counit adj₁ adj₂ ((conjugateEquiv adj₁ adj₂).symm α) d)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\", \"line\": \"251\", \"text\": \"  conjugateEquiv_counit _ _ ((tensoringLeft C).map f) X\"}\n",
+   "date": "2026-10-27",
+   "verdict": "No exact combined statement; reuse the adjunction mate, naturality and Hom-equivalence identities in the complete Lean proof."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedCompactSupportProjection",
+  "date": "2026-10-27",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Steps 15–16: composition of the uniquely open-unit-normalized refinement lift and its proper-image mate compositor.",
+   "via": [
+    "def-pur-condensed-compact-support-projection",
+    "lem-pur-compact-support-condensed-realization",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.UnitNormalizedLiftComposition",
+  "file": "lean/Sheaf/CategoryTheory/UnitNormalizedLiftComposition.lean",
+  "declaration": "CategoryTheory.unitNormalizedLift_comp",
+  "statement": "theorem unitNormalizedLift_comp\n    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]\n    {P : B ⥤ A} {R : A ⥤ B} {Q : D ⥤ B} {S : B ⥤ D}\n    {T : D ⥤ A} {V : A ⥤ D}\n    (ap : P ⊣ R) (aq : Q ⊣ S) (ac : T ⊣ V)\n    (U : A ⥤ C) (U' : B ⥤ C) (U'' : D ⥤ C)\n    (J : C ⥤ A) (J' : C ⥤ B) (J'' : C ⥤ D)\n    (aj : J ⊣ U) (aj' : J' ⊣ U') (aj'' : J'' ⊣ U'')\n    (α : U' ≅ P ⋙ U) (β : U'' ≅ Q ⋙ U') (gamma : U'' ≅ T ⋙ U)\n    (τ : T ≅ Q ⋙ P)\n    (hc : ∀ N, β.hom.app N ≫ α.hom.app (Q.obj N) =\n      gamma.hom.app N ≫ U.map (τ.hom.app N)) (K : C)\n    (Nr : U'.obj (R.obj (J.obj K)) ⟶ U.obj (J.obj K))\n    (Ns : U''.obj (S.obj (J'.obj K)) ⟶ U'.obj (J'.obj K))\n    (Nc : U''.obj (V.obj (J.obj K)) ⟶ U.obj (J.obj K))\n    (hNr : Nr = α.hom.app (R.obj (J.obj K)) ≫ U.map (ap.counit.app (J.obj K)))\n    (hNs : Ns = β.hom.app (S.obj (J'.obj K)) ≫ U'.map (aq.counit.app (J'.obj K)))\n    (hNc : Nc = gamma.hom.app (V.obj (J.obj K)) ≫ U.map (ac.counit.app (J.obj K)))\n    (u : J'.obj K ⟶ R.obj (J.obj K)) (v : J''.obj K ⟶ S.obj (J'.obj K))\n    (w : J''.obj K ⟶ V.obj (J.obj K))\n    (hu : aj'.homEquiv K (R.obj (J.obj K)) u ≫ Nr = aj.unit.app K)\n    (hv : aj''.homEquiv K (S.obj (J'.obj K)) v ≫ Ns = aj'.unit.app K)\n    (hw : aj''.homEquiv K (V.obj (J.obj K)) w ≫ Nc = aj.unit.app K)\n    (hun : ∃! w' : J''.obj K ⟶ V.obj (J.obj K),\n      aj''.homEquiv K (V.obj (J.obj K)) w' ≫ Nc = aj.unit.app K) :\n    w = v ≫ S.map u ≫ (conjugateEquiv (aq.comp ap) ac τ.hom).app (J.obj K)",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1bad5",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261027T012851-L-2342239",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1bad5",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261027T012851-L-2342239",
+  "kind": "interface",
+  "note": "independent cc review: old CondensedCompactSupportProjection vs Core+item+IdentityCalculus (verbatim moves, footer and identityScalar_flat instance kept); item node vs Lean; 4 direct importers compiled OK against delivered modules"
+ }
+}

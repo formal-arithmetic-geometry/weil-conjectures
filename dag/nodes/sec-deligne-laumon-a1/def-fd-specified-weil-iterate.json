@@ -1,0 +1,113 @@
+{
+ "id": "def-fd-specified-weil-iterate",
+ "kind": "definition",
+ "title": "Positive Weil iterates for a specified normalized pullback compositor",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix a finite-field datum $(p,a,q,k_0,k)$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, and a finite extension $E/\\mathbf Q_\\ell$. Let $Y_0$ be a finite-type $k_0$-scheme, put $Y=Y_0\\times_{k_0}k$, and let $g=g_Y$ be its geometric Frobenius [def-weil-frobenius-detailed]. Use the rationalized constructible category $D^b_c(Y,E)$ and its derived pullbacks [def-weil-derived-pullback-tensor-hom]. Fix an integral comparison system $C$ with the stipulated whole-system realization normalization [lem-trf-integral-pullback-comparison-realization]. Its rationalized compositor is\n$$c^C_{h,k,N}:L(kh)^*N\\xrightarrow{\\sim}Lh^*Lk^*N,$$\nnamely the specified rational composition comparison of [lem-trf-local-frobenius-transport-normalization]. For $r\\in\\mathbf N$ put $g^{[1]}=g$, $g^{[r+2]}=g\\circ g^{[r+1]}$, and define the positive-power pullback functor\n$$P_r=L(g^{[r+1]})^*:D^b_c(Y,E)\\to D^b_c(Y,E).$$\nFor an $E$-Weil complex $K=(M,\\theta)$ [def-weil-weil-sheaf-complex], with $\\theta:Lg^*M\\xrightarrow{\\sim}M$, define its specified-compositor positive Weil iterate $W^C_r(K):P_rM\\xrightarrow{\\sim}M$ recursively by\n$$W^C_0(K)=\\theta,\\qquad W^C_{r+1}(K)=W^C_r(K)\\circ P_r(\\theta)\\circ c^C_{g^{[r+1]},g,M}.$$\nThis is the positive iteration of [def-weil-local-frobenius-trace] using precisely the chosen system $C$ at every recursive composition. The index $r$ denotes exponent $r+1$, so every positive exponent occurs. All isomorphisms are in the raw rationalized category; no integral Weil-stable lattice, finite Tor-amplitude condition, separatedness hypothesis, or rational-point choice is included.",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-frobenius-detailed",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-trf-local-frobenius-transport-normalization",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-local-frobenius-trace"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realified-kernel-real.proof.md",
+  "place": "Step 2, pullback raises the local Frobenius to the residue-extension power; specified-compositor positive Weil recursion used in the extracted same-length return square, proof Step 4. Compare Deligne Weil II (1.1.7)-(1.1.10)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Definition of positive iterates of a Weil structure isomorphism using specified pullback composition comparisons",
+   "results": "[leansearch] OK 8 hit(s): CategoryTheory.Functor.IsFibered.pullbackPullbackIso; CategoryTheory.NatTrans.PullbackShift.natIsoComp; Function.iterate_succ'; Function.iterate_pred_comp_of_pos; LinearMap.iterateMapComap; Function.comp_iterate_pred_of_pos; coe_iterateFrobenius; Function.iterate_succ.",
+   "verdict": "No match: general iteration and composition comparisons do not give the normalized-C rational constructible Weil recursion.",
+   "date": "2026-10-24"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Iterated Weil structure on rational constructible derived categories with a specified normalized integral pullback compositor",
+   "results": "[leanfinder] OK 8 hit(s): AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'; AlgebraicGeometry.Scheme.Modules.pseudofunctor; AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity; AlgebraicGeometry.Scheme.Modules.pullbackComp; SheafOfModules.pullbackComp; AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc; AlgebraicGeometry.Scheme.Hom.normalizationDiagram; AlgebraicGeometry.Scheme.Modules.pushforwardComp.",
+   "verdict": "No match: ordinary module pseudofunctors do not define the specified rational Weil iterate.",
+   "date": "2026-10-24"
+  },
+  {
+   "tool": "grep",
+   "query": "msearch grep \"Weil.*[Ii]terat|[Ii]terat.*Weil|strIterate\" CategoryTheory; rg \"LocalFrobeniusCoefficient|localWeilIterate\" lean/Sheaf/Paper/{LocalFrobeniusCoefficientExtension,LocalFrobeniusTrace}.lean; rg \"Weil.*iterate|Weil.*[Ii]terat|strIterate\" lean/WeilConjectures/Mathlib/CategoryTheory/Endofunctor/Algebra.lean lean/WeilConjectures/SixFunctors/ProEtale/FiniteCoefficient/Derived/WeilDatum.lean",
+   "results": "Mathlib: [grep] OK 0 hit(s). Project: LocalFrobeniusCoefficientExtension.lean:46 def pullback (r : ℕ); :97 def iterate (K : sfWeilComplex D l hl X₀ E). LocalFrobeniusTrace.lean:157 def localWeilIterate uses its separate localPullbackComposition. Upstream: IsoAlgebra.strIterate, the generic endofunctor iterate, with no scheme-power C-compositor normalization.",
+   "verdict": "Exact existing project definitions LocalFrobeniusCoefficient.pullback and .iterate supply the notion; reuse them with existing:true. No definition node currently owns this pair of specified-C constructions.",
+   "date": "2026-10-24"
+  },
+  {
+   "tool": "blueprint_refs.py search / ancestor and DAG rg",
+   "query": "Weil iterate; Weil structure; specified.weil.iterat|specified.*Weil.*iterat|LocalFrobeniusCoefficient\\.(iterate|pullback)",
+   "results": "0 blueprint nodes match Weil iterate. ancestor: lem-fd-realified-kernel-real. DAG hits include coefficient-extension and common-stage/return/trace theorem nodes, def-pod-dual-tate-datum (strict perfect duality, not this recursion) and def-weil-local-frobenius-trace (separately chosen compositor). No existing definition node owns the stipulated-C positive-power recursion. The broader Weil structure blueprint search returned 40 nodes, including the cited Weil-pair and Frobenius conventions, with no node specifying this C-dependent recursion.",
+   "verdict": "Add this definition node as authorized by the H2 return; preserve existing definitions and do not duplicate them.",
+   "date": "2026-10-24"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-fd-pullback-weil-return-square",
+  "date": "2026-10-24",
+  "group": "Q62"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fd-realified-kernel-real",
+   "place": "Proof Step 2, pullback raises the local Frobenius to the residue-extension power: positive Weil iteration with the specified rationalized compositor, used in the same-length return square.",
+   "via": [
+    "lem-fd-pullback-weil-return-square",
+    "lem-fd-weil-pullback-local-frobenius"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-some-weight",
+ "lean": {
+  "module": "Sheaf.Paper.LocalFrobeniusCoefficientExtension",
+  "declaration": "WeilConjectures.LocalFrobeniusCoefficient.iterate",
+  "declarations": [
+   "WeilConjectures.LocalFrobeniusCoefficient.pullback",
+   "WeilConjectures.LocalFrobeniusCoefficient.iterate"
+  ],
+  "statement": "def iterate (K : sfWeilComplex D l hl X₀ E) :\n    (r : ℕ) → (pullback D l hl X₀ E r).obj K.carrier ≅ K.carrier",
+  "branch": "newtargets-dag",
+  "by": "Q62",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition ownership repair requested by the independent return of b6baafacf01f. Exact existing definitions in LocalFrobeniusCoefficientExtension.lean: pullback is rationalDerivedPullback along the positive geometric-Frobenius power; iterate starts at K.str and recurses using LocalFrobeniusTransport.rationalComposition l E C. The declaration takes arbitrary finite E and finite-type X₀, with no properness, separatedness, rational point, integral Weil-stable lattice, or finite Tor-amplitude binder. The coefficient-extension theorem in the same module is not a dependency of this notion. No source module or definition is duplicated."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-02f880fc2",
+  "group": "Q62",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-02f880fc2",
+  "group": "Q62",
+  "result": "pass",
+  "note": "Repair of b6baafacf01f (H2): Lean module byte-identical to the fully reviewed b6ba; the item JSON changes only by swapping stmt_dep lem-fd-local-frobenius-coefficient-extension for new def node def-fd-specified-weil-iterate, plus lean.note. New node is existing:true on LocalFrobeniusCoefficient.pullback/iterate (live LocalFrobeniusCoefficientExtension.lean:45-110): P_r = L(g^{r+1})^*, W_0=θ, W_{r+1}=W_r∘P_r(θ)∘rationalComposition C (g^{r+1}) g; matches the node's recursion and directions; hypotheses finite-type/E finite/ℓ≠p with no extra binders; lean.statement verbatim; distinct from localWeilIterate (uses choose compositor); id absent from live; citations equal its 7 stmt_deps. Mechanical finding: lem-weil-frobenius-square-cartesian clause 2 (f∘g_X=g_Y∘f, iterated as power_comm) is needed to type beta via eqToIso, so the statement genuinely depends on the theorem's conclusion → PASS on that point. Gates: no hollow defs, sorry only in power_comm and the main theorem, docstrings present, report sections present. Advisory: item statement text (unchanged from live) does not bracket-cite the two added deps. No compile (no file changed)."
+ }
+}

@@ -1,0 +1,154 @@
+{
+ "id": "lem-trf-etale-topos-point-comparison-bijective",
+ "kind": "statement",
+ "title": "Natural geometric comparisons with the correct support are bijective",
+ "statement": "Let S, p and L(U)=p.inverse(h_U^#) have the conventions of [lem-trf-etale-topos-point-fiber-comparison]. Fix any algebraically closed Ω:Type u and geometric point s:Spec Ω→S [def-weil-geometric-point]. Suppose c:ULift Hom_S(Spec Ω,-)→L is a natural transformation and, for every etale U→S, L(U) is nonempty exactly when s(default) lies in its image. Then every component c_U is bijective. Neither existence of s or c, nor its construction, is asserted.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04HU, lemma-points-small-etale-site: support, finite affine fibers, coherent choice, and affine-cover descent."
+ },
+ "stmt_deps": [
+  "lem-trf-etale-topos-point-fiber-comparison",
+  "def-weil-geometric-point"
+ ],
+ "proof": [
+  {
+   "text": "Let L be the inverse-image functor on lifted sheafified representables. Finite limits, open subobjects and disjoint unions behave as in the elementary opening of the classification proof; jointly surjective covering families remain jointly surjective on L. Choose an affine open A containing the image x of s. The support hypothesis and subterminality show L(A) is a singleton. Restrict to the small etale site of A. Use [lem-trf-affine-etale-split-neighbourhood] for each affine U over A. The remainder has empty value by the support hypothesis and the splitting neighborhood has nonempty value. The value of the fiber product over L(A) identifies its fiber over any b in L(V) with L(U), enumerated by the finite copy sections.",
+   "uses": [
+    "def-trf-geometric-morphism",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-sheafification-sets-exact",
+    "def-weil-pbc-etale-site",
+    "lem-trf-affine-etale-split-neighbourhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04HU, lemma-points-small-etale-site: support, finite affine fibers, coherent choice, and affine-cover descent."
+   }
+  },
+  {
+   "text": "Take b=c_V(v) at the marked lift v of the splitting neighborhood. Its copy sections enumerate the geometric lifts into U and the corresponding fiber of L(U×_A V) over b, both without repetitions. Naturality gives c_U(a_i v)=L(a_i)b. Consequently c_U is bijective for every affine U over A, also when the geometric fiber is empty. This uses only naturality of the supplied c, not its construction by coherent choice.",
+   "uses": [
+    "lem-trf-affine-etale-split-neighbourhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04HU, lemma-points-small-etale-site: support, finite affine fibers, coherent choice, and affine-cover descent."
+   }
+  },
+  {
+   "text": "For an arbitrary etale $T\\to S$, put $T_A=T\\times_S A$. Since $u(A)$ is a singleton, finite-limit preservation identifies $u(T_A)$ with $u(T)$; geometric lifts into $T_A$ and $T$ also agree because $\\bar s$ factors through $A$. Cover $T_A$ by affine opens, as in [lem-weil-pbc-affine-etale-essentially-small-cover]. Joint surjectivity of their $u$-values and step 7 give surjectivity of $c_{T_A}$. For injectivity, lifts $t_1,t_2$ with equal $c$-images factor through affine opens $B_1,B_2$. Their corresponding elements in $u(B_1)$ and $u(B_2)$ have the same image in $u(T_A)$, so define an element of $u(B_1\\times_{T_A}B_2)$. Lift that element along an affine open cover of this fibre product to an element of some $u(C)$ with $C$ affine over $A$. Bijectivity of $c_C$ gives a geometric lift into $C$. By naturality its images in $B_1,B_2$ have the same $c$-images as the original lifts; injectivity of $c_{B_1},c_{B_2}$ identifies them with those lifts. Their composites in $T_A$ coincide, proving $t_1=t_2$. Thus $c$ is a natural isomorphism on the whole site. No affineness of the overlap is asserted.",
+   "uses": [
+    "lem-weil-pbc-affine-etale-essentially-small-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04HU, lemma-points-small-etale-site; claim that affine objects suffice, whose proof the source omits; full cover argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-geometric-morphism",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-sheafification-sets-exact",
+  "def-weil-pbc-etale-site",
+  "lem-trf-affine-etale-split-neighbourhood",
+  "lem-weil-pbc-affine-etale-essentially-small-cover"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04HU, lemma-points-small-etale-site: support, finite affine fibers, coherent choice, and affine-cover descent. This split follows the original node steps; Lean categorical glue uses the cited Mathlib APIs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A natural map from geometric lifts to an etale topos point fiber functor with the same support is bijective",
+   "results": "GrothendieckTopology.Point.toPresheafFiber_map_bijective; StandardEtalePresentation.lift_bijective; PLift.map_bijective.",
+   "date": "2026-10-26",
+   "verdict": "No match; fiber-map bijectivity is for locally bijective presheaf morphisms, not a natural map of site fiber functors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation between etale fiber functors with the same support is bijective",
+   "results": "StandardEtalePresentation.lift_bijective; GrothendieckTopology.Point.toPresheafFiber_map_bijective; Etale.forgetFullyFaithful; PreGaloisCategory.evaluation_aut_bijective_of_isGalois.",
+   "date": "2026-10-26",
+   "verdict": "No match for arbitrary small etale objects and topos inverse image."
+  },
+  {
+   "tool": "grep",
+   "query": "comparison.*bijective|fiber.*comparison|pointSmallEtale in Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean, lean/Sheaf/AlgebraicGeometry, lean/WeilConjectures/AlgebraicGeometry and dag/nodes/sec-trace-formula",
+   "results": "EtalePoint constructs geometric points and their conservative family. AffineEtaleSplitNeighbourhood supplies the needed geometric splitting, but no comparison-bijectivity theorem; no duplicate found in the DAG or latest blueprint.",
+   "date": "2026-10-26",
+   "verdict": "No match; this is the existing classification proof steps 7--8, separated from comparison existence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleToposPointsGeometric",
+  "date": "2026-10-26",
+  "group": "A5"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Current main-20261015 lem-trf-local-term-locality.proof.md, paragraph (1) and (2): \"proved by specialization to the normal cone of Z (his §§1.3–1.4 and 2.1)\"; via the oriented nearby-cycle external-product comparison, its strict-local description uses pointwise conservativity. Supporting the point-classification argument: Natural geometric comparisons with the correct support are bijective.",
+   "via": [
+    "lem-trf-etale-topos-points-geometric",
+    "lem-trf-oriented-product-points-conservative",
+    "lem-trf-oriented-nearby-strict-local-description",
+    "lem-trf-good-oriented-nearby-kunneth",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleToposPointComparisonBijective",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleToposPointComparisonBijective.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etale_point_comparison_bijective",
+  "statement": "theorem etale_point_comparison_bijective (S : Scheme.{u})\n    (p : GeometricMorphism (Type (u + 1))\n      (Sheaf S.smallEtaleTopology (Type (u + 1))))\n    (Ω : Type u) [Field Ω] [IsAlgClosed Ω]\n    (s : Spec (.of Ω) ⟶ S)\n    (c : ((pointSmallEtale s).fiber ⋙ uliftFunctor.{u + 1}) ⟶ etalePointFiberFunctor S p)\n    (hsupport : ∀ U : S.Etale,\n      Nonempty ((etalePointFiberFunctor S p).obj U) ↔ s default ∈ Set.range U.hom) :\n    ∀ U : S.Etale, Function.Bijective (c.app U)",
+  "branch": "sheaf-dag",
+  "by": "A5",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261026T080807-L-1590425",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261026T080807-L-1590425",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

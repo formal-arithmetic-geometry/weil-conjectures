@@ -1,0 +1,137 @@
+{
+ "id": "lem-sf-integral-projection-reduction-coordinates",
+ "kind": "statement",
+ "title": "Normalized scalar squares for individual tensor and projection maps",
+ "statement": "For each finite reduction of the normalized integral datum [def-fix-six-functor-datum], there exist natural tensor-coordinate isomorphisms to the finite partial tensor at the actual reductions (the second input lifted to finite Tor by [def-sf-integral-projection-reduction-coordinates]). In these same coordinates, each individual integral compactification projection and each individual proper counit projection commute with reduction and the corresponding finite projection, using the prescribed support/direct/pullback comparison components. This asserts no composition, pentagon, or proper-coincidence identity.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Successive coefficient reductions, integral reconstruction, and coherence"
+ },
+ "stmt_deps": [
+  "def-sf-integral-projection-reduction-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "Obtain realized coefficient-system operations and the finite-evaluation tensor comparison e. Take its components as t. The two tensor naturality equations follow by applying naturality of e to (a,id) and (id,b).",
+   "uses": [
+    "lem-sf-integral-compactification-system-realization",
+    "lem-sf-integral-projection-finite-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Compatibility of the specified maps under successive coefficient reductions; integral reconstruction and proper counit normalization"
+   }
+  },
+  {
+   "text": "Use integral residue Tor for L. Apply the existing integralProjectionReductionNormalization whole-system square. Evaluate it at m, paste the three endpoint/map evaluation identities, and use naturality of reductionEvaluation. Cancel its source isomorphism and use faithfulness of the full finite inclusion. This proves the single-compactification finite square without any appeal to joint faithfulness of system evaluation.",
+   "uses": [
+    "lem-coef-integral-residue-tor",
+    "lem-sf-integral-projection-reduction-normalization",
+    "lem-sf-integral-projection-finite-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Compatibility of the specified maps under successive coefficient reductions; integral reconstruction and proper counit normalization"
+   }
+  },
+  {
+   "text": "Apply the whole-system proper counit normalization and the same finite-evaluation calculation at the identity-open compactification. Tensor naturality and coefficient compatibility of properIdentity identify the source conjugations. Naturality of finite properIdentity and its coefficient compatibility identify the target conjugations. Cancel the two conjugations by the isomorphism identities; the remaining finite map is definitionally properComponent.",
+   "uses": [
+    "lem-sf-integral-proper-projection-system-normalization",
+    "lem-sf-integral-projection-finite-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Compatibility of the specified maps under successive coefficient reductions; integral reconstruction and proper counit normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-integral-compactification-system-realization",
+  "lem-sf-integral-projection-finite-evaluation",
+  "lem-coef-integral-residue-tor",
+  "lem-sf-integral-projection-reduction-normalization",
+  "lem-sf-integral-proper-projection-system-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Compatibility of the specified maps under successive coefficient reductions; integral reconstruction and proper counit normalization",
+  "note": "C7: evaluate the existing whole-system square and perform the endpoint and proper conjugation diagram chases in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "composition coherence of compact support projection formula proper comparison associativity pentagon",
+   "results": "Eight unrelated Profinite and continuous-map projection hits; no coefficient-normalized compact support identity.",
+   "date": "2026-10-26",
+   "verdict": "Use the project finite projection laws and normalized coefficient data."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pretriangulated.IsHomotopyLimit.bijective_milnorMap",
+   "results": "Unknown identifier; no hits in Mathlib. The project source contains the required proved Milnor injection.",
+   "date": "2026-10-27",
+   "verdict": "Use the proved source Milnor theorem with constructible finite shifted Hom groups."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*coherence|projection.*composition",
+   "results": "Five unrelated Mathlib hits; project rg locates the finite-stage laws, residue-Tor criterion and separated constructible Hom reconstruction.",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib replacement for the normalized projection or the qcqs finiteness input."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralStageProjectionStructuralIdentities",
+  "date": "2026-10-27",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Normalized scalar squares for individual tensor and projection maps",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralProjectionReductionCoordinates",
+  "file": "lean/Sheaf/Paper/IntegralProjectionReductionCoordinates.lean",
+  "declaration": "WeilConjectures.integralProjection_reduction_coordinates",
+  "statement": "theorem integralProjection_reduction_coordinates\n    {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}\n    {E : Type u} [Field E] [Algebra (Padic C.l) E]\n    [FiniteDimensional (Padic C.l) E] {n : ℕ} {hn : 1 ≤ n}\n    (d : SixFunctorOperationDatum D C E n hn) (m : ℕ) :\n    ∃ t : TensorCoordinates d m,\n      (∀ (X : SixFunctorSpace D)\n        (K K' L : sfIntegralConstructibleCategory C.l E X.obj.left) (a : K ⟶ K'),\n        (reduction d m X).map (((d.higher.integralTensor X).map a).app L) ≫\n            (t X K' L).hom =\n          (t X K L).hom ≫\n            ((CompactSupportFiniteProjection.partialTensor (stage d m) X).map\n              ((reduction d m X).map a)).app ((torReduction d m X).obj L)) ∧\n      (∀ (X : SixFunctorSpace D)\n        (K L L' : sfIntegralConstructibleCategory C.l E X.obj.left) (b : L ⟶ L'),\n        (reduction d m X).map (((d.higher.integralTensor X).obj K).map b) ≫\n            (t X K L').hom =\n          (t X K L).hom ≫\n            ((CompactSupportFiniteProjection.partialTensor (stage d m) X).obj\n              ((reduction d m X).obj K)).map ((torReduction d m X).map b)) ∧\n      (∀ {X Y : SixFunctorSpace D} (f : X ⟶ Y)\n        [IsSeparated f.hom.left] [LocallyOfFiniteType f.hom.left] [QuasiCompact f.hom.left]\n        (c : Compactification f.hom.left)\n        (K : sfIntegralConstructibleCategory C.l E X.obj.left)\n        (L : sfIntegralConstructibleCategory C.l E Y.obj.left),\n        (reduction d m Y).map\n            (compactSupportProjectionComponent d.higher.integralExchange f c K L) ≫\n            (targetIso d m t f c K L).hom =\n          (sourceIso d m t f c K L).hom ≫\n            CompactSupportFiniteProjection.component (stage d m) f c\n              ((reduction d m X).obj K) ((torReduction d m Y).obj L)) ∧\n      (∀ {X Y : SixFunctorSpace D} (f : X ⟶ Y) [IsProper f.hom.left]\n        (K : sfIntegralConstructibleCategory C.l E X.obj.left)\n        (L : sfIntegralConstructibleCategory C.l E Y.obj.left),\n        (reduction d m Y).map\n            (compactSupportProperProjection d.higher.integralExchange f K L) ≫\n            (properTargetIso d m t f K L).hom =\n          (properSourceIso d m t f K L).hom ≫\n            CompactSupportFiniteProjection.properComponent (stage d m) f\n              ((reduction d m X).obj K) ((torReduction d m Y).obj L))",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261026T183849-L-3785139",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C7",
+  "result": "pass",
+  "landing": "20261026T222604-L-671250",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

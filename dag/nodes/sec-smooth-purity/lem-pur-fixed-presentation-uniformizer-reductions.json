@@ -1,0 +1,130 @@
+{
+ "id": "lem-pur-fixed-presentation-uniformizer-reductions",
+ "kind": "statement",
+ "title": "Uniformizer reductions for a trace-normalized fixed presentation",
+ "statement": "Fix the finite-field/coefficient setting $P$ of [def-pur-conventions], separated finite-type Noetherian $k$-schemes $X,Y$, and an open/proper factorization $j:X\\hookrightarrow Z$, $p:Z\\to Y$ of a smooth separated quasi-compact locally finite-type $k$-morphism $f$ of pure relative dimension $d\\ge0$. Assume $\\ell$ is invertible in all residue fields of $X,Y$. Let $M$ be a field-shriek model system, $E$ a finite coefficient subfield, $m$ its integral model [def-sp-field-extension-integral-models], $S$ a specified exceptional coefficient ring system, and $T$ a normalized trace-comparison stage of [def-pur-tower-trace-comparison-data]. Assume its unit orientation has PrescribedUnitReductions and that for every finite-Tor integral input $K$, tracePurity of its counitTrace equals its actual tower map. There exist exceptional comparison isomorphisms $e_K:S.G(K)\\simeq purAdicTarget(K)$ such that, for every index $n\\ge0$ (positive uniformizer exponent $n+1$), $red_n(e_K)\\,targetReduction_n=finiteReduction_{T.normal,n}$ and $red_n(tower_K\\,e_K)\\,targetReduction_n=sourceReduction_n\\,finitePurity_n$. All morphisms and source/target comparisons are the literal normalized constructions of that definition node, not unspecified lifts of their finite evaluations.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Step 4, finite uniformizer reductions, including cofinal comparison with ell-power towers"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-sp-field-extension-integral-models",
+  "def-pur-tower-trace-comparison-data",
+  "def-pur-realized-tower-purity-data",
+  "def-pur-adic-purity-objects",
+  "def-pur-adic-exceptional-reduction",
+  "def-pur-adic-source-reduction"
+ ],
+ "proof": [
+  {
+   "text": "Construct the exceptional target comparison by counit-preserving adjoint uniqueness and the normalized completed exceptional realization. Reduce its counit equation. The normalized finite Hom chain determines the comparison uniquely, identifying its reductions with finiteReduction.",
+   "uses": [
+    "lem-pur-tower-purity-realized-transpose",
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the assumed trace-transpose equality to rewrite the whole tower map as tracePurity. Its unit orientation has the prescribed finite reductions, so reduction of its counit trace is finite integration. The normalized K-flat source, tensor and projection comparisons commute with the reduction. Transposition under the finite adjunction therefore gives the specified finite gamma.",
+   "uses": [
+    "det-sp-tower-gamma",
+    "det-sp-integral-adjunction-bijection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write ell as a unit times the e-th power of a uniformizer. The arithmetic restriction comparison preserves total-limit projections and the reconstruction unit/counit, naturally for whole-system maps. For any positive exponent choose a sufficiently large multiple of e and then apply quotient tensor reassociation. The transition identities make both resulting equations independent of this choice.",
+   "uses": [
+    "lem-sp-strict-tower-arithmetic-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-tower-purity-realized-transpose",
+  "det-sp-unique-right-adjoint",
+  "det-sp-tower-gamma",
+  "det-sp-integral-adjunction-bijection",
+  "lem-sp-strict-tower-arithmetic-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Step 4, finite uniformizer reductions, including cofinal comparison with ell-power towers; expansion of normalized realization and counit transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived integral smooth purity under reduction modulo every positive uniformizer power, preserving the specified exceptional counit comparison",
+   "results": "Smooth algebra and localization results only; no derived purity reduction theorem.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral smooth purity has finite uniformizer reductions with the specified counit-preserving exceptional comparison",
+   "results": "PreTilt, untilting, unramified/etale loci and Dedekind uniformizers; no derived tower comparison.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "purAdicTargetReduction.*finiteReduction",
+   "results": "No Mathlib hit. Local TowerPurityRealizedTranspose provides existential normalization data; the fixed-presentation trace-normalized consequence is not separately stated.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TransportIntegralCounitRealization",
+  "date": "2026-10-27",
+  "group": "J3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-purity-transport",
+   "place": "Step 4, finite uniformizer reductions, including cofinal comparison with ell-power towers",
+   "via": [
+    "lem-pur-transport-integral-counit-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FixedPresentationUniformizerReductions",
+  "file": "lean/Sheaf/Paper/FixedPresentationUniformizerReductions.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.TransportIntegralCounit.fixed_presentation_uniformizer_reductions",
+  "statement": "theorem fixed_presentation_uniformizer_reductions\n    [SmoothOfRelativeDimension d (j ≫ p)]\n    [IsNoetherian X] [IsNoetherian Y]\n    [QuasiCompact (j ≫ p)] [IsSeparated (j ≫ p)] [LocallyOfFiniteType (j ≫ p)]\n    [∀ x : X, Invertible (P.coefficients.l : X.residueField x)]\n    [∀ y : Y, Invertible (P.coefficients.l : Y.residueField y)]\n    (S : ConstructibleExceptionalCoefficients.RingSystem P.coefficients.l P.coefficients.Qbar\n      P.field P.coefficients.different (f := j ≫ p))\n    (E : FieldShriekSystem.Index P)\n    (m : FieldExtensionTowers.IntegralModel P M E j p d)\n    (T : TowerTracePurityComparison.Stage P j p d S M E m)\n    (hT : TowerTracePurityComparison.PrescribedUnitReductions P j p d S M E m T\n      (TowerTracePurityComparison.orientation P j p d S M E m T))\n    (ht : ∀ K : finiteTorConstructibleIntegralCategory P.coefficients.l E.val Y,\n      TowerTracePurityComparison.tracePurity P j p d S M E m T\n          (TowerTracePurityComparison.counitTrace P j p d S M E m T\n            (TowerTracePurityComparison.orientation P j p d S M E m T)) K =\n        TowerTracePurityComparison.tower P j p d S M E m T K) :\n    ∃ e : ∀ K : finiteTorConstructibleIntegralCategory P.coefficients.l E.val Y,\n        (((S.operation (SpTowerGamma.factorization j p)\n          (.integral {carrier := E.val})).G.obj K).obj) ≅\n          purAdicTarget P.field P.coefficients E.val (j ≫ p) K.obj,\n      (∀ (K : finiteTorConstructibleIntegralCategory P.coefficients.l E.val Y) (n : ℕ),\n        (scalarReductionDerivedExtension P.coefficients.l E.val X n).map (e K).hom ≫\n            purAdicTargetReduction P.field P.coefficients E.val (j ≫ p) d\n              K.obj K.property n =\n          WeilConjectures.RealizedTowerPurity.finiteReduction P.field P.coefficients\n            E.val (j ≫ p) S (SpTowerGamma.factorization j p) T.normal K n) ∧\n      ∀ (K : finiteTorConstructibleIntegralCategory P.coefficients.l E.val Y) (n : ℕ),\n        (scalarReductionDerivedExtension P.coefficients.l E.val X n).map\n            (TowerTracePurityComparison.tower P j p d S M E m T K ≫\n              (e K).hom) ≫\n            purAdicTargetReduction P.field P.coefficients E.val (j ≫ p) d\n              K.obj K.property n =\n          purAdicSourceReduction P.field P.coefficients E.val (j ≫ p) d\n            K.obj K.property n ≫\n            (purAdicFiniteArrow P.field P.coefficients E.val (j ≫ p) d\n              K.obj K.property n).hom",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1ef65",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261027T034700-L-3673858",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1ef65",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261027T034700-L-3673858",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 9 new modules against clone main (integral_counit_realization statement identical; relocated decls same names/namespaces/variable binders; item public-imports them; 0 importers); new holes against CondensedStage fields, tower_gluing and FiniteNormalization"
+ }
+}

@@ -32,6 +32,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace CategoryTheory
 
+attribute [local instance 20000] ringedCompletionHasSheafCompose
+
 variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
 variable (O : Sheaf J CommRingCat.{u})
 

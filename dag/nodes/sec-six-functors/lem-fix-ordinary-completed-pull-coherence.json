@@ -1,0 +1,144 @@
+{
+ "id": "lem-fix-ordinary-completed-pull-coherence",
+ "kind": "statement",
+ "title": "Identity and composition for ordinary completed-coefficient module pullbacks",
+ "statement": "Fix a prime ell and a finite coefficient extension E [def-weil-l-adic-coefficient-extension]. For every scheme X [def-pc-scheme] use the completed integral coefficient sheaf [def-weil-completed-integral-coefficients] and the actual ordinary module pullback of [def-fix-qcqs-completion-ordinary-models], with independent scheme and coefficient universes. There is a natural isomorphism ordinaryPull(id_X) ≅ id. For any X --f--> Y --g--> Z there is a natural isomorphism ordinaryPull(f ≫ g) ≅ ordinaryPull(g) ⋙ ordinaryPull(f). No exactness, immersion, quasi-compactness or derived category is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2 and 03D7, inverse-image module functors and uniqueness of adjoints; pro-etale fiber-product identity and composition comparisons."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-completed-integral-coefficients",
+  "def-fix-qcqs-completion-ordinary-models"
+ ],
+ "proof": [
+  {
+   "text": "The base-change site functors have the canonical fiber-product identity and composition comparisons. For finite coefficients the direct constant-section maps commute with these comparisons; use their identity-on-constant-sections characterization and naturality of sheafification.",
+   "uses": [
+    "lem-tw-completed-coefficient-ringed-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D2 and 03D7, inverse-image module functors and uniqueness of adjoints; pro-etale fiber-product identity and composition comparisons."
+   }
+  },
+  {
+   "text": "Test the direct completed-ring maps against every finite quotient projection. Naturality of the direct-image compositor, the finite-map identities and the uniqueness in ordinaryCompletedRingMap_existsUnique prove the identity and composition formulas for completed maps.",
+   "uses": [
+    "def-fix-qcqs-completion-ordinary-models",
+    "lem-tw-completed-coefficient-ringed-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D2 and 03D7, inverse-image module functors and uniqueness of adjoints; pro-etale fiber-product identity and composition comparisons."
+   }
+  },
+  {
+   "text": "Apply SheafOfModules.pushforwardComp, pushforwardCongr₂ and pushforwardId to obtain identity and composition for module direct images. Transport their adjunctions and apply leftAdjointUniq to obtain the asserted module pullback comparisons.",
+   "uses": [
+    "def-fix-qcqs-completion-ordinary-models"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D2 and 03D7, inverse-image module functors and uniqueness of adjoints; pro-etale fiber-product identity and composition comparisons."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-fix-qcqs-completion-ordinary-models",
+  "lem-tw-completed-coefficient-ringed-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2 and 03D7, inverse-image module functors and uniqueness of adjoints; pro-etale fiber-product identity and composition comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of sheaves of modules to an open closed decomposition or a covering family jointly reflects isomorphisms, and inverse images compose",
+   "results": "Scheme.Modules.restrictFunctorIsoPullback and restrictFunctorComp concern Zariski structure-sheaf modules. SheafOfModules.pullbackIso and instReflectsIsomorphismsSheafSheafCompose give generic ingredients, not completed pro-etale coefficients.",
+   "date": "2026-10-27",
+   "verdict": "No direct match for the specified ordinaryPull. Use the existing coefficient models and generic site/module constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLeftDerivedFunctor",
+   "results": "leftDerivedUnique and the left-derived natural-isomorphism API.",
+   "date": "2026-10-27",
+   "verdict": "Useful for transporting exact ordinary restrictions to mapDerivedCategory; no geometry-specific module detection statement."
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardComp|mapDerivedCategoryCompIso|JointlyReflectIsomorphisms",
+   "results": "Mathlib SheafOfModules.pushforwardComp and source ExactFunctor.lean mapDerivedCategoryCompIso and jointlyReflectIsomorphisms_mapDerivedCategory.",
+   "date": "2026-10-27",
+   "verdict": "Reuse these proved generic composition and derived-detection lemmas. The lower completed-coefficient geometry still requires its own interface."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact functors which jointly reflect isomorphisms also jointly reflect isomorphisms on unbounded derived categories",
+   "results": "Eight general derived-functor results including mapDerivedCategory and its factorizations. Local rg found the exact jointly-reflecting-family theorem in WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor.",
+   "date": "2026-10-27",
+   "verdict": "Reuse that existing proved source theorem rather than introduce another cohomology descent obligation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QcqsOrdinaryLocalDetection",
+  "date": "2026-10-27",
+  "group": "D7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning “For an admissible exceptional adjoint”, especially “Evaluation is natural in the two Weil maps and their inverses, so its square commutes”: the canonical-unit restriction and finite open–closed locality used in the ordinary-to-completed evaluation comparison.",
+   "via": [
+    "lem-fix-qcqs-ordinary-local-detection",
+    "lem-fix-qcqs-completion-unit-locality",
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OrdinaryCompletedPullCoherence",
+  "file": "lean/Sheaf/Paper/OrdinaryCompletedPullCoherence.lean",
+  "declaration": "WeilConjectures.IntegralOnSlice.ordinaryCompletedPullCoherence",
+  "statement": "theorem ordinaryCompletedPullCoherence\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :\n    (∀ X : Scheme.{t}, Nonempty (ordinaryPull l E (𝟙 X) ≅ 𝟭 (Mod l E X none))) ∧\n    (∀ {X Y Z : Scheme.{t}} (f : X ⟶ Y) (g : Y ⟶ Z),\n      Nonempty (ordinaryPull l E (f ≫ g) ≅ ordinaryPull l E g ⋙ ordinaryPull l E f))",
+  "branch": "sheaf-dag",
+  "by": "D7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261026T222617-L-674083",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261026T222617-L-674083",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,119 @@
+{
+ "id": "lem-per-adic-lisse-linear-dual-comparisons",
+ "kind": "statement",
+ "title": "Lisse linear duality with completed derived-Hom normalization",
+ "statement": "Let ell be prime, let Qbar be an algebraic closure of Q_ell, and let X be a separated Noetherian scheme of finite Krull dimension on which ell is invertible. let M be a normalized model bundle [def-zl-adic-lisse-calculus-models]. There is a contravariant endofunctor on the adic lisse category, whose geometric fibres are the ordinary Qbar-linear duals, with precomposition naturality. The pair of M.realization of each sheaf and M.realization of the lisse unit is a permitted completed internal-Hom pair [def-weil-derived-pullback-tensor-hom]. The realization of its lisse dual is naturally isomorphic to that derived internal Hom, transported back through M.comparison. This asserts no cohomology/tensor comparison.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(1),(4), Remark 6.8.15; dual-system and derived-dual calculations in parent proof Steps 8--10."
+ },
+ "stmt_deps": [
+  "def-zl-adic-lisse-calculus-models",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "proof": [
+  {
+   "text": "The contravariant lisse dual, with fibre evaluation and derived-dual\nnormalizations. This statement does not assert any cohomology/tensor comparison.\nSource: Bhatt--Scholze, Proposition 6.8.4(1),(4), Remark 6.8.15; the linear-dual\ncalculation in the blueprint lisse tensor permanence argument.\n(blueprint: lem-per-adic-lisse-linear-dual-comparisons).\n\nProof: choose a common finite coefficient field and, componentwise, a stable\nfinite-free integral lattice. At level n take the sheaf Hom of its finite-free\nquotient L_n into the constant quotient coefficient sheaf. Finite-free duality\ncommutes with reduction: a change of basis acts on the dual by inverse transpose,\nand reduction preserves this formula. Thus the duals form a normalized lisse\nsystem. Morphisms act by precomposition. Dualization reverses scalar-extension\ncomparisons; evaluation fixes their unit and composition equations. Consequently\nthese systems and maps rationalize and descend to a contravariant functor on the\nadic lisse category, independently of the chosen lattice.\n\nAt a geometric point take finite etale fibres and inverse limits. In a local\nbasis evaluation is the usual sum of coordinate products. The finite-module\nadic limit theorem identifies the limit dual with the integral linear dual.\nInversion of the uniformizer and finite-free scalar extension identify its Qbar\nfibre with the displayed vector-space dual. Precomposition with a map gives\nexactly dual_fiber_naturality, first on integral maps and then on the generators\nof the coefficient localizations.\n\nThe completed realization of the dual system is Hom_B(N,B). Sheaf Hom from N is\nexact: on a trivializing slice it is a finite direct sum of the identity, and\nexactness descends by the sheaf axiom. Apply bounded exact-term Hom preservation\nto N[0] and a K-injective resolution of B[0]. It identifies Hom_B(N,B)[0] with\nthe recorded derived internal Hom. Its local finite-free model puts it in the\nintegral constructible category. Thus the rational and common-stage Hom pair is\npermitted. Rationalizing the evaluation-defined comparison and transporting\nthrough models.comparison gives dual_realization. Precomposition on the complex Hom\nmodel proves the displayed naturality equation. The scalar-operation comparisons\nand their tower laws prove compatibility with every coefficient-change map.\nRank zero and empty components give the zero dual and require no exception.",
+   "uses": [
+    "cor-galois-lisse-representations",
+    "lem-pod-profinite-stable-lattice",
+    "lem-per-lisse-completed-system-comparison",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-pod-adic-limit-finite-modules",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sc-finite-free-internal-hom-exact",
+    "lem-pc-bounded-exact-term-hom-quasi-iso",
+    "def-pur-derived-internal-hom",
+    "lem-pur-integral-operations-scalar-extension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "cor-galois-lisse-representations",
+  "lem-pod-profinite-stable-lattice",
+  "lem-per-lisse-completed-system-comparison",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-pod-adic-limit-finite-modules",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sc-finite-free-internal-hom-exact",
+  "lem-pc-bounded-exact-term-hom-quasi-iso",
+  "def-pur-derived-internal-hom",
+  "lem-pur-integral-operations-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(1),(4), Remark 6.8.15; dual-system and derived-dual calculations in parent proof Steps 8--10."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of derived tensor with a finite locally free lisse sheaf and its dual",
+   "results": "No exact adic common-stage match; sheaf cohomology and condensed module instances only.",
+   "date": "2026-10-25"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapHomologyIso",
+   "results": "Unknown identifier. Ordinary exact-functor homology is available as ShortComplex.mapHomologyIso, but gives neither completed lisse realization nor common-stage descent.",
+   "date": "2026-10-25"
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologyIso|homologyFunctor.*tensor|lisse.*dual",
+   "results": "ShortComplex.mapHomologyIso and ordinary stalk homology hits; no normalized adic bundle or completed dual theorem. Project searches found CompletedLisse.System, localized t-structures, and finite-stage operations; none directly supplies this substatement.",
+   "date": "2026-10-25"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicLisseCohomologyCalculus",
+  "date": "2026-10-25",
+  "group": "A6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-adic-lisse-cohomology-calculus",
+   "place": "Proposition 6.8.4(1),(4), Remark 6.8.15; dual-system and derived-dual calculations in parent proof Steps 8--10.",
+   "via": [
+    "lem-per-adic-lisse-cohomology-calculus"
+   ]
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicLisseLinearDualComparisons",
+  "file": "lean/Sheaf/Paper/AdicLisseLinearDualComparisons.lean",
+  "declaration": "AlgebraicGeometry.Scheme.adic_lisse_linear_dual_comparisons",
+  "statement": "theorem adic_lisse_linear_dual_comparisons (models : AdicLisseCalculusModels l Qbar X) :\n    ∃ dual : (LisseAlgebraicSheaf l X Qbar)ᵒᵖ ⥤ LisseAlgebraicSheaf l X Qbar,\n    ∃ dual_fiber : ∀ (k : Type u) [Field k] [IsAlgClosed k] (x : Spec (.of k) ⟶ X)\n    (L : LisseAlgebraicSheaf l X Qbar),\n    (lisseAlgebraicFiberFunctor l X x Qbar).obj (dual.obj (op L)) ≅\n      ModuleCat.of Qbar (Module.Dual Qbar ((lisseAlgebraicFiberFunctor l X x Qbar).obj L)),\n    (∀ (k : Type u) [Field k] [IsAlgClosed k]\n    (x : Spec (.of k) ⟶ X) (L M : LisseAlgebraicSheaf l X Qbar) (f : L ⟶ M),\n    (lisseAlgebraicFiberFunctor l X x Qbar).map (dual.map f.op) ≫\n        (dual_fiber k x L).hom =\n      (dual_fiber k x M).hom ≫ ModuleCat.ofHom\n        (LinearMap.dualMap ((lisseAlgebraicFiberFunctor l X x Qbar).map f).hom)) ∧\n    ∃ dual_permitted : ∀ L : LisseAlgebraicSheaf l X Qbar,\n    commonStageHomPairs l Qbar X\n      (op (models.comparison.functor.obj (models.realization.obj L)),\n        models.comparison.functor.obj (models.realization.obj (lisseAlgebraicUnit l X Qbar))),\n    ∃ dual_realization : ∀ L : LisseAlgebraicSheaf l X Qbar,\n    models.realization.obj (dual.obj (op L)) ≅ models.comparison.inverse.obj\n      ((commonStageDerivedInternalHom l Qbar X).obj\n        ⟨(op (models.comparison.functor.obj (models.realization.obj L)),\n          models.comparison.functor.obj (models.realization.obj (lisseAlgebraicUnit l X Qbar))),\n          dual_permitted L⟩),\n    ∀ (L M : LisseAlgebraicSheaf l X Qbar) (f : L ⟶ M),\n    models.realization.map (dual.map f.op) ≫ (dual_realization L).hom =\n      (dual_realization M).hom ≫ models.comparison.inverse.map\n        ((commonStageDerivedInternalHom l Qbar X).map\n          (ObjectProperty.homMk\n            ((models.comparison.functor.map (models.realization.map f)).op,\n              𝟙 (models.comparison.functor.obj\n                (models.realization.obj (lisseAlgebraicUnit l X Qbar))))))",
+  "branch": "sheaf-dag",
+  "by": "A6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-42474",
+  "group": "A6",
+  "result": "fix",
+  "landing": "20261025T003304-L-3225711",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-42474",
+  "group": "A6",
+  "result": "fix",
+  "landing": "20261025T003304-L-3225711",
+  "kind": "interface",
+  "note": "independent cc review: item Nonempty(AdicLisseCohomologyCalculus) vs normalized-models ∧ ∀M tensor ∧ ∀M dual assembly; moved data block diffed byte-identical to clone; def-node vs theorem-node lean ownership"
+ }
+}

@@ -1,0 +1,109 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Second triangle, the last paragraph: all rearranged shifts are even."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleCoordinateTraceContractions",
+  "date": "2026-10-25",
+  "group": "G5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The two triangle computations before the diagonal integrals, coordinate interchange and extraction of the common coefficient.",
+   "via": [
+    "lem-sfb-etale-coordinate-trace-contractions",
+    "lem-sf-affine-base-p1-trace-adjunction",
+    "lem-sf-affine-line-canonical-duality",
+    "lem-sf-smooth-dualizing-complex-invertible"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_match": null,
+ "id": "lem-sfb-etale-even-line-self-symmetry",
+ "title": "Identity self symmetry of an even shifted etale line",
+ "statement": "Let A be a commutative ring and Y a scheme. Let J be a sheaf of A-modules on the small etale site of Y, etale locally isomorphic to the unit A_Y, and let d be any integer. The canonical signed symmetry of the derived tensor on L tensor L, for L=J[2d], is the identity morphism. Use the unbounded derived category and shiftedLine and swap of [def-sfb-etale-coordinate-trace-data].",
+ "stmt_deps": [
+  "def-sfb-etale-coordinate-trace-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply etaleLineFlatAndBraiding to obtain flatness and ordinary identity self braiding. Then specialize evenShiftCanonicalSelfSymmetry to the ordinary etale sheaf category. Unfold only the published swap, shiftedLine and tensor wrappers to identify the required canonical symmetry.",
+   "uses": [
+    "lem-sfb-etale-line-flat-braiding",
+    "lem-sfb-even-shift-canonical-self-symmetry"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-etale-line-flat-braiding",
+  "lem-sfb-even-shift-canonical-self-symmetry"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Second triangle, final even-shift paragraph. P3 writes the ordinary etale local-unit argument, the single-complex summand calculation, and canonical K-flat localization cancellation in Lean using existing source-library APIs, without the general ringed-site comparison packages."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The self braiding of a locally free rank one sheaf shifted by an even integer is the identity",
+   "results": "Center.braiding, BraidedCategory.braiding, Limits.biprod.symmetry_assoc, Limits.biprod.symmetry, Center.ofBraidedObj_snd_β, Sheaf.braidedCategory, instBraidedCategoryOverScheme, SemimoduleCat.braiding",
+   "date": "2026-10-25",
+   "verdict": "No even shifted sheaf-line self-symmetry computation; these give generic braidings or double symmetry."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An even shifted line object in the derived category of sheaves has identity tensor self symmetry",
+   "results": "Sheaf.symmetricCategory, LightCondensed.instSymmetricCategoryLightCondMod, DerivedCategory.instCommShiftCochainComplexIntQ, sheafToPresheaf_δ, Sheaf.braidedCategory, sheafToPresheaf_μ, CommShift₂Setup.int_ε, CommShift₂Setup.int",
+   "date": "2026-10-25",
+   "verdict": "Generic signed shift constraints only, no identity self-symmetry theorem for an even shifted etale line."
+  },
+  {
+   "tool": "grep",
+   "query": "(self|even|rank.one).*(braiding|symmetry)|(braiding|symmetry).*(self|even|rank.one)",
+   "results": "No Mathlib hits. Local library search found only the plan in EtaleCoordinateTraceContractions and the rational pro-etale analogue RationalP1KernelContractions, which has a different category and includes diagonal-class maps.",
+   "date": "2026-10-25",
+   "verdict": "No duplicate with the required etale signed symmetry map."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleEvenLineSelfSymmetry",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleEvenLineSelfSymmetry.lean",
+  "declaration": "AlgebraicGeometry.Etale.CoordinateTrace.evenLineSelfSymmetry",
+  "statement": "theorem evenLineSelfSymmetry {Y : Scheme.{u}}\n    (J : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A))\n    (hJ : Scheme.IsLisseRankOneSheaf J) (d : ℤ) :\n    (swap A Y (shiftedLine A J d) (shiftedLine A J d)).hom = 𝟙 _",
+  "branch": "sheaf-dag",
+  "by": "G5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-c7a53",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261025T123006-L-1822645",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261027T034719-L-3678351",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,45 @@
+# Worker report
+
+## Files written
+
+- dag/nodes/sec-six-functors-basics/lem-sfb-flat-algebra-derived-module-tensor-exchange.json: statement, split into five proof steps; Mathlib searches find ordinary flatness and tensor balancing, but no derived module exchange with the specified augmentation.
+- citations.json: one verbatim statement quotation for each of the 19 step/node citations.
+- report.md: this report. No new DAG nodes, no Mathlib leaves, no Lean files, no builds.
+
+## Attachments
+
+None. I searched lean/WeilConjectures by the blueprint id and tensor-exchange concepts and read DerivedChangeOfRings.lean and the relevant FlatModel.lean declarations. The existing K-flat tensor computations are tools, not declarations of this entire two-ring module statement with its augmentation clause.
+
+## WANTED
+
+None. The sources needed for this proof are in the read clone.
+
+## Corrections and provenance
+
+The mathematical statement is retained, with the missing explicit reference to def-weil-pbc-free-module added to the text and stmt_deps. There was no prior sandbox split or report. The live item had an empty proof and status unsplit. I preserved its inherited searches, source, created record and blueprint fields, and appended only searches actually run through msearch.py in this sandbox. The current command log is searches.jsonl. The two semantic phrasings, Loogle searches and source grep were all available; no service failure was relabelled as absence.
+
+The nearest-ancestor command prints blueprint.from.node = None. This is inherited from the existing deformation branch, not a new provenance choice. I retained its detailed from.place and via chain. I read the newest blueprint at literature/blueprint/latest, including sec-six-functors-basics/_section.md, sk-thm-sf-ctf-stability/_section.md and sk-thm-sf-ctf-stability-direct-images.proof.md. The latest direct-image proof (3) now uses proper/open factorization and does not reproduce the long historical alteration/deformation branch in the inherited place text. This auxiliary algebra split makes no change to the chapter or unit route, and does not pretend that the newest blueprint independently states the algebra lemma. Searches of the whole DAG and blueprint for flat algebra, derived module tensor, tensor exchange, base-change-comparison and free resolution found no blueprint node stating this module-coefficient statement. Existing generic tools were reused instead of creating duplicates.
+
+The source for the item is more-algebra.tex Tag 0661, lemma-base-change-comparison (lines 14955 onward), whose proof extends a free resolution across the Tor-independent square and balances tensors, and examples-defos.tex Tag 0DZ2, lemma-lift-equivalence-module (lines 2039 onward), whose footnote explicitly uses module coefficient I. Flatness supplies the resolution condition for arbitrary N, without any finiteness hypothesis. I supplied the naturality and augmentation calculation explicitly and marked proof_origin.by = agent because those compatibility equations are an elaboration of the source proof.
+
+## Unfinished work
+
+None for this stage-1 split. The cited generic DAG tools remain their existing items; no claim is made that their Lean proofs are complete. The independent mathematical review is the maintainer's.
+
+## Review by Q36
+
+I read delivery-errors B through E in full and checked the five proof steps with the cited node statements and Stacks sources open. There are no new nodes, so no new statement-only leaf, duplicate-tag pair, or disguised clause of the item to assess. The algebraic base-change formulas are elementary steps in this item rather than extra DAG nodes. All steps are under 2000 characters. No SGA source is used.
+
+Step 1 uses lem-weil-pbc-flat-tensor-exact for preservation of exactness of the augmented free resolution by S tensor, not just the definition of flatness. Its hypothesis is exactly the assumed flat R-module S. I read algebra.tex Tag 00HD and the flat-ring-map definition. def-weil-pbc-free-module really states the arbitrary-basis finite-coordinate description, and def-weil-pbc-module-tensor-product gives the universal property and pure-tensor generators. These justify the written coordinate inverses for base-changed bases and the elementary injection test for a free tensor factor; flat tensor exactness also converts that test to the exactness convention. The non-elementary K-flat conclusion is precisely the statement of lem-pc-module-bounded-flat-kflat, checked against more-algebra.tex Tag 064K, lemma-derived-tor-quasi-isomorphism. Its bounded-above hypothesis holds for F and S tensor F, but is never imposed on K.
+
+Step 2 uses only the tensor universal property and the signed direct-sum total definition. I checked both inverse formulas on the balancing relations and the differential on bidegree (p,q); the S coefficient has degree zero, so there is no additional sign. This is an elementary chain isomorphism, stronger than a per-degree cohomology comparison, and it retains the action on K. There is no appeal to an uncited derived scalar-exchange theorem.
+
+Step 3 uses lem-trf-one-point-derived-ring-identification, whose statement gives the exact tensor equivalence, its identifications of complexes, K-flatness and derived localizations. I checked its source sites-modules.tex Tag 03CW on the terminal site. Every presheaf there is already a sheaf, so the additive sheafification hypothesis of lem-sf-ringed-derived-native-tensor holds. That latter node explicitly states the canonical lax tensorator's invertibility when either factor is K-flat and its natural comparison on unbounded complexes; I read its statement and sites-cohomology.tex Tag 0FPT with the K-flat construction in more-algebra.tex Tags 064M and 06Y0. It supplies more than a bare existence of an isomorphism. def-weil-abstract-derived-category states localization at quasi-isomorphisms, which inverts e. I checked the directions in alpha = (1 tensor Qe) mu inverse Qb. Restriction is exact by the explicit kernel/image observation in the step; no unsupported assertion that restriction preserves K-flatness is used. Over R it is F, not restricted K, that is K-flat.
+
+Step 4 uses the same natural tensorator and the terminal-site equivalence for the two naturality squares. For naturality in N, lem-weil-pbc-free-complex-maps-to-resolution states exactly existence of a lift from a free complex into an arbitrary resolution. I checked algebra.tex Tag 00LS(1) against it. new-t4-augmented-resolution-lift-homotopy states uniqueness up to homotopy with a projective source and exact target, precisely as required by Tag 00LS(2). Free source terms are projective by lifting basis images, which the step writes out. The reindexing n = -i changes nonpositive cochains to nonnegative chains without changing the augmentation. lem-sfb-total-tensor-homotopy states that tensor passes to homotopy classes on both sides. I read more-algebra.tex lemma-derived-tor-homotopy and its explicit H formula; for K on the left, the second-factor homotopy on x tensor f has sign (-1)^deg(x). Thus two augmented lifts give the same localized S-linear map even when K is unbounded. The comparisons for two resolutions are inverse because their composites lift the identity and hence are homotopic to it. This checks the canonicity claim instead of silently choosing a resolution map.
+
+Step 5 uses the same specified natural lax tensorator for the canonical derived-to-ordinary map. I verified the equation mu(K,M)(1 tensor Qe) = Q(1 tensor e)mu(K,G), substituted alpha, and cancelled only an already invertible factor. Ordinary balancing sends x tensor (s tensor n) to sx tensor n, so the full chain composite is exactly x tensor f -> x tensor epsilon(f), including components where epsilon is zero. This proves the required augmentation clause rather than claiming that any isomorphism will do. The tensor and total-definition nodes supply all elementary generator and sign checks.
+
+I tested the argument on N = 0, K = 0, S = R, N = R, the zero ring, and an infinite-rank free resolution. For R = S = Z, K = (Z/2)[0] and N = Z/2 with its two-term free resolution, both sides have Z/2 in degrees 0 and -1; the augmentation is the usual derived-to-ordinary comparison, not an erroneously asserted quasi-isomorphism to ordinary tensor. For a flat polynomial algebra S = R[t], the S action remains on K on every displayed map. Direct-sum finite support, rather than diagonal finiteness, handles the total tensor when K is unbounded. Dropping flatness would fail: Z -> Z/2 with N = Z/2 gives a nonexact base-changed resolution, confirming why step 1 needs the stated flatness.
+
+I checked every entry of citations.json against its node's statement; full statement quotations ensure the actual K-flat, naturality and homotopy assertions used are present, rather than quoting only the opening setup. Off-unit generic tools are declared in split_report.tool_uses. The server review_split check passed with zero new nodes; the full delivery dry run follows.

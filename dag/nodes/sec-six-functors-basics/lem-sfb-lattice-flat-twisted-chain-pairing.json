@@ -1,0 +1,286 @@
+{
+ "id": "lem-sfb-lattice-flat-twisted-chain-pairing",
+ "kind": "statement",
+ "title": "Flat twisted Koszul chain pairing for lattice algebras",
+ "statement": "Let $R$ be a commutative condensed ring on the small coherent profinite site [sk-def-sfb-condensed-ring, def-weil-size-convention], let $r\\geq0$, and put $D=\\mathbf Z^r$, $\\mathcal M=\\operatorname{Mod}_R$ and $\\mathcal E=\\mathcal A_R(D)$ [sk-def-sfb-module-objects, def-sfb-condensed-action-module]. Write $t:\\mathcal M\\to\\mathcal E$ for trivial action and $\\Gamma$ for invariants [lem-sfb-condensed-derived-restriction-calculus]. Use ordinary derived categories and localization $Q$ [def-weil-abstract-derived-category]. For equivariant cochain complexes use the finite Koszul complex of [lem-sfb-discrete-lattice-koszul-resolution] and its total $K(P)^n=\\bigoplus_{a+b=n}K_R(P^b;T)^a$, with differential $d_K+(-1)^a d_P$. Let $B$ be an internal commutative unital $R$-algebra with commuting $R$-algebra automorphisms $T_1,\\ldots,T_r$, and put $K_B=K_R(B;T)$. Assume $B\\otimes_R-$ is exact on $\\mathcal M$. Then $K_B$ and $tK_B$ are flat-term K-flat bounded complexes in $\\mathcal M$ and $\\mathcal E$ respectively: total tensor with any acyclic complex is acyclic. Put $T_A=\\prod_{i\\in A}T_i$ and $\\epsilon(A,C)=(-1)^{\\#\\{(a,c)\\in A\\times C:c<a\\}}$. The formula\n$$(x\\star y)_I=\\sum_{A\\sqcup C=I,\\ |A|=p}\\epsilon(A,C)x_A T_A(y_C)\\qquad(x\\in K_B^p,\\ y\\in K_B^q,\\ |I|=p+q)$$\ndefines an internal $R$-bilinear chain map $\\star:K_B\\otimes_R K_B\\to K_B$ with\n$$d(x\\star y)=dx\\star y+(-1)^p x\\star dy.$$\nThe degree-zero element $1_B$ gives a chain map $u:R[0]\\to K_B$ and is a two-sided unit for $\\star$. Ordinary tensors of these K-flat complexes represent their derived tensors. The assertions and formulas hold for $r=0$, the zero algebra, the zero ring and characteristic two; no assumption on $R$ beyond commutativity is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YQ, lemma-bounded-flat-K-flat, for bounded flat K-flatness; twisted Leibniz formula is the agent expansion of paragraph (3) of the current blueprint direct-images proof, returned proof steps 10–11."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-size-convention",
+  "sk-def-sfb-module-objects",
+  "def-sfb-condensed-action-module",
+  "lem-sfb-condensed-derived-restriction-calculus",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-discrete-lattice-koszul-resolution",
+  "def-sfb-lattice-algebra-derived-cup",
+  "def-sfb-lattice-derived-invariants-tensor",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "Use [def-weil-pbc-internal-abelian-sheaf-module-equivalence] to regard internal modules as module sheaves on the small coherent profinite site. The relative tensor is the sheafification of the sectionwise balanced tensor [def-pur-sheaf-tensor-product]: its universal balanced maps give the same internal relative tensor. By [lem-sfb-discrete-lattice-koszul-resolution], $K_B^a$ is a finite direct sum of copies of $B$, zero outside $0\\leq a\\leq r$. Tensor with this sum is the finite direct sum of the exact functor $B\\otimes_R-$. Thus every term is flat, including the zero terms [def-pc-flat-sheaf-modules].",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-pur-sheaf-tensor-product",
+    "lem-sfb-discrete-lattice-koszul-resolution",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), discrete-lattice input below the ordinary-open direct-image argument; explicit agent calculation."
+   }
+  },
+  {
+   "text": "Apply [lem-pc-bounded-above-flat-kflat-site] on this ringed site to the flat complex $K_B$, bounded above by $r$. It is K-flat in the acyclic-total-tensor sense [def-pc-kflat-complex]. In particular $\\operatorname{Tot}(K_B\\otimes_R A)$ is acyclic for every acyclic complex $A$; symmetry exchanges the two tensor factors with sign $(-1)^{ab}$ on bidegree $(a,b)$.",
+   "uses": [
+    "lem-pc-bounded-above-flat-kflat-site",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ, lemma-bounded-flat-K-flat, applied to the coherent profinite ringed site."
+   }
+  },
+  {
+   "text": "Let $U:\\mathcal E\\to\\mathcal M$ forget the action. Its exactness and detection of exactness are [lem-sfb-condensed-derived-restriction-calculus]; its underlying diagonal tensor comparison is [def-sfb-condensed-action-tensor]. For a short exact sequence in $\\mathcal E$, tensor with $tK_B^a$ becomes, under $U$, tensor with $K_B^a$ of the underlying short exact sequence, hence is exact. So $tK_B$ has flat terms and the same bounds. For any acyclic complex $A$ in $\\mathcal E$, exactness gives acyclic $UA$, and\n$$U\\operatorname{Tot}(tK_B\\otimes_R A)\\cong\\operatorname{Tot}(K_B\\otimes_R UA).$$\nThis is the canonical chain isomorphism induced by the strong tensor comparison and the additive forgetful functor; it uses only finite sums in each degree, since $K_B$ is bounded. The right side is acyclic by Step 2; detection of exactness implies acyclicity on the left before forgetting. This proves K-flatness in $\\mathcal E$.",
+   "uses": [
+    "lem-sfb-condensed-derived-restriction-calculus",
+    "def-sfb-condensed-action-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), discrete-lattice input below the ordinary-open direct-image argument; explicit agent calculation."
+   }
+  },
+  {
+   "text": "For disjoint $A,C$, the rule $(x,y)\\mapsto xT_A(y)$ is $R$-balanced and additive in each variable because every $T_i$ is an internal $R$-algebra automorphism. It commutes with restrictions on the site, hence induces a map of sheaf tensors [def-pur-sheaf-tensor-product]. Add these maps with coefficients $\\epsilon(A,C)$ over the finite ordered partitions of $I$. This gives an internal degree-preserving bilinear map on $K_B\\otimes_R K_B$, zero in impossible degrees. We check its differential against the explicit Koszul differential of [lem-sfb-discrete-lattice-koszul-resolution] in the next step.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-sfb-discrete-lattice-koszul-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), discrete-lattice input below the ordinary-open direct-image argument; explicit agent calculation."
+   }
+  },
+  {
+   "text": "Fix homogeneous degrees $p,q\\geq0$ and a target set $J$ of size $p+q+1$. Index terms by $J=A\\sqcup C\\sqcup\\{i\\}$, with $|A|=p$, $|C|=q$. Put $N=\\#\\{(a,c)\\in A\\times C:c<a\\}$, $a=\\#\\{j\\in A:j<i\\}$ and $c=\\#\\{j\\in C:j<i\\}$. The contribution to $d(x\\star y)_J$ has sign $(-1)^{N+a+c}$ and value\n$$(T_i-1)(x_A T_A y_C)=T_i(x_A)T_AT_i(y_C)-x_AT_A(y_C).$$\nIn $(dx\\star y)_J$, partition $J=(A\\cup\\{i\\})\\sqcup C$; the sign exponent is $(N+c)+a$. Its value is $(T_ix_A-x_A)T_AT_i(y_C)$. In $(-1)^p(x\\star dy)_J$, partition $J=A\\sqcup(C\\cup\\{i\\})$; the exponent is $p+(N+p-a)+c$, congruent to $N+a+c$ modulo two. Its value is $x_AT_A(T_iy_C-y_C)$. Adding these last two values cancels $-x_AT_AT_i(y_C)$ with $+x_AT_AT_i(y_C)$ and gives the first displayed value. These indexings exhaust all summands, so summing proves the Leibniz identity. Only multiplicativity of $T_i$, commutation with $T_A$, and the stated differential [lem-sfb-discrete-lattice-koszul-resolution] were used. The identity on generalized pure tensors gives equality of the internal morphisms by the tensor presentation [def-pur-sheaf-tensor-product]. Thus $\\star$ is a chain map.",
+   "uses": [
+    "lem-sfb-discrete-lattice-koszul-resolution",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), discrete-lattice input below the ordinary-open direct-image argument; explicit agent calculation."
+   }
+  },
+  {
+   "text": "Every $T_i$ fixes $1_B$, so $d(1_B)=((T_i-1)1_B)_i=0$ by [lem-sfb-discrete-lattice-koszul-resolution]. The algebra unit $R\\to B=K_B^0$, zero in other degrees, therefore defines $u:R[0]\\to K_B$. For $u\\star x$ the only partition has $A=\\varnothing$, sign $+1$, and $T_A=1$. For $x\\star u$ it has $C=\\varnothing$, sign $+1$, and $T_A(1_B)=1_B$. Thus both products equal $x$. For $r=0$ the formulas reduce to ordinary multiplication and unit on $B[0]$. If $B$ or $R$ is zero all maps are the unique zero maps (and the identity of the zero object is zero); in characteristic two the same integral sign identities reduce modulo two. No division, nonzero hypothesis or restriction on characteristic was used.",
+   "uses": [
+    "lem-sfb-discrete-lattice-koszul-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), discrete-lattice input below the ordinary-open direct-image argument; explicit agent calculation."
+   }
+  },
+  {
+   "text": "In $\\mathcal M$, [lem-weil-pbc-site-derived-tensor-descent] applied to the flat-term K-flat complexes just established identifies their ordinary total tensors with their derived tensors. For the action category use its ordinary K-flat derived tensor as specified in [def-sfb-condensed-derived-cup]: the identity of $tK_B$ is already a flat-term K-flat replacement, by Step 3, so the defining representative formula computes its derived tensor by its ordinary total tensor. The same applies to $R[0]$ and $tR[0]$: tensoring with the regular unit is the identity, so these are flat and K-flat. This supplies all ordinary-to-derived tensor identifications asserted in the item.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "def-sfb-condensed-derived-cup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), discrete-lattice input below the ordinary-open direct-image argument; explicit agent calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-pur-sheaf-tensor-product",
+  "lem-sfb-discrete-lattice-koszul-resolution",
+  "def-pc-flat-sheaf-modules",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "def-pc-kflat-complex",
+  "lem-sfb-condensed-derived-restriction-calculus",
+  "def-sfb-condensed-action-tensor",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-sfb-condensed-derived-cup"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), algebraic lattice normalization; bounded-flat input from Stacks Tag 06YQ, all twisted-product calculations written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A flat internal algebra with commuting automorphisms has K flat Koszul cochains and a twisted shuffle Leibniz chain pairing",
+   "results": "{\"t\": \"2026-10-22T06:02:29Z\", \"tool\": \"leanfinder\", \"query\": \"A flat internal algebra with commuting automorphisms has K flat Koszul cochains and a twisted shuffle Leibniz chain pairing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.tensorH1Cotangent\", \"KaehlerDifferential.endEquivAuxEquiv\", \"KaehlerDifferential.End_equiv_aux\", \"Algebra.FormallySmooth.iff_split_injection\", \"Algebra.Extension.formallySmooth_iff_split_injection\", \"KaehlerDifferential.endEquiv\", \"Algebra.FormallySmooth.projective_kaehlerDifferential\", \"Algebra.formallySmooth_iff\"], \"digest\": \"b1a2922807357f4f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary algebra flatness and group or Lie cochain differentials do not state the twisted finite Koszul pairing or its internal-module K-flatness"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KoszulComplex\"",
+   "results": "{\"t\": \"2026-10-22T06:02:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"KoszulComplex\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary algebra flatness and group or Lie cochain differentials do not state the twisted finite Koszul pairing or its internal-module K-flatness"
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*(cup|pair|flat)|twisted.*(shuffle|leibniz)",
+   "results": "{\"t\": \"2026-10-22T06:02:29Z\", \"tool\": \"grep\", \"query\": \"koszul.*(cup|pair|flat)|twisted.*(shuffle|leibniz)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary algebra flatness and group or Lie cochain differentials do not state the twisted finite Koszul pairing or its internal-module K-flatness"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat internal algebra with commuting automorphisms has K flat Koszul cochains and a twisted shuffle Leibniz chain pairing",
+   "results": "{\"t\": \"2026-10-22T06:02:30Z\", \"tool\": \"leansearch\", \"query\": \"A flat internal algebra with commuting automorphisms has K flat Koszul cochains and a twisted shuffle Leibniz chain pairing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.instSubtypeMemSubmoduleSubmoduleAlgebra\", \"RingHom.flat_algebraMap_iff\", \"Algebra.HasGoingDown.of_flat\", \"RingHom.Flat\", \"Algebra.Smooth.flat\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"Module.Flat.self\", \"Module.Flat.tensorSubmoduleAlgebraEquivMul\"], \"digest\": \"a3f8a0e285dc11b6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary algebra flatness and group or Lie cochain differentials do not state the twisted finite Koszul pairing or its internal-module K-flatness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Twisted multiplication on Koszul group cochains x T A y satisfies the graded Leibniz rule",
+   "results": "{\"t\": \"2026-10-22T06:02:39Z\", \"tool\": \"leanfinder\", \"query\": \"Twisted multiplication on Koszul group cochains x T A y satisfies the graded Leibniz rule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"inhomogeneousCochains.d\", \"inhomogeneousCochains.d_hom_apply\", \"groupCohomology.inhomogeneousCochains.d_def\", \"LieModule.Cohomology.d₂₃\", \"LieModule.Cohomology.d₂₃_apply\", \"inhomogeneousCochains.d_eq\", \"groupCohomology.inhomogeneousCochains.d_comp_d\", \"LieModule.Cohomology.d₁₂_apply_apply\"], \"digest\": \"221a1ef759e4183c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary algebra flatness and group or Lie cochain differentials do not state the twisted finite Koszul pairing or its internal-module K-flatness"
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*(cup|pair|flat)|twisted.*(shuffle|leibniz)",
+   "results": "{\"t\": \"2026-10-22T12:04:17Z\", \"tool\": \"grep\", \"query\": \"koszul.*(cup|pair|flat)|twisted.*(shuffle|leibniz)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned ordinary flat-algebra or bar/Lie-cochain declarations do not state the finite twisted internal Koszul pairing and K-flatness assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat internal algebra with commuting automorphisms has K flat Koszul cochains and a twisted shuffle Leibniz chain pairing",
+   "results": "{\"t\": \"2026-10-22T12:04:17Z\", \"tool\": \"leansearch\", \"query\": \"A flat internal algebra with commuting automorphisms has K flat Koszul cochains and a twisted shuffle Leibniz chain pairing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.instSubtypeMemSubmoduleSubmoduleAlgebra\", \"RingHom.flat_algebraMap_iff\", \"Algebra.HasGoingDown.of_flat\", \"RingHom.Flat\", \"Algebra.Smooth.flat\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"Module.Flat.self\", \"Module.Flat.tensorSubmoduleAlgebraEquivMul\"], \"digest\": \"a3f8a0e285dc11b6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned ordinary flat-algebra or bar/Lie-cochain declarations do not state the finite twisted internal Koszul pairing and K-flatness assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KoszulComplex\"",
+   "results": "{\"t\": \"2026-10-22T12:04:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"KoszulComplex\\\"\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: <html> <head><title>502 Bad Gateway</title></head> <body> <center><h1>502 Bad Ga\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat internal algebra with commuting automorphisms has K flat Koszul cochains and a twisted shuffle Leibniz chain pairing",
+   "results": "{\"t\": \"2026-10-22T12:04:28Z\", \"tool\": \"leanfinder\", \"query\": \"A flat internal algebra with commuting automorphisms has K flat Koszul cochains and a twisted shuffle Leibniz chain pairing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.tensorH1Cotangent\", \"KaehlerDifferential.endEquivAuxEquiv\", \"KaehlerDifferential.End_equiv_aux\", \"Algebra.FormallySmooth.iff_split_injection\", \"Algebra.Extension.formallySmooth_iff_split_injection\", \"KaehlerDifferential.endEquiv\", \"Algebra.FormallySmooth.projective_kaehlerDifferential\", \"Algebra.formallySmooth_iff\"], \"digest\": \"b1a2922807357f4f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned ordinary flat-algebra or bar/Lie-cochain declarations do not state the finite twisted internal Koszul pairing and K-flatness assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Twisted multiplication on Koszul group cochains x T A y satisfies the graded Leibniz rule",
+   "results": "{\"t\": \"2026-10-22T12:05:28Z\", \"tool\": \"leanfinder\", \"query\": \"Twisted multiplication on Koszul group cochains x T A y satisfies the graded Leibniz rule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"inhomogeneousCochains.d\", \"inhomogeneousCochains.d_hom_apply\", \"groupCohomology.inhomogeneousCochains.d_def\", \"LieModule.Cohomology.d₂₃\", \"LieModule.Cohomology.d₂₃_apply\", \"inhomogeneousCochains.d_eq\", \"groupCohomology.inhomogeneousCochains.d_comp_d\", \"LieModule.Cohomology.d₁₂_apply_apply\"], \"digest\": \"221a1ef759e4183c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned ordinary flat-algebra or bar/Lie-cochain declarations do not state the finite twisted internal Koszul pairing and K-flatness assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-lattice-koszul-triangulated-cup-comparison",
+  "date": "2026-10-22",
+  "group": "Q49"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), ordinary open direct image; agent lattice expansion: returned proof steps 10–11: flatness, K-flatness and the twisted Leibniz chain pairing. The inherited ancestor lookup returns None; the retained via chain reaches lem-sfb-admissible-direct-image, whose blueprint ancestor is det-thm-sf-ctf-stability-direct-images. This is an agent expansion below paragraph (3), not a claim made in that paragraph.",
+   "via": [
+    "lem-sfb-lattice-koszul-triangulated-cup-comparison",
+    "lem-sfb-discrete-lattice-cup-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-lattice-flat-twisted-chain-pairing",
+  "worker": "stage1",
+  "group": "Q06",
+  "summary": "Preserved the full statement. Reused bounded-above flat K-flatness and site tensor descent; proved equivariant K-flatness by exact tensor-compatible forgetting, and gave an explicit three-sign Leibniz calculation, internal balanced construction, units and all edge cases. No new nodes. Existing internal equivalence, action tensor and derived-tensor specification supply the notions. The bounded-flat node source has a stale tag 06YS: the current tag table assigns lemma-bounded-flat-K-flat to 06YQ; no other node was edited. Repair of returned head ba0e7060e21: rebased the retained split onto the current DAG through the delivery tool, re-read all ten proof dependencies and checked all fifteen retained statement quotations. Their full quoted statements still agree with the current DAG, so the same dependencies and argument apply. Step 3 now explicitly uses the canonical chain isomorphism supplied by the strong tensor comparison rather than a literal equality. The landing refusal concerned unpromoted side-project completion, not a mathematical objection; this delivery restores the split on the current live base for maintainer promotion.",
+  "blueprint": "Paragraph (3) of the current direct-images proof, algebraic discrete-lattice input below the ordinary-open route. The inherited blueprint ancestor is null, as tools/blueprint_refs.py ancestor reports; retained the via chain and explained the meaningful route location.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Generic ringed-site bounded-flat K-flatness, applied on the coherent profinite site; the lattice unit supplies no replacement for this general homological tool."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic ringed-site derived tensor localization for flat-term K-flat representatives; used only to interpret the ordinary Koszul tensor in the derived category."
+   },
+   {
+    "node": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "why": "Generic equivalence identifying internal condensed modules with sectionwise module sheaves on their defining site."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-64841b9b4",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-64841b9b4 (reviewer sub-agent of L); spot-checked: I read all seven steps of the item and the full statement of every cited node. The item is still unsplit in the live and side-live clones and its statement is unchanged from live. Compared with the returned head ba0e7060e21d, the only change is Step 3, which now gives a canonical chain isomorphism U Tot(tK_B⊗A) ≅ Tot(K_B⊗UA) where it used to claim a literal equality; that is the correct claim. That earlier return was a landing refusal about an unpromoted side completion, not a mathematical objection. Steps 1-2: K_B^a is a finite sum of copies of the exact functor B⊗_R−, so its terms are flat; Stacks sites-cohomology.tex l.3120 lemma-bounded-flat-K-flat applies on the ringed site (the tag table at l.8894 confirms this is 06YQ) and gives K-flatness. Step 3: the forgetful functor U is exact and detects exactness, U(tK_B)=K_B, and the strong tensor comparison holds; each total degree is a finite sum because a lies in [0,r]. So tK_B has flat terms and is K-flat even for unbounded test complexes. Step 4: x·T_A(y) is R-balanced because T_A is R-linear, and it is compatible with restrictions, so it passes to the sheafified tensor. Step 5: I re-derived the three sign exponents, N+a+c, (N+c)+a and p+N+(p−a)+c, which agree mod 2. The middle terms cancel and the partitions match one to one. Step 6: T_i(1)=1, and the unit products use A=∅ or C=∅, so both units hold. I checked r=0, r=1 in degree 0, r=2 in degrees (1,1), the zero ring and characteristic 2. Step 7: the site tensor-descent lemma covers the module category M, and def-sfb-condensed-derived-cup fixes the K-flat derived tensor for the action category E. Accepted tool_uses: lem-pc-bounded-above-flat-kflat-site and lem-weil-pbc-site-derived-tensor-descent, both generic Stacks results already recorded as tool_uses in 26 and 40 sfb nodes. There are no new nodes and no duplicates: lem-sfb-integral-cubical-chain-diagonal is a different, chain-level object. No SGA is cited and there is no cycle. Maintainer notes: (a) lem-pc-bounded-above-flat-kflat-site has the stale tag 06YS and should say 06YQ; (b) blueprint.from.node is null, inherited from base; (c) the item needs promotion at landing."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LatticeFlatTwistedChainPairing",
+  "declaration": "Profinite.DiscreteLattice.FlatTwisted.lattice_flat_twisted_chain_pairing",
+  "declarations": [
+   "Profinite.DiscreteLattice.FlatTwisted.trivialKoszul",
+   "Profinite.DiscreteLattice.FlatTwisted.Pairing",
+   "Profinite.DiscreteLattice.FlatTwisted.lattice_flat_twisted_chain_pairing"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/LatticeFlatTwistedChainPairing.lean",
+  "statement": "theorem lattice_flat_twisted_chain_pairing (K : KoszulModel R r) (B : DerivedCup.Algebra R r) [IsCommMonObj B.X] (hflat : exactFunctor (Modules R) (Modules R) (tensorLeft B.X.V)) : (∀ a : ℤ, ObjectProperty.flat ((K.functor.obj B.X).X a)) ∧ (∀ a : ℤ, a < 0 ∨ (r : ℤ) < a → IsZero ((K.functor.obj B.X).X a)) ∧ (∀ A : CochainComplex (Modules R) ℤ, A.Acyclic → (K.functor.obj B.X ⊗ A).Acyclic) ∧ (∀ a : ℤ, ObjectProperty.flat ((trivialKoszul K B).X a)) ∧ (∀ a : ℤ, a < 0 ∨ (r : ℤ) < a → IsZero ((trivialKoszul K B).X a)) ∧ (∀ A : CochainComplex (Equivariant R r) ℤ, A.Acyclic → (trivialKoszul K B ⊗ A).Acyclic) ∧ Nonempty (Pairing K B) ∧ (∀ P Q : CochainComplex (Modules R) ℤ, (P = K.functor.obj B.X ∨ P = (HomologicalComplex.single (Modules R) (.up ℤ) 0).obj (𝟙_ (Modules R))) → (Q = K.functor.obj B.X ∨ Q = (HomologicalComplex.single (Modules R) (.up ℤ) 0).obj (𝟙_ (Modules R))) → IsIso (Functor.LaxMonoidal.μ DerivedCategory.Q.{u + 2} P Q)) ∧ (∀ P Q : CochainComplex (Equivariant R r) ℤ, (P = trivialKoszul K B ∨ P = ((DerivedCup.trivial R r).mapHomologicalComplex (.up ℤ)).obj ((HomologicalComplex.single (Modules R) (.up ℤ) 0).obj (𝟙_ (Modules R)))) → (Q = trivialKoszul K B ∨ Q = ((DerivedCup.trivial R r).mapHomologicalComplex (.up ℤ)).obj ((HomologicalComplex.single (Modules R) (.up ℤ) 0).obj (𝟙_ (Modules R)))) → IsIso (Functor.LaxMonoidal.μ DerivedCategory.Q.{u + 2} P Q))",
+  "branch": "sheaf-dag",
+  "by": "Q83",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing lattice KoszulModel, equivariant Algebra and trivial-action derived tensor API. Pairing records the exact signed subset matrix and both homogeneous unit identities; its star is an internal chain morphism, hence includes the graded Leibniz identity. The theorem states flat terms, support in [0,r], acyclic total-tensor K-flatness in both categories, and invertibility of the canonical localization tensor comparisons, including units. No statement correction or new notion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-964d2ad1c",
+  "group": "Q83",
+  "result": "pass",
+  "note": "Read the node (7 steps), the Stacks 06YQ and blueprint direct-images paragraph (3) sources, all 11 stmt_dep records, and the Lean of KoszulModel/differentialEntry, DerivedCup.Algebra (= Mon (Equivariant R r)), trivial, ObjectProperty.flat/exactFunctor, the FromJoel left-derived monoidal Q (μ canonical, not invertible by construction) and Mathlib's up ℤ ε₂ = (-1)^p. Every clause matches: R arbitrary commutative; B a commutative Mon object (T_i multiplicative, unital, commuting); hflat = exactness of B⊗−; flat terms, IsZero outside [0,r] and the acyclic total-tensor test for K_B and tK_B; Pairing.coordinates gives the ε(A,C) inversion sign with x_A·T_A(y_C), pinning star; the chain-map type gives Leibniz; unit pinned to 1_B with both unit laws; IsIso μ for the K/unit pairs in both categories. Signs checked by hand for r=1 (0,0), r=2 (1,0) and the units. r=0, zero ring/algebra and char 2 are fine; universe u bound. lean.statement verbatim; one sorry; 4 added stmt_deps are used and acyclic (BFS); first S2 delivery; report has both sections. No file changed, no compile. Advisories: downstream CupComparison duplicates Pairing fields and should reuse it; K-flatness is spelled out inline as the literal def-pc-kflat-complex definition."
+ }
+}

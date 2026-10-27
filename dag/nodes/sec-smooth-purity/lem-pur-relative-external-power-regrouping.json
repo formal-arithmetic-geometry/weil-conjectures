@@ -1,0 +1,269 @@
+{
+ "id": "lem-pur-relative-external-power-regrouping",
+ "kind": "statement",
+ "proof": [
+  {
+   "text": "Prove the geometric assertions by induction on $j$. For $j=1$, $h_1=f_1$, $p_1^{(1)}=1_{X_1}$, and $X_1\\to\\operatorname{Spec}k$ is the composite of $f_1$ and $B\\to\\operatorname{Spec}k$. Composition preserves separatedness by clause (e) of [lem-weil-pbc-proper-fp-permanence] and finite type by clause (1) of [lem-sfb-finite-type-composition-base-change]. The identity is separated and of finite type directly from the definitions. Suppose the assertions hold at $j$. In the fibre-product square [def-pc-fibre-product], $a_j$ is the base change of $f_{j+1}$ along $h_j$, and $b_j$ is the base change of $h_j$ along $f_{j+1}$. Thus both projections are separated by [lem-weil-pbc-separated-base-change] and of finite type by clause (2) of [lem-sfb-finite-type-composition-base-change]. Now $h_{j+1}=h_j\\circ a_j$, $p_i^{(j+1)}=p_i^{(j)}\\circ a_j$ for $i\\leq j$, and $p_{j+1}^{(j+1)}=b_j$. The same composition results give all the required properties, including that $P_{j+1}\\to\\operatorname{Spec}k$ is separated of finite type. This proves the induction without imposing any flatness condition on the morphisms.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-sfb-finite-type-composition-base-change",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-separated-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01KU, lemma-separated-permanence, (1) and (3); morphisms.tex, Tags 01T3 (lemma-composition-finite-type) and 01T4 (lemma-base-change-finite-type)"
+   }
+  },
+  {
+   "text": "Choose, for each of the finitely many $K_i$, a finite Tor interval $[u_i,v_i]$. All schemes and morphisms used below satisfy the geometric hypotheses by Step 1. For each fixed $j$ and $i\\leq j$, [lem-sf-pullback-tor-amplitude] gives $E_i^{(j)}:=L(p_i^{(j)})^*K_i\\in D^b_{ctf}(P_j,A)$ with the same interval $[u_i,v_i]$. Define the prefixes $Q_1=E_1^{(j)}$ and $Q_{s+1}=Q_s\\otimes_A^L E_{s+1}^{(j)}$ for $1\\leq s<j$. Induct on $s$: the initial assertion is the one just proved; clause (ii) of [lem-sf-tensor-ctf] gives $Q_{s+1}\\in D^b_{ctf}(P_j,A)$ with interval $[\\sum_{i\\leq s+1}u_i,\\sum_{i\\leq s+1}v_i]$ from the analogous bound for $Q_s$. Hence $T_j=Q_j$ belongs to the claimed category for every $j$. For $j<r$, apply [lem-sf-pullback-tor-amplitude] once more, now to $(a_j,T_j)$ and $(b_j,K_{j+1})$, to obtain both individual pullback-domain assertions. In particular their tensor product also belongs to $D^b_{ctf}$ by [lem-sf-tensor-ctf]. The case $j=1$ involves a single factor, not an empty tensor. In Lean, ctf_of_iso transports the finite support and constructible homology along an isomorphism and composes each Tor-test representative with its inverse. For binary tensor closure choose representatives of both objects and a K-flat resolution of the first, apply lem-sf-tensor-ctf(ii), and transport through the native one-K-flat tensor comparison and the isomorphisms of the representatives. The prefix induction then uses these binary closure assertions.",
+   "uses": [
+    "lem-sf-pullback-tor-amplitude",
+    "lem-sf-tensor-ctf",
+    "lem-pc-kflat-resolution",
+    "lem-sf-ringed-derived-native-tensor",
+    "lem-weil-proetale-dbc-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-sf-tensor-ctf.proof.md",
+    "place": "Clause (ii), finite sums of Tor intervals; together with sec-proetale-coefficients/sk-cor-pe-finite-tor-comparison/lem-sf-pullback-tor-amplitude.md, conclusion"
+   }
+  },
+  {
+   "text": "Fix $j<r$ and put $a=a_j$. Use [prop-weil-pbc-proetale-constant-ring-map] for the canonical isomorphisms $u^{-1}A_V\\cong A_U$ for every scheme map $u:U\\to V$ in this construction. The composite identification is compatible with them: both send every constant $c\\in A$ to $c$, so the uniqueness of the constant-section-preserving identifications in that statement identifies them. Thus [lem-weil-pbc-proetale-derived-pullback-composition] applies with the required compatible coefficient sheaves. Distribute $La^*$ across a left-associated tensor of $s$ objects by induction on $s$. For $s=1$ take the identity. At $s+1$, first use the binary isomorphism of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], then tensor the previously constructed $s$-factor isomorphism with the identity of the last factor. At $s=j$ this gives $La^*T_j\\xrightarrow{\\sim}\\bigotimes_{i\\leq j}La^*L(p_i^{(j)})^*K_i$. For each $i\\leq j$, apply the inverse of $c_{a,p_i^{(j)}}$ from [lem-weil-pbc-proetale-derived-pullback-composition] and the identity $p_i^{(j+1)}=p_i^{(j)}\\circ a$ to its factor. Tensoring these isomorphisms gives $\\lambda_j:La^*T_j\\xrightarrow{\\sim}\\bigotimes_{i\\leq j}L(p_i^{(j+1)})^*K_i$. These are isomorphisms in the derived category itself, constructed from the canonical bifunctorial tensor comparison and the canonical composition components, rather than identifications only of cohomology sheaves.",
+   "uses": [
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat), 0D6D (lemma-derived-pullback-composition)"
+   }
+  },
+  {
+   "text": "Tensor lambda_j of Step 3 with the identity on the last pulled-back factor, using the tensor bifunctor of lem-sf-ringed-derived-native-tensor. The actual projection definitions say that the first j+1 coordinates are the composites through fst and the last coordinate is snd. Consequently the target is definitionally the next left-associated external product. The existing regroup definition gives this isomorphism; no associator or closed structure is needed. For one factor the tensor prefix is its only factor; when r=1 there is no next-product assertion.",
+   "uses": [
+    "lem-sf-ringed-derived-native-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPT (lemma-symmetric-monoidal-derived), associativity constraints; Tag 07A4 (lemma-pullback-tensor-product)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-sfb-finite-type-composition-base-change",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-separated-base-change",
+  "lem-sf-pullback-tor-amplitude",
+  "lem-sf-tensor-ctf",
+  "lem-pc-kflat-resolution",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-weil-proetale-dbc-triangulated",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/schemes.tex; literature/stacks-project/morphisms.tex",
+  "place": "Tags 07A4, 0D6D, 0FPT and 06YS; schemes lemma-separated-permanence (1),(3); morphisms lemma-composition-finite-type and lemma-base-change-finite-type. E2 makes the geometric, coordinate and finite-Tor prefix inductions explicit in Lean; binary tensor closure is transported from the existing K-flat representative theorem."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-affine-space-product-domain",
+  "date": "2026-10-22",
+  "group": "Q112"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "title": "Regrouping and finite-Tor domains of relative external powers",
+ "statement": "Use the finite-coefficient conventions [def-pur-conventions], with $A=A_{E,n}$. Let $B$ be a separated finite-type $k$-scheme, let $r\\geq1$, and let $f_i:X_i\\to B$ be separated finite-type morphisms with $K_i\\in D^b_{ctf}(X_i,A)$ [def-weil-finite-tor-amplitude], for $1\\leq i\\leq r$. Form left-iterated fibre products $P_1=X_1$ and $P_{j+1}=P_j\\times_B X_{j+1}$ [def-pc-fibre-product], with structure maps $h_j:P_j\\to B$ and projections $p_i^{(j)}:P_j\\to X_i$. Put\n$$T_j=\\bigotimes_{i=1}^j L(p_i^{(j)})^*K_i.$$\nFor $j<r$ write $a_j:P_{j+1}\\to P_j$ and $b_j:P_{j+1}\\to X_{j+1}$ for the two projections. Then $P_j$ is separated of finite type over $k$, all $h_j,p_i^{(j)},a_j,b_j$ are separated of finite type, and $T_j\\in D^b_{ctf}(P_j,A)$. Both $La_j^*T_j$ and $Lb_j^*K_{j+1}$ belong to $D^b_{ctf}(P_{j+1},A)$, and there is a canonical isomorphism in the derived category\n$$\\rho_j:La_j^*T_j\\otimes_A^L Lb_j^*K_{j+1}\\xrightarrow{\\sim}T_{j+1}.$$\nHere $\\rho_j$ is the iterated derived tensor-pullback comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] followed by the pullback-composition comparisons [lem-weil-pbc-proetale-derived-pullback-composition] for $p_i^{(j+1)}=p_i^{(j)}a_j$ for $i\\leq j$ and $p_{j+1}^{(j+1)}=b_j$, with the canonical tensor associators. No compact-support direct-image hypothesis, duality axiom or exceptional adjoint is part of the assertion.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat), 0D6D (lemma-derived-pullback-composition); applied with finite-Tor pullback and tensor stability to the relative products in the parent blueprint Proof Steps 3--4"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-finite-tor-amplitude",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-proetale-derived-pullback-composition"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "externalProduct|constructibleFiniteTor|boundedConstructibleFiniteTor|kunneth|Kunneth",
+   "results": "; subdirectory AlgebraicGeometry. Read the returned signatures: Generic Tor functors, monoidal tensor functors and scheme fibre-product formulas do not assert bounded constructible finite-Tor preservation and the derived external-power regrouping.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pulling back a finite external tensor product along a projection of a relative fibre product gives its canonical regrouping and preserves constructible finite Tor amplitude",
+   "results": "CategoryTheory.Over.tensorObj_left; PiTensorProduct.tprod_prod; AlgebraicGeometry.pullbackSpecIso_hom_fst'_assoc; CategoryTheory.Over.tensorHom_left_fst; CategoryTheory.Over.tensorHom_left; AlgebraicGeometry.pullbackSpecIso; CategoryTheory.Over.tensorHom_left_fst_assoc; AlgebraicGeometry.pullbackSpecIso_hom_fst'. Read the returned signatures: Generic Tor functors, monoidal tensor functors and scheme fibre-product formulas do not assert bounded constructible finite-Tor preservation and the derived external-power regrouping.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory, \"tensor\"",
+   "results": "CategoryTheory.MonoidalCategory.tensorUnitLeft; CategoryTheory.MonoidalCategory.tensorUnitRight; CategoryTheory.MonoidalCategory.tensorLeft; CategoryTheory.MonoidalCategory.tensorRight; CategoryTheory.MonoidalCategory.tensor; CategoryTheory.MonoidalCategory.curriedTensor; CategoryTheory.MonoidalCategory.tensoringLeft; CategoryTheory.MonoidalCategory.tensoringRight. Read the returned signatures: Generic Tor functors, monoidal tensor functors and scheme fibre-product formulas do not assert bounded constructible finite-Tor preservation and the derived external-power regrouping.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite Tor constructible complexes on iterated relative fibre products admit canonical regrouping of their external derived tensor product and it remains bounded constructible finite Tor",
+   "results": "CategoryTheory.Tor'_obj_obj; CategoryTheory.Tor'; CategoryTheory.Tor; CategoryTheory.Tor_obj; HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX; HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X; HomologicalComplex.HasGoodTensor₁₂; CategoryTheory.Tor'_map_app. Read the returned signatures: Generic Tor functors, monoidal tensor functors and scheme fibre-product formulas do not assert bounded constructible finite-Tor preservation and the derived external-power regrouping.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "externalProduct|constructibleFiniteTor|boundedConstructibleFiniteTor|Kunneth",
+   "results": "none; subdirectory AlgebraicGeometry; read hits: generic Tor, monoidal functors, diagram external products and finite-limit preservation do not state the derived constructible finite-Tor external-power theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse image preserves finite tensor products and the bounded constructible finite Tor subcategory of sheaves on schemes",
+   "results": "CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback; CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits; TensorProduct.directLimitLeft_symm_of_tmul; CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier; CommRingCat.Under.instPreservesFiniteProductsUnderTensorProd; CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat; CommRingCat.Under.instPreservesLimitUnderDiscreteFunctorTensorProdOfFinite; SheafOfModules.instPreservesFiniteLimitsFunctorOppositeAddCommGrpCatCompSheafToSheafSheafToPresheaf; read hits: generic Tor, monoidal functors, diagram external products and finite-limit preservation do not state the derived constructible finite-Tor external-power theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory, \"tensor\"",
+   "results": "CategoryTheory.MonoidalCategory.tensorUnitLeft; CategoryTheory.MonoidalCategory.tensorUnitRight; CategoryTheory.MonoidalCategory.tensorLeft; CategoryTheory.MonoidalCategory.tensorRight; CategoryTheory.MonoidalCategory.tensor; CategoryTheory.MonoidalCategory.curriedTensor; CategoryTheory.MonoidalCategory.tensoringLeft; CategoryTheory.MonoidalCategory.tensoringRight; read hits: generic Tor, monoidal functors, diagram external products and finite-limit preservation do not state the derived constructible finite-Tor external-power theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Iterated relative external derived tensor products of bounded constructible finite Tor complexes are bounded constructible finite Tor and regroup under derived pullback",
+   "results": "CategoryTheory.Tor'_obj_obj; CategoryTheory.Tor'; CategoryTheory.Tor; CategoryTheory.Tor_obj; CategoryTheory.Tor'_map_app; CategoryTheory.Tor_map; CategoryTheory.Tor'_obj_map; HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX; read hits: generic Tor, monoidal functors, diagram external products and finite-limit preservation do not state the derived constructible finite-Tor external-power theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|externalProduct|finiteTor|FiniteTor",
+   "results": "Mathlib/CategoryTheory/Monoidal/DayConvolution.lean; Mathlib/CategoryTheory/Monoidal/DayConvolution.lean; Mathlib/CategoryTheory/Monoidal/DayConvolution.lean; Mathlib/CategoryTheory/Monoidal/DayConvolution.lean; Mathlib/CategoryTheory/Monoidal/DayConvolution.lean; Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean; Mathlib/CategoryTheory/Monoidal/ExternalProduct/KanExtension.lean; Mathlib/CategoryTheory/Monoidal/ExternalProduct/KanExtension.lean; subdirectory CategoryTheory; read hits: generic Tor, monoidal functors, diagram external products and finite-limit preservation do not state the derived constructible finite-Tor external-power theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Proof Steps 3--4; coefficient regrouping and finite-Tor domain argument of lem-pur-affine-space-product-domain, former Step 2",
+   "via": [
+    "lem-pur-affine-space-product-domain"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-relative-external-power-regrouping",
+  "worker": "stage1",
+  "summary": "Proved scheme permanence, constructible finite-Tor domains and the canonical regrouping by explicit finite inductions using existing DAG statements only. Read all cited statements and relevant Stacks lemmas, checked coefficient-ring hypotheses and the j=1/r=1 and empty-scheme cases. No new nodes or Lean files.",
+  "blueprint": "prop-pur-affine-space-composition-law, Proof Steps 3--4 (regrouping of coordinate tensor blocks); expands the domain argument in lem-pur-affine-space-product-domain without using its compact-support or duality results.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-pullback-tor-amplitude",
+    "why": "Finite-coefficient inverse image preserves the precise bounded constructible finite-Tor domain. This is a generic coefficient tool, not an affine-space purity argument. No specialized node in sk-prop-an supplies this general fact."
+   },
+   {
+    "node": "lem-sf-tensor-ctf",
+    "why": "Clause (ii) supplies closure of the finite-Tor constructible category under binary tensor and the additive Tor interval; iterated closure is proved here. No specialized node in sk-prop-an supplies this general fact."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Identifies inverse images of finite constant coefficient ring sheaves, verifying the hypotheses of the pullback-composition tool. No specialized node in sk-prop-an supplies this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Canonical binary tensor-pullback comparison for ringed topoi, iterated explicitly here. No specialized node in sk-prop-an supplies this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Canonical derived composition comparison for projections, with the coefficient identifications checked here. No specialized node in sk-prop-an supplies this general fact."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Only the tensor bifunctor, canonical associators and their monoidal axioms on the ringed site are used; no internal Hom or duality result is used. No specialized node in sk-prop-an supplies this general fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-pullback-tor-amplitude",
+  "lem-sf-tensor-ctf",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-proetale-derived-pullback-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NS-af9729575",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-af9729575 (reviewer sub-agent of L); spot-checked: I read the item's four steps in full, every cited statement, and Stacks 01KU (1),(3), 01T3/01T4, 07A4, 0G7E, 0D6D, 0FPT (tags checked against tags/tags; no SGA). The statement and stmt_deps are byte-identical to the unsplit item created by Q112, and the citer lem-pur-affine-space-product-domain Step 2 uses exactly the case X_i=X, K_i=M. Step 1: induction is correct; a_j is the base change of f_{j+1} along h_j up to the fibre-product symmetry, b_j the base change of h_j; separated by proper-fp-permanence(e) and separated-base-change, finite type by sfb finite-type (1),(2); this gives the separated finite-type k-morphisms that lem-sf-pullback-tor-amplitude needs. Step 2: explicit prefix induction with lem-sf-tensor-ctf(ii) adding intervals; pullback keeps [a,b]; finite Tor is never inferred from constructibility. Step 3: the composite coefficient identification is checked against c^{kh} via the uniqueness of constant-preserving identifications, so pullback-composition applies; the distribution induction is set up; the direction c_{a,p}^{-1}: La^*Lp^* -> L(pa)^* is right; all isomorphisms are derived, not per-degree. Step 4: lambda_j (x) 1 lands literally on the left-associated T_{j+1} because p_{j+1}^{(j+1)}=b_j; only the bifunctor and associators of the monoidal node are used. Finite coefficient category A=O_E/varpi^n; the pullback is the c^f_A module pullback of def-weil-derived-pullback-tensor-hom, consistent with the ringed-topoi tensor-pullback node. Edge cases r=1, j=1 and empty schemes are fine. No duplicate found (ordinary Kunneth, ringed monoidal comparisons and forward product symmetry differ). The six generic off-unit tool_uses are accepted. Advisory only: the associator node is not a stmt_dep. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RelativeExternalPowerRegrouping",
+  "declaration": "WeilConjectures.RelativeExternalPower.relative_external_power_regrouping",
+  "declarations": [
+   "WeilConjectures.RelativeExternalPower.tensorModel",
+   "WeilConjectures.RelativeExternalPower.product",
+   "WeilConjectures.RelativeExternalPower.fst",
+   "WeilConjectures.RelativeExternalPower.snd",
+   "WeilConjectures.RelativeExternalPower.projection",
+   "WeilConjectures.RelativeExternalPower.tensorPrefix",
+   "WeilConjectures.RelativeExternalPower.tensorPrefixIso",
+   "WeilConjectures.RelativeExternalPower.pullbackPrefix",
+   "WeilConjectures.RelativeExternalPower.externalAt",
+   "WeilConjectures.RelativeExternalPower.external",
+   "WeilConjectures.RelativeExternalPower.externalPullback",
+   "WeilConjectures.RelativeExternalPower.regroup",
+   "WeilConjectures.RelativeExternalPower.relative_external_power_regrouping"
+  ],
+  "file": "lean/Sheaf/Paper/RelativeExternalPowerRegrouping.lean",
+  "statement": "theorem relative_external_power_regrouping (P : PurityFiniteSetting.{u}) (B : Scheme.{u}) (b : B ⟶ Spec (CommRingCat.of P.field.k)) [IsSeparated b] [LocallyOfFiniteType b] [QuasiCompact b] (r : ℕ) (hr : 1 ≤ r) (X : ℕ → Over B) (hX : ∀ i < r, IsSeparated (X i).hom ∧ LocallyOfFiniteType (X i).hom ∧ QuasiCompact (X i).hom) (K : ∀ i : ℕ, proEtaleDerivedCategory (X i).left P.Ring) (hK : ∀ i < r, finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos (X i).left (K i)) : (∀ j < r, (IsSeparated ((product X j).hom ≫ b) ∧ LocallyOfFiniteType ((product X j).hom ≫ b) ∧ QuasiCompact ((product X j).hom ≫ b)) ∧ (IsSeparated (product X j).hom ∧ LocallyOfFiniteType (product X j).hom ∧ QuasiCompact (product X j).hom) ∧ (∀ i : Fin (j + 1), IsSeparated (projection X j i) ∧ LocallyOfFiniteType (projection X j i) ∧ QuasiCompact (projection X j i)) ∧ finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos (product X j).left (external X P.Ring K j)) ∧ (∀ j, j + 1 < r → (IsSeparated (fst X j) ∧ LocallyOfFiniteType (fst X j) ∧ QuasiCompact (fst X j)) ∧ (IsSeparated (snd X j) ∧ LocallyOfFiniteType (snd X j) ∧ QuasiCompact (snd X j)) ∧ finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos (product X (j + 1)).left ((proEtaleConstantRingDerivedPullback P.Ring (fst X j)).obj (external X P.Ring K j)) ∧ finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos (product X (j + 1)).left ((proEtaleConstantRingDerivedPullback P.Ring (snd X j)).obj (K (j + 1))))",
+  "branch": "sheaf-dag",
+  "by": "Q18",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The theorem states the geometric and finite-Tor domains; regroup constructs the prescribed canonical derived isomorphism from the published normalized binary tensor and composition comparisons. Index j encodes j+1 factors; the nonempty finite family is extended arbitrarily beyond r, without hypotheses there."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a6af9f512",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Lean matches every clause of the node: separated finite type of P_j over k, h_j, p_i, a_j, b_j; T_j and both pullbacks in finiteTorConstructible; 0-based indexing with no hypotheses on unused entries. regroup is a real derived-category iso built as the node prescribes: iterated proEtaleCanonicalTensorComparison (07A4), factorwise proEtaleConstantRingPullbackComposition = c^{-1} (0D6D), then tensor with Iso.refl; left association needs no associators; simpa only casts the type. tensorModel = native K-flat derived tensor with its representative iso, which the ProEtaleTensorModel interface of the stmt_dep requires; existing copies are only private or a bare Nonempty theorem, so not a duplicate. lean.statement verbatim, 13 declarations present, node otherwise identical to live. No universe restriction (module universe u+1). Edge cases r=1, j=0, empty schemes fine. Stacks tags 01KU/01T3/01T4/07A4/0D6D/0FPT/0G7E verified, no SGA. Docstrings carry source place, blueprint id and the 4 proof steps; only the theorem has sorry. Advisory: proEtaleConstantRingDerivedPullback, proEtaleConstantRingPullbackComposition and proEtaleCanonicalTensorComparison are owned by nodes outside stmt_deps or have no owner; the native tensor differs from def-pur-finite-pullback-tensor-comparison's finiteIntrinsicDerivedTensor; recommend one public owned native ProEtaleTensorModel. No recompile (no changes); worker reports clean compiles."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261025T201712-L-2604969",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

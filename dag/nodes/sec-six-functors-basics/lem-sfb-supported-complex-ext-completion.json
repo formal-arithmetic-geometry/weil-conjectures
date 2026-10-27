@@ -1,0 +1,266 @@
+{
+ "id": "lem-sfb-supported-complex-ext-completion",
+ "kind": "statement",
+ "title": "Supported pseudo-coherent Ext is unchanged by completing coefficients",
+ "statement": "Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], $I\\subseteq A$ an ideal, and $K\\in D(A)$ a pseudo-coherent complex [def-pc-ring-pseudo-coherent-complex, def-weil-abstract-derived-category]. Put $E^i(K,M)=\\operatorname{Hom}_{D(A)}(K,M[i])$ for an ordinary $A$-module $M$ in degree zero. Fix an integer $a$. Assume that for every finite $A$-module $M$ [def-weil-finitely-generated-module], every $i\\geq a$, and every prime $\\mathfrak p$ not containing $I$, one has $E^i(K,M)_{\\mathfrak p}=0$, where localization is [def-weil-pbc-module-localization]. For a finite $A$-module $N$ put $\\widehat N=\\varprojlim_{n\\geq1}N/I^nN$ [def-weil-pbc-adic-completion]. Then for every $i\\geq a$ the canonical $A$-linear maps\n$$E^i(K,N)\\longrightarrow\\varprojlim_{n\\geq1}E^i(K,N/I^nN),\\qquad E^i(K,N)\\longrightarrow E^i(K,\\widehat N)$$\nare isomorphisms. The first map is induced by all quotient maps; the second is induced by $N\\to\\widehat N$. Both are natural in $N$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0DYJ (lemma-ext-annihilated-into); Tag 0A6A (lemma-base-change-RHom), case (3); Tag 05EC (lemma-neighbourhood-equivalence). Finite-module support criterion and algebra.tex Tags 00MA (lemma-completion-tensor), 00MB (lemma-completion-flat), 031C (lemma-completion-complete)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-weil-abstract-derived-category",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof": [
+  {
+   "text": "Choose a bounded-above finite free complex $P$ representing $K$ by [def-pc-ring-pseudo-coherent-complex]. Finite free modules are projective: lift the finitely many basis vectors along an epimorphism. Thus [lem-sc-bounded-above-projective-kprojective] and [lem-coef-kprojective-derived-hom-bijection] identify $E^i(K,M)$ naturally with degree-$i$ cohomology of $C(M)=\\operatorname{Hom}_A^\\bullet(P,M[0])$. Indeed chain maps to $M[i]$ are the degree-$i$ cycles, and chain homotopies are boundaries (shift signs change a boundary only by a unit). In particular $C(M)^j=\\operatorname{Hom}_A(P^{-j},M)$, with differential $f\\mapsto(-1)^{j+1}f d_P$. This construction is covariant in every module map $M\\to M'$.",
+   "uses": [
+    "def-pc-ring-pseudo-coherent-complex",
+    "lem-sc-bounded-above-projective-kprojective",
+    "lem-coef-kprojective-derived-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0DYI (lemma-ext-induced-toplogy), proof, finite-free Hom model; derived.tex Tag 064B (lemma-morphisms-from-projective-complex)."
+   }
+  },
+  {
+   "text": "For finite $M$, every $C(M)^j$ is finite, since a finite basis of $P^{-j}$ identifies it with a finite power of $M$. By [lem-weil-pbc-noetherian-submodule-finite], the cycles are finite; their quotient $H^i(C(M))$ is finite because images of generators generate a quotient. Fix $i\\geq a$ and put $H=E^i(K,M)$. Its support lies in $V(I)$ by hypothesis. By [lem-weil-pbc-finite-module-support-annihilator], every prime containing $\\operatorname{Ann}(H)$ contains $I$. The intersection-of-primes formula in [lem-weil-pbc-zero-locus-eq-iff-radical-eq] gives $I\\subseteq\\sqrt{\\operatorname{Ann}(H)}$. Noetherianity makes $I$ finitely generated, so [lem-weil-pbc-fg-ideal-radical-power] gives $I^tH=0$ for some $t\\geq1$. Hence $H\\to\\widehat H=\\varprojlim H/I^nH$ is an isomorphism: for $n\\geq t$ the quotients are $H$ with identity transitions, and every compatible sequence is determined by its constant tail.",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "lem-weil-pbc-finite-module-support-annihilator",
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+    "lem-weil-pbc-fg-ideal-radical-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0DYJ (lemma-ext-annihilated-into), opening finiteness and power-annihilation argument; algebra.tex Tags 00IK, 00L2, 00E0 and 00IM."
+   }
+  },
+  {
+   "text": "Fix finite $N$ and $i\\geq a$. Apply [lem-sfb-finite-short-complex-adic-cohomology-limit] to $C(N)^{i-1}\\to C(N)^i\\to C(N)^{i+1}$. Finite bases identify $C(N)^j/I^nC(N)^j$ with $C(N/I^nN)^j$: both are the same finite power of $N/I^nN$. The differential matrices reduce modulo $I^n$, so these identifications commute with differentials and quotient transitions. The lemma identifies $\\widehat{E^i(K,N)}$ with $\\varprojlim_nE^i(K,N/I^nN)$. Composing with Step 2 gives precisely the first map in the statement: coordinate $n$ sends a cycle to its image under $N\\to N/I^nN$.",
+   "uses": [
+    "lem-sfb-finite-short-complex-adic-cohomology-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0EGU (lemma-consequence-Artin-Rees), assertion (2), applied to the three finite Hom modules."
+   }
+  },
+  {
+   "text": "Put $Z=\\ker(d:C(N)^i\\to C(N)^{i+1})$, $B=\\operatorname{im}(d:C(N)^{i-1}\\to C(N)^i)$, $D=\\operatorname{im}(d:C(N)^i\\to C(N)^{i+1})$, and $H=Z/B$. These modules and $C(N)^{i+1}/D$ are finite by [lem-weil-pbc-noetherian-submodule-finite] and the generator argument for quotients. Apply [lem-weil-pbc-completion-exact-finite-modules] to $0\\to Z\\to C(N)^i\\to D\\to0$, $0\\to D\\to C(N)^{i+1}\\to C(N)^{i+1}/D\\to0$, $0\\to B\\to Z\\to H\\to0$, and $0\\to\\ker(d^{i-1})\\to C(N)^{i-1}\\to B\\to0$. It follows that cycles of the termwise completed complex in degree $i$ are $\\widehat Z$, its boundaries are $\\widehat B$, and its cohomology is $\\widehat H$. Finite bases give $\\widehat{C(N)^j}=C(\\widehat N)^j$: inverse limits of a fixed finite power are that power of the inverse limit, coordinate by coordinate. Matrix multiplication commutes with these coordinates, so the differentials agree. The induced map $H\\to H^i(C(\\widehat N))$ is $H\\to\\widehat H$, since it sends each cycle to its compatible quotient sequence. Step 2 makes it invertible. By Step 1 it is exactly the second map, induced by $N\\to\\widehat N$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "lem-weil-pbc-completion-exact-finite-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "algebra.tex Tag 00MA (lemma-completion-tensor), assertion (2), and Tag 00MB (lemma-completion-flat), assertion (2); finite-free Hom model from Tag 0DYI."
+   }
+  },
+  {
+   "text": "For an $A$-linear map $N\\to N'$, postcomposition gives a chain map $C(N)\\to C(N')$. It commutes with every quotient projection and with completion: on a compatible sequence its $n$-th component is the induced map modulo $I^n$. Therefore both squares of the claimed maps commute on cycles and hence on cohomology; equality in the inverse limit is equality of all coordinates. These are $A$-linear maps throughout. This proves the asserted naturality.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Canonical coefficient and quotient maps in Tags 0DYJ and 00MA."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-sc-bounded-above-projective-kprojective",
+  "lem-coef-kprojective-derived-hom-bijection",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-finite-module-support-annihilator",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+  "lem-weil-pbc-fg-ideal-radical-power",
+  "lem-sfb-finite-short-complex-adic-cohomology-limit",
+  "lem-weil-pbc-completion-exact-finite-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Finite-free Hom model of Tag 0DYI; Tag 0EGU(2); support criterion and exact completion from algebra.tex Tags 00L2, 00E0, 00IM, 00MA and 00MB. This assembles the two maps without taking Tag 0DYJ as a black-box restatement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a bounded above complex of finite free modules over a Noetherian ring whose positive Ext groups are ideal power torsion, Ext commutes with completing a finite coefficient module",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.map_exact\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Exactness\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {I : Ideal R} {M : Type u} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : Type u} [inst_5 : AddCommGroup P]\\n  [inst_6 : Module R P] [IsNoetherianRing R] [Module.Finite R N] {f : M →ₗ[R] N} {g : N \", \"doc\": \"If $ f : M \\\\to N $ and $ g : N \\\\to P $ are $ R $-linear maps forming an exact sequence (i.e., $ \\\\operatorname{im} f = \\\\ker g $), then their induced $ I $-adic completions $ \\\\hat{f} : \\\\hat{M} \\\\to \\\\hat{\"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      (M : Type u) →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] →\\n            [IsNoetherianRing R] →\\n              [Module.Finite R M] → TensorProduct R (AdicCompletion I R) M ≃ₗ[AdicCompletion I R] AdicCompletion I \", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is linearly equivalent to the \"}\n  {\"name\": \"localCohomology.diagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) →\\n          ℕ → CategoryTheory.Functor Dᵒᵖ (CategoryTheory.Functor (ModuleCat R) (ModuleCat R))\", \"doc\": \"For a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs a functor from $ \\\\mathcal{D}^{\\\\text{op}} $ to the category of $ R\"}\n  {\"name\": \"IsAdicComplete.StrictMono.factorPow_comp_extend\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {a : ℕ → ℕ} (ha : StrictMono a)\\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ a n • ⊤),\\n  (∀ {m : ℕ}, Submodule.factorPow I N ⋯ ∘ₗ f (\", \"doc\": \"For natural numbers $ m \\\\leq n $, the composition of the factor map $ M/I^nM \\\\to M/I^mM $ with the extension of a linear map $ f $ at level $ n $ equals the extension of $ f $ at level $ m $. This est\"}\n  {\"name\": \"instHasExtModuleCatOfSmall\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Ext/HasExt\", \"type\": \"∀ (R : Type u) [inst : Ring R] [Small.{v, u} R], CategoryTheory.HasExt (ModuleCat R)\", \"doc\": \"For any small ring $ R $, the category of left $ R $-modules satisfies the property that localized hom-sets between single-term cochain complexes concentrated at degree 0 (with respect to quasi-isomor\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.covariant_sequence_exact₁'\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.HasExt C] (X : C) {S : CategoryTheory.ShortComplex C} (hS : S.ShortExact) (n₀ n₁ : ℕ)\\n  (h : n₀ + 1 = n₁),\\n  { X₁ := AddCommGrpCat.of (CategoryTheory.Abelian.Ext X S.X₃ n₀),\\n      \", \"doc\": \"For a short exact sequence $ S $ in an abelian category $ \\\\mathcal{C} $, and natural numbers $ n_0, n_1 $ satisfying $ n_0 + 1 = n_1 $, the composition of the postcomposition map $ \\\\operatorname{Ext}^\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.contravariant_sequence_exact₁\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.HasExt C] {S : CategoryTheory.ShortComplex C} (hS : S.ShortExact) (Y : C) {n₀ : ℕ}\\n  (x₁ : CategoryTheory.Abelian.Ext S.X₁ Y n₀) {n₁ : ℕ} (hn₁ : 1 + n₀ = n₁),\\n  hS.extClass.comp x₁\", \"doc\": \"In the contravariant long exact sequence of Ext groups associated to a short exact sequence $0 \\\\to X_1 \\\\to X_2 \\\\to X_3 \\\\to 0$ in an abelian category, the kernel of the connecting homomorphism $\\\\operat\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.covariant_sequence_exact₁\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.HasExt C] (X : C) {S : CategoryTheory.ShortComplex C} (hS : S.ShortExact) {n₁ : ℕ}\\n  (x₁ : CategoryTheory.Abelian.Ext X S.X₁ n₁),\\n  x₁.comp (CategoryTheory.Abelian.Ext.mk₀ S.f) ⋯ =\", \"doc\": \"In an abelian category $ \\\\mathcal{C} $, for a short exact sequence $ S $, if an element $ x_1 \\\\in \\\\operatorname{Ext}^{n_1}(X, S.X_1) $ satisfies $ x_1 \\\\circ \\\\mathrm{mk}_0(S.f) = 0 $ and $ n_0 + 1 = n_\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results give Ext definitions, local cohomology diagrams, completion exactness and flatness, not continuity of supported Ext or its coefficient-completion map."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext\", \"AdicCompletion\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AdicCompletion.AdicCauchySequence.ext\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] {I : Ideal R} {M : Type u_4} [AddCommGroup M] [Module R M] {x y : AdicCompletion.AdicCauchySequence I M} (h : ∀ (n : ℕ), ↑x n = ↑y n) : x = y\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.AdicCauchySequence.ext_iff\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] {I : Ideal R} {M : Type u_4} [AddCommGroup M] [Module R M] {x y : AdicCompletion.AdicCauchySequence I M} : x = y ↔ ∀ (n : ℕ), ↑x n = ↑y n\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.ext\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] {I : Ideal R} {M : Type u_4} [AddCommGroup M] [Module R M] {x y : AdicCompletion I M} (h : ∀ (n : ℕ), ↑x n = ↑y n) : x = y\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.ext_iff\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] {I : Ideal R} {M : Type u_4} [AddCommGroup M] [Module R M] {x y : AdicCompletion I M} : x = y ↔ ∀ (n : ℕ), ↑x n = ↑y n\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.ext_evalₐ\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \" {R : Type u_1} [CommRing R] {I : Ideal R} {x y : AdicCompletion I R} (H : ∀ (n : ℕ), (AdicCompletion.evalₐ I n) x = (AdicCompletion.evalₐ I n) y) : x = y\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.map_ext\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Functoriality\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) {M : Type u_2} [AddCommGroup M] [Module R M] {N : Sort u_6} {f g : AdicCompletion I M → N} (h : ∀ (a : AdicCompletion.AdicCauchySequence I M), f ((AdicCompletion.mk I M) a) = g ((AdicCompletion.mk I M) a)) : f = g\", \"doc\": \"Equality of maps out of an adic completion can be checked on Cauchy sequences.\"}\n  {\"name\": \"AdicCompletion.map_ext''\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Functoriality\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) {M : Type u_2} [AddCommGroup M] [Module R M] {N : Type u_3} [AddCommGroup N] [Module R N] {f g : AdicCompletion I M →ₗ[R] N} (h : f ∘ₗ AdicCompletion.mk I M = g ∘ₗ AdicCompletion.mk I M) : f = g\", \"doc\": \"Equality of linear maps out of an adic completion can be checked on Cauchy sequences.\"}\n  {\"name\": \"AdicCompletion.map_ext''_iff\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Functoriality\", \"type\": \" {R : Type u_1} [CommRing R] {I : Ideal R} {M : Type u_2} [AddCommGroup M] [Module R M] {N : Type u_3} [AddCommGroup N] [Module R N] {f g : AdicCompletion I M →ₗ[R] N} : f = g ↔ f ∘ₗ AdicCompletion.mk I M = g ∘ₗ AdicCompletion.mk I M\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.map_ext'\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Functoriality\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) {M : Type u_2} [AddCommGroup M] [Module R M] {T : Type u_5} [AddCommGroup T] [Module (AdicCompletion I R) T] {f g : AdicCompletion I M →ₗ[AdicCompletion I R] T} (h : ∀ (a : AdicCompletion.AdicCauchySequence I M), f ((AdicCompletion.mk I M) a) = g ((AdicComp\", \"doc\": \"Equality of linear maps out of an adic completion can be checked on Cauchy sequences.\"}\n  {\"name\": \"AdicCompletion.map_ext'_iff\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Functoriality\", \"type\": \" {R : Type u_1} [CommRing R] {I : Ideal R} {M : Type u_2} [AddCommGroup M] [Module R M] {T : Type u_5} [AddCommGroup T] [Module (AdicCompletion I R) T] {f g : AdicCompletion I M →ₗ[AdicCompletion I R] T} : f = g ↔ ∀ (a : AdicCompletion.AdicCauchySequence I M), f ((AdicCompletion.mk I M) a) = g ((Adi\", \"doc\": \"\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.adicCompletion.ext\", \"module\": \"Mathlib.RingTheory.DedekindDomain.AdicValuation.Completion\", \"type\": \" {R : Type u_1} [CommRing R] [IsDedekindDomain R] (K : Type u_2) [Field K] [Algebra R K] [IsFractionRing R K] (v : IsDedekindDomain.HeightOneSpectrum R) {x y : IsDedekindDomain.HeightOneSpectrum.adicCompletion K v} (h : x.toCompletion = y.toCompletion) : x = y\", \"doc\": \"\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.adicCompletion.ext_iff\", \"module\": \"Mathlib.RingTheory.DedekindDomain.AdicValuation.Completion\", \"type\": \" {R : Type u_1} [CommRing R] [IsDedekindDomain R] {K : Type u_2} [Field K] [Algebra R K] [IsFractionRing R K] {v : IsDedekindDomain.HeightOneSpectrum R} {x y : IsDedekindDomain.HeightOneSpectrum.adicCompletion K v} : x = y ↔ x.toCompletion = y.toCompletion\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results give Ext definitions, local cohomology diagrams, completion exactness and flatness, not continuity of supported Ext or its coefficient-completion map."
+  },
+  {
+   "tool": "grep",
+   "query": "(Ext|ext).*(completion|adic)|(completion|adic).*(Ext|ext)|ext_annihilated",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Jacobson/Ideal.lean\", \"line\": \"18\", \"text\": \"We can extend the idea of the nilradical of `R` to ideals of `R`,\"}\n  {\"file\": \"Mathlib/RingTheory/Jacobson/Ideal.lean\", \"line\": \"20\", \"text\": \"Under this extension, the original nilradical is the radical of the zero ideal `⊥`.\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Flat.lean\", \"line\": \"47\", \"text\": \"    (AdicCompletion.kerProj hf).toLinearMap (LinearMap.ext fun x ↦ congr($hg x))\"}\n  {\"file\": \"Mathlib/RingTheory/LaurentSeries.lean\", \"line\": \"59\", \"text\": \"* In `LaurentSeries.valuation_compare` we prove that the extension of the `X`-adic valuation from\"}\n  {\"file\": \"Mathlib/RingTheory/LaurentSeries.lean\", \"line\": \"1001\", \"text\": \"  UniformSpace.Completion.extensionHom <|\"}\n  {\"file\": \"Mathlib/RingTheory/LaurentSeries.lean\", \"line\": \"1012\", \"text\": \"lemma comparePkg_eq_extension (x : RatFuncAdicCompl K) :\"}\n  {\"file\": \"Mathlib/RingTheory/LaurentSeries.lean\", \"line\": \"1014\", \"text\": \"      (extensionAsRingHom K (continuous_coe' _)) (adicCompletion.toCompletion x) := rfl\"}\n  {\"file\": \"Mathlib/RingTheory/LaurentSeries.lean\", \"line\": \"1104\", \"text\": \"/-- The extension of the `X`-adic valuation from `K⟮X⟯` up to its abstract completion coincides,\"}\n  {\"file\": \"Mathlib/RingTheory/Radical/NatInt.lean\", \"line\": \"90\", \"text\": \"/-- Positivity extension for radical. Proves radicals are nonzero. -/\"}\n  {\"file\": \"Mathlib/RingTheory/Radical/NatInt.lean\", \"line\": \"92\", \"text\": \"meta def evalRadical : PositivityExt where eval {u α} _ _ e := do\"}\n  {\"file\": \"Mathlib/RingTheory/Radical/Basic.lean\", \"line\": \"255\", \"text\": \"  refine ⟨?_, (Or.elim · (by simp +contextual) radical_of_isUnit)⟩\"}\n  {\"file\": \"Mathlib/RingTheory/ZariskisMainTheorem.lean\", \"line\": \"534\", \"text\": \"      (isStronglyTranscendental_mk_radical_conductor H (f X) (by convert! hf; ext; simp))\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"line\": \"350\", \"text\": \"    ext; simp [coeff_toAdicCompletionInv, coeff_toAdicCompletion_val_apply_out]\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"line\": \"351\", \"text\": \"  right_inv _ := by ext; simpa using! mk_truncTotal_toAdicCompletionInv\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"line\": \"78\", \"text\": \"  simp only [AdicCompletion.ext_iff, val_zero, Pi.zero_apply] at hx\"}\n  {\"file\": \"Mathlib/RingTheory/DedekindDomain/FiniteAdeleRing.lean\", \"line\": \"123\", \"text\": \"  map_one' := Subtype.ext <| funext fun _ ↦ adicCompletion.coe_one ..\"}\n  {\"file\": \"Mathlib/RingTheory/DedekindDomain/FiniteAdeleRing.lean\", \"line\": \"124\", \"text\": \"  map_mul' x y := Subtype.ext <| funext fun _ ↦ adicCompletion.coe_mul ..\"}\n  {\"file\": \"Mathlib/RingTheory/DedekindDomain/FiniteAdeleRing.lean\", \"line\": \"125\", \"text\": \"  map_zero' := Subtype.ext <| funext fun _ ↦ adicCompletion.coe_zero ..\"}\n  {\"file\": \"Mathlib/RingTheory/DedekindDomain/FiniteAdeleRing.lean\", \"line\": \"126\", \"text\": \"  map_add' x y := Subtype.ext <| funext fun _ ↦ adicCompletion.coe_add ..\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Basic.lean\", \"line\": \"56\", \"text\": \"class IsAdicComplete : Prop extends IsHausdorff I M, IsPrecomplete I M\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Basic.lean\", \"line\": \"314\", \"text\": \"lemma ext {x y : AdicCompletion I M} (h : ∀ n, x.val n = y.val n) : x = y := Subtype.ext <| funext h\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Basic.lean\", \"line\": \"500\", \"text\": \"theorem ext {x y : AdicCauchySequence I M} (h : ∀ n, x n = y n) : x = y :=\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Basic.lean\", \"line\": \"827\", \"text\": \"  IsAdicComplete.lift I (extend ha f) (factorPow_comp_extend ha f hf)\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Basic.lean\", \"line\": \"831\", \"text\": \"    AdicCompletion.lift I (extend ha f) (factorPow_comp_extend ha f hf) x :=\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Algebra.lean\", \"line\": \"171\", \"text\": \"lemma ext_evalₐ {x y : AdicCompletion I R} (H : ∀ n, evalₐ I n x = evalₐ I n y) : x = y := by\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results give Ext definitions, local cohomology diagrams, completion exactness and flatness, not continuity of supported Ext or its coefficient-completion map."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Supported Ext groups of a pseudo coherent complex equal the inverse limit of Ext into ideal power quotients",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Abelian.Ext.mk₀\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic\", \"type\": \"(f : X ⟶ Y) : Ext X Y 0\", \"doc\": \"For objects $ X $ and $ Y $ in an abelian category $ \\\\mathcal{C} $, the Ext group in degree $ n $ is defined as the hom-set in the derived category between the $ n $-shifted single-term cochain comple\"}\n  {\"name\": \"localCohomology.diagram\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \"(I : D ⥤ Ideal R) (i : ℕ) : Dᵒᵖ ⥤ ModuleCat.{u} R ⥤ ModuleCat.{u} R\", \"doc\": \"For a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs a functor from $ \\\\mathcal{D}^{\\\\text{op}} $ to the category of $ R\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic\", \"type\": \"(X Y : C) (n : ℕ) : Type w\", \"doc\": \"For objects $ X $ and $ Y $ in an abelian category $ \\\\mathcal{C} $, the Ext group in degree $ n $ is defined as the hom-set in the derived category between the $ n $-shifted single-term cochain comple\"}\n  {\"name\": \"AdicCompletion\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Type u_4\", \"doc\": \"The adic completion of an $ R $-module $ M $ with respect to an ideal $ I $ of a commutative ring $ R $ is the inverse limit of the quotient modules $ M/I^nM $, where $ I^n $ denotes the $ n $th power\"}\n  {\"name\": \"CategoryTheory.ShortComplex.ShortExact.extClass\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.ExtClass\", \"type\": \": Ext.{w} S.X₃ S.X₁ 1\", \"doc\": \"The Ext group $ \\\\operatorname{Ext}^1(X_3, X_1) $ in an abelian category $ \\\\mathcal{C} $, defined as the hom-set in the derived category between the single-term cochain complex of $ X_3 $ and the 1-shi\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.extMk.congr_simp\", \"module\": \"Mathlib.CategoryTheory.Abelian.Projective.Ext\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.HasExt C] {X Y : C} (R : CategoryTheory.ProjectiveResolution X) {n : ℕ}\\n  (f f_1 : R.complex.X n ⟶ Y) (e_f : f = f_1) (m m_1 : ℕ) (e_m : m = m_1) (hm : n + 1 = m)\\n  (hf : CategoryT\", \"doc\": \"For objects $ X $ and $ Y $ in an abelian category $ \\\\mathcal{C} $, the Ext group $ \\\\operatorname{Ext}^n(X, Y) $ is defined as the hom-set in the derived category between the $ n $-shifted single-term\"}\n  {\"name\": \"localCohomology.hasColimitDiagram\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \"(I : D ⥤ Ideal R) (i : ℕ) : HasColimit (diagram I i)\", \"doc\": \"For a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, the diagram constructed via the $ i $-th extension functor $ \\\\text{Ext}^i_R $ app\"}\n  {\"name\": \"localCohomology.ofDiagram\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \"(I : D ⥤ Ideal R) (i : ℕ) : ModuleCat.{max u v} R ⥤ ModuleCat.{max u v} R\", \"doc\": \"Given a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs an $ R $-linear endofunctor on the category of $ R $-modules by\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results give Ext definitions, local cohomology diagrams, completion exactness and flatness, not continuity of supported Ext or its coefficient-completion map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat base change and adic continuity of derived Hom from a pseudo coherent complex with torsion positive cohomology",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"localCohomology.diagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) →\\n          ℕ → CategoryTheory.Functor Dᵒᵖ (CategoryTheory.Functor (ModuleCat R) (ModuleCat R))\", \"doc\": \"For a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs a functor from $ \\\\mathcal{D}^{\\\\text{op}} $ to the category of $ R\"}\n  {\"name\": \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/AB\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.IsGrothendieckAbelian.{u, u + 1, u + 1} (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules is a Grothendieck abelian category. This follows from the fact that it is constructed as the category of sheaves on the site of light \"}\n  {\"name\": \"AdicCompletion.flat_of_isNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [IsNoetherianRing R], Module.Flat R (AdicCompletion I R)\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ I $ is an ideal of $ R $, then the $ I $-adic completion of $ R $, defined as the inverse limit $ \\\\varprojlim R/I^n $, is a flat $ R $-module.\"}\n  {\"name\": \"Ext\", \"module\": \"Mathlib/CategoryTheory/Abelian/Ext\", \"type\": \"(R : Type u_1) →\\n  [inst : Ring R] →\\n    (C : Type u_2) →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_2} C] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [CategoryTheory.Linear R C] →\\n            [CategoryTheory.EnoughProjectives C] →\\n              ℕ → CategoryTheory.Functor Cᵒᵖ (Cat\", \"doc\": \"For a ring $ R $ and an abelian $ R $-linear category $ \\\\mathcal{C} $ with enough projectives, the $ n $-th extension functor $ \\\\text{Ext}^n $ is a bifunctor $ \\\\mathcal{C}^{\\\\text{op}} \\\\times \\\\mathcal{\"}\n  {\"name\": \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Fractions\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {X Y : CochainComplex C ℤ} (a b : ℤ) [X.IsStrictlyLE b] [Y.IsStrictlyGE a]\\n  [Y.IsStrictlyLE b] (f : DerivedCategory.Q.obj X ⟶ DerivedCategory.Q.obj Y),\\n  ∃ Y',\\n    ∃ (_ : Y\", \"doc\": \"Given cochain complexes $X$ and $Y$ with integer indices, where $X$ is strictly supported in degrees $\\\\leq b$, $Y$ is strictly supported in degrees $\\\\geq a$ and $\\\\leq b$, and a morphism $f: Q(X) \\\\to Q\"}\n  {\"name\": \"AdicCompletion.tensor_map_id_left_eq_map\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [inst_1 : IsNoetherianRing R] {M : Type u} [inst_2 : AddCommGroup M]\\n  [inst_3 : Module R M] {N : Type u} [inst_4 : AddCommGroup N] [inst_5 : Module R N] (f : M →ₗ[R] N)\\n  [inst_6 : Module.Finite R M] [inst_7 : Module.Finite R N],\\n  TensorProduct.Alge\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is isomorphic to the $ I $-adi\"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_naturality\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] (f : M →ₗ[R] N),\\n  AdicCompletion.map I f ∘ₗ AdicCompletion.ofTensorProduct I M =\\n    AdicCompletion.ofTensorProduct I N \", \"doc\": \"For any $ R $-linear map $ f : M \\to N $, the diagram involving the $ I $-adic completion maps and tensor products commutes, i.e., $\\\\text{map}_I(f) \\\\circ \\\\text{ofTensorProduct}_I(M) = \\\\text{ofTensorPro\"}\n  {\"name\": \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Descent\", \"type\": \"∀ {A B : Type u} [inst : CommRing A] [inst_1 : CommRing B] {f : A →+* B},\\n  f.Flat → CategoryTheory.Limits.PreservesFiniteLimits (ModuleCat.extendScalars f)\", \"doc\": \"Given a flat ring homomorphism $ f : R \\\\to S $ between commutative rings, the scalar extension functor $ \\\\text{Mod}_R \\\\to \\\\text{Mod}_S $ induced by $ f $ preserves finite limits in the category of mod\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results give Ext definitions, local cohomology diagrams, completion exactness and flatness, not continuity of supported Ext or its coefficient-completion map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ext from a pseudo coherent complex with cohomological support in a closed set is unchanged by completion of a finite coefficient module",
+   "results": "8 hits: CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, DerivedCategory.isGE_Q_obj_iff, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.subsingleton_hom_of_isStrictlyLE_of_isStrictlyGE",
+   "date": "2026-10-23",
+   "verdict": "no match: derived-category support, completion definitions, Cauchy-sequence extensionality and local cohomology do not state supported Ext continuity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext\", \"AdicCompletion\"",
+   "results": "12 hits: AdicCompletion.AdicCauchySequence.ext, AdicCompletion.AdicCauchySequence.ext_iff, AdicCompletion.ext, AdicCompletion.ext_iff, AdicCompletion.ext_evalₐ, AdicCompletion.map_ext, AdicCompletion.map_ext'', AdicCompletion.map_ext''_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: derived-category support, completion definitions, Cauchy-sequence extensionality and local cohomology do not state supported Ext continuity."
+  },
+  {
+   "tool": "grep",
+   "query": "(Ext|ext).*(completion|adic)|(completion|adic).*(Ext|ext)|ext_annihilated",
+   "results": "25 hits: Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean, Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean, Mathlib/NumberTheory/NumberField/Completion/Ramification.lean, Mathlib/NumberTheory/NumberField/Completion/Ramification.lean, Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean, Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean, Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean, Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: derived-category support, completion definitions, Cauchy-sequence extensionality and local cohomology do not state supported Ext continuity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Supported derived Hom from a pseudo coherent complex commutes with ideal adic completion of finite coefficients",
+   "results": "8 hits: IsAdicComplete.mk_comp_liftRingHom, IsAdicComplete.of_liftRingHom, AdicCompletion.module, AdicCompletion, IsAdicComplete.liftRingHom, AdicCompletion.liftRingHom.congr_simp, AdicCompletion.of_injective_iff, IsAdicComplete.ofAlgEquiv_comp_liftRingHom",
+   "date": "2026-10-23",
+   "verdict": "no match: derived-category support, completion definitions, Cauchy-sequence extensionality and local cohomology do not state supported Ext continuity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pseudo coherent Ext equals inverse limit of Ext into powers of ideal quotient modules under torsion support assumptions",
+   "results": "8 hits: localCohomology.diagram, localCohomology, localCohomology.ofDiagram, localCohomology.ofSelfLERadical, localCohomology.isoSelfLERadical, IsAdicComplete.StrictMono.extend, localCohomology.hasColimitDiagram, AdicCompletion",
+   "date": "2026-10-23",
+   "verdict": "no match: derived-category support, completion definitions, Cauchy-sequence extensionality and local cohomology do not state supported Ext continuity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-exal-completion-smooth-complement",
+  "date": "2026-10-23",
+  "group": "Q21"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Local-to-global deformation theorem underlying the node parameters in Pikaart--de Jong 2.3.6; no automorphism action or normalized level cover. Supporting calculation: Deformations of an affine isolated singularity and its completions. Tangent comparison for N=P, before passing from the J-adic completion to its complete local factors. Supporting lemma: Supported pseudo-coherent Ext is unchanged by completing coefficients.",
+   "via": [
+    "lem-sfb-exal-completion-smooth-complement",
+    "lem-sfb-isolated-affine-completion-deformation",
+    "lem-sfb-nodal-deformation-smoothing-parameters",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-supported-complex-ext-completion",
+  "worker": "stage1",
+  "summary": "Kept the statement; reduced Ext to three finite Hom modules, derived power annihilation from the cited support and radical criteria, used one new general Artin–Rees quotient-cohomology limit lemma, and proved the coefficient-completion map using exact completion. All canonical maps and naturality are explicit.",
+  "blueprint": "The item inherits the alteration/deformation prerequisite chain in det-thm-sf-ctf-stability-direct-images proof (3), recorded in from.place. Latest blueprint read at literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md; the current proof uses open direct-image finiteness as a black box, with this item a lower algebraic prerequisite.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-noetherian-submodule-finite",
+    "why": "Generic algebraic tool for supported Ext: finiteness of kernels; the six-functor unit has no replacement for this ordinary module calculation."
+   },
+   {
+    "node": "lem-weil-pbc-finite-module-support-annihilator",
+    "why": "Generic algebraic tool for supported Ext: support equals the vanishing locus of the annihilator; the six-functor unit has no replacement for this ordinary module calculation."
+   },
+   {
+    "node": "lem-weil-pbc-completion-exact-finite-modules",
+    "why": "Generic algebraic tool for supported Ext: exactness of completion on finite modules; the six-functor unit has no replacement for this ordinary module calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-finite-module-support-annihilator",
+  "lem-weil-pbc-completion-exact-finite-modules"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q122-976ab9d07",
+  "group": "Q122",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-976ab9d07 (reviewer sub-agent of L); spot-checked: I read the item and the new node in full against more-algebra 0EGU (l.28867), 0DYI (l.29584) and 0DYJ (l.29782). This is not a re-split: there is no repair note, and the item is still unsplit in live and side-live. The item statement is unchanged against the base (same sha1 in 514 earlier snapshots), and the parent's use of it with a=1 is unaffected. Step 1: P is a bounded-above finite free complex, hence K-projective, and the Hom_K→Hom_D bijection holds for any module, including the non-finite N^. Step 2: if p contains Ann H then H_p≠0 by the support-annihilator leaf, so p contains I. Hence I⊆√Ann H, I^tH=0, and H≅Ĥ. Step 3: 0EGU(2) is applied to three finite Hom modules, with C(N)^j/I^n = C(N/I^nN)^j matching differentials and transitions. Step 4: I checked the four-SES chase myself; with exact completion of finite modules it gives H^i(Ĉ)=Ĥ, and Ĉ^j = C(N̂)^j coordinatewise. Step 5 (naturality) is elementary. The new node lem-sfb-finite-short-complex-adic-cohomology-limit is exactly 0EGU(2) with the canonical maps. I tested it on U=W=0, V=A; on Z with p:Z→Z; and on I=0 and I=A. It is strictly smaller than the item, carries a statement only, is self-contained and has all search kinds recorded. The rg -L DAG search and the main-20261015 blueprint search found no duplicate among the Artin–Rees and ML nodes. I tested the item on A=Z, I=(p), K=Z/p. No SGA is cited, and the off-unit citations are Mathlib leaves. I accept the declared tool_uses (three generic module leaves). No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SupportedComplexExtCompletion",
+  "declaration": "DerivedCategory.supportedComplex_ext_completion",
+  "declarations": [
+   "DerivedCategory.supportedExtFunctor",
+   "DerivedCategory.supportedExtCoefficientTower",
+   "DerivedCategory.supportedExtQuotientTower",
+   "DerivedCategory.supportedExtQuotientCone",
+   "DerivedCategory.supportedExtCompletionUnit",
+   "DerivedCategory.supportedExtCompletionMap",
+   "DerivedCategory.supportedExtQuotientMap",
+   "DerivedCategory.supportedExtQuotientComparison",
+   "DerivedCategory.supportedComplex_ext_completion"
+  ],
+  "file": "lean/Sheaf/RingTheory/SupportedComplexExtCompletion.lean",
+  "statement": "theorem supportedComplex_ext_completion {A : Type u} [CommRing A] [IsNoetherianRing A] [HasDerivedCategory.{w} (ModuleCat.{max u v} A)] (I : Ideal A) (K : DerivedCategory (ModuleCat.{max u v} A)) (hK : IsPseudoCoherent K) (a : ℤ) (hSupport : ∀ (M : ModuleCat.{max u v} A), Module.Finite A M → ∀ (i : ℤ), a ≤ i → ∀ (p : Ideal A) [p.IsPrime], ¬ I ≤ p → Subsingleton (LocalizedModule p.primeCompl ((supportedExtFunctor K i).obj M))) : (∀ (N : ModuleCat.{max u v} A), Module.Finite A N → ∀ (i : ℤ), a ≤ i → IsIso (supportedExtQuotientComparison I K i N)) ∧ (∀ (N : ModuleCat.{max u v} A), Module.Finite A N → ∀ (i : ℤ), a ≤ i → IsIso ((supportedExtFunctor K i).map (supportedExtCompletionUnit I N))) ∧ (∀ (N N' : ModuleCat.{max u v} A), Module.Finite A N → Module.Finite A N' → ∀ (f : N ⟶ N') (i : ℤ), a ≤ i → ∀ (n : ℕ), supportedExtQuotientComparison I K i N ≫ limit.π (supportedExtQuotientTower I K i N) (op n) ≫ (supportedExtFunctor K i).map (supportedExtQuotientMap I f n) = (supportedExtFunctor K i).map f ≫ supportedExtQuotientComparison I K i N' ≫ limit.π (supportedExtQuotientTower I K i N') (op n)) ∧ (∀ (N N' : ModuleCat.{max u v} A), Module.Finite A N → Module.Finite A N' → ∀ (f : N ⟶ N') (i : ℤ), a ≤ i → (supportedExtFunctor K i).map (supportedExtCompletionUnit I N) ≫ (supportedExtFunctor K i).map (supportedExtCompletionMap I f) = (supportedExtFunctor K i).map f ≫ (supportedExtFunctor K i).map (supportedExtCompletionUnit I N'))",
+  "branch": "sheaf-dag",
+  "by": "Q109",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-db8750cc1",
+  "group": "Q109",
+  "result": "pass",
+  "note": "The node and the Lean match clause by clause. Noetherian A, ideal I, K in DerivedCategory (ModuleCat.{max u v} A) with the upstream IsPseudoCoherent; coefficient and Hom universes both free. Support hypothesis = Subsingleton of LocalizedModule p.primeCompl of Hom(K,M[i]) for all finite M, i>=a and primes p not containing I; not stronger. First map = limit.lift of Ext applied to the mkQ cone over the tower N/I^(n+1)N with Mathlib transitionMap; IsIso. Second map = Ext applied to AdicCompletion.of; IsIso, no finiteness on the completion. Both naturality squares are stated (the first after every limit projection). The 8 helpers have real data; the only sorry is the theorem; source/blueprint docstrings and the 5-step proof are present; lean.statement is verbatim; the 6 stmt_dep records match; no existing ring-level Ext functor to reuse; report has Worker report and Second reading by Q109 (thin, but present); delivery dry run compiled OK; earlier error-28 failures were server storage, not Lean. No findings."
+ }
+}

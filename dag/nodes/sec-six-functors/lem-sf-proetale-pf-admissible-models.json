@@ -1,0 +1,348 @@
+{
+ "id": "lem-sf-proetale-pf-admissible-models",
+ "kind": "statement",
+ "title": "Etale origin and bounded models for compactification projection comparison",
+ "statement": "Fix the finite-field datum $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, an integer $n\\ge1$, and $A=\\mathcal O_E/\\varpi_E^n$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Let $X,Y$ be finite-type $k$-schemes and $f:X\\to Y$ a separated finite-type $k$-morphism. Fix a factorization $c=(j,r)$ with $j:X\\hookrightarrow Z$ open, $r:Z\\to Y$ proper and $rj=f$ [def-weil-finite-type-morphism, def-weil-proper-morphism, def-weil-open-immersion]. Use ordinary constant-$A$ module derived categories on the small etale and pro-etale sites [def-weil-pbc-derived-categories, def-weil-pbc-proetale-modules], and put $A_T=\\nu_T^*$ for exact derived comparison [def-sf-comparison-derived-pullback].\n\nLet $K\\in D^b(X_{\\mathrm{proet}},A)$ and $L\\in D^b(Y_{\\mathrm{proet}},A)$ have intrinsically constructible cohomology [def-weil-proetale-constructible-sheaf]. Fix integers $c_0\\le d_0$ and $a\\le b$ such that $K,L$ have pro-etale Tor amplitude in $[c_0,d_0]$ and $[a,b]$, respectively [def-weil-proetale-tor-amplitude]. There exist bounded constructible etale objects $K_0,L_0$ [def-weil-pbc-constructible-complexes] and origin witnesses $e_K:A_XK_0\\cong K$, $e_L:A_YL_0\\cong L$ [def-weil-pbc-etale-origin-witness], with etale Tor amplitudes in these same respective intervals [def-kun-tor-amplitude]. The following model assertions hold for every such pair of representatives and witnesses, including witnesses supplied in advance.\n\nFor every $u\\le v$ with $\\mathcal H^i(K_0)=0$ outside $[u,v]$, there are a cochain complex $C^\\bullet$ representing $K_0$, zero outside $[u,v]$, and a cochain complex $P^\\bullet$ representing $L_0$, flat and zero outside $[a,b]$. Flat means that tensoring with a term is exact; K-flat means that total tensor with any acyclic complex is acyclic [def-pc-cochain-complex-modules, def-pc-flat-sheaf-modules, def-pc-kflat-complex]. Both $P^\\bullet$ and its termwise inverse image $r_e^*P^\\bullet$ are K-flat, and the latter represents $Lr_e^*L_0$. Exact open extension $j_!^e$ [def-weil-pbc-extension-by-zero] makes $j_!^eC^\\bullet$ a model of $M_0=j_!^eK_0$ supported in $[u,v]$. The signed total tensor complex [def-pc-tensor-complex-sheaves]\n$$\\operatorname{Tot}(j_!^eC^\\bullet\\otimes_A r_e^*P^\\bullet)^m=\\bigoplus_{i+h=m}j_!^eC^i\\otimes_A r_e^*P^h,$$\nwith differential $d_C\\otimes1+(-1)^i1\\otimes d_P$ on bidegree $(i,h)$, represents $Q_0=M_0\\otimes_A^L Lr_e^*L_0$ [def-kun-derived-tensor] and is zero outside $[u+a,v+b]$. Thus $M_0,Q_0$ are bounded below. The morphism $r$ is quasi-compact and quasi-separated (its diagonal is quasi-compact), so these are admissible inputs for the canonical bounded-below direct-image comparison mate. All sites are chosen small in one common larger universe.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08G1, lemma-tor-amplitude; proetale.tex Tag 09AL, lemma-compare-constructible-derived. The combined compactification-input assertion refines the finite-coefficient transport paragraph of literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-pf-proetale/thm-sf-pf-proetale.proof.md."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-modules",
+  "def-sf-comparison-derived-pullback",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-proetale-tor-amplitude",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-etale-origin-witness",
+  "def-kun-tor-amplitude",
+  "def-pc-cochain-complex-modules",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "def-weil-pbc-extension-by-zero",
+  "def-pc-tensor-complex-sheaves",
+  "def-kun-derived-tensor"
+ ],
+ "proof": [
+  {
+   "text": "For each cohomology sheaf of K and L, keep the intrinsic finite stratification and apply [lem-sf-proetale-lisse-finite-models] on every stratum. This gives the finite constant models in the source fixed-module constructibility predicate. Apply [lem-weil-pbc-fixed-module-constructible-origin] to these sheaves and then [lem-weil-pbc-fixed-module-bounded-constructible-origin] to each bounded complex. Convert the source etale constructibility predicate by [lem-weil-pbc-constructible-etale-module-sheaf-comparison]. The source lower cohomology bound packages each antecedent as a fixed D+ origin witness, with its displayed comparison isomorphism. This proves existence without any choice of data in a definition.",
+   "uses": [
+    "lem-sf-proetale-lisse-finite-models",
+    "lem-weil-pbc-fixed-module-constructible-origin",
+    "lem-weil-pbc-fixed-module-bounded-constructible-origin",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099Y, 09AK and 09AL; fixed-module boundedConstructible_of_homology in the source library."
+   }
+  },
+  {
+   "text": "For every supplied pair of fixed etale-origin witnesses, transport the pro-etale categorical Tor-amplitude property through its specified isomorphism. Apply the fixed-module form of [lem-exc-comparison-tor-interval], namely the existing source theorem ProEtale.DerivedCategory.torAmplitudeIn_mapDerivedCategory_iff, and the existing hasTorAmplitudeIn_iff_torAmplitudeIn. This gives exactly [c_0,d_0] and [a,b] for the original antecedents. The fixed-coefficient HasFixedCoefficientProEtaleTorAmplitude already contains the categorical Tor test, so no intrinsic ringed coefficient realization is necessary.",
+   "uses": [
+    "lem-exc-comparison-tor-interval"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/FiniteCoefficient/Derived/HomComparison.lean",
+    "place": "torAmplitudeIn_mapDerivedCategory_iff, with FlatModel.lean hasTorAmplitudeIn_iff_torAmplitudeIn."
+   }
+  },
+  {
+   "text": "Turn the cohomology vanishing of K_0 outside [u,v] into IsGE u and IsLE v, and apply [lem-sfb-bounded-representative] to obtain C with strict support [u,v] and Q(C) isomorphic to K_0. This includes a singleton interval and an acyclic object.",
+   "uses": [
+    "lem-sfb-bounded-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean",
+    "place": "exists_iso_Q_obj_of_isGE_of_isLE, lines 180-186."
+   }
+  },
+  {
+   "text": "Convert the etale Tor test of L_0 to categorical torAmplitudeIn. Apply [lem-sc-source-tor-amplitude-flat-model] directly in ordinary module-valued etale sheaves to obtain a flat-term representative P strictly supported in [a,b] with Q(P) isomorphic to L_0. This generic source theorem uses precisely the tensor of [def-kun-derived-tensor]; no comparison between separately constructed derived tensors is involved. Flatness includes exactness of tensorRight. Apply [lem-sfb-bounded-above-flat-kflat] to P.",
+   "uses": [
+    "lem-sc-source-tor-amplitude-flat-model",
+    "def-kun-derived-tensor",
+    "lem-sfb-bounded-above-flat-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/FlatModel.lean",
+    "place": "exists_iso_Q_obj_flat_of_torAmplitudeIn, lines 260-300; Stacks sites-cohomology.tex Tag 08G1, lemma-tor-amplitude."
+   }
+  },
+  {
+   "text": "Let RP be the literal termwise inverse image of P along r. The source upperStarPreservesFlat_moduleCat instance, in the module of [lem-sfb-etale-flat-geometric-fibers], makes each term flat. Additive inverse image preserves the zero terms, hence RP has strict support [a,b]. Apply [lem-sfb-bounded-above-flat-kflat] again to obtain K-flatness of RP. Exact inverse image and [lem-weil-pbc-exact-functor-derived-factorization], composed with the image of Q(P) isomorphic to L_0, give Q(RP) isomorphic to the prescribed derived pullback of L_0. No flatness of the scheme morphism is used.",
+   "uses": [
+    "lem-sfb-etale-flat-geometric-fibers",
+    "lem-sfb-bounded-above-flat-kflat",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/Etale/UpperLowerStar/FlatModuleCat.lean",
+    "place": "upperStarPreservesFlat_moduleCat; Mathlib exact-functor localization factorization."
+   }
+  },
+  {
+   "text": "Put JC=j!C. By [lem-weil-pbc-extension-by-zero-exact], extension by zero is exact, so [lem-weil-pbc-exact-functor-derived-factorization] and the representing isomorphism of C give Q(JC) isomorphic to M_0. Additivity preserves the zero terms, so JC has strict support [u,v]. The lower support bound also gives bounded-below membership of M_0.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DJ, lemma-extension-by-zero-exact; source openImmersionLowerShriek and mapDerivedCategoryFactors."
+   }
+  },
+  {
+   "text": "The existing source DerivedCategory.QObjTensorQObjIsoOfKFlatRight applied to JC and RP identifies Q(Tot(JC tensor RP)) with Q(JC) tensor-derived Q(RP). Compose with tensorIso of the two representing isomorphisms to obtain the exact object Q_0 of [def-kun-derived-tensor]. The signed total tensor of [def-pc-tensor-complex-sheaves] has strict support [u+a,v+b], by the source isStrictlyGE_tensorObj and isStrictlyLE_tensorObj lemmas: a nonzero summand requires u<=i<=v, a<=h<=b, and i+h=m. Localization and the representing isomorphism give bounded-below membership of Q_0.",
+   "uses": [
+    "def-kun-derived-tensor",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/FlatModel.lean",
+    "place": "QObjTensorQObjIsoOfKFlatRight, lines 339-355; WeilConjectures/Mathlib/Algebra/Homology/Monoidal.lean support lemmas, lines 101-127; Stacks Tag 06YU."
+   }
+  },
+  {
+   "text": "Properness of r [def-weil-proper-morphism] gives quasi-compactness; its separatedness gives quasi-separatedness by [lem-pc-separated-quasi-separated]. Pair these with the models and lower bounds already established. The theorem asserts admissibility only, so no direct-image comparison theorem is invoked.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-pc-separated-quasi-separated"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-proetale-lisse-finite-models",
+  "lem-weil-pbc-fixed-module-constructible-origin",
+  "lem-weil-pbc-fixed-module-bounded-constructible-origin",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "lem-exc-comparison-tor-interval",
+  "lem-sfb-bounded-representative",
+  "lem-sc-source-tor-amplitude-flat-model",
+  "def-kun-derived-tensor",
+  "lem-sfb-bounded-above-flat-kflat",
+  "lem-sfb-etale-flat-geometric-fibers",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-proper-morphism",
+  "lem-pc-separated-quasi-separated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/Paper/ProEtalePfAdmissibleModels.lean",
+  "place": "F5 stage-3 assembly, 2026-10-25. Fixed-module constructible origins and Tor reflection; Mathlib bounded representatives; existing generic source flat models, geometric flat pullback, exact localization and right-factor K-flat tensor computation. Stacks Tags 09AL, 08G1, 06YQ, 03DJ and 06YU."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "proetale.*(Tor|flat)|etale.*flatModel|extensionByZero.*[Bb]ounded",
+   "results": "0 hits. No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale origin of constructible complexes with finite Tor amplitude and bounded flat models",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Equivalence",
+   "results": "12 hits. CategoryTheory.sheafBotEquivalence, CategoryTheory.Functor.IsDenseSubsite.sheafEquiv, CategoryTheory.Functor.sheafInducedTopologyEquivOfIsCoverDense, CategoryTheory.Equivalence.transportAndSheafify, CategoryTheory.Equivalence.sheafCongr, CategoryTheory.Equivalence.sheafCongr.functor, CategoryTheory.Equivalence.sheafCongr.inverse, CategoryTheory.Equivalence.instPreservesFiniteLimitsFunctorOppositeSheafTransportAndSheafify Generic sheaf equivalences, adjunction/monoidal structure, or scheme isomorphism lemmas do not supply the finite-ring derived comparison theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded constructible pro-etale complexes of finite Tor amplitude admit etale representatives with bounded flat models; extension by zero tensor proper pullback is bounded",
+   "results": "8 hits. AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.Etale.exists_subalgebra_fg, Algebra.FormallyEtale.comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, Algebra.FormallyEtale.instTensorProduct, Algebra.FormallyEtale.instForallOfFinite, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme Returned etale algebra, condensed/profinite, or elementary scheme lemmas; none states this derived module-site assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "HasTorAmplitudeIn|hasTorAmplitudeIn|flatModel|KFlat",
+   "results": "0 hits. No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Choose etale origins of intrinsically constructible finite ring pro-etale complexes preserving their Tor intervals, and bounded flat representatives making compactified tensor inputs bounded",
+   "results": "8 hits. Algebra.Etale.exists_subalgebra_fg, Algebra.Smooth.exists_finiteType, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, Algebra.FormallyEtale.instForallOfFinite, RingHom.IsStandardSmooth.exists_etale_mvPolynomial, Algebra.Smooth.exists_subalgebra_finiteType, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial Returned etale algebra, condensed/profinite, or elementary scheme lemmas; none states this derived module-site assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale.*(Tor|flat)|etale.*flatModel|extensionByZero.*[Bb]ounded",
+   "results": "0 hits: . ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded constructible complex on the pro-etale site descends to the etale site with the same Tor amplitude and a bounded flat representative",
+   "results": "8 hits: AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact, Algebra.FormallyEtale.comp, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, AlgebraicGeometry.Scheme.smallEtaleTopology, Algebra.Etale.exists_subalgebra_fg, AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.Scheme.Etale. ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, CategoryTheory.Sheaf",
+   "results": "0 hits: . ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible pro-etale complexes have etale origins preserving Tor amplitude and bounded flat models",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.of_comp, Algebra.FormallyEtale.comp, RingHom.etale_iff_formallyUnramified_and_smooth, Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth, Algebra.FormallyEtale.of_unramified_and_smooth, Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.instFormallySmooth, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified. ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived etale proetale comparison preserves constructibility and Tor intervals; bounded flat complexes compute derived tensor after open extension and inverse image",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, Algebra.Etale.comp, Algebra.IsEtaleAt.comp, Algebra.Etale.exists_subalgebra_fg, Algebra.FormallyEtale.instTensorProduct, Algebra.FormallyEtale.comp, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, AlgebraicGeometry.IsEtale.of_comp. ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "thm-sf-pf-proetale",
+  "date": "2026-10-22",
+  "group": "Q111"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-pf-proetale",
+ "blueprint": {
+  "from": {
+   "node": "thm-sf-pf-proetale",
+   "place": "Finite-coefficient transport paragraph: choose etale-origin inputs with the same Tor bounds and verify bounded-below inputs for proper comparison (returned proof steps 1-2).",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-proetale-pf-admissible-models",
+  "worker": "Q131",
+  "summary": "Assembled all model assertions from existing generic lemmas; no new nodes. Checked fixed witnesses and exact intervals, supplied a good-truncation construction and explicit total degree bound. Corrected the etale extension-by-zero definition citation. Reviewer (Q131 maintainer reader) FIX: step 3 matches the two derived tensors, step 6 replaces the factor-interchange remark by the one-factor quasi-isomorphism argument, and the 099R source label is corrected to 09A6.",
+  "blueprint": "Realizes the finite-coefficient transport paragraph of thm-sf-pf-proetale: intrinsic etale origins and bounded-below compactification inputs before direct-image comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Constructible comparison supplies origins; a generic comparison tool, not a replacement projection-formula route."
+   },
+   {
+    "node": "lem-exc-comparison-tor-interval",
+    "why": "Transfers the exact Tor intervals for any chosen witnesses."
+   },
+   {
+    "node": "lem-sp-ringed-site-tor-flat-model",
+    "why": "Generic ringed-site flat model theorem applied on Y_et."
+   },
+   {
+    "node": "lem-weil-pbc-independent-bounded-flat-kflat",
+    "why": "Generic bounded-above flat K-flatness criterion."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "Generic ringed pullback preservation of flat-term K-flat complexes."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "why": "Generic computation comparison for derived module pullback."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Exactness on the etale site, used only to construct its termwise model."
+   },
+   {
+    "node": "lem-pc-separated-quasi-separated",
+    "why": "Generic scheme separation implication for the proper compactification morphism."
+   },
+   {
+    "node": "prop-weil-pbc-comparison-direct-image",
+    "why": "The bounded-below qcqs comparison whose input domain is being checked."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Its derived tensor is the one in the flat-model lemma's condition (1); used only to match it with the Kunneth derived tensor."
+   },
+   {
+    "node": "lem-pur-kflat-tensor-quasiiso-independent",
+    "why": "Generic: total tensor with a K-flat second factor preserves quasi-isomorphisms; no node of the unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-comparison-tor-interval",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-pc-separated-quasi-separated"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q131-c56e490ef",
+  "group": "Q131",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-c56e490ef (reviewer sub-agent of L); spot-checked: I read the whole delivery. It is the first split of a Q111 statement-only node: 7 steps, no new nodes, and no repair note applies. I read every cited statement and the Stacks sources: 08G1, 0G7E, 06YQ/06YY/06YU, 09AL, 09A6, 01K7, 0118 and 03DJ. The statement now cites def-weil-pbc-extension-by-zero instead of def-weil-extension-by-zero; this is correct, because the old node is the pro-étale j_! while the item's j_!^e acts on the étale K_0. The only citer, thm-sf-pf-proetale step 1, is unaffected. I accept all tool_uses as generic. FIX for three faults: (1) C4/E1, step 3: the flat-model lemma's condition (1) uses the derived tensor of lem-weil-pbc-site-derived-tensor-descent, but L_0's Tor amplitude uses def-kun-derived-tensor, and the step never matched them. Repaired with flat-term K-flat resolutions (lem-pc-kflat-resolution), the sign symmetry and lem-pur-kflat-tensor-quasiiso-independent. (2) C2/E5, step 6: def-kun-derived-tensor resolves the first factor, but the step resolved the second (r_e^*P) by 'interchanging factors', which needs commutativity of the derived tensor, stated in no cited node. Replaced with a K-flat P'->j_!C and lem-pur-kflat-tensor-quasiiso-independent (K-flat as the second factor); the step is now non-elementary. (3) Source label: lemma-morphism-comparison is Tag 09A6, not 099R (099R is the section); fixed in step 7 and proof_origin. proof_deps and tool_uses are updated (2 generic tensor tool_uses added). No cycle and no trf nodes. Statement unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProEtalePfAdmissibleModels",
+  "declaration": "AlgebraicGeometry.ProEtale.proEtale_pf_admissible_models",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.pfModelCoefficients",
+   "AlgebraicGeometry.ProEtale.pfModelCoefficients_finite",
+   "AlgebraicGeometry.ProEtale.pfAdmissibleModelAssertions",
+   "AlgebraicGeometry.ProEtale.pfAdmissibleOriginAssertions",
+   "AlgebraicGeometry.ProEtale.proEtale_pf_admissible_models"
+  ],
+  "file": "lean/Sheaf/Paper/ProEtalePfAdmissibleModels.lean",
+  "statement": "theorem proEtale_pf_admissible_models (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ+) {X Y Z : Scheme.{u}} [X.Over (Spec (CommRingCat.of D.k))] [Y.Over (Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (X ↘ Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (Y ↘ Spec (CommRingCat.of D.k))] (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (j : X ⟶ Z) [IsOpenImmersion j] (r : Z ⟶ Y) [IsProper r] (_hjr : j ≫ r = f) (K : _root_.DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (pfModelCoefficients l E n)))) (L : _root_.DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} (pfModelCoefficients l E n)))) (_hKb : _root_.DerivedCategory.TStructure.t.bounded K.obj) (_hLb : _root_.DerivedCategory.TStructure.t.bounded L.obj) (_hKc : ∀ i : ℤ, Scheme.IsConstructibleProEtaleFixedModuleSheaf X (pfModelCoefficients l E n) ((_root_.DerivedCategory.homologyFunctor _ i).obj K.obj)) (_hLc : ∀ i : ℤ, Scheme.IsConstructibleProEtaleFixedModuleSheaf Y (pfModelCoefficients l E n) ((_root_.DerivedCategory.homologyFunctor _ i).obj L.obj)) (c0 d0 a b : ℤ) (_hcd : c0 ≤ d0) (_hab : a ≤ b) (_hKTor : Scheme.HasFixedCoefficientProEtaleTorAmplitude X (pfModelCoefficients l E n) K.obj c0 d0) (_hLTor : Scheme.HasFixedCoefficientProEtaleTorAmplitude Y (pfModelCoefficients l E n) L.obj a b) : pfAdmissibleOriginAssertions (pfModelCoefficients l E n) j r K L c0 d0 a b",
+  "branch": "sheaf-dag",
+  "by": "Q65",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f2017c464",
+  "group": "Q65",
+  "result": "pass",
+  "note": "Clause table complete: datum D/l/ℓ≠p/E/n:ℕ+, A = ULift(O_E/ϖ^n); X,Y finite type over k via Over+LOFT+QC; f separated finite type k-morphism; j open, r proper, j≫r=f; K,L in D+ with t.bounded, intrinsic IsConstructibleProEtaleFixedModuleSheaf on all H^i, HasFixedCoefficientProEtaleTorAmplitude [c0,d0],[a,b]; ∃ FixedEtaleOriginWitness pairs (iso via comparisonUpperStar = siteComparisonDerivedPullbackPlus) with isBoundedConstructible and étale hasTorAmplitudeIn (arg order checked); ∀ supplied witnesses → same Tor bounds and, ∀ u0≤v0 with H^i(K0) zero outside, ∃ C,P with Q-isos, supports, flat terms (exactFunctor tensorRight), kFlat P and r^*P, RP≅Lr^*L0, JC≅j_!K0, T=mapBifunctor JC RP curriedTensor ≅ derivedTensor M0 RL0 with support [u0+a,v0+b], t.plus M0/Q0, QuasiCompact∧QuasiSeparated r. Same Sheaf.monoidalCategory throughout. No extra hypotheses, universes as in dep records, statement verbatim, only main theorem sorry, docstrings and blueprint tags present, imports exist, first S2 landing. Advisories: local ULift coefficient abbrev, instance transport term, unused public ProEtaleFiniteModules import, Nonempty representation isos adequate. No file changed, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261025T122901-L-1816072",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

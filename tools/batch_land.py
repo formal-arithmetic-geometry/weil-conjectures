@@ -17,6 +17,14 @@ the branch. The server does not compile the delivery again. One cycle:
      A batch takes the deliveries checked so far once no check has finished for SHEAF_BATCH_QUIET s (30), at most
      SHEAF_BATCH_MAX (150) of them; the other checks go on and a later batch takes them (2026-10-18).
   3. Two deliveries that write the same file do not land in one batch: the later one waits for the next cycle.
+     Merge agents, not text merges (the human, 2026-10-26; tools/merge_jobs.py): a delivery whose Lean file changed on
+     the main branch since its base waits (neither refused nor landed) for a merge job of lane M of the cc review service
+     (~/weil-review-svc/mergelane.py), which writes a merge that keeps both intents and compiles it alone with its
+     importers; green: the merged text lands in place of the delivery's; not mergeable: the delivery goes back to its
+     group with the agent's explanation. Two checked deliveries writing the same Lean file get a job at once (the later
+     one is merged onto the first one's text while that one waits to land). The agent may change any file of the
+     delivery (its other modules, its node files); DAG node conflicts (a node the delivery creates exists now, or both
+     changed the same node field) are merge jobs too, checked by tools/stage3_delivery.py check_nodes (2026-10-26 evening).
   4. Under coord/.merge.lock, held only for the writes: for each delivery, the head and the library files are compared
      with what was checked (a difference: the delivery waits and is checked again), then the files are written and
      registered as one landing (tools/landing.py; several modules are one set), the node records, change records,
@@ -56,6 +64,10 @@ import batch_recovery as recovery
 import import_cycles as cycles
 import repair_queue as repairs
 from pipeline_guard import alert, clear_alert
+import red_rework  # noqa: E402
+import merge_jobs as mj  # noqa: E402   2026-10-26: conflicts go to merge agents (tools/merge_jobs.py)
+import stage2_batch as s2b  # noqa: E402   2026-10-25: stage 2 lands in the same batches
+PRUNE_TIMEOUT = int(os.environ.get("SHEAF_PRUNE_TIMEOUT", "120"))
 
 ROOT = md.ROOT
 BD = ROOT / "local" / "batch"
@@ -154,7 +166,7 @@ def cmd_pass(o) -> int:
         over = fixes(pathlib.Path(o.apply_fixes).resolve(), g, item, head)
     c = {"group": g, "item": item, "head": head, "reviewer": o.reviewer, "overrides": over}
     try:
-        plan = check(c, classify=False)
+        plan = check(c, classify=False, merge_wait=False)
     except (Refuse, Wait) as e:
         raise md.Fail(str(e))
     if o.dry_run:
@@ -335,8 +347,15 @@ def prune_check(D: dict, index_file: str | None = None) -> str | None:
                 oldp = "/dev/null"
             else:
                 old.write_text(m["old"]); oldp = str(old)
-            r = subprocess.run([sys.executable, "-c", PRUNE_WORKER, str(ROOT / "tools"), str(pathlib.Path(__file__).resolve().parent), str(ov), index_file or "",
-                                m["module"], oldp, str(ov / m["file"][len("lean/"):])], cwd=ROOT, capture_output=True, text=True)
+            # 2026-10-24: at most PRUNE_TIMEOUT s per module. A delivery that removed ~40 imports kept this textual check
+            # busy for 3.5 h and held the delivery out of every batch; past the limit the global build decides (a
+            # module it breaks goes back to its writer or becomes a rework item, tools/batch_land.py mechanical_red)
+            try:
+                r = subprocess.run([sys.executable, "-c", PRUNE_WORKER, str(ROOT / "tools"), str(pathlib.Path(__file__).resolve().parent), str(ov), index_file or "",
+                                    m["module"], oldp, str(ov / m["file"][len("lean/"):])], cwd=ROOT, capture_output=True, text=True,
+                                   timeout=PRUNE_TIMEOUT)
+            except subprocess.TimeoutExpired:
+                continue
             if r.returncode != 0:
                 return f"refused by tools/import_prune_check.py for {m['file']}: " + " | ".join(
                     (r.stdout + r.stderr).strip().splitlines()[-25:])
@@ -368,25 +387,16 @@ def merge_imports(text: str, added: list[str]) -> str:
     return "\n".join(L[:k] + add + L[k:])
 
 
-def merge3(ours: str, base: str, theirs: str) -> str | None:
-    """git merge-file of the delivery's text (`ours`) and the library's text now (`theirs`) over their common `base`;
-    None when they overlap."""
-    with tempfile.TemporaryDirectory(prefix="sheaf-merge3-") as td:
-        fs = []
-        for n, t in (("ours", ours), ("base", base), ("theirs", theirs)):
-            f = pathlib.Path(td) / n; f.write_text(t); fs.append(str(f))
-        r = subprocess.run(["git", "merge-file", "-p", *fs], capture_output=True, text=True)
-        return r.stdout if r.returncode == 0 else None
-
-
 def writers_since(base: str, path: str) -> str:
     """the commits on the main branch since `base` that touched `path` (short), for the return message"""
     out = md.git("log", "--format=%h %s", f"{base}..{md.MAIN}", "--", path, check=False).splitlines()
     return "; ".join(l[:90] for l in out[:3]) + (f"; {len(out) - 3} more" if len(out) > 3 else "") if out else "uncommitted change"
 
 
-def check(c: dict, classify: bool = True) -> dict:
-    """Every check that needs no lock. Returns the plan of the landing; Refuse or Wait otherwise."""
+def check(c: dict, classify: bool = True, merge_wait: bool = True) -> dict:
+    """Every check that needs no lock. Returns the plan of the landing; Refuse or Wait otherwise. A file changed on the
+    main branch since the delivery's base is merged by a merge agent (tools/merge_jobs.py): Wait until its job is done
+    (merge_wait=False, a reader's pass: the job is requested and the checks go on with the delivery's own text)."""
     g, item, head = c["group"], c["item"], c["head"]
     reviewer = c.get("reviewer")
     base = md.git("merge-base", md.MAIN, head)
@@ -419,7 +429,7 @@ def check(c: dict, classify: bool = True) -> dict:
                      "group's delivery tool compiled its modules with the probe, and the server does not compile a "
                      "delivery again; deliver with the delivery tool")
     busy = inflight_files()
-    cur, write, merged_any = {}, [], False
+    cur, write, merged_any, conflicts = {}, [], False, []
     base_texts = {m["file"]: s2.Git(ROOT).show(base, m["file"]) for m in D["modules"]}
     for m in D["modules"]:
         p = ROOT / m["file"]
@@ -446,29 +456,70 @@ def check(c: dict, classify: bool = True) -> dict:
             if now == m["text"]:
                 continue
             write.append(m["file"]); continue
-        by = writers_since(base, m["file"])
-        if base_text is None or now is None or m["text"] is None:
+        if now is None or m["text"] is None:
+            by = writers_since(base, m["file"])
             gone = now is None and base_text is not None
             raise Refuse(f"{m['file']} " + ("was removed from lean/ on " if gone else "was created on " if base_text is None
                          else "changed on ") + f"{md.MAIN} after the delivery's base {base[:9]} (by {by})"
                          + (": the module is quarantined now (coord/rework.tsv); claim its rework item and restore it from "
                             "quarantine/" if gone else ": take the file as it is now, make your change in it, compile and "
                             "deliver again"))
-        merged = merge3(m["text"], base_text, now)
-        if merged is None:
-            raise Refuse(f"{m['file']} changed on {md.MAIN} after the delivery's base {base[:9]} (by {by}) in the lines the "
-                         "delivery changes: take the file as it is now, make your change in it, compile and deliver again")
-        # 2026-10-20: a change elsewhere in the file is merged in (3-way: base, the library now, the delivery); the global
-        # build compiles the result and takes it out when red, like any landing
-        m["text"] = merged
-        if m["old"] == base_text:
-            m["old"] = now
-        m["diff"] = s3.diff_module(m["old"], m["text"])
-        D["notes"].append(f"{m['file']}: changes on {md.MAIN} since the base ({by}) merged in (3-way, no overlap)")
-        merged_any = True
-        if now == m["text"]:
+        # 2026-10-26 (the human): no text merge (git merge-file joined characters, not intents: 14.9 % of such landings
+        # reverted against 2.0 %). The file goes to a merge agent; the delivery waits for its job (tools/merge_jobs.py)
+        conflicts.append({"file": m["file"], "base": base_text or "", "target": now, "ours": m["text"]})
+    # 2026-10-26 evening (the human): DAG node conflicts go to the merge agent too, not back to the worker: a node the
+    # delivery creates that exists on main now, or a node field both the delivery and main changed differently
+    for nid, x in D["nodes"].items():
+        p = ROOT / x["path"]
+        cur_t = p.read_text() if p.is_file() else None
+        if cur_t is None:
             continue
-        write.append(m["file"])
+        ours_t = mj.dump(x["node"])
+        if x["role"] == "new":
+            conflicts.append({"file": x["path"], "base": "", "target": cur_t, "ours": ours_t}); continue
+        try:
+            cur_n = json.loads(cur_t)
+        except ValueError:
+            continue
+        b = x["base_node"] or {}
+        if any(b.get(f) != x["node"].get(f) and cur_n.get(f) != b.get(f) and cur_n.get(f) != x["node"].get(f)
+               for f in s3.STAGE3_OWNS + s3.STAGE3_STATEMENT + s3.STAGE3_PRUNES):
+            conflicts.append({"file": x["path"], "base": s2.Git(ROOT).show(base, x["path"]) or "", "target": cur_t, "ours": ours_t})
+    if conflicts:
+        st, got = mj.resolve(g, item, head, base, conflicts, mj.delivery_files(D), D.get("report"))
+        if st == "failed":
+            raise Refuse(got)
+        if st == "wait" and merge_wait:
+            raise Wait(got)
+        for m in D["modules"]:
+            if st != "merged" or m["file"] not in got:
+                if st == "wait" and any(x["file"] == m["file"] for x in conflicts):
+                    write.append(m["file"])         # a reader's pass: checked with its own text; the batch waits for the job
+                continue
+            now, base_text = cur[m["file"]], base_texts[m["file"]]
+            m["text"] = got[m["file"]]
+            if m["old"] == base_text:
+                m["old"] = now
+            m["diff"] = s3.diff_module(m["old"], m["text"])
+            D["notes"].append(f"{m['file']}: " + (f"changes on {md.MAIN} since the base ({writers_since(base, m['file'])}) merged by "
+                              "a merge agent" if any(x["file"] == m["file"] for x in conflicts) else "changed by the merge agent")
+                              + " (tools/merge_jobs.py), compiled alone with its importers")
+            merged_any = True
+            if now != m["text"] and m["file"] not in write:
+                write.append(m["file"])
+        if st == "merged":
+            for nid, x in D["nodes"].items():
+                if x["path"] not in got:
+                    continue
+                node = json.loads(got[x["path"]])
+                if any(c["file"] == x["path"] for c in conflicts):
+                    # lands as a change of main's node (land_one writes the fields that differ from it)
+                    cur_t = (ROOT / x["path"]).read_text()
+                    x.update(node=node, base_node=json.loads(cur_t), role="changed", merged_against=mj.sha(cur_t))
+                else:
+                    x["node"] = node
+                D["notes"].append(f"{x['path']}: node merged by a merge agent (tools/merge_jobs.py; check_nodes passed)")
+                merged_any = True
     if merged_any:
         for module in D["modules"]:
             if module["text"] is None:
@@ -506,12 +557,69 @@ def check(c: dict, classify: bool = True) -> dict:
     if bad:
         raise Refuse(bad)
     paths = {m["file"] for m in D["modules"]} | {x["path"] for x in D["nodes"].values()} | set(D["changes"]) | {D["report_path"]}
-    return dict(c, reviewer=reviewer, base=base, D=D, cur=cur, write=write, paths=sorted(paths))
+    # 2026-10-27 (the human): a landing that fixes a quarantined rework root (restore_after_fix then puts its importers
+    # back) is checked first: not the failing quarantined text again, and the root compiles alone against the live build
+    # (tools/rework_fixcheck.py; Refuse: back to the writer with the error; Wait: an import has no .olean yet)
+    import rework_fixcheck as rfc
+    rootfix = rfc.verify(D, item, head, Refuse, Wait, compile=merge_wait)   # a reader's pass: the batch compiles it
+    if rootfix:
+        D["notes"].append("rework root fix checked before the cluster restore: "
+                          + ", ".join(f"{m} {s}" for m, s in rootfix.items()))
+    return dict(c, reviewer=reviewer, base=base, D=D, cur=cur, write=write, paths=sorted(paths), rootfix=rootfix)
+
+
+def importer_recheck(plan: dict) -> None:
+    """2026-10-27 (the human): a reader-passed delivery that changes the interface of existing modules has the direct
+    importers of those modules compiled again before it lands, those whose source changed since the review packet's
+    compile (tools/importer_compile.py recheck: changed, new, sorry stub then, or not OK then). One that now fails with the
+    delivery and compiles on main without it refuses the landing (Refuse: back to the writer with the compiler message).
+    Pre-existing failures, INFRA, SLOW and a failure of the recheck itself do not refuse; importers not compiled yet
+    (busy slots) make it wait, at most SHEAF_S3_RECHECK_WAIT seconds. Called after check() by
+    _check, outside it (check() and the merge-agent path are maintained separately).
+    2026-10-27 (three red builds in one evening, ~3100 importers quarantined, all from "(interface, COMPILER)" landings
+    that broke a direct importer): an AUTO/COMPILER delivery (no reader, no packet compile) gets the same recheck when
+    it changes the interface of an existing module that has importers outside the delivery (importer_compile.plan:
+    every direct importer compiled, there is no review evidence); a proof-only one is not compiled, as before."""
+    auto = plan.get("reviewer") in ("AUTO", "COMPILER")
+    if not plan.get("passed") and not auto:
+        return
+    try:
+        import importer_compile as ic
+        if auto and not ic.plan(plan["D"])["compile"]:
+            return
+        r = ic.recheck(plan["D"], plan["head"])
+    except Exception as e:  # noqa: BLE001   the global build still verifies the landing
+        try:
+            with open(ROOT / "local" / "importer-checks" / "recheck-errors.log", "a") as f:
+                f.write(f"{time.strftime('%F %T')} {plan['group']} {plan['item']} {plan['head'][:9]} {e!r}"[:600] + "\n")
+        except OSError:
+            pass
+        return
+    if r["compiled"]:
+        plan["D"].setdefault("notes", []).append(
+            f"importer recheck at landing: {len(r['compiled'])} direct importer(s) compiled again"
+            + (f", pre-existing failures {', '.join(r['pre_existing'])}" if r["pre_existing"] else "")
+            + (f", not decided: {', '.join(f'{u} {s}' for u, s in r['other'].items())}" if r["other"] else "")
+            + (f", not compiled: {len(r['not_run'])}" if r["not_run"] else ""))
+    if r["new_fail"]:
+        msg = "; ".join(f"importer {u} now fails against this delivery ({r['compiled'].get(u, '')}; it compiles on "
+                        f"{md.MAIN} without the delivery):\n{out.strip()[-1200:]}" for u, out in r["new_fail"].items())
+        raise Refuse("the importer recheck at landing (tools/importer_compile.py recheck): " + msg[:2800]
+                     + "\nAdapt the delivery so that the importer compiles (changes inside the delivery's own files), "
+                     "compile it with the importer, deliver again.")
+    wait_max = float(os.environ.get("SHEAF_S3_RECHECK_WAIT", "10800"))
+    if r["not_run"] and time.time() - r["first"] < wait_max:
+        # busy compile slots: the delivery waits for the next step, which compiles the rest (results are kept); after
+        # SHEAF_S3_RECHECK_WAIT (3 h) of waiting it lands and the global build decides
+        raise Wait(f"importer recheck: {len(r['not_run'])} of {len(r['compiled'])} direct importer(s) not compiled yet "
+                   f"(compile slots busy), e.g. {', '.join(r['not_run'][:3])}")
 
 
 def _check(c):
     try:
-        return "ok", check(c)
+        plan = check(c)
+        importer_recheck(plan)
+        return "ok", plan
     except Refuse as e:
         return "refuse", str(e)
     except Wait as e:
@@ -674,8 +782,13 @@ def land_one(plan: dict, batch_id: str) -> dict:
         if (p.read_text() if p.is_file() else None) != plan["cur"][m["file"]]:
             raise Wait(f"{m['file']} changed in the library after the checks")
     for nid, x in D["nodes"].items():
-        if x["role"] == "new" and (ROOT / x["path"]).exists():
-            raise Refuse(f"the new node {nid} exists on {md.MAIN} now (another delivery created it)")
+        if x.get("merged_against"):
+            p = ROOT / x["path"]
+            if mj.sha(p.read_text() if p.is_file() else None) != x["merged_against"]:
+                raise Wait(f"the node {nid} changed on {md.MAIN} after its merge: checked again")
+        elif x["role"] == "new" and (ROOT / x["path"]).exists():
+            # 2026-10-26 evening (the human): not returned; the next check gives it to a merge agent
+            raise Wait(f"the new node {nid} exists on {md.MAIN} now (another delivery created it): checked again, a merge agent merges it")
     # 2026-10-22 (the human): compare the lean/ tree, not HEAD: coord-only commits (queue, claims, bookkeeping) land every
     # minute and bounced deliveries for hours with "the library moved"
     if plan.get("cycle_tip_lean") and md.git("rev-parse", "HEAD:lean") != plan["cycle_tip_lean"]:
@@ -814,7 +927,14 @@ def land_batch(cache: dict, log, target: pathlib.Path | None = None) -> dict | N
     except Exception as exc:
         log("rework restore failed, the next batch tries again |", repr(exc)[:300])
     cands = candidates(cache)
-    if not cands:
+    # 2026-10-25 (the human): stage-2 deliveries (reviewer-passed statements) land in the same batch and the same global
+    # build; their own checks ran per delivery when the verdict was queued (tools/stage2_batch.py)
+    pre2 = cache.setdefault("_pre2", s2b.Prep())
+    try:
+        s2ready = pre2.ready()     # checked by the pump at the start of every step
+    except Exception as exc:  # noqa: BLE001
+        log("stage 2: check pump failed |", repr(exc)[:300]); s2ready = []
+    if not cands and not s2ready:
         return None
     t0 = time.time()
     pre = cache.setdefault("_pre", Pre())
@@ -827,6 +947,7 @@ def land_batch(cache: dict, log, target: pathlib.Path | None = None) -> dict | N
         c['_import_graph_file'] = str(pre.graph_file)
         c['_library_index_file'] = str(pre.index_file) if pre.index_file else None
     pairs = pre.results(cands)
+    pending_merge_jobs(pre, cands, log)
     pre.snapshot()
     base_modules = cycles.source_modules(ROOT, pre.graph_tip)
     package_roots = cycles.source_roots(li.LEAN)
@@ -873,7 +994,33 @@ def land_batch(cache: dict, log, target: pathlib.Path | None = None) -> dict | N
     if pairs: log(f"checks: {len(pairs)} of {len(cands)} candidates checked in {time.time() - t0:.0f} s; {len(plans)} to land, "
         f"{counts['refused']} refused, {counts['waiting']} waiting, {counts['error']} errors, {left} over the batch cap, "
         f"{len(cands) - len(pairs)} still being checked")
-    if not plans:
+    s2plans = []
+    for x in s2ready:
+        g, item, head = x["row"]["group"], x["row"]["item"], x["row"]["head"]
+        clash = [p for p in s2b.paths_of(x) if p in taken]
+        if clash:
+            log("waits for the next batch", g, item, head[:9], "stage 2 |", f"{clash[0]} is written by {taken[clash[0]]} in this batch")
+            continue
+        texts = s2b.modules_of(x)
+        try:
+            cycles.refuse_missing(texts, base_modules, package_roots)
+        except RuntimeError as exc:
+            s2b.do_return(g, item, head, str(exc), log); continue
+        cycle = cycles.closing_cycle(import_graph, texts)
+        if cycle:
+            log("waits for the next batch", g, item, head[:9], "stage 2 | import cycle:", " -> ".join(cycle)); continue
+        import_graph = cycles.overlay(import_graph, texts)
+        for p in s2b.paths_of(x):
+            taken[p] = f"{g}/{item}"
+        s2plans.append(x)
+    if s2plans:
+        n2 = len(s2plans)
+        s2plans = s2b.validate(s2plans, log)     # the batch DAG check: only its offenders go back
+        log(f"stage 2: {len(s2plans)} of {n2} checked deliveries pass the batch DAG check")
+    if not plans and not s2plans:
+        return None
+    if target == OPEN and retry_round_open():
+        log("a retry round opened during the checks: the batch lands when the round is green")
         return None
     t1 = time.time()
     if md.git("symbolic-ref", "-q", "--short", "HEAD", check=False) != md.MAIN:
@@ -916,6 +1063,7 @@ def land_batch(cache: dict, log, target: pathlib.Path | None = None) -> dict | N
             lock_started = time.time()
             with md.merge_lock():
                 e = land_one(plan, batch_id)
+                restore_after_fix(plan, log)
             held += time.time() - lock_started
             write_json(landing_marker, {"id": batch_id, "started": ld.now(), "entries": entries + [e]})
         except Wait as w:
@@ -925,12 +1073,32 @@ def land_batch(cache: dict, log, target: pathlib.Path | None = None) -> dict | N
         except md.Fail as f:
             log("landing failed, nothing changed; tried again in the next cycle", g, item, head[:9], "|", str(f)[:300]); continue
         entries.append(e)
+        _qmark_at_landing("3", item, e.get("landing"))
         import_graph = cycles.overlay(import_graph,
                                       {m["module"]: m["text"] for m in plan["D"]["modules"]})
         expected_tip = e["commit"]
         pre.import_graph, pre.graph_tip = import_graph, expected_tip
         pre.graph_file = None
         log("landed", g, item, head[:9], "stage 3", f"batch {batch_id} landing {e['landing']} ({e['kind']}, {e['reviewer']})")
+    for plan in s2plans:
+        g, item, head = plan["row"]["group"], plan["row"]["item"], plan["row"]["head"]
+        try:
+            lock_started = time.time()
+            with md.merge_lock():
+                e = s2b.land_one(plan, batch_id)
+            held += time.time() - lock_started
+            write_json(landing_marker, {"id": batch_id, "started": ld.now(), "entries": entries + [e]})
+        except s2b.Stale as w:
+            log("not in this batch", g, item, head[:9], "stage 2 |", str(w)[:300]); continue
+        except md.Fail as f:
+            log("landing failed, nothing changed; tried again in the next cycle", g, item, head[:9], "stage 2 |", str(f)[:300]); continue
+        entries.append(e)
+        _qmark_at_landing("2", item, e.get("landing"))
+        import_graph = cycles.overlay(import_graph, s2b.modules_of(plan))
+        expected_tip = e["commit"]
+        pre.import_graph, pre.graph_tip = import_graph, expected_tip
+        pre.graph_file = None
+        log("landed", g, item, head[:9], "stage 2", f"batch {batch_id} landing {e['landing']} ({e['kind']}, {e['reviewer']})")
     if entries:
         refresh_recovery_queue()
     for g, item, head, why in back:
@@ -950,8 +1118,30 @@ def land_batch(cache: dict, log, target: pathlib.Path | None = None) -> dict | N
     return b
 
 
+def pending_merge_jobs(pre, cands, log) -> None:
+    """2026-10-26 (the human): two checked deliveries waiting to land that write the same Lean file: the later one (in
+    the order this batch takes them) gets a merge job onto the first one's text now, not after the first one landed."""
+    try:
+        plans = [pre.done[c["head"]][1] for c in cands if pre.done.get(c["head"], ("",))[0] == "ok"]
+        mj.request_pending(plans, log)
+    except Exception as exc:  # noqa: BLE001   never blocks a landing
+        log("merge jobs: pending detection failed |", repr(exc)[:300])
+
+
+def early_red_returned(g, item, head) -> bool:
+    """2026-10-27: the delivery was returned to its writer while the build ran (tools/early_red.py); not again"""
+    try:
+        import early_red
+        return early_red.returned_early(g, item, head)
+    except Exception:  # noqa: BLE001
+        return False
+
+
 def give_back(g, item, head, why, log):
     """A delivery the tools refuse goes back to its group with their message (the human, 2026-10-12)."""
+    if early_red_returned(g, item, head):
+        log("ALREADY RETURNED while the build ran (tools/early_red.py)", g, item, str(head)[:9], "|", " ".join(why.split())[:200])
+        return
     try:
         md.cmd_return(g, item, f"(the landing tools, head {head[:9]}) the delivery did not land: {why[:3000]}")
         log("RETURNED by the tools", g, item, head[:9], "|", " ".join(why.split())[:300])
@@ -1037,7 +1227,7 @@ def _undo_entries(entries, message, *, returned=False, repair_jobs=None):
         if recs and recs[-1]["id"] == rid:
             recs[-1]["result"] = "reverted" if entry_returned else "withdrawn"
             recs[-1]["reason"] = entry_message
-        if entry_returned:
+        if entry_returned and not early_red_returned(e['group'], e['item'], e.get('head')):   # early: entry kept
             p, before, parts = md.return_entries(e['group'], e['item'])
             if p.relative_to(ROOT).as_posix() in prepared:
                 parts = re.split(r'(?=^## )', prepared[p.relative_to(ROOT).as_posix()].decode(), flags=re.M)
@@ -1092,6 +1282,14 @@ def refresh_recovery_queue():
         if md.git('status', '--porcelain', '--', *paths):
             md.git_retry('add', '--', *paths)
             md.git_retry('commit', '-q', '-m', 'Queue after batch recovery' + recovery.TRAILER, '--', *paths)
+    # 2026-10-27 (lead): retag right after the queue write. Only ~/cc1/sorry-route-loop.sh ran tools/tag_batches.py, so items
+    # new in this queue were `untagged` (no dispatcher lane) until its next cycle; 53 sat unstarted 06:29-06:37 behind a
+    # sorry-route refresh. Detached at nice 10 (about a minute); the tag file is replaced atomically by the script.
+    try:
+        subprocess.Popen(['nice', '-n', '10', sys.executable, 'tools/tag_batches.py'], cwd=ROOT, stdin=subprocess.DEVNULL,
+                         stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
+    except OSError:
+        pass
 
 
 def unland(e: dict, reason: str, ledger: str) -> None:
@@ -1112,6 +1310,8 @@ def withdraw(b, reason, log):
 
 def defer_entries(entries):
     for e in entries:
+        if e.get('stage') == '2':
+            s2b.requeue(e); e['state'] = 'waiting'; continue
         br = md.branch_of(e['group'], e['item'])
         if not md.has_ref('refs/heads/' + br): md.git('branch', br, e['head'])
         e['state'] = 'waiting'
@@ -1297,7 +1497,11 @@ def execute(b: dict, decisions: list[dict], log, deferred=(), imports=None) -> N
     suspects = [e for e in active if key(e) in per]
     if imports is None: imports = library_imports()
     waiting = [e for e in active if set(e['modules']) & set(deferred) and e not in suspects]
-    deps = waiting + recovery.dependents(active, suspects + waiting, imports)
+    # 2026-10-25 (the human: a red round removes only what caused the errors): a delivery goes out with a culprit only
+    # when its own files need the culprit's version (chain_dependents); an importer that merely could not be built
+    # stays and the retry verifies it. recovery.dependents (every transitive importer) had deferred 20 innocent
+    # deliveries of batch 20261025T070805 with the two overtime modules.
+    deps = waiting + chain_dependents(active, suspects + waiting, imports)
     messages = {}
     for e in suspects:
         parts = []
@@ -1305,6 +1509,8 @@ def execute(b: dict, decisions: list[dict], log, deferred=(), imports=None) -> N
             modules = set(e['modules']) & (li.closure(d['failure'], imports, {}) | {d['failure']})
             parts.append(d.get('message', '') + '\n' + d.get('reason', ''))
             for m in sorted(modules):
+                if m == d['failure']:
+                    continue   # the delivery's own module fails: the compiler message above says why
                 parts.append(f"your change of {m} broke its importer {d['failure']}: adapt the importers in the same delivery or do not change what they use")
         messages[key(e)] = '\n\n'.join(parts)
     chosen = [e for e in active if e in suspects or e in deps]
@@ -1325,7 +1531,16 @@ def execute(b: dict, decisions: list[dict], log, deferred=(), imports=None) -> N
                                     "changed the same file(s) before it, so it goes out with it. Deliver again on the current library.")
                 log(f"batch {b['id']}: {key(e)} goes out with the culprit (same files changed after it)")
     tip = (ld.read_json(ld.B / 'last.json') or {}).get('commit') or md.git('rev-parse', 'HEAD')
-    repair_jobs = {key(e): repairs.stage(e, tip, per[key(e)], messages[key(e)]) for e in suspects}
+    # a stage-2 delivery goes back to its writer (its claim is restored), no repair job (2026-10-25)
+    # 2026-10-26 (rule of 10-24: a delivery returned by the global build is repaired in the SAME Codex session that
+    # delivered it): stage 3 too. The repair queue (repairs.txt) handed every stage-3 culprit of 10-25/26 to another
+    # group as new work (14 of 14 lost their session). The writer's claim is restored and the reason goes to
+    # coord/returns/<group>.md; the group's dispatcher resumes the delivering session as a repair.
+    for e in suspects:
+        if e.get('commit'):
+            messages[key(e)] += (f"\n\nThe landed change was taken out of the library (delivery branch gone): recover it with "
+                                 f"`git show {e['commit'][:10]} -- lean dag/nodes coord/changes`.")
+    repair_jobs = {}
     try:
         undo_entries(chosen, f"batch {b['id']} dependency take-out", returned=messages, repair_jobs=repair_jobs)
     except recovery.Conflict as x:
@@ -1339,6 +1554,10 @@ def execute(b: dict, decisions: list[dict], log, deferred=(), imports=None) -> N
     for e in suspects:
         e['state'] = 'returned'; e['why'] = messages[key(e)]
         job = repair_jobs.get(key(e))
+        if job is None:
+            holder = repairs.read(repairs.claim_path(e['item'])).get('who')
+            log('TAKEN OUT; RETURNED TO ITS WRITER' if holder == e['group'] else f'TAKEN OUT; RETURNED, BUT ITEM HELD BY {holder}',
+                key(e), '|', messages[key(e)][:300]); continue
         if job is None:   # another group already holds the item (skipped in _undo_entries): its work stands
             log('TAKEN OUT; HELD BY ANOTHER GROUP, NO REPAIR JOB', key(e), '|', messages[key(e)][:300]); continue
         e['repair'] = job['id']
@@ -1354,6 +1573,69 @@ def execute(b: dict, decisions: list[dict], log, deferred=(), imports=None) -> N
 
 ERROR_AT = re.compile(r"^error: (\S+?\.lean):(\d+):(\d+): ?(.*)$", re.M)
 PROOF_KW = ("theorem", "lemma")
+
+
+def chain_dependents(entries, removed, imports) -> list:
+    """The deliveries of `entries` (not in `removed`) whose own modules directly import a module of a removed delivery
+    and need its version: the file goes away (the landing created it), or the importer uses a name the take-out removes
+    (the landing's `changed`, or a declaration its version has and the previous one lacks). Transitive through the
+    deliveries so added; an importer that only sits above a removed module is kept."""
+    out, gone_ids = [], {key(e) for e in removed}
+    names_of, gone_mods = {}, set()
+
+    def _add(e):
+        rec = ld.read_json(ld.REQUESTS / f"{e['landing']}.json") or ld.read_json(ld.DONE / f"{e['landing']}.json") or {}
+        for f in rec.get('files') or []:
+            m = f.get('module')
+            if not m:
+                continue
+            if not f.get('existed', True):
+                gone_mods.add(m); continue
+            ns = {str(c).split()[0] for c in rec.get('changed') or [] if str(c).strip() and not str(c).startswith('(')}
+            try:
+                st, bk = ld.STAGED / rec['id'] / f['path'], ld.BACKUP / rec['id'] / f['path']
+                new = st.read_text(errors='ignore') if st.is_file() else None
+                old = bk.read_text(errors='ignore') if bk.is_file() else None
+                if new is not None and old is not None:
+                    ns |= ({c['name'] for c in li.commands(new) if c['name']} - {c['name'] for c in li.commands(old) if c['name']})
+            except Exception:  # noqa: BLE001
+                pass
+            names_of.setdefault(m, set()).update(ns)
+        for m in e.get('modules') or []:
+            names_of.setdefault(m, set())
+
+    for e in removed:
+        _add(e)
+    changed = True
+    while changed:
+        changed = False
+        for e in entries:
+            if key(e) in gone_ids:
+                continue
+            hit = False
+            for m in e.get('modules') or []:
+                below = set(imports.get(m) or ()) & (set(names_of) | gone_mods)
+                if not below:
+                    continue
+                if below & gone_mods:
+                    hit = True; break
+                ns = set().union(*(names_of.get(x, set()) for x in below))
+                if not ns:
+                    continue
+                p = li.file_of(m)
+                try:
+                    src = li.strip(p.read_text(errors='ignore')) if p.is_file() else ''
+                except OSError:
+                    src = ''
+                used = set()
+                for tok in _IDENT.findall(src):
+                    parts = tok.split('.')
+                    used |= {'.'.join(parts[k:]) for k in range(len(parts))}
+                if any(n in used or n.split('.')[-1] in used and len(n.split('.')[-1]) > 3 for n in ns):
+                    hit = True; break
+            if hit:
+                gone_ids.add(key(e)); out.append(e); _add(e); changed = True
+    return out
 
 
 def conflicting_entries(entries) -> dict:
@@ -1608,6 +1890,18 @@ def drop_other_writers(b: dict, last: dict, failures: list, log, persist: bool =
     # of the dropped file ("bad import"), one layer per build (938-landing build of 993813cbe8: 404 bad imports after
     # 12 restores were dropped alone).
     _recs = {r['id']: r for r in ld.records(ld.REQUESTS)}
+    # 2026-10-24: the rework take-out of a red build (tools/red_rework.py, note "red build rework") removes the failing
+    # module; dropping it put the module back and the next build failed on it again (13:01, AdicSmoothDualizingComplexes)
+    # and the upstream sync's landings (record field `upsync`): dropping one would revert upstream files; a module they
+    # break becomes a rework item instead (mechanical_red)
+    # and the maintainer's landings (group L: undos of mass quarantines, put-backs, cycle breaks, rework moves): they
+    # write thousands of modules; at 21:12 two undos went out as "importers of a dropped module" and 3824 files were
+    # reverted, the upstream sync among them
+    _rework = {i for i, r in _recs.items() if str(r.get('note') or '').startswith('red build rework') or r.get('upsync')
+               or r.get('group') == 'L'}
+    ids = [i for i in ids if i not in _rework]
+    if not ids:
+        return False
     # the import lines of the open landings' own files, read now: the cached library graph predates the restores and
     # missed their importers (11:53-11:57: 218, 68, 34 landings dropped in four builds instead of one)
     _imp_re = re.compile(r"^(?:public\s+)?(?:meta\s+)?import\s+(?:all\s+)?([\w.']+)", re.M)
@@ -1638,12 +1932,13 @@ def drop_other_writers(b: dict, last: dict, failures: list, log, persist: bool =
         for _x in _importers.get(_todo.pop(), ()):
             if _x not in _seen:
                 _seen.add(_x); _todo.append(_x)
-    _extra = sorted({_mod_of[_m] for _m in _seen if _m in _mod_of} - set(ids))
+    _extra = sorted({_mod_of[_m] for _m in _seen if _m in _mod_of} - set(ids) - _rework)
     if _extra:
         log(f"red build {last.get('time')}: {len(_extra)} landing(s) whose modules import a dropped module go out with it")
         ids = ids + _extra
     t0 = time.time()
-    reason = f"the global build of {str(last.get('commit'))[:10]} failed in {' '.join(failures[:6])}; this change is a possible cause"
+    reason = (f"the global build of {str(last.get('commit'))[:10]} failed in {' '.join(failures[:6])}; this change is a possible cause"
+              " (the compiler's full messages: coord/build-errors/<module>.txt in the clone)")
     with md.merge_lock():
         with ld.tree_lock():
             dropped, restore_to, notes = ld.drop_plan(ids)
@@ -1680,10 +1975,550 @@ def return_record(r: dict, reason: str, log) -> None:
               + (f"; it changed the same file(s) after {', '.join(r['chained'])}" if r.get('chained') else ''), log)
 
 
+PARTIAL = BD / "partial-verified.json"
+
+
+def _ls_tree(commit: str, rel: str) -> dict:
+    out = subprocess.run(["git", "ls-tree", "-r", "-z", commit, "--", rel], cwd=ROOT, capture_output=True).stdout.decode()
+    res = {}
+    for x in out.split("\0"):
+        if x:
+            meta, path = x.split("\t", 1)
+            mode, _, sha = meta.split()
+            res[path] = (mode, sha)
+    return res
+
+
+def advance_verified(build_commit: str, included: list[dict], verified: list[dict]) -> str:
+    """The verified main after a red build whose clean landings land: the old verified main with the files of the
+    verified landings at their own version (staged/), in landing order; every other file the build's landings touched
+    stays as it is on the verified main. One commit (no working-tree change), VERIFIED_REF moved to it. Caller holds
+    coord/.merge.lock and local/tree.lock."""
+    old = md.git("rev-parse", "-q", "--verify", ld.VERIFIED_REF, check=False)
+    lean_rel = li.LEAN.resolve().relative_to(ROOT.resolve()).as_posix()
+    base = _ls_tree(old, lean_rel) if old else {}
+    built = _ls_tree(build_commit, lean_rel)
+    want = {}
+    for r in included:
+        for f in r.get("files") or []:
+            full = f"{lean_rel}/{f['path']}"
+            want[full] = base.get(full)
+    for r in sorted(verified, key=ld.order_key):
+        for f in r["files"]:
+            full = f"{lean_rel}/{f['path']}"
+            st = ld.STAGED / r["id"] / f["path"]
+            if f.get("deleted"):
+                want[full] = None
+            elif st.is_file():
+                sha = subprocess.run(["git", "hash-object", "-w", str(st)], cwd=ROOT, capture_output=True, text=True, check=True).stdout.strip()
+                want[full] = ("100644", sha)
+            else:
+                want[full] = built.get(full)
+    with tempfile.TemporaryDirectory(prefix="sheaf-verified-") as td:
+        env = dict(os.environ, GIT_INDEX_FILE=str(pathlib.Path(td) / "index"))
+        subprocess.run(["git", "read-tree", old or build_commit], cwd=ROOT, env=env, check=True, capture_output=True)
+        info = "".join((f"{v[0]} {v[1]}\t{k}\n" if v else f"0 {'0' * 40}\t{k}\n") for k, v in sorted(want.items()))
+        subprocess.run(["git", "update-index", "--index-info"], cwd=ROOT, env=env, input=info, text=True, check=True, capture_output=True)
+        tree = subprocess.run(["git", "write-tree"], cwd=ROOT, env=env, check=True, capture_output=True, text=True).stdout.strip()
+    msg = (f"Verified main after the red build of {build_commit[:10]}: {len(verified)} landing(s) it compiled cleanly\n\n"
+           "tools/batch_land.py land_rest (the human, 2026-10-25: the failures go out, the rest lands from the same build)")
+    new = subprocess.run(["git", "-c", "user.name=Bin Wu", "-c", "user.email=844524296@qq.com", "commit-tree", tree]
+                         + (["-p", old] if old else []) + ["-m", msg], cwd=ROOT, check=True, capture_output=True, text=True).stdout.strip()
+    subprocess.run(["git", "update-ref", ld.VERIFIED_REF, new] + ([old] if old else []), cwd=ROOT, check=True, capture_output=True)
+    return new
+
+
+RED_HANDLED = ld.B / "red-handled.json"
+
+
+def land_rest(log) -> int:
+    """land_rest, then local/builds/red-handled.json names the red build whose handling is complete: land_rest is the
+    last step of every red handling (mechanical_red, round_red, red_without_batch, a batch's later step), and
+    ~/cc1/retry_round.py starts the retry only after it (2026-10-25)."""
+    last = ld.read_json(ld.B / "last.json") or {}
+    try:
+        return _land_rest(log)
+    finally:
+        if last.get("result") == "red":
+            write_json(RED_HANDLED, {"time": last.get("time"), "source_fingerprint": last.get("source_fingerprint"), "at": ld.now()})
+
+
+def _land_rest(log) -> int:
+    """2026-10-25 (the human): after a red build has been handled (its failing landings taken out, with the importers
+    of their removed files), every landing of that build that compiled cleanly lands from it: none of its modules
+    failed or imports a failing module or a module of a landing taken out since (import graph of the build copy,
+    local/builds/last-graph.pkl; tools/build.py clean_landings ran its batch checks). They are closed as verified and
+    the verified main advances (advance_verified). Each red build once (local/batch/partial-verified.json)."""
+    last = ld.read_json(ld.B / "last.json") or {}
+    if last.get("result") != "red" or not isinstance(last.get("clean"), list) or not last.get("failing"):
+        return 0
+    seen = read_json(PARTIAL) or []
+    if last.get("time") in seen:
+        return 0
+    write_json(PARTIAL, (seen + [last.get("time")])[-200:])
+    try:
+        with open(ld.B / "last-graph.pkl", "rb") as fh:
+            saved = pickle.load(fh)
+    except Exception as exc:  # noqa: BLE001
+        log(f"land_rest: no import graph of the build ({exc!r}); nothing lands from it"[:300]); return 0
+    if saved.get("commit") != last.get("commit"):
+        log("land_rest: the saved import graph is of another build; nothing lands from it"); return 0
+    graph = saved["graph"]
+    t0 = time.time()
+    with md.merge_lock():
+        with ld.tree_lock():
+            open_recs = {r["id"]: r for r in ld.records(ld.REQUESTS)}
+            inc, out_mods = [], set()
+            for i in last.get("included") or []:
+                r = open_recs.get(i) or ld.read_json(ld.DONE / f"{i}.json")
+                if not r:
+                    continue
+                inc.append(r)
+                if i not in open_recs and r.get("result", "verified") != "verified":
+                    out_mods |= {f["module"] for f in r.get("files") or []}
+            blocked = set(last["failing"]) | out_mods
+            blocked |= li.downstream(blocked, graph)
+            ok = [open_recs[i] for i in last["clean"] if i in open_recs
+                  and not ({f["module"] for f in open_recs[i]["files"]} & blocked)]
+            # 2026-10-25 (the human): a landing that broke an importer (importer_blame) does not land; the red handling
+            # takes it out
+            try:
+                blamed = {i for x in importer_blame(last, graph).values() for i in x["ids"]}
+            except Exception as exc:  # noqa: BLE001
+                log(f"land_rest: importer blame failed ({exc!r}); nothing lands from it"[:300]); return 0
+            if blamed & {r["id"] for r in ok}:
+                log(f"land_rest: not landed, they broke an importer: {' '.join(sorted(blamed & {r['id'] for r in ok}))}")
+                ok = [r for r in ok if r["id"] not in blamed]
+            if not ok:
+                log(f"land_rest: red build {last.get('time')}: nothing lands from it ({len(last['clean'])} clean, all blocked or closed)")
+                return 0
+            new = advance_verified(last["commit"], inc, ok)
+            for r in ok:
+                r = dict(r)
+                r.update(result="verified", commit=last["commit"], closed=ld.now(), partial_of=last.get("time"))
+                ld.write_json(ld.DONE / f"{r['id']}.json", r)
+                (ld.REQUESTS / f"{r['id']}.json").unlink(missing_ok=True)
+                shutil.rmtree(ld.BACKUP / r["id"], ignore_errors=True)
+                shutil.rmtree(ld.STAGED / r["id"], ignore_errors=True)
+    _mark_landed(ok)
+    log(f"land_rest: red build {last.get('time')} ({str(last.get('commit'))[:10]}): {len(ok)} of {len(last.get('included') or [])} "
+        f"landing(s) compiled cleanly and land from it; {len(out_mods)} module(s) of taken-out landings, {len(last['failing'])} "
+        f"failing; verified main -> {new[:10]} ({time.time() - t0:.0f} s)")
+    MQ_LOG(f"land_rest: {len(ok)} landing(s) of the red build {last.get('time')} verified; verified main {new[:10]}")
+    return len(ok)
+
+
+def _qmark_at_landing(stage: str, item: str, landing=None) -> None:
+    """The human, 2026-10-25: a delivery leaves the queue the moment it lands (its commit is on live), so a finished item
+    is never dispatched again (C6's FiniteCtfInternalEtaleRealization was taken again 34 s after its landing, the queue
+    write then in progress had read the tree before it). tools/queue_mark.py done removes the item's row at once; a
+    stage-3 module that keeps a `sorry` is marked `landed` and stays listed. A red build that takes the landing out
+    marks it rework (_qmark_rework) and the next queue write lists it again. Never fails the caller."""
+    try:
+        subprocess.run([sys.executable, str(ROOT / "tools" / "queue_mark.py"), "done", stage, item,
+                        "--note", f"landed {landing or '-'}"], cwd=ROOT, capture_output=True, timeout=60)
+    except Exception:  # noqa: BLE001
+        pass
+
+
+def _mark_landed(recs) -> None:
+    """tools/queue_mark.py done for the items of the landings verified (as tools/build.py _mark_verified)."""
+    by_stage = {}
+    for r in recs:
+        st = str(r.get("stage") or "-")
+        d = r.get("delivery") or {}
+        if isinstance(d, dict) and d.get("item") and "." not in str(d.get("item")):
+            by_stage.setdefault(st, set()).add(str(d["item"]))
+        for c in r.get("changed") or []:
+            mod = str(c).split()[0] if str(c).strip() else ""
+            if mod and "." in mod:
+                by_stage.setdefault("3" if st == "-" else st, set()).add(mod)
+    for st, items in by_stage.items():
+        try:
+            subprocess.run([sys.executable, str(ROOT / "tools" / "queue_mark.py"), "done", st, *sorted(items)],
+                           cwd=ROOT, capture_output=True, timeout=300)
+        except Exception:  # noqa: BLE001
+            pass
+
+
 def _sync_running() -> bool:
     """2026-10-21 (the human): a scheduled upstream sync (~/cc1/upsync-quick.py) no longer stops the lander; while its
     marker exists the lander lands but leaves red builds to the sync's own quarantine rounds."""
     return (ROOT / "local" / "UPSYNC_RUNNING").exists()
+
+
+RETRY_ROUND = ld.B / "retry-round.json"
+
+
+def retry_round_open() -> bool:
+    """2026-10-25 (the human: each build round is finished on its own): ~/cc1/retry_round.py retries a red build on the
+    same snapshot until it is green (local/builds/retry-round.json). Meanwhile no new batch lands: a red retry must
+    find the landings it contains still open here, and the new batch waits for the next round anyway. A file left by
+    a build loop that is no longer running holds nothing."""
+    if not RETRY_ROUND.exists():
+        return False
+    try:
+        pid = int((pathlib.Path.home() / "cc1" / "buildloop.pid").read_text().split()[0])
+        return b"buildloop.sh" in pathlib.Path(f"/proc/{pid}/cmdline").read_bytes()
+    except (OSError, ValueError, IndexError):
+        return False
+
+
+# ---------------------------------------------------------------- a landing that breaks an importer
+# 2026-10-25 (the human: a red round only removes what caused the failures, and must always be able to finish): a
+# failing module that no landing of the build wrote was broken by a landing that changed a module in its import
+# closure (A9's ProEtaleSectionModuleFunctors removed upperStar_tensorπ_delta, used by SectionOrdinaryOplaxNormalization;
+# G5's ProEtaleFiniteClopenTensorCalculus left FiniteClopenConstructibilityBounds stuck at a universe constraint).
+# Those landings are blamed: land_rest does not land them, the red handling takes them out and returns them to their
+# writers. Quarantine (tools/red_rework.py) is only for a failure no landing explains.
+
+_IDENT = re.compile(r"[\w'.!?]+")
+_UNKNOWN = re.compile(r"[Uu]nknown (?:identifier|constant|declaration) [`'‘«]?([^`'’»\s]+)")
+
+
+def _git_text(commit: str, rel: str) -> str | None:
+    if not commit:
+        return None
+    lean_rel = li.LEAN.resolve().relative_to(ROOT.resolve()).as_posix()
+    r = subprocess.run(["git", "show", f"{commit}:{lean_rel}/{rel}"], cwd=ROOT, capture_output=True)
+    return r.stdout.decode(errors="ignore") if r.returncode == 0 else None
+
+
+def _blame_records(last: dict, published: dict) -> list[dict]:
+    """The landings of the snapshot: those the build included (open or verified), and those land_rest verified from a
+    red build since the last green one (they are in the snapshot but no longer in `included`)."""
+    out, seen = [], set()
+    for i in last.get("included") or []:
+        r = ld.read_json(ld.REQUESTS / f"{i}.json") or ld.read_json(ld.DONE / f"{i}.json")
+        if r:       # a landing taken out since stays blamed (land_rest after the take-out lands the others)
+            out.append(r); seen.add(i)
+    t = str(published.get("time") or "")
+    if t:
+        lo = time.strftime("%Y%m%dT%H%M%S", time.gmtime(calendar.timegm(time.strptime(t, "%Y-%m-%dT%H:%M:%SZ")) - 2 * 86400))
+        for p in sorted(ld.DONE.glob("*.json")):
+            if p.name[:15] < lo or p.stem in seen:
+                continue
+            r = ld.read_json(p)
+            if r and r.get("result") == "verified" and str(r.get("partial_of") or "") > t:
+                out.append(r); seen.add(r["id"])
+    return out
+
+
+def importer_blame(last: dict, graph: dict | None = None, failing=None, published: dict | None = None) -> dict:
+    """{failing module: {'ids': [landing ids blamed], 'by': 'unknown name' | 'name' | 'closest', 'names': [...], 'dist': n,
+    'others': [other landings in its closure]}} for each failing module that no landing of the snapshot wrote and whose
+    import closure a landing of the snapshot changed. Blamed: the landings whose changed interface (`changed`, or a
+    declaration their file no longer has, private ones included) removes or renames a name the failing module uses or
+    the compiler calls unknown (those alone when there are such); failing that, the landings closest to it in the
+    import graph."""
+    failing = list(failing if failing is not None else
+                   dict.fromkeys(list(last.get("failing") or []) + [c["module"] for c in last.get("batch_checks") or []]))
+    if not failing:
+        return {}
+    if published is None:
+        published = ld.read_json(ld.B / "published.json") or {}
+    if graph is None:
+        try:
+            with open(ld.B / "last-graph.pkl", "rb") as fh:
+                saved = pickle.load(fh)
+            graph = saved["graph"] if saved.get("commit") == last.get("commit") else None
+        except Exception:  # noqa: BLE001
+            graph = None
+        if graph is None:
+            graph = library_imports()
+    recs = _blame_records(last, published)
+    written = {f.get("module") for r in recs for f in r.get("files") or []}
+    memo, out, texts = {}, {}, {}
+    for m in failing:
+        if m in written or not li.file_of(m).is_file():
+            continue
+        below = li.closure(m, graph, memo)
+        cands = [r for r in recs if {f.get("module") for f in r.get("files") or []} & below]
+        if not cands:
+            continue
+        src = li.strip(li.file_of(m).read_text(errors="ignore"))
+        used = set()
+        for tok in _IDENT.findall(src):
+            used.add(tok)
+            parts = tok.split(".")
+            used |= {".".join(parts[k:]) for k in range(1, len(parts))}
+        ep = ROOT / "coord" / "build-errors" / f"{m}.txt"
+        err = ep.read_text(errors="ignore") if ep.is_file() else "\n".join(last.get("errors") or [])
+        unknown = {x.strip("`'.") for x in _UNKNOWN.findall(err)}
+
+        def sfx(name):
+            parts = name.split(".")
+            return {".".join(parts[k:]) for k in range(len(parts))}
+
+        def hit(name):
+            return name in used or any(len(s) > 3 and s in used for s in sfx(name) - {name})
+
+        named, unknown_hit = {}, {}
+        for r in cands:
+            names = {str(c).split()[0] for c in r.get("changed") or [] if str(c).strip() and not str(c).startswith("(")}
+            for f in r.get("files") or []:
+                if f.get("module") not in below:
+                    continue
+                key_ = (r["id"], f["path"])
+                if key_ not in texts:
+                    st, bk = ld.STAGED / r["id"] / f["path"], ld.BACKUP / r["id"] / f["path"]
+                    new = st.read_text(errors="ignore") if st.is_file() else _git_text(last.get("commit"), f["path"])
+                    old = bk.read_text(errors="ignore") if bk.is_file() else _git_text(published.get("commit"), f["path"])
+                    texts[key_] = (old, new)
+                old, new = texts[key_]
+                if old is not None and new is not None:
+                    gone = {c["name"] for c in li.commands(old) if c["name"]} - {c["name"] for c in li.commands(new) if c["name"]}
+                    names |= gone
+            u = sorted(n for n in names if sfx(n) & unknown)
+            if u:
+                unknown_hit[r["id"]] = u
+            h = sorted(n for n in names if hit(n))
+            if h:
+                named[r["id"]] = h
+        # distance from the failing module down its imports to each landing's modules
+        dist, frontier, d = {}, [m], 0
+        seen = {m}
+        while frontier:
+            d += 1
+            nxt = []
+            for x in frontier:
+                for y in graph.get(x, ()):
+                    if y not in seen:
+                        seen.add(y); dist[y] = d; nxt.append(y)
+            frontier = nxt
+        rd = {r["id"]: min(dist.get(f.get("module"), 10**6) for f in r.get("files") or []) for r in cands}
+        if unknown_hit:     # a name the compiler calls unknown, removed or renamed by the landing: that landing alone
+            named = unknown_hit
+            ids, by = sorted(named, key=lambda i: (rd[i], i)), "unknown name"
+        else:
+            # 2026-10-26 (the human: no guessing; a failing module no landing wrote goes to rework with its importers):
+            # only a landing that removed or renamed a name the compiler calls unknown is blamed. A name the module merely
+            # uses, or the landing closest in the import graph, was a guess (a 172-landing round took out 88 landings in
+            # two 70-minute retries and kept failing on the same two modules).
+            continue
+        out[m] = {"ids": ids, "by": by, "names": sorted({n for i in ids for n in named.get(i, [])})[:8],
+                  "dist": min(rd[i] for i in ids), "others": sorted(set(rd) - set(ids))}
+    return out
+
+
+def take_out_blamed(last: dict, blame: dict, log, where: str, skip=()) -> bool:
+    """Take the blamed landings out (their files back to the version before them) and return them to their writers.
+    Open landings: as drop_other_writers (ld.drop_plan). Landings land_rest verified since the last green build: their
+    files back to the last green build's version, one maintainer landing (group M) that the next build verifies, the
+    record closed as reverted. `skip`: ids the caller returns another way (a batch's own deliveries). True when
+    something was taken out."""
+    reasons = {}
+    for m, x in blame.items():
+        for i in x["ids"]:
+            why = (f"the global build of {str(last.get('commit'))[:10]} failed in {m}, which imports your module(s)"
+                   + (f" and uses {', '.join(x['names'][:4])}, which your landing removed or changed" if x["names"] else
+                      " (yours is the closest change below it)")
+                   + f"; adapt the change so that {m} still compiles, or adapt {m} too, and deliver again"
+                     " (the compiler's full messages: coord/build-errors/<module>.txt in the clone)")
+            reasons[i] = reasons.get(i, why)
+    ids = sorted(set(reasons) - set(skip))
+    if not ids:
+        return False
+    open_ids = {r["id"] for r in ld.records(ld.REQUESTS)}
+    lean_rel = li.LEAN.resolve().relative_to(ROOT.resolve()).as_posix()
+    removed = False
+    opened = [i for i in ids if i in open_ids]
+    if opened:
+        try:
+            with md.merge_lock():
+                with ld.tree_lock():
+                    dropped, restore_to, notes = ld.drop_plan(opened)
+                    recovery.commit_inverse(ROOT, {f"{lean_rel}/{rel}": data for rel, data in restore_to.items()},
+                                            md.git('rev-parse', 'HEAD'),
+                                            f"Take out {len(dropped)} landing(s) that broke an importer ({where}, red build {last.get('time')})")
+                    ld.drop_close(dropped, "it broke an importer in the global build", reasons)
+        except Exception as x:  # noqa: BLE001
+            log(f"{where}: take-out of the landings that broke an importer failed ({x!r}); retried on the next red"[:400])
+            dropped, notes = [], []
+        for r in dropped:
+            if r.get("delivery"):
+                return_record(r, reasons.get(r["id"]) or "it changed the same file(s) after a landing that broke an importer", log)
+            _qmark_rework(r)
+            log(f"{where}: TAKEN OUT {r['id']} ({r['group']}: {(r.get('note') or ' '.join(f['module'] for f in r['files']))[:100]}): broke an importer")
+        for x in notes:
+            MQ_LOG("blame drop: " + x)
+        removed = removed or bool(dropped)
+    closed = [ld.read_json(ld.DONE / f"{i}.json") for i in ids if i not in open_ids]
+    closed = [r for r in closed if r and r.get("result") == "verified"]
+    pub = (ld.read_json(ld.B / "published.json") or {}).get("commit")
+    busy = {f["path"] for r in ld.records(ld.REQUESTS) for f in r.get("files") or []}
+    # a file another verified landing changed since the last green build too: going back would undo that one as well
+    busy |= {f["path"] for r in _blame_records(last, ld.read_json(ld.B / "published.json") or {}) if r["id"] not in ids
+             for f in r.get("files") or []}
+    restore, undone = {}, []
+    for r in closed:
+        old = {f["path"]: _git_text(pub, f["path"]) for f in r.get("files") or []}
+        if any(v is None for v in old.values()) or set(old) & busy:
+            log(f"{where}: {r['id']} broke an importer but cannot be undone here (a file new since the last green build, "
+                "or another landing changed it since); the maintainer decides")
+            continue
+        restore.update(old); undone.append(r)
+    if undone:
+        try:
+            with md.merge_lock():
+                with ld.tree_lock():
+                    before = {rel: (li.LEAN / rel).read_bytes() if (li.LEAN / rel).is_file() else None for rel in restore}
+                    recovery.commit_inverse(ROOT, {f"{lean_rel}/{rel}": t.encode() for rel, t in restore.items()},
+                                            md.git('rev-parse', 'HEAD'),
+                                            f"Undo {len(undone)} landing(s) that broke an importer ({where}, red build "
+                                            f"{last.get('time')}): back to the last green build's version")
+                    prev = {rel: b for rel, b in before.items() if b is not None and b != restore[rel].encode()}
+                    rec = ld.new_record("M", prev, f"maintainer (tools/batch_land.py take_out_blamed): undo "
+                                        f"{', '.join(r['id'] for r in undone)}; they broke an importer; back to the last "
+                                        "green build's version") if prev else None
+                    for r in undone:
+                        r = dict(r)
+                        r.update(result="reverted", reason=reasons[r["id"]], closed=ld.now(), undone_by=(rec or {}).get("id"))
+                        ld.write_json(ld.DONE / f"{r['id']}.json", r)
+        except Exception as x:  # noqa: BLE001
+            log(f"{where}: undo of verified landings that broke an importer failed ({x!r})"[:400])
+            undone = []
+        for r in undone:
+            if r.get("delivery"):
+                return_record(r, reasons[r["id"]], log)
+            _qmark_rework(r)
+            log(f"{where}: UNDONE {r['id']} ({r['group']}, verified from a red build since the last green one): broke an importer")
+        removed = removed or bool(undone)
+    return removed
+
+
+def blame_out(last: dict, orphan: list, log, where: str, skip=()) -> tuple[dict, bool]:
+    """The failing modules no landing wrote: blame (importer_blame) and take out (take_out_blamed). Returns (blame,
+    removed); the modules in `blame` are not for quarantine."""
+    try:
+        blame = importer_blame(last, failing=orphan)
+    except Exception as x:  # noqa: BLE001
+        log(f"{where}: importer blame failed ({x!r})"[:300]); return {}, False
+    # 2026-10-25 (the human: remove only what caused the errors): a big maintainer/sync landing (group M or L, an
+    # upstream sync, or SHEAF_BLAME_BIG_FILES+ files) is not taken out for an importer it broke; the failing importer
+    # stays an orphan and becomes a rework item. Retry 1 of 2026-10-25 took out the 170-file import narrowing
+    # 20261025T073601-M-1709494-79 for two importers, and retry 2 rebuilt ~1400 modules.
+    big_n = int(os.environ.get('SHEAF_BLAME_BIG_FILES', '20'))
+
+    def _big(i):
+        r = ld.read_json(ld.REQUESTS / f"{i}.json") or ld.read_json(ld.DONE / f"{i}.json") or {}
+        return not r.get('delivery') and (r.get('group') in ('M', 'L') or bool(r.get('upsync'))
+                                          or len(r.get('files') or []) >= big_n)
+    for m in list(blame):
+        if all(_big(i) for i in blame[m]['ids']):
+            log(f"{where}: {m} broken by big landing(s) {', '.join(blame[m]['ids'])}; kept, {m} goes to rework")
+            del blame[m]
+    for m, x in blame.items():
+        log(f"{where}: {m} broken by {', '.join(x['ids'])} ({x['by']}" + (f": {', '.join(x['names'][:4])}" if x['names'] else
+            f", {x['dist']} import(s) below") + f"; {len(x['others'])} other landing(s) in its closure kept)")
+    return blame, (take_out_blamed(last, blame, log, where, skip) if blame else False)
+
+
+def round_red(last: dict, log) -> bool:
+    """A red build of a retry round with no batch open, by the mechanical rule (mechanical_red): a failing module that
+    a landing of the build wrote goes out with that landing (and the importers of its removed files); a failing module
+    no landing took out becomes a rework item (tools/red_rework.py moves it and its importers to quarantine/; refused
+    when it would reach the target statements or move too many modules: then nothing is taken out for it). Then the
+    clean landings land (land_rest). True when something was taken out."""
+    failing = list(dict.fromkeys(list(last.get('failing') or []) + [c['module'] for c in last.get('batch_checks') or []]))
+    removed = drop_other_writers({'id': '-', 'entries': []}, last, failing, log, persist=False, own_only=True)
+    # a batch delivery (group L, record with `delivery`; drop_other_writers never drops group L) whose own module fails
+    # goes back to its group, as mechanical_red returns it while its batch is open
+    inc = set(last.get('included') or [])
+    ids = sorted(r['id'] for r in ld.records(ld.REQUESTS) if r['id'] in inc and r.get('delivery')
+                 and {f.get('module') for f in r.get('files') or []} & set(failing))
+    if ids:
+        reason = (f"the global build of {str(last.get('commit'))[:10]} (retry round) failed in your module(s) "
+                  f"{' '.join(sorted({f.get('module') for i in ids for f in ld.read_json(ld.REQUESTS / f'{i}.json')['files']} & set(failing))[:6])}"
+                  "; fix and deliver again (the compiler's full messages: coord/build-errors/<module>.txt)")
+        with md.merge_lock():
+            with ld.tree_lock():
+                dropped, restore_to, notes = ld.drop_plan(ids)
+                lean_rel = li.LEAN.resolve().relative_to(ROOT.resolve()).as_posix()
+                recovery.commit_inverse(ROOT, {f"{lean_rel}/{rel}": data for rel, data in restore_to.items()},
+                                        md.git('rev-parse', 'HEAD'),
+                                        f"Drop {len(dropped)} landing(s) whose module failed in the retry round of {last.get('time')}")
+                ld.drop_close(dropped, reason)
+        for r in dropped:
+            if r.get('delivery'):
+                return_record(r, reason, log)
+            _qmark_rework(r)
+            log(f"retry round: DROPPED {r['id']} ({r['group']}: {r.get('note', '')[:100]})")
+        for x in notes:
+            MQ_LOG('drop: ' + x)
+        removed = removed or bool(dropped)
+    out_mods = set()
+    for i in last.get('included') or []:
+        r = ld.read_json(ld.DONE / f"{i}.json")
+        if r and r.get('result') == 'reverted':
+            out_mods |= {f.get('module') for f in r.get('files') or []}
+    text = (ld.LOCAL / 'build.log').read_text(errors='ignore') if (ld.LOCAL / 'build.log').exists() else ''
+    blocks = log_blocks(text)
+    messages = {m: blocks.get(m) or '\n'.join(last.get('errors') or []) for m in failing}
+    messages.update({c['module']: c['message'] for c in last.get('batch_checks') or []})
+    def _stale_bad_import(m):
+        errs = [l for l in (messages.get(m) or '').splitlines() if l.lstrip().startswith('error')]
+        bad = [re.search(r"bad import '([^']+)'", l) for l in errs]
+        return bool(errs) and all(bad) and all(li.file_of(x.group(1)).is_file() for x in bad)
+    orphan = [m for m in failing if m not in out_mods and li.file_of(m).is_file() and not _stale_bad_import(m)]
+    if orphan:
+        try:
+            rid, fixed = red_rework.add_suggested_imports(orphan, messages)
+        except Exception as x:  # noqa: BLE001
+            rid, fixed = '', []; log(f"retry round: adding the suggested imports failed: {x!r}"[:300])
+        if fixed:
+            removed = True
+            log(f"retry round: added the public imports the compiler named to {len(fixed)} module(s) (landing {rid}): {' '.join(fixed[:8])}")
+            orphan = [m for m in orphan if m not in fixed]
+    if orphan:
+        # 2026-10-25 (the human): a failing module no landing wrote, below which a landing of the snapshot changed a
+        # module: that landing goes out (importer_blame); quarantine only for a failure no landing explains
+        blame, out = blame_out(last, orphan, log, 'retry round')
+        removed = removed or out
+        # 2026-10-25 (the human): a culprit that cannot be undone (take_out_blamed: a file new since the last green
+        # build, or changed by another landing since) does not stop the round: the failing module stays an orphan and
+        # goes to rework/quarantine below. Taken out = its record closed as reverted.
+        def _out(i):
+            return (ld.read_json(ld.DONE / f"{i}.json") or {}).get('result') == 'reverted'
+        for m in [m for m in orphan if m in blame and not any(_out(i) for i in blame[m]['ids'])]:
+            log(f"retry round: {m}: no culprit of it could be taken out ({', '.join(blame[m]['ids'])}); {m} goes to rework")
+            del blame[m]
+        orphan = [m for m in orphan if m not in blame]
+    if orphan:
+        errs = red_rework.first_errors(orphan)
+        causes = {m: errs.get(m) or messages.get(m, '')[:1500] or 'error: failed in the global build' for m in orphan}
+        # all together, or, when that is refused, each alone: a module whose move is refused does not keep the others
+        for group in [orphan] + ([[m] for m in orphan] if len(orphan) > 1 else []):
+            try:
+                rid, moved = red_rework.quarantine(set(group), causes, f"retry round of the red build {last.get('time')}")
+            except red_rework.Refuse as x:
+                # nothing is guessed (no landing that did not write the module is dropped): the failure stays, the
+                # retry has the same sources and ~/cc1/retry_round.py stops for the maintainer
+                log(f"retry round: rework move of {' '.join(group[:6])} refused ({x})")
+                if len(group) == 1 or len(orphan) == 1:
+                    alert(None, ' '.join(group[:6]), f'retry round: rework move refused ({x})'[:200], 'fix the failing module (coord/build-errors)')
+                continue
+            removed = removed or bool(moved)
+            log(f"retry round: {len(group)} failing module(s) no landing wrote -> rework, {len(moved)} module(s) moved to "
+                f"quarantine/ (landing {rid or '-'}): {' '.join(group[:8])}")
+            if group is orphan:
+                break
+    # 2026-10-26: a module failing with "bad import"/"no such file" because a module it imports is gone from lean/ (a
+    # take-out left it): it and its importers go to quarantine/ as rework (tools/red_rework.py sweep). The round took
+    # nothing out for it and the retry loop STOPPED on the same sources (21:09-21:20, UniformConstructibleExt).
+    try:
+        _when = last.get("time")
+        rid, moved = red_rework.sweep(f"retry round of the red build {_when}: importers of modules gone from lean/")
+        if moved:
+            removed = True
+            log(f"retry round: {len(moved)} module(s) importing modules gone from lean/ moved to quarantine/ "
+                f"(landing {rid or '-'}): {' '.join(moved[:8])}")
+    except Exception as x:  # noqa: BLE001
+        log(f"retry round: sweep of importers of modules gone from lean/ failed ({x!r})"[:400])
+    land_rest(log)
+    write_json(RED_HANDLED, {"time": last.get("time"), "source_fingerprint": last.get("source_fingerprint"), "at": ld.now(),
+                             "round_red": True, "removed": bool(removed)})
+    return removed
 
 
 def red_without_batch(log) -> bool:
@@ -1699,9 +2534,16 @@ def red_without_batch(log) -> bool:
     seen = (seen + [last.get('time'), last.get('source_fingerprint')])[-200:]
     write_json(seen_p, seen)
     log(f"RED build {last.get('time')} with no batch open; failing {' '.join((last.get('failing') or [])[:8])}")
+    if retry_round_open():
+        return round_red(last, log)
     if drop_other_writers({'id': '-', 'entries': []}, last, list(last.get('failing') or []), log, persist=False):
+        land_rest(log)
+        return True
+    if blame_out(last, list(last.get('failing') or []), log, 'red build')[1]:      # 2026-10-25: importer_blame
+        land_rest(log)
         return True
     alert(None, ' '.join(last.get('failing') or []), 'red build with no batch open and no droppable landing', 'maintainer diagnosis')
+    land_rest(log)
     return False
 
 
@@ -1760,6 +2602,8 @@ def running_build() -> dict | None:
 def sync_states(b: dict, log) -> None:
     """The landed entries whose landing record the build or a take-out closed: verified, or reverted."""
     for e in b["entries"]:
+        if e.get("stage") == "2" and e["state"] in ("returned", "reverted"):
+            s2b.mark_out(e)
         if e["state"] != "landed":
             continue
         r = ld.read_json(ld.DONE / f"{e['landing']}.json")
@@ -1803,9 +2647,198 @@ def maybe_pipeline(b: dict, cache: dict, log) -> str | None:
     return "landed" if land_batch(cache, log, target=NEXT) else None
 
 
+def mechanical_red(b: dict, last: dict, log, imports) -> str | None:
+    """2026-10-24 (the human: "哪个文件报错了就汇报给编辑过这个的worker，如果没有就单独把文件的这个报错作为一个新的返工任务。
+    为什么会猜？"): a red build is handled without attribution and without the triage agent. Every failing module that a
+    delivery of the build wrote goes back to that delivery with the compiler's message (taken out, as before); every
+    failing module no delivery wrote becomes a rework item with its error (tools/red_rework.py: moved to quarantine/
+    with its importers, a row in coord/rework.tsv, the worker adapts it). The guessing triage had returned 48
+    innocent deliveries in four rounds (BoundaryWeights, 10-24 03:44-05:48) while the failure stayed. Returns None when
+    a failure reaches the six target statements (the old handling then decides)."""
+    entries = [e for e in b['entries'] if e['state'] == 'landed']
+    inc = set(last.get('included') or [])
+    if inc and any(e['landing'] in inc for e in entries):
+        entries = [e for e in entries if e['landing'] in inc]
+    failures = list(dict.fromkeys(list(last.get('failing') or []) +
+                                  [c['module'] for c in last.get('batch_checks') or []]))
+    if not failures:
+        return None
+    text = (ld.LOCAL / 'build.log').read_text(errors='ignore') if (ld.LOCAL / 'build.log').exists() else ''
+    # 2026-10-24: an import cycle fails every module on it and all their importers (356 at once). Break it first
+    # (tools/import_cycle_breaker.py: an upstream module importing ours goes back to upstream's text, our proof is kept
+    # for its worker); the next build decides the rest. Nothing is moved to rework for a cycle that was broken.
+    if 'build cycle detected' in text:
+        try:
+            r = subprocess.run([sys.executable, str(ROOT / 'tools' / 'import_cycle_breaker.py')], cwd=ROOT,
+                               capture_output=True, text=True, timeout=1800)
+            out = (r.stdout or '').strip()
+        except Exception as x:  # noqa: BLE001
+            out = 'error ' + repr(x)[:200]
+        log(f"batch {b['id']}: import cycle in the red build; tools/import_cycle_breaker.py: {out[:400] or 'nothing to break'}")
+        if 'broken:' in out:
+            b['round'] += 1
+            b['await_recovery'] = True
+            write_json(OPEN, b)
+            return 'returned'
+    blocks = log_blocks(text)
+    messages = {m: blocks.get(m) or '\n'.join(last.get('errors') or []) for m in failures}
+    messages.update({c['module']: c['message'] for c in last.get('batch_checks') or []})
+    decisions, orphan = [], []
+    for m in failures:
+        ws = [e for e in entries if m in (e.get('modules') or [])]
+        if ws:
+            decisions.append({'failure': m, 'case': 'own-fault', 'return': [key(e) for e in ws], 'by': 'tools',
+                              'reason': f'the global build failed in {m}, which your delivery wrote; fix it and deliver again',
+                              'message': messages.get(m, '')})
+        else:
+            orphan.append(m)
+    # 2026-10-24: a failure that is only "bad import 'X'" while X is in the library again (taken out and put back since
+    # that build, e.g. a rework move undone) says nothing about the module: the next build decides. 52 modules and 33
+    # importers were moved to rework at 14:52 for imports a 14:50 undo had already restored.
+    def _stale_bad_import(m):
+        errs = [l for l in (messages.get(m) or '').splitlines() if l.lstrip().startswith('error')]
+        bad = [re.search(r"bad import '([^']+)'", l) for l in errs]
+        return bool(errs) and all(bad) and all(li.file_of(x.group(1)).is_file() for x in bad)
+    stale = [m for m in orphan if li.file_of(m).is_file() and _stale_bad_import(m)]
+    if stale:
+        log(f"batch {b['id']}: {len(stale)} module(s) failed only on imports that are back in the library; the next "
+            f"build decides, no rework item: {' '.join(stale[:8])}")
+        orphan = [m for m in orphan if m not in stale]
+    gone = [m for m in orphan if not li.file_of(m).is_file()]
+    if gone:   # its landing (another writer's) was taken out already (drop_other_writers): nothing left to rework
+        log(f"batch {b['id']}: {' '.join(gone[:8])}: no longer in the library (taken out with its landing); no rework item")
+        orphan = [m for m in orphan if m not in gone]
+    if not orphan and not decisions:
+        b['round'] += 1
+        b['await_recovery'] = True
+        write_json(OPEN, b)
+        return 'returned'
+    if orphan:
+        try:
+            rid, fixed = red_rework.add_suggested_imports(orphan, messages)
+        except Exception as x:  # noqa: BLE001
+            rid, fixed = "", []; log(f"batch {b['id']}: adding the suggested imports failed: {x!r}"[:300])
+        if fixed:
+            log(f"batch {b['id']}: added the public imports the compiler named to {len(fixed)} module(s) (landing {rid}): "
+                f"{' '.join(fixed[:8])}")
+            orphan = [m for m in orphan if m not in fixed]
+    if orphan:
+        # 2026-10-25 (the human): a failing module no delivery wrote, broken by a landing of the snapshot that changed a
+        # module below it (importer_blame): a delivery of this batch goes back to its writer (decision), another
+        # writer's landing is taken out (take_out_blamed); quarantine only for a failure no landing explains
+        by_id = {e['landing']: e for e in entries}
+        blame, _ = blame_out(last, orphan, log, f"batch {b['id']}", skip=set(by_id))
+        for m, x in blame.items():
+            own = [key(by_id[i]) for i in x['ids'] if i in by_id]
+            if own:
+                decisions.append({'failure': m, 'case': 'broke-importer', 'return': own, 'by': 'tools',
+                                  'reason': (f"the global build failed in {m}, which imports your module(s)"
+                                             + (f" and uses {', '.join(x['names'][:4])}, which your delivery removed or changed"
+                                                if x['names'] else " (yours is the closest change below it)")),
+                                  'message': messages.get(m, '')})
+        orphan = [m for m in orphan if m not in blame]
+    if orphan:
+        errs = red_rework.first_errors(orphan)
+        causes = {}
+        for m in orphan:
+            below = li.closure(m, imports, {})
+            ch = [key(e) for e in entries if set(e.get('modules') or []) & below]
+            upn = [r['id'] for r in ld.records(ld.REQUESTS) if r.get('upsync')
+                   and any(f.get('module') in below | {m} for f in r.get('files') or [])]
+            causes[m] = ((errs.get(m) or messages.get(m, '')[:1500] or 'error: failed in the global build')
+                         + (' | the upstream sync changed this module or its imports (keep the upstream text; adapt our code)'
+                            if upn else '')
+                         + (' | changed in this build among the modules it imports (adapt this module to them): '
+                            + ', '.join(ch[:10]) if ch else ''))
+        try:
+            rid, moved = red_rework.quarantine(set(orphan), causes, f"batch {b['id']} round {b['round'] + 1}")
+        except red_rework.Refuse as x:
+            # 2026-10-24: no mass move and no guessing: the failure stays for a worker (coord/build-errors has the
+            # compiler message) and an alert is raised; the batch waits for the next build
+            log(f"batch {b['id']}: ALERT rework move refused ({x}); the failure stays in the library for a worker")
+            alert(b['id'], ' '.join(orphan[:6]), str(x)[:200], 'fix the failing module (coord/build-errors)')
+            # 2026-10-25: the failing modules the batch's deliveries wrote still go back to their writers (below);
+            # before, this branch returned first and they stayed in the library build after build
+        else:
+            log(f"batch {b['id']}: {len(orphan)} failing module(s) no delivery wrote -> rework, {len(moved)} module(s) "
+                f"moved to quarantine/ (landing {rid or '-'}): {' '.join(orphan[:8])}")
+    for d in decisions:
+        log(f"batch {b['id']} red: {d['failure']} -> returned to its writer(s) {', '.join(d['return'])} (tools)")
+    if decisions:
+        execute(b, decisions, log, imports=imports)
+    else:
+        b['round'] += 1
+        b['await_recovery'] = True
+        write_json(OPEN, b)
+    return 'returned'
+
+
+def restore_after_fix(plan: dict, log) -> None:
+    """2026-10-26 (the human, 22:40): a rework fix lands together with the quarantined importers it was blocking. A
+    landing that writes a module of coord/rework.tsv (a quarantined root, now back at its original path: rework.landed)
+    is followed, still under coord/.merge.lock, by the cluster restore (rework.cluster_restore, wait=False): every
+    quarantined module no confirmed-unfixed root blocks comes back in the same snapshot, so the next global build
+    verifies the fix and its whole downstream at once (before: fix -> build -> green -> restore -> another build;
+    PQRU 1fc70eb18da landed while its 3641 importers stayed in quarantine/). A root whose quarantined text is the one
+    that failed (local/rework-tried.json) still blocks (rework.cluster_set). What fails is taken out with its importers
+    (batch_recovery.commit_inverse)."""
+    try:
+        import rework
+        mods = {m.get("module") for m in (plan.get("D") or {}).get("modules") or []} | {plan.get("item")}
+        fixed = sorted(m for m in mods & set(rework.load()) if m and rework.landed(m))
+        if not fixed:
+            return
+        n = rework.cluster_restore(wait=False)
+        chk = plan.get("rootfix") or {}
+        log(f"rework fix landed ({' '.join(fixed[:4])}): {n} quarantined module(s) back in the same batch; the next "
+            "build verifies them with the fix" + (" (root check: " + ", ".join(f"{m} {s}" for m, s in chk.items()) + ")" if chk else ""))
+    except Exception as exc:  # noqa: BLE001
+        log("rework restore after a fix failed (restore_when_idle tries again) |", repr(exc)[:300])
+
+
+def build_running() -> bool:
+    """a global build (tools/build.py) is running: local/builds/current.json names a live build.py pid and no `finished`"""
+    cur = ld.read_json(ld.B / "current.json") or {}
+    if cur.get("finished") or not cur.get("pid"):
+        return False
+    try:
+        return b"build.py" in pathlib.Path(f"/proc/{int(cur['pid'])}/cmdline").read_bytes()
+    except (OSError, ValueError):
+        return False
+
+
+def restore_when_idle(cache: dict, log) -> None:
+    """2026-10-26 (the human, 22:25): the cluster restore does not wait for the next batch. Before, it ran only at the
+    start of land_batch, so a module whose root fix had landed waited for a green build, the next batch and another
+    build (IntegralOperationsScalarComparisons: fixed 21:59, back 22:19). Now, every lander step in which no global
+    build runs, no retry round is open, the last build is green, no batch landing is mid-commit (local/batch/landing.json)
+    and the repository changed since the last try (HEAD, or 10 min), rework.cluster_restore(wait=False) puts back what
+    cluster_set() allows, under coord/.merge.lock and local/tree.lock (a build snapshot, also under the merge lock, takes
+    all of it or none of it); the next build verifies it. land_batch keeps its own call.
+    22:40 (the human): a fix committed into a quarantine/ copy while a build runs goes into the NEXT snapshot, so the
+    restore no longer waits for the running build to end or for a green result; only a retry round (it rebuilds its
+    own snapshot; what lands meanwhile is held back) and a batch landing mid-commit still wait."""
+    if (BD / "landing.json").exists() or (BD / "proof-imports.json").exists() or _sync_running():
+        return
+    if retry_round_open():
+        return
+    head = md.git("rev-parse", "HEAD").strip()
+    if cache.get("_idle_restore") == head and time.time() - cache.get("_idle_restore_t", 0) < 600:
+        return
+    cache["_idle_restore"], cache["_idle_restore_t"] = head, time.time()
+    try:
+        import rework
+        n = rework.cluster_restore(wait=False)
+        if n:
+            log(f"rework restore between steps (no batch landing mid-commit): {n} quarantined module(s) back; the next build snapshot verifies them")
+    except Exception as exc:  # noqa: BLE001
+        log("rework restore while idle failed, tried again next step |", repr(exc)[:300])
+
+
 def step(cache: dict, log) -> str:
     """One step of the cycle; returns what it did (idle, landed, waiting, verified, triage, returned)."""
     repairs.reconcile()
+    restore_when_idle(cache, log)
     # 2026-10-17 (xrhandoff): no dedicated repair service any more; open repair jobs go to the stage-3 queue at once
     # (coord/repairs.txt, see repair_queue.handoff), before counts() could re-take their XR claims.
     try:
@@ -1817,6 +2850,10 @@ def step(cache: dict, log) -> str:
     if cache.get('_repair_stats') != stats:
         log('REPAIR statistics', json.dumps(stats, sort_keys=True))
         cache['_repair_stats'] = stats
+    try:
+        cache.setdefault("_pre2", s2b.Prep()).pump(log)     # stage-2 checks run per delivery, also while a build runs
+    except Exception as exc:  # noqa: BLE001
+        log("stage 2: check pump failed |", repr(exc)[:300])
     b = read_json(OPEN)
     if not b and NEXT.exists():
         os.replace(NEXT, OPEN); b = read_json(OPEN)     # a stop between closing a batch and promoting the next one
@@ -1824,8 +2861,37 @@ def step(cache: dict, log) -> str:
         if (ld.read_json(ld.B / "last.json") or {}).get("result") == "red":
             log("RED build during the upstream sync: left to the sync's quarantine (local/UPSYNC_RUNNING)")
             return "waiting"
-    if not b and ld.merge_queue() and red_without_batch(log):
+    # 2026-10-25: in a retry round, a red build that contains none of the open batch's landings (the batch landed while
+    # the build ran) is handled as one with no batch open; before rounds it waited for the next snapshot
+    _lr = ld.read_json(ld.B / "last.json") or {}
+    _foreign = (bool(b) and _lr.get("result") == "red" and retry_round_open()
+                and not ({e["landing"] for e in b["entries"] if e["state"] == "landed"} & set(_lr.get("included") or [])))
+    if (not b or _foreign) and ld.merge_queue() and red_without_batch(log):
         return "returned"
+    # 2026-10-25: a red build whose handling is complete (the batch recorded it as handled, or the merge queue handled
+    # it with no batch open) lets its clean landings land (land_rest; once per build)
+    _last = ld.read_json(ld.B / "last.json") or {}
+    if _last.get("result") == "red" and ((b and seen_red(b, _last) and not b.get("triage"))
+                                        or (not b and _last.get("time") in (read_json(BD / "mq-red.json") or []))):
+        try:
+            land_rest(log)
+        except Exception as exc:  # noqa: BLE001
+            log("land_rest failed |", repr(exc)[:300])
+        if b and _last.get("time") in (read_json(PARTIAL) or []) and isinstance(_last.get("clean"), list):
+            # what of the batch neither failed nor compiled (it imports a failure no delivery of the batch wrote) stays
+            # an open landing of the merge queue: a later build verifies it or drops it (drop_other_writers); the
+            # batch closes and the next one lands now instead of waiting for that failure's repair
+            sync_states(b, log)
+            left = [e for e in b["entries"] if e["state"] == "landed"]
+            if left:
+                for e in left:
+                    e["state"] = "queued"
+                b.pop("await_recovery", None)
+                write_json(OPEN, b)
+                log(f"batch {b['id']}: {len(left)} landing(s) blocked by a failure they did not write stay in the merge "
+                    "queue; the batch closes")
+    if not b and retry_round_open():
+        return "waiting"            # the next batch lands when the retry round is green (retry_round_open)
     if not b:
         return "landed" if land_batch(cache, log) else "idle"
     sync_states(b, log)
@@ -1835,7 +2901,7 @@ def step(cache: dict, log) -> str:
         if b.get('await_recovery') or b.get('triage'):
             b = fold_next(b, log); nx = None             # never two batches in recovery
     pend = [e for e in b["entries"] if e["state"] == "landed"]
-    if b.get('await_recovery'):
+    if b.get('await_recovery') and pend:     # 2026-10-25: nothing of the batch left open: it closes now (land_rest)
         last = ld.read_json(ld.B / 'last.json') or {}
         removed = {e['landing'] for e in b['entries'] if e['state'] in ('returned', 'waiting', 'reverted')}
         fresh = not seen_red(b, last) and not removed & set(last.get('included') or [])
@@ -1860,7 +2926,9 @@ def step(cache: dict, log) -> str:
         return "verified"
     write_json(OPEN, b)
     if "_pre" in cache:
-        cache["_pre"].pump(candidates(cache))
+        cands = candidates(cache)
+        cache["_pre"].pump(cands)
+        pending_merge_jobs(cache["_pre"], cands, log)
     if b.get("triage"):
         t = b["triage"]
         v = read_json(pathlib.Path(t["dir"]) / "verdict.json")
@@ -1906,6 +2974,11 @@ def step(cache: dict, log) -> str:
     b["handled"].append(last.get("time"))
     if last.get("source_fingerprint"):
         b.setdefault("handled_sources", []).append(last["source_fingerprint"])
+    if os.environ.get("SHEAF_RED_MECHANICAL", "1") == "1":
+        r = mechanical_red(b, last, log, imports)
+        if r:
+            land_rest(log)          # the failures are out: the rest of this build lands from it
+            return r
     if T['unattributed'] and ld.merge_queue() and drop_other_writers(b, last, T['unattributed'], log):
         return 'returned'
     if T['unattributed'] or b['round'] >= 4:
@@ -1923,11 +2996,30 @@ def step(cache: dict, log) -> str:
     return "returned"
 
 
+def _check_slot():
+    """One of SHEAF_CHECK_SLOTS (default 16) machine-wide slots for a check-one process, held until it exits
+    (2026-10-27: a lander restart left the old Pre pool's checks running beside the new pool's, 25+ checks at
+    4.6 GB each plus their prune workers ran the host out of memory; POOL alone is per Pre instance)."""
+    import fcntl
+    n = max(1, int(os.environ.get("SHEAF_CHECK_SLOTS", "16")))
+    d = ROOT / "local" / "check-slots"; d.mkdir(parents=True, exist_ok=True)
+    while True:
+        for i in range(n):
+            f = open(d / f"{i}.lock", "w")
+            try:
+                fcntl.flock(f, fcntl.LOCK_EX | fcntl.LOCK_NB)
+                return f
+            except OSError:
+                f.close()
+        time.sleep(1)
+
+
 def main(a: list[str]) -> int:
     def out(*x):
         print(time.strftime("%F %T"), *x, flush=True)
     if len(a) == 2 and a[0] == "check-one":      # run_checks
-        pathlib.Path(a[1]).write_bytes(pickle.dumps(_check(json.load(sys.stdin)))); return 0
+        c = json.load(sys.stdin); slot = _check_slot()   # noqa: F841   held until exit
+        pathlib.Path(a[1]).write_bytes(pickle.dumps(_check(c))); return 0
     if a == ["step"]:
         print(step({}, out)); return 0
     if a == ["status"]:

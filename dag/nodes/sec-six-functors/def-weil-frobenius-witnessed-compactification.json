@@ -1,0 +1,241 @@
+{
+ "id": "def-weil-frobenius-witnessed-compactification",
+ "kind": "definition",
+ "title": "Witnessed finite-coefficient compactification origins",
+ "status": "split",
+ "statement": "For a finite commutative coefficient ring A, retain an etale-origin witness consisting of an actual intrinsic pro-etale derived object K, a bounded-below etale antecedent L, and its canonical comparison isomorphism. Give these witnesses the induced category containing every ambient map. Construct the comparison/realization functor origin, its exactness instances, and the canonical fixed open and compact-support coordinate identifications. For each compactification refinement construct intrinsicRefinement from the proper compositor, inverse proper/open comparison, and retained witness; require natural, identity, composition and common-refinement coherence, determining the pairwise comparison uniquely. At a recorded finite coefficient stage its refinement component equals the specified refinementComparisonIsomorphism conjugated by the fixed coordinate identifications. Define finite Frobenius direct exchange using the ambient mate. Pull back the retained antecedent, preserve its lower bound, and use the pulled witness to transport the compact exchange between compactifications. All existing names, hypotheses and construction formulas are retained from def-weil-operation-exchange-coefficient-descent; no new comparison is selected. For compactification coherence and refinement normalization, choose a prime ell, a finite extension E of Q_ell, an integer n at least 1, and a field K_0 with ell invertible. Specialize A to the positive finite coefficient ring O_E/(varpi_E^n) and use a separated finite-type K_0 map between finite-type K_0 schemes. Geometry for finite Frobenius exchange is the existing finite-field datum. Pullback statements retain the original scheme maps and actual Cartesian-square and witnessed-domain hypotheses, without adding geometric linearity or Frobenius invertibility assumptions. The Lean attachment contains the exact coherence statement and all 34 original declarations.",
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-system-operation-exchange-realization",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "def-compact-support-direct-image-detailed",
+  "lem-trf-open-square-exchange",
+  "lem-weil-pbc-comparison-pullback",
+  "prop-compactification-coherence-detailed",
+  "def-weil-finite-field-fiber",
+  "def-zl-weil-ind-sheaf-category",
+  "def-weil-frobenius-detailed",
+  "lem-weil-frobenius-square-cartesian",
+  "def-sf-refinement-comparison-isomorphism"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-compactification-coherence.proof.md",
+  "place": "Witnessed-domain comparison, refinement normalization, common refinements and the cocycle; the finite-origin coordinate section of def-weil-operation-exchange-coefficient-descent. Finite Frobenius formulas retain the original direct/compact operation definitions."
+ },
+ "proof": [
+  {
+   "text": "Construct the comparison and exact-derived open/direct-image coordinate changes by the recorded ordinary units and compositors. The retained witness is transported through the same canonical realization unit. This defines precisely originUnderlying, origin, the CompactOrigin category, fixedCompactModel, fixedOriginWitness, fixedRefinementOpen and intrinsicRefinement with their existing formulas.",
+   "uses": [
+    "def-weil-system-operation-exchange-realization",
+    "def-compact-support-direct-image-detailed",
+    "def-weil-pbc-ambient-ringed-exchange",
+    "lem-weil-pbc-comparison-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reuse compactification_coherence in its fixed-scalar witnessed coordinates. For an intrinsic origin (K,L,alpha), apply inverse intrinsic realization to K and then finite-coefficient realization; use fixedOriginWitness and the exact-derived composition isomorphism to retain precisely L and its comparison. Boundedness is transported along this explicit isomorphism. On every ambient map use these same realization functors, giving recordedOriginFunctor. The finite-realization unit identifies its underlying fixed object with the inverse intrinsic realization. Whisker this identification with fixedCompactModel and the intrinsic realization counit to obtain a natural candidate comparison. Naturality of the finite-realization unit identifies the recorded witness with fixedOriginWitness followed by that unit. Naturality of the proper compositor and conjugate_refinement then cancel the units, identifying the transported canonical refinement with intrinsicRefinement. Transport theta and the common-refinement comparisons from compactification_coherence through these natural candidate isomorphisms. Functoriality and cancellation give the identity and composition laws, and the existing finite-family clause is unchanged. Finally any two pairwise comparisons agree by their formulas at a common refinement of the pair, proving the required uniqueness.",
+   "uses": [
+    "prop-compactification-coherence-detailed",
+    "def-weil-compactifications-refinements"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the intrinsic pairwise cocycle, choose a common refinement of three compactifications from intrinsicCompactificationCoherence, substitute its three normalized comparison formulas, and cancel the middle isomorphism and its inverse. Exact etale inverse image preserves the lower bound by Functor.isGE_mapDerivedCategory_obj.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For intrinsicCompactificationComparison_refinement, use the common-refinement formula with the identity at c to identify the pairwise comparison with intrinsicRefinement. For the transported origin the retained witness is the original witness followed by the realization unit; this is unit naturality after cancelling the exact-composition isomorphism. Functoriality of the proper-open witness formula and naturality of the proper compositor identify the fixed refinement as conjugation by that unit. Naturality of the fixedCompactModel isomorphisms and the two triangle identities cancel the outer counits and the conjugating units, yielding exactly the specified refinementComparisonIsomorphism.",
+   "uses": [
+    "def-sf-refinement-comparison-isomorphism"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the finite-field datum, instantiate the ambient exchange at the actual Frobenius Cartesian square. Pull back the retained etale antecedent by exact inverse image, transport its actual comparison, and use Functor.isGE_mapDerivedCategory_obj to keep its lower bound. Define transportCompact as pullback of the pairwise compactification comparison, the fixed compactification exchange, and the inverse pairwise comparison at the pulled witness.",
+   "uses": [
+    "def-weil-finite-field-fiber",
+    "def-zl-weil-ind-sheaf-category",
+    "def-weil-frobenius-detailed",
+    "lem-weil-frobenius-square-cartesian",
+    "lem-trf-open-square-exchange",
+    "lem-weil-pbc-comparison-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/Paper/FrobeniusWitnessedCompactification.lean",
+  "place": "R9, 2026-10-27: intrinsicCompactificationCoherence proved by explicit transport of the existing compactification_coherence theorem; all original public signatures and construction formulas retained."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Localize an integral natural transformation of direct image or chosen compact support and descend it along finite coefficient field extensions to the common-stage category",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondensed.lanLightCondSet",
+     "Condensed.profiniteSolid",
+     "Condensed.lanSheafProfinite",
+     "AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap",
+     "AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom_aux",
+     "AlgebraicGeometry.Scheme.Hom.normalizationDiagram",
+     "CompHausLike.LocallyConstantModule.functor",
+     "AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization"
+    ]
+   },
+   "date": "2026-10-18",
+   "verdict": "Generic categorical localization or unrelated results; no canonical coefficient comparisons and descent for these specified operation recipes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization and common-stage coefficient descent of the derived direct image and compact support exchange natural transformations",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Localization.Construction.natTransExtension",
+     "TopCat.Presheaf.SubmonoidPresheaf.toLocalizationPresheaf",
+     "CategoryTheory.Adjunction.derived",
+     "CategoryTheory.Functor.rightDerivedNatTrans_fac",
+     "CategoryTheory.Adjunction.derived'",
+     "CategoryTheory.Functor.rightDerivedNatTrans_app",
+     "CategoryTheory.Localization.liftNatTrans",
+     "CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac"
+    ]
+   },
+   "date": "2026-10-18",
+   "verdict": "Generic categorical localization or unrelated results; no canonical coefficient comparisons and descent for these specified operation recipes."
+  },
+  {
+   "tool": "grep",
+   "query": "commonStageExchange|modelRationalExchange|stageExchange_compatible|transportCompact",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": []
+   },
+   "date": "2026-10-18",
+   "verdict": "Generic categorical localization or unrelated results; no canonical coefficient comparisons and descent for these specified operation recipes."
+  },
+  {
+   "tool": "grep",
+   "query": "rg commonStageExchange|modelRationalExchange|stageExchange_compatible|transportCompact in WeilConjectures and lean/Sheaf; rg operation.exchange.*descent|operation exchanges.*coefficient|localized integral.*common.stage in dag/nodes; blueprint_refs.py search operation exchange coefficient descent",
+   "results": "No source declaration. DAG hits fix-lem-exchanges and lem-pod-weil-frobenius-compact-support-exchange are compatibility/isomorphism theorems, not this construction. prop-weil-pbc-descent-functors gives general descent, not the normalized coefficient maps constructed here. Blueprint search: 0 nodes.",
+   "date": "2026-10-18",
+   "verdict": "Record the concrete normalized coefficient passage as a helper, using the existing general StageSystem descent without duplicating it."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FrobeniusSquareExchange",
+  "date": "2026-10-27",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-global-geometric-frobenius",
+   "place": "The finite-coefficient witnessed compactification and Frobenius exchanges used by coefficient descent.",
+   "via": [
+    "def-weil-operation-exchange-coefficient-descent",
+    "def-weil-frobenius-square-exchange",
+    "def-weil-frobenius-cohomology-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "module": "Sheaf.Paper.FrobeniusWitnessedCompactification",
+  "file": "lean/Sheaf/Paper/FrobeniusWitnessedCompactification.lean",
+  "declaration": "WeilConjectures.FrobeniusExchange.intrinsicCompactificationCoherence",
+  "declarations": [
+   "WeilConjectures.FrobeniusExchange.originUnderlying",
+   "WeilConjectures.FrobeniusExchange.originUnderlyingAdditive",
+   "WeilConjectures.FrobeniusExchange.originUnderlyingLimits",
+   "WeilConjectures.FrobeniusExchange.originUnderlyingColimits",
+   "WeilConjectures.FrobeniusExchange.origin",
+   "WeilConjectures.FrobeniusExchange.CompactOrigin",
+   "WeilConjectures.FrobeniusExchange.CompactOriginCategory",
+   "WeilConjectures.FrobeniusExchange.compactOriginForget",
+   "WeilConjectures.FrobeniusExchange.fixedOpenModel",
+   "WeilConjectures.FrobeniusExchange.fixedDerivedOpenModel",
+   "WeilConjectures.FrobeniusExchange.fixedCompact",
+   "WeilConjectures.FrobeniusExchange.fixedCompactModel",
+   "WeilConjectures.FrobeniusExchange.fixedOriginWitness",
+   "WeilConjectures.FrobeniusExchange.fixedRefinementOpen",
+   "WeilConjectures.FrobeniusExchange.intrinsicRefinement",
+   "WeilConjectures.FrobeniusExchange.intrinsicOriginCandidate",
+   "WeilConjectures.FrobeniusExchange.refinementIntrinsicOrigin",
+   "WeilConjectures.FrobeniusExchange.intrinsicCompactificationCoherence",
+   "WeilConjectures.FrobeniusExchange.intrinsicCompactificationComparison",
+   "WeilConjectures.FrobeniusExchange.intrinsicCompactificationComparison_cocycle",
+   "WeilConjectures.FrobeniusExchange.intrinsicCompactificationComparison_refinement",
+   "WeilConjectures.FrobeniusExchange.fiberMap",
+   "WeilConjectures.FrobeniusExchange.galois",
+   "WeilConjectures.FrobeniusExchange.finiteDirect",
+   "WeilConjectures.FrobeniusExchange.frobeniusDirectFinite",
+   "WeilConjectures.FrobeniusExchange.etalePull",
+   "WeilConjectures.FrobeniusExchange.realizationPullback",
+   "WeilConjectures.FrobeniusExchange.originUnderlyingPullback",
+   "WeilConjectures.FrobeniusExchange.originPullback",
+   "WeilConjectures.FrobeniusExchange.pulledOriginWitness",
+   "WeilConjectures.FrobeniusExchange.etalePull_lowerBound",
+   "WeilConjectures.FrobeniusExchange.pulledCompactOrigin",
+   "WeilConjectures.FrobeniusExchange.pulledCompactOriginFunctor",
+   "WeilConjectures.FrobeniusExchange.transportCompact"
+  ],
+  "statement": "theorem intrinsicCompactificationCoherence :\n    let A := Padic.coefficientExtensionRing l E n\n    letI := Padic.finite_coefficientExtensionRing l E n hn\n    ∃ theta : ∀ (c d : Compactification f) (_r : c ⟶ d),\n        intrinsicOriginCandidate A c ≅ intrinsicOriginCandidate A d,\n      (∀ (c d : Compactification f) (r : c ⟶ d) (O : CompactOriginCategory A X),\n        (theta c d r).app O = intrinsicRefinement A r O) ∧\n      (∀ c, theta c c (𝟙 c) = Iso.refl _) ∧\n      (∀ (c d e : Compactification f) (r : c ⟶ d) (s : d ⟶ e),\n        theta c e (r ≫ s) = theta c d r ≪≫ theta d e s) ∧\n      (∀ (m : ℕ) (c : Fin m → Compactification f),\n        ∃ d : Compactification f, ∀ i : Fin m, Nonempty (d ⟶ c i)) ∧\n      ∃! comparison : ∀ c d : Compactification f,\n          intrinsicOriginCandidate A c ≅ intrinsicOriginCandidate A d,\n        ∀ (c d b : Compactification f) (r : b ⟶ c) (s : b ⟶ d),\n          comparison c d = (theta b c r).symm ≪≫ theta b d s",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-27",
+  "existing": false
+ },
+ "proof_deps": [
+  "def-weil-system-operation-exchange-realization",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "lem-weil-pbc-comparison-pullback",
+  "prop-compactification-coherence-detailed",
+  "def-weil-compactifications-refinements",
+  "def-sf-refinement-comparison-isomorphism",
+  "def-weil-finite-field-fiber",
+  "def-zl-weil-ind-sheaf-category",
+  "def-weil-frobenius-detailed",
+  "lem-weil-frobenius-square-cartesian",
+  "lem-trf-open-square-exchange"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-3c1b1",
+  "group": "D2",
+  "result": "fix",
+  "landing": "20261027T012820-L-2335181",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261027T034736-L-3680904",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

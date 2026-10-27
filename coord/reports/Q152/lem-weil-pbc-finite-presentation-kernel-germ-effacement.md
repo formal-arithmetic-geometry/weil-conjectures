@@ -1,0 +1,37 @@
+## Worker report
+
+Files written: dag/nodes/sec-proper-base-change/lem-weil-pbc-finite-presentation-kernel-germ-effacement.json (statement, now split; no Mathlib match), citations.json, and this report. No new nodes and no Mathlib leaves were created. The item statement and its statement dependencies are unchanged. All work is stage 1; no Lean file was changed and nothing was compiled.
+
+Attachments: none. Searched the project WeilConjectures source by the exact blueprint tag, kernel/germ and effacement vocabulary, and the finite-presentation module files. No project declaration states the complete item. Existing quotient and extension declarations cover ingredients only.
+
+WANTED: none. The source is available locally.
+
+The imported item was unsplit, with no proof. There is no statement dispute: its sectionwise kernel condition, finite-type submodule, finitely presented quotient and factorization agree with the injectivity paragraph of Stacks 01PJ. I retained the inherited searches and added only queries actually run through msearch.py in this session. The two LeanFinder phrasings found presentation definitions and the finite-presentation-to-quasi-coherent instance, LeanSearch found abstract kernels and ring-module finite-presentation results, Loogle returned no hits, and grep found germ restriction formulas and affine presentations. Reading Quasicoherent.lean:267–285, Tilde.lean:439–485 and Sheaf.lean:519–533 confirmed that these do not construct the required global submodule. Searches and their outcomes are in searches.jsonl; the node records the exact query text.
+
+Nothing remains unfinished within this one-level split. Its dependencies were reused rather than split further.
+
+## New nodes
+
+None. In particular, local representation of a zero-image germ, the cyclic image of its representative, and the final cokernel factorization are proof steps, not separate nodes or restatements of clauses.
+
+## Not duplicates
+
+No new-node/existing-node pairs arise. I searched the whole DAG for tags 01PJ, 01PF, and kernel/quasi-coherent/finite-type quotient vocabulary, and used blueprint_refs.py searches for finite type submodule, kernel germ and 01PJ. The blueprint searches found no matching blueprint node. The existing kernel, finite-type extension, image and cokernel statements were opened and reused. The item retains same_as = [].
+
+## Review by Q152
+
+I read Properties 01PJ (lemma-directed-colimit-diagram-finite-presentation), particularly properties.tex:3150–3168, against every conclusion of the item. Its representative is first shrunk until its image is zero, its cyclic submodule is extended inside the kernel, and its quotient kills the germ. I also read Properties 01PF (lemma-extend), properties.tex:2847–2894, Modules 01BO (lemma-finite-presentation-quasi-coherent), modules.tex:1420–1428, Modules 0H96 (lemma-cokernel-finite-finite-presentation), modules.tex:1431 onwards, and Schemes 01IC and 01LB(5), schemes.tex:1418–1435 and 4717–4746. These justify the existing dependency statements used here. The original master unit sk-thm-p1 and chapter route were read; the current main-20261015 ancestor proof's paragraph beginning 'The finite-pushforward lemma' identifies the approximation branch this auxiliary serves. This stays on that branch and uses no SGA source.
+
+Step 1 uses def-weil-pbc-module-stalk for both representing the element and shrinking a zero germ; that statement explicitly gives both facts and the induced stalk map. The spectral theorem lem-weil-pbc-qcqs-scheme-spectral and def-weil-spectral-space give a basis of quasi-compact opens, so the shrink can be made quasi-compact without an uncited affine-basis theorem. The hypothesis X qcqs is precisely what the spectral theorem assumes. This does not claim that the initial representative already maps to zero on its original open.
+
+Step 2 uses clause (0) of lem-weil-pbc-quasi-coherent-finite-type-affine, which explicitly says finite presentation implies quasi-coherence. With the given quasi-coherence of F, lem-weil-pbc-quasi-coherent-module-kernel applies to alpha. I checked that its statement defines the kernel sectionwise, not merely as an unspecified quasi-coherent kernel. Therefore the section t actually belongs to H(U). No noetherian or coherence hypothesis is introduced.
+
+Step 3 uses lem-weil-pbc-module-restriction-open-immersion-colimits clause (2) for H restricted to U. The rank-one free presentation of O_U has zero relations, hence the finite-presentation definition and clause (0) of the affine finiteness theorem show its quasi-coherence; the section 1 generates it, directly giving finite type. The image theorem lem-weil-pbc-quasi-coherent-module-cokernel-image supplies the sheaf image inside H restricted to U, its quasi-coherence, and factorization through it. The finite-type image clause of lem-weil-pbc-module-finite-type-image-extension supplies its finite type. Both source and target of the quasi-coherent image theorem have been checked. The image consists of locally scalar multiples of t; it is not mistakenly identified with the sectionwise image on an arbitrary open. Only t = m_t(1), which is indeed a global image section, is used on U.
+
+Step 4 applies lem-weil-pbc-module-finite-type-submodule-extension exactly to the quasi-coherent ambient kernel H, rather than to G followed by an unsupported kernel-containment claim. Its statement supplies equality of the restricted submodules on all opens contained in U. I checked X qcqs, U quasi-compact, and the two properties of L before the application. Thus K is inside the sectionwise kernel on every open, and t lies in K(U). These are consequences of the actual inclusions and equality the node states, not of its internal proof.
+
+Step 5 uses the full finite-type-source version of lem-weil-pbc-module-finite-presentation-cokernel: K need not be finitely presented, so its narrower 'in particular' clause would not suffice. The factorization beta follows directly from the defining cokernel universal property since alpha kills the inclusion. The quotient map annihilates t because t is a section of K. The explicit stalk-map formula in def-weil-pbc-module-stalk gives q_x(s) = (q_U(t))_x = 0; no extra stalk-exactness or sectionwise-surjectivity theorem is hidden here.
+
+All 13 step/node incidences have quotes copied verbatim from the opened statements in citations.json. I checked B–E of delivery-errors: no new statements, no incomplete new nodes, no duplicated clauses, no deferred argument smuggled into a definition, and all non-elementary ingredients are cited. Each step is below 2000 characters; the proof is an assembly of existing statements. I corrected the initial possible approach of selecting an affine shrink by using the already cited spectral basis instead; this avoids an extra affine-basis dependency. I also made the local cyclic construction explicitly a sheaf image rather than a presheaf of scalar multiples.
+
+Small cases: s = 0 permits the zero cyclic image and zero extension (or any extension supplied by 01PF); alpha = 0 permits any germ and the same construction; injective alpha forces s = 0. For X = Spec R the construction reduces to extending the local cyclic submodule of ker alpha; the quotient of a finitely presented module by a finitely generated submodule is finitely presented, without R noetherian. The empty scheme has no point x and gives no instance requiring construction. None of these cases forces an extra hypothesis. The section 1 in O_U exists independently of any nonzero assumption.

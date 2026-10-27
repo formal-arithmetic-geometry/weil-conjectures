@@ -1,0 +1,263 @@
+{
+ "id": "lem-sfb-space-affine-derived-pushforward-conservative",
+ "kind": "statement",
+ "title": "Affine derived direct image reflects isomorphisms for algebraic spaces",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and $f:X\\to Y$ an affine morphism of algebraic spaces over $S$ with their small etale structure sheaves [def-trf-algebraic-space]; affine means representable with affine inverse images of affine scheme charts. Use module sheaves [def-weil-sheaf-of-modules-category], their unbounded derived categories [def-weil-abstract-derived-category], and write $D_{\\mathrm{QCoh}}(\\mathcal O_T)$ for the full subcategory with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. Let $Rf_*$ be the total right derived functor of canonical module direct image [def-trf-space-etale-module-functors], computed by K-injective resolutions (a complex $I$ is K-injective when every map from an acyclic complex to $I$ is null-homotopic). Then $Rf_*$ takes $D_{\\mathrm{QCoh}}(\\mathcal O_X)$ into $D_{\\mathrm{QCoh}}(\\mathcal O_Y)$ and reflects isomorphisms: for every morphism $u:E\\to F$ in $D_{\\mathrm{QCoh}}(\\mathcal O_X)$, if $Rf_*u$ is an isomorphism, then $u$ is an isomorphism. No boundedness, Noetherian or finite-type assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08II (lemma-affine-morphism); landing in the quasi-coherent subcategory is Tag 08FA (lemma-quasi-coherence-direct-image), applied to an affine morphism."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-size-convention",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-affine-quasifinite-properties"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-space-affine-locality], choose a surjective etale scheme chart $a:V\\to Y$ such that $f_V:X_V=X\\times_YV\\to V$ is an affine scheme morphism. Put $b:X_V\\to X$. The base-changed cover $b$ is jointly surjective etale by [lem-trf-space-fibre-products-etale-covers]. For any $K\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$, [lem-sfb-space-derived-etale-chart-calculus] gives $b^*K\\in D_{\\mathrm{QCoh}}(\\mathcal O_{X_V})$ and the natural isomorphism $a^*Rf_*K\\cong R(f_V)_*b^*K$. No quasi-compactness of $V$ or $X_V$ is asserted or needed.",
+   "uses": [
+    "lem-sfb-space-affine-locality",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-derived-etale-chart-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tags 03WG, 03WI; spaces.tex Tag 02X2; spaces-topologies.tex Tag 041F; spaces-perfect.tex Tags 08F2 and 08F4."
+   }
+  },
+  {
+   "text": "The affine scheme morphism $f_V$ is quasi-compact and quasi-separated by [lem-weil-pbc-affine-morphism-permanence]. Under the equivalences of [lem-sfb-scheme-derived-etale-qcoh-comparison], its small-etale derived direct image agrees naturally with its Zariski derived direct image. The latter preserves quasi-coherent cohomology by [lem-pc-derived-direct-image-preserves-qcoh]. Consequently $a^*Rf_*K$ has quasi-coherent cohomology. The cover criterion of [lem-sfb-space-derived-etale-chart-calculus] implies $Rf_*K\\in D_{\\mathrm{QCoh}}(\\mathcal O_Y)$. This proves the landing assertion for every unbounded $K$.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-sfb-scheme-derived-etale-qcoh-comparison",
+    "lem-pc-derived-direct-image-preserves-qcoh",
+    "lem-sfb-space-derived-etale-chart-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tags 071Q and 08GH; perfect.tex lemma-quasi-coherence-direct-image; morphisms.tex Tag 01S7."
+   }
+  },
+  {
+   "text": "Now let $u:E\\to F$ with $Rf_*u$ invertible. Applying $a^*$ and the natural comparison in Step 1 shows $R(f_V)_*b^*u$ invertible. By [lem-sfb-scheme-derived-etale-qcoh-comparison], transport $b^*u$ through the equivalence from the Zariski quasi-coherent derived category: its Zariski derived image is invertible because the target equivalence reflects isomorphisms. Apply [lem-sc-affine-derived-pushforward-conservative] to $f_V$, which is affine. It makes the transported morphism invertible, and applying the source equivalence gives that $b^*u$ is invertible.",
+   "uses": [
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-sfb-scheme-derived-etale-qcoh-comparison",
+    "lem-sc-affine-derived-pushforward-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08II (lemma-affine-morphism), proof; Tags 071Q and 08GH; perfect.tex Tag 08I8."
+   }
+  },
+  {
+   "text": "Exact slice restriction $b^*$ from [lem-sfb-space-derived-etale-chart-calculus] commutes with cohomology: kernels and images are preserved by exactness, so $H^n(b^*u)=b^*H^n(u)$. Since $b^*u$ is invertible, every one of these maps is invertible. A module sheaf map invertible on a covering is invertible: restrict the local inverses to overlaps, where they agree by uniqueness of the inverse, and glue their values on sections by the sheaf axiom. Apply this to the covering $b$ to get that every $H^n(u)$ is invertible. Finally [lem-weil-pbc-unbounded-derived-iso-cohomology] gives that $u$ is invertible. The same argument includes empty covers of the empty space and imposes no boundedness or finiteness hypothesis.",
+   "uses": [
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08II (lemma-affine-morphism), cohomology-locality argument; derived.tex Tag 05RT."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "lem-sc-affine-derived-pushforward-conservative",
+  "lem-sfb-scheme-derived-etale-qcoh-comparison",
+  "lem-sfb-space-affine-locality",
+  "lem-sfb-space-derived-etale-chart-calculus",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08II (lemma-affine-morphism), using Tags 08F2, 08F4, 071Q and 08GH."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The derived pushforward along an affine morphism of algebraic spaces reflects isomorphisms in the unbounded quasi coherent derived category",
+   "results": "OK: 8 hits; AlgebraicGeometry.AffineTargetMorphismProperty.cancel_right_of_respectsIso, AlgebraicGeometry.instRespectsIsoSchemeTargetAffineLocallyOfToProperty, AlgebraicGeometry.HasAffineProperty.instRespectsIsoScheme, AlgebraicGeometry.instHasAffinePropertyIsomorphismsSchemeAndIsAffineIsIsoCommRingCatAppTop, DerivedCategory.isIso_Q_map_iff_quasiIso, CategoryTheory.Functor.mapHomologicalComplex_upToQuasiIso_Q_inverts_quasiIso, DerivedCategory.instIsIsoMapCochainComplexIntQ, CategoryTheory.instReflectsIsomorphismsSheafSheafCompose; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary scheme module functors, affine scheme geometry, general localization or Kan-extension results do not state unbounded quasi-coherent algebraic-space conservativity or the perfect pullback test"
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*(conservative|reflects)|pushforward.*ReflectsIsomorphisms|ReflectsIsomorphisms.*pushforward",
+   "results": "OK: 0 hits; ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary scheme module functors, affine scheme geometry, general localization or Kan-extension results do not state unbounded quasi-coherent algebraic-space conservativity or the perfect pullback test",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived pushforward along an affine morphism of algebraic spaces reflects isomorphisms on complexes with quasi coherent cohomology",
+   "results": "OK: 8 hits; AlgebraicGeometry.Scheme.Modules.pushforward, TopCat.Presheaf.toPushforwardOfIso_app, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Cover.pushforwardIso_f, AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward, AlgebraicGeometry.Scheme.IdealSheafData.ideal_map_of_isAffineHom, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Cover.pushforwardIso_X; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary scheme module functors, affine scheme geometry, general localization or Kan-extension results do not state unbounded quasi-coherent algebraic-space conservativity or the perfect pullback test"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ReflectsIsomorphisms\", \"pushforward\"",
+   "results": "OK: 0 hits; ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary scheme module functors, affine scheme geometry, general localization or Kan-extension results do not state unbounded quasi-coherent algebraic-space conservativity or the perfect pullback test"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars is conservative for unbounded quasi coherent complexes under an affine morphism; a complex is zero if its derived affine pushforward is zero",
+   "results": "OK: 8 hits; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom, AlgebraicGeometry.preservesColimit_Γ, AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.Scheme.Modules.instAbelian, AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj, AlgebraicGeometry.preservesLimit_rightOp_Γ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary scheme module functors, affine scheme geometry, general localization or Kan-extension results do not state unbounded quasi-coherent algebraic-space conservativity or the perfect pullback test"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unbounded derived pushforward of quasi coherent structure sheaf modules along an affine morphism of algebraic spaces reflects isomorphisms",
+   "results": "OK: 8 hits; AlgebraicGeometry.Scheme.Modules.instReflectsIsomorphismsPresheafAbCarrierCommRingCatToPresheaf, SheafOfModules.instReflectsIsomorphismsPresheafOfModulesValRingCatForget, AlgebraicGeometry.Scheme.Modules.pushforwardId, AlgebraicGeometry.Scheme.Modules.Hom.isIso_iff_isIso_app, PresheafOfModules.instReflectsIsomorphismsSheafOfModulesSheafAddCommGrpCatToSheaf, AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp, PresheafOfModules.instReflectsIsomorphismsSheafOfModulesFunctorOppositeAddCommGrpCatCompSheafToSheafSheafToPresheaf, SheafOfModules.pushforwardCongr",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary scheme functors or affine scheme geometry, not unbounded derived pushforward on algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ReflectsIsomorphisms\", \"pushforward\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary scheme functors or affine scheme geometry, not unbounded derived pushforward on algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*(conservative|reflects)|pushforward.*ReflectsIsomorphisms|ReflectsIsomorphisms.*pushforward",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary scheme functors or affine scheme geometry, not unbounded derived pushforward on algebraic spaces",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine morphism of algebraic spaces has conservative derived pushforward on unbounded complexes with quasi coherent cohomology",
+   "results": "OK: 8 hits; AlgebraicGeometry.isAffineHom_of_isAffine, AlgebraicGeometry.isAffineHom_isStableUnderBaseChange, AlgebraicGeometry.IsAffineHom, AlgebraicGeometry.IsAffineHom.mk, AlgebraicGeometry.targetAffineLocally_affineAnd_iff', AlgebraicGeometry.instQuasiCompactOfIsAffineHom, AlgebraicGeometry.AffineTargetMorphismProperty.of, AlgebraicGeometry.isAffineHom_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary scheme functors or affine scheme geometry, not unbounded derived pushforward on algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars detects zero unbounded quasi coherent complexes under an affine algebraic space map",
+   "results": "OK: 8 hits; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.Scheme.Modules.instAbelian, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary scheme functors or affine scheme geometry, not unbounded derived pushforward on algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-affine-pullback-perfect-detection",
+  "date": "2026-10-23",
+  "group": "Q02"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Affine base change of the proper flat coherent right adjoint. Supporting input of Tag 0E5I(1): Tags 09IY (theorem-bondal-van-den-Bergh), 0E4R (remark-pullback-generator), affine case: shifted-Hom zero-cone detection. Supporting input: affine conservativity of unbounded quasi-coherent derived direct image (Tag 08II).",
+   "via": [
+    "lem-sfb-space-affine-pullback-perfect-detection",
+    "lem-sfb-affine-flat-proper-adjoint-base-change",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-affine-derived-pushforward-conservative",
+  "worker": "stage1",
+  "summary": "Checked Stacks Tag 08II and its precise Zariski/small-etale reduction. Existing nodes give the etale chart base-change formula, the scheme derived comparison, qcqs scheme preservation, affine scheme conservativity and the unbounded cohomology criterion. The proof explicitly glues local cohomology inverses; no new nodes are needed.",
+  "blueprint": "Realizes the imported Tag 08II proof: etale-local reduction to affine schemes, comparison of small-etale and Zariski derived direct images, and reflection of isomorphisms.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Base-changing the etale atlas covers X; this is a generic algebraic-space fibre-product fact."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "The affine scheme chart map is qcqs, allowing the scheme comparison and preservation theorem."
+   },
+   {
+    "node": "lem-pc-derived-direct-image-preserves-qcoh",
+    "why": "The qcqs scheme theorem supplies quasi-coherent landing after the existing etale comparison."
+   },
+   {
+    "node": "lem-sc-affine-derived-pushforward-conservative",
+    "why": "This is exactly the generic scheme conservativity input specified in the source proof, used after etale comparison."
+   },
+   {
+    "node": "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "why": "Generic cohomology criterion for invertibility in any unbounded abelian derived category."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "lem-sc-affine-derived-pushforward-conservative",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q64-5ca25248c",
+  "group": "Q64",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-5ca25248c (reviewer sub-agent of L); spot-checked: Read the item, the report and all 8 cited statements, plus Stacks spaces-perfect 08II (l.748) and 08FA (l.573). The statement is unchanged and matches 08II with 08FA(1). An affine morphism is qc and separated, so the landing clause holds. The four steps follow the 08II route: an étale-local scheme chart V (lem-sfb-space-affine-locality, lem-trf-space-fibre-products-etale-covers), then chart base change a^*Rf_* = R(f_V)_*b^* (chart-calculus). Landing: f_V is qcqs by lem-weil-pbc-affine-morphism-permanence(3), the Zariski/étale comparison (071Q/08GH) and lem-pc qcqs preservation give it, and the cover criterion finishes. Reflection: transport through the ε^* equivalence (the images lie in D_QCoh by Step 2), then 08I8 (lem-sc-affine-derived-pushforward-conservative). Step 4: exact restriction commutes with H^n; the sheaf map is glued on the pulled-back cover of each test object (the C1 exception, a few lines from the sheaf axiom); 05RT finishes. proof_deps equals the union of uses, and there is no cycle. No new nodes. The only duplicate candidate is the Zariski scheme version, which is correctly cited. No SGA. Batch-5: all four flagged citations are generic foundations (algebraic-space fibre products, affine locality, étale chart calculus, the Zariski/étale qcoh comparison); their closures contain no trace-formula or Poincaré theorems and no nt-assume leaf, so they are accepted. Edge cases X=∅, Y=∅, f=id, Spec B→Spec A and non-qc charts check out. I accept the split_report tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceAffineDerivedPushforwardConservative",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.affine_derivedDirectImage_preservesQCoh_and_reflectsIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceAffineDerivedPushforwardConservative.lean",
+  "statement": "theorem affine_derivedDirectImage_preservesQCoh_and_reflectsIso {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) (hf : MapIsAffine f) [HasDerivedCategory.{wX} X.SmallModules] [HasDerivedCategory.{wY} Y.SmallModules] : (∀ E : X.DerivedModules, X.derivedQCohProperty E → Y.derivedQCohProperty (((smallModuleDirectImage f).rightDerivedFunctor : X.DerivedModules ⥤ Y.DerivedModules).obj E)) ∧ (∀ (E F : X.DerivedModules), X.derivedQCohProperty E → X.derivedQCohProperty F → ∀ v : E ⟶ F, IsIso (((smallModuleDirectImage f).rightDerivedFunctor : X.DerivedModules ⥤ Y.DerivedModules).map v) → IsIso v)",
+  "branch": "newtargets-dag",
+  "by": "Q146",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-34a6e8fd4",
+  "group": "Q146",
+  "result": "pass",
+  "note": "Read item node, report, module, def-sfb-space-derived-module-calculus (AlgebraicSpaceDerivedModules: DerivedModules, derivedQCohProperty, smallModuleDirectImage, derivedDirectImage body) and def-sfb-space-affine-quasifinite-properties (MapIsAffine = 03WF via IsPullback with affine U), Stacks spaces-perfect 08II l.748 and 08FA(1) l.573. Lean renders S, X, Y, affine f, unbounded D(O_X), D_QCoh (all n:ℤ, quasi-coherent), canonical K-injective Rf_* = (smallModuleDirectImage f).rightDerivedFunctor (exact body of derivedDirectImage, source/target localization universes wX/wY independent: harmless generalization), landing conjunct, reflection conjunct over E F in D_QCoh with any v. No extra hypotheses; edge cases X=Y=∅, zero, identity covered. Node diff vs side-live: lean + two landed def-owner stmt_deps only; NL statement unchanged; lean.statement verbatim; single sorry theorem; docstrings carry source place, blueprint id and 4 proof steps; imports exist; report has Worker report and Second reading sections; no duplicate space theorem found. No files changed, no compile."
+ }
+}

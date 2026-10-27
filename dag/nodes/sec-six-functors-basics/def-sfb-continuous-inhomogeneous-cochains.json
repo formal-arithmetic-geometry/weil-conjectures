@@ -1,0 +1,128 @@
+{
+ "id": "def-sfb-continuous-inhomogeneous-cochains",
+ "kind": "definition",
+ "title": "Continuous inhomogeneous cochains and their differential",
+ "status": "split",
+ "statement": "Let $E$ be a topological field [def-weil-field], $J$ a topological group, and $V$ a topological $E$-vector space with an $E$-linear $J$-action whose action map $J\\times V\\to V$ is jointly continuous. The continuous inhomogeneous cochains are $C^n_{\\mathrm{cts}}(J,V)=C(J^n,V)$ for $n\\in\\mathbf N$, regarded as abstract $E$-vector spaces. In degree zero evaluation on the unique point identifies $C(J^0,V)$ with $V$. Define the $E$-linear differential by\n$$(d^nf)(g_1,\\ldots,g_{n+1})=g_1f(g_2,\\ldots,g_{n+1})+\\sum_{i=1}^n(-1)^if(g_1,\\ldots,g_ig_{i+1},\\ldots,g_{n+1})+(-1)^{n+1}f(g_1,\\ldots,g_n).$$\nFor $n=0$ this means $(d^0v)(g)=gv-v$. The continuous inhomogeneous cochain complex is the nonnegative cochain complex of abstract $E$-vector spaces with these terms and differential. Its cohomology uses the image of the differential without taking its closure. No completeness, local compactness, or discreteness of $V$ is assumed.",
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0DVG, section-continuous-group-cohomology: the displayed complex and inhomogeneous differential, including degree zero; specialized to topological vector spaces over a topological field."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "continuousInhomogeneousD|continuousInhomogeneousComplex|inhomogeneous.*[Cc]ochain|[Cc]ochain.*inhomogeneous",
+   "results": [
+    "25 hits; ",
+    "Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean",
+    "Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean",
+    "Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean",
+    "Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean",
+    "Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean",
+    "Mathlib/RepresentationTheory/Homological/GroupCohomology/LongExactSequence.lean",
+    "Mathlib/RepresentationTheory/Homological/GroupCohomology/LongExactSequence.lean",
+    "Mathlib/RepresentationTheory/Homological/GroupCohomology/LongExactSequence.lean"
+   ],
+   "date": "2026-10-23",
+   "verdict": "Mathlib hits concern ordinary all-function inhomogeneous cochains. Local Mathlib ContCohomology is homogeneous and iterated. Project grep finds the exact continuousInhomogeneousD and continuousInhomogeneousComplex in Sheaf.RepresentationTheory.ContinuousCochainFiniteIndexTransfer; reuse them without copying."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous inhomogeneous group cochains with coefficients in a topological linear representation, differential and nonnegative cochain complex",
+   "results": [
+    "8 hits; ",
+    "ContinuousCohomology.MultiInd.complex",
+    "inhomogeneousCochains.d_hom_apply",
+    "ContinuousCohomology.MultiInd.d_comp_d_assoc",
+    "ContinuousCohomology.MultiInd.d",
+    "CochainComplex.HomComplex.δ_hom",
+    "groupCohomology.inhomogeneousCochains.d_def",
+    "groupCohomology.inhomogeneousCochains",
+    "groupHomology.inhomogeneousChains.d_def"
+   ],
+   "date": "2026-10-23",
+   "verdict": "The eight hits concern iterated continuous cohomology or all-function inhomogeneous cochains, not this jointly continuous finite-product construction. Reuse the exact published Sheaf declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "ContinuousCohomology.continuousInhomogeneousD",
+   "results": [
+    "0 hits; loogle: unknown identifier 'ContinuousCohomology.continuousInhomogeneousD'"
+   ],
+   "date": "2026-10-23",
+   "verdict": "The index reports the identifier unknown (zero hits); the exact declaration is present in the published Sheaf module, which is reused."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rectangle-corrected-pointwise-finite-primitives",
+  "date": "2026-10-23",
+  "group": "NI"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), continuous cochains underlying the rectangle-corrected finite-field primitives.",
+   "via": [
+    "lem-sfb-rectangle-corrected-pointwise-finite-primitives",
+    "lem-sfb-prime-to-ell-cochain-finite-quotient-descent",
+    "lem-sfb-prime-to-ell-condensed-acyclicity",
+    "lem-sfb-prime-to-ell-derived-invariants-reduction",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.ContinuousCochainFiniteIndexTransfer",
+  "declaration": "ContinuousCohomology.continuousInhomogeneousD",
+  "declarations": [
+   "ContinuousCohomology.continuousInhomogeneousD",
+   "ContinuousCohomology.continuousInhomogeneousComplex"
+  ],
+  "statement": "def continuousInhomogeneousD (A : TopRep.{w} E J)\n    (hA : Continuous (fun p : J × A ↦ A.ρ p.1 p.2)) (n : ℕ) :\n    C(Fin n → J, A) →ₗ[E] C(Fin (n + 1) → J, A)",
+  "branch": "sheaf-dag",
+  "by": "NI",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Definition ownership repair requested in return H2 at 9a30cad26273: these existing declarations define the jointly continuous inhomogeneous differential and its nonnegative abstract ModuleCat complex. No declaration is moved, copied or changed. The complex uses the existing named square-zero theorem only as its proof field. The transfer existence theorem is not used."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-803a4cf99",
+  "group": "NI",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-803a4cf99",
+  "group": "NI",
+  "result": "pass",
+  "note": "H2 re-delivery. Item Lean module byte-identical to 9a30cad26273 (sha256 4a96c33b), which was accepted clause-by-clause; independently re-checked hypotheses, conclusion, edge cases and provability. Item node changes only one stmt_dep: theorem lem-sfb-continuous-cochain-finite-index-transfer replaced by the new def-sfb-continuous-inhomogeneous-cochains. New node matches Stacks 0DVG (signs, last face via Fin.contractNth, degree 0 gv-v, no closure) specialized to TopRep over a topological field. It is existing:true on the unchanged landed module ContinuousCochainFiniteIndexTransfer; lean.statement is verbatim l.40; both declarations exist with real data; from.node null is the blueprint_refs no-ancestor convention. No duplicate owner; live item still split/lean null. Gates OK. No compile: no file changed. Advisory: the transfer theorem node also lists these declarations (shared ownership, harmless)."
+ }
+}

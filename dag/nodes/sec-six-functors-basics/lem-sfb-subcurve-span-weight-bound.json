@@ -1,0 +1,257 @@
+{
+ "id": "lem-sfb-subcurve-span-weight-bound",
+ "kind": "statement",
+ "title": "Leading weight of a subcurve span with boundary branches",
+ "statement": "Let $k$ be algebraically closed and $X\\subset\\mathbf P^{r-1}_k$ a connected generically reduced one-dimensional closed subscheme with nondegenerate reduced support $D$. Suppose $D$ is nodal, with completed singular local rings $k[[u,v]]/(uv)$ [def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series]. Let $L=\\mathcal O_D(1)$. Let $Y$ be a nonempty proper reduced union of irreducible components, not necessarily connected, and $Z$ its reduced complementary union. On the normalization $E$ of each component of $Z$, choose $b_E$ distinct preimages of boundary nodes between $Y$ and $Z$. Write $e_E=\\deg_E L>0$ and $e_Y=\\deg_YL$. Suppose for every such $E$ either $b_E\\le e_E$, or $E$ maps isomorphically onto a rational normal component of degree $e_E=b_E-1$ with $b_E\\ge2$. Set $b=\\sum_E b_E$. For $W=\\ker(k^r\\to H^0(Y,L|_Y))$, give $W$ weight zero and its quotient weight one. With $s=\\dim(k^r/W)$ and $a_F$ as in [lem-sfb-bounded-hilbert-weight-polynomials], one has\n$$s\\le h^0(Y,L|_Y),\\qquad a_F\\ge e_Y+\\tfrac b2.$$\nThese are geometric weight estimates with no semistability hypothesis. The nilradical of $X$ may be nonzero at finitely many points. A rational normal curve of degree $e$ means a smooth rational curve whose embedding in its own linear span is the complete degree-$e$ embedding of $\\mathbf P^1$. Component degrees below are degrees of the pulled-back hyperplane line on the smooth normalized components [def-sc-normalization, def-pc-degree-line-bundle].",
+ "source": {
+  "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+  "place": "Section 3.2 proof steps (7), (9)--(10), subcurve filtration; Gieseker Proposition 1.0.7, printed pp.55--61, gives the selected-boundary version. Agent formulation includes the rational-normal exception: b=e+1 distinct points span that component, so W restricts to zero on it and its contribution is e>=b/2. Local PDFs WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-projective-space-twist",
+  "def-sc-ringed-space-module-cohomology",
+  "def-pc-degree-line-bundle",
+  "lem-sfb-bounded-hilbert-weight-polynomials",
+  "def-pc-reduced-scheme",
+  "def-sc-normalization",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-sfb-projective-coordinate-hilbert-polynomial",
+  "def-sfb-weighted-monomial-basis-weight"
+ ],
+ "proof": [
+  {
+   "text": "Choose a basis of $V=k^r$ whose first vectors form a basis of $W$ and whose remaining vectors have weight one. Restriction induces an injection $V/W\\hookrightarrow H^0(Y,L|_Y)$: its kernel is zero by the definition of $W$. Thus $s\\le h^0(Y,L|_Y)$. For all sufficiently large $m$, let $H_m=H^0(X,\\mathcal O_X(m))$, $h_m=\\dim H_m$, and let $U_{m,j}\\subset H_m$ be the span of restricted degree-$m$ monomials of weight at most $j$, $0\\le j<m$. The bounded Hilbert-weight lemma supplies monomial bases for $H_m$ and $w_F(m)=a_Fm^2+O(m)$ for this zero/one flag. Its coefficient is the $a_F$ in the statement.",
+   "uses": [
+    "lem-sfb-bounded-hilbert-weight-polynomials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Section 3.2, Theorem 8 proof steps (7), (9)--(10), printed pp.14--15; agent reconstruction of the selected-boundary subcurve filtration (local PDF WANTED, online PDF read)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-projective-curve-normalization-section-defect] to $X$. Write $\\widetilde D=\\coprod_i E_i$, $A_i=L|_{E_i}$, $e_i=\\deg A_i$, and $T_{i,m}=H^0(E_i,A_i^m)$. The map $\\rho_m:H_m\\to\\bigoplus_iT_{i,m}$ has kernel of bounded dimension, $\\dim T_{i,m}=me_i+O(1)$ and $h_m=m\\sum_i e_i+O(1)$. These errors depend on $X$, never on $j$. Separate the indices into components over $Y$, components of $Z$ with $b_E\\le e_E$ (call this set $I$), and the remaining components (call this set $J$), which satisfy the rational-normal exception. If both alternatives hold, put the component in $I$. The sum of the $e_i$ over $Y$ is $e_Y$ by the degree convention of the item.",
+   "uses": [
+    "lem-sfb-projective-curve-normalization-section-defect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Section 3.2, Theorem 8 proof steps (7), (9)--(10), printed pp.14--15; agent reconstruction of the selected-boundary subcurve filtration (local PDF WANTED, online PDF read)."
+   }
+  },
+  {
+   "text": "By [lem-trf-nodal-subcurve-boundary] applied to $D,Y$, each selected boundary point is a smooth branch on the complementary component and has residue field $k$. Each $w\\in W$ has zero value there: it vanishes on $Y$, hence at the common point, and pullback preserves its zero value. On the smooth normalization it therefore vanishes to order at least one. Put $B_E=\\sum_{p\\text{ selected on }E}[p]$, of degree $b_E$. A degree-$m$ monomial of weight $t\\le j<m$ has $m-t\\ge m-j$ factors from $W$. It vanishes identically on $Y$, and its pullback to $E$ belongs to $H^0(E,A_E^m(-(m-j)B_E))$. This assertion is closed under linear combinations, so it holds for all of $U_{m,j}$ and uses no independence of the boundary conditions.",
+   "uses": [
+    "lem-trf-nodal-subcurve-boundary",
+    "def-sc-divisor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Section 3.2, Theorem 8 proof steps (7), (9)--(10), printed pp.14--15; agent reconstruction of the selected-boundary subcurve filtration (local PDF WANTED, online PDF read)."
+   }
+  },
+  {
+   "text": "For $E\\in I$, [lem-sfb-smooth-curve-section-degree-cap] gives\n$$\\dim H^0(E,A_E^m(-(m-j)B_E))\\le me_E-b_E(m-j)+1,$$\nsince $me_E-b_E(m-j)=m(e_E-b_E)+jb_E\\ge0$. For $E\\in J$, a section in the restriction of $W$ belongs to $H^0(E,A_E(-B_E))$ of degree $e_E-b_E=-1$. The same cap gives zero, so $W$ restricts identically to zero on $E$. Every monomial of weight $j<m$ has a $W$ factor, hence all of $U_{m,j}$ restricts to zero on these components as well. The dimension of an image in a finite direct sum is at most the sum of the dimensions of its component images. Rank-nullity for $\\rho_m|_{U_{m,j}}$ and the bounded kernel from step 2 now give, with one constant $C$ independent of $m,j$,\n$$\\dim U_{m,j}\\le\\sum_{E\\in I}(me_E-b_E(m-j)+1)+C.$$\nSubtracting this from the expression for $h_m$ in step 2, and enlarging $C$, yields\n$$h_m-\\dim U_{m,j}\\ge me_Y+\\sum_{E\\in J}me_E+\\sum_{E\\in I}b_E(m-j)-C.$$\nIn particular embedded nilpotents contribute only to the bounded error before summation.",
+   "uses": [
+    "lem-sfb-smooth-curve-section-degree-cap"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Section 3.2, Theorem 8 proof steps (7), (9)--(10), printed pp.14--15; agent reconstruction of the selected-boundary subcurve filtration (local PDF WANTED, online PDF read)."
+   }
+  },
+  {
+   "text": "Let $\\mathcal B$ be any degree-$m$ monomial basis of $H_m$, with weights $t_M\\in\\{0,\\ldots,m\\}$. Its members of weight at most $j$ are linearly independent inside $U_{m,j}$, so at least $h_m-\\dim U_{m,j}$ of its members have weight greater than $j$. Count each monomial once for every $j=0,\\ldots,t_M-1$ to obtain\n$$\\sum_{M\\in\\mathcal B}t_M=\\sum_{j=0}^{m-1}\\#\\{M:t_M>j\\}\\ge\\sum_{j=0}^{m-1}(h_m-\\dim U_{m,j}).$$\nInsert step 4 and use $\\sum_{j=0}^{m-1}(m-j)=m(m+1)/2$:\n$$\\sum_{M\\in\\mathcal B}t_M\\ge m^2\\left(e_Y+\\sum_{E\\in J}e_E+\\tfrac12\\sum_{E\\in I}b_E\\right)-Cm.$$\nThe additional term $m\\sum_{E\\in I}b_E/2$ is nonnegative and was dropped. Since this holds for every monomial basis it holds for their minimum $w_F(m)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Section 3.2, Theorem 8 proof steps (7), (9)--(10), printed pp.14--15; agent reconstruction of the selected-boundary subcurve filtration (local PDF WANTED, online PDF read)."
+   }
+  },
+  {
+   "text": "Divide the inequality of step 5 by $m^2$ and let $m\\to\\infty$. Step 1 gives\n$$a_F\\ge e_Y+\\sum_{E\\in J}e_E+\\tfrac12\\sum_{E\\in I}b_E.$$\nFor $E\\in J$, $e_E=b_E-1$ and $b_E\\ge2$, hence $e_E-b_E/2=(b_E-2)/2\\ge0$. Since $b=\\sum_{I}b_E+\\sum_{J}b_E$, this proves $a_F\\ge e_Y+b/2$. Together with step 1 it proves both clauses. No step used semistability or connectedness of $Y$; components with $b_E=0$ contribute zero boundary term.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Section 3.2, Theorem 8 proof steps (7), (9)--(10), printed pp.14--15; agent reconstruction of the selected-boundary subcurve filtration (local PDF WANTED, online PDF read)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-bounded-hilbert-weight-polynomials",
+  "lem-sfb-projective-curve-normalization-section-defect",
+  "lem-trf-nodal-subcurve-boundary",
+  "def-sc-divisor",
+  "lem-sfb-smooth-curve-section-degree-cap"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+  "place": "Section 3.2, Theorem 8 proof steps (7), (9)--(10), printed pp.14--15; agent reconstruction of the selected-boundary subcurve filtration (local PDF WANTED, online PDF read)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Leading Hilbert weight of the filtration by linear forms vanishing on a subcurve is at least its degree plus half its boundary nodes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ChevalleyThm.degBound\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"ℕ → (m : ℕ) → ℕ → Multiset (Fin m) → ℕ\", \"doc\": \"The function computes a degree bound for Chevalley's theorem by taking $k + n$ and a function that adds 1 to the count of each natural number obtained from mapping $\\\\text{Fin.val}$ over the multiset $\"}\n  {\"name\": \"WeierstrassCurve.natDegree_preΨ'_le\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (W : WeierstrassCurve R) (n : ℕ),\\n  (W.preΨ' n).natDegree ≤ (n ^ 2 - if Even n then 4 else 1) / 2\", \"doc\": \"For any natural number $ n $, the natural degree of the $ n $-th pre-normalized division polynomial $ \\\\Psi'_n $ associated with a Weierstrass curve satisfies $ \\\\deg(\\\\Psi'_n) \\\\leq \\\\frac{n^2 - 4}{2} $ i\"}\n  {\"name\": \"WeierstrassCurve.natDegree_preΨ_le\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (W : WeierstrassCurve R) (n : ℤ),\\n  (W.preΨ n).natDegree ≤ (n.natAbs ^ 2 - if Even n then 4 else 1) / 2\", \"doc\": \"For any integer $ n $, the natural degree of the pre-division polynomial $ \\\\Psi_n $ for a Weierstrass curve satisfies $ \\\\deg(\\\\Psi_n) \\\\leq \\\\frac{|n|^2 - 4}{2} $ if $ n $ is even, and $ \\\\deg(\\\\Psi_n) \\\\le\"}\n  {\"name\": \"ChevalleyThm.MvPolynomialC.degBound_pos\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"∀ (k : ℕ) (D : ℕ → ℕ) (n : ℕ), 0 < ChevalleyThm.MvPolynomialC.degBound k D n\", \"doc\": \"For any natural number $k$ and function $D : \\\\mathbb{N} \\\\to \\\\mathbb{N}$, the degree bound $\\\\text{degBound}\\\\,k\\\\,D\\\\,n$ satisfies $0 < \\\\text{degBound}\\\\,k\\\\,D\\\\,n$ for all $n \\\\in \\\\mathbb{N}$.\"}\n  {\"name\": \"WeierstrassCurve.natDegree_Φ_le\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (W : WeierstrassCurve R) (n : ℤ), (W.Φ n).natDegree ≤ n.natAbs ^ 2\", \"doc\": \"For any integer $n$, the natural degree of the Weierstrass Φ-polynomial $\\\\Phi^{(n)}(X)$ associated with a Weierstrass curve $W$ satisfies $\\\\deg(\\\\Phi^{(n)}(X)) \\\\leq |n|^2$.\"}\n  {\"name\": \"ChevalleyThm.numBound\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"ℕ → (m : ℕ) → ℕ → Multiset (Fin m) → ℕ\", \"doc\": \"A function that computes a numerical bound used in the context of Chevalley's theorem for multivariate polynomials. It takes natural numbers $k$, $m$, $n$ and a multiset $d$ of elements of type $\\\\text\"}\n  {\"name\": \"WeierstrassCurve.natDegree_ΨSq_le\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (W : WeierstrassCurve R) (n : ℤ), (W.ΨSq n).natDegree ≤ n.natAbs ^ 2 - 1\", \"doc\": \"The cosine of $\\\\pi$ radians is equal to $-1$, i.e., $\\\\cos(\\\\pi) = -1$.\"}\n  {\"name\": \"ChevalleyThm.MvPolynomialC.numBound_succ\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"∀ (k : ℕ) (D : ℕ → ℕ) (n : ℕ),\\n  ChevalleyThm.MvPolynomialC.numBound k D (n + 1) =\\n    ChevalleyThm.MvPolynomialC.numBound k D n * ChevalleyThm.MvPolynomialC.degBound k D n * D n\", \"doc\": \"For natural numbers $k, n$ and function $D : \\\\mathbb{N} \\\\to \\\\mathbb{N}$, the numerical bound at $n+1$ satisfies $\\\\text{numBound}(k, D, n+1) = \\\\text{numBound}(k, D, n) \\\\cdot \\\\text{degBound}(k, D, n) \\\\c\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: ideal filtrations do not give the boundary-branch monomial weight estimate for projective subcurves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vanishing at boundary branches bounds monomial section dimensions on the normalization of the complementary subcurve",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ChevalleyThm.MvPolynomialC.numBound\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"ℕ → (ℕ → ℕ) → ℕ → ℕ\", \"doc\": \"A function that takes a natural number $n$, a function $f : \\\\mathbb{N} \\\\to \\\\mathbb{N}$, and another natural number $m$, returning a natural number used to establish well-founded recursion in the conte\"}\n  {\"name\": \"ChevalleyThm.MvPolynomialC.numBound_zero\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"∀ (k : ℕ) (D : ℕ → ℕ), ChevalleyThm.MvPolynomialC.numBound k D 0 = k\", \"doc\": \"For any natural numbers $k$ and $D$, the numerical bound function evaluated at $k$, $D$, and $0$ returns $k$, establishing the base case for recursion in the context of multivariate polynomials and Ch\"}\n  {\"name\": \"ChevalleyThm.numBound\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"ℕ → (m : ℕ) → ℕ → Multiset (Fin m) → ℕ\", \"doc\": \"A function that computes a numerical bound used in the context of Chevalley's theorem for multivariate polynomials. It takes natural numbers $k$, $m$, $n$ and a multiset $d$ of elements of type $\\\\text\"}\n  {\"name\": \"ChevalleyThm.degBound\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"ℕ → (m : ℕ) → ℕ → Multiset (Fin m) → ℕ\", \"doc\": \"The function computes a degree bound for Chevalley's theorem by taking $k + n$ and a function that adds 1 to the count of each natural number obtained from mapping $\\\\text{Fin.val}$ over the multiset $\"}\n  {\"name\": \"WeierstrassCurve.natDegree_preΨ'_le\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (W : WeierstrassCurve R) (n : ℕ),\\n  (W.preΨ' n).natDegree ≤ (n ^ 2 - if Even n then 4 else 1) / 2\", \"doc\": \"For any natural number $ n $, the natural degree of the $ n $-th pre-normalized division polynomial $ \\\\Psi'_n $ associated with a Weierstrass curve satisfies $ \\\\deg(\\\\Psi'_n) \\\\leq \\\\frac{n^2 - 4}{2} $ i\"}\n  {\"name\": \"ChevalleyThm.MvPolynomialC.degBound\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"ℕ → (ℕ → ℕ) → ℕ → ℕ\", \"doc\": \"A function that computes a degree bound for multivariate polynomials, taking a natural number $n$, a function $f : \\\\mathbb{N} \\\\to \\\\mathbb{N}$, and an element of the sum type $\\\\mathbb{N} \\\\oplus \\\\mathbb\"}\n  {\"name\": \"ChevalleyThm.MvPolynomialC.numBound_succ\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"∀ (k : ℕ) (D : ℕ → ℕ) (n : ℕ),\\n  ChevalleyThm.MvPolynomialC.numBound k D (n + 1) =\\n    ChevalleyThm.MvPolynomialC.numBound k D n * ChevalleyThm.MvPolynomialC.degBound k D n * D n\", \"doc\": \"For natural numbers $k, n$ and function $D : \\\\mathbb{N} \\\\to \\\\mathbb{N}$, the numerical bound at $n+1$ satisfies $\\\\text{numBound}(k, D, n+1) = \\\\text{numBound}(k, D, n) \\\\cdot \\\\text{degBound}(k, D, n) \\\\c\"}\n  {\"name\": \"ChevalleyThm.MvPolynomialC.numBound_mono\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"∀ {k₁ k₂ : ℕ} {D₁ D₂ : ℕ → ℕ},\\n  k₁ ≤ k₂ →\\n    ∀ (n : ℕ),\\n      (∀ i < n, D₁ i ≤ D₂ i) → ChevalleyThm.MvPolynomialC.numBound k₁ D₁ n ≤ ChevalleyThm.MvPolynomialC.numBound k₂ D₂ n\", \"doc\": \"For natural numbers $k₁ ≤ k₂$ and functions $D₁, D₂ : ℕ → ℕ$ satisfying $D₁(i) ≤ D₂(i)$ for all $i < n$, the numerical bound function satisfies $\\\\text{numBound}(k₁, D₁, n) ≤ \\\\text{numBound}(k₂, D₂, n)\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: ideal filtrations do not give the boundary-branch monomial weight estimate for projective subcurves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"subcurve\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "No match: ideal filtrations do not give the boundary-branch monomial weight estimate for projective subcurves."
+  },
+  {
+   "tool": "grep",
+   "query": "subcurve|subCurve|monomial.*weight|weight.*monomial",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "No match: ideal filtrations do not give the boundary-branch monomial weight estimate for projective subcurves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Subcurve span filtration leading Hilbert weight and rational normal complementary components",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Ideal.Filtration.submodule_span_single\", \"module\": \"Mathlib.RingTheory.Filtration\", \"type\": \": Submodule.span (reesAlgebra I) (⋃ i, single R i '' (F.N i : Set M)) = F.submodule\", \"doc\": \"The submodule $ F.\\text{submodule} $ of the Rees algebra $ \\\\mathcal{R}(I) $ is equal to the submodule generated by all elements obtained by embedding each element of the $ i $-th submodule $ I^i M $ of\"}\n  {\"name\": \"Ideal.Filtration.submodule_eq_span_le_iff_stable_ge\", \"module\": \"Mathlib.RingTheory.Filtration\", \"type\": \"(n₀ : ℕ) : F.submodule = Submodule.span _ (⋃ i ≤ n₀, single R i '' (F.N i : Set M)) ↔ ∀ n ≥ n₀, I • F.N n = F.N (n + 1)\", \"doc\": \"For a filtration $ F $ of an $ R $-module $ M $ associated with an ideal $ I $, the Rees algebra submodule $ F.\\text{submodule} $ equals the submodule generated by $ \\\\bigcup_{i \\\\leq n_0} \\\\text{single}_\"}\n  {\"name\": \"IsModuleFiltration\", \"module\": \"Mathlib.RingTheory.FilteredAlgebra.Basic\", \"type\": \"{ι : Type u_1} →\\n  {ιM : Type u_2} →\\n    {R : Type u_3} →\\n      {M : Type u_4} →\\n        {σ : Type u_5} →\\n          {σM : Type u_6} →\\n            [inst : AddMonoid ι] →\\n              [inst_1 : PartialOrder ι] →\\n                [PartialOrder ιM] →\\n                  [VAdd ι ιM] →\\n                    [\", \"doc\": \"A predicate asserting that a family of subsets $\\\\{F_i\\\\}_{i \\\\in \\\\iota}$ of a module $M$ over a semiring $R$ forms a module filtration, where $\\\\iota$ is an ordered additive monoid. This requires that ea\"}\n  {\"name\": \"Ideal.Filtration.recOn\", \"module\": \"Mathlib.RingTheory.Filtration\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    {I : Ideal R} →\\n      {M : Type u_3} →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] →\\n            {motive : I.Filtration M → Sort u} →\\n              (t : I.Filtration M) →\\n                ((N : ℕ → Submodule R M) →\\n                 \", \"doc\": \"The recursion principle for filtrations by an ideal on a module, which allows defining functions by recursion on the filtration's data: a decreasing sequence of submodules $ N_i $ satisfying $ N_{i+1}\"}\n  {\"name\": \"Ideal.Filtration.submodule\", \"module\": \"Mathlib.RingTheory.Filtration\", \"type\": \": Submodule (reesAlgebra I) (PolynomialModule R M)\", \"doc\": \"The submodule of the Rees algebra $ \\\\mathcal{R}(I) $ within the polynomial module $ R[x] $ consisting of all functions $ f : \\\\mathbb{N} \\\\to_0 M $ such that for each $ i \\\\in \\\\mathbb{N} $, the coefficie\"}\n  {\"name\": \"Ideal.Filtration.noConfusion\", \"module\": \"Mathlib.RingTheory.Filtration\", \"type\": \"{P : Sort u} →\\n  {R : Type u_1} →\\n    {inst : CommRing R} →\\n      {I : Ideal R} →\\n        {M : Type u_3} →\\n          {inst_1 : AddCommGroup M} →\\n            {inst_2 : Module R M} →\\n              {t : I.Filtration M} →\\n                {R' : Type u_1} →\\n                  {inst' : CommRing R'} →\\n      \", \"doc\": \"Given a filtration $ t $ on an $ R $-module $ M $ associated with an ideal $ I $, this function allows defining a property or constructing an object by specifying its behavior on the decreasing sequen\"}\n  {\"name\": \"Ideal.Filtration\", \"module\": \"Mathlib.RingTheory.Filtration\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_3) → [inst_1 : AddCommGroup M] → [Module R M] → Type u_3\", \"doc\": \"The structure of a filtration on an $ R $-module $ M $ associated with an ideal $ I $ of a commutative ring $ R $, where $ M $ is an additive commutative group equipped with an $ R $-module structure.\"}\n  {\"name\": \"Ideal.Filtration.casesOn\", \"module\": \"Mathlib.RingTheory.Filtration\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    {I : Ideal R} →\\n      {M : Type u_3} →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] →\\n            {motive : I.Filtration M → Sort u} →\\n              (t : I.Filtration M) →\\n                ((N : ℕ → Submodule R M) →\\n                 \", \"doc\": \"Given a filtration $ t $ on an $ R $-module $ M $ associated with an ideal $ I $, this function allows defining a property or constructing an object by specifying its behavior on the decreasing sequen\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: ideal filtrations do not give the boundary-branch monomial weight estimate for projective subcurves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Leading Hilbert weight for linear forms vanishing on a subcurve bounded below by its degree and half the selected boundary branches",
+   "results": "Actual search log 64b5dbc37b8f7d6c: 8 hits; ChevalleyThm.MvPolynomialC.degBound_pos, WeierstrassCurve.natDegree_preΨ'_le, WeierstrassCurve.natDegree_preΨ_le, RootPairing.coxeterWeightIn_le_four, MvPolynomial.le_weightedTotalDegree, Finsupp.le_weight, MvPowerSeries.le_weightedOrder, MvPowerSeries.weightedOrder_le. Polynomial filtrations and weighted monomial degrees do not state the geometric section-space Hilbert weight lower bound.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "subcurve|subCurve|monomial.*weight|weight.*monomial",
+   "results": "Actual search log 32ff72b1f536c0ec: 13 hits; Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean, Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean, Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean, Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean, Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean, Mathlib/RingTheory/MvPolynomial/Homogeneous.lean, Mathlib/RingTheory/MvPolynomial/EulerIdentity.lean, Mathlib/RingTheory/MvPolynomial/EulerIdentity.lean. Polynomial filtrations and weighted monomial degrees do not state the geometric section-space Hilbert weight lower bound.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"subcurve\"",
+   "results": "Actual search log 4f53cda18c2baa0c: 0 hits; . Polynomial filtrations and weighted monomial degrees do not state the geometric section-space Hilbert weight lower bound.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Subcurve span filtration leading Hilbert weight and rational normal complementary components",
+   "results": "Actual search log a5bdfa992345c6cd: 8 hits; Ideal.Filtration.submodule_span_single, Ideal.Filtration.submodule_eq_span_le_iff_stable_ge, IsModuleFiltration, Ideal.Filtration.recOn, Ideal.Filtration.submodule, Ideal.Filtration.noConfusion, Ideal.Filtration, Ideal.Filtration.casesOn. Polynomial filtrations and weighted monomial degrees do not state the geometric section-space Hilbert weight lower bound.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Subcurve boundary vanishing imposes a lower bound on the sum of weights of any monomial basis of sections of a projective curve",
+   "results": "Actual search log ff63b64204e809e1: 8 hits; ChevalleyThm.numBound, WeierstrassCurve.natDegree_preΨ'_le, WeierstrassCurve.natDegree_preΨ_le, WeierstrassCurve.natDegree_preΨ'_pos, WeierstrassCurve.Affine.CoordinateRing.smul_basis_eq_zero, WeierstrassCurve.natDegree_Φ_le, WeierstrassCurve.natDegree_preΨ₄_le, WeierstrassCurve.natDegree_ΨSq_le. Polynomial filtrations and weighted monomial degrees do not state the geometric section-space Hilbert weight lower bound.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-gieseker-potential-stability",
+  "date": "2026-10-22",
+  "group": "Q92"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.2, Definition 7 and Theorem 8, printed pp.13--15, and equation (6) in Section 3.3. Local PDF WANTED; read online. Supporting estimate: Section 3.2 proof steps (7), (9)--(10), subcurve filtration; Gieseker Proposition 1.0.7, printed pp.55--61, gives the selected-boundary version. Agent formulation includes the rational-normal exception: b=e+1 distinct points span that component, so W restricts to zero on it and its contribution is e>=b/2. Local PDFs WANTED.",
+   "via": [
+    "lem-sfb-gieseker-potential-stability",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-subcurve-span-weight-bound",
+  "worker": "stage1",
+  "summary": "Reconstructed the selected-boundary estimate using normalization section defects, degree caps and explicit counting of monomial basis weights. Kept the rational-normal exception and finite embedded nilpotents. Two new statement-only nodes; no statement change.",
+  "blueprint": "Latest det-thm-sf-ctf-stability-direct-images proof (3), inherited alteration/moduli prerequisite chain; Morrison Section 3.2 steps (7), (9)--(10). Inherited blueprint ancestor tool prints None; preserved from.node=null and filled precise supporting places.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-nodal-subcurve-boundary",
+    "why": "Generic nodal boundary geometry: the selected intersections are smooth branches with residue k; no statement of this unit gives this local geometry."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-nodal-subcurve-boundary"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q121-8b02e5094",
+  "group": "Q121",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q121-8b02e5094 (reviewer sub-agent of L); spot-checked: I read the item in full and the two new statement-only nodes in full. The split is correct, and I wrote no fixes. Item steps: (1) s <= h^0 by injection. a_F comes from lem-sfb-bounded-hilbert-weight-polynomials; its hypotheses hold with r>=3, B=1 and linear Hilbert polynomial, and the semistable clause is unused. (2) The defect node gives a bounded kernel and component/total growth. (3) lem-trf-nodal-subcurve-boundary applies: D is reduced and pure 1-dimensional by connectedness, Y is pure, and D is nodal. Each boundary node has one smooth Z-branch, so a monomial with >= m-j factors in W lies in H^0(E, A^m(-(m-j)B_E)). (4) On I the cap gives <= me-b(m-j)+1; on J the degree is -1, so W|_E = 0; the Y-components have zero image. The algebra checks. (5) The threshold-counting sum is valid for every monomial basis. (6) On J, e-b/2 = (b-2)/2 >= 0. I checked small cases: two lines in P^2 give a_F = 3/2, exactly the bound; a conic plus a line hitting it twice (J case) gives 3 >= 2. New node lem-sfb-smooth-curve-section-degree-cap is true via Stacks 0CCS (r <= d, read at curves.tex l.443), 0AYX/0AYY, and the zero divisor for negative degree. It is not a duplicate: linear-series-degree-dimension-bound needs g >= 2, and trf section-degree-positivity is only the negative half. New node lem-sfb-projective-curve-normalization-section-defect is true via the nilradical and normalization-quotient exact sequences, whose finite-support terms are acyclic and of constant length, plus Riemann-Roch on E_i. All its Stacks labels exist. Neither new node restates a clause of the item or its parent. This is a first split with no re-split note. The item statement is unchanged and is consistent with parent steps 6 and 9. Morrison and Gieseker are not available locally; they are marked WANTED with proof_origin agent, and no SGA is cited. Batch-5 flag on lem-trf-nodal-subcurve-boundary: it is generic nodal intersection geometry that neither assumption gives. Its 586-node closure contains no assumption leaf and no trace-formula or Poincare node (mostly proper-base-change and Nagata nodes). I accept it, and the tool_use is declared."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SubcurveSpanWeightBound",
+  "declaration": "AlgebraicGeometry.SubcurveSpanWeight.subcurve_span_weight_bound",
+  "declarations": [
+   "AlgebraicGeometry.SubcurveSpanWeight.hyperplane",
+   "AlgebraicGeometry.SubcurveSpanWeight.componentDegree",
+   "AlgebraicGeometry.SubcurveSpanWeight.IsRestriction",
+   "AlgebraicGeometry.SubcurveSpanWeight.subcurve_span_weight_bound"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SubcurveSpanWeightBound.lean",
+  "statement": "theorem subcurve_span_weight_bound (k : Type u) [Field k] [IsAlgClosed k] (n : ℕ) (X D Y : Scheme.{u}) [ConnectedSpace X] (i : X ⟶ ℙ(HilbertPlucker.Coordinates.{u} n; Spec (.of k))) [IsClosedImmersion i] (hdim : topologicalKrullDim X = 1) (hgeneric : ∀ x : X, closure ({x} : Set X) ∈ irreducibleComponents X → _root_.IsReduced (X.presheaf.stalk x)) (δ : D ⟶ X) [IsClosedImmersion δ] [IsReduced D] (hred : Function.Surjective δ) (hnondegenerate : ProjectiveHilbertPolynomial.equations k (n + 1) (δ ≫ i) 1 = ⊥) (hnodal : ∀ x : D, x ∈ closedPoints D → ¬((δ ≫ i ≫ (ℙ(HilbertPlucker.Coordinates n; Spec (.of k)) ↘ Spec (.of k))).stalkMap x).hom.FormallySmooth → Nonempty (AdicCompletion (IsLocalRing.maximalIdeal (D.presheaf.stalk x)) (D.presheaf.stalk x) ≃+* (MvPowerSeries (Fin 2) k ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) k) * MvPowerSeries.X 1}))) (t : ℕ) (C : Fin t → Scheme.{u}) [∀ a, IsIntegral (C a)] (j : ∀ a, C a ⟶ D) (hclosed : ∀ a, IsClosedImmersion (j a)) (hdistinct : Function.Injective (fun a ↦ Set.range (j a))) (hcomponents : ∀ E : Set D, E ∈ irreducibleComponents D ↔ ∃ a, Set.range (j a) = E) (S : Finset (Fin t)) (hne : S.Nonempty) (hproper : S ≠ Finset.univ) (y : Y ⟶ D) [IsClosedImmersion y] [IsReduced Y] (hY : Set.range y = ⋃ a ∈ S, Set.range (j a)) (selected : ∀ a, Finset (C a).normalization) (hselected : ∀ a, a ∉ S → ∀ p ∈ selected a, p ∈ closedPoints (C a).normalization ∧ j a ((C a).fromNormalization p) ∈ Set.range y) (hdegree : ∀ a, a ∉ S → 0 < componentDegree (j a ≫ δ ≫ i)) (hexception : ∀ a, a ∉ S → ((selected a).card : ℤ) ≤ componentDegree (j a ≫ δ ≫ i) ∨ (componentDegree (j a ≫ δ ≫ i) = ((selected a).card : ℤ) - 1 ∧ 2 ≤ (selected a).card ∧ ∃ e : C a ≅ ℙ(HilbertPlucker.Coordinates.{u} 0; Spec (.of k)), e.hom ≫ (ℙ(HilbertPlucker.Coordinates 0; Spec (.of k)) ↘ Spec (.of k)) = j a ≫ δ ≫ i ≫ (ℙ(HilbertPlucker.Coordinates n; Spec (.of k)) ↘ Spec (.of k)) ∧ ∃ σ : ModuleCat.of k (BoundedHilbertWeight.LinearForms k n) ⟶ BoundedHilbertWeight.sections k n (j a ≫ δ ≫ i) 1, IsRestriction (j a ≫ δ ≫ i) 1 σ ∧ Function.Surjective σ)) (ρ : ∀ m : ℕ, ModuleCat.of k (MvPolynomial.homogeneousSubmodule (HilbertPlucker.Coordinates.{u} n) k m) ⟶ BoundedHilbertWeight.sections k n i m) (hρ : ∀ m, IsRestriction i m (ρ m)) (basis : Module.Basis (HilbertPlucker.Coordinates.{u} n) k (BoundedHilbertWeight.LinearForms k n)) (w : HilbertPlucker.Coordinates.{u} n → ℕ) (hw : ∀ a, w a ≤ 1) (hflag : BoundedHilbertWeight.flag basis w 0 = ProjectiveHilbertPolynomial.equations k (n + 1) (y ≫ δ ≫ i) 1) (aF : ℚ) (haF : ∃ m₀ A : ℕ, ∀ m : ℕ, m₀ ≤ m → (∃ M, BoundedHilbertWeight.IsMonomialBasis (ρ m) basis M) ∧ |(BoundedHilbertWeight.weight (ρ m) basis w : ℚ) - aF * (m : ℚ)^2| ≤ (A : ℚ) * m) : Module.finrank k ((BoundedHilbertWeight.LinearForms k n) ⧸ ProjectiveHilbertPolynomial.equations k (n + 1) (y ≫ δ ≫ i) 1) ≤ Module.finrank k (BoundedHilbertWeight.sections k n (y ≫ δ ≫ i) 1) ∧ (∑ a ∈ S, (componentDegree (j a ≫ δ ≫ i) : ℚ)) + (∑ a ∈ Sᶜ, ((selected a).card : ℚ)) / 2 ≤ aF",
+  "branch": "newtargets-dag",
+  "by": "Q61",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The reduced support and subcurve are represented up to their unique closed-immersion isomorphisms; the finite component family is exhaustive and irredundant. W is the existing degree-one chartwise equation subspace, exactly the kernel of restriction. The leading coefficient is specified by the existing monomial-basis weight and its eventual quadratic error. Rational-normal means an over-k projective-line isomorphism and surjectivity of the actual ambient coordinate restriction, with the prescribed normalized hyperplane degree. Helpers only specialize canonical hyperplane pullback, normalized component degree and the chart normalization already used by the bounded-weight dependency. No semistability, linear normality, reducedness of X or connectedness of Y is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b292d8aac",
+  "group": "Q61",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion matches the node: alg. closed k; closed X in P^{n+1} that is connected, 1-dim and generically reduced; D = X_red up to unique iso, nondegenerate via degree-1 equations = ⊥; nodal hypothesis at closed non-formally-smooth points (ring iso equivalent to k-algebra iso); exhaustive irredundant integral components; Y = reduced union over nonempty proper S, connectedness not assumed; selected points form Finsets of closed points on the canonical normalization with image in Y; e_E = Euler degree of the pulled-back O(1) on the normalization; exception = (b ≤ e) or (e = b−1, b ≥ 2, C ≅ P1 over k, chart-pinned surjective V → H0(O(1))); W = flag at weight 0 = equations(Y,1); a_F pinned by the unique eventual quadratic bound, as in the bounded-weight lemma with B = 1. Conclusions s ≤ h0 and Σ_S e + (Σ_{Sᶜ} b)/2 ≤ a_F are exact. Statement verbatim; only lean and two landed def stmt_deps (STMT_DEPS MAY GAIN LANDED) changed; helpers real; single sorry; docstrings with six proof steps; lines ≤ 88. Not compiled (no change). Advisories: zeroSections owned by theorem node uniform-projective-fibre-vanishing, reached via def-sfb-weighted-monomial-basis-weight and the lemma's identical chart condition; components given as integral closed subschemes rather than reducedNormalizationComponent (canonically isomorphic)."
+ }
+}

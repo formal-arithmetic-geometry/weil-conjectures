@@ -1,0 +1,139 @@
+{
+ "id": "lem-sfb-projective-line-fibrewise-trivial-descent",
+ "kind": "statement",
+ "title": "A fibrewise trivial invertible class on a projective line descends to the base",
+ "statement": "Let $S$ be any scheme, $q:P=\\operatorname{ProjectiveLine}(S)\\to S$ its standard projective line [def-nagata-projective-space-base-change], and $L\\in\\operatorname{Pic}(P)$ [def-sc-picard-group]. For each point $s\\in S$, let $j_s:\\operatorname{Spec}\\kappa(s)\\to S$ be the canonical residue-field morphism [def-weil-residue-field] and let $i_s:\\mathbf P^1_{\\kappa(s)}\\to P$ be its standard projective-space base change. Suppose $i_s^*L=1$ in the Picard group for every $s$, with pullback and unit as in [lem-pc-pic-presheaf-functorial] and [lem-sc-pic-group]. Then there exists $B\\in\\operatorname{Pic}(S)$ such that $q^*B=L$. No nonemptiness, reducedness, connectedness or Noetherianity is assumed.",
+ "source": {
+  "document": "literature/ega/EGA-II_PMIHES-8-1961.pdf",
+  "place": "Remark 4.2.7, printed p.75, degree-zero case of projective-bundle Picard classification. Arbitrary-base passage uses Stacks Tag 0B8W, limits.tex, lemma-descend-invertible-modules; the generic classification already packages that passage."
+ },
+ "stmt_deps": [
+  "def-nagata-projective-space-base-change",
+  "def-sc-picard-group",
+  "def-weil-residue-field",
+  "lem-pc-pic-presheaf-functorial",
+  "lem-sc-pic-group"
+ ],
+ "proof": [
+  {
+   "text": "Apply quotient geometry to the rank-two free module and its ordered basis. Obtain an isomorphism e from its relative Proj P to the standard ProjectiveLine S over S and an isomorphism e*O(1) to its tautological line A. Apply projective-bundle Picard classification to the pullback of a representative M of L, obtaining a locally constant d, an invertible N, and e*M isomorphic to W tensor p*N, where W is the glued degree twist.",
+   "uses": [
+    "lem-trf-projective-bundle-quotient-geometry",
+    "lem-sfb-projective-bundle-picard-classification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each s, let i be the standard residue-field base-change map and a=i;e^{-1}. Every point of the source of a maps under p to s. Hence a factors through the open p^{-1}(lineDegreeOpen d (d(s))). Pull the twist_restrict isomorphism back through this factorization: a*W is isomorphic to a*(integerLinePower A (d(s))). The coefficient a*p*N is trivial, because it factors through the invertible module j_s*N on the one-point scheme Spec kappa(s). The hypothesis trivializes a*e*M. Pulling the decomposition back and cancelling this trivial coefficient makes a*(integerLinePower A (d(s))) trivial.",
+   "uses": [
+    "lem-sfb-projective-bundle-picard-classification",
+    "lem-sc-pic-group"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "IntegerLinePower has Picard class [A]^m: induct on natural tensor powers for positive m, and use the dual class for negative m. Pullback is a group homomorphism. The isomorphism e*O(1)=A and the actual twist base-change isomorphism identify a*[A] with the class of O(1) on the standard projective line over kappa(s). To show this class has no torsion, apply the same free-model comparison and the field clause of projective-bundle Picard classification over kappa(s). Its uniqueness applied to the structure module compares exponent m to exponent zero. Thus d(s)=0.",
+   "uses": [
+    "lem-trf-projective-bundle-quotient-geometry",
+    "lem-sfb-projective-bundle-picard-classification",
+    "lem-sc-pic-group"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Since d(s)=0 for every s, p^{-1}(lineDegreeOpen d 0) is the top open. The twist_restrict clause at zero, transported along the top-open scheme isomorphism, identifies W with integerLinePower A 0, definitionally the structure module. The decomposition reduces to e*M isomorphic to p*N. Pass to Picard classes and use injectivity of pullback along e to obtain q*[N]=L. The argument also applies to the empty base; no point is selected globally.",
+   "uses": [
+    "lem-sfb-projective-bundle-picard-classification",
+    "lem-sc-pic-group"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-projective-bundle-quotient-geometry",
+  "lem-sfb-projective-bundle-picard-classification",
+  "lem-sc-pic-group"
+ ],
+ "proof_origin": {
+  "kind": "adapted",
+  "document": "literature/ega/EGA-II_PMIHES-8-1961.pdf",
+  "place": "Remark 4.2.7, printed p.75, degree-zero case of projective-bundle Picard classification. Arbitrary-base passage uses Stacks Tag 0B8W, limits.tex, lemma-descend-invertible-modules; the generic classification already packages that passage. Formal assembly uses restriction to degree strata instead of the arbitrary-base-change clause, and never unfolds the glued product.",
+  "by": "T1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An invertible sheaf on projective space trivial on every residue field fibre is pulled back from the base scheme",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.fiber, AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, Trivialization.pullback_source, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType, AlgebraicGeometry.Scheme.IdealSheafData.comap_bot, AlgebraicGeometry.ProjectiveSpectrum.Proj.specStalkEquiv, Trivialization.pullback",
+   "date": "2026-10-27",
+   "verdict": "No fibrewise descent theorem: the hits concern fibres, module pullback and topological bundle trivializations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A line bundle on projective space trivial on all residue field fibres is the pullback of a line bundle from the base",
+   "results": "8 hits: AlgebraicGeometry.Proj.pullbackAwayιIso, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd_assoc, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst_assoc, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd, AlgebraicGeometry.Proj.fromOfGlobalSections",
+   "date": "2026-10-27",
+   "verdict": "No fibrewise descent theorem: the hits concern Proj chart pullback isomorphisms and maps from global sections."
+  },
+  {
+   "tool": "grep",
+   "query": "Picard.*[Pp]rojective|[Pp]rojective.*Picard|Pic.*projectiveSpace",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "No matching projective Picard theorem in Mathlib."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveLineAutomorphismHyperplane",
+  "date": "2026-10-27",
+  "group": "M4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "Paragraph (2), finite diagonal components before trace: divisor-line comparison when changing the standard projective-line model. A fibrewise trivial invertible class on a projective line descends to the base.",
+   "via": [
+    "lem-sfb-projective-line-automorphism-hyperplane",
+    "lem-sfb-diagonal-trace-diagonal-pic",
+    "lem-sfb-diagonal-trace-finite-pretrace-components"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveLineFibrewiseTrivialDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveLineFibrewiseTrivialDescent.lean",
+  "declaration": "AlgebraicGeometry.ProjectiveLine.exists_base_class_of_fibrewise_trivial",
+  "statement": "theorem exists_base_class_of_fibrewise_trivial (S : Scheme.{u})\n    (L : (ProjectiveLine S).Pic)\n    (hL : ∀ s : S,\n      Scheme.Pic.map (ProjectiveSpace.map (ULift.{u} (Fin 2))\n        (S.fromSpecResidueField s)) L = 1) :\n    ∃ B : S.Pic, Scheme.Pic.map (ProjectiveLine S ↘ S) B = L",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261027T053008-L-504335",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261027T094519-L-237800",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,91 @@
+{
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-cbc-finite-constant-coefficient-transport",
+  "lem-weil-pbc-ordered-exchange-coefficient-comparison"
+ ],
+ "proof_deps": [
+  "lem-cbc-completed-support-ambient-comparisons",
+  "def-weil-pbc-ordered-coefficient-comparison-data",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "def-weil-pbc-adic-coefficient-datum"
+ ],
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedSupportIntermediateTower",
+  "date": "2026-10-26",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-cbc-completed-support-intermediate-tower",
+   "place": "Finite reduction/unit subcalculation isolated from finiteUnits"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedSupportIntermediateTower",
+  "file": "lean/Sheaf/Paper/CompletedSupportIntermediateTower.lean",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-26",
+  "declaration": "AlgebraicGeometry.Scheme.CompletedSupportIntermediateTower.finiteRingUnit_isIso",
+  "statement": "theorem finiteRingUnit_isIso {U : Scheme.{t}} (n : ℕ) :\n    IsIso (whiskerRight (ringUnit d U) (d.reduction U n))"
+ },
+ "id": "lem-cbc-completed-support-finite-ring-unit-iso",
+ "kind": "statement",
+ "title": "Invertibility of the finite reduction of the completed ring unit",
+ "statement": "For the completed coefficient datum on every scheme U, the reduction of the completed ring unit is an isomorphism: whiskerRight (ringUnit d U) (d.reduction U n) is invertible for every n : ℕ.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/thm-cbc-complete-proetale.proof.md",
+  "place": "Finite reduction/unit subcalculation in the proof of lem-cbc-completed-support-intermediate-tower; the two component obligations isolated from finiteUnits."
+ },
+ "proof": [
+  {
+   "text": "First prove that exact conservative functors between abelian categories induce conservative derived functors: apply the homology comparison isomorphism, reflect each homology isomorphism, and use DerivedCategory.isIso_iff. The second equation of rho_unit transports ringUnit across ringCompletionRestriction to the constant-coefficient unit. The second conjunct of strictUnits at the identity immersion makes its constant reduction invertible. Cancel the completion-restriction isomorphism, transport through rho, and reflect through exchangeTowerRes, whose underlying scalar restriction is exact and conservative. Thus completedReductionTower maps every component of ringUnit to an isomorphism. Apply derived evaluation at n, use completedReductionEvaluation, and reflect through exact scalar restriction along the quotient projection. Componentwise invertibility proves the stated natural transformation is invertible.",
+   "uses": [
+    "lem-cbc-completed-support-ambient-comparisons",
+    "def-weil-pbc-ordered-coefficient-comparison-data",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/thm-cbc-complete-proetale.proof.md",
+    "place": "Finite reduction/unit subcalculation in the proof of lem-cbc-completed-support-intermediate-tower; the two component obligations isolated from finiteUnits."
+   }
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/thm-cbc-complete-proetale.proof.md",
+  "place": "Finite reduction/unit subcalculation in the proof of lem-cbc-completed-support-intermediate-tower; the two component obligations isolated from finiteUnits. A8 (2026-10-26): implemented by transport of the already stated constant strict-unit theorem through rho_unit, followed by evaluation and exact scalar conservativity."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261026T002054-L-54844",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261026T091113-L-3305632",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

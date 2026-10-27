@@ -12,42 +12,49 @@
  ],
  "proof": [
   {
-   "text": "put C = AdicCompletion I A and J = I C. Completion is Noetherian and J-complete,\nand evaluation identifies C/J^(n+1) with A/I^(n+1). A finite C-module N is complete and\nfinitely presented. Its reduction modulo J is finite as a module over C/J = A/I.\nOn a site object U, the constant sections of C/J^(n+1) are flat over that quotient;\ntheir transition maps are surjective. The limit-flat tensor theorem identifies\nN tensor_C H(U) with the limit of the constant quotient-module sections. The\nfinitely presented constant-section tensor comparison identifies this with the\nsections of H tensor_(constant C) constant N. These comparisons are natural in U\nand N, and send a tensor to its projected scalar times the residue of N.\nConsequently they sheafify to the specified realization isomorphisms; the same\nformula gives their linearity and naturality. H is flat over constant C by 093M\napplied to (C,J), so the exact constant functor followed by scalar extension is\nexact. Restricting to finite modules preserves their finite limits and colimits.\nFinally N, restricted to A, is I-complete; its quotient by I is finite over A/I.\nUse the maximal covering sieve and the realization isomorphism on every object\nfor the adic-lisse local model. The projected tensor formula gives its scalar law.\nThe argument includes the zero ring, I = 0, I = top, and N = 0.",
+   "text": "Let C be the completion and J = IC. The kernel of eval_n is J^n, by the adic evaluation kernel formula and scalar restriction. The quotient first isomorphism theorem gives C/J^n = A/I^n. Its evaluation normalization proves the successor-transition square, so constant sheafification produces an isomorphism of the quotient-ring towers. Transporting the scalar phi through the induced limit isomorphism gives the canonical coefficient map for (C,J). Completion is Noetherian, so the existing flat completed-algebra theorem applies to this presentation. It proves ordinary scalar extension along phi exact; compose with exact constant-module sheafification and then the exact inclusion of finite modules. Additivity is the composite of the existing additive constant functor and additive scalar extension.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-adic-completion-mod-power",
+    "lem-weil-pbc-completed-constant-algebra-flat-quotients",
+    "lem-weil-pbc-completed-constant-sheaf-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A finite C-module N is J-complete by the finite-module completeness theorem, since C is Noetherian and J-complete. Scalar restriction gives I-completeness. The map A -> C/J is surjective: lift eval_1(c) to an element a of A, and eval_1(c - a) = 0 gives c - a in J. Thus C/J is finite over A. The finite C-module N/JN is finite over C/J and hence over A. Transport this property through the canonical scalar-restriction quotient isomorphism to N/IN.",
    "uses": [
     "lem-weil-pbc-adic-completion-noetherian",
     "lem-weil-pbc-adic-completion-mod-ideal",
-    "lem-weil-pbc-adic-completion-mod-power",
-    "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
-    "lem-sc-noetherian-finite-module-finite-presentation",
-    "lem-weil-pbc-constant-module-section-properties",
-    "lem-weil-pbc-limit-flat-modules",
-    "def-pur-sheaf-tensor-product",
-    "lem-weil-pbc-completed-constant-sheaf-reduction",
-    "def-weil-pbc-adic-lisse-module"
+    "lem-weil-pbc-finite-module-complete-over-complete-noetherian"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 093J--093M and more-algebra.tex Tag 0912"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Use the finite-module tensor-to-limit comparison for the family of realization isomorphisms, its projection linearity and its naturality. To prove local lissity, choose the maximal covering sieve of the terminal pro-etale object. On every member use the same underlying A-module N. Its completeness and finite first quotient were just proved. Forget each comparison to additive sheaves and restrict it to the over-site. Its scalar condition is the supplied projection-linearity condition evaluated at the underlying over-site object. These constructions fill all fields of CompletedConstantModuleRealization with scalar phi; the scalar equality is reflexivity.",
+   "uses": [
+    "lem-weil-pbc-completed-constant-finite-module-comparison",
+    "def-weil-pbc-adic-lisse-module",
+    "def-weil-pbc-completed-constant-realization-data"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-adic-completion-noetherian",
-  "lem-weil-pbc-adic-completion-mod-ideal",
   "lem-weil-pbc-adic-completion-mod-power",
-  "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
-  "lem-sc-noetherian-finite-module-finite-presentation",
-  "lem-weil-pbc-constant-module-section-properties",
-  "lem-weil-pbc-limit-flat-modules",
-  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-completed-constant-algebra-flat-quotients",
   "lem-weil-pbc-completed-constant-sheaf-reduction",
-  "def-weil-pbc-adic-lisse-module"
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+  "lem-weil-pbc-completed-constant-finite-module-comparison",
+  "def-weil-pbc-adic-lisse-module",
+  "def-weil-pbc-completed-constant-realization-data"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "document",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "proof (c): bounded adic-lisse finite-type terms; module-level completion comparison"
+  "place": "Tags 093J--093M: T4 formal quotient-tower transport proves exactness; finite complete module algebra and restriction of the comparison prove the adic-lisse local models. The tensor-to-limit comparison is isolated in the new strictly smaller lemma."
  },
  "mathlib_searches": [
   {
@@ -115,14 +122,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-26",
   "by": "L",
-  "reviewer": "C-445d0",
-  "group": "E4",
-  "result": "fix",
-  "landing": "20261021T011016-L-2028359",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261026T235939-L-1472778",
   "kind": "interface",
-  "note": "independent cc review: delivered item/data/tower/2 sorry modules vs live CompletedConstantFiniteComplexRealization (moved decls byte-identical, theorem signature verbatim), item node vs its Lean proof, 3 direct importers compiled against delivered modules"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

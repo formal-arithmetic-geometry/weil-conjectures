@@ -1,0 +1,121 @@
+{
+ "id": "lem-pur-ordered-affine-line-transpose-normalization",
+ "kind": "statement",
+ "title": "Normalization of the ordered line transpose",
+ "statement": "In the finite purity setting [def-pur-conventions], let Y be separated finite type over k. The coefficient-unit transpose at dimension one, transported by tateSourceIso as in [def-pur-ordered-affine-trace-data], equals lineNormalizedIntegration: the prescribed open-counit restriction of projective trace transported through the canonical source and compactification comparisons. No projection statement in higher dimension or block law is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/_section.md",
+  "place": "Step 4 of lem-pur-ordered-affine-transpose-projection: normalized affine-line integration; sk-prop-an Step 5(b,c) and Step 6."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-ordered-affine-transpose-data",
+  "def-pur-ordered-affine-trace-data"
+ ],
+ "proof": [
+  {
+   "text": "Proof: unfold the first successor of the ordered recursion. Its preceding comparison\nis the identity. The exceptional identity compositor merely changes the equation\nq_0 ≫ id = p_1. Uniqueness of the ordinary right adjoint makes lineExceptionalIso\npreserve the counit after the canonical compactification comparison. The defining\nHom-equivalence inverse applied to the affine-line comparison therefore recovers its\naugmentation. This is inverse canonical projection followed by tensor of the actual\nopen-counit restriction of the projective trace, and then the coefficient right\nunitor. At the unit coefficient, the projection unit law and the canonical inverse\nimage of the unit identify this composite with the trace itself. The source transport\nis exactly tateSourceIso inverse followed by sourceReassociation at zero and\nlineSource_obj_eq; fixedSourceTransport is exactly the same proper/open comparison\nused in the counit calculation. These are the factors of lineNormalizedIntegration.\nCancel the unitors and their inverses to obtain the equation, also for empty Y.",
+   "uses": [
+    "def-pur-affine-space-comparison",
+    "def-weil-pbc-composite-adjunction",
+    "def-pur-affine-line-purity-comparison",
+    "lem-weil-pbc-adjunct-counit-identity",
+    "lem-pur-projection-formula-coefficient-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-affine-space-comparison",
+  "def-weil-pbc-composite-adjunction",
+  "def-pur-affine-line-purity-comparison",
+  "lem-weil-pbc-adjunct-counit-identity",
+  "lem-pur-projection-formula-coefficient-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/_section.md",
+  "place": "Step 4 of lem-pur-ordered-affine-transpose-projection: normalized affine-line integration; sk-prop-an Step 5(b,c) and Step 6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of a comparison defined by iterated adjunction transpose and the projection formula",
+   "results": "Generic naturality and adjunction counit lemmas only; none fixes the project ordered affine maps.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"counit\"",
+   "results": "Adjunction.counit_naturality, homEquiv_counit and comp_counit_app are useful generic tools, not the ordered affine assertion.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "At the unit coefficient the adjunction transpose of the affine line purity map equals the normalized compact support trace",
+   "results": "No Mathlib declaration specifies the project affine purity and trace maps.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv.*naturality|inv_hom_id|comp_counit_app",
+   "results": "Generic categorical identities only. Searched both project roots for orderedAffine, tateSourceIso, BlockLaw and lineNormalizedIntegration. Only the assigned module contains these constructions; AffineSpaceTraceFactorization is a consumer. Blueprint searches for ordered affine comparison natural, transpose projection and affine line transpose normalization gave no exact prior node.",
+   "date": "2026-10-26",
+   "verdict": "no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.OrderedAffineTransposeProjection",
+  "date": "2026-10-26",
+  "group": "S3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Step 4 of lem-pur-ordered-affine-transpose-projection: normalized affine-line integration; sk-prop-an Step 5(b,c) and Step 6.",
+   "via": [
+    "lem-pur-ordered-affine-transpose-projection"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OrderedAffineLineTransposeNormalization",
+  "file": "lean/Sheaf/Paper/OrderedAffineLineTransposeNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.OrderedAffineTranspose.orderedAffineTranspose_line",
+  "statement": "theorem orderedAffineTranspose_line\n    (P : WeilConjectures.PurityFiniteSetting.{u}) (Y : Scheme.{u})\n    (aY : Y ⟶ Spec (.of P.field.k))\n    [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY]\n    : integration P Y aY 1 = lineNormalizedIntegration P Y aY",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b2367",
+  "group": "S3",
+  "result": "fix",
+  "landing": "20261025T211647-L-4017776",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b2367",
+  "group": "S3",
+  "result": "fix",
+  "landing": "20261025T211647-L-4017776",
+  "kind": "interface",
+  "note": "independent cc review: Delivered item, Data module and 3 child modules + nodes compared with clone sheaf-dag (theorem header byte-identical, 17 defs verbatim plus @[irreducible]); reader gate compiled the 5 delivered modules and 4 clone consumers (AffineSpaceTraceProductData/SuccessorContraction/ContractionProduct/Factorization) together, all OK; children's statements read against the AffineSpacePurity and AffineLinePurity defs"
+ }
+}

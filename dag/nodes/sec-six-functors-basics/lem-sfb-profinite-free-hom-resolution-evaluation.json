@@ -1,0 +1,524 @@
+{
+ "id": "lem-sfb-profinite-free-hom-resolution-evaluation",
+ "kind": "statement",
+ "title": "Free profinite internal Hom evaluated on arbitrary injective resolutions",
+ "statement": "Work on the small coherent profinite site of [def-weil-size-convention], whose coverings are finite jointly surjective families, in the compatible coefficient universes there. Use internal modules over a commutative condensed ring [sk-def-sfb-condensed-ring, sk-def-sfb-module-objects], with sheafified abelian tensor [sk-def-sfb-sheaf-tensor] and ordinary derived categories [sk-def-sfb-derived-categories]. Let $A$ be any such commutative condensed ring, and let $E_A$ be the internal-to-sectionwise module equivalence [def-weil-pbc-internal-abelian-sheaf-module-equivalence]. Write $A_{\\mathrm{sec}}$ for its sheaf of section rings. Internal $A$-modules form a Grothendieck abelian category and admit nonnegative injective resolutions. The equivalence $E_A$ is exact, preserves injectives, and identifies internal tensor and its Hom right adjoint with sectionwise module tensor and slice sheaf Hom [def-pur-sheaf-hom]. For a profinite set $P$, let $A[P]$ be the free internal module on $S\\mapsto C(S,P)$ [def-sfb-condensed-free-module-adjunction] and set $H_P(N)=\\underline{\\operatorname{Hom}}_A(A[P],N)$. There are additive isomorphisms\n$$H_P(N)(S)\\cong N(S\\times P),$$\nnatural in the module $N$ and in both profinite variables. Here $A(S)$ acts on the right through restriction along $S\\times P\\to S$. The isomorphism is evaluation on the tautological free generator over $S\\times P$. Under it, restriction along $u:S'\\to S$ is $N(u\\times1_P)$, and precomposition with $A[v]:A[P']\\to A[P]$ for $v:P'\\to P$ is $N(1_S\\times v)$.\nFor every internal module $M$ and every nonnegative injective resolution $M\\to I^\\bullet$, the complex $J^\\bullet=H_P(I^\\bullet)$ represents $RH_P(M[0])$ in $D(\\operatorname{Mod}_A)$. Evaluation gives $J^n(S)=I^n(S\\times P)$, with differential $d_{I^\\bullet}(S\\times P)$. The augmentation $H_P(M)[0]\\to J^\\bullet$ evaluates to $M(S\\times P)[0]\\to I^\\bullet(S\\times P)$ induced by the given resolution. All these identifications commute with maps of resolutions and the two displayed restriction operations. No acyclicity of $M$ on profinite objects or projectivity of $A[P]$ is asserted.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open-direct-image profinite-parameter input: original steps 1–2 of lem-sfb-normed-scalar-profinite-hom-acyclic. Agent formulation of transport and free-generator evaluation; Stacks sites-modules.tex Tag 03EO (lemma-internal-hom-adjoint-tensor), and sites-cohomology.tex section-internal-hom for injective Hom complexes."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "sk-def-sfb-sheaf-tensor",
+  "sk-def-sfb-derived-categories",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-pur-sheaf-hom",
+  "def-sfb-condensed-free-module-adjunction",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-module-objects",
+  "def-sfb-modobj-internal-hom",
+  "def-sfb-right-derived-functor",
+  "def-sfb-condensed-equivariant-bar-data"
+ ],
+ "proof": [
+  {
+   "text": "The profinite representables are sheaves: for a finite jointly surjective covering of $T$, put $q:\\coprod T_i\\to T$. This is a compact-Hausdorff surjection, hence a quotient map by [lem-sfb-compact-hausdorff-surjection-quotient]. Compatible continuous maps $T_i\\to P$ descend uniquely as set maps along $q$, and continuity follows from its quotient property. The empty covering of the empty object also satisfies this assertion. Products are the usual finite products of profinite spaces, so $h_S\\times h_P=h_{S\\times P}$. The size convention makes this a small ringed site. Apply [lem-pur-ringed-site-grothendieck-abelian] to $A_{\\rm sec}$. The equivalence $E_A$ of [def-weil-pbc-internal-abelian-sheaf-module-equivalence] and preservation of limits and colimits by equivalences [lem-galois-equivalence-preserves-limits] transport its generator, colimits and exact filtered colimits to internal modules. Thus these are Grothendieck abelian. By [lem-sp-grothendieck-enough-injectives], embed $M$ into $I^0$, its cokernel into $I^1$, and each successive cokernel into the next injective. The differentials are quotient followed by embedding; their kernels are the preceding images. With zero terms in negative degrees this is a nonnegative injective resolution.",
+   "uses": [
+    "lem-sfb-compact-hausdorff-surjection-quotient",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-galois-equivalence-preserves-limits",
+    "lem-sp-grothendieck-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A5, section-unbounded, opening paragraph; compact quotient descent and successive-cokernel resolution construction written here"
+   }
+  },
+  {
+   "text": "By [lem-pe-internal-section-tensor-comparison], $E_A$ is exact and identifies relative tensors by the map that is the identity on local pure tensors. It preserves injectives: a lifting problem into $E_A(I)$ along a monomorphism transports through the inverse exact equivalence to a lifting problem into $I$, and a lift transports back. The internal Hom $\\underline{\\operatorname{Hom}}_A(K,-)$ is right adjoint to $K\\otimes_A-$ by [def-sfb-modobj-internal-hom]. The tensor/Hom adjunction of [lem-pc-sheaf-modules-tensor-closed] therefore identifies $E_A\\underline{\\operatorname{Hom}}_A(K,N)$ with $\\mathcal Hom_{A_{\\rm sec}}(E_AK,E_AN)$: their Hom sets from $E_AL$ both equal $\\operatorname{Hom}_A(K\\otimes_A L,N)$, naturally in $L$. The representing isomorphism carries evaluation to evaluation, because both evaluations correspond to the identity under this bijection. This also fixes the normalization of the transported Hom.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-sfb-modobj-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EO, lemma-internal-hom-adjoint-tensor; transport by the pure-tensor comparison"
+   }
+  },
+  {
+   "text": "For any internal module $B$, the free adjunction [def-sfb-condensed-free-module-adjunction] and [lem-galois-yoneda-hom-bijection] give $B(S)\\cong\\operatorname{Hom}_A(A[h_S],B)$, by evaluation at $[1_S]$. Apply this to $B=H_P(N)$. Use the Hom adjunction from step 2 and the generator-preserving tensor isomorphism of [lem-sfb-condensed-free-linearization-tensor] to obtain\n$$H_P(N)(S)\\cong\\operatorname{Hom}_A(A[h_S]\\otimes_A A[h_P],N)\\cong\\operatorname{Hom}_A(A[h_{S\\times P}],N)\\cong N(S\\times P).$$\nFor $m\\in N(S\\times P)$, the associated tensor map sends a local generator $[s]\\otimes[p]$ over $T$, with $s:T\\to S$ and $p:T\\to P$, to $N((s,p))(m)$. Conversely, if $x\\in H_P(N)(S)$, pull $x$ to $S\\times P$ along $\\mathrm{pr}_S$ and evaluate it on $[\\mathrm{pr}_P]$. These maps are inverse: this last evaluation recovers $m$, and all other values follow by restriction along $(s,p)$ and linear extension. Equality on generalized generators detects equality by the cited linearization node. Addition commutes with these formulas; multiplying $x$ by $a\\in A(S)$ multiplies its value by $A(\\mathrm{pr}_S)(a)$. Thus the bijection is additive and has the asserted scalar action.",
+   "uses": [
+    "def-sfb-condensed-free-module-adjunction",
+    "lem-galois-yoneda-hom-bijection",
+    "lem-sfb-condensed-free-linearization-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EO, lemma-internal-hom-adjoint-tensor, combined with free linearization and Yoneda; explicit generator computation"
+   }
+  },
+  {
+   "text": "In the formula of step 3, replacing $x$ by its restriction along $u:S'\\to S$ replaces $s:T\\to S'$ by $u\\circ s$. Hence it sends $m$ to $N(u\\times1_P)(m)$. Precomposition with $A[v]$, for $v:P'\\to P$, replaces the generator $[p']$ by $[v\\circ p']$ and sends $m$ to $N(1_S\\times v)(m)$. Finally a module map $b:N\\to N'$ gives $b_TN((s,p))(m)=N'((s,p))b_{S\\times P}(m)$. These identities prove naturality in all three variables, including mixed compositions, because $(u\\times1)\\circ(1\\times v)=(1\\times v)\\circ(u\\times1)$ with the corresponding sources and targets.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), profinite-parameter input; naturality calculation on the generators of step 3"
+   }
+  },
+  {
+   "text": "The functor $H_P$ is additive by the bilinear evaluation formula in step 3; it is left exact as the right adjoint of tensor from step 2. By [lem-sfb-grothendieck-k-injective] and step 1 every complex in internal modules admits a K-injective resolution, so [def-sfb-right-derived-functor] supplies $RH_P$ and its computation comparison on K-injectives. Any given nonnegative injective resolution $M[0]\\to I^\\bullet$ is K-injective by [lem-weil-pbc-bounded-below-injectives-kinjective]. Consequently the canonical derived computation is\n$$RH_P(M[0])\\cong H_P(I^\\bullet).$$\nIts augmentation is degreewise application of $H_P$ to $M[0]\\to I^\\bullet$, followed by localization, exactly as in the computation unit in [def-sfb-right-derived-functor]. This derives $H_P$ only in its module variable.",
+   "uses": [
+    "lem-sfb-grothendieck-k-injective",
+    "def-sfb-right-derived-functor",
+    "lem-weil-pbc-bounded-below-injectives-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070J (lemma-bounded-below-injectives-K-injective), 070K (lemma-enough-K-injectives-implies), and 070Y (lemma-K-injective-defined)"
+   }
+  },
+  {
+   "text": "Apply steps 3–4 to every $I^n$ and to $d_I^n:I^n\\to I^{n+1}$. They identify $J^n(S)$ with $I^n(S\\times P)$ and $d_J^n(S)$ with $d_I^n(S\\times P)$. Applying the same calculation to the resolution augmentation identifies its degree-zero map with $M(S\\times P)\\to I^0(S\\times P)$ and its other terms with zero. For a chain map $b^\\bullet:I^\\bullet\\to I'^\\bullet$, its component becomes $b^n(S\\times P)$, and the chain identity remains $d_{I'}^n b^n=b^{n+1}d_I^n$ evaluated at $S\\times P$. The formulas of step 4 commute with each such component and with the augmentations, proving all the claimed compatibilities as identifications of complexes and hence of their derived objects.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), profinite-parameter input; degreewise application of the evaluated natural isomorphism"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-compact-hausdorff-surjection-quotient",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-galois-equivalence-preserves-limits",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-sfb-modobj-internal-hom",
+  "def-sfb-condensed-free-module-adjunction",
+  "lem-galois-yoneda-hom-bijection",
+  "lem-sfb-condensed-free-linearization-tensor",
+  "lem-sfb-grothendieck-k-injective",
+  "def-sfb-right-derived-functor",
+  "lem-weil-pbc-bounded-below-injectives-kinjective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), profinite-parameter input; free/tensor/Yoneda calculation and derived resolution assembly with Stacks 03EO, 07A5, 070J, 070K and 070Y"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom from the free module on a profinite set evaluated at S is sections on the product S times P, naturally for every sheaf of modules",
+   "results": {
+    "t": "2026-10-22T06:01:53Z",
+    "tool": "leanfinder",
+    "query": "Internal Hom from the free module on a profinite set evaluated at S is sections on the product S times P, naturally for every sheaf of modules",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondensed.ihomPoints",
+     "LightCondensed.ihomPoints_apply",
+     "LightCondensed.ihomPoints_symm_apply",
+     "LightCondensed.ihom_map_val_app",
+     "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+     "LightCondensed.instMonoidalClosedFunctorOppositeLightProfiniteModuleCat",
+     "LightCondensed.free_internallyProjective_iff_tensor_condition'",
+     "LightCondensed.free_internallyProjective_iff_tensor_condition"
+    ],
+    "digest": "ada3637335b499db"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: light condensed modules over a constant abstract ring, free-module constructors and conditional internal-projectivity criteria do not provide the transported internal-module resolution and its full product-evaluation normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ihomPoints\"",
+   "results": {
+    "t": "2026-10-22T06:02:02Z",
+    "tool": "loogle",
+    "query": "\"ihomPoints\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "LightCondensed.ihomPoints",
+     "LightCondensed.ihomPoints_symm_comp",
+     "LightCondensed.ihomPoints_symm_apply",
+     "LightCondensed.ihomPoints_apply"
+    ],
+    "digest": "c36ac4f6d71bcdd1"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: light condensed modules over a constant abstract ring, free-module constructors and conditional internal-projectivity criteria do not provide the transported internal-module resolution and its full product-evaluation normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "ihomPoints|profiniteFree|internallyProjective",
+   "results": {
+    "t": "2026-10-22T06:02:02Z",
+    "tool": "grep",
+    "query": "ihomPoints|profiniteFree|internallyProjective",
+    "sub": "Condensed",
+    "ok": true,
+    "n_hits": 11,
+    "note": "",
+    "top": [
+     "Mathlib/Condensed/Solid.lean",
+     "Mathlib/Condensed/Solid.lean",
+     "Mathlib/Condensed/Light/Sequence.lean",
+     "Mathlib/Condensed/Light/Sequence.lean",
+     "Mathlib/Condensed/Light/Sequence.lean",
+     "Mathlib/Condensed/Light/Sequence.lean",
+     "Mathlib/Condensed/Light/InternallyProjective.lean",
+     "Mathlib/Condensed/Light/InternallyProjective.lean"
+    ],
+    "digest": "7dc05fb6b68f5cd6"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: light condensed modules over a constant abstract ring, free-module constructors and conditional internal-projectivity criteria do not provide the transported internal-module resolution and its full product-evaluation normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluate internal module Hom from a free profinite parameter module to an injective resolution on a product of profinite spaces",
+   "results": {
+    "t": "2026-10-22T06:02:53Z",
+    "tool": "leansearch",
+    "query": "Evaluate internal module Hom from a free profinite parameter module to an injective resolution on a product of profinite spaces",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondensed.ihomPoints",
+     "Profinite.pi",
+     "LightCondensed.ihom_map_val_app",
+     "ProfiniteAddGrp.Hom.hom",
+     "LightCondensed.ihomPoints_apply",
+     "CategoryTheory.InjectiveResolution.Hom",
+     "LightCondensed.ihomPoints_symm_apply",
+     "ProfiniteGrp.Hom"
+    ],
+    "digest": "72c09a81bba3c022"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: light condensed modules over a constant abstract ring, free-module constructors and conditional internal-projectivity criteria do not provide the transported internal-module resolution and its full product-evaluation normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a commutative ring object in condensed abelian groups, internal modules form a Grothendieck category and Hom from a free representable module sends an injective resolution to product-evaluation sections",
+   "results": {
+    "t": "2026-10-22T06:03:04Z",
+    "tool": "leanfinder",
+    "query": "For a commutative ring object in condensed abelian groups, internal modules form a Grothendieck category and Hom from a free representable module sends an injective resolution to product-evaluation sections",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondensed.instIsGrothendieckAbelianLightCondMod",
+     "Condensed.free",
+     "LightCondensed.free",
+     "instAbelianCondensedMod",
+     "LightCondensed.free_internallyProjective_iff_tensor_condition",
+     "LightCondensed.free_internallyProjective_iff_tensor_condition'",
+     "LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'",
+     "LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition"
+    ],
+    "digest": "4f1e00dc480f9e2e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: light condensed modules over a constant abstract ring, free-module constructors and conditional internal-projectivity criteria do not provide the transported internal-module resolution and its full product-evaluation normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "ihomPoints|profiniteFree|internallyProjective",
+   "results": {
+    "t": "2026-10-23T04:28:37Z",
+    "tool": "grep",
+    "query": "ihomPoints|profiniteFree|internallyProjective",
+    "sub": "Condensed",
+    "ok": true,
+    "n_hits": 11,
+    "note": "",
+    "top": [
+     "Mathlib/Condensed/Solid.lean",
+     "Mathlib/Condensed/Solid.lean",
+     "Mathlib/Condensed/Light/InternallyProjective.lean",
+     "Mathlib/Condensed/Light/InternallyProjective.lean",
+     "Mathlib/Condensed/Light/InternallyProjective.lean",
+     "Mathlib/Condensed/Light/InternallyProjective.lean",
+     "Mathlib/Condensed/Light/InternallyProjective.lean",
+     "Mathlib/Condensed/Light/Sequence.lean"
+    ],
+    "digest": "b9834eb186a9fe95"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected LightCondensed.ihomPoints (constant ring, light site), Condensed.profiniteFree (constructor only), and resolution/freeYoneda APIs; none states the full arbitrary internal condensed-ring product-evaluation and derived normalization. Existing DAG nodes cover the ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal Hom of free representable sheaf modules evaluated on a product and injective resolution",
+   "results": {
+    "t": "2026-10-23T04:28:38Z",
+    "tool": "leansearch",
+    "query": "Internal Hom of free representable sheaf modules evaluated on a product and injective resolution",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondensed.ihomPoints",
+     "CategoryTheory.injectiveResolutions",
+     "CategoryTheory.InjectiveResolution.Hom",
+     "SheafOfModules.freeFunctor",
+     "SheafOfModules.Hom",
+     "PresheafOfModules.freeYonedaEquiv",
+     "SheafOfModules.Hom.mk.injEq",
+     "SheafOfModules.free"
+    ],
+    "digest": "00690a4bbe37c618"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected LightCondensed.ihomPoints (constant ring, light site), Condensed.profiniteFree (constructor only), and resolution/freeYoneda APIs; none states the full arbitrary internal condensed-ring product-evaluation and derived normalization. Existing DAG nodes cover the ingredients."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ihomPoints\"",
+   "results": {
+    "t": "2026-10-23T04:28:38Z",
+    "tool": "loogle",
+    "query": "\"ihomPoints\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "LightCondensed.ihomPoints",
+     "LightCondensed.ihomPoints_symm_comp",
+     "LightCondensed.ihomPoints_symm_apply",
+     "LightCondensed.ihomPoints_apply"
+    ],
+    "digest": "c36ac4f6d71bcdd1"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected LightCondensed.ihomPoints (constant ring, light site), Condensed.profiniteFree (constructor only), and resolution/freeYoneda APIs; none states the full arbitrary internal condensed-ring product-evaluation and derived normalization. Existing DAG nodes cover the ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom from a free module on a representable profinite space evaluates to sections on the product and is computed by applying Hom to any nonnegative injective resolution",
+   "results": {
+    "t": "2026-10-23T04:28:46Z",
+    "tool": "leanfinder",
+    "query": "Internal Hom from a free module on a representable profinite space evaluates to sections on the product and is computed by applying Hom to any nonnegative injective resolution",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondensed.ihomPoints_apply",
+     "LightCondensed.ihomPoints",
+     "LightCondensed.ihomPoints_symm_apply",
+     "LightCondensed.ihomPoints_symm_comp",
+     "LightCondensed.instMonoidalClosedFunctorOppositeLightProfiniteModuleCat",
+     "LightCondensed.ihom_map_val_app",
+     "Condensed.profiniteFree",
+     "LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition"
+    ],
+    "digest": "1cd4ba74e3a4a28e"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected LightCondensed.ihomPoints (constant ring, light site), Condensed.profiniteFree (constructor only), and resolution/freeYoneda APIs; none states the full arbitrary internal condensed-ring product-evaluation and derived normalization. Existing DAG nodes cover the ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf Hom from the linearization of a representable sheaf is evaluation on the product in a ringed site",
+   "results": {
+    "t": "2026-10-23T04:28:48Z",
+    "tool": "leanfinder",
+    "query": "Sheaf Hom from the linearization of a representable sheaf is evaluation on the product in a ringed site",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.evaluation",
+     "SheafOfModules.unitHomEquiv_apply_coe",
+     "SheafOfModules.unitHomEquiv",
+     "PresheafOfModules.Elements.fromFreeYoneda_app_apply",
+     "SheafOfModules.freeHomEquiv",
+     "SheafOfModules.unitHomEquiv_comp_apply",
+     "SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply",
+     "LightCondensed.ihomPoints_apply"
+    ],
+    "digest": "02c230c7776bbe3e"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected LightCondensed.ihomPoints (constant ring, light site), Condensed.profiniteFree (constructor only), and resolution/freeYoneda APIs; none states the full arbitrary internal condensed-ring product-evaluation and derived normalization. Existing DAG nodes cover the ingredients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normed-scalar-profinite-hom-acyclic",
+  "date": "2026-10-22",
+  "group": "Q54"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: profinite-parameter column computation; internal/sectionwise transport and free-generator resolution evaluation (old item steps 1–2)",
+   "via": [
+    "lem-sfb-normed-scalar-profinite-hom-acyclic",
+    "lem-sfb-prime-to-ell-condensed-acyclicity",
+    "lem-sfb-prime-to-ell-derived-invariants-reduction",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-profinite-free-hom-resolution-evaluation",
+  "worker": "stage1",
+  "summary": "Q158: reused existing ringed-site, exact tensor transport, free-linearization, Yoneda and K-injective nodes; supplied explicit generator inverse and all naturality formulas, with arbitrary nonnegative resolution computation. No new nodes. Fixed doubled TeX escaping only and named the internal-Hom and total-derived conventions in stmt_deps.",
+  "blueprint": "Paragraph (3) of main-20261015 direct-images proof: profinite-parameter Hom input below open-direct-image stability. Steps 1–2 supply module infrastructure, 3–4 evaluate free Hom, and 5–6 identify its resolved complex. The inherited ancestor chain terminates at a node with no created.item and blueprint.from.node remains null, as blueprint_refs.py ancestor reports.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-compact-hausdorff-surjection-quotient",
+    "why": "Generic Compact-to-Hausdorff surjections are quotient maps used for the profinite-parameter computation; no step of the constructibility unit is replaced."
+   },
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic small ringed-site Grothendieck theorem used for the profinite-parameter computation; no step of the constructibility unit is replaced."
+   },
+   {
+    "node": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "why": "Generic Internal abelian module sheaves as sectionwise module sheaves used for the profinite-parameter computation; no step of the constructibility unit is replaced."
+   },
+   {
+    "node": "lem-galois-equivalence-preserves-limits",
+    "why": "Generic An equivalence of categories preserves limits and colimits used for the profinite-parameter computation; no step of the constructibility unit is replaced."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Generic Grothendieck abelian categories have enough injectives used for the profinite-parameter computation; no step of the constructibility unit is replaced."
+   },
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Generic internal/sectionwise exact tensor comparison used for the profinite-parameter computation; no step of the constructibility unit is replaced."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic ringed-site tensor/Hom adjunction used for the profinite-parameter computation; no step of the constructibility unit is replaced."
+   },
+   {
+    "node": "lem-galois-yoneda-hom-bijection",
+    "why": "Generic Yoneda evaluation for every presheaf of sets used for the profinite-parameter computation; no step of the constructibility unit is replaced."
+   },
+   {
+    "node": "lem-sfb-grothendieck-k-injective",
+    "why": "Generic existence of K-injective resolutions used for the profinite-parameter computation; no step of the constructibility unit is replaced."
+   },
+   {
+    "node": "def-sfb-right-derived-functor",
+    "why": "Generic total derived computation convention used for the profinite-parameter computation; no step of the constructibility unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "why": "Generic Bounded-below complexes of injectives are K-injective used for the profinite-parameter computation; no step of the constructibility unit is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-compact-hausdorff-surjection-quotient",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-galois-equivalence-preserves-limits",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-galois-yoneda-hom-bijection",
+  "lem-sfb-grothendieck-k-injective",
+  "def-sfb-right-derived-functor",
+  "lem-weil-pbc-bounded-below-injectives-kinjective"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q158-43f48898b",
+  "group": "Q158",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q158-43f48898b (reviewer sub-agent of L); spot-checked: I read the item, all 13 proof_deps statements and the stmt_deps definitions. The delivery is one commit with no new nodes. Live still has the item unsplit, so there is no supersession, and there is no re-split note. The statement is unchanged apart from TeX normalization. The added stmt_deps (def-sfb-modobj-internal-hom, def-sfb-right-derived-functor) are both used by the statement. Step 1: the representables are sheaves via compact-Hausdorff quotient descent, including the empty cover, and internal modules are Grothendieck abelian via the ringed-site node transported by E_A. Step 2: Hom transport through E_A is the Yoneda argument. Step 3: A[h_S]⊗A[h_P]≅A[h_{S×P}]. I checked both explicit inverse maps, using [pr_S]⊗[pr_P]↔[id], and the pr_S^* scalar action. Step 4: I checked the variance of N(u×1) and N(1×v). Step 5: bounded-below injectives are K-injective, so def-sfb-right-derived-functor gives RH_P(M[0])≅H_P(I) with the unit as augmentation. Step 6 is termwise. Edge cases P=∅, P=pt, S=∅ and the zero ring are consistent. No duplicate exists in the DAG; the bar-resolution nodes and the parent normed-scalar node only consume this. The 11 generic tool_uses are accepted. Source checks: Stacks tags 07A5, 03EO, 070J, 070K and 070Y exist; paragraph (3) of the main-20261015 direct-images proof does not give this argument, so by:agent is correct; no SGA is cited. Batch-5 flag: lem-trf-free-module-sheaf-universal-property, reached through lem-sfb-condensed-free-linearization-tensor, is the generic universal property of the free sheaf of modules and is not part of the trace-formula or Poincaré-duality assumptions or their proofs, so it is not a RETURN. FIX (C1/C4): step 2, and through it steps 3 and 5, used the internal-Hom ⊣ tensor adjunction without citing def-sfb-modobj-internal-hom. I added the citation sentence, its uses entry and the proof_deps entry in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-profinite-free-hom-resolution-evaluation.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ProfiniteFreeHomResolutionEvaluation",
+  "declaration": "CategoryTheory.CondensedBar.ProfiniteHom.exists_evaluation",
+  "declarations": [
+   "CategoryTheory.CondensedBar.ProfiniteHom.hom",
+   "CategoryTheory.CondensedBar.ProfiniteHom.eval",
+   "CategoryTheory.CondensedBar.ProfiniteHom.value",
+   "CategoryTheory.CondensedBar.ProfiniteHom.generator",
+   "CategoryTheory.CondensedBar.ProfiniteHom.pre",
+   "CategoryTheory.CondensedBar.ProfiniteHom.hom_additive_leftExact",
+   "CategoryTheory.CondensedBar.ProfiniteHom.homAdditive",
+   "CategoryTheory.CondensedBar.ProfiniteHom.enough",
+   "CategoryTheory.CondensedBar.ProfiniteHom.derived",
+   "CategoryTheory.CondensedBar.ProfiniteHom.unit",
+   "CategoryTheory.CondensedBar.ProfiniteHom.Evaluation",
+   "CategoryTheory.CondensedBar.ProfiniteHom.exists_evaluation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ProfiniteFreeHomResolutionEvaluation.lean",
+  "statement": "theorem exists_evaluation : Nonempty (Evaluation A)",
+  "branch": "sheaf-dag",
+  "by": "Q16",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The primary theorem supplies the full evaluation-normalized Evaluation specification. The supporting theorem states additivity and left exactness of the recorded equalizer internal Hom. All constructors have real data; freeParameter, its adjunction, the internal/section equivalence, and the ordinary right-derived functor are reused. The sole added statement dependency is the landed owner of freeParameter and the bundled commutative-ring/section abbreviations. No natural-language statement is changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8680ceb73",
+  "group": "Q16",
+  "result": "pass",
+  "note": "All node clauses match the Lean: arbitrary condensed ring A; Grothendieck abelian Mod_A and its resolutions; E_A exact and preserving injectives; tensor and homIso pinned by pure tensors and slice evaluation; evaluate pinned by the tautological generator (restrict along fst, evaluate on [snd]); scalar action, restriction N(u×1) and parameter N(1×v) through the conjugateEquiv mate of tensorLeftMap; complexIso equal to evaluate in each degree; complex_natural for every chain map; computation pinned by the unit at a K-injective I; augmentation consistent with it. Owners: freeParameter (bar-data), free/freeAdjunction (def-sfb-condensed-free-module-adjunction), ihom', homObj, rightDerivedFunctorOfQuasiIsoResolutions. Edge cases P=∅, S=∅, P=pt, zero ring, degree-0 resolution are covered; no universe is forced equal; the only sorrys are theorem proofs; statement verbatim. Advisory A1: tensor_value uses comparison_internalTmul/sectionTmul, notation defs owned only by the theorem node lem-pe-internal-section-tensor-comparison. The inline FIX times out at isDefEq on the sectionwise tmul and a FIX cannot add a stmt_dep, so this is accepted as in the Q65 and Q01 PASSes. Control compile of the delivered file was clean."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261026T092022-L-3394706",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.CondensedBar.ProfiniteHom.exists_evaluation",
+   "CategoryTheory.CondensedBar.ProfiniteHom.hom_additive_leftExact"
+  ],
+  "sorry_after": [
+   "CategoryTheory.CondensedBar.ProfiniteHom.exists_evaluation"
+  ]
+ }
+}

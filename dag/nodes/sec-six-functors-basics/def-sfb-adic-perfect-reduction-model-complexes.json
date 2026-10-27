@@ -1,0 +1,108 @@
+{
+ "id": "def-sfb-adic-perfect-reduction-model-complexes",
+ "kind": "definition",
+ "title": "Explicit ordinary quotient complexes and their scalar-balancing maps",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "statement": "Let X be a scheme, A a commutative ring in the coefficient universe, J an ideal and U an object of the coefficient-sized pro-etale site. For an integer cochain complex P of A-modules, define L(P) by the actual termwise constant module realization, coefficient extension to the completed constant ring and restriction to U. Define C_n(P) by ordinary termwise scalar extension of L(P) along the restricted completion projection to the constant A/J^(n+1) ring sheaf. Define tau_n by restricting the actual successor coefficient quotient map. The restricted limit cone equation says projection_(n+1) followed by tau_n equals projection_n. The canonical ordinary balancing isomorphism adicFiniteChangeComp, followed by this equality, defines alpha_n(P): change(tau_n) C_(n+1)(P) isomorphic to C_n(P). All complexes, differentials and maps are explicit; no boundedness, flatness, projectivity or derived claim is part of the definition. The derived balancing isomorphism is also exposed with an explicit functor type as adicPerfectDerivedQuotientStep; its value is the existing adicResidueLocalReductionStep.",
+ "stmt_deps": [
+  "def-sfb-adic-residue-lift-comparisons",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-sfb-adic-constructible-finite-reductions"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09C5 and 09C6, exact sections and the displayed H_n calculation; sites-cohomology.tex Tag 06YY for K-flat scalar extension; derived.tex Tag 064B for K-projective bounded-above models."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09C5 and 09C6, expanded ordinary-model and homotopy calculations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "K flat computation counit of a constant finite projective sheaf complex commutes with successive scalar extensions and restriction to a slice",
+   "results": "msearch.py: constantSheafAdj counit and ModuleCat scalar adjunction counits; no normalized completed-complex reduction comparison.",
+   "date": "2026-10-26",
+   "verdict": "Components only; no complete statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy classes of chain maps between quotient constant finite projective complexes are sections of degree zero algebraic Hom cohomology, natural under quotient scalars",
+   "results": "msearch.py: HomComplex.CohomologyClass.homAddEquiv and toHom_mk; these concern ordinary Hom cochains, without constant sheaf realization, quotient scalars or sections.",
+   "date": "2026-10-26",
+   "verdict": "Useful components, no full comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologicalComplexCompIso|mapHomotopyCategoryFactors|Qh_map_bijective; constant finite-projective reduction models",
+   "results": "Mathlib localization and additive functor comparisons. Source search found ConstantModuleKFlat, PerfectConstantLocalChainRepresentative, AdicPerfectModelCompleteReduction and ScalarPerfectDualRealization. The local chain result only gives a cover; the residue completeness theorem requires Noetherianity and a maximal ideal and treats exponent one. Neither has the present successor-coherent computation on a fixed weakly contractible slice. No matching blueprint node found.",
+   "date": "2026-10-26",
+   "verdict": "No existing declaration with the required hypotheses and conclusion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "P4",
+  "item": "Sheaf.Paper.AdicPerfectHomCohomologyComparison",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Local perfect lifting in the proof invoking sk-prop-integral-criterion; expanded as Stacks Tag 09C6. Tags 09C5 and 09C6, dual-perfect tensor calculation and exact sections on each affine weakly contractible covering object. Supporting calculation: actual quotient Hom from two fixed constant perfect models, before image stabilization. The explicit ordinary-complex calculation in proof steps 1--3 of lem-sfb-adic-perfect-hom-cohomology-comparison.",
+   "via": [
+    "lem-sfb-adic-perfect-hom-cohomology-comparison",
+    "lem-sfb-adic-perfect-reduction-hom-ml",
+    "lem-sfb-adic-residue-lisse-perfect-lift",
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicPerfectReductionModelComplexes",
+  "file": "lean/Sheaf/Paper/AdicPerfectReductionModelComplexes.lean",
+  "declaration": "AlgebraicGeometry.Scheme.adicPerfectLocalComplex",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.adicPerfectLocalComplex",
+   "AlgebraicGeometry.Scheme.adicPerfectQuotientComplex",
+   "AlgebraicGeometry.Scheme.adicPerfectQuotientScalarStep",
+   "AlgebraicGeometry.Scheme.adicPerfectQuotientScalarStep_comp",
+   "AlgebraicGeometry.Scheme.adicPerfectQuotientStep",
+   "AlgebraicGeometry.Scheme.adicPerfectDerivedQuotientStep"
+  ],
+  "statement": "def adicPerfectLocalComplex (X : Scheme.{u})\n    {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)\n    (U : coefficientProEtaleSiteModel.{u, v} X)\n    (P : CochainComplex (ModuleCat.{max v (u + 1)} A) ℤ) :\n    Cx ((completed (coefficientProEtaleModelTopology.{u, v} X) A J).over U)",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261026T002124-L-58811",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-94abe",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261026T065433-L-2969140",
+  "kind": "interface",
+  "note": "independent cc review: relocated definitions block vs clone (byte-identical); item conjunction vs kprojective+compatibility lemmas; new nodes' lean.statement vs signatures; terms_projective vs AdicResidueSliceWeaklyContractible and strictPerfectConstantSheaf; delivered modules + importer AdicPerfectModelHomCohomology + AdicPerfectHomCohomologyComparison compiled in sandbox (exit 0), axioms checked"
+ }
+}

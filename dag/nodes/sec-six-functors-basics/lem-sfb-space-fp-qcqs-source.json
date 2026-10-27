@@ -1,0 +1,397 @@
+{
+ "id": "lem-sfb-space-fp-qcqs-source",
+ "kind": "statement",
+ "title": "Finite presentation over a qcqs space has qcqs source",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and work with algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Point spaces carry the atlas topology [def-a1-space-point-topology]. An algebraic space is quasi-compact if its point space is quasi-compact (every open cover has a finite subcover); it is quasi-separated if its absolute diagonal over $\\operatorname{Spec}\\mathbf Z$ is quasi-compact. A morphism is quasi-compact if its pullback along every affine scheme mapping to its target has quasi-compact point space; it is quasi-separated if its relative diagonal is quasi-compact. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Let $f:X\\to Y$ be a morphism, where $Y$ is quasi-compact and quasi-separated. Suppose $f$ is of finite presentation, meaning quasi-compact, quasi-separated and locally of finite presentation on etale scheme charts [def-sbc-locally-finite-presentation]. Then $X$ is quasi-compact and quasi-separated.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 06G5, lemma-finite-presentation-quasi-compact-quasi-separated."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-a1-space-point-topology",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-affine-spectrum",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-proper-curve-moduli",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-absolute-quasi-separated"
+ ],
+ "proof": [
+  {
+   "text": "First extend the affine-test definition of quasi-compactness to quasi-compact space tests. Let $h:A\\to B$ satisfy that definition, and let $C\\to B$ have quasi-compact point space. By [lem-sfb-qc-space-affine-etale-atlas], choose an affine scheme $U$ with a surjective etale map $U\\to C$. The space $A\\times_BU$ has quasi-compact point space by the hypothesis on $h$. The projection $A\\times_BU\\to A\\times_BC$ is surjective etale by [lem-trf-space-fibre-products-etale-covers] and the fibre-product universal property. By [lem-a1-space-point-open-calculus] its point map is continuous and surjective. For any open cover of $|A\\times_BC|$, inverse images cover $|A\\times_BU|$; a finite subcover upstairs covers downstairs by surjectivity. Thus $|A\\times_BC|$ is quasi-compact. Conversely arbitrary quasi-compact space tests include affine schemes, which are quasi-compact by [lem-weil-pbc-affine-scheme-qcqs].",
+   "uses": [
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-a1-space-point-open-calculus",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03KG (lemma-quasi-compact-local), proof of (3) implies (1); spaces-properties.tex Tags 03H6 and 03BX."
+   }
+  },
+  {
+   "text": "Quasi-compact morphisms are stable under arbitrary base change and composition in the affine-test convention. For $h:A\\to B$, $B'\\to B$ and affine $T\\to B'$, the test of the base change is $(A\\times_BB')\\times_{B'}T\\cong A\\times_BT$, so it is quasi-compact. For quasi-compact $A\\to B\\to C$ and affine $T\\to C$, first $B\\times_CT$ is quasi-compact; step 1 then shows $A\\times_B(B\\times_CT)$ quasi-compact. This is $A\\times_CT$. Both identifications send compatible tuples to the same components and have inverses inserting the uniquely prescribed component, so follow directly from the sheaf fibre-product universal property [lem-trf-space-fibre-products-etale-covers]. These are two-line consequences of step 1 and the definitions, rather than additional lemmas to be added to the DAG.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 03HF (lemma-base-change-quasi-compact) and 03HG (lemma-composition-quasi-compact), the omitted transitivity-of-fibre-products arguments."
+   }
+  },
+  {
+   "text": "Finite presentation includes quasi-compactness of $f$ by the hypothesis as stated. Apply step 1 with $A=X$, $B=C=Y$ and $C\\to B$ the identity. Its conclusion is that $|X\\times_YY|=|X|$ is quasi-compact. The identification sends $(x,f(x))$ to $x$, with inverse $x\\mapsto(x,f(x))$, using [lem-trf-space-fibre-products-etale-covers]. This proves the quasi-compactness clause without using local finite presentation.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 06G5 (lemma-finite-presentation-quasi-compact-quasi-separated), quasi-compactness clause, expanded using Tag 03KG."
+   }
+  },
+  {
+   "text": "Put $Z=\\operatorname{Spec}\\mathbf Z$ and regard the given spaces as absolute spaces, as in the definition of quasi-separatedness in the statement. The map $k:X\\times_YX\\to X\\times_ZX$ is the pullback of $\\Delta_{Y/Z}:Y\\to Y\\times_ZY$ along $f\\times f$. Indeed a section of that pullback consists of $(x_1,x_2,y)$ with $f(x_1)=y=f(x_2)$, equivalent to the pair $(x_1,x_2)$ defining $X\\times_YX$; the inverse inserts $y=f(x_1)$. These maps commute with restrictions, so this is an isomorphism of sheaves, hence of the algebraic-space fibre products [lem-trf-space-fibre-products-etale-covers]. Since $Y$ is quasi-separated, $\\Delta_{Y/Z}$ is quasi-compact; step 2 makes $k$ quasi-compact. Since $f$ is quasi-separated, $\\Delta_f:X\\to X\\times_YX$ is quasi-compact. Their composite is $\\Delta_{X/Z}$, because both send $x$ to $(x,x)$. Step 2 makes this composite quasi-compact. By the stated definition $X$ is quasi-separated, proving the second clause. No separation property of the ambient $S$ was used.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04ZH (lemma-separated-over-separated), clause (2), and Tag 03KQ (lemma-composition-separated), diagonal factorization, applied over Spec Z; Tag 06G5, omitted quasi-separatedness argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-qc-space-affine-etale-atlas",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-a1-space-point-open-calculus",
+  "lem-weil-pbc-affine-scheme-qcqs"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 06G5 (lemma-finite-presentation-quasi-compact-quasi-separated), omitted proof expanded through Tags 03KG, 03HF, 03HG and 04ZH."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If an algebraic space is finitely presented over a quasi compact quasi separated algebraic space then its source is quasi compact and quasi separated",
+   "results": {
+    "t": "2026-10-23T09:46:35Z",
+    "tool": "leanfinder",
+    "query": "If an algebraic space is finitely presented over a quasi compact quasi separated algebraic space then its source is quasi compact and quasi separated",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.quasiCompact_over_affine_iff",
+     "AlgebraicGeometry.LocallyOfFinitePresentation",
+     "AlgebraicGeometry.quasiCompact_of_compactSpace",
+     "AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.quasiCompact_iff_compactSpace",
+     "AlgebraicGeometry.QuasiCompact.of_comp",
+     "AlgebraicGeometry.QuasiCompact",
+     "AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation"
+    ],
+    "digest": "5a42e06e922976a5"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: all semantic hits concern schemes or topological spaces; none states this result for algebraic spaces. Loogle and the whole-Mathlib algebraic-space grep have zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "algebraic space|AlgebraicSpace",
+   "results": {
+    "t": "2026-10-23T09:48:17Z",
+    "tool": "grep",
+    "query": "algebraic space|AlgebraicSpace",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: all semantic hits concern schemes or topological spaces; none states this result for algebraic spaces. Loogle and the whole-Mathlib algebraic-space grep have zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"QuasiCompact\"",
+   "results": {
+    "t": "2026-10-23T09:48:17Z",
+    "tool": "loogle",
+    "query": "\"AlgebraicSpace\", \"QuasiCompact\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: all semantic hits concern schemes or topological spaces; none states this result for algebraic spaces. Loogle and the whole-Mathlib algebraic-space grep have zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The source of a finite presentation morphism of algebraic spaces over a qcqs base is qcqs",
+   "results": {
+    "t": "2026-10-23T09:48:28Z",
+    "tool": "leanfinder",
+    "query": "The source of a finite presentation morphism of algebraic spaces over a qcqs base is qcqs",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.LocallyOfFinitePresentation",
+     "AlgebraicGeometry.LocallyQuasiFinite",
+     "AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation",
+     "AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite",
+     "AlgebraicGeometry.IsFinite",
+     "AlgebraicGeometry.LocallyOfFiniteType",
+     "AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite",
+     "AlgebraicGeometry.locallyOfFinitePresentation_iff"
+    ],
+    "digest": "50e9d0ef49713a2a"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: all semantic hits concern schemes or topological spaces; none states this result for algebraic spaces. Loogle and the whole-Mathlib algebraic-space grep have zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The source of a finitely presented morphism over a quasi compact quasi separated algebraic space is quasi compact and quasi separated",
+   "results": {
+    "t": "2026-10-23T09:49:31Z",
+    "tool": "leansearch",
+    "query": "The source of a finitely presented morphism over a quasi compact quasi separated algebraic space is quasi compact and quasi separated",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated",
+     "AlgebraicGeometry.IsSeparated.instQuasiSeparated",
+     "AlgebraicGeometry.quasiSeparated_over_affine_iff",
+     "AlgebraicGeometry.quasiCompact_of_noetherianSpace_source",
+     "AlgebraicGeometry.quasiCompact_iff_compactSpace",
+     "AlgebraicGeometry.quasiCompact_over_affine_iff",
+     "AlgebraicGeometry.QuasiSeparated",
+     "AlgebraicGeometry.QuasiCompact.of_comp"
+    ],
+    "digest": "222e78f33bc0c711"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: all semantic hits concern schemes or topological spaces; none states this result for algebraic spaces. Loogle and the whole-Mathlib algebraic-space grep have zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "algebraic space|AlgebraicSpace",
+   "results": {
+    "t": "2026-10-23T12:01:41Z",
+    "tool": "grep",
+    "query": "algebraic space|AlgebraicSpace",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations are for schemes or rings, not arbitrary algebraic spaces; the whole-Mathlib AlgebraicSpace grep and Loogle have zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite presentation morphisms of algebraic spaces over a qcqs target have qcqs source",
+   "results": {
+    "t": "2026-10-23T12:01:41Z",
+    "tool": "leansearch",
+    "query": "Finite presentation morphisms of algebraic spaces over a qcqs target have qcqs source",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "RingHom.FinitePresentation",
+     "AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth",
+     "AlgHom.FinitePresentation",
+     "AlgebraicGeometry.IsFinite.recOn",
+     "AlgebraicGeometry.LocallyOfFinitePresentation",
+     "AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE",
+     "AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation",
+     "AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE"
+    ],
+    "digest": "b7da063b444e8ba6"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations are for schemes or rings, not arbitrary algebraic spaces; the whole-Mathlib AlgebraicSpace grep and Loogle have zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"QuasiCompact\"",
+   "results": {
+    "t": "2026-10-23T12:01:42Z",
+    "tool": "loogle",
+    "query": "\"AlgebraicSpace\", \"QuasiCompact\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations are for schemes or rings, not arbitrary algebraic spaces; the whole-Mathlib AlgebraicSpace grep and Loogle have zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact quasi separated algebraic space has quasi compact quasi separated source under a finite presentation morphism",
+   "results": {
+    "t": "2026-10-23T12:01:49Z",
+    "tool": "leanfinder",
+    "query": "A quasi compact quasi separated algebraic space has quasi compact quasi separated source under a finite presentation morphism",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated",
+     "AlgebraicGeometry.quasiCompact_isStableUnderBaseChange",
+     "AlgebraicGeometry.QuasiCompact.of_comp",
+     "AlgebraicGeometry.quasiCompact_of_compactSpace",
+     "AlgebraicGeometry.quasiCompact_over_affine_iff",
+     "AlgebraicGeometry.QuasiCompact",
+     "AlgebraicGeometry.instQuasiCompactLiftSchemeIdOfQuasiSeparatedSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.instIsMultiplicativeSchemeQuasiCompact"
+    ],
+    "digest": "262620124d5f1e14"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations are for schemes or rings, not arbitrary algebraic spaces; the whole-Mathlib AlgebraicSpace grep and Loogle have zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi compact and quasi separated algebraic spaces are preserved as sources of quasi compact quasi separated morphisms",
+   "results": {
+    "t": "2026-10-23T12:03:40Z",
+    "tool": "leanfinder",
+    "query": "Quasi compact and quasi separated algebraic spaces are preserved as sources of quasi compact quasi separated morphisms",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated",
+     "AlgebraicGeometry.QuasiCompact.of_comp",
+     "AlgebraicGeometry.quasiCompact_of_compactSpace",
+     "AlgebraicGeometry.quasiCompact_isStableUnderComposition",
+     "AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace",
+     "AlgebraicGeometry.instIsMultiplicativeSchemeQuasiCompact",
+     "AlgebraicGeometry.QuasiCompact",
+     "AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated"
+    ],
+    "digest": "1a215a56dc9c5ffa"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations are for schemes or rings, not arbitrary algebraic spaces; the whole-Mathlib AlgebraicSpace grep and Loogle have zero hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fp-etale-presentation-criterion",
+  "date": "2026-10-23",
+  "group": "Q99"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D55 (lemma-curves-limits). Input to Tag 0D55: Tag 07SK (lemma-descend-finite-presentation), specialized to affine scheme bases; base change of finite presentation: spaces-morphisms.tex, Tag 03XR (lemma-base-change-finite-presentation). Supporting finite-presentation criterion for the etale scheme presentation in Tag 07SK, first paragraph, including its omitted finiteness checks and the finiteness of the descended quotient. Supporting input to the finite-presentation criterion: Forward direction: Y is qcqs because T is affine and Y to T is finitely presented.",
+   "via": [
+    "lem-sfb-fp-etale-presentation-criterion",
+    "lem-sfb-fp-space-limit-category",
+    "lem-sfb-curve-limit-preservation",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-fp-qcqs-source",
+  "worker": "stage1",
+  "summary": "Four-step proof with no new nodes. Expand the affine-test convention via a finite affine etale atlas, derive base change and composition directly, then prove quasi-compactness and factor the absolute diagonal. Every external non-elementary assertion is an existing cited statement. Statement and statement dependencies retained.",
+  "blueprint": "Supporting finiteness check in the existing provenance chain below det-thm-sf-ctf-stability-direct-images, proof (3), via lem-sfb-fp-etale-presentation-criterion: finite presentation over an affine scheme has qcqs source. The latest blueprint direct-image proof (3) is the compactification assembly; this supporting geometric lemma does not replace that route. ancestor command returns None for the existing created-item chain, so its existing null ancestor and precise place/via are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Only general existence, universal property, and etale base change of algebraic-space fibre products are used; no trace formula, pairing, duality, or cohomology argument."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Only continuity and surjectivity of point maps for a representable surjective etale map are used; these are generic atlas-topology facts, with no purity or cohomology input."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Only quasi-compactness of an affine scheme is used to compare the two test conventions; this is a basic scheme tool, not a change of route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-a1-space-point-open-calculus",
+  "lem-weil-pbc-affine-scheme-qcqs"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-a1522a2bc",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-a1522a2bc (reviewer sub-agent of L); spot-checked: I read the full statement against Stacks 06G5 (spaces-morphisms.tex, lemma-finite-presentation-quasi-compact-quasi-separated; proof omitted). Hypotheses and conclusion are identical, quasi-separated is absolute over Spec Z as in spaces-properties definition-separated, and the statement is unchanged from live. Live and side-live still have the item unsplit and there is no repair note, so it is not superseded. The delivery creates no new nodes. Step 1 (non-elementary) shows that the affine-test definition of quasi-compact maps also covers quasi-compact space tests. It uses an affine surjective étale atlas from lem-sfb-qc-space-affine-etale-atlas, base change of a surjective étale family from lem-trf-space-fibre-products-etale-covers, and continuity plus the point-surjectivity criterion from lem-a1-space-point-open-calculus; then the image of a compact space under a continuous surjection is compact. The converse sentence in step 1 is unused and its justification is slightly short (advisory only). Step 2 proves base change and composition through fibre-product identities, and composition correctly needs step 1 because B×_C T need not be affine. Step 3 applies step 1 to the identity test on Y. Step 4 uses the magic square: X×_Y X→X×_Z X is the base change of Δ_{Y/Z}, then Δ_{X/Z}=k∘Δ_f, which is 04ZH(2) via 03KQ, with absolute and relative diagonals kept apart (E4 respected). proof_deps equals the union of the step uses, all cited tags exist, and no SGA source is used. Duplicates: no existing node states the item. The same-day unsplit Q83 quasicompact-affine-tests and Q56 qcqs-source-products overlap steps 1, 2 and 4 under a different convention (quasi-compact meaning an atlas from a quasi-compact scheme); this is advisory and no duplicate node is created. Tool uses accepted: the trf fibre-product node (generic), the a1 point calculus, and the affine qcqs Mathlib leaf. Batch 5: the flagged citations lem-sfb-qc-space-affine-etale-atlas and lem-a1-space-point-open-calculus reach sec-trace-formula only through the general definition def-trf-algebraic-space, which is no part of the trace formula, Poincaré duality or their proofs, so both are accepted. Small cases checked: empty Y, the identity map, non-representable f, and non-separated S."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceFinitePresentationQcqsSource",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.qcqs_source_of_finitePresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceFinitePresentationQcqsSource.lean",
+  "statement": "theorem qcqs_source_of_finitePresentation {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) (hYqc : CompactSpace (Point Y.obj.obj)) (hYqs : IsAbsolutelyQuasiSeparated Y) (hfqc : MapIsQuasiCompact f.hom.hom) (hfqs : MapIsQuasiCompact (pullback.diagonal f.hom.hom)) (hflfp : MapIsLocallyOfFinitePresentation f) : CompactSpace (Point X.obj.obj) ∧ IsAbsolutelyQuasiSeparated X",
+  "branch": "sheaf-dag",
+  "by": "Q37",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Point-space compactness uses the existing atlas topology. Absolute quasi-separatedness uses the existing equivalent affine-test predicate, without any assumption on S. Finite presentation is expanded into the three specified hypotheses using the landed predicates; no new notion or dependency module is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d6f8fe0da",
+  "group": "Q37",
+  "result": "pass",
+  "note": "Checked against Stacks 06G5 (spaces-morphisms.tex l.5599) and the node: S : Scheme.{u}; X Y : AlgebraicSpace S; f : X ⟶ Y. Hypotheses: Y quasi-compact = CompactSpace of its point space (landed atlas topology); Y quasi-separated = IsAbsolutelyQuasiSeparated (Tag 0AHR(3) affine tests, absolute, no assumption on S); f finite presentation = MapIsQuasiCompact f.hom.hom + MapIsQuasiCompact (pullback.diagonal f.hom.hom) (definitionally MapIsQuasiSeparated) + MapIsLocallyOfFinitePresentation (étale-chart tests). Conclusion: CompactSpace (Point X) ∧ IsAbsolutelyQuasiSeparated X. Nothing extra assumed (no instance, universe equality, separatedness of S or representability of f). Edge cases covered: empty Y, identity f, non-quasi-separated S, non-representable f. No duplicate declaration in side-live lean/Sheaf. Node differs from side-live only in stmt_deps and lean: the 3 added stmt_deps (def-sfb-proper-curve-moduli, def-sfb-space-morphism-properties, def-sfb-space-absolute-quasi-separated) own the predicates used, have Lean records on the base, no cycle. lean.statement verbatim; proof sorry only; docstrings carry source place, blueprint id and proof steps 1-4; report sections present. Not compiled (no file changed). Advisory only: hfqs could use MapIsQuasiSeparated."
+ }
+}

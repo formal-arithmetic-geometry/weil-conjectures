@@ -13,26 +13,26 @@
  ],
  "proof": [
   {
-   "text": "The invertible completed coefficient map identifies module pullback with pure inverse image. Its underlying-set comparison and the module adjunction make it additive, exact, and preserving countable products.",
+   "text": "The invertible completed coefficient map identifies module pullback with pure inverse image. Its underlying-set comparison and the module adjunction make it additive, exact, and preserving countable products. Its left-derived universal property identifies the specified derived pullback with the exact termwise derived functor.",
    "uses": [
-    "lem-sp-completed-pullback-adjunction"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply canonical tensor pullback to the finite free factors. Their rank-one differential is multiplication by a_j^(m+1), and the dual transition is multiplication by a_j in degree -1 and identity in degree zero. Naturality of constants identifies these scalars and all quotient maps. Ordered tensoring identifies the strict dual Koszul tensor towers, naturally in an arbitrary complex, including their degree-zero augmentations.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "def-weil-pbc-ringed-koszul-system",
+    "lem-sp-completed-pullback-adjunction",
     "lem-weil-pbc-constant-completion-equivalence"
    ],
    "elementary": false
   },
   {
-   "text": "Use exact products and exactProductFunctorStrictLimit for the normalized strict Roos comparison. On the signed shifted-cone coordinates it carries (gamma,0) to (F gamma,0). Descend the strict tower comparison and this normalized derived-limit comparison through localization. The tensor-factorization and right-derived universal properties identify the descended completion functors with the supplied presentations; their actual unit definitions give the required equation.",
+   "text": "Use the strict finite augmented Koszul tower comparison. This identifies the actual tower functors on complexes, their transitions, and each component of the tensor unit, before localization.",
+   "uses": [
+    "lem-sfb-strict-completed-koszul-tower-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use exactProductFunctorStrictLimit for the normalized strict Roos comparison. Normalize its comparison at arbitrary complexes from the K-injective normalization using the monic Roos inclusion and naturality. Transport from limits of complexes to degreewise limits by ordinaryLimitIso. Descend the strict tensor tower isomorphism through localization and compose with the natural derived-limit comparison. The degreewise product projection formula identifies the ordinary limit units. Naturality and the tensorFactors and comparison equations identify the specified unitOnComplex maps. Localization and naturality extend the equality to every derived object. Finally transport along the unique isomorphism from the specified left-derived pullback to the exact termwise derived functor. Reuse the proved generic Koszul-unit naturality helpers from the flat scalar comparison module.",
    "uses": [
     "lem-cbc-exact-product-functor-strict-limit",
-    "def-weil-pbc-ringed-koszul-system"
+    "def-weil-pbc-ringed-koszul-system",
+    "lem-weil-pbc-flat-scalar-koszul-tower-comparison"
    ],
    "elementary": false
   }
@@ -40,14 +40,15 @@
  "proof_deps": [
   "def-weil-pbc-ringed-koszul-system",
   "lem-cbc-exact-product-functor-strict-limit",
+  "lem-sfb-strict-completed-koszul-tower-pullback",
   "lem-sp-completed-pullback-adjunction",
   "lem-weil-pbc-constant-completion-equivalence",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+  "lem-weil-pbc-flat-scalar-koszul-tower-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebraization.tex",
-  "place": "Tag 0A0E, lemma-derived-completion-koszul, augmented finite Koszul tower; sites-cohomology.tex Tags 07A4 and 0941; explicit transport refinement of lem-sfb-adic-stratum-completion-unit"
+  "place": "Tag 0A0E, augmented finite Koszul tower; sites-cohomology.tex Tags 07A4 and 0941. C7: finite augmented tower isolated; normalized Roos comparison, localization and actual-unit transport formalized in Lean."
  },
  "mathlib_searches": [
   {
@@ -117,13 +118,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-26",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W3",
+  "group": "C7",
   "result": "pass",
-  "landing": "20261021T160738-L-3834799",
+  "landing": "20261026T023008-L-511469",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

@@ -1,0 +1,154 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.proof.md",
+  "place": "Paragraph 2, last sentence, and paragraph 3, perfect-factor membership."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.proof.md",
+  "place": "Paragraph 2, last sentence, and paragraph 3, perfect-factor membership."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.InternalHomDualConstructibleModels",
+  "date": "2026-10-26",
+  "group": "B9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sf-ctf-stability-internal-hom",
+   "place": "Paragraph 2, last sentence: locally constant perfect P has dual P^vee; paragraph 3: the perfect factors lie in Dctf. The explicit ordinary-module presentation comparison is expanded by the cited parent node.",
+   "via": [
+    "lem-sfb-internal-hom-dual-constructible-models"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "id": "lem-sfb-ordinary-scalar-perfect-local-dual",
+ "title": "Ordinary scalar perfect models compute local coefficient duals",
+ "statement": "Let A be any commutative topological ring and let C_T be its canonical scalar realization on the pro-etale site [def-sfb-finite-constant-model-data]. Assume C_T is additive for each scheme T. Let S be a scheme, P an object of the unbounded derived category of modules over the continuous coefficient ring A_S [sk-def-sfb-derived-tensor-hom], and U_i -> S a pro-etale cover [def-weil-pbc-proetale-site]. Suppose bounded complexes F_i of finite projective ordinary A-modules realize to P on each U_i. Let G_i be complexes equipped with isomorphisms tau_i^q: G_i^q -> Hom_A(F_i^(-q),A) such that d_G tau = tau (-(-1)^q d_F^*), for every pair of degrees. Then RHom(P,A_S) restricts on every original U_i to the realization of G_i. No assertion about scalar cohomology finiteness or global bounded constructibility is made.",
+ "stmt_deps": [
+  "def-sfb-finite-constant-model-data",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-derived-tensor-hom",
+  "sk-def-sfb-constructible"
+ ],
+ "proof": [
+  {
+   "text": "Transport internal abelian sheaf modules to sectionwise modules over the associated commutative ring sheaf. The constant-module and scalar-extension constructions identify the transported model with C_B(M)=B tensor underline M, naturally in M and linear maps. The ring map sends a to the constant section a.",
+   "uses": [
+    "def-sfb-finite-constant-model-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose degreewise finite-free retract data for F. Apply scalarPerfectDualRealization and its ordinary comparison: internal Hom into the coefficient unit is computed by the scalar dual, with the differential -(-1)^q phi d_F. The supplied component isomorphisms tau identify G with this complex.",
+   "uses": [
+    "lem-sfb-scalar-perfect-dual-realization",
+    "def-weil-pbc-strict-perfect-coefficient-package"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every original covering member identify the covering slice with its pro-etale site, with its actual coefficient ring. Derived internal Hom commutes with this exact restriction. Apply the given local model isomorphism and the previous comparison and transport back to internal modules.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-sfb-coefficient-sections-localization",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-finite-constant-model-data",
+  "lem-sfb-scalar-perfect-dual-realization",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-sfb-coefficient-sections-localization",
+  "lem-pur-site-restriction-module-adjunction-exact"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "exact scalar realization commutes with derived dual of bounded finite projective complexes",
+   "results": [
+    "Module.dual_projective",
+    "Module.dual_finite",
+    "IsBaseChange.toDualBaseChange"
+   ],
+   "date": "2026-10-26",
+   "verdict": "Scalar dual base change is available, but no pro-etale restriction/derived-internal-Hom comparison for the canonical internal-module realization."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FinitePresentation",
+   "results": [
+    "Module.finitePresentation_of_finite",
+    "Module.FinitePresentation.of_equiv"
+   ],
+   "date": "2026-10-26",
+   "verdict": "Only scalar finite presentation; no derived pro-etale dual-model statement."
+  },
+  {
+   "tool": "grep",
+   "query": "homology.*[Ff]inite|[Ff]inite.*homology",
+   "results": [
+    "Mathlib/Algebra/Homology/ShortComplex/ExactFunctor.lean",
+    "Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean"
+   ],
+   "date": "2026-10-26",
+   "verdict": "Generic exact-functor homology APIs do not supply the module-category and derived-dual identifications."
+  }
+ ],
+ "lean": {
+  "module": "Sheaf.Paper.OrdinaryScalarPerfectLocalDual",
+  "file": "lean/Sheaf/Paper/OrdinaryScalarPerfectLocalDual.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.ordinaryScalarPerfect_local_dual",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ordinaryScalarPerfect_local_dual"
+  ],
+  "statement": "theorem ordinaryScalarPerfect_local_dual (S : Scheme.{u}) (P : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj (Profinite.continuousCoefficientRingObj A) S))) (𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage S) (F G : 𝒰.I₀ → CochainComplex (ModuleCat.{u + 1} A) ℤ) (hbounded : ∀ i : 𝒰.I₀, ∃ a b : ℤ, ∀ q : ℤ, q < a ∨ b < q → IsZero ((F i).X q)) (hprojective : ∀ (i : 𝒰.I₀) (q : ℤ), Module.Finite A ((F i).X q) ∧ Module.Projective A ((F i).X q)) (τ : ∀ (i : 𝒰.I₀) (q : ℤ), (G i).X q ≅ ModuleCat.of A (Module.Dual A ((F i).X (-q)))) (hτ : ∀ (i : 𝒰.I₀) (q r : ℤ), (G i).d q r ≫ (τ i r).hom = (τ i q).hom ≫ ModuleCat.ofHom (-q.negOnePow • ((F i).d (-r) (-q)).hom.dualMap)) (hmodel : ∀ i : 𝒰.I₀, Nonempty (((CondensedRing.upperStar (Profinite.continuousCoefficientRingObj A) (𝒰.f i)).mapDerivedCategory).obj P ≅ DerivedCategory.Q.obj (((FiniteConstantModel.modelFunctor A (𝒰.X i)).mapHomologicalComplex (.up ℤ)).obj (F i)))) : ∀ i : 𝒰.I₀, Nonempty (((CondensedRing.upperStar (Profinite.continuousCoefficientRingObj A) (𝒰.f i)).mapDerivedCategory).obj (((CondensedRing.derivedHom (Profinite.continuousCoefficientRingObj A) S).obj (op P)).obj (𝟙_ _)) ≅ DerivedCategory.Q.obj (((FiniteConstantModel.modelFunctor A (𝒰.X i)).mapHomologicalComplex (.up ℤ)).obj (G i)))",
+  "branch": "sheaf-dag",
+  "by": "B9",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261025T205856-L-3384397",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261025T205856-L-3384397",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

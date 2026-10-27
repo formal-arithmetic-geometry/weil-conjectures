@@ -47,6 +47,17 @@ theorem finitePresentation_iff_of_finite_of_finitePresentation
     [AddCommGroup M] [Module S M] [Module R M] [IsScalarTower R S M]
     [Module.Finite R S] [Algebra.FinitePresentation R S] :
     Module.FinitePresentation R M ↔ Module.FinitePresentation S M := by
-  sorry
+  constructor
+  · intro hM
+    apply FinitePresentation.of_finiteType_subring (algebraMap R S)
+      (RingHom.finiteType_algebraMap.mpr inferInstance)
+    have hmodule : Module.compHom M (algebraMap R S) = (inferInstance : Module R M) :=
+      Module.ext' _ _ fun r m ↦ IsScalarTower.algebraMap_smul S r m
+    rw [hmodule]
+    exact hM
+  · intro hM
+    let := hM
+    let := FinitePresentation.of_finite_of_finitePresentation R S
+    exact FinitePresentation.trans R M S
 
 end Module

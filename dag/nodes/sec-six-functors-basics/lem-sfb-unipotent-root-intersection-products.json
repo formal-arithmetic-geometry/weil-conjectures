@@ -1,0 +1,289 @@
+{
+ "id": "lem-sfb-unipotent-root-intersection-products",
+ "kind": "statement",
+ "title": "Scheme intersections of Borels with a common torus",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $G$ be a reductive $F$-group scheme [def-sc-group-scheme], meaning smooth, connected, affine and of finite type with no nontrivial smooth connected normal unipotent subgroup. Fix a split maximal torus $T$, a Borel subgroup $B\\supseteq T$, its unipotent radical $V$, positive roots $\\Phi^+$ and the quotient $Q=G/B$ with right torsor $\\pi:G\\to Q$ as in [lem-sfb-reductive-borel-pair-structure]. Put $W=N_G(T)(F)/T(F)$, acting on characters by $(w\\chi)(t)=\\chi(n^{-1}tn)$ for a representative $n$ of $w$. For each $\\alpha\\in\\Phi$, let $U_\\alpha$ be the root subgroup of [lem-sfb-reductive-root-subgroup-parametrizations]. For any Borel subgroup $B'\\supseteq T$, write $V'=R_u(B')$ and $\\Psi^+$ for its positive roots. The scheme-theoretic intersections $B\\cap B'$, $V\\cap B'$ and $V\\cap V'$ are smooth and connected, and $V\\cap B'=V\\cap V'$. For any ordering of $S=\\Phi^+\\cap\\Psi^+$ the multiplication maps\n$$\\prod_{\\alpha\\in S} U_\\alpha\\xrightarrow{\\sim}V\\cap V',\\qquad \\left(\\prod_{\\alpha\\in S} U_\\alpha\\right)\\times_F T\\xrightarrow{\\sim}B\\cap B'$$\nare isomorphisms of schemes. These assertions persist under algebraically closed extension of $F$. Empty products are $\\operatorname{Spec}F$; in particular $S=\\varnothing$ gives $B\\cap B'=T$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "21.66--21.68(a)--(c), pp.444--446; Proposition 21.77, formula (136), and the scheme-stabilizer computation 21.79(a), pp.448--449; opposite Borels in 21.84. Root-product extension to the common torus uses B=V semidirect T. The incorrect necessity assertion 21.68(d), identified in the appended errata, is not asserted."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-reductive-root-subgroup-parametrizations"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-regular-cocharacter-borel-description] to $B'$ and $T$, obtaining a regular cocharacter $\\lambda:\\mathbf G_m\\to T$ with $B'=P(\\lambda)$. Thus, on every commutative $F$-algebra $A$, membership in $B'(A)$ means that $t\\mapsto\\lambda(t)g\\lambda(t)^{-1}$ extends to $\\mathbf A^1_A$. Put $n_\\alpha=\\langle\\alpha,\\lambda\\rangle\\in\\mathbf Z$. Regularity gives $n_\\alpha\\ne0$ for every root. The Lie-algebra formula in that node, together with the definition of positive roots in [lem-sfb-reductive-borel-pair-structure] applied to $(T,B')$, gives $\\Psi^+=\\{\\alpha\\in\\Phi:n_\\alpha>0\\}$. In particular $S=\\{\\alpha\\in\\Phi^+:n_\\alpha>0\\}$.",
+   "uses": [
+    "lem-sfb-regular-cocharacter-borel-description",
+    "lem-sfb-reductive-borel-pair-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "21.32 and 21.35, pp.434--435; limit-subgroup conventions 13.21 and 13.24, pp.261--262."
+   }
+  },
+  {
+   "text": "Fix the ordering of $S$ required in the statement and extend it to an ordering of $\\Phi^+$ by appending the remaining roots. By [lem-sfb-borel-root-product-coordinates], multiplication gives a $T$-equivariant scheme isomorphism $m:\\prod_{\\alpha\\in\\Phi^+}U_\\alpha\\to V$. Choose the isomorphisms $u_\\alpha:\\mathbf G_a\\to U_\\alpha$ supplied by [lem-sfb-reductive-root-subgroup-parametrizations]. They identify the source with $\\operatorname{Spec}R$, $R=F[z_\\alpha:\\alpha\\in\\Phi^+]$. The conjugation formula in that node and equivariance of $m$ identify the orbit of a tuple $(a_\\alpha)$ under $\\lambda(t)$ with $(t^{n_\\alpha}a_\\alpha)$. Setting a coordinate to zero means putting the identity in that root factor.",
+   "uses": [
+    "lem-sfb-borel-root-product-coordinates",
+    "lem-sfb-reductive-root-subgroup-parametrizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "21.68(a) and Remark 21.69, pp.445--446; root-subgroup formula 21.19, p.431."
+   }
+  },
+  {
+   "text": "For $v\\in V(A)$, an extension of its $\\lambda$-orbit to $G$ factors through the closed subscheme $V$. Indeed, write $G=\\operatorname{Spec}H$ and $V=\\operatorname{Spec}(H/J)$, using the affine description of a closed immersion in [def-weil-closed-immersion]. An extension is a map $f:H\\to A[t]$. Each $f(j)$ for $j\\in J$ is zero in $A[t,t^{-1}]$, since the orbit over $\\mathbf G_{m,A}$ lies in $V$. The inclusion $A[t]\\hookrightarrow A[t,t^{-1}]$ is injective even when $A$ has nilpotents: multiplication by $t$ just shifts polynomial coefficients. Hence $f(J)=0$. Conversely an extension into $V$ is one into $G$.",
+   "uses": [
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "13.21--13.24, pp.261--262; restriction to a closed invariant affine subscheme, with the coefficient argument written out."
+   }
+  },
+  {
+   "text": "In the coordinates of step 2, extension to $\\mathbf A^1_A$ means that every Laurent monomial $t^{n_\\alpha}a_\\alpha$ belongs to $A[t]$. Comparing coefficients shows this holds exactly when $a_\\alpha=0$ for $n_\\alpha<0$; coefficients with $n_\\alpha>0$ are unrestricted. Therefore $m^{-1}(V\\cap B')$ is the coordinate subscheme $X_S$ cut out by the $z_\\alpha$ with $\\alpha\\notin S$. To verify the scheme structure explicitly, let $I\\subset R$ be the ideal of this pullback and $K=(z_\\alpha:\\alpha\\notin S)$. The universal point over $R/K$ has a polynomial orbit, so $I\\subseteq K$. The universal point over $R/I$ has an extending orbit by steps 1 and 3, so coefficient comparison gives $K\\subseteq I$. Thus $I=K$, including all infinitesimal structure. Restricting $m$ gives the required multiplication isomorphism $\\prod_{\\alpha\\in S}U_\\alpha\\simeq V\\cap B'$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "13.24, p.262, explicit Laurent-coefficient test; 21.68(a),(c), pp.445--446, root products."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-borel-root-product-coordinates] to the Borel $B'$ with the same maximal torus $T$. Every $U_\\alpha$ with $\\alpha\\in\\Psi^+$ is a subgroup of $V'$. Since $S\\subseteq\\Psi^+$, multiplication of the factors of $X_S$ takes values in $V'$, over every test algebra. Step 4 identifies its image as the closed subscheme $V\\cap B'$, so it factors through $V\\cap V'$. Conversely $V'\\subseteq B'$ gives $V\\cap V'\\subseteq V\\cap B'$. These two inclusions are inverse, being inclusions of closed subschemes of $V$. Hence $V\\cap B'=V\\cap V'$, and the first displayed isomorphism in the statement is proved.",
+   "uses": [
+    "lem-sfb-borel-root-product-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "21.68(a), p.445, applied also to B prime; intersection identification in 21.79(a), p.449, made scheme-theoretic using the coordinates."
+   }
+  },
+  {
+   "text": "The semidirect-product isomorphism in [lem-sfb-reductive-borel-pair-structure] gives $V\\times_F T\\simeq B$, $(v,t)\\mapsto vt$, with inverse $b\\mapsto(bp(b)^{-1},p(b))$. Because $T\\subseteq B'$, for every $A$ one has $vt\\in B'(A)$ if and only if $v\\in B'(A)$. Thus this isomorphism restricts to $(V\\cap B')\\times_F T\\simeq B\\cap B'$. Its inverse is the same displayed morphism restricted to $B\\cap B'$; the factorization through $V\\cap B'$ follows from $bp(b)^{-1}\\in B'$ by the group operations. Substitute step 5 and then step 4. The resulting map is precisely $( (u_\\alpha),t)\\mapsto(\\prod u_\\alpha)t$, with the original ordering of $S$.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "21.68(b), p.445; common-torus extension of 21.68(c) and 21.79(a), using the displayed semidirect-product inverse."
+   }
+  },
+  {
+   "text": "The parametrizations in [lem-sfb-reductive-root-subgroup-parametrizations] and the split-torus condition identify the three intersections just computed with $\\mathbf A_F^{|S|}$ or $\\mathbf A_F^{|S|}\\times_F\\mathbf G_m^r$. By [def-sc-gm-ga] their coordinate algebras are $F[z_1,\\ldots,z_{|S|}]$ and $F[z_1,\\ldots,z_{|S|},x_1^{\\pm1},\\ldots,x_r^{\\pm1}]$. They are finitely presented and formally smooth as in [def-sbc-smooth-morphisms]: lift each variable across a square-zero quotient, and a lift of a unit is a unit, since $(1+j)^{-1}=1-j$ for $j^2=0$. Their spectra are nonempty and connected as in [def-weil-connected-scheme]: each ring is a domain, and its zero prime belongs to every nonempty basic open, so no two nonempty opens are disjoint. This proves smoothness and connectedness without assuming them for an intersection.",
+   "uses": [
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "def-sc-gm-ga",
+    "def-sbc-smooth-morphisms",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "21.68(c) and 21.77, pp.445--449; explicit geometry of their root-product coordinates. Smoothness criterion: Stacks Definition 02H0, as stated in def-sbc-smooth-morphisms."
+   }
+  },
+  {
+   "text": "For an algebraically closed extension $E/F$, restriction to commutative $E$-algebras preserves every functor calculation above. More explicitly, the equations $z_\\alpha=0$ for $\\alpha\\notin S$, the multiplication maps, their coordinate inverses, and the semidirect-product inverse in step 6 all extend by scalars. Intersections commute with this operation because they are fibre products: a point is a pair of points with equal image in $G$. The coordinate rings in step 7 simply replace $F$ by $E$, so the same smoothness and connectedness calculation applies. Our ordering of $S$ was arbitrary at step 2. If $S=\\varnothing$, its coordinate product is $\\operatorname{Spec}F$, and steps 4--6 give $V\\cap B'=V\\cap V'=1$ and $B\\cap B'=T$. This also covers $G=T$ and the trivial group.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "13.24 and 21.69, pp.262,446; scalar extension and empty products in the explicit coordinate argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-regular-cocharacter-borel-description",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-borel-root-product-coordinates",
+  "lem-sfb-reductive-root-subgroup-parametrizations",
+  "def-weil-closed-immersion",
+  "def-sc-gm-ga",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Explicit common-torus intersection argument using 21.32, 21.68(a),(b), 21.69 and the Laurent-coefficient limit test of 13.24; verifies the conclusions of 21.77 and 21.79(a) on all test algebras."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a split reductive algebraic group multiplication of positive root subgroups is an isomorphism onto the unipotent radical of a Borel",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.GeckConstruction.cartanSubalgebra'\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  {P : RootPairing\", \"doc\": \"The Lie subalgebra over $ R $ obtained as the preimage of the Cartan subalgebra under the canonical inclusion map from the Geck-constructed Lie algebra into the ambient matrix algebra $ \\\\text{Mat}_{(S\"}\n  {\"name\": \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra'\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N}\\n  [inst_5 : P.IsCrystallographic] {b : P.Base} [inst_6 : Finite ι] [inst_7 : IsDomain R] [inst\", \"doc\": \"For a root pairing $ P $ with finite support indexed by $ \\\\iota $ over a commutative ring $ R $, the matrix $ h(i) $ constructed from the Geck construction lies in the Cartan subalgebra $ \\\\mathfrak{h}\"}\n  {\"name\": \"LieAlgebra.rootSpaceProduct_def\", \"module\": \"Mathlib/Algebra/Lie/Weights/Cartan\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  (H : LieSubalgebra R L) [inst_3 : LieRing.IsNilpotent ↥H],\\n  LieAlgebra.rootSpaceProduct R L H = LieAlgebra.rootSpaceWeightSpaceProduct R L H L\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ with a subalgebra $H$, and weights $\\\\chi_1, \\\\chi_2, \\\\chi_3 : H \\\\to R$ satisfying $\\\\chi_1 + \\\\chi_2 = \\\\chi_3$, there exists an $R$-linear Lie\"}\n  {\"name\": \"RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N}\\n  [inst_5 : P.IsCrystallographic] {b : P.Base} [inst_6 : Finite ι] [inst_7 : IsDomain R] [inst\", \"doc\": \"In the Geck construction for a root pairing, the ω-conjugated Lie submodule $\\\\omega\\\\text{-ConjLieSubmodule}(N)$ equals the entire Lie module (denoted $\\\\top$) if and only if the original Lie submodule \"}\n  {\"name\": \"LieAlgebra.cartan_sup_iSup_rootSpace_eq_top\", \"module\": \"Mathlib/Algebra/Lie/Weights/Cartan\", \"type\": \"∀ {L : Type u_2} [inst : LieRing L] {K : Type u_4} [inst_1 : Field K] [inst_2 : LieAlgebra K L] [FiniteDimensional K L]\\n  (H : LieSubalgebra K L) [inst_4 : H.IsCartanSubalgebra] [LieModule.IsTriangularizable K (↥H) L],\\n  H.toLieSubmodule ⊔ ⨆ α, ⨆ (_ : α.IsNonZero), LieAlgebra.rootSpace H ⇑α = ⊤\", \"doc\": \"The direct sum of the Cartan subalgebra $\\\\mathfrak{h}$ and all non-zero root spaces associated with weights $\\\\chi$ equals the entire Lie algebra $\\\\mathfrak{g}$, i.e., $\\\\mathfrak{h} \\\\oplus \\\\bigoplus_{\\\\\"}\n  {\"name\": \"RootPairing.range_weylGroup_coweightHom\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/WeylGroup\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (P : RootPairing ι R M N),\\n  ((RootPairing.Equiv.coweightHom P).restrict P.weylGroup).range =\\n    Subgroup.closure (Set.\", \"doc\": \"The image of the Weyl group of a root pairing $ P $ under the restricted coweight homomorphism is equal to the subgroup generated by the coreflections composed with the opposite monoid operation. Spec\"}\n  {\"name\": \"RootPairing.baseOf_root_eq_baseOf_coroot\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/BaseExists\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [Finite ι] [inst : AddCommGroup M]\\n  [inst_1 : AddCommGroup N] [inst_2 : Field R] [CharZero R] [inst_4 : Module R M] [inst_5 : Module R N]\\n  (P : RootPairing ι R M N) [P.IsRootSystem] [P.IsCrystallographic] [P.IsReduced] (f : M →+ ℚ),\\n  (\", \"doc\": \"Given a root pairing $ P $ between $ R $-modules $ M $ and $ N $, additive monoid homomorphisms $ f : M → ℚ $ and $ g : N → ℚ $ that are non-vanishing on all roots $ P.\\text{root}(i) $ and coroots $ P.\"}\n  {\"name\": \"LieAlgebra.IsKilling.sl2SubmoduleOfRoot_eq_sup\", \"module\": \"Mathlib/Algebra/Lie/Weights/Killing\", \"type\": \"∀ {K : Type u_2} {L : Type u_3} [inst : LieRing L] [inst_1 : Field K] [inst_2 : LieAlgebra K L]\\n  [inst_3 : FiniteDimensional K L] {H : LieSubalgebra K L} [inst_4 : H.IsCartanSubalgebra]\\n  [inst_5 : LieAlgebra.IsKilling K L] [inst_6 : LieModule.IsTriangularizable K (↥H) L] [inst_7 : CharZero K]\\n  (α\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a field $K$ with non-degenerate Killing form and a non-zero weight $\\\\alpha$, the $\\\\mathfrak{sl}_2$-submodule generated by the $\\\\mathfrak{sl}_2$-triple associated \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract root systems, topological actions, or general affine/projective scheme constructions do not state this group-scheme or attracting-cell assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Intersections of the unipotent radical with conjugates of positive and opposite Borels are smooth complementary products of root subgroups",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.GeckConstruction.cartanSubalgebra'\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  {P : RootPairing\", \"doc\": \"The Lie subalgebra over $ R $ obtained as the preimage of the Cartan subalgebra under the canonical inclusion map from the Geck-constructed Lie algebra into the ambient matrix algebra $ \\\\text{Mat}_{(S\"}\n  {\"name\": \"RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N}\\n  [inst_5 : P.IsCrystallographic] {b : P.Base} [inst_6 : Finite ι] [inst_7 : IsDomain R] [inst\", \"doc\": \"In the Geck construction for a root pairing, the ω-conjugated Lie submodule $\\\\omega\\\\text{-ConjLieSubmodule}(N)$ equals the entire Lie module (denoted $\\\\top$) if and only if the original Lie submodule \"}\n  {\"name\": \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"The Lie algebra constructed via the Geck construction from a root pairing over an algebraically closed field has a trivial radical, hence is semisimple. Specifically, the Lie subalgebra of the matrix \"}\n  {\"name\": \"RootPairing.GeckConstruction.mem_ωConjLieSubmodule_iff\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N}\\n  [inst_5 : P.IsCrystallographic] {b : P.Base} [inst_6 : Finite ι] [inst_7 : IsDomain R] [inst\", \"doc\": \"For any vector $x$, $x$ belongs to the $\\\\omega$-conjugated Lie submodule $N$ if and only if the matrix $\\\\omega$ (from the Geck construction) multiplied by $x$ lies in $N$.\"}\n  {\"name\": \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra'\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N}\\n  [inst_5 : P.IsCrystallographic] {b : P.Base} [inst_6 : Finite ι] [inst_7 : IsDomain R] [inst\", \"doc\": \"For a root pairing $ P $ with finite support indexed by $ \\\\iota $ over a commutative ring $ R $, the matrix $ h(i) $ constructed from the Geck construction lies in the Cartan subalgebra $ \\\\mathfrak{h}\"}\n  {\"name\": \"LieModule.isCompl_genWeightSpace_zero_posFittingComp\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (R : Type u_2) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [IsNoetherian R M] [IsArtinian R M],\\n  IsComp\", \"doc\": \"In a Lie module $ M $ over a commutative ring with a nilpotent Lie algebra action, the generalized weight space associated with the zero weight function and the positive Fitting component form complem\"}\n  {\"name\": \"LieModule.isCompl_genWeightSpaceOf_zero_posFittingCompOf\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (R : Type u_2) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [IsNoetherian R M] [IsArtinian R M] (x : L),\\n\", \"doc\": \"For a nilpotent Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ acting on a Lie module $M$, and for each element $x \\\\in \\\\mathfrak{g}$, the generalized weight space $\\\\text{genWeightSpaceOf}(M, 0\"}\n  {\"name\": \"RootPairing.GeckConstruction.instIsTriangularizableSubtypeMatrixSumMemFinsetSupportLieSubalgebraLieAlgebraCartanSubalgebra'Forall\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N}\\n  [inst_5 : P.IsCrystallographic] {b : P.Base} [inst_6 : Finite ι] [inst_7 : IsDomain R] [inst\", \"doc\": \"The Cartan subalgebra obtained via the Geck construction acts triangularizably on the module of functions from the disjoint union of the finite support set and $\\\\iota$ to the commutative ring $R$. Thi\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract root systems, topological actions, or general affine/projective scheme constructions do not state this group-scheme or attracting-cell assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RootSubgroup\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract root systems, topological actions, or general affine/projective scheme constructions do not state this group-scheme or attracting-cell assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "root.subgroup|unipotent.radical|opposite.borel|BorelSubgroup",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean\", \"line\": \"18\", \"text\": \"* `Matrix.SpecialLinearGroup.lineStab` : the unipotent radical attached to a subspace `L ⊆ ι → F`\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean\", \"line\": \"31\", \"text\": \"/-- The \\\"unipotent radical\\\" attached to a subspace `L ⊆ ι → F`: the subgroup of\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean\", \"line\": \"55\", \"text\": \"`PSL ι F` acting on the projective space `ℙ F (ι → F)`: the unipotent radical\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract root systems, topological actions, or general affine/projective scheme constructions do not state this group-scheme or attracting-cell assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ordered root subgroup products parametrize a Borel unipotent radical and its Weyl conjugate intersections",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Pi.orderedSub\", \"module\": \"Mathlib.Algebra.Order.Sub.Prod\", \"type\": \"{ι : Type*} {α : ι → Type*} [∀ i, Preorder (α i)] [∀ i, Add (α i)] [∀ i, Sub (α i)] [∀ i, OrderedSub (α i)] :\\n  OrderedSub ((i : ι) → α i)\", \"doc\": \"Given an indexed family of ordered additive groups where each component is closed under subtraction and downward closed with respect to its order, the product type inherits an ordered subgroup structu\"}\n  {\"name\": \"RootPairing.weylGroup\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.WeylGroup\", \"type\": \": Subgroup (Aut P)\", \"doc\": \"The Weyl group of a root pairing $ P $ is the subgroup of the automorphism group $ \\\\text{Aut}(P) $ generated by the image of the reflection automorphisms. It consists of all automorphisms that can be \"}\n  {\"name\": \"RootPairing.weylGroup_toSubmonoid\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.WeylGroup\", \"type\": \": P.weylGroup.toSubmonoid = Submonoid.closure (range (Equiv.reflection P))\", \"doc\": \"The submonoid generated by the reflection automorphisms of a root pairing $ P $ is equal to the submonoid underlying its Weyl group, i.e., $ \\\\text{WeylGroup}(P) $ viewed as a submonoid coincides with \"}\n  {\"name\": \"RootPairing.span_orbit_eq_top\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Irreducible\", \"type\": \"(i : ι) : span R (orbit P.weylGroup (P.root i)) = ⊤\", \"doc\": \"For any root pairing $ P $ over a commutative ring $ R $, and for any index $ i $, the span of the orbit of the root $ P.\\\\text{root}(i) $ under the Weyl group of $ P $ is equal to the entire module $ \"}\n  {\"name\": \"OrderedSub\", \"module\": \"Mathlib.Algebra.Order.Sub.Defs\", \"type\": \"(α : Type u_2) → [LE α] → [Add α] → [Sub α] → Prop\", \"doc\": \"A type class asserting that a subset of an ordered additive group is closed under subtraction and downward closed with respect to the order ≤\"}\n  {\"name\": \"RootPairing.range_weylGroup_coweightHom\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.WeylGroup\", \"type\": \":\\n  MonoidHom.range ((Equiv.coweightHom P).restrict P.weylGroup) =\\n    Subgroup.closure (range (MulOpposite.op ∘ P.coreflection))\", \"doc\": \"The image of the Weyl group of a root pairing $ P $ under the restricted coweight homomorphism is equal to the subgroup generated by the coreflections composed with the opposite monoid operation. Spec\"}\n  {\"name\": \"RootPairing.rootForm_restrict_nondegenerate_of_ordered\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Finite.Nondegenerate\", \"type\": \": LinearMap.Nondegenerate (P.RootForm.restrict (P.rootSpan R))\", \"doc\": \"The bilinear form associated to the root pairing, when restricted to the submodule generated by the roots, is non-degenerate provided the underlying ring or module structure satisfies an ordered condi\"}\n  {\"name\": \"RootPairing.range_weylGroupToPerm\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.WeylGroup\", \"type\": \": P.weylGroupToPerm.range = Subgroup.closure (range P.reflectionPerm)\", \"doc\": \"The image of the Weyl group permutation homomorphism $ P.\\text{weylGroupToPerm} $ for a root pairing $ P $ is equal to the subgroup generated by the permutations $ P.\\text{reflectionPerm} $ associated w\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract root systems, topological actions, or general affine/projective scheme constructions do not state this group-scheme or attracting-cell assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "rootSubgroup|unipotentRadical|BorelSubgroup",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract subgroup, root-datum or Lie-algebra facts do not give intersections of Borel group schemes or their scheme coordinates"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Intersection of Borel subgroup schemes containing a common torus and multiplication coordinates of root subgroups",
+   "results": "8 hits; Subgroup.subgroupOf_isMulCommutative, Subgroup.instInfSet, Subgroup.IsArithmetic.inter, AddSubgroup.mem_iInf, RingSubgroupsBasis.inter, AddSubgroup.instInfSet, AddSubgroup.inf_addSubgroupOf_inf_normal_of_right, RootPairing.iInf_ker_coroot'_eq",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract subgroup, root-datum or Lie-algebra facts do not give intersections of Borel group schemes or their scheme coordinates"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Borel\", \"Subgroup\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract subgroup, root-datum or Lie-algebra facts do not give intersections of Borel group schemes or their scheme coordinates"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scheme theoretic intersection of two Borel subgroups containing the same maximal torus is a product of common positive root subgroups and the torus",
+   "results": "8 hits; Subgroup.IsArithmetic.inter, Subgroup.inf_mul_assoc, Subgroup.mul_inf_assoc, Subgroup.inf_subgroupOf_left, Subgroup.inf_subgroupOf_right, Subgroup.ofUnits_inf_units, AddSubgroup.inertia_map_subtype, Subgroup.codisjoint_subgroupOf_sup",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract subgroup, root-datum or Lie-algebra facts do not give intersections of Borel group schemes or their scheme coordinates"
+  },
+  {
+   "tool": "grep",
+   "query": "root.subgroup|unipotent.radical|Borel.subgroup",
+   "results": "3 hits; Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean, Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean, Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the three hits are comments on the point-group construction Matrix.SpecialLinearGroup.lineStab in Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean:18,31,55; read lines 25--78; this has no Borel group schemes or intersection-coordinate isomorphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a split reductive group, any ordering of the common positive root groups gives coordinates on the intersection of two unipotent radicals",
+   "results": "8 hits; RootPairing.rootForm_restrict_nondegenerate_of_ordered, RootDatum, RootPairing.posRootForm_eq, RootPairing.RootPositiveForm.rootLength_pos, RootPairing.baseOf_root_eq_baseOf_coroot, RootPairing.posRootForm_posForm_apply_apply, RootPairing.posRootForm.congr_simp, RootPairing.Base.exists_eq_sum_and_forall_sum_mem_of_isPos",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract subgroup, root-datum or Lie-algebra facts do not give intersections of Borel group schemes or their scheme coordinates"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RootPairing\"",
+   "results": "12 hits; RootPairing, RootPairing.IsRootSystem, RootPairing.indexNeg, RootPairing.IsOrthogonal, RootPairing.coroot, RootPairing.coxeterWeight, RootPairing.pairing, RootPairing.root",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract subgroup, root-datum or Lie-algebra facts do not give intersections of Borel group schemes or their scheme coordinates"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a regular cocharacter, the intersection of its parabolic with a torus equivariant affine root product is the coordinate subspace of positive weights",
+   "results": "8 hits; LieSubalgebra.root, LieAlgebra.rootSpaceProduct_def, RootPairing.exist_set_root_not_disjoint_and_le_ker_coroot'_of_invtSubmodule, LieAlgebra.IsKilling.rootSpace_zsmul_add_ne_bot_iff_mem, LieAlgebra.rootSpace_comap_eq_genWeightSpace, LieAlgebra.IsKilling.rootSpace_zsmul_add_ne_bot_iff, LieModule.exists_forall_mem_corootSpace_smul_add_eq_zero, LieAlgebra.IsKilling.sl2SubmoduleOfRoot_eq_sup",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract subgroup, root-datum or Lie-algebra facts do not give intersections of Borel group schemes or their scheme coordinates"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-bruhat-longest-cell-charts",
+  "date": "2026-10-24",
+  "group": "Q136"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Large rho tensor squares detect a nonzero invariant vector. Geometric input: opposite flags form the nonvanishing locus of the invariant rho external-square section. Supporting input: Bruhat cells and flag charts for a split reductive group. Supporting input: smooth scheme-theoretic intersections and root factors needed for stabilizers and opposite Borels; no Bruhat stratification is asserted",
+   "via": [
+    "lem-sfb-bruhat-longest-cell-charts",
+    "lem-sfb-double-flag-invariant-boundary",
+    "lem-sfb-rho-tensor-square-eventual-detection",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-unipotent-root-intersection-products",
+  "worker": "stage1",
+  "group": "Q85",
+  "summary": "Kept the statement and all hypotheses. Reused regular-cocharacter Borel recognition and arbitrary-order Borel root coordinates. Computed V intersect B prime as the positive-weight coordinate subspace on arbitrary test algebras, identified it with V intersect V prime, then restricted the semidirect product. Wrote out the closed-subscheme factorization, equality of ideals, polynomial/Laurent smoothness and connectedness, scalar extension, and empty-root cases. No new nodes.",
+  "blueprint": "Supports the existing from.place chain through lem-sfb-bruhat-longest-cell-charts to det-thm-sf-ctf-stability-direct-images, proof (3). Realizes the common-torus intersection prerequisite only; the Bruhat stratification and longest-cell arguments remain in the parent. The ancestor command returns None in the current DAG, so the existing null from.node and via chain are preserved; searches for Borel, cocharacter, root and 21.68 found no equivalent imported blueprint statement."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q85-3c820cd23",
+  "group": "Q85",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q85-3c820cd23 (reviewer sub-agent of L); spot-checked: Read the item's 8 steps in full against Milne iAG2017 Thm 21.68(a)-(c), Rem 21.69, Prop 21.67, and 21.76-21.78 with (136), pp.445-449, plus the errata on 21.68(d). One commit; the statement and stmt_deps are unchanged and there are no new nodes. Step 1 uses the regular-cocharacter node's statement (B'=P(λ), the extension definition on all A, and the Lie formula) to get Ψ+={n_α>0}. Step 2 uses the root-product node (any enumeration, T-equivariant) and the root-subgroup conjugation formula on all A. Steps 3-4 are elementary and correct: V is closed in affine G, A[t]→A[t,t^-1] is injective for every A, and coefficient comparison gives V∩B' = X_S as schemes, including non-reduced A. Step 5 uses root-product coordinates for B' (U_α ⊆ V' for α∈Ψ+) to get V∩B'=V∩V'. Step 6 restricts B=V⋊T using T⊆B'. Step 7 checks smoothness and connectedness of A^s×G_m^r straight from def-sbc-smooth-morphisms and def-weil-connected-scheme. Step 8 covers scalar extension and the empty S case. Small cases checked: SL2 opposite Borels in characteristic 2 give T; B'=B; SL3 with s_α1 B matches (136); the F[ε] point is not lost. Duplicate search over sources and statements citing 21.68/21.69/21.77/21.79 or Borel∩root found no duplicate, and the only citer is the parent, so there is no cycle. Batch-5 flags: both lem-trf-smooth-fpqc-base-descent and lem-trf-fppf-covering-base-change are mathlib-status generic fpqc/fppf base-change facts, not part of the trace formula or Poincaré duality, so they are accepted. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.UnipotentRootIntersectionProducts",
+  "declaration": "AlgebraicGeometry.unipotent_root_intersection_products",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/UnipotentRootIntersectionProducts.lean",
+  "statement": "theorem unipotent_root_intersection_products {F : Type u} [Field F] [IsAlgClosed F] (G T B B' V V' : Grp (Over (Spec (.of F)))) (hG : ReductiveTorusCentralizer.IsReductive G) (iT : T ⟶ G) (hT : ReductiveTorusCentralizer.IsMaximalTorus iT) (hsplit : ∃ n : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus F n)) (iB : B ⟶ G) (hB : IsBorelGroupScheme iB.hom.hom) (iB' : B' ⟶ G) (hB' : IsBorelGroupScheme iB'.hom.hom) (j : T ⟶ B) (hj : j ≫ iB = iT) (j' : T ⟶ B') (hj' : j' ≫ iB' = iT) (Q : Over (Spec (.of F))) (π : G.X ⟶ Q) (hQproper : IsProper Q.hom) (hQfinite : LocallyOfFiniteType Q.hom ∧ QuasiCompact Q.hom) (hπflat : Flat π.left) (hπsurj : Surjective π.left) (hπinv : (fst G.X B.X * (snd G.X B.X ≫ iB.hom.hom)) ≫ π = fst G.X B.X ≫ π) (hπtorsor : IsPullback (fst G.X B.X) (fst G.X B.X * (snd G.X B.X ≫ iB.hom.hom)) π π) (iV : V ⟶ B) (iV' : V' ⟶ B') (hV : IsClosedSubgroupScheme iV.hom.hom ∧ IsNormalSubgroupScheme iV.hom.hom ∧ Smooth V.X.hom ∧ ConnectedSpace V.X.left ∧ SolvableGroupStructure.IsUnipotent V ∧ ∀ (N : Grp (Over (Spec (.of F)))) (iN : N ⟶ B), IsClosedSubgroupScheme iN.hom.hom → IsNormalSubgroupScheme iN.hom.hom → Smooth N.X.hom → ConnectedSpace N.X.left → SolvableGroupStructure.IsUnipotent N → ∃ f : N ⟶ V, f ≫ iV = iN) (hV' : IsClosedSubgroupScheme iV'.hom.hom ∧ IsNormalSubgroupScheme iV'.hom.hom ∧ Smooth V'.X.hom ∧ ConnectedSpace V'.X.left ∧ SolvableGroupStructure.IsUnipotent V' ∧ ∀ (N : Grp (Over (Spec (.of F)))) (iN : N ⟶ B'), IsClosedSubgroupScheme iN.hom.hom → IsNormalSubgroupScheme iN.hom.hom → Smooth N.X.hom → ConnectedSpace N.X.left → SolvableGroupStructure.IsUnipotent N → ∃ f : N ⟶ V', f ≫ iV' = iN) (aG : ModObj T.X G.X) (aB : ModObj T.X B.X) (aB' : ModObj T.X B'.X) (haG : aG.smul = (iT.hom.hom ⊗ₘ 𝟙 G.X) ≫ GrpObj.conj G.X) (haB : aB.smul = (j.hom.hom ⊗ₘ 𝟙 B.X) ≫ GrpObj.conj B.X) (haB' : aB'.smul = (j'.hom.hom ⊗ₘ 𝟙 B'.X) ≫ GrpObj.conj B'.X) (r : ℕ) (α : Fin r → (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (hαinj : Function.Injective α) (hαpos : ∀ χ : T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F), (∃ i : Fin r, α i = χ) ↔ χ.hom.hom ≠ 1 ∧ @TorusCharacterTangent.weightSpace F _ T G aG χ ≠ ⊥ ∧ @TorusCharacterTangent.weightSpace F _ T B aB χ ≠ ⊥ ∧ @TorusCharacterTangent.weightSpace F _ T B' aB' χ ≠ ⊥) (R : Fin r → Grp (Over (Spec (.of F)))) (iR : ∀ i : Fin r, R i ⟶ G) (hR : ∀ i : Fin r, IsClosedSubgroupScheme (iR i).hom.hom ∧ Smooth (R i).X.hom ∧ ConnectedSpace (R i).X.left ∧ @TorusCharacterTangent.IsStable F _ T G aG _ (iR i) ∧ (GrpObj.differential (iR i).hom.hom).toLinearMap.range = @TorusCharacterTangent.weightSpace F _ T G aG (α i)) : Smooth (pullback iB.hom.hom iB'.hom.hom).hom ∧ ConnectedSpace (pullback iB.hom.hom iB'.hom.hom).left ∧ Smooth (pullback (iV ≫ iB).hom.hom iB'.hom.hom).hom ∧ ConnectedSpace (pullback (iV ≫ iB).hom.hom iB'.hom.hom).left ∧ Smooth (pullback (iV ≫ iB).hom.hom (iV' ≫ iB').hom.hom).hom ∧ ConnectedSpace (pullback (iV ≫ iB).hom.hom (iV' ≫ iB').hom.hom).left ∧ (∃ e : pullback (iV ≫ iB).hom.hom iB'.hom.hom ≅ pullback (iV ≫ iB).hom.hom (iV' ≫ iB').hom.hom, e.hom ≫ pullback.fst _ _ = pullback.fst _ _) ∧ (∃ mV : (∏ᶜ fun i : Fin r ↦ (R i).X) ⟶ pullback (iV ≫ iB).hom.hom (iV' ≫ iB').hom.hom, IsIso mV ∧ mV ≫ pullback.fst _ _ ≫ (iV ≫ iB).hom.hom = (List.ofFn (fun i : Fin r ↦ Pi.π (fun l : Fin r ↦ (R l).X) i ≫ (iR i).hom.hom)).prod) ∧ (∃ mB : (∏ᶜ fun i : Fin r ↦ (R i).X) ⊗ T.X ⟶ pullback iB.hom.hom iB'.hom.hom, IsIso mB ∧ mB ≫ pullback.fst _ _ ≫ iB.hom.hom = (fst (∏ᶜ fun i : Fin r ↦ (R i).X) T.X ≫ (List.ofFn (fun i : Fin r ↦ Pi.π (fun l : Fin r ↦ (R l).X) i ≫ (iR i).hom.hom)).prod) * (snd (∏ᶜ fun i : Fin r ↦ (R i).X) T.X ≫ iT.hom.hom)) ∧ (r = 0 → Nonempty ((∏ᶜ fun i : Fin r ↦ (R i).X) ≅ Over.mk (𝟙 (Spec (.of F)))) ∧ ∃ eT : T.X ≅ pullback iB.hom.hom iB'.hom.hom, eT.hom ≫ pullback.fst _ _ ≫ iB.hom.hom = iT.hom.hom) ∧ ∀ (E : Type u) [Field E] [Algebra F E] [IsAlgClosed E], Smooth ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap F E)))).obj (pullback iB.hom.hom iB'.hom.hom)).hom ∧ ConnectedSpace ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap F E)))).obj (pullback iB.hom.hom iB'.hom.hom)).left ∧ Smooth ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap F E)))).obj (pullback (iV ≫ iB).hom.hom iB'.hom.hom)).hom ∧ ConnectedSpace ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap F E)))).obj (pullback (iV ≫ iB).hom.hom iB'.hom.hom)).left ∧ Smooth ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap F E)))).obj (pullback (iV ≫ iB).hom.hom (iV' ≫ iB').hom.hom)).hom ∧ ConnectedSpace ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap F E)))).obj (pullback (iV ≫ iB).hom.hom (iV' ≫ iB').hom.hom)).left",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c63372f8c",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Item node differs from live only by its lean record; lean.statement appears verbatim in the file; one sorry, no defs; source/blueprint docstrings carry the 8 proof steps; real Worker report and Second reading by Q29 sections. Clause check: reductive G, split maximal T, Borels B and B' over the same iT (hj, hj'), radicals V/V' by the dependency's maximality characterization verbatim, Q/pi torsor hypotheses as context only (existence given by the dependency), actions pinned to conjugation, hαpos with injective α = exactly S = Phi+ ∩ Psi+ through the Borel-pair node's IsPos ↔ weightSpace B ≠ ⊥ (applied to B and B'), root subgroups R i by the uniqueness characterization of reductive_root_subgroup_parametrizations. Conclusions: B∩B', V∩B', V∩V' are fibre products over G, each Smooth and ConnectedSpace; V∩B' = V∩V' as an iso over V; mV and mB are isos pinned by their composite into G (ordered List.ofFn product, torus on the right); r=0 gives eT : T ≅ B∩B' over G; the base change to every algebraically closed E keeps smoothness and connectedness, and the isos carry over formally since Over.pullback preserves limits. Edge cases r=0, B'=B, SL2 char 2, non-reduced test algebras checked. Notions reach the item through the theorem dependencies' recorded declarations, like the landed sibling borel_root_product_coordinates; no duplicate found in side-live GroupScheme. Advisory only: the r=0 Nonempty(∏ ≅ terminal) conjunct is automatically true; E is in the same universe u. No file changed, no compile."
+ }
+}

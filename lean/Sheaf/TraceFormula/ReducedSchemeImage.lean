@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
-import Sheaf.Paper.ReducedSourceFactors
+import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-!
@@ -31,7 +31,6 @@ by definition the scheme-theoretic image of the open immersion).
 
 set_option autoImplicit false
 set_option relaxedAutoImplicit false
-set_option warn.sorry false
 
 universe u
 
@@ -85,6 +84,25 @@ theorem schemeTheoreticImage_reduced
       ∀ (Z : Scheme.{u}) (i : Z ⟶ X) [IsClosedImmersion i],
         (∃ g : U ⟶ Z, g ≫ i = f) →
           ∃! h : f.image ⟶ Z, h ≫ i = f.imageι := by
-  sorry
+  let T : TopologicalSpace.Closeds X := ⟨closure (Set.range f), isClosed_closure⟩
+  have hT := reduced_induced_closed_subscheme X T
+  have hk : f.ker = vanishingIdeal T := f.ker_eq_vanishingIdeal
+  have hred : IsReduced f.image := by
+    change IsReduced f.ker.subscheme
+    rw [hk]
+    exact hT.2.2.2.1
+  have hrange : Set.range f.imageι = closure (Set.range f) := by
+    change Set.range f.ker.subschemeι = _
+    rw [hk]
+    exact hT.2.2.2.2.2.1
+  refine ⟨inferInstance, hred, hk, hrange, ?_⟩
+  intro Z i _ hfac
+  let : IsReduced f.image := hred
+  apply IsClosedImmersion.existsUnique_fac_of_range_subset_range i f.imageι
+  rw [hrange]
+  apply closure_minimal _ i.isClosedEmbedding.isClosed_range
+  obtain ⟨g, hg⟩ := hfac
+  rintro _ ⟨x, rfl⟩
+  exact ⟨g x, by rw [← Scheme.Hom.comp_apply, hg]⟩
 
 end AlgebraicGeometry

@@ -1,0 +1,340 @@
+{
+ "id": "lem-sfb-dg-coefficient-realization-comparison",
+ "kind": "statement",
+ "title": "Derived comparison of dg coefficient realizations with the normalized scheme arrow",
+ "statement": "Let $D\\to E\\to A$ be maps of commutative rings, let $Y\\to\\operatorname{Spec}D$ be a separated finite type scheme, and put $Y_E=Y\\times_D\\operatorname{Spec}E$, $Y_A=Y\\times_D\\operatorname{Spec}A$, $p_E:Y_E\\to Y$, $\\pi_E:Y_A\\to Y_E$, and $q_E:Y_E\\to\\operatorname{Spec}E$ [def-pc-scheme, def-pc-morphism-conventions, def-pc-fibre-product]. Use the dg coefficient category, $\\Phi_E$, $\\widehat K$, $U$, and $\\nu_E$ of [def-sfb-dg-coefficient-realization]. For $G\\in D_{\\mathrm{QCoh}}(\\mathcal O_{Y_E})$ and $K\\in D_{\\mathrm{QCoh}}(\\mathcal O_{Y_A})$ [def-pc-derived-category], there is a canonical isomorphism in $D(\\mathcal O_Y)$\n$$U\\Phi_E(G)\\simeq Rp_{E*}\\bigl(Lq_E^*\\widetilde A\\otimes^{\\mathbf L}G\\bigr).$$\nHere $\\widetilde A$ is the associated module on $\\operatorname{Spec}E$ [lem-weil-pbc-spec-module-tilde-sections], and pullback and tensor are [def-pc-derived-pullback, def-pc-scheme-derived-tensor-structure]. This isomorphism is natural in $G$, commutes with restriction to opens of $Y$, and identifies the actual arrow $U\\nu_E(\\gamma)$ with $Rp_{E*}\\theta_{E,G,\\gamma}$ for every $\\gamma:G\\to R\\pi_{E*}K$. The arrow $\\theta_{E,G,\\gamma}$ is the adjoint [lem-pc-ringed-spaces-derived-adjoint] of\n$$L\\pi_E^*(Lq_E^*\\widetilde A\\otimes^{\\mathbf L}G)\\simeq L(q_E\\pi_E)^*\\widetilde A\\otimes^{\\mathbf L}L\\pi_E^*G\\longrightarrow\\mathcal O_{Y_A}\\otimes^{\\mathbf L}K\\simeq K,$$\nusing the given scalar action and the transpose of $\\gamma$. In particular $\\Phi_E(G)$ and the cone of $\\nu_E(\\gamma)$ have quasi-coherent underlying cohomology. The comparison holds without flatness of $E\\to A$ or $Y_E\\to\\operatorname{Spec}E$. For $E=D$, the functor $T=\\Phi_D=\\mathcal B\\otimes_{\\mathcal O_Y}^{\\mathbf L}-$ is left adjoint to $U$: for every $P\\in D_{\\mathrm{QCoh}}(\\mathcal O_Y)$ and $C\\in D_{\\mathrm{QCoh}}(\\mathcal B)$ there is a natural bijection $\\operatorname{Hom}_{D(\\mathcal B)}(T(P),C)=\\operatorname{Hom}_{D(\\mathcal O_Y)}(P,UC)$, whose transpose is extension followed by the dg action. Forgetting actions preserves cones and their underlying cohomology. The category $D_{\\mathrm{QCoh}}(\\mathcal B)$ with these cones is triangulated, $U$ is exact, and $T=\\Phi_D$ is exact. On an affine open $\\operatorname{Spec}S\\subseteq Y$ and for a finite polynomial surjection $Q=D[x_1,\\ldots,x_r]\\twoheadrightarrow S$ [def-weil-pbc-mv-polynomial-ring], restriction of dg actions along $Q\\otimes_D R_A\\to S\\otimes_D R_A$, followed by the quasi-isomorphism equivalence $D(Q\\otimes_D R_A)\\simeq D(Q_A)$ induced by $Q\\otimes_D R_A\\to Q_A=A[x_1,\\ldots,x_r]$, carries $\\widehat K$ to the restriction of the affine $K$ to $Q_A$, carries $\\Phi_D(P)$ to $Q_A\\otimes_Q^{\\mathbf L}\\operatorname{Res}_Q^S P$, and carries their normalized arrows and cones to the corresponding scalar-action arrows and cones. More generally it carries $\\Phi_E(G)$ to $Q_A\\otimes_{Q_E}^{\\mathbf L}\\operatorname{Res}_{Q_E}^{S\\otimes_D E}G$, with $Q_E=E[x_1,\\ldots,x_r]$. Cohomology of these comparisons is the canonical $Q_A$-module cohomology, with its action factoring through $S\\otimes_D A$ when the object is a $\\mathcal B$-module.",
+ "source": {
+  "document": "literature/stacks-project/sdga.tex",
+  "place": "Agent comparison of the coefficient models: Tag 0FTF (lemma-derived-tensor-product), Tag 0FTR (lemma-derived-adjoint-push-pull), with scheme affine tensor calculation in cohomology.tex Tag 06YH. These tags give the constructions; the stated normalized comparison is the separate obligation. The $E=D$ adjunction is Tag 0FTQ (lemma-derived-adjoint-tensor-hom). Polynomial-source restriction comparison uses Tag 0FTZ (lemma-qis-equivalence), with the polynomial source flat over D."
+ },
+ "stmt_deps": [
+  "def-sfb-dg-coefficient-realization",
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-pc-fibre-product",
+  "def-pc-derived-category",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-pc-derived-pullback",
+  "def-pc-scheme-derived-tensor-structure",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\mathcal H_E=p_{E*}\\mathcal O_{Y_E}$. The maps $p_E$ and $\\pi_E$ are affine, being base changes of maps between affine spectra. Hence their direct images preserve quasi-coherent cohomology. The canonical map $g_E:(Y_E,\\mathcal O_{Y_E})\\to(Y,\\mathcal H_E)$ gives an equivalence on quasi-coherent derived objects: take $L=Lg_E^*$ in the cited unit/counit theorem. Its inverse $Rg_{E*}$ identifies $Rp_{E*}G$ with a derived $\\mathcal H_E$-module. This equivalence respects tensor and the specified adjunction maps: the tensor comparison for its right adjoint is inverse to the strong monoidal comparison for $Lg_E^*$, conjugated by its invertible unit and counit. Thus coefficient tensors and their action maps can be computed on $Y$ using $\\mathcal H_E$-modules.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-sc-affine-derived-cohomology",
+    "lem-sc-affine-algebra-derived-adjunction-isos",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0AVW (perfect.tex, lemma-affine-morphism-equivalence); ordinary derived monoidal comparisons 07A4, 0D6D, 0FPI"
+   }
+  },
+  {
+   "text": "Use the nonpositive termwise D-flat resolutions $R_E\\to E$ and $R_A\\to A$ specified in the current definition. They are D-K-flat by the bounded-above-flat theorem, so the existing left-module bar theorem applies with $P=R_E$, $Q=R_A$. Put $F_E=B(R_A,R_E,E)$. Each term is a direct sum of modules $R_A^i\\otimes_D R_E^{j_1}\\otimes_D\\cdots\\otimes_D R_E^{j_n}\\otimes_D E$, with $i,j_k\\leq0$ and bar shift $[n]$. Tensor products of flat D-modules are flat, their base changes to E are flat, and sums are flat: tensoring an exact sequence commutes with each of these operations. Thus $F_E$ is nonpositive and termwise E-flat, hence E-K-flat. By the symmetry for the commutative dg algebras, its underlying object represents $E\\otimes_{R_E}^{\\mathbf L}R_A$. The quasi-isomorphism $R_E\\to E$ induces a derived equivalence; its unit at $R_A$ identifies $R_A$ with $\\operatorname{Res}_{R_E}F_E$. The composite of this unit with the bar augmentation $F_E\\to A$ is $R_A\\to A$. The latter is a quasi-isomorphism, so $F_E\\to A$ is one as well. This is an E-linear, E-K-flat resolution of A; no E-action on $R_A$ or flatness of E over D is asserted.",
+   "uses": [
+    "def-sfb-dg-coefficient-realization",
+    "lem-sfb-sheaf-dg-relative-flat-bar-extension",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-sfb-dg-qis-restriction-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 09S6 (dga.tex, lemma-qis-equivalence); Tag 0FTF and relative flat bar construction"
+   }
+  },
+  {
+   "text": "Put $M=Rg_{E*}G$, with its commuting $\\mathcal O_Y$- and E-actions. Use the left bar convention of the current definition. In every bar degree the balancing map $$(R_A\\otimes_D R_E^{\\otimes_D n}\\otimes_D E)\\otimes_E M\\longrightarrow R_A\\otimes_D R_E^{\\otimes_D n}\\otimes_D M$$ sends $(h\\otimes\\mathbf r\\otimes e)\\otimes m$ to $h\\otimes\\mathbf r\\otimes em$ and has inverse inserting $1\\in E$. These maps respect the internal differential, all faces, the shifted left action and degeneracies. Hence $B(R_A,R_E,M)=F_E\\otimes_E M$. Since $F_E$ is E-K-flat, this computes the derived coefficient tensor with its commuting structure-sheaf action. On each affine open of $Y$ the complex $F_E\\otimes_E M$ is the tilde of the module total tensor, so it has quasi-coherent $\\mathcal H_E$-cohomology and the unit of step 1 is invertible on it. Under the affine algebra equivalence of step 1 it is $Rp_{E*}(q_E^*\\widetilde F_E\\otimes G)$. The tilde tensor and affine pullback models identify $q_E^*\\widetilde F_E$ with $Lq_E^*\\widetilde A$. Its stalks are extensions of the E-K-flat complex $F_E$, hence K-flat by scalar extension and the stalk criterion. Thus the displayed tensor computes the derived tensor. This constructs the comparison globally through the affine algebra equivalence. The explicit balancing maps are natural and unchanged on open restrictions, as are the bar and pullback constructions.",
+   "uses": [
+    "def-sfb-dg-coefficient-realization",
+    "lem-sfb-sheaf-dg-relative-flat-bar-extension",
+    "lem-sc-affine-algebra-derived-adjunction-isos",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-pc-affine-derived-pullback-module-model",
+    "lem-pc-kflat-extension-of-scalars",
+    "lem-pc-kflat-stalk-criterion",
+    "lem-pc-affine-tilde-total-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FTF; perfect.tex Tags 06Z0, 08DW, 08DX, 0AVW; more-algebra.tex Tag 06Y1"
+   }
+  },
+  {
+   "text": "Track $\\gamma:G\\to R\\pi_{E*}K$ using the current definition's coefficient-linear direct images. The ringed-space composition theorem identifies $Rp_{E*}R\\pi_{E*}K$ with $R\\pi_{D*}K$ in $D(\\mathcal H_E)$: use the two factorizations through $Y_E$ and through $(Y,\\mathcal O_Y\\otimes_D A)$. The final identity-space map is exact restriction, and the composites agree since $D\\to E\\to A$ commutes. Restriction along $R_E\\to E$ retains this identification. By definition $\\nu_E(\\gamma)$ is the bar of $Rp_{E*}\\gamma$ followed by the action counit. In left bar degree zero this sends $h\\otimes m$ to $hm$, and in higher bar degrees it is zero, exactly as the cited bar theorem specifies. Under step 3 these maps are the augmentation $F_E\\to A$ followed by the A-action on K. Its transpose along $L\\pi_E^*\\dashv R\\pi_{E*}$ is therefore $L\\pi_E^*Lq_E^*\\widetilde A\\otimes^{\\mathbf L}L\\pi_E^*G\\to\\mathcal O_{Y_A}\\otimes^{\\mathbf L}K\\to K$, using that augmentation on the first factor and the transpose of $\\gamma$ on the second. The monoidal pullback and composition comparisons identify its source and counit with those defining $\\theta$. Adjunction and $Rp_{E*}$ now give $U\\nu_E(\\gamma)=Rp_{E*}\\theta$. The natural global chain maps descend through quasi-isomorphism localization to arbitrary derived $\\gamma$.",
+   "uses": [
+    "def-sfb-dg-coefficient-realization",
+    "lem-sfb-sheaf-dg-relative-flat-bar-extension",
+    "lem-pc-ringed-spaces-derived-adjoint",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-pc-ringed-spaces-derived-direct-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "section-dg-bimodules, Tag 0FTR; cohomology.tex Tag 079W; sites-cohomology.tex Tag 0FPI"
+   }
+  },
+  {
+   "text": "Pullback and tensor preserve quasi-coherent cohomology, so the right side of the comparison has quasi-coherent cohomology after affine pushforward. Also $U\\widehat K=R\\pi_{D*}K$ has quasi-coherent cohomology. Forgetting the dg action leaves the underlying mapping cone unchanged. The quasi-coherent subcategory is closed under shifts and triangles (take the support subset to be all of Y in the cited supported-subcategory theorem). Thus the cone of $\\nu_E(\\gamma)$ is quasi-coherent as well. This also proves that the inherited triangles make $D_{\\mathrm{QCoh}}(\\mathcal B)$ triangulated and that U restricts to an exact functor.",
+   "uses": [
+    "lem-pc-derived-pullback-tensor-qcoh",
+    "lem-sc-affine-derived-cohomology",
+    "lem-pc-supported-qcoh-triangulated",
+    "lem-sfb-ringed-dg-scalar-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "perfect.tex Tags 08DW, 08DX, 0AVW, 0A9A; sdga.tex Tags 0FT4, 0FT5"
+   }
+  },
+  {
+   "text": "At E=D the constant resolution is D, so the defining tensor is $T(P)=\\mathcal B\\otimes_{\\mathcal O_Y}^{\\mathbf L}P$. Apply the sheaf dg scalar adjunction to $\\mathcal O_Y\\to\\mathcal B$ (or opposite algebras for the left-module convention). Its right adjoint is exactly U, and its inverse Hom bijection is extension followed by the dg action counit. Both functors are exact. Step 5 shows T preserves the quasi-coherent subcategory, so this adjunction restricts to the full subcategories in the statement, without changing either Hom set or its transposition.",
+   "uses": [
+    "def-sfb-dg-coefficient-realization",
+    "lem-sfb-ringed-dg-scalar-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FTR for the identity geometric morphism and structural map; Tag 0FTF"
+   }
+  },
+  {
+   "text": "On an affine open $V=\\operatorname{Spec}S$, write $S_E=S\\otimes_D E$ and represent G by its affine derived $S_E$-module M. Restriction from $S\\otimes_D R_A$ to $Q\\otimes_D R_A$ changes only the commuting algebra action on its bar model. Polynomial Q is D-free, so $Q\\otimes_D R_A\\to Q_A$ is a quasi-isomorphism; the cited dg equivalence carries the restricted bar to the Q_A object represented by coefficient extension of $\\operatorname{Res}_{Q_E}^{S_E}M$. Choose a Q_E-K-flat replacement L of $\\operatorname{Res}M$. It is E-K-flat: tensor an acyclic E-complex first with the E-free algebra Q_E and then with L. The augmentation $F_E\\otimes_E L\\to A\\otimes_E L=Q_A\\otimes_{Q_E}L$ is consequently a quasi-isomorphism, linear for $Q\\otimes_D R_A$. Since $F_E$ is E-K-flat, $F_E\\otimes_E L\\to F_E\\otimes_E M$ is also a quasi-isomorphism. This gives the asserted Q_A-object through the quasi-isomorphism equivalence, with the specified actions. For E=D this gives the stated formula for P. For $\\widehat K$, all coefficient actions factor through the augmentation to A, so the same equivalence carries it to K restricted to Q_A. No assertion that $S\\otimes_D R_A\\to S\\otimes_D A$ is a quasi-isomorphism is used.",
+   "uses": [
+    "def-sfb-dg-coefficient-realization",
+    "lem-sfb-sheaf-dg-relative-flat-bar-extension",
+    "lem-sfb-dg-qis-restriction-equivalence",
+    "lem-pc-affine-qcoh-complex-model",
+    "lem-pc-source-module-kflat-resolution",
+    "lem-pc-kflat-extension-of-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 09S6; perfect.tex Tag 06Z0; relative bar model and Tag 06Y1"
+   }
+  },
+  {
+   "text": "The polynomial calculation uses the same augmentation and action maps as step 4; restriction leaves them unchanged, and the dg equivalence carries the adjunction counit to the corresponding scalar-action map. Hence it carries the normalized arrows themselves, and exactness carries their triangles and cones. Finally $H^0(S\\otimes_D R_A)=S\\otimes_D A$: the complex is nonpositive, and right exactness of tensor identifies its degree-zero cokernel with $S\\otimes_D H^0(R_A)$. Boundaries in degree zero act trivially on every module cohomology group, since $d(b)m=d(bm)$ for a cycle m. The action of $Q_A=H^0(Q\\otimes_D R_A)$ on the compared cohomology is consequently the canonical one through $S\\otimes_D A$. This proves the last clause, including the cone objects.",
+   "uses": [
+    "def-sfb-dg-coefficient-realization",
+    "lem-sfb-sheaf-dg-relative-flat-bar-extension",
+    "lem-sfb-dg-qis-restriction-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 09S6, exact equivalence; elementary degree-zero cokernel and dg Leibniz calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-sc-affine-derived-cohomology",
+  "lem-sc-affine-algebra-derived-adjunction-isos",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "def-sfb-dg-coefficient-realization",
+  "lem-sfb-sheaf-dg-relative-flat-bar-extension",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-sfb-dg-qis-restriction-equivalence",
+  "lem-pc-affine-derived-pullback-module-model",
+  "lem-pc-kflat-extension-of-scalars",
+  "lem-pc-kflat-stalk-criterion",
+  "lem-pc-affine-tilde-total-tensor",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "lem-pc-ringed-spaces-derived-direct-image-composition",
+  "lem-pc-derived-pullback-tensor-qcoh",
+  "lem-pc-supported-qcoh-triangulated",
+  "lem-sfb-ringed-dg-scalar-adjunction",
+  "lem-pc-affine-qcoh-complex-model",
+  "lem-pc-source-module-kflat-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sdga.tex",
+  "place": "Coefficient comparison assembled from the relative flat bar model, dg quasi-isomorphism equivalence, and perfect.tex affine comparison; the normalized comparison is not a quoted Stacks theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Comparison of a sheaf dg derived coefficient tensor with the normalized scheme scalar action arrow after affine pushforward",
+   "results": "{\"t\": \"2026-10-24T01:42:26Z\", \"tool\": \"leanfinder\", \"query\": \"Comparison of a sheaf dg derived coefficient tensor with the normalized scheme scalar action arrow after affine pushforward\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.unitToPushforwardObjUnit\", \"SheafOfModules.unitToPushforwardObjUnit_val_app_apply\", \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"AlgebraicGeometry.AffineSpace.comp_homOfVector\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCBasicOpens\", \"SheafOfModules.pushforwardSections_coe\", \"AlgebraicGeometry.AffineSpace.comp_homOfVector_assoc\", \"AlgebraicGeometry.Scheme.Modules.pushforward\"], \"digest\": \"60c23e1b08ebdc35\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: SheafOfModules.unitToPushforwardObjUnit, SheafOfModules.unitToPushforwardObjUnit_val_app_apply, SheafOfModules.pushforwardSections_unitHomEquiv, AlgebraicGeometry.AffineSpace.comp_homOfVector, AlgebraicGeometry.LocallyRingedSpace.toΓSpecCBasicOpens, SheafOfModules.pushforwardSections_coe, AlgebraicGeometry.AffineSpace.comp_homOfVector_assoc, AlgebraicGeometry.Scheme.Modules.pushforward; these concern ordinary modules, ordinary scheme pullbacks, fractions, differentials or smooth algebra descent, not the stated sheaf dg coefficient model or finite-stage arrow realization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DifferentialGradedAlgebra\", \"TensorProduct\"",
+   "results": "{\"t\": \"2026-10-24T01:42:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"DifferentialGradedAlgebra\\\", \\\"TensorProduct\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ; these concern ordinary modules, ordinary scheme pullbacks, fractions, differentials or smooth algebra descent, not the stated sheaf dg coefficient model or finite-stage arrow realization"
+  },
+  {
+   "tool": "grep",
+   "query": "dg.*tensor|derived.*coefficient|bar.*tensor",
+   "results": "{\"t\": \"2026-10-24T01:42:24Z\", \"tool\": \"grep\", \"query\": \"dg.*tensor|derived.*coefficient|bar.*tensor\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ; these concern ordinary modules, ordinary scheme pullbacks, fractions, differentials or smooth algebra descent, not the stated sheaf dg coefficient model or finite-stage arrow realization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A dg scalar extension of a coherent scheme complex agrees with the derived coefficient tensor and its adjunction normalized map",
+   "results": "{\"t\": \"2026-10-24T01:42:24Z\", \"tool\": \"leansearch\", \"query\": \"A dg scalar extension of a coherent scheme complex agrees with the derived coefficient tensor and its adjunction normalized map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.extendRestrictScalarsAdj\", \"ModuleCat.restrictCoextendScalarsAdj\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction\", \"ModuleCat.instIsRightAdjointCoextendScalars\", \"AlgHom.extendScalars\", \"comonadicExtendScalars\", \"ModuleCat.RestrictionCoextensionAdj.unit'\", \"Derivation.coe_restrictScalars\"], \"digest\": \"e7e41a8af5851c26\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ModuleCat.extendRestrictScalarsAdj, ModuleCat.restrictCoextendScalarsAdj, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, ModuleCat.instIsRightAdjointCoextendScalars, AlgHom.extendScalars, comonadicExtendScalars, ModuleCat.RestrictionCoextensionAdj.unit', Derivation.coe_restrictScalars; these concern ordinary modules, ordinary scheme pullbacks, fractions, differentials or smooth algebra descent, not the stated sheaf dg coefficient model or finite-stage arrow realization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The augmentation of flat dg resolutions identifies a bimodule derived tensor with derived scalar extension while retaining a commuting structure sheaf action",
+   "results": "{\"t\": \"2026-10-24T01:42:25Z\", \"tool\": \"leanfinder\", \"query\": \"The augmentation of flat dg resolutions identifies a bimodule derived tensor with derived scalar extension while retaining a commuting structure sheaf action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.moduleBaseChange'\", \"KaehlerDifferential.tensorKaehlerEquiv_left_inv\", \"Module.Flat.baseChange\", \"Module.Flat.toAlgebra\", \"comonadicExtendScalars\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex\", \"KaehlerDifferential.moduleBaseChange\"], \"digest\": \"515c1caa58142d9f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: KaehlerDifferential.moduleBaseChange', KaehlerDifferential.tensorKaehlerEquiv_left_inv, Module.Flat.baseChange, Module.Flat.toAlgebra, comonadicExtendScalars, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex, KaehlerDifferential.moduleBaseChange; these concern ordinary modules, ordinary scheme pullbacks, fractions, differentials or smooth algebra descent, not the stated sheaf dg coefficient model or finite-stage arrow realization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-global-witness-one-degree-binary-patching",
+  "date": "2026-10-24",
+  "group": "NU"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Independent prerequisite: Pseudo-coherent perfect direct images between flat finitely presented families. Kiehl finiteness input: the unnumbered general relative-pseudo-coherence assertion following Stacks lemma-flat-proper-pseudo-coherent-direct-image-general. Finite-degree Noetherian descente input for the Kiehl finiteness assertion. Independent prerequisite: Relative sheaf descente on a prescribed Noetherian envelope. Two-open gluing prerequisite, conditional on approximation on both opens and their intersection, uniform in a supplied finite coefficient stage. Single-degree induction step: cancel finite polynomial-chart top obstructions globally while retaining the prescribed scalar-action normalization. Mayer--Vietoris subproblem for one degree: given a global coherent witness at cutoff n+1 and witnesses on two opens at cutoff n, obtain a global witness at cutoff n. The supplied global witness is part of the hypothesis. Independent input: Derived comparison of dg coefficient realizations with the normalized scheme arrow.",
+   "via": [
+    "lem-sfb-global-witness-one-degree-binary-patching",
+    "lem-sfb-sheaf-single-degree-coefficient-cancellation",
+    "lem-sfb-relative-coefficient-window-two-open-locality",
+    "lem-sfb-prescribed-envelope-relative-sheaf-descente",
+    "lem-sfb-relative-complex-noetherian-cohomology-approximation",
+    "lem-sfb-kiehl-relative-pseudocoherent-direct-image",
+    "lem-sfb-flat-family-perfect-direct-image-pseudocoherent",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dg-coefficient-realization-comparison",
+  "worker": "stage1",
+  "summary": "Rebased the retained eight-step comparison onto the current coefficient definition. Revalidated its D-algebra-map hypothesis and coefficient-linear composition, replaced the superseded bar prerequisite by the existing left-module bar theorem, and expanded the elementary E-flatness and balancing calculations. Retained one general sheaf dg scalar/triangulation prerequisite; no target statement changed.",
+  "blueprint": "Latest blueprint det-thm-sf-ctf-stability-direct-images proof (3): coefficient-model prerequisite in the inherited direct-image finiteness route. The item is a created technical node, not a sketch statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "General affine, tensor, or triangulated-category tool used only for this coefficient-model calculation; it does not replace the unit direct-image argument."
+   },
+   {
+    "node": "lem-sc-affine-derived-cohomology",
+    "why": "General affine, tensor, or triangulated-category tool used only for this coefficient-model calculation; it does not replace the unit direct-image argument."
+   },
+   {
+    "node": "lem-sc-affine-algebra-derived-adjunction-isos",
+    "why": "General affine, tensor, or triangulated-category tool used only for this coefficient-model calculation; it does not replace the unit direct-image argument."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "General affine, tensor, or triangulated-category tool used only for this coefficient-model calculation; it does not replace the unit direct-image argument."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "General affine, tensor, or triangulated-category tool used only for this coefficient-model calculation; it does not replace the unit direct-image argument."
+   },
+   {
+    "node": "lem-pc-affine-derived-pullback-module-model",
+    "why": "General affine, tensor, or triangulated-category tool used only for this coefficient-model calculation; it does not replace the unit direct-image argument."
+   },
+   {
+    "node": "lem-pc-kflat-extension-of-scalars",
+    "why": "General affine, tensor, or triangulated-category tool used only for this coefficient-model calculation; it does not replace the unit direct-image argument."
+   },
+   {
+    "node": "lem-pc-kflat-stalk-criterion",
+    "why": "General affine, tensor, or triangulated-category tool used only for this coefficient-model calculation; it does not replace the unit direct-image argument."
+   },
+   {
+    "node": "lem-pc-affine-tilde-total-tensor",
+    "why": "General affine, tensor, or triangulated-category tool used only for this coefficient-model calculation; it does not replace the unit direct-image argument."
+   },
+   {
+    "node": "lem-pc-ringed-spaces-derived-adjoint",
+    "why": "General affine, tensor, or triangulated-category tool used only for this coefficient-model calculation; it does not replace the unit direct-image argument."
+   },
+   {
+    "node": "lem-pc-derived-pullback-tensor-qcoh",
+    "why": "General affine, tensor, or triangulated-category tool used only for this coefficient-model calculation; it does not replace the unit direct-image argument."
+   },
+   {
+    "node": "lem-pc-supported-qcoh-triangulated",
+    "why": "General affine, tensor, or triangulated-category tool used only for this coefficient-model calculation; it does not replace the unit direct-image argument."
+   },
+   {
+    "node": "lem-pc-affine-qcoh-complex-model",
+    "why": "General affine, tensor, or triangulated-category tool used only for this coefficient-model calculation; it does not replace the unit direct-image argument."
+   },
+   {
+    "node": "lem-pc-source-module-kflat-resolution",
+    "why": "General affine, tensor, or triangulated-category tool used only for this coefficient-model calculation; it does not replace the unit direct-image argument."
+   },
+   {
+    "node": "lem-pc-ringed-spaces-derived-direct-image-composition",
+    "why": "The coefficient-linear identification in the normalized arrow uses the general ringed-space composition theorem, not merely its scheme O-module version."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-sc-affine-derived-cohomology",
+  "lem-sc-affine-algebra-derived-adjunction-isos",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-affine-derived-pullback-module-model",
+  "lem-pc-kflat-extension-of-scalars",
+  "lem-pc-kflat-stalk-criterion",
+  "lem-pc-affine-tilde-total-tensor",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "lem-pc-derived-pullback-tensor-qcoh",
+  "lem-pc-supported-qcoh-triangulated",
+  "lem-pc-affine-qcoh-complex-model",
+  "lem-pc-source-module-kflat-resolution",
+  "lem-pc-ringed-spaces-derived-direct-image-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-O4-5260686d6",
+  "group": "O4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-5260686d6 (reviewer sub-agent of L); spot-checked: I read the whole item. I also read the new node lem-sfb-ringed-dg-scalar-adjunction, the current def-sfb-dg-coefficient-realization, lem-sfb-sheaf-dg-relative-flat-bar-extension, the statement of every proof dependency, and the Stacks sources: sdga 0FT4, 0FT5, 0FTF, 0FTQ, 0FTR (l.4989, ringed topoi), 0FTZ; dga 09S6; perfect 0AVW, 06Z0, 08DW, 08DX, 0A9A; more-algebra 06Y1; sites-cohomology 0FPI, 07A4, 0D6D; cohomology 079W. Every tag matches its label. There is no SGA citation and no repair note.\n\nStatement: correct via R_E≃E and R_A≃A, giving Φ_E(G)≅A⊗^L_E Rp_{E*}G≅Rp_{E*}(Lq^*Ã⊗^L G). I tested E=D, G=0, D=Z with A=F_p, and E=A. The statement and stmt_deps are identical to the previously accepted FIX.\n\nSteps:\n- Step 2: F_E=B(R_A,R_E,E) has terms that are E-flat and nonpositive, so it is E-K-flat. The unit r↦r⊗1 composed with the augmentation is ε_A, because R_E→R_A→A equals R_E→E→A; two-out-of-three then holds.\n- Step 3: balancing (h⊗r⊗e)⊗m↦h⊗r⊗em, with inverse given by e=1.\n- Step 4: the coefficient-linear composition follows the new definition, and the counit h⊗m↦hm on V_0 equals the augmentation followed by the A-action.\n- Steps 5 and 6: QC-ness and triangulation come from the new node plus lem-pc-supported-qcoh-triangulated. The E=D adjunction restricts to the full subcategories.\n- Step 7: L is Q_E-K-flat, hence E-K-flat via the free Q_E. Both quasi-isomorphisms are Q⊗R_A-linear, and S⊗R_A≃S⊗A is never used.\n- Step 8: H^0(S⊗R_A)=S⊗A by right exactness, and Leibniz gives the action on cohomology.\n\nNew node: true by Stacks 0FT5/0FTF/0FTR for the identity morphism and a map of sheaf dg algebras. Open restriction holds because j_! is exact. It is statement-only and general, not a clause of the item. It does not duplicate def-sfb-sheaf-dg-module-localization (notation, no existence), the bar theorem (only S⊗P→S⊗Q with K-flat P and Q, no triangulation), the Z-dg nodes lem-sfb-dg-bimodule-derived-adjunction and lem-sfb-dg-qis-restriction-equivalence, lem-sfb-ringed-site-dg-tensor-hom (End(K)), or lem-coef-dg-*.\n\nBatch-5 check: lem-trf-triangulated-subcategory-cone-system, reached through lem-sfb-dg-qis-restriction-equivalence, is a Mathlib leaf for generic Verdier localization (ObjectProperty.trW). It is not part of the trace formula or of Poincaré duality, so the citation is accepted. The 15 declared tool uses are generic and accepted.\n\nFIX: two points of the previous FIX (run 3766002c) were lost in this re-delivery, and I re-applied both.\n(a) Step 3 now states that F_E⊗_E M has QC H_E-cohomology, by the tilde total tensor on affine opens, so the step-1 unit is invertible on it. lem-sc-affine-algebra-derived-adjunction-isos only gives the unit on QC objects.\n(b) In step 5, UK̂=Rp_{D*}K is corrected to Rπ_{D*}K.\nuses and proof_deps are unchanged.; 1 file(s) fixed by the reviewer"
+ }
+}

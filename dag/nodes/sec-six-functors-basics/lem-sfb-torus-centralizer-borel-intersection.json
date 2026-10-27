@@ -1,0 +1,364 @@
+{
+ "id": "lem-sfb-torus-centralizer-borel-intersection",
+ "kind": "statement",
+ "title": "Intersecting a Borel with a torus centralizer gives a Borel of the centralizer",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups are affine group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism] over $F$, and all subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness mean [def-sbc-smooth-morphisms, def-weil-connected-scheme]. A group is solvable if its successive scheme-theoretic commutator subgroups eventually become trivial; a Borel subgroup is a maximal smooth connected solvable subgroup. A torus is a group isomorphic to $\\mathbf G_m^r$ for some integer $r\\geq0$, where $\\mathbf G_m(A)=A^\\times$ for a commutative $F$-algebra $A$ [def-sc-gm-ga]. Let $G$ be smooth and connected, let $B\\subseteq G$ be a Borel subgroup, and let $S\\subseteq B$ be a torus, not necessarily maximal. Define the centralizer functor by\n$$C_G(S)(A)=\\{g\\in G(A):g_{A'}s=sg_{A'}\\text{ for every commutative }A\\text{-algebra }A'\\text{ and }s\\in S(A')\\}.$$\nThis functor is represented by a smooth connected closed subgroup scheme $C\\subseteq G$. The scheme-theoretic intersection $B\\cap C=B\\times_G C$, viewed as a closed subgroup scheme of $C$, is a Borel subgroup of $C$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 17.46 and its proof, printed pp.365--366; restatement 17.72, printed p.376. Smoothness and connectedness are Corollary 13.10 and Theorem 17.38, as explicitly invoked in that proof."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-gm-ga",
+  "def-sfb-borel-subgroup-scheme",
+  "def-sfb-tori-multiplicative-type",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-torus-centralizer-smooth-connected] to $G$ and also to the smooth connected group $B$. Over the algebraically closed field $F$, connectedness is the algebraic-closure test for geometric connectedness [lem-weil-geometrically-connected-algebraic-closure]. Thus $C=C_G(S)$ and $H=C_B(S)$ are represented by smooth connected closed subgroups. On every algebra $A$, both $H(A)$ and $(B\\times_G C)(A)$ consist of the elements of $B(A)$ commuting with $S$ after every further algebra extension; the fibre-product universal property identifies $H=B\\cap C$ as subgroup schemes [def-pc-fibre-product]. The derived subgroups of these smooth connected groups exist by [lem-sfb-smooth-connected-derived-subgroup]. Moreover $H$ is solvable: the commutator map of a subgroup factors through each corresponding ambient derived subgroup, so induction embeds $D^iH$ in $D^iB$, which is trivial for sufficiently large $i$.",
+   "uses": [
+    "lem-sfb-torus-centralizer-smooth-connected",
+    "lem-weil-geometrically-connected-algebraic-closure",
+    "def-pc-fibre-product",
+    "lem-sfb-smooth-connected-derived-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.46, p.365, first two sentences; Corollary 13.10 and Theorem 17.38."
+   }
+  },
+  {
+   "text": "Form $Q=G/B$ by [lem-sfb-homogeneous-orbit-quotient-geometry], with quotient map $q$. The coset formula defines left translation on $Q$ and the identity coset $o=q(1)$. The quotient is faithfully flat; its coset fibre is $G\\times_QG\\simeq G\\times_F B$, and its sheaf quotient gives fpqc local lifts. It is of finite presentation: $q$ is of finite type by [lemma-nagata-finite-type-to-separated-target]; $Q$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian] over the field $F$ (its only ideals are $0$ and $F$); hence $q$ is locally of finite presentation by [pqf-lem-lft-fp-locnoeth], and is quasi-compact and quasi-separated by [lem-weil-pbc-qcqs-morphism-permanence], since $G$ is affine and $Q$ separated. It therefore meets the hypotheses of [lem-sfb-borel-quotient-proper-geometry], which says that $Q$ is proper and $q$ is smooth. In particular $q$ is an open surjection by [lem-weil-pbc-flat-lfp-open], using [lem-pc-smooth-flat] for flatness and local finite presentation. For the action restricted to $C$, its scheme stabilizer of $o$ is $H$: $co=o$ if and only if $c\\in B$, on every algebra. The reduced orbit $O=C\\cdot o$ is smooth and locally closed by [lem-sfb-smooth-group-orbit-geometry], and $O\\simeq C/H$ by [lem-sfb-homogeneous-orbit-quotient-geometry].",
+   "uses": [
+    "lem-sfb-homogeneous-orbit-quotient-geometry",
+    "lemma-nagata-finite-type-to-separated-target",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "pqf-lem-lft-fp-locnoeth",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-sfb-borel-quotient-proper-geometry",
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-pc-smooth-flat",
+    "lem-sfb-smooth-group-orbit-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.46, p.365: reduction to closedness of the orbit in the complete quotient."
+   }
+  },
+  {
+   "text": "Prepare the solvable group $B$. Its derived series is a finite normal series with commutative quotients: the iterated derived subgroups are smooth connected closed normal subgroups by [lem-sfb-smooth-connected-derived-subgroup], and the commutator becomes trivial on each quotient. Thus the normal-series version of solvability in [lem-sfb-perfect-solvable-unipotent-torus] applies. Since $F$ is algebraically closed, it is perfect. This gives a smooth connected normal unipotent subgroup $U$ and a quotient homomorphism $\\varphi:B\\to D=B/U$ with $D$ a torus. Choose a maximal torus $T$ of $B$ containing $S$: tori are smooth and connected by [lem-sfb-multiplicative-type-largest-subtorus], and among tori containing $S$ a greatest-dimensional one is maximal, by the bounded integer dimensions and strict dimension growth in [lem-sfb-solvable-normal-subgroup-products]. By [lem-sfb-solvable-torus-complements], $\\varphi|_T:T\\to D$ is an isomorphism. Consequently every $b\\in B(F)$ has a unique expression $b=ut$ with $u\\in U(F),t\\in T(F)$: set $t=(\\varphi|_T)^{-1}\\varphi(b)$ and $u=bt^{-1}$. Here $\\ker\\varphi=U$: a point in the kernel belongs to $U$ fppf locally by sheafification of cosets, and the closed equations of $U$ then vanish globally by faithful flatness.",
+   "uses": [
+    "lem-sfb-smooth-connected-derived-subgroup",
+    "lem-sfb-perfect-solvable-unipotent-torus",
+    "lem-sfb-multiplicative-type-largest-subtorus",
+    "lem-sfb-solvable-normal-subgroup-products",
+    "lem-sfb-solvable-torus-complements"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.33(c),(d), p.336, and Theorem 17.46, pp.365--366: the quotient by the unipotent subgroup and choice of T."
+   }
+  },
+  {
+   "text": "Let $M=q^{-1}(|O|)\\subseteq |G|$. After extending a residue field to an algebraic closure, the quotient coset formulas show that $M$ is precisely the topological image of multiplication $C\\times_F B\\to G$: $q(g)=q(c)$ if and only if $g=cb$. The lifting clauses of [lem-sfb-homogeneous-orbit-quotient-geometry] justify choosing these geometric representatives; equality of geometric representatives detects the same underlying point. In particular $M$ is locally closed, since $O$ is locally closed. Let $Z$ be the reduced closed subscheme supported on the closure of $M$. The product $C\\times_F B$ is connected by [lem-weil-pbc-geometrically-connected-product-components], since $C$ is geometrically connected and $B$ is connected. The continuous image and its closure are connected: a separation pulls back to a separation of the source, and a dense connected subset cannot meet two clopen pieces of its closure. Hence $Z$ is connected and contains $1$. It is affine and of finite type, being a reduced closed subscheme of the affine finite-type scheme $G$.",
+   "uses": [
+    "lem-sfb-homogeneous-orbit-quotient-geometry",
+    "lem-weil-pbc-geometrically-connected-product-components",
+    "def-weil-pbc-scheme-reduction",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.46, p.365: connectedness of the closure of CB."
+   }
+  },
+  {
+   "text": "Use [lem-sfb-constant-source-closed-factorization-locus] for the family $S\\times_FG\\to G$, $(s,y)\\mapsto y^{-1}sy$, and the closed subgroup $B\\hookrightarrow G$. Its hypotheses hold: the groups are separated over $F$ by [lem-sc-group-scheme-separated-field] and of finite type. It gives a closed subscheme $L\\subseteq G$ on which this family factors through $B$. The morphism $C\\times_F B\\to G$ factors through $L$, since $(cb)^{-1}s(cb)=b^{-1}sb\\in B$ on every algebra. Thus $M\\subseteq |L|$, so also $|Z|\\subseteq |L|$. As $Z$ is reduced, [lem-weil-pbc-reduced-source-factors-through-closed-subscheme] makes $Z\\to G$ factor through $L$. The universal property of $L$ now gives an actual morphism $Z\\times_F S\\to B$, $(y,s)\\mapsto y^{-1}sy$, not just a containment on rational points.",
+   "uses": [
+    "lem-sfb-constant-source-closed-factorization-locus",
+    "lem-sc-group-scheme-separated-field",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.46, p.365, equation (126) and footnote 2 (closed transporter)."
+   }
+  },
+  {
+   "text": "Compose the family just constructed with $\\varphi$ to obtain $\\psi:Z\\times_F S\\to D$. For every algebra $A$ and $y\\in Z(A)$ it is a group homomorphism in $s$, because conjugation and $\\varphi$ are homomorphisms. The two tori $S$ and $D$ are diagonalizable over the algebraically closed field: $\\mathbf G_m^r=D_F(\\mathbf Z^r)$ by [lem-sfb-diagonalizable-group-geometric-criteria]. The parameter $Z$ is connected, affine and of finite type with the point $1$. Thus [lem-sfb-diagonalizable-hom-family-rigidity] applies, with $x_0=1$, and gives the equality of morphisms\n$$\\varphi(y^{-1}sy)=\\varphi(s).$$\nThis holds for all algebra-valued points, including nonreduced algebras.",
+   "uses": [
+    "lem-sfb-diagonalizable-group-geometric-criteria",
+    "lem-sfb-diagonalizable-hom-family-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.46, p.365, equation (127); Theorem 12.36, pp.243--244."
+   }
+  },
+  {
+   "text": "For each $b\\in B(F)$, right translation $r_b:G\\to G$ is a homeomorphism and preserves $M$, because $q(gb)=q(g)$ on every algebra. It therefore preserves its closure $|Z|$ and, being an isomorphism, preserves the reduced closed subscheme $Z$. In particular $y\\in Z(F)$ implies $yb\\in Z(F)$. This is the continuity assertion $\\overline{CB}\\,B\\subseteq\\overline{CB}$ used by Milne.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.46, p.366: right B-stability of the closure."
+   }
+  },
+  {
+   "text": "Fix $y\\in Z(F)$. By the transporter step, $S_y=y^{-1}Sy$ is a torus subgroup of $B$. Enlarge it to a maximal torus $T_y$ of $B$, using again the smoothness of tori and the greatest-dimension argument of [lem-sfb-multiplicative-type-largest-subtorus, lem-sfb-solvable-normal-subgroup-products]. Apply [lem-sfb-borel-maximal-torus-conjugacy] to the smooth connected group $B$: there is $b\\in B(F)$ with $b^{-1}T_yb=T$. Write $b=ut$ by step 3. Then $t^{-1}u^{-1}S_yut\\subseteq T$, and conjugating by $t\\in T$ gives $u^{-1}S_yu\\subseteq T$. These are inclusions of subgroup schemes, because the cited maximal-torus conjugacy has that meaning. We have derived the required unipotent conjugation from existing nodes; we do not use a stronger claim hidden in a source's proof.",
+   "uses": [
+    "lem-sfb-multiplicative-type-largest-subtorus",
+    "lem-sfb-solvable-normal-subgroup-products",
+    "lem-sfb-borel-maximal-torus-conjugacy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.46, p.366: the use of Theorem 16.33(d), expanded using maximal-torus conjugacy and the torus complement."
+   }
+  },
+  {
+   "text": "The point $yu$ lies in $Z(F)$ by right $B$-stability. Apply the rigidity equality at $yu$. Both $(yu)^{-1}s(yu)$ and $s$ lie in $T$ after every algebra extension: the former by step 8, the latter because $S\\subseteq T$. Their images under $\\varphi$ agree. Since $\\varphi|_T$ is an isomorphism, they are equal. Thus $yu\\in C(F)$, by the all-algebra centralizer definition, and $y=(yu)u^{-1}\\in C(F)B(F)\\subseteq M$. We conclude $Z(F)\\subseteq M$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.46, p.366: injectivity on T and the conclusion y lies in CB."
+   }
+  },
+  {
+   "text": "Since $M$ is locally closed and dense in its closure $|Z|$, it is open in $|Z|$; hence $|Z|\\setminus M$ is closed there. If that complement were nonempty, [lem-sc-lft-over-field-jacobson-space] would give a closed point of $Z$ in it, and [lem-weil-pbc-closed-point-residue-field-base] would make it an $F$-point, contradicting step 9. Thus $M=|Z|$ is closed in $G$. The open surjection $q$ is a quotient map: if $q^{-1}(V)$ is open, then $V=q(q^{-1}(V))$ is open. Applying this to the complement of $|O|$ shows that $|O|$ is closed in $Q$. As its inclusion is already a locally closed immersion, it is a closed immersion (in an open neighbourhood use its defining ideal; outside its now closed support use the unit ideal, and these agree on the overlap). By [lem-weil-pbc-closed-immersion-proper], $O$ is proper, since $Q$ is proper.",
+   "uses": [
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-weil-pbc-closed-immersion-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.46, pp.365--366: closedness of CB and of the orbit, hence completeness."
+   }
+  },
+  {
+   "text": "It remains to prove maximality of $H$; we give the fixed-point argument behind the criterion in Milne 17.19. Suppose $H\\subseteq J\\subseteq C$, with $J$ smooth, connected and solvable. The proper scheme $O\\simeq C/H$ is nonempty and of finite type. By [lem-sfb-solvable-proper-fixed-point], the left $J$-action on $O$ has an $F$-point fixed scheme-theoretically. Lift it to $c\\in C(F)$ by [lem-sfb-homogeneous-orbit-quotient-geometry]. For every algebra $A$, fixedness says $jcH=cH$, so $c^{-1}Jc\\subseteq H$ as subgroup schemes. The strict dimension-growth assertion of [lem-sfb-solvable-normal-subgroup-products] shows that $\\dim J\\leq\\dim H$, since conjugation preserves dimension. If $H\\subsetneq J$, the same assertion would give $\\dim H<\\dim J$, a contradiction. Hence $J=H$. Together with step 1, $H=B\\cap C$ is a maximal smooth connected solvable subgroup of $C$, exactly a Borel subgroup.",
+   "uses": [
+    "lem-sfb-solvable-proper-fixed-point",
+    "lem-sfb-homogeneous-orbit-quotient-geometry",
+    "lem-sfb-solvable-normal-subgroup-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.19, p.357, via its Borel fixed-point argument; Theorem 17.46, p.365."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-torus-centralizer-smooth-connected",
+  "lem-weil-geometrically-connected-algebraic-closure",
+  "def-pc-fibre-product",
+  "lem-sfb-smooth-connected-derived-subgroup",
+  "lem-sfb-homogeneous-orbit-quotient-geometry",
+  "lemma-nagata-finite-type-to-separated-target",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "pqf-lem-lft-fp-locnoeth",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-sfb-borel-quotient-proper-geometry",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-pc-smooth-flat",
+  "lem-sfb-smooth-group-orbit-geometry",
+  "lem-sfb-perfect-solvable-unipotent-torus",
+  "lem-sfb-multiplicative-type-largest-subtorus",
+  "lem-sfb-solvable-normal-subgroup-products",
+  "lem-sfb-solvable-torus-complements",
+  "lem-weil-pbc-geometrically-connected-product-components",
+  "def-weil-pbc-scheme-reduction",
+  "def-weil-closed-immersion",
+  "lem-sfb-constant-source-closed-factorization-locus",
+  "lem-sc-group-scheme-separated-field",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-sfb-diagonalizable-group-geometric-criteria",
+  "lem-sfb-diagonalizable-hom-family-rigidity",
+  "lem-sfb-borel-maximal-torus-conjugacy",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-sfb-solvable-proper-fixed-point"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 17.46 and proof, printed pp.365--366; Proposition 17.19, p.357, expanded by the Borel fixed-point argument. The all-algebra statements of Theorem 12.36 and Theorem 16.33(d) are used via the cited DAG nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "BorelSubgroup|borelSubgroup|borel.*centralizer|centralizer.*borel",
+   "results": "OK 0 hit(s): ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are centralizers and subgroup intersections of abstract groups, not representability and Borel maximality for group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Intersection of a Borel subgroup with a torus centralizer is a Borel subgroup of the centralizer",
+   "results": "OK 8 hit(s): Subgroup.centralizer, AddSubgroup.centralizer, Subsemigroup.centralizer, Subgroup.subgroupOf, AddSubgroup.centralizer_le, Subsemigroup.centralizer_le, Subgroup.normal_centralizer, Subgroup.centralizer_eq_iInf",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are centralizers and subgroup intersections of abstract groups, not representability and Borel maximality for group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"centralizer\", \"Borel\"",
+   "results": "OK 0 hit(s): ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are centralizers and subgroup intersections of abstract groups, not representability and Borel maximality for group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a torus S is contained in a Borel subgroup B of a smooth connected affine algebraic group G then the scheme intersection of B and the centralizer of S is a Borel subgroup of the centralizer",
+   "results": "OK 8 hit(s): Subgroup.characteristic_centralizer, Subgroup.le_centralizer, Subgroup.center_le_centralizer, Subgroup.closure_le_centralizer_centralizer, Subgroup.normal_centralizer, Subgroup.le_centralizer_iff_isMulCommutative, Subgroup.centralizer_eq_top_iff_subset, Subgroup.center_eq_infi'",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are centralizers and subgroup intersections of abstract groups, not representability and Borel maximality for group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Borel subgroup intersect centralizer of subtorus is Borel subgroup in algebraic group",
+   "results": "{\"t\": \"2026-10-23T22:08:56Z\", \"tool\": \"leanfinder\", \"query\": \"Borel subgroup intersect centralizer of subtorus is Borel subgroup in algebraic group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.le_centralizer\", \"Subgroup.characteristic_centralizer\", \"Subgroup.closure_le_centralizer_centralizer\", \"Subgroup.le_centralizer_iff_isMulCommutative\", \"Subgroup.center_le_centralizer\", \"Subgroup.center_eq_infi'\", \"Subgroup.centralizer_closure\", \"Subgroup.center_eq_iInf\"], \"digest\": \"0a8ee34be2e26bd5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract centralizers or Lie-algebra results do not state representability or Borel maximality for algebraic group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"centralizer\", \"Borel\"",
+   "results": "{\"t\": \"2026-10-23T22:09:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"centralizer\\\", \\\"Borel\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract centralizers or Lie-algebra results do not state representability or Borel maximality for algebraic group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "BorelSubgroup|borelSubgroup|borel.*centralizer|centralizer.*borel",
+   "results": "{\"t\": \"2026-10-23T22:09:30Z\", \"tool\": \"grep\", \"query\": \"BorelSubgroup|borelSubgroup|borel.*centralizer|centralizer.*borel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract centralizers or Lie-algebra results do not state representability or Borel maximality for algebraic group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Borel subgroup intersected with the centralizer of a torus is a Borel subgroup of the centralizer",
+   "results": "{\"t\": \"2026-10-23T22:09:31Z\", \"tool\": \"leansearch\", \"query\": \"A Borel subgroup intersected with the centralizer of a torus is a Borel subgroup of the centralizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.centralizer\", \"AddSubgroup.centralizer\", \"Subsemigroup.centralizer\", \"Subgroup.centralizer_le\", \"Set.centralizer_subset\", \"Subgroup.centralizer_closure\", \"Subsemigroup.centralizer_le\", \"AddSubgroup.centralizer_le\"], \"digest\": \"e1a0371fcfcd6292\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract centralizers or Lie-algebra results do not state representability or Borel maximality for algebraic group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Intersection of a Borel with the centralizer of a subtorus is maximal connected solvable in that centralizer for smooth connected algebraic groups",
+   "results": "{\"t\": \"2026-10-23T22:16:57Z\", \"tool\": \"leanfinder\", \"query\": \"Intersection of a Borel with the centralizer of a subtorus is maximal connected solvable in that centralizer for smooth connected algebraic groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.zeroRootSubalgebra_normalizer_eq_self\", \"LieSubalgebra.isCartanSubalgebra_iff_isUcsLimit\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieSubalgebra.normalizer_eq_self_of_engel_le\", \"LieAlgebra.exists_engelian_lieSubalgebra_of_lt_normalizer\", \"LieSubalgebra.normalizer_engel\", \"LieAlgebra.center_le_maxNilpotentIdeal\", \"LieSubalgebra.normalizer_eq_self_of_isCartanSubalgebra\"], \"digest\": \"d6336c5a8aa31572\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract centralizers or Lie-algebra results do not state representability or Borel maximality for algebraic group schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-borel-opposite-root-dichotomy",
+  "date": "2026-10-24",
+  "group": "NZ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: Identify the actual Lie(B) weights with an integral positive half-space; the simple-root base is subsequently constructed in the item. Supporting input: Milne 21.29, second paragraph: a Borel containing the limit subgroup cannot have an additional negative root weight, by rank-one Borel dichotomy. Supporting input for the opposite-root argument: intersect the Borel with the centralizer of the largest subtorus of the root kernel (Milne 21.28, using 17.46).",
+   "via": [
+    "lem-sfb-borel-opposite-root-dichotomy",
+    "lem-sfb-regular-cocharacter-borel-description",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-torus-centralizer-borel-intersection",
+  "worker": "stage1",
+  "summary": "Read Milne Theorem 17.46 and supporting passages. Expanded the closed-product/rigidity proof into eleven steps using existing nodes only; no statement change and no new nodes. Avoided the circular general-flag-variety citation, whose normalizer dependency uses this item. Checked all algebra-valued centralizer identities, the nonreduced test-algebra issue, and rank-zero/central/solvable cases.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: Identify the actual Lie(B) weights with an integral positive half-space; the simple-root base is subsequently constructed in the item. Supporting input: Milne 21.29, second paragraph: a Borel containing the limit subgroup cannot have an additional negative root weight, by rank-one Borel dichotomy. Supporting input for the opposite-root argument: intersect the Borel with the centralizer of the largest subtorus of the root kernel (Milne 21.28, using 17.46). Realizes the torus-centralizer intersection prerequisite by the closed-orbit argument of Milne 17.46. The latest blueprint direct-image proof (3) is the inherited ancestor route; this auxiliary lies below the fixed unit route. The ancestor tool prints null, preserved as inherited.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-geometrically-connected-algebraic-closure",
+    "why": "Generic scheme, connectedness, reduced-factorization, closed-point or properness tool for Milne 17.46; no statement in this unit provides this general fact, and it replaces no step of the six-functor unit route."
+   },
+   {
+    "node": "lem-sc-group-scheme-separated-field",
+    "why": "Generic scheme, connectedness, reduced-factorization, closed-point or properness tool for Milne 17.46; no statement in this unit provides this general fact, and it replaces no step of the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "why": "Generic scheme, connectedness, reduced-factorization, closed-point or properness tool for Milne 17.46; no statement in this unit provides this general fact, and it replaces no step of the six-functor unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-geometrically-connected-algebraic-closure",
+  "lem-sc-group-scheme-separated-field",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O2-29d219595",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-29d219595 (reviewer sub-agent of L); spot-checked: Read the item's 11 steps and all 30 cited statements in full, against Milne iAG2017 Thm 17.46 (pp.365-366, including footnote 2) and Prop 17.19. The statement and stmt_deps are identical to live; the item is still unsplit live and has no repair note. There are no new nodes. No cited node depends on the item (cycle check on snapshot, live and side-live), and no node in the DAG duplicates it. proof_deps equals the union of the step uses. Step checks: (1) the smooth-connected centralizer node applied to G and B, with geometric connectedness via the algebraic-closure test; H = B x_G C; D^iH is contained in D^iB. (2) G/B is finitely presented via the nagata, Noetherian, lfp and qcqs leaves, so borel-quotient-proper applies and gives Q proper and q smooth, hence open; the stabilizer is H, so O is isomorphic to C/H. (3) U and phi from the perfect-solvable node, a maximal torus T containing S by dimension, phi restricted to T is an isomorphism (torus complements), and b = ut. (4)-(5) M is the image of C x B; Z is connected; the closed factorization locus plus reduced-source factoring give an actual morphism Z x S -> B. (6) Diagonalizable rigidity with parameter Z at the point 1. (8) Maximal-torus conjugacy inside B plus b = ut gives u^-1 S_y u inside T, correctly replacing Milne 16.33(d). (10) Jacobson closed point and residue field show M = |Z|, so O is closed and proper. (11) The solvable fixed point, the F-point lift and strict dimension growth give maximality. Edge cases S=1, S central, G=B, G a torus, rank 0 and GL2 with diagonal or scalar S all hold. The three tool_uses (geometrically-connected-algebraic-closure, group-scheme-separated-field, reduced-source-factors) are generic scheme facts, accepted. Batch 5: all 10 flagged paths end in four sk-i-curve-zero lemmas (smooth-at-point fibre criterion, connected-point-geometrically-connected, fppf covering base change, smooth fpqc descent). These are general scheme facts, not steps of the proofs of the trace formula or Poincare duality, so all are accepted. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.TorusCentralizerBorelIntersection",
+  "declaration": "AlgebraicGeometry.exists_torusCentralizer_borel_intersection",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/TorusCentralizerBorelIntersection.lean",
+  "statement": "theorem exists_torusCentralizer_borel_intersection {F : Type u} [Field F] [IsAlgClosed F] (G B S : Grp (Over (Spec (.of F)))) [IsAffine G.X.left] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] [Smooth G.X.hom] [ConnectedSpace G.X.left] (iB : B ⟶ G) (hB : IsBorelGroupScheme iB.hom.hom) (iS : S ⟶ B) (hS : IsClosedSubgroupScheme iS.hom.hom) (hT : ∃ r : ℕ, Nonempty (S ≅ MultiplicativeType.splitTorus F r)) : ∃ (C : Grp (Over (Spec (.of F)))) (iC : C ⟶ G), IsClosedSubgroupScheme iC.hom.hom ∧ Smooth C.X.hom ∧ ConnectedSpace C.X.left ∧ (∀ (A : Type u) [CommRing A] [Algebra F A], ReductiveTorusCentralizer.centralizerPoints (iS ≫ iB) A = Set.range (fun c : StandardGroupSchemes.affine F A ⟶ C.X ↦ c ≫ iC.hom.hom)) ∧ ∃ (H : Grp (Over (Spec (.of F)))) (jB : H ⟶ B) (jC : H ⟶ C), IsPullback jB.hom.hom.left jC.hom.hom.left iB.hom.hom.left iC.hom.hom.left ∧ IsBorelGroupScheme jC.hom.hom",
+  "branch": "newtargets-dag",
+  "by": "Q102",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cb142acfd",
+  "group": "Q102",
+  "result": "pass",
+  "note": "Statement matches node/Milne 17.46 clause by clause: G affine finite type smooth connected; B Borel via IsBorelGroupScheme; S closed subgroup of B and isomorphic to splitTorus F r (r=0 allowed, no maximality); centralizer via centralizerPoints (all algebras, all extensions, no reducedness) represented by closed smooth connected C as equality of ranges; H = B x_G C via IsPullback (orientation checked) and IsBorelGroupScheme on H->C. Only stmt_deps (+4 landed owners) and lean changed vs live/side-live; statement verbatim; imports exist; no defs, sorry only, docstrings with source/blueprint/11 steps; edge cases S=1, central S, G=B, torus, GL2 hold. Not recompiled (no change). No findings."
+ }
+}

@@ -1,0 +1,309 @@
+{
+ "id": "lem-cbc-strict-coefficient-augmentation-homotopicality",
+ "kind": "statement",
+ "title": "Strict coefficient augmentation and homotopical reduction",
+ "statement": "Let $\\mathcal C$ be a small site, $O$ and $B_n$, $n\\geq1$, sheaves of commutative rings, and $p_n:O\\to B_n$, $q_n:B_{n+1}\\to B_n$ ring-sheaf maps with $q_np_{n+1}=p_n$. Use module sheaves [def-weil-sheaf-of-modules-category], their cochain complexes and derived localizations [def-weil-abstract-derived-category], and strict inverse systems [def-weil-inverse-system]. Let $\\mathcal K$ be the full category of K-flat complexes of $O$-modules with flat terms [def-pc-kflat-complex, def-pc-flat-sheaf-modules]. Let $\\operatorname{Tow}(O)=\\operatorname{Fun}(\\mathbf N_{\\geq1}^{\\mathrm{op}},\\operatorname{Mod}(O))$ and $Q_t:K(\\operatorname{Tow}(O))\\to D(\\operatorname{Tow}(O))$ be its localization. Regard each $B_n$-module as an $O$-module along $p_n$ [def-pc-sheaf-restrict-scalars]. The formulas\n$$R(P)_n=P\\otimes_OB_n,\\quad R(P)_{n+1}\\to R(P)_n=1\\otimes q_n,\\quad R(f)_n=f\\otimes1$$\nusing sheaf tensor [def-pur-sheaf-tensor-product], define a functor from $\\mathcal K$ to strict tower complexes. The constant tower functor $\\Delta$ has a natural strict chain augmentation $a:\\Delta\\to R$ whose $n$-th component is $x\\mapsto x\\otimes1$; thus $R(f)a_P=a_{P'}\\Delta f$. Both functors respect chain homotopies. If $f$ in $\\mathcal K$ is a quasi-isomorphism, then $\\Delta f$ and $R(f)$ are quasi-isomorphisms of strict tower complexes. Consequently $Q_t\\Delta$, $Q_tR$ and $Q_ta$ descend to the localization of $\\mathcal K$ at quasi-isomorphisms. For every additive functor $E:\\operatorname{Mod}(O)\\to\\mathcal B$ to an abelian category [def-sp-abelian], termwise levelwise $E$ carries $\\Delta P$ to $\\Delta E(P)$, including identity transitions; it descends to homotopy categories and preserves shifts and cone triangles there. No flatness of $B_n$ over $O$ and no K-flatness of $R(P)_n$ over $O$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+  "place": "Completed-pullback invocation: strict quotient augmentation, homotopy descent, and quasi-isomorphism localization (former strict-quotient computation Steps 1 and 6, and the additive-cone argument in Step 2). Stacks sites-cohomology.tex Tag 06YT (lemma-derived-tor-quasi-isomorphism-other-side) and homology.tex Tag 02MZ (lemma-inverse-systems-abelian); augmented strict-diagram assembly is agent-written."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-inverse-system",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-sheaf-tensor-product",
+  "def-sp-abelian",
+  "def-sf-localized-strict-tensor-comparison-data",
+  "def-sf-strict-tensor-reduction-termwise"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\mathcal A=\\operatorname{Mod}(O)$. It is abelian since the site is small. For each degree $i$, define the $O$-module $(R(P)_n)^i=P^i\\otimes_OB_n$ by scalar restriction along $p_n$, and set $d_{R(P)_n}^i=d_P^i\\otimes1$. The tensor relations give $d^2=0$. The map $t_n=1\\otimes q_n$ is $O$-linear because $q_np_{n+1}=p_n$, and $d t_n=t_n d$ since both composites take $x\\otimes b$ to $d x\\otimes q_n(b)$. Compose these adjacent transitions for all arrows of $\\mathbf N_{\\geq1}^{\\mathrm{op}}$. This gives a complex of strict towers: at degree $i$ the tower is $(P^i\\otimes_OB_n,t_n)$. Define $R(f)^i_n=f^i\\otimes1$; it commutes with differentials and transitions by the same formula, and preserves identities and compositions on pure tensors. All formulas are first maps of presheaves of tensors and hence induce the asserted maps of their sheafifications. The constant tower has terms $P^i$ and identity transitions, and $\\Delta f$ has component $f$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-sheaf-restrict-scalars",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-inverse-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), tensor and change-of-rings definitions; strict diagram assembly from the formulas"
+   }
+  },
+  {
+   "text": "Define $(a_P)^i_n(x)=x\\otimes1$. This is $O$-linear: $(rx)\\otimes1=x\\otimes p_n(r)$, which is the $O$-action on $x\\otimes1$. It commutes with $d$ because $d(x\\otimes1)=dx\\otimes1$, and with tower transitions because $q_n(1)=1$. For a chain map $f:P\\to P'$, both $(f^i\\otimes1)(a_P)^i_n$ and $(a_{P'})^i_n f^i$ send $x$ to $f^i(x)\\otimes1$. These equations hold as sheaf maps, so $a$ is a natural strict chain augmentation $\\Delta\\to R$. In Lean, use the proved sheaf unitor formula in def-pur-cochain-tensor-coherence-data and the tensor-map pure-section formula of lem-pur-module-tensor-generator-calculus.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pc-sheaf-restrict-scalars",
+    "def-pur-cochain-tensor-coherence-data",
+    "lem-pur-module-tensor-generator-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, tensor relations; agent verification of coefficient units and augmentation naturality"
+   }
+  },
+  {
+   "text": "If $f-g=d_{P'}h+h d_P$ for a degree $-1$ family $h^i:P^i\\to P'^{i-1}$, use the constant family $h^i$ for $\\Delta$ and the family $h^i\\otimes1$ at level $n$ for $R$. The latter commutes with $1\\otimes q_n$. Tensoring is additive on maps, so $(f-g)\\otimes1=(d_{P'}\\otimes1)(h\\otimes1)+(h\\otimes1)(d_P\\otimes1)$. Thus these are homotopies in the category of strict towers, and both functors factor through maps modulo chain homotopy. The equations of Step 2 remain equations there. For $\\mathcal K$ this means the homotopy category with its prescribed objects, not an assertion about K-flatness of the reduced complexes.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-abstract-derived-category",
+    "def-weil-inverse-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Definition definition-complexes-notation, homotopy category; direct tensor homotopy calculation"
+   }
+  },
+  {
+   "text": "For a quasi-isomorphism f between resolving inputs, its cone K is acyclic. Use the proved independent-universe K-flat cone closure and acyclic K-flat tensor argument in the proof of lem-pur-derived-change-of-rings (DerivedChangeOfRingsIndependentCoefficients): K is K-flat, and Tot(F tensor K) is acyclic for every F. Take F to be the underlying coefficient module B_n in degree zero. The single-degree total-tensor comparison identifies this with termwise left tensoring K by B_n. The symmetric tensor braiding identifies left and right tensoring. The additive mapping-cone comparison then identifies the resulting acyclic complex with the cone of termwise right tensoring f by B_n. The cone criterion proves that this is a quasi-isomorphism. This argument uses no flatness of B_n and works with independent site and coefficient universes.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "def-pc-kflat-complex",
+    "def-pur-sheaf-tensor-product",
+    "lem-pur-quasi-iso-cone-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YT and 06YS; independent-universe acyclic K-flat tensor and cone helpers already proved in DerivedChangeOfRingsIndependentCoefficients.lean; degree-zero tensor and braiding comparisons."
+   }
+  },
+  {
+   "text": "Use [lem-weil-tower-category-levelwise-abelian] with $\\mathcal A=\\operatorname{Mod}(O)$. In the tower category, kernels and cokernels are computed levelwise. Thus the kernel of a differential, its image (the kernel of its cokernel), and the quotient defining $H^i$ are all computed levelwise: $H^i(X)_n=H^i(X_n)$, compatibly with maps. A map of tower complexes inducing isomorphisms on every $H^i$ at every level is therefore a quasi-isomorphism: the inverse of a levelwise isomorphism commutes with transitions by multiplying its naturality equation by the component inverses. Step 4 supplies this criterion for $R(f)$; for $\\Delta f$, every evaluated map is $f$. Both are consequently quasi-isomorphisms of strict tower complexes.",
+   "uses": [
+    "lem-weil-tower-category-levelwise-abelian",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 02MZ (lemma-inverse-systems-abelian); cohomology and isomorphism criterion written out from levelwise kernels/cokernels"
+   }
+  },
+  {
+   "text": "Let $L:\\mathcal K\\to\\mathcal K[W^{-1}]$ localize the chain-map category at its quasi-isomorphisms. Compose $\\Delta$ and $R$ with passage to the tower homotopy category and $Q_t$, obtaining $F_\\Delta,F_R:\\mathcal K\\to D(\\operatorname{Tow}(O))$ and $\\tau=Q_ta:F_\\Delta\\to F_R$. Step 5 says both functors invert $W$. Clause (1) of [lem-weil-pbc-localization-universal-property] therefore gives $\\overline F_\\Delta,\\overline F_R$ with natural isomorphisms $\\phi_\\Delta:\\overline F_\\Delta L\\simeq F_\\Delta$ and $\\phi_R:\\overline F_R L\\simeq F_R$. Clause (2) gives the unique descended augmentation with component $\\overline a_{L(P)}=\\phi_{R,P}^{-1}\\tau_P\\phi_{\\Delta,P}$. This specifies descent even when the factorization is only up to natural isomorphism. In particular, for $w:P\\to P\\prime$ in $W$, naturality gives $\\overline F_R(Lw)\\overline a_{L(P)}=\\overline a_{L(P\\prime)}\\overline F_\\Delta(Lw)$. Both functor images of $Lw$ are invertible, so multiplying by their inverses gives $\\overline F_R(Lw)^{-1}\\overline a_{L(P\\prime)}=\\overline a_{L(P)}\\overline F_\\Delta(Lw)^{-1}$, the augmentation equation on the inverted arrows. Step 3 independently supplies homotopy descent; no claim that $R$ lands back in $\\mathcal K$ is involved.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 04VG/04VK, localization universal property; natural-transformation clause as stated in the cited node (Mathlib Localization.liftNatTrans)"
+   }
+  },
+  {
+   "text": "For the asserted additive functor $E:\\mathcal A\\to\\mathcal B$, apply $E$ to every degree, differential and transition of a tower complex. The relations $E(0)=0$ and $E(uv)=E(u)E(v)$ make this a tower complex and functor. In a constant tower the transitions remain $E(1)=1$, giving $E(\\Delta P)=\\Delta E(P)$ with their chain maps. Applying $E$ to $f-g=dh+hd$ gives $E(f)-E(g)=E(d)E(h)+E(h)E(d)$; the image homotopy still commutes with transitions. Hence the functor descends to homotopy categories. For any integer $r$, the standard shift has terms $X^{i+r}$ and differential $(-1)^rd$; additivity gives $E((-1)^rd)=(-1)^rE(d)$, so this termwise functor preserves shifts, naturally in $X$. The constant-tower comparison is StrictReduction.constantSquare, lifted by mapHomologicalComplexCompIso; homotopy descent and CommShift are Mathlib functor constructions.",
+   "uses": [
+    "def-sp-abelian",
+    "def-weil-inverse-system",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Definition definition-complexes-notation and section-cones; termwise additive functor and shift formulas"
+   }
+  },
+  {
+   "text": "For a strict tower chain map $u:X\\to Y$, let $\\iota_1,\\iota_2,\\pi_1,\\pi_2$ be the biproduct maps of $Y^i\\oplus X^{i+1}$. Applying $E$ to the equations $\\pi_j\\iota_k=\\delta_{jk}$ and $\\iota_1\\pi_1+\\iota_2\\pi_2=1$ shows that $(E(\\pi_1),E(\\pi_2))$ gives the canonical isomorphism $E(Y^i\\oplus X^{i+1})\\simeq E(Y^i)\\oplus E(X^{i+1})$. In these coordinates $E$ takes the cone differential $\\left(\\begin{smallmatrix}d_Y&u\\\\0&-d_X\\end{smallmatrix}\\right)$ to $\\left(\\begin{smallmatrix}E(d_Y)&E(u)\\\\0&-E(d_X)\\end{smallmatrix}\\right)$. The isomorphisms commute with tower transitions, being defined by the projections. They also take the cone inclusion to the cone inclusion and its signed projection to the signed projection, so identify the image of $X\\to Y\\to C(u)\\to X[1]$ with the cone triangle of $E(u)$ in the homotopy category. This proves the last clause using additivity alone. Apply Mathlib CochainComplex.mappingCone.mapTrianglehIso to the additive termwise functor.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-inverse-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Definition definition-cone and cone-triangle convention in def-weil-abstract-derived-category; explicit biproduct calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-inverse-system",
+  "def-pur-cochain-tensor-coherence-data",
+  "lem-pur-module-tensor-generator-calculus",
+  "def-weil-abstract-derived-category",
+  "lem-pur-derived-change-of-rings",
+  "def-pc-kflat-complex",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-pbc-localization-universal-property",
+  "def-sp-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "B6 Lean proof, 2026-10-24. Tags 06YT/06YS via existing independent-universe K-flat cone and acyclic tensor helpers; 03EK via the existing unitor and pure-tensor map formulas; 02MZ via quasiIso_iff_evaluation; localization and additive homotopy/shift/cone assembly use Mathlib."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A strict tower of quotient coefficient sheaves defines an augmented tensor reduction functor on K flat complexes preserving quasi isomorphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Tor\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Abelian C] →\\n        [CategoryTheory.MonoidalPreadditive C] →\\n          [CategoryTheory.HasProjectiveResolutions C] → ℕ → CategoryTheory.Functor C (Cat\", \"doc\": \"The $ n $-th left-derived functor of the tensor product operation in a monoidal abelian category, constructed by taking projective resolutions. For each object $ X $, $ \\\\mathrm{Tor}_n(X,-) $ is the $ \"}\n  {\"name\": \"Rep.Tor\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic\", \"type\": \"(k G : Type u) →\\n  [inst : CommRing k] →\\n    [inst_1 : Group G] → ℕ → CategoryTheory.Functor (Rep k G) (CategoryTheory.Functor (Rep k G) (ModuleCat k))\", \"doc\": \"For a commutative ring $k$ and group $G$, the $n$-th Tor functor is a bifunctor from the category of representations $\\\\text{Rep}(k, G)$ to $k$-modules. It is constructed as the $n$-th left-derived fun\"}\n  {\"name\": \"CategoryTheory.Tor'\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Abelian C] →\\n        [CategoryTheory.MonoidalPreadditive C] →\\n          [CategoryTheory.HasProjectiveResolutions C] → ℕ → CategoryTheory.Functor C (Cat\", \"doc\": \"For a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, the $n$-th Tor functor $\\\\mathrm{Tor}_n : \\\\mathcal{C} \\\\times \\\\mathcal{C} \\\\to \\\\mathcal{C}$ is the $n$-th left-derived functo\"}\n  {\"name\": \"CategoryTheory.Tor_obj\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) (X : C),\\n  (CategoryTheory.Tor C n).obj X =\", \"doc\": \"For each object $X$ in a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, the $n$-th Tor functor $\\\\mathrm{Tor}_n(X,-)$ is defined as the $n$-th left-derived functor of the left \"}\n  {\"name\": \"Module.Flat.rTensor_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) [Module.Flat R ↑M] (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n  C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorRight M)).Exact\", \"doc\": \"For a commutative ring $ R $, a flat $ R $-module $ M $, and an exact short complex $ C $ in the category of $ R $-modules, the tensor product of $ C $ with $ M $ results in an exact short complex.\"}\n  {\"name\": \"Module.Flat.lTensor_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) [Module.Flat R ↑M] (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n  C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorLeft M)).Exact\", \"doc\": \"For a commutative ring $ R $ and a flat $ R $-module $ M $, if $ C $ is an exact short complex in the category of $ R $-modules, then the tensor product of $ C $ with $ M $ (via left tensoring) result\"}\n  {\"name\": \"CategoryTheory.Tor'_obj_obj\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) (k j : C),\\n  ((CategoryTheory.Tor' C n).obj\", \"doc\": \"In a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, for any objects $k, j \\\\in \\\\mathcal{C}$, the $n$-th Tor functor $\\\\mathrm{Tor}_n(k, j)$ is equal to the $n$-th left-derived f\"}\n  {\"name\": \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R),\\n  Module.Flat R ↑M ↔\\n    ∀ (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n      C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorLeft M)).Exact\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is flat if and only if for every exact short complex of $ R $-modules, the induced complex obtained by tensoring with $ M $ remains exact. In symbols, $ M \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary flat modules, individual short complexes, or derived localization of exact functors; none constructs this augmented strict tensor tower on unbounded K-flat representatives"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor reduction to a tower of quotient sheaves is natural and preserves quasi isomorphisms between K flat complexes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.ShortComplex.quasiIso_map_of_preservesLeftHomology\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.PreservesHomology\", \"type\": \"[F.PreservesLeftHomologyOf S₁] [F.PreservesLeftHomologyOf S₂] [QuasiIso φ] : QuasiIso (F.mapShortComplex.map φ)\", \"doc\": \"If a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ preserves left homology for short complexes $ S_1 $ and $ S_2 $ in $ \\\\mathcal{C} $, and $ \\\\phi : S_1 \\\\to S_2 $ is a quasi-isomorphism (inducing isomorp\"}\n  {\"name\": \"Module.Flat.rTensor_shortComplex_exact\", \"module\": \"Mathlib.RingTheory.Flat.CategoryTheory\", \"type\": \"[Flat R M] (C : ShortComplex <| ModuleCat R) (hC : C.Exact) : C.map (tensorRight M) |>.Exact\", \"doc\": \"For a commutative ring $ R $, a flat $ R $-module $ M $, and an exact short complex $ C $ in the category of $ R $-modules, the tensor product of $ C $ with $ M $ results in an exact short complex.\"}\n  {\"name\": \"CategoryTheory.ShortComplex.quasiIso_map_of_preservesRightHomology\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.PreservesHomology\", \"type\": \"[F.PreservesRightHomologyOf S₁] [F.PreservesRightHomologyOf S₂] [QuasiIso φ] : QuasiIso (F.mapShortComplex.map φ)\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with zero morphisms, a functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ preserving zero morphisms, and short complexes $S_1, S_2$ in $\\\\mathcal{C}$, if $F$ pre\"}\n  {\"name\": \"CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier\", \"module\": \"Mathlib.Algebra.Category.Ring.Under.Limits\", \"type\": \"[Module.Flat R S] : PreservesFiniteLimits (tensorProd R S)\", \"doc\": \"If $ S $ is a flat $ R $-module, then the tensor product functor from the under category of $ R $ to the under category of $ S $ preserves finite limits.\"}\n  {\"name\": \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh\", \"module\": \"Mathlib.Algebra.Homology.Localization\", \"type\": \":\\n  HomologicalComplexUpToQuasiIso.Qh ⋙ F.mapHomologicalComplexUpToQuasiIso c ≅\\n    F.mapHomotopyCategory c ⋙ HomologicalComplexUpToQuasiIso.Qh\", \"doc\": \"Given an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between preadditive categories with homology that preserves homology, this asserts a natural isomorphism between the composition of the de\"}\n  {\"name\": \"CommRingCat.Under.instPreservesLimitUnderWalkingParallelPairParallelPairTensorProdOfFlatCarrier\", \"module\": \"Mathlib.Algebra.Category.Ring.Under.Limits\", \"type\": \"[Module.Flat R S] {A B : Under R} (f g : A ⟶ B) : PreservesLimit (parallelPair f g) (tensorProd R S)\", \"doc\": \"If $ R $ is a flat module over $ S $, then the tensor product functor from the under category of $ R $ to the under category of $ S $ preserves the limits of parallel pairs (i.e., equalizers) in the c\"}\n  {\"name\": \"TensorProduct.tensorQuotientEquiv\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Quotient\", \"type\": \"(n : Submodule R N) :\\n  M ⊗[R] (N ⧸ (n : Submodule R N)) ≃ₗ[R] (M ⊗[R] N) ⧸ (LinearMap.range (map (LinearMap.id : M →ₗ[R] M) n.subtype))\", \"doc\": \"For a commutative ring $ R $, $ R $-module $ M $, and submodule $ n $ of an $ R $-module $ N $, the tensor product $ M \\\\otimes_R (N/n) $ is naturally isomorphic to the quotient module $ (M \\\\otimes_R N\"}\n  {\"name\": \"LinearMap.tensorKerEquiv_apply\", \"module\": \"Mathlib.RingTheory.Flat.Equalizer\", \"type\": \"[Module.Flat R M] (x : M ⊗[R] ker f) : tensorKerEquiv S M f x = tensorKer S M f x\", \"doc\": \"Given commutative rings $ R $ and $ S $ with $ S $ an $ R $-algebra, an $ S $-module $ M $ satisfying scalar tower compatibility $ \\\\mathrm{IsScalarTower}(R, S, M) $, $ R $-modules $ N, P $, and an $ R\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary flat modules, individual short complexes, or derived localization of exact functors; none constructs this augmented strict tensor tower on unbounded K-flat representatives"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex, QuasiIso, TensorProduct",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary flat modules, individual short complexes, or derived localization of exact functors; none constructs this augmented strict tensor tower on unbounded K-flat representatives"
+  },
+  {
+   "tool": "grep",
+   "query": "[Kk].?[Ff]lat.*([Tt]ower|[Qq]uotient)|([Tt]ower|[Qq]uotient).*[Kk].?[Ff]lat",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary flat modules, individual short complexes, or derived localization of exact functors; none constructs this augmented strict tensor tower on unbounded K-flat representatives"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a ringed site and inverse system of algebras tensor a K flat quasi isomorphism with each algebra and obtain a quasi isomorphism of diagrams",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Module.Flat.iff_preservesFiniteLimits_tensorLeft\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R),\\n  Module.Flat R ↑M ↔ CategoryTheory.Limits.PreservesFiniteLimits (CategoryTheory.MonoidalCategory.tensorLeft M)\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is flat if and only if the tensor product functor with $ M $ preserves finite limits.\"}\n  {\"name\": \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Descent\", \"type\": \"∀ {A B : Type u} [inst : CommRing A] [inst_1 : CommRing B] {f : A →+* B},\\n  f.Flat →\\n    CategoryTheory.Limits.PreservesFiniteLimits\\n      (CategoryTheory.MonoidalCategory.tensorLeft ((ModuleCat.restrictScalars f).obj (ModuleCat.of B B)))\", \"doc\": \"For a flat ring homomorphism $ f : R \\\\to S $, the functor $ - \\\\otimes_R S $ from the category of $ R $-modules to itself preserves finite limits.\"}\n  {\"name\": \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R),\\n  Module.Flat R ↑M ↔\\n    ∀ (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n      C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorLeft M)).Exact\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is flat if and only if for every exact short complex of $ R $-modules, the induced complex obtained by tensoring with $ M $ remains exact. In symbols, $ M \"}\n  {\"name\": \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R),\\n  Module.Flat R ↑M ↔\\n    ∀ (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n      C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorRight M)).Exact\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is flat if and only if for every short exact sequence in the category of $ R $-modules, the sequence obtained by tensoring with $ M $ remains exact. In oth\"}\n  {\"name\": \"CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier\", \"module\": \"Mathlib/Algebra/Category/Ring/Under/Limits\", \"type\": \"∀ {R S : CommRingCat} [inst : Algebra ↑R ↑S] [Module.Flat ↑R ↑S],\\n  CategoryTheory.Limits.PreservesFiniteLimits (R.tensorProd S)\", \"doc\": \"If $ S $ is a flat $ R $-module, then the tensor product functor from the under category of $ R $ to the under category of $ S $ preserves finite limits.\"}\n  {\"name\": \"Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) [Module.Flat R ↑M],\\n  CategoryTheory.Limits.PreservesFiniteLimits (CategoryTheory.MonoidalCategory.tensorLeft M)\", \"doc\": \"For any commutative ring $ R $ and flat $ R $-module $ M $, the functor given by tensoring with $ M $ preserves finite limits in the category of $ R $-modules. This means that for any finite diagram i\"}\n  {\"name\": \"Module.Flat.rTensor_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) [Module.Flat R ↑M] (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n  C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorRight M)).Exact\", \"doc\": \"For a commutative ring $ R $, a flat $ R $-module $ M $, and an exact short complex $ C $ in the category of $ R $-modules, the tensor product of $ C $ with $ M $ results in an exact short complex.\"}\n  {\"name\": \"Module.Flat.lTensor_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) [Module.Flat R ↑M] (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n  C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorLeft M)).Exact\", \"doc\": \"For a commutative ring $ R $ and a flat $ R $-module $ M $, if $ C $ is an exact short complex in the category of $ R $-modules, then the tensor product of $ C $ with $ M $ (via left tensoring) result\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary flat modules, individual short complexes, or derived localization of exact functors; none constructs this augmented strict tensor tower on unbounded K-flat representatives"
+  },
+  {
+   "tool": "grep",
+   "query": "([Kk]Flat|[Kk]_flat).*(tower|Tower|augmentation)|(tower|Tower|augmentation).*([Kk]Flat|[Kk]_flat)",
+   "results": "Hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary flat-module tensor and Tor results do not give the augmented strict tower on unbounded K-flat sheaf complexes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An inverse system of algebras gives a tensor reduction functor on K flat complexes and a natural augmentation from the constant diagram",
+   "results": "Hits: IsReduced.tensorProduct_of_flat_of_forall_fg, CommRingCat.Under.instPreservesLimitUnderWalkingParallelPairParallelPairTensorProdOfFlatCarrier, CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier, Algebra.TensorProduct.liftEquiv_symm_apply_coe, CommRingCat.Under.instPreservesLimitsOfShapeUnderWalkingParallelPairTensorProdOfFlatCarrier, Algebra.TensorProduct.congr_symm_apply, TensorProduct.directLimitRight, TensorAlgebra.lift_symm_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary flat-module tensor and Tor results do not give the augmented strict tower on unbounded K-flat sheaf complexes"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopyCategory, Functor, QuasiIso",
+   "results": "Hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary flat-module tensor and Tor results do not give the augmented strict tower on unbounded K-flat sheaf complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict inverse systems of coefficient ring sheaves tensor reduction on K flat complexes with a natural augmentation preserving quasi isomorphisms",
+   "results": "Hits: Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, AdicCompletion.tensor_map_id_left_eq_map, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX, Module.Flat.iff_preservesFiniteLimits_tensorLeft",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary flat-module tensor and Tor results do not give the augmented strict tower on unbounded K-flat sheaf complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded complexes of sheaves tensor with an inverse system of algebras defines a homotopical functor with unit natural transformation",
+   "results": "Hits: CategoryTheory.Tor, CategoryTheory.Tor', CategoryTheory.Tor_obj, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, CategoryTheory.Tor'_obj_obj, LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX, HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary flat-module tensor and Tor results do not give the augmented strict tower on unbounded K-flat sheaf complexes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-cbc-strict-quotient-pullback-computation",
+  "date": "2026-10-22",
+  "group": "Q66"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "from": {
+   "node": "lem-cbc-completed-extension-zero-comparison",
+   "place": "Completed-pullback invocation: strict quotient augmentation, homotopy descent, and quasi-isomorphism localization (former strict-quotient computation Steps 1 and 6, and the additive-cone argument in Step 2). Stacks sites-cohomology.tex Tag 06YT (lemma-derived-tor-quasi-isomorphism-other-side) and homology.tex Tag 02MZ (lemma-inverse-systems-abelian); augmented strict-diagram assembly is agent-written.",
+   "via": [
+    "lem-cbc-strict-quotient-pullback-computation",
+    "lem-cbc-adic-pullback-presentation-transport"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-cbc-strict-coefficient-augmentation-homotopicality",
+  "worker": "stage1",
+  "summary": "Constructed the strict coefficient tensor tower, augmentation and tensor homotopies explicitly. Quasi-isomorphisms are checked using the existing change-of-rings lemma and levelwise abelian structure, then descended with the existing localization universal property. Expanded the additive-functor shift and cone calculation. Statement unchanged; no new nodes. Repair of the live-promotion return: compared the retained split with the current unsplit live item, re-read all current dependency statements, and made the localization and the conjugated descended augmentation explicit using clauses (1) and (2) of the current localization node. Delivery is rebuilt on current origin/sheaf-dag by deliver.py. In this retry the localization assembly also spells out the augmentation equation on inverted quasi-isomorphisms, retaining the original statement and all existing citations.",
+  "blueprint": "Realizes the completed-pullback invocation in lem-cbc-completed-extension-zero-comparison.proof.md: strict quotient augmentation and homotopy/localization assembly from the former strict-quotient computation Steps 1 and 6, and the additive-cone argument of former Step 2. This auxiliary statement does not use the blueprint final product-preservation assertion.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-change-of-rings-kflat-quasi-iso",
+    "why": "Generic ringed-site change-of-rings quasi-isomorphism criterion, applied separately at each coefficient level; the CBC unit does not supply its tensor homological-algebra proof."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NA-6b1ba14dd",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-6b1ba14dd (reviewer sub-agent of L); spot-checked: Third delivery of the item. It is not an answer to a re-split note and has no new nodes. Compared with the previous head 89f879fa, only Step 6 and the split_report changed. The earlier E1 FIX (issued at 773fa86e, re-applied at 89f879fa) is missing again: the statement makes only O commutative, but Step 4 cites lem-pur-change-of-rings-kflat-quasi-iso, which needs both O and O' to be sheaves of commutative rings. Stacks 06YT (sites-cohomology.tex:3233) is likewise about a ringed site. FIX: the statement now reads '$O$ and $B_n$, $n\\geq1$, sheaves of commutative rings', and Step 4 names both rings. The statement and Step 4 are byte-identical to the prior fix, and the new Step 6 of this head is kept. Both citers break nothing: lem-cbc-strict-quotient-pullback-computation uses (A/I^n)_T and lem-trf-point-transport-strict-quotient uses (O_E/ϖ^n)_s, both commutative. The item is not a target. All 8 steps re-read. Steps 1-3: d^2=0, t_n=1⊗q_n is O-linear because q_np_{n+1}=p_n, x↦x⊗1 is natural, and h⊗1 commutes with transitions. Step 4: scalar restriction keeps the abelian sheaf, sectionwise kernels and sheafified cokernels, so it keeps cohomology. Step 5: levelwise kernels and cokernels from lem-weil-tower-category-levelwise-abelian. Step 6: clauses (1) and (2) of lem-weil-pbc-localization-universal-property give ā=φ_R^{-1}τφ_Δ, and the new inverted-arrow equation follows by multiplying the naturality square on both sides by the inverses, which is correct. Steps 7-8: shift sign and cone matrix by additivity alone. Edge cases: B_n=0, identity coefficients, Z→Z/2^n on a point, a contractible P, and an additive non-exact Hom(Z/2,-). No SGA cited. The off-unit tool use of lem-pur-change-of-rings-kflat-quasi-iso is accepted. Maintainer note: this FIX has been lost twice through re-delivery; the landing must carry the fixes/ file.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.StrictCoefficientAugmentationHomotopicality",
+  "declaration": "SheafOfModules.StrictCoefficientAugmentation.strict_coefficient_augmentation_homotopicality",
+  "declarations": [
+   "SheafOfModules.StrictCoefficientAugmentation.Inputs",
+   "SheafOfModules.StrictCoefficientAugmentation.inclusion",
+   "SheafOfModules.StrictCoefficientAugmentation.constantComplex",
+   "SheafOfModules.StrictCoefficientAugmentation.reductionComplex",
+   "SheafOfModules.StrictCoefficientAugmentation.coefficientUnit",
+   "SheafOfModules.StrictCoefficientAugmentation.towerAugmentation",
+   "SheafOfModules.StrictCoefficientAugmentation.augmentation",
+   "SheafOfModules.StrictCoefficientAugmentation.weakEquivalences",
+   "SheafOfModules.StrictCoefficientAugmentation.homotopyAugmentation",
+   "SheafOfModules.StrictCoefficientAugmentation.constantLocalized",
+   "SheafOfModules.StrictCoefficientAugmentation.reductionLocalized",
+   "SheafOfModules.StrictCoefficientAugmentation.strict_coefficient_augmentation_homotopicality"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/StrictCoefficientAugmentationHomotopicality.lean",
+  "statement": "theorem strict_coefficient_augmentation_homotopicality (S : AlgebraTowers.{c, v, r} O) : (∀ (P : Inputs.{c, v, r} O) (i : ℤ) (n : ℕᵒᵖ) (U : Cᵒᵖ) (x : (P.obj.X i).val.obj U), ((((augmentation.{c, v, r} O S).app P.obj).f i).app n).val.app U x = LocalizedStrictTensor.pure.{c, v, r} O (P.obj.X i) ((S ⋙ algebraModules.{c, v, r} O).obj n) U x (1 : (S.obj n).right.obj.obj U)) ∧ (∀ (P P' : Inputs.{c, v, r} O) (f : P ⟶ P'), (augmentation.{c, v, r} O S).app P.obj ≫ (reductionComplex.{c, v, r} O S).map f.hom = (constantComplex.{c, v, r} O).map f.hom ≫ (augmentation.{c, v, r} O S).app P'.obj) ∧ (∀ (P P' : Inputs.{c, v, r} O) (f g : P ⟶ P'), Nonempty (Homotopy f.hom g.hom) → Nonempty (Homotopy ((constantComplex.{c, v, r} O).map f.hom) ((constantComplex.{c, v, r} O).map g.hom)) ∧ Nonempty (Homotopy ((reductionComplex.{c, v, r} O S).map f.hom) ((reductionComplex.{c, v, r} O S).map g.hom))) ∧ (∀ P : Inputs.{c, v, r} O, ((Functor.const ℕᵒᵖ : Modules.{c, v, r} O ⥤ _).mapHomotopyCategoryFactors (.up ℤ)).hom.app P.obj ≫ (HomotopyCategory.quotient _ (.up ℤ)).map ((augmentation.{c, v, r} O S).app P.obj) = (homotopyAugmentation.{c, v, r} O S).app ((HomotopyCategory.quotient _ (.up ℤ)).obj P.obj) ≫ ((reduction.{c, v, r} O S).mapHomotopyCategoryFactors (.up ℤ)).hom.app P.obj) ∧ (∀ (P P' : Inputs.{c, v, r} O) (f : P ⟶ P'), QuasiIso f.hom → QuasiIso ((constantComplex.{c, v, r} O).map f.hom) ∧ QuasiIso ((reductionComplex.{c, v, r} O S).map f.hom)) ∧ (∃ (FΔ FR : (weakEquivalences.{c, v, r} O).Localization ⥤ DerivedCategory (ℕᵒᵖ ⥤ Modules.{c, v, r} O)) (φΔ : (weakEquivalences.{c, v, r} O).Q ⋙ FΔ ≅ constantLocalized.{c, v, r} O) (φR : (weakEquivalences.{c, v, r} O).Q ⋙ FR ≅ reductionLocalized.{c, v, r} O S), ∃! a : FΔ ⟶ FR, ∀ P : Inputs.{c, v, r} O, a.app ((weakEquivalences.{c, v, r} O).Q.obj P) = φΔ.hom.app P ≫ DerivedCategory.Q.map ((augmentation.{c, v, r} O S).app P.obj) ≫ φR.inv.app P) ∧ (∀ (B : Type b) [Category.{w} B] [Abelian B] (E : Modules.{c, v, r} O ⥤ B) [E.Additive], Nonempty (constantComplex.{c, v, r} O ⋙ (CategoryTheory.StrictReduction.termwise E).mapHomologicalComplex (.up ℤ) ≅ E.mapHomologicalComplex (.up ℤ) ⋙ (Functor.const ℕᵒᵖ : B ⥤ _).mapHomologicalComplex (.up ℤ)) ∧ (∀ (P : CochainComplex (Modules.{c, v, r} O) ℤ) (i : ℤ) (m n : ℕᵒᵖ) (f : m ⟶ n), ((((CategoryTheory.StrictReduction.termwise E).mapHomologicalComplex (.up ℤ)).obj ((constantComplex.{c, v, r} O).obj P)).X i).map f = 𝟙 (E.obj (P.X i))) ∧ Nonempty (HomotopyCategory.quotient _ (.up ℤ) ⋙ (CategoryTheory.StrictReduction.termwise E).mapHomotopyCategory (.up ℤ) ≅ (CategoryTheory.StrictReduction.termwise E).mapHomologicalComplex (.up ℤ) ⋙ HomotopyCategory.quotient _ (.up ℤ)) ∧ Nonempty (((CategoryTheory.StrictReduction.termwise E).mapHomotopyCategory (.up ℤ)).CommShift ℤ) ∧ (∀ (X Y : CochainComplex (ℕᵒᵖ ⥤ Modules.{c, v, r} O) ℤ) (f : X ⟶ Y), Nonempty (((CategoryTheory.StrictReduction.termwise E).mapHomotopyCategory (.up ℤ)).mapTriangle.obj (CochainComplex.mappingCone.triangleh f) ≅ CochainComplex.mappingCone.triangleh (((CategoryTheory.StrictReduction.termwise E).mapHomologicalComplex (.up ℤ)).map f))))",
+  "branch": "sheaf-dag",
+  "by": "Q59",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Reviewer fix (4cf5795f0117): the augmentation x ↦ x ⊗ 1 is built in this module as towerAugmentation (inverse right unitor followed by the tensored coefficient unit), the same term as CategoryTheory.StrictReduction.augmentation (checked by rfl). That plain def lives in the theorem module of lem-weil-pbc-reduction-pullback-derived-tower and is not among the declarations of def-sf-strict-tensor-reduction-termwise, so the item no longer uses a declaration whose owner is outside its stmt_deps. The theorem statement is unchanged.",
+  "fixed_by": "NT-stage2-cc-4cf5795f0"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4cf5795f0",
+  "group": "Q59",
+  "result": "fix",
+  "note": "All node clauses match: commutative O and B_n via Under, K-flat flat-term inputs, real sheaf tensor tower R and constant tower Δ, augmentation x↦x⊗1 (pure x 1) natural, homotopy descent, quasi-iso preservation, unique conjugated descended augmentation, additive E with identity transitions, homotopy descent, CommShift and actual cone triangles; edge cases (B_n=0, identity coefficients, ℤ→ℤ/2^{n+1}, contractible P, empty site, non-exact E) all covered; only item lean/stmt_deps changed, added def stmt_deps landed and acyclic. Fault: item used plain def CategoryTheory.StrictReduction.augmentation, owned only by theorem lem-weil-pbc-reduction-pullback-derived-tower (not a stmt_dep, not in def-sf-strict-tensor-reduction-termwise declarations). FIX: item-local towerAugmentation (rfl-equal, checked), used by augmentation and homotopyAugmentation; lean-record adds it to declarations with a note; theorem statement unchanged; fixed file compiled clean with nt_compile --json (4.1 s), control error confirmed the compile ran."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261023T230434-L-3426203",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

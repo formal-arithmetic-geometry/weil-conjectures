@@ -1,0 +1,356 @@
+{
+ "id": "lem-pur-line-zero-geometry",
+ "kind": "statement",
+ "title": "Geometry and universal Cartier property of a line-bundle zero section",
+ "statement": "Fix the purity datum of [def-pur-conventions], with $k=\\overline{\\mathbf F}_q$. Let $B$ be a separated finite-type $k$-scheme [def-weil-finite-type-morphism, def-weil-proper-morphism], and let $\\pi:E\\to B$ be a rank-one vector bundle with zero section $z:B\\to E$ and underlying locally free module $\\mathcal E$ [def-pur-vector-bundle-zero-section]. Then $B$ and $E$ are Noetherian (locally Noetherian and quasi-compact), $E$ is separated and of finite type over $k$, and $\\pi$ is separated of finite type and smooth of relative dimension one [def-sbc-smooth-morphisms]. There is a compactification $E\\xrightarrow j\\overline E\\xrightarrow r B$, with $j$ an open immersion, $r$ proper and $rj=\\pi$ [def-weil-compactifications-refinements], in which\n$$\\overline E=\\underline{\\operatorname{Proj}}_B\\operatorname{Sym}(\\mathcal O_B\\oplus\\mathcal E),$$\nand $j$ is the standard chart where the first degree-one generator is invertible [def-nagata-relative-proj].\n\nThe map $z$ is a closed immersion, $\\pi z=\\mathrm{id}_B$, and $D=z(B)$ is an effective Cartier divisor [def-pc-divisor-line-bundle]. Its map to $B$ is smooth of relative dimension zero and, at every $x\\in D$,\n$$\\dim\\mathcal O_{E,x}=\\dim\\mathcal O_{D,x}+1.$$\nHere dimension is Krull dimension, the supremum of lengths of strict prime chains. The open complement $E\\setminus D\\hookrightarrow E$ is quasi-compact. For every scheme morphism $B'\\to B$, without a flatness or Noetherian hypothesis, the base-changed zero section in $E\\times_B B'$ is again an effective Cartier divisor. More precisely, on each affine frame $U=\\operatorname{Spec}R\\subset B$, the pair $(E|_U,D|_U)$ is $(\\operatorname{Spec}R[t],V(t))$; on every affine chart $\\operatorname{Spec}R'$ over $U$ of $B'$ the pulled-back pair is $(\\operatorname{Spec}R'[t],V(t))$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
+  "place": "Step 1, global Cartier zero divisor: affine frames, projective completion, smoothness, codimension and arbitrary base change; expanded realization proof steps 1--2"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-vector-bundle-zero-section",
+  "def-sbc-smooth-morphisms",
+  "def-weil-compactifications-refinements",
+  "def-nagata-relative-proj",
+  "def-pc-divisor-line-bundle",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-amb-vector-projective-presentation-data",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Finite type over the fixed field makes B Noetherian. Apply the existing projective-completion theorem to the canonical rank-one relative spectrum. It supplies the presentation Q, normalized dehomogenization equivalences, a proper completion with the precise chart image and equations, and separatedness, finite type and Noetherianity of the total space. Transport the compactification by V.phi: use the same ambient scheme, compose its open immersion with V.phi.hom, and retain the proper projection. The section-chart equation cancels V.phi.inv followed by V.phi.hom. The image is unchanged by precomposing with an isomorphism. Compose the projection properties with the given base morphism.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-amb-vector-projective-completion",
+    "def-pur-vector-bundle-zero-section",
+    "lem-sfb-finite-type-composition-base-change",
+    "def-weil-compactifications-refinements"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the existing locally free frame cover. On each member trivializationMap_spec identifies the restricted canonical projection with affine one-space projection after an isomorphism. Affine one-space is smooth of relative dimension one; target locality gives this for the canonical projection. Transport through V.phi. The canonical zero-section specification supplies closedness and the section identity; rewriting that identity makes the zero-section composite smooth of relative dimension zero. Target locality is the IsZariskiLocalAtTarget instance for SmoothOfRelativeDimension (the chart-local definition); composition is the fixed-relative-dimension permanence theorem.",
+   "uses": [
+    "def-asd-vector-bundle-zero-section",
+    "def-amb-finite-locally-free-module",
+    "sbc-lem-affine-space-smooth",
+    "def-pur-vector-bundle-zero-section",
+    "def-sbc-smooth-morphisms",
+    "lem-sbc-smooth-relative-dimension-permanence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A section z of the separated smooth relative curve is a closed immersion since z followed by the projection is the identity. The canonical lift from the kernel subscheme V(ker z) to the source of z is an isomorphism (closed immersions with the same kernel). Its composite with the projection is this isomorphism, so it is finite, flat and locally of finite presentation. Apply the already-proved finite-locally-free Cartier criterion to obtain invertibility of ker z, which is exactly the effective Cartier center condition.",
+   "uses": [
+    "lem-pc-cartier-criterion",
+    "def-pc-divisor-line-bundle"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At a zero-section point choose an affine neighbourhood on which the invertible kernel is (t), with t a nonzerodivisor. The stalk is the flat localization of this affine ring, so the germ t′ remains a nonzerodivisor. Scheme.Hom.ker_stalkMap identifies the kernel of the closed-immersion stalk map with the extension of (t), namely (t′). Its image in the source stalk is zero, so t′ is a nonunit and belongs to the maximal ideal. The ambient stalk is Noetherian. The one-equation dimension theorem and the quotient-by-kernel isomorphism from surjectivity of the stalk map give dim O_E,z(x) = dim O_B,x + 1.",
+   "uses": [
+    "def-pc-divisor-line-bundle",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "pqf-lem-affine-open-locnoeth",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-dimension-quotient-nonzerodivisor",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-localization-flat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The complement is an open of the Noetherian total scheme. It has Noetherian topology, and every morphism from a Noetherian topological source is quasi-compact; apply this to the complement inclusion.",
+   "uses": [
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For an arbitrary B′ to B, base-change stability gives a separated smooth relative curve with projection pullback.snd. The sectionBaseChange_snd equation makes the pulled-back zero section a section of this projection. Apply the same closed-immersion and Cartier-criterion argument from Step 3. No flatness, finite type, Noetherianity or reducedness is required of B′.",
+   "uses": [
+    "def-pc-base-change",
+    "lem-pc-cartier-criterion",
+    "def-pc-divisor-line-bundle",
+    "lem-sbc-smooth-relative-dimension-permanence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an affine frame U the first three required equations are trivializationMap_spec. Transport the pullback square defining restriction through this frame isomorphism and V.phi. Paste with the affine-space base-change square along Spec R′ to U. Its canonical pullback isomorphism identifies pullback V.p (g followed by U inclusion) with A^1_Spec R′. Compose with AffineSpace.SpecIso and the spectrum of the inverse of MvPolynomial.uniqueAlgEquiv to obtain Spec R′[t]. The coefficients equation of the polynomial equivalence identifies the projection with Spec of Polynomial.C. By the two pullback projections the base-changed section becomes the affine-space zero section: the first projection is g followed by the original zero section, using trivializationMap_spec, and the second is the identity. AffineSpace.hom_ext, on the base projection and its unique coordinate, then identifies this section with Spec of Polynomial.evalRingHom 0. Both arguments are identities of scheme morphisms over arbitrary R′.",
+   "uses": [
+    "def-asd-vector-bundle-zero-section",
+    "def-pur-vector-bundle-zero-section",
+    "def-pc-base-change",
+    "def-sbc-affine-space"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-amb-vector-projective-completion",
+  "def-pur-vector-bundle-zero-section",
+  "lem-sfb-finite-type-composition-base-change",
+  "def-weil-compactifications-refinements",
+  "def-asd-vector-bundle-zero-section",
+  "def-amb-finite-locally-free-module",
+  "sbc-lem-affine-space-smooth",
+  "def-sbc-smooth-morphisms",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-pc-cartier-criterion",
+  "def-pc-divisor-line-bundle",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-dimension-quotient-nonzerodivisor",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "def-pc-base-change",
+  "def-sbc-affine-space"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
+  "place": "Step 1; existing projective completion and frame specifications, finite-locally-free Cartier criterion (Stacks 0B9D), flat stalk localization and dimension drop (00KW), and explicit affine-space pullback equations. Lean proof by K3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A rank one algebraic vector bundle over a separated finite type scheme over a field has a projective compactification and a universally Cartier zero section smooth of codimension one",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "AlgebraicGeometry.Proj.fromOfGlobalSections",
+     "AlgebraicGeometry.Proj",
+     "AlgebraicGeometry.Proj.isSeparated",
+     "AlgebraicGeometry.Proj.valuativeCriterion_existence",
+     "AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat",
+     "AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+     "AlgebraicGeometry.Proj.instIsSeparated"
+    ],
+    "note": "",
+    "digest": "a59726b3bfda836d",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: read returned signatures; Proj properness and affine-local smoothness are ingredients, not the universal Cartier zero-section and global bundle-geometry statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The total space of an invertible sheaf is a smooth relative affine line with zero divisor stable under every base change",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "AlgebraicGeometry.isSmoothOfRelativeDimension_iff",
+     "AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension",
+     "AlgebraicGeometry.isSmooth_iff",
+     "AlgebraicGeometry.IsSmoothOfRelativeDimension",
+     "AlgebraicGeometry.IsSmooth.exists_isStandardSmooth",
+     "Algebra.basicOpen_subset_smoothLocus_iff",
+     "AlgebraicGeometry.IsSmooth",
+     "AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth"
+    ],
+    "note": "",
+    "digest": "bdf44d41f1067b95",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: read returned signatures; Proj properness and affine-local smoothness are ingredients, not the universal Cartier zero-section and global bundle-geometry statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"zeroSection\"",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "note": "",
+    "digest": "4f53cda18c2baa0c",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: read returned signatures; Proj properness and affine-local smoothness are ingredients, not the universal Cartier zero-section and global bundle-geometry statement"
+  },
+  {
+   "tool": "grep",
+   "query": "(zeroSection|zero_section).*(Cartier|[Ss]mooth)|[Cc]artier.*(vector|[Zz]ero)",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "note": "",
+    "digest": "4f53cda18c2baa0c",
+    "subdirectory": "AlgebraicGeometry"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: read returned signatures; Proj properness and affine-local smoothness are ingredients, not the universal Cartier zero-section and global bundle-geometry statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The zero section of a line bundle is an effective Cartier divisor universally over its base and the bundle has a relative projective completion",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "digest": "4f53cda18c2baa0c",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The zero section of an algebraic line bundle is an effective Cartier divisor stable under arbitrary base change",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "Bundle.mdifferentiableOn_zeroSection",
+     "Bundle.zeroSection",
+     "Bundle.mdifferentiableAt_zeroSection",
+     "Bundle.contMDiff_zeroSection",
+     "Bundle.mdifferentiable_zeroSection",
+     "Bundle.contMDiffAt_zeroSection",
+     "Bundle.contMDiffOn_zeroSection",
+     "AlgebraicGeometry.RingedSpace.res_zero"
+    ],
+    "note": "",
+    "digest": "134f3fa5d3b33972",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected results; the scheme Proj and smoothness ingredients or topological/manifold zero sections do not state the full scheme-theoretic geometry and universally Cartier assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A line bundle over a scheme has a universally effective Cartier zero section and compactifies in the projective bundle of O plus the line module",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "AlgebraicGeometry.Proj",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections",
+     "AlgebraicGeometry.Proj.toSheafedSpace",
+     "AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero",
+     "AlgebraicGeometry.Proj.valuativeCriterion_existence",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ",
+     "AlgebraicGeometry.Proj.awayι"
+    ],
+    "note": "",
+    "digest": "cc6f04aef735e595",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected results; the scheme Proj and smoothness ingredients or topological/manifold zero sections do not state the full scheme-theoretic geometry and universally Cartier assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The total scheme of an invertible sheaf is smooth of relative dimension one with a Cartier divisor cut out locally by the polynomial variable",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth",
+     "AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension",
+     "AlgebraicGeometry.IsSmoothOfRelativeDimension",
+     "AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension",
+     "AlgebraicGeometry.IsSmooth.exists_isStandardSmooth",
+     "AlgebraicGeometry.isSmoothOfRelativeDimension_iff",
+     "AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion",
+     "AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth"
+    ],
+    "note": "",
+    "digest": "fb5b61941ae68a6b",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected results; the scheme Proj and smoothness ingredients or topological/manifold zero sections do not state the full scheme-theoretic geometry and universally Cartier assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-line-zero-class-etale-realization",
+  "date": "2026-10-22",
+  "group": "Q123"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-rank-one-thom",
+   "place": "Step 1, global Cartier zero divisor: affine frames, projective completion, smoothness, codimension and arbitrary base change; expanded realization proof steps 1--2",
+   "via": [
+    "lem-pur-line-zero-class-etale-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-line-zero-geometry",
+  "worker": "stage1",
+  "summary": "Preserved every clause and wrote nine proof steps: affine symmetric-algebra frames, morphism properties, smoothness, proper projective completion and explicit overlap maps, Cartier equation and its zero scheme, Noetherianity, local Krull dimension, quasi-compact complement, and arbitrary-base-change equations. Reused existing nodes throughout; no new node or Lean attachment.",
+  "blueprint": "Realizes thm-pur-rank-one-thom proof Step 1, the global zero Cartier divisor smooth over its base of pure codimension one, with the projective completion and universal equation required by the parent lem-pur-line-zero-class-etale-realization. Retains the sk-prop-an vector-bundle route; no cohomological purity theorem is used. Whole-blueprint searches for zero section, Cartier and relative Proj found no node stating this complete geometry conjunction.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-morphism-relative-spec",
+    "why": "Relative Spec makes the given total-space projection affine; this construction theorem is a generic tool for the existing bundle definition."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Affine-space projections of relative dimensions one and zero give the local geometry; no sk-prop-an node supplies this elementary geometric input."
+   },
+   {
+    "node": "lemma-nagata-relative-affine-space-open-immersion",
+    "why": "Standard chart t=T1/T0 identifies each frame open of the compactification; this general Proj chart is not a replacement for the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-affine-space-smooth"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-N9-e151651e5",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-e151651e5 (reviewer sub-agent of L); spot-checked: I read all 9 steps and every one of the 29 cited statements. No new nodes. The statement is byte-identical to side-live, so no target is weakened. The item is not in the drop list, uses no SGA and duplicates no existing node; a DAG search for zero-section + Cartier found only cohomological or affine-space nodes. Source checked: Step 1 of main-20261015 thm-pur-rank-one-thom.proof.md, which the item expands. Step 1: Sym(E) frames and R[t] by the free-module polynomial lemma (n=1); a frame change e'=ue gives t'=ut. Step 2: relative Spec is affine, so pi is qc and separated; the pointwise lft criterion and the composition lemmas 01T3/(e) give finite type and separatedness over k. Step 3: A^1 smoothness, carried over by restrict (c)/(b) and source-locality; fibre dimension 1. Step 4: P(O+E) has rank 2 and is proper by tautological geometry; the chart D+(T0) has T1'=uT1, T0'=T0, matching t'=ut, and the pieces glue to j with rj=pi. Step 5: t is a nonzerodivisor, so D is Cartier, and D->B is an isomorphism, smooth of relative dimension 0. Step 7: in R[t]_q the element t/1 is a nonzerodivisor in the maximal ideal, A/(t) is O_{D,x} by an explicit evaluation-kernel argument, and 00KW gives the dimension formula. Step 8: 01OW. Step 9: R[t] tensor R' = R'[t], z' is closed by 01QR, and no flatness is used. Edge cases checked: empty B, a field, k[e]/e^2, a reducible base, a nontrivial line bundle, and a non-Noetherian, non-flat B'. Batch-5 flags: (1) projective-bundle-tautological-geometry reaches trf projective-bundle-quotient-geometry, which is the generic functor of points of Proj Sym. It is neither assumption nor a step of their proofs, and Step 4 needs it for properness: accepted. (2) affine-line-support-geometry reaches lem-poincare-compatible-primitive-roots. The only cause is that lemma's stmt_dep def-pur-affine-line-datum (Kummer and twist data), and Step 6 used the lemma just for 'B is Noetherian'. FIX: Step 6 now proves directly that Spec k is Noetherian (pqf-def-locnoeth, def-weil-pbc-noetherian-ring) and applies 01T6 (lem-weil-pbc-finite-type-over-noetherian) to B->Spec k and then to pi. proof_deps and tool_uses are updated, so the Poincare flag is gone. The other three tool_uses (relative Spec, affine-space smoothness, standard Proj chart) are generic and accepted. Corrected file: fixes/dag/nodes/sec-smooth-purity/lem-pur-line-zero-geometry.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.LineZeroGeometry",
+  "declaration": "AlgebraicGeometry.PurityVectorBundle.lineZeroGeometry",
+  "file": "lean/Sheaf/Paper/LineZeroGeometry.lean",
+  "statement": "theorem lineZeroGeometry (P : WeilConjectures.PurityFiniteSetting.{u}) (B : Scheme.{u}) (b : B ⟶ Spec (CommRingCat.of P.field.k)) [IsSeparated b] [LocallyOfFiniteType b] [QuasiCompact b] (V : PurityVectorBundle P B b 1) : ∃ hB : IsNoetherian B, IsNoetherian V.E ∧ IsSeparated (V.p ≫ b) ∧ LocallyOfFiniteType (V.p ≫ b) ∧ QuasiCompact (V.p ≫ b) ∧ IsSeparated V.p ∧ LocallyOfFiniteType V.p ∧ QuasiCompact V.p ∧ SmoothOfRelativeDimension 1 V.p ∧ (∃ (Q : VectorProjectiveCompletion.Presentation B V.𝓔) (ht : ∀ U : B.affineOpens, VectorProjectiveCompletion.t Q U ∈ Q.algebra.grading U 1) (a : ∀ U : B.affineOpens, SymmetricAlgebraSheaf.sections V.𝓔 (op U.1) ≃+* HomogeneousLocalization.Away (Q.algebra.grading U) (VectorProjectiveCompletion.t Q U)), (∀ (U : B.affineOpens) (m : V.𝓔.val.obj (op U.1)), (a U (SymmetricAlgebra.ι _ _ m)).val = algebraMap (Q.algebra.obj U) (Localization.Away (VectorProjectiveCompletion.t Q U)) (VectorProjectiveCompletion.x Q U m) * IsLocalization.Away.invSelf (VectorProjectiveCompletion.t Q U)) ∧ (∀ (U : B.affineOpens) (r : Γ(B, U.1)), (a U (algebraMap Γ(B, U.1) (SymmetricAlgebraSheaf.sections V.𝓔 (op U.1)) r)).val = algebraMap (Q.algebra.obj U) (Localization.Away (VectorProjectiveCompletion.t Q U)) (algebraMap Γ(B, U.1) (Q.algebra.obj U) r)) ∧ ∃ (c : Compactification V.p) (e : c.Z ≅ Q.algebra.relProj), e.hom ≫ Q.algebra.relProjHom = c.g ∧ (c.i ≫ e.hom).opensRange = VectorProjectiveCompletion.chartOpen Q ∧ ∀ U : B.affineOpens, @VectorBundleZeroSection.affineChart B hB 1 V.𝓔 V.locallyFree U ≫ VectorProjectiveCompletion.chartMap Q ht a U = ((@VectorBundleZeroSection.π B hB 1 V.𝓔 V.locallyFree) ⁻¹ᵁ U.1).ι ≫ V.phi.inv ≫ c.i ≫ e.hom) ∧ IsClosedImmersion V.zeroSection ∧ V.zeroSection ≫ V.p = 𝟙 B ∧ IsEffectiveCartierCenter V.zeroSection ∧ SmoothOfRelativeDimension 0 (V.zeroSection ≫ V.p) ∧ (∀ x : B, ringKrullDim (V.E.presheaf.stalk (V.zeroSection x)) = ringKrullDim (B.presheaf.stalk x) + (1 : WithBot ℕ∞)) ∧ QuasiCompact (Scheme.Opens.ι (X := V.E) V.zeroSection.ker.support.compl) ∧ (∀ (B' : Scheme.{u}) (h : B' ⟶ B), IsEffectiveCartierCenter (sectionBaseChange V.p V.zeroSection V.zeroSection_spec.1 (Over.mk h))) ∧ (∀ (U : B.affineOpens) (frame : VectorBundleZeroSection.Trivialization B 1 V.𝓔 U.1), IsIso (@VectorBundleZeroSection.trivializationMap B hB 1 V.𝓔 V.locallyFree U.1 frame) ∧ (@VectorBundleZeroSection.trivializationMap B hB 1 V.𝓔 V.locallyFree U.1 frame ≫ (AffineSpace (ULift.{u} (Fin 1)) U.1.toScheme ↘ U.1.toScheme) = (@VectorBundleZeroSection.π B hB 1 V.𝓔 V.locallyFree) ∣_ U.1) ∧ (@VectorBundleZeroSection.zeroRestricted B hB 1 V.𝓔 V.locallyFree U.1 ≫ @VectorBundleZeroSection.trivializationMap B hB 1 V.𝓔 V.locallyFree U.1 frame = AffineSpace.zeroSection (ULift.{u} (Fin 1)) U.1.toScheme) ∧ ∀ (R' : CommRingCat.{u}) (g : Spec R' ⟶ U.1.toScheme), ∃ e' : pullback V.p (g ≫ U.1.ι) ≅ Spec (CommRingCat.of (Polynomial R')), e'.hom ≫ Spec.map (CommRingCat.ofHom (Polynomial.C : R' →+* Polynomial R')) = pullback.snd V.p (g ≫ U.1.ι) ∧ sectionBaseChange V.p V.zeroSection V.zeroSection_spec.1 (Over.mk (g ≫ U.1.ι)) ≫ e'.hom = Spec.map (CommRingCat.ofHom (Polynomial.evalRingHom (0 : R'))))",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the existing affine-basis presentation of Sym(O_B ⊕ E), relative Proj, and canonical sectionBaseChange; records all clauses including normalized dehomogenization and affine polynomial equations. No statement correction, new definition, or extra hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fa14a9160",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Read the item node, all 10 stmt_deps and the side-live declarations they use: PurityVectorBundle, VectorBundleZeroSection charts/frames, VectorProjectiveCompletion Presentation/chartOpen/chartMap, Compactification, IsEffectiveCartierCenter, sectionBaseChange, Hom.ker. Only lean and stmt_deps changed; the 2 added stmt_deps are landed definition nodes. lean.statement matches the file verbatim. Every clause is rendered: Noetherian B and E as conclusions; E separated/finite type over k; pi separated, finite type, smooth of relative dimension 1; completion pinned to relProj of Sym(O+E) by Presentation, iso over B, chartOpen image, dehomogenization fixed on generators and the affineChart/chartMap equation; z closed immersion and section; effective Cartier; relative dimension 0; local Krull-dimension equality; quasi-compact complement; Cartier after arbitrary base change; affine frame pairs and Spec R'[t]/V(t) pulled-back pairs as scheme equations, inside the frame binder. No extra hypotheses or universe restriction; docstrings carry the source and all 9 steps; sorry only; plain imports are proof_dep modules. No file changed, so not recompiled (worker reports a clean compile). Advisories: frame clause repeats trivializationMap_spec; the relative-dimension-0 clause is implied by z≫p=𝟙; the parent's line_zero_geometry helper should be derived from this item at stage 3; Compactification and VectorBundleZeroSection owners are not stmt_deps."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261023T103008-L-3031812",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

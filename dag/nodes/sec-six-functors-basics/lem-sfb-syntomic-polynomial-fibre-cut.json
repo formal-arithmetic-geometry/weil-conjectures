@@ -1,0 +1,315 @@
+{
+ "id": "lem-sfb-syntomic-polynomial-fibre-cut",
+ "kind": "statement",
+ "title": "Cutting polynomial coordinates on the reduction of a syntomic algebra",
+ "statement": "Call a map $T\\to E$ syntomic if it is flat [def-weil-pbc-flat-ring-map], finitely presented [def-weil-pbc-finitely-presented-algebra], and every fibre $E\\otimes_T\\kappa(\\mathfrak p)$ is a local complete intersection over $\\kappa(\\mathfrak p)$ [def-weil-pbc-complete-intersection-over-field]; residue fields are as in [def-weil-residue-field]. Let $R$ be a commutative ring, $I\\subset R$ any ideal, and $R\\to D$ syntomic. Let $A_0$ be a syntomic $R/I$-algebra and fix an $R/I$-algebra isomorphism $\\theta:D/ID\\xrightarrow{\\sim}A_0[x_1,\\ldots,x_r]$ [def-weil-pbc-mv-polynomial-ring], for $r\\ge0$. Choose $t_1,\\ldots,t_r\\in D$ with $\\theta(\\bar t_i)=x_i$, and put $A=D/(t_1,\\ldots,t_r)$. Then there is $a\\in A$ mapping to $1$ under the induced isomorphism $A/IA\\cong A_0$ such that $R\\to A_a$ is syntomic [def-weil-ring-localization-away]. There are no nilpotence or Noetherian hypotheses; $r=0$ and $A_0=0$ are allowed.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07M8 (proposition-lift-smooth), proof of assertion (1), final claim and its proof, starting \"Choose f_1,...,f_n in D\"; local presentations use algebra.tex Tag 00SY and the appended equations use Tag 00ST."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-complete-intersection-over-field",
+  "def-weil-residue-field",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-ring-localization-away"
+ ],
+ "proof": [
+  {
+   "text": "The map $D\\to A$ followed by reduction modulo $I$ identifies $A/IA$ with $A_0[x_1,\\ldots,x_r]/(x_1,\\ldots,x_r)=A_0$: the inverse sends a coefficient to its constant polynomial class. If $D=R[y]/(g)$ is any finite presentation and $t_i$ has polynomial lift $t_i^{\\prime}$, then $A=R[y]/(g,t_1^{\\prime},\\ldots,t_r^{\\prime})$. Thus $A$ is finitely presented. These are quotient identities, with no flatness assumption on $R/I$.",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Tag 07M8 (proposition-lift-smooth), proof of (1), paragraph beginning Choose f_1,...,f_n in D"
+   }
+  },
+  {
+   "text": "Fix $\\mathfrak q\\in V(IA)$ and let $\\widetilde{\\mathfrak q}$ be its inverse image in $D$, and $\\mathfrak p=\\widetilde{\\mathfrak q}\\cap R$. Then $I\\subseteq\\mathfrak p$. Flatness of $R\\to D$ gives flatness of $R_{\\mathfrak p}\\to D_{\\widetilde{\\mathfrak q}}$. The fibre of $D$ is a local complete intersection by hypothesis; its defining principal global-complete-intersection cover contains the fibre prime associated to $\\widetilde{\\mathfrak q}$. The local syntomic chart theorem therefore supplies $u\\notin\\widetilde{\\mathfrak q}$ and a specified relative global complete intersection presentation $D_u=R[y_1,\\ldots,y_N]/(g_1,\\ldots,g_c)$. Its quotient by the images of $t_i$ is $A_{\\bar u}$.",
+   "uses": [
+    "lem-weil-pbc-flat-local-ring-maps",
+    "def-weil-pbc-complete-intersection-over-field",
+    "lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Tag 07M8 (proposition-lift-smooth), proof of (1), claim: the question is local on Spec D; use 00SY"
+   }
+  },
+  {
+   "text": "Put $k=\\kappa(\\mathfrak p)$ and $B=A_0\\otimes_{R/I}k$, a finite type $k$-algebra, since a finite presentation of $A_0$ gives finite generators after scalar extension. Reduction followed by scalar extension identifies $D\\otimes_R k$ with $B[x_1,\\ldots,x_r]$, sending $t_i$ to $x_i$, and $A\\otimes_Rk$ with $B$. Explicitly on tensors the first identification sends $d\\otimes\\lambda$ to $\\theta(\\bar d)\\otimes\\lambda$; it is invertible because $I$ acts by zero on $k$. Let $q_B$ be the fibre prime associated to $\\mathfrak q$. The prime associated to $\\widetilde{\\mathfrak q}$ is $Q=q_BB[x]+(x_1,\\ldots,x_r)$. The fibre of $D_u$ is $(B[x])_{u_k}$, with $u_k\\notin Q$. Its displayed presentation is a global complete intersection with $N$ variables and $c$ equations, by base change of the relative presentation. Equidimensionality and invariance under an open neighbourhood give $\\dim_Q\\operatorname{Spec}B[x]=N-c$. The zero-section dimension formula gives $\\dim_{q_B}\\operatorname{Spec}B=N-c-r$.",
+   "uses": [
+    "lem-weil-pbc-fibre-ring-primes-bijection",
+    "lem-weil-pbc-relative-global-complete-intersection-base-change",
+    "lem-weil-pbc-global-complete-intersection-equidimensional",
+    "lem-weil-pbc-algebra-localization-away-base-change",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-dimension-at-point-open-subspace",
+    "lem-sfb-polynomial-zero-section-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Tag 07M8 (proposition-lift-smooth), proof of (1), claim: compute the fibre dimensions before appending the equations"
+   }
+  },
+  {
+   "text": "Lift the images of $t_i$ in $D_u$ to polynomials $t_i^{\\prime}\\in R[y_1,\\ldots,y_N]$. Then $A_{\\bar u}=R[y]/(g_1,\\ldots,g_c,t_1^{\\prime},\\ldots,t_r^{\\prime})$ has $N$ variables and $c+r$ equations. Its fibre dimension at the prime coming from $\\mathfrak q$ is $N-(c+r)$: it is the open neighbourhood $\\operatorname{Spec}B_{\\bar u_k}$ of $q_B$ in the preceding step. In particular $N\\ge c+r$. Apply the pointwise equation-count localization lemma to this specified presentation. It gives $v\\notin\\mathfrak q A_{\\bar u}$ such that $(A_{\\bar u})_v$ is a relative global complete intersection. This applies to arbitrary $R$, using the lemma at a point, rather than assuming the entire closed reduction has one constant dimension.",
+   "uses": [
+    "lem-weil-pbc-equation-count-localize-relative-global-complete-intersection",
+    "lem-weil-pbc-algebra-localization-away-base-change",
+    "lem-weil-pbc-dimension-at-point-open-subspace",
+    "lem-weil-pbc-spec-localization-away-basic-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Tag 07M8 (proposition-lift-smooth), proof of (1), claim: append the lifted equations and apply 00ST(3)"
+   }
+  },
+  {
+   "text": "Write $v=b/\\bar u^e$ in $A_{\\bar u}$. Then $(A_{\\bar u})_v\\cong A_{\\bar u b}$: in either ring both $\\bar u$ and $b$ are invertible, and their universal localization maps are inverse. Also $\\bar u b\\notin\\mathfrak q$. Consequently, for every $\\mathfrak q\\in V(IA)$ we have found an element $b_{\\mathfrak q}\\notin\\mathfrak q$ with $A_{b_{\\mathfrak q}}$ a relative global complete intersection. This is just fraction arithmetic applied to the charts already obtained, not a further syntomic descent assertion.",
+   "uses": [
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Tag 07M8 (proposition-lift-smooth), proof of (1), claim: express each resulting neighbourhood as a principal neighbourhood in Spec A"
+   }
+  },
+  {
+   "text": "Let $J\\subseteq A$ be the ideal generated by all the $b_{\\mathfrak q}$ just obtained. Every prime containing $IA$ misses one of these generators, so $V(J)\\cap V(IA)=\\varnothing$. The disjoint-zero-loci criterion gives $a\\in J$ and $i\\in IA$ with $a+i=1$. Thus $a$ maps to $1\\in A/IA=A_0$. Choose a finite expression $a=\\sum_{j=1}^m h_jb_j$ with each $b_j$ one of the chart elements. In $A_a$, the relation $\\sum_j(h_j/a)b_j=1$ gives a finite principal cover. If $V(IA)$ is empty, $J=0$ and the same criterion gives $IA=A$; take $a=0$, giving the zero localization.",
+   "uses": [
+    "lem-weil-pbc-spec-zero-loci-disjoint-unit-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Tag 07M8 (proposition-lift-smooth), proof of (1), after the claim: find a localization equal to 1 on the reduction"
+   }
+  },
+  {
+   "text": "For each chosen $b_j$, the ring $(A_a)_{b_j}\\cong(A_{b_j})_a$ is a relative global complete intersection: the cited principal-localization theorem appends one variable and one equation to a relative global complete intersection presentation, so its dimension difference is unchanged. Apply relative-complete-intersection principal-cover syntomic gluing to $R\\to A_a$ and the displayed relation $\\sum_j(h_j/a)b_j=1$. It gives flatness, finite presentation and local-complete-intersection fibres of $R\\to A_a$, exactly the required syntomicity. The gluing theorem permits the empty cover and the zero algebra. Nothing required $r>0$, $A_0\\ne0$, nilpotence of $I$, or Noetherianity of $R$.",
+   "uses": [
+    "lem-weil-pbc-relative-global-complete-intersection-principal-localization",
+    "lem-trf-relative-ci-principal-cover-syntomic-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Tag 07M8 (proposition-lift-smooth), proof of (1), after the claim: the localized ring is syntomic"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-flat-local-ring-maps",
+  "def-weil-pbc-complete-intersection-over-field",
+  "lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection",
+  "lem-weil-pbc-fibre-ring-primes-bijection",
+  "lem-weil-pbc-relative-global-complete-intersection-base-change",
+  "lem-weil-pbc-global-complete-intersection-equidimensional",
+  "lem-weil-pbc-algebra-localization-away-base-change",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-dimension-at-point-open-subspace",
+  "lem-sfb-polynomial-zero-section-dimension",
+  "lem-weil-pbc-equation-count-localize-relative-global-complete-intersection",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-spec-zero-loci-disjoint-unit-ideal",
+  "lem-weil-pbc-relative-global-complete-intersection-principal-localization",
+  "lem-trf-relative-ci-principal-cover-syntomic-gluing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07M8 (proposition-lift-smooth), final claim in the proof of (1); with the dimension comparison made explicit via algebra.tex Tags 00OT and 00P0, and the pointwise case 00ST(3)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a syntomic algebra D whose reduction modulo a base ideal is a polynomial algebra over a syntomic algebra A0, quotient by lifts of the polynomial variables is syntomic after localizing by an element equal to one modulo the base ideal",
+   "results": "{\"t\": \"2026-10-23T12:42:56Z\", \"tool\": \"leanfinder\", \"query\": \"For a syntomic algebra D whose reduction modulo a base ideal is a polynomial algebra over a syntomic algebra A0, quotient by lifts of the polynomial variables is syntomic after localizing by an element equal to one modulo the base ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.isStandardSmooth_holdsForLocalizationAway\", \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"Algebra.SubmersivePresentation.localizationAway\", \"RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway\", \"Algebra.IsStandardSmooth.localization_away\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"Algebra.IsStandardSmooth\", \"RingHom.isStandardSmoothOfRelativeDimension_localizationPreserves\"], \"digest\": \"8dd0549fee58e57b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smoothness, formally smooth map lifting, finite conormal modules, or general localization; none proves this syntomic statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, MvPolynomial",
+   "results": "{\"t\": \"2026-10-23T12:42:57Z\", \"tool\": \"loogle\", \"query\": \"Module.Flat, MvPolynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smoothness, formally smooth map lifting, finite conormal modules, or general localization; none proves this syntomic statement"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]yntomic|[Rr]egularSequence.*[Ff]lat|[Ff]lat.*[Rr]egularSequence",
+   "results": "{\"t\": \"2026-10-23T12:42:57Z\", \"tool\": \"grep\", \"query\": \"[Ss]yntomic|[Rr]egularSequence.*[Ff]lat|[Ff]lat.*[Rr]egularSequence\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smoothness, formally smooth map lifting, finite conormal modules, or general localization; none proves this syntomic statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A syntomic algebra can be cut by lifts of polynomial coordinates in its closed fibre and remains syntomic in a neighbourhood of that fibre",
+   "results": "{\"t\": \"2026-10-23T12:42:57Z\", \"tool\": \"leansearch\", \"query\": \"A syntomic algebra can be cut by lifts of polynomial coordinates in its closed fibre and remains syntomic in a neighbourhood of that fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.exists_lift\", \"Algebra.FormallySmooth.lift.congr_simp\", \"Algebra.Smooth.formallySmooth\", \"RingHom.FormallySmooth\", \"Algebra.smoothLocus\", \"Algebra.FormallySmooth.lift\", \"RingHom.FormallyEtale\", \"Algebra.FormallySmooth.mk_lift\"], \"digest\": \"df677c5849a1e99a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smoothness, formally smooth map lifting, finite conormal modules, or general localization; none proves this syntomic statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Let D be syntomic over R and D/ID isomorphic to A0[x1,...,xn] with A0 syntomic over R/I; after killing lifts of xi and inverting g congruent to 1 modulo I the resulting algebra is syntomic over R",
+   "results": "{\"t\": \"2026-10-23T12:47:57Z\", \"tool\": \"leanfinder\", \"query\": \"Let D be syntomic over R and D/ID isomorphic to A0[x1,...,xn] with A0 syntomic over R/I; after killing lifts of xi and inverting g congruent to 1 modulo I the resulting algebra is syntomic over R\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePresentation\", \"Algebra.SubmersivePresentation.isStandardSmooth\", \"Algebra.IsStandardSmooth\", \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"Algebra.IsStandardSmooth.out\"], \"digest\": \"48357c5558201f4c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smoothness, formally smooth map lifting, finite conormal modules, or general localization; none proves this syntomic statement"
+  },
+  {
+   "tool": "grep",
+   "query": "syntomic|Syntomic",
+   "results": "{\"t\": \"2026-10-23T14:32:14Z\", \"tool\": \"grep\", \"query\": \"syntomic|Syntomic\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: standard smooth and etale presentations, lifting and localization facts do not state the syntomic coordinate cutting assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Flat, MvPolynomial",
+   "results": "{\"t\": \"2026-10-23T14:32:15Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Flat, MvPolynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Algebra.Flat'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: standard smooth and etale presentations, lifting and localization facts do not state the syntomic coordinate cutting assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A syntomic algebra with polynomial closed reduction remains syntomic near that reduction after quotienting by lifts of the polynomial variables",
+   "results": "{\"t\": \"2026-10-23T14:32:20Z\", \"tool\": \"leanfinder\", \"query\": \"A syntomic algebra with polynomial closed reduction remains syntomic near that reduction after quotienting by lifts of the polynomial variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmooth\", \"Algebra.SubmersivePresentation.isStandardSmooth\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"StandardEtalePresentation\", \"Algebra.Etale\", \"Algebra.IsStandardEtale\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePair\"], \"digest\": \"827bfc17f9c93ae8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: standard smooth and etale presentations, lifting and localization facts do not state the syntomic coordinate cutting assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quotient a syntomic algebra by lifts of polynomial variables on a closed reduction and localize to obtain a syntomic algebra",
+   "results": "{\"t\": \"2026-10-23T14:32:35Z\", \"tool\": \"leansearch\", \"query\": \"Quotient a syntomic algebra by lifts of polynomial variables on a closed reduction and localize to obtain a syntomic algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.localization\", \"IsLocalization.liftAlgHom\", \"Algebra.FormallySmooth.comp_lift\", \"IsLocalization.Away.mvPolynomialQuotientEquiv\", \"Submodule.toLocalizedQuotient'_mk\", \"Ideal.Quotient.liftₐ\", \"Algebra.FormallyEtale.of_isLocalization\", \"instIsLocalizedModuleQuotientSubmoduleLocalizedModuleLocalizationLocalizedToLocalizedQuotient\"], \"digest\": \"08b576958491c7d4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: standard smooth and etale presentations, lifting and localization facts do not state the syntomic coordinate cutting assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely presented flat ring algebra with complete intersection fibres, killing elements that reduce to polynomial coordinates is syntomic locally along the closed fibre",
+   "results": "{\"t\": \"2026-10-23T14:32:38Z\", \"tool\": \"leanfinder\", \"query\": \"For a finitely presented flat ring algebra with complete intersection fibres, killing elements that reduce to polynomial coordinates is syntomic locally along the closed fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"Algebra.Smooth\", \"Algebra.IsSmoothAt\", \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"RingHom.IsStandardSmoothOfRelativeDimension\", \"RingHom.IsStandardSmooth\"], \"digest\": \"e9d7df4f09c56df8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: standard smooth and etale presentations, lifting and localization facts do not state the syntomic coordinate cutting assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-syntomic-algebra-surjection-lift",
+  "date": "2026-10-23",
+  "group": "O4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Unobstructed deformations of a separated curve with isolated lci singularities. Tag 0DZQ, proof: Tag 0DZH (lemma-lci-unobstructed), scheme formulation via Tag 0DYX (lemma-affine), with example-schemes and section-general; formal-defos.tex, definition-CLambda specifies the coefficient identifications. Ring-theoretic input: Tag 0DZH proof invokes Smoothing Ring Maps Tag 07M8 (1) after recognizing the given deformation algebra as syntomic. Supporting input: 07M8(1), final claim: cutting lifts of the polynomial coordinates and localizing away from the bad locus.",
+   "via": [
+    "lem-sfb-syntomic-algebra-surjection-lift",
+    "lem-sfb-affine-lci-artinian-lift",
+    "lem-sfb-isolated-lci-curve-unobstructed",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-syntomic-polynomial-fibre-cut",
+  "worker": "stage1",
+  "summary": "Q117 checked 07M8 final claim and supplied its local presentation, zero-section dimension, appended-equation, principal neighbourhood and finite gluing argument. Reused the existing 00SY, 00ST and gluing nodes; added only the zero-section dimension formula as a statement-only prerequisite. Statement unchanged; no exact project Lean attachment or Mathlib match.",
+  "blueprint": "Realizes the inherited direct-images proof (3) auxiliary algebra branch, specifically 07M8 final claim, without changing the unit route; nearest blueprint ancestor remains null as printed by blueprint_refs.py.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection",
+    "why": "General local algebra chart theorem (00SY) used as a black box; the unit has no alternate chart theorem."
+   },
+   {
+    "node": "lem-weil-pbc-equation-count-localize-relative-global-complete-intersection",
+    "why": "General equation-count localization (00ST(3)) required by the source proof; not a replacement of the unit route."
+   },
+   {
+    "node": "lem-trf-relative-ci-principal-cover-syntomic-gluing",
+    "why": "General algebraic source-local gluing (00SO), to assemble the principal charts; the unit has no separate gluing statement."
+   },
+   {
+    "node": "lem-weil-pbc-relative-global-complete-intersection-base-change",
+    "why": "General algebraic/topological tool used for the specified local presentation and fibre comparison, not to replace any step of the unit proof."
+   },
+   {
+    "node": "lem-weil-pbc-global-complete-intersection-equidimensional",
+    "why": "General algebraic/topological tool used for the specified local presentation and fibre comparison, not to replace any step of the unit proof."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-at-point-open-subspace",
+    "why": "General algebraic/topological tool used for the specified local presentation and fibre comparison, not to replace any step of the unit proof."
+   },
+   {
+    "node": "lem-weil-pbc-relative-global-complete-intersection-principal-localization",
+    "why": "General algebraic/topological tool used for the specified local presentation and fibre comparison, not to replace any step of the unit proof."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection",
+  "lem-weil-pbc-equation-count-localize-relative-global-complete-intersection",
+  "lem-trf-relative-ci-principal-cover-syntomic-gluing",
+  "lem-weil-pbc-relative-global-complete-intersection-base-change",
+  "lem-weil-pbc-global-complete-intersection-equidimensional",
+  "lem-weil-pbc-dimension-at-point-open-subspace",
+  "lem-weil-pbc-relative-global-complete-intersection-principal-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q117-e0f222bcd",
+  "group": "Q117",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-e0f222bcd (reviewer sub-agent of L); spot-checked: Read the whole proof of (1) in Stacks 07M8 (smoothing.tex) and the cited 00SY, 00ST(3), 00SS(2), 00SO, 00OT and 00P0, with tags verified. The item statement agrees with the final claim of the source and is unchanged. Each of the 7 steps checked against the statements it cites. Step 2: syntomic-at-prime hypotheses (1) g=1, (2) via flat-local-ring-maps, (3) from the lci principal cover through the kernel prime. Step 3: D⊗k≅B[x] and A⊗k≅B, Q=q_B B[x]+(x); the base-change, equidimensional, basic-open and open-subspace nodes give dim_Q=N−c, and the new node gives dim_{q_B}B=N−c−r. Step 4: pointwise 00ST(3) hypothesis N−(c+r) holds exactly. Steps 5-6: fraction arithmetic and the disjoint-zero-loci criterion give a≡1 mod IA; V(IA)=∅ gives a=0, which is fine. Step 7: principal localization plus 00SO gluing with Σ(h_j/a)b_j=1. New node lem-sfb-polynomial-zero-section-dimension (statement only) is true: minimal primes of B[x] are pB[x], they pass through Q iff p⊆q, and each component has dimension dim(B/p)+r. Tested on r=0, B a field, B nonreduced, mixed component dimensions and B=0. It is not a duplicate: the nearest existing nodes (dimension-at-point-components, locally-algebraic-dimension-components, polynomial-prime-height-residue-degree) state only the component formula or a height formula. Batch-5 flag on lem-trf-relative-ci-principal-cover-syntomic-gluing: this is the generic 00SO commutative-algebra gluing lemma. Its full closure (178 nodes) contains no trace-formula or Poincaré-duality theorem, so it is outside the assumed statements and accepted. Generic tool_uses accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SyntomicPolynomialFibreCut",
+  "declaration": "Algebra.exists_syntomic_localization_of_polynomial_reduction",
+  "file": "lean/Sheaf/RingTheory/SyntomicPolynomialFibreCut.lean",
+  "statement": "theorem exists_syntomic_localization_of_polynomial_reduction {R : Type u} {D : Type v} [CommRing R] [CommRing D] [Algebra R D] (I : Ideal R) [Module.Flat R D] [FinitePresentation R D] (hciD : ∀ p : PrimeSpectrum R, IsLocalCompleteIntersection p.asIdeal.ResidueField (p.asIdeal.Fiber D)) (A₀ : Type w) [CommRing A₀] [Algebra (R ⧸ I) A₀] [Module.Flat (R ⧸ I) A₀] [FinitePresentation (R ⧸ I) A₀] (hci₀ : ∀ p : PrimeSpectrum (R ⧸ I), IsLocalCompleteIntersection p.asIdeal.ResidueField (p.asIdeal.Fiber A₀)) (r : ℕ) (θ : (D ⧸ I.map (algebraMap R D)) ≃+* MvPolynomial (Fin r) A₀) (hθ : ∀ x : R, θ (Ideal.Quotient.mk (I.map (algebraMap R D)) (algebraMap R D x)) = MvPolynomial.C (algebraMap (R ⧸ I) A₀ (Ideal.Quotient.mk I x))) (t : Fin r → D) (ht : ∀ i : Fin r, θ (Ideal.Quotient.mk (I.map (algebraMap R D)) (t i)) = MvPolynomial.X i) : ∃ (a : D ⧸ Ideal.span (Set.range t)) (_ : FinitePresentation R (Localization.Away a)), Ideal.Quotient.mk (I.map (algebraMap R (D ⧸ Ideal.span (Set.range t)))) a = 1 ∧ Module.Flat R (Localization.Away a) ∧ ∀ p : PrimeSpectrum R, IsLocalCompleteIntersection p.asIdeal.ResidueField (p.asIdeal.Fiber (Localization.Away a))",
+  "branch": "sheaf-dag",
+  "by": "NJ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3099cfd85",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Read node, source (Stacks 07M8 (1) final claim), module, report, dep declarations (Module.Flat, Algebra.FinitePresentation, Algebra.IsLocalCompleteIntersection with FiniteType via baseChange, Ideal.Fiber/ResidueField, MvPolynomial, Localization.Away). Every hypothesis/conclusion clause matches: θ+hθ = R/I-algebra iso; A = D/span(range t) literally; a reduces to 1 in A/IA; A_a flat+FP+lci fibres. Independent universes u v w; no extra hypotheses; edge cases r=0, A0=0, I=⊤/⊥, zero rings covered. No duplicate or project syntomic predicate; stmt_deps all used, no theorem deps; proof imports exist and match recorded modules; lean.statement verbatim; docstrings carry source, blueprint tag and 7 proof steps; sorry only. Node non-lean fields identical to live. No findings."
+ }
+}

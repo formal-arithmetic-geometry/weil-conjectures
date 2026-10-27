@@ -1,0 +1,140 @@
+{
+ "id": "lem-pur-product-composition-coordinate-comparison",
+ "kind": "statement",
+ "title": "Compatible-tower composition in explicit product compactifications",
+ "statement": "For Noetherian B,X,Z, separated finite-type f:X→B and g:Z→B, compactifications cf,cg and finite commutative A, every bounded-below etale-origin object Q on X×B Z satisfies alpha_Q=compositionRoute_Q in the coordinates of def-pur-product-exchange-coordinate-data. There are no tensor, projection-invertibility or ambient exchange-invertibility assumptions.",
+ "stmt_deps": [
+  "def-pur-product-exchange-coordinate-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Symmetry paragraph, reduction to proper maps, expanded by product-coordinate node Steps 3--8; Stacks Tags 09BN, 0E47 and 0F7J."
+ },
+ "proof": [
+  {
+   "text": "Use q=pullback.snd f g, d=cg and the upper compactification (u,t), where u=(cf.baseChange g).i followed by i and t=pullback.snd cf.g cg.g. Its restriction along cg.i is isomorphic to cf.baseChange g by square; the unique projection-preserving isomorphism identifies all compactification candidate comparisons.",
+   "uses": [
+    "def-weil-compactifications-refinements",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a bounded-below etale antecedent apply the equality-only compatible-tower formula. Normalize exact versus total pullback and identify the open adjunct towerGamma with properOpenMate by the restriction/exchange and open-unit equations. The two open compositors agree by uniqueness of the adjoint to composite restriction; the direct-image compositor is finiteDirectImageComposition.",
+   "uses": [
+    "lem-trf-proetale-composition-tower-normalization",
+    "lem-pur-product-open-adjunction-normalization",
+    "lem-weil-derived-direct-image-composition",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the equality along the supplied etale-origin witness by naturality of canonical candidate comparisons, origin composition, mate and compositors, and cancel the witness isomorphism. This proves the equality on Q without any arbitrary witness selection in a definition.",
+   "uses": [
+    "def-weil-pbc-etale-origin-witness",
+    "thm-sf-comp-composition"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-etale-origin-witness",
+  "lem-pur-product-open-adjunction-normalization",
+  "lem-sf-open-tensor-normalization",
+  "lem-trf-proetale-composition-tower-normalization",
+  "lem-weil-derived-direct-image-composition",
+  "thm-sf-comp-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Symmetry paragraph, reduction to proper maps, expanded by product-coordinate node Steps 3--8; Stacks Tags 09BN, 0E47 and 0F7J."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived open restriction equals base change exchange and proper open interchange is its inverse open adjunction mate",
+   "results": "8 hits, including Scheme.Modules.restrictAdjunction and IsProper.instMorphismRestrict. These concern ordinary scheme modules or geometry, not the specified unbounded pro-etale maps.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The adjunct of an inverse open restriction isomorphism commutes with the counit and computes compactly supported pushforward composition",
+   "results": "8 hits, including Scheme.Modules.restrictAdjunction_counit_app_app and SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app. No matching pro-etale comparison or compactification-coordinate formula.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_counit",
+   "results": "1 hit, CategoryTheory.Adjunction.homEquiv_counit. Used for the elementary adjunction argument, but does not identify independently specified geometric comparisons.",
+   "date": "2026-10-26",
+   "verdict": "generic adjunction API only"
+  },
+  {
+   "tool": "grep",
+   "query": "properOpenMate|towerOpenUnit|counit_naturality",
+   "results": "25 Mathlib hits for generic adjunction counit naturality, no project-specific comparisons. Searches of lean/WeilConjectures and lean/Sheaf found RelativeCompactSupportPasting, ProEtaleCompositionTowerNormalization, ProEtaleCompositionTowerFormula and ProperOpenProjectionMate; their interfaces do not state the explicit product-coordinate identifications. blueprint_refs searches: open counit (2 unrelated blueprint nodes), horizontal exchange (0), composition coordinate (0).",
+   "date": "2026-10-26",
+   "verdict": "no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProductExchangeCounitCoordinates",
+  "date": "2026-10-26",
+  "group": "B6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Symmetry paragraph, reduction to proper maps, expanded by product-coordinate node Steps 3--8; Stacks Tags 09BN, 0E47 and 0F7J.",
+   "via": [
+    "lem-pur-product-exchange-counit-coordinates",
+    "lem-pur-finite-product-compactification",
+    "lem-pur-finite-forward-product-symmetry",
+    "lem-pur-affine-space-trace-factorization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProductCompositionCoordinateComparison",
+  "file": "lean/Sheaf/Paper/ProductCompositionCoordinateComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.ProductExchangeCoordinates.productCompositionCoordinateComparison",
+  "statement": "theorem productCompositionCoordinateComparison\n    {B X Z : Scheme.{u}} {f : X ⟶ B} {g : Z ⟶ B}\n    [IsNoetherian B] [IsNoetherian X] [IsNoetherian Z]\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g]\n    (cf : Compactification f) (cg : Compactification g)\n    (A : Type u) [CommRing A] [Finite A]\n    (Q : ProperOpenDerived (ULift.{u + 1} A) (pullback f g))\n    (hQ : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} (ULift.{u + 1} A))\n      (pullback f g) Q) :\n    alpha cf cg A Q hQ = compositionRoute cf cg A Q",
+  "branch": "sheaf-dag",
+  "by": "B6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-c1a8c",
+  "group": "B6",
+  "result": "fix",
+  "landing": "20261025T204401-L-2949505",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-c1a8c",
+  "group": "B6",
+  "result": "fix",
+  "landing": "20261025T204401-L-2949505",
+  "kind": "interface",
+  "note": "independent cc review: item theorem byte-identical to clone; 23 moved decls verbatim vs clone; 3 new sorry statements vs original Equations/alpha conjuncts and proEtaleCompositionTowerFormula generality; item node fields vs live node"
+ }
+}

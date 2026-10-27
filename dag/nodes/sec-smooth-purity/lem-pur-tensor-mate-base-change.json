@@ -1,0 +1,279 @@
+{
+ "id": "lem-pur-tensor-mate-base-change",
+ "kind": "statement",
+ "title": "Canonical tensor mate and arbitrary constructible base change",
+ "statement": "Fix the finite coefficient setting [def-pur-conventions]: $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, $n\\ge1$, and $\\Lambda=\\mathcal O_E/\\varpi_E^n$. All schemes are finite-type $k$-schemes, without absolute separatedness; all arrows are $k$-morphisms. Use $D^b_{ctf}$, the bounded constructible finite-Tor subcategory [def-weil-finite-tor-amplitude], on small pro-etale sites, and the derived pullback and tensor [def-weil-derived-pullback-tensor-hom]. For a separated finite-type arrow $u:T\\to U$, write $F_u=Ru_!$, $G_u=Ru^!$ for compact supports and its transported constructible exceptional right adjoint [def-weil-exceptional-inverse-image], $\\varepsilon_u:F_uG_u\\to1$ for its counit, and $\\omega_u=G_u\\Lambda_U$. Use the specified canonical tensor map $\\theta_{u,P}:Lu^*P\\otimes^L\\omega_u\\to G_uP$ and dualizing base-change map $\\beta_{u,v}$ of [def-pur-co-smoothness]; these maps are defined without assuming cohomological smoothness. All unit, symmetry and reassociation maps are the canonical derived ones.\n\nLet $u:T\\to U$ be separated of finite type, let $v:U'\\to U$ be arbitrary between the finite-type $k$-schemes, and form the Cartesian square [def-cbc-compact-support-square] with $T'=T\\times_UU'$, $w:T'\\to T$, and $u':T'\\to U'$. Use a compactification of $u$ and its base change. Write $E_u:v^*F_u\\xrightarrow{\\sim}F_{u'}w^*$ for the specified transported etale compact-support exchange [def-cbc-exchange-map]. For $P\\in D^b_{ctf}(U,\\Lambda)$, the pullback $Lv^*P$ is again bounded constructible of finite Tor amplitude, with the same Tor interval. Define\n$$b_{u,v;P}:Lw^*G_uP\\longrightarrow G_{u'}Lv^*P$$\nas the transported constructible adjoint transpose of\n$$F_{u'}Lw^*G_uP\\xrightarrow{E_u(G_uP)^{-1}}Lv^*F_uG_uP\\xrightarrow{Lv^*\\varepsilon_{u,P}}Lv^*P,$$\nthat is, the base-change morphism $b_{v,P}$ of [pur9-cs-def-bc] computed with the base-changed compactification for $u'$.\nThen $b_{u,v;\\Lambda_U}=\\beta_{u,v}$ under the coefficient-unit comparisons, and the following equality of the specified canonical derived morphisms holds:\n$$b_{u,v;P}\\circ Lw^*\\theta_{u,P}=\\theta_{u',Lv^*P}\\circ(1_{Lu'^*Lv^*P}\\otimes\\beta_{u,v}).$$\nIn this equation identify $Lw^*(Lu^*P\\otimes^L\\omega_u)$ with $Lu'^*Lv^*P\\otimes^LLw^*\\omega_u$ by the canonical tensor and pullback-composition comparisons. The exchange in the defining transpose is the same ambient proper-then-open exchange as in the compactification projection/exchange square, including for arbitrary $v$; it is not an independently chosen exchange. No cohomological smoothness of $u$ or $u'$, or invertibility of $P$, $\\theta$, $b$ or $\\beta$, is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-composition.proof.md",
+  "place": "Final base-change sentence: specified projection/exchange coherence, etale/pro-etale identification and tensor-mate transpose; returned Steps 5–7"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-exceptional-inverse-image",
+  "def-pur-co-smoothness",
+  "def-cbc-compact-support-square",
+  "def-cbc-exchange-map",
+  "pur9-cs-def-bc"
+ ],
+ "proof": [
+  {
+   "text": "Use the already proved fixed-scalar pro-etale source-library APIs constructibleFiniteTor_leftDerivedFunctor_upperStar_obj and torAmplitudeIn_leftDerivedUpperStar. The former follows bounded constructible etale origins through the exact comparison/pullback square; the latter pulls back a flat model in the same interval. Their signatures allow any g and finite coefficients. Apply them to K and to each prescribed interval. This directly establishes the entire first conjunct in the stated fixed-coefficient presentation.",
+   "uses": [
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/FiniteCoefficient/Derived/LocalizationFiniteTor.lean",
+    "place": "constructibleFiniteTor_leftDerivedFunctor_upperStar_obj; Stability.torAmplitudeIn_leftDerivedUpperStar"
+   }
+  },
+  {
+   "text": "Install the compactification instances from c and its base change, and obtain quasi-compactness of f-prime from the pullback square. Unfold the unit-normalization predicate: the two arrows are definitionally equal by dualizingComplexBaseChangeMap, the component of rightDerivedUpperShriekBaseChangeMap at the coefficient unit followed by the canonical pullback-unit isomorphism. Thus rfl proves the second conjunct.",
+   "uses": [
+    "pur9-cs-def-bc",
+    "def-pur-co-smoothness"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For arbitrary etale derived inputs M,N, apply the proved abstract Adjunction.projectionTensorMap_mateEquiv to the ordinary etale adjunctions. Supply projectionMap_rightDerivedLowerShriekBaseChangeMap as the actual projection/exchange square, the canonical tensor comparisons as delta-a and delta-b, and derivedSquareUpperStarIsoInvApp as kappa. Naturality in the first projection input is NatTrans.congr_app of projectionMap.naturality; tensor-pullback naturality is leftDerivedUpperStarTensorIso_hom_naturality_left. The exchange has its canonical inverse. This gives the private exceptional_tensor_base_change equality for any Cartesian square, without a smoothness assumption. These are existing proved source-library results, not new holed dependencies.",
+   "uses": [
+    "def-pur-co-smoothness",
+    "pur9-cs-def-bc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/Adjunction/ProjectionTensorMap.lean",
+    "place": "projectionTensorMap_mateEquiv; etale specialization using LowerShriekProjectionExchange.projectionMap_rightDerivedLowerShriekBaseChangeMap"
+   }
+  },
+  {
+   "text": "Specialize the first input M to the coefficient unit. The private unit_tensor_base_change lemma moves the left unitor through the base-change natural transformation, uses leftDerivedUpperStarTensorComparison_leftUnitor_hom, and applies naturality of the primed tensor mate to the canonical pullback-unit map. The interchange laws then give exactly dualizing_tensor_base_change in omega-first coordinates. Apply congrArg of comparisonUpperStar.mapDerivedCategory.map to this equality. Its two sides are definitionally the two sides of tensorMateBaseChangeIdentity, so it proves the last conjunct on every retained origin (in fact without the constructibility restriction). No theta, b or beta is inverted. The original coefficient-first interpretation and the unit route are unchanged.",
+   "uses": [
+    "def-pur-co-smoothness"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/Sheaf/AlgebraicGeometry/SmoothExceptionalBaseChange.lean",
+    "place": "proved private helpers unit_tensor_base_change, exceptional_tensor_base_change, dualizing_tensor_base_change, generalized from the chosen pullback to arbitrary IsPullback"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-tor-amplitude",
+  "pur9-cs-def-bc",
+  "def-pur-co-smoothness"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-composition.proof.md",
+  "place": "Final base-change sentence; implemented by existing fixed-scalar pullback APIs and the proved abstract tensor-mate calculation, generalized to arbitrary Cartesian squares (P5, 2026-10-25)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical tensor map for exceptional inverse image commutes with arbitrary Cartesian base change as a counit mate of compact support exchange",
+   "results": "CategoryTheory.ExponentiableMorphism.coev_ev; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit; CategoryTheory.ExponentiableMorphism.coev_ev_assoc; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc; CategoryTheory.ExponentiableMorphism.coev_naturality; CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom; CategoryTheory.ExponentiableMorphism.coev_naturality_assoc; CategoryTheory.ExponentiableMorphism.pushforwardId_hom_counit; hits concern ordinary modules, general adjunctions or other notions, not this constructible pro-etale canonical morphism.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The square comparing pullback of the relative dualizing tensor transformation with the exceptional base change mate is commutative",
+   "results": "CategoryTheory.ExponentiableMorphism.ev_coev; CategoryTheory.ExponentiableMorphism.ev_coev_assoc; CategoryTheory.ExponentiableMorphism.coev_naturality_assoc; CategoryTheory.ExponentiableMorphism.coev_ev_assoc; CategoryTheory.ExponentiableMorphism.coev_ev; CategoryTheory.ExponentiableMorphism.coev_naturality; CategoryTheory.ExponentiableMorphism.ev_naturality_assoc; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; hits concern ordinary modules, general adjunctions or other notions, not this constructible pro-etale canonical morphism.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical exceptional tensor comparison commutes with arbitrary base change",
+   "results": "LinearMap.rTensor_baseChange; TensorProduct.AlgebraTensorModule.lTensor_comp_cancelBaseChange; LinearMap.liftBaseChange_tmul; TensorProduct.isBaseChange; Algebra.TensorProduct.cancelBaseChange; IsLocalization.algebraTensorEquiv; Algebra.Unramified.baseChange; KaehlerDifferential.tensorKaehlerEquiv; hits concern ordinary modules, general adjunctions or other notions, not this constructible pro-etale canonical morphism.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizingComplexTensorMap\"",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*baseChange|baseChange.*projection",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*baseChange|baseChange.*projection",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match; hits do not state the specified constructible exceptional tensor/base-change identity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical exceptional tensor comparison commutes with arbitrary base change",
+   "results": "LinearMap.rTensor_baseChange; TensorProduct.AlgebraTensorModule.lTensor_comp_cancelBaseChange; LinearMap.liftBaseChange_tmul; TensorProduct.isBaseChange; Algebra.TensorProduct.cancelBaseChange; IsLocalization.algebraTensorEquiv; Algebra.Unramified.baseChange; KaehlerDifferential.tensorKaehlerEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match; hits do not state the specified constructible exceptional tensor/base-change identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionTensorMap\"",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match; hits do not state the specified constructible exceptional tensor/base-change identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical tensor map for exceptional inverse image commutes with arbitrary Cartesian base change as a counit mate of compact support exchange",
+   "results": "LightCondensed.ihomPoints_symm_comp; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit; CategoryTheory.ExponentiableMorphism.coev_naturality; CategoryTheory.ExponentiableMorphism.pushforwardId_hom_counit_assoc; CategoryTheory.ExponentiableMorphism.coev_ev; CategoryTheory.ExponentiableMorphism.coev_ev_assoc; CategoryTheory.ExponentiableMorphism.coev_naturality_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match; hits do not state the specified constructible exceptional tensor/base-change identity"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionTensorMap|dualizingComplexTensorMap|projection_formula",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match; hits do not state the specified constructible exceptional tensor/base-change identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "results": "CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "date": "2026-10-22",
+   "verdict": "no match; generic Hom-adjunction naturality is only a formal calculation used in the proof"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The square comparing pullback of the relative dualizing tensor transformation with the exceptional base change mate is commutative",
+   "results": "CategoryTheory.ExponentiableMorphism.ev_coev; CategoryTheory.ExponentiableMorphism.ev_coev_assoc; CategoryTheory.ExponentiableMorphism.coev_naturality; CategoryTheory.ExponentiableMorphism.coev_ev; CategoryTheory.ExponentiableMorphism.coev_naturality_assoc; CategoryTheory.ExponentiableMorphism.coev_ev_assoc; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; CategoryTheory.ExponentiableMorphism.ev_naturality_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match; hits do not state the specified constructible exceptional tensor/base-change identity"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-co-smooth-composition",
+  "date": "2026-10-22",
+  "group": "Q118"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-cohsm",
+ "blueprint": {
+  "from": {
+   "node": "lem-pur-co-smooth-composition",
+   "place": "Final base-change sentence: specified projection/exchange coherence, etale/pro-etale identification and tensor-mate transpose; returned Steps 5–7",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-tensor-mate-base-change",
+  "worker": "stage1",
+  "summary": "Wrote six explicit steps, reusing existing supporting results. Checked arbitrary v via etale origins and the stalk Tor test, identified the same ambient proper/open exchange, and compared the two counit transposes without cancelling theta, b or beta. No new nodes and no statement change.",
+  "blueprint": "lem-pur-co-smooth-composition.proof.md, final sentence: the same calculation after arbitrary base change gives (3). The extracted tensor-mate compatibility is proved by the actual projection/exchange square and two explicit transpose calculations.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Constructible site comparison supplies etale origins for arbitrary finite-type schemes, needed to type pullback and restricted adjunction. This is an operation or comparison tool, not a replacement for the cohomological-smoothness route."
+   },
+   {
+    "node": "lem-sf-comparison-tor-amplitude",
+    "why": "Preservation and reflection of the same Tor interval lets the arbitrary pullback argument pass through etale origins. This is an operation or comparison tool, not a replacement for the cohomological-smoothness route."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Exact inverse image of constant modules controls cohomological bounds for arbitrary v. This is an operation or comparison tool, not a replacement for the cohomological-smoothness route."
+   },
+   {
+    "node": "prop-constructible-pullback",
+    "why": "Generic constructibility preservation is used on each cohomology sheaf; it is independent of purity. This is an operation or comparison tool, not a replacement for the cohomological-smoothness route."
+   },
+   {
+    "node": "lem-sf-etale-stalk-tor-test",
+    "why": "Generic geometric-stalk Tor test supplies arbitrary-morphism preservation of the same interval; the separated-map pullback lemma is insufficient. This is an operation or comparison tool, not a replacement for the cohomological-smoothness route."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Canonical site comparison identifies the pullback of the retained origin for arbitrary v. This is an operation or comparison tool, not a replacement for the cohomological-smoothness route."
+   },
+   {
+    "node": "lem-sf-tensor-ctf",
+    "why": "Generic finite-Tor tensor closure types the sources of the Hom bijection. This is an operation or comparison tool, not a replacement for the cohomological-smoothness route."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Finite dimension of the supplied finite-type compactification meets the class-adjunction bound hypothesis. This is an operation or comparison tool, not a replacement for the cohomological-smoothness route."
+   },
+   {
+    "node": "lem-weil-pbc-transport-identifies-exchange",
+    "why": "Generic normalized exchange comparison identifies the actual proper factor, for arbitrary v. This is an operation or comparison tool, not a replacement for the cohomological-smoothness route."
+   },
+   {
+    "node": "lem-pur-finite-site-counit-projection-transport",
+    "why": "Site-transport normalization identifies the actual counits and tensor transposes on bounded finite-Tor inputs. This is an operation or comparison tool, not a replacement for the cohomological-smoothness route."
+   },
+   {
+    "node": "lem-weil-finite-compact-projection-formula",
+    "why": "Generic finite-coefficient projection isomorphism and its naturality are used, without assuming smoothness. This is an operation or comparison tool, not a replacement for the cohomological-smoothness route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "The canonical tensor/pullback comparison is natural simultaneously in both variables, used in the counit transpose calculation; this is a general derived ringed-site tool and does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q124-4bb35991e",
+  "group": "Q124",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-4bb35991e (reviewer sub-agent of L); spot-checked: Read in full: the item, all 20 cited statements, and the source (main-20261015 sk-prop-cohsm lem-pur-co-smooth-composition.proof.md, final sentence 'the same calculation after arbitrary base change gives (3)'). The delivery has 0 new nodes and leaves the statement and stmt_deps unchanged. The item is unsplit in live and side-live and has no repair note. The closure walk found no cycle. Off-route uses are all declared in tool_uses and are generic operation tools; I accept them. The base-change map and coefficient category agree with pur9-cs-def-bc: c_{f'}=c', so theta_{c'} is the identity. They also agree with def-pur-co-smoothness clauses 2 and 3 (transported def-cbc-exchange-map, finite Lambda, pro-etale D^b_ctf). Step 1: arbitrary v keeps D^b_ctf via etale origin, exact inverse image, constructible pullback for any g, the stalk Tor test for any u, and the comparison pullback; no separatedness of v is used. Step 2: b_Lambda=beta follows by injectivity of the thm-sf-ambient-adjoint-class bijection; the dimension bound on Tbar' comes from lem-kun-dimension-finite-type. Step 3: pur9 itself identifies the thm-cbc exchange with the ambient E_u^c of pf-exchange-coherence (proper factor via transport-identifies-exchange, open factor via extension-by-zero comparison). Step 4: I checked the algebra of the rearranged coherence c(Pi^-1)E_X^-1=(E_omega^-1 x 1)Pi'^-1. Steps 5-6 are the two counit transposes; the naturality directions of E and PF are correct and they agree. Edge cases P=0, T empty, v=id, u open, u proper all hold. Batch-5: lem-weil-finite-compact-projection-formula (finite-coefficient projection formula) and lem-pur-finite-site-counit-projection-transport (etale/pro-etale counit and projection transport) are general six-functor and site-comparison facts. Neither the trace-formula leaf nor the Poincare-duality leaf gives them, and they are not steps of those proofs. Their path into sec-poincare-duality ends at lem-pod-lisse-module-sheaves-as-module-objects, which is generic sheaf algebra (lisse sheaves as module objects of FLC). I accept both, consistent with the same flag on sibling Q21. FIX, one fault, B4: steps 1, 2, 4, 5 and 6 had corrupted TeX. Backslashes were stripped (omega, Lambda, otimes, Pi, operatorname, dashv), \\varepsilon, \\beta, \\begin, \\tau, \\theta and \\to became control characters (\\v, \\b, \\t), and \\nu became a newline. I rewrote these steps in clean TeX and added one sentence to Step 6: the pullback/tensor comparison commutes with the swap because it is termwise on K-flat representatives. uses, proof_deps and all other fields are unchanged. Corrected file: fixes/dag/nodes/sec-smooth-purity/lem-pur-tensor-mate-base-change.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TensorMateBaseChange",
+  "declaration": "AlgebraicGeometry.ProEtale.tensorMateBaseChange",
+  "file": "lean/Sheaf/Paper/TensorMateBaseChange.lean",
+  "statement": "theorem tensorMateBaseChange (P : WeilConjectures.PurityFiniteSetting.{u}) {X X' Y Y' : Scheme.{u}} [X.Over (Spec (.of P.field.k))] [X'.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))] [Y'.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))] [QuasiCompact (X ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (X' ↘ Spec (.of P.field.k))] [QuasiCompact (X' ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))] [QuasiCompact (Y ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (Y' ↘ Spec (.of P.field.k))] [QuasiCompact (Y' ↘ Spec (.of P.field.k))] {f : X ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X} {g : Y' ⟶ Y} [f.IsOver (Spec (.of P.field.k))] [f'.IsOver (Spec (.of P.field.k))] [g'.IsOver (Spec (.of P.field.k))] [g.IsOver (Spec (.of P.field.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (sq : IsPullback g' f' f g) (c : Compactification f) : (∀ K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} P.Coefficient)), DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} P.Coefficient) Y K → DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} P.Coefficient) Y' ((upperStar (ModuleCat.{u + 1} P.Coefficient) g).leftDerivedFunctor.obj K) ∧ ∀ a b : ℤ, DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} P.Coefficient) Y a b K → DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} P.Coefficient) Y' a b ((upperStar (ModuleCat.{u + 1} P.Coefficient) g).leftDerivedFunctor.obj K)) ∧ tensorMateBaseChangeUnitNormalization P.Coefficient sq c ∧ ∀ K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient)), DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} P.Coefficient) Y ((comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) Y).mapDerivedCategory.obj K) → tensorMateBaseChangeIdentity P.Coefficient sq c K",
+  "branch": "newtargets-dag",
+  "by": "Q153",
+  "date": "2026-10-22",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.tensorMateBaseChangeUnitNormalization",
+   "AlgebraicGeometry.ProEtale.tensorMateBaseChangeIdentity",
+   "AlgebraicGeometry.ProEtale.tensorMateBaseChange"
+  ],
+  "note": "The equality is in the canonical etale-origin comparison coordinates already used by def-pur-co-smoothness, with the same omega-first ordering as finiteComparedTensorClause. Canonical symmetry identifies it exactly with the node's coefficient-first equation. Pullback/tensor, square and unit comparisons are explicit. The theorem quantifies over every origin whose comparison image is Dctf; the first conjunct is directly on all pro-etale Dctf objects and preserves every Tor interval. No smoothness or invertibility of theta, b or beta is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-45cd0fba9",
+  "group": "Q153",
+  "result": "pass",
+  "note": "Read the item, all 8 stmt_dep records, both delivered modules, the report and the exact upstream declarations (UpperShriekCanonicalMaps, LowerShriekBaseChange, derivedSquareUpperStarIsoInvApp, CohomologicalSmoothnessFiniteComparison, ProEtale TorAmplitude/Stability). Only the lean fields of the item and pur9-cs-def-bc differ from side-live; both statements are verbatim. Hypotheses match the node (k-schemes and k-arrows, f separated finite type, g arbitrary, IsPullback, compactification c and its ofIsPullback). The exchange is the upstream proper-then-open map plus the canonical comparison, the same one the landed beta uses. Conjunct 1 gives pro-etale Dctf preservation and keeps every Tor interval; it is not a duplicate (no pro-etale version upstream). The identity is a real equation, b.app K after g'^*theta equals tensorIso, then beta tensor 1, then 1 tensor square iso, then theta'; directions checked; the body equals the landed smoothTensorBaseChangeCoherence verbatim (omega-first etale-origin coordinates as in finiteComparedTensorClause). The section 1(B) re-record of pur9-cs-def-bc is accepted: the Q16 module was deleted on 2026-10-20 and no live Lean or Lean-recorded citer uses it; the new def is nu^* of the etale counit mate, not hollow. Docstrings carry source place, blueprint tags and the 6 proof steps; proof is sorry only; no line over 100 chars; universes match the dependency; every import exists in live except the delivered sibling. Not recompiled per the 2026-10-21 rule; no file changed. Advisory only: the unit clause holds by rfl from the dualizingComplexBaseChangeMap definition, which is faithful under the comparison convention; Prop duplicates smoothTensorBaseChangeCoherence (plain def in a theorem module, cannot be cited); the item does not reference the new wrapper; H11 has no independent second reader (dispatcher policy)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-3a18e",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261025T095715-L-3470224",
+  "kind": "interface",
+  "note": "independent cc review: delivered TensorMateBaseChange.lean + node lem-pur-tensor-mate-base-change against clone 3d29461 (signatures/defs unchanged, unit sk-prop-cohsm realized empty), #print axioms clean, sole importer SmoothExceptionalTensorPasting compiled"
+ }
+}

@@ -1,0 +1,297 @@
+{
+ "id": "lem-sfb-torsor-isom-affine-smooth",
+ "kind": "statement",
+ "title": "Affine smooth isomorphism scheme of two represented torsors over an arbitrary base",
+ "statement": "Let $B$ and $Y$ be schemes, with a morphism $Y\\to B$ [def-pc-scheme]. Let $H\\to B$ be an affine smooth group scheme [pqf-def-affine-morphism, def-sbc-smooth-morphisms]: its multiplication, identity and inverse obey the diagrams of [def-sc-group-scheme], with base $B$. Let $P,Q\\to Y$ be represented right $H$-torsors [def-sfb-split-solvable-right-torsors], using base $B$. For each $Y$-scheme $f:T\\to Y$ put $P_T=P\\times_YT$, $Q_T=Q\\times_YT$ and $H_T=H\\times_BT$ [def-pc-fibre-product]. Let $\\mathcal I(T)$ be the set of $T$-scheme isomorphisms $P_T\\simeq Q_T$ commuting with the right $H_T$-actions, with pullback as restriction. This functor is represented by a $Y$-scheme $I=\\underline{\\operatorname{Isom}}_{H,Y}(P,Q)$: naturally in every $T\\to Y$ there is a bijection $\\operatorname{Mor}_Y(T,I)\\cong\\mathcal I(T)$. The morphism $I\\to Y$ is affine and smooth. In particular, if $Y$ is affine, then $I$ is an affine scheme. No field base, triviality of the torsors, connectedness or reductivity of $H$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 049C (remark-fun-with-torsors), affine torsor representability; descent.tex Tags 0245 (lemma-affine) and 02VL (lemma-descending-property-smooth). Agent-extracted isomorphism-functor version via simultaneous fppf trivializations; also the affine smooth Isom input of Alper--Halpern-Leistner--Heinloth, Section 2 Claim 3, printed p.3 (WANTED locally)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-sc-group-scheme",
+  "def-sfb-split-solvable-right-torsors",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Put $W=P\\times_YQ$, with tautological sections $p\\in P(W)$ and $q\\in Q(W)$. The represented-torsor definition makes $P\\to Y$ and $Q\\to Y$ flat, surjective and finitely presented, hence singleton fppf covers. By fppf-to-fpqc inclusion and the base-change and composition axioms for fpqc coverings, $Q_P=W\\to P\\to Y$ gives the singleton fpqc cover $W\\to Y$. Its pullback $T_W\\to T$ is an fpqc cover for every $T\\to Y$.",
+   "uses": [
+    "def-sfb-split-solvable-right-torsors",
+    "def-pc-fppf-site",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-fpqc-covering-axioms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tags 021L (definition-fppf-covering), 022C (lemma-zariski-etale-smooth-syntomic-fppf-fpqc), 022D (lemma-fpqc)."
+   }
+  },
+  {
+   "text": "The torsor isomorphism $(x,h)\\mapsto(x,xh)$, pulled back along $p$ and $q$, identifies $P_W$ and $Q_W$ with $H_W$ by $h\\mapsto ph$ and $h\\mapsto qh$. These are scheme isomorphisms: the inverse sends $x$ to the unique $h$ with $x=ph$, using the inverse of the torsor isomorphism. For every $W$-scheme $T$, an equivariant isomorphism is therefore uniquely $ph\\mapsto qch$ for a section $c\\in H_W(T)$; its inverse is $qh\\mapsto pc^{-1}h$. Evaluation at $p$ gives the inverse correspondence. All formulas use the group-scheme multiplication and inverse, so are morphisms and commute with every base change.",
+   "uses": [
+    "def-sfb-split-solvable-right-torsors",
+    "def-sc-group-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 049C (remark-fun-with-torsors), explicit simultaneous trivialization argument for right torsors."
+   }
+  },
+  {
+   "text": "Over $W_2=W\\times_YW$, write the two tautological pairs as $(p_1,q_1)$ and $(p_2,q_2)$. The torsor isomorphisms give unique scheme sections $a,b$ of $H_{W_2}$ with $p_2=p_1a$, $q_2=q_1b$. The same equivariant isomorphism has coefficients related by $c_2=b^{-1}c_1a$. Thus $\\varphi(c)=b^{-1}ca$ is an isomorphism between the two pullbacks of $H_W$, with inverse $c\\mapsto bca^{-1}$. On $W_3$, uniqueness gives $a_{13}=a_{12}a_{23}$ and $b_{13}=b_{12}b_{23}$; hence $b_{23}^{-1}(b_{12}^{-1}ca_{12})a_{23}=b_{13}^{-1}ca_{13}$. This proves the descent cocycle. Since $H_W\\to W$ is a base change of the affine morphism $H\\to B$, affine effective descent gives a scheme $I\\to Y$ and $I\\times_YW\\simeq H_W$ inducing precisely $\\varphi$.",
+   "uses": [
+    "def-sfb-split-solvable-right-torsors",
+    "def-sc-group-scheme",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-galois-fpqc-affine-descent-effective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 0245 (lemma-affine); groupoids.tex Tag 049C, with the explicit right-torsor cocycle."
+   }
+  },
+  {
+   "text": "Fix $T\\to Y$. Apply morphism descent to the singleton fpqc cover $T_W\\to T$: a section of $I_T$ is exactly a section of $H_{T_W}$ whose two pullbacks obey $c_2=b^{-1}c_1a$, by the defining comparison for $I$. Such coefficients give local equivariant isomorphisms $ph\\mapsto qch$. The transition formula says exactly that their two pullbacks agree as maps $P_{T_W}\\to Q_{T_W}$. Morphism descent, now for the two $T$-schemes $P_T,Q_T$, gives a unique map $u:P_T\\to Q_T$. Descend the local inverses too; faithfulness in morphism descent shows both composites are identities. It also shows equivariance by comparing the two maps $P_T\\times_T H_T\\to Q_T$, which agree after the same cover. Conversely an equivariant isomorphism pulls back to a unique local coefficient by step 2; step 3 forces its transition relation, so it descends to a unique section of $I_T$. These operations are inverse. For $T\\prime\\to T$, their pullbacks agree with the same local formulas, so uniqueness of descent proves naturality. Thus $\\operatorname{Mor}_Y(T,I)\\cong\\mathcal I(T)$ for all $T$.",
+   "uses": [
+    "lem-galois-fpqc-morphisms-descend",
+    "lem-weil-pbc-fpqc-covering-axioms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02W0 (lemma-refine-coverings-fully-faithful), last assertion; topologies.tex Tag 022D for the test-scheme covers."
+   }
+  },
+  {
+   "text": "The base change $I_W\\to W$ is isomorphic to $H_W\\to W$, which is affine by base change of $H\\to B$. The singleton $W\\to Y$ is an fpqc cover by step 1. Affineness descends along this cover, giving $I\\to Y$ affine. If $Y$ is affine, the source of this affine morphism is an affine scheme.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-fpqc-descend-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02L5 (lemma-descending-property-affine); morphisms.tex Tag 01SD (lemma-base-change-affine) and Definition 01S6."
+   }
+  },
+  {
+   "text": "By smooth base change, $H_W\\to W$ is smooth, and hence so is $I_W\\to W$. Descend first along $Q_P=W\\to P$: it is flat and surjective because it is the base change of the fpqc cover $Q\\to Y$ (step 1 and the covering definition), and it is quasi-compact by quasi-compact base change since the torsor $Q\\to Y$ is finitely presented. Single-cover smooth descent therefore makes $I_P\\to P$ smooth. Descend again along $P\\to Y$, which is flat, surjective and quasi-compact by the represented-torsor definition. This gives smoothness of $I\\to Y$. These applications require no field hypothesis or trivialization over $Y$ itself.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-pc-quasi-compact-base-change",
+    "lem-trf-smooth-fpqc-base-descent",
+    "def-sfb-split-solvable-right-torsors",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02VL (lemma-descending-property-smooth), applied twice; morphisms.tex Tag 01VB (lemma-base-change-smooth); schemes.tex Tag 01K5 (lemma-quasi-compact-preserved-base-change)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-split-solvable-right-torsors",
+  "def-pc-fppf-site",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-weil-pbc-fpqc-covering-axioms",
+  "def-sc-group-scheme",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-galois-fpqc-affine-descent-effective",
+  "lem-galois-fpqc-morphisms-descend",
+  "lem-weil-pbc-fpqc-descend-affine",
+  "lem-pc-proper-base-change",
+  "lem-pc-quasi-compact-base-change",
+  "lem-trf-smooth-fpqc-base-descent",
+  "def-weil-pbc-fpqc-covering"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 049C, made explicit for the Isom functor using descent.tex Tags 0245, 02W0, 02L5 and 02VL."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an affine smooth group scheme over an arbitrary base the sheaf of equivariant isomorphisms between two fppf torsors is represented by an affine smooth scheme",
+   "results": "{\"t\": \"2026-10-24T04:15:41Z\", \"tool\": \"leanfinder\", \"query\": \"For an affine smooth group scheme over an arbitrary base the sheaf of equivariant isomorphisms between two fppf torsors is represented by an affine smooth scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.homOverEquiv\", \"AlgebraicGeometry.AffineSpace.homOverEquiv_symm_apply_coe\", \"AlgebraicGeometry.AffineSpace.homOverEquiv_apply\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom_appTop\", \"AlgebraicGeometry.AffineSpace.over\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_over\", \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\"], \"digest\": \"3b0b81e7fd6f924c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Hits concern affine space, invariance of affineness under isomorphism, or set-theoretic torsors. None represents the scheme functor of isomorphisms between two fppf torsors or gives its smoothness over an arbitrary base."
+  },
+  {
+   "tool": "grep",
+   "query": "Isom.*Torsor|Torsor.*Isom|isom.*torsor|torsor.*isom",
+   "results": "{\"t\": \"2026-10-24T04:17:51Z\", \"tool\": \"grep\", \"query\": \"Isom.*Torsor|Torsor.*Isom|isom.*torsor|torsor.*isom\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Hits concern affine space, invariance of affineness under isomorphism, or set-theoretic torsors. None represents the scheme functor of isomorphisms between two fppf torsors or gives its smoothness over an arbitrary base."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The isomorphism functor of two principal bundles under an affine smooth group scheme is affine and smooth over the base",
+   "results": "{\"t\": \"2026-10-24T04:17:52Z\", \"tool\": \"leansearch\", \"query\": \"The isomorphism functor of two principal bundles under an affine smooth group scheme is affine and smooth over the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsAffine.of_isIso\", \"AlgebraicGeometry.instIsAffineHomOfIsIsoScheme\", \"AlgebraicGeometry.IsAffine.iff_of_isIso\", \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal.respectsIso\", \"AlgebraicGeometry.HasAffineProperty.instRespectsIsoScheme\", \"HasFibers.Fib.isoMk\", \"AlgebraicGeometry.instIsIsoSchemeAppUnitOppositeCommRingCatAdjunctionOfIsAffine\"], \"digest\": \"b9a7b245b459c462\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Hits concern affine space, invariance of affineness under isomorphism, or set-theoretic torsors. None represents the scheme functor of isomorphisms between two fppf torsors or gives its smoothness over an arbitrary base."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Torsor\"",
+   "results": "{\"t\": \"2026-10-24T04:17:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"Torsor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AddTorsor\", \"Torsor\", \"addGroupIsAddTorsor\", \"AddGroup.instAddTorsor\", \"Group.instTorsor\", \"AddTorsor.nonempty\", \"Torsor.nonempty\", \"AddTorsor.toVSub\"], \"digest\": \"152f29f523dd7238\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Hits concern affine space, invariance of affineness under isomorphism, or set-theoretic torsors. None represents the scheme functor of isomorphisms between two fppf torsors or gives its smoothness over an arbitrary base."
+  },
+  {
+   "tool": "grep",
+   "query": "Isom.*Torsor|Torsor.*Isom|isom.*torsor|torsor.*isom",
+   "results": "{\"t\": \"2026-10-24T04:45:24Z\", \"tool\": \"grep\", \"query\": \"Isom.*Torsor|Torsor.*Isom|isom.*torsor|torsor.*isom\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern affine spaces, affine morphisms or local finite presentation, not equivariant Isom schemes of arbitrary represented scheme torsors."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine smooth representability of the scheme of equivariant isomorphisms of two principal bundles",
+   "results": "{\"t\": \"2026-10-24T04:45:24Z\", \"tool\": \"leansearch\", \"query\": \"Affine smooth representability of the scheme of equivariant isomorphisms of two principal bundles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsAffineHomOfIsIsoScheme\", \"AlgebraicGeometry.IsAffine.recOn\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsAffine.casesOn\", \"AlgebraicGeometry.IsAffine.of_isIso\", \"AlgebraicGeometry.IsAffine.iff_of_isIso\", \"AlgebraicGeometry.IsAffine.mk\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine.congr_simp\"], \"digest\": \"bf922d0e0e169b68\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern affine spaces, affine morphisms or local finite presentation, not equivariant Isom schemes of arbitrary represented scheme torsors."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Torsor\", \"Scheme\"",
+   "results": "{\"t\": \"2026-10-24T04:45:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"Torsor\\\", \\\"Scheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern affine spaces, affine morphisms or local finite presentation, not equivariant Isom schemes of arbitrary represented scheme torsors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The equivariant isomorphism functor between two represented right torsors under an affine smooth group scheme is represented by an affine smooth scheme",
+   "results": "{\"t\": \"2026-10-24T04:45:27Z\", \"tool\": \"leanfinder\", \"query\": \"The equivariant isomorphism functor between two represented right torsors under an affine smooth group scheme is represented by an affine smooth scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.homOverEquiv\", \"AlgebraicGeometry.AffineSpace.functor_obj_obj\", \"AlgebraicGeometry.AffineSpace.homOverEquiv_symm_apply_coe\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom_appTop\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_over\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine\"], \"digest\": \"65c0edc7bf05cb47\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern affine spaces, affine morphisms or local finite presentation, not equivariant Isom schemes of arbitrary represented scheme torsors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Faithfully flat descent constructs the affine scheme of isomorphisms between two principal homogeneous spaces for a smooth affine group",
+   "results": "{\"t\": \"2026-10-24T04:45:28Z\", \"tool\": \"leanfinder\", \"query\": \"Faithfully flat descent constructs the affine scheme of isomorphisms between two principal homogeneous spaces for a smooth affine group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.AffineSpace.over\", \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.AffineSpace.homOverEquiv\", \"AlgebraicGeometry.AffineSpace.homOfVector\", \"AlgebraicGeometry.AffineSpace.instIsOverHomOfVectorOverSchemeInferInstanceOverClass\"], \"digest\": \"58a86c855a545c77\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern affine spaces, affine morphisms or local finite presentation, not equivariant Isom schemes of arbitrary represented scheme torsors."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-equivariant-torsor-rigidity",
+  "date": "2026-10-24",
+  "group": "Q85"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Lemma 3.3 and its proof, printed p.4, expressed as equivariant torsors on the nodal scheme; Section 2, Claim 3, printed p.3, gives the degreewise algebraization calculation. Supporting affine-scheme input in Claim 3: representability and smoothness of the isomorphism functor, before infinitesimal lifting.",
+   "via": [
+    "lem-sfb-nodal-equivariant-torsor-rigidity",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-torsor-isom-affine-smooth",
+  "worker": "stage1",
+  "summary": "Constructed the simultaneous-trivialization cocycle c -> b^{-1}ca, descended its affine scheme, proved the natural representing bijection by fully faithful fpqc descent, and descended affineness and smoothness. All inputs reuse existing nodes; no new nodes and no change to the statement. Smoothness descends in two stages so quasi-compactness is checked separately on the original torsor maps and their base change.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Lemma 3.3 and its proof, printed p.4, expressed as equivariant torsors on the nodal scheme; Section 2, Claim 3, printed p.3, gives the degreewise algebraization calculation. Supporting affine-scheme input in Claim 3: representability and smoothness of the isomorphism functor, before infinitesimal lifting. Steps 1-6 supply precisely this auxiliary affine smooth Isom input. Current latest blueprint direct-images proof (3) and unit read; no unit or chapter route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-galois-fpqc-affine-descent-effective",
+    "why": "Generic effective descent of an affine scheme, after the explicit torsor transition cocycle; no unit-level six-functor step is replaced."
+   },
+   {
+    "node": "lem-galois-fpqc-morphisms-descend",
+    "why": "Generic fully faithful descent of scheme morphisms supplies the natural representing bijection and descent of inverses/equivariance."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-affine",
+    "why": "Generic descent of affineness for the constructed Isom scheme; the unit supplies no replacement for this scheme-theoretic tool."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Only clause (2), arbitrary smooth base change, for H_W -> W; no properness assertion is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-galois-fpqc-affine-descent-effective",
+  "lem-galois-fpqc-morphisms-descend",
+  "lem-weil-pbc-fpqc-descend-affine",
+  "lem-pc-proper-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NU-f2c1c3867",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-f2c1c3867 (reviewer sub-agent of L); spot-checked: Read in full: the item, all six steps and every cited or stmt_dep statement (16 nodes); no new nodes; statement, stmt_deps and source unchanged; proof_deps equals the union of the steps' uses. Sources checked: Stacks groupoids.tex l.2208 049C (affine G gives representability via descent-lemma-affine), and the tags 0245/02W0/02L5/02VL/01SD/01VB/01K5/022C/022D in tags/tags. Step 1: the singleton fppf covers P,Q→Y are fpqc (lem-trf leaf), and W=Q_P→P→Y and T_W→T are covers by the composition and base-change axioms. Step 2: the pullback of P×_B H≅P×_Y P gives the trivialization ph↦qch with inverse qh↦pc^{-1}h; elementary, checked for noncommutative S_3. Step 3: p_2=p_1a, q_2=q_1b, so c_2=b^{-1}c_1a; recomputed a_13=a_12a_23 and the cocycle φ13=φ23∘φ12 in the pr02*=pr12*∘pr01* convention of the 0245 node; H_W→W affine by permanence(1). Step 4: real 02W0 morphism-descent argument for sections, maps, inverses, equivariance and naturality. Step 5: 02L5 on {W→Y}, and permanence(2) for affine Y. Step 6: smoothness by 01VB, then 02VL twice (W→P is flat, surjective and qc by base change; P→Y is flat, surjective and qc), which avoids a composite-qc step. Edge cases (Y empty, H=1, P=Q with no section, noncommutative H, nonreduced base) all hold. tool_uses accepted (galois 0245/02W0, pbc 02L5, and only clause (2) of pc-proper-base-change), all generic. Batch-5: lem-trf-fppf-covering-is-fpqc (Mathlib leaf fppfPrecoverage_le_fpqcPrecoverage, 022C) and lem-trf-smooth-fpqc-base-descent (Mathlib leaf, 02VL) are generic topology/descent facts with no proof deps, not steps of the trace formula or Poincaré duality, so accepted. No SGA source. Maintainer note: the existing unsplit lem-sfb-smooth-affine-torsor-isom-scheme (Q28, created the same day and slightly later) states the same theorem plus a base-change clause that follows from representability. It should be merged into this item and its citer lem-sfb-contracting-line-equivariant-torsor-rigidity repointed. This duplicate predates the delivery and is not a fault of the split. The statement's use of def-sc-group-scheme, defined over a field, \"with base B\" is pre-existing and unchanged. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TorsorIsomAffineSmooth",
+  "declaration": "AlgebraicGeometry.RepresentedRightTorsor.isom_affine_smooth",
+  "declarations": [
+   "AlgebraicGeometry.RepresentedRightTorsor.EquivariantIsom",
+   "AlgebraicGeometry.RepresentedRightTorsor.testChangeMap",
+   "AlgebraicGeometry.RepresentedRightTorsor.isom_affine_smooth"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/TorsorIsomAffineSmooth.lean",
+  "statement": "theorem isom_affine_smooth {B : Scheme.{u}} (H : Grp (Over B)) [IsAffineHom H.X.hom] [Smooth H.X.hom] (Y : Over B) (P Q : RepresentedRightTorsor H Y) : ∃ I : Over Y, IsAffineHom I.hom.left ∧ Smooth I.hom.left ∧ (IsAffine Y.left → IsAffine I.left.left) ∧ ∃ E : ∀ T : Over Y, (T ⟶ I) ≃ EquivariantIsom P Q T.hom, ∀ (T T' : Over Y) (h : T' ⟶ T) (s : T ⟶ I), (E T' (h ≫ s)).iso.hom ≫ testChangeMap Q h = testChangeMap P h ≫ (E T s).iso.hom",
+  "branch": "sheaf-dag",
+  "by": "Q46",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5280efc05",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: H : Grp (Over B) with IsAffineHom/Smooth only (no field); P,Q are the recorded RepresentedRightTorsor; P_T,Q_T are actual pullbacks; EquivariantIsom = iso + over_base + equivariance on all U-points of H_T (translate p' always exists via the torsor square); E is a real Equiv; the naturality square with testChangeMap plus over_base characterises pulling back the iso; IsAffineHom/Smooth on I.hom.left; IsAffine Y.left → IsAffine I.left.left. Edge cases (empty Y/B, trivial or noncommutative H, P=Q with no section, Spec 0, single universe u) are fine. lean.statement verbatim; node unchanged except lean; helpers have real data with source/blueprint docstrings; the six proof steps are in the docstring; proof is sorry; no name clash in live Sheaf/WeilConjectures. No compile reproduced (worker dry run OK). Advisory: the duplicate unsplit lem-sfb-smooth-affine-torsor-isom-scheme (Q28, lean null) should be merged or rebound to isom_affine_smooth."
+ }
+}

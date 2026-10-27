@@ -13,28 +13,38 @@
  },
  "proof": [
   {
-   "text": "Complete f:T -> M to a distinguished triangle with cone Q. The Koszul-completion unit is a natural map of exact functors, so its isomorphism criterion and two-out-of-three show Q is locally complete. The exact reduction functor takes this triangle to one whose first map is invertible, so its residue cone Q_0 is zero. Choose a flat-term K-flat model of Res Q. Tensor the exact constant coefficient sequence 0 -> J^n/J^(n+1) -> A/J^(n+1) -> A/J^n -> 0 with it. Exact constant realization and flatness give the coefficient triangle. Reassociation identifies the first term with Q_0 tensor^L_(A/J) (J^n/J^(n+1)), hence with zero. Starting at exponent one, induction gives zero for every quotient reduction Q_n. Completeness identifies Q with their derived inverse limit, which is zero. The distinguished cone triangle then makes f invertible. All constructions and equalities take place on the specified slice, preserving the original quotient action; no finiteness as sets or perfectness of A/J^n over A is used.",
+   "text": "Choose the universally specified derived change-of-rings cochain model for the residue projection. Its exactness and uniqueness of left derived functors transport a triangulated shift structure to the actual adicResidueLocalReduction. Complete f to a distinguished triangle T -> M -> Q. On each further slice each defining internal-Hom completeness test is an exact functor. Its first two values vanish, so its cone value vanishes. Thus Q is locally complete. Exact residue reduction and the zero-cone criterion give R_0(Q)=0.",
    "uses": [
-    "lem-weil-pbc-constant-completion-equivalence",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-sf-derived-homology-long-exact",
-    "lem-weil-pbc-constant-module-section-properties",
-    "lem-pur-derived-change-of-rings"
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on n. The base R_0(Q)=0 was just obtained. Apply the successor coefficient-vanishing theorem to R_0(Q)=0 and R_n(Q)=0 to obtain R_(n+1)(Q)=0. This is the consecutive coefficient triangle part of the original plan, with no completeness or finiteness conditions on Q.",
+   "uses": [
+    "lem-sfb-adic-residue-vanishing-successor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the normalized complete-reduction cone theorem to Q. Every term F_n is isomorphic to exact scalar restriction of the zero object R_n(Q), hence is zero. The homotopy-limit Hom vanishing criterion makes the identity of the cone point zero: all maps from it and its shift to each zero F_n vanish. Therefore the cone point and Q are zero. The original distinguished triangle makes f invertible.",
+   "uses": [
+    "lem-sfb-adic-complete-reduction-cone"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "lem-pur-derived-change-of-rings",
-  "lem-sf-derived-homology-long-exact",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "lem-weil-pbc-constant-module-section-properties",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+  "lem-sfb-adic-complete-reduction-cone",
+  "lem-sfb-adic-residue-vanishing-successor",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 09C6, final complete-cone argument; Algebraization Tags 099M and 099F for quotient completion and derived Nakayama."
+  "document": "literature/stacks-project/proetale.tex; literature/stacks-project/more-algebra.tex",
+  "place": "Tags 09C6 (final inverse-limit morphism), 099M (completion), 0G1T (successive coefficient vanishing); triangulated assembly formalized by Y2."
  },
  "mathlib_searches": [
   {
@@ -113,14 +123,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "C-9a1f0",
-  "group": "C4",
+  "reviewer": "COMPILER",
+  "group": "Y2",
   "result": "pass",
-  "landing": "20261021T022430-L-2846381",
+  "landing": "20261025T203737-L-2850606",
   "kind": "interface",
-  "note": "independent cc review: item theorem and 6 moved defs vs quarantine/Sheaf/Paper/AdicResidueLissePerfectLift.lean (byte-identical); 4 new sorry statements vs Stacks 09C6/09C5/099M/0940; --all compile of 7 modules clean; #print axioms checked"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

@@ -1,0 +1,129 @@
+{
+ "id": "lem-pur-completed-module-section-reindexing",
+ "kind": "statement",
+ "title": "Completed-module section reindexing and its reverse",
+ "statement": "For every adic coefficient datum d over a commutative ring A in Type(t+1), schemes T,T prime in Scheme(t), and scheme isomorphism u:T prime -> T, the published completed-ring tensor pullback has a natural underlying abelian-sheaf identification with sectionwise inverse-image reindexing. Its inverse on a local section x over the postcomposed test is the inverse-image unit applied to x followed by restriction along proEtaleIsoCommaArrow. There is an equivalence between the completed-ring module categories whose forward functor equals the published tensor pullback along u and whose inverse equals the published tensor pullback along inv u. This is an assertion about ordinary completed-ring modules only; it asserts no tower, derived-limit, reduction, or exchange compatibility. The coefficient datum and the concrete canonical maps are those of [def-weil-pbc-adic-coefficient-datum] and [def-pur-completed-reindexing-data].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/derived.tex; literature/stacks-project/proetale.tex",
+  "place": "Stacks Tags 09A5, 00WX and 03D2; extracted argument step 1"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-strict-tower-operations",
+  "def-weil-pbc-cartesian-square",
+  "def-pur-completed-reindexing-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the covering-preserving site equivalence and its comma-normalized inverse-image identification. Transport each module action by the inverse completed coefficient identification. The coefficient composition equation identifies reverse transport with the coefficient comparison for inv u.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The published tensor pullback is left adjoint to the sectionwise direct image with this coefficient action. Its tensor-unit-normalized adjunction identifies it with the action-transport functor. Under this identification its inverse-image unit is the comma coprojection, so the inverse identification is the displayed unit followed by restriction. The coefficient identity and composition equations provide the natural unit and counit and identify the inverse functor with the reverse published tensor pullback.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "def-weil-pbc-proetale-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/derived.tex",
+  "place": "agent-written specialization of the cited Stacks argument and extracted parent proof; preserves actual canonical normalization maps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "For an isomorphism of schemes, completed coefficient module pullback agrees with section reindexing and preserves derived inverse limits, quotient augmentation and adjunction base change mates",
+   "results": "Eight results give ordinary scheme module pullback and generic sheaf pullback constructions; none concerns the project completed pro-etale coefficient operations or their specified normalizations.",
+   "date": "2026-10-25",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "LeanFinder",
+   "query": "Inverse image of module sheaves under a site equivalence, preservation of derived inverse limit and compatibility of base change mates with derived functors",
+   "results": "ExactFunctor derived descent APIs are available; no theorem identifies these published completed-ring operations and their specified normalization maps in one specialization.",
+   "date": "2026-10-25",
+   "verdict": "not a one-line Mathlib specialization"
+  },
+  {
+   "tool": "Loogle",
+   "query": "CategoryTheory.Equivalence, CategoryTheory.Functor",
+   "results": "General equivalence infrastructure does not state the completed coefficient section and derived-unit normalization equations.",
+   "date": "2026-10-25",
+   "verdict": "not in Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*mate|pushforwardPushforwardEquivalence|limit\\.post",
+   "results": "Sheaf.PushforwardContinuous supplies the action-transport equivalence, and limit.post supplies the ordinary limit map. Neither states the comparison with the project tensor pullback, completed quotient augmentation or specified derived mates.",
+   "date": "2026-10-25",
+   "verdict": "generic ingredients only"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurCompletedReductionReindexing",
+  "group": "W2",
+  "date": "2026-10-25"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-weil-equivariance-compatibilities",
+   "place": "Stacks Tags 09A5, 00WX and 03D2; extracted argument step 1; constituent scheme-isomorphism normalization",
+   "via": [
+    "lem-pur-isomorphism-completed-reduction-reindexing",
+    "lem-pur-weil-semilinear-exchange-reindexing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurCompletedModuleReindexing",
+  "file": "lean/Sheaf/Paper/PurCompletedModuleReindexing.lean",
+  "declaration": "AlgebraicGeometry.Scheme.purCompletedModuleReindexing",
+  "statement": "theorem purCompletedModuleReindexing {T' T : Scheme.{t}} (u : T' ⟶ T) [IsIso u] : PurCompletedReindexingAtSections d u ∧ PurCompletedReindexingAtModules d u",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6471a",
+  "group": "W2",
+  "result": "fix",
+  "landing": "20261025T203551-L-2828711",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6471a",
+  "group": "W2",
+  "result": "fix",
+  "landing": "20261025T203551-L-2828711",
+  "kind": "interface",
+  "note": "independent cc review: delivered item proof + 4 split statements + relocated Data defs against the clone's old item module, the CompletedPullback/CompletedPullbackInterface definitions, the node JSONs and the 3 direct importers (all compiled against the delivered modules)"
+ }
+}

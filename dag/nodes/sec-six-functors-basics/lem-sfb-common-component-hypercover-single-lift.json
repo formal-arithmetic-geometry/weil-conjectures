@@ -1,0 +1,230 @@
+{
+ "id": "lem-sfb-common-component-hypercover-single-lift",
+ "kind": "statement",
+ "title": "Lifting a prescribed Stonean hypercover over one affine base",
+ "statement": "Let $T$ be an affine scheme [def-pc-scheme] with w-strictly local coordinate ring [sk-def-pe-wlocal], let $P$ be a profinite space in the same universe [def-weil-size-convention], and let $a:P\\simeq\\pi_0(T)$ be a homeomorphism. Let $S_\\bullet$ be a simplicial profinite space over $P$ [def-weil-pbc-simplicial-object] with surjective proper-face matching arrows, zero matching object $P$, extremally disconnected terms and surjective augmentations [def-sfb-proper-face-diagram]. Then there exist a simplicial object $U_\\bullet$ in the full small pro-etale site of $T$ [def-weil-pbc-proetale-site] and natural continuous coordinates $p_n:|U_n|\\to S_n$ with the following properties. Every proper-face matching arrow is a singleton pro-etale covering, and the zero matching object is exactly $\\operatorname{id}_T$. Every term is affine, its coordinate ring is w-contractible, and it is weakly contractible for sheaves of sets in universe $u+1$ [sk-def-pe-weak-contractible]. Every structure map is stalkwise an isomorphism; $|U_n|$ is homeomorphic to $\\{(x,s)\\mid\\pi_0(x)=a(t_n(s))\\}$ over both coordinates, and $p_n$ identifies both the component space and the closed-point space with $S_n$. For $C=\\Gamma(T,\\mathcal O_T)$ and $f_n:S_n\\to\\pi_0(\\operatorname{Spec} C)$ induced by $a,t_n$ and $T\\simeq\\operatorname{Spec} C$, the term $U_n$ is isomorphic to $\\operatorname{Spec} D_n$ over $T$, where $D_n$ is the colimit of the finite clopen-partition restriction diagram [def-sfb-stonean-partition-diagram]. There is a $C$-algebra equivalence from $D_n$ to the canonical graph-restriction ring, sending the stage element $(r_b)_b$ to the image of the corresponding locally constant function under the algebra map. Under this equivalence and scheme isomorphism the canonical profinite projection is $p_n$. The empty case is included.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 2.2.8 and its more precise statement (printed p. 10); Lemma 2.4.8; Stacks Tag 097D. Original common-component hypercover node steps 4--7, for a single base."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "sk-def-pe-wlocal",
+  "lem-pe-spectral-components-profinite",
+  "def-weil-size-convention",
+  "def-weil-pbc-proetale-site",
+  "lem-zl-component-relative-profinite-site",
+  "def-weil-pbc-simplicial-object",
+  "sk-def-pe-weak-contractible",
+  "def-weil-affine-spectrum",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-localization-at-prime",
+  "def-sfb-proper-face-diagram",
+  "def-sfb-stonean-partition-diagram",
+  "def-sfb-affine-component-space"
+ ],
+ "proof": [
+  {
+   "text": "Let $T$ be the given affine scheme and transport the base $P$ to $\\pi_0(T)$ along $a$. Apply the relative component functor to the prescribed simplicial profinite object. Functoriality supplies every operator. Finite-limit preservation transports each proper-face limiting cone; identify the zero vertex with the terminal object over $T$, changing its cone by that canonical isomorphism. Cover preservation sends each surjective matching arrow to a singleton pro-etale covering. The relative pullback-space theorem gives affine terms, stalk isomorphisms, the underlying spaces $|T|\\times_P S_n$, natural second coordinates and the component homeomorphisms. These are objects of the full small pro-etale site.",
+   "uses": [
+    "lem-zl-component-relative-profinite-site",
+    "lem-sfb-relative-component-lift-pullback-space",
+    "lem-zl-affine-component-site-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 2.2.8 and its more precise statement; HRS paragraph before equation (4.1)"
+   }
+  },
+  {
+   "text": "For each degree, apply the Stonean component-cover theorem to $C=\\Gamma(T,\\mathcal O_T)$, $S_n$, and the composite $S_n\\to P\\xrightarrow a\\pi_0(T)\\to\\pi_0(\\operatorname{Spec} C)$. The map is surjective by the assumed augmentation surjectivity and the two homeomorphisms. The theorem gives a normalized $C$-algebra equivalence from the partition colimit $D_n$ to the canonical graph-restriction ring, with w-contractibility, stalkwise isomorphisms and the homeomorphism of closed points to $S_n$.",
+   "uses": [
+    "det-pe-wc-cover-second-stage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-wc-cover/det-pe-wc-cover-second-stage.proof.md",
+    "place": "Preliminaries and assertions 1–4; Stacks Tag 097D, proetale.tex label lemma-construct-profinite"
+   }
+  },
+  {
+   "text": "For a partition $\\mathcal Q$, the canonical restriction theorem and the finite-product spectrum theorem give a homeomorphism $|\\operatorname{Spec}(\\prod_{A\\in\\mathcal Q}C_{t_n(A)})|\\simeq\\coprod_{A\\in\\mathcal Q}\\pi_T^{-1}(t_n(A))$. Under refinement its map is $(x,A')\\mapsto(x,A)$ for the containing part $A$. The partition-restriction theorem supplies the small nonempty directed diagram and precisely these restriction maps. Its colimit is the displayed $D_n$. The filtered-spectrum topological-limit theorem and the profinite partition-incidence-limit theorem therefore identify $|\\operatorname{Spec}D_n|$ homeomorphically with $|T|\\times_P S_n$, compatibly with the two projections. This uses the topology conclusions of those nodes, not just their point bijections.",
+   "uses": [
+    "lem-pe-clopen-restriction-canonical-localization",
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "lem-pe-partition-restriction-ind-zariski",
+    "lem-a1-filtered-spectrum-topological-limit",
+    "lem-pe-profinite-partition-incidence-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-wc-cover/det-pe-wc-cover-second-stage.proof.md",
+    "place": "Assertion 2, the partition diagram and the topology of its inverse limit; compare Stacks Tag 097D"
+   }
+  },
+  {
+   "text": "Both the relative lift $T\\times_P S_n\\to T$ and the ring model $\\operatorname{Spec}D_n\\to T$ have isomorphisms on all stalks by steps 4–5. Their topological homeomorphism from step 6 is over $|T|$. Apply the stalk-isomorphism lifting theorem to this homeomorphism, and then to its inverse, with these two structure morphisms as targets. It gives mutually inverse scheme morphisms over $T$: their composites have underlying identity maps, and the uniqueness clause identifies them with the identity morphisms. This is the canonical isomorphism over $T$ and $S_n$. Thus the actual relative lift has the stated ring model and its coordinate ring is w-contractible. Since it is an object of $T_{\\mathrm{proet}}$, the affine w-contractible projectivity theorem shows that every sheaf epimorphism evaluates there surjectively. Transport the closed-point homeomorphism through this scheme isomorphism. The isomorphism of the coordinate rings with the graph ring transports w-contractibility; the projectivity theorem gives weak contractibility of each site object. The finite-stage normalization is exactly that of the Stonean component-cover theorem. For empty $S_n$, the empty partition gives the zero ring and all claims remain valid.",
+   "uses": [
+    "new-lem-zl-stalk-isomorphism-lifting",
+    "det-pe-wcb-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 2.2.8, canonical locally ringed-space realization; Lemma 2.4.8 and weak contractibility on the pro-etale site"
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-pe-wc-cover-second-stage",
+  "det-pe-wcb-projective",
+  "lem-a1-filtered-spectrum-topological-limit",
+  "lem-pe-clopen-restriction-canonical-localization",
+  "lem-pe-partition-restriction-ind-zariski",
+  "lem-pe-profinite-partition-incidence-limit",
+  "lem-sfb-relative-component-lift-pullback-space",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "lem-zl-affine-component-site-projection",
+  "lem-zl-component-relative-profinite-site",
+  "new-lem-zl-stalk-isomorphism-lifting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 2.2.8 and its more precise statement (printed p. 10); Lemma 2.4.8; Stacks Tag 097D. Original common-component hypercover node steps 4--7, for a single base."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Lift an extremally disconnected profinite hypercover to a weakly contractible proetale hypercover of a w strictly local affine scheme",
+   "results": "Scheme.Cover.ulift, Profinite.lift, Profinite.projective_of_extrDisc and one-hypercover lifting; no component-lift result.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simplicial profinite hypercover with extremally disconnected terms lifts to an affine weakly contractible proetale hypercover over a w strictly local scheme",
+   "results": "ExistsHomHomCompEqCompAux constructions, Scheme.GlueData.oneHypercover, QuasiCompactCover and OneHypercover; no component-lift result.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(hypercover|Hypercover).*(Stonean|[Cc]omponent|[Ee]xtremally)|([Cc]omponent|Stonean|[Ee]xtremally).*(hypercover|Hypercover)",
+   "results": "13 Mathlib hits, on ObjectProperty.SiteLocal and zero/one hypercovers; no affine component-lift result.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.WStrictCommonComponentHypercovers",
+  "date": "2026-10-26",
+  "group": "N1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Common-component hypercover construction: Lifting a prescribed Stonean hypercover over one affine base. Paragraph (3), open direct image: the unpunctured one-term root-tower calculation underlying coordinate-face restriction in the tame-boundary expansion. Extracted Old proof steps 2-3; HRS paragraph before (4.1) and proof of Proposition 4.3(1); Bhatt–Scholze Lemma 2.2.8, Example 2.4.6 and Lemma 2.4.8; Stacks Tag 0DAV, hypercovering.tex label lemma-hypercovering-object. Agent-formulated compatible construction, not a verbatim theorem of HRS.",
+   "via": [
+    "lem-sfb-wstrict-common-component-hypercovers",
+    "lem-sfb-wstrict-lisse-component-cohomology",
+    "lem-sfb-root-tower-coordinate-face",
+    "lem-sfb-root-tower-inner-support",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CommonComponentHypercoverSingleLift",
+  "file": "lean/Sheaf/Paper/CommonComponentHypercoverSingleLift.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_common_component_hypercover_single_lift",
+  "statement": "theorem exists_common_component_hypercover_single_lift\n    (T : Scheme.{u}) [IsAffine T] [IsWStrictlyLocalRing Γ(T, ⊤)]\n    {P : Profinite.{u}} (a : P ≃ₜ ConnectedComponents T)\n    (S : SimplicialObject (Over P))\n    (hS :\n      ∃ (M : ∀ n : ℕ, Cone (S.properFaceDiagram n))\n        (μ : ∀ n : ℕ, S _⦋n⦌ ⟶ (M n).pt),\n        (M 0).pt = Over.mk (𝟙 P) ∧\n        (∀ n : ℕ, Nonempty (IsLimit (M n))) ∧\n        (∀ (n : ℕ) (b : SimplicialObject.ProperFaceCategory n),\n          μ n ≫ (M n).π.app (op b) = S.map b.obj.hom.op) ∧\n        (∀ n : ℕ, Function.Surjective (μ n).left) ∧\n        (∀ n : ℕ, ExtremallyDisconnected (S _⦋n⦌).left) ∧\n        (∀ n : ℕ, Function.Surjective (S _⦋n⦌).hom)) :\n    ∃ (U : SimplicialObject T.ProEt)\n      (p : ∀ n : ℕ, C((U _⦋n⦌).left, (S _⦋n⦌).left)),\n      (∃ (M : ∀ n : ℕ, Cone (U.properFaceDiagram n))\n          (μ : ∀ n : ℕ, U _⦋n⦌ ⟶ (M n).pt),\n        (M 0).pt = Scheme.ProEt.mk (𝟙 T) ∧\n        (∀ n : ℕ, Nonempty (IsLimit (M n))) ∧\n        (∀ (n : ℕ) (b : SimplicialObject.ProperFaceCategory n),\n          μ n ≫ (M n).π.app (op b) = U.map b.obj.hom.op) ∧\n        (∀ n : ℕ, Presieve.singleton (μ n) ∈ Scheme.ProEt.precoverage T (M n).pt)) ∧\n      (∀ n : ℕ, IsAffine (U _⦋n⦌).left ∧\n        IsWContractibleRing Γ((U _⦋n⦌).left, ⊤) ∧\n        (Scheme.ProEt.topology T).IsWeaklyContractible.{u + 1} (U _⦋n⦌)) ∧\n      (∀ (m n : SimplexCategoryᵒᵖ) (f : m ⟶ n) (x : (U.obj m).left),\n        p n.unop.len ((U.map f).left x) = (S.map f).left (p m.unop.len x)) ∧\n      (∀ n : ℕ, (∀ x : (U _⦋n⦌).left, IsIso ((U _⦋n⦌).hom.stalkMap x)) ∧\n        (∃ H : (U _⦋n⦌).left ≃ₜ\n            {z : T × (S _⦋n⦌).left | ConnectedComponents.mk z.1 = a ((S _⦋n⦌).hom z.2)},\n          (∀ x, (H x).val.1 = (U _⦋n⦌).hom x) ∧ (∀ x, (H x).val.2 = p n x)) ∧\n        (∃ c : ConnectedComponents (U _⦋n⦌).left ≃ₜ (S _⦋n⦌).left,\n          ∀ x : (U _⦋n⦌).left, c (ConnectedComponents.mk x) = p n x) ∧\n        (∃ c : closedPoints (U _⦋n⦌).left ≃ₜ (S _⦋n⦌).left,\n          ∀ x : closedPoints (U _⦋n⦌).left, c x = p n x.val)) ∧\n      (∀ n : ℕ,\n        ∃ (e : (colimit (Algebra.stoneanPartitionDiagram Γ(T, ⊤) (S _⦋n⦌).left\n              (⟨fun s ↦ T.isoSpec.hom.continuous.connectedComponentsMap\n                (a ((S _⦋n⦌).hom s)),\n              T.isoSpec.hom.continuous.connectedComponentsMap_continuous.comp\n                (a.continuous.comp (S _⦋n⦌).hom.hom.hom.continuous)⟩)) :\n            CommAlgCat Γ(T, ⊤)) ≃ₐ[Γ(T, ⊤)]\n            WContractification.PullbackProfinite Γ(T, ⊤) (S _⦋n⦌).left\n              (⟨fun s ↦ T.isoSpec.hom.continuous.connectedComponentsMap\n                (a ((S _⦋n⦌).hom s)),\n              T.isoSpec.hom.continuous.connectedComponentsMap_continuous.comp\n                (a.continuous.comp (S _⦋n⦌).hom.hom.hom.continuous)⟩))\n          (k : (U _⦋n⦌).left ≅ Spec (.of\n            (colimit (Algebra.stoneanPartitionDiagram Γ(T, ⊤) (S _⦋n⦌).left\n              (⟨fun s ↦ T.isoSpec.hom.continuous.connectedComponentsMap\n                (a ((S _⦋n⦌).hom s)),\n              T.isoSpec.hom.continuous.connectedComponentsMap_continuous.comp\n                (a.continuous.comp (S _⦋n⦌).hom.hom.hom.continuous)⟩)) : CommAlgCat Γ(T, ⊤)))),\n          (∀ (Q : DiscreteQuotient (S _⦋n⦌).left) (r : Q → Γ(T, ⊤)),\n            e ((colimit.ι (Algebra.stoneanPartitionDiagram Γ(T, ⊤) (S _⦋n⦌).left\n                (⟨fun s ↦ T.isoSpec.hom.continuous.connectedComponentsMap\n                (a ((S _⦋n⦌).hom s)),\n              T.isoSpec.hom.continuous.connectedComponentsMap_continuous.comp\n                (a.continuous.comp (S _⦋n⦌).hom.hom.hom.continuous)⟩)) (op Q)).hom\n                  (fun b ↦ algebraMap Γ(T, ⊤) _ (r b))) =\n              algebraMap (LocallyConstant (S _⦋n⦌).left Γ(T, ⊤))\n                (WContractification.PullbackProfinite Γ(T, ⊤) (S _⦋n⦌).left\n                  (⟨fun s ↦ T.isoSpec.hom.continuous.connectedComponentsMap\n                (a ((S _⦋n⦌).hom s)),\n              T.isoSpec.hom.continuous.connectedComponentsMap_continuous.comp\n                (a.continuous.comp (S _⦋n⦌).hom.hom.hom.continuous)⟩))\n                (LocallyConstant.comapₐ Γ(T, ⊤) ⟨Q.proj, Q.proj_continuous⟩\n                  ⟨r, IsLocallyConstant.of_discrete r⟩)) ∧\n          k.hom ≫ Spec.map (CommRingCat.ofHom (algebraMap Γ(T, ⊤)\n              (colimit (Algebra.stoneanPartitionDiagram Γ(T, ⊤) (S _⦋n⦌).left\n                (⟨fun s ↦ T.isoSpec.hom.continuous.connectedComponentsMap\n                (a ((S _⦋n⦌).hom s)),\n              T.isoSpec.hom.continuous.connectedComponentsMap_continuous.comp\n                (a.continuous.comp (S _⦋n⦌).hom.hom.hom.continuous)⟩)) : CommAlgCat Γ(T, ⊤)))) ≫\n              T.isoSpec.inv = (U _⦋n⦌).hom ∧\n          (∀ x : (U _⦋n⦌).left,\n            WContractification.PullbackProfinite.projT Γ(T, ⊤) (S _⦋n⦌).left\n              (⟨fun s ↦ T.isoSpec.hom.continuous.connectedComponentsMap\n                (a ((S _⦋n⦌).hom s)),\n              T.isoSpec.hom.continuous.connectedComponentsMap_continuous.comp\n                (a.continuous.comp (S _⦋n⦌).hom.hom.hom.continuous)⟩)\n              (Spec.map (CommRingCat.ofHom e.symm.toRingHom) (k.hom x)) = p n x))",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-26"
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "lem-sfb-common-component-hypercover-single-lift",
+  "worker": "stage3 N1",
+  "summary": "Strict subargument of the common-component hypercover theorem, stated as a separate Lean theorem; no new definition or changed target.",
+  "blueprint": "Common-component hypercover construction: Lifting a prescribed Stonean hypercover over one affine base. Paragraph (3), open direct image: the unpunctured one-term root-tower calculation underlying coordinate-face restriction in the tame-boundary expansion. Extracted Old proof steps 2-3; HRS paragraph before (4.1) and proof of Proposition 4.3(1); Bhatt–Scholze Lemma 2.2.8, Example 2.4.6 and Lemma 2.4.8; Stacks Tag 0DAV, hypercovering.tex label lemma-hypercovering-object. Agent-formulated compatible construction, not a verbatim theorem of HRS.",
+  "tool_uses": [
+   {
+    "node": "det-pe-wc-cover-second-stage",
+    "why": "Generic explicit Stonean component-ring realization used as stated in the prescribed component-hypercover route; this unit has no separate statement supplying this generic tool."
+   },
+   {
+    "node": "det-pe-wcb-projective",
+    "why": "Generic component-lift or partition-limit comparison used as stated in the prescribed component-hypercover route; this unit has no separate statement supplying this generic tool."
+   },
+   {
+    "node": "lem-a1-filtered-spectrum-topological-limit",
+    "why": "Generic component-lift or partition-limit comparison used as stated in the prescribed component-hypercover route; this unit has no separate statement supplying this generic tool."
+   },
+   {
+    "node": "lem-pe-clopen-restriction-canonical-localization",
+    "why": "Generic component-lift or partition-limit comparison used as stated in the prescribed component-hypercover route; this unit has no separate statement supplying this generic tool."
+   },
+   {
+    "node": "lem-pe-partition-restriction-ind-zariski",
+    "why": "Generic component-lift or partition-limit comparison used as stated in the prescribed component-hypercover route; this unit has no separate statement supplying this generic tool."
+   },
+   {
+    "node": "lem-pe-profinite-partition-incidence-limit",
+    "why": "Generic component-lift or partition-limit comparison used as stated in the prescribed component-hypercover route; this unit has no separate statement supplying this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "why": "Generic component-lift or partition-limit comparison used as stated in the prescribed component-hypercover route; this unit has no separate statement supplying this generic tool."
+   },
+   {
+    "node": "lem-zl-affine-component-site-projection",
+    "why": "Generic component-lift or partition-limit comparison used as stated in the prescribed component-hypercover route; this unit has no separate statement supplying this generic tool."
+   },
+   {
+    "node": "lem-zl-component-relative-profinite-site",
+    "why": "Generic component-lift or partition-limit comparison used as stated in the prescribed component-hypercover route; this unit has no separate statement supplying this generic tool."
+   },
+   {
+    "node": "new-lem-zl-stalk-isomorphism-lifting",
+    "why": "Generic scheme-map lifting and uniqueness used as stated in the prescribed component-hypercover route; this unit has no separate statement supplying this generic tool."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261026T082539-L-2188683",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261026T082539-L-2188683",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

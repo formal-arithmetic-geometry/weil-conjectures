@@ -1,0 +1,57 @@
+## Worker report
+
+Files written:
+
+- dag/nodes/sec-six-functors-basics/lem-sfb-elliptic-global-garding-estimate.json — item, statement, split. Four steps, 2350 characters altogether. The statement and its statement dependencies are unchanged.
+- citations.json — exact statement quotations for step 1's formal-adjoint node and step 3's weak-estimate node.
+- report.md — this report. searches.jsonl is the unmodified record made by the required search command.
+
+## New nodes
+
+None: 0 new nodes, 0 Mathlib leaves. In particular I did not introduce a two-bundle estimate, a block-symbol lemma, a direct-sum norm lemma, or a smooth special case of the already existing weak estimate. The first would duplicate the item; the middle two are elementary displayed calculations; the last would duplicate a specialization of an existing stronger statement.
+
+## Attachments
+
+None. Read-only searches under lean/WeilConjectures for the exact blueprint tag and for Garding/Gårding, Sobolev, elliptic operator and elliptic estimate found no project declaration stating this result. The case-insensitive unanchored 'garding' pattern also catches the ordinary word 'regarding', which is irrelevant.
+
+## Wanted literature
+
+WANTED: Demailly, Complex Analytic and Differential Geometry, VI §1 (1.5)–(1.7) and VI §2 (2.3), printed pp.288–289, for lem-sfb-elliptic-global-garding-estimate. The named local PDF is absent from the supplied literature tree. Attempts to read the author's agbook.pdf online at the current and older Grenoble hostnames timed out; the hodge-ams.pdf alternate also timed out. I did not download a substitute, and do not claim to have read the PDF. Following brief-stage1 §4, proof_origin.by is agent. The proof is a direct elementary assembly from two existing DAG statements which I read completely, rather than an attribution of a new argument to that unavailable source.
+
+## What changed and what was wrong
+
+The item was an unsplit statement with no proof, no Lean attachment and four inherited Mathlib search records. Its statement is mathematically sound on the stated positive-volume convention, and no correction or dispute is needed. I retained those records and added the six actually executed logged searches. The existing weak Gårding theorem is for endomorphisms of one bundle, so simply substituting Q into it would have been invalid. I repaired that potential hypothesis mismatch by constructing the endomorphism P(a,b)=(Q*b,Qa) of the orthogonal sum G⊕H. The asterisk here denotes the differential formal adjoint supplied by the existing arbitrary-order adjoint theorem. Equal-rank ellipticity makes both off-diagonal symbol maps invertible. Applying the weak estimate at s=0 to (u,0), then calculating the three norms, proves precisely the item.
+
+The intended source route in the inherited blueprint.from.place is supporting analytic work beneath det-thm-sf-ctf-stability-direct-images proof (3). I read the current latest unit _section.md and its direct-images proof, as well as the chapter and unit JSON. That current blueprint paragraph concerns proper/open direct image; it does not itself contain this block argument. The long analytic prerequisite chain is inherited supporting material. blueprint_refs.py ancestor prints None; I retained the supplied null ancestor and detailed place/via fields rather than inventing an imported ancestor. The split_report explicitly records this.
+
+## Searches and reuse
+
+Before considering new analytic nodes I searched statements across the whole DAG for Sobolev, Garding/Gårding, Plancherel, elliptic operators and partitions of unity. This found lem-sfb-weak-garding-sobolev-estimate and lem-sfb-differential-formal-adjoint-symbol, both in this item's unit. I opened both complete statements, not merely their titles or their sources. I also read lem-sfb-bundle-sobolev-rellich and lem-sfb-smooth-subordinate-partition but do not cite them: the former is unnecessary because the smooth localized norms agree by definition, and the latter is unnecessary because the item already fixes a subordinate partition. The existing formal-adjoint theorem includes all orders k, so the first-order adjoint theorem is not a substitute.
+
+The whole-blueprint search command was run for 'elliptic', 'Sobolev', 'Gårding', 'formal adjoint' and 'elliptic estimate'. The elliptic query has only unrelated coefficient-category hits; the remaining queries have zero hits. No second blueprint statement of this analytic estimate was found, so same_as stays []. No new node is being created.
+
+For the item I ran the mandated msearch.py command six times: two different natural-language LeanFinder formulations, Loogle for "elliptic" and "Sobolev", a LeanSearch formulation about equal-rank compact bundle estimates, and grep for Garding|Gårding|elliptic.*(estimate|operator)|Sobolev under Analysis/. All services returned successfully; none is recorded as unavailable. I read the returned signatures: the elliptic hits are curves/divisibility sequences; the natural-language hits are Euclidean Gagliardo–Nirenberg estimates and Schwartz seminorm bounds; the Sobolev hits concern Bessel-potential membership and derivative maps. I also opened Mathlib/Analysis/Distribution/Sobolev.lean:11–100 and Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean:15–65. None is the claimed variable-coefficient compact-bundle elliptic estimate or a one-line specialization yielding it. Actual queries and results are in mathlib_searches and the tool-generated searches.jsonl.
+
+## Not duplicates
+
+No new nodes; no new/existing pair needs justification. Reuse of the stronger existing weak estimate is deliberate. The one-bundle regularity theorem remains an independent prerequisite; this delivery does not also create a smooth-estimate node underneath it. At the time of writing, I followed both stmt_deps and proof_deps of each proposed dependency and found no path back to this item. Their current only downstream statement dependency is def-weil-field. The server's required global DAG check will check the delivered dependency direction again.
+
+## Review by Q08
+
+I read delivery-errors.md B–E whole, the item, the full statements of its two used nodes, and the current latest blueprint unit and direct-images paragraph. The missing external source and the consequent agent provenance are explicit above. There are no new statements to verify against external sources, no newly assigned tags, and no claims of a Mathlib match or of a completed Lean proof. Existing source metadata has been retained. Nothing was written in the shared repository or launcher, and no Lean file or compiler was used.
+
+Step 1 uses lem-sfb-differential-formal-adjoint-symbol for exactly two clauses: existence of the arbitrary-order smooth real differential formal adjoint, and its degree-k symbol (-1)^k times the metric adjoint of the degree-k symbol of Q. The theorem permits two different finite-rank metric bundles on an oriented boundaryless manifold with positive smooth volume, all of which the item supplies. The item has k≥1, within the theorem's d≥0 range. A formal differential adjoint is sufficient; I do not assume a Hilbert-space adjoint or a self-adjoint extension. The rest of the step constructs a bundle and a block differential expression, which is immediate in concatenated frames. It disposes of the empty manifold and zero-rank cases with C=1.
+
+Step 2 is elementary linear algebra on the symbol computed in step 1. I checked both compositions with the written inverse: (a,b) ↦ (Db,Aa) ↦ (A⁻¹Aa,D⁻¹Db)=(a,b), and the reverse gives (c,e). Here A* is invertible with inverse (A⁻¹)* for the positive definite fibre metrics. The sign (-1)^k is included in D and D⁻¹, so odd order works as well as even order. No identification of G with H, positivity of the elliptic operator, or even-order hypothesis has slipped in. There is no uncited analytic result in this step.
+
+Step 3 uses precisely the assertion in lem-sfb-weak-garding-sobolev-estimate with s=0, d=k, B=G⊕H and v=(u,0). That statement explicitly includes the norm bound, and explicitly says its H^0 norm is the integrated L² norm: it is not merely a definition of ellipticity or a regularity-only claim. I verified the compact boundaryless base, m≥1, positive metric on B, smooth coefficients of order at most k, and the invertible degree-k symbol from step 2. Smoothness and compactness put both w and Pw into L², explained through the finite chart supports and bounded densities. Distributional derivatives of the smooth section agree with the displayed differential expression by integration by parts against compactly supported tests; there is no boundary term. The resulting constant depends on the fixed operator and norms and not on u. The step is correctly non-elementary because it applies the weak estimate; none of its analytic substance is attributed to an elementary flag.
+
+Step 4 has no external dependency. With the SAME cutoffs and concatenated frames, each localized derivative is (derivative of χ_i u,0). Equality of every summand of the squared H^k norms proves exact equality of norms, so a norm-equivalence theorem is not hidden here. The orthogonal sum metric gives the two integrated norm equalities pointwise and then under the integral. Substitution gives the item's full inequality and a positive constant. This is genuinely an elementary calculation, and does not assert an extra Sobolev-space realization theorem.
+
+Small cases checked: u=0; Q with nonzero kernel (the L² remainder remains); the empty base; common rank zero; scalar k=1 on a circle, where the adjoint principal symbol has the opposite sign; scalar even k; nontrivial and non-isomorphic bundles G and H (only the direct sum is used); and non-orthonormal input frames (the Sobolev norm is a sum of coordinate-component norms, while the integrated norm uses the metric, and both separate exactly on the orthogonal direct sum). Smooth metric and density coefficients may vary; the formal-adjoint node already handles them. Compactness, finite rank, and the fixed supports ensure all smooth norms used here are finite. There is no strengthened conclusion and no added hypothesis.
+
+B1–B10 are satisfied without manufacturing new nodes: self-contained original statement retained, no unsplit proof sketches, no duplicate definitions, actual search records preserved, no false Mathlib leaf or attachment. For C1–C4 the two non-elementary assertions are the exact statements of the cited nodes and citations.json copies them verbatim; C5 searches preceded reuse and C6's dependency direction was inspected. No other unit's generic tool is needed. D1–D5 are addressed by reusing existing nodes and writing the block construction, inverse and norm calculations rather than renaming the desired result. E1–E7 are addressed by the hypothesis-by-hypothesis and small-case checks just described. All four proof steps are below 2000 characters; no long step hides a lemma. I corrected my initial idea of creating interpolation/local-estimate prerequisites after reading the existing weak estimate, since those new nodes would be unnecessary. No statement correction was needed.
+
+## Unfinished work
+
+No unfinished part of this item's assembly proof. The existing prerequisites remain stage-1 items under their own owners; this delivery does not pretend to prove them. Required server dry run and delivery results follow below when available.

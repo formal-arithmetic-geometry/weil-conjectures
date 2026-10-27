@@ -22,55 +22,44 @@
  },
  "proof": [
   {
-   "text": "For $F=E,L$, let $R^E_W=R_W$, $R^L_W=S_W$. The normalized inverse-image tensor comparison applies to $g^{-1}$, the geometric inverse image defined in the statement, and the ring $R^F_Y$. For any complex $M$ of $R^F_Y$-modules it gives, termwise, a canonical identification\n$$D^F_n(M)\\cong g^{-1}M\\otimes_{g^{-1}R^F_Y}B_{F,X,n}.$$\nExplicitly it sends $((g^{-1}(x\\otimes a))\\otimes b)$ to $g^{-1}x\\otimes c^g_{A_{F,n}}(g^{-1}a)b$; the inverse sends $g^{-1}x\\otimes b$ to $(g^{-1}(x\\otimes1))\\otimes b$. The displayed maps are inverse by the two tensor-balancing relations. Here $c^g_{A_{F,n}}:g^{-1}B_{F,Y,n}\\to B_{F,X,n}$ is the canonical constant-ring structure map of the inverse-image definition; this calculation does not require that map to be invertible. The action of $g^{-1}R^F_Y$ on the last factor is its projected action, so restriction to $R^F_X$ is the one in $D^F_n$. No identification $g^{-1}R^F_Y=R^F_X$ is made.",
+   "text": "Apply lem-weil-ramified-finite-module-comparison separately at every n and module M. It supplies objectwise isomorphisms d_n(M) with the full nested tensor formula, before any naturality or coherence.",
    "uses": [
-    "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
-    "def-weil-proetale-inverse-image",
-    "def-weil-pbc-ringed-tensor-section-calculus"
+    "lem-weil-ramified-finite-module-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL (lemma-tensor-product-pullback), before scalar extension; explicit balanced reassociation and canonical finite constant coefficient map"
-   }
+   "elementary": true
   },
   {
-   "text": "Put $H=g^{-1}R_Y$ and $N=g^{-1}P$. Reassociate the tensor in Step 5, using $(x\\otimes b)\\otimes s\\leftrightarrow x\\otimes(b\\otimes s)$, and apply Step 4 on $X$. This identifies $D^E_m(P)\\otimes_{R_X}S_X$ with $N\\otimes_H B_{L,X,em}$. On the other side apply Step 5 to $Q$ and the inverse-image tensor comparison to $P\\otimes_{R_Y}S_Y$. It identifies $D^L_{em}(Q)$ with\n$$(N\\otimes_H g^{-1}S_Y)\\otimes_{g^{-1}S_Y}B_{L,X,em}\\cong N\\otimes_H B_{L,X,em},$$\nwhere the last map sends $(x\\otimes z)\\otimes b$ to $x\\otimes\\bar z b$, with inverse $x\\otimes b\\mapsto(x\\otimes1)\\otimes b$. All displayed reassociations are inverse balanced maps and are linear in the final scalar. Compose the first identification with the inverse of the second to obtain $\\widetilde d_m$. On local tensor generators its formula is\n$$((g^{-1}(p\\otimes\\bar a))\\otimes b)\\otimes s\\longmapsto(g^{-1}((p\\otimes1)\\otimes j_m(\\bar a)))\\otimes(j_m(b)\\pi^L_{em}(s)).$$\nHere $p\\otimes1\\in Q$ explains the implicit $p$ on the statement's right-hand side. The formulas are natural in each module variable; applying them degreewise to $P$ therefore commutes with its differential and gives an isomorphism of $S_X$-complexes.",
+   "text": "Prove equality of completed-L-linear maps out of scalar-extended finite E pullback by adjunction. First remove completed scalar extension with its normalized unit. The square π_E q=c_X π_L and local surjectivity of π_E let these maps be retyped as finite-coefficient linear maps. Apply the finite pullback adjunction, then finite scalar-extension extensionality. Thus equality is detected on 1⊗g*(1⊗p). For a module map f, naturality of each adjunction unit and of sheafified scalar extension shows both composites send this generator to g*(1⊗(1⊗f(p))). Hence the d_n(M) are natural. Apply this naturality to every differential of P to construct an isomorphism of cochain complexes, and to every component of a chain map to prove naturality in P. The section formula is the module formula in each degree.",
    "uses": [
-    "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
-    "def-pur-sheaf-tensor-product",
-    "def-weil-pbc-ringed-tensor-section-calculus"
+    "lem-pur-integral-operations-well-defined",
+    "def-weil-integral-reduction-tower",
+    "lem-weil-ramified-finite-tensor-sections",
+    "lem-weil-ramified-finite-module-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03EL (lemma-tensor-product-pullback) and 03EK (section-tensor-product); agent balanced-map calculation after Steps 4 and 5"
-   }
+   "elementary": false
   },
   {
-   "text": "Write $q^F_{b,a}$ for quotient reduction from level $b$ to $a$. On quotient representatives,\n$$q^L_{e(m+1),em}j_{m+1}(\\bar a)=j_m q^E_{m+1,m}(\\bar a),\\qquad q^L_{e(m+1),em}\\pi^L_{e(m+1)}(s)=\\pi^L_{em}(s).$$\nBoth first expressions are the residue of the same element of $\\mathcal O_E$ in $\\mathcal O_L/v^{em}$; the second equality is the limit-projection identity. Applying these equations to $\\bar a,b,s$ in Step 6 shows that its two transition composites both have image $(g^{-1}((p\\otimes1)\\otimes j_m(q^E_{m+1,m}\\bar a)))\\otimes(j_m(q^E_{m+1,m}b)\\pi^L_{em}(s))$. Thus $\\widetilde d_\\bullet$ is a map of the specified towers, including their restricted completed-scalar actions. For a chain map $f:P\\to P'$, either composite replaces $p$ by $f(p)$ in Step 6 and leaves the coefficient factors unchanged. The pure pairings determine tensor maps, so these generator equalities are equalities of sheaf maps, also on sections that require covers.",
+   "text": "For the adjacent tower square use the same extensionality test with source level n+1, target level index(e,n), and coefficient q equal to E quotient reduction followed by j_n. The projection identity and target.ramified_projection prove the required ring square. Naturality of the outer scalar tensor sends its generator to 1⊗τ_E(g*(1⊗p)); pullTensor_transition reduces this to the level-n generator. Its image under d_n is the normalized L generator. In the other composite d_(n+1) first gives the normalized L generator at index(e,n+1), and pullTensor_transition again reduces it to the identical generator at index(e,n). All coefficient factors are one, since every ring map preserves one. Module-map extensionality in each degree yields the claimed equality of chain maps. The full formula and these transition equations together give the requested witness.",
    "uses": [
-    "def-pur-integral-derived-operations",
-    "def-weil-pbc-ringed-tensor-section-calculus"
+    "lem-weil-finite-pullback-transition-generators",
+    "lem-pur-integral-operations-well-defined",
+    "def-weil-integral-reduction-tower",
+    "lem-weil-ramified-finite-tensor-sections"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK (section-tensor-product); quotient and inverse-limit transition calculations with the towers of def-pur-integral-derived-operations"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
-  "def-weil-proetale-inverse-image",
-  "def-weil-pbc-ringed-tensor-section-calculus",
-  "def-pur-sheaf-tensor-product",
-  "def-pur-integral-derived-operations"
+  "lem-weil-ramified-finite-module-comparison",
+  "lem-pur-integral-operations-well-defined",
+  "def-weil-integral-reduction-tower",
+  "lem-weil-ramified-finite-tensor-sections",
+  "lem-weil-finite-pullback-transition-generators"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Separate source subargument of lem-weil-ramified-pullback-tower-identification, steps 5,6,7"
+  "place": "Tags 03EK and 03EL: objectwise comparison followed by adjunction-unit extensionality for naturality, cochain differentials and tower transitions; H5, 2026-10-27."
  },
  "mathlib_searches": [
   {
@@ -138,13 +127,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-cc983",
-  "group": "H3",
-  "result": "fix",
-  "landing": "20261021T174242-L-3772858",
+  "reviewer": "COMPILER",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261027T123448-L-2301724",
   "kind": "interface",
-  "note": "independent cc review: delivered RamifiedPullbackTowerData vs clone item block (verbatim apart from docstrings), identification signature vs clone (identical), two sorry lemmas vs nodes and source (true, not restatements), proof_deps vs Lean names used, sandbox compile of all 5 modules + #print axioms"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

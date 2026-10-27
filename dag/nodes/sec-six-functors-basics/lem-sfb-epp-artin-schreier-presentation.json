@@ -1,0 +1,286 @@
+{
+ "id": "lem-sfb-epp-artin-schreier-presentation",
+ "kind": "statement",
+ "title": "Artin–Schreier presentation and field-algebra dichotomy",
+ "statement": "Let $p$ be prime and let $E\\subseteq F$ be fields of characteristic $p$ [def-pc-field-extension, def-pc-field-characteristic]. If $F/E$ is normal and separable of degree $p$, there are $z\\in F\\setminus E$ and $a\\in E$ with $z^p-z=a$ and $F=E[z]$, and evaluation gives $E[T]/(T^p-T-a)\\cong F$. Here normal means that every irreducible polynomial over $E$ having a root in $F$ splits in $F$, separable means that minimal polynomials have distinct roots, and degree is vector-space dimension [def-weil-pbc-separable-algebraic-extension, def-weil-vector-space-dimension]. Polynomial rings and their quotient algebras have their usual coefficient structures [def-weil-polynomial-ring, def-weil-pbc-algebra-hom-quotient]. Conversely, for every field $E$ of characteristic $p$ and $a\\in E$, the algebra $E[T]/(T^p-T-a)$ is either a field, normal and separable of degree $p$ over $E$, or the product of $p$ copies of $E$; the latter case occurs exactly when $a=u^p-u$ for some $u\\in E$.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Tag 09DY, lemma-Artin-Schreier, and section-Artin-Schreier immediately before it (the polynomial dichotomy); prime degree makes the Galois group cyclic of order p."
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-pc-field-characteristic",
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-vector-space-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Put $G=\\operatorname{Aut}_E(F)$. By [lem-weil-pbc-finite-galois-fixed-field], $|G|=p$ and $F^G=E$. Apply [lem-sfb-prime-order-group-cyclic] to choose a generator $\\sigma$. Its order is $p$: the distinct powers before its first return exhaust the cyclic group of $p$ elements. In particular $1,\\sigma,\\ldots,\\sigma^{p-1}$ are distinct multiplicative characters on $F$.",
+   "uses": [
+    "lem-weil-pbc-finite-galois-fixed-field",
+    "lem-sfb-prime-order-group-cyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tags 09DY (lemma-Artin-Schreier), 09I1 (lemma-finite-Galois), 09DW (theorem-galois-theory)."
+   }
+  },
+  {
+   "text": "Regard $\\sigma$ as an $E$-linear endomorphism and put $N=\\sigma-1$. In characteristic $p$, the intermediate binomial coefficients vanish, so $N^p=\\sigma^p-1=0$. But $N^{p-1}\\ne0$: expanding $(\\sigma-1)^{p-1}$ would otherwise give a relation among the distinct characters $1,\\sigma,\\ldots,\\sigma^{p-1}$ with leading coefficient $1$, contradicting [lem-per-monoid-characters-linear-independent]. Choose $w$ with $y=N^{p-1}w\\ne0$. Since $Ny=0$, $y$ is fixed by the generator, hence by $G$, and therefore $y\\in E$ by [lem-weil-pbc-finite-galois-fixed-field].",
+   "uses": [
+    "lem-per-monoid-characters-linear-independent",
+    "lem-weil-pbc-finite-galois-fixed-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09DY, lemma-Artin-Schreier, linear independence of characters; Tag 0CKL, lemma-independence-characters."
+   }
+  },
+  {
+   "text": "Set $z=y^{-1}N^{p-2}w$; this is defined also for $p=2$, when $N^0=1$. As $y\\in E$, $Nz=y^{-1}N^{p-1}w=1$, so $\\sigma(z)=z+1$. Thus $z\\notin E$, and $\\sigma(z^p-z)=(z+1)^p-(z+1)=z^p-z$. The fixed-field statement gives $a=z^p-z\\in E$. The $p$ elements $\\sigma^i(z)=z+i\\cdot1$ for $0\\le i<p$ are distinct, since the characteristic is exactly $p$.",
+   "uses": [
+    "lem-weil-pbc-finite-galois-fixed-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09DY, lemma-Artin-Schreier, explicit formula for z and final calculation."
+   }
+  },
+  {
+   "text": "Write $f=T^p-T-a$. Evaluation at $z$ gives an $E$-algebra map $E[T]/(f)\\to F$. By [lem-weil-pbc-monic-quotient-free], its domain has basis $1,T,\\ldots,T^{p-1}$. If a representative $q$ of degree $<p$ lies in its kernel, applying $\\sigma^i$ to $q(z)=0$ gives $q(z+i)=0$ for all $0\\le i<p$; hence $q=0$. Here the root bound follows by repeatedly dividing by $T-r$: at each distinct root the remaining quotient still vanishes at the other roots, so a nonzero polynomial with $p$ distinct roots has degree at least $p$. The map is injective between two $p$-dimensional $E$-spaces, hence bijective. Its image is $E[z]$, proving all the forward assertions.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09DY, lemma-Artin-Schreier, conclusion L=K[z]; quotient description via the monic basis."
+   }
+  },
+  {
+   "text": "For the converse fix $E$ and $a$, and put $f=T^p-T-a$. Choose a root $b$ in an algebraic closure of $E$ [def-weil-algebraic-closure]. In characteristic $p$, $(x+t)^p=x^p+t^p$ by the binomial coefficients, and $(i\\cdot1)^p=i\\cdot1$ by induction on $i$. Hence the distinct $b+i\\cdot1$, $0\\le i<p$, are roots of $f$. Repeated division by these linear factors and comparison of degree and leading coefficient give $f=\\prod_{i=0}^{p-1}(T-b-i\\cdot1)$. Its roots are therefore exactly these translates. Put $L=E(b)$ and let $m$ be the minimal polynomial of $b$ [def-weil-pbc-separable-algebraic-extension]. It divides $f$, because division by the monic $m$ leaves a polynomial of smaller degree vanishing at $b$. Write $f=mg$ in $E[T]$. In characteristic $p$ the derivative is $f'=p\\,T^{p-1}-1=-1$, while $f'=m'g+mg'$; hence $m\\cdot(-g')+m'\\cdot(-g)=1$, so $m$ is coprime to its derivative, i.e. separable [def-pc-separable-polynomial], and $b$ is separable over $E$. Thus $L/E$ is separable by [lem-trf-simple-separable-field-extension].",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "def-weil-pbc-separable-algebraic-extension",
+    "def-pc-separable-polynomial",
+    "lem-trf-simple-separable-field-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09I7, section-Artin-Schreier, paragraph preceding lemma-Artin-Schreier; Tags 09H1 and 09H9."
+   }
+  },
+  {
+   "text": "All roots of $f$ lie in $L$, and they generate $L$ since one is $b$. Thus [lem-sfb-splitting-field-finite-normal] gives finite dimensionality and normality of $L/E$. Together with the preceding separability this permits [lem-weil-pbc-finite-galois-fixed-field]: its automorphism group $H$ has order $[L:E]$, and its fixed field is $E$. For $\\tau\\in H$, write $\\tau(b)=b+c_\\tau$ with $c_\\tau\\in\\mathbf F_p$, using the explicit root list of step 5. Since every automorphism fixes the prime field, $c_{\\tau\\rho}=c_\\tau+c_\\rho$. This homomorphism is injective, since fixing $b$ fixes the generated field $L$.",
+   "uses": [
+    "lem-sfb-splitting-field-finite-normal",
+    "lem-weil-pbc-finite-galois-fixed-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09I7, section-Artin-Schreier, injection of the Galois group into Z/pZ; Tags 09HU, 09I1, 09DW."
+   }
+  },
+  {
+   "text": "If $b\\notin E$, the fixed-field result in step 6 supplies $\\tau$ moving $b$. Its nonzero $c_\\tau\\in\\mathbf F_p$ has $p$ distinct multiples: equality of two would give $(i-j)c_\\tau=0$, impossible for $0<|i-j|<p$. The powers of $\\tau$ therefore give $p$ distinct elements of $H$; injectivity into the $p$-element prime field gives $|H|=p$. Consequently $[L:E]=p$. Evaluation $E[T]/(f)\\to L$ is injective by exactly the degree/root argument of step 4, now using the $p$ conjugates of $b$ supplied by powers of $\\tau$. The monic basis [lem-weil-pbc-monic-quotient-free] and equality of dimensions make it an isomorphism. This is the field case, with normality and separability already established.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09I7, section-Artin-Schreier, order of the translation group, with the quotient argument written out."
+   }
+  },
+  {
+   "text": "If $b=u\\in E$, the roots $r_i=u+i\\cdot1$ all lie in $E$. Evaluation gives $E[T]/(f)\\to E^p$. Its inverse as a vector-space map sends $(v_i)_i$ to the class of $\\sum_i v_i\\prod_{j\\ne i}(T-r_j)/(r_i-r_j)$. The denominators are nonzero; evaluating at $r_k$ gives $v_k$. Injectivity follows from the root bound and the degree-$<p$ representatives supplied by [lem-weil-pbc-monic-quotient-free]. Thus evaluation is a bijective algebra homomorphism, so an algebra isomorphism. A root $u\\in E$ is exactly an equation $a=u^p-u$. Conversely an algebra isomorphism with $E^p$ followed by any coordinate projection sends the class of $T$ to such a root $u$. The two cases are exclusive since $p\\ge2$ and $E^p$ has nonzero zero divisors.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09I7, section-Artin-Schreier, split-root case; explicit interpolation inverse rather than an implicit Chinese remainder theorem."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-galois-fixed-field",
+  "lem-sfb-prime-order-group-cyclic",
+  "lem-per-monoid-characters-linear-independent",
+  "lem-weil-pbc-monic-quotient-free",
+  "def-weil-algebraic-closure",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-pc-separable-polynomial",
+  "lem-trf-simple-separable-field-extension",
+  "lem-sfb-splitting-field-finite-normal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Tag 09DY, lemma-Artin-Schreier, and Tag 09I7, section-Artin-Schreier; quotient and split-product identifications written out by Q03."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A Galois field extension of prime degree p in characteristic p is generated by z with z to the p minus z in the base field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"GaloisField\", \"module\": \"Mathlib/FieldTheory/Finite/GaloisField\", \"type\": \"(p : ℕ) → [Fact (Nat.Prime p)] → ℕ → Type\", \"doc\": \"The splitting field of the polynomial $ X^{p^n} - X $ over $ \\\\mathbb{Z}/p\\\\mathbb{Z} $, which is the unique finite field with $ p^n $ elements containing all roots of this polynomial.\"}\n  {\"name\": \"FiniteField.Extension\", \"module\": \"Mathlib/FieldTheory/Finite/Extension\", \"type\": \"(k : Type u_1) → [inst : Field k] → (p : ℕ) → [Fact (Nat.Prime p)] → ℕ → [CharP k p] → Type\", \"doc\": \"Given a finite field $ k $ of characteristic $ p $, this definition constructs the finite field extension of degree $ n $ over $ k $. The resulting field has $ p^{m \\\\cdot n} $ elements, where $ m $ is\"}\n  {\"name\": \"instFieldGaloisField\", \"module\": \"Mathlib/FieldTheory/Finite/GaloisField\", \"type\": \"(p : ℕ) → [inst : Fact (Nat.Prime p)] → (n : ℕ) → Field (GaloisField p n)\", \"doc\": \"For any prime number $ p $ and natural number $ n $, the Galois field $ \\\\text{GaloisField}(p, n) $ with $ p^n $ elements is a field. This field is the splitting field of the polynomial $ X^{p^n} - X $\"}\n  {\"name\": \"instIsSplittingFieldZModGaloisFieldHSubPolynomialHPowNatX\", \"module\": \"Mathlib/FieldTheory/Finite/GaloisField\", \"type\": \"∀ (p : ℕ) [inst : Fact (Nat.Prime p)] (n : ℕ),\\n  Polynomial.IsSplittingField (ZMod p) (GaloisField p n) (Polynomial.X ^ p ^ n - Polynomial.X)\", \"doc\": \"For any prime number $ p $ and natural number $ n $, the polynomial $ X^{p^n} - X $ splits completely into linear factors in the finite field $ \\\\text{GaloisField}(p, n) $, which is the unique field ex\"}\n  {\"name\": \"FiniteField.isSplittingField_of_nat_card_eq\", \"module\": \"Mathlib/FieldTheory/Finite/GaloisField\", \"type\": \"∀ (p : ℕ) [h_prime : Fact (Nat.Prime p)] (n : ℕ) {K : Type u_1} [inst : Field K] [inst_1 : Algebra (ZMod p) K],\\n  Nat.card K = p ^ n → Polynomial.IsSplittingField (ZMod p) K (Polynomial.X ^ p ^ n - Polynomial.X)\", \"doc\": \"For any finite field $ K $ with cardinality $ p^n $, where $ p $ is a prime number and $ n $ is a positive integer, the field $ K $ is a splitting field of the polynomial $ X^{p^n} - X $ over the prim\"}\n  {\"name\": \"instAlgebraZModGaloisField\", \"module\": \"Mathlib/FieldTheory/Finite/GaloisField\", \"type\": \"(p : ℕ) → [inst : Fact (Nat.Prime p)] → (n : ℕ) → Algebra (ZMod p) (GaloisField p n)\", \"doc\": \"For a prime number $p$ and natural number $n$, the finite field $\\\\mathbb{F}_{p^n}$ of order $p^n$ is equipped with an algebra structure over the base field $\\\\mathbb{Z}/p\\\\mathbb{Z}$. This means $\\\\mathb\"}\n  {\"name\": \"instInhabitedGaloisField\", \"module\": \"Mathlib/FieldTheory/Finite/GaloisField\", \"type\": \"(p : ℕ) → [inst : Fact (Nat.Prime p)] → (n : ℕ) → Inhabited (GaloisField p n)\", \"doc\": \"For any prime number $ p $ and natural number $ n $, the finite field with $ p^n $ elements is non-empty.\"}\n  {\"name\": \"FiniteField.instFieldExtension\", \"module\": \"Mathlib/FieldTheory/Finite/Extension\", \"type\": \"(k : Type u_1) →\\n  [inst : Field k] →\\n    (p : ℕ) → [inst_1 : Fact (Nat.Prime p)] → (n : ℕ) → [inst_2 : CharP k p] → Field (FiniteField.Extension k p n)\", \"doc\": \"Given a finite field $ k $ of characteristic $ p $, this constructs the finite field extension of degree $ n $ over $ k $. The resulting field has $ p^{m \\\\cdot n} $ elements, where $ m $ is the dimens\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-field and Kummer results do not give the characteristic-p Artin-Schreier presentation or polynomial dichotomy for arbitrary fields."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every cyclic extension of degree equal to the characteristic is an Artin Schreier extension",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"isCyclic_tfae\", \"module\": \"Mathlib.FieldTheory.KummerExtension\", \"type\": \"(K L) [Field K] [Field L] [Algebra K L] [FiniteDimensional K L]\\n  (hK : (primitiveRoots (Module.finrank K L) K).Nonempty) :\\n  List.TFAE\\n    [IsGalois K L ∧ IsCyclic Gal(L/K),\\n      ∃ a : K, Irreducible (X ^ (finrank K L) - C a) ∧ IsSplittingField K L (X ^ (finrank K L) - C a),\\n      ∃ (α : L), α ^ (\", \"doc\": \"Let $L/K$ be a finite field extension of degree $n = [L:K]$. Suppose that the base field $K$ contains a primitive $n$-th root of unity. Then the following statements are equivalent:\\\\n1. The extension \"}\n  {\"name\": \"IsAbelianGalois.of_isCyclic\", \"module\": \"Mathlib.FieldTheory.Galois.Abelian\", \"type\": \"[IsGalois K L] [IsCyclic Gal(L/K)] : IsAbelianGalois K L\", \"doc\": \"If the field extension $ L/K $ is Galois and its Galois group $ \\\\text{Gal}(L/K) $ is cyclic, then $ L/K $ is an abelian Galois extension.\"}\n  {\"name\": \"FiniteField.instIsCyclicAlgEquivOfFinite\", \"module\": \"Mathlib.FieldTheory.Finite.Basic\", \"type\": \"(K L) [Finite L] [Field K] [Field L] [Algebra K L] : IsCyclic Gal(L/K)\", \"doc\": \"The Galois group $\\\\text{Gal}(L/K)$ of any finite field extension $L/K$ is a cyclic group. This means that when $L$ is a finite field and $K$ is a subfield of $L$, the group of field automorphisms of $\"}\n  {\"name\": \"IsPurelyInseparable\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \"(F : Type u_1) → (E : Type u_2) → [inst : CommRing F] → [inst_1 : Ring E] → [Algebra F E] → Prop\", \"doc\": \"The property that the field extension $ E $ over $ F $ is purely inseparable, meaning every element of $ E $ has a minimal polynomial over $ F $ of the form $ x^{p^n} - a $ for some $ a \\\\in F $ and pr\"}\n  {\"name\": \"FiniteField.instFieldExtension\", \"module\": \"Mathlib.FieldTheory.Finite.Extension\", \"type\": \"(k : Type u_1) →\\n  [inst : Field k] →\\n    (p : ℕ) → [inst_1 : Fact (Nat.Prime p)] → (n : ℕ) → [inst_2 : CharP k p] → Field (FiniteField.Extension k p n)\", \"doc\": \"Given a finite field $ k $ of characteristic $ p $, this constructs the finite field extension of degree $ n $ over $ k $. The resulting field has $ p^{m \\\\cdot n} $ elements, where $ m $ is the dimens\"}\n  {\"name\": \"FiniteField.Extension\", \"module\": \"Mathlib.FieldTheory.Finite.Extension\", \"type\": \"[CharP k p] : Type\", \"doc\": \"Given a finite field $ k $ of characteristic $ p $, this definition constructs the finite field extension of degree $ n $ over $ k $. The resulting field has $ p^{m \\\\cdot n} $ elements, where $ m $ is\"}\n  {\"name\": \"FiniteField.Extension.frob\", \"module\": \"Mathlib.FieldTheory.Finite.Extension\", \"type\": \": Gal(Extension k p n/k)\", \"doc\": \"The Frobenius automorphism of the finite field extension $ L/k $, defined by raising elements to the power of the characteristic $ p $ of the base field $ k $, viewed as an element of the Galois group\"}\n  {\"name\": \"isCyclic_of_isSplittingField_X_pow_sub_C\", \"module\": \"Mathlib.FieldTheory.KummerExtension\", \"type\": \"[NeZero n] : IsCyclic Gal(L/K)\", \"doc\": \"If $L/K$ is a splitting field of the polynomial $X^n - c$ for some $c \\\\in K$ and $n \\\\neq 0$, then the Galois group $\\\\mathrm{Gal}(L/K)$ is cyclic.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-field and Kummer results do not give the characteristic-p Artin-Schreier presentation or polynomial dichotomy for arbitrary fields."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsGalois, CharP",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-field and Kummer results do not give the characteristic-p Artin-Schreier presentation or polynomial dichotomy for arbitrary fields."
+  },
+  {
+   "tool": "grep",
+   "query": "ArtinSchreier|artin_schreier|artinSchreier",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-field and Kummer results do not give the characteristic-p Artin-Schreier presentation or polynomial dichotomy for arbitrary fields."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cyclic degree p Galois extension admits an Artin Schreier primitive generator",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"exists_root_adjoin_eq_top_of_isCyclic\", \"module\": \"Mathlib/FieldTheory/KummerExtension\", \"type\": \"∀ (K : Type u) [inst : Field K] (L : Type u_1) [inst_1 : Field L] [inst_2 : Algebra K L] [FiniteDimensional K L],\\n  (primitiveRoots (Module.finrank K L) K).Nonempty →\\n    ∀ [IsGalois K L] [IsCyclic Gal(L/K)], ∃ α, α ^ Module.finrank K L ∈ Set.range ⇑(algebraMap K L) ∧ K⟮α⟯ = ⊤\", \"doc\": \"In a Galois field extension $ L/K $ with cyclic Galois group $ \\\\text{Gal}(L/K) $, there exists an element $ \\\\alpha \\\\in L $ such that $ \\\\alpha^{[L:K]} $ lies in the image of the canonical embedding $ K\"}\n  {\"name\": \"isCyclic_tfae\", \"module\": \"Mathlib/FieldTheory/KummerExtension\", \"type\": \"∀ (K : Type u_1) (L : Type u_2) [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] [FiniteDimensional K L],\\n  (primitiveRoots (Module.finrank K L) K).Nonempty →\\n    [IsGalois K L ∧ IsCyclic Gal(L/K),\\n        ∃ a,\\n          Irreducible (Polynomial.X ^ Module.finrank K L - Polynomial.C a) ∧\\n  \", \"doc\": \"Let $L/K$ be a finite field extension of degree $n = [L:K]$. Suppose that the base field $K$ contains a primitive $n$-th root of unity. Then the following statements are equivalent:\\\\n1. The extension \"}\n  {\"name\": \"isCyclic_of_isSplittingField_X_pow_sub_C\", \"module\": \"Mathlib/FieldTheory/KummerExtension\", \"type\": \"∀ {K : Type u} [inst : Field K] {n : ℕ},\\n  (primitiveRoots n K).Nonempty →\\n    ∀ {a : K},\\n      Irreducible (Polynomial.X ^ n - Polynomial.C a) →\\n        ∀ (L : Type u_1) [inst_1 : Field L] [inst_2 : Algebra K L]\\n          [Polynomial.IsSplittingField K L (Polynomial.X ^ n - Polynomial.C a)] [NeZero\", \"doc\": \"If $L/K$ is a splitting field of the polynomial $X^n - c$ for some $c \\\\in K$ and $n \\\\neq 0$, then the Galois group $\\\\mathrm{Gal}(L/K)$ is cyclic.\"}\n  {\"name\": \"isGalois_of_isSplittingField_X_pow_sub_C\", \"module\": \"Mathlib/FieldTheory/KummerExtension\", \"type\": \"∀ {K : Type u} [inst : Field K] {n : ℕ},\\n  (primitiveRoots n K).Nonempty →\\n    ∀ {a : K},\\n      Irreducible (Polynomial.X ^ n - Polynomial.C a) →\\n        ∀ (L : Type u_1) [inst_1 : Field L] [inst_2 : Algebra K L]\\n          [Polynomial.IsSplittingField K L (Polynomial.X ^ n - Polynomial.C a)], IsGalo\", \"doc\": \"If $L$ is a splitting field of the polynomial $X^k - c$ over $K$, then the field extension $L/K$ is Galois.\"}\n  {\"name\": \"FiniteField.instIsCyclicAlgEquivOfFinite\", \"module\": \"Mathlib/FieldTheory/Finite/Basic\", \"type\": \"∀ (K : Type u_4) (L : Type u_5) [Finite L] [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L], IsCyclic Gal(L/K)\", \"doc\": \"The Galois group $\\\\text{Gal}(L/K)$ of any finite field extension $L/K$ is a cyclic group. This means that when $L$ is a finite field and $K$ is a subfield of $L$, the group of field automorphisms of $\"}\n  {\"name\": \"GaloisField.instIsGaloisOfFinite\", \"module\": \"Mathlib/FieldTheory/Finite/GaloisField\", \"type\": \"∀ {K : Type u_2} {K' : Type u_3} [inst : Field K] [inst_1 : Field K'] [Finite K'] [inst_3 : Algebra K K'], IsGalois K K'\", \"doc\": \"For any fields $ K $ and $ K' $, if $ K' $ is a finite type and equipped with an algebra structure over $ K $, then the field extension $ K'/K $ is Galois. This means the extension is algebraic, norma\"}\n  {\"name\": \"Algebra.IsQuadraticExtension.isCyclic\", \"module\": \"Mathlib/FieldTheory/Galois/Basic\", \"type\": \"∀ (F : Type u_1) (K : Type u_2) [inst : Field F] [inst_1 : Field K] [inst_2 : Algebra F K]\\n  [Algebra.IsQuadraticExtension F K], IsCyclic Gal(K/F)\", \"doc\": \"For any quadratic field extension $ K/F $, the Galois group $ \\\\text{Gal}(K/F) $ is a cyclic group. This instance asserts that when $ K $ is a degree-2 extension of $ F $, its Galois group, which consi\"}\n  {\"name\": \"IsAbelianGalois.of_isCyclic\", \"module\": \"Mathlib/FieldTheory/Galois/Abelian\", \"type\": \"∀ (K : Type u_1) (L : Type u_2) [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] [IsGalois K L]\\n  [IsCyclic Gal(L/K)], IsAbelianGalois K L\", \"doc\": \"If the field extension $ L/K $ is Galois and its Galois group $ \\\\text{Gal}(L/K) $ is cyclic, then $ L/K $ is an abelian Galois extension.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-field and Kummer results do not give the characteristic-p Artin-Schreier presentation or polynomial dichotomy for arbitrary fields."
+  },
+  {
+   "tool": "grep",
+   "query": "ArtinSchreier|artin_schreier|artinSchreier",
+   "results": "{\"t\": \"2026-10-24T07:40:52Z\", \"tool\": \"grep\", \"query\": \"ArtinSchreier|artin_schreier|artinSchreier\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Kummer hypotheses require roots of unity and give multiplicative equations, finite-field hits assume finite base, and none states the arbitrary-field presentation and quotient dichotomy."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Artin Schreier polynomial X to p minus X minus a is irreducible or splits completely in characteristic p",
+   "results": "{\"t\": \"2026-10-24T07:40:52Z\", \"tool\": \"leansearch\", \"query\": \"Artin Schreier polynomial X to p minus X minus a is irreducible or splits completely in characteristic p\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"X_pow_sub_C_irreducible_of_prime\", \"X_pow_sub_C_irreducible_iff_of_prime\", \"X_pow_sub_C_irreducible_of_prime_pow\", \"Subfield.splits_bot\", \"GaloisField.splits_zmod_X_pow_sub_X\", \"Polynomial.Splits.degree_eq_one_of_irreducible\", \"instIsSplittingFieldZModGaloisFieldHSubPolynomialHPowNatX\", \"Polynomial.degree_eq_one_of_irreducible_of_splits\"], \"digest\": \"181b77f9c0c28eed\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Kummer hypotheses require roots of unity and give multiplicative equations, finite-field hits assume finite base, and none states the arbitrary-field presentation and quotient dichotomy."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsGalois, CharP",
+   "results": "{\"t\": \"2026-10-24T07:40:52Z\", \"tool\": \"loogle\", \"query\": \"IsGalois, CharP\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Kummer hypotheses require roots of unity and give multiplicative equations, finite-field hits assume finite base, and none states the arbitrary-field presentation and quotient dichotomy."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Artin Schreier presentation of a Galois extension of prime degree equal to characteristic and polynomial quotient dichotomy",
+   "results": "{\"t\": \"2026-10-24T07:40:53Z\", \"tool\": \"leanfinder\", \"query\": \"Artin Schreier presentation of a Galois extension of prime degree equal to characteristic and polynomial quotient dichotomy\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isCyclic_tfae\", \"GaloisField\", \"instIsSplittingFieldZModGaloisFieldHSubPolynomialHPowNatX\", \"FiniteField.Extension.frob\", \"IsGalois.tfae\", \"GaloisField.algEquivGaloisField\", \"FiniteField.Extension.exists_frob_pow_eq\", \"GaloisField.algEquivGaloisFieldOfFintype\"], \"digest\": \"30f32dd5e59f27de\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Kummer hypotheses require roots of unity and give multiplicative equations, finite-field hits assume finite base, and none states the arbitrary-field presentation and quotient dichotomy."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-epp-artin-schreier-degree-p",
+  "date": "2026-10-24",
+  "group": "Q152"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through the creation chain of lem-sfb-epp-essentially-finite-type-traits. Current latest direct-image proof (3) does not state this auxiliary algebra result. Weak Epp at each normalized branch over the perfect-residue algebraic preparation. Supporting Finite coefficient triple in Epp elimination. Source subargument: Tag 09F1, lemma-characteristic-p-case; conclusion used only in its finite separable totally ramified form, not the stronger Galois wording. Tag 09F1 opening paragraph: express the degree-p Galois extension by z^p-z=xi; field-only input Tag 09DY.",
+   "via": [
+    "lem-sfb-epp-artin-schreier-degree-p",
+    "lem-sfb-epp-finite-coefficient-triple",
+    "lem-sfb-epp-weak-perfect-residue",
+    "lem-sfb-epp-essentially-finite-type-traits",
+    "lem-sfb-raynaud-faltings-normalized-reduction",
+    "lem-sfb-group-model-potential-smooth-normalization",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-epp-artin-schreier-presentation",
+  "worker": "stage1",
+  "summary": "Q03 follows the explicit nilpotent-operator construction of Stacks 09DY, proves both quotient-algebra identifications, and expands the 09I7 translation-group argument. Reuses existing character independence, Galois fixed field, monic quotient basis, separable generation and splitting-field normality. One new Mathlib leaf: prime-order groups are cyclic. Statement unchanged.",
+  "blueprint": "Historical support to direct-image proof (3) along the existing creation chain; latest sk-thm-sf-ctf-stability-direct-images.proof.md (3) has no Epp/Artin-Schreier statement. Retain blueprint.from.node=null as the ancestor command reports; refine the field-only 09DY/09I7 subargument, without changing the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-de1d18a6b",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-de1d18a6b (reviewer sub-agent of L); spot-checked: I read the whole delivery: Stacks fields.tex 09I7 (section-Artin-Schreier) and 09DY (lemma-Artin-Schreier) with its proof, all 8 steps of the item, and the statement of every cited node. The item's statement is unchanged and this is its first split, not a re-split. Steps 1-4 follow the Stacks proof. Step 1 gets the order and fixed field from lem-weil-pbc-finite-galois-fixed-field and a generator from the new leaf. Step 2 uses Dedekind's independence of characters, since the coefficient of sigma^(p-1) in (sigma-1)^(p-1) is 1; it also uses N^p=0 and y in E. Step 3 builds z with sigma z=z+1; for p=2 the exponent p-2 is 0. Step 4 uses the monic basis, the p roots z+i and the dimension count. Steps 6-8 check out: the splitting-field node's hypotheses hold for L=E(b); the map tau -> tau(b)-b is an injective homomorphism into F_p; if b is not in E then |H|=p, and if b is in E the Lagrange interpolation map to E^p is an isomorphism. The 'exactly when' clause holds through the root list u=b+i, and the two cases cannot both occur because E^p has zero divisors. FIX: step 5 went from 'f has distinct roots' to 'm is separable' (coprime to its derivative) with no cited statement; the existing distinct-roots node only gives the other direction. Replaced by: f'=-1 and f=mg give m(-g')+m'(-g)=1. I added def-pc-separable-polynomial to the step's uses and to proof_deps. Small cases: over F_2, a=1 gives F_4 and a=0 gives F_2xF_2; over F_3, a=1 gives a degree-3 field; over an algebraically closed E only the product case occurs; over F_p(t), a=t gives a field. New node lem-sfb-prime-order-group-cyclic: self-contained and statement-only, an exact match of isCyclic_of_prime_card (Cyclic/Basic.lean:169-175, checked), three searches recorded. No duplicate exists (grep of dag/nodes) and it does not restate the item. Batch-5 check: lem-trf-simple-separable-field-extension is a pure field-theory Mathlib leaf (isSeparable_adjoin_simple_iff_isSeparable) with no proof_deps. It is not part of the trace formula, Poincare duality or their proofs, so it is accepted. Artin-Gabber route check: lem-per-monoid-characters-linear-independent is still in the DAG as a Mathlib leaf (linearIndependent_monoidHom) with no proof_deps. It is Dedekind's lemma (Stacks 0CKL), used at step 2 exactly as in the 09DY proof, and uses none of the forbidden inputs, so it is accepted. All cited statements are Mathlib leaves, so no tool_uses are needed. No nodes dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.ArtinSchreierPresentation",
+  "declaration": "ArtinSchreier.exists_generator_presentation",
+  "declarations": [
+   "ArtinSchreier.exists_generator_presentation",
+   "ArtinSchreier.quotient_field_or_product"
+  ],
+  "file": "lean/Sheaf/FieldTheory/ArtinSchreierPresentation.lean",
+  "statement": "theorem exists_generator_presentation (p : ℕ) (hp : p.Prime) (E : Type u) (F : Type v) [Field E] [Field F] [Algebra E F] [CharP E p] [CharP F p] [Normal E F] [Algebra.IsSeparable E F] (hdegree : Module.finrank E F = p) : ∃ (z : F) (a : E), z ∉ Set.range (algebraMap E F) ∧ z ^ p - z = algebraMap E F a ∧ Algebra.adjoin E ({z} : Set F) = ⊤ ∧ ∃ e : AdjoinRoot (X ^ p - X - C a) ≃ₐ[E] F, ∀ q : E[X], e (AdjoinRoot.mk (X ^ p - X - C a) q) = aeval z q",
+  "branch": "sheaf-dag",
+  "by": "Q14",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The two declarations render respectively the forward presentation and the converse dichotomy with its split-case equivalence. AdjoinRoot is the literal polynomial quotient with the recorded coefficient algebra structure; the forward equivalence is characterized as evaluation on every polynomial. The converse has only its own E, p, characteristic and a binders, independent of any degree-p extension."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c77e71ff0",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Read the node, the Stacks source (fields.tex 09I7/09DY), the 6 statement-dependency records (byte-identical to live; 4 Mathlib lean records, 2 mathlib_match only) and the module. Item changes only by its new lean record; lean.statement is verbatim the signature. Forward theorem has every node hypothesis (prime, CharP E/F, Normal, IsSeparable, finrank = p) and nothing stronger; its iso from AdjoinRoot is pinned to evaluation at z on every representative; adjoin = top gives F = E[z]. Converse has its own binders; field branch puts IsField.toField on the existing quotient ring and requires Normal, IsSeparable and finrank p; product branch is Fin p → E; the and/or grouping parses as intended; the 'exactly when' clause is a two-way iff with a = u^p - u. Edge cases p=2, a=0, F_p, algebraically closed base are covered; universes independent. No definitions, proofs are sorry, docstrings carry source/blueprint and all 8 proof steps, Mathlib imports only, no duplicate or name clash. No compile run since no file changed; the worker reports clean compiles. No findings."
+ }
+}

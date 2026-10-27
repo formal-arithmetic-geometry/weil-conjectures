@@ -1,0 +1,386 @@
+{
+ "id": "lem-per-complete-toric-face-strata",
+ "kind": "statement",
+ "title": "Regularity and codimension of face strata in complete toric models",
+ "statement": "Let $P$ be a sharp fine saturated additive commutative monoid [def-trf-fs-log-blowup], and let $n\\ge0$. For a nonzero local ring $L$ with maximal ideal $\\mathfrak m_L$ put\n$$B_L(P,n)=\\varprojlim_N L[P][t_1,\\ldots,t_n]/(\\mathfrak m_L,z^q\\ (q\\ne0),t_1,\\ldots,t_n)^N,$$\nusing adic completion [def-weil-pbc-adic-completion]; $L[P]$ is free over $L$ on $z^q$, with $z^qz^{q'}=z^{q+q'}$. Let $R$ be either $B_k(P,n)$ for a field $k$, or $B_C(P,n)/(\\theta)$ for a Cohen ring $C$ of residue characteristic a prime $p$, with uniformizer $p$ [def-weil-pbc-cohen-ring], where\n$$\\theta-p\\in(z^q\\ (q\\ne0),t_1,\\ldots,t_n)B_C(P,n).$$\nWrite $z^q$ also for the images in $R$. Let $\\mathfrak Q$ be any prime ideal of $R$, set $E=R_{\\mathfrak Q}$ [def-weil-pbc-localization-at-prime], and put\n$$F=\\{q\\in P:z^q\\notin\\mathfrak Q\\},\\qquad\nP_F=\\{q-f:q\\in P,\\ f\\in F\\}\\subseteq P^{\\rm gp},\\qquad T=P_F/F^{\\rm gp}.$$\nThe set $F$ is a face (a submonoid such that $a+b\\in F$ implies $a,b\\in F$), and $T$ is sharp fs. Put $J=(z^q:q\\in P\\setminus F)E$. Then $R$ and $E$ are nonzero Noetherian local rings [def-weil-pbc-noetherian-ring], $E/J$ is a regular local ring [def-weil-regular-scheme], and\n$$\\dim E=\\dim(E/J)+\\operatorname{rank}_{\\mathbf Z}T^{\\rm gp}.$$\nDimension and rank have the meanings of [def-trf-fs-log-blowup]. The assertions include $P=0$, $n=0$, $F=0$, $F=P$ and the zero prime $\\mathfrak Q$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Agent-formulated local algebra interface for the completed models of Expose VI 1.6(i)--(ii), printed p.70, in the generization argument of VI 1.3, printed p.69. The localization input referred to there is Kato 1994, 7.1 (WANTED, not read locally); VI does not provide its proof. The node is an unsplit algebraic statement, not a claim that a proof was read."
+ },
+ "stmt_deps": [
+  "def-trf-fs-log-blowup",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-cohen-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-trf-complete-toric-model"
+ ],
+ "proof": [
+  {
+   "text": "First treat any sharp fs monoid $H$ and either allowed complete model $A$ of $(H,n)$; we will apply this construction to $H=P$ and to its face $F$. The zero-variable case of [lem-weil-pbc-power-series-field-cohen-regular-complete] says that the coefficient field or Cohen ring $L$ is nonzero complete regular local, of dimension $0$ or $1$. The monoid $H\\oplus\\mathbf N^n$ is sharp fs, directly from the componentwise definitions, and its rank is $\\operatorname{rank}H^{\\rm gp}+n$. Its finite-sum ring is exactly $L[H][t]$, with exactly the completion ideal in this item. Apply [lem-trf-formal-monoid-ring-dimension] to this monoid and $D=L$. In the Cohen case the augmentation of $\\theta$ is $p\\in pL\\setminus p^2L$. Thus the completed ring before the hypersurface is Noetherian local, and\n$$\\dim A=\\operatorname{rank}H^{\\rm gp}+n.$$\nThe hypersurface quotient is nonzero local by [lem-weil-pbc-quotient-local-structure], and Noetherian because every ideal lifts to a finitely generated ideal upstairs. Its normal-domain property is [lem-trf-log-regular-saturation-normality].",
+   "uses": [
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "lem-trf-formal-monoid-ring-dimension",
+    "lem-weil-pbc-quotient-local-structure",
+    "lem-trf-log-regular-saturation-normality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6, p.70: completed models; agent algebra using the cited formal-dimension theorem."
+   }
+  },
+  {
+   "text": "The completion ideal before the hypersurface is finitely generated: use finite monoid generators, the variables and, over a Cohen ring, $p$. By [lem-weil-pbc-adic-completion-mod-ideal] its completion is complete for this extended ideal. By part (2) of the same lemma, the quotient by this extended ideal is $L[H][t_1,\\ldots,t_n]/(\\mathfrak m_L,z^h\\ (h\\ne0),t_1,\\ldots,t_n)=L/\\mathfrak m_L$, a field; so the extended ideal is maximal, and since the ring is local by Step 1 it is the maximal ideal, with residue field $L/\\mathfrak m_L$. For the hypersurface, [lem-weil-pbc-local-completion-quotient] identifies its completion with the same hypersurface of the completed ring, hence with $A$ itself. The residue of every $z^h$, $h\\ne0$, is zero. Consequently the chart $H\\to A$ has inverse image of the units equal to $\\{0\\}$. By [lem-per-complete-local-excellence], $A$ is excellent. Its universal catenarity and the openness of regularity for finite type $A$-algebras are precisely clauses of [def-exc-excellent-ring].",
+   "uses": [
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-local-completion-quotient",
+    "lem-per-complete-local-excellence",
+    "def-exc-excellent-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6, p.70; completion inputs: algebra.tex 05GG (lemma-hathat-finitely-generated) and completion exactness; excellence is a separately cited theorem."
+   }
+  },
+  {
+   "text": "The group $H^{\\rm gp}$ is torsion free: if $mg=0$ with $m>0$ and $g=h-h'$, then $mg=0\\in H$, so $g\\in H$ by saturation, likewise $-g\\in H$, and sharpness gives $g=0$. Hence $M_0=\\operatorname{Spec}_{\\rm mon}H$ is a fine torsion-free monoscheme with a finite affine cover. Apply [lem-trf-toric-normalized-desingularization] to the finite affine monoscheme $M_0=\\operatorname{Spec}_{\\rm mon}H$ over $\\mathbf Q$. Its specified tower has coherent torus-invariant centers and regular last realization. By [lem-trf-monoscheme-toric-tower-descent], this gives a finite saturated monoscheme blowup tower $M_\\bullet$ with smooth last monoscheme; this use of a rational realization is solely to obtain the combinatorial tower. Now realize THAT monoid tower over $\\mathbf Z$ and base change it to $A$, using [lem-per-integral-toric-tower-proper]. We obtain a proper finite type map $\\pi:Y\\to\\operatorname{Spec}A$ which is an isomorphism on the open $U$ where all chart monomials are invertible. This open is a principal open: invert the product of any finite set of monoid generators. The product is nonzero since $A$ is a domain. Every final affine chart has ring $A\\otimes_{\\mathbf Z[H]}\\mathbf Z[Q]$, with $H\\subseteq Q\\subseteq H^{\\rm gp}$ and $Q^{\\rm gp}=H^{\\rm gp}$.",
+   "uses": [
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-monoscheme-toric-tower-descent",
+    "lem-per-integral-toric-tower-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.2.19--3.2.20, p.106; integer realization uses VIII 3.2.17--3.2.18, p.105. Agent application to the formal model."
+   }
+  },
+  {
+   "text": "By [lem-trf-monoscheme-smooth-local-charts], refine the final monoid charts to their smallest point neighborhoods. Since $M_r$ is smooth, these section monoids have the form $Q\\cong\\mathbf N^a\\oplus\\mathbf Z^b$ by the smoothness definition [def-trf-monoscheme-toric-realization]. The refinement retains $Q\\subset H^{\\rm gp}$ and the group-completion isomorphism. Fix a point $y$ of $Y$ above the closed point of $\\operatorname{Spec}A$, choose such a chart, and write\n$$B=(A\\otimes_{\\mathbf Z[H]}\\mathbf Z[Q])_{\\mathfrak q},\\qquad V=\\{q:z^q\\in B^\\times\\},\\qquad T'=Q_V/V^{\\rm gp}.$$\nThe prime $\\mathfrak q$ contracts to the maximal ideal of $A$. For [lem-trf-formal-monoid-extension-model], take its base monoid $R=H$, its ring $A$ as here, $G=0$, $S=H$, its sharp chart the given chart, and its unit character identically $1$. Steps 1--2 verify every ring and completion hypothesis; no global log regularity is assumed by that lemma. It identifies $\\widehat B$ with $D[[T']]$ or $D[[T']]/(\\eta)$ for a nonzero complete regular local $D$, with $\\bar\\eta\\in\\mathfrak m_D\\setminus\\mathfrak m_D^2$.",
+   "uses": [
+    "lem-trf-monoscheme-smooth-local-charts",
+    "def-trf-monoscheme-toric-realization",
+    "lem-trf-formal-monoid-extension-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.15--3.1.16, pp.99--100; VI 1.6, p.70, through the independent formal monoid extension theorem."
+   }
+  },
+  {
+   "text": "In $Q=\\mathbf N^a\\oplus\\mathbf Z^b$, $V$ contains the group factor. It contains exactly the sums supported on those basis vectors $e_i$ it contains: if such a sum is a unit in a local ring, every factor is a unit, and the converse holds. Thus $T'\\cong\\mathbf N^s$ for the complementary coordinates. Put $K=D[[T']]$. By [lem-trf-formal-monoid-residue-domain] its maximal ideal is generated by $\\mathfrak m_D$ and the $s$ coordinate monomials; its hypotheses hold with the standard embedding $\\mathbf N^s\\subset\\mathbf Z^s$ and the sum-of-coordinates grading. As $D$ is regular, there are $d=\\dim D$ generators of $\\mathfrak m_D$. By [lem-trf-formal-monoid-ring-dimension], $\\dim K=d+s$, so these $d+s$ generators make $K$ regular by [def-weil-regular-scheme]. In the hypersurface case, the augmentation $K\\to D$ carries $\\mathfrak m_K^2$ into $\\mathfrak m_D^2$. Therefore $\\eta\\notin\\mathfrak m_K^2$, and [lem-weil-pbc-regular-local-hypersurface-criterion] makes $K/(\\eta)$ regular as well. Hence $\\widehat B$ is regular. The local ring $B$ is Noetherian (each tensor chart is generated over $A$ by a finite generating tuple of $Q$, so is finite type and Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian], and $B$ is its localization at a prime, Noetherian by [lem-weil-pbc-localization-noetherian]), so [lem-weil-pbc-completion-regular-local] makes $B$ regular. This proves regularity at every point above the closed base point.",
+   "uses": [
+    "lem-trf-formal-monoid-residue-domain",
+    "lem-trf-formal-monoid-ring-dimension",
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-regular-local-hypersurface-criterion",
+    "lem-weil-pbc-completion-regular-local",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6--1.7, p.70; elementary free-chart cotangent argument from the cited formal-ring theorems."
+   }
+  },
+  {
+   "text": "The regular locus of $Y$ is open: each of its finite type affine charts over excellent $A$ has open regular locus by [def-exc-excellent-ring]. Their descriptions agree on overlaps because further prime localizations of a regular local ring are regular, by [lem-weil-pbc-regular-local-localization]. Let $Z$ be its closed complement. Since $\\pi$ is proper, $\\pi(Z)$ is closed by [def-weil-proper-morphism]. Step 5 says it omits the closed point of $\\operatorname{Spec}A$. A nonempty closed subset of a local spectrum contains its closed point (a proper ideal lies in the maximal ideal). Thus $\\pi(Z)$ is empty and $Y$ is regular. Its open $\\pi^{-1}U\\cong U$ is regular as well, since the local rings of an open subscheme are the same. We have therefore proved, for each of the two models and every sharp fs $H$, regularity of the open obtained by inverting all its chart monomials. This argument has used only the completed chart at the closed base point, not the generization assertion that the present item is meant to prove.",
+   "uses": [
+    "def-exc-excellent-ring",
+    "lem-weil-pbc-regular-local-localization",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent properness argument using VIII 3.2.17--3.2.20, pp.105--106 and VI 1.6, p.70; it replaces no unit-level route."
+   }
+  },
+  {
+   "text": "Return to the given $R,\\mathfrak Q$. The identity $z^{u+v}=z^uz^v$ and primality show that $F$ is a submonoid and that $u+v\\in F$ implies $u,v\\in F$. By [lem-trf-fs-face-sharpening], $T=P_F/F^{\\rm gp}$ is sharp fs and\n$$T^{\\rm gp}\\cong P^{\\rm gp}/F^{\\rm gp}.$$\nThis quotient is finite free, so\n$$\\operatorname{rank}T^{\\rm gp}=\\operatorname{rank}P^{\\rm gp}-\\operatorname{rank}F^{\\rm gp}.$$\nBy [lem-trf-complete-model-face-quotients], $\\mathfrak p_F=(z^q:q\\notin F)R$ is prime and $R/\\mathfrak p_F$ is the complete model of $(F,n)$ of the same type (in the Cohen case with the projected $\\theta_F$ satisfying the required congruence). Clearly $\\mathfrak p_F\\subseteq\\mathfrak Q$. The fraction map identifies\n$$E/J\\cong(R/\\mathfrak p_F)_{\\mathfrak Q/\\mathfrak p_F}.$$\nIndeed it sends $(r/s)\\bmod J$ to $\\bar r/\\bar s$; denominators are exactly the classes of elements outside $\\mathfrak Q$, and its kernel consists of fractions with numerator in $\\mathfrak p_F$.",
+   "uses": [
+    "lem-trf-fs-face-sharpening",
+    "lem-trf-complete-model-face-quotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.3 and 1.6, pp.69--70; VIII 3.1.1--3.1.5, pp.98--99, for the face operations."
+   }
+  },
+  {
+   "text": "The prime $\\mathfrak Q/\\mathfrak p_F$ of the face model contains none of its surviving monomials: for $f\\in F$, $z^f\\notin\\mathfrak Q$ by definition. Hence it is a point of the monomial-invertible open of that model. Steps 1--6, applied with $H=F$ and the projected Cohen equation when applicable, prove that this open is regular. Thus $E/J$ is regular local by [def-weil-regular-scheme]. Also $E$ is nonzero and local by its fraction construction at a proper prime: an element $r/s$ is invertible exactly when $r\\notin\\mathfrak Q$, and $1/1$ cannot be zero since that would put $1$ in $\\mathfrak Q$. Its Noetherianity follows from [lem-weil-pbc-localization-noetherian]. The corresponding properties of $R$ were proved in Step 1.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.3--1.6, pp.69--70; agent assembly of the regular monomial open and face quotient."
+   }
+  },
+  {
+   "text": "Finally $R$ is a catenary local domain by Steps 1--2 and [def-exc-excellent-ring]. In such a ring, saturated prime chains concatenate: a chain from $(0)$ to a prime $\\mathfrak a$ followed by one from $\\mathfrak a$ to the maximal ideal is saturated; catenarity makes its length $\\dim R$. Similarly for chains ending at $\\mathfrak Q$. Write $h(\\mathfrak a)=\\dim R_{\\mathfrak a}$, the maximum chain length from $(0)$ to $\\mathfrak a$. These chains have finite maximal lengths since $R$ is Noetherian local. Applying the concatenation first to $\\mathfrak p_F\\subset\\mathfrak m_R$ and then to $\\mathfrak p_F\\subset\\mathfrak Q$ gives\n$$h(\\mathfrak p_F)=\\dim R-\\dim(R/\\mathfrak p_F),\\qquad\n\\dim E= h(\\mathfrak p_F)+\\dim(E/J).$$\nStep 1 for $H=P$ and $H=F$ says the first difference is $(\\operatorname{rank}P^{\\rm gp}+n)-(\\operatorname{rank}F^{\\rm gp}+n)=\\operatorname{rank}T^{\\rm gp}$, by Step 7. Substitution proves the required equality. This uses only the definition of catenarity and the prime correspondences for localization and quotient, and treats zero-length chains in exactly the same way.",
+   "uses": [
+    "def-exc-excellent-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent prime-chain argument; Stacks algebra.tex Tag 00NI (definition-catenary) and Tag 00NL (definition-universally-catenary), read locally with their tag mapping."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-trf-formal-monoid-ring-dimension",
+  "lem-weil-pbc-quotient-local-structure",
+  "lem-trf-log-regular-saturation-normality",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-local-completion-quotient",
+  "lem-per-complete-local-excellence",
+  "def-exc-excellent-ring",
+  "lem-trf-toric-normalized-desingularization",
+  "lem-trf-monoscheme-toric-tower-descent",
+  "lem-per-integral-toric-tower-proper",
+  "lem-trf-monoscheme-smooth-local-charts",
+  "def-trf-monoscheme-toric-realization",
+  "lem-trf-formal-monoid-extension-model",
+  "lem-trf-formal-monoid-residue-domain",
+  "def-weil-regular-scheme",
+  "lem-weil-pbc-regular-local-hypersurface-criterion",
+  "lem-weil-pbc-completion-regular-local",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-regular-local-localization",
+  "def-weil-proper-morphism",
+  "lem-trf-fs-face-sharpening",
+  "lem-trf-complete-model-face-quotients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.3 and 1.6, pp.69--70; independent algebraic proof using VIII 3.2.17--3.2.20, pp.105--106, and cited DAG lemmas. Kato 1994, 7.1 is not read or invoked."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every prime localization of a complete toric monoid power series ring, including a mixed characteristic Cohen hypersurface, has a regular monomial stratum and dimension equal to stratum dimension plus characteristic monoid rank",
+   "results": "{\"t\": \"2026-10-24T02:47:19Z\", \"tool\": \"leanfinder\", \"query\": \"Every prime localization of a complete toric monoid power series ring, including a mixed characteristic Cohen hypersurface, has a regular monomial stratum and dimension equal to stratum dimension plus characteristic monoid rank\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.spanFinrank_le_spanFinrank_map_constantCoeff_add_one_of_isPrime\", \"RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway\", \"RingHom.isStandardSmoothOfRelativeDimension_localizationPreserves\", \"PowerSeries.spanFinrank_eq_spanFinrank_map_constantCoeff_of_X_notMem_of_fg_of_isPrime\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.localization_away\", \"Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\"], \"digest\": \"d7b7537795510892\"}; Read the hits: univariate power-series prime-generator bounds and localization of standard-smooth presentations do not prove the saturated-monoid face-stratum assertion, particularly the mixed-characteristic hypersurface case. MonoidAlgebra definitions/grading and IsRegular.monomial concern finite sums or nonzerodivisors, not regular local strata. Source grep found only IsSMulRegular for skew monoid algebras, a cancellation property. Loogle had no hits.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Regularity and codimension of monomial face strata in a completed saturated monoid algebra",
+   "results": "{\"t\": \"2026-10-24T02:47:16Z\", \"tool\": \"leansearch\", \"query\": \"Regularity and codimension of monomial face strata in a completed saturated monoid algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MonoidAlgebra\", \"IsRegular.monomial\", \"AddMonoidAlgebra.grade.gradedAlgebra\", \"AddMonoidAlgebra.gradeBy.gradedMonoid\", \"Subalgebra.saturation\", \"AddMonoidAlgebra.exists_finset_adjoin_eq_top\", \"MonoidAlgebra.isLocalHom_algebraMap\", \"MonoidAlgebra.inhabited\"], \"digest\": \"6c2230ec00106929\"}; Read the hits: univariate power-series prime-generator bounds and localization of standard-smooth presentations do not prove the saturated-monoid face-stratum assertion, particularly the mixed-characteristic hypersurface case. MonoidAlgebra definitions/grading and IsRegular.monomial concern finite sums or nonzerodivisors, not regular local strata. Source grep found only IsSMulRegular for skew monoid algebras, a cancellation property. Loogle had no hits.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidAlgebra\", \"IsRegularLocalRing\"",
+   "results": "{\"t\": \"2026-10-24T02:47:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"MonoidAlgebra\\\", \\\"IsRegularLocalRing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the hits: univariate power-series prime-generator bounds and localization of standard-smooth presentations do not prove the saturated-monoid face-stratum assertion, particularly the mixed-characteristic hypersurface case. MonoidAlgebra definitions/grading and IsRegular.monomial concern finite sums or nonzerodivisors, not regular local strata. Source grep found only IsSMulRegular for skew monoid algebras, a cancellation property. Loogle had no hits.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "MonoidAlgebra.*[Rr]egular|[Rr]egular.*MonoidAlgebra|monomial.*strat",
+   "results": "{\"t\": \"2026-10-24T02:47:16Z\", \"tool\": \"grep\", \"query\": \"MonoidAlgebra.*[Rr]egular|[Rr]egular.*MonoidAlgebra|monomial.*strat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/SkewMonoidAlgebra/Basic.lean\", \"Mathlib/Algebra/SkewMonoidAlgebra/Basic.lean\", \"Mathlib/Algebra/SkewMonoidAlgebra/Basic.lean\", \"Mathlib/Algebra/SkewMonoidAlgebra/Basic.lean\", \"Mathlib/Algebra/SkewMonoidAlgebra/Basic.lean\"], \"digest\": \"b4ad8f9136c4071b\"}; Read the hits: univariate power-series prime-generator bounds and localization of standard-smooth presentations do not prove the saturated-monoid face-stratum assertion, particularly the mixed-characteristic hypersurface case. MonoidAlgebra definitions/grading and IsRegular.monomial concern finite sums or nonzerodivisors, not regular local strata. Source grep found only IsSMulRegular for skew monoid algebras, a cancellation property. Loogle had no hits.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regularity and codimension of face strata in complete saturated toric monoid local rings and Cohen ring parameter hypersurfaces",
+   "results": "{\"t\": \"2026-10-24T03:17:23Z\", \"tool\": \"leanfinder\", \"query\": \"Regularity and codimension of face strata in complete saturated toric monoid local rings and Cohen ring parameter hypersurfaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Module.supportDim_add_length_eq_supportDim_of_isRegular\", \"Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal\"], \"digest\": \"9529417a13de77f6\"}; Read the hits: regular sequences give ordinary dimension drop; standard-smooth presentations and localization instances do not give face-stratum regularity in saturated completed monoid algebras. Loogle and the focused RingTheory grep found no match; the broad grep also returned unrelated combinatorics/historical strings.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegularLocalRing\", \"MonoidAlgebra\"",
+   "results": "{\"t\": \"2026-10-24T03:19:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsRegularLocalRing\\\", \\\"MonoidAlgebra\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the hits: regular sequences give ordinary dimension drop; standard-smooth presentations and localization instances do not give face-stratum regularity in saturated completed monoid algebras. Loogle and the focused RingTheory grep found no match; the broad grep also returned unrelated combinatorics/historical strings.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "toric|face.strat|MonoidAlgebra.*[Rr]egular|[Rr]egular.*MonoidAlgebra",
+   "results": "{\"t\": \"2026-10-24T03:21:17Z\", \"tool\": \"grep\", \"query\": \"toric|face.strat|MonoidAlgebra.*[Rr]egular|[Rr]egular.*MonoidAlgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/MaricaSchoenheim.lean\", \"Mathlib/Topology/CWComplex/Classical/Graph.lean\", \"Mathlib/Topology/CWComplex/Classical/Basic.lean\", \"Mathlib/NumberTheory/FrobeniusNumber.lean\", \"Mathlib/NumberTheory/ClassNumber/AdmissibleAbsoluteValue.lean\", \"Mathlib/LinearAlgebra/Reflection.lean\", \"Mathlib/LinearAlgebra/Matrix/Irreducible/Defs.lean\", \"Mathlib/LinearAlgebra/Matrix/Irreducible/Defs.lean\"], \"digest\": \"bb42c9efb65292d5\"}; Read the hits: regular sequences give ordinary dimension drop; standard-smooth presentations and localization instances do not give face-stratum regularity in saturated completed monoid algebras. Loogle and the focused RingTheory grep found no match; the broad grep also returned unrelated combinatorics/historical strings.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Complete fine saturated monoid algebra localized at a prime has regular face stratum of codimension the rank of the sharp localized monoid",
+   "results": "{\"t\": \"2026-10-24T03:21:17Z\", \"tool\": \"leansearch\", \"query\": \"Complete fine saturated monoid algebra localized at a prime has regular face stratum of codimension the rank of the sharp localized monoid\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsLocalizationAlgebraMapSubmonoidPrimeComplLocalization\", \"IsLocalization.instAlgebraAtPrimeLocalization\", \"instIsTorsionFreeLocalizationAlgebraMapSubmonoidPrimeCompl\", \"IsLocalization.isRegular_mk'\", \"Algebra.EssFiniteType.isLocalization\", \"AlgebraicGeometry.StructureSheaf.Localizations\", \"AlgebraicGeometry.StructureSheaf.instAtPrimeLocalizationsValCarrierTopMemOpensAsIdeal\", \"instAlgebraAtPrimeFractionRing\"], \"digest\": \"f98182d6e094751c\"}; Read the hits: regular sequences give ordinary dimension drop; standard-smooth presentations and localization instances do not give face-stratum regularity in saturated completed monoid algebras. Loogle and the focused RingTheory grep found no match; the broad grep also returned unrelated combinatorics/historical strings.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "MonoidAlgebra.*[Rr]egular|[Rr]egular.*MonoidAlgebra|face.strat",
+   "results": "{\"t\": \"2026-10-24T03:21:59Z\", \"tool\": \"grep\", \"query\": \"MonoidAlgebra.*[Rr]egular|[Rr]egular.*MonoidAlgebra|face.strat\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the hits: regular sequences give ordinary dimension drop; standard-smooth presentations and localization instances do not give face-stratum regularity in saturated completed monoid algebras. Loogle and the focused RingTheory grep found no match; the broad grep also returned unrelated combinatorics/historical strings.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-log-regular-generization",
+  "date": "2026-10-24",
+  "group": "Q71"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor lem-per-artin-gabber-affine-curve, proof Step 3 (regular local model and purity), through the strict-local log-regularity condition in VI 3.7(c) used by lem-per-pointwise-diagonal-kummer-neighbourhood; pointwise-to-local-spectrum promotion in VI 1.3. Agent-formulated local algebra interface for the completed models of Expose VI 1.6(i)--(ii), printed p.70, in the generization argument of VI 1.3, printed p.69. The localization input referred to there is Kato 1994, 7.1 (WANTED, not read locally); VI does not provide its proof. The node is an unsplit algebraic statement, not a claim that a proof was read.",
+   "via": [
+    "lem-per-log-regular-generization",
+    "lem-per-pointwise-diagonal-kummer-neighbourhood",
+    "lem-per-very-tame-locus-open",
+    "lem-per-abelian-inert-rigidification-cover",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-complete-toric-face-strata",
+  "worker": "stage1",
+  "summary": "Kept every statement clause and supplied an independent proof. Complete model dimensions and normality come from existing nodes; a generic integer toric-tower properness input permits the closed-fibre regularity argument using the existing formal monoid extension theorem. Face quotients then give regularity and elementary catenary chain arithmetic gives codimension. No generization or log-regularity theorem is assumed. One new statement-only generic toric-realization node; no Mathlib matches.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve, Step 3 regular local model and purity, through the existing VI 3.7(c) strict-local condition and VI 1.3 generization; VI 1.6 complete toric models are made explicit without changing chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "why": "Generic power series over a field or a cohen ring: complete regular local domain used with its stated hypotheses in the local algebra argument; this unit has no alternative statement of that tool. No Fourier or perverse unit step is replaced."
+   },
+   {
+    "node": "lem-trf-formal-monoid-ring-dimension",
+    "why": "Generic dimension of a formal monoid ring and a parameter hypersurface used with its stated hypotheses in the local algebra argument; this unit has no alternative statement of that tool. No Fourier or perverse unit step is replaced."
+   },
+   {
+    "node": "lem-trf-log-regular-saturation-normality",
+    "why": "Generic normality of complete saturated monoid local models used with its stated hypotheses in the local algebra argument; this unit has no alternative statement of that tool. No Fourier or perverse unit step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-quotient",
+    "why": "Generic completion of a quotient of a noetherian local ring used with its stated hypotheses in the local algebra argument; this unit has no alternative statement of that tool. No Fourier or perverse unit step is replaced."
+   },
+   {
+    "node": "def-exc-excellent-ring",
+    "why": "Generic excellent and quasi-excellent commutative rings used with its stated hypotheses in the local algebra argument; this unit has no alternative statement of that tool. No Fourier or perverse unit step is replaced."
+   },
+   {
+    "node": "lem-trf-toric-normalized-desingularization",
+    "why": "Generic smooth-functorial normalized toric desingularization over the rationals used with its stated hypotheses in the local algebra argument; this unit has no alternative statement of that tool. No Fourier or perverse unit step is replaced."
+   },
+   {
+    "node": "lem-trf-monoscheme-toric-tower-descent",
+    "why": "Generic unique centerwise descent of a finite equivariant toric tower to monoschemes used with its stated hypotheses in the local algebra argument; this unit has no alternative statement of that tool. No Fourier or perverse unit step is replaced."
+   },
+   {
+    "node": "lem-trf-monoscheme-smooth-local-charts",
+    "why": "Generic smallest affine neighborhoods and smooth monoscheme product charts used with its stated hypotheses in the local algebra argument; this unit has no alternative statement of that tool. No Fourier or perverse unit step is replaced."
+   },
+   {
+    "node": "def-trf-monoscheme-toric-realization",
+    "why": "Generic fine monoschemes, toric realization and normalized toric towers used with its stated hypotheses in the local algebra argument; this unit has no alternative statement of that tool. No Fourier or perverse unit step is replaced."
+   },
+   {
+    "node": "lem-trf-formal-monoid-extension-model",
+    "why": "Generic formal models after a group-isomorphism monoid extension used with its stated hypotheses in the local algebra argument; this unit has no alternative statement of that tool. No Fourier or perverse unit step is replaced."
+   },
+   {
+    "node": "lem-trf-formal-monoid-residue-domain",
+    "why": "Generic constant coefficients, locality, and domain property of a completed positive monoid algebra used with its stated hypotheses in the local algebra argument; this unit has no alternative statement of that tool. No Fourier or perverse unit step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-hypersurface-criterion",
+    "why": "Generic a non-square element cuts a regular local hypersurface used with its stated hypotheses in the local algebra argument; this unit has no alternative statement of that tool. No Fourier or perverse unit step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-completion-regular-local",
+    "why": "Generic a noetherian local ring is regular iff its completion is used with its stated hypotheses in the local algebra argument; this unit has no alternative statement of that tool. No Fourier or perverse unit step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-localization",
+    "why": "Generic a localization of a regular local ring at a prime is a regular local ring used with its stated hypotheses in the local algebra argument; this unit has no alternative statement of that tool. No Fourier or perverse unit step is replaced."
+   },
+   {
+    "node": "lem-trf-fs-face-sharpening",
+    "why": "Generic localization at a face and sharpening of an fs monoid used with its stated hypotheses in the local algebra argument; this unit has no alternative statement of that tool. No Fourier or perverse unit step is replaced."
+   },
+   {
+    "node": "lem-trf-complete-model-face-quotients",
+    "why": "Generic face projections and prime quotients of complete monoid models used with its stated hypotheses in the local algebra argument; this unit has no alternative statement of that tool. No Fourier or perverse unit step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-trf-formal-monoid-ring-dimension",
+  "lem-trf-log-regular-saturation-normality",
+  "lem-weil-pbc-local-completion-quotient",
+  "def-exc-excellent-ring",
+  "lem-trf-toric-normalized-desingularization",
+  "lem-trf-monoscheme-toric-tower-descent",
+  "lem-trf-monoscheme-smooth-local-charts",
+  "def-trf-monoscheme-toric-realization",
+  "lem-trf-formal-monoid-extension-model",
+  "lem-trf-formal-monoid-residue-domain",
+  "lem-weil-pbc-regular-local-hypersurface-criterion",
+  "lem-weil-pbc-completion-regular-local",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-trf-fs-face-sharpening",
+  "lem-trf-complete-model-face-quotients"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-O1-dfc7087f8",
+  "group": "O1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-dfc7087f8 (reviewer sub-agent of L); spot-checked: Read in full: the item (9 steps, statement unchanged from the base), the new node lem-per-integral-toric-tower-proper, and the statements of all 25 cited nodes. Sources checked: ILO VI 1.2-1.8 (pp.69-70; VI 1.6(i)/(ii) gives exactly the k[[P]][[t]] and C(k)[[P]][[t]]/(f), f≡p models) and VIII 3.2.9 and 3.2.17-3.2.20 (pp.104-106). The proof avoids Kato 7.1 generization. It realizes the monoid desingularization tower over Z and base-changes it to A (new node), proves regularity at points over the closed point via formal-monoid-extension-model (G=0, S=H, ε=1), spreads regularity to the whole monomial open by J-2 openness plus the closed image of a proper map, then concludes with face quotients and a catenary chain count. I checked the steps and small cases (k[[x]], C[[x]]/(p-x), the A1 cone, F=0, F=P, P=0, n=0); the dimension and regularity claims hold. The new node is true: the blowup over Z[P] is projective, saturation is finite, properness is stable under base change, and each stage is an iso after inverting α(P). It is self-contained, statement only, and not a duplicate (the trf chart nodes work over a field only; coherent-log-ideal-chart-construction does not state properness). Three repairs in fixes/: (1) C4, step 2: local-completion-local-ring was cited for the non-local ring L[H][t]; replaced by adic-completion-mod-ideal (2) (B/aB≅L/m_L, a field) plus locality from Step 1, and the cite was dropped. (2) E1 minor, step 3: added the torsion-freeness of H^gp (sharp + saturated), which the desingularization and descent nodes require. (3) C1, step 5: added lem-weil-pbc-localization-noetherian for the Noetherianity of B. Batch 5: all 13 flagged citations are generic commutative algebra or toric geometry, not steps of the trace formula or Poincaré duality. BFS from the nt-target nodes (stopping at the nt-assume leaves, item excluded) already reaches every one of them. Their own closures contain no thm-trf, trace transport or nt-assume node; the one sec-poincare-duality node they meet, lem-pod-separated-finite-type-base-change, is generic. Accepted. Artin-Gabber route: lem-per-complete-local-excellence is pure algebra (complete local ⇒ excellent) and is used only for J-2 and universal catenarity in Step 2. Neither it nor the item is reached from lem-per-artin-gabber-affine-curve, the node is already in the target closure, and no forbidden tool is used. Accepted. No SGA source, no cycle, and the tool_uses are complete. Maintainer note: blueprint.from.via on the item and the new node still lists the stale artin-gabber Step-3 chain.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CompleteToricFaceStrata",
+  "declaration": "ToricMonoid.complete_toric_face_strata",
+  "file": "lean/Sheaf/RingTheory/CompleteToricFaceStrata.lean",
+  "statement": "theorem complete_toric_face_strata (P : Type u) [AddCommMonoid P] (hfs : AlgebraicGeometry.IsFineSaturatedMonoid (Multiplicative P)) (hsharp : ∀ a b : P, a + b = 0 → a = 0 ∧ b = 0) (n : ℕ) (R : Type w) [CommRing R] (z : P → R) (hmodel : IsCompleteModel.{u, v, w} P n R z) (Q : Ideal R) [Q.IsPrime] : Nontrivial R ∧ IsNoetherianRing R ∧ IsLocalRing R ∧ Nontrivial (Localization.AtPrime Q) ∧ IsNoetherianRing (Localization.AtPrime Q) ∧ IsLocalRing (Localization.AtPrime Q) ∧ ∃ F : Submonoid (Multiplicative P), (∀ q : P, Multiplicative.ofAdd q ∈ F ↔ z q ∉ Q) ∧ (∀ a b : Multiplicative P, a * b ∈ F → a ∈ F ∧ b ∈ F) ∧ AlgebraicGeometry.IsFineSaturatedMonoid (Associates (Algebra.faceLocalization (Multiplicative P) F)) ∧ (∀ t : Associates (Algebra.faceLocalization (Multiplicative P) F), IsUnit t → t = 1) ∧ ∃ J : Ideal (Localization.AtPrime Q), J = Ideal.span {x | ∃ q : P, Multiplicative.ofAdd q ∉ F ∧ x = algebraMap R (Localization.AtPrime Q) (z q)} ∧ IsRegularLocalRing (Localization.AtPrime Q ⧸ J) ∧ ringKrullDim (Localization.AtPrime Q) = ringKrullDim (Localization.AtPrime Q ⧸ J) + (Cardinal.toENat (Module.rank ℚ (TensorProduct ℤ ℚ (Additive (Algebra.GrothendieckGroup (Associates (Algebra.faceLocalization (Multiplicative P) F)))))) : WithBot ℕ∞)",
+  "branch": "newtargets-dag",
+  "by": "Q40",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fd67bfc1b",
+  "group": "Q40",
+  "result": "pass",
+  "note": "Read the item, all 7 stmt_deps and their Lean records (IsFineSaturatedMonoid, IsCompleteModel/Complete/monomial/completedChartIdeal, IsCohenRing, Localization.AtPrime, IsRegularLocalRing, IsNoetherianRing), and faceLocalization/face_sharpening. Clause-by-clause match: sharp fs P, both complete models with the theta-p congruence, F pinned by iff plus the face implication, T = Associates(face localization) = P_F/F^gp by face_sharpening, J pinned by span equality, R and E nonzero Noetherian local, E/J regular local, ringKrullDim formula with the fs-log-blowup Q-rank convention. Universes u,v,w independent and bound. The only node change besides lean is stmt_deps gaining the landed def-trf-complete-toric-model, which brief l.177 allows. lean.statement verbatim. Edge cases P=0, n=0, F=0, F=P, zero prime, theta=p all hold. Docstrings carry the source, blueprint tag and 9 steps; only the theorem is sorry; imports resolve; report sections present. No findings; no compile (no file changed)."
+ }
+}

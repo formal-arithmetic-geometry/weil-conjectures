@@ -1,0 +1,308 @@
+{
+ "id": "lem-pur-ordinary-unit-exchange-naturality",
+ "kind": "statement",
+ "title": "Exchange naturality of ordinary finite-twist units",
+ "statement": "Fix the finite datum $k,\\ell,E,n,A=A_{E,n}$ of [def-pur-conventions] and the signed finite twists of [def-coefficient-twists-detailed, lem-asd-etale-finite-twist-pullback]. Let $v:X'\\to X$ be any morphism of $k$-schemes, $p:\\mathbf A^1_X\\to X$, $p':\\mathbf A^1_{X'}\\to X'$ the projections [def-sbc-affine-space], and $w=\\mathbf A^1_v$. For either topology use the derived adjunctions and ordinary cohomology of [def-weil-pbc-inverse-image, def-weil-pbc-direct-image, def-weil-pbc-proetale-operations, def-weil-pbc-sites-and-cohomology]. For $L=A(r)_X$, $r\\in\\mathbf Z$, write $\\theta:p'^*v^*\\cong w^*p^*$ for the inverse-image square identification, and $\\beta:v^*Rp_*\\to Rp'_*w^*$ for its counit-transpose exchange (on the etale site this is [sbc-def-base-change-map] on the exchanged square). Then\n$$Rp'_*(\\theta_L^{-1})\\circ\\beta_{p^*L}\\circ v^*(\\eta_{p,L})=\\eta_{p',v^*L}.$$\nFor the etale-origin coefficients on the pro-etale site, the canonical pullback comparison [lem-weil-pbc-comparison-pullback] and the canonical counit mate [lem-weil-pbc-comparison-direct-image-canonical-mate] identify this equation and the named exchange maps with their etale counterparts. If the two units in the equation are isomorphisms, the exchange component $\\beta_{p^*L}$ is an isomorphism. The ordinary pullback maps satisfy\n$$(\\mathbf A^1_v)^*p^*=p'^*v^*,$$\nand for every finite coefficient morphism $u$ between the specified twists, including changes of finite level and quotient maps,\n$$p^*\\circ H^q(u)=H^q(p^*u)\\circ p^*.$$\nThese equations hold for all $q\\in\\mathbf Z$, are identified by the canonical site comparisons, and imply the corresponding equations for inverses whenever the pullback maps are invertible. No invertibility of the units or exchange is assumed in the unconditional equations, and there is no flatness requirement on $u$.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints, for the counit-mate normalization; agent site and finite-coefficient refinement of blueprint Base change on Y. The complete transpose cancellation and comparison identification of retained step 8 are in report.md."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-sbc-affine-space",
+  "sbc-def-base-change-map",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "def-coefficient-twists-detailed",
+  "lem-asd-etale-finite-twist-pullback",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Use the canonical signed-twist pullbacks of [lem-asd-etale-finite-twist-pullback]. The projection square is cartesian by [def-sbc-affine-space]. On an affine open $\\operatorname{Spec}R\\subset X$ its projection is $\\operatorname{Spec}R[t]\\to\\operatorname{Spec}R$, so it is affine; [lem-weil-pbc-affine-morphism-permanence] makes $p$ and its base change $p'$ qcqs. No condition on $v$ is needed. All coefficients used below are sheaves in degree zero, so the bounded-below hypotheses in the site-comparison statements hold.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback",
+    "def-sbc-affine-space",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/sk-prop-a1-kummer.proof.md",
+    "place": "Base change on Y: specify the square, coefficient objects and qcqs hypotheses."
+   }
+  },
+  {
+   "text": "In either topology apply [lem-pur-mate-unit-compatibility] with $(L_1,R_1)=(p^*,Rp_*)$, $(L_2,R_2)=(p'^*,Rp'_*)$, $G=v^*$, $H=w^*$ and $\\alpha=\\theta$. Its right mate is the specified $\\beta$: [def-weil-pbc-adjunction-mate] gives transpose $w^*\\varepsilon_p\\circ\\theta_{Rp_*}$, precisely the inverse-image description in [sbc-def-base-change-map] on the exchanged etale square; the pro-etale exchange is defined by that same transpose. The cited unit equation is $\\beta_{p^*L}v^*\\eta_{p,L}=Rp'_*(\\theta_L)\\eta_{p',v^*L}$. Compose with $Rp'_*(\\theta_L^{-1})$; functoriality cancels $\\theta_L^{-1}\\theta_L$ and gives the required equation. This argument uses no invertibility of either unit or of $\\beta$.",
+   "uses": [
+    "lem-pur-mate-unit-compatibility",
+    "def-weil-pbc-adjunction-mate",
+    "sbc-def-base-change-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/sk-prop-a1-kummer.proof.md",
+    "place": "Base change on Y: compatibility of exchange with the units; right-mate normalization of Stacks Tag 0B65 (categories.tex, lemma-transformation-between-functors-and-adjoints)."
+   }
+  },
+  {
+   "text": "Write $C_T=\\nu_T^*$ and $a_u:C_Uu_e^*\\cong u_p^*C_V$ for [lem-weil-pbc-comparison-pullback]. For $u=p,p'$, [lem-weil-pbc-comparison-direct-image-canonical-mate] defines $b_u:C_VRu_{e,*}\\to Ru_{p,*}C_U$ as the right mate of $a_u^{-1}$. Apply [lem-pur-mate-unit-compatibility] to this square and cancel $Ru_{p,*}(a_{u,M}^{-1})$: this gives $\\eta^p_{u,C_VM}=Ru_{p,*}(a_{u,M})\\,b_{u,u_e^*M}\\,C_V(\\eta^e_{u,M})$. Thus these are the named units under comparison. Apply [lem-weil-pbc-transport-identifies-exchange] with $(f,f',g,g')=(p,p',v,w)$ and input $p_e^*L$. Its hypotheses hold by step 1; its $S,T$ identify the named etale and pro-etale exchange components. The square coherence in [lem-weil-pbc-comparison-pullback] identifies $\\theta$ and $\\theta^{-1}$. Substituting these unit, exchange and square identifications in step 2 identifies its entire equation on the two sites. No comparison for $Rv_*$ or $Rw_*$ is invoked.",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-pur-mate-unit-compatibility",
+    "lem-weil-pbc-transport-identifies-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/sk-prop-a1-kummer.proof.md",
+    "place": "Base change on Y: canonical site transport; compare main-20261015 lem-weil-pbc-transport-identifies-exchange.proof.md and Stacks Tag 0B65."
+   }
+  },
+  {
+   "text": "Use [lem-pe-left-module-derived-evaluation-forget] to identify module-derived sections with ordinary abelian-sheaf cohomology, compatibly with geometric pullback. Apply the composition clause (4) of [lem-weil-pbc-site-cohomology-pullback] to the geometric site morphisms for $(p,w)$ and $(v,p')$, evaluating at the final object. Since $p\\circ w=v\\circ p'$, it gives $w^*p^*=p'^*v^*$ after the canonical inverse-image square identification, in each topology, for $q\\ge0$. For a finite coefficient morphism $u:L\\to L'$ use clause (2), applied to the underlying abelian sheaves, to get $p^*H^q(u)=H^q(p^*u)p^*$. Changes of level and quotient maps are such sheaf morphisms; the canonical twist pullbacks in step 1 identify their pulled-back coefficients. This applies a cohomology functor to a morphism, not an exactness assertion for tensoring with a quotient. Thus no flatness assumption on $u$ occurs. The units themselves are natural in any such fixed-ring sheaf morphism because a unit is a natural transformation.",
+   "uses": [
+    "lem-pe-left-module-derived-evaluation-forget",
+    "lem-weil-pbc-site-cohomology-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/sk-prop-a1-kummer.proof.md",
+    "place": "Base change on Y and Coefficients: ordinary pullback composition and coefficient naturality; Stacks Tags 01F8 (cohomology.tex, lemma-functoriality), 01FB (remark-explain-arrow), site form stated by the cited node."
+   }
+  },
+  {
+   "text": "The global comparison $c_T$ of [lem-weil-pbc-comparison-global-cohomology] is explicitly derived sections of the comparison unit followed by final-object evaluation. It is therefore the cohomological pullback along $\\nu_T$ of [lem-weil-pbc-site-cohomology-pullback]. Apply its composition clause to the two paths around the comparison square for any scheme morphism $u:U\\to V$. Using $a_u$ from [lem-weil-pbc-comparison-pullback], the result is $c_Uu_e^*=H^q(a_u^{-1})u_p^*c_V$. Its coefficient naturality clause also gives $c_TH^q(h)=H^q(\\nu_T^*h)c_T$ for every coefficient map $h$. These two equations identify all the ordinary equations in step 4 across the sites. For coefficients at different finite levels one can regard both as modules over a common $\\mathbf Z/\\ell^N$ annihilating them; their maps are linear there, so this is still the natural finite-ring comparison. For $q<0$, a sheaf has an injective resolution concentrated in nonnegative degrees in [def-weil-pbc-sites-and-cohomology]; its sections complex has no negative terms. Thus its negative cohomology is zero and the equations hold uniquely as equations of zero-group maps.",
+   "uses": [
+    "lem-weil-pbc-comparison-global-cohomology",
+    "lem-weil-pbc-site-cohomology-pullback",
+    "lem-weil-pbc-comparison-pullback",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/sk-prop-a1-kummer.proof.md",
+    "place": "Base change on Y and Coefficients: identify ordinary equations using the comparison unit, final-object evaluation and pullback composition."
+   }
+  },
+  {
+   "text": "If the two units are invertible, step 2 rewrites the exchange component as $\\beta_{p^*L}=Rp'_*(\\theta_L)\\eta_{p',v^*L}(v^*\\eta_{p,L})^{-1}$, a composite of isomorphisms. Finally, a commuting square $bP=P'a$ with $P,P'$ invertible gives $P'^{-1}b=aP^{-1}$ by multiplying on the left and right by their inverses. Apply this to each pullback naturality square and to its site comparison. This proves the asserted inverse equations under exactly their stated conditional hypotheses. Identity base maps, zero coefficient maps and empty schemes require no change in these formal equations.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/sk-prop-a1-kummer.proof.md",
+    "place": "Base change on Y: conditional invertibility and inverse naturality, elementary cancellation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-etale-finite-twist-pullback",
+  "def-sbc-affine-space",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-pur-mate-unit-compatibility",
+  "def-weil-pbc-adjunction-mate",
+  "sbc-def-base-change-map",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-transport-identifies-exchange",
+  "lem-pe-left-module-derived-evaluation-forget",
+  "lem-weil-pbc-site-cohomology-pullback",
+  "lem-weil-pbc-comparison-global-cohomology",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/sk-prop-a1-kummer.proof.md",
+  "place": "Base change on Y and Coefficients paragraphs, expanded using existing categorical-mate and site-cohomology statements; no smooth base-change invertibility input."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a cartesian square of schemes the derived base change exchange mate composed with the pulled back adjunction unit equals the new unit and respects etale pro etale finite coefficient comparison",
+   "results": "{\"t\": \"2026-10-22T06:12:21Z\", \"tool\": \"leanfinder\", \"query\": \"For a cartesian square of schemes the derived base change exchange mate composed with the pulled back adjunction unit equals the new unit and respects etale pro etale finite coefficient comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"AlgebraicGeometry.pullbackSpecIso_hom_base\", \"CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"CategoryTheory.ExponentiableMorphism.ev_coev\", \"CategoryTheory.ExponentiableMorphism.unit_pushforwardId_hom\", \"CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc\", \"AlgebraicGeometry.pullbackSpecIso_hom_fst'\"], \"digest\": \"991a7a3c9602983e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this finite etale/pro-etale geometric and canonical-map assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of ordinary finite twist derived units under arbitrary base change and coefficient maps with canonical comparison between etale and pro etale sites",
+   "results": "{\"t\": \"2026-10-22T06:12:52Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality of ordinary finite twist derived units under arbitrary base change and coefficient maps with canonical comparison between etale and pro etale sites\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.Compatibility.τ₁_hom_app\", \"AlgebraicTopology.DoldKan.Compatibility.υ_hom_app\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\", \"LightCondMod.hom_naturality_apply\", \"StandardEtalePair.homEquiv_apply_coe\"], \"digest\": \"23e5e9588e725512\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this finite etale/pro-etale geometric and canonical-map assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a cartesian square of schemes the derived base change exchange mate composed with the pulled back adjunction unit equals the new unit and respects etale pro etale finite coefficient comparison",
+   "results": "{\"t\": \"2026-10-22T06:12:53Z\", \"tool\": \"leansearch\", \"query\": \"For a cartesian square of schemes the derived base change exchange mate composed with the pulled back adjunction unit equals the new unit and respects etale pro etale finite coefficient comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived_unit\", \"CategoryTheory.Adjunction.derivedη.congr_simp\", \"CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategoryFst_mapPullbackAdj_unit_app\", \"CategoryTheory.Adjunction.derivedη\", \"CategoryTheory.Adjunction.derivedη_fac_app\", \"CategoryTheory.Adjunction.derivedη_fac_app_assoc\", \"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.unit_mateEquiv\"], \"digest\": \"8a2e8c825eee96ac\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this finite etale/pro-etale geometric and canonical-map assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"unit\", \"naturality\"",
+   "results": "{\"t\": \"2026-10-22T06:12:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"Adjunction\\\", \\\"unit\\\", \\\"naturality\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.counit_naturality\", \"CategoryTheory.Adjunction.unit_naturality\", \"CategoryTheory.Adjunction.counit_naturality_assoc\", \"CategoryTheory.Adjunction.unit_naturality_assoc\"], \"digest\": \"7c1cb4a86baaf971\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this finite etale/pro-etale geometric and canonical-map assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "unit_mateEquiv|baseChange.*unit|unit.*baseChange",
+   "results": "{\"t\": \"2026-10-22T06:12:54Z\", \"tool\": \"grep\", \"query\": \"unit_mateEquiv|baseChange.*unit|unit.*baseChange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/RingTheory/Extension/Presentation/Submersive.lean\"], \"digest\": \"81cbc568204ff085\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this finite etale/pro-etale geometric and canonical-map assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "unit_mateEquiv|baseChange.*unit|unit.*baseChange",
+   "results": "{\"t\": \"2026-10-22T11:19:14Z\", \"tool\": \"grep\", \"query\": \"unit_mateEquiv|baseChange.*unit|unit.*baseChange\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\"], \"digest\": \"3b1131e2e59e6fde\"}",
+   "date": "2026-10-22",
+   "verdict": "partial match: CategoryTheory.unit_mateEquiv at Mathlib/CategoryTheory/Adjunction/Mates.lean:136 supplies only the generic unit equation, already reused through lem-pur-mate-unit-compatibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"unit\", \"naturality\"",
+   "results": "{\"t\": \"2026-10-22T11:19:14Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, \\\"unit\\\", \\\"naturality\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.counit_naturality\", \"CategoryTheory.Adjunction.unit_naturality\", \"CategoryTheory.Adjunction.counit_naturality_assoc\", \"CategoryTheory.Adjunction.unit_naturality_assoc\"], \"digest\": \"7c1cb4a86baaf971\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical or sheaf-module hits do not supply the complete finite etale/pro-etale exchange and ordinary-cohomology assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of derived affine line units and ordinary cohomology pullback with finite coefficient maps and etale pro etale comparison",
+   "results": "{\"t\": \"2026-10-22T11:19:14Z\", \"tool\": \"leansearch\", \"query\": \"Naturality of derived affine line units and ordinary cohomology pullback with finite coefficient maps and etale pro etale comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"SheafOfModules.unitHomEquiv_symm_comp\", \"CategoryTheory.Adjunction.derivedη.congr_simp\", \"CategoryTheory.Adjunction.derivedη\", \"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"CategoryTheory.toSheafify_naturality\", \"CategoryTheory.Adjunction.derivedη_fac_app_assoc\"], \"digest\": \"b7e8388781589f65\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical or sheaf-module hits do not supply the complete finite etale/pro-etale exchange and ordinary-cohomology assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change exchange mate composed with the pullback of an adjunction unit equals the base changed unit for finite etale and pro etale sheaves",
+   "results": "{\"t\": \"2026-10-22T11:19:21Z\", \"tool\": \"leanfinder\", \"query\": \"Base change exchange mate composed with the pullback of an adjunction unit equals the base changed unit for finite etale and pro etale sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"SheafOfModules.pullback_id_comp\"], \"digest\": \"8b5660eba728a800\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical or sheaf-module hits do not supply the complete finite etale/pro-etale exchange and ordinary-cohomology assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical etale proetale comparison preserves the base change mate and ordinary cohomology pullback for quotient maps of finite coefficient sheaves",
+   "results": "{\"t\": \"2026-10-22T11:20:24Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical etale proetale comparison preserves the base change mate and ordinary cohomology pullback for quotient maps of finite coefficient sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"AlgebraicGeometry.IsEtale.of_comp\", \"SheafOfModules.pullbackObjFreeIso\", \"SheafOfModules.freeFunctorCompPullbackIso\"], \"digest\": \"3d088f36ec9cf6bb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical or sheaf-module hits do not supply the complete finite etale/pro-etale exchange and ordinary-cohomology assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-affine-line-ordinary-invariance",
+  "date": "2026-10-22",
+  "group": "Q116"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "from": {
+   "node": "lem-pur-frame-independence",
+   "place": "Shear paragraph, ordinary affine-line input: Exchange naturality of ordinary finite-twist units; retained ordinary-invariance proof steps 8.",
+   "via": [
+    "lem-pur-affine-line-ordinary-invariance",
+    "lem-pur-supported-affine-line-homotopy"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-ordinary-unit-exchange-naturality",
+  "worker": "stage1",
+  "summary": "Proved the unconditional mate-unit equation using the existing Mathlib leaf; checked qcqs only for the affine projections; reused the canonical exchange-comparison theorem and generic site-cohomology functoriality for all base and coefficient squares. No statement changes, no new nodes, no Lean or compilation.",
+  "blueprint": "Nearest ancestor lem-pur-frame-independence, Elementary shears paragraph: formal base/coefficient/site naturality of the ordinary affine-line input, via lem-pur-supported-affine-line-homotopy and lem-pur-affine-line-ordinary-invariance. Realizes Base change on Y and Coefficients in main-20261015 sk-prop-a1-kummer.proof.md; retains the extracted step-8 argument as assembly using existing nodes.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Generic coherent site pullback comparison for arbitrary scheme morphisms; identifies the square isomorphism in this finite ordinary-cohomology calculation."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "why": "Generic qcqs finite-ring comparison with the specified counit normalization, applied only to p and p′."
+   },
+   {
+    "node": "lem-weil-pbc-transport-identifies-exchange",
+    "why": "Generic finite-ring exchange-conjugation theorem, applied to the projection square to identify the named maps, without assuming base change invertible."
+   },
+   {
+    "node": "lem-weil-pbc-site-cohomology-pullback",
+    "why": "General site-cohomology composition and coefficient naturality; the unit route requires these formal laws and does not replace their proof."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-global-cohomology",
+    "why": "Generic natural finite-ring comparison of ordinary derived global sections, used only to identify the comparison map as sections of its unit."
+   },
+   {
+    "node": "lem-pe-left-module-derived-evaluation-forget",
+    "why": "Generic constant-ring derived-evaluation comparison, including compatibility with geometric pullback; bridges the item’s module adjunctions to ordinary abelian-sheaf cohomology on either site."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Generic signed finite-twist pullback theorem, already a statement dependency; supplies the canonical coefficient and composition identifications."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-transport-identifies-exchange",
+  "lem-weil-pbc-site-cohomology-pullback",
+  "lem-weil-pbc-comparison-global-cohomology",
+  "lem-pe-left-module-derived-evaluation-forget",
+  "lem-asd-etale-finite-twist-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-e26faa4d1",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-e26faa4d1 (reviewer sub-agent of L); spot-checked: I read the delivery in full; it is one commit with the item node and report only, no new nodes, statement and stmt_deps unchanged, and no repair note for this item. No cited node leads back to the item (no cycle), every cited id exists and is unmerged, proof_deps equals the union of the step uses, and there is no SGA citation. Step 1: by def-sbc-affine-space and clauses (1) and (3) of affine-morphism-permanence, p and p' are affine and therefore qcqs; ell is invertible over k, so the twist-pullback node applies. Step 2: with (L1,R1,L2,R2,G,H,alpha)=(p*,Rp_*,p'*,Rp'_*,v*,w*,theta), the mate's transpose is w*eps_p after theta_{Rp_*}. This equals the inverse-image form of sbc-def-base-change-map on the exchanged square (f=v, g=p, h=p', e=w). Mathlib unit_mateEquiv (Mates.lean lines 136-138, no invertibility needed) followed by Rp'_*(theta^-1) gives exactly the item's equation; I checked the types. Step 3: b_u is the mate of a_u^-1 (finite ring, p and p' qcqs, D+), so the mate-unit leaf gives the displayed unit identity. transport-identifies-exchange with (f,f',g,g')=(p,p',v,w) puts no condition on v, and its theta^e is the item's theta. comparison-pullback's compatibility with the cartesian identification carries theta across the sites. Step 4: clause (4) of site-cohomology-pullback gives the composition law and clause (2) gives naturality for any abelian sheaf map, including varpi multiplication, quotients and level changes, so no flatness is used. The module-forget node bridges module sections to ordinary cohomology. Step 5: unwound on an injective resolution, the global comparison c_T equals the site pullback along nu, and the equation c_U u_e* = H(a^-1) u_p* c_V type-checks; negative degrees give zero groups. Step 6 is a correct elementary cancellation. The route matches main-20261015 sk-prop-a1-kummer.proof.md, paragraphs 'Base change on Y' and 'Coefficients' (lines 44-70). I accept all seven declared tool uses: generic properbasechange/p1/sf comparison and cohomology nodes that no node of the unit supplies. Edge cases checked: v=id, u=0, r<=0, q<0, empty X, non-qcqs X or v. One point, not a fault: the composite site functors for p∘w and v∘p' agree only up to the canonical fibre-product isomorphism, which the statement already builds in ('after the canonical identification'). No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.OrdinaryUnitExchangeNaturality",
+  "declaration": "WeilConjectures.purity_ordinary_unit_exchange_naturality",
+  "declarations": [
+   "WeilConjectures.purityUnitExchangeEquation",
+   "WeilConjectures.purityH",
+   "WeilConjectures.purityHMap",
+   "WeilConjectures.purityHPull",
+   "WeilConjectures.purityCohomologyNaturality",
+   "WeilConjectures.purityCohomologySquare",
+   "WeilConjectures.PurityFiniteSetting.ordinaryEtaleTwist",
+   "WeilConjectures.PurityFiniteSetting.ordinaryTwistAb",
+   "WeilConjectures.purityAffineLineSquare",
+   "WeilConjectures.purityProEtaleIntegerPullback",
+   "WeilConjectures.purityLineProjection",
+   "WeilConjectures.purityLineMap",
+   "WeilConjectures.purityChosenLineSquare",
+   "WeilConjectures.purityTwistPlus",
+   "WeilConjectures.purityTwistComplex",
+   "WeilConjectures.purityComparisonUnitEquation",
+   "WeilConjectures.purityComparisonExchangeEquation",
+   "WeilConjectures.puritySiteCohomologySquare",
+   "WeilConjectures.PurityFiniteSetting.ordinaryAtLevel",
+   "WeilConjectures.purity_ordinary_unit_exchange_naturality"
+  ],
+  "file": "lean/Sheaf/Paper/OrdinaryUnitExchangeNaturality.lean",
+  "statement": "theorem purity_ordinary_unit_exchange_naturality (P : PurityFiniteSetting.{u}) {X X' : Scheme.{u}} [X.Over (Spec (CommRingCat.of P.field.k))] [X'.Over (Spec (CommRingCat.of P.field.k))] (v : X' ⟶ X) [v.IsOver (Spec (CommRingCat.of P.field.k))] (r : ℤ) : purityUnitExchangeEquation (Etale.derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} P.Coefficient) (purityLineProjection X)) (Etale.derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} P.Coefficient) (purityLineProjection X')) (Etale.derivedSquareUpperStarIso (ModuleCat.{u + 1} P.Coefficient) (purityAffineLineSquare v)) (Etale.derivedBaseChangeMap (ModuleCat.{u + 1} P.Coefficient) (purityAffineLineSquare v)) (purityTwistComplex P X r) ∧ purityUnitExchangeEquation (ProEtale.derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} P.Coefficient) (purityLineProjection X)) (ProEtale.derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} P.Coefficient) (purityLineProjection X')) (ProEtale.leftDerivedUpperStarSquareIso (ModuleCat.{u + 1} P.Coefficient) (purityAffineLineSquare v)) (ProEtale.derivedBaseChangeMap (ModuleCat.{u + 1} P.Coefficient) (purityAffineLineSquare v)) ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X).mapDerivedCategory.obj (purityTwistComplex P X r)) ∧ purityComparisonUnitEquation P.Coefficient (purityLineProjection X) (purityTwistPlus P X r) ∧ purityComparisonUnitEquation P.Coefficient (purityLineProjection X') ((Etale.upperStar (ModuleCat.{u + 1} P.Coefficient) v).mapDerivedCategoryPlus.obj (purityTwistPlus P X r)) ∧ purityComparisonExchangeEquation P v r ∧ ProEtale.ComparisonSquareComponent (ProEtale.comparisonSquareData (ModuleCat.{u + 1} P.Coefficient) (purityLineMap v) (purityLineProjection X') (purityLineProjection X) v (purityChosenLineSquare v)) (P.ordinaryEtaleTwist X r) ∧ purityCohomologySquare (Etale.upperStar AddCommGrpCat.{u + 1} (purityLineProjection X)) (Etale.upperStar AddCommGrpCat.{u + 1} v) (Etale.upperStar AddCommGrpCat.{u + 1} (purityLineProjection X')) (Etale.upperStar AddCommGrpCat.{u + 1} (purityLineMap v)) ((Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} (purityLineProjection X)).symm.app (AddCommGrpCat.of (ULift.{u + 1} ℤ))) ((Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} v).symm.app (AddCommGrpCat.of (ULift.{u + 1} ℤ))) ((Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} (purityLineProjection X')).symm.app (AddCommGrpCat.of (ULift.{u + 1} ℤ))) ((Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} (purityLineMap v)).symm.app (AddCommGrpCat.of (ULift.{u + 1} ℤ))) (Etale.squareUpperStarIso AddCommGrpCat.{u + 1} (purityAffineLineSquare v)) (P.ordinaryTwistAb X r) ∧ purityCohomologySquare (ProEtale.upperStar AddCommGrpCat.{u + 1} (purityLineProjection X)) (ProEtale.upperStar AddCommGrpCat.{u + 1} v) (ProEtale.upperStar AddCommGrpCat.{u + 1} (purityLineProjection X')) (ProEtale.upperStar AddCommGrpCat.{u + 1} (purityLineMap v)) (purityProEtaleIntegerPullback (purityLineProjection X)) (purityProEtaleIntegerPullback v) (purityProEtaleIntegerPullback (purityLineProjection X')) (purityProEtaleIntegerPullback (purityLineMap v)) (ProEtale.upperStarCompIso AddCommGrpCat.{u + 1} (purityAffineLineSquare v).w.symm) ((ProEtale.comparisonUpperStar AddCommGrpCat.{u + 1} X).obj (P.ordinaryTwistAb X r)) ∧ puritySiteCohomologySquare v (P.ordinaryTwistAb X r) ∧ puritySiteCohomologySquare (purityLineProjection X) (P.ordinaryTwistAb X r) ∧ puritySiteCohomologySquare (purityLineProjection X') ((Etale.upperStar AddCommGrpCat.{u + 1} v).obj (P.ordinaryTwistAb X r)) ∧ puritySiteCohomologySquare (purityLineMap v) ((Etale.upperStar AddCommGrpCat.{u + 1} (purityLineProjection X)).obj (P.ordinaryTwistAb X r)) ∧ (∀ (n : ℕ) (hn : 1 ≤ n) (s : ℤ) (a : P.ordinaryTwistAb X r ⟶ (P.ordinaryAtLevel n hn).ordinaryTwistAb X s), purityCohomologyNaturality (Etale.upperStar AddCommGrpCat.{u + 1} (purityLineProjection X)) ((Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} (purityLineProjection X)).symm.app (AddCommGrpCat.of (ULift.{u + 1} ℤ))) a ∧ purityCohomologyNaturality (Etale.upperStar AddCommGrpCat.{u + 1} (purityLineProjection X')) ((Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} (purityLineProjection X')).symm.app (AddCommGrpCat.of (ULift.{u + 1} ℤ))) ((Etale.upperStar AddCommGrpCat.{u + 1} v).map a) ∧ purityCohomologyNaturality (ProEtale.upperStar AddCommGrpCat.{u + 1} (purityLineProjection X)) (purityProEtaleIntegerPullback (purityLineProjection X)) ((ProEtale.comparisonUpperStar AddCommGrpCat.{u + 1} X).map a) ∧ purityCohomologyNaturality (ProEtale.upperStar AddCommGrpCat.{u + 1} (purityLineProjection X')) (purityProEtaleIntegerPullback (purityLineProjection X')) ((ProEtale.upperStar AddCommGrpCat.{u + 1} v).map ((ProEtale.comparisonUpperStar AddCommGrpCat.{u + 1} X).map a)) ∧ purityCohomologyNaturality (ProEtale.comparisonUpperStar AddCommGrpCat.{u + 1} X) (ProEtale.constantIntIsoComparisonUpperStar X) a ∧ purityCohomologyNaturality (ProEtale.comparisonUpperStar AddCommGrpCat.{u + 1} (AffineSpace (ULift.{u} (Fin 1)) X)) (ProEtale.constantIntIsoComparisonUpperStar (AffineSpace (ULift.{u} (Fin 1)) X)) ((Etale.upperStar AddCommGrpCat.{u + 1} (purityLineProjection X)).map a) ∧ purityCohomologyNaturality (ProEtale.comparisonUpperStar AddCommGrpCat.{u + 1} X') (ProEtale.constantIntIsoComparisonUpperStar X') ((Etale.upperStar AddCommGrpCat.{u + 1} v).map a) ∧ purityCohomologyNaturality (ProEtale.comparisonUpperStar AddCommGrpCat.{u + 1} (AffineSpace (ULift.{u} (Fin 1)) X')) (ProEtale.constantIntIsoComparisonUpperStar (AffineSpace (ULift.{u} (Fin 1)) X')) ((Etale.upperStar AddCommGrpCat.{u + 1} (purityLineProjection X')).map ((Etale.upperStar AddCommGrpCat.{u + 1} v).map a)))",
+  "branch": "newtargets-dag",
+  "by": "Q148",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-229e7d4b0",
+  "group": "Q148",
+  "result": "pass",
+  "note": "Node diff is lean-only; statement verbatim; declarations complete; single sorry; docstrings and source places present. Etale/ProEtale derivedBaseChangeMap are by definition mateEquiv of the square iso .hom, so the unit equation (with θ.inv cancellation) and the conditional IsIso clause are exact and true. Comparison clauses: fixedComparisonDirectImageMatePlus is the mate of a⁻¹ and fixedComparisonPullbackPlus.hom is a; comparison_derivedBaseChangeMap at (p,p',v,w) on p^*L; square coherence via ComparisonSquareComponent; D+/unbounded linked by upstream RestrictPlus/baseChange_eq lemmas. Ordinary composition, coefficient naturality (any abelian map, any level/twist, no flatness), four site squares and inverse squares hold for all q∈ℤ. ringChar twist justified (twistEtale needs e∣n and gives only r=1). Edge cases v=id, empty, r≤0, n=1, q<0 covered; no universe restriction. Advisories: ℤ-graded ShiftedHom H^q instead of Sheaf.H; non-stmt_dep owner decls; fixed-ModuleCat pro-étale operations; self-audit second reading."
+ }
+}

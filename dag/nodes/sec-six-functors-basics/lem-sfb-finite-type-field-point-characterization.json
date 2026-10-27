@@ -1,0 +1,234 @@
+{
+ "id": "lem-sfb-finite-type-field-point-characterization",
+ "kind": "statement",
+ "title": "Finite type field points and finite residue extensions",
+ "statement": "Let $V$ be a scheme [def-pc-scheme], $l$ a field [def-weil-field], and $f:\\operatorname{Spec}l\\to V$ a morphism [def-weil-affine-spectrum]. Let $v$ be its image point and put $k=\\kappa(v)$ [def-weil-residue-field], with the induced field embedding $k\\to l$. The following are equivalent: (i) $f$ is of finite type [def-weil-finite-type-morphism]; (ii) $f$ is locally of finite type; (iii) there is an affine open neighbourhood $W=\\operatorname{Spec}A$ of $v$ such that $v$ is closed in $W$ and $[l:k]<\\infty$. In this case the canonical morphism $\\operatorname{Spec}k\\to V$ is of finite type.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01TA (lemma-point-finite-type), equivalence (1), (2), (4); last assertion follows by the closed-point factorization in the affine open."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "def-weil-residue-field",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "The spectrum of $l$ has one point. The inverse image under $f$ of any affine open of $V$ is therefore either empty or this singleton, hence quasi-compact. By the definition of finite type, (i) and (ii) are equivalent. This argument applies to every morphism from the spectrum of a field, including the canonical morphism from $\\operatorname{Spec}k$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TA (lemma-point-finite-type), first paragraph of proof"
+   }
+  },
+  {
+   "text": "Assume (ii). Choose an affine open $U=\\operatorname{Spec}A$ containing $v$. The all-affine-pairs criterion says that the corresponding map $A\\to l$ makes $l$ a finitely generated $A$-algebra. Its kernel is the prime $\\mathfrak p$ of $v$, and $k=\\kappa(v)$ is the fraction field of $R=A/\\mathfrak p$, embedded in $l$. The same algebra generators show that $l$ is finitely generated over the image subring $R\\subset l$. Apply the subring-localization lemma to obtain $0\\ne s\\in R$ with $R_s$ a field and $l/R_s$ finite.",
+   "uses": [
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-weil-pbc-spec-field-point-residue-field",
+    "lem-sfb-field-finite-type-over-subring-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TA (lemma-point-finite-type), (2) implies (3), through the application of Algebra Tag 00FY"
+   }
+  },
+  {
+   "text": "Lift $s$ to $a\\in A$. Then $a\\notin\\mathfrak p$ and $W=D(a)$ is an affine neighbourhood of $v$ with coordinate ring $A_a$. Localization commutes with quotient, giving $A_a/\\mathfrak p A_a\\cong(A/\\mathfrak p)_s=R_s$. Since this is a field, $\\mathfrak p A_a$ is maximal, so its singleton is closed in $\\operatorname{Spec}A_a$: a prime containing this maximal ideal equals it. Moreover the fraction field of $R$ equals $R_s$: each nonzero element of $R$ has its inverse in the field $R_s$, and every element of $R_s$ is a fraction in $R$. Thus the induced embedding identifies $k$ with $R_s$, and $[l:k]<\\infty$. This proves (iii).",
+   "uses": [
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "lem-weil-pbc-localization-quotient-commute",
+    "lem-weil-pbc-spec-field-point-residue-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TA (lemma-point-finite-type), end of (2) implies (3) and closed-point interpretation (3) implies (4)"
+   }
+  },
+  {
+   "text": "Assume (iii), and write $W=\\operatorname{Spec}A$ with prime $\\mathfrak p$ for $v$. Closedness means $\\mathfrak p$ is maximal: its closure is the primes containing $\\mathfrak p$, and a maximal ideal containing it would otherwise give a second point in that closure. Hence $A/\\mathfrak p$ is a field. The affine residue-field description identifies $k=\\operatorname{Frac}(A/\\mathfrak p)=A/\\mathfrak p$, with the specified embedding into $l$. Take a finite $k$-basis of $l$. Since $A\\to k$ is surjective, every linear combination of the basis has coefficients lifted from $A$; these basis elements therefore also generate $l$ as an $A$-algebra. The pointwise affine-pair criterion, applied to the sole point of $\\operatorname{Spec}l$ and the target open $W$, gives (ii).",
+   "uses": [
+    "lem-weil-pbc-spec-field-point-residue-field",
+    "lem-weil-pbc-lft-pointwise-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TA (lemma-point-finite-type), (4) implies (3) implies (2)"
+   }
+  },
+  {
+   "text": "Under these equivalent conditions retain the same $W$ and the identification $k=A/\\mathfrak p$. The canonical morphism $\\operatorname{Spec}k\\to V$ is induced on $W$ by the quotient $A\\twoheadrightarrow k$. A quotient is generated as an algebra by the empty family, so the pointwise affine-pair criterion makes this canonical morphism locally of finite type. The singleton argument of step 1 makes it quasi-compact, hence of finite type.",
+   "uses": [
+    "lem-weil-pbc-spec-field-point-residue-field",
+    "lem-weil-pbc-lft-pointwise-criterion",
+    "def-weil-finite-type-morphism",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TA (lemma-point-finite-type), (4) implies (2) applied to the canonical residue-field point"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-spec-field-point-residue-field",
+  "lem-sfb-field-finite-type-over-subring-localization",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-weil-pbc-localization-quotient-commute",
+  "lem-weil-pbc-lft-pointwise-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01TA (lemma-point-finite-type), proof of (1) iff (2), (2) implies (3) implies (4), and (4) implies (3) implies (2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite type morphism from the spectrum of a field to a scheme has a locally closed image point and a finite residue field extension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [JacobsonSpace ↥X] {x : ↥X},\\n  IsClosed {x} ↔ AlgebraicGeometry.LocallyOfFiniteType (X.fromSpecResidueField x)\", \"doc\": \"For a Jacobson scheme $X$ and a point $x \\\\in X$, the singleton set $\\\\{x\\\\}$ is closed in $X$ if and only if the canonical morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to X$ (where $\\\\kappa(x)$ is the resid\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.SpecMap_residue\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X),\\n  AlgebraicGeometry.IsClosedImmersion (AlgebraicGeometry.Spec.map (X.residue x))\", \"doc\": \"For any scheme $X$ and any point $x \\\\in X$, the morphism of schemes $\\\\operatorname{Spec}(k(x)) \\\\to \\\\operatorname{Spec}(\\\\mathcal{O}_{X,x})$ induced by the residue map $\\\\mathcal{O}_{X,x} \\\\to k(x)$ is a \"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.Spec_map_residue\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X),\\n  AlgebraicGeometry.IsClosedImmersion (AlgebraicGeometry.Spec.map (X.residue x))\", \"doc\": \"For any scheme $X$ and point $x \\\\in X$, the morphism of schemes $\\\\operatorname{Spec}(k(x)) \\\\to \\\\operatorname{Spec}(\\\\mathcal{O}_{X,x})$ induced by the residue homomorphism $\\\\mathcal{O}_{X,x} \\\\to k(x)$ \"}\n  {\"name\": \"AlgebraicGeometry.isClosed_singleton_iff_isClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x : ↥X}, IsClosed {x} ↔ AlgebraicGeometry.IsClosedImmersion (X.fromSpecResidueField x)\", \"doc\": \"For a scheme $X$ and a point $x \\\\in X$, the singleton set $\\\\{x\\\\}$ is closed in the topological space of $X$ if and only if the canonical morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to X$ (where $\\\\kappa(\"}\n  {\"name\": \"AlgebraicGeometry.isField_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f], IsField ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"If $X$ is an integral scheme and the morphism $f: X \\\\to \\\\operatorname{Spec}(K)$ is universally closed, then the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a field.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X), AlgebraicGeometry.IsPreimmersion (AlgebraicGeometry.Spec.map (X.residue x))\", \"doc\": \"For any scheme $X$ and any point $x \\\\in X$, the morphism $\\\\operatorname{Spec}(k(x)) \\\\to X$ induced by the residue homomorphism $\\\\mathcal{O}_{X,x} \\\\to k(x)$ is a preimmersion, where $k(x)$ denotes the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X), AlgebraicGeometry.IsPreimmersion (X.fromSpecResidueField x)\", \"doc\": \"For any scheme $X$ and a point $x \\\\in X$, the canonical morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to X$ from the spectrum of the residue field $\\\\kappa(x)$ at $x$ to $X$ is a preimmersion in the sense \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: Jacobson-space closed-point criteria have an extra hypothesis; residue-field and finite morphism hits do not provide the arbitrary-scheme finite-type-point characterization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite type field valued point is closed in some affine open with finite extension of its residue field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [JacobsonSpace ↥X] {x : ↥X},\\n  IsClosed {x} ↔ AlgebraicGeometry.LocallyOfFiniteType (X.fromSpecResidueField x)\", \"doc\": \"For a Jacobson scheme $X$ and a point $x \\\\in X$, the singleton set $\\\\{x\\\\}$ is closed in $X$ if and only if the canonical morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to X$ (where $\\\\kappa(x)$ is the resid\"}\n  {\"name\": \"AlgebraicGeometry.isClosed_singleton_iff_isClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x : ↥X}, IsClosed {x} ↔ AlgebraicGeometry.IsClosedImmersion (X.fromSpecResidueField x)\", \"doc\": \"For a scheme $X$ and a point $x \\\\in X$, the singleton set $\\\\{x\\\\}$ is closed in the topological space of $X$ if and only if the canonical morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to X$ (where $\\\\kappa(\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.SpecMap_residue\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X),\\n  AlgebraicGeometry.IsClosedImmersion (AlgebraicGeometry.Spec.map (X.residue x))\", \"doc\": \"For any scheme $X$ and any point $x \\\\in X$, the morphism of schemes $\\\\operatorname{Spec}(k(x)) \\\\to \\\\operatorname{Spec}(\\\\mathcal{O}_{X,x})$ induced by the residue map $\\\\mathcal{O}_{X,x} \\\\to k(x)$ is a \"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.Spec_map_residue\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X),\\n  AlgebraicGeometry.IsClosedImmersion (AlgebraicGeometry.Spec.map (X.residue x))\", \"doc\": \"For any scheme $X$ and point $x \\\\in X$, the morphism of schemes $\\\\operatorname{Spec}(k(x)) \\\\to \\\\operatorname{Spec}(\\\\mathcal{O}_{X,x})$ induced by the residue homomorphism $\\\\mathcal{O}_{X,x} \\\\to k(x)$ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (x : ↥X) → Field ↑(X.residueField x)\", \"doc\": \"For any scheme $X$ and any point $x$ in $X$, the stalk of the structure sheaf at $x$ is a local ring, i.e., $\\\\mathcal{O}_{X,x}$ is a local ring.\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Spec_map_residue_apply\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X) (s : ↥(AlgebraicGeometry.Spec (X.residueField x))),\\n  (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Spec.map (X.residue x)).base) s =\\n    IsLocalRing.closedPoint ↑(X.presheaf.stalk x)\", \"doc\": \"Let $X$ be a scheme and $x$ a point in its underlying topological space. Let $\\\\mathcal{O}_{X,x}$ be the local ring at $x$, and let $k(x)$ be its residue field. The residue map is the canonical project\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.SpecMap_residue_apply\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X) (s : ↥(AlgebraicGeometry.Spec (X.residueField x))),\\n  (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Spec.map (X.residue x)).base) s =\\n    IsLocalRing.closedPoint ↑(X.presheaf.stalk x)\", \"doc\": \"For a scheme $X$ and a point $x \\\\in X$, the morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to \\\\operatorname{Spec}(\\\\mathcal{O}_{X,x})$ induced by the residue homomorphism $\\\\mathcal{O}_{X,x} \\\\to \\\\kappa(x)$ m\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: Jacobson-space closed-point criteria have an extra hypothesis; residue-field and finite morphism hits do not provide the arbitrary-scheme finite-type-point characterization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite type point spectrum field finite residue extension closed in affine open",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X : Scheme.{u}} [JacobsonSpace X] {x : X} : IsClosed { x } ↔ LocallyOfFiniteType (X.fromSpecResidueField x)\", \"doc\": \"For a Jacobson scheme $X$ and a point $x \\\\in X$, the singleton set $\\\\{x\\\\}$ is closed in $X$ if and only if the canonical morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to X$ (where $\\\\kappa(x)$ is the resid\"}\n  {\"name\": \"IsLocalRing.closedPoint_mem_iff\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \"(U : TopologicalSpace.Opens <| PrimeSpectrum R) : closedPoint R ∈ U ↔ U = ⊤\", \"doc\": \"For a local ring $ R $, the closed point of $ R $ is contained in an open subset $ U $ of the prime spectrum $ \\\\operatorname{Spec}(R) $ if and only if $ U $ is the entire space $ \\\\operatorname{Spec}(R\"}\n  {\"name\": \"IsLocalRing.ResidueField.finite_of_finite\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Basic\", \"type\": \"[Module.Finite R S] (hfin : Finite (ResidueField R)) : Finite (ResidueField S)\", \"doc\": \"Let $ R $ and $ S $ be local rings with $ S $ being a finite $ R $-module. If the residue field of $ R $ is finite, then the residue field of $ S $ is also finite.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.fromSpecResidueField\", \"module\": \"Mathlib.AlgebraicGeometry.ResidueField\", \"type\": \"(X : Scheme) (x : X) : Spec (X.residueField x) ⟶ X\", \"doc\": \"For a scheme $X$ and a point $x \\\\in X$, this defines the canonical morphism of schemes from the spectrum of the residue field at $x$, $\\\\operatorname{Spec}(k(x))$, to $X$. This morphism is constructed \"}\n  {\"name\": \"IsLocalRing.closed_point_mem_iff\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \"{U : TopologicalSpace.Opens (PrimeSpectrum R)} : closedPoint R ∈ U ↔ U = ⊤\", \"doc\": \"For a local ring $ R $, the closed point $ \\\\mathfrak{m} $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ is contained in an open set $ U $ if and only if $ U $ is the entire space $ \\\\operatorname{Sp\"}\n  {\"name\": \"IsLocalRing.closedPoint\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \": PrimeSpectrum R\", \"doc\": \"In a commutative semiring $ R $ that is a local ring, the maximal ideal consisting of all non-units is a prime ideal. This defines a closed point in the prime spectrum of $ R $, corresponding to the u\"}\n  {\"name\": \"Algebra.QuasiFinite.instFiniteResidueField\", \"module\": \"Mathlib.RingTheory.QuasiFinite.Basic\", \"type\": \"[QuasiFinite R S] (P : Ideal R) [P.IsPrime] (Q : Ideal S) [Q.IsPrime] [Q.LiesOver P] :\\n  Module.Finite P.ResidueField Q.ResidueField\", \"doc\": \"For a quasi-finite algebra $ S $ over a commutative ring $ R $, if $ Q $ is a prime ideal in $ S $ lying over a prime ideal $ P $ in $ R $, then the residue field of $ Q $ is a finite extension of the\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \": HasAffineProperty @IsFinite (fun X _ f _ ↦ IsAffine X ∧ RingHom.Finite (f.appTop).hom)\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: Jacobson-space closed-point criteria have an extra hypothesis; residue-field and finite morphism hits do not provide the arbitrary-scheme finite-type-point characterization."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.Scheme.fromSpecResidueField",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" {X : AlgebraicGeometry.Scheme} [JacobsonSpace ↥X] {x : ↥X} : IsClosed {x} ↔ AlgebraicGeometry.LocallyOfFiniteType (X.fromSpecResidueField x)\", \"doc\": \"[Stacks Tag 01TB](https://stacks.math.columbia.edu/tag/01TB) ((1) => (2))\"}\n  {\"name\": \"AlgebraicGeometry.SpecMap_residueFieldIsoBase_inv\", \"module\": \"Mathlib.AlgebraicGeometry.AlgClosed.Basic\", \"type\": \" {X : AlgebraicGeometry.Scheme} {K : Type u} [Field K] [IsAlgClosed K] (f : X ⟶ AlgebraicGeometry.Spec ↧K) [AlgebraicGeometry.LocallyOfFiniteType f] (x : ↥X) (hx : IsClosed {x}) : AlgebraicGeometry.Spec.map (AlgebraicGeometry.residueFieldIsoBase f x hx).inv = CategoryTheory.CategoryStruct.comp (X.fr\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.SpecMap_residueFieldIsoBase_inv_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.AlgClosed.Basic\", \"type\": \" {X : AlgebraicGeometry.Scheme} {K : Type u} [Field K] [IsAlgClosed K] (f : X ⟶ AlgebraicGeometry.Spec ↧K) [AlgebraicGeometry.LocallyOfFiniteType f] (x : ↥X) (hx : IsClosed {x}) {Z : AlgebraicGeometry.Scheme} (h : AlgebraicGeometry.Spec ↧K ⟶ Z) : CategoryTheory.CategoryStruct.comp (AlgebraicGeometry\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: Jacobson-space closed-point criteria have an extra hypothesis; residue-field and finite morphism hits do not provide the arbitrary-scheme finite-type-point characterization."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteType.*[Rr]esidue|finite.*[Pp]oint|[Rr]esidueField.*[Ff]inite",
+   "results": "[grep] OK 8 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"216\", \"text\": \"    (hf : ∀ x, LocallyQuasiFinite (f.fiberToSpecResidueField x)) : LocallyQuasiFinite f := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Fiber.lean\", \"line\": \"145\", \"text\": \"  have : LocallyOfFiniteType (f.fiberToSpecResidueField y) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Fiber.lean\", \"line\": \"147\", \"text\": \"  LocallyOfFiniteType.jacobsonSpace (f.fiberToSpecResidueField y)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"315\", \"text\": \"/-- The set of quasi-finite points of a morphism `f : X ⟶ Y` as an `X.Opens`. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean\", \"line\": \"34\", \"text\": \"lemma Smooth.of_smooth_fiberToSpecResidueField [LocallyOfFinitePresentation f] [Flat f]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"line\": \"222\", \"text\": \"    IsClosed {x} ↔ LocallyOfFiniteType (X.fromSpecResidueField x) := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"349\", \"text\": \"    (f : X ⟶ Spec (.of K)) [LocallyOfFinitePresentation f] : genericPoint X ∈ f.smoothLocus := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"350\", \"text\": \"  have := LocallyOfFiniteType.stalkMap f (genericPoint X)\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: Jacobson-space closed-point criteria have an extra hypothesis; residue-field and finite morphism hits do not provide the arbitrary-scheme finite-type-point characterization."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteType.*[Rr]esidue|finite.*[Pp]oint|[Rr]esidueField.*[Ff]inite",
+   "results": "[grep] OK 8 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"315\", \"text\": \"/-- The set of quasi-finite points of a morphism `f : X ⟶ Y` as an `X.Opens`. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean\", \"line\": \"34\", \"text\": \"lemma Smooth.of_smooth_fiberToSpecResidueField [LocallyOfFinitePresentation f] [Flat f]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"line\": \"222\", \"text\": \"    IsClosed {x} ↔ LocallyOfFiniteType (X.fromSpecResidueField x) := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"216\", \"text\": \"    (hf : ∀ x, LocallyQuasiFinite (f.fiberToSpecResidueField x)) : LocallyQuasiFinite f := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"349\", \"text\": \"    (f : X ⟶ Spec (.of K)) [LocallyOfFinitePresentation f] : genericPoint X ∈ f.smoothLocus := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"350\", \"text\": \"  have := LocallyOfFiniteType.stalkMap f (genericPoint X)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Fiber.lean\", \"line\": \"145\", \"text\": \"  have : LocallyOfFiniteType (f.fiberToSpecResidueField y) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Fiber.lean\", \"line\": \"147\", \"text\": \"  LocallyOfFiniteType.jacobsonSpace (f.fiberToSpecResidueField y)\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the closed-point criterion requires JacobsonSpace, absent here; finite morphism and affine tests do not state this characterization."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.Scheme.fromSpecResidueField",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" {X : AlgebraicGeometry.Scheme} [JacobsonSpace ↥X] {x : ↥X} : IsClosed {x} ↔ AlgebraicGeometry.LocallyOfFiniteType (X.fromSpecResidueField x)\", \"doc\": \"[Stacks Tag 01TB](https://stacks.math.columbia.edu/tag/01TB) ((1) => (2))\"}\n  {\"name\": \"AlgebraicGeometry.SpecMap_residueFieldIsoBase_inv\", \"module\": \"Mathlib.AlgebraicGeometry.AlgClosed.Basic\", \"type\": \" {X : AlgebraicGeometry.Scheme} {K : Type u} [Field K] [IsAlgClosed K] (f : X ⟶ AlgebraicGeometry.Spec ↧K) [AlgebraicGeometry.LocallyOfFiniteType f] (x : ↥X) (hx : IsClosed {x}) : AlgebraicGeometry.Spec.map (AlgebraicGeometry.residueFieldIsoBase f x hx).inv = CategoryTheory.CategoryStruct.comp (X.fr\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.SpecMap_residueFieldIsoBase_inv_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.AlgClosed.Basic\", \"type\": \" {X : AlgebraicGeometry.Scheme} {K : Type u} [Field K] [IsAlgClosed K] (f : X ⟶ AlgebraicGeometry.Spec ↧K) [AlgebraicGeometry.LocallyOfFiniteType f] (x : ↥X) (hx : IsClosed {x}) {Z : AlgebraicGeometry.Scheme} (h : AlgebraicGeometry.Spec ↧K ⟶ Z) : CategoryTheory.CategoryStruct.comp (AlgebraicGeometry\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the closed-point criterion requires JacobsonSpace, absent here; finite morphism and affine tests do not state this characterization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from the spectrum of a field to an arbitrary scheme is locally of finite type iff its image is closed in an affine neighbourhood and its residue field extension is finite",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [JacobsonSpace ↥X] {x : ↥X},\\n  IsClosed {x} ↔ AlgebraicGeometry.LocallyOfFiniteType (X.fromSpecResidueField x)\", \"doc\": \"For a Jacobson scheme $X$ and a point $x \\\\in X$, the singleton set $\\\\{x\\\\}$ is closed in $X$ if and only if the canonical morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to X$ (where $\\\\kappa(x)$ is the resid\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [h : AlgebraicGeometry.IsClosedImmersion f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Every closed immersion of schemes is locally of finite type. Specifically, if $ f: X \\to Y $ is a closed immersion (i.e., induces a homeomorphism of $ X $ onto a closed subset of $ Y $ with surjective \"}\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyOfFiniteType f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n         \", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite type if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ with $ f(V) \\\\subseteq U $, t\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.SpecMap_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {R S : CommRingCat} (f : R ⟶ S),\\n  AlgebraicGeometry.IsFinite (AlgebraicGeometry.Spec.map f) ↔ (CommRingCat.Hom.hom f).Finite\", \"doc\": \"For commutative rings $R$ and $S$, a ring homomorphism $f : R \\to S$ induces a morphism of schemes $\\\\operatorname{Spec}(S) \\to \\\\operatorname{Spec}(R)$. This morphism is finite if and only if the ring ho\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Every finite morphism of schemes is locally of finite type.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the closed-point criterion requires JacobsonSpace, absent here; finite morphism and affine tests do not state this characterization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-artin-versal-field-lifting",
+  "date": "2026-10-23",
+  "group": "Q19"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 07Y4 (lemma-diagonal-representable), specialized to Spec Z; section-axioms [-1] through [3], definition-versal and definition-openness-versality. The specialization uses that Z and its localizations are G-rings. Local supporting input: first sentence of the proof of Tag 07Y4: apply lemma-get-smooth to each finite type field and object. Supporting input in Tag 07XY: apply lemma-versal-smooth after shrinking to the versal locus; residue-field restriction argument of Stacks 07XT via 07XG",
+   "via": [
+    "lem-sfb-artin-versal-field-lifting",
+    "lem-sfb-artin-smooth-point-neighbourhood",
+    "lem-sfb-artin-representable-diagonal-criterion",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-type-field-point-characterization",
+  "worker": "stage1",
+  "summary": "Checked Stacks Tag 01TA against all three clauses and the final canonical-point assertion. Proved singleton quasi-compactness, used the existing affine tests and residue-field description, and extracted the genuine arbitrary-subring algebra input Tag 00FY as one searched statement-only node. No statement change.",
+  "blueprint": "Supporting finite-type-point input in the recorded chain from det-thm-sf-ctf-stability-direct-images proof (3), through the Artin versality and residue restriction argument; realizes the application of Tag 01TA in lem-sfb-artin-versal-field-lifting. The current latest blueprint direct-image route is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spec-field-point-residue-field",
+    "why": "Generic affine description of a field-valued point, its image prime and induced residue-field embedding; this is needed for the Tag 01TA argument and is not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spec-field-point-residue-field"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q91-0058b9435",
+  "group": "Q91",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-0058b9435 (reviewer sub-agent of L); spot-checked: Read Stacks morphisms.tex Tag 01TA (lemma-point-finite-type, l.2827-2875) and algebra.tex Tag 00FY (lemma-field-finite-type-over-domain, l.6611-6627) in full. The item statement is unchanged and is 01TA (1),(2),(4); its final clause (Spec κ(v)→V of finite type) is true and step 5 proves it. Step 1: Spec l is one point, so preimages are qc and (i)⇔(ii). Step 2: lft-affine-pairs on (Spec l, U) gives A→l of finite type; spec-field-point-residue-field (3) gives kernel 𝔭_v and the unique extension of A/𝔭↪l; the new node applied to R=A/𝔭⊆l gives s≠0 with R_s a field and l/R_s finite. Step 3: a lift a∉𝔭; D(a) is affine with ring A_a (section-vanishing-prime a,b); A_a/𝔭A_a≅R_s (quotient-commute, arbitrary ideal), so v is closed in D(a); Frac R=R_s in l, so k=R_s and [l:k]<∞. Step 4: v closed in W, so 𝔭 is maximal and k=A/𝔭; a k-basis spans l over A; the pointwise criterion gives lft. Step 5: clause (2) gives Spec κ(v)→W as A↠A/𝔭, so it is lft by the pointwise criterion and qc by step 1. proof_deps equals the union of uses; no cycle. New node lem-sfb-field-finite-type-over-subring-localization: statement-only, self-contained, every notion cited to its definition node, source tag and label exact, searches of all three kinds recorded, blueprint from/same_as given. It is not a duplicate: rg -L over dag/nodes found only lem-weil-pbc-zariski-lemma (base field only), lem-trf-geometric-field-stalk-descent and the isolated-prime node (base field), and the 01TA space/stack analogues; no blueprint hit for 00FY or 01TA; no Mathlib match (the Mathlib hit isClosed_singleton_iff_locallyOfFiniteType needs JacobsonSpace). It is strictly smaller than the item and not one of its clauses. Small cases: R=K (s=1); Z_(p)⊂Q (s=p); k[x]_(x)⊂k(x) (s=x); Z⊂Q is vacuous; the DVR generic point is closed in D(π) only, consistent with (iii). Route: the pbc leaves are tools; the declared tool_use lem-weil-pbc-spec-field-point-residue-field is accepted as a generic description of affine field points. No SGA citation. The item is still unsplit in live, so nothing supersedes this delivery. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteTypeFieldPointCharacterization",
+  "declaration": "AlgebraicGeometry.finite_type_field_point_characterization",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteTypeFieldPointCharacterization.lean",
+  "statement": "theorem finite_type_field_point_characterization (V : Scheme.{u}) (l : Type u) [Field l] (f : Spec (.of l) ⟶ V) : ((LocallyOfFiniteType f ∧ QuasiCompact f) ↔ LocallyOfFiniteType f) ∧ (LocallyOfFiniteType f ↔ ∃ W : V.Opens, IsAffineOpen W ∧ f (IsLocalRing.closedPoint l) ∈ W ∧ IsClosed (Subtype.val ⁻¹' {f (IsLocalRing.closedPoint l)} : Set W) ∧ RingHom.Finite (V.descResidueField (Scheme.stalkClosedPointTo f)).hom) ∧ (LocallyOfFiniteType f → LocallyOfFiniteType (V.fromSpecResidueField (f (IsLocalRing.closedPoint l))) ∧ QuasiCompact (V.fromSpecResidueField (f (IsLocalRing.closedPoint l))))",
+  "branch": "newtargets-dag",
+  "by": "Q125",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2a6f46e6c",
+  "group": "Q125",
+  "result": "pass",
+  "note": "Checked each clause against Stacks 01TA (1),(2),(4) and the node. V : Scheme.{u}, l : Type u [Field l], f : Spec (.of l) ⟶ V, v = f (closedPoint l). Embedding k → l is the canonical descResidueField (stalkClosedPointTo f) (Mathlib Stalk.lean:280, ResidueField.lean:78/286/349). (i) = LocallyOfFiniteType f ∧ QuasiCompact f, the recorded finite-type form; (ii) = LocallyOfFiniteType f; (iii) = affine W with v ∈ W, v closed in W's subspace topology, RingHom.Finite of the embedding. Final clause: fromSpecResidueField v is lft and qc. No Jacobson, separability or extra universe assumption. Edge cases: empty V, DVR generic point closed only in D(π), infinite algebraic extension. Only change to the node is the lean record; statement matches the file verbatim. Docstrings carry the source, the blueprint tag and 5 proof steps; proof is sorry. Proof-dependency modules exist on side-live. Duplicate search of Sheaf/WeilConjectures and Mathlib found none (the Mathlib criterion needs JacobsonSpace). No fixes; not recompiled."
+ }
+}

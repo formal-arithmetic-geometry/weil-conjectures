@@ -1,0 +1,110 @@
+{
+ "id": "def-pur-localized-derived-tensor-braiding",
+ "kind": "definition",
+ "title": "Canonical signed K-flat derived tensor braiding",
+ "status": "split",
+ "statement": "Let $\\mathcal C$ be an abelian category with derived category $D(\\mathcal C)$ [def-weil-abstract-derived-category]. Suppose $\\mathcal C$ is Grothendieck abelian in its morphism universe, monoidal [def-sfb-monoidal-category], closed, monoidal preadditive and braided, and has functorial flat resolutions. Use its existing K-flat derived tensor monoidal structure on $D(\\mathcal C)$. Define $\\beta^L_{K,M}:K\\otimes^L M\\xrightarrow{\\sim}M\\otimes^L K$ to be exactly the canonical localization braiding $\\operatorname{DerivedMonoidal.braiding}'(Q_h,W)(K,M)$, where $Q_h:K(\\mathcal C)\\to D(\\mathcal C)$ is the homotopy-category localization and $W$ is the class of quasi-isomorphisms. The braiding being localized is the signed total-complex braiding, given by $(-1)^{pq}\\beta$ on the summand of bidegree $(p,q)$. This defines the specified isomorphism, including its inverse, by the existing derived-functor lift of that braiding; no braided structure is chosen. For symmetric coefficients this is the derived tensor symmetry used in the tensor mates and reassociations.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sfb-monoidal-category"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+  "place": "Steps 1–2: the canonical tensor symmetries in the orientation-free dualizing tensor comparison. Construction: WeilConjectures/CategoryTheory/Monoidal/DerivedBraided.lean, braiding' and braiding_hom_counit; Stacks cohomology.tex, lemma-symmetric-monoidal-derived (usual signed commutativity constraint)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical signed Koszul symmetry of the derived tensor product obtained by K flat localization",
+   "results": "8 hits: HasDerivedCategory.standard, RingHom.Flat.ofLocalizationSpanTarget, RingHom.Flat.holdsForLocalizationAway, CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier, Module.Flat.localizedModule, HomologicalComplex.mapBifunctorFlipIso, HomologicalComplex₂.ιTotal_totalFlipIso_f_inv, Localization.flat",
+   "date": "2026-10-22",
+   "verdict": "Use the existing upstream localization braiding, specialized at Qh and quasi-isomorphisms in the new owning definition module; no independent braiding is constructed."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedMonoidal.braiding",
+   "results": "0 hits: ; loogle: unknown identifier 'DerivedMonoidal.braiding'",
+   "date": "2026-10-22",
+   "verdict": "Use the existing upstream localization braiding, specialized at Qh and quasi-isomorphisms in the new owning definition module; no independent braiding is constructed."
+  },
+  {
+   "tool": "grep",
+   "query": "DerivedMonoidal|Koszul.*symmetr|derived.*braiding",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "Use the existing upstream localization braiding, specialized at Qh and quasi-isomorphisms in the new owning definition module; no independent braiding is constructed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Koszul symmetry on the unbounded derived category of a symmetric monoidal Grothendieck abelian category with functorial flat resolutions",
+   "results": "8 hits: CategoryTheory.Tor', CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Tor, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor_obj, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, DerivedCategory.instCommShiftCochainComplexIntQ",
+   "date": "2026-10-22",
+   "verdict": "Use the existing upstream localization braiding, specialized at Qh and quasi-isomorphisms in the new owning definition module; no independent braiding is constructed."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"braiding'|projectionCoherenceSymmetry\" lean/WeilConjectures lean/Sheaf; rg -l 'Koszul.*braid|signed.*symmetr|derived tensor.*symmetr' dag/nodes; blueprint_refs.py search 'derived tensor symmetry'; blueprint_refs.py search 'Koszul'",
+   "results": "Upstream WeilConjectures/CategoryTheory/Monoidal/DerivedBraided.lean:127 defines CategoryTheory.DerivedMonoidal.braiding'. ProjectionFormulaCoefficientCoherence.lean:61 is its Qh/quasiIso wrapper. The two existing ownership nodes concern native condensed modules and ringed representative coherence, respectively, and do not own this localization braiding. No node binds the generic upstream declaration. Blueprint searches returned 2 and 25 candidates, respectively; no definition of this generic localization map.",
+   "date": "2026-10-22",
+   "verdict": "Use the existing upstream localization braiding, specialized at Qh and quasi-isomorphisms in the new owning definition module; no independent braiding is constructed."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-composition-tensor-mate",
+  "date": "2026-10-22",
+  "group": "Q01"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Steps 1–2: canonical signed tensor symmetries in theta, sigma, r and the composite inverse projection.",
+   "via": [
+    "lem-pur-composition-tensor-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedTensorKoszulSymmetry",
+  "declaration": "CategoryTheory.derivedTensorKoszulSymmetry",
+  "file": "lean/Sheaf/CategoryTheory/DerivedTensorKoszulSymmetry.lean",
+  "statement": "def derivedTensorKoszulSymmetry (C : Type v) [Category.{w} C] [Abelian C] [IsGrothendieckAbelian.{w} C] [MonoidalCategory C] [MonoidalClosed C] [MonoidalPreadditive C] [BraidedCategory C] [Abelian.HasFunctorialFlatResolution C] (K L : DerivedCategory C) : K ⊗ L ≅ L ⊗ K",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "R1 definition ownership: specialize the existing upstream DerivedMonoidal.braiding' to Qh and quasi-isomorphisms. This is definitionally the old projectionCoherenceSymmetry helper. The separate module caches the generic category instances so use in the four geometric composites does not repeatedly expand their specialized structures; no new tensor or independently chosen braiding is introduced."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a4b72e852",
+  "group": "Q01",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a4b72e852",
+  "group": "Q01",
+  "result": "pass",
+  "note": "R1 repaired exactly: the item's stmt_deps swap the theorem lem-pur-projection-formula-coefficient-coherence for the new definition node def-pur-localized-derived-tensor-braiding; the theorem stays in proof_deps as a plain import, and none of its 10 names is used. Module diff vs ad0a1310: only 4 helper renames plus the imports; derivedTensorKoszulSymmetry has the same binders and body as the old projectionCoherenceSymmetry (DerivedMonoidal.braiding' at Qh and quasiIso), so theta, sigma, r and compositePi are definitionally unchanged and every previously checked clause still holds. New node checked: real data, independent universes v and w, Stacks lemma-symmetric-monoidal-derived exists, deps def-weil-abstract-derived-category and def-sfb-monoidal-category exist, docstrings carry source and blueprint, no sorry, no name collision; no other definition node owns this braiding. Both lean.statement fields verbatim; the only sorry is the main theorem; the report has both sections. Base drift in def-sf-etale-origin-subcategory (new module publicly imports the old one, declarations a superset) is harmless. No file changed, so no compile; worker reports 23.1 s and 54.3 s. Advisory: canonicalBraidingNatIso of theorem node lem-kun-tensor-sym packages the same braiding."
+ }
+}

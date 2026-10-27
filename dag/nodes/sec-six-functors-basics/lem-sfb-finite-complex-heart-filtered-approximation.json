@@ -1,0 +1,239 @@
+{
+ "id": "lem-sfb-finite-complex-heart-filtered-approximation",
+ "kind": "statement",
+ "title": "Filtered finite-constructible-complex heart presentations under a uniform local bound",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\overline{\\mathbf Q}_\\ell$, a finite intermediate extension $E/\\mathbf Q_\\ell$, and a finite commutative ring $A$ annihilated by a power of $\\ell$. Let $\\Lambda\\in\\{A,\\mathbf Z_\\ell,\\mathcal O_E,\\mathbf Q_\\ell,E\\}$, discrete for $A$ and with its induced $\\ell$-adic topology otherwise [sk-def-localizing-closure]. Its condensed ring on profinite sets is $P\\mapsto C(P,\\Lambda)$, with all continuous functions. Let $X$ be an affine Noetherian scheme [def-pc-scheme], meaning locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-quasi-compact-scheme]. Use the small étale and pro-étale sites and the small indexing universe [def-weil-pbc-etale-site, def-weil-pbc-proetale-site, def-weil-size-convention]. Put $\\Lambda_T=p_T^*\\Lambda$ and $\\mathcal A_T=\\operatorname{Mod}_{\\Lambda_T}$ for schemes $T$ over $X$, with the ordinary uncompleted derived categories and actual module-derived global sections to abelian groups [sk-def-sfb-module-derived-pushpull].\n\nLet $\\mathcal C_X$ consist of the finite constant scalar-model constructible modules of [sk-def-sfb-constructible]. A finite constructible complex here means a cochain complex $K^\\bullet$ in $\\mathcal A_X$ [def-pc-cochain-complex-modules] with only finitely many nonzero terms, each in $\\mathcal C_X$; the differentials are arbitrary actual $\\Lambda_X$-linear sheaf maps, not necessarily maps given by a common constant scalar matrix. Put $N_K=\\ker(d^0:K^0\\to K^1)/\\operatorname{im}(d^{-1}:K^{-1}\\to K^0)$, the zeroth cohomology module of this complex. No constructibility assumption is imposed on $N_K$.\n\nLet $c\\geq0$ be an integer. Assume that for every finite constructible complex $K^\\bullet$ as above, every affine pro-étale object $v:U\\to X$, and every integer $q>c$,\n$$H^q\\bigl(R\\Gamma(U_{\\mathrm{pro\\acute et}},v^*N_K[0])\\bigr)=0.$$\nDefine $\\mathcal I_X$ to be the replete class of modules isomorphic to small filtered colimits in $\\mathcal A_X$ of modules $N_K$: the diagram is a diagram of the modules $N_K$ with arbitrary module maps, and is not required to lift to a diagram of complexes. Filtered categories and their colimits are as in [def-weil-pbc-category-colimit]. Then $\\mathcal I_X$ contains zero and $\\mathcal C_X$, is closed under kernels and cokernels of all morphisms between its members, and is closed under extensions and all small ambient coproducts. In particular extension closure refers to every ambient short exact sequence $0\\to B'\\to B\\to B''\\to0$ with $B',B''\\in\\mathcal I_X$, without requiring a pre-existing finite-stage lift of the extension. All the asserted resulting presentations are indexed by small filtered categories in the same indexing universe. No field of definition, invertibility of $\\ell$, derived-completeness or finite-subextension-valued coefficient hypothesis is imposed. The Noetherian hypothesis is essential to this heart argument; the stated local bound alone does not imply the conclusion on arbitrary affine schemes. The empty scheme and the zero coefficient ring are included.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "Paragraph (2), first paragraph: ambient localizing direct-sum preservation. Agent coefficient-transfer decomposition; compare Hemo–Richarz–Scholbach, Section 8, (8.1), Lemmas 5.3 and 8.6, and Proposition 8.2. An exact reference for the full coefficient and geometric generality stated here is WANTED."
+ },
+ "stmt_deps": [
+  "sk-def-localizing-closure",
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-constructible",
+  "def-pc-cochain-complex-modules",
+  "def-weil-pbc-category-colimit",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-sfb-finite-constructible-complex-heart-presentations",
+  "def-sfb-condensed-module-sections"
+ ],
+ "proof": [
+  {
+   "text": "Apply lem-sfb-qcqs-finite-complex-heart-filtered-closure to the same prime ell, coefficient object Lambda and scheme X. Its six coefficient alternatives and the finite-complex-heart filtered hull are exactly those in this statement; locally Noetherian and quasi-compact are already hypotheses. Its conclusion is precisely the six asserted closure properties, in the same universe. It requires neither affineness nor the extra local cohomology bound. Its Noetherian constructible-heart and FP2 argument is reused rather than duplicated.",
+   "uses": [
+    "lem-sfb-qcqs-finite-complex-heart-filtered-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart.proof.md",
+    "place": "Filtered-colimit hull and extension paragraphs"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-qcqs-finite-complex-heart-filtered-closure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart.proof.md",
+  "place": "Specialization of the existing Noetherian finite-complex-heart filtered-closure theorem, which follows the constructible-heart and FP2 hull argument. The affine and local-bound assumptions are unused."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IndCons|ind[Cc]onstructible|weakSerre|[Cc]onstructible",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract complexes, filtered colimits, or condensed module axioms; none states this pro-étale finite-complex coefficient theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Under a local finite cohomological dimension bound kernels cokernels extensions and coproducts of filtered colimits of finite constructible complex cohomology sheaves admit such presentations",
+   "results": "8 hits: HomologicalComplex.instHasFilteredColimitsOfSize, SheafOfModules.isFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, CategoryTheory.ObjectProperty.isFinitelyPresentable, SheafOfModules.Presentation.isColimit, SheafOfModules.QuasicoherentData.IsFinitePresentation.mk, CategoryTheory.Limits.IndObjectPresentation.mk, CategoryTheory.Limits.filtered_colim_preservesFiniteLimits",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract complexes, filtered colimits, or condensed module axioms; none states this pro-étale finite-complex coefficient theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, IsFiltered",
+   "results": "0 hits: ; loogle: unknown identifier 'IsFiltered'",
+   "date": "2026-10-24",
+   "verdict": "unavailable: Loogle did not resolve the unqualified identifier IsFiltered; the qualified query was run separately"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The weak Serre coproduct hull of finite scalar model constructible pro etale modules is contained in filtered colimits of zeroth cohomology of bounded complexes of constructible modules under a uniform affine cohomology bound",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instHasColimits, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, LightCondensed.instIsGrothendieckAbelianLightCondMod, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, Condensed.instAB5CondensedMod, localCohomology.ofDiagram, Condensed.instAB4CondensedMod, CondensedMod.IsSolid",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract complexes, filtered colimits, or condensed module axioms; none states this pro-étale finite-complex coefficient theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Approximate a morphism or short exact sequence of ind constructible internal module sheaves by finite diagrams and represent its kernel or extension as a filtered colimit of finite complex cohomology",
+   "results": "8 hits: LightCondensed.instIsGrothendieckAbelianLightCondMod, Condensed.instAB5CondensedMod, Condensed.instAB4CondensedMod, instAbelianCondensedMod, Condensed.instAB4StarCondensedMod, localCohomology.diagram, SheafOfModules.Presentation.isColimit, localCohomology.ofDiagram",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract complexes, filtered colimits, or condensed module axioms; none states this pro-étale finite-complex coefficient theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CategoryTheory.IsFiltered",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract complexes, filtered colimits, or condensed module axioms; none states this pro-étale finite-complex coefficient theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Filtered colimits of zeroth cohomology of bounded complexes of finite constant constructible pro etale module sheaves form a weak Serre subcategory under a uniform local cohomology bound",
+   "results": "8 hits; [\"localCohomology.ofDiagram\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"localCohomology.diagram\", \"Condensed.instAB4CondensedMod\", \"localCohomology.ofSelfLERadical\", \"Condensed.instAB4StarCondensedMod\", \"localCohomology\", \"instAbelianLightCondMod\"]",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract filtered colimits, complexes and condensed categories do not state this finite-complex pro-etale heart approximation"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CategoryTheory.IsFiltered",
+   "results": "0 hits; []",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract filtered colimits, complexes and condensed categories do not state this finite-complex pro-etale heart approximation"
+  },
+  {
+   "tool": "grep",
+   "query": "IndConstructible|finiteComplex|WeakSerre|weakSerre",
+   "results": "0 hits; []",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract filtered colimits, complexes and condensed categories do not state this finite-complex pro-etale heart approximation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A filtered colimit of cohomology of finite constructible complexes is closed under all kernels cokernels and extensions in sheaves of modules",
+   "results": "8 hits; [\"CategoryTheory.IsGrothendieckAbelian.isColimitMapCoconeOfSubobjectMkEqISup\", \"SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat\", \"HomologicalComplex.instHasFilteredColimitsOfSize\", \"SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat\", \"instPreservesHomologyFunctorAddCommGrpCatColim\", \"CategoryTheory.Sheaf.hasFilteredColimitsOfSize\", \"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"HomologicalComplex.ab5OfSize\"]",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract filtered colimits, complexes and condensed categories do not state this finite-complex pro-etale heart approximation"
+  },
+  {
+   "tool": "grep",
+   "query": "IndObjectPresentation|filtered_colim_preservesFiniteLimits|IsClosedUnderExtensions",
+   "results": "17 hits; [\"Mathlib/CategoryTheory/ObjectProperty/Extensions.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Extensions.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Extensions.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Extensions.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Extensions.lean\", \"Mathlib/CategoryTheory/Abelian/SerreClass/Basic.lean\", \"Mathlib/CategoryTheory/Filtered/CostructuredArrow.lean\", \"Mathlib/CategoryTheory/Limits/Indization/ParallelPair.lean\"]",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract filtered colimits, complexes and condensed categories do not state this finite-complex pro-etale heart approximation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an abelian category of pro etale modules approximate arbitrary maps and Yoneda extensions between filtered colimits of homology of finite constructible complexes by finite constructible data",
+   "results": "8 hits; [\"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"Condensed.profiniteSolid\", \"localCohomology.diagram\", \"Condensed.isColimitLocallyConstantPresheaf_desc_apply\", \"Condensed.profiniteSolidification\", \"CondensedMod.IsSolid.isIso_solidification_map\", \"Condensed.profiniteSolidCounit\", \"localCohomology.ofDiagram\"]",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract filtered colimits, complexes and condensed categories do not state this finite-complex pro-etale heart approximation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-torsion-cd-topological-serre-transfer",
+  "date": "2026-10-24",
+  "group": "O1"
+ },
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement proof (2), first paragraph: preservation of direct sums by derived direct image on the ambient localizing hull; the coefficient part of the affine heart bound, after the classical torsion affine bound is established. Filtered presentation and all ambient weak-Serre closure operations before the final cohomology colimit.",
+   "via": [
+    "lem-sfb-torsion-cd-topological-serre-transfer",
+    "lem-sfb-affine-profinite-family-serre-cd",
+    "lem-sfb-profinite-geometric-family-heart-cd",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-complex-heart-filtered-approximation",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: original arbitrary-affine kernel closure fails for Q_ell on the Stone–Cech w-contractible affine example, even under the local bound (HRS 8.6(2)). Added Noetherianity and split the repaired assertion into constructible-heart closure/smallness, Hom and Yoneda Ext1 continuity, and a general FP2 hull lemma. Parent arbitrary-affine transfer must be reopened; report gives the counterexample, scope of correction and source audits.",
+  "blueprint": "Refinement proof (2), first paragraph. Repairs an invalid coefficient-transfer heart step rather than claiming that derived Ind-completion proves heart closure; uses the Noetherian heart argument of sk-prop-ind-heart.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-sieve-module-sheaves-grothendieck",
+    "why": "Generic small-site abelian-sheaf Grothendieckness, applied at Z; the unit has no replacement."
+   },
+   {
+    "node": "sk-def-sfb-sheaf-tensor",
+    "why": "Generic closed sheaf tensor structure needed for internal modules."
+   },
+   {
+    "node": "lem-sfb-modobj-grothendieck",
+    "why": "Generic Grothendieckness of internal modules over a ring object."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NN-8712600d7",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-8712600d7 (reviewer sub-agent of L); spot-checked: E7 statement change accepted: arbitrary affine X narrowed to affine Noetherian X. I re-derived the counterexample to the original statement. X = Spec C_lc(βN,k) with char k = ℓ is w-contractible affine; take Λ = Q_ℓ and f = ext(ℓ^n). Q = coker f = N_K for [Λ_X -f-> Λ_X], so Q ∈ I_X. Every member of I_X has an injective counit L_0Γ → id: terms are lisse, so K = L(P) with P perfect (HRS Lemma 4.1(2)); R = C(βN,Q_ℓ) is semi-hereditary (Theorem 6.12), so L has amplitude [-1,0]; H^0 L(τ≤0 P) injects into N_K; this passes to filtered colimits. But B = im f = ker(Λ_X → Q) has counit Λ_X ↠ B with kernel the invisible sheaf of HRS Example 4.2 / Remark 6.4, so B ∉ I_X. HRS Lemma 8.6(2) supplies the local bound, so the bound does not save the statement. Step 1: lem-cbc-sieve-module-sheaves-grothendieck (applied at Z), sk-def-sfb-sheaf-tensor (closed monoidal, hence additive) and lem-sfb-modobj-grothendieck make A_X Grothendieck; these generic tool_uses are accepted. Step 2: the heart node's hypotheses match exactly. Step 3 (elementary): Z = ker d^0, im d^-1 = coker(ker d^-1 → K^-1) and N_K = coker(im → Z) all lie in C_X, so I_X = J. Step 4: the abstract node's hypotheses are met. New node lem-sfb-noetherian-scalar-constructible-heart is true: for adic Λ, t-admissibility (HRS Lemma 6.10, Corollary 6.11(1), including Q̄_ℓ with norm topology) and Theorem 6.2(3) heart = sk-def-sfb-constructible class; for A, lem-sfb-discrete-noetherian-constructible-serre. It is not a duplicate of det-lem-coefficient-heart-* (E and Q̄_ℓ via the qlbar-condensed ring only). New node lem-sfb-noetherian-scalar-constructible-fp2: HRS Lemma 5.3(2) with n=0 covers the regular rings; tested on A = Z/ℓ^2 with C = A/ℓ via Ext^p_A(P, H^q) for p+q ≤ 2 and the five lemma; WANTED flag is honest. Not a duplicate of sk-lem-constructible-ext-continuity (E, Q̄_ℓ, O_E with locally free a_!L only). New node lem-sfb-fp2-ind-realization faithfully abstracts the five paragraphs of the sk-prop-ind-heart proof; I checked filteredness, the AB5 kernels/cokernels and the extension pullback/pushout argument. It is not a restatement of the item; det-ind-heart-full-faithfulness-realization covers only the first paragraph. All three nodes: B1-B9 satisfied, from.node and via correct, three search kinds recorded, no SGA. Maintainer notes (not faults of this delivery): (1) live parent lem-sfb-torsion-cd-topological-serre-transfer step 2 uses this item for arbitrary affine X; it must be reopened with a new route. (2) Unsplit lem-sfb-qcqs-finite-complex-heart-filtered-closure (qcqs) is refuted by the same βN example; it is cited by lem-sfb-closed-torsion-rigidity-serre-transfer step 2. Mark it STATEMENT-DISPUTED and record both in HUMAN.md. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteComplexHeartFilteredApproximation",
+  "declaration": "AlgebraicGeometry.ProEtale.finite_complex_heart_filtered_approximation",
+  "file": "lean/Sheaf/Paper/FiniteComplexHeartFilteredApproximation.lean",
+  "statement": "theorem finite_complex_heart_filtered_approximation (ℓ : ℕ) [Fact ℓ.Prime] (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (hΛ : (∃ (A : Type) (_ : CommRing A) (_ : TopologicalSpace A) (_ : DiscreteTopology A) (_ : IsTopologicalRing A), Finite A ∧ (∃ n : ℕ, ∀ a : A, (ℓ ^ n) • a = 0) ∧ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj A))) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℤ_[ℓ])) ∨ (∃ E : PadicAlgCl.FiniteIntermediateField ℓ, Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ℓ E))) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℚ_[ℓ])) ∨ (∃ E : PadicAlgCl.FiniteIntermediateField ℓ, Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E)))) (X : Scheme.{u}) [IsAffine X] [IsLocallyNoetherian X] [CompactSpace X] (c : ℕ) (hcd : ∀ (K : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ℤ), IsFiniteConstantConstructibleComplex Λ X K → ∀ (U : X.ProEt) [IsAffine U.left] (q : ℤ), (c : ℤ) < q → IsZero ((DerivedCategory.homologyFunctor Ab.{u + 1} q).obj ((condensedModuleSections Λ U.left).rightDerivedFunctor.obj ((DerivedCategory.singleFunctor _ 0).obj ((CondensedRing.upperStar Λ U.hom).obj (K.homology 0)))))) : (indFiniteConstructibleComplexHearts Λ X).ContainsZero ∧ IsConstantModelConstructible Λ X ≤ indFiniteConstructibleComplexHearts Λ X ∧ (indFiniteConstructibleComplexHearts Λ X).IsClosedUnderKernels ∧ (indFiniteConstructibleComplexHearts Λ X).IsClosedUnderCokernels ∧ (indFiniteConstructibleComplexHearts Λ X).IsClosedUnderExtensions ∧ ∀ I : Type (u + 1), (indFiniteConstructibleComplexHearts Λ X).IsClosedUnderColimitsOfShape (Discrete I)",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-866547dfd",
+  "group": "NL",
+  "result": "pass",
+  "note": "Clause-by-clause check of the Lean statement against the node: the six coefficient cases (same encoding as the landed FiniteConstructibleComplexHeartCd; the finite-subextension-valued algebraic-closure variant is correctly excluded), affine + locally Noetherian + CompactSpace X, a cohomology-bound hypothesis using module-derived sections at affine pro-etale U with q > c, the hull as ObjectProperty.ind.{u+1} of K.homology 0 (arbitrary module maps; u+1 is the size-convention universe), and conclusions ContainsZero, constructibles ≤ hull, closure under kernels, cokernels, extensions and coproducts over every I : Type (u+1). Edge cases (empty scheme, zero ring, zero complex, c = 0, empty coproduct) are covered. The new definition node has real bodies and source/blueprint docstrings and does not duplicate the existing ind-constructible classes. Recorded statements match the files verbatim; single sorry; node statement unchanged from live; no prior S2 run for this item. Nothing recompiled because no file changed; the worker's dry run was OK. Advisory: sk-def-localizing-closure is cited in prose but its predicate is not used in Lean (inherited stage-1 dependency)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261023T231758-L-3643251",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "statement_change": {
+  "date": "2026-10-25",
+  "by": "L maintenance (coefficient removal, follow-up of 66b1ce0e791)",
+  "old_statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega=\\overline{\\mathbf Q}_\\ell$, a finite intermediate extension $E/\\mathbf Q_\\ell$, and a finite commutative ring $A$ annihilated by a power of $\\ell$. Let $\\Lambda\\in\\{A,\\mathbf Z_\\ell,\\mathcal O_E,\\mathbf Q_\\ell,E,\\Omega\\}$, discrete for $A$ and with its induced $\\ell$-adic topology otherwise [sk-def-localizing-closure]. Its condensed ring on profinite sets is $P\\mapsto C(P,\\Lambda)$, with all continuous functions also for $\\Omega$. Let $X$ be an affine Noetherian scheme [def-pc-scheme], meaning locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-quasi-compact-scheme]. Use the small étale and pro-étale sites and the small indexing universe [def-weil-pbc-etale-site, def-weil-pbc-proetale-site, def-weil-size-convention]. Put $\\Lambda_T=p_T^*\\Lambda$ and $\\mathcal A_T=\\operatorname{Mod}_{\\Lambda_T}$ for schemes $T$ over $X$, with the ordinary uncompleted derived categories and actual module-derived global sections to abelian groups [sk-def-sfb-module-derived-pushpull].\n\nLet $\\mathcal C_X$ consist of the finite constant scalar-model constructible modules of [sk-def-sfb-constructible]. A finite constructible complex here means a cochain complex $K^\\bullet$ in $\\mathcal A_X$ [def-pc-cochain-complex-modules] with only finitely many nonzero terms, each in $\\mathcal C_X$; the differentials are arbitrary actual $\\Lambda_X$-linear sheaf maps, not necessarily maps given by a common constant scalar matrix. Put $N_K=\\ker(d^0:K^0\\to K^1)/\\operatorname{im}(d^{-1}:K^{-1}\\to K^0)$, the zeroth cohomology module of this complex. No constructibility assumption is imposed on $N_K$.\n\nLet $c\\geq0$ be an integer. Assume that for every finite constructible complex $K^\\bullet$ as above, every affine pro-étale object $v:U\\to X$, and every integer $q>c$,\n$$H^q\\bigl(R\\Gamma(U_{\\mathrm{pro\\acute et}},v^*N_K[0])\\bigr)=0.$$\nDefine $\\mathcal I_X$ to be the replete class of modules isomorphic to small filtered colimits in $\\mathcal A_X$ of modules $N_K$: the diagram is a diagram of the modules $N_K$ with arbitrary module maps, and is not required to lift to a diagram of complexes. Filtered categories and their colimits are as in [def-weil-pbc-category-colimit]. Then $\\mathcal I_X$ contains zero and $\\mathcal C_X$, is closed under kernels and cokernels of all morphisms between its members, and is closed under extensions and all small ambient coproducts. In particular extension closure refers to every ambient short exact sequence $0\\to B'\\to B\\to B''\\to0$ with $B',B''\\in\\mathcal I_X$, without requiring a pre-existing finite-stage lift of the extension. All the asserted resulting presentations are indexed by small filtered categories in the same indexing universe. No field of definition, invertibility of $\\ell$, derived-completeness or finite-subextension-valued coefficient hypothesis is imposed. The Noetherian hypothesis is essential to this heart argument; the stated local bound alone does not imply the conclusion on arbitrary affine schemes. The empty scheme and the zero coefficient ring are included.",
+  "what": "Decision of the human, 2026-10-25: the ring of all continuous maps to the algebraic closure (continuousMapRingObj (PadicAlgCl l)) is no longer an admissible coefficient (commit 66b1ce0e791, coord/changes/L-coefficient-allcontinuous-removal.md). That commit narrowed the roots of this chain (weak-Serre generation, torsion-cd Serre transfer) to A, Z_l, O_E, Q_l, E, but this statement still listed the all-continuous case. It is dropped here and from the Lean hypothesis (landing L 20261025T093525); the remaining coefficients are unchanged. No citer uses the dropped case.",
+  "source": {
+   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/_section.md",
+   "place": "coefficient list A, Z_l, O_E, Q_l, E, Qbar_l, with Qbar_l read as sk-def-sfb-qlbar-condensed"
+  },
+  "citers": [
+   {
+    "id": "lem-sfb-noetherian-torsion-cd-topological-serre-transfer",
+    "holds": true,
+    "note": "cites it only for A, Z_l, O_E, Q_l, E; the all-continuous algebraic-closure coefficient is not admissible any more"
+   },
+   {
+    "id": "lem-sfb-torsion-cd-topological-serre-transfer",
+    "holds": true,
+    "note": "cites it only for A, Z_l, O_E, Q_l, E; the all-continuous algebraic-closure coefficient is not admissible any more"
+   }
+  ]
+ }
+}

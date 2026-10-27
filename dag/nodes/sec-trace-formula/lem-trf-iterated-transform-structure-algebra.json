@@ -1,0 +1,270 @@
+{
+ "id": "lem-trf-iterated-transform-structure-algebra",
+ "kind": "statement",
+ "title": "Structure algebra of an iterated scheme strict transform",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $\\mathcal I\\subseteq\\mathcal O_S$ be a finite-type quasi-coherent ideal [pqf-def-coherent], and let $b_0:S_1=\\operatorname{Bl}_{\\mathcal I}(S)\\to S$ be its blow-up [def-nagata-global-blowup]. Let $\\mathcal J\\subseteq\\mathcal O_{S_1}$ be a finite-type quasi-coherent ideal and let $b_1:S_2=\\operatorname{Bl}_{\\mathcal J}(S_1)\\to S_1$. For a morphism $f:X\\to S$, put $A=X\\times_SS_1$, $B=X\\times_SS_2=A\\times_{S_1}S_2$, with projections $p:A\\to X$, $q:B\\to A$, $f_1:A\\to S_1$ and $f_2:B\\to S_2$ [def-pc-fibre-product]. Let $i_1:X_1\\hookrightarrow A$ be the scheme strict transform of $X\\to S$ along $b_0$, and let $i_2:X_2\\hookrightarrow X_1\\times_{S_1}S_2$ be the scheme strict transform of $X_1\\to S_1$ along $b_1$ [def-nagata-strict-transform]. Write $\\widetilde i_1:X_1\\times_{S_1}S_2\\to B$ for the base change of $i_1$ and $k_2=\\widetilde i_1i_2:X_2\\to B$. Let $M$ and $N$ be the two successive module strict transforms of $\\mathcal O_X$ [def-trf-module-strict-transform]. Let $\\alpha:\\mathcal O_B\\to N$ be the composite of the pullback of $\\mathcal O_A\\to M$ with $q^*M\\to N$, using the multiplication identifications of structure-sheaf pullbacks [def-pc-module-pullback]. Then $k_2$ is a closed immersion [def-weil-closed-immersion] and there is a canonical isomorphism\n$$\\theta:N\\xrightarrow{\\sim}k_{2,*}\\mathcal O_{X_2}$$\nof quotient $\\mathcal O_B$-algebras such that $\\theta\\alpha$ is the structure map $\\mathcal O_B\\to k_{2,*}\\mathcal O_{X_2}$. In particular $\\ker\\alpha$ is exactly the defining ideal sheaf of $X_2$ in $B$.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 080I, lemma-strict-transform-composition-blowups, passage from sheaf clause (1) to scheme clause (2); Tag 080G, lemma-strict-transform-affine, applied to the first closed immersion; Tag 080D, definition-strict-transform (2)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-nagata-global-blowup",
+  "def-pc-fibre-product",
+  "def-trf-module-strict-transform",
+  "def-pc-module-pullback",
+  "def-nagata-strict-transform",
+  "def-weil-closed-immersion",
+  "lem-trf-strict-transform-sheaf-kernel",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sfb-tensor-pullback-structure-sheaf-map",
+  "lem-weil-pbc-module-pullback-structure-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Put $Y=X_1\\times_{S_1}S_2$, $j=\\widetilde i_1:Y\\to B$, and $r:Y\\to X_1$. The fibre-product universal property identifies the square $(r,j,q,i_1)$ as Cartesian. Since $i_1,i_2$ are closed immersions by the scheme strict-transform construction, closed-immersion base change gives that $j$ is closed and composition gives that $k_2=ji_2$ is closed. In particular $j$ and $i_1$ are affine by the finite closed-immersion lemma.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-nagata-strict-transform",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-comp",
+    "lem-weil-pbc-closed-immersion-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080D, definition-strict-transform (2); Tag 080G, lemma-strict-transform-affine, applied to the closed immersion $i_1$."
+   }
+  },
+  {
+   "text": "Let $L$ be the module strict transform of $\\mathcal O_{X_1}$ along $b_1$, on $Y$. Apply the sheaf-kernel lemma first to $(f,\\mathcal I,\\mathcal O_X)$ and then to $(X_1\\to S_1,\\mathcal J,\\mathcal O_{X_1})$. It gives quotient-compatible module isomorphisms $m:M\\simeq i_{1,*}\\mathcal O_{X_1}$ and $l:L\\simeq i_{2,*}\\mathcal O_{X_2}$, and quasi-coherence of $M,L$ and the kernel $K_Y$ of $\\pi_Y:\\mathcal O_Y\\to L$. Its structure-sheaf clause identifies both kernels as defining ideals. Hence $m,l$ are algebra isomorphisms: in each case products of local lifts $a,b$ map to the product of the images of $a,b$, and the image of $1$ is $1$. Quotient maps of sheaves admit such lifts locally.",
+   "uses": [
+    "lem-trf-strict-transform-sheaf-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080D, definition-strict-transform (1)-(2), used twice."
+   }
+  },
+  {
+   "text": "Affine base change for $i_1$ along $q$ gives the canonical algebra isomorphism $\\beta:q^*i_{1,*}\\mathcal O_{X_1}\\simeq j_*\\mathcal O_Y$. Compose with $q^*m$ to obtain $\\gamma:H=q^*M\\simeq j_*\\mathcal O_Y$. If $u:\\mathcal O_B\\to H$ is the pullback of the first quotient map, then $\\gamma u$ is the structure map for $j$. Indeed the algebra base-change map carries $a\\otimes c$ to $a\\,r^\\sharp(c)$ on affine charts, so it takes $a\\otimes1$ to the structural image of $a$; Step 2 identifies the first quotient with the structural map for $i_1$. These equalities are sheaf-local and require no flatness of $q$.",
+   "uses": [
+    "lem-weil-pbc-affine-pushforward-base-change",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02KG, lemma-affine-base-change, affine tensor formula; divisors.tex Tag 080G, first sentence."
+   }
+  },
+  {
+   "text": "Put $D=f_2^{-1}b_1^{-1}V(\\mathcal J)\\subseteq B$ and $D_Y=j^{-1}D\\subseteq Y$. By the module strict-transform definition, $N=H/K$, where $K(W)=\\{s\\in H(W):s|_{W\\setminus D}=0\\}$, while $L=\\mathcal O_Y/K_Y$ with the same restriction-kernel formula for $D_Y$. Under $\\gamma$, $K=j_*K_Y$ as submodule sheaves: for every open $W\\subseteq B$, $(j_*\\mathcal O_Y)(W)=\\mathcal O_Y(j^{-1}W)$ and $j^{-1}(W\\setminus D)=j^{-1}W\\setminus D_Y$; naturality of $\\gamma$ identifies the two restriction maps, and therefore their kernels. This is a direct equality on every open, not a claim that arbitrary pushforward is exact.",
+   "uses": [
+    "def-trf-module-strict-transform"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 07ZQ, lemma-push-sections-supported-on-closed-subset, final instruction in the proof: match the sheaves directly; divisors.tex Tag 080D (1)."
+   }
+  },
+  {
+   "text": "Apply the affine quotient lemma to the affine morphism $j$ and the quasi-coherent pair $K_Y\\subseteq\\mathcal O_Y$. Step 2 supplies quasi-coherence of $K_Y$ and of its quotient $L$. It gives a unique quotient-compatible isomorphism $(j_*\\mathcal O_Y)/(j_*K_Y)\\simeq j_*L$. Step 4 lets $\\gamma$ descend to $t:N\\simeq j_*L$, and the compatibility in that lemma gives $t\\pi_1=(j_*\\pi_Y)\\gamma$, where $\\pi_1:H\\to N$. All these are algebra maps: $K_Y$ is an ideal by Step 2; $K$ is an ideal since multiplication of a section zero off $D$ by any section remains zero off $D$; and the induced map sends the class of a local section to its class under the ring map $\\gamma$.",
+   "uses": [
+    "lem-trf-affine-pushforward-quasi-coherent-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080G, lemma-strict-transform-affine, last sentence; schemes.tex Tags 01IB, lemma-equivalence-quasi-coherent, and 01IC, lemma-kernel-cokernel-quasi-coherent."
+   }
+  },
+  {
+   "text": "Define $\\theta$ by $N\\xrightarrow{t}j_*L\\xrightarrow{j_*l}j_*i_{2,*}\\mathcal O_{X_2}=k_{2,*}\\mathcal O_{X_2}$. For direct image the last identification is literal on sections: both evaluate on $W$ as $\\mathcal O_{X_2}(i_2^{-1}j^{-1}W)$ with the same scalar action. The equations of Steps 2, 3 and 5 give $\\theta\\alpha=(j_*i_2^\\sharp)\\gamma u=(j_*i_2^\\sharp)j^\\sharp=k_2^\\sharp$. The last equality is the definition of the structure map of a composite morphism of locally ringed spaces. Thus $\\theta$ is the asserted algebra isomorphism and it respects the specified map from $\\mathcal O_B$.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080G, conclusion, applied after the two structure-sheaf identifications of Tag 080D; passage from Tag 080I (1) to (2)."
+   }
+  },
+  {
+   "text": "The iterated-quotient lemma, with $\\mathcal F=\\mathcal O_X$, says that $\\alpha:\\mathcal O_B\\to N$ is surjective. Consequently any two comparisons satisfying the structure-map equation coincide: locally lift a section of $N$ to $a\\in\\mathcal O_B$ and both comparisons send it to $k_2^\\sharp(a)$. This proves canonicity, including independence of all quotient presentations above. Since $\\theta$ is injective, $\\ker\\alpha=\\ker(\\theta\\alpha)=\\ker k_2^\\sharp$, which is precisely the defining ideal sheaf of the closed immersion $k_2$.",
+   "uses": [
+    "lem-trf-iterated-transform-quotient-support",
+    "def-sbc-closed-immersion-ideal-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080I, lemma-strict-transform-composition-blowups, first proof paragraph; Tag 080D (2), defining ideal of the scheme strict transform."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-strict-transform",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-trf-module-strict-transform",
+  "def-weil-locally-ringed-space-morphism",
+  "lem-trf-affine-pushforward-quasi-coherent-quotient",
+  "lem-trf-iterated-transform-quotient-support",
+  "lem-trf-strict-transform-sheaf-kernel",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-comp",
+  "lem-weil-pbc-closed-immersion-finite"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Expanded quotient-algebra compatibility in Tags 080D (definition-strict-transform), 080G (lemma-strict-transform-affine) and the scheme passage of 080I (lemma-strict-transform-composition-blowups); generic inputs 02KG, 01IB/01IC and the sectionwise calculation of 07ZQ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The iterated module strict transform of the structure sheaf is the pushforward of the structure sheaf of the successive scheme strict transform as a quotient algebra on the ambient fiber product",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.IdealSheafData.map_comp, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom, AlgebraicGeometry.Scheme.IdealSheafData.map, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjMap, AlgebraicGeometry.Scheme.IdealSheafData.map_ideal', AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp_assoc; inspected responses do not state this two-step strict-transform assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Successive strict transforms of a scheme have structure sheaf equal to the iterated strict transform of its structure sheaf compatibly with the quotient algebra map",
+   "results": "8 hits: AlgebraicGeometry.Spec_sheaf, AlgebraicGeometry.LocallyRingedSpace.𝒪, AlgebraicGeometry.Spec.structureSheaf, AlgebraicGeometry.Scheme.sheaf, AlgebraicGeometry.Scheme.Modules, AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_assoc, AlgebraicGeometry.localRingHom_comp_stalkIso, AlgebraicGeometry.Spec.sheafedSpaceMap_hom_c_app; inspected responses do not state this two-step strict-transform assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, \"comp\"",
+   "results": "8 hits: AlgebraicGeometry.IsClosedImmersion.comp, AlgebraicGeometry.IsClosedImmersion.of_comp_isClosedImmersion, AlgebraicGeometry.isClosedImmersion_of_comp_eq_id, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsClosedImmersionIsSeparated, AlgebraicGeometry.IsClosedImmersion.of_comp, AlgebraicGeometry.IsClosedImmersion.comp_iff, AlgebraicGeometry.IsImmersion.isImmersion_iff_exists_of_quasiCompact, AlgebraicGeometry.Scheme.instIsClosedImmersionIrreducibleComponentι; inspected responses do not state this two-step strict-transform assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictTransform|strict_transform|strict.*pushforward",
+   "results": "4 hits: Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; inspected responses do not state this two-step strict-transform assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The iterated strict transform of the structure sheaf is the quotient algebra of the successive scheme strict transform",
+   "results": "8 hits: AlgebraicGeometry.specTargetImage, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Hom.liftQuotient_comp_assoc, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.liftQuotient, AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj, AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app. Inspected returned types; these concern ordinary structure sheaves, quotient spectra, base-change geometry or module adjunctions, and do not state the iterated strict-transform quotient-algebra identification.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictTransform|strict_transform|strict transform",
+   "results": "0 hits: . Inspected returned types; these concern ordinary structure sheaves, quotient spectra, base-change geometry or module adjunctions, and do not state the iterated strict-transform quotient-algebra identification.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The structure sheaf of a strict transform is the quotient by exceptional supported sections, compatible with repeated blowups",
+   "results": "8 hits: AlgebraicGeometry.LocallyRingedSpace.𝒪, AlgebraicGeometry.Spec.locallyRingedSpaceObj_sheaf', AlgebraicGeometry.Spec.locallyRingedSpaceObj_sheaf, AlgebraicGeometry.structureSheafInType, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType, AlgebraicGeometry.commRingStructureSheafInTypeObj, AlgebraicGeometry.Spec.structureSheaf. Inspected returned types; these concern ordinary structure sheaves, quotient spectra, base-change geometry or module adjunctions, and do not state the iterated strict-transform quotient-algebra identification.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.Scheme.Modules.pullback",
+   "results": "12 hits: AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackId_hom, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapId_hom_τl, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapId_inv_τl, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapId_hom_τr, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapId_inv_τr. Inspected returned types; these concern ordinary structure sheaves, quotient spectra, base-change geometry or module adjunctions, and do not state the iterated strict-transform quotient-algebra identification.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Removing exceptional torsion from a quotient structure algebra commutes with pushforward along a closed immersion after base change",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.liftQuotient_comp_assoc, AlgebraicGeometry.Scheme.Hom.liftQuotient_comp, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.liftQuotient, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion, AlgebraicGeometry.IsImmersion.isPullback_toImage_liftCoborder, AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor. Inspected returned types; these concern ordinary structure sheaves, quotient spectra, base-change geometry or module adjunctions, and do not state the iterated strict-transform quotient-algebra identification.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-strict-transform-composition",
+  "date": "2026-10-22",
+  "group": "Q73"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Supporting finite-after-blowup input in the Orgogozo modification route of lem-trf-local-term-locality; extraction from Tag 080I, lemma-strict-transform-composition-blowups, passage from sheaf clause (1) to scheme clause (2); Tag 080G, lemma-strict-transform-affine, applied to the first closed immersion; Tag 080D, definition-strict-transform (2).",
+   "via": [
+    "lem-trf-strict-transform-composition",
+    "lem-trf-finite-after-blowup",
+    "lem-trf-alteration-finite-refinement",
+    "lem-trf-orgogozo-good-modification",
+    "lem-trf-trait-nearby-base-change",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-iterated-transform-structure-algebra",
+  "worker": "stage1",
+  "summary": "Q92 split the iterated structure-algebra identification entirely through existing nodes: closed-immersion permanence, two one-step structure-sheaf identifications, affine algebra base change, equality of restriction kernels on inverse images of opens, and exact affine quotient. Wrote the structure-map equation explicitly, checked products and units using local lifts, and deduced the defining ideal and uniqueness from the iterated quotient epimorphism. No statement change and no new nodes; searched the full DAG/blueprint and current project Lean source and ran five logged Mathlib searches with two semantic phrasings.",
+  "blueprint": "Retains the supporting finite-after-blowup branch of lem-trf-local-term-locality through lem-trf-strict-transform-composition: the passage from sheaf clause (1) to scheme clause (2) of Stacks 080I, using 080G for the first closed immersion and 080D twice. Latest blueprint proof (1)-(2) is the ancestor; no unit or chapter route replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-pushforward-base-change",
+    "why": "Generic underived affine base change, specifically its structure-algebra clause (2), supplies the canonical algebra map in the Cartesian closed-immersion square; the unit has no such generic base-change theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-pushforward-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q92-8ae6da447",
+  "group": "Q92",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-8ae6da447 (reviewer sub-agent of L); spot-checked: I read all 7 steps, the 12 cited statements and the Stacks source in full. Stacks divisors.tex 080I proves only clause (1), for modules. The item supplies the missing passage to clause (2), for schemes, via 080G and 080D. Statement and stmt_deps are identical to live, where the node is still unsplit. There is no repair note, so this is not a re-split, and there is no cycle. Step 1: the fibre-product pasting gives Y = X1 x_A B; the closed-immersion base-change, comp and finite leaves give that j and k2 are closed and that j and i1 are affine. Step 2: sheaf-kernel last clause, applied twice; the exceptional set for the second application matches i2. The upgrade to algebra maps by local lifts is valid because both kernels are ideals. Step 3: clause (2) of the affine base-change lemma (accepted tool use: generic, and the in-unit 080G node is module-only) is an O_B-algebra isomorphism, which gives gamma u = j#. Step 4: D = f2^-1 b1^-1 V(J) and D_Y = j^-1 D; the elementary sectionwise kernel equality is correct. lem-trf-supported-sections-pushforward states the same transport; citing it is optional. Step 5: the affine quotient lemma is applied with f = j, H = O_Y and K = K_Y, both quasi-coherent, and gives t pi1 = (j_* piY) gamma. Step 6: theta alpha = j_*(l piY) gamma u = j_*(i2#) j# = k2#, by the composite formula. Step 7: quotient-support gives alpha epi, hence uniqueness, and ker alpha = ker k2#. Edge cases checked: I = O, I = 0, X inside V(I), non-reduced X. Duplicate search over the strict-transform nodes found nothing that states the item. No SGA is cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IteratedStrictTransformStructureAlgebra",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.iteratedStrictTransform_structureAlgebra",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.iteratedStrictTransformι",
+   "AlgebraicGeometry.Scheme.Modules.iteratedStrictTransformStructureModule",
+   "AlgebraicGeometry.Scheme.Modules.iteratedStrictTransformStructureMap",
+   "AlgebraicGeometry.Scheme.Modules.iteratedStrictTransform_structureAlgebra"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/IteratedStrictTransformStructureAlgebra.lean",
+  "statement": "theorem iteratedStrictTransform_structureAlgebra {X S : Scheme.{u}} (f : X ⟶ S) (I : S.IdealSheafData) [I.toModules.IsFiniteType] (J : I.blowup.IdealSheafData) [J.toModules.IsFiniteType] : IsClosedImmersion (iteratedStrictTransformι f I J) ∧ ∃ a : MonObj (iteratedStrictTransformStructureModule f I J), a.one = iteratedStrictTransformStructureMap f I J ∧ @IsCommMonObj _ _ _ _ _ a ∧ (∃! θ : iteratedStrictTransformStructureModule f I J ≅ (pushforward (iteratedStrictTransformι f I J)).obj (SheafOfModules.unit (J.strictTransform (strictTransformMap f I.blowupMap I.support.compl)).ringCatSheaf), iteratedStrictTransformStructureMap f I J ≫ θ.hom = SheafOfModules.unitToPushforwardObjUnit (iteratedStrictTransformι f I J).toRingCatSheafHom ∧ ∀ (V : (Limits.pullback (pullback.snd f I.blowupMap) J.blowupMap).Opens) (s t : Γ(iteratedStrictTransformStructureModule f I J, V)), θ.hom.app V (a.mul.app V (tmulSection s t)) = @Mul.mul (Γ(J.strictTransform (strictTransformMap f I.blowupMap I.support.compl), (iteratedStrictTransformι f I J) ⁻¹ᵁ V)) inferInstance (θ.hom.app V s) (θ.hom.app V t)) ∧ ∀ (V : (Limits.pullback (pullback.snd f I.blowupMap) J.blowupMap).Opens) (s : Γ((SheafOfModules.unit (Limits.pullback (pullback.snd f I.blowupMap) J.blowupMap).ringCatSheaf : (Limits.pullback (pullback.snd f I.blowupMap) J.blowupMap).Modules), V)), Hom.app (iteratedStrictTransformStructureMap f I J) V s = 0 ↔ s ∈ (iteratedStrictTransformι f I J).ker.idealOfOpens V",
+  "branch": "newtargets-dag",
+  "by": "Q58",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-95d77c43d",
+  "group": "Q58",
+  "result": "pass",
+  "note": "Re-delivery of 448c (returned H2). Lean diff: successiveModuleStrictTransform replaced by its exact body (@moduleStrictTransform applied to the first transform with the QC proof from moduleStrictTransform_properties), so N is definitionally unchanged; comparison-epimorphism import replaced by public TensorPullbackStructureSheaf import. Node diff: stmt_deps drops lem-trf-strict-transform-comparison-epimorphism and adds def-sfb-tensor-pullback-structure-sheaf-map + lem-weil-pbc-module-pullback-structure-sheaf; all other fields equal side-live main. lean.statement verbatim in file; 4 declarations present. Mechanical theorem-stmt_dep finding judged: sheaf-kernel conclusion (QC of M) is needed to type N, and pullback-structure-sheaf conclusion (IsIso ε_q) is needed to invert ε_q in α, so both are genuine dependencies on theorem conclusions -> PASS on that point. Mathematics as in the full 448c review (all node clauses, edge cases, no extra hypotheses or universe restriction, real helper data, docstrings with 7 proof steps, sorry only). No fix, so no compile."
+ }
+}

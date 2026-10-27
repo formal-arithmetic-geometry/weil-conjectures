@@ -9,7 +9,8 @@
   "lem-sfb-root-tower-lisse-morphism-extension",
   "lem-sfb-root-tower-coordinate-face",
   "def-sfb-derived-profinite-evaluation",
-  "def-sfb-lisse-coefficient-module"
+  "def-sfb-lisse-coefficient-module",
+  "def-sfb-parameter-root-boundary-data"
  ],
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
@@ -136,10 +137,14 @@
  },
  "lean_audit": {
   "master": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
   "slopmaster2": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   }
  },
  "chapter": "sec-six-functors-basics",
@@ -148,22 +153,10 @@
   "module": "Sheaf.Paper.RootBoundaryComparison",
   "declaration": "AlgebraicGeometry.ProEtale.RootBoundary.NormalizedComparison",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.RootBoundary.tower",
-   "AlgebraicGeometry.ProEtale.RootBoundary.stratumRing",
-   "AlgebraicGeometry.ProEtale.RootBoundary.stratumScheme",
-   "AlgebraicGeometry.ProEtale.RootBoundary.stratumInclusion",
-   "AlgebraicGeometry.ProEtale.RootBoundary.roots_vanish",
-   "AlgebraicGeometry.ProEtale.RootBoundary.zeroRoots",
-   "AlgebraicGeometry.ProEtale.RootBoundary.boundary",
-   "AlgebraicGeometry.ProEtale.RootBoundary.boundary_square",
-   "AlgebraicGeometry.ProEtale.RootBoundary.test",
-   "AlgebraicGeometry.ProEtale.RootBoundary.testMap",
-   "AlgebraicGeometry.ProEtale.RootBoundary.qP",
    "AlgebraicGeometry.ProEtale.RootBoundary.puncture",
    "AlgebraicGeometry.ProEtale.RootBoundary.vP",
    "AlgebraicGeometry.ProEtale.RootBoundary.jP",
    "AlgebraicGeometry.ProEtale.RootBoundary.puncture_square",
-   "AlgebraicGeometry.ProEtale.RootBoundary.test_boundary_square",
    "AlgebraicGeometry.ProEtale.RootBoundary.moduleAtZero",
    "AlgebraicGeometry.ProEtale.RootBoundary.testModule",
    "AlgebraicGeometry.ProEtale.RootBoundary.fullSource",
@@ -201,11 +194,12 @@
    "AlgebraicGeometry.ProEtale.RootBoundary.Assertion"
   ],
   "file": "lean/Sheaf/Paper/RootBoundaryComparison.lean",
-  "statement": "def NormalizedComparison (N : SiteMod F (tower p t)) (B : PointMod F) (e : (CondensedRing.upperStar (coefficients F) (boundary p t)).obj N ≅ (pointPull F (stratumScheme t)).obj B) (P : Profinite.{u}) : Prop",
+  "statement": "def NormalizedComparison (N : SiteMod F (tower p t)) (B : PointMod F)\n    (e : (CondensedRing.upperStar (coefficients F) (boundary p t)).obj N ≅\n      (pointPull F (stratumScheme t)).obj B) (P : Profinite.{u}) : Prop",
   "branch": "newtargets-dag",
-  "by": "NO",
-  "date": "2026-10-21",
-  "existing": false
+  "by": "Q33",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Repair requested in return L of lem-sfb-parameter-root-integral-nil-fibre: the elementary tower, stratum, zero-root and test-map declarations have moved with the same names to Sheaf.Paper.ParameterRootBoundaryData, imported publicly here. They are removed from this lean.declarations owner list. The previous monolithic module forced its elementary consumers to import the downstream coordinate-face theorem, closing an import cycle. This module retains exactly the original normalized derived comparison and all remaining declarations; no mathematical signature changes."
  },
  "reviewed": {
   "date": "2026-10-21",
@@ -222,5 +216,20 @@
   "group": "NO",
   "result": "pass",
   "note": "Re-delivery after the fc3955fe RETURN (H3/H12/H11), diffed against that snapshot; item statement, source, proof and stmt_deps unchanged. F1 fixed: ScalarCompatibility uses B'=model Ω E M; eΩ is pinned by IsScalarExtendedBoundary (the actual tensor unit equation, existence and uniqueness stated in scalarBoundaryIdentification_existsUnique); u_M = scalarConstantMap transported by the sectionwise modelIso (x↦1⊗x); target maps are RHom(u_M[0]) and the canonical restrictPointPullD⁻¹ ≫ restrictHomD; one biproduct equation with α_E and α_Ω lands in D. Unfolded: the E leg is IsScalarExtendedBoundary pulled to S[P] via exchange naturality; the Ω leg is comparison_scalarRestriction plus the restriction/exchange mate. Both are true and non-vacuous, and nothing is inverted. F2: node statement rewritten consistently; fields OK; records verbatim with all declarations listed (script). F3: real second reading. Re-checked hypotheses, NormalizedComparison, the naturality clauses, derivedEvaluation = recorded ProfiniteFunctions.comparison, modelIso pinned by ∃!, edge cases r=0, P=∅, P=*, finite P, rank 0, empty stratum, incomplete Ω, universes, docstrings, sorry only in theorems, lines ≤100. Advisory: the new def nodes cite theorem nodes (integral-lisse-closed-base-change, profinite-constant-derived-functions, root-tower-coordinate-face, root-tower-lisse-morphism-extension) for plain defs; the rule is item-scoped and the tool raised no finding, so this is a maintainer note suggesting existing:true def nodes. No files changed, no compile run (worker reports clean compiles: 28.4 s scalar module, 3.9 s item)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261025T050822-L-3846932",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.RootBoundary.puncture_square",
+   "AlgebraicGeometry.ProEtale.RootBoundary.testMap_projection"
+  ],
+  "sorry_after": []
  }
 }

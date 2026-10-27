@@ -1,0 +1,256 @@
+{
+ "id": "lem-sfb-pointlike-quasiseparated-space-field",
+ "kind": "statement",
+ "title": "A quasi-separated space with an etale field atlas is a field spectrum",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $Y$ be an algebraic space over $S$ [def-trf-algebraic-space], and let $L$ be a field [def-weil-field] with an $S$-morphism $q:\\operatorname{Spec}L\\to Y$ [def-weil-affine-spectrum]. Assume $q$ is representable, surjective and etale in the scheme-test sense of [def-trf-algebraic-space, def-weil-etale-morphism]. Assume $Y$ is quasi-separated: its absolute diagonal over $\\operatorname{Spec}\\mathbf Z$ is quasi-compact, meaning that its pullback along every affine test scheme has quasi-compact underlying topological space [def-weil-pbc-quasi-compact-scheme]. Then there is a subfield $k\\subseteq L$ and an isomorphism $Y\\cong\\operatorname{Spec}k$ over $S$ under which $q$ is induced by the inclusion $k\\hookrightarrow L$. The extension $L/k$ is finite separable: it has finite vector-space dimension and the minimal polynomial of each element has no repeated root in an algebraic closure. No finite-type hypothesis on $S$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03DZ (lemma-point-like-spaces), statement and its displayed invariant subfield in the proof."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-sfb-space-absolute-quasi-separated"
+ ],
+ "proof": [
+  {
+   "text": "Put $U=\\operatorname{Spec}L$ and $R=U\\times_Y U$. Apply [lem-a1-etale-atlas-presentation] to the given representable surjective etale $S$-map $q$. It gives a representing scheme $R$, surjective etale projections $s,t:R\\to U$, and a sectionwise equivalence relation $(s,t):R\\to U\\times_S U$. It also identifies $Y$, with its specified map from $U$, with the fppf sheaf quotient $U/R$. All these statements are over the original scheme $S$.",
+   "uses": [
+    "lem-a1-etale-atlas-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 0262 (lemma-space-presentation), clauses (1)-(3); applied in Tag 03DZ (lemma-point-like-spaces)."
+   }
+  },
+  {
+   "text": "The statement of [def-sfb-space-absolute-quasi-separated] identifies quasi-compactness of the absolute diagonal with the affine-test criterion, for algebraic spaces over an arbitrary scheme $S$. Apply that criterion to the two copies of the affine $S$-scheme $U$ and the maps $q,q$. Their sheaf fibre product is precisely the represented scheme $R$ from step 1, so $R$ is quasi-compact. This uses absolute quasi-separatedness, exactly the hypothesis of the item, and imposes no separation or finite-type assumption on $S$.",
+   "uses": [
+    "def-sfb-space-absolute-quasi-separated"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0AHR (lemma-characterize-quasi-separated), equivalence (1) and (3); quasi-compactness step in Tag 03DZ (lemma-point-like-spaces)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-etale-fibre-discrete-separable-points] to $s:R\\to\\operatorname{Spec}L$ at the unique point of $\\operatorname{Spec}L$. Its residue field is $L$, and base change by its identity identifies this fibre with $R$. Thus $R$ is the disjoint union of its one-point open subschemes $\\operatorname{Spec}L_i$, where each $L_i/L$ via $s$ is finite separable. The cover of $R$ by these singleton opens has a finite subcover by step 2; hence there are only finitely many points, indexed by a finite set $I$. Apply the same cited statement to $t$ at the unique point of $U$. It says that the same intrinsic residue fields $L_i$ are finite separable over $L$ also via $t$. The diagonal section $U\\to R$ shows that $I$ is nonempty.",
+   "uses": [
+    "lem-weil-pbc-etale-fibre-discrete-separable-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GL (lemma-etale-over-field), clause (2); finite-index argument in spaces-properties.tex Tag 03DZ (lemma-point-like-spaces)."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-finite-affine-coproduct-spectrum], $R\\cong\\operatorname{Spec}B$ for $B=\\prod_{i\\in I}L_i$. Under either structural map $L\\to B$, a choice of a finite $L$-basis of each $L_i$ gives a finite basis of $B$ by placing those basis elements in their respective coordinates. Consequently $s$ and $t$ are finite by [def-weil-finite-integral-morphism]: both source and target are affine and the corresponding algebra is a finite module. They are flat and locally of finite presentation because they are etale, by [def-weil-etale-morphism]. The definition [def-pc-finite-locally-free] therefore makes both projections finite locally free. This verifies all the geometric hypotheses needed for the affine-relation quotient theorem.",
+   "uses": [
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "def-weil-finite-integral-morphism",
+    "def-weil-etale-morphism",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03DZ (lemma-point-like-spaces), finite locally free projections before application of Tag 03BM; finite coproduct identification: Schemes Tag 01I5 (lemma-disjoint-union-affines)."
+   }
+  },
+  {
+   "text": "Apply [lem-a1-finite-flat-affine-relation-quotient] to the affine $S$-schemes $U=\\operatorname{Spec}L$, $R=\\operatorname{Spec}B$ and the relation of step 1, using step 4 for finite local freeness. It identifies the quotient with $\\operatorname{Spec}C$, where $C=\\{a\\in L:s^\\sharp(a)=t^\\sharp(a)\\}$, and identifies its quotient map with the map induced by $C\\subseteq L$, all over $S$. The two quotient identifications give $Y\\cong\\operatorname{Spec}C$ with the required compatibility with $q$. The subring $C$ contains $0,1$ and is closed under addition and multiplication because $s^\\sharp,t^\\sharp$ are ring maps. For $0\\ne a\\in C$, these maps carry $a^{-1}$ to the inverses of their common value at $a$, so their values at $a^{-1}$ are equal. Hence $C$ is a subfield $k\\subseteq L$.",
+   "uses": [
+    "lem-a1-finite-flat-affine-relation-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BM (proposition-finite-flat-equivalence), as used in spaces-properties.tex Tag 03DZ (lemma-point-like-spaces); the displayed invariant subfield and its closure under inverses."
+   }
+  },
+  {
+   "text": "Under this isomorphism, the given etale map $q$ is $\\operatorname{Spec}L\\to\\operatorname{Spec}k$ induced by inclusion. Apply [lem-weil-pbc-etale-fibre-discrete-separable-points] at the unique point of $\\operatorname{Spec}k$, whose residue field is $k$. The fibre is $\\operatorname{Spec}L$, with its single residue field $L$. The cited statement makes $L/k$ finite and every element a root of a separable polynomial over $k$. Its minimal polynomial divides such a polynomial and therefore has no repeated root. These are exactly the two required clauses of finite separability.",
+   "uses": [
+    "lem-weil-pbc-etale-fibre-discrete-separable-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GL (lemma-etale-over-field), clause (2), applied to the quotient map in Tag 03DZ (lemma-point-like-spaces)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-etale-atlas-presentation",
+  "def-sfb-space-absolute-quasi-separated",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-pc-finite-locally-free",
+  "lem-a1-finite-flat-affine-relation-quotient"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03DZ (lemma-point-like-spaces), full proof, with absolute quasi-separatedness applied via Tag 0AHR and finite separability spelled out via Tag 02GL."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A quasi separated algebraic space admitting a surjective etale morphism from a field spectrum is itself the spectrum of a subfield with finite separable extension",
+   "results": "{\"t\": \"2026-10-23T14:57:34Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi separated algebraic space admitting a surjective etale morphism from a field spectrum is itself the spectrum of a subfield with finite separable extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.instQuasiSeparatedToSpecΓOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.IsIntegral\"], \"digest\": \"e2b2c6e230ed66a2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: only schemes, residue fields, etale algebras or topological quasi-separatedness; none states the algebraic-space assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|point.?[Ll]ike|[Ff]ield.*[Ss]urjective.*[Ee]tale",
+   "results": "{\"t\": \"2026-10-23T15:00:30Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|point.?[Ll]ike|[Ff]ield.*[Ss]urjective.*[Ee]tale\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: only schemes, residue fields, etale algebras or topological quasi-separatedness; none states the algebraic-space assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi separated algebraic space with a surjective etale field spectrum atlas is the spectrum of a field",
+   "results": "{\"t\": \"2026-10-23T15:00:31Z\", \"tool\": \"leansearch\", \"query\": \"A quasi separated algebraic space with a surjective etale field spectrum atlas is the spectrum of a field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.instQuasiSeparatedSpace\", \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace\", \"AlgebraicGeometry.quasiSeparatedSpace_of_isAffine\", \"AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace\", \"AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated\", \"SpectralSpace.toQuasiSeparatedSpace\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_affine\"], \"digest\": \"16fe595005b33ce5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: only schemes, residue fields, etale algebras or topological quasi-separatedness; none states the algebraic-space assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsEtale\"",
+   "results": "{\"t\": \"2026-10-23T15:00:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicSpace\\\", \\\"IsEtale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: only schemes, residue fields, etale algebras or topological quasi-separatedness; none states the algebraic-space assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi separated algebraic space admitting a surjective etale morphism from Spec L for a field L is isomorphic to Spec k for a subfield k of L and L over k is finite separable",
+   "results": "{\"t\": \"2026-10-23T15:00:32Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi separated algebraic space admitting a surjective etale morphism from Spec L for a field L is isomorphic to Spec k for a subfield k of L and L over k is finite separable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecOf\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"AlgebraicGeometry.IsIntegral\", \"Algebra.FormallyEtale.of_isSeparable_aux\", \"AlgebraicGeometry.Scheme.Etale\"], \"digest\": \"fa5e9e99d387b910\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: only schemes, residue fields, etale algebras or topological quasi-separatedness; none states the algebraic-space assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi separated algebraic space with a surjective etale atlas Spec L is a field spectrum Spec k with L finite separable over k",
+   "results": "{\"t\": \"2026-10-23T20:39:44Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi separated algebraic space with a surjective etale atlas Spec L is a field spectrum Spec k with L finite separable over k\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecOf\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"Algebra.FormallyEtale.of_isSeparable_aux\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiSeparated\", \"AlgebraicGeometry.Scheme.Etale\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\"], \"digest\": \"4e26b67cb6dae7b5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are scheme quasi-separatedness, etale algebra classification, or field spectra; none states representability of this algebraic-space quotient."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|point.?[Ll]ike",
+   "results": "{\"t\": \"2026-10-23T20:40:07Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|point.?[Ll]ike\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are scheme quasi-separatedness, etale algebra classification, or field spectra; none states representability of this algebraic-space quotient."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic space with a quasi compact diagonal and a surjective etale field spectrum atlas is the spectrum of a subfield",
+   "results": "{\"t\": \"2026-10-23T20:40:08Z\", \"tool\": \"leansearch\", \"query\": \"An algebraic space with a quasi compact diagonal and a surjective etale field spectrum atlas is the spectrum of a subfield\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift\", \"AlgebraicGeometry.quasiSeparated_iff\", \"AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal\", \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"AlgebraicGeometry.QuasiSeparated.mk\", \"AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact\", \"AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact\", \"AlgebraicGeometry.instQuasiCompactLiftSchemeIdOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\"], \"digest\": \"8ee603608aa5a48e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are scheme quasi-separatedness, etale algebra classification, or field spectra; none states representability of this algebraic-space quotient."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsEtale\"",
+   "results": "{\"t\": \"2026-10-23T20:40:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicSpace\\\", \\\"IsEtale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are scheme quasi-separatedness, etale algebra classification, or field spectra; none states representability of this algebraic-space quotient."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-point-self-relation-field-monomorphism",
+  "date": "2026-10-24",
+  "group": "Q111"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Adequate moduli spaces are universal for separated targets. Alper Theorem 7.2.1, locally separated case through Proposition 7.1.1: Proposition 7.1.1, proof, printed p.36: surjectivity of the diagonal pullback W from condition (a), expanded as its closure-equivalence input. Rational points of a locally separated space over an algebraically closed field have closed images; continuity gives the assertion. This is the geometric-points sublemma, not the universality conclusion. Supporting geometric input: rational sections after field base change are closed immersions. Supporting input: The absolute locally separated space has quasi-compact field-valued representatives. First paragraph of Tag 088J: after proving the field self-relation finite etale, obtain a field monomorphism representing the point. Supporting input to 03JU (3) to (4): Tag 03DZ identifies the quasi-separated quotient with a field spectrum.",
+   "via": [
+    "lem-sfb-finite-point-self-relation-field-monomorphism",
+    "lem-sfb-locally-separated-space-decent",
+    "lem-sfb-locally-separated-rational-point-closed-immersion",
+    "lem-sfb-locally-separated-closure-equivalent-images",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-pointlike-quasiseparated-space-field",
+  "worker": "stage1",
+  "summary": "Read Tag 03DZ and its inputs 0262, 0AHR, 02GL and 03BM. All substantive inputs already have DAG nodes. Wrote the finite-discrete relation argument, verified affine and finite locally free hypotheses for both projections, proved the invariant ring is a subfield, and recovered the specified field map and finite separability. No new nodes or statement correction.",
+  "blueprint": "Supporting input to the inherited direct-images alteration/moduli route: Tag 03DZ identifies the quasi-separated quotient with a field spectrum. The six steps realize its presentation, finite relation, affine quotient and invariant-subfield argument; the current latest direct-images blueprint was read.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-etale-atlas-presentation",
+    "why": "Generic atlas presentation of a space as its fppf relation quotient; this unit has no substitute and the inherited source 03DZ explicitly uses 0262."
+   },
+   {
+    "node": "lem-a1-finite-flat-affine-relation-quotient",
+    "why": "Generic finite locally free affine relation quotient, exactly 03BM used by the source 03DZ; this unit does not supply a replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-etale-atlas-presentation",
+  "lem-a1-finite-flat-affine-relation-quotient"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-b4e036473",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-b4e036473 (reviewer sub-agent of L); spot-checked: I read the whole split and its sources: Stacks 03DZ (statement and full proof), 03BM and the 0AHR label. The statement is byte-identical to the live node, which is still unsplit in live and side-live, so there is no parallel supersession. There are no new nodes. The six steps follow 03DZ in order and each cited statement says what its step takes from it. (1) The 0262 atlas node gives R=U×_YU, surjective étale s,t, a testwise equivalence relation and the fppf quotient identified with q. (2) The def-sfb-space-absolute-quasi-separated statement gives the affine-pair criterion and its 0AHR equivalence, so R is quasi-compact; the point topology of a representable R equals its scheme topology (elementary). (3) The 02GL fibre node, applied to s and to t separately, gives a discrete R with finite separable residue fields L_i; quasi-compactness makes I finite, and the diagonal makes I nonempty. (4) The sigmaSpec leaf gives R≅Spec∏L_i; this is finite over L via both maps, and étale gives flat and locally of finite presentation, so s,t are finite locally free. (5) The hypotheses of the 03BM node are verified, giving Y≅Spec C over S compatibly with q; the proof that C is a field is correct. (6) The fibre node over Spec k gives L/k finite separable, and the minimal-polynomial clause is spelled out. Edge cases: identity, finite Galois with C=k, an infinite relation excluded by quasi-compactness, inseparable excluded by étale. Batch-5 findings: all three are generic and outside the assumed statements. Two only reach the definition def-trf-algebraic-space; the third reaches lem-trf-finite-presentation-module-descent-flat-local, which is faithfully flat descent of finite presentation, generic algebra. I accept the 0262 and 03BM nodes as generic tool_uses. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PointlikeQuasiseparatedSpaceField",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.pointlike_quasiseparated_space_field",
+  "file": "lean/Sheaf/AlgebraicGeometry/PointlikeQuasiseparatedSpaceField.lean",
+  "statement": "theorem pointlike_quasiseparated_space_field {S : Scheme.{u}} (Y : AlgebraicSpace S) (L : Type u) [Field L] (a : Spec (CommRingCat.of L) ⟶ S) (q : yoneda.obj (Over.mk a) ⟶ Y.obj.obj) (hq : IsEtale q) (hsur : IsSurjective q) (hY : IsAbsolutelyQuasiSeparated Y) : ∃ (k : Subfield L) (b : Spec (CommRingCat.of k) ⟶ S) (h : Spec.map (CommRingCat.ofHom k.subtype) ≫ b = a) (e : Y.obj.obj ≅ yoneda.obj (Over.mk b)), q ≫ e.hom = yoneda.map (Over.homMk (Spec.map (CommRingCat.ofHom k.subtype)) h) ∧ FiniteDimensional k L ∧ Algebra.IsSeparable k L",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d695add60",
+  "group": "NF",
+  "result": "pass",
+  "note": "Read the item, 7 stmt_deps, Stacks 03DZ source/proof, the module and report. Hypotheses: S scheme, Y : AlgebraicSpace S, field L : Type u with a, q : h_{Spec L} → Y; IsEtale/IsSurjective include representability; IsAbsolutelyQuasiSeparated = 0AHR(3) affine test. Conclusion: ∃ k : Subfield L, b with Spec(k.subtype)≫b=a (b forced since Spec L→Spec k is epi), presheaf iso e over S (full subcategory), q≫e.hom = inclusion map, FiniteDimensional k L ∧ Algebra.IsSeparable k L. Nothing assumed on S; one universe u by the size convention. Node differs from live only by stmt_deps (+def-sfb-space-absolute-quasi-separated, already a proof_dep, landed 2026-10-23 before the delivery) and lean; statement verbatim. No defs, single sorry, docstrings with source/blueprint/6 steps, report sections present. Edge cases: empty S, identity atlas, Galois, infinite relation, inseparable. No compile (no file changed); worker reports clean scompile. No findings."
+ }
+}

@@ -1,0 +1,369 @@
+{
+ "id": "lem-sp-stratified-reduction-postnikov-comparison",
+ "kind": "statement",
+ "title": "Coefficient-preserving stratified reduction and finite Postnikov comparison",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, $A=\\mathcal O_E$, and a scheme $T$, using fixed small pro-étale skeletons [def-weil-l-adic-coefficient-extension, def-weil-pbc-proetale-site]. For every scheme $W$ put $R_W=\\varprojlim_{n\\geq1}\\underline{A/\\ell^n}_W$ and $R_{W,n}=\\underline{A/\\ell^n}_W$ [sk-def-sp-coefficient-towers, def-weil-pbc-constant-sheaf]. Use sheaves of modules and their ordinary unbounded derived categories [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], sheafified tensor products [def-pur-sheaf-tensor-product], and derived scalar extension computed by K-flat complexes [lem-pur-derived-change-of-rings]. Let $M\\in D(R_T)$ have cohomology supported in a finite interval $[r,s]$. Suppose given a finite partition of $T$ by constructible locally closed subschemes with actual immersions $i_\\alpha:S_\\alpha\\to T$ [def-constructible-stratification], and suppose every $i_\\alpha^*H^q(M)$ has a finite constant local model over $R_{S_\\alpha}$ [sk-def-sfb-constructible]. Use the canonical coefficient identifications $i_\\alpha^{-1}R_T\\simeq R_{S_\\alpha}$ and $i_\\alpha^{-1}R_{T,n}\\simeq R_{S_\\alpha,n}$, so that $i_\\alpha^*$ is exact inverse image with its transported scalar action.\n\nFor every $n\\geq1$, there is a natural isomorphism in $D(R_{S_\\alpha,n})$\n$$i_\\alpha^*(M\\otimes_{R_T}^LR_{T,n})\\simeq (i_\\alpha^*M)\\otimes_{R_{S_\\alpha}}^LR_{S_\\alpha,n},$$\ncompatible with shifts and distinguished triangles. The reductions followed by restriction of the canonical truncation triangles\n$$\\tau_{\\leq q-1}M\\longrightarrow\\tau_{\\leq q}M\\longrightarrow H^q(M)[-q]\\longrightarrow(\\tau_{\\leq q-1}M)[1]$$\n[def-sbc-standard-tstructure-derived-category] are a finite sequence of distinguished triangles, starting at zero for $q=r$ and ending at the restricted reduction of $M$ for $q=s$. Every term in this sequence has locally constant finite-type cohomology on $S_\\alpha$; the final term has cohomology only in $[r-1,s]$. In particular every cohomology sheaf of $M\\otimes_{R_T}^LR_{T,n}$ is constructible [def-weil-proetale-constructible-sheaf], using this same finite global partition for all $n$ and all degrees, with finite geometric stalks on each stratum. No identification of truncation with derived reduction is asserted; only the images of the truncation triangles are used. No qcqs or Noetherian hypothesis on $T$ is required beyond the explicitly given finite global partition. The zero complex and the empty scheme are included.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093U (lemma-kernel-finite-locally-constant), clause (3); coefficient-preserving restriction and finite truncation induction of the blueprint constructibility paragraph, using derived.tex Tags 08J5 (remark-truncation-distinguished-triangle), 05RS (lemma-cohomology-homological)"
+ },
+ "stmt_deps": [
+  "def-pur-sheaf-tensor-product",
+  "lem-pur-derived-change-of-rings",
+  "def-constructible-stratification",
+  "sk-def-sfb-constructible",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sp-coefficient-towers",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-sp-commutative-coefficient-ring-tower",
+  "def-sfb-proetale-fp-local-models",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-system-scalar-model",
+  "def-sfb-proetale-inverse-image-unit-section",
+  "def-weil-proetale-inverse-image",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "Coefficient preparation (formalized in this delivery). Construct the constant-scalar cone with NatTrans.ofOpSequence: adjacent quotient maps compose to the lower quotient map, and faithfulness of commutative-ring forgetting identifies these components with the specified preimages. Apply the constant-ring inverse-image naturality of [lem-weil-pbc-profinite-coefficient-inverse-image] at each adjacent quotient and NatTrans.ofOpSequence to obtain spStratifiedFiniteMap_naturality for every tower arrow. For each ell-power quotient, use cofinality [sk-def-sp-coefficient-towers] to choose a uniformizer-power ideal contained in its defining ideal; the finite coefficient quotient [def-weil-l-adic-coefficient-extension] surjects onto it, proving finiteness. Express the given commutative coefficient tower as the constant sheaf of its finite ring tower, using identity component isomorphisms. The inverse-image functor preserves its limit by [lem-weil-pbc-proetale-finite-tower-limit]. Its mapped limit cone and the target limit cone are identified by the canonical finite constant-ring isomorphisms. Mathlib conePointsIsoOfNatIso gives an isomorphism of their cone points. Its projection equations agree with those of spStratifiedRingMap, so limit.hom_ext identifies the canonical limit lift with its hom, proving spStratifiedRingMap_isIso. The remaining six steps below retain the plan for the three still-open comparison/Postnikov declarations.",
+   "uses": [
+    "sk-def-sp-coefficient-towers",
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "lem-weil-pbc-proetale-finite-tower-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 098T (2), finite constant coefficient towers; quotient coefficient convention of the blueprint, sk-def-sp-coefficient-towers; sites.tex Tags 0H7J and 04D3"
+   }
+  },
+  {
+   "text": "Fix a stratum $i:S\\to T$ and $n\\geq1$, and use the coefficient identifications specified in the statement. By [def-sfb-proetale-ring-derived-inverse-image], applied to $i$ with $R=R_T$ and with $R=R_{T,n}$, module inverse image is additive and exact over the actual inverse-image rings $i^{-1}R_T$, $i^{-1}R_{T,n}$, and it acts termwise on complexes. Transporting scalars along the given ring isomorphisms $i^{-1}R_T\\simeq R_S$, $i^{-1}R_{T,n}\\simeq R_{S,n}$ is an equivalence of module categories, so $i^*$ is exact for both $R_T$ and $R_{T,n}$. By [lem-sp-exact-functor-preserves-homology](c), $H^k(i^*K)\\simeq i^*H^k(K)$ naturally, so termwise inverse image preserves quasi-isomorphisms. It therefore acts on the ordinary unbounded derived categories. It commutes with shifts and cone triangles: apply its additivity to the matrix $\\left(\\begin{smallmatrix}d_L&f\\\\0&-d_K\\end{smallmatrix}\\right)$ defining the cone in [def-weil-abstract-derived-category]. This gives exactly the cone matrix of $i^*f$, including its inclusion and negative projection. Hence derived inverse image is exact, with these specified shift maps.",
+   "uses": [
+    "def-sfb-proetale-ring-derived-inverse-image",
+    "lem-sp-exact-functor-preserves-homology",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04JC (lemma-flat-pullback-exact), transported coefficients; cone and homology calculation"
+   }
+  },
+  {
+   "text": "Choose $P\\to M$ K-flat with flat terms by [lem-pc-kflat-resolution]. Exact inverse image makes $i^*P\\to i^*M$ a quasi-isomorphism; [lem-weil-pbc-ringed-topos-kflat-pullback], with the coefficient isomorphism as ring map, makes $i^*P$ K-flat with flat terms. By [lem-pur-derived-change-of-rings], the two objects to compare are represented by $i^*(P\\otimes_{R_T}R_{T,n})$ and $(i^*P)\\otimes_{R_S}R_{S,n}$. Clause (1) of [lem-pur-proetale-inverse-image-tensor-comparison] identifies them degreewise by $i^{-1}(x\\otimes a)\\mapsto i^{-1}x\\otimes i^{-1}a$. This is $R_{S,n}$-linear: multiplying the second tensor factor by $c$ gives the same formula with $ac$ on both sides. The formula commutes with differentials and maps of resolutions. The resolving-class equivalence of [lem-weil-pbc-site-derived-tensor-descent] and the transformation clause of [lem-weil-pbc-localization-universal-property] descend it to a natural isomorphism on $D(R_T)$. The formula in each shifted degree is unchanged and commutes with the negative shifted differential; on a cone it is the direct sum of the two component formulas and commutes with the off-diagonal map. Thus it respects shifts and cone triangles, including connecting maps. Both reduction functors are exact by [lem-pur-derived-change-of-rings], and restriction is exact by step 1, so this proves the stated compatibility with distinguished triangles.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-proetale-inverse-image-tensor-comparison",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), 06YU (definition-derived-tor); sites-modules.tex Tag 03EL (lemma-tensor-product-pullback)"
+   }
+  },
+  {
+   "text": "Put $F_{i,n}(K)=i^*(K\\otimes^L_{R_T}R_{T,n})$. Apply this exact functor to [lem-weil-pbc-truncation-triangle], for $q=r,\\ldots,s$. Write $X_q=F_{i,n}(\\tau_{\\leq q}M)$ and $B_q=F_{i,n}(H^q(M)[-q])$. This yields distinguished triangles $X_{q-1}\\to X_q\\to B_q\\to X_{q-1}[1]$. The explicit truncations in [def-sbc-standard-tstructure-derived-category] have the same cohomology as $M$ in degrees at most $q$, and zero above $q$. Thus $\\tau_{\\leq r-1}M$ is acyclic and the canonical $\\tau_{\\leq s}M\\to M$ is a quasi-isomorphism, by the given support interval. In the localization defining the derived category these identify $X_{r-1}=0$ and $X_s\\simeq F_{i,n}(M)$. This is a finite sequence of images of truncation triangles; no truncation of a reduction is substituted for any $X_q$.",
+   "uses": [
+    "lem-weil-pbc-truncation-triangle",
+    "def-sbc-standard-tstructure-derived-category",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5 (remark-truncation-distinguished-triangle), second displayed triangle with a=q-1"
+   }
+  },
+  {
+   "text": "Let $L_q=i^*H^q(M)$, which has the finite constant local model supplied in the hypotheses. Step 2 and shift compatibility identify $B_q\\simeq(L_q[0]\\otimes^L_{R_S}R_{S,n})[-q]$. Apply [lem-sp-integral-local-model-finite-matrix-reduction] on the arbitrary scheme $S$. It gives locally constant finite-type cohomology of the unshifted reduction only in degrees $-1,0$, on local covers independent of $n$, and gives finiteness of $A_n=A/\\ell^n$. Consequently $B_q$ has locally constant finite-type cohomology only in degrees $q-1,q$. This uses finite constant models rather than an assumption that $L_q$ is torsion-free; the degree $q-1$ is retained.",
+   "uses": [
+    "lem-sp-integral-local-model-finite-matrix-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 093M (lemma-completion-flat), 093J (lemma-constant-exact); the cited scalar-matrix reduction node"
+   }
+  },
+  {
+   "text": "For fixed $i,n$, let $\\mathcal L_n$ be the locally constant finite-type $\\underline{A_n}$-modules on $S_{\\mathrm{proet}}$. The finite ring $A_n$ is Noetherian: it has only finitely many ideals, so every ascending ideal chain stabilizes. Thus [lem-weil-pbc-locally-constant-derived-serre] applies on this small site. Induct on $q=r,\\ldots,s$, with $X_{r-1}=0$, claiming all $H^k(X_q)$ lie in $\\mathcal L_n$ and vanish outside $[r-1,q]$. For the triangle of step 3, [lem-sf-derived-homology-long-exact] gives the short exact sequence\n$$0\\to\\operatorname{coker}(H^{k-1}(B_q)\\to H^k(X_{q-1}))\\to H^k(X_q)\\to\\ker(H^k(B_q)\\to H^{k+1}(X_{q-1}))\\to0.$$\nIts outer terms lie in $\\mathcal L_n$ by kernel/cokernel closure and the inductive hypothesis together with step 4; extension closure gives the middle term. Outside $[r-1,q]$, both $H^k(X_{q-1})$ and $H^k(B_q)$ vanish, so exactness gives $H^k(X_q)=0$. The base is zero cohomology, which is constant of finite type. This proves the claim and gives $[r-1,s]$ for $X_s$. All the $B_q$, the $X_q$, and their shifted fourth terms have locally constant finite-type cohomology, since shifting merely reindexes the degrees.",
+   "uses": [
+    "lem-weil-pbc-locally-constant-derived-serre",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093U (lemma-kernel-finite-locally-constant), clause (3); derived.tex Tag 05RS (lemma-cohomology-homological)"
+   }
+  },
+  {
+   "text": "By step 1, $i_\\alpha^*H^k(M\\otimes^L_{R_T}R_{T,n})\\simeq H^k(F_{i_\\alpha,n}(M))$. Step 5 makes this locally constant of finite type for every $\\alpha,n,k$. Its geometric stalks are finite: on a constant chart a finitely generated $A_n$-module is a quotient of $A_n^t$ for finite $t$, hence is a finite set. Apply [lem-weil-pbc-proetale-finite-model-stalks] to these finite constant models to obtain finite geometric stalks. Therefore the very partition in the hypotheses satisfies [def-weil-proetale-constructible-sheaf] for all the reduced cohomology sheaves. The indices $n,k$ never required a new partition. Nothing in these arguments uses qcqs or Noetherianity of $T$ or $S_\\alpha$: Noetherianity was used only for the finite scalar ring $A_n$. For $M=0$ all terms are zero; for empty $T$ (represented by its single empty stratum) all restrictions and stalk assertions are vacuous, so these cases are included.",
+   "uses": [
+    "lem-weil-pbc-proetale-finite-model-stalks",
+    "def-weil-proetale-constructible-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099Y and 09AK, finite local models and geometric stalks; blueprint reduction-tower constructibility assertion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sp-coefficient-towers",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-proetale-finite-tower-limit",
+  "def-sfb-proetale-ring-derived-inverse-image",
+  "lem-sp-exact-functor-preserves-homology",
+  "def-weil-abstract-derived-category",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-proetale-inverse-image-tensor-comparison",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-truncation-triangle",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-sp-integral-local-model-finite-matrix-reduction",
+  "lem-weil-pbc-locally-constant-derived-serre",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-proetale-finite-model-stalks",
+  "def-weil-proetale-constructible-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Assembly from Tags 04JC, 03EL, 06YS, 0G7E, 06YU, 08J5, 05RS and 093U(3), and the existing finite scalar-matrix reduction lemma; blueprint reduction-tower constructibility assertion; U5, 2026-10-25: coefficient preparation formalized using naturality, cofinal finite quotients and preserved limit cones; original six-step comparison/Postnikov plan retained for the remaining three holes"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Serre|[Cc]onstructible|locally[Cc]onstant",
+   "results": "0 hits in Mathlib/Algebra/Homology: ",
+   "date": "2026-10-22",
+   "verdict": "no match: truncation and cohomological-bound infrastructure, exact abelian functors and Serre classes do not identify coefficient-preserving stratum restrictions with reductions or construct their common-stratum finite Postnikov comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded truncation devissage under exact functors with cohomology in locally constant finite type sheaves on a common stratification",
+   "results": "8 hits: ComplexShape.Embedding.truncLEFunctor, ComplexShape.Embedding.truncLEFunctor_obj, SSet.truncation, CochainComplex.truncate, ComplexShape.Embedding.truncGEFunctor, CategoryTheory.SimplicialObject.Truncated.trunc, CochainComplex.isIso_ιTruncLE_iff, CategoryTheory.CosimplicialObject.truncation",
+   "date": "2026-10-22",
+   "verdict": "no match: truncation and cohomological-bound infrastructure, exact abelian functors and Serre classes do not identify coefficient-preserving stratum restrictions with reductions or construct their common-stratum finite Postnikov comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.IsTriangulated, DerivedCategory",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: truncation and cohomological-bound infrastructure, exact abelian functors and Serre classes do not identify coefficient-preserving stratum restrictions with reductions or construct their common-stratum finite Postnikov comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor on derived categories sends a bounded object to complexes with finite locally constant cohomology on a common constructible stratification if it does so for all its cohomology sheaves; truncation devissage preserves uniform cohomological bounds",
+   "results": "8 hits: DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.IsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.isLE_Q_obj_iff, CategoryTheory.Functor.exact_tfae, DerivedCategory.instIsGEObjSingleFunctor",
+   "date": "2026-10-22",
+   "verdict": "no match: truncation and cohomological-bound infrastructure, exact abelian functors and Serre classes do not identify coefficient-preserving stratum restrictions with reductions or construct their common-stratum finite Postnikov comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite Postnikov filtrations and weak Serre subcategories imply constructibility of exact functor images from constructibility of the images of the finitely many cohomology objects",
+   "results": "8 hits: CategoryTheory.Functor.exact_tfae, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.ObjectProperty.prop_X₂_of_exact, CategoryTheory.Abelian.Ext.mapExactFunctor_zero, CategoryTheory.Functor.preservesFiniteColimits_tfae, CategoryTheory.Functor.preservesFiniteLimits_tfae, CategoryTheory.ObjectProperty.instIsSerreClassInverseImageOfPreservesFiniteLimitsOfPreservesFiniteColimits",
+   "date": "2026-10-22",
+   "verdict": "no match: truncation and cohomological-bound infrastructure, exact abelian functors and Serre classes do not identify coefficient-preserving stratum restrictions with reductions or construct their common-stratum finite Postnikov comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, CategoryTheory.Sheaf",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: none states the coefficient-preserving restriction and reduction comparison with constructibility on fixed global strata; fraction factorizations, geometric finite type and restriction of scalars do not supply it."
+  },
+  {
+   "tool": "grep",
+   "query": "Postnikov|[Cc]onstructible|locally[Cc]onstant",
+   "results": "0 hits in Mathlib/Algebra/Homology: ",
+   "date": "2026-10-22",
+   "verdict": "no match: none states the coefficient-preserving restriction and reduction comparison with constructibility on fixed global strata; fraction factorizations, geometric finite type and restriction of scalars do not supply it."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact restriction and derived scalar reduction on a fixed constructible stratification preserve locally constant finite type cohomology by finite truncation induction",
+   "results": "8 hits: AlgebraicGeometry.instLocallyOfFiniteTypeMorphismRestrict, instSeminormedAddCommGroupRestrictScalars, ContinuousAlgHom.restrictScalars, Module.RestrictScalars.normedSpaceOrig, AlgebraicGeometry.StructureSheaf.res_const', AlgebraicGeometry.instLocallyOfFiniteTypeResLE, IntermediateField.restrictScalars, ContinuousLinearMap.restrictScalarsₗ",
+   "date": "2026-10-22",
+   "verdict": "no match: none states the coefficient-preserving restriction and reduction comparison with constructibility on fixed global strata; fraction factorizations, geometric finite type and restriction of scalars do not supply it."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived coefficient reduction commutes with exact inverse image on ringed sites and sends a bounded constructible Postnikov filtration to finite locally constant cohomology on fixed strata",
+   "results": "8 hits: Profinite.NobelingProof.succ_exact, CochainComplex.cm5b, AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace, Profinite.NobelingProof.CC_exact, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE",
+   "date": "2026-10-22",
+   "verdict": "no match: none states the coefficient-preserving restriction and reduction comparison with constructibility on fixed global strata; fraction factorizations, geometric finite type and restriction of scalars do not supply it."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact triangulated functor preserves bounded complexes whose cohomology lies in a weak Serre subcategory when each single cohomology object has image in that subcategory",
+   "results": "8 hits: CategoryTheory.Functor.map_distinguished_exact, CategoryTheory.Functor.isHomological_of_localization, CategoryTheory.Functor.IsHomological.exact, CategoryTheory.Functor.map_distinguished_op_exact, CategoryTheory.Functor.IsHomological.mk', CategoryTheory.Functor.IsHomological, CategoryTheory.Functor.mem_homologicalKernel_trW_iff, CategoryTheory.Functor.mem_homologicalKernel_W_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: none states the coefficient-preserving restriction and reduction comparison with constructibility on fixed global strata; fraction factorizations, geometric finite type and restriction of scalars do not supply it."
+  },
+  {
+   "tool": "grep",
+   "query": "map_distinguished_exact|mem_homologicalKernel_trW_iff",
+   "results": "6 hits in Mathlib/CategoryTheory/Triangulated: Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean, Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean, Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean, Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean, Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern exactness of a homological functor, already covered by the cited long-exact-cohomology node; they do not give coefficient-preserving reduction or finite locally constant cohomology on the supplied global partition."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-reduction-tower-normalized",
+  "date": "2026-10-22",
+  "group": "Q92"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sp-normalized-towers",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-reduction-tower-normalized",
+   "place": "Constructibility paragraph: coefficient-preserving restriction and finite truncation induction on a fixed global partition (former proof steps 6--7)",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-stratified-reduction-postnikov-comparison",
+  "worker": "stage1",
+  "summary": "Six explicit steps assemble coefficient-preserving K-flat restriction, a natural triangle-compatible reduction comparison, the finite truncation tower, scalar-matrix atoms and a long-exact/weak-Serre induction. All supporting statements already have DAG nodes; zero new nodes. Statement and statement dependencies unchanged. No Lean attachment found. Mathlib searches run through msearch with two semantic phrasings.",
+  "blueprint": "det-sp-reduction-tower-normalized, constructibility assertion: makes explicit the coefficient-preserving restriction and finite Postnikov induction allocated to this node by its parent split (former steps 6--7). The source blueprint contains the assertion, not a proof; this assembly is marked agent-written.",
+  "tool_uses": [
+   {
+    "node": "def-sfb-proetale-ring-derived-inverse-image",
+    "why": "Exact pro-etale module inverse image over the actual inverse-image ring, applied termwise to complexes, for an arbitrary morphism of schemes; no node of this unit states it."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Existence of flat-term K-flat resolutions in the ordinary unbounded ringed-site derived category."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "why": "Preservation of flat-term K-flat complexes under ringed-topos pullback, specialized to the supplied coefficient isomorphism."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Exact unbounded derived scalar extension, canonical computation and resolution independence."
+   },
+   {
+    "node": "lem-pur-proetale-inverse-image-tensor-comparison",
+    "why": "Natural pure-tensor comparison for ordinary pro-etale module inverse image; used to construct the comparison on K-flat complexes."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Equivalence of the flat-term K-flat resolving localization with the ordinary derived category."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Descent and uniqueness of the natural comparison from K-flat representatives to derived objects."
+   },
+   {
+    "node": "lem-weil-pbc-locally-constant-derived-serre",
+    "why": "Kernel, cokernel and extension closure for finite-type locally constant sheaves over a Noetherian scalar ring on an arbitrary small site."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-finite-model-stalks",
+    "why": "Finite geometric stalks from finite constant local models on an arbitrary scheme; the unit has no independent stalk-finiteness lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sfb-proetale-ring-derived-inverse-image",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-proetale-inverse-image-tensor-comparison",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-locally-constant-derived-serre",
+  "lem-weil-pbc-proetale-finite-model-stalks"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q103-0eee4fdf3",
+  "group": "Q103",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q103-0eee4fdf3 (reviewer sub-agent of L); spot-checked: Read the item's six steps in full; there are no new nodes. The statement and stmt_deps are unchanged from the live unsplit node, and there is no re-split repair note. Each cited statement says what its step takes from it. Step 1: exact i^*, transported scalars, cone matrix with the negative projection. Step 2: flat-term K-flat P (lem-pc-kflat-resolution), K-flatness kept under pullback with c = the coefficient isomorphism (0G7E node), representation by derived change of rings, then clause (1) of the pure-tensor comparison 03EL. Descent goes through the W^{-1}P≃D equivalence and clause (2) of the localization universal property; shift and cone compatibility is written out. Step 3: truncation triangles from lem-weil-pbc-truncation-triangle (08J5), with X_{r-1}=0 and X_s≅F(M). Step 4: the finite-matrix node gives cohomology in degrees -1 and 0, so B_q has it in q-1 and q; tested on N=A, N=A/π with E ramified (both degrees occur) and N=0. Step 5: long exact sequence (05RS), the coker→H^k(X_q)→ker sequence, and Serre closure 093U(3) with finite A_n Noetherian; the degree bookkeeping [r-1,q] checks. Step 6: def-weil-proetale-constructible-sheaf on the same partition, with finite stalks from the finite-model-stalks node. Duplicate check: lem-sfb-finite-model-stratum-filtration needs a Noetherian X and is a sheaf filtration, so it does not duplicate the item; the item is what the parent's step 4 delegates to it. Batch-5 flag: lem-trf-geometric-inverse-image-exact is a generic 04JC fact, but a non-trf node states exactly what step 1 needs. FIX replaces it with def-sfb-proetale-ring-derived-inverse-image (any morphism of schemes and any ring sheaf R; exact over f^{-1}R; D(P) induced termwise) in step 1's text and uses, in proof_deps and in tool_uses. The replacement's closure has no trace-formula or Poincaré-duality node and does not reach the item. The only other trf node in the item's closure is reached through the pre-existing stmt_dep sk-def-sfb-constructible, not a new citation. No SGA is cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.StratifiedReductionPostnikovComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.sp_stratified_reduction_postnikov_comparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.spStratifiedRing",
+   "AlgebraicGeometry.ProEtale.spStratifiedScalar",
+   "AlgebraicGeometry.ProEtale.spStratifiedScalarCone_naturality",
+   "AlgebraicGeometry.ProEtale.spStratifiedScalarMap",
+   "AlgebraicGeometry.ProEtale.spStratifiedModules",
+   "AlgebraicGeometry.ProEtale.spStratifiedSiteModulesAbelian",
+   "AlgebraicGeometry.ProEtale.spStratifiedModulesAbelian",
+   "AlgebraicGeometry.ProEtale.spStratified_hasDerived",
+   "AlgebraicGeometry.ProEtale.spStratifiedReductionModel",
+   "AlgebraicGeometry.ProEtale.spStratifiedFiniteMap_naturality",
+   "AlgebraicGeometry.ProEtale.spStratifiedRingMap",
+   "AlgebraicGeometry.ProEtale.spStratifiedRingMap_isIso",
+   "AlgebraicGeometry.ProEtale.spStratifiedPull",
+   "AlgebraicGeometry.ProEtale.spStratifiedReduction",
+   "AlgebraicGeometry.ProEtale.spStratifiedReduction_commShift",
+   "AlgebraicGeometry.ProEtale.spStratifiedReduction_triangulated",
+   "AlgebraicGeometry.ProEtale.spStratifiedScalar_finite",
+   "AlgebraicGeometry.ProEtale.spStratifiedReducedPull",
+   "AlgebraicGeometry.ProEtale.spStratifiedPullReduced",
+   "AlgebraicGeometry.ProEtale.spStratifiedPullUnitSection",
+   "AlgebraicGeometry.ProEtale.spStratifiedOrdinaryComparison_existsUnique",
+   "AlgebraicGeometry.ProEtale.spStratifiedOrdinaryComparison",
+   "AlgebraicGeometry.ProEtale.SpStratifiedComparisonFormula",
+   "AlgebraicGeometry.ProEtale.sp_stratified_reduction_postnikov_comparison",
+   "AlgebraicGeometry.ProEtale.sp_stratified_reduction_homology_comparison"
+  ],
+  "file": "lean/Sheaf/Paper/StratifiedReductionPostnikovComparison.lean",
+  "statement": "theorem sp_stratified_reduction_postnikov_comparison (T : Scheme.{u}) (M : DerivedCategory (spStratifiedModules l E T)) (r s : ℤ) (hsupport : ∀ q : ℤ, q < r ∨ s < q → IsZero ((DerivedCategory.homologyFunctor (spStratifiedModules l E T) q).obj M)) (P : Scheme.FiniteLocallyClosedStratification T) (hconstructible : ∀ a : Fin P.n, Topology.IsConstructible (P.stratum a)) (hlocal : ∀ (a : Fin P.n) (q : ℤ), letI : IsImmersion (P.immersion a) := P.isImmersion a HasFiniteConstantRingedLocalModel (P.domain a) (Padic.coefficientExtensionIntegers l E) (spStratifiedRing l E (P.domain a)) (spStratifiedScalarMap l E (P.domain a)) ((spStratifiedPull l E (P.immersion a)).obj ((DerivedCategory.homologyFunctor (spStratifiedModules l E T) q).obj M))) : (∀ (a : Fin P.n) (n : ℕ), letI : IsImmersion (P.immersion a) := P.isImmersion a ∃ e : spStratifiedReducedPull l E (P.immersion a) n ≅ spStratifiedPullReduced l E (P.immersion a) n, SpStratifiedComparisonFormula l E (P.immersion a) n e ∧ NatTrans.CommShift e.hom ℤ ∧ (let F := spStratifiedReducedPull l E (P.immersion a) n let t := DerivedCategory.TStructure.t (C := spStratifiedModules l E T) IsZero (F.obj ((t.truncLT r).obj M)) ∧ IsIso (F.map ((t.truncLEι s).app M)) ∧ (∀ q : ℤ, r ≤ q → q ≤ s → let Δ := (t.triangleLTLTGELT q (q + 1) (by omega)).obj M F.mapTriangle.obj Δ ∈ distTriang _ ∧ Nonempty (F.obj Δ.obj₃ ≅ F.obj (((DerivedCategory.singleFunctor (spStratifiedModules l E T) 0).obj ((DerivedCategory.homologyFunctor (spStratifiedModules l E T) q).obj M))⟦-q⟧)) ∧ (∀ k : ℤ, Scheme.IsFinitelyPresentedLocallyConstantProEtaleModule ((DerivedCategory.homologyFunctor _ k).obj (F.obj Δ.obj₁)) ∧ Scheme.IsFinitelyPresentedLocallyConstantProEtaleModule ((DerivedCategory.homologyFunctor _ k).obj (F.obj Δ.obj₂)) ∧ Scheme.IsFinitelyPresentedLocallyConstantProEtaleModule ((DerivedCategory.homologyFunctor _ k).obj (F.obj Δ.obj₃)) ∧ Scheme.IsFinitelyPresentedLocallyConstantProEtaleModule ((DerivedCategory.homologyFunctor _ k).obj ((F.obj Δ.obj₁)⟦(1 : ℤ)⟧)))) ∧ (∀ k : ℤ, Scheme.IsFinitelyPresentedLocallyConstantProEtaleModule ((DerivedCategory.homologyFunctor _ k).obj (F.obj M))) ∧ (∀ k : ℤ, k < r - 1 ∨ s < k → IsZero ((DerivedCategory.homologyFunctor _ k).obj (F.obj M))))) ∧ (∀ (n : ℕ) (k : ℤ), IsConstructibleProEtaleModuleSheaf T (spStratifiedScalar l E n) ((DerivedCategory.homologyFunctor _ k).obj ((spStratifiedReduction l E T n).obj M)) ∧ ∀ a : Fin P.n, IsLocallyConstantProEtaleModuleSheaf (P.domain a) (spStratifiedScalar l E n) (proEtaleConstantModulePullback (P.immersion a) (spStratifiedScalar l E n) ((DerivedCategory.homologyFunctor _ k).obj ((spStratifiedReduction l E T n).obj M))) ∧ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ P.domain a), Finite (proEtaleGeometricModuleStalk y (proEtaleConstantRing (P.domain a) (spStratifiedScalar l E n)) (proEtaleConstantModulePullback (P.immersion a) (spStratifiedScalar l E n) ((DerivedCategory.homologyFunctor _ k).obj ((spStratifiedReduction l E T n).obj M)))))",
+  "branch": "sheaf-dag",
+  "by": "Q120",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The ring is the literal limit of the recorded ell-power commutative coefficient tower. Canonical restriction is the limit lift of normalized finite maps, with a named invertibility assertion; the natural reduction comparison is fixed by pure tensors and universal K-flat counits. The theorem uses the original canonical truncation triangles, all four terms, both endpoints and the same supplied partition for all levels/degrees. Helper declarations belong to this node and are listed. Positive index n denotes exponent n+1."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-10197877e",
+  "group": "Q120",
+  "result": "pass",
+  "note": "Re-delivery of 82d4 RETURN H2. Only change: item stmt_deps swap lem-pur-system-scalar-model→def-weil-pbc-system-scalar-model plus def-sfb-proetale-inverse-image-unit-section, def-weil-proetale-inverse-image, def-pc-kflat-complex (all definition nodes on the base, no cycle). Both Lean modules byte-identical to 82d4; statement/proof/proof_deps unchanged vs live; sk-def-sfb-constructible §1(B) record unchanged and not changed by another group since. Fresh owner audit: every project declaration in the statement is owned by a cited node (IsLocallyConstantProEtaleModuleSheaf/proEtaleGeometricModuleStalk have no owner record and are the clauses of the cited IsConstructibleProEtaleModuleSheaf; advisory). Maths re-read: literal limit ring, canonical limit-lift coefficient iso, pinned pure-tensor/K-flat comparison with CommShift, canonical truncation triangles with zero start and iso end, all four vertices locally constant, [r-1,s], same partition P for constructibility/stalks; edge cases M=0, empty T, r>s, n=0, ramified E all covered. No compile (files unchanged)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U5",
+  "result": "pass",
+  "landing": "20261025T144144-L-1201406",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

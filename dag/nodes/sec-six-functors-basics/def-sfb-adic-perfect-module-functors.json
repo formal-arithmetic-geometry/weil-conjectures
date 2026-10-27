@@ -1,0 +1,110 @@
+{
+ "id": "def-sfb-adic-perfect-module-functors",
+ "kind": "definition",
+ "title": "Ordinary completed quotient realization of modules",
+ "statement": "For a scheme X, a commutative ring A, an ideal J and an object U of the coefficient-sized pro-etale site, define the functor from A-modules to completed module sheaves on the slice by constant module realization, canonical coefficient transport, extension to the completed ring and restriction to U. Define F_n by further ordinary extension along the completed projection to A/J^(n+1). Define the natural isomorphism F_(n+1) followed by extension along the successor quotient map to F_n using the existing normalized scalar balancing and the completion cone equation. These are the single-module functors underlying the complexes of [def-sfb-adic-perfect-reduction-model-complexes]; no new choices or data from existence theorems occur.",
+ "stmt_deps": [
+  "def-sfb-adic-perfect-reduction-model-complexes"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Lemma lemma-connected-adic-lisse, Tag 09C6, quotient total-Hom calculation, its single-module finite-projective evaluation step; Modules on Sites Tag 093T; More on Algebra Tag 0A8H."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Constant module sheaf scalar quotient Hom comparison natural in two variables bijective for rank one source",
+   "results": "Sheaf.ΓHomEquiv; PresheafOfModules.restrictHomEquivOfIsLocallySurjective; sheafifyHomEquiv'; homEquivOfIsLocallyBijective. These provide sheafification universal properties, not completed quotient realization or successor normalization.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap, TensorProduct, Module.Projective",
+   "results": "dualTensorHomEquiv and lTensorHomEquivHomLTensor in Mathlib.LinearAlgebra.Contraction. These algebraic finite-projective comparisons do not construct the sheaf quotient Hom map.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*[Hh]om|[Hh]om.*quotient; constant.*(quotient|change|extend); in Mathlib and both project roots",
+   "results": "LinearMap.reduceModIdeal and TensorProduct.quotTensorEquivQuotSMul are algebraic tools. SiteConstantModuleHom proves the unquotiented constant internal Hom theorem. AdicPerfectModelCompleteReduction has scalar/slice balancing helpers. No existing declaration states the natural ordinary quotient comparison with the source restricted to A and its specified successor balancing.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicPerfectModuleHom",
+  "date": "2026-10-26",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Local perfect lifting in the proof invoking sk-prop-integral-criterion; expanded as Stacks Tag 09C6. Tags 09C5 and 09C6, dual-perfect tensor calculation and exact sections on each affine weakly contractible covering object. Supporting calculation: actual quotient Hom from two fixed constant perfect models, before image stabilization. The explicit ordinary-complex calculation in proof steps 1--3 of lem-sfb-adic-perfect-hom-cohomology-comparison. Chain-level evaluation and successor scalar balancing, before cycles and boundaries. Single-module quotient Hom evaluation, prior to finite cochain assembly. The rank-one and finite-dual-basis steps of the ordinary module Hom calculation.",
+   "via": [
+    "lem-sfb-adic-perfect-module-hom",
+    "lem-sfb-adic-perfect-hom-cochains",
+    "lem-sfb-adic-perfect-model-hom-cohomology",
+    "lem-sfb-adic-perfect-hom-cohomology-comparison",
+    "lem-sfb-adic-perfect-reduction-hom-ml",
+    "lem-sfb-adic-residue-lisse-perfect-lift",
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicPerfectModuleFunctors",
+  "file": "lean/Sheaf/Paper/AdicPerfectModuleFunctors.lean",
+  "declaration": "AlgebraicGeometry.Scheme.adicPerfectLocalFunctor",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.adicPerfectLocalFunctor",
+   "AlgebraicGeometry.Scheme.adicPerfectQuotientFunctor",
+   "AlgebraicGeometry.Scheme.adicPerfectQuotientModuleStep"
+  ],
+  "statement": "def adicPerfectLocalFunctor (X : Scheme.{u})\n    {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)\n    (U : coefficientProEtaleSiteModel.{u, v} X) :\n    ModuleCat.{max v (u + 1)} A ⥤\n      Mod ((completed (coefficientProEtaleModelTopology.{u, v} X) A J).over U)",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-d8a7b",
+  "group": "V3",
+  "result": "fix",
+  "landing": "20261026T092913-L-3478464",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-d8a7b",
+  "group": "V3",
+  "result": "fix",
+  "landing": "20261026T092913-L-3478464",
+  "kind": "interface",
+  "note": "independent cc review: AdicPerfectModuleHom/UnitHom/ModuleFunctors Lean against nodes lem-sfb-adic-perfect-module-hom, lem-sfb-adic-perfect-unit-hom, def-sfb-adic-perfect-module-functors; moved defs/instances Expr-hash identical to published; importer AdicPerfectHomCochains compiled OK"
+ }
+}

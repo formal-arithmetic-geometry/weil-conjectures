@@ -17,59 +17,74 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-a1-space-affine-etale-cover] to obtain a scheme $W=\\coprod_{i\\in I}W_i$ with every $W_i$ affine and a representable surjective etale map $w:h_W\\to E$ with $|w|$ surjective. Write $\\iota_i:W_i\\to W$ for the coprojections of [lem-weil-pbc-scheme-coproduct-family]; they are open immersions with disjoint images covering $W$, so $O_i=|w|(\\iota_i(W_i))$ is the image of the open set $\\iota_i(W_i)$ under the open map $|w|$ (openness clause of [lem-a1-space-affine-etale-cover]) and the $O_i$ are open sets covering $|E|$. By the continuity clause of the same node, $|c|:|C|\\to|E|$ is continuous, so the sets $|c|^{-1}(O_i)$ form an open covering of $C$. Since $C$ is quasi-compact [def-weil-pbc-quasi-compact-scheme], there is a finite set $J\\subseteq I$ with $C=\\bigcup_{j\\in J}|c|^{-1}(O_j)$ ($J=\\varnothing$ if $C$ is empty). Let $U\\subseteq W$ be the open subscheme $\\bigcup_{j\\in J}\\iota_j(W_j)$; by [lem-weil-pbc-scheme-coproduct-family] it is the coproduct $\\coprod_{j\\in J}W_j$, so by [lem-weil-pbc-finite-affine-coproduct-spectrum] it is affine, isomorphic to $\\operatorname{Spec}\\prod_{j\\in J}A_j$ where $W_j=\\operatorname{Spec}A_j$ (for $J=\\varnothing$ this is the empty scheme $\\operatorname{Spec}0$). Let $u=w\\circ k$ where $k:U\\to W$ is the open immersion; it is an $S$-morphism. It is representable etale: for a scheme $T$ with $h_T\\to E$, the sheaf $h_T\\times_Eh_U$ equals $(h_T\\times_Eh_W)\\times_{h_W}h_U$; by [def-trf-algebraic-space] $P=h_T\\times_Eh_W$ is a scheme etale over $T$, and $P\\times_WU$ is the open subscheme of $P$ lying over $U$ (the fibre product [def-pc-fibre-product] of a scheme with an open immersion is the open preimage, checked on the universal property). An open immersion is etale and composites of etale morphisms are etale [lem-weil-pbc-etale-composition-cancellation](1),(2), so $P\\times_WU\\to T$ is etale. Finally the image of $|u|$ is $\\bigcup_{j\\in J}O_j$, which contains $|c|(|C|)$.",
+   "text": "Take a scheme atlas w:h_W -> E directly from [def-trf-algebraic-space], and represent its base change along c by P with projection p:P -> C. Surjectivity follows from IsSurjective w. Étaleness of the same chosen projection follows from IsEtale w: the private helper property_of_represented_pullback uses Mathlib MorphismProperty.relative.of_exists and relative.property to transfer an isomorphism-invariant property to every representing square. Yoneda fullness [lem-pc-yoneda] identifies the other projection with b:P -> W. Choose the ordinary affine open cover A of W [lem-weil-pbc-affine-opens-basis]. The sets O_i=p(b^{-1}(range(A_i -> W))) are open by [lem-weil-pbc-etale-morphism-open-map], and cover C because p is surjective and A covers W. Compactness [def-weil-pbc-quasi-compact-scheme] and Mathlib IsCompact.elim_finite_subcover give a finite set J of indices, allowing J empty when C is empty.",
    "uses": [
-    "lem-a1-space-affine-etale-cover",
+    "def-trf-algebraic-space",
+    "lem-pc-yoneda",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-etale-morphism-open-map",
+    "def-weil-pbc-quasi-compact-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0APL, affine chart selection and represented pullback paragraph; scheme-test implementation of the finite-cover argument."
+   }
+  },
+  {
+   "text": "Form U as the finite scheme coproduct of the selected affine charts [lem-weil-pbc-scheme-coproduct-family]. Give it the map to S obtained by Sigma.desc of their maps through W. It is affine by the Mathlib finite-coproduct IsAffine instance, which realizes [lem-weil-pbc-finite-affine-coproduct-spectrum]. The induced k:U -> W is étale by IsZariskiLocalAtSource.sigmaDesc since each component is an open immersion [lem-weil-pbc-etale-composition-cancellation]. The private helper yoneda_isEtale represents every test by the ordinary pullback in Over S and uses étale base change, proving IsEtale (yoneda.map k). Compose with w using isEtale_comp from [def-trf-algebraic-space] to obtain the desired u.",
+   "uses": [
     "lem-weil-pbc-scheme-coproduct-family",
-    "def-weil-pbc-quasi-compact-scheme",
     "lem-weil-pbc-finite-affine-coproduct-spectrum",
-    "def-trf-algebraic-space",
+    "lem-weil-pbc-etale-composition-cancellation",
     "def-pc-fibre-product",
-    "lem-weil-pbc-etale-composition-cancellation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/spaces-properties.tex",
-    "place": "Tag 0APL, proposition-sheaf-fpqc, proof paragraph choosing the affine etale U; inputs Tags 03FX (lemma-cover-by-union-affines), 03BX (lemma-topology-points), 03H6 (lemma-quasi-compact-affine-cover), and the finite coproduct construction."
-   }
-  },
-  {
-   "text": "Form the sheaf fibre product $V=C\\times_EU$. By the definition of representable etale maps in [def-trf-algebraic-space], applied to $u$ and the scheme $C$, $V$ is a scheme and $V\\to C$ is etale [def-weil-etale-morphism]. For every point $x\\in C$, step 1 gives a point $y\\in|U|$ with $|u|(y)=|c|(x)$; [lem-a1-space-fibre-product-point] then gives a point of $V$ mapping to $x$. Hence $V\\to C$ is surjective.",
-   "uses": [
     "def-trf-algebraic-space",
-    "def-weil-etale-morphism",
-    "lem-a1-space-fibre-product-point"
+    "lem-pc-yoneda"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/spaces-properties.tex",
-    "place": "Tag 0APL, proof paragraph defining $V=U\\times_{X,c}T\\prime$ and asserting representability, etaleness and surjectivity; Tags 03H4 (lemma-points-cartesian) and 03BX (lemma-topology-points)."
+    "place": "Tag 0APL, affine chart selection and represented pullback paragraph; scheme-test implementation of the finite-cover argument."
    }
   },
   {
-   "text": "The affine scheme $U\\cong\\operatorname{Spec}B$ is separated: its diagonal over $\\operatorname{Spec}\\mathbf Z$ is $\\operatorname{Spec}$ of the surjective multiplication map $B\\otimes_{\\mathbf Z}B\\to B$, hence a closed immersion [def-weil-proper-morphism] (Stacks 01KN; elementary). So [lem-a1-separated-etale-chart] applies to the representable etale chart $u$ and the scheme $C$ with $c$: its second clause says exactly that $V=C\\times_EU\\to C$ is separated.",
+   "text": "Since U is affine it is absolutely separated. Apply the second clause of [lem-a1-separated-etale-chart] to choose a represented pullback V -> C with separated projection v. Transfer étaleness from IsEtale u to this same v with property_of_represented_pullback. This retains the required IsPullback witness and proves both Etale v.left and IsSeparated v.left.",
    "uses": [
     "lem-a1-separated-etale-chart",
-    "def-weil-proper-morphism"
+    "def-trf-algebraic-space",
+    "def-weil-proper-morphism",
+    "def-weil-etale-morphism"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/spaces-properties.tex",
-    "place": "Tag 03FZ (lemma-separated-cover), together with Morphisms Tag 01UA for base-change permanence of separatedness."
+    "place": "Tag 0APL, affine chart selection and represented pullback paragraph; scheme-test implementation of the finite-cover argument."
    }
   },
   {
-   "text": "Apply [lem-a1-etale-space-locally-quasi-finite] to the algebraic space $h_V$ (a scheme, hence an algebraic space by [def-trf-algebraic-space]) with $f:h_V\\to C$ the projection of step 2, and target the scheme $C$. Its chartwise hypothesis holds: if $v:h_{V'}\\to h_V$ is representable etale with $V'$ a scheme, then the base change of $v$ along $\\mathrm{id}_V$ is $V'\\to V$ itself, so $V'\\to V$ is etale by [def-trf-algebraic-space], and $V'\\to V\\to C$ is etale by [lem-weil-pbc-etale-composition-cancellation](2), since $V\\to C$ is etale by step 2. Its conclusion for the chart $v=\\mathrm{id}_V$ says that $V\\to C$ is locally quasi-finite [pqf-def-quasifinite]. With steps 2 and 3 this gives all four asserted properties.",
+   "text": "For surjectivity, form the ordinary scheme pullback Q=U x_W P in Over S [def-pc-fibre-product]. Yoneda preservation of pullbacks and pasting with the square defining P identify Q with the pullback of u along c. Uniqueness of pullbacks and Yoneda fullness [lem-pc-yoneda] give an isomorphism e:Q -> V preserving projection to C. For x in C, the finite subcover supplies i in J and z in P with p(z)=x and b(z)=A_i(y). The coprojection of y gives y' in U with k(y')=b(z). The scheme point-lifting fact Scheme.exists_preimage_of_isPullback, used in the Mathlib leaf [lem-weil-pbc-base-change-image], supplies t in Q above y' and z. Then e(t) maps to x, proving surjectivity without a topology or point-class equality on E.",
    "uses": [
-    "lem-a1-etale-space-locally-quasi-finite",
-    "def-trf-algebraic-space",
-    "lem-weil-pbc-etale-composition-cancellation",
+    "def-pc-fibre-product",
+    "lem-pc-yoneda",
+    "lem-weil-pbc-base-change-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0APL, affine chart selection and represented pullback paragraph; scheme-test implementation of the finite-cover argument."
+   }
+  },
+  {
+   "text": "Finally Etale v.left gives local finite type and an open-immersion diagonal by Mathlib instances. Apply the already proved scheme theorem Scheme.Hom.isLocallyQuasiFinite_of_unramified [lem-weil-pbc-unramified-quasi-finite-at-points], giving local quasi-finiteness in the sense of [pqf-def-quasifinite]. Package this with the preceding witnesses.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-unramified-quasi-finite-at-points",
     "pqf-def-quasifinite"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 03WS (lemma-etale-locally-quasi-finite), as used in spaces-properties Tag 0APL."
+    "place": "Tags 03WS and 02V5, étale implies unramified implies locally quasi-finite."
    }
   }
  ],
@@ -79,19 +94,21 @@
   "def-weil-etale-morphism",
   "def-weil-pbc-quasi-compact-scheme",
   "def-weil-proper-morphism",
-  "lem-a1-etale-space-locally-quasi-finite",
   "lem-a1-separated-etale-chart",
-  "lem-a1-space-affine-etale-cover",
-  "lem-a1-space-fibre-product-point",
+  "lem-pc-yoneda",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-base-change-image",
   "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-morphism-open-map",
   "lem-weil-pbc-finite-affine-coproduct-spectrum",
   "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-unramified-quasi-finite-at-points",
   "pqf-def-quasifinite"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "W3 stage 3",
   "document": "literature/stacks-project/spaces-properties.tex",
-  "place": "Tag 0APL, proposition-sheaf-fpqc, Gabber proof paragraph selecting the affine etale chart and forming its pullback; auxiliary Tags 03FX, 03BX, 03H4, 03FZ, 03H6 and Morphisms Tags 02GO, 03WS."
+  "place": "Tag 0APL, affine-chart paragraph. Select the finite cover after scheme base change of an arbitrary atlas; use ordinary scheme point lifting and the proved unramified-to-locally-quasi-finite theorem instead of algebraic-space point topology."
  },
  "mathlib_searches": [
   {
@@ -184,5 +201,26 @@
   "date": "2026-10-18",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261023T110025-L-3639298",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

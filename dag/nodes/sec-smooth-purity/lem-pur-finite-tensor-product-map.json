@@ -1,0 +1,134 @@
+{
+ "id": "lem-pur-finite-tensor-product-map",
+ "kind": "statement",
+ "title": "Existence of the ordinary normalized finite signed product morphism",
+ "statement": "For a finite purity setting P [def-pur-conventions], a k-scheme T, and integers r,t, there exists a sheaf morphism f from F_r tensor F_t to F_(r+t), where F_j is the actual fixed-scalar signed coefficient sheaf [def-pur-finite-tensor-reduction-data]. For every coherent signed frame and ordinary representatives x,y of its degree-r and degree-t basis vectors, the ordinary sheaf pure tensor followed by f realizes to the degree-(r+t) basis vector. Coherent frames and ordinary realization are those defined in [lem-pur-finite-tensor-product-frame-ext]. No isomorphism or uniqueness assertion is included.",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-finite-tensor-reduction-data",
+  "lem-pur-finite-tensor-product-frame-ext"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+  "place": "Step 2: compatibility with the invertible twist by associativity; expanded local coherent-frame construction of signed products. Stacks sites-modules.tex, section-tensor-product and section-invertible."
+ },
+ "proof": [
+  {
+   "text": "On a cover trivializing the prescribed first line, construct coherent signed frames by ordered positive powers, the unit at zero and the evaluation-dual basis at negative degrees. Define the intrinsic bilinear rule (a e_r,b e_t) maps to ab e_(r+t).",
+   "uses": [
+    "def-coefficient-twists-detailed",
+    "lem-pur-finite-tensor-product-frame-ext"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Changing the first generator by a unit u changes each signed generator by u^j: positive induction proves the positive case; evaluation against the positive basis proves the negative case. The equality u^r u^t=u^(r+t) makes the bilinear rules agree on overlaps, so the sheaf axiom glues them. The tensor universal property gives an intrinsic sheaf morphism.",
+   "uses": [
+    "def-coefficient-twists-detailed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transfer that morphism through the actual realization equivalence and tensor comparison. The scalar unit, counit and pure tensor formulas give the stated normalization for any coherent frame. The construction uses no inverse and no uniqueness theorem.",
+   "uses": [
+    "def-pur-finite-tensor-reduction-data",
+    "lem-sfb-proetale-intrinsic-tensor-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coefficient-twists-detailed",
+  "lem-pur-finite-tensor-product-frame-ext",
+  "def-pur-finite-tensor-reduction-data",
+  "lem-sfb-proetale-intrinsic-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+  "place": "Step 2: compatibility with the invertible twist by associativity; expanded local coherent-frame construction of signed products. Stacks sites-modules.tex, section-tensor-product and section-invertible."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A sheaf morphism of invertible modules sending local basis generators to basis generators is an isomorphism and is uniquely determined",
+   "results": "Eight results, including Sheaf.isLocallyBijective_iff_isIso, GrothendieckTopology.W_sheafToPreheaf_map_iff_isIso and PresheafOfModules.homEquivOfIsLocallyBijective. They provide general sheaf tools, but none supplies coherent signed frame products for these finite fixed-scalar lines.",
+   "date": "2026-10-25",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor product of signed integer powers of an invertible sheaf with local basis normalization",
+   "results": "Eight results, including CommRing.Pic.mk_tensor and CommRing.Pic.mul_eq_tensor, concern classes of modules or unrelated scheme sections; none is a normalized sheaf product map or its frame detection criterion. Loogle query \"tensorPow\", \"add\" had zero hits.",
+   "date": "2026-10-25",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*[zZ][pP]ow|[zZ][pP]ow.*[aA]dd; coherent frame; coefficientTwistLine; signedFamily",
+   "results": "Mathlib search returned numerical zpow identities, no sheaf product. Read NormalizedSignedTensorPowers (categorical products but no coherent-frame normalization), SignedLineOrdinaryConstraints (successive positive powers and evaluation), and FinitePositiveChartFrameExt (positive single-line detection requiring a first chart; imports the item). Blueprint searches \"signed tensor\" returned four unrelated operation definitions; \"coherent frame\" returned no node. No duplicate of the three local sheaf steps.",
+   "date": "2026-10-25",
+   "verdict": "new specialized steps needed"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteSignedTwistProducts",
+  "date": "2026-10-25",
+  "group": "V4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-finite-reduction-of-purity",
+   "place": "Step 2: compatibility with the invertible twist by associativity; expanded local coherent-frame construction of signed products. Stacks sites-modules.tex, section-tensor-product and section-invertible.",
+   "via": [
+    "def-pur-finite-signed-twist-products",
+    "lem-pur-finite-tensor-presentation-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteTensorProductMap",
+  "file": "lean/Sheaf/Paper/FiniteTensorProductMap.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.exists_finiteTensorSheafProductMap",
+  "statement": "theorem exists_finiteTensorSheafProductMap (P : PurityFiniteSetting.{u})\n    (T : Scheme.{u}) [T.Over (Spec (.of P.field.k))] (r t : ℤ) :\n    ∃ f : P.finiteTensorFixedSheaf T r ⊗ P.finiteTensorFixedSheaf T t ⟶\n      P.finiteTensorFixedSheaf T (r + t),\n      ∀ (V : T.ProEt) (e : P.FiniteTensorFrame T V)\n      (x : (P.finiteTensorFixedSheaf T r).obj.obj (Opposite.op V))\n      (y : (P.finiteTensorFixedSheaf T t).obj.obj (Opposite.op V)),\n      P.finiteTensorSection T r V x = e.basis r 0 →\n      P.finiteTensorSection T t V y = e.basis t 0 →\n      P.finiteTensorSection T (r + t) V\n        (f.hom.app (Opposite.op V) (P.finiteTensorSectionTmul T r t V x y)) =\n          e.basis (r + t) 0",
+  "branch": "sheaf-dag",
+  "by": "V4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-1eab1",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261025T181238-L-4122249",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-1eab1",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261025T181238-L-4122249",
+  "kind": "interface",
+  "note": "independent cc review: item node def-pur-finite-signed-twist-products + 3 new lem nodes vs delivered Lean (verbatim statements); relocated frame defs byte-identical to live lines 57-108; 4 delivered modules + 6 direct importers compiled together in /tmp sandbox, no errors; #print axioms: sorryAx only from the 3 new sorried lemmas"
+ }
+}

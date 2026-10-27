@@ -8,7 +8,13 @@ def _key(ref,paths):
  # pfinc 2026-10-17: 'v2' = the baseline reads the base tree's own dag/nodes (see _check_ref); older entries were computed
  # on whatever DAG SHEAF_DAG named in the calling slot
  return None if r.returncode else __import__('hashlib').sha1(('v2\n'+r.stdout).encode()).hexdigest()
+_REF_OF={}   # 2026-10-27: hash of a baseline text -> the commit check_ref computed it on (see _new_cycle)
 def check_ref(ref):
+ sha=subprocess.run(['git','rev-parse','--verify','-q',ref+'^{commit}'],cwd=ROOT,capture_output=True,text=True).stdout.strip()
+ out=_check_ref_cached(ref)
+ if sha:_REF_OF[__import__('hashlib').sha1(out.encode()).hexdigest()]=sha
+ return out
+def _check_ref_cached(ref):
  # 2026-10-16 20:30 (launcher): check_dag.py --cycles takes ~20 s and merge_delivery ran it on HEAD under
  # coord/.merge.lock for every landing (~50-65 s lock hold per landing, sync starved). The result depends only on the
  # trees archived below, so it is cached by their hashes; returns/queue commits do not change the key.
@@ -61,9 +67,43 @@ def findings(text,ids):
 def mentions(line,ids):
  tokens=set(re.findall(r'[a-z][a-z0-9]*(?:-[a-z0-9]+)+',line))
  return bool(set(ids)&tokens)
+CYC=re.compile(r'^cycles: (\d+) nodes depend on each other: (.*)$')
+def _members(line):
+ m=CYC.match(line)
+ if not m:return None
+ mem=[x.strip() for x in m.group(2).split(',')]
+ return None if len(mem)!=int(m.group(1)) or '\u2026' in m.group(2) else frozenset(mem)
+_IDS={}
+def _base_ids(sha):
+ if sha not in _IDS:
+  r=subprocess.run(['git','ls-tree','-r','--name-only',sha,'--','dag/nodes'],cwd=ROOT,capture_output=True,text=True)
+  _IDS[sha]=None if r.returncode else {pathlib.PurePosixPath(x).stem for x in r.stdout.splitlines() if x.endswith('.json')}
+ return _IDS[sha]
+def _new_cycle(line,base_text,old):
+ """2026-10-27 (lead, after J9's stage-3 refusals through a cycle already on main): a strongly connected component is
+ refused only if it is new: it meets no base component, or meets one and also holds nodes outside it that are base nodes
+ (merging base components, pulling acyclic base nodes into a cycle). New nodes joining one base component, or a component
+ shrinking, pass. Base nodes are the base commit's dag/nodes file names (check_ref records the commit); without it, or
+ for a truncated member list, only a component inside one base component passes. A self-loop passes only if the base
+ has the same line."""
+ C=_members(line)
+ if C is None:return line not in old
+ base=[B for B in (_members(l) for l in base_text.splitlines() if l.startswith('cycles:')) if B]
+ B=next((B for B in base if C&B),None)
+ if B is None:return True
+ rest=C-B
+ if not rest:return False
+ sha=_REF_OF.get(__import__('hashlib').sha1(base_text.encode()).hexdigest())
+ ids=_base_ids(sha) if sha else None
+ return ids is None or bool(rest&ids)
 def introduced(current,base_text,ids):
  old=set(findings(base_text,ids))
- return [line for line in findings(current.replace(str(ROOT),'<ROOT>'),ids) if line not in old or (line.startswith(('cycles:','deps:','ids:','route:')) and mentions(line,ids))]
+ out=[]
+ for line in findings(current.replace(str(ROOT),'<ROOT>'),ids):
+  if line.startswith('cycles:'):
+   if _new_cycle(line,base_text,old):out.append(line)
+  elif line not in old or (line.startswith(('deps:','ids:','route:')) and mentions(line,ids)):out.append(line)
+ return out
 
 
 def delivery_findings(current, base_text, ids):

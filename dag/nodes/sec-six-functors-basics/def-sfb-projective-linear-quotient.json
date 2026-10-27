@@ -1,0 +1,116 @@
+{
+ "id": "def-sfb-projective-linear-quotient",
+ "kind": "definition",
+ "title": "Fppf scalar-quotient characterization of a projective linear group scheme",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $k$ be a field [def-weil-field], $r\\in\\mathbf N$, and $G$ a group scheme over $k$ [def-sc-group-scheme]. For a $k$-scheme $T$ [def-weil-scheme-over-base], let $Q(T)=\\operatorname{GL}_r(\\Gamma(T,\\mathcal O_T))/\\Gamma(T,\\mathcal O_T)^\\times$, the quotient of the invertible matrices of [def-sc-general-linear-group] by scalar units. Say that $G$ represents the projective linear fppf quotient if there are natural injective group homomorphisms $q_T:Q(T)\\to\\operatorname{Hom}_k(T,G)$ and every $x:T\\to G$ locally lies in their images: there is an fppf covering sieve $R$ on $T$ [def-pc-fppf-site] such that for every $h:W\\to T$ in $R$ there is $g\\in Q(W)$ with $q_W(g)=x\\circ h$. Naturality uses entrywise pullback of matrices along the pullback map on global sections. Equivalently $G$ represents the fppf sheafification of this scalar-quotient presheaf.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-scheme-over-base",
+  "def-sc-general-linear-group",
+  "def-pc-fppf-site"
+ ],
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Example 5.49, printed p.111; fppf scalar-quotient interpretation in lem-sfb-pgl-reductive-structure."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A projective general linear group scheme represents the fppf quotient of the general linear group by scalar matrices",
+   "results": "8 hits; MatrixGroups.termPSL(_,_), Matrix.ProjectiveSpecialLinearGroup, Projectivization.rep, Projectivization.generalLinearGroup_smul_def, Projectivization.mk', Projectivization.lift, projectivizationSetoid, Rep.ofQuotient; no matching stack-diagonal or fppf projective-linear scheme-quotient predicate. Project source searches read ModuliStackProperties, StablePointedModuliGroupoids, AffinePGLAction, PGLLinearizedPolarization; no duplicate generic predicate.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme presentation of a stack diagonal retaining both projections and a property of its map to the product",
+   "results": "8 hits; AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme, AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal, AlgebraicGeometry.AffineTargetMorphismProperty.diagonal, AlgebraicGeometry.IsImmersion.instDiagonalScheme, AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover, AlgebraicGeometry.instIsZariskiLocalAtSourceDiagonalSchemeOfHasOfPostcompPropertyOfRespectsRightIsOpenImmersion, AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover_diagonal, AlgebraicGeometry.HasAffineProperty.diagonal_iff; no matching stack-diagonal or fppf projective-linear scheme-quotient predicate. Project source searches read ModuliStackProperties, StablePointedModuliGroupoids, AffinePGLAction, PGLLinearizedPolarization; no duplicate generic predicate.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "PGL|HasSchemeDiagonalWith|IsSchemeDiagonalPresentation",
+   "results": "25 hits; Mathlib/NumberTheory/ModularForms/Cusps.lean, Mathlib/NumberTheory/ModularForms/Cusps.lean, Mathlib/NumberTheory/ModularForms/Cusps.lean, Mathlib/NumberTheory/ModularForms/Cusps.lean, Mathlib/NumberTheory/ModularForms/Cusps.lean, Mathlib/NumberTheory/ModularForms/EisensteinSeries/Defs.lean, Mathlib/NumberTheory/ModularForms/Bounds.lean, Mathlib/NumberTheory/ModularForms/Bounds.lean; no matching stack-diagonal or fppf projective-linear scheme-quotient predicate. Project source searches read ModuliStackProperties, StablePointedModuliGroupoids, AffinePGLAction, PGLLinearizedPolarization; no duplicate generic predicate.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-action-stack-presentation",
+  "date": "2026-10-24",
+  "group": "Q11"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Presentation and diagonal of an affine action quotient stack. Definition of Fppf scalar-quotient characterization of a projective linear group scheme.",
+   "via": [
+    "lem-sfb-affine-action-stack-presentation",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveLinearQuotient",
+  "declaration": "AlgebraicGeometry.IsProjectiveLinearQuotient",
+  "declarations": [
+   "AlgebraicGeometry.IsProjectiveLinearQuotient"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveLinearQuotient.lean",
+  "statement": "def IsProjectiveLinearQuotient (k : Type u) [Field k] (r : ℕ) (G : Over (Spec (.of k))) [GrpObj G] : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q11",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bfd4b2d29",
+  "group": "Q11",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bfd4b2d29",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Read the item, both new definition nodes, all three modules, the dependency Lean (AffineActionQuotientStack, SchemeActionTorsorGroupoids, AlgebraicModuliStack, StablePointedModuliGroupoids) and the Mathlib ModObj action and ProjGenLinGroup. The live statement is unchanged; only lean and the two new stmt_deps were added. Every clause matches: algebraic stack and smooth surjective atlas quotientAtlas; finite type as a finite-type smooth atlas; affine diagonal via HasSchemeStackDiagonalWith IsAffineHom (equivalent to the node's affine-pullback test); (a,pr2) presentation keeping both projections; quasi-finite and separated diagonal under the zero-dimensional full-scheme-stabilizer hypothesis, in the node's finite-type plus finite-geometric-fibre convention with a closed relative diagonal; maps to algebraic spaces as restriction to an invariant map plus extension unique up to vertical iso; bijection from Mathlib orbitRel to the Skeleton of torsorFiber; E^G as the equalizer, with rho(e)=e⊗1 through an ∃!-pinned tensor comparison; phi characterized by its composite with the atlas and unique up to iso; PGL for every r>=1. New nodes are not duplicates: ModuliSchemeTest lacks both projections; ProjectiveMatrixCentralCover.Presentation is lemma-owned and needs r>=2. Neither is hollow. Edge cases: empty U, trivial G, r=1, nonreduced stabilizers, single universe u. All proofs are sorry; docstrings carry source places and steps 1-10; statements are verbatim; plain imports are proof-plan modules. Not recompiled (no file changed). Advisories: the PGL clause is stated as ∃ G; two PGL-node searches were copied from the diagonal node."
+ }
+}

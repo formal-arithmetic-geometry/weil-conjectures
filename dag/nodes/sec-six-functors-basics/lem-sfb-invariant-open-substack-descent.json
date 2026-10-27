@@ -1,0 +1,292 @@
+{
+ "id": "lem-sfb-invariant-open-substack-descent",
+ "kind": "statement",
+ "title": "Invariant opens in a smooth presentation descend to open substacks",
+ "statement": "Let $S$ be a scheme, $\\mathcal X$ an algebraic stack over $S$, and $p:P\\to\\mathcal X$ a smooth surjective scheme atlas. Put $R=P\\times_{\\mathcal X}P$, with projections $s,t:R\\to P$. An open substack means a strictly full substack (closed under isomorphism) whose base change by every scheme is an open subscheme; an open subspace of an algebraic space is defined by the same base-change condition. Pullback along $p$ gives an inclusion-preserving bijection between open substacks $\\mathcal W\\subseteq\\mathcal X$ and open subschemes $V\\subseteq P$ satisfying $s^{-1}(V)=t^{-1}(V)$ as open subspaces of $R$. The corresponding pair satisfies $P\\times_{\\mathcal X}\\mathcal W=V$. For every morphism of algebraic stacks $f:\\mathcal Y\\to\\mathcal X$, the map $f$ factors through $\\mathcal W$ if and only if $\\mathcal Y\\times_{\\mathcal X}P\\to P$ factors through $V$. An algebraic stack here is a stack in groupoids on schemes over $S$ with diagonal representable by algebraic spaces and a smooth surjective scheme atlas. Fibred groupoids, stacks, representability and 2-fibre products use [def-sfb-stable-pointed-moduli-groupoids]; algebraic spaces use [def-trf-algebraic-space]. Smoothness and surjectivity of a representable map are tested after scheme base change on etale scheme charts, using [def-sbc-smooth-morphisms] and ordinary surjectivity on points. In particular, by the smooth surjective atlas condition, for each scheme $T\\to\\mathcal X$ the algebraic-space projection $T\\times_{\\mathcal X}P\\to T$ is smooth and surjective.",
+ "source": {
+  "document": "literature/stacks-project/stacks-properties.tex",
+  "place": "Tag 0507 (lemma-substacks-presentation), open-substack case and factorization criterion; atlas convention of algebraic.tex, definition-algebraic-stack."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-sbc-smooth-morphisms",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-open-moduli-substack"
+ ],
+ "proof": [
+  {
+   "text": "For an open substack $\\mathcal W\\subseteq\\mathcal X$, its scheme test along $P\\to\\mathcal X$ is an open subscheme $V\\subseteq P$. The two pullbacks to $R$ are the same open subspace: an $R$-object includes an isomorphism between its two images in $\\mathcal X$, and membership in a strictly full substack is invariant under this isomorphism. Pulling back an inclusion of substacks gives an inclusion of these open subschemes. This proves that the proposed map is defined and preserves inclusion; it does not yet assert existence of its inverse.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 0507 (lemma-substacks-presentation), forward map; Tag 04YM (definition-substacks), strict fullness"
+   }
+  },
+  {
+   "text": "Fix an invariant open $V\\subseteq P$. For a scheme $T$ and object $x:T\\to\\mathcal X$, put $Q_x=T\\times_{\\mathcal X}P$, with projections $q_x:Q_x\\to T$ and $a_x:Q_x\\to P$, and put $E_x=Q_x\\times_PV$. These are algebraic spaces by representability of the diagonal of $\\mathcal X$ and by [lem-trf-space-fibre-products-etale-covers]; $E_x$ is an open subspace of $Q_x$ by the scheme-test definition of an open subspace. The atlas hypothesis makes $q_x$ smooth and gives a surjective scheme chart over $T$. The current chart-test equivalence in [lem-sfb-stack-chartwise-smooth-etale-calculus] therefore gives field-extension local lifting for $q_x$: each field-valued point of $T$ lifts after a field extension. Thus $|q_x|$ is surjective on point classes, in the convention of [lem-trf-space-fibre-products-etale-covers]. The smooth-implies-flat-and-locally-of-finite-presentation clause of the same calculus node applies to this algebraic-space map, so [lem-sfb-flat-lfp-space-universally-open] makes $q_x$ an open map. Consequently $U_x=|q_x|(|E_x|)$ is open in $T$. Give it its open subscheme structure, using [def-weil-open-immersion]. Open subspaces are determined by their point subsets by [lem-a1-space-etale-open-image]; only that node's open-subspace correspondence is used, not its etale-image theorem for the smooth map $q_x$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-flat-lfp-space-universally-open",
+    "def-weil-open-immersion",
+    "lem-a1-space-etale-open-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 042S (lemma-fppf-open); spaces-properties.tex Tag 03BZ (lemma-open-subspaces); chartwise smooth implies flat and locally finitely presented"
+   }
+  },
+  {
+   "text": "The construction satisfies $U_{x|_{T'}}=g^{-1}(U_x)$ for every scheme map $g:T'\\to T$. Indeed, the tuple definition of 2-fibre product identifies $Q_{x|_{T'}}=T'\\times_TQ_x$ and $E_{x|_{T'}}=T'\\times_TE_x$, respecting all projections. The image of the latter in $T'$ is contained in $g^{-1}(U_x)$. Conversely, if $t'\\in T'$ maps to $q_x(e)$ for $e\\in|E_x|$, the field-point convention of [lem-trf-space-fibre-products-etale-covers] says that representatives of $t'$ and $e$ have equal images in $T$ after a common field extension. They then give a point of $T'\\times_TE_x$ over $t'$. Thus the two subsets are equal, hence their open subschemes are equal. An isomorphism $x\\simeq y$ over $T$ similarly induces an isomorphism $Q_x\\simeq Q_y$ carrying $E_x$ to $E_y$, so $U_x=U_y$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03H4 (lemma-points-cartesian), common-field-extension proof, written out here; algebraic.tex Tag 003R, 2-fibre-product tuples"
+   }
+  },
+  {
+   "text": "Invariance gives $q_x^{-1}(U_x)=E_x$ as open subspaces of $Q_x$. One inclusion follows from the definition of $U_x$. For the other, take $z\\in|Q_x|$ with $q_x(z)\\in U_x$ and choose $e\\in|E_x|$ with $q_x(e)=q_x(z)$. After a common field extension these two representatives give a point of $Q_x\\times_TQ_x$. Over that common field, write their atlas components as $p_z,p_e$ and their comparison arrows as $\\alpha_z:x\\xrightarrow{\\sim}p(p_z)$ and $\\alpha_e:x\\xrightarrow{\\sim}p(p_e)$. The tuple $(p_e,p_z,\\alpha_z\\alpha_e^{-1})$ is a point of $R=P\\times_{\\mathcal X}P$. One projection lies in $V$, so $s^{-1}(V)=t^{-1}(V)$ forces the other projection to lie in $V$. Thus $z\\in|E_x|$. Equality of the point subsets gives equality of open subspaces by [lem-a1-space-etale-open-image]. For $x=p$ on $T=P$, label the projections of $Q_p=R$ so that $q_p=s$ and $a_p=t$. Then $E_p=t^{-1}(V)$, so saturation gives $s^{-1}(U_p)=t^{-1}(V)=s^{-1}(V)$, where the last equality is the assumed invariance. The map $s$ is surjective by the atlas hypothesis, hence $U_p=V$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-a1-space-etale-open-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 0507, invariant-open condition; spaces-properties.tex Tags 03H4 and 03BZ, explicit saturation calculation"
+   }
+  },
+  {
+   "text": "Define $\\mathcal W(T)$ to be the full subgroupoid of $\\mathcal X(T)$ on the objects $x$ for which $U_x=T$. Step 3 makes this predicate invariant under isomorphism and stable under all pullbacks. It is local for etale covers: if $\\{T_i\\to T\\}$ is jointly surjective, then $U_x=T$ exactly when all its inverse images $U_{x|_{T_i}}$ equal $T_i$. Hence $\\mathcal W$ is a strictly full substack. Explicitly, its isomorphism sheaves are those of $\\mathcal X$; an etale descent datum in $\\mathcal W$ descends in $\\mathcal X$ to $x$, and the displayed locality puts $x$ in $\\mathcal W$. For the scheme test $x:T\\to\\mathcal X$ and any $g:T'\\to T$, a lift of $xg$ to $\\mathcal W$ exists exactly when $g^{-1}(U_x)=T'$, equivalently when $g$ factors through the open subscheme $U_x$. A lift is a pair $(w,\\alpha)$ with $w\\in\\mathcal W(T\\prime)$ and $\\alpha:w\\xrightarrow{\\sim}xg$. Between two such pairs $(w,\\alpha)$ and $(w\\prime,\\alpha\\prime)$, full faithfulness gives exactly one arrow, namely $(\\alpha\\prime)^{-1}\\alpha$. Thus the lift groupoid is contractible whenever nonempty. Therefore $T\\times_{\\mathcal X}\\mathcal W$ is represented by $U_x\\subseteq T$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tags 04YM and 0507, strictly full substack and scheme tests, expanded directly from the stack and open-immersion definitions"
+   }
+  },
+  {
+   "text": "The substack just constructed is algebraic. For schemes $A,B\\to\\mathcal W$, full faithfulness identifies $A\\times_{\\mathcal W}B$ with $A\\times_{\\mathcal X}B$, an algebraic space since the diagonal of $\\mathcal X$ is representable. Step 4 gives $P\\times_{\\mathcal X}\\mathcal W=U_p=V$. For a scheme $T\\to\\mathcal W$ with underlying object $x$, the tuple description identifies $T\\times_{\\mathcal W}V$ with $E_x\\subseteq Q_x$. Since $U_x=T$, step 4 says $E_x=Q_x$. Its map to $T$ is the original smooth surjective $q_x$. Thus $V\\to\\mathcal W$ is a smooth surjective scheme atlas, and the representable diagonal and this atlas prove algebraicity according to the definition in the statement. In particular $\\mathcal W\\to\\mathcal X$ is an open substack in precisely the required scheme-test sense.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 0507, algebraicity of the descended open, checked directly by diagonal and atlas instead of invoking the quotient presentation"
+   }
+  },
+  {
+   "text": "Let $\\mathcal W'$ be any open substack with pullback $V$. For a scheme test $x:T\\to\\mathcal X$ write $T'=T\\times_{\\mathcal X}\\mathcal W'$, viewed as an open subscheme of $T$. Associating the 2-fibre-product tuples gives $Q_x\\times_TT'\\simeq T\\times_{\\mathcal X}(P\\times_{\\mathcal X}\\mathcal W')\\simeq T\\times_{\\mathcal X}V=E_x$, compatibly with the inclusions into $Q_x$. The second identification uses the given atlas pullback of $\\mathcal W'$, not an assumption that its scheme test is already $U_x$. Since $q_x$ is surjective, the image of this inverse-image open in $T$ is exactly $T'$, whereas the image of $E_x$ is $U_x$. Hence $T'=U_x$. Strict fullness now gives $x\\in\\mathcal W'(T)$ if and only if $T'=T$, equivalently $U_x=T$, so $\\mathcal W'=\\mathcal W$. This proves uniqueness and the bijection. If $V_1\\subseteq V_2$, then $E_{1,x}\\subseteq E_{2,x}$ and $U_{1,x}\\subseteq U_{2,x}$ for every $x$. Therefore $U_{1,x}=T$ implies $U_{2,x}=T$, proving inclusion preservation for the inverse as well.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 0507, uniqueness; scheme-test expansion of pullback and saturation; inclusion preservation"
+   }
+  },
+  {
+   "text": "If $f:\\mathcal Y\\to\\mathcal X$ factors through $\\mathcal W$, pulling back gives a factorization of $\\mathcal Y\\times_{\\mathcal X}P\\to P$ through $P\\times_{\\mathcal X}\\mathcal W=V$. Conversely, suppose this atlas pullback map factors through $V$. For any scheme $T$ and object $y:T\\to\\mathcal Y$, put $x=fy$. Base change of the assumed factorization says that $a_x:Q_x\\to P$ factors through $V$, hence $E_x=Q_x$. As $q_x$ is surjective, $U_x=|q_x|(|Q_x|)=T$. Thus every object $f(y)$ belongs to $\\mathcal W(T)$. Every arrow of $\\mathcal Y$ is carried to an arrow of $\\mathcal W$ since it is full, and cartesian pullbacks agree since it is a full fibred subcategory. The same object and arrow assignments as $f$ therefore define a morphism $\\mathcal Y\\to\\mathcal W$ whose composite with the inclusion is $f$. This proves the criterion for arbitrary algebraic stacks $\\mathcal Y$, without imposing representability on $f$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 0507 (lemma-substacks-presentation), last assertion, proved using the explicit scheme-test construction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-open-immersion",
+  "lem-a1-space-etale-open-image",
+  "lem-sfb-flat-lfp-space-universally-open",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/stacks-properties.tex",
+  "place": "Tag 0507 (lemma-substacks-presentation), open case; direct scheme-test proof using Tag 042S and Tags 03BZ, 03H4 rather than the source quotient-stack construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Open substacks of an algebraic stack correspond to invariant open subspaces in a smooth presentation and factorization is detected on the atlas",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.of_stalk_iso\", \"module\": \"Mathlib/Geometry/RingedSpace/OpenImmersion\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasLimits C]\\n  [inst_2 : CategoryTheory.Limits.HasColimits C] {FC : C → C → Type u_1} {CC : C → Type v}\\n  [inst_3 : (X Y : C) → FunLike (FC X Y) (CC X) (CC Y)] [instCC : CategoryTheory.ConcreteCategory C FC]\\n  [(Category\", \"doc\": \"For sheafed spaces $X$ and $Y$ over a category $\\\\mathcal{C}$, a morphism $f: X \\\\to Y$ is an open immersion if its underlying continuous map is an open embedding and for every point $x \\\\in X$, the indu\"}\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"AlgebraicGeometry.instIsOpenImmersionMapSchemeCompOverOverTopMorphismPropertyForgetForget\", \"module\": \"Mathlib/AlgebraicGeometry/LimitsOver\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) {S : AlgebraicGeometry.Scheme} {J : Type u_1}\\n  [inst : CategoryTheory.Category.{v_1, u_1} J] (F : CategoryTheory.Functor J (P.Over ⊤ S))\\n  [∀ {i j : J} (f : i ⟶ j), AlgebraicGeometry.IsOpenImmersion (F.map f).left] {i j : J} (f : i ⟶ \", \"doc\": \"For any morphism $ f $ in the appropriate category, applying the composition of the forgetful functors (first forgetting the morphism property and then forgetting the over category structure) results \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every open immersion of schemes is a smooth morphism.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.GlueData.f_open\", \"module\": \"Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing\", \"type\": \"∀ (self : AlgebraicGeometry.LocallyRingedSpace.GlueData) (i j : self.J),\\n  AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion (self.f i j)\", \"doc\": \"For each pair of objects $i,j$ in the indexing category $J$ of the gluing data, the morphism $f(i,j)$ from $V(i,j)$ to $U(i)$ is an open immersion in the category of locally ringed spaces.\"}\n  {\"name\": \"AlgebraicGeometry.isOpenImmersion_eq_inf\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/OpenImmersion\", \"type\": \"AlgebraicGeometry.IsOpenImmersion =\\n  (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => Topology.IsOpenEmbedding) ⊓\\n    AlgebraicGeometry.stalkwise fun {R S} [CommRing R] [CommRing S] x => Function.Bijective ⇑x\", \"doc\": \"A morphism of schemes is an open immersion if and only if it is a topological open embedding and induces bijective maps on all stalks.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.GlueData.ι_isOpenImmersion\", \"module\": \"Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing\", \"type\": \"∀ (D : AlgebraicGeometry.LocallyRingedSpace.GlueData) (i : D.J),\\n  AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion (D.ι i)\", \"doc\": \"For each object $ i $ in the indexing category $ J $ of the gluing data $ D $, the canonical inclusion morphism $ ι_i: U(i) → D.\\\\text{glued} $ from the local piece $ U(i) $ to the glued locally ringed\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme/ring, sheaf or manifold declarations do not state this theorem about algebraic spaces and algebraic stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An invariant open subset of a smooth atlas descends uniquely to an open substack",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"restr_mem_maximalAtlas\", \"module\": \"Mathlib.Geometry.Manifold.HasGroupoid\", \"type\": \"[ClosedUnderRestriction G] {e : OpenPartialHomeomorph M H} (he : e ∈ G.maximalAtlas M) {s : Set M} (hs : IsOpen s) :\\n  e.restr s ∈ G.maximalAtlas M\", \"doc\": \"If a structure groupoid $G$ is closed under restriction, then for any chart $e$ in the maximal atlas of $G$ on a manifold $M$ and any open subset $s \\\\subseteq M$, the restriction of $e$ to $s$ remains\"}\n  {\"name\": \"TopologicalSpace.Opens.chart_eq\", \"module\": \"Mathlib.Geometry.Manifold.HasGroupoid\", \"type\": \"{s : Opens M} (hs : Nonempty s) {e : OpenPartialHomeomorph s H} (he : e ∈ atlas H s) :\\n  ∃ x : s, e = (chartAt H (x : M)).subtypeRestr hs\", \"doc\": \"For any non-empty open subset $ s $ of a charted space $ M $ with model space $ H $, every chart $ e $ in the atlas of $ s $ is the restriction of a chart from $ M $'s atlas to $ s $. Specifically, th\"}\n  {\"name\": \"StructureGroupoid.LocalInvariantProp.liftPropOn_of_mem_maximalAtlas\", \"module\": \"Mathlib.Geometry.Manifold.LocalInvariantProperties\", \"type\": \"[HasGroupoid M G] (hG : G.LocalInvariantProp G Q) (hQ : ∀ y, Q id univ y) (he : e ∈ maximalAtlas M G) :\\n  LiftPropOn Q e e.source\", \"doc\": \"If $ Q $ is a local invariant property under the structure groupoid $ G $ and holds for the identity map on the universal set, then for any chart $ e $ in the maximal atlas of $ M $ with respect to $ \"}\n  {\"name\": \"StructureGroupoid.LocalInvariantProp.liftPropWithinAt_indep_chart_target_aux2\", \"module\": \"Mathlib.Geometry.Manifold.LocalInvariantProperties\", \"type\": \"(g : H → M') {x : H} {s : Set H} (hf : f ∈ G'.maximalAtlas M') (xf : g x ∈ f.source) (hf' : f' ∈ G'.maximalAtlas M')\\n  (xf' : g x ∈ f'.source) (hgs : ContinuousWithinAt g s x) : P (f ∘ g) s x ↔ P (f' ∘ g) s x\", \"doc\": \"For a continuous function $ g $ within a set $ s $ at a point $ x $, if $ f $ and $ f' $ are charts in the maximal atlas of a structure groupoid $ G' $ containing $ g(x) $, then the local invariant pr\"}\n  {\"name\": \"StructureGroupoid.LocalInvariantProp.liftPropWithinAt_indep_chart_source_aux\", \"module\": \"Mathlib.Geometry.Manifold.LocalInvariantProperties\", \"type\": \"(g : M → H') (he : e ∈ G.maximalAtlas M) (xe : x ∈ e.source) (he' : e' ∈ G.maximalAtlas M) (xe' : x ∈ e'.source) :\\n  P (g ∘ e.symm) (e.symm ⁻¹' s) (e x) ↔ P (g ∘ e'.symm) (e'.symm ⁻¹' s) (e' x)\", \"doc\": \"For a charted space $M$ with model space $H$, given a continuous map $g : M → H'$, two charts $e, e'$ in the maximal atlas of $M$ containing $x$ in their domains, and a set $s ⊆ H$, the local invarian\"}\n  {\"name\": \"StructureGroupoid.restriction_in_maximalAtlas\", \"module\": \"Mathlib.Geometry.Manifold.HasGroupoid\", \"type\": \"∀ {H : Type u} {M : Type u_2} [inst : TopologicalSpace H] [inst_1 : TopologicalSpace M] [inst_2 : ChartedSpace H M]\\n  {e : OpenPartialHomeomorph M H},\\n  e ∈ atlas H M →\\n    ∀ {s : TopologicalSpace.Opens M} (hs : Nonempty ↥s) {G : StructureGroupoid H} [HasGroupoid M G]\\n      [ClosedUnderRestriction G\", \"doc\": \"For a charted space $M$ over a topological space $H$ with structure groupoid $G$ closed under restriction, if a chart $e$ belongs to the atlas of $M$ and $s$ is a non-empty open subset of $M$, then th\"}\n  {\"name\": \"StructureGroupoid.subtypeRestr_mem_maximalAtlas\", \"module\": \"Mathlib.Geometry.Manifold.HasGroupoid\", \"type\": \"{e : OpenPartialHomeomorph M H} (he : e ∈ atlas H M) {s : Opens M} (hs : Nonempty s) {G : StructureGroupoid H}\\n  [HasGroupoid M G] [ClosedUnderRestriction G] : e.subtypeRestr hs ∈ G.maximalAtlas s\", \"doc\": \"For a charted space $M$ with model space $H$, if $e$ is a chart in the atlas of $M$ and $s$ is a non-empty open subset of $M$, then the restriction of $e$ to $s$ belongs to the maximal atlas of $s$ un\"}\n  {\"name\": \"OpenPartialHomeomorph.singletonChartedSpace_mem_atlas_eq\", \"module\": \"Mathlib.Geometry.Manifold.HasGroupoid\", \"type\": \"(h : e.source = Set.univ) (e' : OpenPartialHomeomorph α H) (h' : e' ∈ (e.singletonChartedSpace h).atlas) : e' = e\", \"doc\": \"If a charted space is constructed from a global chart $ e $ (whose domain is the entire space $ \\\\alpha $), then the atlas of this charted space contains only $ e $. Specifically, any chart $ e' $ belo\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme/ring, sheaf or manifold declarations do not state this theorem about algebraic spaces and algebraic stacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Substack\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme/ring, sheaf or manifold declarations do not state this theorem about algebraic spaces and algebraic stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "Substack|invariant.*open.*subspace|open.*substack",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme/ring, sheaf or manifold declarations do not state this theorem about algebraic spaces and algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a stack presented by a smooth groupoid open substacks are the opens of the presentation with equal inverse images under source and target",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"TopologicalSpace.Opens.instHasGroupoid\", \"module\": \"Mathlib/Geometry/Manifold/HasGroupoid\", \"type\": \"∀ {H : Type u} {M : Type u_2} [inst : TopologicalSpace H] [inst_1 : TopologicalSpace M] [inst_2 : ChartedSpace H M]\\n  (G : StructureGroupoid H) [HasGroupoid M G] (s : TopologicalSpace.Opens M) [ClosedUnderRestriction G],\\n  HasGroupoid (↥s) G\", \"doc\": \"If a structure groupoid $G$ on a topological space $H$ is closed under restriction, then every open subset $s$ of a charted space $M$ over $H$ inherits a $G$-compatible charted space structure. This m\"}\n  {\"name\": \"idRestrGroupoid_mem\", \"module\": \"Mathlib/Geometry/Manifold/StructureGroupoid\", \"type\": \"∀ {H : Type u_1} [inst : TopologicalSpace H] {s : Set H} (hs : IsOpen s),\\n  OpenPartialHomeomorph.ofSet s hs ∈ idRestrGroupoid\", \"doc\": \"For any open set $ s $ in a topological space $ H $, the identity partial homeomorphism on $ s $ is a member of the identity restriction structure groupoid on $ H $.\"}\n  {\"name\": \"Topology.IsOpenEmbedding.singleton_hasGroupoid\", \"module\": \"Mathlib/Geometry/Manifold/HasGroupoid\", \"type\": \"∀ {H : Type u} [inst : TopologicalSpace H] {α : Type u_5} [inst_1 : TopologicalSpace α] [inst_2 : Nonempty α]\\n  {f : α → H} (h : Topology.IsOpenEmbedding f) (G : StructureGroupoid H) [ClosedUnderRestriction G], HasGroupoid α G\", \"doc\": \"Given a topological space $\\\\alpha$ and a model space $H$, if $f : \\\\alpha \\\\to H$ is an open embedding and $G$ is a structure groupoid on $H$ closed under restriction, then the charted space structure o\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.of_stalk_iso\", \"module\": \"Mathlib/Geometry/RingedSpace/OpenImmersion\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasLimits C]\\n  [inst_2 : CategoryTheory.Limits.HasColimits C] {FC : C → C → Type u_1} {CC : C → Type v}\\n  [inst_3 : (X Y : C) → FunLike (FC X Y) (CC X) (CC Y)] [instCC : CategoryTheory.ConcreteCategory C FC]\\n  [(Category\", \"doc\": \"For sheafed spaces $X$ and $Y$ over a category $\\\\mathcal{C}$, a morphism $f: X \\\\to Y$ is an open immersion if its underlying continuous map is an open embedding and for every point $x \\\\in X$, the indu\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.isStackFor'\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat)\\n  {J : CategoryTheory.GrothendieckTopology C} [F.IsStack J] {S : C}, ∀ R ∈ J S, F.IsStackFor R.arrows\", \"doc\": \"A pseudofunctor $\\\\mathcal{F}$ from the locally discrete opposite category $\\\\mathcal{C}^{\\\\text{op}}$ to the category of small categories $\\\\mathsf{Cat}$ satisfies the stack conditions with respect to a \"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStack.toIsPrestack\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C}\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat}\\n  {J : CategoryTheory.GrothendieckTopology C} [self : F.IsStack J], F.IsPrestack J\", \"doc\": \"If a pseudofunctor from the opposite category (viewed as a locally discrete bicategory) to the category of small categories satisfies the stack conditions with respect to a Grothendieck topology on th\"}\n  {\"name\": \"StructureGroupoid.locality\", \"module\": \"Mathlib/Geometry/Manifold/StructureGroupoid\", \"type\": \"∀ {H : Type u_1} [inst : TopologicalSpace H] (G : StructureGroupoid H) {e : OpenPartialHomeomorph H H},\\n  (∀ x ∈ e.source, ∃ s, IsOpen s ∧ x ∈ s ∧ e.restr s ∈ G) → e ∈ G\", \"doc\": \"For a structure groupoid $ G $ on a topological space $ H $, if a partial homeomorphism $ e : H \\to H $ has the property that for every $ x $ in its domain, there exists an open neighborhood $ s $ of $\"}\n  {\"name\": \"idRestrGroupoid\", \"module\": \"Mathlib/Geometry/Manifold/StructureGroupoid\", \"type\": \"{H : Type u_1} → [inst : TopologicalSpace H] → StructureGroupoid H\", \"doc\": \"The structure groupoid on a topological space $ H $ consisting of open partial homeomorphisms that are equivalent to identity maps on open subsets of $ H $. It is closed under composition, inverses, c\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme/ring, sheaf or manifold declarations do not state this theorem about algebraic spaces and algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open substacks of an algebraic stack correspond to invariant open subschemes of a smooth surjective scheme atlas",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.scheme\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"(X : AlgebraicGeometry.LocallyRingedSpace) →\\n  (∀ (x : ↑X.toTopCat),\\n      ∃ R f,\\n        x ∈ Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base) ∧\\n          AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion f) →\\n    AlgebraicGeometry.Scheme\", \"doc\": \"A locally ringed space $ X $ is a scheme if every point $ x \\\\in X $ is contained in the image of an open immersion from the spectrum of some commutative ring $ R $. This establishes that $ X $ is loca\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toScheme\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"{X : AlgebraicGeometry.PresheafedSpace CommRingCat} →\\n  (Y : AlgebraicGeometry.Scheme) →\\n    (f : X ⟶ Y.toPresheafedSpace) → [H : AlgebraicGeometry.PresheafedSpace.IsOpenImmersion f] → AlgebraicGeometry.Scheme\", \"doc\": \"Given an open immersion from a presheafed space into a scheme, this constructs the scheme structure on the presheafed space by inheriting the local affine structure through the open immersion, ensurin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.fromGlued_open_map\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover),\\n  IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Cover.fromGlued 𝒰).base)\", \"doc\": \"For any open cover 𝒰 of a scheme X, the underlying continuous map of the canonical morphism from the glued scheme constructed from 𝒰 to X is an open map.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.isOpenMap_fromGlued\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover),\\n  IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Cover.fromGlued 𝒰).base)\", \"doc\": \"The canonical morphism from the glued scheme constructed via an open cover to the original scheme is an open map, meaning it maps open subsets of the glued scheme to open subsets of the original schem\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOpenImmersionF\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (i : 𝒰.I₀), AlgebraicGeometry.IsOpenImmersion (𝒰.f i)\", \"doc\": \"For each element $i$ in the zeroth component $I_0$ of a pre-zero hypercover $\\\\mathcal{U}$ of a scheme $S$, the associated morphism $\\\\mathcal{U}.f(i): X(i) \\\\to S$ is an open immersion. This means the m\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"AlgebraicGeometry.Scheme → Type u_1\", \"doc\": \"For a scheme $X$, the type of open subsets of its underlying topological space.\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.scheme_toScheme\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f],\\n  AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toScheme Y f.toPshHom = X\", \"doc\": \"If $ f: X \\to Y $ is an open immersion of schemes, then converting the presheafed space structure of $ Y $ via $ f $ results in the scheme structure of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.isOpenImmersion_eq_inf\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/OpenImmersion\", \"type\": \"AlgebraicGeometry.IsOpenImmersion =\\n  (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => Topology.IsOpenEmbedding) ⊓\\n    AlgebraicGeometry.stalkwise fun {R S} [CommRing R] [CommRing S] x => Function.Bijective ⇑x\", \"doc\": \"A morphism of schemes is an open immersion if and only if it is a topological open embedding and induces bijective maps on all stalks.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: no returned declaration states the algebraic-stack invariant-open correspondence and factorization criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Substack\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: no returned declaration states the algebraic-stack invariant-open correspondence and factorization criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "Substack|open.*substack|invariant.*open.*subspace",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: no returned declaration states the algebraic-stack invariant-open correspondence and factorization criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of open substacks along a smooth surjective atlas, with factorization detected after atlas pullback",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Pseudofunctor.isEquivalence_toDescentData\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.IsStack\", \"type\": \"[F.IsStack J] {ι : Type t} {S : C} {X : ι → C} (f : ∀ i, X i ⟶ S) (hf : Sieve.ofArrows _ f ∈ J S) :\\n  (F.toDescentData f).IsEquivalence\", \"doc\": \"Let $\\\\mathcal{C}$ be a category equipped with a Grothendieck topology $J$, and let $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$ be a pseudofunctor satisfying the stack conditi\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStackFor.mk\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat} {S : C}\\n  {R : CategoryTheory.Presieve S}, (F.toDescentData fun f => f.obj.hom).IsEquivalence → F.IsStackFor R\", \"doc\": \"If the descent data functor associated to $ F $ is an equivalence of categories, then $ F $ satisfies the stack condition for the presieve $ R $ on $ S $.\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \": IsOpenImmersion.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an open immersion descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes an open \"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \": (isomorphisms Scheme.{u}).DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an isomorphism descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is su\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \": DescendsAlong @UniversallyOpen (@Surjective ⊓ @Flat ⊓ @QuasiCompact)\", \"doc\": \"The property of being universally open descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes universally open after base change al\"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \": DescendsAlong @Surjective (@Surjective ⊓ @Flat ⊓ @QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStack.recOn\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.IsStack\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat} →\\n      {J : CategoryTheory.GrothendieckTopology C} →\\n        {motive : F.IsStack J → Sort u_1} →\\n          (t : F.IsStack J) →\\n            ([to\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a pseudofunctor $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$ that is a prestack with respect to $J$, and for e\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: no returned declaration states the algebraic-stack invariant-open correspondence and factorization criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invariant open subsets of a groupoid presentation descend to representable open subfunctors of a stack",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Pseudofunctor.isStackFor'\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat)\\n  {J : CategoryTheory.GrothendieckTopology C} [F.IsStack J] {S : C}, ∀ R ∈ J S, F.IsStackFor R.arrows\", \"doc\": \"A pseudofunctor $\\\\mathcal{F}$ from the locally discrete opposite category $\\\\mathcal{C}^{\\\\text{op}}$ to the category of small categories $\\\\mathsf{Cat}$ satisfies the stack conditions with respect to a \"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.isStackFor\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat)\\n  {J : CategoryTheory.GrothendieckTopology C} [F.IsStack J] {S : C} (R : CategoryTheory.Presieve S),\\n  CategoryTheory.Sieve.generate R ∈ J S → F.IsSta\", \"doc\": \"A pseudofunctor $ \\\\mathcal{F} $ from the locally discrete opposite category of $ \\\\mathcal{C} $ to the category of small categories $ \\\\mathsf{Cat} $ satisfies the stack conditions with respect to a giv\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStack.of_isStackFor\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat}\\n  {J : CategoryTheory.GrothendieckTopology C}, (∀ (S : C), ∀ R ∈ J S, F.IsStackFor R.arrows) → F.IsStack J\", \"doc\": \"Let $\\\\mathcal{C}$ be a category equipped with a Grothendieck topology $J$, and let $\\\\mathcal{F}: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathsf{Cat}$ be a pseudofunctor from the locally discrete opposite categor\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.isPrestackFor'\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat)\\n  {J : CategoryTheory.GrothendieckTopology C} [F.IsPrestack J] {S : C}, ∀ R ∈ J S, F.IsPrestackFor R.arrows\", \"doc\": \"For a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$, if a pseudofunctor $F$ from the locally discrete opposite category $\\\\mathcal{C}^{\\\\text{op}}$ to the category of small categories\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsPrestack.of_isPrestackFor\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat}\\n  {J : CategoryTheory.GrothendieckTopology C}, (∀ (S : C), ∀ R ∈ J S, F.IsPrestackFor R.arrows) → F.IsPrestack J\", \"doc\": \"If a pseudofunctor $ F $ satisfies the prestack condition for every sieve $ R $ in a Grothendieck topology $ J $ on a category $ \\\\mathcal{C} $, then $ F $ is a prestack for $ J $. Formally, for all ob\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.isPrestackFor\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat)\\n  {J : CategoryTheory.GrothendieckTopology C} [F.IsPrestack J] {S : C} (R : CategoryTheory.Presieve S),\\n  CategoryTheory.Sieve.generate R ∈ J S → F.Is\", \"doc\": \"For a pseudofunctor $ F $ from the locally discrete opposite category of $ C $ to the category of small categories, if the sieve generated by a presieve $ R $ on an object $ S $ belongs to the Grothen\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStackFor_generate_iff\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat) {S : C}\\n  (R : CategoryTheory.Presieve S), F.IsStackFor (CategoryTheory.Sieve.generate R).arrows ↔ F.IsStackFor R\", \"doc\": \"For a pseudofunctor $\\\\mathcal{F}$ from the locally discrete bicategory of $\\\\mathcal{C}^\\\\text{op}$ to $\\\\mathsf{Cat}$, an object $S$ in $\\\\mathcal{C}$, and a presieve $R$ on $S$, the pseudofunctor $\\\\math\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.isPrestackFor_iff_isSheafFor'\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat) {S : C}\\n  (R : CategoryTheory.Sieve S),\\n  F.IsPrestackFor R.arrows ↔\\n    ∀ ⦃S₀ : C⦄ (M N : ↑(F.obj { as := Opposite.op S₀ })) (a : S ⟶ S₀),\\n      Cate\", \"doc\": \"A pseudofunctor $ F $ satisfies the prestack condition for a sieve $ R $ on an object $ S $ if and only if, for every morphism $ a : S \\to S_0 $, the presheaf of hom-sets $ F $ satisfies the sheaf cond\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: no returned declaration states the algebraic-stack invariant-open correspondence and factorization criterion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-algebraic-stack-dm-point-stabilizer",
+  "date": "2026-10-22",
+  "group": "Q04"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Stabilizer criterion for membership in the DM locus. Atlas construction and field-point test of Tag 0DSN, supporting the infinitesimal DM-locus input. Proof steps 3--5: descend the invariant atlas open, compare containments, and detect factorization of the field point on its atlas pullback.",
+   "via": [
+    "lem-sfb-algebraic-stack-dm-point-stabilizer",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-invariant-open-substack-descent",
+  "worker": "stage1",
+  "summary": "NK constructs the inverse on all scheme tests by the open image of the atlas pullback of V. Common-field-extension arguments prove arbitrary base-change compatibility and saturation; a local full-subgroupoid predicate then gives a stack with representable diagonal and the explicit atlas V. Uniqueness, both inclusion implications, and arbitrary-source factorization are proved directly. No new nodes. Clarified strict fullness to match Tag 04YM and the literal bijection of Tag 0507. Repair of returned head 2d44d4645c5: rechecked all six cited statements against the current DAG, retained their valid uses, and made the source/target projection calculation in the atlas pullback explicit. Delivery is rebased by deliver.py onto its freshly fetched origin/sheaf-dag. Repeated return repair for branch head 51ae4e3fbb7: reread all current cited statements and made the unique arrow between scheme-test lifts explicit. Repair of the latest return (head 05eed38610c): compared the retained artifact with the current unsplit shared node, reread every current cited statement and all 20 quotes, and expanded the uniqueness step's fibre-product identification using the given atlas pullback. Initial rebased dry run passed at 54a98859a53; this revised proof is submitted for a fresh complete dry run. Continued repair of return L at head 105efd873cb: rebased through the required delivery tool onto the current DAG, reread all six current cited statements and the retained actual search outputs, verified all 20 citation quotes, and made the comparison arrow in the saturation step explicit. Repair of returned head ef1d2038ef0 (2026-10-23 05:04 UTC): reread the newly reviewed chartwise-calculus statement and all other cited statements, and revised step 2 to use its explicit equivalence between chart surjectivity and field-extension local lifting before applying point surjectivity. Updated the corresponding verbatim citation to the current statement; the smooth-implies-flat-and-lfp clause remains valid. Initial current-base dry run passed at daf75dacb60.",
+  "blueprint": "Realizes the inherited from.place: det-thm-sf-ctf-stability-direct-images proof (3), the DM-locus supporting input of stable pointed-curve extension, specifically its parent proof steps 3--5 (descend the invariant atlas open, compare containment, detect factorization). blueprint_refs.py ancestor returns None for this inherited chain; from.node and via are retained. The whole-blueprint searches open substack and invariant open found no matching imported node.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence and field-point convention for algebraic-space fibre products used in atlas pullbacks and common-field-extension arguments; this unit has no replacement for this construction."
+   },
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "Generic correspondence of open subspaces with point opens, used only to detect equality of open subspaces; no DM restriction or etale-image theorem is imposed on the smooth atlas."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-a1-space-etale-open-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NK-cdb7542ec",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-cdb7542ec (reviewer sub-agent of L); spot-checked: I read the statement and all 8 steps in full. There are no new nodes and no repair note. Live and side-live still have the item unsplit, so it is not superseded. This is the 6th push; heads 2d44, 51ae, 05ee, 105e and ef1d were all PASS and then returned at L. Against ef1d only step 2 and the split_report date/summary changed. Step 2 no longer asserts 'q_x smooth and surjective' directly. It now takes the surjective scheme chart given by the atlas and applies the chart-test ⇔ field-extension-lifting equivalence, which is a verbatim clause of the current reviewed lem-sfb-stack-chartwise-smooth-etale-calculus statement (the NG fix). That gives |q_x| surjective in the trf field-point convention. I checked this: an L-lift of x|_t is exactly an L-point of Q_x over t. The smooth ⇒ flat+lfp clause plus lem-sfb-flat-lfp-space-universally-open (Stacks 042S) still make U_x open. That surjectivity is what steps 4, 7 and 8 use. The other five cited statements are byte-identical to the ef1d snapshot. I rechecked steps 1 and 3-8: invariance from strict fullness; base change via 03H4; saturation through (p_e,p_z,α_zα_e⁻¹) and U_p=V; W is an étale-local strictly full substack with contractible lifts; the diagonal and the atlas V; uniqueness through the pullback of W'; the factorization criterion for arbitrary f, checked against Stacks 0507 (stacks-properties.tex l.1809). 'Strictly full' matches 04YM; plain 'full' makes the bijection false. Edge cases checked: V=∅, V=P, identity atlas, empty atlas, BG_k. No SGA, no cycle. Batch-5: lem-a1-space-etale-open-image, lem-sfb-flat-lfp-space-universally-open, lem-sfb-stack-chartwise-smooth-etale-calculus and lem-trf-space-fibre-products-etale-covers are generic algebraic-space/stack foundations. They reach trf only through the definition def-trf-algebraic-space and generic space laws, and none is a step of the trace-formula or Poincaré proof, so all are accepted. Both tool_uses accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.InvariantOpenSubstackDescent",
+  "declaration": "CategoryTheory.invariantOpenSubstackDescent",
+  "declarations": [
+   "CategoryTheory.openAtlasScheme",
+   "CategoryTheory.openAtlasSchemeι",
+   "CategoryTheory.invariantOpenSubstackDescent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/InvariantOpenSubstackDescent.lean",
+  "statement": "theorem invariantOpenSubstackDescent {S : Scheme.{u}} (F : BasedCategory.{v₁, w₁} (Over S)) (hF : IsAlgebraicModuliStack F) (P : Over S) (p : BasedFunctor (discreteModuli (yoneda.obj P)) F) (hp : IsSmoothModuliAtlas F P p) : ∃ e : OpenModuliSubstack F ≃ {V : P.left.Opens // ∀ (T : Over S) (a b : T ⟶ P), Nonempty (ModuliTwoIso ((discreteModuliMap (yoneda.map a)).comp p) ((discreteModuliMap (yoneda.map b)).comp p)) → a.left ⁻¹ᵁ V = b.left ⁻¹ᵁ V}, (∀ W Z : OpenModuliSubstack F, W.IsContainedIn Z ↔ (e W).val ≤ (e Z).val) ∧ (∀ W : OpenModuliSubstack F, ∃ c : BasedFunctor (discreteModuli (yoneda.obj (openAtlasScheme P (e W).val))) (moduliTwoFiberProduct p (fullModuliInclusion F W.property)), c.toFunctor.IsEquivalence ∧ Nonempty (ModuliTwoIso (c.comp (moduliTwoFiberFst p (fullModuliInclusion F W.property))) (discreteModuliMap (yoneda.map (openAtlasSchemeι P (e W).val))))) ∧ ∀ (G : BasedCategory.{v₂, w₂} (Over S)), IsAlgebraicModuliStack G → ∀ (f : BasedFunctor G F) (W : OpenModuliSubstack F), (∃ g : BasedFunctor G W.category, Nonempty (ModuliTwoIso (g.comp (fullModuliInclusion F W.property)) f)) ↔ ∃ g : BasedFunctor (moduliTwoFiberProduct p f) (discreteModuli (yoneda.obj (openAtlasScheme P (e W).val))), Nonempty (ModuliTwoIso (g.comp (discreteModuliMap (yoneda.map (openAtlasSchemeι P (e W).val)))) (moduliTwoFiberFst p f))",
+  "branch": "sheaf-dag",
+  "by": "Q33",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The theorem supplies the bijection, both directions of inclusion preservation, the actual atlas 2-base-change equivalence over P, and factorization for arbitrary algebraic-stack morphisms. Invariance is equality of inverse-image open subschemes on every scheme-valued arrow of the self-relation. The two canonical helpers construct the open subscheme over S and its inclusion. Existing algebraic-stack and open-substack definition nodes are registered in stmt_deps under brief-stage2 section 5; no mathematical text or proof changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9df9bac35",
+  "group": "Q33",
+  "result": "pass",
+  "note": "First S2 delivery (runs/1 holds only NK stage-1 splits). Item record differs from side-live only in lean and in stmt_deps gaining the landed def-sfb-algebraic-moduli-stack and def-sfb-open-moduli-substack (allowed by brief-stage2 §5). lean.statement is verbatim. Clauses checked against the node, Stacks 0507 and the dep sources (ModuliTwoIso = natural iso over identities, moduliTwoFiberProduct = iso-comma, OpenModuliSubstack fields Prop apart from the predicate, IsSmoothModuliAtlas = smooth surjective projection of scheme base change): invariance over all T-points (a,b,α) of R gives s^-1V=t^-1V; bijection pinned by the P×_X W ≃ V-over-P clause; inclusion iff; factorization for arbitrary algebraic G with independent universes and no representability. Edge cases: empty stack, V=∅/P, automorphisms and non-reduced structure kept, no extra hypotheses. Imports = stmt-dep modules (public) + proof-dep modules (plain). Helpers openAtlasScheme/openAtlasSchemeι are real canonical constructions (openAtlasScheme repeats the trivial expression of VeroneseQuotient.openTest; noted, not H4). Theorem body by sorry with 8-step proof docstring. Report has Worker report and Second reading by Q33 (short, same thread). No compile: no file changed."
+ }
+}

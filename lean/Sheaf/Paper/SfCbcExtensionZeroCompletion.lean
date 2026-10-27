@@ -22,7 +22,9 @@ import Sheaf.CategoryTheory.DiagramSiteRealization
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Mathlib.CategoryTheory.Abelian.FunctorCategory
 import Mathlib.CategoryTheory.Sites.Limits
+import Mathlib.CategoryTheory.Sites.Equivalence
 import Sheaf.Paper.CompletedPullbackAdjunction
+import Sheaf.Paper.SmallSiteReducedCompletionUnit
 import Sheaf.CategoryTheory.RingedSliceExtensionTensor
 import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
@@ -35,6 +37,13 @@ import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.CategoryTheory.RingedSiteEquivalenceTensor
+import Sheaf.Algebra.Homology.RingedOpenFlatResolution
+import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
+import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
+import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
+public import Sheaf.Paper.SfCbcExtensionModel
+import all Sheaf.Paper.SfCbcExtensionModel
 
 /-!
 # Strict reduction of completed extension by zero
@@ -45,370 +54,22 @@ Stacks Project Tags 099M, 099N and 0941
 -/
 
 @[expose] public noncomputable section
+set_option Elab.async false
 set_option autoImplicit false
-set_option synthInstance.maxSize 4096
-set_option backward.isDefEq.respectTransparency.types false
+set_option backward.defeqAttrib.useBackward true
+set_option synthInstance.maxSize 256
+set_option backward.isDefEq.respectTransparency.types true
+attribute [local instance 30000] SheafOfModules.hasSheafify_coefficientUniverse
+  SheafOfModules.wEqualsLocallyBijective_coefficientUniverse
 universe t
 open CategoryTheory CategoryTheory.Functor CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
-/-- Constant sections uniquely identify the coefficient sheaf on the localized site.
-Source: Stacks Tags 098K and 00XZ; Step 1 of the node.
-Proof: the concrete slice functor is an equivalence of sites by
-lem-weil-proetale-weakly-etale-localization. Restrict the constant presheaf and
-apply the sheafification adjunction. Its unit gives the displayed equality;
-local generation by constant sections gives uniqueness.
-(blueprint: lem-sf-cbc-extension-zero-completion). -/
-theorem sfCbcConstantSliceMap_existsUnique (X : Scheme.{t}) (W : X.ProEt)
-    (A : Type t) [CommRing A] :
-    ∃! φ : (adicConstantRing X A).over W ⟶
-        ((cbcSliceFunctor X W).sheafPushforwardContinuous CommRingCat.{t + 1}
-          ((ProEt.topology X).over W) (ProEt.topology W.left)).obj
-            (adicConstantRing W.left A),
-      ∀ V : Over W,
-        (toSheafify (ProEt.topology X)
-          ((Functor.const X.ProEtᵒᵖ).obj
-            (CommRingCat.of (ULift.{t + 1, t} A)))).app (op V.left) ≫
-              φ.hom.app (op V) =
-        (toSheafify (ProEt.topology W.left)
-          ((Functor.const W.left.ProEtᵒᵖ).obj
-            (CommRingCat.of (ULift.{t + 1, t} A)))).app
-              (op ((cbcSliceFunctor X W).obj V)) := by
-  sorry
-
-/-- The canonical constant coefficient map, fixed by sheafification's unit.
-Source: Stacks Tags 098K and 00XZ
-(blueprint: lem-sf-cbc-extension-zero-completion). -/
-def sfCbcConstantSliceMap (X : Scheme.{t}) (W : X.ProEt)
-    (A : Type t) [CommRing A] :=
-  (sfCbcConstantSliceMap_existsUnique X W A).exists.choose
-
-/-- Regard modules on the open scheme as modules on the ambient localized site.
-Source: Stacks Tags 098K and 03DI
-(blueprint: lem-sf-cbc-extension-zero-completion). -/
-def sfCbcConstantModuleToSlice (X : Scheme.{t}) (W : X.ProEt)
-    (A : Type t) [CommRing A] :
-    SheafOfModules.{t + 1} (adicModuleRing W.left A) ⥤
-      SheafOfModules.{t + 1} ((adicModuleRing X A).over W) :=
-  SheafOfModules.pushforward.{t + 1} (F := cbcSliceFunctor X W)
-    (J := (ProEt.topology X).over W) (K := ProEt.topology W.left)
-    ((sheafCompose ((ProEt.topology X).over W)
-      (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).map
-        (sfCbcConstantSliceMap X W A))
-
-/-- Ordinary extension by zero of constant-coefficient module sheaves, for arbitrary A.
-It is the direct-sum extension presheaf followed by module sheafification.
-Source: Stacks Tags 03DI and 03DJ; Step 1 of the node
-(blueprint: lem-sf-cbc-extension-zero-completion). -/
-def sfCbcOpenExtension {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j]
-    (A : Type t) [CommRing A] :
-    SheafOfModules.{t + 1} (adicModuleRing U A) ⥤
-      SheafOfModules.{t + 1} (adicModuleRing X A) :=
-  sfCbcConstantModuleToSlice X (cbcOpenObject j inferInstance) A ⋙
-    SheafOfModules.localizedModuleExtension (adicConstantRing X A)
-      (cbcOpenObject j inferInstance)
-
-/-- The constant coefficient extension is additive and exact.
-Source: Stacks Tags 03DI and 03DJ; Step 1 of the node.
-Proof: the ringed-slice transport is an equivalence, by the uniquely specified
-constant coefficient comparison and weakly-etale localization. Compose it with
-lem-pur-site-restriction-module-adjunction-exact. This requires no quasi-compactness
-and applies equally to the empty open and the zero ring.
-(blueprint: lem-sf-cbc-extension-zero-completion). -/
-theorem sfCbcOpenExtension_exact {U X : Scheme.{t}} (j : U ⟶ X)
-    [IsOpenImmersion j] (A : Type t) [CommRing A] :
-    (sfCbcOpenExtension j A).Additive ∧
-      PreservesFiniteLimits (sfCbcOpenExtension j A) ∧
-      PreservesFiniteColimits (sfCbcOpenExtension j A) := by
-  sorry
-
-/-- Additivity supplied by localized extension's exactness. Source: Stacks Tag 03DI
-(blueprint: lem-sf-cbc-extension-zero-completion). -/
-instance sfCbcOpenExtension_additive {U X : Scheme.{t}} (j : U ⟶ X)
-    [IsOpenImmersion j] (A : Type t) [CommRing A] :
-    (sfCbcOpenExtension j A).Additive := (sfCbcOpenExtension_exact j A).1
-
-/-- Left exactness supplied by localized extension. Source: Stacks Tag 03DJ
-(blueprint: lem-sf-cbc-extension-zero-completion). -/
-instance sfCbcOpenExtension_limits {U X : Scheme.{t}} (j : U ⟶ X)
-    [IsOpenImmersion j] (A : Type t) [CommRing A] :
-    PreservesFiniteLimits (sfCbcOpenExtension j A) := (sfCbcOpenExtension_exact j A).2.1
-
-/-- Right exactness supplied by localized extension. Source: Stacks Tag 03DI
-(blueprint: lem-sf-cbc-extension-zero-completion). -/
-instance sfCbcOpenExtension_colimits {U X : Scheme.{t}} (j : U ⟶ X)
-    [IsOpenImmersion j] (A : Type t) [CommRing A] :
-    PreservesFiniteColimits (sfCbcOpenExtension j A) := (sfCbcOpenExtension_exact j A).2.2
-
-/-- The ordinary uncompleted derived extension functor.
-Source: Stacks Tag 03DJ; Step 1 of the node
-(blueprint: lem-sf-cbc-extension-zero-completion). -/
-abbrev sfCbcDerivedExtension {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j]
-    (A : Type t) [CommRing A] :
-    proEtaleDerivedCategory U A ⥤ proEtaleDerivedCategory X A :=
-  (sfCbcOpenExtension j A).mapDerivedCategory
-
-/-- Constant coefficients on the published small model of the pro-etale site.
-Source: Stacks Tags 098K and 00VC
-(blueprint: lem-sf-cbc-extension-zero-completion). -/
-abbrev sfCbcModelRing (X : Scheme.{t}) (A : Type t) [CommRing A] :=
-  ConstantCompletion.constant (proEtaleModelTopology X) (ULift.{t + 1, t} A)
-
-/-- The coefficient transport is fixed on constant sections.
-Source: Stacks Tags 00VC and 00XZ.
-Proof: precomposition by AsSmall.down is an equivalence of sites. The
-sheafification adjunction extends the displayed unit map uniquely, and the
-result is invertible because the presheaf equivalence preserves sheafification.
-(blueprint: lem-sf-cbc-extension-zero-completion). -/
-theorem sfCbcModelRingMap_existsUnique (X : Scheme.{t}) (A : Type t) [CommRing A] :
-    ∃! c : sfCbcModelRing X A ⟶
-      ((AsSmall.down : proEtaleSiteModel X ⥤ X.ProEt).sheafPushforwardContinuous
-        CommRingCat.{t + 1} (proEtaleModelTopology X) (ProEt.topology X)).obj
-          (adicConstantRing X A),
-      IsIso c ∧ ∀ V : proEtaleSiteModel X,
-        (toSheafify (proEtaleModelTopology X)
-          ((Functor.const (proEtaleSiteModel X)ᵒᵖ).obj
-            (CommRingCat.of (ULift.{t + 1, t} A)))).app (op V) ≫ c.hom.app (op V) =
-        (toSheafify (ProEt.topology X)
-          ((Functor.const X.ProEtᵒᵖ).obj
-            (CommRingCat.of (ULift.{t + 1, t} A)))).app (op (AsSmall.down.obj V)) := by
-  sorry
-
-/-- Canonical map from the small model's constant ring to the transported ring.
-Source: Stacks Tag 00XZ (blueprint: lem-sf-cbc-extension-zero-completion). -/
-def sfCbcModelRingMap (X : Scheme.{t}) (A : Type t) [CommRing A] :=
-  (sfCbcModelRingMap_existsUnique X A).exists.choose
-
-/-- Exact small-model transport with the canonical constant scalar action.
-Source: Stacks Tags 00VC and 03D1
-(blueprint: lem-sf-cbc-extension-zero-completion). -/
-def sfCbcModelModules (X : Scheme.{t}) (A : Type t) [CommRing A] :
-    SheafOfModules.{t + 1} (adicModuleRing X A) ⥤
-      ConstantCompletion.Mod (sfCbcModelRing X A) :=
-  proEtaleModuleToModel (adicModuleRing X A) ⋙
-    ConstantCompletion.res (sfCbcModelRingMap X A)
-
-/-- Small-model transport is an additive equivalence.
-Source: Stacks Tags 00VC and 03D1.
-Proof: sectionwise precomposition by AsSmall.down is an equivalence with inverse
-precomposition by AsSmall.up. The coefficient map is invertible by
-sfCbcModelRingMap_existsUnique. Restriction of scalars along that map is an
-additive equivalence as well. Compose these equivalences.
-(blueprint: lem-sf-cbc-extension-zero-completion). -/
-theorem sfCbcModelModules_properties (X : Scheme.{t}) (A : Type t) [CommRing A] :
-    (sfCbcModelModules X A).IsEquivalence ∧ (sfCbcModelModules X A).Additive := by
-  sorry
-
-/-- The canonical model transport is an equivalence. Source: Stacks Tag 00VC
-(blueprint: lem-sf-cbc-extension-zero-completion). -/
-instance sfCbcModelModules_isEquivalence (X : Scheme.{t}) (A : Type t) [CommRing A] :
-    (sfCbcModelModules X A).IsEquivalence := (sfCbcModelModules_properties X A).1
-
-/-- The canonical model transport preserves addition. Source: Stacks Tag 03D1
-(blueprint: lem-sf-cbc-extension-zero-completion). -/
-instance sfCbcModelModules_additive (X : Scheme.{t}) (A : Type t) [CommRing A] :
-    (sfCbcModelModules X A).Additive := (sfCbcModelModules_properties X A).2
-
-/-- Additivity of the forward equivalence in its bundled presentation.
-Source: Stacks Tag 03D1 (blueprint: lem-sf-cbc-extension-zero-completion). -/
-instance sfCbcModelEquivalence_additive (X : Scheme.{t}) (A : Type t) [CommRing A] :
-    (sfCbcModelModules X A).asEquivalence.functor.Additive :=
-  inferInstanceAs (sfCbcModelModules X A).Additive
-
-/-- Standard localization size on the equivalent small site. Source: Stacks Tag 05RU
-(blueprint: lem-sf-cbc-extension-zero-completion). -/
-instance sfCbcModelModules_derived (X : Scheme.{t}) (A : Type t) [CommRing A] :
-    HasDerivedCategory (ConstantCompletion.Mod (sfCbcModelRing X A)) :=
-  HasDerivedCategory.standard _
-
-/-- Standard localization size for strict towers. Source: Stacks Tag 05RU
-(blueprint: lem-sf-cbc-extension-zero-completion). -/
-instance sfCbcModelTowers_derived (X : Scheme.{t}) (A : Type t) [CommRing A] :
-    HasDerivedCategory (ℕᵒᵖ ⥤ ConstantCompletion.Mod (sfCbcModelRing X A)) :=
-  HasDerivedCategory.standard _
-
-/-- The ordinary derived equivalence to the small model.
-Source: Stacks Tags 00VC and 05RU
-(blueprint: lem-sf-cbc-extension-zero-completion). -/
-def sfCbcModelDerived (X : Scheme.{t}) (A : Type t) [CommRing A] :
-    proEtaleDerivedCategory X A ≌ ConstantCompletion.D (sfCbcModelRing X A) :=
-  (sfCbcModelModules X A).asEquivalence.mapDerivedCategory
-
-/-- The ideal in the same lifted coefficient ring used by constant sheaves.
-Source: Stacks Tag 099M (blueprint: lem-sf-cbc-extension-zero-completion). -/
-abbrev sfCbcModelIdeal {A : Type t} [CommRing A] (d : CompleteCoefficientDatum A) :
-    Ideal (ULift.{t + 1, t} A) := d.ideal.map ULift.ringEquiv.symm.toRingHom
-
-/-- The derived category of actual strict towers in the small-site presentation.
-Source: Stacks Tags 0941 and 00VC
-(blueprint: lem-sf-cbc-extension-zero-completion). -/
-abbrev sfCbcTowerDerived (X : Scheme.{t}) (A : Type t) [CommRing A] :=
-  ConstantCompletion.TD (sfCbcModelRing X A)
-
-/-- Strict reduction uses the universal quotient presentation on one K-flat model.
-The small-model transport enlarges only Hom sizes; it does not identify the
-original small pro-etale site's object and Hom universes.
-Source: Stacks Tags 099M, 06YY and 00VC
-(blueprint: lem-sf-cbc-extension-zero-completion). -/
-def sfCbcReduction (X : Scheme.{t}) {A : Type t} [CommRing A]
-    (d : CompleteCoefficientDatum A) :
-    proEtaleDerivedCategory X A ⥤ sfCbcTowerDerived X A :=
-  (sfCbcModelDerived X A).functor ⋙
-    (ConstantCompletion.quotientPresentation (proEtaleModelTopology X)
-      (ULift.{t + 1, t} A) (sfCbcModelIdeal d) false).tower
-
-/-- Completion is total right derived inverse limit of the strict reduction tower.
-Source: Stacks Tags 099M and 0941
-(blueprint: lem-sf-cbc-extension-zero-completion). -/
-def sfCbcCompletion (X : Scheme.{t}) {A : Type t} [CommRing A]
-    (d : CompleteCoefficientDatum A) : proEtaleDerivedCategory X A ⥤
-      proEtaleDerivedCategory X A :=
-  sfCbcReduction X d ⋙ ConstantCompletion.rlim (sfCbcModelRing X A) ⋙
-    (sfCbcModelDerived X A).inverse
-
-/-- The prescribed quotient-unit completion map, transported through the equivalence.
-Source: Stacks Tags 099M and 00VC
-(blueprint: lem-sf-cbc-extension-zero-completion). -/
-def sfCbcCompletionUnit (X : Scheme.{t}) {A : Type t} [CommRing A]
-    (d : CompleteCoefficientDatum A) : 𝟭 (proEtaleDerivedCategory X A) ⟶
-      sfCbcCompletion X d :=
-  (sfCbcModelDerived X A).unitIso.hom ≫
-    whiskerLeft (sfCbcModelDerived X A).functor
-      (whiskerRight
-        (ConstantCompletion.completionUnit (proEtaleModelTopology X)
-          (ULift.{t + 1, t} A) (sfCbcModelIdeal d) false)
-        (sfCbcModelDerived X A).inverse)
-
-/-- The existing local derived-completeness predicate on the equivalent small site.
-Source: Stacks Tags 0999 and 099M
-(blueprint: lem-sf-cbc-extension-zero-completion). -/
-abbrev sfCbcIsComplete (X : Scheme.{t}) {A : Type t} [CommRing A]
-    (d : CompleteCoefficientDatum A) (K : proEtaleDerivedCategory X A) : Prop :=
-  ConstantCompletion.IsComplete
-    (ConstantCompletion.quotient (proEtaleModelTopology X)
-      (ULift.{t + 1, t} A) (sfCbcModelIdeal d) 0)
-    ((sfCbcModelDerived X A).functor.obj K)
-
-/-- The flat K-flat model of extension is the actual termwise extended complex.
-Source: Stacks Tags 06YS, 03DI and 0E8I; Step 1 of the node.
-Proof: the projection formula identifies tensoring an extended flat module
-with exact restriction, tensoring on U, and exact extension. Thus its terms
-are flat. Extension is a left adjoint, so it preserves the direct sums in
-total tensor complexes. Exact restriction sends acyclic complexes to acyclic
-complexes, K-flatness makes their tensor acyclic on U, and exact extension
-preserves that acyclicity. Exactness also descends the realization map.
-(blueprint: lem-sf-cbc-extension-zero-completion). -/
-theorem sfCbcExtensionModel_existsUnique {U X : Scheme.{t}} (j : U ⟶ X)
-    [IsOpenImmersion j] (A : Type t) [CommRing A]
-    {K : proEtaleDerivedCategory U A} (M : AdicKFlatModel U A K) :
-    ∃! N : AdicKFlatModel X A ((sfCbcDerivedExtension j A).obj K),
-      N.complex = ((sfCbcOpenExtension j A).mapHomologicalComplex (.up ℤ)).obj M.complex ∧
-      HEq N.realization
-        (((sfCbcOpenExtension j A).mapDerivedCategoryFactors.app M.complex).symm ≪≫
-          (sfCbcDerivedExtension j A).mapIso M.realization) := by
-  sorry
-
-/-- The canonical termwise extended model; its complex and realization determine it.
-Source: Step 1 of the node (blueprint: lem-sf-cbc-extension-zero-completion). -/
-def sfCbcExtensionModel {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j]
-    (A : Type t) [CommRing A] {K : proEtaleDerivedCategory U A}
-    (M : AdicKFlatModel U A K) :=
-  (sfCbcExtensionModel_existsUnique j A M).exists.choose
-
-/-- Ordinary extension transported to the equivalent small-site module categories.
-Source: Stacks Tags 00VC and 03DI
-(blueprint: lem-sf-cbc-extension-zero-completion). -/
-def sfCbcModelExtension {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j]
-    (A : Type t) [CommRing A] :
-    ConstantCompletion.Mod (sfCbcModelRing U A) ⥤
-      ConstantCompletion.Mod (sfCbcModelRing X A) :=
-  (sfCbcModelModules U A).asEquivalence.inverse ⋙ sfCbcOpenExtension j A ⋙
-    sfCbcModelModules X A
-
-/-- Additivity is preserved through the two model equivalences.
-Source: Stacks Tags 00VC and 03DI
-(blueprint: lem-sf-cbc-extension-zero-completion). -/
-instance sfCbcModelExtension_additive {U X : Scheme.{t}} (j : U ⟶ X)
-    [IsOpenImmersion j] (A : Type t) [CommRing A] :
-    (sfCbcModelExtension j A).Additive :=
-  inferInstanceAs ((sfCbcModelModules U A).asEquivalence.inverse ⋙
-    sfCbcOpenExtension j A ⋙ sfCbcModelModules X A).Additive
-
-/-- Left exactness survives the equivalence transport. Source: Stacks Tag 00VC
-(blueprint: lem-sf-cbc-extension-zero-completion). -/
-instance sfCbcModelExtension_limits {U X : Scheme.{t}} (j : U ⟶ X)
-    [IsOpenImmersion j] (A : Type t) [CommRing A] :
-    PreservesFiniteLimits (sfCbcModelExtension j A) :=
-  inferInstanceAs (PreservesFiniteLimits ((sfCbcModelModules U A).asEquivalence.inverse ⋙
-    sfCbcOpenExtension j A ⋙ sfCbcModelModules X A))
-
-/-- Right exactness survives the equivalence transport. Source: Stacks Tag 00VC
-(blueprint: lem-sf-cbc-extension-zero-completion). -/
-instance sfCbcModelExtension_colimits {U X : Scheme.{t}} (j : U ⟶ X)
-    [IsOpenImmersion j] (A : Type t) [CommRing A] :
-    PreservesFiniteColimits (sfCbcModelExtension j A) :=
-  inferInstanceAs (PreservesFiniteColimits ((sfCbcModelModules U A).asEquivalence.inverse ⋙
-    sfCbcOpenExtension j A ⋙ sfCbcModelModules X A))
-
-/-- Exact termwise extension on the derived small-site presentation.
-Source: Stacks Tags 03DJ and 00VC
-(blueprint: lem-sf-cbc-extension-zero-completion). -/
-abbrev sfCbcModelDerivedExtension {U X : Scheme.{t}} (j : U ⟶ X)
-    [IsOpenImmersion j] (A : Type t) [CommRing A] :=
-  (sfCbcModelExtension j A).mapDerivedCategory
-
-/-- The termwise ordinary extension functor on actual strict towers.
-Source: Stacks Tag 0941 (blueprint: lem-sf-cbc-extension-zero-completion). -/
-abbrev sfCbcTowerExtension {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j]
-    (A : Type t) [CommRing A] :=
-  (Functor.whiskeringRight ℕᵒᵖ _ _).obj (sfCbcModelExtension j A)
-
-/-- Termwise extension is exact also on strict towers.
-Source: Stacks Tags 03DJ and 0941; Step 2 of the node.
-Proof: kernels and cokernels of diagrams are computed pointwise. At every
-index the functor is the exact ordinary module extension. Evaluations jointly
-reflect the finite-limit and finite-colimit universal properties, proving both
-preservation clauses. Additivity is checked at the same evaluations.
-(blueprint: lem-sf-cbc-extension-zero-completion). -/
-theorem sfCbcTowerExtension_exact {U X : Scheme.{t}} (j : U ⟶ X)
-    [IsOpenImmersion j] (A : Type t) [CommRing A] :
-    (sfCbcTowerExtension j A).Additive ∧
-      PreservesFiniteLimits (sfCbcTowerExtension j A) ∧
-      PreservesFiniteColimits (sfCbcTowerExtension j A) := by
-  sorry
-
-/-- Additivity of termwise extension. Source: Stacks Tag 0941
-(blueprint: lem-sf-cbc-extension-zero-completion). -/
-instance sfCbcTowerExtension_additive {U X : Scheme.{t}} (j : U ⟶ X)
-    [IsOpenImmersion j] (A : Type t) [CommRing A] :
-    (sfCbcTowerExtension j A).Additive := (sfCbcTowerExtension_exact j A).1
-
-/-- Left exactness of termwise extension. Source: Stacks Tag 0941
-(blueprint: lem-sf-cbc-extension-zero-completion). -/
-instance sfCbcTowerExtension_limits {U X : Scheme.{t}} (j : U ⟶ X)
-    [IsOpenImmersion j] (A : Type t) [CommRing A] :
-    PreservesFiniteLimits (sfCbcTowerExtension j A) := (sfCbcTowerExtension_exact j A).2.1
-
-/-- Right exactness of termwise extension. Source: Stacks Tag 0941
-(blueprint: lem-sf-cbc-extension-zero-completion). -/
-instance sfCbcTowerExtension_colimits {U X : Scheme.{t}} (j : U ⟶ X)
-    [IsOpenImmersion j] (A : Type t) [CommRing A] :
-    PreservesFiniteColimits (sfCbcTowerExtension j A) := (sfCbcTowerExtension_exact j A).2.2
-
-/-- The ordinary exact extension functor on derived strict towers.
-Source: Stacks Tag 0941 (blueprint: lem-sf-cbc-extension-zero-completion). -/
-abbrev sfCbcDerivedTowerExtension {U X : Scheme.{t}} (j : U ⟶ X)
-    [IsOpenImmersion j] (A : Type t) [CommRing A] :
-    sfCbcTowerDerived U A ⥤ sfCbcTowerDerived X A :=
-  (sfCbcTowerExtension j A).mapDerivedCategory
-
-/-- The published universal K-flat presentation of strict reductions on the small model.
-Source: Stacks Tags 099M and 06YY
-(blueprint: lem-sf-cbc-extension-zero-completion). -/
-abbrev sfCbcQuotientPresentation (X : Scheme.{t}) {A : Type t} [CommRing A]
-    (d : CompleteCoefficientDatum A) :=
-  ConstantCompletion.quotientPresentation (proEtaleModelTopology X)
-    (ULift.{t + 1, t} A) (sfCbcModelIdeal d) false
+attribute [local irreducible] sfCbcConstantSliceIso constantSheaf
+  sfCbcModelModules sfCbcModelRingMap sfCbcModelDerived
+  SheafOfModules.monoidalCategory
+  sfCbcOpenExtension sfCbcExtensionModel
+attribute [-instance] sfCbcTensorTotal sfCbcSliceTransport_additive
 
 /-- Ordinary tensor projection comparison, as one isomorphism of strict quotient diagrams.
 Its equation fixes the map by the actual quotient units, not just its endpoints.
@@ -443,6 +104,8 @@ def sfCbcOrdinaryTensorComparison {U X : Scheme.{t}} (j : U ⟶ X)
     [IsOpenImmersion j] {A : Type t} [CommRing A] (d : CompleteCoefficientDatum A) :=
   (sfCbcOrdinaryTensorComparison_existsUnique j d).exists.choose
 
+attribute [local semireducible] sfCbcModelDerived
+
 /-- Canonical transport of the exact derived extension functor.
 Source: Stacks Tags 00VC and 05RU
 (blueprint: lem-sf-cbc-extension-zero-completion). -/
@@ -456,6 +119,8 @@ def sfCbcExtensionTransport {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j]
       (isoWhiskerRight (sfCbcModelModules U A).asEquivalence.unitIso
         (sfCbcOpenExtension j A ⋙ sfCbcModelModules X A)) ≪≫
     Functor.mapDerivedCategoryCompIso (sfCbcModelModules U A) (sfCbcModelExtension j A)
+
+attribute [local irreducible] sfCbcModelDerived
 
 /-- Zero morphisms on the ordinary extension/reduction route.
 Source: Stacks Tags 03DI and 06YY
@@ -480,6 +145,13 @@ instance sfCbcTensorRightRoute_zero {U X : Scheme.{t}} (j : U ⟶ X)
     (ULift.{t + 1, t} A) (sfCbcModelIdeal d) false
   infer_instance
 
+attribute [local irreducible] sfCbcExtensionTransport sfCbcOrdinaryTensorComparison
+  ConstantCompletion.quotientPresentation sfCbcModelExtension
+  NatIso.mapHomologicalComplex Functor.mapHomologicalComplexCompIso
+  ConstantCompletion.reductionUnit
+  ConstantCompletion.reductionTower
+  sfCbcModelDerivedFactors sfCbcModelExtensionFactors sfCbcTowerExtensionFactors
+
 /-- Normalization of the derived tensor comparison on every flat-term K-flat complex.
 Both sides use the universal quotient counits and the ordinary tensor comparison.
 Source: Stacks Tag 06YY; Step 2 of the node
@@ -488,23 +160,36 @@ def sfCbcTensorComparisonNormalized {U X : Scheme.{t}} (j : U ⟶ X)
     [IsOpenImmersion j] {A : Type t} [CommRing A] (d : CompleteCoefficientDatum A)
     (e : sfCbcModelDerivedExtension j A ⋙ (sfCbcQuotientPresentation X d).tower ≅
       (sfCbcQuotientPresentation U d).tower ⋙ sfCbcDerivedTowerExtension j A) : Prop := by
-  letI := sfCbcTensorRightRoute_zero j d
-  letI := sfCbcTensorRoute_zero j d
+  letI := ConstantCompletion.reductionTower_additive (proEtaleModelTopology X)
+    (ULift.{t + 1, t} A) (sfCbcModelIdeal d) false
+  letI := ConstantCompletion.reductionTower_additive (proEtaleModelTopology U)
+    (ULift.{t + 1, t} A) (sfCbcModelIdeal d) false
+  let c : (sfCbcModelExtension j A).mapHomologicalComplex (.up ℤ) ⋙
+      (ConstantCompletion.reductionTower (proEtaleModelTopology X)
+        (ULift.{t + 1, t} A) (sfCbcModelIdeal d) false).mapHomologicalComplex (.up ℤ) ≅
+      (ConstantCompletion.reductionTower (proEtaleModelTopology U)
+        (ULift.{t + 1, t} A) (sfCbcModelIdeal d) false).mapHomologicalComplex (.up ℤ) ⋙
+          (sfCbcTowerExtension j A).mapHomologicalComplex (.up ℤ) :=
+    Functor.mapHomologicalComplexCompIso
+      (sfCbcOrdinaryTensorComparison j d) (.up ℤ) ≪≫
+      (Functor.mapHomologicalComplexCompIso
+        (F := ConstantCompletion.reductionTower (proEtaleModelTopology U)
+          (ULift.{t + 1, t} A) (sfCbcModelIdeal d) false)
+        (G := sfCbcTowerExtension j A) (Iso.refl _) (.up ℤ)).symm
   exact ∀ P : ConstantCompletion.Cx (sfCbcModelRing U A), P.IsAcyclicTensorKFlat →
     (∀ i : ℤ, SheafOfModules.IsFlat (P.X i)) →
-      e.hom.app ((ConstantCompletion.Q (sfCbcModelRing U A)).obj P) ≫
+      HEq (e.hom.app ((ConstantCompletion.Q (sfCbcModelRing U A)).obj P) ≫
           (sfCbcDerivedTowerExtension j A).map
             ((sfCbcQuotientPresentation U d).comparison.app P) ≫
-          (sfCbcTowerExtension j A).mapDerivedCategoryFactors.hom.app
+          (sfCbcTowerExtensionFactors j A).hom.app
             (ConstantCompletion.reductionComplex (proEtaleModelTopology U)
-              (ULift.{t + 1, t} A) (sfCbcModelIdeal d) false P) =
-        (sfCbcQuotientPresentation X d).tower.map
-            ((sfCbcModelExtension j A).mapDerivedCategoryFactors.hom.app P) ≫
+              (ULift.{t + 1, t} A) (sfCbcModelIdeal d) false P))
+        ((sfCbcQuotientPresentation X d).tower.map
+            ((sfCbcModelExtensionFactors j A).hom.app P) ≫
           (sfCbcQuotientPresentation X d).comparison.app
             (((sfCbcModelExtension j A).mapHomologicalComplex (.up ℤ)).obj P) ≫
           (ConstantCompletion.TQ (sfCbcModelRing X A)).map
-            ((NatIso.mapHomologicalComplex (sfCbcOrdinaryTensorComparison j d)
-              (.up ℤ)).hom.app P)
+            (c.hom.app P))
 
 /-- The tensor projection comparison descends uniquely to derived strict towers.
 Source: Stacks Tags 06YY, 0E8I and 0941; Steps 1–2 of the node.
@@ -543,18 +228,68 @@ def sfCbcReducedCompletionUnit {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion
   whiskerLeft (sfCbcDerivedExtension j A)
     (whiskerRight (sfCbcCompletionUnit X d) (sfCbcReduction X d))
 
+private theorem sfCbcTransportedUnit_isIso {C D B : Type*}
+    [Category C] [Category D] [Category B] (E : C ≌ D) (G : D ⥤ D)
+    (η : 𝟭 D ⟶ G) (T : D ⥤ B) [IsIso (whiskerRight η T)] (K : C) :
+    IsIso (T.map (E.functor.map
+      (E.unitIso.hom.app K ≫ E.inverse.map (η.app (E.functor.obj K))))) := by
+  have hη : E.functor.map
+      (E.unitIso.hom.app K ≫ E.inverse.map (η.app (E.functor.obj K))) =
+        η.app (E.functor.obj K) ≫ E.counitIso.inv.app (G.obj (E.functor.obj K)) := by
+    apply (cancel_mono (E.counitIso.hom.app (G.obj (E.functor.obj K)))).mp
+    rw [Functor.map_comp, Category.assoc]
+    have hn := E.counitIso.hom.naturality (η.app (E.functor.obj K))
+    change E.functor.map (E.inverse.map _) ≫ _ = _ at hn
+    rw [hn]
+    dsimp only [Functor.id_obj, Functor.id_map]
+    rw [← Category.assoc, E.functor_unitIso_comp, Category.id_comp,
+      Category.assoc, Iso.inv_hom_id_app]
+    dsimp only [Functor.id_obj]
+    exact (Category.comp_id _).symm
+  rw [hη, Functor.map_comp]
+  have : IsIso (T.map (η.app (E.functor.obj K))) :=
+    inferInstanceAs (IsIso ((whiskerRight η T).app _))
+  infer_instance
+
+private theorem sfCbcTransportedUnitNat_isIso {C D B : Type*}
+    [Category C] [Category D] [Category B] (E : C ≌ D) (G : D ⥤ D)
+    (η : 𝟭 D ⟶ G) (T : D ⥤ B) [IsIso (whiskerRight η T)] :
+    IsIso (whiskerRight
+      (E.unitIso.hom ≫ whiskerLeft E.functor (whiskerRight η E.inverse))
+      (E.functor ⋙ T)) := by
+  exact @NatIso.isIso_of_isIso_app _ _ _ _ _ _
+    (whiskerRight
+      (E.unitIso.hom ≫ whiskerLeft E.functor (whiskerRight η E.inverse))
+      (E.functor ⋙ T))
+    (fun K ↦ sfCbcTransportedUnit_isIso E G η T K)
+
 /-- The reduced unit is invertible in the derived category of strict towers.
 Source: Stacks Tag 099M; Step 3 of the node.
-Proof: apply lemma-weil-pbc-adic-completion-reduction to J K. At each n the
-adjoint of the n-th limit projection is an isomorphism and its composite with
-the reduced completion unit is identity. Hence the reduced unit at n is its
-inverse. Exact evaluation detects acyclic cones in the tower category, so
-the whole strict tower morphism is invertible. No completeness of J K is used.
+Proof: apply reductionCompletionUnit_isIso on the AsSmall site with the lifted
+Noetherian coefficient ring. Counit naturality and the equivalence triangle
+identity identify the transported unit with the model unit followed by the inverse
+counit. Reduction preserves that isomorphism. Apply the result to ordinary
+extension and assemble the component isomorphisms. No completeness of J K is used.
 (blueprint: lem-sf-cbc-extension-zero-completion). -/
 theorem sfCbcReducedCompletionUnit_isIso {U X : Scheme.{t}} (j : U ⟶ X)
     [IsOpenImmersion j] {A : Type t} [CommRing A] (d : CompleteCoefficientDatum A) :
     IsIso (sfCbcReducedCompletionUnit j d) := by
-  sorry
+  let := d.noetherian
+  let : IsNoetherianRing (ULift.{t + 1, t} A) :=
+    isNoetherianRing_of_ringEquiv A ULift.ringEquiv.symm
+  let S : AdicSites.Site.{t + 1} :=
+    ⟨proEtaleSiteModel X, proEtaleModelTopology X⟩
+  let E := sfCbcModelDerived X A
+  have := AdicSites.reductionCompletionUnit_isIso S
+    (ULift.{t + 1, t} A) (sfCbcModelIdeal d)
+  let η := S.unit (ULift.{t + 1, t} A) (sfCbcModelIdeal d)
+  let T := S.reduction (ULift.{t + 1, t} A) (sfCbcModelIdeal d)
+  have := sfCbcTransportedUnitNat_isIso E
+    (S.completion (ULift.{t + 1, t} A) (sfCbcModelIdeal d)) η T
+  exact inferInstanceAs (IsIso (whiskerLeft (sfCbcDerivedExtension j A)
+    (whiskerRight
+      (E.unitIso.hom ≫ whiskerLeft E.functor (whiskerRight η E.inverse))
+      (E.functor ⋙ T))))
 
 /-- Completed extension is ordinary extension followed by completion.
 Source: Stacks Tag 099M; Step 4 of the node
@@ -583,6 +318,11 @@ def sfCbcCompletedExtensionPresentation {U X : Scheme.{t}} (j : U ⟶ X)
   isoWhiskerRight (sfCbcTensorComparison j d)
     (ConstantCompletion.rlim (sfCbcModelRing X A) ⋙ (sfCbcModelDerived X A).inverse)
 
+attribute [local instance 1000] SheafOfModules.hasSheafify_coefficientUniverse
+  SheafOfModules.wEqualsLocallyBijective_coefficientUniverse
+
+attribute [local semireducible] sfCbcOpenExtension
+
 open Classical in
 /-- Insert a section into its factorization summand of the extension presheaf,
 then apply module sheafification. This is the actual extension generator.
@@ -601,6 +341,11 @@ def sfCbcExtensionSection {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j]
               (V ⟶ cbcOpenObject j inferInstance)
               (fun b ↦ ((sfCbcConstantModuleToSlice X (cbcOpenObject j inferInstance) A).obj
                 M).val.obj (op (Over.mk b))) a m)
+
+attribute [local instance 30000] SheafOfModules.hasSheafify_coefficientUniverse
+  SheafOfModules.wEqualsLocallyBijective_coefficientUniverse
+
+attribute [local irreducible] sfCbcOpenExtension
 
 /-- Ordinary scalar restriction commutes with extension by zero by the same summands.
 The equality on extension generators fixes the comparison uniquely.
@@ -649,6 +394,8 @@ def sfCbcDerivedRestrictExtensionIso {U X : Scheme.{t}} (j : U ⟶ X)
     Functor.mapDerivedCategoryNatIso (sfCbcRestrictExtensionIso j φ) ≪≫
     Functor.mapDerivedCategoryCompIso (sfCbcOpenExtension j B)
       (SheafOfModules.restrictScalars (adicModuleMap X φ))
+
+attribute [local irreducible] sfCbcDerivedRestrictExtensionIso
 
 /-- The finite tensor comparison is the adjoint of the extended quotient unit.
 Its target retains the actual quotient coefficient action.
@@ -721,6 +468,136 @@ def sfCbcFiniteCompletedHom {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j]
         (adicChange X (Ideal.Quotient.mk (d.ideal ^ (n + 1)))
           (sfCbcExtensionModel j A M).complex)).inv) ≫ sfCbcFiniteTensorHom j d M n
 
+private theorem sfCbcReductionHomEquiv_apply (X : Scheme.{t}) {A : Type t}
+    [CommRing A] (d : CompleteCoefficientDatum A) {K : proEtaleDerivedCategory X A}
+    (M : AdicKFlatModel X A K) (n : ℕ)
+    (H : proEtaleDerivedCategory X (A ⧸ d.ideal ^ (n + 1)))
+    (f : adicReduction X d M ⟨n + 1, Nat.succ_pos n⟩ ⟶ H) :
+    adicReductionHomEquiv X d M n H f = adicReductionDerivedUnit X d M n ≫
+      (adicDerivedRestrict X (Ideal.Quotient.mk (d.ideal ^ (n + 1)))).map f := rfl
+
+attribute [local irreducible] adicReductionHomEquiv
+
+attribute [local irreducible] adicDerivedRestrictFactors
+  adicCompletionEvaluation
+  adicDerivedRestrict
+
+private theorem sfCbcTransposeComp
+    {C D : Type*} [Category C] [Category D] (R : D ⥤ C)
+    {X Y : C} {P Q T : D} (u : X ⟶ R.obj P) (v : Y ⟶ R.obj Q)
+    (E : (P ⟶ T) ≃ (X ⟶ R.obj T)) (E' : (Q ⟶ T) ≃ (Y ⟶ R.obj T))
+    (hE : ∀ f, E f = u ≫ R.map f) (hE' : ∀ f, E' f = v ≫ R.map f)
+    (m : P ⟶ Q) (a : X ⟶ Y) (b : Y ⟶ R.obj T)
+    (hm : u ≫ R.map m = a ≫ v) :
+    E.symm (a ≫ b) = m ≫ E'.symm b := by
+  apply E.injective
+  rw [Equiv.apply_symm_apply, hE, CategoryTheory.Functor.map_comp,
+    ← Category.assoc, hm, Category.assoc, ← hE', Equiv.apply_symm_apply]
+
+private theorem sfCbcCompletionAdjoint_isIso (X : Scheme.{t}) {A : Type t}
+    [CommRing A] (d : CompleteCoefficientDatum A) {K L : proEtaleDerivedCategory X A}
+    (M : AdicKFlatModel X A K) (N : AdicKFlatModel X A L)
+    (c : L ≅ adicCompletionObject X d M) (n : ℕ) :
+    IsIso ((adicReductionHomEquiv X d N n _).symm
+      (c.hom ≫ adicCompletionEvaluation X d M n ≫
+        (adicDerivedRestrictFactors X (Ideal.Quotient.mk (d.ideal ^ (n + 1)))
+          (adicChange X (Ideal.Quotient.mk (d.ideal ^ (n + 1))) M.complex)).inv)) := by
+  let N' : AdicKFlatModel X A (adicCompletionObject X d M) :=
+    { complex := N.complex
+      isKFlat := N.isKFlat
+      flatTerms := N.flatTerms
+      realization := N.realization ≪≫ c }
+  let R := adicDerivedRestrict X (Ideal.Quotient.mk (d.ideal ^ (n + 1)))
+  have he : (adicReductionHomEquiv X d N n _).symm
+      (c.hom ≫ adicCompletionEvaluation X d M n ≫
+        (adicDerivedRestrictFactors X (Ideal.Quotient.mk (d.ideal ^ (n + 1)))
+          (adicChange X (Ideal.Quotient.mk (d.ideal ^ (n + 1))) M.complex)).inv) =
+      adicReductionMap X d N N' n c.hom ≫ adicCompletionReduction X d M N' n := by
+    exact sfCbcTransposeComp R
+      (adicReductionDerivedUnit X d N n) (adicReductionDerivedUnit X d N' n)
+      (adicReductionHomEquiv X d N n _) (adicReductionHomEquiv X d N' n _)
+      (sfCbcReductionHomEquiv_apply X d N n _)
+      (sfCbcReductionHomEquiv_apply X d N' n _)
+      (adicReductionMap X d N N' n c.hom) c.hom _
+      (adicReductionMap_unit X d N N' n c.hom)
+  rw [he]
+  have := adicReductionMap_isIso X d N N' n c.hom
+  have := adicCompletionReduction_isIso X d M N' n
+  infer_instance
+
+private theorem sfCbcTransposeCompositeIdentity
+    {C D : Type*} [Category C] [Category D] (R : D ⥤ C)
+    {X Y : C} {P Q : D} (u : X ⟶ R.obj P) (v : Y ⟶ R.obj Q)
+    (E : (P ⟶ P) ≃ (X ⟶ R.obj P)) (E' : (Q ⟶ P) ≃ (Y ⟶ R.obj P))
+    (hE : ∀ f, E f = u ≫ R.map f) (hE' : ∀ f, E' f = v ≫ R.map f)
+    (m : P ⟶ Q) (a : X ⟶ Y) (b : Y ⟶ R.obj P)
+    (hm : u ≫ R.map m = a ≫ v) (hab : a ≫ b = u) :
+    m ≫ E'.symm b = 𝟙 P := by
+  apply E.injective
+  rw [hE, hE, Functor.map_comp, ← Category.assoc, hm, Category.assoc]
+  rw [← hE', Equiv.apply_symm_apply, hab, CategoryTheory.Functor.map_id, Category.comp_id]
+
+private theorem sfCbcCompTransport
+    {C : Type*} [Category C] {K L M N : C}
+    (η : K ⟶ L) (c : L ⟶ M) (p : M ⟶ N) (u : K ⟶ M) (v : K ⟶ N)
+    (hc : η ≫ c = u) (hp : u ≫ p = v) : η ≫ (c ≫ p) = v := by
+  rw [← Category.assoc, hc, hp]
+
+private theorem sfCbcCompletionProjection_unit (X : Scheme.{t}) {A : Type t}
+    [CommRing A] (d : CompleteCoefficientDatum A) {K : proEtaleDerivedCategory X A}
+    (M : AdicKFlatModel X A K) (n : ℕ) :
+    adicCompletionMap X d M ≫
+      (adicCompletionEvaluation X d M n ≫
+        (adicDerivedRestrictFactors X (Ideal.Quotient.mk (d.ideal ^ (n + 1)))
+          (adicChange X (Ideal.Quotient.mk (d.ideal ^ (n + 1))) M.complex)).inv) =
+      adicReductionDerivedUnit X d M n := by
+  unfold adicReductionDerivedUnit
+  rw [← Category.assoc]
+  have hp : adicCompletionMap X d M ≫ adicCompletionEvaluation X d M n =
+      M.realization.inv ≫ (adicLocalization X A).map (adicReductionAugmentation X d M n) := by
+    simpa only [adicCompletionEvaluation] using adicCompletionMap_projection X d M n
+  exact (congrArg (fun f ↦ f ≫
+    (adicDerivedRestrictFactors X (Ideal.Quotient.mk (d.ideal ^ (n + 1)))
+      (adicChange X (Ideal.Quotient.mk (d.ideal ^ (n + 1))) M.complex)).inv) hp).trans
+        (Category.assoc _ _ _)
+
+attribute [local irreducible] adicReductionDerivedUnit
+
+private theorem sfCbcCompletionAdjoint_unit (X : Scheme.{t}) {A : Type t}
+    [CommRing A] (d : CompleteCoefficientDatum A) {K L : proEtaleDerivedCategory X A}
+    (M : AdicKFlatModel X A K) (N : AdicKFlatModel X A L)
+    (c : L ≅ adicCompletionObject X d M) (η : K ⟶ L)
+    (hc : η ≫ c.hom = adicCompletionMap X d M) (n : ℕ) :
+    adicReductionMap X d M N n η ≫
+      (adicReductionHomEquiv X d N n _).symm
+        (c.hom ≫ adicCompletionEvaluation X d M n ≫
+          (adicDerivedRestrictFactors X (Ideal.Quotient.mk (d.ideal ^ (n + 1)))
+            (adicChange X (Ideal.Quotient.mk (d.ideal ^ (n + 1))) M.complex)).inv) =
+      𝟙 _ := by
+  let R := adicDerivedRestrict X (Ideal.Quotient.mk (d.ideal ^ (n + 1)))
+  apply sfCbcTransposeCompositeIdentity R
+    (adicReductionDerivedUnit X d M n) (adicReductionDerivedUnit X d N n)
+    (adicReductionHomEquiv X d M n _) (adicReductionHomEquiv X d N n _)
+    (sfCbcReductionHomEquiv_apply X d M n _)
+    (sfCbcReductionHomEquiv_apply X d N n _)
+    (adicReductionMap X d M N n η) η _ (adicReductionMap_unit X d M N n η)
+  exact sfCbcCompTransport η c.hom _ (adicCompletionMap X d M)
+    (adicReductionDerivedUnit X d M n) hc (sfCbcCompletionProjection_unit X d M n)
+
+private theorem sfCbcInverseFormula {C : Type*} [Category C] {P N T : C}
+    (u : P ⟶ N) (a : N ⟶ P) (t : P ⟶ T) [IsIso a] [IsIso t]
+    (hu : u ≫ a = 𝟙 P) :
+    ∃ h : IsIso (a ≫ t), (@asIso _ _ _ _ (a ≫ t) h).inv = inv t ≫ u := by
+  refine ⟨inferInstance, ?_⟩
+  apply (cancel_mono (a ≫ t)).mp
+  change inv (a ≫ t) ≫ (a ≫ t) = _
+  rw [IsIso.inv_hom_id]
+  symm
+  calc
+    (inv t ≫ u) ≫ (a ≫ t) = inv t ≫ ((u ≫ a) ≫ t) := by
+      simp only [Category.assoc]
+    _ = 𝟙 _ := by rw [hu, Category.id_comp, IsIso.inv_hom_id]
+
 /-- Finite completion comparison and its inverse reduced-unit formula, over P_n itself.
 Source: Stacks Tag 099M; Steps 3–5 of the node.
 Proof: the adjoint of projection is invertible by
@@ -739,7 +616,19 @@ theorem sfCbcFiniteCompletedHom_inverse {U X : Scheme.{t}} (j : U ⟶ X)
           (sfCbcFiniteTensorHom_isIso j d M n)).inv ≫
           adicReductionMap X d (sfCbcExtensionModel j A M) N n
             ((sfCbcCompletionUnit X d).app ((sfCbcDerivedExtension j A).obj K)) := by
-  sorry
+  let P := sfCbcExtensionModel j A M
+  let c := sfCbcCompletionModelIso X d P
+  let a := (adicReductionHomEquiv X d N n _).symm
+    (c.hom ≫ adicCompletionEvaluation X d P n ≫
+      (adicDerivedRestrictFactors X (Ideal.Quotient.mk (d.ideal ^ (n + 1)))
+        (adicChange X (Ideal.Quotient.mk (d.ideal ^ (n + 1))) P.complex)).inv)
+  have ha : IsIso a := sfCbcCompletionAdjoint_isIso X d P N c n
+  have ht := sfCbcFiniteTensorHom_isIso j d M n
+  have hu : adicReductionMap X d P N n
+      ((sfCbcCompletionUnit X d).app ((sfCbcDerivedExtension j A).obj K)) ≫ a = 𝟙 _ :=
+    sfCbcCompletionAdjoint_unit X d P N c _
+      (sfCbcCompletionModelIso_existsUnique X d P).exists.choose_spec n
+  exact sfCbcInverseFormula _ a (sfCbcFiniteTensorHom j d M n) hu
 
 /-- The finite comparison with its specified inverse, as an isomorphism.
 Source: Stacks Tag 099M (blueprint: lem-sf-cbc-extension-zero-completion). -/
@@ -792,6 +681,57 @@ theorem sfCbcFiniteUnderlyingHom_transition {U X : Scheme.{t}} (j : U ⟶ X)
             (Nat.succ_le_succ h)) := by
   sorry
 
+private theorem sfCbcFiniteTensorHom_naturality {U X : Scheme.{t}} (j : U ⟶ X)
+    [IsOpenImmersion j] {A : Type t} [CommRing A] (d : CompleteCoefficientDatum A)
+    {K L : proEtaleDerivedCategory U A} (M : AdicKFlatModel U A K)
+    (M' : AdicKFlatModel U A L) (f : K ⟶ L) (n : ℕ) :
+    adicReductionMap X d (sfCbcExtensionModel j A M) (sfCbcExtensionModel j A M') n
+        ((sfCbcDerivedExtension j A).map f) ≫ sfCbcFiniteTensorHom j d M' n =
+      sfCbcFiniteTensorHom j d M n ≫
+        (sfCbcDerivedExtension j (A ⧸ d.ideal ^ (n + 1))).map
+          (adicReductionMap U d M M' n f) := by
+  let R := adicDerivedRestrict X (Ideal.Quotient.mk (d.ideal ^ (n + 1)))
+  let e := sfCbcDerivedRestrictExtensionIso j (Ideal.Quotient.mk (d.ideal ^ (n + 1)))
+  have ht {H : proEtaleDerivedCategory U A} (P : AdicKFlatModel U A H) :
+      adicReductionDerivedUnit X d (sfCbcExtensionModel j A P) n ≫
+          R.map (sfCbcFiniteTensorHom j d P n) =
+        (sfCbcDerivedExtension j A).map (adicReductionDerivedUnit U d P n) ≫
+          e.hom.app (adicReduction U d P ⟨n + 1, Nat.succ_pos n⟩) :=
+    by
+      simpa only [sfCbcReductionHomEquiv_apply, sfCbcFiniteTensorHom] using
+        (adicReductionHomEquiv X d (sfCbcExtensionModel j A P) n _).apply_symm_apply _
+  apply (adicReductionHomEquiv X d (sfCbcExtensionModel j A M) n _).injective
+  simp only [sfCbcReductionHomEquiv_apply]
+  change adicReductionDerivedUnit X d (sfCbcExtensionModel j A M) n ≫ R.map _ =
+    adicReductionDerivedUnit X d (sfCbcExtensionModel j A M) n ≫ R.map _
+  rw [Functor.map_comp, ← Category.assoc, adicReductionMap_unit, Category.assoc, ht]
+  rw [Functor.map_comp]
+  simp only [← Category.assoc]
+  rw [ht]
+  simp only [Category.assoc]
+  have he := e.hom.naturality (adicReductionMap U d M M' n f)
+  change (sfCbcDerivedExtension j A).map
+      ((adicDerivedRestrict U (Ideal.Quotient.mk (d.ideal ^ (n + 1)))).map
+        (adicReductionMap U d M M' n f)) ≫ e.hom.app _ =
+    e.hom.app _ ≫ R.map
+      ((sfCbcDerivedExtension j (A ⧸ d.ideal ^ (n + 1))).map
+        (adicReductionMap U d M M' n f)) at he
+  rw [← he, ← Functor.map_comp_assoc, ← Functor.map_comp_assoc, adicReductionMap_unit]
+
+private theorem sfCbcFiniteCompletedHom_unit {U X : Scheme.{t}} (j : U ⟶ X)
+    [IsOpenImmersion j] {A : Type t} [CommRing A] (d : CompleteCoefficientDatum A)
+    {K : proEtaleDerivedCategory U A} (M : AdicKFlatModel U A K)
+    (N : AdicKFlatModel X A ((sfCbcCompletedExtension j d).obj K)) (n : ℕ) :
+    adicReductionMap X d (sfCbcExtensionModel j A M) N n
+        ((sfCbcCompletionUnit X d).app ((sfCbcDerivedExtension j A).obj K)) ≫
+      sfCbcFiniteCompletedHom j d M N n = sfCbcFiniteTensorHom j d M n := by
+  change _ ≫ (_ ≫ _) = _
+  rw [← Category.assoc, sfCbcCompletionAdjoint_unit X d
+    (sfCbcExtensionModel j A M) N (sfCbcCompletionModelIso X d _) _
+    (sfCbcCompletionModelIso_existsUnique X d _).exists.choose_spec n, Category.id_comp]
+
+attribute [local irreducible] sfCbcFiniteCompletedHom sfCbcFiniteTensorHom
+
 /-- Finite comparisons are natural in arbitrary input maps and model choices.
 Source: Stacks Tags 06YY and 099M; Step 5 of the node.
 Proof: the reduced completion unit and its inverse are natural, as is the tensor
@@ -810,7 +750,30 @@ theorem sfCbcFiniteCompletedHom_naturality {U X : Scheme.{t}} (j : U ⟶ X)
       sfCbcFiniteCompletedHom j d M N n ≫
         (sfCbcDerivedExtension j (A ⧸ d.ideal ^ (n + 1))).map
           (adicReductionMap U d M M' n f) := by
-  sorry
+  let P := sfCbcExtensionModel j A M
+  let P' := sfCbcExtensionModel j A M'
+  let η := sfCbcCompletionUnit X d
+  let u := adicReductionMap X d P N n
+    (η.app ((sfCbcDerivedExtension j A).obj K))
+  have ht := sfCbcFiniteTensorHom_isIso j d M n
+  have hc := (sfCbcFiniteCompletedHom_inverse j d M N n).choose
+  have hu := sfCbcFiniteCompletedHom_unit j d M N n
+  have hui : IsIso u := by
+    apply (isIso_comp_right_iff _ (sfCbcFiniteCompletedHom j d M N n)).mp
+    rw [show u ≫ sfCbcFiniteCompletedHom j d M N n =
+      sfCbcFiniteTensorHom j d M n from hu]
+    exact ht
+  apply (cancel_epi u).mp
+  have hη := η.naturality ((sfCbcDerivedExtension j A).map f)
+  have hn : u ≫ adicReductionMap X d N N' n ((sfCbcCompletedExtension j d).map f) =
+      adicReductionMap X d P P' n ((sfCbcDerivedExtension j A).map f) ≫
+        adicReductionMap X d P' N' n
+          (η.app ((sfCbcDerivedExtension j A).obj L)) := by
+    rw [← adicReductionMap_comp, ← adicReductionMap_comp]
+    exact congrArg (adicReductionMap X d P N' n) hη.symm
+  rw [← Category.assoc, hn, Category.assoc, sfCbcFiniteCompletedHom_unit]
+  rw [← Category.assoc, hu]
+  exact sfCbcFiniteTensorHom_naturality j d M M' f n
 
 /-- Exact evaluation in the actual strict diagram category on the small model.
 Source: Stacks Tag 0941 (blueprint: lem-sf-cbc-extension-zero-completion). -/
@@ -822,6 +785,17 @@ Source: Stacks Tag 0941 (blueprint: lem-sf-cbc-extension-zero-completion). -/
 abbrev sfCbcEvaluate (X : Scheme.{t}) (A : Type t) [CommRing A] (n : ℕ) :=
   (sfCbcEvaluateModule X A n).mapDerivedCategory
 
+/-- The standard evaluation factorization with the fixed localization endpoints.
+Source: Stacks 05RU and 0941 (blueprint: lem-sf-cbc-extension-zero-completion). -/
+def sfCbcEvaluateFactors (X : Scheme.{t}) (A : Type t) [CommRing A] (n : ℕ) :
+    ConstantCompletion.TQ (sfCbcModelRing X A) ⋙ sfCbcEvaluate X A n ≅
+      (sfCbcEvaluateModule X A n).mapHomologicalComplex (.up ℤ) ⋙
+        ConstantCompletion.Q (sfCbcModelRing X A) :=
+  (sfCbcEvaluateModule X A n).mapDerivedCategoryFactors
+
+attribute [local irreducible] sfCbcEvaluateFactors
+
+set_option backward.isDefEq.respectTransparency true in
 /-- The canonical site-model transport preserves flat-term K-flat representatives.
 Source: Stacks Tags 00VC and 06YY.
 Proof: transport the tensor unit and tensor product along the ringed-site equivalence.
@@ -834,7 +808,48 @@ theorem sfCbcModelComplex_kflat (X : Scheme.{t}) {A : Type t} [CommRing A]
       (((sfCbcModelModules X A).mapHomologicalComplex (.up ℤ)).obj M.complex) ∧
       ∀ i : ℤ, SheafOfModules.IsFlat
         ((((sfCbcModelModules X A).mapHomologicalComplex (.up ℤ)).obj M.complex).X i) := by
-  sorry
+  let R := adicConstantRing X A
+  let S := sfCbcModelRing X A
+  let e := (AsSmall.equiv.{t, t + 1, t + 1} (C := X.ProEt)).symm
+  have : e.functor.IsContinuous (proEtaleModelTopology X) (ProEt.topology X) :=
+    inferInstanceAs (AsSmall.down.IsContinuous (proEtaleModelTopology X) (ProEt.topology X))
+  have : e.inverse.IsContinuous (ProEt.topology X) (proEtaleModelTopology X) :=
+    proEtaleModelUp_isContinuous X
+  let hc : IsIso (sfCbcModelRingMap X A) := by
+    unfold sfCbcModelRingMap
+    exact (sfCbcModelRingMap_existsUnique X A).exists.choose_spec.1
+  let c : S ≅ (e.functor.sheafPushforwardContinuous CommRingCat.{t + 1}
+      (proEtaleModelTopology X) (ProEt.topology X)).obj R :=
+    @asIso _ _ _ _ (sfCbcModelRingMap X A) hc
+  let := SheafOfModules.isMonoidal_W_independentCoefficients R
+  let := SheafOfModules.isMonoidal_W_independentCoefficients S
+  let := SheafOfModules.monoidalCategory R
+  let := SheafOfModules.monoidalCategory S
+  let := SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients R
+  let := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients R
+  let := SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients S
+  let := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients S
+  obtain ⟨q⟩ := SheafOfModules.pushforward_equivalence_tensor_iso
+    (proEtaleModelTopology X) (ProEt.topology X) e R S c
+  let φ := (sheafCompose (proEtaleModelTopology X)
+    (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).map (sfCbcModelRingMap X A)
+  let F := SheafOfModules.pushforward.{t + 1} (F := e.functor)
+    (J := proEtaleModelTopology X) (K := ProEt.topology X)
+    (R := adicModuleRing X A)
+    (S := (sheafCompose (proEtaleModelTopology X)
+      (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj S) φ
+  have h : sfCbcModelModules X A ≅ F := by
+    unfold sfCbcModelModules
+    exact sfCbcPushforwardRestrictIso (AsSmall.down : proEtaleSiteModel X ⥤ X.ProEt)
+      (adicModuleRing X A) _ φ
+  have q' : MonoidalCategory.tensor _ ⋙ sfCbcModelModules X A ≅
+      (sfCbcModelModules X A).prod (sfCbcModelModules X A) ⋙ MonoidalCategory.tensor _ :=
+    isoWhiskerLeft (MonoidalCategory.tensor _) h ≪≫ q ≪≫
+      isoWhiskerRight (NatIso.prod h.symm h.symm) (MonoidalCategory.tensor _)
+  constructor
+  · exact sfCbcKFlatTransport (sfCbcModelModules X A) q' M.complex M.isKFlat
+  · intro i
+    exact sfCbcFlatTransport (sfCbcModelModules X A) q' (M.complex.X i) (M.flatTerms i)
 
 /-- Ordinary finite reductions commute with the fixed ringed-site equivalence.
 The quotient-unit equation in each degree uniquely fixes the tensor comparison.
@@ -860,6 +875,20 @@ theorem sfCbcFiniteModelIso_existsUnique (X : Scheme.{t}) {A : Type t} [CommRing
           (sfCbcModelModules X A).map ((adicReductionAugmentation X d M n).f i) := by
   sorry
 
+/-- Model localization at finite level, with its original-coefficient endpoint explicit.
+Source: Stacks 05RU and 06YY (blueprint: lem-sf-cbc-extension-zero-completion). -/
+def sfCbcFiniteModelFactors (X : Scheme.{t}) {A : Type t} [CommRing A]
+    (d : CompleteCoefficientDatum A) {K : proEtaleDerivedCategory X A}
+    (M : AdicKFlatModel X A K) (n : ℕ) :
+    (ConstantCompletion.Q (sfCbcModelRing X A)).obj
+        (((sfCbcModelModules X A).mapHomologicalComplex (.up ℤ)).obj
+          (adicReductionComplex X d M n)) ≅
+      (sfCbcModelDerived X A).functor.obj
+        (adicReductionUnderlying X d M ⟨n + 1, Nat.succ_pos n⟩) :=
+  ((sfCbcModelDerivedFactors X A).app (adicReductionComplex X d M n)).symm
+
+attribute [local irreducible] sfCbcFiniteModelFactors
+
 /-- Canonical evaluation of the strict reduction at finite level. The formula uses
 one model, the universal quotient counit, and the unit-normalized ordinary comparison.
 Source: Stacks Tags 0941 and 06YY
@@ -869,23 +898,22 @@ def sfCbcFiniteEvaluationIso (X : Scheme.{t}) {A : Type t} [CommRing A]
     (M : AdicKFlatModel X A K) (n : ℕ) :
     (sfCbcEvaluate X A n).obj ((sfCbcReduction X d).obj K) ≅
       (sfCbcModelDerived X A).functor.obj
-        (adicReductionUnderlying X d M ⟨n + 1, Nat.succ_pos n⟩) :=
-  (sfCbcEvaluate X A n).mapIso
+        (adicReductionUnderlying X d M ⟨n + 1, Nat.succ_pos n⟩) := by
+  let P : ConstantCompletion.Cx (sfCbcModelRing X A) :=
+    ((sfCbcModelModules X A).mapHomologicalComplex (.up ℤ)).obj M.complex
+  have hP := sfCbcModelComplex_kflat X M
+  exact (sfCbcEvaluate X A n).mapIso
     ((sfCbcQuotientPresentation X d).tower.mapIso
       ((sfCbcModelDerived X A).functor.mapIso M.realization.symm ≪≫
-        (sfCbcModelModules X A).mapDerivedCategoryFactors.app M.complex) ≪≫
-      @asIso _ _ _ _ ((sfCbcQuotientPresentation X d).comparison.app
-        (((sfCbcModelModules X A).mapHomologicalComplex (.up ℤ)).obj M.complex))
-        ((sfCbcQuotientPresentation X d).laws.2.1 _
-          (sfCbcModelComplex_kflat X M).1 (sfCbcModelComplex_kflat X M).2)) ≪≫
-    (sfCbcEvaluateModule X A n).mapDerivedCategoryFactors.app
+        (sfCbcModelDerivedFactors X A).app M.complex) ≪≫
+      @asIso _ _ _ _ ((sfCbcQuotientPresentation X d).comparison.app P)
+        ((sfCbcQuotientPresentation X d).laws.2.1 P hP.1 hP.2)) ≪≫
+    (sfCbcEvaluateFactors X A n).app
       (ConstantCompletion.reductionComplex (proEtaleModelTopology X)
-        (ULift.{t + 1, t} A) (sfCbcModelIdeal d) false
-          (((sfCbcModelModules X A).mapHomologicalComplex (.up ℤ)).obj M.complex)) ≪≫
+        (ULift.{t + 1, t} A) (sfCbcModelIdeal d) false P) ≪≫
     (ConstantCompletion.Q (sfCbcModelRing X A)).mapIso
       (sfCbcFiniteModelIso_existsUnique X d M n).exists.choose ≪≫
-    ((sfCbcModelModules X A).mapDerivedCategoryFactors.app
-      (adicReductionComplex X d M n)).symm
+    sfCbcFiniteModelFactors X d M n
 
 /-- Evaluation commutes with termwise extension by the identity natural isomorphism.
 Source: Stacks Tag 0941 (blueprint: lem-sf-cbc-extension-zero-completion). -/
@@ -895,7 +923,8 @@ def sfCbcEvaluateExtensionIso {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion 
       sfCbcEvaluate U A n ⋙ sfCbcModelDerivedExtension j A :=
   (Functor.mapDerivedCategoryCompIso (sfCbcTowerExtension j A)
     (sfCbcEvaluateModule X A n)).symm ≪≫
-    Functor.mapDerivedCategoryNatIso (Iso.refl _) ≪≫
+    Functor.mapDerivedCategoryNatIso
+      (whiskeringRightCompEvaluation (sfCbcModelExtension j A) (op n)) ≪≫
       Functor.mapDerivedCategoryCompIso (sfCbcEvaluateModule U A n)
         (sfCbcModelExtension j A)
 
@@ -928,6 +957,9 @@ abbrev sfCbcOpenLocalization {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j
     U.ProEt ⥤ X.ProEt :=
   MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale j)
 
+attribute [local instance 1000] SheafOfModules.hasSheafify_coefficientUniverse
+  SheafOfModules.wEqualsLocallyBijective_coefficientUniverse
+
 /-- A fixed-scalar section in the canonical associated module sheaf.
 Source: Stacks Tag 00YV (blueprint: lem-sf-cbc-extension-zero-completion). -/
 def sfCbcRealizationSection (T : Scheme.{t}) (B : Type t) [CommRing B]
@@ -938,6 +970,9 @@ def sfCbcRealizationSection (T : Scheme.{t}) (B : Type t) [CommRing B]
     (etaleOriginScalars T (ULift.{t + 1, t} B))).unit.app
       ((ProEtale.finiteCoefficientModulePresheaf T.ProEt
         (ULift.{t + 1, t} B)).obj F.obj)).app (op V) m
+
+attribute [local instance 30000] SheafOfModules.hasSheafify_coefficientUniverse
+  SheafOfModules.wEqualsLocallyBijective_coefficientUniverse
 
 /-- Realization identifies the fixed-coefficient extension with the localized
 module extension, with the identity on every extension generator. The HEq only
@@ -1023,7 +1058,9 @@ theorem sfCbcEtaleExtension_boundedBelow {U X : Scheme.{t}} (j : U ⟶ X)
     DerivedCategory.TStructure.t.plus
       ((Etale.openImmersionLowerShriek
         (ModuleCat.{t + 1} (ULift.{t + 1, t} B)) j).mapDerivedCategory.obj L.obj) := by
-  sorry
+  obtain ⟨n, hn⟩ := L.property
+  exact ⟨n, (Etale.openImmersionLowerShriek
+    (ModuleCat.{t + 1} (ULift.{t + 1, t} B)) j).isGE_mapDerivedCategory_obj L.obj n⟩
 
 /-- The transported etale antecedent is the actual termwise j! of the input.
 Source: Stacks Tag 03DI (blueprint: lem-sf-cbc-extension-zero-completion). -/
@@ -1059,6 +1096,20 @@ def sfCbcTransportEtaleWitnessIso {U X : Scheme.{t}} (j : U ⟶ X)
     (sfCbcDerivedExtension j (A ⧸ d.ideal ^ (n + 1))).mapIso α ≪≫
       (sfCbcFiniteCompletedIso j d M N n).symm
 
+private theorem sfCbcComplete_of_iso
+    {S : Type (t + 1)} [SmallCategory S] {J : GrothendieckTopology S}
+    {R T : Sheaf J CommRingCat.{t + 1}} (q : R ⟶ T)
+    {M N : ConstantCompletion.D R} (e : M ≅ N)
+    (hN : ConstantCompletion.IsComplete q N) : ConstantCompletion.IsComplete q M := by
+  let : HasDerivedCategory (ConstantCompletion.Mod R) := HasDerivedCategory.standard _
+  let : ∀ V : S, HasDerivedCategory (ConstantCompletion.Mod (R.over V)) :=
+    fun _ ↦ HasDerivedCategory.standard _
+  intro V f hf
+  exact (hN V f hf).of_iso ((derivedInternalHom (J.over V) (R.over V)).mapIso
+    ((Iso.refl _).prod ((ringedDerivedRestriction R V).mapIso e)))
+
+-- The retained witness binder occurs in the proof but not in its existential conclusion.
+set_option linter.unusedVariables false in
 /-- Strict reduction of completed extension by zero: the unit normalization,
 completeness of the output, and the specified natural derived-limit presentation.
 Source: blueprint fix-lem-exchanges, integral open factor; Stacks Tags 099M and 0941.
@@ -1106,6 +1157,35 @@ theorem sfCbcExtensionZeroCompletion {U X : Scheme.{t}} (j : U ⟶ X)
             (ULift.{t + 1, t} (A ⧸ d.ideal ^ (n + 1)))).obj
               (sfCbcEtaleExtensionPlus j (A ⧸ d.ideal ^ (n + 1)) L).obj ≅
                 adicReduction X d N ⟨n + 1, Nat.succ_pos n⟩)) := by
-  sorry
+  have := sfCbcReducedCompletionUnit_isIso j d
+  constructor
+  · exact sfCbcReducedCompletionUnit_isIso j d
+  constructor
+  · intro K
+    change (asIso (sfCbcReducedCompletionUnit j d)).hom.app K ≫
+      ((asIso (sfCbcReducedCompletionUnit j d)).inv ≫
+        (sfCbcTensorComparison j d).hom).app K = _
+    exact (asIso (sfCbcReducedCompletionUnit j d)).hom_inv_id_app_assoc K _
+  constructor
+  · intro K
+    let := d.noetherian
+    let : IsNoetherianRing (ULift.{t + 1, t} A) :=
+      isNoetherianRing_of_ringEquiv A ULift.ringEquiv.symm
+    obtain ⟨r, a, ha⟩ := Submodule.fg_iff_exists_fin_generating_family.mp
+      (Ideal.fg_of_isNoetherianRing (sfCbcModelIdeal d))
+    obtain ⟨P, _, h, _⟩ := ConstantCompletion.koszul_quotient_reflector
+      (proEtaleModelTopology X) (ULift.{t + 1, t} A) (sfCbcModelIdeal d) false r a ha
+    let E := sfCbcModelDerived X A
+    let C := ConstantCompletion.completion (proEtaleModelTopology X)
+      (ULift.{t + 1, t} A) (sfCbcModelIdeal d) false
+    have hc := h (E.functor.obj ((sfCbcDerivedExtension j A).obj K))
+    change ConstantCompletion.IsComplete _
+      (E.functor.obj (E.inverse.obj (C.obj
+        (E.functor.obj ((sfCbcDerivedExtension j A).obj K)))))
+    exact sfCbcComplete_of_iso _
+      (E.counitIso.app (C.obj (E.functor.obj ((sfCbcDerivedExtension j A).obj K)))) hc
+  · intro K M N n
+    exact ⟨(sfCbcFiniteCompletedHom_inverse j d M N n).choose,
+      fun L α ↦ ⟨sfCbcTransportEtaleWitnessIso j d M N n L α⟩⟩
 
 end AlgebraicGeometry.Scheme

@@ -1,0 +1,141 @@
+{
+ "id": "lem-pur-ordinary-open-scalar-composition",
+ "kind": "statement",
+ "title": "Ordinary open tensor balancing respects normalized coefficient composition",
+ "statement": "Fix a prime l and finite extensions E,F,L of Q_l with algebra embeddings i:E→F and j:F→L. On the small pro-etale sites, use the constant integral coefficient data and scalar adjunctions of [def-pur-constant-scalar-tower-adjunction] and the open extension functors of [def-pur-integral-compact-support-coefficient-data]. Let g:Z→W be any open immersion and M any ordinary sheaf of O_E-modules on Z. Write b_i for ordinaryBaseOpenTensor, the inverse scalar mate of the open restriction comparison [lem-pur-compact-support-strict-scalar-mate], and alpha_V for the left-adjoint-uniqueness isomorphism from successive ordinary scalar extension i,j to scalar extension j∘i, transferred along the identity-on-sections scalar restriction compositor. Then alpha_W(j_!^E M) followed by b_(j∘i)(M) equals scalar extension j at W of b_i(M), followed by b_j(C_i M), followed by j_!^L of alpha_Z(M). This is an equality of ordinary sheaf morphisms, without tower diagrams, derived categories, compactification, or finite-Tor hypotheses.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0E8I, lemma-j-shriek-and-tensor; extension-by-zero presheaf in lemma-extension-by-zero; agent auxiliary Step 4 of lem-pur-compact-support-strict-scalar-composition. The normalized adjunction associator is as in Stacks 07A6."
+ },
+ "stmt_deps": [
+  "def-pur-constant-scalar-tower-adjunction",
+  "def-pur-integral-compact-support-coefficient-data",
+  "lem-pur-compact-support-strict-scalar-mate"
+ ],
+ "proof": [
+  {
+   "text": "Use ordinaryCoefficientComp, the proved ordinary-ring helper of lem-sp-proetale-open-scalar-cocycle, for the integral inclusion homomorphisms. It proves the restriction/pullback square composition with inverse restriction associators, without finite or torsion hypotheses. Cancel the inverse associators using the forward isomorphisms to obtain the forward normalized restriction cocycle.",
+   "uses": [
+    "lem-sp-proetale-open-scalar-cocycle",
+    "lem-fix-ordinary-restriction-pullback-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The scalar mate defining ordinaryBaseOpenTensor is itself the inverse mate of the geometric restriction square. Mathlib iterated_mateEquiv_conjugateEquiv_symm therefore identifies its inverse with the left conjugate of the restriction/pullback isomorphism. Apply the conjugate equivalence to obtain the precise normalization at each of the three coefficient maps.",
+   "uses": [
+    "lem-pur-compact-support-strict-scalar-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand leftAdjointUniq and ofNatIsoRight: the displayed ordinary associator is leftAdjointCompIso, whose inverse conjugates to the specified restriction compositor. The proved generic normalizedCocycle helper of lem-sp-proetale-open-scalar-cocycle now applies to the forward right cocycle and these five conjugate identifications. Its conclusion is exactly the ordinary open tensor composition formula.",
+   "uses": [
+    "def-pur-constant-scalar-tower-adjunction",
+    "lem-sp-proetale-open-scalar-cocycle"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-constant-scalar-tower-adjunction",
+  "lem-fix-ordinary-restriction-pullback-square",
+  "lem-pur-compact-support-strict-scalar-mate",
+  "lem-sp-proetale-open-scalar-cocycle"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Agent proof from the proved generic ordinary coefficient and normalized conjugate-cocycle helpers of Sheaf.SecSmoothPurity.ProEtaleOpenScalarCocycle; Stacks 07A6 mate pasting and 0E8I open tensor normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero tensor scalar extension composition ordinary sheaf modules associativity",
+   "results": "ModuleCat.extendScalars_assoc and tensor lemmas, but no sheaf/open inverse-mate composition law.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of scalar extension mates under tensor associativity from composed adjunctions",
+   "results": "Mathlib mateEquiv, conjugateEquiv and their composition laws; no normalized open sheaf instance.",
+   "date": "2026-10-26",
+   "verdict": "generic mate calculus only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "mateEquiv_hcomp and mateEquiv_vcomp provide pasting but require the input square and associator identifications.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "openRestriction.*comp|mapDerivedCategorySquareIso.*comp; compositionOpen and ordinaryOpenTensor in lean/Sheaf and lean/WeilConjectures",
+   "results": "No existing ordinary open scalar composition statement. CompactSupportStrictScalarMate proves ordinaryOpenTensor_isIso and openTensor_ordinary. ConstantCompletedScalarAssociativity provides a proved localization helper, used for the derived assembly.",
+   "date": "2026-10-26",
+   "verdict": "use existing normalization and localization helpers"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportStrictScalarComposition",
+  "date": "2026-10-26",
+  "group": "F7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Imported Proof Step 2 (Qbar-stage), independence of finite coefficient extension; unit sk-thm-purity-transport Step 3, transitivity in coefficient extensions; auxiliary Composition of scalar proper/open mates before total limit (returned comparison Steps 11)",
+   "via": [
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OrdinaryOpenScalarComposition",
+  "file": "lean/Sheaf/Paper/OrdinaryOpenScalarComposition.lean",
+  "declaration": "WeilConjectures.PurStrictScalar.ordinaryBaseOpenTensor_composition",
+  "statement": "theorem ordinaryBaseOpenTensor_composition\n    (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]\n    (i : E →ₐ[ℚ_[l]] F)\n    (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]\n    (j : F →ₐ[ℚ_[l]] L) {Z W : Scheme.{u}} (g : Z ⟶ W) [IsOpenImmersion g]\n    (M : pbcModules Z ((constants l E).ring Z)) :\n    let α (V : Scheme.{u}) :=\n      (((pbcScalarAdjunction (constantMap l E F i V)).comp\n          (pbcScalarAdjunction (constantMap l F L j V))).ofNatIsoRight\n        (pbcRestrictComp _ _ _ (by\n          unfold constantMap\n          rw [← Functor.map_comp]\n          congr 1))).leftAdjointUniq\n            (pbcScalarAdjunction (constantMap l E L (j.comp i) V))\n    (α W).hom.app ((PurCompactSupport.openExtension (constants l E) g).obj M) ≫\n        (ordinaryBaseOpenTensor (change l E L (j.comp i)) g).app M =\n      (pbcExtend (constantMap l F L j W)).map\n          ((ordinaryBaseOpenTensor (change l E F i) g).app M) ≫\n        (ordinaryBaseOpenTensor (change l F L j) g).app\n          ((pbcExtend (constantMap l E F i Z)).obj M) ≫\n        (PurCompactSupport.openExtension (constants l L) g).map ((α Z).hom.app M)",
+  "branch": "sheaf-dag",
+  "by": "F7",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F7",
+  "result": "pass",
+  "landing": "20261026T182014-L-3516860",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F7",
+  "result": "pass",
+  "landing": "20261026T182014-L-3516860",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

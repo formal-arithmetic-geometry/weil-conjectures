@@ -1,0 +1,337 @@
+{
+ "id": "lem-sfb-nodal-log-canonical-reconstruction",
+ "kind": "statement",
+ "title": "Log dualizing polarization and reconstruction of marked nodal families",
+ "statement": "Let $S$ be a locally Noetherian scheme [pqf-def-locnoeth]. A marked nodal family in this statement is a projective [def-kun-projective], flat [def-weil-flat-morphism], finitely presented [def-sbc-locally-finite-presentation] morphism $f:X\\to S$ with nonempty connected reduced geometric fibres of pure dimension one [def-weil-geometric-fibre, def-kun-topological-krull-dimension], all of whose singularities are ordinary double points, together with finitely many pairwise disjoint sections $a_1,\\ldots,a_n$ in its relative smooth locus [def-sbc-smooth-morphisms]. Here an ordinary double point has completed geometric local ring $\\Omega[[u,v]]/(uv)$ [def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series]. The integer $n$ may be zero. Write $D=\\sum_i a_i(S)$ for the effective Cartier divisor of sections and $\\mathcal O_X(D)$ for its associated invertible module [def-pc-divisor-line-bundle]. There is a canonical relative dualizing invertible module $\\omega_{X/S}$ [def-sc-invertible-module], with the local complete-intersection adjunction normalization of [def-trf-nodal-dualizing-datum]; its restriction to the relative smooth locus is $\\Omega^1_{X/S}$, and its formation commutes with arbitrary base change. Put $L=\\omega_{X/S}\\otimes\\mathcal O_X(D)$. For each normalization $C$ of an irreducible component of a geometric fibre, $\\deg(L|_C)=2g(C)-2+r_C$, where $r_C$ counts branches of nodes and markings on $C$ [def-pc-degree-line-bundle, def-pc-genus, def-weil-pbc-reduced-normalization]. If these numbers are positive for every such $C$, then $L$ is relatively ample [def-weil-pbc-ample-invertible-module]: its restriction above each affine open of $S$ is ample. Whenever $L$ is relatively ample, the canonical evaluation map is an isomorphism $X\\xrightarrow{\\sim}\\operatorname{Proj}_S(\\bigoplus_{m\\ge0}f_*L^{\\otimes m})$ [def-nagata-relative-proj, def-weil-pbc-graded-sheaf-structures]. In particular over $S=\\operatorname{Spec}R$ it identifies $X$ with $\\operatorname{Proj}(\\bigoplus_{m\\ge0}H^0(X,L^{\\otimes m}))$ as an $R$-scheme, with the section-ring operations of [def-sc-invertible-section-ring]. These canonical maps commute with isomorphisms of marked families. No smoothness of the generic fibre, normality or integrality of $S$, or morphism to another curve is assumed.",
+ "source": {
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Tag 0E6R (lemma-gorenstein-dualizing) and the component-degree argument of Tag 0E74 (lemma-stable), extended to the section twist; relative ampleness uses varieties.tex Tag 0B5Y (lemma-ampleness-in-terms-of-degrees-components). Reconstruction is the proper case of morphisms.tex Tag 01VJ (lemma-characterize-relatively-ample). Agent formulation of the marked version, not a claim that 0E74 itself treats marked curves."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-kun-projective",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-geometric-fibre",
+  "def-kun-topological-krull-dimension",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-pc-divisor-line-bundle",
+  "def-sc-invertible-module",
+  "def-trf-nodal-dualizing-datum",
+  "def-pc-degree-line-bundle",
+  "def-pc-genus",
+  "def-weil-pbc-reduced-normalization",
+  "def-weil-pbc-ample-invertible-module",
+  "def-nagata-relative-proj",
+  "def-weil-pbc-graded-sheaf-structures",
+  "def-sc-invertible-section-ring",
+  "def-trf-multipointed-curve",
+  "def-trf-multipointed-curve-modification",
+  "def-trf-nodal-geometric-fibres",
+  "def-weil-pure-dimension",
+  "def-pc-module-pullback",
+  "def-a1-relative-differentials-pullback-map",
+  "def-sfb-marked-nodal-dualizing-degree-data",
+  "def-sfb-relative-section-algebra-canonical-map",
+  "def-sfb-relative-proj-iso-of-graded-iso",
+  "def-sfb-tensor-power-pullback-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Projectivity gives properness, hence separatedness and quasi-compactness. Apply [lem-sfb-nodal-family-regular-affine-presentations] to the given flat finitely presented nodal family: over every base affine it supplies the regular curve presentations needed for adjunction.",
+   "uses": [
+    "lem-kun-projective-implies-proper",
+    "lem-sfb-nodal-family-regular-affine-presentations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00SY (lemma-syntomic), 00SV (lemma-relative-global-complete-intersection-conormal), 061L (lemma-regular-sequence-in-neighbourhood), together with curves.tex Tag 0C4E (lemma-nodal-lci). Agent assembly of former item steps 1--3; use yh-1 to express a principal ambient localization as a regular affine curve presentation."
+   }
+  },
+  {
+   "text": "[lem-sfb-locnoeth-lci-curve-adjunction-gluing] applies to these presentations. It gives the canonical invertible $\\omega$, the Jacobian-normalized fundamental class and Ext datum, the smooth-locus identification, and arbitrary-base-change and isomorphism comparisons.",
+   "uses": [
+    "lem-sfb-locnoeth-lci-curve-adjunction-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tags 0B6V (lemma-lci-shriek), 0E2Y (lemma-base-change-relative-dualizing), 0E9Y (lemma-determinant), 0E9Z (lemma-fundamental-class-lci). Agent affine-refinement gluing formulation of former item steps 4--5, using the existing signed fundamental-class comparison; not a claim that 0E9Z verbatim treats nonproper morphisms."
+   }
+  },
+  {
+   "text": "Use this $\\omega$ as the supplied $K$ in [lem-sfb-smooth-marking-normalization-twist]. Its fibre identifications are those of step 2. This gives the relative Cartier divisor $D$, the invertible twist $L$, and $\\deg(\\nu^*L)=2g(C)-2+\\#B_C+\\#M_C=2g(C)-2+r_C$, including empty markings and self-nodes.",
+   "uses": [
+    "lem-sfb-smooth-marking-normalization-twist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0C1A (lemma-genus-smooth), 0BS6 (lemma-rr), and divisors.tex Tag 067R (lemma-section-smooth-regular-immersion). Agent marked-twist assembly of former item steps 6--9, using lem-trf-nodal-normalization-adjunction for the ambient-branch comparison (Temkin, Stable modification of relative curves, section 1.2(b)); its source PDF is wanted, not claimed read."
+   }
+  },
+  {
+   "text": "If these degrees are positive, [lem-trf-fibre-degree-ample-criterion] makes $L$ ample on each geometric fibre, which is proper over its field by clause (b) of [lem-weil-pbc-proper-fp-permanence] for the proper $f$. The ampleness descent clause of [lem-pc-very-ample-descends] gives ampleness on each ordinary fibre, which is proper by the same clause, hence of finite type, over its residue field. [lem-trf-ample-neighbourhood] gives relative ampleness near every base point. Refine by base affines and apply [lem-trf-scheme-relative-ample-affine-cover], using quasi-compactness of $f$, to obtain ampleness above every affine open of $S$.",
+   "uses": [
+    "lem-trf-fibre-degree-ample-criterion",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-pc-very-ample-descends",
+    "lem-trf-ample-neighbourhood",
+    "lem-trf-scheme-relative-ample-affine-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B5Y (lemma-ampleness-in-terms-of-degrees-components); more-morphisms.tex Tag 0D2S (lemma-ample-in-neighbourhood). Former item step 10."
+   }
+  },
+  {
+   "text": "Whenever $L$ is relatively ample, apply [lem-sfb-proper-ample-section-proj-reconstruction] to the proper $f$ and this invertible $L$. Its canonical evaluation isomorphism and affine-base section-ring description give both reconstruction assertions.",
+   "uses": [
+    "lem-sfb-proper-ample-section-proj-reconstruction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01VJ (lemma-characterize-relatively-ample) and 0C6J (lemma-proper-ample-is-proj); constructions.tex Tag 01MY (lemma-morphism-proj) for the graded-isomorphism chart formula. Agent formulation with naturality, extracting former item steps 11--14."
+   }
+  },
+  {
+   "text": "An isomorphism of marked families preserves $\\omega$ with its adjunction comparisons by step 2, and preserves its marked twist by step 3. Apply the polarized naturality equality of [lem-sfb-proper-ample-section-proj-reconstruction] to the resulting $h^*L\\simeq L\\prime$. This makes the reconstruction square commute, compatibly with identities and composition.",
+   "uses": [
+    "lem-sfb-proper-ample-section-proj-reconstruction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01VJ (lemma-characterize-relatively-ample) and 0C6J (lemma-proper-ample-is-proj); constructions.tex Tag 01MY (lemma-morphism-proj) for the graded-isomorphism chart formula. Agent formulation with naturality, extracting former item steps 11--14."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-projective-implies-proper",
+  "lem-sfb-nodal-family-regular-affine-presentations",
+  "lem-sfb-locnoeth-lci-curve-adjunction-gluing",
+  "lem-sfb-smooth-marking-normalization-twist",
+  "lem-trf-fibre-degree-ample-criterion",
+  "lem-pc-very-ample-descends",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-trf-ample-neighbourhood",
+  "lem-trf-scheme-relative-ample-affine-cover",
+  "lem-sfb-proper-ample-section-proj-reconstruction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Same route as the prior reviewed split (0E6R/0E74 with lci adjunction, marked normalization, 0B5Y and 0C6J), reassembled from four independent extracted arguments under the human re-split handoff of 2026-10-22."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a stable pointed nodal curve the log relative dualizing line bundle is relatively ample and recovers the curve by relative Proj of its section algebra",
+   "results": "{\"t\": \"2026-10-22T03:45:09Z\", \"tool\": \"leanfinder\", \"query\": \"For a stable pointed nodal curve the log relative dualizing line bundle is relatively ample and recovers the curve by relative Proj of its section algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.projIsoSpec\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero\", \"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero_assoc\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec\"], \"digest\": \"eb303adf380f7823\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj.fromOfGlobalSections constructs a map from graded sections; it supplies neither the nodal dualizing module nor logarithmic ampleness or reconstruction. No dualizing or log-canonical construction was found in the scheme source."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"dualizing\"",
+   "results": "{\"t\": \"2026-10-22T03:45:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"dualizing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj.fromOfGlobalSections constructs a map from graded sections; it supplies neither the nodal dualizing module nor logarithmic ampleness or reconstruction. No dualizing or log-canonical construction was found in the scheme source."
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|pluricanonical|log.canonical",
+   "results": "{\"t\": \"2026-10-22T03:45:04Z\", \"tool\": \"grep\", \"query\": \"dualizing|pluricanonical|log.canonical\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj.fromOfGlobalSections constructs a map from graded sections; it supplies neither the nodal dualizing module nor logarithmic ampleness or reconstruction. No dualizing or log-canonical construction was found in the scheme source."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A stable marked curve is the relative Proj of the log canonical section ring",
+   "results": "{\"t\": \"2026-10-22T03:45:05Z\", \"tool\": \"leansearch\", \"query\": \"A stable marked curve is the relative Proj of the log canonical section ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.termProj|_\", \"AlgebraicGeometry.Proj.toLocallyRingedSpace\", \"AlgebraicGeometry.Proj.isSeparated\", \"AlgebraicGeometry.Proj.toSheafedSpace\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType\"], \"digest\": \"86b00fbe385d7816\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj.fromOfGlobalSections constructs a map from graded sections; it supplies neither the nodal dualizing module nor logarithmic ampleness or reconstruction. No dualizing or log-canonical construction was found in the scheme source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative dualizing sheaf of nodal curves twisted by disjoint marked sections is ample precisely under component stability",
+   "results": "{\"t\": \"2026-10-22T03:45:12Z\", \"tool\": \"leanfinder\", \"query\": \"Relative dualizing sheaf of nodal curves twisted by disjoint marked sections is ample precisely under component stability\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.instIsOpenImmersionMapAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpec\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.formallyUnramified_iff\", \"AlgebraicGeometry.FormallyUnramified.formallyUnramified_of_affine_subset\"], \"digest\": \"038904cc45ae8388\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj.fromOfGlobalSections constructs a map from graded sections; it supplies neither the nodal dualizing module nor logarithmic ampleness or reconstruction. No dualizing or log-canonical construction was found in the scheme source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a projective flat family of marked nodal curves the log relative dualizing invertible sheaf has component degree twice genus minus two plus branches and markings and reconstructs the family by Proj",
+   "results": "{\"t\": \"2026-10-22T04:02:37Z\", \"tool\": \"leanfinder\", \"query\": \"For a projective flat family of marked nodal curves the log relative dualizing invertible sheaf has component degree twice genus minus two plus branches and markings and reconstructs the family by Proj\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"AlgebraicGeometry.projIsoSpec\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.projIsoSpecTopComponent\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd_assoc\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero_assoc\"], \"digest\": \"96de02eab2771e4d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: nodal/dualizing inputs absent. Read Proj.fromOfGlobalSections at Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean:438-460: it constructs a Proj map from a ring map into global functions with irrelevant ideal generating the unit ideal, not this nodal log-dualizing theorem or its reconstruction assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"dualizing\"",
+   "results": "{\"t\": \"2026-10-22T04:02:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"dualizing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: nodal/dualizing inputs absent. Read Proj.fromOfGlobalSections at Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean:438-460: it constructs a Proj map from a ring map into global functions with irrelevant ideal generating the unit ideal, not this nodal log-dualizing theorem or its reconstruction assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|nodal|logCanonical",
+   "results": "{\"t\": \"2026-10-22T04:02:38Z\", \"tool\": \"grep\", \"query\": \"dualizing|nodal|logCanonical\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: nodal/dualizing inputs absent. Read Proj.fromOfGlobalSections at Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean:438-460: it constructs a Proj map from a ring map into global functions with irrelevant ideal generating the unit ideal, not this nodal log-dualizing theorem or its reconstruction assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper curve family is recovered by Proj of the section algebra of its relatively ample dualizing line bundle",
+   "results": "{\"t\": \"2026-10-22T04:02:38Z\", \"tool\": \"leansearch\", \"query\": \"A proper curve family is recovered by Proj of the section algebra of its relatively ample dualizing line bundle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero\", \"AlgebraicGeometry.Proj.ext\", \"AlgebraicGeometry.termProj|_\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"AlgebraicGeometry.Proj.isSeparated\", \"AlgebraicGeometry.IsProper\"], \"digest\": \"435f4b6d7b0444e7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: nodal/dualizing inputs absent. Read Proj.fromOfGlobalSections at Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean:438-460: it constructs a Proj map from a ring map into global functions with irrelevant ideal generating the unit ideal, not this nodal log-dualizing theorem or its reconstruction assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical dualizing line bundle of a Gorenstein family of nodal curves, normalized by local complete intersection adjunction",
+   "results": "{\"t\": \"2026-10-22T04:03:19Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical dualizing line bundle of a Gorenstein family of nodal curves, normalized by local complete intersection adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'\", \"WeierstrassCurve.Affine.Point.toClass_some\", \"WeierstrassCurve.Affine.Point.toClass_apply\", \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'_eq\", \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"Algebra.smoothLocus_eq_compl_support_inter\", \"WeierstrassCurve.Affine.Point.toClass\"], \"digest\": \"216a7415998b5192\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: nodal/dualizing inputs absent. Read Proj.fromOfGlobalSections at Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean:438-460: it constructs a Proj map from a ring map into global functions with irrelevant ideal generating the unit ideal, not this nodal log-dualizing theorem or its reconstruction assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stable-pointed-isom-finite",
+  "date": "2026-10-22",
+  "group": "NP"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Log dualizing polarization and reconstruction of marked nodal families",
+   "via": [
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-nodal-log-canonical-reconstruction",
+  "worker": "stage1",
+  "summary": "N6 returned-delivery rebase repair on the current live DAG. Retained all four statement-only tasks, the 1940-character assembly, all original arguments, citations and actual search logs. Compared all five node files: only the four parent split fields differ from main and all four extracted ids remain absent. Reread all nine distinct assembly statements, their ten citation pairs and the signed adjunction/normalization inputs; no quote or hypothesis changed. The first dry run exposed the new 01VJ qcqs section-algebra evaluation overlap; report now distinguishes its construction and affine domain from proper reconstruction, surjectivity and polarized naturality. Updated the report and provenance for the new server-base delivery; no Lean changed.",
+  "blueprint": "Serves the inherited det-thm-sf-ctf-stability-direct-images proof (3), marked stable-curve rigidity input in the recorded alteration route. Steps 1--9 realize the log dualizing polarization and component degrees; step 10 realizes positivity; steps 11--14 realize canonical Proj reconstruction and isomorphism naturality. blueprint_refs ancestor returns None for this inherited chain; retained its null ancestor and explicit place rather than inventing an imported id. Re-split mapping: original steps 1--3 to lem-sfb-nodal-family-regular-affine-presentations, 4--5 to lem-sfb-locnoeth-lci-curve-adjunction-gluing, 6--9 to lem-sfb-smooth-marking-normalization-twist, 11--14 to lem-sfb-proper-ample-section-proj-reconstruction; original step 10 stays in the assembly. No imported blueprint ancestor exists; null and the explicit place are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Generic input for Projective morphisms are proper; used only for its stated assertion in this nodal log-polarization proof. The constructible-stability unit has no substitute for this algebraic-geometry tool."
+   },
+   {
+    "node": "lem-pc-very-ample-descends",
+    "why": "Generic input for Very ampleness descends along field extensions; used only for its stated assertion in this nodal log-polarization proof. The constructible-stability unit has no substitute for this algebraic-geometry tool."
+   },
+   {
+    "node": "lem-trf-ample-neighbourhood",
+    "why": "Generic input for Relative ampleness is open on the base; used only for its stated assertion in this nodal log-polarization proof. The constructible-stability unit has no substitute for this algebraic-geometry tool."
+   },
+   {
+    "node": "lem-trf-fibre-degree-ample-criterion",
+    "why": "Generic input for Positive component degrees characterize ampleness on a proper curve; used only for its stated assertion in this nodal log-polarization proof. The constructible-stability unit has no substitute for this algebraic-geometry tool."
+   },
+   {
+    "node": "lem-trf-scheme-relative-ample-affine-cover",
+    "why": "Generic input for Relative ampleness can be checked on an affine open cover of the base; used only for its stated assertion in this nodal log-polarization proof. The constructible-stability unit has no substitute for this algebraic-geometry tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-projective-implies-proper",
+  "lem-pc-degree-base-change",
+  "lem-pc-recd-pullback",
+  "lem-pc-tensor-dual-invertible",
+  "lem-pc-very-ample-descends",
+  "lem-sbc-constant-local-dimension-components",
+  "lem-sbc-equidimensional-open-local-dimension",
+  "lem-sc-ample-proj-local-chart",
+  "lem-sc-canonical-degree",
+  "lem-sc-point-cartier",
+  "lem-sc-riemann-roch",
+  "lem-sc-section-ring-localization-bijective",
+  "lem-trf-ample-neighbourhood",
+  "lem-trf-fibre-degree-ample-criterion",
+  "lem-trf-flat-lci-canonical-adjunction",
+  "lem-trf-nodal-curve-lci-criterion",
+  "lem-trf-nodal-normalization-adjunction",
+  "lem-trf-scheme-ample-canonical-proj-criterion",
+  "lem-trf-scheme-relative-ample-affine-cover",
+  "lem-trf-smooth-curve-section-cartier",
+  "lem-weil-pbc-dimension-at-point-field-extension",
+  "lem-weil-pbc-global-complete-intersection-principal-localization",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-relative-global-complete-intersection-local-regular-sequence",
+  "lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection",
+  "prop-nagata-relative-proj-functoriality",
+  "lem-exc-regular-sequence-principal-neighbourhood"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N6-bd8582731",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-bd8582731 (reviewer sub-agent of L); spot-checked: Fifth N6 head of this re-split; the FIXes on 24152aa5, a7e3faa2, 9614db9d and 42623697 were lost. Compared field by field with 42623697: the four new nodes are identical, and the item differs only in split_report (one new sentence on the 01VJ node lem-trf-qcqs-line-section-algebra-evaluation). The item statement, its stmt_deps and the O2 14-step base proof (kept verbatim in the report) are unchanged. Re-split check: old steps 1-3 went to regular-affine-presentations (0C4E, 00SY, N-c=1, 00SV, 061L, the yh-1 presentation), 4-5 to the adjunction gluing (eps_c e_0 kept), 6-9 to the marking/normalization twist (067R, flat disjoint D, branches, chi vs divisor degree, 2g-2+#B+#M), 11-14 to the proper-ample Proj reconstruction (0C6J: density, closed image, the Proj(Phi) r_L' = r_L h direction checked). Old step 10 stays as item step 4. Nothing was dropped, the node sizes are comparable, and none restates the item; the assembly is 2082 chars. Each assembly hypothesis was checked against the cited statements. Small cases: c=0, xy=t, n=0, P1 with 3 marks (degree 1), a self-nodal rational curve (0), two P1 meeting once (-1 each), X empty, A_0 != O_S. The 01VJ qcqs evaluation node stops at r on U(psi), so it is a tool for node D, not a duplicate. Batch 5: the three flagged defs are general definitions; lem-trf-flat-lci-canonical-adjunction and lem-sfb-lci-curve-fundamental-class are generic lci duality (0B6V/0E2Y/0E9Z), not trace-formula or PD steps. All accepted. The 5 tool_uses are accepted, and no SGA is cited. Two faults, re-applied in fixes/dag/nodes/sec-six-functors-basics/: (1) B3/E: node A cited def-trf-nodal-geometric-fibres, which imposes connected fibres, while saying connectedness is not required. The nodal condition is now written out with def-sbc-smooth-morphisms, def-weil-pbc-adic-completion and def-weil-pbc-multivariate-power-series, and stmt_deps are updated. (2) C1: item step 4 asserted that the fibres are proper and of finite type with no citation; it now cites clause (b) of lem-weil-pbc-proper-fp-permanence in the text, uses and proof_deps. Advisory: the same-day unsplit Q64 lem-sfb-proper-nodal-dualizing-base-change (and Q38/Q39) overlaps nodes A+B for proper families but duplicates no single new node; later workers must avoid a cycle.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalLogCanonicalReconstruction",
+  "declaration": "AlgebraicGeometry.exists_nodal_log_canonical_reconstruction",
+  "declarations": [
+   "AlgebraicGeometry.nodalLogFundamental",
+   "AlgebraicGeometry.nodalLogPullbackSection",
+   "AlgebraicGeometry.NodalLogReconstructionIsNatural",
+   "AlgebraicGeometry.NodalLogAffineReconstruction",
+   "AlgebraicGeometry.exists_nodal_log_canonical_reconstruction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalLogCanonicalReconstruction.lean",
+  "statement": "theorem exists_nodal_log_canonical_reconstruction (S : Scheme.{u}) [IsLocallyNoetherian S] (P : MultipointedCurve S) [IsHProjective P.x] (n : ℕ) (marking : (∐ fun _ : Fin n ↦ S) ≅ P.D) (hmarking : marking.hom ≫ P.d = Sigma.desc (fun _ : Fin n ↦ 𝟙 S)) (hsmooth : ∀ z : P.D, P.i z ∈ P.x.smoothLocus) (hnodal : HasNodalGeometricFibres P.x) (hgeometric : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ S), IsReduced (pullback P.x t) ∧ (pullback P.x t).IsPureDimension 1) : ∃ D : MarkedNodalDualizingDegreesData P, IsIso ((Scheme.Modules.tensorPullback P.x.smoothLocus.ι).map D.dualizing.fundamental) ∧ ((∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ S) (Z : Scheme.{u}) [IsIntegral Z] (j : Z ⟶ pullback P.x t), IsClosedImmersion j → Set.range j ∈ irreducibleComponents (pullback (C := Scheme) P.x t) → 0 < (2 * markedNodalComponentGenus Ω Z (j ≫ pullback.snd P.x t) : ℤ) - 2 + ((markedNodalBranches P Ω t Z j).ncard : ℤ)) → ∀ (V : S.Opens), IsAffineOpen V → ∃ h : ((Scheme.Modules.tensorPullback (P.x ⁻¹ᵁ V).ι).obj (markedNodalLine P D.omega)).IsInvertible, @Scheme.Modules.IsAmple (P.x ⁻¹ᵁ V).toScheme ((Scheme.Modules.tensorPullback (P.x ⁻¹ᵁ V).ι).obj (markedNodalLine P D.omega)) h) ∧ ((∀ (V : S.Opens), IsAffineOpen V → ∃ h : ((Scheme.Modules.tensorPullback (P.x ⁻¹ᵁ V).ι).obj (markedNodalLine P D.omega)).IsInvertible, @Scheme.Modules.IsAmple (P.x ⁻¹ᵁ V).toScheme ((Scheme.Modules.tensorPullback (P.x ⁻¹ᵁ V).ι).obj (markedNodalLine P D.omega)) h) → (∃ (A : Scheme.Modules.RelativeSectionAlgebra P.x (markedNodalLine P D.omega)) (r : P.X ≅ A.data.relProj), A.IsCanonicalMap r.hom ∧ NodalLogReconstructionIsNatural P D A r.hom) ∧ NodalLogAffineReconstruction P (markedNodalLine P D.omega) D.marked_invertible)",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The existing multipointed-curve representation is specialized by a finite splitting of its marking over the base. Existing normalized dualizing/degree data and canonical relative section-algebra interfaces are reused, with real helper constructions for the log fundamental class and pullback of homogeneous sections. O2’s earlier reviewed landing was a stage-1 split, with no Lean record or module; this is its stage-2 statement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8b1126544",
+  "group": "Q06",
+  "result": "fix",
+  "note": "Head 8b112654 is byte-identical to ff692ae4 (item .lean sha b008353f, item record ac1e15a0, four new node records); only a report section is new, and it misreads the landing refusal. The ff692 FIX was refused only because def-sc-tensor-pullback-power-comparison (Q32, merged 04:40 UTC) was not on that base (04:35); this head's base (blueprint-index 04:42) has it. As delivered, the head repeats the H4/H12 overlap: def-sfb-tensor-power-pullback-comparisons binds boundaryPullbackComparison/TensorIso/PowIso, which def-sc already owns. Re-applied the ff692 record fixes in fixes/: F1 narrow that node to boundaryTensorPowIso and cite def-sc; F2 relative-section-algebra node cites def-sc and def-trf-space-line-module-proj-input (trivializedPower); F3 marked-nodal node cites def-sc-normalization, def-trf-effective-cartier-center and def-a1-relative-differentials-pullback-map (body uses checked in the owner modules); F4 relProjIsoOfIso lean.statement begins at def. Each fix has exactly the NEW_NODE_KEYS, cites equal stmt_deps, and every dep exists on the base. Mathematics re-read and still holds (locally Noetherian S, projective flat lfp MultipointedCurve with Fin n split marking incl. n=0, smooth-locus sections, nodal and reduced pure-1 geometric fibres, normalized omega with smooth-locus IsIso and base change, 2g-2+r, ampleness over affine opens, canonical relProj iso, affine section-ring form, naturality); helpers real, only sorry, docstrings and 14-step plan present. No Lean changed, no compile run."
+ }
+}

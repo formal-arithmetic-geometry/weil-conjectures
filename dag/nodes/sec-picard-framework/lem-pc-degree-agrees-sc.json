@@ -79,7 +79,52 @@
   "def-sc-divisor"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.degree_dual_toModules_eq_one"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.degree_dual_toModules_eq_one",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
+     "lines": [
+      424,
+      435
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Divisor.degree_dual_toModules_idealSheaf",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.DivisorDegree",
+     "lines": [
+      58,
+      75
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Divisor.degree_dual_toModules_idealSheaf_eq_degree",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.DivisorDegree",
+     "lines": [
+      77,
+      92
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-picard-framework",
  "unit": "sk-prop-picard-pic-split",
  "split_report": {
@@ -123,5 +168,27 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $k$ be a field, $C$ a proper smooth\ncurve over $k$, and $D$ a\ndivisor of $C$ which is effective, $D=\\sum_Pn_P[P]$ with $P$ closed points\nand $n_P\\ge0$. Then the\ndegree $\\deg(\\mathcal{O}_C(D))$ of\nDefinition [def-pc-degree-line-bundle] is\n$\\sum_Pn_P[\\kappa(P):k]$; for $k$ algebraically closed this\nequals $\\deg D$ of [def-sc-pic0]. In particular for a $k$-rational point $P$,\n$\\deg(\\mathcal{O}_C([P]))=1$.",
+  "proof": [
+   {
+    "text": "Both notions are additive in $D$: $\\mathcal{O}_C(D_1+D_2)=\\mathcal{O}_C(D_1)\\otimes\\mathcal{O}_C(D_2)$\n(for the module of\n[def-pc-divisor-line-bundle]: by the local checks of\n[lem-pc-divisor-line-bundle-properties]; for the degree:\n[lem-pc-degree-base-change] / [lem-pc-euler-additive]), so it\nsuffices to treat $D=[P]$ with $P$ a closed point. The exact sequence\n$0\\to\\mathcal{O}_C\\to\\mathcal{O}_C([P])\\to\\kappa(P)\\to0$ (the quotient\n$\\mathcal{O}_C([P])/\\mathcal{O}_C=\\mathcal{O}_C([P])|_P=\\kappa(P)$: the module\n$\\mathcal{O}_C([P])=\\mathcal{I}_P^\\vee$ contains $\\mathcal{O}_C$ with quotient\n$\\mathcal{I}_P^\\vee\\otimes_{\\mathcal{O}_C}\\mathcal{O}_P\\cong\\kappa(P)$ since\n$\\mathcal{I}_P\\otimes\\mathcal{O}_P=\\mathfrak m_P$; the inclusion being the embedding of\nthe ideal, dualizing gives an inclusion $\\mathcal{O}_C\\subseteq\\mathcal{I}_P^\\vee$ with\nquotient as stated) together with the additivity of $\\chi$\n([lem-pc-euler-additive]) gives\n\n$$\n\\chi(C,\\mathcal{O}_C([P]))=\\chi(C,\\mathcal{O}_C)+\\dim_k\\kappa(P),\n$$\n\nand for a $k$-rational point $P$ (i.e. $\\dim_k\\kappa(P)=1$) therefore\n$\\deg(\\mathcal{O}_C([P]))=\\chi(\\mathcal{O}_C([P]))-\\chi(\\mathcal{O}_C)=1=\\deg([P])$ of\n[def-sc-pic0] (degree of a $k$-rational point is $1$). For\ngeneral closed points the same computation gives\n$\\deg(\\mathcal{O}_C([P]))=[\\kappa(P):k]=\\deg([P])$, and additivity finishes.",
+    "uses": [
+     "def-pc-divisor-line-bundle",
+     "lem-pc-divisor-line-bundle-properties",
+     "lem-pc-degree-base-change",
+     "lem-pc-euler-additive",
+     "def-sc-pic0"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

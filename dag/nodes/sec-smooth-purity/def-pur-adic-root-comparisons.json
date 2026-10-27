@@ -12,9 +12,73 @@
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-adic-reconstruction.md",
   "place": "node thm-pur-adic-reconstruction, order 2023"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For adicPurityDoubleSuccSucc, cast natural-number successors to integers and use integer linear arithmetic. This gives exactly the degree equality used by adicPurityDiagonalGeneric.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For adicPurityEtalePower_flat, l is prime and hence l^(r+1) is positive. Map the assumed global unit to each stalk. Apply finite_etale_torsion_twist_line from [lem-asd-finite-etale-twist-line] to the finite lifted coefficient ring. Its finite-limit preservation assertion gives ObjectProperty.flat by flat_iff_preservesFiniteLimits.",
+   "uses": [
+    "lem-asd-finite-etale-twist-line"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The two recursions adicPurityPower and finiteEtaleTateTwist agree at zero and one. Two-step induction identifies their higher tensor powers. Rewrite by this equality and use the preceding flatness result to prove adicPurityEtaleGenericPower_flat.",
+   "uses": [
+    "def-asd-finite-etale-tate-twist"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For adicPurityEtaleDiagonal_existsUnique, first work over an arbitrary commutative coefficient ring A, with flatness of its ordered powers as a parameter. Induction identifies affineLinearBaseCoefficient with adicPurityShiftedPower; two-step induction already identifies adicPurityPower with finiteEtaleTateTwist. These object equalities identify the two isomorphism types. Prove the elementary polymorphic transport fact by eliminating an equality of types: the transported element is uniquely heterogeneously equal to the original one. Apply it to adicPurityDiagonalGeneric. Specialize this proved private generic-coefficient helper to finiteTateCoefficient and adicPurityEtaleGenericPower_flat. Working over abstract A avoids repeatedly normalizing the concrete p-adic quotient in kernel checking. All existing data definitions and public signatures are unchanged. The explicitly typed adicPurityEtaleDiagonalModel interface is definitionally the existing generic diagonal with its original unit isomorphism, and checks the derived tensor instances once. The existing ordinaryFiniteDegreeZero interface replaces its definitionally identical singleFunctor.obj expression in the etale signatures and in transport congruences, avoiding repeated checking of the large single-functor construction.",
+   "uses": [
+    "def-amb-affine-linear-trace-action",
+    "def-asd-finite-etale-tate-twist"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Obtain the comparison b and its root normalization from finite_tate_site_descent. For any second normalized comparison bprime, apply finiteTate_local_root_tensors_hom_ext to their hom morphisms. Both send each test tensor to the same prescribed finiteTateProPowerGenerator, so transitivity gives the detection hypothesis. Iso.ext finishes uniqueness. Existence is unchanged and no comparison is chosen from bare isomorphy.",
+   "uses": [
+    "lem-amb-finite-tate-site-descent",
+    "lem-pur-finite-tate-local-root-tensors-ext"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For adicPurityRootQuotients_existsUnique, apply signedTwistFirstReduction, which has no invertibility hypothesis, to get the normalized first-line comparison. Use the existing positiveComparison recursion (the positive, arbitrary-module part of the signed-line comparison module): zero is scalarExtensionUnitIso, one is the given comparison, and each higher step uses scalarTensorBinaryIso and maps both tensor factors. Compose scalarExtensionEmbedding with each comparison to obtain the semilinear quotient maps. The unit formula, signedTwistFirstReduction section equation, and positiveComparison_tmul prove the three required normalizations. For uniqueness at one, restrict completed scalars to the integral constants and use the identity-on-sections integralForgetIso; scalarExtension_hom_ext reduces equality to the prescribed root tensors. At zero use the section projection equation. Two-step induction and scalarTensor_hom_ext then give equality at every higher degree. This proof uses no root basis and no local-freeness hypothesis.",
+   "uses": [
+    "def-coefficient-twists-detailed",
+    "lem-weil-twist-first-quotient-normalization",
+    "lem-pur-signed-line-scalar-tensor-tower",
+    "lem-pur-twist-integral-local-models",
+    "lem-sp-scalar-extension-binary-coherence",
+    "def-sp-canonical-scalar-extension-maps"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-finite-etale-twist-line",
+  "def-asd-finite-etale-tate-twist",
+  "def-amb-affine-linear-trace-action",
+  "lem-amb-finite-tate-site-descent",
+  "lem-pur-finite-tate-local-root-tensors-ext",
+  "def-coefficient-twists-detailed",
+  "lem-weil-twist-first-quotient-normalization",
+  "lem-pur-signed-line-scalar-tensor-tower",
+  "lem-pur-twist-integral-local-models",
+  "lem-sp-scalar-extension-binary-coherence",
+  "def-sp-canonical-scalar-extension-maps"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/def-coefficient-twists-detailed.md; literature/stacks-project/sites-modules.tex",
+  "place": "N2, 2026-10-26: complete remaining diagonal and positive quotient-family proofs by recursion equality and existing normalized scalar-extension comparisons. Existing root-comparison and flatness proofs are retained."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -96,7 +160,18 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-thm-purity-transport",
  "lean": {
@@ -108,6 +183,7 @@
    "WeilConjectures.adicPurityShiftedPower",
    "WeilConjectures.adicPurityDoubleSuccSucc",
    "WeilConjectures.adicPurityDiagonalGeneric",
+   "WeilConjectures.adicPurityEtaleDiagonalModel",
    "WeilConjectures.adicPurityQuotientFinite",
    "WeilConjectures.adicPurityRootComparison_existsUnique",
    "WeilConjectures.adicPurityRootComparison",
@@ -145,5 +221,15 @@
   "group": "N0",
   "result": "fix",
   "note": "Re-delivery of PASSed 76c20af30ac6 (landing return was a load timeout in base WeilSiteDerivedTensorDescent). All 13 owned modules byte-identical to 76c; item node adds only a correct lean.note (upstream exists_iso_realization_twistShiftPullbackLevel is only the reconstruction step); new-node edits trim implementation wording and add the real def-weil-exceptional-inverse-image citation; declaration lists match modules and statements are verbatim; dependency copies equal live. Statement substance unchanged from the clause-by-clause PASS (actual U, V, smoothPurityMap at K_n, IsIso, ctf endpoints, reduction equation for every n+1, coherent lift G; edge cases covered). New content: a §1(B) edit of Q118's live DerivedPullbackTensorHom (2 transparency options, 16 @[no_expose], not 9 as reported, including the operation functors). It does not address the landing failure and is ineffective: back to back, live 39.6/42.1 s vs delivered 36.6/41.9 s. The live module already has a published build and about 40 live files use the hidden names; 2 sampled importers compile clean. FIX: fixes/DerivedPullbackTensorHom.lean = live text. nt_compile --json: all 13 owned modules clean against live (5-26 s). Notes: if the dep node carries a group note, use --revert-nodes (the node is not in the snapshot); NW's re-binding of def-weil-finite-tor-amplitude left Sheaf.Paper.FiniteTorAmplitude, whose finiteTorConstructibleIntegral this item and at least 10 live modules use, with no owning node; land at lower load."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-2a30d",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261026T070345-L-3558301",
+  "kind": "interface",
+  "note": "independent cc review: def-pur-adic-root-comparisons statement/proof/proof_deps vs delivered AdicPurityRootComparisons.lean; change record old/new vs ordinaryFiniteDegreeZero body (defeq) and adicPurityDiagonalGeneric; 5 direct importers compiled in sandbox"
  }
 }

@@ -1,0 +1,136 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 06YY and 0941; corresponding step of lem-trf-transported-reduction-systems-normalized."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-trf-integral-comparison-sequence-systems",
+  "def-coef-ringed-sequence-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 06YY and 0941; same transported scalar normalization argument. Lean proof uses the existing finite association and strict-representative normalization, with a universal left-derived comparison and explicit isomorphism transport.",
+  "group": "Q5",
+  "date": "2026-10-26"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "normalized derived coefficient sequence preserved by inverse image or coefficient extension",
+   "results": "No specialized match; existing project interfaces are required.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normalized coefficient sequence inverse image scalar extension",
+   "results": "Only generic derived functor infrastructure.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "IsNormalizedCoefficientSequence.*integralComparisonDerivedSequence",
+   "results": "No existing theorem matching the statement.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TransportedReductionSystemsNormalized",
+  "date": "2026-10-26",
+  "group": "Q5"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-transported-reduction-systems-normalized",
+   "place": "The corresponding inverse-image or scalar-extension proof step.",
+   "via": [
+    "lem-trf-effective-quotient-model-descent"
+   ]
+  }
+ },
+ "id": "stage3-trf-transported-scalar-normalized",
+ "title": "Normalization of transported scalar reduction systems",
+ "statement": "Fix l, finite coefficient fields E,L, an embedding ι : E →ₐ[ℚ_[l]] L, a scheme Y with l invertible, and a coefficient reduction calculus SY over E on Y. For every ambient derived K, the specified whole-system scalar extension of SY.reduction.obj K is normalized over L.",
+ "proof": [
+  {
+   "text": "Apply semilinearDerivedSections on the actual pro-etale coefficient tower and take its coefficientExtension field for the actual quotient inclusions. This supplies scalar-system data A over the whole sequence site.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The component specification of systemMap identifies its ring map with integralComparisonSequenceScalarMap: both components at (n,U) are the actual quotient-ring sheaf map. For two cochain scalar models of this same ring map, their prescribed object and morphism equations give an ordinary natural isomorphism. Localize it using Functor.leftDerivedNatIso and the two universal counits, obtaining an isomorphism from A.scalar.T to integralComparisonDerivedSequenceScalar on entire derived systems.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "def-trf-integral-comparison-sequence-systems",
+    "def-sfb-derived-change-of-rings-cochain-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Obtain the balanced finite association from coefficientExtensionFiniteAssociation_exists. Feed it and the specified reduction calculus SY to coefficientExtensionStrictRepresentative_exists. Its last conclusion proves normalization of A.scalar.T(SY.reduction(K)) for every ambient unbounded K. The completion and Roos-limit clauses of the full coefficient-extension reduction theorem are unnecessary.",
+   "uses": [
+    "stage3-pur-finite-extension-association",
+    "stage3-pur-extension-strict-representatives"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport normalization through the derived system isomorphism. For a system isomorphism e:X to Y, let e_n and e_m be its evaluated isomorphisms. Naturality gives e_m followed by transition(Y) equals transition(X) followed by Res(e_n). Thus the transition Hom map for Y is conjugate to that for X by precomposition with e_n and e_m. The explicit inverse is precomposition with e_n inverse; cancellation proves injectivity and the transported preimage proves surjectivity. Apply this to the scalar-functor isomorphism at SY.reduction(K).",
+   "uses": [
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-semilinear-derived-sections",
+  "def-trf-integral-comparison-sequence-systems",
+  "def-sfb-derived-change-of-rings-cochain-model",
+  "stage3-pur-finite-extension-association",
+  "stage3-pur-extension-strict-representatives",
+  "def-coef-ringed-sequence-site"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TransportedReductionScalarNormalized",
+  "file": "lean/Sheaf/Paper/TransportedReductionScalarNormalized.lean",
+  "declaration": "WeilConjectures.transportedReductionSystems_scalar_normalized",
+  "statement": "theorem transportedReductionSystems_scalar_normalized\n    {Y : Scheme.{t}}\n    (_hlY : ∀ y : Y, IsUnit (l : Y.residueField y))\n    (SY : CoefficientDerivedSystemCalculus l E Y) :\n    ∀ K : DerivedCategory (scalarReductionSource l E Y),\n      IsNormalizedCoefficientSequence l L Y\n        ((integralComparisonDerivedSequenceScalar l E L ι Y).obj (SY.reduction.obj K))",
+  "branch": "sheaf-dag",
+  "by": "Q5",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261026T023832-L-607160",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261026T070632-L-3632938",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

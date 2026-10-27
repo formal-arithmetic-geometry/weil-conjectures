@@ -1,0 +1,249 @@
+{
+ "id": "lem-per-alteration-generators-pullback",
+ "kind": "statement",
+ "title": "The raw alteration generators admit pullbacks and are stable under them",
+ "statement": "Let $S$ be a Noetherian scheme, meaning a scheme admitting a finite affine cover by spectra of Noetherian rings [def-pc-scheme, def-weil-pbc-noetherian-ring], and let $\\ell$ be a prime. In $\\mathcal C=\\operatorname{alt}/S$ [def-per-prime-to-ell-alteration-topology], let $K(X)$ consist precisely of the presieves represented by either (i) a set-indexed $\\ell'$-decomposed etale family $(U_i\\to X)_i$, or (ii) a singleton proper surjective maximally $\\ell'$-finite morphism $U\\to X$, with these terms as defined in that definition node. A presieve is a set of arrows with a fixed target. For every arrow $Y\\to X$ of $\\mathcal C$ and every family of type (i) or (ii), the categorical pullbacks $U_i\\times_X^{\\mathcal C}Y$ exist, and their projections to $Y$ form a family of the same type. These are categorical pullbacks in $\\mathcal C$, characterized by the universal property of a commuting square [def-pc-fibre-product], and are not asserted to be the ordinary scheme fibre products. Consequently $K$ (a precoverage, i.e. a collection of designated presieves) has pullbacks, and is stable under base change in the sense that for every $R\\in K(X)$ and every arrow $Y\\to X$, the presieve formed by the projections to $Y$ of one chosen categorical pullback of each arrow of $R$ belongs to $K(Y)$. No stability under composition of these raw families is asserted.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose II Proposition 1.2.6 (existence of categorical pullbacks), Proposition 1.2.7 (maximal prime-to-ell finiteness under base change), Proposition 1.2.8 (proper surjectivity under dominant reduction), 2.1.1 and Remark 2.3.2, printed pp.25--28."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-per-prime-to-ell-alteration-topology",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "For any two arrows $U\\to X\\leftarrow Y$, apply only the fibre-product assertion of [lem-per-alteration-cover-calculus]: the categorical pullback exists and is $Q=(U\\times_XY)_{\\mathrm{md}}$ relative to $S$. This assertion concerns existence and the object, not merely the preservation of covering sieves; we do not use that node to infer preservation of raw generators. Each of $X,Y,U,Q$ is an object of $\\operatorname{alt}/S$. By [lem-per-alteration-arrow-properties], their arrows are finite type and send component generic points to component generic points with finite residue extensions. In particular every generic point $y$ of $Y$ maps to a generic point $x$ of $X$ and a generic point $s$ of $S$. All four schemes are Noetherian by [lem-weil-pbc-finite-type-over-noetherian].",
+   "uses": [
+    "lem-per-alteration-cover-calculus",
+    "lem-per-alteration-arrow-properties",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II 1.1.10 and Proposition 1.2.6, printed pp.24--25."
+   }
+  },
+  {
+   "text": "First take an etale generating family $(U_i\\to X)_i$. Write $P_i=U_i\\times_XY$. Its projection $P_i\\to Y$ is etale by [lem-weil-pbc-etale-scheme-base-change]. Apply the etale comparison in [lem-per-dominant-part-coreflection] over $S$ to $P_i\\to Y$: both schemes are finite type over $S$ by [lem-sfb-finite-type-composition-base-change] and Step 1. Since every generic point of $Y$ lies over a generic point of $S$, the closed set defining $Y_{\\mathrm{md}}$ in that cited statement is all of $Y$; as $Y$ is reduced, the uniqueness clause of [lem-weil-pbc-reduced-induced-closed-subscheme] applied to $\\mathrm{id}_Y$ gives $Y_{\\mathrm{md}}=Y$. It gives $Q_i=(P_i)_{\\mathrm{md}}\\simeq P_i\\times_Y Y_{\\mathrm{md}}=P_i$ compatibly with the projections. Hence the categorical pullback projections are etale.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-per-dominant-part-coreflection",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II 1.2.5--1.2.6 and 2.1.1, printed pp.25--26."
+   }
+  },
+  {
+   "text": "For any point $y\\in Y$ over $x\\in X$, choose $i$ and $u\\in U_i$ over $x$ with finite residue degree prime to $\\ell$, using the definition of decomposedness [def-per-prime-to-ell-alteration-topology]. Apply [lem-per-prime-to-ell-residue-base-change] with $k=\\kappa(x)$, $L=\\kappa(u)$ and $K=\\kappa(y)$. The point description [lem-weil-pbc-fibre-product-points] places its good point in $P_i$ above $(u,y)$; [lem-weil-pbc-fibre-product-point-residue-field] identifies its residue extension over $\\kappa(y)$ with the one supplied by the residue-degree lemma. Thus $P_i\\to Y$, and by Step 2 also $Q_i\\to Y$, have a good lift of every $y$. This proves precisely the etale generating condition, for any set of indices, without extracting a finite subfamily.",
+   "uses": [
+    "def-per-prime-to-ell-alteration-topology",
+    "lem-per-prime-to-ell-residue-base-change",
+    "lem-weil-pbc-fibre-product-points",
+    "lem-weil-pbc-fibre-product-point-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II Proposition 1.2.7 and 2.1.1, printed pp.25--26."
+   }
+  },
+  {
+   "text": "Now take a proper surjective maximally $\\ell\\prime$-finite $U\\to X$. Its ordinary pullback $P=U\\times_XY\\to Y$ is proper and surjective by [lem-weil-pbc-proper-base-change, lem-weil-pbc-surjective-base-change]. These are finite-type $S$-schemes by Step 1 and [lem-sfb-finite-type-composition-base-change]. The proper-surjective assertion of [lem-per-dominant-part-coreflection] therefore gives a proper surjective $Q=P_{\\mathrm{md}}\\to Y_{\\mathrm{md}}=Y$. It remains to check the generic residue-degree condition; properness and surjectivity alone do not imply it.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-per-dominant-part-coreflection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II Proposition 1.2.8, printed p.26."
+   }
+  },
+  {
+   "text": "Let $y$ be a component generic point of $Y$, with images $x$ in $X$ and $s$ in $S$. Step 1 makes $x,s$ generic. Surjectivity of $U\\to X$ and maximal $\\ell\\prime$-finiteness [def-per-prime-to-ell-alteration-topology] provide a generic $u$ above $x$ of degree prime to $\\ell$. The same residue-degree and fibre-product-point lemmas as in Step 3 give $p\\in P$ over $(u,y)$ of finite degree prime to $\\ell$ over $\\kappa(y)$. This point lies over $s$, hence belongs to the support of $P_{\\mathrm{md}}$ by [lem-per-dominant-part-coreflection]. Its lift $q\\in Q$ has the same residue field: locally the reduced induced closed immersion is $A\\to A/I$ and residue fields at primes containing $I$ are unchanged [lem-weil-pbc-reduced-induced-closed-subscheme]. Choose a component generic generalization $q_0$ of $q$ using [lem-sc-irreducible-components-cover, lem-sc-scheme-sober]. Its image in $Y$ generalizes the generic point $y$, hence equals $y$. The arrow assertion of Step 1 gives finite $\\kappa(q_0)/\\kappa(y)$. By [lem-trf-finite-residue-point-closed-in-fibre], $q_0$ is closed in the fibre $Q_y$. The fibre $Q_y$ is homeomorphic to the subspace of points of $Q$ over $y$ [def-pc-scheme-fibre], and $q$ lies in the closure of $q_0$ inside that subspace, so $q=q_0$. Thus the good lift is generic, as required. All generic residue extensions of $Q\\to Y$ are already finite by Step 1. This proves maximal $\\ell\\prime$-finiteness.",
+   "uses": [
+    "def-per-prime-to-ell-alteration-topology",
+    "lem-per-prime-to-ell-residue-base-change",
+    "lem-weil-pbc-fibre-product-points",
+    "lem-weil-pbc-fibre-product-point-residue-field",
+    "lem-per-dominant-part-coreflection",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-sc-irreducible-components-cover",
+    "lem-sc-scheme-sober",
+    "lem-trf-finite-residue-point-closed-in-fibre",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II Propositions 1.2.6--1.2.8, printed pp.25--26; generic-point verification expanded from 1.1.10."
+   }
+  },
+  {
+   "text": "For $R\\in K(X)$, choose a representing family of either type. Step 1 supplies its pullbacks, and Steps 2--5 show that their projections again represent a member of $K(Y)$. Repeated arrows in the representation make no difference to the presieve. Any other chosen categorical pullback is uniquely isomorphic to this one over both factors by the universal property [def-pc-fibre-product]; an isomorphism preserves properness, etaleness, surjectivity, generic points and the induced residue extensions, so the same family condition holds for that choice. This is exactly having pullbacks and stability under base change as defined in the item. For the empty target the empty etale family and the proper singleton with empty source satisfy the same argument vacuously. No composition of raw families has been used.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II 2.1.1 and Remark 2.3.2, printed pp.26--28."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-alteration-cover-calculus",
+  "lem-per-alteration-arrow-properties",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-per-dominant-part-coreflection",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-per-prime-to-ell-alteration-topology",
+  "lem-per-prime-to-ell-residue-base-change",
+  "lem-weil-pbc-fibre-product-points",
+  "lem-weil-pbc-fibre-product-point-residue-field",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-sc-irreducible-components-cover",
+  "lem-sc-scheme-sober",
+  "lem-trf-finite-residue-point-closed-in-fibre",
+  "def-pc-scheme-fibre",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose II proof of 1.2.6, Propositions 1.2.7--1.2.8, 2.1.1 and Remark 2.3.2, printed pp.25--28; assembly and generic-lift verification expanded by Q121."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "alteration|[Mm]aximally|[Cc]ompletely[Dd]ecomposed",
+   "results": "20 hits: Mathlib/GroupTheory/CoprodI.lean, Mathlib/GroupTheory/CoprodI.lean, Mathlib/RingTheory/UniqueFactorizationDomain/Kaplansky.lean, Mathlib/RingTheory/Ideal/Maximal.lean, Mathlib/RingTheory/Ideal/Maximal.lean, Mathlib/RingTheory/Ideal/Maximal.lean, Mathlib/RingTheory/Ideal/Maximal.lean, Mathlib/RingTheory/Ideal/Maximal.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: generic precoverage stability interfaces assume stability; ordinary scheme pullback lemmas do not prove stability of the raw alteration generators under categorical dominant-reduced pullbacks."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generating alteration covering families are stable under pullbacks using reduced dominant parts of fibre products",
+   "results": "8 hits: CategoryTheory.Precoverage.IsStableUnderBaseChange.mem_coverings_of_isPullback, CategoryTheory.Coverage.pullback, CategoryTheory.Precoverage.IsStableUnderBaseChange.mk, CategoryTheory.Precoverage.mem_coverings_of_isPullback, CategoryTheory.Precoverage.IsStableUnderBaseChange, CategoryTheory.MorphismProperty.coverage, CategoryTheory.Precoverage.instIsStableUnderBaseChangeComapOfPreservesLimitsOfShapeWalkingCospan, AlgebraicGeometry.Scheme.Cover.pullbackCoverOver'_f",
+   "date": "2026-10-24",
+   "verdict": "no match: generic precoverage stability interfaces assume stability; ordinary scheme pullback lemmas do not prove stability of the raw alteration generators under categorical dominant-reduced pullbacks."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Precoverage.IsStableUnderBaseChange",
+   "results": "12 hits: CategoryTheory.Precoverage.IsStableUnderBaseChange, CategoryTheory.Precoverage.instIsStableUnderBaseChangeMin, CategoryTheory.Precoverage.instIsStableUnderBaseChangeComapOfPreservesLimitsOfShapeWalkingCospan, CategoryTheory.Precoverage.pullbackArrows_mem, CategoryTheory.Precoverage.mem_coverings_of_isPullback, CategoryTheory.Precoverage.IsStableUnderBaseChange.mem_coverings_of_isPullback, CategoryTheory.Precoverage.IsStableUnderBaseChange.mk, CategoryTheory.Precoverage.toPretopology",
+   "date": "2026-10-24",
+   "verdict": "no match: generic precoverage stability interfaces assume stability; ordinary scheme pullback lemmas do not prove stability of the raw alteration generators under categorical dominant-reduced pullbacks."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The precoverage on the alteration category consisting of prime to ell decomposed etale families and proper surjective maximally prime to ell finite maps is stable under categorical pullback",
+   "results": "8 hits: AlgebraicGeometry.Scheme.instHasPullbacksPrecoverageOfHasPullbacks, AlgebraicGeometry.Scheme.instOverXPullbackCoverOverProp', AlgebraicGeometry.Scheme.instOverXPullbackCoverOverProp, AlgebraicGeometry.Scheme.instOverXPullbackCoverOver', AlgebraicGeometry.Scheme.instOverXPullbackCoverOver, AlgebraicGeometry.Scheme.instOverPullbackCoverOver', AlgebraicGeometry.Scheme.instOverPullbackCoverOver, AlgebraicGeometry.Scheme.instOverPullbackCoverOverProp'",
+   "date": "2026-10-24",
+   "verdict": "no match: generic precoverage stability interfaces assume stability; ordinary scheme pullback lemmas do not prove stability of the raw alteration generators under categorical dominant-reduced pullbacks."
+  },
+  {
+   "tool": "grep",
+   "query": "alteration|maximally.*finite|decomposed",
+   "results": "0 hits:  (Mathlib/AlgebraicGeometry)",
+   "date": "2026-10-24",
+   "verdict": "no match: generic precoverage stability interfaces assume stability; ordinary scheme pullback lemmas do not prove stability of the raw alteration generators under categorical dominant-reduced pullbacks."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reduced dominant fibre products preserve proper surjective maximally prime to ell finite morphisms and prime to ell decomposed etale families",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving, AlgebraicGeometry.Scheme.isJointlySurjectivePreserving, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-24",
+   "verdict": "no match: generic precoverage stability interfaces assume stability; ordinary scheme pullback lemmas do not prove stability of the raw alteration generators under categorical dominant-reduced pullbacks."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper surjective maximally prime to ell finite morphisms and decomposed etale families are preserved by dominant reduced pullback",
+   "results": "8 hits: AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.instIsDominantOfSurjective, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.Scheme.instIsJointlySurjectivePreservingIsOpenImmersion, AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeJointlySurjectivePrecoverage, AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange",
+   "date": "2026-10-24",
+   "verdict": "no match: generic stability interfaces assume stability and ordinary scheme base-change declarations do not establish raw alteration generator stability."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Raw prime to ell alteration generators are stable under categorical pullbacks formed by dominant reduced parts",
+   "results": "8 hits: AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange, AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme, RingHom.IsStableUnderBaseChange.pullback_fst_appTop, AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange.mk, AlgebraicGeometry.Scheme.Cover.pullbackCoverOverProp'_I₀, AlgebraicGeometry.Scheme.Cover.pullbackCoverOverProp_I₀, AlgebraicGeometry.of_pullback_fst_Spec_of_codescendsAlong",
+   "date": "2026-10-24",
+   "verdict": "no match: generic stability interfaces assume stability and ordinary scheme base-change declarations do not establish raw alteration generator stability."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reduced dominant part of a fibre product preserves prime to ell decomposed etale covers and proper maximally prime to ell finite surjections",
+   "results": "8 hits: AlgebraicGeometry.Scheme.instOverXPullbackCoverOverProp, AlgebraicGeometry.Scheme.instOverXPullbackCoverOverProp', AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.Cover.pullbackCoverOverProp'_I₀, AlgebraicGeometry.Scheme.Cover.pullbackCoverOverProp_I₀, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.Cover.pullbackCoverOverProp'_X, AlgebraicGeometry.Scheme.Cover.pullbackCoverOverProp'_f",
+   "date": "2026-10-24",
+   "verdict": "no match: generic stability interfaces assume stability and ordinary scheme base-change declarations do not establish raw alteration generator stability."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-alteration-site-localization",
+  "date": "2026-10-24",
+  "group": "Q93"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor finiteness/duality branch, through III Proposition 6.2 closed-fibre gluing: interpreting the pointed-etale-neighborhood cover in alt/T as a cover of the same object T in alt/S before the cover is pulled to P_i times_S T. ILO II 1.1.10, proof of 1.2.6 and 2.3.1 supply the category and generator identifications. Child: Expose II Proposition 1.2.6 (existence of categorical pullbacks), Proposition 1.2.7 (maximal prime-to-ell finiteness under base change), Proposition 1.2.8 (proper surjectivity under dominant reduction), 2.1.1 and Remark 2.3.2, printed pp.25--28.",
+   "via": [
+    "lem-per-alteration-site-localization",
+    "lem-per-alteration-cover-closed-fibre-shrink",
+    "lem-per-uniformization-complete-local-descent",
+    "lem-per-uniformization-nodal-quotient-reduction",
+    "lem-per-gabber-prime-to-ell-regular-cover",
+    "lem-per-prime-to-ell-uniformization-standard-form",
+    "lem-per-gabber-open-immersion-sheaf-finiteness",
+    "lem-per-quasi-excellent-etale-direct-image-finiteness",
+    "lem-per-finite-exceptional-preservation",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-alteration-generators-pullback",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Constructed a six-step split using existing categorical-product, dominant-part, arrow, and residue-degree nodes. Separated preservation of raw generators from preservation of covering sieves, and explicitly checked that a good generic-fibre lift survives dominant reduction and is a component generic point. No new nodes. Checked ILO II pp.23--28, current blueprint ancestor, existing statements and project Lean source.",
+  "blueprint": "Ancestor finiteness/duality branch, through III Proposition 6.2 closed-fibre gluing: interpreting the pointed-etale-neighborhood cover in alt/T as a cover of the same object T in alt/S before the cover is pulled to P_i times_S T. ILO II 1.1.10, proof of 1.2.6 and 2.3.1 supply the category and generator identifications. Child: Expose II Proposition 1.2.6 (existence of categorical pullbacks), Proposition 1.2.7 (maximal prime-to-ell finiteness under base change), Proposition 1.2.8 (proper surjectivity under dominant reduction), 2.1.1 and Remark 2.3.2, printed pp.25--28. The split supplies categorical pullbacks and preserves both raw generating types for the localization step; it does not assert composition stability.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-finite-residue-point-closed-in-fibre",
+    "why": "Step 5 takes only its statement (a point with finite residue extension over its image is closed in the scheme-theoretic fibre of a locally finite type morphism, Stacks 01TE/01TF); a generic scheme lemma, no node of sk-p-dl-a1-perverse or its route gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-finite-residue-point-closed-in-fibre"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q121-38f7236b5",
+  "group": "Q121",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q121-38f7236b5 (reviewer sub-agent of L); spot-checked: Read the item's six steps, every cited statement and ILO Exposé II printed pp.24-28 (1.1.8, 1.1.10, 1.2.2-1.2.8, 2.1.1, 2.3.1, Rem 2.3.2). The statement matches the source: categorical pullbacks (X×Y)_md, raw generators of types (i) and (ii), no composition claim. The proof is correct. Step 2 is the étale clause of the dominant-part coreflection. Step 3 is the residue-degree lemma plus the fibre-product point and residue-field nodes, for arbitrary index sets. Step 4 is ILO 1.2.8. Step 5 shows the good lift is generic, as in ILO 1.1.10. Step 6 is uniqueness of pullbacks. Edge cases tested: empty Y, identity, blow-up of A^2 at the origin, C/R with ℓ=3, inseparable degree p with ℓ≠p. No cycles. FIX makes three repairs: (1) Step 2 now cites lem-weil-pbc-reduced-induced-closed-subscheme (uniqueness) for Y_md=Y; (2) Step 5 now cites def-pc-scheme-fibre (fibre homeomorphic to the subspace over y) for q=q_0; (3) split_report.tool_uses declares lem-trf-finite-residue-point-closed-in-fibre (unit sk-i-curve-zero, off route), which I accept. Batch-5 check: lem-trf-finite-residue-point-closed-in-fibre is Stacks 01TE/01TF, a generic scheme lemma whose 11-node closure has no trace-formula or Poincaré-duality node. Cover-calculus reaches sec-trace-formula only through that lemma. Both accepted. Artin-Gabber route check: the item is not in the closure of lem-per-artin-gabber-affine-curve. It is reached only through the sfb alteration chain under det-thm-sf-ctf-stability-direct-images, and its blueprint.from naming that ancestor is inherited from creation. The flagged cover-calculus, dominant-part-coreflection and prime-to-ell-residue-base-change are live split alt/S facts with no Q̄_ℓ, adic, duality or t-structure content, so the rule is not violated.; 1 file(s) fixed by the reviewer"
+ }
+}

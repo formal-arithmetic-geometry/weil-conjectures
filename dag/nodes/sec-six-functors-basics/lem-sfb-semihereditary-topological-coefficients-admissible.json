@@ -1,0 +1,225 @@
+{
+ "id": "lem-sfb-semihereditary-topological-coefficients-admissible",
+ "kind": "statement",
+ "title": "Semihereditary topological rings give admissible condensed coefficients",
+ "statement": "Let $R$ be a commutative topological ring such that every singleton is closed. Suppose every finitely generated ideal of the underlying ring $R$ is projective as an $R$-module [def-weil-pbc-projective-module] (the semihereditary condition). Let $\\Lambda$ be its continuous-function condensed ring [def-sfb-continuous-map-condensed-ring], so $\\Lambda(P)=C(P,R)$ for every profinite set $P$, with no restriction on the image. Then every finitely generated ideal of $R$ is finitely presented, every finitely presented $R$-module admits a finite resolution by finitely generated projective $R$-modules, and the constant-function homomorphism $R\\to C(P,R)$ is flat [def-weil-pbc-flat-ring-map] for every profinite set $P$. In particular $\\Lambda(*)=R$ is regular coherent and $\\Lambda$ is t-admissible in the explicit sense of [def-zl-t-admissible-coefficient-models]. No completeness or local compactness of $R$ is assumed.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 6.10, including its proof, and Lemma 6.7(1); t-admissibility is Definition 6.1. No Stacks tag states this topological-coefficient theorem."
+ },
+ "stmt_deps": [
+  "def-sfb-continuous-map-condensed-ring",
+  "def-weil-pbc-flat-ring-map",
+  "def-zl-t-admissible-coefficient-models",
+  "def-weil-pbc-projective-module",
+  "def-sc-finitely-presented-module"
+ ],
+ "proof": [
+  {
+   "text": "Every finitely generated ideal $I\\subseteq R$ is projective by hypothesis. Apply [lem-weil-pbc-finite-projective-finitely-presented] to $I$: it is finitely presented. This gives coherence in the explicit meaning required here.",
+   "uses": [
+    "lem-weil-pbc-finite-projective-finitely-presented"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 6.7(1), proof, first sentence; Stacks Tag 00NX, lemma-finite-projective, (2) implies (1)."
+   }
+  },
+  {
+   "text": "For a finitely presented $R$-module $N$, [def-sc-finitely-presented-module] gives $R^m\\xrightarrow{a}R^n\\to N\\to0$. Put $K=\\operatorname{im}(a)$; the images of the $m$ coordinate vectors generate $K$. By [lem-sfb-semihereditary-finite-free-submodule], $K$ is projective. The finite free module $R^n$ is projective by the direct-summand characterization in [def-weil-pbc-projective-module] (take both maps to be the identity). Thus $0\\to K\\to R^n\\to N\\to0$ is a finite resolution by finitely generated projectives. Together with step 1 this is regular coherence.",
+   "uses": [
+    "def-sc-finitely-presented-module",
+    "lem-sfb-semihereditary-finite-free-submodule",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 6.7(1), with the finite-resolution conclusion expanded using a finite presentation."
+   }
+  },
+  {
+   "text": "Fix any profinite set $P$. By [def-sfb-continuous-map-condensed-ring], $\\Lambda(P)=C(P,R)$ with pointwise operations. Evaluation gives an $R$-linear map $e:C(P,R)\\to\\prod_{p\\in P}R$, $e(f)_p=f(p)$, for the action by constant functions. If $e(f)=e(g)$, then $f(p)=g(p)$ for every $p$, hence $f=g$. Apply [lem-sfb-semihereditary-torsionless-flat] to this embedding. It makes $C(P,R)$ flat as an $R$-module, which is exactly flatness of the constant-function ring map by [def-weil-pbc-flat-ring-map].",
+   "uses": [
+    "def-sfb-continuous-map-condensed-ring",
+    "lem-sfb-semihereditary-torsionless-flat",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 6.10, proof: evaluation into the unrestricted product, followed by Chase flatness."
+   }
+  },
+  {
+   "text": "Evaluation at the unique point identifies $C(*,R)$ with $R$, with inverse the constant-function map, by [def-sfb-continuous-map-condensed-ring]. Steps 1 and 2 give the two scalar finiteness conditions of [def-zl-t-admissible-coefficient-models]; the resolution in step 2 represents $N[0]$ by its two-term finite projective complex. Step 3 holds for all profinite sets, hence for extremally disconnected ones. These are precisely the stated t-admissibility conditions. No step needs completeness, local compactness, or an image restriction on continuous functions.",
+   "uses": [
+    "def-sfb-continuous-map-condensed-ring",
+    "def-zl-t-admissible-coefficient-models"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Definition 6.1 and Lemma 6.10; identification of sections at the point."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-projective-finitely-presented",
+  "def-sc-finitely-presented-module",
+  "lem-sfb-semihereditary-finite-free-submodule",
+  "def-weil-pbc-projective-module",
+  "def-sfb-continuous-map-condensed-ring",
+  "lem-sfb-semihereditary-torsionless-flat",
+  "def-weil-pbc-flat-ring-map",
+  "def-zl-t-admissible-coefficient-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemmas 6.7(1) and 6.10 and Definition 6.1; the finite-resolution argument is expanded by the worker."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Semihereditary|semi.hereditary|admissible.*[Cc]ondensed|[Ff]lat.*[Cc]ontinuousMap|[Cc]ontinuousMap.*[Ff]lat",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: flatness definitions, continuous-function constructions and flat finitely presented implies projective do not give the semihereditary continuous-function flatness theorem or its regular-coherence conclusion"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, ContinuousMap",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: flatness definitions, continuous-function constructions and flat finitely presented implies projective do not give the semihereditary continuous-function flatness theorem or its regular-coherence conclusion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a T1 topological commutative ring with projective finitely generated ideals the condensed ring has regular coherent scalar ring and flat continuous function modules on extremally disconnected profinite sets",
+   "results": "8 hits: CondensedMod, CondensedMod.ofSheafProfinite, Condensed.profiniteSolid, Condensed.profiniteFree, CondensedMod.ofSheafStonean, CondensedMod.ofSheafCompHaus, CondensedMod.IsSolid, LightCondMod",
+   "date": "2026-10-24",
+   "verdict": "no match: flatness definitions, continuous-function constructions and flat finitely presented implies projective do not give the semihereditary continuous-function flatness theorem or its regular-coherence conclusion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a T1 topological semihereditary ring R the continuous function module C(S,R) is flat over R for every extremally disconnected profinite set S and R is regular coherent",
+   "results": "8 hits: RingHom.Flat, TopCat.continuousFunctions, Module.Flat, TopModuleCat.toModuleCat, continuousSubmodule, Module.flat_iff_of_isLocalization, TopModuleCat.noConfusionType, Module.Flat.self",
+   "date": "2026-10-24",
+   "verdict": "no match: flatness definitions, continuous-function constructions and flat finitely presented implies projective do not give the semihereditary continuous-function flatness theorem or its regular-coherence conclusion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous functions from a profinite space into a topological semihereditary commutative ring form a flat module over the ring of constant functions and finitely presented scalar modules have finite projective resolutions",
+   "results": "8 hits: Condensed.profiniteFree, Condensed.profiniteSolid, Profinite.instEnoughProjectives, Module.Flat.projective_of_finitePresentation, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-24",
+   "verdict": "no match: flatness definitions, continuous-function constructions and flat finitely presented implies projective do not give the semihereditary continuous-function flatness theorem or its regular-coherence conclusion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous functions from a profinite set into a semihereditary topological ring are flat and the scalar ring is regular coherent",
+   "results": "8 hits: Condensed.profiniteSolid, Condensed.profiniteFree, CondensedMod.ofSheafProfinite, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, LocallyConstant.freeOfProfinite, CondensedMod, CondensedMod.IsSolid, LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give continuous-function ring constructions or condensed-module constructions, not regular coherence and flatness under the semihereditary hypothesis"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, ContinuousMap",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give continuous-function ring constructions or condensed-module constructions, not regular coherence and flatness under the semihereditary hypothesis"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A topological semihereditary ring has regular coherent scalar ring and flat modules of continuous functions on profinite sets",
+   "results": "8 hits: TopModuleCat.noConfusionType, TopCat.continuousFunctions, TopModuleCat.toModuleCat, Bundle.ContMDiffRiemannianMetric.mk.sizeOf_spec, IsTopologicalRing.toIsTopologicalSemiring, IsModuleTopology, TopModuleCat, TopModuleCat.freeObj",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give continuous-function ring constructions or condensed-module constructions, not regular coherence and flatness under the semihereditary hypothesis"
+  },
+  {
+   "tool": "grep",
+   "query": "Semihereditary|semi.hereditary|[Ff]lat.*ContinuousMap|ContinuousMap.*[Ff]lat|[Rr]egular[Cc]oherent",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give continuous-function ring constructions or condensed-module constructions, not regular coherence and flatness under the semihereditary hypothesis"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-noetherian-scalar-constructible-heart",
+  "date": "2026-10-24",
+  "group": "N5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement proof (2), preservation of direct sums on the localizing hull: the corrected Noetherian finite scalar-model heart route; admissibility of topological coefficients before the lisse truncation argument.",
+   "via": [
+    "lem-sfb-noetherian-scalar-constructible-heart",
+    "lem-sfb-finite-complex-heart-filtered-approximation",
+    "lem-sfb-torsion-cd-topological-serre-transfer",
+    "lem-sfb-affine-profinite-family-serre-cd",
+    "lem-sfb-profinite-geometric-family-heart-cd",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-semihereditary-topological-coefficients-admissible",
+  "worker": "stage1",
+  "summary": "Checked HRS Lemmas 6.7(1) and 6.10 and Definition 6.1. Reused the existing Mathlib finite-projective finite-presentation leaf, isolated finite-free-submodule projectivity and Chase torsionless flatness as two general algebraic nodes, and wrote the evaluation embedding explicitly. The statement is unchanged, including all profinite sets and unrestricted continuous functions.",
+  "blueprint": "Refinement proof (2), preservation of direct sums on the localizing hull: coefficient admissibility in the Noetherian finite scalar-model heart argument, via HRS Lemmas 6.7(1) and 6.10. The latest cocycle proof uses refinement isomorphisms; this is a supporting coefficient lemma in its inherited dependency chain, not a replacement of the cocycle argument.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-ec4bba7bd",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-ec4bba7bd (reviewer sub-agent of L); spot-checked: I read HRS 2305.18131: the regular-coherent paragraph, Def 6.1, Lemma 6.7(1) with its proof, and Lemma 6.10 with its proof. The item statement is unchanged and byte-identical to the live unsplit version; it keeps all profinite P and unrestricted C(P,R), so the target is not weakened. Step 1: the Mathlib leaf finite-projective⇒finitely-presented applies to the finitely generated ideals, which are projective by hypothesis. Step 2: a finite presentation R^m→R^n→N→0 makes K=im(a) a finitely generated submodule of R^n; the new finite-free-submodule node makes K projective, giving 0→K→R^n→N→0, i.e. N[0] perfect. Step 3: evaluation C(P,R)→∏_P R is R-linear for the constant-function action and injective, so the new torsionless-flat node (Chase) gives flatness; this matches HRS's proof. Step 4 is elementary: Γ(*)=R, and the quantifier is restricted to extremally disconnected S, which gives exactly the three clauses of def-zl-t-admissible-coefficient-models. Both new nodes are true. Finite-free-submodule follows by the Kaplansky induction on n. Torsionless-flat follows because weak dimension is ≤1 and coherence makes ∏R flat. Edge cases tested: n=0, A or P empty, finite products of fields; Z/4 fails the hypothesis. Both nodes are statement-only, self-contained and cite their definitions. I found no duplicates in the snapshot or live DAG, no statement in the main-20261015 blueprint, and nothing in Mathlib (only domain criteria) or the project Lean. Neither node restates a clause of the item; they are strictly smaller algebraic inputs. There is no SGA and no tool_uses. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.SemihereditaryContinuousCoefficients",
+  "declaration": "Profinite.semihereditary_continuous_coefficients_admissible",
+  "file": "lean/Sheaf/Topology/SemihereditaryContinuousCoefficients.lean",
+  "statement": "theorem semihereditary_continuous_coefficients_admissible (R : Type u) [CommRing R] [TopologicalSpace R] [IsTopologicalRing R] [T1Space R] (hR : ∀ I : Ideal R, I.FG → Module.Projective R I) : (∀ I : Ideal R, I.FG → Module.FinitePresentation R I) ∧ (∀ N : ModuleCat.{u} R, Module.FinitePresentation R N → DerivedCategory.IsPerfectRingComplex ((DerivedCategory.singleFunctor _ 0).obj N)) ∧ (∀ P : Profinite.{v}, (algebraMap R C(P, R)).Flat) ∧ (∃ e : (continuousMapRingSheafOfUniverse.{u, u} R).obj.obj (op (Profinite.of PUnit.{u + 1})) ≃+* R, ∀ f, e f = f.down PUnit.unit) ∧ @AlgebraicGeometry.ProEtale.CondensedRing.IsTAdmissible.{u} { X := continuousMapRingObjOfUniverse.{u, u} R mon := continuousMapRingObjOfUniverseMonObj R } (isCommMonObj_continuousMapRingObjOfUniverse R)",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c59208d31",
+  "group": "N6",
+  "result": "pass",
+  "note": "Only the lean field of the item changed; lean.statement matches the file signature exactly. Every node hypothesis is rendered (T1Space, hR semihereditary) and nothing stronger is assumed. Five conclusion clauses match the node: f.g. ideals are finitely presented; finitely presented modules in degree zero are perfect (IsPerfectRingComplex, same form as the t-admissible definition node); algebraMap R C(P,R) = constant functions is flat for every Profinite.{v}, unrestricted; Λ(*)≅R is fixed to evaluation at the point; IsTAdmissible holds for the recorded continuousMapRingObjOfUniverse with its recorded monoid and commutativity structures. Universes are consistent (AddCommGrpCat.{u+1} over Profinite.{u}). Edge cases checked: empty and one-point P, zero ring, zero ideal or module, n=0; Z/4 fails the hypothesis. No duplicate or name clash in the project trees, no definitions so nothing hollow, the only proof is sorry, docstrings give HRS Lemmas 6.7(1), 6.10 and Definition 6.1 with the node's proof steps, all imports are used, no pro-étale substitute. Advisory only: IsPerfectRingComplex/singleFunctor owners are not in stmt_deps (reached through def-zl-t-admissible-coefficient-models), and a stage-2 fix cannot change stmt_deps. Not recompiled since no file changed; the worker reports clean compiles in 11.4 s and 3.0 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261024T014505-L-2205991",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "Profinite.semihereditary_continuous_coefficients_admissible"
+  ],
+  "sorry_after": []
+ }
+}

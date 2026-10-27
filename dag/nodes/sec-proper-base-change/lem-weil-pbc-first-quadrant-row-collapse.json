@@ -4,10 +4,10 @@
   "is": null,
   "from": {
    "node": "lemma-weil-pbc-cancellation",
-   "place": "step 6 of its split (source: Etale Cohomology, Lemma 0A4C (label lemma-sandwich), proof, second paragraph (\"Using the spectral sequence (Cohomology on Sites, Lemma 0734) $R^pg'_*R^qf'_*a^{-1}\\mathcal J\\Rightarrow R^{p+q}(g'\\circ f')_*a^{-1}\\mathcal J$ we conclude that $R^pg'_*(b^{-1}f_*\\mathcal J)=R^pg'_*(f'_*a^{-1}\\mathcal J)=0$ for $p>0$ as desired\"))",
+   "place": "Proof of lemma-weil-pbc-cancellation, first paragraph, sentence beginning \"the spectral sequence of [lem-weil-pbc-grothendieck-spectral-sequence] collapses to the q=0 row and yields\": the implication from upper-row and positive-total-degree vanishing to bottom-row vanishing (also step 6 of its DAG split; Stacks Tag 0A4C, lemma-sandwich, second proof paragraph).",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "A first-quadrant spectral sequence concentrated in the row q = 0 collapses",
@@ -23,55 +23,48 @@
  ],
  "proof": [
   {
-   "text": "**Step 1 (the vanishing propagates to every page).** Claim: for every $r\\ge2$, $E_r^{p,q}=0$ whenever $p<0$, or $q<0$, or $q>0$. For $r=2$ this is the first-quadrant hypothesis together with the hypothesis $E_2^{p,q}=0$ for $q>0$. If it holds for $r$, then $E_{r+1}^{p,q}\\cong\\ker(d_r^{p,q})/\\operatorname{im}(d_r^{p-r,q+r-1})$ is a subquotient of $E_r^{p,q}$, and a subquotient of $0$ is $0$ in the abelian category $\\mathcal A$; so it holds for $r+1$. By induction on $r$ the claim holds for all $r\\ge2$.",
+   "text": "Apply [lem-weil-pbc-spectral-page-zero-propagation] to the first-quadrant and upper-row hypotheses. Thus $E_r^{p,q}=0$ for $p<0$ or $q\\ne0$ on every page $r\\ge2$, and every positive-row stable term vanishes.",
    "uses": [
-    "def-sp-abelian"
+    "lem-weil-pbc-spectral-page-zero-propagation"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/homology.tex",
-    "place": "Definition 011N (definition-spectral-sequence, line 5164): $E_{r+1}=\\Ker(d_r)/\\Im(d_r)$; Lemma 0BDV (lemma-relate-boundedness, line 6292), proof hint: 'If $E_r^{p,q}=0$, then we have $E_{r'}^{p,q}=0$ for all $r'\\ge r$'"
+    "place": "Tags 011N (definition-spectral-sequence) and 0BDV (lemma-relate-boundedness), zero-entry propagation; the supplied row-support hypotheses are the base case."
    }
   },
   {
-   "text": "**Step 2 ($E_\\infty$ and the row $q=0$ is stationary from $E_2$ on).** Fix $(p,q)$ and $r>\\max(p,q+1)$. The differential out of $E_r^{p,q}$ lands in $E_r^{p+r,q-r+1}$ with $q-r+1<0$, and the differential into it starts at $E_r^{p-r,q+r-1}$ with $p-r<0$; both objects are $0$ by Step 1, so both differentials are $0$ and $E_{r+1}^{p,q}\\cong\\ker/\\operatorname{im}=E_r^{p,q}$. Hence the $E_r^{p,q}$ for $r>\\max(p,q+1)$ are identified with each other by these isomorphisms, and $E_\\infty^{p,q}$ of the statement is well defined (in Stacks' terms the subobjects $Z_r^{p,q}$, $B_r^{p,q}$ of $E_2^{p,q}$ are stationary, so this is the limit $Z_\\infty/B_\\infty$; a first-quadrant spectral sequence is bounded, hence regular and coregular). Now take $(p,q)=(n,0)$ with $n\\ge0$ and any $r\\ge2$: the differential out of $E_r^{n,0}$ lands in $E_r^{n+r,1-r}$, which is $0$ since $1-r<0$; the differential into $E_r^{n,0}$ starts at $E_r^{n-r,r-1}$, which is $0$ by Step 1 since $r-1\\ge1>0$ (the hypothesis on the rows $q>0$). So $d_r$ vanishes into and out of $E_r^{n,0}$ for every $r\\ge2$, $E_{r+1}^{n,0}\\cong E_r^{n,0}$ for every $r\\ge2$, and composing these finitely many isomorphisms up to any $r>\\max(n,1)$ gives $E_2^{n,0}\\cong E_\\infty^{n,0}$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Definition 011O (definition-limit-spectral-sequence, line 5219): limit $E_\\infty=Z_\\infty/B_\\infty$ and degeneration at $E_r$ with $E_r=E_{r+1}=\\dots=E_\\infty$; Definition 0BDU (definition-bounded-ss, line 6262) and Lemma 0BDV (lemma-relate-boundedness, line 6292), (1)-(2), (5)-(6): bounded implies regular and coregular, i.e. $Z_r^{p,q}$ and $B_r^{p,q}$ eventually constant"
-   }
-  },
-  {
-   "text": "**Step 3 (the filtration of $H^n$ collapses to its last step).** Fix $n\\ge0$. By hypothesis $H^n=F^0H^n\\supseteq\\dots\\supseteq F^{n+1}H^n=0$ with $F^pH^n/F^{p+1}H^n\\cong E_\\infty^{p,n-p}$ [def-sp-filtration]. For $0\\le p\\le n-1$ we have $n-p\\ge1$, so $E_\\infty^{p,n-p}=E_r^{p,n-p}=0$ (for $r$ large, Step 2) by Step 1. So the inclusion $F^{p+1}H^n\\to F^pH^n$ is a monomorphism with cokernel $\\operatorname{gr}^pH^n=0$, hence an epimorphism, hence an isomorphism in the abelian category $\\mathcal A$ [def-sp-abelian]; i.e. $F^{p+1}H^n=F^pH^n$ as subobjects. Composing for $p=0,\\dots,n-1$: $F^nH^n=F^0H^n=H^n$, so the inclusion $F^nH^n\\hookrightarrow H^n$ is an isomorphism. Since $F^{n+1}H^n=0$, the quotient map $F^nH^n\\to F^nH^n/F^{n+1}H^n=\\operatorname{gr}^nH^n$ is an isomorphism, and $\\operatorname{gr}^nH^n\\cong E_\\infty^{n,0}$. (For $n=0$ the chain is empty and $F^0H^0=H^0$ directly.)",
+   "text": "Apply [lem-weil-pbc-stationary-bottom-row] to the all-page support from Step 1. Take its isomorphisms a(n,r): E_2^(n,0) ≅ E_(r+2)^(n,0), whose initial value is the identity. Its bottom-row conclusion makes each actual cycle inclusion i_r invertible. Define b(n,r)=a(n,r).hom followed by the inverse cycle inclusion. Inverse cancellation gives b(n,r) followed by i_r equal to a(n,r).hom. The supplied consecutive comparison square, after cancelling i_r and a(n,r), gives b(n,r) followed by homology projection and the specified next-page isomorphism equal to a(n,r+1).hom. The page indices (r+1)+2 and r+3 agree. No separate short-complex lemma is needed in this assembly.",
    "uses": [
-    "def-sp-filtration",
-    "def-sp-abelian"
+    "lem-weil-pbc-stationary-bottom-row"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/homology.tex",
-    "place": "Definition 0121 (definition-filtered, line 4667), items (1), (7): finite filtrations and $\\operatorname{gr}^p=F^p/F^{p+1}$; Lemma 012W (lemma-biregular-ss-converges, line 6362), proof of (4): 'we can find an $r'$ such that $E_\\infty^{p,q}=E_{r'}^{p,q}$ for all $p,q$ with $p+q=n$. Thus $H^n$ has a finite filtration whose graded pieces are ...'; Lemma 0132 (lemma-first-quadrant-ss, line 6672), (2)-(3): finite filtrations and convergence in the first quadrant"
+    "place": "Tags 011N (definition-spectral-sequence), 011O (definition-limit-spectral-sequence), 0BDV (lemma-relate-boundedness): stationary comparisons and their cycle/homology maps."
    }
   },
   {
-   "text": "**Step 4 (the edge map; the particular case).** The edge map of the statement is the composite $E_2^{n,0}\\xrightarrow{\\ \\sim\\ }E_\\infty^{n,0}\\xrightarrow{\\ \\sim\\ }\\operatorname{gr}^nH^n=F^nH^n\\hookrightarrow H^n$ of the isomorphism of Step 2, the inverse of the convergence isomorphism, the identification $F^nH^n=\\operatorname{gr}^nH^n$ (as $F^{n+1}H^n=0$) and the inclusion; each is an isomorphism (Steps 2 and 3), so the edge map is an isomorphism $E_2^{n,0}\\cong H^n$ for every $n\\ge0$. If moreover $H^n=0$ for every $n>0$, then $E_2^{n,0}\\cong H^n=0$ for every $n>0$ (and conversely, if $E_2^{n,0}=0$ for $n>0$ then $H^n=0$ for $n>0$).",
-   "uses": [],
-   "elementary": true,
+   "text": "Fix n≥0. For every integer 0≤p<n, let k=p.toNat and q=n-k. Then k+q=n, q>0 and k=p as integers. Step 1 gives E_(n+2)^(k,q)=0; transport this along the supplied convergence isomorphism to obtain gr^p(F n)=0. Apply [lem-weil-pbc-finite-filtration-last-piece] with the supplied endpoint conditions, A=E_2^(n,0), B=E_(n+2)^(n,0), a=a(n,n) from Step 2, and c=conv(n,n,0). Take its unique lift f and its isomorphism e:A≅H n. The canonical quotient identity for rho identifies the lift equation with the required equation, and the canonical inclusion identity for j identifies e.hom with f followed by the inclusion. Thus that composite is invertible. The same lemma gives IsZero(H n) → IsZero(A), which proves the positive-degree vanishing corollary. This applies also to n=0, when the range 0≤p<n is empty.",
+   "uses": [
+    "lem-weil-pbc-finite-filtration-last-piece"
+   ],
+   "elementary": false,
    "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, Lemma 0A4C (lemma-sandwich), proof, second paragraph ('Using the spectral sequence ... we conclude that $R^pg'_*(f'_*a^{-1}\\mathcal J)=0$ for $p>0$'), where this conclusion is drawn without statement"
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tags 0121 (definition-filtered) and 012W (lemma-biregular-ss-converges), proof of (4), finite filtration; convergence is supplied, not inferred. Applied in Etale Cohomology Tag 0A4C (lemma-sandwich), second proof paragraph."
    }
   }
  ],
  "proof_deps": [
-  "def-sp-abelian",
-  "def-sp-filtration"
+  "lem-weil-pbc-spectral-page-zero-propagation",
+  "lem-weil-pbc-stationary-bottom-row",
+  "lem-weil-pbc-finite-filtration-last-piece"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/homology.tex",
-  "place": "Stacks states no such lemma; the proof is written from Homology, Definitions 011N, 011O, 0121, 0BDU, Lemmas 0BDV, 012W (proof of (4)), 0132, and is the inference left implicit in Etale Cohomology, Lemma 0A4C, proof"
+  "place": "Definitions 011N (definition-spectral-sequence), 011O (definition-limit-spectral-sequence), 0121 (definition-filtered); expands the row-collapse inference in Etale Cohomology Tag 0A4C (lemma-sandwich), second proof paragraph. Convergence and finite filtration are hypotheses, not an application of 0132. E4 stage-3 assembly uses the three recorded dependency theorems directly; the short-complex leaf remains within their proofs and is not cited separately here."
  },
  "mathlib_searches": [
   {
@@ -122,6 +115,55 @@
    "results": "no hit for the first pattern anywhere; second pattern only a comment in SpectralSequence/ComplexShape.lean line 24 ('spectral sequences associated to a *finite* filtration'); SpectralSequence/Basic.lean has the structure SpectralSequence, Hom, pageXIsoOfEq, pageFunctor and the abbrevs (E₂)CohomologicalSpectralSequence(Nat|Fin); IsFirstQuadrant is a class on SpectralObject C EInt whose docstring says '(convergent)' but no convergence is stated",
    "date": "2026-10-09",
    "verdict": "no match: Mathlib has (first-quadrant) spectral sequences but no limit page, abutment or convergence, so the statement is absent; confirmed"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "First quadrant cohomological spectral sequence concentrated in row zero has bottom edge isomorphism from E2 to its filtered abutment",
+   "results": "CochainComplex.ConnectData.homologyIsoPos, CochainComplex.ConnectData.homologyIsoNeg, CochainComplex.exists_iso_single, CochainComplex.isIso_homologyπ₀, HomologicalComplex.pOpcycles_singleObjOpcyclesSelfIso_inv_assoc, CochainComplex.cm5b.instQuasiIsoIntP, HomologicalComplex.singleObjOpcyclesSelfIso_hom, HomologicalComplex.singleObjOpcyclesSelfIso_hom_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pageInfinity|abutment|rowCollapse|row_collapse|degenerate|collapse",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Spectral sequence concentrated in degree zero row is canonically isomorphic to its abutment",
+   "results": "CochainComplex.fromSingle₀Equiv, CategoryTheory.ShortComplex.asIsoHomologyι.congr_simp, CategoryTheory.ShortComplex.asIsoHomologyπ, CategoryTheory.ShortComplex.cyclesIsoLeftHomology, CochainComplex.quasiIsoAt₀_iff, CategoryTheory.ShortComplex.isIso_homologyπ, ChainComplex.alternatingConstHomologyZero, CochainComplex.isoHomologyπ₀",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SpectralSequence, IsIso",
+   "results": "No hits; loogle: unknown identifier 'IsIso'",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "abut|Infinity|∞|degener|collapse|filtration",
+   "results": "Mathlib/Algebra/Homology/SpectralSequence/ComplexShape.lean",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SpectralSequence",
+   "results": "CategoryTheory.SpectralSequence, CategoryTheory.SpectralSequence.instCategory, CategoryTheory.SpectralSequence.Hom, CategoryTheory.SpectralSequence.page, CategoryTheory.SpectralSequence.pageFunctor, CategoryTheory.SpectralSequence.pageXIsoOfEq, CategoryTheory.SpectralSequence.pageFunctor_obj, CategoryTheory.SpectralSequence.Hom.hom",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a convergent spectral sequence has E2(p,q) zero for every q nonzero then H(n) is isomorphic to E2(n,0)",
+   "results": "CochainComplex.ConnectData.homologyIsoPos, groupHomology.isIso_δ_of_isZero, ChainComplex.isoHomologyι₀, HomologicalComplex.singleObjHomologySelfIso, CochainComplex.isoHomologyπ₀, HomologicalComplex.singleObjHomologySelfIso_inv_homologyι_assoc, HomologicalComplex.homologyπ_singleObjHomologySelfIso_hom_assoc, CochainComplex.isIso_homologyπ₀",
+   "date": "2026-10-22",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
@@ -132,19 +174,34 @@
   "item": "lemma-weil-pbc-cancellation",
   "date": "2026-10-09"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-reduction",
  "split_report": {
-  "date": "2026-10-09",
+  "date": "2026-10-23",
   "item": "lem-weil-pbc-first-quadrant-row-collapse",
   "worker": "stage1",
-  "summary": "Statement kept (it fixes its own convergence conventions: first quadrant, E_∞^{p,q}=E_r^{p,q} for r>max(p,q+1), finite filtration H^n=F^0⊇…⊇F^{n+1}=0 with gr^p≅E_∞^{p,n-p}); stmt_deps def-sp-abelian, def-sp-filtration kept; it deliberately does not use def-sp-convergence (exact-couple notion whose 'regular' = B_r eventually constant is Stacks' coregular, Lemma 0BDV (2)); the node needs neither regularity hypothesis, since first-quadrant gives both. Proof written in four elementary steps from Stacks Homology 011N, 011O, 0121, 0BDU/0BDV, 012W (proof of (4)), 0132: vanishing for q>0 on all pages; d_r into and out of (n,0) vanish so E_2^{n,0}=E_∞^{n,0}; gr^p H^n=0 for p<n so F^nH^n=H^n and F^nH^n=E_∞^{n,0}; the edge map and the particular case. No new nodes. Mathlib re-searched three ways (leansearch, loogle on SpectralObject.IsFirstQuadrant, leanfinder, grep): spectral sequences and first-quadrant spectral objects exist, no convergence: no match. Proof marked agent-written because Stacks uses this inference (0A4C) without stating it."
+  "summary": "Q60 repairs the returned delivery: retains the checked short-complex Mathlib leaf and creates three independent unsplit statement-only nodes for zero-page propagation, stationary bottom-row comparisons, and finite-filtration collapse with canonical composite. Every old argument is assigned to these nodes; the parent is a three-step assembly. Statement, statement dependencies and historical search/review records are unchanged. Landing-return repair of ca71bf532f9: reapply the approved split to the current live item, preserving all live statement/Lean/review metadata; revalidate all four cited child statements and their definition dependencies; clarify that the degree-zero identity is the initial comparison a_{0,2}, and give step-specific source places. The child statements and logged searches are retained unchanged. Repair of latest returned head 144ce30dceb: rebase again onto the current live item, revalidate every cited child and live definition, and explicitly record the inverse of the canonical edge composite in Step 3. All four child statements and their logged searches are unchanged.",
+  "blueprint": "The sentence in the first paragraph of main-20261015 lemma-weil-pbc-cancellation.proof.md that the spectral sequence collapses to q=0 and yields positive-degree vanishing: old Step 1 is the page-propagation node; old Step 2 is the stationary-comparison node; old Steps 3-4 are the generic finite-filtration/composite node. Parent steps assemble these, retaining the canonical cycle lifts."
  },
  "reviewed": {
-  "date": "2026-10-09",
+  "date": "2026-10-23",
   "by": "L",
-  "result": "pass"
+  "reviewer": "NT-cc-Q60-4827d9188",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-4827d9188 (reviewer sub-agent of L); spot-checked: I read the item, its 4 delivered nodes and the cited definitions in full. Cited definitions: def-sp-abelian, def-sp-filtration, and def-sp-spectral-sequence, which allows Z^2 shapes with r0=2. Sources checked: Stacks homology.tex 0BDV (l.6292 and its proof hint), 011N, 011O, 0121, 012W and 0A4C. Mathlib leaf lines checked: Homology.lean:1147 and 1152, LeftHomology.lean:486, Abelian.lean:193. Status: the live item still carries the old 4-step proof of 3274 characters, the repair note is still released, and no child node exists live or in side-live. 144ce30d was returned only because the landing refused an unpromoted side completion; the mathematics was approved. Diff against 144ce: all 4 child files are byte-identical. The item changes only in the split_report and in Step 3, which adds the inverse a_n^{-1}c rho j^{-1}; this is a correct clause of the filtration node, since the two composites cancel. Re-split test: old step 1 became the propagation node, old step 2 became the stationary node plus the Mathlib leaf, and old steps 3-4 became the finite-filtration node. The parent is a 3-step assembly of 1444 characters. No argument was dropped and no child restates the item. Math checks: for r>max(p,q+1), q-r+1<0 and p-r<0; at (n,0), 1-r<0 and r-1>=1 for every r>=2; n+2>max(n,1); n=0 gives a_{0,2}=1. In the filtration node, a mono with zero cokernel is an iso, so F^p=V for p<=n, j and rho are isos, f=rho^{-1}c^{-1}a, and V=0 forces A=0. In item Step 3, gr^p H^n=0 for n-p>0 by Step 1. No duplicate turned up in an rg -L search, no SGA source is cited, and there are no tool_uses. FIX (B1/B2): the ca71/144ce fix was lost again. The stationary node again asserts that the 'recursively formed cycle and boundary subobjects ... constant ..., so their limiting quotient is any such page'. Those subobjects are undefined, the clause is a proof fragment, and the item does not use it. I copied the prior fix file verbatim: the clause becomes 'iterated composites canonically identify all such late pages E_r^{p,q}, r>max(p,q+1), with one another', and source.place drops 'stationary cycles and boundaries'. File: fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-stationary-bottom-row.json. Advisory: Step 2's leaf citation is redundant. Maintainer: this item is stuck in a side-promotion landing loop and loses this fix on every re-push.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.FirstQuadrantRowCollapse",
@@ -163,5 +220,15 @@
   "group": "M1",
   "result": "pass",
   "note": "E₂CohomologicalSpectralSequence = SpectralSequence C (up' ⟨r,1-r⟩) 2 (d_r:(p,q)->(p+r,q-r+1)); hfirst page-2 first quadrant over all ℤ; F^0=⊤, F^{n+1}=⊥ on recorded DecreasingFiltration; conv gr^p H^n ≅ E_{n+2}^{p,q}, n+2>max(p,q+1); hrow q>0; a/b pinned by a n 0=𝟙, iCycles, homologyπ≫E.iso (unique, canonical bottom-row edge), f unique via cokernel.π, IsIso(f≫arrow) = edge map; vanishing corollary for n>0; names checked by env lookup"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261026T081609-L-2017653",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,297 @@
+{
+ "id": "lem-sfb-flat-space-fibre-dimension-lower-semicontinuous",
+ "kind": "statement",
+ "title": "Lower semicontinuity of fibre dimension for flat finitely presented algebraic spaces",
+ "statement": "Let $T$ be a scheme [def-pc-scheme] and let $f:X\\to T$ be a morphism from an algebraic space [def-trf-algebraic-space]. For $t\\in T$ put $X_t=X\\times_T\\operatorname{Spec}\\kappa(t)$, using the residue field and its canonical point map [def-weil-residue-field, def-weil-affine-spectrum] and sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Define $n_f(t)$ as the supremum of the topological Krull dimensions [def-kun-topological-krull-dimension] of all affine schemes with a representable etale map to $X_t$; the empty fibre has dimension $-\\infty$. Assume $f$ is flat and of finite presentation: flatness and local finite presentation are tested on etale scheme charts [def-weil-flat-morphism, def-sbc-locally-finite-presentation], and finite presentation additionally requires quasi-compactness and quasi-separatedness. Here quasi-compactness means that pullback to a quasi-compact scheme has a quasi-compact scheme atlas, and quasi-separatedness means that the diagonal is quasi-compact. Then $n_f(t)\\in\\{-\\infty,0,1,2,\\ldots\\}$ for every $t$, and for each integer $a\\geq-1$ the set $\\{t\\in T:n_f(t)>a\\}$ is open. No properness, nonemptiness or equidimensionality assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0D4P (lemma-dimension-fibres-flat), restricted to a scheme target; fibre dimension is computed on affine etale charts."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-residue-field",
+  "def-weil-affine-spectrum",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-kun-topological-krull-dimension",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "Cover $T$ by affine opens $V$. The pullback $X_V=X\\times_TV$ has a quasi-compact scheme atlas by the quasi-compactness hypothesis on $f$. By [lem-trf-space-qc-finite-affine-atlas-refinement] choose a representable surjective etale map $p:U\\to X_V$ with $U$ affine. View $U\\to X$ as an etale chart lying above the etale target chart $V\\to T$. The hypothesis that flatness and local finite presentation are tested on compatible etale scheme charts says directly that $g:U\\to V$ is flat and locally of finite presentation. No composition or descent theorem for flatness is being presumed here. For $t\\in V$, fibre-product pasting identifies $(X_V)_t$ with $X_t$ and the base-changed atlas $p_t:U_t\\to X_t$ is surjective etale by [lem-trf-space-fibre-products-etale-covers]. The pointwise statements over $V$ therefore concern the original fibres.",
+   "uses": [
+    "lem-trf-space-qc-finite-affine-atlas-refinement",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0D4P, lemma-dimension-fibres-flat, scheme-target and affine-source reduction"
+   }
+  },
+  {
+   "text": "We verify the dimension convention rather than assuming it. Write $d_t=\\dim|X_t|$. Apply [lem-sfb-space-etale-atlas-topological-dimension] with $B=T$, the original quasi-separated $f$, and $\\operatorname{Spec}\\kappa(t)\\to T$: it gives $d_t=\\dim U_t$. The scheme $U_t$ is affine by [lem-weil-pbc-fibre-product-affine-spectra], since $U,V$ are affine. Thus $U_t$ itself is among the affine charts whose dimensions define $n_f(t)$, giving $d_t\\leq n_f(t)$. Conversely, for any affine etale chart $W\\to X_t$, form the scheme atlas $W\\amalg U_t\\to X_t$. This is etale because each scheme test is the disjoint union of the two etale projections, and is surjective because its second summand is. The finite coproduct construction is [lem-weil-pbc-finite-affine-coproduct-spectrum]; its two summands are open (the two complementary idempotents in the product ring give their principal opens). The same atlas-dimension lemma and [lem-weil-pbc-open-subspace-dimension-monotone] give $\\dim W\\leq\\dim(W\\amalg U_t)=d_t$. Taking the supremum proves $n_f(t)=d_t=\\dim U_t$, including the empty case.",
+   "uses": [
+    "lem-sfb-space-etale-atlas-topological-dimension",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "lem-weil-pbc-open-subspace-dimension-monotone"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0D4P, lemma-dimension-fibres-flat, scheme-target and affine-source reduction"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-lfp-affine-opens-finite-presentation], the ring map $A\\to B$ for $g:U\\to V$, $U=\\operatorname{Spec}B$, $V=\\operatorname{Spec}A$, has a presentation $B=A[z_1,\\ldots,z_r]/(h_1,\\ldots,h_s)$. Let $V'=\\operatorname{Spec}A'\\subseteq V$ be any affine open. Its preimage $g^{-1}(V')$ is the fibre product $U\\times_VV'$ (an open immersion pulls back to the inclusion of the preimage), which is $\\operatorname{Spec}(B\\otimes_AA')$ by [lem-weil-pbc-fibre-product-affine-spectra]. Hence $g$ is affine in the sense of [pqf-def-affine-morphism], and $B\\otimes_AA'$ is generated as an $A'$-algebra by the finitely many images $z_i\\otimes1$, so $g$ is locally of finite type in [def-weil-finite-type-morphism]. By [lem-weil-pbc-affine-morphism-permanence] (3), $g$ is quasi-compact; it is of finite type. The affine base $V$ is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. Apply [lem-fin-finite-type-fibre-dimension-bound] to obtain an integer bound on every $\\dim U_t$. Together with step 2 this proves the asserted value range: a nonempty fibre has a finite nonnegative integer dimension and an empty one has $-\\infty$.",
+   "uses": [
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "pqf-def-affine-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-fin-finite-type-fibre-dimension-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01TQ (lemma-locally-finite-presentation-characterize) and 0A3V (lemma-morphism-finite-type-bounded-dimension)"
+   }
+  },
+  {
+   "text": "Fix $t\\in V$ with $n_f(t)=n>a$, where $a\\geq-1$. By step 3, $n\\geq0$. The fibre $U_t$ is a finite type scheme over $\\kappa(t)$: its affine ring is obtained from the displayed finite presentation by tensoring with $\\kappa(t)$ and has the same finite list of algebra generators. By [lem-weil-pbc-dimension-supremum-local-dimensions], some point $x$ has $\\dim_x U_t=n$; a supremum of nonnegative integers bounded by the integer $n$ and equal to $n$ must attain $n$. By [lem-trf-locally-algebraic-dimension-components] choose a component $C$ through $x$ of dimension $n$. By [lem-weil-pbc-scheme-sober] it has a generic point $\\eta$. Any irreducible component containing $\\eta$ contains $\\overline{\\{\\eta\\}}=C$ and therefore equals $C$ by maximality. Applying the same component-dimension formula at $\\eta$ gives $\\dim_\\eta U_t=\\dim C=n$.",
+   "uses": [
+    "lem-weil-pbc-dimension-supremum-local-dimensions",
+    "lem-trf-locally-algebraic-dimension-components",
+    "lem-weil-pbc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0D4H (lemma-dimension-fibres-flat), point in the dimension-n piece; expanded using varieties.tex Tag 0B1B (lemma-dimension-locally-algebraic, item-dimension-irreducibles-passing-through)"
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-flat-fibre-dimension-strata] to $g:U\\to V$ and the whole open $V$. Its hypotheses hold by step 1. The point $\\eta$ is generic in a component of its ordinary fibre by step 4, so it lies in one of the opens $H_m\\subseteq U$ supplied there. Its local fibre dimension is both $m$ and $n$, so $m=n$. Let $N=g(H_n)$. By [lem-weil-pbc-flat-lfp-open], $g$ is an open map, hence $N$ is an open neighbourhood of $t$ in $V$. For $s\\in N$, choose $y\\in H_n$ with $g(y)=s$. The strata statement gives $\\dim_y U_s=n$. By [lem-weil-pbc-dimension-supremum-local-dimensions], $\\dim U_s\\geq n>a$. Step 2 identifies this with $n_f(s)$. Thus $N\\subseteq\\{s:n_f(s)>a\\}$.",
+   "uses": [
+    "lem-sbc-flat-fibre-dimension-strata",
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-weil-pbc-dimension-supremum-local-dimensions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0D4H (lemma-dimension-fibres-flat), constant dimension opens and their images; Tags 054T and 054U for the generic-point opens; morphisms.tex Tag 01UA (lemma-fppf-open)"
+   }
+  },
+  {
+   "text": "For each affine $V\\subseteq T$, step 5 supplies an open neighbourhood inside the strict superlevel set at every point of that set in $V$. Therefore its intersection with $V$ is open in $V$. Since $V$ is open in $T$ and these affine opens cover $T$, the strict superlevel set is their union of such neighbourhoods and is open in $T$. When $a=-1$ this is precisely the nonempty-fibre locus; empty fibres contribute no points. If $T$ is empty all assertions are vacuous. The value-range assertion is also local on this cover, so step 3 proves it on all of $T$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0D4P, lemma-dimension-fibres-flat, scheme-target and affine-source reduction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-qc-finite-affine-atlas-refinement",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-etale-atlas-topological-dimension",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "lem-weil-pbc-open-subspace-dimension-monotone",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "pqf-def-affine-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-weil-pbc-dimension-supremum-local-dimensions",
+  "lem-trf-locally-algebraic-dimension-components",
+  "lem-weil-pbc-scheme-sober",
+  "lem-sbc-flat-fibre-dimension-strata",
+  "lem-weil-pbc-flat-lfp-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0D4P, lemma-dimension-fibres-flat, scheme-target and affine-source reduction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a flat finitely presented morphism of algebraic spaces fibre dimension is lower semicontinuous",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.Flat.generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then the underlying continuous map $ f $ satisfies the generalizing property: for any $ x \\\\in X $ and $ y \\\\in Y $ such that $ y $ specializes to $ f(x\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to Z $ is als\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphism properties, smooth relative dimension, module ranks or general semicontinuity; none states semicontinuity of fibre Krull dimension for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The locus where a flat finitely presented family has fibre dimension greater than an integer is open",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"Module.isOpen_freeLocus\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [Module.FinitePresentation R M], IsOpen (Module.freeLocus R M)\", \"doc\": \"For a finitely presented module $ M $ over a commutative ring $ R $, the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R) $ where the localization $ M_{\\\\mathfrak{p}} $ is a free module ov\"}\n  {\"name\": \"Algebra.isOpen_unramifiedLocus\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A], IsOpen (Algebra.unramifiedLocus R A)\", \"doc\": \"If $ A $ is a commutative ring of essential finite type over a commutative ring $ R $, then the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A) $ where $ A $ is unramified over $ R $ for\"}\n  {\"name\": \"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base) →\\n    IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If a morphism of schemes is locally of finite presentation and a generalizing map, then it is an open map.\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f] [CategoryTheory.Mono f], AlgebraicGeometry.IsOpenImmersion f\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, locally of finite presentation, and a monomorphism, then $ f $ is an open immersion. This means the underlying continuous map is a topological open emb\"}\n  {\"name\": \"AlgebraicGeometry.Polynomial.isOpen_imageOfDf\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/IsOpenComapC\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {f : Polynomial R}, IsOpen (AlgebraicGeometry.Polynomial.imageOfDf f)\", \"doc\": \"For any polynomial $ f $ over a commutative semiring $ R $, the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R) $ such that at least one coefficient of $ f $ is not contained in $ \\\\mathf\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphism properties, smooth relative dimension, module ranks or general semicontinuity; none states semicontinuity of fibre Krull dimension for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LowerSemicontinuous\", \"AlgebraicGeometry\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphism properties, smooth relative dimension, module ranks or general semicontinuity; none states semicontinuity of fibre Krull dimension for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerSemicontinuous.*dim|dim.*lowerSemicontinuous|dimensionFib|fiberDim",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphism properties, smooth relative dimension, module ranks or general semicontinuity; none states semicontinuity of fibre Krull dimension for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a flat finitely presented morphism of algebraic spaces fibre dimension is lower semicontinuous",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.isLocallyConstant_rankAtStalk\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \"[Module.FinitePresentation R M] [Module.Flat R M] : IsLocallyConstant (rankAtStalk (R := R) M)\", \"doc\": \"If $ M $ is a finitely presented and flat module over a commutative semiring $ R $, then the function assigning to each prime ideal $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R) $ the rank of the localiza\"}\n  {\"name\": \"AlgebraicGeometry.Flat.stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"[Flat f] (x : X) : (f.stalkMap x).hom.Flat\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. Then for any point $x \\\\in X$, the induced ring homomorphism on stalks, $f_x^\\\\sharp: \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$, is a flat ring homomo\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatMono\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [Flat f] [LocallyOfFinitePresentation f] [Mono f] : IsOpenImmersion f\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, locally of finite presentation, and a monomorphism, then $ f $ is an open immersion. This means the underlying continuous map is a topological open emb\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for any affine open subset $ U \\\\subseteq Y $ and affine open subset $ V \\\\subseteq X $ satisfying $ V \\\\subseteq f^{-1}(U) $, the induced ring homo\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[IsSmoothOfRelativeDimension n f] : IsSmooth f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is smooth of relative dimension $ n $, then $ f $ is smooth.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphism properties, smooth relative dimension, module ranks or general semicontinuity; none states semicontinuity of fibre Krull dimension for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat finitely presented morphism of algebraic spaces the dimension of the fibres is lower semicontinuous",
+   "results": "UniversallyOpen.of_flat, Flat.generalizingMap, Flat, IsSmoothOfRelativeDimension, flat descent and permanence declarations; no algebraic-space fibre-dimension theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The sets of base points where a flat family has fibre dimension greater than n are open",
+   "results": "UniversallyOpen.of_flat plus manifold immersion, linear-map rank and fibre-bundle base-open results; none gives fibre Krull dimension.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LowerSemicontinuous\", \"AlgebraicGeometry\"",
+   "results": "OK 0 hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerSemicontinuous.*dim|dim.*lowerSemicontinuous|dimensionFib|fiberDim",
+   "results": "OK 0 hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-flat-space-fibre-dimension",
+  "date": "2026-10-23",
+  "group": "Q67"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E6I proof, the dimension-one open locus, with arbitrary-base-change invariance. Supporting input: Stacks 0D4P, lemma-dimension-fibres-flat, the lower semicontinuity half of the proof of 0D4R.",
+   "via": [
+    "lem-sfb-proper-flat-space-fibre-dimension",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-flat-space-fibre-dimension-lower-semicontinuous",
+  "worker": "stage1",
+  "summary": "Q75 follows Stacks 0D4P affine-atlas reduction and expands the scheme proof 0D4H using existing constant-fibre-dimension opens and flat-lfp openness. Verifies the supremum-over-affine-charts convention by comparing two atlases, proves finite fibre dimension, and treats empty fibres and the threshold -1. Statement unchanged; no new nodes.",
+  "blueprint": "Current latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md (3), supporting dimension input in the recorded alteration/plurinodal prerequisite chain; realizes the inherited 0D4P lower-semicontinuity place without changing the chapter or unit route. The inherited nearest blueprint ancestor is null (tools/blueprint_refs.py ancestor), retained.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-qc-finite-affine-atlas-refinement",
+    "why": "Generic atlas, dimension or fibre-stratification input used exactly as stated in the Stacks 0D4P/0D4H reduction; no node of this unit supplies this auxiliary fact."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic atlas, dimension or fibre-stratification input used exactly as stated in the Stacks 0D4P/0D4H reduction; no node of this unit supplies this auxiliary fact."
+   },
+   {
+    "node": "lem-fin-finite-type-fibre-dimension-bound",
+    "why": "Generic atlas, dimension or fibre-stratification input used exactly as stated in the Stacks 0D4P/0D4H reduction; no node of this unit supplies this auxiliary fact."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-supremum-local-dimensions",
+    "why": "Generic atlas, dimension or fibre-stratification input used exactly as stated in the Stacks 0D4P/0D4H reduction; no node of this unit supplies this auxiliary fact."
+   },
+   {
+    "node": "lem-trf-locally-algebraic-dimension-components",
+    "why": "Generic atlas, dimension or fibre-stratification input used exactly as stated in the Stacks 0D4P/0D4H reduction; no node of this unit supplies this auxiliary fact."
+   },
+   {
+    "node": "lem-sbc-flat-fibre-dimension-strata",
+    "why": "Generic atlas, dimension or fibre-stratification input used exactly as stated in the Stacks 0D4P/0D4H reduction; no node of this unit supplies this auxiliary fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-qc-finite-affine-atlas-refinement",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-weil-pbc-dimension-supremum-local-dimensions",
+  "lem-trf-locally-algebraic-dimension-components",
+  "lem-sbc-flat-fibre-dimension-strata"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-b8596c9e0",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-b8596c9e0 (reviewer sub-agent of L); spot-checked: Read Stacks 0D4P (spaces-more-morphisms 7203-7224), the scheme lemma-dimension-fibres-flat (more-morphisms 8491-8512) and every cited statement. The item's statement and stmt_deps are unchanged and there are no new nodes; live and side-live still show the item unsplit, so no other group has superseded it. Steps 1, 2 and 4-6 are correct. Step 1: the 03H6 refinement gives one affine U (Spec 0 if X_V is empty), the chart-test hypothesis gives g flat and lfp, and 02X2 base change makes U_t -> X_t surjective etale. Step 2: the atlas-dimension node applies because f is quasi-separated; the W coproduct U_t argument with open monotonicity gives n_f(t)=dim U_t. Step 4: 0B7I gives a point where the maximum is attained, 0B1B gives a component C of dimension n through it, and C's generic point has local dimension n, with no equidimensionality used. Step 5: 054T/054U strata plus flat-lfp openness match 0D4H exactly. Fault C1/C3, fixed in step 3: the claim that g is affine rested on principal opens only (locality on the target, 01S8, has no node), and local finite type for every affine V' was asserted from the global generators alone. The repair writes g^-1(V') = U x_V V' = Spec(B tensor_A A') by 01I4 and cites pqf-def-affine-morphism; it adds those two nodes to the step's uses and pqf-def-affine-morphism to proof_deps. Batch-5 check: lem-trf-space-qc-finite-affine-atlas-refinement (03H6), lem-sfb-space-etale-atlas-topological-dimension (0A4J/0A4H; its closure reaches only generic space and descent lemmas and generic pod module lemmas) and lem-trf-locally-algebraic-dimension-components (0B1B) are generic foundations. None is a step of the trace formula or of Poincare duality, and neither assumption gives them, so I accepted them. tool_uses (0A3V, 054T, trf atlas and fibre products, 0B1B) are accepted as generic. Small cases checked: T empty, X empty, the identity, A^n, an open immersion with a=-1, and A^2 disjoint union a point. No cycle, no SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatSpaceFibreDimensionLowerSemicontinuous",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.affineEtaleFibreDimension_finite_isOpen_of_flat",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.affineEtaleFibreDimension",
+   "AlgebraicGeometry.AlgebraicSpace.affineEtaleFibreDimension_finite_isOpen_of_flat"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatSpaceFibreDimensionLowerSemicontinuous.lean",
+  "statement": "theorem affineEtaleFibreDimension_finite_isOpen_of_flat {S : Scheme.{u}} (X : AlgebraicSpace S) (T : Over S) (f : X.obj.obj ⟶ yoneda.obj T) (hflat : MapToSchemeIsLocally (@Flat) X T f) (hlfp : MapToSchemeIsLocally (@LocallyOfFinitePresentation) X T f) (hqc : MapIsQuasiCompact f) (hqs : MapIsQuasiCompact (pullback.diagonal f)) : (∀ t : T.left, affineEtaleFibreDimension X T f t = ⊥ ∨ ∃ n : ℕ, affineEtaleFibreDimension X T f t = (n : WithBot ℕ∞)) ∧ (∀ a : ℤ, -1 ≤ a → IsOpen {t : T.left | ((a + 1).toNat : WithBot ℕ∞) ≤ affineEtaleFibreDimension X T f t})",
+  "branch": "sheaf-dag",
+  "by": "Q08",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The helper is the node's stipulated supremum over affine representable etale charts of the actual residue-field sheaf fibre product. MapToSchemeIsLocally and MapIsQuasiCompact, including quasi-compactness of pullback.diagonal f, come from def-sfb-proper-curve-moduli. For a >= -1 and finite-or-bottom dimension, the displayed (a+1).toNat lower bound is exactly the strict integer superlevel condition, including a=-1. Repairs H2/H4 of the returned head 6e5fc9bc3d46 by using this definition-node interface and removing the theorem-node dependency."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a6a7d5fa4",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Re-delivery fixes the H2/H4 return of 6e5fc9bc exactly: hqc/hqs now use MapIsQuasiCompact f / MapIsQuasiCompact (pullback.diagonal f) from def-sfb-proper-curve-moduli (lean record lists MapIsQuasiCompact and MapToSchemeIsLocally); theorem node lem-trf-space-qc-separated-etale-local and its import removed. Node diff vs side-live: only the lean record and stmt_deps +def-sfb-proper-curve-moduli. lean.statement verbatim. affineEtaleFibreDimension is a real supremum over affine IsEtale charts of the residue-field presheaf pullback; empty fibre gives bottom. Conclusions checked: values ⊥ or a natural number (no ⊤); (a+1).toNat ≤ d ⟺ d > a for a ≥ -1, including a = -1. No extra assumptions; matches Stacks 0D4P (spaces-more-morphisms 7203-7224). No competing definition; proof-dependency imports exist. Edge cases checked: empty T, empty X, identity, open immersion, A²⊔point. Only sorry; docstrings carry source and blueprint; Worker report and Second reading sections present. No file changed, nothing compiled."
+ }
+}

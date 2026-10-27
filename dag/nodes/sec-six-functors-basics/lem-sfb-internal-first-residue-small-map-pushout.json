@@ -1,0 +1,95 @@
+{
+ "id": "lem-sfb-internal-first-residue-small-map-pushout",
+ "kind": "statement",
+ "title": "Small-site transport of the first-residue pushout",
+ "statement": "theorem internal_first_residue_smallMap_pushout\n    (X : Scheme.{u})\n    {R B S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}\n    [MonObj R] [MonObj B] [MonObj S]\n    [IsCommMonObj R] [IsCommMonObj B] [IsCommMonObj S]\n    (f : R ⟶ B) [IsMonHom f] (q : R ⟶ S) [IsMonHom q]\n    (p : B ⟶ S) [IsMonHom p]\n    (h : IsPushout f q p (𝟙 _)) :\n    IsPushout (IntegralModelsStacks.smallMap X f)\n      (IntegralModelsStacks.smallMap X q)\n      (IntegralModelsStacks.smallMap X p) (𝟙 _)",
+ "stmt_deps": [
+  "def-sfb-integral-models-stacks-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models.proof.md",
+  "place": "section-ring reconstruction and AsSmall transport"
+ },
+ "proof": [
+  {
+   "text": "In the preadditive category of abelian sheaves, f is epi. Indeed, if f ≫ g = 0, the pushout descendent for (g, 0) is zero because its composite with the identity lower edge is zero. Its composite with p is g, hence g = 0. Apply Preadditive.epi_of_cancel_zero.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The section-ring reconstruction forgets definitionally to the original additive sheaf and additive map. The faithful functor sheafCompose with forget₂ CommRingCat RingCat ⋙ forget₂ RingCat Ab reflects epimorphisms, so sectionMap X f is epi. Both AsSmall.down and AsSmall.up are continuous for the transported topology. Apply Adjunction.sheafPushforwardContinuous to the inverse AsSmall equivalence adjunction. Thus the small-site pushforward is a left adjoint and preserves epimorphisms, so smallMap X f is epi.",
+   "uses": [
+    "def-sfb-integral-models-stacks-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the small-site pushforward functor to the reconstructed equality f ≫ p = q from the original commutative square. This gives the required commutative square with lower identity. Apply Mathlib IsPushout.of_horiz_isIso_epi to its epi top edge and identity lower edge.",
+   "uses": [
+    "def-sfb-integral-models-stacks-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-integral-models-stacks-data"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "J1",
+  "date": "2026-10-26",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models.proof.md",
+  "place": "section-ring reconstruction and AsSmall transport; identity-edge epimorphism argument written by J1"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProEtale.InternalFirstResidueRingPushout",
+  "date": "2026-10-26",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-internal-first-residue-ring-pushout",
+   "place": "section-ring reconstruction and AsSmall transport",
+   "via": [
+    "lem-sfb-internal-first-residue-ring-pushout"
+   ]
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-pf-adic",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProEtale.InternalFirstResidueSmallMapPushout",
+  "file": "lean/Sheaf/SixFunctors/ProEtale/InternalFirstResidueSmallMapPushout.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.internal_first_residue_smallMap_pushout",
+  "statement": "theorem internal_first_residue_smallMap_pushout\n    (X : Scheme.{u})\n    {R B S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}\n    [MonObj R] [MonObj B] [MonObj S]\n    [IsCommMonObj R] [IsCommMonObj B] [IsCommMonObj S]\n    (f : R ⟶ B) [IsMonHom f] (q : R ⟶ S) [IsMonHom q]\n    (p : B ⟶ S) [IsMonHom p]\n    (h : IsPushout f q p (𝟙 _)) :\n    IsPushout (IntegralModelsStacks.smallMap X f)\n      (IntegralModelsStacks.smallMap X q)\n      (IntegralModelsStacks.smallMap X p) (𝟙 _)",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261026T003112-L-146756",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261026T023331-L-544795",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

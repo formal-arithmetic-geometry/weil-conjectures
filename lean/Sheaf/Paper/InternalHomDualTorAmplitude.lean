@@ -14,32 +14,15 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 public import WeilConjectures.CategoryTheory.ModuleObjects.Free
 
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Sites.Proetale
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
-import Sheaf.Algebra.Homology.RingedInternalHomSignedCalculus
-import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
-import Sheaf.Paper.CoefficientRingedTensorHomModel
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Paper.CoefficientHomRepresentativeEvaluation
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
-import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
-import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
-import WeilConjectures.Algebra.Homology.BoundedExactTermHomQuasiIso
-import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-import WeilConjectures.Algebra.Homology.HomComplex
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
-import Sheaf.Algebra.Homology.RingedSiteTorFlatModel
-import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
-import Sheaf.Paper.ModuleObjectRingedSiteDerivedComparison
+import Sheaf.Paper.FiniteAffineProEtaleRefinement
+import Sheaf.Paper.ScalarPerfectChartTorVanishing
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Conservative
+import Mathlib.Data.Finset.Max
 
 /-!
 # Finite Tor amplitude of locally constant perfect duals
 
-Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
+Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
   sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.proof.md,
   paragraph 2 final sentence and paragraph 3 parenthetical
   (blueprint: lem-sfb-internal-hom-dual-tor-amplitude).
@@ -52,7 +35,7 @@ set_option autoImplicit false
 universe u
 
 open CategoryTheory CategoryTheory.Limits
-open scoped CategoryTheory.Obj
+open scoped CategoryTheory.Obj ZeroObject
 
 namespace AlgebraicGeometry.ProEtale
 
@@ -102,36 +85,74 @@ noncomputable def relativeInternalHomDual
   ((CondensedRing.derivedHom Λ.X S).obj (Opposite.op P)).obj
     ((DerivedCategory.singleFunctor _ 0).obj (Mod.regular (condensedRingObj Λ.X S)))
 
+/-- Vanishing on original charts is detected by a covering refinement of those charts.
+The covering sieve at a test object is given by the affine-refinement base changes;
+each arrow factors through an original chart. Source: Stacks 04TQ.
+(blueprint: lem-sfb-internal-hom-dual-tor-amplitude). -/
+private theorem isZero_sheaf_of_refined_cover
+    {S : Scheme.{u}} {I : Type*} {J : Type*}
+    (U : I → S.ProEt) (α : J → I) (V : ∀ j, (U (α j)).left.Opens)
+    (hcover : Presieve.ofArrows (fun j ↦ (V j).toScheme)
+      (fun j ↦ (V j).ι ≫ (U (α j)).hom) ∈ Scheme.proetalePrecoverage S)
+    (M : Sheaf (Scheme.ProEt.topology S) Ab.{u + 1})
+    (hM : ∀ j, IsZero ((upperStar Ab.{u + 1} (U (α j)).hom).obj M)) :
+    IsZero M := by
+  let z : M ⟶ 0 := 0
+  have hz (j : J) : IsIso
+      ((localizationRestriction Ab.{u + 1} (U (α j)).hom inferInstance).map z) := by
+    have : (localizationRestriction Ab.{u + 1} (U (α j)).hom inferInstance).Additive :=
+      ⟨fun {_ _} f g ↦ by ext T; rfl⟩
+    have h := (hM j).of_iso
+      ((upperStarIsoLocalizationRestriction Ab.{u + 1} (U (α j)).hom inferInstance).app M).symm
+    exact h.isIso
+      ((localizationRestriction Ab.{u + 1} (U (α j)).hom inferInstance).map_isZero
+        (isZero_zero _)) _
+  have : IsIso z := by
+    apply Sheaf.isIso_of_isIso_app_of_mem _ z
+    intro T
+    refine ⟨_, Scheme.ProEt.ofArrows_baseChange_mem_topology T
+      (fun j ↦ (V j).ι ≫ (U (α j)).hom) hcover, ?_⟩
+    rintro W f ⟨-, a, -, ⟨j⟩, rfl⟩
+    apply isIso_app_of_isIso_localizationRestriction Ab.{u + 1} z
+      (U (α j)).hom (hz j) W
+      (a.left ≫ pullback.snd T.hom ((V j).ι ≫ (U (α j)).hom) ≫ (V j).ι)
+    rw [Category.assoc, Category.assoc, ← pullback.condition, ← Category.assoc]
+    exact MorphismProperty.Over.w a
+  exact (isZero_zero _).of_iso (asIso z)
+
+/-- The empty-cover sheaf condition makes every abelian sheaf on the empty scheme zero.
+Source: Stacks 098K, empty covering; the existing pro-etale terminal-sections theorem.
+(blueprint: lem-sfb-internal-hom-dual-tor-amplitude). -/
+private theorem isZero_sheaf_on_empty
+    (S : Scheme.{u}) [IsEmpty S]
+    (M : Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) : IsZero M := by
+  apply Sheaf.isZero_of_isZero_obj
+  intro U
+  have : IsEmpty U.unop.left := ⟨fun x ↦ isEmptyElim (show S from U.unop.hom x)⟩
+  exact (Scheme.ProEt.isTerminalSectionsOfIsEmpty M U.unop).isZero
+
 /-- The dual of a pro-etale locally constant perfect complex has finite Tor amplitude.
-Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
+Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
   sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.proof.md, paragraphs 2--3
 (blueprint: lem-sfb-internal-hom-dual-tor-amplitude).
 
-Proof plan, following all seven steps of the DAG node:
-1. Use lem-sfb-module-object-ringed-site-derived-comparison to identify module objects with
-   modules on the ringed site, preserving tensor, internal Hom and slice restriction.
-2. For the empty scheme take `[0,0]`. Otherwise quasi-compactness and the fpqc covering
-   condition give a nonempty finite covering refinement. Take the minimum lower bound and
-   maximum upper bound of its bounded coefficient models.
-3. Pull back their degreewise finite-projective splittings. Each term is a retract of a
-   finite free coefficient module, so tensor and internal Hom out of it are exact
-   (lem-sc-finite-free-internal-hom-exact).
-4. Use lem-weil-pbc-ringed-internal-hom-exact-restriction and
-   lem-pc-bounded-exact-term-hom-quasi-iso to compute the restricted dual by the signed
-   Hom complex into B[0]. Its n-th term is Hom(E^(-n),B), with differential
-   phi mapped to (-1)^(n+1) phi composed with d_E^(-n-1), and interval `[-b_j,-a_j]`.
-5. Dualizing the splittings shows the dual terms are finite-free retracts and flat.
-   Apply lem-sp-ringed-site-tor-flat-model to both bounded flat models.
-6. Exact slice restriction commutes with cohomology and derived tensor, by
-   lem-pur-site-restriction-module-adjunction-exact and
-   lem-weil-pbc-ringed-topoi-derived-tensor-pullback. Test the local bounds on N restricted
-   to each chart, and enlarge to the common intervals `[a,b]` and `[-b,-a]`.
-7. Apply lem-sfb-sheaf-cover-local-isomorphism to each cohomology sheaf mapped to zero.
-   Transport the resulting global vanishings back to module objects. The bounds were
-   chosen before N, so they give finite Tor amplitude as in sk-def-sfb-constructible.
+Proof:
+1. On the empty scheme all sections of every abelian sheaf are terminal, so every
+   module object is zero. Take the interval [0,0].
+2. Otherwise use finite_affine_proetale_refinement to select finitely many original
+   charts whose affine opens cover S. Replace the bounds of the selected scalar
+   models by their minimum and maximum, then take the minimum lower endpoint and
+   maximum upper endpoint over the finite nonempty index set.
+3. Apply scalarPerfect_chart_tor_vanishing to each selected original chart, with
+   its fixed ordered model interval. Widen its two vanishings to the common
+   interval and its reflection. The bounds do not depend on the test module.
+4. Apply the sheaf local-isomorphism criterion to each cohomology sheaf mapped
+   to zero. The affine refinement covers every test object by base change, and
+   its arrows factor through the selected original charts. Faithfulness of the
+   module forgetful functor reflects zero to module objects.
 
-The hypothesis `_hΛ` is the recorded six-case admissible coefficient predicate, including
-all continuous functions into the algebraic closure with its specified topology. -/
+The hypothesis `_hΛ` is the recorded six-case admissible coefficient predicate. Its
+admissibility and the separatedness assumptions are not needed by this argument. -/
 theorem internalHom_dual_tor_amplitude
     (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
     [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
@@ -172,6 +193,66 @@ theorem internalHom_dual_tor_amplitude
               (relativeInternalHomDual Λ S P)).obj
               ((DerivedCategory.singleFunctor _ 0).obj N)))) ∧
       (IsEmpty S → a = 0 ∧ b = 0) := by
-  sorry
+  classical
+  by_cases hS : IsEmpty S
+  · let := hS
+    refine ⟨0, 0, le_rfl, ?_, ?_, fun _ ↦ ⟨rfl, rfl⟩⟩
+    · intro N q _
+      apply (IsZero.iff_id_eq_zero _).2
+      apply (Mod.forget _).map_injective
+      exact (isZero_sheaf_on_empty S _).eq_of_src _ _
+    · intro N q _
+      apply (IsZero.iff_id_eq_zero _).2
+      apply (Mod.forget _).map_injective
+      exact (isZero_sheaf_on_empty S _).eq_of_src _ _
+  · have : Nonempty S := not_isEmpty_iff.mp hS
+    have : CompactSpace S := QuasiCompact.compactSpace_of_compactSpace
+      (S ↘ Spec (.of k))
+    obtain ⟨𝒰, h𝒰⟩ := hP
+    choose F hb hp hG he using h𝒰
+    choose lo hi hF using hb
+    have (i : 𝒰.I₀) : WeaklyEtale (𝒰.f i) := 𝒰.forgetQc.map_prop i
+    let U : 𝒰.I₀ → S.ProEt := fun i ↦ Scheme.ProEt.mk (𝒰.f i)
+    obtain ⟨n, hn, α, V, _, hcover⟩ :=
+      Scheme.finite_affine_proetale_refinement S 𝒰.I₀ U 𝒰.mem₀
+    have : Nonempty (Fin n) := ⟨⟨0, hn⟩⟩
+    let l : Fin n → ℤ := fun j ↦ min (lo (α j)) (hi (α j))
+    let h : Fin n → ℤ := fun j ↦ max (lo (α j)) (hi (α j))
+    obtain ⟨ja, _, hja⟩ := Finset.exists_min_image Finset.univ l Finset.univ_nonempty
+    obtain ⟨jb, _, hjb⟩ := Finset.exists_max_image Finset.univ h Finset.univ_nonempty
+    have hlh (j : Fin n) : l j ≤ h j := min_le_max
+    have hab : l ja ≤ h jb := (hlh ja).trans (hjb ja (Finset.mem_univ _))
+    have hlocal (j : Fin n) := scalarPerfect_chart_tor_vanishing Λ (𝒰.f (α j)) P
+      (F (α j)) (l j) (h j) (hlh j)
+      (fun q hq ↦ hF (α j) q (by
+        rcases hq with hq | hq
+        · exact Or.inl (hq.trans_le (min_le_left _ _))
+        · exact Or.inr ((le_max_right _ _).trans_lt hq)))
+      (hp (α j)) (hG (α j)) (he (α j))
+    refine ⟨l ja, h jb, hab, ?_, ?_, fun he ↦ (hS he).elim⟩
+    · intro N q hq
+      apply (IsZero.iff_id_eq_zero _).2
+      apply (Mod.forget _).map_injective
+      have hz := isZero_sheaf_of_refined_cover U α V hcover
+        (((DerivedCategory.homologyFunctor _ q).obj
+          (((CondensedRing.derivedTensor Λ.X S).obj P).obj
+            ((DerivedCategory.singleFunctor _ 0).obj N))).X) (fun j ↦ ?_)
+      · exact hz.eq_of_src _ _
+      · apply (hlocal j N q).1
+        rcases hq with hq | hq
+        · exact Or.inl (hq.trans_le (hja j (Finset.mem_univ _)))
+        · exact Or.inr ((hjb j (Finset.mem_univ _)).trans_lt hq)
+    · intro N q hq
+      apply (IsZero.iff_id_eq_zero _).2
+      apply (Mod.forget _).map_injective
+      have hz := isZero_sheaf_of_refined_cover U α V hcover
+        (((DerivedCategory.homologyFunctor _ q).obj
+          (((CondensedRing.derivedTensor Λ.X S).obj (relativeInternalHomDual Λ S P)).obj
+            ((DerivedCategory.singleFunctor _ 0).obj N))).X) (fun j ↦ ?_)
+      · exact hz.eq_of_src _ _
+      · apply (hlocal j N q).2
+        have h₁ := hja j (Finset.mem_univ _)
+        have h₂ := hjb j (Finset.mem_univ _)
+        omega
 
 end AlgebraicGeometry.ProEtale

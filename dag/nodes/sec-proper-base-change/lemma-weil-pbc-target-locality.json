@@ -194,7 +194,30 @@
    "cites": []
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.hasTorsionBaseChange_of_affineOpens",
+     "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Cancellation",
+     "lines": [
+      398,
+      424
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-reduction",
  "split_report": {
@@ -232,17 +255,23 @@
   "note": "proper f; etale j with pointwise joint surjectivity (I : Type w as landed etale-cover-detects-iso); X_i,Y'_i,X'_i as IsPullback; g'_i by both components; arbitrary F degree 0; three conjuncts of (a) incl. k_i^{-1} via mapDerivedCategoryPlus; (b) IsProper fi and PBC descent only, no converse"
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "For proper $f:X\\to Y$, the assertion $\\mathrm{PBC}(f)$ of\n[def-weil-pbc-property] is local on $Y$ for the etale topology. More\nprecisely, after an etale covering $\\coprod_iV_i\\to Y$, the exchange map is an\nisomorphism if and only if its pullback over every $V_i$ is an isomorphism.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\Lambda$ be a commutative ring and $f:X\\to Y$ a morphism of schemes. Say\nthat $f$ has *torsion base change* over $\\Lambda$ if for every cartesian square\n[def-weil-pbc-cartesian-square] with $f$ on the right and an arbitrary $g:Y'\\to Y$\nat the bottom, the derived exchange morphism [def-weil-pbc-derived-exchange]\n$g^{-1}Rf_*K\\to Rf'_*g'^{-1}K$ is an isomorphism for every\n$K\\in\\Dplus(X_{\\Et},\\Lambda)$ with torsion cohomology sheaves\n[def-weil-pbc-torsion-etale-sheaf]. If for every affine open $U\\subseteq Y$ the\nrestriction $f|_U:f^{-1}(U)\\to U$ has torsion base change over $\\Lambda$, then $f$\nhas torsion base change over $\\Lambda$.",
   "proof": [
    {
-    "text": "By the quasi-compact quasi-separated description of higher direct image, the\nrestriction of $R^qf_*F$ to $V$ is the sheafification of $U\\mapsto\nH^q(X\\times_YU,F|)$, compatible with further etale restriction and with the\ncanonical exchange morphism of [def-weil-pbc-derived-exchange]. Hence the\nexchange map is an isomorphism if and only if it is so on the stalks over an\netale cover, and geometric stalks are conservative.",
+    "text": "Fix a cartesian square with $f$ on the right and $g:Y'\\to Y$ at the bottom, and\n$K\\in\\Dplus(X_{\\Et},\\Lambda)$ with torsion cohomology sheaves. The opens\n$g^{-1}(U)$, $U\\subseteq Y$ affine, cover $Y'$. A morphism in\n$\\Dplus(Y'_{\\Et},\\Lambda)$ is an isomorphism if its restrictions to the members of\nan open cover are: apply [lem-weil-pbc-etale-cover-detects-iso] to the induced maps\nof cohomology sheaves, restriction to an open being exact. The restriction of the\nexchange morphism of the square to $g^{-1}(U)$ is the exchange morphism of the\nrestricted cartesian square with $f|_U$ on the right and\n$g|_{g^{-1}(U)}:g^{-1}(U)\\to U$ at the bottom, applied to $K|_{f^{-1}(U)}$:\nrestriction to an open commutes with derived direct image (higher direct images\nare the sheafifications of $V\\mapsto H^q(X\\times_YV,-)$, by\n[lem-weil-pbc-qcqs-higher-direct-image]) and with inverse images, compatibly with\nthe units and counits defining the exchange. The restricted complex again has\ntorsion cohomology sheaves, so the hypothesis on $f|_U$ applies.",
     "uses": [
-     "def-weil-pbc-derived-exchange"
+     "lem-weil-pbc-etale-cover-detects-iso",
+     "lem-weil-pbc-qcqs-higher-direct-image"
     ],
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

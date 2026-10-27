@@ -1,0 +1,156 @@
+{
+ "id": "def-sfb-space-etale-presentation",
+ "kind": "definition",
+ "title": "Compatible etale scheme presentation diagram",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Let $F,G$ be presheaves of sets on the category of schemes over $S$, in the test-scheme universes of [def-trf-algebraic-space], and let $f:F\\to G$ be a natural transformation. An etale presentation diagram of $f$ consists of schemes $U,V$ over $S$, natural transformations $a:h_U\\to F$ and $b:h_V\\to G$, and an $S$-morphism $h:U\\to V$, such that $a,b$ are representable etale maps in the scheme-test sense of [def-trf-algebraic-space], using etale scheme morphisms [def-weil-etale-morphism], and $f\\circ a=b\\circ h_h$, where $h_h:h_U\\to h_V$ is the Yoneda map induced by $h$. Neither chart is required to be surjective. In particular this applies to a morphism of algebraic spaces and to a scheme source via its representable presheaf.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03MJ (lemma-local-source-target), the commutative scheme-chart diagram preceding conditions (1) and (2); its diagram data apply to presheaves with representable etale chart maps."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Etale presentation diagram of a morphism of algebraic spaces consists of etale scheme charts and a commuting scheme morphism",
+   "results": "OK 8 hits: AlgebraicGeometry.IsEtale, StandardEtalePresentation, AlgebraicGeometry.Scheme.Etale, RingHom.Etale, AlgebraicGeometry.IsEtale.instIsSmooth, Algebra.Etale.finitePresentation, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.ExistsHomHomCompEqCompAux.mk.",
+   "date": "2026-10-24",
+   "verdict": "No matching scheme-chart diagram structure; StandardEtalePresentation is a ring-algebra presentation."
+  },
+  {
+   "tool": "loogle",
+   "query": "EtalePresentation",
+   "results": "OK 0 hits; loogle: unknown identifier 'EtalePresentation'",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "EtalePresentation|etale presentation (Mathlib/AlgebraicGeometry via msearch.py)",
+   "results": "OK 0 hits.",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "EtalePresentation|etale presentation (lean/WeilConjectures)",
+   "results": "Hits concern StandardEtalePresentation for rings and unrelated etale presentation uses; no AlgebraicSpace.EtalePresentation structure.",
+   "date": "2026-10-24",
+   "verdict": "No upstream definition of the scheme-chart diagram."
+  },
+  {
+   "tool": "grep",
+   "query": "^structure EtalePresentation|etale presentation (lean/Sheaf)",
+   "results": "The exact structure is at lean/Sheaf/AlgebraicGeometry/SpaceEtalePresentationPropertyCriterion.lean:54, with U,V,a,b,h,source_etale,target_etale,comm. Other hits are unrelated uses.",
+   "date": "2026-10-24",
+   "verdict": "Reuse this unchanged declaration via existing:true; do not duplicate or move it."
+  },
+  {
+   "tool": "grep",
+   "query": "\"declaration\": \"AlgebraicGeometry.AlgebraicSpace.EtalePresentation\"|\"id\": \"def-.*etale-presentation (dag/nodes)",
+   "results": "No definition node owns the structure. The theorem node lem-sfb-space-etale-presentation-property-criterion lists it among its declarations. def-sfb-etale-local-source-target-property owns only IsEtaleLocalOnSourceAndTarget.",
+   "date": "2026-10-24",
+   "verdict": "A separate definition node is required by the returned H2 review."
+  },
+  {
+   "tool": "blueprint_refs.py",
+   "query": "search etale presentation; ancestor lem-sfb-space-finite-type-point-characterization",
+   "results": "0 blueprint nodes match 'etale presentation'; ancestor reports blueprint.from.node = None.",
+   "date": "2026-10-24",
+   "verdict": "Use the item's inherited null ancestor and prepend the item to its via chain."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-finite-type-point-characterization",
+  "date": "2026-10-24",
+  "group": "Q14"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0CXU (lemma-SGE-implies-openness-versality), specialized to Spec Z; remark-strong-effectiveness; definitions definition-RS-star, definition-limit-preserving, definition-versal and definition-openness-versality. Supporting input: Tag 0CXU, representable fibre product Z and application of lemma-base-change-versal at z_0=i(u_0). Supporting input: Tag 0CXU proof, z_0=i(u_0): passing from the locally finite type field representative to a finite type point in a chart. Definition of the compatible etale scheme-chart diagram used to express local finite type of the field-valued representative.",
+   "via": [
+    "lem-sfb-space-finite-type-point-characterization",
+    "lem-sfb-artin-versal-base-change-smooth",
+    "lem-sfb-artin-square-zero-effectivity-openness",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceEtalePresentationPropertyCriterion",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.EtalePresentation",
+  "statement": "structure EtalePresentation {S : Scheme.{u}} {F G : (Over S)ᵒᵖ ⥤ Type u}\n    (f : F ⟶ G)",
+  "branch": "newtargets-dag",
+  "by": "Q14",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Owns the existing plain structure at line 54 of the landed criterion module, exactly as requested by the H2 return. No theorem conclusion, choice, move, source edit, or duplicate definition is involved. All eight fields are the diagram data of Stacks 03MJ; neither surjectivity nor a morphism property is included."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bdb213480",
+  "group": "Q14",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bdb213480",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Matches Stacks 06EF: (i)=(2) with global IsClosed {w}, representable IsEtale e and schemePointMap e w = x; (ii)=(1) as a PointRepresentative p with Quot.mk p = x and LocallyOfFiniteType on every EtalePresentation of the canonical Yoneda map, which is the 03MJ universal chart test with no surjectivity. That test equals the Stacks definition because local finite type is etale-local on source and target (etalePresentation_property_criterion). It is the unfolded body of MapIsLocally, which only takes AlgebraicSpace sources, so no duplicate notion. lean.statement verbatim. New existing:true node def-sfb-space-etale-presentation matches the 8 structure fields and 03MJ, repairing the earlier H2 return; no theorem node in stmt_deps. No new defs, sorry only, docstrings with source and blueprint tags and the 4 proof steps, both report sections present. Edge cases (empty X/S, empty charts, chart-closed but not X-closed points, universes) OK. Advisory: the EtalePresentation docstring still tags the theorem node. No compile, since no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261026T081446-L-1969605",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.AlgebraicSpace.etalePresentation_property_criterion",
+   "AlgebraicGeometry.AlgebraicSpace.etalePresentation_property_iff_scheme"
+  ],
+  "sorry_after": []
+ }
+}

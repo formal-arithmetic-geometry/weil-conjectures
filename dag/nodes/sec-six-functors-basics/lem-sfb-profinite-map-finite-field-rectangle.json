@@ -1,0 +1,404 @@
+{
+ "id": "lem-sfb-profinite-map-finite-field-rectangle",
+ "kind": "statement",
+ "title": "A continuous profinite map has a finite-field coset rectangle",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega/\\mathbf Q_\\ell$ [def-weil-algebraic-closure] with the extended norm topology, and a finite intermediate field $E/\\mathbf Q_\\ell$ [def-weil-l-adic-coefficient-extension]. Let $G$ be a profinite group, meaning a compact Hausdorff topological group whose open subgroups form a neighbourhood basis of the identity. Let $m\\geq1$ and $d\\geq0$ be integers, and give $G^m$ and $\\Omega^d$ their product topologies. For every continuous function $f:G^m\\to\\Omega^d$ there exist a finite intermediate extension $E\\subseteq F\\subseteq\\Omega$, an open subgroup $H\\subseteq G$, and elements $a_0,\\ldots,a_{m-1}\\in G$ such that\n$$f(h_0a_0,\\ldots,h_{m-1}a_{m-1})\\in F^d\\subseteq\\Omega^d\\qquad(h_0,\\ldots,h_{m-1}\\in H).$$\nThe subgroup need not be normal. No equivariance or cocycle condition on $f$, no completeness of $\\Omega$, and no finite generation of $G$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent arithmetic expansion; returned local-cocycle proof steps 2–3: closed finite-field exhaustion, Baire on G^m, and one common left-coset rectangle. Baire source: Stacks Tag 0CQN, topology.tex, lemma-baire-category-locally-compact; countability source: literature/stanford-weil2-seminar/L19.pdf, Proposition 1.1.9, p. 3. Neither source states this precise rectangle assertion."
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-algcl-countable-closed-finite-cover] to the given $\\ell,\\Omega,E$, obtaining increasing closed finite intermediate fields $F_j\\supseteq E$ covering $\\Omega$. Put $X=G^m$ and $A_j=\\{x\\in X:\\forall r<d,\\ f(x)_r\\in F_j\\}$. Each coordinate of $f$ is continuous, so $A_j$ is the finite intersection of inverse images of the closed set $F_j$, hence closed. For each $x$, choose an index for each of the finitely many coordinates of $f(x)$ and take their maximum; increasingness gives $x\\in A_j$. If $d=0$, use $j=0$ and the empty intersection $A_0=X$. Thus $X=\\bigcup_{j\\geq0} A_j$.",
+   "uses": [
+    "lem-sfb-algcl-countable-closed-finite-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, first bullet, p. 3; agent adaptation from matrix coefficients to an arbitrary finite coordinate family, using the existing closed-cover node."
+   }
+  },
+  {
+   "text": "The product $X$ is quasi-compact by [lem-weil-pbc-tychonoff-product-quasi-compact]. It is Hausdorff: distinct tuples differ in a coordinate, and disjoint coordinate neighbourhoods pull back to disjoint neighbourhoods. It is nonempty, containing $(1,\\ldots,1)$, and locally compact, since the whole quasi-compact space is a neighbourhood of every point. Apply [lem-sfb-baire-closed-cover-interior] to the nonempty full subspace $Y=X$ and the closed cover $(A_j)_{j\\in\\mathbf N}$. It gives $j$ and $a=(a_0,\\ldots,a_{m-1})\\in\\operatorname{Int}_X(A_j)$.",
+   "uses": [
+    "lem-weil-pbc-tychonoff-product-quasi-compact",
+    "lem-sfb-baire-closed-cover-interior"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0CQN, lemma-baire-category-locally-compact, closed-cover consequence; product compactness via the cited Tychonoff node."
+   }
+  },
+  {
+   "text": "By the finite product topology choose open neighbourhoods $U_r$ of $a_r$ with $\\prod_{r<m}U_r\\subseteq\\operatorname{Int}_X(A_j)$. Right translation by $a_r^{-1}$ is a homeomorphism: the map and its inverse are continuous by continuity of group multiplication. Thus $U_ra_r^{-1}$ is an identity neighbourhood. By the assumed open-subgroup basis choose an open subgroup $H_r\\subseteq U_ra_r^{-1}$. The finite intersection $H=\\bigcap_{r<m}H_r$ is an open subgroup. For every $h_r\\in H$, one has $h_ra_r\\in U_r$, so $(h_0a_0,\\ldots,h_{m-1}a_{m-1})\\in A_j$ and its image lies in $F_j^d$. Take $F=F_j$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent arithmetic expansion of the local finite-field input: extracting a common left-coset rectangle from nonempty interior."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-algcl-countable-closed-finite-cover",
+  "lem-sfb-baire-closed-cover-interior",
+  "lem-weil-pbc-tychonoff-product-quasi-compact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), elementary rectangle argument combined with the closed finite-field exhaustion and Stacks Tag 0CQN. The blueprint itself does not state this auxiliary assertion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(IntermediateField|PadicAlgCl).*(rectangle|coset)|(rectangle|coset).*(IntermediateField|PadicAlgCl)",
+   "results": {
+    "t": "2026-10-22T06:07:22Z",
+    "tool": "grep",
+    "query": "(IntermediateField|PadicAlgCl).*(rectangle|coset)|(rectangle|coset).*(IntermediateField|PadicAlgCl)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite approximation and profinite limit maps do not give exact containment in a finite coefficient field on a coset rectangle; Galois closed-subgroup correspondences concern a different topology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A continuous function from a profinite group product to the p adic algebraic closure has its image in a finite extension on some open coset rectangle",
+   "results": {
+    "t": "2026-10-22T06:07:23Z",
+    "tool": "leansearch",
+    "query": "A continuous function from a profinite group product to the p adic algebraic closure has its image in a finite extension on some open coset rectangle",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ProfiniteGrp.denseRange_toLimit",
+     "ProfiniteGrp.pi",
+     "ProfiniteGrp.toLimit_fun_continuous",
+     "cyclotomicCharacter.continuous",
+     "ProfiniteGrp.topologicalGroup",
+     "ProfiniteAddGrp.pi",
+     "ProfiniteGrp.continuousMulEquivLimittoFiniteQuotientFunctor",
+     "ProfiniteAddGrp.instCoeFunHomForallCarrierToTopTotallyDisconnectedSpaceToProfinite"
+    ],
+    "digest": "19cec96f1e2f86a5"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite approximation and profinite limit maps do not give exact containment in a finite coefficient field on a coset rectangle; Galois closed-subgroup correspondences concern a different topology"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Profinite\", \"ContinuousMap\"",
+   "results": {
+    "t": "2026-10-22T06:07:23Z",
+    "tool": "loogle",
+    "query": "\"Profinite\", \"ContinuousMap\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "LightProfinite.instPreservesLimitsOfShapeOppositeNatForgetContinuousMapCarrierToTopAndTotallyDisconnectedSpaceSecondCountableTopology",
+     "ProfiniteAddGrp.instHasForget₂ContinuousAddMonoidHomCarrierToTopTotallyDisconnectedSpaceToProfiniteProfiniteContinuousMap",
+     "ProfiniteGrp.instHasForget₂ContinuousMonoidHomCarrierToTopTotallyDisconnectedSpaceToProfiniteProfiniteContinuousMap",
+     "ProfiniteAddGrp.instFaithfulProfiniteForget₂ContinuousAddMonoidHomCarrierToTopTotallyDisconnectedSpaceToProfiniteContinuousMap",
+     "ProfiniteAddGrp.instPreservesLimitsProfiniteForget₂ContinuousAddMonoidHomCarrierToTopTotallyDisconnectedSpaceToProfiniteContinuousMap",
+     "ProfiniteAddGrp.instReflectsIsomorphismsProfiniteForget₂ContinuousAddMonoidHomCarrierToTopTotallyDisconnectedSpaceToProfiniteContinuousMap",
+     "ProfiniteGrp.instFaithfulProfiniteForget₂ContinuousMonoidHomCarrierToTopTotallyDisconnectedSpaceToProfiniteContinuousMap",
+     "ProfiniteGrp.instPreservesLimitsProfiniteForget₂ContinuousMonoidHomCarrierToTopTotallyDisconnectedSpaceToProfiniteContinuousMap"
+    ],
+    "digest": "bb8789992ff971a7"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite approximation and profinite limit maps do not give exact containment in a finite coefficient field on a coset rectangle; Galois closed-subgroup correspondences concern a different topology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous map from a finite power of a profinite group into a finite dimensional vector space over the normed algebraic closure of a p adic field takes values in one finite extension on a product of open subgroup cosets",
+   "results": {
+    "t": "2026-10-22T06:07:34Z",
+    "tool": "leanfinder",
+    "query": "A continuous map from a finite power of a profinite group into a finite dimensional vector space over the normed algebraic closure of a p adic field takes values in one finite extension on a product of open subgroup cosets",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "cyclotomicCharacter.continuous",
+     "ContinuousMap.exists_finite_sum_const_mulIndicator_approximation_of_mem_nhds_diagonal",
+     "Profinite.NobelingProof.Nobeling_aux",
+     "Profinite.NobelingProof.Linear_CC'₀",
+     "ContinuousMap.exists_finite_sum_const_indicator_approximation_of_mem_nhds_diagonal",
+     "Profinite.NobelingProof.Linear_CC'₁",
+     "Profinite.NobelingProof.fin_comap_jointlySurjective",
+     "InfiniteGalois.proj"
+    ],
+    "digest": "2b63bd80180016b2"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite approximation and profinite limit maps do not give exact containment in a finite coefficient field on a coset rectangle; Galois closed-subgroup correspondences concern a different topology"
+  },
+  {
+   "tool": "grep",
+   "query": "(Baire|interior).*(ContinuousMap|coset)|(IntermediateField|PadicAlgCl).*(closed|countable)",
+   "results": {
+    "t": "2026-10-22T06:07:52Z",
+    "tool": "grep",
+    "query": "(Baire|interior).*(ContinuousMap|coset)|(IntermediateField|PadicAlgCl).*(closed|countable)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 11,
+    "note": "",
+    "top": [
+     "Mathlib/FieldTheory/IsAlgClosed/Basic.lean",
+     "Mathlib/FieldTheory/IntermediateField/Basic.lean",
+     "Mathlib/FieldTheory/AlgebraicClosure.lean",
+     "Mathlib/FieldTheory/KrullTopology.lean",
+     "Mathlib/FieldTheory/IsSepClosed.lean",
+     "Mathlib/FieldTheory/IsSepClosed.lean",
+     "Mathlib/FieldTheory/Galois/Infinite.lean",
+     "Mathlib/FieldTheory/Galois/Infinite.lean"
+    ],
+    "digest": "f4d928e38d45e071"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite approximation and profinite limit maps do not give exact containment in a finite coefficient field on a coset rectangle; Galois closed-subgroup correspondences concern a different topology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a continuous map from a compact totally disconnected topological group raised to a positive finite power to a space covered by countably many closed sets there is an open subgroup and translated product rectangle mapped into one closed set",
+   "results": {
+    "t": "2026-10-22T06:08:01Z",
+    "tool": "leanfinder",
+    "query": "For a continuous map from a compact totally disconnected topological group raised to a positive finite power to a space covered by countably many closed sets there is an open subgroup and translated product rectangle mapped into one closed set",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousMap.exists_finite_sum_const_mulIndicator_approximation_of_mem_nhds_diagonal",
+     "ContinuousMap.exists_finite_approximation_of_mem_nhds_diagonal",
+     "ContinuousMap.exists_disjoint_nonempty_clopen_cover_of_mem_nhds_diagonal",
+     "ContinuousMap.exists_finite_sum_const_indicator_approximation_of_mem_nhds_diagonal",
+     "MeasureTheory.Measure.haar.index_defined",
+     "MeasureTheory.Measure.haar.addIndex_defined",
+     "MeasureTheory.Measure.haar.index_elim",
+     "IsTopologicalGroup.exist_mul_closure_nhds"
+    ],
+    "digest": "7ee6420d98310b5a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite approximation and profinite limit maps do not give exact containment in a finite coefficient field on a coset rectangle; Galois closed-subgroup correspondences concern a different topology"
+  },
+  {
+   "tool": "grep",
+   "query": "(IntermediateField|PadicAlgCl).*(rectangle|coset)|(rectangle|coset).*(IntermediateField|PadicAlgCl)",
+   "results": {
+    "t": "2026-10-23T09:47:31Z",
+    "tool": "grep",
+    "query": "(IntermediateField|PadicAlgCl).*(rectangle|coset)|(rectangle|coset).*(IntermediateField|PadicAlgCl)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: no declaration combines finite coefficient fields with a rectangle or coset."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A continuous function on a profinite group product with values in the p adic algebraic closure takes values in a finite extension on a nonempty open rectangle",
+   "results": {
+    "t": "2026-10-23T09:47:32Z",
+    "tool": "leansearch",
+    "query": "A continuous function on a profinite group product with values in the p adic algebraic closure takes values in a finite extension on a nonempty open rectangle",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ProfiniteGrp.pi",
+     "ProfiniteGrp.toLimit_fun_continuous",
+     "ProfiniteGrp.topologicalGroup",
+     "cyclotomicCharacter.continuous",
+     "ProfiniteAddGrp.pi",
+     "PadicInt.mahlerEquiv",
+     "ProfiniteAddGrp.ofHom_apply",
+     "PadicComplex.nnnorm_extends"
+    ],
+    "digest": "2dc8af75df1e6218"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: profinite products, cyclotomic continuity and Mahler equivalences do not give finite-field containment."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Profinite\", \"ContinuousMap\"",
+   "results": {
+    "t": "2026-10-23T09:47:32Z",
+    "tool": "loogle",
+    "query": "\"Profinite\", \"ContinuousMap\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "LightProfinite.instPreservesLimitsOfShapeOppositeNatForgetContinuousMapCarrierToTopAndTotallyDisconnectedSpaceSecondCountableTopology",
+     "ProfiniteAddGrp.instHasForget₂ContinuousAddMonoidHomCarrierToTopTotallyDisconnectedSpaceToProfiniteProfiniteContinuousMap",
+     "ProfiniteGrp.instHasForget₂ContinuousMonoidHomCarrierToTopTotallyDisconnectedSpaceToProfiniteProfiniteContinuousMap",
+     "ProfiniteAddGrp.instFaithfulProfiniteForget₂ContinuousAddMonoidHomCarrierToTopTotallyDisconnectedSpaceToProfiniteContinuousMap",
+     "ProfiniteAddGrp.instPreservesLimitsProfiniteForget₂ContinuousAddMonoidHomCarrierToTopTotallyDisconnectedSpaceToProfiniteContinuousMap",
+     "ProfiniteAddGrp.instReflectsIsomorphismsProfiniteForget₂ContinuousAddMonoidHomCarrierToTopTotallyDisconnectedSpaceToProfiniteContinuousMap",
+     "ProfiniteGrp.instFaithfulProfiniteForget₂ContinuousMonoidHomCarrierToTopTotallyDisconnectedSpaceToProfiniteContinuousMap",
+     "ProfiniteGrp.instPreservesLimitsProfiniteForget₂ContinuousMonoidHomCarrierToTopTotallyDisconnectedSpaceToProfiniteContinuousMap"
+    ],
+    "digest": "bb8789992ff971a7"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: categorical profinite forgetful functors and instances do not constrain coefficients of arbitrary continuous functions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous map from a finite product of profinite groups to an algebraic closure of a p adic field maps a nonempty open coset rectangle into a finite extension",
+   "results": {
+    "t": "2026-10-23T09:47:34Z",
+    "tool": "leanfinder",
+    "query": "A continuous map from a finite product of profinite groups to an algebraic closure of a p adic field maps a nonempty open coset rectangle into a finite extension",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "InfiniteGalois.proj",
+     "cyclotomicCharacter.continuous",
+     "InfiniteGalois.isOpen_iff_finite",
+     "InfiniteGalois.isOpen_mulEquivToLimit_image_fixingSubgroup",
+     "Field.instTopologicalSpaceAbsoluteGaloisGroup",
+     "krullTopology_mem_nhds_one_iff",
+     "Profinite.NobelingProof.fin_comap_jointlySurjective",
+     "krullTopology_isTotallySeparated"
+    ],
+    "digest": "7384cb22dcf91994"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: Galois fixed fields concern the Krull topology, not arbitrary maps into the norm-topological algebraic closure."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous function from a compact Hausdorff space to a countable union of closed subsets has image contained in one closed subset on some nonempty open set",
+   "results": {
+    "t": "2026-10-23T09:48:50Z",
+    "tool": "leanfinder",
+    "query": "A continuous function from a compact Hausdorff space to a countable union of closed subsets has image contained in one closed subset on some nonempty open set",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "exists_compact_surjective_zorn_subset",
+     "IsCompactOpenCovered.image",
+     "ContinuousMap.exists_disjoint_nonempty_clopen_cover_of_mem_nhds_diagonal",
+     "LocallyConstant.range_finite",
+     "IsLocallyConstant.range_finite",
+     "exists_subset_iUnion_compact_subset_t2space",
+     "IsCompactOpenCovered.of_isOpenMap",
+     "image_subset_closure_compl_image_compl_of_isOpen"
+    ],
+    "digest": "5e9fe4dc901d2779"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: clopen approximation and locally constant finite-range lemmas do not apply to arbitrary norm-continuous functions or supply a closed finite-field exhaustion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-local-norm-algcl-cocycle-descent",
+  "date": "2026-10-22",
+  "group": "Q90"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), agent arithmetic expansion; returned local-cocycle proof steps 2–3: closed finite-field exhaustion, Baire on G^m, and one common left-coset rectangle. Baire source: Stacks Tag 0CQN, topology.tex, lemma-baire-category-locally-compact; countability source: literature/stanford-weil2-seminar/L19.pdf, Proposition 1.1.9, p. 3. Neither source states this precise rectangle assertion.",
+   "via": [
+    "lem-sfb-local-norm-algcl-cocycle-descent",
+    "lem-sfb-profinite-algcl-derived-invariants-comparison",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-profinite-map-finite-field-rectangle",
+  "worker": "stage1",
+  "summary": "Q127: statement unchanged; reuse the existing increasing closed finite-field cover, product compactness and Baire interior nodes. Prove the finite-coordinate cover and common open-subgroup rectangle explicitly. No new nodes; no metrizability, normality or completeness assumption added. All cited statements and sources checked.",
+  "blueprint": "Current latest direct-images proof, paragraph (3), arithmetic coefficient-topology input to the open direct-image argument. The three steps give closed preimages, Baire interior, and the common left-coset rectangle. The inherited created.item chain is broken above lem-sfb-admissible-direct-image; blueprint_refs.py ancestor reports None, so its existing null from.node and via list are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q127-ef34cab81",
+  "group": "Q127",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q127-ef34cab81 (reviewer sub-agent of L); spot-checked: Read in full: the item with its unchanged statement and stmt_deps, and the three proof steps. There are no new nodes. Step 1: lem-sfb-algcl-countable-closed-finite-cover gives an increasing sequence of closed finite F_j ⊇ E covering Ω. Each A_j is closed as a finite intersection of coordinate preimages; the cover follows by taking the maximum index; d=0 is vacuous. Step 2: Tychonoff node (any index set) plus Hausdorff, nonempty and locally compact, all elementary; the Baire node is applied with Y=X and I=N, and every hypothesis holds without metrizability (Stacks topology.tex:2044, 0CQN, locally quasi-compact Hausdorff). Step 3: basic box, the right translate U_r a_r^{-1} is a neighbourhood of 1, H = finite intersection of open subgroups H_r; left cosets match the statement. Small cases checked: trivial G, d=0, constant f, m=1 with G=Z_ℓ and f(g)=gα. The only citer, local-norm-algcl-cocycle-descent step 2 (m=n+1), needs exactly this. L19 Prop 1.1.9 p.3 was read; it is about representations only, and the item is correctly marked agent. Not a duplicate of cochain-closed-rectangle-certificates (that one is parametrised, metrizable, normal-subgroup). No SGA. Batch-5 flag: lem-trf-spectral-norm-algebraic-extension is a generic Mathlib spectral-norm leaf, not part of the trace formula or Poincaré duality and not in their proofs, so it is outside the assumptions. Advisory: step 3 and proof_origin cite the moving literature/blueprint/latest path; the file exists, and main-20261015 would be the stable path."
+ },
+ "lean": {
+  "module": "Sheaf.NumberTheory.Padics.ProfiniteMapFiniteFieldRectangle",
+  "declaration": "Padic.exists_finiteIntermediateField_coset_rectangle",
+  "file": "lean/Sheaf/NumberTheory/Padics/ProfiniteMapFiniteFieldRectangle.lean",
+  "statement": "theorem exists_finiteIntermediateField_coset_rectangle (ℓ : ℕ) [Fact ℓ.Prime] (Ω : Type u) [NormedField Ω] [NormedAlgebra (Padic ℓ) Ω] [IsAlgClosure (Padic ℓ) Ω] (E : IntermediateField (Padic ℓ) Ω) [FiniteDimensional (Padic ℓ) E] (G : Type v) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [T2Space G] (hG : ∀ U ∈ nhds (1 : G), ∃ H : OpenSubgroup G, (H : Set G) ⊆ U) (m : ℕ) (hm : 1 ≤ m) (d : ℕ) (f : (Fin m → G) → (Fin d → Ω)) (hf : Continuous f) : ∃ F : IntermediateField (Padic ℓ) Ω, E ≤ F ∧ FiniteDimensional (Padic ℓ) F ∧ ∃ (H : OpenSubgroup G) (a : Fin m → G), ∀ h : Fin m → H, ∀ r : Fin d, f (fun i ↦ (h i : G) * a i) r ∈ F",
+  "branch": "sheaf-dag",
+  "by": "Q17",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-335596bc6",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Item lean record only change vs live (stmt/stmt_deps/proof unchanged); statement field verbatim. Clause-by-clause: ℓ prime; Ω NormedField+NormedAlgebra(Padic ℓ)+IsAlgClosure (same binders as proof dep exists_monotone_closed_finiteIntermediateField_cover, extended norm, no completeness); E finite IntermediateField; G compact T2 topological group with hG open-subgroup basis at 1 (no normality/metrizability); m≥1, d, Pi topologies, continuous f; ∃ F ≥ E finite-dimensional, ∃ open H, a : Fin m → G, ∀ h ∈ H^m, ∀ r, f(h i * a i) r ∈ F — matches node incl. order and left cosets. Universes u,v independent. Edge cases d=0, trivial G, m=1, noncommutative G OK. No defs, sorry-only, source/blueprint docstrings with 3 proof steps, imports cover stmt/proof deps, no duplicate (cochain-closed-rectangle-certificates differs). Report has Worker report + Second reading by Q17. Not recompiled (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261025T050758-L-3840559",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "Padic.exists_finiteIntermediateField_coset_rectangle"
+  ],
+  "sorry_after": []
+ }
+}

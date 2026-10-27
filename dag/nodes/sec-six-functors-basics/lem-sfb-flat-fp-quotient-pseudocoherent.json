@@ -1,0 +1,183 @@
+{
+ "id": "lem-sfb-flat-fp-quotient-pseudocoherent",
+ "kind": "statement",
+ "title": "Pseudo-coherence under a quotient between flat finitely presented algebras",
+ "statement": "Let $R\\to B\\xrightarrow{q} A$ be homomorphisms of commutative rings, with $q$ surjective and both $R\\to B$ and $R\\to A$ flat and of finite presentation [def-weil-pbc-flat-ring-map, def-weil-pbc-finitely-presented-algebra]. In ordinary module derived categories [def-weil-abstract-derived-category], for every $M\\in D(A)$, the object $M$ is pseudo-coherent over $A$ if and only if its restriction of scalars along $q$ is pseudo-coherent over $B$ [def-pc-ring-pseudo-coherent-complex]. Here restriction of scalars applies the ordinary forgetful functor termwise to a complex. There is no Noetherian hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0E1T, lemma-more-relative-pseudo-coherent-is-moot, equivalence (1) with (4)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-abstract-derived-category",
+  "def-pc-ring-pseudo-coherent-complex"
+ ],
+ "proof": [
+  {
+   "text": "Choose a finite polynomial presentation $\\pi:P=R[x_1,\\ldots,x_n]\\twoheadrightarrow B$ using [def-weil-pbc-finitely-presented-algebra] and the polynomial ring of [def-weil-pbc-mv-polynomial-ring]. The composite $q\\pi:P\\to A$ is surjective: lift an element first through $q$ and then through $\\pi$. Thus the same $P$ presents both algebras. On any complex representing $M$, direct restriction along $q\\pi$ and successive restriction along $q$ and $\\pi$ give the same $P$-action, namely $p\\cdot m=q(\\pi(p))m$, with identical groups and differentials. Forgetting scalars keeps kernels, images and cohomology, so this identification is valid in the derived categories.",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0E1T, lemma-more-relative-pseudo-coherent-is-moot, polynomial-presentation reformulation of its relative comparisons; definition-relatively-pseudo-coherent."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-flat-fp-polynomial-pseudocoherent] to $R\\to B$ with presentation $\\pi$ and to $R\\to A$ with presentation $q\\pi$. Both maps are flat and finitely presented by the hypotheses of the item; both chosen presentations are surjective by step 1. Hence $B[0]$ and $A[0]$ are pseudo-coherent over this same ring $P$. No Noetherian assumption on $P$ is needed.",
+   "uses": [
+    "lem-sfb-flat-fp-polynomial-pseudocoherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 067J, lemma-flat-finite-presentation-perfect, pseudo-coherence consequence; Tag 065H, lemma-relatively-pseudo-coherent, arbitrary presentation."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-pseudocoherent-algebra-scalar-restriction] to $P\\to A$ and $M$, using the pseudo-coherence of $A[0]$ from step 2. This gives $M$ pseudo-coherent over $A$ if and only if $(q\\pi)_*M$ is pseudo-coherent over $P$. Apply the same lemma to $P\\to B$ and $q_*M$, using pseudo-coherence of $B[0]$: $q_*M$ is pseudo-coherent over $B$ if and only if $\\pi_*(q_*M)$ is pseudo-coherent over $P$. The two right-hand complexes agree by the explicit action calculation in step 1. Combining the equivalences proves both implications for every $M\\in D(A)$.",
+   "uses": [
+    "lem-sfb-pseudocoherent-algebra-scalar-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064Z, lemma-finite-push-pseudo-coherent, final assertion, twice; this realizes Tag 0E1T equivalence (1) with (4)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-sfb-flat-fp-polynomial-pseudocoherent",
+  "lem-sfb-pseudocoherent-algebra-scalar-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Polynomial-presentation assembly of 0E1T using 067J/065H and 064Z; it makes the relative-pseudo-coherence comparison explicit without introducing the relative notion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Surjection between flat finitely presented algebras restriction of scalars preserves pseudo coherent complexes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Module.FaithfullyFlat.surjective_of_tensorProduct\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Descent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u_3}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [Module.FaithfullyFlat R S],\\n  Function.Surjective ⇑(algebraMap S (TensorProduct R S T)) → Function.Surjective ⇑(algebraMap R T)\", \"doc\": \"If $ S $ is a faithfully flat $ R $-module and the canonical algebra map $ S \\\\to S \\\\otimes_R T $ is surjective, then the canonical algebra map $ R \\\\to T $ is also surjective.\"}\n  {\"name\": \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] (f : S →ₐ[R] A),\\n  Function.Surjective ⇑f → ∀ [Module.Flat R S] [IsNoetherianRing S] [Algebra.FormallySmooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a commutative ring, $ S $ a Noetherian $ R $-algebra that is flat over $ R $, and $ A $ a formally smooth $ R $-algebra. If there exists a surjective $ R $-algebra homomorphism $ f: S \\to \"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Surjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n  {\"name\": \"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"module\": \"Mathlib/RingTheory/Unramified/Finite\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (M : Type u_3)\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : Module S M] [IsScalarTower R S M]\\n  [Algebra.FormallyUnramified R S] [Algebra.EssFiniteType R S] [Module.Flat R M], Module.Flat \", \"doc\": \"If $ M $ is a flat $ R $-module, then $ M $ remains flat as an $ S $-module when viewed through the scalar restriction induced by an $ S $-algebra structure on $ R $. This holds for any commutative ri\"}\n  {\"name\": \"Module.FaithfullyFlat.of_comap_surjective\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] [Module.Flat A B],\\n  Function.Surjective (PrimeSpectrum.comap (algebraMap A B)) → Module.FaithfullyFlat A B\", \"doc\": \"If the induced map on prime spectra given by taking preimages under the canonical algebra homomorphism $ A \\\\to B $ is surjective, then $ B $ is a faithfully flat $ A $-module.\"}\n  {\"name\": \"RingHom.FaithfullyFlat.codescendsAlong_surjective\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Descent\", \"type\": \"RingHom.CodescendsAlong (fun {R S} [CommRing R] [CommRing S] f => Function.Surjective ⇑f)\\n  fun {R S} [CommRing R] [CommRing S] => RingHom.FaithfullyFlat\", \"doc\": \"Given a pushout diagram of commutative rings with a faithfully flat homomorphism $ R \\to R' $ and a surjective homomorphism $ R' \\to S' $, the induced homomorphism $ R \\to S $ is surjective. This establi\"}\n  {\"name\": \"AlgHom.FinitePresentation.comp_surjective\", \"module\": \"Mathlib/RingTheory/FinitePresentation\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {B : Type u_3} {C : Type u_4} [inst : CommRing R] [inst_1 : CommRing A]\\n  [inst_2 : CommRing B] [inst_3 : CommRing C] [inst_4 : Algebra R A] [inst_5 : Algebra R B] [inst_6 : Algebra R C]\\n  {f : A →ₐ[R] B} {g : B →ₐ[R] C},\\n  f.FinitePresentation → Function.Surjective ⇑\", \"doc\": \"For algebra homomorphisms $ f : A \\\\to B $ and $ g : B \\\\to C $ over a commutative semiring $ R $, if $ f $ is finitely presented, $ g $ is surjective, and the kernel of $ g $ is finitely generated, the\"}\n  {\"name\": \"PrimeSpectrum.comap_surjective_of_faithfullyFlat\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B]\\n  [Module.FaithfullyFlat A B], Function.Surjective (PrimeSpectrum.comap (algebraMap A B))\", \"doc\": \"If $ B $ is a faithfully flat $ A $-algebra, then the induced map from the prime spectrum of $ B $ to the prime spectrum of $ A $, given by taking preimages under the canonical algebra homomorphism $ \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary flatness, finite presentation or module duals, not the stated derived relative-perfection or diagonal-Hom assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Diagonal algebra of a flat finitely presented algebra is pseudo coherent over its tensor square",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FinitePresentation.baseChange\", \"module\": \"Mathlib/RingTheory/FiniteStability\", \"type\": \"∀ {R : Type w₁} [inst : CommRing R] {A : Type w₂} [inst_1 : CommRing A] [inst_2 : Algebra R A] (B : Type w₃)\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FinitePresentation R A],\\n  Algebra.FinitePresentation B (TensorProduct R B A)\", \"doc\": \"Let $R$ be a commutative ring, and let $A$ and $B$ be $R$-algebras. If $A$ is a finitely presented $R$-algebra, then the base change $B \\\\otimes_R A$ is a finitely presented $B$-algebra.\"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.Smooth R A],\\n  Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"module\": \"Mathlib/RingTheory/Unramified/Finite\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (M : Type u_3)\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : Module S M] [IsScalarTower R S M]\\n  [Algebra.FormallyUnramified R S] [Algebra.EssFiniteType R S] [Module.Flat R M], Module.Flat \", \"doc\": \"If $ M $ is a flat $ R $-module, then $ M $ remains flat as an $ S $-module when viewed through the scalar restriction induced by an $ S $-algebra structure on $ R $. This holds for any commutative ri\"}\n  {\"name\": \"Algebra.FormallySmooth.instTensorProduct\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} [inst : CommRing R] {A : Type u_5} [inst_1 : CommRing A] [inst_2 : Algebra R A] (B : Type u_6)\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallySmooth R A],\\n  Algebra.FormallySmooth B (TensorProduct R B A)\", \"doc\": \"If $ A $ is a formally smooth $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is a formally smooth $ B $-algebra.\"}\n  {\"name\": \"Algebra.Smooth.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Smooth A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Smooth (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any commutative ring $ R $ and a commutative $ R $-algebra $ A $ that is smooth over $ B $, there exists a finitely generated $ R $-subalgebra $ A_0 $ of $ A $ such that $ A_0 $ is smooth over $ B\"}\n  {\"name\": \"instFinitePresentationTensorProduct\", \"module\": \"Mathlib/Algebra/Module/FinitePresentation\", \"type\": \"∀ {R : Type u_2} {M : Type u_3} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {A : Type u_1}\\n  [inst_3 : CommRing A] [inst_4 : Algebra R A] [Module.FinitePresentation R M],\\n  Module.FinitePresentation A (TensorProduct R A M)\", \"doc\": \"Let $R$ be a commutative semiring and let $A$ be a commutative ring that is also an $R$-algebra. If $M$ is a finitely presented $R$-module, then the tensor product $A \\\\otimes_R M$, viewed as an $A$-mo\"}\n  {\"name\": \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] (f : S →ₐ[R] A),\\n  Function.Surjective ⇑f → ∀ [Module.Flat R S] [IsNoetherianRing S] [Algebra.FormallySmooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a commutative ring, $ S $ a Noetherian $ R $-algebra that is flat over $ R $, and $ A $ a formally smooth $ R $-algebra. If there exists a surjective $ R $-algebra homomorphism $ f: S \\to \"}\n  {\"name\": \"Algebra.Smooth.exists_finiteType\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Smooth A B],\\n  ∃ A₀ B₀ x x_1 x_2 x_3 x_4,\\n    Function.Injective ⇑(algebraMap A₀ A) ∧\\n      Algebra.FiniteType R A₀ ∧ Algebra.Smooth A₀ B₀ ∧ No\", \"doc\": \"For any smooth algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-algebra $ A_0 $, an injective $ R $-algebra homomorphism $ A_0 \\\\to A $, and a smooth $ A_0 $-algebra\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary flatness, finite presentation or module duals, not the stated derived relative-perfection or diagonal-Hom assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary flatness, finite presentation or module duals, not the stated derived relative-perfection or diagonal-Hom assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudoCoherent|PseudoCoherent|pseudo_coherent",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary flatness, finite presentation or module duals, not the stated derived relative-perfection or diagonal-Hom assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat finitely presented algebra diagonal module pseudo coherent finite free resolution",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.Flat.projective_of_finitePresentation\", \"module\": \"Mathlib.RingTheory.Flat.EquationalCriterion\", \"type\": \"[Flat R M] [FinitePresentation R M] : Projective R M\", \"doc\": \"If $ M $ is a flat module over a commutative semiring $ R $ and $ M $ is finitely presented, then $ M $ is a projective module over $ R $.\"}\n  {\"name\": \"Module.Flat.tfae_equational_criterion\", \"module\": \"Mathlib.RingTheory.Flat.EquationalCriterion\", \"type\": \":\\n  List.TFAE\\n    [Flat R M, ∀ I : Ideal R, Function.Injective (rTensor M I.subtype),\\n      ∀ {l : ℕ} {f : Fin l → R} {x : Fin l → M}, ∑ i, f i ⊗ₜ x i = (0 : R ⊗[R] M) → VanishesTrivially R f x,\\n      ∀ {l : ℕ} {f : Fin l → R} {x : Fin l → M}, ∑ i, f i • x i = 0 → IsTrivialRelation f x,\\n      ∀ {l :\", \"doc\": \"Let $R$ be a commutative ring and $M$ be an $R$-module. The following statements are equivalent:\\n1. $M$ is a flat $R$-module.\\n2. For every ideal $I$ of $R$, the map $I \\\\otimes_R M \\\\to R \\\\otimes_R M$ i\"}\n  {\"name\": \"Module.finitePresentation_of_projective\", \"module\": \"Mathlib.Algebra.Module.FinitePresentation\", \"type\": \"[Projective R M] [Module.Finite R M] : FinitePresentation R M\", \"doc\": \"If a module $ M $ over a semiring $ R $ is projective (i.e., a direct summand of a free module) and finitely generated (i.e., admits a finite generating set), then $ M $ is finitely presented (i.e., a\"}\n  {\"name\": \"Module.free_of_flat_of_isLocalRing\", \"module\": \"Mathlib.RingTheory.LocalRing.Module\", \"type\": \"[Module.Finite R P] [Flat R P] : Free R P\", \"doc\": \"Let $ R $ be a local ring and $ P $ a finitely generated flat $ R $-module. Then $ P $ is a free $ R $-module.\"}\n  {\"name\": \"Module.FinitePresentation.mk\", \"module\": \"Mathlib.Algebra.Module.FinitePresentation\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : Semiring R] [inst_1 : AddCommMonoid M] [inst_2 : Module R M],\\n  (∃ s, Submodule.span R ↑s = ⊤ ∧ (Finsupp.linearCombination R Subtype.val).ker.FG) → Module.FinitePresentation R M\", \"doc\": \"If there exists a finite set $ s $ such that the span of $ s $ equals $ M $ and the kernel of the linear map from the free module on $ s $ to $ M $ is finitely generated, then $ M $ is finitely presen\"}\n  {\"name\": \"Module.Flat.exists_factorization_of_comp_eq_zero_of_free\", \"module\": \"Mathlib.RingTheory.Flat.EquationalCriterion\", \"type\": \"[Flat R M] {K N : Type*} [AddCommGroup K] [Module R K] [Module.Finite R K] [AddCommGroup N] [Module R N] [Free R N]\\n  [Module.Finite R N] {f : K →ₗ[R] N} {x : N →ₗ[R] M} (h : x ∘ₗ f = 0) :\\n  ∃ (k : ℕ) (a : N →ₗ[R] (Fin k →₀ R)) (y : (Fin k →₀ R) →ₗ[R] M), x = y ∘ₗ a ∧ a ∘ₗ f = 0\", \"doc\": \"Let $ R $ be a commutative semiring and $ M $ a flat $ R $-module. If $ K $ and $ N $ are finite $ R $-modules with $ N $ free, and $ f: K \\\\to N $, $ x: N \\\\to M $ are linear maps satisfying $ x \\\\circ \"}\n  {\"name\": \"Module.FinitePresentation.of_finite_of_finitePresentation\", \"module\": \"Mathlib.RingTheory.Finiteness.ModuleFinitePresentation\", \"type\": \"[Module.Finite R S] [Algebra.FinitePresentation R S] : Module.FinitePresentation R S\", \"doc\": \"If $ S $ is a finitely generated $ R $-module and finitely presented as an $ R $-algebra, then $ S $ is finitely presented as an $ R $-module.\"}\n  {\"name\": \"Module.Flat.of_forall_exists_factorization\", \"module\": \"Mathlib.RingTheory.Flat.EquationalCriterion\", \"type\": \"(h :\\n    ∀ {l : ℕ} {f : Fin l →₀ R} {x : (Fin l →₀ R) →ₗ[R] M},\\n      x f = 0 → ∃ (k : ℕ) (a : (Fin l →₀ R) →ₗ[R] (Fin k →₀ R)) (y : (Fin k →₀ R) →ₗ[R] M), x = y ∘ₗ a ∧ a f = 0) :\\n  Flat R M\", \"doc\": \"A module $ M $ over a commutative semiring $ R $ is flat if and only if for every finite list $ f $ of elements in the free $ R $-module $ \\\\text{Fin}(l) \\\\to_0 R $, and for every $ R $-linear map $ x: \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary flatness, finite presentation or module duals, not the stated derived relative-perfection or diagonal-Hom assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-dualizing-pair-base-change",
+  "date": "2026-10-23",
+  "group": "Q110"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Relative dualizing line of an arbitrary nodal family. Derived-complex prerequisite: proper flat duality and its normalized polynomial models, before applying the regular-equation calculation. Supporting input: Arbitrary base change of supplied coherent relative dualizing pairs. Specific prerequisite: Pseudo-coherence of the diagonal module needed to realize the algebraic class test as sheaf internal Hom.",
+   "via": [
+    "lem-sfb-relative-dualizing-pair-base-change",
+    "lem-sfb-proper-flat-dualizing-polynomial-model",
+    "lem-sfb-gorenstein-curve-relative-dualizing",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-flat-fp-quotient-pseudocoherent",
+  "worker": "stage1",
+  "summary": "Preserved the exact non-Noetherian quotient equivalence. Chose a common polynomial presentation and separated the two general algebra inputs: flat finite-presentation pseudo-coherence over polynomial presentations, and scalar restriction through a pseudo-coherent algebra. Both are statement-only unsplit nodes after logged Mathlib, whole-DAG, blueprint and upstream Lean searches. Explicitly identified the two restricted complexes by their scalar actions.",
+  "blueprint": "Supports the inherited diagonal-pseudo-coherence prerequisite below det-thm-sf-ctf-stability-direct-images, proof (3), through the unchanged chain in blueprint.from. The current blueprint direct-images proof was read. blueprint_refs ancestor returns None for this inherited chain, so the null ancestor is preserved, with its precise existing place and extended via lists; no chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-finitely-presented-algebra",
+    "why": "Generic algebra definition used only to choose a finite polynomial presentation; the unit has no competing definition."
+   },
+   {
+    "node": "def-weil-pbc-mv-polynomial-ring",
+    "why": "Generic polynomial-ring construction and notation needed for the common presentation; no unit route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NB-ff3dbca4b",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-ff3dbca4b (reviewer sub-agent of L); spot-checked: The item's statement, stmt_deps, source, blueprint and searches are identical to the base. Only proof, proof_deps, proof_origin and status changed, and split_report was added. There is no repair note, and live/side-live still have the item unsplit, so it is not superseded. I read Stacks more-algebra 0E1T, which is exactly (1)⇔(4) with the item's hypotheses and no Noetherian condition. Its proof has a B→A direction typo, which the report notes and nothing uses. I also read 067J, 065H, 064Z, and the definition of pseudo-coherent/perfect ring maps. New node lem-sfb-flat-fp-polynomial-pseudocoherent is true by 067J+065H: a flat finitely presented C is pseudo-coherent over every polynomial presentation, for arbitrary rings. I tested n=0 (C=R/(e)), k[t]/(t²) over k[x], and a redundant variable. New node lem-sfb-pseudocoherent-algebra-scalar-restriction is the pseudo-coherent case of 064Z for commutative rings. I tested T=0, dual numbers over a field, and T=S[t], where the hypothesis correctly fails. Step 1 is genuinely elementary: qπ is surjective and restriction along qπ equals π_* after q_*, with the same action and exact forgetful functor. Step 2 applies node 1 to π and to qπ, with hypotheses checked. Step 3 applies node 2 to P→A and P→B and identifies the two P-restrictions. Both new nodes are self-contained, statement-only, cite definitions that define their notions, and record all three search kinds. Neither restates a clause of the item. Duplicate check against the whole DAG: lem-trf-flat-polynomial-quotient-perfect and lem-trf-algebraic-shriek-relative-perfect are Noetherian, lem-sfb-flat-ambient-relative-pseudocoherence is scheme 09UU relative pseudo-coherence, lem-sfb-finite-free-algebra-pseudocoherent-resolution covers a finite free algebra in one direction, and the pc 066D/08E7 nodes make different claims. None is a duplicate. The route stays inside unit sk-thm-sf-ctf-stability. The inherited blueprint from.node is null, and via is extended correctly. The declared tool_uses are two generic definitions and are accepted as harmless. No SGA is cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FlatFpQuotientPseudoCoherent",
+  "declaration": "DerivedCategory.isPseudoCoherent_restrictScalars_iff_of_flat_finitePresentation_quotient",
+  "file": "lean/Sheaf/RingTheory/FlatFpQuotientPseudoCoherent.lean",
+  "statement": "theorem isPseudoCoherent_restrictScalars_iff_of_flat_finitePresentation_quotient {R : Type uR} {B : Type uB} {A : Type uA} [CommRing R] [CommRing B] [CommRing A] (f : R →+* B) (q : B →+* A) (hq : Function.Surjective q) (hf_flat : f.Flat) (hqf_flat : (q.comp f).Flat) (hf_fp : f.FinitePresentation) (hqf_fp : (q.comp f).FinitePresentation) [HasDerivedCategory.{wA} (ModuleCat.{max uR uB uA v} A)] [HasDerivedCategory.{wB} (ModuleCat.{max uR uB uA v} B)] (M : DerivedCategory (ModuleCat.{max uR uB uA v} A)) : IsPseudoCoherent M ↔ IsPseudoCoherent ((ModuleCat.restrictScalars q).mapDerivedCategory.obj M)",
+  "branch": "sheaf-dag",
+  "by": "NV",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-864c9b132",
+  "group": "NV",
+  "result": "pass",
+  "note": "Read node, Stacks more-algebra 0E1T (l.21885-21914), module, report, and all four stmt_dep declarations (RingHom.Flat, RingHom/Algebra.FinitePresentation, DerivedCategory/HasDerivedCategory, side-live DerivedCategory.IsPseudoCoherent = bounded-above finite free model, real def). Clauses match: f : R→+*B, q : B→+*A surjective, f and q.comp f flat and finitely presented, ∀ M : D(A), IsPseudoCoherent M ↔ IsPseudoCoherent ((restrictScalars q).mapDerivedCategory.obj M) (termwise via mapDerivedCategoryFactors). No hypotheses on q beyond surjectivity, no Noetherian/Nontrivial; separate HasDerivedCategory universes; module universe max uR uB uA v is the project convention (as in PolynomialPresentationPseudoCoherence) and loses nothing. Edge cases q=id, A=0, M=0, non-Noetherian R covered. No duplicate (only the 065H presentation-invariance neighbour). Node differs from side-live only by the lean record; lean.statement verbatim; docstrings carry source, blueprint and the 3 proof steps; proof is sorry only; report sections present. No files changed, no compile needed."
+ }
+}
